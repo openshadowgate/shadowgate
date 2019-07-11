@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "riden"
+components (["ectoplasmic crystal":17,"black star sapphire":5,"garnet":30,"clear quartz":20,"blue lace agate":6,"sodalite":30,"amethyst":20,"peridot":20,"banded amethyst":30,"red jasper":50,"tektite":15,"danburite":20,"smoky quartz":12,])

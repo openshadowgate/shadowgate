@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/portal/workroom"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "portal"
+owner "magnus"
+components (["ectoplasmic crystal":20,"garnet":50,"opal":34,"aquamarine":7,"gray agate":20,"fire opal":35,"yellow jasper":19,"seraphinite":11,"wemic tears":3,"smoky quartz":25,"red spinel":5,"bloodstone":50,"pyrite":28,"ruby":37,"clear quartz":50,"amethyst":23,"tektite":44,"snowflake obsidian":29,"tourmaline":22,"jade":33,"zoisite":21,"tigers eye":4,"charoite":8,])

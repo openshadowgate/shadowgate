@@ -1,0 +1,41 @@
+#/d/magic/spellbook.c
+trap_data ([])
+encumbrance 10
+size 0
+ac 0
+decayRate 100
+decayStatus 0
+currentStatus 50
+props (["repairtype":({"tailor","jewel","woodwork","leatherwork",}),])
+serial_number 0
+ob_data (["condition":100,"value":0,"updated time":1523355683,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),"long":"This is a spellbook.","short":"A Book",])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/attaya/newseneca/mon/godfrey"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["invisibility":2,"shadow nova":9,"shield of shadows":1,"shadow double":7,"magic missile":1,"protection from scrying":3,"wall of fire":4,"wall of stone":5,"contingency":6,"augmentation":2,"ray of enfeeblement":2,"teleport without error":7,"scorcher":2,"fireball":3,"dragon scales":6,"water breathing":3,"powerword stun":8,"meteor swarm":9,"ice storm":4,"tongues":3,"monster summoning 7":9,"warriors constitution":6,"monster summoning 5":7,"armor":1,"light":1,"monster summoning 1":3,"web":2,"greater shout":8,"magic mirror":7,"teleport":5,"levitate":2,"finger of death":7,"burning hands":1,"conjure elemental":5,"blink":3,"detect invisibility":2,"umbral sight":2,"detect magic":1,"stoneskin":4,"incendiary cloud":8,"cone of cold":5,"faithful phantom guardians":6,"prismatic spray":7,"ball lightning":5,])
+magic ({"armor","augmentation","ball lightning","blink","burning hands","cone of cold","conjure elemental","contingency","detect invisibility","detect magic","dragon scales","faithful phantom guardians","finger of death","fireball","greater shout","ice storm","incendiary cloud","invisibility","levitate","light","magic missile","meteor swarm","monster summoning 1","monster summoning 5","monster summoning 7","powerword stun","prismatic spray","protection from scrying","ray of enfeeblement","scorcher","stoneskin","teleport","teleport without error","tongues","wall of fire","wall of stone","warriors constitution","water breathing","web",})
+mID 0
+bookdesc 0
+owner "graevus"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

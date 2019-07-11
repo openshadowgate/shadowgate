@@ -1,0 +1,34 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-797739510,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"Songbook%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/bard#23925"
+cursed "aynetta"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+spells (["summon companion":1,"dispel magic":3,"chill touch":1,"teleport":5,"shout":4,"cone of cold":5,"know alignment":2,"magic missile":1,"protection from scrying":3,"dragon scales":6,"detect scrying":4,"blink":3,"hideous laughter":2,"invisibility":2,"teleport without error":7,"web":2,"powerword stun":7,"fireball":3,"ice storm":4,"lightning orb":3,"contingency":6,"sonic orb":3,"water breathing":3,"conjure fire elemental":5,"sleep":1,"faithful phantom guardians":6,"garble":3,"darkness":1,"stoneskin":4,"identify":1,"monster summoning 2":4,"hold person":3,"lightning bolt":3,"wall of fire":4,"armor":1,"rope trick":2,"conjure earth elemental":5,"magic mirror":7,"detect invisibility":2,"detect magic":1,"color spray":1,"conjure air elemental":5,"scorcher":2,"lower resistance":5,"ray of enfeeblement":2,"acid arrow":2,"monster summoning 3":5,"tongues":3,"domination":5,"acid orb":3,"warriors constitution":6,"vampiric touch":3,"light":1,"conjure water elemental":5,"frost orb":3,"monster summoning 4":6,"chain lightning":6,"burning hands":1,])
+magic ({"summon companion","chill touch","magic missile","sleep","darkness","identify","armor","detect magic","color spray","light","burning hands","know alignment","hideous laughter","invisibility","web","rope trick","detect invisibility","scorcher","ray of enfeeblement","acid arrow","dispel magic","protection from scrying","blink","fireball","lightning orb","sonic orb","water breathing","garble","hold person","tongues","acid orb","vampiric touch","frost orb","shout","detect scrying","ice storm","stoneskin","monster summoning 2","teleport","cone of cold","conjure fire elemental","conjure earth elemental","conjure air elemental","lower resistance","monster summoning 3","domination","conjure water elemental","dragon scales","contingency","faithful phantom guardians","warriors constitution","monster summoning 4","chain lightning","teleport without error","powerword stun",})
+mID 0
+bookdesc 0
+owner "aynetta"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

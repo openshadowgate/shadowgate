@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "shadow"
+owner "illusen"
+components (["small drum":35,"eyelash":18,"blessed leather":20,"water":10,"minute tarts":20,"tiny bell":10,"incense stick":5,"talc":10,"tiny bucket":20,"small candle":10,"gum arabic":20,"firefly":9,"tiny bag":10,"exotic feather":10,"parchment":15,"piece of reed":5,"diamond":4,"pinch of special dust":15,"will o wisp essence":5,])

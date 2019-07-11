@@ -1,0 +1,52 @@
+#/d/magic/obj/companion.c
+trap_data ([])
+props (["new_exp_perc":"normal","has_random_treasure":1,"no dominate":1,"treasure level":5,"treasure type":"D","new_exp_level":5,"new_exp_amount":355,"new_exp_set":2,"champion_check":1,])
+ob_data (["adreniline":0,"condition":100,"race":"hellhound","id":({"hellhound","companion",}),"short":"%^RED%^A v%^BOLD%^%^BLACK%^i%^RESET%^%^RED%^cio%^BOLD%^%^BLACK%^us, %^RED%^f%^YELLOW%^l%^WHITE%^a%^RED%^m%^ORANGE%^i%^WHITE%^n%^RED%^g%^RESET%^ %^RED%^he%^BOLD%^%^BLACK%^ll%^RESET%^%^RED%^ho%^BOLD%^%^BLACK%^u%^RED%^nd%^RESET%^","long":"%^RED%^A v%^BOLD%^%^BLACK%^i%^RESET%^%^RED%^cio%^BOLD%^%^BLACK%^us, %^RED%^f%^YELLOW%^l%^WHITE%^a%^RED%^m%^ORANGE%^i%^WHITE%^n%^RED%^g%^RESET%^ %^RED%^he%^BOLD%^%^BLACK%^ll%^RESET%^%^RED%^ho%^BOLD%^%^BLACK%^u%^RED%^nd%^RESET%^ %^RED%^This b%^ORANGE%^e%^BOLD%^%^%^BLACK%^ast%^RED%^ is an almost %^WHITE%^sk%^ORANGE%^elet%^WHITE%^al%^RED%^ hound with large, powerful muzzel and large %^WHITE%^fa%^ORANGE%^ngs%^RED%^. Her skin is %^WHITE%^pit%^RED%^ch-%^BOLD%^%^BLACK%^bla%^WHITE%^ck%^RED%^, and %^ORANGE%^f%^RED%^l%^WHITE%^a%^ORANGE%^m%^RED%^e%^WHITE%^s%^RED%^ pour from her gaping maw and ribcage. She has %^ORANGE%^gl%^WHITE%^owi%^ORANGE%^ng%^RED%^ red o%^BOLD%^%^BLACK%^r%^RED%^bs where the eyes should be. Her ears are long, thin, and pointed, and has %^BOLD%^%^BLACK%^sp%^WHITE%^i%^BOLD%^%^BLACK%^kes%^RED%^ running along the spine, and a %^BOLD%^%^BLACK%^sp%^WHITE%^i%^BOLD%^%^BLACK%^ked%^RED%^ tail. She wears a spiked %^BOLD%^%^BLACK%^ma%^WHITE%^t%^BOLD%^%^BLACK%^icle %^RED%^around her neck, %^RED%^attached to a long, %^BOLD%^%^BLACK%^br%^WHITE%^ok%^BOLD%^%^BLACK%^en%^WHITE%^ ch%^BOLD%^%^BLACK%^ai%^WHITE%^n.%^RESET%^",])
+cap_name "Hellhound"
+true_name "hellhound"
+creator "/d/magic/obj/scompanion#862433"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+player_data (["general":(["sp":1,"alignment":9,"experience":355,"extra_hp":0,"max_hp":120,"hp":120,"max_sp":1,]),])
+magic (["max points":15,"points":15,])
+severed ([])
+healing ([])
+limbs ({"head","left foreleg","left forepaw","torso","right rear paw","right rear leg","right forepaw","right foreleg","left rear paw","left rear leg",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+guilds (["fighter":0,])
+mlevels (["fighter":5,])
+wimpydir "out"
+combat_vars (["react":0,"swarm":0,"paralyzed":0,"gagged":0,"asleep":0,"wimpy":0,"any attack":0,"castFunc":0,"unconscious":0,"NEW":1,"bound":0,"blindfolded":0,"toAttack":-1,"funcCast":0,"casting":0,"tripped":0,])
+combat_messages (["blinded":0,"NEW":1,"bound":0,"paralyzed":0,"gagged":0,"blindfolded":0,"asleep":0,"tripped":0,"unconscious":0,])
+combat_counters (["blinded":0,"NEW":1,"bound":0,"healing":0,"gagged":0,"blindfolded":0,"asleep":0,"block_attack":0,"tripped":0,"unconscious":0,])
+ok_to_heal 1210
+player_age 418
+divine_domain ({})
+quest_spells ({})
+gender "female"
+stats (["wisdom":2,"dexterity":2,"constitution":2,"strength":2,"intelligence":2,"charisma":2,])
+time_delay ([])
+lost_spell_level (["psywarrior.c":9,"antipaladin.c":9,"druid.c":9,"warlock.c":9,"mage.c":9,"bard.c":9,"fighter.c":9,"psion.c":9,"paladin.c":9,"ranger.c":9,"sorcerer.c":9,"cavalier.c":9,"cleric.c":9,"thief.c":9,"barbarian.c":9,"monk.c":9,])
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 31
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+static_bab 5
+longdesc "%^RED%^This b%^ORANGE%^e%^BOLD%^%^%^BLACK%^ast%^RED%^ is an almost %^WHITE%^sk%^ORANGE%^elet%^WHITE%^al%^RED%^ hound with large, powerful muzzel and large %^WHITE%^fa%^ORANGE%^ngs%^RED%^. Her skin is %^WHITE%^pit%^RED%^ch-%^BOLD%^%^BLACK%^bla%^WHITE%^ck%^RED%^, and %^ORANGE%^f%^RED%^l%^WHITE%^a%^ORANGE%^m%^RED%^e%^WHITE%^s%^RED%^ pour from her gaping maw and ribcage. She has %^ORANGE%^gl%^WHITE%^owi%^ORANGE%^ng%^RED%^ red o%^BOLD%^%^BLACK%^r%^RED%^bs where the eyes should be. Her ears are long, thin, and pointed, and has %^BOLD%^%^BLACK%^sp%^WHITE%^i%^BOLD%^%^BLACK%^kes%^RED%^ running along the spine, and a %^BOLD%^%^BLACK%^sp%^WHITE%^i%^BOLD%^%^BLACK%^ked%^RED%^ tail. She wears a spiked %^BOLD%^%^BLACK%^ma%^WHITE%^t%^BOLD%^%^BLACK%^icle %^RED%^around her neck, %^RED%^attached to a long, %^BOLD%^%^BLACK%^br%^WHITE%^ok%^BOLD%^%^BLACK%^en%^WHITE%^ ch%^BOLD%^%^BLACK%^ai%^WHITE%^n.%^RESET%^"
+owner 

@@ -1,0 +1,13 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "demiathus"
+components (["small drum":50,"adders stomach":24,"small candle":50,"powdered chalk":7,"firefly":50,"water":50,"phosphorus":50,"aluminum chaff":7,"tiny bag":50,"crystal":50,"iron rod":50,"sulfur":50,"dart":25,])

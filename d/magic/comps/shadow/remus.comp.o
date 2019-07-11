@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "remus"
+components (["talc":5,"eyelash":5,"small candle":50,"gum arabic":5,"powdered chalk":5,"water":30,"powdered silver":10,"tiny bag":40,"piece of mirror":2,"aluminum chaff":5,"crystal":25,"clay model ziggurat":5,"parchment":5,"tiny hearing trumpet":2,"pinch of special dust":10,])

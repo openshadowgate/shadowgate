@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "juran"
+owner "tatpo"
+components (["bat guano":5,"eyelash":7,"phosphorus":4,"water":10,"blessed leather":8,"bit of bone":5,"aluminum chaff":4,"eyelash of ogre-mage":15,"dart":8,"sulfur":5,"tiny bell":8,"incense stick":5,"adders stomach":9,"amber rod":4,"small candle":29,"spider web":12,"powdered silver":5,"piece of mirror":5,"tiny bag":19,"carbon":5,"iron rod":10,"rose petals":5,"tiny hearing trumpet":4,"powdered rhubarb leaf":15,"pinch of special dust":5,"piece of iron":7,"small drum":5,"magnets":5,"powdered chalk":5,"citric acid":5,"minute tarts":15,"clay model ziggurat":3,"ivory portal":1,"dragon scale":12,"charcoal":5,"talc":5,"owlfeather":5,"spider":4,"bitumen":5,"gum arabic":7,"firefly":12,"drop of blood":5,"crystal":4,"exotic feather":5,"phosphorescent moss":9,"feather":5,"pearl":5,"wing feather":4,"parchment":4,"piece of reed":5,"corn extract":5,"beeswax":5,])

@@ -1,0 +1,36 @@
+#d/magic/magic_book.c
+trap_data ([])
+size 0
+props (["died time":1419554374,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A black book with silver trim.%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#652774"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["monster summoning 1":3,"summon companion":1,"timestop":9,"chill touch":1,"identify":1,"passwall":5,"transformation":6,"augmentation":2,"magic missile":1,"armor":1,"rope trick":2,"detect invisibility":2,"detect magic":1,"darkvision":2,"scorcher":2,"blink":3,"invisibility":2,"ray of enfeeblement":2,"acid arrow":2,"fireball":3,"monster summoning 3":5,"tongues":3,"vampiric touch":3,"light":1,"burning hands":1,])
+magic ({"summon companion","chill touch","identify","armor","magic missile","detect magic","light","burning hands","augmentation","rope trick","darkvision","scorcher","ray of enfeeblement","acid arrow","monster summoning 1","blink","passwall","monster summoning 3","transformation","timestop",})
+mID 0
+bookdesc 0
+owner "keisha"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

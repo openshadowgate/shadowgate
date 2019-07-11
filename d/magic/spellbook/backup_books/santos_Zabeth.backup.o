@@ -1,0 +1,29 @@
+#d/magic/magic_book.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/fighter-mage-thief#143426"
+cursed 0
+identified ({})
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+spells (["darkness":1,"chill touch":1,"identify":1,"light":1,"know alignment":2,"rope trick":2,"armor":1,"magic missile":1,"detect magic":1,"detect invisibility":2,"scorcher":2,"ray of enfeeblement":2,"invisibility":2,"burning hands":1,"hideous laughter":2,])
+magic ({"darkness","chill touch","identify","light","armor","magic missile","detect magic","burning hands","know alignment","rope trick","detect invisibility","scorcher","ray of enfeeblement","invisibility","hideous laughter",})
+mID 0
+bookdesc 0
+owner "santos"
+restore 0
+spells_at_level 0
+in_mind 0

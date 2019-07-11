@@ -1,0 +1,10 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "circe"
+components ([])

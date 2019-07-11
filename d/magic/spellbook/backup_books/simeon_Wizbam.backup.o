@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-673061390,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#995"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["monster summoning 1":3,"darkness":1,"dispel magic":3,"stoneskin":4,"monster summoning 2":4,"hold person":3,"know alignment":2,"wall of fire":4,"rope trick":2,"magic missile":1,"lightning bolt":3,"protection from scrying":3,"color spray":1,"detect invisibility":2,"detect magic":1,"scorcher":2,"detect scrying":4,"hideous laughter":2,"invisibility":2,"ray of enfeeblement":2,"acid arrow":2,"web":2,"fireball":3,"gust of wind":4,"tongues":3,"lightning orb":3,"acid orb":3,"sonic orb":3,"water breathing":3,"vampiric touch":3,"frost orb":3,"static field":4,"burning hands":1,"garble":3,])
+magic ({"darkness","magic missile","color spray","detect magic","burning hands","know alignment","rope trick","detect invisibility","scorcher","hideous laughter","invisibility","ray of enfeeblement","acid arrow","web","monster summoning 1","dispel magic","hold person","lightning bolt","protection from scrying","fireball","tongues","lightning orb","acid orb","sonic orb","water breathing","vampiric touch","frost orb","garble","stoneskin","wall of fire","detect scrying","gust of wind","static field",})
+mID 0
+bookdesc 0
+owner "simeon"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

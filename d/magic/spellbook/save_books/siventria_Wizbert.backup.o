@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^%^BOLD%^%^BLACK%^a bl%^RESET%^a%^BOLD%^%^BLACK%^ck %^RESET%^%^ORANGE%^l%^RESET%^%^BOLD%^%^BLACK%^ea%^RESET%^%^ORANGE%^t%^RESET%^%^BOLD%^%^BLACK%^he%^RESET%^%^ORANGE%^r%^RESET%^%^BOLD%^%^BLACK%^bo%^RESET%^%^ORANGE%^u%^RESET%^%^BOLD%^%^BLACK%^nd book%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/cleric-mage#155231"
+cursed "siventria"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString " (wielded in left hand)"
+unwieldf 0
+hit 0
+wielded 
+factionitem 0
+spells (["summon companion":1,"dispel magic":3,"teleport":5,"chill touch":1,"shout":4,"know alignment":2,"cone of cold":5,"magic missile":1,"acid breath":5,"protection from scrying":3,"detect scrying":4,"blink":3,"hideous laughter":2,"invisibility":2,"fireball":3,"ice storm":4,"sonic orb":3,"water breathing":3,"static field":4,"faithful phantom guardians":6,"sleep":1,"conjure fire elemental":5,"garble":3,"monster summoning 1":3,"darkness":1,"identify":1,"stoneskin":4,"monster summoning 2":4,"conjure earth elemental":5,"wall of fire":4,"lightning bolt":3,"armor":1,"rope trick":2,"detect magic":1,"color spray":1,"detect invisibility":2,"scorcher":2,"lower resistance":5,"ray of enfeeblement":2,"acid arrow":2,"monster summoning 3":5,"tongues":3,"finger of death":7,"warriors constitution":6,"conjure water elemental":5,"vampiric touch":3,"light":1,"burning hands":1,])
+magic ({"acid arrow","acid breath","armor","blink","burning hands","chill touch","color spray","cone of cold","conjure earth elemental","conjure fire elemental","conjure water elemental","darkness","detect invisibility","detect magic","detect scrying","dispel magic","faithful phantom guardians","finger of death","fireball","garble","hideous laughter","ice storm","identify","invisibility","know alignment","light","lightning bolt","lower resistance","magic missile","monster summoning 1","monster summoning 2","monster summoning 3","protection from scrying","ray of enfeeblement","rope trick","scorcher","shout","sleep","sonic orb","static field","stoneskin","summon companion","teleport","tongues","vampiric touch","wall of fire","warriors constitution","water breathing",})
+mID 0
+bookdesc 0
+owner "siventria"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/attaya/newseneca/rooms/mage_lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "seneca"
+owner "aunuit"
+components (["bat guano":35,"jade circlet":12,"leather loop":13,"crane's feather":14,"sapphire dust":20,"vermilion":4,"blessed leather":50,"phosphorus":50,"aluminum chaff":47,"dart":12,"sulfur":50,"tiny bell":6,"iron blade":7,"smoky quartz":5,"red cloth":17,"copper":35,"small candle":49,"glass rod":11,"tiny bag":50,"piece of mirror":50,"iron rod":50,"rod of iron":2,"pinch of special dust":50,"flint":50,"magnets":50,"powdered chalk":28,"eye of roc":15,"minute tarts":50,"slug":16,"clay model ziggurat":50,"nitric acid":40,"dragon scale":12,"powdered amber":50,"large diamond":10,"owlfeather":50,"grain of salt":19,"bitumen":50,"crushed black pearl":50,"gum arabic":50,"mini brass trumpet":16,"drop of blood":50,"blood of umber hulk":10,"crystal":50,"dung scrapings":50,"exotic feather":50,"pearl":50,"gloworm":20,"beeswax":50,"snakes tongue":14,"piece of reed":50,])

@@ -1,0 +1,32 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-2028910814,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadow/mon/wizbert#6458"
+cursed "alothanil"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+spells (["web":2,"lightning orb":3,"identify":1,"water breathing":3,"hold person":3,"know alignment":2,"vampiric touch":3,"lightning bolt":3,"detect magic":1,"scorcher":2,"hideous laughter":2,"garble":3,"burning hands":1,])
+magic ({"burning hands","detect magic","garble","hideous laughter","hold person","identify","know alignment","lightning bolt","lightning orb","scorcher","vampiric touch","water breathing","web",})
+mID 0
+bookdesc 0
+owner "alothanil"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

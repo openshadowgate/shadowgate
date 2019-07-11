@@ -1,0 +1,418 @@
+//Cythera - Magic Vestments 6/05
+//Added Anhur ~Circe~ 5/27/8
+//Added Silvanus - N, 3/13.
+// set to medium armor prof as kids were getting baffled why they wouldn't stack with bracers. N, 3/11
+#include <std.h>
+inherit ARMOUR;
+string owner;
+
+void create(){
+  ::create();
+  set_name("vestments");
+  set_id(({"vestments","magical vestments","vestment"}));
+  set_short("vestments");
+  set_long("These are vestments.  They will be of your faith.");
+  set_type("chain");
+  set_limbs(({"torso"}));
+  set_armor_prof("medium");
+  set_weight(15);
+  set_value(0);
+  set_ac(5);
+  set_wear((:TO,"wearit":));
+  set_remove((:TO,"removeit":));
+	//set_property("enchantment",1);
+      //if(TO->query_property("enchantment")< 1){
+      //   remove_property("enchantment");
+      //   set_property("enchantment",1);
+     // }
+}
+void init(){
+    int clevel;
+   ::init();
+   if(stringp(owner)) return;
+   if(interactive(TP) && TP == ETO){
+       owner = TPQN;
+   }
+	clevel = ETO->query_guild_level("cleric");
+  		set_property("enchantment",clevel/10);
+   	while((int)(query_property("enchantment")) < 0){
+      	remove_property("enchantment");
+  		set_property("enchantment",clevel/10);
+   }
+
+}
+
+int query_size(){
+   if(living(ETO))
+      return ETO->query_size();
+   else return 3;
+}
+
+int wearit(){
+	string deity;
+      int myac;
+      int mylvl;
+	if(!objectp(ETO)) return 1;
+      mylvl = ETO->query_guild_level("cleric");
+  	deity = ETO->query_diety();
+     // switch(mylvl){
+     //    case 0: myac = 0; break;
+     //    case 1..10:  myac = 4; break;
+     //    case 11..20:  myac = 5; break;
+     //    case 21..30:  myac = 6; break;
+     //    case 31..40:  myac = 7; break;
+     //    default: myac = 8; break;
+      //}
+  	switch(deity){
+     	case "akadi": set_long("Light silk that has been"+
+	" dyed %^BOLD%^%^CYAN%^sky blue%^RESET%^ has been"+
+	" fashioned into these vestments.  The vestments "+
+	"are cut to flow freely around the wearer, allowing"+
+	" the wind to pass through the silk with ease.  Twisted"+
+	" lengths of %^BOLD%^%^BLUE%^blue%^RESET%^, %^BOLD%^white"+
+	"%^RESET%^, %^BOLD%^%^BLACK%^gray%^RESET%^ silk create a"+
+	" sash across the wearer's chest, with the ends of the "+
+	"layers of silk left to hang freely and blow in the winds."+
+	"  The vestments are extremely light and give plenty of "+
+	"freedom for the wearer to move about.");
+        set_short("%^BOLD%^%^CYAN%^Sky blue silk vestments%^RESET%^");
+        break;
+      case "anhur": set_long("Fashioned from flowing white linen, "+
+        "these vestments consist of a tight-fitting wrapped skirt "+
+        "that reaches from the knees to the waist and is fastened "+
+        "with a %^YELLOW%^golden clasp %^RESET%^in the shape of a "+
+        "%^BOLD%^%^RED%^hawk's head%^RESET%^.  A decorative "+
+        "imitation of a pectoral collar has been sewn from "+
+        "%^BOLD%^%^BLACK%^black damask %^RESET%^with vibrant %^BOLD%^"+
+        "%^BLUE%^jew%^YELLOW%^e%^BLUE%^ll%^RED%^e%^BLUE%^d "+
+        "%^RESET%^embroidery to provide a top for the vestments.  "+
+        "The finishing touch is a pair of %^ORANGE%^leather "+
+        "footwraps%^RESET%^ that reach just above the ankle.");
+        set_short("%^BOLD%^%^WHITE%^Pristine white linen vestments%^RESET%^");
+        break;
+      case "auppenser": set_long("%^RESET%^%^CYAN%^Lightweight "+
+        "%^BOLD%^%^BLUE%^pale blue%^RESET%^%^CYAN%^ linen"+
+	" has been fashioned to create these vestments.  "+
+	"Threads of %^ORANGE%^bronze%^CYAN%^ are woven into the "+
+        "linen cloth giving a subtle luster to the fabric.  "+
+        "The long flowing vestment's edges are finished with bias "+
+        "strips of %^BOLD%^%^BLACK%^inky black%^RESET%^%^CYAN%^ "+
+        "linen, creating a uniform border.  A slender mantle and "+
+        "cowl are attached to the vestments, edged with %^BOLD%^%^BLACK%^"+
+        "black linen%^RESET%^%^CYAN%^ as well.  In the center of the "+
+        "mantle a stylized eye made of %^BOLD%^%^WHITE%^crystal%^RESET%^"+
+        "%^CYAN%^ rests against the %^BOLD%^%^BLUE%^blue%^RESET%^%^CYAN%^"+
+        " background of the linen.  Within the crystal a serene %^BOLD%^"+
+        "light%^RESET%^%^CYAN%^ pulses.");
+        set_short("%^BOLD%^%^BLUE%^Pale blue linen vestments%^RESET%^");
+        break;
+     case "auril": set_long("%^RESET%^Heavy %^BOLD%^snow white%^RESET%^"+
+	" silk has been fashioned to create these vestments.  "+
+	"The pristine white silk is caked with %^BOLD%^%^CYAN%^frost%^RESET%^"+
+	", that never seems to melt.  The long flowing vestment's edges"+
+	" are finished off with %^BOLD%^%^CYAN%^icy blue%^RESET%^"+
+	" piping, a standard in Auril's faith.  A short mantle made"+
+	" of %^BOLD%^%^WHITE%^snow white%^RESET%^ fur, of some kind,"+
+	" trim the shoulders of these vestments.  A silver belt around"+
+	" the waist of the vestments finish off these pale garments.");
+        set_short("%^BOLD%^%^WHITE%^Snow white silk vestments%^RESET%^");
+        break;
+     case "bane": set_long("Heavy %^BOLD%^%^BLACK%^black wool"+
+	"%^RESET%^ has been fashioned into these vestments.  "+
+	"The dark %^BOLD%^%^BLACK%^inky black%^RESET%^ wool has"+
+	" been sliced across the chest and sleeves, revealing "+
+	"splashes of %^BOLD%^%^RED%^metallic red %^RESET%^and "+
+	"%^BOLD%^%^GREEN%^emerald green %^RESET%^satin.  The "+
+	"long sleeved tight fitting vestments may feel a bit "+
+	"constraint by may, but the faithful see it as a sign "+
+	"of Bane's grasp around all life.  %^BOLD%^%^GREEN%^Emerald"+
+	" green%^RESET%^ threads have been used to stitch rays across"+
+	" the surface of the vestments.");
+        set_short("%^BOLD%^%^BLACK%^Inky black wool vestments%^RESET%^");
+        break;
+     case "beshaba": set_long("Crafted from %^BOLD%^%^BLACK%^black cotton"+
+       "%^RESET%^ these %^BOLD%^%^MAGENTA%^mauve%^RESET%^ and %^RED%^red"+
+       "%^RESET%^ striped vestments have a chaotic look to them.  The "+
+       "vestments are fitted through the torso but flare outwards at the "+
+       "hips into voluminous folds.  Bi-colored sleeves lace onto the main "+
+       "body of the vestments.  The left sleeve is made with %^RED%^deep red"+
+       "%^RESET%^ and %^BOLD%^%^BLACK%^black cotton%^RESET%^, while the right"+
+       " features a %^BOLD%^%^MAGENTA%^mauve%^RESET%^ and %^BOLD%^%^BLACK%^black"+
+       "%^RESET%^ color scheme.  A %^BOLD%^%^BLACK%^black%^RESET%^ lacquered belt"+
+       " that resembles the spiked horns of an antler rest around the midsection"+
+       " of the vestments.");
+       set_short("%^BOLD%^%^BLACK%^Black cotton %^MAGENTA%^s%^RED%^t%^MAGENTA%^r"+
+       "%^RED%^i%^MAGENTA%^p%^RED%^e%^MAGENTA%^d%^BLACK%^ vestments%^RESET%^");
+       break;     
+     case "cyric": set_long("Stark %^BOLD%^%^BLACK%^black cotton"+
+	"%^RESET%^ is used in the creation of these vestments.  The"+
+	" %^BOLD%^%^BLACK%^black cotton%^RESET%^ is trimmed with"+
+	"%^MAGENTA%^ purple%^RESET%^ piping around the edges, "+
+	"giving a hidden splash of color.  Stitched in %^BOLD%^silver"+
+	"%^RESET%^ threads across the surface of the dark vestments "+
+	"is the image of a jawless skull in the middle of a starburst."+
+	"  As light falls across the images of the skulls, it almost "+
+	"seems as if they are watching you and laughing.");
+        set_short("%^BOLD%^%^BLACK%^Stark black cotton vestments%^RESET%^");
+        break;
+     case "grumbar": set_long("%^ORANGE%^Earthen%^RESET%^ colored"+
+	" wool is used in the creation of these vestments.  The dark"+
+	" %^ORANGE%^rich brown wool%^RESET%^ is trimmed with "+
+	"%^RED%^rust%^RESET%^ colored binding along the edges.  "+
+	"The wool vestments fall over a huge pair of shoulder pad "+
+	"that are stiffened and built up to make the wearer seem "+
+	"solid and strong.  A %^ORANGE%^leather belt%^RESET%^ binds"+
+	" the vestments around the waist, offering solid support "+
+	"to these thick vestments.");
+        set_short("%^RESET%^%^ORANGE%^Dark brown wool vestments%^RESET%^");
+        break;
+     case "helm": set_long("%^BLUE%^Dark blue cotton%^RESET%^"+
+	 " make up the under layer of these vestments.  The "+
+	"%^BLUE%^deep rich blue%^RESET%^ cloth is left unadorned."+
+	"  A breastplate made of %^CYAN%^steel%^RESET%^ is worn "+
+	"over the dark blue vestments.  The steel breastplate has"+
+	" been polished to a high shine, reflecting the brilliance"+
+	" of the metal in the light.  Engraved into the metal on "+
+	"the chest and back of the breastplate is the image of a "+
+	"staring eye with a %^BOLD%^%^BLUE%^blue%^RESET%^ pupil on"+
+	" an upright war gauntlet, granting the priest a feeling of"+
+	" protection.");
+        set_short("%^RESET%^%^BLUE%^Dark blue cotton vestments%^RESET%^");
+        break;
+     case "istishia": set_long("%^CYAN%^Blue green%^RESET%^ "+
+	"silk has been dyed with a rippling pattern across the"+
+	" surface of these vestments.  The flowing vestments fall"+
+	" loosely around the wearer, the silk flowing and rippling"+
+	" as if it was made from water.  Across the chest and back"+
+	" of the armor, a mantle of open woven %^ORANGE%^c"+
+	"%^BOLD%^%^MAGENTA%^o%^RESET%^%^ORANGE%^r%^BOLD%^%^MAGENTA%^"+
+	"a%^RESET%^%^ORANGE%^l%^RESET%^ overlays the vestments.  "+
+	"The coral is so light and flexible in design that the priest"+
+	" can't even feel it.");
+        set_short("%^RESET%^%^CYAN%^Blue green silk vestments%^RESET%^");
+        break;
+     case "kelemvor": set_long("%^GREEN%^Green-%^BOLD%^%^BLACK%^gray"+
+	"%^RESET%^ cotton is used in the creation of these vestments.  "+
+	"The crisp vestments are tailored in a simple but dignified manner."+
+	"  A thick band of quilted %^BOLD%^%^BLACK%^gray%^RESET%^ cotton "+
+	"trims the bottom of the vestments.  Long tailored sleeves stop"+
+	" at the wrists.  A badge of a skeletal hand holding a pair of"+
+	" balanced scales has been stitched in place over the left breast.");
+        set_short("%^RESET%^%^GREEN%^Green-%^BOLD%^%^BLACK%^gray cotton vestments%^RESET%^");
+        break;
+     case "kossuth": set_long("Rare and exotic firesilk is used"+
+	" in the creation of these vestments.  The %^RED%^crimson "+
+	"firesilk%^RESET%^ is cut in a flame like pattern that "+
+	"reveals layers of %^BOLD%^%^RED%^red %^RESET%^and "+
+	"%^ORANGE%^orange%^RESET%^ silk underneath, dancing "+
+	"like a flame as the cleric moves about.  The long sleeves"+
+	" of the vestments are trimmed with appliqués of flames that"+
+	" dance up the wearer's arms.  These dramatic vestments "+
+	"reflect the flashy display that Kossuthans typically enjoy flaunting.");
+        set_short("%^RESET%^%^RED%^Crimson flamesilk vestments%^RESET%^");
+        break;
+     case "lathander": set_long("Layers of thin silk gauze has"+
+	" been fashioned to create these vestments.  Each layer "+
+	"moves through the colors of the dawn.  The layers are "+
+	"in ascending order are, %^MAGENTA%^dark violet%^RESET%^,"+
+	" %^RED%^scarlet%^RESET%^, %^BOLD%^%^RED%^crimson%^RESET%^,"+
+	" %^ORANGE%^golden orange%^RESET%^, %^BOLD%^%^MAGENTA%^rose-red"+
+	"%^RESET%^, and %^YELLOW%^sunshine yellow%^RESET%^.  Each layer"+
+	" has been tailored in a fashion as not to obstruct the underlying"+
+	" one, allowing for the Lathanderite to radiate with the colors"+
+	" of the dawn.  A %^RED%^scarlet%^RESET%^ red sash is used to tie"+
+        " the vestments closed.");
+        set_short("%^BOLD%^%^RED%^D%^YELLOW%^a%^MAGENTA%^w%^RESET%^%^ORANGE%^n"+
+		" colored silk vestments%^RESET%^");
+        break;
+     case "loviatar": set_long("Tight and fitted, these vestments"+
+	" are crafted from %^BOLD%^%^BLACK%^thin black leather%^RESET%^."+
+	"  The vestments cling to the wearer's body, so tight in fact that"+
+	" they cause some pain and discomfort in wearing them, as any "+
+	"disciple of pain would want.  The long vestments lace up the "+
+	"front, back and up each sleeves.  The lower portions of the "+
+	"vestments are torn and tattered, revealing the %^RED%^dark "+
+	"scarlet%^RESET%^ lining that flashes forth like spilled blood.");
+        set_short("%^BOLD%^%^BLACK%^Black leather vestments%^RESET%^");
+        break;
+     case "malar": set_long("The %^RED%^bloody%^RESET%^ hide of a "+
+	"%^ORANGE%^puma%^RESET%^ has been used to fashion these "+
+	"vestments.  The pelt of the cat drapes over the wearer's"+
+	" shoulder, giving a wild feral look to the vestments.  "+
+	"The spotted fur is slick with %^RED%^fresh blood%^RESET%^"+
+	" is splotched across its surface.  The paws of the cat wrap"+
+	" around the priest's waist, forming a belt of sorts to keep"+
+	" the vestments from falling off.  The head of the cat is worn"+
+	" as a hood, its long %^RED%^bloody %^BOLD%^%^WHITE%^teeth%^RESET%^"+
+	" resting on the priests' forehead.");
+        set_short("%^RESET%^%^RED%^Bloody %^ORANGE%^puma hide vestments%^RESET%^");
+        break;
+	case "mask": set_long("%^BOLD%^%^BLACK%^Dark gray %^RESET%^velvet"+
+	" is used in the creation of these vestments.  The long flowing"+
+	" vestments are made in a way to allow the priest to easily blend"+
+	" in with the shadows around them.  The shapeless vestments are "+
+	"trimmed with %^RED%^red piping%^RESET%^ around the sleeves and "+
+	"hem, just as the holy symbol of Mask is.");
+	  set_short("%^BOLD%^%^BLACK%^Dark gray velvet vestments%^RESET%^");
+	  break;
+	case "mielikki": set_long("The vestments of Mielikki are unlike "+
+	"the typical regalia of the faith.  These vestments display the "+
+	"beauty of the autumn.  Leaves in %^RED%^reds%^RESET%^, %^YELLOW%^"+
+	"golds%^RESET%^, %^ORANGE%^oranges%^RESET%^, and %^GREEN%^greens"+
+	"%^RESET%^ are stitched over a cotton base.  There is no obvious"+
+	" pattern in the placement of the leaves.  Oak, maple, spruce, and"+
+	" ash are just a few of the many tree leaves represented here.  "+
+	"The vestments have a utilitarian look to them, like the faith of "+
+	"Mielikki.  Stitched in %^BOLD%^silver%^RESET%^ threads over the "+
+	"left breast is the silhouette of a unicorn's head facing left.");
+	  set_short("%^RESET%^%^RED%^A%^ORANGE%^u%^YELLOW%^t%^GREEN%^u"+
+		"%^RED%^m%^RESET%^%^ORANGE%^n colored vestments%^RESET%^");
+	  break;
+	case "mystra": set_long("%^BLUE%^Midnight blue velvet%^RESET%^"+
+	" is used in the creation of these vestments.  The flowing "+
+	"vestments fit loose on the priest, making them quite comfortable."+
+	"  Woven into the velvet are strands of %^BOLD%^silver%^RESET%^,"+
+	" giving a slight metallic sheen to the vestments.  %^RED%^Dark "+
+	"crimson%^RESET%^ mist has been stitched along the hem and up the"+
+	" sleeves of the vestment, giving it an arcane mystical feel.");
+	 set_short("%^RESET%^%^BLUE%^Midnight blue velvet vestments%^RESET%^");
+	 break;
+	case "oghma": set_long("The vestments of Oghma are fashioned "+
+	"from crisp %^BOLD%^white linen%^RESET%^.  The tailored and "+
+	"structured pristine white linen has a stylish appeal to it, "+
+	"though nothing that would be considered gaudy or excessive.  "+
+	"The vestments are belted with a %^YELLOW%^gold braid%^RESET%^"+
+	" belt that is left to drape against the linen.  A %^BOLD%^%^BLACK%^"+
+	"black velvet%^RESET%^ vest trimmed with %^YELLOW%^gold braided%^RESET%^"+
+	" finishes off the vestments.  The dark surface covered with numerous "+
+	"runes and sigils of modern day and yesteryears.");
+	 set_short("%^BOLD%^%^WHITE%^Crisp white linen vestments%^RESET%^");
+	 break;
+	case "selune": set_long("%^BOLD%^Pale white%^RESET%^ heavy"+
+	" silk has been fashioned into these vestments.  The pale "+
+	"silk has a slight %^BOLD%^white%^RESET%^ seen to it, giving"+
+	" it an opalescent look.  The flowing vestments have a "+
+	"fashionable silhouette to them, in a way that seems timeless."+
+	"  %^BOLD%^Silver%^RESET%^ bands trim the hem and flowing "+
+	"sleeves of the vestments, a favorite metal of the faith.  "+
+	"Within the silver bands the phases of the %^BOLD%^%^CYAN%^moon"+
+	" %^RESET%^have been woven into the cloth, from full to three"+
+	" quarters to half and finally the crescent moon before waxing"+
+	" back to full.%^RESET%^");
+	 set_short("%^BOLD%^%^WHITE%^Pale white silk vestments%^RESET%^");
+	 break;
+	case "shar": set_long("%^BOLD%^%^BLACK%^Plush black velvet%^RESET%^"+
+	" make up the voluminous vestments.  The vestments are cut full, to"+
+	" allow of the priest to easily blend into the night and move as "+
+	"silently as possible.  Minute %^MAGENTA%^amethyst%^RESET%^ colored"+
+	" piping trims the vestments, giving a subtle hint of color that "+
+	"only seems to deepen the darkness of the garments.  The vestments"+
+	" are made with full sweeping sleeves that flow over the priests hands.");
+	 set_short("%^BOLD%^%^BLACK%^Plush black velvet vestments%^RESET%^");
+	 break;
+        case "shaundakul": set_long("Crafted from a combination of wool, cotton"+
+        ", and linen the vestments are crafted for comfort in travels in mind.  "+
+        "The %^BOLD%^%^BLACK%^dark black %^RESET%^cloth is embroidered with "+
+        "%^MAGENTA%^deep violet%^RESET%^ and %^CYAN%^blue-gray%^RESET%^ threads"+
+        " that resemble ripples of wind.  A %^BOLD%^silver%^RESET%^ upright left"+
+        " hand has been stitched on the back of the vestments, showing off the "+
+        "symbol of Shaundakul for the world to see.  The edges of the vestments "+
+        "are a bit worn and threadbare.");
+         set_short("%^BOLD%^%^BLACK%^Dark black vestments with embroidered "+
+         "%^RESET%^%^CYAN%^r%^MAGENTA%^i%^CYAN%^p%^MAGENTA%^p%^CYAN%^l%^MAGENTA%^"+
+         "e%^CYAN%^s%^RESET%^");
+          break;
+	case "silvanus": set_long("These vestments are simple and unassuming, made "+
+        "of old hides in shades of %^ORANGE%^dusty brown%^RESET%^.  They are loosely "+
+        "cut to afford an ease of movement, but thick enough to deflect rough foliage "+
+        "and thorns.  Small, %^BOLD%^%^BLACK%^d%^RESET%^u%^ORANGE%^l%^BOLD%^%^BLACK%^l "+
+        "%^RESET%^feathers hang from the collar and sleeves, swaying with the wearer's "+
+        "movements.  Upon the breast, the vestments bear the image of a small "+
+        "%^GREEN%^oak leaf%^RESET%^.");
+      set_short("%^RESET%^%^ORANGE%^Dull hide vestments adorned with %^BOLD%^%^BLACK%^f"+
+        "%^RESET%^e%^ORANGE%^a%^RESET%^t%^BOLD%^%^BLACK%^h%^RESET%^%^ORANGE%^e%^RESET%^r"+
+        "%^ORANGE%^s%^RESET%^");
+      break;  
+        case "sune": set_long("%^RED%^Deep crimson%^RESET%^ velvet and silk have"+
+        " been fashioned into these vestments.  The vestments are cut in a fashion"+
+        " to show off the best features of the wearer, and minimize any flaws.  "+
+        "The fitted vestments are composed mostly of %^RED%^velvet%^RESET%^ with"+
+        " %^RED%^silk%^RESET%^ serving as an accent.  Armbands made from %^BOLD%^"+
+        "ivory%^RESET%^ and %^YELLOW%^gold%^RESET%^ filigree rest over each sleeve,"+
+        " adding an artistic touch to the aesthetically pleasing vestments.");
+        set_short("%^RESET%^%^RED%^Deep crimson velvet and silk vestments%^RESET%^");
+        break;  
+	case "talos": set_long("%^BOLD%^%^BLACK%^Metallic black satin%^RESET%^"+
+	" is used to fashion these vestments.  The black satin shimmers "+
+	"chaotically in the light, giving the vestments a wild look.  "+
+	"The vestments are cut with a jagged pattern all over, as if trying"+
+	" to mirror bolts of lighting.  The edges of the vestments are "+
+	"finished off with %^BOLD%^silvery %^YELLOW%^gold %^RESET%^cloth"+
+	" that helps to further give the illusion as if they are made of lightning.");
+	 set_short("%^BOLD%^%^BLACK%^Metallic black satin vestments%^RESET%^");
+	 break;
+	case "tempus": set_long("%^BOLD%^Ivory white cotton%^RESET%^ has"+
+	" been used to fashion these vestments.  The white cloth is cut "+
+	"in a militaristic fashion, forsaking form for function.  Across "+
+	"the surface of these white vestments %^BOLD%^%^RED%^bright "+
+	"crimson%^RESET%^ splotches have randomly been placed, looking"+
+	" like droplets of blood.  The functional vestments are fitted "+
+	"close to the priests body, to avoid any excess cloth from getting"+
+	" in the way.");
+	 set_short("%^BOLD%^%^WHITE%^Ivory white cotton vestments%^RESET%^");
+	 break;
+	case "torm": set_long("%^YELLOW%^Rich golden yellow cashmere wool%^RESET%^"+
+	" is used in the creation of these vestments.  The fashionable vestments"+
+	" have a rich and noble look to them, like something one might see in the"+
+	" royal courts of the lands.  The vestments though lack any of the "+
+	"additional adornments that would be considered flaunting ones wealth"+
+	" or status.  The tailored vestments are made to fit close to the "+
+	"priest, as if offering their protection to them.  %^BOLD%^White"+
+	" threads%^RESET%^ are used to embroider a detailed scrolling "+
+	"pattern up the sleeves and hem of the vestments.  On the back "+
+	"of the robes an upright unadorned gauntlets has been crafted"+
+	" with %^BOLD%^white threads%^RESET%^, the holy symbol of Torm.");
+	set_short("%^YELLOW%^Golden cashmere vestments%^RESET%^");
+	break;
+	case "tymora": set_long("%^BOLD%^%^BLUE%^Bright blue cotton"+
+	"%^RESET%^ is used in the creation of these vestments.  The"+
+	" simple looking vestments have a slight fashionable look to"+
+	" them, in a roguish sort of way.  The free flowing vestment"+
+	" has been belted with a %^BOLD%^silver braided belt%^RESET%^."+
+	"  Around the wrists and hem of the vestments, %^BOLD%^silver"+
+	"%^RESET%^ bands trim the edges. Within the silver band images of"+
+	" cards, dice, shamrocks and rabbits can be found, all totems of "+
+	" good fortune.");
+	 set_short("%^BOLD%^%^BLUE%^Bright blue cotton vestments%^RESET%^");
+	break;
+	case "tyr": set_long("%^MAGENTA%^Purple%^RESET%^ and "+
+	"%^BLUE%^blue%^RESET%^ striped cotton has been used in the "+
+	"creation of these vestments.  The bold solid stripes offer a"+
+	" feeling of solidarity and stability to these structured "+
+	"vestments.  Tailored to fit the priest's body perfectly, "+
+	"without any room for error, the long sleeved vestments are "+
+	"pristine and always clean.  A sash of %^BOLD%^white%^RESET%^"+
+	" wraps around the waist of the vestments, in a uniform and even"+
+	" manner.");
+	 set_short("%^RESET%^%^MAGENTA%^Purple%^RESET%^ and %^BLUE%^blue"+
+		"%^RESET%^ striped cotton vestments");
+	break;	 
+     default:  tell_object(ETO,"Somehow cythera forgot your deity,"+
+	" can you mail her and let her know who you follow.");
+       break;
+  }
+  //set_ac(myac);
+ tell_object(ETO,"%^BOLD%^Your deity blesses you with vestments to help protect you.");
+ tell_room(EETO,"%^BOLD%^"+ETOQCN+" is clothed in vestments of "+ETO->QP+" faith.",ETO);
+  return 1;
+}
+
+int removeit(){
+   tell_room(EETO,"The vestments shimmer slightly as "+ETOQCN+" removes them.",ETO);
+   tell_object(ETO,"The vestments shimmers slightly as you remove them.");
+    return 1;
+}
+
+int save_me(string file){ return 1;}
+
+int wearable() { return 1; }

@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+id "tabor"
+owner "danar"
+components (["diamond dust":10,"talc":50,"bat guano":50,"granite dust":10,"firefly":50,"water":50,"powdered silver":50,"crystal":50,"tiny bag":40,"sulfur":50,"piece of steel":50,"pinch of special dust":50,"emerald":50,])

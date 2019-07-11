@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+id "tabor"
+owner "aryon"
+components (["owlfeather":50,"eyelash":49,"small candle":50,"gum arabic":49,"firefly":50,"water":50,"tiny bag":30,"crystal":50,"pearl":11,"rose petals":25,"ivory portal":1,"charcoal":1,])

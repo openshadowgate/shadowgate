@@ -1,0 +1,35 @@
+#d/magic/magic_book.c
+size 0
+props (["died time":1243227658,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/bard#12143"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties ({})
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["fireball":3,"lightning orb":3,"stoneskin":4,"water breathing":3,"know alignment":2,"fly":3,"magic missile":1,"frost orb":3,"detect magic":1,"scorcher":2,"invisibility":2,"burning hands":1,"sleep":1,"hideous laughter":2,"ray of enfeeblement":2,])
+magic ({"burning hands","detect magic","fireball","fly","frost orb","hideous laughter","invisibility","know alignment","lightning orb","magic missile","ray of enfeeblement","scorcher","sleep","stoneskin","water breathing",})
+mID 0
+bookdesc 0
+owner "teondril"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

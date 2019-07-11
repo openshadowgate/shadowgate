@@ -1,0 +1,14 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "shadow"
+owner "trillet"
+components (["dung scrapings":15,"diamond dust":15,"crane's feather":15,"drop of blood":15,"pinch of special dust":15,"blessed leather":15,"fur":15,])

@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "shadow"
+owner "dakkon"
+components (["diamond dust":14,"bat guano":30,"small drum":15,"granite dust":5,"eyelash":50,"crane's feather":40,"powdered chalk":10,"blessed leather":50,"water":14,"aluminum chaff":30,"sulfur":22,"clay model ziggurat":5,"nitric acid":10,"dragon scale":10,"snake scale":50,"emerald":14,"owlfeather":30,"small candle":40,"gum arabic":50,"spider web":20,"drop of blood":40,"tiny bag":40,"iron rod":30,"pearl":10,"parchment":10,"corn extract":10,"diamond":30,"pinch of special dust":35,"small diamond":3,])

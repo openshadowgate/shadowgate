@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "shadow"
+owner "vaya"
+components (["pearl":7,])

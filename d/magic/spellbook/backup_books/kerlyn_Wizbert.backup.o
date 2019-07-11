@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":1888591778,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^BOLD%^%^WHITE%^S%^BLUE%^p%^WHITE%^a%^BLUE%^r%^WHITE%^k%^BLUE%^l%^WHITE%^i%^BLUE%^n%^WHITE%^g %^BLUE%^Blue %^WHITE%^Tome%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#113889"
+cursed "kerlyn"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties ({})
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["summon companion":1,"dispel magic":3,"chill touch":1,"know alignment":2,"acid breath":5,"magic missile":1,"protection from scrying":3,"sonic shield":4,"invisibility":2,"hideous laughter":2,"web":2,"fireball":3,"lightning orb":3,"water breathing":3,"static field":4,"garble":3,"sleep":1,"conjure fire elemental":5,"monster summoning 1":3,"darkness":1,"stoneskin":4,"identify":1,"hold person":3,"wall of fire":4,"rope trick":2,"armor":1,"color spray":1,"detect magic":1,"detect invisibility":2,"scorcher":2,"lower resistance":5,"ray of enfeeblement":2,"acid arrow":2,"tongues":3,"light":1,"vampiric touch":3,"frost orb":3,"burning hands":1,])
+magic ({"summon companion","chill touch","magic missile","sleep","darkness","identify","armor","color spray","detect magic","light","burning hands","know alignment","invisibility","hideous laughter","web","rope trick","detect invisibility","scorcher","ray of enfeeblement","acid arrow","dispel magic","protection from scrying","fireball","lightning orb","water breathing","garble","monster summoning 1","hold person","tongues","vampiric touch","frost orb","sonic shield","static field","stoneskin","wall of fire","acid breath","conjure fire elemental","lower resistance",})
+mID 0
+bookdesc 0
+owner "kerlyn"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

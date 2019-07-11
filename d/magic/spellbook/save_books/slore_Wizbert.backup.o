@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":1251866075,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^BOLD%^%^CYAN%^A %^WHITE%^B%^CYAN%^o%^WHITE%^o%^CYAN%^k %^RESET%^%^YELLOW%^G%^BOLD%^l%^RESET%^%^YELLOW%^i%^BOLD%^s%^RESET%^%^YELLOW%^t%^BOLD%^e%^RESET%^%^YELLOW%^n%^BOLD%^i%^RESET%^%^YELLOW%^n%^BOLD%^g %^WHITE%^with a %^BOLD%^%^MAGENTA%^M%^CYAN%^a%^YELLOW%^g%^MAGENTA%^i%^CYAN%^c%^YELLOW%^a%^MAGENTA%^l %^CYAN%^A%^YELLOW%^u%^MAGENTA%^r%^CYAN%^a%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadow/mon/wizbert#25485"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["ball lightning":5,"summon companion":1,"dispel magic":3,"teleport":5,"shout":4,"know alignment":2,"cone of cold":5,"magic missile":1,"protection from scrying":3,"monster summoning 6":8,"detect scrying":4,"blink":3,"invisibility":2,"web":2,"powerword stun":7,"fireball":3,"ice storm":4,"water breathing":3,"contingency":6,"sonic orb":3,"fly":3,"animate dead":5,"static field":4,"faithful phantom guardians":6,"sleep":1,"garble":3,"monster summoning 1":3,"darkness":1,"stoneskin":4,"identify":1,"monster summoning 2":4,"hold person":3,"wall of fire":4,"rope trick":2,"lightning bolt":3,"armor":1,"conjure earth elemental":5,"detect invisibility":2,"detect magic":1,"color spray":1,"scorcher":2,"conjure air elemental":5,"lower resistance":5,"ray of enfeeblement":2,"acid arrow":2,"monster summoning 3":5,"gust of wind":4,"finger of death":7,"warriors constitution":6,"acid orb":3,"light":1,"conjure water elemental":5,"vampiric touch":3,"monster summoning 4":6,"chain lightning":6,"frost orb":3,"burning hands":1,])
+magic ({"acid arrow","acid orb","animate dead","armor","ball lightning","blink","burning hands","chain lightning","color spray","cone of cold","conjure air elemental","conjure earth elemental","conjure water elemental","contingency","darkness","detect invisibility","detect magic","detect scrying","dispel magic","faithful phantom guardians","finger of death","fireball","fly","frost orb","garble","gust of wind","hold person","ice storm","identify","invisibility","know alignment","light","lightning bolt","lower resistance","magic missile","monster summoning 1","monster summoning 2","monster summoning 3","monster summoning 4","monster summoning 6","powerword stun","protection from scrying","ray of enfeeblement","rope trick","scorcher","shout","sleep","sonic orb","static field","stoneskin","summon companion","teleport","vampiric touch","wall of fire","warriors constitution","water breathing","web",})
+mID 0
+bookdesc 0
+owner "slore"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

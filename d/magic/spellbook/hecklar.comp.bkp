@@ -1,0 +1,8 @@
+#d/magic/comp_bag.c
+props ([])
+ob_data (["long":"This is a small to medium-sized leather bag.  It isonly in this bag that you store the material componentsfor casting your spells.To check what is in the bag type <components>.To put a component into the bag type:<put [component name] into components bag>To retrieve components from the bag type:<produce [quantity] [component name]>","value":0,"short":"A leather bag","condition":100,"cointype":"gold","id":({"componenter","bag","components bag","compx",}),])
+cap_name "Components bag"
+true_name "components bag"
+creator "/d/shadowgate/masters/bard#14668"
+comp (["diamond dust":1638,"granite dust":1638,"eyelash":1,"crane's feather":271,"water":456,"phosphorus":41,"sand":710,"sulfur":429,"dragon scale":89,"incense stick":98,"talc":203,"owlfeather":266,"soft clay":135,"small candle":91,"spider web":142,"firefly":15140,"gum arabic":1,"drop of blood":271,"powdered silver":203,"tiny bag":91,"crystal":1152,"iron rod":319,"rose petals":1859,"pearl":266,"pinch of special dust":362,"piece of iron":42,])
+comps ({"crane's feather","crystal","diamond dust","dragon scale","drop of blood","eyelash","firefly","granite dust","gum arabic","incense stick","iron rod","owlfeather","pearl","phosphorus","piece of iron","pinch of special dust","powdered silver","rose petals","sand","small candle","soft clay","spider web","sulfur","talc","tiny bag","water",})

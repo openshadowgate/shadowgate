@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/laerad/parnelli/asgard/asgardworkroom"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "asgard"
+owner "devan"
+components (["banded amethyst":29,"red jasper":29,"sodalite":29,"blue lace agate":29,])

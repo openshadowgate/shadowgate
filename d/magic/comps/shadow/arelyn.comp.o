@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "shadow"
+owner "arelyn"
+components (["diamond dust":50,"bat guano":50,"granite dust":50,"eyelash":50,"crane's feather":50,"powdered chalk":50,"eye of roc":50,"phosphorus":50,"eyelash of ogre-mage":50,"clay model ziggurat":50,"sulfur":50,"nitric acid":50,"powdered amber":50,"emerald":50,"zinc":50,"copper":50,"small candle":50,"spider web":50,"gum arabic":50,"drop of blood":50,"piece of mirror":50,"tiny bag":50,"exotic feather":50,"iron rod":50,"tiny hearing trumpet":50,"ruby dust":50,"corn extract":50,"quicksilver":50,])

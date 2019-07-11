@@ -1,0 +1,16 @@
+#/d/magic/psiCompAccount.c
+trap_data ([])
+decayRate 100
+currentStatus 100
+props ([])
+ob_data (["condition":100,"updated time":1493426964,"id":({}),])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "tabor"
+owner "zeal"
+components (["beryl":50,"unakite":50,"sodalite":25,"sapphire":50,"red jasper":25,"tektite":50,"flowstone":50,"banded amethyst":10,"blue lace agate":25,"danburite":50,"adamite":25,"wemic tears":25,"blue diamond":25,])

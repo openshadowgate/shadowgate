@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "jacob"
+components (["diamond dust":17,"talc":10,"zinc":5,"bat guano":15,"copper":5,"granite dust":21,"gum arabic":16,"firefly":20,"eye of roc":5,"powdered silver":10,"sulfur":15,"nitric acid":5,"emerald":10,])

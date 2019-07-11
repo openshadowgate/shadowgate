@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props (["died time":798102994,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^BOLD%^%^BLACK%^T%^RESET%^%^BOLD%^o%^RESET%^%^BOLD%^%^BLACK%^me%^RESET%^%^BOLD%^%^BLACK%^ of %^WHITE%^S%^RESET%^%^BOLD%^%^BLACK%^m%^RESET%^%^WHITE%^o%^RESET%^%^BOLD%^%^BLACK%^k%^RESET%^%^WHITE%^e%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#519626"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["spider climb":2,"ball lightning":5,"teleport":5,"shout":4,"cone of cold":5,"acid breath":5,"magic missile":1,"dragon scales":6,"protection from scrying":3,"sonic shield":4,"blink":3,"invisibility":2,"hideous laughter":2,"teleport without error":7,"web":2,"ice storm":4,"lightning orb":3,"drawmij's instant summons":8,"sonic orb":3,"summon swarm":1,"fly":3,"animate dead":4,"static field":4,"planar beacon":6,"greater dispel magic":7,"sleep":1,"monster summoning 1":3,"prismatic spray":7,"darkness":1,"gate":9,"identify":1,"stoneskin":8,"conjure elemental":5,"monster summoning 2":4,"hold person":3,"lightning bolt":3,"rope trick":2,"armor":1,"wall of fire":4,"magic mirror":7,"color spray":1,"detect magic":1,"scorcher":2,"lower resistance":5,"acid arrow":2,"black tentacles":4,"gust of wind":4,"domination":5,"warriors constitution":6,"incendiary cloud":8,"vampiric touch":3,"light":1,"monster summoning 4":6,"chain lightning":6,])
+magic ({"magic missile","summon swarm","sleep","darkness","identify","armor","color spray","detect magic","light","spider climb","invisibility","hideous laughter","web","rope trick","scorcher","acid arrow","protection from scrying","blink","lightning orb","sonic orb","fly","monster summoning 1","hold person","lightning bolt","vampiric touch","shout","sonic shield","ice storm","animate dead","static field","monster summoning 2","wall of fire","black tentacles","gust of wind","ball lightning","teleport","cone of cold","acid breath","conjure elemental","lower resistance","domination","dragon scales","planar beacon","warriors constitution","monster summoning 4","chain lightning","teleport without error","greater dispel magic","prismatic spray","magic mirror","drawmij's instant summons","stoneskin","incendiary cloud","gate",})
+mID 0
+bookdesc 0
+owner "hester"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

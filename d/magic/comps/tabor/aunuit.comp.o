@@ -1,0 +1,13 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "aunuit"
+components (["diamond dust":35,"granite dust":23,"crane's feather":50,"eye of roc":10,"citric acid":24,"water":50,"eyelash of ogre-mage":50,"sulfur":19,"nitric acid":35,"dragon scale":50,"emerald":43,"charcoal":37,"zinc":50,"owlfeather":50,"large diamond":10,"copper":50,"gum arabic":50,"drop of blood":50,"fur":50,"tiny bag":39,"iron rod":34,"tiny hearing trumpet":50,"silver pin":22,"beeswax":19,"quicksilver":50,])

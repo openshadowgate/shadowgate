@@ -1,0 +1,48 @@
+#/d/shadow/juran/mons/hetori.c
+props (["swarm":1,"strength":"spells","treasure type":"A","new_exp_level":20,"new_exp_perc":"normal","has_random_treasure":1,"treasure level":20,"no attack":1,"new_exp_set":1,"new_exp_amount":10000,"no bump":1,"repairtype":({"tailor","jewel","woodwork","leatherwork",}),"champion_check":1,"spell_casting":0,])
+ob_data (["race":"ogre-mage","condition":100,"adreniline":0,"id":({"monster","Hetori","hetori","clerk","shop keeper","shopkeeper",}),"aggressive":0,"short":"Hetori Spell-Keeper","long":"Hetori is a large, old, ogre-mage.  The long hair growing from his topknot is graying and his face is lined with the wrinkles of age.  One eye is pale and cloudy, either from his extreme age or an errant spell, no one knows.  He offers spells for lots and lots of money and seems to live richly as his clothing and rings show.<help shop> will get you a list of shop commands.",])
+cap_name "Hetori"
+true_name "Hetori"
+creator "/d/shadow/juran/city/spell_store"
+identified ({})
+player_data (["general":(["sp":1,"alignment":3,"experience":100,"extra_hp":0,"max_hp":86,"hp":86,"max_sp":1,]),])
+magic (["max points":300,"points":300,])
+severed ([])
+healing ([])
+limbs ({"head","right leg","right foot","neck","left arm","left foot","waist","left leg","torso","right hand","right arm","left hand",})
+all_my_fingers 5
+heal_rate 2
+classes ({"mage",})
+posed "mage"
+skills ([])
+guilds (["mage":20,])
+mlevels (["mage":20,])
+wimpydir "out"
+combat_vars (["react":0,"swarm":0,"bound":0,"paralyzed":0,"blindfolded":0,"toAttack":0,"gagged":0,"asleep":0,"wimpy":0,"any attack":0,"RNEW":1,"funcCast":0,"castFunc":0,"tripped":0,"unconscious":0,])
+combat_messages (["NEW":1,"blinded":0,"paralyzed":0,"bound":0,"blindfolded":0,"gagged":0,"asleep":0,"tripped":0,"unconscious":0,])
+combat_counters (["NEW":1,"blinded":0,"healing":0,"bound":0,"blindfolded":0,"gagged":0,"block_attack":0,"asleep":0,"tripped":0,"unconscious":0,])
+env_var ([])
+choice "wizish"
+ok_to_heal 183928
+player_age 183672
+gender "male"
+stats (["wisdom":14,"dexterity":10,"constitution":17,"intelligence":19,"strength":18,"charisma":6,])
+masteredspells ({})
+level 20
+hit_dice 20
+hit_dice_bonus 1
+stage 24
+emotes (["attack chance":0,"chance":0,"msg":({"%^CYAN%^Hetori says%^RESET%^: Make your mind up and move on.","%^CYAN%^Hetori says%^RESET%^: Time is money.","%^CYAN%^Hetori says%^RESET%^: I haven't got all day.","%^CYAN%^Hetori says%^RESET%^: You look like you could use meteor swarms....for you only 98,000 gold.","Hetori watches you closely.","Hetori raises an eyebrow, then shakes his head while mumbling something","Hetori watches to make sure none of his scrolls walk out unpaid for.",}),"attack msg":({"%^BOLD%^%^CYAN%^Hetori says%^RESET%^: You bastard...I'll kill you for that!","%^BOLD%^%^CYAN%^Hetori says%^RESET%^: OOOOOO!!  That's gonna leave a mark!","%^BOLD%^%^CYAN%^Hetori says%^RESET%^: Dying sucks boy!",}),])
+spells (["commands":({"powerword stun","hideous laughter","fireball","magic missile","monster summoning 1",}),"chance":90,])
+thief_skill ([])
+body_type "human"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+BONUS_ADDED 1
+static_bab 20
+Available ({"alter self","chain lightning","conjure elemental","deny the reaper","detect scrying","disintegrate","eagles splendor","foxs cunning","identify","magic mirror","monster summoning 1","protection from scrying","scorcher",})
+tmpstr "book"
+number 1
+spellnames (["identify":2520,"detect scrying":24080,"monster summoning 1":2530,"scorcher":5469,"magic mirror":84013,"chain lightning":59727,"foxs cunning":5408,"protection from scrying":12623,"deny the reaper":112593,"disintegrate":59770,"alter self":5429,"conjure elemental":39786,"eagles splendor":5509,])
+backing (["qillree":1041913096,"dabyllaer":1060460601,"tidus":1149947458,"catherine":1314298296,"raelith":1112768537,"arken":1451501114,"immoln":1012338425,"rubicant":1126989575,"kinjaro":1111938215,"zalanne":1030429154,"lexin":1085170517,"svamp":1014503936,"madison":1055170805,"belendithas":1392839557,"klinque":1168229672,"simnel":1045414122,"alucarn":1098333645,])

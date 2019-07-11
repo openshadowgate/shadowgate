@@ -1,0 +1,864 @@
+Subject: Mage Spell List
+From: l2wang@napier.waterloo.edu (Lei Wang)
+Date: 26 Jun 92 11:25:06 GMT
+
+Subject: Updated FR Mage Spell List
+From: boyd@colonial.eecs.umich.edu (Eric Boyd)
+Date: 26 Jun 92 17:44:18 GMT
+
+Edited by: wsbusr1@urc.tue.nl (Boudewijn Wayers)
+
+
+Herein you will find:
+~~~~~~~~~~~~~~~~~~~~ 
+Magic spells from the Players Handbook,
+Magic spells from the Forgotten Realms Adventures,
+Magic spells from the Forgotten Realms Adventures (updated),
+Priest spells from the Players Handbook.
+
+
+Abbreviations and general statistics:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Magic Schools:
+
+ABJ: abjuration			ILL: illusion/phatasm
+ALT: alteration			GrD: greater divination
+C/S: conjuration/sumoning	LrD: lesser divination
+E/C: enchantment/charm		NCR: necromantic
+I/E: invocation/evocation
+
+Priest Spheres:
+
+ALL: all			HEA: healing
+ANI: animal			NEC: necromancy
+CHA: charm			PLA: plant
+COM: combat			PRO: protection
+CRE: creation			SUM: summoning
+DIV: divination			SUN: sun
+ELE: elemental			WEA: weather
+GUA: guardian			
+
+Total spells:
+
+Players magic:  312
+Forgotten Realms magic:  81
+Players priest:  174
+
+
+Spells sorted by schools.
+
+school	PHB	FR	magic	priest	total
+~~~~~~	~~~	~~	~~~~~	~~~~~~	~~~~~
+ ABJ	 22	12	  34	  25	  59
+ ALT	110	28	 138	  63	 201
+ C/S	 41	 3	  44	  24	  68
+ E/C	 42	 4	  46	  23	  69
+ I/E	 50	17	  67	  18	  85
+ ILL	 52	 5	  57	   2	  59
+ GrD	  9	 0	   9	   9	  18
+ LrD	 11	 1	  12	  10	  22
+ NCR	 17	19	  36	  15	  51
+
+Spells sorted by schools.
+
+ALL 5		ANI 17		AST 2		CHA 10
+COM 8		CRE 6		DIV 22		ELE 31
+GUA 5		HEA 6		NEC 12		PLA 24
+PRO 20		SUM 15		SUN 6		WEA 9
+
+Spells sorted by level, magic.
+
+1: 48		2: 42		3: 36		4: 42
+5: 41		6: 40		7: 26		8: 22
+9: 18
+
+Spells sorted by level, priest.
+
+1: 27		2: 28		3: 30		4: 25
+5: 24		6: 22		7: 22
+
+Spells sorted by components, magic.
+
+V,S,M	262		V,-,-	28
+V,S,-	87		-,S,-	2
+V,-,M	8		-,-,M	0
+-,S,M	5		-,-,-	0
+
+Spells sorted by components, magic.
+
+V,S,M	104		V,-,-	4
+V,S,-	64		-,S,-	0
+V,-,M	1		-,-,M	0
+-,S,M	1		-,-,-	0
+
+Spells sorted by components, all:
+
+V,S,M	366		V,-,-	32
+V,S,-	151		-,S,-	2
+V,-,M	9		-,-,M	0
+-,S,M	6		-,-,-	0
+
+
+Wizard Spells, Player's Handbook:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Level		Name				Comp.	School
+
+Wizard	1	Affect_Normal_Fires		V,S,-	ALT
+Wizard	1	Alarm				V,S,M	ABJ,I/E
+Wizard	1	Armor				V,S,M	C/S
+Wizard	1	Audible_Glamer			V,S,M	ILL
+Wizard	1	Burning_Hands			V,S,-	ALT
+Wizard	1	Cantrip				V,S,-	ALL
+Wizard	1	Change_Self			V,S,-	ILL
+Wizard	1	Charm_Person			V,S,-	E/C
+Wizard	1	Chill_Touch			V,S,-	NCR
+Wizard	1	Color_Spray			V,S,M	ALT
+Wizard	1	Comprehend_Languages		V,S,M	ALT
+Wizard	1	Dancing_Lights			V,S,M	ALT
+Wizard	1	Detect_Magic			V,S,-	LrD
+Wizard	1	Detect_Undead			V,S,M	LrD,NCR
+Wizard	1	Enlarge				V,S,M	ALT
+Wizard	1	Erase				V,S,-	ALT
+Wizard	1	Feather_Fall			V,-,-	ALT
+Wizard	1	Find_Familiar			V,S,M	C/S
+Wizard	1	Friends				V,S,M	E/C
+Wizard	1	Gaze_Reflection			V,S,M	C/S
+Wizard	1	Grease				V,S,M	C/S
+Wizard	1	Hold_Portal			V,-,-	ALT
+Wizard	1	Hypnotism			V,S,-	E/C
+Wizard	1	Identify			V,S,M	LrD
+Wizard	1	Jump				V,S,M	ALT
+Wizard	1	Light				V,-,M	ALT
+Wizard	1	Magic_Missile			V,S,-	I/E
+Wizard	1	Mending				V,S,M	ALT
+Wizard	1	Message				V,S,M	ALT
+Wizard	1	Mount				V,S,M	C/S
+Wizard	1	Nystul's_Magical_Aura		V,S,M	ILL
+Wizard	1	Phantasmal_Force		V,S,M	ILL
+Wizard	1	Protection_From_Evil		V,S,M	ABJ
+Wizard	1	Read_Magic			V,S,M	LrD
+Wizard	1	Shield				V,S,-	I/E
+Wizard	1	Shocking_Grasp			V,S,-	ALT
+Wizard	1	Sleep				V,S,M	E/C
+Wizard	1	Spider_Climb			V,S,M	ALT
+Wizard	1	Spook				V,S,-	ILL
+Wizard	1	Taunt				V,S,M	E/C
+Wizard	1	Tenser's_Floating_Disc		V,S,M	I/E
+Wizard	1	Unseen_Servant			V,S,M	C/S
+Wizard	1	Ventriloquism			V,-,M	ILL
+Wizard	1	Wall_Of_Fog			V,S,M	I/E
+Wizard	1	Wizard_Mark			V,S,M	ALT
+Wizard	2	Alter_Self			V,S,-	ALT
+Wizard	2	Bind				V,S,M	E/C
+Wizard	2	Blindness			V,-,-	ILL
+Wizard	2	Blur				V,S,-	ILL
+Wizard	2	Continual_Light			V,S,-	ALT
+Wizard	2	Darkness,15'_Radius		V,S,M	ALT
+Wizard	2	Deafness			V,S,M	ILL
+Wizard	2	Deeppockets			V,S,M	ALT,E/C
+Wizard	2	Detect_Evil			V,S,-	LrD
+Wizard	2	Detect_Invisibility		V,S,M	LrD
+Wizard	2	ESP				V,S,M	LrD
+Wizard	2	Flaming_Sphere			V,S,M	I/E
+Wizard	2	Fog_Cloud			V,S,-	ALT
+Wizard	2	Fools's_Gold			V,S,M	ALT,ILL
+Wizard	2	Forget				V,S,-	E/C
+Wizard	2	Flitterdust			V,S,M	C/S
+Wizard	2	Hypnotic_Pattern		-,S,M	ILL
+Wizard	2	Improved_Phantasmal_Force	V,S,M	ILL
+Wizard	2	Invisibility			V,S,M	ILL
+Wizard	2	Irritation			V,S,M	ALT
+Wizard	2	Knock				V,-,-	ALT
+Wizard	2	Know_Alignment			V,S,-	LrD
+Wizard	2	Leomund's_Trap			V,S,M	ILL
+Wizard	2	Levitate			V,S,M	ALT
+Wizard	2	Locate_Object			V,S,M	LrD
+Wizard	2	Magic_Mouth			V,S,M	ALT
+Wizard	2	Melf's_Acid_Arrow		V,S,M	C/S
+Wizard	2	Misdirection			V,S,-	ILL
+Wizard	2	Protection_From_Cantrips	V,S,M	ABJ
+Wizard	2	Pyrotechnics			V,S,M	ALT
+Wizard	2	Ray_Of_Enfeeblement		V,S,-	E/C
+Wizard	2	Rope_Trick			V,S,M	ALT
+Wizard	2	Scare				V,S,M	E/C
+Wizard	2	Shatter				V,S,M	ALT
+Wizard	2	Spectral_Hand			V,S,-	NCR
+Wizard	2	Stinking_Cloud			V,S,M	I/E
+Wizard	2	Strength			V,S,M	ALT
+Wizard	2	Summon_Swarm			V,S,M	C/S
+Wizard	2	Tasha's_Hideous_Laughter	V,S,M	E/C
+Wizard	2	Web				V,S,M	I/E
+Wizard	2	Whispering_Wind			V,S,-	ALT,ILL
+Wizard	2	Wizard_Lock			V,S,-	ALT
+Wizard	3	Blink				V,S,-	ALT
+Wizard	3	Clairaudience			V,S,M	LrD
+Wizard	3	Clairvoyance			V,S,M	LrD
+Wizard	3	Delude				V,S,-	ALT
+Wizard	3	Dispel_Magic			V,S,-	ABJ
+Wizard	3	Explosive_Runes			V,S,-	ALT
+Wizard	3	Feign_Death			V,S,-	NCR
+Wizard	3	Fireball			V,S,M	I/E
+Wizard	3	Flame_Arrow			V,S,M	C/S
+Wizard	3	Fly				V,S,M	ALT
+Wizard	3	Gust_Of_Wind			V,S,M	ALT
+Wizard	3	Haste				V,S,M	ALT
+Wizard	3	Hold_Person			V,S,M	E/C
+Wizard	3	Hold_Undead			V,S,M	NCR
+Wizard	3	Illusionary_Script		V,S,M	ILL
+Wizard	3	Infravision			V,S,M	ALT
+Wizard	3	Invisibility_10'_Radius		V,S,M	ILL
+Wizard	3	Item				V,S,M	ALT
+Wizard	3	Leomund's_Tiny_Hut		V,S,M	ALT
+Wizard	3	Lightning_Bolt			V,S,M	I/E
+Wizard	3	Melf's_Minute_Meteors		V,S,M	ALT,I/E
+Wizard	3	Monster_Summoning_I		V,S,M	C/S
+Wizard	3	Non-Detection			V,S,M	ABJ
+Wizard	3	Phantom_Steed			V,S,-	C/S,ILL
+Wizard	3	Protection_From_Evil_10'	V,S,M	ABJ
+Wizard	3	Protection_Normal_Missiles	V,S,M	ABJ
+Wizard	3	Secret_Page			V,S,M	ALT
+Wizard	3	Sepia_Snake_Sigil		V,S,M	C/S
+Wizard	3	Slow				V,S,M	ALT
+Wizard	3	Spectral_Force			V,S,-	ILL
+Wizard	3	Suggestion			V,-,M	E/C
+Wizard	3	Tongues				V,-,M	ALT
+Wizard	3	Vampiric_Touch			V,S,-	NCR
+Wizard	3	Water_Breathing			V,S,M	ALT
+Wizard	3	Wind_Wall			V,S,M	ALT
+Wizard	3	Wraithform			-,S,M	ALT,ILL
+Wizard	4	Charm_Monster			V,S,-	E/C
+Wizard	4	Confusion			V,S,M	E/C
+Wizard	4	Contagion			V,S,-	NCR
+Wizard	4	Detect_Scrying			V,S,M	GrD
+Wizard	4	Dig				V,S,M	I/E
+Wizard	4	Dimension_Door			V,-,-	ALT
+Wizard	4	Emotion				V,S,-	E/C
+Wizard	4	Enchanted_Weapon		V,S,M	E/C
+Wizard	4	Enervation			V,S,-	NCR
+Wizard	4	Evard's_Black_Tentacles		V,S,M	C/S
+Wizard	4	Extension_I			V,-,-	ALT
+Wizard	4	Fear				V,S,M	ILL
+Wizard	4	Fire_Charm			V,S,M	E/C
+Wizard	4	Fire_Shield			V,S,M	ALT,I/E
+Wizard	4	Fire_Trap			V,S,M	ABJ,I/E
+Wizard	4	Fumble				V,S,M	E/C
+Wizard	4	Hallucinatory_Terrain		V,S,M	ILL
+Wizard	4	Ice_Storm			V,S,M	I/E
+Wizard	4	Illusionarg_Wall		V,S,-	ILL
+Wizard	4	Improved_Invisibility		V,S,-	ILL
+Wizard	4	Leomund's_Secure_Shelter	V,S,M	ALT,E/C
+Wizard	4	Magic_Mirror			V,S,M	E/C,GrD
+Wizard	4	Massmorph			V,S,M	ALT
+Wizard	4	Minor_Creation			V,S,M	ILL
+Wizard	4	Minor_Globe_Invulnerability	V,S,M	ABJ
+Wizard	4	Monster_Summoning_II		V,S,M	C/S
+Wizard	4	Otiluke's_Resilient_Sphere	V,S,M	ALT,I/E
+Wizard	4	Phantasmal_Killer		V,S,-	ILL
+Wizard	4	Plant_Growth			V,S,-	ALT
+Wizard	4	Polymorph_Other			V,S,M	ALT
+Wizard	4	Polymorph_Self			V,-,-	ALT
+Wizard	4	Rainbow_Pattern			-,S,M	ALT,ILL
+Wizard	4	Rary's_Mnemonic_Enhancer	V,S,M	ALT
+Wizard	4	Remove_Curse			V,S,-	ABJ
+Wizard	4	Shadow_Monsters			V,S,-	ILL
+Wizard	4	Shout				V,-,M	I/E
+Wizard	4	Solid_Fog			V,S,M	ALT
+Wizard	4	Stoneskin			V,S,M	ALT
+Wizard	4	Vacancy				V,S,M	ALT,ILL
+Wizard	4	Wall_Of_Fire			V,S,M	I/E
+Wizard	4	Wall_Of_Ice			V,S,M	I/E
+Wizard	4	Wizard_Eye			V,S,M	ALT
+Wizard	5	Advanced_Illusion		V,S,M	ILL
+Wizard	5	Airy_Water			V,S,M	ALT
+Wizard	5	Animal_Growth			V,S,M	ALT
+Wizard	5	Animate_Dead			V,S,M	NCR
+Wizard	5	Avoidance			V,S,M	ABJ,ALT
+Wizard	5	Bigby's_Interposing_Hand	V,S,M	I/E
+Wizard	5	Chaos				V,S,M	E/C
+Wizard	5	Cloudkill			V,S,-	I/E
+Wizard	5	Cone_Of_Cold			V,S,M	I/E
+Wizard	5	Conjure_Elemental		V,S,M	C/S
+Wizard	5	Contact_Other_Plane		V,-,-	GrD
+Wizard	5	Demi-Shadow_Monsters		V,S,-	ILL
+Wizard	5	Dismissal			V,S,M	ABJ
+Wizard	5	Distance_Distortion		V,S,M	ALT
+Wizard	5	Domination			V,S,-	E/C
+Wizard	5	Dream				V,S,-	I/E,ILL
+Wizard	5	Extension_II			V,-,-	ALT
+Wizard	5	Fabricate			V,S,M	ALT,E/C
+Wizard	5	False_Vision			V,S,M	GrD
+Wizard	5	Feeblemind			V,S,M	E/C
+Wizard	5	Hold_Monster			V,S,M	E/C
+Wizard	5	Leomund's_Belaborment		V,-,-	E/C,I/E
+Wizard	5	Leomund's_Secret_Chest		V,S,M	ALT,C/S
+Wizard	5	Magic_Jar			V,S,M	NCR
+Wizard	5	Major_Creation			V,S,M	ILL
+Wizard	5	Monster_Summoning_III		V,S,M	C/S
+Wizard	5	Mordenkainen's_Hound		V,S,M	C/S
+Wizard	5	Passwall			V,S,M	ALT
+Wizard	5	Seeming				V,S,-	ILL
+Wizard	5	Sending				V,S,M	I/E
+Wizard	5	Shadow_Door			-,S,-	ILL
+Wizard	5	Shadow_Magic			V,S,-	ILL
+Wizard	5	Stone_Shape			V,S,M	ALT
+Wizard	5	Summon_Shadow			V,S,M	C/S,NCR
+Wizard	5	Telekinesis			V,S,-	ALT
+Wizard	5	Teleport			V,-,-	ALT
+Wizard	5	Transmute_Rock_To_Mud		V,S,M	ALT
+Wizard	5	Wall_Of_Force			V,S,M	I/E
+Wizard	5	Wall_Of_Iron			V,S,M	I/E
+Wizard	5	Wall_Of_Stone			V,S,M	I/E
+Wizard	6	Anti-Magic_Shell		V,S,-	ABJ
+Wizard	6	Bigby's_Forceful_Hand		V,S,M	I/E
+Wizard	6	Chain_Lightning			V,S,M	I/E
+Wizard	6	Conjure_Animals			V,S,-	C/S
+Wizard	6	Contingency			V,S,M	I/E
+Wizard	6	Control_Weather			V,S,M	ALT
+Wizard	6	Death_Fog			V,S,M	ALT,I/E
+Wizard	6	Death_Spell			V,S,M	NCR
+Wizard	6	Demi-Shadow_Magic		V,S,-	ILL
+Wizard	6	Disintegrate			V,S,M	ALT
+Wizard	6	Enchant_An_Item			V,S,M	E/C,I/E
+Wizard	6	Ensnarement			V,S,M	C/S
+Wizard	6	Extension_III			V,-,-	ALT
+Wizard	6	Eyebite				V,S,-	E/C,ILL
+Wizard	6	Geas				V,-,-	E/C
+Wizard	6	Glassee				V,S,M	ALT
+Wizard	6	Globe_Of_Invulnerability	V,S,M	ABJ
+Wizard	6	Guards_And_Wardss		V,S,M	ALT,E/C,I/E
+Wizard	6	Invisible_Stalker		V,S,M	C/S
+Wizard	6	Legend_Lore			V,S,M	GrD
+Wizard	6	Lower_Water			V,S,M	ALT
+Wizard	6	Mass_Suggestion			V,-,M	E/C
+Wizard	6	Mirage_Arcana			V,S,M	ALT,ILL
+Wizard	6	Mislead				-,S,-	ILL
+Wizard	6	Monster_Summoning_IV		V,S,M	C/S
+Wizard	6	Mordenkainen's_Lucubration	V,S,-	ALT
+Wizard	6	Move_Earth			V,S,M	ALT
+Wizard	6	Otiluke's_Freezing_Sphere	V,S,M	ALT,I/E
+Wizard	6	Part_Water			V,S,M	ALT
+Wizard	6	Permenent_Illusion		V,S,M	ILL
+Wizard	6	Programmed_Illusion		V,S,M	ILL
+Wizard	6	Project_Image			V,S,M	ALT,ILL
+Wizard	6	Reincarnation			V,S,M	NCR
+Wizard	6	Repulsion			V,S,M	ABJ
+Wizard	6	Shades				V,S,-	ILL
+Wizard	6	Stone_To_Earth			V,S,M	ALT
+Wizard	6	Tenser's_Transformation		V,S,M	ALT,I/E
+Wizard	6	Transmute_Water_To_Dust		V,S,M	ALT
+Wizard	6	True_Seeing			V,S,M	GrD
+Wizard	6	Veil				V,S,-	ILL
+Wizard	7	Banishment			V,S,M	ABJ
+Wizard	7	Bigby's_Grasping_Hand		V,S,M	I/E
+Wizard	7	Charm_Plants			V,S,M	E/C
+Wizard	7	Control_Undead			V,S,M	NCR
+Wizard	7	Delayed_Blast_Fireball		V,S,M	I/E
+Wizard	7	Drawmij's_Instant_Summons	V,S,M	C/S
+Wizard	7	Duo-Dimension			V,S,M	ALT
+Wizard	7	Finger_Of_Death			V,S,-	NCR
+Wizard	7	Forcecage			V,S,M	I/E
+Wizard	7	Limited_Wish			V,-,-	C/S,I/E
+Wizard	7	Mass_Invisibility		V,S,M	ILL
+Wizard	7	Monster_Summonging_V		V,S,M	C/S
+Wizard	7	Mordenkainen's_Mansion		V,S,M	ALT,C/S
+Wizard	7	Mordenkainen's_Sword		V,S,M	I/E
+Wizard	7	Phase_Door			V,-,-	ALT
+Wizard	7	Power_Word_Stun			V,-,-	C/S
+Wizard	7	Prismatic_Spray			V,S,-	C/S
+Wizard	7	Reverse_Gravity			V,S,M	ALT
+Wizard	7	Sequester			V,S,M	ABJ,ILL
+Wizard	7	Shadow_Walk			V,S,-	E/C,ILL
+Wizard	7	Simulacrum			V,S,M	ILL
+Wizard	7	Spell_Turning			V,S,M	ABJ
+Wizard	7	Statue				V,S,M	ALT
+Wizard	7	Teleport_Without_Error		V,-,-	ALT
+Wizard	7	Vanish				V,-,-	ALT
+Wizard	7	Vision				V,S,M	GrD
+Wizard	8	Antipathy-Sympathy		V,S,M	E/C
+Wizard	8	Bigby's_Clenched_Fist		V,S,M	I/E
+Wizard	8	Binding				V,S,M	E/C,I/E
+Wizard	8	Clone				V,S,M	NCR
+Wizard	8	Demand				V,S,M	E/C,I/E
+Wizard	8	Glassteel			V,S,M	ALT
+Wizard	8	Incendiary_Cloud		V,S,M	ALT,I/E
+Wizard	8	Mass_Charm			V,-,-	E/C
+Wizard	8	Maze				V,S,-	C/S
+Wizard	8	Mind_Blank			V,S,-	ABJ
+Wizard	8	Monster_Summong_VI		V,S,M	C/S
+Wizard	8	Otiluke's_Telekinetic_Sphere	V,S,M	ALT,I/E
+Wizard	8	Otto's_Irresistable_Dance	V,-,-	E/C
+Wizard	8	Permanency			V,S,-	ALT
+Wizard	8	Polymorph_Any_Object		V,S,M	ALT
+Wizard	8	Power_Word_Blind		V,-,-	C/S
+Wizard	8	Prismatic_Wall			V,S,-	C/S
+Wizard	8	Screen				V,S,-	GrD,ILL
+Wizard	8	Serten's_Spell_Immunity		V,S,M	ABJ
+Wizard	8	Sink				V,S,-	ALT,E/C
+Wizard	8	Symbol				V,S,M	C/S
+Wizard	8	Trap_The_Soul			V,S,M	C/S
+Wizard	9	Astral_Spell			V,S,-	I/E
+Wizard	9	Bigby's_Crushing_Hand		V,S,M	I/E
+Wizard	9	Crystalbrittle			V,S,-	ALT
+Wizard	9	Energy_Drain			V,S,M	I/E,NCR
+Wizard	9	Foresight			V,S,M	GrD
+Wizard	9	Gate				V,S,-	C/S
+Wizard	9	Imprisonment			V,S,-	ABJ
+Wizard	9	Meteor_Swarm			V,S,-	I/E
+Wizard	9	Monster_Summoning_VII		V,S,M	C/S
+Wizard	9	Mordenkainen's_Disjunction	V,-,-	ALT,E/C
+Wizard	9	Power_Word_Kill			V,-,-	C/S
+Wizard	9	Prismatic_Sphere		V,-,-	ABJ,C/S
+Wizard	9	Shape_Change			V,S,M	ALT
+Wizard	9	Succor				V,S,M	ALT,E/C
+Wizard	9	Temporal_Stasis			V,S,M	ALT
+Wizard	9	Time_Stop			V,-,-	ALT
+Wizard	9	Weird				V,S,-	ILL
+Wizard	9	Wish				V,-,-	C/S
+
+
+Wizard Spells, Forgotten Realms:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Level		Name				Comp.	School
+
+Wizard	1	Catapult			V,S,-	ALT
+Wizard	1	Corpselight			V,S,M	ALT,NCR
+Wizard	1	Know_School			V,S,M	LrD
+Wizard	1	Scatterspray			V,S,M	ALT
+Wizard	1	Snilloc's_Snowball		V,S,M	I/E
+Wizard	2	Agannazar's_Scorcher		V,S,-	I/E
+Wizard	2	Bladethirst			V,S,M	ALT
+Wizard	2	Cloak_From_Undead		V,S,M	ALT
+Wizard	2	Cloak_Undead			V,S,-	NCR
+Wizard	2	Decastave			V,S,M	I/E
+Wizard	2	Flying_Fist			V,S,-	I/E
+Wizard	2	Ghost_Pipes			V,S,-	ALT
+Wizard	2	Quimby's_Enchanting_Gourmet	V,S,M	C/S
+Wizard	2	Snilloc's_Snowball_Swarm	V,S,M	I/E
+Wizard	2	Undead_Mount			V,S,M	NCR
+Wizard	2	Vocalize			-,S,M	ALT
+Wizard	3	Blacklight			V,S,M	ALT
+Wizard	3	Dire_Charm			V,S,M	E/C
+Wizard	3	Dispel_Silence			-,S,M	ABJ,ALT
+Wizard	3	Ghost_Armor			V,S,M	C/S
+Wizard	3	Hold_Vapor			V,S,M	ABJ
+Wizard	3	Icelance			V,S,M	ALT
+Wizard	3	Laeral's_Dancing_Dweomer	V,S,M	ILL
+Wizard	3	Mummy_Touch			V,S,M	NCR
+Wizard	3	Nchaser's_Glowing_Globe		V,S,M	ALT
+Wizard	3	Nightscar			V,S,M	ILL
+Wizard	3	Paralyze			V,S,M	NCR
+Wizard	3	Proof_From_Teleportation	V,S,M	ABJ
+Wizard	3	Revenance			V,S,M	NCR
+Wizard	3	Skull_Watch			V,S,M	NCR
+Wizard	3	Ward_Against_Undead		V,S,-	ABJ
+Wizard	3	Waves_Of_Weariness		V,S,M	E/C
+Wizard	4	Beltyn's_Burning_Blood		V,S,M	NCR
+Wizard	4	Callgarde's_Claw		V,S,M	C/S
+Wizard	4	Encrypt				V,S,M	ILL
+Wizard	4	Fire_Gate			V,-,M	ALT
+Wizard	4	Ilyykur's_Mantle		V,S,M	ABJ
+Wizard	4	Missile_Mastery			V,S,-	ALT
+Wizard	4	Phase_Trap			V,S,M	ALT
+Wizard	4	Plague				V,S,M	ILL
+Wizard	4	Spectral_Wings			V,S,M	I/E
+Wizard	4	Spendelard's_Chaser		V,S,M	NCR
+Wizard	4	Thunderlance			V,S,M	I/E
+Wizard	4	Wall_Of_Sand			V,S,M	I/E
+Wizard	4	Watchware			V,S,M	I/E
+Wizard	5	Bowgentle's_Fleeting_Journey	V,S,M	ALT
+Wizard	5	Disguise_Undead			V,S,M	ILL,NCR
+Wizard	5	Improved_Skull_Watch		V,S,M	NCR
+Wizard	5	Ironguard			V,S,M	ABJ,ALT
+Wizard	5	Nulanthoe's_Ninemen		V,S,M	NCR
+Wizard	5	Presper's_Moonbow		V,S,M	I/E
+Wizard	5	Secure				V,S,M	ALT
+Wizard	5	Shroud				V,S,M	I/E
+Wizard	5	Snilloc's_Major_Missile		V,S,-	I/E
+Wizard	6	Blade_Of_Doom			V,S,M	I/E
+Wizard	6	Grimwald's_Greymantle		V,S,M	NCR
+Wizard	6	Imbue_Undead_With_Spell		V,S,M	NCR
+Wizard	6	Lich_Touch			V,S,M	NCR
+Wizard	6	Power_Word_Silence		V,-,-	ALT
+Wizard	6	Reconstruction			V,S,M	ALT
+Wizard	6	Teleport_Dead			V,S,-	ALT,NCR
+Wizard	6	Turnshadow			V,S,-	ABJ
+Wizard	7	Gemjump				V,S,M	ALT
+Wizard	7	Khelben's_Warding_Whip		V,S,M	ABJ
+Wizard	7	Ruby_Ray_Of_Reversal		V,S,M	ALT
+Wizard	7	Spectral_Guard			V,S,M	I/E
+Wizard	7	Spelltrap			V,S,M	ABJ,ALT
+Wizard	7	Simbul's_Synostodweomer		V,S,-	ALT,NCR
+Wizard	8	Death_Link			V,S,-	NCR
+Wizard	8	Gateway				V,S,M	ALT
+Wizard	8	Great_Shout			V,-,M	I/E
+Wizard	8	Spell_Engine			V,S,M	ABJ,ALT
+Wizard	8	Sunburst			V,S,M	I/E
+Wizard	9	Master_Undead			V,S,M	NCR
+Wizard	9	Dismind				V,-,-	E/C
+Wizard	9	Elminster's_Epuration		V,S,-	ABJ
+Wizard	9	Elminster's_Evasion		V,S,M	I/E
+Wizard	9	Spellstrike			V,S,-	ALT
+Wizard	9	Spell_Invulnerability		V,S,-	ABJ
+Wizard	9	Virus_Charm			V,S,M	E/C
+Wizard	9	Worldwalk			V,S,M	ALT
+
+Below is an updated FR mage spell list, using far more sources.
+Comments about ommisions and errors would be appreciated by e-mail.
+
+Level		Name				Comp.	School	Source
+
+Wizard	1	Catapult			V,S,-	ALT	FRA
+Wizard	1	Corpselight			V,S,M	ALT,NCR	FRA
+Wizard	1	Dreamspeak			V,S,M	NCR	FRQ1
+		(formerly Detho's_Delirium)
+Wizard	1	Know_School			V,S,M	LrD	FRA
+Wizard	1	Oilskin				V,S,M	ABJ	FOR3
+Wizard	1	Scatterspray			V,S,M	ALT	FRA
+Wizard	1	Snilloc's_Snowball		V,S,M	I/E	FRA
+Wizard	1	Spidereyes			V,S,M	ALT	FOR2
+Wizard	1	Tasso's_Shriek			V,-,-	ILL	Dragon, May 92
+Wizard	1	Weathertell			V,S,M	LrD	FOR3
+Wizard	2	Agannazar's_Scorcher		V,S,-	I/E	FRA
+Wizard	2	Bladethirst			V,S,M	ALT	FRA
+Wizard	2	Cloak_From_Undead		V,S,M	ALT	FRA
+		(formerly Invisibility_To_Undead)
+Wizard	2	Cloak_Undead			V,S,-	NCR	FRA
+Wizard	2	Dark_Mirror			V,S,M	ABJ,ALT	Dragon, May 92
+Wizard	2	Decastave			V,S,M	I/E	FRA
+Wizard	2	Firestaff			V,S,M	I/E	Dragon, May 92
+Wizard	2	Flying_Fist			V,S,-	I/E	FRA
+Wizard	2	Forcewave			V,S,M	ABJ,I/E	Dragon, May 92
+Wizard	2	Ghost_Pipes			V,S,-	ALT	FRA
+Wizard	2	Immurk's_Distraction		V,S,M	E/C	FOR3
+Wizard	2	Mass_Jump			V,S,M	ALT	FOR3
+Wizard	2	Mist_Magic			V,S,M	I/E	FA1
+Wizard	2	Quimby's_Enchanting_Gourmet	V,S,M	C/S	FRA
+Wizard	2	Ray_of_Ondovir			V,S,-	E/C	FRQ1
+Wizard	2	Slumberward			V,S,-	ABJ	Dragon, May 92
+Wizard	2	Skyhook				V,S,M	I/E	FOR2
+Wizard	2	Snilloc's_Snowball_Swarm	V,S,M	I/E	FRA
+Wizard	2	Undead_Mount			V,S,M	NCR	FRA
+Wizard	2	Vocalize			-,S,M	ALT	FRA
+Wizard	2	Whirling_Blade			V,S,-	I/E	UM	
+Wizard	3	Blacklight			V,S,M	ALT	FRA
+Wizard	3	Call_Undead			V,S,M	NCR	FA1
+Wizard	3	Dark_Wings			V,S,M	ALT	FOR2
+Wizard	3	Dire_Charm			V,S,M	E/C	FRA
+Wizard	3	Dispel_Fog			V,S,-	ABJ	FOR3
+Wizard	3	Dispel_Silence			-,S,M	ABJ,ALT	FRA
+Wizard	3	Ghost_Armor			V,S,M	C/S	FRA
+Wizard	3	Hand_Of_Darkness		V,S,M	ALT	FOR2
+Wizard	3	Hold_Vapor			V,S,M	ABJ	FRA
+Wizard	3	Icelance			V,S,M	ALT	FRA
+Wizard	3	Khelben's_Suspended_Silence	V,S,M	ALT	UM	
+Wizard	3	Laeral's_Dancing_Dweomer	V,S,M	ILL	FRA
+Wizard	3	Mummy_Touch			V,S,M	NCR	FRA
+Wizard	3	Nchaser's_Glowing_Globe		V,S,M	ALT	FRA
+Wizard	3	Nightscar			V,S,M	ILL	FRA
+Wizard	3	Paralyze			V,S,M	NCR	FRA
+Wizard	3	Preserve_Wood			V,S,-	ABJ	FOR3
+Wizard	3	Proof_From_Teleportation	V,S,M	ABJ	FRA
+Wizard	3	Revenance			V,S,M	NCR	FRA
+Wizard	3	Shadow_Bolt			V,S,-	ILL	Dragon, May 92
+Wizard	3	Skull_Watch			V,S,M	NCR	FRA
+Wizard	3	Ward_Against_Undead		V,S,-	ABJ	FRA
+Wizard	3	Watery_Form			V,S,-	ALT	FOR3
+Wizard	3	Waves_Of_Weariness		V,S,M	E/C	FRA
+Wizard	3	Wind_Servant			V,S,M	C/S	FOR3
+Wizard	4	Acid_Bolt			V,S,M	C/S	FOR2
+Wizard	4	Backlash			V,S,-	NCR	FOR2
+Wizard	4	Ball_Lightning			V,S,-	C/S	FOR3
+Wizard	4	Beltyn's_Burning_Blood		V,S,M	NCR	FRA
+Wizard	4	Caligarde's_Claw		V,S,M	C/S	FRA
+Wizard	4	Encrypt				V,S,M	ILL	FRA
+Wizard	4	Fire_Gate			V,-,M	ALT	FRA
+Wizard	4	Flamsterd's_Flamestrike		V,S,M	I/E	FA1
+Wizard	4	Geirdorn's_Grappling_Grasp	V,S,M	I/E	Dragon, May 92
+Wizard	4	Ilyykur's_Mantle		V,S,M	ABJ	FRA
+Wizard	4	Laeral's_Aqueous_Column		V,S,M	ALT,I/E	Dragon, May 92
+Wizard	4	Missile_Mastery			V,S,-	ALT	FRA
+Wizard	4	Phase_Trap			V,S,M	ALT	FRA
+Wizard	4	Plague				V,S,M	ILL	FRA
+Wizard	4	Sargossa			V,S,M	ALT	FOR3
+Wizard	4	Shadow_Skeleton			V,S,M	ILL	Dragon, May 92
+Wizard	4	Speak_With_Dead			V,S,M	NCR	FRQ1
+Wizard	4	Spectral_Wings			V,S,M	I/E	FRA
+Wizard	4	Spendelard's_Chaser		V,S,M	NCR	FRA
+Wizard	4	Stop				V,S,-	ALT	FOR2
+Wizard	4	Thunderlance			V,S,M	I/E	FRA
+Wizard	4	Wall_Of_Sand			V,S,M	I/E	FRA
+Wizard	4	Watchware			V,S,M	I/E	FRA
+Wizard	5	Bowgentle's_Fleeting_Journey	V,S,M	ALT	FRA
+Wizard	5	Calm_Water			V,S,M	ABJ	FOR3
+Wizard	5	Calm_Wind			V,S,-	ABJ	FOR3
+Wizard	5	Disguise_Undead			V,S,M	ILL,NCR	FRA
+Wizard	5	Halaster's_Grappling_Hand	V,S,-	I/E	UM	
+Wizard	4	Jhanifer's_Deliquescence	V,S,M	ALT	Dragon, May 92
+Wizard	5	Improved_Skull_Watch		V,S,M	NCR	FRA
+Wizard	5	Ironguard			V,S,M	ABJ,ALT	FRA
+Wizard	5	Morgannaver's_Sting		V,S,-	NCR	Dragon, May 92
+Wizard	5	Nulanthoe's_Ninemen		V,S,M	NCR	FRA
+Wizard	5	Passweb				V,S,-	ABJ,ALT	FOR2
+Wizard	5	Presper's_Moonbow		V,S,M	I/E	FRA
+Wizard	5	Secure				V,S,M	ALT	FRA
+Wizard	5	Shadow_Hand			V,S,-	ILL	Dragon, May 92
+Wizard	5	Shroud_of_Flame			V,S,M	I/E	FRA
+		(formerly Flame_Shroud)
+Wizard	5	Snilloc's_Major_Missile		V,S,-	I/E	FRA
+Wizard	6	Blade_Of_Doom			V,S,M	I/E	FRA
+		(formerly Shaeroon's_Scimitar)
+Wizard	6	Energy_Transformation		V,S,M	ALT	UM	
+Wizard	6	Grimwald's_Greymantle		V,S,M	NCR	FRA
+Wizard	6	Imbue_Undead_With_Spell		V,S,M	NCR	FRA
+Wizard	6	Lich_Touch			V,S,M	NCR	FRA
+Wizard	6	Prismatic_Eye			V,S,M	ALT,I/E	Dragon, May 92
+Wizard	6	Power_Word_Silence		V,-,-	ALT	FRA
+Wizard	6	Reconstruction			V,S,M	ALT	FRA
+Wizard	6	Shadow_Gauntlet			V,S,-	I/E,ILL	Dragon, May 92
+Wizard	6	Starharp			V,S,M	ALT,NCR	FA1
+Wizard	6	Summon_Spider			V,S,M	C/S	FOR2
+Wizard	6	Teleport_Dead			V,S,-	ALT,NCR	FRA
+Wizard	6	Turnshadow			V,S,-	ABJ	FRA
+Wizard	7	Chromatic_Blade			V,S,M	ALT	Dragon, May 92
+Wizard	7	Gemjump				V,S,M	ALT	FRA
+Wizard	7	Khelben's_Warding_Whip		V,S,M	ABJ	FRA
+Wizard	7	Ruby_Ray_Of_Reversal		V,S,M	ALT	FRA
+		(formerly Nezram's_Ruby_Ray_Of_Reversal)
+Wizard	7	Spectral_Guard			V,S,M	I/E	FRA
+Wizard	7	Spelltrap			V,S,M	ABJ,ALT	FRA
+Wizard	7	Simbul's_Synostodweomer		V,S,-	ALT,NCR	FRA
+Wizard	7	The_Curse_Of_Forgetfullness	V,S,-	E/C	UM	
+Wizard	7	Vipergout			V,S,M	C/S	FOR2
+Wizard	7	Whirlpool			V,S,M	ALT	FOR3
+Wizard	8	Blackstaff			V,S,M	ALT,I/E	Dragon, May 92
+Wizard	8	Death_Link			V,S,-	NCR	FRA
+Wizard	8	Death_Spider			V,S,M	ALT,NCR	FOR2
+Wizard	8	Gateway				V,S,M	ALT	FRA
+Wizard	8	Great_Shout			V,-,M	I/E	FRA
+Wizard	8	Spell_Engine			V,S,M	ABJ,ALT	FRA
+Wizard	8	Sunburst			V,S,M	I/E	FRA
+Wizard	8	Symbol				V,S,M	C/S	UM	
+Wizard	9	Black_Blade_Of_Disaster		V,S,-	I/E,C/S	FOR2
+Wizard	9	Dismind				V,-,-	E/C	FRA
+Wizard	9	Elminster's_Eff._Epuration	V,S,-	ABJ	FRA, FRE2
+Wizard	9	Elminster's_Evasion		V,S,M	I/E	FRA
+Wizard	9	Master_Undead			V,S,M	NCR	FRA
+Wizard	9	Phezult's_Sleep_Of_Ages		V,S,M	ALT	UM	
+Wizard	9	Spellstrike			V,S,-	ALT	FRA
+Wizard	9	Spell_Invulnerability		V,S,-	ABJ	FRA
+Wizard	9	Tidal_Wave			V,S,M	ALT	FOR3
+Wizard	9	Virus_Charm			V,S,M	E/C	FRA
+Wizard	9	Worldwalk			V,S,M	ALT	FRA
+
+"Lost" Mage Spells (First Edition FR4 and FR-DM):
+
+Circle Dance W2			Hover W3		Mailed Might W3
+Tasirin's Haunted Sleep W3	Archveult's Skybolt W4	Censure W4
+Firebrand W4			Hailcone W4		Tulrun's Tracer W4
+Caddelyn's Catastrophe W5	Shandril's Tracer W5	Xult's Magical Doom W5
+Stealspell W7			Body Sympathy W8	Spell Ward W9
+
+"Lost" Mage Spells (First Edition REF5):
+
+Undead Mount W1			Spectral Wings W2	Ward Against Undead W3
+Death's Door W4			Hold Undead W5		Spectral Guard W6
+Undead Regeneration W6		Sunburst W8		Unlife W8
+Control Undead W9
+
+Ignored Mage Spells:
+
+FOR1	spells castable (currently) only by dragons
+FR10	second edition spells specific to the 'Old Empires'
+FR12	second edition spells specific to 'Anauroch'
+FR13	second edition spells specific to the 'Great Glacier'
+First Edition specialized cantrips
+First edition FR - series spells (e.g. FR6, etc.)
+Al-Quadim campaign
+
+Other General Sources:
+
+PH	Player's Handbook
+ToM	Tome of Magic
+CWH	Complete Wizard's Handbook
+
+
+Priest Spells:
+~~~~~~~~~~~~~
+Level		Name				Comp.	School	Sphere
+
+Priest	1	Animal_Friendship		V,S,M	E/C	ANI
+Priest	1	Bless				V,S,M	C/S	ALL
+Priest	1	Combine				V,S,-	I/E	ALL
+Priest	1	Command				V,-,-	E/C	CHA
+Priest	1	Create_Water			V,S,M	ALT	ELE
+Priest	1	Cure_Light_Wounds		V,S,-	NCR	HEA
+Priest	1	Detect_Evil			V,S,M	LrD	ALL
+Priest	1	Detect_Magic			V,S,M	LrD	DIV
+Priest	1	Detect_Poison			V,S,M	LrD	DIV
+Priest	1	Detect_Snares_And_Pits		V,S,M	LrD	DIV
+Priest	1	Endure_Heat_Or_Cold		V,S,-	ALT	PRO
+Priest	1	Entangle			V,S,M	ALT	PLA
+Priest	1	Faerie_Fire			V,-,M	ALT	WEA
+Priest	1	Invisibility_To_Animals	-,S,M	ALT	ANI
+Priest	1	Invisibility_To_Undead		V,S,M	ABJ	NEC
+Priest	1	Light				V,S,-	ALT	SUN
+Priest	1	Locate_Animals_Or_Plants	V,S,M	LrD	ANI,DIV,PLA
+Priest	1	Magical_Stone			V,S,M	E/C	COM
+Priest	1	Pass_Without_Trace		V,S,M	E/C	PLA
+Priest	1	Protection_From_Evil		V,S,M	ABJ	PRO
+Priest	1	Purify_Food_And_Drink		V,S,-	ALT	ALL
+Priest	1	Remove_Fear			V,S,-	ABJ	CHA
+Priest	1	Sanctuary			V,S,M	ABJ	PRO
+Priest	1	Shillelagh			V,S,M	ALT	COM,PLA
+Priest	2	Aid				V,S,M	NCR,C/S	NEC
+Priest	2	Augury				V,S,M	LrD	DIV
+Priest	2	Barkskin			V,S,M	ALT	PLA,PRO
+Priest	2	Chant				V,S,-	C/S	COM
+Priest	2	Charm_Person_Or_Mammal		V,S,-	E/C	ANI
+Priest	2	Detect_Charm			V,S,-	LrD	DIV
+Priest	2	Dust_Devil			V,S,-	C/S	ELE
+Priest	2	Enthrall			V,S,-	E/C	CHA
+Priest	2	Find_Traps			V,S,-	LrD	DIV
+Priest	2	Fire_Trap			V,S,M	ABJ,I/E	ELE
+Priest	2	Flame_Blade			V,S,M	I/E	ELE
+Priest	2	Goodberry			V,S,M	ALT,I/E	PLA
+Priest	2	Heat_Metal			V,S,M	ALT	ELE
+Priest	2	Hold_Person			V,S,M	E/C	CHA
+Priest	2	Know_Alignment			V,S,-	LrD	DIV
+Priest	2	Messenger			V,S,-	E/C	ANI
+Priest	2	Obscurement			V,S,-	ALT	WEA
+Priest	2	Produce_Flame			V,S,-	ALT	ELE
+Priest	2	Resist_Fire_Or_Cold		V,S,M	ALT	PRO
+Priest	2	Silence_15'_Radius		V,S,-	ALT	GUA
+Priest	2	Slow_Poison			V,S,M	NCR	HEA
+Priest	2	Snake_Charm			V,S,-	E/C	ANI
+Priest	2	Speak_With_Animals		V,S,-	ALT	ANI,DIV
+Priest	2	Spiritual_Hammer		V,S,M	I/E	COM
+Priest	2	Trip				V,S,-	E/C	PLA
+Priest	2	Warp_Wood			V,S,-	ALT	PLA
+Priest	2	Withdraw			V,S,-	ALT	PRO
+Priest	2	Wyvern_Watch			V,S,M	I/E	GUA
+Priest	3	Animate_Dead			V,S,M	NCR	NEC
+Priest	3	Call_Lightning			V,S,-	ALT	WEA
+Priest	3	Continual_Light			V,S,-	ALT	SUN
+Priest	3	Create_Food_And_Water		V,S,-	ALT	CRE
+Priest	3	Cure_Blindness_Or_Deafness	V,S,-	ABJ	NEC
+Priest	3	Cure_Disease			V,S,-	ABJ	NEC
+Priest	3	Dispel_Magic			V,S,-	ABJ	PRO
+Priest	3	Feign_Death			V,-,-	NCR	NEC
+Priest	3	Flame_Walk			V,S,M	ALT	ELE
+Priest	3	Glyph_Of_Warding		V,S,M	ABJ,I/E	GUA
+Priest	3	Hold_Animal			V,S,-	E/C	ANI
+Priest	3	Locate_Object			V,S,M	LrD	DIV
+Priest	3	Magical_Vestment		V,S,M	E/C	PRO
+Priest	3	Meld_Into_Stone			V,S,M	ABJ	ELE
+Priest	3	Negative_Plane_Protection	V,S,-	ABJ	NEC,PRO
+Priest	3	Plant_Growth			V,S,M	ALT	PLA
+Priest	3	Prayer				V,S,M	C/S	COM
+Priest	3	Protection_From_Fire		V,S,M	ABJ	ELE,PRO
+Priest	3	Pyrotechnics			V,S,M	ALT	ELE
+Priest	3	Remove_Curse			V,S,-	ABJ	PRO
+Priest	3	Remove_Paralysis		V,S,-	ABJ	PRO
+Priest	3	Snare				V,S,M	E/C	PLA
+Priest	3	Speak_With_Dead			V,S,M	NCR	DIV
+Priest	3	Spike_Growth			V,S,M	ALT,E/C	PLA
+Priest	3	Starshine			V,S,M	I/E,ILL	SUN
+Priest	3	Stone_Shape			V,S,M	ALT	ELE
+Priest	3	Summon_Insects			V,S,M	C/S	ANI
+Priest	3	Tree				V,S,M	ALT	PLA
+Priest	3	Water_Breathing			V,S,-	ALT	ELE
+Priest	3	Water_Walk			V,S,M	ALT	ELE
+Priest	4	Abjure				V,S,M	ABJ	SUM
+Priest	4	Animal_Summoning_I		V,S,-	C/S	ANI,SUM
+Priest	4	Call_Woodland_Beings		V,S,M	C/S	SUM
+Priest	4	Cloak_Of_Bravery		V,S,M	C/S	CHA
+Priest	4	Control_Temperature_10'		V,S,M	ALT	WEA
+Priest	4	Cure_Serious_Wounds		V,S,-	NCR	HEA
+Priest	4	Detect_Lie			V,S,M	GrD	DIV
+Priest	4	Divination			V,S,M	GrD	DIV
+Priest	4	Free_Action			V,S,M	ABJ,E/C	CHA
+Priest	4	Giant_Insect			V,S,M	ALT	ANI
+Priest	4	Hallucinatory_Forest		V,S,-	ILL	PLA
+Priest	4	Hold_Plant			V,S,-	E/C	PLA
+Priest	4	Imbue_With_Spell_Ability	V,S,M	E/C	CHA
+Priest	4	Lower_Water			V,S,M	ALT	ELE
+Priest	4	Neutralize_Poison		V,S,-	NCR	HEA
+Priest	4	Plant_Door			V,S,M	ALT	PLA
+Priest	4	Produce_Fire			V,S,M	ALT	ELE
+Priest	4	Protection_From_Evil_10'	V,S,M	ABJ	PRO
+Priest	4	Protection_From_Lightning	V,S,M	ABJ	PRO,WEA
+Priest	4	Reflecting_Pool			V,S,M	GrD	DIV
+Priest	4	Repel_Insects			V,S,M	ABJ,ALT	ANI,PRO
+Priest	4	Speak_With_Plants		V,S,M	ALT	PLA
+Priest	4	Spell_Immunity			V,S,M	ABJ	PRO
+Priest	4	Sticks_To_Snakes		V,S,M	ALT	PLA
+Priest	4	Tongues				V,S,-	ALT	DIV
+Priest	5	Air_Walk			V,S,M	ALT	ELE
+Priest	5	Animal_Growth			V,S,M	ALT	ANI
+Priest	5	Animal_Summoning_II		V,S,-	C/S	ANI,SUM
+Priest	5	Anti-Plant_Shell		V,S,-	ABJ	PLA,PRO
+Priest	5	Atonement			V,S,M	ABJ	ALL
+Priest	5	Commune				V,S,M	GrD	DIV
+Priest	5	Commune_With_Nature		V,S,-	GrD	DIV
+Priest	5	Control_Winds			V,S,-	ALT	WEA
+Priest	5	Cure_Critical_Wounds		V,S,-	NCR	HEA
+Priest	5	Dispel_Evil			V,S,M	ABJ	PRO,SUM
+Priest	5	Flame_Strike			V,S,M	I/E	COM
+Priest	5	Insect_Plague			V,S,M	C/S	COM
+Priest	5	Magic_Font			V,S,M	GrD	DIV
+Priest	5	Moonbeam			V,S,M	ALT,I/E	SUN
+Priest	5	Pass_Plant			V,S,M	ALT	PLA
+Priest	5	Plane_Shift			V,S,M	ALT	AST
+Priest	5	Quest				V,S,M	E/C	CHA
+Priest	5	Rainbow				V,S,M	ALT,I/E	SUN,WEA
+Priest	5	Raise_Dead			V,S,-	NCR	NEC
+Priest	5	Spike_Stones			V,S,M	ALT,E/C	ELE
+Priest	5	Transmute_Rock_To_Mud		V,S,M	ALT	ELE
+Priest	5	True_Seeing			V,S,M	GrD	DIV
+Priest	5	Wall_Of_Fire			V,S,M	C/S	ELE
+Priest	6	Aerial_Servant			V,S,-	C/S	SUM
+Priest	6	Animal_Summoning_III		V,S,-	C/S	ANI,SUM
+Priest	6	Animate_Object			V,S,-	ALT	CRE,SUM
+Priest	6	Anti-Animal_Shell		V,S,M	ABJ	ANI,PRO
+Priest	6	Blade_Barrier			V,S,-	I/E	CRE,GUA
+Priest	6	Conjure_Animals			V,S,-	C/S	SUM
+Priest	6	Conjure_Fire_Elemental		V,S,-	C/S	ELE
+Priest	6	Find_The_Path			V,S,M	GrD	DIV
+Priest	6	Fire_Seeds			V,S,M	C/S	ELE
+Priest	6	Forbiddance			V,S,M	ABJ	PRO
+Priest	6	Heal				V,S,-	NCR	HEA
+Priest	6	Heroes's_Feast			V,S,M	I/E	CRE
+Priest	6	Liveoak				V,S,M	E/C	PLA
+Priest	6	Part_Water			V,S,M	ALT	ELE
+Priest	6	Speak_With_Monsters		V,S,-	ALT	DIV
+Priest	6	Stone_Tell			V,S,M	GrD	DIV,ELE
+Priest	6	Transmute_Water_To_Dust		V,S,M	ALT	ELE
+Priest	6	Transport_Via_Plants		V,S,-	ALT	PLA
+Priest	6	Turn_Wood			V,S,-	ALT	PLA
+Priest	6	Wall_Of_Thorns			V,S,-	C/S	CRE,PLA
+Priest	6	Weather_Summoning		V,S,-	C/S	WEA
+Priest	6	Word_Of_Recall			V,-,-	ALT	SUM
+Priest	7	Animate_Rock			V,S,M	ALT	ELE
+Priest	7	Astral_Spell			V,S,-	ALT	AST
+Priest	7	Changestaff			V,S,M	E/C,I/E	CRE,PLA
+Priest	7	Chariot_Of_Sustarre		V,S,M	I/E	ELE
+Priest	7	Confusion			V,S,M	E/C	CHA
+Priest	7	Conjure_Earth_Elemental		V,S,-	C/S	ELE,SUM
+Priest	7	Control_Weather			V,S,M	ALT	WEA
+Priest	7	Creeping_Doom			V,S,-	C/S	ANI,SUM
+Priest	7	Earthquake			V,S,M	ALT	ELE
+Priest	7	Exaction			V,S,M	ALT,I/E	CHA,SUM
+Priest	7	Fire_Storm			V,S,-	I/E	ELE
+Priest	7	Gate				V,S,-	C/S	SUM
+Priest	7	Holy_Word			V,-,-	C/S	COM
+Priest	7	Regenerate			V,S,M	NCR	NEC
+Priest	7	Reincarnate			V,S,-	NCR	NEC
+Priest	7	Restoration			V,S,-	NCR	NEC
+Priest	7	Resurrection			V,S,M	NCR	NEC
+Priest	7	Succor				V,S,M	ALT,E/C	SUM
+Priest	7	Sunray				V,S,M	ALT,I/E	SUN
+Priest	7	Symbol				V,S,M	C/S	GUA
+Priest	7	Transmute_Metal_To_Wood		V,S,M	ALT	ELE
+Priest	7	Wind_Walk			V,S,M	ALT	ELE
+
+

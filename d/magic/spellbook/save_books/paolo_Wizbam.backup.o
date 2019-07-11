@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-416445336,])
+serial_number 0
+ob_data (["long":"%^BOLD%^%^BLACK%^This book is bound in a soft bl%^RESET%^a%^BOLD%^%^BLACK%ck suede which seems to be immune to dirt and age.  Inside the book there are approximately a hundred sheets of fine %^BOLD%^%^WHITE%^vellum%^BOLD%^%^BLACK%^upon which magical spells have been inscribed.  The first page bears a bookplate with the insignia of a single %^BOLD%^%^RED%^r%^RESET%^%^RED%^e%^BOLD%^%^RED%^d %^BOLD%^%^BLACK%^rose.%^RESET%^","value":0,"short":"%^BOLD%^%^BLACK%^A book bound in soft bl%^RESET%^a%^BOLD%^%^BLACK%^ck suede%^RESET%^","condition":100,"general short":"%^BOLD%^%^BLACK%^A book bound in soft bl%^RESET%^a%^BOLD%^%^BLACK%^ck suede%^RESET%^","cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook","book","book",}),"alterby":"octothorpe",])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#22469"
+cursed "paolo"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties ({})
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString " (wielded in left hand)"
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["spider climb":2,"summon companion":1,"chill touch":1,"sonic shield":4,"invisibility":2,"powerword stun":7,"lightning orb":3,"drawmij's instant summons":8,"monster summoning 7":9,"contingency":6,"fly":3,"garble":3,"prismatic spray":7,"identify":1,"wall of fire":4,"magic mirror":7,"detect magic":1,"lower resistance":5,"domination":5,"meteor swarm":9,"warriors constitution":6,"acid orb":3,"light":1,"vampiric touch":3,"chain lightning":6,"frost orb":3,"ball lightning":5,"dispel magic":3,"teleport":5,"animus blast":9,"bestow curse":4,"shout":4,"know alignment":2,"cone of cold":5,"magic missile":1,"acid breath":5,"dragon scales":6,"protection from scrying":3,"blink":3,"detect scrying":4,"teleport without error":7,"web":2,"fireball":3,"ice storm":4,"blindness":2,"water breathing":3,"sonic orb":3,"animate dead":5,"static field":4,"greater dispel magic":7,"monster summoning 1":3,"stoneskin":8,"conjure elemental":5,"monster summoning 2":4,"hold person":3,"lightning bolt":3,"rope trick":2,"armor":1,"heart of stone":7,"color spray":1,"detect invisibility":2,"scorcher":2,"acid arrow":2,"tongues":3,"greater shout":8,"burning hands":1,])
+magic ({"summon companion","chill touch","identify","detect magic","light","magic missile","armor","color spray","burning hands","spider climb","invisibility","know alignment","web","blindness","rope trick","detect invisibility","scorcher","acid arrow","lightning orb","fly","garble","acid orb","vampiric touch","frost orb","dispel magic","protection from scrying","blink","fireball","water breathing","sonic orb","monster summoning 1","hold person","lightning bolt","tongues","sonic shield","wall of fire","bestow curse","shout","detect scrying","ice storm","static field","monster summoning 2","lower resistance","domination","ball lightning","teleport","cone of cold","acid breath","animate dead","conjure elemental","contingency","warriors constitution","chain lightning","dragon scales","powerword stun","prismatic spray","magic mirror","teleport without error","greater dispel magic","heart of stone","drawmij's instant summons","stoneskin","greater shout","monster summoning 7","meteor swarm","animus blast",})
+mID 0
+bookdesc 0
+owner "paolo"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "shadow"
+owner "trent"
+components (["diamond dust":50,"granite dust":50,"eyelash":50,"phosphorus":50,"water":50,"blessed leather":50,"eyelash of ogre-mage":8,"sand":50,"aluminum chaff":5,"clay model ziggurat":50,"sulfur":50,"dragon scale":6,"owlfeather":50,"small candle":50,"gum arabic":50,"earth from grave":10,"powdered silver":6,"dung scrapings":6,"tiny bag":50,"crystal":50,"phosphorescent moss":50,"feather":6,"wing feather":50,"pearl":50,])

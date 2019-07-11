@@ -1,0 +1,14 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "tabor"
+owner "arathas"
+components (["diamond dust":1,"granite dust":1,"eyelash":50,"vermilion":2,"water":50,"minute tarts":50,"eyelash of ogre-mage":1,"dragon scale":9,"zinc":13,"talc":5,"soft clay":50,"amber rod":10,"adders stomach":23,"small candle":50,"firefly":50,"gum arabic":50,"powdered silver":5,"tiny bag":50,"iron rod":10,"feather":50,"wing feather":50,"pinch of special dust":50,"quicksilver":1,])

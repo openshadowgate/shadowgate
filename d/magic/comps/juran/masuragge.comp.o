@@ -1,0 +1,13 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "juran"
+owner "masuragge"
+components (["diamond dust":42,"flint":10,"bat guano":6,"granite dust":37,"crane's feather":6,"eye of roc":6,"blessed leather":2,"sulfur":6,"nitric acid":16,"dragon scale":9,"emerald":2,"talc":10,"zinc":6,"soft clay":50,"owlfeather":38,"copper":6,"amber rod":10,"drop of blood":6,"powdered silver":10,"crystal":7,"dung scrapings":10,"piece of mirror":50,"tiny bag":10,"iron rod":5,"carbon":3,"pearl":8,"parchment":7,"snakes tongue":7,"quicksilver":10,])

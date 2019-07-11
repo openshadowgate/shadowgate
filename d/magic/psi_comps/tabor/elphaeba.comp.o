@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "elphaeba"
+components (["malachite":1,"clear quartz":20,"citrine quartz":10,"leopard agate":10,"apatite":9,"peridot":6,"aventurine":10,"yellow calcite":20,"adamite":10,"tektite":10,"jade":14,"wemic tears":20,"tigers eye":10,"unakite":10,"carnelian":20,"bloodstone":20,])

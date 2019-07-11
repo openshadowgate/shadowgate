@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/player_houses/rufus/lab"
+id "rufus"
+owner "rufus"
+components (["diamond dust":32,"bat guano":100,"granite dust":75,"eyelash":100,"crane's feather":100,"powdered chalk":75,"eye of roc":5,"sand":88,"aluminum chaff":13,"eyelash of ogre-mage":8,"sulfur":100,"nitric acid":71,"fine cloth":29,"zinc":65,"talc":100,"copper":43,"owlfeather":100,"firefly":50,"spider web":50,"gum arabic":100,"drop of blood":83,"powdered silver":55,"tiny bag":100,"piece of mirror":10,"pearl":19,"parchment":100,"rose petals":100,"tiny hearing trumpet":65,"quicksilver":38,])

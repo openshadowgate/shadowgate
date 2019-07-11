@@ -1,0 +1,35 @@
+#d/magic/magic_book.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^%^ORANGE%^a small %^YELLOW%^b%^BLACK%^r%^RESET%^a%^ORANGE%^s%^YELLOW%^s b%^BOLD%^%^BLACK%^o%^RESET%^u%^ORANGE%^n%^YELLOW%^d %^RESET%^%^ORANGE%^book%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#43006"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["summon companion":1,"darkness":1,"chill touch":1,"know alignment":2,"armor":1,"magic missile":1,"rope trick":2,"protection from scrying":3,"color spray":1,"detect magic":1,"detect invisibility":2,"scorcher":2,"hideous laughter":2,"ray of enfeeblement":2,"invisibility":2,"acid arrow":2,"lightning orb":3,"acid orb":3,"light":1,"garble":3,"burning hands":1,"sleep":1,])
+magic ({"darkness","summon companion","chill touch","magic missile","armor","detect magic","color spray","light","sleep","burning hands","know alignment","rope trick","detect invisibility","scorcher","invisibility","ray of enfeeblement","hideous laughter","acid arrow","protection from scrying","lightning orb","acid orb","garble",})
+mID 0
+bookdesc 0
+owner "zeendi"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "renicus"
+components (["zinc":7,"copper":7,"crane's feather":35,"powdered chalk":50,"eye of roc":6,"drop of blood":20,"minute tarts":30,"aluminum chaff":10,"piece of mirror":30,"dart":40,"feather":30,"nitric acid":11,"tiny hearing trumpet":30,"quicksilver":20,])

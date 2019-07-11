@@ -1,0 +1,34 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadow/mon/wizbert#108027"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["prismatic spray":7,"dispel magic":3,"monster summoning 3":5,"teleport":5,"meteor swarm":9,"warriors constitution":6,"stoneskin":8,"identify":1,"augmentation":2,"lightning bolt":3,"magic missile":1,"detect magic":1,"scorcher":2,"lower resistance":5,"blink":3,"faithful phantom guardians":6,])
+magic ({"augmentation","blink","detect magic","dispel magic","faithful phantom guardians","identify","lightning bolt","lower resistance","magic missile","meteor swarm","monster summoning 3","prismatic spray","scorcher","stoneskin","teleport","warriors constitution",})
+mID 0
+bookdesc 0
+owner "sevirwyn"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

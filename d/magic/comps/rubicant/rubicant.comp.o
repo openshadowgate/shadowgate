@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/player_stores/rubicant/laboratory"
+identified ({})
+studied ({})
+studied_failed ([])
+id "rubicant"
+owner "rubicant"
+components (["bat guano":20,"eyelash":20,"crane's feather":10,"phosphorus":20,"water":20,"aluminum chaff":20,"eyelash of ogre-mage":19,"sulfur":20,"small candle":20,"spider web":20,"glass rod":20,"powdered silver":20,"tiny bag":20,"piece of mirror":20,"carbon":20,"iron rod":20,"rose petals":20,"silver pin":20,"pinch of special dust":20,"small drum":20,"eye of roc":12,"minute tarts":20,"clay model ziggurat":20,"dragon scale":20,"emerald":20,"talc":20,"owlfeather":20,"soft clay":20,"piece of bone":20,"drop of blood":20,"fur":20,"crystal":20,"parchment":20,"pearl":20,"corn extract":20,"beeswax":20,"quicksilver":19,])

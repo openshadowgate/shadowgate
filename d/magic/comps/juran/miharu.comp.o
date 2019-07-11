@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "juran"
+owner "miharu"
+components (["talc":4,"eyelash of ogre-mage":2,"eyelash":50,"piece of reed":10,"gum arabic":50,"small diamond":5,])

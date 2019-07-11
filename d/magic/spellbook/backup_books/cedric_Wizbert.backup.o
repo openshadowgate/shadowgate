@@ -1,0 +1,36 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props (["died time":973926355,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^%^ORANGE%^A %^BOLD%^%^BLACK%^w%^YELLOW%^o%^BLACK%^r%^YELLOW%^n %^RESET%^%^ORANGE%^book %^BOLD%^%^BLACK%^c%^RESET%^%^ORANGE%^o%^BOLD%^%^BLACK%^v%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^r%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^d %^RESET%^%^ORANGE%^i%^BOLD%^%^BLACK%^n %^RESET%^%^CYAN%^p%^BOLD%^%^CYAN%^r%^MAGENTA%^e%^BLACK%^c%^RESET%^%^CYAN%^i%^BOLD%^%^CYAN%^c%^MAGENTA%^i%^BLACK%^o%^RESET%^%^CYAN%^u%^BOLD%^%^CYAN%^s %^BOLD%^MAGENTA%^g%^CYAN%^e%^WHITE%^m%^BLACK%^s%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadow/mon/wizbert#77326"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["spider climb":2,"summon companion":1,"chill touch":1,"monster summoning 5":7,"shocking grasp":1,"mages sword":7,"monster summoning 6":8,"invisibility":2,"powerword stun":8,"drawmij's instant summons":8,"monster summoning 7":9,"contingency":6,"garble":3,"prismatic spray":7,"identify":1,"transformation":6,"wall of fire":4,"detect magic":1,"magic mirror":7,"freedom of movement":9,"ray of enfeeblement":2,"meteor swarm":9,"domination":5,"levitate":2,"warriors constitution":6,"light":1,"vampiric touch":3,"chain lightning":6,"ball lightning":5,"dispel magic":3,"teleport":5,"resist energy":2,"shout":4,"fog cloud":2,"cone of cold":5,"magic missile":1,"protection from scrying":3,"dragon scales":6,"detect scrying":4,"blink":3,"teleport without error":7,"hideous laughter":2,"fireball":3,"ice storm":4,"water breathing":3,"animate dead":4,"greater dispel magic":7,"faithful phantom guardians":6,"darkness":2,"fire shield":4,"stoneskin":4,"protection from spells":8,"conjure elemental":5,"monster summoning 2":4,"augmentation":2,"rope trick":2,"lightning bolt":3,"armor":1,"color spray":1,"detect invisibility":2,"scorcher":2,"monster summoning 3":5,"tongues":3,"finger of death":7,"greater shout":8,"incendiary cloud":8,"monster summoning 4":6,"hellball":9,"burning hands":1,"disintegrate":6,])
+magic ({"summon companion","chill touch","shocking grasp","identify","detect magic","light","magic missile","armor","color spray","burning hands","spider climb","invisibility","ray of enfeeblement","levitate","hideous laughter","darkness","augmentation","rope trick","detect invisibility","scorcher","garble","vampiric touch","dispel magic","protection from scrying","blink","fireball","water breathing","lightning bolt","tongues","wall of fire","shout","detect scrying","ice storm","animate dead","fire shield","stoneskin","monster summoning 2","domination","ball lightning","teleport","cone of cold","conjure elemental","monster summoning 3","contingency","warriors constitution","chain lightning","dragon scales","faithful phantom guardians","monster summoning 4","disintegrate","monster summoning 5","mages sword","prismatic spray","magic mirror","teleport without error","greater dispel magic","finger of death","monster summoning 6","powerword stun","drawmij's instant summons","protection from spells","incendiary cloud","greater shout","monster summoning 7","meteor swarm","hellball",})
+mID 0
+bookdesc 0
+owner "cedric"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

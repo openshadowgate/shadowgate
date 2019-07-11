@@ -1,0 +1,41 @@
+#/d/magic/magic_book.c
+trap_data ([])
+encumbrance 10
+size 0
+ac 0
+decayRate 100
+decayStatus 0
+currentStatus 100
+props (["repairtype":({"tailor","jewel","woodwork","leatherwork",}),])
+serial_number 0
+ob_data (["condition":100,"value":0,"updated time":1534102340,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),"short":"Newbie spellbook%^RESET%^","long":"This is a spellbook.",])
+cap_name "Spell book"
+true_name "spell book"
+creator "/std/class/mage"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["magic missile":1,"detect magic":1,"resonating word":7,"identify":1,"color spray":1,"darkvision":2,"haste":3,"timestop":9,])
+magic ({"color spray","darkvision","detect magic","haste","identify","magic missile","resonating word","timestop",})
+mID 0
+bookdesc 0
+owner "satfin"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

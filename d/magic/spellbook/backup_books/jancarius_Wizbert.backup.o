@@ -1,0 +1,9 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-1740070613,"stolen":(["ethius":(["difficulty":-8,"max value":0,]),]),])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"a %^BOLD%^%^YELLOW%^s%^RESET%^%^ORANGE%^h%^BOLD%^%^YELLOW%^i%^RESET%^%^ORANGE%^m%^BOLD%^%^YELLOW%^m%^RESET%^%^ORANGE%^%^BOLD%^%^YELLOW%^e%^RESET%^%^ORANGE%^r%^BOLD%^%^YELLOW%^i%^RESET%^%^ORANGE%^n%^BOLD%^%^YELLOW%^g golden %^WHITE%^%^BOLD%^crystal %^GREEN%^book with %^RESET%^%^BLUE%^s%^BLUE%^%^BOLD%^h%^RESET%^%^BLUE%^i%^BLUE%^%^BOLD%^m%^RESET%^%^BLUE%^m%^BLUE%^%^BOLD%^e%^RESET%^%^BLUE%^r%^BLUE%^%^BOLD%^i%^RESET%^%^BLUE%^n%^BLUE%^%^BOLD%^g %^RESET%^%^BLUE%^b%^BLUE%^%^BOLD%^l%^RESET%^%^BLUE%^u%^BLUE%^%^BOLD%^e %^RESET%^%^BLUE%^r%^BLUE%^%^BOLD%^u%^RESET%^%^BLUE%^n%^BLUE%^%^BOLD%^e%^RESET%^%^BLUE%^s%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#196764"
+cursed "jancarius

@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+id "tabor"
+owner "zaknafein"
+components (["diamond dust":2,"minute tarts":40,"bat guano":20,"granite dust":8,"rose petals":20,"small candle":3,])

@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "azuth"
+components (["diamond dust":9,"bat guano":50,"granite dust":9,"eyelash":50,"phosphorus":20,"water":50,"sulfur":50,"dart":50,"dragon scale":20,"incense stick":50,"owlfeather":8,"soft clay":25,"adders stomach":50,"small candle":50,"spider web":50,"firefly":50,"gum arabic":50,"tiny bag":50,"crystal":50,"pearl":8,"powdered rhubarb leaf":10,])

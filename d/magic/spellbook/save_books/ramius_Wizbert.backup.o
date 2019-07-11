@@ -1,0 +1,40 @@
+#/d/magic/spellbook.c
+trap_data ([])
+encumbrance 10
+size 0
+ac 0
+decayRate 100
+decayStatus 4
+currentStatus 100
+props (["died time":-316891988,"repairtype":({"tailor","jewel","woodwork","leatherwork",}),"stolen":(["shar":(["max value":0,"difficulty":-144,]),"citizen":(["max value":0,"difficulty":58,]),"kortahl":(["max value":0,"difficulty":52,]),"mithras":(["max value":0,"difficulty":68,]),]),])
+serial_number 0
+ob_data (["condition":-126,"value":0,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),"long":"This is a spellbook.","short":"%^RESET%^%^A %^RESET%^%^GREEN%^small book %^RESET%^bound in %^RESET%^%^RED%^r%^ORANGE%^e%^RED%^d le%^RESET%^%^ORANGE%^a%^RED%^th%^ORANGE%^e%^RED%^r%^RESET%^%^RESET%^",])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/cleric-mage#76458"
+cursed "mithras"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["charm monster":1,"summon companion":1,"shout":4,"iron body":8,"disjunction":9,"animate dead":4,"darkness":2,"protection from scrying":3,"augmentation":2,"teleport without error":7,"fireball":3,"scorcher":2,"drawmij's instant summons":8,"powerword stun":8,"alter self":2,"meteor swarm":9,"monster summoning 9":9,"monster summoning 8":8,"monster summoning 7":7,"monster summoning 6":6,"monster summoning 5":5,"monster summoning 4":4,"monster summoning 3":3,"monster summoning 2":2,"monster summoning 1":1,"flare":1,"powerword kill":9,"resistance":1,"chain lightning":6,"levitate":2,"finger of death":7,"project image":7,"touch of idiocy":2,"crushing despair":4,"detect poison":1,"detect invisibility":2,"detect magic":1,"stoneskin":4,"true strike":1,"gate":9,"owls wisdom":2,"haste":3,"acid arrow":2,"invisibility":2,"reverse gravity":7,"dancing lights":1,"glitterdust":2,"cause fear":1,"sonic orb":3,"telepathic bond":5,"lightning orb":3,"mages sword":7,"chill touch":1,"dispel magic":3,"polar ray":8,"dimension door":4,"sleep":1,"fear":4,"tongues":3,"black tentacles":4,"false vision":5,"light":1,"magic mirror":7,"weird":9,"reduce person":1,"protection from spells":8,"gust of wind":4,"burning hands":1,"minor creation":4,"legend lore":6,"frost orb":3,"detect scrying":4,"faithful phantom guardians":6,"ball lightning":5,"garble":3,"lightning bolt":3,"lower resistance":5,"color spray":1,"hellball":9,"acid breath":5,"foxs cunning":2,"domination":5,"screen":8,"wail of the banshee":9,"contingency":6,"rage":3,"bears endurance":2,"dragon scales":6,"heroism":3,"vampiric touch":3,"phase door":7,"transformation":6,"web":2,"shield":1,"greater shout":8,"teleport":5,"prying eyes":9,"planar beacon":6,"eyebite":6,"animus blizzard":9,"conjure elemental":5,"greater invisibility":4,"blink":3,"mending":1,"incendiary cloud":8,"cats grace":2,"identify":1,"darkvision":2,"deny the reaper":8,"phantom steed":3,"bulls strength":2,"rope trick":2,"hideous laughter":2,"greater dispel magic":7,"break curse":5,"magic missile":1,"sleet storm":3,"disrupt undead":1,"disintegrate":6,"sunburst":8,"planar sending":9,"enlarge person":1,"timestop":9,"wall of fire":4,"wall of stone":5,"horrid wilting":8,"misdirection":2,"spectral hand":2,"mind fog":6,"ray of enfeeblement":2,"resist energy":2,"phantasmal killer":4,"water breathing":3,"ice storm":4,"summon swarm":1,"dimensional lock":9,"warriors constitution":6,"spider climb":2,"armor":1,"fog cloud":2,"animus blast":9,"bestow curse":4,"hold person":3,"daze":1,"expeditious retreat":1,"fire shield":4,"resonating word":7,"displacement":3,"cone of cold":5,"prismatic spray":7,"freedom of movement":9,"greater teleport":7,"foresight":7,])
+magic ({"acid arrow","acid breath","alter self","animate dead","animus blast","animus blizzard","armor","augmentation","ball lightning","bears endurance","bestow curse","black tentacles","blink","break curse","bulls strength","burning hands","cats grace","cause fear","chain lightning","charm monster","chill touch","color spray","cone of cold","conjure elemental","contingency","crushing despair","dancing lights","darkness","darkvision","daze","deny the reaper","detect invisibility","detect magic","detect poison","detect scrying","dimension door","dimensional lock","disintegrate","disjunction","dispel magic","displacement","disrupt undead","domination","dragon scales","drawmij's instant summons","enlarge person","expeditious retreat","eyebite","faithful phantom guardians","false vision","fear","finger of death","fire shield","fireball","flare","fog cloud","foresight","foxs cunning","freedom of movement","frost orb","garble","gate","glitterdust","greater dispel magic","greater invisibility","greater shout","greater teleport","gust of wind","haste","hellball","heroism","hideous laughter","hold person","horrid wilting","ice storm","identify","incendiary cloud","invisibility","iron body","legend lore","levitate","light","lightning bolt","lightning orb","lower resistance","mages sword","magic mirror","magic missile","mending","meteor swarm","mind fog","minor creation","misdirection","monster summoning 1","monster summoning 2","monster summoning 3","monster summoning 4","monster summoning 5","monster summoning 6","monster summoning 7","monster summoning 8","monster summoning 9","owls wisdom","phantasmal killer","phantom steed","phase door","planar beacon","planar sending","polar ray","powerword kill","powerword stun","prismatic spray","project image","protection from scrying","protection from spells","prying eyes","rage","ray of enfeeblement","reduce person","resist energy","resistance","resonating word","rope trick","scorcher","screen","shield","shout","sleep","sleet storm","sonic orb","spectral hand","spider climb","stoneskin","summon companion","summon swarm","sunburst","telepathic bond","teleport","teleport without error","timestop","tongues","touch of idiocy","transformation","true strike","vampiric touch","wail of the banshee","wall of fire","wall of stone","warriors constitution","water breathing","web","weird",})
+mID 0
+bookdesc 0
+owner "ramius"
+restore 0
+spells_at_level 0
+in_mind 0

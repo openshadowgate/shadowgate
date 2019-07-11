@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "kaeroth"
+components (["talc":5,"bat guano":10,"owlfeather":5,"adders stomach":5,"eyelash":20,"gum arabic":20,"powdered silver":5,"sulfur":10,"dart":5,"pearl":5,"parchment":3,"powdered rhubarb leaf":5,"corn extract":3,])

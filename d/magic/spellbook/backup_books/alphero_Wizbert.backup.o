@@ -1,0 +1,36 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props (["died time":30364197,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A white leather book bound in %^BOLD%^YELLOW%^gold%^RESET%^.%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#877699"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["spider climb":2,"ball lightning":5,"summon companion":1,"teleport":5,"resist energy":2,"shocking grasp":1,"fog cloud":2,"magic missile":1,"mages sword":7,"dragon scales":6,"blink":3,"invisibility":2,"web":2,"fireball":3,"ice storm":4,"water breathing":3,"fire shield":4,"identify":1,"stoneskin":4,"conjure elemental":5,"monster summoning 2":4,"hold person":3,"lightning bolt":3,"armor":1,"detect magic":1,"scorcher":2,"ray of enfeeblement":2,"acid arrow":2,"monster summoning 3":5,"tongues":3,"warriors constitution":6,"light":1,"monster summoning 4":6,"hellball":9,"burning hands":1,])
+magic ({"acid arrow","armor","ball lightning","blink","burning hands","conjure elemental","detect magic","dragon scales","fire shield","fireball","fog cloud","hellball","hold person","ice storm","identify","invisibility","light","lightning bolt","mages sword","magic missile","monster summoning 2","monster summoning 3","monster summoning 4","ray of enfeeblement","resist energy","scorcher","shocking grasp","spider climb","stoneskin","summon companion","teleport","tongues","warriors constitution","water breathing","web",})
+mID 0
+bookdesc 0
+owner "alphero"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

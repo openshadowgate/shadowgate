@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/attaya/newseneca/rooms/mage_lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "seneca"
+owner "aurianne"
+components (["alum":10,"granite dust":50,"eyelash":30,"crane's feather":10,"water":30,"blessed leather":30,"aluminum chaff":30,"bit of bone":20,"eyelash of ogre-mage":30,"chalk":20,"zinc":10,"caterpillar cocoon":10,"copper":30,"adders stomach":10,"amber rod":30,"small candle":20,"powdered silver":30,"tiny bag":50,"piece of mirror":30,"carbon":10,"iron rod":30,"tiny hearing trumpet":30,"silver pin":30,"pinch of special dust":15,"diamond dust":10,"powdered chalk":30,"eye of roc":5,"citric acid":30,"clay model ziggurat":20,"nitric acid":30,"dragon scale":5,"emerald":40,"vampire dust":10,"talc":30,"soft clay":30,"large diamond":20,"owlfeather":30,"ogre's eyelash":30,"bitumen":10,"gum arabic":30,"drop of blood":5,"fur":50,"crystal":30,"pearl":10,"piece of reed":30,"beeswax":30,"quicksilver":30,"diamond":10,"small diamond":30,])

@@ -1,0 +1,13 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+magic_properties ({})
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "arylianna"
+components (["eyelash":50,"powdered chalk":50,"water":50,"blessed leather":50,"aluminum chaff":50,"minute tarts":50,"clay model ziggurat":10,"dart":50,"talc":50,"owlfeather":50,"small candle":50,"gum arabic":50,"firefly":50,"drop of blood":50,"powdered silver":50,"tiny bag":50,"crystal":50,"parchment":50,"beeswax":50,"pinch of special dust":50,])

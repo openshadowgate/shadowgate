@@ -1,0 +1,13 @@
+#d/magic/psiCompAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/azha/town/crystal"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "azha"
+owner "rethen"
+components (["mottled jasper":50,"lapiz lazuli":50,"moonstone":22,"malachite":50,"blue lace agate":25,"opal":17,"aquamarine":5,"gray agate":26,"dallyhanite":4,"peridot":5,"fire opal":14,"yellow calcite":50,"banded amethyst":11,"hematite":14,"yellow jasper":13,"seraphinite":12,"wemic tears":50,"smoky quartz":7,"rhodochrosite":7,"bloodstone":50,"pyrite":7,"clear quartz":7,"blue amethyst":28,"topaz":26,"apatite":50,"lodestone":26,"aventurine":50,"flowstone":50,"jade":50,"sapphire":23,"ectoplasmic crystal":7,"black star sapphire":6,"rutilated quartz":23,"rose quartz":3,"sodalite":1,"chalcopyrite":19,"danburite":50,"blue diamond":10,"unakite":50,"sunstone":50,"emerald":5,"red spinel":13,"orange calcite":50,"citrine quartz":50,"blue tigers eye":20,"leopard agate":50,"amethyst":7,"adamite":50,"green fluorite":10,"blue calcite":7,"tektite":50,"snowflake obsidian":14,"tourmaline":4,"tigers eye":50,"charoite":21,"carnelian":50,"larvikite":2,])

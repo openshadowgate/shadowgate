@@ -1,0 +1,4 @@
+These are meant to be a variety of instruments that can be dropped into new areas and spread around the mud.  They were originally created when I was designing a destroyed inn for Koenig that had a chance for finding a musical instrument.  Feel free to use any of these at any time to add variety to the instruments in the world.
+
+Circe
+Also note that if you design a new instrument and want it to go in the instrument cases, you need to add -- int is_instrument(){return 1;} to your file.

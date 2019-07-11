@@ -1,0 +1,40 @@
+#/d/magic/spellbook.c
+trap_data ([])
+encumbrance 10
+size 0
+ac 0
+decayRate 100
+decayStatus 0
+currentStatus 100
+props (["died time":-316891988,"repairtype":({"tailor","jewel","woodwork","leatherwork",}),"stolen":(["shar":(["max value":0,"difficulty":-144,]),"citizen":(["max value":0,"difficulty":58,]),"kortahl":(["max value":0,"difficulty":52,]),"mithras":(["max value":0,"difficulty":68,]),]),])
+serial_number 0
+ob_data (["condition":-126,"value":0,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),"long":"This is a spellbook.","short":"%^RESET%^%^A %^RESET%^%^GREEN%^small book %^RESET%^bound in %^RESET%^%^RED%^r%^ORANGE%^e%^RED%^d le%^RESET%^%^ORANGE%^a%^RED%^th%^ORANGE%^e%^RED%^r%^RESET%^%^RESET%^",])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/cleric-mage#76458"
+cursed "mithras"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["summon companion":1,"shout":4,"iron body":8,"color spray":1,"animate dead":4,"darkness":2,"acid breath":5,"protection from scrying":3,"foxs cunning":2,"domination":5,"screen":8,"contingency":6,"augmentation":2,"bears endurance":2,"teleport without error":7,"fireball":3,"scorcher":2,"drawmij's instant summons":8,"dragon scales":6,"powerword stun":8,"alter self":2,"meteor swarm":9,"vampiric touch":3,"monster summoning 7":9,"monster summoning 6":8,"monster summoning 5":7,"monster summoning 4":6,"monster summoning 3":5,"transformation":6,"monster summoning 2":4,"web":2,"monster summoning 1":3,"resistance":1,"greater shout":8,"chain lightning":6,"teleport":5,"levitate":2,"planar beacon":6,"finger of death":7,"conjure elemental":5,"detect poison":1,"blink":3,"detect invisibility":2,"detect magic":1,"stoneskin":4,"gate":9,"incendiary cloud":8,"cats grace":2,"identify":1,"darkvision":2,"acid arrow":2,"invisibility":2,"rope trick":2,"hideous laughter":2,"greater dispel magic":7,"dancing lights":1,"magic missile":1,"disintegrate":6,"sunburst":8,"chill touch":1,"wall of fire":4,"wall of stone":5,"horrid wilting":8,"ray of enfeeblement":2,"dispel magic":3,"polar ray":8,"sleep":1,"water breathing":3,"ice storm":4,"summon swarm":1,"tongues":3,"black tentacles":4,"warriors constitution":6,"false vision":5,"spider climb":2,"armor":1,"light":1,"magic mirror":7,"protection from spells":8,"hold person":3,"gust of wind":4,"burning hands":1,"expeditious retreat":1,"legend lore":6,"displacement":3,"cone of cold":5,"detect scrying":4,"faithful phantom guardians":6,"prismatic spray":7,"freedom of movement":9,"ball lightning":5,"garble":3,"lightning bolt":3,])
+magic ({"acid arrow","acid breath","alter self","animate dead","armor","augmentation","ball lightning","bears endurance","black tentacles","blink","burning hands","cats grace","chain lightning","chill touch","color spray","cone of cold","conjure elemental","contingency","dancing lights","darkness","darkvision","detect invisibility","detect magic","detect poison","detect scrying","disintegrate","dispel magic","displacement","domination","dragon scales","drawmij's instant summons","expeditious retreat","faithful phantom guardians","false vision","finger of death","fireball","foxs cunning","freedom of movement","garble","gate","greater dispel magic","greater shout","gust of wind","hideous laughter","hold person","horrid wilting","ice storm","identify","incendiary cloud","invisibility","iron body","legend lore","levitate","light","lightning bolt","magic mirror","magic missile","meteor swarm","monster summoning 1","monster summoning 2","monster summoning 3","monster summoning 4","monster summoning 5","monster summoning 6","monster summoning 7","planar beacon","polar ray","powerword stun","prismatic spray","protection from scrying","protection from spells","ray of enfeeblement","resistance","rope trick","scorcher","screen","shout","sleep","spider climb","stoneskin","summon companion","summon swarm","sunburst","teleport","teleport without error","tongues","transformation","vampiric touch","wall of fire","wall of stone","warriors constitution","water breathing","web",})
+mID 0
+bookdesc 0
+owner "ramius"
+restore 0
+spells_at_level 0
+in_mind 0

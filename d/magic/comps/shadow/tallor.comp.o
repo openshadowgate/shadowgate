@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "tallor"
+components (["owlfeather":38,"eyelash":4,"small candle":5,"gum arabic":6,"blessed leather":3,"tiny bag":5,"aluminum chaff":10,"sulfur":14,"pearl":15,"rod of iron":7,])

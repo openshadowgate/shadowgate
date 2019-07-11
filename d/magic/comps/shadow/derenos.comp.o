@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "derenos"
+components (["bat guano":50,"soft clay":50,"adders stomach":50,"eyelash":50,"small candle":50,"gum arabic":50,"firefly":50,"phosphorus":50,"water":50,"sand":50,"tiny bag":50,"dart":50,"sulfur":50,"powdered rhubarb leaf":50,])

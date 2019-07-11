@@ -1,0 +1,59 @@
+#d/magic/obj/companion.c
+props (["no dominate":1,])
+ob_data (["long":"%^BOLD%^%^RED%^A %^BLACK%^black%^RED%^ female %^RESET%^%^RED%^blood%^BOLD%^ hound%^RESET%^ %^BOLD%^%^GREEN%^is a large female dog with thick %^BLACK%^black%^GREEN%^ fur. She appears to be a normal dog, however, there are tell-tale signs of %^BLUE%^magic%^GREEN%^ shimmering around her form. She is wearing a spiked %^BLACK%^black%^GREEN%^ leather collar with a tag that says %^RED%^'%^BLACK%^ONYX%^RED%^'%^RESET%^","id":({"dog","companion",}),"short":"%^BOLD%^%^RED%^A %^BLACK%^black%^RED%^ female %^RESET%^%^RED%^blood%^BOLD%^ hound%^RESET%^","adreniline":0,"condition":100,"race":"dog",])
+cap_name "Dog"
+true_name "dog"
+creator "/d/magic/obj/scompanion#945"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+player_data (["general":(["alignment":8,"extra_hp":0,"max_hp":12,"max_sp":1,"hp":12,"experience":175,"sp":1,]),])
+magic (["points":15,"max points":70,])
+severed ([])
+healing ([])
+limbs ({"left forepaw","left foreleg","torso","right forepaw","right foreleg","left rear paw","left rear leg","right rear paw","right rear leg","head",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":5,])
+nwps ([])
+toAttack -1
+atnames ({})
+wimpydir "out"
+attackers ({})
+hunters ({})
+combat_vars (["blindfolded":0,"bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_messages (["bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_counters (["block_attack":0,"asleep":0,"tripped":0,"gagged":0,"healing":0,"blindfolded":0,"bound":0,"unconscious":0,"blinded":0,])
+env_var ([])
+ok_to_heal 1192
+player_age 382
+divine_domain ({})
+quest_spells ({})
+gender "female"
+stats (["charisma":2,"dexterity":2,"wisdom":2,"strength":2,"intelligence":2,"constitution":2,])
+time_delay ([])
+lost_spell_level (["fighter.c":9,"bard.c":9,"sorcerer.c":9,"thief.c":9,"mage.c":9,"cleric.c":9,"ranger.c":9,"psion.c":9,"paladin.c":9,"cavalier.c":9,"antipaladin.c":9,])
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 49
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+num_hand 2
+num_dice 1
+type 4
+weapon_type "slashing"
+attack_limbs ({"right forepaw","left forepaw",})
+longdesc "%^BOLD%^%^GREEN%^is a large female dog with thick %^BLACK%^black%^GREEN%^ fur. She appears to be a normal dog, however, there are tell-tale signs of %^BLUE%^magic%^GREEN%^ shimmering around her form. She is wearing a spiked %^BLACK%^black%^GREEN%^ leather collar with a tag that says %^RED%^'%^BLACK%^ONYX%^RED%^'%^RESET%^"
+owner 

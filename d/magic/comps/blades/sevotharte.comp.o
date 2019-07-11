@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/guilds/raiders/mosutha/rooms/moslab"
+identified ({})
+id "blades"
+owner "sevotharte"
+components (["crystal":50,"incense stick":49,"water":50,])

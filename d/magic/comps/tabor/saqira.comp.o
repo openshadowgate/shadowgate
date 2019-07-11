@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "saqira"
+components (["diamond dust":5,"small drum":10,"granite dust":5,"eyelash":40,"powdered chalk":5,"eye of roc":1,"blessed leather":20,"aluminum chaff":5,"nitric acid":1,"emerald":38,"zinc":1,"talc":5,"copper":1,"owlfeather":20,"small candle":10,"gum arabic":10,"drop of blood":17,"powdered silver":1,"crystal":30,"tiny bag":20,"iron rod":50,"silver pin":10,"will o wisp essence":6,])

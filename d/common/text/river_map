@@ -1,0 +1,39 @@
+%^BOLD%^%^RED%^---------------------------------------------------------------------%^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^                         %^BOLD%^%^YELLOW%^11 %^RESET%^       %^BLUE%^-------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^         %^BOLD%^%^YELLOW%^7%^RESET%^               |       %^BLUE%^---------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^         |             / %^BOLD%^%^YELLOW%^10%^RESET%^     %^BLUE%^----------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^     %^BOLD%^%^YELLOW%^17%^RESET%^--|            /        %^BLUE%^------------------------------------ %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^  %^BOLD%^%^YELLOW%^16%^RESET%^ |   |---------- %^BOLD%^%^YELLOW%^6%^RESET%^        %^BLUE%^----------------------%^RESET%^ %^BOLD%^%^YELLOW%^8%^RESET%^ %^BLUE%^------------ %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^  |   \  |                    %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^  |    | |                    %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^   \%^BOLD%^%^YELLOW%^ 4%^RESET%^ | |                    %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^ %^YELLOW%^15%^RESET%^ ---- %^YELLOW%^1%^RESET%^ --------- %^BOLD%^%^YELLOW%^2%^RESET%^ ------ %^BLUE%^-------%^RESET%^ %^BOLD%^ocean%^RESET%^ %^BLUE%^------%^RESET%^ %^BOLD%^%^YELLOW%^9%^RESET%^ %^BLUE%^-------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^  \  %^BOLD%^%^YELLOW%^3%^RESET%^   |     |              %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^   \     |----%^BOLD%^%^YELLOW%^18%^RESET%^              %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^   %^BOLD%^%^YELLOW%^19%^RESET%^    |                    %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^   /     |                    %^BLUE%^------------------------%^RESET%^ %^BOLD%^%^YELLOW%^14%^RESET%^ %^BLUE%^--------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^ ------- %^BOLD%^%^YELLOW%^5%^RESET%^ ------- %^BOLD%^%^YELLOW%^12%^RESET%^         %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^ |                            %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^ %^BOLD%^%^YELLOW%^13%^RESET%^	                       %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|%^RESET%^                              %^BLUE%^------------------------------------- %^BOLD%^%^RED%^|
+%^BOLD%^%^RED%^|--------------------------------------------------------------------%^BOLD%^%^RED%^-
+
+%^BOLD%^ 1. %^BOLD%^%^GREEN%^ Shadow
+%^BOLD%^ 2. %^BOLD%^%^GREEN%^ Desert                         %^BOLD%^%^BLUE%^ 1- 4
+%^BOLD%^ 3. %^BOLD%^%^GREEN%^ Kobold Forest                  %^BOLD%^%^BLUE%^ 1- 5
+%^BOLD%^ 4. %^BOLD%^%^GREEN%^ Goblin Stronghold              %^BOLD%^%^BLUE%^ 5- 10
+%^BOLD%^ 5. %^BOLD%^%^GREEN%^ Tharis                         %^BOLD%^%^BLUE%^ 8-15
+%^BOLD%^ 6. %^BOLD%^%^GREEN%^ Muileann                       %^BOLD%^%^BLUE%^ 8-15
+%^BOLD%^ 7. %^BOLD%^%^GREEN%^ Antioch                        %^BOLD%^%^BLUE%^10-25 
+%^BOLD%^ 8. %^BOLD%^%^GREEN%^ Deku (Verbobone, Sanctuary)    %^BOLD%^%^BLUE%^ 5-15
+%^BOLD%^ 9. %^BOLD%^%^GREEN%^ Laerad (Asgard, Systyquah)     %^BOLD%^%^BLUE%^ 8-35
+%^BOLD%^10. %^BOLD%^%^GREEN%^ Dagger (Daggerdale, Marsh)     %^BOLD%^%^BLUE%^ 10+
+%^BOLD%^11. %^BOLD%^%^GREEN%^ Dagger (Underdark, Kinaro)     %^BOLD%^%^BLUE%^ 10+
+%^BOLD%^12. %^BOLD%^%^GREEN%^ Tharis Forest                  %^BOLD%^%^BLUE%^12-25
+%^BOLD%^13. %^BOLD%^%^GREEN%^ Azha                           %^BOLD%^%^BLUE%^ 15+
+%^BOLD%^14. %^BOLD%^%^GREEN%^ Attaya (Seneca)                %^BOLD%^%^BLUE%^ 25+
+%^BOLD%^15. %^BOLD%^%^GREEN%^ Meadow Lands                   %^BOLD%^%^BLUE%^ 7-13
+%^BOLD%^16. %^BOLD%^%^GREEN%^ Newbie Land (Offestry)         %^BOLD%^%^BLUE%^ 1- 5
+%^BOLD%^17. %^BOLD%^%^GREEN%^ Juran                          %^BOLD%^%^BLUE%^ 20+
+%^BOLD%^18. %^BOLD%^%^GREEN%^ Darkwood Forest                %^BOLD%^%^BLUE%^ 6-13
+%^BOLD%^19. %^BOLD%^%^GREEN%^ Tabor                          %^BOLD%^%^BLUE%^ 7-20

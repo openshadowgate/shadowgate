@@ -1,0 +1,36 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props (["died time":1428505691,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^BOLD%^%^BLACK%^A %^RESET%^%^ORANGE%^leather %^BOLD%^%^BLACK%^t%^RESET%^o%^BOLD%^%^BLACK%^m%^RESET%^e %^BOLD%^%^CYAN%^w%^RESET%^%^CYAN%^r%^BOLD%^a%^RESET%^%^CYAN%^p%^BOLD%^p%^RESET%^%^CYAN%^e%^BOLD%^d %^BLACK%^in bl%^RESET%^%^MAGENTA%^a%^BOLD%^%^BLACK%^ck v%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^lv%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^t%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#1005239"
+cursed "mordeth"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString " (wielded in left hand)"
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["phantasmal killer":9,"ball lightning":5,"darkness":2,"teleport":5,"stoneskin":4,"monster summoning 2":4,"augmentation":2,"cone of cold":5,"wall of fire":4,"magic missile":1,"armor":1,"detect magic":1,"detect invisibility":2,"scorcher":2,"blink":3,"invisibility":2,"ray of enfeeblement":2,"acid arrow":2,"fireball":3,"ice storm":4,"greater invisibility":4,"tongues":3,"domination":5,"project image":7,"levitate":2,"light":1,"misdirection":2,"burning hands":1,])
+magic ({"magic missile","armor","detect magic","light","burning hands","darkness","augmentation","detect invisibility","scorcher","invisibility","ray of enfeeblement","acid arrow","levitate","misdirection","blink","fireball","tongues","stoneskin","monster summoning 2","wall of fire","ice storm","greater invisibility","ball lightning","teleport","cone of cold","domination","project image","phantasmal killer",})
+mID 0
+bookdesc 0
+owner "mordeth"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

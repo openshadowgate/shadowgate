@@ -1,0 +1,34 @@
+#d/magic/spellbook.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^%^ORANGE%^A worn book%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/newbie/mon/zabeth"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+spells (["summon companion":1,"ball lightning":5,"dispel magic":3,"teleport":5,"chill touch":1,"shout":4,"know alignment":2,"magic missile":1,"sonic shield":4,"blink":3,"detect scrying":4,"invisibility":2,"hideous laughter":2,"web":2,"ice storm":4,"water breathing":3,"contingency":6,"animate dead":5,"garble":3,"sleep":1,"conjure fire elemental":5,"darkness":1,"identify":1,"monster summoning 2":4,"conjure earth elemental":5,"armor":1,"rope trick":2,"wall of fire":4,"lightning bolt":3,"detect magic":1,"detect invisibility":2,"scorcher":2,"conjure air elemental":5,"tongues":3,"domination":5,"acid orb":3,"light":1,"vampiric touch":3,"conjure water elemental":5,"burning hands":1,])
+magic ({"summon companion","chill touch","magic missile","sleep","darkness","identify","armor","detect magic","light","burning hands","know alignment","hideous laughter","invisibility","web","rope trick","detect invisibility","scorcher","dispel magic","blink","water breathing","garble","lightning bolt","tongues","acid orb","vampiric touch","shout","detect scrying","ice storm","monster summoning 2","wall of fire","ball lightning","teleport","animate dead","conjure fire elemental","conjure earth elemental","conjure air elemental","domination","contingency",})
+mID 0
+bookdesc 0
+owner "maldrin"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

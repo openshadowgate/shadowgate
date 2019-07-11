@@ -1,0 +1,13 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "juran"
+owner "vicdaerrysn"
+components (["bat guano":11,"water":50,"minute tarts":14,"bit of bone":6,"dart":27,"sulfur":8,"tiny bell":40,"incense stick":15,"chalk":10,"spider":10,"bitumen":10,"firefly":13,"earth from grave":7,"phosphorescent moss":7,"feather":12,"pearl":13,"powdered rhubarb leaf":15,"clear crystal":4,])

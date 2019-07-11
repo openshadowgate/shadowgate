@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "duergan"
+components (["talc":17,"zinc":4,"granite dust":3,"piece of bone":6,"powdered silver":11,"earth from grave":11,"iron rod":6,"parchment":5,"dragon scale":7,"ivory portal":1,"corn extract":5,"pinch of special dust":8,"charcoal":5,"piece of iron":5,])

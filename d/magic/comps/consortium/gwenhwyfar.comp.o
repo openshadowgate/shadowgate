@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/guilds/consortium/hall/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "consortium"
+owner "gwenhwyfar"
+components (["sand":50,"piece of mirror":38,"feather":50,"sulfur":50,"bat guano":50,"tiny hearing trumpet":31,"powdered chalk":50,"water":50,])

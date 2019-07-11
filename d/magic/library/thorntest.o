@@ -1,0 +1,27 @@
+#realms/thorn/library.c
+props (["light":2,"used sticks":1,"indoors":1,])
+ob_data (["long":"%^BOLD%^Library%^RESET%^You are in what looks to be a very cozy library or study.  Books of all sorts seem to be crammed into bookcases that line most of the available wall space.  The rest of the space is taken up by rugs that have been hung on the walls to add color and warmth.  A number of lamps hang from the ceiling, providing ample, warm light for reading. There are a few leather armchairs both small and normal-sized. You can <research> things here if you have magical skills....Also <help library> might help....","id":({}),"short":"%^BOLD%^Library%^RESET%^","condition":100,])
+creator "/std/user#49207"
+destinations (["north":"/d/dagger/avalounge",])
+invis_exits ([])
+pre_exit_func ([])
+post_exit_func ([])
+climb_exits ([])
+footprints ({0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,})
+orig_exits ([])
+buried ([])
+round ({({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),({}),})
+nextRound ({})
+untouchable ({})
+__Items (["slayar":,"red moon":,"spyefel":,"armchairs":"Large and small, they are very comfortable looking.","green moon":,"moon":,"laros":,"sun":,"moons":,"lamps":"The lamps seem to give off a constant magical light.","blue moon":,"bookcases":"They are crammed with books of all sorts, some mundane, some of common arcane lore.","stove":"Squat and black, the iron stove has a little door in the front and a pipe that goes up into the ceiling.","sky":,])
+__Smells (["default":"The smell of parchment and leather pervades the room.",])
+__Listens (["default":"There is the sound of a fire crackling.",])
+__Searches ([])
+only_on_reset 1
+allowed_storage 50
+lib_id "thorntest"
+books (["Thorn's Manual of Magic":(["ids":({"manualx","book","manual","Thorn's Manual of Magic","thorn's manual of magic",}),"knowledge":(["alteration":100,]),"long":"A large, heavy book.  You can <check title>.","title":"Thorn's Manual of Magic","unique":0,"short":"a book",]),"Xyzphyl's Deadly Book of Black Artifice":(["ids":({"manualx","book","manual","Xyzphyl's Deadly Book of Black Artifice","xyzphyl's deadly book of black artifice",}),"knowledge":(["alteration":100,]),"long":"A large, heavy book.  You can <check title>.","title":"Xyzphyl's Deadly Book of Black Artifice","unique":0,"short":"a book",]),])
+collection (["alteration":200,])
+quantity 2
+rqueue ([])
+notes ([])

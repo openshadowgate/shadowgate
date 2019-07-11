@@ -1,0 +1,30 @@
+#d/magic/spellbook.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A fatter book%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/cmds/system/_clone"
+cursed 0
+identified ({})
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+spells (["cone of cold":5,"detect magic":1,])
+magic ({"cone of cold","detect magic",})
+mID 0
+bookdesc 0
+owner "nienne"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

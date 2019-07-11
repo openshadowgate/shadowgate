@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "juran"
+owner "tebryn"
+components (["bat guano":25,"granite dust":5,"eyelash":50,"crane's feather":10,"blessed leather":10,"aluminum chaff":5,"sulfur":30,"incense stick":10,"tiny bell":15,"zinc":10,"small candle":50,"powdered silver":10,"tiny bag":20,"iron rod":50,"carbon":10,"rose petals":5,"tiny hearing trumpet":10,"pinch of special dust":43,"powdered chalk":10,"minute tarts":50,"clay model ziggurat":40,"nitric acid":2,"dragon scale":5,"emerald":34,"talc":40,"owlfeather":20,"firefly":5,"gum arabic":10,"drop of blood":10,"crystal":10,"feather":10,"pearl":5,"parchment":10,])

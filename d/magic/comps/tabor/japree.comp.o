@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "japree"
+components (["eyelash":50,"crane's feather":50,"disc of bronze":50,"blessed leather":28,"water":50,"aluminum chaff":50,"bit of bone":8,"eyelash of ogre-mage":16,"dart":50,"zinc":6,"adders stomach":50,"small candle":50,"powdered silver":45,"piece of mirror":50,"tiny bag":50,"iron rod":40,"rose petals":50,"piece of steel":50,"powdered rhubarb leaf":50,"pinch of special dust":50,"piece of iron":6,"diamond dust":14,"flint":50,"magnets":50,"minute tarts":35,"dragon scale":5,"emerald":50,"talc":50,"piece of bone":18,"firefly":50,"drop of blood":50,"dung scrapings":50,"crystal":50,"feather":50,"pearl":29,"wing feather":50,"clear crystal":12,"beeswax":50,"small diamond":18,])

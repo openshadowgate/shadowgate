@@ -1,0 +1,14 @@
+#d/magic/psiCompAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "tabor"
+owner "eversor"
+components (["yellow calcite":50,"aventurine":50,"dallyhanite":50,])

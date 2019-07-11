@@ -1,0 +1,14 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/attaya/newseneca/rooms/mage_lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "seneca"
+owner "pangretor"
+components (["flint":50,"water":50,"phosphorus":50,"sulfur":50,"powdered amber":50,"soft clay":50,"small candle":50,"firefly":50,"piece of mirror":50,"tiny bag":50,"wing feather":50,"white feather":50,"silver pin":50,"piece of reed":50,"pinch of special dust":50,"quicksilver":50,"piece of iron":50,])

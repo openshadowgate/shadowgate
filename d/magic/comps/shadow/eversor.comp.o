@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "shadow"
+owner "eversor"
+components (["zinc":50,"copper":50,"granite dust":43,"eyelash":45,"small candle":50,"gum arabic":36,"blessed leather":50,"eyelash of ogre-mage":50,"tiny bag":41,"nitric acid":50,"pinch of special dust":50,"quicksilver":28,])

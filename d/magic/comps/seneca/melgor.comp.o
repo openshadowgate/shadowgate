@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/attaya/newseneca/rooms/mage_lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "seneca"
+owner "melgor"
+components (["zinc":10,"diamond dust":5,"copper":10,"nitric acid":4,"spider web":7,"eye of roc":10,])

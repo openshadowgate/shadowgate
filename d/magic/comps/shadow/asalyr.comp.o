@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "asalyr"
+components (["adders stomach":20,"granite dust":24,"eyelash":10,"gum arabic":10,"glass rod":3,"spider web":10,"firefly":50,"fur":3,"sand":50,"phosphorescent moss":2,"clay model ziggurat":20,"dart":20,"powdered rhubarb leaf":20,"silver pin":3,])

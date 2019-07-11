@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "shadow"
+owner "belendithas"
+components (["granite dust":50,"eyelash":50,"crane's feather":50,"vermilion":50,"disc of bronze":50,"sand":50,"eyelash of ogre-mage":50,"aluminum chaff":50,"dart":50,"incense stick":50,"tiny bell":50,"snake scale":50,"honey":50,"zinc":50,"copper":50,"small candle":50,"animal hair":50,"glass rod":50,"tiny bag":50,"iron rod":50,"tiny hearing trumpet":50,"piece of iron":50,"minute tarts":50,"clay model ziggurat":50,"nitric acid":50,"bat fur":50,"bit of seashell":50,"strip of parchment":50,"pinch of dung":50,"powdered amber":50,"emerald":50,"talc":50,"large diamond":50,"tiny bucket":50,"bitumen":50,"black silk":50,"firefly":50,"gum arabic":50,"exotic feather":50,"wing feather":50,"small crystal bead":50,"piece of reed":50,"corn extract":45,"quicksilver":30,"bark chips":50,"small diamond":39,"alum":50,"bat guano":50,"jade circlet":50,"sapphire dust":50,"blessed leather":50,"phosphorus":50,"water":50,"bit of bone":50,"sulfur":50,"squid tentacle":50,"polished marble":50,"snakeskin glove":50,"red cloth":50,"amber rod":50,"ground mica":50,"spider web":50,"earth from grave":50,"powdered silver":50,"piece of mirror":50,"carbon":50,"ruby dust":50,"pinch of special dust":50,"diamond dust":50,"sack of salt":50,"magnets":50,"powdered chalk":50,"eye of roc":50,"citric acid":50,"slug":50,"turtle shell":50,"ivory portal":50,"dragon scale":50,"charcoal":50,"mercury":50,"soft clay":50,"spider":50,"owlfeather":50,"ogre's eyelash":50,"metal rod":50,"piece of bone":50,"drop of blood":50,"crystal":50,"phosphorescent moss":50,"feather":50,"pearl":50,"beeswax":50,"snakes tongue":50,"will o wisp essence":50,"diamond":50,])

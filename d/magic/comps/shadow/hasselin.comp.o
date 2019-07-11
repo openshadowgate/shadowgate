@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "shadow"
+owner "hasselin"
+components (["colored sand":15,"bat guano":36,"magnets":40,"citric acid":50,"water":50,"minute tarts":30,"eyelash of ogre-mage":4,"clay model ziggurat":6,"dragon scale":25,"incense stick":13,"zinc":5,"owlfeather":20,"adders stomach":15,"piece of bone":19,"firefly":40,"powdered silver":16,"feather":20,"phosphorescent moss":5,"iron rod":13,"pearl":13,"beeswax":39,"pinch of special dust":13,"piece of iron":38,])

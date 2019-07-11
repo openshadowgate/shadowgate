@@ -1,0 +1,48 @@
+#d/magic/obj/companion.c
+props (["no dominate":1,])
+ob_data (["long":"This is a male owl.  It looks like a normal creature, except for an occasional shimmering around it, like a strange hint of a magical aura.","id":({"owl","companion",}),"short":"A owl","condition":100,"race":"owl",])
+cap_name "Owl"
+true_name "owl"
+creator "/d/magic/obj/scompanion#209857"
+identified ({})
+studied ({})
+studied_failed ([])
+player_data (["general":(["alignment":4,"extra_hp":0,"max_hp":16,"max_sp":1,"hp":16,"experience":175,"sp":1,]),])
+magic (["points":15,"max points":70,])
+severed ([])
+healing ([])
+limbs ({"left forepaw","left foreleg","torso","right forepaw","right foreleg","left rear paw","left rear leg","right rear paw","right rear leg","head",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":5,])
+nwps ([])
+toAttack -1
+atnames ({})
+wimpydir "out"
+attackers ({})
+hunters ({})
+gender "male"
+stats (["charisma":2,"dexterity":2,"wisdom":2,"strength":2,"intelligence":2,"constitution":2,])
+time_delay ([])
+lost_cl_spell_level 7
+lost_wiz_spell_level 9
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 60
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+num_hand 2
+num_dice 1
+type 4
+weapon_type "slashing"
+attack_limbs ({"right forepaw","left forepaw",})
+owner 

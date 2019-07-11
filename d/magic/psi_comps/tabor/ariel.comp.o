@@ -1,0 +1,10 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "ariel"
+components (["mottled jasper":50,"malachite":50,"moonstone":50,"aquamarine":50,"peridot":50,"dallyhanite":50,"banded amethyst":50,"yellow calcite":50,"red jasper":50,"yellow jasper":50,"wemic tears":50,"seraphinite":50,"rhodochrosite":50,"bloodstone":50,"pyrite":50,"clear quartz":50,"blue amethyst":50,"apatite":30,"aventurine":50,"flowstone":50,"obsidian":50,"jade":50,"rutilated quartz":36,"black star sapphire":5,"rose quartz":50,"sodalite":50,"rhodonite":50,"danburite":50,"blue diamond":12,"unakite":50,"orange calcite":50,"leopard agate":50,"amethyst":50,"adamite":50,"tektite":50,"snowflake obsidian":25,"tourmaline":50,"carnelian":50,])

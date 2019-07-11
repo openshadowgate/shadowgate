@@ -1,0 +1,61 @@
+#d/magic/obj/companion.c
+props (["no dominate":1,])
+ob_data (["long":"%^RESET%^%^CYAN%^A %^BOLD%^%^BLACK%^gh%^RESET%^o%^CYAN%^s%^BOLD%^%^BLACK%^tly%^RESET%^%^MAGENTA%^ sh%^BOLD%^i%^WHITE%^m%^RESET%^%^MAGENTA%^mer%^CYAN%^ of %^BOLD%^%^WHITE%^l%^YELLOW%^i%^RESET%^%^ORANGE%^g%^BOLD%^%^WHITE%^ht%^RESET%^%^CYAN%^ in human form%^RESET%^ %^CYAN%^- Looking closely at this shimmer of %^BOLD%^%^WHITE%^l%^YELLOW%^i%^RESET%^%^ORANGE%^g%^BOLD%^%^WHITE%^ht%^RESET%^%^CYAN%^ and %^BOLD%^%^BLACK%^s%^RESET%^h%^CYAN%^a%^BOLD%^%^BLACK%^dow%^RESET%^%^CYAN%^, the outline of a what appears to be a middle-aged woman can be just made out. Pale as the %^BOLD%^m%^RESET%^%^CYAN%^o%^WHITE%^r%^BOLD%^%^CYAN%^ning%^RESET%^%^CYAN%^ mists and %^BOLD%^%^WHITE%^tr%^RESET%^a%^YELLOW%^n%^WHITE%^slucent%^RESET%^%^CYAN%^ as air itself, the details are near impossible to define, and yet there is an inherent %^BOLD%^%^MAGENTA%^fe%^RESET%^%^MAGENTA%^m%^RED%^i%^BOLD%^%^MAGENTA%^ninity%^RESET%^%^CYAN%^ about this shape that hints of gowns and quiet laughter. As you concentrate upon her, slowly details come into focus. Long, %^ORANGE%^a%^YELLOW%^s%^RESET%^%^ORANGE%^h-bl%^YELLOW%^o%^WHITE%^n%^RESET%^%^ORANGE%^de%^RESET%^%^CYAN%^ hair, pale %^YELLOW%^g%^RESET%^%^ORANGE%^o%^YELLOW%^lden%^RESET%^%^CYAN%^ skin and keenly intelligent %^BOLD%^%^GREEN%^g%^RESET%^%^GREEN%^r%^RESET%^e%^BOLD%^%^GREEN%^en%^RESET%^%^CYAN%^ eyes, being the most obvious, though her choice to wear all %^BOLD%^%^WHITE%^w%^RESET%^h%^CYAN%^i%^BOLD%^%^WHITE%^te%^RESET%^%^CYAN%^ in the form of long fluid robe causes her to seem washed out and faded.%^RESET%^","id":({"ghost","companion",}),"short":"%^RESET%^%^CYAN%^A %^BOLD%^%^BLACK%^gh%^RESET%^o%^CYAN%^s%^BOLD%^%^BLACK%^tly%^RESET%^%^MAGENTA%^ sh%^BOLD%^i%^WHITE%^m%^RESET%^%^MAGENTA%^mer%^CYAN%^ of %^BOLD%^%^WHITE%^l%^YELLOW%^i%^RESET%^%^ORANGE%^g%^BOLD%^%^WHITE%^ht%^RESET%^%^CYAN%^ in human form%^RESET%^","adreniline":0,"condition":100,"race":"ghost",])
+cap_name "Ghost"
+true_name "ghost"
+creator "/d/magic/obj/scompanion#1002"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+player_data (["general":(["alignment":4,"extra_hp":0,"max_hp":100,"max_sp":1,"hp":100,"experience":175,"sp":1,]),])
+magic (["points":15,"max points":70,])
+severed ([])
+healing ([])
+limbs ({"left forepaw","left foreleg","torso","right forepaw","right foreleg","left rear paw","left rear leg","right rear paw","right rear leg","head",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":5,])
+nwps ([])
+toAttack -1
+atnames ({})
+wimpydir "out"
+attackers ({})
+hunters ({})
+combat_vars (["blindfolded":0,"bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_messages (["bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_counters (["block_attack":0,"asleep":0,"tripped":0,"gagged":0,"healing":0,"blindfolded":0,"bound":0,"unconscious":0,"blinded":0,])
+ok_to_heal 1004
+player_age 6
+divine_domain ({})
+quest_spells ({})
+gender "female"
+stats (["charisma":2,"dexterity":2,"wisdom":2,"strength":2,"intelligence":2,"constitution":2,])
+time_delay ([])
+lost_cl_spell_level 7
+lost_wiz_spell_level 9
+lost_psi_spell_level 9
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 57
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+BONUS_ADDED 1
+num_hand 2
+num_dice 1
+type 4
+weapon_type "slashing"
+attack_limbs ({"right forepaw","left forepaw",})
+longdesc "%^CYAN%^- Looking closely at this shimmer of %^BOLD%^%^WHITE%^l%^YELLOW%^i%^RESET%^%^ORANGE%^g%^BOLD%^%^WHITE%^ht%^RESET%^%^CYAN%^ and %^BOLD%^%^BLACK%^s%^RESET%^h%^CYAN%^a%^BOLD%^%^BLACK%^dow%^RESET%^%^CYAN%^, the outline of a what appears to be a middle-aged woman can be just made out. Pale as the %^BOLD%^m%^RESET%^%^CYAN%^o%^WHITE%^r%^BOLD%^%^CYAN%^ning%^RESET%^%^CYAN%^ mists and %^BOLD%^%^WHITE%^tr%^RESET%^a%^YELLOW%^n%^WHITE%^slucent%^RESET%^%^CYAN%^ as air itself, the details are near impossible to define, and yet there is an inherent %^BOLD%^%^MAGENTA%^fe%^RESET%^%^MAGENTA%^m%^RED%^i%^BOLD%^%^MAGENTA%^ninity%^RESET%^%^CYAN%^ about this shape that hints of gowns and quiet laughter. As you concentrate upon her, slowly details come into focus. Long, %^ORANGE%^a%^YELLOW%^s%^RESET%^%^ORANGE%^h-bl%^YELLOW%^o%^WHITE%^n%^RESET%^%^ORANGE%^de%^RESET%^%^CYAN%^ hair, pale %^YELLOW%^g%^RESET%^%^ORANGE%^o%^YELLOW%^lden%^RESET%^%^CYAN%^ skin and keenly intelligent %^BOLD%^%^GREEN%^g%^RESET%^%^GREEN%^r%^RESET%^e%^BOLD%^%^GREEN%^en%^RESET%^%^CYAN%^ eyes, being the most obvious, though her choice to wear all %^BOLD%^%^WHITE%^w%^RESET%^h%^CYAN%^i%^BOLD%^%^WHITE%^te%^RESET%^%^CYAN%^ in the form of long fluid robe causes her to seem washed out and faded.%^RESET%^"
+owner 

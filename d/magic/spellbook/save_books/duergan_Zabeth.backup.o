@@ -1,0 +1,32 @@
+#d/magic/spellbook.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage-thief#122889"
+cursed "duergan"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+spells (["summon companion":1,"dispel magic":3,"chill touch":1,"shout":4,"know alignment":2,"magic missile":1,"invisibility":2,"hideous laughter":2,"web":2,"fireball":3,"ice storm":4,"sonic orb":3,"water breathing":3,"sleep":1,"monster summoning 1":3,"darkness":1,"identify":1,"stoneskin":4,"monster summoning 2":4,"hold person":3,"rope trick":2,"armor":1,"lightning bolt":3,"detect invisibility":2,"detect magic":1,"color spray":1,"scorcher":2,"ray of enfeeblement":2,"acid arrow":2,"tongues":3,"light":1,"frost orb":3,"burning hands":1,])
+magic ({"summon companion","chill touch","magic missile","sleep","darkness","identify","armor","detect magic","color spray","light","burning hands","know alignment","invisibility","hideous laughter","web","rope trick","detect invisibility","scorcher","ray of enfeeblement","acid arrow","dispel magic","fireball","sonic orb","water breathing","monster summoning 1","hold person","lightning bolt","tongues","frost orb","shout","ice storm","stoneskin","monster summoning 2",})
+mID 0
+bookdesc 0
+owner "duergan"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

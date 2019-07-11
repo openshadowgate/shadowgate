@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^%^MAGENTA%^a w%^ORANGE%^e%^MAGENTA%^ll-used book of s%^RED%^o%^MAGENTA%^ngs and sk%^GREEN%^e%^CYAN%^t%^MAGENTA%^ches%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/conversion/conversion2"
+cursed "kerrid"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties ({})
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["summon companion":1,"identify":1,"monster summoning 2":4,"know alignment":2,"hold person":3,"rope trick":2,"lightning bolt":3,"protection from scrying":3,"detect magic":1,"scorcher":2,"blink":3,"hideous laughter":2,"web":2,"acid arrow":2,"fireball":3,"ice storm":4,"tongues":3,"lightning orb":3,"water breathing":3,"sonic orb":3,"fly":3,"garble":3,])
+magic ({"summon companion","identify","detect magic","know alignment","rope trick","scorcher","hideous laughter","web","acid arrow","hold person","lightning bolt","protection from scrying","blink","fireball","tongues","lightning orb","water breathing","sonic orb","fly","garble","monster summoning 2","ice storm",})
+mID 0
+bookdesc 0
+owner "kerrid"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

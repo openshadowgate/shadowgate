@@ -1,0 +1,32 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-2007759290,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#77837"
+cursed "meneloth"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+spells (["monster summoning 1":3,"summon companion":1,"darkness":1,"dispel magic":3,"chill touch":1,"stoneskin":4,"identify":1,"hold person":3,"know alignment":2,"wall of fire":4,"magic missile":1,"armor":1,"rope trick":2,"lightning bolt":3,"detect invisibility":2,"detect magic":1,"color spray":1,"protection from scrying":3,"scorcher":2,"ray of enfeeblement":2,"invisibility":2,"hideous laughter":2,"web":2,"fireball":3,"tongues":3,"lightning orb":3,"water breathing":3,"vampiric touch":3,"light":1,"burning hands":1,"sleep":1,])
+magic ({"summon companion","darkness","chill touch","identify","magic missile","armor","detect magic","color spray","light","burning hands","sleep","know alignment","rope trick","detect invisibility","scorcher","ray of enfeeblement","invisibility","hideous laughter","web","monster summoning 1","dispel magic","hold person","lightning bolt","protection from scrying","fireball","tongues","lightning orb","water breathing","vampiric touch","stoneskin","wall of fire",})
+mID 0
+bookdesc 0
+owner "meneloth"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

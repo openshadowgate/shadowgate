@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+id "tabor"
+owner "raelith"
+components (["diamond dust":2,"granite dust":8,"eyelash":10,"crane's feather":9,"powdered chalk":20,"eye of roc":50,"minute tarts":50,"dart":50,"clay model ziggurat":10,"emerald":10,"zinc":50,"copper":50,"owlfeather":20,"gum arabic":10,"firefly":50,"drop of blood":9,"crystal":33,"feather":50,"iron rod":15,"pearl":10,"powdered rhubarb leaf":50,])

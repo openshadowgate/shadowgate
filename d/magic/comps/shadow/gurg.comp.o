@@ -1,0 +1,14 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "shadow"
+owner "gurg"
+components (["granite dust":50,"eyelash":50,"crane's feather":50,"blessed leather":50,"water":50,"eyelash of ogre-mage":50,"aluminum chaff":50,"bit of bone":13,"incense stick":4,"zinc":50,"copper":50,"amber rod":50,"small candle":50,"spider web":10,"powdered silver":50,"tiny bag":50,"piece of mirror":50,"iron rod":50,"tiny hearing trumpet":50,"ruby dust":50,"pinch of special dust":50,"diamond dust":50,"powdered chalk":50,"eye of roc":50,"clay model ziggurat":50,"nitric acid":50,"dragon scale":25,"powdered amber":50,"emerald":50,"charcoal":9,"talc":50,"owlfeather":50,"soft clay":50,"gum arabic":50,"drop of blood":50,"crystal":50,"phosphorescent moss":50,"pearl":50,"parchment":50,"piece of reed":3,"beeswax":50,"corn extract":50,"diamond":1,"quicksilver":50,])

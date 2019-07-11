@@ -1,0 +1,54 @@
+#/d/islands/elf/mon/celebrim.c
+trap_data ([])
+props (["strength":"spellsspellsspellsspellsspellsspellsspellsspellsspellsspellsspellsspells","new_exp_level":35,"treasure type":"A","new_exp_perc":"normal","has_random_treasure":1,"treasure level":35,"new_exp_set":2,"new_exp_amount":15873,"repairtype":({"tailor","jewel","woodwork","leatherwork",}),"champion_check":1,])
+ob_data (["condition":100,"combat_feats_enabled":1,"adreniline":0,"race":"elf","CombatFeats":({"sunder","rush",}),"id":({"Celebrimbor Losshelin","teacher","wizard","elf","celebrimbor","celebrimbor losshelin","celebrimbor lossehelin","losshelin",}),"feats_enabled":1,"long":"Celebrimbor Losshelin is a rather old looking elf.  He has grey hair and deep lines in his face from his years of practicing magic.  He wears a simple gold and red trimmed robe.  He looks to be studying intently but perhaps he will sell you a spell or two.Type <list spells> to see what he has to offer you.","short":"Celebrimbor Losshelin the wizard teacher","aggressive":0,])
+cap_name "Celebrimbor"
+true_name "Celebrimbor"
+creator "/cmds/system/_clone"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+player_data (["general":(["alignment":1,"sp":1,"experience":15873,"extra_hp":0,"max_hp":156,"max_sp":1,"hp":156,]),])
+magic (["max points":525,"points":525,])
+severed ([])
+healing ([])
+limbs ({"neck","right foot","left hand","right leg","left foot","torso","left leg","right arm","head","waist","right hand","left arm",})
+all_my_fingers 5
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":35,])
+wimpydir "out"
+combat_vars (["react":0,"swarm":0,"bound":0,"paralyzed":0,"blindfolded":0,"toAttack":0,"gagged":0,"asleep":0,"wimpy":0,"any attack":0,"RNEW":1,"funcCast":0,"castFunc":0,"tripped":0,"unconscious":0,])
+combat_messages (["blinded":0,"NEW":1,"bound":0,"paralyzed":0,"gagged":0,"blindfolded":0,"asleep":0,"tripped":0,"unconscious":0,])
+combat_counters (["blinded":0,"NEW":1,"bound":0,"healing":0,"gagged":0,"blindfolded":0,"asleep":0,"block_attack":0,"tripped":0,"unconscious":0,])
+ok_to_heal 3688
+player_age 3372
+divine_domain ({})
+quest_spells ({})
+gender "male"
+stats (["wisdom":10,"dexterity":52,"strength":8,"constitution":52,"intelligence":19,"charisma":52,])
+time_delay ([])
+lost_spell_level (["paladin.c":9,"ranger.c":9,"sorcerer.c":9,"cavalier.c":9,"cleric.c":9,"antipaladin.c":9,"druid.c":9,"thief.c":9,"mage.c":9,"psion.c":9,"bard.c":9,"fighter.c":9,])
+level 35
+hit_dice 35
+hit_dice_bonus 1
+stage 54
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "elf"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+static_bab 35
+Available ({"acid arrow","animate dead","armor","blindness","bulls strength","detect invisibility","finger of death","hideous laughter","ice storm","mages sword","magic mirror","monster summoning 3","monster summoning 5","resist energy","resonating word","summon swarm","tongues","vampiric touch","wail of the banshee",})
+tmpstr "book"
+number 18
+spellnames (["resonating word":72000,"monster summoning 5":73000,"blindness":21000,"hideous laughter":20000,"wail of the banshee":90000,"armor":10000,"monster summoning 3":53000,"animate dead":40000,"resist energy":20000,"magic mirror":73000,"finger of death":75000,"vampiric touch":32000,"ice storm":41000,"bulls strength":20000,"summon swarm":10000,"tongues":32000,"detect invisibility":21000,"acid arrow":21000,"mages sword":75000,])
+backing (["hades":1368602819,])

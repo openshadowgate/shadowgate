@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "vortahn"
+components (["tiny bag":34,"owlfeather":50,"phosphorescent moss":48,"small candle":34,"spider web":48,"gum arabic":40,"blessed leather":40,])

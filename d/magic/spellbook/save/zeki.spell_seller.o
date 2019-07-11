@@ -1,0 +1,54 @@
+#/d/tharis/newtharis/mobs/zeki.c
+trap_data ([])
+props (["new_exp_level":16,"treasure type":"A","new_exp_perc":"normal","has_random_treasure":1,"treasure level":15,"no bump":1,"new_exp_set":1,"new_exp_amount":8928,"repairtype":({"tailor","jewel","woodwork","leatherwork",}),"champion_check":1,])
+ob_data (["condition":100,"adreniline":0,"race":"human","id":({"zeki","clerk","shop keeper","shopkeeper","Zeki","human",}),"long":"%^MAGENTA%^Zeki Duman %^ORANGE%^is a man of average height.  His skin is bronzed and his lively eyes %^BOLD%^%^BLACK%^black as coal%^RESET%^%^ORANGE%^.  His %^BOLD%^%^WHITE%^snowy white%^RESET%^ %^ORANGE%^hair is loosely tied in a bun at the base of his neck, but most of it is hidden by the mage's hat he is wearing.  A pair of %^WHITE%^legless spectacles %^ORANGE%^rests on the bridge of his nose and occasionally slides down, forcing him to push them back up with a finger.  The top of his amber colored puffy pantaloons is hidden by a %^BOLD%^%^MAGENTA%^bright fuchsia%^RESET%^ %^ORANGE%^embroidered overcoat with bell sleeves, the thread of the embroidery and the sash both of the same amber as the pantaloons.  The toes of his %^YELLOW%^curly toed shoes%^RESET%^ %^ORANGE%^rise high, a symbol of wealth and status in the Tsarven society.%^RESET%^<help shop> will get you a list of shop commands.","aggressive":0,"short":"%^RED%^Zeki Duman Effendi,%^RESET%^ %^MAGENTA%^Resident Alchemist%^RESET%^",])
+cap_name "Zeki"
+true_name "zeki"
+creator "/d/tharis/newtharis/rooms/tharis_mage_spells"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+player_data (["general":(["alignment":4,"sp":1,"experience":8928,"extra_hp":0,"max_hp":70,"max_sp":1,"hp":70,]),])
+magic (["max points":192,"points":192,])
+severed ([])
+healing ([])
+limbs ({"neck","right foot","left hand","right leg","left foot","torso","left leg","right arm","head","waist","right hand","left arm",})
+all_my_fingers 5
+heal_rate 2
+classes ({"mage",})
+posed "mage"
+skills ([])
+guilds (["mage":16,])
+mlevels (["mage":16,])
+wimpydir "out"
+combat_vars (["react":0,"swarm":0,"bound":0,"paralyzed":0,"blindfolded":0,"toAttack":0,"gagged":0,"asleep":0,"wimpy":0,"any attack":0,"RNEW":1,"funcCast":0,"castFunc":0,"tripped":0,"unconscious":0,])
+combat_messages (["blinded":0,"NEW":1,"bound":0,"paralyzed":0,"gagged":0,"blindfolded":0,"asleep":0,"tripped":0,"unconscious":0,])
+combat_counters (["blinded":0,"NEW":1,"bound":0,"healing":0,"gagged":0,"blindfolded":0,"asleep":0,"block_attack":0,"tripped":0,"unconscious":0,])
+ok_to_heal 7432
+player_age 6856
+divine_domain ({})
+quest_spells ({})
+gender "male"
+stats (["wisdom":16,"dexterity":18,"strength":12,"constitution":14,"intelligence":19,"charisma":13,])
+time_delay ([])
+lost_spell_level (["paladin.c":9,"ranger.c":9,"sorcerer.c":9,"warlord.c":9,"cavalier.c":9,"cleric.c":9,"antipaladin.c":9,"thief.c":9,"mage.c":9,"psion.c":9,"bard.c":9,"fighter.c":9,])
+level 16
+hit_dice 16
+hit_dice_bonus 1
+stage 52
+emotes ([])
+spells (["chance":90,"commands":({"color spray","hideous laughter","acid arrow","sleep","monster summoning 2",}),])
+thief_skill ([])
+body_type "human"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+static_bab 16
+Available ({"burning hands","chain lightning","chill touch","detect invisibility","dragon scales","faithful phantom guardians","finger of death","ice storm","magic mirror","scorcher","sleep","stoneskin","summon companion","teleport without error","wall of fire","warriors constitution","web",})
+tmpstr "book"
+number 6
+spellnames (["summon companion":19602,"web":21924,"magic mirror":154996,"chain lightning":71823,"finger of death":74607,"burning hands":8950,"detect invisibility":25298,"wall of fire":42021,"chill touch":11761,"stoneskin":53091,"faithful phantom guardians":94144,"scorcher":27834,"teleport without error":74400,"dragon scales":72739,"sleep":7029,"ice storm":48488,"warriors constitution":53047,])
+backing (["belendithas":1320977753,])

@@ -1,0 +1,13 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+magic_properties ({})
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "kale"
+components (["rutilated quartz":10,"clear quartz":5,"seraphinite":23,"tourmaline":30,"amethyst":5,"peridot":25,"dallyhanite":40,])

@@ -1,0 +1,34 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^CYAN%^A cyan colored book, soft to the touch with a thin binding with flowing script in %^WHITE%^silver%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#604214"
+cursed "ristven"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["web":2,"chill touch":1,"foresight":6,"light":1,"augmentation":2,"magic missile":1,"detect magic":1,"clairvoyance":2,"prying eyes":9,"scorcher":2,"telepathic bond":5,"sleep":1,"burning hands":1,])
+magic ({"augmentation","burning hands","clairvoyance","detect magic","foresight","magic missile","prying eyes","scorcher","sleep","telepathic bond","web",})
+mID 0
+bookdesc 0
+owner "ristven"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

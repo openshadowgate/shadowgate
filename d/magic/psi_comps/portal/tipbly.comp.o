@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/portal/workroom"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "portal"
+owner "tipbly"
+components (["garnet":30,"clear quartz":25,"blue tigers eye":5,"sodalite":50,"adamite":10,"aventurine":25,"jade":5,"wemic tears":50,"bloodstone":50,])

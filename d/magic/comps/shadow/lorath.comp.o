@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "lorath"
+components (["colored sand":50,"flint":30,"granite dust":4,"eyelash":3,"crane's feather":5,"phosphorus":30,"nitric acid":24,"strip of parchment":5,"talc":20,"copper":50,"adders stomach":13,"small candle":50,"firefly":4,"drop of blood":30,"tiny bag":50,"crystal":30,"feather":50,"iron rod":20,"piece of steel":30,"pearl":17,"wood":18,"quicksilver":30,])

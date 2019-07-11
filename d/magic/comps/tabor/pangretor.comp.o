@@ -1,0 +1,14 @@
+#/d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["condition":100,"id":({}),])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "tabor"
+owner "pangretor"
+components (["exotic feather":50,"flint":50,"dung scrapings":50,"crane's feather":50,"clay model ziggurat":50,"drop of blood":50,"iron rod":50,"wing feather":50,"pinch of special dust":50,"piece of reed":50,"bat guano":50,"tiny hearing trumpet":50,"small candle":50,"water":50,"sunstone":50,"tiny bag":50,"sulfur":50,"firefly":50,])

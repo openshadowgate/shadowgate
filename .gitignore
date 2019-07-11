@@ -1,13 +1,16 @@
+#PI
 /daemon/save
 /adm/db
 /adm/save
-/d
 /log
 /realms
 /avatar
 /tmp
 /inv
 /dest.log
+
+#Spoilers
+/d/*
 
 #Parts of the lib are in the world
 !/d/common

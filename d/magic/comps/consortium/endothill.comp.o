@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/guilds/consortium/hall/lab"
+identified ({})
+id "consortium"
+owner "endothill"
+components (["eyelash of ogre-mage":15,"tiny bag":50,"eyelash":50,"small candle":50,"firefly":50,"quicksilver":15,])

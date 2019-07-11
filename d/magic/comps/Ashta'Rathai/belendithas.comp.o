@@ -1,0 +1,14 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/islands/elf/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "Ashta'Rathai"
+owner "belendithas"
+components (["crane's feather":50,"disc of bronze":50,"aluminum chaff":50,"dart":50,"tiny bell":50,"chalk":50,"smoky quartz":50,"zinc":50,"copper":50,"animal hair":50,"string":50,"butter":50,"tiny bag":50,"coal":50,"tiny hearing trumpet":50,"tallow":50,"straw":50,"clay model ziggurat":50,"bat fur":50,"strip of parchment":50,"bit of seashell":50,"talc":50,"bitumen":50,"tiny bucket":50,"black silk":50,"blood of umber hulk":50,"wing feather":50,"wood":50,"corn extract":50,"bark chips":50,"drop of oil":50,"alum":50,"bat guano":50,"squid ink":50,"water":50,"alkaline salt":50,"blessed leather":50,"bit of bone":50,"sulfur":50,"squid tentacle":50,"cricket":50,"snakeskin glove":50,"caterpillar cocoon":50,"adders stomach":50,"amber rod":50,"spider web":50,"earth from grave":50,"carbon":50,"thread":50,"colored sand":50,"diamond dust":50,"copper wire":50,"citric acid":50,"tiny fan":50,"turtle shell":50,"crushed pearls":50,"dragon scale":50,"vampire dust":50,"charcoal":50,"soft clay":50,"soft glove":50,"crushed black pearl":50,"drop of blood":50,"dung scrapings":50,"crystal":50,"clear crystal":50,"beeswax":50,"snakes tongue":50,"diamond":50,"will o wisp essence":50,])

@@ -1,0 +1,35 @@
+#d/magic/magic_book.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"is a tall human, with a what is visible of his body being composed of tight lean muscles.  He has short sable hair, and piercing silver eyes that give him an almost eldritch appearence.  His features are sharply defined, with a narrow chin and high cheekbones that imply a distant elven ancestry.  The creases around his mouth indicate that he smiles regularly.  He is dressed simply, in a velvet black robe. book%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#196764"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["acid arrow":2,"web":2,"mind fog":6,"spider climb":2,"powerword kill":9,"heroism":3,"rope trick":2,"armor":1,"magic missile":1,"daze":1,"detect magic":1,"scorcher":2,"blink":3,"hideous laughter":2,"sleep":1,"invisibility":2,])
+magic ({"acid arrow","armor","blink","daze","detect magic","heroism","hideous laughter","invisibility","magic missile","mind fog","powerword kill","rope trick","scorcher","sleep","spider climb","web",})
+mID 0
+bookdesc 0
+owner "jancarius"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

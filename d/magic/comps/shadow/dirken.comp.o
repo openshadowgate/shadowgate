@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "dirken"
+components (["colored sand":50,"tiny bag":36,"owlfeather":1,"dart":24,"carbon":10,"adders stomach":7,"pearl":3,"powdered rhubarb leaf":14,"spider web":45,])

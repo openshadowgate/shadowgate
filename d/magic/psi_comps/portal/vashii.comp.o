@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/portal/workroom"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "portal"
+owner "vashii"
+components (["mottled jasper":23,"lapiz lazuli":38,"moonstone":2,"malachite":33,"opal":4,"aquamarine":1,"dallyhanite":50,"peridot":39,"gray agate":20,"yellow calcite":50,"red jasper":15,"azurite":8,"hematite":5,"yellow jasper":50,"wemic tears":50,"seraphinite":18,"blue spinel":50,"smoky quartz":36,"rhodochrosite":13,"bloodstone":31,"turquoise":10,"blue amethyst":16,"apatite":18,"topaz":46,"flowstone":19,"aventurine":3,"obsidian":18,"jade":43,"zoisite":35,"ectoplasmic crystal":24,"black star sapphire":6,"garnet":28,"rutilated quartz":20,"rose quartz":39,"chalcopyrite":32,"rhodonite":13,"danburite":3,"unakite":26,"emerald":48,"purple fluorite":15,"red spinel":11,"blue tigers eye":12,"citrine quartz":41,"leopard agate":50,"green fluorite":50,"blue calcite":3,"tektite":10,"snowflake obsidian":46,"tourmaline":50,"beryl":6,"carnelian":40,"green moss agate":35,"charoite":38,])

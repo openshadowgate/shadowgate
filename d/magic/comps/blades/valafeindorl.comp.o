@@ -1,0 +1,13 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/guilds/raiders/mosutha/rooms/moslab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "blades"
+owner "valafeindorl"
+components ([])

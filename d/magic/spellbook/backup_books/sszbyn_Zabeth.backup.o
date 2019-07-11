@@ -1,0 +1,34 @@
+#d/magic/magic_book.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage-thief#146911"
+cursed "sszbyn"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+spells (["summon companion":1,"fireball":3,"tongues":3,"identify":1,"hold person":3,"rope trick":2,"armor":1,"magic missile":1,"detect magic":1,"blink":3,"invisibility":2,])
+magic ({"identify","armor","magic missile","detect magic","rope trick","invisibility","fireball","tongues","hold person","blink",})
+mID 0
+bookdesc 0
+owner "sszbyn"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

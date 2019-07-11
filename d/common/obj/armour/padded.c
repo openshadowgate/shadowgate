@@ -1,0 +1,22 @@
+inherit "/std/armour";
+
+void create() {
+    ::create();
+    set_max_dex_bonus(8);
+    set_armor_prof("light");
+    set_name("padded");
+    set("id", ({ "padded","padded armor", "armor" }) );
+    set("short", "A suit of padded armor");
+    set("long", 
+	"This is the simplest type of armor, fashioned from quilted "
+   "layers of cloth and batting. It offers only a little more protection than a robe. It tends to get hot, and after "
+   "a time becomes foul with sweat, grime, lice and fleas."
+       );
+    set_weight(10);
+    set("value", 4);
+    set_type("leather");
+    set_limbs( ({ "torso" }) );
+    set_ac(2);
+}
+
+int is_metal() { return 0; }

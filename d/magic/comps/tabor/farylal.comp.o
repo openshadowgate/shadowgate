@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "farylal"
+components (["bat guano":39,"granite dust":7,"eyelash":42,"crane's feather":50,"disc of bronze":41,"phosphorus":45,"blessed leather":50,"water":50,"eyelash of ogre-mage":42,"aluminum chaff":18,"bit of bone":13,"sand":10,"sulfur":50,"incense stick":40,"tiny bell":50,"copper":4,"small candle":50,"spider web":50,"glass rod":15,"powdered silver":36,"tiny bag":50,"piece of mirror":50,"carbon":46,"iron rod":24,"tiny hearing trumpet":35,"silver pin":10,"ruby dust":10,"pinch of special dust":35,"piece of iron":10,"diamond dust":12,"magnets":47,"powdered chalk":38,"minute tarts":50,"clay model ziggurat":36,"dragon scale":20,"ivory portal":4,"powdered amber":7,"emerald":46,"charcoal":21,"talc":50,"soft clay":10,"owlfeather":41,"firefly":50,"gum arabic":33,"drop of blood":33,"fur":5,"crystal":50,"phosphorescent moss":29,"feather":43,"exotic feather":9,"pearl":17,"wing feather":33,"parchment":29,"piece of reed":19,"beeswax":11,"corn extract":24,"snakes tongue":14,"quicksilver":28,"diamond":7,"will o wisp essence":50,"small diamond":21,])

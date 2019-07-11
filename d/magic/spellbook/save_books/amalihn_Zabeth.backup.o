@@ -1,0 +1,34 @@
+#d/magic/magic_book.c
+trap_data ([])
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^BOLD%^%^WHITE%^A book made of %^GREEN%^w%^RESET%^%^GREEN%^o%^CYAN%^v%^BOLD%^%^RED%^e%^YELLOW%^n %^GREEN%^f%^BLUE%^l%^REsET%^%^RED%^o%^MAGENTA%^w%^BOLD%^%^CYAN%^e%^RED%^r %^MAGENTA%^p%^RED%^e%^GREEN%^t%^YELLOW%^a%^RESET%^%^RED%^l%^CYAN%^s%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#286323"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["phantasmal killer":9,"acid arrow":2,"summon companion":1,"darkness":1,"greater invisibility":4,"project image":7,"sonic orb":3,"light":1,"magic missile":1,"detect magic":1,"color spray":1,"scorcher":2,"misdirection":2,"invisibility":2,"hideous laughter":2,"burning hands":1,])
+magic ({"acid arrow","burning hands","color spray","darkness","detect magic","greater invisibility","hideous laughter","invisibility","light","magic missile","misdirection","phantasmal killer","project image","scorcher","sonic orb","summon companion",})
+mID 0
+bookdesc 0
+owner "amalihn"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

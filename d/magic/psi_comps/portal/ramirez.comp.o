@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/portal/workroom"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "portal"
+owner "ramirez"
+components (["mottled jasper":50,"lapiz lazuli":40,"sodalite":30,"blue lace agate":5,"peridot":20,"dallyhanite":20,"banded amethyst":30,"red jasper":30,"hematite":40,"wemic tears":45,"unakite":18,"orange calcite":20,"bloodstone":30,"clear quartz":30,"amethyst":30,"adamite":45,"aventurine":30,"flowstone":18,"tektite":30,"carnelian":30,])

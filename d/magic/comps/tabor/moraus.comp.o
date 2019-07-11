@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "moraus"
+components (["bat guano":20,"small drum":20,"granite dust":45,"magnets":40,"eyelash":32,"eye of roc":11,"blessed leather":40,"clay model ziggurat":50,"sulfur":20,"nitric acid":29,"zinc":20,"talc":21,"copper":29,"owlfeather":41,"small candle":40,"firefly":43,"gum arabic":40,"crystal":50,"tiny bag":40,"pearl":30,"beeswax":17,])

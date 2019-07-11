@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "juran"
+owner "adderlash"
+components (["bat guano":50,"granite dust":50,"eyelash":30,"magnets":50,"grasshopper leg":50,"water":50,"blessed leather":10,"sand":50,"sulfur":50,"piece of glass":50,"tiny bell":50,"chalk":50,"charcoal":50,"soft glove":50,"small candle":30,"string":50,"gum arabic":20,"butter":50,"drop of blood":50,"nutshells":50,"tiny bag":50,"feather":50,"carbon":50,"wing feather":50,"parchment":50,"thread":50,"piece of iron":50,])

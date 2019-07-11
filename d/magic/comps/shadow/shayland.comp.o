@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "shayland"
+components (["eyelash":20,"water":8,"blessed leather":5,"phosphorus":4,"sand":12,"minute tarts":25,"sulfur":26,"incense stick":3,"talc":20,"soft clay":4,"owlfeather":9,"gum arabic":23,"firefly":50,"crystal":50,"tiny bag":34,"iron rod":20,"rose petals":20,"thread":38,"piece of iron":40,])

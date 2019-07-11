@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-1078470043,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^An ordinary %^ORANGE%^leatherb%^RESET%^o%^ORANGE%^und%^RESET%^ book%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#189567"
+cursed "wells"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties ({})
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["summon companion":1,"chill touch":1,"monster summoning 5":7,"sonic shield":4,"invisibility":2,"powerword stun":7,"lightning orb":3,"contingency":6,"fly":3,"identify":1,"wall of fire":4,"detect magic":1,"magic mirror":7,"conjure air elemental":5,"lower resistance":5,"ray of enfeeblement":2,"domination":5,"acid orb":3,"warriors constitution":6,"light":1,"vampiric touch":3,"chain lightning":6,"frost orb":3,"ball lightning":5,"dispel magic":3,"teleport":5,"shout":4,"know alignment":2,"cone of cold":5,"acid breath":5,"magic missile":1,"protection from scrying":3,"dragon scales":6,"blink":3,"detect scrying":4,"hideous laughter":2,"web":2,"fireball":3,"ice storm":4,"sonic orb":3,"water breathing":3,"animate dead":5,"static field":4,"greater dispel magic":7,"sleep":1,"conjure fire elemental":5,"faithful phantom guardians":6,"monster summoning 1":3,"darkness":1,"stoneskin":4,"monster summoning 2":4,"hold person":3,"lightning bolt":3,"conjure earth elemental":5,"armor":1,"rope trick":2,"detect invisibility":2,"color spray":1,"scorcher":2,"acid arrow":2,"gust of wind":4,"monster summoning 3":5,"tongues":3,"finger of death":7,"greater shout":8,"conjure water elemental":5,"monster summoning 4":6,"burning hands":1,])
+magic ({"summon companion","chill touch","identify","detect magic","light","magic missile","sleep","darkness","armor","color spray","burning hands","invisibility","ray of enfeeblement","know alignment","hideous laughter","web","rope trick","detect invisibility","scorcher","acid arrow","lightning orb","fly","acid orb","vampiric touch","frost orb","dispel magic","protection from scrying","blink","fireball","sonic orb","water breathing","monster summoning 1","hold person","lightning bolt","tongues","sonic shield","wall of fire","shout","detect scrying","ice storm","static field","stoneskin","monster summoning 2","gust of wind","conjure air elemental","lower resistance","domination","ball lightning","teleport","cone of cold","acid breath","animate dead","conjure fire elemental","conjure earth elemental","monster summoning 3","conjure water elemental","contingency","warriors constitution","chain lightning","dragon scales","faithful phantom guardians","monster summoning 4","monster summoning 5","powerword stun","magic mirror","greater dispel magic","finger of death","greater shout",})
+mID 0
+bookdesc 0
+owner "wells"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

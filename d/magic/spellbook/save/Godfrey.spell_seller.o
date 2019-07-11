@@ -1,0 +1,53 @@
+#/d/attaya/newseneca/mon/godfrey.c
+props (["strength":"spells","treasure type":"A","new_exp_level":40,"new_exp_perc":"normal","has_random_treasure":1,"treasure level":40,"repairtype":({"tailor","jewel","woodwork","leatherwork",}),"no attack":1,"new_exp_set":1,"new_exp_amount":35714,"no bump":1,"champion_check":1,])
+ob_data (["race":"aasimar","condition":100,"adreniline":0,"id":({"godfrey","Godfrey","godfrey kieran","kieran","shopkeeper","shop keeper","vendor","aasimar",}),"short":"Godfrey Kieran, Proprietor of Ethereal Wonders","aggressive":0,"long":"Dressed in a plush velvet %^BLUE%^indigo doublet %^CYAN%^embroidered with %^YELLOW%^stars%^RESET%^%^CYAN%^, Godfrey looks most unlike the typical wizard.  Strapped to his back is a %^BOLD%^%^WHITE%^two-handed sword %^RESET%^%^CYAN%^made from some unknown metal that %^RESET%^g%^BOLD%^l%^RESET%^i%^BOLD%^t%^RESET%^t%^BOLD%^e%^RESET%^r%^BOLD%^s %^RESET%^%^CYAN%^even in the absence of light.  %^BLUE%^Stockinged %^CYAN%^legs with %^BLUE%^knee-high boots %^CYAN%^are well-muscled, hinting at his raw power.  His %^YELLOW%^golden locks %^RESET%^%^CYAN%^curve naturally up and away from his face, falling gently to his shoulders.  Stunning wide %^BOLD%^%^WHITE%^silver eyes %^RESET%^%^CYAN%^gaze serenely upon his surroundings, while his full %^RED%^rosebud lips %^CYAN%^combine with the slightly %^YELLOW%^golden tint %^RESET%^%^CYAN%^of his skin to give him the appearance of an angel.  Godfrey became the shopkeeper here in Seneca to help keep an eye on Octavia when the city refused to expel her, and he often finds himself at odds with the tiefling and her little imp.%^RESET%^<help shop> will get you a list of shop commands.",])
+cap_name "Godfrey"
+true_name "Godfrey"
+creator "/adm/obj/simul_efun"
+identified ({})
+studied ({})
+studied_failed ([])
+magic_properties ({})
+item_owners ({})
+item_owner_props "01100"
+player_data (["general":(["sp":1,"alignment":1,"experience":35714,"extra_hp":0,"max_hp":180,"hp":201,"max_sp":1,]),])
+magic (["max points":600,"points":600,])
+severed ([])
+healing ([])
+limbs ({"head","right leg","right foot","neck","left arm","left foot","waist","left leg","torso","right hand","right arm","left hand",})
+all_my_fingers 5
+heal_rate 2
+classes ({"mage","paladin",})
+posed "mage"
+skills ([])
+guilds (["cleric":40,"paladin":40,"mage":40,])
+mlevels (["paladin":40,"mage":40,])
+wimpydir "out"
+combat_vars (["react":0,"swarm":0,"paralyzed":0,"bound":0,"gagged":0,"toAttack":0,"blindfolded":0,"wimpy":0,"asleep":0,"RNEW":1,"any attack":0,"castFunc":0,"funcCast":0,"tripped":0,"unconscious":0,])
+combat_messages (["NEW":1,"blinded":0,"paralyzed":0,"bound":0,"blindfolded":0,"gagged":0,"asleep":0,"tripped":0,"unconscious":0,])
+combat_counters (["NEW":1,"blinded":0,"healing":0,"bound":0,"blindfolded":0,"gagged":0,"block_attack":0,"asleep":0,"tripped":0,"unconscious":0,])
+ok_to_heal 13549
+player_age 13084
+divine_domain ({})
+quest_spells ({})
+gender "male"
+stats (["wisdom":20,"dexterity":14,"intelligence":18,"constitution":18,"strength":18,"charisma":18,])
+time_delay ([])
+masteredspells ({})
+level 40
+hit_dice 40
+hit_dice_bonus 12
+stage 58
+emotes (["attack chance":5,"chance":5,"msg":({"%^MAGENTA%^Godfrey declares%^RESET%^: That Octavia has gone too far this time!","%^MAGENTA%^Godfrey declares%^RESET%^: I will see that gods-forsaken imp banished back to the hells from whence he came!","Godfrey brushes back his golden locks and gives a charming smile.","Glancing into a mirror, Godfrey brushes imaginary dust off his doublet.",}),"attack msg":({"Godfrey glares righteously at you!","%^MAGENTA%^Godfrey declares%^RESET%^: This foul deed will not go unpunished!","%^MAGENTA%^Godfrey declares%^RESET%^: You are a coward and a fool!",}),])
+spells (["commands":({"sunburst","searing light","searing light","lightning bolt","lighting bolt","magic missile","magic missile","magic missile",}),"chance":100,])
+thief_skill ([])
+body_type "human"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+static_bab 40
+Available ({"blindness","bulls strength","cone of cold","dragon scales","expeditious retreat","fear","foxs cunning","freedom of movement","invisibility","mind fog","monster summoning 3","monster summoning 5","monster summoning 7","planar sending","ray of frost","reduce person","web",})
+number 15
+spellnames (["invisibility":5415,"blindness":5470,"monster summoning 5":39796,"mind fog":59722,"monster summoning 3":12616,"cone of cold":39835,"web":5476,"freedom of movement":145221,"reduce person":2566,"dragon scales":59803,"foxs cunning":5477,"ray of frost":2569,"planar sending":145539,"fear":24173,"expeditious retreat":2580,"bulls strength":5425,"monster summoning 7":83964,])
+backing (["belendithas":1392839623,"arken":1260441061,"arvellon":1461672737,"whisper":1401201935,"cedric":1361028935,"kyle":1241851615,])

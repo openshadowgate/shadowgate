@@ -1,0 +1,13 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+magic_properties ({})
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "imran"
+components (["eyelash":45,"small candle":50,"firefly":50,"gum arabic":45,"blessed leather":19,"minute tarts":50,"tiny bag":50,"feather":50,])

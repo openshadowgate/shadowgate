@@ -1,0 +1,32 @@
+#d/magic/spellbook.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/darkwood/tabor/mon/wizbam"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+spells (["summon companion":1,"chill touch":1,"monster summoning 5":7,"monster summoning 6":8,"invisibility":2,"powerword stun":7,"lightning orb":3,"drawmij's instant summons":8,"monster summoning 7":9,"contingency":6,"garble":3,"prismatic spray":7,"identify":1,"wall of fire":4,"magic mirror":7,"detect magic":1,"conjure air elemental":5,"lower resistance":5,"ray of enfeeblement":2,"domination":5,"meteor swarm":9,"warriors constitution":6,"acid orb":3,"vampiric touch":3,"light":1,"chain lightning":6,"frost orb":3,"ball lightning":5,"dispel magic":3,"teleport":5,"shout":4,"cone of cold":5,"know alignment":2,"acid breath":5,"magic missile":1,"dragon scales":6,"protection from scrying":3,"detect scrying":4,"blink":3,"teleport without error":7,"hideous laughter":2,"anti-teleportation shell":9,"web":2,"fireball":3,"ice storm":4,"water breathing":3,"sonic orb":3,"animate dead":5,"sleep":1,"faithful phantom guardians":6,"conjure fire elemental":5,"monster summoning 1":3,"darkness":1,"stoneskin":4,"monster summoning 2":4,"hold person":3,"lightning bolt":3,"conjure earth elemental":5,"armor":1,"rope trick":2,"detect invisibility":2,"color spray":1,"scorcher":2,"acid arrow":2,"monster summoning 3":5,"tongues":3,"finger of death":7,"greater shout":8,"incendiary cloud":8,"conjure water elemental":5,"monster summoning 4":6,"burning hands":1,])
+magic ({"acid arrow","acid breath","acid orb","animate dead","anti-teleportation shell","armor","ball lightning","blink","burning hands","chain lightning","chill touch","color spray","cone of cold","conjure air elemental","conjure earth elemental","conjure fire elemental","conjure water elemental","contingency","darkness","detect invisibility","detect magic","detect scrying","dispel magic","domination","dragon scales","drawmij's instant summons","faithful phantom guardians","finger of death","fireball","frost orb","garble","greater shout","hideous laughter","hold person","ice storm","identify","incendiary cloud","invisibility","know alignment","light","lightning bolt","lightning orb","lower resistance","magic mirror","magic missile","meteor swarm","monster summoning 1","monster summoning 2","monster summoning 3","monster summoning 4","monster summoning 5","monster summoning 6","monster summoning 7","powerword stun","prismatic spray","protection from scrying","ray of enfeeblement","rope trick","scorcher","shout","sleep","sonic orb","stoneskin","summon companion","teleport","teleport without error","tongues","vampiric touch","wall of fire","warriors constitution","water breathing","web",})
+mID 0
+bookdesc 0
+owner "raelith"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

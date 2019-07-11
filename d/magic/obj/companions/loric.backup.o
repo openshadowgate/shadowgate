@@ -1,0 +1,62 @@
+#d/magic/obj/companion.c
+props (["no dominate":1,])
+ob_data (["long":"%^BOLD%^%^BLACK%^A tiny%^RESET%^ %^RED%^s%^RESET%^%^BOLD%^%^BLACK%^c%^RESET%^%^YELLOW%^a%^RESET%^%^BOLD%^%^BLACK%^r%^RESET%^%^RED%^l%^RESET%^%^BOLD%^%^BLACK%^e%^RESET%^%^YELLOW%^t%^RESET%^ %^RED%^k%^RESET%^%^BOLD%^%^BLACK%^i%^RESET%^%^YELLOW%^n%^RESET%^%^BOLD%^%^BLACK%^g%^RESET%^%^RED%^s%^RESET%^%^BOLD%^%^BLACK%^n%^RESET%^%^YELLOW%^a%^BOLD%^%^BLACK%^k%^RESET%^%^RED%^e%^RESET%^ %^RED%^is just over a foot long. Her slender body is brightly colored with bands of%^RESET%^ %^BOLD%^%^BLACK%^black%^RESET%^%^RED%^,%^RESET%^ %^BOLD%^%^RED%^scarlet%^RESET%^ %^RED%^and%^RESET%^ %^YELLOW%^yellow%^RESET%^%^RED%^. Her dark eyes seem alert and intelligent, almost brimming with a very unusual sense of humor. Occasionally, her small%^RESET%^ %^BOLD%^%^BLACK%^black tongue%^RESET%^ %^RED%^tastes the air about her.%^RESET%^","id":({"snake","companion",}),"short":"%^BOLD%^%^BLACK%^A tiny%^RESET%^ %^RED%^s%^RESET%^%^BOLD%^%^BLACK%^c%^RESET%^%^YELLOW%^a%^RESET%^%^BOLD%^%^BLACK%^r%^RESET%^%^RED%^l%^RESET%^%^BOLD%^%^BLACK%^e%^RESET%^%^YELLOW%^t%^RESET%^ %^RED%^k%^RESET%^%^BOLD%^%^BLACK%^i%^RESET%^%^YELLOW%^n%^RESET%^%^BOLD%^%^BLACK%^g%^RESET%^%^RED%^s%^RESET%^%^BOLD%^%^BLACK%^n%^RESET%^%^YELLOW%^a%^BOLD%^%^BLACK%^k%^RESET%^%^RED%^e%^RESET%^","adreniline":0,"condition":100,"race":"snake",])
+cap_name "Snake"
+true_name "snake"
+creator "/d/magic/obj/scompanion#5851"
+identified ({})
+studied ({})
+studied_failed ([])
+magic_properties ({})
+item_owners ({})
+item_owner_props "01100"
+player_data (["general":(["alignment":8,"extra_hp":0,"max_hp":16,"max_sp":1,"hp":16,"experience":175,"sp":1,]),])
+magic (["points":15,"max points":70,])
+severed ([])
+healing ([])
+limbs ({"left forepaw","left foreleg","torso","right forepaw","right foreleg","left rear paw","left rear leg","right rear paw","right rear leg","head",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":5,])
+nwps ([])
+toAttack -1
+atnames ({})
+wimpydir "out"
+attackers ({})
+hunters ({})
+combat_vars (["blindfolded":0,"bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_messages (["bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_counters (["block_attack":0,"asleep":0,"tripped":0,"gagged":0,"healing":0,"blindfolded":0,"bound":0,"unconscious":0,"blinded":0,])
+env_var ([])
+ok_to_heal 1171
+player_age 340
+divine_domain ({})
+quest_spells ({})
+gender "female"
+stats (["charisma":2,"dexterity":2,"wisdom":2,"strength":2,"intelligence":2,"constitution":2,])
+time_delay ([])
+lost_cl_spell_level 9
+lost_wiz_spell_level 9
+lost_psi_spell_level 9
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 10
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+num_hand 2
+num_dice 1
+type 4
+weapon_type "slashing"
+attack_limbs ({"right forepaw","left forepaw",})
+longdesc "%^RED%^is just over a foot long. Her slender body is brightly colored with bands of%^RESET%^ %^BOLD%^%^BLACK%^black%^RESET%^%^RED%^,%^RESET%^ %^BOLD%^%^RED%^scarlet%^RESET%^ %^RED%^and%^RESET%^ %^YELLOW%^yellow%^RESET%^%^RED%^. Her dark eyes seem alert and intelligent, almost brimming with a very unusual sense of humor. Occasionally, her small%^RESET%^ %^BOLD%^%^BLACK%^black tongue%^RESET%^ %^RED%^tastes the air about her.%^RESET%^"
+owner 

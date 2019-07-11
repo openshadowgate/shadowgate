@@ -1,0 +1,22 @@
+#d/magic/spellbook.c
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadow/mon/wizbert#14907"
+material 0
+magic_properties 0
+set_trap_func 0
+trap_set 0
+trap_trigger 0
+trap_ref 0
+spells (["sleep":1,])
+magic 0
+mID 0
+bookdesc 0
+owner "raveena"
+restore 0
+temp 0
+spells_at_level 0
+in_mind 0

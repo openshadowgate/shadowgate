@@ -1,0 +1,14 @@
+#d/magic/psiCompAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "tabor"
+owner "kole"
+components (["rose quartz":25,"sodalite":25,"blue lace agate":25,"rhodonite":25,"peridot":25,"dallyhanite":25,"yellow calcite":25,"banded amethyst":25,"blue diamond":25,"red jasper":25,"sunstone":25,"unakite":25,"rhodochrosite":25,"clear quartz":25,"aventurine":25,"flowstone":25,"tektite":25,"jade":25,"sapphire":25,"tourmaline":25,"larvikite":25,"green moss agate":25,])

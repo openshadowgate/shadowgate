@@ -1,0 +1,34 @@
+#d/magic/magic_book.c
+trap_data ([])
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"An ornate book%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#559004"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["spider climb":2,"monster summoning 1":3,"augmentation":2,"lightning bolt":3,"magic missile":1,"wall of fire":4,"detect invisibility":2,"protection from scrying":3,"dimensional lock":9,"color spray":1,"detect magic":1,"sonic shield":4,"scorcher":2,"invisibility":2,"hideous laughter":2,"acid arrow":2,"web":2,"spell turning":7,"break curse":5,"animate dead":4,"shield":1,"frost orb":3,"burning hands":1,])
+magic ({"acid arrow","augmentation","break curse","burning hands","color spray","detect magic","dimensional lock","frost orb","hideous laughter","invisibility","magic missile","monster summoning 1","scorcher","shield","sonic shield","spell turning","spider climb","wall of fire","web",})
+mID 0
+bookdesc 0
+owner "jenkem"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

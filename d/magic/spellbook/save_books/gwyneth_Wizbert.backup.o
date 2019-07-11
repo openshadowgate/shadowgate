@@ -1,0 +1,36 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props (["died time":1158260249,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/newbie/mon/zabeth"
+cursed "gwyneth"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString " (wielded in left hand)"
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["spider climb":2,"summon companion":1,"ball lightning":5,"teleport":5,"chill touch":1,"powerword kill":9,"shout":4,"cone of cold":5,"magic missile":1,"dragon scales":6,"protection from scrying":3,"sonic shield":4,"blink":3,"detect scrying":4,"invisibility":2,"teleport without error":7,"hideous laughter":2,"web":2,"fireball":3,"ice storm":4,"water breathing":3,"sonic orb":3,"fly":3,"static field":4,"greater dispel magic":7,"sleep":1,"faithful phantom guardians":6,"monster summoning 1":3,"mind fog":6,"darkness":1,"prismatic spray":7,"stoneskin":4,"conjure elemental":5,"monster summoning 2":4,"heroism":3,"augmentation":2,"hold person":3,"lightning bolt":3,"armor":1,"color spray":1,"detect magic":1,"detect invisibility":2,"magic mirror":7,"daze":1,"scorcher":2,"lower resistance":5,"acid arrow":2,"gust of wind":4,"monster summoning 3":5,"tongues":3,"warriors constitution":6,"acid orb":3,"light":1,"vampiric touch":3,"chain lightning":6,"frost orb":3,"monster summoning 4":6,"burning hands":1,"disintegrate":8,])
+magic ({"acid arrow","acid orb","armor","augmentation","ball lightning","blink","burning hands","chain lightning","chill touch","color spray","cone of cold","darkness","daze","detect invisibility","detect magic","detect scrying","disintegrate","dragon scales","faithful phantom guardians","fly","frost orb","greater dispel magic","gust of wind","heroism","hideous laughter","hold person","ice storm","invisibility","light","lightning bolt","lower resistance","magic mirror","magic missile","mind fog","monster summoning 1","monster summoning 2","monster summoning 3","monster summoning 4","powerword kill","prismatic spray","protection from scrying","scorcher","shout","sleep","sonic orb","sonic shield","spider climb","static field","stoneskin","summon companion","teleport","teleport without error","tongues","vampiric touch","warriors constitution","water breathing","web",})
+mID 0
+bookdesc 0
+owner "gwyneth"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

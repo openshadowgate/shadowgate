@@ -1,0 +1,54 @@
+#d/magic/obj/companion.c
+props (["no dominate":1,])
+ob_data (["long":"%^YELLOW%^A %^BLACK%^chocolate%^RESET%^%^ORANGE%^ brown%^YELLOW%^ Capuchin monkey%^RESET%^ %^YELLOW%^is dressed in a %^GREEN%^light green%^YELLOW%^ short sleeved shirt.  The small shirt has %^WHITE%^silver buttons%^YELLOW%^ down it's front.  His %^BLACK%^chocolate %^RESET%^%^ORANGE%^brown%^BOLD%^ fur is sleek, as if it's been recently brushed and cleaned.  His %^BLACK%^dark eyes%^YELLOW%^ are large and alert.  A %^WHITE%^white ring%^YELLOW%^ of fur seperates the darker fur from his bare face.  His tiny hands and feet have even smaller nails.  A pair of %^BLUE%^blue%^YELLOW%^ and %^RESET%^%^MAGENTA%^purple%^YELLOW%^ plaid shorts covers the lower portion of his body, with a hole cut out for his long lean tail.","id":({"monkey","companion",}),"short":"%^YELLOW%^A %^BLACK%^chocolate%^RESET%^%^ORANGE%^ brown%^YELLOW%^ Capuchin monkey%^RESET%^","adreniline":0,"condition":100,"race":"monkey",])
+cap_name "Monkey"
+true_name "monkey"
+creator "/d/magic/obj/scompanion#199577"
+identified ({})
+studied ({})
+studied_failed ([])
+player_data (["general":(["alignment":8,"extra_hp":0,"max_hp":84,"max_sp":1,"hp":84,"experience":175,"sp":1,]),])
+magic (["points":15,"max points":70,])
+severed ([])
+healing ([])
+limbs ({"left forepaw","left foreleg","torso","right forepaw","right foreleg","left rear paw","left rear leg","right rear paw","right rear leg","head",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":5,])
+nwps ([])
+toAttack -1
+atnames ({})
+wimpydir "out"
+attackers ({})
+hunters ({})
+combat_vars (["blindfolded":0,"bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_messages (["bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_counters (["asleep":0,"tripped":0,"gagged":0,"blindfolded":0,"bound":0,"unconscious":0,"blinded":0,])
+ok_to_heal 1059
+player_age 116
+gender "male"
+stats (["charisma":2,"dexterity":2,"wisdom":2,"strength":2,"intelligence":2,"constitution":2,])
+time_delay ([])
+lost_cl_spell_level 7
+lost_wiz_spell_level 9
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 2
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+num_hand 2
+num_dice 1
+type 4
+weapon_type "slashing"
+attack_limbs ({"right forepaw","left forepaw",})
+longdesc "%^YELLOW%^is dressed in a %^GREEN%^light green%^YELLOW%^ short sleeved shirt.  The small shirt has %^WHITE%^silver buttons%^YELLOW%^ down it's front.  His %^BLACK%^chocolate %^RESET%^%^ORANGE%^brown%^BOLD%^ fur is sleek, as if it's been recently brushed and cleaned.  His %^BLACK%^dark eyes%^YELLOW%^ are large and alert.  A %^WHITE%^white ring%^YELLOW%^ of fur seperates the darker fur from his bare face.  His tiny hands and feet have even smaller nails.  A pair of %^BLUE%^blue%^YELLOW%^ and %^RESET%^%^MAGENTA%^purple%^YELLOW%^ plaid shorts covers the lower portion of his body, with a hole cut out for his long lean tail."
+owner 

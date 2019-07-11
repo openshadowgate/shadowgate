@@ -1,0 +1,29 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":77569160,"stolen":(["al-Radin":(["difficulty":36,"max value":0,]),]),])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage-thief#49186"
+cursed "melgor"
+identified ({})
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+spells (["dispel magic":3,"chill touch":1,"teleport":5,"monster summoning 5":7,"powerword kill":9,"know alignment":2,"cone of cold":5,"magic missile":1,"protection from scrying":3,"dragon scales":6,"monster summoning 6":8,"detect scrying":4,"blink":3,"teleport without error":7,"invisibility":2,"hideous laughter":2,"web":2,"powerword stun":7,"fireball":3,"ice storm":4,"monster summoning 7":9,"water breathing":3,"contingency":6,"animate dead":5,"faithful phantom guardians":6,"conjure fire elemental":5,"sleep":1,"garble":3,"monster summoning 1":3,"prismatic spray":7,"darkness":1,"stoneskin":4,"identify":1,"monster summoning 2":4,"hold person":3,"wall of fire":4,"conjure earth elemental":5,"rope trick":2,"armor":1,"lightning bolt":3,"detect invisibility":2,"detect magic":1,"color spray":1,"magic mirror":7,"scorcher":2,"conjure air elemental":5,"lower resistance":5,"ray of enfeeblement":2,"acid arrow":2,"monster summoning 3":5,"tongues":3,"meteor swarm":9,"finger of death":7,"domination":5,"warriors constitution":6,"incendiary cloud":8,"conjure water elemental":5,"light":1,"vampiric touch":3,"chain lightning":6,"monster summoning 4":6,"burning hands":1,])
+magic ({"acid arrow","animate dead","armor","blink","burning hands","chain lightning","chill touch","color spray","cone of cold","conjure air elemental","conjure earth elemental","conjure fire elemental","conjure water elemental","contingency","darkness","detect invisibility","detect magic","detect scrying","dispel magic","domination","dragon scales","faithful phantom guardians","finger of death","fireball","garble","hideous laughter","hold person","ice storm","identify","incendiary cloud","invisibility","know alignment","light","lightning bolt","lower resistance","magic mirror","magic missile","meteor swarm","monster summoning 1","monster summoning 2","monster summoning 3","monster summoning 4","monster summoning 5","monster summoning 6","monster summoning 7","powerword kill","powerword stun","prismatic spray","protection from scrying","ray of enfeeblement","rope trick","scorcher","sleep","stoneskin","teleport","teleport without error","vampiric touch","wall of fire","warriors constitution","water breathing","web",})
+mID 0
+bookdesc 0
+owner "melgor"
+restore 0
+spells_at_level 0
+in_mind 0

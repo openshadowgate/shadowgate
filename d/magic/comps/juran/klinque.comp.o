@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "juran"
+owner "klinque"
+components (["small horn":50,"diamond dust":1,"granite dust":8,"eyelash":35,"water":50,"blessed leather":31,"bit of bone":50,"dragon scale":14,"incense stick":48,"ivory portal":1,"charcoal":9,"zinc":50,"copper":35,"small candle":25,"firefly":20,"gum arabic":40,"drop of blood":10,"powdered silver":40,"tiny bag":15,"iron rod":2,"corn extract":50,])

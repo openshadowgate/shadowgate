@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "shadow"
+owner "lissa"
+components (["small drum":26,"granite dust":1,"eyelash":38,"disc of bronze":28,"blessed leather":26,"water":9,"dart":6,"incense stick":13,"dragon scale":1,"tiny bell":15,"emerald":6,"talc":10,"owlfeather":20,"small candle":9,"gum arabic":19,"drop of blood":6,"powdered silver":10,"earth from grave":8,"tiny bag":9,"rose petals":5,"piece of reed":9,"will o wisp essence":14,"pinch of special dust":10,"piece of iron":8,"small diamond":2,])

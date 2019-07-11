@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "santos"
+components (["diamond dust":3,"small drum":50,"bat guano":50,"granite dust":8,"eyelash":35,"powdered chalk":10,"blessed leather":35,"water":50,"sand":50,"minute tarts":50,"eyelash of ogre-mage":40,"clay model ziggurat":50,"sulfur":20,"talc":35,"owlfeather":30,"small candle":40,"spider web":40,"gum arabic":28,"drop of blood":16,"powdered silver":10,"crystal":9,"tiny bag":40,"iron rod":30,"carbon":50,"piece of steel":50,"corn extract":30,"quicksilver":45,"pinch of special dust":40,])

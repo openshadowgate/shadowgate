@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "danar"
+components (["diamond dust":50,"bat guano":50,"granite dust":50,"crane's feather":29,"eye of roc":9,"phosphorus":50,"clay model ziggurat":50,"sulfur":50,"nitric acid":6,"incense stick":50,"emerald":50,"talc":40,"zinc":17,"owlfeather":35,"copper":33,"small candle":50,"spider web":50,"drop of blood":49,"powdered silver":40,"crystal":50,"tiny bag":50,"iron rod":40,"pearl":35,"rose petals":45,])

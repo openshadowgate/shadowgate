@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+id "shadow"
+owner "mithras"
+components (["flint":50,"granite dust":3,"powdered chalk":40,"blessed leather":10,"eyelash of ogre-mage":35,"dart":25,"clay model ziggurat":25,"nitric acid":42,"dragon scale":23,"zinc":42,"owlfeather":20,"adders stomach":30,"piece of mirror":30,"dung scrapings":20,"feather":40,"piece of steel":50,"parchment":20,"tiny hearing trumpet":30,"corn extract":50,"beeswax":20,"quicksilver":35,])

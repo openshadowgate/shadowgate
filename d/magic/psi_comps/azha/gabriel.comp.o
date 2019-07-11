@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/azha/town/crystal"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "azha"
+owner "gabriel"
+components (["mottled jasper":50,"lapiz lazuli":50,"malachite":50,"blue lace agate":8,"dallyhanite":50,"peridot":50,"yellow calcite":50,"banded amethyst":48,"red jasper":48,"hematite":50,"wemic tears":50,"seraphinite":50,"smoky quartz":50,"rhodochrosite":50,"bloodstone":50,"clear quartz":50,"apatite":50,"aventurine":50,"flowstone":50,"jade":50,"rutilated quartz":2,"garnet":50,"black star sapphire":1,"rose quartz":50,"sodalite":48,"danburite":50,"blue diamond":3,"sunstone":50,"unakite":50,"orange calcite":50,"citrine quartz":50,"amethyst":50,"adamite":50,"blue calcite":50,"tektite":50,"snowflake obsidian":50,"tourmaline":50,"carnelian":50,])

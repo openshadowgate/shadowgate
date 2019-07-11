@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":1233111918,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"a musty old tome%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/fighter-mage#11706"
+cursed "hasselin"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString " (wielded in right hand and left hand)"
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["summon companion":1,"chill touch":1,"monster summoning 5":7,"sonic shield":4,"invisibility":2,"powerword stun":7,"lightning orb":3,"monster summoning 7":9,"contingency":6,"fly":3,"mind fog":6,"prismatic spray":7,"identify":1,"heroism":3,"wall of fire":4,"daze":1,"detect magic":1,"magic mirror":7,"lower resistance":5,"ray of enfeeblement":2,"domination":5,"meteor swarm":9,"warriors constitution":6,"acid orb":3,"vampiric touch":3,"light":1,"frost orb":3,"dispel magic":3,"teleport":5,"powerword kill":9,"shout":4,"cone of cold":5,"magic missile":1,"acid breath":5,"protection from scrying":3,"dragon scales":6,"blink":3,"detect scrying":4,"hideous laughter":2,"teleport without error":7,"web":2,"fireball":3,"ice storm":4,"water breathing":3,"sonic orb":3,"static field":4,"sleep":1,"monster summoning 1":3,"darkness":1,"stoneskin":8,"conjure elemental":5,"monster summoning 2":4,"augmentation":2,"hold person":3,"rope trick":2,"armor":1,"lightning bolt":3,"detect invisibility":2,"color spray":1,"scorcher":2,"acid arrow":2,"gust of wind":4,"monster summoning 3":5,"tongues":3,"greater shout":8,"burning hands":1,])
+magic ({"summon companion","chill touch","identify","daze","detect magic","light","magic missile","sleep","darkness","armor","color spray","burning hands","invisibility","ray of enfeeblement","hideous laughter","web","augmentation","rope trick","detect invisibility","scorcher","acid arrow","lightning orb","fly","heroism","acid orb","vampiric touch","frost orb","dispel magic","protection from scrying","blink","fireball","water breathing","sonic orb","monster summoning 1","hold person","lightning bolt","tongues","sonic shield","wall of fire","shout","detect scrying","ice storm","static field","monster summoning 2","gust of wind","lower resistance","domination","teleport","cone of cold","acid breath","conjure elemental","monster summoning 3","contingency","mind fog","warriors constitution","dragon scales","monster summoning 5","powerword stun","prismatic spray","magic mirror","teleport without error","stoneskin","greater shout","monster summoning 7","meteor swarm","powerword kill",})
+mID 0
+bookdesc 0
+owner "hasselin"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

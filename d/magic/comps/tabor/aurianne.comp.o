@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "aurianne"
+components (["granite dust":30,"crane's feather":26,"aluminum chaff":11,"eyelash of ogre-mage":20,"bit of bone":3,"zinc":45,"copper":29,"adders stomach":7,"animal hair":12,"small candle":8,"glass rod":5,"spider web":4,"powdered silver":2,"tiny bag":3,"iron rod":21,"tiny hearing trumpet":7,"silver pin":50,"diamond dust":37,"colored sand":2,"eye of roc":20,"copper wire":1,"clay model ziggurat":19,"nitric acid":50,"powdered amber":1,"charcoal":1,"soft clay":13,"owlfeather":3,"ogre's eyelash":13,"piece of bone":4,"gum arabic":38,"drop of blood":3,"fur":2,"exotic feather":18,"parchment":17,"beeswax":11,"quicksilver":4,])

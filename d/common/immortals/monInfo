@@ -1,0 +1,82 @@
+
+	 		level	hps	exp	str	dex 	AC (w/dex)
+			--------------------------------------------------
+Newbie	rat		2	20 for 	75 	 3	3	8 : 12
+	xvart 		3	30 hp 	120      3	3	6 : 10
+	xv sham		3	70	1000	 3	4	4 : 7
+	bee - newbie	1	3	30		20	6 : 2
+	bear -n for	2	26	80	16	 3	7 : 11
+	orc bandit F/T  5/5     40	180	18	16	6 : 4
+	bugb guard	3	35	150	20	10	6 : 6
+	hobgoblin	5	39	160	17	10	7 : 7
+	kobold		2	20	60	15	16	8 : 6
+	drow fight	7	47	800	17	13	2 : 2
+	drow f/t	6/6	70	900	14	18	5 : 1
+	zombie		5	52	80	18	 9	8 : 8
+	snake		1	20	25	 5	14	10: 10
+
+goblins gatekeeper	5	55	175	7	7	5 : 5
+	ranger		5	78	200	16	18	4 : 0
+	soldier		4	37	140	14	14	6 : 6
+	royal		10	105	750	17	15	2 : 1
+	royal		9	89	675	17	15	2 : 1
+	king		10	95	1200	18	17	2 : -1
+
+echoes/dd kob capt.F/T	8/8	67	500	16	16	4 : 2
+	child F/T	4/6	46	250	15	12	8 : 8
+	dirty kob F/T	6/6	52	350	15	12	6 : 6
+	scaly F/M/T	10/10	92	600	16	16	2 : 0
+
+yntala
+	dire wolf	10	89	2500	18	15	-2:-3
+	bear		12	146	1000	18	13	-2:-2
+	yuan-ti		18/18	115	4000	15	13	-5 : -5
+	yuan-tip F/R	10/10	115	3000	11	13	-3 : -3	
+	girallon	16	247	1200	19	16	-3 : -5
+	hag F/T		12/12	178	12000	19	12	-2 : -2
+	lep F/M		13/11	240	5500	18	15	-2 : -3
+	lizard		4	25	20	3	13	 4 : 4
+	shark		15	83	400	22	20	-4 : -8
+	
+
+orc camp bandit F/T	15/12	175	2500	17	17	4 : 1
+	gore		20	250	10000	19	15	1 : 0
+	raider		10	125	1700	17	12	7 : 7
+
+
+pirates cove (guard-types in groups of 4, crew types travel in groups of 2-5. Most bosses have extra crew-types in the room)
+	crew t		18	130	1500	17	17	0 : -3
+	crew2 f		16	150	1500	18	15	-1 : -2
+	crew3 m		10	110	1500	10	15	0 : -1
+	guard t		18	140	1500	17	18	-1 : -5
+	guard2 f	16	160	1500	18	15	-2 : -3
+	guard3 m	13	120	1500	10	15	-2 : -3
+	1st mate f	24	250	5000	19	13	-6 : -6
+	2nd mate f	19	200	4000	18	15	-5 : -6
+	mate 2 ft	22/23	250	5000	19	16	-5 : -8
+	wizard m	18	175	5000	10	16	-6 : -8
+	captain 1 f	24	300	7500	20	12	-5 : -8
+	captain 2 f	25	350	8000	18	17	-6 : -9
+	bowyer ft	20/22	200	5000	16	18	-3 : -7
+	rogue t		17	120	1500	17	18	0 : -4
+	cedwin ft	20/22	280	8000	14	19	-6 : -10
+			
+		
+Deku
+ 
+Azha- Desert Sun Theater
+r = random
+    	pink siren f/m		18/18		170(+r50)	800(+r500)	17	18	-4 to -6
+    	purple siren m/t 	18/18   	170(+r50)	800(+r500)	17	18	-4 to -6
+    	bard marionette m	21        	170(+r30)	1000(+r300)	15	18	0:-4
+    	caval marion ca		21	    	200(r50)	1000(r300)	18	15	-5:-6
+    	cleric marion cl	21	    	190(r40)	1000(r300)	17	15	-4:-5
+	fighter marion f	21 	    	200(r50)	1000(r300)	18	16	-3:-5
+	ranger marion r/cl	21       	200(r30)	1000(r300)	18	18	-2:-6
+	mage marion m		21	    	170(r30)	1000(r300)	17	18	5:1
+	thief marion t		21	    	200(r30)	1000(r300)	17	18	-1:-5
+	cloaker f/c		18	    	200(r50)	1000(r500)	19	16	-2:-4
+	mimic f			20	    	200(r50)	1000(r500)	20	15	-5:-5
+	ivashka f/t		24/24      	400(r50)	6000(r500)	19	16	-2:-4
+	giant marion f/c/m	20/20/20 	400(r5)		4000(r2000) 	20	17	-3:-6
+	mashiva f/m/c		25/25/25   	500(r50)	14000(r2000)	19	18	-6:-10

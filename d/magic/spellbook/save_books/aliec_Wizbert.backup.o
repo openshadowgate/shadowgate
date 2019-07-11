@@ -1,0 +1,22 @@
+#d/magic/spellbook.c
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/fighter-cleric-mage#8276"
+material 0
+magic_properties 0
+set_trap_func 0
+trap_set 0
+trap_trigger 0
+trap_ref 0
+spells (["monster summoning 1":3,"teleport":5,"chill touch":1,"stoneskin":4,"hold person":3,"cone of cold":5,"conjure earth elemental":5,"lightning bolt":3,"magic missile":1,"armor":1,"wall of fire":4,"rope trick":2,"color spray":1,"scorcher":2,"conjure air elemental":5,"blink":3,"hideous laughter":2,"invisibility":2,"ray of enfeeblement":2,"acid arrow":2,"web":2,"fireball":3,"ice storm":4,"domination":5,"vampiric touch":3,"light":1,"conjure water elemental":5,"conjure fire elemental":5,"sleep":1,"burning hands":1,])
+magic ({"acid arrow","armor","blink","burning hands","chill touch","color spray","cone of cold","conjure air elemental","conjure earth elemental","conjure fire elemental","conjure water elemental","domination","fireball","hideous laughter","hold person","ice storm","invisibility","light","lightning bolt","magic missile","monster summoning 1","ray of enfeeblement","rope trick","scorcher","sleep","stoneskin","teleport","vampiric touch","wall of fire","web",})
+mID 0
+bookdesc 0
+owner "aliec"
+restore 0
+temp 1
+spells_at_level 0
+in_mind 0

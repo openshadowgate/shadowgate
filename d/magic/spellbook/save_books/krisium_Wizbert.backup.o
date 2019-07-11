@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":-550539886,"stolen":(["ryzan":(["difficulty":29,"max value":0,]),]),])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^BOLD%^%^BLACK%^A %^BOLD%^%^RED%^f%^RESET%^%^RED%^l%^BOLD%^%^RED%^e%^RESET%^%^RED%^s%^BOLD%^%^RED%^h%^BOLD%^%^BLACK%^-bound tome%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#141323"
+cursed "krisium"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["spider climb":2,"summon companion":1,"chill touch":1,"teleport":5,"animus blast":9,"bestow curse":4,"know alignment":2,"magic missile":1,"invisibility":2,"web":2,"fireball":3,"blindness":2,"sonic orb":3,"fly":3,"animate dead":5,"static field":4,"faithful phantom guardians":6,"sleep":1,"darkness":1,"identify":1,"conjure elemental":5,"monster summoning 2":4,"augmentation":2,"lightning bolt":3,"rope trick":2,"armor":1,"heart of stone":7,"detect magic":1,"detect invisibility":2,"scorcher":2,"acid arrow":2,"light":1,"monster summoning 4":6,"burning hands":1,])
+magic ({"summon companion","chill touch","magic missile","sleep","darkness","identify","armor","detect magic","light","burning hands","spider climb","know alignment","invisibility","web","blindness","augmentation","rope trick","detect invisibility","scorcher","acid arrow","fireball","sonic orb","fly","lightning bolt","bestow curse","static field","monster summoning 2","teleport","animate dead","conjure elemental","monster summoning 4","heart of stone","animus blast",})
+mID 0
+bookdesc 0
+owner "krisium"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

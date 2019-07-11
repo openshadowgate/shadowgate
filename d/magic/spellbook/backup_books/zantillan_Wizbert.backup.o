@@ -1,0 +1,41 @@
+#/d/magic/spellbook.c
+trap_data ([])
+encumbrance 10
+size 0
+ac 0
+decayRate 100
+decayStatus 0
+currentStatus 100
+props (["repairtype":({"tailor","jewel","woodwork","leatherwork",}),])
+serial_number 0
+ob_data (["condition":100,"value":0,"updated time":1514099433,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),"short":"A Book","long":"This is a spellbook.",])
+cap_name "Spell book"
+true_name "spell book"
+creator "/std/class/mage"
+cursed "zantillan"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["invisibility":2,"rope trick":2,"summon companion":1,"shout":4,"iron body":9,"color spray":1,"animate dead":4,"darkness":2,"magic missile":1,"protection from scrying":3,"sunburst":9,"domination":5,"mages sword":7,"screen":8,"wall of fire":4,"wall of stone":5,"contingency":6,"augmentation":2,"ray of enfeeblement":2,"fireball":3,"scorcher":2,"resist energy":2,"dragon scales":6,"sleep":1,"water breathing":3,"ice storm":4,"fear":4,"tongues":3,"warriors constitution":6,"spider climb":2,"monster summoning 4":6,"armor":1,"monster summoning 3":5,"transformation":6,"fog cloud":2,"monster summoning 2":4,"monster summoning 1":3,"web":2,"greater shout":8,"magic mirror":7,"teleport":5,"chain lightning":6,"gust of wind":4,"levitate":2,"hold person":3,"finger of death":7,"shocking grasp":1,"burning hands":1,"conjure elemental":5,"blink":3,"detect invisibility":2,"fire shield":4,"detect magic":1,"faithful phantom guardians":6,"detect scrying":4,"identify":1,"cone of cold":5,"ball lightning":5,"garble":3,"lightning bolt":3,"acid arrow":2,])
+magic ({"summon companion","color spray","magic missile","sleep","armor","shocking grasp","burning hands","detect magic","identify","invisibility","rope trick","darkness","augmentation","ray of enfeeblement","scorcher","resist energy","spider climb","fog cloud","web","levitate","detect invisibility","acid arrow","protection from scrying","fireball","water breathing","tongues","monster summoning 1","hold person","blink","garble","lightning bolt","shout","animate dead","wall of fire","ice storm","fear","monster summoning 2","gust of wind","fire shield","detect scrying","domination","wall of stone","monster summoning 3","teleport","conjure elemental","cone of cold","ball lightning","contingency","dragon scales","warriors constitution","monster summoning 4","transformation","chain lightning","faithful phantom guardians","mages sword","magic mirror","finger of death","screen","greater shout","iron body","sunburst",})
+mID 0
+bookdesc 0
+owner "zantillan"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

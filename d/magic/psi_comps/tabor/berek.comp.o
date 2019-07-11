@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "berek"
+components (["aventurine":20,"clear quartz":50,"danburite":10,"amethyst":18,"sunstone":50,"apatite":20,"bloodstone":50,"dallyhanite":32,])

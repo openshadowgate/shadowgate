@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "shadow"
+owner "adrenas"
+components (["diamond dust":1,"bat guano":10,"granite dust":20,"eyelash":30,"powdered chalk":5,"eye of roc":2,"aluminum chaff":5,"sulfur":10,"nitric acid":16,"emerald":10,"zinc":16,"talc":5,"owlfeather":16,"copper":16,"small candle":30,"firefly":20,"gum arabic":30,"drop of blood":4,"powdered silver":15,"tiny bag":30,"crystal":21,"phosphorescent moss":6,"iron rod":40,"pearl":16,])

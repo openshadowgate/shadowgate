@@ -1,0 +1,31 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":1935126986,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadow/mon/wizbert#26784"
+cursed 0
+material 0
+magic_properties 0
+set_trap_func 0
+trap_set 0
+trap_trigger 0
+trap_ref 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+spells (["dispel magic":3,"chill touch":1,"identify":1,"cone of cold":5,"know alignment":2,"conjure earth elemental":5,"armor":1,"magic missile":1,"detect magic":1,"detect invisibility":2,"invisibility":2,"hideous laughter":2,"acid arrow":2,"monster summoning 3":5,"finger of death":7,"chain lightning":6,"burning hands":1,"sleep":1,])
+magic ({"chill touch","identify","armor","magic missile","detect magic","burning hands","sleep","know alignment","detect invisibility","invisibility","hideous laughter","acid arrow","dispel magic","cone of cold","conjure earth elemental","monster summoning 3","chain lightning","finger of death",})
+mID 0
+bookdesc 0
+owner "cyreen"
+restore 0
+temp 0
+spells_at_level 0
+in_mind 0

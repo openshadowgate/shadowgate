@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "celine"
+components (["owlfeather":19,"piece of bone":6,"firefly":10,"spider web":26,"blessed leather":5,"eyelash of ogre-mage":6,"minute tarts":8,"iron rod":4,"pearl":19,"piece of reed":8,"pinch of special dust":7,])

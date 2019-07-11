@@ -1,0 +1,61 @@
+#d/magic/obj/companion.c
+props (["no dominate":1,])
+ob_data (["long":"%^RESET%^%^CYAN%^a %^BOLD%^%^WHITE%^white %^RESET%^%^CYAN%^cat with one %^BOLD%^%^CYAN%^sky blue%^RESET%^%^CYAN%^ eye and one of %^BOLD%^%^GREEN%^grass green %^RESET%^ %^RESET%^%^CYAN%^is a male cat with %^BOLD%^%^WHITE%^pure white fur%^RESET%^%^CYAN%^, a %^BOLD%^%^BLACK%^j%^BLUE%^e%^BLACK%^t bl%^BLUE%^a%^BLACK%^ck n%^BLUE%^o%^BLACK%^se%^RESET%^%^CYAN%^, and %^BOLD%^%^GREEN%^mi%^CYAN%^sm%^GREEN%^at%^CYAN%^ch%^GREEN%^ed %^CYAN%^green%^RESET%^%^CYAN%^ and %^BOLD%^%^GREEN%^blue%^RESET%^%^CYAN%^ eyes. He surveys the world with a %^RESET%^%^MAGENTA%^regal air%^CYAN%^ and ignores most people. Oddly, he occasionally seems to blink out of vision or grow %^BOLD%^%^WHITE%^tr%^CYAN%^a%^WHITE%^ns%^CYAN%^p%^WHITE%^ar%^CYAN%^e%^WHITE%^nt.%^RESET%^","id":({"cat","companion",}),"short":"%^RESET%^%^CYAN%^a %^BOLD%^%^WHITE%^white %^RESET%^%^CYAN%^cat with one %^BOLD%^%^CYAN%^sky blue%^RESET%^%^CYAN%^ eye and one of %^BOLD%^%^GREEN%^grass green %^RESET%^","adreniline":0,"condition":100,"race":"cat",])
+cap_name "Cat"
+true_name "cat"
+creator "/d/magic/obj/scompanion#155206"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+player_data (["general":(["alignment":4,"extra_hp":0,"max_hp":12,"max_sp":1,"hp":12,"experience":175,"sp":1,]),])
+magic (["points":15,"max points":70,])
+severed ([])
+healing ([])
+limbs ({"left forepaw","left foreleg","torso","right forepaw","right foreleg","left rear paw","left rear leg","right rear paw","right rear leg","head",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":5,])
+nwps ([])
+toAttack -1
+atnames ({})
+wimpydir "out"
+attackers ({})
+hunters ({})
+combat_vars (["blindfolded":0,"bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_messages (["bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_counters (["block_attack":0,"asleep":0,"tripped":0,"gagged":0,"healing":0,"blindfolded":0,"bound":0,"unconscious":0,"blinded":0,])
+env_var ([])
+ok_to_heal 1135
+player_age 268
+divine_domain ({})
+quest_spells ({})
+gender "male"
+stats (["charisma":2,"dexterity":2,"wisdom":2,"strength":2,"intelligence":2,"constitution":2,])
+time_delay ([])
+lost_cl_spell_level 9
+lost_wiz_spell_level 9
+lost_psi_spell_level 9
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 46
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+num_hand 2
+num_dice 1
+type 4
+weapon_type "slashing"
+attack_limbs ({"right forepaw","left forepaw",})
+longdesc "%^RESET%^%^CYAN%^is a male cat with %^BOLD%^%^WHITE%^pure white fur%^RESET%^%^CYAN%^, a %^BOLD%^%^BLACK%^j%^BLUE%^e%^BLACK%^t bl%^BLUE%^a%^BLACK%^ck n%^BLUE%^o%^BLACK%^se%^RESET%^%^CYAN%^, and %^BOLD%^%^GREEN%^mi%^CYAN%^sm%^GREEN%^at%^CYAN%^ch%^GREEN%^ed %^CYAN%^green%^RESET%^%^CYAN%^ and %^BOLD%^%^GREEN%^blue%^RESET%^%^CYAN%^ eyes. He surveys the world with a %^RESET%^%^MAGENTA%^regal air%^CYAN%^ and ignores most people. Oddly, he occasionally seems to blink out of vision or grow %^BOLD%^%^WHITE%^tr%^CYAN%^a%^WHITE%^ns%^CYAN%^p%^WHITE%^ar%^CYAN%^e%^WHITE%^nt.%^RESET%^"
+owner 

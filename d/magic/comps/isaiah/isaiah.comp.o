@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/player_houses/isaiah/rooms/isscry"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "isaiah"
+owner "isaiah"
+components (["diamond dust":20,"zinc":47,"copper":47,"granite dust":50,"small candle":50,"spider web":28,"eye of roc":20,"water":50,"powdered silver":40,"tiny bag":50,"clay model ziggurat":50,"nitric acid":47,])

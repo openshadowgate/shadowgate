@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "iminia"
+components (["diamond dust":6,"bat guano":30,"eyelash":49,"blessed leather":33,"phosphorus":40,"water":50,"aluminum chaff":24,"bit of bone":16,"eyelash of ogre-mage":5,"sulfur":4,"dragon scale":10,"talc":19,"zinc":5,"piece of bone":6,"small candle":50,"firefly":50,"gum arabic":48,"spider web":17,"drop of blood":30,"dung scrapings":14,"tiny bag":50,"feather":40,"pearl":3,"parchment":50,"rose petals":50,"powdered rhubarb leaf":30,"clear crystal":19,"corn extract":50,"beeswax":22,"pinch of special dust":35,"diamond":15,"small diamond":11,])

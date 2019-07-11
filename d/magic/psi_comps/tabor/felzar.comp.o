@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "tabor"
+owner "felzar"
+components (["ectoplasmic crystal":2,"mottled jasper":50,"rutilated quartz":2,"garnet":10,"malachite":10,"peridot":50,"yellow calcite":20,"azurite":10,"danburite":10,"wemic tears":20,"seraphinite":27,"unakite":20,"sunstone":10,"bloodstone":20,"orange calcite":50,"clear quartz":10,"blue tigers eye":20,"leopard agate":50,"amethyst":10,"apatite":50,"adamite":5,"aventurine":50,"flowstone":10,"tektite":10,"snowflake obsidian":5,"jade":10,"tigers eye":10,"carnelian":10,])

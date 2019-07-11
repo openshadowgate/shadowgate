@@ -1,0 +1,10 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "tikan"
+components (["mottled jasper":50,"garnet":50,"lapiz lazuli":50,"malachite":40,"sodalite":50,"dallyhanite":20,"peridot":50,"yellow calcite":30,"banded amethyst":43,"red jasper":50,"hematite":50,"wemic tears":40,"sunstone":30,"unakite":50,"orange calcite":30,"bloodstone":30,"clear quartz":25,"citrine quartz":50,"leopard agate":50,"amethyst":25,"apatite":30,"flowstone":50,"adamite":40,"aventurine":30,"tektite":30,"snowflake obsidian":50,"jade":30,"tourmaline":20,"carnelian":30,])

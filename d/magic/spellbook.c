@@ -1,0 +1,673 @@
+//      Magic Book for Wizard Characters [v2.0]
+//      Thorn@Shadowgate
+//      10/10/94 [2.0: 6/8/95]
+//      General Wizard Class Items
+//      magic_book.c
+// fixed up the help and avatar commands so a non-mage avatar can see them, etc.
+// *Styx* 10/6/05, last change 2/05
+// made memorize delay mitigated by level and cut some of the spam *Styx* 6/4/06
+// added ability to memorize multiple copies of a spell from one command *Styx* 6/18/06
+
+#include <std.h>
+#include <daemons.h>
+#include <security.h>
+#include <magic.h>
+#include <ansi.h>
+#include <schoolspells.h>
+
+#define WIZ_LEV (int)TP->query_class_level("mage")
+#define CLS ESC+"[H"+ESC+"[2J"
+
+inherit OBJECT;
+
+void set_spellbook(string spell);
+string *query_spells();
+void set_spells(mapping spelllist);
+void remove_spellbook(string spell);
+int remove_spell(string spell);
+int query_spellbook(string spell);
+int look(string str);
+int memorize_spell(string str);
+int check_activity(string str);
+void flip(string str, int temp, object play, int num);
+void memorize2(string str, int temp, object play);
+int forget_spell(string str);
+int add_spell(string str);
+int help(string str);
+void line();
+void set_owner();
+int offer(string str);
+int add_all();
+string query_owner();
+void sort();
+void sort_two();
+private void swap(int i, int j);
+void do_old_spells_merge(object holder);
+void cull_non_school_spells(object holder);
+
+mapping spells = ([]);
+string *magic, *mID, bookdesc;
+string owner;
+int restore, *spells_at_level, *in_mind;
+
+
+int is_spellbook() {
+    return 1;
+}
+
+void create() {
+    ::create();
+    set_id( ({ "book", "bookx", "magic book", "spell book", "spellbook", "tome", "grimoire"}) );
+    set_weight(10);
+    set_value(0);
+    set_name("spell book");
+    set_short("A Book");
+    set_long("This is a spellbook.");
+    add_spell("detect magic");
+    add_spell("magic missile");
+}
+
+void init() {
+    string *mastered;
+    int i, masterflag;
+    ::init();
+    if (!owner)
+	{	
+        set_owner();
+	}
+    if(stringp(owner)) 
+	{
+        if (lower_case(owner) != owner)
+		{
+            owner = lower_case(owner);
+		}
+	}
+    add_action("memorize_spell", "memorize");
+    add_action("look", "look");
+    add_action("help", "help");
+    add_action("offer","offer");
+    add_action("mydesc","setdesc");
+    add_action("report_spells","report");
+    if((string)TP->query_name() == owner) {
+        mastered = ({});
+        masterflag = 0;
+        if(sizeof(TP->query_mastered_spells())) {
+            mastered += (string)TP->query_mastered_spells();
+
+            for(i = 0;i < sizeof(mastered); i++) {
+                if(member_array(mastered[i],keys(spells)) == -1) {
+                    set_spellbook(mastered[i]);
+                    masterflag = 1;
+                }
+            }
+            if(masterflag) tell_object(TP,"Mastered spells added successfully!");
+        }
+    }
+    do_old_spells_merge(TP);
+    if (avatarp(TP)) add_action("remove_spell", "rmspell");
+    if (avatarp(TP)) add_action("add_spell", "addspell");
+    if (avatarp(TP)) add_action("add_all", "addall");
+}
+
+void do_old_spells_merge(object holder) {
+    int mergetracker;
+    mergetracker = 0;
+    if(!userp(holder)) return;
+    if(member_array("conjure earth elemental",keys(spells)) != -1) {
+      map_delete(spells,"conjure earth elemental");
+      mergetracker = 1;
+    }
+    if(member_array("conjure air elemental",keys(spells)) != -1) {
+      map_delete(spells,"conjure air elemental");
+      mergetracker = 1;
+    }
+    if(member_array("conjure fire elemental",keys(spells)) != -1) {
+      map_delete(spells,"conjure fire elemental");
+      mergetracker = 1;
+    }
+    if(member_array("conjure water elemental",keys(spells)) != -1) {
+      map_delete(spells,"conjure water elemental");
+      mergetracker = 1;
+    }
+    if(mergetracker) {
+      tell_object(holder,"Vaping outdated elemental summons...");
+      if(member_array("conjure elemental",keys(spells)) == -1) {
+        tell_object(holder,"Adding new elemental summons...");
+        add_spell("conjure elemental");
+      }
+    }
+    if(member_array("know alignment",keys(spells)) != -1) {
+      map_delete(spells,"know alignment");
+      tell_object(holder,"Removing expired spell: know alignment...");
+    }
+    mergetracker = 0;
+    if(member_array("static field",keys(spells)) != -1) {
+      map_delete(spells,"static field");
+      mergetracker = 1;
+    }
+    if(member_array("sonic shield",keys(spells)) != -1) {
+      map_delete(spells,"sonic shield");
+      mergetracker = 1;
+    }
+    if(member_array("fly",keys(spells)) != -1) {
+      map_delete(spells,"fly");
+      add_spell("levitate");
+      tell_object(holder,"Vaping outdated spells: replacing fly with levitate.");
+    }
+    if(member_array("heart of stone",keys(spells)) != -1) {
+      map_delete(spells,"heart of stone");
+      holder->remove_mastered_spell("heart of stone");
+      tell_object(holder,"Vaping outdated necromancy school spell: heart of stone.");
+    }
+    if(member_array("seeming",keys(spells)) != -1) { //ditch seeming from all books - won't be in for a while
+      map_delete(spells,"seeming");
+      holder->remove_mastered_spell("seeming");
+      tell_object(holder,"Vaping outdated spell: seeming.");
+    }
+    if(member_array("passwall",keys(spells)) != -1) { //ditch passwall, now redundant
+      map_delete(spells,"passwall");
+      holder->remove_mastered_spell("passwall");
+      tell_object(holder,"Vaping outdated alteration school spell: passwall.");
+    }
+}
+
+void cull_non_school_spells(object holder) {
+    return;
+}
+
+void set_spellbook(string spell) {
+    string a_buggy_spell;
+    string spell_file;
+    int spell_level;
+    if (spell) {
+        spell_file="/cmds/spells/"+spell[0..0]+"/_"+replace_string(spell," ","_")+".c";
+        if (file_exists(spell_file)) {
+            if (a_buggy_spell = catch(spell_level=spell_file->query_spell_level("mage")))
+	      write(a_buggy_spell + ": "+ spell_file );
+            if (!spell_level) return;
+            if (!spell) return;
+            spells[spell] = spell_level;
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
+
+string *query_spells() {
+    if (!spells || spells == ([ ]) ) return({ });
+    else return keys(spells);
+}
+int get_spell_level(string spell){
+      int spell_level;
+      set_spellbook(spell);
+      spell_level = spells[spell];
+      return spell_level;
+}
+
+void set_spells(mapping spelllist) {
+    if (base_name(PO) != "/std/spell_vend") return;
+    spells = spelllist;
+}
+
+void remove_spellbook(string spell) {
+    remove_spell(spell);
+}
+
+int remove_spell(string spell) {
+    if (!spell) return 1;
+    map_delete(spells, spell);
+    return 1;
+}
+
+int query_spellbook(string spell) {
+    return spells[spell];
+}
+
+int look(string str) {
+    object ob;
+    int x;
+    string tmp, gtype, temp1;
+
+    tmp = ({});
+
+    if (!str)
+        return 0;
+
+    sscanf(str, "%s by %s", str, gtype);
+    if(!gtype) gtype = "name";
+
+    if (!ob=present(str,TP))
+        return 0;
+    if ( !(ob == TO) )
+        return 0;
+    if (!TP->is_class("mage") && !avatarp(TP)) {
+        write("This book is nothing more than page after page of words you can't comprehend.");
+        return 1;
+    }
+
+    magic = keys(spells);
+  if (TP->isKnown(owner))
+    write("\n%^BOLD%^%^CYAN%^This is $&$"+owner+"$&$'s spell book.  Its pages include the following spells:\n");
+  else
+    write("\n%^BOLD%^%^CYAN%^You do not realize who this spell book belongs to.  Its pages include the following spells:\n");
+    line();
+    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 28) + arrange_string("Level", 8)+"Memorized");
+    line();
+
+    if(gtype != "level") sort();
+    else sort_two();
+
+    for (x=0;x<sizeof(magic);x++) {
+        if (!temp1 = ""+TP->query_memorized("mage",magic[x]))
+            temp1 = ""+0;
+        write("%^CYAN%^%^BOLD%^"+arrange_string(magic[x], 30)+"%^RESET%^%^CYAN%^"+arrange_string(get_spell_level(magic[x]),15)+arrange_string(temp1,15));
+    }
+
+    line();
+  if (avatarp(TP)) write( 
+@GARRETT
+  Avatar functions: 
+  	addspell [spellname] - to add a specific spell
+	rmspell [spellname] - to remove a specific spell
+	addall - to add all mage spells to your master book for reference
+GARRETT
+    );
+    return 1;
+}
+
+int memorize_spell(string str) {
+    int sl, rst, temp, cl, lvadj, num;
+    string splnm;
+    object ownr;
+
+    if (TP->query_bound() || TP->query_unconscious()) {
+        TP->send_paralyzed_message("info",TP);
+        return 1;
+    }
+    if (TP->query_blind())
+        return notify_fail("You can't see the words to study the spell.\n");
+    if (!(int)TP->query_guild_level("mage"))
+        return notify_fail("Only users with magical abilities may memorize spells!\n");
+    if (!str)
+        return notify_fail("Memorize what?\n");
+    if (TP->query_paralyzed())
+        return notify_fail(""+(string)TP->query_paralyze_message()+"\n");
+    if ( sizeof(TP->query_attackers()) > 0 )
+        return notify_fail("You cannot memorize spells while in battle!\n");
+    if ((string)TPQN != owner)
+        return notify_fail("This is not your spellbook, you cannot memorize spells from it.\n");
+    if (TP->query_property("berserked"))
+        return notify_fail("Your berserker rage won't give you the peace needed.");
+//    if (TP->query_property("PKfled") > time())
+//        return notify_fail("You are still calming down from your flight from battle!");
+
+
+    remove_call_out("flip");
+// adding ability to do x number of the same spell *Styx* 6/6/06
+    if(sscanf(str,"%s times %d",splnm, num) == 2 || sscanf(str, "%s times", splnm) == 1 )  {
+	str = splnm;
+    }	
+    if(num < 0)
+        return notify_fail("You must specify a positive number.  Syntax is <memorize spellname> or <memorize spellname times # > - use the numeric such as 2.\n");
+    if (!sl = query_spellbook(str))
+        return notify_fail("You do not have any spell named "+str+" in your book to memorize!\n");
+
+    rst = TP->can_memorize("mage",str);
+    if(rst == TOO_STUPID){
+        tell_object(TP, "You are not intelligent enough to understand that spell effectively.");
+        return 1;
+    }
+    if(rst == TOO_MANY)
+        return notify_fail("You have memorized all of the spells that you are allowed at this level.\n");
+    if (rst == SPELL_RESTRICTED)
+        return notify_fail("The power to pull that spell from the weave has been taken from you.\n");
+    if(rst != MEM_OK)
+        return notify_fail("You cannot memorize that spell.\n");
+
+    temp = sl * MEMORIZE_DELAY;
+// this adjustment added by *Styx* 6/4/06
+    cl = WIZ_LEV;
+    if(cl > 9) {
+	lvadj = 1000/(WIZ_LEV);
+	if(!lvadj)
+	   lvadj = 1;   // they say dividing by zero is reserved for god...
+	temp = temp - ((temp * 10)/lvadj);
+	if(!temp)
+	   temp = 1;
+    }
+// more support for multiple versions of the same spell
+    if(!num)  num = 1;
+    temp = temp * num;
+    tell_object(TP, "%^BOLD%^%^GREEN%^You open your spell book and begin memorizing "+str+".  ("+num+" attempt(s) - Any action you take will interrupt your memorizing...");
+    tell_room(ETP, TPQCN+" opens "+TP->QP+" book and starts studying intensely.", TP);
+    call_out("flip", 2, str, temp, TP, num);
+//    input_to("check_activity", 1);
+//    TP->set_property("memorizing",(: TO, "check_activity" :) );
+       TP->set_property("memorizing",TO);
+//    TP->set_paralyzed(temp);
+//    TP->setAdminBlock();
+    return 1;
+}
+
+int check_activity(string str) {
+    if (remove_call_out("flip") != -1) {
+        tell_player(TP, "You stop memorizing to do something else!\n");
+        //TP->remove_paralyzed();
+         TP->removeAdminBlock();
+        return 1;
+    }
+    return 1;
+}
+
+void flip(string str, int temp, object play, int num){
+object obt;
+       if (!objectp(obt=play->query_property("memorizing")) && (obt != TO) ) {
+//           write(identify(TO)+":"+identify(obt));
+           return;
+         }
+    if (random(8) == 0) {
+        tell_object(play,"You flip to the next page.");
+        tell_room(environment(play),play->QCN+" flips to the next page in "+play->QP+" book.", play);
+    }
+    temp -= 2;
+/**************  before multiple copies
+*    if (temp > 0)
+*        call_out("flip", 2, str, sl, temp);
+*    else {
+*        memorize2(str, sl);
+*        temp = 0;
+*        return 1;
+*    }
+**************/
+    if (temp > 0 && ((int)TP->can_memorize("mage",str) == MEM_OK)) {
+// don't wait until the end for all to go in mem. in case they bail from a long set
+ 	if(num > 1 && !random(3)) { 
+	    play->set_memorized("mage",str, 1);
+	    num--;
+	}
+        call_out("flip", 2, str, temp, play, num);
+   } else {
+	if(num > 1) {
+	  while(num--) {
+	    if((int)play->can_memorize("mage",str) == MEM_OK)
+	       play->set_memorized("mage",str, 1);
+	  }
+        } else {
+	    if(num && ((int)play->can_memorize("mage",str) == MEM_OK))
+	       play->set_memorized("mage",str, 1);
+	}
+        memorize2(str, temp, play);
+        temp = 0;
+	return 1;
+    }
+}
+
+void memorize2(string str, int temp, object play) {
+//  has to move into the flip section for multiples
+//    TP->set_memorized(str, 1);
+    //TP->remove_paralyzed();
+//    play->removeAdminBlock();
+       play->remove_property("memorizing");
+    tell_room(ETP,TPQCN+" finishes studying and closes "+TP->QP+" book.", TP);
+//    tell_object(TP, "You have finished memorizing "+str+".  (Hit <RETURN> to continue...)");
+    tell_object(play, "%^BOLD%^%^GREEN%^You have finished memorizing "+str+".");
+}
+
+int report_spells(string str){
+    int i, j;
+    mapping spells, level;
+    string *k, *k2;
+    if (!str) {
+        return 0;
+    }
+    if (str != "mage spells") {
+        return 0;
+    }
+    spells = TP->query_all_memorized("mage");
+    k = keys(spells);
+    for (i=0;i<sizeof(k);i++) {
+        level = spells[k[i]];
+        k2=keys(level);
+        for (j=0;j<sizeof(k2);j++) {
+            TP->force_me("say I currently have "+k2[j]+" memorized "+level[k2[j]]+" times.");
+        }
+    }
+    return 1;
+}
+
+int forget_spell(string str) {
+    int temp, sl, allowed_sl;
+    object ownr;
+    mapping memorized;
+    int *in_mind;
+
+    if (!sl = TP->query_memorized("mage",str))
+        return notify_fail("You do not have that spell in your book to forget! ["+str+"]\n");
+
+    TP->set_cast_type("wizard");
+
+    if(!TP->forget_memorized(str))
+       return notify_fail("The spell, \""+str+"\" is not in your memory!\n");
+    else
+       tell_object(TP, "The spell, \""+str+"\" has been forgotten successfully!");
+
+    return 1;
+}
+
+int add_spell(string str) {
+    if (!str)
+        return 1;
+    str = lower_case(str);
+
+/* We don't need to log this too
+   seteuid(UID_LOG);
+       log_file("addspell",capitalize(TPQN)+" added "+str+" to "+owner+"'s spellbook.\n");
+    seteuid(getuid());
+*/
+    if (set_spellbook(str) && avatarp(TP))
+        write("Spell added successfully.");
+    return 1;
+}
+
+int *magic_arsenal_feat(object ob, int *spells)
+{
+    int i;
+
+    if(FEATS_D->usable_feat(ob,"magic arsenal"))
+    {
+        for(i=0;i<sizeof(spells);i++)
+        {
+            if(!spells[i]) { continue; }
+            spells[i] += 2;
+        }
+    }
+    return spells;
+}
+
+int *bonus_spell_slots(object ob, int *spells)
+{
+    int i,extra;
+
+    if(!objectp(ob)) { return spells; }
+
+    extra = (int)ob->query_property("bonus_spell_slots");
+    if(!intp(extra) || !extra) { return spells; }
+
+    for(i=0;i<sizeof(spells);i++)
+    {
+        if(!spells[i]) { continue; }
+        spells[i] += extra;
+        if(spells[i] < 0) { spells[i] = 0; }
+    }
+
+    return spells;
+}
+
+int help(string str) {
+    int x, calc;
+    int *in_mind;
+    string tmp;
+
+    if (!str)
+        return 0;
+    if (str != "spell book" &&
+        str != "spellbook" &&
+        str != "book")
+        return 0;
+    if ( !interactive(TP) || (!TP->is_class("mage") && !avatarp(TP) ))
+        return 0;
+
+    //tell_object(TP, CLS);
+
+    write(
+"%^BOLD%^%^CYAN%^When you have a spell book, you can%^RESET%^
+
+%^ORANGE%^<look book>%^RESET%^            To see a listing of spells in a spellbook
+%^ORANGE%^<look book by level>%^RESET%^   To see a listing of your spells, in order of spell level
+%^ORANGE%^<prepare>%^RESET%^              Refer to %^ORANGE%^<help prepare>%^RESET%^.
+%^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
+
+%^BOLD%^%^RED%^A mage must have spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
+    
+
+    
+    if (avatarp(TP)) {
+        tell_object(TP, "Immortals can also:\n%^ORANGE%^<rmspell>%^RESET%^ spellname");
+        tell_object(TP, "%^ORANGE%^<addspell>%^RESET%^ spellname\n"
+		"%^ORANGE%^<addall>%^RESET%^ - YOUR books only!\n"
+		"and %^ORANGE%^<resetdesc>%^RESET%^\n"
+	);
+    }
+
+    if (WIZ_LEV) {
+        line();
+        tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell level:", 18)+"Number allowed:      Memorized:     [Your level: "+TP->query_class_level("mage")+"]");
+        line();
+
+        in_mind = allocate(10);
+        in_mind = (int)WIZ_CALCS->query_max_spell_array(WIZ_LEV, "mage",(int)TP->query_stats("intelligence"));
+        in_mind = magic_arsenal_feat(TP,in_mind);
+        in_mind = bonus_spell_slots(TP,in_mind);
+
+        for (x = 0; x < 9;x++) {
+            tmp = in_mind[x];
+            if(!tmp) tmp = "0";
+            tell_object(TP, "%^CYAN%^"+arrange_string((x+1), 18) + arrange_string(tmp,21) + TP->query_num_spells_level("mage",x+1));
+        }
+
+        line();
+    }
+    return 1;
+}
+
+void line() { write("%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"); }
+
+void set_owner() {
+    string *schools, spl, sphere;
+    int spellnum;
+    object tp;
+    tp = ETO;
+    /* had interactive(tp) && in this commented out... */ if (TP->is_class("mage")){
+
+        owner = tp->query_name();
+        if (spells && sizeof(spells) != 0)
+            return 1;
+        schools = ({ "abjuration", "conjuration_summoning",
+                   "divination", "enchantment_charm",
+                   "illusion", "invocation_evocation", "necromancy",
+                   "alteration", "elemental"});
+        sphere=tp->query_school();
+        if (!sphere)
+            sphere="invocation_evocation";
+        spellnum = member_array(sphere, schools, 0);
+        spl = ({"armor","armor","magic missile","sleep",
+               "color spray","magic missile", "chill touch",
+               "burning hands", "burning hands"})[spellnum];
+        set_spellbook(spl);
+    }
+    return 1;
+}
+
+int offer(string str) {
+    if (id(str)) {
+        tell_object(TP, "%^BOLD%^No offering spell books.  If you don't want it sell it!");
+        return 1;
+    }
+    return 0;
+}
+
+int add_all() {
+    string *all_spells;
+    int x;
+
+    all_spells = keys((mixed *)MAGIC_D->query_index("mage"));
+    for(x = 0;x<sizeof(all_spells);x++){
+        add_spell(all_spells[x]);
+    }
+    return 1;
+}
+
+string query_owner() {
+    return owner;
+}
+
+void sort() {
+    int i,j;
+
+    for (j=0;j<sizeof(magic);j++)
+        for (i=sizeof(magic)-1;i>j;i--) {
+            if (magic[i] < magic[i-1]) {
+                swap(i-1,i);
+            }
+        }
+}
+void sort_two() {
+    int i,j;
+
+    for (j=0;j<sizeof(magic);j++)
+        for (i=sizeof(magic)-1;i>j;i--) {
+            if (spells[magic[i]] < spells[magic[i-1]]) {
+                swap(i-1,i);
+            }
+        }
+}
+
+private void swap(int i, int j) {
+    string tmp;
+
+    tmp = magic[i];
+    magic[i]=magic[j];
+    magic[j]=tmp;
+}
+
+int mydesc(string str) {
+   string str2;
+   if (TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
+     TP->send_paralyzed_message("info",TP);
+     return 1;
+   }
+   if (avatarp(TP)) {
+     TO->set_short(""+str+"%^RESET%^");
+     tell_object(TP,"%^WHITE%^%^BOLD%^This spellbook will now appear as:%^RESET%^ "+TO->query_short());
+     return 1;
+   }
+   if ((string)TPQN != owner) {
+     tell_object(TP,"This is not your spellbook, you cannot set its appearance.\n");
+     return 1;
+   }
+   if (!str) {
+     TO->set_short("A book");
+     tell_object(TP,"%^WHITE%^%^BOLD%^Your spellbook will now appear as:%^RESET%^ A book");
+     return 1;
+   }
+   str2 = "/daemon/filters_d"->filter_colors(str);
+   if(strsrch(str2,"book") == -1 &&  strsrch(str2,"Book") == -1 &&
+      strsrch(str2,"tome") == -1 && strsrch(str2,"Tome") == -1 &&
+      strsrch(str2,"grimoire") == -1 && strsrch(str2,"Grimoire") == -1 
+       ) TO->set_short(""+str+" book%^RESET%^");
+   else TO->set_short(""+str+"%^RESET%^");
+   tell_object(TP,"%^WHITE%^%^BOLD%^Your spellbook will now appear as:%^RESET%^ "+TO->query_short());
+   return 1;
+}
+

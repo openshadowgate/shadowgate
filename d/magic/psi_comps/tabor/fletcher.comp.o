@@ -1,0 +1,14 @@
+#d/magic/psiCompAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/psilounge"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "tabor"
+owner "fletcher"
+components (["rutilated quartz":2,"moonstone":5,"clear quartz":4,"blue amethyst":5,"amethyst":4,"dallyhanite":25,"aventurine":5,"yellow calcite":20,"danburite":4,"obsidian":5,"seraphinite":3,"carnelian":6,"orange calcite":15,"bloodstone":6,])

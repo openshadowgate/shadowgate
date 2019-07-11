@@ -1,0 +1,14 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "shadow"
+owner "arathas"
+components (["diamond dust":8,"granite dust":50,"eyelash":50,"crane's feather":20,"water":50,"minute tarts":50,"dart":50,"soft clay":50,"amber rod":23,"piece of bone":6,"small candle":50,"gum arabic":50,"firefly":50,"drop of blood":20,"fur":20,"crystal":50,"tiny bag":50,"exotic feather":7,"iron rod":35,"feather":50,"phosphorescent moss":5,"silver pin":20,"powdered rhubarb leaf":20,"beeswax":50,"snakes tongue":21,"pinch of special dust":50,])

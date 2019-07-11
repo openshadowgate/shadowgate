@@ -1,0 +1,10 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+studied ({})
+studied_failed ([])
+id "tabor"
+owner "ozymandias"
+components (["zinc":8,"diamond dust":1,"eyelash":6,"piece of bone":7,"gum arabic":10,"firefly":5,"earth from grave":8,"powdered silver":14,"dung scrapings":4,"aluminum chaff":16,"dragon scale":5,"powdered rhubarb leaf":23,"oak leaf":1,"clear crystal":8,"piece of reed":11,"piece of iron":7,])

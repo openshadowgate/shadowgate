@@ -1,0 +1,35 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":1249519873,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"worn-out note book of song sheets and arcana%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/bard#15381"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties ({})
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["monster summoning 1":3,"summon companion":1,"darkness":1,"chill touch":1,"identify":1,"stoneskin":4,"know alignment":2,"hold person":3,"lightning bolt":3,"rope trick":2,"magic missile":1,"armor":1,"wall of fire":4,"color spray":1,"detect invisibility":2,"detect magic":1,"scorcher":2,"sonic shield":4,"blink":3,"detect scrying":4,"ray of enfeeblement":2,"hideous laughter":2,"invisibility":2,"acid arrow":2,"web":2,"fireball":3,"lightning orb":3,"acid orb":3,"vampiric touch":3,"light":1,"frost orb":3,"burning hands":1,"sleep":1,"garble":3,])
+magic ({"acid arrow","acid orb","armor","burning hands","chill touch","color spray","darkness","detect invisibility","detect magic","detect scrying","fireball","frost orb","garble","hideous laughter","hold person","identify","invisibility","know alignment","light","lightning bolt","lightning orb","magic missile","monster summoning 1","ray of enfeeblement","rope trick","scorcher","sleep","sonic shield","stoneskin","summon companion","vampiric touch","wall of fire","web",})
+mID 0
+bookdesc 0
+owner "sylthas"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

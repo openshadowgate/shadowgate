@@ -1,0 +1,32 @@
+#d/magic/spellbook.c
+size 0
+props (["died time":323311929,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/cleric-mage#65922"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+spells (["monster summoning 1":3,"summon companion":1,"dispel magic":3,"chill touch":1,"identify":1,"hold person":3,"lightning bolt":3,"wall of fire":4,"rope trick":2,"magic missile":1,"color spray":1,"detect magic":1,"scorcher":2,"invisibility":2,"ray of enfeeblement":2,"hideous laughter":2,"acid arrow":2,"web":2,"tongues":3,"lightning orb":3,"water breathing":3,"sonic orb":3,"light":1,"frost orb":3,"sleep":1,"burning hands":1,])
+magic ({"acid arrow","burning hands","chill touch","color spray","detect magic","dispel magic","frost orb","hideous laughter","hold person","identify","invisibility","light","lightning bolt","lightning orb","magic missile","monster summoning 1","ray of enfeeblement","rope trick","scorcher","sleep","sonic orb","summon companion","tongues","wall of fire","water breathing","web",})
+mID 0
+bookdesc 0
+owner "vaya"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

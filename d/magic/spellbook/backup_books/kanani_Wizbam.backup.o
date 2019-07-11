@@ -1,0 +1,36 @@
+#d/magic/magic_book.c
+trap_data ([])
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^A large %^RED%^scarlet%^RESET%^ leatherbound tome inscribed with %^CYAN%^arcane%^RESET%^ %^YELLOW%^golden%^RESET%^ runes%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#575994"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["summon companion":1,"darkness":1,"fire shield":4,"shocking grasp":1,"identify":1,"augmentation":2,"armor":1,"magic missile":1,"lightning bolt":3,"color spray":1,"mages sword":7,"detect magic":1,"detect invisibility":2,"scorcher":2,"hideous laughter":2,"light":1,"hellball":9,"sleep":1,"burning hands":1,])
+magic ({"armor","augmentation","burning hands","color spray","darkness","detect invisibility","detect magic","fire shield","hellball","hideous laughter","identify","light","lightning bolt","mages sword","magic missile","scorcher","shocking grasp","sleep","summon companion",})
+mID 0
+bookdesc 0
+owner "kanani"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

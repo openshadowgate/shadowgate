@@ -1,0 +1,40 @@
+#/d/magic/spellbook.c
+trap_data ([])
+encumbrance 10
+size 0
+ac 0
+decayRate 100
+decayStatus 0
+currentStatus 100
+props (["repairtype":({"tailor","jewel","woodwork","leatherwork",}),])
+serial_number 0
+ob_data (["condition":100,"value":0,"updated time":1558223073,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),"short":"%^RESET%^%^CYAN%^An %^BLUE%^ancient %^BLUE%^p%^WHITE%^atched %^BOLD%^%^BLACK%^bla%^WHITE%^c%^WHITE%^k %^RED%^grimoir%^BLUE%^e%^RESET%^%^RESET%^","long":"This is a spellbook.",])
+cap_name "Spell book"
+true_name "spell book"
+creator "/std/class/mage"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["summon companion":1,"shout":4,"mirror image":2,"iron body":8,"lower resistance":5,"color spray":1,"animate dead":4,"hellball":9,"darkness":2,"acid breath":5,"protection from scrying":3,"domination":5,"contingency":6,"wail of the banshee":9,"augmentation":2,"bears endurance":2,"fireball":3,"scorcher":2,"dragon scales":6,"heroism":3,"alter self":2,"meteor swarm":9,"vampiric touch":3,"monster summoning 7":7,"monster summoning 6":6,"blindness":2,"transformation":6,"flare":1,"greater shout":8,"shield":1,"powerword kill":9,"chain lightning":6,"prying eyes":9,"teleport":5,"planar beacon":6,"levitate":2,"finger of death":7,"project image":7,"touch of idiocy":2,"animus blizzard":9,"crushing despair":4,"shocking grasp":1,"eyebite":6,"conjure elemental":5,"greater invisibility":4,"detect invisibility":2,"blink":3,"detect magic":1,"stoneskin":4,"mending":1,"gate":9,"incendiary cloud":8,"identify":1,"darkvision":2,"haste":3,"phantom steed":3,"deny the reaper":8,"rope trick":2,"invisibility":2,"hideous laughter":2,"greater dispel magic":7,"acid orb":3,"break curse":4,"spell turning":7,"glitterdust":2,"cause fear":1,"magic missile":1,"sonic orb":3,"sleet storm":3,"telepathic bond":5,"disrupt undead":1,"clairvoyance":2,"lightning orb":3,"disintegrate":6,"acid fog":7,"timestop":9,"chill touch":1,"wall of fire":4,"horrid wilting":8,"misdirection":2,"wall of stone":5,"spectral hand":2,"ray of enfeeblement":2,"resist energy":2,"dimension door":4,"polar ray":8,"sleep":1,"phantasmal killer":4,"water breathing":3,"ice storm":4,"fear":4,"tongues":3,"warriors constitution":6,"black tentacles":4,"spider climb":2,"armor":1,"light":1,"fog cloud":2,"animus blast":9,"magic mirror":7,"protection from spells":8,"gust of wind":4,"bestow curse":4,"hold person":3,"daze":1,"burning hands":1,"expeditious retreat":1,"minor creation":4,"legend lore":6,"fire shield":4,"resonating word":7,"frost orb":3,"displacement":3,"detect scrying":4,"faithful phantom guardians":6,"cone of cold":5,"prismatic spray":7,"freedom of movement":9,"greater teleport":7,"foresight":7,"ball lightning":5,"garble":3,])
+magic ({"acid breath","acid fog","acid orb","alter self","animate dead","animus blast","animus blizzard","armor","augmentation","ball lightning","bears endurance","bestow curse","black tentacles","blindness","blink","break curse","burning hands","cause fear","chain lightning","chill touch","clairvoyance","color spray","cone of cold","conjure elemental","contingency","crushing despair","darkness","darkvision","daze","deny the reaper","detect invisibility","detect magic","detect scrying","dimension door","disintegrate","displacement","disrupt undead","domination","dragon scales","expeditious retreat","eyebite","faithful phantom guardians","fear","finger of death","fire shield","fireball","flare","fog cloud","foresight","freedom of movement","frost orb","garble","gate","glitterdust","greater dispel magic","greater invisibility","greater shout","greater teleport","gust of wind","haste","hellball","heroism","hideous laughter","hold person","horrid wilting","ice storm","identify","incendiary cloud","invisibility","iron body","legend lore","levitate","light","lightning orb","lower resistance","magic mirror","magic missile","mending","meteor swarm","minor creation","mirror image","misdirection","monster summoning 6","monster summoning 7","phantasmal killer","phantom steed","planar beacon","polar ray","powerword kill","prismatic spray","project image","protection from scrying","protection from spells","prying eyes","ray of enfeeblement","resist energy","resonating word","rope trick","scorcher","shield","shocking grasp","shout","sleep","sleet storm","sonic orb","spectral hand","spell turning","spider climb","stoneskin","summon companion","telepathic bond","teleport","timestop","tongues","touch of idiocy","transformation","vampiric touch","wail of the banshee","wall of fire","wall of stone","warriors constitution","water breathing",})
+mID 0
+bookdesc 0
+owner "avoluin"
+restore 0
+spells_at_level 0
+in_mind 0

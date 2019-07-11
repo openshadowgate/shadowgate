@@ -1,0 +1,36 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props (["died time":26194192,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^%^ORANGE%^A %^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^u%^BOLD%^ne %^RESET%^%^ORANGE%^covered leather book%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/darkwood/tabor/mon/wizbam"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["mind fog":6,"monster summoning 1":3,"ball lightning":5,"prismatic spray":7,"teleport":5,"chill touch":1,"monster summoning 5":7,"resist energy":2,"powerword kill":9,"stoneskin":4,"identify":1,"heroism":3,"fog cloud":2,"augmentation":2,"cone of cold":5,"wall of fire":4,"magic missile":1,"armor":1,"dragon scales":6,"protection from scrying":3,"fear":4,"detect invisibility":2,"daze":1,"detect magic":1,"scorcher":2,"blink":3,"invisibility":2,"teleport without error":7,"ray of enfeeblement":2,"ice storm":4,"tongues":3,"domination":5,"monster summoning 4":6,])
+magic ({"chill touch","identify","magic missile","armor","daze","detect magic","resist energy","fog cloud","augmentation","detect invisibility","scorcher","invisibility","ray of enfeeblement","monster summoning 1","heroism","protection from scrying","blink","tongues","stoneskin","wall of fire","fear","ice storm","ball lightning","teleport","cone of cold","domination","mind fog","dragon scales","monster summoning 4","prismatic spray","monster summoning 5","teleport without error","powerword kill",})
+mID 0
+bookdesc 0
+owner "tyra"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

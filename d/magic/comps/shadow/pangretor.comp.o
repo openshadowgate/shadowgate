@@ -1,0 +1,14 @@
+#d/magic/compAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "shadow"
+owner "pangretor"
+components (["bat guano":50,"granite dust":50,"crane's feather":50,"phosphorus":50,"water":50,"aluminum chaff":50,"eyelash of ogre-mage":50,"sulfur":50,"zinc":50,"small candle":50,"glass rod":50,"piece of mirror":50,"tiny bag":50,"iron rod":50,"tiny hearing trumpet":50,"ruby dust":50,"silver pin":50,"pinch of special dust":50,"flint":50,"powdered chalk":50,"eye of roc":40,"clay model ziggurat":50,"nitric acid":50,"dragon scale":50,"powdered amber":50,"sunstone":50,"soft clay":50,"firefly":50,"drop of blood":50,"fur":50,"dung scrapings":50,"wing feather":50,"piece of reed":50,"will o wisp essence":50,"quicksilver":50,"small diamond":50,])

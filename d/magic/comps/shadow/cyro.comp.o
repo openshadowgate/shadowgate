@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "cyro"
+components (["diamond dust":2,"owlfeather":15,"granite dust":25,"firefly":50,"gum arabic":15,"drop of blood":30,"pearl":8,"dragon scale":3,])

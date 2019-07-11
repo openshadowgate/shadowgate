@@ -1,0 +1,35 @@
+#d/magic/magic_book.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/cleric-mage#46967"
+cursed "konrad"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString " (wielded in left hand)"
+unwieldf 0
+hit 0
+wielded 0
+factionitem 0
+spells (["monster summoning 1":3,"summon companion":1,"darkness":1,"chill touch":1,"identify":1,"hold person":3,"know alignment":2,"armor":1,"magic missile":1,"rope trick":2,"lightning bolt":3,"detect invisibility":2,"color spray":1,"protection from scrying":3,"detect magic":1,"invisibility":2,"ray of enfeeblement":2,"hideous laughter":2,"web":2,"acid arrow":2,"fireball":3,"tongues":3,"acid orb":3,"sonic orb":3,"water breathing":3,"light":1,"vampiric touch":3,"frost orb":3,"garble":3,"burning hands":1,"sleep":1,])
+magic ({"summon companion","darkness","chill touch","identify","armor","magic missile","color spray","detect magic","light","burning hands","sleep","know alignment","rope trick","detect invisibility","invisibility","ray of enfeeblement","hideous laughter","web","acid arrow","monster summoning 1","hold person","lightning bolt","protection from scrying","fireball","tongues","acid orb","sonic orb","water breathing","vampiric touch","frost orb","garble",})
+mID 0
+bookdesc 0
+owner "konrad"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

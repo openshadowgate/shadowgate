@@ -1,0 +1,14 @@
+#d/magic/psiCompAccount.c
+trap_data ([])
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/portal/workroom"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+item_bonuses ([])
+id "portal"
+owner "torrellan"
+components (["garnet":39,"black star sapphire":7,"rutilated quartz":15,"ruby":10,"sodalite":10,"blue amethyst":10,"aquamarine":10,"flowstone":24,"danburite":3,"blue diamond":2,"tektite":20,"seraphinite":7,"jade":16,"tigers eye":11,])

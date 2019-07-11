@@ -1,0 +1,32 @@
+#d/magic/magic_book.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/fighter-mage#37517"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+wielded 0
+spells (["acid arrow":2,"summon companion":1,"chill touch":1,"identify":1,"sonic orb":3,"know alignment":2,"light":1,"magic missile":1,"frost orb":3,"detect magic":1,"color spray":1,"scorcher":2,"burning hands":1,"sleep":1,])
+magic ({"acid arrow","burning hands","chill touch","color spray","detect magic","frost orb","identify","light","magic missile","scorcher","sleep","sonic orb","summon companion",})
+mID 0
+bookdesc 0
+owner "krom"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

@@ -1,0 +1,12 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/juran/city/lab"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "juran"
+owner "akielstreea"
+components (["bat guano":25,"granite dust":50,"eyelash":25,"crane's feather":50,"water":50,"blessed leather":35,"aluminum chaff":50,"eyelash of ogre-mage":30,"sulfur":25,"zinc":50,"copper":50,"small candle":50,"spider web":50,"powdered silver":50,"tiny bag":50,"carbon":50,"pinch of special dust":50,"diamond dust":50,"powdered chalk":50,"eye of roc":19,"citric acid":25,"clay model ziggurat":25,"nitric acid":30,"dragon scale":5,"charcoal":5,"talc":50,"soft clay":50,"large diamond":4,"owlfeather":50,"ogre's eyelash":50,"gum arabic":50,"drop of blood":50,"pearl":3,"wing feather":50,"beeswax":25,"corn extract":5,"quicksilver":50,"diamond":20,"small diamond":5,])

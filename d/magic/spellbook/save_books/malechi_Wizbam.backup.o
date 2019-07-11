@@ -1,0 +1,36 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^BOLD%^%^WHITE%^A %^RESET%^%^ORANGE%^leather-bound %^BOLD%^%^WHITE%^book%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#881573"
+cursed 0
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString 0
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["spider climb":2,"darkness":2,"teleport":5,"monster summoning 2":4,"hold person":3,"armor":1,"magic missile":1,"detect magic":1,"color spray":1,"dimensional lock":9,"hideous laughter":2,"invisibility":2,"web":2,"fireball":3,"levitate":2,"break curse":5,"spell turning":7,"water breathing":3,"light":1,"animate dead":4,"shield":1,"monster summoning 4":6,"garble":3,"burning hands":1,])
+magic ({"armor","magic missile","detect magic","color spray","light","shield","burning hands","spider climb","darkness","hideous laughter","invisibility","web","levitate","hold person","fireball","water breathing","garble","monster summoning 2","animate dead","break curse","monster summoning 4","spell turning","dimensional lock",})
+mID 0
+bookdesc 0
+owner "malechi"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

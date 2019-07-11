@@ -1,0 +1,36 @@
+#d/magic/spellbook.c
+trap_data ([])
+size 0
+props (["died time":-934181665,])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"A Book","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/mage#202319"
+cursed "kevralos"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+item_owners ({})
+item_owner_props "01100"
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+lrhit 0
+wielded 0
+item_bonuses ([])
+factionitem 0
+spells (["spider climb":2,"ball lightning":5,"summon companion":1,"dispel magic":3,"chill touch":1,"teleport":5,"monster summoning 5":7,"animus blast":9,"bestow curse":4,"shout":4,"magic missile":1,"protection from scrying":3,"monster summoning 6":8,"blink":3,"teleport without error":7,"hideous laughter":2,"invisibility":2,"web":2,"powerword stun":8,"fireball":3,"ice storm":4,"blindness":2,"water breathing":3,"animate dead":4,"garble":3,"faithful phantom guardians":6,"monster summoning 1":3,"prismatic spray":7,"darkness":2,"protection from spells":8,"identify":1,"stoneskin":4,"conjure elemental":5,"monster summoning 2":4,"augmentation":2,"hold person":3,"wall of fire":4,"lightning bolt":3,"rope trick":2,"armor":1,"color spray":1,"detect magic":1,"detect invisibility":2,"heart of stone":7,"scorcher":2,"ray of enfeeblement":2,"acid arrow":2,"gust of wind":4,"tongues":3,"levitate":2,"domination":5,"meteor swarm":9,"warriors constitution":6,"incendiary cloud":8,"light":1,"vampiric touch":3,"monster summoning 4":6,"chain lightning":6,"disintegrate":6,"burning hands":1,])
+magic ({"summon companion","chill touch","magic missile","identify","armor","color spray","detect magic","light","burning hands","spider climb","hideous laughter","invisibility","web","blindness","darkness","augmentation","rope trick","detect invisibility","scorcher","ray of enfeeblement","acid arrow","levitate","dispel magic","protection from scrying","blink","fireball","water breathing","garble","monster summoning 1","hold person","lightning bolt","tongues","vampiric touch","bestow curse","shout","ice storm","animate dead","stoneskin","monster summoning 2","wall of fire","gust of wind","ball lightning","teleport","conjure elemental","domination","faithful phantom guardians","warriors constitution","monster summoning 4","chain lightning","disintegrate","monster summoning 5","teleport without error","prismatic spray","heart of stone","monster summoning 6","powerword stun","protection from spells","incendiary cloud","animus blast","meteor swarm",})
+mID 0
+bookdesc 0
+owner "kevralos"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 0

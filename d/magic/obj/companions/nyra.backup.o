@@ -1,0 +1,59 @@
+#d/magic/obj/companion.c
+props (["no dominate":1,"posed":"curled up in a ball alseep on the ground",])
+ob_data (["long":"This is a female cat.  It looks like a normal creature, except for an occasional shimmering around it, like a strange hint of a magical aura.","id":({"cat","companion",}),"short":"tabby cat","adreniline":0,"condition":100,"race":"cat",])
+cap_name "Cat"
+true_name "cat"
+creator "/d/magic/obj/scompanion#55499"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+player_data (["general":(["extra_hp":0,"alignment":4,"max_hp":4,"max_sp":1,"hp":4,"experience":175,"sp":1,]),])
+magic (["points":15,"max points":70,])
+severed ([])
+healing ([])
+limbs ({"left forepaw","left foreleg","torso","right forepaw","right foreleg","left rear paw","left rear leg","right rear paw","right rear leg","head",})
+all_my_fingers 4
+heal_rate 2
+classes ({"fighter",})
+posed "fighter"
+skills ([])
+mlevels (["fighter":5,])
+nwps ([])
+toAttack -1
+atnames ({})
+wimpydir "out"
+attackers ({})
+hunters ({})
+combat_vars (["blindfolded":0,"bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_messages (["bound":0,"unconscious":0,"asleep":0,"tripped":0,"gagged":0,])
+combat_counters (["block_attack":0,"asleep":0,"tripped":0,"gagged":0,"healing":0,"blindfolded":0,"bound":0,"unconscious":0,"blinded":0,])
+ok_to_heal 1027
+player_age 52
+divine_domain ({})
+quest_spells ({})
+gender "female"
+stats (["charisma":2,"dexterity":2,"wisdom":2,"strength":2,"constitution":2,"intelligence":2,])
+time_delay ([])
+lost_cl_spell_level 9
+lost_wiz_spell_level 9
+lost_psi_spell_level 9
+level 5
+hit_dice 5
+hit_dice_bonus 10
+stage 34
+emotes ([])
+spells ([])
+thief_skill ([])
+body_type "quadruped"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+path ({})
+num_hand 2
+num_dice 1
+type 4
+weapon_type "slashing"
+attack_limbs ({"right forepaw","left forepaw",})
+owner 

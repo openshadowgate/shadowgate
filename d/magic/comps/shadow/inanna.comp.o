@@ -1,0 +1,7 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/cguild/mage/lab"
+id "shadow"
+owner "inanna"
+components (["owlfeather":15,"pearl":1,"incense stick":20,"eyelash":40,"emerald":9,"pinch of special dust":10,"water":20,])

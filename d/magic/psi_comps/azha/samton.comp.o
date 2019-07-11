@@ -1,0 +1,13 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/azha/town/crystal"
+identified ({})
+studied ({})
+studied_failed ([])
+magic_properties ({})
+item_owners ({})
+item_owner_props "01100"
+id "azha"
+owner "samton"
+components (["mottled jasper":50,"lapiz lazuli":50,"sodalite":4,"blue lace agate":4,"dallyhanite":50,"peridot":50,"banded amethyst":4,"yellow calcite":50,"red jasper":4,"hematite":50,"wemic tears":50,"sunstone":50,"unakite":50,"orange calcite":50,"bloodstone":50,"clear quartz":50,"citrine quartz":50,"amethyst":50,"apatite":50,"adamite":50,"aventurine":50,"flowstone":50,"jade":50,"tourmaline":50,"carnelian":50,])

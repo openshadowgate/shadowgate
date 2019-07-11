@@ -1,0 +1,53 @@
+#/d/darkwood/tabor/mon/wizbam.c
+props (["saving_init":1,"swarm":1,"strength":"spells","treasure type":"A","new_exp_level":16,"new_exp_perc":"normal","has_random_treasure":1,"treasure level":15,"repairtype":({"tailor","jewel","woodwork","leatherwork",}),"no bump":1,"new_exp_amount":8928,"new_exp_set":1,"no attack":1,"dispellable spells":({}),"champion_check":1,])
+ob_data (["condition":100,"combat_feats_enabled":1,"adreniline":0,"race":"gnome","CombatFeats":({"armoredtitan","hardenedminions",}),"id":({"wizbam","clerk","shop keeper","shopkeeper","gnome",}),"feats_enabled":1,"last say":"here now! You're not going to bop me on the noggin with that, are you?","long":"Wizbam is a puny looking gnome hidden in a bright yellow robe with a hood pulled over his head.  His main feature aside from the robe is his very large nose which protrudes from within the hood.  He looks very incoherent, but you know he'll respond to a sale in an instant.  He offers spells for lots and lots of money.<help shop> will get you a list of shop commands.","short":"Wizbam, the magic entrepreneur","aggressive":0,])
+cap_name "Wizbam"
+true_name "Wizbam"
+creator "/d/darkwood/tabor/room/tstuff"
+identified ({})
+player_data (["general":(["alignment":7,"sp":1,"experience":8928,"extra_hp":0,"max_hp":79,"max_sp":1,"hp":79,]),])
+magic (["max points":192,"points":192,])
+severed ([])
+healing ([])
+limbs ({"head","right leg","right foot","neck","left arm","left foot","waist","left leg","torso","right hand","right arm","left hand",})
+all_my_fingers 5
+heal_rate 2
+classes ({"mage",})
+posed "mage"
+skills ([])
+guilds (["mage":16,])
+mlevels (["mage":16,])
+wimpydir "out"
+combat_vars (["react":0,"swarm":0,"paralyzed":0,"bound":0,"gagged":0,"toAttack":0,"blindfolded":0,"wimpy":0,"asleep":0,"RNEW":1,"any attack":0,"castFunc":0,"funcCast":0,"tripped":0,"unconscious":0,])
+combat_messages (["blinded":0,"NEW":1,"bound":0,"paralyzed":0,"gagged":0,"blindfolded":0,"asleep":0,"tripped":0,"unconscious":0,])
+combat_counters (["blinded":0,"NEW":1,"bound":0,"healing":0,"gagged":0,"blindfolded":0,"asleep":0,"block_attack":0,"tripped":0,"unconscious":0,])
+money (["gold":1000,])
+__Lang (["kobold":12,"common":23,"gnomish":100,"dwarvish":8,])
+_grammar (["kobold":0,"common":1,"gnomish":0,"dwarvish":0,])
+subgrammar (["kobold":1,"common":1,"gnomish":1,"dwarvish":1,])
+choice "common"
+ok_to_heal 15535312
+player_age 15535104
+gender "male"
+stats (["wisdom":10,"dexterity":18,"strength":8,"constitution":14,"intelligence":19,"charisma":13,])
+save_bonus (["breath_weapon":0,"petrification_polymorph":0,"paralyzation_poison_death":0,"rod_staff_wand":0,"spell":0,])
+time_delay ([])
+masteredspells ({})
+level 16
+hit_dice 16
+hit_dice_bonus 1
+stage 48
+emotes (["chance":5,"attack chance":20,"attack msg":({"Wizbam says: Being attacked... definitely not good... definitely.","Wizbam says: Must protect money, and spells, definitely spells.","Wizbam says: Dying sucks!",}),"msg":({"Wizbam says: Must get money, definitely money...","Wizbam says: Spells are good, lots and lots of spells.","Wizbam says: Must sell spells, definitely must sell spells...definitely spells.","Wizbam says: Must count gold... 2237132 gold... square root is1495.704516...","Wizbam paces around the room nervously.","Wizbam shakes his head while mumbling something","Wizbam counts his spells and gold.",}),])
+spells (["chance":90,"commands":({"color spray","hideous laughter","acidarrow","ice storm","monster summoning 2","shout","frost orb",}),])
+thief_skill ([])
+body_type "human"
+charmed_int ([])
+offend_int ([])
+norm_int ([])
+BONUS_ADDED 1
+static_bab 16
+Available ({"acid breath","cats grace","conjure elemental","daze","dimension door","disrupt undead","garble","lightning orb","magic missile","polar ray","protection from spells","summon swarm","warriors constitution",})
+tmpstr "book"
+number 13
+spellnames (["cats grace":5522,"acid breath":39799,"magic missile":2498,"protection from spells":112483,"polar ray":112657,"dimension door":24227,"daze":2533,"disrupt undead":2501,"lightning orb":12661,"garble":12648,"summon swarm":2491,"conjure elemental":39873,"warriors constitution":59838,])
+backing (["lotherin":1103375853,"revan":1280312676,"iarire":1305450293,"phadrius":1145931965,"bryanna":1045440732,"jack":1123099855,"ryat":1339558810,"queles":1100663265,"arvellon":1462958712,"mosutha":1120604648,"malachai":1101480360,"margath":1136989315,"philoxtar":1059976359,"onnelette":1214299704,"ragen":1138387236,"simnel":1048623700,"amsay":1496756099,"harkain":1115925137,"ziger":1144779646,"catherine":1197461599,"dage":1326095431,"isabelle":1368544154,"klama":1118605568,"levi":1230609744,"alanilairya":1110714667,"stetoti":1528373347,"kharos":1128947516,"charine":1540482625,"rahgen":1220858658,"klinque":1168360627,"andromede":1143053055,"lysander":1102134901,"alucarn":1099095284,"finrod":1081295106,"quinten":1095625343,"ambrosia":1070274190,"cyclone":1222632197,"timothy":1102556343,"raelith":1156896947,"krahzphar":1123097074,"bant":1119820853,"lerock":1083224309,"reimrep":1166891168,"vortahn":1128561149,"vagnor":1274843655,"kheli":1138123255,"godzilla":1160966803,"krendal":1126268957,"ozaranth":1169652971,"kale":1094937175,"selindel":1142702161,"jasmine":1061241096,"rubicant":1126990765,"dakkon":1159323290,"tyra":1440421311,"cozchee":1115918748,"halcyon":1200691449,"kaean":1099523797,"belendithas":1392839478,"kalous":1082099803,"jiraiya":1101880233,"malechi":1413682891,"stefano":1123337501,])

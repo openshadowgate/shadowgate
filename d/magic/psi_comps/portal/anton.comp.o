@@ -1,0 +1,12 @@
+#d/magic/psiCompAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/shadow/room/city/portal/workroom"
+identified ({})
+studied ({})
+studied_failed ([])
+item_owners ({})
+item_owner_props "01100"
+id "portal"
+owner "anton"
+components (["black star sapphire":4,"banded amethyst":31,"red jasper":47,"blue diamond":42,"blue lace agate":46,"sodalite":47,])

@@ -1,0 +1,32 @@
+#d/magic/magic_book.c
+size 0
+props ([])
+serial_number 0
+ob_data (["long":"This is a spellbook.","value":0,"short":"%^RESET%^%^BOLD%^%^BLACK%^a bl%^RESET%^a%^BOLD%^%^BLACK%^ck %^RESET%^%^ORANGE%^l%^RESET%^%^BOLD%^%^BLACK%^ea%^RESET%^%^ORANGE%^t%^RESET%^%^BOLD%^%^BLACK%^he%^RESET%^%^ORANGE%^r%^RESET%^%^BOLD%^%^BLACK%^bo%^RESET%^%^ORANGE%^u%^RESET%^%^BOLD%^%^BLACK%^nd book%^RESET%^%^RESET%^","condition":100,"cointype":"gold","id":({"book","bookx","magic book","spell book","spellbook",}),])
+cap_name "Spell book"
+true_name "spell book"
+creator "/d/shadowgate/masters/cleric-mage#155231"
+cursed "siventria"
+identified ({})
+studied ({})
+studied_failed ([])
+material 0
+magic_properties 0
+set_trap_func 0
+trap_trigger 0
+unique_item 0
+unique_lease 0
+wieldf 0
+limbString ""
+unwieldf 0
+hit 0
+wielded 0
+spells (["darkness":1,"summon companion":1,"chill touch":1,"identify":1,"know alignment":2,"light":1,"magic missile":1,"armor":1,"rope trick":2,"detect magic":1,"color spray":1,"hideous laughter":2,"sleep":1,"invisibility":2,"burning hands":1,])
+magic ({"darkness","summon companion","chill touch","identify","light","magic missile","armor","detect magic","color spray","sleep","burning hands","know alignment","rope trick","hideous laughter","invisibility",})
+mID 0
+bookdesc 0
+owner "siventria"
+restore 0
+spells_at_level 0
+in_mind 0
+descflag 1

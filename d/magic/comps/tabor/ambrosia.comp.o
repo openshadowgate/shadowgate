@@ -1,0 +1,8 @@
+#d/magic/compAccount.c
+props ([])
+ob_data (["id":({}),"condition":100,])
+creator "/d/darkwood/tabor/room/tlab"
+identified ({})
+id "tabor"
+owner "ambrosia"
+components (["sulfur":30,"phosphorescent moss":30,"crane's feather":30,"small candle":30,"firefly":30,"drop of blood":30,"powdered silver":30,])
