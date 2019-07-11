@@ -1,0 +1,5 @@
+ShadowGate MUD lib
+
+This is LPC code repository. You'll need fluffos (https://www.fluffos.info/) and world files to utilize it.
+
+As of 11.07.2019 this repository serves as a backup and tracking system only. The development happens from within metaprogramming environment of the game.
