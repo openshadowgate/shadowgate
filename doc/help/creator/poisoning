@@ -1,0 +1,11 @@
+Our mudlib supports the ability to poison players.
+To poison a player, the following call in the player is used:
+    this_player()->add_poisoning(amount);
+where amount is any amount.
+
+A poisoned player loses hp, rather than regenerates hp.  The amount the
+player loses each heart beat depends upon the amount of poison.
+Strong poisoning is 40.
+Also, cleric purification spells and the hospital purify in amounts, so
+the more poisoned, the more purification spells need casting.
+	-Descartes

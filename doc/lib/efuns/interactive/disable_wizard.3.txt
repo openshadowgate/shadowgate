@@ -1,0 +1,23 @@
+disable_wizard(3)            LPC Library Functions           disable_wizard(3)
+
+
+
+[1mNAME[0m
+       disable_wizard() - remove wizard priveleges from an object
+
+
+[1mSYNOPSIS[0m
+       void disable_wizard( void );
+
+
+[1mDESCRIPTION[0m
+       The  opposite  of enable_wizard().  Disables wizard privileges from the
+       current object.
+
+
+[1mSEE ALSO[0m
+       enable_wizard(3), wizardp(3)
+
+
+
+MudOS                             5 Sep 1994                 disable_wizard(3)

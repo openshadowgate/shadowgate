@@ -1,0 +1,123 @@
+                 Nightmare Mudlib 3.2 for MudOS 0.9.19
+                            List of Credits
+
+The following people have contributed at least a small amount of code:
+
+Archimedes Blackthorn Brian Bohemund Buddha Cygnus Dainia Darkone Daroki 
+Descartes Flamme Forlock Gregon Grendel Hanse Huthar Kalinash Lassondra Melvaig
+Pallando Pinkfish Plura Shadowwolf Sulam Truilkan Valodin
+
+Primary credit for the Nightmare Mudlib 3.0 goes to the development team:
+current team: Bohemund Descartes Gregon Kalinash Pallando Valodin
+other past members: Cygnus Hanse Plura
+
+Bohemund
+new player abilities, recode of the standard domain, recode of fishing,
+debugging player commands
+
+Cygnus:
+mudlib balancing code
+
+Descartes:
+master object, security system, mailer, combat, races, skills system, 
+vendor, barkeep, fishing, vault, user interface, living, monster,
+bulletin boards, quest system, room, standard domain (except cemetary),
+astronomy, banking, events, economy, intermud network, command handling,
+chat lines 
+
+Gregon:
+Support for player leadership, new player commands, debugging old
+player commands
+
+Hanse:
+virtual rooms, class abilities, sign
+
+Kalinash:
+Command debugging
+
+Pallando:
+multiple character handling, admin commands, wiz commands,
+(object materials still in development), modifications to virtual rooms,
+modifications to basic object and room, miscelaneous simul_efuns, security
+and bug fixing.
+
+Plura:
+admin and wizard commands
+
+Valodin:
+languages, monster races, tracking in room.c, lfun docs, player wizard and 
+admin commands
+
+In addition:
+Daroki: time
+Flamme: balancing of the game, cemetary in the standard domain
+Forlock: player commands and the torch
+Melvaig: ansi compatibility
+Shadowwolf: login site restricting, reboot scheduler
+
+Mudlib history:
+The Nightmare Mudlib was developed using the MudOS 0.8.11 driver and the
+accompanying mudlib (often referred to as TMI-1 or TMI 0.8.11, no relation
+however to TMI-2).
+
+Version 1.* still retained the basic TMI 0.8.11 structure, with the most
+notable differences being the creation of a working limb oriented combat
+system, many extra inheritables, and some spiffy features.
+
+Version 2.* marked the point at which the Nightmare Mudlib was no longer
+"an enhanced TMI 0.8.11 mudlib".  The entire living object was new, as
+was much of the simul_efun object, most commands, and the login object.
+Over the course of 2.* development, socket handling (which had been
+borrowed from the Basis Mudlib during 1.* development) actually took
+on characteristics which look more like the current Nightmare tcp network.
+A major trend during the course of 2.* devlopment was a dramatic increase
+is mudlib effeciency.  Still remaining in the mudlib from TMI 0.8.11 was
+the master object, the security system, some simul_efuns, the user shell,
+and the basic object and container.
+
+Version 3.* marks a near complete rewrite of the basic mudlib.  A new
+system for races, a brand new security system, languages, faster code,
+a new user interface that gets rid of the old one that has hung around
+mudlibs since the early days of LPMud, a complete rewrite of room.c, a
+new mailing system, a udp network for communicating with CDlib muds, a
+more modular header library including a more consistent use of headers.
+Still stuck in tact from TMI 0.8.11 are a few simul_efuns and the
+user shell.
+
+The most recent version, 3.2, will be the final full release in the 3.*
+patch level.  You will notice in it many references to a Nightmare IV,
+which essentially is Nightmare 4.0.  Nightmare IV, however, is a 
+complete rewrite from scratch of the mudlib which will retain little if
+any backwards compatibility.  The LPMud Nightmare itself will never
+run Nightmare IV.
+
+Version 3.2 introduces an entirely new directory structure which closely
+resembles the directory structure of Nightmare IV.  In addition, it is
+the first release in which the number of SimulEfuns is drastically less
+than the preceeding release.  This is largely an effeciency release.
+It is marked by a *huge* leap in the efficiency of the mudlib code, as
+well as a much more intuitive mudlib structure.  In addition to reducing
+redundant and useless SimulEfuns, we have also cut down on the number
+of daemons in the mudlib.  No new daemons have root access.  Many old
+ones have lost root access and now exist in the directory /daemon.  And
+a lot of old daemons have been thrown out the window.
+
+Future development:
+Nightmare IV will be a truly object oriented mudlib, the first of its kind
+Everything will be written from scratch
+Weather will be added
+Pallando will finish materials once Murmur comes up with balance formulas.
+The skills system will be entirely rewritten.
+A new advancement daemon to cut down on the code in class halls, plus
+making it easier to make a classless mud using this mudlib.
+An events scheduler.
+
+TMI 0.8.11 credits:
+Code from the following developers of the TMI 0.8.11 mudlib still resides
+in the Nightmare Mudlib: Brian, Buddha, Huthar, Sulam, Truilkan
+
+Other important credits:
+Blackthorn@Genocide
+Dainia@Dreamshadow
+Grendel@TMI-2
+Pinkfish@Discworld

@@ -1,0 +1,10 @@
+Nightmare Mudlib 3.2 SimulEfun: day()
+
+int day(int when);
+
+DESCRIPTION
+Returns the name of the day of the week in NM time.
+
+SEE ALSO
+month(), year(), date(), time(), season(), ctime(), minutes(), query_night(), 
+hour()

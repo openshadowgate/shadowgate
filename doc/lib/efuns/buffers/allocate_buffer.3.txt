@@ -1,0 +1,28 @@
+allocate_buffer(3)           LPC Library Functions          allocate_buffer(3)
+
+
+
+[1mNAME[0m
+       allocate_buffer() - allocate a buffer
+
+
+[1mSYNOPSIS[0m
+       buffer allocate_buffer( int size );
+
+
+[1mDESCRIPTION[0m
+       Allocate  a  buffer of <size> elements.  The number of elements must be
+       >= 0 and not bigger than a system maximum (usually ~10000).   All  ele‐
+       ments are initialized to 0.
+
+
+[1mSEE ALSO[0m
+       bufferp(3), read_buffer(3), write_buffer(3), sizeof(3), to_int(3)
+
+
+[1mAUTHOR[0m
+       Truilkan
+
+
+
+MudOS                             5 Sep 1994                allocate_buffer(3)

@@ -1,0 +1,46 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Shadowdancer:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Ranger or Level 20 Thief
+%^RESET%^%^CYAN%^             %^RESET%^ 15 Points Spent in Stealth Skill
+%^RESET%^%^CYAN%^             %^RESET%^ 15 Points Spent in Athletics Skill
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Dexterity (before equipment modifiers)
+
+%^RESET%^%^BOLD%^%^GREEN%^For Ranger Shadowdancers:
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ beastman, drow, elf, human, half-drow, 
+               half-elf, half-orc, voadkyn, wemic, firbolg, orc, hobgoblin, 
+               gnome (forest), halfling (ghostwise), minotaur, yuan-ti
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/reflex strong, will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, stealth, survival
+
+%^RESET%^%^BOLD%^%^GREEN%^For Thief Shadowdancers:
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ all except wemic, firbolg, ogre and half-ogre
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ reflex strong, fort/will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, dungeoneering, stealth, thievery
+      
+%^RESET%^%^BOLD%^%^GREEN%^For All Shadowdancers:
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: one with the shadows
+   %^RESET%^L4: shadow master
+   %^RESET%^L7: shadow jump
+
+    %^RESET%^A shadowdancer is a powerful adventurer who has learned not 
+only to hide within the shadows, but to actually harness the shadows 
+themselves and almost become  part of them. Contrary to popular belief, 
+this has little to do with the moral intentions of the shadowdancer; both 
+good and evil alike learn to use the shadows in such a manner. Thieves 
+are most commonly drawn to this calling, but rangers have also been known 
+to have enough natural stealthy aptitude.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, prepare, 
+          combatstyle, stab

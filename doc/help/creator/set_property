@@ -1,0 +1,6 @@
+Nightmare Mudlib lfun: set_property()
+Object: /std/room.c
+
+void set_property(string prop, mixed value);
+
+Gives the room a certain property using the value "value".

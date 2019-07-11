@@ -1,0 +1,85 @@
+// --==** /cmds/priest/_invisibility_purge.c **==--
+// Created by Garrett@ShadowGate
+// Jan 12, 2001
+
+#include <priest.h>
+
+int value;
+object where;
+
+create() {
+    ::create();
+    set_author("garrett");
+    set_spell_name("invisibility_purge");
+    set_spell_level(4);
+    set_spell_type("priest");
+    set_spell_sphere("magic");
+    set_diety("mystra");
+    set_xp_bonus(1);
+    set_target_required(0);
+    set_verbal_comp();
+    set_somatic_comp();
+}
+
+int preSpell() {
+  //if (PLACE->query_property("no invis")) {
+  //      tell_object(CASTER, "%^CYAN%^This room is already purged of invisibility!%^RESET%^");
+  //      return 0;
+  //  }
+    return 1;
+}
+
+
+void spell_effect(int prof) {
+    int duration, amount,clevel;
+
+    clevel = CLEVEL;
+    where = PLACE;
+
+    // Is there some magic protection already ?
+    //value = (int)where->query_property("no invis");
+    //if (value) {
+    //    tell_object(CASTER, "%^CYAN%^This room is already purged from invisibility!");
+    //    destruct(this_object() );
+    //    return 1;
+    //} else {
+        tell_object(CASTER,"%^CYAN%^This room is purged of invisibility!");
+        tell_room(PLACE,"%^CYAN%^"+YOU+" purges this room against invisibility", ({ CASTER}) );
+    //}
+    amount = clevel/2;
+    amount++;
+    where->set_property("no invis", 1);
+    where->set_property("spelled", ({TO}) );
+    // The time the room will be steal protected
+    duration = ( clevel * 30);
+    if (duration < 250) duration = 250;
+    spell_successful();
+    call_out("dest_effect",duration);
+    addSpellToCaster();
+}
+
+void dest_effect() {
+    ::dest_effect();
+    if (objectp(PLACE)){
+        PLACE->remove_property("no invis");
+        PLACE->remove_property_value("spelled", ({TO}) );
+    }
+    TO->remove();
+}
+
+int help(string str) {
+    write(
+@HELP
+Spell  : Invisibility Purge
+Level  : 4th level
+Sphere : Magic
+Diety  : Mystra
+Syntax : <chant invisibility purge>
+
+This spell reveals all invisible and hiding beings in the room where the caster
+has cast his spell.
+
+HELP
+);
+    return 1;
+}

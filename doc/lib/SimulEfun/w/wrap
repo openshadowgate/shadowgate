@@ -1,0 +1,14 @@
+Nightmare IV SimulEfun: wrap()
+
+varargs string wrap(string, int);
+
+DESCRIPTION
+Wraps a given string to a screen as wide as specified.  If no width
+is specified, then it wraps to the DEFAULT_SCREEN_SIZE specified in
+the mud's config.h file.
+
+LOCATION
+/adm/simul_efun/wrap.c
+
+SEE ALSO
+arrange_string(), format_page(), sprintf()

@@ -1,0 +1,13 @@
+Nightmare IV SimulEfun: mudlib()
+
+string mudlib();
+
+DESCRIPTION
+Returns the name of the mudlib you are using, and if you are using
+this file, that likely means it returns the word "Nightmare".
+
+LOCATION
+/adm/simul_efun/mud_info.c
+
+SEE ALSO
+architecture(), mud_name(), mudlib_version(), query_host_port(), version()

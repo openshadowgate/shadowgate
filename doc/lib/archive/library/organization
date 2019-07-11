@@ -1,0 +1,61 @@
+                    The Organization of Nightmare LPMud
+                               As of 931113
+
+The highest levels of mud functioning aredivided into 4 departments,
+each with a head arch and several assistant arches.  On Nightmare, there are
+no levels for immortals as there are for players.  Instead, responsibilities
+are dictated by your position.  Nightmare has the following positions:
+
+head arch
+arch
+mentor   elder   advocate
+retired arch
+creator
+immortal
+new immortal
+
+Each position carries the following responsibilities:
+
+head arch:
+Administrates 1 of the four administrative departments in the game.
+Nightmare's administrative departments are:
+approval    driver    law    mudlib
+approval is responsible for the quality and balance of realms
+added to the game
+driver is responsible for the running of the MudOS driver as
+well as all system level code
+law handles the rules necessary to make sure that the mud is secure
+and to make sure that the game remains the challenge
+that it is intended to be
+mudlib is responsible for the library code used by immortals to
+build objects for the game
+
+arch:
+An arch carries out the decisions for day to day functioning
+of each administrative department
+
+mentor
+A mentor is responsible for the sponsorship of new immortals
+into full immortality.  A mentor helps their sponsors learn LPC
+coding and work within Nightmare's structure.
+
+advocate
+The mud advocate handles player affairs, answering questions and
+presenting problems beyond the power of the advocate to deal
+with to the appropriate administrative department.
+
+elder
+Elders run domains and supervise the coding of immortals and creators who are
+building under their domain.
+
+creator
+A creator is an immortal who has added to the game and thus
+has certain coding priveledges beyond the coding of realms and quests.
+
+immortal
+A person who has met all qualitifications for immortality and
+is responsible for adding a realm to the game.
+
+new immortal
+A player who is responsible for reading mud documentation in preparation
+for sponsorship.

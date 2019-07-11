@@ -1,0 +1,4 @@
+%^RESET%^%^BOLD%^Some prestige classes are available to any classes.
+
+Those that are will require you to select a base class when you advance into the prestige class.  This will happen automatically when you try to advance as a prestige class (When you take level 41, for example when a level 40 character types advance bladeweaver).  The progression of the character's hitpoints and skills and other relevant information will continue as if the character had gained a level in the base class.  When you abandon a prestige class, your base class will automatically be removed.
+

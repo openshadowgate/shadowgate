@@ -1,0 +1,43 @@
+Here is the basic format for how the code needs to see the basic elements of a room.  The things I have filled in with WIZ, we'll have to set.  If you use copy/paste to use this as a template (which would be helpful), do please leave them in and it'll save us having to remember to add those basics.
+
+You can use color anywhere in your descriptions and you can even check how they'll come out by doing a copy/paste into a say from whatever text editor you're using or mail those sections to yourself first and see how they look.  Doing a spell and grammar check yourself or having someone review it for spelling and grammar is also appreciated.
+
+Note:  Be sure you have a concept approval before going to the trouble to write detailed descriptions and keep in mind that it may still take some time for us to get the other elements finished and get your rooms put in, depending on availability of wiz time to work on it.  If this looks too complicated or you don't understand, feel free to ask questions or just send descriptions alone and we'll do the rest.
+
+What you put in set_name and set_short are generally the same, but name wouldn't have colors.  Short is what you see in brief mode and long is the long description.
+
+- - start copy/paste and filling in between the " ", etc. here down
+
+#include <std.h>
+inherit WIZ;
+
+void create() {
+        ::create();
+        set_property("indoors",1);  // is 0 if outdoors
+        set_property("light",2);    // 2 is pretty much average lighting
+        set_terrain(WIZ);
+        set_travel(WIZ);
+	set_name("   ");    // should be the same as the set_short but without colors
+        set_short("  ");
+        set_long("   ");
+        set_smell("default","   ");
+        set_listen("default","   ");
+// These are the things you can look at.  If you want more than one word or words (oil lamp and lamp, chair and chairs) to work, all the words you want to see the same thing go in the ({ }) like chair & chairs below.
+        set_items(([
+           ({"chair","chairs"}) : "They look like chairs.",
+	   "stove" : "It looks like a stove.",
+	   ({"   ", "  " }) : "    ",
+        ]));
+// For exits, just give us the directions (which can be enter, down, living room, or whatever as well as north/south type directions.  Also put the name (or short description) of the room they go to where I have filename, we'll assign the actual filenames but that will help us keep track of how you intend for things to connect.
+        set_exits(([
+           "south" : "WIZ (filename)",
+        ]));
+// if you want doors and there is more than one, they have to be unique, so specify a color, wood type, or something.  Note:  all doors need an exit, so even though you define the door here, you also have to include the exit in set_exits above.
+        set_door("magenta door","WIZ (filename)","south",0);
+	set_door_description("magenta door", "   ");
+}
+- - and that's the end of what goes into the very basics of a room
+
+If you want a key, give us a description for the key and some idea of how it's going to be hidden and how you'll get it, etc.  Also make sure the room has some indication of the item it's hidden in/behind, or whatever that can be looked at.  Generally we'll want keys to fit all doors within a house/shop.
+
+Traps and other special room effects as well as guards and mobs are the most time consuming for wizzes, but also add more to what the rooms contribute to the game.  If you want guards or it's a shop and you need clerks, etc. we'll also appreciate descriptions for them as well as race and alignment for starters.  How far we go after that depends on time available and suitability/balance.

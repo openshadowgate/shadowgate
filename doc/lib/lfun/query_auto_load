@@ -1,0 +1,41 @@
+Nightmare mudlib lfun: query_auto_load()
+
+mixed *query_auto_load();
+
+This function is called by the player object in every object in the possession
+of the player when the player quits or saves.  The functions is different
+from the LPMud function of the same name in that it returns a mixed array.
+This array is generally of the form:
+    ({ "path/file_name", ({ var1, var2, ..., varn }) })
+Where element 1 of the array is a string representing the file name of the
+item to be cloned when the player logs in.  The second element of the array
+is another mixed arrays containing any information you want to be saved
+and passed into the new object that is created the next time the player
+logs in.
+
+Any object which autoloads should have the function remove() defined for it,
+so that the player's encumbrance is updated upon its destruction.  If you
+are inheriting any standard object in the Nightmare mudlib, this is already done
+for you.  Not also another difference from the LPMud mudlib, namely that
+autoload objects may be droppable if you desire.
+
+*****
+example:
+
+If you choose to save some information stored in an autoload object, like a
+counter and a string that keeps the name of a player's spouse, these were, as
+you remember from above, stored in the second element of the return array of
+query_auto_load(), like:
+
+mixed *query_auto_load() {
+    return ({ "/obj/divorcer", ({ count, spouse }) });
+}
+
+To bring these values into the object at login, you need
+also to define a function called init_arg(mixed *arr);
+
+For the functioning of this, see init_arg() man.
+
+But, if the values of any variables do not matter, then simply use:
+
+mixed *query_auto_load() { return ({ "filename", ({}) }); }

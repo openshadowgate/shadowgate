@@ -1,0 +1,90 @@
+Approval Process for Areas on Shadowgate MUD
+
+** This process will be adhered to WITHOUT exception **
+
+IMPORTANT
+
+	The approval process has been set up to provide guidelines for 
+wizards to work within in order to insure that game does not become 
+neither too hard nor too easy for players.  Further, at Shadowgate,
+it is used to make sure that the basic theme of the MUD, as outlined
+by the Gods, is not compromised.  Shadowgate, in rules and in spirit,
+is strictly an AD&D MUD.  Deviations from this theme will be considered,
+but will be eyed very critically by the Approval admins.  Despite 
+all of this, please do not consider these rules to be here to restrict
+your creativity, that is not their purpose.  Their purpose is to 
+direct your creativity and efforts in a direction that will be
+beneficial to the MUD.  Lastly, feel free to direct questions at
+the Approval team at any point in this process.  We want to open
+your new area as much as you do for the greater glory of the MUD.
+
+APPROVAL PROCESS
+
+
+1.	Find your sponsor or an admin and talk to him/her about what
+	you want to do with the area.  If they like it, ask them if
+	they will talk it over with the Approval admins and get the
+	idea approved.  You can start working on it before you get
+	approval, but if it is not approved, for whatever reason, you 
+	will have wasted your time.
+	
+2.	You will be given access to the new directory created for 
+	your area.  Anything new that you create for the area should
+	be placed in here.  You can use your home directory to test
+	objects, but any area that calls on files in your home
+	directory WILL NOT BE OPENED.  No exceptions, for any
+	reason.
+	
+3.	You are encourged to use standard objects that have been pre-
+	approved, for weapons or items that will be the same
+	throughout the MUD.  For instance, the standard weapons are
+	located in /d/shadow/obj/weapon/.  If you use items from
+	another area directory, you must make absolutely certain that
+	it will work in your area, and you should NOT copy the file
+	into your area directory UNLESS you have changed it.  This
+	saves on RAM and CPU usage.
+	
+4.	The Approval team encourages you to make traps and puzzles
+	that make the user think instead of just hack and slash.
+	By no means are these required for area approval, but they
+	are nice.  If you do have these things we do require you
+	to point out any traps that may cause death to a
+	player.  Inescapable death traps are NOT allowed.
+	
+5.	Any magic items you create need to be pointed out, because
+	they can easily mess up balance.  Be sure to look at the
+	weapons docs <help weapons> for rules about magic weapons
+	and the magic item docs <help magic_items> for rules about 
+	items.
+	
+6.	When you are ready to have your area approved, mail arch
+	a note with the following:
+	
+	% Name of area
+	% Wizards working on it
+	% Directory it is in
+	% Dfficulty level of the area (newbie, level 10-15, high mortal, 
+	etc.)
+	% The filenames of, or the directory with any
+	new magic items
+	% The location of death traps
+	% Any quest information
+	% When you are available to give the admins a tour of the area. 
+	If you can't be around, please provide a map of the area.
+	
+	The admins will mail back in response and start looking things over.
+	The area needs to be approved by 2 admins (1 Law, 1 Balance).  When
+	that occurs, your area can be opened. (NOTE: DO NOT BOTHER THE APPROVAL
+	ADMINS WHEN THEY ARE APPROVING!  Approval is long job and admins
+	are busy people too.  Please be patient.)
+	
+7.	You must maintain your area.  If the rules change or bugs are not
+	corrected in the area, it can be closed by any admin until it is fixed. 
+	Fixing such an area takes precedence over all other projects so there is
+	as little as possible disruption of the game.
+	
+	END
+	
+	Direct any questions about Approval to Aragorn, Melnmarn or Thorn
+	
+See also:  wiz_rules, balance

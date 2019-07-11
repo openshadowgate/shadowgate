@@ -1,0 +1,215 @@
+                  ----------------
+                   Spell Tutorial
+                  ----------------
+
+                      Contents
+
+    I.    Introduction to ShadowGate spell system
+    II.   Interfaces (Wizard, Ability & Object)
+    III.  Spell Creation
+    A1.   Spell.h variables
+
+  I. INTRODUCTION
+
+  The ShadowGate spell system has been set up to emulate the classic AD&D (tm)
+spell system in the context of an LPmud.  There are MANY areas that we are 
+completely unable to reproduce the effects of the spells, but there are also
+areas that we haven't covered that a little imagination and lots of work will
+make possible.  Presently the spell system is based on a unique (...I think)
+inheritance system.  There is a /std/magic/spell.c inheritable file, and there
+are daughter files that use the spell.c functions to create specific spells.
+In this way, spell coding should remind any experienced coder of room, or 
+object coding, a very simple exercise once you know the appropriate functions.
+Of course, writing a spell requires quite a bit more experience and practice
+than writing a room does, it is still vastly simpler than writing a command
+(the way some MUDs have chosen to impliment spells).  In this system, there
+IS a command, but only one, the 'cast' command, which references all spells
+whether the spell is a priest or wizard spell.  From a coding angle, this
+system vastly simplifies coding of spell and most certainly reduces RAM
+usage by eliminating duplication of certain common verification functions that
+are covered in the spell.c file.  From a playing angle, well there has been
+little input as of yet, but there really should be little difference between
+typing 'cast magic missile at thorn' and 'magic_missile thorn' except the 
+extra typing involved, something that a good alias could overcome quite
+easily for a player's most commonly used spells.  Of course, as you might
+have noticed, the new system flows in plain english, which can be useful
+for its own reasons.
+  The purpose of the the rest of this file is to aid in the understanding and
+the creation of spells using this system.  The functions involved and some 
+examples of their implimentation are here as well as an explaination.  If
+you have questions about this system that cannot be answered here, see your
+admin in charge of spells and/or the wizard/priest guild, because changes
+are likely to occur in the future.  Documentation usually lags behind updates.
+
+  II. INTERFACES
+
+  There are 3 interfaces that are defined in the spell.c file that allow
+different things to access the same spell effects in different ways.
+The first one is the one you would be most familiar with, the wizard 
+interface.  This is the interface that allows users to cast spells by typing
+'cast <spellname> at <target>'.  In spell.c the function that handles this 
+interface is aptly called wizard_interface().  If you look at the file you
+will note that it has code that checks things such as the number of magic
+points that the player has, or if there is a target for the spell, etc.  
+You will also note that it may call upon a magic_d.c for some of this 
+information.  This is a daemon file that holds verification functions for 
+user casting of spells.  If you are properly using the spell inheritable, this
+should be the only place that you see it called.
+  The second interface is what refered to as a 'spell-like ability' in AD&D.
+Spell-like abilities are not spells, but rather abilities that natural 
+creatures have that resemble spells that need to be cast by wizards or
+priests.  These are natural abilities and therefore the creature requires
+no components, nor a spellbook, nor in fact, intelligence, to use these
+abilities.  AD&D referenced monster's abilities in the framework of spells
+probably to make it easier for the DM to make rolls for the effects of these
+abilities, and also to cut down on the description of the powers of the
+monsters.  On ShadowGate, we can use the same idea to make it easier on us
+to code monsters with interesting abilities.  The function in spell.c that
+carries these functions out is ability_interface().  Looking at the
+function, you will note that it is quite a bit shorter than the wizard 
+interface, and rightly so.  There are many fewer restrictions on the animal 
+or monster casting the spell as an ability than a wizard casting it as a
+magical spell.  
+  The final interface that is provided is for objects that cast spells.  
+What we mean by objects is things like scrolls, potions, wands, etc.  Of
+course, you can use this interface to have just about anything cast a spell.
+This interface has the most amount of useful possibilities because you can
+use it to say, make a spell go off when a person triggers a trap, or use
+it to have a magic sword cast one of its innate spells.  Of course, this 
+would be the way to have a wand, staff or rod cast a spell on command.  Or
+a potion that is drunk would automatically cast the spell with the drinker
+as the target.  This interface will be rather open so that many different
+types of targets or types of casters can be accomodated.  The function that
+accesses the interface is called use_spell().
+
+  III.  SPELL CREATION
+
+  Okay, this is the part that you were waiting for.  When you create a new
+spell. You will need to follow these steps:
+
+  1. Determine what you want your spell to do and come up with a general
+idea how to code the effects you desire. (This is the hardest part of 
+coding a spell).
+  2. Create the spell file.  In the create() you will need to set all of the
+spell's general information such as spell name, level, type and sphere. 
+This is REQUIRED.  There are also some optional functions you can put in here
+too.  You will then need to make a function called spell_effect().  In here
+you will put the code for the effect that the spell will have.  Make sure and
+put a line in that says ::spell_effect(); or it will not recognize it 
+properly.
+  3. Be sure that the file is placed in the correct directory.  The cast
+command will only recognize the file if it is in /cmds/wizard or /cmds/priest.
+If you cannot put it there yourself, have it put there by someone who can,
+with proper approval, of course.
+
+  Now that we have gone through the basic steps lets look at a spell file
+and what it would like. (This is a sample spell and will not appear in a
+real game, although it would work).
+
+//  Sample Spell for Spell System II (Cantrip)
+//  Thorn@ShadowGate
+
+#include <std.h>
+#include <spell.h>
+
+**Be sure to include these header files, or your spell will not
+**work properly.
+
+inherit SPELL;
+
+**This is the spell.c file that processes the data from this file.
+
+create() {
+	::create();
+	set_spell_name("cantrip");
+**This sets the name of the spell, in this case, "cantrip".
+
+	set_spell_level(1);
+**This sets the level of the SPELL, not the wizard casting it.  There are
+**9 levels of wizard spells and 7 levels of priest spells.  See the Player's
+**Handbook and/or the DMG for details, or ask someone.
+
+	set_spell_type("wizard");
+**Sets what the type of spell is, whether a priest or a wizard would cast
+**this spell.  This is important.  Priest and wizard spell files are also
+**stored in the different places, and the cast command is sensitive to this.
+
+	set_spell_sphere("alteration");
+**Sets the sphere or "school" of the spell that is being cast by the caster.
+**Wizards have different "schools" of magic that they can study, allowing
+**them to specialize in certain types of spell.  Priests have religions,
+**whose deities may of Earth, War, or of the Sun.  These deities will be 
+**more apt to grant spells that apply to their sphere, and may not grant
+**some spells at all!
+
+	set_components( ([ "stardust" : 1, "idol of lassur" : 0, ]) );
+**This is a very important in a system which requires the existence of
+**certain material objects (components) in order for the wizard or priest
+**to cast the spell properly.  This function takes input in a mapping.
+**The format for this mapping is:
+**             (["name of component" : quantity required,])
+**The name of the component is pretty obvious, but the quantity issue is not
+**If your spell requires "a pinch of dust", you would put:
+**             "pinch of dust" : 1,
+**If your spell requires 50 eyes of newt then it is:
+**             "eye of newt" : 50,
+**If the spell just needs the presence of a component, but does not consume
+**it, then you may put:
+**             "model of pyramid" : 0,
+**If the spell has no components, you should omit this function altogether, so
+**that the magic daemon knows not to test for components.  However, if you 
+**entered a null mapping ([]), then it should still work, it would just be 
+**more work for no reason.
+
+	set_target_required(1);
+**Some spells are area spells which can just be cast, however, some spells,
+**like magic missile, require a target.  For those spells that require a 
+**target, you MUST put this function in, so that the wizard_interface()
+**function doesn't error out when the player forgets to enter a target.
+**If there is not a required target, or if a target is optional, you can
+**set this function to 0 or you can just not put it in.
+
+	
+	set_casting_string(this_player()->query_name()+" casts a bubble at
+you!!!\n");
+**This is an _optional_ function that allows you to alter what the players are
+**told when the caster begins to cast a spell.  Since the default string is
+**"<caster> begins to cast a spell!", changing the casting string will have
+**many different effects.  For instance, if you want the player to seem like
+**he is doing something other than casting a spell, or if you just want it to
+**look cool, you can set your own string.  If you want the caster to say
+**nothing at all, just look at the next function which is...
+
+	set_silent_casting(1);
+**This is another _optional_ function.  If there are some spells that could
+**be cast secretly, you can use this function to cast them without warning
+**the other people in the same room.  If you want to retain the casting string
+**or don't care you can set this function to 0 or omit it from the file.
+
+}
+
+spell_effect() {
+	::spell_effect();
+	tell_player(CASTER, "You blow a bubble at your enemies!!!\n");
+	tell_room(environment(CASTER), "You see a bunch of evil....bubbles fly
+at you!!!!!!\n", CASTER);
+}
+
+**The spell_effect() function is where you set up the effects of the spell.
+**You may also put any subsidiary code there as well, if you would like.
+**You will note that there are variables in upper case letters (ie. CASTER)
+**These are NOT actual variables, but rather they are functions that are
+**being called in the spell.c file.  The uppercase shorthands (like CASTER)
+**are found in the /adm/include/spell.c file.y
+**This function is THE function for handling spell out puts.  If you are 
+**going to use other functions, that is fine, but you must reference 
+**spell_effect() or the spell will not go off properly.
+
+	A1.  THE 'spell.h' VARIABLES [APPENDIX]
+
+	This is a list of pre-compiler definitions that you can use in place
+of long complicated call_outs() to get a value you need from the spell 
+inheritable.  They are defined in the file /adm/include/spell.h for your
+information.
+
+

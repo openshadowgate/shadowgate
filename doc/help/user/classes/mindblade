@@ -1,0 +1,35 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Mindblade:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 in Psion (selected when advancing)
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Intelligence
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Strength or Dexterity
+
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow,
+               kobold, hobgoblin, yuan-ti, halfling (ghostwise), 
+               dwarf (duergar)
+
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, sorcerer, psywarrior
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, spellcraft (see below)
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: mind before matter 
+   %^RESET%^L4: improved prescience
+   %^RESET%^L7: metabolic perfection
+
+The mindblade is a psion who has dedicated his craft towards
+becoming a more effective warrior in melee combat.  He is able
+to manifest powers in the heaviest armor and while wielding 
+any weapons.  His prescience power is also stronger than that
+of a typical psion and has much longer duration.  When the 
+mindblade reaches level seven, the true metabolism power becomes
+so effect that it will no longer expire over time, but only when
+the mindblade is knocked unconscious or killed.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, 
+          prepare, disciplines, master

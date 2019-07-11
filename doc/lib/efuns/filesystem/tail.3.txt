@@ -1,0 +1,24 @@
+tail(3)                      LPC Library Functions                     tail(3)
+
+
+
+[1mNAME[0m
+       tail() - displays the latter portion of a file
+
+
+[1mSYNOPSIS[0m
+       int tail( string path );
+
+
+[1mDESCRIPTION[0m
+       This  efunction  displays the latter portion of the file named by path.
+       It returns 1 if successful, 0 otherwise (e.g. when  the  file  is  pro‐
+       tected against reading).
+
+
+[1mSEE ALSO[0m
+       read_file(3), read_buffer(3), file_size(3)
+
+
+
+MudOS                             5 Sep 1994                           tail(3)

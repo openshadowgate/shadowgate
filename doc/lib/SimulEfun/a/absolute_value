@@ -1,0 +1,17 @@
+Nightmare IV SimulEfun: absolute_value()
+
+int absolute_value(int);
+
+DESCRIPTION
+Returns the absolute value of an integer.
+
+EXAMPLE
+absolute_value(5) returns 5
+absolute_value(0) returns 0
+absolute_value(-5) returns 5
+
+LOCATION
+/adm/simul_efun/absolute_value.c
+
+SEE_ALSO
+cos() cot() pow() sin() sqrt() tan()

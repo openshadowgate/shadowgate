@@ -1,0 +1,12 @@
+Nightmare IV SimulEfun: query_host_port()
+
+int query_host_port();
+
+DESCRIPTION
+Returns the port number you connect to in order to login to the MUD.
+
+LOCATION
+/adm/simul_efun/mud_info.c
+
+SEE ALSO
+architecture(), mud_name(), mudlib(), mudlib_version(), version()

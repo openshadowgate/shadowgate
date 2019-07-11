@@ -1,0 +1,235 @@
+Nightmare room tutorial
+Written 181092 by Descartes of Borg
+Additions 140493 by Valodin
+Additions 050295 by Melnmarn
+Additions 051395 by Melnmarn
+Rewritten by ~Circe~ 1/29/08 to match current mud standards
+
+This tutorial contains all information you need to know on building 
+basic rooms.  Once you have mastered the material here, you should 
+read <help complex room tutorial> to learn how to add more interest
+and functionality to your rooms.
+********************************************************************
+
+The Basic Room
+-----------------------
+
+The code for a basic room looks like this:
+
+******
+
+#include <std.h>
+
+inherit ROOM;
+
+void create(){
+   ::create();
+   set_indoors(1); 
+   set_light(2); 
+   set_travel(PAVED_ROAD);
+   set_terrain(CITY);
+   set_name("A Sample Room");
+   set_short("A Sample Room");
+   set_long("This is a practice room meant to show you code.  "+
+      "There is a single table with two chairs but no other "+
+      "ornamentation.  Help!  There's no way out!");
+   set_items(([ 
+      "table" : "This is what you would see when you <look table>. "+
+         "If an object has only one id, it should be set up in "+
+         "this way.", 
+      ({"chair","chairs"}) : "This is what you would see when you "+
+         "<look chair> or <look chairs>.  If an object has more "+
+         "than one id, you should set it up this way."
+   ]));
+   set_smell("default","This room has a smell.");
+   set_listen("default","This room has some noise.");
+   set_exits(([ 
+      "south" : "/d/shadow/room/city/adventure"
+   ]));
+}
+
+******
+
+In this example, you have a room with a single exit.  You must 
+have all of these functions in your code to create any room.  
+It is true that you can omit the set_exits and set_items 
+functions and still have a viable room, but it is very rare 
+indeed that you have a room set with no exits and on ShadowGate, 
+you should attempt to have every noun in the room description given
+an item description.  
+
+All of these functions are placed within the definition of a function 
+called create.  create() is called whenever a room is first loaded 
+into memory.  All of the below functions which you are calling from 
+inside create have been pre-defined for you in the file /std/room 
+which you access in the first lines:
+
+%^BOLD%^#include <std.h>
+   This includes a header file, where different items are defined.  
+   Typically, std.h should be included in any room where you are 
+   using common abbreviations).  You should include this file and 
+   use the common inherits as much as possible, as this will make
+   your area much easier to update if there are mud-wide changes.
+
+%^BOLD%^inherit ROOM;
+   This line of code tells the mud what to use as the file's base.
+   If you included <std.h>, you can use ROOM as your inherit if
+   your room needs no doors, or VAULT if it needs doors.
+
+%^BOLD%^void create(){
+   This lets the file know what to make.
+
+%^BOLD%^::create();
+   The :: is an operator like +. -. *, etc.  It means the function 
+   which follows is down the inheritance tree one level.  In this 
+   example, it means it is calling the create() function in room.c.  
+   You use this syntax when there might be confusion as to which 
+   function you mean.  Make sure you always include ::create();
+   in all of your items, rooms, and mobs.
+
+%^BOLD%^set_indoors(1);
+   Means that the room is inside.  Hence players will not be able to
+   see the sun or moon or be rained on.  Omitting this or setting it 
+   to 0 will make it an outside room.  Outside rooms get dark at 
+   night, have weather, and fun stuff like that.          
+
+%^BOLD%^set_light(2);
+   Sets the value of light available to players in that room, not 
+   taking into account torches and the such.  Light values are 
+   generally within the range of -5 to 5, where 0 is where a 
+   human cannot see but function, and -1 causes a human to loose 
+   all functionality.  Remeber, however, that there are races with 
+   the ability to see in the dark.  An average lighting is 2 to 3,
+   although caves and such should be darker.
+
+%^BOLD%^set_travel(PAVED_ROAD);
+%^BOLD%^set_terrain(CITY);
+   Travel and terrain affect several different aspects of the mud, 
+   such as stamina drain and the type of items (based on forage and 
+   other commands) that might be found.  See 
+   <help climate_and_terrain> for a list of valid types.
+
+%^BOLD%^set_name("A Practice Room");
+   Names the room; used by various functions.  This can be the same 
+   as the short description without color codes.
+
+%^BOLD%^set_short("A Practice Room");
+   This is the thing a player in brief mode will see upon entering a
+   room or typing "glance".  It is simply a short description of what 
+   the room is.
+
+%^BOLD%^set_long("This is a practice room meant to show you code.  "+
+%^BOLD%^    "There is a single table with two chairs but no other "+
+%^BOLD%^    "ornamentation.  Help!  There's no way out!");
+   A more verbose description of the room.  Often there will be 
+   subtle clues as to any special things a player can do in the 
+   room here.  For instance, you might say "There is a crack in 
+   the south wall".  In this case, you might allow the player to 
+   enter the crack to go to a different room.  Note how a long 
+   room description in the basic room example was broken up 
+   using the ability to add strings.
+   NOTE: The Nightmare Mudlib now wraps text to fit the screens of
+   each individual player, so you should only put in carriage
+   returns (\n) when you specifically want them to break there.
+   Carriage returns are what is used on those rooms that have a 
+   blank line in between the main description and a OOC statement 
+   such as "<help shop> will get you a list of commands to use here"
+
+%^BOLD%^set_items(([ 
+%^BOLD%^   "table" : "This is what you would see when you <look table>"+
+%^BOLD%^   ".  If an object has only one id, it should be set up in "+
+%^BOLD%^      "this way.", 
+%^BOLD%^   ({"chair","chairs"}) : "This is what you would see when you "+
+%^BOLD%^      "<look chair> or <look chairs>.  If an object has more "+
+%^BOLD%^      "than one id, you should set it up this way."
+%^BOLD%^]));
+   This function is very important to making your room interesting to
+   players.  It allows players to look at items which are described
+   somehow in your room, but yet which do not physically exist inside
+   the room.  For example, in the room description, you may mention
+   the existence of a desk.  There is no point in actually placing a 
+   desk object in the room since it does nothing special, but you 
+   want someone to be able to look at it.  Perhaps you might even 
+   want to add something that allows players to pull something out 
+   of it, nevertheless, it is still a simple waste to add another 
+   object in the room.  The set_items() allows you to add 
+   descriptions to the room.  You use a mapping as the argument, 
+   where you have ([ "item": "description"])
+
+%^BOLD%^set_smell("default","This room has a smell.");
+%^BOLD%^set_listen("default","This room has some noise.");
+   Smell and listen are important lines of code that add flavor to
+   an area.  If you use default, such as the examples above, the 
+   lines of smell and sound will appear in the room's long 
+   description as well as when a player types <listen> or <smell>.
+   In addition, you can also set these to something other than 
+   default, such as:
+%^BOLD%^set_smell("default","You smell flowers in the air.");
+%^BOLD%^set_smell("flowers","You inhale the lovely aroma of roses.");
+   in which case players would type <smell flowers> to get the second
+   description.
+
+%^BOLD%^set_exits(([ 
+%^BOLD%^   "south" : "/d/shadow/room/city/adventure"
+%^BOLD%^]));
+   This function passes a data type called a mapping.  What it does 
+   is associate the value "/d/shadow/room/city/adventure" with a 
+   value called a key, which here is "south".  In practical terms, 
+   it says that the exit south is /d/shadow/room/city/adventure.  
+   There may be any number of exits added to a room, but each one
+   needs to be uniquely named, and it is usually better to have them
+   set as the names of directions rather than "building" to help 
+   players get a sense of the layout of an area.
+
+That is it for a basic room.  It's purpose is simply to link complex 
+rooms as basic rooms should not be the basis of an area.  Too often 
+immortals brag about having a 500 room area.  It will turn out that 
+400 rooms are just basic rooms.  There is nothing on this earth 
+more boring than an area full of basic rooms.  But they are 
+necessary, and a proper combination of basic rooms with complex 
+rooms is what makes for a neat area.
+
+%^BOLD%^Some basic notes on code format and readability:%^RESET%^
+To make sure your code is as neat as possible, there are two things
+you can do so that it is easily readable, even in <more>.
+
+%^BOLD%^Indentions:%^RESET%^
+   First, each "level" of your code should be indented, but do not
+   use tab.  The mud interprets any tab as 8 spaces, which means 
+   if you have more than a couple of levels, you run out of space.
+   Consider using 3 spaces for each level, which changes code that 
+   looks like this:
+void create(){
+::create();
+set_name("A room");
+set_short("A room");
+set_long("This is a room that has lots of stuff in it.  There are "
+"plenty of things you could look at.");
+
+   To code that looks like this instead:
+void create(){
+   ::create();
+   set_name("A room");
+   set_short("A room");
+   set_long("This is a room that has lots of stuff in it.  There "
+      "are plenty of things you could look at.");
+
+   As you can see, the indentions allow you to see each piece of 
+   code clearly, which will be helpful when it comes to debugging 
+   and finding typos.
+
+%^BOLD%^Line Length:%^RESET%^
+   Again to help aid in reading files with <more>, your lines should
+   be no more than 70 characters in length.  If you come to the 70th
+   space and are not finished with the string you are writing, 
+   simply end the line with " (or "+, which you will see in some 
+   places), and then begin on the next line, indenting an extra 3
+   spaces for readability.  See the set_long example in this file.
+
+The wiz overseeing your apprenticeship will likely address code 
+readability before your area can be put in game, mostly because we 
+do a lot of reading in <more>, and it's nearly impossible if the 
+code is formatted incorrectly, so please take these hints to heart
+and employ them when you are writing your rooms.  Several examples
+of readable code are in game - see 
+<more /d/attaya/newseneca/rooms/healer.c> for one of them.

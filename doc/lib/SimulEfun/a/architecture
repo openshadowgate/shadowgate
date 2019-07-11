@@ -1,0 +1,12 @@
+Nightmare IV SimulEfun: architecture()
+
+string architecture()
+
+DESCRIPTION
+Returns the name of the architecture on which the mud is running.
+
+LOCATION
+/adm/simul_efun/mud_info.c
+
+SEE ALSO
+mud_name(), mudlib(), mudlib_version(), query_host_port(), version()

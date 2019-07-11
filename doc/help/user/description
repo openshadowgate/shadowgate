@@ -1,0 +1,51 @@
+Adds a description that people will see when they look at you. The 
+description is shown in the form of "your name + text". For example, if 
+I type <describe is a blue-eyed elf.>, then my description will read 
+"Joe is a blue-eyed elf.".  If no argument is given, then you will 
+see your current description.  If the argument -remove or -Remove is
+used then you will clear your description. 
+
+Descriptions past a certain point of play are required, but you are 
+strongly encouraged to come up with one as soon as possible before
+you are forced to.  Poor descriptions that have been obviously entered to
+simply fulfill the requirement to level are not allowed.  You must
+adhere to the guidelines below in determining your description.
+Your description should also be at a very minimum 2 sentences, and when
+deciding what you look like you should also defer to your race and charisma
+to guide you.
+ 
+Please keep in mind that a description and adjectives are the means by
+which you describe your *physical* appearance to people.  Stick to the
+facts, and do not add opinions.  If you were to walk up to me in the
+street, you would not be able to tell if I was strong or evil or good. 
+If you want people to come to a conclusion about you, you need to
+describe things about yourself factually.  If you want to look evil,
+then perhaps you should say that you are sneering or, even better, say
+that your face has wrinkles from sneering.  Do not try and tell the
+player what they should think about you.
+ 
+Do not mix up opinions with facts.  You can be a "muscular dwarf" 
+character, but don't try and tell a firbolg that he should consider you 
+"strong". To him, you're nothing special.  The same thing with beauty, 
+or alignment.  Make sure and think like a character would, not as you, 
+the human player.  
+ 
+Next, descriptions are not your history.  That is what your background 
+is for.  Besides the fact that it is the wrong thing to do, putting your 
+history in your describe gives an advantage to other players as to how 
+to act regarding you.  If you are a con-artist and are talking to 
+someone and he sees that you describe yourself as evil, then how are you 
+going to trick them into a con game? 
+ 
+Finally, your ability to do something is not a description.  There is no 
+activity that should be put in a description.  Phrases like 
+"...suddenly he turns and sees you," or "She sees straight into your 
+soul" are wrong.  Are you a robot that always turns around when a person 
+looks at you?  No.  Do you have a magical spell that allows you to look 
+into souls instantly?  No.
+
+If for some reason your character is quite different than normal from your
+race you need to have a good, and valid, reason for the changes. "I don't
+know" and "I'm just a freak" or blaming it on genetics are not valid reasons.
+ 
+See also: charisma, look, adjective, recognize, chfn, passwd, background 

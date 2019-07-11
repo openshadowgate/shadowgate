@@ -1,0 +1,36 @@
+%^RESET%^%^BOLD%^The following prestige classes are available:
+
+%^RESET%^%^MAGENTA%^Prestige Class         Base Class
+
+%^RESET%^%^CYAN%^Arcane Archer          %^RESET%^Any arcane caster
+%^RESET%^%^CYAN%^Assassin               %^RESET%^Any but psionic
+%^RESET%^%^CYAN%^Bladeweaver            %^RESET%^Any
+%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any but psionic
+%^RESET%^%^CYAN%^Stonelord              %^RESET%^Any
+%^RESET%^%^CYAN%^Warmaster              %^RESET%^Any
+%^RESET%^%^CYAN%^Chronicler             %^RESET%^Bard 
+%^RESET%^%^CYAN%^Archdruid              %^RESET%^Druid 
+%^RESET%^%^CYAN%^Archmage               %^RESET%^Mage 
+%^RESET%^%^CYAN%^Grandmaster of the Way %^RESET%^Monk
+%^RESET%^%^CYAN%^Archpsion              %^RESET%^Psion
+%^RESET%^%^CYAN%^Mindblade              %^RESET%^Psion
+%^RESET%^%^CYAN%^Metamind               %^RESET%^Psywarrior
+%^RESET%^%^CYAN%^Warmind                %^RESET%^Psywarrior
+%^RESET%^%^CYAN%^Shadowdancer           %^RESET%^Thief or Ranger
+%^RESET%^%^CYAN%^Shadow Adept           %^RESET%^Mage or Sorcerer 
+%^RESET%^%^CYAN%^Versatile Arcanist     %^RESET%^Sorcerer 
+%^RESET%^%^CYAN%^Primeval Champion      %^RESET%^Druid
+%^RESET%^%^CYAN%^Immortal Defender      %^RESET%^Fighter or Paladin
+%^RESET%^%^CYAN%^Radiant Servant        %^RESET%^Cleric
+%^RESET%^%^CYAN%^Hierophant             %^RESET%^Cleric or Druid
+%^RESET%^%^CYAN%^Hellfire Warlock       %^RESET%^Warlock
+
+Prestige classes are similar to standard classes, but their abilities are more specialized and often more powerful. Prestige classes on Shadowgate can only be taken starting at level 40 and have a maximum of 10 levels. Some prestige classes have steep requirements, such a minimum amount of levels in a base class, a certain feat, skill or similar. 
+
+To acquire a prestige class when you advance to level 41, simply type %^ORANGE%^<advance CLASS>%^RESET%^.
+
+If you were to type <advance shadow_adept> for example, you would become a 40th level mage/1st level shadow adept. The class feats listed for prestige classes at level 1, level 4 and level 7 are automatically granted when you attain the correct level in the prestige class. They are free feats and you don't need to add them yourself. In almost all cases, when you advance in a prestige class, you also gain spells per day and spells known as if you had advanced in the base class required for the prestige class.
+
+%^RESET%^%^CYAN%^To get more information on a class, type %^ORANGE%^<help CLASS>%^RESET%^%^CYAN%^.
+
+%^CYAN%^See also: %^RESET%^ classes, stats, feats, skills, races, abandon

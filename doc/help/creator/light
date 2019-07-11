@@ -1,0 +1,34 @@
+In all rooms or things in which players may enter, you need to specify a light
+value for it using set_light(x); where x is an integer representing the light
+available to any player in the room, without adjustments for torches and such.
+The following is a table of light values for different situations:
+
+Outdoors:
+   below -3: pitch black sky, usually indicating a magic darkness
+   -3: a starless, moonless night sky
+   -2: a starlit, moonless night
+   -1: A night lit by a not-so bright moon
+   0: Full moon night
+   1: Night in a well lit town area, or late twilight
+   2: Shadowy areas, early twilight, day with heavy cloud cover
+   3: Average daylight
+   4: Unusually bright daylight
+   5: Blindingly bright daylight (too bright for most beings to see)
+
+Indoors:
+   -5: Magically darkned area.  No light exists.
+   -4: Magically, darkened, but not as dark as a -5
+   -3: Pitch black, no light sources
+   -2: Very weak light sources
+   -1: Weak sources of light, but still too dark for most humans to function
+    0: Too dark for humans to see, but bright enough to allow them to function
+    1: Dimly lit room
+    2: A room of average lighting
+    3: A brightly lit room
+    4: A very bright room, usually because of a magic light source.
+    5: Blindlingly, magically lit room
+
+Keep in mind that any light value is acceptable.  If you want something so
+magically darkened that no one may ever see in it, set_light(-1000);
+But any values greater than 5 or less than -5 indicate magic at use.
+Indeed, in some cases, numbers within that range indicate magic at work.

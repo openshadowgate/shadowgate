@@ -1,0 +1,124 @@
+// Slay Living spell for Clerics coded by Grazzt@Shadowgate
+// Based on _finger_of_death.c
+
+#include <std.h>
+#include <daemons.h>
+#include <spell.h>
+
+inherit SPELL;
+
+void create() {
+    ::create();
+    set_spell_name("slay living");
+    set_spell_level(5);
+    set_spell_type("priest");
+    set_spell_sphere("necromantic");
+    set_verbal_comp();
+    set_somatic_comp();
+    set_peace_needed(1);
+}
+
+string query_cast_string() {
+    return "%^BOLD%^%^RED%^"+caster->query_cap_name()+" begins to chant in a mournful tone while swaying back\nand forth with "+caster->query_possessive()+" hands raised into the air!%^RESET%^";
+}
+
+void spell_effect(int prof) {
+    object caster, target, env;
+    int clevel;
+    string him,it;
+    target = TARGET;
+    caster = CASTER;
+    clevel = CLEVEL;
+
+    if (!objectp(target) || !objectp(caster)){
+        dest_effect();
+        return;
+    }
+    if (!objectp(environment(caster))) {
+        dest_effect();
+        return;
+    }
+    env = environment(caster);
+    him = caster->query_cap_name();
+    it = target->query_cap_name();
+
+    tell_room(env, "%^RESET%^%^RED%^The ground around "+it+" opens up and spews forth several\nfurtive figures of death who glance briefly at "+him+".%^RESET%^",({caster,target}));
+    tell_object(target,"%^RESET%^%^RED%^The ground around you opens up and spews forth several\nfurtive figures of death who glance briefly at "+him+".%^RESET%^");
+    tell_object(caster,"%^RESET%^%^RED%^The ground around "+it+" opens up and spews forth several\nfurtive figures of death who glance briefly at you.%^RESET%^");
+    spell_kill(target, caster);
+    call_out("next_step",5,caster,target);
+}
+
+void next_step(object caster, object target) {
+    object env;
+    string him,it;
+
+    if (!objectp(target) || !objectp(caster)){
+        dest_effect();
+        return;
+    }
+    if (!objectp(environment(caster))) {
+        dest_effect();
+        return;
+    }
+    env = environment(caster);
+    him = caster->query_cap_name();
+    it = target->query_cap_name();
+
+    if (!present(target,env)) {
+        tell_object(caster,"%^BOLD%^%^WHITE%^Your target manages to run from the furtive figures of\ndeath before they deliver their deadly blows!");
+        dest_effect();
+        return;
+    }
+
+    tell_room(env,"%^BOLD%^%^WHITE%^As "+him+" chants a final phrase, the furtive figures let out\nan eerie howl and bring their scythes of death down upon "+it+"!%^RESET%^",({caster,target}));
+    tell_object(caster,"%^BOLD%^%^WHITE%^As you chant the final phrase, the furtive figures let out\nan eerie howl and bring their scythes of death down upon "+it+"!%^RESET%^");
+    tell_object(target,"%^BOLD%^%^WHITE%^As "+him+" chants a final phrase, the furtive figures let out\nan eerie howl and bring their scythes of death down upon you!%^RESET%^");
+    if ((string)target->query_property("no death",1)) {
+        tell_room(env,"%^BOLD%^The figures of death slowly dissipate harmlessly around "+it+".",target);
+        tell_object(target,"%^BOLD%^The figures of death dissipate harmlessly around you.");
+        dest_effect();
+        return;
+    }
+    if (SAVING_D->saving_throw(target, "paralyzation_poison_death",0) ) {
+        tell_object(target,"%^BOLD%^%^CYAN%^As the scythes slice into your flesh, you feel a cold chill attempt to\nstop your heart, but it fails to do so.\n%^RED%^The furtive figures vanish back to the land of the dead.%^RESET%^");
+        tell_room(env,"%^BOLD%^%^CYAN%^The scythes slice deep into "+it+"'s flesh!\n%^RED%^However, the furtive figures vanish back to the land of \nthe dead leaving "+it+" standing among the living.%^RESET%^",target);
+        damage_targ(target, target->query_target_limb(),(roll_dice(2,8))+1);
+        if (!spell_kill(target, caster)) return 1;
+        target->set_property("no death", 1);
+        dest_effect();
+        return;
+    }
+    tell_room(env, "%^RESET%^%^RED%^The furtive figures slice their scythes deep into "+it+"'s flesh!\n%^BOLD%^%^WHITE%^"+him+" grins as the figures drag "+it+" into the land of the dead!%^RESET%^",({caster,target}));
+    tell_object(target,"%^RESET%^%^RED%^The furtive figures slice their scythes deep into your flesh!\n%^BOLD%^%^WHITE%^"+him+" grins as the figures drag you into the land of the dead!%^RESET%^");
+    tell_object(caster,"%^RESET%^%^RED%^The furtive figures slice their scythes deep into "+it+"'s flesh!\n%^BOLD%^%^WHITE%^You grin as the figures drag "+it+" into the land of the dead!%^RESET%^");
+    damage_targ(target,target->query_target_limb(),(int)target->query_max_hp() + 10);
+    if (objectp(target))
+        if (!spell_kill(target, caster)) return 1;
+    dest_effect();
+}
+
+void dest_effect(){
+    ::dest_effect();
+    TO->remove();
+}
+
+int help() {
+    write(
+@HELP
+Spell  : Slay Living
+Level  : 5th Level
+Sphere : Necromantic
+Deity  : All
+Syntax : chant slay living on <target>
+
+This spell is necromantic in nature and allows the caster to
+call forth beings from the land of the dead to take the caster's
+target back with them to their homeland. If the beings are successful,
+this transition will result in the target's instant death.
+You must be at peace to cast this spell.
+
+HELP
+);
+    return 1;
+}

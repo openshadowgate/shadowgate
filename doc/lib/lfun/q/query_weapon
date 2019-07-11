@@ -1,0 +1,8 @@
+Nightmare mudlib living lfun: query_weapon()
+
+object query_weapon(string limb)
+
+This returns the object of the weapon wielded in "limb".  If there is none,
+then it return 0.
+
+See also: query_armour(), query_limbs()

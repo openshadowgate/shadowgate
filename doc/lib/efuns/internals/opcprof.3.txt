@@ -1,0 +1,25 @@
+opcprof(3)                   LPC Library Functions                  opcprof(3)
+
+
+
+[1mNAME[0m
+       opcprof() - reports statistics on calling frequencies of various efuns
+
+
+[1mSYNOPSIS[0m
+       void opcprof( string | void );
+
+
+[1mDESCRIPTION[0m
+       This  function dumps a list of statistics on each efunction and eopera‐
+       tor.  If no argument is specified, then the information will be  dumped
+       to  files  named  /OPCPROF.efun  and /OPCPROF.eoper.  If an argument is
+       specified, then that name is used as the filename for the dump.
+
+
+[1mSEE ALSO[0m
+       function_profile(3)
+
+
+
+MudOS                             5 Sep 1994                        opcprof(3)

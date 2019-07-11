@@ -1,0 +1,32 @@
+%^CYAN%^Standard rollable races:%^RESET%^
+        Beastkin       Dwarf          Elf
+        Firbolg        Gnome          Half-Elf
+        Half-orc       Halfling       Human
+        Saurian
+
+%^CYAN%^Experienced players only (accounts with L30+):%^RESET%^
+        Bugbear        Centaur        Drow
+        Gnoll          Goblin         Half-drow
+        Half-ogre      Hobgoblin      Kobold
+        Minotaur       Orc            Ogre
+        Ogre-mage      Voadkyn        Wemic
+        Yuan-ti        Satyr
+        Rare subraces 
+
+Your race determines your make-up. Some races are predisposed to being stronger, sturdier, more intelligent, more sensitive to light, etc. than other races. In addition, different races are physically different from others, having different limbs and other types of body parts. In real life, you had no choice. You were born human. In ShadowGate reality, you do get a choice. Do you want a magical character? Or do you want to play the game by brute force? Or perhaps deception or skullduggery? What do you prefer to explore? Do you like dark, enclosed areas? Or do you like well lit castles or the open outdoors? All these questions face you now. Whatever choice you make, so long as it fits the style in which you like to play, will be rewarding. There is neither a best pick nor a worst pick. There is only what is best or worst for your style.
+ 
+Towards that end, here are some clues:
+  Intelligence and wisdom make the best magic users.
+  Strength and constitution make the best fighters.
+  Dexterity and charisma make the best roguish types.
+ 
+Each race has its own help file. For example, to find out about humans, type %^ORANGE%^<help human>%^RESET%^.
+
+%^CYAN%^It is discouraged for all but those who have proven they understand the game from choosing the following races:%^RESET%^
+
+Drow, half-drow, ogre, ogre-mage, bugbear, kobold, goblin, gnoll, orc.
+
+%^ORANGE%^This is not the 20th century and an enlightened society. Racial hatreds and differences, people looking down on bastard half-races (including half-elves) and so forth is a way of life and even a requirement for survival.%^RESET%^
+
+%^CYAN%^See also:%^RESET%^ individual help files for races.
+

@@ -1,0 +1,46 @@
+                        How to Lock Your Mud
+
+While in development, you should lock your mud to all but people
+who are there to build.  Too many muds never open because they do not lock
+their mud or they allow online people who just play around.  It simply
+takes too much concentration to develop a mud to have so many distractions.
+
+The Nightmare Mudlib has mechanisms to let you lock out all but those people
+who need to be on the mud  for development.  In addition, when emergencies
+arise (like a hard drive crash where players can lose their .o files if
+they login), it is set up so you can quickly lock up the mud in order to.
+assess damage.
+
+To lock the mud:
+Change the #define MUD_IS_LOCKED 0
+so that it says #define MUD_IS_LOCKED 1
+
+You want to make sure that the people you want to allow into the mud are
+members of groups defined in config.h in:
+#define LOCKED_ACCESS_ALLOWED ({})
+It should be an array of ok groups.  The mud ships with the arch groups,
+superuser and assist, as allowed for locked access.
+If you want to allow people other than those defined in groups,
+use the command addguest:
+<addguest [guest name]>
+
+After setting up the config file, update master.c and login.c
+If you add any guests, you have to update in the following order:
+banish.c
+login.c
+
+You should always have LOCKED_ACCESS_ALLOWED defined so your minimal emergency
+team can get on.  This way if an emergency arises, you only
+need to do the foolowing steps:
+
+change #define MUD_IS_LOCKED 0
+to #define MUD_IS_LOCKED 1
+
+update master.c
+
+Throw everyone off the mud, but you and everyon in
+LOCKED_ACCESS_ALLOWED in config.h will be able to get right back on.  You can 
+also simply shutdown the mud.
+
+See also:
+commands: addguest, removeguest, whoguest

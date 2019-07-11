@@ -1,0 +1,69 @@
+#include <std.h>
+#include <spell.h>
+#include <magic.h>
+#include <daemons.h>
+
+inherit SPELL;
+
+void create() 
+{
+    ::create();
+    set_spell_name("wail of the banshee");
+    set_spell_level(([ "mage" : 9 ]));
+    set_spell_sphere("necromancy");
+    set_syntax("cast CLASS wail of the banshee");
+    set_description("A caster invokes a horrible arcane scream that kills everything living in sight.");
+    set_verbal_comp();
+    set_somatic_comp();
+    set_save("fort");
+    splash_spell(1);
+}
+
+string query_cast_string() {
+    return "%^BLUE%^"+caster->QCN+" starts to chant in tongues fell, a feeling of otherwordly horror fills the place.";
+}
+
+void spell_effect(int prof) 
+{
+    object *foes, foe;
+    int x;
+    
+    tell_object(caster,"%^BLUE%^You concentrate and release a HORRIBLE SCREAM in tongues of unlife.");
+    tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM in fell tongues, you feel your soul is being ripped from your body.",caster);
+
+    foes = all_living(place);
+    foes = filter_array(foes, "is_non_immortal",FILTERS_D);    
+    foes = target_filter(foes);
+
+    foreach(foe in foes)
+    {
+        x=0;
+        if(pointerp(foe->query_property("no_slay"))) 
+            if(member_array(caster->query_name(),foe->query_property("no_slay")) != -1) 
+                x = 1;
+        if(do_save(foe,8) || x || foe->query_property("no death") ||
+           (string)foe->query_race() == "undead" ||
+           foe->query_property("undead"))
+        {
+            tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
+            tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
+            foe->set_property("no_slay",({caster->query_name()}));
+            damage_targ(foe, foe->query_target_limb(),1,"negative energy");
+            continue;
+        }
+        tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
+        tell_room(place,"%^BOLD%^%^BLUE%^"+foe->QCN+" screams as "+foe->QP+" soul is carved out from the body!",foe);
+        damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"sonic");
+    }
+    
+    spell_successful();
+    dest_effect();
+}
+
+void dest_effect()
+{
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
+}
+
+

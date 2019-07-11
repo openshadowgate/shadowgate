@@ -1,0 +1,9 @@
+Nightmare mudlib living lfun: set_overall_ac()
+
+void set_overall_ac(int x)
+
+This sets all of a living object's limbs to have an armour class of "x" and
+the torso to have and armour class of 2*x.
+
+See also: set_ac(), query_ac()
+Defined in /std/living/body.c

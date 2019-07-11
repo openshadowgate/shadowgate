@@ -1,0 +1,23 @@
+query_load_average(3)        LPC Library Functions       query_load_average(3)
+
+
+
+[1mNAME[0m
+       query_load_average() - forces an error to occur in an object.
+
+
+[1mSYNOPSIS[0m
+       string query_load_average( void );
+
+
+[1mDESCRIPTION[0m
+       This  function  returns a string which reports two things: 1) user com‐
+       mands per second, and 2) compiled lines per second.
+
+
+[1mSEE ALSO[0m
+       rusage(3)
+
+
+
+MudOS                             5 Sep 1994             query_load_average(3)

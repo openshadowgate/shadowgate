@@ -1,0 +1,22 @@
+shout(3)                     LPC Library Functions                    shout(3)
+
+
+
+[1mNAME[0m
+       shout() - sends a message to all living objects
+
+
+[1mSYNOPSIS[0m
+       void shout( string str );
+
+
+[1mDESCRIPTION[0m
+       Sends the string 'str' to all living objects except this_player().
+
+
+[1mSEE ALSO[0m
+       message(3), write(3), tell_object(3), tell_room(3), say(3)
+
+
+
+MudOS                             5 Sep 1994                          shout(3)

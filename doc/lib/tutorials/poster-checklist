@@ -1,0 +1,133 @@
+Inclined to bug/outdated coding to correct
+==========================================
++ + + + + + + + + + + + + + Index + + + + + + + + + + + + + +
+A)  General - ed, noting changes & backups, inherits
+B)  add-actions - search & read should NOT be (see set below), souls, in general
+C)  set_something - short, long, race, id, read & search, etc.
+D)  set_property(something, what) - enchantment, light, no teleport...
+E)  gear - wear/wield/remove/unwield, use ETO, not TP
+F)  variables - global versus local
+G)  functions - ignore invis avatar/wiz, bugs, ETO, set("aggressive", int or func) versus using init(), non-combat damage - add attacker
+H)  rooms - no .c on exit filenames, doors
+I)  misc - mobs wielding, use /d/common/obj for mundane items
++ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+A)  General
+    -------
+    1) Be careful using ed and watch for a warning about truncating lines when it first opens.  If you get it, q or Q out without changing anything to avoid losing the text.  Then either do your changes via FTP or make extra sure you have a backup and then break the long string down into shorter ones when you do the other change.
+    2) Please note your changes with your name and date, adding the last time the file had been changed for reference is also good.  Not required for just typo fixes but it can't hurt.
+    3) Make SURE you make backups of large files or complex files and especially lib files before making changes.
+    4) Use inherits for rooms and even similar mobs and weapons
+	and/or make one file serve multiple purposes (two shopkeepers from one file)
+
+
+B)  add_actions - in init() and their related functions - <man add_action>
+    ----------------------------------------------------------------------
+    1) search (in rooms)
+	- Needs to be changed to set_search(string item, mixed desc)
+	- item can be "default" for a generic search
+	- Examples:  set_search("default", "You find a pile of stuff.");
+		     set_search("pile", (: TO, "search_pile" :) );
+			to use a function for the result of searching the pile
+			see <man functionp> regarding function pointers
+	- lib code for the set_search is in /std/room/senses
+       - make absolutely sure search functions that give items or spawm mobs are controlled and can't be repeated too often (use a flag that resets randomly in reset(), etc.) and test, test, TEST them
+    2) read (on anything) - lib code is in /std/Object
+	- Needs to be changed to use set_read(string readstring)
+	- Also use set_language(string lang) to require translation
+	- You can set more than one language if appropriate
+	- Setting read(s) in a room is tricky - stay tuned for a solution
+	    I haven't been able to get a function to work yet
+    3) add_actions in general - see <man add_action>
+	- Make sure the failure messages work, 
+	   if the verb is also a soul, that gets very tricky (i.e. push)
+	- They should be int functions so you can actually return 0
+	- Be sure to return 0 if the player doesn't use the right target,
+	   other items may need to use the same verb/command 
+	   drink is a common one as well as read, but read is dealt with above
+
+C)  set(string what, mixed arg) - in /std/Object
+    -----------------------------------------------
+    1) Where there is a set_something(blah) function, please use them
+	- set_race("racename") definitely, do NOT use set("race", blah)
+	   when set_race is used for a valid, defined race, set_wielding_limbs, 
+	   set_body_type, etc. are not required either.
+    2) set_long("longdesc") - 
+       - in mobs or inherited rooms it can save a fair bit of memory to use a function pointer, i.e. set_long( (: TO, "ldesc" :) ) where the function goes string ldesc() { return("insert your text here"); }
+       - best to avoid using with objects because they get restored from PC inventories and can lose the description and error if they've had an addition made to it in the cloning process
+    3) set_id(array), set_short() also need updated from set(blah, blah)
+    4) set_name(string str) - rooms SHOULD be named so if traps are added, etc. there is a name for the info. recorded as to cause of death
+    5) set_terrain(TERRAINTYPE) & set_travel(TRAVELTYPE) are required
+       - see /adm/include/terrain.h for valid options, indoor vs. outdoor
+       - check /log/travel for errors after updating and regularly
+    6) less common but available - 
+	set_peer_message(), set_charge_message(), set_mcharge_message()
+	the charge messages are related to knight's charging
+    
+D)  set_property("propertyname", mixed prop) - in /std/Object
+    ---------------------------------------------------------
+    1) Don't forget that set_property adds to any already set
+       - a room inherits light of 2, set_property("light", 1) makes it 3
+    2) Common properties
+	Rooms - light, no teleport, no sticks, used sticks, 
+		("indoors", 1) defaults to outdoors, 
+              - night light isn't common but is handy to avoid 
+		adding street light objects for outdoor rooms
+	Items - enchantment
+
+E)  Gear - wield/unwield, wear/unwear, special hit functions, etc.
+    --------------------------------------------------------------
+    1) use ETO, do NOT use TP in those or they will bug
+	 - TP is often not defined due to an action being forced, etc.
+	 - bugs on logout or combat often from gear using TP, not ETO
+    2) do use int functions and do NOT use notify_fail in them
+	 - notify_fail messages will not get to the user
+	 - must return 0 if not supposed to wear or wield successfully
+    3) hit functions can do special effects or return an integer to add to the damage from combat, so be careful with those due to things like thief stab or other multipliers
+
+F)  Variable use - global versus local
+    ----------------------------------
+    1)  Global variables are defined at the top of the file 
+    2)  Local variables are declared within a function/only used there
+    3)  If you get an error trying to define one within a function but only need it for that function, try putting it before the ::create(), ::reset(), etc. rather than making it global
+    4)  If the variable is not needed outside a given function or can be passed to a call_outor where ever else it's needed and then discarded, make it a local variable to save memory and keep it clean
+
+G)  Functions in general - exclude avatars/wizzes from effects, etc.
+    ----------------------------------------------------------------
+    1) Older code uses checks like wizardp(TP) or avatarp(TP)
+       - instead, check TP->query_true_invis() (or targ, whatever is passed for the target if it's a special, area effect, etc.)
+       - by using query_true_invis() avatars who are in persona will be treated as normal PC's while invis. through hide, invis. spells, etc.   They will be ignored if they use the true invis. ability for watching or following as avatars, also applies to wizzes the same
+    2) Most functions need an if(!objectp(TO) || !objectp(ETO)) return 0; 
+       - put it first thing after declaring variables, especially call_outs.  
+       - The object or its environment may no longer be valid by the time the function goes off and will bug if they aren't.  
+       - "Bad argument 1 to call other" errors are usually caused by missing checks for valid objects.
+    3) Aggressive functions 
+       - set("aggressive", function) functions will not need an objectp(TO) or (ETO) check because we added it into the lib before they are called from ::init()
+    4) Do not use init to initiate combat if at all avoidable
+        - use a set("aggressive", function) function instead.  
+	- Exception would be if you need it to go off on an invis. person 
+	    because the aggressive check currently ignores invis. people
+    5) If you do damage outside of normal combat (traps, etc.) 
+	- you MUST have the following to insure death will be handled properly
+	- note:  TP may need to be a variable defining the target instead
+	- TP->add_attacker(TO);
+          TP->continue_attack();
+	  TP->remove_attacker(TO);
+
+H)  Rooms
+    1) Room exits - remove .c extensions, they break lpeer and ranged weapons
+    2) use set_door_description("door id", "description") 
+	- doors described in set_items() will be ignored
+	- look door (or gate or whatever) to confirm
+    3) Door names (red door, shop door) must be the same on both sides
+	- if they aren't, the open/closed status won't stay in sync
+    4) Use CROOM or CVAULT to control respawning of wandering mobs
+	- especially note randomness and set_repop abilities
+    5) Use do_random_encounters sparingly, it's too hack and slashable
+
+I)  Misc.
+    2) Mobs wielding - don't specify hands, just "wield sword" 
+	- don't need to add in right hand, in right and left hand, etc.
+	- used to be necessary but now can bug if size is wrong
+    3) All mundane weapons, armor, potions, etc. should come from /d/common/obj
+	- change any that aren't, adding enchantments if needed

@@ -1,0 +1,26 @@
+set_hide(3)                  LPC Library Functions                 set_hide(3)
+
+
+
+[1mNAME[0m
+       set_hide() - set the hide flag on a hidable object
+
+
+[1mSYNOPSIS[0m
+       void set_hide( int flag );
+
+
+[1mDESCRIPTION[0m
+       Sets  the  hidden  flag  of an object to 'flag', which should be 0 or 1
+       (hide disable, or hide enable, respectively).  Only objects  for  which
+       When  the  object is hidden, only other hidable objects will be able to
+       find the object with find_object(), or multiple-object returning  efuns
+       such as users(), children(), all_inventory(), etc.
+
+
+[1mSEE ALSO[0m
+       valid_hide(4)
+
+
+
+MudOS                             5 Sep 1994                       set_hide(3)

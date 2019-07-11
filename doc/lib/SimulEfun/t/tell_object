@@ -1,0 +1,15 @@
+Nightmare IV SimulEfun: tell_object()
+
+varargs void tell_object(object, mixed, mixed);
+
+DESCRIPTION
+If the object in argument 1 is living, it sends the text from argument 2
+to the living object.  If not living, it sends the text to the living objects
+in its inventory.  Argument 3, which is optional, is an object or an
+array of objects to be excluded from seeing the message.
+
+LOCATION
+/adm/simul_efun/communications.c
+
+SEE ALSO
+message(), say(), write()

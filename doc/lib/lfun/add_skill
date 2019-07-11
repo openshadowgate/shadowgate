@@ -1,0 +1,11 @@
+Nightmare mudlib living lfun: add_skill()
+
+int add_skill(string type, int level, int max)
+
+This adds a new skill called "type" with a current level of "level" and a 
+maximum value of "max".  If this skill already exists in the object, then 
+nothing happens and a 0 is returned.  A 1 is returned in the case of
+success.
+
+See also: query_all_skills(), set_skill()
+Defined in /std/living/skills.c

@@ -1,0 +1,21 @@
+ed_cmd(3)                    LPC Library Functions                   ed_cmd(3)
+
+
+
+[1mNAME[0m
+       ed_cmd() - send a command to an ed session
+
+
+[1mSYNOPSIS[0m
+       string ed_cmd(string cmd)
+
+
+[1mDESCRIPTION[0m
+       This efun is available only if __OLD_ED__ is not defined.
+
+       The  command  'cmd' is sent to the active ed session, and the resulting
+       output is returned.
+
+
+
+MudOS                             22 Jan 1995                        ed_cmd(3)

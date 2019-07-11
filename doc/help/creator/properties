@@ -1,0 +1,228 @@
+The functions which handle properties are contained in the file /std/prop.c
+These ar simply special things about an object.  For instance, in some rooms,
+you may not want a player to ba able to teleport.  You there for do this in
+the create() of the room:
+
+	set_property("no teleport", 1);
+
+This file contains a list of properties and what they do.  Afterwards is an
+explanation of the property handling functions.
+
+*****************************************************************************
+
+Nightmare properties:
+----------------------
+
+name: "no teleport"
+value: 1
+types of objects: rooms
+ex: set_property("no teleport", 1);
+
+All teleport spells check the room they are in to see if the room has the
+value 1 for the property "no teleport".  If the value is 1, the teleport will
+fail.  If there is no value, the teleport will succeed.
+
+******
+
+name: "full attacks"
+value: 1
+types of objects: monsters
+ex: set_property("full attacks",1);
+
+This will allow a monster of fighter classes to attack as a player
+of same level. giving them full attacks per round instead of just 1.
+
+name: magic
+value: 1
+types of objects: all
+this property will allow any call to do_damage to break through a stoneskin. The object calling the do_damage function needs to have this property set to a non zero value.
+
+name: "holy ground"
+value: 1
+types of objects: rooms
+
+This property is like the 'no-killing' property, but it only goes into
+effect during "Highlander" wars.  No player may attack anything on holy
+ground.
+
+******
+
+name: "no magic"
+value: 1
+types of objects: rooms
+ex: set_property("no magic", 1);
+
+Much like "no teleport", except this property prevents the casting of any
+spells, including spells like fireball, shock, and missile.
+
+*****
+
+name: "magic item"
+value: string representing the name of a command
+types of objects: treasure, armour, and weapons
+ex: set_property("magic item", ({ "illuminate", "darken" }) );
+
+A magic item is considered any item that performs a function other than one
+considered possible according to the laws of physics.  For example, a helmet
+that you can use to light the room through an illuminate spell is a magic
+item, although a sword you use to pick a lock is not.  To use an item in
+the Nightmare reality for an unnatural or supernatural use, there should
+be a command that goes with it.  For example, you can set any armour of item
+to have an illuminate spell.  This makes it a magic item, and the command
+to have it work is "illuminate".  So the armour code, when you set_illuminate()
+automatically does set_property("magic item", ({ "illuminate" }) );
+The theory behind this is that you should not be able to tell that an item
+does anything peculiar just by looking at it.  Instead it should take some
+special powers to determine that an item has a magic function.  And clerics
+and monks have a spell called sense that will find out what magic powers
+if any an item has.
+
+*****
+
+name: "magic hold"
+value: an int representing the strength of the hold
+types of objects: things with locks
+ex: set_property("magic hold", 15);
+
+When a rogue tries to pick a lock, it is simply a random chance based
+on the player's locks skill.  With a magic hold on the lock, it is
+that number which is subtracted from the player's skill, making it harder
+for the lock to be pick.  You can code this into a lock you want
+to have harder to pick than most, or it can be placed on a lock by a mage,
+or you might create a magic wand that casts a magic hold spell on locks.
+See /obj/chest.c for an example of this at work.
+
+*****
+
+name: "monsterweapon"
+value: int represneting if this is an exclusively monster item
+types of objects: anything usable by a monster
+ex: set_property("monsterweapon",1);
+
+There are many items that are only proper in the hands(or such) of monsters.
+The most common examples are the fangs of a snake, the claws of a dragon, and
+so on. This property is checked when the monster dies and prevents them from
+being transferred to the corpse object. the values are simply 1 and 0, to
+flag whether the item is or isn't a monster weapon.
+
+*****
+
+name: "picking tool"
+value: int representing how useful the object is in helping pick a lock
+types of objects: armour, weapon, or treasure
+ex: set_property("picking tool", 4);
+
+When a rogue attempts to pick a lock, it checks all of the items in the
+rogue's inventory for picking tools, which can be a dagger, or a skeleton
+key.   No matter what it is, the total is added to the rogues lock picking
+skill to give the rogue a greater chance of picking the lock.
+These numbers should always be small for anything that is not specifically
+made to be used in picking locks.
+
+*****
+
+name: "no attack"
+value: 1
+ex: set_property("no attack", 1);
+types of objects: rooms
+
+This makes a room a haven where no combat may take place.  It should only
+be allowed in places where the textual nature of our Virtual Reality has
+reached its limit, so it should be used rarely.  For example, rooms with
+bulletin boards and such things where a player is in an input_to
+situation make it difficult to respond to attack.  In addition, the main
+pub is a haven for the sake of balance, although most probably should
+not be havens.
+
+*****
+
+name: "no steal"
+value: 1
+ex: set_property("no steal", 1);
+types of objects: rooms
+
+Same as "no attack", except it prevents thievery.
+
+*****
+
+name: "keep"
+value: lower case name of a player
+ex: set_property("keep", "descartes");
+types of objects: any gettable object
+
+This property keeps anyone but the person named from picking up the item.
+For instance, here, only Descartes can pick up the object.
+
+*****
+
+name: "strength"
+value: fire ice magic water cold energy lightning (others may be added as well)
+ex: set_property("strength", "water");
+types of objects: living objects
+
+Living objects may be resistent or vulnerable to attacks of certain types.
+The strength property allows you to set this property in a monster, to make
+the monster resistent to certain modes of attack.  If you have an item
+that makes a certain type of attack, or a special attack which is of one
+of the above mentioned types, you should add it to the attack code you
+have written.
+
+*****
+
+name: "weakness"
+value: same as for strength
+ex: set_property("weakness", "ice");
+types of objects: see strength
+
+The same type of thing as strength, except this is for weaknesses.
+
+*****
+
+name "able to cast"
+value: 1
+ex: set_property("able to cast", 1);
+types of objects:  Weapons
+
+This property will allow a mage or cleric to cast a spell when wielding the weapon this property is set in.
+
+*****************************************************************************
+
+Property handling functions:
+----------------------------
+
+*****
+
+set_property(string name, mixed values);
+ex: set_property("magic item", ({ "illuminate", "darken" }) );
+
+This adds a property to the properties of an object. Note that this
+is additive.  This does not erase any values of the property previously set.
+If you want to erase all the properties, first call remove_all_properties() 
+and then set_property();
+
+*****
+
+remove_property(string name);
+ex: remove_property("no teleport");
+
+Removes the property from the object.
+
+*****
+
+remove_property_value(string name, mixed values);
+ex: remove_property_value("magic item", ({ "illuminate" }) );
+
+This subtracts the value from the previous value of the property.
+
+*****
+
+remove_all_properties();
+
+This clears out the object so it has no properties at all.
+
+*****
+
+mixed query_property(string name);
+ex: query_property("magic item");
+
+This returns all of the values of a given property.

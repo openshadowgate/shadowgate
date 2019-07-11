@@ -1,0 +1,14 @@
+Nightmare Mudlib 3.2 SimulEfun: owner_euid()
+
+string owner_euid(string|object);
+
+DESCRIPTION
+Gives the euid of the owner of a given object.  For objects made by
+creators, the euid returned will be the name of the creator.  For
+other objects, the owner_euid() is the same as the object euid.
+
+LOCATION
+/adm/simul_efun/owner_euid.c
+
+SEE ALSO
+export_uid(), geteuid(), getuid(), seteuid()

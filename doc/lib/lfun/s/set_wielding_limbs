@@ -1,0 +1,9 @@
+Nightmare mudlib living lfun: set_wielding_limbs()
+
+void set_wielding_limbs( string *str)
+
+This sets each of the limbs mentioned in the array "str" to be wieldable.
+The limb must be present in the living object for this to work.
+
+See also: query_wielding_limbs(), add_wielding_limb()
+Defined in /std/living/body.c

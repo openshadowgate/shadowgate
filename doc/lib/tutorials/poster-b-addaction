@@ -1,0 +1,26 @@
+B)  add_actions - in init() and their related functions - <man add_action>
+    ----------------------------------------------------------------------
+1) search (in rooms)
+   - Needs to be changed to set_search(string item, mixed desc)
+   - item can be "default" for a generic search
+   - Examples:  set_search("default", "You find a pile of stuff.");   
+ 		set_search("pile", (: TO, "search_pile" :) );
+		to use a function for the result of searching the pile
+		see <man functionp> regarding function pointers
+   - lib code for the set_search is in /std/room/senses
+   - make absolutely sure search functions that give items or spawm mobs are controlled and can't be repeated too often (use a flag that resets randomly in reset(), etc.) and test, test, TEST them
+
+2) read (on anything) - lib code is in /std/Object
+   - Needs to be changed to use set_read(string readstring)
+   - Also use set_language(string lang) to require translation
+   - You can set more than one language if appropriate
+   - Setting read(s) in a room is tricky - stay tuned for a solution
+	I haven't been able to get a function to work yet
+
+3) add_actions in general - see <man add_action>
+   - Make sure the failure messages work, if the verb is also a soul, 
+	that gets very tricky (i.e. push)
+   - They should be int functions so you can actually return 0
+   - Be sure to return 0 if the player doesn't use the right target,
+ 	other items may need to use the same verb/command 
+	drink is a common one as well as read, but read is dealt with above

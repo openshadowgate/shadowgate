@@ -1,0 +1,142 @@
+//
+//      _demonbolt.c - AntiPaladin Ability that
+//      does some damage and can paralyze
+//      Grazzt@Shadowwgate Sept 1996.
+//
+#include <std.h>
+inherit DAEMON;
+ 
+int cmd_demonbolt(string str) {
+    object tp, ob;
+    int dam, wis, hiswis, level, hislevel, failure;
+ 
+    tp = this_player();
+    if((string)tp->query_class() != "antipaladin" ) {
+	notify_fail("This is not for you!\n");
+	return 0;
+    }
+    if(tp->query_ghost()) {
+        notify_fail("You need to be alive to demonbolt anything!\n");
+        return 0;
+    }
+    if(environment(tp)->query_property("no attack")) {
+        notify_fail("You cannot attack in this place.\n");
+        return 0;
+    }
+    if(tp->query_paralyzed() || tp->query_disable()) return 0;
+    if((int)tp->query_hp() < 40) {
+        notify_fail("You are too weak of health to handle the demonic "
+	"wrath!\n");
+        return 0;
+    }
+    if(!str) {
+        ob = (object)tp->query_current_attacker();
+        if(!ob) {
+            notify_fail("Demonbolt who?\n");
+            return 0;
+        }
+    }
+    else {
+        ob = present(str, environment(tp));
+          if(!ob) {
+            notify_fail("No "+str+" here!\n");
+            return 0;
+          }
+        }
+    if(!living(ob)) {
+        notify_fail(ob->query_cap_name()+" is not a living thing!\n");
+        return 0;
+    }
+    if(ob == tp) {
+        notify_fail("Demonbolt yourself?\n");
+        return 0;
+    }
+    if(ob->query_ghost()) {
+      notify_fail("Demonbolt a ghost???\n");
+      return 0;
+    }
+    if(ob->is_player() && !interactive(ob)) {
+        notify_fail("You cannot attack link-dead players.\n");
+        return 0;
+    }
+    if((int)tp->query_level() < 6) {
+	notify_fail("The demons ignore your weak heart!\n");
+	return 0;
+    }
+    if((int)TP->query_money("gold") < 50 ) {
+        notify_fail("The demons demand tribute in gold and you do not have enough for "
+		"a suitable sacrifice!\n");
+        return 0;
+    }
+    if(!ob->kill_ob(tp, 0)) return 1;
+    level = (int)tp->query_level();
+    if (level > 30) level = 30;
+    wis = (int)tp->query_stats("wisdom");
+    hiswis = (int)ob->query_stats("wisdom");
+    hislevel = (int)ob->query_level();
+    tp->set_paralyzed(5,"You are busy hurling the bolt of evil!");
+    if((int)ob->query_alignment() != 1 &&
+      (int)ob->query_alignment() != 4 &&
+      (int)ob->query_alignment() != 7) {
+	write("There is no good in this creatures soul!\n"
+	+ob->query_cap_name()+
+	" is displeased with your attempt!");
+	return 1;
+    }
+    if(level < hislevel) {
+	failure = (hislevel - level)*5;
+    } else {
+	failure = 5;
+    }
+    if((random(100)+1) < failure) {
+        write(
+	    "%^BOLD%^%^RED%^Your %^BLUE%^demonbolt%^RED%^ fails to strike "
+            +ob->query_cap_name()+"'s soul!%^RESET%^"
+	);
+        message("other_action",
+	    "%^BOLD%^%^RED%^"+tp->query_cap_name()+" just "
+            "tried to %^BLUE%^demonbolt%^RED%^ you!%^RESET%^"
+	,ob);
+        say(
+	    "%^BOLD%^%^RED%^"+TPQCN+" fails in a %^BLUE%^demonbolt%^RED%^ attempt.%^RESET%^"
+	,TP);
+        tp->add_hp(-(random(2)+2) );
+        tp->add_money("gold",(-(30)) );
+        return 1;
+    }
+    message("info", "%^BOLD%^%^RED%^"
+	"You summon the %^MAGENTA%^energy of the Abyss%^RED%^ into a %^BLUE%^bolt of pure evil%^RED%^!\n"
+        +(string)ob->query_cap_name()+"'s %^BLUE%^soul%^RED%^ is invaded by the %^MAGENTA%^demonbolt%^RED%^!%^RESET%^\n"
+        "%^GREEN%^You sense the %^YELLOW%^good%^RESET%^%^GREEN%^ within and will follow this "
+	"%^YELLOW%^holy being%^RESET%^%^GREEN%^ until it dies!%^RESET%^"
+    ,tp);
+    message("env", "%^BOLD%^%^RED%^"
+	+(string)tp->query_cap_name()+" hurls a %^BLUE%^bolt of %^MAGENTA%^pure%^BLUE%^ evil%^RED%^ into "
+        +(string)ob->query_cap_name()+"'s soul!%^RESET%^"
+	"\n%^MAGENTA%^"+ob->query_cap_name()+
+        " body is wracked and siezed within %^RED%^Abyssal%^MAGENTA%^ agony!%^RESET%^"
+    ,environment(tp), ({ ob, tp }));
+    message("target", "%^BOLD%^%^RED%^"
+	+(string)tp->query_cap_name()+
+        " hurls a %^BLUE%^bolt of pure evil%^RED%^ into "
+        "your soul!%^RESET%^"
+	"\n%^MAGENTA%^Your body is wracked and siezed within %^RED%^Abyssal%^MAGENTA%^ agony!%^RESET%^"
+    ,ob);
+    ob->add_follower(TP);
+    dam = (random(level) + (level/2) + random(wis) + 
+	(wis/2)+4) - (random(hiswis)); 
+    if(random(wis) > random(hiswis/3)) {
+        ob->set_paralyzed(random(wis)+random(level)+10,"%^MAGENTA%^Your body is wracked and siezed within %^RED%^Abyssal%^MAGENTA%^ agony!%^RESET%^" 
+	    );
+    } else {
+	write(
+	    "%^MAGENTA%^Your foe quickly recovers.%^RESET%^"
+	);
+    }  
+    ob->do_damage(ob->return_target_limb(),dam);
+    tp->add_hp(-(random(3)+2));
+    tp->add_money("gold",(-(50)) );
+    return 1;
+}
+ 
+

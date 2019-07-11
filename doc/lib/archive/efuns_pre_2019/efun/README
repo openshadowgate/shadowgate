@@ -1,0 +1,10 @@
+The documentation in this directory is simply the ascii man pages
+for MudOS 0.9.19 efuns which ship with the driver.  They are
+setup within the Nightmare mudlib 3.2 to be accessible through a
+"man" command.  In addition, SimulEfun, lfun, and apply information
+may be accessed through the man command.
+
+Credits for the documentation of the efuns in this directory may be
+found in the file /doc/etc/Credits.DriverDocs
+
+Descartes of borg 940122

@@ -1,0 +1,15 @@
+Nightmare Mudlib SimulEfun: effective_light()
+
+int effective_light(object ob);
+
+DESCRIPTION
+This function returns the amount of light available to a player, adjusting
+for sight bonuses and inventory items which only affect the player's
+ability to see.  This differes from total light, in that total_light
+simply returns the amount of light available to any observer in the room.
+
+LOCATION
+/adm/simul_efun/effective_light.c
+
+SEE ALSO
+total_light()

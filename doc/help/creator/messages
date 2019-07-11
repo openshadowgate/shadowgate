@@ -1,0 +1,36 @@
+The mud now uses the message() efun for everything.  write(), say(),
+shout() tell_room(), and tell_object() are all redefined using this efun.
+Eventually tell_room() and tell_object() will be removed altogether.
+First, valid Nightmare message classes:
+
+info: information, like lists, menus, etc.
+more: Information being sent out a page at a time.
+prompt: Prompts.
+help: For help information
+talk: local communications like say, whipser, etc.
+tell: remote communication like tell (not including channels)
+<channel name>: the name of a communcation channel is its class
+environment: An event happening in the environment, like the sun going down
+my_action: Text describing an action I have taken
+other_action: Text describing an action others have taken
+system: wizard command output, like ls, etc.
+shout: Text being displayed to all users
+broadcast: same as shout, except that it cannot be blocked by codeblock
+smell: Text describing area olfactory input
+listen: Text describing area auditory input
+room_description: Text describing area visual iinput
+room_exits: Text describing room exits
+living_item: Text describing a living item
+inanimate_item: Text describing non-living items
+
+room_description, room_exits, living_item, inanimate_item are ONLY for use by
+the user object
+
+Message class which are not affected by blocking:
+broadcast, info, more, room_description, room_exits, smell, listen, system,
+prompt, inanimate_item, living_item
+
+All text is wrapped automatically EXCEPT in the following situations:
+If the message class starts with "N".  Example: "Ninfo"
+If you use the efuns: printf() or notify_fail()
+If the message is of class "prompt".

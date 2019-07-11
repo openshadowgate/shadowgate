@@ -1,0 +1,6 @@
+Syntax: rend <limb name> from <corpse>
+
+This will "rend" the limb from the corpse in question. removing the limb from the corpse and giving it to you as a grizzly prize, or proof of deed.
+   <corpselimbs> will allow you to find out what limbs are valid
+
+see also:  corpselimbs

@@ -1,0 +1,122 @@
+//Added Auppenser, Sune, Beshaba, and Shaundakul - Cythera 8/05
+//Added Silvanus - N, 3/13.
+#include <std.h>
+#include <priest.h>
+
+inherit OBJECT;
+object ob;
+
+void create()
+{
+    ::create();
+    set_name("godsfavor");
+    set("id", ({ "remotexoli"}) );
+    set_short("");
+    set_long("");
+    set_property("no animate", 1);
+    set_weight(0);
+}
+
+void init() {
+    ::init();
+    add_action("now","now");
+}
+
+
+int clean_up()
+{
+    if(!objectp(TO)) { return 1; }
+    if(objectp(ETO)) { return 1; }
+    destruct(TO);
+    return 1;
+}
+
+
+void dest_effect()
+{
+    destruct(TO);
+}
+
+
+void remove()
+{
+    if(objectp(PO))
+    {
+        if(!avatarp(PO) && (strsrch(base_name(PO),"_gods") == -1)) { return; }
+    }
+    destruct(TO);
+}
+
+
+int save_me(string file) {
+    return 1;
+}
+
+
+int now(string str){
+   string where, temple, diety;
+   int mypower,startpower,endpower,bonus;
+   object place;
+   diety = "auril";
+   where = "/d/dagger/arctic/rooms/lake/waterfall";
+
+   if (environment(TP)->query_property("no teleport")) {
+      tell_object(TP,"Even "+diety+" is unable to save you from here.");
+      dest_effect();
+      return 0;
+   }
+//teleport proof stuff by ~Circe~ 6/20/08
+//new property to be used for areas protected from teleport
+//but not foolproof
+   place = ETP;
+   if(where &&
+      (where->query_property("teleport proof") ||
+      place->query_property("teleport proof") ||
+      !where->is_room())){
+      startpower = place->query_property("teleport proof");
+      endpower = where->query_property("teleport proof");
+     bonus = TP->query_stats("wisdom");
+      bonus = bonus -10;
+      if((object *)TP->query_attackers() != ({})){
+         mypower = (int)TP->query_level("cleric") + bonus + random(6);
+      }else{
+         mypower = (int)TP->query_level("cleric") + bonus + random(6) + 5;
+//making it easier to teleport out if you aren't in combat
+      }
+      if((mypower < startpower) || (mypower < endpower)){
+         tell_object(TP,"Even "+diety+" is unable to save you from here.");
+         dest_effect();
+         return 0;
+      }
+   }
+   if(ETP->is_temple() && (string)ETP->query_diety() == diety){
+      tell_object(TP,"You are already in your temple!");
+      dest_effect();
+      return 1;
+   }
+  switch(lower_case(diety)) {
+    case "auril":
+      tell_object(TP,"%^BOLD%^%^CYAN%^You feel your blood run like ice as "+
+		    "Auril's killing frost envelops you and all goes dark!");
+      tell_room(environment(ETO), "%^BOLD%^%^CYAN%^A sheet of frost spreads"+
+		    " along "+TPQCN+"'s body, encasing "+TP->QO+" before"+
+        " bursting violently outward leaving slowly descending snowflakes "+
+        "where "+TP->QS+" once stood!",TP);
+      tell_room(find_object_or_load(where),"%^BOLD%^%^CYAN%^A pillar of ice"+
+		    " climbs upward from the floor, cracks spreading across its length"+
+		      " before shattering to reveal a frost covered "+TPQCN+".",TP);
+      TP->move_player(where);
+      tell_object(TP,"%^BOLD%^%^CYAN%^You feel the cold touch of your goddess"+
+		    " stir you to life.  Flexing your limbs you burst free from your icy embrace.");
+      dest_effect();
+      break;
+    default:
+      tell_object(TP,"You are suddenly whisked away to the "+where+" as you call to "+diety+".");
+      tell_room(environment(ETO),""+TPQCN+" calls to "+diety+" and suddenly disappears!",TP);
+      tell_room(find_object_or_load(where),""+TPQCN+" suddenly appears before the altar!",TP);
+      TP->move_player(where);
+      dest_effect();
+      break;
+   }
+   return 1;
+}

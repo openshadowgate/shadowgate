@@ -1,0 +1,38 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Hellfire Warlock:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Warlock
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Ranks in the Spellcraft Skill
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Charisma (before equipment modifiers)
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human (standard, tiefling or aasimar), half-elf, 
+               half-orc, half-drow, elf, gnome (rock/forest), 
+               halfling (lightfoot), drow, goblin, kobold, orc 
+               (tanarukk), hobgoblin, ogre-mage, yuan-ti, shade
+
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any chaotic or evil
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, sorcerer, psion, psywarrior, 
+               paladin
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, influence, spellcraft
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: no fear of the flame
+   %^RESET%^L4: infernal practitioner
+   %^RESET%^L7: hellfire blast
+
+The Hellfire Warlock is a warlock who has taken the additional and 
+perilous step of harnessing the very power of hellfire itself. 
+While this most obviously lends itself to warlocks with infernal 
+pacts, any warlock can potentially seek to wield such power, given 
+his existing ability with dark and chaotic arts. Such arts are not 
+conquered lightly; only the hardiest of warlocks can channel such 
+power. The results are even more potent and fearsome than those of 
+most warlocks; along with a flawless knowledge of the brimstone 
+essence and a greater endurance to flame and fear, the hellfire 
+warlock learns to call down hellfire itself upon his foes.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, master, 
+          warlock

@@ -1,0 +1,358 @@
+#	Created by Billbo Baggins esq.
+#	Tue Mar 30 16:08:49 BST 1993
+#
+#	A database for the where command
+#	/bin/user/_where.c
+#
+#	num1.num2.num3.num4:location
+#
+#	num(1-4) 	Can either be a number 
+#			or '*' ( meaning any )
+#
+#	location	Is the location of the
+#			telnet site
+#
+18.23.*.*:Stoneham  MA, USA
+18.58.*.*:Cambridge  MA, USA
+18.62.*.*:Cambridge  MA, USA
+18.70.*.*:Cambridge  MA, USA
+18.71.*.*:Cambridge  MA, USA
+18.74.*.*:Cambridge  MA, USA
+18.78.*.*:Cambridge  MA, USA
+18.80.*.*:Cambridge  MA, USA
+35.1.*.*:Ann Arbor  Michigan, USA
+35.8.*.*:East Lansing, Michigan, United States of America
+35.193.*.*:East Lansing, Michigan, United States of America
+35.197.153.*:Holland, Michigan, United States of America
+35.202.112.*:Ann Arbor, Michigan, United States of America
+35.211.*.*:Grand Rapids, Michigan, United States of America
+127.0.0.1:Boise, ID  USA
+128.2.*.*:Pittsburgh, Pennsylvania, United States of America
+128.6.7.*:Cherry Hill, New Jersey, United States of America
+128.6.13.*:Piscataway, New Jersey, United States of America
+128.6.18.*:Camden, New Jersey, United States of America
+128.8.*.*:Washington  DC, USA
+128.32.*.*:Berkeley  CA, USA
+128.55.*.*:Cedar Rapids, Iowa, United States of America
+128.59.*.*:New York City  NY, USA
+128.61.*.*:Atlanta, Georgia, United States of America
+128.83.*.*:Austin, Texas, United States of America
+128.95.136.*:Seattle  WA, USA
+128.100.32.*:Waterloo, Ontario, Canada
+128.101.*.*:Minneapolis, Minnesota, United States of America
+128.103.*.*:Cambridge, Massachussetts, United States of America
+128.110.6.*:Salt Lake City, Utah, United States of America
+128.112.*.*:Princeton, New Jersey, United States of America
+128.113.*.*:Troy, New York, United States of America
+128.114.2.*:Santa Cruz, California, United States of America
+128.118.*.*:Erie, Pennsylvania, United States of America
+128.119.*.*:Amherst, Massachussetts, United States of America
+128.120.253.*:Davis, California, United States of America
+128.122.*.*:Jackson Heights, New York, United States of America
+128.123.*.*:Fargo, North Dakota, United States of America
+128.130.*.*:Wien, Oesterriech
+128.135.12.*:Chicago, Illinois, United States of America
+128.138.*.*:Boulder, Colorado, United States of America
+128.140.94.*:Atlanta, Georgia, United States of America
+128.143.44.*:Charlottesville, Virginia, United States of America
+128.147.*.*:Plano, Texas, United States of America
+128.163.*.*:Lexington, Kentucky, United States of America
+128.169.*.*:Knoxville, Tennessee, United States of America
+128.173.16.*:Blacksburg, Virginia, United States of America
+128.174.*.*:Urbana, Illinois, United States of America
+128.175.*.*:Newark, Delaware, United States of America
+128.185.123.*:Westboro, Massachusetts, United States of America
+128.189.80.*:Victoria, British Columbia, Canada
+128.192.22.*:Columbus, Georgia, United States of America
+128.193.32.*:Corvallis, Oregon, United States of America
+128.194.*.*:College Station, Texas, United States of America
+128.194.*.*:Houston, Texas, United States of America
+128.197.*.*:Boston, Massachussetts, United States of America
+128.204.*.*:Saratoga, New York, United States of America
+128.205.100.*:Buffalo, New York, United States of America
+128.210.*.*:Purdue, Indiana, United States of America
+128.214.44.*:Helsinki, Suomi
+128.226.*.*:Binghampton, New York, United States of America
+128.230.*.*:Syracuse, New York, United States of America
+128.235.1.*:Newark, New Jersey, United States of America
+128.248.*.*:Chicago, Illinois, United States of America
+128.250.229.*:Melbourne, Victoria, Australia
+128.252.93.*:St. Louis, Missouri, United States of America
+128.253.*.*:Ithaca  NY, USA
+128.255.*.*:Iowa City, Iowa, United States of America
+129.2.*.*:College Park, Maryland, United States of America
+129.3.*.*:Oswego, New York, United States of America
+129.7.*.*:Houston, Texas, United States of America
+129.10.8.180:Boston, Massachusetts, United States of America
+129.10.20.*:Lynnfield, Massachussetts, United States of America
+129.12.*.*:Canterbury, England, United Kingdom
+129.24.*.*:Albuquerque, New Mexico, United States of America
+129.25.3.*:Philadelphia, Pennsylvania, United States of America
+129.31.*.*:London, England, United Kingdom
+129.49.*.*:Stonybrook, New York, United States of America
+129.63.*.*:North Andover, Massachussetts, United States of America
+129.71.*.*:Morgantown, West Virginia, United States of America
+129.74.*.*:Notre Dame, Indiana, United States of America
+129.78.*.*:Sydney, New South Wales, Australia
+129.79.*.*:Bloomington, Indiana, United States of America
+129.81.224.*:New Orleans, Louisiana, United States of America
+129.89.*.*:Milwaukee, Wisconsin, United States of America
+129.97.*.*:Waterloo, Ontario, Canada
+129.100.*.*:London, Ontario, Canada
+129.101.*.*:Moscow, Idaho, United States of America
+129.106.*.*:Houston, Texas, United States of America
+129.107.1.*:Arlington, Texas, United States of America
+129.110.*.*:Dallas, Texas, United States of America
+129.115.120.*:San Antonio, Texas, United States of America
+129.118.161.*:Lubbock, Texas, United States of America
+129.123.*.*:Logan, Utah, United States of America
+129.127.*.*:Adelaide, South Australia, Australia
+129.128.*.*:Edmonton, Alberta, Canada
+129.130.*.*:Manhattan, Kansas, United States of America
+129.132.*.*:Zuerich, Schweiz
+129.133.*.*:Middletown, Connecticut, United States of America
+129.138.*.*:Socorro, New Mexico, United States of America
+129.142.*.*:Aarhus, Danmark
+129.162.*.*:San Antonio, Texas, United States of America
+129.170.48.*:Hanover, New Hampshire, United States of America
+129.173.*.*:Halifax, Nova Scotia, Canada
+129.174.1.*:Washington, District of Columbia, United States of America
+129.186.*.*:Ames, Iowa, United States of America
+129.217.*.*:Dortmund, Nordrhein-Westfalen, Deutschland
+129.234.*.*:Durham, England, United Kingdom
+129.252.22.*:Columbia, South Carolina, United States of America
+130.15.*.*:Kingston  Ontario, Canada
+130.39.*.*:Baton Rouge  LA, USA
+130.49.*.*:Pittsburgh, Pennsylvania, United States of America
+130.60.*.*:Zuerich, Schweiz
+130.64.*.*:Boston, Massachussetts, United States of America
+130.88.93.*:Manchester, England, United Kingdom
+130.95.*.*:Perth, Western Australia, Australia
+130.102.32.*:Brisbane, Queensland, Australia
+130.105.*.*:Cambridge, Massachusetts, United States of America
+130.111.32.*:Orono, Maine. United States of America
+130.111.160.*:Augusta, Maine, United States of America
+130.115.*.*:Rotterdam, Nederland
+130.132.*.*:New Haven, Connecticut, United States of America
+130.159.*.*:Glasgow, Scotland, United Kingdom
+130.179.*.*:Winnipeg, Manitoba, Canada
+130.184.252.*:Fayetteville, Arkansas, United States of America
+130.194.*.*:Churchill, Victoria, Australia
+130.199.90.*:Upton, New York, United States of America
+130.209.16.*:Glasgow, Scotland, United Kingdom
+130.215.*.*:Worcester, Massachussetts, United States of America
+130.225.*.*:Aalborg, Danmark
+130.234.0.*:Jyvaskyla, Suomi
+130.236.254.*:Linkoping, Sverige
+130.237.*.*:Stockholm, Sverige
+130.238.*.*:Uppsala, Sverige
+130.239.*.*:Sundswall, Sverige
+131.95.109.*:Hattiesburg, Mississippi, United States of America
+131.104.48.*:Guelph, Ontario, Canada
+131.118.70.*:Baltimore, Maryland, United States of America
+131.121.*.*:Annapolis, Maryland, United States of America
+131.123.2.*:Akron, Ohio, United States of America
+131.144.*.*:Atlanta, Georgia, United States of America
+131.172.*.*:Melbourne, Victoria, Australia
+131.174.82.*:Nijmegen, Nederland
+131.210.1.*:Kenosha, Wisconsin, United States of America
+131.215.131.*:Pasadena, California, United States of America
+131.225.91.*:Aurora, Illinois, United States of America
+131.229.*.*:North Hampton, Massachussetts, United States of America
+131.231.*.*:Southampton, England, United Kingdom
+131.234.*.*:Paderborn, Deutschland
+131.246.9.*:Kaiserslautern, Deutschland
+131.252.*.*:Portland, Oregon, United States of America
+132.67.32.*:Tel Aviv, Israel
+132.68.*.*:Haifa, Israel
+132.136.71.*:Ithaca, New York, United States of America
+132.147.218.*:Santa Cruz, California, United States of America
+132.162.*.*:Oberlin, Ohio, United States of America
+132.177.*.*:Durham, New Hampshire, United States of America
+132.178.*.*:Boise  ID, USA
+132.205.4.*:Montreal, Quebec, Canada
+132.206.*.*:Montreal, Quebec, Canada
+132.236.*.*:Ithaca, New York, United States of America
+132.241.*.*:Chico, California, United States of America
+134.3.*.*:Waxahachie, Texas, United States of America
+134.7.*.*:Perth, Western Australia, Australia
+134.10.*.*:Portland, Oregon, United States of America
+134.29.*.*:Winona, Minnesota, United States of America
+134.36.*.*:Dundee, Scotland, United Kingdom
+134.40.*.*:Dundee, Scotland, United Kingdom
+134.53.*.*:Oxford, Ohio, United States of America
+134.68.*.*:Indianapolis, Indiana, United States of America
+134.71.*.*:Alhambra, California, United States of America
+134.74.64.*:New York City, New York, United States of America
+134.79.*.*:Menlo Park, California, United States of America
+134.82.*.*:Lewisburg, Pennsylvania, United States of America
+134.83.*.*:Brunel, England, United Kingdom
+134.84.101.*:Saint Paul, Minnesota, United States of America
+134.87.60.*:Vancouver, British Columbia, Canada
+134.88.*.*:Dartmouth, Massachusetts, United States of America
+134.91.4.*:Muelheim, Dusseldorf, Deutschland
+134.124.*.*:St. Louis, Missouri, United States of America
+134.129.*.*:Oswego, New York, United States of America
+134.153.12.*:St. John's, Newfoundland, Canada
+134.161.*.*:Cedar Falls, Iowa, United States of America
+134.169.*.*:Braunschweig, Deutschland
+134.176.*.*:Giessen, Deutschland
+134.181.*.*:Lewiston, Maine, United States of America
+134.192.15.*:Annapolis, Maryland, United States of America
+134.193.1.*:Kansas City, Missouri, United States of America
+134.206.*.*:Villeneuve d'Ascq, Nord, France
+134.225.*.*:Reading, England, United Kingdom
+134.241.30.*:Amherst, Massachusetts, United States of America
+136.142.*.*:Pittsburgh, Pennsylvania, United States of America
+136.145.1.*:Rio Piedras, Puerto Rico
+136.167.*.*:Boston, Massachussetts, United States of America
+136.204.*.*:Morrisville, New York, United States of America
+136.227.*.*:Springfield, Ohio, United States of America
+136.242.*.*:Washington, District of Columbia, United States of America
+137.52.232.*:Hollywood, Florida, United States of America
+137.82.*.*:Vancouver, British Columbia, Canada
+137.99.15.*:Storrs, Connecticut, United States of America
+137.122.6.*:Ottawa, Ontario, Canada
+137.132.10.*:Singapore City, Singapore
+137.141.*.*:Oneonta, New York, United States of America
+137.142.18.*:Albany, New York, United States of America
+137.143.110.*:Potsdam, New York, United States of America
+137.148.2.*:Cleveland, Ohio, United States of America
+137.161.5.*:Portland, Oregon, United States of America
+137.195.18.*:Edinburgh, Scotland, United Kingdom
+137.208.*.*:Wien, Oesterriech
+137.219.16.*:Townsville, Queensland, Australia
+137.238.1.*:Geneseo, New York, United States of America
+138.25.*.*:Sydney, New South Wales, Australia
+138.38.32.*:Bath, England, United Kingdom
+138.95.*.*:Beaverton, Oregon, United States of America
+138.129.1.*:Moorhead, Minnesota, United States of America
+138.110.1.*:South Hadley, Massachusetts, United States of America
+138.251.*.*:St. Andrews, Scotland, United Kingdom
+139.94.64.*:Kingsville, Texas, United States of America
+139.230.16.*:Perth, Western Australia, Australia
+140.104.*.*:Waukesha, Wisconsin, United States of America
+140.142.*.*:Seattle, Washington, United States of America
+140.146.*.*:Kenosha, Wisconsin, United States of America
+140.160.240.*:Bellingham, Washington, United States of America
+140.178.1.*:Poulsbo, Washington, United States of America
+140.198.32.*:Glendale, Arizona, United States of America
+140.198.64.*:Mesa, Arizona, United States of America
+140.211.92.*:Ashland, Oregon, United States of America
+140.232.*.*:Worcester, Massachussetts, United States of America
+141.212.*.*:Ann Arbor, Michigan, United States of America
+141.217.5.*:Detroit, Michigan, United States of America
+142.32.2.*:Victoria, British Columbia, Canada
+142.92.*.*:Ottawa, Ontario, Canada
+142.104.*.*:Victoria, British Columbia, Canada
+143.43.33.*:Chicago, Illinois, United States of America
+143.53.*.*:Bradford, Yorkshire, England
+143.54.*.*:Porto Alegre, Rio Grande do Sul, Brasil
+143.117.*.*:Belfast, Ireland (occupied) 
+143.210.*.*:Leicester, England, United Kingdom
+144.80.128.*:Indiana, Pennsylvania, United States of America
+144.92.20.*:Madison, Wisconsin, United States of America
+144.175.*.*:Frederick, Maryland, United States of America
+145.18.114.*:Amsterdam, The Netherlands, Holland
+145.24.*.*:Rotterdam, Nederland
+146.50.*.*:Amsterdam, Nederland
+146.87.*.*:Manchester, England, United Kingdom
+146.186.*.*:University Park, Pennsylvania, United States of America
+147.8.167.*:Hong Kong City, Hong Kong (still British)
+147.9.1.*:Washington, District of Columbia, United States of America
+147.26.*.*:San Marcos, Texas, United States of America
+147.28.17.*:Beaverton, Oregon, United States of America
+147.174.*.*:Baton Rouge, Louisiana, United States of America
+147.128.*.*:Ithaca, NY United States of America
+147.205.*.*:Oneonta, New York, United States of America
+147.226.112.*:Muncie, Indiana, United States of America
+149.152.*.*:Willimantic, Connecticut, United States of America
+149.155.23.*:Harpenden, Hertfordshire, United Kingdom
+149.171.*.*:Sydney, New South Wales, Australia
+150.131.*.*:Missoula, Montana, United States of America
+150.188.1.*:Caracas, Venezuela
+151.103.*.*:Troy, New York, United States of America
+152.1.*.*:Raleigh, North Carolina, United States of America
+152.2.119.*:Chapel Hill, North Carolina, United States of America
+152.10.*.*:Boone, North Carolina, United States of America
+152.17.*.*:Salem, North Carolina, United States of America
+155.92.*.*:Milwaukee, Wisconsin, United States of America
+155.210.*.*:Zaragoza, Espana
+155.245.*.*:Essex, England, United Kingdom
+157.182.44.*:Morgantown, West Virginia, United States of America
+157.193.*.*:Ghent, Belgium
+157.252.49.*:Hartford, Connecticut, United States of America
+158.65.8.*:Keene, New Hampshire, United States of America
+158.135.*.*:Huntsville, Texas, United States of America
+159.28.1.*:Richmond, Indiana, United States of America
+159.230.*.*:Farmville, Virginia, United States of America
+159.242.1.*:Indianapolis, Indiana, United States of America
+160.91.128.*:Oak Ridge, Tennessee, United States of America
+160.114.8.*:Szeged, Magyar orsza'g
+161.45.1.*:Murfreesboro, Tennessee, United States of America
+162.148.*.*:Seattle, Washington, United States of America
+163.1.129.*:Oxford, England, United Kingdom
+163.11.8.*:Philadelphia, Pennsylvania, United States of America
+163.11.13.*:Cedarville, Ohio, United States of America
+163.118.5.*:Melbourne, Florida, United States of America
+168.143.*.*:Laurel  MD, USA
+192.31.*.*:Kelowna, British Columbia, Canada
+192.34.*.*:Walla Walla, Washington, United States of America
+192.41.245.*:Chicago, Illinois, United States of America
+192.42.239.*:Melbourne, Florida, United States of America
+192.43.199.*:Commerce, Texas, United States of America
+192.48.211.*:Seattle, Washington, United States of America
+192.52.*.*:Schenectady, New York, United States of America
+192.58.*.*:North Andover, Massachussetts, United States of America
+192.65.*.*:Fryeburg, Virginia, United States of America
+192.80.63.*:Manchester, New Hampshire, United States of America
+192.84.*.*:Des Moines, Iowa, United States of America
+192.88.*.*:Muelheim, Dusseldorf, Deutschland
+192.92.115.*:Huntsville, Texas, United States of America
+192.94.*.*:Dallas, Texas, United States of America
+192.100.81.*:San Jose  CA, USA
+192.102.*.*:Natchitoches, Louisiana, United States of America
+192.108.254.*:Portland, Oregon, United States of America
+192.111.*.*:St. Louis, Missouri, United States of America
+192.131.123.*:Yellow Springs, Ohio, United States of America
+192.153.88.*:Rio de Janeiro, RJ, Brasil
+192.173.11.*:Arlington, Virginia, United States of America
+192.207.232.*:Salt Lake City, Utah, United States of America
+192.245.137.*:Dallas, Texas, United States of America
+194.134.29.*:Sittard, Limburg, The Netherlands
+194.134.28.*:Deurne, Noord Branbant, The Netherlands
+194.134.0.*:Amsterdam, The Netherlands
+194.134.1.*:Amsterdam, The Netherlands
+195.74.192.*:Brussels, Belgium
+195.74.193.*:Brussels, Belgium
+192.246.36.*:Medfield, Massachusetts, United States of America
+198.7.0.*:New York City, New York, United States of America
+198.17.145.*:San Diego, California, United States of America
+198.60.22.*:Salt Lake City, UT  USA
+198.60.253.*:Boise, ID  USA
+198.64.*.*:Boise, ID  USA
+198.78.*.*:Memphis, Tennessee, United States of America
+198.110.*.*:Holland, Michigan, United States of America
+198.145.8.*:Seattle, Washington, United States of America
+198.161.243.11:Calgary, Alberta, Canada
+198.161.243.12:Calgary, Alberta, Canada
+199.166.210.*:Kitchener, Ontaria, Canada
+199.171.167.*:Provence, Rhode Island, United States of America
+199.224.71.*:South Montrose, Pensilvania, United States of America
+202.82.24.*:Hong Kong City, China
+202.82.48.*:Hong Kong City, China
+202.82.49.*:Hong Kong City, China
+202.82.50.*:Hong Kong City, China
+204.118.149.*:Sandy  UT, USA
+204.17.223.*:Mt. Vernon, Washington, United States of America
+204.193.*.*:Manalapan  NJ, USA
+205.252.116.144:Baltimora, Maryland, United States of America
+206.53.102.*:Garden City, Kansas, United States of America
+206.97.111.4:Rhode Island, United States of America
+206.161.75.*:Baltimore, Maryland, United States of America
+206.163.12.*:Portland, Oregon, United States of America
+206.165.5.*: Phoenix, Arizona, United States of America
+207.103.6.*:Philadelphia, Pensilvania, United States of America
+207.115.128.46:Honolulu, Hawaii, United states of America
+207.172.68.5:Baltimore, Maryland, United States of America
+207.175.111.18:Honolulu, Hawaii, United States of America

@@ -1,0 +1,44 @@
+WIZES LEARN TO ADD THIS STUFF I PUT IN
+
+Okay this is really simple.
+To make a monster that effects the alignment of the players
+attacking it all that needs to be added to the monster is:
+	set_property("alignment adjustment",#);
+	
+	the # is a number between -10 and 10 
+	-10 meaning that this action is really evil
+	and 10 meaning that it's good and stuff
+	
+So lost child would be 
+		set_property("alignment adjustment",-9);
+
+killing it would be pretty evil!
+
+So a horrid tyrant who eats children would be
+		set_property("alignment adjustment",9);
+		
+killing it would be pretty good!
+
+easy no?
+
+
+Okay in rooms to have the alignment adjust to actions and such.
+
+You will need to add the same line as above.
+Then at some point in the action you will need the line
+	"daemon/killing_d"->check_actions(TP,TO);
+	
+So stealing the sacred cross of blah blah
+
+int get(...){
+	if(id(str)){
+		set_property("alignment adjustment",-5);
+		KILLING_D->check_actions(TP,TP);
+	}
+	return 0;
+}
+
+any questions please direct them to tristan
+
+
+

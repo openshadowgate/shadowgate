@@ -1,0 +1,9 @@
+Nightmare mudlib living lfun: add_mp()
+
+void add_mp(int x)
+
+This adds "x" magic points to the current magic points of a living object.
+It keeps the magic points within a range of 0 and "max_mp".
+
+See also: set_mp(), query_mp(), set_max_mp(), query_max_mp()
+Defined in /std/living/body.c

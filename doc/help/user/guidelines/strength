@@ -1,0 +1,60 @@
+%^BOLD%^%^RED%^STRENGTH (STR)
+%^RESET%^Strength measures your character's muscle and physical 
+power. This ability is especially important for 
+fighters, paladins, rangers,  cavaliers, and antipaladins because it
+helps them prevail in combat. Strength also limits the 
+amount of equipment your character can carry.
+
+To further explain what defines the Strength score, it can be broken down into:
+
+%^BOLD%^%^RED%^Muscle - Muscle measures the sheer power a character can exert
+	%^BOLD%^%^RED%^at a moment's notice. A character with a higher muscle ratio than 
+	%^BOLD%^%^RED%^his Stamina will look quite strong. Males will have bulging biceps, 
+	%^BOLD%^%^RED%^broad chests, and wide shoulders. While females don't generate the
+	%^BOLD%^%^RED%^muscle mass of males, they will have well-defined, strongly toned forms.
+
+%^RESET%^%^RED%^Stamina - Stamina determines muscle efficiency. A character with a
+	%^RED%^higher stamina than muscle may not have masses of huge muscles,
+	%^RED%^but the muscles he has will be rock hard. Characters like these 
+	%^RED%^may surprise others; not because they can lift four hay bales at 
+	%^RED%^once, but because they can lift one or two at a time for 10 hours 
+	%^RED%^straight.
+
+%^RESET%^You apply your character's Strength modifier to:
+
+%^BOLD%^%^RED%^* Melee attack rolls.
+%^RESET%^%^RED%^* Damage rolls when using a melee weapon
+%^BOLD%^%^RED%^* Some NWPS have minimum in STR to learn
+%^RESET%^%^RED%^* Encumbrance - How much you character can carry
+
+%^RESET%^Stat Scores
+
+1-3 %^RED%^Very weak%^RESET%^ - About that of a young child (ages 3-5)
+4-6 %^BOLD%^%^RED%^Weak%^RESET%^ - About that of a child (ages 5-9)
+7-9 %^RED%^Below Average%^RESET%^ - You lack any muscle tone, and 
+	find lifting most things to be out of your range.
+10-12 %^BOLD%^%^RED%^Average - %^RESET%^The "standard" strength of
+	 an adult male and female
+13-14 %^RED%^Above Average%^RESET%^ - You are able to lift more 
+	and have some muscle tone.
+15-16 %^BOLD%^%^RED%^Tone/Fit%^RESET%^ - You posses more muscle 
+	mass and raw strength than your average person.  Your 
+	strength is often complimented and praised.  Usually 
+	characters with a strength this high have spent some time 
+      in the military, on a farm, or involved in some physical labor.
+17 - %^RED%^Very Fit%^RESET%^ - You have an athletic body, with well
+	defined muscle tone and in most circles could be considered 
+	very strong.  Your stamina and muscle mass are near peak, 
+	allowing you to accomplish many things that others would 
+	find physically impossible.
+18 - %^BOLD%^%^RED%^Extremely Fit%^RESET%^ - Your body and muscles are at 
+	their peak, able to lift most things with ease. Serious 
+	definition can usually be seen.
+19 - %^RED%^Supremely Fit %^RESET%^- Your strength is one that leaves 
+	many in awe of how you've trained your body. Your muscles and build 
+	are much more pronounced, usually with some bulging.
+20 + %^BOLD%^%^RED%^Legendary Strength%^RESET%^- Your strength is the 
+	stuff myths and legends are made of.  Bards create stories about 
+	your mythical strength.
+
+See Also: %^RED%^exceptional_strength

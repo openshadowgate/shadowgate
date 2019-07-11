@@ -1,0 +1,29 @@
+Nightmare IV SimulEfun: event()
+
+void event(string, int, mixed *, int);
+
+DESCRIPTION
+Sets up and event to occur at a much later time.
+This SimulEfun is much like the efun call_out(), except
+that event() saves across reboot.  This is very useful for setting up
+an events which is to accur once a month or even longer.
+The first argument is the name of the function to be called when the
+time comes.  The second argument is how many seconds from the time
+event() us called should pass before the function gets called.  The
+remaining arguments are optional.  The third one is an array of
+arguments which will get passed to the function.  The final argument
+will set up the event to be recurring, so that once the event happens,
+it is automatically set up to happen again after the same original
+interval.  1 means recurr, 0 meansone time only.
+
+EXAMPLES
+event("start_war", MONTH) will call start_war() in this_object() one
+   mud month from now
+
+LOCATION
+/adm/simul_efun/events.c
+
+SEE ALSO
+call_out(), event_pending(), remove_call_out(), set_heart_beat()
+
+

@@ -1,0 +1,10 @@
+Nightmare IV SimulEfun: user_exists()
+
+int user_exists(string)
+
+DESCRIPTION
+Returns true if a user is a player of the mud.  Returns false if there
+is no player by the name given.
+
+LOCATION
+/adm/simul_efun/user_exists.c

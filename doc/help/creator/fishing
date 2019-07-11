@@ -1,0 +1,42 @@
+The Nightmare mudlib supports fishing!  And creating a room that allows fishing
+is very easy.  Basically, it is just like building a regular room, except
+instead of inheriting /std/room, you inherit /std/pier
+Other than that, you add the following function calls:
+(some of these are optional, and marked as such)
+ 
+void set_max_fishing(int x);
+example: set_max_fishing(10);
+This function sets the most players which can be fishing in the room at the
+same time.  You must set this number, or no one will be able to fish.
+The number you choose should depend upon whether the room is a small
+fishing hole, or a huge jetty on the ocean.
+ 
+void set_chance(int x);
+example: set_chance(4);
+A number between 1 and 20 which defines how good of a fishing spot
+the area is.  20 means the fish bite like crazy, 1 means they rarely bite.
+This is a necessary function to call as well.
+ 
+void set_max_catch(int x);
+example: set_max_catch(15);
+This sets how many fish are in the room every reset (the fish population).
+15 is a lot :).  This is a necessary function call.
+ 
+*** Optional ***
+void set_fish(mapping borg);
+example: set_fish( ([ "catfish": 5, "mackeral":10 ]) );
+This allows you to customize the fish that players catch in the room.
+There is a default of 4 fish.  This function replaces the fish which
+are default.  The structure of the mapping is as follows:
+       ([ fish_name: strength, fish_name: strength ])
+Where fish_name is a string which is the type of fish being caugh, and
+strength is how good of a healer the fish is (It is exactly the
+same variable as strength in food).  Also, the better the fish is at
+healing people, the more likely it is to break the player's pole.
+ 
+*** Optional ***
+void add_fish(string str, int x);
+example: add_fish("catfish", 5);
+This function call just adds a fish to the list of fish in the room;s
+fish population.  The first argument is the fish type, and the second is the
+healing strength of the fish.

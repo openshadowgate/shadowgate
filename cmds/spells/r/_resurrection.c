@@ -1,0 +1,112 @@
+//Based on Raise Dead - Cythera 5/05
+// help file ammended to reflect lower exp. loss and avatar command *Styx* 1/06
+
+#include <std.h>
+#include <spell.h>
+inherit SPELL;
+
+void create() {
+    ::create();
+    set_spell_name("resurrection");
+    set_spell_level(([ "cleric" : 9 ]));
+    set_spell_sphere("healing");
+    set_syntax("cast CLASS resurrection on TARGET (dead player's name)");
+    set_description("Praying to their diety for a miracle, a priest can attempt to resurrect a slain ally back to life.  "
+"The resurrection, if successful, will restore the corpse back to life and full of health.  The spell is somewhat "
+"draining on the priest, for channeling large ammounts of divine power can be exhausting.  The target will suffer "
+"significantly less (lower exp. loss) from the death due to the intervention of the priest.\n\nSee also:  help pkilling, "
+"help rules");
+    set_verbal_comp();
+    set_somatic_comp();
+    set_arg_needed();
+    set_non_living_ok(1);
+	set_helpful_spell(1);
+}
+
+string what_alignment(int align)
+{
+    string alignment;
+    switch(align)
+    {
+    case 1: alignment = "Lawful Good"; break;
+    case 2: alignment = "Lawful Neutral"; break;
+    case 3: alignment = "Lawful Evil"; break;
+    case 4: alignment = "Neutral Good"; break;
+    case 5: alignment = "True Neutral"; break;
+    case 6: alignment = "Neutral Evil"; break;
+    case 7: alignment = "Chaotic Good"; break;
+    case 8: alignment = "Chaotic Neutral"; break;
+    case 9: alignment = "Chaotic Evil"; break;
+    }
+    return alignment;
+}
+
+spell_effect(int prof) {
+    string what;
+    object corpse, targ;
+
+    ::spell_effect();
+    what = "corpse of $&$"+caster->realName(lower_case(arg))+"$&$";
+    targ = find_player(caster->realName(lower_case(arg)));
+    if (!targ) {
+        tell_object(caster,"You can only revive interactive players.");
+        dest_effect();
+        return;
+    }
+    if (!interactive(targ)) {
+        tell_object(caster,"You can only revive interactive players.");
+        dest_effect();
+        return;
+    }
+    if (interactive(caster) ) {
+        set_cast_string("%^CYAN%^"+caster->QCN+" draws upon the"+
+		" power of "+caster->QP+" god for a miracle.\n");
+        tell_object(caster, "%^CYAN%^You attempt to resurrect"+
+		" "+capitalize(arg)+" from the dead.");
+        tell_room(environment(CASTER), "%^CYAN%^"+caster->QCN+" draws upon"+
+		" the power of "+caster->QP+" deity to resurrect "+
+		""+capitalize(arg)+".", ({ CASTER, TARGET}));
+    } else {
+        set_cast_string("%^CYAN%^"+caster->QCN+" prays to "+caster->QP+" "+
+		"deity to resurrect "+capitalize(arg)+".\n");
+    }
+    if (!targ->query_ghost()) {
+        tell_object(caster,capitalize(arg)+" does not need to be revived.");
+        dest_effect();
+        return;
+    }
+    if (!corpse = present(what,environment(caster))) {
+        tell_object(caster,capitalize(arg)+"'s corpse is not here.");
+        tell_object(targ,caster->QCN+" fails to resurrect you.");
+        dest_effect();
+        return;
+    }
+    tell_object(caster,"You can feel the power of "+capitalize((string)caster->query_diety())+" flow out "
+        "to "+targ->QCN+"'s soul, and know that "+targ->QS+" life is in "+targ->QP+" own hands now.");
+    tell_room(environment(caster),"The power of "+caster->QCN+"'s spell flows through the area as "+caster->QS+" "
+        "tries to bring "+targ->QCN+" back to life!",caster);
+    
+    targ->set("RaisingPriestGod",caster->query_diety());
+    targ->set("RaisingPriestAlignment",caster->query_alignment());
+    targ->set("RaisingRoom",base_name(environment(caster)));
+    targ->set("RaisingExpLoss",(-5));
+    targ->set("RaisingType","resurrection");   
+    tell_object(targ,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul.  You sense "
+        "that a "+capitalize(what_alignment((int)caster->query_alignment()))+" faithful "
+        "of "+capitalize((string)caster->query_diety())+" is trying to return you to "
+        "life!\nType <accept> to return to life, or <cancel> to leave your "
+        "fate in Lysara's hands.%^RESET%^");
+    //targ->revive(-5);
+    //targ->set_heart_beat(1);
+    //targ->cease_all_attacks();
+    //targ->move_player(environment(caster));
+    corpse->remove();
+	//targ->set_hp(targ->query_max_hp());
+	caster->use_stamina(25);
+    dest_effect();
+}
+
+void dest_effect(){
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
+}

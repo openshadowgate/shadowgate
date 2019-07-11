@@ -1,0 +1,29 @@
+%^RESET%^%^CYAN%^Druid:
+
+%^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 wisdom
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ beastman, elf, firbolg, gnome (rock/forest), half-drow, half-elf, halfling (ghostwise), human (except tiefling and aasimar), voadkyn, yuan-ti
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ LN, NG, TN, NE, CN
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/will strong, reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ endurance, healing, perception, survival
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: light armor proficiency, medium armor proficiency, shield 
+   %^RESET%^proficiency, simple weapon proficiency, spell focus
+   %^RESET%^L3: tracklessstep
+   %^RESET%^L4: shapeshift
+   %^RESET%^L9: venom immunity
+   %^RESET%^L11: wild speech
+   %^RESET%^L16: wild knowledge
+   %^RESET%^L17: timeless body
+   %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
+
+Druids are champions of nature, though they claim no power over it. Instead, a druid's power comes from being one with the natural world, revelling in the awesome destructive power of a storm and finding strength in the gentle rejuvenating potential of a calm pool. Druids are a mixed lot, following the paths of various deities and even holding to diverse truths about the natural world. As such, any two druids may not see eye-to-eye on many matters, including the very essence of nature itself. Many druids prefer to be solitary, finding the company of others an unwelcome distraction. Some form circles with other druids, employing strict hierarchies wherein each druid knows his own standing and that of his brothers and sisters.
+
+Druids are versatile and they can take many paths in their lives, becoming powerfull users of The Power or preferring feral lives in shapes of fearsome beasts, or even using their potential for martial combat.
+
+%^CYAN%^Druidic oaths:%^RESET%^ Druids train with natural weapons and armor, and they further take traditional oaths that restrict them from using metal armor. Druids avoid carrying much worked metal at all, believing that it interferes with the pure nature of the wilds. The deep reasoning behind these oaths change from druid to truid.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, shapeshift, prestige classes 
+
+%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard druid list>%^CYAN%^.%^RESET%^

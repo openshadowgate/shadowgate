@@ -1,0 +1,26 @@
+%^CYAN%^NAME%^RESET%^
+
+A Quick List of Color Codes on Shadowgate.
+
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+The following color codes and their associated colors are available:  
+
+     %^RESET%^%^BLUE%^%%%^^^BLUE%%%^^^          %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^BLUE%%%^^^
+     %^RESET%^%^CYAN%^%%%^^^CYAN%%%^^^          %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^CYAN%%%^^^
+     %^RESET%^%^GREEN%^%%%^^^GREEN%%%^^^         %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^GREEN%%%^^^
+     %^RESET%^%^RED%^%%%^^^RED%%%^^^           %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^RED%%%^^^
+     %^RESET%^%^ORANGE%^%%%^^^ORANGE%%%^^^        %^BOLD%^%%%^^^YELLOW%%%^^^
+     %^RESET%^%^MAGENTA%^%%%^^^MAGENTA%%%^^^       %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^MAGENTA%%%^^^
+     %^RESET%^%%%^^^WHITE%%%^^^         %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^WHITE%%%^^^
+                       %^BOLD%^%^BLACK%^%%%^^^BOLD%%%^^^%%%^^^BLACK%%%^^^
+
+     %%%^^^BOLD%%%^^^          Sets all text following this code to its %^BOLD%^bold value%^RESET%^.
+     %%%^^^ULINE%%%^^^         Sets all text following this code to its %^ULINE%^underlined value%^RESET%^.     
+     %%%^^^RESET%%%^^^         Resets all colors and modifiers and sets color back to white.
+
+
+%^CYAN%^SEE ALSO%^RESET%^
+  
+adjective, describe, setenv, color, colors 	 

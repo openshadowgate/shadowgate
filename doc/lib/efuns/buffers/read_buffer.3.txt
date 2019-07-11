@@ -1,0 +1,39 @@
+read_buffer(3)               LPC Library Functions              read_buffer(3)
+
+
+
+[1mNAME[0m
+       read_buffer() - read from a file and return a buffer, or return part of
+       a buffer as a string
+
+
+[1mSYNOPSIS[0m
+       string | buffer read_buffer( string | buffer src,
+                                    int start,  int len );
+
+
+[1mDESCRIPTION[0m
+       If 'src' is a string (filename), then the filename will be read, start‐
+       ing  at  byte # 'start', for 'len' bytes, and returned as a buffer.  If
+       neither argument is given, the entire file is read.
+
+       If 'src' is a buffer, then characters are read from the  buffer  begin‐
+       ning  at  byte  #  'start' in the buffer, and for 'len' # of bytes, and
+       returned as a string.
+
+       Note that the maximum number of bytes you can read from a file and into
+       a buffer is controlled via the 'maximum byte transfer' parameter in the
+       runtime config file.
+
+
+[1mSEE ALSO[0m
+       write_buffer(3),   allocate_buffer(3),    bufferp(3),    read_bytes(3),
+       write_bytes(3)
+
+
+[1mAUTHOR[0m
+       Truilkan
+
+
+
+MudOS                             5 Sep 1994                    read_buffer(3)

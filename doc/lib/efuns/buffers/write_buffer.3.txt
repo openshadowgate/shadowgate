@@ -1,0 +1,34 @@
+write_buffer(3)              LPC Library Functions             write_buffer(3)
+
+
+
+[1mNAME[0m
+       write_buffer() - write a buffer to a file, or read into a buffer from a
+       source
+
+
+[1mSYNOPSIS[0m
+       int write_buffer( string | buffer dest, int start,
+                         mixed source );
+
+
+[1mDESCRIPTION[0m
+       If 'dest' is a file, then 'source' must be an int (and will be  written
+       to the file in network-byte-order), a buffer, or a string, and 'source'
+       will be written to the file 'dest' starting at byte # 'start'.
+
+       If 'dest' is a buffer, then 'source' will be written  into  the  buffer
+       starting  at  byte  # 'start' in the buffer.  If 'source' is an int, it
+       will be written in network-byte-order.
+
+
+[1mSEE ALSO[0m
+       read_buffer(3), allocate_buffer(3)
+
+
+[1mAUTHOR[0m
+       Truilkan
+
+
+
+MudOS                             5 Sep 1994                   write_buffer(3)

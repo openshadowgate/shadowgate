@@ -1,0 +1,20 @@
+%^CYAN%^NAME
+
+The Six Attributes of Your Character (AKA Stats)
+
+%^CYAN%^DESCRIPTION 
+
+A character's physical and mental capabilities are determined by his/her attributes, commonly known as stats.  They are often referred to in their abbreviated form, which you fill find in parentheses below.  There are six such attributes:
+
+  <> %^BOLD%^%^RED%^Strength (str) is a measure of your muscle-mass and physical power.%^RESET%^
+  <> %^BOLD%^%^GREEN%^Dexterity (dex) is a measure of your hand-to-eye coordination, agility, reflexes and balance. %^RESET%^
+  <> %^YELLOW%^Constitution (con) is a measure of your health and stamina. %^RESET%^
+  <> %^BOLD%^%^CYAN%^Wisdom (wis) is a measure of your willpower, common sense, perception and intuition.%^RESET%^
+  <> %^BOLD%^%^BLUE%^Intelligence (int) is a measure of your mental prowess, reasoning/deductive skills and how well you retain facts (learning).%^RESET%^
+  <> %^BOLD%^%^MAGENTA%^Charisma (cha) is a measure of your personal magnetism, persuasiveness, force of personality and physical attractiveness.%^RESET%^
+
+Each of these stats have a help file to better explain what they stand for, and a table to gauge your strengths and weaknesses.  The information in these files is taken from D&D Player's Handbook.  The subtypes are taken from Player's Option: Skills and Power, as a way to better explain what makes up each stat.
+
+%^CYAN%^SEE ALSO
+
+stats, individual help files on each attribute (%^ORANGE%^<help ATTRIBUTE>%^RESET%^), score, skills 

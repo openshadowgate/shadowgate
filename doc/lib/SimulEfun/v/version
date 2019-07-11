@@ -1,0 +1,13 @@
+Nightmare IV SimulEfun: version()
+
+string version();
+
+DESCRIPTION
+Returns the name of the driver and the version of the driver together.
+
+LOCATION
+/adm/simul_efun
+/mud_info.c
+
+SEE ALSO
+architecture(), mud_name(), mudlib(), mudlib_version(), query_host_port()

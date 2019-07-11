@@ -1,0 +1,81 @@
+#include <spell.h>
+#include <daemons.h>
+#include <magic.h>
+inherit SPELL;
+
+int size;
+int keepsize;
+
+void create() 
+{
+    ::create();
+    set_spell_name("reduce person");
+    set_spell_level(([ "mage" : 1 ]));
+    set_spell_sphere("alteration");
+    set_syntax("cast CLASS reduce person");
+    set_description("When this spell is cast, humanoid caster will shrink twice in size. This spell will turn humans into halflings, firbolgs into humans. Halflings will turn into mice!");
+    set_verbal_comp();
+    set_somatic_comp();
+    set_helpful_spell(1);
+}
+
+
+void spell_effect(int prof) 
+{
+    string racefile;
+    target = caster;
+    
+    if (target->query_property("enlarged")) 
+    {
+        tell_object(caster,"The spell is repelled by its own magic.");
+        TO->remove();
+    }
+
+    racefile = "/std/races/"+target->query_race()+".c";
+    if(!file_exists(racefile))
+    {
+        tell_object(caster,"You can't become bigger.");
+        TO->remove();
+    }
+
+    if(!size=racefile->size())
+    {
+        tell_object(caster,"You can't become bigger.");
+        TO->remove();
+    }
+    
+    spell_successful();
+
+    tell_object(caster,"%^YELLOW%^You shring twice in size!");
+    tell_room(place,"%^YELLOW%^"+caster->QCN+" shrinks twice in size!", caster );
+
+    target->set_property("added short",({"%^YELLOW%^ (absurdly tiny)%^RESET%^"}));
+    //For small characters the spell is cosmetic only
+    keepsize = 0;
+    if(size>1)
+        target->set_size(--size);
+    else
+        keepsize = 1;
+    target->set_property("spelled", ({TO}) );
+    target->set_property("enlarged",1);
+    call_out("dest_effect",ROUND_LENGTH*clevel);
+    addSpellToCaster();
+}
+
+
+void dest_effect() 
+{    
+    if(objectp(target)) 
+    {
+        if(!keepsize)
+            target->set_size(++size);
+        target->remove_property_value("spelled", ({TO}) );
+        tell_object(target, "%^YELLOW%^You grow back to normal!");
+        tell_room(environment(target),"%^YELLOW%^"+target->QCN+" grows back to normal size.", target );
+        target->remove_property("added short",({"%^YELLOW%^ (absurdly tiny)%^RESET%^"}));
+        target->remove_property("enlarged");
+    }
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
+}
+

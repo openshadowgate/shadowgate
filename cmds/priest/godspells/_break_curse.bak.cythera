@@ -1,0 +1,107 @@
+//_break_curse.c
+
+#include <std.h>
+#include <spell.h>
+
+inherit SPELL;
+
+void create() {
+    ::create();
+
+    set_spell_name("break curse");
+    set_spell_level(6);
+    set_spell_type("priest");
+    set_diety("torm");
+    set_spell_sphere("protection");
+    set_verbal_comp();
+    set_somatic_comp();
+    set_arg_needed();
+}
+
+string query_casting_string() {
+   return "%^MAGENTA%^"+caster->query_cap_name()+" kneels and prays for the divine influence of Torm.";
+}
+
+int preSpell() {
+    if (!ARG) {
+        tell_object(CASTER, "You must specify what to remove the curse from.");
+        return 0;
+    }
+    return 1;
+}
+
+
+void spell_effect(int prof) {
+    string what,who;
+    object ob, ob2;
+    int ench;
+
+    if (sscanf(arg,"%s at %s", what, who) != 2) {
+        what = arg;
+        who = 0;
+    }
+
+    if (!who) {
+        ob = present(what,caster);
+    } else {
+// checks for a realName versus known as added by *Styx* 8/15/03 to fix recognize problem
+        if((string)caster->realName(who) != "")
+	   who = (string)caster->realName(who);   
+        if (!ob2 = present(who, place)) {
+            tell_object(caster,"That person isn't here.");
+            dest_effect();
+            return;
+        }
+        ob = present(what,ob2);
+    }
+
+    if (!objectp(ob)) {
+        tell_object(caster,"That object is not present");
+        dest_effect();
+        return;
+    }
+    if (objectp(ob2)) {
+        if (!ALIGN->is_good(ob2)) {
+            tell_object(caster,"%^YELLOW%^Torm angrily rebukes you for attempting to use his power on that non believer.");
+            tell_room(place,"%^YELLOW%^You see "+caster->query_cap_name()+"'s face crease with pain.",caster);
+            dest_effect();
+            return;
+        }
+    }
+
+    ench = ob->query_property("enchantment");
+    if (ench > -1) {
+        tell_object(caster,"That object is not cursed.");
+        dest_effect();
+        return;
+    }
+    ob->set_property("enchantment",-1*ench);
+    while (ench = ob->query_property("enchantment")) {
+        ob->set_property("enchantment",-1*ench);
+
+    }
+
+    tell_room(place,"%^BOLD%^%^RED%^The power of torm flows down and magically encompasses the "+what+".");
+    dest_effect();
+}
+
+void dest_effect(){
+    ::dest_effect();
+    TO->remove();
+}
+
+int help() {
+    write(
+@OLI
+Spell  : Break Curse
+Level  : 6th Level
+Sphere : Protection
+Deity  : Torm
+Syntax : chant break curse on <object> [at <player>]
+
+Will break the curse on any item. Torm is very sensitive
+however about the beliefs of those who his power helps.
+OLI
+);
+    return 1;
+}

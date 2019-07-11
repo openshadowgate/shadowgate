@@ -1,0 +1,24 @@
+get_config(3)                LPC Library Functions               get_config(3)
+
+
+
+[1mNAME[0m
+       get_config() - query various driver config settings
+
+
+[1mSYNOPSIS[0m
+       string | int get_config( int );
+
+
+[1mDESCRIPTION[0m
+       This  efun  is  used  to  query  the  driver's various config settings.
+       Please refer to the "runtime_config.h" include file for a list of  cur‐
+       rently recognized options.
+
+
+[1mSEE ALSO[0m
+       /include/runtime_config.h
+
+
+
+MudOS                             5 Sep 1994                     get_config(3)

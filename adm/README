@@ -1,0 +1,44 @@
+/adm
+The mud's secure directory
+
+Only mud administration, the top administration, should have access to
+this directory.  People with access to this directory can screw up
+the mud, since no matter what other access you gave them, they casn
+get access to the whole mud just in virtue of having access to this dir.
+Ideally, only objects in /adm/obj would have Root access.  Since this
+security system is relatively new, however, /adm/daemon retains
+Root access for the time being.  In truth, the only object on the mud
+which needs Root access under this security system is the master object.
+I left login.c with Root for the sake of simplicity, and simul_efun
+object always acts as if it were root anyways.  
+
+The directory is subdivided as follows:
+
+/adm/daemon:
+Secure daemons.  These do not need Root access, but they do need the sort
+of access that can screw the mud up if misused.  For example, the banish
+objects, if misused, could prevent admins from logging in.
+
+/adm/db:
+Secure databases.  These are databases no one but admins should have access to.
+A good example here is the access.db which determines what access
+different euid's have.
+
+/adm/etc:
+A special junk directory just for the arches.  You can store stuff in
+there away from prying eyes.
+
+/adm/include:
+The mud include directory.  Again, access here means you can do things
+like redefine euid Root and such.
+
+/adm/obj:
+Objects needing root access.
+
+/adm/save:
+A save directory for data which should not be readable by the general
+populace.
+
+/adm/simul_efun:
+All the simul_efun code is stored here, modularly, so that adding and
+removing simul_efuns is simple.

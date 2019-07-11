@@ -1,0 +1,221 @@
+Written by ~Circe~ 2/8/08 to aid new wizzes in the creation of their areas
+
+This tutorial contains information on using inherits and header files on the MUD.  Headers will help you with nearly any file you create, and inherits are remarkably useful for creating areas, particularly adventure areas though they are used in many cities and inhabited areas as well.
+
+The tutorial is divided into several parts:
+
+Part 1: How Header Files Work
+Part 2: Making Headers Work for You
+Part 3: Common Header Files
+Part 4: Useful Abbreviations from <std.h>
+Part 5: Inherits
+Part 6: General Notes
+
+%^YELLOW%^********************************************************************
+
+%^BOLD%^Part 1: How Header Files Work
+
+Header files use #define to set up certain definitions that become true for any file that then incorporates them by using #include.  Instead of the standard .c, header files use the .h extension, and they cannot be updated as other files can.  They can be manipulated in the same ways though (either by using ed or ftp to add to, change, or delete portions of them).
+
+In a header file, a wiz can set up any number of shortcuts, so to speak, to then use in his coding.  For example, if I made the following file (named inherit.h and saved in /d/example/):
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#define ROOMS "/d/example/room/"+
+#define STORAGE "/d/example/storage/"+
+#define OBJ "/d/example/obj/"+
+#define MON "/d/example/mon/"+
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Then I could:
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#include "/d/example/inherit.h"
+
+inherit STORAGE"cave";
+
+void create(){
+   ::create();
+//here you would set anything not already set in the inherit
+   set_exits(([
+      "west" : ROOMS"cave1",
+      "east" : ROOMS"cave2"
+   ]));
+}
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Where "cave.c" would be a file saved in /d/example/storage.
+
+You could, of course, type in inherit "/d/example/mon/cave" for the same effect for the inherit, and "/d/example/rooms/cave1" and "/d/example/rooms/cave2" for the exits.  However, files, directories, and even entire areas are sometimes moved about on the MUD, particularly when you are a builder or an apprentice, and it becomes very tedious and difficult to go into every file you've already coded and ensured is working to then change all the file paths.  This is especially true in using exits.  If you use a well-defined header, then all you need to do is go back and change the header file to get your files ready for transfer rather than changing each individual file.
+
+%^YELLOW%^********************************************************************
+
+%^BOLD%^Part 2: Making Headers Work for You
+
+To effectively use headers, you should have a general idea of what the layout for your area will be before you begin working on it.  You will want to set up your directories so that things are sorted in a logical way.  For example, most wizzes find that four different folders are needed for an area: one for monsters, one for rooms, one for objects, and one for inheritables and storage rooms.  Typically, these are named mon, room, obj, and either storage or inherit.  Once you've decided upon your directory structure, make the folders you need by creating an overall directory for your area in the appropriate folder by using mkdir and a short title for the area:
+
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mkdir example
+Ok
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Then go to the new folder:
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cd example
+/d/example:
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You will have a new folder that will be empty.  Now, create the other directories you need in the same way.  When you finish, you should see something like this:
+
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ls
+/d/example/:
+     mon/         obj/         room/        storage/
+A total of 0 bytes in 0 files.  (4 directories)
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now, you are ready to set up your header file.  Begin by creating the file itself with a .h extension.  Typically it's best to use the same title as the folder you created.
+
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ed example.h
+ isn't readable.
+:i
+*
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Then set up the definitions you need:
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#define ROOMS "/d/example/room/"+
+#define STORAGE "/d/example/storage/"+
+#define OBJ "/d/example/obj/"+
+#define MON "/d/example/mon/"+
+.
+:w
+"d/example/example.h" 4 lines 135 bytes
+:q
+Exit from ed.
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Note the way these definitions are written.  If you go ahead and add on the + at the end, you do not need to put a + in your file paths when you use them.  (Hence, ROOMS"cave1" rather than ROOMS+"cave1").  Remember that you can add to the header file as you go, but you should initially set it up with these four main paths at least so that they are easily at your disposal.  If you find you need more, continue to add to the file.
+
+%^YELLOW%^********************************************************************
+
+%^BOLD%^Part 3: Common Header Files
+
+In addition to the headers you may make for your areas, the MUD has several widely used header files that you will want to learn about.
+
+%^BOLD%^%^RED%^std.h %^RESET%^- This is the most prominent header file on the MUD.  It is used in most files, and it includes some of the most useful definitions.  You should include this in your files in this way #include <std.h>  It has its own section below.
+
+%^BOLD%^%^RED%^/d/common/common.h%^RESET%^ - This is the header file for all things in /d/common.  You can use <more /d/common/common.h> to see what definitions you can use if you include this file.  You would include this one by typing #include "/d/common/common.h".  It is especially useful for inheriting basic weapons and armors.
+
+Other common header files are listed in /adm/include, which is a restricted directory.  You should not need anything there (they are mostly for spells and higher level coding), but if you do, you can <more> the files there to see which might be useful for you.
+
+%^YELLOW%^********************************************************************
+
+%^BOLD%^Part 4: Useful Abbreviations from std.h
+
+As stated, std.h is the most included and most useful header file.  Using it will save you much typing as well as make your area up to date codewise.  Be sure to use the shortcuts listed there because it will help when we do mud-wide updates on different items or areas.  Also, do not have your definitions match any of these.  For example, if you also set up a #define ROOM, you will create problems.  Use something else instead, such as ROOMS or ROOMPATH.
+
+Basic inherit shortcuts you need to use:
+%^YELLOW%^ROOM%^RESET%^ - means "/std/room" - this is the basic inherit used for rooms without doors
+%^YELLOW%^VAULT%^RESET%^ - means "/std/vault" - this is the basic inherit for rooms with doors
+%^YELLOW%^CROOM%^RESET%^ - means "/std/controlroom" - this is the basic inherit for rooms without doors that will control wandering mobs
+%^YELLOW%^CVAULT %^RESET%^ - means "/std/controlvault" - this is the basic inherit for rooms with doors that will control wandering mobs
+%^YELLOW%^MONSTER%^RESET%^ - means "/std/monster" - used for most mobs
+%^YELLOW%^WEAPONLESS%^RESET%^ - means "/std/weaponless_monsters" - used for mobs who fight barehanded
+%^YELLOW%^OBJECT%^RESET%^ - means "/std/Object" - used for normal objects, not weapon or armor
+%^YELLOW%^ARMOUR%^RESET%^ - means "/std/armour" - used for anything that can be worn
+%^YELLOW%^WEAPON%^RESET%^ - means "/std/weapon" - used for weapons
+%^BOLD%^%^RED%^NOTE: %^WHITE%^When creating weapons and armor, please inherit a base file from /d/common/ instead of WEAPON or ARMOUR.  That way, if we make changes to the base item (such as increasing the damage or weight), your item is updated as well.  This saves a lot of time in chasing down changes across the mud.
+
+The following shortcuts are very useful for interacting with players with weapons, rooms, and so on:
+%^YELLOW%^TP%^RESET%^ - this_player() - this will refer to the person interacting with your object
+%^YELLOW%^TO%^RESET%^ - this_object() - this will refer to whatever object (player or otherwise) is triggering an effect
+%^YELLOW%^ETO%^RESET%^ - environment(this_object()) - refers to the surroundings of this object
+%^YELLOW%^ETP%^RESET%^ - environment(this_player()) - refers to the surroundings of this player
+%^YELLOW%^EETO%^RESET%^ - environment(environment(this_object())) - refers to the surroundings of the surroundings of this_object (for example, if a sword is the object, ETO would be the person wielding it, and EETO would be the room around the person wielding it)
+%^YELLOW%^TPQN %^RESET%^-this_player()->query_name() - returns the player's name
+%^YELLOW%^TPQCN %^RESET%^-this_player()->query_cap_name() - returns the player's name captialized
+%^YELLOW%^TOQCN %^RESET%^-this_object()->query_cap_name() - returns the object's name capitalized
+%^YELLOW%^ETOQN %^RESET%^- environment(this_object())->query_name() - returns the name of the environment around the object iteracting
+%^YELLOW%^ETOQCN %^RESET%^- environment(this_object())->query_cap_name() - returns the name of the environment around the object iteracting
+%^YELLOW%^QS %^RESET%^- query_subjective() - usually used as TP->QS, ETO->QS, etc. - this will return the nominative pronoun for the player (so "she" for a female character, "he" for a male, "it" for a neuter)
+%^YELLOW%^QP %^RESET%^- query_possessive() - TP->QP, ETO->QP, etc. - this will return the possessive pronoun for the player ("her","his","its")
+%^YELLOW%^QO %^RESET%^- query_objective() - TP->QO, ETO->QO, etc. - this will reutrn the objective pronoun for the player ("her","him","it")
+
+There are many other shortcuts defined in std.h, but these will be the most helpful to you in getting started.
+
+%^YELLOW%^********************************************************************
+
+%^BOLD%^Part 5: Inherits
+
+The purpose of an inherit is to cut down on the memory needed by the MUD to load objects as well as to help save you time and energy with creating multiple files with the same code.  By using inherits, we help the MUD run more smoothly as well as help create consistency.  Also, when there have been mud-wide changes, such as the addition of terrain and travel, having your files use inherits can be a _tremendous_ help to the wizzes updating those things.
+
+The first thing you must do is decide what inherits you will need.  If you are building a forest area, for example, you might want three inherits - one for the forest's edge, one for the bulk of the forest, and then one for the very center.  You can include any number of important features in your inherit.  Common choices are travel, terrain, light, indoors, name, short, long, smell, listen, and items.  You may also choose to go ahead and set up searches or other functions in the inherit.  Anything that is set up in the inherit will then be passed along to whatever rooms inherit that file.
+
+For example, if I saved this file as "/d/example/storage/street.c":
+
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#include <std.h>
+#include "../example.h"
+
+inherit VAULT;
+
+void create(){
+   ::create();
+   set_terrain(CITY);
+   set_travel(PAVED_ROAD);
+   set_light(2);
+   set_indoors(0);
+   set_name("Example Street");
+   set_short("Example Street");
+   set_long("%^BOLD%^Example Street, Anytown%^RESET%^\n"+
+      "This is a sample street to help illustrate how headers "+
+      "and inherits can be beneficial in an area.\n");
+   set_listen("default","You hear the slow crackling sound of "+
+      "minds frying.");
+   set_smell("default","Hmm...what's that ozone smell?");
+   set_items(([
+      "stuff" : "This would be whatever stuff you could see."
+   ]));
+}
+
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Then, in my room file (/d/example/room/street1), I could simply do:
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#include "../example.h"
+
+inherit STORAGE"street";
+
+void create(){
+   ::create();
+   set_exits(([
+      "east" : ROOMS"street1"
+   ]));
+}
+
+%^BOLD%^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+And everything else would be taken care of.  Alternatively, you can also make changes to any number of things simply by overriding them.  If in the example above I wanted a different smell, for example, I could simply add:
+
+set_smell("default","Wow, what stinks?");
+
+There are a couple of very useful commands, however, that will keep the majority of your code intact but allow you to make each room different.  First, if you'd like to keep the long description but add a few lines to it, you use this in the room file:
+
+set_long(::query_long()+"Here is where you'd add any extra information.\n");
+
+Similarly, if you want to keep the items that are there but want to add one (or simply change the description for one that is there), you would use:
+
+add_item("new thing","This is something else to look at.");
+
+%^YELLOW%^********************************************************************
+
+%^BOLD%^Part 6: General Notes
+
+And now, a few final notes :)
+
+- When used correctly, inherits and headers can make your life much easier.  If you are ever in doubt as to what to do, please feel free to ask.  We've all had to fumble through these, and there's a lot of experience among the wiz staff that can help you out.
+
+- Inherits should always be in their own directory.  Certain effects (like the teleport spell) operate by picking randomly within a directory.  If you put your inherit in the same directory as your room, people might wind up there by accident.
+
+- Try to put any information that will be shared by multiple files into an inherit.  That way, your individual rooms will use less memory, and you will also save yourself time if you find you left something out (like a name or terrain type).

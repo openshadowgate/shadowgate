@@ -1,0 +1,8 @@
+Money conversions:
+ 
+1 platinum = 5 gold = 10 electrum = 50 silver = 500 copper
+ 
+Here is an example on how to give money to another player:
+ 
+give 10 gold coins to janedoe
+ 

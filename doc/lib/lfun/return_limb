@@ -1,0 +1,8 @@
+Nightmare mudlib living lfun: return_limb()
+
+string return_limb()
+
+This function returns a random limb name.  All limbs have equal chance.
+
+See also: query_limbs(), return_target_limb()
+Defined in /std/living/body.c

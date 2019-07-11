@@ -1,0 +1,12 @@
+Nightmare IV SimulEfun: mud_currencies()
+
+string *mud_currencies();
+
+DESCRIPTION
+Returns an array of all currencies known to the mud.
+
+LOCATION
+/adm/simul_efun/economy.c
+
+SEE ALSO
+currency_inflation(), currency_rate(), currency_weight()

@@ -1,0 +1,14 @@
+Nightmare Mudlib 3.2 simul_efun: query_night()
+
+int query_night();
+
+DESCRIPTION
+This function returns true if it is full night outside.  If it is full day
+or in transition, it returns false.
+
+LOCATION
+/adm/simul_efun/time.c
+
+SEE ALSO
+hour(), date(), month(), year(), day(), time(), season(), ctime()
+    minutes()

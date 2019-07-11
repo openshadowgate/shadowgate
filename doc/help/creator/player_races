@@ -1,0 +1,12 @@
+Adding a new player race:
+
+1. Add race to /std/user.c - starting age, height
+2. Add race to /daemon/player_d.c - starting weight
+3. Add race to /std/lang.c
+4. Add race to /adm/daemon/skills_d.c if needed
+5. Add race to /cmds/mortal/skill.c
+6. Add race to /adm/db/races.db
+7. Add race to /d/shadowgate/class_set.c
+8. Add race to /d/shadowgate/race_set.c
+9. Add help file to /doc/help/user/
+

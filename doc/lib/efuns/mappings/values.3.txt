@@ -1,0 +1,37 @@
+values(3)                    LPC Library Functions                   values(3)
+
+
+
+[1mNAME[0m
+       values() - return an array of the values from the (key, value) pairs
+                  in a mapping
+
+
+[1mSYNOPSIS[0m
+       mixed *values( mapping m );
+
+
+[1mDESCRIPTION[0m
+       values() returns an array of values corresponding to the value elements
+       in the (key, value) pairs stored in the mapping m.
+
+       For example, if:
+
+              mapping m;
+
+              m = (["hp" : 35, "sp" : 42, "mass" : 100]);
+
+       then
+
+              values(m) == ({35, 42, 100})
+
+       Note: the values will be returned in the same order as the  correspond‐
+       ing keys.
+
+
+[1mSEE ALSO[0m
+       keys(3), each(3)
+
+
+
+MudOS                             5 Sep 1994                         values(3)

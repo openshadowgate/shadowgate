@@ -1,0 +1,25 @@
+all_previous_objects(3)      LPC Library Functions     all_previous_objects(3)
+
+
+
+[1mNAME[0m
+       all_previous_objects()  -  returns  an array of objects that called the
+       current function
+
+
+[1mSYNOPSIS[0m
+       object *all_previous_objects();
+
+
+[1mDESCRIPTION[0m
+       Returns an array of objects that called current  function.   Note  that
+       local  function  calls  do  not  set  previous_object()  to the current
+       object, but leave it unchanged.
+
+
+[1mSEE ALSO[0m
+       call_other(3), call_out(3), origin(3), previous_object(3)
+
+
+
+MudOS                             5 Sep 1994           all_previous_objects(3)

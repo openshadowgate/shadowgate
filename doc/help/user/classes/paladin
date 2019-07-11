@@ -1,0 +1,45 @@
+%^RESET%^%^CYAN%^Paladin:
+
+%^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 12 strength, 12 wisdom, 12 charisma
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, dwarf (gold), halfling (strongheart), elf (sun)
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any lawful
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ bard, barbarian, thief, psywarrior, warlock
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d12
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, endurance, influence
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: light armor proficiency, medium armor proficiency, heavy armor 
+   %^RESET%^proficiency, shield proficiency, simple weapon proficiency, martial 
+   %^RESET%^weapon proficiency, parry
+   %^RESET%^L2: smite
+   %^RESET%^L3: mounted combat, divine health
+   %^RESET%^L6: layonhands
+   %^RESET%^L7: indomitable
+   %^RESET%^L9: ride-by attack
+   %^RESET%^L11: charge
+   %^RESET%^L14: force of personality
+   %^RESET%^L17: leadership
+   %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
+
+Paladins are the protectors of their chosen patron in the realm of 
+ShadowGate. They are cavaliers selected by their faith to battle their 
+enemies and uphold their charge. A paladin's purpose varies according to
+theiry patron's charge, but protection and law are always part of their 
+code of honor.
+
+A knight must serve someone or some cause. Cavaliers usually serve a lord
+or nobility, or the order of knighthood, while paladins serve a deity. Only
+a limited number of faiths permit knights to join their ranks, where lawful
+clergy are accepted. Paladins are granted a subset of divine spells based 
+on their wisdom score, as well as the ability to turn undead.
+
+Another characteristic of cavaliers and paladins is the ability to train a
+warhorse. As a cavalier grows in power, so will this steed. Simply buy the
+horse from a stable or guild hall. Be warned, though, that your warhorse 
+will share in your experience should it be used for direct combat.
+
+%^CYAN%^Before playing a paladin, be sure to read %^ORANGE%^<help knights>%^CYAN%^. You will be expected to follow those guidelines.%^RESET%^
+
+%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, prepare, buff, knights, cavalier, squire, deities, prestige classes
+
+%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard paladin list>%^CYAN%^.%^RESET%^

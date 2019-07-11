@@ -1,0 +1,119 @@
+The following is a list of monster body types for the set_body_type() efun.
+
+*TYPE* is the name to use in the set_body_type() efun. 
+IE: set_body_type("arachnid");
+
+*Wielding Limbs* are the limbs that can wield weapons. 
+So, the set_wielding_limbs() efun must contain one or more of these limbs.
+IE: set_wielding_limbs(({"right pincer","left pincer"}));
+
+*FATAL Body Parts* are the body parts that can receive fatal wounds.
+These are for your information only. 
+They are used for the combat message system.
+
+*Other Body Parts* are the other parts of the body. 
+These are for your information only. 
+They are used for the combat message system.
+
+TYPE : arachnid
+
+Wielding Limbs   : right pincer, left pincer
+FATAL Body Parts : head, abdomen
+Other Body Parts :
+right fore leg, left fore leg
+right mid leg, left mid leg
+right tertiary leg, left tertiary leg
+right rear leg, left rear leg
+
+
+TYPE : centaur
+
+Wielding Limbs   : right hand;left hand
+FATAL Body Parts : head
+Other Body Parts :
+right arm, left arm
+right foreleg, right front hoof
+left foreleg, left front hoof
+right rear leg, right rear hoof
+left rear leg, left rear hoof
+tail
+
+TYPE : equine
+
+Wielding Limbs   : right front hoof, left front hoof
+FATAL Body Parts : head
+Other Body Parts :
+right foreleg, left foreleg
+right rear leg, right rear hoof
+left rear leg, left rear hoof
+tail
+
+TYPE : dragon
+
+Wielding Limbs   : right foreclaw, left foreclaw
+FATAL Body Parts : head
+Other Body Parts :
+right foreleg, left foreleg
+right rear leg, right rear claw
+left rear leg, left rear claw
+right wing, left wing
+tail
+
+TYPE : fowl
+
+Wielding Limbs   : right claw, left claw
+FATAL Body Parts : head
+Other Body Parts :
+right wing, left wing
+right leg, left leg
+beak, tail
+
+TYPE : insectoid
+
+Wielding Limbs   : right fore leg,left fore leg
+FATAL Body Parts : head, abdomen
+Other Body Parts :
+right mid leg, left mid leg
+right rear leg, left rear leg
+right antennae, left antennae
+
+TYPE : insectoid-winged
+
+Wielding Limbs   : right fore leg,left fore leg
+FATAL Body Parts : head, abdomen
+Other Body Parts :
+right mid leg, left mid leg
+right rear leg, left rear leg
+right antennae, left antennae
+right wing, left wing
+
+TYPE : merperson
+
+Wielding Limbs   : left hand, right hand
+FATAL Body Parts : head, tail
+Other Body Parts :
+right arm, left arm
+fin
+
+TYPE : quadruped
+
+Wielding Limbs   : right forepaw, left forepaw
+FATAL Body Parts : head
+Other Body Parts :
+right foreleg, left foreleg
+right rear leg, right rear paw
+left rear leg, left rear paw
+
+TYPE : snake 
+
+Wielding Limbs   : mouth
+FATAL Body Parts : head
+Other Body Parts :
+tail, torso
+
+
+If you wish to have another body type added, please send mail
+to Melnmarn with a similar layout of the different body parts,
+we will see if we can add them to the list.
+
+Melnmarn@ShadowGate

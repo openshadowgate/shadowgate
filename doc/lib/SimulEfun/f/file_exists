@@ -1,0 +1,9 @@
+Nightmare IV SimulEfun: file_exists()
+
+int file_exists(string)
+
+DESCRIPTION
+Returns true if the file named exists.  False if not.
+
+LOCATION
+/adm/simul_efun/files.c

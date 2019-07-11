@@ -1,0 +1,23 @@
+bufferp(3)                   LPC Library Functions                  bufferp(3)
+
+
+
+[1mNAME[0m
+       bufferp() - determine whether or not a given variable is a buffer
+
+
+[1mSYNOPSIS[0m
+       int bufferp( mixed arg );
+
+
+[1mDESCRIPTION[0m
+       Return 1 if 'arg' is a buffer value and zero (0) otherwise.
+
+
+[1mSEE ALSO[0m
+       mapp(3),  stringp(3),  pointerp(3),  objectp(3),  intp(3),  bufferp(3),
+       floatp(3), functionp(3), nullp(3), undefinedp(3), errorp(3)
+
+
+
+MudOS                             5 Sep 1994                        bufferp(3)

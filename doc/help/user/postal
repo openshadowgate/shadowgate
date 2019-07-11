@@ -1,0 +1,81 @@
+               Help for the Imaginary Intermud Postal Service
+                     v2.0 by Descartes of Borg 1993
+-----------------------------------------------------------------------------
+<a [group] [list]>
+Adds a list of players to the group named.  If no such group exists, it is
+created.
+ 
+<x [group] ([list])>
+Deletes a list of players from your mailing group.  If no list is given,
+the entire group is deleted.
+ 
+<g ([group])>
+Shows the members of the group named.  If no group is named, it shows the
+names of all available groups, including those defined by the mud.
+
+<? ([command])>
+Gives detailed help on the command you ask for.  If no command is stated,
+you get this help file!
+
+<m [list]>
+Mails to a list of recipients.
+
+<d (#)>
+Marks either the letter named or the current letter for deletion when
+you quit out of the mailer.
+
+<u (#)>
+Unmarks a letter marked for deletion.
+
+<h (#)>
+Lists the headers for letters starting at the letter given until
+the last one.  If no letter is named, it lists all headers.
+
+<r (#) (to|all)>  OR  <R (#) (to|all)>
+Replies to the letter named, sending the reply to those addressed in
+the "to" list if a "to" argument is given, to those in the "to" and
+"cc" lists if an "all" argument is given, or simply to the original sender
+if no argument is given.  If you do not specify a letter number, the
+current letter is replied to.  The capital "R" command includes
+the original text in the reply.
+Ex:
+    "r": replies to the person who sent the current letter
+    "R": replies to the person who sent the current letter, including the
+      original text
+    "r to": replies to those listed in the to list and the original sender
+      of the current letter
+    "R 4 all": replies to the original sender, the people in the to list,
+      and the people in the cc list of letter number 4 including the
+      original text in the reply.
+
+
+<f (#) [list]>  OR  <F (#) [list]>
+Forwards either the letter named or the current letter to the list of
+people or groups you want.  The capital "F" command allows you
+to add your own comments before the full original text.
+
+<q>  OR  <Q>
+Quits from the mailer.  The capital "Q" quits without marking your
+read letters or deleting the mail you marked for deletion.
+
+<w [user]>
+Sets all your mail to be sent on to the named user instead of being sent to you.
+This is useful for people with 2 characters or with a character they play
+primarily on another mud.
+
+Environment variables:
+MAIL_MSG
+The message you will receive when you receive new mail while online.
+Use $S in place of the subject and $N in place of the name of whom it
+comes from
+
+MAIL_NO_CC
+Set to 1 if you do not want to be prompted for cc, 0 otherwise.
+
+MAIL_NO_HEADERS
+Set to 1 if you do not want to see all your mail headers when you first
+open your post box.
+
+MAIL_DELETE_PROMPT
+Set to 1 if you want to be prompted before the deletion of letters when
+you exit the mailer.

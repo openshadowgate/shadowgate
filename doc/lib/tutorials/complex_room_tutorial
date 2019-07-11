@@ -1,0 +1,709 @@
+Nightmare room tutorial
+Written 181092 by Descartes of Borg
+Additions 140493 by Valodin
+Additions 050295 by Melnmarn
+Additions 051395 by Melnmarn
+Rewritten by ~Circe~ 6/13/08 to match current mud standards
+
+Before using this file, please make sure you have read and mastered
+<help room tutorial>.  This file assumes you know how to make a 
+basic room.
+
+Part 1: Adding new actions
+Part 2: The Function reset()
+Part 3: Manipulating Item Descriptions
+Part 4: Using Flags
+Part 5: Manipulating exits
+Part 6: Searching
+Part 7: Using light
+Part 8: Random Encounters
+Part 9: Climbing and Descending (special exits)
+
+Any information following // is a note for you and not meant to 
+actually be typed into your file.
+
+*********************************************************************
+
+%^BOLD%^Part 1: Adding New Actions
+%^YELLOW%^---------------------------
+
+In many rooms, you will want players to be able to do more than 
+look around the room, look at specific objects, and use the exits.  
+You will want them to be able to do such things as climb a wall, 
+sit in a chair, or perhaps pray at an altar.  To do all of this, 
+you must call the function add_action() from inside a function 
+you define called init().  %^BOLD%^Note that init is outside of 
+%^BOLD%^create.%^RESET%^
+
+An add action looks like this:
+
+*****
+
+void init(){
+   ::init();
+   add_action("climb_fun", "climb");
+}
+
+*****
+
+The function init() is called by each player when that player 
+enters the room.  In this way, any new commands a player might
+need for that room can be given to the player in init().  The 
+function that actually adds the command to the player is 
+add_action();
+
+In this particular example, the function first calls ::init();
+The file "/std/room.c" already has a function called init() in it.  
+This init() in "/std/room.c" is what adds the directional commands 
+from set_exits() to the player.  To be able to add those commands as 
+well as the ones you want to add to the player, you MUST call 
+::init();  The :: tells the driver to call the function defined 
+in the inherited code instead of the function defined in the 
+current code.  Calling ::init(); or ::create(); is referred 
+to as "calling the super" and is very important to make your 
+room or item use the code it is inheriting as well as whatever
+new code you are writing for it.
+
+%^BOLD%^add_action("climb_fun", "climb");
+   This function adds the command "climb" to the player's list of
+   available commands.  Whenever the player types the command 
+   "climb", the driver will call the function climb_fun(), and 
+   it will search for it in your room code.  In addition, the 
+   driver will pass as an argument to the function anything the 
+   player types on the command line besides "climb".  For instance, 
+   if the player types "climb rope", the driver will pass the string 
+   "rope" to the function climb_fun();
+
+After having defined init(), you need to go on to defined climb_fun().
+A sample climb_fun() might look like this:
+
+*****
+
+int climb_fun(string str){
+   if(!str){
+      tell_object(TP,"Climb what?");
+      return 1;
+   }
+   if(str == "rope"){
+      tell_object(TP,"You slip trying to climb the rope!");
+      tell_room(TO,""+TPQCN+" slips trying to climb the rope!",TP);
+      return 1;
+   }
+   return 0;
+}
+
+*****
+
+To break down the information in the above function, you need to 
+understand some of the shortcuts taken.  First, TP means 
+this_player(), and it refers to the person typing the action.  
+Next, TO means this_object().  Since this object is a room in 
+this case, it broadcasts that message to the whole room.  Because
+TP is also a part of that room and you wouldn't want him to see that 
+message, you exclude him by adding ,TP on the end of tell_room.
+
+Next, the difference between return 0 and return 1 is very important.
+If you return 0, that allows any other commands that might use that
+same command word to go through.  Return 1 does not allow for any 
+other commands to go through.  For example, in the above function, 
+if the players had something they could climb other than rope (say,
+a ladder) that was not called by this function, then the way this 
+function is coded would allow the ladder to still work.
+
+This is just one example of how functions and other actions can 
+work.  init() can also be used for any number of things - whatever 
+you would like to have happen when players enter the room.
+
+*********************************************************************
+
+%^BOLD%^Part 2: The Function reset()
+%^YELLOW%^-----------------------------
+
+Besides create() and init(), there is one last function that you 
+may sometimes needs to define which the driver searches for in your 
+code.  It is reset().  reset() is called everytime there is a reset, 
+which is about every ten minutes.  If your room never changes in
+character, then you do not need to define this function.  However, 
+you might have a monster which needs to regenerate every reset, or 
+something else which needs to set back to the rooms original situation 
+at reset.  You do this in the following way:
+
+First you define the reset() as follows:
+
+*****
+
+void reset(){
+   ::reset();
+   if(!present("ogre")){
+      new("/obj/mon/ogre")->move(TO);
+   }
+}
+
+*****
+
+At each reset, reset() is called and checks to see if the ogre is 
+still in the room from the last reset.  If it is not there, then 
+it makes one.  The function ::create() in room.c calls reset() for 
+the first time to set up the room, which means that if you want a 
+monster to spawn in a room on create as well as to respawn when 
+reset is called, you should set it up in reset only, not in create.
+Also, see <help controlroom tutorial> for the proper want to add 
+wandering mobs to your area.
+
+*********************************************************************
+
+%^BOLD%^Part 3: Manipulating Item Descriptions
+%^YELLOW%^--------------------------------------
+
+You have already learned how to set_items(); in the basic room 
+tutorial.  Sometimes, however, items in some rooms may change during 
+the course of the game.  For instance, in the inn, certain rooms on a
+list of rooms may become unavailable, so the list needs to be able to 
+change.  Or, perhaps, someone picks the last of the flowers, and that 
+needs to be reflected when someone types <look flowers>. 
+The following functions allow you to manipulate items:
+
+%^BOLD%^set_items( ([ "item" : "description" ]) );
+%^BOLD%^add_item("item", "description");
+%^BOLD%^remove_item("item");
+
+set_items() was described in the basic room tutorial, so this
+tutorial will not cover that command again.  However, let's say that 
+when the player tries climbing the rope from our add_action, the 
+rope disintegrates.  In that case, you need to remove the item rope
+from the list of items.  In the climb_fun(), you have it defined 
+this way:
+
+*****
+
+int climb_fun(string str){
+   if(!str){
+      tell_object(TP,"Climb what?");
+      return 1;
+   }
+   if(str == "rope"){
+      tell_object(TP,"The rope disintegrates as you attempt to "
+         "climb it!");
+      tell_room(TO,"The rope disintegrates as "+TPQCN+" attempts "
+         "to climb it!",TP);
+      remove_item("rope");
+      return 1;
+   }
+   return 0;
+}
+
+*****
+
+But now let's say you want the rope to come back later on (or the 
+flowers to regrow).  To do this, you would add code to your reset():
+
+*****
+
+void reset(){
+   ::reset();
+   add_item("rope","You might be able to climb it.");
+}
+
+*****
+
+Every time the room resets, there will be a rope in the room for a 
+player to look at and climb.  Once a player uses the "climb" command 
+correctly, however, the rope will be taken out of the room.  If a 
+player tries to look at the rope, they will get the default message 
+as if you had never had "rope" in the items.  
+
+%^BOLD%^NOTE:%^RESET%^  In order to make sure that the code makes 
+sense, and people cannot attempt to climb the rope even when the 
+rope is not there, you should track the rope with a flag.  See 
+the portion on flags below for an explanation. 
+
+Some items change instead of disappear.  Take for instance the list 
+of rooms available in the inn.  You would not put "list" in the list 
+of items in set_items() with a static description.  You would instead 
+use a function which tests which rooms are available and return 
+descriptions based on room availability.  Instead of a string, you 
+therefore use a function for the description:
+
+   set_items(([ 
+      "list": (:TO,"look_at_list":)
+   ]));
+
+When the player types "look list" or "examine list", the driver will
+call the function look_at_list(), which might be defined like this:
+
+*****
+
+string look_at_list(string str) {
+   if(full){
+      return "The list says that there are no rooms available.";
+   }else{
+      return "The list says that there are plenty of rooms free.";
+   }
+}
+
+*****
+
+In this function, it is assumed that you have declared an integer 
+variable called full that is 1 when no rooms are available and 0 
+when there are rooms the player can rent.  For an explanation of 
+this interger variable see the section on flags below.  Similar 
+to the way set_items() allows functions, add_item() also does, and 
+remove_item() will remove those items as well.
+
+*********************************************************************
+
+%^BOLD%^Part 4: Using Flags
+%^YELLOW%^-------------------
+
+"Flag" is simply a term we use on the mud to mean an integer 
+variable that keeps up with whether or not there are any uses
+left of a certain item.  They are very simple to use and can 
+be added to or subtracted from as players manipulate the 
+environment.  They can also be used as a means to change
+descriptions based on whether something is there or not.
+
+To use a flag, you need to define an integer to act as the flag 
+first.  To make sure it will track throughout the whole file, 
+you should define it above create, such as in this example:
+
+*****
+
+#include <std.h>
+inherit ROOM;
+
+int apples;
+
+void create(){
+   ::create(){
+   set_name("An orchard");
+   ...etc.
+   apples = 3;
+}
+
+*****
+
+The int part meants that "apples" is just a variable number, 
+which we have defined in create to equal three.  Now, when 
+you write your functions, you can manipulate this variable 
+to go along with your descriptions and actions.
+
+*****
+
+void init(){
+   ::init();
+   add_action("pick_fun","pick");
+}
+
+int pick_fun(string str){
+   if(str == "apple" || str == "apples"){
+      if(apples < 1){
+         tell_object(TP,"It looks as though someone has already "
+            "picked all the apples.");
+         tell_room(TO,""+TPQCN+" looks for an apple to pick but "
+            "can't seem to find one.",TP);
+         return 1;
+      }
+      tell_object(TP,"You reach up and pick a juicy apple.");
+      tell_room(TO,""+TPQCN+" picks an apple from the tree.",TP);
+      apples--; 
+//This means take the number of apples and subtract 1
+      new("/d/common/obj/apple.c")->move(TP); 
+//make a new apple and give it to the player
+      return 1;
+   }
+   return 0;
+}
+
+*****
+
+As you can see, this allows you to keep track of how many apples 
+the players can get, helping you simulate real life as well as 
+controlling the prevalence of an item.  Flags are often used to 
+track whether a room has been searched and an item found as well.
+If you want more apples (or more searches) to be possible throughout
+a boot, you should include a line in your reset() to provides more.
+A simple line of code such as this will work, though you can make 
+it more complicated by adding randomness as well.
+
+*****
+
+void reset(){
+   ::reset();
+   if(!apples) apples = 3;
+}
+
+*****
+
+By using flags well, you have the ability to make your area much 
+more interesting and provide a lot of interactivity for the 
+players.  For an example of flags in use, see 
+<more /d/shadow/room/ekibi/shore_inherit.c>
+
+*********************************************************************
+
+%^BOLD%^Part 5: Manipulating Exits
+%^YELLOW%^-----------------------------
+
+The set_exits() command has add_ and remove_ counterparts similar to 
+those described above for item descriptions in part 3. For example:
+
+*****
+
+#include <std.h>
+inherit ROOM;
+
+int blocked;
+
+void create(){
+   ::create();
+   set_light(2);
+   set_indoors(1);
+   set_name("A room with a table");
+   set_short("A room with a table");
+   set_long("You are in a huge empty room with a table in it.");
+   set_items(([ 
+      "room" : "It is huge.", 
+      "table" : (:TO,"table":)
+   ]));
+   set_exits(([ 
+      "south": "/d/standard/room3"
+   ]));
+   blocked = 0;
+//The exit starts out unblocked
+}
+
+void reset(){
+   ::reset();
+   if(blocked){
+      add_exit("/d/standard/room1","north");
+      blocked = 0;
+   }
+}
+
+void init(){
+   ::init();
+   add_action("kick_it","kick");
+}
+
+int kick_it(string str){
+   if(str == "table"){
+      tell_object(TP,"You kick the table across the room, and "
+         "it blocks the north exit.");
+      tell_room(TO,""+TPQCN+" kicks the table to block the exit.",TP);
+      remove_exit("north");
+      blocked = 1;
+      return 1;
+   }
+   tell_object(TP,"Kick what?");
+   return 0;
+}
+
+string table(string str){
+   if(blocked){
+      return "It is blocking the north exit.";
+   }else{
+      return "It is in the middle of the room.";
+   }
+}
+
+*****
+
+Hopefully, this example will demonstrate to you everything we have 
+so far gone over.  But there is more to exits that adding or removing 
+them.  Sometimes you may want to call a function before or after the 
+player leaves the room.  You might even want to prevent the player 
+from leaving.  These are the functions which allow you to do so:
+
+%^BOLD%^set_pre_exit_functions( ({"north"}), ({"go_north"}) );
+%^BOLD%^set_post_exit_functions( ({"south"}), ({"go_south"}) );
+%^BOLD%^add_pre_exit_function( "north", "go_north" );
+%^BOLD%^add_post_exit_function("south", "go_south");
+%^BOLD%^remove_pre_exit_function("north");
+%^BOLD%^remove_post_exit_function("south");
+
+When you set a pre_exit_function for a given direction, that function 
+gets called any time a player tries to go in that direction before 
+they go that way.  In the following case:
+
+%^BOLD%^set_pre_exit_functions( ({"north"}), ({"go_north"}) );
+
+The function go_north() is called when the player types "north".
+You define go_north() in your room, and return 1 if the player may 
+proceed to the exit set for north in set_exits, or you return 0 
+if the player is not allowed to leave. For example:
+
+*****
+
+int go_north(){
+   if(present("ogre")){
+      tell_object(TP,"The ogre blocks your way!");
+      return 0;
+   }
+   else return 1;
+}
+
+*****
+
+In this example, if the ogre is in the room, the player cannot 
+proceed to the exit to the north.  But if the player has killed 
+the ogre, then the player may indeed go to the north exit.  
+Note that thieves can sneak past functions coded this way.  If 
+you intend to catch thieves sneaking as well (use only in cases 
+where it makes sense that they could not sneak by), use GoThroughDoor
+as the name of your function.  The remove_ and add_ functions
+work as the remove_ and add_ for the items.
+
+There are two differences between pre_exit_functions and 
+post_exit_functions.
+1) The pre_ ones get called before the player leaves the room and 
+      the _post ones get called after the player has left the room.
+2) The pre_ ones are type int and return a 1 or 0.  The post ones 
+      are type void instead of int and return no value, since the 
+      player has already left the room.
+
+The last functions involving the exits are:
+
+%^BOLD%^set_invis_exits( ({"north", "south"}) );
+%^BOLD%^add_invis_exit("east");
+%^BOLD%^remove_invis_exit("north");
+%^BOLD%^skip_obvious();
+
+These functions simply leave the exits out of the list of obvious 
+exits.
+
+For instance, the following:
+   set_exits(([
+      "north":"/d/standard/room1",
+      "south":"/d/standard/room2"
+   ]));
+
+Will have the following description printed at the end of the long 
+description:
+
+   There are two obvious exits: north and south.
+
+But maybe you want the south exit not listed, though you still 
+want it to exist without going through all of the trouble of an 
+add_action().  You would do this
+
+   set_invis_exits( ({"south"}) );
+
+And the long description would say instead at the end:
+
+   There is one obvious exit: north.
+
+Finally, the function skip_obvious() simply has the room description
+omit all obvious exits.  This function is rarely, if ever, used.
+
+*********************************************************************
+
+%^BOLD%^Part 6: Senses
+%^YELLOW%^--------------
+
+There are several default commands that are added automatically to 
+every room that inherits the file "/std/room.c".  Among them are 
+all normal direction commands and the command "search".  You change 
+some of the functions when you set_exits, so that instead of getting 
+the message "You can't go that way." you get moved to the exit.  The 
+default setting for search is "You find nothing special.".  But this 
+too, you can change with the following
+
+%^BOLD%^set_search("item","string");
+%^BOLD%^set_search("item",(:TO,"string":));
+
+This makes it possible for a player to search a particular item and 
+for something to happen.  If you just want whatever to happen when 
+"search" alone is typed, you replace "item" with "default".
+
+The second example has you passing a function instead of a simple 
+string as the second argument.  This allows you to call a function 
+by the name represented by the string in the object named.  Thus:
+
+%^BOLD%^set_search("default",(:TO,"search_default":));
+
+will call the function search_default() in your room so that you 
+can define what happens in better detail, rather than simply print
+a string.
+
+%^BOLD%^set_smell("default","The odors of the sea fill the air.");
+%^BOLD%^set_smell("cat",(:TO,"smell_cat":));
+%^BOLD%^set_listen("cat","You hear the purring of the sweet kitty.");
+%^BOLD%^set_listen("default",(:TO,"default_listen":));
+
+Notice that set_smell() and set_listen() are used much like 
+set_search().  There are a couple of interesting properties 
+about set_smell() and set_listen() however:
+
+1) Default listens and smells automatically show up when a player 
+looks or enters a room.  This allows for a description for an 
+environment even though the room may be dark or something.  It 
+is recommended that ALL rooms make use of default smells and sounds.
+
+2) The user defined functions return a string to be printed.  For
+"smell_cat" and "default_listen" above, you would create in your room
+the functions:
+
+string smell_cat(string str);     string default_listen(string str);
+
+The parameter being passed, str, is whatever the person is smelling 
+or listening to.  This can allow you to define multiple smells and 
+listens to use one function, but that is a bit more advanced.  Here 
+is a minimal example of a properly defined smell_cat() function:
+
+In create():
+   set_smell("cat","smell_cat");
+
+Then outside of create, you define:
+
+*****
+
+string smell_cat(string str){
+   if((string)TP->query_race() == "goblin"){
+      return "Mmm...that kitty sure does smell good.  Dinner, maybe?";
+   }else{
+      return "You smell the contentment in the cute feline.";
+   }
+}
+
+*****
+
+To see an example of a search where someone finds an object in 
+action, look at <more /d/shadow/room/ekibi/cave_inherit.c>
+
+*********************************************************************
+
+Part 7: Using Light
+--------------------
+
+Because the mud has both day and night time, you have to declare that 
+a room is an indoor room if you want it not to get dark at night.  
+But, you can also use a few functions to give a room different long 
+descriptions when it is day or night.  These are:
+
+%^BOLD%^set("day long","It's bright and sunshiny.");
+%^BOLD%^set("night long", "It's dark and spooky.");
+%^BOLD%^set_indoors(1);
+   1 if the room is inside (a building, cave, etc.) 
+   0 if it is outside
+
+You can use these to make a better room.  Here are two nicer create() 
+functions using the new calls.
+
+*****
+
+void create(){
+   ::create();
+   set_indoors(1);
+   set_light(2);
+   set_long("This is a very nice sitting room.  There is a couch on "
+      "the north wall that has a nice view out the huge window on "
+      "the south wall.");
+   set("day long","The sun is streaming in the huge window on the "
+      "south wall, bathing the couch across from it in warm sun "
+      "beams.");
+...
+}
+
+void create(){
+   ::create();
+   set_indoors(0);
+   set_light(2);
+   set_long("Two paths diverge here around a large oak that looks "
+      "like a great tree to nap under.");
+   set("night long","The twist of dark branches of this massive "
+      "oak tree guard the two paths that stretch into the "
+      "blackness.");  
+...
+}
+
+*****
+
+As you can see, these can make a boring rooms much more interesting.  
+Remember the value of descriptive language in the mud.  Since there 
+are no pictures, try to make your language paint a picture.
+
+*********************************************************************
+
+%^BOLD%^Part 8: Random Monster Encounters
+%^YELLOW%^---------------------------------
+
+You may see some files that use do_random_encounters().   In 
+general, this function has become somewhat obsolete.  Instead, 
+you should generate your monsters in reset() if they are non-
+moving mobs, or you should see <help controlroom tutorial> if 
+they are moving.
+
+*********************************************************************
+
+%^BOLD%^Part 10: Climbing and Descending
+%^YELLOW%^--------------------------------
+
+The last types of special exits available for your rooms are the 
+climb and descend exits.  Climb is for upward movement, such as 
+going up walls, through holes, and other situations where there is 
+not a ladder or stairs present.  Descend is for downward movement.
+All uses can access these exits, but non-thieves or bards will 
+need climbing tools.
+
+*****
+
+   set_climb_exits(([
+      "climb" : ({"d/shadow/room/shaft",3,6,300}),
+      "descend" : ({"d/shadow/room/pit",5,18,100}),
+   ]));
+
+*****
+
+When using these exits, first we have the verb, 'climb' or 'descend'. 
+Then we have a mixed array with:
+   1st: the path the exit leads to.
+   2nd: the difficulty level of the object being climbed.
+   3rd: extra damage done if the player falls, due to spikes, etc.
+   4th: the distance of the climb. 
+
+1st - The path is self-explanatory. 
+
+2nd - The difficulty has 7 levels:
+   easiest        1:  rope and wall
+      |           2:  abundant handholds/tree with limbs/rope w/o wall
+      |           3:  sloped outward / not quite straight up
+      |           4:  normal wall / straight up
+      |           5:  slightly slippery / loose rocky walls
+      |           6:  slipperly / crumbling walls
+nearly impossible 7:  icey
+
+3rd - The Extra Damage is for damage inflicted on a fall, that is 
+over and above the damage from hitting the floor from the fall 
+itself.  For example, if there are spikes at the bottom of the 
+fall, they will do extra damage to the player who falls on them.  
+A player will suffer 1d6 damage for every 100 feet they fall, plus 
+damage due to spikes or whatever obstacle you have them land on.   
+The number you put here is the size of dice that will be rolled. 
+IE set to 8, it will roll an extra 1d8 of damage for the player.  
+Players can be killed from falling.
+
+4th - The Distance. This is the distance from the top of the climb
+to the bottom.  It should be in 100-foot increments, so anything 
+below 100 feet will be put as 100 feet. For every 100 feet, the 
+player is checked for successfully climbing/descending that 
+section. If they fail, but don't fall off, they will climb/descend 
+back to the place they started.  However, if they fall, they will 
+suffer 1d6 damage for every 100 feet they successfully climbed to 
+that point, where they fell. For example, if a player is scaling 
+up a 600 foot cliff, makes it 400 feet before slipping and falling, 
+they will fall 400 feet and suffer 4d6 damage.
+
+Finally, there is a line of code to help add realism to the fall:
+%^BOLD%^set_fall_desc(string desctiption);
+
+*****
+
+   set_fall_desc("You land painfully upon a bed of spikes!"):
+
+*****
+
+This will set your description, which will be called whenever the 
+player falls.  Good for those spiked floors, so you can describe 
+the reason for all the damage they receive.
+
+*********************************************************************

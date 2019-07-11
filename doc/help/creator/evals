@@ -1,0 +1,96 @@
+%^RED%^PLAYER RELATED EVALS%^RESET%^
+
+eval TP->set_class(string class)
+eval TP->set_mlevel(string class,int amount)
+eval TP->remove_class(string class)
+eval TP->set_max_hp(int amount)
+eval TP->set_hp(int amount)
+eval TP->set_alignment(int amount)
+eval TP->set_player_height(int amount)
+eval TP->set_player_weight(int amount)
+eval TP->reset_weight() - not often used, was for fixing a weight bug
+eval TP->set_paralyzed(int amount) 0 removes paralysis or..
+eval TP->remove_paralyze()
+eval TP->set_blind(int amount) 0 removes blindness, 1 adds it
+eval TP->set_temporary_blinded(int amount) 0 removes temp blindness
+eval TP->add_poisoning(+/-int amount) +will add it, - will remove it
+eval TP->add_intox(+/-int amount) +adds, - removes
+eval TP->set_stats(string stat,int amount)
+eval TP->add_stat_bonus(string stat,+/-int amount) bonus lasts until quitting
+eval TP->add_sight_bonus(int amount)
+eval TP->set_race(string race) do NOT capatalize or set a race that doesn't exist
+**USE THE COMMAND '%^CYAN%^Races%^RESET%^' and check if the race you have in mind is valid if you are unsure
+eval TP->set_gender(string gender) female, male, or neuter
+eval TP->add_exp(+/-int amount)
+eval TP->set_diety(string diety) just () with nothing inside removes the diety
+eval TP->set_sphere(string sphere) each diety has a corresponding sphere
+eval TP->set_lang(string name, int amount) wizzes have skillset, this is more for players. wizzes also get wizish, which is the best
+eval TP->set('no advance', in level) **NOTE - use the levelcap command when a levelcap is needed**
+
+To reset a buggy or completely inaccessible trainer room -
+eval return find_player("name")->set("advance place", 0)");
+
+%^CYAN%^THIEF OR BARD ONLY EVALS%^RESET%^
+
+eval TP->set_advanced(int x) - for when a thief loses skill points - each 1 of x will give them 30 more points to add (IE x = 3 then points equals 90)
+eval TP->set_thief_skill(string skill, int amount) sets whatever thief skill to the amount specified
+eval TP->set_thief_skill_bonus(string skill, int amount) gives a bonus until quitting to whatever valid thief skill
+%^BLUE%^**VALID THIEF SKILLS**
+pick pockets
+find/remove traps
+open lock
+move silently
+hide in shadows
+detect noise
+climb walls
+read languages%^RESET%^
+
+%^CYAN%^SPELLBOOK AND COMPONENTS RELATED EVALS%^RESET%^
+
+**NOTE - You must call the bag or book you want to modify
+present("bag",find_player(string playername))->set_comp(string compname, int amount)
+present("book",find_player(string playername))->add_spell(string spellname)
+**NOTE - The %^CYAN%^<makescroll>%^RESET%^ command is an easy way to create specific scrolls
+
+%^RED%^WEAPON PROFICIENCY RELATED EVALS%^RESET%^
+
+eval TP->increase_skill(string skillname, int amount) - this increases the given skillname OR adds it and sets it to that amount if they don't have it
+eval TP->use_prof(string skillname) - applies a prof to the given skillname
+eval TP->reset_profs() - frees up all used profs
+eval TP->delete_skill(string skillname)
+eval TP->set_profs(string skillname,int amount)
+eval TP->query_skills() - returns list of profs
+eval TP->query("youth weapon") returns parent weapon
+eval set_skill(string name, int amt)
+Also check out the fixprofs command for handling combined/changed weapon profs
+
+**NOTE**
+TP equals the object that calls it (IE - You) - so to modify player
+variables you need to use %^RED%^eval find_player(string playername)->%^RESET%^
+You may also use present(string object,object location) - IE present('bag',TP)->
+**The player you specify with present OR find_player MUST be online
+
+%^RED%^OBJECT RELATED EVALS%^RESET%^
+
+present(string object,object who)->set_property("enchantment",int amount)
+present(string object,object who)->set_size(int x)
+**NOTE almost any property that is set in a weapon OR object can be modified with an eval
+IE - id(({})), set_short(), set_long(), set_weight(), etc
+**NOTE You may also query most of these properties (IE - present(string object, object who)->query_property('enchantment')
+%^BOLD%^Just a nifty thing for when you're trying to track down an item that you're not sure how players are getting.%^RESET%^
+eval return present(string object name, find_player(string name))->query_creator()
+
+%^BOLD%^%^GREEN%^NWP RELATED EVALS - Styx 12/03%^RESET%^
+
+First always do <nwps [name]> and this so you have a complete list of what was there before in case something goes wrong
+eval return find_player(string PCname)->query_nwps_mapping()
+
+To increase a "free" nwp level:
+eval return "/daemon/nwps_d.c"->advance_player(find_player(string name), string class, int level)
+**NOTE - level should be the level they are in the class that the nwp is free in
+If they already have the nwp, it will add one level at a time.  If it's new, it will bump them straight to the level
+
+**NOTE - The %^GREEN%^<fixnwps>%^RESET%^ command will now do this
+
+Don't forget the %^GREEN%^<nwpbonus>%^RESET%^ and %^GREEN%^<addnwp>%^RESET%^ commands that both avatars and wizzes have for personas or giving players a boost for good RP
+

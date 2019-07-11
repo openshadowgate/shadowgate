@@ -1,0 +1,9 @@
+Nightmare mudlib living lfun: add_wielding_limb()
+
+void add_wielding_limb(string str)
+
+This makes the limb "str" able to wield a weapon.  The limb must already be
+present for this to work.
+
+See also: set_wielding_limbs(), query_wielding_limbs()
+Defined in /std/living/body.c

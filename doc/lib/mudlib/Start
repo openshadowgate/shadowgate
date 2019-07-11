@@ -1,0 +1,55 @@
+This directory contains all the files you will need to help you get
+your MUD up and running using the Nightmare Mudlib version 3.2 for
+the MudOS enhanced LPMud driver version 0.9.19.  Naturally, this file named
+start is where you should start.  Other files describe features beyond
+the initial process.
+
+The first thing you should do if you have any patience :) is look at
+Nightmare's directory structure and understand why things are set out
+like they are.  This file, however, assumes you have no patience and
+that you want to get your MUD up and running ASAP.  The file
+"DirectoryStructure" will explain everything about the directory structure.
+
+First, use the config.mud and options.h file which ships with the Nightmare 
+Mudlib 3.2 making only the minimum changes necessary to get the mud running.
+Changes like the mud name and where to find the mudlib directory, etc.  As of
+*this* version, you cannot use strict typing or casting call outs since
+some of the older code in the mudlib does not support those options.
+At any rate, only make changes to the config.mud and options.h file once
+you have managed to get the mud up and running smoothly under the default
+one that ship[s with the mudlib.
+
+The MUD should now boot up fine.  You will find that the mudlib ships
+with a character called "admin" with a password of "admin".  You should
+login with this character and your own character. Then take the following
+steps:
+
+1) With the admin character, type: "xmote mychar 1 administrator"
+"mychar", of course, being the name of your character.  Level and
+position are actually irrelevant, except that characters with
+position "player" (like any new player) and "high mortal" do not have
+access to creator powers.
+2) Still with the admin character, edit the file /adm/db/groups.db, changing
+every instance of the word "admin" to your characters name (in step one,
+it was the name "mychar").
+3) Make sure your name is NOT in the ambassador group.  Ambassador permissions
+are restrictive permissions which override any other permissions you
+might have.
+4) Save the file and update /adm/obj/master.c
+5) Either one of two things have now happened:
+    a) master.c updated, and now you have admin access and wiz commands.
+    b) The mud crashed.
+If the MUD crashed, that means you made a typo in editing the groups.db
+file.  Go back to the original and start again.
+6) Move /adm/save/users/a/admin.o OUTSIDE of your mudlib directory on your
+account.  You want to save this in case of later need, but you do not
+want it sitting in your MUD as a security whole.  Truthfully, though,
+even admin itself should have only regular creator powers.  But still
+you do not want something with an easy password like "admin" just sitting
+around.
+
+You are now all set up as the administrator of your MUD.  You should be
+able to edit any file you like, and promote any player to any
+level and position you desire.  You will now likely want to read the
+file called "GivingAccess" which details the process of adding other
+creators and and administrators.

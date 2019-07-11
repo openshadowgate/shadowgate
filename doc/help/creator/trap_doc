@@ -1,0 +1,119 @@
+	Traps are based on the idea of being set and then being
+disarmable. Actions can lead to the setting off of traps.
+
+example:
+	There is a pouch of gold in the middle of the floor.
+	Little does an unsuspecting adventurer know but a small 
+	string has been attached to the bottom of the pouch.
+	When the Pouch is lifted (aka get pouch) the string is 
+	pulled and a cloud of noxitous gas is released, killing
+	everyone in the room and of course not allowing the player
+	to get the item. Now however simple inspection by
+	a thief would see the string and know how to disarm the 
+	trap.
+	
+How to code this trap?
+
+the operative function is 
+
+set_trap_functions(string *items, string *functions, 
+										string *triggers);
+										
+
+items may seem like a useless array, objects can only be
+	trapped in one way. So for objects it would be
+	({some id}). This is simply to identify the objects.
+	
+	However in rooms this array serves a much large purpose.
+	When you have an virtual object. Such as a lever, something 
+	that is simply written in, and you want to trap the pull
+	function. Here is where the items aray comes into play
+	you can put into the room code a trap with the item set
+	to "lever". Also if you want to trap movement, say a 
+	trip wire across the north exit. Your items would be "north".
+	
+functions array is self explanitory. This is the name of the 
+	function[i] that is called from this_object() upon
+	stimulus trigger[i]. assuming the target of the trigger[i] is
+	TO, or item[i].
+	
+trigger array contains the actions that will cause the function
+	to be called. This can be ANY action. NOTE: that for
+	actions of your own creating such as pull lever that you 
+	also trap, you will need to have the following
+	
+	 void init(){
+	 	add_action("function","pull")
+	 	::init();
+	 	}
+	 	
+	 for the trap to be effective.
+	 
+
+for the example above the code would look something like this.
+	This code would appear in the pouch object.
+	
+	void create(){
+		.
+		.
+		.
+		.
+		set_trap_functions(({"pouch"}),({"gas_em"}),({"get"}));
+		.
+		.
+	}
+	
+	int gas_em(string str){
+		tell_room(ETO,"You see a hugr bollowing cloud filling the 
+			room!");
+		tell_room(ETO,"You all die!");
+		
+		return 1; 
+		//The return 1 disallows the action
+		//a return 0 would have allowed the soon to die player 
+			to pick up the object.
+	}
+	
+Okay say that the trap is a one timer. The trap code 
+	would appear like this.
+	
+	int gas_em(string str){
+		tell_room(ETO,"You see a hugr bollowing cloud filling the 
+			room!");
+		tell_room(ETO,"You all die!");
+		toggle_trap("pouch");
+		
+		return 1; 
+		//The return 1 disallows the action
+		//a return 0 would have allowed the soon to die player 
+			to pick up the object.
+	}
+	
+int toggle_trap(string item);
+	this function toggle the trap on and off.
+	
+int trapped(string action);
+	this function returns a 1 if the trap on action is set,
+	0 if it's not.
+	
+
+The combination of these two functions makes it so that you can 
+	asure your trap resets appropriately.
+	
+	void reset(){
+		::reset();
+		
+		if(!trapped("get"))	
+			toggle_trap("pouch");
+	}
+	
+	//This code would appear in the pouch.
+	
+Please note that when a trap is toggled it is in fact toggling a 
+function. So this means that each trap shold have a unique
+function.
+
+
+Any questions please feel free to ask me Tristan@shadowgate
+
+or reference the mudlib.

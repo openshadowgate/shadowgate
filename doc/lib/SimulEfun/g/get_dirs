@@ -1,0 +1,9 @@
+string *get_dirs(string path);
+
+DESCRIPTION
+This will return a list of all the directories
+found in the location path.  It will only return
+directories and will ignore normal files.
+
+LOCATION
+/adm/simul_efun/get_dirs.c

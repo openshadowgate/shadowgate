@@ -1,0 +1,37 @@
+keys(3)                      LPC Library Functions                     keys(3)
+
+
+
+[1mNAME[0m
+       keys()  -  return an array of the keys from the (key, value) pairs in a
+       mapping
+
+
+[1mSYNOPSYS[0m
+       mixed *keys( mapping m );
+
+
+[1mDESCRIPTION[0m
+       keys() returns an array of keys (indices) corresponding to the keys  in
+       the (key, value) pairs stored in the mapping m.
+
+       For example, if:
+
+              mapping m;
+              m = (["hp" : 35, "sp" : 42, "mass" : 100]);
+
+       then
+
+              keys(m) == ({"hp", "sp", "mass"})
+
+       Note:  the  keys  will not be returned in any apparent order.  However,
+       they will be returned in the same order  as  the  corresponding  values
+       (returned by the values() efun).
+
+
+[1mSEE ALSO[0m
+       values(3), each(3)
+
+
+
+MudOS                             5 Sep 1994                           keys(3)

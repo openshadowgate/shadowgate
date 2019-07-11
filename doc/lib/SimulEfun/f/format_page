@@ -1,0 +1,12 @@
+Nightmare Mudlib 3.2 simul_efun: format_page()
+
+string format_page(string *str_arr, int columns);
+
+DESCRIPTION
+Takes an array of strings and returns a single string with the items in
+equal columns as specified by the columns parameter.  It is best used for
+printing out information like commands available in a nice
+format.
+
+SEE ALSO
+arrange_string(), printf(), replace_string(), sprintf(), wrap()

@@ -1,0 +1,242 @@
+                   Nightmare Mudlib 3.0 Security
+
+Perhaps the most major change which the Nightmare Mudlib has undergone is
+in security.  The old mudlib, like most uid based mudlibs, relied upon
+giving out Root uid to commands, daemons, and the /adm objects.  Seecurity
+rested upon the fact that you should only give access to these directories
+to people you really trust.  Problem is, coding commands and daemons should
+not be a major security issue in addition to the fact that the more places
+that can have Root uid, the more places which can be used to violate your
+security.  
+
+The new Nightmare Mudlib security is based on the belief that ONLY the master
+object should have Root uid (note: the simul_efun object has a uid of 0
+unless you update it on the mud... but the master object allows it to act
+*as if* it had Root uid).  No other mud object, not the login object, not 
+daemons, and certainly not commands should have Root access.
+
+Now before I get into the nitty gritty, a small of note.  First, the
+security setup is not 100% complete.  The entire /adm directory still has
+Root uid.  This is a simple, but time consuming change you should be able
+to do yourself if these security features interest you.  We simply did
+not want to hold up the release of the entire mudlib over daemons having
+Root access, since the main idea is to make sure /bin does not have
+Root access.
+
+First, on uid:
+When an object is loaded or cloned into memory, the driver assigns it
+a uid (user id).  It does this by passing the file name of the object
+to the function creator_file() in master.c.  That function will return
+some appropriate uid (a string).  The values that can be returned are
+set in /adm/simul_efun/creator_file.c.  Basically it does this:
+If the object is from /adm, UID_ROOT is returned (note, this should
+be changed eventually to if(file == "/adm/obj/master") return UID_ROOT).
+If the object is from /std, UID_BACKBONE is returned (/obj currently
+returns UID_BACKBONE, but I am going to make it UID_MUDLIB so I can place
+the daemons from /adm in there).
+If the object is from /d, the CAPITALIZED version of the domain name is
+returned
+If the object is from /wizards, the name of the wizard who created it is
+returned.
+If the object is from /bin, UID_MUDLIB is returned.
+
+The actual values of UID_ROOT, UID_MUDLIB, etc. is defined in an include
+file called /include/security.h.  The driver will then assign
+to the newly created object that string as its uid, *except* for objects
+where UID_BACKBONE is returned.  Depending on your config file setup,
+(if you have #define AUTO_TRUST_BACKBONE commented out or not in your
+driver configuration), either the driver will assign it UID_BACKBONE *or*
+it will assign it the uid of the object that cloned it into memory.
+So now your newly created object has its uid.  In addition, if you
+have in your driver configuration the define that has it automatically
+set object euid's, then its euid (effective user id), then its euid is
+set to that same value.
+I recommend setting up your driver config file so that Backbone objects
+get the uid of the object which clones them and so that you have to
+manually set the euid for all objects (note: regular mudlib objects have
+in their create() a function to set their euid, the purpose of this is
+simply to make tracking the euid of special objects easier for debugging
+and security detective work).
+
+Now the newly created objects have a uid and perhaps an euid.  What does this
+mean? 
+
+The user id is used to determine *how an object as at any period in time*.
+The effecitve user id is used to determine *how an object may act now*.
+More on what this means as follows:
+
+User id's:
+Basically, user id determines what effective user id's an object can have.
+For example, let's look at the cd command.  Read and write stuff is
+determined for the object requesting it.  Thus whether a creator can cd
+to any directory that the cd command object has access to.  So how is it
+that the admin can cd to /arch but a regular immortal cannot?  The cd
+changes its own effective user id depending on who is using it!.  No
+matter what its effective user id, an object never changes its user id.
+
+Effective user id's:
+The effective user id determines 2 things:
+1) Can the object perform a requested function to read or write to a file
+   or directory?
+2) Can the object access a restricted function in an object?
+
+So thus, an object will succeed or fail at changing its euid for the sake
+of r/w or function access based upon its user id.  When an object wants
+to change its euid, it calls
+    seteuid(neweuid);
+where neweuid is the euid it is requesting.  The driver then calls the
+function valid_seteuid() in master.c.  If master.c says (based upon the
+object's user id) that the object may change to that euid, then the change
+occurs.  If the master says no (by returning 0), then the change fails.
+
+The master object is the focal point of all security concerns.  The
+important functions in the master object are:
+valid_seteuid()
+valid_read()
+valid_write()
+
+Naturally, they all determine if an object can set its euid to a desired
+euid, read a desired file, or write to a desired file, respectively.
+There are, however, 3 databases the master object reads at reboot to 
+determine the criteria on which these valid_* functions allow the
+requested behavior.  All there are in /adm/etc, and they are:
+privs.db
+groups.db
+access.db
+
+The file privs.db:
+When an object asks to change its euid, the driver calls valid_seteuid()
+in master.c.  Now, on any mud, it will ALWAYS return 1 for objects whose
+uid is root, or for the simul_efun object. In addition, if an object
+is trying to change its euid to the same thing as its uid, that is allowed.
+This is about as much as most mudlibs do.  Nightmare, however, has other
+shades of valid euid setting.  For example:
+UID_SYSTEM returns 1 so long as it is not trying to set its euid to 
+    UID_ROOT or UID_BACKBONE.  This allows objects like the cd command
+    to take on player euid's without being given the ability to read and
+    write everywhere like UID_ROOT can.  Basically, UID_SYSTEM differs
+    from UID_ROOT in that:
+      1) UID_SYSTEM cannot seteuid() to UID_ROOT or UID_BACKBONE
+      2) UID_ROOT as an euid gives an object universal read/write, whereas
+         UID_SYSTEM as an euid leaves an object unable to read or write
+         anywhere.
+Finally, if an object has none of these uid's, the file name of the object
+is checked against a database of priveledged objects which are allowed to
+change their euid's to *specific* euid's.
+The database is /adm/etc/privs.db.   In it, you specify an object and all
+the euid's which it may legally take on.  For example, the file might contain:
+
+(/bin/user/_bug): Log
+
+This means that the bug command can change its euid legally to "Log".
+More on why you would want to allow it to do that, or even to have an euid of
+"Log" later.
+
+The file groups.db:
+Reading and writing to a file involves a call to the master object.
+Simply put, when an object requests to read or write something, the driver
+checks with the master to see if 1) That object has access to 2) that file.
+Naturally, and euid of "Root" (UID_ROOT) always returns 1.  In addition,
+player and domain euid's are always allowed to write and read to their
+own directories.  Beyond that, the master object maintains a database of
+groups of common access, /adm/etc/groups.db.  In that file, you might see
+something like:
+
+(superuser): descartes flamme forlock shadowwolf
+
+This means to the driver that descartes, flamme, forlock, and shadowwolf
+all have some sort of similar access.  At this point it checks to see
+what groups, if any, the euid of the object might belong to.  If it finds
+that the object's euid is part of any of the groups, it checks against
+its database of access as defined in /adm/etc/access.db.  There you might
+see something like:
+
+(/adm/etc): [n](all) [r](assist) [rw](superuser)
+
+Everyone belongs to group "all".  The access checks look for positive
+access anywhere, meaning taat teey go beyond the no access of all and
+check the other groups to which the object's euid might belong.  If it
+finds that an object belongs to any group which does have the access
+requested (read or write), it will return 1.  If it cannot affirm that
+the object is a member of any of the groups with the right access, it will
+return 0.
+
+This is what all happens in the master object with regard to security.  It
+is your primary defense against hackers trying to write or read directly
+to files they should not be able to touch.  However, throughout the
+mudlib are objects which have valid reasons to perform certain mud
+functions (like shutting it down, writing to intermud sockets, logging files).
+Unprotected, these objects might be used to do damage.  For example, if
+you have a shutdown daemon, you do not want anyone out there to be able
+to call the function in it that shuts down the game.  So you might have:
+
+void do_shutdown() {
+    if(geteuid(previous_object()) != UID_SHUTDOWN) return;
+    shutdown();
+}
+
+As stated above, only those objects which are specifically allowed by
+the privs database and those objects with uid UID_ROOT as well as the
+simul_efun object can take on the UID_SHUTDOWN as an euid.  If the
+master object is your only root object, this means the only things which
+could be used to shut down the mud are:
+    The master object.
+    The simul_efun object.
+    Any object specified in the file /adm/etc/privs.db as being allows to
+      change its euid to "Shutdown".
+There are a couple of very comforting implications here:
+    1) On other mudlibs, you can only restrict shutdown by checking to see
+      if the mudlib has euid UID_ROOT.  This means that in order to restrict
+      the ability to shutdown the mud, you have to give those objects that
+      need to shut down the mud UID_ROOT!  With this setup, however,
+      the objects needing to shut the mud down need only the access
+      required to shut the mud down, without having to give them the
+      access to do things like write over the master object.
+    2) You can give out access to more people than your most totally
+      trusted friends to the directories with the shutdown objects.  Under
+      other security configurations, uid (and thus euid) are based on
+      what directory an object comes from.  Thus if you give one object
+      in a directory needs the ability to shutdown the mud, then you have
+      to give it to all of the objects in that directory.  And therefore,
+      you have to risk giving out access to that directory to people you
+      would rather not (for the sake of code productivity), or you
+      unnecessarily restrict access to that directory and slow down
+      productivity.  With the Nightmare Mudlib, you can give more people
+      access to the directory with enabling them to create other files without
+      giving those files the ability to shut down the game.
+
+The header file /include/security.h contains all the special uid's of the
+Nightmare Mudlib.  It comes in 3 parts.  First, the basic mudlib
+uid's assigned based upon directory.  Second, the object access euid's (the
+ones like the Shutdown one which restrict access to function calls).
+And finally, limited read/write euid's.  The final one is much like
+access groups.  The difference is in that access groups give out read or
+write access to all objects with the euid's which are members of the group
+(for example, not only am I part of the superuser group, but also all
+objects from my home directory).  The third group of euid's allow for
+individual objects to take on an euid allowing a very specific type of
+access without giving it to all objects that have its euid.
+
+Finally, restrict access to the maximum to the following directories:
+/adm: Any object in this directory has root uid, and thus can read/write
+    anywhere.  Plus, this means people can change the access files and
+    basically undo the entire mud.
+/include: A person with access to /include could change the definition of
+    UID_ROOT.  Say my name is "bozo" and I want to chnage the access
+    database to do as I please.  I have no access to /adm, but I have access
+    to /include.  I redefine UID_ROOT from "Root" to "bozo".
+/bin/system: These files, although they have no read/write access on their
+    own, they can change euid to any euid except Root and Backbone.  This
+    means they can change to your euid, faking being you. 
+And, any home directory of anyone with access to the above directories.
+    Thus on our mudlib, such access is restircted for /wizards/descartes,
+    /wizards/flamme, /wizards/forlock, /wizards/shadowwolf, /wizards/pallando,
+    and /wizards/valodin.  Mentors and other lower level people however have
+    write access to all other /wizards directories (other relatively
+    lower level people)
+
+Well, that is a hell of a lot to digest.  I certainly hope it gives you the
+idea however of how the security of the Nightmare Mudlib version 3.0
+works.
+    -Descartes
+     20 august 1993

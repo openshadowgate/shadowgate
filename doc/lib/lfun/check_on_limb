@@ -1,0 +1,12 @@
+Nightmare mudlib living lfun: check_on_limb()
+
+int check_on_limb(string limb)
+
+This function is called in combat to check on the status of each limb.  If
+the limb has reached it's maximum damage, then the proper messages are
+delivered by this function and corpse and/or body parts are cloned up and
+moved the current location.  Wizards should probably not need to ever call
+this function.
+
+See also: do_damage()
+Defined in /std/living/body.c

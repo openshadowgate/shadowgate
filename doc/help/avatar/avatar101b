@@ -1,0 +1,183 @@
+Avatar Basics
+
+OK, so you're an avatar.  Now what??  This is a primer that I (Cyric) have written to help you newbies out until I can be online more.  
+Things are different as an immort, the primary goal is to create an environment where the PLAYERS have FUN.  
+Rule number 1 for avatars is to be fair...  BE FAIR.  You're supposedly a good RP'er otherwise you wouldn't be reading this, so put yourself into players' shoes when dealing with them.
+
+Originally, avatars had 21 non-player commands, now there are more than I can count, so here's a list of useful commands and suggestions to get started with.  99 percent of these have help files, so use those in addition to what's here. 
+
+As of right now, I don't know if the guard command saves or not, but if it does, that's a good command to know as well.
+
+**Commands marked with a double asterisk are ones that you should practice and become quick at using.
+
+The basics....
+
+Profile
+one of the hardest things for a new avatar to wrap their heads around is the profile command, originally, profile was all we needed to change
+to a custom NPC, but when recognize went in, that had to change.  Here's how it works:
+- changeself - allows you to set some critical stats, **Only to be used to create a new profile** (otherwise use setatt and skillset)
+- profile save XYZ - Saves your current profile, overwriting the old XYZ (no prompt), 
+	it also creates a character called XYZ with the password the same as your avatar's password (more on this later)
+- profile change ABC - loads ABC profile without saving your current profile
+- whoami - lists all of your saved profiles
+
+Ok, so hopefully this kind of makes sense, profiles save when you tell them to (profile save), and profile change will load whatever you saved.
+You can use this to save items and money, and make copies of these things or multiply your cash if you need to.
+
+If you profile save dirk, whatever your current stats etc are will save in a character called dirk.
+Now you can log dirk on and do stuff with him (password is the same as your avatar)
+Any changes you do with dirk will not affect the profile you have saved, hence why it's a good idea to flesh out a profile as much as possible
+before saving it and using it... For example:
+1. log on your avatar
+2. use changeself to set up some stats
+3. profile save dirk
+4. log on dirk (now you have both your avatar and dirk logged on)
+
+Now, if you make any changes with dirk, i.e. setting a description, outfitting eq, etc, it will NOT SAVE on the profile.  
+The character is now completely separate.  so this means if you set the description, switch to your avatar, 
+and do profile save dirk, it will overwrite whatever changes you made.  
+This is going to happen sooner or later, so make sure you have a backup profile for each NPC you have.
+
+As a shortcut, or if you can't be bothered with having an avatar and an NPC logged on at the same time, use charswitch and switchback.
+charswitch dirk - logs off your avatar and logs on dirk.
+switchback - logs off your NPC and logs on your avatar.
+
+**Echo
+Echo is one of the most useful commands you have.  Become familliar with it so you can whip up a decent looking echo quickly.
+help echo for the variants.
+
+**Orb
+The orb is useful as well, I suggest setting up aliases so you can use it quickly.
+
+Item
+This command is essential.  use it to create new items.  Neat, right?  Balancing is tough.  Assume that the items already in the game
+are balanced, and create items that are identical but have some cosmetic differences.  Alternatively, you can test a weapon repeatedly
+in the monster generation room to make sure that they do comparable damage to something already IG.  Any such tests should be extensive.
+Until you get more experienced, avoid creating items that are more powerful than what's IG.  I suggest making some test items first
+to see how it works before creating an AWESOME item with 18 echoes and special effects.  Reason being is if you screw up, you need 
+to start over from scratch.  Also, just because it's IG, doesn't mean it's balanced for everyone. Some items are harder to get than
+others, use your judgement.
+
+setatt, skillset, spellset, rstock, lstock
+Use these commands to set your skills, languages, equipment etc.
+If there is some item not on the list or in the item generation room, feel free to get it yourself and save it on a storage profile.
+
+wp, peo, whereare, stat player, score player, inven -l player, listdeaths player, newdeaths player, note view player
+All stuff for getting vital stats on players.
+
+Getting around....
+
+go
+go to player, self explanatory
+
+dock
+dock undead, dock shadow, dock tonnerra, self explanatory
+
+temples
+easy way to get to temples
+
+go arena
+sends you to obsidian's arena with a bunch of exits
+
+lounge
+sends you to the avatar lounge, where you can push buttons and pull levers to get a cube ring (perfect vision), and a stick (grant deeds and xp)
+
+Player relations....
+
+dam, wizheal, damall
+Ways to deal damage and heal (negative damage heals)
+
+vis, invis, ckvis
+sets you to wizinvis, if you try to hide in shadows after using this command, it tends to cancel the wizinvis and sets you to hidden, instead.
+
+racetoggle
+sets your race to on or off, if you don't want stuff to interact with you or have players look you over as elf 3, turn this off.
+for example, if you're the 2nd elf in the room, and someone does l elf 2, they'll see you if you have racetoggle on.
+You'll also be included in random hits like chain lightning with racetoggle on.
+
+**army
+Allows you to create a bunch of fodder NPC's to protect you, also useful for ambushing players as you can move the army straight to them. :)
+I suggest setting up aliases for quick use.
+
+notes
+Notes are essential, use them a lot.  help note for more...
+
+levelcap
+This is a tool to control PL'ing. 
+Don't use this until you become more experienced.  As an avatar, your primary role is to encourage RP, not police it.  Remember that 
+although you are an immortal, there are many different styles of Rp'ing and there is no 'best' style.  If you think someone is out of hand,
+note ckpt them and mail someone more experienced.  Of course, if they ask you to cap them, you can do that.
+
+grant
+grants xp to players, use this if you see some RP you like, and at the conclusions of plots.  Grant negative xp as a penalty
+
+alignment
+allows you to see and modify the alignment of a player, use this when you see someone do something that's good or evil, hit them with a
+change in alignment and note them when you do this and why.  As a reference, attacking a player unprovoked is a -10 alignment shift.
+They don't get an echo, so you might want to send them one when you use this command.
+
+Plots...
+As a new immortal, you have ideas on what you want to do for plots, these will get done eventually, but I stress that you should start small.
+Big plots have a tendency to spiral out of control as high level players want to get involved.  As they get involved, their sheer power
+demands that the ante be raised, and the threats increase proportionally, and pretty soon you're dealing with 12 characters and an earth
+shattering plot that takes 2 years to resolve.  Players LOVE anything avatary, they think it's so cool, even if it's the most simple thing
+in the world and all they get is a little deed in their bio.  So here's a few plot ideas for you, they can get more complicated as you
+become more experienced.  one more word of warning, don't fall in love with your NPC's, i.e. don't make them uberpowered with the best
+equipment and 10000 hps etc, it's bad, players don't appreciate unbeatable NPC's, expect your NPC's could die at any time (of course, 
+there would be appropriate IG responses).  Ok, a few plot outlines...
+
+Courier- deliver object from one NPC to another (like a sealed scroll)
+escort- escort an NPC from one place to another
+find and retrieve/rescue mission- seek out an area, find an item, return it for a reward (rob a caravan without being seen, healing potion
+	to save a child, kidnapped wife)
+seek and destroy- assassination mission (only kill the target? frame someone else?)
+settle dispute- two NPC's are in some kind of argument, diffuse the situation (or escalate it?)
+scavenger hunt- like the swords quest, one clue leads to the next etc.
+
+Obviously you're eventually going to have to throw some wrenches into the works, for example, in the rescue mission, the person you're 
+trying to rescue doesn't want to go back, apparently the one who hired you is an abusive husband and the wife fled with her new lover.  
+How the players respond to situations like this determines much about their character (and what kind of reputation they will get, someone 
+who honors their agreements, someone who does what's right, someone who will do anything for money, someone who is unpredictable 
+and unreliable... etc)
+
+I suggest working in teams of 2 when possible, because players move too quickly for you to do everything at once.  With one avatar behind the
+scenes (setting up the areas, mobs, etc) and one avatar interacting with the players, things will run smoother.  Ideally, these short dinky plots
+should run about 30 minutes, and be finished in one session.  If your plots last more than one session, you will find that often, not every 
+player shows up when they say they will, and things begin to drag.  Plus, people will talk and more players will want to get involved etc etc.
+Most of the time, it's best to keep it short and sweet.  Keep in mind that the players have no idea what's going on behind the scenes, and most
+likely, they will think whatever plot you throw their way is awesome.  You don't need to give them ultra rewards, you don't need to grant them
+tons of XP, the plot itself is the reward.  If they don't like it, don't run plots for them anymore as most other players will appreciate what 
+you do.  As you get more experienced, you can start doing things like sending two players of opposing dieties after the same item, etc.  Remember,
+some NPC's are smart, and some are dumb, players like outwitting NPC's, but all truly great villians are the ones who can outwit the heroes and
+always seem one step ahead of them.
+
+Plot commands
+eddb- control mob emotes, kinda neat
+graffitti- edit room descriptions.
+eavesdrop- listen on a player's whispers
+setagg- sets the aggressiveness of mobs, setagg 18 means that a mob will autoattack any player with a cha below 18.
+unswarm- when one mob is in combat, swarmed mobs also attack.  The unswarm command causes the mobs to not care if their buddy gets attacked.
+deed- you need the stick from the lounge to use this, set deeds to make a note of when plots are completed and give players a little badge
+of honor that they can look back on and remember.
+alignment- mentioned earlier, use to adjust player's alignment
+
+A word of caution...
+As an avatar, you have incredible influence on SG.  Eventually someone will accuse you of cheating or favoritism, it's inevitable.  The best
+thing you can do is to avoid situations where you're making decisions on characters that your char is allies with, or running plots for
+your OOG friends.  Just avoid the situations where you might be biased and make a point of saying you're avoiding the issue because
+you may be biased.  It might suck for your friends who expected more interaction and unique items, but they shouldn't be expecting 
+favoritism from immorts anyway.  Also, please try to be polite and professional when dealing with the players, offer suggestions, not edicts.  
+It's always good to get the players excited about something.  Also, you should probably know that occasionally older, 
+more experienced avatars will play characters to see how other immorts are doing... so be nice!
+
+Well, hopefully that's enough to get you started and running for the first few months.  After that you'll know if avataring is something 
+you're cut out for (not all great players make great avatars, sometimes it just doesn't work).  Remember the main rules,
+
+1. Be Fair
+2. Have Fun
+
+And you will have a much easier time.
+
+--Cyric
+
+see also:  new-imm, avatar101, imm_rules, guidelines

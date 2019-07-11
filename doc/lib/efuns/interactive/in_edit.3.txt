@@ -1,0 +1,23 @@
+in_edit(3)                   LPC Library Functions                  in_edit(3)
+
+
+
+[1mNAME[0m
+       in_edit() - determine if a player is in the editor
+
+
+[1mSYNOPSIS[0m
+       string in_edit( object default : F_THIS_OBJECT );
+
+
+[1mDESCRIPTION[0m
+       If  the  given  object  is  in  the  editor,  the  file being edited is
+       returned, else zero.
+
+
+[1mSEE ALSO[0m
+       ed(3), in_input(3)
+
+
+
+MudOS                             5 Sep 1994                        in_edit(3)

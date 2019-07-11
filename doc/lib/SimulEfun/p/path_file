@@ -1,0 +1,13 @@
+Nightmare IV SimulEfun: path_file()
+
+mixed *path_file(mixed val);
+
+DESCRIPTION
+Takes a path or an array of paths and returns an array with the files
+and the directories those files are in separated up.
+
+EXAMPLES
+path_file("/adm/db/groups.db") returns ({ "/adm/db", "groups.db" })
+
+LOCATION
+/adm/simul_efun/path_file.c

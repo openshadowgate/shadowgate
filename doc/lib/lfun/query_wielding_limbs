@@ -1,0 +1,9 @@
+Nightmare mudlib living lfun: query_wielding_limbs()
+
+string *query_wielding_limbs()
+
+Returns an array of strings containing the names of all the wielding limbs
+of a living object.  If none are wieldable, then ({}) is returned.
+
+See also: add_wielding_limb(), set_wielding_limbs()
+Defined in /std/living/body.c

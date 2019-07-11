@@ -1,0 +1,13 @@
+Nightmare mudlib living lfun: equip_weapon_to_limb()
+
+string equip_weapon_to_limb(object weap, string limb1, string limb2)
+
+This tries to equip "weap" to "limb1" and/or "limb2".  It returns an
+appropriate message to be sent to the player if the equip fails.  If it
+succeeds, it returns a 0 and equips the weapon properly.  If "weap" is a
+one handed weapon, then "limb2" should be passed as a 0.  This is used
+already in weapon.c so most wizards probably will never have to use this
+function.
+
+See also: equip_armour_to_limb(), set_wielding_limbs(), add_limb()
+Defined in /std/living/body.c

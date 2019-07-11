@@ -1,0 +1,29 @@
+%^RESET%^%^CYAN%^Mage:
+
+%^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 intelligence
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ drow, elf, half-drow, half-elf, human, ogre-mage, gnome,
+   yuan-ti
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ sorcerer, psion, psywarrior, warlock
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, dungeoneering, healing, spellcraft
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: simple weapon proficiency, spell focus
+   %^RESET%^L6: scribe
+   %^RESET%^L9: brew potion
+   %^RESET%^L11: enchant
+   %^RESET%^L17: craft magical equipment
+   %^RESET%^Also: one bonus spellcraft feat at L21, and every five class levels thereafter
+   
+Mages are people who have devoted their lives to learning magic for the same reasons that motivate most people on a day-to-day basis: material gain, power, or merely the pure "fun" of the use of magic. They place no reliance on the power of faith for their craft, and their time spent learning magic takes away from any time they might spend learning fighting skills. They are very capable of learning, however, a diverse array of both defensive and offensive arcane spellcraft.
+
+Mages are highly protective of the "art" and guard their knowledge jealously. They spend years studying and will expect apprentices to do the same. They will also be very careful to insure that magic doesn't fall into the "wrong" hands.
+
+Mages are able to <master> one spell of each level for free as they gain greater skill, to supplement those spells they learn from scrolls.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^ prepare, feats, stats, skills, spells, cast, buff, mage schools, master, prestige classes
+
+%^CYAN%^If you have a spellbook, you may also see %^RESET%^<help book>%^CYAN%^.%^RESET%^
+
+%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard mage list>%^CYAN%^.%^RESET%^

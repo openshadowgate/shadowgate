@@ -1,0 +1,12 @@
+Nightmare mudlib lfun: extra_look()
+
+string extra_look();
+
+This function is called from the long of a living object carrying the object
+this function is in.  For instance, a wedding ring has the line:
+
+string extra_look() { return capitalize(owner)+" is married to "+
+	capitalize(spouse)+"\n"; }
+
+When another player looks at me, and I am carrying this ring, the line
+"Descartes is married to Ariana" is added to my description.

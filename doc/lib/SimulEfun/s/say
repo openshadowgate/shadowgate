@@ -1,0 +1,29 @@
+Nightmare IV SimulEfun: say()
+
+varargs string say(mixed, mixed);
+
+DESCRIPTION
+First argument is a message that should be displayed to everyone in the
+environment of the command giver (this_player()).  The second argument
+is an object or an array of objects which are excluded from seeing the
+message.  The command giver is automatically excluded.
+The second argument is optional.
+
+EXAMPLE
+say("Foo.") will display "Foo" to everyone in the room except the person who
+   is currently this_player()
+say("Descartes hits Forlock in the nose.", ({find_player("forlock")}))
+   displays the text to everyone but Descartes and Forlock.
+
+NOTE
+This SimulEfun takes place of the MudOS efun by the same name in order to
+use message() for proper formatting using ansi, terminal wrapping, etc.
+Old code using say() will work fine under this SimulEfun.
+
+LOCATION
+/adm/simul_efun/communication.c
+
+SEE ALSO
+message(), tell_object(), write()
+
+

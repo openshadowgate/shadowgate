@@ -1,0 +1,96 @@
+
+	The shop has 7 commands: buy, sell, value, list, show, repair and
+	      resize (resizing items is HM restricted only).
+	Inside <> are required arguments, [] are optional.
+
+	
+				%^YELLOW%^BUY: 
+
+			%^CYAN%^syntax: buy <item name> [#]
+
+	Description: Buy an item from the shop.
+
+     <item name> can be any valid name of the object. 
+   	IE: a hooded lantern, 'buy lantern' or 'buy hooded' will work.
+
+     <#> is the number of the item in the list.
+     	IE: the third lantern down the list. 'buy lantern 3'
+     	it doesn't matter if the first 2 lanterns were different types.
+     	but if you type 'buy hooded 3', you will get the third hooded 
+	lantern!
+
+
+				%^YELLOW%^SELL: 
+	
+			%^CYAN%^syntax: sell <item name> [#]
+
+	Description: Sells items in the shop.
+
+     <item name> can be any valid name of the object. 
+   	IE: a hooded lantern, 'sell lantern' or 'sell hooded' will work.
+
+     <#> is the number of the item in the list.
+     	IE: the third lantern down your inventory list. 'sell lantern 3'
+     	it doesn't matter if the first 2 lanterns were different types.
+     	but if you type 'sell hooded 3', you will sell the third hooded 
+	lantern!
+     
+
+				%^YELLOW%^LIST:
+
+			%^CYAN%^syntax: list [item type]
+
+	Description: Lists the items for sale in the shop.
+
+     'list' will list all items in the shop.	
+
+	[item type] will show only items of this type.
+	IE: 'list lantern' will list all lanterns for sale in 
+	    the shop.
+        %^GREEN%^Note: 'list size <size>' will list all items of a
+                 particular size in the shop.  Valid sizes are:
+                 small, medium, normal, large.
+
+
+				%^YELLOW%^VALUE:
+
+			%^CYAN%^syntax: value <item name> [#]
+
+	Description: Tells you the value of the item. The amount
+		     the shop will pay for the item 
+	
+	  <item name> The name of the item you want the value of.
+	    IE: 'value lantern'	will get the value of the first lantern.
+	  [#] The item number in your inventory. 
+	    IE: 'value lantern 3' will give you the value of your 3rd
+		lantern.
+	
+
+				%^YELLOW%^SHOW:
+
+			%^CYAN%^syntax: show <item name> [#]
+
+	Description: Will show you the long description of an item.
+
+	  <item name> The name of the item you want to be shown. 
+	    IE: 'show lantern' will show you the first lantern.
+	  [#] The item number in your inventory. 
+	    IE: 'show lantern 3' will show you the 3rd lantern.
+
+	   
+	
+
+				%^YELLOW%^REPAIR:
+
+			%^CYAN%^syntax: repair <item name> [#]
+
+	  Description: Will repair the item in your inventory, at a
+                          considerable cost.
+
+
+		          %^YELLOW%^RESIZE (HM only):
+
+			%^CYAN%^syntax: resize <item name> [#]
+
+	Description: Will resize the item in your inventory to fit you,
+                        at a considerable cost.

@@ -1,0 +1,16 @@
+Nightmare mudlib living lfun: add_limb()
+
+int add_limb(string limb_name, string limb_ref, int max_dam, int curr_dam, 
+             int limb_ac)
+
+This adds a new limb to a living object.  "limb_name" is the name of the 
+limb being added.  "limb_ref" is the name of another limb that should be lost
+when this limb is lost, or FATAL if losing it is fatal, or "" if nothing else
+should happen.  "max_dam" is the maximum damage that the limb can sustain 
+before being lost.  "curr_dam" is how much damage has been done to the limb so
+far (allows for creation of wounded monsters).  "limb_ac" is how much 
+protection the limb has (>0 means natural armour).  Each limb that you add must
+have it's own distinct name.
+
+See also: remove_limb()
+Defined in /std/living/body.c

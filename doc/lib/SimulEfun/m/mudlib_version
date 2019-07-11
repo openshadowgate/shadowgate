@@ -1,0 +1,13 @@
+Nightmare IV SimulEfun: mudlib_version()
+
+string mudlib_version();
+
+DESCRIPTION
+Returns which version of the Nightmare Mudlib this mud is using.
+If I have any shred of sanity at all, it will always return "IV".
+
+LOCATION
+/adm/simul_efun/mud_info.c
+
+SEE ALSO
+architecture(), mud_name(), mudlib(), query_host_port(), version()

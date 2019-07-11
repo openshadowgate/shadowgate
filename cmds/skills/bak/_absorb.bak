@@ -1,0 +1,69 @@
+//   /bin/user/_absorb.c
+//   Written by Forlock for the Nightmare mudlib
+
+#include <std.h>
+
+inherit DAEMON;
+
+int cmd_absorb (string str) {
+   object ob;
+   int points, mag, total;
+   if(!str) {
+      ob = (object)this_player()->query_current_attacker();
+      if(!ob) {
+         notify_fail("Absorb from what?\n");
+         return 0;
+      }
+   }
+   else ob = present(str, environment(this_player()));
+   if(!ob) ob = parse_objects(environment(this_player()), str);
+   if(!ob || !living(ob)) {
+      notify_fail("Look again.\n");
+      return 0;
+   }
+   if(environment(this_player())->query_property("no magic")) {
+      notify_fail("A magic force prevents your spell.\n");
+      return 0;
+   }
+    if(!alignment_ok(this_player())) {
+        notify_fail("You have betrayed the source of your powers.\n");
+        return 0;
+    }
+    if((int)this_player()->query_skill("healing") < 1) {
+        notify_fail("You are not skilled enough to work this magic.\n");
+        return 0;
+    }
+   if((mag = (int)this_player()->query_skill("magic attack")) < 1) {
+      notify_fail("You are not skilled enough for this spell.\n");
+      return 0;
+   }
+   if((points = (int)this_player()->query_mp()) <60) {
+      notify_fail("Too low on magic power.\n");
+      return 0;
+   }
+   if(this_player()->query_ghost()) {
+      notify_fail("Your voice is hollow.\n");
+      return 0;
+   }
+   if(this_player()->query_casting()) return 1;
+   if(!ob->kill_ob(this_player(),0)) return 1;
+   if(environment(this_player())->query_property("no attack")) {
+      notify_fail("A magic force prevents you from casting your spell.\n");
+      return 0;
+   }
+   write("You absorb some health from "+(string)ob->query_cap_name()+" and feel stronger.");
+   tell_room(environment(this_player()), this_player()->query_cap_name()+ " suddenly looks stronger.", ({ob, this_player()}));
+   total = random(mag/3 + (int)this_player()->query_skill("healing") / 3);
+   this_player()->set_casting(total);
+   this_player()->add_mp(-60);
+    this_player()->add_hp(total);
+   tell_object(ob,this_player()->query_cap_name()+ " sucks some health from you.  You feel weaker.");
+   return 1;
+}
+
+void help() {
+    write("Syntax: <absorb [enemy]>\n\n"
+        "With this spell, you drain the strength of your enemies\n"
+        "and increase your own.\n"
+    );
+}

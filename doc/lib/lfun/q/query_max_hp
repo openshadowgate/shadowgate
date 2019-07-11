@@ -1,0 +1,7 @@
+Nightmare mudlib living lfun: query_max_hp()
+
+int query_max_hp()
+
+This returns the maximum hit points of a living object.
+
+See also: query_hp(), set_max_hp(), set_hp(), add_hp()

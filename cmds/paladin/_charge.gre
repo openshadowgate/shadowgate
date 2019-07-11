@@ -1,0 +1,281 @@
+//_charge.c
+/*
+ *This cmd is a paladin command designed around the paladin
+ *charging toward an opponent on his or her warhorse.
+ */
+
+#include <std.h>
+#define VOID "/d/shadowgate/void" 
+
+inherit DAEMON;
+
+int do_room(string str);
+
+void cmd_charge(string str){
+
+  	object ob, *weapon, current;
+  	int damage;
+  	string target, direction;
+  	int distance, inc;
+
+  	if(!str)
+    	return notify_fail("You need to specify a target!\n");
+    
+  	if(sscanf(str, "%s %d %s",target, distance,direction) != 3)
+  		return do_room(str);
+  	
+    if(!TP->is_class("paladin") && !TP->is_class("antipaladin"))
+    	return notify_fail("You haven't the skill to try this attack!\n");
+
+	weapon = TP->query_wielded();
+	if((weapon == ({})))
+		return notify_fail("This attack is useless without weapons!\n");
+	
+	if(!weapon[0]->query_property("lance")) return notify_fail("You can charge with only one kind of weapon, a lance.\n");
+	
+	if(!TP->query_in_vehicle() || !objectp((object)TP->query_in_vehicle()))
+  		return notify_fail("You need to be mounted to do that.\n");
+
+	
+	if(effective_light(TP) > 6) 
+		return notify_fail("It is much too bright to see.\n");
+   	if(distance < 1) 
+      	return notify_fail("Yeah that monster might let you do that.\n");
+    if(effective_light(TP) +(int)TP->query_sight_bonus() < 0 && interactive(TO)){
+		return notify_fail("It is much too dark to see.\n");
+	}
+    if((string)environment(TP)->query_exit(direction) == VOID) 
+		return notify_fail("You wish to charge through that wall??\n");	
+	current = environment(TP);
+	
+	/*
+	 * announce the charge starting in all rooms to be charged though
+	 */
+	
+	tell_object(TP,"%^BOLD%^%^BLUE%^You dig your heels into your steed and charge "+direction+"!");
+	tell_room(ETP,"%^BOLD%^%^BLUE%^"+TPQCN+" digs "+TP->query_possessive()+" steed and charges "+direction+"!",TP);
+	
+	for(inc = 0;inc < distance+2;inc ++){	       
+		current = find_object_or_load((string)current->query_exit(direction));
+		tell_room(current,"%^BOLD%^%^BLUE%^You hear the rumble of hooves barreling in your direction.");
+    	if((string)current->query_exit(direction) == VOID) 
+			break;		
+	}
+	
+	current = environment(TP);
+	call_out("charging",2,distance,TP,current, direction, target, distance);
+	return 1;
+}
+
+charging(int distance, object play, object current, string dir, string target, int Tdist){
+	int inc;
+	object next;
+	
+	
+	if(distance < 1)
+		return finish_charge(play, current, target, Tdist);
+	
+	next = current;
+	
+	if((string)current->query_exit(dir) == VOID) 
+		return tell_object(play,"Your vision must be failing, there is now a wall in your way.\n");
+
+	for(inc = 0;inc < distance+2;inc ++){	       
+		next = find_object_or_load((string)next->query_exit(dir));
+		tell_room(next,"%^BOLD%^%^BLUE%^You hear the rumble of hooves barreling in your direction getting closer.");
+    	if((string)next->query_exit(dir) == VOID) 
+			break;		
+	}
+		
+	if((object *)play->query_attackers() != ({}))
+		switch (random(50) + play->query_stats("strength")){
+			case 0..25:
+				tell_object(play,"%^BOLD%^Your attackers knock you off your horse as you ride through.");
+				tell_room(enviroment(play),"%^BOLD%^"+play->query_cap_name()+" is knocked off "+play->query_possessive()+" steed.",play);
+				play->force_me("dismount");
+				return;
+				break;
+			case 26..50:
+				tell_object(play,"%^BOLD%^Your attackers bring your charge to a hault with their fearous attack.");
+				tell_room(environment(play),"%^BOLD%^"+play->query_cap_name()+"'s charge is brought to a hault by the unexpected attack.",play);
+				return;
+			default:
+			    break;
+		}
+	
+	
+	current = find_object_or_load((string)current->query_exit(dir));
+	play->move_player(current, "charging "+dir);
+    
+	
+	call_out("charging", 1, (distance-1),play,current,dir,target, Tdist);
+}
+
+int finish_charge(object play, object current, string target, int distance){
+  object ob, *weapon;
+  int damage;
+  
+    if(!play->is_class("paladin") && !play->is_class("antipaladin"))
+    return tell_object(play,"You haven't the skill to try this attack!\n");
+
+  if(!(ob = present(target, current)))
+    return tell_object(play,"Your target is not in range!\n");
+
+  if(!play->ok_to_kill(ob)) {
+    tell_object(play,"Supernatural forces prevent your attack.\n");
+    return 0;
+  }
+  
+  if(ob->query_property("no rush")) return tell_object(play,"You can't really charge that.\n");
+  
+  if(!play->query_in_vehicle() || !objectp((object)play->query_in_vehicle()))
+  	return tell_object(play,"You need to be mounted to do that.\n");
+
+  //if((int)TP->query_level() < 10) return tell_object(play,"Your experience is not enough to control that horse.\n");
+  
+  if(current->query_property("no kill") || current->query_property("no attack")){
+    tell_object(play,"Supernatural forces prevent your attack.\n");
+    return 0;
+  }
+	play->clean_up_attackers();
+    ob->clean_up_attackers();
+
+	if((object *)play->query_attackers() != ({}) || (member_array(ob,(object*)play->query_hunted()) != -1)){
+    	tell_object(play,"You can't do that while being attacked.");
+    	return 1;
+    }
+	weapon = play->query_wielded();
+	if((weapon == ({})))
+		return tell_object(play,"This attack is useless without weapons!\n");
+	
+	if(!weapon[0]->query_property("lance")) return tell_object(play,"You can charge with only one kind of weapon, a lance.\n");
+		
+  ob->kill_ob(play,1);
+  play->kill_ob(ob,1);
+  
+  
+    tell_object(ob,"%^BOLD%^%^BLUE%^"+TPQCN+" is charging toward you!!!");
+  if((int)TP->Thaco(0,ob,weapon[0]) <= roll_dice(1,20)-(distance+2) && random(100) > 10){
+
+    if((int)ob->query_size() <3)
+      damage = weapon[0]->query_damage();
+    else
+      damage = weapon[0]->query_large_damage();
+    damage += play->get_damage(weapon[0]);
+    damage += "/daemon/bonus_d"->damage_bonus(play->query_stats("strength"));
+     damage = damage *(((distance+1)*2));
+    
+    call_out("do_harm",1,damage,ob, play);
+  } else {
+    tell_room(ETP,"%^BOLD%^%^BLUE%^As "+play->query_cap_name()+" charges, "+ob->query_cap_name()+" manages to dodge the attack.",({TP,ob}));
+    tell_object(TP,"%^BOLD%^%^BLUE%^"+ob->query_cap_name()+" dodges your charge.");
+    tell_object(ob,"%^BOLD%^%^BLUE%^You successfully dodge the charge.");
+    TP->set_paralyzed(15,"Your recovering from your missed charge!");
+    return 1;
+  }
+
+  return 1;
+}
+
+int do_room(string str){
+  object ob, *weapon, play;
+  int damage;
+  
+  play = TP;
+    if(!TP->is_class("paladin") && !TP->is_class("antipaladin"))
+    return tell_object(play,"You haven't the skill to try this attack!\n");
+
+  if(!(ob = present(str,ETP)))
+    return tell_object(play,"Your target is not in range!\n");
+
+  if(!this_player()->ok_to_kill(ob)) {
+    tell_object(play,"Supernatural forces prevent your attack.\n");
+    return 0;
+  }
+  
+  if(ob->query_property("no rush")) return tell_object(play,"You can't really charge that.\n");
+  
+  if(!TP->query_in_vehicle() || !objectp((object)TP->query_in_vehicle()))
+  	return tell_object(play,"You need to be mounted to do that.\n");
+
+  //if((int)TP->query_level() < 10) return tell_object(play,"Your experience is not enough to control that horse.\n");
+  
+  if(ETP->query_property("no kill") || ETP->query_property("no attack")){
+    tell_object(play,"Supernatural forces prevent your attack.\n");
+    return 0;
+  }
+	TP->clean_up_attackers();
+    ob->clean_up_attackers();
+
+	if((object *)TP->query_attackers() != ({}) || (member_array(ob,(object*)TP->query_hunted()) != -1)){
+    	write("You can't do that while being attacked.");
+    	return 1;
+    }
+	weapon = TP->query_wielded();
+	if((weapon == ({})))
+		return tell_object(play,"This attack is useless without weapons!\n");
+	
+	if(!weapon[0]->query_property("lance")) return tell_object(play,"You can charge with only one kind of weapon, a lance.\n");
+		
+  ob->kill_ob(TP,1);
+  TP->kill_ob(ob,1);
+  
+  tell_room(ETP, "%^BOLD%^%^BLUE%^"+TPQCN+" digs "+TP->query_possessive()+" heels into "+TP->query_possessive()+" "+TP->query_in_vehicle()->query_cap_name()+".",TP);
+    tell_object(TP,"%^BOLD%^%^BLUE%^You dig your heels into your "+TP->query_in_vehicle()->query_cap_name()+".");
+    tell_object(ob,"%^BOLD%^%^BLUE%^"+TPQCN+" is charging toward you!!!");
+  if((int)TP->Thaco(0,ob,weapon[0]) <= roll_dice(1,20) && random(100) > 20){
+
+    if((int)ob->query_size() <3)
+      damage = weapon[0]->query_damage();
+    else
+      damage = weapon[0]->query_large_damage();
+    damage += TP->get_damage(weapon[0]);
+    damage += "/daemon/bonus_d"->damage_bonus(TP->query_stats("strength"));
+    damage = damage * 2;
+    
+    call_out("do_harm",2,damage,ob, TP);
+  } else {
+    tell_room(ETP,"%^BOLD%^%^BLUE%^As "+TPQCN+" charges, "+ob->query_cap_name()+" manages to dodge the attack.",({TP,ob}));
+    tell_object(TP,"%^BOLD%^%^BLUE%^"+ob->query_cap_name()+" dodges your charge.");
+    tell_object(ob,"%^BOLD%^%^BLUE%^You successfully dodge the charge.");
+    TP->set_paralyzed(15,"Your recovering from your missed charge!");
+    return 1;
+  }
+
+  return 1;
+}
+
+
+void do_harm(int damage, object ob, object play) {
+  if(!objectp(ob)) return;
+  if(!objectp(play)) return;
+  if(!present(ob, environment(play))) {
+    tell_object(play,"%^BOLD%^You realize that your opponent has escaped your charge.");
+    tell_object(ob,"%^BOLD%^You have safely elluded "+play->query_cap_name()+"'s charge!");
+    return;
+  }
+
+  tell_object(play,"%^BOLD%^You successfully ride with the power of your steed behind you into "+ob->query_cap_name()+"!");
+  tell_room(environment(play),"%^BOLD%^"+play->query_cap_name()+" rides with tremendous force into "+ob->query_cap_name()+"!",({ob,TP}));
+  tell_object(ob,"%^BOLD%^"+TPQCN+" rides with tremendous force into you, "+play->query_possessive()+" weapon doing great damage!\n");
+  play->set_disable(60);
+  ob->do_damage(ob->return_target_limb(),damage);
+  ob->set_paralyzed(8,"Your recovering from that last hit");
+  return 1;
+
+}
+
+
+void help(){
+        write(
+@OLI
+
+This command is a paladin/anti-paladin command designed around
+charging ones opponent while mounted on a horse. You must be 
+wielding a lance for this attack to work. The damage is in 
+proportion to your level. 
+
+charge <target>
+OLI
+        );
+}

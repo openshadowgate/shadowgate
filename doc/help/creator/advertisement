@@ -1,0 +1,60 @@
+
+Builders and Coders Wanted:
+______________________________________
+
+
+	ShadowGate MUD (MudOS 0.9.20, overhauled Nightmare mudlib) 
+is looking for people to help us write areas for a medieval themed 
+AD&D MUD.  There are two types of openings that we have for
+immortals: builders and coders.  
+	Coders write the unique code for the domain that they are working on.  
+Examples of this are traps, unique monsters, magic items, etc.  Anything 
+that requires new coding would be handled by the area coders.  If you
+have never coded, if you don't have quite enough time to code, or if
+you would like to code but need to get some experience, then read on.
+	Builder is a new position on ShadowGate that makes life easier for the 
+coders and can benefit new wizards.  ShadowGate is right now putting
+the finishing touches on our Room maker code for online, UNIX and DOS use.
+This means that users who have little or no experience with coding
+can help out and make rooms en-masse.  This relieves the coders of the
+job of thinking up both the code for the room and also spending the
+time writing room descriptions and connecting the rooms, etc.  Because
+the room maker requires little or no knowledge of coding, we can use
+just about ANYBODY who has a good imagination and some time.  Further,
+since builders are wizard characters as well, they are free to look 
+over code and get some coding experience on their own.  
+	The reqirements for positions differ, of course, but they both are
+similar when it comes to flexibility on the part of the admins.  For
+coder openings we would prefer people who have had some experience coding
+on a LP mud running under MudOS, however if you have any kind of programming
+experience, either in real life or on MUDs, we invite you to come on over.  
+Those people who have coded in C or C++ will find the transition to LPC
+very easy to make.  
+	If you are interested in a builder position, the only requirements are
+that you know how to telnet, ftp and have general computing knowledge.  In
+a nutshell, if you are reading this right now, you probably already meet the
+requirements.  People interested in the builder position will find some
+playing experience on MUDs to be helpful, but such experience is not required.
+	Here's a little information on us:
+	
+**Driver -- MudOS 0.9.20
+**Mudlib -- based on Nightmare 3.2 but extremely modified
+**Theme -- medieval AD&D, main city based on Waterdeep,
+but lots of room for new additions.  Areas can be just
+about anything as long as they are not too far from the 
+medieval theme.
+**Features -- Players inventories are saved after quits and
+reboots, players start in the same room where they quit
+allowing for continuous adventuring in an area.  Completely
+reworked magic system to fit AD&D rules (includ. material
+components), ANSI color and more....
+
+	If you have any questions or if you are interested in one of these
+positions contact:
+
+Intermud:                E-mail:
+---------                -------
+Melnmarn@ShadowGate      wgay@nwcl.nwcl.net
+Thorn@ShadowGate         tnk1@cornell.edu
+                        
+

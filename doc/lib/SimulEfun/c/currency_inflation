@@ -1,0 +1,18 @@
+Nightmare IV SimulEfun: currency_inflation()
+
+float currency_inflation(string);
+
+DESCRIPTION
+Returns the current rate of annual (mud years) inflation to which
+a given currency type is subject.  
+
+EXAMPLES
+currency_inflation("silver") might return 0.03, meaning that currency
+which may be worth 100 now, will be worth 103 in a year (it has a 3% annual 
+inflation rate).
+
+LOCATION
+/adm/simul_efun/economy.c
+
+SEE ALSO
+currency_rate(), currency_weight(), mud_currencies()

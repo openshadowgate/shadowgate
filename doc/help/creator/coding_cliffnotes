@@ -1,0 +1,350 @@
+* * * * * * * * * * * INDEX * * * * * * * * * * *
+  1.  Unix file commands
+  2.  Conventions (file names, etc.)
+  3.  General coding
+  4.  Main directories & their usage 
+  5.  Most-used wiz/coding commands
+  6.  Randomness
+  7.  Inherited files
+  8.  FTP or ed?...
+  9.  Coding mobs
+ 10.  Functions - aggressive for mobs, special attacks, searching
+ 11.  Notes on functions and special ones
+ 12.  Errors & debugging (elog)
+ 20.  Checklists for common oversights/mistakes 
+         rooms, objects, mobs
+         
+* * * * * * * * * * * * * * * * * * * * * * * * * 
+
+%^YELLOW%^1.  Unix file commands:
+----------------------
+ls - list dir/files in the current dir  Note:  dir names will show in
+blue, 
+     file names in white (or green if loaded into memory), red is
+restricted
+cd /d/shadow/room - changes to that dir
+cd obj - changes to /d/shadow/room/obj if you were in /d/shadow/room
+cd ../  - moves you back up one dir, so from /d/shadow/room you get
+/d/shadow
+cd ../city - moves up one dir then to the one specified
+(/d/shadow/room/city)
+cd ../../common/obj - moves up two dir to just /d and ends up in
+/d/common/obj
+cd ~ - goes to your dir (/realms/yourwizname/)
+cd ~obj - would go to your obj dir (/realms/yourwizname/obj/)
+cd ~wiz - cd's to their dir
+elog - shows you the error log in your dir, (log errors/styx) 
+       or use "elog <dir name>" for other dirs (use the dirname just
+       under /d/)
+rm /log/errors/yourwizname - to clear your elog
+
+
+mkdir <dirname> - make a new directory in the one you're in
+more here - displays the code for the room you're in
+more <dir/filename> - displays the code for the given file
+
+%^YELLOW%^2.  Conventions
+---------------
+Indenting is important for tracing matching {}, etc.  The mud turns tabs
+   to 8 spaces and you often need to indent 3-4 levels so it's usually best
+   to just space in 2-3 spaces for each indent rather than using tabs.
+   If you want to use tabs, set your offline editor tabs to 8 so things you
+   copy/paste will line up correctly with anything that uses spaces
+instead.
+Keep lines to about 80 characters or less.  More than that will get
+truncated
+   if someone has to use ed to edit them and several wizzes have to.  To 
+   continue a line of text, end the line with a " before your hard return
+   and start the next one with a " so the mud knows they are continuous.
+example within create - 
+   set_long("blah blah blah"
+     "blah blah blah line 2"
+     "blah line 3");
+Often you'll see a + added at the end of the line to indicate it is
+concatenated to the next and imbedding a function within a string requires
+the + to connect them.
+
+Try to be consistent with dir names and structure
+   /rooms, /mon, /obj, /inherit, /armor, /wpn, etc.
+Use the weapons, armor, etc. in /d/common/.... for basic mob gear and/or
+   as a base to start from for damage, profs, etc.
+Don't duplicate those files in your dirs, use them from there.  If you 
+   want mostly the same settings but minor changes, inherit them so if 
+   those get updated, your items will stay comparable
+Use an inherited base file for most of your rooms and even for mobs that
+   are similar (see inherited files section)
+Try to avoid having just 2 or 3 files in a directory.  For instance, if
+you 
+   have 2-3 dirs of rooms for an area but only a few special objects, put 
+   your obj dir at the same level as your rooms, don't make a separate obj 
+   dir under each room dir.  It makes it much faster/easier to find and
+   get to them to create replacements as needed, fix typos or bugs, etc.
+Room filenames - It helps to have stores and special rooms named
+appropriately.
+   Aside from that, it helps to have a convention of a few characters with
+   numbers (for01, for02) for a series of up to 99 forest rooms.  It is 
+   nice to have the leading zeros for quite a few instances.  If you
+   have a small group of special rooms, use something like fsp01.  The
+   helpful thing is to have a way to pick out the majority of similar rooms
+   for things like randomly loading mini-quest items by the first few
+   characters within the dir.  If you have an up or down for a room, you
+   might use something like for01up.
+If you work offline, ALWAYS upload a fresh copy of a file before you make
+   changes.
+Large files such as the /std/Object tend to bomb when they upload/download,
+   so plan to work in ed on those.
+Before you change something of someone else's, make a copy with a .was in
+   that dir or copy it out to your dir in case you have problems so you can
+   put it back.  Also make notes about what you changed and when, either at 
+   the top of the file or near the change.
+If you set a property and want to remove it (esp. things like light or magic, 
+   which is the way to break through stoneskin), don't use remove_property, 
+   use add_property("magic", -1).  That's important so if something else had 
+   set it, it simply goes back to the prior state.
+   
+%^YELLOW%^3.  General coding:
+------------------
+Anything enclosed between /*  and */ is a comment, the MUD's compiler
+doesn't read it and it ignores it completely.  This can go across multiple
+lines.
+
+Anything following // is a comment as well, but only lasts to the end of
+the line.
+
+The #include at the top. you'll almost ALWAYS have one of those, probably
+<std.h>.  That means take this file, and read it before you continue. 
+(Most #includes are .h files... Header files.)
+
+#include "../cave.h" means include the cave.h file that is one directory
+up from this file. #include <std.h> is saying to include a standard system-
+file called std.h. (It looks in different places for the file, rather than
+where the current file is.)
+
+Only put in carriage returns (\n) when you specifically want them to
+break there.  Per Obs only really needed in notify_fail().
+Per Grendel:  EVERY create, init, and reset MUST have ::whatever() called
+        or things will break.
+Grendel said not to use say and write for functions, use tell_room,
+tell_object.  
+
+Do NOT put the .c on the end of file names in your code, especially
+exits.  It's not needed and in exits causes problems with peer and long
+range weapons.
+
+Do NOT use TP ( this_player() ) in hit/unwear functions or callouts (pass
+an argument instead) per Garrett
+
+
+Be sure you set_name("blah") for rooms as well as mobs.  Get in the habit
+in case someone adds a trap or any way the room might kill a PC.  Name is
+needed for their deaths list, etc.
+
+%^YELLOW%^4. Main directories and their uses:
+---------------------------------------
+/d/ - the playing areas & objects - rooms, monsters, gear, etc.
+/std - where the main inherited files are stored for mobs, weapons, NPC's, 
+         rooms, you name it.  Good reading eventually to understand what
+         makes your code do what it does and find functionality you might
+         not be aware of.
+/adm/include - where the global header files are stored - #include <std.h>
+               (std.h, common.h, terrain.h, etc.) 
+/doc/help/... - all very useful and are the topics you get when you type 
+                "help" - depending on your status of course
+/doc/concepts - has a few useful explanations
+/doc/lpc - useful explanation of LPC coding concepts
+~bin (/realms/yourwizname/bin/) where it searches for commands for you in 
+      addition to the standard command paths. /cmds/mortal, cmds/avatar,
+etc.  
+      You put copies of commands you want to test modifications to there.
+
+%^YELLOW%^5.  Most used/initially useful wiz/coding commands: 
+--------------------------------------------------
+wherare - shows room file names occupied by players with list of living
+   occupants
+wp      - list of players online with status (HM, Nb) & room name
+pdesc   - list of players online with adjectives
+inven <name> - shows inventory of person (with -l shows items in sacks)
+I <name> - shows inventory (not in containers) with file names & other info
+I here   - shows the contents of the room you're in
+man <efun name> (like help for functions)  They are in /doc/efun/....
+
+log ftpd - to see what files you've ftp'd up or down
+clone <filename> to put objects/weapons into your inventory
+reset - calls reset on this room - to test flags, mobs popping, etc.
+update (no file name) - updates the room you're in (only for creators up)
+    won't boot you off, but if it errors loading will send you to the void
+update <filename> - updates the filename 
+    Caution:  If it's a room, you and anyone in the room will get booted
+renew <objectname> - updates the file and clones a new one (mobs, items)
+elog (error log) - no arguments checks errors in your dir, 
+    elog shadow - checks errors anywhere in /d/shadow, etc.
+
+callout - lists callouts currently timing things
+localcmds - lists all objects and the add_actions/commands they have added
+log debug.log - to check for errors in functions for mobs, etc. you're
+testing
+grep - used to find instances of words, names, etc. in a file or directory
+       grep 'stringyourelookingfor' *.c (for directory you're in)
+       grep '/laerad/mon' /log/debug.log (finds that string in the
+debug.log)
+       grep 'estal' /d/laerad/parnelli/asgard/*.c (for a given dir)
+       
+stat <mobname> or <playername> - shows quite a bit more info. than score, 
+   esp. to check your mobs for hp, level, classes, exp, etc.
+reasonableness       
+
+%^YELLOW%^6.  Randomness:
+--------------
+random(100) returns 0 or a number from 1-99
+!(random(100)) returns 1 (success) 1% of the time or 0 (fail) 99% of the
+time
+   Because the ! operator is not, and that makes the 1-99 false, and the
+0 true
+Use switch(random(10)) with cases for what to do depending on the roll
+   Be sure to put in a break for each one unless you WANT it to keep
+going through the rest.
+   Be sure to start the cases with 0 because the lowest roll is zero.
+   You can also use switch("string") to have different events based on a
+string
+
+%^YELLOW%^7.  Inherited files:
+-------------------
+Highly recommended for your rooms and even mobs.
+  - Put them in a separate directory (usually in the top group of your
+files) unless they are also a valid real room, along with store-rooms so
+people don't accidentally mis-teleport into them.
+  - Use for things like terrain, light, no sticks, no teleport, smell,
+listen, room name/short/long, items to look at, search functions for a
+group of rooms, and even random mob population on reset.
+  - Saves tons of time in maintenance if you have a typo, want to change
+lighting or terrain, add or remove no sticks or other settings or we add
+functionality that needs set on all rooms (when terrains went in for
+instance).
+  - Most things you set in the base room can be changed by simply
+defining that setting in the lower rooms you want different.  You can also
+remove items to look at and some other things if you don't have
+replacements but don't want them there.
+  - NOTE:  Light settings are cumulative.  So, if you set light to 2 on
+your inherited room, setting it to 2 in the others will stack to be 4. 
+You can make it darker than the base with a -1, (or -2, etc.) or brighter,
+but don't set anything if you want it the same as the base room.
+
+%^YELLOW%^8.  FTP or ed?
+--------------
+    Diego and I use WS_FTP... to ftp files up and down to do most coding
+in a text
+editor.  It is much faster than ed to be able to copy/paste whole chunks
+of code from a similar file to simply edit for differences, etc. or to be
+able to spell-check with your off-line editor, etc.
+Important settings for ftp:
+  Host name/address is of course the same as the mud - (currently
+209.161.2.50)
+  Remote port - 6968 (Advanced tab from where you set login stuff on my
+version)
+  Do not use passive transfer (unless it gets implemented and you need it)
+  Host type - Unix (std)
+  Transfer mode - ASCII
+The mud doesn't support passive FTP at this time, so if you're behind a
+firewall or a proxy server, you may have problems with that.
+
+    You need your files saved as binary with .c extensions (although pure
+text such as help files you'll remove the .c) and without hidden
+formatting.  NoteTab is a nice program that handles that.  There is a free
+version and an inexpensive one with spell-check and thesaurus.  Either one
+can be set to save with a .c and most importantly allows you to have
+multiple files open at once for easy copy/paste, etc. between them.  It
+also has a lot of other really handy features that you can use as you get
+familiar with it.
+
+ed - The mud editor is handy for quick typo fixes, if you aren't in
+position to ftp, or need to see what is on a particular line # when you
+get errors, etc.  Type "ed filename.c" and you get a : prompt.  Type the
+line # you want to see, or "h" (for help) to pull up the list of commands.
+"q" quits without saving, which is what you want unless you're actually
+trying to change something.
+
+%^YELLOW%^9.  Coding mobs:
+---------------
+Order you set things can be very important.  
+- Set ** hd ** before levels, guild levels, hp and exp. or it'll reset
+them.  Undead MUST have hd set (turn undead checks hd) and other things
+may too, so always set it.
+- Set ** race ** before body type and be sure to use
+set_body_type("human") (for humanoid races) and be sure it's a valid type.
+Remove/add limbs as needed from there.  "mraces" will show the special
+body types that are established.
+- Have to set_guild_level("mage",10), etc. for mobs to cast spells
+- To make a mob disappear - if no gear, just do a tell_room(ETO,"blah") to
+   explain it and then   TO->remove();
+   If they have gear, use   TO->move("/d/shadowgate/void"); and then TO->remove();
+   That makes them drop their gear in the void where it will get cleaned up.
+
+ 
+%^YELLOW%^10.  Functions:
+--------------
+   Use int (integer) functions for add_actions and be sure to return 1 for
+each stage or 0 if/when you want to allow a command (such as read) on 
+another item to execute.
+   Always think about do you need to have them ignore invis, or wiz invis
+( query_true_invis() ) or non-interactives such as summoned monsters.
+   example - "if(userp(TP) && interactive(TP))" do whatever to NOT count
+snakes or summoned monsters for an init/reset
+   Don't just use !avatarp(TP) to exclude avatars/wizzes because if they
+are in persona you may want them to be treated like a normal player.  Use
+query_true_invis() instead if you aren't excluding invis entirely.
+   Use flags that reset (in reset) to limit how often things can be
+searched.
+
+%^YELLOW%^11.  Notes on functions and some special ones:   
+---------------------------------------------
+%^BOLD%^%^BLUE%^>->->->->-> heartbeat <-<-<-<-<-<-< 
+void heartbeat() is a special base function in all objects (used by the
+std files such as /std/monster, /std/room, /std/Object, etc. that is
+called every second or so and controls things like combat, moving, and a
+ton of other things.
+
+(MOVING mobs)
+Do NOT add a void hearbeat() to make mobs wander - use set_moving(1) and
+set_speed(xx).  If you need to keep them from leaving the area, overload
+the move_around function and define a list of exit direction(s) or exit
+names you want them to ignore (ask someone how to do that if you don't
+know).
+
+Avoid using heartbeat at all if possible and it MUST call ::heartbeat()
+if you do.  It is a critical base function that controls a lot of other
+stuff.  It can really screw things up if it breaks.  If you must, be sure
+TP is defined and check for valid objects, (userp and objectp), etc. and
+TEST TEST TEST TEST it to be sure it doesn't break.
+
+%^BOLD%^%^BLUE%^>->->->-> Pre-exit function & sneaking <-<-<-<-<
+To prevent sneaking (thieves) past a pre-exit function, use
+"GoThroughDoor" (exactly including caps) for your function name.  See the
+coding in /std/vault to understand why.
+
+
+%^YELLOW%^12.  Errors & debugging:
+-----------------------
+elog (error log) - with no arguments checks errors in your dir, 
+    elog shadow - checks errors anywhere in /d/shadow/../.., etc.
+Parse errors - usually missing ; at the end of a line or unmatched {} or
+().
+Illegal LHS - often follow a missing ; so when you put the ; those go away
+Illegal character constant or End of file in string - 
+    usually an unmatched " causing it to think other characters that are 
+    supposed to be within a text string are a problem
+Other common mistakes -
+- set_items(([ "item" : "Description", next item stuff, next stuff, ])); 
+      need to be separated by a comma within the series
+   
+%^YELLOW%^20.  Checklist:
+--------------
+Be sure mobs don't have a chance of weapons/armor beyond their level to
+use (or wear functions that will stop them).
+
+Don't use the .c extension on filenames you refer to within your files,
+esp. exits
+
+Be sure to call ::create() (and ::reset(), ::init(), etc. if you have
+those - basically ANY function that also exists in the /std/ inherited
+files unless you are redefining it completely and you MUST use the /std of
+the ones above.

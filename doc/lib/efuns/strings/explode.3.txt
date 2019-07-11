@@ -1,0 +1,28 @@
+explode(3)                   LPC Library Functions                  explode(3)
+
+
+
+[1mNAME[0m
+       explode() - break up a string
+
+
+[1mSYNOPSIS[0m
+       string *explode( string str, string del );
+
+
+[1mDESCRIPTION[0m
+       explode() returns an array of strings, created when the string <str> is
+       split into pieces as divided by the delimiter <del>.
+
+
+[1mEXAMPLE[0m
+       explode(str," ") will return as an array all of the words (separated by
+       spaces) in the string <str>.
+
+
+[1mSEE ALSO[0m
+       sscanf(3), extract(3), replace_string(3), strsrch(3)
+
+
+
+MudOS                             5 Sep 1994                        explode(3)

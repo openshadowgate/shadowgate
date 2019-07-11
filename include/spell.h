@@ -1,0 +1,15 @@
+#include <std.h>
+
+#define SPELL_LEVEL (int)TO->query_spell_level()
+#define SPELL_NAME (string)TO->query_spell_name()
+#define SPELL_TYPE (string)TO->query_spell_type()
+#define SPELL_SPHERE (string)TO->query_spell_sphere()
+#define CASTER_OBJ TO->query_caster()
+#define CASTER TO->query_caster()
+#define TARGET TO->query_target_object()
+#define TARGET_OBJ TO->query_target_object()
+#define COMPONENTS TO->query_components()
+#define PSICOMPS TO->query_psi_components()
+#define CLEVEL TO->query_clevel()
+#define PLACE TO->query_place()
+#define ARG TO->query_arg()

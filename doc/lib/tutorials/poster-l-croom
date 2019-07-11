@@ -1,0 +1,76 @@
+Info. for use of CROOM (/std/controlroom.c) and CVAULT (/std/controlvault.c)
+
+If you are going to have wandering mobs, you need to use these to control their population
+
+If you need to do trickier stuff like have them stick together to travel in groups, you will have to be very careful to control total numbers possible over numerous resets.  Don't attempt that even based on examples without confirming with someone they actually work correctly.
+
+This will work for inherited rooms wonderfully with care to insure not all rooms will get mobs
+
+Settings for CROOM and CVAULT:
+
+1)  set_repop(x);  in create - will set chance out of 100 of spawning each reset
+    If not set, will default to 100 & respawn missing mobs every reset
+
+2)  set_monsters ( ({filename1, filename2}),({1, random(3)}) ) - as an example
+    The integers are the qty. of the respective mob that will be created, 
+    random # can be used
+
+3)  do the set_monsters in create() > > > > above ::create() < < < < < 
+    Needs to be above ::create() to be available when the rooms first load
+    You can also use a switch to choose from different sets, including if 
+      you want to make none an option - needed if it's an inherited room
+    You can also call a function here too, just don't call it again without
+      the extra controls in #4 below
+
+4)  You can also use a switch or call a function in the reset() to have the mix change over the course of a reboot and/or among the lower level inherited files as things get killed off
+    However, it takes very careful coding as follows to have proper control
+
+    If you want to change the mix in reset() and it's an inherit, you NEED to:
+	a)  declare a global variable and set it = 1 *only* for the % of rooms
+	    you want to get mobs
+
+	b) and you also need *before* ::reset() to 
+	     - check for your variable to be = 1 AND
+	     - do a check for has_mobs(),
+	     - then clear the array >>  if(mons)  mons = ([]); 
+
+example for #4 (more complex as you can see):
+
+int getmobs;  // global variable declared before create()
+void pick_critters();  // your mob chooser function
+
+create() {
+   if(!random(4))  getmobs = 1;
+   if(getmobs) pick_critters();
+
+   ::create();
+   other creation stuff
+}
+
+void reset() {
+   int active;
+// check first to see if this room should be getting mobs at all
+   if(getmobs) {
+      active = has_mobs();  // runs the function to count active mobs from prior spawns
+      if(!active) {  // if they are all killed off, go ahead and pick a new set
+         if(mons)  mons = ([]);  // this clears the array
+	 
+	// use a switch or call a function for the new settings
+         switch(random(4)) {     // this chooses which ones to set next
+	    case 0..1:  set_monsters( ({MONST"rattlesnake"}),({1}));
+		break;
+	    case 2:  	set_monsters( ({MONST"koboldf1"}),({2}));
+		break;
+	    case 3:     set_monsters( ({MONST"koboldf2", MONST"koboldf"}),({1, 2}));
+		break;
+         }
+      }
+   }
+   ::reset();  // do NOT forget to call the super here
+               // doing it before will repop the old originally set ones before changing
+}
+
+This can make for great variety and unpredictability with an inherit without wild swings in population over longer resets.  And, it should clean up the mobs it controls if the room gets cleaned up.
+
+Enjoy,
+*Styx*

@@ -1,0 +1,17 @@
+Nightmare Mudlib 3.2 SimulEfun: possessive()
+
+string possessive(object|string);
+
+DESCRIPTION
+Returns the third person possessive pronoun appropriate for the gender
+of the object or the gender string passed.
+
+EXAMPLES
+possessive(find_player("lassondra")) returns "her"
+possessive("male") returns "his"
+
+NOTE
+For any odd genders, this will return "its".
+
+SEE ALSO
+nominative(), objective()

@@ -1,0 +1,27 @@
+I)  Misc.
+---------
+1) Mobs wielding - don't specify hands, just "wield sword" 
+	- don't need to use "in right hand", "in right and left hand", etc.
+	- used to be necessary but now can bug if size is wrong
+
+2) All mundane weapons, armor, potions, etc. should come from /d/common/obj/...
+	- change any that aren't, adding enchantments if needed
+        - inherit those and adjust or add features as needed
+
+3) Be sure to put some variety in gear that can be found and so the mobs don't always 
+
+3) Every area should have several searches and a trap or two.  
+
+4) Wandering mobs should be spawned by CROOM.
+	- Use set_repop(int) and make it less than 50 to keep the chance of mobs repopping at reset low to slow down cycling
+
+5) Don't let mobs (except maybe shopkeepers) always repop on reset.  
+	It makes areas too easily cycled.
+	For those who are new and/or take time exploring, it may force them to rush.
+
+6) Use inherited rooms to randomly spawn mobs, set searches, etc. so that things are seldom in exactly the same place.
+
+7)  Searches 
+    All areas should have several, even if they just get a different message than the "You find nothing odd" to keep things interesting.  Use set_search("default", blah) freely to provide a hint that something specific there is searchable and then go ahead and set the specific search too.  
+    So few places reward taking the time to look at everything and try to search extensively that players lose interest in even trying.  If you have a hidden exit, put hints about it in a search or even add an exit on a successful search.
+    Specifics - Be sure if there is something to be found on searching, that there are adequate hints.  We don't want to keep people from having any chance of finding it if they don't read your mind and think of one exact word.

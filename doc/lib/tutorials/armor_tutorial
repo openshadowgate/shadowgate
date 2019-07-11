@@ -1,0 +1,159 @@
+This is a document written for building armour with the Nightmare mudlib.
+Originally written by Descartes 20 october 1992
+Rewritten by Descartes 25 june 1993
+Rewritten by Kayla 29 Septembet 1994
+Modified by Melnmarn on the 20th of January 1995
+Modified by Vetri 17 August 1999
+Rewritten by Circe January 1, 2005
+-------------------------------------------------------------------------
+
+These are the things you MUST do in building armour:
+
+NOTE: When possible, please inherit the base file for all armor.  The 
+base files are in "/d/common/obj/armour/".  Instead of inheriting 
+/std/armour or ARMOUR, you could inherit "/d/common/obj/armour/chain" if
+you were making chainmail.  This means ac, weight, etc, are already 
+set for you.  Please don't override them unless you mean to for a 
+specific reason.
+
+#include <std.h>
+	This will include the basic header file used on ShadowGate.  Here, 
+	most common shorthand is defined, such as TO for this_object().  
+	(This is not absolutely necessary but is a good idea)
+
+inherit "/std/armour.c"; or inherit ARMOUR;
+	Using inherit ARMOUR; is better than /std/armour because it 
+	ensures that if anything is changed in std.h, your file will 
+	follow along with it. (see note about inherits above)
+
+void create(){
+::create();
+      Make sure you call this always first thing in the function create()!
+
+set_name("helmet");
+	This gives the helmet a name, how it will often be referred to in the
+	game as far as messages to mortals are concened.
+
+set_id(({"helm","helmet"}));
+	This gives the helmet a means of being referred to.  NOTE: whatever 
+	ids you set will be the ONLY ways a player can look at, pick up, 
+	or otherwise manipulate the object.
+
+set_short("The Helmet of Love");
+	This is the short description of the helmet. This is what you see in
+      inventory or on the ground.  NOTE: see set_obvious_short() in the 
+	optional section below.  If the object has an obvious_short, the 
+	short set with set_short() will ONLY be seen when the item is 
+	identified.
+
+set_long("This is a red helmet with gaudy hearts on its side.");
+	This is what players see when they look at the item.
+
+set_type("helmet");
+	Armours have many different types. Currently the valid types of armour 
+      are: clothing, sheath, leather, ring, chain, bracer, plate, shield, 
+	armour, thiefshield
+
+set_ac(2);
+        Sets the amount of protection this armor will give.  I.e. if your
+        player has the base AC of 10, wearing this will be lower it by 2 
+        points to 8.
+
+set_limbs(({"head"}));
+	Sets the limbs which the armour item protects.
+	The item can be set up to protect more than one limb, but there are
+	guidelines for which limbs can be protected by which armour types.
+
+set_weight(167);
+	Sets how much the armour weighs.
+
+set_value(300);
+	Sets the value of the item in gold.  Conversion to other currencies is
+	done by the objects that need to convert them.
+
+That is all you need to do to create a simple armour object.  However, there
+many other neat functions for creating a more interesting item object.
+
+*******************************************************************************
+
+Optional functions:
+-------------------
+
+set_obvious_short("a red helmet");
+	This is the "unidentified" short description - what players who were 
+	not present when the item was identified will see as the short.
+
+set_lore("This helmet is worn by warriors who love.");
+	This sets a story or history on the item that can be studied by players
+	with the study NWP.
+
+set_property("lore difficulty",15);
+	This sets the difficulty of the lore message.  If it is not set, the 
+	lore difficulty is based on the enchantment of the item.
+
+set_wear(string message || functionp)
+
+This is an example of a string message:
+set_wear("You feel safer in the helmet of love.\n");
+	This changes the message a player gets when wearing an item from:
+		You wear A helmet.
+	to:
+		You feel safer in the helmet of love.
+
+This is an example of a function pointer (functionp):
+set_wear((:TO,"extra_worn":));
+	This tells the armour object that you have written a function called
+	extra_worn() in the object that has this line.  In other words, you
+	wrote the extra_worn() function in the helmet if it this function
+	if written in create() of the helmet.  The important thing is the 
+	argument to this function (TO) is the object in which the function 
+	you define can be found.  The function may be called anything, and
+	it must be of type int, and it return a 1 if the player gets
+	to wear the armour, or 0 if the player is not allowed to wear it.
+	set_wear may be used to restrict armor to specific classes, levels, 
+	deities, etc.
+
+set_remove(string message || functionp)
+        Similar to set_wear() except for when the thing is removed.
+        *NOTE* Do not use TP - this_player() - in a remove function because
+               something may force the player to remove or drop an item.
+               Use ETO - environment(this_object()) - instead.
+
+set_struck(string message || functionp)
+        Similar to set_wear(). This message appears or function is called
+        when the armor is struck during combat.
+
+set_property("enchantment", 2);
+        This will make the armour enchanted to +2. (This also means that it
+        has the potential to be cursed to -2.)
+        *NOTE* Very few items should be made so they can not be cursed, but
+               if this armour is one of these, set up a while loop to make
+               sure that the enchantment is ending up positive.	
+
+An example of a function written for armor.  In this one, we are using 
+set_wear((:TO,"wearme":));  Note that this would go outside of the 
+create function.
+
+int wearme(){
+   if((int)ETO->query_lowest_level() < 10){
+      tell_object(ETO,"You are far too weak to wear such a helmet!");
+      return 0; //this makes it so the player cannot wear it
+   }
+   tell_object(ETO,"You feel safer in the helmet of love.");
+   tell_room(EETO,""+ETOQCN+" wears the helmet with a smile.",ETO);
+   return 1;
+}
+        
+****************************************************************************
+
+Other types of armour:
+----------------------
+Pocket armour:
+    This will allow the armour to have objects placed inside of it.
+        
+    inherit "/std/pocketarmour.c";
+     
+    set_max_internal_encumbrance(10);
+        This defines the amount of weight that can be placed in the "pockets"
+        of the armour.
+        

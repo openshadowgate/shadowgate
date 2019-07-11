@@ -1,0 +1,225 @@
+//         Modified by Melnmarn on the 20th of January 1995          //
+//         Modified by Vashkar on the 23rd of October 1995
+
+You may find examples of monsters already built in /d/shadow/mon.
+
+What must be done in each and every monster!:
+To build a monster, you must first inherit "/std/monster";
+In the create functions, you must call the following functions IN ORDER!:
+
+set_name("beggar");  //  Please use a single noun for set name so that 
+			 intelligent objects can use phrases like "a beggar".
+			 This function simply gives the monster a generic
+			 name. (Also see set_proper_name()) //
+
+set("id", ({ "beggar", "poor beggar", "a poor beggar", "a beggar" }) );
+		    //	 These are the things a player must type to make 
+			 reference to the monster, as in look at poor beggar.
+			 You can have any number of id's inside the ({ }),
+			 but make sure you separate them by , and enclose them
+			 in "".  For advanced information, this is an example
+			 of an array. //
+
+
+set("short", "a poor beggar" ); //  This sets the desc you see when you enter a
+				  room with the monster in it.
+
+set("long", "He is a poor pathetic beggar looking for a few coins." );
+		    //   This sets the decription you see when you look at
+			 the monster.
+
+set("race", "human" ); //	 This makes the monster a member of a certain race.
+			 See /doc/build/races for a list of races.  This
+			 list is never complete, and it is meant to be added
+			 to, but any time you want to add a race that is not
+			 on the list, mail APPROVAL so that the race can be
+			 added to the list. //
+
+set_gender( "male" ); // The old version used numbers to indicate gender.
+			 Nowadays gender is set with a string.  Acceptable 
+			 strings are "male", "female", "neuter".  Make sure
+			 you set this, as a neuter knight is a silly thing.
+
+set_body_type("human");   
+			 // Let's start from the back up.  In the 
+			 Shadowgate combat system, you must create
+			 a body for a monster.  You do this by adding limbs.
+			 set_body_type() automatically adds the limbs used
+                         by the player race you pass, or by the monster
+                         body type you pass as an arg.  Examples:
+                         set_body_type("artrell") set_body_type("quadruped")
+
+set_hd( 4,1 );	 	 // This sets the number of dice to roll for hit points
+		 	 as well as any pluses to thier hit-dice. For example
+		 	 an 11th level monster with a plus 2 to their hit-dice.
+			 set_hd(11,2) would do it. 
+
+set_overall_ac( 4 ); //  This sets the ac of all limbs to 4, except the torso
+			 which it sets a bit higher than the number.
+                         Note that a level 4 begger would NEVER have
+                         an AC of anything other than 10.
+set_size( 2 );       //  This sets the size of the creature. 
+			 There are 3 basic sizes:
+			 1 ---- Smaller than man (IE: rats, dogs, etc.)
+			 2 ---- Man-sized (obvious, isn't it)
+			 3 ---- Giant (much larger than man.)
+These are all of the functions minimally necessary to create a monster.
+However, just using these functions will not help you get a monster past
+QC, as they will be dull monsters set up for hack and slash.  Below is a
+listing of optional functions you may put in code to individualize your monster.
+******************************************************************************
+
+set_wielding_limbs( ({ "right hand", "left hand" }) );
+		    //	 Sets the limbs in which a monster
+		    	 is able to wield a weapon.
+
+
+set_max_hp(100);    //   Sets the maximum number of hit points a monster
+			 may have. You would set this if you want to create
+			 a monster that is wounded and can heal.
+                         Seriously consider the balance docs with this one.
+
+set_hp(50);	    //	 Sets how many hp the monster has.  The function
+			 will not allow you to set it below a certain number
+			 depending on the level of the monster.
+
+set_max_sp(400);      // Sets the maximum number of stamina points
+
+set_sp(300);          // Sets the starting stamina points
+
+set_exp(1000);	    //	 Sets how many experience points the monster has, and
+			 therefore its worth to the player.  Thois function
+			 is mostly useless to the immortal, since it will not
+			 allow you to set it above the default setting.  But
+			 if you want to make a 20th level monster yielding
+			 no exp, set_exp(0); is the way to do it.
+
+
+set_stats("strength", 15) // Sets a monster stat value.
+
+set_class("cleric");   // Makes the monster a member of a certain class.  I
+			  hope to make this important later, by allowing the
+			  monsters with set_class to do class-like things.
+
+set("aggressive", 10)     *or*     set("aggressive", "special_func");
+            // If you pass a number, then it will have the monster 
+               automatically attack anyone with a charisma lower than that
+               number.  If you pass a string, then it will look for a
+               function by the name of the string passed to call (you write
+               the function and specify what you want to happen when the
+               monster encounters a player).  This is useful for making 
+               monsters which only attack rogues or artrells or whatever.
+
+set_wimpy(20);	    //	 Makes the monster wimp out at 20% of its max_hp
+
+set_wimpydir("out"); //  Makes "out" the preferred direction of wimping out.
+			 Keep in mind that if you set out and there is no out,
+			 it will search for a direction that is there.
+
+set_spell_chance(30); // Sets the percent chance the monster has during an
+			 and attack for each round for casting a spell.
+
+set_spells( ({ "magic missile", "hideous laughter" }) );
+                      // Sets up a list of possible spells the monster
+			 can execute during combat.  Note that game defined
+			 attack spells need no argument during combat.  But
+			 other spells, like heal spells, stealing, and
+			 immortal defined spells need any appropriate arguments
+                         Also, some spells require the monster to be a member
+                         of a certain class.  And if you want the monster to
+                         cast the spell effectively, remember to set that
+                         skill.
+
+set_func_chance(15); // Sets the percent chance the monster has to attack
+                         by running a random function rather than try to
+                         hit an enemy normally.
+
+set_funcs( ({ "scream", "firebreath" }) );
+                      // Sets up a list of possible functions the monster
+                         can execute during combat.  The monster will
+                         randomly call a function within its code, passing
+                         a random enemy to the function as an argument.
+                         You can set up the firebreath function like this.
+
+                         void firebreath(object targ) {...
+
+                         That will accept a random enemy as a target for
+                         the function.  Then you can have the function
+                         do damage to targ (usually a player attacking
+                         the monster).
+
+set_languages( ({ "farsi", "borgish" }) );
+                        Makes the monster be able to speak each of these
+                        languages fluently.  A monster needs to be able
+                        to speak a language fluently in order ALWAYS to
+                        understand the utterances of another fluent speaker
+                        in the same language (for insteance, when you use
+                        set_speech() or define catch_tell())
+
+set_lang_prof("nibelungen", 7);
+                        Useful for making a monster partially adept
+                        at a given language.  (fluency range: 1-10)
+
+set_emotes(20, ({"The beggar grovels a bit.","The beggar whines."}), 0);
+                        This sends emotes and other messages to the room.
+                        Every heart beat, this beggar will have a 20% chance
+                        (the first arg) of sending out randomly one of these
+                        messages.  The third argument is either 1 or 0.
+                        1 means the message is for combat, 0 is for peace.
+
+set_speech(20, "farsi", ({"I have nothing to sell.", "My brain hurts."}),0);
+                        Much like set_emotes(), except this sets up text
+                        which the monster will randomly try to speak using
+                        the speak command.  Of course, the monster must
+                        already have had set_lang_prof() or set_languages()
+                        set for the language (in this case "farsi") being
+                        spoken.
+
+
+set_achats(20, ({ "The beggar bleeds on you.\n", "The beggar spits on you.\n" }) );		    \\ This is the same as set_chats(), except that these chats
+			are given while the monster is engaged in combat.
+
+*******************************************************************************
+
+Functions outside of create() that you define:
+
+void catch_tell(string str) { }
+
+Whenever anything is done in a room, like you give bozo a flower, the function
+tell_object is used to tell:
+you: You give Bozo a flower.
+Bozo: Descartes gives you a flower.
+anyone else in the room: Descartes gives Bozo a flower.
+
+The string given by tell_object() to a monster will go to the function
+catch_tell if it exists in the monster, so that, if Bozo is a monster, then
+str in our catch tell: str = "Descartes gives you a flower."
+inside catch_tell, you can do whatever you want with this string, the most
+common user is to use a function called sscanf() to search for keywords in
+the monster.  I am adding a function to monster.c called interact
+usage: interact(str1, str2);
+If str1 is in str2, the the function will return 1, if not 0;
+So we could test to see if Bozo is getting a sword by the following:
+if(interact("gives", str)) {
+    if(interact("you", str)) {
+	if(interact("sword", str)) {
+		if(present("sword")) tell_room(environment(this_object()), "Bozo says: Thank you!\n");
+	}
+    }
+}
+
+You need to check in the case of gives that it was actually a giving, and no
+emote was used.  Make sure you do not have the monster respond by teling
+a phrase that would in turn cause it to respond again.  You can always
+exempt the monster from being told what you are telling the room with the
+following syntax:
+
+tell_room(environment(this_object()), string_to_be_told, ({ this_object() }) );
+
+Please see /doc/efun/tell_room, /doc/lfun/catch_tell, /doc/lfun/interact,
+/doc/efun/tell_object
+
+
+			-Descartes of Borg 920928
+modified 930822
+re-modified by Melnmarn@ShadowGate 950120

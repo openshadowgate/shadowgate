@@ -1,0 +1,23 @@
+restore_variable(3)          LPC Library Functions         restore_variable(3)
+
+
+
+[1mNAME[0m
+       restore_variable() - restore value of a variable from a string
+
+
+[1mSYNOPSIS[0m
+       mixed restore_variable( string value );
+
+
+[1mDESCRIPTION[0m
+       Restore  values  of  a  variable from a string.  The format used is the
+       same format as save/restore_object.
+
+
+[1mSEE ALSO[0m
+       restore_object(3)
+
+
+
+MudOS                             5 Sep 1994               restore_variable(3)

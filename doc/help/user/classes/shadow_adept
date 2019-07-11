@@ -1,0 +1,44 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Shadow Adept:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Mage or Level 20 Sorcerer
+%^RESET%^%^CYAN%^             %^RESET%^ Faith: Lord Shadow
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Intelligence or Charisma (before equipment modifiers)
+
+%^RESET%^%^BOLD%^%^GREEN%^For Mage Shadow Adepts:
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ drow, elf, half-drow, half-elf, human, ogre-mage, gnome,
+               yuan-ti
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ sorcerer, psion, psywarrior
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, dungeoneering, healing, spellcraft
+
+%^RESET%^%^BOLD%^%^GREEN%^For Sorcerer Shadow Adepts:
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow, elf, drow, halfling, 
+               gnome, voadkyn, kobold, goblin, orc (tanarukk), yuan-ti
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, psion, psywarrior
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, disguise, influence, spellcraft
+              **disguise temporarily substituted to perception until installed
+      
+%^RESET%^%^BOLD%^%^GREEN%^For All Shadow Adepts:
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: gift of the shadows 
+   %^RESET%^L4: elusive spellcraft
+   %^RESET%^L7: shadow apotheosis
+
+    %^RESET%^A shadow adept is a master not just of magic, but of its 
+use by means of the secretive Shadow Weave, rather than the weave that 
+nearly all arcanists use. Only Sharrans and their allies are privy to 
+the hidden ways by which their Mistress' gift might be used.  A shadow 
+adept is more familiar with certain spell types.  Enchantment, illusion 
+and necromancy spells become easier for him to resist, and harder for 
+his foes to resist.
+

@@ -1,0 +1,18 @@
+random(3)                    LPC Library Functions                   random(3)
+
+
+
+[1mNAME[0m
+       random() - return a pseudo-random number
+
+
+[1mSYNOPSIS[0m
+       int random( int n );
+
+
+[1mDESCRIPTION[0m
+       Return a pseudo-random number from the range [0 .. (n -1)] (inclusive).
+
+
+
+MudOS                             5 Sep 1994                         random(3)

@@ -1,0 +1,19 @@
+Nightmare Mudlib lfun: set_search()
+Object: /std/room.c (inherited from /std/room/senses.c)
+
+void set_search(string item, mixed desc);
+
+This function makes something happen when a player types the search command
+and uses 'item' as an argument.  The first argument is, of course, the
+item that will get searched.  If you want it to work when the player
+enters "search" alone, item should be "default".  The second
+argument is either an argument of type string or type function.
+If the argument is a string, then that string will simply get printed
+when the playertypes the command.  If it is of type function, the function
+named gets called when the player types the search command.
+
+Examples:
+    set_search("shelf", "You find only dust on the shelf.");
+    set_search("floor", (: this_object(), "search_floor" :));
+
+See also: remove_search(), query_search()

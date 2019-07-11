@@ -1,0 +1,32 @@
+children(3)                  LPC Library Functions                 children(3)
+
+
+
+[1mNAME[0m
+       children() - returns an array of objects cloned from a given object.
+
+
+[1mSYNOPSIS[0m
+       object *children( string name );
+
+
+[1mDESCRIPTION[0m
+       This  efunction  returns an array of objects that have been cloned from
+       the file named by 'name', as well  as  the  object  'name'  itself,  if
+       loaded.   An example use of children() is to find all objects that have
+       been cloned from the user object:
+
+              object *list;
+
+              list = children("/obj/user");
+
+       This lets you find all users  (both  netdead  and  interactive  whereas
+       users() only reports interactive users).
+
+
+[1mSEE ALSO[0m
+       deep_inherit_list(3), inherit_list(3), objects(3)
+
+
+
+MudOS                             5 Sep 1994                       children(3)

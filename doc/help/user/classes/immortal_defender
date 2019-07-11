@@ -1,0 +1,49 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Immortal Defender:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Paladin or Level 20 Fighter
+%^RESET%^%^CYAN%^             %^RESET%^ Counter (WeaponAndShield Feat)
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in Endurance Skill
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Constitution (before equipment modifiers)
+
+%^RESET%^%^BOLD%^%^GREEN%^For Paladin Immortal Defenders:
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, dwarf (gold), halfling (strongheart), elf (sun)
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any lawful
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ bard, barbarian, ranger, thief
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d12
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, endurance, influence
+
+%^RESET%^%^BOLD%^%^GREEN%^For Fighter Immortal Defenders:
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d12
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, healing, perception
+      
+%^RESET%^%^BOLD%^%^GREEN%^For All Immortal Defenders:
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: defenders presence
+   %^RESET%^L4: shield charge
+   %^RESET%^L7: shield master
+
+    %^RESET%^And immortal defender is the master of fighting with a weapon
+and shield.  They are the immovable front line of any fighting force.  A 
+first level immortal defender is able to activate a defenders presence
+which will bolster allies in battle, giving them extra vitality to shrug 
+off enemy attacks.  Once the immortal defender reaches level four, they 
+are able to use a devestating shield charge that will knock attackers 
+scattering and can even be used to charge through an enemy lines, making 
+room for all who are following the immortal defender in their wake.  
+Finally, upon reaching level seven, an immortal defender becomes a master
+with their shield.  They are highly resistant to being knocked down while 
+using their shield.  The immortal defender also will not loose his melee 
+attacks while he is fully defensive using shieldwall.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, styles, mystyle
+          spells, cast, prepare, knights,

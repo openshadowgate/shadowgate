@@ -1,0 +1,18 @@
+Nightmare IV SimulEfun: distinct_array()
+
+mixed *distinct_array(mixed *);
+
+DESCRIPTION
+Takes any sort of array and returns a similar array with all duplicate
+members removed from the array so that each member occurrs only once
+in the array.
+
+EXAMPLES:
+distinct_array( ({ "a", "b", "c", "a" })) returns ({"a", "b", "c"})
+
+NOTE
+This is the same as the Nightmare Mudlib 3.* SimulEfun uniq_array()
+but was renamed due to confusion with the MudOS efun unique_array().
+
+LOCATION
+/adm/simul_efun/distinct_array.c

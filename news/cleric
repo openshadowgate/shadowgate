@@ -1,0 +1,25 @@
+
+%^BOLD%^%^GREEN%^READ ME!%^RESET%^
+
+Telepathy spell:
+Tells now require a telepathy spell to be cast between two people to 
+work. This is a 7th level cleric spell available to all gods. If you
+notice any problems with the spell, please let a wiz know ASAP.
+
+Addendum: (10-13-2001) Telepathy now requires you to have recognized the target. (Though I haven't changed the tell/reply commands yet *mumblegrumblefashes*)
+
+%^BOLD%^%^GREEN%^===========================================================%^RESET%^
+
+Spell Domains
+   There has been a drastic change in the spells for clerics.  Priests are now allowed access to
+spells ranging from 1st to 9th level.  We have phased out deity spells, in favor for spell domains. 
+Each deity has access to three domains, which are within their sphere of influence.  Single class
+clerics are allowed to pick 2 domains, while multi's getting one.  Some spells are still needing
+tweaking and debuging.  Please bug or typo anything that you notice odd.  In order to access these
+new spell levels you will need to gain a new holy symbol, and use the fixspells command.
+
+(From your hard-working creators and developers.)
+
+%^BOLD%^%^GREEN%^===========================================================%^RESET%^
+
+%^B_BLUE%^%^BOLD%^%^GREEN%^Returning clerics (5/30/08):%^RESET%^  %^BOLD%^%^BLUE%^Due to recent events in the game, including the resurrection of a new deity, your domains will be erased the first time you log in after the change.  Please note the messages you are given (likely above this news post on your screen, so you may have to scroll up), and read all appropriate help files before journeying to your temple to choose your domains.  You will likely need to get a new holy symbol after choosing your domains, and you may need to use fixspells if you have problems.%^RESET%^

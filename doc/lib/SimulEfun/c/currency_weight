@@ -1,0 +1,17 @@
+Nightmare IV SimulEfun: currency_weight()
+
+int currency_weight(string, int);
+
+DESCRIPTION
+Returns how much a given amount of currency of a given type weighs.
+The first argument represents the currency type, the second
+argument how much of that currency exists.
+
+EXAMPLES
+currency_weight("gold", 10) will return how much 10 gold coins weighs
+
+LOCATION
+/adm/simul_efun/economy.c
+
+SEE ALSO
+currency_inflation(), currency_rate(), mud_currencies()

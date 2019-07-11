@@ -1,0 +1,43 @@
+%^RESET%^%^CYAN%^Ranger:
+
+%^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 13 dexterity, 13 wisdom
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ beastman, drow, elf, human, half-drow, half-elf, half-orc, 
+   voadkyn, wemic, firbolg, orc, hobgoblin, gnome (forest), halfling
+   (ghostwise), minotaur, yuan-ti
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/reflex strong, will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, stealth, survival
+%^RESET%^%^CYAN%^Class Feats (dual wield combat style):%^RESET%^
+   %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon 
+   %^RESET%^proficiency, ambidexterity, track
+   %^RESET%^L5: whirl
+   %^RESET%^L9: two weapon fighting 
+   %^RESET%^L13: improved two weapon fighting
+   %^RESET%^L17: unassailable parry
+   %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
+%^RESET%^%^CYAN%^Class Feats (archery combat style):%^RESET%^
+   %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon 
+   %^RESET%^proficiency, point blank shot, track
+   %^RESET%^L5: manyshot
+   %^RESET%^L9: deadeye
+   %^RESET%^L13: preciseshot
+   %^RESET%^L17: shot on the run
+   %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
+
+The ranger is a hunter and woodsman who lives by not only his sword or bow,
+but also his wits. Rangers, like nature itself, can be of any alignment. 
+Their role and outlook changes depending upon their alignment, but they all
+have a few things in common. They are more comfortable in the wilderness 
+than the city, and they have a strong affinity for nature that defines 
+them.
+
+Although rangers have the basic combat skills of a warrior, they have 
+several other abilities to aid their survival. Aside from a choice of skill
+at archery or the ability to dual wield weapons without penalty, they also
+gain lesser divine spellcraft based on their wisdom score.
+
+%^RESET%^%^CYAN%^See also:%^RESET%^ ranger roleplay, feats, stats, skills, spells, cast, prepare, buff, combatstyle, prestige classes
+
+%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard ranger list>%^CYAN%^.%^RESET%^

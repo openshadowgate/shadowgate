@@ -1,0 +1,46 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Radiant Servant:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Cleric
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Heal Skill
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Wisdom (before equipment modifiers)
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ all except wemic, ogre, ogre-mage and voadkyn
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/will strong, reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ healing, influence, perception, spellcraft
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: contingent healing 
+   %^RESET%^L4: radiant aura 
+   %^RESET%^L7: supreme healer
+
+Radiant Servants are clerics who have dedicated their lives to the 
+art and skill of healing.  They are peerless when it comes to healing 
+the injured.  A first level radiant servant gains the contingent 
+healing feat which allows them to automatically heal any sufficiently 
+injured member of their party. This automatic healing happens in 
+addition to, and regardless of any other actions that the radiant 
+servant takes in the round.  Only incapacitation of some sort can 
+prevent the radiant servant from healing the most wounded of  his or 
+her allies.  At level four, a radiant servant gains the ability to 
+project an aura of healing.  This aura will heal injured party members
+continually until they are at full health and can only be stopped by 
+knocking the radiant servant unconscious or killing him.  Finally, at 
+level seven a radiant servant gains the ability to cast any healing 
+spell that he or she knows at will and an unlimited amount of times 
+per day, without needing to prepare those spells.  In effect, the only
+way to prevent a high level radiant servant from healing his or her 
+allies is to render them unconscious or kill them.
+
+Radiant Servants channel healing energy directly from their diety, 
+and while they are blessed with extraordinary healing abilities, they 
+are no more favored or disfavored than other priests of their faiths 
+in matters not related to healing.  They are, however, without equal 
+when it comes to keeping groups of allies alive.  A group with a 
+radiant servant in their midst is a very difficult group to defeat.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, prepare,
+          domains, cleric

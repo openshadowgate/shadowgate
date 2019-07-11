@@ -1,0 +1,7 @@
+Nightmare Mudlib lfun: query_reset_number()
+Object: /std/room.c
+
+int query_reset_number();
+
+This function returns the current reset number for the object.  In other
+words, it returns how many resets have happened since the object was loaded.

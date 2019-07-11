@@ -1,0 +1,32 @@
+typeof(3)                    LPC Library Functions                   typeof(3)
+
+
+
+[1mNAME[0m
+       typeof() - return the type of an expression
+
+
+[1mSYNOPSIS[0m
+       string typeof( mixed var );
+
+
+[1mDESCRIPTION[0m
+       Return  the  type  of  an  expression.   The return values are given in
+       <type.h>.  They are:
+
+       T_INT           "int" T_STRING        "string" T_ARRAY          "array"
+       T_OBJECT           "object"    T_MAPPING         "mapping"   T_FUNCTION
+       "function" T_FLOAT          "float"  T_BUFFER         "buffer"  T_CLASS
+       "class"
+
+       T_INVALID        "*invalid*"  T_LVALUE         "*lvalue*" T_LVALUE_BYTE
+       "*lvalue_byte*"   T_LVALUE_RANGE    "*lvalue_range*"    T_ERROR_HANDLER
+       "*error_handler*" T_FREED         "*freed*" T_UNKNOWN       "*unknown*"
+
+
+[1mSEE ALSO[0m
+       allocate(3), allocate_mapping(3), strlen(3)
+
+
+
+MudOS                             5 Sep 1994                         typeof(3)

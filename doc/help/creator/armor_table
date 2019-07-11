@@ -1,0 +1,42 @@
+ARMOR                                     ARMOR CLASS(ac)
+---------------------------------------------------------
+None                                             10
+---------------------------------------------------------
+Shield only                                       9
+---------------------------------------------------------
+padded/leather armor                              8
+---------------------------------------------------------
+padded/leather armor + shield,
+studded or ring mail                              7
+---------------------------------------------------------
+studded/ringmail + shield,
+brigandine,
+scale mail,
+or hide armor                                     6
+---------------------------------------------------------
+scale mail / hide + shield,
+chain mail                                        5
+---------------------------------------------------------
+chain mail + shield
+splint mail,
+banded mail,
+or bronze plate
+mail                                              4
+---------------------------------------------------------
+splint, banded, or bronze plate + shield
+or plate mail                                     3
+---------------------------------------------------------
+plate mail and shield
+field plate                                       2
+---------------------------------------------------------
+field plate + shield,
+full plate                                        1
+---------------------------------------------------------
+full plate + shield                               0
+---------------------------------------------------------
+---------------------------------------------------------
+
+AC Range is +10 to -10  (+10 = easy to hit)
+Magical armor will allow for ac lower than 0
+
+Thorn (9/29/94)

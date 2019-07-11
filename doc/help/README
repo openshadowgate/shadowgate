@@ -1,0 +1,15 @@
+ Basic organization:
+
+9/13/2003: Readded HM general topic. Added Rules, Policies, Guidelines
+ Roleplaying, Deities, Faq, Classes, Races, and cleared the redundancy
+out of the directories that was causing some things to not work as expected.
+
+Did some decisions about what went into rules, and what went into policies
+and what went into guidelines / roleplay. We might want to get rid of
+one (or more) of these categories if they appear to be redundant or unneeded.
+
+Added the FAQ category as well. Was thinking it might be better to split
+the FAQ up and have it recompiled by a script/daemon?
+
+But I don't have energy to do that yet.
+

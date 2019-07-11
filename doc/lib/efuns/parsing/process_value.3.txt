@@ -1,0 +1,37 @@
+process_value(3)             LPC Library Functions            process_value(3)
+
+
+
+[1mNAME[0m
+       process_value() - give a value from a described function call
+
+
+[1mSYNOPSIS[0m
+       mixed process_value( string calldescription );
+
+
+[1mDESCRIPTION[0m
+       Get  the  replacement  of  one syntactic pattern. The pattern is on the
+       form:
+
+                 "function[:filename][|arg1|arg2....|argN]"
+
+       The returned value can be of any type.
+
+       Note that both object and arguments are marked optional with the brack‐
+       ets and that the brackets are not included in the actual pattern.
+
+
+[1mSEE ALSO[0m
+       process_string(3)
+
+
+[1mCAVEAT[0m
+       This is usually used to support 'value by function call' in the mudlib.
+       It is wise to set the  effuserid  of  the  object  to  0  before  using
+       process_value  as  any function in any object can be called with almost
+       any arguments.
+
+
+
+MudOS                             5 Sep 1994                  process_value(3)

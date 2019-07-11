@@ -1,0 +1,47 @@
+#include <std.h>
+#include <daemons.h>
+inherit DAEMON;
+ 
+int cmd_lay(string str) {
+    object ob;
+    string str2;
+    int x,chamod;
+ 
+    if(!TP->is_class("paladin")){
+        notify_fail("You are not a paladin and cannot do that!\n");
+        return 0;
+    }
+    if(sscanf(str, "on hands %s", str2) != 1){
+        tell_object(TP, "Usage: lay on hands <player>\n");
+        return 1;
+    }
+    if((int)TP->query_property("lay hands delay") > time()) {
+        write("%^CYAN%^You have already used that power very recently.");
+        write("%^CYAN%^You must wait before your god will allow you to lay on hands again.%^RESET%^");
+      return 1;
+    }
+    ob = present(str2,ETP);
+    if(!ob) {
+        notify_fail("That is not here!\n");
+        return 0;
+    }
+    write("%^BOLD%^%^CYAN%^You concentrate deeply and touch "+(string)ob->QCN+".%^RESET%^");
+    say("%^BOLD%^%^CYAN%^"+TP->QCN+" touches "+(string)ob->QCN+" and concentrates for a moment.%^RESET%^",ob);
+    if(TP != ob) tell_object(ob,"%^BOLD%^%^CYAN%^"+TP->QCN+" touches you and concentrates for a moment.%^RESET%^");
+
+    chamod = (((int)TP->query_stats("charisma") - 10)/2);
+    if(chamod < 1) chamod = 1;
+    ob->add_hp (2 * (int)TP->query_level() * chamod);
+    this_player()->remove_property("lay hands delay");
+    this_player()->set_property("lay hands delay",(time() + 300)); //5min delay now. -N, 9/10.
+    this_player()->set_disable(1);
+    return 1;
+}
+ 
+void help() {
+  write("Syntax: <lay on hands (player)>");
+  write("This will heal the player you choose, increasing in power with your level and your charisma. Invoking this kind "
+"of divine power can be wearying, so the paladin will need to wait a few minutes before they can attempt to use such a "
+"blessing again.");
+  return 1;
+}

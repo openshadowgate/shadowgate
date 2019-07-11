@@ -1,0 +1,23 @@
+floor(3)                     LPC Library Functions                    floor(3)
+
+
+
+[1mNAME[0m
+       floor() - round a float down to the nearest integer
+
+
+[1mSYNOPSIS[0m
+       float floor( float f );
+
+
+[1mDESCRIPTION[0m
+       Returns  (as  a  float)  the nearest integer number equal to or smaller
+       than f.
+
+
+[1mSEE ALSO[0m
+       ceil(3), to_int(3), to_float(3)
+
+
+
+MudOS                             5 Sep 1994                          floor(3)

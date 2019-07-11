@@ -1,0 +1,26 @@
+query_privs(3)               LPC Library Functions              query_privs(3)
+
+
+
+[1mNAME[0m
+       query_privs() - return the privs string for an object
+
+
+[1mSYNOPSIS[0m
+       string query_privs( object ob );
+
+
+[1mDESCRIPTION[0m
+       Returns the privs string for an object.  The privs string is determined
+       at compile time via a call to privs_file() in the  master  object,  and
+       changeable via the set_privs() efun.
+
+       This efun is only available if PRIVS is defined at driver compile time.
+
+
+[1mSEE ALSO[0m
+       privs_file(4), set_privs(3)
+
+
+
+MudOS                             5 Sep 1994                    query_privs(3)

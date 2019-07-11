@@ -1,0 +1,726 @@
+Nightmare room tutorial
+Written 181092 by Descartes of Borg
+Additions 140493 by Valodin
+Additions 050295 by Melnmarn
+Additions 051395 by Melnmarn
+
+This tutorial contains all information you need to know on building rooms.
+It is divided into several parts.
+
+Part 1: The Basic Room
+Part 2: Adding new actions
+Part 3: The function reset()
+Part 4: Manipulating Item Descriptions
+Part 5: Manipulating exits
+Part 6: Searching
+Part 7: Adding objects
+Part 8: Using light
+Part 9: Random Encounters
+part 10: Climbing and Descending
+
+********************************************************************
+
+Part 1: The Basic Room
+-----------------------
+
+The basic room looks like this:
+******
+
+inherit "std/room";
+
+void create() {
+    ::create();
+    set_property("indoors", 1);
+    set_property("light", 2);
+    set("short", "The Praxis Inn");
+    set("long",
+	"Welcome to the Praxis Inn.\n"+
+	"The only exit is south onto the street.\n"
+    );
+    set_items( ([ "inn": "The inn is a beautiful place.", 
+      "street":"Boc La Road.", "exit":"It leads out to Boc La Road>" ]) );
+    set_exits( ([ "south" : "/d/standard/e_boc_la3" ]) );
+}
+
+******
+
+In this example, You have a room with a single exit.  You must have all of
+these functions in your code to create any room.  It is true that you can omit
+the set_exits and set_items functions and still have a viable
+room, but it is very rare indeed that you have a room set with no exits and
+on Nightmare, you should have every noun in the room description given an
+item description.  Here is what all of these functions do:
+
+::create();
+    The :: is an operator like +. -. *, etc.  It means the function which
+    follows is down the inheritance tree one level.  In this example, it
+    means it is calling the create() function in room.c.  You use this syntax
+    when there might be confusion as to which function you mean.
+
+set_property("indoors", 1);
+        Means that the room is inside.  Hence players will not be able to
+        see the sun or moon or be rained on.  Omitting this or setting it to
+        0 will make it an outside room.  Outside rooms get dark at night and
+        fun stuff like that.           
+
+set_property("light", 2);
+ 	Sets the value of light available to players in that room, not taking
+	into account torches and the such.  Light values are generally within 
+	the range of -5 to 5, where 0 is where a human cannot see but function,
+	and -1 causes a human to loose all functionality.  Remeber, however,
+	that there are races with the ability to see in the dark.  See
+	/doc/build/etc/light for a further description of light values and
+	what they mean.
+
+set("short","The Praxis Inn");
+	This is the thing a player in brief mode will see upon entering a room
+	or typing "glance".  It is simply a short description of what the room
+	is.
+
+set("long","The Praxis Inn.  People come here to rest.  The exit is south.");
+	A more verbose description of the room.  Often there will be subtle
+	clues as to any special things a player can do in the room here,
+	for instance, you might say "There is a crack in the south wall. ".
+	In this case, you might allow the player to enter the crack to go to
+	a different room.  Note how a long room description in the basic room
+	example was broken up using the ability to add strings.
+        NOTE: The Nightmare Mudlib now wraps text to fit the screens of
+              each individual player, so you should only put in carriage
+              returns (\n) when you specifically want them to break there.
+
+set_items( ([ "inn": "A place for people to rest." ]) );
+        This function is very important to making your room interesting to
+        players.  It allows players to look at items which are described
+        somehow in your room, but yet which do not physically exist inside
+        the room.  For example, in the room description, you may mention
+        the existence of a desk.  There is no point in actually placing a desk
+        object in the room since it does nothing special, but you want someone
+        to be able to look at it.  Perhaps you might even want to add
+        something that allows players to pull something out of it, nevertheless,
+        it is still a simple waste to add another object in the room.  The 
+        set_items() allows you to add descriptions to the room.  You use
+        a mapping as the argument, where you have ([ "item": "description"])
+        set_items( ([ "house":"It is a nice house.", 
+          "window":"It is fogged up." ]) );
+        When you type "look at house", you see the house description.  
+        Similarly, when you type "look at window", you see the window one.
+        In addition, if you have many items with the same description, you
+        can do this:
+          set_items( (["house":"It is a nice house",
+            ({ "candles", "candle"}):"It is a nice set of candles." ]) );
+        So therefore you can use an array of strings instead of a
+        single string to specify which items are being described.
+
+set_exits( ([ "south" : "/d/standard/e_boc_la3" ]) );
+        This function passes a data type called a mapping.  What it does is
+        associate the value "/d/standard/e_boc_la3" with a value called a key,
+        which here is "south".  In practical terms, it says that the exit
+        south is /d/standard/e_boc_la3.  There may be any number of exits 
+        added to a room.
+
+All of these functions are placed within the definition of a function called
+create.  create() is called whenever a room is first loaded into memory.
+All of the above functions which you are calling from inside create have
+been pre-defined for you in the file /std/room which you access in the
+first line:
+	inherit "std/room";
+
+That is it for a basic room.  It's purpose is simply to link complex rooms as
+basic rooms should not be the basis of an area.  Too often immortals brag
+about having a 500 room area.  It will turn out that 400 rooms are just basic
+rooms.  There is nothing on this earth more boring than an area full of basic
+rooms.  But they are necessary, and a proper combination of basic rooms with
+complex rooms is what makes for a neat area.
+
+*****************************************************************************
+
+Part 2: adding new actions
+---------------------------
+
+In many rooms, you will want players to be able to do more than look, look at,
+and use the exits.  You will want them to be able to do such things as climb
+a wall, or perhaps pray at an altar.  To do all of this, you must call the
+function add_action() from inside a function you define called init().
+This is what it looks like:
+
+*****
+
+void init() {
+    ::init();
+    add_action("climb_fun", "climb");
+}
+
+*****
+
+If you remember from part 1, the function create() was called when the room
+got loaded into memory. init() gets called by each player when the player
+enters the room.  In this way, any new commands a player might need for a room
+(or for any other object, for that matter) can be given to the player.
+The function that actually adds commands to the player is add_action();
+In this particular example, the function first calls ::init();
+The file "std/room" already has a function called init() in it.  This
+predefined init() is what adds the directional commands from set_exits() to
+the player.  To be able to add those commands as well as the ones you want
+to add to the player, you MUST call ::init();  The :: tells the driver to
+call the function defined in the inherited code instead of the function
+defined in the current code.
+
+add_action("climb_fun", "climb");
+	This function adds the commands "climb" to the player's list of
+	available commands.  Whenever the player types the command "climb",
+	the driver will call the function climb_fun(), and it will search
+	for it in your room code.  In addition, the driver will pass as
+	an argument to the function anything the player types on the command
+	line besides "climb".  For instance, if the player types "climb rope",
+	the driver will pass the string "rope" to the function climb_fun();
+
+After having defined init(), you need to go on to defined climb_fun().
+A sample climb_fun() might look like this:
+
+*****
+
+int climb_fun(string str) {
+    if(!str) {
+	notify_fail("Climb what?\n");
+	return 0;
+    }
+    if(str != "rope") {
+	notify_fail("You can't climb that!\n");
+	return 0;
+    }
+    write("You slip trying to climb the rope!");
+    say(this_player()->query_cap_name()+" slips trying to climb the rope!", this_player());
+    this_player()->add_hp(-5);
+    return 1;
+}
+
+*****
+
+There are several parts to any function called by a player command.  The first
+part is testing to see if the command was really supposed to call THIS
+function.  For example, a command in a room might be "read".  But a player
+could also have several objects which have the command "read" as well.  So
+you always check the string argument to see what the player meant when the
+command was typed.  Very few commands should be allowed without passing
+arguments.  Here is what the following lines of the above code do:
+
+if(!str) { notify_fail("Climb what?\n"); return 0; }
+
+When a function is called by a player command, it is expected to return a 1 or
+a 0.  A 1 means that this function was the function that the player meant to
+call.  A 0 means that either the player probably meant to use another function,
+or the player was using this one in an ambiguous manner.  (Success or failure).
+notify_fail() is a function that changes the error message for the player.
+The default error message is the ever so loved "What ?".  Any time you
+return 0 in a function (well almost any time) you should change that error
+message.  You use notify_fail() to do this.  Why use notify_fail() instead of
+write()?  Because notify_fail() will not be written to the player if another
+function returning 1 is found.  For instance, the room has a list in it to
+be read, and the player is carrying a book.  The player types <read book>.
+The driver finds that indeed there is a read command for the player, and it
+calles the function read_list() in the room (it searches in the order the 
+commands were added to the player). It executes read_list(), which tests
+to see if "book" == "list", which is false.  A notify_fail() is then
+executed changing "What ?" to "Read what?", and then 0 is returned.  The
+"Read what?" is not yet written to the screen, as the driver has not searched
+all of the player's commands.  It then finds that there is a read_book()
+function in the player's book, which gets executed successfully returning 1.
+"Read what?" is therefore never seen by the player.  If you had used
+write(), it would have written to the player "Read what?" AND executed
+the read_book.  Or if you had done write("Read what?\n"); return 1;, it would
+have written "Read what? to the player without ever having executed the 
+read_book() which was the player's intention.
+The second part of a function called by player command is the actual execution
+of the act intended, in this case the climbing of the rope.  After that is
+completed, you return 1; and are done.
+
+You can use init() to do things other than add_action(), such as throw out
+players who should not be entering that room and such.
+
+*************************************************************************
+
+Part 3: The function reset()
+-----------------------------
+
+Besides create() and init(), there is one last function that you may sometimes
+needs to define which the driver searches for in your code.  It is reset().
+reset() is called everytime there is a reset.  If your room never changes in
+character, then you do not need to define this function.  But you might have
+a monster which needs to regenerate every reset, or something else which
+needs to set back to the rooms original situation at reset.  You do this in
+the following way:
+
+First you define the reset() as follows:
+
+*****
+
+void reset() {
+    ::reset();
+    if(!present("ogre")) new("obj/mon/ogre")->move(this_object());
+}
+
+*****
+
+At each reset, reset() is called and checks to see if the ogre is still in the
+room from the last reset.  If it is not there, then it makes one.
+The function ::create() in room.c calls reset() for the first time to
+set up the room.
+
+******************************************************************************
+
+Part 4: item manipulation
+--------------------------
+
+You have already learned how to set_items();
+It happens, however, that items in some rooms may change during the course of
+the game.  For instance, in the inn, certain rooms on list of rooms may
+become unavailable, so the list needs to be able to change.  The following
+functions allow you to manipulate items:
+
+set_items( ([ "item" : "description" ]) );
+add_item("item", "description");
+remove_item("item");
+
+set_items() was described above.  But say, when the player tries
+climbing the rope, the rope disintegrates, you need to remove the item rope
+from the list of items.  In the climb_fun(), you have it defined this way:
+
+*****
+
+int climb_fun(string str) {
+    if(!str) {
+	notify_fail("Climb what?\n");
+	return 0;
+    }
+    if(str != "rope") {
+	notify_fail("You can't climb that!\n");
+	return 0;
+    }
+    if(!id("rope")) {
+	notify_fail("That is not here!\n");
+	return 0;
+    }
+    write("The rope disintegrates as you attempt to climb it.");
+    say("The rope disintegrates as "+this_player()->query_cap_name()+" tries to climb it.", this_player());
+    remove_item("rope");
+    return 1;
+}
+
+*****
+
+And in your reset():
+
+*****
+
+void reset() {
+    ::reset();
+    add_item("rope", "You might be able to climb it.");
+}
+
+*****
+
+Every time the room resets, there will be a rope in the room for a player to
+look at and climb.  Once a player uses the "climb" command correctly, however,
+the rope will be taken out of the room.  If a player tries to look at the rope,
+they will get the default message as if you had never had "rope" in the items.
+In addition, if the player tries to climb the rope which does not exist now,
+the player will be informaed that there is no rope in the room.  
+
+But some items change instead of disappear.  Take for instance the list of
+rooms available in the inn.  You would not put "list" in the list of items
+in set_items() with a static description.  You would instead use a function
+which tests which rooms are available and return descriptions based on
+room availability.  Instead of a string, you therefore use a function
+for the description:
+      set_items( ([ "list": (: this_object(), "look_at_list" :) ]) );
+When the player types "look at list" or "examine list", the driver will
+call the function look_at_list(), which might be defined like this:
+
+*****
+
+string look_at_list(string str) {    /* str will = "list" */
+    if(full) return "The list says that there are no rooms available.";
+    else return "The list says that there are plenty of rooms free.";
+}
+
+*****
+
+In this function, it is assumed that you have declared an integer variable 
+called full that is 1 when no rooms are available and 0 when there are rooms
+the player can rent. Similar to the way set_items() allows functions, add_item()
+also does, and remove_item() will remove those items as well.
+
+*******************************************************************************
+
+Part 5: Manipulating exits
+-----------------------------
+
+The set_exits() command has add_ and remove_ counterparts similar to those
+described above for item descriptions in part 4. For example:
+
+inherit "std/room";
+
+int blocked;
+
+void init() {
+    ::init();
+    add_action("kick", "kick");
+}
+
+void create() {
+    ::create();
+    set_property("light", 1);
+    set_property("indoors", 1);
+    set("short","A room with a table");
+    set("long","You are in a huge empty room with a table in it.");
+    set_items( ([ "room":"It is huge.", 
+      "table" : (: this_object(), "table" :) ]) );
+    set_exits( ([ "south": "/d/standard/room3" ]) );
+}
+
+void reset() {
+    ::reset();
+    add_exit("/d/standard/room1", "north");
+    blocked = 0;
+}
+
+int kick(string str) {
+    if(!str || str != "table") {
+	notify_fail("Kick what?\n");
+	return 0;
+    }
+    write("You kick the table across the room, and it blocks the north exit.");
+    say(this_player()->query_cap_name()+" kicks the table to block the exit.", this_player());
+    remove_exit("north");
+    blocked = 1;
+    return 1;
+}
+
+string table(string str) {
+    if(blocked) return "It is blocking the north exit.";
+    else return "It is in the middle of the room.";
+}
+
+*****
+
+Hopefully, this example will demonstrate to you everything we have so far
+gone over.  But there is more to exits that adding or removing them.  Sometimes
+you may want to call a function before or after the player leaves the room. 
+You might even want to prevent the player from leaving.  These are the
+functions which allow you to do so:
+
+set_pre_exit_functions( ({"north" }), ({"go_north"}) );
+set_post_exit_functions( ({ "south" }), ({ "go_south" }) );
+add_pre_exit_function( "north", "go_north" );
+add_post_exit_function("south", "go_south");
+remove_pre_exit_function("north");
+remove_post_exit_function("south");
+
+When you set a pre_exit_function for a given direction, that function gets
+called any time a player tries to go in that direction before they go that
+way.  In the following case:
+
+set_pre_exit_functions( ({"north"}), ({"go_north"}) );
+
+The function go_north() is called when the player types "north".
+You define go_north() in your room, and return 1 if the player may proceed to
+the exit set for north in set_exits, or you return 0 if the player is not
+allowed to leave. For example:
+
+*****
+
+int go_north() {
+    if(present("ogre")) {
+	write("The ogre blocks your way!");
+	return 0;
+    }
+    else return 1;
+}
+
+*****
+
+In this example, if the ogre is in the room, the player cannot proceed to
+the exit to the north.  But if the player has killed the ogre, then the 
+player may indeed go to the north exit.  The remove_ and add_ functions
+work as the remove_ and add_ for the items.
+
+There are two differences between pre_exit_functions and post_exit_functions.
+1) The pre_ ones get called before the player leaves the room and the _post
+	ones get called after the player has left the room.
+2) The pre_ ones are type int and return a 1 or 0.  The post ones are type
+	void and return no value, since the player has already left the room.
+
+The last functions involving the exits are:
+
+set_invis_exits( ({"north", "south"}) );
+add_invis_exit("east");
+remove_invis_exit("north");
+skip_obvious();
+
+These functions simply leave the exits out of the list of obvious exits.
+For instance, the following:
+        set_exits((["north":"/d/standard/room1","south":"/d/standard/room2"]));
+Will have the following description printed at the end of the long description:
+	There are two obvious exits: north and south.
+But maybe you want the south exit not listed, but you still want it to exist
+without going through all of the trouble of an add_action().  You would do this
+	set_invis_exits( ({"south"}) );
+And the long description would say instead at the end:
+	There is one obvious exit: north.
+
+Finally, the function skip_obvious() simply has the room description
+omit all obvious exits.
+
+******************************************************************************
+
+Part 6: Senses
+-------------------
+
+There are several default commands that are added automatically to every
+room by the file /std/room.  Among them are all normal direction commands
+and the command "search".  You change some tof the functions when you 
+set_exits, so that instead of getting "You can't go that way." you get
+moved to the exit.  The default setting for search is "You find nothing
+special.\n".  But this too, you can change with the following
+
+set_search("item", "string");
+set_search("item", (: object, string :) );
+
+This makes it possible for a player to search a particular item and for
+something to happen.  If you just want whatever to happen when "search" alone
+is typed, you replace "item" with "default".
+
+The second example has you passing as a second argument a function.
+This allows you to call a function by the name represented by the
+string in the object named.  Thus:
+set_search("default", (: this_object(), "search_default" :));
+will call the function search_default() in your room so that you 
+can define what happens in better detail  rather than simply print
+a string.
+
+set_smell("default", "The odors of the sea fill the air.");
+set_smell("cat", (: this_object(), "smell_cat" :));
+set_listen("cat", "You hear the purring of the sweet kitty.");
+set_listen("default", (: this_object(), "default_listen" :) );
+
+Notice that set_smell() and set_listen() are used much like set_search().
+There are a couple of interesting properties about set_smell() and
+set_listen() however:
+
+1) default listens and smells automatically show up when a player looks or
+enters a room... This allows for a description for an environment even though
+the room may be dark or something.  It is recommended that ALL rooms make use
+of default smells and sounds.
+
+2) The user defined functions return a string to be printed.  This for
+"smell_cat" and "default_listen" above, you would create in your room
+the functions:
+string smell_cat(string str);     string default_listen(string str);
+
+The parameter being passed, str, is whatever the person is smelling or
+listening to.  This can allow you to define multiple smells and listens
+to use one function.  But that is a bit advanced.  Here is a minimal
+example of a properly defined smell_cat() function:
+
+In create():
+    set_smell("cat", "smell_cat");
+
+Then somewhere you define:
+string smell_cat(string str) {
+    if((string)this_player()->query_race() == "klingon")
+      return "You smell fear in the pathetic human companion.";
+    else return "You smell the contentment in the cute feline.";
+}
+
+*****************************************************************************
+
+Part 7: Adding objects
+-----------------------------------
+
+There are two ways to put things in a room.  You can simply code a ready
+made object, like the ogre shown above in the part on the reset function, or
+you can take a generic file and tailor it to your individual needs.  At
+any rate, when you do this depends upon when you want the object to go into
+the room.  Do you want it to regenerate every reset?  Or do you want it to
+be put in the room only when the player searches the room for something?
+
+Most of the time, you will do it at reset.  How to do a ready-made monster
+was already described above in the section on reset().  Doing any ready
+made object is just like that.  
+
+*****
+
+void reset() {
+    object mon;
+
+  ::reset();
+  if(!present("ogre")) {
+    mon = new("std/monster");
+    mon->set_name("ogre");
+    mon->set_level(5);
+    mon->set("short", "An ogre");
+    mon->set("long", "An ugly ogre.\n");
+    mon->set_race("ogre");
+    mon->set_alignment(-300);
+    mon->set_hp(100);
+    mon->set_humanoid();
+    mon->set_aggressive(10);
+    mon->move(this_object());
+  }
+}
+                    
+******************************************************************************
+
+Part 8: Using light
+--------------------
+
+Since the addition of a Nightmare clock, we now have daytime and nighttime.
+So, now you have to declare that a room is an indoor room if you want it not
+to get dark at night.  But, you can also use a few functions to give a room
+different long descriptions when it is day or night.  These are:
+
+set("day long", "It's bright and sunshiny.\n");
+set("night long", "It's dark and spooky.\n");
+set_property("indoors", 1);  /* indoors */
+set_property("indoors", 0);  /* outdoors */
+
+You can use these to make a better room.  Here are two nicer create() functions
+using the new calls.
+
+void create() {
+   ::create();
+   set_property("indoors", 1);
+   set_property("light", 2);
+   set("long", "This is a very nice sitting room.  There is a couch on the "
+       "north wall that has a nice view out the huge window on the south "
+       "wall.");
+   set("day long", "The sun is streaming in the huge window on the south "
+       "wall, bathing the couch across from it in warm sun beams.");
+...
+}
+
+void create() {
+    ::create();
+   set_property("indoors", 0);
+   set_property("light", 2);
+   set("long", "Two paths diverge here around a large oak that looks like a "
+       "great tree to nap under. ");
+   set("night long", "The twist of dark branches of this massive oak tree "
+       "guard the two paths that stretch into the blackness. ");  
+...
+}
+
+As you can see, these can make a boring rooms much more interesting.  Remember
+the value of descriptive language in the mud.  Since there are no pictures, try
+to make your language paint a picture.
+******************************************************************************
+
+Part 9: Random Monster Encounters
+---------------------------------
+
+Kai@Shadowgate has added a random monster function to the rooms.
+
+do_random_encounters(({string monsterfile,...}),int percentage,
+			int max_num_of_monsters);
+The <monsterfile> is the complete path and filename of the monster file's.
+It is an array of strings.
+The <percentage> is a number between 1 and 99. This will set the chance 
+of an encounter.
+The <max_num_of_monsters> is an int. This tells the fun the max number of
+monsters to add to the room.
+This fun is used in the init() function of the room. 
+An Example:
+
+void init(){
+do_random_encounters(({"/d/shadow/mon/orc","/d/shadow/mon/orc_captian"}),80,12);
+}
+
+This will add orcs, and orc_captians to the room, 80% of the time, up to 
+a maximum of 12 monsters(mixed count).
+
+The random encounters fun has a treasure efun built into it, which will 
+add some treasure to the random monsters, dependant on the monsters level.
+The random treasure generator will add money, or items, or magic items.
+If you have items to add to the store for the generator, please contact 
+Melnmarn, for approval and implementation.
+
+This is a real nice efun, it enables you to have monsters in you area's, 
+that are constantly changing in numbers and treasure. This will make 
+area's more challanging, and interesting.
+
+You are encouraged to use this efun. 
+
+***************************************************************************
+
+Part 10: Climbing and Descending
+-------------------------------
+
+I have added an efun for climbing walls/cliffs as well as descending them.
+Using the PHB standards, this efun allows 2 additional exits to rooms.
+These exits are 'climb' and 'descend'. Climb is for upward movement, using 
+walls, cracks, crevices, ropes and tools, other than ladders and staircases.
+Descend is for downward movement using the same devices as climb. 
+All users can use these exits, although non-thiefs need climbing tools.
+
+Syntax:  set_climb_exits(([
+    string direction:({string path,int difficulty,int damage,int distance})
+	]))
+IE:
+	set_climb_exits(([
+		"climb":({"d/shadow/room/shaft",3,6,300}),
+		"descend":({"d/shadow/room/pit",5,18,100}),
+	]));
+
+Ok, first we have the verb, 'climb' or 'descend'. Then we have a mixed
+array with:
+1st: the path the exit leads to.
+2nd: the difficulty level of the object being climbed.
+3rd: extra damage done if the player falls, due to spikes, etc..
+4th: the distance of the climb. 
+
+The path is self explainitory. 
+The difficulty has 7 levels.
+     easiest		1:  rope and wall
+	|		2:  abundant handholds / tree with limbs / rope, no wall.
+	|		3:  sloped outward / not quite straight up
+	|		4:  normal wall / straight up
+	|		5:  slightly slippery / loose rocky walls
+	|		6:  slipperly / crumbling walls
+ nearly impossible	7:  icey
+
+The Extra Damage is for damage inflicted on a fall, that is over and 
+above the damage from the fall, hitting the floor. For example, if there are
+spikes at the bottom of the fall, they will do extra damage to the player
+who falls on them. A player will suffer 1d6 damage for every 100 feet they
+fall, plus damage due to spikes or what erev obstical you have them land on.
+The number you put here is the size of dice that will be rolled. IE set to
+8, it will roll an extra 1d8 of damage for the player.
+Players can be killed, from falling.
+
+And lastly, the Distance. This is the distance from the top of the wall
+to the bottom. it should be in 100 feet increments. so anything below 100
+feet will be put as 100 feet. For every 100 feet, the player is checked
+for successfully climbing/descending that section. If they fail, but don't 
+fall off, they will climb/descend back to the place they started. However,
+if they fall, they will suffer 1d6 damage for every 100 feet they 
+successfully climbed to that point, where they fell. 
+For example, if a player is scaling up a 600 foot cliff, makes it 400 
+feet before slipping and falling, they will fall 400 feet and suffer 4d6 
+damage.
+
+-----------
+
+set_fall_desc(string desctiption);
+
+This will set your description, which will be called whenever the player 
+falls. Good for those spiked floors, so you can describe the reason for 
+all the damage, they receive.
+
+
+
+			Melnmarn
+--------------------------------------
+
+And that is all there is to room building!  Now you can do anything necessary
+to make an interesting area in conjunction of course with the proper knowledge
+of weapon, armour, and simple object building.

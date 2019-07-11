@@ -1,0 +1,61 @@
+  Welcome to the help file for the increasingly complex magistrate system.  Hopefully this will just confuse you more than you already are, and I can do what I want with the system  :)
+
+  G.
+
+
+Basically, in the new magistrate, there are many different settings that can be changed.
+The major ones are:
+  number of jurors for a case
+  what 'state' the magistrate is in (read on for more info...  race vs align)
+  the lawfulness of the magistrate
+  the goodness of the magistrate
+
+  The magistrate can be in one of two modes.  Alignment or race based.  Each mode has its influences from the other, but when in alignment mode, the magistrate cares mostly if you are good or evil.  In race mode, he cares about the color of your skin.
+
+No matter what, the following values are determined by a person's race.
+  Whether or not they can make a bounty request (accuzation)
+  What it will cost them to make an accuzation
+  What it will cost them to bribe the magistrate to 'loose' the case.
+  How many votes against them they need to be convicted
+  and the interesting one I think, is there's a race based modifier on whether or not he'd like to see you dead.
+
+  When in race mode, he doesn't care as much about stereotypes.  This is most like the old system.  He is given a value between 1 and 9 for his alignment.  Based on that value, the chance of a person being in the jury is from the following table:
+
+1: good person
+2: 2/3 chance of good, 1/3 chance of neutral, 0 chance of evil
+3: 5/9 chance of good, 1/3 chance of neutral, 1/9 chance of evil
+4: 4/9 chance of good, 1/3 chance of neutral, 2/9 chance of evil
+5: 1/3 chance of good, 1/3 chance of neutral, 1/3 chance of evil
+6: 2/9 chance of good, 1/3 chance of neutral, 4/9 chance of evil
+7: 1/9 chance of good, 1/3 chance of neutral, 5/9 chance of evil
+8: 0 chance of good, 1/3 chance of neutral, 2/3 chance of evil
+9: evil person
+
+Also mitigating circumstances in this mode is how lawful the magistrate is.  If he has a law rating of <5 (towards lawful) and the juror candidate has a law bounty, they only have no chance of getting on the jury, if he's towards chaotic (>5) then it reduces their chance to 10%.
+
+
+  In the other mode, really the only other thing that their race decide is their percent chance of being selected as a juror.  This is then modified IF they have an alignment bounty.  (the other magistrate always has the power to KNOW your alignment)
+
+Another neat feature that is already included, but the players don't know about and I want you to let trickle into the game slowly is that the magistrate can be bribed.
+  The bribery process is actually interesting, kinda interactive, and based on the magistrates lawfullness.
+  The command when at the magistrate is 'bribe magistrate with X gold'  but the consequences can be fun :)
+
+
+Default values:
+  number of jurors: 8
+  state:  alignment based
+  lawfulness:  5
+  goodness:  5
+  can make accuzation:  yes
+  cost to make accuzation:  1000
+  cost to bribe:  10000   (this is interactive and random)
+  votes needed to convict:  4
+  death modifier:  0
+  % chance to be juror in race mode:  100
+  List of races:
+    Beastman, Bugbear, Drow, Dwarf, Elf, Half-Drow, Half-Elf, Firbolg, Gnoll, Gnome, Goblin, Halfling, Hobgoblin, Human, Kobold, Ogre, Half-Ogre, Ogre-Mage, Orc, Half-irc, Voadkyn, Wemic, Unborn (default for people that don't reply...  magistrate doesn't like these people)
+
+
+If this doesn't make any sense, sorry.  I'll try to work on it if you need it.
+
+G.

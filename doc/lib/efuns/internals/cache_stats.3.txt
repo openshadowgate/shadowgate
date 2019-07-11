@@ -1,0 +1,24 @@
+cache_stats(3)               LPC Library Functions              cache_stats(3)
+
+
+
+[1mNAME[0m
+       cache_stats() - report various driver and mudlib statistics
+
+
+[1mSYNOPSIS[0m
+       void cache_stats( void );
+
+
+[1mDESCRIPTION[0m
+       This  efun  is only available if CACHE_STATS is defined in options.h at
+       driver build time.  This efun  dumps  statistics  on  the  call_other()
+       cache hit rate to the caller's screen.
+
+
+[1mSEE ALSO[0m
+       opcprof(3), mud_status(3)
+
+
+
+MudOS                             5 Sep 1994                    cache_stats(3)

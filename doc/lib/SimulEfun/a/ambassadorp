@@ -1,0 +1,17 @@
+Nightmare IV SimulEfin: ambassadorp()
+
+int ambassadorp(object);
+
+DESCRIPTION
+Checks to see if an object is a member of the mud's ambassador group.
+Be careful about placing people in the ambassador group, as
+ambassador priveledges override all others.  The purpose for this
+is to restrict the trouble an ambassador could possibly cause.
+Thus if someone is in the arch group and the ambassador group,
+their ambassador priveledges will override.
+
+LOCATION
+/adm/simul_efun/pointers.c
+
+SEE ALSO
+adminp(), high_mortalp(), wizardp()

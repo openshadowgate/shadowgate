@@ -1,0 +1,64 @@
+Climates, used in set_climate();
+
+Climates
+
+arctic                  temperate 
+tropical                mountain
+desert
+
+Travel means, used in set_travel();
+These can be indoor or outdoor
+
+Type                    Stamina drain
+
+PAVED_ROAD                  10
+DIRT_ROAD                   30
+BACK_ALLEY                  20
+RUTTED_TRACK                30
+FOOT_PATH                   20
+GAME_TRACK                  40
+FRESH_BLAZE                 50
+SLICK_FLOOR                 10
+DECAYED_FLOOR               20
+STAIRWAY                    40
+RUBBLE                      80
+LEDGE                       50
+
+
+Terrain types, used in set_terrain();
+
+Outside                 Inside
+
+HEAVY_FOREST            CITY
+LIGHT_FOREST            VILLAGE
+JUNGLE                  CEMETERY
+DENSE_JUNGLE            GARDEN
+SCRUB_LANDS             STONE_BUILDING
+GRASSLANDS              WOOD_BUILDING
+HILLS                   HUT
+SAVANNAH                NAT_CAVE
+DESERT                  BUILT_CAVE
+DESERT_DUNES            BUILT_TUNNEL
+DESERT_ROCKS            NAT_TUNNEL
+ROCKY                   BRANCHES
+HILLS                   SHALLOW_WATER
+OLD_MOUNTS              DEEP_WATER
+NEW_MOUNTS              RUINS
+SWAMP
+MARSH
+SNOW
+ICE
+SHALLOW_WATER
+DEEP_WATER
+CITY
+VILLAGE
+CEMETERY
+GARDEN
+BEACH
+SHORE
+BARREN
+GLACIER
+MEADOWLANDS
+BRANCHES
+RUINS
+BOATS

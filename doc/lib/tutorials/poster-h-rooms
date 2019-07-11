@@ -1,0 +1,19 @@
+H)  Rooms
+---------
+1) Room exits - remove .c extensions, they break lpeer and ranged weapons
+
+2) use set_door_description("door id", "description") 
+	- doors described in set_items() will be ignored
+	- look door (or gate or whatever) to confirm
+
+3) Door names (red door, shop door) must be the same on both sides
+	- if they aren't, the open/closed status won't stay in sync
+
+4) Use CROOM or CVAULT to control respawning of wandering mobs
+	- especially note randomness and set_repop abilities
+
+5) Use do_random_encounters sparingly, it's too hack and slashable
+
+6) If you want to use street lights, use or at least inherit the /d/common/obj/street_light that T re-coded for Shadow, also see set("night light", int) mentioned in the properties poster
+
+7) If you have a trap that does damage and then does a move player to get them to another room, be sure to check for death first.  If they are dead, do NOT move them because you'll yank them out of the death sequence.

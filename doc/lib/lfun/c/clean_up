@@ -1,0 +1,26 @@
+Nightmare mudlib lfun: clean_up()
+
+void clean_up();
+
+This function is automatically called if it exists in an object and has not
+had any functions in it called for a certain amount of time.  You can also
+have this function as an int and return 1.  If void or returning 0, then
+clean_up() will only get called once (it should be destructed that once).
+However, if there are conditions under which you want the object to 
+destruct, then you might want it to return 1 for when it does not destruct.
+If clean_up() returns a 1, then it is set up to be called in the future if
+it again goes a long time without being used.
+This function exists to clear memory out of objects which simply are not
+being used.  All objects inheriting /std/move.c in the Nightmare mudlib
+(this would be Object.c, bag_logic.c, weapon.c, room.c, armour.c, and just
+about any other mudlib object), have a predefined clean_up() which checks
+to see if the creator has not disabled the clean_up().  To make your object
+not clean up, use:
+
+set_no_clean(1);
+
+This should only be used for objects which can mess up things
+by being cleaned.
+
+The mud administrator defines the time until clean_up() is called in the mud
+config file.

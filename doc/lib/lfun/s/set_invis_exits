@@ -1,0 +1,8 @@
+Nightmare mudlib room lfun: set_invis_exits()
+
+void set_invis_exits(string *dirs)
+
+Makes all of the exits activated by the verbs in the array "dirs" invisible.
+
+See also: add_invis_exit(), invis_exit(), remove_invis_exit()
+Defined in /std/room/exits.c

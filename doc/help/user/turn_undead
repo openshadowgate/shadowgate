@@ -1,0 +1,9 @@
+
+Turn undead is an ability useable by clerics and paladins only.
+By using the command "turn undead" you attempt to destroy all the undead
+monsters that are in the room with you. The ability can only be used once
+per monster and you will not get experience for turning them as you would
+have for killing them. Some undead are immune to this, others merely have
+degrees of resistance that are based on their level and yours, and whatever
+other natural resistances they might have.
+

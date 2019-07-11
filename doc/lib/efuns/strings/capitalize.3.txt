@@ -1,0 +1,23 @@
+capitalize(3)                LPC Library Functions               capitalize(3)
+
+
+
+[1mNAME[0m
+       capitalize() - capitalize a string
+
+
+[1mSYNOPSIS[0m
+       string capitalize( string str );
+
+
+[1mDESCRIPTION[0m
+       Convert  the first character in <str> to upper case, and return the new
+       string.
+
+
+[1mSEE ALSO[0m
+       lower_case(3)
+
+
+
+MudOS                             5 Sep 1994                     capitalize(3)

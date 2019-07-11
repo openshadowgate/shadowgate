@@ -1,0 +1,90 @@
+The database system that has been implemented on ShadowGate consists
+of 2 parts. The NPC part and the storage database (or script) part.
+
+
+NPC:
+The /std/npc.c is the generic NPC. There are 11 new functions in it.
+
+void set_interact();   mark the NPC being interacting with others
+void set_interact_invis(int x);   allow the NPC to interact with
+                                  invisible people
+int query_interact_invis();   check if interacting with invis allowed
+void reset_interact();   mark the NPC as in ready state
+int query_interact();   check if the NPC is currently interacting
+void set_need_addressed(int x);   NPC must be addressed to trigger a
+                                  responce, can use any id to address
+int query_need_addressed();   check if NPC needs to be addressed
+void set_db(string db);   specify a database other than standard one
+void set_random_act_chance(int chance);   set the chance of random
+                                          action occurance out of 1000
+void set_random_act_db(string db);   set the random action database
+void remove_std_db();   causes the NPC not to use the standard set
+
+The file extensions are not needed. For example, set_db("crier"); is
+enough and set_db("crier.db") or set_db("/d/db/crier.db") will not work.
+All NPCs use the standard set database unless remove_std_db(); has been
+executed. You can add one extra normal type database and one extra
+random action type database to it by using the above mentioned functions.
+
+
+Database:
+-Structure:
+The databases are dividied into 2 major groups. The normal type and
+the random action type. All normal type databases consist of a set
+of 2 files. For example, "std.dbh" and "std.db" are the standard set.
+The random action type database has only one file. For example, the
+Town crier uses "crierrandom.db".
+The .dbh file contains all the keywords that will trigger a series
+of actions that is stored in the .db file of the same name. They are
+using a one-to-one correspondent logic. That is, line 1 of std.dbh
+is the keyword with its actual content stored in line 1 of the std.db
+file.
+The random action type database uses the same format as of the .db
+files of normal type, because no keyword is necessary to trigger the
+event.
+All database files are stored in /d/db/ directory.
+
+-Format:
+All .dbh files contain short lines each at most a few words long. They
+are the keywords. An sample .dbh here,
+shadow
+dagger
+daggerdale
+tharis
+
+All .db files contain long lines that is in the form of this,
+element 1+element 2+element 3+element 4+......
+Elements can be empty or lead by one of the referring symbols following,
+@ command (soul command or other available commands) directed at the
+  character who spoke the keyword
+& command (soul command or other available commands) directed at no one
+# whisper command directed at the character who spoke the keyword
+$ emote command
+^ yell command
+Note: There must be NO SPACE after the symbols. IE '& grin' will not work.
+An empty element represents a 2-second long pausing in the script.
+Elements not lead by a referring symbol is plainly content to be said.
+For the random action .db files, @ and # will pick a random character
+from the same room that is either a player or a townsman. A sample
+.db here,
+Shadow is the center of ShadowGate+It is the most visited place in the realms.
+Dagger is to the north of Shadow city+You need to go pass the toll booth
+Daggerdale is the oldest and perhaps the largest city in dagger realm+&smile
+Tharis is not just the city+The surrounding areas are also called Tharis, including Tharis forest+#Don't go to the sewer, you will die!+&shudder
+
+
+Summary:
+Basically all NPCs will use at least 2 database files, the std.db and
+the std.dbh pair unless the function remove_std_db() has been executed.
+They can use an extra pair of normal type database files which directs
+the uniqueness of the NPC. Also the random action database file which
+directs what random non-triggered action the NPC will perform.
+
+It is also possible to mask a keyword that exists in the standard database
+the "std" file pair. Setting up the same keyword in the extra database
+will have the effect of overriding the standard one.
+
+One can be very creative and use two NPCs making up a really interesting
+conversation.
+
+See also: eddb

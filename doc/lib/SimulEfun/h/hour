@@ -1,0 +1,11 @@
+Nightmare Mudlib 3.2 simul_efun: hour()
+
+int hour(int when);
+
+DESCRIPTION
+Returns the hour between 0 and 19 for the hour of the day in NM time.
+To find out the current hour, use hour(time());
+
+SEE ALSO
+date(), month(), year(), day(), time(), season(), ctime(), minutes()
+query_night()

@@ -1,0 +1,30 @@
+set_bit(3)                   LPC Library Functions                  set_bit(3)
+
+
+
+[1mNAME[0m
+       set_bit() - set a bit in a bitstring
+
+
+[1mSYNOPSIS[0m
+       string set_bit( string str, int n );
+
+
+[1mDESCRIPTION[0m
+       Return  the  new string where bit 'n' is set in string 'str'. Note that
+       the old string 'str' is not modified.
+
+       The max value of 'n' is limited. Ask the administrator if you  want  to
+       now the maximum value.
+
+       The new string will automatically be extended if needed.
+
+       Bits are packed 6 per byte in printable strings.
+
+
+[1mSEE ALSO[0m
+       clear_bit(3), test_bit(3)
+
+
+
+MudOS                             5 Sep 1994                        set_bit(3)

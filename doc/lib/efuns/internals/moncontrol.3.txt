@@ -1,0 +1,26 @@
+moncontrol(3)                LPC Library Functions               moncontrol(3)
+
+
+
+[1mNAME[0m
+       moncontrol() - turns on/off profiling during execution
+
+
+[1mSYNOPSIS[0m
+       void moncontrol( int on );
+
+
+[1mDESCRIPTION[0m
+       If passed 1, moncontrol() enables profiling.  If passed 0, moncontrol()
+       disables profiling.  It can be called many times during execution, typ‐
+       ical use is to profile only certain parts of driver execution.  moncon‐
+       trol() has no effect if profiling is  not  enabled  at  driver  compile
+       time.
+
+
+[1mSEE ALSO[0m
+       opcprof(3), function_profile(3)
+
+
+
+MudOS                             5 Sep 1994                     moncontrol(3)

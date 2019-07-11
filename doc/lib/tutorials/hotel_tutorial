@@ -1,0 +1,74 @@
+		A tutorial specifically for the hotel object.
+
+A sample hotel:
+
+inherit HOTEL;
+
+void create() {
+    ::create();
+    set_property( "light" , 1); 
+    set_property("indoors" , 1);
+    set_short("Home.");
+    set_long(
+	"The Hotel."
+      );
+    set_exits( ([
+	"south":"/d/shadow/room/city/eastgate"
+             ]) );
+    set_rooms(([
+	"single":1,
+	"double":2,
+	"triple":3,
+	"quad":4,
+	]));
+    set_cost(10);
+}
+
+As you can see, most of it is a basic room. For info on the basic rooms,
+read the room_tutorial. This will only cover the hotel aspect of the room.
+
+Now, you may have noticed, there are only 3 differences from a standard room.
+First, the inherit statement inherits the HOTEL object. This object 
+includes the room object, with the hotel functions added.
+
+The other difference is the set_rooms() efun.
+    set_rooms(([
+	"single":1,
+	"double":2,
+	"triple":3,
+	"quad":4,
+	]));
+
+void set_rooms(mapping rooms)
+The first part is the room name, as it will appear in the registar.
+keep this name to 12 letters, or it will mess up the registar display.
+The second is the number of beds in the room, Max is 5 beds to a room.
+
+The last is the set_cost efun:
+void set_cost(int cost)
+This will set the cost of a single bed in a room with the maximum of
+5 beds. For example: With set_cost(10);
+Rooms with:
+1  bed will cost 50 per bed.
+2 beds will cost 25 per bed.
+3 beds will cost 16 per bed.
+4 beds will cost 12 per bed.
+5 beds will cost 10 per bed.
+
+This will add 4 add_actions to the room. read, rent, cost, and help. 
+Rent allows the players to rent a room in the hotel, and automatically
+logs them off of the mud. 
+Read lets them see a sorted(by # of beds) list of the rooms, with the bed 
+occupants.
+Cost shows them a pricelist of the beds by room name, sorted by cost.
+Help <hotel> will give the players help for the hotel.
+
+It is recommended that you put something like:
+<Help hotel> for a list of commands.
+in your hotel description.
+
+Well, that's it. The hotel object will handle logging the players off, 
+removing them from the registar when they log back on, and all the other
+little and complex things..
+
+

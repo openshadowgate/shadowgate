@@ -1,0 +1,143 @@
+Modified by Melnmarn on the 20th of January 1995
+Modified by Vetri 29 August 1999
+--------------------------------------------------------------
+
+These are the things you MUST do in building weapons:
+
+inherit "/std/weapon.c"; or inherit WEAPON;
+
+::create();
+       Make sure you call this always first thing in the function create().
+
+set_name("knife");
+	This gives the weapon a name, how it will often be referred to in the
+	game as far as messages to mortals are concened.
+
+set_id(({ "knife", "butter knife" }));
+	This gives the weapon a means of being referred to.  The basic
+	difference between name and id is between output and input.  The game
+	makes references to objects using name, player reference objects using
+	ids.
+
+set_short("silver butter knife");
+	This is the short description of the weapon. This is what you see in
+        inventory or on the ground.
+
+set_long("This is a nice knife that looks ready to slice into some butter!");
+	This is what players see when they look at the item.
+
+set_type("magepiercing");
+	Weapons have many different types. This restricts the player class that
+        is allowed to use the weapon.
+        See <help weapon types> for currently valid types and restriction. 
+
+set_prof_type("small blades");
+        This sets the type of profiency needed to use this weapon effectively. 
+        See <help profs> to get the current types available and see guidelines
+        for using proficiencies. 
+        
+set_weight(20);
+	Sets how much the sword weighs.
+
+set_value(300);
+	Sets the value of the item in gold.  Conversion to other currencies is
+	done by the objects that need to convert them.
+
+set_size(1);
+        Sets the size of the weapon. A size 2 weapon can be wielded by a size 2
+        race in one hand. (1 = small, 2 = medium, 3 = large, 4 = giant)
+
+set_wc(1,2);
+        Sets the hit dice for the damage to small and medium sized creatures.
+
+set_large_wc(1,2);
+        Sets the hit dice for the damage to large sized creatures.
+
+That is all you need to do to create a simple weapon object.  
+
+*******************************************************************************
+
+However, there are many other functions for creating a more interesting weapon.
+
+Optional functions:
+-------------------
+void set_wield(string|function);
+        If you pass a function, when a player tries to wield a
+        weapon, that function will be called.  If that function returns a 1,
+        the player can wield the weapon.  If it returns 0, the wielding is
+        not allowed.
+Examples:
+set_wield("You feel the power of the butter knife!");	
+        This changes the message a player gets when wearing an item from:
+		You wield silver butter knife.
+	to:
+		You feel the power of the butter knife!
+
+set_wield((:this_object(), "wield_butter":));
+	This tells the weapon object that you have written a function called
+	wield_butter() in the object that has this line. The function may be 
+        called anything, and it must be of type int. Return 1 if the player 
+        can wield the weapon, or 0 if the player is not allowed to wield it.
+        void create() {
+            ::create();
+            ...
+            set_wield( (: this_object(), "wield_butter" :) );
+            ...
+        }
+
+        int wield_butter() {
+            if((int)this_player()->query_stats("intelligence") < 8){
+                write("You realize that this is not a good weapon.");
+                return 0;
+            }
+            else{
+                write("You feel the power of the butter knife!");
+                return 1;
+            }
+        }
+
+void set_unwield(string|function);
+        Similar to wield() except for when the weapon is unwielded.
+        *NOTE* Do not use TP - this_player() - in an unwield function because
+               something may force the player to unwield or drop the item.
+               Use ETO - environment(this_object()) - instead.
+
+set_hit(string|function)
+        Similar to set_wear(). This message appears or function is called
+        every time the weapon hits something during combat. 
+        If you pass a function, the function will be called passing the 
+        current attacker's object as an argument.  The function returns the
+        amount of extra damage to be done on the hit.
+        
+set_weapon_speed(1);
+        The weapon speed indicates how fast it is possible to maneuver the
+        weapon in combat. Smaller weapons will have lower weapon speeds. 
+        See <help weapons> for the weapon speeds of basic weapons.
+        *NOTE* Weapon speed defaults to 3 * size if none is set.
+
+add_poisoning(5)
+        This will add poison to the weapon that will poison oppenents when 
+        they are hit.
+
+set_property("magic",1);
+...
+remove_property("magic");
+        This will make the weapon's attacks considered to be magical. This 
+        means that they will go through things like stoneskin. 
+        *NOTE* It is possible to make weapons that are completely defined
+               as magic. but it is better to make only some special hit 
+               functions magic, otherwise the stoneskin spell will be almost
+               useless. Use this before do_damage calls in a special, and
+               remove the property after.
+               
+set_property("enchantment", 2);
+        This will make the weapon enchanted to +2. (This also means that it
+        has the potential to be cursed to -2.)
+        *NOTE* Very few items should be made so they can not be cursed, but
+               if this weapon is one of these, set up a while loop to make
+               sure that the enchantment is ending up positive.	
+
+****************************************************************************
+
+Type <help weapons> for more information on basic weapons.
+

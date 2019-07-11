@@ -1,0 +1,32 @@
+allocate(3)                  LPC Library Functions                 allocate(3)
+
+
+
+[1mNAME[0m
+       allocate() - allocate an array
+
+
+[1mSYNOPSIS[0m
+       varargs mixed *allocate( int size, void | mixed value );
+
+
+[1mDESCRIPTION[0m
+       Allocate  an  array of <size> elements.  The number of elements must be
+       >= 0 and not bigger than a system maximum (usually ~10000).   All  ele‐
+       ments are initialized to 0 by default.
+
+       If the optional second argument is provided, the values are initialized
+       to that argument, unless the second argument is a functional.  In  that
+       case, the functional will be evaluated for each array element, with the
+       first argument passed to the functional being the number of  the  array
+       element.
+
+       Example: allocate( 5, (: $1 + 3 :) ) => ({ 3, 4, 5, 6, 7 })
+
+
+[1mSEE ALSO[0m
+       sizeof(3), allocate_mapping(3)
+
+
+
+MudOS                             5 Sep 1994                       allocate(3)

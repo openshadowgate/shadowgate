@@ -1,0 +1,32 @@
+socket_error(3)              LPC Library Functions             socket_error(3)
+
+
+
+[1mNAME[0m
+       socket_error() - return a text description of a socket error
+
+[1mSYNOPSIS[0m
+       #include <socket_err.h>
+
+       string socket_error( int error );
+
+
+[1mDESCRIPTION[0m
+       socket_error()  returns  a  string  describing  the  error signified by
+       error.
+
+
+[1mRETURN VALUES[0m
+       socket_error() returns:
+
+              a string describing the error on success.
+
+              "socket_error: invalid error number" on bad input.
+
+
+[1mSEE ALSO[0m
+       socket_create(3), socket_connect(3)
+
+
+
+MudOS                             5 Sep 1994                   socket_error(3)

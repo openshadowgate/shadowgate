@@ -1,0 +1,30 @@
+//	Truce
+//	Thorn@Shadowgate
+//	10/5/94
+//	Wizard commands
+//	_truce.c
+
+#include <std.h>
+
+inherit DAEMON;
+
+
+int cmd_truce(string str) {
+    object *inv;
+    int faith, i;
+
+if(!wizardp(previous_object())) return 0;
+    write("You enforce a truce.\n");
+    say(this_player()->query_cap_name()+" raises "+this_player()->query_possessive()+" hands to the sky and compels a truce.\n", this_player());
+    inv = all_inventory(environment(this_player()));
+    for(i=0; i<sizeof(inv); i++) {
+        if(!living(inv[i])) continue;
+        inv[i]->cease_all_attacks();
+    }
+    return 1;
+}
+
+void help() {
+    write("Syntax: <truce>\n\n"+
+        "This command causes all fighting to cease in an area.\n");
+}

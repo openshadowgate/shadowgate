@@ -1,0 +1,22 @@
+Nightmare IV SimulEfun: arrange_string()
+
+string arrange_string(string, int);
+
+DESCRIPTION
+The second argument to this SimulEfun is a string length to which a string
+should be arranged.  If the first argument is longer than the specified
+length, then all remaining characters are chopped off.  If it is shorter,
+then the remaining characters will be filled with spaces.
+
+EXAMPLES
+arrange_string("This is a long string.", 7) returns "This is"
+arrange_string("short", 15) returns "short          "
+
+NOTE
+This function strips colours!
+
+LOCATION
+/adm/simul_efun/arrange_string.c
+
+SEE ALSO
+format_page(), sprintf(), wrap()

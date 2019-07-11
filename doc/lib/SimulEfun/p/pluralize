@@ -1,0 +1,20 @@
+Nightmare IV SimulEfun: pluralize()
+
+string pluralize(mixed)
+
+DESCRIPTION
+When a string is passed, it returns the plural form of the string.
+When an object is passed, it returns the value of query_plural_name()
+if that object has a plural name, or it returns the plural form
+of its name as returns by query_name()
+
+EXAMPLES
+pluralize("frog") returns "frogs"
+pluralize("moose") returns "moose"
+pluralize("a globe of frogs") returns "globes of frogs"
+
+LOCATION
+/adm/simul_efun/pluralize.c
+
+SEE ALSO
+consolidate(), ordinal()

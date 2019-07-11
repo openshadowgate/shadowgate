@@ -1,0 +1,30 @@
+J - Help info
+=============
+
+Required reading:    <help guidelines>     <help imm-rules>
+
+Some useful files
+-----------------
+/doc/help/creator/evals - now in <help evals>
+   handy evals for your wiz char or PC fixes
+   easier to read using <more filename> until help starts translating color codes
+   NOTE:  Be very careful with evals as a mistyped string for something like race might break you and the mud
+
+/doc/help/creator/coding_cliffnotes - now in <help coding_cliffnotes>
+   various bits of info to get new wizzes started and some to have handy later
+   easier to read using <more filename> until help starts translating color codes
+
+/doc/help/tutorials/...
+   directory of tutorials on various topics
+   note:  many are out of date so the posters are important supplemental reading
+
+/doc/help/creator/....
+   will show up in your *creator general group in help
+   also review avatar commands 
+   NOTE:  remember that apprentices and builders are restricted from contact with players as well as using commands to gain information about players, PCs, or their activities
+
+/doc/help/creator/mud.help
+   Written by Killeshandra
+   Very helpful on basics like unix cmds and general coding concepts
+   A lot of detailed explanations and examples of specific functions and programming concepts that are important to understand as you get started
+   Also good to review as your knowledge and understanding increase

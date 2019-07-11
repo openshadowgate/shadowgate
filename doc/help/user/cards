@@ -1,0 +1,9 @@
+
+The deck of cards is meant to be exactly that, a deck of 52 standard cards.
+You can:
+deal to <name>
+add card (to return to the deck)
+shuffle
+flip a card that is on the ground allowing it to be seen, or hidden
+view hand
+reveal hand

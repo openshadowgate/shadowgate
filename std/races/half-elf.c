@@ -1,0 +1,173 @@
+// Bonuses in lib: +2 vs charm spells, sleep immunity. See /std/magic/spell.
+// added tiefling to the template to support Niccoli on the half-elf race. N, 3/11.
+#include <std.h>
+inherit DAEMON;
+
+void create() { ::create(); }
+
+// age at which each age cat starts: normal, middle, old, venerable
+int *age_brackets() { return ({ 18, 45, 60, 90 }); }
+
+int *restricted_alignments(string subrace) {
+    if(!subrace || subrace == "") return ({});
+    switch(subrace) {
+      case "tiefling": return ({ 1, 4, 7 }); break;
+      default: return ({}); break;
+    }
+}
+
+string *restricted_classes(string subrace) { return ({ "cavalier", "paladin" }); }
+
+string *restricted_deities(string subrace) { return ({}); }
+
+int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
+    if(!subrace || subrace == "") return ({ 0, 0, 0, 0, 0, 0 });
+    switch(subrace) {
+      case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
+      default: return ({ 0, 0, 0, 0, 0, 0 }); break;
+    }
+}
+
+mapping skill_mods(string subrace) {
+    if(!subrace || subrace == "") return ([ "influence" : 2 ]);
+    switch(subrace) {
+      case "tiefling": return ([ "stealth" : 2, "disguise" : 2 ]); break;
+      default: return ([ "influence" : 2 ]); break;
+    }
+}
+
+int level_adjustment(string subrace) {
+    if(!subrace || subrace == "") return 0;
+    switch(subrace) {
+      case "tiefling": return 1; break;
+      default: return 0; break;
+    }
+}
+
+int natural_AC(string subrace) { return 0; }
+
+int sight_bonus(string subrace) {
+    if(!subrace || subrace == "") return 1;
+    switch(subrace) {
+      case "tiefling": return 2; break;
+      default: return 1; break;
+    }
+}
+
+mapping daily_uses(string subrace) {
+    if(!subrace || subrace == "") return ([]);
+    switch(subrace) {
+      case "tiefling": return ([ "light" : 1 ]); break;
+      default: return ([]); break;
+    }
+}
+
+mapping query_racial_innate(string subrace) {
+	if(!subrace || subrace == "") return 0;
+	switch(subrace) {
+		case "tiefling": 
+				return (["light" : (["type" : "spell", "casting level" : 0.5, 
+				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
+				"refresh time" : -1, "level required" : 0, 
+				"class specific" : 0])]);
+				break;
+		default:
+			return 0;
+			break;
+	}
+	return 0;
+}
+
+int misc_bonuses(string subrace, string bonus) { return 0; }
+
+// ---------------------------------------------------------------------------------------------------
+// Below: mods prior to racial overhaul; some may still be in use in some places. -N, 10/10.
+
+// stats in order: str, dex, con, int, wis, cha
+int *min_stats() { return ({ 3, 6, 6, 4, 3, 3 }); }
+int *max_stats() { return ({ 18, 18, 18, 18, 18, 18 }); }
+int *stat_adj() { return ({ 0, 0, 0, 0, 0, 0 }); }
+
+int is_restricted() { return 0; } // restricted races by approval
+
+// Stuff needed to replace what was in the old race database
+string race_name() { return "half-elf"; }
+
+// gets used in a forumla based on con to determine actual weight
+int weight() { return 7500; }
+
+int fingers() { return 5; }
+
+string *wielding_limbs() { return ({ "right hand", "left hand" }); }
+
+mapping monster_stat_rolls() { return ([ "str" : 0, "con" : -2, "int" : -2, "wis" : -5, "dex" : 4, "cha" : 2 ]); }
+
+int size() { return 2; }
+
+string *limbs() {
+    return ({  "head",
+               "right arm",
+               "right hand",
+               "left arm",
+               "left hand",
+               "left leg",
+               "left foot",
+               "right leg",
+               "right foot",
+               "waist",
+               "neck" });
+}
+
+// minimum height for the race = base, max height for the race = base + mod
+int height_base(string gender) {
+    if(gender == "male") return 55;
+    return 53;
+}
+
+int height_mod(string gender) {
+    return 16;
+}
+
+// minimum weight for the race = base, max weight for the race = base + (modifier x height mod)
+// height mod = player height minus base height.
+int weight_base(string gender) {
+    if(gender == "male") return 100;
+    return 80;
+}
+
+int weight_mod(string gender) {
+    return 8;
+}
+
+// used by /daemon/player_d 
+mapping weight_values(string gender, int height){
+    mapping map=([]);
+    
+    map["num"]  = 3;    
+    
+    switch(gender)
+    {
+    case "male":
+        map["base"] = 110;
+        switch(height)
+        {
+        case 60..62: map["adjust"] = -18; map["die"] = 18; break;
+        case 63..68: map["adjust"] = 0;   map["die"] = 12; break;
+        case 69..72: map["adjust"] = 0;   map["die"] = 18; break;
+        case 73..75: map["adjust"] = 15;  map["die"] = 20; break;
+        default:     map["adjust"] = 0;   map["die"] = 12; break;
+        }
+    default:
+        map["base"] = 85;
+        switch(height)
+        {
+        case 58..60: map["adjust"] = -18; map["die"] = 18; break;
+        case 61..66: map["adjust"] = -5;  map["die"] = 12; break;
+        case 67..70: map["adjust"] = 0;   map["die"] = 18; break;
+        case 71..73: map["adjust"] = 10;  map["die"] = 20; break;        
+        default:     map["adjust"] = 0;   map["die"] = 12; break;            
+        }       
+    }
+    
+    return map;   
+}

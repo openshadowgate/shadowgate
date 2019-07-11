@@ -1,0 +1,52 @@
+Score		to_hit	damage	weight	max	open	bend bars/	
+		bonus	bonus	allow	press	doors	lift gates
+1		-5	-4	1	3	1	0%
+2		-3	-2	1	5	1	0%
+3		-3	-1	5	10	2	0%
+4-5		-2	-1	10	25	3	0%
+6-7		-1	None	20	55	4	0%
+8-9		None	None	35	90	5	1%
+10-11		None	None	40	115	6	2%
+12-13		None	None	45	140	7	4%
+14-15		None	None	55	170	8	7%
+16		None	+1	70	195	9	10%
+17		+1	+1	85	220	10	13%
+18		+1	+2	110	255	11	16%
+18/01-50	+1	+3	135	280	12	20%
+18/51-75	+2	+3	160	305	13	25%
+18/76-90	+2	+4	185	330	14	30%
+18/91-99	+2	+5	235	380	15(3)	35%
+18/00		+3	+6	335	480	16(6)	40%
+19		+3	+7	485	640	16(8)	50%
+20		+3	+8	535	700	17(10)	60%
+21		+4	+9	635	810	17(12)	70%
+22		+4	+10	785	970	18(14)	80%
+23		+5	+11	935	1130	18(16)	90%
+24		+6	+12	1235	1440	19(17)	95%
+25		+7	+14	1535	1750	19(18)	99%	
+
+Notes:
+
+Max Press:  The heaviest weight a character can pick up and lift over his 
+head.  A character cannot walk more than a few step this way.  No human 
+or humanoid creature without exceptional strength can lift more than 
+twice his body weight over his head.  
+
+Open Doors: Indicates the characters chance to force open a heavy or 
+stuck door.  When a character tries to force a door open, roll d20.  If 
+the result is equal to or less than the listed number, the door opens.  A 
+character can keep trying to open a door until it finally opens, but each 
+attempt takes time and makes a *lot* of noise.  Numbers in parenthesis 
+are the chances on a d20 to open a locked, barred, or magically held 
+door, but *only* one attempt can *ever* be made.  If it fails, no further 
+attempts by that character can succeed.
+
+Bend Bars/Lift Gates:  States the characters percentage chance rolled on 
+percentile dice, to bend normal, soft iron bars, lift a vertical gate 
+(portcullis), or perform a similar feat of *enormous* strength.  When a 
+character makes the attempt, roll percentile dice.  If the number is 
+equal to or less than number listed above, the character bends the bars 
+or lifts the gate.  If the attempt fails, the character can never succeed 
+at that task.  A character can however, try to bend the bars on a gate 
+that he couldn't lift, and vise versa.
+

@@ -1,0 +1,80 @@
+				Weapons 
+
+This doc will cover basic weapons on ShadowGate and their properties.
+It is intended to be used as a guideline when creating new weapons.
+You will find basic weapons in the /d/shadow/obj/weapon/*.c
+See the weapons tutorial for more details on creating a weapon.
+
+
+Abbreviations used:
+    Sizes:
+        1 small
+        2 medium
+        3 large
+        4 giant
+        
+    Types:
+        S -- slashing
+        B -- bludgeon
+        P -- piercing
+        TS - thiefslashing
+        MP - magepiercing
+        MB - magebludgeon
+
+
+Basic Weapons Statistics:
+
+--------------------- MISC WEAPONS -----------------------------
+Weapon  	cost  weight size type speed damage damage
+                                              (s/m)  (l)
+----------------------------------------------------------------
+battle axe      5gp	7     M	   S	 7     1,8   1,8
+club            0gp	3     S	   MB    4     1,6   1,3
+dagger          2gp	1     S	   MP	 2     1,4   1,3
+flail           15gp	15    M	   B	 7     1.6   2,4 
+handaxe		1gp	5     M	   TS	 4     1,6   1,4
+knife		5sp	1     S	   MP	 2     1,3   1,2
+mace		8gp	10    M	   B	 7     1,6   1,6
+morning star	10gp	12    M	   B	 7     2,4   1,6
+pick		8gp	6     M	   P	 7     1,6   2,4
+quarter staff   1gp	4     L	   MB	 4     1,6   1,6
+scourge		1gp	2     S	   TS	 5     1,4   1,2
+scythe          10gp    7     M    S     4     1,6   1,8
+sickle		6sp	3     S	   S	 4     1,4   1,4
+spear           8sp     5     M    P     6     1,6   1,8
+trident		2gp	6     M	   P	 7     1,6   3,4
+warhammer	2gp	6     M	   B	 4     1,4   1,4
+whip		1sp	2     M	   TS	 8     1,2   1,0
+
+--------------------- POLEARMS ---------------------------------
+Weapon  	cost  weight size type speed damage damage
+                                              (s/m)  (l)
+----------------------------------------------------------------
+awlpike      	5gp	12    L	   P	 13    1,6   1,12     	
+bardiche        7gp	12    L	   P	 9     2,4   2,6  
+bec_de_corbin   8gp	10    L	   S	 9     1,8   1,6	  
+bill_guisarme   7gp	15    L	   P	 10    2,4   1,10
+fauchard        5gp	7     L	   S	 8     1.6   1.8
+glaive		6gp	8     L	   S	 8     1,6   1,10
+guisarme	5gp	8     L	   S	 9     2,4   1,8
+halberd		10gp	15    L	   S	 9     1,10  2,6
+lucern_hammer	7gp	15    L	   B	 9     2,4   1,6
+military_fork	5gp	7     L	   P	 7     1,8   2,4
+partisan	10gp	8     L	   P	 9     1,6   1,6
+spetum		5gp	7     L	   P	 8     1,6   2,6
+voulge		5gp	12    L	   S	 10    2,4   2,4
+
+--------------------- SWORDS -----------------------------------
+Weapon  	cost  weight size type speed damage damage
+                                              (s/m)  (l)
+----------------------------------------------------------------
+bastard         20gp    10    M	   S	 6     1,8   1,12
+bastard_2_hand  20gp    10    L	   S	 8     2,4   2,8
+broad   	10gp	4     M	   TS	 7     2,4   1,6
+khopesh		10gp	7     M	   S	 9     2,4   1,6	
+long    	15gp	4     M	   TS	 5     1,8   1,12
+scimitar 	15gp	4     M	   TS	 5     1,8   1,8	
+short   	10gp	3     S	   TS	 3     1,6   1,8
+two_handed	50gp	15    L    S	 10    1,10  3,6
+
+

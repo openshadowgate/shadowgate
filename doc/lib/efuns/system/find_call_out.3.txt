@@ -1,0 +1,23 @@
+find_call_out(5 Sep 1994)                            find_call_out(5 Sep 1994)
+
+
+
+[1mNAME[0m
+       find_call_out() - find a call out scheduled to be called next
+
+
+[1mSYNOPSIS[0m
+       int find_call_out( string func ):
+
+
+[1mDESCRIPTION[0m
+       Find  the  first  call  out due to be executed for function 'func', and
+       return the time left. If it is not found, then return -1.
+
+
+[1mSEE ALSO[0m
+       call_out(3), remove_call_out(3), set_heart_beat(3)
+
+
+
+LPC Library Functions                MudOS           find_call_out(5 Sep 1994)

@@ -1,0 +1,97 @@
+	Basic Intro to using Sea-Faring Craft on ShadowGate
+
+The Boat
+--- ----
+
+	The basic boat object must inherit /std/sea/boat.c.
+This is just a container object that holds a number of rooms.
+These rooms are where a player can be when he is inside the boat.
+When a player gives the 'board' command when he is in a room with
+a boat in it, he will be moved into the room associated with the
+entrance.  In order to tell a boat which room is associated with
+what, you use a call to set_room.  For example,
+set_room("enter","my_room");  You also must provide a limit on
+the number of people who can enter the boat, using set_capacity().
+
+The Boat Room
+--- ---- ----
+
+	The rooms on a boat determine the functions the player
+can perform in that room.  There are a number of different types
+of rooms that a boat can have in it.
+
+/std/sea/shanty.c	For single-room boats, has the helm controls,
+                        the enter code and the exit code.
+
+/std/sea/broom.c	This is a basic room, with no helm, no enter,
+			and no exit.  Just for filler rooms.
+
+/std/sea/enter.c	This contains the enter and exit code, mainly
+			for entrance ramps and their corresponding rooms.
+
+/std/sea/helm.c		This has only the helm code, for ships with
+			helms in seperate rooms.
+
+Every boat room must have a call to set_enclosed().  If it is 1, you
+cannot see the description of the room that the boat itself is in.
+If it's 0, you have open view to the outside of the boat.
+
+The Water Room
+--- ----- ----
+
+	Thess are the rooms that boats are allowed to travel through.  
+Just inherit /std/sea/waterroom.c instead of /std/room.c and
+boats will be allowed to sail through.  There are two functions
+associated with the waterroom, set_depth() and set_turbulence().
+Neither of these variables do anything just yet, but these are
+the tables.
+
+	Depth  Description
+	-----------------------------------------------------------------
+	  0  |  All but the smallest ships will suffer hull damage.
+	  1  |  No hull damage, but possible slow progress.
+	  2  |  Typical river depth.  
+	  3  |  Typical ocean depth.
+	  4  |  Deep sea.
+	
+	Turb   Description
+	------------------------------------------------------------------
+	  0  |  No turbulence, calm waters.
+	  1  |  Little turbulence.
+	  2  |  Small whitecaps, small waves.
+	  3  |  Large waves, a little rough.
+	  4  |  Very rough, hard sailing.
+	  5  |  Storm!  Ships will suffer hull damage.
+	  6  |  Random
+
+
+The Dock Room
+--- ---- ----
+
+In order for you to launch your ship into a waterroom, you must be
+at a DOCK.  You must inherit /std/sea/dock in a room that you will
+allow ships to launch from.  Also, rooms tagged as a dock will
+be traversable by boats, as they have to land in them.  If players
+sail a boat into a dock, it will automatically dock them.  In order
+to set which room a dock launches boats into, you must set the
+launch room with a call to set_launch_room.  For example,
+set_launch_room("/d/domain/room/water1");
+
+
+
+For More Help
+--- ---- ----
+
+	You can always take a peek at the following files to see
+examples of a working ship and sets of water rooms.
+
+/d/koenig/stream/stream1.c	Example dock room.
+/d/koenig/stream/stream2-12.c	Example water rooms.
+/d/koenig/obj/canoe.c		Example single-room boat.
+/d/koenig/obj/canoeroom.c	Example boat room.
+
+	And of course, just drop me a note and I can give you more
+help.
+
+Kai@ShadowGate
+scott@jedi.net

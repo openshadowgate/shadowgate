@@ -1,0 +1,12 @@
+Nightmare mudlib living lfun: equip_armou_to_limb()
+
+string equip_armour_to_limb(object arm, string *limb)
+
+This tries to equip "arm" to the limbs in the array "limb".  It returns an
+appropriate message to be sent to the player if the equip fails.  If it
+succeeds, it returns a 0 and equips the armour properly.  This is used
+already in armour.c so most wizards probably will never have to use this
+function.
+
+See also: equip_weapon_to_limb(), add_limb()
+Defined in /std/living/body.c

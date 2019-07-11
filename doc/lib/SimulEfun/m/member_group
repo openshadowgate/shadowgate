@@ -1,0 +1,17 @@
+Nightmare IV SimulEfun: member_group()
+
+int member_group(string, string|string *);
+
+DESCRIPTION
+First argument is an euid (often the name of a creator) and the second
+argument is either a group from /adm/db/groups.db (also defined in
+/adm/include/security.h), or an array of groups.  This efun
+will return true if the euid is a member of one of the groups.
+
+EXAMPLES
+member_group("descartes", "superuser") returns 1 (at least on Nightmare :))
+member_group("hacker", ({ "arch", "superuser" })) should return 0 if security 
+    is right!
+
+LOCATION
+/adm/simul_efun/member_group.c

@@ -1,0 +1,17 @@
+Nightmare IV SimulEfun: currency_rate()
+
+float currency_rate(string);
+
+DESCRIPTION
+Returns the current exchange rate for a given currency relative to the
+value returned by "query_value()" in an object.
+
+EXAMPLES
+currency_rate("gold") might return 1.5, meaning it costs 3 gold to buy
+something which has set_value() to 2.
+
+LOCATION
+/adm/simul_efun/economy.c
+
+SEE ALSO
+currency_inflation(), currency_weight(), mud_currencies()

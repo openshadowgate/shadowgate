@@ -1,0 +1,54 @@
+%^YELLOW%^CONSTITUTION (CON)
+%^RESET%^Constitution represents your character's health and 
+stamina. A Constitution bonus increases a character's
+hit points, so the ability is important for all classes.
+
+Constitution can be broken down into:
+
+%^YELLOW%^Fitness - A character with high fitness has great 
+	%^YELLOW%^endurance and can suffer more damage than other 
+	%^YELLOW%^characters while continuing to function.
+
+%^RESET%^%^ORANGE%^Health - A character with a high health would seldom 
+	%^ORANGE%^get sick and be little affected by allergies 
+	%^ORANGE%^and other ailments.
+
+%^RESET%^You apply your character's Constitution modifier to:
+
+%^YELLOW%^* Each roll of a Hit Die (though a penalty can never drop 
+  %^YELLOW%^a result below 1-that is, a character always gains at 
+  %^YELLOW%^least 1 hit point each time he or she advances in level).
+%^RESET%^%^ORANGE%^* Stamina - Your stamina points are based off your Constitution score
+%^RESET%^
+Stat Scores
+
+1-3 %^ORANGE%^Very Unhealthy %^RESET%^- You are often sick, coughing and ravaged by 
+    	the effects of pollen, mold, and multiple allergies. Many 
+    	people speculate when you are going to die (often they think 
+    	within the next few days!)
+4-6 %^YELLOW%^Unhealthy%^RESET%^ - You were perhaps a "sickly" child that's left some 
+    	lingering effects on you as an adult. Your health is in 
+    	horrible shape. You tire often from just crossing the room, 
+    	or going up half a flight of stairs.
+7-9 %^ORANGE%^Below Average %^RESET%^- You are more prone to sickness and illness 
+    	than most people. When a cold or plague roll around, you 
+    	often have the feeling you are going to get it (and often do!)
+10-12 %^YELLOW%^Average %^RESET%^- The "standard" constitution of an adult male and female
+13-14 %^ORANGE%^Above Average%^RESET%^ - Your health is better than that of the average 
+     	person. You sometimes get sick and maybe have one or two allergies. 
+     	On a whole though, you are fairly healthy.
+15-16 %^YELLOW%^Healthy %^RESET%^- You rarely get sick, maybe once every 2 years.
+	Your fitness is at a level that it takes awhile for you get tired 
+	or exhausted.
+17 - %^ORANGE%^Durable %^RESET%^- You could count easily the number of times you've 
+	gotten sick, for you rarely do. Your fitness is a near peak level, 
+	meaning you seem to keep going, and going and going with little or 
+	no rest. You have a rather high tolerance to pain, physically.
+18 - %^YELLOW%^Hardened %^RESET%^- You can count the number of times you have been sick on 
+     	one hand (if even ever!). Your body and health is at its peak. You 
+     	seem to have a never ending supply of stamina that keeps you going 
+     	through the day, moving from one task to another. You have a very 
+	high tolerance to pain, physically.
+19 + %^ORANGE%^Legendary Constitution%^RESET%^ -Your health is the stuff myths 
+	and legends are made of. Some might wonder if your have some troll or 
+	dwarven blood in you.

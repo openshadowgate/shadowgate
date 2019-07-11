@@ -1,0 +1,17 @@
+Nightmare Mudlib 3.2 SimulEfun: nominative()
+
+string nominative(string|object);
+
+DESCRIPTION
+Returns the third person nominative case pronoun matching the gender of
+the object or gender string passed.
+
+EXAMPLES
+nominative(find_player("forlock")) returns "he"
+nominative("female") returns "she"
+
+NOTE
+For neuter and anything else odd, it will return "it".
+
+SEE ALSO
+objective(), possessive()

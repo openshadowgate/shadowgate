@@ -1,0 +1,31 @@
+What must be done for the ammo object:
+
+ #  Be sure to include the ammo object.
+
+inherit "/std/ammo";
+
+ # usual object set commands
+
+   set_id(({ "arrows","quiver","missles" }));
+   set_name("arrows");
+   set_short("A quiver of arrows");
+   set_long(
+	"This is a quiver of arrows for a bow. "
+   );
+
+### sets the number of missiles in this object;
+
+   set_shots(int missiles);
+
+###  sets the normal damage
+
+   set_wc(int #dice,int #ofsides);
+
+###  sets the large damage
+
+   set_large_wc(int #dice,int #ofsides);
+
+Pretty simple..
+
+Melnmarn
+

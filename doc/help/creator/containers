@@ -1,0 +1,75 @@
+A document for the easy use of containers.
+Written for the Nightmare Mudlib by Descartes 221092
+
+This is the basic build document for the file /std/bag_logic.c, which is
+a file that allows you easily to make bags, treasure chests, and other
+sorts of objects.  The first part is a list of necessary functions you must
+call in the container item.  The second part is about nifty functions which
+can add individuality to your things.
+
+******************************************************************************
+
+Must call:
+----------
+
+set_name(), set_id(), set_short(), set_long(), set_weight(), set_value()
+	It is assumed that the immortal reading this document understands
+	these basic functions of object coding.  They are the same for all
+	objects.
+
+*****
+
+set_max_internal_encumbrance(1200);
+    This is how much weight the container can hold at most.
+
+*****
+
+Those are all the functions that must be called in order to create such an
+object as a bag.  But it is rather uninteresting, and does nothing but allow
+you to put things in and get things out.  Of course, down below, there are some
+functions which make for an interesting container.
+
+*******************************************************************************
+
+Optional functions:
+-------------------
+
+*****
+
+set_possible_to_close(1);
+	This makes the container closeable and openable.
+	Note that the container is created open.  You have to call the function
+	toggle_closed() in order to close it.
+
+*****
+
+toggle_closed();
+	This toggles the container that has been set closeable between
+	open and closed.  If you want a container to start out closed, you have
+	to call this either in the create() function or from the room which
+	created the container.
+
+*****
+
+set_lock("locked");
+	This function does 2 things.  First it makes the container lockable.
+	Second, it sets the container at start either locked or unlocked,
+	depending upon which string you pass as an argument.
+
+*****
+
+set_key("orc_treasure");
+	This function sets the id of the object to be used in unlocking
+	the container.  It should never be anything like "key", or
+	"silver key", since you only want one key to open your lock.
+
+*****
+
+set_property("magic hold", 10);
+	This is something generally done by a magic spell cast by a player,
+	but if you want to make the lock a little harder for a rogue to pick
+	a lock, you set a value to this property.  When a rogue tries to pick
+	a lock, this value simply is subtracted from the players locks skill,
+	such that is the player has a 50 in locks, then the player has a
+	40% chance of picking the lock instead of the normal 50% for that
+	skill level.

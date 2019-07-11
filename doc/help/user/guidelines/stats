@@ -1,0 +1,17 @@
+The Six Stats that help to define your character are
+* Strength
+* Dexterity
+* Constitution
+* Wisdom
+* Intelligence
+* Charisma
+
+Each of these stats have a help file to better explain 
+what they stand for, and table to gauge your strengths 
+and weaknesses.  The information in these files is taken 
+from D&D Player's Handbook.  The subtypes are taken from 
+Player's Option: Skills and Power, as a way to better 
+explain what makes up each stat.
+
+Typing %^BOLD%^%^GREEN%^stats%^RESET%^ will give you a print out of your stats.  
+They can also be found in your %^BOLD%^%^GREEN%^score%^RESET%^.

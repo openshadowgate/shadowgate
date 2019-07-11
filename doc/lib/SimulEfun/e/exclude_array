@@ -1,0 +1,14 @@
+Nightmare IV SimulEfun: exclude_array()
+
+varargs mixed *exclude_array(mixed *arr, int x, int y);
+
+DESCRIPTION
+Takes an array and returns an array of that same type with elements
+in the range from argument 2 to argument 3 excluded.
+
+EXAMPLES
+exclude_array( ({ "a", "b", "c" }), 1) returns ({ "a", "c" })
+exclude_array( ({ 1, 2, 3, 4, 5 }), 1, 3) returns ({ 1, 5 })
+
+LOCATION
+/adm/simul_efun/exclude_array.c

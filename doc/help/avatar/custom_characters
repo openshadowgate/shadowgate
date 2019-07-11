@@ -1,0 +1,71 @@
+%^BOLD%^%^CYAN%^Custom characters
+
+%^BOLD%^%^WHITE%^As follows, specifics for various request races. For most races, the adjustments can be found in the according helpfiles (firbolg, voadkyn, wemic, gnoll, ogre, ogre-mage, half-ogre, drow, half-drow). For any race with adjustments, just reverse the stat adjustments for whatever race the player rolled, and then add the new ones (instructions below are included for this. Preferred races are given below to make life easier (though some are pretty obvious).
+
+%^BOLD%^%^WHITE%^Note: most of the HM request races (except half-drow) and the demihuman subraces (except wild elf) will require a specially made item that is bound to the player, to grant them their racial skills (until we put this in command folders) such as spells per day, and resistances. You will need a wiz to create these for the player (or for you to keep to give them later), and they will bind when worn. For each, they will also need a wiz to set their subrace (%^YELLOW%^eval find_player("blah")->set("subrace","deep gnome")%^WHITE%^ etc).
+
+%^BOLD%^%^WHITE%^Note: it is usually easier to have the player roll a race with an identical start-age to the one they desire (eg/ drow, roll as an elf). Most attributes can be changed, but age is one of the few that is excessively difficult to alter.
+
+%^YELLOW%^Svirfneblin
+-roll as basic gnome
+-stat changes: reverse basic gnomish stats (wis/int). Add: +1 wis/dex, -1 str/cha
+-set subrace to "deep gnome"
+-requires svirfneblin racial item from /d/common/obj/races
+
+%^YELLOW%^Duergar
+-roll as basic dwarf
+-no stat changes (standard as per generic dwarf)
+-set subrace to "gray dwarf"
+-requires duergar racial item from /d/common/obj/races
+
+%^YELLOW%^Wild elf
+-roll as basic elf
+-stat changes: add +1 con (negate removal by standard elf stats) and -1 int for wild elf
+-set subrace to "wild elf"
+-no item
+
+%^YELLOW%^Drow
+-roll as basic elf
+-set race to drow and alter alignment/etc as required
+-stats set as per <help drow>, after reversing elven racial stats (dex/con)
+-requires drow racial item from /d/common/obj/races
+
+%^YELLOW%^Tiefling
+-roll as basic human
+-stat changes: +1 dex/int, -2 cha
+-set subrace to "tiefling"
+-requires tiefling racial item from /d/common/obj/races
+
+%^YELLOW%^Aasimar
+-roll as basic human
+-stat changes: +1 wis/cha, -1 int/dex
+-set subrace to "aasimar"
+-requires aasimar racial item from /d/common/obj/races
+
+%^YELLOW%^Genasi, air
+-roll as basic human
+-stat changes: +1 dex/int, -1 wis/cha
+-set subrace to "air genasi"
+-requires genasiair racial item from /d/common/obj/races
+*clerics MUST follow Akadi, Auril or Shaundakul
+
+%^YELLOW%^Genasi, earth
+-roll as basic human
+-stat changes: +1 str/con, -1 int/cha
+-set subrace to "earth genasi"
+-requires genasiearth racial item from /d/common/obj/races
+*clerics MUST follow Grumbar
+
+%^YELLOW%^Genasi, fire
+-roll as basic human
+-stat changes: +1 int, -1 cha
+-set subrace to "fire genasi"
+-requires genasifire racial item from /d/common/obj/races
+*clerics MUST follow Kossuth or Lathander
+
+%^YELLOW%^Genasi, water
+-roll as basic human
+-stat changes: +1 con, -1 cha
+-set subrace to "water genasi"
+-requires genasiwater racial item from /d/common/obj/races
+*clerics MUST follow Istishia

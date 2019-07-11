@@ -1,0 +1,211 @@
+				Weapons 
+
+
+This doc will cover the weapons allowed in the ShadowGate Mud, their 
+hit dice allowed, magical properties restrictions, etc. Any weapon not 
+within these guidelines will not be accepted into the mud.
+
+Part 1:               Basic Weapons Statistics:
+
+
+--------------------- MISC WEAPONS -----------------------------
+Weapon@@         cost   weight size*  type** speed*** damage(s) damage(l)
+----------------------------------------------------------------
+battle_axe       5gp      7     M      S       7      1,8       1,8
+club             0gp      3     S     MB       4      1,6       1,3
+dagger           2gp      1     S     MP       2      1,4       1,3
+flail           15gp     15     M      B       7      1,6       2,4 
+handaxe          1gp      5     M     TS       4      1,6       1,4
+knife            5sp      1     S     MP       2      1,3       1,2
+mace             8gp     10     M      B       7      1,6       1,6
+morning_star    10gp     12     M      B       7      2,4       1,6
+pick             8gp      6     M      P       5      1,6       2,4
+quarter_staff    1gp      4     L     MB       4      1,6       1,6
+scourge          1gp      2     S     TS       5      1,4       1,2
+sickle           6sp      3     S      S       4      1,4       1,4
+trident          2gp      6     M      P       7      1,6       3,4
+warhammer        2gp      6     M      B       4      1,4       1,4
+whip             1sp      2     M     TS       8      1,2       1,0
+
+--------------------- POLEARMS ---------------------------------
+Weapon@@         cost   weight size*  type** speed*** damage(s) damage(l)
+----------------------------------------------------------------
+
+awlpike          5gp     12     L      P      13      1,6       1,12     	
+bardiche         7gp     12     L      P       9      2,4       2,6
+bec_de_corbin    8gp     10     L      S       9      1,8       1,6	  
+bill_guisarme    7gp     15     L      P      10      2,4       1,10
+fauchard         5gp      7     L      S	     8      1,6       1,8
+glaive           6gp      8     L      S       8      1,6       1,10
+guisarme         5gp      8     L      S       8      2,4       1,8
+halberd         10gp     15     L      S       9      1,10      2,6
+lucern_hammer    7gp     15     L      B       9      2,4       1,6
+military_fork    5gp      7     L      P       7      1,8       2,4
+partisan        10gp      8     L      P       9      1,6       1,6
+spetum           5gp      7     L      P       8      1,6       2,6
+voulge           5gp     12     L      S      10      2,4       2,4
+
+--------------------- LANCE**** --------------------------------
+Weapon@@         cost   weight size*  type** speed*** damage(s) damage(l)
+----------------------------------------------------------------
+
+heavy lance     15gp     15     S      P       8      1,12      1,21
+jousting lance  20gp     20     S      P      10      1,6       1,12
+light lance      6gp      5     S      P       6      1,6       1,8
+medium lance    10gp     10     S      P       7      1,6       1,12
+
+--------------------- SWORDS -----------------------------------
+Weapon@@         cost   weight size*  type** speed*** damage(s) damage(l)
+----------------------------------------------------------------
+
+bastard         20gp     10     M      S       6      1,8       1,12
+bastard_2_hand  20gp     10     L      S       8      2,4       2,8
+broad           10gp      4     M      S       5      2,4       1,6
+khopesh         10gp      7     M      S       9      2,4       1,6	
+long            15gp      4     M      S       5      1,8       1,12
+scimitar        15gp      4     M      S       5      1,8       1,8	
+short           10gp      3     S     TS       3      1,6       1,8
+short_2_hand    50gp     15     L      S      10      1,10      3,6
+
+----------------------------------------------------------------
+
+@@ Weapon names:
+The weapon name in the weapon column, is the name to be used in the 
+set_name() efun. 
+IE: set_name("bastard");
+
+* sizes:
+S = 1
+M = 2
+L = 3
+H = 4
+These are the only valid values in set_size() 
+IE: set_size(1);
+
+** types:               Classes allowed.
+------------------------------------------------------
+S -- slash              fighter classes only
+B -- bludgeon           fighter and cleric classes
+P -- piercing           fighter classes only
+TP - thiefpiercing      fighter and thief classes
+TS - thiefslashing      fighter and thief classes
+MP - magepiercing       fighter/thief/mage classes
+MB - magebludgeon       fighter/thief/mage/cleric classes
+
+This will be strictly adheared to!
+IE: set_type("magepiercing");
+
+*** speed:
+Weapon speed will default to 3 times the size of the weapon, unless otherwise specified.
+
+
+**** LANCES:
+Lances are special, they are used by knights while riding horses, they must have four features to them. First, their proficiency type should be set to lance. Second, you need to set a lance property. Third, you must specify a check for the hit function to make sure the person is on a horse. Fourth, make sure the lance is the same size as the user. There are lances in /d/shadow/room/city/cguild/cavalier you can look at for more examples.
+
+A sample lance
+-------------------------------------------------------------------
+#include <std.h>
+inherit WEAPON;
+
+void create()
+{
+   ::create();
+   set_name("lance");
+   set_short("A shiney lance");
+   set_id(({"lance","shiney lance","medium lance"}));
+   set_long("This is a bright, shiney, well polished medium lance.");
+   set_weight(10);
+   set_value(10);
+   set_wc(1,6);
+   set_large_wc(1,12);
+   set_size(1);
+   set_type("piercing");
+   set_property("lance",1);
+   set_prof_type("lance");
+   set_hit((:TO,"check":));
+}
+
+int check(object targ)
+{
+   if(!objectp(ETO)) return 0;
+   if(!ETO->query_in_vehicle() || !objectp(ETO->query_in_vehicle()))
+      ETO->force_me("drop lance");
+   return 0;
+}
+
+int query_size()
+{
+   if(objectp(ETO) && living(ETO))
+      return (int)ETO->query_size();
+   return ::query_size();
+}
+
+
+NOTE: There are also proficiencies of weapons, be sure that each weapon is of the right proficiency type by using <skillneeded> on the weapon when you have it in your inventory. You can also set different proficiency types for magical weapons that you wish to be different.
+set_prof_type(string name)
+
+@@@ Damage:
+-------------------------------------------------------------------
+There are 2 catagories for damage. s and l. the s catagory
+is the damage it will inflict on small and medium sized creatures.
+the l catagory is the damage it does to large creatures.
+
+A sample weapon
+--------------------------------------------------------------------
+#include <std.h>
+inherit WEAPON;
+
+void create() {
+   ::create();
+   set_id(({ "club" }));
+   set_name("club");
+   set_short("A club");
+   set_long(
+	"This is a wooden club. Similar to modern day baseball bats."
+   );
+   set_weight(3);             /* in encumberance */
+   set_size(2);               /* 1-small 2-medium 3-large 4-huge */
+   set("value", 1);
+   set_cointype("copper")     /* specifies currency, defaults to gold */
+   set_wc(1,6);               /* against small and medium */
+   set_large_wc(1,3);         /* against large */
+   set_type("magebludgeon");  /* anyone can wield it */
+   set_weapon_speed(4);       /* sets the speed of the weapon */
+}
+
+---------------------------------------------------------------------
+
+
+You will find these basic weapons in the /d/shadow/obj/weapon/*.c
+I would suggest you use these as the base to your weapons. 
+
+			-=-=-=-=-=-=-=-=-=-=-
+
+Part 2:			Magical properties:
+
+This will be a difficult area to cover. 
+First off, let me say that all magical weapons will be based on the basic 
+weapons. No special weapons, only enhanced basic weapons.
+
+
+
+
+I'll leave the types of enhancement to you, but you must follow these 
+guidelines:
+
+1) Magical weapons are scarce. There should be very few of them, and they 
+   should be hard to obtain. They shouldn't be replaced but once a day.
+
+2) They should only have at most 2 properties of enhancement. Such as a +1
+   sword that increases strength by 1.
+
+3) They should be restrictive in their use. Such as only mages can carry
+   a magic staff, or only good characters can carry a magic knife, etc...
+
+There is an example magic weapon in /d/shadow/obj/magic.
+
+
+			-=-=-=-=-=-=-=-=-=-=-
+
+
+Please direct questions/comments to Tristan

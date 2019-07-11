@@ -1,0 +1,15 @@
+Nightmare Mudlib 3.2 SimulEfun: total_light()
+
+int total_light(object who);
+ 
+DESCRIPTION
+This function returns the total light in the environment of the object.  This
+includes the light sources on the object.  Most often the object will be a
+player.
+
+LOCATION
+/adm/simul_efun/total_light.c
+
+SEE ALSO
+effective_light()
+

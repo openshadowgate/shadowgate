@@ -1,0 +1,18 @@
+%^CYAN%^NAME
+
+How to use the ID "attacker" in combat.  
+
+%^CYAN%^DESCRIPTION 
+
+While in combat, you will sometimes need to direct your spell or special attack at a specific creature (known as your target).  Some creatures have especially difficult names to spell.  To ease your typing-troubles, the ID "attacker" is added to any creature you are currently combatting.  In addition, each enemy after the first, will be assigned a number, so that you can target "attacker 1", "attacker 2" etc.
+
+
+%^CYAN%^EXAMPLE
+
+The spell "Magic Missile" requires a valid target to be cast.  If you are fighting one enemy named Xcrthull, you can type <cast YOURCLASS magic missile on attacker> to target Xcrthull.
+
+The feat "Rush" requires a valid target.  If you are fighting one zombie and one skeleton, you can type <rush attacker 1> to rush the first enemy and <rush attacker 2> to rush the second enemy.  
+
+%^CYAN%^SEE ALSO
+
+con, alias, nickname, feats, spells 

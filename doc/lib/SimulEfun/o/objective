@@ -1,0 +1,18 @@
+Nightmare Mudlib 3.2 SimulEfun: objective()
+
+string objective(object|string);
+
+DESCRIPTION
+Returns the accusative/dative/prepositional case of the third person
+pronoun for a living object name or for the string name for a gender.
+
+EXAMPLES
+objective(find_player("descartes")) returns "him"
+objective("female") returns "her"
+
+NOTE
+For anything other than male or female things or strings, it returns 
+"it".
+
+SEE ALSO
+nominative(), possessive()

@@ -1,0 +1,568 @@
+                  ----------------
+                   Spell Tutorial
+                  ----------------
+                by Vashkar (11/1/95)
+
+        Originally written by Thorn and heavily
+      modified, updated, and rewritten by Vashkar
+
+                      Contents
+
+    I.   Spell coding on Shadowgate
+    II.  Spell.c inheritable introduction
+    III. Interfaces (Wizard & Object)
+    IV.  Spell Creation
+
+I. SPELL CODING ON SHADOWGATE
+    Since Shadowgate is based on AD&D rules, the spells should be
+  as well.  Therefore, we have chosen to try to code as many spells
+  as possible out of such books as the 2nd edition AD&D Player's
+  Handbook, the AD&D Tome of Magic, the AD&D Unearthed Arcana,
+  etcetera.  If you are going to be a spell coder, either you can
+  supply your own book (one of the above mentioned), or ask other
+  spell coders for details on spells.  Before we get new spells
+  written up, there are other spells already coded that must be
+  updated to the latest standards.  From the other sections in this
+  tutorial, you can learn how to code a spell, and fix spells too.
+  Spell coding, unlike many other types of LPC coding, is always
+  comprehensive.  Unfortunately, simple spells are rare.  Therefore,
+  don't hesitate to ask away at other coders with any questions you
+  may have.
+    Furthermore, as the coordinator of spells, I, Vashkar, reserve
+  the right to edit any spell to fix bugs, fix typos, improve the
+  description, and make it conform more to AD&D standards.
+
+II. SPELL.C INHERITABLE INTRODUCTION
+
+    Spells on Shadowgate are different than on other muds.  Other
+  muds make spells as commands.  This is inefficient and
+  cumbersome, as much of the same code (ie. the spell-casting
+  emulation) is the same from spell to spell.  With Shadowgate's
+  spell system, there is only one command that is called, the
+  cast command.  This calls out the wizard_interface function in
+  a spell object, which would be the individual spell.
+    I'll refer to magic missile as an example.  The cast command
+  is activated, for example, by a user typing "cast magic missile
+  on orc".  The cast command will create a new spell object from
+  the /cmds/wizard/_magic_missile.c file which in fact, inherits
+  spell.c  Spell.c is nothing more than an file which has code
+  that is the same for all spell objects, and gets inheritted by
+  (tacked on to the end of) each spell object.
+    The cast command then calls the wizard_interface function
+  within the new spell object.  The wizard_interface code is
+  contained in the spell.c file, and therefore, will be included
+  in every spell.  The wizard_interface function then performs
+  various checks to make sure the spell casting is okay.  It
+  ends by calling the check_fizzle function to make sure the
+  target is not immune to the spell to be casted.  The check
+  fizzle function, if the spell didn't fizzle harmlessly,
+  then calls the spell_effect function, almost all of which is
+  defined in the individual spell file.
+    In the case of magic missile, the spell effect function makes
+  darts fly from the caster's fingers, and do damage to the
+  target.  This function is where the creativity in spell
+  designing lies.
+    In some spells, with long lasting effects, the spell_effect
+  function, or a function called from it, will eventually call the
+  dest_effect function in the individual spell file.  dest_effect
+  is the standardized name for a function which disables the spell.
+  The dest_effect function will have a line ::dest_effect(); in
+  each individual spell code to perform necessary function calls
+  to ready the spell for destruction.  The last line of every
+  dest_effect function is destruct(TO); to clear the spell from
+  memory.
+
+III. INTERFACES
+
+  There are 2 main interface functions to the spell.c file.
+
+    i.   wizard_interface(object user, string targ)
+    ii.  use_spell(object ob, string targ, int ob_level)
+
+  i.  The wizard_interface function is simply designed to allow
+  players(ie. mages, druids, paladins, etc.) to cast spells.
+  This function's main purpose is to be called by the cast
+  command.  It will check to see if all the conditions are met
+  that are needed to cast the spell.  Then it will emulate the
+  spell casting process.  The delay before the actual casting
+  is done by the cast command, before it calls this function.
+
+  ii. The use_spell interface function is a flexible way of
+  programmatically casting spells.  While in combat, if monsters
+  are set up to cast spells, the combat.c will call the use_spell
+  function to have the monster cast spells.  use_spell can also
+  be used to have an object cast a spell at a certain casting
+  level.  The format for using the use_spell function is:
+
+  use_spell(object ob, string targ, int ob_level)
+
+    The first argument, ob, is an object variable containing the
+  caster, which can be a sword, a monster, or even a player,
+  depending on what object you pass to it as a caster.  The
+  next argument, a string variable, targ, is the id of the
+  target in string format.
+    How the use_spell function converts this into an object
+  target is as follows.  It will search the environment of the
+  object for an object with a matching id to targ.  If not found,
+  it will search the environment of the environment of the
+  caster.  This is useful in case you want an object held by a
+  person to be able to cast a spell at a target in the holder's
+  environment.
+    Lastly, there is the ob_level argument.  The caster, ob, is
+  casts the spell as if it were a spell caster of a level equal
+  to ob_level.
+
+    Examples of how to use the use_spell function include:
+
+- Call it from an add_action in an object.
+  new("/cmds/wizard/_magic_missile.c")->use_spell(TO, str, 10);
+  This would make the object that contains this code to cast the
+  spell, magic missile, as a level 10 spell caster, at str, which
+  is the variable containing the string after the add_action.
+
+- Call it from an init function in a room.  Something like a
+  glyph/trap can look pretty neat.
+
+- Use the ready-made monster functions that will allow monsters
+  to randomly cast spells during combat.  Examples of these
+  functions that are required are:
+
+    set_class("mage");
+    set_guild_level("mage",10);
+    set_spell_chance(90);
+    set_spells( ({ "magic missile", "hideous laughter" }) );
+
+    NOTE:  All of these functions are required.  The class
+    determines if the monster casts wizard or priest spells.  The
+    guild level determines what level the monster casts the spells
+    at.  The spell chance is the percentage of attacks the monster
+    makes which are spells.  And set_spells is a string array of
+    the spell names which the monster can cast.
+
+IV. SPELL CREATION
+Miscellaneous notes on spells
+
+- Spells should be from AD&D
+Spells should be designed to imitate spells from AD&D.  This will not
+only ensure that the spell will be balanced with the MUD, but it will
+also provide you with good practice in figuring out how to program.
+
+The "spelled" property
+Each spell that has a prolonged effect on one or more targets will
+use the set_property command to add the spell to each target's
+"spelled" array.  It basically does:
+target->set_property("spelled",TO);  where TO is the spell object and
+"spelled" is the property name.  The array is stored in the format
+({ spellob1, spellob2, ... })  Therefore,
+target->query_property("spell");  would return that array of spell
+objects.  Each spell should remove itself from each target's array
+during the dest_effect() function.
+
+The "spell" property
+Whenever a spell summons or conjures an object that is removed when
+the spell wears off, you need to set the "spell" property to the
+spell object.  Such an example is in the monster summoning 1 spell.
+The monster is created, given the needed attributes via
+call_other()'s to it, including setting the "spell" property, then
+moving the monster to the caster.  Here is the code:
+mon = new("/d/shadow/mon/bat.c");
+mon->set("aggressive", 1);
+mon->set_property("spell", TO );
+mon->move(place);
+
+/adm/include/spell.h variables
+Make sure you have the line    #include <spell.h>   in every spell
+so that these "function shorthands" will be defined.
+  This is a list of pre-compiler definitions that you can use in place
+of long complicated call_outs() to get a value you need from the spell
+inheritable.  They are defined in the file /adm/include/spell.h for your
+information.
+
+    CASTER, or CASTER_OBJ is the object variable representing the
+    one who activated the spell.
+
+    TARGET or TARGET_OBJ is the object variable representing the
+    target of the spell specified by the caster.  If the spell was
+    cast at or on something, that something is TARGET
+
+    CLEVEL is that caster's casting level.  Many spells' strengths
+    depend on the caster's spell casting level.  This is it.
+
+    PLACE is the environment that all "viewers" of the spell are in.
+    This is the object you should direct all tell_room's to, which
+    describe what the spell is doing to all who watch the caster and
+    the target.  Also, this is useful for area affect spells.  Don't
+    use environment(CASTER) because a magic object held by a user
+    might be the caster of the spell.  Lastly, PLACE should be used
+    as the environment in which the caster, or the person holding
+    the casting object resides, so that in spells like monster
+    summoning 1, if an object casts the spell, monsters don't
+    appear in the caster's inventory.
+
+For your convenience, here is a quick reference guide of all the
+variables, including the less used ones.
+
+CASTER_OBJ   object  - the caster
+CASTER       object  - the caster
+TARGET_OBJ   object  - the target
+TARGET       object  - the target
+CLEVEL       integer - level at which the spell is cast (casting level)
+PLACE        object  - environment of the target
+SPELL_LEVEL  integer - level of spell (not casting level, spell level)
+SPELL_NAME   string  - spell's name
+SPELL_TYPE   string  - either "wizard" or "priest"
+SPELL_SPHERE string  - the sphere of the spell
+COMPONENTS   mapping - components required for the spell
+
+
+-----------------------------------------------------------------------
+  Now that we have gone through the basic steps lets look at a spell
+file, /cmds/wizard/_acid_arrow.c  to facilitate learning how to code
+a spell.
+
+// Acid arrow
+// Written by Vashkar
+// Last modified on 11/1/95
+** This is the comments you should include in every spell before you
+** begin the code.  Beforehand, I may not have included such a header
+** in all of my spells, but when there are more than one spell coder,
+** then such documentation matters, in case there is a problem with a
+** spell.  Its plenty true that the one who coded a spell can help a
+** great deal if the need arrives to modify or fix the spell.
+
+#include <std.h>
+#include <spell.h>
+#include <magic.h>
+#include <daemons.h>
+** These are some sample #include's that you might include in your spell.
+** Using std.h and spell.h is highly recommended.
+
+inherit SPELL;
+** This is a necessary line in all spells.
+
+int clevel, num, need, roll;
+string target_limb;
+object caster, target, place;
+** Of course, after all your inherit and include statements, you need to
+** define all global variables.
+
+void create()
+** All spells should have this for its first function.  There are a few
+** required lines that need to be included in this function in order for
+** the spell to work.
+
+    set_spell_name("acid arrow");
+** This sets the spell's name.  This needs to be the same as the spell's
+** filename, except that the first underscore is removed, and the others
+** are replaced by spaces.
+
+    set_spell_level(3);
+** This sets the level of the spell.  The spell level determines a few
+** things.  First, how long it takes to memorize and cast the spell.
+** Second, the extra experience a mage gets for casting the spell.
+** Third, how many times a spell can be memorized.
+
+    set_spell_type("wizard");
+** Either you're making a wizard spell, or a priest spell.  There are only
+** two kinds, just like in AD&D.
+
+    set_spell_sphere("conjuration");
+** This function sets the "sphere" of the spell.  In the case of a wizard
+** spell, this function actually is used to set the school of the spell.
+** This is needed in all spells.
+
+    set_immunities( ({ "acid" }) );
+** Use this function to define any immunities that would stop the spell.
+** Immunities are defined in a player with a set_property command as
+** follows:  player->set_property("strength","fire");  Such an immunity
+** would render the player object immune to any spells with "fire" in
+** the set_immunities array.  Here's an example of setting a spell to be
+** affected by immunity to fire and cold:
+** set_immunities( ({ "fire", "cold" }) );
+
+    set_components( ([
+        "dart" : 1,
+        "rhubarb leaf" : 1
+    ]) );
+** This is a very important in a system which requires the existence of
+** certain material objects (components) in order for the wizard or
+** priest to cast the spell properly.  This function takes input in a
+** mapping.
+** The format for this mapping is:
+**              (["name of component" : quantity required,])
+** The name of the component is pretty obvious, but the quantity issue
+** is not.
+** If your spell requires "a pinch of dust", you would put:
+**              "pinch of dust" : 1,
+** If your spell requires 50 eyes of newt then it is:
+**              "eye of newt" : 50,
+** If the spell just needs the presence of a component, but does not
+** consume it, then you may put:
+**              "model of pyramid" : 0,
+** If the spell has no components, you should omit this function
+** altogether, so that the magic daemon knows not to test for
+** components.  However, if you entered a null mapping ([]), then it
+** should still work, it would just be more work for no reason.
+
+    set_verbal_comp();
+    set_somatic_comp();
+** Spells very often will require the caster to speak or will require
+** the caster to have his hands free.  When converting a spell from
+** AD&D, this is listed under components.  A spell with
+** Components: V,S,M   will require you to include  set_verbal_comp();
+** for the V,   set_somatic_comp(); for the S, and for the M, which
+** stands for material components, you'd have to use the
+** aforementioned set_components() function.
+
+    set_target_required(1);
+** If a spell, such as one that does damage to an enemy, requires a
+** target to be specified, call this function in your create()
+** function, passing a 1 as an argument.
+
+    set_silent_casting(0);
+** If there are some spells that could be cast secretly, you can use
+** this function to cast them without warning the other people in
+** the same room. If you want to retain the cast string or don't
+** care you can set this function to 0 or omit it from the file.
+}
+
+string query_cast_string()
+{
+    return caster->query_cap_name()+" shouts out "+
+        "magical words in a powerful voice while holding a "+
+        "dart in "+caster->query_possessive()+" grasp.";
+}
+** This function should be added into every spell except those with
+** silent casting.  When you cast a spell, it normally says,
+** "Someone begins to cast a spell!" and to you it says, "You begin
+** to cast the spell!"  Although you can't change what it says to
+** the caster, this function will change what it says to the
+** target and those watching the caster.  The format of the function
+** is simple.  Just write it as shown, returning the string you want
+** the viewers of the spell casting to see.
+
+void spell_effect()
+** This function is called by the spell.c inheritable to start the
+** spell.  You should begin your spell in this function.  The spell
+** can from here jump to other functions, but this function actually
+** begins your spell.
+
+    caster=CASTER;
+    target=TARGET;
+    clevel=CLEVEL;
+    place=PLACE;
+** You will note that there are variables in upper case letters (ie.
+** CASTER)  These are NOT actual variables, but rather they are
+** shorthands that represent function call to the spell.c file.  The
+** uppercase shorthands (like CASTER) are found in the
+** /adm/include/spell.h file.  At first, I thought there was a need
+** for inputting these functions into global variables like shown
+** above.  Now, I'm pretty sure you don't need to.  You may do this
+** in case you don't like big capital letters, but if you see it in
+** previously made spells, don't worry about it.
+
+    target_limb = target->return_target_limb();
+    need="/daemon/bonus_d.c"->thaco(clevel,"fighter") -
+        target->query_ac();
+    roll=random(20) + 1;
+** This is just a bunch of spell specific code, that may or may not
+** be needed in other code.  What it does is first inputs a random
+** limb of the target (to aim for) into variable target_limb.  Then,
+** it rolls to see if it hits, as the spell requires the arrow to
+** have the same chance of hitting as if fired by a fighter of a
+** level equal to the casting level of the spell, or CLEVEL.
+
+    if(interactive(caster))
+    {
+** The caster must be tested to find out if it is a user or an
+** object/monster.  If the caster is a player, the caster will have
+** all body parts a humanoid has.  Therefore, you can say things like
+** "A dart flies out of Someone's hand!" ... if the caster is an
+** object, such as a sword, it would look strange for a dart to fly out
+** out of the sword's hand.  Monsters might not have hands also.
+** Therefore, it is necessary to test if the caster is interactive,
+** or in otherwords, a player/humanoid.  Have the spell use tells
+** that mention body parts if the caster is a player, and for other,
+** cases, create the tells so that no body parts are mentioned.
+
+        tell_object(caster,"%^GREEN%^%^BOLD%^You launch a dart "+
+            "out of your hand, aiming it at "+target->query_cap_name()+
+            "!");
+        tell_object(target,"%^GREEN%^%^BOLD%^"+caster->query_cap_name()+
+            " launches a dart out of "+caster->query_possessive()+
+            " hand, aiming it at you!");
+        tell_room(PLACE,"%^GREEN%^%^BOLD%^"+
+            caster->query_cap_name()+" launches a dart out of "+
+            caster->query_possessive()+" hand, aiming it at "+
+            target->query_cap_name()+"!",({ caster,target }) );
+** This tell_room is directed to all within the object place.  The
+** place object variable was assigned the value of PLACE, the spell.h
+** shorthand definition.  PLACE is the environment of the target,
+** which is the desired environment to tell what is happening to.
+** Don't use environment(caster), as the caster might be an object
+** held by a player/monster.
+
+        if( !((roll >= need) || (roll == 20)) )
+        {
+            tell_object(caster,"%^GREEN%^Your dart explodes into an "+
+                "acidic arrow and zips past "+target->query_possessive()+
+                ".");
+            tell_object(target,"%^GREEN%^"+caster->query_cap_name()+
+                "'s dart explodes into an acidic arrow and zips past "+
+                "you.");
+            tell_room(place,"%^GREEN%^"+
+                caster->query_cap_name()+"'s dart explodes into an "+
+                "acidic arrow and zips past "+target->query_cap_name()+
+                ".",({ caster,target }) );
+            destruct(TO);
+            return 1;
+** If a spell is unsuccessful, make sure you destruct the spell object
+** with the destruct(TO);  function call.  I put in the return 1;
+** afterwards just because I've had some weird experiences with
+** destruct(TO)'s if the code doesn't act like it'll still be running
+** after the destruct(TO);  But make sure you call  destruct(TO);  only
+** when the spell is unsuccessful, and as the last line of your
+** dest_effect() function, which will be mentioned later in this
+** example.
+
+        }
+        tell_object(caster,"%^GREEN%^%^BOLD%^Your dart explodes into an "+
+            "acidic arrow and pierces "+target->query_possessive()+" "+
+            target_limb+"!");
+        tell_object(target,"%^GREEN%^%^BOLD%^"+caster->query_cap_name()+
+            "'s dart explodes into an acidic arrow and pierces your "+
+            target_limb+"!\n%^RESET%^%^GREEN%^Acid burns through your "+
+            "veins.");
+        tell_room(environment(target),"%^GREEN%^%^BOLD%^"+
+            caster->query_cap_name()+"'s dart explodes into an acidic "+
+            "arrow and pierces "+target->query_cap_name()+"'s "+
+            target_limb+"!",({ caster,target }) );
+        spell_successful();
+** Put this line in your spell so that it runs once at the instant you
+** wish to define the spell as a success.  This function gives out
+** experience points for the casting of the spell alone.  If there's a
+** target specified, this will add the spell to the target's "spelled"
+** property.
+
+
+    }
+    else
+    {
+        tell_object(target,"%^GREEN%^%^BOLD%^A dart flies from "+
+            +caster->query_short()+", aiming directly at you!");
+        tell_room(place,"%^GREEN%^%^BOLD%^A dart flies from "+
+            +caster->query_short()+", aiming directly at "+
+            target->query_cap_name()+"!",({ target }) );
+
+** This is the section of the code which is run if the caster is not an
+** interactive object, such as a magic object or a monster.  Notice how
+** no body parts are mentioned.  The dart just "flies" from the caster,
+** which is a sufficient description.
+
+        if( !((roll >= need) || (roll == 20)) )
+        {
+            tell_object(target,"%^GREEN%^The dart explodes into an "+
+                "acidic arrow and zips past you.");
+            tell_room(place,"%^GREEN%^The dart explodes into an "+
+                "acidic arrow and zips past "+
+                target->query_cap_name()+".", ({ target }) );
+            destruct(TO);
+            return 1;
+        }
+        tell_object(target,"%^GREEN%^%^BOLD%^The dart explodes into "+
+            "an acidic arrow and pierces your "+target_limb+
+            "!\n%^RESET%^%^GREEN%^Acid burns through your veins.");
+        tell_room(place,"%^GREEN%^%^BOLD%^The dart explodes into "+
+            "an acidic arrow and pierces "+target->query_cap_name()+
+            "'s "+target_limb+"!",({ target }) );
+        spell_successful();
+    }
+    damage_targ(target, target_limb, (random(7) + 2) );
+** Use this function to do any damage to a target.  The object variable,
+** target, is the guy who is targetted by the spell.  limbname is the
+** target limb that the spell hits.  Some spells will hit a random limb.
+** Other spells just hit the target and do general overall damage, so in
+** such cases, just pass "torso" for this argument.  The third
+** argument is the damage done to the target.  This often is random.
+** For instance, you might pass (random(7) + 2), such as above, for 2
+** to 8 damage.  When this function is run on a target, it will make
+** the target attack the caster, if possible.  Furthermore, it ensures
+** that upon the target's death, the caster will get some or all of the
+** experience for the kill.
+
+    num=1 + to_int(clevel / 3);
+    call_out("more_acid", ROUND_LENGTH);
+** All spells with prolonged effects, such as paralyzation, temporary
+** stat loss, or slow damage, as in this example, require the use of
+** the call_out() function.  ROUND_LENGTH is defined as the length of
+** time a combat round is.  This call_out() is used to continuously
+** do acid damage every combat round.
+
+}
+
+more_acid()
+{
+    tell_object(target,"%^GREEN%^Pain floods through your "+
+        target_limb+" as the acid continues to burn.");
+    damage_targ(target, target_limb, (random(7) + 2) );
+    if(num-- > 0)
+        call_out("more_acid", ROUND_LENGTH);
+    else
+        dest_effect();
+}
+** This function is spell specific of course, and is only for the acid
+** arrow spell.  There are various good examples in here to point out
+** though.  Notice the damage_targ() function being used to deal out
+** damage every combat round.  Obviously, the caster can easily walk
+** away and let the spell run through its effect.  Therefore, it
+** is necessary to use the damage_targ() function to ensure that if
+** the target affected dies, the caster will still get a share, if not
+** all, of the experience for the kill.  Then also notice that this
+** function loops itself a certain number of times.  By using a
+** call_out() to call itself, it can run itself again the next combat
+** round.  But the spell only lasts for a certain predefined number
+** of combat rounds, so if num is decremented each iteration, and
+** when it reaches 0, dest_effect() is called to end the spell.  Note
+** that destruct(TO); was not used, as if it was, the "spelled" array
+** in the target will not be readjusted when the spell wears off.
+
+void dest_effect()
+    ::dest_effect();
+** First and foremost, this function should have a line  ::dest_effect();
+** right after the local variable declarations.  This will allow the
+** spell to remove the spell object from its targets' "spelled" array,
+** before the spell object is destructed.  Next, this function is the
+** standardized function for all spells which is designated to "end" each
+** spell.  This is important for the dispel magic spell.  Never have the
+** function accept any arguments, for this function should have the
+** ability to be called by both the spell to finish it off, and by the
+** dispel magic spell.  Make any variables that are needed from outside
+** this function into global variables.
+
+    if(find_call_out("more_acid") != -1)
+        remove_call_out("more_acid");
+** In cases like acid arrow, where the spell may use call_out() function
+** calls to repeat a function after a certain amount of time.  Well, the
+** dest_effect() function can be called by not merely the spell itself,
+** but also by a dispel magic spell, and possibly other things coded
+** later on.  Therefore, although I admit I'm not positive if this is
+** needed in spells with dest_effect() functions that don't have delays
+** in them, it is, at worst, slightly more memory efficient.
+
+    tell_object(target,"%^CYAN%^The burning of the acid finally "+
+        "recedes.");
+    destruct(TO);
+}
+** The dest_effect() function simply finishes up the spell as shown
+** above.  A destruct(TO); should be the last line of all dest_effect()
+** functions, as this will remove the spell object from memory.
+
+Well, that just about concludes the basics of spell coding.  When I
+say basics, I don't mean learning this is easy, I mean that each
+spell is different, so each spell required a different coding
+strategy.  But if you decide to help out with spell coding, make
+sure you have read this in its entirety, then inform me beforehand,
+just so I can coordinate the spell coding efforts.
+
+
+- Vashkar (11/1/95)

@@ -1,0 +1,13 @@
+Nightmare IV SimulEfun: copy()
+
+mixed copy(mixed);
+
+DESCRIPTION
+Takes any variable and returns an exact copy of that variable with no
+insecure pointers to the secure data.
+
+EXAMPLES
+copy( ([ "a":1 ]) )  returns ([ "a":1 ])
+
+LOCATION
+/adm/simul_efun/copy.c

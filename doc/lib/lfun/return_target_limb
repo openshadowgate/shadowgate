@@ -1,0 +1,9 @@
+Nightmare mudlib living lfun: return_target_limb()
+
+string return_target_limb()
+
+This returns a random limb giving more weight to those limbs that can take 
+more damage (and are in theory bigger and easier to hit).
+
+See also: return_limb(), query_limbs(), query_is_limb()
+Defined in /std/living/body.c

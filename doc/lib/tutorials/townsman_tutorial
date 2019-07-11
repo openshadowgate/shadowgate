@@ -1,0 +1,67 @@
+		The Townsman Tutorial for ShadowGate
+		--- -------- -------- --- ----------
+
+	A townsman is a generic name for any NPC or monster that follows
+a set of timed events to simulate a real-life schedule.  All other
+functions are identical to a regular monster.  In fact, the townsman
+object inherits the monster object, so you can be assured compatibility.
+
+To Set Events
+-- --- ------
+
+All events are added using the set_event() function.  However,
+there are many different ways to use this function.  Here are some examples.
+
+	set_event("6:00","say Ah, what a beautiful day!");
+
+This will trigger the monster to say Ah, what a beautiful day at 6 o'clock,
+MUD time.  Please note that MUD time is very different from real time.
+Take a look at a clock in the game to see the difference.
+
+	set_event("6:00","fun my_fun");
+
+This will trigger the monster to call the function my_fun(), which should
+be defined in the actual townsman object, at 6 o'clock mud time.  The
+function can perform any actions you wish.
+
+	set_event("6:00",(: this_player(), "my_fun" :));
+
+This will trigger the monster to call the function my_fun, which
+should be defined in whatever object specified in the first argument.
+This allows you to call any function in any object.
+
+	set_event("6:00",({ "n", "n", "e", "e", "e", "n" }));
+
+This will trigger a path list to be followed, using each command in the
+array passed to it as a seperate command.  The delay between each
+command in the path list is determined by a call to set_path_speed().
+The higher the number, the longer the wait between commands.  The basic
+reason I allow you to give a path list is to that you can have higher
+resolution paths than once a mud-minute, which can be unbearably slow
+if you have complicated paths to follow (it could take hours just to 
+walk across the village!).  So with set_path_speed(0), the monster
+will traverse the path list every single heartbeat, which means he 
+will move once a second.  
+
+
+Why?
+----
+
+	I wrote the townsman for a number of reasons.  Mainly I saw
+a lack of realism in current MUDs, given that shop keepers are
+ALWAYS in their shops, no people in the towns have any set schedules,
+they never go to the pub and eat lunch, etc.  A secondary reason
+is that a primary influence in my gaming is the Ultima series of
+PC games.  One of the main developments in the series lately is the
+addition of a scheduling system similar to this - it makes the world
+seem much more real, and much more interactive.  If used correctly and
+robustly, many very powerful things can be done with the event system.
+For instance, using function calls as events can be a very powerful tool,
+as it can be used to modify the NEXT event in the list before it happens,
+I.E. deterministic path setting; an example of this would be a townsman who
+decides at 6:00 depending on the number of people in his shop if he shuold
+close it or not.  The rest of his day could be modified by this function.
+The possibilities are only limited by your imagination.
+
+Kai@ShadowGate
+scott@jedi.net

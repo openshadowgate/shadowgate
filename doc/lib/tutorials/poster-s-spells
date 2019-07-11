@@ -1,0 +1,35 @@
+Spells checklist - things to double check when creating or fixing spells
+
+It is important to run through this checklist even when copying existing spells and just changing the messages because not all have been reviewed and updated to be working as they should.
+
+Casting needs a spell_kill() if it is an aggressive spell (that logs it into the killers log and also handles alignment hits, etc.)
+
+Also for aggressive spells - casting and damage functions (if they have area effects) need a check for newbiep so newbies can't be targeted and side or area effects bypass them too
+
+Functions for area effects also need to bypass query_true_invis() immortals
+
+Damage needs to use the special damage_targ() or do_spell_damage() functions in spell.c so the proper checks are done (which may mean the checks above aren't needed except to avoid sending messages that don't apply - newbies - or giving away invis. immortals)
+
+Does it have a saving throw (particularly damage spells).  Probably need justification if it doesn't which might be good to include in the header so someone won't think it was an oversight and add it later.
+
+Cleric spells -
+   If it's god specific, is the deity set correctly (spelling)?  Test to be sure clerics of other faiths can't use it.
+      
+Put in set_somatic() unless it is verbal *only* so it will require hands to be free.  That has been established as required for all cleric spells for some time (I think by T) and even included "word of power" even though it would seem to be reasonably as verbal only.  Power word spells are the only mage spells I know of being granted exceptions.
+
+Therefore, don't put in checks for wielded because that should be controlled by the somatic component.  If it's in one you are copying from, get it taken out please.
+
+Make sure any summoned creatures, control objects, etc. get dested when the spell expires and there are objectp checks in case they have been already.   Use dest_effect() and be sure to call ::dest_effect().
+
+Be sure anywhere the casting gets cancelled that dest_effect() is called before the return to complete the function.
+
+If there are callouts in use, they should be removed in dest_effect().
+
+Any functions being run from a callout need objectp(TO), objectp(targ or whatever), etc. checks so they don't bug if the objects they are looking for are invalid.
+
+Other things to consider:
+  Should party members, owned pets, etc. be excluded from area effects or backfires?
+  Does damage or duration increase with level (appropriately) or should it?
+  Should it drain stamina or need other control factors?
+
+As people think of other things, please add them to this list and we'll turn it into a help file for spell coding eventually.

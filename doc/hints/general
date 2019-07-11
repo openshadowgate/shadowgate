@@ -1,0 +1,19 @@
+Hints like this may be toggled with the <hints> command.
+If you are stuck in a room without exits, try typing <fixroom> and seeing if that fixes the problem.
+Never give away items, and only sell to people who you *know* can get them themselves.
+The best means to report a bug is via the <bug> command.
+When the MUD reboots, please be sure to logout at the 2 minute mark, or as soon as you are able, given your circumstances.
+There is a <soulcheck> feature in a number of churches for you to get an idea of how your alignment stands.
+Looting corpses is legal and is good role-playing, unless your character has a distaste for it or religious reasons to not do so.
+If a player has a 'D' in front of their name, they have recently died and have multikill protection, unless they invalidate it.
+If you ask for your equipment back after dying, you invalidate your multikill protection.
+Seeking to change your alignment by using the auto-alignment system is illegal unless your change has been discussed with and approved by the staff.
+If you feel that you might be getting something too easily, consult with the staff about it.  You may be exploiting a bug.
+Multikill protection is to allow the killed player to reequip with basic gear.  Quest items do not count as gear.
+If you kill a player, you must assume they will probably stay that way.  Do not "hold" equipment for them.
+If a player removes their character from the MUD and a new character with the same name appears, that person is *different* than the original character.
+Remember to check your condition often, you can do so with the <score> command.
+Condition may be added to your prompt by using the <prompt> command.  See <help prompt> for details.
+Lines may be used only for OOC communication OR to gather parties.  Party invitations must be limited to meeting location and general goal of the party.
+Have you checked your condition lately?
+Have you eaten today?

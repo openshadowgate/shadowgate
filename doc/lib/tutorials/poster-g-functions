@@ -1,0 +1,42 @@
+G)  Functions in general - exclude avatars/wizzes from effects, etc.
+----------------------------------------------------------------
+1) Older code uses checks like wizardp(TP) or avatarp(TP)
+   - instead, check TP->query_true_invis() (or targ, whatever is passed for the target if it's a special, area effect, etc.)
+   - by using query_true_invis() avatars who are in persona will be treated as normal PC's while invis. through hide, invis. spells, etc.   They will be ignored if they use the true invis. ability for watching or following as avatars, also applies to wizzes the same
+
+2) Most functions need an if(!objectp(TO) || !objectp(ETO)) return 0; 
+   - put it first thing after declaring variables, ALWAYS with call_outs because of the delay
+   - The object or its environment may no longer be valid by the time the function goes off and will bug if they aren't.  
+   - "Bad argument 1 to call other" errors are usually caused by missing checks for valid objects.
+
+3) Aggressive functions 
+   - set("aggressive", function) functions will not need an objectp(TO) or (ETO) check because we added it into the lib before they are called from ::init()
+
+4) Do not use init to initiate combat if at all avoidable
+   - use a set("aggressive", function) function instead.  
+   - Exception would be if you need it to go off on an invis. person 
+	because the aggressive check currently ignores invis. people
+   - Note:  setting aggressive to anything other than 0 will also automatically turn on swarm, so if you don't want the mob to jump into fights where other mobs are attacked, do set_property("swarm", 0) after the set("aggressive", whatever)
+
+5) If you do damage outside of normal combat (traps, etc.) 
+   - you MUST have the following to insure death will be handled properly
+   - note:  TP may need to be a variable defining the target instead
+	TP->add_attacker(TO);
+	TP->continue_attack();
+	if(objectp(TP))	   TP->remove_attacker(TO);
+
+6) wander/wonder inherits or mobs using heartbeat to control movement or with move_around() overrides need converted to use set_nogo( ({ "filename", "filename" })) instead
+
+7) function pointers - WOO WOO for flexibility and memory savings
+    can save a lot of memory, especially if you use it in an inherit
+    To see how much memory per object is saved you can use:
+	eval return memory_info(ETP) (to check the room you're in) or
+	eval return memory_info(present("object id",ETP)); for a mob or item in the room
+    don't use them for descriptions of objects that get cloned though
+    CAN be used for long descriptions of rooms as well as things in set_items
+       set_long( (: TO, "ldesc" :) ) in create, then add a function string ldesc()
+     (or in set items)  "torch" : (: "torch_desc" :),
+       string func_name(string str) {  return("yada yada");  }
+       where func_name is the string in "" inside the (:   :)
+    you can also use if(yada) return("choice a"), etc. dependent on search flags, time of day, or whatever variables you choose even or especially for things in set_items
+    however, don't forget set("night long", "night description") if you want room descriptions to change at night

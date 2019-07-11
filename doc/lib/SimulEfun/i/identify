@@ -1,0 +1,18 @@
+Nightmare IV SimulEfun: identify()
+
+string identify(mixed);
+
+DESCRIPTION
+For strings and integers, it will return either the original string or an
+integer converted to a string.  For other data types, it will convert them
+to a printable format.
+
+EXAMPLE
+identify( ({ 1, master(), ([ "a":1 ]) }) ) 
+   returns "({ 1, OBJ(/adm/obj/master), ([ "a":1, ]), })"
+
+LOCATION
+/adm/simul_efun/identify.c
+
+SEE ALSO
+to_float(), to_int(), to_object()

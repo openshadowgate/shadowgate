@@ -1,0 +1,10 @@
+materials
+
+Materials are the components used to make items such as jewelry,
+weapons clothing or armor. Mainly they are used by nwps allowing
+players to create master pieces. Any given material has a type,
+such as "metal", a specific type, such as "titanium", and a quantity.
+You can combine materials with the same type and specific type. Note
+that when doing so you will assume the lowest quality, so combining
+Excellent with low will result in low.
+

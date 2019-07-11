@@ -1,0 +1,69 @@
+// Blindness
+
+#include <std.h>
+#include <spell.h>
+#include <magic.h>
+
+inherit SPELL;
+
+create() {
+	::create();
+	set_spell_name("blindness");
+	set_spell_level(2);
+	set_spell_type("wizard");
+	set_spell_sphere("illusion_phantasm");
+	set_visual_comp();
+	set_target_required(1);
+}
+
+spell_effect() {
+	object target;
+	::spell_effect();
+	
+	target = TARGET;
+	if(TO->do_saving_throw(target)) {
+		tell_player(CASTER, "Your spell fails.");
+		return;
+	}
+	tell_player(target, "Your world suddenly goes all gray!!");
+	target->add_sight_bonus(-100000);
+	target->set_attack_bonus(-4);
+	call_out("dispel_effect", 2*ROUND_LENGTH);
+}
+
+void dispel_effect() {
+	object target;
+
+	target = TARGET;
+	if(!target) return;
+	tell_player(target, "You recover your sight!");
+	target->add_sight_bonus(100000);
+	target->set_attack_bonus(4);
+}
+	
+
+help() {
+	write(
+@HELP
+Blindness (Illusion/Phantasm)
+-----------------------------
+Usage: cast blindness on <target>
+
+Range: same room as caster
+Casting time: 2 rds.
+Visual Component only.
+Duration: 2 rds.
+Area of Effect: 1 creature
+Saving Throw: Neg.
+
+	The "blind" spell causes the target to lose all sight for the 
+duration of the spell.  More importantly, because of that, the target
+recieves a -6 to all attack rolls and is unable to retaliate against
+attackers for the spell duration.  The blindness will also effect
+how a player sees his inventory, the room, etc. as if it were totally
+dark.
+
+HELP
+	);
+}
+

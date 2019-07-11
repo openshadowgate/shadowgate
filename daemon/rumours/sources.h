@@ -1,0 +1,50 @@
+#define SOURCES ({"Stories around town tell you that",\
+ "You hear from a barmaid that she heard from one of her customers that",\
+ "A rumour is going around town that", "A shopkeeper having a drink after hours lets slip that",\
+ "You have a quiet chat with one of the city guards, and find out that", "A street urchin passes on a rumour that",\
+ "You hear from a garrolous old chap that", "You hear a rumour that", "Word around town is that",\
+ "A group of drunken revellers reveal that", "A jaded looking retired adventurer tells you that",\
+ "A young woman tells you that", "You hear from a shady looking gnome that",\
+ "A stable lad reveals he overheard that", "A tipsy noblewoman relates a story that",\
+ "You come across a whisper, suggesting that", "An unreliable source informs you that",\
+ "A source you trust tells you", "A serious young sorceress tells you",\
+ "A badly dressed boy tells you", "A half heard whisper suggests that",\
+ "An overheard conversation leads you toward the conclusion that",\
+ "Some judicious eavesdropping (accidental or deliberate?) helps you overhear a story being passed on that"}) 
+#define BEASTSOURCES ({"A beast tells you", "You hear from a drow contact that",\
+ "A gnoll slaver passes on a rumour that", "Word in the underdark is that",\
+ "Apparently, the whispers in Juran are that",\
+ "A tribe of orcs has been passing on the story that",\
+ "A passing hobgoblin mercenary mentions that",\
+ "A mysterious ogre-mage claims to know that", "Word among the drow is that",\
+ "An outcast half-drow, eager to curry favour, passes on a the nugget that",\
+ "A few bribes passed out in the Underdark lead you to find out that" })
+#define WILDSOURCES ({"A whisper on the wind carries a rumour that",\
+ "A trail rumour suggests that", "Apparently, word among the druids is that",\
+ "You overhear a fairy whisper that", "You follow some trail signs and learn that",\
+ "A gaunt old ranger tells you that", "A dusty traveller relates a story that",\
+ "A story has been passed around among the elves that",\
+ "A conclave of druids has let slip the information that",\
+ "A company of rangers has learned that", "A party of travellers shares the rumour that",\
+ "A rumour picked up over a shared campfire suggests that",\
+ "Whispers in elven voices reach you, carrying word that", "Gossip among the faerie circles suggests that"})
+#define CITY_SOURCE 1
+#define WILD_SOURCE 2
+#define BEAST_SOURCE 3
+#define RUMOUR_SUBJECT 0
+#define TIME 1
+#define TRACTION 2
+#define SOURCE_TYPE 3
+#define RUMOUR_NUMBER 4
+#define SURFACE 5
+#define DETAIL 6
+#define SECRET 7
+#define INSTIGATOR 8
+#define TRUENAME 9
+#define RUMOUR_LEVEL 2
+#define BEAST_PATHS ({"juran", "muuldaan", "systyquah", "scourge"})
+#define WILD_PATHS ({"beastvillage", "ranger" })
+#define CITY_PATHS ({"rhapsody", "scourge", "temple"})
+#define SURFACE_LVL 1
+#define DETAIL_LVL 2
+#define SECRET_LVL 3

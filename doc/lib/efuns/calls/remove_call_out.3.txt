@@ -1,0 +1,28 @@
+remove_call_out(3)           LPC Library Functions          remove_call_out(3)
+
+
+
+[1mNAME[0m
+       remove_call_out() - remove a pending call_out
+
+
+[1mSYNOPSIS[0m
+       int remove_call_out( string fun ); int remove_call_out();
+
+
+[1mDESCRIPTION[0m
+       In  the  first form this function removes the next pending call out for
+       function 'fun' in the current object.  The return  value  is  the  time
+       remaining  before  the callback is to be called, or -1 if there were no
+       call out pending to this function.
+
+       In the second form all pending call outs for the current object will be
+       removed.  In this case the return value is always 0.
+
+
+[1mSEE ALSO[0m
+       call_out(3), call_out_info(3).
+
+
+
+MudOS                             5 Sep 1994                remove_call_out(3)

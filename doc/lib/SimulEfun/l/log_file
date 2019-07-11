@@ -1,0 +1,24 @@
+Nightmare Mudlib 3.2 SimulEfun: log_file()
+
+void log_file(string, mixed);
+
+DESCRIPTION
+The first argument is the name of a file under the MUD's log directory
+as defined in /adm/include/dirs.h.  The text which is the second argument
+is written to that file.  Logging using this SimulEfun is subject to the MUD's
+security for the log directory in question.  In other words, secure log
+directories require logging objects to have an euid represented by the
+define in security.h UID_LOG or UID_ROOT.  Any object may log to non-secure
+log directories (like the reports directory).
+
+EXAMPLE
+log_file("enter", (string)this_player()->query_name()+" (quit): "+
+  ctime(time()));
+This will log to the file /log/enter (assuming /log is the log dir) the text
+of the second argument.
+
+LOCATION
+/adm/simul_efun/log_file.c
+
+SEE ALSO
+read_file(), write_file()

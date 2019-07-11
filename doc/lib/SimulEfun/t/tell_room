@@ -1,0 +1,14 @@
+Nightmare Mudlib 3.2 SimulEfun: tell_room()
+
+varargs void tell_room(object, string|int, object|object *);
+
+DESCRIPTION
+Tells to all objects in the inventory of the first argument the message
+represented by the second argument.  An optional third argument allows
+you to exclude and object or array of objects from receiving message.
+
+LOCATION
+/adm/simul_efun/communications.c
+
+SEE ALSO
+message(), say(), shout(), tell_object(), write()

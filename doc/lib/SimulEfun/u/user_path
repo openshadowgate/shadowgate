@@ -1,0 +1,12 @@
+Nightmare IV SimulEfun: user_path()
+
+string user_path(string);
+
+DESCRIPTION
+Returns the home directory for the user named.
+
+EXAMPLES
+user_path("descartes") returns "/wizards/descartes"
+
+LOCATION
+/adm/simul_efun/files.c

@@ -1,0 +1,19 @@
+Nightmare Mudlib 3.2 SimulEfun: translate()
+
+string translate(string, int);
+
+DESCRIPTION
+Translates a raw string into garble based on a given linguistic proficiency
+passed as the second argument.  A value of 1 means the entire string is
+pretty much mangled.  A value of 10 leaves the original string in tact.
+
+EXAMPLES
+translate("This is a test string.", 5) might return "This womble foo a bing
+  string."
+
+Also: generally used in the form:
+translate(str, (int)this_player()->query_lang_prof(language));
+where language is some language or another (a string).
+
+LOCATION
+/adm/simul_efun/translate.c

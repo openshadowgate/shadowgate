@@ -1,0 +1,21 @@
+Nightmare IV SimulEfun: to_object()
+
+object to_object(mixed);
+
+DESCRIPTION
+Takes an object, string, or function as an argument and returns the object
+which is being referenced.  This will also load previously unloaded
+objects.  Valid strings which can be passed are:
+to_object("here") returns the environment of this_player()
+to_object("me") returns this_player()
+to_object("this@there") returns the object which is in the environment
+    described by the string there
+to_object("#3@there") returns the third object in the object there
+to_object("e(what)") returns the environment of the object described by
+    the string what
+
+LOCATION
+/adm/simul_efun/to_object.c
+
+SEE ALSO
+identify(), to_float(), to_int()

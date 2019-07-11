@@ -1,0 +1,55 @@
+Profs....
+
+When we say sized that means ...
+size = 1  small
+       2  medium
+       3  large
+       4  giant
+
+Standards 
+---------
+All standard swords are sized with the type "blades" however they 
+default so you needn't change them.
+Clubs are sized and are also defaulted. 
+
+Types
+-----
+We have established the types of..
+
+mace
+fork 
+blades
+clublike
+polearm
+tool (farm equipment etc)
+flail
+staff 
+whip
+axe (sized)
+hammer (sized)
+long bow
+short bow
+spear (sized)
+
+When should you make a new type? You should make a new type if you 
+have a weapon that you feel requires special learning .. ie a tyrelk 
+is a special weapon. The battle axe of the dominion has a special
+point at the top so its a large pointed axe (or such). 
+
+Using profs
+-----------
+funcitons of consideration....
+set_prof_type(string)
+set_prof_level(int)
+query_level_max()
+query_prof_type()
+
+
+the set_prof_type is used to set the above types....
+the set_max_level is used to set the level at which you can achieve 
+100% proficiency (set it if yo htink it should be not sure if its to 
+used)
+
+use the querys to test the defaults etc....
+
+

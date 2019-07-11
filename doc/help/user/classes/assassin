@@ -1,0 +1,26 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Assassin:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Base class
+%^RESET%^%^CYAN%^             %^RESET%^ 16 Base Intelligence
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the stealth skill
+%^RESET%^%^CYAN%^             %^RESET%^ "Price of The Void" quest completed
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ see Base Class
+
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any Evil
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ psion, psywarrior, monk
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: crit
+   %^RESET%^L4: combat critical
+   %^RESET%^L7: void stalker
+
+Warning: This class is not yet implemented.
+
+Deadly professionals, assassins come from various backgrounds to serve one purpose of silent murder for boon. Assassins lean towards stealthy approach in their craft, stalking and studying their victim before executing a deadly attack. In combat, hover, an assassin should not be underestimated as they learn the main rule about preparation very soon in their training: always be. They gain knowledge in arcane and stealthy arts, learn spells and powers to aid in their missions. Assassins receive their own normal caster set of spells that functions like clerical casting. They learn death attack, and learn to use its variant in combat. They learn how to find their victim anywhere. Finally, they become part of... *Suddenly, the narrator drops dead*
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, prepare, prestige classes

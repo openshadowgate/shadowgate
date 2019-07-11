@@ -1,0 +1,25 @@
+next_inventory(3)            LPC Library Functions           next_inventory(3)
+
+
+
+[1mNAME[0m
+       next_inventory() - return the next object in the same inventory
+
+
+[1mSYNOPSIS[0m
+       object next_inventory( object ob );
+
+
+[1mDESCRIPTION[0m
+       Return the next object in the same inventory as 'ob'.
+
+       Warning:   If  the  object  'ob'  is  moved  by  "move_object()",  then
+       "next_inventory()" will return an object from the new inventory.
+
+
+[1mSEE ALSO[0m
+       first_inventory(3), all_inventory(3), deep_inventory(3)
+
+
+
+MudOS                             5 Sep 1994                 next_inventory(3)

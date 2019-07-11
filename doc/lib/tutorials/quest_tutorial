@@ -1,0 +1,70 @@
+Created by Melnmarn (date unknown)
+Modified by Vetri 17 August 1999  
+---------------------------------------------------------------------
+
+Quests on ShadowGate
+
+A small tutorial on how to set up quests for ShadowGate.
+
+First, let me say that we feel quests are an important part of the mud. 
+They will help make it more interactive.
+
+There are no real rules about quests, feel free to come up with some that 
+are unique. We don't want hack and slash, make the players use their brains. 
+Give them puzzles, tricks, traps, etc. Don't make them easy. And make them 
+in such a way, that even if someone else tells a player how to complete the 
+quest, they still have to work at it.
+
+The first thing you need to do is make up a plan for the quest.
+Then you'll need to make everything up that the quest needs to be completed. 
+
+I'll use my cave quest for an example. (Pipe Quest) 
+
+The plan:
+        The player must see Bandolar first. She will ask the player to take 
+        a note to her friend, in the Dragon's Den Caverns. The player will 
+        have to go to the cave, find and solve the mysteries of the caves, 
+        and open the door to find Bandolar's friend, Rufsu, then give her 
+        the note. Rufsu completes the quest.
+
+Creation:
+        Bandolar checks to see if the player has solved the quest, and only 
+        gives the note to players who haven't solved it. In the caves, there 
+        are special rooms, where the player must find certain objects, needed 
+        to open the door to Rufsu.Once they talk with Rufsu, she gives them a 
+        reward, a pipe, and then ends the quest.
+
+        There is one other thing you need to make to complete the quest. That 
+        is the creation of the quest object.
+
+        ::::SAMPLE::::
+
+        #include <std.h>
+
+        inherit "std/quest_ob";
+
+        void create() {
+           set_name("Pipe Quest");
+           set_id( ({ "note", "cave note","quest_object","Pipe Quest"}) );
+           set_short("Note for Rufsu");
+           set_long("Give this note to the Wizard in the Dragon Den Cave");
+           set_quest_points(5);
+        }
+        
+        :::::::::::
+
+        This is all that is needed for the quest object. This MUST be created.
+        Before your quest will operate, an admin will have to copy this quest 
+        object into the quest dir, which, for security reasons, is not 
+        accessable to wizards.
+
+Completion of the quest:
+        At the end of the quest, you must do 2 things.
+        1. Set the quest in the player:
+                this_player()->set_quest("Pipe Quest");
+        2. Add the experience gained from completing the quest:
+                this_player()->add_exp(5000);
+
+
+That is all that is needed to create a quest.
+

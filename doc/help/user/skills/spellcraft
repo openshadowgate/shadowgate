@@ -1,0 +1,10 @@
+%^YELLOW%^Skill: Spellcraft
+
+%^BOLD%^%^WHITE%^A player's spellcraft skill indicates their knowledge of magic and its effects. It involves knowledge of spells, scrolls and magical items, and the use of these abilities and items. Only certain classes (mages, bards and thieves) may actually use scrolls that they can read.
+
+%^BOLD%^%^CYAN%^Stat basis: %^WHITE%^intelligence
+%^BOLD%^%^CYAN%^Current areas of influence: %^WHITE%^scroll use, spell recognition, identification of items, spell reflection
+
+%^YELLOW%^This skill is converted but awaiting several changes in mechanics.
+
+%^BOLD%^%^CYAN%^Related helpfiles: %^WHITE%^skills, study, spell reflection

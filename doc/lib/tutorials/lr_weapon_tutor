@@ -1,0 +1,75 @@
+//         Created by Melnmarn on the 5th of March 1995          //
+
+Functions which must be called to set values:
+
+set_id(string *names);         	IE: set_id(({"a name","another name"}));
+set_name(string name);  	IE: set_name("a name");
+set_short(string short desc);	IE: set_short("short desc");
+set_long(string long_dec);  	IE: set_long("long desc");
+set_weight(int weight);  	IE: set_weight(3);
+set_value(int val);		IE: set_value(3);
+
+Things which must be set which are specific to long range weapons:
+
+set_type(string type);		IE: set_type("peircing");
+set_range(int short,int medium,int long); IE: set_range(1,5,10);
+set_ammo(string ammunition);    IE: set_ammo("arrows");
+
+***************************************************************************
+You MUST create an ammo object for the weapon. 
+(can't shoot it with out ammunition.)
+***************************************************************************
+Special functions which you may use to do fun things:
+See the standard object's:
+set("read", string|function);
+
+void set_wield(string|function);
+Examples: set_wield("You feel the power of the butter knife!");
+          set_wield( (:this_object(), "wield_butter":));
+You may pass either a function or a string to this function as an argument.
+If you pass a string, the string will be written to the player every
+time the weapon is wielded in place of the "You wield foo" generic
+wield message.  If you pass a function, when a player tries to wield a
+weapon, that function will be called.  If that function returns a 1,
+the player can wield the weapon.  If it returns 0, the wielding is
+not allowed.  Example:
+void create() {
+    ::create();
+    ...
+    set_wield( (: this_object(), "wield_butter" :) );
+    ...
+}
+
+int wield_butter() {
+    if((string)this_player()->query_class() != "cleric") return 0;
+    else return 1;
+}
+See /doc/lpc/data_types/function for more info on the function data type.
+
+set_hit(string|function)
+Examples: set_hit("You bash your opponent with the butter knife!");
+          set_hit( (: this_object(), "weapon_hit" :));
+Every time the weapon hits an opponent, if you have passed a string,
+the string will be written to the wielder.  If you passed a function,
+the function you passed will be called passing the enemy object as an
+argument.  Whatever your function returns will be added to the damage
+done.  Example:
+void create() {
+    ::create();
+    ...
+    set_hit( (: this_object(), "weapon_hit" :) );
+    ...
+}
+
+int weapon_hit(object attacker) {
+    if((string)attacker->query("race") == "artrell") return random(10);
+    else return 0;
+}
+
+void set_unwield(string|function);
+Examples: set_unwield("You are no longer burdened by the butter knife.");
+          set_unwield( (: this_object(), "unwield_butter" :) );
+Exactly the same as set_wield(), except this is called when the player
+unwields a weapon.
+
+

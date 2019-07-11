@@ -1,0 +1,1 @@
+#define VALID_SHADOWS ({ "/realms/valodin/obj/opticalshadow", "/realms/darkone/lawshadow", "/realms/valodin/obj/acidshadow", "/realms/valodin/obj/tapeshadow", "/realms/valodin/obj/horseshadow", "/realms/valodin/vampire/obj/vampsh", "/realms/silenus/obj/steedshadow" })

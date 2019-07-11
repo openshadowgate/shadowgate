@@ -1,0 +1,31 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Versatile Arcanist:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Sorcerer
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Spellcraft Skill
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Charisma (before equipment modifiers)
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow, elf, 
+               drow, halfling, gnome, voadkyn, kobold, goblin, 
+               orc (tanarukk), yuan-ti
+
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, psion, psywarrior
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, disguise, influence, spellcraft
+              **disguise temporarily substituted to perception until installed
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: greater spell knowledge
+   %^RESET%^L4: master of elements
+   %^RESET%^L7: master of versatility
+
+Versatile arcanists have a flexible understanding of the weave that only
+rare sorcerers ever truly obtain.  Such mastery of arcana extends not only
+to the sorcerer's instinctive understanding of magic and magical items, 
+but also grants a command of spells that most normal sorcerers never 
+manage to learn.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, prepare, master

@@ -1,0 +1,35 @@
+A quick tutorial for rings....
+
+
+inherit "/std/armour";  // so it can be worn. :)
+
+create() {
+  ::create();
+  set_name("ring");     //  set the name to ring
+                        
+  set_id(({"ring"}));   // set id to whatever, including ring.
+
+                        // normal set_short and set_long.
+  set_short("Ring");   
+  set_long("This is a ring.");
+
+  set_type("ring"); 
+    
+  set_ac(0);              //  Rings don't have an AC. so set this to 0!
+			  //  use the enchantment to add AC.
+
+  set_weight(1);          //  They are light, never more than a pound. 
+			  //  so set to 1.
+ 
+  set_value(75);          // Value may vary.
+
+  set_limbs(({"right hand", "left hand"}));  // Gotta wear them somewhere.
+					     // fingers are not valid limbs.
+
+  set_property("enchantment",2);  // use this to set an AC if it needs to 
+				  // have one, like a protection ring.
+
+			// the typical wear and unwear functions.
+  set_wear(string|| function);      
+  set_unwear(string || function);
+}

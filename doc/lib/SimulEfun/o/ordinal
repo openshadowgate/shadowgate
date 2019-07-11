@@ -1,0 +1,12 @@
+Nighmare IV SimulEfun: ordinal()
+
+string ordinal(int);
+
+DESCRIPTION
+Returns the ordinal prefix for a given number.
+
+EXAMPLES
+ordinal(7) returns "th"
+
+LOCATION
+/adm/simul_efun/ordinal.c

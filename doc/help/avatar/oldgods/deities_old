@@ -1,0 +1,84 @@
+%^BOLD%^%^BLUE%^The world of ShadowGate is pantheistic and includes many deities who may be worshipped by mortals.  While any mortal may make offerings to any deity to appease him or her, each mortal is also encouraged to choose a patron who will help guide the mortal's life.  The deities are based on the Forgotten Realms pantheon, with modification.  These are the deities and their spheres of influence.
+
+%^BOLD%^%^GREEN%^Deity       Spheres of Influence
+               %^BOLD%^%^WHITE%^-%^GREEN%^Domains
+%^BOLD%^%^WHITE%^--------------------------------------------------
+%^BOLD%^%^BLUE%^Akadi       Air/Freedom
+               %^BOLD%^%^WHITE%^-%^BLUE%^Air, Storms, Travel
+%^BOLD%^%^RED%^Anhur       Valor/Vindication/War/Storms
+               %^BOLD%^%^WHITE%^-%^RED%^Good, Storms, War
+%^CYAN%^Auppenser   Psionics/Enlightenment/Serenity
+               %^BOLD%^-%^RESET%^%^CYAN%^Creation, Knowledge, Mentalism
+%^BOLD%^Auril       Cold/Ice/Winter
+               %^BOLD%^-Air, Cold, Evil
+%^BOLD%^%^BLACK%^Bane        Tyranny/Strife/Fear/Revenge/Retribution
+               %^BOLD%^-%^BLACK%^Evil, Tyranny, War
+%^BOLD%^%^MAGENTA%^Beshaba     Misfortune/Poison/Disease/Decay
+               %^BOLD%^-%^MAGENTA%^Evil, Fate, Trickery
+%^MAGENTA%^Cyric       Deception/Lies/Illusions/Undeath
+               %^BOLD%^-%^RESET%^%^MAGENTA%^Evil, Illusion, Trickery
+%^ORANGE%^Grumbar     Earth/Craft/Artifice
+               %^BOLD%^-%^RESET%^%^ORANGE%^Cavern, Creation, Earth
+%^CYAN%^Helm        Guardians/Protection
+               %^BOLD%^-%^RESET%^%^CYAN%^Protection, Strength, Vigilance
+%^BOLD%^%^CYAN%^Istishia    Waters/Purification/Oceans
+               %^BOLD%^-%^CYAN%^Plant, Storms, Water
+%^GREEN%^Kelemvor    Death/The Dead
+               %^BOLD%^-%^RESET%^%^GREEN%^Fate, Protection, Repose
+%^BOLD%^%^RED%^Kossuth     Fire/Corruption/Prophecy/Summer
+               %^BOLD%^-%^RED%^Destruction, Fire, Renewal
+%^YELLOW%^Lathander   Dawn/Sun/Renewal/Athletics/Spring
+               %^BOLD%^-%^YELLOW%^Good, Sun, Renewal
+%^RED%^Malar       Hunters/Bloodlust/Beasts
+               %^BOLD%^-%^RESET%^%^RED%^Animal, Evil, Strength
+%^BOLD%^%^BLACK%^Mask        Thieves/Shadows
+               %^BOLD%^-%^BLACK%^Darkness, Evil, Trickery
+%^BOLD%^%^GREEN%^Mielikki    Forests/Autumn
+               %^BOLD%^-%^GREEN%^Animal, Good, Plant
+%^BOLD%^%^BLUE%^Mystra      Magic/The Weave/Mysteries/Time
+               %^BOLD%^-%^BLUE%^Illusion, Knowledge, Magic
+%^MAGENTA%^Oghma       Knowledge/Song/Literature
+               %^BOLD%^-%^RESET%^%^MAGENTA%^Charm, Knowledge, Travel
+%^BOLD%^Selune      Moon/Stars/Seekers
+               %^BOLD%^-Good, Moon, Travel
+%^BOLD%^%^BLACK%^Shar        Darkness/Night/Secrets/Caverns
+               %^BOLD%^-%^BLACK%^Cavern, Darkness, Evil
+%^CYAN%^Shaundakul  Trade/Travel/Exploration
+               %^BOLD%^-%^RESET%^%^CYAN%^Air, Protection, Travel
+%^GREEN%^Silvanus    Wild Nature/Summer/Patron of Druids
+               %^BOLD%^-%^RESET%^%^GREEN%^Animal, Plant, Renewal
+%^RED%^Sune        Love/Beauty
+               %^BOLD%^-%^RESET%^%^RED%^Charm, Good, Protection
+%^YELLOW%^Talos       Storms/Destruction
+               %^BOLD%^-%^YELLOW%^Destruction, Evil, Storms
+%^BOLD%^%^RED%^Tempus      War/Strength
+               %^BOLD%^-%^RED%^Destruction, Strength, War
+%^BOLD%^Torm        Duty/Loyalty
+               %^BOLD%^-Good, Protection, Strength
+%^BOLD%^%^MAGENTA%^Tymora      Good Fortune/Victory/Good Luck
+               %^BOLD%^-%^MAGENTA%^Fate, Good, Travel
+%^BOLD%^%^BLUE%^Tyr         Justice
+               %^BOLD%^-%^BLUE%^Good, Vigilance, War
+
+%^BOLD%^%^WHITE%^--------------------------------------------------
+%^BOLD%^%^BLUE%^See also: %^GREEN%^race_gods, domains, individual help files for each deity
+
+%^BOLD%^Suggested Readings:
+%^BOLD%^%^GREEN%^Faiths and Avatars
+%^BOLD%^%^GREEN%^Powers and Pantheons
+
+%^BOLD%^%^BLUE%^The majority of the information about the gods of Shadowgate have been taken from these two books.  Not everything presented in these helpful tools from Wizards of the Coast are used, such as the Time of Troubles.  
+
+%^BOLD%^We have taken some liberties with the faiths here:
+%^BOLD%^-%^GREEN%^Akadi is the combination of Akadi and Valkur
+%^BOLD%^-%^GREEN%^Bane is the combination of Bane and Hoar
+%^BOLD%^-%^GREEN%^Beshaba is the combination of Beshaba, Moander, and Talona
+%^BOLD%^-%^GREEN%^Cyric is the combination of Cyric, Garagos, and Velsharoon
+%^BOLD%^-%^GREEN%^Grumbar is the combination of Gond, Geb, and Grumbar
+%^BOLD%^-%^GREEN%^Istishia is the combination of Eldath, Umberlee, and Istishia
+%^BOLD%^-%^GREEN%^Kossuth is the combination of Kossuth, Gargauth, and Glautru
+%^BOLD%^-%^GREEN%^Mystra is Pre-Midnight
+%^BOLD%^-%^GREEN%^Oghma is the combination of Milil, Denier, and Oghma
+%^BOLD%^-%^GREEN%^Shar is the combination of Shar and Loviatar
+%^BOLD%^-%^GREEN%^Tempus is the combination of Tempus and Uthgar
+%^BOLD%^-%^GREEN%^Torm is the combination of Torm, Ilmater, and Nobanion

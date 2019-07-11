@@ -1,0 +1,42 @@
+%^BOLD%^Priests %^RESET%^are able to select at least one domain from those offered by your deity. Multiclass priests will be able to select one domain, and singleclass priests will be able to select two. This can be done at churches and temples using <pick domain x>, where x is the domain you wish to have access to.
+
+%^GREEN%^Rangers %^RESET%^are able to access spells from the %^GREEN%^animal %^RESET%^and %^GREEN%^plant %^RESET%^domains.
+%^YELLOW%^Paladins%^RESET%^ are able to access spells from the %^BOLD%^vigilance %^RESET%^and %^BOLD%^protection %^RESET%^domains.
+
+%^BOLD%^Be aware %^RESET%^- you cannot change your mind on a domain you choose later on, so choose wisely. Domains available to each god can be seen in the specific helpfiles for each deity, eg/ <help callamir>, and in <help deities>.
+
+%^BOLD%^Domain spells are as follows:
+------------------------------------------------------------------
+%^CYAN%^Air          whispering wind, airbolt, windstorm
+Animal       ghost step, snakebite, rage
+%^CYAN%^Cavern       meld into stone, maw of stone, earthquake
+Charm        good hope, bliss, charm monster
+%^CYAN%^Cold         frost breath, ice shield, hypothermia
+Creation     minor creation, glyph of warding, cometfall
+%^CYAN%^Darkness     armor of darkness, darkbolt, listening shadow
+Destruction  shatter, tremor, disintegrate
+%^CYAN%^Earth        earth reaver, strength of stone, stone body
+Evil         blight, unholy orb, blasphemy
+%^CYAN%^Good         bless, holy orb, holy word
+Fate         auspicious bolt, aegis of fate, fortune fate
+%^CYAN%^Fire         handfire, fire shield, flameburst
+Illusion     displacement, screen, phantasmal killer
+%^CYAN%^Knowledge    comprehend languages, wieldskill, forgotten melody
+Magic        true seeing, mystic bolt, break curse
+%^CYAN%^Mentalism    foresight, bolt of force, discern location
+Moon         faerie fire, moonbeam, moonfire
+%^CYAN%^Plant        entangle, meld into nature, thorn spray
+Protection   divine shield, invisibility purge, teleportation ward
+%^CYAN%^Repose       death watch, spectral touch, spectral steed
+Storm        lightning touch, stormwinds, stormrage
+%^CYAN%^Strength     righteous might, resilience, crushing hand
+Suffering    body blades, kiss of torment, wave of pain
+%^CYAN%^Sun          nimbus of light, searing light, sunburst
+Travel       fly, faithful mount, create portal
+%^CYAN%^Trickery     bestow curse, conceal alignment, confusion
+Tyranny      oppression, fear, forbiddance
+%^CYAN%^Vigilance    orders oath, mark of justice, dictum
+War          seeking sword, offensive summoning, berserker
+%^CYAN%^Water        cloudburst, mist of the goddess, tidal surge
+
+See also: cleric, deities, individual help files for each deity

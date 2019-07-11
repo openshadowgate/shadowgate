@@ -1,0 +1,8 @@
+Nightmare mudlib living lfun: set_max_mp()
+
+void set_max_mp(int mp)
+
+This sets the maximum magic points in a living object to "mp".
+
+See also: query_max_mp(), set_mp(), add_mp()
+Defined in /std/living/body.c

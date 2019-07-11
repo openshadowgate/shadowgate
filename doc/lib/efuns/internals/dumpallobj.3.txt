@@ -1,0 +1,26 @@
+dumpallobj(3)                LPC Library Functions               dumpallobj(3)
+
+
+
+[1mNAME[0m
+       dumpallobj()  - report various statistics on all objects that have been
+       loaded
+
+
+[1mSYNOPSIS[0m
+       void dumpallobj( string | void );
+
+
+[1mDESCRIPTION[0m
+       This function dumps a list of statistics on all objects that have  been
+       loaded.   If  no  argument  is  specified, then the information will be
+       dumped to a file named /OBJ_DUMP.  If an argument  is  specified,  then
+       that name is used as the filename for the dump.
+
+
+[1mSEE ALSO[0m
+       mud_status(3), debug_info(3)
+
+
+
+MudOS                             5 Sep 1994                     dumpallobj(3)

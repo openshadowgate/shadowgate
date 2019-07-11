@@ -1,0 +1,33 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Metamind:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Psywarrior
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Academics Skill
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Intelligence (before equipment modifiers)
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, 
+               half-drow, kobold, hobgoblin, yuan-ti, 
+               halfling (ghostwise), dwarf (duergar)
+
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ psion, mage, sorcerer, paladin, bard
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, endurance, perception
+
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: mind partition
+   %^RESET%^L4: mental fortress
+   %^RESET%^L7: mind wave
+
+Metaminds have mastered control over their minds, making them particularly
+resilient, especially to attacks against their psyche. After countless 
+hours spent honing their mental prowess, metaminds are able to ignore mind
+controlling effects used against them.  The metamind is also able to 
+project a portion of himself into the astral plane, granting the timeless
+body power.  A metamind is also so skilled with mental exercises that they
+gain a +2 to all academics and spellcraft checks.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, prepare

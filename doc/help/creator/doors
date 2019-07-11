@@ -1,0 +1,210 @@
+                     Building Rooms with Doors
+                     for the Nightmare mudlib
+                   written by Descartes of Borg
+                         23 february 1993
+
+In this document is a tutorial on how to use the vault.c object that comes
+with the Nightmare mudlib.  This is an object which inherits room.c for rooms
+with doors.  Doors were not included in room.c, because the overhead of 
+having all the door functions in simple rooms which, for the most part, do
+not make use of doors was thought to be wasteful.  The following functions
+regarding the creation of doors are described in the tutorial:
+
+void set_door(string id, string dest, string dir, string key);
+void set_open(string id, int open);
+void set_locked(string id, int open);
+void set_func(string id, string which, string fun);
+void set_string(string id, string which, string str);
+void set_door_pre_exit_function(string id, string fun);
+int query_open(string id);
+int query_locked(string id);
+
+Part I: setup
+----------------------------------------------------------------------------
+To set up a door, you need two rooms which inherit "/std/vault".
+Each room must AT LEAST have the functions set_door();
+This function looks like this:
+    set_door("door", "/d/standard/locked", "south", "honor key");
+OR
+    set_door("portal", "/d/standard/foo", "east", 0);
+
+The first argument is an id.  This is because vault.c allows you to set up
+multiple doors in a single room.  Each door must have a unique id.
+
+The second argument is the room that the door leads to.  This will also be
+listed in the rooms set_exits() function.  You may have more than one door
+which leads to the same exit.
+
+The third argument is the command typed by the player to go through the door
+when open (again, listed with the destination room in set_exits()).  You
+may only have one door respond to each command.
+
+The final argument is the id of a key which a player must have in order to
+lock or unlock the door.  If the door has no lock, then this argument should
+be 0.
+
+This function sets up a door in a room that is closed and unlocked when the
+room is created.  But you need to make sure the room on the other side of
+the door has setup the door as well. Assuming the first case in the two
+examples above, we therefore need to set up a room in /d/standard/locked
+In that room, we therefore have the line:
+    set_door("door", "/d/standard/house", "north", "honor key");
+This will set up a door in /d/standard/locked that leads north to the room
+above, using the same key.  At room creation, it too is closed, but unlocked.
+
+If you want the room to return to opening conditions at reset(), then you 
+reset the conditions ONLY IN ONE ROOM.  This is because, with some drivers,
+reset() in different objects are called at different times.  You therefore,
+whenever manipulating the state of the door, want to make sure that the rooms
+controls are set for both rooms.  Therefore, in one of these rooms (it does
+not matter which), you will have the reset() function as follows:
+(we will assume the reset is in /d/standard/locked)
+
+void reset() {
+    set_open("door", 0);
+    set_locked("door", 0);
+    "/d/standard/house"->set_open("door", 0);
+    "/d/standard/house"->set_locked("door", 0);
+}
+
+This is the minimum amount of work needed to setup a door between two rooms
+on the Nightmare mudlib.  But there are of course many other features of
+which you can make use.  The first bit will be to explain the locking and
+opening functions used in reset() above, so that you may set you room to
+be in any state you like on creation and at reset().
+
+****************************************************************************
+
+Part II: opening, closing, locking, and unlocking the doors
+---------------------------------------------------------------------------
+The default settings for all doors are closed, but unlocked.  Most people
+will want their doors closed but locked(if they have a lock).  The
+manipulation of locks and the opening is done through the 2 following
+functions:
+
+    set_open("door", 1);
+    set_locked("door", 1);
+
+The first argument of both functions is the id of the door which is being
+affected.  The second argument is either true or false, where you are setting
+the door to be open (1) or closed (0) and locked(1) or unlocked(0).
+In general, the only time you should even call these functions are in
+create() and reset().  The actual open, close, lock, unlock commands and
+handling of those commands are already contained in vault.c.  In addition,
+if you want to add something extra to any of these commands (for instance,
+to check not only if the player has the right key (which vault.c already does),
+but you also want to make it harder for drunk people to unlock the door), then
+there is a way to do it, and there is no need to mainpulate these controls.
+Remember, however, WHEREVER YOU USE ONE OF THESE FUNCTIONS, USE IT ALSO IN THE
+ROOM ON THE OTHER SIDE OF THE DOOR.  Otherwise you will create an
+inconsistency.
+
+***************************************************************************
+
+Part III: status checking
+-------------------------------------------------------------------------
+There are two functions which check the status of the door:
+    int query_locked("door");
+    int query_open("door");
+
+These two functions tell you whether or not the door is open or locked :)
+
+***************************************************************************
+
+Part IV: creating your own functions
+----------------------------------------------------------------
+There are three functions which allow you to manipulate what happens when
+a player tries to open, close, lock, or unlock a door.  These are:
+
+    set_string("door", "open", "You hear the door creak as you open it.\n");
+    set_func("door", "unlock", "check_drunkard");
+    set_door_pre_exit_function("door", "no_can_do");
+
+The simplest of these is the set_string() function.  This allows you to set a
+custom message to the use when he/she locks, unlocks, opens, or closes the door.
+They only see the message if they successfully open the door.
+
+The first argument is the id of the doors for which you are setting this
+message.
+
+The second argument states which command the message is designed for.
+
+The third argument gives the message the player sees when the command is
+successful. 
+
+The example above would therefore look like this to the player:
+>north
+The door is closed.
+>open door
+You hear the door creak as you open it.
+>
+
+Otherwise, the player would have seen "You open the door." Dull indeed!
+
+There are some events which you may not want a player to perform a given
+command, even though he/she has the key or the door is unlocked, etc.
+For instance, perhaps you want to make it randomly possible that a drunk
+player cannot put the key in the keyhole?
+
+    set_func("door", "unlock", "check_drunkard);
+
+would check a function you defined called check_drunkard() if all other
+conditions for unlocking the door are met.  If your function returns 1, then
+the player can unlock the door, if it returns 0, the player cannot.  So
+you might define the check_drunkard() function like this:
+
+int check_drunkard() {
+    if(!this_player()->query_intox()) return 1;
+    if(random(101) < 10) {
+	write("You fumble with the key, but you are too drunk to fit it in the hole.\n");
+	say(this_player()->query_cap_name()+" fumbles drunkenly with the key.\n");
+	return 0;
+    }
+    return 1;
+}
+
+When the player types the command <unlock door with key>, if the player
+has the key, the door is closed and locked, then the driver checks to see
+that check_drunkard() returns 1.  If it returns 1, the player unlocks the
+door.  Otherwise the player does not.  In this case, if the player is sober,
+it allows him/her to unlock the door.  If the player is drunk, then the
+player has a 10% chance of not being able to unlock the door.
+
+The last function is similar to room.c's set_pre_exit_functions() function.
+Since vault.c uses that function for the exit use by the door, if you
+want to define your own pre-exit function, then you will have to use
+set_door_pre_exit_function() instead.  The functionality is EXACTLY the same,
+except the call for set_door_pre_exit_function() takes two strings, whereas
+set_pre_exit_functions() takes two string arrays.  If this all confuses you,
+then don't worry.  You should understand room.c set_pre_exit_functions()
+before trying to use this anyways.  Simply put however, it is just like
+the set_func() described above, except it is called when the player
+tries to get through the open door.
+
+***************************************************************************
+
+Addendum: about keys
+---------------------------------------------------------------------------
+The lock and unlock commands of vault.c check that the player has ANY
+object with the id in question.  So NEVER set your key to being "key",
+because then any old key will unlock/lock your door.
+The id is the only thing that matters to the command.  Nothing else about
+the object makes a difference.
+
+Also, you might want to disable lock_picking for some reason (this should
+be done only in special circumstances, as this otherwise cheapens the
+rogue lockpicking ability).  To do that, do the following:
+
+int pick_lock(string str) { return 0; }
+
+We recommend, instead, that you use the magic hold property described in the
+document on properties to make it more difficult for a rogue to pick the
+lock.  Holds apply to the room in which the picking is taking place, not to
+individual doors.
+
+	-Descartes of Borg 930223
+And one last thing.  Every doors should be an item in set_item_descriptions()
+or set_item_functions() (as defined in room.c).  set_item_functions() is
+preferred, since you should probably differentiate in the description
+between an open and closed door.  Things will get messed up if you fail
+to define the door in the descriptions.

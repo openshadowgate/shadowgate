@@ -1,0 +1,14 @@
+Nightmare Mudlib 3.2 SimulEfun: read_database()
+
+string *read_database(string);
+
+DESCRIPTION
+You pass to this argument the name of a database file which you want read
+into an array of strings.  The simul_efun will ignore lines beginning with a
+# sign and it will also ignore blank lines.
+
+LOCATION
+/adm/simul_efun/read_database.c
+
+SEE ALSO
+log_file(), read_file(), write_file()

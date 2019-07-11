@@ -1,0 +1,14 @@
+D)  set_property("propertyname", mixed prop) - in /std/Object
+---------------------------------------------------------
+1) Don't forget that set_property adds to any already set
+   - example - a room inherits light of 2 from a file it inherits
+	       set_property("light", 1) adds 1 to the 2 and makes it 3
+
+2) Common properties
+   Rooms - 
+	light, no teleport, no sticks, used sticks, indoors, 
+	("indoors", 1) - defaults to outdoors ("indoors", 0) with no setting 
+        Note:  night light is a set("night light", int) - handy to avoid needing street light objects for outdoor rooms that would somehow be lit at night
+   Items - enchantment
+   Mobs - set_property("swarm", 0) if you need to turn off swarm (or 1 for on)
+	  note:  set("aggressive", anything but 0) will turn swarm on

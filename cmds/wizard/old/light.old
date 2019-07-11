@@ -1,0 +1,164 @@
+//      Light [v2.0: casting on player possible]
+//      Thorn@Shadowgate
+//      2/11/95 [v2.0: 2/21/95]
+//      Wizard Spells
+//      light.c
+
+object location, victim;
+string saved_long;
+int effect;
+
+string query_sphere() { return "alteration"; }
+
+//	Allows light to be used as an offensive spell on a living 
+//	being or monster.
+
+void alternate_do_spell(object caster, string targ) {
+  object target;
+  string *ret, spell_name;
+  mapping components;
+  int mp_req,x;
+  spell_name = "light";
+  seteuid(getuid());
+  components = ([ "firefly" : 1,]);
+  if(!caster) return 0;
+  target = present(targ,environment(caster));
+  if(!target) {
+    tell_player(caster, "That is not here!\n");
+    return 1;
+  }
+  if(!living(target)) {
+    tell_player(caster, "That is not a living being!\n");
+    return 1;
+  }
+  mp_req = "/daemon/magic_d"->query_spell_cost(2,caster->query_sphere(),query_sphere());
+  if((int)caster->query_mp() < mp_req) {
+    tell_player(caster, "Your magic powers are too weak to cast that spell.\n");
+    return 1;
+  }
+  if(!"/daemon/magic_d"->can_cast(caster,1,"wizard", spell_name, components)) {
+    tell_player(caster, "You cannot cast that spell.\n");
+	return 1;
+  }
+  if(caster->query_disable()) {
+    write("You are still recovering from the last spell.");
+    return 1;
+  }
+  write("You begin to cast the spell!");
+  caster->set_mp((int)caster->query_mp() - mp_req);
+  caster->set_casting(1);
+  say(this_player()->query_cap_name()+" raises "+this_player()->query_possessive()+" hands in a small bag and throws a firefly in the air towards "+capitalize(targ)+"!\n");
+  caster->set_disable(7);
+  call_out("do_real_spell",7,caster,target);
+  effect = 1;
+  return 1;
+}
+
+void do_spell(object caster, string targ) {
+	object target;
+	string *ret, spell_name, saved_long2;
+	mapping components;
+	int mp_req,x;
+	spell_name = "light";
+	components = ([ "firefly" : 1, ]);
+	if(!caster) return 0;
+	if(targ) {
+		alternate_do_spell(caster, targ);
+		return;
+	}
+	seteuid(getuid());
+	mp_req = "/daemon/magic_d"->query_spell_cost(2,caster->query_sphere(),query_sphere());
+	if((int)caster->query_mp() < mp_req) {
+		tell_player(caster, "Your magic powers are too weak to cast that spell.\n");
+		return 1;
+	}
+	if(!"/daemon/magic_d"->can_cast(caster,1,"wizard", spell_name, components)) {
+		tell_player(caster, "You cannot cast that spell.\n");
+		return 1;
+	}
+	if(caster->query_disable()) {
+		write("You are still recovering from the last spell.");
+		return 1;
+	}
+  	write("You begin to cast the spell!");
+  	caster->set_mp((int)caster->query_mp() - mp_req);
+  	caster->set_casting(1);
+	location = environment(caster);
+	saved_long = location->query_long();
+  	tell_room(location, caster->query_cap_name()+" releases a firefly which disappears in a puff of smoke!\n",({ caster,target }) );
+  	caster->set_disable(7);
+  	saved_long2 = saved_long+"\nThere is an unnatural light source present here.";
+	if(saved_long2 != saved_long) location->set_long(saved_long2);
+  	call_out("do_real_spell",7,caster,target);
+  	effect = 0;
+  	return 1;
+}
+
+void go_dark(object target) {
+	if(target) {
+		target->add_sight_bonus(1000);
+		target->set_ac(target->query_ac() + 4);
+		tell_player(target, "You regain your sight.\n");
+	}
+	else {
+		location->set_long(saved_long);
+		tell_room(location,"The light source winks out.\n");
+		location->set_light(-2);
+	}
+}
+	
+
+void do_real_spell(object caster, object target) {
+	string target_limb;
+	int levelmod, casterlevel;
+	object obj;
+
+	if(caster->query_spell_interrupted()) {
+    	tell_player(caster,"Your spell is disrupted by an attack!\n");
+   		caster->set_spell_interrupted(0);
+    	return 1;
+  	}
+  	casterlevel = (int)caster->query_guild_level("mage");
+  	if(!casterlevel)
+    	casterlevel = (int)caster->query_guild_level("illusionist");
+  	if(!casterlevel) {
+    	tell_player(caster,"Wait, you're not a magic user!\n");
+    	return 1;
+  	}
+  	tell_player(caster,"You cast Light.\n");
+	if(!effect) {
+		environment(caster)->set_light(2);
+    	tell_room(environment(caster),"Light seems to appear from nowhere!\n",({ target }));
+		call_out("go_dark", casterlevel*7);
+  		caster->set_casting(0);
+  		return;
+  	}    
+	if(effect && !"/daemon/saving_d"->saving_throw(target, "spell")) { 
+		target->add_sight_bonus(-1000);
+                target->set_ac((int)target->query_ac() - 4);
+    	tell_room(environment(caster),"Light seems to appear from nowhere, blinding "+capitalize(target->query_name())+"!\n",({ target }));
+		tell_player(target, "You are suddenly blinded by an intense light source!\n");
+		call_out("go_dark", casterlevel*7, target);
+	} 
+	else {
+		tell_player(caster, "The spell seems to have no effect on "+capitalize(target->query_name())+"!\n");
+	}		
+}
+
+int help() {
+  write( @EndText
+Syntax: cast light [on <name>] 
+
+	This spell creates a luminous glow, equal to torchlight,
+within the room.  Light can spring from any room whatsoever,
+but may not completely negate the darkness in that room.  
+	Light may be also used to counteract magically induced
+darkness to ratio of one spell of light to one of darkness.
+	Light cast upon a monster or player directly will worsen
+their armor class by 4 for the duration of the spell.
+
+See also: darkness
+EndText
+  );
+  return 1;
+}

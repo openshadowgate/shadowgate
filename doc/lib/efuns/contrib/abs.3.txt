@@ -1,0 +1,18 @@
+abs(3)                       LPC Library Functions                      abs(3)
+
+
+
+[1mNAME[0m
+       abs() - return the absolute value of a number
+
+
+[1mSYNOPSIS[0m
+       mixed abs( float f ); mixed abs( int i );
+
+
+[1mDESCRIPTION[0m
+       Returns the absolute value of its argument
+
+
+
+FluffOS                           30 Dec 2015                           abs(3)

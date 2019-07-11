@@ -1,0 +1,26 @@
+%^BOLD%^%^CYAN%^The Way of The Elements.%^RESET%^
+
+%^BOLD%^%^WHITE%^Those who have dedicated themselves to this emphasis of Ki have learned to manipulate the very elements. By doing so they have managed to learn to control their own Ki to a greater degree. While the monks who dedicate themselves to this emphasis of Ki are still quite adept in physical combat, much more of their focus is dedicated to spellcraft than any other emphasis, and they have learned how to manipulate ki to create some potent elemental effects.
+
+NOTE: 
+      Additional Class Skills: Spellcraft and Academics.
+      Way of The Elements monks receive the following spells:
+      Level 3: burning hands and fly.
+      Level 5: thunder wave and hold person.
+      Level 7: fireball and shatter. 
+      Level 9: wall of stone and gaseous form. 
+      Level 11: stoneskin and gale fist
+      Level 13: wall of fire and gust of wind. 
+      Level 15: cone of cold.
+      Level 17: fire storm and monsoon. 
+      
+      Monks of this dedication receive 2 Ki points per level.       
+      
+      Monks of this dedication are able to use the ki 
+      command to specify which element they want to focus
+      on. The command to do so is ki focus <elemental type>.
+      Valid types are fire, cold, electricity, and 
+      acid. This elemental focus will determine the 
+      damage type of flurry of blows, as well as the 
+      type of guardians who may show up when the 
+      elemental opportunist feat is selected.     

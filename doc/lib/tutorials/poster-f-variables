@@ -1,0 +1,9 @@
+F)  Variable use - global versus local
+----------------------------------
+1)  Global variables are defined at the top of the file and stay in memory 
+
+2)  Local variables are declared within a function/only used there
+
+3)  If you get an error trying to define one within a function but only need it for that function, try putting it before the ::create(), ::reset(), etc. rather than making it global
+
+4)  If the variable is not needed outside a given function or can be passed to a call_other where ever else it's needed and then discarded, make it a local variable to save memory and keep things cleaner

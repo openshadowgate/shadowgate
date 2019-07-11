@@ -1,0 +1,25 @@
+Nightmare Mudlib player lfun: more()
+
+varargs in more(mixed what, string cl, function endfun);
+
+This lfun will more a file or an array of lines for a player.  The
+first argument is the only required argument.  It is the name of the
+file to be paged through, or an array of lines which will be paged through.
+The second argument, which is optional, specifies what class of message
+the paged information belongs to.  The default is "info".
+The final argument is a function to be called when the player is done
+paging through the file.
+
+Examples:
+this_player()->more("/std/user.c");
+this_player()->more("/doc/help/topics", "help");
+this_player()->more(str_array, "info", (: this_object(), "end_more" :));
+
+Number 1 simply pages through the file "/std/user.c"
+Number 2 pages through the topics help file, giving it the "help" message
+    class.
+Number 3 pages through an array of lines (like the who command), giving
+    it the message class "info", and asking it to call the function
+    end_more() in the object that made the more() call.
+
+See also: message()

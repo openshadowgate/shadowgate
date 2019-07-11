@@ -1,0 +1,34 @@
+
+
+As an immortal new to the immortal reality of ShadowGate, your are
+obligated to read a certain set of documents before going on to coding. 
+On ShadowGate, immortality is not a reward for "winning the game" or being
+a great player. Instead, it is an alternative to playing the game.  There
+is no point at which a player wins on ShadowGate, just like in life.  At a
+certain point, however, (unlike life) a player is given the opportunity to
+become immortal. And you have chosen that path.  That means that you no
+longer belong in the realm of the mortal, and your participation in our
+reality has taken on a different character. 
+
+The first thing you should do is read all docs in /doc/help/creator.
+This can be accomplished by either typing 'help *creator general' or
+going to the directory itself, and using more.
+
+Be sure to pay special attention to the files 'approval' and 'new_coder'. 
+They will give you information on the process you must follow to get your 
+code added to the mud, as well as how the promotions are earned.
+
+If you know nothing about LPC, you should read the documents in /doc/lpc.
+Granted they are weighty and hard to follow for someone with little 
+programming experience, but you do not need to be able to understand it in
+detail in order to code.  In order to be able to code, you simply need to
+get the drift of those docs.
+
+Also you will find that there are a few tutorials in the /doc/help/creator.
+These documents tell you the specifics of building rooms, monsters, 
+weapons, armour, and other items.  After reading these documents,
+you should now know enough to code a decent area.  
+
+The other documents in the /doc directory are supplementary docs and
+You do not need to read them in order to function as an immortal in the
+ShadowGate reality.  But at some point you may indeed find them useful.

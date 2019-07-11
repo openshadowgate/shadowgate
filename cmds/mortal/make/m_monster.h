@@ -1,0 +1,42 @@
+#define VERSION "v2.0"
+#define PROMPT "Select ==> "
+#define EDIT_PROMPT "] "
+#define MASTER "/adm/obj/master"
+#define MONSTER_BODIES  "/adm/db/mon_races"
+#define CLS ESC+"[H"+ESC+"[2J"
+#define TERM (string)this_player()->getenv("TERM")
+#define OK_TERMS ({ "xterm", "ansi", "ansi-status" })
+#define TP  this_player()
+#define TXTPATH "/wizards/tinks/make/"
+
+/*___________TEXT FILES_____________*/
+#define FORCE_FILE    "force.txt"
+#define NAME_FILE     "name.txt"
+#define IDS_FILE      "id.txt"
+#define SHORT_FILE    "short.txt"
+#define LONG_FILE     "long.txt"
+#define BODY_FILE     "body.txt"
+#define RACE_FILE     "race.txt"
+#define GENDER_FILE   "gender.txt"
+#define LEVEL_FILE    "level.txt"
+#define STARTXP_FILE  "xp.txt"
+#define STARTSP_FILE  "sp.txt"
+
+#define MAXHP_FILE    "maxhp.txt"
+#define STARTHP_FILE  "hp.txt"
+#define AC_FILE       "ac.txt"
+#define EMOTES_FILE   "emotes.txt"
+#define LANGS_FILE    "langs.txt"
+#define CHATS_FILE    "chats.txt"
+#define ATTACKS_FILE  "attacks.txt"
+#define OBJECTS_FILE  "objects.txt"
+#define SPELLS_FILE   "spells.txt"
+#define FINGERS_FILE  "fingers.txt"
+#define MAXSP_FILE    "maxsp.txt"
+#define WLIMBS_FILE   "wlimbs.txt"
+#define MOVING_FILE   "moving.txt"
+#define WIMPY_FILE    "wimpy.txt"
+#define WIMPYDIR_FILE "wimpydir.txt"
+#define CLASS_FILE    "class.txt"
+#define HELP_TXT      "help.txt"
+

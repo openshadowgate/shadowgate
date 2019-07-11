@@ -1,0 +1,22 @@
+
+Language on ShadowGate
+
+The concept behind language on ShadowGate MUD is to enhance the
+RP of the game. I always pick on ogres, so why stop here, IE:
+if I'm an ogre with a 5 intelligence how can I have an intelligent
+conversation with a dwarf and elf and a human, non of whom know
+ogrish? Languages affect all forms of inter-personal communication.
+More than likely the debate concerning languages on public lines will
+go on forever. If you have any knowledge of a language it will appear
+in your <languages> command list. The number next to the language listing
+is the proficiency with which you speak the language. IE I understand about
+45% of the language (etc etc). The number in () is the progress toward a
+greater understanding. IE I'm about 65% of the way to understanding this
+new facet of the language.
+Currently you receive languages by intelligence. Intelligence determines
+how many you can learn. We are debating some kind of supplementing system.
+For the moment you can only learn as many as your intelligence allows.
+You learn languages from other folk who know the language well and have
+the inclination to teach you. To teach someone you use the <teach> command.
+To set what language you speak in use the <speak> command.
+See also: speech, say, speak, teach, languages

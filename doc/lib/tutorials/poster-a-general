@@ -1,0 +1,18 @@
+Bug prevention and update notes
+
+Topic A - General
+-----------------
+1) Be careful using ed and watch for a warning about truncating lines when it first opens.  If you get it, q or Q out without changing anything to avoid losing the text.  Then either do your changes via FTP or make extra sure you have a backup and then break the long string down into shorter ones when you do the other change.
+
+2) Please note your changes with your name and date, adding the last time the file had been changed for reference is also good.  Not required for just typo fixes still helps in case bugs turn up and we wonder if it's from a change or an old problem.
+
+3) Make SURE you make backups of large files or complex files and especially lib files before making changes.
+
+4) Use inherits for rooms and even similar mobs and weapons and/or make one file serve multiple purposes.  Using inherits for groups of similar files, inheriting the /d/common/obj/ gear files, and using inherits for your rooms by area, will make adding material types and other major upgrades possible.  Inheriting one main mob for a family of similar ones will also facilitate corrections, balancing and upgrades to monster abilities possible.
+Examples -
+    a) two shopkeeper description/names in one file for a shop and have it set randomly which one to use in create() 
+	- see /d/player_stores/clerks/girruuth_shop.c
+    b) multiple nwp trainers rotate for an area, one there per reboot/one file
+	- see /d/npc/trainer_seneca.c
+
+5) Please do not propagate (copy and use) things from existing files if you don't know if it's needed or not, especially variables.  However, do ask if you aren't certain, because things like set_hd may seem unnecessary if you manually set hps and exp. but it is still used in saving throws and turning undead, etc.  Check the other posters for specific things that are out of date and need removed or updated.

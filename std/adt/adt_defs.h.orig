@@ -1,0 +1,17 @@
+/* adt definitions file - Truilkan 92/01/31 */
+
+#ifndef _ADT_DEFINITIONS /* only include this file once */
+
+#define _ADT_DEFINITIONS 1
+#define NULL ({})
+
+#define SEMAPHORE_ADT "/usr/lib/adt/semaphore"
+
+#define ILIST_ADT   "/usr/lib/adt/ilist"
+#define ISET_ADT    "/usr/lib/adt/iset"
+#define STACK_ADT  "/usr/lib/adt/stack"
+#define ISTACK_ADT "/usr/lib/adt/istack"
+#define QUEUE_ADT  "/usr/lib/adt/queue"
+#define IQUEUE_ADT "/usr/lib/adt/iqueue"
+
+#endif

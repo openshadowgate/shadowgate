@@ -1,0 +1,34 @@
+%^RESET%^%^BOLD%^%^GREEN%^Prestige Class
+%^RESET%^%^CYAN%^Bladeweaver:
+
+%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^             %^RESET%^ Level 20 in Base Class (selected when advancing)
+%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Athletics Skill
+%^RESET%^%^CYAN%^             %^RESET%^ Improved Two Weapon Fighting
+
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ see Base Class
+
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ see Base Class
+
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: whirling dervish 
+   %^RESET%^L4: shield of whirling steel
+   %^RESET%^L7: masters parry
+
+Bladeweavers are the masters of fighting with two weapons at the
+same time.  At level one they are so quick on their feet and they
+are so good at getting back into position that they are able to
+use the whirl feat without a delay between rounds.  They still can
+only use one feat at a time, but they no longer need to wait before
+using it again.  When a bladeweaver reaches the fourth level they
+have learned to turn their spinning weapons into a formidable 
+defensive force.  Their shield of whirling steel makes them much more
+effective at parrying enemy attacks.  Finally at seventh level a 
+bladeweaver is able to frequently counter attack an enemy when he
+parries an attack.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^base class

@@ -1,0 +1,22 @@
+acos(3)                      LPC Library Functions                     acos(3)
+
+
+
+[1mNAME[0m
+       acos() - return the arccosine of a float
+
+
+[1mSYNOPSIS[0m
+       float acos( float f );
+
+
+[1mDESCRIPTION[0m
+       Returns the arccosine of its argument, 'f', measured in radians.
+
+
+[1mSEE ALSO[0m
+       asin(3), atan(3), cos(3), sin(3), tan(3)
+
+
+
+MudOS                             5 Sep 1994                           acos(3)

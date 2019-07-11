@@ -1,0 +1,20 @@
+Nightmare IV SimulEfun: consolidate()
+
+string consolidate(int, string);
+
+DESCRIPTION
+Takes a text string describing a singular thing along with how many
+of those things exist and *consolidates* it into one plural
+description with a numeric text modifier representing how many
+there are.
+
+EXAMPLES
+consolidate(5, "a long sword") returns "five long swords"
+consolidate(2, "Excalibur") returns "two Excaliburs"
+consolidate(100, "a list of players") returns "numerous lists of players"
+
+LOCATION
+/adm/simul_efun/consolidate.c
+
+SEE ALSO
+ordinal(), pluralize()

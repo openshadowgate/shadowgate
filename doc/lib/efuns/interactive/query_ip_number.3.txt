@@ -1,0 +1,23 @@
+query_ip_number(3)           LPC Library Functions          query_ip_number(3)
+
+
+
+[1mNAME[0m
+       query_ip_number() - return the ip number for a player object
+
+
+[1mSYNOPSIS[0m
+       string query_ip_number( object ob );
+
+
+[1mDESCRIPTION[0m
+       Return  the  ip-number  (dotted  decimal  form or IPv6 form) for player
+       'ob'.
+
+
+[1mSEE ALSO[0m
+       query_ip_name(3), query_host_name(3), resolve(3), socket_address(3)
+
+
+
+MudOS                             5 Sep 1994                query_ip_number(3)

@@ -1,0 +1,12 @@
+Nightmare IV SimulEfun: creator_file()
+
+string creator_file(string)
+
+DESCRIPTION
+Returns a uid for the creator of an object based upon its file name.
+Except for backbone objects, this uid will become the object's uid.
+In the case of backbone objects, they get the uid of the object which
+created them if your mud config file requests them to do so.
+
+LOCATION
+/adm/simul_efun/creator_file.c

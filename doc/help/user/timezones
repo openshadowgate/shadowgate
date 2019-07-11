@@ -1,0 +1,17 @@
+The following time zones are known by the Nightmare Driver.
+
+AET Austrailian Eastern Standard Time
+AWT Australian Western Standard Time
+MT Moscow Time
+CET Central European Time
+GMT Greenwich Mean Time
+BST British Summer Time
+AST Atlantic Standard Time
+EST Eastern Standard Time
+CST Central Standard Time
+MST Mountain Standard Time
+PST Pacific Standard TIME
+
+Other timezones are easily added, but we need to know the name, abbreviation,
+and the offset from one of the time zones listed above.  Mail ARCH with that
+information.

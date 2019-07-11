@@ -1,0 +1,11 @@
+Nightmare Mudlib 3.2 simul_efun: alignment_ok()
+
+int alignment_ok(object ob);
+
+DESCRIPTION
+Returns true if a player is staying within the alignment range set up
+for the player's class.  It will return false otherwise.  Very useful
+for spells.
+
+LOCATION
+/adm/simul_efun/alignment_ok.c

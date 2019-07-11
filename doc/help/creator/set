@@ -1,0 +1,28 @@
+Nightmare Mudlib lfun: set()
+Object: /std/room.c
+
+void set(string what, mixed value);
+
+This sets the value "value" to the key "what".
+For example, set("short", "An empty room"); sets the short description of
+a room.  This is used for some standard mud uses, but also may be used
+by the coder to create their own settable and queryable values without
+having to create a new variable or any new functions.
+Current standard mudlib set keys:
+
+"short": gives the room a short description for when the player is in brief mode
+
+"long": gives the room a long description for when a player is in verbose
+    mode.  Carriage returns should not be placed in the short descriptions
+    or in the long descriptions of rooms, as the mud automatically wraps
+    room descriptions to fit in the player's screen.
+
+"night long": Sets up an alternate long description used only during the night.
+
+"day long": Sets up an alternate long description used only during the day.
+
+"long func": If you have your own criteria for deciding among different tyoes
+    of long descriptions, you can set up a function to be called in your room
+    code.  The function you define should return a string which will be used
+    as the room's long description for that moment
+

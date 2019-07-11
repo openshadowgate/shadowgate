@@ -1,0 +1,13 @@
+//#define ROOM_START "/d/shadowgate/adv_main"
+#define ROOM_START "/d/shadow/room/forest/road30"
+// middle of shadow city isn't exactly neutral. going for a more neutral location instead! N, 9/15.
+#define ROOM_VOID "/d/shadowgate/void"
+#define ROOM_FREEZER "/d/shadowgate/freezer"
+#define ROOM_SETTER "/d/shadowgate/setter"
+#define ROOM_DEATH "/d/shadowgate/death/death_room"
+#define ROOM_IDLE_SHOP "/d/shadowgate/idle_supply"
+#define ROOM_HALL "/d/shadowgate/adv_main"
+#define ROOM_QUEST "/d/shadowgate/misc/quest_room"
+#define ROOM_CACHE "/d/shadowgate/cache"
+#define JAIL "/d/shadowgate/jail"
+#define DEATH_ROOM "/d/shadowgate/death/afterlife"

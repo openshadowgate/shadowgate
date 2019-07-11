@@ -1,0 +1,19 @@
+E)  Gear - wield/unwield, wear/unwear, special hit functions, etc.
+--------------------------------------------------------------
+1) use ETO, do NOT use TP in those or they will bug
+   - TP is often not defined due to an action being forced, etc.
+   - bugs on logout or combat often from gear using TP, not ETO
+   - for the room, it's EETO (environment(ETO)) where you would normally use ETP
+
+2) use int functions (not void) and do NOT use notify_fail in them
+   - notify_fail messages will not get to the user
+   - must return 0 if not supposed to wear or wield successfully
+   - return 1 for success 
+
+3) hit functions can do special effects or return an integer to add to the damage from combat, so be careful with those due to things like thief stab or other multipliers
+   - make sure they are int functions (not void ones) so they can return something
+
+4) Try to always inherit a file from /d/common/obj/... & only have whatever you need to actually change in your file.  Use bonuses rather than increasing set_wc() damage, etc.
+   - will help with adjustments we need to make to damage, insure correct
+	profs, speed, etc.
+   - if there is something you need that isn't there, suggest we add it rather than borrow from another area	

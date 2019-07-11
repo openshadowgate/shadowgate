@@ -1,0 +1,10 @@
+Nightmare Mudlib object lfun: notify_kill()
+
+void notify_kill(object ob);
+
+Whenever a living thing dies, the function notify_kill() is called in
+all objects carried by its opponent.  The dying object is passed as
+an argument.  This allows you to create objects which are aware
+of kills made by the owner.
+
+Defined in /std/living/combat.c

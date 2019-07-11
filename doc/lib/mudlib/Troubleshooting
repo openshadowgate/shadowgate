@@ -1,0 +1,30 @@
+Troubleshooting:
+If, for some reason the mud is not running as described at any point
+in the process shown in these file, your number 1 priority should
+look at your compilation of the driver, namely the options.h file.
+The Nightmare Mudlib is developed on a working and heavily played
+mud.  What you get has in fact been running using the MudOS driver, so
+unless we made an idiotic blunder in tarring up the mudlib (which we would
+catch really soon (I hope)), something is simply going wrong with the
+way the driver is running the mudlib.
+
+Problem #1: What version of MudOS are you using?
+Nightmare writes its mudlib releases for full MudOS driver releases.
+This means that there might be compatibility problems between the mudlib
+and half-releases (A full release is one with 3 numbers like 0.9.19,
+a half-release is one with 4 numbers, like 0.9.19.5).  Nightmare 2.4
+was for 0.9.16.  Nightmare 2.5 was for 0.9.17.  There was no
+release for the 20 something half releases in between.  The solution
+is either to figure out the compat busters on your own, or grab the
+latest full release.  Nightmare always updates releases for full
+MudOS releases, so you can be sure the mudlib works with the latest full 
+MudOS release.
+Also, if you are using an old version of MudOS, there might be some compat
+problems.
+
+Problem #2: The driver options.h file
+Check to see that you have set the appropriate definitions in here.
+
+If none of those are the case, contact Descartes@Nightmare.  Mail
+borg@hebron.connected.com.  As a matter of fact, Descartes is happy to help you
+with any problems regarding the installation of your Nightmare Mudlib.

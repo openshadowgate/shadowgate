@@ -1,0 +1,22 @@
+sin(3)                       LPC Library Functions                      sin(3)
+
+
+
+[1mNAME[0m
+       sin() - return the sine of a float
+
+
+[1mSYNOPSIS[0m
+       float sin( float f );
+
+
+[1mDESCRIPTION[0m
+       Returns the sine of its argument, 'f', measured in radians.
+
+
+[1mSEE ALSO[0m
+       acos(3), asin(3), atan(3), cos(3), tan(3)
+
+
+
+MudOS                             5 Sep 1994                            sin(3)

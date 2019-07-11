@@ -1,0 +1,68 @@
+//minor prescience
+//~Circe~ 7/20/05
+#include <spell.h>
+inherit SPELL;
+
+object targ;
+
+void create() {
+    ::create();
+    set_spell_name("minor prescience");
+    set_spell_level(([ "psion" : 1 ]));
+    set_spell_sphere("combat");
+    set_syntax("cast CLASS minor prescience");
+    set_description("This power will allow the psion foreknowledge, granting him additional prowess in battle.  The power "
+"gives the psion a minor bonus to hit and damage his opponents for a time.");
+    set_verbal_comp();
+    set_property("keywords", ({ "targeted", "personal" }));
+	set_helpful_spell(1);
+}
+
+string query_cast_string() {
+    return "%^ORANGE%^"+caster->QCN+"'s eyes take on a calculating look.";
+}
+
+int preSpell() {
+    if (caster->query_property("prescienced")) {
+        tell_object(caster,"You are already under the effects "+
+           "of a prescience power.");
+        return 0;
+    }
+    return 1;
+}
+
+void spell_effect(int prof){
+    int mylevel;
+   if(caster->is_class("psywarrior")){
+      mylevel = caster->query_guild_level("psywarrior");
+   }else{
+      mylevel = caster->query_guild_level("psion");
+   }
+    target = caster;
+    tell_room(place,"%^YELLOW%^Knowledge shimmers in "+caster->QCN+"'s "+
+       "eyes as "+caster->QS+" grows more confident.",target);
+    tell_object(target, "%^YELLOW%^You feel the calm assurance of "+
+       "foreknowledge fill your mind, making you deadly in battle.");
+    target->add_attack_bonus(3);
+    target->add_damage_bonus(2);
+    call_out("dest_effect",mylevel*20);
+    target->set_property("prescienced",1);
+    target->set_property("spelled", ({TO}) );
+    addSpellToCaster();
+    spell_successful();
+}
+
+void dest_effect() {
+    if (objectp(target)) {
+        tell_object(target,"%^ORANGE%^You feel the foreknowledge "+
+           "drain from you.");
+        tell_room(environment(target),"%^ORANGE%^"+target->QCN+"'s "+
+           "eyes seem to grow dull.",target);
+        target->add_attack_bonus(-3);
+        target->add_damage_bonus(-2);
+        target->remove_property("prescienced");
+        target->remove_property_value("spelled", ({TO}) );
+    }
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
+}

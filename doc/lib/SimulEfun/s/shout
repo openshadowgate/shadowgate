@@ -1,0 +1,14 @@
+Nightmare Mudlib 3.2 SimulEfun: shout()
+
+varargs void shout(string|int, object|object *);
+
+DESCRIPTION
+Sends a message to all interactive users on the MUD except this_player().
+The first argument is the message sent.  The second, optional argument
+is an object or an array of objects to be excluded from hearing the message.
+
+LOCATION
+/adm/simul_efun/communications.c
+
+SEE ALSO
+say(), message(), tell_object(), tell_room(), write()

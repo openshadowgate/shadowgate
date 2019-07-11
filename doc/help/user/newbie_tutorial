@@ -1,0 +1,331 @@
+       Newbie Tutorial
+Alternatively you may view the entire guide online at http://shadowgate.s4.bizhat.com/viewtopic.php?p=25061&mforum=shadowgate#25061
+=============================
+
+This is meant to be a step-by-step guide to mechanics for surviving on ShadowGate MUD for new players.  
+It does not cover player interactions as this would be an entire guide unto itself.  
+There's a lot of information below, broken into 13 parts. 
+I suggest completing each part prior to moving on to the next, but nothing is stopping you from reading through the whole thing at once.
+This guide is not comprehensive, but it will help bridge the knowledge gap between experienced players and newbies, minimize 
+frustration for true newbies, and give new players a leg up to getting started learning how to play the game (and possibly teach some old dogs a few new tricks).
+It by no means tells you how to create the most optimized character, but it will give you a good start with a survivable class and a
+base of knowledge to build on, including where to find equipment experienced players would consider indispensable.
+It covers everything I did playing an elven wood elf fighter up to level 11 or so, which is the one of the simplest classes to 
+learn & play.  The elven race has the best vision, so you won't need to bother about lanterns and oil, and the wood elf sub-race 
+grants bonuses to strength and dex, perfect for keeping fighters alive and killing things.  
+Fighters can use the widest range of weapons and armor, so you won't need to worry about finding light armor; you can wear it all. 
+You will have the most feats of any class to play around and experiment with, perfect for newbies.
+By the time you get to the low teens, you'll do enough damage, and have enough equipment, experience and hit points to 
+allow you to explore the under 20 areas west of Shadow and around Tabor.
+
+If you get stuck, you can always ask for help on the lines (help line use), especially the ooc line.
+
+Essential to a good experience is a decent mud client so you can see all the pretty colors, but bear in mind scripts and triggers are not allowed.  
+
+I use Zmud, but there are plenty of good clients out there.
+
+--Cyric
+
+Part 1: Getting started
+
+Go through character generation and create a wood elf Fighter
+Pick Recommended for your stats
+pick normal age range
+create the rest of your character, go through the in-game tutorial, follow the commands.  Once you get to the Offestry town square, this guide takes over.
+
+Initial Setup: 
+Here are the aliases and nicknames I've set up, feel free to copy them and use them for yourself or set up your own aliases.
+<alias 0 score>, now when you type 0, you will see your character sheet
+<alias ga get all $*> - ga will pick up everything on the ground, 'ga from corpse' or 'ga from chest' will let you pick up items from corpses or chests or wherever else you need
+<alias gc get coins $*> - gc will allow you to get coins from the ground, 'gc from corpse' or 'gc from chest' will let you get coins from corpses or chests or wherever else you need
+<nickname att attacker> - will let you type att when targeting attackers, useful for the impale feat, which needs to target an enemy
+<alias wa watch> - allows you to watch your back for thief stabs by typing two letters instead of five
+<alias kl kill $*> - now you don't have to type out the whole word "kill" to attack something
+<alias 1 sweepingblow> - you will use sweepingblow a lot in combat, better to just type a single character
+<alias 2 impale att $*> - you will use impale a lot in combat, better to just type a single character.  Note the nickname used, which was added above.
+
+Other useful commands: 
+<discern> will let you know how much base damage a weapon does and how much protection a piece of armor grants.
+briefcombat (this will let you see more descriptive combat messages, which is more fun and will let you know if you do something like start fighting without wielding a weapon)
+prompt %^GREEN%^%^BOLD%^$h%^RESET%^%^BOLD%^/%^RESET%^%^GREEN%^$H%^RESET%^-%^RED%^%^BOLD%^> 
+	- This is my prompt, it shows current hit points every time I hit enter.  <Help prompt> to come up with customized prompts of your own if you like.
+Macro: If you can set up macros with your MUD client, set up F1 as quaff kit
+	- if you can't set up macros, alias ` as quaff kit.  This will drink healing potions, which will become important when you're getting hit a lot and are trying to avoid dying
+
+Skill suggestions: 
+	- maximum skill caps go up as you advance in level.
+	- <skills add 1 to healing> to max out your healing skill, so you can <heal yourname> if you get low without using healing vials
+		- you'll probably find this skill useful until around level 6 or 7, when you can search the goblin stronghold or ogre pit in echoes mountain, and when 
+        you'll have enough gold to simply buy healing vials instead of spending time healing 
+	- <skills add 1 to perception> to max out your perception skill, so you will have better defense against sneak attacks
+		- keep this maxed out forever
+	- <skills add 1 to spellcraft> to help identifying cursed items by studying them, <study item>
+		- you will be able to tell an item is cursed if it has a -1 next to its short description, instead of the normal +1 or +2 for magical items.  
+        You won't see the +/- 1 until you've successfully studied it (or used the identify spell if your a mage)
+		- you can always bring an item to a church to determine if it is cursed
+
+Part 2, Starting out:
+s;w from offestry center to get to the general store
+<list> to see the items, show <item 1>, <show item 2> etc. to make sure you're buying the right one.
+buy a a large sack, climbing tools, large pouch, rope. 
+	- eventually you'll want 5 large sacks and a large pouch.  They will let you carry more; the limit is 5 sacks.
+	- do not put sacks inside of sacks, they do not save.
+	- when you check your inventory <i> inside of a shop, it will show you what you can sell at that shop for how much gold
+<put rope in sack>, <put tools in pouch>, <wear pouch>
+	- you want to keep your climbing tools in your pouch so they don't get stolen in a place you need them to get out of.
+	- worn and wielded items can't be stolen
+<feats add sweepingblow> - this uses your free level 1 feat to add the sweepingblow attack option, which attempts to hit everything you're fighting, best against large groups
+<feats martial impale> - this uses your free martial feat to add the impale attack option, which attempts to damage and paralyze (for a round) one enemy you target
+3e from town center and n, to the armory
+<buy banded> or <buy banded 2>, whichever is medium size (show banded, show banded 2, to make sure you get a medium size) 
+<buy great helm> or <buy helm 2>, whichever is medium size (show helm, show helm 2, to make sure you get a medium sized helm) 
+you should already be wearing a robe from the character generation tutorial
+3w from town center and n, to the weapon shop
+<buy two handed sword>, <wield two handed>
+	- if you log off and re-enter, you'll need to wield your weapon again
+
+Part 3, Let's Play!!: 
+go out the western gates of offestry, head northwest to the keep.  You can get quests from the two npc's on the way, but they're not essential
+explore the keep, kill the xvarts, spiders, and the half-ogre, using sweepingblow and impale to do extra damage
+	- use peer (peer north 5, peer east 10, etc) to look ahead and see what's coming up.
+	- if you set up the aliases above, you can simply type 1 to use sweepingblow, or 2 to impale an attacker (use "2 2", "2 3" to impale the 2nd or 3rd attackers in the room)
+		- this means less time typing
+	- don't forget to set your wimpy, and wimpydir (you learned this in the in-game tutorial), it can save your life if you get low on hps or if your internet connection drops
+	- if you walk into a room with something and it doesn't attack you, impale it or kill it
+	- use <offer (item)> to get rid of stuff in your inventory you don't want, or <offerall> to get rid of everything on the ground
+	- <bury corpse> after something dies to regain a few hit points.  This command only works during levels 1-5.
+	- use <heal yourname> to recover hit points if you need to, the only thing this costs is time.
+Keep killing things, burying corpses, collecting shortswords and pants, and selling what you don't need in town
+	- armor is sold at the armor store, weapons are sold at the weapon store, gems are sold at the general store
+	- you can sell scrolls at the wizard tower, check your map.  In the rest of the game, you sell mage scrolls at the general store.
+	- you can offer pants and short swords in a pinch to instantly regain a few hps, but that's a desperation move.
+	- if you run out of inventory space, start putting things in sacks.  You can always get an item from a sack later if you need it.
+	- *if you attempt to leave a fight, only try to escape once (by typing the direction you want to run).  Every time you attempt to run from combat, 
+        the timer resets, so if you keep trying to run, you will trap yourself in a fight you want to escape!
+	- there are things to explore in the keep, hidden passages, rubble you need to dig through, etc.
+When you have enough experience to go up a level (0 to check your score), return to the board in offestry and <advance>
+	- If you run out of things to kill, head back to the fork in the road (out of the west gate of offestry), down the southwest path, 
+        there is a cemetary with undead at night, kill them, or explore around for other things to kill.
+	- the orc bandits out the east gates of Offestry can be tough, but you can run past them before they attack if you're quick
+Once you find the skeleton key in the keep, the command is <unlock door with key>
+In the forest south of Offestry, there is an elf you can help by finding journal pages in the forest (by searching) and giving them to her.  
+Most quest giving NPCs will respond if you say hello or hi to them.  
+In return for completing the quest for her, she will give you a colorful armband, which grants a +1 bonus to AC.
+
+Feat Build through level 15: 
+At level 3, light weapon feat
+At level 4, increase strength (stats gain strength, you will want to max your strength at 24)
+At level 6, strength of arm feat (feats martial strength of arm)
+At level 6, toughness feat
+At level 8, increase strength again (stats gain strength)
+At level 9, improved toughness feat
+At level 11, exotic weapon proficiency feat
+At level 12, damage resistance feat
+At level 12, increase strength again (stats gain strength)
+At level 15, improved damage resistance
+
+Your stats max at 25, but the base highest modifier is at 24.
+
+
+Hunger/Thirst:
+Monitor your hunger/thirst from time to time to make sure you don't starve.  You can buy food at the tavern
+	- s;s;w;w;w;n from the Offestry town square
+	- read menu to see what's there, or <buy pot roast>, <buy water>, <eat food>, <drink drink>
+
+Part 4, Advancing to Level 6
+To get to level 6 (and every 5 levels thereafter) you need to find your trainer.
+	- Find your trainer using <help advance>.  you'll need to search around to find it.  Use peer to see the short room descriptions
+	- Once you find your sign post, the command is <camp>, you can advance from inside the camp
+	- If you can't find your trainer after making a decent attempt to search (i.e. you're getting frustrated), ask on the lines for help, other players can offer advice or a wiz can reset the location.
+	- a list of room short descriptions in Offestry and how to get to them will go into a later version of this guide
+	- To advance to level 6, you need to set your description and adjective.  
+	- Your description is the physical description of your character.
+	- Your adjective is what is seen on the who list (type who) and what people will see when they first encounter your character in a room
+	- set your description (describe) and adjective
+	- You also need to recognize yourself (recognize <yourname> as <yourname>)
+	- <adjective is a (insert description here) $R (insert description here)>
+		- $R is where your race will appear
+	- look at yourself to make sure your description looks correct, and check your score to see your adjective
+After you advance to level 6, you need to find the cart to get to the rest of the game.  From Offestry town center, head east towards rolling hills, then go south as much as you can (follow the wide gravel trail)
+go south through the path through the foothills
+when you get to ardelmir's cart service, <ride>
+The cart drops you on a path, and you need to get to Tabor with all your gold.
+When the cart drops you off, go: ne;s;ne;e;ne;e;ne;e;se;s (crossroads on the quiet forest road)
+Then go: w;w;sw;s;s;s;se;e;se;s;s;s;e;ne;e;se;se;s;s;se;e;e;e;se;se;se;se;se;s;se;se 
+	- this takes you on the path through the meadowlands and safely to Gwydion street in Tabor
+Then go: e;e;e;s;s;s to Caerveron Square in Tabor.  
+
+
+Part 5, Getting set up in Tabor:
+The bank is n;n;e from the square.  
+	- open account
+	- money
+	- deposit your gold
+From the town square, head to the crown and castle inn, s;se;se;e (open door)
+There's a list of mini-quest items here.
+	- read list to see the list of mini-quest items.  
+	- Retrieve the item and return it here and <claim item> (i.e. claim slippers, claim crown, etc) to gain the xp listed.
+	- you probably won't know where most of the items are at first, but as you explore more, you'll learn where they are
+	- the mini-quest board provides an alternative to mindlessly killing the same thing over and over
+		- Shadow and Seneca also have mini-quest boards
+	- The crown and castle is usually a good place to meet players, or you can use the <rumors> command, or directly ask to RP on the ooc line.
+<l board> to see what you can do with the board, other players make posts here.  <read> to see what they say, post <title> to make a post of your own, and <reply Post #> to answer someone's post
+	- you don't have to read them right away, just know that the board is here.  Every major city has a board you can read and advance at.
+Make sure you are not hungry/thirsty (score), if you are, buy some food and drink some water (read menu, buy <item>, buy rose water, eat food, drink drink)
+Head back to the square.
+From the square, go n;e to the scribe's office
+<draw tabor> and <draw area>.  
+	- This will give you maps to both Tabor and the surrounding lands with level suggestions.
+	- *you need to become familiar with Tabor, where the healer weapon and armor shops are and the bank, because if you die, you will return to life at the church with few belongings, and if you're to retreieve your corpse, you'll need a lot of kits, a weapon, and armor, all of which cost gold.
+	- make sure you can get around town without a map in game (you may want to keep maps offline).
+
+Part 6, *** Dying and recovery ***
+When you die, you'll go through a death sequence.  If you're out of offestry, most of your equipment will remain on your corpse.
+You will have a choice of temples or cities to reappear in, you should choose tabor since you have a bank account there, and you don't know where the other temples and cities are yet.
+	- when you're more experienced, you might choose to return in a temple or city closer to your corpse
+You will need to pray to come back to life.  Dying costs you 10% of your accumulated xp, but that's okay, recovering isn't bad.
+<reequip> at the church to get some basic equipment
+	- the more you donate to your temple, the more equipment you receive, but it will always be basic equipment for your level.
+You are now faced with a choice, you can try to recover your corpse and risk another 10% xp loss if you die again, or you can re-equip from where you are.
+If you choose to go back for your corpse, head to the bank to withdraw gold, and use the gold to buy weapons and armor from the shops, and stock up on healing kits (5 batches of 15 should do, <bp 15>), depending on how much gold you have.
+Be liberal with drinking kits on your way back to your corpse, and remember you can only drink 5 per round, so heal up before each fight.
+
+
+Part 7, Goblin Stronghold
+From this point forward, it makes more sense to be liberal with drinking your healing kits to have a better chance of avoiding death than trying to time it perfectly and save a few gold in healing vials.
+My advice is if you are running low on kits (less than 15), head back to town and buy some more from the healer <bp #>.  You don't want to get caught with zero healing kits.
+Once you're familiar with Tabor, go to the goblin stronghold
+	- from the yard of the crown and castle, w;s;s;s;s.
+	- peer se to see the goblins.  Explore the stronghold, peering ahead to see what you're fighting.
+	- essentially it's the same as fighting the xvarts, except now you can't bury the corpses.  You can use offerall to destroy everything on the ground and dump whatever was on the corpses onto the ground.
+	- keep the weapons to sell.
+	- eat the crumbs the goblins drop to gain 1 hp back
+	- search the 2nd level of each of the towers for random drops, including healing kits, a tarnished band, or golden ring (magic resistance), among other things.
+	- the goblin sorceror sometimes has a golden ring (lesser magic resistance)
+if you're quick, you can block down before the goblin archers and rangers in the towers do, which will let your wimpy work if you get in trouble
+The goblin king may be difficult to kill at first, don't forget to set wimpy and wimpydir, or level up a few times and try him later
+After clearing out the stronghold (it's not very large), return to tabor and visit the weapon shop to sell your loot.
+You can sell scrolls at the general store.
+**Deposit your excess gold in the bank.
+When you have enough gold, buy field plate armor from an armor shop in Tabor or Shadow, for an additional +2 AC, and sell your banded armor.
+<study> items to see what they are, and whether they have magical properties, whether they're cursed
+	- always check to see if an item is cursed (at a church, if you fail to study it) before wearing/wielding it
+
+Part 8, Shadow
+The easiest way to get to Shadow is via the the Tabor-Shadow River ferry
+	- the ferry is w;s;s;s;w from the yard of the crown and castle
+	- wait for a shadow-tabor ferry to show up and <buy ticket for shadow-tabor>
+	- this will drop you at a dock between Shadow and the Meadowlands
+	- from the Shadow dock, go eastwards
+		- ne;e;se;s;e;ne;e;e to the large wooden sign.  The road to the mountains is north, and if you follow it, you will come to echoes mountains
+	- Shadow is east.  You need to know where Shadow is because it's a good base to venture to echoes mountains and the areas past it.
+	- there is another mini-quest board in Shadow, west from the alchemists shop near the end of mead road
+	- you may want to open a second bank account in Shadow, when you have enough gold
+		- the bank is 9 north and 1 east from the monument at the southern end of town
+	- the mini-quest board is 8 north and 1 west from the monument at the southern end of town
+
+Part 9, Level 6-8 Echoes Mountains
+When you run out of goblins to kill, head to echoes mountains, west from Shadow's west gate and north from the large wooden sign
+Don't forget to peer ahead, you should be able to see inside the first level of echoes mountains, including a pair of trolls
+	- they can be tough at level 6, but you can search around the room if you kill them and get a random drop
+After the trolls head down to the 2nd level (you passed the entrance on the way to the trolls)
+From here you can go west to kill some lizards, once again you can search this room for a random drop
+head back the way you came, and then north, then east when you can (if you hit the dwarven mine or the sloping cavern, you went the wrong way).
+Just before you hit the tunnel between caverns, you'll see the entrance down to level 3 of echoes mountains.  
+	- the tunnel between caverns leads to the dragon den caves, with some nasty kobolds; they can be tough fights at low level as they use scramble, backstab, and magic
+	- the kobolds drop bracers of defense and rings of protection
+	- use the <watch> command to watch your back against stabbing, your perception skill helps with this
+The main ogre pit just after the entrance to level 3 of echoes mountains.  There are mats you can search to get random drops
+Some ogres have +1 weapons, they will be of exceptional quality if you look at them.  Don't forget to check for curses before you wield anything.
+	- I picked up a bardiche +1 as a random drop to replace my two-handed sword, as the discern is the same.
+Half-ogres use spells, but sometimes have bracers of defense
+	- be sure to make sure they're not cursed before you wear them.  <Study> them, identify curse on <item> at a church, or have another player (caster) ID it for you
+	- I picked up bracers +1 here, for an extra +2 AC
+After you get your second attack per round, head northeast from the main ogre pit
+	- there are lots of ogres along the path to kill and loot, but no more mats to search.  
+	- This is a passage leading to Echoes Mountains level 4
+Echoes Mts Level 4: 
+	- If you take the first branch east, you sometimes come to a kobold who sometimes has a ring of protection +1
+	- past the kobold, there is a dead end, but you can <climb> if you have climbing tools or if you've got enough skill
+	- kill the ogres first and when you search the rubble, a mountain giant attacks you.
+	- kill it then search the rubble again to reveal the treasure
+	- Take what you want then <descend> to get out
+	- head back to the fork and go south until you come to a T junction.  West is deep echoes mountains, avoid it for now.  
+	- East is the ogre king
+	- The ogre king has a large spear you can use, don't forget to check for curses
+	- The ogre king sometimes has ring of protection as a random drop, don't forget to check for curses
+	- you can search the ogre king's room for extra treasure
+
+Part 10, Level 8-9 Kildare glen
+	- this is a small area with perytons to kill
+	- there are several rooms where you can climb into peryton nests and search for random items, you'll have read the room descriptions and search around
+		- there are at least two I found plus the peryton king's nest
+	- I picked up a two-handed scythe +1 here, which required exotic weapon proficiency.  The best weapons all require exotic weapon prof
+	- I also picked up an iron helm +1 here.
+	- you can give some items you find to guyon the guide and he will exchange them for you
+
+Part 11, Level 9 - Yntala forest
+Yntala is really meant for characters leveled to the teens, but we can take it at level 9 with the right equipment, and if we're careful
+	- bracers of defense (half-ogres from echos mtns)
+	- ring of protection (kobold in echo mtns or ogre king in echo mtns)
+	- ogre's spear (from the ogre king in echo mtns)
+	- field plate armor (from armor shop)
+	- cloak +1 from the flinds in the meadowlands at night (check your area map)
+	- at least 20 blue vials
+	- peer before entering a room, make sure your wimpy and wimpydir are set.
+	- the dire wolves wander, it can be a problem if 4 of them walk in while you're fighting something else
+	- the leprechauns cast spells and can send you to the southern exit of yntala (new growth forest). You can reenter the forest by going north, or you can head south to the road between azha and tharis
+		- heading west on this road will take you to a road you can use to get back to tabor if you don't want to go through yntala.  Refer to your area map.
+	- Stay on the west side of the river; the other side is the dark forest which is significantly tougher.  
+		- you should be able to take the dark forest with full equipment at around level 11 or 12.
+	- Searching the foliage (or water, in some rooms) can yield several effects
+		- attacked by a brown bear
+		- attacked by a wasp swarm (sweepingblow is perfect here)
+		- find a man's shirt +1 or a leaf dress +1 (check for curses before putting it on)
+	- Dire wolves have kits as a random drop
+		- When I went here at level 9, I ended up with more kits than I could carry, even with all 5 sacks full (15 vials each)
+		- combine <kit with kit> to put them together
+		- <take # from kit> to split them up
+
+Part 12, miscellaneous
+Throw
+	- throwing stuff is helpful, because it gets monsters to move to you
+	- wield an item, and the command is <throw item at target direction distance>
+		- i.e. wield dagger; throw dagger at wolf south 1
+		- this will cause the wolf 1 south of you (and anything else in the room and between you and the target) to move to your position and attack you
+		- if you're in an area with long lines of sight, this can come in handy to fight everything at once
+		- you don't need to throw a weapon, you can throw just about anything
+
+Platinum band and golden ring
+	- on the goblin sorceror and as a random find from searching, you may acquire a golden ring or a platinum band which flash when you wear them
+	- these are items of spell resistance, every time they flash they use a charge, when they reach zero charges, they vanish.
+	- you can use them to help against creatures that use magic against you
+	- to prevent them from vanishing, remove them when you're not using them; every time they flash, it uses up a charge
+	- you can quickly remove and re-wear them to keep them from using a charge
+
+Part 13, summary
+Starting equipment: 
+	- two handed sword
+	- banded mail
+	- robe (from character generation tutorial)
+	- great helm
+
+Equipment upgrades
+	- weapon: large spear +1 from ogre king
+	- Ring of protection +1 from kobold in dragon den caves, or the ogre king
+	- bracers of defense +1 from half-ogre in Echo Mountains
+	- Field Plate Armor from Tabor or Shadow armor shop --> full plate armor when you can afford it
+	- (not included in guide) cloak +1 from flind in meadowlands (only appears at night)
+	- platinum band or golden ring (tarnished band of metal, random find on deku or goblin stronghold)
+	- shirt +1 (or dress +1 for female characters, random find in yntala forest)
+	- iron helm +1 from searching peryton nests
+	- upgraded weapon: large scythe +1 from searching peryton nests (needs exotic weapon prof, which can be picked up with the martial feat at level 11).
+
+That just about does it.  If you've gone all the way through this guide, you're at least level 10 and should be able to keep fighting in Yntala all the way to level 19 and picking up the damage resistance feats as you go.  I encourage you to get out and explore the other areas on tabor's area map, because that's where the fun is, but this guide should give you a basic understanding of the game and how to re-equip after losing your equipment, and how to recover from xp loss (self-inflicted or otherwise).
+Beat in mind this guide says nothing about role-playing, so the best bet is to start with the help roleplaying file on SG.  There will be a companion guide to this one for player relations for newbies soon.
+
+Happy Mudding!
+
+--Cyric
+
+See Also: View the Entire guide online at http://shadowgate.s4.bizhat.com/viewtopic.php?p=25061&mforum=shadowgate#25061

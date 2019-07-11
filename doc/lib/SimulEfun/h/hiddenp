@@ -1,0 +1,12 @@
+Nightmare Mudlib 3.2 SimulEfun: hiddenp()
+
+int hiddenp(object);
+
+DESCRIPTION
+Returns true if the object has been hidden using the set_hide() efun.
+
+LOCATION
+/adm/simul_efun/hide.c
+
+SEE ALSO
+set_hide(), visible()

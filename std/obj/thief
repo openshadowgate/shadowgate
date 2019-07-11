@@ -1,0 +1,62 @@
+Thief:
+
+Ability Requirements:
+   Dexterity    9
+
+Races allowed:
+   beastman, bugbear, drow, dwarf, elf, gnoll, gnome,
+   goblin, half-drow, half-elf, half-orc, halfling,
+   hobgoblin, human, kobold, ogre-mage, orc, voadkyn
+   
+Alignments allowed:
+   lawful neutral, lawful evil, neutral good, true neutral,
+   neutral evil, chaotic good, chaotic neutral, chaotic evil
+   (That's right, LG and thieves are mutually exclusive.)
+
+   The thief is the master of the shadows.  Their attacks are based
+on surprise, jumping from the shadows to deal great damage upon
+a target.  <stab> target will deal a great blow of damage.  It 
+depends upon move silently and hide in shadows skills.  You can also
+<scramble> while you are in combat, this will help you to dodge enemy
+attacks and try to position you for another backstab.
+Note:  Stabbing will cause you to be unable to leave the room for a 
+       period of time and of course scrambling makes you entirely too
+       busy to do so.
+
+Armor allowed:  Nothing heavier than leather types (although studded
+   leather is allowed).  Thieves (aka rogues) rely on stealth, so 
+   anything with metal against metal is going to be too noisy.  They
+   can wear bracers.  A high dexterity (which helps with dodging
+   attacks too) is very important and useful to thieves.
+
+Thieves have skills such as :
+   pick pockets -> pp <target> (money)
+   **NOTE** A thief is able to <plant> items on 
+   different creatures. 
+   pick locks -> pick <lock> on <what>  
+   pick pockets -> steal <item> from <target> (items)
+   hide in shadows -> hide_in_shadows
+   **NOTE** To move out of the shadows once hidden a thief
+   can <step>
+   move silently -> sneak <direction>
+   back stab -> stab <target>
+   detect noise -> detect noise <exit>
+   scrolls -> use scroll
+   investigating a target -> spy <living>
+   find/remove traps -> this allows you to find or remove traps. It
+	                has the following syntaxes.  <help trap> expands
+		        on what is here.
+
+  To find traps:
+	trap find on <what>
+  To remove traps:
+	trap remove when I <action> the <aspect> on <object>
+  OR
+	trap remove when I <action> the <object> 
+  
+
+** NOTE ** <skills> is a very important command. Use it every 
+time you level, including when you first make your character. 
+Be sure to use a 0 when you want no entry.
+
+See also:  Help trap

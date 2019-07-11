@@ -1,0 +1,24 @@
+shadowp3(5 Sep 1994)                                      shadowp3(5 Sep 1994)
+
+
+
+[1mNAME[0m
+       shadowp()  -  determine  whether  or  not  a  given object it shadowing
+       another
+
+
+[1mSYNOPSIS[0m
+       object shadowp( object ob );
+
+
+[1mDESCRIPTION[0m
+       Returns the object that 'ob' is shadowing, or zero (0)  if  it  is  not
+       shadowing any object.
+
+
+[1mSEE ALSO[0m
+       shadow(3), objectp(3), query_shadowing(3), valid_shadow(4)
+
+
+
+LPC Library Functions                MudOS                shadowp3(5 Sep 1994)

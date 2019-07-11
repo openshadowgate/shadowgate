@@ -1,0 +1,38 @@
+%^RESET%^%^CYAN%^Sorcerer:
+
+%^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 charisma
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow, elf, drow, halfling, 
+   gnome, voadkyn, kobold, goblin, orc (tanarukk), yuan-ti
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, psion, psywarrior
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, perception, influence, spellcraft
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: simple weapon proficiency, spell focus
+   %^RESET%^Also: one bonus spellcraft feat at L1, and every five class levels thereafter
+
+Sorcerers are masters of arcane magic, but in a completely different 
+sense to mages.  Where a wizard will study and call upon the weave 
+by theory and ritual, sorcerers instead harness raw talent and instinct 
+to produce such spell effects.  A typical sorcerer turns to an adventurer's
+life to prove and improve their command of the magical arts.  While the 
+latent talent is inborn, part of their soul, the development of such 
+skill becomes a quest in and of itself for many.  Many sorcerers, both 
+good and evil, come to consider themselves above other, lesser mortals 
+due to their talents.
+
+Sorcerers prepare themselves by drawing upon their inner strength, but 
+do not memorize spells as wizards do. Instead, they may cast spontaneously 
+of any spells they know, until they are spent and must prepare themselves 
+anew.  While sorcerers are far more capable of enduring lengthy combat, 
+as they don't study their art, they lack the diversity of a mage and may 
+only cast of a smaller number of known spells (see <help master>).
+
+Given their innate understanding of magic, sorcerers also lend towards 
+learning means to improve their art naturally. They gain one free magic 
+feat for every five levels in the class.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, master, prestige classes
+
+%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard sorcerer list>%^CYAN%^.%^RESET%^

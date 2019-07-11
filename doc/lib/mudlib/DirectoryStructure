@@ -1,0 +1,39 @@
+The directory structure of the Nightmare Mudlib 3.2 is designed to be
+as intuitive thinking in order to allow you security along with
+supposed to represent a natural way of dividing up the files based on
+the style in which the mudlib was coded.
+
+Nightmare Mudlib 3.2 ships with the following sub-directories of the root:
+/adm
+Secure directory for the mud.
+/cmds
+Commands available to all users at all times
+/d
+Domains of the mud.  Areas which link creator realms.
+/daemon
+Non-secure daemons
+/doc 
+Documentation and help files
+/ftp
+You hook up the ftp daemon available at the same site as the mudlib here
+/hm
+Not currently used.  High mortal castles will be stored here.
+/log
+Logging is done to this directory
+/news
+All your news files are located here
+/std
+Inheritable and backbone objects
+/tmp
+An open directory to which everyone has write access
+/wizards
+Personal files of creators where their domains can be found.
+
+As an administrator, you are most conerned with the /adm, /daemon,
+/std directories.  Each directory comes with help files describing
+what is stores and what sort of access you should be granting to it.
+In general, /adm and /cmds/system should be administrator only
+directories.  Only arches with an absolute *need* should have write
+access to /std.  And only admins and arches should have access to /cmds
+The reast should be based on a need to access basis.
+

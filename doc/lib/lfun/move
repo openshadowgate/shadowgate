@@ -1,0 +1,51 @@
+Nightmare mudlib lfun: move()
+
+int move(mixed dest);
+
+This function handles what happens when an object is being moved by another
+object.  The MudOS driver only allows the move_object() efun to move an
+object when it is moving itself.
+
+*****
+note:
+
+You might want to do the following if you need to know things
+like if the move could not occur because it is not allowed or if the
+player was too encumbered:
+
+#include <move.h>
+
+The following are the return codes
+
+MOVE_OK		Everything went just peachy :) (This is 0 btw)
+MOVE_NOT_ALLOWED This object is either immobile or is being blocked
+MOVE_NO_ROOM	The player or object to which the object is being moved is
+		"full", most often too encumbered.
+MOVE_DESTRUCTED Never seen or heard of this being returned.
+MOVE_NO_DEST	The target object does not exist.
+
+*****
+example:
+
+This code might appear in the reset() function of a room:
+
+void reset() {
+    if(present("monster")) return;
+    ob = new("/wizards/descartes/monster");
+    ob->move(this_object());
+}
+
+Also note:
+
+...
+    ob = new("/wizards/descartes/sword");
+    if(ob->move(this_player())) {    /* Ack! something wrong */
+	write("You drop the sword.\n");
+	say(this_player()->query_cap_name()+" drops the sword.\n");
+	ob->move(environment(this_player()));
+    }
+...
+
+In the second example, the first move() returned MOVE_NO_ROOM,
+(or at least you can safely assume that), so you let the player
+know that he/she was way too encumbered, and move the object to the room.

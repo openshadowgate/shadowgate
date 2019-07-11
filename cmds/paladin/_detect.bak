@@ -1,0 +1,54 @@
+#include <std.h>
+ 
+// detect evil for paladins
+// 5/30 kai
+// Fixed by Grazzt@Shadowgate June 1996
+ 
+inherit DAEMON;
+ 
+int cmd_detect(string str) {
+    object ob;
+    object *inv;
+    int x,a;
+ 
+    if(!str) {
+        notify_fail("Detect what?\n");
+        return 0;
+    }
+    if(!TP->is_class("paladin")){
+        notify_fail("You are not a paladin and cannot do that!\n");
+        return 0;
+    }
+    if(str != "evil") {
+        notify_fail("You cannot detect that.\n");
+        return 0;
+    }
+    write("%^YELLOW%^"
+	"You concentrate on the area around you.%^RESET%^");
+    say("%^YELLOW%^"
+        +this_player()->query_cap_name()+
+	" concentrates deeply for a moment.%^RESET%^"
+    ,this_player());
+    inv = all_inventory(environment(this_player()));
+    for(x=0;x<sizeof(inv);x++) {
+        if(!living(inv[x])) continue;
+        else if(wizardp(inv[x])) continue;
+        else if(avatarp(inv[x]) && inv[x]->query_invis()) continue;
+        a = (int)inv[x]->query_alignment();
+        if (a == 9 || a == 3 || a == 6) {
+            write("%^YELLOW%^"
+	        +(string)inv[x]->query_cap_name()+
+	        " gives off a sickening aura of evil.%^RESET%^"
+	    );
+        }
+        continue;
+    }
+    this_player()->set_disable(1,TP);
+    return 1;
+}
+ 
+void help() {
+  write("Syntax: <detect evil>");
+  write("  This will attempt to sense evil in the monsters in "
+	"the room.");
+}

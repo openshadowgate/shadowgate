@@ -1,0 +1,23 @@
+query_snooping(3)            LPC Library Functions           query_snooping(3)
+
+
+
+[1mNAME[0m
+       query_snooping() - return the object than an object is snooping
+
+
+[1mSYNOPSIS[0m
+       object query_snooping( object ob );
+
+
+[1mDESCRIPTION[0m
+       If 'ob' (an interactive object) is snooping another interactive object,
+       the snooped object is returned.  Otherwise, 0 is returned.
+
+
+[1mSEE ALSO[0m
+       snoop(3), query_snoop(3)
+
+
+
+MudOS                             5 Sep 1994                 query_snooping(3)

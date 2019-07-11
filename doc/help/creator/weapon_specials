@@ -1,0 +1,43 @@
+A weapon specials faq by Bane for limiting the use of weapon special functions.
+-------------------------------------------------------------------------------
+
+Ok first off lets try to look at the overall balance of the mud before we
+create a weapon with a special function.  How is your weapon going to affect
+the mud as a WHOLE, and I don't just mean your area I mean the entire mud.
+Are you creating a +5 sword that can behead creatures in one fell swoop?
+Take a look at your creation and think about what kind of affect it will
+have on the other areas and how it fits into YOUR area.  I am writing this
+faq to remind all of you that we are working towards a common goal here.
+To create a nice balanced mud, a pleasant playing environment for everyone.
+We are NOT using our wiz powers for a popularity contest and not to make
+the most powerful items and areas in the game.  Weapons should be limited
+to area level restrictions first off.  There shouldnt be a +5 axe in a 
+newbie area!  In fact +5 weapons shouldnt be coded without consulting
+administrators first because of the raw power the contain.  As for the
+set_hit function it should be limited based on the enchantment of the
+weapon.  If a weapon is +1 the set function should do no more than an
+additional 10 points of damage maximum, or one other special effect such
+as a short paralyze.  A +2 weapon should do no more than 20 points of
+additional damage or 10 damage and one special effect such as paralyze.
+So for each +1 of the weapon there should be no more than 10 points of
+additional damage in the set_hit OR a different special effect.  For
+example...I have a +4 long sword, I have a set_hit that randomly works
+1 in 10 times it hits.  In the set_hit i have it do an additional roll
+for damage of 3,10 or 3d10(in AD&D terms) and it also has a change of
+paralyzing for a round.  Under no circumstance should a weapon do more
+than an additional 50 points of damage in the set_hit function for that
+is entirely too much damage for AD&D characters to endure.  Also any function
+which even has the chance to do that much damage should rarely succeed
+to provide some fairness to the other players and even the creatures
+of our game world.  Overall we can say that each +1 enchantment on a
+weapon provides one 'slot' for a set_hit function...each slot can do up
+to 10 points of additional damage or do one minor special effect.  Thirty
+points of additional damage will take up 3 slots on a weapon and paralyze
+for a few rounds would take up 1 slot.  Other special functions may use up
+more than one slot such as a beheading ability.  Such an ability should use
+up approximately 4 slots and should be extremely rare.  Other powers can be
+slot determined by administrators in special cases.
+
+Thank you for your time and all questions can be mailed or directed to Bane.
+
+Bane (7/15/97)

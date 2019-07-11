@@ -1,0 +1,15 @@
+Weapon Types
+============
+These are the currently valid weapon types
+
+    bludgeon        warrior and cleric classes
+    magebludgeon    ALL
+    slashing        warrior classes only
+    thiefslashing   warrior and thief classes
+    magicslashing   ALL - This is ONLY to be used for weapons created by spells.
+    piercing        warrion classes only
+    magepiercing    warrior, thief, and mage classes
+    thiefpiercing   warrior and thief classes
+
+warrior classes = fighter, cavalier, paladin, antipaladin, ranger, bard
+

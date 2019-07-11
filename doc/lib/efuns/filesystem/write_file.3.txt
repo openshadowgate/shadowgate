@@ -1,0 +1,24 @@
+write_file(3)                LPC Library Functions               write_file(3)
+
+
+
+[1mNAME[0m
+       write_file() - appends a string to a file
+
+
+[1mSYNOPSIS[0m
+       int write_file( string file, string str, int flag );
+
+
+[1mDESCRIPTION[0m
+       Append  the string 'str' into the file 'file'. Returns 0 or 1 for fail‐
+       ure or success.  If flag is 1, write_file overwrites instead of append‐
+       ing.
+
+
+[1mSEE ALSO[0m
+       read_file(3), write_buffer(3), file_size(3)
+
+
+
+MudOS                             5 Sep 1994                     write_file(3)

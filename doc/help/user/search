@@ -1,0 +1,6 @@
+Syntax: <search [(item)]>
+
+Sometimes items become hidden either because they were
+hidden there long ago, or a monster or player (usually a rogue)
+has hidden the object.  You may search specific items or simply
+search randomly.

@@ -1,0 +1,12 @@
+Nightmare IV SimulEfun: mud_name()
+
+string mud_name()
+
+DESCRIPTION
+Returns the official name of the mud.
+
+LOCATION
+/adm/simul_efun/mud_info.c
+
+SEE ALSO
+architecture(), mudlib(), mudlib_version(), query_host_port(), version()

@@ -1,0 +1,36 @@
+C)  set(string what, mixed arg) 
+    - main function is in /std/Object
+    - various special ones in lower level inherits such as room, monster, armor
+-------------------------------------------------------------------------------
+1) Where there is a set_something(blah) function in the lib, please use them
+   - set_race("racename") definitely, do NOT use set("race", blah)
+     when set_race is used for a valid, defined race, set_wielding_limbs, 
+     set_body_type, etc. are not required either.
+
+2) set_long("longdesc") - 
+   - in mobs or inherited rooms it can save a fair bit of memory to use a function pointer, i.e. set_long( (: TO, "ldesc" :) ) where the function goes string ldesc() { return("insert your text here"); }
+   - do not use with cloned objects/mobs, only rooms - objects get restored from PC inventories or saved otherwise and cloned mobs or items can error for various reasons
+
+3) set_id(array), set_short() also need updated from set(blah, blah)
+
+4) set_name(string str) - rooms SHOULD be named so if traps are added, etc. there is a name for the info. recorded as to cause of death
+
+5) set_terrain(TERRAINTYPE) & set_travel(TRAVELTYPE) are required
+   - see /adm/include/terrain.h for valid options, indoor vs. outdoor
+   - check /log/travel for errors after updating and regularly
+
+6) less common but available - 
+	set_peer_message(), set_charge_message(), set_mcharge_message()
+	the charge messages are related to knight's charging
+
+7) mobs that ride horses need a >> set_nwp("riding",int); << int needs to >= animal's level
+
+8) special/enchanted objects - use set_obvious_short() for what will show to those who haven't seen an identify cast on the item
+
+9) use set_lore() to set a history of the item for bards or an nwp to research
+
+10) MOBS 
+    - use set("aggressive", int or func), not init (see functions)
+    - remove any set_mp or set_sp (we don't use them currently and if we ever do will probably want to default settings in and then re-adjust)
+
+

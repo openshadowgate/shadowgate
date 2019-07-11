@@ -1,0 +1,43 @@
+                       The Nightmare Mudlib
+                            version 3.2
+                         for MudOS 0.9.19
+
+The Nightmare mudlib is the result of great collaboration originating way
+back to the original LPMud mudlibs.  The creators of the Nightmare mudlib
+used the TMI mudlib 0.8.11 as their basic coding environment while creating
+the mudlib, and thus some code from that mudlib is still quite present in
+the Nightmare Mudlib.
+
+This document serves as the liscensing agreement between those credited
+in the credits document and any user of the Nightmare Mudlib 3.2, in
+whole or in part.  Use of the Nightmare Mudlib 3.2 is considered consent to
+the terms contained in this document.  There are 2 terms:
+  1) The Nightmare mudlib 3.2, neither in whole nor in part, may ever be
+     used for profit.  Access to any mud making use of the Nightmare mudlib
+     may only be restricted based on security reasons or reasons of network
+     limitations. Specifically, access may not be restricted in order to
+     charge access tolls.
+  2) This document must be retained with any copy of Nightmare mudlib 3.2
+     in the /doc/mudlib directory with the mudlib credits.
+
+
+A note about local modifications:
+    Use your own best judgment of what is fair with respect to
+    modifying the mudlib name.  Changing the base world is not changing
+    the mudlib.  At the same rate, we do not expect people who take a few
+    files to incorporate into their mudlib to retain the mudlib name (although
+    headers should remain).  In between probably should mention something
+    like "Nightmare 3.2 version <insert name>" if it is more Nightmare than
+    local, or "<insert name> Mudlib based on Nightmare 3.2" otherwise.  But
+    we are not anal about this, we just request you be fair.
+    Examples:
+    straight mudlib: display as "Nightmare Mudlib 3.2"
+    straight mudlib with a different town: display as "Nightmare Mudlib 3.2"
+    minor mudlib changes: "Nightmare Mudlib 3.2 version Foomud 1.0"
+    heavily changed mudlib: "Foomud 1.0-Nightmare 3.2 Mudlib"
+    fundamentally changed mudlib: "Foomud Mudlib 1.0, based on Nightmare
+        Mudlib 3.2"
+    you just borrowed a few files: "Foomud Mudlib 1.0"
+
+  Descartes of Borg      27 August 1993          borg@hebron.connected.com
+  references to 3.0 changed to 3.2 22 January 1994

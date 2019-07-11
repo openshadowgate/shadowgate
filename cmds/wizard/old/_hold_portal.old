@@ -1,0 +1,86 @@
+//      Hold Portal
+//      Thorn@Shadowgate
+//      2/10/95 
+//      Wizard Spells
+//      hold_portal.c
+
+string query_sphere() { return "alteration"; }
+
+void do_spell(object caster, string targ) {
+	object target;
+	string *ret, spell_name, door;
+	int mp_req,x;
+	spell_name = "hold portal";
+	seteuid(getuid());
+	if(!caster) return 0;
+	if(!targ) {
+		write("You must specifiy what door to cast this spell on.\n");
+		return 1;
+	}
+	else
+    target = environment(caster);
+	if(!target->query_door(targ)) {
+		tell_player(caster, "That exit has no door.\n");
+		return 1;
+	}
+	door = target->query_door(targ);
+	mp_req = "/daemon/magic_d"->query_spell_cost(2,caster->query_sphere(),query_sphere());
+	if((int)caster->query_mp() < mp_req) {
+		tell_player(caster, "Your magic powers are too weak to cast that spell.\n");
+		return 1;
+	}
+	if(!"/daemon/magic_d"->can_cast(caster,1,"wizard", spell_name)) {
+		tell_player(caster, "You cannot cast that spell.\n");
+		return 1;
+	}
+	if(caster->query_disable()) {
+		write("You are still recovering from the last spell.");
+		return 1;
+	}
+  	write("You begin to cast the spell!");
+  	caster->set_mp((int)caster->query_mp() - mp_req);
+  	caster->set_casting(1);
+    tell_room(environment(caster),caster->query_cap_name()+" concentrates for awhile on the door to the "+targ+".\n", ({ caster }));
+  	caster->set_disable(7);
+  	call_out("do_real_spell",7,caster,target,door);
+  	return 1;
+}
+
+void do_real_spell(object caster, object target, string door) {
+	string target_limb;
+	int levelmod, casterlevel;
+
+	if(caster->query_spell_interrupted()) {
+    	tell_player(caster,"Your spell is disrupted by an attack!\n");
+   		caster->set_spell_interrupted(0);
+    	return 1;
+  	}
+  	casterlevel = (int)caster->query_guild_level("mage");
+  	if(!casterlevel)
+    	casterlevel = (int)caster->query_guild_level("illusionist");
+  	if(!casterlevel) {
+    	tell_player(caster,"Wait, you're not a magic user!\n");
+    	return 1;
+  	}
+  	tell_player(caster,"You cast Hold Portal on the portal at the "+door+".\n");
+	target->set_hold_portal(door, 1);
+  	caster->set_casting(0);
+}
+
+
+
+int help()
+{
+  write( @EndText
+Syntax: cast hold portal on <exitname>
+
+	This spell will alter a door so that it is barred magically.  
+No one may pass through this door without casting a successful 'knock'
+or a 'dispell magic'.  Wizards that are 4 levels higher and other 
+planar creatures of 4 Hit Dice or above may open this door at will.
+
+See also: knock, dispel_magic
+EndText
+  );
+  return 1;
+}

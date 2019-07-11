@@ -1,0 +1,107 @@
+//      Chill Touch 
+//      Thorn@Shadowgate
+//      10/16/94
+//      Wizard Spells
+//      chill_touch.c
+
+string query_sphere() { return "necromancy"; }
+
+void do_spell(object caster, string targ) {
+  object target;
+  string *ret;
+  int mp_req,x;
+
+  if(!caster) return 0;
+  if(!targ) {
+    target = caster->query_current_attacker();
+    if(!target) {
+      write("You must specifiy who to cast this spell on when not in battle.");
+      return 1;
+    }
+  }
+  else
+    target = present(targ,environment(caster));
+  if(!target) {
+    tell_player(caster, "That is not here!\n");
+    return 1;
+  }
+  if(!living(target)) {
+    tell_player(caster, "That is not a living being!\n");
+    return 1;
+  }
+  mp_req =
+"/daemon/magic_d"->query_spell_cost(2,caster->query_sphere(),query_sphere();
+  if((int)caster->query_mp() < mp_req) {
+    tell_player(caster, "Your magic powers are too weak to cast that spell.\n");
+    return 1;
+  }
+  if(!"/daemon/magic_d"->can_cast(caster,1,"wizard")) {
+    tell_player(caster, "You cannot cast that spell.\n");
+	return 1;
+  }
+  if(caster->query_disable()) {
+    write("You are still recovering from the last spell.");
+    return 1;
+  }
+  if(!caster->ok_to_kill(target)) {
+    write("Supernatural forces prevent your magic.");
+    return 1;
+  }
+  write("You begin to cast the spell!");
+  caster->set_mp((int)caster->query_mp() - mp_req);
+  caster->set_casting(1);
+  say(this_player()->query_cap_name()+" concentrates for a second and mutters something to himself.");
+  caster->set_disable(7);
+  call_out("do_real_spell",7,caster,target);
+  return 1;
+}
+
+void do_real_spell(object caster, object target) {
+  string target_limb;
+  int levelmod, damage, casterlevel, attrmod;
+
+  if(caster->query_spell_interrupted()) {
+    tell_player(caster,"Your spell is disrupted by the monster's attack!\n");
+    caster->set_spell_interrupted(0);
+    return 1;
+  }
+  casterlevel = (int)caster->query_guild_level("mage");
+  if(!casterlevel)
+    casterlevel = (int)caster->query_guild_level("illusionist");
+  if(!casterlevel) {
+    tell_player(caster,"Wait, you're not a magic user!\n");
+    return 1;
+  }
+  
+  attrmod = target->query_attribute("strength") - 1;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Modifies the strength attribute by -1 as per the chill touch spell req.
+ 
+  damage = random(4) + 1;
+//^^^^^^^^^^^^^^^^^^^^^^^
+// Standard damage modifier for the spell with the random and the fixed components.
+
+  target_limb = target->return_target_limb();
+  tell_player(caster,"You cast Chill Touch at "+target->query_cap_name()+".\n");
+  tell_player(target,caster->query_cap_possessive()+" hands glow a bluish color.\n"  
+  tell_room(environment(caster),
+            caster->caster->query_cap_possessive()+" hands glow a bluish color.\n",
+            ({ caster,target }) );
+  if(!"/daemon/saving_d"->saving_throw(target, "spell")) {
+    tell_room(environment(caster),caster->query_cap_name()+" reaches out and touches "+target->query_name()+".\n",({ target }));
+    tell_player(target,"You are scorched by the sheet of flames.");
+    target->do_damage(target_limb,damage);
+	target->set_attribute("strength", attrmod);
+  }
+  
+// If Saving Throw vs. Spells is made then the damage from the flames is only 1/2 as much.
+
+  else
+  {
+    tell_room(environment(caster),target->query_cap_name()+" jumps out of the way just as the flames are about to hit!\n",({ target }));
+    tell_player(target,"You are only slightly singed by the flames.");
+	target->do_damage(target_limb,damage/2);
+  }
+  caster->set_casting(0);
+  caster->kill_ob(target);
+}

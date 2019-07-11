@@ -1,0 +1,22 @@
+asin(3)                      LPC Library Functions                     asin(3)
+
+
+
+[1mNAME[0m
+       asin() - return the arcsine of a float
+
+
+[1mSYNOPSIS[0m
+       float asin( float f );
+
+
+[1mDESCRIPTION[0m
+       Returns the arcsine of its argument, 'f', measured in radians.
+
+
+[1mSEE ALSO[0m
+       acos(3), atan(3), cos(3), sin(3), tan(3)
+
+
+
+MudOS                             5 Sep 1994                           asin(3)

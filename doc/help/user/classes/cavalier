@@ -1,0 +1,45 @@
+%^RESET%^%^CYAN%^Cavalier:
+
+%^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 12 strength, 12 charisma
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, dwarf (gold), halfling (strongheart), elf (sun)
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any lawful
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ bard, barbarian, ranger, thief, paladin
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d12
+%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
+%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, endurance, influence
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+   %^RESET%^L1: light armor proficiency, medium armor proficiency, heavy armor 
+   %^RESET%^proficiency, shield proficiency, simple weapon proficiency, martial 
+   %^RESET%^weapon proficiency, parry
+   %^RESET%^L3: mounted combat
+   %^RESET%^L7: indomitable
+   %^RESET%^L9: ride-by attack
+   %^RESET%^L11: charge
+   %^RESET%^L14: force of personality
+   %^RESET%^L17: leadership
+   %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
+   
+A cavalier must be of proper social class and is usually of noble or 
+aristocratic origin. A cavalier must always place honor, bravery, and 
+personal deeds in the forefront of his or her activity, and must adhere to
+a code of conduct and ethics. Upon being sworn to knighthood, a cavalier 
+must pledge himself or herself to this code. Failure to sustain the oath 
+is sufficient reason to revoke knighthood, according to the lords of the 
+realm. Should this happen, the cavalier becomes a mere fighter.
+
+A knight must serve someone or some cause. Cavaliers usually serve a lord
+or nobility, or the order of knighthood, while paladins serve a deity. Only
+a limited number of faiths permit knights to join their ranks. The gods 
+that train cavaliers, and grant divine gifts to paladins, are Auppenser, 
+Auril, Bane, Grumbar, Helm, Kelemvor, Kossuth, Lathander, Mystra, Selune, 
+Torm, Tyr, Shar, and Sune.
+
+Another characteristic of cavaliers and paladins is the ability to train a
+warhorse. As a cavalier grows in power, so will this steed. Simply buy the
+horse from a stable or guild hall. Be warned, though, that your warhorse 
+will share in your experience should it be used for direct combat.
+
+**NOTE** Before playing a cavalier, be sure to read <help knights>
+         You will be expected to follow these guidelines.
+
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, knights, paladin, squire

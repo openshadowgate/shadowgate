@@ -1,0 +1,14 @@
+Nightmare mudlib efun: remove()
+
+void remove();
+
+No objects should ever be destroyed by the efun destruct() as was the practice
+in the LPMud series mudlibs.  Instead each object should have a function in
+it called remove() which takes care of any messy business left over before
+getting rid of the object.  A good example is making sure that any object
+carrying an item deducts its weight from the player carring it before
+destructs so that the player's carry is correct.
+
+This function is defined for any object already in the mudlib.  So if
+you are inheriting a mudlib object, like Object.c, weapon.c, armour.c
+etc... you do not need to worry about writing this function.

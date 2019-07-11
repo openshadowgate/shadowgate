@@ -1,0 +1,119 @@
+//      Armor 
+//      Thorn@Shadowgate w/ lots of help from Melnmarn
+//      1/19/95 
+//      Wizard Spells
+//      armor.c
+
+int prev_ac, benchmark, tally;
+
+string query_sphere() { return "conjuration"; }
+
+void do_spell(object caster, string targ) {
+	object target;
+	string *ret, spell_name;
+	int mp_req,x;
+	spell_name = "armor";
+	if(!caster) return 0;
+	if(!targ) {
+		write("You must specifiy who or what monster to cast this spell on.\n");
+		return 1;
+	}
+	else
+    target = present(targ,environment(caster));
+	if(!target) {
+		tell_player(caster, "That is not here!\n");
+		return 1;
+	}
+	if(!living(target)) {
+		tell_player(caster, "That is not a living being!\n");
+		return 1;
+	}
+	if((int)target->query_ac() <= 6) {
+		tell_player(caster, target->query_cap_name()+" already has better protection than your spell can provide.\n");
+		return 1;
+	}	
+	seteuid(getuid());	
+	mp_req = "/daemon/magic_d"->query_spell_cost(2,caster->query_sphere(),query_sphere());
+	if((int)caster->query_mp() < mp_req) {
+		tell_player(caster, "Your magic powers are too weak to cast that spell.\n");
+		return 1;
+	}
+	if(!"/daemon/magic_d"->can_cast(caster,1,"wizard", spell_name)) {
+		tell_player(caster, "You cannot cast that spell.\n");
+		return 1;
+	}
+	if(caster->query_disable()) {
+		write("You are still recovering from the last spell.");
+		return 1;
+	}
+  	write("You begin to cast the spell!");
+  	caster->set_mp((int)caster->query_mp() - mp_req);
+  	caster->set_casting(1);
+  	tell_room(environment(caster), caster->query_cap_name()+" raises a piece of cured leather in the air.\n",({ caster }) );
+  	caster->set_disable(7);
+  	call_out("do_real_spell",7,caster,target);
+  	return 1;
+}
+
+void unarmor(object caster, object target) {
+	target->set_ac(prev_ac);
+	if(wizardp(target)) {
+		tell_player(target, "Armor spell expired.  AC returned to "+prev_ac+".\n");
+	}
+	if(wizardp(caster)) {
+		tell_player(target, "Armor spell on "+target->query_cap_name()+" expired.  AC returned to "+prev_ac+".\n");
+	}
+	tell_player(target, "You briefly see a magical field dissipate around you.");
+}
+
+void do_real_spell(object caster, object target) {
+	int casterlevel;
+	benchmark = target->query_hp();
+	tally = 0;
+	if(caster->query_spell_interrupted()) {
+    	tell_player(caster,"Your spell is disrupted by an attack!\n");
+   		caster->set_spell_interrupted(0);
+    	return 1;
+  	}
+  	casterlevel = (int)caster->query_guild_level("mage");
+  	if(!casterlevel)
+    	casterlevel = (int)caster->query_guild_level("illusionist");
+  	if(!casterlevel) {
+    	tell_player(caster,"Wait, you're not a magic user!\n");
+    	return 1;
+  	}
+  	tell_player(caster,"You cast Armor on "+target->query_cap_name()+".\n");
+    tell_player(target,"You see a brief shimmer around you as "+caster->query_cap_name()+" casts a spell on you.\n");
+	prev_ac = target->query_ac();
+    target->set_ac(6);
+	call_out("test", 7, caster, target);
+  	caster->set_casting(0);
+}
+
+//	Test for damage to the magical armor takes place every 7 seconds of 
+//	real time.  This may need to be modified as player testin may indicate.
+//	Thorn 1/20/95
+
+int test(object caster, object target) {
+	int max_damage, add_tally, caster_level, thp;
+	if(!target) return 1; // To avoid errors when player quits - Thorn
+	caster_level = (int)caster->query_guild_level("mage");
+	if(target->query_hp() > benchmark) {
+		benchmark = target->query_hp();
+		call_out("test", 7, caster, target);
+		return 1;
+	}
+	if(target->query_hp() < benchmark) {
+		add_tally = benchmark - thp;
+		thp = target->query_hp();
+		max_damage = 8 + caster_level;
+		tally += add_tally;
+		benchmark = target->query_hp();
+		if(tally < max_damage) call_out("test", 7, caster, target);
+		if(tally >= max_damage) unarmor(caster, target);
+		return 1;
+	}
+	return 0;
+}
+
+

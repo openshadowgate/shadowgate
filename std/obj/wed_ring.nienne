@@ -1,0 +1,177 @@
+//	/obj/wed_ring.c
+//	from the Nightmare mudlib
+//	a wedding ring for the married ones of the mud
+//	created by Descartes of Borg august 1992
+
+#include <std.h>
+
+inherit ARMOUR;
+
+string me, spouse;
+int jealous;
+
+set_spouse(str) { spouse = str; }
+
+set_me(str) { me = str; }
+
+init()
+{
+    ::init();
+     // Added by Garrett so that animated wedding rings wouldn't go berzerk.
+     if (ETO != TP) return;
+//removed by Obsidian 080999
+//    add_action("remove_ring","remove");
+//    add_action("remove_ring","unwear");
+    //add_action("notify_spouse","honey");
+/*
+Removing these since they seem out of character for the MUD now. It doesn't make sense that the spouse would automatically feel this. We can add back later if we'd like.
+~Circe~ 5/14/11
+    add_action("jealous_action0","kiss");
+    add_action("jealous_action2","french");
+    add_action("jealous_action2","snuggle");
+    add_action("jealous_action0","wink");
+    add_action("jealous_action1","nibble");
+    add_action("jealous_action2","love");
+    add_action("jealous_action2","lick");
+    add_action("jealous_action2","grope");
+    add_action("jealous_action2","fondle");
+    add_action("jealous_action1","cuddle");
+*/
+    call_out("wear", 2, "band");
+}
+
+void create() {
+    ::create();
+    set_id( ({ "band", "night_wed_ring", "wedding ring" }) );
+    set_name("band");
+    set_short( (:this_object(), "short_fun" :));
+    set_long("A Wedding Ring\n");
+    set_ac(0);
+    set_type("ring");
+    set_limbs( ({ "left hand" }) );
+    set_weight(0);
+    set_value(0);
+}
+
+notify_spouse(str)
+{
+    if(!find_living(spouse))
+    {
+        write(capitalize(spouse)+" is not around.\n");
+        return 1;
+    }
+   if(!TP->is_monster()) str= "daemon/language_d"->translate(str, TP->query_spoken(), TP);
+    message("honey","%^BOLD%^%^RED%^Honey: %^RESET%^"+str+"\n",find_living(spouse));
+    message("honey","%^BOLD%^%^RED%^You tell your spouse: %^RESET%^"+str+"\n",TP);
+    return 1;
+}
+
+jealous_action0(str)
+{
+    if(!str) return 0;
+  if(strsrch(str,spouse)==-1) notify_jealous();
+    return 0;
+}
+
+jealous_action1(str)
+{
+    if(!str) return 0;
+    if(strsrch(str,spouse)==-1) notify_jealous(1);
+    return 0;
+}
+
+jealous_action2(str)
+{
+    if(!str) return 0;
+    if(strsrch(str,spouse)==-1) notify_jealous(2);
+    return 0;
+}
+
+notify_jealous(arg)
+{
+    object zip;
+
+    if(!find_living(spouse)) return;
+    if(!arg) tell_object(find_living(spouse), "You are feeling a little jealous.\n");
+    else if(arg == 1) tell_object(find_living(spouse), "You feel jealous.\n");
+    else tell_object(find_living(spouse), "You feel very jealous.\n");
+    if(zip = present("night_wed_ring", find_player(spouse)))
+      zip->add_jealous(arg);
+    return;
+}
+
+/* removed by Obsidian 080999
+remove_ring(str)
+{
+    if(!id(str)) return 0;
+    write("You may only remove your wedding band through divorce!\n");
+    return 1;
+}
+*/
+
+void unwear() {
+   tell_object(query_worn(),"You may only remove your wedding band through divorce!");
+   return;
+}
+
+
+string extra_look()
+{
+    return (capitalize(me)+" is married to "+capitalize(spouse)+".\n"); }
+
+get()
+{
+// Added the following line to allow an animated wedding ring to be reclaimed.
+// Garrett.
+  if (objectp(TP) && objectp(ETP) && ETP==ETO && TP->query_name() == me)
+    return 1;
+    return 0;
+}
+
+drop()
+{
+    return 1;
+}
+
+add_jealous(arg)
+{
+    jealous = jealous + arg;
+    return;
+}
+
+query_jealous()
+{
+    return jealous;
+}
+
+mixed *query_auto_load()
+{
+    return ({ "/std/obj/wed_ring", ({ me, spouse, jealous }) });
+}
+
+void init_arg(mixed *arg)
+{
+
+    me = arg[0];
+    spouse = arg[1];
+    jealous = arg[2];
+    notify_spouse("I'm home.");
+}
+
+wear(str)
+{ 
+	set_short( (:this_object(), "short_fun" :));
+	set_long("A solid gold band.  There is some writing on it.\n");
+	set("read", "From "+capitalize(spouse)+" with love.\n");
+  if(objectp(ETO) && interactive(ETO))
+	ETO->force_me("wear band");
+}
+
+  string short_fun() {return ("$&$"+me+"$&$'s wedding band");}
+	
+
+string query_spouse() { return spouse; }
+string query_me() { return me; }
+
+restore_me(){return 1;}
+save_me(){return 1;}

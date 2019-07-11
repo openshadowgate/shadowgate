@@ -1,0 +1,605 @@
+*******************************************************************************
+		     MUD PROGRAMMING by: Killashandra (Menolly)
+*******************************************************************************
+
+INTRODUCTION:
+	This is a general introduction and guideline for new wizards.  I will
+list many commands and routines with some basic info ... for more information
+try typing "man <command_name>"  This will generally give you more detailed
+information.
+
+0) Setting up your wiz char ...
+	You can set various characteristics for your wiz char.  I'm told there
+is a "call me" command but I haven't been able to use it ... prob because I'm an
+apprentice.  This is how it's supposed to work ... I think :)
+
+call me;set_stats;"charisma";20
+
+What does work for me however is:
+
+eval find_player("killashandra")->set_max_hp(2000);
+eval find_player("killashandra")->set_stats("charisma",20);
+etc
+
+1) Getting Around:
+
+	The environment and directory structure are organized exactly like
+unix.  If you're familiar with unix you might want to skip this section.
+	As a wizard, you will have your own home directory.  You can return
+to this directory at any time by typing "cd".  Here is a list of commands to
+help you get around:
+
+CD:  Change Directory
+	This command works much the same as in DOS ... "cd .." moves you back
+	one directory etc.
+PWD: Print Working Directory
+	This shows you where you are.
+
+
+2) Manipulating Files:
+
+	Again this is similar to unix:
+
+CAT:  This displays the contents of a file to the screen ... it does not stop
+	for one page at a time but scrolls by all at once ... I'd recomend using
+	less or more instead.
+MORE/LESS:  These display the contents of files one page at a time.  Less is better
+	in that it allows you to go backwards as well as forwards.  (So less is
+	more that more :)  There are other options like searching etc ... read 
+	the man pages.  I think there's a bug in the less comand because it's 
+	not currently working ...
+MKDIR/RMDIR:  Make and remove directories.
+CP:  Copies a file to a new file.
+MV:  Moves a file to a new file.
+LS:  Lists the contents of the current directory.
+RM:  Removes (Deletes) a file
+
+
+3) Some special MUD commands:
+
+CLONE:  clone <path/file.c>
+	This creates an object from the .c file that describes it.  Objects could
+	include items, monsters etc ... Do not clone rooms.
+	ie: clone torch.c
+DEST:   dest <object>
+	This removes an object from memory(the game).  The object must be in your
+	inventory or in the room with you.
+	ie: dest grimtooth
+UPDATE: update <filename>
+	This updates the info for an object that already exists from filename.
+	ie: update workroom.c
+ED:	This is the editor that you must use to edit files if you choose to edit
+	files online.  The other option is to write your files off-line and then
+	upload them ... You should still know something about this editor for the
+	puposes of debugging and making small changes ... look it up :)
+	Also, entering h while in ed gives you a list of commands.
+
+	The ftp address for the mud is: "ftp firedragon.com 6968"
+	If you have a wiz char, you have access to this site.  look at a man page
+	for ftp if you've never used it ...
+
+***********************************************************************************
+
+4) The basics of LPC (the C-like programming Language)
+
+COMMENTS:  Coments are advisable so you can look back and understand the code you
+	wrote a year ago (or last week for that matter).  Coments can be either
+	prefaced by a "//" or surrounded by "/* ... */"
+	ie:
+	// this is a comment
+	/*
+	* so is this
+	*/
+
+VARIABLES:  Variables must be declared at the top of a program of function.
+	Here are the variable types and how to declare them:
+	Integer: int count; or int count1, count2;
+	Status: status stat;  /* This is either 0 or 1 */
+	String: string info;
+	Object: object ob;
+		objects are special variables.  Objects are pointers that point 
+		to a structure containing information on an object.  You'll
+		learn how to initialize these to point to a given object, and how
+		to use them to access and change info on an object.
+	Arrays: You can define arrays of any type of variable.  When you declare 
+		an array, precede the varable name by a "*".  You use square
+		brackets [] to indicate the index of the array that you wish
+		to access.  Note, arrays are indexed as in C with the first element\
+		being at index 0 and the fourth at 3 etc ...
+		ie: int intarr*;
+		    object *objarr;
+	Mixed:	This a variable that could store integers, strings, or objects.
+
+TYPE MODIFIERS:  You can apply type modifiers to the declaration of a variable.
+	There are 4 possible modifiers:
+	static:  the variable is not saved when save_object() is called on the
+		object in which the variable is defined.
+	private:  the variable cannot be accessed by an object that inherits the 
+		object in which the variable is defined.
+	nomask:  the variable cannot be redefined by a shadow
+	public:  the variable can be accessed by an object that inherits the
+		object in which the variable is defined.  In addition the 
+		variable may be redefined by a shadow.
+	The default for all variables is public.  Examples of how to define follow:
+	static nomask object ob;
+	static object ob;
+
+OPERATORS:  Operators generally act between variables or expressions of variables
+	to form a new expr.
+	VAR = EXPR	Evaluates EXPR and assigns the value to VAR
+	VAR += EXPR	VAR = VAR + EXPR
+	VAR -= EXPR	VAR = VAR - EXPR
+	||		or
+	&&		and
+	==		equivalent
+	!=		not equivalent
+	>		greater than
+	>=		greater than or equal to
+	<		less than
+	<=		less than or equal to
+	MATH:
+	+		plus
+	-		minus
+	/		divide by
+	*		multiply
+	++		increment
+	--		decrement
+
+
+SYNTAX:  Syntax is extremely important, and the most common bug that prevents your
+	code from being loaded (cloned).
+Braces: {} indicate the opening and closing of a function, a clause in an if-else
+	statement, or the clause in a loop.
+	ie:
+	if (a==b)
+	    {
+		a = a++;
+		return a;
+	    }
+	  else
+	    {
+		return a;
+	    }
+	for (i=0; i<10; i++)
+	    {			/* the + here means string concatenation */
+		write("I equals: "+ i +".\n");
+	    }			/* the \n specifies a carriage return or newline */
+Semicolons: ; semicolons indicate the end of a statement.
+Parenthesis: () These specify the arguments given to a function, as well as the 
+	order of operation for evaluating an expression.
+Return:  causes the function to end and return the specified variable as it's result.
+If-Else:  This is just like in C.  The else part is optional, and you could create
+	a series of if() {} elseif () {} etc.
+	IMPORTANT NOTE:  when you start nesting if statements and loops, carefull
+	indentation will make your code MUCH easier to read, understand, and debug!
+Loops:
+
+FOR:	for(expr1; expr2; expr3) statement;
+	expr1 is evaluated prior to the execution of the l0op
+	expr2 is evaluated at the beginning of each loop and if it is false, the
+		loop is exited.
+	expr3 is evaluated at the end of each loop iteration ... generaly a counter
+		increment.
+	statement could be either a single statemnt ending in a ";" or a series
+		of statements enclosed in parentheses {}
+
+WHILE:	while (expr) statement;
+	this will loop until expr is false.  Expr is checked at the beginning of each
+	loop iteration.  Again statement could be a series of statements enclosed 
+	in parenthesis {}
+
+INCLUSION:   #include "/obj/living.h"  or #include <living.h>
+	This includes the named file as if it's contents were written into the
+	current file at the location of the include statement.  Mostly used
+	for header (.h) files which contain definitions you may wish to use
+	over and over again.
+INHERITANCE:  inherit "/obj/monster.c"
+	This gives the current object being defined in the file the basic
+	properties and behaviors that are generally associated with that
+	type of object (ie: room, monster, weapon, armour etc)
+	In general you should inherit the correct set of properties and
+	then define the specifics of the object being defined based ... if
+	not clear, look at some object files and see how they differ....
+FUNCTIONS:  Functions are a very important construct in any language.  In LPC
+	there are two main types of functions: efuns and lfuns.  These are
+	External and Local respectively.  Efuns are generally defined by the
+	MUDOS  and you call them from within your code but don't define them.
+	Lfuns are those that you create and use locally within your code.
+	For examples, look through some files ...
+DEBUGGING:  Whenever you try to clone a new object, you may have syntax or other
+	errors and it may not work.  Error messages are written to the file:
+	/log/errors/killashandra (or your name in place of mine :)
+	the command elog lists this file for you.  Since errors are constantly
+	appended to the elog file, you may wish to delete it periodically with:
+	rm /log/errors/killashandra
+*************************************************************************************
+
+	OK, that introduces you to the basics of the language, syntax, and
+programming environment.  Here are some basic functions that are defined by the 
+MUDOS which you will inevitably use a great deal.  You can learn about many
+others by reading through some already written code.
+	An important concept here is that of Objects.  This is an object 
+oriented architecture.  Everything is an object of one type or another.  Each
+player, monster, room, item is an object.  Even the effects of some spells are
+invisible objects put in someone's inventory temporarily.  A person is an object
+contained within a room object so the environment of the person is the room.
+A sword is an object inside a person's inventory and therefore the sword's
+environment is the person object.  Containers like sacks and chests are special
+objects that can contain other objects ... etc etc etc
+
+
+ADD_ACTION	void add_action(string func, string cmd)
+	add_action sets up a local fuinction func to be called when a user inputs
+	a command line cmd.
+	ie:  add_action("drop_thing","drop")
+	This would be later followed by a user defined:
+	int drop_thing(string str)
+	   {
+	   }
+	Here, str is what was written on the command line after drop.  Look at
+	some examples ...
+
+ADD_VERB	void add_verb(string verb)
+	This efun is connected to the add_action efun.  It will set up the command
+	verb to trigger a call to the function set up by the previous call to 
+	add_action.  ie:  add_action("drop_thing");  add_verb("drop");
+	This is made obsolete by the new form of the add_action command above ...
+
+ADD_XVERB	void add_xverb(string xverb)
+	This efun works the same as add_verb except that a space is not required
+	between the xverb and it's first argument.  A common use for this might be:
+	init()
+	{
+	   add_action("speak","say");
+	   add_action("speak"); add_xverb("'");
+	}
+
+ALL_INVENTORY	object *all_inventory(object ob)
+	Returns an array of all the objects in the inventory of ob.
+	ie:
+	object *allob;
+	allob = all_inventory( this_object() );
+
+ALLOCATE	mixed *allocate(int size)
+	This allocates memory for an array of size elements.  This may be somewhat 
+	obsolete ... look for examples in the existing code for how space is 
+	allocated to arrays.
+	ie: string *queue;
+	    queue = allocate( 100 );
+
+ATOI		int atoi(string str)
+	Converts str to an integer.  returns 0 if str is non-numeric.
+
+CALL_OTHER  unknown call_other(object ob, string func, mixed arg1, mixed arg2, ...)
+	This calls a function func in an object ob with the arguments arg1, arg2,
+	... etc.  The value returned bu call_other is that which it received from
+	the function func.  If ob has not yet been loaded, it will be loaded.
+
+CALL_OUT	void call_out(string func, int delay, mixed arg)
+	This calls the function func in this_object (TO).  The call will take
+	place in delay seconds.  If arg is supplied, it is passed to func.
+	Note ... the efun this player (TP) will not work in a function called
+	by call_out.  TP needs to be passed to the function as an argument or
+	defined globally.
+
+CALLER		object caller()
+	Returns a pointer to the object that called the current function.
+
+CAN_PUT_AND_GET	int can_put_and_get(string str)
+	This function is called to see whether it is possible to place objects
+	inside the current object.  If it returns true (1) it is possible.  Note
+	the absence of this function defaults to a value of 0 meaning that you
+	man not place objects within the current.  To permit the placement of
+	items within the current you need a function that looks like:
+	can_put_and_get(str) {return 1;}
+
+CATCH_TELL  void catch_tell(string str)
+	This is usefull for enabling objects to act when the receive a tell_object(),
+	tell_room(), or say() that contains the string str.  The object must be a
+	living object and must have enable_commands set in it.  Take a look at
+	how Grazzt has used this to make Grimtooth REALLY tough!
+
+CLONE_OBJECT	object clone_object(string filename)
+	This loads a new object from fielname and returns a pointer to this 
+	new object.  After cloning an object, you will often move it into the 
+	inventory of the object currently being defined.
+
+COMMAND		int command(string str, object ob)
+	This executes str as a command issued by the current player.  If ob is
+	specified, the command is issued by ob.  An object must be living and
+	have enable_commands set in order for this to work.
+
+CREATE		void create()
+	This is an lfun that you define which is only called once when the object
+	being loaded is first created.  All major initializations for the object
+	should e done within this lfun ... look at some examples
+
+DEEP_INVENTORY	object *deep_inventory(object ob)
+	Returns a recursive list of all objects contained within ob.  In other 
+	words ... the contents of containers as well.  If ob isn't specified,
+	it defaults to this_player().
+
+DESTRUCT	void destruct(object ob)
+	When this is called it destroys and removes the definition of ob.
+
+DROP		int drop(int silently)
+	This must be defined in order for an object to be dropable.  If silently
+	is true (!=0) then no message will be written to indicate that the object
+	has been dropped.  The default for all objects is that they are droppable.
+
+ENABLE_COMMANDS	void enable_commands()
+	This enables the capability of an object to use commands normally added by
+	external objects when they enter the immediate environment of the object
+	in which enable commands was called.  This also classifies the object as
+	"living".
+
+ENVIRONMENT	object environment(object ob)
+	Returns the environment object of ob.
+
+FILE_NAME	string file_name(object ob)
+	Get's the filename of the object ob.
+
+FIND_LIVING	object find_living(string str)
+	This tries to find the first living object that answers to the identity
+	str.  If the object is found a pointer to the object is returned.  If not,
+	a 0 is returned.  An example for str might be "dwarf"
+
+FIND_OBJECT	object find_object(string str)
+	Tries to find an object with the filename str.  If the object hasn't
+	been loaded it won't be found.  Returns a zero if unsuccesful.
+
+FIND_PLAYER	object find_player(string str)
+	Tries to find the player whose name is str.  If found returnd a pointer
+	to object player, otherwise returns 0.
+
+FIRST_INVENTORY	object first_inventory(object ob)
+	returns a pointer to the first object in the inventory of ob.
+
+GET		int get()
+	This is an lfun that is defined by all objects that need to control whether
+	they can be picked up.  Should return 1 if it can be picked up.
+	ie:
+	get()
+	    {
+		if (this_player()->query_level() >= 21) return 1;
+	    }
+	With the basic macros used on SG ... this_player is shortened to TP:
+	get()
+	    {
+		if (TP->query_level() >= 21) return 1;
+	    }
+	This is a good intro to how some of the properties of objects can be
+	dependent on the player trying to use them.  Read lots of examples ...
+
+GET_DIR		string *get_dir(string dirname)
+	This returns a string array containing the names of all files located
+	within the specified directory dirname.
+
+HEART_BEAT	void heart_beat()
+	This is an lfun that is automatically called by the game every 2 seconds.
+	This is computationally intensive and should be turned off when not needed.
+	It can be turned on and off with set_heart_beat().  Note, if there is
+	an error, the heartbeat will be automatically shut off and can't be 
+	turned on with set_heart_beat ... rather it will need to be reloaded.
+	Grazzt has used this to make some rather interesting monsters ... look
+	at his pest.c in the temple in drow.
+
+INDEX		int index(mixed arr, mixed target, int offset, int increment)
+	This efun returns the index of target in arr.  It starts at offset from
+	the beginning of arr and searches with an increment of increment.
+
+INIT		void init()
+	This is an lfun whose main purpose is to facilitate the set up of add_action.
+	Init is called when two objects move near each other provided that one object
+	is marked as living.  Example:
+		If object A is living and moves into object B (room), init is called
+	in object B and this_player (TP) is set to return a pointer to object A.
+	For every living object C inside of object B, init is then called in object
+	A with this_player() set to return a pointer to object C.  Then again, for
+	every living object C inside of object B, init is called in object C with 
+	this_player() set to return a pointer to object A.  Finally, init is called
+	in object A with this_player() set to return a pointer to object B.
+		WHEW!!! confused yet?  Take a look at some of the code in the
+	forest east of Theris.
+
+LIVING		int living(object ob)
+	This returns a 1 if ob is living ... otherwise it returns a 0.
+
+LONG		void long(string str)
+	This enables an object to write a long description of itself.
+
+MEMBER_ARRAY	int member_array(mixed item, mixed *arr)
+
+	This efun returns the index of the first occurence of item in arr.  If
+	none is found it returns -1.
+
+MOVE_OBJECT	void move_object(object item, object dest)
+	This moves the object item into a destination object dest.
+
+NEXT_INVENTORY	object next_inventory(object ob)
+	This returns a pointer to the next object that is located in the same
+	inventory as ob.  If the object ob is moved by move_object(), then the
+	next_inventory will return an object from the new inventory.
+
+NOTIFY_FAIL	void notify_fail(string str)
+	This stores str as the message to be given in the event of an error when 
+	a verb is used.  This will be given insead of the standard "What?"
+	It's a good idea to put one in an lfun you've defined just before the return
+	statement.
+
+OBJECTP		int objectp(mixed arg)
+	Returns a 1 if arg is an object ... otherwise 0.
+
+POINTERP	int pointerp(mixed arg)
+	Returns a 1 if arg is an array ... otherwise 0.
+
+PRESENT		object present(string str, object ob
+	This searches the inventory of the current object (this_object)(TO) as 
+	well as the inventory of the environment of the current object for an 
+	object that answers to the string str.  If found, a pointer to the object
+	is returned ... otherwise 0 is returned.
+
+PREVIOUS_OBJECT	object previous_object()
+	This returns a pointer to the object that did a call_other to the current
+	object, if any. otherwise 0.
+
+QUERY_AUTO_LOAD	string query_auto_load()
+	this is an lfun that should be defined in any object that needs to be cloned
+	and moved to the player when he/she logs on.  I don't think this is
+	particularly applicable on this mud since the inventories are saved ...
+
+QUERY_IDLE	int query_idle(object ob)
+	Returns the number of seconds that player ob has been idle.
+
+QUERY_LEVEL	int query_level()
+	Efun which returns the level of a player.  Often used as follows:
+	lev = TP->query_level()
+
+QUERY_NAME	string query_name()
+	Returns the string which is the designated name of the item being
+	queried.
+
+RANDOM		int random(int num)
+	This efun returns an integer value in the range 0 to num-1.
+
+RESET	void reset()
+	This is called internally by the game driver every so often ... when
+	rooms etc reset.  If a room is creating a monster at reset, it should
+	check that the monster isn't already present ... otherwise the room
+	could get a bit crowded :)
+
+RESTORE_OBJECT	int restore_object(string filename)
+	This returns the values of all variables for the current object from
+	the file filename.  Periods and spaces are not permitted in filename.
+
+SAVE_OBJECT	void save_object(string filename)
+	This saves the values of all non-static global variables of the current 
+	object (this_object) (TO) in the file filename(could include path).
+	Periods and spaces are not permitted in filename.  Returns 1 if
+	succesful.
+
+SAY		void say(string str, object ob)
+	This efun sends a message str to all players in the same object.  If the
+	optional argument ob is specified, then str is sent to all players except
+	the object specified by ob.
+
+SET_HEART_BEAT	void set_heart_beat(int flag)
+	This efun enables of disables the calling of heart_beat by the game in
+	the current object (TO or this_object).  If the flag is 1 then the game
+	will call heart_beat every 2 secs.  If the flag is 0 then the game will
+	cease to call heartbeat.
+
+SET_LIGHT	int set_light(int lightlev)
+	An object is, by default dark.  It can be set to a state of not being dark
+	by calling set_light.  I'm not sure whether a higher positive lightlev will
+	result in more light, or if the object is lit at 1 and otherwise dark.  A 
+	negative lightlev darkens the object.  The environment surrounding a lit
+	object (ie torch) is also considered to be lit.  The value that set_light
+	returns is the sum total amount of light given off by all objects in one
+	location that radiate light.  NOTE:  The value of set light in an object
+	is cumulative ... if you call set_light(1) three times and set_light(0)
+	once ... the net returned lightlev would be 3 ... hmm this might be the
+	cause for the buggy ranger light spell ... it should call a set_light(-1)
+	when offered ...
+
+SHORT		string short()
+	This is an lfun that all objects must have.  It returns a string which
+	is the short message that describes the object.  Invisible objects
+	will return a 0.
+	ie:  short() {return "A stout dwarf.\n";}
+
+SHOUT		void shout(string str)
+	This efun sends a string to all users and returns 1.
+
+SIZEOF		int sizeof(mixed *arr)
+	This efun returns the number of elements in the array arr.
+
+SSCANF		int sscanf(string str, string fmt, mixed arg1, mixed arg2, ...)
+	This efun parses a string str using the format fmt.  Fmt can contain
+	strings seperated by %d and %s.  Every %d and %s correspond to it's
+	respective variable, arg1, arg2, ...  %d indicates that the argument
+	to be scanned out should be an integer, while %s indicates a string.
+	sscanf returns the number of succesfully matched %d and %s.  If a 
+	matching fails, the variable to which the match would have been applied is
+	left unchanged.
+	ie:
+	string str, what, whom;
+	str = "get all from corpse"
+	if (sscanf(str, "get %s from %s",what,whom) != 2)
+	    write("Get <what> from <whom>?.\n");
+	else
+	    write("You got "+what+" from "+whom+" !\n");
+
+STRINGP		int stringp(mixed arg)
+	This returns a 1 if arg is a string ... otherwise 0.
+
+STRLEN		int strlen(string str)
+	This returns the number of characters in string str.
+
+TELL_OBJECT	void tell_object(object ob, string str)
+	This sends a message string str to object ob.  If ob is not a user, str
+	will be intercepted by the local function catch_tell to be manipulated and
+	acted upon by the object ... assuming that catch_tell is defined in the 
+	object.  catch_tell() returns a 1 if it was able to send str to ob and
+	a 0 if ob could not be found.
+
+TELL_ROOM	void tell_room(object ob, string str)
+	This sends a message str to all objects in the room ob.  If the objects that
+	receive the message are not users, catch_tell will process the message.  
+	Returns a 1 if succesful, 0 otherwise.
+
+THIS_INTERACTIVE	void this_interactive()
+	This efun returns a pointer to the object that initiated the current
+	execution chain.  If it was not initiated by a user, 0 is returned.
+	Note!  Do not use this in place of this_player.
+
+THIS_OBJECT	object this_object()
+	This returns the object pointer to the current object.
+	In SG this is generally set to TO.  ie: TO=this_object
+
+THIS_PLAYER	object this_player()
+	This efun returns a pointer to the object representing the current player.
+	This function does not work in a call_out.  If you need to keep track of
+	this_player through a call_out, use a global object variable.
+	In SG this is generally set to TP. ie: TP=this_player()
+
+USERS		object *users()
+	This efun returns an array of all interactive users.
+
+WRITE		void write(string str)
+	This writes a string str to the current player (TP).
+
+WRITE_FILE	int write_file(string filename, string str)
+	This appends the string str to the file filename.  Filename may not
+	contain spaces.  A 1 is returned if succesful .. otherwise a 0.
+
+
+**********************************************************************************
+CONCLUSION:
+
+	This introduces some of the basic organizations and functions you need
+to do.  Once you understand these, you should be able to read any existing code
+and understand how it works.  I would recommend familiarizing yourself with
+some object files of various types (rooms, monsters, weapons etc).  That's
+the best way to see what efuns are inherited and what lfuns should be defined.
+ENJOY!  Feel free to ask me any questions you might have.
+
+*hugs*
+Killashandra/Menolly
+
+P.S. If you find any errors, emmisions, or unclear areas in this file please
+send me an explanation so I can try to improve this help file.
+My email is: angelic@drao.nrc.ca
+
+hmm one more thing ... when I get around to it, I'll try to make a list of 
+some of the paths to various areas ... meanwhile ... explore :)
+
+a few paths:
+Some areas:
+/d/shadow
+/d/dagger/drow
+/d/attaya
+/d/theris
+
+Standard definitions:
+/std

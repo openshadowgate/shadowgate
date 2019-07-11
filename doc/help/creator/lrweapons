@@ -1,0 +1,67 @@
+                             LRWeapons
+
+These are weapons that are wielded in two hands, such as bows and crossbows, it also covers the amunition.
+
+Part 1:               Basic LRWeapons Statistics:
+
+--------------------- LRWEAPONS ----------------------------------
+Weapon@@    cost   weight size  type  wc    l_wc   fire   range
+------------------------------------------------------------------
+long bow    60 gp    2    3      B    1,8   1,8     2     7,15,21
+short bow   30 gp    2    2     MB    1,6   1,6     2     5,10,15
+crossbow    30 gp   20    2      B    1,6   1,6     4     7,12,17
+
+--------------------- AMMO ---------------------------------------
+Weapon@@        cost   weight  wc    l_wc   shots
+------------------------------------------------------------------
+arrows          0 gp    0      1,6   1,6     20
+flight arrows   0 gp    0      1,8   1,8     20
+quarrels        0 gp    0      1,10  1,10    20
+
+NOTE: You must inherit LRWEAPON, you need to specify the prof type (typically staff) as well as the lr prof type (the bow), and the lr type (thiefpiercing typically) and set it to be two_handed. You must also specify the ammo and the decay rate of the item. The weapon works in two ways, it can be used to fire at enemies from a distance, but if someone walks into the room it then turns into a normal weapon that you are wielding, with whatever properties you've set up for the normal weapon.
+
+A sample bow
+-------------------------------------------------------------------
+#include <std.h>
+inherit LRWEAPON;
+
+void create()
+{
+   ::create();
+   set_name("longbow");
+   set_short("A long bow");
+   set_id(({"long bow","longbow","bow"}));
+   set_long("This is a standard long bow.");
+   set_weight(2);
+   set_size(3);
+   set_value(60);
+   set_prof_type("staff");
+   set_lr_prof_type("long bow");
+   set_type("bludgeon");
+   set_lr_type("thiefpiercing");
+   set_two_handed();
+   set_wc(1,8);
+   set_large_wc(1,8);
+   set_rate_of_fire(2);
+   set_range(7,15,21);
+   set_ammo("longbow arrow");
+   set_decay_rate(100);
+}
+
+
+A sample arrow
+-------------------------------------------------------------------
+#include <std.h>
+inherit "/std/ammo";
+
+void create()
+{
+   ::create();
+   set_name("arrows");
+   set_short("A quiver of flight arrows");
+   set_long("This is a quiver of flight arrows for a longbow. ");
+   set_shots(2);
+   set_wc(1,8);
+   set_large_wc(1,8);
+   set_ammo_type("longbow arrow");
+}

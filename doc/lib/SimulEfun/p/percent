@@ -1,0 +1,21 @@
+Nightmare Mudlib 3.2 simul_efun: percent()
+
+float percent(int|float, int|float);
+
+DESCRIPTION
+An efun which returns what percent of denominator numerator is.
+Either value may be either float or int, and mixing is ok.
+
+EXAMPLES
+Goal: to find out what percent x is of y (say x=12, y=100);
+z = percent(x, y); /* this would be the call */
+the value of z then becomes 12.00 (notice it is a float)
+
+Example 2:
+Goal to get an int percentage value for (x=12.00, y=100) (float, int)
+int z;
+z = to_int(precent(x, y));
+the value of z then becomes 12 (an int)
+
+DESCRIPTION
+to_int(), to_float()
