@@ -7,4 +7,12 @@
 /avatar
 /tmp
 /inv
-dest.log
+/dest.log
+
+#Parts of the lib are in the world
+!/d/common
+!/d/magic
+!/d/shadowgate
+!/d/example
+!/d/obj
+
