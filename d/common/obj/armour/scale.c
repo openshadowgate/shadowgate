@@ -11,7 +11,7 @@ void create() {
 	"This is a coat and leggings of leather covered with overlapping "
         "pieces of metal, much like the scales of a fish."
        );
-    set_weight(22);
+    set_weight(16);
     set("value", 120);
     set_type("chain");
     set_limbs( ({ "torso" }) );

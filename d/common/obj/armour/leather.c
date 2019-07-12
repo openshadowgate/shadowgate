@@ -13,7 +13,7 @@ void create() {
 	"shaped into breastplate and shoulder protectors. The rest of the "
     "suit is made of softer, more flexible materials."
        );
-    set_weight(15);
+    set_weight(14);
     set("value", 5);
     set_type("leather");
     set_limbs( ({ "torso" }) );

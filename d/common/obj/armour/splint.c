@@ -12,7 +12,7 @@ void create() {
 	"backing of leather and cloth padding. The joints are protected "
 	"by chainmail."
        );
-    set_weight(35);
+    set_weight(32);
     set("value", 80);
     set_type("armour");
     set_limbs( ({ "torso" }) );

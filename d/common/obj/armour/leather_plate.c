@@ -16,7 +16,7 @@ void create() {
        "movement.  The breastplate is often a prime choice for "+
        "those concerned with appearances who do not like to be "+
        "seen in a full suit of armor.");
-    set_weight(25);
+    set_weight(14);
     set_value(350);
     set_type("leather");
     set_limbs(({"torso"}));

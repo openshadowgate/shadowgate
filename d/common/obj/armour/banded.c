@@ -15,7 +15,7 @@ void create() {
 	"movement must be assured. Through straps and buckles, "
      "the weight is more or less evenly distributed."
        );
-    set_weight(35);
+    set_weight(32);
     set("value", 200);
     set_type("armour");
     set_limbs( ({ "torso" }) );

@@ -12,7 +12,7 @@ void create() {
 	"in which metal rings are sewn directly to leather backing, instead "
 	"of being interlaced. "
        );
-    set_weight(25);
+    set_weight(16);
     set("value", 100);
     set_type("armour");
     set_limbs( ({ "torso" }) );

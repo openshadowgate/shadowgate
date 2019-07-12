@@ -15,7 +15,7 @@ void create() {
 	" has been double layered for protection.  The hide has been boiled to"+
 	" toughen it, which also makes it stiff and harder to move in. "
 	);
-	set_weight(14);
+	set_weight(16);
 	set_value(15);
 	set_ac(4);
 	set_type("leather");
