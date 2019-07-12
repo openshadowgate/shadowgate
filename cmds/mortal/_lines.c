@@ -41,7 +41,7 @@ lines - toggle lines off or on
 
 %^CYAN%^SYNTAX%^RESET%^
 
-lines on|off
+lines [on|off]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 

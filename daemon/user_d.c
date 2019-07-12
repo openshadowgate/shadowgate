@@ -723,19 +723,18 @@ string *determine_lines(object who)
     string *gstore, *mychannels = ({}), *restricted_channels = ({}), myclasses = ({});
     if(!objectp(who)) return ({});
     restricted_channels = who->query_restricted_channels();
+
+    mychannels = ({"dev", "inform", "newbie", "ooc", "question"});
     
     if (avatarp(who))
     {
-        mychannels = ({ "question", "discuss", "avatar", "petition"});
+        mychannels += ({ "avatar", "discuss", "petition", "question"});
     }
-    else
-    {
-        mychannels += ({"question"});        
-    }
-    mychannels += ({"inform", "ooc", "newbie"});    
   
-    if (wizardp(who)) mychannels += ({ "wiz" });
-    if (member_group(who->query_true_name(),"law_c")) mychannels += ({ "law" });    
+    if (wizardp(who))
+        mychannels += ({ "wiz" });
+    if (member_group(who->query_true_name(),"law_c"))
+        mychannels += ({ "law" });    
     CHAT_D->add_user(mychannels, who);
     return mychannels;
 }
