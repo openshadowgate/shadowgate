@@ -1,7 +1,6 @@
 #define MAPPER "/daemon/map_maker_d.c"
 varargs int cmd_map(string str) {
-  string verb, name, *mapnames, result, mapname, title, note, verb2, plain_title, * roomnames, * titles, title1, title2, startroom, endroom, * route,
-line, temp;
+  string verb, name, *mapnames, result, mapname, title, note, verb2, plain_title, * roomnames, * titles, title1, title2, startroom, endroom, * route, line, temp;
   mapping maps;
   int num, i, count, j, width, flag;
 //  report("Running command map, with string " + str);
@@ -48,8 +47,7 @@ line, temp;
       plain_title = "/daemon/stripper_d.c"->stripcolors(title);
       if (strlen(plain_title)>2) 
       {
-        tell_object(TP, "%^RESET%^The title of your note must be 2 characters or less (e.g. 'N1'). It can contain colour codes, though. You
-entered: " + title);
+        tell_object(TP, "%^RESET%^The title of your note must be 2 characters or less (e.g. 'N1'). It can contain colour codes, though. You entered: " + title);
         return 1;
       } 
       if (strlen(plain_title)==1)
@@ -207,19 +205,6 @@ entered: " + title);
     return 1;
     break;
   case "view":
-    mapname = MAPPER->query_current_map(TP->query_name());
-     if (mapname == "none")
-    {
-      tell_object(TP, "%^RESET%^You don't have a map currently loaded. You can use"
-        +" 'map list' to see the list of your available maps, and 'map load"
-        +" <name>' to load a map.");
-      return 1;
-    }
-    MAPPER->load_map(TPQN, mapname);
-    tell_object(TP, "%^ORANGE%^Showing map: %^GREEN%^" + mapname); 
-    tell_object(TP, MAPPER->show_basic_map(TP));
-    break;
-  case "key":
     mapname = MAPPER->query_current_map(TP->query_name());
      if (mapname == "none")
     {
@@ -454,8 +439,6 @@ void help()
 {
    write(
     "Syntax: <map view>           - displays your current map\n"
-    "        <map key>            - displays your current map with an explanatory\n"
-    "                               key\n"
     "        <map start>          - starts the process of mapping your movements\n"
     "        <map stop>           - stops mapping your movements\n"
     "        <map clear>          - clears your current map\n"
