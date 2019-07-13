@@ -319,7 +319,7 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
   report("Findburiedpath 1");
   room = startroom;
 
-  
+  if (flag >6) return ({"flag count exceeded"});
   if (depth <0){
     return ({});
   }
@@ -352,7 +352,7 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
           if (temproom == endroom)
           {
             report("Temproom is the endroom");  
-            if (flag == 1)
+            if (flag >0)
             {
               if (sizeof(finalpath)<1 ||sizeof(finalpath)>(sizeof(path)+1))
               {
@@ -365,8 +365,8 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
             }
           }else{
             if (member_array(temproom, rooms)==-1){
-              temppath = findpath(temproom, endroom, path + exits[i..i],
-                          finalpath, rooms + ({startroom}), depth-1, flag, nogorooms);
+              temppath = findburiedpath(temproom, endroom, path + combined_exits[i..i],
+                          finalpath, rooms + ({startroom}), depth-1, flag ++, nogorooms);
               if (sizeof(finalpath)<1){
                  if (sizeof(temppath)>0){
                    finalpath = temppath;
@@ -384,26 +384,36 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
         } else report("temproom is not a valid object");
       }
     }
-
   } else
   {
     report("There are no combined exits");
   }
-
-
   return finalpath;
 } 
 
 string find_open_or_buried_destination(object room, string direction){
   string * exits, * buried_directions;
   mapping buried_exits;
-  if (!objectp(room)) return "";
+  if (!objectp(room))
+  {
+    report("Find open or buried destination: room is not an object");
+    return "";
+  }
   exits = room->query_exits();
   buried_exits = room->query_orog_exits();
+
   if (mapp(buried_exits) && sizeof(buried_exits)>0) buried_directions = keys(buried_exits);
   else buried_directions = ({});
-  if (member_array(direction, exits)!=-1) return room->query_exit(direction);
-  if (member_array(direction, buried_directions)!=-1) return buried_exits[direction];
+  report("Find open or buried destination: " + sizeof(exits) + " exits and " + sizeof(buried_directions) + " buried exits");
+  if (member_array(direction, exits)!=-1){
+    report(direction + " is one of the normal exits, leading to: " + room->query_exit(direction));
+    return room->query_exit(direction);
+  }
+  if (member_array(direction, buried_directions)!=-1)
+  {
+    report(direction + " is one of the buried exits, leading to: " + buried_exits[direction]);
+    return buried_exits[direction];
+  }
   return "";
 }
 
