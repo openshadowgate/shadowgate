@@ -8,10 +8,10 @@ decayStatus 0
 currentStatus 100
 props ([])
 serial_number 0
-ob_data (["race":"outsider","condition":100,"updated time":1562983522,"id":({"outsider",}),"long":"this is an outsider","short":"outsider",])
+ob_data (["race":"outsider","condition":100,"updated time":1562987426,"id":({"outsider",}),"long":"this is an outsider","short":"outsider",])
 cap_name "Outsider"
 true_name "outsider"
-creator "/cmds/spells/g/_gate#1398198"
+creator "/cmds/spells/g/_gate#1563642"
 cursed 0
 identified ({})
 studied ({})
