@@ -1,0 +1,5 @@
+%^BOLD%^%^CYAN%^The bars, like the one to the north, are a good place to work on your character concept and RP (role-play) with others.  Try to get to know the people you meet and what motivates them.  Do they seem %^RED%^evil and selfish %^CYAN%^or like a %^WHITE%^goody goody %^CYAN%^wanting to save the world%^CYAN%^?  Do they want everyone to follow strict rules (lawful) or do they ignore rules if they get in the way or even actively resist law and order that might restrict personal freedoms (chaotic)?
+
+%^CYAN%^Is that good or bad for you?  Think about how your character feels about the god they follow and their beliefs and motives.  Will they be a good ally or do you need to keep a close eye on them once you both leave the protection of this newbie area?
+
+%^BOLD%^%^BLUE%^The bars or anywhere you stand still for long are good places to practice with the %^WHITE%^< pose > and < emoteat > %^BLUE%^commands (see "help pose and help emoteat").  If you don't have a description yet, you might want to read %^WHITE%^help describe and help adjective %^BLUE%^and create them soon.  Please keep your stats in mind and also read %^WHITE%^help charisma%^RESET%^.

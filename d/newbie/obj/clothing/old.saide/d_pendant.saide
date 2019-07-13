@@ -1,0 +1,33 @@
+#include <std.h>
+
+#define DESIGNS ({"spider","lion","bear","wolf","hawk","falcon","wolverine","squirrel","chipmunk","cougar","lynx","panther","bobcat"})
+
+inherit DAEMON;
+
+int i, j, val;
+string DESIGN;
+
+void create()
+{
+   ::create();
+}
+
+void create_pendant(object obj)
+{
+   j = random(sizeof(DESIGNS));
+   DESIGN = DESIGNS[j];
+   val = random(5)+5;
+   obj->set_value(val+1);
+   obj->set_cointype("silver");
+   obj->set_type("ring");
+   obj->set_limbs(({"neck"}));
+   obj->set_weight(1);
+   obj->set_name("quartz pendant");
+   obj->set_id(({"pendant","quartz pendant","smokey quartz pendant",""+DESIGN+" pendant"}));
+   obj->set_short("smokey quartz pendant");
+   obj->set_long("The pendant is strung on a gray silk cord with a"+
+   " silver loop. The smokey quartz is only slightly cut, with the"+
+   " bottom end being left naturally jagged. In the very center of"+
+   " the crystal there appears to be the shadowy image of a "+DESIGN+""+
+   " trapped within it.");
+}

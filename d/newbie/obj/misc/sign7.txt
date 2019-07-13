@@ -1,0 +1,10 @@
+%^RESET%^%^CYAN%^Take the time to look around each room carefully here.  Usually in the description there will be several lookable nouns.  For instance (at this writing), in this room you can look at the doors, moss, fungi, floor, mud, walls, and ceiling.   For example, type < %^BOLD%^%^WHITE%^look moss%^RESET%^%^CYAN%^ >.
+
+%^RESET%^%^CYAN%^This area has several well-hidden secrets and a few traps too.  It can be helpful to find a rogue to come along to help with the traps.
+%^RESET%^%^CYAN%^Rogues can also help with locked doors in case you don't find the keys.
+
+%^BOLD%^%^BLUE%^You should always try to look specifically at everything that looks interesting and search carefully.  Think and try to act like a real adventurer and poke around thoroughly.  There is much that is easy to miss if you aren't thorough, especially in this area.
+
+%^BOLD%^%^BLUE%^Naturally, it can be rewarding to find hidden treasure.  Moreso, it also makes for great fun in role-play if you have a companion along.  You might want to discuss whether you want to risk pulling that lever or poking around in that pile of bones before you take a chance of getting everyone killed by your curiosity.
+
+%^RESET%^%^CYAN%^Just typing < %^BOLD%^%^WHITE%^search%^RESET%^%^CYAN%^ > will sometimes be helpful.  However, you will also want to try searching specific things.  For instance, if you see a desk, you might try < %^BOLD%^%^WHITE%^search desk%^RESET%^%^CYAN%^ > but, if it has drawers, you might want to also try < %^BOLD%^%^WHITE%^search drawers%^RESET%^%^CYAN%^ >.

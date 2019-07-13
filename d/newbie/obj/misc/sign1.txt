@@ -1,0 +1,16 @@
+%^BOLD%^%^BLUE%^EAST:%^RESET%^
+%^RED%^Dragon's Blood Bar-
+%^RESET%^   A bar where you can receive both food and drink.
+%^GREEN%^Forest-%^RESET%^
+   A good place for beginners to search...watch out for the bees!
+%^BOLD%^%^GREEN%^Rolling Hills-%^RESET%^
+   Another area to explore for the curious adventurer, including mines to the south if you wish to try your hand at mining!
+%^BOLD%^%^BLUE%^WEST:%^RESET%^
+%^CYAN%^Seamstress-
+%^RESET%^   THE Place to go if you are in need of clothing!
+%^BLUE%^The Dancing Ogre-
+%^RESET%^   Another good place for food and drink.
+%^ORANGE%^Abandoned Town-
+%^RESET%^   This area is complete with a hidden drow area.  Tread with caution, it is designed for the more advanced beginner.
+%^MAGENTA%^Keep-
+%^RESET%^   A good place for the beginning explorer to earn experience.

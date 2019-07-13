@@ -1,0 +1,21 @@
+
+%^BOLD%^%^CYAN%^                        L   Sc
+%^BOLD%^%^WHITE%^                        |   |
+%^BOLD%^%^CYAN%^                    M   %^WHITE%^.-.-.   %^CYAN%^Ps
+%^BOLD%^%^GREEN%^       ^             %^WHITE%^\ /  | |\ /
+%^BOLD%^%^GREEN%^       N              %^WHITE%^.   %^CYAN%^I%^WHITE%^-%^CYAN%^i%^WHITE%^ .
+%^BOLD%^%^WHITE%^                      |       |
+%^BOLD%^%^CYAN%^                    W%^WHITE%^-. %^CYAN%^J C%^WHITE%^-%^CYAN%^H %^WHITE%^.-%^CYAN%^A
+%^BOLD%^%^WHITE%^                    | | | | | | |
+%^BOLD%^%^WHITE%^                    .-.-.-%^YELLOW%^@%^WHITE%^-.-.-.
+%^BOLD%^%^WHITE%^                   /      |      \
+%^BOLD%^%^WHITE%^                  .-%^CYAN%^B   G%^WHITE%^-.-%^CYAN%^b   S%^WHITE%^-.
+%^BOLD%^%^WHITE%^                  | |   | | |   | |
+%^BOLD%^%^WHITE%^                 -%^YELLOW%^#%^WHITE%^-.-.-.-.-.-.-.-%^YELLOW%^#%^WHITE%^-
+
+%^YELLOW%^@%^WHITE%^: Town square     %^YELLOW%^#%^WHITE%^: Town gates       %^CYAN%^B%^WHITE%^: Tavern
+%^BOLD%^%^CYAN%^b%^WHITE%^: Bank            %^CYAN%^G%^WHITE%^: General store    %^CYAN%^S%^WHITE%^: Stable/tether
+%^BOLD%^%^CYAN%^W%^WHITE%^: Weapons         %^CYAN%^C%^WHITE%^: Church           %^CYAN%^H%^WHITE%^: Healer
+%^BOLD%^%^CYAN%^A%^WHITE%^: Armorer         %^CYAN%^J%^WHITE%^: Clothing         %^CYAN%^M%^WHITE%^: Mage tower
+%^BOLD%^%^CYAN%^L%^WHITE%^: Library         %^CYAN%^Sc%^WHITE%^: Scribe          %^CYAN%^Ps%^WHITE%^: Psion enclave
+%^BOLD%^%^CYAN%^i%^WHITE%^: Instruments     %^CYAN%^I%^WHITE%^: Bard components

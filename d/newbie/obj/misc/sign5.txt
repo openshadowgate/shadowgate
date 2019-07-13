@@ -1,0 +1,5 @@
+%^RESET%^%^CYAN%^Take the time to look around your environment.  Usually in the description there will be several lookable nouns.  For instance, in this room here, type < %^BOLD%^%^WHITE%^look berries%^RESET%^%^CYAN%^ >.
+%^RESET%^%^CYAN%^Notice that they look good to eat?
+%^RESET%^%^CYAN%^Now, type < %^BOLD%^%^WHITE%^pick berries %^RESET%^%^CYAN%^>
+%^RESET%^%^CYAN%^You can eat them if you are hungry by simply typing < %^BOLD%^%^WHITE%^eat berries %^RESET%^%^CYAN%^>
+%^RESET%^%^CYAN%^You can check your characters condition, including hunger level by typing <%^BOLD%^%^WHITE%^ score %^RESET%^%^CYAN%^>%^RESET%^

@@ -1,0 +1,9 @@
+%^BOLD%^%^BLUE%^NORTHWEST%^:
+%^RESET%^%^CYAN%^The town of Offestry
+
+%^BOLD%^%^BLUE%^EAST:
+%^BOLD%^%^GREEN%^Rolling Hills
+
+%^BOLD%^%^BLUE%^SOUTHWEST:
+%^RESET%^%^GREEN%^Forest
+%^RESET%^

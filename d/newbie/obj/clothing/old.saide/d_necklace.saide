@@ -1,0 +1,54 @@
+#include <std.h>
+
+#define STONES ({"amethyst","ivory","ebony","agate","aquamarine","onyx","amber","jade","crystal quartz","rose quartz","smokey quartz","tigers eye","fire agate","moonstone","bloodstone","jasper","carnelian","citrine","lapis lazuli","beryl","topaz","malachite","blue spinel","red spinel","red jasper","moss agate","peridot","garnet","hematite"})
+
+inherit DAEMON;
+
+int i, j, val;
+string STONE, METAL;
+
+void create()
+{
+   ::create();
+}
+
+void create_necklace(object obj)
+{
+   j = random(sizeof(STONES));
+   STONE = STONES[j];
+   val = random(25)+5;
+   switch(val) {
+      case 5..7:
+         METAL = "brass";
+         break;
+      case 8..11:
+         METAL = "bronze";
+         break;
+      case 12..16:
+         METAL = "silver";
+         break;
+      case 17..21:
+         METAL = "mithril";
+         break;
+      case 22..25:
+         METAL = "gold";
+         break;
+      case 26..27:
+         METAL = "rose gold";
+         break;
+      case 28..29:
+         METAL = "white gold";
+         break;
+   }
+   obj->set_value(val+1);
+   obj->set_cointype("silver");
+   obj->set_type("ring");
+   obj->set_limbs(({"neck"}));
+   obj->set_weight(1);
+   obj->set_name("necklace");
+   obj->set_id(({"necklace",""+STONE+" necklace",""+METAL+" necklace",""+STONE+" "+METAL+" necklace",""+METAL+" "+STONE+" necklace"}));
+   obj->set_short(""+STONE+" necklace");
+   obj->set_long("The necklace has a fine "+METAL+" chain that has a"+
+   " clasp in the back. A pendant of polished "+STONE+" hangs in the"+
+   " front of the necklace.");
+}

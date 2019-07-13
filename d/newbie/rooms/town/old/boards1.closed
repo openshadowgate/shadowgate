@@ -1,0 +1,48 @@
+//Room for copies of main board for Newbietown - 
+//essentially copied from /d/shadowgate/ombud_hall
+
+#include <std.h>
+#include "../../newbie.h"
+
+inherit ROOM;
+object ob;
+
+void create() {
+	::create();
+	set_property("light",3);
+	set_property("indoors",1);
+   set_property("no teleport",1);
+	set_terrain(STONE_BUILDING);
+	set_travel(PAVED_ROAD);
+	set_short("Comments Department");
+	set_long(	"This room holds a copy of the Comments Board for new travelers "
+	"to be able to see the comments and suggestions brought up by others that "
+	"relate to the wider realm.  Post any gripes, questions, or comments you "
+	"have that you wish for the wizards to address on the board.  Note that "
+	"there are special commands for <typo>s, <bug>s, and <praise> and you are "
+	"encouraged to use them if it's something that isn't necessarily a general "
+	"concern.");
+   set_property("no teleport",1);
+   ob = new("std/bboard");
+   ob->set_name("board");
+   ob->set_id( ({ "board", "comments board", "ombud" }) );
+   ob->set_board_id("ombud");
+//Wouldn't update with this and I couldn't more the room with the other one
+//to figure out why.
+//   set_edit_ok(({"nialson"}))
+   ob->set("short", "The ShadowGate Comments Board");
+   ob->set("long", "People of this reality come here to post their comments "
+     "and questions for the immortals who control the fate of all reality.\n");
+   ob->set_max_posts(50);
+    ob->set_ooc_board(1);
+   ob->set_location(MAINTOWN"boards1.c");
+   set_exits(([
+      "up": MAINTOWN"square",
+      "down": MAINTOWN"boards2"
+   ]));
+}
+
+void reset(){
+   ::reset();
+   
+}

@@ -1,0 +1,10 @@
+#include <std.h>
+inherit "/std/armour";
+
+void create()
+{
+   ::create();
+   "/d/newbie/obj/clothing/d_pants"->create_pants(TO);
+   set_size(random(3)+1);
+   set_cointype("silver");
+}

@@ -1,0 +1,1 @@
+%^RESET%^%^CYAN%^Remember to use peer so you do not get lost.  Type: %^BOLD%^%^WHITE%^peer west 8 %^RESET%^%^CYAN%^to find the next two helpful signs.  Notice that with peer you can see the exits in a room as well as who/what is in there.  This is good because you can see what enemies you may be walking into before you enter and possibly be prepared.

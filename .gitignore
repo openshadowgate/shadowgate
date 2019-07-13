@@ -13,6 +13,8 @@
 /d/*
 
 #Parts of the lib are in the world
+!/d/newbie
+!/d/token_hunt
 !/d/common
 !/d/magic
 !/d/shadowgate

@@ -1,0 +1,33 @@
+Thieves have a number of commands and skills to learn to use and maintain.
+
+Typing %^BOLD%^<skills> %^RESET%^will allow you to apply skill points you begin with or that you earn from advancing in levels (they do accumulate if you forget to use them).  It will also let you see what your skills are if you have none to apply but *CAUTION* when you are applying them, if you fail to use them all the rest are lost.  You automatically lose skill points when they die and lose a level.
+
+Thieves have a variety of abilities, the success of which often depends on various skill levels.  The thief is the master of the shadows.  His attacks are based
+on surprise, jumping from the shadows to deal great damage upon a target. %^BOLD%^<stab> target %^RESET%^will deal a great blow of damage.  It depends upon move silently and hide in shadows skills.  You can also %^RED%^<scramble> %^RESET%^while you are in combat, this will help you to dodge enemy attacks and try to position you for another backstab.  Wearing special sheaths with a dagger hidden in them (available only from thief guild shops which you'll have to seek out in character outside Newbietown) enables an extra chance at a stab.  Note that stab and scramble will keep you busy and unable to leave the room for a while, or until combat ends.
+
+Thieves also now a way they can %^YELLOW%^fence %^RESET%^items or launder money they have stolen.  Read %^BOLD%^<help fencing>%^RESET%^.  You'll have to find the various NPC's IC who deal in such.
+
+Other commands include:
+   pick pockets -> pp <target> (money)
+   pick locks -> pick <lock> on <what>  
+   pick pockets -> steal <item> from <target> (items)
+   hide in shadows -> hide_in_shadows
+   move silently -> sneak <direction>
+   back stab -> stab <target>
+   detect noise -> detect noise <exit>
+   scrolls -> use scroll
+   investigating a target -> spy <living>
+   plant an item on someone -> plant <item> on <living>
+   find/remove traps -> this allows you to find or remove traps. 
+       It has the following syntaxes.  <help trap> expands on what is here.
+
+  To find traps:
+        trap find on <what>
+  To remove traps:
+        trap remove when I <action> the <aspect> on <object>
+  OR
+        trap remove when I <action> the <object> 
+
+
+
+

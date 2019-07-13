@@ -1,0 +1,22 @@
+Mages spend their life studying arcane magic and must be intelligent to understand and memorize their spells.  An 18 intelligence is required to use the highest level wizard spells.  Pure mages cannot wear armor, only robes, cloaks, boots, and other clothing type items.  Multi-class mages can wear some types of armor, but cannot cast spells in it.
+
+MAGE (Wizard) SPELLS  (also read 'help new mage')
+======================
+Mages must find scrolls and %^BOLD%^<transcribe scroll> %^RESET%^into their books to be able to '%^BOLD%^memorize <spellname>%^RESET%^' before casting them.  They can also %^BOLD%^<use scroll> %^RESET%^to cast the spell from the scroll itself as can thieves.  Mage spells will also soon require additional study to become proficient in them.  Using a spell at less than 100% proficiency will, of course, have some sort of potential side effect or backfire.
+
+If your spellbook or components bag is lost, you'll need to get replacements from the mage scribe in the mage tower.  Once you have a few spells in your book, you'll also want to have a backup made and leave it there.  <help shop> in the shop will explain more when you're there.
+
+Many mage spells require components and/or hand motions, so you'll have to unwield weapons and have the needed components in your components bag.  Components are purchased at alchemist shops.  After leaving Offestry and finding the mage tower, you'll be able to buy space in a laboratory to store extras to have handy since a shop only has a limited selection and quantity at any one time.  The command is generally '%^BOLD%^cast <spellname>%^RESET%^' to use spells although many also require targets.  Refer to the help file for the spell to see if it requires a target, any special syntax, and what components are required.  You may have to %^BOLD%^<pose mage>%^RESET%^ to access the help files if you are multi-classed.  For roleplay purposes, you can also ask the alchemists about the components required for a spell.   
+
+Other helpful commands you'll need to use include:
+
+help book
+look book
+look book by level
+recall wizard spells
+components (see what's in your components bag)
+put component into components bag
+recall locations (see help teleport)
+help wimpy (to help you survive in battle)
+help wimpydir
+help scribe (for single class mages only)

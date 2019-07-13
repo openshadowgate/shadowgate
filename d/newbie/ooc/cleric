@@ -1,0 +1,24 @@
+Clerics should be wise and an 18 wisdom is required to use the highest level cleric spells.  Clerics are also limited to using only blunt weapons such as maces, morning stars, flails, staff, etc.
+
+
+CLERIC (Priest) SPELLS
+======================
+Clerics have a holy symbol and '%^BOLD%^pray <spellname>%^RESET%^' to prepare for using the spells their god or goddess grants them.
+
+Most clerical spells require hand motions, so you'll have to unwield weapons.  The command is generally '%^BOLD%^chant <spellname>%^RESET%^' to use spells although some require targets.  Mages use "cast" and there are some spells used by both classes, so although cast may work sometimes, use chant.  Refer to the help file for the spell to see if it requires a target and any special syntax.  You may have to %^BOLD%^<pose cleric>%^RESET%^ to access the help files if you are multi-classed.
+
+Other helpful commands to try out are:
+
+help holy symbol
+look holy symbol
+recall priest spells
+spells
+spells by level
+turn undead - also usable by paladins and anti's
+bw <quantity> - buy quantity of holy water vials (must be in your god's temple)
+
+Misc. stuff:
+
+Holy water - in the cleric's guild 
+
+Holy water of (each god) - can be purchased by all followers of that god in their temples (bw quantity).  It is used to %^BOLD%^<bless>%^RESET%^ rooms.  Aside from the RP aspects, a cleric can only pray for the highest level spells in a blessed room. 

@@ -1,0 +1,20 @@
+Bards are quite challenging to RP because they should be masters of some sort of entertaining and yet aren't intended to be friends with everyone.  Thieves may resent their cutting into their territory, etc.  
+
+Refer to mage and thief info. regarding how to use thief skills and mage spells.  Thief abilities are limited to %^BOLD%^<steal> items, pickpocket <pp> people, <climb> walls, and <detect noise>%^RESET%^.  Due to being a jack of all trades of sorts, they are of course, masters of none.  Thus, they do not gain attacks as they advance like fighters nor have the highest level mage spells or advance in their thief skills or mage abilities as quickly.
+
+High charisma and ability to influence people is an important facet of being a bard, so they have abilities to %^BOLD%^<charm> monsters%^RESET%^ (which can backfire of course), %^BOLD%^<rally>%^RESET%^ their companions, and either %^BOLD%^<calm> or <anger> their opponents%^RESET%^.  
+
+Telling stories and singing songs are the most common bardic activities to support their RP and supported by the %^BOLD%^<lore> %^RESET%^command (help lore, help story, and help song).  Of course the best stories adapt to the audience and are likely to be different each time told, but the commands are there to support things that do lend well to a rehearsed type performance.  The recite command does leave you free to emote and say, so you can still interject things as you perform.
+
+%^YELLOW%^lore <recite|teach|list|stop> <story|song> <name> %^RESET%^%^GREEN%^<optional player>
+%^GREEN%^(note teach is not yet implemented so a player target is not currently used)
+
+Examples of usage:
+%^BOLD%^lore recite song <songname>%^RESET%^ - To recite a saved song
+%^BOLD%^lore list story%^RESET%^ -             Lists recorded stories
+%^BOLD%^lore delete story <name>%^RESET%^ -    Will ask if you are sure
+%^BOLD%^lore stop%^RESET%^ -                   Stop reciting
+
+To record stories and songs:
+%^BOLD%^story <name>%^RESET%^ or %^BOLD%^song <name>%^RESET%^
+The names can't have spaces and are really just file names for you to use in the commands, they don't affect the performance.  These commands take you into an editor to input the content for the stories or songs.

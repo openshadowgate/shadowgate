@@ -1,0 +1,536 @@
+ 
+                  Shadowgate FAQ (January 04, 2001)
+             -----------------------------------------
+ 
+The following list are most of the frequently asked questions people
+new to Shadowgate have.  Be sure you have read this whole thing and
+know that your question is unanswered before you go asking someone
+else.  Everyone here is happy to help you, but you must understand
+that answering the same question over and over again when it is well
+documented is a bit annoying.  That is why we have this faq document.
+ 
+************************************************************************
+
+0) What is legal here?
+ 
+The rules have recently been rewritten and are in <help rules> for
+your perusal and easy access.  It is also important to read the file
+under <help roleplaying> Reading and aggreeing to the rules, and
+understanding the file on roleplaying is a condition of playing here.
+
+1) What is the first thing I should do here as a newbie?
+ 
+Type <help features>.  Every command on Shadowgate should have a help
+file, but there are other help files as well.  <help features> will list
+those other help file for you.  Some of the most important topics will
+be touched upon here, but it is not possible to cover them all.
+ 
+2) Why do I not see any names on the "who" listing?
+ 
+People on the who listing are currently unknown to you. You will first
+have to <recognize> them, before you will be able to call them by
+name.  You can refer them to by race and a number. but you will also
+be included this list as well, so be careful.  Should you want to
+appear as something other than your race (Which is highly
+suggested...) please check out the command <adjective> and the help
+that comes with it.
+
+2b) What do the ** before and after a persons name on who list mean?
+
+People who have the ** around their name means that their next command
+is being processed.  In otherwords, they are either editing, posting
+on a bulletin board, or mailing (or something of that nature).  It is
+considered polite not to bother someone who is in one of these
+situations, unless it is really important, or you KNOW they won't
+mind.
+ 
+2c) What does the number (1m, 10s, 28m, etc) after some names on the
+   "who" list mean?
+ 
+Anyone with a number after their name is idle.  The number represents
+how long they have been idle (m for minutes, s for seconds).  Idle
+time is simply the amount of time since their last command was
+entered.
+ 
+2d) What does [INACTIVE] after a player's name on who list mean?
+
+This indicates a player has set themselves into an inactive mode,
+likely because they have left the keyboard for a long time.
+
+2e) What does [INJAIL] after a player's name on who list mean?
+
+This indicates that the player is currently serving out a sentence in
+a jail environment, likely because the player has either broken a law
+or was creating a problem and was placed in the jail mode until they
+could be dealt with. Communication is impossible with a player who is
+in jail.
+  
+3) Why can I not understand anything I say?
+
+This would probably indicate that you are a non-human race, and are
+speaking a language other than the one that your parents raised you
+with.  This makes it somewhat more challenging to play a non-human
+(common-speaking) race.  <languages> will list the languages you do
+speak, and you can use the <speak> command to change your language to
+one that you know at 100%.
+
+3b) Okay, but doesn't this limit my RP?
+
+It is the opinion of the wizzes here on Shadowgate that everyone not
+knowing how to speak the same language at the outset causes more
+opportunities to RP rather than less.  Perhaps you will meet someone
+not of your race who knows your language, or perhaps you may not
+bother, or be able to learn common for some reason.  You can use the
+<teach> command to teach another player a language you know.
+
+3d) How do I customize my says?
+
+There is a command called <speech>, which you can use to change how
+your speech will look.  Please note that the before the first space of
+your speech pattern, an 's' will be appended to that word, so that:
+
+	speech says with a snarl
+
+...will result in it looking at others like:
+
+	Relen sayss with a snarl
+
+...which is probably not what you wanted.
+
+Please also see the help files on <color>, <alias> and <nickname>, as
+the former will let you change colors for your speech, and the latter
+two will save you quite a bit of typing.
+
+4) How do I send and read mail on Shadowgate?
+ 
+To enter into the mail server system of Shadowgate, simply type:
+<mail>. This will enter you into the mailer system. To mail a letter,
+it is best to rather than type : mail, to instead type : mail <player
+name>.  Mail is considered an out-of-character tool, however
+
+5) How many quests do I have to do?
+ 
+Unlike many muds, within Shadowgate all quests are entirely optional.
+You do not have to do quests to advance in levels, with one major
+exception.  There is a quest (Quest for the Swords) that is required
+to be completed by a level 19 player in order to advance to level 20.
+Other than that, quests will grant a reward of ability, xp, items,
+treasure, etc for being completed and generally are something worth
+solving if you can or so desire.
+
+There are no quests that you need to join your class with the
+notable exception of cavaliers becoming paladins or antipaladins,
+although finding your class hall can be considered a quest and a
+right of passage, so asking other people where it is located, is a
+bit impolite, at least.
+
+Guild halls, on the other hand, you will most likely be shown to,
+upon your initiation into the guild, and you should probably keep
+this information secret.
+
+5b) What is a class?
+ 
+A class is considered your general way of life, akin to the modern
+expression of saying "I work in television".  It does not specify
+exactly what it is I do, but it does suggest that I have certain
+talents I have gained through training and such which will last me
+throughout my life that may be manifest in many different manners.
+Similarly in the reality of Shadowgate, there are the following
+general classes of people:
+
+	[fighters, mages, clerics, thieves, rangers]
+	[cavaliers. paladins, antipaladins and bards]
+
+There are help files on each of these.  Once you join a class, you
+are a member for life.  The class is your source of power.
+
+If you are a multiclassed character, you are learning more than one
+trade at a time. This is slightly harder, but does have it's own
+benefits. You will need to often abide by the most restrictive of
+all of your classes when arm and armoring yourself. You may often
+find that, for mages, the armor allowed you by your other classes
+will interfere with your spellcasting abilities.  Clerics will
+only be able to use blunt weapons to fight.  Rogues will find
+their abilities impaired or impossible when wearing armor other
+than leather.
+
+You may also wish to read the help on 
+
+5c) What is a guild?
+
+A guild on the other hand is a social institution.  It's main function
+is to give an individual player character and individuality that is not
+common in LPMud games.  There are no great powers gained by joining a
+guild, but they do help tie you in a way to other players in the game. 
+Your choice of guild should thus reflect your game personality.  The
+number of guilds is limited only by how many the immortals of
+Shadowgate have created.
+ 
+5d) What are the different guilds on Shadowgate?
+ 
+Type <help guilds> to get the most up to date guild information.
+ 
+5e) How do I join a guild?
+ 
+The method will vary from guild to guild.  You should talk to a member
+of the guild you want to join to find out the process for that guild.
+Remember that each guild on Shadowgate is meant only for a certain
+resricted group of characters, so a guild good for one player is not
+necessarily good for another player.
+ 
+6) Have you seen player X?
+ 
+type <finger [name]> and you will get all of the information you need.
+ 
+6b) How do I block my IP information?
+
+The command <where block> will accomplish this, but it will not
+prevent the admin from finding out where you are from.
+
+7) Why can't I wield this weapon?
+ 
+You can't just wield a weapon here on Shadowgate, you have to specify
+what limb you want to wield it in, as armours such as shields cannot
+be worn on the same limb as a wielded weapon.  The correct syntax to
+wield a sword in your right hand thus would be:
+
+	          <wield sword in right hand>
+
+As of the printing of this faq, Shadowgate player races all are
+humanoids with right and left hands only, so you can only wield in
+either your right hand or left hand.
+
+7b) But I type it correct and I still cannot wield this weapon!?!
+
+First, certain classes cannot wield certain weapons.  You may have a
+weapon that you are not allowed to wield due to your class.  Mages
+will encounter this quite often.  This applies to armour as
+well. Second, you may be trying to wield or wear something which is
+restricted to players of a higher level than your current level.  For
+example, a level 1 player cannot wield a magical longsword +4. Third,
+you may be trying wield a weapon that is designed for specific NPCs or
+monsters to use only.  Lastly, You may be trying to wield a weapon
+that could only be used by the player who *first* discovered it at
+it's proper location within the mud.
+
+8) Is player killing allowed?
+ 
+Yes.  Players of level 5 or lower cannot participate in any player
+killing within Shadowgate.  Furthermore they cannot steal from or be
+stolen from by other player characters.  If you are still a newbie, it
+is important that you do not loot other players corpses, as this will
+get your privilidges as a newbie revoked.  There is a seperate topic
+here under <help pkilling>
+
+9) How do I know my stats?
+ 
+The commands <score> and <stats> are available for your reference.
+ 
+9b) What do the stats mean?
+ 
+Stats are numerical representations of your basic physical make-up,
+which is is determined when you first create your character.  These
+stats are used in different relevant aspects of your mud life.
+
+Constitution determines how sturdy you are, which in basic terms, means
+it determines how healthy you are.  A higher constitution will mean
+you gain extra hit points when you advance levels.
+
+Intelligence determines your capacity for using magic, namely, how
+successful your spell casting will be.  If you are not a spell caster
+then intelligence has less of a bearing on your mud life.
+
+Dexterity factors into many different situations, among them are your
+resistence to being stolen from or backstabbed, your actual ability to
+do those to another, combat, and how well you can avoid being hit
+during combat.  High dexterity provides an invisible bonus to your
+armour class (AC) rating.
+
+Strength alone determines naturally how much you are able to carry. It
+also, if high enough, will provide you with a bonus "to hit" when in
+combat, and will cause you blows to deal extra damage on top of the
+regular amount you normally would do.
+
+Wisdom determines your resistence to offensive magic.  It is also adds
+to certain magical ability and spell casting.  Clerics, paladins,
+antipaladins and druids all will find a high wisdom extremely helpful.
+
+Charisma factors into your ability to get by normally aggressive
+monsters and in the buying and selling of goods. It also helps to
+define your character's looks and personality. The higher the
+charisma, the prettier and more charismatic your character should be.
+
+You will find your experience on ShadowGate much better if you try to
+avoid dealing with the numbers and let the MUD handle most of these
+for you.  This is not to say, however, that you will be able to get
+away with portraying yourself as a beauty queen with the sweetest
+personality with a Charisma score of 8.
+
+9c) How do I raise my stats?
+ 
+Stats are constants more or less.  What you start with is what you
+will likely have, or very close to it throughout your mud life.  The
+only way for stats to change is through the passage of time and aging.
+
+There are some items when used or worn that may provide a temporary
+increase in a stat.  However, this bonus will vanish when the item is
+removed, lost, wears out, etc.  However, the stat raises will not be
+put on your stats sheet, and you will have to discover these bonuses
+through the course of your play.
+
+9d) How do I reroll my stats?
+ 
+You don't.  If you have made your character and find your stats to be
+less than sufficent, your only recourse is to suicide the character
+and start over.
+
+10) What's AC? Why does it matter?
+
+Armour class or AC for short, is your armour defense rating.  The
+better your AC rating, the harder you are to be hit.  There is also no
+way for you to know your armor class, and this is quite intentional.
+
+11) What is alignment?
+
+Alignment is the basic attitude of your character towards morality and
+laws.  To find out more about a specific alignment, type : help
+<alignment name>.  The characters alignment will often be useful in
+determining how you will roleplay your character.
+
+12) How do I learn more about this mud?
+ 
+The first people you should talk to are other newbies.  They are most
+familiar with many of the questions you might have.  You can do this
+by using the newbie line.  To use the newbie line type <newbie
+message>.  Do not ask the immortals questions about how to do things
+unless you have exhausted all other resources.  If you plan to ask an
+immortal something, then check to make sure they are not in an editor
+at the time.  Immortals can answer technical questions, but generally
+are not allowed to provide game information such as how to solve a
+quest.
+
+13) What is legal here?
+ 
+The rules have recently been rewritten and are in <help rules> for
+your perusal and easy access.  It is also important to read the file
+under <help roleplaying> Reading and aggreeing to the rules, and
+understanding the file on roleplaying is a condition of playing
+here. (And yes, this is so important, we have put it in twice.)
+
+14) I have an idea for something new here, who do I tell?
+ 
+Talk to an immortal.  If it is a simple idea for an area, use the
+"idea" command.  For general mud ideas, use the "mudidea" command.
+ 
+14b) Huh? An overseer rank? Well what are the immortal ranks here
+then?
+
+The ranking of the immortals from highest authority to lowest are as
+follows:
+
+			 Admin: 1) God
+	 	        	2) Arch
+				3) Elder
+
+	         Senior Coders: 4) Overseer
+				5) Developer
+		
+		 Junior Coders: 6) Creator
+				7) Apprentice
+ 	
+		       Avatars: 8) Avatar
+
+14c) I just heard a 'Someone' say something on the newbie line!
+     Who was that?
+
+It was an immortal who was invisible.  They are the only ones that
+show up on lines as 'Someone'.
+
+
+15) What does `afk' mean?
+
+A list of abbreviations:
+
+    PK - Player killer
+    HM - High mortal
+    wiz - A term often used to refer to immortals
+    afk - `away from keyboard'
+    brb - `be right back'
+    brt - `be right there'
+    OOC - Out of character.
+	Lines are considered OOC. Line usage is covered in <help line
+	use>.
+    IC - In character.
+	Knowledge your character knows. You may know who Vecna is from
+	reading the latest book about him, but your character does
+	not.
+	For our views on books, please read <help rules>. but it would
+	be best to leave them elsewhere.
+    OOG - Out of game.
+	Stuff that is best left outside of ShadowGate. Please do try.
+	This includes a real life friend, real life girlfriends,
+        bosses, the bully from your 12th grade class who picked on
+	you.
+    IG - In Game.
+	The gameworld of ShadowGate, with all the dieties, and
+	diverse personalities that we have come up with.
+
+16) How do I see in colour?
+
+Since not all terminals are capable of seeing in colour, Shadowgate
+has new players setup to be in black and white.  But if you have a
+colour terminal supporting ansi escape codes (like a vt100 emulation),
+then you will want to experience Shadowgate in colour.  Type : help
+ansi for more about this.
+ 
+17) How do I know what commands exist?
+
+Type <help commands>.
+
+18) What are hp?
+
+Hp refers to health points.  Basically, if your health points go below
+zero you die.  If you die you will lose some experience points, so
+dying will set you back a bit.
+
+18b) How do I know my current hps?
+
+Type <score> or <hp>. There is also a way to set your prompt to show
+your hp after each command you enter, as well as other useful
+information, like your current language and your condition.
+
+18c) Wait? Condition? What's that?
+
+Basically this is reflecting, the more you run around and the more
+you fight, the faster you get tired and worn out.  You do get a boost
+to your condition when you enter combat, but you will loose your
+second wind shortly after you leave.
+
+18d) Well ok but now I went and attacked a farmer and have only 3 hp
+    left from my max of 24.  What can I do to solve this health
+    problem?
+
+First, you can type : heal <your name> and try to use a natural
+ability that all players have to heal a few of you lost hps back. You
+can do this as much as you like but it takes time, so is a slower
+method. Second, many of the major cities in Shadowgate have healers
+who, for a fee in gold, will provide healing services and sell healing
+devices. Third, certain players due to their class, will have healing
+spells or abilities.
+
+Lastly, some items that you may find within the Shadowgate world have
+the ability to heal. The most common would be healing potions that
+most healers will sell, for varying prices.
+
+19) Ummm...a lot of the stuff I have been picking up is junk.  Should
+    I just leave this stuff on the ground?
+
+No!  It creates lag having useless items laying about.  You should get
+removed from the game environment as soon as possible if it is `junk'.
+Either take the stuff you do not want to local stores and sell it as
+money is important and your character likely needs it, or type : offer
+<item>, and this will remove the item, as well as it may heal you a
+slight bit for each item you offer.
+
+There is also the command <offerall> which will get rid of whatever is
+laying about on the ground.  Please note that this is an OOC command
+to help clean up the mud and prevent more frequent reboots. There are
+rules about this command, and you should read that in <help rules>.
+
+19b) What about reboots? What do I need to do when one is happening?
+
+Logging out at the 2 minute warning is expected of all characters who
+are in a position to log out. This means people who are not in combat
+and not in an area of risk of logging into combat. If you do not
+follow the large yellow warning you risk potential punishment and/or
+loss of equipment through the MUD failing to reboot. Equipment lost in
+this way will NOT be returned.
+
+20) Ok I know the game terms and I got a good idea on what is going on
+    but Shadowgate seems really big and I am confused as to where to
+    start adventuring, where to get equip, where not to go etc.
+
+Ok.  Yes it is a big place, and yes high up players generally don't
+want to take you by the hand and lead you around.  But asking them
+simple questions about things often will result in answers.  But if
+you are a die hard soloist, it is suggested you make a map or obtain a
+map of the city of Shadow which you start in and explore what it has
+to offer.  Primarily, you want to locate the gates leading out of the
+city, the shops and institutions of use and the general layout of the
+roads. You might want to pick up a weapon or some armour in the stores
+and perhaps a torch or lantern in case it gets dark while you are
+exploring. Keep in mind that it is a city in every sense and you are
+still a stranger to it, so entering areas that are guarded or operated
+by the militia of Shadow city could lead to a quick death.
+
+If you are a drow or half-drow, Shadow may not be the best place for
+you to stay in, as it is a shadow primarily made up of humans, elves,
+and half-elves.  But then again, you read <help drow> or <help
+half-drow> and knew it was going to be a challenge, right?
+
+21) Alright, I know Shadow city well and have the multi-coloured map
+    of it that I spent hours drawing hanging in a lovely frame on my
+    wall. But there does not seem to be that much to explore is an
+    adventuring, monster killing sense within Shadow city, where is
+    a good place for a newbie to start adventuring and exploring?
+
+Well.  It is suggested you head west from Shadow city.  Much of the
+lands located past the west gates of Shadow are for newbies and low
+mid level players.  Also, out the east gates of Shadow is a vast
+desert full of rats and snakes and critters for young players to kill,
+but be very careful not to get lost in the desert(it is *very* big).
+And there is also some stuff up the past the North gates which is also
+good for players level 3 and up to explore. Basically, the high up
+level areas are located far away from Shadow and take a lot of
+wandering to get too them.  And yes, mapping is important.
+
+There is a map on the Main Adventurer's Hall floor that you may want
+to take a look at.
+
+22) Woo woo!  I found some monsters and crushed a few skulls!  Now
+    though my experience needed to advance in the <score> command list
+    is in the negatives?!?  Am I bugged or do I have to do something
+    to advance in levels?
+
+No your not bugged.  Yes you must do something to advance.  You go to
+any guild hall, class guild hall, room with a posting board present,
+the forkroad of shadow, any city center and type : advance. If you
+have gained the proper experience required and you have enough gold to
+pay for the cost of training your character on you, you will then
+receive your advancement of level.
+
+For those of you who are multiclassed, you can also <advance class>
+to advance one of your classes without using the <pose> command to
+change which class you are acting as.
+
+23) Okay why does it say I'm hitting myself with this new weapon I've
+    found?
+
+Simply put, you aren't proficient enough with that weapon, and that
+lack of skill makes it dangerous to yourself to use. If you go to a
+trainer he will train you in use of that weapon. To find out more
+about proficiences please type <help profs> and <help proficiencies>.
+To figure out what skill a weapon will require when you are holding it
+in your hands, please read the help on the <skillneeded> command.  If
+you are a single class fighter, you may also want to read the file
+under <help specialization>
+
+24) I just got something that said "Error! Contact a WIZ?" How do I
+    do that?
+
+First thing is you probably should try the command again. If this
+works then then it was probably a one-time error.  Should you be
+trapped in a room with no exits, we suggest the command <fixmore> to
+try to fix the room, however, there are some areas that there will be
+no exits apparent, but the room still will not be broken.  If the
+error continues, then you may need to seek higher assistance and aid.
+
+25) I've heard of someone being called a High Mortal? What's that?
+
+A High Mortal is someone who has achieved a level of fame beyond
+ordinary mortals and is either well known for his or her deeds
+throughout the land, or has his or her name spoken in hushed tones,
+hopefully not to garner too much attention.  It is a level of status
+and it may be granted by any immortal who feels you meet the
+requirements.  The requirements and benefits are listed under
+<help highmortal>.

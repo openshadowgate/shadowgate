@@ -1,0 +1,34 @@
+Ruined Keep
+
+Level 1
+
+19 - 18 - 17 - 16 - 15 - 14 - 24 - 25 - 26
+ |                        |         |    |
+20 - Stairs              13        27   28 - 29 - 30
+ |                        |                        |
+21                       12   41 - 40             31
+ |                        |         |              |
+22 - 23             11 - 10 - 39 S 38 - 36 S 35 - 32
+                          |              |         |
+           6              9             37        33
+           |              |                        |
+      5 -  4 -  3 -  2 -  1 -  7 -  8
+
+Level 2
+
+Stairs - 1 - 2
+         |   |
+         3 - 4 - 5
+                 S
+         8 - 7 - 6
+
+Secret Basement
+
+    5
+    |
+3 - 2 - 4
+    |
+    1 (stairs leading to room 37 of first floor)
+
+S denotes a secret passage that can be opened to connect rooms
+

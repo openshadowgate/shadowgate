@@ -1,0 +1,15 @@
+%^BOLD%^%^GREEN%^SPEECH and COLORS for CUSTOMIZING YOUR CHARACTER%^RESET%^
+
+The %^BOLD%^%^BLUE%^<speech>%^RESET%^ emote customizes how you come across when you use <say>.  Type 'speech mumble' to change from 'Bob says: blah blah' to 'Bob mumbles: blah blah'.  NOTE:  The mud WILL add an 's' to the end of the first word you use after 'speech' for what others see.  So, if you type 'speech mumbles softly', you will see 'You mumbles softly: blah blah' and others will see 'Bob mumbless softly: blah blah'.
+
+                     %^BOLD%^%^MAGENTA%^U S I N G   C O L O R S%^RESET%^
+Type 'help color' to see the color commands available.  Note - the color 
+words inside the %%^^ characters must be in capital letters.  If you use 
+colors in your adjective, put a '%%^^RESET%%^^' at the end so your colors 
+don't carry over to others in the room.
+
+You may want to %^BOLD%^<alias>%^RESET%^ your say or line use commands to use colors.  
+For example if you type 'alias say say %%^^RED%%^^$*' with the RED in capital letters, when you type 'say hello' it will add the color command to show as 'Bob says: %^RED%^hello%^RESET%^.'  Type 'help alias' to learn more about aliases.
+
+***Note - be careful with aliases for special commands, and DO NOT alias 
+%^BOLD%^<pray>%^RESET%^.  You will need to be able to type 'pray' and not have the mud change it to something else when your character dies and needs to get a new body.  Making an alias for a "soul" such as laugh is fine though (see 'help souls' and the 'action' poster here).

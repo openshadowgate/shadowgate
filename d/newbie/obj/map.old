@@ -1,0 +1,31 @@
+                               %^BLUE%^E%^RESET%^
+                               |
+                   -------------------------                %^MAGENTA%^^%^RESET%^
+                  /   |        |     |  |   \               %^MAGENTA%^N%^RESET%^
+                 /    |        |     |  |    \
+          %^BLUE%^h%^RESET%^  %^BLUE%^h%^RESET%^  |     %^BLUE%^L%^RESET%^     %^BLUE%^C%^RESET%^--+--%^BLUE%^H%^RESET%^  %^BLUE%^J%^RESET%^  %^BLUE%^X%^RESET%^     |  %^BLUE%^h%^RESET%^  %^BLUE%^h%^RESET%^
+          |  |  |  -     -     |              |  |  |
+          |  |  |  |     |     |              |  |  |
+       %^BLUE%^h%^RESET%^--+--+--|  |-----+--%^BLUE%^P%^RESET%^--|              |--+--+--%^BLUE%^h%^RESET%^
+          |  |  |  |     |     |              |  |  |
+          |  |  |  --|   -     |              |  |  |
+          %^BLUE%^h%^RESET%^  %^BLUE%^h%^RESET%^  |           %^BLUE%^M%^RESET%^--+--%^BLUE%^W%^RESET%^  %^BLUE%^T%^RESET%^  %^BLUE%^A%^RESET%^     |  %^BLUE%^h%^RESET%^  %^BLUE%^h%^RESET%^
+                 \          |  |  |  |  |    /
+                  \         |  |  |  |  |   /
+                   |--------+--%^RED%^@%^RESET%^--+--+-----|
+                   |  |     |  |  |  |     |
+                   |  |     |  |  |  |     |
+                   |  %^BLUE%^t%^RESET%^     %^BLUE%^G%^RESET%^--+--%^BLUE%^I%^RESET%^  %^BLUE%^S%^RESET%^     |
+                   |           |           |
+                   |           |           |
+                   |--%^BLUE%^b%^RESET%^  %^BLUE%^s%^RESET%^     |--%^BLUE%^B%^RESET%^     %^BLUE%^b%^RESET%^--|
+                   |  |  |     |        |  |
+                   |  |  |     |        |  |
+                  -%^GREEN%^#%^RESET%^-----------------------%^GREEN%^#%^RESET%^-
+
+%^RED%^@%^RESET%^: Town Center      %^BLUE%^E%^RESET%^: Psion Enclave    %^BLUE%^L%^RESET%^: Library          %^BLUE%^t%^RESET%^: Mage Tower         
+%^GREEN%^#%^RESET%^: Gate             %^BLUE%^G%^RESET%^: General Store    %^BLUE%^M%^RESET%^: Magic Shop       %^BLUE%^T%^RESET%^: Trainer     
+%^BLUE%^A%^RESET%^: Armory           %^BLUE%^h%^RESET%^: House            %^MAGENTA%^N%^RESET%^: North Arrow      %^BLUE%^W%^RESET%^: Weaponsmith           
+%^BLUE%^b%^RESET%^: Bar              %^BLUE%^H%^RESET%^: Healer           %^BLUE%^P%^RESET%^: Park Entrance    %^BLUE%^X%^RESET%^: Scribe
+%^BLUE%^B%^RESET%^: Bank             %^BLUE%^I%^RESET%^: Inn              %^BLUE%^s%^RESET%^: Seamstress           
+%^BLUE%^C%^RESET%^: Church           %^BLUE%^J%^RESET%^: Jewelery         %^BLUE%^S%^RESET%^: Stable       

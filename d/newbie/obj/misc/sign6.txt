@@ -1,0 +1,5 @@
+%^RESET%^%^CYAN%^Another good thing to learn is how to search.  Look at this room and see if anything stands out.
+%^RESET%^%^CYAN%^If you can not find anything that stands out, sometimes a general search will help you.  Type < %^BOLD%^%^WHITE%^search %^RESET%^%^CYAN%^>
+%^RESET%^%^CYAN%^Notice that the undergrowth stands out?
+%^RESET%^%^CYAN%^You can also search individual items in a room.
+%^RESET%^%^CYAN%^Type < %^BOLD%^%^WHITE%^search undergrowth %^RESET%^%^CYAN%^>

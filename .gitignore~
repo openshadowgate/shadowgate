@@ -13,9 +13,12 @@
 /d/*
 
 #Parts of the lib are in the world
+!/d/newbie
 !/d/common
 !/d/magic
 !/d/shadowgate
 !/d/example
 !/d/obj
 
+#fixme
+*.o

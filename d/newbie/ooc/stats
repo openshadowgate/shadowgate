@@ -1,0 +1,34 @@
+9) How do I know my stats?
+ 
+The commands <score> and <stats> are available for your reference.
+ 
+9b) What do the stats mean?
+ 
+Stats are numerical representations of your basic physical make-up, which is is determined when you first create your character.  These stats are used in different relevant aspects of your mud life.
+
+Constitution determines how sturdy you are, which in basic terms, means it determines how healthy you are.  A higher constitution will mean you gain extra hit points when you advance levels.
+
+Intelligence determines your capacity for using magic, namely, how successful your spell casting will be.  Only mages of highest intelligence can learn and cast the most powerful spells.  If you are not a spell caster then intelligence has less of a bearing on your mud life.  However, we still expect you to RP your intelligence.
+
+Dexterity factors into many different situations, among them are your resistence to being stolen from or backstabbed, your actual ability to do those to another, combat, and how well you can avoid being hit during combat.  High dexterity provides an invisible bonus to your armour class (AC) rating.
+
+Strength alone determines naturally how much you are able to carry. It also, if high enough, will provide you with a bonus "to hit" when in combat, and will cause you blows to deal extra damage on top of the regular amount you normally would do.
+
+Wisdom determines your resistence to offensive magic.  It is also adds to certain magical ability and spell casting.  Clerics, paladins, antipaladins and rangers (those who use clerical spells) all will find a high wisdom extremely helpful and only the wisest clerics will be able to cast the highest level spells.
+
+Charisma factors into your ability to get by normally aggressive monsters and in the buying and selling of goods. It also helps to define your character's looks and personality. The higher the charisma, the prettier and more charismatic your character should be.
+
+You will find your experience on ShadowGate much better if you try to avoid dealing with the numbers and let the MUD handle most of these for you.  This is not to say, however, that you will be able to get away with portraying yourself as a beauty queen with the sweetest personality with a Charisma score of 8.
+
+9c) How do I raise my stats?
+ 
+Stats are constants more or less.  What you start with is what you will likely have, or very close to it throughout your mud life.  The only way for stats to change is through the passage of time and aging.
+
+There are some items when used or worn that may provide a temporary increase in a stat.  However, this bonus will vanish when the item is removed, lost, wears out, etc.  However, the stat raises will not be put on your stats sheet, and you will have to discover these bonuses through the course of your play.
+
+9d) How do I reroll my stats?
+ 
+You don't.  If you have made your character and find your stats to be less than sufficent, your only recourse is to suicide the character and start over.
+
+9e) The <score> command provides a variety of information, including the status of IC states of hunger, thirst, poison, intoxication, and condition (related to stamina or tiredness).  As you move from room to room, fight, cast or maintain spells, etc. you use stamina.  If you push yourself to complete exhaustion, you WILL pass out and be unconscious until you are rested enough to awaken.  Remaining still will allow you to regain stamina.  We have chosen to NOT have a rest command to accelerate the process.
+	Common sense applies in that the more encumbered you are, the faster you become tired from either walking or fighting, etc.  There are other several other factors to keep it realistic as well as balanced.  In battle it is assumed you get an adrenalin rush which boosts your stamina.  It will, however, wear off and you may pass out soon after the battle is over if you are pushing your limits and don't pause to catch your breath.  

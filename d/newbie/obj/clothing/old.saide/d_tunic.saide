@@ -1,0 +1,96 @@
+#include <std.h>
+
+#define COLORS ({"aquamarine","olive green","azure","indigo","emerald green","amethyst","ivory","ocean blue",\
+"leaf green","pine green","cobalt blue","navy blue","forest green",\
+"sky blue","sapphire blue","blue-green","gray-green","black",\
+"rich brown","dark brown","walnut brown","brick red","dusty brown",\
+"lime green","ruby red","royal purple","blood red","violet",\
+"rusty orange","rusty red","reddish orange","fiery red","cornflower blue",\
+"lavander","carnation pink","light brown","turquoise","charcoal gray",\
+"cyan blue","rich cream","cream","white","saphron",\
+"rusty orange","tangerine","lemon yellow","brilliant purple","brilliant yellow",\
+"brilliant white","brilliant blue","brilliant green","brilliant red","pale purple",\
+"pale yellow","pale blue","pale green","pale red","light purple",\
+"light yellow","light blue","light green","light red","light brown",\
+"bright purple","bright yellow","bright blue","bright green","bright red",\
+"deep purple","deep blue","deep green","deep red","deep brown",\
+"rich purple","rich blue","rich green","rich red","vibrant purple",\
+"vibrant blue","vibrant green","vibrant red","vibrant yellow","dark purple",\
+"dark blue","dark green","dark red","light gray","dark gray",\
+"stormy gray","pale gray","crimson","daffodil","lilac",\
+"beige","taupe","sable","fawn"\
+})
+
+inherit DAEMON;
+
+int j, val;
+string str, FABRIC, VAR;
+
+void create()
+{
+   ::create();
+}
+
+void create_tunic(object obj)
+{
+   j = random(sizeof(COLORS));
+   str = COLORS[j];
+   VAR = "a";
+   if(str == "amethyst" || str == "emerald" || str == "aquamarine" || str == "indigo" || str == "olive green" || str == "ivory" || str == "azure" || str == "ocean blue") {
+      VAR = "an";
+   }
+   val = random(30);
+   switch(val) {
+      case 0..5:
+         FABRIC = "burlap";
+         obj->set_long("This burlap tunic is rather rough and uncomfortable."+
+         " It has been dyed "+VAR+" "+str+" color. This would be good"+
+         " for field work or other strenuous activities for it will"+
+         " hold up quite well.");
+         break;
+      case 6..10:
+         FABRIC = "hemp";
+         obj->set_long("This tunic is made from sturdy hemp that's been"+
+         " dyed "+VAR+" "+str+" color. It tends to make one a bit"+
+         " itchy when it gets hot, but it is very durable.");
+         break;
+      case 11..15:
+         FABRIC = "cotton";
+         obj->set_long("This is a thick cotton tunic that has been dyed"+
+         " "+VAR+" "+str+" shade. It is of good quality and appears"+
+         " durable in addition to being fairly comfortable.");
+         break;
+      case 16..20:
+         FABRIC = "woolen";
+         obj->set_long("This is a hand-knit woolen tunic that has been"+
+         " dyed "+VAR+" "+str+" shade. It is of fine quality and looks"+
+         " warm and durable, as well as fairly comfortable. This would"+
+         " be good for the winters or colder climates.");
+         break;
+      case 21..25:
+         FABRIC = "suede";
+         obj->set_long("This suede tunic has been dyed "+VAR+""+
+         " "+str+" color. It is rather fancy, as far as tunics go, and"+
+         " is obviously not meant for work and other such demeaning"+
+         " activities.");
+         break;
+      case 26..29:
+         FABRIC = "velvet";
+         obj->set_long("The velvet tunic is soft and rather pleasant"+
+         " to wear. It has been dyed "+VAR+" "+str+" shade. This is"+
+         " obviously not for every day wear.");
+         break;
+   }
+   if(val < 5) {
+      obj->set_value(5);
+   }
+   else {
+      obj->set_value(val);
+   }
+   obj->set_name("tunic");
+   obj->set_type("clothing");
+   obj->set_limbs(({"torso"}));
+   obj->set_weight(5);
+   obj->set_short(capitalize(VAR)+" "+str+" "+FABRIC+" tunic");
+   obj->set_id(({"tunic","clothing",""+str+" tunic",""+FABRIC+" tunic",""+str+" "+FABRIC+" tunic"}));
+}

@@ -1,0 +1,121 @@
+#include <std.h>
+
+#define COLORS ({"aquamarine","olive green","azure","indigo","emerald green","amethyst","ivory","ocean blue",\
+"leaf green","pine green","cobalt blue","navy blue","forest green",\
+"sky blue","sapphire blue","blue-green","gray-green","black",\
+"rich brown","dark brown","walnut brown","brick red","dusty brown",\
+"lime green","ruby red","royal purple","blood red","violet",\
+"rusty orange","rusty red","reddish orange","fiery red","cornflower blue",\
+"lavender","carnation pink","light brown","turquoise","charcoal gray",\
+"cyan blue","rich cream","cream","white","saphron",\
+"rusty orange","tangerine","lemon yellow","brilliant purple","brilliant yellow",\
+"brilliant white","brilliant blue","brilliant green","brilliant red","pale purple",\
+"pale yellow","pale blue","pale green","pale red","light purple",\
+"light yellow","light blue","light green","light red","light brown",\
+"bright purple","bright yellow","bright blue","bright green","bright red",\
+"deep purple","deep blue","deep green","deep red","deep brown",\
+"rich purple","rich blue","rich green","rich red","vibrant purple",\
+"vibrant blue","vibrant green","vibrant red","vibrant yellow","dark purple",\
+"dark blue","dark green","dark red","light gray","dark gray",\
+"stormy gray","pale gray","crimson","daffodil","lilac",\
+"beige","taupe","sable","fawn"\
+})
+
+inherit DAEMON;
+
+int j, val;
+string str, FABRIC, VAR, LENGTH;
+
+void create()
+{
+   ::create();
+}
+
+void create_shirt(object obj)
+{
+   j = random(sizeof(COLORS));
+   str = COLORS[j];
+   VAR = "a";
+   if(str == "amethyst" || str == "emerald" || str == "aquamarine" || str == "indigo" || str == "olive green" || str == "ivory" || str == "azure" || str == "ocean blue") {
+      VAR = "an";
+   }
+	switch(random(2)) {
+      case 0:
+         LENGTH = "short sleeved";
+         break;
+      case 1:
+         LENGTH = "long sleeved";
+         break;
+	}
+   val = random(40);
+   switch(val) {
+      case 0..5:
+         FABRIC = "burlap";
+         obj->set_long("This is a rather rough and uncomfortable "+LENGTH+""+
+         " burlap shirt that has been dyed "+VAR+" "+str+" color. The"+
+         " best thing about this shirt is that it will last for a long"+
+         " time.");
+         break;
+      case 6..10:
+         FABRIC = "hemp";
+         obj->set_long("This "+LENGTH+" shirt is made out of sturdy"+
+         " hemp that's been dyed "+VAR+" "+str+" color. It is slightly"+
+         " itchy and rather uncomfortable to wear in the heat, but"+
+         " appears very durable.");
+         break;
+      case 11..15:
+         FABRIC = "cotton";
+         obj->set_long("This is a soft, "+LENGTH+" cotton shirt that has"+
+         " been dyed "+VAR+" "+str+" shade. It is of a very good quality and"+
+         " looks durable in addition to being comfortable. The front"+
+         " buttons up and there is a collar around the neck.");
+         break;
+      case 16..20:
+         FABRIC = "woolen";
+         obj->set_long("This is a hand-knit "+LENGTH+" woolen shirt that has"+
+         " been dyed "+VAR+" "+str+" shade. It is of fine quality and looks"+
+         " warm and durable, as well as fairly comfortable. This would"+
+         " be good for the winters or colder climates.");
+         break;
+      case 21..25:
+         FABRIC = "fleece";
+         obj->set_long("This "+LENGTH+" fleece shirt is just about the"+
+         " softest thing you've ever touched. It has been excellently"+
+         " made and tightly woven to keep out the cold. It is "+VAR+""+
+         " "+str+" shade and will keep you warm in the cold.");
+         break;
+      case 26..30:
+         FABRIC = "suede";
+         obj->set_long("This "+LENGTH+" suede shirt has been dyed "+VAR+""+
+         " "+str+" color. It is fairly sturdy and rather smooth to the"+
+         " touch. It buttons up the front with a collar around the neck.");
+         break;
+      case 31..35:
+         FABRIC = "velvet";
+         obj->set_long("The velvet shirt is very soft and quite pleasant"+
+         " to touch. It is "+LENGTH+" and has been dyed "+VAR+" "+str+""+
+         " shade. It is not the most durable of materials but is pretty"+
+         " to look at.");
+         break;
+      case 36..39:
+         FABRIC = "silk";
+         obj->set_long("This is a delicate "+LENGTH+" silk shirt that has"+
+         " been dyed "+VAR+" "+str+" shade. It is of excellent quality and"+
+         " incredibly soft to the touch. A shirt like this is not for"+
+         " every day wear, and would probably not last long unless"+
+         " carefully treated.");
+         break;
+   }
+   if(val < 5) {
+      obj->set_value(5);
+   }
+   else {
+      obj->set_value(val);
+   }
+   obj->set_name("shirt");
+   obj->set_type("clothing");
+   obj->set_limbs(({"torso"}));
+   obj->set_weight(3);
+   obj->set_short(capitalize(VAR)+" "+str+" "+LENGTH+" "+FABRIC+" shirt");
+   obj->set_id(({"shirt","clothing",""+str+" shirt",""+FABRIC+" shirt",""+str+" "+FABRIC+" shirt",""+LENGTH+" shirt",""+LENGTH+" "+FABRIC+" shirt",""+LENGTH+" "+str+" shirt",""+LENGTH+" "+str+" "+FABRIC+" shirt",""+str+" "+LENGTH+" "+FABRIC+" shirt",""+str+" "+LENGTH+" shirt"}));
+}

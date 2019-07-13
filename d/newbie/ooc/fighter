@@ -1,0 +1,17 @@
+Fighters are probably the easiest class to play on ShadowGate.  They can wear most types of armor, use any weapon or shield, and don't need to learn or cast spells, etc.  They do have special abilities, however, that still make them fun and challenging to play.  They also gain additional attacks with their primary weapon hand at certain points in advancement.
+
+Fighters can %^BOLD%^<specialize> %^RESET%^in the use of a weapon.  This allows them to gain up to 200% proficiency (or 220% if it is their "parent" weapon).  Higher proficiency means more damage in combat.
+
+Commands:
+
+%^BOLD%^flash <target> %^RESET%^Doesn't always succeed, but does some extra damage and has a neat message so others also see your heroics when it succeeds.
+
+%^BOLD%^parry %^RESET%^- Puts you in a defensive stance to lessen your chances of being hit in combat, although it prevents you from leaving the room because you are busy parrying.   You can toggle it off by typing parry again, but you still may be unable to leave the room for a while after if you remain in combat. 
+
+%^BOLD%^rush <target> %^RESET%^- You charge at your opponent, doing significant extra damage and possibly stunning them, IF you don't fall on your face trying.  A missed rush will stun you from falling on your face or slamming into a wall for a little while.  On the other hand, you can rush more than one target, although missing one will negate any tries after until you can get up again.  Either way, the effort will keep you from leaving the room for a while, or until combat ceases.
+
+%^BOLD%^rescue <name> %^RESET%^- Similar to protect (which anyone can do), but is more effective.  However, it is a one-time thing like running in front of an ally to block a specific attack although you can do it repeatedly if you choose.
+
+%^BOLD%^%^discern <weaponname> %^RESET%^- allows you to estimate a weapon's damage potential.
+
+You will automatically improve at your chances of successful flash, parry, rush, and rescue as you advance in levels.  Profs must be applied and you'll need to train to improve with your weapons, however.

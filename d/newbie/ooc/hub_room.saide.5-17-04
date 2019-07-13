@@ -1,0 +1,34 @@
+#include <std.h>
+
+inherit ROOM;
+
+void create() {
+        ::create();
+        set_property("indoors",1);
+        set_property("no teleport",1);
+        set_property("light",3);
+        set_property("no sticks",1);
+	set_property("ooc room", 1);
+        set_short("%^MAGENTA%^OOC area hub to player training/info. rooms");
+        set_long(
+@STYX
+This room is a hub to various rooms to help answer player's questions about how to get started and get the most from playing in ShadowGate.  When you have reviewed the information and are ready to begin your adventure, %^BOLD%^<out>%^RESET%^ will take you to the town square of Offestry.  You can return here anytime to look for answers to other questions you may have or refresh your memory.
+STYX
+        );
+        set_items(([
+        ]));
+        set_exits(([
+        "basics" : "/d/newbie/ooc/basics_room",
+        "char" : "/d/newbie/ooc/char_room",
+        "questions" : "/d/newbie/ooc/faq_room",
+        "rules" : "/d/newbie/ooc/rules_room",
+        "classes": "/d/newbie/ooc/classes_room",
+        "out": "/d/newbie/rooms/town/square",
+        ]));
+}
+
+void reset(){
+	::reset();
+	if(!present("sign",TO))
+	new("/d/newbie/obj/misc/townsign")->move(TO);
+}

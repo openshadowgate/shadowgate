@@ -1,0 +1,5 @@
+%^BOLD%^%^BLUE%^WEST:%^RESET%^
+%^MAGENTA%^Town of Offestry%^RESET%^
+%^BOLD%^%^BLUE%^SOUTHEAST:%^RESET%^
+%^GREEN%^Forest
+%^BOLD%^%^GREEN%^Rolling Hills%^RESET%^

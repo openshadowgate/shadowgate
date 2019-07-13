@@ -1,0 +1,25 @@
+// /d/tonerra/obj/gem.c
+
+#include <std.h>
+
+#define NAMES ({"ruby","opal","sapphire","emerald","topaz","diamond","gold nugget"})
+
+inherit OBJECT;
+
+void create(){
+   int i,j, val;
+   string str, size;
+
+   ::create();
+   val = random(150);
+   size = "small ";
+   j=random(7);
+   str= NAMES[j];
+   set_long("This is a "+size+""+str+". It shines in the light and is probably very valuable.");
+   set_short("a "+size+""+str);
+   set_id(({"gem",str,capitalize(str)}));
+   set_weight(10);
+   set_value(val);
+}
+
+int is_gem(){return 1;}
