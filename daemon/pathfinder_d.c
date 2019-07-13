@@ -308,7 +308,7 @@ string * nogorooms - an array of base names of rooms that the path should
 } 
 
 
-varargs string * findburiedpath (object startroom, object endroom, string * path, string * finalpath, object * rooms, int depth, int flag, string * nogorooms, string * checked_exits){
+varargs string * findburiedpath (object startroom, object endroom, string * path, string * finalpath, object * rooms, int depth, int flag, string * nogorooms){
 
 /* Same as findpath, but includes buried exits.*/
 
@@ -336,7 +336,6 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
     combined_exits += buried_directions;
   } else report("No buried exits found");
   report("Findburiedpath 3");
-  if (sizeof(checked_exits)<1) checked_exits = ({});
   if (sizeof(combined_exits)>0)
   {
     report("About to cycle through " + sizeof(combined_exits) + " combined exits"); 
@@ -344,14 +343,6 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
     {
       report("Combined exit " + i + " Direction: " + combined_exits[i]);
       temp_exit = find_open_or_buried_destination(room, combined_exits[i]);
-      if (member_array(temp_exit, checked_exits)!=-1)
-      {
-        report("%^CYAN%^" + temp_exit + " has already been checked. Moving on...");
-        continue; //skip any rooms that have already been checked
-      }
-      report("%^BOLD%^%^CYAN%^" + temp_exit + " has not already been checked");
-      checked_exits += ({temp_exit});
-      report("%^GREEN%^" + sizeof(checked_exits) + " have now been checked");
       if (member_array(temp_exit, nogorooms)!=-1) continue; // skip any rooms included in the nogo list
       if (file_exists(temp_exit + ".c") && !catch(temp_exit->query_short()))
       {
@@ -376,10 +367,10 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
               return path + combined_exits[i..i];
             }
           }else{
-            report("%^ORANGE%^Temproom " + file_name(temproom) + " is not the end room");
+            report("Current room: " + file_name(startroom) + " %^ORANGE%^Temproom " + file_name(temproom) + " is not the end room");
             if (member_array(temproom, rooms)==-1){
               temppath = findburiedpath(temproom, endroom, path + combined_exits[i..i],
-                          finalpath, rooms + ({startroom}), depth-1, flag ++, nogorooms, checked_exits);
+                          finalpath, rooms + ({startroom}), depth-1, flag ++, nogorooms);
               if (sizeof(finalpath)<1){
                  if (sizeof(temppath)>0){
                    finalpath = temppath;
@@ -395,6 +386,9 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
             }
           }
         } else report("%^BOLD%^%^RED%^temproom "+ file_name(temproom) + " is not a valid object");
+      }  else
+      {
+        report("Either " + temp_exit + " does not exist as a file, or there is an error with query_short");
       }
     }
   } else
