@@ -316,7 +316,7 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
   string * exits, *tempexits, *temppath, * buried_directions, * combined_exits;
   object room, temproom;
   mapping buried_exits;
-
+  report("Findburiedpath 1");
   room = startroom;
 
   
@@ -327,32 +327,41 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
   if (!objectp(startroom)||!objectp(endroom)){return ({});}
   exits = startroom->query_obvious_exits();
   buried_exits = startroom->query_orig_exits();
-
-
+  combined_exits = exits;
+  report("Findburiedpath 2");
   if (sizeof(buried_exits)>0)
   {
+    report("There are " + sizeof(buried_exits) + " buried exits");
     buried_directions = keys(buried_exits);
-    combined_exits = exits + buried_directions;
-  }
-
+    combined_exits += buried_directions;
+  } else report("No buried exits found");
+  report("Findburiedpath 3");
 
   if (sizeof(combined_exits)>0)
   {
+    report("About to cycle through " + sizeof(combined_exits) + " combined exits"); 
     for (i=0;i<sizeof(combined_exits);i++)
     {
+      report("Combined exit " + i + " Direction: " + combined_exits[i]);
       if (member_array(find_open_or_buried_destination(room, combined_exits[i]), nogorooms)!=-1) continue; // skip any rooms included in the nogo list
-      if (file_exists(find_open_or_buried_destination(room, combined_exits[i])+".c") && !catch(find_open_or_buried_destination(room, combined_exits[i])->query_short())){
+      if (file_exists(find_open_or_buried_destination(room, combined_exits[i])+".c") && !catch(find_open_or_buried_destination(room, combined_exits[i])->query_short()))
+      {
         temproom = find_object_or_load(find_open_or_buried_destination(room, combined_exits[i]));
-          if (objectp(temproom)){
-            if (temproom == endroom){  
-              if (flag == 1){
-              if (sizeof(finalpath)<1 ||sizeof(finalpath)>(sizeof(path)+1)){
+        if (objectp(temproom))
+        {
+          if (temproom == endroom)
+          {
+            report("Temproom is the endroom");  
+            if (flag == 1)
+            {
+              if (sizeof(finalpath)<1 ||sizeof(finalpath)>(sizeof(path)+1))
+              {
                 path += exits[i..i];
                 finalpath = path;
               }else{
               } 
             }else{
-              return path + exits[i..i];
+              return path + combined_exits[i..i];
             }
           }else{
             if (member_array(temproom, rooms)==-1){
@@ -372,10 +381,13 @@ varargs string * findburiedpath (object startroom, object endroom, string * path
 
             }
           }
-        }
+        } else report("temproom is not a valid object");
       }
     }
 
+  } else
+  {
+    report("There are no combined exits");
   }
 
 
@@ -388,7 +400,8 @@ string find_open_or_buried_destination(object room, string direction){
   if (!objectp(room)) return "";
   exits = room->query_exits();
   buried_exits = room->query_orog_exits();
-  buried_directions = keys(buried_exits);
+  if (mapp(buried_exits) && sizeof(buried_exits)>0) buried_directions = keys(buried_exits);
+  else buried_directions = ({});
   if (member_array(direction, exits)!=-1) return room->query_exit(direction);
   if (member_array(direction, buried_directions)!=-1) return buried_exits[direction];
   return "";
@@ -400,6 +413,7 @@ void report(string str){
 //  if (objectp(luj)){
 //    tell_object(luj, "%^GREEN%^" + str);
 //  }
+  "/daemon/reporter_d"->report("lujke", str);
 }
 
 varargs object find_waystation(object startroom, string destination,int distance, string * nogorooms){
