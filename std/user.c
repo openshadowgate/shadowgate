@@ -3631,6 +3631,26 @@ mapping query_rem_rooms()
     return rem_rooms;
 }
 
+object query_rem_room(string room)
+{
+    object destobj;
+    string destfile;
+    mapping remrooms;
+
+    room = lower_case(room);
+    remrooms = TO->query_rem_rooms();
+    destfile = remrooms[room];
+
+    if(destfile)
+        if(!(destobj = find_object_or_load(destfile)))
+            destfile = 0;
+
+    if(!destfile)
+        return 0;
+    
+    return destobj;
+}
+
 mapping query_rem_obs() {
   return rem_obs;
 }

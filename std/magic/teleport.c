@@ -83,7 +83,7 @@ mixed teleport_object(object invoker, mixed teleportee, mixed destination, int c
 
     if(stringp(destination))
     {
-        if(!(destroom = get_room_from_memory(invoker,destination)))
+        if(!(destroom = invoker->query_rem_room(destination)))
         {
             tell_object(invoker,"You can't remember "+destination);
             return 0;

@@ -19,12 +19,13 @@ void create() {
 ".  Then the caster can type <cast classname teleport to cave> and the the spell will move the caster to the location "
 "specified.  Be warned, however.  This powerful spell of teleport is not always without error.  The caster may end up far "
 "from where he/she intended to teleport to. You may also <unremember location> which will remove a specific location from "
-"memory.\nThis spell can only be cast while at peace.\nSee also: remember, unremember, recall");
+"memory.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ remember, unremember, recall");
     set_verbal_comp();
     set_arg_needed();
-    set_casting_time(2);
-    set_peace_needed(1);
 	set_helpful_spell(1);
+    set_peace_needed(1);    
 }
 
 string query_cast_string() {
@@ -35,20 +36,12 @@ void spell_effect(int prof) {
     mixed endplace;
     int power, prob;
 
-    if (sizeof(caster->query_attackers()))
-    {
-        tell_object(caster,"Combat distracts you from your spell!");
-        tell_room(place,caster->QCN+" is distracted by combat, spell fails.");
-        dest_effect();
-        return;
-    }
-
     power = clevel>50?50:clevel;
     prob = to_int(25.0 + 65.0*(power/50.0));
     if(roll_dice(1,100)>prob)
     {
         if(!endplace=TELEPORT->scatter_destination(
-               TELEPORT->get_room_from_memory(caster,arg)))
+               caster->query_rem_room(arg)))
             endplace = arg;
     }
     else

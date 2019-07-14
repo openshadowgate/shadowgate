@@ -165,7 +165,7 @@ void scribe(string spell, object tp, object paper, int number){
 
     tell_object(tp,"%^BOLD%^You finish scribing "+spell+".");
     tell_room(environment(tp),"%^BOLD%^"+tp->query_cap_name()+" finishes "+tp->QP+" scribing.",tp);
-    scroll = new ("/d/magic/scribed_scroll");
+    scroll = new ("/d/magic/scroll");
     scroll->set_spell_name(spell);
     scroll->set_spell_level(number);
     scroll->set_passed((string)tp->query_name()); //let scribers automatically read their own scrolls. Nienne, 07/09.
