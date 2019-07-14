@@ -55,12 +55,12 @@ void spell_effect(int prof)
         if(foes[i] == caster) continue;
         if(interactive(foes[i]) && foes[i]->query_level() < 6) continue;        
         limb = foes[i]->return_target_limb();
-        damage = roll_dice(clevel,6); //same as the bolt spells
+        define_base_damage(0);
+        damage = sdamage;
         if(!interactive(foes[i]))
         {
             tell_object(caster,"%^BOLD%^%^CYAN%^The power from your sphere glows brightly as it engulfs "+foes[i]->QCN+".%^RESET%^");
             tell_room(place,"%^BOLD%^%^CYAN%^The power from "+caster->QCN+"'s sphere glows brightly as it engulfs "+foes[i]->QCN+"."+"%^RESET%^",({foes[i],caster}));
-            damage += roll_dice(1,clevel);
             if(!do_save(foes[i],-2)) { damage_targ(foes[i],limb,damage,"divine"); }
             else { damage_targ(foes[i],limb,damage/2,"divine"); }
         }
@@ -77,7 +77,6 @@ void spell_effect(int prof)
                 tell_room(place,"%^BOLD%^%^CYAN%^The power from "+
                     ""+caster->QCN+"'s sphere glows brightly as it "+
                     "engulfs "+foes[i]->QCN+".%^RESET%^",({foes[i],caster}));
-                damage += roll_dice(1,clevel);
                 if(!do_save(foes[i],-2)) { damage_targ(foes[i],limb,damage,"divine"); } 
                 else { damage_targ(foes[i],limb,damage/2,"divine"); }
             }

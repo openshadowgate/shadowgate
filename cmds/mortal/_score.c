@@ -275,7 +275,7 @@ int cmd_score(string str)
  
    melnmarn = sprintf("  %sHitPoints %s--- %s: %s%-64s       %sCarrying# %s%s: %s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE,hit,GREEN,RESET+WHITE,GREEN,encumbrance);
    write(melnmarn);
-   melnmarn = sprintf("  %sArmor Class %s- %s: %s%-15s            %sBase Hit %s-%s: %s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE,""+"/daemon/bonus_d"->effective_ac(targ),GREEN,RESET+WHITE,GREEN,BOLD+WHITE+""+"/daemon/bonus_d.c"->new_bab(1, targ));
+   melnmarn = sprintf("  %sArmor Class %s- %s: %s%-15s            %sBase Hit %s-%s: %s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE,""+BONUS_D->effective_ac(targ)+" + "+BONUS_D->ac_bonus(targ,targ)+"",GREEN,RESET+WHITE,GREEN,BOLD+WHITE+""+"/daemon/bonus_d.c"->new_bab(1, targ));
    write(melnmarn);
    //melnmarn = sprintf("  %sQuest Points %s %s: %s%-20d       %sQuests %s-- %s: %s%-10d",BOLD+GREEN,RESET+WHITE,GREEN,WHITE,questsleft,BOLD+GREEN,RESET+WHITE,GREEN,WHITE,quests);
    //write(melnmarn);

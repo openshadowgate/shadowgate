@@ -19,7 +19,7 @@ void create() {
     set_description("When manifesting this power, the psionic character "
        "strengthens her mental defenses against certain types of energy. "
        "The manifester must choose either fiendish (protecting her from "
-       "fire, electricity, and sonic attacks) or celestial (protecting her "
+       "fire, electricity, and negative energy attacks) or celestial (protecting her "
        "from cold, acid, and sonic attacks) when manifesting the power.");
     set_verbal_comp();
     set_arg_needed();
@@ -68,7 +68,7 @@ void spell_effect(int prof) {
     switch(mytype){
        case "fiendish": caster->set_resistance("fire",mylevel);
                         caster->set_resistance("electricity",mylevel);
-                        caster->set_resistance("sonic",mylevel);
+                        caster->set_resistance("negative energy",mylevel);
                         break;
        default: caster->set_resistance("cold",mylevel);
                 caster->set_resistance("acid",mylevel);

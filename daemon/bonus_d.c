@@ -118,20 +118,6 @@ int query_dex_bonus(object target)
         }
     }
 
-    enc = (int)target->query_encumbrance_percent();
-
-    switch(enc) // bonus/penalty based on encumbrance
-    {
-    case 0..50:     ret += -3;  break;
-    case 51..55:    ret += -2;  break;
-    case 56..65:    ret += -1;  break;
-    case 66..75:    ret += 0;   break;
-    case 76..85:    ret += 1;   break;
-    case 86..95:    ret += 2;   break;
-    case 96..100:   ret += 3;   break;
-    default:        ret += 0;   break;
-    }
-
     // gets the max dex bonus based on armor type
     torso = (object *)target->query_armour("torso");
     if(!sizeof(torso)) { max = 10; }

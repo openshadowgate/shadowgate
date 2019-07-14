@@ -12,7 +12,7 @@ int cmd_background(string str) {
         dir = "/d/save/background/";
         write("Background removed.");
         //cp(dir+lower_case(TP->query_name())+".htm",dir+"bkups/"+lower_case(TP->query_name())+".bak");
-        rm(dir+lower_case(TP->query_name())+".htm");
+        rm(dir+lower_case(TP->query_name())+".txt");
         return 1;
     }
     ob = new("/cmds/mortal/backobj");

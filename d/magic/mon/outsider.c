@@ -372,6 +372,7 @@ void save_outsider()
 {
     seteuid(getuid());
     if(!objectp(TO)) { return; }
+    if(!objectp(ETO)) { return; }
     mkdir("/d/save/summons/"+castname);
     mkdir("/d/save/summons/"+castname+"/"+query_name());
     saveMonster(fname);
