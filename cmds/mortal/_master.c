@@ -79,7 +79,7 @@ int mage_master(string str)
     spellsknown = ({});
     spellsknown += TP->query_mastered_spells();
     if(member_array(MAGIC_D->query_index("mage")[str],available) == -1) {
-        tell_object(TP,"You cannot master a level-"+spelllevel +" spell.");
+        tell_object(TP,"This spell is not available");
         return 1;
     }
     if(member_array(str,spellsknown) != -1) { // should never see this

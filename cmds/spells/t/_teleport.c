@@ -5,8 +5,7 @@
 #include <teleport.h>
 
 inherit SPELL;
-
-string maindir;
+mixed endplace;
 
 void create() {
     ::create();
@@ -33,7 +32,7 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-    mixed endplace;
+
     int power, prob;
 
     power = clevel>50?50:clevel;
@@ -42,32 +41,42 @@ void spell_effect(int prof) {
     {
         if(!endplace=TELEPORT->scatter_destination(
                caster->query_rem_room(arg)))
-            endplace = arg;
+            endplace = caster->query_rem_room(arg);
     }
     else
-        endplace = arg;
+        endplace = caster->query_rem_room(arg);
 
     tell_object(caster,"%^BLUE%^%^BOLD%^You recall your destination "+
-                "in your mind, focusing on it while chanting.");
-    if(!(endplace=TELEPORT->teleport_object(caster,caster,endplace,clevel)))
+                "in your mind, focusing to bring yourself to it.");
+
+    spell_successful();
+
+    if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
     {
-         tell_object(caster,"You sense something blocking your "+
-                    "passage and lose concentration on your power.");
+        tell_object(caster,"You sense something is wrong with your spell and loose concentration.");
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
         dest_effect();
-        return;
+
     }
-   
-    spell_successful();
-    tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" disappears in a bright blue flash!",caster);
-    tell_room(endplace,"%^BOLD%^%^BLUE%^An outline of a figure appears near you.",caster);
+    tell_room(endplace,"%^BOLD%^%^BLUE%^A blue light grows in your vicinity.",caster);
+    call_out("spell_effect_next",ROUND_LENGTH);
+}
+
+void spell_effect_next()
+{
+    if(!TELEPORT->teleport_object(caster,caster,endplace,clevel))
+    {
+        tell_object(caster,"You sense something is wrong with your spell and loose concentration.");
+        tell_room(place,caster->QCN+" "+
+                  "looks startled.",caster);
+    }
     dest_effect();    
-    return;
 }
 
 void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
+
 

@@ -17,7 +17,7 @@ void create()
 {
     ::create();
     set_spell_name("forgotten melody");
-    set_spell_level(([ "cleric" : 7, "bard" : 5 ]));
+    set_spell_level(([ "cleric" : 7 ]));
     set_spell_sphere("enchantment_charm");
     set_spell_domain("knowledge");
     set_syntax("cast CLASS forgotten melody on TARGET in <language>");
