@@ -41,26 +41,6 @@ object scatter_destination(mixed destination)
     return destobj;
 }
 
-object get_room_from_memory(object player, string room)
-{
-    object destobj;
-    string destfile;
-    mapping remrooms;
-
-    room = lower_case(room);
-    remrooms = player->query_rem_rooms();
-    destfile = remrooms[room];
-
-    if(destfile)
-        if(!(destobj = find_object_or_load(destfile)))
-            destfile = 0;
-
-    if(!destfile)
-        return 0;
-    
-    return destobj;
-}
-
 mixed teleport_object(object invoker, mixed teleportee, mixed destination, int clevel)
 {
     object tped, destroom;

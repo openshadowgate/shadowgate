@@ -45,7 +45,7 @@ void spell_effect(int prof) {
     if(roll_dice(1,100)>prob)
     {
         if(!endplace=TELEPORT->scatter_destination(
-               TELEPORT->get_room_from_memory(caster,arg)))
+               caster->query_rem_room(arg)))
             endplace = arg;
     }
     else
