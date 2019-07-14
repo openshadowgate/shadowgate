@@ -4,7 +4,7 @@ inherit SPELL;
 
 object eyes,remote;
 string theName;
-#define DELAY 300 
+#define DELAY 180 
 
 void create(){
     ::create();
@@ -21,7 +21,6 @@ void create(){
 ". The caster will need to rest after attempting this kind of spell, before re-attempting it again.");
     set_somatic_comp();
     set_arg_needed();
-    set_peace_needed(1);
 }
 
 int preSpell(){
@@ -102,6 +101,7 @@ void dest_effect(){
       caster->remove_property("remote scrying");
       caster->remove_property("remote scrying time");
       caster->set_property("remote scrying time",time());
+      tell_object(caster,"Your concentration on places afar fades.");      
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

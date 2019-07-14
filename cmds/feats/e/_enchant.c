@@ -94,14 +94,16 @@ void select_spell(string str, object ob){
         input_to("select_spell",0,ob);
         return;
     }
-    if(spell->query_arg_needed()){
-        write("You can't enchant something with that spell.");
-        write("%^BOLD%^%^RED%^You start the process of enchanting the "+ob->query_short()+".");
-        write("%^YELLOW%^Enter spell name:");
-        write("~q to cancel");
-        input_to("select_spell",0,ob);
-        return;
-    }
+
+    //TODO: Fix corresponding code in use
+    /* if(spell->query_arg_needed()){ */
+    /*     write("You can't enchant something with that spell."); */
+    /*     write("%^BOLD%^%^RED%^You start the process of enchanting the "+ob->query_short()+"."); */
+    /*     write("%^YELLOW%^Enter spell name:"); */
+    /*     write("~q to cancel"); */
+    /*     input_to("select_spell",0,ob); */
+    /*     return; */
+    /* } */
 
     write("%^YELLOW%^Number of charges (10 max):");
     write("~q to cancel");

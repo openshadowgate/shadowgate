@@ -33,7 +33,11 @@ void init() {
         TO->remove(); 
 	  return;
     }
-    if (living(ETO)) ETO->force_me("wear scales");
+    if (living(ETO))
+    {
+        TO->set_worn(ETO);
+        TO->set_actual_limbs(ETO);
+    }
     if (living(TP) && !owner) owner = TPQN;
 }
 

@@ -32,13 +32,6 @@ int cmd_wear(string str)
         if(!(ob = present(find_object(str), TP)))
         if(!(sscanf(str, "%s on %s", what, where) != 2 && stringp(what) && (!(ob = present(find_object(what), TP )) /* && parse_objects(TP,what) != ob*/ )) ) 
         {
-            if ((string)TP->query_name() == "garrett") 
-            { 
-                write(str);
-                write(what);
-                write(where);
-                write(identify(ob));
-            }
             notify_fail("You don't have that!\n");
             return 0;
         }
@@ -53,8 +46,6 @@ int cmd_wear(string str)
         }
     }
 
-// revised - this is only supposed to stop more than one + item on hands (rops), not prevent "rings" (ie. jewelry) on other slots worn when a rop is.
-//    if(ob->query_type() == "ring") {
     if(ob->query_type() == "ring" && ((member_array("left hand",ob->query_limbs()) != -1) || (member_array("right hand",ob->query_limbs()) != -1))) {
         if(ob->query_property("enchantment") || ob->query_property("ring of protection") || ob->id("ring of protection")) {
             obs = TP->all_armour();
