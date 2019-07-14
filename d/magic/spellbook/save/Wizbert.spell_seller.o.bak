@@ -1,44 +1,0 @@
-#d/shadow/mon/wizbert.c
-props (["no bump":1,"swarm":2,"no attack":1,"strength":"spells",])
-ob_data (["long":"Wizbert is a puny looking gnome hidden in a bright yellow robe with a hoodpulled over his head.  His main feature aside from the robe is his very largenose which protrudes from within the hood.  He looks very incoherent, but youknow he'll respond to a sale in an instant.  He offers spells for lots and lotsof money.<help shop> will get you a list of shop commands.","id":({"wizbert","clerk","shop keeper","shopkeeper",}),"aggressive":0,"short":"Wizbert, the magic entrepreneur","condition":100,"race":"gnome",])
-cap_name "Wizbert"
-true_name "Wizbert"
-creator "/cmds/system/_clone"
-player_data (["general":(["alignment":7,"extra_hp":0,"max_hp":85,"max_sp":1,"hp":85,"experience":2800,"sp":1,]),])
-magic (["points":192,"max points":240,])
-severed ([])
-healing ([])
-limbs ({"neck","right foot","left hand","right leg","left foot","torso","left leg","right arm","head","waist","right hand","left arm",})
-all_my_fingers 5
-ac -1
-heal_rate 2
-classes ({"mage",})
-posed "mage"
-skills (["small blades":50,])
-guilds (["mage":16,])
-mlevels (["mage":16,])
-toAttack -1
-wimpydir "out"
-attackers ({})
-hunters ({})
-ok_to_heal 93132
-player_age 92170
-gender "male"
-stats (["charisma":13,"dexterity":18,"wisdom":10,"strength":8,"intelligence":19,"constitution":14,])
-level 16
-hit_dice 16
-hit_dice_bonus 1
-stage 55
-emotes (["chance":20,"attack msg":({"%^MAGENTA%^Wizbert says%^RESET%^: Being attacked... definitely not good... definitely.","%^MAGENTA%^Wizbert says%^RESET%^: Must protect money, and spells, definitely spells.","%^MAGENTA%^Wizbert says%^RESET%^: Dying sucks!",}),"attack chance":20,"msg":({"%^MAGENTA%^Wizbert says%^RESET%^: Must get money, definitely money...","%^MAGENTA%^Wizbert says%^RESET%^: Spells are good, lots and lots of spells.","%^MAGENTA%^Wizbert says%^RESET%^: Must sell spells, definitely must sell spells... definitely spells.","%^MAGENTA%^Wizbert says%^RESET%^: Must count gold... 1224047 gold... square root is 1106.366577...","Wizbert paces around the room nervously.","Wizbert shakes his head while mumbling something","Wizbert counts his spells and gold.",}),])
-spells (["chance":90,"commands":({"color spray","hideous laughter","acid arrow","sleep","monster summoning 2",}),])
-thief_skill ([])
-body_type "human"
-charmed_int ([])
-offend_int ([])
-norm_int ([])
-Available ({"fireball","teleport","finger of death","powerword kill","monster summoning 2","light","chain lightning","conjure earth elemental","rope trick","armor","magic missile","color spray","detect magic","scorcher","burning hands","hideous laughter","ray of enfeeblement",})
-tmpstr "book"
-number 11
-spellnames (["fireball":36517,"teleport":58385,"finger of death":74765,"powerword kill":86840,"monster summoning 2":43606,"light":8461,"chain lightning":69430,"conjure earth elemental":60387,"rope trick":23074,"armor":6031,"magic missile":9044,"color spray":11215,"detect magic":9777,"scorcher":27252,"burning hands":5935,"hideous laughter":19944,"ray of enfeeblement":30704,])
-backing (["circe":921639003,"valen":921902781,"obsidian":921952570,"madsoul":921888704,"tristan":920821305,"vetri":920493027,"astalath":920955662,"hecklar":921856813,])
-backed (["harmony":921327585,"ator":921506628,"singer":920618899,"lenni":920835395,"valen":921902781,"amra":921357063,"melkor":921517117,"argon":920989963,"joker":920684475,"tam":921916059,"astalath":920955662,"kahlen":921018852,"gotha":921723173,"wenhok":921515401,"blaez":921737894,"silverleaf":921844179,"daelmas":920567336,"slore":921607493,"dissous":921343115,"obsidian":921952570,"madsoul":921888704,"fizban":920982789,"hecklar":921856813,"tristan":920821305,"renoir":921056975,"armad":920765310,"scheharezade":921827769,"russ":920632733,"mystic":921184892,"vetri":920493027,"thistle":921871512,"zak":921907280,"imdak":921942913,"circe":921639003,"manik":921134299,"ender":921565565,"kassandra":921802693,"jynx":920786304,"cyndre":921355709,"spinthrift":921053072,"duaran":921576289,"melgor":921665048,])

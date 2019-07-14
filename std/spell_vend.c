@@ -16,8 +16,8 @@
 
 #define SCROLL_PATH "/d/magic/scroll"
 #define LINE "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n"
-#define BACKUP_DIR "/d/magic/spellbook/backup_books"
-#define SAVE_DIR "/d/magic/spellbook/save"
+#define BACKUP_DIR "/d/save/spellbook/backup_books"
+#define SAVE_DIR "/d/save/spellbook/save"
 
 inherit MONSTER;
 
@@ -170,7 +170,7 @@ int __Buy(mixed str){
       TP->use_funds("gold",2000);
       write("%^GREEN%^You relinquish your book to "+query_cap_name()+".\n%^MAGENTA%^"+query_cap_name()+"%^RESET%^: I will have your spell book copied in twenty minutes. Come back then to <pickup spell book>");
       ob->save_me(BACKUP_DIR+"/"+TPQN+"_"+query_name()+".backup");
-      ob->save_me("/d/magic/spellbook/save_books/"+TPQN+"_"+query_name()+".backup");
+      ob->save_me("/d/save/spellbook/save_books/"+TPQN+"_"+query_name()+".backup");
       ob->remove();
       backing += ([ TPQN : time() ]);
       save_object(SAVE_DIR+"/"+query_name()+".spell_seller");

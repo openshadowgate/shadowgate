@@ -1,9 +1,0 @@
-#d/magic/comp_bag.c
-props ([])
-ob_data (["long":"	This is a small to medium-sized leather bag.  It isonly in this bag that you store the material componentsfor casting your spells.		To check what is in the bag type 'components'.	","id":({"componenter","bag","components bag","compx","vetri.comp",}),"value":0,"short":"A leather bag","cointype":"gold",])
-cap_name "Components bag"
-true_name "components bag"
-creator "/cmds/system/_clone"
-comp (["colored sand":978,"eyelash":996,"crane's feather":996,"water":991,"phosphorus":940,"bit of bone":999,"unit of water":100,"incense stick":996,"emerald":1,"owlfeather":998,"incense":100,"small candle":964,"gum arabic":996,"firefly":997,"spider web":83,"drop of blood":995,"tiny bag":964,"crystal":999,"phosphorescent moss":97,"pince of special dust":100,"rose petals":998,"pearl":998,"parchment":977,"corn extract":977,"pinch of special dust":97,"piece of iron":994,])
-comps ({"bit of bone","colored sand","corn extract","crane's feather","crystal","drop of blood","emerald","eyelash","firefly","gum arabic","incense","incense stick","owlfeather","parchment","pearl","phosphorescent moss","phosphorus","piece of iron","pince of special dust","pinch of special dust","rose petals","small candle","spider web","tiny bag","unit of water","water",})
-compid "vetri"

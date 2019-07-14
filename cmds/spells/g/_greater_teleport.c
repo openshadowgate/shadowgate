@@ -60,7 +60,7 @@ void spell_effect(int prof) {
       {
         if(!objectp(followers[i]))
           continue;
-        if(!present(followers[i],ETP))
+        if(!present(followers[i],environment(TP)))
           continue;
         presentparty += ({followers[i]});
       }

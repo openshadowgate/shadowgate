@@ -1,8 +1,0 @@
-#d/magic/comp_bag.c
-props ([])
-ob_data (["long":"This is a small to medium-sized leather bag.  It isonly in this bag that you store the material componentsfor casting your spells.To check what is in the bag type <components>.To put a component into the bag type:<put [component name] into components bag>To retrieve components from the bag type:<produce [quantity] [component name]>","value":0,"short":"A leather bag","condition":100,"cointype":"gold","id":({"componenter","bag","components bag","compx",}),])
-cap_name "Components bag"
-true_name "components bag"
-creator "/d/shadow/mon/wizbert#3729"
-comp (["sand":40,"thread":500,"vermilion":40,])
-comps ({"sand","thread","vermilion",})

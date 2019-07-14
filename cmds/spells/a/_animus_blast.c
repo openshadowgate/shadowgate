@@ -17,7 +17,8 @@ void create()
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^");
+To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
+To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");

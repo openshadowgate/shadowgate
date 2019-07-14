@@ -1,9 +1,0 @@
-#d/magic/comp_bag.c
-props ([])
-ob_data (["long":"	This is a small to medium-sized leather bag.  It isonly in this bag that you store the material componentsfor casting your spells.		To check what is in the bag type 'components'.	","id":({"componenter","bag","components bag","compx","tristan.comp",}),"value":0,"short":"A leather bag","cointype":"gold",])
-cap_name "Components bag"
-true_name "components bag"
-creator "/cmds/system/_clone"
-comp ([])
-comps ({})
-compid "tristan"

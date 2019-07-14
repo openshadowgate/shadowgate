@@ -75,9 +75,11 @@ void remove()
     int i;
     for(i=0;i<sizeof(mons);i++)
     {
-        if(objectp(mons[i])) { mons[i]->remove(); }
+        if(objectp(mons[i]))
+            mons[i]->remove();
     }
-    if(objectp(caster))caster->remove_property("raised");
+    if(objectp(caster))
+        caster->remove_property("raised");
     return ::remove();
 }
 
@@ -95,7 +97,7 @@ int poolsize(string str)
 
     pool=(int)caster->query_property("raised");
     if (pool)
-        tell_object(caster,"%^BOLD%^%^BLACK%^THERE ARE %^WHITE%^"+pool+"%^BLACK%^ POWERS OF UNDEAD UNDER YOUR COMMAND.%^RESET%^");
+        tell_object(caster,"%^BOLD%^%^BLACK%^YOUR UNDEAD POOL IS FILLED WITH %^WHITE%^"+pool+"%^BLACK%^ LEVELS.%^RESET%^");
     else
         tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^THERE IS NO DEAD THAT FOLLOWS %^BLACK%^Y%^BLACK%^O%^BLACK%^U%^RESET%^%^RESET%^");
 

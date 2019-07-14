@@ -1,45 +1,0 @@
-#d/newbie/mon/zabeth.c
-props (["no bump":1,"swarm":1,"no attack":1,"strength":"spells",])
-ob_data (["long":"%^BOLD%^Zabeth is an elderly human woman who has dedicated her life to the research of spells and the magic of the weave.  Her creamy white skin has become wrinkled with age and is rather thin, giving it the look of white parchment.  Though not an overly handsome woman, she is saved from being plain by high, graceful cheekbones and warm chestnut brown eyes.  Her dark brown hair is streaked with gray and pulled back into a bun at the base of her neck, though escaped tendrils of hair ring her face and soften her appearance.  She seems to love her work and is never found without a book in her hand and a small ink smudge on her cheek. %^RESET%^<help shop> will get you a list of shop commands.","short":"Zabeth, the mystical scribe","adreniline":0,"condition":100,"race":"human","id":({"zabeth","clerk","shop keeper","shopkeeper",}),"max staff":120,"aggressive":0,"last say":"I will have your spell book copied in twenty minutes. Come back then to <pickup spell book>","youth weapon":"staff",])
-cap_name "Zabeth"
-true_name "Zabeth"
-creator "/cmds/creator/_renew"
-player_data (["general":(["alignment":2,"extra_hp":0,"max_hp":77,"max_sp":1,"hp":77,"experience":2800,"sp":1,]),])
-magic (["points":192,"max points":240,])
-severed ([])
-healing ([])
-limbs ({"neck","right foot","left hand","right leg","left foot","torso","left leg","right arm","head","waist","right hand","left arm",})
-all_my_fingers 5
-ac -1
-heal_rate 2
-classes ({"mage",})
-posed "mage"
-skills (["staff":50,])
-guilds (["mage":16,])
-mlevels (["mage":16,])
-toAttack -1
-wimpydir "out"
-attackers ({})
-hunters ({})
-combat_vars ([])
-combat_messages (["bound":0,"unconscious":0,"tripped":0,"gagged":0,])
-combat_counters (["bound":0,"unconscious":0,"tripped":0,"gagged":0,])
-choice "common"
-ok_to_heal 1361
-player_age 720
-gender "female"
-stats (["charisma":13,"dexterity":18,"wisdom":10,"strength":8,"intelligence":19,"constitution":14,])
-level 16
-hit_dice 16
-hit_dice_bonus 1
-emotes (["chance":20,"attack msg":({"Wizbert says: Being attacked... definitely not good... definitely.","Wizbert says: Must protect money, and spells, definitely spells.","Wizbert says: Dying sucks!",}),"attack chance":20,"msg":({"Wizbert says: Must get money, definitely money...","Wizbert says: Spells are good, lots and lots of spells.","Wizbert says: Must sell spells, definitely must sell spells... definitelyspells.","Wizbert says: Must count gold... 2929767 gold... square root is1711.656250...","Wizbert paces around the room nervously.","Wizbert shakes his head while mumbling something","Wizbert counts his spells and gold.",}),])
-spells (["chance":90,"commands":({"color spray","hideous laughter","acid arrow","sleep","monstersummoning 2",}),])
-thief_skill ([])
-body_type "human"
-charmed_int ([])
-offend_int ([])
-norm_int ([])
-Available ({"magic missile","armor","identify",})
-tmpstr "book"
-spellnames (["magic missile":7398,"armor":10101,"identify":7287,])
-backing ([])
