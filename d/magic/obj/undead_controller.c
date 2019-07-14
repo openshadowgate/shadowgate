@@ -55,8 +55,8 @@ int clean_mons()
         if(!objectp(mons[i])) { continue; }
         temp += ({ mons[i] });
     }
-    if(!sizeof(temp)) 
-    { 
+    if(!sizeof(temp))
+    {
         if(objectp(TO)) { TO->remove(); }
         return 1;
     }
@@ -77,7 +77,7 @@ void remove()
     {
         if(objectp(mons[i])) { mons[i]->remove(); }
     }
-    caster->remove_property("raised");
+    if(objectp(caster))caster->remove_property("raised");
     return ::remove();
 }
 
@@ -86,7 +86,7 @@ void init()
     ::init();
     add_action("cmd","command");
     add_action("dismiss","dismiss");
-    add_action("poolsize","poolsize");    
+    add_action("poolsize","poolsize");
 }
 
 int poolsize(string str)
@@ -110,16 +110,16 @@ int cmd(string str)
 
     if(clean_mons()) { return 0; }
 
-    if(!str) 
+    if(!str)
         return notify_fail("%^RESET%^%^BOLD%^%^BLACK%^PROVIDE YOUR DEMMANDS%^RESET%^%^RESET%^");
 
-    if(sscanf(str, "%s to %s", who, what) != 2) 
+    if(sscanf(str, "%s to %s", who, what) != 2)
         return notify_fail("%^RESET%^%^BOLD%^%^BLACK%^YOU MUST TELL WHAT TO DO%^RESET%^%^RESET%^");
-   
+
     if(who != "undead")
         return 0;
-   
-    if(what[0..3] == "kill") 
+
+    if(what[0..3] == "kill")
     {
         flag = 1;
         if(sscanf(what, "kill %s",who) == 1)
@@ -133,8 +133,8 @@ int cmd(string str)
             }
         }
     }
-   
-    if(what == "follow")   
+
+    if(what == "follow")
     {
         flag = 1;
         for(i=0;i<sizeof(mons);i++)
@@ -161,11 +161,11 @@ int cmd(string str)
     }
     return 1;
 }
-	
+
 int dismiss(string str)
 {
     int i;
-   
+
     if(!str || str != "undead")
         return 0;
     tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^THE SOULS %^BLACK%^R%^BLACK%^E%^BLACK%^J%^BLACK%^O%^BLACK%^I%^BLACK%^C%^BLACK%^E%^BLACK%^ IN %^BLACK%^F%^BLACK%^R%^BLACK%^E%^BLACK%^E%^BLACK%^D%^BLACK%^O%^BLACK%^M%^RESET%^%^RESET%^");
