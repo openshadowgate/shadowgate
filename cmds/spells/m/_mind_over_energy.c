@@ -83,13 +83,13 @@ void spell_effect(int prof) {
 void dest_effect(){
     if(objectp(caster)){
        switch(mytype){
-          case "fiendish": caster->set_resistance("fire",-1*mylevel);
-                           caster->set_resistance("electricity",-1*mylevel);
-                           caster->set_resistance("sonic",-1*mylevel);
+          case "fiendish": caster->set_resistance("fire",-mylevel);
+                           caster->set_resistance("electricity",-mylevel);
+                           caster->set_resistance("negative energy",-mylevel);
                            break;
-          default: caster->set_resistance("cold",-1*mylevel);
-                   caster->set_resistance("acid",-1*mylevel);
-                   caster->set_resistance("sonic",-1*mylevel);
+          default: caster->set_resistance("cold",-mylevel);
+                   caster->set_resistance("acid",-mylevel);
+                   caster->set_resistance("sonic",-mylevel);
                    break;
        }
        caster->set_property("castspellresist",-1);
