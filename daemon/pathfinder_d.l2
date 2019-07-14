@@ -430,7 +430,7 @@ void report(string str){
 //  if (objectp(luj)){
 //    tell_object(luj, "%^GREEN%^" + str);
 //  }
-//  "/daemon/reporter_d"->report("lujke", str);
+  "/daemon/reporter_d"->report("lujke", str);
 }
 
 varargs object find_waystation(object startroom, string destination,int distance, string * nogorooms){
