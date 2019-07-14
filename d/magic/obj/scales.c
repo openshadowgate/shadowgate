@@ -35,8 +35,10 @@ void init() {
     }
     if (living(ETO))
     {
+        ETO->equip_armour_to_limb(TO,TO->query_limbs());
+        TO->run_item_bonuses("equip",ETO,TO->query_item_bonuses());        
         TO->set_worn(ETO);
-        TO->set_actual_limbs(ETO);
+        TO->set_actual_limbs(ETO->query_limbs());
     }
     if (living(TP) && !owner) owner = TPQN;
 }

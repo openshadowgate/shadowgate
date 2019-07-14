@@ -64,9 +64,10 @@ void spell_effect(int prof)
     time = 500 + (clevel * 50);    
     scales = new("/d/magic/obj/scales");
     enc = clevel / 8;
-    if(enc > 4) enc = 4;
-    scales->set_ac(enc);
     mr = enc * 5;
+    if(enc > 4)
+        enc = 4;
+    scales->set_ac(enc);
     scales->set_mr(mr);
     scales->set_owner(target->query_name());
     scales->set_property("spell", TO);
