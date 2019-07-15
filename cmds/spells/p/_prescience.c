@@ -55,10 +55,13 @@ void spell_effect(int prof)
 
     mybonus = clevel / 5;
 
-    if(mybonus < 4) mybonus = 4;
-    if(mybonus > 8) mybonus = 8;
+    if(mybonus < 4)
+        mybonus = 4;
+    if(mybonus > 10)
+        mybonus = 10;
 
-    if(FEATS_D->usable_feat(caster,"improved prescience")) { mybonus += clevel / 5; }
+    if(FEATS_D->usable_feat(caster,"improved prescience"))
+        mybonus += clevel / 6;
 
     target->add_attack_bonus(mybonus);
     target->add_damage_bonus(mybonus);
