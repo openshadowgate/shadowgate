@@ -11,7 +11,7 @@
 "sapphire dust", "sesame seeds", "silver pin", "small candle", "small drum", "small silver mirror",\
 "snakes tongue", "soft clay", "spider", "spider web", "sulfur", "sunstone", "talc", "tiny bag",\
 "tiny hearing trumpet", "vermilion", "water", "white feather", "will o wisp essence", "wing feather", "zinc",\
-"smoky quartz", "rose petals", "slug", "lodestone"\
+"smoky quartz", "rose petals", "slug", "lodestone", "mini shovel"\
 })
 
 #define PSI_COMPONENTS ({ \
