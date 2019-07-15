@@ -10,8 +10,8 @@ inherit MONSTER;
 object caster, follower;
 void self_destruct();
 void set_scry_power(int x);
-int query_scry_power();
-object query_mycaster();
+void query_scry_power();
+void query_mycaster();
 void query_caster();
 
 int power;

@@ -887,7 +887,7 @@ int damage_done(object attacker, object weap, int damage, int isranged)
                 }
                 if(FEATS_D->usable_feat(attacker, "opportunity strikes"))
                 {
-                    prof = to_int(prof*1.85);
+                    prof = to_int(prof*1.75);
                 }
             }
         }
