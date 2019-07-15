@@ -1,56 +1,41 @@
-%^BOLD%^%^GREEN%^DEXTERITY (DEX)
-%^RESET%^Dexterity measures hand-eye coordination, agility, 
-reflexes, and balance. This ability is the most 
-important one for rogues, but it's also high on the 
-list for characters who typically wear light or 
-medium armor or no armor at all, and for anyone who 
-wants to be a skilled archer.
+﻿%^BOLD%^%^GREEN%^DEXTERITY (DEX)
+%^RESET%^Dexterity measures hand-eye coordination, agility, reflexes, and balance. This ability is the most important one for rogues, but it's also high on the list for characters who typically wear light or medium armor or no armor at all, and for anyone who wants to be a skilled archer.
 
-To further explain what defines the Dexterity score, 
-it can be broken down into:
+To further explain what defines the Dexterity score, it can be broken down into:
 
-%^BOLD%^%^GREEN%^Aim - A character with a high Aim might be an expert 
-	%^BOLD%^%^GREEN%^marksman or a sleight-of-hand artist.
+%^BOLD%^%^GREEN%^Aim - A character with a high Aim might be an expert marksman or a sleight-of-hand artist.
 
-%^RESET%^%^GREEN%^Balance - A character possessing a high Balance may 
-	%^GREEN%^be an acrobat or a tightrope walker.
+Balance - A character possessing a high Balance may be an acrobat or a tightrope walker.
 
 %^RESET%^You apply your character's Dexterity modifier to:
-
 %^BOLD%^%^GREEN%^* Ranged attack rolls, including those for attacks made 
-  %^BOLD%^%^GREEN%^with bows, crossbows, throwing axes, and other ranged weapons.
-%^RESET%^%^GREEN%^* Armor Class (AC), provided that the character can react 
-  %^GREEN%^to the attack.
-%^BOLD%^%^GREEN%^* Some NWPS use Dexterity as a prime ability score
+with bows, crossbows, throwing axes, and other ranged weapons.
+
+%^RESET%^%^GREEN%^* Armor Class (AC), provided that the character can react to the attack and are not wearing armor that would preclude you from receiving it.
+
+%^BOLD%^%^GREEN%^* Certain skills such as Athletics, Stealth, and Thievery.
+
+%^RESET%^%^GREEN%^* Your Reflex saving throw.
+
 
 %^RESET%^Stat Scores
 
-1-3 %^GREEN%^Very Clumsy%^RESET%^- Walking across the room causes you to 
-    	trip and fall. You lack any coordination.
-4-6 %^BOLD%^%^GREEN%^Clumsy%^RESET%^ - You have a very hard time to keep from 
-    	tripping and falling. Your coordination leaves much to 
-    	be desired. You often miss, horribly, when using missile weapons.
-7-9 %^GREEN%^Below Average %^RESET%^- You trip and fall often, finding it hard 
-    	to stay balanced. Such things as tightrope walking, dancing,
-    	and even acrobatics are very difficult (if not impossible) 
-    	for you to learn.
-10-12 %^BOLD%^%^GREEN%^Average%^RESET%^ - The "standard" dexterity of an adult male and female
-13-14 %^GREEN%^Above Average%^RESET%^ - You have some natural grace with balance 
-    	and coordination. You can excel at simpler feats of dexterity, 
-    	like basic dance steps, or being able sometimes hit the 
-    	bull's-eye of a target.
-15-16 %^BOLD%^%^GREEN%^Nimble%^RESET%^ - You have a sense of natural balance and grace. 
-    	You find ease in being able to coordinate your movements and 
-    	hands together. Acrobatic feats, dancing, even ranged weapons 
-    	you are able to pick up on with a few practice lessons.
-17 - %^GREEN%^Acrobatic %^RESET%^- Your feats of dexterity often leaves others in 
-    	awe. You are able to easily perform acrobatic feats, dancing 
-    	seems natural to you, and people often refer to you as being 
-	very coordinated.
-18 - %^BOLD%^%^GREEN%^Lightning %^RESET%^- Your dexterity is at its peak. Your coordination, 
-    	balance and reflexes blend in such a way that you make 
-    	springing off the wall, flipping through the air, and then 
-    	landing on your left hand seem easy.
-19 + %^GREEN%^Legendary Dexterity%^RESET%^ - Your dexterity is the stuff myths and 
-    	legends are made of.  Others might think there is elven blood in
-	your family, or worse drow!
+2-3: %^BOLD%^%^GREEN%^Graceless%^RESET%^- The fact you can stand still on a perfectly level floor and not trip across your own feet is a miracle from the gods themselves.
+
+4-5: %^GREEN%^Very Clumsy%^RESET%^- Walking across the room causes you to trip and fall. You lack any coordination.
+
+6-7: %^BOLD%^%^GREEN%^Clumsy%^RESET%^ - You have a very hard time to keep from tripping and falling. Your coordination leaves much to be desired. You often miss, horribly, when using missile weapons.
+
+8-9: %^GREEN%^Below Average %^RESET%^- You trip and fall often, finding it hard to stay balanced. Such things as tightrope walking, dancing, and even acrobatics are very difficult (if not impossible) for you to learn.
+
+10-11: %^BOLD%^%^GREEN%^Average%^RESET%^ - The "standard" dexterity of an adult male and female
+
+12-13: %^GREEN%^Above Average%^RESET%^ - You have some natural grace with balance and coordination. You can excel at simpler feats of dexterity, like basic dance steps, or being able sometimes hit the bull's-eye of a target.
+
+14-15: %^BOLD%^%^GREEN%^Nimble%^RESET%^ - You have a sense of natural balance and grace. You find ease in being able to coordinate your movements and hands together. Acrobatic feats, dancing, even ranged weapons you are able to pick up on with a few practice lessons.
+
+16-17:  %^GREEN%^Acrobatic %^RESET%^- Your feats of dexterity often leaves others in awe. You are able to easily perform acrobatic feats, dancing seems natural to you, and people often refer to you as being very coordinated.
+
+18-19: %^BOLD%^%^GREEN%^Lightning %^RESET%^- Your dexterity is at its peak. Your coordination, balance and reflexes blend in such a way that you make springing off the wall, flipping through the air, and then landing on your left hand seem easy.
+
+20+: %^GREEN%^Legendary Dexterity%^RESET%^ - Your dexterity is the stuff myths and legends are made of.  Others might think there is elven blood in your family, or worse drow!

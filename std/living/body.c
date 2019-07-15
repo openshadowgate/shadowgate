@@ -789,12 +789,10 @@ int query_ac()
 
     if(!userp(TO) && !TO->query_property("full ac")) { return monster_ac; }
     myac = (ac_bonus + EQ_D->gear_bonus(TO, "armor bonus"));
-/*Stuff for barbarian unarmored defense - Octothorpe 1/14/16*/
     if(FEATS_D->usable_feat(TO,"unarmored defense") && TO->is_ok_armour("barb"))
-        myac += 5;
+        myac += 6;
     if(TO->is_class("monk"))
         myac += (int)"/daemon/bonus_d.c"->query_stat_bonus(TO, "wisdom");
-   
    if(FEATS_D->usable_feat(TO,"indomitable")) myac += 2;
    if(FEATS_D->usable_feat(TO,"mobility") && !TO->query_paralyzed() && 
    !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief")) myac += 4;

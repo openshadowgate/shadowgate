@@ -3,17 +3,19 @@
 
 Intelligence can be divided into:
 
-%^BOLD%^%^BLUE%^Knowledge - This is a measurement of the character's educational experiences-whether in a school or on the streets, his grasp of languages, and his memory capacity. A character with a high Knowledge can speak many languages, knows something about several subjects, and can remember the slightest detail of a past event.
+%^BOLD%^%^BLUE%^Knowledge - This is a measurement of the character's educational experiences-whether in a school or  on the streets, his grasp of languages, and his memory capacity. A character with a high Knowledge can speak many languages, knows something about  several subjects, and can remember the slightest detail of a past event.
 
 %^RESET%^%^BLUE%^Reason - This defines how well a character handles new information. A character with a high Reason would be good at solving riddles and puzzles, and would be talented at using deductive, logical thinking.
 
 %^RESET%^You apply your character's Intelligence modifier to:
 
 %^BOLD%^%^BLUE%^* The number of languages your character knows at the start of the game.
-%^RESET%^%^BLUE%^* You add your intelligence bonus to Academics and Spellcraft skills.
+%^RESET%^%^BLUE%^* You add your intelligence bonus to Academics, Healing, and Spellcraft skills.
 %^BOLD%^%^BLUE%^* INT is very important for wizards, psions, and psywarriors, as the more powerful spells/powers require a minimum to even learn and use.
 %^RESET%^%^BLUE%^* Mages get bonus spells based on their Intelligence stat.
 %^BOLD%^%^BLUE%^* Psions and psywarriors gain extra power points based on their Intelligence stat.
+
+%^RESET%^%^BLUE%^* The Academics and Spellcraft skills.
 
 %^RESET%^An animal has an Intelligence score of 1 or 2. 
 A creature of humanlike intelligence has a score of at least 3.
@@ -34,6 +36,6 @@ Stat Scores
 
 16-17: %^BLUE%^Brilliant%^RESET%^ - Your brilliance leaves others often astounded or jealous. You are able to pick up on new languages with ease and could be considered a master in many fields of knowledge (such as those mentioned above or plant lore, demon lore, undead lore, a history of warfare).
 
-18-19: %^BOLD%^%^BLUE%^Genius%^RESET%^ - You are a true genius. You can solve complex riddles and puzzles in your free time for fun. You have a wide range of subjects that you can recite detailed information about. Some might consider you a sage in a few fields, and seek you out for your brilliance.
+18-19: %^BOLD%^%^BLUE%^Genius%^RESET%^ - You are a true genius. You can solve complex riddles and puzzles in your free time for fun. You have a wide range of subjects that you can recite detailed information about. Some might consider you a sage in a few fields, and seek you out for  your brilliance.
 
-20+: %^BLUE%^Legendary Intelligence%^RESET%^- Your intelligence is the stuff legends are made of. People are left in awe at (or perhaps even a bit spooked) just how smart you are.
+20+: %^BLUE%^Legendary Intelligence%^RESET%^ - Your intelligence is the stuff legends are made of. People are left in awe at (or perhaps even a bit spooked) just how smart you are.

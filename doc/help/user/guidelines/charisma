@@ -1,4 +1,4 @@
-%^MAGENTA%^CHARISMA (CHA)
+﻿%^MAGENTA%^CHARISMA (CHA)
 %^RESET%^Charisma measures a character's force of personality, persuasiveness, personal magnetism, ability to lead, and physical attractiveness. This ability represents actual strength of personality, not merely how one is perceived by others in a social setting. Charisma is most important for paladins and bards. It is also important for clerics, in being able to lead their church/faith and in preaching.
 
 Charisma can be divided into:
@@ -10,9 +10,8 @@ Charisma can be divided into:
 %^RESET%^You apply your character's Charisma modifier to:
 
 %^MAGENTA%^* Aggressive Mobs, some mobs will ignore a character with a high charisma score.
-%^BOLD%^%^MAGENTA%^* Checks that represent attempts to influence others.
-%^RESET%^%^MAGENTA%^* Charisma affects if you get a discount or a mark up in price from shop keepers.%^RESET%^
-%^BOLD%^%^MAGENTA%^* The spellcasting abilities of sorcerers and bards is based off of Charisma.
+%^BOLD%^%^MAGENTA%^* The spellcasting abilities of sorcerers, bards, and warlocks is based off of Charisma.
+%^RESET%^%^MAGENTA%^* The Influence skill.
 
 Stat Scores
 
@@ -28,7 +27,7 @@ Stat Scores
 
 14-15: %^BOLD%^%^MAGENTA%^Friendly%^RESET%^ - You have a certain spark that draws people to you. Others want to get to know more about you, finding you rather personable. You can usually lead or command a small group, using your persuasiveness to sway them, though a large group you often struggle with. Your appearance could be described as "pretty/cute".
 
-16-17: %^MAGENTA%^Charismatic%^RESET%^ - You find lots of people are drawn to you, and seem to want to be your friend or even in your company. You find it easy to lead or command a group of people, swaying them with your charismatic presence to your side. Your appearance could be described as "handsome/beautiful"
+16-17: %^MAGENTA%^Charismatic%^RESET%^- You find lots of people are drawn to you, and seem to want to be your friend or even in your company. You find it easy to lead or command a group of people, swaying them with your charismatic presence to your side. Your appearance could be described as "handsome/beautiful"
 
 18-19: %^BOLD%^%^MAGENTA%^Blinding %^RESET%^- When you walk into a populated area, you find that people (usually in large number or clusters) are drawn to you. You find it extremely easy to lead or command people, even to the point of leading a great army! You can sway others with your charm to your side with little difficulty at all. Your apperance could be described as "breathtaking/alluring".
 

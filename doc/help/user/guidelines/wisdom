@@ -1,80 +1,37 @@
-%^CYAN%^WISDOM (WIS)
-%^RESET%^Wisdom describes a character's willpower, common 
-sense, perception, and intuition. While Intelligence 
-represents one's ability to analyze information, Wisdom 
-represents being in tune with and aware of one's surroundings. 
-Wisdom is the most important ability for clerics and druids, 
-and it is also important for paladins and rangers. If you 
-want your character to have acute senses, put a high score 
-in Wisdom. Every creature has a Wisdom score.
+﻿%^CYAN%^WISDOM (WIS)
+%^RESET%^Wisdom describes a character's willpower, common sense, perception, and intuition. While Intelligence represents one's ability to analyze information, Wisdom represents being in tune with and aware of one's surroundings. Wisdom is the most important ability for clerics and druids, and it is also important for paladins and rangers. If you want your character to have acute senses, put a high score in Wisdom. Every creature has a Wisdom score.
 
 Wisdom can be broken down into:
 
-%^CYAN%^Intuition - A character with a high intuition likely would be 
-	%^CYAN%^very perceptive and good at making educated guesses, 
-	%^CYAN%^and would be difficult to fool or lie to effectively.
+%^CYAN%^Intuition - A character with a high intuition likely would be very perceptive and good at making educated guesses, and would be difficult to fool or lie to effectively.
 
-%^BOLD%^%^CYAN%^Willpower - This gauges a character's strength of will, 
-	%^BOLD%^%^CYAN%^ability to resist magical forces, and sense of 
-	%^BOLD%^%^CYAN%^commitment to a cause. A character with a high 
-	%^BOLD%^%^CYAN%^Willpower would be difficult to harm with mind-affecting
-	%^BOLD%^%^CYAN%^magic spells, could be quite stubborn, 
-	%^BOLD%^%^CYAN%^and would resist interrogation.
+%^BOLD%^%^CYAN%^Willpower - This gauges a character's strength of will, ability to resist magical forces, and sense of commitment to a cause. A character with a high Willpower would be difficult to harm with mind-affecting magic spells, could be quite stubborn, and would resist interrogation.
 
 %^RESET%^
 You apply your character's Wisdom modifier to:
 
-%^CYAN%^* Saving throws vs mental attacks
-%^BOLD%^%^CYAN%^* Some NWPS require a minimum WIS score
+%^CYAN%^* Your will save.
+%^BOLD%^%^CYAN%^* The Dungeoneering, Perception, Rope Use, and Survival skills.
+%^CYAN%^* Monks add their wisdom modifier to their AC provided they wear no armor.
 
-%^RESET%^Wisdom is very important to priests. They get bonus spells 
-per level with higher wisdom scores. The higher spell levels 
-require a minimum wisdom to be able to even cast those spells.
+%^RESET%^Wisdom is very important to priests and druids. They get bonus spells per level with higher wisdom scores. The higher spell levels require a minimum wisdom to be able to even cast those spells.  Wisdom is less important to rangers and paladins, who only need a score of 14 in order to be able to cast all of their spells.
 
 Stat Scores
 
-1-3 %^CYAN%^Foolish %^RESET%^- You were the reason why the term a Fool and his 
-	money are soon parted was invented. It's almost laughable how 
-    	easy it is to tempt you to do something. The idea of even 
-    	torture often makes you black out, and you easily give up 
-    	any information, in detail, to those interrogating you.
-4-6 %^BOLD%^%^CYAN%^Naive%^RESET%^ - You are easily swindled, and very naive about the 
-    	world. Someone could tell you the sky is bright green and 
-    	the clouds are actually fat elves floating in the sky, and 
-    	you would believe them. You have no mental tolerance for 
-    	torture or interrogation.
-7-9 %^CYAN%^Below Average %^RESET%^- You tend to lack any "common sense", meaning 
-    	you do silly or dangerous things often, that tend to backfire 
-    	on you. It's rather easy for someone to lie to you, though not
-    	to the extent of a naive person.
-10-12 %^BOLD%^%^CYAN%^Average%^RESET%^ - The "standard" wisdom of an adult male and female
-13-14 %^CYAN%^Above Average%^RESET%^ - You posses a fair amount of common sense. It's 
-	more difficult for people to lie or swindle you, but still 
-	possible if they have a believable tale. You have some 
-	slight resistance to torture, though you could never hold out. 
-	Interrogations might take a few minutes or even an hour to get 
-	you to crack.
-15-16 %^BOLD%^%^CYAN%^Clever%^RESET%^ - Your common sense and intuition often helps you out 
-	when you need it most. It's more difficult for people to lie to 
-	you, and you are often not swindled when dealing with a merchant. 
-	You have a slight resistance to torture, able to mentally endure 
-	the pain for awhile before screaming out. Interrogations take a 
-	few hours to get you to crack.
-17 - %^CYAN%^Wise%^RESET%^- Others often come to you for advice on every day life, for 
-	your wisdom shines forth. Your common sense and intuition are 
-	strong and solid, making it extremely difficult for others to lie 
-	to you. Merchants often run the other way when they see you coming 
-	to market, for they find you almost impossible to swindle. You are 
-	able to mentally hold out in torture for a great length of time. 
-	When interrogated, your willpower makes it extremely difficult for 
-	them to make you talk.
-18 - %^BOLD%^%^CYAN%^Sage %^RESET%^- You have an "iron will", meaning it is damn hard to get past 
-	you. Your common sense and intuition are extremely strong and solid, 
-	aiding you in everday life. It's nearly impossible for others to lie or 
-	swindle you. When tortured, your iron allows you to mentally resist 
-	much of the pain, keeping you from crying out. When interrogated, 
-	your iron will makes it supremely difficult for others to make you 
-	talk. Others might consider you "stubborn".
-19 + %^CYAN%^Legendary Wisdom %^RESET%^- Your wisdom and willpower is as solid as adamantium
-	or diamond. Your will is nearly impossible to break, and you can spot 
-	lies a mile away often.  Your Wisdom is the stuff of legends and myths
+4-5: %^CYAN%^Foolish %^RESET%^- You were the reason why the term a Fool and his money are soon parted was invented. It's almost laughable how easy it is to tempt you to do something. The idea of even torture often makes you black out, and you easily give up any information, in detail, to those interrogating you.
+
+6-7: %^BOLD%^%^CYAN%^Naive%^RESET%^ - You are easily swindled, and very naive about the world. Someone could tell you the sky is bright green and the clouds are actually fat elves floating in the sky, and you would believe them. You have no mental tolerance for torture or interrogation.
+
+8-9: %^CYAN%^Below Average %^RESET%^- You tend to lack any "common sense", meaning you do silly or dangerous things often, that tend to backfire on you. It's rather easy for someone to lie to you, though not to the extent of a naive person.
+
+10-11: %^BOLD%^%^CYAN%^Average%^RESET%^ - The "standard" wisdom of an adult male and female
+
+12-13: %^CYAN%^Above Average%^RESET%^ - You posses a fair amount of common sense. It's more difficult for people to lie or swindle you, but still possible if they have a believable tale. You have some slight resistance to torture, though you could never hold out. Interrogations might take a few minutes or even an hour to get you to crack.
+
+14-15: %^BOLD%^%^CYAN%^Clever%^RESET%^ - Your common sense and intuition often helps you out when you need it most. It's more difficult for people to lie to you, and you are often not swindled when dealing with a merchant. You have a slight resistance to torture, able to mentally endure the pain for a while before screaming out. Interrogations take a few hours to get you to crack.
+
+16-17: %^CYAN%^Wise%^RESET%^- Others often come to you for advice on every day life, for your wisdom shines forth. Your common sense and intuition are strong and solid, making it extremely difficult for others to lie to you. Merchants often run the other way when they see you coming to market, for they find you almost impossible to swindle. You are able to mentally hold out in torture for a great length of time. When interrogated, your willpower makes it extremely difficult for them to make you talk.
+
+18-19: %^BOLD%^%^CYAN%^Sage %^RESET%^- You have an "iron will", meaning it is damn hard to get past you. Your common sense and intuition are extremely strong and solid, aiding you in everday life. It's nearly impossible for others to lie or swindle you. When tortured, your iron allows you to mentally resist much of the pain, keeping you from crying out. When interrogated, your iron will makes it supremely difficult for others to make you talk. Others might consider you "stubborn".
+
+20+: %^CYAN%^Legendary Wisdom %^RESET%^- Your wisdom and willpower is as solid as adamantium or diamond. Your will is nearly impossible to break, and you can spot lies a mile away often.  Your Wisdom is the stuff of legends and myths
