@@ -4,22 +4,22 @@ Character Improvement Tax (Exp Tax)
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-ShadowGate provides you with a wide range of abilities and options.  Some changes to your character are costly and incur a %^RESET%^%^CYAN%^Character Improvement Tax (Exp Tax)%^RESET%^.  These changes include:
+ShadowGate provides you with a wide range of abilities and options. Some changes to your character are costly and incur a %^RESET%^%^CYAN%^Character Improvement Tax (Exp Tax)%^RESET%^. These changes include:
 
-     <>  Selecting a new general feat.
-     <>  Removing a feat from your list of known feats.
-     <>  Rearranging your stat points.
-     <>  Removing points from one skill to free them up for use elsewhere.
-     <>  Crafting magic potions, scrolls, gems and items also incur a tax.
+  * Selecting a new general feat.
+  * Removing a feat from your list of known feats.
+  * Rearranging your stat points.
+  * Removing points from one skill to free them up for use elsewhere.
+  * Crafting magic potions, scrolls, gems and items also incur a tax.
 
-The tax represents both the time and effort it takes to learn a new ability and the toll on your soul that comes with imbuing items with magic.  For as long as you have this tax, part of the experience you gain from any source will go to repaying it.  If you gain 1000 experience points, for instance, 500 or more will go towards the tax, while the remaining points will go towards gaining your next level.
+The tax represents both the time and effort it takes to learn a new ability and the toll on your soul that comes with imbuing items with magic. For as long as you have this tax, part of the experience you gain from any source will go to repaying it. If you gain 1000 experience points, for instance some part of it, 500 or more will go towards the tax, while the remaining points will go towards gaining your next level. How much goes towards exp tax fluctuates, but is never less than 50% of total experience gained.
 
 To see your current Character Improvement Tax, type %^ORANGE%^<score>%^RESET%^ and look for %^CYAN%^Exp Tax%^RESET%^.
 
 You can set the Character Improvement Tax to anything between 50 - 100 by using the command above. If set to 100, all of your experience will go towards paying off the tax. 
 
-There is a limit to how high an exp tax you can have at each level.  If any of the above actions would cause you to exceed this limit, you will be notified of this and required to work off some of the tax first.
+There is a limit to how high an exp tax you can have at each level. If any of the above actions would cause you to exceed this limit, you will be notified of this and required to work off some of the tax first.
 
-%^CYAN%^SEE ALSO%^RESET%^  
+%^CYAN%^SEE ALSO%^RESET%^ 
 
 flag, feats, skills, stats, death 

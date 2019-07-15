@@ -101,14 +101,14 @@ int read_list(string str)
            if(wizardp(TP)) {
                 questlist += "%^BOLD%^%^GREEN%^%^ ("+file+")%^RESET%^";
            }
-           questlist += "\n  before "+ctime(quests[item][4])+" (MST) for "+exp+" experience.\n";
+           questlist += "\n";
         }
         else if(which =="room"){
            questlist += "Retrieve the "+item+"%^RESET%^ last seen in\n  "+name;
            if(wizardp(TP)) {
                 questlist += " %^BOLD%^%^GREEN%^("+file+")%^RESET%^";
            }
-           questlist += "\n  before "+ctime(quests[item][4])+" (MST) for "+exp+" experience.\n";
+           questlist += "\n";
         }
     }
     questlist += "\n";
