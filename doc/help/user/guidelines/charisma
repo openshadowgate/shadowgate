@@ -1,79 +1,39 @@
 %^MAGENTA%^CHARISMA (CHA)
-%^RESET%^Charisma measures a character's force of personality, 
-persuasiveness, personal magnetism, ability to lead, and 
-physical attractiveness. This ability represents actual 
-strength of personality, not merely how one is perceived 
-by others in a social setting. Charisma is most important 
-for paladins and bards. It is also important for clerics, 
-in being able to lead their church/faith and in preaching.
+%^RESET%^Charisma measures a character's force of personality, persuasiveness, personal magnetism, ability to lead, and physical attractiveness. This ability represents actual strength of personality, not merely how one is perceived by others in a social setting. Charisma is most important for paladins and bards. It is also important for clerics, in being able to lead their church/faith and in preaching.
 
 Charisma can be divided into:
 
-%^MAGENTA%^Leadership - A character with a high Leadership often 
-	%^MAGENTA%^may be a group's leader, or at least its spokesman. Generals 
-	%^MAGENTA%^and those who can calm or incite a mob with a few words all 
-	%^MAGENTA%^have good Leadership scores.
+%^MAGENTA%^Leadership - A character with a high Leadership often may be a group's leader, or at least its spokesman. Generals and those who can calm or incite a mob with a few words all have good Leadership scores.
 
-%^BOLD%^%^MAGENTA%^Appearance - This determines the physical presence and 
-	%^BOLD%^%^MAGENTA%^attractiveness of the character. A character with a 
-	%^BOLD%^%^MAGENTA%^high Appearance score would be handsome or beautiful, 
-	%^BOLD%^%^MAGENTA%^perhaps even famous for outstanding looks (such as Helen of Troy).
+%^BOLD%^%^MAGENTA%^Appearance - This determines the physical presence and attractiveness of the character. A character with a high Appearance score would be handsome or beautiful, perhaps even famous for outstanding looks (such as Helen of Troy).
 
 %^RESET%^You apply your character's Charisma modifier to:
 
 %^MAGENTA%^* Aggressive Mobs, some mobs will ignore a character with a high charisma score.
 %^BOLD%^%^MAGENTA%^* Checks that represent attempts to influence others.
-%^RESET%^%^MAGENTA%^* Charisma affects if you get a discount or a mark up in price from shop keepers.
-%^RESET%^
+%^RESET%^%^MAGENTA%^* Charisma affects if you get a discount or a mark up in price from shop keepers.%^RESET%^
+%^BOLD%^%^MAGENTA%^* The spellcasting abilities of sorcerers and bards is based off of Charisma.
+
 Stat Scores
 
-1-3 %^MAGENTA%^Garish%^RESET%^ - You lack any social graces or personal magnetism. 
-    	Your appearance would be classified as horrific, frightening many men, 
-	women and children. Some people might even chase you out of town!
-4-6 %^BOLD%^%^MAGENTA%^Uncooth%^RESET%^ - Your social graces and personal magnetism leave much 
-    	to be desired. In social settings you exhibit a lack of manners. 
-    	Your appearance is ghastly, frightening many. Inns sometimes lock 
-    	their doors when they see you coming.
-7-9 %^MAGENTA%^Below Average%^RESET%^ - You tend to exhibit poor manners. Others often 
-    	ignore you when you try to lead them. Your personal magnetism 
-    	is low, making it hard for you to find friends. Your appearance 
-    	could be classified as homely, very plain, or even some deformity 
-    	or body modification has altered in a rather unattractive manner.
-10-12 %^BOLD%^%^MAGENTA%^Average%^RESET%^ - The "standard" charisma of an adult male and female
-13-14 %^MAGENTA%^Above Average%^RESET%^ - You tend to be more friendly than your average 
-    	person. You have a bit of a "spark" in your personal magnetism that 
-    	might draw others to you. Your appearance, while above average, often 
-    	can be described as  "kind of cute/pretty". You exhibit some social 
-    	graces, that puts you a step above the average person.
-15-16 %^BOLD%^%^MAGENTA%^Friendly%^RESET%^ - You have a certain spark that draws people to you. Others 
-    	want to get to know more about you, finding you rather personable. 
-    	You can usually lead or command a small group, using your 
-	persuasiveness to sway them, though a large group you often 
-	struggle with. Your appearance could be described as "pretty/cute".
-17 - %^MAGENTA%^Charismatic%^RESET%^- You find lots of people are drawn to you, and 
-	seem to want to be your friend or even in your company. 
-	You find it easy to lead or command a group of people, 
-	swaying them with your charismatic presence to your 
-	side. Your appearance could be described as 
-	"handsome/beautiful"
-18 - %^BOLD%^%^MAGENTA%^Blinding %^RESET%^- When you walk into a populated area, you find that people 
-     	(usually in large number or clusters) are drawn to you. You 
-	find it extremely easy to lead or command people, even to the 
-	point of leading a great army! You can sway others with your 
-	charm to your side with little difficulty at all. Your 
-	apperance could be described as "breathtaking/alluring".
-19 + %^MAGENTA%^Legendary Charisma%^RESET%^ - Your charisma is the stuff that legends are made 
-     	of. With a charisma this high your charm seems to ooze out 
-	of you, causing many people to flock to your side and to 
-	support you in almost anything you do. You can lead a kingdom to
-	war, if so desired. A charisma this high often is associated with
-	a dryad, nymph, succubus or incubus. Your appearance is one that 
-     	bards write poems and ballads about, artists try to immortalize, 
-	and one that could cause wars.
+4-5 %^MAGENTA%^Garish%^RESET%^ - You lack any social graces or personal magnetism. Your appearance would be classified as horrific, frightening many men, women and children. Some people might even chase you out of town!
 
-See also : help describe, help charisma2
+6-7: %^BOLD%^%^MAGENTA%^Uncooth%^RESET%^ - Your social graces and personal magnetism leave much to be desired. In social settings you exhibit a lack of manners. Your appearance is ghastly, frightening many. Inns sometimes lock their doors when they see you coming.
 
-***Please Note - Beauty and Appearance are subjective to racial 
-and personal tastes.  The use of pretty/handsome and other such 
-phrases used here are only to clarify and define the charisma 
-score, to help in writing a proper description.***
+8-9: %^MAGENTA%^Below Average%^RESET%^ - You tend to exhibit poor manners. Others often ignore you when you try to lead them. Your personal magnetism is low, making it hard for you to find friends. Your appearance could be classified as homely, very plain, or even some deformity or body modification has altered in a rather unattractive manner.
+
+10-11: %^BOLD%^%^MAGENTA%^Average%^RESET%^ - The "standard" charisma of an adult male and female
+
+12-13: %^MAGENTA%^Above Average%^RESET%^ - You tend to be more friendly than your average person. You have a bit of a "spark" in your personal magnetism that might draw others to you. Your appearance, while above average, often can be described as "kind of cute/pretty". You exhibit some social graces, that puts you a step above the average person.
+
+14-15: %^BOLD%^%^MAGENTA%^Friendly%^RESET%^ - You have a certain spark that draws people to you. Others want to get to know more about you, finding you rather personable. You can usually lead or command a small group, using your persuasiveness to sway them, though a large group you often struggle with. Your appearance could be described as "pretty/cute".
+
+16-17: %^MAGENTA%^Charismatic%^RESET%^ - You find lots of people are drawn to you, and seem to want to be your friend or even in your company. You find it easy to lead or command a group of people, swaying them with your charismatic presence to your side. Your appearance could be described as "handsome/beautiful"
+
+18-19: %^BOLD%^%^MAGENTA%^Blinding %^RESET%^- When you walk into a populated area, you find that people (usually in large number or clusters) are drawn to you. You find it extremely easy to lead or command people, even to the point of leading a great army! You can sway others with your charm to your side with little difficulty at all. Your apperance could be described as "breathtaking/alluring".
+
+20+ %^MAGENTA%^Legendary Charisma%^RESET%^ - Your charisma is the stuff that legends are made of. With a charisma this high your charm seems to ooze out of you, causing many people to flock to your side and to support you in almost anything you do. You can lead a kingdom towar, if so desired. A charisma this high often is associated with a dryad, nymph, succubus or incubus. Your appearance is one that bards write poems and ballads about, artists try to immortalize, and one that could cause wars.
+
+%^BOLD%^%^MAGENTA%^N.B.%^RESET%^ Beauty and Appearance are subjective to racial and personal tastes. The use of pretty/handsome and other such phrases used here are only to clarify and define the charisma score, to help in writing a proper description.
+
+%^MAGENTA%^See also:%^RESET%^ describe

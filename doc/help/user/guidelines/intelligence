@@ -1,71 +1,39 @@
 %^BOLD%^%^BLUE%^INTELLIGENCE (INT)
-%^RESET%^Intelligence determines how well your character 
-learns and reasons. This ability is important for 
-wizards because it affects how many spells they can 
-cast, how hard their spells are to resist, and how 
-powerful their spells can be. It's also important 
-for any character who wants to have a wide assortment of skills.
+%^RESET%^Intelligence determines how well your character learns and reasons. This ability is important for wizards, psions, and psywarriors because it affects how many spells/powers they can cast, how hard their spells/powers are to resist, and how powerful their spells/powers can be.
 
 Intelligence can be divided into:
 
-%^BOLD%^%^BLUE%^Knowledge - This is a measurement of the character's 
-	%^BOLD%^%^BLUE%^educational experiences-whether in a school or 
-	%^BOLD%^%^BLUE%^on the streets, his grasp of languages, and his 
-	%^BOLD%^%^BLUE%^memory capacity. A character with a high Knowledge 
-	%^BOLD%^%^BLUE%^can speak many languages, knows something about 
-	%^BOLD%^%^BLUE%^several subjects, and can remember the slightest 
-	%^BOLD%^%^BLUE%^detail of a past event.
+%^BOLD%^%^BLUE%^Knowledge - This is a measurement of the character's educational experiences-whether in a school or on the streets, his grasp of languages, and his memory capacity. A character with a high Knowledge can speak many languages, knows something about several subjects, and can remember the slightest detail of a past event.
 
-%^RESET%^%^BLUE%^Reason - This defines how well a character handles new information.
-	%^BLUE%^A character with a high Reason would be good at solving 
-	%^BLUE%^riddles and puzzles, and would be talented at using 
-	%^BLUE%^deductive, logical thinking.
+%^RESET%^%^BLUE%^Reason - This defines how well a character handles new information. A character with a high Reason would be good at solving riddles and puzzles, and would be talented at using deductive, logical thinking.
 
 %^RESET%^You apply your character's Intelligence modifier to:
 
 %^BOLD%^%^BLUE%^* The number of languages your character knows at the start of the game.
-%^RESET%^%^BLUE%^* Some NPWs(non-weapon proficiencies) require a minimum in INT to learn.
-%^BOLD%^%^BLUE%^* INT is very important for wizards, as the more powerful 
-  %^BOLD%^%^BLUE%^spells require a minimum to even learn and use.
-%^RESET%^%^BLUE%^* Psions and Mages get bonus spells based on their Intelligence stat.
+%^RESET%^%^BLUE%^* You add your intelligence bonus to Academics and Spellcraft skills.
+%^BOLD%^%^BLUE%^* INT is very important for wizards, psions, and psywarriors, as the more powerful spells/powers require a minimum to even learn and use.
+%^RESET%^%^BLUE%^* Mages get bonus spells based on their Intelligence stat.
+%^BOLD%^%^BLUE%^* Psions and psywarriors gain extra power points based on their Intelligence stat.
 
 %^RESET%^An animal has an Intelligence score of 1 or 2. 
 A creature of humanlike intelligence has a score of at least 3.
 
 Stat Scores
 
-1-3 %^BLUE%^Moronic%^RESET%^ - Your vocabulary is often limited to a few words and
-	lots of grunts. Things such as sentences are just beyond you.
-4-6 %^BOLD%^%^BLUE%^Dim%^RESET%^ - You tend to speak in very simple words, like that of a 4 
-    	to 6 year old child. Puzzles and riddles often leave you confused. 
-    	New information thrown at you sometimes leaves you feeling 
-    	disoriented or confused.
-7-9 %^BLUE%^Below Average %^RESET%^- You can manage to fumble your way in a conversation,
-    	though you stick to simple words. Puzzles and riddles throw you off, 
-    	often taking a few days to figure out some of the moderate ones, and 
-    	the harder ones often months or years. You come across as being 
-    	"unschooled", never really having any formal training.
-10-12 %^BOLD%^%^BLUE%^Average%^RESET%^ - The "standard" intelligence of an adult male and female
-13-14 %^BLUE%^Above Average%^RESET%^ - You are able to pick up on things easier than 
-     	the normal individual. Learning a new language or bits of history 
-     	tends to be somewhat easier for you. Your vocabulary might have a 
-     	few fancier words thrown in like, opulent or plethora.
-15-16 %^BOLD%^%^BLUE%^Smart%^RESET%^ - Others call you smart. Learning a new language or bits 
-     	of history and lore is rather easy for you. You're able to carry 
-     	on a conversation with more scholarly folk with some ease. There 
-     	are a few subject matters where you are able to recite events 
-     	from without any hesitation. (example Ancient History of Tsvaren,
-     	Religon, A History of Art, or even Magical Theory)
-17 - %^BLUE%^Brilliant%^RESET%^ - Your brilliance leaves others often astounded or jealous. 
-     	You are able to pick up on new languages with ease and could be 
-     	considered a master in many fields of knowledge (such as those 
-     	mentioned above or plant lore, demon lore, undead lore, a 
-     	history of warfare)
-18 - %^BOLD%^%^BLUE%^Genius%^RESET%^ - You are a true genius. You can solve complex riddles and 
-     	puzzles in your free time for fun. You have a wide range of 
-     	subjects that you can recite detailed information about. Some 
-     	might consider you a sage in a few fields, and seek you out for 
-     	your brilliance.
-19+ - %^BLUE%^Legendary Intelligence%^RESET%^- Your intelligence is the stuff legends 
-	are made of. People are left in awe at (or perhaps even a bit spooked) 
-	just how smart you are.
+4-5: %^BLUE%^Moronic%^RESET%^ - Your vocabulary is often limited to a few words and lots of grunts. Things such as sentences are just beyond you.
+
+6-7: %^BOLD%^%^BLUE%^Dim%^RESET%^ - You tend to speak in very simple words, like that of a 4 to 6 year old child. Puzzles and riddles often leave you confused. New information thrown at you sometimes leaves you feeling disoriented or confused.
+
+8-9: %^BLUE%^Below Average %^RESET%^- You can manage to fumble your way in a conversation, though you stick to simple words. Puzzles and riddles throw you off, often taking a few days to figure out some of the moderate ones, and the harder ones often months or years. You come across as being "unschooled", never really having any formal training.
+
+10-11: %^BOLD%^%^BLUE%^Average%^RESET%^ - The "standard" intelligence of an adult male and female
+
+12-13: %^BLUE%^Above Average%^RESET%^ - You are able to pick up on things easier than the normal individual. Learning a new language or bits of history tends to be somewhat easier for you. Your vocabulary might have a few fancier words thrown in like, opulent or plethora.
+
+14-15: %^BOLD%^%^BLUE%^Smart%^RESET%^ - Others call you smart. Learning a new language or bits of history and lore is rather easy for you. You're able to carry on a conversation with more scholarly folk with some ease. There are a few subject matters where you are able to recite events from without any hesitation. (example Ancient History of the Tsvaren Empire, Religon, A History of Art, or even Magical Theory)
+
+16-17: %^BLUE%^Brilliant%^RESET%^ - Your brilliance leaves others often astounded or jealous. You are able to pick up on new languages with ease and could be considered a master in many fields of knowledge (such as those mentioned above or plant lore, demon lore, undead lore, a history of warfare).
+
+18-19: %^BOLD%^%^BLUE%^Genius%^RESET%^ - You are a true genius. You can solve complex riddles and puzzles in your free time for fun. You have a wide range of subjects that you can recite detailed information about. Some might consider you a sage in a few fields, and seek you out for your brilliance.
+
+20+: %^BLUE%^Legendary Intelligence%^RESET%^- Your intelligence is the stuff legends are made of. People are left in awe at (or perhaps even a bit spooked) just how smart you are.
