@@ -84,31 +84,20 @@ void enter_short(string str, object ob, int percent){
       return;
     }
     if(!avatarp(TP)) {
-      quality = do_quality(ob, percent);
-      baseweight = ob->query_weight();
-      adjweight = (baseweight*2) - (baseweight * percent/100);
-      if(adjweight > baseweight) {
-	TP->add_encumbrance(adjweight - baseweight);
-	ob->set_weight(adjweight);
-      }
-      basevalue = ob->query_value();
-      adjvalue = basevalue * percent/100;
-      if(adjvalue < basevalue)
-	ob->set_value(adjvalue);
+        quality = do_quality(ob, percent);
+        basevalue = ob->query_value();
+        adjvalue = basevalue * percent/100;
+        if(adjvalue < basevalue)
+            ob->set_value(adjvalue);
     }
-/* can't let it go lighter/more valuable without saving the original somehow 
-*  because it could keep going down unless we deny chances to change it again 
-*  which means typos couldn't be fixed, so if the quality is low, it gains 
-*  weight and loses value, otherwise no change *Styx*
-*/
     if(!quality)  quality = "";
     ob->set("alterby", TPQN);
     ob->set_short(str);
     log_file("alterobj",capitalize(TPQN)+" altered "+base_name(ob)+" on"
-	" "+ctime(time())+"\n");
+             " "+ctime(time())+"\n");
     write("Please enter the new LONG description for the item and then "
-	"<enter>.  The current long is: "
-	"\n"+ob->query_long()+"%^RESET%^\n");
+          "<enter>.  The current long is: "
+          "\n"+ob->query_long()+"%^RESET%^\n");
     input_to("enter_long",ob, quality);
     return;
 }
@@ -424,7 +413,7 @@ int do_quality(object ob, int percent) {
     return quality;
 }
 
-int help(){
+void help(){
 
     write( "
 %^CYAN%^NAME%^RESET%^
@@ -433,28 +422,20 @@ alterobj - change long and short description of an item
 
 %^CYAN%^SYNTAX%^RESET%^
 
-alterobj %^ORANGE%^%^ULINE%^ITE%^RESET%^M
+alterobj %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command will allow you to change the long and short descriptions of an item if you are skilled enough in the appropriate crafting skill. 
 
-It comes with a level of risk as a low roll could lower the quality of the item or even add to its overall weight. Use this to fix your own typos or embellish upon a crafted item, or to change some attributes of items found in game. You can also add a new ID to an item which can be used to look or intact with it.
+This is considered an %^CYAN%^in character action%^RESET%^ and it is highly inadvisable to change item material and describe item you won't normally see in that limb slot. For example:
+ %^RED%^*%^RESET%^ Making wooden crown golden is illegal.
+ %^RED%^*%^RESET%^ Altering pants to be hat isn't legal, as such a hat would be worn in legs slots.
+ %^GREEN%^*%^RESET%^ Making glasses from a circlet, skirt from breeches, handbands from gloves considered to be legal.
 
-Changing an item in such a way is considered an IC event and it is advised to be roleplayed accordingly.
-
-This command will only change the cosmetic attributes of an item, everything else about it stays the same, including how it is identified, special powers etc. Please do NOT alter things that have unique lore or emotes, etc. that will make them seem out of place with your changes.
-
-%^BOLD%^%^WHITE%^To clarify: %^RESET%^Changing the material is unrealistic but adding embroidery, engraving, lace, etc. or even dying most cloth a different color is probably fine. Changing the main type of metal on a jeweled item would be a no but you could change out the gems and perhaps alter the design slightly. Leather armor is leather armor (or steel or mithril) but you could add things to it such as engraving, patches or overlays of other materials, or perhaps even change the way it fits slightly.
+Be vary about what you change. Some items have their descriptions edged in their special abilities, so these should be changed with special care.
 
 %^CYAN%^SEE ALSO%^RESET%^
-skills, help craft, repair, resize.
-");
-    
-    if(avatarp(TP))
-        write("%^CYAN%^SEE ALSO%^RESET%^
-
-You will bypass the nwp check so you can alter anything.");
-    return 1;
+discern, skills, craft, repair");
 }
 

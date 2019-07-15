@@ -51,45 +51,24 @@
 ])
 
 #define TAILOR ([\
-    "bandanna":(["file":COMMONFILE"clothing/hat","units":2]),\
     "belt":(["file":COMMONFILE"clothing/belt","units":1]),\
-    "boots":(["file":COMMONFILE"clothing/shoes","units":2]),\
     "caparison":(["file":COMMONFILE"clothing/caparison","units":4]),\
-    "cape":(["file":COMMONFILE"clothing/cloak","units":3]),\
     "cloak":(["file":COMMONFILE"clothing/cloak","units":3]),\
-    "coat":(["file":COMMONFILE"clothing/robe","units":4]),\
-    "dress":(["file":COMMONFILE"clothing/robe","units":4]),\
     "gloves":(["file":COMMONFILE"clothing/gloves","units":1]),\
     "hat":(["file":COMMONFILE"clothing/hat","units":2]),\
-    "hood":(["file":COMMONFILE"clothing/hat","units":2]),\
-    "leggings":(["file":COMMONFILE"clothing/breeches","units":3]),\
-    "mask":(["file":COMMONFILE"clothing/hat","units":2]),\
-    "pants":(["file":COMMONFILE"clothing/breeches","units":3]),\
+    "breeches":(["file":COMMONFILE"clothing/breeches","units":3]),\
     "pocket robe":(["file":COMMONFILE"clothing/magerobe","units":5]),\
     "robe":(["file":COMMONFILE"clothing/robe","units":4]),\
-    "sandals":(["file":COMMONFILE"clothing/shoes","units":2]),\
-    "sash":(["file":COMMONFILE"clothing/belt","units":1]),\
     "shirt":(["file":COMMONFILE"clothing/shirt","units":3]),\
     "shoes":(["file":COMMONFILE"clothing/shoes","units":2]),\
-    "shorts":(["file":COMMONFILE"clothing/breeches","units":2]),\
-    "skirt":(["file":COMMONFILE"clothing/breeches","units":2]),\
-    "tunic":(["file":COMMONFILE"clothing/shirt","units":3]),\
-    "vest":(["file":COMMONFILE"clothing/shirt","units":2]),\
 ])
 
 #define JEWEL ([\
-    "amulet":(["file":COMMONFILE"jewelry/necklace","units":3]),\
     "anklet":(["file":COMMONFILE"jewelry/anklet","units":2]),\
-    "bangle":(["file":COMMONFILE"jewelry/bracelet","units":2]),\
     "bracelet":(["file":COMMONFILE"jewelry/bracelet","units":2]),\
     "bracers":(["file":COMMONFILE"armour/bracers","units":3]),\
     "circlet":(["file":COMMONFILE"jewelry/circlet","units":2]),\
-    "collar":(["file":COMMONFILE"jewelry/necklace","units":2]),\
-    "crown":(["file":COMMONFILE"jewelry/circlet","units":3]),\
-    "earrings":(["file":COMMONFILE"jewelry/circlet","units":1]),\
-    "glasses":(["file":COMMONFILE"jewelry/circlet","units":2]),\
     "necklace":(["file":COMMONFILE"jewelry/necklace","units":2]),\
-    "necklace":(["file":COMMONFILE"jewelry/necklace","units":3]),\
     "ring":(["file":COMMONFILE"jewelry/ring","units":2]),\
 ])
 
