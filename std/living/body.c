@@ -787,26 +787,33 @@ int query_ac()
     string myfile, myrace, mysubrace;
     object shape;
 
-    if(!userp(TO) && !TO->query_property("full ac")) { return monster_ac; }
+    if(!userp(TO) && !TO->query_property("full ac"))
+        return monster_ac; 
     myac = (ac_bonus + EQ_D->gear_bonus(TO, "armor bonus"));
     if(FEATS_D->usable_feat(TO,"unarmored defense") && TO->is_ok_armour("barb"))
         myac += 6;
     if(TO->is_class("monk"))
         myac += (int)"/daemon/bonus_d.c"->query_stat_bonus(TO, "wisdom");
-   if(FEATS_D->usable_feat(TO,"indomitable")) myac += 2;
+   if(FEATS_D->usable_feat(TO,"indomitable"))
+       myac += 2;
    if(FEATS_D->usable_feat(TO,"mobility") && !TO->query_paralyzed() && 
-   !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief")) myac += 4;
-   if(!userp(TO)) return ac - myac;
+      !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief"))
+       myac += 4;
+   if(!userp(TO))
+       return ac - myac;
 
    // adding racial bonus here for players
    myrace = (string)TO->query_race();
-   if(!myrace) return ac - myac;
+   if(!myrace)
+       return ac - myac;
    mysubrace = (string)TO->query("subrace");
    myfile = "/std/races/"+myrace+".c";
-   if(!file_exists(myfile)) return ac - myac;
+   if(!file_exists(myfile))
+       return ac - myac;
    raceac = (int)myfile->natural_AC(mysubrace);
 
-   if(objectp(shape = TO->query_property("shapeshifted"))) { shifted_ac = (int)shape->query_bonus_ac(); }
+   if(objectp(shape = TO->query_property("shapeshifted")))
+       shifted_ac = (int)shape->query_bonus_ac();
 
    return ac - myac - raceac - shifted_ac;
 }
