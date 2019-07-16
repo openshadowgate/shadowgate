@@ -19,8 +19,6 @@
 #define MAX_LEVEL 50
 
 #define QLEVEL 20
-//moving to genetics.h so that they are all in one place - Saide
-/*#define TESTERS (({ "trillet", "gaje", "testgreeble", "testlock", "zeal", "balur", "lorelai", "azrael", "shyntyrr" }))*/
 
 #define FIVE ({"/d/newbie/rooms/forest/", "/d/newbie/rooms/hill/",\
 "/d/newbie/rooms/ruins/", "/d/newbie/rooms/keep/keep3*",\
@@ -185,15 +183,6 @@ int can_multiclass(object ob,string myclass) {
         return 0;
     }
 
-//TO STOP PLAYERS FROM MULTICLASSING INTO INCOMPLETE CLASSES - ADJUST CLASSNAME AS NEEDED
-/*    if(class == "???"){
-      if(member_array((string)ob->query_name(),TESTERS) == -1){ 
-        tell_object(ob,"You cannot become a "+class+" because that class is currently undergoing development and testing.");
-        return 0;
-      }
-    } */
-
-// second, we can check that they meet the specific class requirements (class conflicts, alignment, deity, and stats)
     file                = DIR_CLASSES+"/"+myclass+".c";
     if(!file_exists(file)) { return 0; }
     if(file->is_prestige_class())

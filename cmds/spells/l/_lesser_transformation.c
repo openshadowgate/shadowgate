@@ -1,5 +1,6 @@
 #include <clock.h>
 #include <spell.h>
+#include <magic.h>
 inherit SPELL;
 
 int abonus; 
@@ -12,9 +13,7 @@ void create() {
     set_spell_sphere("alteration");
     set_discipline("egoist");
     set_syntax("cast CLASS lesser transformation");
-    set_description("A lesser form of transformation will reshape casters in a minor way, empowering their muscles and granting better prowess in the combat. Much less powerful than its greater version it won't impede casters ability to use offensive spells. This spell will be overwritten by similar effects, such as rage and transformation.
-
-This spell grants (1 + (caster level) / 16) bonus attacks to caster and the same amount to athletics skill and reflex saving bonus.");
+    set_description("A lesser form of transformation that yet, however, requires greater subtlety in casting to avoid ill-effects will reshape casters in a minor way, empowering their muscles and granting better prowess in the combat. Much less powerful than its greater version it won't impede casters ability to use offensive spells. This spell will be overwritten by similar effects, such as rage and transformation.");
     set_verbal_comp();
     set_somatic_comp();
 	set_helpful_spell(1);
@@ -45,12 +44,28 @@ void spell_effect(int prof)
     caster->set_property("spelled", ({TO}) );    
     spell_successful();
     addSpellToCaster();
-    //TODO: add test that checks for rage/transformation and calls dest_effect
     call_out("dest_effect",(clevel*20));
+    //TODO: add test that checks for rage/transformation and calls dest_effect    
+    call_out("validate_conditions",ROUND_LENGTH*2);
+}
+
+void validate_conditions()
+{
+    if ((int)caster->query_property("raged") ||
+        (int)caster->query_property("transformed") ||
+        (int)caster->query_property("dance-of-cuts"))
+    {
+        tell_object(caster,"Your lesser transformation fades as it is replaced by greater spell.");
+        TO->dest_effect();
+        return;
+    }
+    call_out("validate_conditions",ROUND_LENGTH*2);
 }
 
 void dest_effect()
 {
+    if(find_call_out("validate_conditions") != -1)
+        remove_call_out("validate_conditions");
     if(objectp(caster)) 
     {
         caster->remove_property("lesser_transformation");
