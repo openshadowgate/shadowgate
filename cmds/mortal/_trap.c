@@ -320,13 +320,13 @@ int set_action(string input)
 		return help();
 	}
 
-	if(sscanf(input, "%s on %s | %s", trapkit, targ, trigger) != 3)
+	if(sscanf(input, "%s on %s with %s", trapkit, targ, trigger) != 3)
 	{
 		if(sscanf(input, "%s on %s", trapkit, targ) != 2)
 		{
 			tell_object(TP, "trap set <trap kit> on <object>\n"+
-			"trap set <trap kit> on <object> | <trigger action>\n"+
-			"trap set <trap kit> on <object> | <triggers>");
+			"trap set KIT on OBJECT with ACTION\n"+
+			"trap set KIT on OBJECT with triggers");
 			return 1;
 		}
 	}
@@ -1152,82 +1152,44 @@ int remove_recover_action(string input, string Atype)
 
 int help()
 {
-	string *tmp;
-	tmp = ({"This is the generic command to deal with traps.\n"+
-		  "Currently supported concepts:\n"+
-		  "detect\n"+
-		  "find\n"+
-		  "disarm\n"+
-		  "recover\n"+
-		  "set\n"+
-		  "reveal\n"});
+    write("
+%^CYAN%^NAME%^RESET%^
 
-	tmp += ({"%^BOLD%^%^RED%^Syntaxes%^RESET%^:\n"});
-	tmp += ({"%^BOLD%^%^WHITE%^trap detect <on>\ntrap detect <off>\n\n%^RESET%^"+
-			"trap detect <on> will toggle on your ability to auto detect "+
-			"traps, if you aren't already doing so.  "+
-			"\ntrap detect <off> will turn this ability off, if it is currently "+
-			"on.\n\n%^BOLD%^%^RED%^Example%^RESET%^ : Auto detected trapped room "+
-			"exits/doors will show up in %^BOLD%^%^RED%^"+
-			"red%^RESET%^ - for traps that you set or someone reveals to you, "+
-			"they will show up in %^BOLD%^%^GREEN%^green%^RESET%^.  Objects will "+
-			"have (%^BOLD%^%^RED%^Trapped%^RESET%^) or (%^BOLD%^%^GREEN%^Trapped"+
-			"%^RESET%^) after their names.  Non standard traps (IE on a lever "+
-			"in a room will NOT show up this way))\n"});
-	
-      tmp += ({"%^BOLD%^%^WHITE%^trap find on <object>\n%^RESET%^"});
-	tmp += ({"Will attempt to find any traps on <object> specificied.  It will "+
-		  "first check your inventory, then the area around you for the object "+
-		  "and if not found, it will default to an object in the room.\n\n%^BOLD%^"+
-		  "%^RED%^Example%^RESET%^ : trap find on <door> will try to find any "+
-		  "traps on the <door> "+
-		  "specified if there is such a <door> in the room.\n"});
+trap - deal with traps
 
-	tmp += ({"%^BOLD%^%^WHITE%^trap disarm on <object>\ntrap remove on <object>"+
-		  "%^RESET%^\n"});
+%^CYAN%^SYNTAX%^RESET%^
 
-	tmp += ({"Will attempt to disarm the first trap on the object that you specify "+
-		  "should you be able to find one.  Failure will result in the trap being "+
-		  "triggered.\n\n%^BOLD%^%^RED%^Example%^RESET%^ : If there are 3 traps "+
-		  "on a door in the room trap disarm on <door> will attempt to remove "+
-		  "the first one.%^RESET%^\n"});
+trap detect on|off
+trap find|disarm|remove|recover on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^
+trap reveal on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ to %^ORANGE%^%^ULINE%^WHO%^RESET%^|party
+trap set %^ORANGE%^%^ULINE%^KIT%^RESET%^ on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [with %^ORANGE%^%^ULINE%^ACTION%^RESET%^|triggers]
 
-	tmp += ({"%^BOLD%^%^WHITE%^trap reveal on <object> to <who>\n"+
-		  "trap reveal on <object> to party%^RESET%^\n"});
+%^CYAN%^DESCRIPTION%^RESET%^
 
-	tmp += ({"This will attempt to reveal any traps that you've set on the "+
-		  "object you specify, to either <who> you specify or the members "+
-		  "of your <party> should you be in one and any of them present.  "+
-		  "It is presumed that they have at least a basic understanding "+
-		  "of dungeoneering in order to understand your instructions on "+
-		  "avoiding your traps, otherwise it will do little good."});
+This command manages various trap aspects. Your dungeoneering skill is essential for various actions related to them.
 
-	tmp += ({"%^BOLD%^%^WHITE%^trap recover on <object>\n%^RESET%^"});
-	
-	tmp += ({"Will attempt to recover a trap kit from the first trap on the object "+
-		   "you specify.  This is more difficult than simply disarming a trap "+
-		   "but will result in a usuable trap kit should you succeed.  Failure "+
-		   "will result in the trap being triggered.\n%^BOLD%^%^RED%^Example "+
-		   "%^RESET%^: trap recover on <door> will attemp to recover a usuable "+
-		   "trap kit from the trap on <door> specified, should there be a trap."+
-		   "\n\n"});
+%^ORANGE%^<trap detect on|off>%^RESET%^
+    Will toggle your ability to auto detect traps. Trapped exits will show in %^BOLD%^%^RED%^bold red%^RESET%^ if they aren't set by you and in %^BOLD%^%^GREEN%^bold green%^RESET%^ if they are set by you or your party. Non standard traps won't be shown this way.
 
-	tmp += ({"%^BOLD%^%^WHITE%^trap set <trap kit> on <object> | <target action>\n"+
-		   "trap set <trap kit> on <object> | <triggers>%^RESET%^\n"});
+%^ORANGE%^<trap find on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^%^ORANGE%^>%^RESET%^
+    You will attemp to find a trap place on the %^ORANGE%^%^ULINE%^OBJECT%^RESET%^.
 
-	tmp += ({"This will attempt to set the <trap kit> (you must have it in your "+
-		   "inventory) on the <object> that you specify, to be triggered when "+
-		   "someone later performs the <target action> \n\n"+
-		   "trap set <trap kit> on <object> | <triggers> will reveal to you "+
-		   "valid syntaxes for setting your trap on the <object> you specify.\n"+
-		   "%^BOLD%^%^RED%^Examples %^RESET%^: \ntrap set weak acid trap kit on east\n"+
-		   "trap set weak acid trap kit on door | open\n"+
-		   "trap set weak acid trap kit on door | close\n"+
-		   "trap set weak acid trap kit on door | unlock <lock name>\n"+
-    		   "trap set weak acid trap kit on door | pick <lock name>\n"+
-		   "trap set weak acid trap kit on door | triggers (this will reveal "+
-		   "available syntaxes for setting your trap kit)\n"});
-	TP->more(tmp);
-    	return 1;
+%^ORANGE%^<trap disarm|remove on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^%^ORANGE%^>%^RESET%^
+    Will attempt to disarm the first trap on the object that you specify should you be able to find one. Failure will result in the trap being triggered.
+
+%^ORANGE%^<trap reveal on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^%^ORANGE%^ to %^ORANGE%^%^ULINE%^WHO%^RESET%^%^ORANGE%^|party>%^RESET%^
+    This will attempt to reveal any traps that you've set on the object you specify, to either %^ORANGE%^%^ULINE%^WHO%^RESET%^ you specify or the members of your %^ORANGE%^%^ULINE%^PARTY%^RESET%^ should you be in one and any of them present. It is presumed that they have at least a basic understanding of dungeoneering in order to understand your instructions on avoiding your traps, otherwise it will do little good.
+
+%^ORANGE%^<trap recover on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^%^ORANGE%^>%^RESET%^
+    Will attempt to recover a trap kit from the first trap on the object you specify. This is more difficult than simply disarming a trap but will result in a usuable trap kit should you succeed. Failure will result in the trap being triggered.
+
+%^ORANGE%^<trap set %^ORANGE%^%^ULINE%^KIT%^RESET%^%^ORANGE%^ on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^%^ORANGE%^ [with %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^|triggers]>%^RESET%^
+This will attempt to set the %^ORANGE%^%^ULINE%^KIT%^RESET%^ (you must have it in your inventory) on the %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ that you specify, to be triggered when someone later performs the %^ORANGE%^%^ULINE%^ACTION%^RESET%^. %^ORANGE%^<trap set %^ORANGE%^%^ULINE%^KIT%^RESET%^%^ORANGE%^ on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^%^ORANGE%^ | triggers>%^RESET%^ will reveal to you valid syntaxes for setting your trap on the %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ you specify.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+search, steal, glance, dungeoneering
+");
+    return 1;
 }
 

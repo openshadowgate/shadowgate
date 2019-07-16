@@ -106,8 +106,10 @@ void spell_effect(int prof){
     return;
 }
 
-void dest_effect() {
-    bow->remove();
+void dest_effect()
+{
+    if(objectp(bow))
+        bow->remove();
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
