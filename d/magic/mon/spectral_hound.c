@@ -95,7 +95,7 @@ void remove_hound()
        objectp(ETO))
     {
         caster->remove_property("has_faithful_hound");
-        tell_object(caster,"%^CYAN%^You concentration releases as your hound fades%^RESET%^");
+        tell_object(caster,"%^CYAN%^You concentration releases as your hound fades.%^RESET%^");
     }
     destruct(TO);
 }
