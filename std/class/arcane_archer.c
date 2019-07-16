@@ -86,6 +86,11 @@ int prerequisites(object player)
         if( (player->query_class_level("bard") + adj) < 20) { return 0; }
         player->set("arcane_archer_base_class","bard");
     }
+    if(player->is_class("warlock")) 
+    { 
+        if( (player->query_class_level("warlock") + adj) < 20) { return 0; }
+        player->set("arcane_archer_base_class","warlock");
+    }
     if(player->is_class("druid")) 
     { 
         if( (player->query_class_level("druid") + adj) < 20) { return 0; }
