@@ -29,4 +29,41 @@ To dismiss the chest use %^ORANGE%^<dismiss chest>%^RESET%^.");
 
 //Blep
 
+string query_cast_string()
+{
+    return "%^ORANGE%^"+caster->QCN+" throws miniature chest into the air.";
+}
+
+void spell_effect()
+{
+    tell_room(place,"%^RESET%^%^ORANGE%^The %^BOLD%^%^ORANGE%^c%^BLACK%^h%^ORANGE%^e%^BLACK%^s%^BLACK%^t%^RESET%^%^ORANGE%^ floats in the air and grows in size!%^RESET%^");
+    chest=new(CHEST);
+    chest->set_property("spelled", ({TO}));
+    chest->set_property("spell_creature", TO);
+    chest->set_property("spell", TO);
+    chest->set_property("minion", caster);
+    chest->move(place);
+    chest->setup_chest(caster);
+    caster->add_follower(chest);
+    caster->set_property("has_elemental",1);
+    addSpellToCaster();
+}
+
+void dest_effect()
+{
+    if(objectp(caster))
+    {
+        caster->remove_property("has_elemental");
+    }
+    if(objectp(chest))
+    {
+        tell_room(environment(chest),"%^RESET%^%^ORANGE%^Floating %^BOLD%^%^ORANGE%^Ch%^BLACK%^e%^BLACK%^s%^ORANGE%^t%^RESET%^%^ORANGE%^ simply vanishes!%^RESET%^");
+        chest->move("/d/shadowgate/void");
+        chest->remove();
+    }
+    ::dest_effect();
+    if(objectp(TO))
+        TO->remove();
+}
+
 

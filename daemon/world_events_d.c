@@ -439,8 +439,6 @@ void establish_weekend_events()
             NEXT_WEEKLY_EVENT_END = NEXT_WEEKLY_EVENT + WEEKLY_EVENT_LENGTH;
         }
     }
-   // tell_object(find_player("saide"), "Next Weekly Event = "+NEXT_WEEKLY_EVENT);
-     //tell_object(find_player("saide"), "Next Weekly Event End = "+NEXT_WEEKLY_EVENT_END);
     if(WEEKLY_EVENT_ONGOING) return;
     if(NEXT_WEEKLY_EVENT > time()) return;
     if(WORLD_EVENTS["Fate's Conundrum!"]) return;
@@ -455,17 +453,14 @@ void establish_weekend_events()
                 "%^BOLD%^%^GREEN%^You watch in %^BOLD%^%^RED%^HORROR%^BOLD%^%^GREEN%^ as it tosses a %^BOLD%^%^CYAN%^large glowing "+
                 "%^BOLD%^%^GREEN%^dice toward you!\n\n";
                 
-    mod = 20 + random(5);
+    mod = 15 + random(5);
     eventType = "exp bonus";
     eventNotify = mod+"% Bonus Exp!";
     eventMod = "%^BOLD%^%^WHITE%^The number %^CYAN%^1%^BOLD%^%^WHITE%^ lands facing up!!";
-    eventMod2 = "%^BOLD%^%^WHITE%^For the next "+length+" hours all experience gained will award "+
-        "an additional "+mod+"%%^RESET%^";
     
     eventDesc += eventMod +"\n\n";
     eventDesc += "%^BOLD%^%^BLACK%^The %^BOLD%^%^BLUE%^myst%^CYAN%^e%^BLUE%^r%^CYAN%^iou%^BOLD%^%^BLUE%^s %^BOLD%^%^WHITE%^being "+
                  "%^BOLD%^%^GREEN%^CACKLES%^BOLD%^%^BLACK%^ insanely for a brief moment before vanishing as suddenly as it appeared!%^RESET%^\n\n";
-    eventDesc += eventMod2;   
     eventDesc += "\n\n%^BOLD%^%^WHITE%^"+eventName+"%^BOLD%^%^WHITE%^ has been triggered!%^RESET%^";
     
     WORLD_EVENTS += ([eventName : (["type" : eventType, "end time" : NEXT_WEEKLY_EVENT_END,
