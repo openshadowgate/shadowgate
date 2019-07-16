@@ -22,7 +22,7 @@ void create()
     set_stats("intelligence",28);
     set_stats("wisdom",20);
     set_stats("strength",20);
-    set_stats("charisma",12);
+    set_stats("charisma",8);
     set_stats("dexterity",20);
     set_stats("constitution",28);
     set_property("magic",1);
@@ -34,8 +34,7 @@ void create()
                     "greater dispel magic",
                     "resonating word",
                     "resonating word",                    
-                    "powerword kill",
-                    "powerword stun"}));
+                    "powerword kill",}));
     set_spell_chance(100);    
 }
 
@@ -56,32 +55,44 @@ void make_me()
 void thank()
 {
     string thanklist;
-    thanklist = ({"Thank you for your service, here is your reward.",
-                "Thank you, adventurer. Now... Unless you have more, get lost.",
-                "What took you so long?.. If you won't be fast others will claim the reward.",
-                "Eeeh. Thanks. I guess. Now, get out.",
-                "Could you bring something nice next time?",
-                "Dont you have anything better to do. Princesses to kill, dragons to bed?",
-                "You're wasting your time on these. You should go do something useful.",
-                "Do that again and maybe I will hire assassins to kill you.",
+    thanklist = ({
+            "Ah, isn't it my favorite useless adventurer.",
                 "Are you still here?",
-                "You know how to make a dwarf fly?.. Throw him up.",
-                "You're not helping anyone but yourself.",
-                "Once there was just one moon. Someone killed her.",
+                "Be gone",
+                "Bugger off.",
+                "Could you bring something nice next time?",
                 "Did you know that... Nevermind, get lost.",
-                "You are not adding any meaning to life, you know.",
-                "Perhaps next time you could bring something useful.",
-                "Ah, isn't it my favorite useless adventurer.",
-                "Next time bring me a drink.",
-                "Yes-yes, move along, I don't have all day...",
-                "Well?.. Why are you still here. There are more to hunt down.",
-                "Perhaps one day you'll be as great as me.",
-                "Pathetic weakling, why don't you go kill something instead.",
+                "Do that again and maybe I will hire assassins to kill you.",
+                "Dont you have anything better to do. Princesses to kill, dragons to bed?",
+                "Eeeh. Thanks. I guess. Now, get out.",
+                "Feeling lucky today? Your luck will run out, and you will die.",
+                "Go away.",
+                "Go find somewhere else to loiter.",
+                "Great, now I have to pay this worthless scum.",
                 "Hmm? Something you said, you worthless scum?",
                 "Just die.",
+                "Next time bring me a drink.",
+                "Once there was just one moon. Someone killed her.",
+                "Pathetic weakling, why don't you go kill something instead.",
+                "Perhaps next time I'll kill you myself.",
+                "Perhaps next time you could bring something useful.",
+                "Perhaps one day you'll be as great as me.",
+                "Thank you, adventurer. Now... Unless you have more, get lost.",
+                "Thanks for nothing.",
                 "Useless.",
-                "Bugger off.",
-                "Go away."});
+                "Well?.. Why are you still here. There are more to hunt down.",
+                "What do you want now?",
+                "What took you so long?.. If you won't be fast others will claim the reward.",
+                "Why do I even bother?",
+                "Why won't you go and screw yourself?",
+                "Yes-yes, move along, I don't have all day...",
+                "You are not adding any meaning to life, you know.",
+                "You know how to make a dwarf fly?.. Throw him up.",
+                "You're not helping anyone but yourself.",
+                "You're wasting your time on these. You should go do something useful.",
+                "Your existence is meaningless.",
+                "Thank you for your service, here is your reward.",
+                });
     tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in annoyed voice:%^RESET%^ "+thanklist[random(sizeof(thanklist))]);
 }
 
