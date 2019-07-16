@@ -14,7 +14,7 @@ string *restricted_races() {
 }
 
 string *restricted_classes() { 
-    return ({ "bard","barbarian","thief","warlord","antipaladin","cavalier","psywarrior","warlock" }); 
+    return ({ "bard","barbarian","thief","warlord","antipaladin","cavalier","psywarrior",}); 
 }
 
 int *restricted_alignments() { 

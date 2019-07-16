@@ -14,7 +14,7 @@ string *restricted_races() { // irrelevant, this is handled in the race files
     return ({  });
 }
 
-string *restricted_classes() { return ({ "mage","sorcerer","psion","psywarrior","paladin" }); }
+string *restricted_classes() { return ({ "mage","sorcerer","psion","psywarrior",}); }
 
 int *restricted_alignments() { return ({ 1,2,4,5 }); }
 
