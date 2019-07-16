@@ -18,7 +18,7 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","bard","druid","cleric" }); }
+string *query_base_classes() { return ({ "mage","sorcerer","bard","druid","cleric", "warlock" }); }
 
 int has_base_class_set(object obj)
 {
