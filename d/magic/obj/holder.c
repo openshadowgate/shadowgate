@@ -144,7 +144,7 @@ int cmd(string str){
 	//	return notify_fail("It has broken your spell!\n");
 	
 	if(sscanf(str, "%s to %s", who, what) != 2)
-		return notify_fail("Syntax: command <monster> to <jump up and down>\n");
+		return notify_fail("Syntax: <command OBJECT to ACTION>\n");
 	
 	if(!mon->id(who))
 		return 0;
@@ -162,11 +162,11 @@ int cmd(string str){
 				if(!caster->ok_to_kill(ob))
 					return notify_fail("You are not allowed to kill that creature!\n");
 	}
-        if(what[0..3] == "wear")
-	     return notify_fail("Elementals cannot wear anything.");
+    if(what[0..3] == "wear")
+        return notify_fail("This summon cannot wear anything.");
 	
 	if(!mon->force_me(what))
-		return notify_fail("You fail to command the elemental to "+what+"!\n");
+		return notify_fail("You fail to command the "+mon->query_name()+" to "+what+"!\n");
 	
 	return 1;
 }
@@ -181,9 +181,9 @@ int dismiss(string str){
 	if(freed)
 		return notify_fail("You have no power over this being any more.\n");
 	
-	tell_room(environment(caster),"%^BOLD%^"+caster->query_cap_name()+" dismisses the elemental!",caster);
+	tell_room(environment(caster),"%^BOLD%^"+caster->query_cap_name()+" dismisses the "+mon->query_name()+"!",caster);
     if(objectp(caster)) { caster->remove_property("has_elemental"); }
-	tell_object(caster,"%^BOLD%^You dismiss the elemental!\n");
+	tell_object(caster,"%^BOLD%^You dismiss the "+mon->query_name()+"!\n");
 	call_out("timed",1);
 	return 1;
 }
