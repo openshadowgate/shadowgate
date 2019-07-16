@@ -16,6 +16,7 @@ void create(){
     set_hp(40);
     set_exp(1);
     set_size(3);
+    set_max_internal_encumbrance(100);
     set_stats("strength",20);
     set_stats("constitution",20);
     set_stats("dexterity",5);

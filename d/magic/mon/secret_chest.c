@@ -10,13 +10,12 @@ void create(){
     set_id(({"chest","secret chest","floating wooden chest"}));
     set_short("%^RESET%^%^CYAN%^Floating %^ORANGE%^wooden %^BOLD%^c%^RESET%^%^ORANGE%^h%^BOLD%^e%^RESET%^%^ORANGE%^s%^BOLD%^t%^RESET%^");
     set_long("%^RESET%^%^ORANGE%^This is an %^BOLD%^%^ORANGE%^iro%^BLACK%^n%^ORANGE%^-bound%^RESET%^%^ORANGE%^ wooden chest that appears to float. It is quite large and could probably fit a lot of things inside.%^RESET%^");
-    set("not living",1);
     set_attacks_num(1);    
     set_exp(1);
     set_gender("neuter");
     set_hp(40);
     set_race("chest");
-    set_stats("constitution",16);
+    set_stats("constitution",24);
     set_stats("dexterity",2);
     set_stats("strength",24);
     set_body_type("humanoid");
@@ -27,7 +26,10 @@ void create(){
     remove_limb("left leg");
     remove_limb("right leg");
     add_limb("chest",0,0,0,0);
-    set_attack_limbs(({"chest"}));    
+    set_attack_limbs(({"chest"}));
+    setenv("MIN", "$N floats in.");
+    setenv("MOUT", "$N floats off to the $D.");
+    set_max_internal_encumbrance(250);    
 }
 
 void setup_chest(object invoker)
@@ -49,15 +51,6 @@ int remove(){
     save_chest();
     all_inventory(TO)->remove();
     ::remove();
-}
-
-void heart_beat()
-{
-   ::heart_beat();
-   if(!objectp(caster))
-       TO->remove();
-   if(!objectp(TO))
-       TO->remove();
 }
 
 void save_chest()
