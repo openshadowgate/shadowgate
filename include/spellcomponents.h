@@ -11,7 +11,7 @@
 "sapphire dust", "sesame seeds", "silver pin", "small candle", "small drum", "small silver mirror",\
 "snakes tongue", "soft clay", "spider", "spider web", "sulfur", "sunstone", "talc", "tiny bag",\
 "tiny hearing trumpet", "vermilion", "water", "white feather", "will o wisp essence", "wing feather", "zinc",\
-"smoky quartz", "rose petals", "slug", "lodestone", "mini shovel"\
+"smoky quartz", "rose petals", "slug", "lodestone", "mini shovel","tiny chest"  \
 })
 
 #define PSI_COMPONENTS ({ \
@@ -230,6 +230,7 @@
 "tiny bag" : 5,\
 "tiny bell" : 25,\
 "tiny bucket" : 25,\
+"tiny chest" : 75,\
 "tiny fan" : 50,\
 "tiny hearing trumpet" : 100,\
 "turtle shell" : 10,\
