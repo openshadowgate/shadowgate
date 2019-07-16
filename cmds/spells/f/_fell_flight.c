@@ -5,6 +5,7 @@
 inherit SPELL;
 
 string message_out,message_in,heritage,active;
+int bonus;
 
 void create(){
     ::create();
@@ -98,11 +99,12 @@ void spell_effect(int prof) {
     caster->set_property("MIN","$N drifts in.");
     caster->set_property("MOUT","$N wings lightly to the $D.");
 
-// mini haste - no reflex or athletics as warlocks get these from other spells already. Extra attack is handled ala rage/berserker with call-out below!
-    caster->add_attack_bonus(1); // +1 BAB!
-    caster->add_ac_bonus(1); // +1 dodge to AC!
+    bonus = clevel/12+1;
+    bonus = bonus>4?4:bonus;
+    caster->add_ac_bonus(bonus);
+    caster->add_attack_bonus(bonus);
+    caster->add_damage_bonus(bonus);
     caster->set_property("hasted",1); // tracking!
-
     caster->set_property("spelled", ({TO}) );
     active = 1;
     spell_successful();
@@ -133,8 +135,9 @@ void dest_effect() {
       caster->set_property("endurance",(-1*(clevel/10)));
       caster->remove_property("MIN");
       caster->remove_property("MOUT");
-      caster->add_attack_bonus(-1);
-      caster->add_ac_bonus(-1);
+      caster->add_attack_bonus(-bonus);
+      caster->add_damage_bonus(-bonus);      
+      caster->add_ac_bonus(-bonus);
       caster->set_property("hasted",-1);
 
       switch(heritage) {

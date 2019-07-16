@@ -77,7 +77,7 @@ void spell_effect(int prof)
     }
 
     target->add_ac_bonus(bonus);
-    target->set_property("magic resistance",clevel/16);
+    target->set_property("magic resistance",clevel/2);
     target->set_property("spelled", ({TO}) );
     target->set_property("armoured",1);
     addSpellToCaster();
@@ -121,7 +121,7 @@ void dest_effect()
     {
         target->add_ac_bonus(-1 * bonus);
         target->remove_property_value("spelled", ({TO}) );
-        target->set_property("magic resistance",-clevel/16);
+        target->set_property("magic resistance",-clevel/2);
         tell_object(target, "%^CYAN%^The magic shielding around you glows briefly, then fades away.");
         tell_room(environment(target),"%^CYAN%^"+target->QCN+" glows briefly.", target );
         target->remove_property("armoured");

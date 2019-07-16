@@ -4,6 +4,7 @@
 inherit SPELL;
 
 object targ;
+int bonus;
 
 void create() {
     ::create();
@@ -33,18 +34,20 @@ int preSpell() {
 
 void spell_effect(int prof){
     int mylevel;
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    if(caster->is_class("psywarrior")){
+        mylevel = caster->query_guild_level("psywarrior");
+    }else{
+        mylevel = caster->query_guild_level("psion");
+    }
     target = caster;
     tell_room(place,"%^YELLOW%^Knowledge shimmers in "+caster->QCN+"'s "+
-       "eyes as "+caster->QS+" grows more confident.",target);
+              "eyes as "+caster->QS+" grows more confident.",target);
     tell_object(target, "%^YELLOW%^You feel the calm assurance of "+
-       "foreknowledge fill your mind, making you deadly in battle.");
-    target->add_attack_bonus(3);
-    target->add_damage_bonus(2);
+                "foreknowledge fill your mind, making you deadly in battle.");
+    bonus = clevel/12;
+    bonus = bonus>4?4:bonus;
+    target->add_attack_bonus(bonus);
+    target->add_damage_bonus(bonus);
     call_out("dest_effect",mylevel*20);
     target->set_property("prescienced",1);
     target->set_property("spelled", ({TO}) );
@@ -58,8 +61,8 @@ void dest_effect() {
            "drain from you.");
         tell_room(environment(target),"%^ORANGE%^"+target->QCN+"'s "+
            "eyes seem to grow dull.",target);
-        target->add_attack_bonus(-3);
-        target->add_damage_bonus(-2);
+        target->add_attack_bonus(-bonus);
+        target->add_damage_bonus(-bonus);
         target->remove_property("prescienced");
         target->remove_property_value("spelled", ({TO}) );
     }

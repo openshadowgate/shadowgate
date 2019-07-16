@@ -8,15 +8,10 @@ To further explain what defines the Dexterity score, it can be broken down into:
 Balance - A character possessing a high Balance may be an acrobat or a tightrope walker.
 
 %^RESET%^You apply your character's Dexterity modifier to:
-%^BOLD%^%^GREEN%^* Ranged attack rolls, including those for attacks made 
-with bows, crossbows, throwing axes, and other ranged weapons.
-
+%^BOLD%^%^GREEN%^* Ranged attack rolls, including those for attacks made with bows, crossbows, throwing axes, and other ranged weapons.
 %^RESET%^%^GREEN%^* Armor Class (AC), provided that the character can react to the attack and are not wearing armor that would preclude you from receiving it.
-
 %^BOLD%^%^GREEN%^* Certain skills such as Athletics, Stealth, and Thievery.
-
 %^RESET%^%^GREEN%^* Your Reflex saving throw.
-
 
 %^RESET%^Stat Scores
 
