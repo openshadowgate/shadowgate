@@ -15,8 +15,8 @@ string *restricted_races() {
 
 string *restricted_classes() { return ({ "cavalier","paladin","antipaladin","psywarrior","monk" }); }
 
-int *restricted_alignments() { // switched March 2016 to 3e standard, all non-lawful >> N <<
-    return ({ 1, /*LG*/ 2, /*LN*/ 3, /*LE*/ });
+int *restricted_alignments() { 
+    return ({  });
 }
 
 string *restricted_gods() { return ({}); }
