@@ -22,8 +22,8 @@ void create()
 
 void spell_effect(int prof) 
 {
-    string racefile;
-    target = caster;
+    if(!target)
+        target = caster;
     
     if (target->query_property("enlarged")) 
     {
@@ -31,16 +31,9 @@ void spell_effect(int prof)
         TO->remove();
     }
 
-    racefile = "/std/races/"+target->query_race()+".c";
-    if(!file_exists(racefile))
+    if(target->query_size_bonus())
     {
-        tell_object(caster,"You can't become bigger.");
-        TO->remove();
-    }
-
-    if(!size=racefile->size())
-    {
-        tell_object(caster,"You can't become bigger.");
+        tell_object(caster,"The spell is repelled by similar magic.");
         TO->remove();
     }
     
@@ -53,7 +46,7 @@ void spell_effect(int prof)
     //For small characters the spell is cosmetic only
     keepsize = 0;
     if(size>1)
-        target->set_size(--size);
+        target->set_size_bonus(-1);
     else
         keepsize = 1;
     target->set_property("spelled", ({TO}) );
@@ -68,7 +61,7 @@ void dest_effect()
     if(objectp(target)) 
     {
         if(!keepsize)
-            target->set_size(++size);
+            target->set_size_bonus(0);
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target, "%^YELLOW%^You grow back to normal!");
         tell_room(environment(target),"%^YELLOW%^"+target->QCN+" grows back to normal size.", target );

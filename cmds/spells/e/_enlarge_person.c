@@ -11,7 +11,7 @@ void create()
     set_spell_name("enlarge person");
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS enlarge person");
+    set_syntax("cast CLASS enlarge person [on TARGET]");
     set_description("When this spell is cast, humanoid caster will grow twice in size. This spell will turn halflings into humans, humans into firbolgs, and firbolgs into mountains.");
     set_verbal_comp();
     set_somatic_comp();
@@ -21,8 +21,8 @@ void create()
 
 void spell_effect(int prof) 
 {
-    string racefile;
-    target = caster;
+    if(!target)
+        target = caster;
     
     if (target->query_property("enlarged")) 
     {
@@ -30,26 +30,19 @@ void spell_effect(int prof)
         TO->remove();
     }
 
-    racefile = "/std/races/"+target->query_race()+".c";
-    if(!file_exists(racefile))
+    if(target->query_size_bonus())
     {
-        tell_object(caster,"You can't become bigger.");
-        TO->remove();
-    }
-
-    if(!size=racefile->size())
-    {
-        tell_object(caster,"You can't become bigger.");
+        tell_object(caster,"The spell is repelled by similar magic.");
         TO->remove();
     }
     
     spell_successful();
 
-    tell_object(caster,"%^YELLOW%^You grow twice in size!");
-    tell_room(place,"%^YELLOW%^"+caster->QCN+" grows twice in size!", caster );
+    tell_object(target,"%^YELLOW%^You grow twice in size!");
+    tell_room(place,"%^YELLOW%^"+target->QCN+" grows twice in size!", target);
 
     target->set_property("added short",({"%^YELLOW%^ (gigantic)%^RESET%^"}));
-    target->set_size(++size);
+    target->set_size_bonus(1);
     target->set_property("spelled", ({TO}) );
     target->set_property("enlarged",1);
     call_out("dest_effect",ROUND_LENGTH*clevel);
@@ -61,7 +54,7 @@ void dest_effect()
 {    
     if(objectp(target)) 
     {
-        target->set_size(--size);
+        target->set_size_bonus(0);
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target, "%^YELLOW%^You shrink back to normal!");
         tell_room(environment(target),"%^YELLOW%^"+target->QCN+" shrinks back to normal size.", target );

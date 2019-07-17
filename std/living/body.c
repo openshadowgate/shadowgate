@@ -31,6 +31,7 @@ int all_my_fingers;
 static int ac = 10;
 static int monster_ac;
 static int size;
+static int size_bonus = 0;
 static int num_wielded;
 static int ac_bonus;
 static int max_hp_bonus = 0;
@@ -1335,13 +1336,28 @@ int query_size() {
       val = 2;
       race = this_object()->query_race();
       val = RACE_D->query_size(race);
-      return val;
+      return val+size_bonus;
    } else
-      return size;
+      return size+size_bonus;
 }
 
 void set_size(int x) {
    size = x;
+}
+
+int query_size_bonus()
+{
+    return size_bonus;
+}
+
+void set_size_bonus(int x)
+{
+    size_bonus=x;
+}
+
+void add_size_bonus(int x)
+{
+    size_bonus+=x;
 }
 
 void set_wielding_limbs( string *str) {

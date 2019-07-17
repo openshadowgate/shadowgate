@@ -84,9 +84,9 @@ int cmd_discern(string str)
     }
     {
         int weight;
-        weight = (int)ob->query_weight();
+        weight = (int)obj->query_weight();
         if(weight)
-            write("It weights %^ORANGE%^"+weight+"%^RESET%^lb.");
+            write("It weights %^ORANGE%^"+weight+" lb%^RESET%^.");
     }
     if(obj->is_weapon())
     {
