@@ -11,7 +11,7 @@ void create() {
     set_spell_name("false life");
     set_spell_level(([ "mage" : 2, "bard" : 2 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS false life [on TARGET]");
+    set_syntax("cast CLASS false life on TARGET");
     set_description("With this spell, caster harnesses powers of unlife to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
     set_components(([
       "mage" : ([ "drop of blood":1, "crane's feather":1, ]),
@@ -26,7 +26,7 @@ string query_casting_string()
 
 int preSpell()
 {
-    if (target->query_property("false_life")) 
+    if(target->query_property("false_life")) 
     {
         tell_object(caster,"The spell is repelled by its own magic.");
         TO->remove();
@@ -35,14 +35,18 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect() 
 {
-    if (!objectp(target))
+
+    if(!target)
+        target = caster;
+
+    if(!objectp(target))
     {
         TO->remove();
         return;
     }
-    if (!objectp(caster))
+    if(!objectp(caster))
     {
         TO->remove();
         return;
