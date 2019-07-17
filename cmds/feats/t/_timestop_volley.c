@@ -93,10 +93,14 @@ void check()
     ::execute_attack();
 
     weapons = caster->query_wielded();
-    if(!weapons[0]->is_lrweapon()) {
-        tell_object(caster,"%^YELLOW%^You can't use timestop volley feat unless you are wielding a ranged weapon!\n");
-        dest_effect();
-        return;
+    if(sizeof(weapons))
+    {
+        if(!weapons[0]->is_lrweapon())
+        {
+            tell_object(caster,"%^YELLOW%^You can't use timestop volley feat unless you are wielding a ranged weapon!\n");
+            dest_effect();
+            return;
+        }
     }
 
     if(sizeof(caster->query_attackers()))
