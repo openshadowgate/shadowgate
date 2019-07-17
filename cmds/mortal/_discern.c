@@ -82,6 +82,12 @@ int cmd_discern(string str)
         if(names)
             write("%^BOLD%^This item can be refered to as:%^RESET%^ "+implode(names,", "));
     }
+    {
+        int weight;
+        weight = (int)ob->query_weight();
+        if(weight)
+            write("It weights %^ORANGE%^"+weight+"%^RESET%^lb.");
+    }
     if(obj->is_weapon())
     {
         int num, dice, lnum, ldice;
