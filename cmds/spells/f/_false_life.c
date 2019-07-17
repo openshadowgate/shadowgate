@@ -60,7 +60,7 @@ void spell_effect()
         tell_object(target,"%^RED%^You feel the force of "+caster->QCN+"'s will strengthen your body.");
         tell_room(environment(caster),"%^RED%^You see a wave of force surround and strengthen "+target->QCN+"'s body.",({target}));
     }
-    bonus = 5*clevel;
+    bonus = 4*clevel;
     target->add_max_hp_bonus(bonus);
     target->set_property("spelled",({TO}));
     target->set_property("false_life",1);

@@ -18,11 +18,11 @@ void create(){
     ]));
 }
 
-void set_quest_daemon(string daemon){
-     QUEST_D = daemon;
+void set_quest_daemon(string daemon){ //TODO: remove this and call from questing locations
+    QUEST_D = daemon;
 }
 
-string query_quest_daemon(){ 
+string query_quest_daemon(){
     return QUEST_D;
 }
 
@@ -36,45 +36,55 @@ int read_list(string str)
 {
     string questlist, *questkeys;
     mapping quests;
-    int i,exp;
+    int i,exp,character_level;
     string item, file, which, name;
-    
+
+
     if(!str || str!="list") return 0;
-    //added by Saide - May 2016 
+
+    character_level = (int)TP->query_character_level();
+    switch(character_level) {
+        case 1..14: QUEST_D = "/daemon/quests_low"; break;
+        case 15..24: QUEST_D = "/daemon/quests_mid"; break;
+        case 25..50: QUEST_D = "/daemon/quests_high"; break;
+        default: QUEST_D = "/daemon/quests"; break;
+    }
+
+    //added by Saide - May 2016
     if(QUEST_D == "/daemon/quests_high")
     {
-        if((int)TP->query_character_level() < 25 && !avatarp(TP)) 
+        if(character_level < 25 && !avatarp(TP))
         {
             tell_object(TP, "%^BOLD%^You are far too inexperienced to be attempting to recover "+
             "items from this quest list. OOC: You must now be level 25 or above to "+
-            "see this quest list or claim items here.%^RESET%^");
-            return 1;            
+            "see this quest list or claim items from it.%^RESET%^");
+            return 1;
         }
     }
-    
+
     if(QUEST_D == "/daemon/quests_low")
     {
-        if((int)TP->query_character_level() > 15 && !avatarp(TP)) 
+        if(character_level > 14 && !avatarp(TP))
         {
             tell_object(TP, "%^BOLD%^You are far too experienced to be attempting to claim "+
-            "items from this quest list. OOC: You must now be level 15 or below to "+
-            "see this quest list or claim items here.%^RESET%^");
-            return 1;            
+            "items from this quest list. OOC: You must now be below level 15 to "+
+            "see this quest list or claim items from it.%^RESET%^");
+            return 1;
         }
     }
-    
+
     if(QUEST_D == "/daemon/quests_mid")
     {
-        if((int)TP->query_character_level() > 25 && !avatarp(TP) || ((int)TP->query_character_level() < 15 && !avatarp(TP))) 
+        if(character_level > 24 && !avatarp(TP) || (character_level < 15 && !avatarp(TP)))
         {
             tell_object(TP, "%^BOLD%^You are far too experienced to be attempting to claim "+
-            "items from this quest list. OOC: You must now be between level 15 and 25 "+
-            "see this quest list or claim items here.%^RESET%^");
-            return 1;            
+            "items from this quest list. OOC: You must now be level 15 and below level 25 to "+
+            "see this quest list or claim items from it.%^RESET%^");
+            return 1;
         }
-    }    
-        
-   
+    }
+
+
     // this section added 1/15/03
     if(QUEST_D == "/daemon/quests_low") {
         questkeys = QUEST_D->query_generic_list();
@@ -113,17 +123,26 @@ int read_list(string str)
     }
     questlist += "\n";
     TP->more(explode(questlist,"\n"));
-    return 1;    
+    return 1;
 }
 
 int claim(string str){
     mapping quests;
-    string *questkeys;
+    string *questkeys,name;
     object ob,ob2;
-    string name;
-    
+    int character_level;
+
     if(!str) return notify_fail("Claim <item name>.\n");
     if(waiting) return notify_fail("Please wait a moment while I clean up this mess the last person left.\n");
+
+    character_level = (int)TP->query_character_level();
+    switch(character_level) {
+        case 1..14: QUEST_D = "/daemon/quests_low"; break;
+        case 15..24: QUEST_D = "/daemon/quests_mid"; break;
+        case 25..50: QUEST_D = "/daemon/quests_high"; break;
+        default: QUEST_D = "/daemon/quests"; break;
+    }
+
     quests = QUEST_D->queryQuests();
     questkeys = keys(quests);
     ob = present(str,TP);
@@ -131,37 +150,37 @@ int claim(string str){
     //Added by Saide - May 2016
     if(QUEST_D == "/daemon/quests_high")
     {
-        if((int)TP->query_character_level() < 25) 
+        if(character_level < 25)
         {
             tell_object(TP, "%^BOLD%^You are far too inexperienced to be attempting to claim "+
             "items from this quest list. OOC: You must now be level 25 or above to "+
-            "see this quest list or claim items here.%^RESET%^");
-            return 1;            
+            "see this quest list or claim items from it.%^RESET%^");
+            return 1;
         }
     }
-    
+
     if(QUEST_D == "/daemon/quests_low")
     {
-        if((int)TP->query_character_level() > 15) 
+        if(character_level > 15)
         {
             tell_object(TP, "%^BOLD%^You are far too experienced to be attempting to claim "+
-            "items from this quest list. OOC: You must now be level 15 or below to "+
-            "see this quest list or claim items here.%^RESET%^");
-            return 1;            
+            "items from this quest list. OOC: You must now be below level 15 to "+
+            "see this quest list or claim items from it.%^RESET%^");
+            return 1;
         }
     }
-    
+
     if(QUEST_D == "/daemon/quests_mid")
     {
-        if((int)TP->query_character_level() > 25 || (int)TP->query_character_level() < 15) 
+        if(character_level > 25 || character_level < 15)
         {
             tell_object(TP, "%^BOLD%^You are far too experienced to be attempting to claim "+
-            "items from this quest list. OOC: You must now be between level 15 and 25 to "+
+            "items from this quest list. OOC: You must now be level 15 and below level 25 to "+
             "see this quest list or claim items here.%^RESET%^");
-            return 1;            
+            return 1;
         }
-    }    
-    
+    }
+
     if (!TO->query_property("no_ckpt")) TO->set_property("no_ckpt", 1);
     name = ob->query("short");
      waiting = 1;
@@ -173,7 +192,7 @@ int claim(string str){
         QUEST_D->claimExp(name,TP,ob->query_ob_level());
         ob->remove();
         return 1;
-    }    
+    }
 }
 void delay(){waiting = 0;}
 
@@ -184,8 +203,6 @@ void reset()
     if(!present("questor"))
     {
         questor = new("/d/common/mons/questor");
-        questor ->move(TO);
+        questor->move(TO);
     }
 }
-
-
