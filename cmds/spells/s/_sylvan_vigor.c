@@ -1,7 +1,7 @@
 #include <spell.h>
 inherit SPELL;
 
-int newhp;
+int bonus;
 
 void create() {
     ::create();
@@ -26,22 +26,18 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    if(objectp(Vob = caster->query_property("VigorOb"))) Vob->dest_effect();
     tell_object(caster,"%^BOLD%^%^GREEN%^The vigor of nature strengthens you!%^RESET%^");
     tell_room(environment(caster),"%^BOLD%^%^GREEN%^"+caster->QCN+"'s skin takes on a glow of health!%^RESET%^",caster);
-    newhp = (clevel+10) - (int)caster->query_extra_hp();
-    if (newhp < 0) newhp = 0;
-    caster->add_extra_hp(newhp);
+    bonus = clevel+10;
+    caster->add_max_hp_bonus(bonus);
     caster->set_property("spelled",({TO}));
-    caster->set_property("VigorOb",TO);
     addSpellToCaster();
 }
 
 void dest_effect() {
     if(objectp(caster)) 
     {
-        caster->add_extra_hp(-1* newhp);
-        if ((int)caster->query_extra_hp() < 0) caster->add_extra_hp(-1 * (int)caster->query_extra_hp());
+        caster->add_max_hp_bonus(-bonus);
         caster->remove_property_value("spelled", ({TO}) );
     }
     ::dest_effect();

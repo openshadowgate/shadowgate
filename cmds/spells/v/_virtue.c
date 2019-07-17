@@ -35,45 +35,19 @@ void spell_effect(int prof)
     
     newhp = clevel + 10;
     
-    diff = caster->query_max_hp() - caster->query_hp();
-    if(diff > 0)
-    {
-        if(diff >= newhp)
-        {
-            caster->add_hp(newhp);
-            newhp = 0;
-            dest_effect();
-            return;
-        }
-        else
-        {
-            caster->add_hp(newhp);
-            newhp -= diff;
-        }        
-    }
-    
-    newhp -= caster->query_extra_hp();
-    
-    if (newhp < 0) newhp = 0;
-    caster->add_extra_hp(newhp);
-    //caster->set_property("spelled",({TO}));
-    //addSpellToCaster();
-    caster->set_property("VigorOb",TO);
+    caster->add_max_hp_bonus(newhp);
+//    caster->set_property("spelled",({TO}));
+    addSpellToCaster();
 }
 
 void dest_effect() 
 {
     if(objectp(caster)) 
 	{
-        if((int)caster->query_extra_hp() > 0)
-        {
             tell_object(caster, "%^BOLD%^%^BLUE%^The truth and valor of your cause fades away!%^RESET%^");
             tell_room(environment(caster), "%^BOLD%^%^BLUE%^The healthy glow of "+caster->QCN+
             "%^BOLD%^%^BLUE%^'s skin fades away!%^RESET%^", caster);
-        }
-        caster->add_extra_hp(-1* newhp);
-        if ((int)caster->query_extra_hp() < 0) caster->add_extra_hp(-1 * (int)caster->query_extra_hp());
-        caster->remove_property_value("spelled", ({TO}) );
+            caster->add_max_hp_bonus(-newhp);            
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

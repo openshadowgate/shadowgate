@@ -20,7 +20,7 @@ void create() {
 
 string query_casting_string()
 {
-    return "%^RED%^With a shout and a body wide flex, "+caster->QCN+" starts to cast a spell.";
+    return "%^BLUE%^With a shout and a body wide flex, "+caster->QCN+" starts to cast a spell.";
 }
 
 int preSpell()
@@ -53,12 +53,12 @@ void spell_effect()
     }
     
     if (caster == target) {
-        tell_object(caster,"%^RED%^You slowly summon inner strength, lending the force of your will to the strength of your body.");
-        tell_room(environment(caster),"%^RED%^You see a wave of force surround and strengthen "+caster->QCN+"'s body.",({caster}));
+        tell_object(caster,"%^BLUE%^You slowly summon inner strength, lending the force of your will to the strength of your body.");
+        tell_room(environment(caster),"%^BLUE%^You see a wave of force surround and strengthen "+caster->QCN+"'s body.",({caster}));
     } else {
-        tell_object(caster,"%^RED%^You slowly summon inner strength, lending the force of your will to strengthen "+target->QCN+"'s body.");
-        tell_object(target,"%^RED%^You feel the force of "+caster->QCN+"'s will strengthen your body.");
-        tell_room(environment(caster),"%^RED%^You see a wave of force surround and strengthen "+target->QCN+"'s body.",({target}));
+        tell_object(caster,"%^BLUE%^You slowly summon inner strength, lending the force of your will to strengthen "+target->QCN+"'s body.");
+        tell_object(target,"%^BLUE%^You feel the force of "+caster->QCN+"'s will strengthen your body.");
+        tell_room(environment(caster),"%^BLUE%^You see a wave of force surround and strengthen "+target->QCN+"'s body.",({target}));
     }
     bonus = 4*clevel;
     target->add_max_hp_bonus(bonus);
