@@ -19,20 +19,35 @@ void create() {
 	set_helpful_spell(1);
 }
 
-string query_casting_string() {
+string query_casting_string()
+{
     return "%^RED%^With a shout and a body wide flex, "+caster->QCN+" starts to cast a spell.";
+}
+
+int preSpell()
+{
+    if (target->query_property("false_life")) 
+    {
+        tell_object(caster,"The spell is repelled by its own magic.");
+        TO->remove();
+        return 0;
+    }
+    return 1;
 }
 
 void spell_effect(int prof) 
 {
-    if (!objectp(target)) {
+    if (!objectp(target))
+    {
         TO->remove();
         return;
     }
-    if (!objectp(caster)) {
+    if (!objectp(caster))
+    {
         TO->remove();
         return;
     }
+    
     if (caster == target) {
         tell_object(caster,"%^RED%^You slowly summon inner strength, lending the force of your will to the strength of your body.");
         tell_room(environment(caster),"%^RED%^You see a wave of force surround and strengthen "+caster->QCN+"'s body.",({caster}));
@@ -42,9 +57,9 @@ void spell_effect(int prof)
         tell_room(environment(caster),"%^RED%^You see a wave of force surround and strengthen "+target->QCN+"'s body.",({target}));
     }
     bonus = 5*clevel;
-    caster->add_max_hp_bonus(bonus);
-    caster->set_property("spelled",({TO}));
-    caster->set_property("false_life",1);
+    target->add_max_hp_bonus(bonus);
+    target->set_property("spelled",({TO}));
+    target->set_property("false_life",1);
     spell_successful();
     addSpellToCaster();
 }
@@ -55,6 +70,7 @@ void dest_effect()
     {
        target->add_max_hp_bonus(-bonus);
        target->remove_property_value("spelled", ({TO}) );
+       target->remove_property("false_life");
     }
     ::dest_effect();
     if(objectp(TO))
