@@ -33,6 +33,7 @@ static int monster_ac;
 static int size;
 static int num_wielded;
 static int ac_bonus;
+static int max_hp_bonus = 0;
 private int heal_rate;
 private static int stoneSkinned;
 private static int missChance;
@@ -147,6 +148,16 @@ int query_sp() {
 
 void set_max_hp(int hp) {
    player_data["general"]["max_hp"] = hp;
+}
+
+void set_max_hp_bonus(int hp)
+{
+    max_hp_bonus = hp;
+}
+
+void add_max_hp_bonus(int hp)
+{
+    max_hp_bonus += hp;
 }
 
 void set_diety(string str) {
@@ -478,7 +489,8 @@ int query_max_hp()
     int num, lvladj, mypsi;
     string file, myrace, subrace;
 
-    if(!objectp(TO)) { return 0; }
+    if(!objectp(TO))
+        return 0;
     if(!interactive(TO)) 
     { 
         num = player_data["general"]["max_hp"];
@@ -489,19 +501,22 @@ int query_max_hp()
     num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("constitution"));
     num = num * (int)TO->query_highest_level();
 
-    if(FEATS_D->usable_feat(TO,"toughness")) { num += ((int)TO->query_level())/2; }
-    if(FEATS_D->usable_feat(TO,"improved toughness")) { num += TO->query_level(); }
+    if(FEATS_D->usable_feat(TO,"toughness"))
+        num += ((int)TO->query_level())/2;
+    if(FEATS_D->usable_feat(TO,"improved toughness"))
+        num += TO->query_level(); 
     if(FEATS_D->usable_feat(TO,"psionic body")) 
     {
        mypsi = 0;
        mypsi += FEATS_D->calculate_psionic_feats(TO);
-       if(mypsi < 1) mypsi = 1; //This shouldn't happen, but better safe than sorry.
-       mypsi = mypsi*5; // 5 bonus hit points per psionic feat
+       if(mypsi < 1) mypsi = 1;
+       mypsi = mypsi*5; 
        if(FEATS_D->usable_feat(TO,"battle psyche")) { mypsi = mypsi * 3; } 
        num += mypsi;
     }
 
-    // adding monster hitdice for each level of LA per the books. Nienne, 5/13.
+    num+=max_hp_bonus;
+
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
     file = DIR_RACES+"/"+myrace+".c";
