@@ -1,7 +1,6 @@
 #include <std.h>
-#include <dirs.h>
 #include <daemons.h>
-#include <priest.h>
+#include <spell.h>
 inherit SPELL;
 
 int bonus;
@@ -11,7 +10,7 @@ void create() {
     set_spell_name("false life");
     set_spell_level(([ "mage" : 2, "bard" : 2 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS false life on TARGET");
+    set_syntax("cast CLASS false life [on TARGET]");
     set_description("With this spell, caster harnesses powers of unlife to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
     set_components(([
       "mage" : ([ "drop of blood":1, "crane's feather":1, ]),
@@ -26,9 +25,11 @@ string query_casting_string()
 
 int preSpell()
 {
-    if(target->query_property("false_life")) 
+    if(!target)
+        target = caster;
+    if(target->query_property("false_life"))
     {
-        tell_object(caster,"The spell is repelled by its own magic.");
+        tell_object(caster,"The spell is repelled by similar magic.");
         TO->remove();
         return 0;
     }
@@ -37,7 +38,6 @@ int preSpell()
 
 void spell_effect() 
 {
-
     if(!target)
         target = caster;
 

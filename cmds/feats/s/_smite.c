@@ -50,11 +50,6 @@ void execute_feat() {
         dest_effect();
         return;
     }
-    if((int)caster->query_alignment() > 3) {
-        tell_object(caster,"You have lost your alignment!");
-        dest_effect();
-        return;
-    }
     mygawd = (string)caster->query_diety();
     mygawds = keys(DIETIES);
     if(member_array(mygawd,mygawds) == -1) {

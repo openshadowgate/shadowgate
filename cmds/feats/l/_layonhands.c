@@ -21,7 +21,7 @@ int allow_shifted() { return 0; }
 
 int prerequisites(object ob){
     if(!objectp(ob)) return 0;
-    if(ob->query_class_level("paladin") < 6 || (int)ob->query_alignment() > 3) {
+    if(ob->query_class_level("paladin") < 6 ) {
         dest_effect();
         return 0;
     }
@@ -48,18 +48,6 @@ void execute_feat() {
     }
     if((int)caster->query_property("using layonhands") > time()) {
         tell_object(caster,"You are not prepared to channel such powerful energies again so soon!");
-        dest_effect();
-        return;
-    }
-    if((int)caster->query_alignment() > 3) {
-        tell_object(caster,"You have lost your alignment!");
-        dest_effect();
-        return;
-    }
-    mygawd = (string)caster->query_diety();
-    mygawds = keys(DIETIES);
-    if(member_array(mygawd,mygawds) == -1) {
-        tell_object(caster,"You have no deity to call upon!");
         dest_effect();
         return;
     }
