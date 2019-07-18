@@ -9,7 +9,7 @@ void create()
     ::create();
     set_author("circe");
     set_spell_name("freedom of movement");
-    set_spell_level(([ "cleric" : 4, "bard" : 4, "ranger" : 4, "mage" : 9,"druid" : 4, "assassin" : 4, "psion" : 4, "psywarrior" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "bard" : 4, "ranger" : 4, "mage" : 9,"druid" : 4, "assassin" : 4, "psion" : 4, "psywarrior" : 4, "blackguard" : 4 ]));
     set_spell_sphere("healing");
     set_spell_domain("renewal");
     set_syntax("cast CLASS freedom of movement");

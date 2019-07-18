@@ -9,7 +9,7 @@ create() {
     ::create();
     set_author("pator");
     set_spell_name("cure critical wounds");
-    set_spell_level(([ "cleric" : 4, "bard" : 4,"druid" : 5,"paladin":4 ]));
+    set_spell_level(([ "cleric" : 4, "bard" : 4,"druid" : 5, "paladin" : 4, "blackguard" : 4 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS cure critical wounds on TARGET");
     set_description("This pray will heal large amounts of damage and wounds to the target.  As the caster's power grows, "

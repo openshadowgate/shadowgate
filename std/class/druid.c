@@ -15,7 +15,7 @@ string *restricted_races() {
 
 string *restricted_classes() { return ({ }); }
 
-int *restricted_alignments() { return ({ }); }
+int *restricted_alignments() { return ({ 1,3,7,9 }); }
 
 string *restricted_gods() { return ({}); }
 

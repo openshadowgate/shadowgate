@@ -8,7 +8,7 @@ void create() {
     ::create();
     set_author("cythera");
     set_spell_name("cure moderate wounds");
-    set_spell_level(([ "cleric" : 2, "bard" : 2, "paladin" : 3, "ranger" : 3,"druid" : 3 ]));
+    set_spell_level(([ "cleric" : 2, "bard" : 2, "paladin" : 3, "ranger" : 3,"druid" : 3,"blackguard":2 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS cure moderate wounds on TARGET");
     set_description("Praying to their diety for a small miracle, the priest can attempt to heal a bit of damage to the "

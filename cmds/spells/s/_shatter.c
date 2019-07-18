@@ -12,7 +12,7 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("shatter");
-    set_spell_level(([ "cleric" : 2, "monk" : 7]));
+    set_spell_level(([ "cleric" : 2, "monk" : 7,"blackguard":2]));
     set_spell_sphere("combat");
     set_spell_domain("destruction");
     set_syntax("cast CLASS shatter on TARGET");

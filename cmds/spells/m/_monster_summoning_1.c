@@ -9,7 +9,7 @@ inherit "/cmds/spells/m/monster_summoning.c";
 create() {
     ::create();
     set_spell_name("monster summoning 1");
-    set_spell_level(([ "mage" : 1, "bard" : 1, "cleric" : 1 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 1, "cleric" : 1, "blackguard":1 ]));
     set_syntax("cast CLASS monster summoning 1");
 }
 

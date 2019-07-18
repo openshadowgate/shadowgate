@@ -7,7 +7,7 @@ inherit SPELL;
 void create() {
 	::create();
     set_spell_name("cause fear");
-    set_spell_level(([ "mage" : 1, "bard" : 2 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 2, "cleric":1,"blackguard":1 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS cause fear on TARGET");
     set_description("This power allows the caster to project "

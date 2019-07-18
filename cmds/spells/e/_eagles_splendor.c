@@ -9,7 +9,7 @@ int mydiff;
 void create() {
     ::create();
     set_spell_name("eagles splendor");
-    set_spell_level(([ "paladin" : 2, "bard" : 2, "cleric" : 2, "mage" : 2 ]));
+    set_spell_level(([ "paladin" : 2, "bard" : 2, "cleric" : 2, "mage" : 2,"blackguard":2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS eagles splendor on TARGET");
     set_description("This spell allows the caster to infuse their target with the presence of an eagle, enhancing their force of personality.  This spell doesn't stack with similarly powerful spells of enhancement.");

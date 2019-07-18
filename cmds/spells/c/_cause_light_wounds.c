@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("pator");
     set_spell_name("cause light wounds");
-    set_spell_level(([ "cleric" : 1 ]));
+    set_spell_level(([ "cleric" : 1,"blackguard":1 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS cause light wounds on TARGET");
     set_description("When cast it makes a nice little wound on the target monster. It is almost as powerful in inflicting "

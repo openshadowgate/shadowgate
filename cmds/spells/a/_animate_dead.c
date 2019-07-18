@@ -12,7 +12,7 @@ void fail();
 void create() {
     ::create();
     set_spell_name("animate dead");
-    set_spell_level(([ "mage" : 4, "cleric" : 3 ]));
+    set_spell_level(([ "mage" : 4, "cleric" : 3, "blackguard" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animate dead [on TARGET]");
     set_description("%^RESET%^With this spell, the caster uses remnants of negative energy released upon recent death to bend souls of the deceased to the will of the caster and puts them into their former vessels. Such souls are incapable of understanding what has been done to them, forced to serve and protect the caster. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.

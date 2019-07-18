@@ -4,7 +4,7 @@
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ half-elf, human, wemic, elf (moon, sun), gnome (rock, 
    forest), dwarf (shield, gold), firbolg, halfling (lightfoot, 
    strongheart)
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any non-lawful
+%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
 %^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ reflex/will strong, fort weak
