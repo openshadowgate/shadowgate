@@ -1914,8 +1914,10 @@ void set_paralyzed(object who, int x, string paralyze_msg)
         }
         return;
     }
-    if(x > 72)
-        x = 72;
+    x /= 8;
+    x = x<1?1:x;
+    x = x>72?72:x;
+
     who->adjust_combat_mapps("vars", "paralyzed", x);
     who->adjust_combat_mapps("messages", "paralyzed", paralyze_msg);
     return;
