@@ -14,9 +14,8 @@ void create() {
     set_spell_level(([ "mage" : 6, "bard" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS eyebite on TARGET");
-    set_description("With this spell caster imbues her eyes with dread power, glancing upon her enemies she curses them. This curse works its worst on weaker enemies, paralyzing them in fear.
-
-Second tier will kick in if target's LVL-10+1d20 < CLEVEL - 10.");
+    set_description("With this spell caster imbues her eyes with dread power, glancing upon her enemies she curses them. This curse works its worst on weaker enemies, paralyzing them in fear.");
+    set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -36,7 +35,7 @@ void spell_effect(int prof) {
         return;
     }
     if(do_save(target)){
-        tell_object(target,"%^CYAN%^You manage to shake off the dark aura that starts to grow around you, and it fades "
+        tell_object(target,"%^CYAN%^You manage to endure the dark aura that starts to grow around you, and it fades "
 "away to nothing!%^RESET%^");
         tell_room(place,"%^CYAN%^A mirroring aura starts to grow around "+target->QCN+", but then it fades away to "
 "nothing.%^RESET%^",target);
@@ -51,16 +50,21 @@ void spell_effect(int prof) {
     target->add_damage_bonus((-1)*bonus);
     target->add_attack_bonus((-1)*bonus);
     target->set_property("empowered",(-1)*bonus);
-    for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],(-1)*bonus);
+    for(i=0;i<sizeof(CORE_SKILLS);i++)
+        caster->add_skill_bonus(CORE_SKILLS[i],-bonus);
     caster->add_saving_bonus("all",(-1)*bonus);
-    if(target->query_character_level()-10+roll_dice(1,20)<clevel-10)
+    if(target->query_character_level()-5+roll_dice(1,10)<clevel-5)
     {
-        tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain "+
-                    "your terror, you cower before "+caster->QCN+"!%^RESET%^");
-        tell_room(environment(target),"%^BOLD%^%^BLUE%^"+
-                  ""+target->QCN+" cowers in terror!%^RESET%^",target);
+        tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you cower before "+caster->QCN+"!%^RESET%^");
+        tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" cowers in terror!%^RESET%^",target);
         target->force_me("flee");        
-        target->set_paralyzed(clevel/5,"You cannot contain your fear to do that!");
+        target->set_paralyzed(roll_dice(1,3)*8,"You cannot contain your fear to do that!");
+    }
+    if(target->query_character_level()-10+roll_dice(2,10)<clevel-10)
+    {
+        tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you faint!%^RESET%^");
+        tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" faints!%^RESET%^",target);
+        target->set_unconscious(roll_dice(1,2)*8,"You're unconcious!");
     }
     call_out("dest_effect",duration);
     spell_successful();
@@ -75,7 +79,8 @@ void dest_effect() {
         target->add_damage_bonus(bonus);
         target->add_attack_bonus(bonus);
         target->set_property("empowered",bonus);
-        for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],bonus);
+        for(i=0;i<sizeof(CORE_SKILLS);i++)
+            caster->add_skill_bonus(CORE_SKILLS[i],bonus);
         caster->add_saving_bonus("all",bonus);
         target->remove_property("cursed");
     }

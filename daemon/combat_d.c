@@ -1895,6 +1895,10 @@ void set_blindfolded(object who, int difficulty, string message)
     if(stringp(message)) who->adjust_combat_mapps("messages", "blindfolded", message);
 }
 
+/**
+ * Assigns paralyzed state, where 'x' is divisor of 8 rounds.
+ * E.g. x = 16 will set paralyzed status for 2 rounds.
+ */
 void set_paralyzed(object who, int x, string paralyze_msg)
 {
     if(!objectp(who) || !intp(x))
@@ -1923,6 +1927,9 @@ void set_paralyzed(object who, int x, string paralyze_msg)
     return;
 }
 
+/**
+ * Removes paralyzed state
+ */
 void remove_paralyzed(object who)
 {
     if(!objectp(who)) { return; }

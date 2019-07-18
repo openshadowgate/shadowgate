@@ -43,7 +43,7 @@ void make_me()
     string name;
     name = GENNAM(4,random(4)+1,);
     set_race("outsider");
-    set_gender(({"female","male"})[random(2)]);
+    set_gender("female");
     set_name(name);
     set_short("%^RESET%^"+({"%^BLUE%^","%^MAGENTA%^","%^RED%^","%^ORANGE%^"})[random(4)]+name+"%^CYAN%^, Collector of various lost things%^RESET%^");
     set_id(({name,lower_case(name),"questor",query_race(),"collector","Collector"}));
@@ -57,6 +57,7 @@ void thank()
     string thanklist;
     thanklist = ({
             "Ah, isn't it my favorite useless adventurer.",
+                "A dwarf walks past a bar... Hey, it could happen.",
                 "Are you still here?",
                 "Be gone",
                 "Bugger off.",
@@ -66,6 +67,7 @@ void thank()
                 "Dont you have anything better to do. Princesses to kill, dragons to bed?",
                 "Eeeh. Thanks. I guess. Now, get out.",
                 "Feeling lucky today? Your luck will run out, and you will die.",
+                "Freaking dwarfs... I hate them.",
                 "Go away.",
                 "Go find somewhere else to loiter.",
                 "Great, now I have to pay this worthless scum.",
@@ -77,11 +79,13 @@ void thank()
                 "Perhaps next time I'll kill you myself.",
                 "Perhaps next time you could bring something useful.",
                 "Perhaps one day you'll be as great as me.",
+                "Thank you for your service, here is your reward.",
                 "Thank you, adventurer. Now... Unless you have more, get lost.",
                 "Thanks for nothing.",
                 "Useless.",
                 "Well?.. Why are you still here. There are more to hunt down.",
                 "What do you want now?",
+                "What has four wheels, is bearded, and flies? Dwarf driving a garbage wagon.",
                 "What took you so long?.. If you won't be fast others will claim the reward.",
                 "Why do I even bother?",
                 "Why won't you go and screw yourself?",
@@ -91,7 +95,6 @@ void thank()
                 "You're not helping anyone but yourself.",
                 "You're wasting your time on these. You should go do something useful.",
                 "Your existence is meaningless.",
-                "Thank you for your service, here is your reward.",
                 });
     tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in annoyed voice:%^RESET%^ "+thanklist[random(sizeof(thanklist))]);
 }
