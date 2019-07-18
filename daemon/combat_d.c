@@ -1897,28 +1897,25 @@ void set_blindfolded(object who, int difficulty, string message)
 
 void set_paralyzed(object who, int x, string paralyze_msg)
 {
-    if(!objectp(who) || !intp(x)) return;
+    if(!objectp(who) || !intp(x))
+        return;
     if(archp(who))
     {
         message("my_action", "Your Archhood just saved you from being paralyzed.", who);
         return;
     }
-        if(who->query_property("no paralyze"))
-        {
-                message("my_action","You are uneffected by the paralysis.",who);
+    if(who->query_property("no paralyze"))
+    {
+        message("my_action","You are uneffected by the paralysis.",who);
         if(objectp(environment(who)) && !who->query_invis())
         {
             tell_room(environment(who), who->QCN+" %^BOLD%^%^GREEN%^is totally uneffected by "+
-            "the paralysis attempt!%^RESET%^");
+                      "the paralysis attempt!%^RESET%^");
         }
-                return;
-        }
-    if(x < 200)
-    {
-        x = x/8;
-        if(x > 18) x = 18;
-        if(x < 1) x = 1;
+        return;
     }
+    if(x > 72)
+        x = 72;
     who->adjust_combat_mapps("vars", "paralyzed", x);
     who->adjust_combat_mapps("messages", "paralyzed", paralyze_msg);
     return;
