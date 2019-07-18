@@ -8,10 +8,10 @@ decayStatus 0
 currentStatus 100
 props ([])
 serial_number 0
-ob_data (["race":"outsider","condition":100,"updated time":1563407690,"id":({"outsider",}),"long":"This is an outsider. If you can see this, your warlock heritage is borked. Please contact a wiz.","short":"outsider",])
+ob_data (["race":"outsider","condition":100,"updated time":1563410306,"id":({"outsider",}),"long":"This is an outsider. If you can see this, your warlock heritage is borked. Please contact a wiz.","short":"outsider",])
 cap_name "Outsider"
 true_name "outsider"
-creator "/cmds/spells/b/_beckoned_from_beyond#189952"
+creator "/cmds/spells/b/_beckoned_from_beyond#208537"
 cursed 0
 identified ({})
 studied ({})
