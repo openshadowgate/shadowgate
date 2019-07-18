@@ -17,6 +17,7 @@ int cmd_profile(string strg)
     int hp, level1,level2,level3,i,j, fsize, str,inte,con,dex,cha,wis;
     object *inven;
     string *files;
+    string position;
 
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
