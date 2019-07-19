@@ -1,0 +1,12 @@
+head:FATAL:2:0
+right forearm:right hand:3:0
+right hand:0:4:right forearm
+left forearm:left hand:3:0
+left hand:0:4:left forearm
+right rear leg:right rear claw:3:0
+right rear claw:0:5:right rear leg
+left rear leg:left rear claw:3:0
+left rear claw:0:5:left rear leg
+right wing:0:4:0
+left wing:0:4:0
+tail:0:4:0

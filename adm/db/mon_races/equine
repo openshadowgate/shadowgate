@@ -1,0 +1,11 @@
+1:right front hoof;left front hoof
+head:FATAL:2:0
+right foreleg:right front hoof:3:0
+right fore hoof:0:4:right foreleg
+left foreleg:left front hoof:3:0
+left fore hoof:0:4:left foreleg
+right rear leg:right rear hoof:3:0
+right rear hoof:0:4:right rear leg
+left rear leg:left rear hoof:3:0
+left rear hoof:0:4:left rear leg
+tail:0:5:0

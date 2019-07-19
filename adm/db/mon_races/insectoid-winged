@@ -1,0 +1,13 @@
+1:right fore leg;left fore leg
+head:FATAL:2:0
+right fore leg:0:3:0
+left fore leg:0:3:0
+right mid leg:0:3:0
+left mid leg:0:3:0
+right rear leg:0:3:0
+left rear leg:0:3:0
+right antennae:0:4:head
+left antennae:0:4:head
+abdomen:FATAL:2:0
+right wing:0:3:0
+left wing:0:3:0

@@ -1,0 +1,15 @@
+5:right hand;left hand
+head:FATAL:2:0
+right arm:right hand:3:0
+right hand:0:4:right arm
+left arm:left hand:3:0
+left hand:0:4:left arm
+right foreleg:right front hoof:3:0
+right fore hoof:0:4:right foreleg
+left foreleg:left front hoof:3:0
+left fore hoof:0:4:left foreleg
+right rear leg:right rear hoof:3:0
+right rear hoof:0:4:right rear leg
+left rear leg:left rear hoof:3:0
+left rear hoof:0:4:left rear leg
+tail:0:5:0

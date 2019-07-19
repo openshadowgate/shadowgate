@@ -1,0 +1,14 @@
+head:FATAL:2:0
+waist:0:4:0
+neck:0:4:0
+right arm:right hand:3:0
+right hand:0:4:right arm
+left arm:left hand:3:0
+left hand:0:4:left arm
+right leg:right hoof:3:0
+right hoof:0:4:right leg
+left leg:left hoof:3:0
+left hoof:0:4:left leg
+tail:0:5:0
+left horn:0:5:head
+right horn:0:5:head

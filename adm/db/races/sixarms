@@ -1,0 +1,15 @@
+head:FATAL:2:0
+upper right arm:upper right hand:3:0
+upper right hand:0:3:upper right arm
+upper left arm:upper left hand:3:0
+upper left hand:0:4:upper left arm
+lower right arm:lower right hand:3:0
+lower right hand:0:4:lower right arm
+lower left arm:lower left hand:3:0
+lower left hand:0:4:lower left arm
+right arm:right hand:3:0
+right hand:0:4:right arm
+left arm:left hand:3:0
+left hand:0:4:left arm
+waist:0:4:0
+neck:0:4:0

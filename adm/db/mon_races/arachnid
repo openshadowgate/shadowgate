@@ -1,0 +1,13 @@
+1:right pincer;left pincer
+head:FATAL:2:0
+right fore leg:0:3:0
+left fore leg:0:3:0
+right mid leg:0:3:0
+left mid leg:0:3:0
+right tertiary leg:0:3:0
+left tertiary leg:0:3:0
+right rear leg:0:3:0
+left rear leg:0:3:0
+right pincer:0:4:0
+left pincer:0:4:0
+abdomen:FATAL:2:0

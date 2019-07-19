@@ -1,0 +1,82 @@
+# /adm/etc/groups.db
+# from the Nightmare Mudlib
+# defines groups of euid's with similar access needs
+# system created by Descartes of Borg 01 august 1993
+# based on security ideas by Cygnus@Synergy
+#
+# file format:
+# (group name): list of members by euid
+# note... a creator's name is the euid for that creator
+# -------------------------------------------------------------
+
+#       superuser is for 2000 gods/1750 arches
+(superuser): vetri firedragon grendel thorn melnmarn garrett advil rotor tristan styx
+
+#       assist is for level 1500 elder
+(assist): grayhawk pator grazzt
+(approval): aragorn melnmarn thorn
+
+#       mudlib is a special one for 1500 elders who get mudlib access
+(mudlib): firedragon thorn garrett grendel
+(daemon): crystal circe styx
+(admin): thorn pator grazzt grayhawk melnmarn
+
+#       misc groups
+(law_c): styx firedragon thorn grendel grayhawk tristan garrett vetri
+(law): styx thorn pator advil grendel tristan garrett vetri
+(record): pator svaha
+(standard): firedragon melnmarn thorn
+(classcoding): styx circe garrett tristan crystal obsidian saide
+(creatorcmd): thorn pator grazzt
+
+#       Closed directories (Wiz's private areas)
+(thornclosed): thorn idris
+(patorclosed): pator svaha rotor
+(grendelclosed): grendel
+
+
+#       Teams
+(area): diego dinji styx grendel obsidian garrett crystal mercutio circe saide tsera
+(mentor): crystal garrett obsidian
+(over): obsidian tristan crystal garrett vetri advil styx
+(guilds): tristan grendel obsidian crystal vetri diego circe saide tsera cyric selune mask loviatar mielikki kelemvor grumbar shar eldath mystra bane oghma torm xvim helm oghma tyr auril istishia dinji circe styx garrett mercutio silvanus
+
+
+#
+#	Class coding teams 
+#       (with write access to certain /cmds and /std dirs)
+(wizard-coding): obsidian styx diego tsera tristan garrett crystal dinji circe saide
+
+
+#       Areas of the game (/d)
+(antioch): crystal
+(attaya): grendel bruenor
+#(azha): thorn
+(barovia): grendel
+(barrier): circe tsera nienne
+#(cavern): svaha
+(cursed): grendel
+(danger): circe tsera
+(Dagger): obsidian grazzt svaha grendel
+(darkwood): dinji tsera
+(deku): obsidian dinji saide
+(dragon): dinji
+(elemental): grendel
+(hmcoding): grendel
+(islands): svaha obsidian
+(khalian): svaha pator
+(koenig): obsidian
+(kravor): grendel
+(laerad): obsidian diego
+(mine): grendel
+(newbie): vetri crystal styx garrett
+(playerhouses): saide
+(ptalkin): svaha pator
+(sands): grendel
+(shadow): grazzt obsidian circe
+#(shanterra): grendel
+(stella): grendel
+(tharis): tristan grazzt
+(tsarven): mercury thorn
+
+

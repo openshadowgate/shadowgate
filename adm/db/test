@@ -1,0 +1,91 @@
+# /adm/etc/groups.db
+# from the Nightmare Mudlib
+# defines groups of euid's with similar access needs
+# system created by Descartes of Borg 01 august 1993
+# based on security ideas by Cygnus@Synergy
+#
+# file format:
+# (group name): list of members by euid
+# note... a creator's name is the euid for that creator
+# -------------------------------------------------------------
+
+#       superuser is for 2000 gods/1750 arches
+(superuser): firedragon nienne ares saide
+# 
+
+
+#       assist is for level 1500 elder
+(assist): grayhawk pator grazzt Restore
+(approval): aragorn melnmarn thorn
+
+#       mudlib is a special one for 1500 elders who get mudlib access
+(mudlib): firedragon ares saide nienne
+(daemon): ares saide nienne
+(daemon_adv): nienne ares saide
+(admin):  grazzt grayhawk 
+
+#       misc groups
+(law_c): firedragon nienne ares saide
+(law): nienne ares saide firedragon
+(record): pator svaha
+(standard): firedragon Standard
+(classcoding): saide ares nienne lujke dinji octothorpe klieth ergo
+(creatorcmd): grazzt
+
+#       Closed directories (Wiz's private areas)
+(thornclosed): thorn idris
+(patorclosed): pator svaha rotor
+(grendelclosed): 
+
+
+#       Teams
+(area): diego dinji saide nienne ares lujke loki octothorpe ari hades klieth ergo
+(areajr): nobody
+(mentor): crystal dinji ares lujke nienne
+(over): nienne ares saide octothorpe
+(guilds): diego saide cyric selune mask loviatar mielikki kelemvor grumbar shar eldath mystra bane oghma torm xvim helm tyr auril istishia dinji mercutio silvanus nienne cythera lujke ares auppenser loki velsharoon garugath anhur asmodeus klieth moradin kossuth brandobaris
+(god): saide ares nienne
+(daemonassist): nienne dinji ares saide lujke octothorpe
+(daemonjr): lujke ares
+(wwwassist): nienne saide ares
+
+#
+#	Class coding teams 
+#       (with write access to certain /cmds and /std dirs)
+(wizard-coding): cythera diego crystal dinji circe saide nienne lujke ares octothorpe klieth
+
+
+#       Areas of the game (/d)
+(antioch): crystal
+(attaya): bruenor lujke
+#(azha): thorn
+(barovia): saide
+(barrier): nienne
+#(cavern): saide
+(cursed): saide
+(danger): saide ares nienne
+(Dagger): obsidian grazzt svaha
+(darkwood): dinji
+(deku): dinji saide
+(dragon): dinji
+(elemental): saide
+(hmcoding): ares
+(islands): svaha ari
+(khalian): svaha pator
+(koenig): saide
+(kravor): ares
+(laerad): diego essyllis
+(mine): ares
+(newbie): ares
+(playerhouses): saide ares
+(ptalkin): svaha pator
+(sands): ares
+(shadow): grazzt
+#(shanterra): saide
+(stella): nienne
+(tharis): grazzt
+(tsarven): mercury 
+(undead): ares
+
+# eof
+

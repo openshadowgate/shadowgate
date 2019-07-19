@@ -1,0 +1,10 @@
+3:right claw;left claw
+head:FATAL:2:0
+right wing:0:3:0
+left wing:0:3:0
+right leg:right claw:3:0
+right claw:0:4:right leg
+left leg:left claw:3:0
+left claw:0:4:left leg
+beak:0:4:head
+tail:0:4:0

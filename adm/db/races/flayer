@@ -1,0 +1,15 @@
+primary right tentacle:0:3:head
+secondary right tentacle:0:3:head
+primary left tentacle:0:3:head
+secondary left tentacle:0:3:head
+head:FATAL:2:0
+right arm:right hand:3:0
+right hand:0:4:right arm
+left arm:left hand:3:0
+left hand:0:4:left arm
+waist:0:4:0
+neck:0:4:0
+left leg:left foot:4:waist
+left foot:0:4:left leg
+right leg:right foot:4:waist
+right foot:0:4:right leg

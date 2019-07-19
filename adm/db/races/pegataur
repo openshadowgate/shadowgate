@@ -1,0 +1,19 @@
+head:FATAL:2:0
+right arm:right hand:3:0
+right hand:0:4:right arm
+left arm:left hand:3:0
+left hand:0:4:left arm
+left foreleg:left forehoof:3:0
+left forehoof:0:4:left foreleg
+right foreleg:right forehoof:3:0
+right forehoof:0:4:right foreleg
+left hindleg:left hindhoof:3:0
+left hindhoof:0:4:left hindleg
+right hindleg:right hindhoof:3:0
+right hindhoof:0:4:right hindleg
+right wing:0:4:0
+left wing:0:4:0
+tail:0:4:0
+waist:0:4:0
+lower torso:0:4:0
+girth:0:4:0

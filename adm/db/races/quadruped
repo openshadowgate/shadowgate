@@ -1,0 +1,13 @@
+head:FATAL:2:0
+left foreleg:left forepaw:3:0
+left forepaw:0:4:left foreleg
+right foreleg:right forepaw:3:0
+right forepaw:0:4:right foreleg
+left hindleg:left hindpaw:3:0
+left hindpaw:0:4:left hindleg
+right hindleg:right hindpaw:3:0
+right hindpaw:0:4:right hindleg
+tail:0:4:0
+waist:0:4:0
+hindquarters:0:4:0
+

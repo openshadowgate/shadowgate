@@ -1,0 +1,10 @@
+4:right forefoot;left forefoot
+head:FATAL:2:0
+right foreleg:right forefoot:3:0
+right forefoot:0:4:right foreleg
+left foreleg:left forefoot:3:0
+left forefoot:0:4:left foreleg
+right rear leg:right rear foot:3:0
+right rear foot:0:4:right rear leg
+left rear leg:left rear foot:3:0
+left rear foot:0:4:left rear leg

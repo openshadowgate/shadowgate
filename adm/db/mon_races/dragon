@@ -1,0 +1,13 @@
+3:right foreclaw;left foreclaw
+head:FATAL:2:0
+right foreleg:right foreclaw:3:0
+right foreclaw:0:5:right foreleg
+left foreleg:left foreclaw:3:0
+left foreclaw:0:5:left foreleg
+right rear leg:right rear claw:3:0
+right rear claw:0:5:right rear leg
+left rear leg:left rear claw:3:0
+left rear claw:0:5:left rear leg
+right wing:0:4:0
+left wing:0:4:0
+tail:0:4:0

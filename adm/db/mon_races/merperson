@@ -1,0 +1,9 @@
+5:left hand;right hand
+head:FATAL:2:0
+tail:FATAL:2:0
+right arm:right hand:3:0
+right hand:0:4:right arm
+left arm:left hand:3:0
+left hand:0:4:left arm
+tail:fin:3:0
+fin:0:4:tail
