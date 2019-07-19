@@ -1,3 +1,2 @@
-/daemon/network
-/daemon/services
-/adm/daemon/ftpd
+#Socket preloads. See master.c or older revisions for examples
+
