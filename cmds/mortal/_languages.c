@@ -47,11 +47,17 @@ void help(){
 "
 %^CYAN%^NAME%^RESET%^
 
-languages - display your languages
+languages - manage your languages
+
+%^CYAN%^SYNTAX%^RESET%^
+
+languages add NUM to LANGUAGE
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command will display languages you know, you can choose what you say with %^ORANGE%^<speak %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^>%^RESET%^ command.
+
+With argument, you can add NUM points you have accumulated to LANGUAGE you already know.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

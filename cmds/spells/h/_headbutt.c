@@ -9,7 +9,7 @@ void create() {
     set_spell_name("headbutt");
     set_spell_level(([ "innate" : 1 ]));
     set_syntax("cast innate headbutt on TARGET");
-    set_description("A satyr can charge someone with her horns any time she wishes. The power of her charge will depend on her strength.");
+    set_description("A satyress can charge someone with her horns any time she wishes. The power of her charge will depend on her strength.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
