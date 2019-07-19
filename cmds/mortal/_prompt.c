@@ -1,7 +1,7 @@
-// Command to change prompt to different things
-// Coded by Bane@Shadowgate
 #include <std.h>
+
 inherit DAEMON;
+
 void cmd_prompt(string str){
     if(!str)
     {
@@ -17,39 +17,54 @@ void cmd_prompt(string str){
 }
 void help(){
     write("
-	Command that allows you to change your current prompt settings.
-	When used with no arguments(i.e. <prompt>), the prompt
-	will reset to a default of %^BOLD%^BLACK%^-%^RED%^>%^RESET%^, Otherwise the prompt will
-	become whatever you type after the prompt command.  [Example: prompt 
-	Bane >] would look like this at my prompt:
-		Bane >
-	To change the prompt to show your current hit points use the argument 
-	$h, and to show your maximum hit points use the argument $H.  If you 
-	wish to show your current hit points over your maximum hit points use
-	$h/$H.  [Example: prompt $h/$H >] would look like:
-		300/320 >
+%^CYAN%^NAME%^RESET%^
 
+prompt - change your prompt appearance
 
-	available codes: 
-	  $F capitalized shapeshifted form
-	  $f lower case shapeshifted form
-	  $h current hp
-	  $H maximum hp
-	  $p power points
-	  $P maximum power points
-	  $L current language
-	  $N name of mud
-	  $r rage status
-          $x Current encumbrance level
-          $X Maximum encumbrance level
-	  $S condition
-	  $W current wimpy %
-	  $E eldritch essence
-	  $k available ki
-	  $K maximum ki      
-    ");
-  if (avatarp(TP)) {
-    write("$I shows True Invis / Mortal Invis / Stealthed status");
-  }
-    return 1;
+%^CYAN%^SYNTAX%^RESET%^
+
+prompt [LINE]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This allows you to change your current prompt settings.  
+
+When used with no arguments, the prompt will reset to a default of
+    %^BOLD%^BLACK%^-%^RED%^>%^RESET%^
+Otherwise the prompt will become whatever you type after the prompt
+command.
+
+Available codes: 
+  %^MAGENTA%^$F%^WHITE%^ capitalized shapeshifted form
+  %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
+  %^MAGENTA%^$h%^WHITE%^ current hp
+  %^MAGENTA%^$H%^WHITE%^ maximum hp
+  %^MAGENTA%^$p%^WHITE%^ power points
+  %^MAGENTA%^$P%^WHITE%^ maximum power points
+  %^MAGENTA%^$L%^WHITE%^ current language
+  %^MAGENTA%^$N%^WHITE%^ name of mud
+  %^MAGENTA%^$r%^WHITE%^ rage status
+  %^MAGENTA%^$x%^WHITE%^ Current encumbrance level
+  %^MAGENTA%^$X%^WHITE%^ Maximum encumbrance level
+  %^MAGENTA%^$S%^WHITE%^ condition
+  %^MAGENTA%^$W%^WHITE%^ current wimpy %
+  %^MAGENTA%^$E%^WHITE%^ eldritch essence
+  %^MAGENTA%^$k%^WHITE%^ available ki
+  %^MAGENTA%^$K%^WHITE%^ maximum ki 
+  %^MAGENTA%^$I%^WHITE%^ shows True Invis / Mortal Invis / Stealthed status%^RESET%^
+
+%^CYAN%^EXAMPLE%^RESET%^
+
+%^ORANGE%^<prompt Bane >>%^RESET%^
+    would look like this
+Bane > 
+
+%^ORANGE%^<prompt $h/$H >>%^RESET%^
+    would look like
+300/320 >
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+setenv, setopt, speech, adjective, describe
+");
 }
