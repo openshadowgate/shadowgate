@@ -6,30 +6,14 @@
 #
 /daemon/command
 /adm/daemon/race_d
-# just in case. Permadeath daemon needs to be loaded.
-/adm/daemon/perma_d.c
 #/adm/daemon/astronomy_d
-#/d/tharis/monsters/glory/mparty_d commenting out ok per T, *Styx* 1/5/04 
-#/daemon/astronomy
-# /adm/daemon/castle_d
-#/adm/daemon/race_d
-#/daemon/localpost
-#/daemon/remotepost
-#/daemon/letter
-#/daemon/economy_d
-#/daemon/events_d
-#/adm/daemon/prison_d
-#places all the temporary moving rooms then unloads
-/daemon/placement_d
-/daemon/events_d
-/adm/daemon/shutdown_d
-/daemon/wholist_d
-#loads to place a new quest 
-/daemon/quests
-/d/tharis/monsters/scavengers_d
-/daemon/monster_d
-/adm/daemon/lawbounty_d
-#/daemon/permspell
 /adm/daemon/cleaning_d
-/d/islands/tonerra/mountain/dhome
+/adm/daemon/lawbounty_d
+/adm/daemon/perma_d
+/adm/daemon/shutdown_d
+/daemon/events_d
+/daemon/monster_d
+/daemon/placement_d
+/daemon/quests
+/daemon/wholist_d
 
