@@ -232,6 +232,7 @@ int cmd_abandon(string str)
         return 1;
     }
     str = lower_case(str);
+    str = replace_string(str," ","_");
     if(TP->query("negative level"))
     {
         tell_object(TP, "%^BOLD%^%^RED%^You have incurred a negative level and must remove it "+
