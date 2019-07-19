@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/shadow/room/city/cguild/mage/lab"
-identified ({})
-id "shadow"
-owner "keito"
-components (["owlfeather":7,"adders stomach":5,"piece of bone":9,"firefly":2,"drop of blood":8,"aluminum chaff":9,"sulfur":6,"iron rod":21,"dart":10,"powdered rhubarb leaf":30,"piece of reed":8,])

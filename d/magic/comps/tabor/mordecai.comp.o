@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/darkwood/tabor/room/tlab"
-identified ({})
-id "tabor"
-owner "mordecai"
-components (["diamond dust":1,"bat guano":32,"granite dust":1,"eyelash":30,"phosphorus":5,"blessed leather":10,"bit of bone":9,"eyelash of ogre-mage":29,"aluminum chaff":10,"sulfur":32,"dragon scale":19,"zinc":9,"owlfeather":10,"piece of bone":29,"small candle":3,"firefly":50,"gum arabic":23,"powdered silver":15,"earth from grave":14,"tiny bag":30,"iron rod":10,"feather":48,"phosphorescent moss":10,"pearl":9,"clear crystal":7,"pinch of special dust":10,"piece of iron":33,])

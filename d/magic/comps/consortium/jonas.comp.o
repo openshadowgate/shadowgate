@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/guilds/consortium/hall/lab"
-identified ({})
-id "consortium"
-owner "jonas"
-components (["colored sand":50,"spider":50,"eyelash":50,"small candle":50,"gum arabic":50,"tiny bag":9,"minute tarts":50,"feather":50,"rose petals":50,])

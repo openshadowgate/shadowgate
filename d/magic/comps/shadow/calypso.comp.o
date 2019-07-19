@@ -1,7 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/shadow/room/city/cguild/mage/lab"
-id "shadow"
-owner "calypso"
-components (["eyelash":45,"powdered chalk":50,"water":50,"phosphorus":50,"sand":50,"eyelash of ogre-mage":1,"sulfur":50,"zinc":2,"owlfeather":40,"copper":45,"soft clay":40,"small candle":50,"gum arabic":45,"firefly":50,"crystal":50,"tiny bag":50,"piece of mirror":15,"iron rod":25,"piece of steel":50,"tiny hearing trumpet":15,"quicksilver":1,"pinch of special dust":50,"piece of iron":50,])

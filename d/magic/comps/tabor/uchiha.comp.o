@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/darkwood/tabor/room/tlab"
-identified ({})
-id "tabor"
-owner "uchiha"
-components (["diamond dust":1,"granite dust":50,"eyelash":1,"small candle":10,"gum arabic":1,"firefly":30,"drop of blood":6,"blessed leather":12,"water":50,"tiny bag":50,"pinch of special dust":50,])

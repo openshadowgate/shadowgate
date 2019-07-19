@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/shadow/room/city/cguild/mage/lab"
-identified ({})
-id "shadow"
-owner "sevotharte"
-components (["powdered chalk":30,"phosphorus":30,"water":50,"sand":50,"minute tarts":50,"incense stick":50,"ivory portal":5,"talc":30,"owlfeather":50,"small candle":50,"firefly":50,"spider web":50,"gum arabic":50,"drop of blood":50,"powdered silver":30,"crystal":50,"piece of mirror":30,"tiny bag":50,"iron rod":50,"rose petals":50,"parchment":50,"quicksilver":10,"pinch of special dust":50,"small diamond":3,])

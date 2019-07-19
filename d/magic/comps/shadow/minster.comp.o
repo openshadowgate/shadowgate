@@ -1,7 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/shadow/room/city/cguild/mage/lab"
-id "shadow"
-owner "minster"
-components (["bat guano":50,"granite dust":50,"eyelash":40,"phosphorus":50,"water":45,"sand":45,"sulfur":50,"dart":30,"incense stick":50,"owlfeather":45,"adders stomach":30,"small candle":40,"firefly":30,"gum arabic":40,"tiny bag":40,"powdered rhubarb leaf":30,"pinch of special dust":50,])

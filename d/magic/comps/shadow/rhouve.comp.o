@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/shadow/room/city/cguild/mage/lab"
-identified ({})
-id "shadow"
-owner "rhouve"
-components (["colored sand":50,"diamond dust":4,"bat guano":50,"eyelash":50,"crane's feather":50,"water":25,"minute tarts":20,"dart":50,"sulfur":40,"tiny bell":14,"emerald":6,"talc":15,"owlfeather":50,"small candle":50,"firefly":50,"gum arabic":50,"drop of blood":37,"powdered silver":15,"tiny bag":50,"crystal":40,"carbon":50,"iron rod":50,"rose petals":50,"pearl":35,"powdered rhubarb leaf":21,"corn extract":50,])

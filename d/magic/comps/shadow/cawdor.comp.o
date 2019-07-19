@@ -1,7 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/shadow/room/city/cguild/mage/lab"
-id "shadow"
-owner "cawdor"
-components (["diamond dust":50,"bat guano":50,"granite dust":50,"eyelash":37,"crane's feather":50,"water":45,"phosphorus":28,"sulfur":29,"strip of parchment":44,"dragon scale":47,"emerald":50,"talc":16,"emerald dust":20,"owlfeather":50,"firefly":50,"gum arabic":50,"spider web":15,"drop of blood":50,"powdered silver":16,"crystal":50,"tiny bag":50,"iron rod":28,"rod of iron":1,"pearl":50,"corn extract":50,"pinch of special dust":15,])

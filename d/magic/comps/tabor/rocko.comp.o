@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/darkwood/tabor/room/tlab"
-identified ({})
-id "tabor"
-owner "rocko"
-components (["talc":5,"bat guano":2,"owlfeather":1,"small candle":41,"powdered chalk":5,"firefly":30,"powdered silver":5,"tiny bag":41,"sulfur":20,"tiny hearing trumpet":2,"powdered rhubarb leaf":8,"pinch of special dust":10,])

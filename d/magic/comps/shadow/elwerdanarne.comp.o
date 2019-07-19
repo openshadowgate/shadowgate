@@ -1,8 +1,0 @@
-#d/magic/compAccount.c
-props ([])
-ob_data (["id":({}),"condition":100,])
-creator "/d/shadow/room/city/cguild/mage/lab"
-identified ({})
-id "shadow"
-owner "elwerdanarne"
-components (["colored sand":19,"eyelash":50,"blessed leather":5,"water":20,"bit of bone":3,"talc":7,"zinc":10,"owlfeather":15,"gum arabic":7,"firefly":3,"spider web":7,"drop of blood":2,"tiny bag":5,"iron rod":3,"phosphorescent moss":5,"pearl":12,"powdered rhubarb leaf":27,"clear crystal":9,"piece of iron":9,])
