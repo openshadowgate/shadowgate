@@ -927,8 +927,8 @@ string query_long(string unused)
     }
     if(TP == TO) { if(stringp(dis = "/daemon/disease_d"->my_obvious_disease_effects(TP))) pre += dis; }
     else if(stringp(dis = "/daemon/disease_d"->their_obvious_disease_effects(TO))) pre += dis;
-    sub = capitalize(query_subjective());
-   
+    /* sub = capitalize(query_subjective()); */
+    sub = "They";
     if(userp(TO))
     {
         height = TO->query_player_height();
@@ -939,38 +939,27 @@ string query_long(string unused)
         if(objectp(shape)) { weight = (int)shape->query_shape_weight(); }
         weight = weight / 25;
         weight = (weight + random(2)) * 25;
-        reg += "%^BOLD%^"+sub+" is approximately "+height+" inches tall and "+weight+" pounds.%^RESET%^\n";
+        reg += "%^BOLD%^"+sub+" are approximately "+height+" inches tall and "+weight+" pounds.%^RESET%^\n";
     }
    
     x = ((player_data["general"]["hp"]*100)/player_data["general"]["max_hp"]);
-    if(x>90) reg += "%^YELLOW%^"+sub+" is in top shape.%^RESET%^\n";
-    else if(x>75) reg += "%^WHITE%^%^BOLD%^"+sub+" is in decent shape.%^RESET%^\n";
-    else if(x>60) reg += "%^WHITE%^"+sub+" is slightly injured.%^RESET%^\n";
-    else if(x>45) reg += "%^MAGENTA%^"+sub+" is hurting.%^RESET%^\n";
-    else if(x>30) reg += "%^ORANGE%^"+sub+" is badly injured.%^RESET%^\n";
-    else if(x>15) reg += "%^RED%^%^BOLD%^"+sub+" is terribly injured.%^RESET%^\n";
-    else reg += "%^RED%^"+sub+" is near death.%^RESET%^\n";
+    if(x>90) reg += "%^YELLOW%^"+sub+" are in top shape.%^RESET%^\n";
+    else if(x>75) reg += "%^WHITE%^%^BOLD%^"+sub+" are in decent shape.%^RESET%^\n";
+    else if(x>60) reg += "%^WHITE%^"+sub+" are slightly injured.%^RESET%^\n";
+    else if(x>45) reg += "%^MAGENTA%^"+sub+" are hurting.%^RESET%^\n";
+    else if(x>30) reg += "%^ORANGE%^"+sub+" are badly injured.%^RESET%^\n";
+    else if(x>15) reg += "%^RED%^%^BOLD%^"+sub+" are terribly injured.%^RESET%^\n";
+    else reg += "%^RED%^"+sub+" are near death.%^RESET%^\n";
     stuff = "";
     extra = "";
-/*
-   inv = all_inventory(this_object());
-   if(sizeof(inv)) {
-      for(i=0; i<sizeof(inv); i++) {
-         if(inv[i]->extra_look()) extra += (string)inv[i]->extra_look();
-         if(inv[i]->query_invis()) continue;
-         short = (string)inv[i]->query_short();
-         if(short && short != "") stuff += short + "\n";
-      }
-   }
-*/
     stuff = describe_item_contents(({}));
-    if(stuff == "") reg += capitalize(query_subjective())+" is empty handed.\n";
+    if(stuff == "") reg += sub+" are empty handed.\n";
     else 
     {
         stuff = " "+stuff;
         stuff = replace_string(stuff,",","\n");
         stuff = replace_string(stuff," are here.","");
-        reg += "%^GREEN%^%^BOLD%^"+capitalize(query_subjective())+" is carrying:%^RESET%^\n"+
+        reg += "%^GREEN%^%^BOLD%^"+sub+" are carrying:%^RESET%^\n"+
             "%^GREEN%^"+stuff+"%^RESET%^";
     }
    
