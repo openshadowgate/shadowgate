@@ -40,6 +40,8 @@ void help(){
 	  $L current language
 	  $N name of mud
 	  $r rage status
+          $x Current encumbrance level
+          $X Maximum encumbrance level
 	  $S condition
 	  $W current wimpy %
 	  $E eldritch essence

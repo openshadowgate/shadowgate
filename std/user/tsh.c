@@ -156,6 +156,8 @@ string write_prompt()
         prompt = replace_string( prompt, "$C", ""+query_cmd_num() );
         prompt = replace_string(prompt, "$S", ""+this_object()->query_condition_string());
         prompt = replace_string(prompt, "$W", ""+this_object()->query_wimpy()+"%");
+       prompt = replace_string(prompt, "$x", ""+this_player()->query_internal_encumbrance()); // Encumbrance
+       prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance()); // Max Encumbrance
         if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");
         else prompt = replace_string(prompt, "$E", "No Essence");
      if (avatarp(this_player()))
