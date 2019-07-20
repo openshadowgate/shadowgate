@@ -14,6 +14,7 @@ void create(){
     set_exp(1);
     set_gender("neuter");
     set_hp(40);
+    set_hd(4,1);
     set_race("chest");
     set_stats("constitution",24);
     set_stats("dexterity",2);
@@ -29,7 +30,6 @@ void create(){
     set_attack_limbs(({"chest"}));
     setenv("MIN", "$N floats in.");
     setenv("MOUT", "$N floats off to the $D.");
-    set_max_internal_encumbrance(250);    
 }
 
 void setup_chest(object invoker)
@@ -37,7 +37,7 @@ void setup_chest(object invoker)
     caster = invoker;
     castname = caster->query_name();
     fname = "/d/save/summons/"+castname+"/"+query_name();
-    restoreMonster(fname);    
+    "/daemon/yuck_d"->load_inventory(this_object(),fname);
 }
 
 void die(object obj)
@@ -61,7 +61,7 @@ void save_chest()
     if(!objectp(ETO))
         return;
     mkdir("/d/save/summons/"+castname);
-    mkdir("/d/save/summons/"+castname+"/"+query_name());
-    saveMonster(fname);
+    mkdir(fname);
+    "/daemon/yuck_d"->save_inventory(this_object(),fname);
 }
 

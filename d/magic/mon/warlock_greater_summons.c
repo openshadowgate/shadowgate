@@ -34,7 +34,7 @@ void setup_beastie(object caster, int beastheritage) {
     myheritage = beastheritage;
     castname = cast->query_name();    
     fname = "/d/save/summons/"+castname+"/"+query_name();
-    restoreMonster(fname);
+    "/daemon/yuck_d"->load_inventory(this_object(),fname);
     switch(myheritage) {
       case "celestial":
         set_id(({"shiradi","resplendent shiradi","celestial","outsider","summoned monster"}));
@@ -265,8 +265,8 @@ void save_outsider()
     seteuid(getuid());
     if(!objectp(TO)) { return; }
     mkdir("/d/save/summons/"+castname);
-    mkdir("/d/save/summons/"+castname+"/"+query_name());
-    saveMonster(fname);
+    mkdir(fname);
+    "/daemon/yuck_d"->save_inventory(this_object(),fname);
 }
 
 

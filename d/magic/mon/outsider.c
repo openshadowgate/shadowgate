@@ -16,7 +16,7 @@ void create(){
     set_hp(40);
     set_exp(1);
     set_size(3);
-    set_max_internal_encumbrance(100);
+
     set_stats("strength",20);
     set_stats("constitution",20);
     set_stats("dexterity",5);
@@ -35,9 +35,10 @@ void setup_beastie(object caster, int beastalign) {
     seteuid(getuid());
     castname = cast->query_name();    
     fname = "/d/save/summons/"+castname+"/"+query_name();
-    restoreMonster(fname);        
+    "/daemon/yuck_d"->load_inventory(this_object(),fname);
     myalign = beastalign;
     set_alignment(myalign);
+
     if(caster->query_property("talossian elementalist")) { // Pangretor's quest reward greeble!
       set_id(({"elemental","lightning elemental","outsider","summoned monster"}));
       set_short("%^RESET%^%^MAGENTA%^Lightning Elemental%^RESET%^");
@@ -327,6 +328,7 @@ void set_mylevel(int x){
    set_stats("constitution",20);
    set_stats("dexterity",5);
    set_property("effective_enchantment",(mylevel/7)+1);
+   set_max_internal_encumbrance(100);       
 }
 
 void defend(){
@@ -375,8 +377,8 @@ void save_outsider()
     if(!objectp(TO)) { return; }
     if(!objectp(ETO)) { return; }
     mkdir("/d/save/summons/"+castname);
-    mkdir("/d/save/summons/"+castname+"/"+query_name());
-    saveMonster(fname);
+    mkdir(fname);
+    "/daemon/yuck_d"->save_inventory(this_object(),fname);
 }
 
 
