@@ -23,7 +23,7 @@ int allow_shifted() { return 1; }
 int prerequisites(object ob){
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("stonelord") < 7 || !FEATS_D->usable_feat(ob,"mighty resilience")) {
+    if((int)ob->query_class_level("stonelord") < 7) {
         dest_effect();
         return 0;
     }
