@@ -129,8 +129,8 @@ void InitInnate()
     { 
         feat_spells = ([
             "meld into stone" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "stoneskin"    : (["type" : "spell", "casting level" : 1, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "earthquake" : (["type" : "spell", "casting level" : 1, "daily uses" : 2,  "delay" : 1, "uses left" : 2,  "refresh time" : -1, "level required" : 0, "class specific" : 0]), 
+            "stone body"    : (["type" : "spell", "casting level" : 1, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "earthquake" : (["type" : "spell", "casting level" : 1, "daily uses" : 4,  "delay" : 1, "uses left" : 2,  "refresh time" : -1, "level required" : 0, "class specific" : 0]), 
             "conjure elemental" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             ]);
     }

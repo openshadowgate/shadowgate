@@ -1750,7 +1750,7 @@ void heart_beat()
         {
             if(query_hp() < query_max_hp())
             {
-                add_hp(roll_dice(1,8));
+                add_hp(roll_dice(2,4));
             }
         }
         if(FEATS_D->usable_feat(TO,"mighty resilience") &&

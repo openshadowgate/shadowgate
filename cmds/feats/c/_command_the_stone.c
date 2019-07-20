@@ -12,8 +12,8 @@ void create() {
 it by magical means. Several new spells are learned as innate abilities:
 
   meld into stone (at will)
-  stoneskin (x1), 
-  earthquake (x2)
+  stone body (x1), 
+  earthquake (x4)
   conjure elemental (at will - earth only)");
     permanent(1);
 }
