@@ -2789,18 +2789,18 @@ who->execute_attack(); }
         return;
     }
 
-    if(FEATS_D->usable_feat(who,"combat reflexes") && who->is_ok_armour("thief") && !who->query_casting() &&
-(int)who->query_property("stabs_available") > 0
-    && !who->query_paralyzed() && !who->query_tripped())
+    if(FEATS_D->usable_feat(who,"combat reflexes") &&
+       who->is_ok_armour("thief") &&
+       !who->query_casting() &&
+       (int)who->query_property("stabs_available") > 0 &&
+       !who->query_paralyzed() && !who->query_tripped())
     {
         who->set_property("stabs_available",-1);
         if(victim->query_property("stab_resilience")) {
             victim->set_property("stab_resilience",-1);
             tell_object(who,"You successfully position yourself to strike where "+victim->QCN+" is vulnerable, but "+victim->QS+" seems unaffected.");
-            tell_object(victim,"You suddenly notice that "+who->QCN+" has moved to strike where you are vulnerable, but you are resilient against the
-worst of the attack.");
-            tell_room(EWHO,""+who->QCN+" has positioned "+who->QO+"self to strike where "+victim->QCN+" is vulnerable, but "+victim->QS+" seems
-unaffected.",({victim,who}));
+            tell_object(victim,"You suddenly notice that "+who->QCN+" has moved to strike where you are vulnerable, but you are resilient against the worst of the attack.");
+            tell_room(EWHO,""+who->QCN+" has positioned "+who->QO+"self to strike where "+victim->QCN+" is vulnerable, but "+victim->QS+" seems unaffected.",({victim,who}));
         }
         else {
             tell_object(who,"You successfully position yourself to strike where "+victim->QCN+" is vulnerable.");

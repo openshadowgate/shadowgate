@@ -282,10 +282,13 @@ void heart_beat()
     // new stab resets available chances once per round.
     if(objectp(TO) && sizeof(TO->query_attackers())) 
     {
-        if(TO->query_property("stabs_available")) TO->remove_property("stabs_available");
+        if(TO->query_property("stabs_available"))
+            TO->remove_property("stabs_available");
         if(FEATS_D->usable_feat(TO,"combat reflexes")) 
         {
-            i = ((int)TO->query_class_level("thief")+9)/10;
+            i = (max(({(int)TO->query_guild_level("thief"),
+                                (int)TO->query_class_level("thief")
+                                }))+9)/10;
             TO->set_property("stabs_available",i);
         }
     }

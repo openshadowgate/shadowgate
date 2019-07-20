@@ -1745,15 +1745,18 @@ void heart_beat()
     
     if(objectp(TO))
     {
-        if(FEATS_D->usable_feat(TO,"regeneration") || query_race() == "shade")
+        if(FEATS_D->usable_feat(TO,"regeneration")
+           || query_race() == "shade")
         {
             if(query_hp() < query_max_hp())
             {
-                add_hp(roll_dice(1,6));
+                add_hp(roll_dice(1,8));
             }
         }
-        if(FEATS_D->usable_feat(TO,"mighty resilience") && !TO->query_property("stab_resilience")) {
-            TO->set_property("stab_resilience",TO->query_level()/10/2);
+        if(FEATS_D->usable_feat(TO,"mighty resilience") &&
+           !TO->query_property("stab_resilience"))
+        {
+            TO->set_property("stab_resilience",TO->query_level()/10);
         }
     }
 }
