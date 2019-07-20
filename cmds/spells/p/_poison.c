@@ -7,37 +7,80 @@ inherit SPELL;
 #define POISONS ({ "wyvern_poison", "shadow_essence", "purple_worm_poison", "large_scorpion_venom", "giant_wasp_poison", "deathblade" })
 #define PDIR "/d/common/obj/poisons/base/"
 
-void create() {
+object wpn;
+
+void create()
+{
     ::create();
     set_spell_name("poison");
-    set_spell_level(([ "cleric" : 4, "druid" : 3, "blackguard" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "druid" : 3, "blackguard" : 4, "assassin" : 4 ]));
     set_spell_sphere("combat");
-    set_syntax("cast CLASS poison on TARGET");
-    set_description("Blep");
+    set_syntax("cast CLASS poison on TARGET|WEAPON");
+    set_description("With this spell you create a natural poison and either envenom your target with it, or apply it to a weapon in your possession.");
     set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed(1);
 }
 
-void spell_effect(){
+void spell_effect()
+{
     string poisonf;
+    object targ;
 
-    if(!objectp(caster) || !objectp(target))
+    poisonf = PDIR+POISONS[random(sizeof(POISONS))];
+    targ = present(arg,place);
+    
+    if(objectp(targ) &&
+       !liginv(targ))
     {
-        dest_effect();
-        return;
-    }
-    if(do_save(target,-4))
-    {
-        tell_object(caster,"%^GREEN%^"+target->QCN+"seems to be %^BOLD%^unaffected%^RESET%^%^GREEN%^ by your poisoning attemp!");
+        tell_object(caster, "That is not a living being!");
         TO->remove();
         return;
     }
-    poisonf = PDIR+POISONS[random(sizeof(POISONS))];
-    POISON_D->ApplyPoison(caster,poisonf,caster,"injury");
-    dest_effect();
-    return;
+
+    if(objectp(targ))
+    {
+        tell_object(caster,"%^GREEN%^You extend your hand and %^BOLD%^thorn%^RESET%^%^GREEN%^ flies out of it straight into %^BOLD%^"+targ->QCN+"%^RESET%^%^GREEN%^!");
+        tell_room(place,"%^GREEN%^"+caster->QCN+" extends "+caster->QP+" hand and %^BOLD%^thorn%^RESET%^%^GREEN%^ flies out of it straight into %^BOLD%^"+targ->QCN+"%^RESET%^%^GREEN%^!",({caster}));
+        POISON_D->ApplyPoison(targ,poisonf,caster,"injury");
+        dest_effect();    
+        return;
+    }
+    targ = present(arg,caster);
+    if(!targ->is_weapon())
+    {
+        tell_object(caster, "That is not a weapon!");
+        TO->remove();
+        return;
+    }
+    if(objectp(targ))
+    {
+        string pname;
+        object poisono;
+
+        poisono=new(poisonf);
+        if(!objectp(poisono))
+        {
+            tell_object(caster, "Poisoning failed because of reasons!");
+            TO->remove();
+            return;
+        }
+        wpn = targ;
+        
+        pname = poisono->query_poison_name();
+        wpn->set("PoisonDoses", clevel/5);
+        wpn->set("PoisonType", pname);
+        wpn->set("whoImmune", caster->query_name());
+        if(wpn->query_property("temp_oiled")){
+            wpn->remove_property("temp_oiled");
+        }
+        wpn->set_property("temp_oiled","damage bonus acid 5");
+        tell_object(caster, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_short()+" %^RESET%^%^GREEN%^as you move your hand along it.%^RESET%^");
+        tell_room(place, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_short()+" %^RESET%^%^GREEN%^as "+caster->QCN+" moves "+caster->QP+" hand along it.%^RESET%^",({caster}));        
+        dest_effect();    
+        return;
+    }
 }
 
 void dest_effect() 
