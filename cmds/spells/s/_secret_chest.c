@@ -21,10 +21,10 @@ To command chest, use %^ORANGE%^<command chest to %^ORANGE%^%^ULINE%^ACTION%^RES
 To command lost chest to follow you once again, use %^ORANGE%^<command chest to follow>%^RESET%^.
 To dismiss the chest use %^ORANGE%^<dismiss chest>%^RESET%^.");
 	set_helpful_spell(1);
-    /* set_components(([ */
-    /*                     "mage" : ([ "tiny chest":1, */
-    /*                                 "onyx dust":1]), */
-    /*                     ])); */
+    set_components(([
+                        "mage" : ([ "tiny chest":1,
+                                    "onyx dust":1]),
+                        ]));
 }
 
 string query_cast_string()
