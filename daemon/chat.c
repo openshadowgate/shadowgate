@@ -161,7 +161,7 @@ int do_chat(string verb, string str)
 
     msg=format_chat(verb,tpname,tppos,str,emote);
     message(verb,msg,pllist,ignored_list(TP));
-    //IPC->sendbus("chat",strip(msg));
+    //BUS_D->sendbus("CHAT",strip(msg));
     return 1;
 }
 
@@ -252,13 +252,11 @@ void do_amsg(object tp, object *list, string chan, string msg, int emote)
         message(chan,format_chat(chan,tpname,tppos,msg,emote),list[i],ignored_list(TP));
 }
 
-
 int clear_channels() 
 {
     channels = ([ ]);
     return 1;
 }
-
 
 void force_chat(object tp, string verb, string str, int emote) 
 {
@@ -268,7 +266,6 @@ void force_chat(object tp, string verb, string str, int emote)
     list -= ({ 0 }) ;
     return do_amsg(tp, list, verb, str, emote);
 }
-
 
 object *ignored_list(object obj)
 {
@@ -293,9 +290,3 @@ object *ignored_list(object obj)
     
     return ignoring;
 }
-
-
-
-
-
-
