@@ -298,6 +298,8 @@ wield %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 
 This command will attempt to wield the given %^ORANGE%^%^ULINE%^ITEM%^RESET%^. Not all items are good weapons.
 
+N.B. Shields are worn, not weld, as they are armour pieces. Attempt to wield shield as a weapon will turn it into simple blunt weapon and won't help with your defenses.
+
 %^CYAN%^SEE ALSO%^RESET%^
 
 unwield, wear, remove, inv, eq, limbs, look

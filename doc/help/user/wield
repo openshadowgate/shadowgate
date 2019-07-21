@@ -1,9 +1,0 @@
-Syntax <wield [weapon] in [limb]>
-
-This command allows you to wield a weapon for use in combat.
-The limb is the limb in which you want to wield it.  For most races this
-will be right hand or left hand.
-ex: wield sword in right hand
-
-For two handed weapons, you must specify both limbs.
-ex: wield battleaxe in right hand and left hand
