@@ -20,6 +20,17 @@ string query_cast_string()
     return "%^BOLD%^%^BLUE%^"+caster->QCN+" lowers "+caster->QP+" head and speaks a prayer.";
 }
 
+int preSpell()
+{
+    if(caster->query_property("spell_bonus_hp"))
+    {
+        tell_object(caster,"The spell is repelled by similar magic.");
+        TO->remove();
+        return 0;
+    }
+    return 1;
+}
+
 void spell_effect(int prof) 
 {
     object Vob;
@@ -36,8 +47,10 @@ void spell_effect(int prof)
     newhp = clevel + 10;
     
     caster->add_max_hp_bonus(newhp);
+    target->set_property("spell_bonus_hp",1);
 //    caster->set_property("spelled",({TO}));
     addSpellToCaster();
+    spell_successful();        
 }
 
 void dest_effect() 
@@ -47,7 +60,8 @@ void dest_effect()
             tell_object(caster, "%^BOLD%^%^BLUE%^The truth and valor of your cause fades away!%^RESET%^");
             tell_room(environment(caster), "%^BOLD%^%^BLUE%^The healthy glow of "+caster->QCN+
             "%^BOLD%^%^BLUE%^'s skin fades away!%^RESET%^", caster);
-            caster->add_max_hp_bonus(-newhp);            
+            caster->add_max_hp_bonus(-newhp);
+            caster->remove_property("spell_bonus_hp");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

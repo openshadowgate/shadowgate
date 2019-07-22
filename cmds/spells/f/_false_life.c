@@ -27,7 +27,7 @@ int preSpell()
 {
     if(!target)
         target = caster;
-    if(target->query_property("false_life"))
+    if(target->query_property("spell_bonus_hp"))
     {
         tell_object(caster,"The spell is repelled by similar magic.");
         TO->remove();
@@ -63,7 +63,7 @@ void spell_effect()
     bonus = 4*clevel;
     target->add_max_hp_bonus(bonus);
     target->set_property("spelled",({TO}));
-    target->set_property("false_life",1);
+    target->set_property("spell_bonus_hp",1);
     spell_successful();
     addSpellToCaster();
 }
@@ -74,7 +74,7 @@ void dest_effect()
     {
        target->add_max_hp_bonus(-bonus);
        target->remove_property_value("spelled", ({TO}) );
-       target->remove_property("false_life");
+       target->remove_property("spell_bonus_hp");
     }
     ::dest_effect();
     if(objectp(TO))

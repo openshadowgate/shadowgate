@@ -27,6 +27,17 @@ string query_cast_string()
        "fist and calls forth a mighty power from within!";
 }
 
+int preSpell()
+{
+    if(caster->query_property("spell_bonus_hp"))
+    {
+        tell_object(caster,"The spell is repelled by similar magic.");
+        TO->remove();
+        return 0;
+    }
+    return 1;
+}
+
 void spell_effect(int prof) 
 {
     object Vob;
@@ -46,10 +57,10 @@ void spell_effect(int prof)
         
     newhp = clevel+10;
 
-    caster->set_property("spelled",({TO}));
     caster->add_max_hp_bonus(newhp);
-    spell_successful();
-    addSpellToCaster(); 
+    caster->set_property("spell_bonus_hp",1);    
+    addSpellToCaster();
+    spell_successful();    
 }
 
 void dest_effect() {
@@ -59,7 +70,7 @@ void dest_effect() {
         tell_object(caster,"%^RESET%^%^CYAN%^You feel somewhat weakened as "
             "the energy granted by vigor fades away%^RESET%^");
         caster->add_max_hp_bonus(-newhp);
-        caster->remove_property_value("spelled", ({TO}) );
+        caster->remove_property("spell_bonus_hp");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
