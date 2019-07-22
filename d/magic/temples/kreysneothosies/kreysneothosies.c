@@ -1,4 +1,5 @@
 //Temple of Kreysneothosies - created by Nienne 2/18
+//updated by ~Circe~ with items to look at 7/21/19
 #include <std.h>
 inherit "/std/temple";
 
@@ -12,19 +13,69 @@ void create() {
    set_name("Temple of Kreysneothosies");
    set_short("%^YELLOW%^Temple of Kreysneothosies%^RESET%^");
    set_long("%^YELLOW%^Temple of Kreysneothosies%^RESET%^\n"
-"%^BOLD%^%^WHITE%^This structure of %^RESET%^%^ORANGE%^earthy stone %^BOLD%^%^WHITE%^bears the distinctive architecture of the Tsarven empire, notable even before setting foot within the "
-"building itself.  The vast iwan serves as a dramatic facade, which curves in and down to meet the main temple doorway.  Behind it rise %^RESET%^%^MAGENTA%^slender %^BOLD%^%^WHITE%^twin "
-"minarets, standing to either side of the main temple dome, which is tiled entirely in %^BOLD%^%^CYAN%^sky-blue %^BOLD%^%^WHITE%^in distinct contrast to the rest of the building.  Stepping "
-"through the vaulted doorway, you are first met with a line of wudhu taps, before the building itself leads deeper into a rectangular hallway lined with decorative pillars.  Archways to the "
-"left and right each open onto %^RESET%^%^GREEN%^sh%^BOLD%^%^GREEN%^a%^RESET%^%^GREEN%^ded cou%^BOLD%^%^GREEN%^r%^RESET%^%^GREEN%^tya%^BOLD%^%^GREEN%^r%^RESET%^%^GREEN%^ds%^BOLD%^%^WHITE%^, "
-"which are set about with stone walkways, elegant fountains, and immaculately tended gardens.  At the far end, the circular prayer hall opens out beneath the onion-shaped dome, where numerous "
-"%^RESET%^%^ORANGE%^pa%^RED%^tt%^MAGENTA%^e%^CYAN%^rn%^GREEN%^ed %^BOLD%^%^WHITE%^mats are set for the use of visitors.  The minbar stands before them, and above it upon the wall has been "
-"lettered the charge of Kreysneothosies.  Almost every other surface is patterned with artful calligraphy and motifs in the traditional Tsarven style, decorated with hints of glittering "
-"%^YELLOW%^go%^RESET%^%^ORANGE%^l%^YELLOW%^d %^BOLD%^%^WHITE%^and %^RESET%^%^GREEN%^ma%^CYAN%^la%^GREEN%^ch%^CYAN%^i%^GREEN%^te%^BOLD%^%^WHITE%^.\n%^RESET%^");
+      "%^BOLD%^%^WHITE%^This structure of %^RESET%^%^ORANGE%^earthy stone "
+      "%^BOLD%^%^WHITE%^bears the distinctive architecture of the Tsarven "
+      "empire, notable even before setting foot within the building itself.  "
+      "The vast iwan serves as a dramatic facade, which curves in and down to "
+      "meet the main temple doorway.  Behind it rise %^RESET%^%^MAGENTA%^slender "
+      "%^BOLD%^%^WHITE%^twin minarets, standing to either side of the main "
+      "temple dome, which is tiled entirely in %^BOLD%^%^CYAN%^sky-blue "
+      "%^BOLD%^%^WHITE%^in distinct contrast to the rest of the building.  Stepping "
+      "through the vaulted doorway, you are first met with a line of wudhu "
+      "taps, before the building itself leads deeper into a rectangular hallway "
+      "lined with decorative pillars.  Archways to the left and right each "
+      "open onto %^RESET%^%^GREEN%^sh%^BOLD%^%^GREEN%^a%^RESET%^%^GREEN%^ded "
+      "cou%^BOLD%^%^GREEN%^r%^RESET%^%^GREEN%^tya%^BOLD%^%^GREEN%^r%^RESET%^"
+      "%^GREEN%^ds%^BOLD%^%^WHITE%^, which are set about with stone walkways, "
+      "elegant fountains, and immaculately tended gardens.  At the far end, "
+      "the circular prayer hall opens out beneath the onion-shaped dome, where numerous "
+      "%^RESET%^%^ORANGE%^pa%^RED%^tt%^MAGENTA%^e%^CYAN%^rn%^GREEN%^ed %^BOLD%^"
+      "%^WHITE%^mats are set for the use of visitors.  The minbar stands before "
+      "them, and above it upon the wall has been lettered the charge of Kreysneothosies.  "
+      "Almost every other surface is patterned with artful calligraphy and motifs in "
+      "the traditional Tsarven style, decorated with hints of glittering %^YELLOW%^go"
+      "%^RESET%^%^ORANGE%^l%^YELLOW%^d %^BOLD%^%^WHITE%^and %^RESET%^%^GREEN%^ma"
+      "%^CYAN%^la%^GREEN%^ch%^CYAN%^i%^GREEN%^te%^BOLD%^%^WHITE%^.\n%^RESET%^");
+   set_items(([
+      "iwan" : "The iwan or entryway is a three-sided hallway with a vaulted "
+         "ceiling towering overhead. The front is shaped into a pointed archway "
+         "and decorated with geometric etchings filled with glittering gold.",
+      ({"door","doorway"}) : "The massive temple doors are %^RESET%^%^ORANGE%^gi"
+         "%^BOLD%^l%^RESET%^%^ORANGE%^de%^BOLD%^d %^RESET%^and etched with geometric "
+         "shapes that surround decorative panels accented with %^BOLD%^%^BLUE%^s"
+         "%^BOLD%^a%^CYAN%^p%^BLUE%^ph%^WHITE%^i%^RESET%^%^CYAN%^r%^BOLD%^%^BLUE%^e"
+         "s %^RESET%^and %^RESET%^%^GREEN%^ma"
+         "%^CYAN%^la%^GREEN%^ch%^CYAN%^i%^GREEN%^te%^RESET%^.",
+      ({"minaret","minarets"}) : "The slender %^MAGENTA%^minarets %^RESET%^are just "
+         "visible through the clear arched windows ringing the %^BOLD%^%^CYAN%^sky-blue "
+         "dome %^RESET%^of the ceiling. The minarets are tiled in pristine %^RESET%^"
+         "%^CYAN%^m%^GREEN%^o%^BOLD%^s%^RESET%^%^GREEN%^a%^CYAN%^i%^BOLD%^c %^RESET%^"
+         "tiled patterns broken up by narrow open windows and topped by an observation "
+         "floor capped with a %^BOLD%^%^CYAN%^domed roof%^RESET%^. A %^YELLOW%^go%^RESET%^%^ORANGE%^l%^YELLOW%^de"
+         "%^RESET%^%^ORANGE%^n %^YELLOW%^sp%^RESET%^%^ORANGE%^i%^YELLOW%^re %^RESET%^rises "
+         "from the very top, piercing the sky.",
+      ({"dome","roof"}) : "The ceiling of the temple is tiled in %^BOLD%^%^CYAN%^sky-blue"
+         "%^RESET%^, giving the space an open-air feel. The color contrasts nicely "
+         "with the %^ORANGE%^earthy stone %^RESET%^of the reset of the building.",
+      ({"wudu","wudu taps","tap","taps"}) : "The entry hallway is lined with thick "
+         "stone blocks supporting golden taps intended for performing wudu, or ritual "
+         "purification before prayer. The priests of Kreysneothosies have enchanted "
+         "the taps to produce pure water when one places an object beneath them.",
+      "minbar" : "The lectern of the temple is shaped something like a small tower "
+         "featuring a %^BOLD%^%^CYAN%^sky-blue dome%^RESET%^ reminiscent of the temple. "
+         "From the minbar, a priest may deliver a message to those gathered in the temple.",
+      ({"mat","mats","patterned mat","patterned mats"}) : "Beneath the onion-shaped dome "
+         "at the far end of the temple is the prayer hall, where the faithful may spend "
+         "time in contemplation and prayer. Each petitioner chooses a %^RESET%^%^ORANGE%^pa"
+         "%^RED%^tt%^MAGENTA%^e%^CYAN%^rn%^GREEN%^ed %^RESET%^mat to kneel upon. Each mat "
+         "features geometric shapes and fanciful scrollwork done in bright colors heavily "
+         "favoring %^BOLD%^%^BLUE%^bl%^CYAN%^u%^BLUE%^e%^RESET%^, %^GREEN%^gr%^BOLD%^e"
+         "%^RESET%^%^GREEN%^en%^RESET%^, and %^YELLOW%^go%^RESET%^%^ORANGE%^l%^YELLOW%^d%^RESET%^."
+   ]));
    set_smell("default","Incense carries a gentle, earthy scent throughout the temple.");
    set_listen("default","The low murmur of prayers and chanting is almost constant here.");
    set_exits(([
-      "out": "/d/tharis/road/wroad30",
+      "out": "/d/tharis/road/wroad30"
    ]));
 }
 

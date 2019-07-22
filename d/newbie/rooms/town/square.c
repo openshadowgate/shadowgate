@@ -47,7 +47,7 @@ void create()
     "south":MAINTOWN"sstreet1",
     "east":MAINTOWN"estreet1",
     "west":MAINTOWN"wstreet1",
-    "ooc":"/d/newbie/ooc/hub_room3",
+    "oochub":"/d/newbie/ooc/hub_room3",
   ]));
   
    ob = new("/std/bboard");
