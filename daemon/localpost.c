@@ -239,21 +239,21 @@ mapping mail_status(string who) {
 }
 
 static private notify_online(string *who, string de, string sub) {
-   object ob, mail;
-   string str;
-   int i;
+    object ob, mail;
+    string str;
+    int i;
 
-   i = sizeof(who);
-   while(i--) {
-      if(!(ob = find_player(who[i])) || ((str=(string)ob->getenv("MAIL_MSG")))
- == "ignore") continue;
-      if(!avatarp(ob)) continue;
-      if(!str || str == "")
- str = "    New mail has arrived from $N\n    Subject: $S";
-      str = replace_string(replace_string(str, "$S", sub), "$N", capitalize(de));
-      message("info", str, ob);
-      if(mail = present(POSTAL_ID, ob)) mail->reset_post();
-   }
+    i = sizeof(who);
+    while(i--) {
+        if(!(ob = find_player(who[i])) ||
+           ((str=(string)ob->getenv("MAIL_MSG")))
+           == "ignore")
+            continue;
+        if(!str || str == "")
+            str = sprintf("  New mail has arrived from: %s\n  Subject: %2",capitalize(de),sub);
+        message("info", str, ob);
+        if(mail = present(POSTAL_ID, ob)) mail->reset_post();
+    }
 }
 
 mapping add_group(string who, string grp, string *in_grp) {
