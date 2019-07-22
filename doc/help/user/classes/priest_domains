@@ -11,32 +11,33 @@
 Animal       ghost step, snakebite, rage
 %^CYAN%^Cavern       meld into stone, maw of stone, earthquake
 Charm        good hope, bliss, charm monster
-%^CYAN%^Cold         frost breath, ice shield, hypothermia
+%^CYAN%^Cold         ice shield, frost breath, hypothermia
 Creation     minor creation, glyph of warding, cometfall
 %^CYAN%^Darkness     armor of darkness, darkbolt, listening shadow
 Destruction  shatter, tremor, disintegrate
-%^CYAN%^Earth        earth reaver, strength of stone, stone body
+%^CYAN%^Earth        strength of stone, earth reaver, stone body
 Evil         blight, unholy orb, blasphemy
+%^CYAN%^Fate         auspicious bolt, aegis of fate, fortune fate
+Fire         fire shield, handfire, flameburst
 %^CYAN%^Good         bless, holy orb, holy word
-Fate         auspicious bolt, aegis of fate, fortune fate
-%^CYAN%^Fire         handfire, fire shield, flameburst
 Illusion     displacement, screen, phantasmal killer
 %^CYAN%^Knowledge    comprehend languages, wieldskill, forgotten melody
 Magic        true seeing, mystic bolt, break curse
-%^CYAN%^Mentalism    foresight, bolt of force, discern location
-Moon         faerie fire, moonbeam, moonfire
+%^CYAN%^Mentalism    insight, bolt of force, inner eye
+Moon         faerie fire, moonbeam, silver sight
 %^CYAN%^Plant        entangle, meld into nature, thorn spray
 Protection   divine shield, invisibility purge, teleportation ward
-%^CYAN%^Repose       death watch, spectral touch, spectral steed
-Storm        lightning touch, stormwinds, stormrage
-%^CYAN%^Strength     righteous might, resilience, crushing hand
-Suffering    body blades, kiss of torment, wave of pain
-%^CYAN%^Sun          nimbus of light, searing light, sunburst
-Travel       fly, faithful mount, create portal
-%^CYAN%^Trickery     bestow curse, conceal alignment, confusion
-Tyranny      oppression, fear, forbiddance
-%^CYAN%^Vigilance    orders oath, mark of justice, dictum
-War          seeking sword, offensive summoning, berserker
-%^CYAN%^Water        cloudburst, mist of the goddess, tidal surge
+%^CYAN%^Renewal      rejuvenation, freedom of movement, rebirth
+Repose       phantom steed, spectral touch, ghostform
+%^CYAN%^Storms       lightning touch, stormwinds, stormrage
+Strength     righteous might, resilience, crushing hand
+%^CYAN%^Suffering    body blades, kiss of torment, wave of pain
+Sun          nimbus of light, searing light, sunburst
+%^CYAN%^Travel       faithful mount, pass portal, create portal
+Trickery     conceal alignment, befuddle, confusion
+%^CYAN%^Tyranny      oppression, fear, forbiddance
+Vigilance    orders oath, mark of justice, weighed in the balance
+%^CYAN%^War          seeking sword, offensive summoning, berserker
+Water        cloudburst, mist of the goddess, tidal surge
 
 See also: cleric, deities, individual help files for each deity
