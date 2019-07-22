@@ -170,7 +170,7 @@ string get_trap_room_auto_detect(string str, object who, int is_door)
 			{
 				if(member_array(MN, trap_data[str]["KnownToPlayers"]) != -1)
 				{
-					return "%^BOLD%^%^GREEN%^"+str+"%^BOLD%^%^CYAN%^";
+					return "%^BOLD%^%^GREEN%^"+str+" (your trap)%^BOLD%^%^CYAN%^";
 				}
 			}			
 			if(member_array(MN, keys(trap_data[str]["failed_check"])) != -1)
@@ -181,7 +181,7 @@ string get_trap_room_auto_detect(string str, object who, int is_door)
 			(MySkill + roll_dice(1, 20)) >= trap_data[str]["dc"]) 
 			{
 				TO->add_passed_check(MN);
-				return "%^BOLD%^%^RED%^"+str+"%^BOLD%^%^CYAN%^";
+				return "%^BOLD%^%^RED%^"+str+" (trap)%^BOLD%^%^CYAN%^";
 			}
 			if((MySkill + roll_dice(1, 20)) < trap_data[str]["dc"])
 			{

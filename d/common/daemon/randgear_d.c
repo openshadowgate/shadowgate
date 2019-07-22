@@ -63,8 +63,14 @@ void arm_me(object me, string which, int chance, int plus, int monweap) {
    if(me->is_monster()) {  // added this check 11/26/03 *Styx*
       if(monweap > random(100)) 
          ob->set_property("monsterweapon", 1);
+//inelegant solution to the problem with mobs not being able to wear shields after the order of limbs changed
+//stop-gap until we figure out something better ~Circe~ 7/22/19
       if((which == "edgeds" || which == "edgedm" || which == "clubm" || which == "blunts" || which == "bluntsm") && member_array("left hand",(me->query_wielding_limbs()))){
-         me->force_me("wield "+ob->query_name()+" in left hand");
+         if(!me->query_weapon("left hand")){
+            me->force_me("wield "+ob->query_name()+" in left hand");
+         }else{
+            me->force_me("wield "+ob->query_name()+"");
+         }
       }else{
          me->force_me("wield "+ob->query_name()+"");
       }
