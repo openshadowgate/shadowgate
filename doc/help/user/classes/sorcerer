@@ -2,7 +2,7 @@
 
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 charisma
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow, elf, drow, halfling, 
-   gnome, voadkyn, kobold, goblin, orc (tanarukk), yuan-ti
+   gnome, voadkyn, kobold, goblin, orc (tanarukk), yuan-ti, shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
 %^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, psion, psywarrior
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6

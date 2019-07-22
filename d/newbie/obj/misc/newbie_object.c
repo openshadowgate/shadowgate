@@ -65,6 +65,7 @@ void create()
     set_property("soulbound", 1);
     set_property("no drop", 1);
     set_property("death keep", 1);
+
     set_weight(0);
     set_value(0);
     

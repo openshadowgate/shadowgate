@@ -2,7 +2,7 @@
 
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 intelligence
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow,
-   kobold, hobgoblin, yuan-ti, halfling (ghostwise), dwarf (duergar)
+   kobold, hobgoblin, yuan-ti, halfling (ghostwise), dwarf (duergar), shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
 %^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, sorcerer, psywarrior
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
