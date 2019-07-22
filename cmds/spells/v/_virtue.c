@@ -43,12 +43,13 @@ void spell_effect(int prof)
     if(objectp(Vob = caster->query_property("VigorOb"))) Vob->dest_effect();
     tell_object(caster,"%^BOLD%^%^BLUE%^The truth and valor of your cause fills you!");
     tell_room(environment(caster),"%^BOLD%^%^BLUE%^"+caster->QCN+"'s skin takes on a glow of health!",caster);
+
     
     newhp = clevel + 10;
     
     caster->add_max_hp_bonus(newhp);
-    target->set_property("spell_bonus_hp",1);
-//    caster->set_property("spelled",({TO}));
+    caster->set_property("spell_bonus_hp",1);
+    caster->set_property("spelled",({TO}));
     addSpellToCaster();
     spell_successful();        
 }

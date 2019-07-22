@@ -42,7 +42,8 @@ void spell_effect(int prof) {
     bonus = clevel+10;
 
     caster->add_max_hp_bonus(bonus);
-    caster->set_property("spell_bonus_hp",1);    
+    caster->set_property("spell_bonus_hp",1);
+    caster->set_property("spelled",({TO}));    
     addSpellToCaster();
     spell_successful();            
 }
