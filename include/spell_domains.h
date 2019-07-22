@@ -32,7 +32,7 @@
     "tyr"           : ({ "war", "vigilance", "good" })              ,\
     "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire" })       ,\
     "callamir"         : ({ "good", "charm", "air", "trickery" })                   ,\
-    "kreysneothosies"  : ({ "protection", "vigilance", "strength", "earth" })       ,\
+    "kreysneothosies"  : ({ "protection", "vigilance", "strength", "earth", "war" })       , \
     "nilith"            : ({ "war", "strength", "destruction", "evil" })              ,\
     "lord shadow"      : ({ "evil", "cold", "tyranny", "suffering", "darkness" })   ,\
     "the faceless one" : ({ "trickery", "illusion", "cavern", "darkness", "evil" }) ,\

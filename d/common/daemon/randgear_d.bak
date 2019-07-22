@@ -63,11 +63,7 @@ void arm_me(object me, string which, int chance, int plus, int monweap) {
    if(me->is_monster()) {  // added this check 11/26/03 *Styx*
       if(monweap > random(100)) 
          ob->set_property("monsterweapon", 1);
-      if((which == "edgeds" || which == "edgedm" || which == "clubm" || which == "blunts" || which == "bluntsm") && member_array("left hand",(me->query_wielding_limbs()))){
-         me->force_me("wield "+ob->query_name()+" in left hand");
-      }else{
-         me->force_me("wield "+ob->query_name()+"");
-      }
+      me->force_me("wield "+ob->query_name());
    }
 }
 
