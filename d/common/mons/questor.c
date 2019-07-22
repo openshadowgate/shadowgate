@@ -27,14 +27,12 @@ void create()
     set_stats("constitution",28);
     set_property("magic",1);
     set_new_exp(100,"boss");
-    set_property("magic resistance",70);
-    set_spells(({"greater shout",
-                    "greater shout",
-                    "greater shout",
+    set_spells(({"sunburst",
+                    "hellball",
+                    "hellball",
                     "greater dispel magic",
-                    "resonating word",
-                    "resonating word",                    
-                    "powerword kill",}));
+                    "horrid wilthing",
+                    "weird",}));
     set_spell_chance(100);    
 }
 
