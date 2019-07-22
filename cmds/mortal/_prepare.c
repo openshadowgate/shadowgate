@@ -1078,10 +1078,10 @@ prepare - prepare a casting
 
 %^CYAN%^SYNTAX%^RESET%^
 
-Normal casters (mage, cleric, druid, paladin, ranger, assassin):
+Normal casters (mage, cleric, druid, paladin, ranger):
     prepare %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [times %^ORANGE%^%^ULINE%^NUMBER%^RESET%^]
 
-Spontaneous casters (bard, sorcerer:
+Spontaneous casters (bard, sorcerer):
     prepare %^ORANGE%^%^ULINE%^CLASS%^RESET%^ level %^ORANGE%^%^ULINE%^NUMBER%^RESET%^ [times %^ORANGE%^%^ULINE%^NUMBER2%^RESET%^]
 
 Psionic casters (psion, psywarrior):
@@ -1120,7 +1120,7 @@ Spell lists are the feature that allows you to prepare spells in bulk and store 
 
     Will begin preparation of list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ for given %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^. When you'll begin preparation all your currently memorized spells in %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^ will be overwritten by those in %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^, even if %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ has unused spell slots.
 
-%^ORANGE%^<prepare check %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^>%^RESET%^
+%^ORANGE%^<prepare check %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^
 
     Will check whether any spell in your %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ got moved, removed or changed and remove it from the list if so, freeing spell slots.
 
@@ -1128,11 +1128,11 @@ Spell lists are the feature that allows you to prepare spells in bulk and store 
 
     Will delete list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ for given %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^ 
 
-%^ORANGE%^<prepare display %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^>%^RESET%^
+%^ORANGE%^<prepare display %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^
 
     Will show you list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ for given %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^ 
 
-%^ORANGE%^<prepare copy %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASS%^RESET%^ to %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^2 %^ORANGE%^%^ULINE%^CLASS2%^RESET%^%^ORANGE%^>%^RESET%^
+%^ORANGE%^<prepare copy %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASS%^RESET%^ to %^ORANGE%^%^ULINE%^LISTNAME2%^RESET%^ %^ORANGE%^%^ULINE%^CLASS2%^RESET%^%^ORANGE%^>%^RESET%^
 
     Will copy your list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ of %^ORANGE%^%^ULINE%^CLASS%^RESET%^ to %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^2 of class %^ORANGE%^%^ULINE%^CLASS2%^RESET%^
 
