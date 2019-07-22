@@ -7,7 +7,7 @@ inherit SPELL;
 create() {
     ::create();
     set_spell_name("raise dead");
-    set_spell_level(([ "cleric" : 5,"druid" : 4 ]));
+    set_spell_level(([ "cleric" : 5, "druid" : 4, "paladin" : 4 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS raise dead on TARGET (dead player's name)");
     set_description("This spell will revive a dead player when cast upon their corpse.  The deceased will be returned to "
@@ -88,11 +88,7 @@ spell_effect(int prof) {
     targ->set("RaisingRoom",base_name(environment(caster)));
     targ->set("RaisingExpLoss",(-10+(random(2)+random(3)+1)));
     targ->set("RaisingType","raise dead");
-    tell_object(targ,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul.  You sense "
-        "that a "+capitalize(what_alignment((int)caster->query_alignment()))+" faithful "
-        "of "+capitalize((string)caster->query_diety())+" is trying to return you to "
-        "life!\nType <accept> to return to life, or <cancel> to leave your "
-        "fate in Lysara's hands.%^RESET%^");
+    tell_object(targ,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul. You sense that a faithful of "+capitalize((string)caster->query_diety())+" is trying to return you to life!\nType <accept> to return to life, or <cancel> to leave your fate in Lysara's hands.%^RESET%^");
     corpse->remove();
     dest_effect();
 }
