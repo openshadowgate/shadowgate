@@ -28,6 +28,7 @@ int *restricted_alignments(string subrace) {
     switch(subrace) {
       case "tiefling": return ({ 1, 4, 7 }); break;
       case "aasimar": return ({ 3, 6, 9 }); break;
+      case "feytouched": return ({ 4, 7, 8 }); break;          
       default: return ({}); break;
     }
 }
@@ -47,11 +48,12 @@ string *restricted_deities(string subrace) { return ({}); }
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     if(!subrace || subrace == "") return ({ 0, 0, 0, 0, 0, 0 });
     switch(subrace) {
-      case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
       case "aasimar": return ({ 0, 0, 0, -2, 2, 2 }); break;
       case "air genasi": return ({ 0, 2, 0, 2, -2, -2 }); break;
       case "earth genasi": return ({ 2, 0, 2, -2, 0, -2 }); break;
+      case "feytouched": return ({ 0, 2, -2, 0, 0, 2 }); break;          
       case "fire genasi": return ({ 0, 0, 0, 2, 0, -2 }); break;
+      case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
       case "water genasi": return ({ 0, 0, 2, 0, 0, -2 }); break;
       default: return ({ 0, 0, 0, 0, 0, 0 }); break;
     }
@@ -62,6 +64,7 @@ mapping skill_mods(string subrace) {
     switch(subrace) {
       case "tiefling": return ([ "stealth" : 2, "disguise" : 2 ]); break;
       case "aasimar": return ([ "perception" : 2, "influence" : 2 ]); break;
+      case "feytouched": return ([ "perception" : 2, "influence" : 2 ]); break;          
       case "heartlander": return ([ "influence" : 1 ]); break;
       case "zin'charu": case "zincharu": return ([ "spellcraft" : 1 ]); break;
       case "attayan": return ([ "academics" : 1]); break;
@@ -72,7 +75,13 @@ mapping skill_mods(string subrace) {
 
 int level_adjustment(string subrace) {
     if(!subrace || subrace == "") return 0;
-    if(subrace == "tiefling" || subrace == "aasimar" || subrace == "air genasi" || subrace == "earth genasi" || subrace == "fire genasi" || subrace == "water genasi") return 1; // all human planetouched are LA1
+    if(subrace == "tiefling" ||
+       subrace == "aasimar" ||
+       subrace == "air genasi" ||
+       subrace == "earth genasi" ||
+       subrace == "fire genasi" ||
+       subrace == "water genasi")
+        return 1;
     return 0;
 }
 
@@ -86,18 +95,26 @@ int natural_AC(string subrace) {
 
 int sight_bonus(string subrace) {
     if(!subrace || subrace == "") return 0;
-    if(subrace == "tiefling" || subrace == "aasimar" || subrace == "air genasi" || subrace == "earth genasi" || subrace == "fire genasi" || subrace == "water genasi") return 2; // all human planetouched are darkvision
+    if(subrace == "tiefling" ||
+       subrace == "aasimar" ||
+       subrace == "air genasi" ||
+       subrace == "earth genasi" ||
+       subrace == "fire genasi" ||
+       subrace == "water genasi" ||
+       subrace == "feytouched")
+        return 2;
     return 0;
 }
 
 mapping daily_uses(string subrace) {
     if(!subrace || subrace == "") return ([]);
     switch(subrace) {
-      case "tiefling": return ([ "darkness" : 1 ]); break;
       case "aasimar": return ([ "light" : 1 ]); break;
       case "air genasi": return ([ "levitate" : 1 ]); break;
       case "earth genasi": return ([ "ghost step" : 1 ]); break;
       case "fire genasi": return ([ "handfire" : 1 ]); break;
+      case "feytouched": return ([ "faerie fire" : 1 ]); break;
+      case "tiefling": return ([ "darkness" : 1 ]); break;
       case "water genasi": return ([ "water breathing" : 1 ]); break;
       case "zin'charu": case "zincharu": return ([ "detect magic" : 3 ]); break;
       default: return ([]); break;
@@ -117,6 +134,12 @@ mapping query_racial_innate(string subrace)
 				break;
 		case "aasimar":
 				return (["light" : (["type" : "spell", "casting level" : 0.5, 
+				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
+				"refresh time" : -1, "level required" : 0, 
+				"class specific" : 0])]);
+				break;
+		case "feytouched":
+				return (["faerie fire" : (["type" : "spell", "casting level" : 0.5, 
 				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
 				"refresh time" : -1, "level required" : 0, 
 				"class specific" : 0])]);
@@ -259,10 +282,18 @@ string *query_hair_colors(object who) {
     string *choices = ({}), subrace;
     subrace = (string)who->query("subrace");
     cha = (int)who->query_stats("charisma");
-    if(subrace == "tiefling" || subrace == "air genasi" || subrace == "earth genasi" || subrace == "fire genasi" || subrace == "water genasi") cha -= 2;
-    if(subrace == "aasimar") cha += 2;
+    if(subrace == "tiefling" ||
+       subrace == "air genasi" ||
+       subrace == "earth genasi" ||
+       subrace == "fire genasi" ||
+       subrace == "water genasi")
+        cha -= 2;
+    if(subrace == "aasimar"||
+       subrace == "feytouched")
+        cha += 2;
 
-    if(!stringp(subrace) || member_array(subrace,({"aasimar","tiefling","air genasi","earth genasi","fire genasi","water genasi","heartlander"})) != -1) {
+    if(!stringp(subrace) ||
+       member_array(subrace,({"aasimar", "feytouched","tiefling","air genasi","earth genasi","fire genasi","water genasi","heartlander"})) != -1) {
         switch(cha) {
             case 18..40:
                 choices += ({"ebony", "golden", "silver"});
@@ -321,10 +352,18 @@ string *query_eye_colors(object who) {
     string *choices = ({}), subrace;
     subrace = (string)who->query("subrace");
     cha = (int)who->query_stats("charisma");
-    if(subrace == "tiefling" || subrace == "air genasi" || subrace == "earth genasi" || subrace == "fire genasi" || subrace == "water genasi") cha -= 2;
-    if(subrace == "aasimar") cha += 2;
+    if(subrace == "tiefling" ||
+       subrace == "air genasi" ||
+       subrace == "earth genasi" ||
+       subrace == "fire genasi" ||
+       subrace == "water genasi")
+        cha -= 2;
+    if(subrace == "aasimar" ||
+        subrace == "feytouched")
+        cha += 2;
 
-    if(!stringp(subrace) || member_array(subrace,({"aasimar","tiefling","air genasi","earth genasi","fire genasi","water genasi","heartlander","attayan"})) != -1) {
+    if(!stringp(subrace) ||
+       member_array(subrace,({"aasimar","feytouched","tiefling","air genasi","earth genasi","fire genasi","water genasi","heartlander","attayan"})) != -1) {
         switch(cha) {
             case 18..40:
                 choices += ({"violet", "purple", "silver"});
@@ -349,7 +388,8 @@ string *query_eye_colors(object who) {
     if(subrace == "tiefling") { // extras for specific planetouched subtypes
       choices += ({ "red" });
     }
-    if(subrace == "aasimar") { // extras for specific planetouched subtypes
+    if(subrace == "aasimar" ||
+        subrace == "feytouched") { // extras for specific planetouched subtypes
       if(cha > 17) choices += ({ "golden" });
       if(cha > 15) choices += ({ "topaz" });
     }
@@ -403,8 +443,12 @@ string *query_subraces(object who)
 {
     string *subraces;
     subraces = ({"heartlander","zin'charu","aesatri","attayan","tsarven","morinnen","tonaz'tlacar","senzokuan","maalish"});
-    if(OB_ACCOUNT->is_experienced(who->query_true_name()) || OB_ACCOUNT->is_high_mortal(who->query_true_name()) || avatarp(who) || who->query("is_valid_npc")) { 
-        subraces += ({ "tiefling","aasimar","air genasi","earth genasi","fire genasi","water genasi" });
+    if(OB_ACCOUNT->is_experienced(who->query_true_name()) ||
+       OB_ACCOUNT->is_high_mortal(who->query_true_name()) ||
+       avatarp(who) ||
+       who->query("is_valid_npc"))
+    { 
+        subraces += ({ "tiefling","aasimar","feytouched","air genasi","earth genasi","fire genasi","water genasi" });
     }
     return subraces;
 }

@@ -26,7 +26,6 @@ string query_cast_string() {
 void spell_effect(int prof) 
 {
     object *foes, foe;
-    int x;
     
     tell_object(caster,"%^BLUE%^You concentrate and release a HORRIBLE SCREAM in tongues of unlife.");
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM in fell tongues, you feel your soul is being ripped from your body.",caster);
@@ -37,17 +36,13 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        x=0;
-        if(pointerp(foe->query_property("no_slay"))) 
-            if(member_array(caster->query_name(),foe->query_property("no_slay")) != -1) 
-                x = 1;
-        if(do_save(foe,8) || x || foe->query_property("no death") ||
+        if(do_save(foe,8) ||
+           foe->query_property("no death") ||
            (string)foe->query_race() == "undead" ||
            foe->query_property("undead"))
         {
             tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
             tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
-            foe->set_property("no_slay",({caster->query_name()}));
             damage_targ(foe, foe->query_target_limb(),1,"negative energy");
             continue;
         }
