@@ -590,7 +590,7 @@ int query_resistance(string res) {
     int myres;
     if(!valid_resistance(res)) return 0; // to avoid throwing errors on any invalid queries. N, 8/15.
     myres = resistances["resistance"][res];
-    if((string)TO->query("subrace") == "aasimar" && (res == "acid" || res == "cold" || res == "electricity")) myres += 5;
+    if(((string)TO->query("subrace") == "aasimar" || (string)TO->query("subrace") == "feytouched") && (res == "acid" || res == "cold" || res == "electricity")) myres += 5;
     if((string)TO->query("subrace") == "tiefling" && (res == "cold" || res == "fire" || res == "electricity")) myres += 5;
     if(FEATS_D->usable_feat(TO,"energy resistance")) {
       if((string)TO->query("warlock heritage") == "celestial" && res == "acid") myres += 10;
