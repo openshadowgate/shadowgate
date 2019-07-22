@@ -1,6 +1,7 @@
+//updated by ~Circe~ 7/21/19 to remove temple functions and change description
 #include <std.h>
 
-inherit "/std/temple";
+inherit ROOM;
 
 void create(){
    ::create();
@@ -8,42 +9,55 @@ void create(){
    set_travel(PAVED_ROAD);
    set_light(2);
    set_indoors(1);
-   set_temple("oghma");
+//   set_temple("oghma");
+   set_name("A Gathering Hall");
+   set_short("A Gathering Hall");
+   set_long("%^BOLD%^%^WHITE%^This %^RESET%^grey stone%^BOLD%^%^WHITE%^ "
+      "building houses a well-stocked library arranged in %^RESET%^%^ORANGE%^"
+      "bookshelves%^BOLD%^%^WHITE%^ along the walls. The center of the space "
+      "is dominated by %^RESET%^%^GREEN%^couches %^BOLD%^%^WHITE%^and "
+      "%^RESET%^%^MAGENTA%^armchairs%^BOLD%^%^WHITE%^, while one corner of "
+      "the room has a small raised %^RESET%^%^ORANGE%^stage%^BOLD%^%^WHITE%^ "
+      "for both practice and performance. Sages come here to read more from the wealth of "
+      "information housed here, while scribes work hard to copy the "
+      "texts. Entertainers mill about playing a variety of songs and "
+      "melodies for all within this large structure. Large, pale rectangles "
+      "of stone on the walls indicate that something must have once hung there, "
+      "and a threadbare %^YELLOW%^gold velvet %^WHITE%^rug leads to a "
+      "%^RESET%^%^ORANGE%^wooden table %^BOLD%^%^WHITE%^surrounded by "
+      "matching %^RESET%^%^ORANGE%^benches%^BOLD%^%^WHITE%^. Decorative elements "
+      "throughout the room hint that it once had a much grander purpose than "
+      "it now serves.%^RESET%^\n");
+   set_items(([
+      ({"library","books","bookshelves"}) : "While the official library of Tabor "
+         "is just across the street, this building houses an impressive collection "
+         "of books, both old and new. Wooden bookshelves line the walls, some more "
+         "recently constructed than others. The books have been arranged by subject, "
+         "and scribes often volunteer their time to make copies for distribution or preservation.",
+      ({"couch","couches","armchair","armchairs","chair"}) : "Plush couches and "
+         "armchairs are arranged in a circle around a woven rug in the center of "
+         "the room. They are often occupied by various individuals reading, drawing, or talking.",
+      "stage" : "The wooden stage in the corner of the room seems newer than "
+         "the other furnishings. Several stools are placed along the wall behind it, "
+         "and a trunk to the side holds props and instruments for anyone to use.",
+      ({"table","benches","bench"}) : "The long wooden table has been polished to a "
+         "high shine. It has some knicks and scratches along with a few burn marks, "
+         "but it is otherwise in good shape. A bench lines each side, providing space "
+         "for many people to sit around the table at once.",
+      ({"rug","velvet rug"}) : "The velvet of the threadbare rug has been crushed under "
+         "many feet. Looking closer, you see that embroidery has been picked out and "
+         "some gems removed. The missing embroider seems to have been vaguely scroll-shaped."
+   ]));
+   set_exits(([
+      "east" : "/d/darkwood/tabor/room/math4"
+   ]));
    set_smell("default","The smell of wet ink is heavy in the air.");
    set_listen("default","Among the various discussions you can hear a variety of different melodies being played.");
-   set_short("Temple of Oghma");
-   set_long(
-"%^YELLOW%^The Temple of Oghma%^RESET%^\n"+
-"%^BOLD%^%^WHITE%^Much like his followers, the %^BOLD%^%^BLACK%^Lord of Knowledge's "+
-"%^BOLD%^%^WHITE%^temple fills a need for a variety of people. This "+
-"%^RESET%^grey%^BOLD%^%^WHITE%^ stone temple houses a well stocked library "+
-"filled with the knowledge of the ages. Sages come here to "+
-"read more from the wealth of information house here, "+
-"while scribes work hard to copy the texts. Entertainers mull about "+
-"the temple playing a variety of songs and melodies for all within "+
-"this large structure, for Oghma is also the %^RESET%^%^MAGENTA%^Patron of Bards, "+
-"the God of song, music and performance%^BOLD%^%^WHITE%^. With such an eclectic "+
-"mix of followers the temple still retains a harmonious balance.  "+
-"Tapestries devoted to each side of Oghma hang over the walls, each well "+
-"crafted and very elaborate. A %^YELLOW%^gold velvet%^BOLD%^%^WHITE%^ rug leads "+
-"to the %^BOLD%^%^CYAN%^crystal altar%^BOLD%^%^WHITE%^ of the Binder as violet "+
-"drapes flank it.\n"+
-"Written on a %^RESET%^parchment scroll%^BOLD%^%^WHITE%^ in the "+
-"most elegant penmanship you have seen is the charge of Oghma. "+
-"The scroll even features some very detailed illuminations.\n"
-   );
-   set_exits(([
-      "out" : "/d/darkwood/tabor/room/math4",
-   ]));
-   set_items(([
-      ({"altar","scroll"}) : "The charge of Oghma is written on the scroll.",
-      "charge":"Maybe you should read it.",
-   ]));
 }
 
 void init(){
    ::init();
-   add_action("read_charge","read");
+//   add_action("read_charge","read");
 }
 
 int read_charge(string str){
