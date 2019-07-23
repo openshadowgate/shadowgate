@@ -13,8 +13,8 @@ void create(){
   set_long("%^YELLOW%^Shrine of the Gods%^RESET%^\n"
 "This sizeable %^CYAN%^shrine %^RESET%^is almost a room unto itself, but the way "
 "it lies half-open onto the church nave makes it still feel part of that larger "
-"chamber.  Roughly square in layout, its plain walls contain three %^MAGENTA%^alcoves "
-"%^RESET%^upon each face, allowing for nine in total.  Each is small, but carefully "
+"chamber.  Roughly square in layout, its plain walls contain several %^MAGENTA%^alcoves "
+"%^RESET%^upon each face, allowing for ten in total.  Each is small, but carefully "
 "decorated, should you wish to %^YELLOW%^look %^RESET%^at them more closely.\n");
   set_smell("default","The fragrance of many types of incense lingers here.");
   set_listen("default","You can hear various chants and conversations coming through the different portals.");
@@ -22,12 +22,13 @@ void create(){
     "south":MAINTOWN"church",
   ]));
   set_items(([
-    ({"alcoves","shrines"}):"There are nine alcoves around the room, each wall supporting three at "
+//add Nilith and Ryorik, remove Varda
+    ({"alcoves","shrines"}):"There are ten alcoves around the room, each wall supporting three at "
 "equidistant spaces.  The alcoves are dedicated to the gods of the realm: "
 "%^BOLD%^%^BLUE%^Callamir%^RESET%^, %^BOLD%^%^RED%^Jarmila%^RESET%^, %^CYAN%^Kismet%^RESET%^, "
 "%^BOLD%^%^WHITE%^Kreysneothosies%^RESET%^, %^BOLD%^%^BLACK%^Lord Shadow%^RESET%^, "
-"%^BOLD%^%^MAGENTA%^Lysara%^RESET%^, %^MAGENTA%^Nimnavanon%^RESET%^, %^ORANGE%^The "
-"Faceless One%^RESET%^, and %^GREEN%^Varda%^RESET%^. You could %^YELLOW%^<look deityname> "
+"%^BOLD%^%^MAGENTA%^Lysara%^RESET%^, %^BOLD%^%^BLACK%^Nilith%^RESET%^, %^MAGENTA%^Nimnavanon%^RESET%^, "
+"%^BOLD%^%^BLUE%^Ryorik%^RESET%^, and %^ORANGE%^The Faceless One%^RESET%^. You could %^YELLOW%^<look deityname> "
 "%^RESET%^to consider the alcove of a particular deity, or %^YELLOW%^<read deityname> "
 "%^RESET%^to learn a little more about them.",
     ({"callamir","Callamir","callamir alcove"}):({"This alcove is dedicated "
@@ -92,6 +93,33 @@ void create(){
 "this god.","%^ORANGE%^The Faceless One is the deity of Lies and Murder. A secretive and chaotic god, the "
 "faithful do not even agree on the race or gender of their deity, but certainly agree upon the use of murder, "
 "mayhem and madness to spread chaos across the realm.%^RESET%^","wizish"}),
+      ({"nilith","Nilith","nilith alcove","Nilith alcove"}):({"This alcove is dedicated "
+"to Nilith, the goddess of Undeath and War.  A %^CYAN%^steel towershield %^RESET%^affixed to the wall "
+"holds her symbol, a %^BOLD%^%^WHITE%^skeletal hand %^RESET%^holding a single wilted %^BOLD%^%^WHITE%^"
+"ca%^RESET%^l%^BOLD%^l%^RESET%^a %^BOLD%^li%^RESET%^l%^BOLD%^y%^RESET%^. Uncut %^RED%^bl%^BOLD%^o"
+"%^RESET%^%^RED%^od%^ORANGE%^s%^RED%^to%^BOLD%^n%^RESET%^%^RED%^e %^RESET%^and %^BOLD%^%^RED%^r"
+"%^BLACK%^e%^RED%^d ag%^BLACK%^a%^RED%^te %^RESET%^have been left here in offering alongside "
+"what look like mummified finger bones.  You could %^YELLOW%^<read nilith> %^RESET%^to "
+"learn a bit more about her.","%^BOLD%^%^BLACK%^Nilith is the goddess of Undeath and War.  "
+"A former tiefling general of Graez, she bids her followers to make war upon the living, ravage "
+"the land, and take what they desire. Only the elite will be rewarded with immortal undeath.%^RESET%^","wizish"}),
+      ({"ryorik","Ryorik","ryorik alcove","Ryorik alcove"}):({"This alcove is dedicated "
+"to Ryorik, the god of Elements and Natural Disasters.  A %^BOLD%^%^BLACK%^dark gray %^RESET%^cloth drape, "
+"tattered as though worn by the elements, shows his symbol: an elongated, curved %^BOLD%^silver scimitar "
+"%^RESET%^against a %^BOLD%^%^BLACK%^sto%^RESET%^r%^BOLD%^%^BLACK%^m-cl%^RESET%^o%^BOLD%^%^BLACK%^ud "
+"backdrop%^RESET%^.  Offerings of %^RESET%^%^RED%^g%^BOLD%^e%^RESET%^%^ORANGE%^m%^YELLOW%^s%^GREEN%^t"
+"%^RESET%^%^GREEN%^o%^CYAN%^n%^BOLD%^e%^RESET%^%^MAGENTA%^s %^RESET%^in a riot of colors representing "
+"the elements have been placed into the alcove.  You could %^YELLOW%^<read ryorik> %^RESET%^to "
+"learn a bit more about him.","%^BOLD%^%^BLUE%^Ryorik is the God of Elements and Natural Disasters.  "
+"Once a primordial force slumbering away the millenia, Ryorik was awakened with the help of some "
+"denizens of the realms and has accepted the responsibility that comes with his divinity.  He "
+"encourages his followers to revel in the elements rather than taming them and to teach others "
+"to respect the destructive force they command.%^RESET%^","wizish"}),
+  ]));
+}
+
+/*
+Varda was removed, so I took her alcove out of Offestry ~Circe! 7/23/19
     ({"varda","Varda","varda alcove"}):({"This alcove is dedicated to Varda, goddess of War and Strength.  No "
 "delicate cloth or detailed artwork shows her symbol, but instead her sigil of a %^RED%^bloodied %^BOLD%^%^BLACK%^iron "
 "battle-axe %^RESET%^has been roughly painted upon the alcove's rear wall.  Plunder of all kinds has been left here in "
@@ -99,5 +127,4 @@ void create(){
 "lies across them all.  You could %^YELLOW%^<read varda> %^RESET%^to learn a bit more about her.","%^CYAN%^Varda is the "
 "Goddess of War. She prizes strength and cunning, and bids her followers to do however they see fit, as long as they "
 "have the power to enforce it.%^RESET%^","wizish"}),
-  ]));
-}
+*/
