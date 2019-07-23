@@ -6,7 +6,7 @@ int polished;
 void create() {
    ::create();
    set_name("battleaxe");
-   set_short("%^BOLD%^%^WHITE%^Rashan's Cleaver%^RESET%^");
+   set_short("%^BOLD%^%^WHITE%^Rashan\'s Cleaver%^RESET%^");
    set_obvious_short("%^RESET%^%^WHITE%^an old grimy axe%^RESET%^");
    set_id(({"axe","grimy axe","battleaxe","battle axe","rashans cleaver","rashan's cleaver","steel axe","cleaver"}));
    set_long("This is a quite sturdy battleaxe, crafted of what appears to"
@@ -50,7 +50,7 @@ int polish_fun(string str) {
      notify_fail("What do you want to clean?\n");
      return 0;
    }
-   if(str != "axe" && str != "battleaxe" && str != "battle axe") {
+   if(str != "axe" && str != "battleaxe" && str != "battle axe" && str != "grimy axe") {
      notify_fail("You can't polish that.\n");
      return 0;
    }
