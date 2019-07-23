@@ -157,9 +157,23 @@ int cmd_say(string str)
 
 void help() 
 {
-    write("Syntax: <say [message]>\n\n"
-        "Sends out a message to everyone in the room notifying them that "
-        "you said it."
-        "\n\nSee also: tell, whisper, shout, yell, class, emote, speech");
-    return;
+    write(
+        "
+%^CYAN%^NAME%^RESET%^
+
+say - speak up
+
+%^CYAN%^SYNTAX%^RESET%^
+
+say %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Sends out a message to everyone in the room, notifying them that you said it.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+whisper, yell, pose, emote, emoteat, speech, tell, reply
+");
+
 }

@@ -49,7 +49,7 @@ In addition to that, there are several substitutions to expand your adjective:
 
     %^CYAN%^$B%^RESET%^ - body type
 
-    %^CYAN%^$B%^RESET%^ - gender
+    %^CYAN%^$G%^RESET%^ - gender
 
     %^CYAN%^$E%^RESET%^ - eye color
 

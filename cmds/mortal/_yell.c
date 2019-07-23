@@ -79,9 +79,23 @@ void do_yell(object env, string prompt, string str, string lang) {
 }
 
 void help() {
-   write("Syntax: <yell [message]>\n\n"
-         "It yells a message to surrounding rooms.\n"
-         "The sound does dissipate over distance, however.\n\n"
-         "See also: say, whisper, emote, shout\n"
-        );
+   write(
+"
+%^CYAN%^NAME%^RESET%^
+
+yell - convey a message to nearby rooms
+
+%^CYAN%^SYNTAX%^RESET%^
+
+yell MESSAGE
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command yells a message to nearby rooms.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+say, whisper, emote, emoteat, tell, reply, line use
+"
+);
 }
