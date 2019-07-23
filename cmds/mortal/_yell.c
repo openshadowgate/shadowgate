@@ -87,7 +87,7 @@ yell - convey a message to nearby rooms
 
 %^CYAN%^SYNTAX%^RESET%^
 
-yell MESSAGE
+yell %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
