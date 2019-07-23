@@ -78,6 +78,7 @@ int level_adjustment(string subrace) {
     if(subrace == "tiefling" ||
        subrace == "aasimar" ||
        subrace == "air genasi" ||
+       subrace == "feytouched" ||       
        subrace == "earth genasi" ||
        subrace == "fire genasi" ||
        subrace == "water genasi")
