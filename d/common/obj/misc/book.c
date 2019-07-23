@@ -8,7 +8,7 @@ inherit OBJECT;
 
 mapping __BookData;     // used to keep track of what's on all the pages, global so it can be saved and loaded
 string __BookShort;     // will be restored when retrieved from library
-string __BookLong;      // will be restored when retrieved from library
+string __BookLong = "";      // will be restored when retrieved from library
 string __Title;         // used to identify the book in the library
 string __AuthorAlias;   // this is to needed for library functions
 string __AuthorName;    // more stuff needed for libraries
@@ -84,6 +84,7 @@ void create()
 void init()
 {
     ::init();
+    set_overallStatus(100);
     add_action("check_page","add");
     add_action("show_contents","contents");
     add_action("turn_page","turn");
@@ -98,10 +99,10 @@ string query_long(string str) // override to stick the title on the end, now com
     string hold;
     if(!__AuthorName || __AuthorName == "" || __AuthorAlias == "")
     {
-        hold= ::query_long(str)+"\n%^BOLD%^The title on the spine reads%^RESET%^: "+__Title;
+        hold= __BookLong +"\n%^BOLD%^The title on the spine reads%^RESET%^: "+__Title;
         return hold;
     }
-    hold= ::query_long(str)+"\n%^BOLD%^The title on the spine reads%^RESET%^: "+__Title+""
+    hold= __BookLong+"\n%^BOLD%^The title on the spine reads%^RESET%^: "+__Title+""
         "%^RESET%^ by "+__AuthorAlias+"%^RESET%^";
     return hold;
 }
