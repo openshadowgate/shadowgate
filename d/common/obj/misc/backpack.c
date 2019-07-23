@@ -11,7 +11,7 @@ void create() {
     set("long", "This is a simple leather backpack that you could put things in. It has rope stripes to wear.\n");
     set_value(2);
     set_max_internal_encumbrance(45);
-    set_type("clothing");
+    set_type("ring");
     set_limbs(({"torso"}));    
     set_value(250);
     set_property("repairtype",({ "leatherwork", "tailor" }));

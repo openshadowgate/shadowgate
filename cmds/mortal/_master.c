@@ -1038,8 +1038,12 @@ int univ_master(string str)
 
 int cmd_master(string str) 
 {
-   if(TP->is_class("mage")) 
+   if(TP->is_class("mage"))
+   {
+       write("For mages this command is temporarily disabled, sorry. -- Cat .t.t. ps. I'll fix it asap I promewse!");
+       return 1;
        return mage_master(str);
+   }
    if(TP->is_class("sorcerer")) 
        return sorcerer_master(str);
    if(TP->is_class("psywarrior"))
