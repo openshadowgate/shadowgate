@@ -1004,8 +1004,8 @@ int use_XP_tax(int exp)
     }
     if ((int)TO->query_character_level()>20)
     {
-        adjustment*=0.55;
-        adjustment*=1.0-((int)TO->query_character_level())/100.0;
+        adjustment*=0.5;
+        adjustment*=1.0-((int)TO->query_character_level())/90.0;
     }
     
     //scaled level then don't gain any actual experience 
