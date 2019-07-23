@@ -2693,7 +2693,7 @@ void help() {
     if(traveling_aoe_spell)
         write("%^BOLD%^%^RED%^TravAOE spell:%^RESET%^ This is travelling area of effect spell. It affects everyone in the room that caster is in. It uses special damage table.");
     if(splash_spell)
-        write("%^BOLD%^%^RED%^Splash spell%^RESET%^ This is splash damage spell. It has a change of affecting multiple targets at the price of the spell level.");
+        write("%^BOLD%^%^RED%^Splash spell%^RESET%^ This is a splash damage spell. It has a change of affecting multiple targets at the price of the spell level.");
 
     if(mapp(components)) {
       compskeys = keys(components);
