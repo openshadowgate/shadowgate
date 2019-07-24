@@ -20,7 +20,8 @@ void create()
     set_discipline("shaper");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS astral construct");
-    set_description("By manifesting this command, a shaper may pull small portions of ectoplasm from the Astral Plane and weave from them a construct to do his bidding.  The shaper must be careful, else he may lose control of his new creation.
+    set_description("By manifesting this command, a shaper may pull small portions of ectoplasm from the Astral Plane and weave from them a construct to do his bidding.  The shaper must be careful, else he may lose control of his new creation. This is a greater summon, you can't control two such powerful beings.
+
 To command this construct use <command construct to ACTION>.
 To command lost construct to follow you again, <command construct to follow>.
 To dismiss construct, <dismiss construct>.");
@@ -38,6 +39,10 @@ string query_cast_string()
 
 int preSpell() 
 {
+    if(caster->query_property("mages_sword") || caster->query_property("has_elemental")) {
+        tell_object(caster,"You already have a powerful summoned creature under your control.");
+        return 0;
+    }
     if (present("celemdevicex999",caster)) 
     {
         tell_object(caster,"You can only control one construct at a time!\n");
@@ -66,7 +71,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BOLD%^%^BLUE%^You seem to pull at the air "+
        "as you reach into the Astral Plane and draw forth fine "+
        "filaments of ectoplasm.");
-       
+    caster->set_property("has_elemental",1);
     call_out("next_step",10);
     spell_successful();
 }
@@ -166,7 +171,7 @@ void dest_effect()
         elem->move("/d/shadowgate/void");
         elem->remove();
     }
-
+    if(objectp(caster)) { caster->remove_property("has_elemental"); }
     if(objectp(device)) { device->remove(); }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

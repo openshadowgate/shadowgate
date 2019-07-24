@@ -93,7 +93,7 @@ void spell_effect(int prof) {
               +" You almost see a small hole in the fabric of the world in the middle.", caster);
     tell_object(caster,"%^BOLD%^%^BLUE%^You hands are lifted above you by a tremendous force."
                 +" Dark mists swirl above your head. You see a small opening in the middle of those mists.");
-
+    caster->set_property("has_elemental",1);
     call_out("next_step",ROUND_LENGTH, prof);
 }
 
@@ -196,7 +196,6 @@ void next_step(int prof) {
         ob->add_damage_bonus(prof/10-10);
         ob->set_hp((int)ob->query_hp() + (prof/10));
     }
-    caster->set_property("has_elemental",1);
     addSpellToCaster();    
 }
 
