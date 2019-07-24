@@ -27,6 +27,7 @@ void create()
     set_stats("constitution",28);
     set_property("magic",1);
     set_new_exp(100,"boss");
+    set_property("cast and attack",1);    
     set_spells(({"sunburst",
                     "hellball",
                     "hellball",
@@ -94,13 +95,28 @@ void thank()
                 "You're wasting your time on these. You should go do something useful.",
                 "Your existence is meaningless.",
                 });
-    tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in annoyed voice:%^RESET%^ "+thanklist[random(sizeof(thanklist))]);
+    tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an annoyed voice:%^RESET%^ "+thanklist[random(sizeof(thanklist))]);
+}
+
+void heart_beat() 
+{
+    object *living;
+    ::heart_beat();
+
+    living = TO->query_attackers();
+    living = filter_array(living,(:userp($1):));
+    if(random(50)==42)
+    {
+        tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an angry voice:%^RESET%^ Not today.");
+        tell_room(ETO,query_name()+" snaps her fingers.");
+        living->die();
+    }
 }
 
 void die(object ob)
 {
     WORLD_EVENTS_D->kill_event("A rare opportunity");
-    WORLD_EVENTS_D->inject_event((["A rare opportunity" : (["start message": "For the next two hours all experience gained will award an additional 50%!","event type" : "exp bonus", "length" : 120, "notification" : "50% Bonus Exp","event name" : "A rare opportunity", "modifier" : 50,"announce" : 1, "announce to" : "world" ]),]));
+    WORLD_EVENTS_D->inject_event((["A rare opportunity" : (["start message": "For the next two hours all experience gained will award an additional 33%!","event type" : "exp bonus", "length" : 120, "notification" : "50% Bonus Exp","event name" : "A rare opportunity", "modifier" : 33,"announce" : 1, "announce to" : "world" ]),]));
     ::die(ob);
 }
 

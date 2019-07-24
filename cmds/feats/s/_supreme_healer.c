@@ -10,7 +10,7 @@ void create()
     feat_category("RadiantServant");
     feat_name("supreme healer");
     feat_prereq("Radiant servant L7");
-    feat_desc("Supreme healer will allow the Radiant Servant to cast any healing spell that he or she knows without needing the healing spell prepared and without using any spell slots, at will and an unlimited amount of times per day.");
+    feat_desc("Supreme healer will allow the Radiant Servant to cast any wound-curing spell that she knows without needing the healing spell prepared and without using any spell slots, at will and an unlimited amount of times per day.");
     permanent(1);
 }
 
