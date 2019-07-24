@@ -302,7 +302,7 @@ void fence(object fence, object item, object who)
     myLev = (int)who->query_character_level();
     if(myLev > 100) myLev = 100;
     expvalue = to_int(to_float(exp_for_level(myLev)) * exp_perc);
-    expvalue = to_int(to_float(expvalue * expdiff) / 100);    
+    expvalue = to_int(to_float(expvalue * expdiff) / 33);    
     tell_object(who, "exp value = "+expvalue);
     seteuid(UID_LOG);
     LF(who->query_name()+" ("+wholevel+") fenced "+item->query_short());

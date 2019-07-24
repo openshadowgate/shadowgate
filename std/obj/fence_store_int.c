@@ -1,21 +1,9 @@
 #include <std.h>
 inherit "std/room";
 
-#undef GARRETT_DEBUG 1
-
-#ifdef GARRETT_DEBUG
-
-#define FENCE_D "/realms/garrett/fence_d.c"
-#define STORE_INH_ROOM "/realms/garrett/fence_store_int"
-#define MASTER_STORE_ROOM "/realms/garrett/fence_store"
-
-#else // GARRETT_DEBUG
-
 #define FENCE_D "/daemon/fence_d"
 #define STORE_INH_ROOM "/std/obj/fence_store_int"
 #define MASTER_STORE_ROOM "/std/obj/fence_store"
-
-#endif // GARRETT_DEBUG
 
 int flag;
 int save_contents() { return 1;}

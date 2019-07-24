@@ -242,9 +242,9 @@ int sorcerer_master(string str)
              tell_object(TP,"You can only swap two spells of the same level, unless you have the spell knowledge feat.");
              return 1;
            }
-           if(!FEATS_D->usable_feat(TP,"spell knowledge"))
+           if(FEATS_D->usable_feat(TP,"spell knowledge"))
                knownbonus = 1;
-           if(!FEATS_D->usable_feat(TP,"greater spell knowledge"))
+           if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
                knownbonus = 4;
            // run totals here to allow spell knowledge to exceed overall only by 2
            if(sizeof(sorcmap[spelllevel2]) >= available[(spelllevel2-1)]) { // if already at native cap on this level!
@@ -253,9 +253,10 @@ int sorcerer_master(string str)
                if(myint > available[(i-1)]) runtally += (myint - available[(i-1)]);
              }
              if(runtally > knownbonus && (sizeof(sorcmap[spelllevel]) <= available[(spelllevel-1)])) {
-               tell_object(TP,"You've already mastered your extra spells for the spell knowledge feat.");
-               tell_object(TP,"To learn another above that level's cap, you must swap it for an existing extra spell.");
-               return 1;
+
+                 tell_object(TP,"You've already mastered your extra spells for the spell knowledge feat.");
+                 tell_object(TP,"To learn another above that level's cap, you must swap it for an existing extra spell.");
+                 return 1;
              }
            }
          }
@@ -294,9 +295,9 @@ int sorcerer_master(string str)
            tell_object(TP,"You can't learn any further spells of level "+spelllevel+".");
            return 1;
          }
-         if(!FEATS_D->usable_feat(TP,"spell knowledge"))
+         if(FEATS_D->usable_feat(TP,"spell knowledge"))
              knownbonus = 1;
-         if(!FEATS_D->usable_feat(TP,"greater spell knowledge"))
+         if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
              knownbonus = 4;
          // run totals here to allow spell knowledge to exceed overall only by 2
          for(i=1;i<10;i++) {
@@ -1039,11 +1040,7 @@ int univ_master(string str)
 int cmd_master(string str) 
 {
    if(TP->is_class("mage"))
-   {
-       write("For mages this command is temporarily disabled, sorry. -- Cat .t.t. ps. I'll fix it asap I promewse!");
-       return 1;
        return mage_master(str);
-   }
    if(TP->is_class("sorcerer")) 
        return sorcerer_master(str);
    if(TP->is_class("psywarrior"))

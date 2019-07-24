@@ -51,6 +51,8 @@ Available codes:
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
   %^MAGENTA%^$k%^WHITE%^ available ki
   %^MAGENTA%^$K%^WHITE%^ maximum ki 
+
+Avatars only:
   %^MAGENTA%^$I%^WHITE%^ shows True Invis / Mortal Invis / Stealthed status%^RESET%^
 
 %^CYAN%^EXAMPLE%^RESET%^

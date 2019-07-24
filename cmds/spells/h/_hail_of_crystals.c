@@ -60,7 +60,7 @@ void execute_attack()
     if(caster->query_followers()) { foes -= caster->query_followers(); }   
     foes = target_filter(foes); 
 
-    tell_object(caster,"Debug: "+clevel);    
+//    tell_object(caster,"Debug: "+clevel);    
     
     if(time > clevel)
     {
