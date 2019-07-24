@@ -623,8 +623,13 @@ int calculate_healing() {
          if (query_unconscious()) {
             force_me("twitch in a drunken stupor.");
          } else {
-            write("You "+msg+(msg=="look" ? " drunk." : "."));
-            say(query_cap_name()+" "+msg+"s"+(msg == "look" ? " drunk." : "."));
+            if(userp(TO)){
+               tell_object(TO,"You "+msg+(msg=="look" ? " drunk." : "."));
+               tell_room(ETO,""+TPQCN+" "+msg+"s"+(msg == "look" ? " drunk." : "."),TO);
+            }else{
+               write("You "+msg+(msg=="look" ? " drunk." : "."));
+               say(query_cap_name()+" "+msg+"s"+(msg == "look" ? " drunk." : "."));
+            }
          }
       }
    }
