@@ -16,9 +16,9 @@ void create()
     set_hp(25000);
     set_alignment(5);
     set_class("mage");
-    set_mlevel("mage",90);
-    set_guild_level("mage",90);
-    set_guild_level("fighter",90);    
+    set_mlevel("mage",70);
+    set_guild_level("mage",70);
+    set_guild_level("fighter",70);    
     set_stats("intelligence",28);
     set_stats("wisdom",20);
     set_stats("strength",20);
