@@ -16,8 +16,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS bestow curse on TARGET");
     set_description("By means of this spell, the caster places a curse upon the target that will weaken them considerably"
-", lowering their defenses and their combat abilities. It is not dispellable by normal magics, but will fade over time."
-"\n\nNon-specialized mages cannot cast this spell.");
+", lowering their defenses and their combat abilities. It is not dispellable by normal magics, but will fade over time.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

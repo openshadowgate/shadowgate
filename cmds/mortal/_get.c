@@ -186,6 +186,7 @@ get - get stuff
 %^CYAN%^SYNTAX%^RESET%^
 
 get %^ORANGE%^%^ULINE%^ITEM%^RESET%^ [%^ULINE%^%^ORANGE%^%^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^RESET%^] [from %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [%^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^RESET%^]]
+get all [from %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [%^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^RESET%^]]
 get all [coins]
 
 %^CYAN%^DESCRIPTION%^RESET%^

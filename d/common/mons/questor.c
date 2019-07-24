@@ -105,11 +105,14 @@ void heart_beat()
 
     living = TO->query_attackers();
     living = filter_array(living,(:userp($1):));
-    if(random(50)==42)
+    if(sizeof(living))
     {
-        tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an angry voice:%^RESET%^ Not today.");
-        tell_room(ETO,query_name()+" snaps her fingers.");
-        living->die();
+        if(random(50)==42)
+        {
+            tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an angry voice:%^RESET%^ Not today.");
+            tell_room(ETO,query_name()+" snaps her fingers.");
+            living->die();
+        }
     }
 }
 
