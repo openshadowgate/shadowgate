@@ -1,18 +1,6 @@
-// Garrett 01 - 13 - 2004
-//minor typo fixed by Circe 2/6/04
-//Fixed so it cant stack from the same 
-//priest - Saide 2009
-// Based on cure light wounds by  Pator@ShadowGate
-// Aug 8 1996
-
 #include <priest.h>
 
 inherit SPELL;
-
-int my_repeats;
-string * my_party;
-int first_execute = 0;
-
 
 void create() 
 {
@@ -45,121 +33,76 @@ string query_cast_string()
    }
 }
 
+int preSpell() {
+    if (caster->query_property("aura_of_healing")) {
+      tell_object(caster,"You are already under the effects of this spell!");
+        return 0;
+    }
+    return 1;
+}
 
 void spell_effect(int prof) 
 {
-    int clevel,rnd,i,spell_level;
-    object * obarr;
-   
-    if(!objectp(caster))
-    {
+    if(!objectp(caster)){
         dest_effect();
         return;
     }
-
-    my_party = ob_party(caster);
-
-    if(caster->has_property(caster->query_name() + "_aura_of_healing")) 
-    {
-        caster->remove_property(caster->query_name() + "_aura_of_healing");
-        caster->set_property(caster->query_name() + "_aura_of_healing", 1);
-        tell_object(caster, "%^CYAN%^You refresh the aura of healing "+
-            "already surrounding you!%^RESET%^");
-        dest_effect();
-        return;
-    }
-   
-    caster->set_property(caster->query_name() + "_aura_of_healing", 1);
+    caster->set_property("aura_of_healing",1);
     tell_object(caster, "%^CYAN%^You feel a magical aura of energy from your "+
         "god surround you!%^RESET%^");
-    addSpellToCaster();
+    caster->set_property("spelled", ({TO}) );
     spell_successful();
-    execute_attack();
+    addSpellToCaster();    
+    place->addObjectToCombatCycle(TO,1);        
+    call_out("dest_effect",ROUND_LENGTH*clevel*5);
 }
-
 
 void execute_attack() 
 {
-    int rnd, spell_level, i, repeats, flag;   //flag var so it doesn't give messages
-    object cast, targ, place;                 //unless someone is injured, less spam - Saide
-
-    if (!first_execute) 
-    {
-        first_execute++;
-        ::execute_attack();
-        return;
-    }
+    object *people;
+    object dude;
+    int i;
     
-    if(!objectp(caster))
-    {
+    ::execute_attack();
+    if(!objectp(caster)){
         dest_effect();
         return;
     }
-   
-    cast = caster;
-    place = environment(caster);
+    place = environment(caster); // In the case caster moves
 
-    for(i=0;sizeof(my_party),i<sizeof(my_party);i++) 
+    people = ({});
+    if(caster->query_party())
     {
-        if(!objectp(my_party[i])) { continue; }
-        if(environment(my_party[i]) != place) { continue; }
-        targ = my_party[i];
-        
-        if((int)targ->query_hp() < (int)targ->query_max_hp()) 
-        {
-            if(!flag) 
+        object *party;
+        party = PARTY_D->query_party_members(caster->query_party());
+        if(sizeof(party))
+            for(i=0;i<sizeof(party);i++)
             {
-                tell_room(place,"%^CYAN%^A slight magical wave radiates out from "+cast->QCN+"!",({ cast }) );
-                tell_object(cast,"%^CYAN%^A slight magical wave radiates out from your body from your god!");
-                flag = 1;
+                if(environment(party[i]) == environment(caster)) 
+                    people += ({ party[i] });
             }
-        }
-       
-        if(!flag) { continue; }
-       
-        if(cast != targ)
-        {               
-            if((int)targ->query_hp() < (int)targ->query_max_hp()) 
-            {
-                tell_object(cast,"%^CYAN%^You see the power of your deity add "+
-                    "a small bit of energy to "+targ->QCN+"!");
-            }
-        }
-       
-        if((int)targ->query_hp() < (int)targ->query_max_hp()) 
+    }
+    if(member_array(caster,people)==-1)
+        people+=({caster});
+
+    define_base_damage(0);
+    foreach(dude in people)
+    {
+        if((int)dude->query_hp() < (int)dude->query_max_hp())
         {
-            tell_object(targ,"%^CYAN%^The magical energy adds a bit of "+
-                "strength to you.");
-            rnd = (int)CLEVEL / 4;
-            rnd = roll_dice(rnd,12) + rnd;
-            damage_targ(targ,targ->query_random_limb(),-1*rnd,"positive energy");
+            tell_object(dude,"%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
+            tell_room(place,"%^CYAN%^Some of "+dude->QCN+"'s wounds seem to heal!%^RESET%^",caster);
+            damage_targ(dude,dude->return_target_limb(),-sdamage/2,"positive energy");
         }
-        continue;
     }
-    
-    repeats = 0;
-    repeats = caster->query_property(caster->query_name() + "_aura_of_healing");
-    repeats++;
-    
-    if(repeats > ((int) clevel / 2))
-    {
-        dest_effect();
-        return;
-    }
-    else
-    {
-        place->addObjectToCombatCycle(TO,1);
-        caster->remove_property(caster->query_name() + "_aura_of_healing");
-        caster->set_property(caster->query_name() +"_aura_of_healing", repeats);
-    }
+    place->addObjectToCombatCycle(TO,1);        
 }
-
 
 void dest_effect() 
 {       
     if(objectp(caster)) 
     { 
-        caster->remove_property(caster->query_name() + "_aura_of_healing"); 
+        caster->remove_property("aura_of_healing"); 
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
