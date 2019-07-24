@@ -88,9 +88,8 @@ static string *query_categories() {
 
    tmp = ({ "*player general", "*player commands","*feats","*skills","*spells" });
    // tmp += ({ "*abilities" });
-   // this is useless right now.
-   tmp += ({ "*policies", "*rules", "*guidelines", "*deities", "*races" });
-   tmp += ({ "*alignment","*roleplaying","*classes" ,"*faq", "*domains"});
+
+   tmp += ({ "*policies", "*rules", "*lore", "*guidelines", "*deities", "*races", "*alignment","*roleplaying","*classes" ,"*faq", "*domains"});
 
    if((TP->query("is_assassin"))
       || (avatarp(TP)))
@@ -159,6 +158,7 @@ string *query_topics(string category) {
    switch(category) {
    case "*player general": return topics_dir(DIR_USER_HELP+"/");
    case "*policies": return topics_dir(DIR_POLICIES_HELP+"/");
+   case "*lore": return topics_dir(DIR_RULES_HELP+"/");       
    case "*rules": return topics_dir(DIR_RULES_HELP+"/");
    case "*guidelines": return topics_dir(DIR_GUIDELINES_HELP+"/");
    case "*dieties": case "*deities": return topics_dir(DIR_DEITIES_HELP+"/");
@@ -308,6 +308,9 @@ static int find_help(string topic, string category, int menu) {
       if(!file_exists(tmp = DIR_USER_HELP+"/"+topic)) return 0;
       break;
    case "*rules":
+      if(!file_exists(tmp = DIR_RULES_HELP+"/"+topic)) return 0;
+      break;
+   case "*lore":
       if(!file_exists(tmp = DIR_RULES_HELP+"/"+topic)) return 0;
       break;
    case "*feats":
