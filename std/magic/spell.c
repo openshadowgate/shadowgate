@@ -428,7 +428,7 @@ int check_reflection()
 
     //adding new property for spellturning spells and items
     // changing this to prevent stacking feats, and allow them to stack one-off with armor - aligned with current balance meta. N, 7/15.
-    
+
     flagz = 0;
     if(FEATS_D->usable_feat(target,"spell reflection")) flagz = 1;
     if(FEATS_D->usable_feat(target,"reflection") && target->is_wearing_type("shield")) flagz = 2;
@@ -444,12 +444,14 @@ int check_reflection()
         turnperc = 0;
         break;
     }
+    if(!turnperc)
+        if(flagz==1||flagz==2)
+            turnperc = 25;
 
     turnperc += (int)target->query_property("spellturning");
     if(turnperc < 0) turnperc = 0;
     if(!turnperc) return 0;
 
-    tell_room(environment(target),turnperc);
     if(turnperc > roll_dice(1,100)) 
     {
         if(!FEATS_D->usable_feat(target,"perfect caster")) 
@@ -1838,7 +1840,7 @@ void define_base_damage_adjustment()
 {
     sdamage_adjustment = 0;
     if (query_splash_spell())
-        sdamage_adjustment-=2;
+        sdamage_adjustment-=1;
     if(spell_type=="psywarrior")
         sdamage_adjustment-=2;
     if(spell_type=="bard")
