@@ -26,7 +26,7 @@ object puppeteer;
 void create() {
     ::create();
     set_spell_name("magic mirror");
-    set_spell_level(([ "mage" : 7 ]));
+    set_spell_level(([ "mage" : 7, "bard" : 6 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS magic mirror on <object> (a scrying mirror)");
     set_description("By means of this spell, the wizard changes a normal mirror into a scrying device similar to a "
