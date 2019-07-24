@@ -34,7 +34,19 @@ void create()
                     "greater dispel magic",
                     "horrid wilthing",
                     "weird",}));
-    set_spell_chance(100);    
+    set_spell_chance(100);
+    set_funcs(({"mercy"}));
+    set_func_chance(5);
+}
+
+void mercy(object target)
+{
+    object *living;
+    ::heart_beat();
+
+    tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an angry voice:%^RESET%^ Not today.");
+    tell_room(ETO,query_name()+" snaps her fingers.");
+    target->die();
 }
 
 void make_me()
@@ -96,24 +108,6 @@ void thank()
                 "Your existence is meaningless.",
                 });
     tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an annoyed voice:%^RESET%^ "+thanklist[random(sizeof(thanklist))]);
-}
-
-void heart_beat() 
-{
-    object *living;
-    ::heart_beat();
-
-    living = TO->query_attackers();
-    living = filter_array(living,(:userp($1):));
-    if(sizeof(living))
-    {
-        if(random(50)==42)
-        {
-            tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an angry voice:%^RESET%^ Not today.");
-            tell_room(ETO,query_name()+" snaps her fingers.");
-            living->die();
-        }
-    }
 }
 
 void die(object ob)
