@@ -981,7 +981,7 @@ void wizard_interface(object user, string type, string targ)
     
     supreme_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds",
         "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds",
-        "mass cure critical wounds", "regeneration", "aura of healing", "heal", "mass heal" });
+        "mass cure critical wounds", "regeneration", "aura of healing", });
         
     natures_gift_spells = ({ "faerie fire","entangle","animal messenger","spider climb","meld into nature",
         "wall of thorns","treestride","insect plague","wall of stone","regeneration" });
