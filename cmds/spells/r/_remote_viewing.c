@@ -24,10 +24,10 @@ void create() {
     set_spell_level(([ "psion" : 5 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS remote viewing on <object> (a crystal ball or equivalent)");
-    set_description("By means of this power, the psion changes a normal crystal ball or mirror into a scrying device. The details "
+    set_description("By means of this power, the psion changes a normal crystal ball into a scrying device. The details "
 "of the use of such a scrying device can be accessed by typing <help crystal ball> after a successful cast on a crystal "
 "ball.  You will be able to scry a player character or a location with the scrying device made by this power.\n\nThe "
-"crystal ball or mirror used must be of finely polished crystal of a minimum cost of 1,000 gp - such ones are generally found only "
+"crystal ball used must be of finely polished crystal of a minimum cost of 1,000 gp - such ones are generally found only "
 "in psion enclaves as they are both large and fragile, making them impossible to carry around.\n\nYou will not be able "
 "to scry a character that you have not recognized previously with the 'recognize' command.  Your chance of success in "
 "using the crystal ball on a character is less if you recognize someone as something other than their true name, but its "
@@ -83,7 +83,7 @@ void spell_effect(int prof) {
     }
 
     ids = target->query_id();
-    if(member_array("crystal ball", ids)== -1 && member_array("mirror",ids) == -1) {
+    if(member_array("crystal ball", ids)== -1) {
         tell_room(place,"%^BOLD%^RED%^The stones fall to the floor "+
            "as "+caster->QCN+" looks around, confused.",caster);
         tell_object(caster,"%^BOLD%^RED%^The focus of your power "+
@@ -119,18 +119,14 @@ void spell_effect(int prof) {
 	scry_control = new(CONTROL);
 	scry_control->set_observer(caster);
 	scry_control->set_parent(TO);
-//Bonus stuff by ~Circe~ 6/20/08
-//updated again by ~Circe~ 9/16/11 to use bonuses correctly
       bonus = caster->query_stats(casting_stat);
       bonus = bonus-10;
       power = mylevel + random(6) + bonus; 
-//random(6) provides 0-5, allowing for some randomness
 	scry_control->set_scry_power(power);
-//End bonus stuff
 	scry_control->move(environment(target));
-//    duration = 8 * mylevel;
     duration = 60+ (10 * mylevel);
     if(avatarp(caster)) duration = 400;
+    addSpellToCaster();
     caster->set_property("remote scrying",1);
     call_out("dest_effect", duration);
     return;
