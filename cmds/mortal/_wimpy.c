@@ -61,12 +61,28 @@ int cmd_wimpy(string arg) {
 }
 
 void help() {
-    write("Syntax: <wimpy [on|off] percent>\n\n"
-          "When on, it will have you automatically flee from combat\n"
-          "when your hit points are reduced below the % of your total "
-	  "you have specified with the command.\n"
-          "Of course, some combat circumstances make it possible to lose\n"
-          "more than that % in one shot, so this is not fail safe.\n"
-          "See also: wimpydir, kill\n"
-         );
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+wimpy - manage automatic fleeing
+
+%^CYAN%^SYNTAX%^RESET%^
+
+wimpy [on [%^ORANGE%^%^ULINE%^PERCENT%^RESET%^]]
+wimpy off
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Wimpy allows you to automatically flee from combat when your hit points are reduced below the % of your total you have specified with the command. Of course, some combat circumstances make it possible to lose more than that % in one shot, so this is not fail safe.
+
+Without an argument, this command will display direction to run to.
+
+To choose where to flee by default use %^ORANGE%^<wimpydir>%^RESET%^ command.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+wimpydir, flee, kill
+");
 }
+

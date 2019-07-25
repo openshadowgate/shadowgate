@@ -27,15 +27,31 @@ int cmd_wimpydir(string str) {
    return 1;
 }
 
-int help() {
-   write("Usage:\nwimpydir <direction>\n" +
-      "This command will set the direction you will flee in when in combat.\n" +
-      "If the direction isn't set or doesn't work, you will flee in a random\n" +
-      "direction.\n" +
-      "If no direction is specified, it will tell you the current setting.\n"
-        "If retreat is specified it will return you to the previous room if possible.\n"+
-      "See also: wimpy, kill\n"
-   );
-   return 1;
+void help() {
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+wimpydir - choose where to run
+
+%^CYAN%^SYNTAX%^RESET%^
+
+wimpydir [%^ORANGE%^%^ULINE%^DIRECTION%^RESET%^|retreat]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command will set the direction you will flee in when in combat.
+
+If the direction isn't set or doesn't work, you will flee in a random direction.
+
+If no direction is specified, it will tell you the current setting.
+
+If 'retreat' is specified it will return you to the previous room if possible.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+wimpy, flee, kill
+"
+        );
 }
 
