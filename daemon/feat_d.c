@@ -437,8 +437,10 @@ int can_gain_bonus_feat(object ob,string feat)
     for(i=0;i<sizeof(myclasses);i++) {
       if(member_array(myclasses[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
-      if(myclasses[i] == "fighter") currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5); // fighters @ L1 & every 5 levels thereafter
-      else currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // melee classes @ L21 & every 5 levels thereafter
+      if(myclasses[i] == "fighter" || myclasses[i] == "paladin")
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5); 
+      else
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // melee classes @ L21 & every 5 levels thereafter
       if(currentlvl < 0) currentlvl = 0;
       MAX_ALLOWED += currentlvl;
     }
@@ -460,8 +462,10 @@ int can_gain_magic_feat(object ob,string feat)
     for(i=0;i<sizeof(myclasses);i++) {
       if(member_array(myclasses[i],MELEECLASSES) != -1) continue; // melee classes get no bonus caster feats!
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
-      if(myclasses[i] == "psion" || myclasses[i] == "sorcerer") currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5); // psions/sorcs @ L1 & every 5 levels thereafter
-      else currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // caster classes @ L21 & every 5 levels thereafter
+      if(myclasses[i] == "psion" || myclasses[i] == "sorcerer")
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
+      else
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5);
       if(currentlvl < 0) currentlvl = 0;
       MAX_ALLOWED += currentlvl;
     }
@@ -526,7 +530,7 @@ int add_my_feat(object ob,string type,string feat)
         for(i=0;i<sizeof(subset);i++) {
           if(member_array(subset[i],MELEECLASSES) == -1) num += ob->query_class_level(subset[i]);
           else {
-            if(subset[i] != "fighter") {
+            if(subset[i] != "fighter" && subset[i] != "paladin") {
               if(ob->query_class_level(subset[i]) > 20) num += 20;
               else num += ob->query_class_level(subset[i]);
             }
