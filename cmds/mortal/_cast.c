@@ -300,9 +300,7 @@ Negative energy harms living and heals undead.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-perpare, buff
-
-buff, prepare, spells, recall, dispell
+forget, buff, prepare, spells, recall, dispell
 "
         );
 }
