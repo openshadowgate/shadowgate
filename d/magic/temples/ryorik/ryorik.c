@@ -119,7 +119,7 @@ int read_charge(string str){
    write(
 @CHARGE
 %^BOLD%^Ryorik charges his followers with this message:%^RESET%^%^CYAN%^
-Feel the freedom of the natural world. Run free like the wind, obey your own moral code as devoutly as the stone. Care little for taming the elements, but do not exploit elements in a way that would harm or alter their natural state. Help others see that the storms are not to be bound and tamed, but to be unleashed, shared and respected. Let those who would manipulate and abuse them feel the fiery or icy touchy of true elemental power. Fear not natural, elemental destruction as it is the basis for growth and life.
+Feel the freedom of the natural world. Run free like the wind, and obey your own moral code as devoutly as the stone. Care little for taming the elements, but revel in their power, respecting each force's natural dominion. Help others see that the storms are not to be bound and tamed, but to be unleashed, shared and respected. Let those who would manipulate and abuse them feel the unbridled touch of true elemental power. Fear not natural elemental destruction as it is the basis for growth and life.
 CHARGE
    );
    return 1;

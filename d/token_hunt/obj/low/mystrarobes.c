@@ -1,4 +1,5 @@
 // this is supposed to be a mystran (read - arcane) robe. not wearable by other classes. N, 11/15
+// updated to remove mention of Mystra ~Circe~ 7/25/19 
 #include <std.h>
 
 inherit "/d/common/obj/clothing/magerobe";
@@ -26,9 +27,9 @@ void create()
     set_lore("%^WHITE%^%^BOLD%^A long history follows these robes, since their creation for the well-known "
         "gnomish illusionist Tasmar, nearly two centuries ago.  They were crafted and blessed by the Mother of "
         "Magic, as a reward for Tasmar's efforts in both retrieving and scribing many precious writings concerning"
-        " spellcraft and the Weave.  The single blue-white star on the back represents the symbol of Mystra when "
-        "the garment was originally crafted; the symbol has since been changed to the seven stars commonly "
-        "depicted in most temples.");
+        " spellcraft and the Weave.  The single blue-white star on the back represents the symbol of magic when "
+        "the garment was originally crafted; the symbol has since been changed to the scroll crossed by a quill "
+        "and a smith's hammer commonly depicted in most temples.");
     
     set_property("lore difficulty",16);
     set_limbs(({"torso"}));
