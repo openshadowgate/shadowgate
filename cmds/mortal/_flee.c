@@ -56,7 +56,8 @@ int help(){
 "
 %^CYAN%^NAME%^RESET%^
 
-flee - escape the combad
+
+flee - escape the combat
 
 %^CYAN%^SYNTAX%^RESET%^
 
