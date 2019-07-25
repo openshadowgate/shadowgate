@@ -12,21 +12,19 @@
    %^RESET%^proficiency, shield proficiency, simple weapon proficiency, martial 
    %^RESET%^weapon proficiency, parry
    %^RESET%^L2: smite
-   %^RESET%^L3: mounted combat, divine health
+   %^RESET%^L3: divine health
    %^RESET%^L6: layonhands
    %^RESET%^L7: indomitable
-   %^RESET%^L9: ride-by attack
-   %^RESET%^L11: charge
    %^RESET%^L14: force of personality
    %^RESET%^L17: leadership
-   %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
+   %^RESET%^Also: one bonus melee feat at L1, and every five class levels thereafter
 
 Paladins are the protectors of their chosen patron in the realm of ShadowGate. They are cavaliers selected by their faith to battle their enemies and uphold their charge. A paladin's purpose varies according totheiry patron's charge, but protection and law are always part of their code of honor.
 
-A knight must serve someone or some cause. They usually serve a lordor nobility, or the order of knighthood, while paladins serve a higher power, like deity. Onlya limited number of faiths permit knights to join their ranks. Paladins are granted a subset of divine spells based on their wisdom score, as well as the ability to turn undead.
+A knight must serve someone or some cause. They usually serve a lordor nobility, or the order of knighthood, while paladins serve a higher power, like deity. Only faiths with lawful clergy allowed permit knights to join their ranks. Paladins are granted a subset of divine spells based on their wisdom score, including spell to summon a powerful mount, as well as the ability to turn undead.
 
 %^CYAN%^Before playing a paladin, be sure to read %^ORANGE%^<help knights>%^CYAN%^. You will be expected to follow those guidelines.%^RESET%^
 
-%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, prepare, buff, knights, cavalier, squire, deities, prestige classes
+%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, prepare, buff, knights, deities, prestige classes
 
 %^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard paladin list>%^CYAN%^.%^RESET%^
