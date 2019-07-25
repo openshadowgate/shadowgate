@@ -113,7 +113,7 @@ void thank()
 void die(object ob)
 {
     WORLD_EVENTS_D->kill_event("A rare opportunity");
-    WORLD_EVENTS_D->inject_event((["A rare opportunity" : (["start message": "For the next two hours all experience gained will award an additional 33%!","event type" : "exp bonus", "length" : 120, "notification" : "50% Bonus Exp","event name" : "A rare opportunity", "modifier" : 33,"announce" : 1, "announce to" : "world" ]),]));
+    WORLD_EVENTS_D->inject_event((["A rare opportunity" : (["start message": "For the next two hours all experience gained will award an additional 33%!","event type" : "exp bonus", "length" : 120, "notification" : "33% Bonus Exp","event name" : "A rare opportunity", "modifier" : 33,"announce" : 1, "announce to" : "world" ]),]));
     ::die(ob);
 }
 
