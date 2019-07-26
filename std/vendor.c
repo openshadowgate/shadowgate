@@ -144,10 +144,6 @@ int __Buy(string str)
         force_me("say Leave my shop, scum, I will not serve you.");
         return 1;
     }
-    if (!TP->is_player() && member_array(TP->query_race(),RACE_D->query_races())== -1) {
-        force_me("say We don't serve your kind around here.");
-        return 1;
-    }
     if (!__Eco["storage object"]) {
         __Eco["storage object"] = find_object_or_load(__Eco["storage file"]);
     }
@@ -235,10 +231,6 @@ int __Sell(string str) {
     if (!should_interact(TP)) {
         force_me("glare "+TPQN);
         force_me("say Leave my shop, scum, I will not serve you.");
-        return 1;
-    }
-    if (!TP->is_player() && member_array(TP->query_race(),RACE_D->query_races())== -1) {
-        force_me("say We don't serve your kind around here.");
         return 1;
     }
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
@@ -1121,12 +1113,6 @@ int __Repair(string str)
         force_me("say Leave my shop, scum, I will not serve you.");
         return 1;
     }
-
-    if (!TP->is_player() && member_array(TP->query_race(),RACE_D->query_races())== -1) 
-    {
-        force_me("say We don't serve your kind around here.");
-        return 1;
-    }
     if(str == "cost all"){
         costarray = map_array(all_inventory(TP),"repair_cost");
         costsum = sum_array(costarray,sizeof(costarray));
@@ -1228,21 +1214,12 @@ int __Resize(string str) {
         force_me("say Leave my shop, scum, I will not serve you.");
         return 1;
     }
-    if (!TP->is_player() && member_array(TP->query_race(),RACE_D->query_races())== -1) {
-        force_me("say We don't serve your kind around here.");
-        return 1;
-    }
     if (!(ob = present(str, TP))) {
         tell_room(ETO, TPQCN+" asks the shopkeeper about an item.", TP);
         tell_room(ETO, response+"You don't have any "+str+"s to resize!");
         return 1;
     }
 
-    if (!high_mortalp(TP) && !avatarp(TP) && !OB_ACCOUNT->is_high_mortal(TP->query_true_name())) { // currently HM only command. May change in future? N, 8/12.
-        tell_room(ETO, TPQCN+" asks the shopkeeper about an item.", TP);
-        tell_room(ETO, response+"Hah. Why would I go to that much effort for someone as unimpressive as you?");
-        return 1;
-    }
     if (check_allowed(ob) == 0) {
         tell_room(ETO, response+"Sorry, I don't deal in "+str+"s!");
         return 1;
