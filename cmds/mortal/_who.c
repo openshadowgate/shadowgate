@@ -38,7 +38,6 @@ int cmd_who(string str)
     return 1;
 }
 
-
 string race_color(object who) 
 {
     string tmp;
@@ -58,7 +57,7 @@ string list_users(string *races, object tp)
     wizzes = filter_array(users(),"wizards",TO);
     who = users() + "/daemon/filters_d.c"->query_retired();
     who = filter_array(who, "which_users", this_object(), races);
-    max = sizeof(wizzes+who); // pick up size of players before we filter out the 60sec immune ones, so we still know it's active.
+    max = sizeof(wizzes+who); 
 
     wizzes = sort_array(wizzes, "sort_by_level", this_object());
     who = sort_array(who, "sort_by_name", this_object());
@@ -117,18 +116,10 @@ string list_users(string *races, object tp)
                                 tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
                             }
             length = 43;
+
             if ( wizardp(who[i]) && who[i]->query_quietness() ) {
                 tmp += "%^BOLD%^%^CYAN%^Q %^RESET%^";
                 length -=2;
-            }
-
-            if(objectp(TP)) 
-            {
-                if (avatarp(who[i]) && who[i]->query_invis() && avatarp(TP)) 
-                {       
-                    tmp += "%^BOLD%^%^WHITE%^I %^RESET%^";
-                    length -= 2;
-                }
             }
 
             if (in_edit(who[i]) || in_input(who[i])) {
@@ -171,8 +162,7 @@ string list_users(string *races, object tp)
             else
                 if(objectp(who[i]) && interactive(who[i]) && objectp(tp))
                 {
-                    if(!avatarp(tp))
-                        tmp += LEVELCHECK->levelcheck_string(tp,who[i]);
+                    tmp += LEVELCHECK->levelcheck_string(tp,who[i]);
                 }
                 else
                     tmp = arrange_string(tmp, 75);
@@ -209,20 +199,8 @@ string list_users(string *races, object tp)
 
 int wizards(object who) 
 {
-/*    if ((wizardp(TP)) && (TP==who))
-      return 1;
-      if (!wizardp(who)) return 0;
-      if(wizardp(who) && who->query("true_quietness")) return 0;
-      if(member_group(TP->query_name(), "superuser")) return 1;
-      if ((who->query_quietness())&&(wizardp(who))&&(!wizardp(TP)))
-      return 0;
-      if (who->query_highest_level() > TP->query_lowest_level())
-      if (who->query_invis())
-      return 0; */
-// new visibility for all imms; quietness flag still allows coders to go unseen if desired. N, 7/18.
     if ((avatarp(TP)) && (TP==who)) return 1;
     if (!avatarp(who)) return 0;
-    if (!avatarp(TP)) return 0; // players do search below
     if(wizardp(who) && who->query("true_quietness")) return 0;
     if ((who->query_quietness())&&(wizardp(who))&&(!wizardp(TP))) return 0;
     return 1;
@@ -232,19 +210,8 @@ int wizards(object who)
 int which_users(object who, string *races) {
     string my_race;
     int i;
-    //if (wizardp(who)) return 0;
     if (!who->query_name()) return 0;
-    //    if(who->query_invis() && wizardp(who) && !archp(this_player()))
-    //      return 0;
-/*  if (avatarp(who) && who->query_true_invis()) {
-    if (this_player()->query_level() < who->query_level())
-    return 0;
-    }*/
-    if (avatarp(who)) {
-        if(avatarp(TP)) return 0; // imms see each other in above imm filter
-        if(who->query_true_invis()) return 0; // only players at this point, who shouldn't see true invis imms.
-    }
-
+    if (avatarp(who)) return 0;
     if (!(i=sizeof(races))) return 1;
     my_race = (string)who->query_race();
     while (i--) if (races[i] == my_race) return 1;
@@ -377,6 +344,8 @@ Lists all players online.
 
 If argument is provided, filters players by races.
 
+%^CYAN%^PLAYER KILL FLAGS%^RESET%^
+
  %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^ in the end of the line indicates you're free to engage in player %^BOLD%^%^GREEN%^kill%^RESET%^ or adventures with that player. 
 
  %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^ means you're free to %^YELLOW%^adventure%^RESET%^ only and are forbidden to engage in player kill due to recent death or flag changes.
@@ -388,6 +357,10 @@ The difference in power is defined by the weakest character. To engage in advent
 %^CYAN%^SEE ALSO%^RESET%^
 
 chfn, finger, mail, passwd, flag, pkilling, threaten, levelcheck, rules, notify
+
+%^CYAN%^IMMORTALS%^RESET%^
+
+quietness, invis
 "
         );
 }
