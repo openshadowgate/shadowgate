@@ -95,6 +95,7 @@ int mage_master(string str)
     }
     mylvl = TP->query_level();
     myint = TP->query_stats("intelligence");
+    spelllevel = (int)MAGIC_D->query_index("mage")[str];
     if(WIZ_CALCS->query_spell_limit(MAGIC_D->query_index("mage")[str],mylvl,"mage",myint)) {
         TP->remove_masterable(spelllevel);
         TP->add_mastered_spell(str);
