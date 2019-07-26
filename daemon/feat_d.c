@@ -539,7 +539,7 @@ int add_my_feat(object ob,string type,string feat)
         num_feats = (((int)ob->query_bonus_feats_gained()+1)*5);
         num += num_feats;
         num -= 4; // to move feats back to 1/6/11/16/21/etc
-
+        
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
@@ -1155,6 +1155,9 @@ varargs void add_feat(object ob, string type, string feat,int level)
     
     feats  = get_feats(ob,type);
     player = player_data(ob);
+
+    tell_room(environment(ob),"feat_d.c add_feat():"+level);
+            
     if(level) { num = level; }
     else { num = player["level"]; }
     if(!pointerp(feats[num])) { feats[num] = ({ feat }); }
