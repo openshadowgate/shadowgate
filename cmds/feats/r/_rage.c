@@ -243,6 +243,10 @@ void check()
       return;
    }
    /*"Inspired" by the rage cleric spell =P - Octothorpe 1/27/16*/
+   if(!random(10))
+   {
+       tell_object(caster,"%^RED%^Bloodlust fills your mind.%^RESET%^");
+   }
    if(caster->is_in_combat() && (!random(4)))
    {
       switch(random(100))
@@ -280,6 +284,7 @@ void check()
 
 void dest_effect()
 {
+    remove_call_out("check");
     if(!objectp(caster)) 
     {
         ::dest_effect();
