@@ -1057,7 +1057,7 @@ int cmd_feats(string str){
         for(i=0;i<sizeof(subset);i++) {
           if(member_array(subset[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
           if(member_array(subset[i],HYBRID) != -1) continue; // neither do hybrids!
-          if(subset[i] == "fighter") j = (((int)TP->query_class_level(subset[i]) + 4) / 5); // fighters @ L1 & each 5 levels thereafter
+          if(subset[i] == "fighter" || subset[i] == "paladin") j = (((int)TP->query_class_level(subset[i]) + 4) / 5); // fighters @ L1 & each 5 levels thereafter
           else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // melee classes @ L21 & each 5 levels thereafter
           if(j < 0) j = 0;
           BONUS_ALLOWED += j;
