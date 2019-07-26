@@ -446,7 +446,7 @@ int check_reflection()
     }
     if(!turnperc)
         if(flagz==1||flagz==2)
-            turnperc = 25;
+            turnperc = 15;
 
     turnperc += (int)target->query_property("spellturning");
     if(turnperc < 0) turnperc = 0;

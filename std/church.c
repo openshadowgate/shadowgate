@@ -169,13 +169,16 @@ int pray()
     if(!newbiep(TP)&&((int)TP->query_character_level()>6))
     {
         object *stuff;
-        int exploss, exp;
+        int exploss, exp, thelevel;
         int i;
 
         "/daemon/user_d.c"->scale_level_to(TP, TP->query_base_character_level());
         /* Subtracting exp to next level  */
+        thelevel = TP->query_character_level();
+        if(thelevel == 50)
+            thelevel = 49;
         classes = TP->query_classes();
-        TP->set_general_exp(classes[sizeof(classes)-1],EXP_NEEDED[(TP->query_character_level())]);
+        TP->set_general_exp(classes[sizeof(classes)-1],EXP_NEEDED[(thelevel)]);
 
         /* Adding death tax */
 
