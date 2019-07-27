@@ -45,7 +45,7 @@ void spell_effect(int prof){
         ""+caster->QS+" is encased in a protective barrier of blades!",caster);
     tell_object(caster,"%^BOLD%^%^BLACK%^You growl an incantation to your deity and the sound "
         "of thousands of whirring blades surrounds you as you are encased "
-        "in their protective barrier!.");
+        "in their protective barrier!");
     caster->set_property("spelled", ({TO}));
     caster->set_property("blade barrier",1);
     caster->set_property("added short",({"%^CYAN%^ (encircled by blades)%^RESET%^"}));
