@@ -38,6 +38,7 @@ int cmd_who(string str)
     return 1;
 }
 
+
 string race_color(object who) 
 {
     string tmp;
