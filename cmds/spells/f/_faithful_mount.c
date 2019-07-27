@@ -54,8 +54,7 @@ void spell_effect(int prof){
 "%^ORANGE%^becomes apparent in the air!%^RESET%^", caster);
     tell_object(caster, "%^ORANGE%^Just in front of you along the path of your "
 "arms, a thin %^BLUE%^tear %^ORANGE%^becomes apparent in the air!%^RESET%^");
-    caster->set_paralyzed(7, "You are still calling upon your god to send you a mount!");
-    call_out("mount", 5);
+    call_out("mount", ROUND_LENGTH);
 }
 
 void mount(){
@@ -68,7 +67,7 @@ void mount(){
     tell_object(caster,"%^ORANGE%^The tear widens as a narrow hooved leg "
 "emerges from it, followed by the rest of a proud %^RED%^equine %^ORANGE%^creature. "
 "You blink, and the tear in the air has already disappeared behind it.%^RESET%^");
-    ob = new(HORSE+"travel"+(string)caster->query_diety());
+    ob = new(HORSE+"travel");
     ob->set_property("spell", TO);
     ob->set_property("spell_creature", TO);
     ob->set_owner(caster);

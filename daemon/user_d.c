@@ -728,11 +728,9 @@ string *determine_lines(object who)
     
     if (avatarp(who))
     {
-        mychannels += ({ "avatar", "discuss", "petition", "question"});
+        mychannels += ({ "discuss", "petition", "question", "wiz"});
     }
   
-    if (wizardp(who))
-        mychannels += ({ "wiz" });
     if (member_group(who->query_true_name(),"law_c"))
         mychannels += ({ "law" });    
     CHAT_D->add_user(mychannels, who);
