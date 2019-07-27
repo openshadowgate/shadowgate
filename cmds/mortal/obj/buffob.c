@@ -22,7 +22,6 @@ void set_owner(object obj);
 void do_party(int num);
 void owner_check();
 
-
 object owner,*targets,*party_members,my_room;
 mapping buffs, party_targets=([]),special_spells_map=([]);
 string *spells = ({}), *normal_spells = ({}), *targeted_spells = ({}), *special_spells = ({}), *party_target_spells = ({}), *special_target_spells = ({});
@@ -603,23 +602,30 @@ string get_class(string spell)
     return 0;
 }
 
-
-string can_cast(string spell)
+mixed can_cast(string spell)
 {
     string *classes,first_letter,myclass,file,improv;
     int i,level;
     
     owner_check();
-    if (!stringp(spell) || spell == "" || spell == " ") { return 0; }
+    if (!stringp(spell) || spell == "" || spell == " ")
+        return 0;
     classes = (string)owner->query_classes();
     file = get_file(spell);
+    if(file == "")
+    {
+        tell_object(owner, "The spell " + spell + " can't be found.");
+        return 0;
+    }
     for (i = 0;i < sizeof(classes);i++)
     {
         myclass = classes[i];
         level = (int)file->query_spell_level(myclass);
         improv = "level " + level;
-        if ("/daemon/magic_d.c"->can_cast(owner, level, myclass, improv, 0)) { return myclass; }
-        if ("/daemon/magic_d.c"->can_cast(owner, level, myclass, spell, 0)) { return myclass; }
+        if (MAGIC_D->can_cast(owner, level, myclass, improv, 0))
+            return myclass;
+        if (MAGIC_D->can_cast(owner, level, myclass, spell, 0))
+            return myclass; 
     }
     tell_object(owner, "You can't cast the spell " + spell + ", please make sure you have it prepared.");
     return 0;
@@ -682,11 +688,7 @@ string cast_check(string spell)
 
 string get_file(string spell)
 {
-    string first_letter, file;
-    if (!stringp(spell) || spell == "" || spell == " ") { return 0; }
-    first_letter = arrange_string(spell,1);
-    file = "/cmds/spells/" + first_letter + "/_" + replace_string(spell, " ", "_") + ".c";
-    return file;
+    return (string)MAGIC_D->get_spell_file_name(spell);
 }
 
 

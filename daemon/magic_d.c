@@ -469,11 +469,11 @@ string spell_file_to_spell_name(string spellfile)
 }
 
 /**
- * Converts spell name to corresponding spell
+ * Converts spell name to corresponding spell file
  */
-mixed get_spell_file_name(string spell)
+string get_spell_file_name(string spell)
 {
-	if(!spell) return;
+	if(!spell) return "";
 	spell = DIR_SPELLS + "/"+ explode(spell, "")[0] + "/_" + replace_string(spell, " ", "_") + ".c";
 	if(!file_exists(spell)) return "";
 	return spell;
