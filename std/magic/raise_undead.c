@@ -31,6 +31,8 @@ void raise_ghosts(int clevel, int limit, int power, object caster, object contro
             break;
         if(nummon>clevel)
             break;
+        if(!objectp(target))
+            continue;
         undead=new("/d/magic/obj/undead");
 
         lvl=target->make_new_body(undead);

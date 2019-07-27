@@ -59,7 +59,6 @@ void execute_attack()
 
     if(!objectp(caster) || !objectp(place) || !present(caster,place)|| counter<0)
     {
-        tell_object(caster,":"+counter);
         dest_effect();
         return;
     }
