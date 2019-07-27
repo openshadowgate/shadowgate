@@ -193,7 +193,7 @@ This command lets you attempt to discern the whispers of another person It is a 
 
 Success of this command depends on your and targets perception skill.
 
-Without an argument, yo will stop listening to other conversation.
+Without an argument, you will stop listening to other conversation.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

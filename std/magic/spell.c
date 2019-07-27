@@ -697,7 +697,10 @@ void wizard_interface(object user, string type, string targ)
 *        }
 */
         weaps = caster->query_wielded();
-        if (weaps != ({}) && (!caster->query_property("shapeshifted") || (string)TP->query("relationship_profile")== "spell_alter_self_999"))
+        if (weaps != ({}) &&
+            (!caster->query_property("shapeshifted") ||
+             (string)TP->query("relationship_profile") == "spell_alter_self_999" ||
+             (string)TP->query("relationship_profile") == "shadow_apotheosis"))
         {
             for (i=0;i<sizeof(weaps);i++) 
             {
@@ -771,7 +774,10 @@ void wizard_interface(object user, string type, string targ)
             return;
         }
     }
-    if(caster->query_property("shapeshifted") && (string)caster->query("relationship_profile") != "spell_alter_self_999" && (string)caster->query("relationship_profile") != "druid_elemental_999") 
+    if(caster->query_property("shapeshifted") &&
+       (string)caster->query("relationship_profile") != "spell_alter_self_999" &&
+       (string)caster->query("relationship_profile") != "druid_elemental_999" &&
+       (string)caster->query("relationship_profile") != "shadow_apotheosis") 
     {
         shapeob = caster->query_property("shapeshifted");
         if(!objectp(shapeob)) 
