@@ -27,7 +27,7 @@ int cmd_bury(string str) {
              "surroundings to bury the deceased.",TP);
    this_player()->add_hp(random(4) + 1);
    ob->remove();
-   write("You gather you thoughts in the process.");
+   write("You gather your thoughts in the process.");
    return 1;
 }
 

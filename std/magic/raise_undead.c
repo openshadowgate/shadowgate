@@ -23,12 +23,14 @@ void raise_ghosts(int clevel, int limit, int power, object caster, object contro
     
     if(!sizeof(targs))
         return;
-    
-    for (i=0;i < sizeof(targs), i < limit;i++) 
+
+    i = 0;
+    foreach(target in targs)
     {
+        if (i>limit)
+            break;
         if(nummon>clevel)
             break;
-        target=targs[i];
         undead=new("/d/magic/obj/undead");
 
         lvl=target->make_new_body(undead);
@@ -67,7 +69,9 @@ void raise_ghosts(int clevel, int limit, int power, object caster, object contro
         undead->set_property("keep exp",1);
         undead->set_exp((int)undead->query_hd()*50);
         caster->set_property("raised", lvl);        
-        controller->add_monster(undead);            
+        controller->add_monster(undead);
+
+        i++;
     }
     
     if(raised)

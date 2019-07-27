@@ -1,28 +1,7 @@
-/* First aid, known as _heal.c
-  Will allow players to perform basic first aid on themselves and others
-  To balance the obvious repeat commands will no allow the players 
-    involved in the the first aid to attack for 5 rounds --
-    1/2 to get to the player and the rest to perform.
-  Note the monsters will still be attacking --- this will keep players 
-    from attempting to mass heal themselves while in combat.
----> above all original notes, not sure it all still applies
-Adapted to use NWPs by *Styx* 7/2002
-   Will work with no prof, but time delay is less, success improves, and
-   # of 3 sided die of healing increases with profs
-   healing a mount DOES require a prof, at least for now
-   Need to look at magical mounts (Malar spell)????
-   hypogriff per Lahnna
-Healers teach the nwp, will set some to higher levels in higher level areas
-Healing mount taught by:
-  /d/antioch/antioch2/mons/mellany (in the stable)
-  /d/attaya/seneca/mon/trainer (15) wandering
-(T)  why don't you just use is_riding_animal? - doesn't seem to exist that I can find....
-Adapted to use skills by Nienne, 6/09
-*/
-
 #include <std.h>
 #include <daemons.h>
 #include <dirs.h>
+#include <magic.h>
 inherit DAEMON;
 
 int cmd_heal(string str) 
@@ -109,7 +88,7 @@ int cmd_heal(string str)
 
     if(TP->query_blind())     prof = 0;
     
-    paratime = 4; // setting a default timer for use, but increasing effectiveness with skill. N, 8/13
+    paratime = 3; // setting a default timer for use, but increasing effectiveness with skill. N, 8/13
     
     if(!TP->query_time_delay("healing",paratime) && !combat_ok)
     {
@@ -121,6 +100,7 @@ int cmd_heal(string str)
     if(prof >= diff) success = 1;
 
     TP->set_disable(paratime,targ);
+    call_out("notify_done",paratime*ROUND_LENGTH);
     TP->set_time_delay("healing");
    
     if(TP == targ) 
@@ -162,6 +142,12 @@ int cmd_heal(string str)
     }
    
     return 1;
+}
+
+void notify_done()
+{
+    if(objectp(TP))
+        tell_object(TP,"%^CYAN%^%^BOLD%^You finish tending to wounds.%^RESET%^");
 }
 
 void help() 

@@ -53,7 +53,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    teleportee = present(targ,environment(caster));
+    teleportee = present(TP->realName(targ),environment(caster));
     if(!objectp(teleportee))
     {
      	tell_object(caster,"Your target not in this area, so the spell fails.");

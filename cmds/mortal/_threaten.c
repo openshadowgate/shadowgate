@@ -15,15 +15,15 @@ int cmd_threaten(string str)
         return 0;
     }
    
-    if(!(targ = present(str,ETP))) 
+    if(!(targ = find_player(TP->realName(str)))) 
     {
-        notify_fail("No such player here.\n");
+        notify_fail("No such player found.\n");
         return 0;
     }
    
     if(!userp(targ)) 
     {
-        notify_fail("No such player here.\n");
+        notify_fail("This is not a player.\n");
         return 0;
     }
 
