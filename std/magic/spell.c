@@ -1895,6 +1895,11 @@ void define_base_damage(int adjust)
             sdamage = 200+roll_dice(10,5);
 }
 
+int query_base_damage()
+{
+    return sdamage;
+}
+
 int preSpell() { return 1; }
 
 void spell_effect(int prof) 
