@@ -263,7 +263,11 @@ void heart_beat(){
 void save_outsider()
 {
     seteuid(getuid());
-    if(!objectp(TO)) { return; }
+    if(!objectp(TO))
+        return;
+    if(!stringp(castname) ||
+       castname == "")
+        return;
     mkdir("/d/save/summons/"+castname);
     mkdir(fname);
     "/daemon/yuck_d"->save_inventory(this_object(),fname);
