@@ -108,7 +108,7 @@ int query_moon_light()
     light = 0.0;
     foreach(moon in keys(moons))
         light+=is_moon_visible(moon)?query_moon_state(moon):0;
-
+    
     return to_int(round(light));
 }
 
