@@ -15,7 +15,7 @@ int cmd_brew(string str){
     mysneak = present("TSR80",TP);
     if(objectp(mysneak)) mysneak->force_cancel();
   }
-  if (TP->query_magic_hidden()) return notify_fail("You can't see to work!\n");
+  if (TP->query_magic_hidden()) return notify_fail("You can't see your hands to work!\n");
   if (sizeof((object *)TP->query_attackers())) return notify_fail("You're in combat, let's not do that now.\n");
   if (TP->query_property("working")) return notify_fail("You are already "+(string)TP->query_property("working")+".\n");
   if (sscanf(str,"%s %s",mytype,myname) != 2) {
