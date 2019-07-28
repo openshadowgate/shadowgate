@@ -17,7 +17,6 @@ void write_who(){
   object * retired = ({ });
   j = sizeof(who);
   for(i = 0;i<j;i++){
-    if(who[i]->query_true_invis()) continue;
     if(wizardp(who[i]))
       wizes += ({who[i]->query_name()});
     else
@@ -28,7 +27,8 @@ void write_who(){
   retired = "/daemon/filters_d"->query_retired();
   nonplayers = retired->query_name();
 //  nonplayers = sort_array(nonplayers,"sort_by_name",TO);
-  out="<html>
+  out="<!DOCTYPE html>
+<html>
 <head>
 <link href=\"wholist.css\" rel=\"stylesheet\" type=\"text/css\">
 </head>
@@ -91,3 +91,4 @@ void create(){
   seteuid(getuid());
   write_who();
 }
+
