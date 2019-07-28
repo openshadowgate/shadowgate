@@ -14,7 +14,7 @@ void create()
     set_description("By attuning yourself to a target you can create damaging vibrations within it, that will last several rounds.");
     set_verbal_comp();
     set_somatic_comp();
-    set_save("fort");
+    set_save("will");
     set_target_required(1);
 }
 
