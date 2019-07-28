@@ -4822,8 +4822,7 @@ void tidy_feats()
             if(member_array(subset[i],MELEECLASSES) == -1) newpoint += query_class_level(subset[i]);
             else 
             {
-                tell_room(ETP,"user.c subsets:"+subset[i]);
-                if(subset[i] != "fighter") 
+                if(subset[i] != "fighter" && subset[i] !=  "paladin") 
                 {
                     if(query_class_level(subset[i]) > 20) newpoint += 20;
                     else newpoint += query_class_level(subset[i]);
