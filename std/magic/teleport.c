@@ -2,7 +2,13 @@
 
 int object_can_be_teleported(object teleportee, object destination, int clevel)
 {
-    if(!objectp(destination))
+    if(!objectp(destination)) //I'm going to rant. So I declared a
+                              //contract in function definiton,
+                              //stating that clearly I expect this to
+                              //be an object, yet if I pass anything
+                              //but an object into this function, it
+                              //still will process it?.. The fuck we
+                              //need types for then?
         return 0;
     if(!destination->is_room())
         return 0;
