@@ -4591,14 +4591,6 @@ void set_bonus_feats(mapping feats)
     if(mapp(feats))
     {
         __FEAT_DATA["bonus"] = feats;
-
-        {
-            mixed key;
-            foreach(key in keys(feats))
-            {
-                tell_room(ETP,"user.c:"+key+":"+identify(feats[key]));
-            }
-        }
     }
     return;
 }
@@ -4830,7 +4822,8 @@ void tidy_feats()
             if(member_array(subset[i],MELEECLASSES) == -1) newpoint += query_class_level(subset[i]);
             else 
             {
-                if(subset[i] != "fighter" || subset[i] != "paladin") 
+                tell_room(ETP,"user.c subsets:"+subset[i]);
+                if(subset[i] != "fighter") 
                 {
                     if(query_class_level(subset[i]) > 20) newpoint += 20;
                     else newpoint += query_class_level(subset[i]);
