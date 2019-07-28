@@ -35,7 +35,7 @@ string query_cast_string()
 
 void spell_effect(int prof) 
 {
-    object *foes = ({});
+    object *foes = ({}), foe;
     string YOU, HIM, tmp = "";
     int i;
 
@@ -69,21 +69,22 @@ void spell_effect(int prof)
     {
         damage_targ(target, "torso", sdamage,"negative energy");
     }
-
+    
     for(i=0;i<sizeof(foes);i++)
     {
+        define_base_damage(0); //lazy re-roll
         if(!objectp(foes[i])) { continue; }
         if(!do_save(foes[i]))
         {
             tell_room(environment(foes[i]),"%^BLUE%^The fell tendrils caress "+foes[i]->QCN+"!",foes[i]);
             tell_object(foes[i],"%^BLUE%^The fell tendril caresses you!");
-            damage_targ(foes[i], "torso", sdamage, element);
+            damage_targ(foes[i], "torso", sdamage, "negative energy");
         }
         else
         {
             tell_room(environment(foes[i]),"%^BLUE%^"+foes[i]->QCN+" barely dodges fell energy tendrill!",foes[i]);
             tell_object(foes[i],"%^BLUE%^You barely dodge fell energy tendril!");
-            damage_targ(foes[i], "torso", sdamage / 2, element);
+            damage_targ(foes[i], "torso", sdamage / 2, "negative energy");
         }
     }
     dest_effect();

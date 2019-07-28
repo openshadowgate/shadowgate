@@ -16,6 +16,7 @@ void create()
     set_somatic_comp();
     set_property("magic",1);
     set_helpful_spell(1);
+    traveling_aoe_spell(1);
 }
 
 

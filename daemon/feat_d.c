@@ -1194,7 +1194,7 @@ void set_feats(object ob,string type,mapping feats)
     if(!objectp(ob))    { return; }
     if(!stringp(type))  { return; }
     if(!mapp(feats))    { return; }
-    
+
     switch(type)
     {
     case "class":

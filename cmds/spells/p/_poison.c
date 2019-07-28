@@ -32,7 +32,7 @@ void spell_effect()
     targ = present(arg,place);
     
     if(objectp(targ) &&
-       !liginv(targ))
+       !living(targ))
     {
         tell_object(caster, "That is not a living being!");
         TO->remove();
