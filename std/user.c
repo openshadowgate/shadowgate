@@ -4591,6 +4591,14 @@ void set_bonus_feats(mapping feats)
     if(mapp(feats))
     {
         __FEAT_DATA["bonus"] = feats;
+
+        {
+            mixed key;
+            foreach(key in keys(feats))
+            {
+                tell_room(ETP,"user.c:"+key+":"+identify(feats[key]));
+            }
+        }
     }
     return;
 }

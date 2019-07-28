@@ -50,30 +50,29 @@
 #define TOQCN this_object()->query_cap_name()
 #define ETOQN environment(this_object())->query_name()
 #define ETOQCN environment(this_object())->query_cap_name()
-// because Garrett is a lazy conv-addicted crackhead.
+#define TPTN this_player()->query_true_name()
+#define TPQTN this_player()->query_true_name()
+#define TPQP this_player()->query_possessive()
+#define TPQO this_player()->query_objective()
+#define TPQS this_player()->query_subjective()
+#define QP query_possessive()
+#define QO query_objective()
+#define QS query_subjective()
+
+#define ENV(A) environment(A)
+// because Garrett is silly and is a wabbit
 #define SPELL "/std/magic/spell"
 #define FEAT "/std/feat"
 #define SCRIBE "/std/scribe"
 #define WEAPONLESS "/std/weaponless_monsters"
 #define TO this_object()
 #define WIZARDSPELL "/std/magic/wizardspell.c"
-#define TPTN this_player()->query_true_name()
-#define TPQTN this_player()->query_true_name() 
 #define PO previous_object()
 #define ETP environment(this_player())
 #define ETO environment(this_object())
 #define ROPE "/d/common/obj/misc/rope.c"
-// and a few more because Styx likes readability and consistency and less typing too
-// 11/16/03, last change 1/14/03
 #define EETO environment(environment(this_object()))
-#define TPQP this_player()->query_possessive()
-#define TPQO this_player()->query_objective()
-#define TPQS this_player()->query_subjective()
-// *Styx* 11/16/03 also, for functions that use targ-> etc. instead of TP
 #define QCN query_cap_name()
-#define QP query_possessive()
-#define QO query_objective()
-#define QS query_subjective()
 #define CHARACTER_LEVEL_CAP 50
 #define TEST_CHARACTER_LEVEL_CAP 60
 
@@ -123,8 +122,7 @@
 #define _TWO_WEEKS_IN_SECONDS_ 1209600
 #define DEATH_FLAG_TIME 21600
 #define PK_DEATH_FLAG_LOGIN_TIME 43200
-//#define PK_DEATH_RL_TIME 345600
-#define PK_DEATH_RL_TIME 604800
+#define PK_DEATH_RL_TIME 165600
 #define SIZE_SMALL 1
 #define SIZE_MEDIUM 2
 #define SIZE_NORMAL 2

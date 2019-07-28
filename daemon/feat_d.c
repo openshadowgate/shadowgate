@@ -1194,13 +1194,20 @@ void set_feats(object ob,string type,mapping feats)
     if(!objectp(ob))    { return; }
     if(!stringp(type))  { return; }
     if(!mapp(feats))    { return; }
-
+    
     switch(type)
     {
     case "class":
         ob->set_class_feats(feats);
         break;
     case "bonus":
+        {
+            mixed key;
+            foreach(key in keys(feats))
+            {
+                tell_room(ETP,"feat_d.c:"+key+":"+identify(feats[key]));
+            }
+        }
         ob->set_bonus_feats(feats);
         break;
     case "magic":
