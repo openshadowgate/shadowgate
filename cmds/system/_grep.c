@@ -42,8 +42,20 @@ int cmd_grep(string str) {
             write("%^BOLD%^%^RED%^"+files[i]+" Access Denied.");
             continue;
         }
-        borg[files[i]] = regexp(explode(read_file(files[i])+"", "\n"), exp);
-        if(!sizeof(borg[files[i]])) map_delete(borg, files[i]);        
+        {
+            string line;
+            int cline = 0;
+            borg[files[i]]=({});
+            while((line = read_file(files[i],cline,128)) &&
+                cline < 65535)
+            {
+                borg[files[i]] += regexp(explode(line, "\n"), exp);
+                cline+=128;
+            }
+
+            if(!sizeof(borg[files[i]]))
+                map_delete(borg, files[i]);
+        }
     }
   
     if(!(max = sizeof(files = keys(borg))))

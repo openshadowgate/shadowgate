@@ -13,7 +13,7 @@ inherit "/std/bag_logic";
 string chest_type = "normal";
 int charges;
 
-void create() 
+void create()
 {
     ::create();
     set_no_clean(1);
@@ -45,24 +45,24 @@ void create_treasure_chest(mixed size, string type)
 	//of the chest, weight is slightly more if it's metal.
 	//hmtype variable is the material type
 	//of the hinges - either wood or metal.
-	//ccolor variable is the color of the description of 
+	//ccolor variable is the color of the description of
 	//chest
-	//scolor variable is the color of the short 
+	//scolor variable is the color of the short
 	//description of the chest
-	//dtype variable is the design type of 
-	//the chest - ornate, simple, rough, rotten, etc. 
+	//dtype variable is the design type of
+	//the chest - ornate, simple, rough, rotten, etc.
 
-	//Type is either lockable or not 
-	//Size is the size of the chest 
-	//can be tiny, small, medium, large, 
+	//Type is either lockable or not
+	//Size is the size of the chest
+	//can be tiny, small, medium, large,
 	//or huge. Can be in the format
 	//1 || tiny, 2 || small,
-	//3 || medium, 4 || large, 
+	//3 || medium, 4 || large,
 	//5 || huge.
 
     if (query_property("created") || query_property("restoring")) return;
 
-    if(!random(2)) 
+    if(!random(2))
     {
         cmtype = METAL_TYPES[random(sizeof(METAL_TYPES))];
         x = 1;
@@ -98,7 +98,7 @@ void create_treasure_chest(mixed size, string type)
     {
         TO->set_value(75);
         TO->set_weight(7);
-        if(x) TO->set_weight(11);		
+        if(x) TO->set_weight(11);
         size = "small";
         TO->set_max_internal_encumbrance(30);
     }
@@ -106,7 +106,7 @@ void create_treasure_chest(mixed size, string type)
     {
         TO->set_value(150);
         TO->set_weight(15);
-        if(x) TO->set_weight(20);	
+        if(x) TO->set_weight(20);
         size = "medium";
         TO->set_max_internal_encumbrance(45);
     }
@@ -114,7 +114,7 @@ void create_treasure_chest(mixed size, string type)
     {
         TO->set_value(300);
         TO->set_weight(30);
-        if(x) TO->set_weight(40);		
+        if(x) TO->set_weight(40);
         size = "large";
         TO->set_max_internal_encumbrance(80);
     }
@@ -134,23 +134,23 @@ void create_treasure_chest(mixed size, string type)
     if(type)
     {
         TO->set_short(scolor+"A "+size+ " " +type+ " "+
-        VALID_COLORS[random(sizeof(VALID_COLORS))] + 
-        cmtype + scolor + " chest with " + 
+        VALID_COLORS[random(sizeof(VALID_COLORS))] +
+        cmtype + scolor + " chest with " +
         VALID_COLORS[random(sizeof(VALID_COLORS))] +
         hmtype + " hinges");
-		
+
         switch(dtype)
         {
-            case "rough":				
+            case "rough":
                 TO->set_open_long(ccolor+ "This rough, "+size+
                 " chest, has been hastily carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+"%^RESET%^"+
                 ccolor+".  Its creation was careless "+
                 "and quick, offering a storage area "+
                 "without any concern for durability.  "+
                 "It has been fitted with a lock and "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+"%^RESET%^"+
                 ccolor+" hinges in order for it to open and "+
                 "close.%^RESET%^");
@@ -160,23 +160,23 @@ void create_treasure_chest(mixed size, string type)
             case "simple":
                 TO->set_open_long(ccolor+ "This simple, "+size+
                 " chest, has been carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+"%^RESET%^"+
                 ccolor+".  Its design is one of simplicity "+
                 "and convenience, offering a storage area "+
                 "without any concern for its appearance.  "+
                 "It has been fitted with a lock and "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+"%^RESET%^"+
                 ccolor+" hinges in order for it to open and "+
                 "close properly.%^RESET%^");
                 break;
 
             case "ornate":
-				
+
                 TO->set_open_long(ccolor+ "This ornate, "+size+
                 " chest, has been expertly carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+"%^RESET%^"+ccolor+
                 ".  Its creation was one of "+
                 "great pain and effort, resulting in "+
@@ -184,10 +184,10 @@ void create_treasure_chest(mixed size, string type)
                 "before you.  It is covered with strange "+
                 "and mysterious patterns that serve only to "+
                 "add to its overall beauty.  It serves, not "+
-                "only as a storage area, but a durabile "+
+                "only as a storage area, but a durable "+
                 "piece of art.  It has been fitted with a lock "+
                 "and brilliant "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+"%^RESET%^"+
                 ccolor+" hinges in order for it to open and "+
                 "close silenty.%^RESET%^");
@@ -196,39 +196,39 @@ void create_treasure_chest(mixed size, string type)
             case "rotting":
                 TO->set_open_long(ccolor+ "This rotting, "+size+
                 " chest, has been carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+"%^RESET%^"+
                 ccolor+".  Its original design has "+
                 "been lost in time and weathered away "+
                 "by nature.  It offers a storage area, but "+
                 "has no concern for durability.  "+
                 "It has been fitted with a lock and "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+"%^RESET%^"+
                 ccolor+" hinges, hopefully it "+
                 "might still open and close.%^RESET%^");
                 break;
-            }		
+            }
     }
     else
     {
         TO->set_short(scolor+"A "+size+ " " +
-        VALID_COLORS[random(sizeof(VALID_COLORS))] + 
-        cmtype + scolor + " chest with " + 
+        VALID_COLORS[random(sizeof(VALID_COLORS))] +
+        cmtype + scolor + " chest with " +
         VALID_COLORS[random(sizeof(VALID_COLORS))] +
         hmtype + " hinges");
-		
+
         switch(dtype)
         {
-            case "rough":				
+            case "rough":
                 TO->set_open_long(ccolor+ "This rough, "+size+
                 " chest, has been hastily carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+ccolor+".  Its creation was careless "+
                 "and quick, offering a storage area "+
                 "without any concern for durability.  "+
                 "It has been fitted with "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+ccolor+" hinges in order for it to open and "+
                 "close.%^RESET%^");
                 break;
@@ -236,31 +236,31 @@ void create_treasure_chest(mixed size, string type)
             case "simple":
                 TO->set_open_long(ccolor+ "This simple, "+size+
                 " chest, has been carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+ccolor+".  Its design is one of simplicity "+
                 "and convenience, offering a storage area "+
                 "without any concern for its appearance.  "+
                 "It has been fitted with "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+ccolor+" hinges in order for it to open and "+
                 "close properly.%^RESET%^");
                 break;
 
             case "ornate":
-					
+
                 TO->set_open_long(ccolor+ "This ornate, "+size+
                 " chest, has been expertly carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+ccolor+".  Its creation was one of "+
                 "great pain and effort, resulting in "+
                 "the ornate work of art that you now see "+
                 "before you.  It is covered with strange "+
                 "and mysterious patterns that serve only to "+
                 "add to its overall beauty.  It serves, not "+
-                "only as a storage area, but a durabile "+
+                "only as a storage area, but a durable "+
                 "piece of art.  It has been fitted with equally "+
                 "brilliant "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+ccolor+" hinges in order for it to open and "+
                 "close silenty.%^RESET%^");
                 break;
@@ -268,13 +268,13 @@ void create_treasure_chest(mixed size, string type)
             case "rotting":
                 TO->set_open_long(ccolor+ "This rotting, "+size+
                 " chest, has been carved from " +
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 cmtype+ccolor+".  Its original design has "+
                 "been lost in time and weathered away "+
                 "by nature.  It offers a storage area, but "+
                 "has no concern for durability.  "+
                 "It has been fitted with "+
-                VALID_COLORS[random(sizeof(VALID_COLORS))] + 
+                VALID_COLORS[random(sizeof(VALID_COLORS))] +
                 hmtype+ccolor+" hinges, hopefully it "+
                 "might still open and close.%^RESET%^");
                 break;
@@ -322,11 +322,11 @@ void make_speciality_chest(string ctype, mixed size, string type)
     if(ctype == "fire")
     {
         charges = 10 + random(11);
-        if(type) 
+        if(type)
         {
             TO->set_short("%^BOLD%^%^RED%^A "+size+" "+type+
             " flaming chest%^RESET%^");
-            TO->set_open_long("%^BOLD%^%^RED%^This "+size+ 
+            TO->set_open_long("%^BOLD%^%^RED%^This "+size+
             " chest is made from an eternally burning flame, "+
             "that by some magic method, has been shaped and "+
             "manipulated to serve as a storage space.  However, "+
@@ -340,7 +340,7 @@ void make_speciality_chest(string ctype, mixed size, string type)
         {
             TO->set_short("%^BOLD%^%^RED%^A "+size+" "+type+
             " flaming chest%^RESET%^");
-            TO->set_open_long("%^BOLD%^%^RED%^This "+size+ 
+            TO->set_open_long("%^BOLD%^%^RED%^This "+size+
             " chest is made from an eternally burning flame, "+
             "that by some magic method, has been shaped and "+
             "manipulated to serve as a storage space.  However, "+
@@ -371,9 +371,9 @@ void heart_beat()
     if(!objectp(ETO)) return;
     if(chest_type == "fire")
     {
-        if(objectp(EETO) && interactive(EETO)) 
+        if(objectp(EETO) && interactive(EETO))
         {
-            if(ETO->is_container()) 
+            if(ETO->is_container())
             {
                 tell_object(EETO, "%^RED%^Your "+
                 ETO->query_cap_name() + " is slowly burning!!"+
@@ -383,17 +383,17 @@ void heart_beat()
                 "%^RED%^'s "+ETO->query_cap_name()+ " is slowly "+
                 "burning!!%^RESET%^", ({EETO}));
                 charges--;
-                if(charges <= 0) 
+                if(charges <= 0)
                 {
                     tell_object(EETO, "%^RED%^Your "+
                     ETO->query_cap_name() + " erupts into flame "+
                     "and all of its inventory burns away!%^RESET%^");
-										
-                    tell_room(environment(EETO), 
+
+                    tell_room(environment(EETO),
                     ETO->query_cap_name() +
-                    "%^RED%^'s "+ETO->query_cap_name() + 
+                    "%^RED%^'s "+ETO->query_cap_name() +
                     " erupts into flame and "+
-                    "all of its inventory burns away!%^RESET%^", 
+                    "all of its inventory burns away!%^RESET%^",
                     ({EETO}));
                     if(!interactive(ETO)) ETO->remove();
                     TO->remove();
@@ -401,16 +401,16 @@ void heart_beat()
 
             }
         }
-        if(objectp(ETO) && interactive(ETO)) 
+        if(objectp(ETO) && interactive(ETO))
         {
             tell_object(ETO, "%^RED%^The chest continues to "+
             "flare, burning you!%^RESET%^");
-            tell_room(EETO, ETO->query_cap_name() + "%^RED%^" + 
+            tell_room(EETO, ETO->query_cap_name() + "%^RED%^" +
             "'s flaming chest, continues to flare, burning "+
             ETO->query_objective() + "!%^RESET%^", ({ETO}));
             charges--;
             ETO->do_damage("torso", roll_dice(2, 6));
-            if(charges <= 0) 
+            if(charges <= 0)
             {
                 tell_object(ETO, "%^RED%^Your flaming chest "+
                 "explodes into "+
@@ -420,9 +420,9 @@ void heart_beat()
                 "flaming chest explodes into a puff of ash and all "+
                 "of its inventory burns away!%^RESET%^", ({ETO}));
                 TO->remove();
-            }			
+            }
         }
-    }		
+    }
 }
 
 int restore_me(string file) {
@@ -435,7 +435,7 @@ int restore_me(string file) {
     remove_property("restoring");
 }
 
-int save_me(string file) 
+int save_me(string file)
 {
     int hold;
     remove_property("my_wgt");
