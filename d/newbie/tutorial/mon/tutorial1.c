@@ -46,15 +46,18 @@ void step_1(object target) {
    if(!objectp(target)) return 0;
    if(!objectp(TO)) return 0;
    if(!present(target,ETO)) return 0;
-   if(target->query("newbtutorial")) tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The man turns to you and says:"
-"%^RESET%^ Hello again!  Do you want to start again at where we left off?  If you can't remember where you "
-"were up to, just %^YELLOW%^<ask>%^RESET%^ me.\n\nThe man smiles.");
-   else {
-     tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The man turns to you and says:%^RESET%^ Welcome, newcomer, "
-"to the Shadowgate MUD!  I am always glad to see fresh faces, it gets very lonely here sometimes.\n\n"
-"%^MAGENTA%^He shakes his head and continues:%^RESET%^ I am here to teach you the first basic commands.  Just "
-"%^YELLOW%^<nod>%^RESET%^ when you're ready.\n\nThe man smiles.");
-     target->set("newbtutorial",1);
+   if(target->query("newbtutorial") > 1){
+      tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The man turns to you and says:"
+      "%^RESET%^ Hello again!  Do you want to start again at where we left off?  If you can't remember where you "
+      "were up to, just %^YELLOW%^<ask>%^RESET%^ me.\n\nThe man smiles.");
+      return;
+   }else{
+      tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The man turns to you and says:%^RESET%^ Welcome, newcomer, "
+         "to the Shadowgate MUD!  I am always glad to see fresh faces, it gets very lonely here sometimes.\n\n"
+         "%^MAGENTA%^He shakes his head and continues:%^RESET%^ I am here to teach you the first basic commands.  Just "
+         "%^YELLOW%^<nod>%^RESET%^ when you're ready.\n\nThe man smiles.");
+      target->set("newbtutorial",1);
+      return;
    }
 }
 

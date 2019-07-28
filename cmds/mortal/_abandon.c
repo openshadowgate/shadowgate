@@ -1,3 +1,4 @@
+//minor fix by Circe 7/28/19 - fixing "choosen" typo
 #include <living.h>
 #include <security.h>
 #include <std.h>
@@ -99,12 +100,12 @@ int confirm_drop(string str,string theclass,int drop,int cost)
         if(!avatarp(imms[i])) { continue; }
         if((int)TP->query_class_level(theclass) <= 1)
         {
-            tell_object(imms[i],"%^RESET%^%^BOLD%^"+capitalize(TP->query_true_name())+" has choosen to "
+            tell_object(imms[i],"%^RESET%^%^BOLD%^"+capitalize(TP->query_true_name())+" has chosen to "
                 "abandon "+TP->QP+" "+theclass+" class.");
         }
         else
         {
-            tell_object(imms[i],"%^RESET%^%^BOLD%^"+capitalize(TP->query_true_name())+" has choosen "
+            tell_object(imms[i],"%^RESET%^%^BOLD%^"+capitalize(TP->query_true_name())+" has chosen "
                 "to drop "+drop+" levels in "+TP->QP+" "+theclass+" class.");
         }
     }
