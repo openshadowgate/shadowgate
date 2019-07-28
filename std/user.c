@@ -3640,7 +3640,7 @@ object query_rem_room(string room)
     string destfile;
     mapping remrooms;
 
-    room = lower_case(room);
+//    room = lower_case(room);
     remrooms = TO->query_rem_rooms();
     destfile = remrooms[room];
 

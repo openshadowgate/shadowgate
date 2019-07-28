@@ -12,8 +12,7 @@ void create()
     feat_type("permanent");
     feat_category("Duelist");
     feat_name("bladesong");
-    feat_prereq("Swipe");
-    feat_desc("With this feat duelist learns how to use just one hand to channel their spells.");
+    feat_desc("With this feat one learns how to use just one hand to channel their spells. The caster can use their spells while wielding a weapon in their second hand.");
     permanent(1);
 }
 
@@ -23,11 +22,6 @@ int prerequisites(object ob)
 {
     object *weapons;
     if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"swipe"))
-    {
-        dest_effect();
-        return 0;
-    }
     return ::prerequisites(ob);
 }
 

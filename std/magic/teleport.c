@@ -2,9 +2,10 @@
 
 int object_can_be_teleported(object teleportee, object destination, int clevel)
 {
+    if(!objectp(destination))
+        return 0;
     if(!destination->is_room())
         return 0;
-
     if (destination->is_flight_room())
         return 0;
 
