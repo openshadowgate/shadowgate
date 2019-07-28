@@ -39,9 +39,9 @@ void spell_effect(int prof) {
     prob = to_int(25.0 + 65.0*(power/50.0));
     if(roll_dice(1,100)>prob)
     {
-        if(!endplace=TELEPORT->scatter_destination(
-               caster->query_rem_room(arg)))
-            endplace = caster->query_rem_room(arg);
+        /* if(!endplace=TELEPORT->scatter_destination( */
+        /*        caster->query_rem_room(arg))) */
+        endplace = caster->query_rem_room(arg);
     }
     else
         endplace = caster->query_rem_room(arg);
