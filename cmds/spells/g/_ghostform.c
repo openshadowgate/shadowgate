@@ -54,13 +54,9 @@ void spell_effect(int prof) {
        "finishes "+caster->QP+" prayer!%^RESET%^",caster);
     mychance = 10+clevel;
     if(mychance > 50) mychance = 50;
-//Since they can wear armor while using this spell, 50 may end up 
-//being too good - will see after testing in game for awhile
     caster->set_property("spelled", ({TO}) );
     caster->set_property("amorpha",1);
-//    caster->set_missChance(mychance);
-// rebalanced to work as the others so it's not garbage at low end and broken at high end. N, 6/15.
-    caster->set_missChance(caster->query_missChance()+ 30); // 30% evasion
+    caster->set_missChance(caster->query_missChance()+ 35);
     caster->set_property("added short",({"%^BOLD%^%^WHITE%^ (ghostly)%^RESET%^"}));
     spell_successful();
     addSpellToCaster();

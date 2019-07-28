@@ -43,33 +43,24 @@ int cmd_grep(string str) {
             continue;
         }
         {
-            string line;
-            int cline = 0;
-            borg[files[i]]=({});
-            while((line = read_file(files[i],cline,128)) &&
-                cline < 65535)
+            string *foundlines;
+            string bytes;
+            int cbytes = 0;
+            int j;
+            foundlines=({});
+            while((bytes = read_bytes(files[i],cbytes,1024)) &&
+                cbytes < 20971520)
             {
-                borg[files[i]] += regexp(explode(line, "\n"), exp);
-                cline+=128;
+                foundlines = regexp(explode(bytes+read_bytes(files[i],cbytes,1), "\n"), exp);
+                if(sizeof(foundlines))
+                    for(j=0; j< (sizeof(foundlines));j++)
+                    {
+                        tell_object(TP,"%^BOLD%^%^RED%^"+files[i]+":%^RESET%^"+foundlines[j]);
+                    }
+                cbytes+=1024;
             }
-
-            if(!sizeof(borg[files[i]]))
-                map_delete(borg, files[i]);
         }
     }
-  
-    if(!(max = sizeof(files = keys(borg))))
-        return notify_fail("No matches found.\n");
-    else {
-        for(i=0, str = ""; i<max; i++)
-            str += files[i] +":\n"+implode(borg[files[i]],"\n")+"\n\n";
-    }
-  
-    if(output) {
-        if(!write_file(output, str))
-            message("system", "Failed to write to: "+output, this_player());
-        else message("system", "Grep sent to: "+output, this_player());
-    } else TP->more(explode(str,"\n"));
   
     seteuid(getuid());
     return 1;
