@@ -80,7 +80,8 @@ void execute_attack(){
             ""+caster->QO+"!",({caster,target}));
         tell_object(caster,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" is burned by the shield of "
             "flames as "+attackers[i]->QS+" strikes you!");
-        tell_object(target,"%^BOLD%^%^RED%^You are burned by the shield of flames as you strike "
+//changed the below - was tell_object(target... which was sending the message to the caster ~Circe~ 7/29/19
+        tell_object(attackers[i],"%^BOLD%^%^RED%^You are burned by the shield of flames as you strike "
             ""+caster->QCN+"!");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");
     }
