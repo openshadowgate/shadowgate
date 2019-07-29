@@ -44,6 +44,7 @@ void spell_effect()
         tell_object(caster,"%^GREEN%^You extend your hand and %^BOLD%^thorn%^RESET%^%^GREEN%^ flies out of it straight into %^BOLD%^"+targ->QCN+"%^RESET%^%^GREEN%^!");
         tell_room(place,"%^GREEN%^"+caster->QCN+" extends "+caster->QP+" hand and %^BOLD%^thorn%^RESET%^%^GREEN%^ flies out of it straight into %^BOLD%^"+targ->QCN+"%^RESET%^%^GREEN%^!",({caster}));
         POISON_D->ApplyPoison(targ,poisonf,caster,"injury");
+        spell_kill(targ,caster);
         dest_effect();    
         return;
     }
