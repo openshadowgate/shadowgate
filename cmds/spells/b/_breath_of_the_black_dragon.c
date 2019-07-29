@@ -35,7 +35,7 @@ void spell_effect(int prof) {
         return;
     }
     spell_successful();
-    dmg = roll_dice(clevel,6);
+    dmg = sdamage;
     if(!living(caster)) {
         foes = all_living(environment(target));
         foes = filter_array(foes, "is_non_immortal",FILTERS_D);
@@ -115,10 +115,8 @@ void burn_again(){
       dest_effect();
       return;
    }
-   dmg = roll_dice((clevel/4),4); //reducing the periodic damage
-//was (clevel/2),4.  This seems a bit high, especially since it 
-//stacks. ~Circe~ 5/31/08
-//Going back to d4 with the increase in HP ~Circe~ 9/28/09
+   define_base_damage(-2);
+   dmg = sdamage;
    for(x=0;x<sizeof(foes);x++){
         if (!objectp(foes[x])) continue;
         tell_object(foes[x],"%^GREEN%^You feel the acid course through your "+

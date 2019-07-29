@@ -53,9 +53,9 @@ void spell_effect(int prof) {
     for(i=0;i<sizeof(foes);i++){
        if(!objectp(foes[i])) continue;
        tell_object(foes[i],"%^RESET%^%^ORANGE%^"+caster->QCN+" focuses "+caster->QP+" "
-          "steely gaze on you!%^RESET%^"); 
-       damage = roll_dice(mylevel,4); //lowering damage from 3rd level spells a bit because of the healing effect. This may need to be adjusted.
-//       tell_object(caster, "Base damage = "+damage+"."); //for testing/debugging
+          "steely gaze on you!%^RESET%^");
+       define_base_damage(0);
+       damage = sdamage;
        target_limb = foes[i]->return_target_limb();
        if(!do_save(foes[i],0)){
           tell_object(foes[i],"%^BOLD%^%^RED%^You shriek in pain as your "+target_limb+" "

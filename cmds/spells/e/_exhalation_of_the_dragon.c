@@ -154,7 +154,7 @@ void spell_effect(int prof)
     if(caster->is_class("psion")) { mylevel = caster->query_guild_level("psion"); }
     else { mylevel = caster->query_guild_level("psywarrior"); }
     
-    damage = roll_dice(mylevel,5); //currently lower than lightning bolt. Adjust if needed
+    damage = sdamage;
 
     target_limb = target->return_target_limb();
 
@@ -259,7 +259,7 @@ void spell_effect(int prof)
             if(mind_immunity_check(target, "default"))
             {
                 target->add_attacker(caster);
-                damage_targ(target, target->return_target_limb(), roll_dice(5,8),"untyped");
+                damage_targ(target, target->return_target_limb(), sdamage/2,"untyped");
                 spell_successful();
                 dest_effect();
                 return;
@@ -289,7 +289,8 @@ void more_fire()
     tell_object(target,"%^RESET%^%^RED%^The f%^BOLD%^i%^RESET%^%^RED%^re flares again, scorching your skin!%^RESET%^");
     tell_room(environment(target),"%^RESET%^%^RED%^F%^BOLD%^i%^RESET%^%^RED%^re flares on "
         ""+target->QCN+", scorching "+target->QP+" skin!%^RESET%^",target);
-    damage_targ(target, target_limb, roll_dice(2,4), savetype);
+    define_base_damage(-2);
+    damage_targ(target, target_limb, sdamage, savetype);
     if(!target && objectp(TO)) 
     {
         TO->remove();

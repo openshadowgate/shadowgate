@@ -45,7 +45,7 @@ int preSpell() {
 }
 
 void spell_effect(int prof){
-      int i, mylevel;
+    int i, mylevel, doses;
     	if (!objectp(caster)){
         dest_effect();
         return;
@@ -72,7 +72,8 @@ void spell_effect(int prof){
          return;
       }
       pname = mypoison->query_poison_name();
-      mywpn->set("PoisonDoses", 1);
+      doses = clevel/12 +1;
+      mywpn->set("PoisonDoses", doses);
       mywpn->set("PoisonType", pname);
       mywpn->set("whoImmune", caster->query_name());
       if(mywpn->query_property("temp_oiled")){

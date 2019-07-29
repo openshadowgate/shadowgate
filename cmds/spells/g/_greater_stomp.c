@@ -112,6 +112,7 @@ int storm_effects(object obj){
 
    tell_object(obj,"%^YELLOW%^The earth ripples beneath you, making "+
       "footing treacherous!%^RESET%^");
+   define_base_damage(0);
    if(do_save(obj,0)){
         tell_object(obj,"%^ORANGE%^The debris grazes you, but you "+
          "avoid the worst of it!%^RESET%^");

@@ -80,7 +80,6 @@ void spell_effect(int prof){
       "on "+mycolor+" hue %^BOLD%^%^WHITE%^as it emanates "+myenergy+" energy%^BOLD%^%^WHITE%^!%^RESET%^");
    caster->set_property("energy_emanated",1);
    caster->set_property("spelled", ({TO}) );
-   define_base_damage(-8);//This is non-standard aoe.
    addSpellToCaster();
    spell_successful();
    environment(caster)->addObjectToCombatCycle(TO,1);
@@ -111,6 +110,7 @@ void execute_attack(){
    if(sizeof(ppl))
    {
       done = 0;
+      define_base_damage(0);
       for(i=0;i<sizeof(ppl);i++)
       {
           

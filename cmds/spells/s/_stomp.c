@@ -52,7 +52,7 @@ void spell_effect(int prof) {
           if(!present(mytargs[i],environment(caster))) continue;
           tell_object(mytargs[i],"%^RESET%^%^CYAN%^Debris rises from the earth, striking you!%^RESET%^");
           tell_room(environment(mytargs[i]),"%^RESET%^%^CYAN%^"+mytargs[i]->QCN+" is hit by flying debris!%^RESET%^",mytargs[i]);
-          damage_targ(mytargs[i],"torso",roll_dice(mylevel,2),"untyped");
+          damage_targ(mytargs[i],"torso",sdamage,"untyped");
        }
        if(!do_save(mytargs[i])){
           if(!objectp(mytargs[i])) continue;
