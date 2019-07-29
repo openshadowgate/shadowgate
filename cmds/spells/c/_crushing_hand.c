@@ -55,7 +55,7 @@ void spell_effect(int prof){
    tell_object(caster,"%^BOLD%^%^BLUE%^Feeling "+(string)caster->query_diety()+"'s "+
       "strength, you swing your arms forward, filling the air with "+
       "a %^RED%^booming %^BLUE%^clap.%^RESET%^");
-   call_out("next_step",10);
+   call_out("next_step",ROUND_LENGTH);
 }
 
 void next_step() {
@@ -69,7 +69,7 @@ void next_step() {
    tell_object(caster,"%^BOLD%^%^RED%^At the moment of impact, a small "+
       "%^BLACK%^portal%^RED%^ opens before you, and a "+
       "monstrous hand begins clawing its way through!%^RESET%^");
-   call_out("step3",5);
+   call_out("step3",ROUND_LENGTH);
 }
 
 void step3(){
@@ -89,7 +89,7 @@ int hd,hp,strength;
    tell_object(caster,"%^BOLD%^%^BLUE%^The monstrous hand "+
       "stands before you, bowing to your whim!%^RESET%^");
    caster->add_ac_bonus(2);
-   hd = caster->query_lowest_level();
+   hd = clevel;
    hp = caster->query_max_hp();
    strength = (int)caster->query_lowest_level()/4;
    strength = strength + 8;

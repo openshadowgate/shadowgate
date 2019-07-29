@@ -56,7 +56,8 @@ spell_effect(int prof){
 
     if(sizeof(attackers)){
         for(i=0;i<sizeof(attackers);i++){
-            damage = roll_dice(clevel,6);
+            define_base_damage(0);
+            damage = sdamage;
             if(!objectp(attackers[i])) { continue; }
             if(attackers[i] == target){
                 tell_object(target, "%^BOLD%^A bolt of shimmering moonlight streaks "+

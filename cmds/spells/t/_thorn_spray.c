@@ -23,7 +23,7 @@ void spell_effect(int prof)
 {
     int num, numdarts, i;
 
-    numdarts = roll_dice(clevel,8);
+    numdarts = sdamage;
 
     tell_object(caster,"%^ORANGE%^Sharp thorns shoot from your hand at "+target->QCN+"!");
     tell_object(target,"%^ORANGE%^Sharp thorns shoot from "+caster->QCN+"'s hand at you!");

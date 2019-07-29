@@ -24,6 +24,7 @@ void create(){
     set_somatic_comp();
     set_target_required(1);
     set_save("reflex");
+    splash_spell(1);
 }
 
 int preSpell(){
@@ -53,13 +54,7 @@ void spell_effect(int prof) {
    }
    foes = ({});
    ownparty = ({});
-//   dam = roll_dice(clevel,10); //bit too much even for a top end domain spell. N, 5/11.
-   dam = roll_dice(clevel,8);
-//   if(sizeof(caster->query_classes()) > 1){
-//      dam += (clevel/2);
-//   }else{
-//      dam += clevel;
-//   }
+   dam = sdamage;
    tell_object(caster,"%^CYAN%^As your continue to chant, you can feel the water "
       "for miles and miles being pulled from the very air to heed your call!");
    tell_room(place,"%^BOLD%^%^CYAN%^Your mouth begins to feel dry as "+caster->QCN+" "

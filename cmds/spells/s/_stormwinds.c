@@ -78,7 +78,7 @@ void spell_effect(int prof)
         if(!do_save(who[i],0)) {
 	    //if (!(SAVING_D->saving_throw(who[i], "spell",0))) {
             tell_object(who[i],"%^BOLD%^The air whirling around you causes some small objects to hit you.");
-            damage_targ(who[i],"torso",roll_dice(clevel,3),"bludgeoning");
+            damage_targ(who[i],"torso",sdamage/2,"bludgeoning");
         }
     }
     count = 0;
@@ -109,7 +109,7 @@ void do_lightning() {
         return;
     }
 
-    dam = roll_dice(clevel,3);
+    dam = sdamage/2;
     tell_object(target,"%^YELLOW%^A lightning bolt streaks toward you from the swirling mass of air!");
     tell_room(environment(target),"%^YELLOW%^A lightning bolt streaks toward "+target->QCN+" from the swirling mass of air!",({target}));
     if(!do_save(target,-4)) {

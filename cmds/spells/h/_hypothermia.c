@@ -89,6 +89,7 @@ int hypo(object obj){
    if(!objectp(environment(obj)))  { dest_effect(); return 0; }
    if(!objectp(caster))            { dest_effect(); return 0; }
    room = environment(obj);
+   define_base_damage(0);
    switch(hypo_count){
       case 0:  tell_object(obj,"%^CYAN%^You feel the ice from "+
                   ""+caster->QCN+"'s frozen ray creep slowly up "+
@@ -96,7 +97,7 @@ int hypo(object obj){
                tell_room(room,"%^CYAN%^"+obj->QCN+" shivers for "+
                   "a brief moment.%^RESET%^",obj);
                num = clevel/3;
-               damage_targ(obj,obj->return_target_limb(),roll_dice(num,6),"cold");
+               damage_targ(obj,obj->return_target_limb(),sdamage,"cold");
                hypo_count++;
                call_out("hypo",ROUND_LENGTH,obj);
                break;
@@ -106,7 +107,7 @@ int hypo(object obj){
                tell_room(room,"%^BOLD%^%^BLUE%^"+obj->QCN+"'s teeth "+
                   "chatter uncontrollably.%^RESET%^",obj);
                num = clevel/2;
-               damage_targ(obj,obj->return_target_limb(),roll_dice(num,6),"cold");
+               damage_targ(obj,obj->return_target_limb(),sdamage,"cold");
                hypo_count++;
                call_out("hypo",ROUND_LENGTH,obj);
                break;
@@ -114,8 +115,8 @@ int hypo(object obj){
                   "limbs seize up, freezing you in place!%^RESET%^");
                tell_room(room,"%^BOLD%^%^CYAN%^"+obj->QCN+" suddenly "+
                   "freezes in place!%^RESET%^",obj);
-               obj->set_paralyzed(roll_dice(4,6),"You are frozen in place!");
-               obj->set_temporary_blinded(2,6);
+               obj->set_paralyzed(roll_dice(3,2),"You are frozen in place!");
+               obj->set_temporary_blinded(3,2);
 //Takes a bit for their vision to clear
                dest_effect();
                break;

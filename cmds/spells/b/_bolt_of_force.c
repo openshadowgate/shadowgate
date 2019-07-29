@@ -17,6 +17,7 @@ void create(){
     set_somatic_comp();
     set_target_required(1);
     set_save("reflex");
+    splash_spell(1);
 }
 
 int preSpell(){
@@ -64,7 +65,8 @@ void spell_effect(int prof){
         if(!objectp(attackers[x])) { continue; }
         if(!present(attackers[x],place)) { continue; }
 
-        damage = roll_dice(clevel,6);
+        define_base_damage(0);//lazy re-roll
+        damage = sdamage;
         if(!do_save(attackers[x],0)){
         //if(SAVING_D->saving_throw(attackers[x], "spell",0)){
             tell_room(place, "%^BOLD%^"+attackers[x]->QCN+" dodges the wave "+

@@ -52,10 +52,7 @@ void spell_effect(int prof){
         return;
     }
 
-// scorcher is 3d8 + clevel d3 on multi-target; static base here plus clevel d4 as single target only.
-// still less output than scorcher/soundburst/etc but at least useful in parties/etc? N, 02/11.
-//    damage = roll_dice(clevel,3);
-    damage = ((15+roll_dice(clevel,4))*prof)/100;
+    damage = sdamage;
 
     tell_object(caster,"%^CYAN%^With a peal of thunder, you direct the clouds let loose a torrent of water "
 "over "+target->QCN+".");

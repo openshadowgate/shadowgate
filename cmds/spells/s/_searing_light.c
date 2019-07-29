@@ -62,9 +62,11 @@ spell_effect(int prof){
     if(sizeof(attackers)){
         for(i=0;i<sizeof(attackers);i++){
             if(!objectp(attackers[i])) { continue; }
-            damage = roll_dice(clevel,6);
+            define_base_damage(0);
+            damage = sdamage;
             if(attackers[i]->query_property("undead") || (string)attackers[i]->query_race() == "undead"){
-               damage = roll_dice(clevel,8);
+                define_base_damage(2);
+                damage = sdamage;
             }
             if(attackers[i] == target){
                 tell_object(target,"%^YELLOW%^A ray of sunlight "+

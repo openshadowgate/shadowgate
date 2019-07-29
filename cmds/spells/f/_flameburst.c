@@ -69,7 +69,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^RED%^You send forth a tiny ball of fire straight at "+target->QCN+"!");
     tell_object(target,"%^RED%^"+caster->QCN+" sends a tiny ball of fire straight towards you!");
     tell_room(place,"%^RED%^"+caster->QCN+" sends a tiny ball of fire straight at "+target->QCN+"!",({caster,target}));
-
+    
     if(!do_save(target,0)) 
     {
         tell_object(caster,"%^RED%^Your fireball strikes "+target->QCN+" right in the chest and "
@@ -80,7 +80,7 @@ void spell_effect(int prof)
             "and burrows under "+target->QP+" skin!",({caster,target}));
         target->set_property("spelled", ({TO}));
         target->set_property("flameburst",1);
-        damage_targ(target,"torso",(roll_dice(clevel,4))/2,"fire");
+        damage_targ(target,"torso",sdamage/2,"fire");
         spell_kill(target,caster);
         return;
     }
@@ -92,7 +92,7 @@ void spell_effect(int prof)
             "able to shrug away at the last instant!");
         tell_room(place,"%^RED%^"+caster->QCN+"'s fireball hits "+target->QCN+" but "
             ""+target->QS+" is able to shrug away at the last instant!",({target,caster}));
-        damage_targ(target,target->return_target_limb(),roll_dice(clevel,4),"fire");
+        damage_targ(target,target->return_target_limb(),sdamage,"fire");
         spell_kill(target,caster);
         dest_effect();
         return;

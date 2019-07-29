@@ -37,7 +37,7 @@ void spell_effect(int prof) {
             "writhing in horrific pain.");
         tell_object(target,"%^RED%^"+caster->QCN+" carresses you with a tender touch and you fall "
             "writhing in horrific pain.");
-        damage_targ(target, "torso",roll_dice(4,6)+random(4*clevel),"divine");
+        damage_targ(target, "torso",sdamage,"divine");
         if (!objectp(target)) return;
         target->set_paralyzed(12,"%^RED%^You are writhing in pain.");
 // this really seems counter-intuitive; yanking it. N, 12/18.

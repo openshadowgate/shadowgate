@@ -17,6 +17,7 @@ void create() {
 "and doing damage to anyone who attacks the caster.");
     set_verbal_comp();
     set_helpful_spell(1);
+    traveling_aoe_spell(1);
 }
 
 string query_cast_string() 
@@ -82,7 +83,7 @@ void execute_attack()
             "sprouted from your body!");
      	tell_room(environment(attackers[i]),"%^BOLD%^%^RED%^"+attackers[i]->QCN+" is cut by the "
             "blades that have sprouted from "+caster->QCN+"'s body!",({target,caster}));
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),roll_dice(2,10),"slashing");
+        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"slashing");
     }
     room->addObjectToCombatCycle(TO,1);
 }

@@ -57,7 +57,7 @@ void spell_effect(int prof){
     attackers = target_filter(attackers);
     attackers = distinct_array(attackers);
 
-    damage = roll_dice(clevel,6);
+    damage = sdamage;
 
     tell_object(caster,"%^BLUE%^You hurl your fist towards "+target->QCN+" and a bolt of energy "
         "flows forth towards "+target->QO+".");
@@ -67,7 +67,8 @@ void spell_effect(int prof){
 
     if(sizeof(attackers)){
         for(i=0;i<sizeof(attackers);i++){
-            damage = roll_dice(clevel,6);
+            define_base_damage(0);
+            damage = sdamage;
             if(!objectp(attackers[i])) { continue; }
             if(!present(attackers[i],place)) { continue; }
             if(attackers[i] == target){

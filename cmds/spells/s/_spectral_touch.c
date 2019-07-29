@@ -21,6 +21,7 @@ void create(){
     set_somatic_comp();
     set_target_required(1);
     set_save("fort");
+    splash_spell(1);
 }
 
 spell_effect(int prof){
@@ -49,8 +50,8 @@ spell_effect(int prof){
     if(sizeof(attackers)){
         for(i=0;i<sizeof(attackers);i++){            
             if(!objectp(attackers[i])) { continue; }
-            if(!interactive(attackers[i])) { damage = roll_dice(clevel,8); }
-            else { damage = roll_dice(clevel,4); }
+            define_base_damage(0);
+            damage = sdamage;
             if(attackers[i] == target){
                 tell_object(target,"%^BOLD%^%^BLUE%^A beam of energy "+
                    "is unleashed from "+caster->QCN+"'s glowing hand "+
@@ -70,7 +71,6 @@ spell_effect(int prof){
                     damage_targ(attackers[i],attackers[i]->return_target_limb(),damage/2,"negative energy");
                 }
             }else{
-                damage = roll_dice(clevel,8);
                 if(!do_save(attackers[i],0)) {
                 //if(!SAVING_D->saving_throw(attackers[i],"spell",0)){
                     tell_room(place,"%^BOLD%^%^BLUE%^"+attackers[i]->QCN+" "+

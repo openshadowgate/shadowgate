@@ -103,23 +103,11 @@ void spell_effect(int prof){
 }
 
 int calculate_healing(){
-   int num, bonus;
-   num = roll_dice(clevel,3);
-   bonus = 0;
-   if(sizeof(caster->query_classes()) == 1){ bonus = clevel/2; }
-//single class clerics get a bonus to their healing and damage
-   num = num + bonus;
-   return num;
+    return sdamage;
 }
 
 int calculate_damage(){
-   int num, bonus;
-   num = roll_dice(clevel,3);
-   bonus = 0;
-   if(sizeof(caster->query_classes()) == 1){ bonus = clevel/2; }
-//single class clerics get a bonus to their healing and damage
-   num = num + bonus;
-   return num;
+    return sdamage;
 }
 
 void dest_effect(){

@@ -79,7 +79,7 @@ void spell_effect(int prof){
             "as it rises!%^RESET%^");
          tell_object(place,"%^YELLOW%^"+who[i]->QCN+" is struck by "+
             "the maw of stone as it rises!%^RESET%^",who[i]);
-         damage_targ(who[i],"torso",roll_dice(clevel,3),"bludgeoning");
+         damage_targ(who[i],"torso",sdamage,"bludgeoning");
       }
    }
    count = 0;
@@ -105,8 +105,8 @@ void do_gnaw() {
       dest_effect();
       return;
    }
-
-   dam = roll_dice(clevel,3);
+   define_base_damage(-2);
+   dam = sdamage;
 //   if(dam > 150) dam = 150; //changed from clevel,4, capped at 150. If needs rebalancing.
    tell_object(target,"%^BOLD%^%^BLACK%^The maw of stone gnaws on "+
       "you, crushing you in its gaping jaws!%^RESET%^");

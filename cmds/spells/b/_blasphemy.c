@@ -71,15 +71,13 @@ void spell_effect(int prof){
    }
 
    limb = target->return_target_limb();
-   damage = roll_dice(clevel,8);
+   damage = sdamage;
    if(!interactive(target)){
-//Added to always do damage to mobs per conversations with Ares. ~Circe~ 5/12/08
       tell_object(CASTER,"%^BOLD%^%^BLACK%^The hatred of your spell "+
          "slams into "+target->QCN+"!%^RESET%^");
       tell_room(place,"%^BOLD%^%^BLACK%^The force of "+CASTER->QCN+"'s "+
          "spell slams into "+target->QCN+"!"+
          "%^RESET%^",({target,CASTER}));
-      damage += roll_dice(1,CLEVEL);
       damage_targ(target,limb,damage,"divine");
 
       if(!do_save(target,-2)) {
@@ -105,7 +103,6 @@ void spell_effect(int prof){
          tell_room(place,"%^BOLD%^%^BLACK%^The force of "+CASTER->QCN+"'s "+
             "spell slams into "+target->QCN+"!"+
             "%^RESET%^",({target,CASTER}));
-         damage += roll_dice(1,CLEVEL);
          damage_targ(target,limb,damage,"divine");
 
          if(!do_save(target,-2)) {
@@ -151,7 +148,8 @@ void spell_effect(int prof){
             "strikes "+target->QCN+"!%^RESET%^");
          tell_room(place,"%^BOLD%^%^BLACK%^The force of "+CASTER->QCN+"'s "+
             "spell strikes "+target->QCN+"!%^RESET%^",({target,CASTER}));
-         damage -= (int)CLEVEL;
+         define_base_damage(-2);
+         damage = sdamage;
          if(damage>0)
             damage_targ(target,limb,damage,"divine");
       }
