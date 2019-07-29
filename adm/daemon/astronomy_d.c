@@ -7,6 +7,7 @@
 static mapping moons;
 private static mapping moonstate, moonphase, moonorbit;
 static string *moonphases;
+int in_eclipse;
 
 //name:description
 moons = (["sera":"%^BOLD%^%^WHITE%^silvery moon",
@@ -110,6 +111,30 @@ int query_moon_light()
         light+=is_moon_visible(moon)?query_moon_state(moon):0;
     
     return to_int(round(light));
+}
+
+/**
+ * This function sets eclipse flag. Anything can be a cause.
+ */
+void set_eclipse()
+{
+    in_eclipse = 1;
+}
+
+/**
+ * This function removes eclipse flag
+ */
+void remove_eclipse()
+{
+    in_eclipse = 0;
+}
+
+/**
+ * This function removes eclipse flag
+ */
+int query_eclipse()
+{
+    return in_eclipse;
 }
 
 /**
