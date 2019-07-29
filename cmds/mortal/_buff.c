@@ -139,7 +139,6 @@ int cmd_buff(string str)
 
         if (sizeof(normal_buffs)) 
         { 
-            normal_buffs = sort_array(normal_buffs, "alphabetical_sort", FILTERS_D);
             for (i = 0;i < sizeof(normal_buffs);i++)
             {
                 display += ({ "    %^RESET%^%^BOLD%^%^GREEN%^" + normal_buffs[i] + "" });
@@ -148,7 +147,6 @@ int cmd_buff(string str)
         
         if (sizeof(targeted_buffs)) 
         { 
-            targeted_buffs = sort_array(targeted_buffs, "alphabetical_sort", FILTERS_D); 
             display += ({ "" });
             for (i = 0;i < sizeof(targeted_buffs);i++)
             {
@@ -161,7 +159,6 @@ int cmd_buff(string str)
 
         if (sizeof(special_buffs)) 
         {             
-            special_buffs = sort_array(special_buffs, "alphabetical_sort", FILTERS_D); 
             display += ({ "" });
             for (i = 0;i < sizeof(special_buffs);i++)
             {

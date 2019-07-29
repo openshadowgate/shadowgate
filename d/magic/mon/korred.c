@@ -82,8 +82,8 @@ void stones(object targ){
  		set_func_chance(60);
  	 	return;
  	 }
- 	 tell_room(ETO,"%^BOLD%^%^RED%^Suddenly the korred whirls around in a fluid motion you are sure you couldn't repeat throws a great mass of hair at "+targ->query_cap_name()+"!",targ);
- 	 tell_object(targ,"%^BOLD%^%^RED%^Suddenly the korred whirls around in a fluid montion you are sure you couldn't repeat throws a great mass of hair at you!\n");
+ 	 tell_room(ETO,"%^BOLD%^%^RED%^Suddenly the korred whirls around in a fluid motion you are sure you couldn't repeat and throws a great mass of hair at "+targ->query_cap_name()+"!",targ);
+ 	 tell_object(targ,"%^BOLD%^%^RED%^Suddenly the korred whirls around in a fluid montion you are sure you couldn't repeat and throws a great mass of hair at you!\n");
  	 if("daemon/saving_d"->saving_throw(targ,"paralyzation_poison_death",0)){
  	 	tell_room(ETO,"%^BOLD%^The strands of hair fly throught the air but they all miss any target and the korred ends again facing battle!");
  	 	return;

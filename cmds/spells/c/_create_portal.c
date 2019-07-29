@@ -16,9 +16,11 @@ void create(){
     set_spell_sphere("alteration");
     set_spell_domain("travel");
     set_syntax("cast CLASS create portal to <location>");
-    set_description("This power allows the priest to call on the power of his diety to open a portal from his current "
+    set_description("This power allows the priest to call on the power of his deity to open a portal from his current "
 "location to any place that he has remembered before.  The portal can not open unless both rooms may be teleported to "
-"and from.  The portal remains in effect longer for stronger casters.\n\nSee also: remember, unremember, recall");
+"and from.  The portal remains in effect longer for stronger casters.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ remember, unremember, recall");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
