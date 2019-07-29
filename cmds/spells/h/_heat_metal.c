@@ -70,7 +70,7 @@ void spell_effect(int prof){
            "burns you, scalding your flesh!%^RESET%^");
         tell_object(caster,"%^YELLOW%^"+target->QCN+" is blasted "
            "by the force of your spell!%^RESET%^");
-        damage_targ(target,target->return_target_limb(),damage,"fire");
+        damage_targ(target,target->return_target_limb(),sdamage,"fire");
     }else{
        tell_object(target,"%^BOLD%^%^BLACK%^A sweat breaks out on your brow, but otherwise the wave has no effect!%^RESET%^");
     }
