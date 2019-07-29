@@ -26,7 +26,7 @@ int total_light(object who) {
         light += (int)inv[i]->query_property("light");
     if(env->query_property("indoors"))
         return light;
-    if(ASTRONOMY_D->query_eclipse())
+    if((int)ASTRONOMY_D->query_eclipse())
     {
         return night_light(env,light);
     }

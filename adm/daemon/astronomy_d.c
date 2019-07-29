@@ -15,8 +15,8 @@ moons = (["sera":"%^BOLD%^%^WHITE%^silvery moon",
 
 //Moonshine is in illumination units. Some moons suck up the light because physics is a lie.
 //Argument to closure is current day of calendar month.
-moonshine = (["sera":(:(sin($1*PI*2*1/24)+1):),
-              "tyrannos":(:-(sin($1*PI*2*1/36)+1)/2:)]);
+moonshine = (["sera":(:(sin($1*PI/12)+1):),
+              "tyrannos":(:-(sin($1*PI/13)+1)/2:)]);
 
 //Orbital anomaly (argument of periapsis + true anomaly) for an
 //observer, with values < 0 implying object is below the horizon.
@@ -26,7 +26,7 @@ moonorbit = (["sera":(:sin($1*PI*2*1/18):),
 
 //This is illumination to moonphase formulae. You need to convert illumination to [0:7] scale here.
 //Argument to closure is illumination.
-moonphase = (["sera":(:to_int(round(abs($1*2)*7)):),
+moonphase = (["sera":(:to_int(round(abs($1)*7)/2):),
               "tyrannos":(:to_int(round(abs($1)*7)):)]);
 
 //Moon phases indexed by [0:7]. If you want custom moon phases for specific moon, well, good luck.
@@ -94,6 +94,7 @@ int is_moon_visible(string moon)
  */
 string query_moon_phase_string(string moon)
 {
+
     return moonphases[query_moon_phase(moon)];
 }
 

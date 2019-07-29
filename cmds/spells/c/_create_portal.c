@@ -42,9 +42,8 @@ void spell_effect(int prof){
     string a, file, tempstr, *tempdir;
     int mypower,startpower,endpower,bonus;
     mapping tmp;
-    if (!tempstr) { tempstr = ""; }
 
-    if(!sscanf(tempstr, "%s", a)) 
+    if(!sscanf(arg, "%s", a)) 
     {
         tell_object(caster,"This spell requires a target destination.");
         tell_room(place,caster->QCN+" looks confused.",caster);
