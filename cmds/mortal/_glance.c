@@ -121,10 +121,23 @@ void look_msg(object ob, string str) {
 }
  
 int help() {
-   write("Command: glance\nSyntax: glance <person>, or just 'glance'\n"+
-      "This command allows you to take a brief look over a living\n"+
-      "without knowing the being's inventory.\n"+
-      "See also: look, describe, lines, ansi, autowrap, brief\n"
-   );
+   write("
+%^CYAN%^NAME%^RESET%^
+
+glance - glance at something
+
+%^CYAN%^SYNTAX%^RESET%^
+
+glance [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command allows you to take a brief look over a living or this room without knowing the being's inventory or room's long description.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+look, spy, describe, brief
+"
+       );
    return 1;
 }

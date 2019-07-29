@@ -74,10 +74,14 @@
 
 #define WEAPONSMITH ([\
     "arquebus":(["file":COMMONFILE"lrweapon/arquebus","units":5]), \
+    "bastard sword":(["file":COMMONFILE"weapon/bastard","units":3]),\
     "cannon":(["file":COMMONFILE"lrweapon/cannon","units":15]), \
     "claw":(["file":COMMONFILE"weapon/claw","units":2]),\
+    "dwarven waraxe":(["file":COMMONFILE"weapon/dwarvenwaraxe","units":3]),\
+    "elven curved blade":(["file":COMMONFILE"weapon/elvencurvedblade","units":4]),\
     "dagger":(["file":COMMONFILE"weapon/dagger","units":1]),\
     "fan":(["file":COMMONFILE"weapon/fan","units":1]),\
+    "falcata":(["file":COMMONFILE"weapon/longsword","units":3]),\
     "flail":(["file":COMMONFILE"weapon/flail","units":3]),\
     "giant axe":(["file":COMMONFILE"weapon/giant_battle_axe","units":5]),\
     "giant hammer":(["file":COMMONFILE"weapon/giant_hammer","units":5]),\

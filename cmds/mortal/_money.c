@@ -34,8 +34,18 @@ int cmd_money(string str) {
 }
 
 void help() {
-    write("Syntax: <money>\n\n"
-      "Allows you to search your pockets for all your money\n"
-      "of all currency types.\n"
+    write("
+%^CYAN%^NAME%^RESET%^
+
+money - look into your purse
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command displays currency you have on yourself.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+inventory, eq, score
+"
     );
 }

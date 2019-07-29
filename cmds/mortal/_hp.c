@@ -100,12 +100,18 @@ int cmd_hp(string str) {
 
 
 void help() {
-  write("Syntax: <hp>\n\n"+
-        "Gives you your current Hit Point status, condition (stamina), and hunger/thirst.\n"
-        "See also: score, report, stats, skills, languages, profs\n"
-       );
-  if(avatarp(TP)){
-     write("%^BOLD%^You may also use this command to get basic information about a player.\n"
-        "Syntax: hp <player>\n");
-  }
+    write("
+%^CYAN%^NAME%^RESET%^
+
+hp - display hitpoints, stamina, carrying capacity
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command displays briefly your status.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+score, report, stats, skills, languages, inventory
+");
+  
 }

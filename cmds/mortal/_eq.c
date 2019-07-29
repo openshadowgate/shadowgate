@@ -59,12 +59,20 @@ int cmd_eq()
     return 1;
 }
 
-int help() {
-   write("Command: eq\nSyntax: eq\n"+
-         "This command gives you a list of the items\n"+
-         "that you are currently using.\n"
-         "See also: score, inventory.\n"
+void help() {
+    write("
+%^CYAN%^NAME%^RESET%^
+
+eq - view equipped items
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command displays a list of the items that you are currently using.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+inventory, limbs, score, money
+"
         );
-   return 1;
 }
-/* EOF */
+

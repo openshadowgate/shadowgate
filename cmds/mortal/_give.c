@@ -113,9 +113,22 @@ cmd_give(string str) {
 
 int
 help() {
-   write("Command: give\nSyntax: give <item> to <player>\n"+
-         "This command will make you give an item in your inventory\n"+
-         "to the player specified.  You must be in the same room for\n"+
-         "this to occur.\n");
+   write("
+%^CYAN%^NAME%^RESET%^
+
+give - give something to someone
+
+%^CYAN%^SYNTAX%^RESET%^
+
+give %^ORANGE%^%^ULINE%^ITEM%^RESET%^ to %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command will attempt to move an item from your inventory to %^ORANGE%^%^ULINE%^TARGET%^RESET%^'s inventory. It might fail if target already has too much on them.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+get, look, glance, spy, steal, pp
+");
    return 1;
 }
