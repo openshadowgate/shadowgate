@@ -26,6 +26,9 @@ void create(){
    set_property("no steal", 1);
    flag = 0;
 }
+//added the following to fix bugs with the item showing up in players' inventories at vendors ~Circe~ 7/29/19
+int is_detectable() { return 0; }
+int query_invis() { return 1; }
 
 void save_me(string file){return 1;}
 
