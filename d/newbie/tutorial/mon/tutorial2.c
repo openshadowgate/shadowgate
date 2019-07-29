@@ -50,7 +50,7 @@ void step_1(object target) {
    if(!objectp(target)) return 0;
    if(!objectp(TO)) return 0;
    if(!present(target,ETO)) return 0;
-   if(target->query("newbtutorial2")) tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The halfling turns to you "
+   if(target->query("newbtutorial2") > 1) tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The halfling turns to you "
 "and says:%^RESET%^ Hello again!  Do you want to start again at where we left off?  If you can't remember "
 "where you were up to, just %^YELLOW%^<ask>%^RESET%^ me.\n\nShe grins at you.");
    else {

@@ -73,9 +73,9 @@ void make_sword() {
     ob->set_attack_limbs(({"left hand","right hand"}));
     ob->set_nat_weapon_type("slashing");
     ob->set_attacks_num(clevel/10);
-    ob->set_damage(1,clevel);
+    ob->set_damage(4,(clevel/4)); //changed to tighten up the damage range for more consistency 8/28/19
     ob->set_overall_ac(10-clevel);
-    ob->set_hd(clevel);
+    ob->set_hd(clevel,8); //copied from phantasmal_killer Odin 8/28/19
     ob->set_stats("strength",15);
     ob->set_max_hp(ob->query_hp());
     ob->set_caster(caster);

@@ -37,7 +37,7 @@ void step_1(object target)
     if(!objectp(target)) return 0;
     if(!objectp(TO)) return 0;
     if(!present(target,ETO)) return 0;
-    if(target->query("newbtutorial5")) 
+    if(target->query("newbtutorial5") > 1) 
     {
         tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The short lean human turns to you "+
         "and says:%^RESET%^ Hello there.  Do you want to start again at where we left off?  If you can't remember "+
@@ -71,7 +71,7 @@ int step_2(string str)
         "\n\nYou may notice the i alias defined as inventory in that list. This means that anytime you type the letter i "+
         "and send it to the game, the game substitutes i for inventory.\n\nThe help file for the command %^YELLOW%^<help "+
         "alias>%^RESET%^ is very useful. \n\n%^RESET%^%^MAGENTA%^The man speaks clearly and calmly:%^RESET%^ "+
-        "Now, I want you to try to make an alias. When you are ready I went you to type %^YELLOW%^<alias bc bury corpse>%^RESET%^\n\n"+
+        "Now, I want you to try to make an alias. When you are ready, I want you to type %^YELLOW%^<alias bc bury corpse>%^RESET%^\n\n"+
         "He watches you patiently.");
         return 1;
     }
@@ -85,13 +85,13 @@ int step_2(string str)
         }
         TP->set("newbtutorial5",3);
         TP->force_me("alias bc bury corpse");
-        tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man cheers before speaking again:%^RESET%^ That's it, now you have learned "+
+        tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man cheers before speaking again:%^RESET%^ That's it. Now you have learned "+
         "how to establish your own aliases! They will become very useful as you explore the world. The particular alias that you "+
         "established will allow for you to type bc in order to bury a corpse that is in the room with you. This is a "+
         "very useful ability that is only available to you while you remain a newbie character. Burying a corpse will "+
         "allow for you to replenish some of your health.\n\n%^RESET%^%^MAGENTA%^His eyes flash before he speaks again:%^RESET%^ "+
-        "Now, there is another command, which is particularly useful "+
-        "when you encounter something frequently with a difficult to spell name. This command is called nickname. To continue "+
+        "Now, there is another command that is particularly useful "+
+        "when you encounter something with a difficult-to-spell name. This command is called nickname. To continue, "+
         "simply type %^YELLOW%^<nickname>%^RESET%^.\n\nHe watches you patiently.");
         return 1;
     }
@@ -111,8 +111,8 @@ int step_3(string str)
         TP->set("newbtutorial5",4);
         TP->force_me("nickname");
         tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man speaks calmly: %^RESET%^Very good! Nicknames work almost like an alias "+
-        "except their functionality is somewhat different. For example, if you type nickname b "+
-        "this is a test whenever you type the letter b anywhere, the game will substitute it for 'this is a test'. "+
+        "except their functionality is somewhat different. For example, if you type <nickname b "+
+        "this is a test>, whenever you type the letter b anywhere, the game will substitute it for 'this is a test'. "+
         "Now, I want you to make a nickname. I want you to type %^YELLOW%^<nickname "+myName[0..1]+" "+myName+">%^RESET%^. "+
         "This will cause the game to substitute your name, "+myName+", anytime you type the letters "+myName[0..1]+".");
         return 1;
@@ -129,9 +129,9 @@ int step_3(string str)
         }
         TP->set("newbtutorial5",5);
         TP->force_me("nickname "+myName[0..1]+" "+myName);
-        tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man cheers before speaking again:%^RESET%^ That's it, now you have learned "+
-        "how to establish a nickname of your own! Nicknames are powerful when used properly and can make your time in the "+
-        "world convenient. I want to show you an example of their functionality now. When you are ready I want you to "+
+        tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man cheers before speaking again:%^RESET%^ That's it. Now you have learned "+
+        "how to establish a nickname of your own! Nicknames are powerful and convenient when used properly. "
+        "I want to show you an example of their functionality now. When you are ready I want you to "+
         "simply %^YELLOW%^<say "+myName[0..1]+" is going to see the world!>%^RESET%^");
         return 1;
     }
@@ -160,9 +160,10 @@ int step_4(string str)
     TP->force_me("say "+str);
     tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man cheers loudly before speaking again:%^RESET%^ That is very good! "+
     "And yes you will! This is a perfect example of the functional power of nicknames. Remember them and use them "+
-    "wisely as you explore the world of Shadowgate and make a name for yourself.\n\n%^RESET%^%^MAGENTA%^The man "+
-    "continues speaking, quieter now and more serious:%^RESET%^ The world of Shadowgate is very large and "+
-    "there are many things that would see you dead. Sometimes they will succeed. You must not lose heart though "+
+    "wisely as you explore the world of Shadowgate and make a name for yourself. See <help nickname> for how to "
+    "adjust your nicknames and even delete them.\n\n%^RESET%^%^MAGENTA%^The man "+
+    "continues speaking, quieter now and more serious:%^RESET%^ The world of Shadowgate is very large, and "+
+    "there are many things that would see you dead. Sometimes they will succeed. You must not lose heart, though, "+
     "for death on Shadowgate is only temporary. Use the knowledge that you have learned here and "+
     "live a long prosperous life!\n\n%^RESET%^%^MAGENTA%^The man smiles once more before speaking again:%^RESET%^ "+
     "With that, I have nothing more to teach you. Your destiny awaits!%^RESET%^");

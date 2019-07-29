@@ -33,7 +33,7 @@ void init() {
    add_action("step_5","wield");
    add_action("step_6","unwield");
    add_action("step_7","discern");
-   add_action("step_8", "skillneeded");
+//   add_action("step_8", "skillneeded");
    add_action("step_9","help");
    add_action("step_10","drink");
    add_action("step_11","money");
@@ -50,7 +50,7 @@ void step_1(object target) {
    if(!objectp(target)) return 0;
    if(!objectp(TO)) return 0;
    if(!present(target,ETO)) return 0;
-   if(target->query("newbtutorial3")) tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The elf turns to you "
+   if(target->query("newbtutorial3") > 1) tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The elf turns to you "
 "and says:%^RESET%^ Hello there.  Do you want to start again at where we left off?  If you can't remember "
 "where you were up to, just %^YELLOW%^<ask>%^RESET%^ me.\n\nHe smiles at you.");
    else {
@@ -176,14 +176,20 @@ int step_7(string str) {
    }
    TP->set("newbtutorial3",7);
    TP->force_me("discern "+twep+"");
+/*
    tell_object(TP,"\n\n%^RESET%^%^MAGENTA%^The elf smiles and nods:%^RESET%^ Good.  You can see how much damage the "
 +twep+" does. Now, the most important part of using a weapon is your proficiency with "
 "it.  You will need training in a type of weapon in order to use it well without hurting yourself.  Let's "
 "first check what sort of training you need to properly use the weapon you have. "
 "Type %^YELLOW%^<skillneeded "+twep+">%^RESET%^ to see.");
+*/
+   tell_object(TP,"\n\n%^RESET%^%^MAGENTA%^The elf smiles and nods:%^RESET%^ Good.  You can see how much damage the "
++twep+" does. Let's learn a little about feats.  You can see this by typing %^YELLOW%^<help feats>%^RESET%^, so try that.");
+   TP->set("newbtutorial3",8);
    return 1;
 }
 
+/*
 int step_8(string str) 
 {
    string twep,tprof;
@@ -203,7 +209,7 @@ int step_8(string str)
 "Let's learn a little about feats.  You can see this by typing %^YELLOW%^<help feats>%^RESET%^, so try that.");
    return 1;
 }
-
+*/
 
 int step_9(string str) {
    string tprof;
@@ -219,7 +225,7 @@ int step_9(string str) {
    TP->set("newbtutorial3",9);
    TP->force_me("help feats");
    tell_object(TP,"\n\n%^RESET%^%^MAGENTA%^The elf continues:%^RESET%^ Ok.  These are the basic commands to "
-"use feats.  As it says, you can use %^YELLOW%^<feats>%^RESET%^ to list what you have so far - if you try this "
+"use feats.  As it says, you can use %^YELLOW%^<feats list>%^RESET%^ to list what you have so far - if you try this "
 "later you will see that %^YELLOW%^"+tprof+" weapon profiencity%^RESET%^ is on your list.  Other weapon feats "
 "will allow you to use other weapons effectively in combat, while other feats may give you other skills and "
 "abilities, both in and out of combat.  You can also use %^YELLOW%^<feats allowed>%^RESET%^ to see how many "
