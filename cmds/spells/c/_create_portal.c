@@ -122,7 +122,7 @@ void spell_effect(int prof){
     }
     spell_successful();
 
-    tell_object(caster,"%^BOLD%^%^CYAN%^You feel the power of your diety as the shimmering "
+    tell_object(caster,"%^BOLD%^%^CYAN%^You feel the power of your deity as the shimmering "
         "outline of a portal begins to appear!");
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+"'s chanting grows louder and the shimmering "
         "outline of a portal begins to appear in the air!",caster);

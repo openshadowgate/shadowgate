@@ -227,7 +227,7 @@ int plea() {
    if(present("true holy symbol", TP))
         return notify_fail("You need not another symbol!! Return thee to thine life!\n");
    if(!TP->query_diety() || (string)TP->query_diety() == "pan")
-        return notify_fail("You need to follow a diety before you need a holy symbol!\n");
+        return notify_fail("You need to follow a deity before you need a holy symbol!\n");
    if(!can_request())
         return notify_fail("You cannot retrieve a holy symbol here.\n");
    if(!TP->query_funds("gold", 500))
@@ -273,10 +273,10 @@ int __Read_me(string str) {
 
 %^GREEN%^In a temple, you can do the following:%^RESET%^
 
-  %^ORANGE%^<choose>%^RESET%^                  Follow the diety of this temple.
+  %^ORANGE%^<choose>%^RESET%^                  Follow the deity of this temple.
   %^ORANGE%^<choose %^ORANGE%^%^ULINE%^DEITY%^RESET%^%^ORANGE%^>%^RESET%^            Select a new god if you are
 godless.
-  %^ORANGE%^<forsake>%^RESET%^                 Forsake the diety of this temple.
+  %^ORANGE%^<forsake>%^RESET%^                 Forsake the deity of this temple.
   %^ORANGE%^<pick domain %^ORANGE%^%^ULINE%^DOMAIN%^RESET%^%^ORANGE%^>%^RESET%^      Choose a domain
   %^ORANGE%^<pick way %^ORANGE%^%^ULINE%^WAY%^RESET%^%^ORANGE%^>%^RESET%^            Dedicate to that emphasis of Ki.
 

@@ -2703,19 +2703,19 @@ void help() {
     if(!description) description = "contact a wiz - not initialized";
     write("%^BOLD%^%^RED%^Syntax:%^RESET%^ "+syntax+"\n");
     write(description+"\n");
-
+//fixed up some typos in the following messages ~Circe~ 7/29/19
     if(peace)
         write("%^BOLD%^%^RED%^Only at peace:%^RESET%^ This spell can be cast only when you aren't in combat.");
     if(silent_casting)
         write("%^BOLD%^%^RED%^Silent casting:%^RESET%^ This spell is silent to cast.");
     if(evil_spell)
-        write("%^BOLD%^%^RED%^Evil spell:%^RESET%^ For one reason or another, this is evil, selfish spell. Good characters won't use it unless in dire need.");
+        write("%^BOLD%^%^RED%^Evil spell:%^RESET%^ For one reason or another, this is an evil, selfish spell. Good characters won't use it unless in dire need.");
     if(aoe_spell)
-        write("%^BOLD%^%^RED%^AOE spell:%^RESET%^ This is area of effect spell. It will affect all targetss in the room over time. It uses special damage table. Two spells of the same effect can't be used by the same caster simultaneously. More than three area of effects can't be maintained by the same caster.");
+        write("%^BOLD%^%^RED%^AOE spell:%^RESET%^ This is an area of effect spell. It will affect all targets in the room over time. It uses a special damage table. Two spells of the same effect can't be used by the same caster simultaneously. More than three area of effect spells can't be maintained by the same caster.");
     if(traveling_aoe_spell)
-        write("%^BOLD%^%^RED%^TravAOE spell:%^RESET%^ This is travelling area of effect spell. It affects everyone in the room that caster is in. It uses special damage table.");
+        write("%^BOLD%^%^RED%^TravAOE spell:%^RESET%^ This is a travelling area of effect spell. It affects everyone in the room that the caster is in. It uses a special damage table.");
     if(splash_spell)
-        write("%^BOLD%^%^RED%^Splash spell%^RESET%^ This is a splash damage spell. It has a change of affecting multiple targets at the price of the spell level.");
+        write("%^BOLD%^%^RED%^Splash spell:%^RESET%^ This is a splash damage spell. It has a chance of affecting multiple targets at the price of the spell level.");
 
     if(mapp(components)) {
       compskeys = keys(components);

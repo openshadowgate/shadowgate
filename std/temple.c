@@ -169,7 +169,7 @@ int leave_diety(string str) {
     if((int)TP->query_lowest_level() < 10) return notify_fail("You have not been one of the faithful long enough to forsake your deity.");
     symbol = present("holy symbol",TP);
     if(!avatarp(TP))
-        ADVANCE_D->deity_news(diety,TPQCN+" has forsaken "+capitalize(diety)+" as "+TP->query_possessive()+" diety!");
+        ADVANCE_D->deity_news(diety,TPQCN+" has forsaken "+capitalize(diety)+" as "+TP->query_possessive()+" deity!");
     log_file("god_change", capitalize(TP->query_name())+" left "+capitalize(diety)+": "+ctime(time())+"\n");
 //added by Styx 4/21/02
     "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" %^BOLD%^%^CYAN%^chose to forsake "+capitalize(diety)+".");
