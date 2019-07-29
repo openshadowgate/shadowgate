@@ -781,10 +781,11 @@ void wizard_interface(object user, string type, string targ)
             }
         }        
     }
-    if(caster->query_property("shapeshifted") &&
-       (string)caster->query("relationship_profile") != "spell_alter_self_999" &&
-       (string)caster->query("relationship_profile") != "druid_elemental_999" &&
-       (string)caster->query("relationship_profile") != "shadow_apotheosis") 
+    if(caster->query_property("shapeshifted"))
+        if((string)caster->query("relationship_profile") != "spell_alter_self_999" &&
+           (string)caster->query("relationship_profile") != "druid_elemental_999" &&
+           (string)caster->query("relationship_profile") != "shadow_apotheosis" &&
+           !FEATS_D->usable_feat(caster, "ragecaster")) 
     {
         shapeob = caster->query_property("shapeshifted");
         if(!objectp(shapeob)) 
@@ -994,9 +995,7 @@ void wizard_interface(object user, string type, string targ)
         return;
     }
     
-    supreme_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds",
-        "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds",
-        "mass cure critical wounds", "regeneration", "aura of healing", });
+    supreme_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds", "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds", "mass cure critical wounds", "regeneration", "aura of healing", });
         
     natures_gift_spells = ({ "faerie fire","entangle","animal messenger","spider climb","meld into nature",
         "wall of thorns","treestride","insect plague","wall of stone","regeneration" });
@@ -1012,8 +1011,8 @@ void wizard_interface(object user, string type, string targ)
     (!FEATS_D->usable_feat(caster,"expanded knowledge 1") || (spell_name != (string)caster->query("expanded_knowledge_1"))) && 
     (!FEATS_D->usable_feat(caster,"expanded knowledge 2") || (spell_name != (string)caster->query("expanded_knowledge_2"))) && 
     (!FEATS_D->usable_feat(caster,"expanded knowledge 3") || (spell_name != (string)caster->query("expanded_knowledge_3"))) &&
-    ( (!FEATS_D->usable_feat(caster,"body cognition") && !FEATS_D->usable_feat(caster,"mind over matter")) || (spell_name != "true metabolism")) &&
-    ( (!FEATS_D->usable_feat(caster,"presence of mind") && !FEATS_D->usable_feat(caster, "mental fortress")) || (spell_name != "timeless body")))
+    ((!FEATS_D->usable_feat(caster,"body cognition") && !FEATS_D->usable_feat(caster,"mind over matter")) || (spell_name != "true metabolism")) &&
+    ((!FEATS_D->usable_feat(caster,"presence of mind") && !FEATS_D->usable_feat(caster, "mental fortress")) || (spell_name != "timeless body")))
     { 
 // only bother checking memorized if it's not spellmastered or part of expanded knowledge/epic feats
         if(!caster->check_memorized(spell_type,improv))
@@ -1844,9 +1843,9 @@ void define_clevel()
         if(FEATS_D->usable_feat(caster, "mastery of power")) clevel += 4;
     if (FEATS_D->usable_feat(caster, "eldritch conditioning"))
         clevel = caster->query_character_level();
-    if (FEATS_D->usable_feat(caster, "ragecaster"))
-        if(caster->query_property("raged"))
-            clevel = caster->query_character_level();
+    if(caster->query_property("raged"))    
+        if (FEATS_D->usable_feat(caster, "ragecaster"))
+            clevel = caster->query_character_level() + 4;
     if((int)caster->query_property("empowered"))
         clevel += (int)caster->query_property("empowered");
     clevel = clevel<0?1:clevel;

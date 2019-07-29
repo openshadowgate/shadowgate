@@ -6,17 +6,18 @@ inherit FEAT;
 void create() 
 {
     ::create();
-    feat_type("permanent");
+    feat_type("instant");
     feat_category("RagingProphet");
     feat_name("spirit warrior");
     feat_prereq("Raging Prophet L4");
-    feat_desc("With this feat you fuck up everything.");
+    feat_syntax("spirit_warrior");
+    feat_desc("A rage prophet can enter the realm of spirits, gaining partial immunity to corporeal damage.");
     permanent(1);
 }
 
 //blep blep mew mew
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {

@@ -40,9 +40,8 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Base Class Levels\n"
+        "    20 Barbarian Levels\n"
         "    40 Character Levels\n"
-        "    Mighty Rage\n"
         "    Spell focus\n";
         
     return str;    
@@ -65,7 +64,6 @@ int prerequisites(object player)
 
     if((player->query_class_level("barbarian") + adj) < 20) { return 0; }    
     if(!FEATS_D->usable_feat(player,"spell focus")) { return 0; }
-    if(!FEATS_D->usable_feat(player,"mighty rage")) { return 0; }    
     if(player->query_level() < 40) { return 0; }
     return 1;    
 }
