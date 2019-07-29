@@ -10,7 +10,7 @@ void create()
     feat_category("RagingProphet");
     feat_name("ragecaster");
     feat_prereq("Raging Prophet L4");
-    feat_desc("With this feat raging prophet can use offensive spells in the combat, those spells will also have full potency of their class.");
+    feat_desc("With this feat raging prophet can use offensive spells in the combat while being under effects of rage, those spells will also have full potency of their class.");
     permanent(1);
 }
 

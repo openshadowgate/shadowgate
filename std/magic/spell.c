@@ -83,6 +83,7 @@ int spell_level,
     pcost,
     mypp,
     mycost,
+    healing_spell,
     aoe_spell,
     traveling_aoe_spell,
     splash_spell,
@@ -319,6 +320,8 @@ void aoe_spell(int num) { aoe_spell = num; }
 int query_aoe_spell() { return aoe_spell; }
 void traveling_aoe_spell(int num) { traveling_aoe_spell = num; }
 int query_traveling_aoe_spell() { return traveling_aoe_spell; }
+void set_healing_spell(int num) { healing_spell = num; }
+int query_healing_spell() { return healing_spell; }
 void evil_spell(int num) { evil_spell = num; }
 int query_evil_spell() { return evil_spell; }
 void splash_spell(int num) { splash_spell = num; }
@@ -759,20 +762,24 @@ void wizard_interface(object user, string type, string targ)
 
     // welcome to the new casting restrictions on melee-powered forms! Currently applies to druid shapeshifts (except elemental), as well as rage & transformation spells.
     // this only allows the casting of helpful spelltypes, and only if non- or self-targetted with no arguments. Ie. no complex casting or nuking. N, 10/15.
-    if(caster->query_property("raged") || caster->query_property("transformed")) 
+    if(caster->query_property("raged") ||
+       caster->query_property("transformed")) 
     {
-        if(!help_or_harm) 
-        { // only spells flagged as helpful work in these states
-            tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
-            TO->remove();
-            return;
-        }
-        if(arg_needed || (target_required && target != caster)) 
-        { // only non-arg and non- or self-targetted spells
-            tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
-            TO->remove();
-            return;
-        }
+        if (!FEATS_D->usable_feat(caster, "ragecaster"))
+        {
+            if(!help_or_harm) 
+            {
+                tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
+                TO->remove();
+                return;
+            }
+            if(arg_needed || (target_required && target != caster)) 
+            {
+                tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
+                TO->remove();
+                return;
+            }
+        }        
     }
     if(caster->query_property("shapeshifted") &&
        (string)caster->query("relationship_profile") != "spell_alter_self_999" &&

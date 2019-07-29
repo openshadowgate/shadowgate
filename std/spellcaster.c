@@ -191,6 +191,18 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
                 return 1;
             }
         }
+        if(TO->query_property("raged"))
+            if(FEATS_D->usable_feat(TO,"raging healer"))
+            {
+                if(random(4))
+                {
+                    string raging_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds", "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds", "mass cure critical wounds", "regeneration", "aura of healing", "heal", "mass heal"});
+                    if(member_array(spell,raging_healer_spells)!=-1)
+                    {
+                        tell_object(TO,"%^RESET%^%^RED%^You're so angry that your spell preserves in memory!%^RESET%^");
+                    }
+                }
+            }
     }
 
     if(myclass == "bard" || myclass == "sorcerer") {
