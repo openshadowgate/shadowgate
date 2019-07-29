@@ -61,7 +61,7 @@ void spell_effect(int prof){
       if (member_array(foes[i],party) != -1) continue;
       if (interactive(foes[i]) && foes[i]->query_level() < 6) continue;
       limb = foes[i]->return_target_limb();
-      damage = roll_dice(clevel,6); //same as the bolt spells
+      damage = sdamage;
       if(!interactive(foes[i])){
 //Added to always do damage to mobs per conversations with Ares
 //~Circe~ 5/12/08
@@ -71,7 +71,6 @@ void spell_effect(int prof){
          tell_room(place,"%^BOLD%^%^BLACK%^The power from "+CASTER->QCN+"'s "+
             "sphere %^GREEN%^glows%^BLACK%^ with a green aura as it "+
             "engulfs "+foes[i]->QCN+".%^RESET%^",({foes[i],CASTER}));
-         damage += roll_dice(1,CLEVEL);
          if(!do_save(foes[i],-2)) {
             damage_targ(foes[i],limb,damage,"divine");
          }else{
@@ -88,7 +87,6 @@ void spell_effect(int prof){
             tell_room(place,"%^BOLD%^%^BLACK%^The power from "+CASTER->QCN+"'s "+
                "sphere %^GREEN%^glows%^BLACK%^ with a green aura as it "+
                "engulfs "+foes[i]->QCN+".%^RESET%^",({foes[i],CASTER}));
-            damage += roll_dice(1,CLEVEL);
             if(!do_save(foes[i],-2)){
                damage_targ(foes[i],limb,damage,"divine");
             }else{
@@ -119,7 +117,8 @@ void spell_effect(int prof){
             tell_room(place,"%^BOLD%^%^BLACK%^The power from "+
                ""+CASTER->QCN+"'s sphere %^GREEN%^flickers%^BLACK%^ "+
                "as it strikes "+foes[i]->QCN+".%^RESET%^",({foes[i],CASTER}));
-            damage -= (int)CLEVEL;
+            define_base_damage(0);
+            damage = sdamage;
             if(damage>0){
                if(!do_save(foes[i],2)){
                   damage_targ(foes[i],limb,damage,"divine");

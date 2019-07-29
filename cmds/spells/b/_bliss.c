@@ -57,7 +57,7 @@ void spell_effect(int prof)
     if(mind_immunity_check(target, "default"))
     {
         target->add_attacker(caster);
-        damage_targ(target, target->return_target_limb(), roll_dice(5,8),"untyped");
+        damage_targ(target, target->return_target_limb(), sdamage,"untyped");
         spell_successful();
         dest_effect();
         return;

@@ -63,7 +63,7 @@ void spell_effect(int prof){
         tell_room(place,"%^BOLD%^%^GREEN%^"+target->QCN+" is unable to move in time and is hit with the "
             "full destructive power of "+caster->QCN+"'s spell!%^RESET%^",({target,caster}));
         damage_stuff(target);
-        damage = roll_dice(clevel,2);
+        damage = sdamage;
     }else{
         tell_object(caster,"%^CYAN%^"+target->QCN+" dodges at the last "
             "second, narrowly avoiding the full power of your spell!%^RESET%^");
@@ -71,7 +71,7 @@ void spell_effect(int prof){
             "full power of the destructive spell!%^RESET%^");
         tell_room(place,"%^CYAN%^"+target->QCN+" manages to dodge aside at the last instant, "
             "avoiding the full power of the destructive spell!%^RESET%^",({target,caster}));
-        damage = roll_dice(clevel,2)/2;
+        damage = sdamage/2;
     }
     damage_targ(target,target->return_target_limb(),damage,"acid");
     spell_kill(target,caster);

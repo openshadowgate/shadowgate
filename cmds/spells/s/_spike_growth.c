@@ -23,6 +23,7 @@ void create()
         "be used in areas where some vegetation may be found.");
     set_property("magic",1);
     set_casting_time(1);
+    aoe_spell(1);
 }
 
 
@@ -105,7 +106,7 @@ int GoThroughDoor()
     {
         tell_object(TP,"%^RED%^You wince in pain as you step on one of the sharp spikes!");
         tell_room(ETP,"%^RED%^"+TP->QCN+" winces in pain as "+TP->QS+" steps on a sharp spike!",TP);
-        TP->cause_typed_damage(TP,TP->return_target_limb(),roll_dice(1,clevel),"piercing");
+        TP->cause_typed_damage(TP,TP->return_target_limb(),sdamage,"piercing");
         if(!interactive(TP)) { spell_kill(TP,caster); }
         return 1;
     }
@@ -174,7 +175,8 @@ void execute_attack()
         if(sizeof(tmp)) { old_ppl = tmp; }
         else { old_ppl = ({}); }
     }
-        
+
+    define_base_damage(0);
     if(sizeof(ppl))
     {
         for(i=0;i<sizeof(ppl);i++)
@@ -188,7 +190,7 @@ void execute_attack()
                 old_ppl += ({ ppl[i] });
                 tell_object(ppl[i],"%^RED%^You wince in pain as you step on one of the sharp spikes!");
                 tell_room(place,"%^RED%^"+ppl[i]->QCN+" winces in pain as "+ppl[i]->QS+" steps on one of the sharp spikes!");
-                ppl[i]->cause_typed_damage(ppl[i],ppl[i]->return_target_limb(),roll_dice(1,clevel),"piercing");
+                ppl[i]->cause_typed_damage(ppl[i],ppl[i]->return_target_limb(),sdamage,"piercing");
                 if(!interactive(ppl[i])) { spell_kill(ppl[i],caster); }
             }
 
@@ -197,7 +199,7 @@ void execute_attack()
 
             tell_object(ppl[i],"%^RED%^You wince in pain as you step on one of the sharp spikes!");
             tell_room(place,"%^RED%^"+ppl[i]->QCN+" winces in pain as "+ppl[i]->QS+" steps on one of the sharp spikes!");
-            ppl[i]->cause_typed_damage(ppl[i],ppl[i]->return_target_limb(),roll_dice(1,clevel),"piercing");
+            ppl[i]->cause_typed_damage(ppl[i],ppl[i]->return_target_limb(),sdamage,"piercing");
             if(!interactive(ppl[i])) { spell_kill(ppl[i],caster); }
         }
     }

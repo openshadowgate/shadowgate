@@ -32,6 +32,7 @@ void create() {
     set_target_required(1);
     set_immunities( ({ "ice", "spell_immunity"}) );
     set_save("reflex");
+    splash_spell(1);
 }
 
 void spell_effect(int prof) {
@@ -75,10 +76,7 @@ void spell_effect(int prof) {
             foes += ({ tempob});
         oldfoes -= ({ tempob});
     }
-    damage=roll_dice((6+(clevel-9)/4),10);
-//tell_object(caster,"damage = "+damage);
-//taking this back out in response to a bug report.
-//I'm assuming someone was using it for debugging?  Circe 9/19/04
+    damage=sdamage;
     if(do_save(target,0))
     //if ("/daemon/saving_d"->saving_throw(target, "spell",-1 * clevel/10))
         damage_targ(target, "torso", to_int(damage / 2),"cold" );
@@ -87,18 +85,18 @@ void spell_effect(int prof) {
     for (x=0;x < sizeof(foes);x++) {
 		if(!objectp(foes[x])) { continue; }
 		if(foes[x]->query_true_invis()) { continue; }
-        damage=roll_dice((6+(clevel-9)/4),10);
+        damage=sdamage;
         tell_room(environment(foes[x]),"%^BOLD%^%^WHITE%^The frozen wind also catches "+foes[x]->QCN+" in its chilling embrace!",foes[x]);
         tell_object(foes[x], "%^BOLD%^%^WHITE%^You are chilled to the bone by the icy wind!");
-        damage_targ(foes[x], "torso", damage,"cold");
+        damage_targ(foes[x], "torso", damage/2,"cold");
     }
     for (x=0;x < sizeof(allies);x++) {
         if (!objectp(allies[x])) continue;
 		if (allies[x]->query_true_invis()) { continue; }
-        damage=roll_dice((6+(clevel-9)/4),10);
+        damage=sdamage;
         tell_room(environment(allies[x]), "%^BOLD%^%^WHITE%^The outer edges of the frozen wind catch "+allies[x]->QCN+"!", allies[x]);
         tell_object(allies[x], "%^BOLD%^%^WHITE%^You are chilled by the edge of the icy wind.");
-        damage_targ(allies[x], "torso", to_int(damage / 2),"cold" );
+        damage_targ(allies[x], "torso", to_int(damage / 4),"cold" );
     }
     dest_effect();
 }
