@@ -13,7 +13,9 @@ void create()
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS eclipse");
-    set_description("With this powerful ritual a mage moves Tyrannos in front of the sun, temporarily turning day into the night. The heavenly body then will stay in the sky for a long while, but eventually will return back to its orbit.");
+    set_description("With this powerful ritual a mage moves Tyrannos in front of the sun, temporarily turning day into the night. The heavenly body then will stay in the sky for a long while, but eventually will return back to its orbit.
+
+%^RED%^N.B.%^RESET%^ Using this spell might get your head commissioned to the assassins guild by farmers of the world.");
     set_helpful_spell(1);
 }
 
@@ -45,13 +47,13 @@ int preSpell()
 void spell_effect(int prof) 
 {
     tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and your hands into the sky, you notice Tyrannos stards to move to stand in front of the sun!%^RESET%^");
-    tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+"'s chanting grows louder, up in the sky you see Tyrannos moving!",caster);
+    tell_room(place,"%^BOLD%^%^WHITE%^As "+caster->QCN+"'s chanting grows louder, up in the sky you see Tyrannos moving!",caster);
     call_out("step_two",ROUND_LENGTH);
 }
 
 void step_two()
 {
-    message("info","%^BOLD%^%^BLACK%^Darkness descends as Tyrannos blots out the %^YELLOW%^s%^RESET%^%^ORANGE%^u%^YELLOW%^n%^BOLD%^%^BLACK%^!\n",users());
+    message("info","\n%^BOLD%^%^BLACK%^Darkness descends as Tyrannos blots out the %^YELLOW%^s%^RESET%^%^ORANGE%^u%^YELLOW%^n%^BOLD%^%^BLACK%^!\n",users());
     ASTRONOMY_D->set_eclipse();
 }
 
