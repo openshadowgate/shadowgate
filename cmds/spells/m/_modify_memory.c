@@ -31,11 +31,17 @@ void spell_effect(int prof)
         return;
     }
 
+    if(!userp(target)){
+        tell_object(caster,"Your target is weird.");
+        dest_effect();
+        return;
+    }
+    
     if(!do_save(target,-4)){
         spell_successful();
         tell_object(caster,"%^BLUE%^You sense your memory attempt succeeded, and your victim is momentarily dazed.%^RESET%^");
-        target->set_paralyzed(random(3),"%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted.%^RESET%^");
-        target->remove_relationship(caster->query_name());
+        target->set_paralyzed(roll_dice(1,3),"%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted.%^RESET%^");
+        target->remove_relationship(caster->query_true_name());
     }
     tell_object(caster,"%^BLUE%^You sense your memory altering attemp failed.%^RESET%^");
     dest_effect();
