@@ -40,7 +40,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    if(target->query_property("cursed")) {
+    if(target->query_property("crushing_despair")) {
         tell_object(caster,"%^CYAN%^Your spell slips away from "+target->QCN+", unable to weaken them further!%^RESET%^");
         tell_room(place,"%^CYAN%^The aura around "+caster->QCN+"'s hands weakens and then fades away.%^RESET%^",caster);
         TO->remove();
@@ -67,7 +67,7 @@ void spell_effect(int prof) {
     target->set_property("empowered",(-1)*bonus);
     for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],(-1)*bonus);
     caster->add_saving_bonus("all",(-1)*bonus);
-    target->set_property("cursed",1);
+    target->set_property("crushing_despair",1);
     call_out("dest_effect",duration);
     spell_successful();
 }
@@ -81,7 +81,7 @@ void dest_effect() {
         target->set_property("empowered",bonus);
         for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],bonus);
         caster->add_saving_bonus("all",bonus);
-        target->remove_property("cursed");
+        target->remove_property("crushing_despair");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

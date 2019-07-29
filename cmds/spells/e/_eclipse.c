@@ -15,7 +15,7 @@ void create()
     set_syntax("cast CLASS eclipse");
     set_description("With this powerful ritual a mage moves Tyrannos in front of the sun, temporarily turning day into the night. The heavenly body then will stay in the sky for a long while, but eventually will return back to its orbit.
 
-%^RED%^N.B.%^RESET%^ Using this spell might get your head commissioned to the assassins guild by farmers of the world.");
+%^BOLD%^%^RED%^N.B.%^RESET%^ Using this spell might get your head commissioned to the assassins guild by farmers of the world.");
     set_helpful_spell(1);
 }
 
