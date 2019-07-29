@@ -10,7 +10,7 @@ void create()
     feat_category("RagingProphet");
     feat_name("raging healer");
     feat_prereq("Raging Prophet L1");
-    feat_desc("With this feat a raging prophet has a chance to preserve healing spell in memory while raging.");
+    feat_desc("With this feat a raging prophet has a significant chance to preserve healing spell in memory while raging.");
     permanent(1);
 }
 

@@ -120,6 +120,7 @@ int query_moon_light()
 void set_eclipse()
 {
     in_eclipse = 1;
+    call_out("remove_eclipse",600);//cap if causer forgets cleanup
 }
 
 /**
@@ -128,6 +129,7 @@ void set_eclipse()
 void remove_eclipse()
 {
     in_eclipse = 0;
+    message("info","%^BOLD%^%^BLACK%^The %^WHITE%^eclipse%^BLACK%^ is over!%^BOLD%^%^BLACK%^\n",users());    
 }
 
 /**

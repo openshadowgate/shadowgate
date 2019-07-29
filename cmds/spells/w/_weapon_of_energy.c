@@ -68,8 +68,6 @@ void spell_effect(int prof)
     caster->remove_paralyzed();
     caster->force_me("wield weapon");
     spell_successful();
-    
-    call_out("dest_effect",clevel*16);
 }
 
 
