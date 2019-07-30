@@ -17,14 +17,13 @@ create() {
    set_large_wc(1,4);
     set_weight(2);
     set_size(1);
-    set("value", 2);   
+    set("value", 2);
     set_type("magebludgeon");
     set_prof_type("staff");
    set_weapon_speed(2);
    set_weapon_prof("simple");
    set_property("repairtype",({"woodwork"}));
-   
    set_critical_threat_range(2);
-   set_critical_hit_multiplier(3);
+   set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");
 }

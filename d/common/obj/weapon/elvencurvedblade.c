@@ -16,7 +16,6 @@ create() {
    set_type("thiefslashing");
    set_weapon_speed(10);
    set_weapon_prof("exotic");
-
    set_critical_threat_range(3);
    set_critical_hit_multiplier(2);
    set_damage_type("slashing");

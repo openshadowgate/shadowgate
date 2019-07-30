@@ -55,7 +55,7 @@ int query_critical_hit_multiplier();
 // ****************************************
 
 
-void create() 
+void create()
 {
     Object::create();
     set_decay_rate(300);
@@ -81,11 +81,11 @@ void set_large_wc(int num, int dice) {
 void set_type(string str) { type = str;}
 
 
-void add_poisoning(int x) 
+void add_poisoning(int x)
 {
     poisoning +=x;
     TO->set("PoisonDoses", poisoning);
-    if(poisoning <= 0) 
+    if(poisoning <= 0)
     {
         poisoning =0;
         TO->delete("PoisonDoses");
@@ -96,8 +96,8 @@ void add_poisoning(int x)
 
 string query_pois()
 {
-    //I don't care much about the concept of this - seems like it would 
-    //really give it away if you look over someone and their weapons are 
+    //I don't care much about the concept of this - seems like it would
+    //really give it away if you look over someone and their weapons are
     //poisoned. - Saide
     return "";
     if(!poisoning) return "";
@@ -143,7 +143,7 @@ string query_short() {
 }
 
 
-// adding a query_long so it can show size & condition like the armor does 
+// adding a query_long so it can show size & condition like the armor does
 // last change 7/19/05 *Styx* 10/14/05
 string query_long(string str) {
    string ret;
@@ -161,7 +161,7 @@ string query_long(string str) {
    }
 
    // adding decay condition to long *Styx* 10/14/05, last change 7/19/05
-   if(query_broken() != "") 
+   if(query_broken() != "")
       ret += "\nCondition appears to be"+query_broken()+"\n";
    else ret += "\n";
    if(wielded) ret += limbString+"\n";
@@ -284,7 +284,7 @@ string query_weapon_prof()
         }
     }
     return weapon_prof;
-} 
+}
 
 
 int is_ok_wield(){
@@ -308,7 +308,7 @@ int is_ok_wield(){
         default: return 0;
         }
     }
-    
+
     else
     {
         if(who->is_class("mage")) ma = 1;
@@ -480,7 +480,7 @@ int query_size(){
 }
 
 
-int query_value() 
+int query_value()
 {
   int cost;
   cost = to_int((::query_value()*::query_overallStatus()/100.0));
@@ -505,14 +505,15 @@ void set_critical_threat_range(int num)
 
 
 // doing a temporary override here for now -Ares
+// removing override to allow medium and large weapons with expanded critical hit range - Odin
 int query_critical_threat_range()
 {
-    //if(!threat_range) { threat_range = 1; }
+    if(!threat_range) { threat_range = 1; }
 
-    if(query_size() > 1) { return 2; }
-    else { return 3; }
+  //  if(query_size() > 1) { return 2; }
+  //  else { return 3; }
 
-    //return threat_range;
+    return threat_range;
 }
 
 

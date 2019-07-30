@@ -13,15 +13,14 @@ create() {
      "even break or sever bones.  The hilt is longer than a short or long "
      "sword because it requires two hands for normal size humanoids to even "
      "wield it, hence the name.");
-   set_weight(15);
+   set_weight(8);
    set_size(3);
    set_value(50);
-   set_wc(3,4);
-   set_large_wc(3,4);
+   set_wc(2,6);
+   set_large_wc(2,6);
    set_type("thiefslashing");
    set_weapon_speed(10);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(2);
    set_critical_hit_multiplier(2);
    set_damage_type("slashing");

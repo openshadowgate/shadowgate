@@ -14,17 +14,16 @@ create() {
    set_weight(3);
    set_size(1);
    set_value(6);
-   set_cointype("silver"); 
-   set_wc(1,4);
-    set_large_wc(1,4);
+   set_cointype("silver");
+   set_wc(1,6);
+    set_large_wc(1,6);
    //set_wc(1,6);
    //set_large_wc(2,4);
 set_type("magepiercing");
 set_prof_type("small blades");
    set_weapon_speed(4);
    set_weapon_prof("simple");
-   
    set_critical_threat_range(2);
-   set_critical_hit_multiplier(3);
+   set_critical_hit_multiplier(2);
    set_damage_type("piercing");
 }

@@ -19,7 +19,6 @@ create() {
    set_prof_type("hammer");
    set_weapon_speed(3);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");

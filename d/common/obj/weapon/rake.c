@@ -8,7 +8,7 @@ create(){
     set_long("This is a well used farmer's rake.");
     set_weight(2);
     set_size(2);
-    set_wc(1,3);
+    set_wc(1,2);
     set_large_wc(1,2);
     set_type("magebludgeon");
     set_prof_type("tool");
@@ -18,7 +18,6 @@ create(){
     set_unwield("You no longer feel foolish as you unwield the rake.");
     set_weapon_speed(4);
     set_weapon_prof("simple");
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");

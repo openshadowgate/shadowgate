@@ -16,10 +16,9 @@ void create(){
    set_type("thiefslashing");
    set_prof_type("polearm");
    set_weapon_speed(8);
-   set_wc(1,6);
+   set_wc(2,6);
    set_large_wc(2,6);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(3);
    set_damage_type("piercing");

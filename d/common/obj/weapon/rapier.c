@@ -15,7 +15,7 @@ create(){
 "employ finesse rather than brute force in sparring or battle.  It looks "
 "durable, light, and easy to maintain.");
 //    set_large_wc(1,6);
-    set_wc(1,7);
+    set_wc(1,6);
     set_large_wc(1,6);
     set_weight(4);
     set_size(2);
@@ -24,7 +24,6 @@ create(){
     set_prof_type("rapier");
    set_weapon_speed(3);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(3);
    set_critical_hit_multiplier(2);
    set_damage_type("piercing");

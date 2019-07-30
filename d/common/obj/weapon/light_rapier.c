@@ -16,8 +16,8 @@ create(){
 "durable, light, and easy to maintain.  The blade of this rapier is "+
 "shorter than it's more famous cousin.");
 //    set_large_wc(1,6);
-    set_wc(1,5);
-    set_large_wc(1,5);
+    set_wc(1,4);
+    set_large_wc(1,4);
     set_weight(4);
     set_size(1);
     set("value",10);
@@ -25,7 +25,6 @@ create(){
     set_prof_type("rapier");
    set_weapon_speed(3);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(3);
    set_critical_hit_multiplier(2);
    set_damage_type("piercing");

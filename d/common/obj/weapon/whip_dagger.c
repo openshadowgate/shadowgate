@@ -11,17 +11,16 @@ void create() {
    "in a dagger several inches long, adding a deadly touch to this "+
    "weapon and making it obvious that it is useful only for combat.");
    set_weight(4);
-   set_size(2);
+   set_size(1);
    set_value(15);
-   set_wc(1,8);   
-   set_large_wc(1,8);  
-   set_type("magepiercing");
+   set_wc(1,4);
+   set_large_wc(1,4);
+   set_type("thiefpiercing");
    set_damage_type("piercing");
    set_prof_type("whip");
    set_weapon_speed(8);
    set_weapon_prof("exotic");
-   
-   set_critical_threat_range(1);
+   set_critical_threat_range(3);
    set_critical_hit_multiplier(2);
    set_property("repairtype",({"leatherwork"}));
 }

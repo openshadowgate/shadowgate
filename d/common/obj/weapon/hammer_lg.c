@@ -4,7 +4,7 @@ inherit "/std/weapon";
 
 create() {
     ::create();
-   set_id(({ "warhammer","hammer","large hammer", 
+   set_id(({ "warhammer","hammer","large hammer",
 	"large war hammer", "war hammer" }));
    set_name("warhammer");
    set_short("A large war hammer");
@@ -20,7 +20,6 @@ create() {
    set_prof_type("hammer");
    set_weapon_speed(8);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(3);
    set_damage_type("bludgeoning");

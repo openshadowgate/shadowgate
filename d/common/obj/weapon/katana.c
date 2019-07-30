@@ -13,13 +13,12 @@ void create() {
    set_weight(12);
    set_size(3);
    set_value(60);
-   set_wc(3,4);
-   set_large_wc(3,4);
+   set_wc(2,6);
+   set_large_wc(2,6);
    set_type("thiefslashing");
    set_weapon_speed(8);
-   set_weapon_prof("exotic");
-   
+   set_weapon_prof("martial");
    set_critical_threat_range(2);
-   set_critical_hit_multiplier(3);
+   set_critical_hit_multiplier(2);
    set_damage_type("slashing");
 }

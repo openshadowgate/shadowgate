@@ -1,6 +1,6 @@
 inherit "/std/weapon";
 
-void create() 
+void create()
 {
     ::create();
    set_id(({ "scimitar","sword","scimitar sword" }));
@@ -12,13 +12,12 @@ void create()
    set_weight(4);
    set_size(2);
    set("value", 15);
-   set_wc(1,8);
-   set_large_wc(1,8);
+   set_wc(1,6);
+   set_large_wc(1,6);
    set_type("thiefslashing");
    set_weapon_speed(5);
    set_prof_type("medium blades");
    set_weapon_prof("martial");
-   
    set_critical_threat_range(3);
    set_critical_hit_multiplier(2);
    set_damage_type("slashing");

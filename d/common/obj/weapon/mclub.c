@@ -16,14 +16,13 @@ create() {
    set_size( 2 );
    set_prof_type("club");
    set("value", 8);
-   set_cointype("silver"); 
-   set_wc(1,8);
+   set_cointype("silver");
+   set_wc(1,6);
    set_large_wc(1,6);
    set_type("magebludgeon");
    set_weapon_speed(4);
    set_weapon_prof("simple");
    set_property("repairtype",({"woodwork"}));
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");

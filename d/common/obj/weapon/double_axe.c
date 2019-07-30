@@ -20,7 +20,6 @@ void create() {
    set_large_wc(3,4);
    set_weight(15);
    set_weapon_speed(11);
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(3);
    set_damage_type("slashing");

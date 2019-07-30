@@ -13,12 +13,11 @@ create() {
    set_size(2);
    set("value", 8);
    set_wc(1,6);
-   set_large_wc(2,3);
+   set_large_wc(1,6);
      set_type("thiefpiercing");
 set_prof_type("short blades");
    set_weapon_speed(5);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(4);
    set_damage_type("piercing");

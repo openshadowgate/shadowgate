@@ -11,7 +11,7 @@ void create() {
 @GARRETT
 This is a blunt striking weapon, suitable for fighting on foot or from
 horseback.  The head of the mace is a single piece of cast iron, and the
-handle is made from the heartwood of an oak tree.  This particular 
+handle is made from the heartwood of an oak tree.  This particular
 version is massive, reaching nearly five feet in length.
 GARRETT
    );
@@ -24,7 +24,6 @@ GARRETT
    set_prof_type("mace");
    set_weapon_speed(6);
    set_weapon_prof("simple");
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");

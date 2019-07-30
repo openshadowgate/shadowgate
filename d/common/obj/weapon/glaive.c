@@ -22,7 +22,6 @@ void create(){
    set_wc(3,4);
    set_large_wc(3,4);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(3);
    set_damage_type("slashing");

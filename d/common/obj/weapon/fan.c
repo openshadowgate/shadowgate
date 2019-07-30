@@ -15,15 +15,14 @@ void create() {
 		"females.");
    	set_type("magepiercing");
    	set_prof_type("fan");
-         set_weapon_prof("exotic");
+    set_weapon_prof("exotic");
    	set_weight(3);
    	set_size(1);
     set_wc(1,5);
     set_weapon_speed(3);
     set_large_wc(1,5);
    	set_value(25);
-   
-   set_critical_threat_range(2);
-   set_critical_hit_multiplier(3);
+   set_critical_threat_range(3);
+   set_critical_hit_multiplier(2);
    set_damage_type("piercing");
 }

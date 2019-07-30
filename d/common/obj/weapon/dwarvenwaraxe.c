@@ -16,7 +16,6 @@ create() {
    set_prof_type("axe");
    set_weapon_speed(6);
    set_weapon_prof("exotic");
-
    set_critical_threat_range(1);
    set_critical_hit_multiplier(3);
    set_damage_type("slashing");

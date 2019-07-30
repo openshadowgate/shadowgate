@@ -18,14 +18,13 @@ create() {
    set_size(1);
    set("value", 6);
    set_wc(1,4);
-   set_large_wc(1,6);
+   set_large_wc(1,4);
    set_type("thiefpiercing");
    set_prof_type("spear");
    set_weapon_speed(5);
    set_weapon_prof("simple");
    set_property("repairtype",({"woodwork"}));
-   
    set_critical_threat_range(2);
-   set_critical_hit_multiplier(3);
+   set_critical_hit_multiplier(2);
    set_damage_type("piercing");
 }

@@ -15,11 +15,10 @@ void create() {
 	set_prof_type("short blades");
    	set_value(75);
    	set_wc(2,3);
-   	set_large_wc(1,5);
+   	set_large_wc(2,3);
    	set_type("thiefslashing");
    	set_weapon_speed(3);
     set_weapon_prof("exotic");
-   
     set_critical_threat_range(2);
     set_critical_hit_multiplier(3);
     set_damage_type("slashing");

@@ -17,14 +17,13 @@ void create(){
        "to a vicious point.");
     set_weight(11);
     set_value(15);
-    set_wc(2,7);
-    set_large_wc(2,8);
+    set_wc(2,4);
+    set_large_wc(2,4);
     set_size(3);
       set_type("thiefslashing");
 set_prof_type("polearm");
     set_weapon_speed(6);
-    set_weapon_prof("exotic");
-   
+    set_weapon_prof("martial");
    set_critical_threat_range(1);
    set_critical_hit_multiplier(4);
    set_damage_type("slashing");

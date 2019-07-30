@@ -14,11 +14,10 @@ create() {
    set_value(10);
    set_wc(2,4);
 //   set_large_wc(1,6);
-   set_large_wc(2,5);
+   set_large_wc(2,4);
    set_type("slashing");
-   set_weapon_speed(9);
-   set_weapon_prof("exotic");
-   
+   set_weapon_speed(6);
+   set_weapon_prof("martial");
    set_critical_threat_range(2);
    set_critical_hit_multiplier(2);
    set_damage_type("slashing");

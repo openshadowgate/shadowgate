@@ -23,7 +23,6 @@ create() {
    set_weapon_speed(6);
    set_weapon_prof("simple");
    set_property("repairtype",({"woodwork"}));
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");

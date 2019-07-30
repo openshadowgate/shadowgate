@@ -14,17 +14,16 @@ create() {
    "support.  A staff is a traveling tool has many uses and the street "
    "thugs are aware enough of one to keep away from them."
     );
-    set_wc(2,4);
-    set_large_wc(2,5);
+    set_wc(2,6);
+    set_large_wc(2,6);
     set_weight(4);
     set_size(3);
-    set("value", 3);   
+    set("value", 3);
     set_type("magebludgeon");
     set_prof_type("staff");
    set_weapon_speed(4);
    set_weapon_prof("simple");
    set_property("repairtype",({"woodwork"}));
-   
    set_critical_threat_range(1);
    set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");

@@ -12,13 +12,12 @@ create() {
    set_size(2);
    set("value", 15);
   set_wc(1,8);
-   set_large_wc(3,4);
+   set_large_wc(1,8);
    set_type("pierce");
 set_prof_type("spear");
    set_weapon_speed(7);
    set_weapon_prof("martial");
-   
    set_critical_threat_range(1);
-   set_critical_hit_multiplier(2);
+   set_critical_hit_multiplier(3);
    set_damage_type("piercing");
 }

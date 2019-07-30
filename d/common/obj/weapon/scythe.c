@@ -19,13 +19,12 @@ void create(){
 //    set_wc(1,6);
 //    set_large_wc(1,8);
     set_wc(2,4);
-    set_large_wc(2,5);
-    set_size(2);
+    set_large_wc(2,4);
+    set_size(3);
     set_type("slashing");
     set_prof_type("polearm");
     set_weapon_speed(4);
-    set_weapon_prof("exotic");
-   
+    set_weapon_prof("martial");
    set_critical_threat_range(1);
    set_critical_hit_multiplier(4);
    set_damage_type("slashing");
