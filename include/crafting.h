@@ -87,6 +87,7 @@
     "giant hammer":(["file":COMMONFILE"weapon/giant_hammer","units":5]),\
     "giant mace":(["file":COMMONFILE"weapon/giant_mace","units":5]),\
     "giant sword":(["file":COMMONFILE"weapon/giant_bastard","units":5]),\
+    "kukri":(["file":COMMONFILE"weapon/kukri","units":1]),\
     "large axe":(["file":COMMONFILE"weapon/large_battle_axe","units":4]),\
     "large hammer":(["file":COMMONFILE"weapon/hammer_lg","units":4]),\
     "longsword":(["file":COMMONFILE"weapon/longsword","units":3]),\
@@ -102,6 +103,7 @@
     "two-handed sword":(["file":COMMONFILE"weapon/two_hand_sword","units":4]),\
     "small axe":(["file":COMMONFILE"weapon/handaxe","units":2]),\
     "shortsword":(["file":COMMONFILE"weapon/shortsword","units":2]),\
+    "waveblade":(["file":COMMONFILE"weapon/waveblade","units":1]),\
 ])
 
 #define WOODWORK ([\

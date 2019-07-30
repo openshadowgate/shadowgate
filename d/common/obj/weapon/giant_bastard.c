@@ -20,7 +20,7 @@ create() {
    set_large_wc(3,6);
    set_type("slash");
    set_weapon_speed(8);
-   set_weapon_prof("exotic");
+   set_weapon_prof("martial");
    set_critical_threat_range(2);
    set_critical_hit_multiplier(2);
    set_damage_type("slashing");
