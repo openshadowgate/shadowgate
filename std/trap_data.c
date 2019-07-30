@@ -290,7 +290,7 @@ int trapped(string str)
 	return is_trapped(str);
 }
 
-varargs int execute_trap(string str, object who, int FP)
+varargs int execute_trap(string str, object who, int FPP)
 {
 	string MyAction, *MyArrs, mobdir, *MBN;
 	mixed ThisTrap = 0;
@@ -299,7 +299,7 @@ varargs int execute_trap(string str, object who, int FP)
 	if(!stringp(str)) return 0;
 	if(!mapp(trap_data)) return 0;
 	if(who->query_true_invis()) return 0;
-	if(!intp(FP)) FP = 0;
+	if(!intp(FPP)) FPP = 0;
 	MyArrs = explode(str, " ");
 	MyAction = MyArrs[0];
 	if(trap_data[MyAction]) 
@@ -322,7 +322,7 @@ varargs int execute_trap(string str, object who, int FP)
 	}
 	//this way we can have randomly placed traps in an area with 
 	//defined directories of monsters that will ignore them - Saide
-	if(who->is_monster() && !FP) 
+	if(who->is_monster() && !FPP) 
 	{
 		if(sizeof(trap_data[ThisTrap]["KnownToMobs"])) 
 		{
@@ -336,7 +336,7 @@ varargs int execute_trap(string str, object who, int FP)
 	}
 	//you wont trigger your own trap, unless you happen to 
 	//fail as disarming/recovering it - Saide 
-	if(userp(who) && !FP)
+	if(userp(who) && !FPP)
 	{
 		if(sizeof(trap_data[ThisTrap]["KnownToPlayers"])) 
 		{
