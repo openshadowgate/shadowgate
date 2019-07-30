@@ -13,17 +13,17 @@ void damage();
 
 void create() {
     ::create();
-    set_spell_name("drawmij's instant summons");
-    set_spell_level(([ "mage" : 8 ]));
+    set_spell_name("instant summons");
+    set_spell_level(([ "mage" : 7 ]));
     set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS drawmij's instant summons on <item>, with password <password>");
+    set_syntax("cast CLASS instant summons on ITEM, with password PASSWORD");
     set_description("To cast this spell, the mage must use a gem of at least 500 gold value. This will need to be an "
 "actual gem found somewhere in the realms; 'spell component' gems won't do (Wizbert says that it's something to do with "
 "the special way 'component' gems are cut. Sounds plausible, but then again everyone knows Wizbert talks rubbish a lot of "
 "the time).\n\nAt the time of casting, the mage identifies an item from her inventory that she wants to be able to summon "
 "at a later date. She also names a specific password to activate the spell. Once the spell is cast, the item can be "
 "stored wherever the mage chooses and she carries the gem with her. When she wishes to retrieve the item, she crushes the "
-"gem while saying the password: %^YELLOW%^crush gem while saying <password>%^RESET%^\n\nThe gem will then crumble to dust "
+"gem while saying the password: %^YELLOW%^crush gem while saying PASSWORD%^RESET%^\n\nThe gem will then crumble to dust "
 "and the item should appear in its place. This can go wrong. If the item no longer exists it can't be summoned. If the "
 "item is in someone else's posession, it won't be summoned, but the mage will get a brief flash of a vision of where the "
 "item is, and who has it.");
@@ -76,7 +76,7 @@ void spell_effect(int prof) {
   }
   sscanf(arg, "%s, with password %s",item_name, password);
   if (item_name ==0||password==0){
-    tell_object(caster, "Try: %^YELLOW%^cast drawmij's instant"
+    tell_object(caster, "Try: %^YELLOW%^cast instant"
                        +" summons on <item>, with password <password>");
     return 1;
   }
