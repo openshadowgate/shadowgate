@@ -35,7 +35,7 @@ int preSpell()
     }
     if((int)caster->query_property("eclipse_caused") + DELAY > time())
     {
-        tell_object(caster, "%^BOLD%^%^BLACK%^Cover what sun? It is already dark!%^RESET%^");
+        tell_object(caster, "%^BOLD%^%^BLACK%^Tyrannos won't move yet.%^RESET%^");
         return 0;
     }
     if((int)ASTRONOMY_D->query_eclipse())
