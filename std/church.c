@@ -182,13 +182,12 @@ int pray()
             myclass = TP->query_class();
         
         classes = TP->query_classes();
-        TP->set_general_exp(myclass,EXP_NEEDED[(thelevel)]);
 
         if(thelevel == 50)
-        {
             thelevel = 49;
-            resetLevelForExp(0);
-        }
+        
+        TP->set_general_exp(myclass,EXP_NEEDED[(thelevel)]);
+        resetLevelForExp(0);
 
         /* Adding death tax */
 

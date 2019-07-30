@@ -60,6 +60,7 @@
 #define QS query_subjective()
 
 #define ENV(A) environment(A)
+#define FP(A) find_player(A)    
 // because Garrett is silly and is a wabbit
 #define SPELL "/std/magic/spell"
 #define FEAT "/std/feat"
