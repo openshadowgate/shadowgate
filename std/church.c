@@ -206,11 +206,8 @@ int pray()
                 stuff[i]->set_not_inhand();
             if(stuff[i]->id("questob"))
                 stuff[i]->remove();
-            if((int)"/daemon/config_d.c"->check_config("death") == 1 && !newbiep(TP)) 
-            {
-                if((int)stuff[i]->query_property("enchantment")>0)
-                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
-            }
+            if((int)stuff[i]->query_property("enchantment")>0)
+                stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
         }
     }
     

@@ -165,7 +165,7 @@ void basicsky(string str)
     string borg;
     int night, tmp;
 
-    night = query_night();
+    night = query_night() || query_eclipse();
     
     switch(str) 
     {
