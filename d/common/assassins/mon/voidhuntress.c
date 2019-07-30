@@ -30,11 +30,16 @@ void create()
     set_property("full attacks",1);
     set_property("magic resistance",70);
     set_property("spell damage resistance",70);    
- set_monster_feats(({"dodge","evasion","knockdown","expertise", "mobility","powerattack","rush","combat reflexes", "dodge","evasion","scramble","spring attack"}));
+    set_monster_feats(({"dodge","evasion","knockdown","expertise", "mobility","powerattack","rush","combat reflexes", "dodge","evasion","scramble","spring attack"}));
     set_skill("stealth",50);
     set_skill("athletics",50);
     set_property("damage resistance",2); 
-    set_funcs(({"strike"}));
+    set_spells(({"horrid wilthing",
+                    "fear",
+                    "weird",}));
+    set_property("cast and attack",1);
+    set_spell_chance(100);
+    set_funcs(({"strike"}));    
     set_func_chance(30);
     set_scrambling(1);
     set_attacks_num(8);

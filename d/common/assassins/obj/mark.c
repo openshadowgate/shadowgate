@@ -20,7 +20,7 @@ void create()
 
 int set_timer(int x)
 {
-    tracker = x;
+    tracker = time()+x;
 }
 
 void heart_beat()
