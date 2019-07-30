@@ -10,9 +10,9 @@ create() {
    set_weight(2);
    set_size(2);
    set("value", 30);
-   set_wc(2,4);
-   set_large_wc(2,4);
-  set_type("thiefpiercing");
+   set_wc(1,6);
+   set_large_wc(1,6);
+  set_type("magebludgeon");
    set_two_handed();
    set_lr_prof_type("short bow");
    set_weapon_prof("simple");
@@ -23,7 +23,4 @@ create() {
    set_decay_rate(100);
    set_property("repairtype",({"woodwork"}));
    set_weapon_speed(3);
-   set_critical_threat_range(1);
-   set_critical_hit_multiplier(3);
-   set_damage_type("piercing");
 }

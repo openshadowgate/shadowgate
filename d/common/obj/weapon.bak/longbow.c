@@ -14,16 +14,13 @@ create() {
    set_lr_prof_type("long bow");
    set_weapon_prof("martial");
    set_two_handed();
-   set_wc(2,6);
-   set_large_wc(2,6);
-   set_type("thiefpiercing");
+   set_wc(1,8);
+   set_large_wc(1,8);
+   set_type("bludgeon");
    set_rate_of_fire(2);
    set_range(7,15,21);
    set_ammo("longbow arrow");
    set_decay_rate(100);
    set_property("repairtype",({"woodwork"}));
    set_weapon_speed(4);
-   set_critical_threat_range(1);
-   set_critical_hit_multiplier(3);
-   set_damage_type("piercing");
 }
