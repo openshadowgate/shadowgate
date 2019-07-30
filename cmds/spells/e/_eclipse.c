@@ -5,7 +5,7 @@ inherit SPELL;
 
 int benchmark,tally,bonus;
 
-#define DELAY 3600
+#define DELAY 10800
 
 void create() 
 {
@@ -19,6 +19,9 @@ void create()
 %^BOLD%^%^RED%^N.B.%^RESET%^ Using this spell might get your head commissioned to the assassins guild by farmers of the world.");
     set_helpful_spell(1);
     evil_spell(1);
+    set_components(([
+      "mage" : ([ "large diamond" : 13]),
+    ]));    
 }
 
 string query_cast_string()

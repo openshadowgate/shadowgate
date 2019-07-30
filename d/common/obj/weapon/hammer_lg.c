@@ -14,7 +14,7 @@ create() {
    set_weight(15);
    set_size(3);
    set("value", 10);
-   set_wc(2,5);
+   set_wc(2,6);
    set_large_wc(2,6);
    set_type("bludgeon");
    set_prof_type("hammer");
