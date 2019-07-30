@@ -28,7 +28,8 @@ void create() {
 }
 
 string query_cast_string() {
-    return "%^CYAN%^%^BOLD%^"+caster->QCN+" chants rapidly.";
+    tell_room(place,"%^CYAN%^As "+caster->QCN+" chants, "+caster->QP+" form shines in a bright blue light.%^RESET%^",caster);
+    return "display";
 }
 
 void spell_effect(int prof) {
