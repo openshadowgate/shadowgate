@@ -188,7 +188,7 @@ int pray()
             thelevel = 49;
         
         TP->set_general_exp(myclass,EXP_NEEDED[(thelevel)]);
-        resetLevelForExp(0);
+        TP->resetLevelForExp(0);
 
         /* Adding death tax */
 
