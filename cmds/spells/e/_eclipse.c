@@ -17,6 +17,7 @@ void create()
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ Using this spell might get your head commissioned to the assassins guild by farmers of the world.");
     set_helpful_spell(1);
+    evil_spell(1);
 }
 
 string query_cast_string()
