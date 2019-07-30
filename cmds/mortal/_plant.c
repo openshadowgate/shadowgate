@@ -172,12 +172,24 @@ int cmd_plant(string str) {
 }
 
 void help() {
-    message("help", "Syntax: <plant [item] on [being]>\n"
-            "Plant gives a thief the ability to stealthily plant an item on "
-            "another person. Sometimes the victim or others might notice, "
-            "or sometimes no one will notice at all.  It all depends "
-            "on your ability to steal, the lighting, and other factors.\n", 
-            this_player());
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+plant - plant something
+
+%^CYAN%^SYNTAX%^RESET%^
+
+plant %^ORANGE%^%^ULINE%^ITEM%^RESET%^ on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Plant gives a thief the ability to stealthily plant an item on another person. Sometimes the victim or others might notice, or sometimes no one will notice at all. It all depends on your ability to steal, the lighting, and other factors.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+stealth, give, spy, steal, pp, pkilling
+");
 }
 void check_caught(int roll, object target, object ob, int sLevel){
     int test;

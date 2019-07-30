@@ -25,15 +25,25 @@ int cmd_show(string str){
 	return 1;
 }
 
-int help(){
+void help(){
 	write(
-@HELP
-This will allow you to show an item from your inventory 
-to someone else without handing it to them.
+"
+%^CYAN%^NAME%^RESET%^
 
-Syntax: show <item> to <person>
+show - show something to someone
 
-HELP
+%^CYAN%^SYNTAX%^RESET%^
+
+show %^ORANGE%^%^ULINE%^ITEM%^RESET%^ to %^ORANGE%^%^ULINE%^PERSON%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+With this command you can show an %^ORANGE%^%^ULINE%^ITEM%^RESET%^ to %^ORANGE%^%^ULINE%^PERSON%^RESET%^.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+look, glance, inventory
+"        
 	);
-	return 1;
+
 }

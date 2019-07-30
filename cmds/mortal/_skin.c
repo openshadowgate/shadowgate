@@ -11,20 +11,21 @@ int do_live(object corpse);
 int help(){
     write(
 @OLI
-    skin <object>
-    This will skin a corpse. The skinning process will be based on your
-    skill in survival. The larger the corpse and the more difficult the 
-    creature the harder the skinning. As skill increases, the time to
-    skin will decrease, and you will get better quality results.
+%^CYAN%^NAME%^RESET%^
 
-%^BOLD%^%^RED%^Please note.  Just because the code may allow you to skin monsters, think
-about if you should be able to.  Incorporal creatures such as ghosts,
-shadows, and shades, do not posses skins.  Inanimate objects, such as
-golems and floating crystals, lack skins as well. 
+skin - gather biomass
 
-%^BOLD%^%^RED%^We ask that you to think about this in your role-playing, rather than
-forcing us to code it in.
-%^RESET%^
+%^CYAN%^SYNTAX%^RESET%^
+
+skin CORPSE
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+With this command you skin a CORPSE. The skinning process will be based on your skill in survival. The larger the corpse and the more difficult the creature the harder the skinning. As skill increases, the time to skin will decrease, and you will get better quality results.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+hunt, kill, craft
 OLI
     );
     return 1;

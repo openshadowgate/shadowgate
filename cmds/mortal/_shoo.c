@@ -38,13 +38,21 @@ int help(){
 
    write(
 @OLI
-   Shoo
-   
-   Usage: shoo <mount>
+%^CYAN%^NAME%^RESET%^
 
-   This will chase away any mount you may have near you, to prevent them getting into a dangerous situation. It will not work in places where they have nowhere to go, such as enclosed surroundings or magically warded areas.
+shoo - shoo a thing
 
-See also:  whistle, horses
+%^CYAN%^SYNTAX%^RESET%^
+
+shoo MOUNT
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This will chase away any mount you may have near you, to prevent them getting into a dangerous situation. It will not work in places where they have nowhere to go, such as enclosed surroundings or magically warded areas.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+whistle, horses
 OLI
       );
    return 1;

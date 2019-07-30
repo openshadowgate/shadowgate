@@ -44,14 +44,23 @@ int list_ignored(string *str){
 }
 
 void help(){
-    message("help",
-      "Syntax: ignore :  Lists who you are currently ignoring.\n"
-      "        ignore clear  : clears your ignore list and lets anyone send\n"
-      "                      you a tell.\n"
-      "        ignore <name> : Makes it so that <name> can't send you a tell,\n"
-      "                        or reply to you.\n"
-      "Allows you to ignore specific players.  For those of you that may want to ignore "
-      "tells from a wiz, it wont work.\n\n"
-      "See also: unignore, tellblock", this_player()
-    );
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+ignore - ignore someone
+
+%^CYAN%^SYNTAX%^RESET%^
+
+ignore [%^ORANGE%^%^ULINE%^TARGET%^RESET%^|clear]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Allows you to ignore specific players. Without an argument it will display list of currently ignored.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+tellblock, tell, reply, telepathy, line use, rules
+");
+
 }

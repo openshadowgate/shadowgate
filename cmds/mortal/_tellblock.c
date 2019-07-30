@@ -18,6 +18,22 @@ int cmd_tellblock() {
 }
 
 void help() {
-    write("Syntax: <tellblock>\n\n"+
-        "Toggles the blocking of tells on and off.");
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+tellblock - block incoming tells
+
+%^CYAN%^SYNTAX%^RESET%^
+
+tellblock on|off
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command will toggle blocking of all tells.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+tell, ignore, line use
+");
 }

@@ -41,11 +41,23 @@ int cmd_wake(string str){
 
 int help(){
     write(
-@OLI
-    wake <person>
-    
-    This will wake people who are asleep.
-OLI
+"
+%^CYAN%^NAME%^RESET%^
+
+wake - wake someone up
+
+%^CYAN%^SYNTAX%^RESET%^
+
+wake %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command mages the %^ORANGE%^%^ULINE%^TARGET%^RESET%^ less asleep.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+sleep, souls, cast
+"        
     );
     return 1;
 }

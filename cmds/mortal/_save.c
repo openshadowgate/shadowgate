@@ -41,13 +41,21 @@ cmd_save(string str)
     return 1;
 }
 
-int
-help() {
-   message("help", "Command: save\nSyntax: save\n\nThis command saves the"
-           " present status of your character to disk.  This is important as"
-           " it is this file that will be used to set your character back "
-           "up if the mud should crash.  Your character is automatically "
-           "saved if you quit.", this_player());
-  return 1;
+void help() {
+    write(
+        "
+%^CYAN%^NAME%^RESET%^
+
+save - save yourself
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command saves the present status of your character to disk. This is important as it is this file that will be used to set your character back up if the mud should crash. Your character is automatically saved if you %^ORANGE%^<quit>%^RESET%^.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+inventory, score
+"
+        );
 }
-/* EOF */
+

@@ -166,9 +166,25 @@ int cmd_pp(string str) {
 }
 
 void help() {
-    write("Syntax: <pp [living]>\n\n"+
-	      "Picks the pocket of the living being named as a target.\n");
-    }
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+pp - pickpocket someone
+
+%^CYAN%^SYNTAX%^RESET%^
+
+pp %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command will attempt to steal some money from %^ORANGE%^%^ULINE%^TARGET%^RESET%^. If %^ORANGE%^%^ULINE%^TARGET%^RESET%^ discovers you attempt, they will be upset at you.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+stealth, steal, spy, look, glance, pkilling, flee
+");
+}
 
 void check_caught(int roll, object target, int sLevel){
 	int test;

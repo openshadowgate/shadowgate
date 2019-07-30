@@ -28,9 +28,21 @@ int cmd_watch(string str){
 	return 1;
 }
 
-int help() {
-    tell_object(TP,"Syntax: <watch>\n\n"
-        "    This command is used to watch your back.  It gives a temporary, minor boost to perception against being stabbed.%^RESET%^");
+void help() {
+    write(
+"
+%^CYAN%^NAME%^RESET%^
 
-    return 1;
+watch - watch your back
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+While watching your back you get bonus in intercepting thief stabs.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+stab, thief, perception
+"
+        );
+
 }

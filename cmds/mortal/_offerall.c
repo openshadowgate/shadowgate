@@ -52,10 +52,19 @@ cmd_offerall() {
 }
 
 int help() {
-   write("Syntax:  %^BOLD%^%^GREEN%^offerall%^RESET%^\n"+
-      "%^BOLD%^This command will offer everything that's on the ground"+
-      " in front of you. It is an OOC tool to keep the mud lag down and is not"+
-      " to be used as RP tool to get rid of another player's equipment. Such"+
-       " use is illegal (specifically stated in rule 2D).\n");
+   write(
+"
+%^CYAN%^NAME%^RESET%^
+
+offerall - clean the room
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command will offer everything that's on the ground in front of you.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+offer, pkilling, get, drop
+");
    return 1;
 }

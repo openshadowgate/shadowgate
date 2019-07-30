@@ -126,34 +126,30 @@ int cmd_ki(string str)
 
 int help(){
    write(
-@SAIDE
-Syntax:   ki
-          ki focus <elemental type> (For way of the elements monks)
+"
+%^CYAN%^NAME%^RESET%^
 
-This command display your dedication if you have chosen one, your spells if 
-your dedication grants any for your current level (and the ki cost per 
-casting), your available, and maximum ki, and how long it will be until 
-you passively regenerate more ki. 
+ki - monks spells
 
-Please note that ki is not available to you until you reach at least
-level 2 in the monk class. 
-SAIDE
-);
+%^CYAN%^SYNTAX%^RESET%^
 
-write(
-@SAIDE
-You may visit your diety's temple to pick the dedication that you would
-like, however, you must be at least level 3 in order to do so. 
+ki
+ki focus %^ORANGE%^%^ULINE%^ELEMENT%^RESET%^
 
-ki focus <elemental type> will allow a monk dedicated to the way of
-the elements to pick an elemental type to focus on for now. This 
-dictates the type of damage that flurry of blows will be, as well 
-as the type of guardians that may show up with the
-elemental opportunist feat. It does not change spell damage
-types. The default is fire. Valid options are fire, cold,
-electricity, and acid.
+%^CYAN%^DESCRIPTION%^RESET%^
 
-See also: help monk, way of the fist, way of the shadow way of the elements, prompt, hp. 
-SAIDE
+This command display your dedication if you have chosen one, your spells if your dedication grants any for your current level (and the ki cost per casting), your available, and maximum ki, and how long it will be until you passively regenerate more ki. 
+
+Ki is not available to you until you reach at least level 2 in the monk class. 
+
+You may visit your diety's temple to pick the dedication that you wouldplike, however, you must be at least level 3 in order to do so. 
+
+%^ORANGE%^<ki focus %^ORANGE%^%^ULINE%^ELEMENT%^RESET%^%^ORANGE%^>%^RESET%^ will allow a monk dedicated to the way of the elements to pick an elemental type to focus on for now. This dictates the type of damage that flurry of blows will be, as well as the type of guardians that may show up with the elemental opportunist feat. It does not change spell damage types. The default is fire. Valid options are fire, cold, electricity, and acid.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+monk, way of the fist, way of the elements, way of the shadow, prompt, hp
+"
    );
+   return 1;
 }
