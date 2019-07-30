@@ -22,6 +22,7 @@ int cmd_help(string str) {
 	  }
       }
     else topic = str;
+    topic = lower_case(topic);
     HELP_D->help(topic, category);
     return 1;
   }
