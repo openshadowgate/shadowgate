@@ -11,8 +11,8 @@ create() {
    set_weight(7);
    set_size(3);
    set_value(80);
-   set_wc(1,10);
-   set_large_wc(1,10);
+   set_wc(2,6); //putting this higher than TT values since we lack the tech to make it useable with weapon finesse.  Also 2h sword was strictly better by the numbers - Odin
+   set_large_wc(2,6); //see above
    set_type("thiefslashing");
    set_weapon_speed(10);
    set_weapon_prof("exotic");
