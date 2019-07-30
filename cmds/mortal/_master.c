@@ -204,9 +204,8 @@ int sorcerer_master(string str)
        return 1;
      }
 
-// swapping sorc spells (same level unless spell knowledge is taken)
      if(sscanf(str,"swap %s for %s",first, second) == 2) {
-       i = (int)TP->query("last_swapped_spells") + 36000; //require either 12hrs, or to have hit an even level, to swap a spell.
+       i = (int)TP->query("last_swapped_spells") + 36000; 
        if(!TP->query("can_swap_spells") && (i > time())) {
          tell_object(TP,"You cannot swap known spells so often! You can only do so after reaching an even level, or after a considerable wait from your last exchange.");
          return 1;

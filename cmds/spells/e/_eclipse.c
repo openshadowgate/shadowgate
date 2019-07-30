@@ -5,6 +5,7 @@ inherit SPELL;
 
 int benchmark,tally,bonus;
 
+#define DELAY 3600
 
 void create() 
 {
@@ -32,6 +33,11 @@ int preSpell()
         tell_object(caster, "%^BOLD%^%^BLACK%^Cover what sun? You're inside!%^RESET%^");
         return 0;
     }
+    if((int)caster->query_property("eclipse_caused") + DELAY > time())
+    {
+        tell_object(caster, "%^BOLD%^%^BLACK%^Cover what sun? It is already dark!%^RESET%^");
+        return 0;
+    }
     if((int)ASTRONOMY_D->query_eclipse())
     {
         tell_object(caster, "%^BOLD%^%^BLACK%^There is already ongoing %^WHITE%^eclipse%^BLACK%^!%^RESET%^");
@@ -47,6 +53,7 @@ int preSpell()
 
 void spell_effect(int prof) 
 {
+    caster->set_property("eclipse_caused",time());
     tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and your hands into the sky, you notice Tyrannos stards to move to stand in front of the sun!%^RESET%^");
     tell_room(place,"%^BOLD%^%^WHITE%^As "+caster->QCN+"'s chanting grows louder, up in the sky you see Tyrannos moving!",caster);
     call_out("step_two",ROUND_LENGTH);
