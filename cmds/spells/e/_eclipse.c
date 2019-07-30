@@ -56,9 +56,12 @@ int preSpell()
 
 void spell_effect(int prof) 
 {
-    object mark;
-    mark = new("/d/common/assassins/obj/mark");
-    mark->move(caster);
+    if(!random(3))
+    {
+        object mark;
+        mark = new("/d/common/assassins/obj/mark");
+        mark->move(caster);
+    }
     caster->set_property("eclipse_caused",time());
     tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and your hands into the sky, you notice Tyrannos stards to move to stand in front of the sun!%^RESET%^");
     tell_room(place,"%^BOLD%^%^WHITE%^As "+caster->QCN+"'s chanting grows louder, up in the sky you see Tyrannos moving!",caster);
