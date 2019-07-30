@@ -166,7 +166,8 @@ int pray()
     TP->delete("RaisingType");
 
     /* Punishment for non-newbies. */
-    if(!newbiep(TP)&&((int)TP->query_character_level()>6))
+    if(!newbiep(TP) &&
+       ((int)TP->query_character_level()>6))
     {
         object *stuff;
         int exploss, exp, thelevel;
