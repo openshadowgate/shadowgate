@@ -13,8 +13,8 @@ void create() {
    set_weight(4);
    set_size(1);
    set_value(15);
-   set_wc(1,4);
-   set_large_wc(1,4);
+   set_wc(1,6); //waveblade from pathfinder equivalent
+   set_large_wc(1,6);
    set_type("thiefpiercing");
    set_damage_type("piercing");
    set_prof_type("whip");

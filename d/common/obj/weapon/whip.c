@@ -13,14 +13,14 @@ void create() {
    set_weight(4);
    set_size(1);
    set_value(15);
-   set_wc(1,4);
-   set_large_wc(1,4);
+   set_wc(1,6); //waveeblade euivalent from pathfinder
+   set_large_wc(1,6);
    set_type("thiefpiercing");
    set_damage_type("piercing");
    set_prof_type("whip");
    set_weapon_speed(8);
    set_weapon_prof("exotic");
-   set_critical_threat_range(2);
+   set_critical_threat_range(3);
    set_critical_hit_multiplier(2);
    set_property("repairtype",({"leatherwork"}));
 }

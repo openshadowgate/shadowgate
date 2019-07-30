@@ -18,9 +18,9 @@ void create() {
     set_weapon_prof("exotic");
    	set_weight(3);
    	set_size(1);
-    set_wc(1,5);
+    set_wc(1,6); //basically making this the waveblade from pathfinder - Odin
     set_weapon_speed(3);
-    set_large_wc(1,5);
+    set_large_wc(1,6);
    	set_value(25);
    set_critical_threat_range(3);
    set_critical_hit_multiplier(2);

@@ -1,31 +1,26 @@
-// updating damage and size to be closer to 3rd ed per discussions with Cythera & Circe *Styx* 8/2/05
-//removed mention of Loviatar ~Circe~ 4/27/11
-
 inherit "/std/weapon";
 
-create() {
+void create() {
     ::create();
-   set_id(({ "scourge", "whip", "scourge whip" }));
-   set_name("scourge");
-   set_short("A scourge whip");
-   set_long(
-	"Nine long leather lashes have been affixed to a"+
-        " wooden base.  Braided into the leather lashes of"+
-        " this scourage are sharp iron barbs, made to slice"+
-        " and pierce the flesh.  Each lash is held in place"+
-        " with a round metal stud, which has been hammered "+
-        "deep into the dark wooden base." );
-   set_weight(2);
-   set_size(2);   // was size 1
+   set_id(({"whip","whip dagger","lash"}));
+   set_name("whip dagger");
+   set_short("A whip dagger");
+   set_long("Interwoven strips of leather and steel have been braided together to "+
+   "create this flexible whip.  The handle of the whip is crafted from leather, "+
+   "creating a comfortable grip.  Unlike a normal whip, this lash ends "+
+   "in a dagger several inches long, adding a deadly touch to this "+
+   "weapon and making it obvious that it is useful only for combat.");
+   set_weight(4);
+   set_size(1);
+   set_value(15);
+   set_wc(1,6); //counting this as the waveblade from pathfinder - Odin
+   set_large_wc(1,6);
+   set_type("thiefpiercing");
+   set_damage_type("piercing");
    set_prof_type("whip");
-   set_value(10);
-   set_wc(2,3);  // was 1,4
-   set_large_wc(2,3);  // was 1,2
-   set_type("lash");
-   set_weapon_speed(5);
+   set_weapon_speed(8);
    set_weapon_prof("exotic");
-   set_critical_threat_range(1);
+   set_critical_threat_range(3);
    set_critical_hit_multiplier(2);
    set_property("repairtype",({"leatherwork"}));
-   set_damage_type("piercing");
 }
