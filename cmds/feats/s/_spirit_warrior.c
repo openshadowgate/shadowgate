@@ -11,7 +11,7 @@ void create()
     feat_name("spirit warrior");
     feat_prereq("Raging Prophet L4");
     feat_syntax("spirit_warrior");
-    feat_desc("A raging rage prophet can enter the realm of spirits, gaining partial immunity to corporeal damage. In addition, he can enter into the rage more freequently.");
+    feat_desc("In his frenzy raging prophet gains ability to partially enter the spirit realm, negating some of received corporeal damage and calming rage's taxing effects on his body.");
     permanent(1);
 }
 
