@@ -1,4 +1,4 @@
-
+//fixed name based on bug report ~Circe~ 7/31/19
 #include <std.h>
 
 #define WTROB "/d/magic/obj/vacuum_breathob.c"
@@ -8,7 +8,7 @@ object breathob;
 
 void create(){
     ::create();
-    set_spell_name("water breathing");
+    set_spell_name("vacuum breathing");
     set_spell_level(([ "mage" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS vacuum breathing on TARGET");
