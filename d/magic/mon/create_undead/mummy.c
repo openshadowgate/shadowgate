@@ -50,20 +50,19 @@ void despair()
     object *foes, foe;
     foes = TO->query_attackers();
     if(sizeof(foes))
-    {
-        foreach(foe in foes)
-        {
-            if(!objectp(foe))
-                continue;
-
-            if(!SAVING_D->saving_throw(foe,"will"))
+        if(!random(3))
+            foreach(foe in foes)
             {
-                tell_object(foe,"%^ORANGE%^You cover in %^WHITE%^f%^BOLD%^%^WHITE%^ea%^RESET%^%^WHITE%^r%^ORANGE%^ before the mummy!");
-                tell_room(ENV(TO),"%^ORANGE%^"+foe->QCN+"%^ORANGE%^ covers in %^BOLD%^%^WHITE%^fear%^RESET%^%^ORANGE%^ before the mummy!");
-                foe->set_paralyzed(roll_dice(1,2),"%^ORANGE%^You're still %^BOLD%^%^WHITE%^shakin%^RESET%^%^WHITE%^g%^ORANGE%^ with fear!");
+                if(!objectp(foe))
+                    continue;
+
+                if(!SAVING_D->saving_throw(foe,"will"))
+                {
+                    tell_object(foe,"%^ORANGE%^You cover in %^WHITE%^f%^BOLD%^%^WHITE%^ea%^RESET%^%^WHITE%^r%^ORANGE%^ before the mummy!");
+                    tell_room(ENV(TO),"%^ORANGE%^"+foe->QCN+"%^ORANGE%^ covers in %^BOLD%^%^WHITE%^fear%^RESET%^%^ORANGE%^ before the mummy!");
+                    foe->set_paralyzed(roll_dice(1,2),"%^ORANGE%^You're still %^BOLD%^%^WHITE%^shakin%^RESET%^%^WHITE%^g%^ORANGE%^ with fear!");
+                }
             }
-        }
-    }
 }
 
 

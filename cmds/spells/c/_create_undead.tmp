@@ -1,0 +1,76 @@
+#include <std.h>
+#include <spell.h>
+#include <magic.h>
+#include <rooms.h>
+inherit SPELL;
+int num_mon;
+
+void fail();
+
+#DEFINE UNDEAD ({"ghoul","ghast","mummy","mohrg"});
+
+void create() {
+    ::create();
+    set_spell_name("create undead");
+    set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
+    set_spell_sphere("necromancy");
+    set_syntax("cast CLASS create undead [on ghoul|ghast|mummy|mohrg]");
+    set_description("Bla bla bla
+
+To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
+To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
+To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
+    evil_spell(1);
+    set_components(([
+      "mage" : ([ "drop of blood" : 1, ]),
+    ]));
+    set_helpful_spell(1);
+}
+
+void spell_effect(int prof) 
+{
+    object controller, undead;
+    int lvl;
+
+    //Parse args here
+
+    //Check if undead pool is full and die if so
+    //dest_effect();
+
+    //Controller stuff
+    if(present("undead_controller",caster))
+    {
+        controller = present("undead_controller",caster);
+    }
+    else
+    {
+        controller = new("/d/magic/obj/undead_controller");
+        controller->set_caster(caster);
+        controller->move(caster);
+    }
+
+    //spawn mob here
+    
+    //add controller
+    controller->add_monster(undead);
+
+    lvl = undead->query_level();
+    caster->set_property("raised", lvl);
+
+    dest_effect();
+    spell_successful();
+    return;
+}
+
+void dest_effect()
+{
+    if(objectp(TO)) TO->remove();;
+}
+
+string query_cast_string() {
+    return "%^BOLD%^%^BLUE%^"+caster->QCN+" steps "+
+    "into the shadows, then mixes something in his hands while "+
+    "chanting in a deep, dark tone.";
+}
+
