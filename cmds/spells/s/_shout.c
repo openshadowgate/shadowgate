@@ -15,9 +15,7 @@ create() {
     set_spell_level(([ "mage" : 4, "bard" : 4 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shout on TARGET");
-    set_description("This spell allows for the mage to magically enchant and enhance her voice, to deliver a strong sonic "
-"attack against one target.  The amplified voice can knock some targets off balance for a moment, forcing them to spend "
-"some time for the ringing in their ears to pass.");
+    set_description("This spell allows for the mage to magically enchant and enhance their voice to deliver a strong sonic attack against one target.  The amplified voice can knock some targets off balance for a moment, forcing them to spend some time for the ringing in their ears to pass.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -56,7 +54,7 @@ spell_effect(int prof) {
         tell_object(target,"%^MAGENTA%^%^BOLD%^"+caster->QCN+"'s voice"+
 		" is magically amplified as "+caster->QS+" shouts at you!"+
 		"\n%^CYAN%^The force of the sonic attack sends your ears "+
-		"ringing for a moment, leving you disoriented.");
+		"ringing for a moment, leaving you disoriented.");
         tell_room(place,"%^MAGENTA%^%^BOLD%^"+caster->QCN+"'s voice is "+
 		"magically amplified as "+caster->QS+" shouts at "+
             ""+target->QCN+"!", target);
