@@ -170,7 +170,7 @@ int pray()
        ((int)TP->query_character_level()>6))
     {
         object *stuff;
-        int exploss, exp, thelevel;
+        int exploss, expdelta, exp, thelevel;
         int i;
         string myclass;
 
@@ -184,10 +184,12 @@ int pray()
         
         classes = TP->query_classes();
 
-        if(thelevel == 50)
-            thelevel = 49;
+        exp = (int)TP->query_exp();
+        expdelta = abs(EXP_NEEDED[thelevel+1]-EXP_NEEDED[thelevel]);
+        exploss = expdelta * (int)TP->query_character_level()/41;
+        log_file("exploss", TPQN+" lost "+exploss+" in resurrection at a church.\n");
         
-        TP->set_general_exp(myclass,EXP_NEEDED[(thelevel)]);
+        TP->set_general_exp(myclass,exp - exploss);
         TP->resetLevelForExp(0);
 
         /* Adding death tax */
