@@ -177,6 +177,8 @@ int confirm_drop(string str,string theclass,int drop,int cost)
     TP->force_me("fixspells");
     TP->set("hp_array",0);
     TP->make_new_hitpoint_rolls(TP);
+//Below should clear spells given by Shadowdancer prestige class ~Circe~ 7/30/19
+    TP->InitInnate();
     tell_object(TP,"%^YELLOW%^Finished... You dropped %^BLUE%^"+drop+" %^YELLOW%^levels from "
         "your %^BLUE%^"+theclass+"%^YELLOW%^ class and were charged %^BLUE%^"+cost+" %^YELLOW%^experience "
         "points.  Your hitpoints will be rerolled when you log back in.  "

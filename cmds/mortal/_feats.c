@@ -457,7 +457,6 @@ int confirm_add(string str,object ob,string feat,string extradata) {
             log_file("added_feats",""+ob->QCN+" added "+feat+" on "+ctime(time())+" for a character improvement tax of "+price+".\n");
         }
     }
-    
     tell_object(ob,"%^YELLOW%^Congratulations, you have successfully added "
         "the feat %^BLUE%^"+feat+"%^YELLOW%^!%^RESET%^");
     free = 0;

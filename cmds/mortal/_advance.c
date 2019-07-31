@@ -105,6 +105,8 @@ int do_multiclass(object ob,string myclass) {
     ob->set_class(myclass);
     ob->set("lvl_"+level+"_class",myclass);
     ob->set("active_class",myclass);
+//InitInnate() is necessary for Shadowdancers and maybe others ~Circe~ 7/30/19
+    ob->InitInnate();
     ob->init_spellcaster();
     ob->remove_property("multiclassing");
 }
@@ -750,6 +752,8 @@ int cmd_advance(string myclass)
                     add_class_feats(TP,myclass);
                     FEATS_D->update_usable(TP);
                     initiate_psychic_powers(TP);
+                    TP->InitInnate();
+
 	                TP->use_funds("gold",train);                    
                     if(!TP->query("test_character") && ((string)TP->query("advance place") != "/d/newbie/ooc/trainer"))
                     {                        
@@ -797,6 +801,7 @@ int cmd_advance(string myclass)
                     add_class_feats(TP,myclass);
                     FEATS_D->update_usable(TP);
                     initiate_psychic_powers(TP);
+                    TP->InitInnate();
 	                TP->use_funds("gold",train);
                     if (was_newbie != newbiep(TP)) 
                     {
@@ -833,6 +838,7 @@ int cmd_advance(string myclass)
                 add_class_feats(TP,myclass);
                 FEATS_D->update_usable(TP);
                 initiate_psychic_powers(TP);
+                TP->InitInnate();
 	            TP->use_funds("gold",train);
                 if (was_newbie != newbiep(TP)) 
                 {
