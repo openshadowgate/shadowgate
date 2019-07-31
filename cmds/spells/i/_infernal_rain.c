@@ -24,6 +24,7 @@ void create(){
     set_save("reflex");
     aoe_spell(1);
     set_aoe_message("%^BOLD%^%^BLACK%^(%^RESET%^%^RED%^aglow %^BOLD%^%^BLACK%^with %^BOLD%^%^RED%^hellfire%^BOLD%^%^BLACK%^)%^RESET%^");
+    set_feats_required(([ "warlock" : "infernal practitioner"]));
 }
 
 string query_cast_string(){ 

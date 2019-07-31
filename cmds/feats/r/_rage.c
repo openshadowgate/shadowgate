@@ -155,10 +155,7 @@ void rage_me()
             caster->add_saving_bonus("will",3);
             caster->add_ac_bonus(-4);
         }      
-        //caster->add_attack_bonus(12);
-        //caster->add_damage_bonus(12);
         caster->use_stamina(roll_dice(1,6));
-      //Borrowing below from Ring of Regeneration /d/shadow/room/beastvillage/rings/regeneration.c - Octothorpe 1/31/16
       if(pointerp(caster->query_temporary_feats()))
       {
         if(member_array("regeneration",(string*)caster->query_temporary_feats()) == -1)
@@ -212,7 +209,21 @@ void rage_me()
             caster->add_ac_bonus(-4);
         }
    }
+   
    cooldown = duration/2;
+
+   if(FEATS_D->usable_feat(caster,"spirit warrior"))
+   {
+       cooldown/=3;
+       if(myFlag == 1)
+       {
+           caster->set_missChance(caster->query_missChance()+ 33);
+       }
+       else 
+       {
+           caster->set_missChance(caster->query_missChance()-33);
+       }      
+   }
    if(caster->query_property("using rage"))
    {
       caster->remove_property("using rage");
@@ -346,7 +357,13 @@ void dest_effect()
                 caster->add_ac_bonus(4);
                 caster->use_stamina(35);
                 break;                        
-        }      
+        }
+
+        if(FEATS_D->usable_feat(caster,"spirit warrior"))
+        {
+            caster->set_missChance(caster->query_missChance()-33);
+        }
+
         basemax = caster->query_max_hp();
         deltahp = newmax - basemax;
         caster->add_extra_hp(-1*deltahp);

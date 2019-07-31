@@ -15,6 +15,7 @@ void create(){
     set_property("magic",1);
     set_casting_time(1);
     set_helpful_spell(1);
+    set_feats_required(([ "warlock" : "infernal practitioner"]));    
 }
 
 string query_cast_string(){
