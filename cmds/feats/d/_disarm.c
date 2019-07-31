@@ -5,7 +5,7 @@ inherit FEAT;
 
 int fired;
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 30; 
 
 void create() {
     ::create();
