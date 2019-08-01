@@ -9,7 +9,7 @@ void create()
 	::create();
 	set_name("mummy");
 	set_id(({"mummy","undead","monster"}));
-	set_short("%^ORANGE%^A %^WHITE%^m%^WHITE%^u%^BOLD%^%^WHITE%^mmy%^RESET%^");
+	set_short("%^RESET%^%^ORANGE%^A disgusting %^BOLD%^%^BLACK%^w%^RESET%^%^ORANGE%^i%^ORANGE%^t%^BOLD%^%^BLACK%^h%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^red%^RESET%^%^ORANGE%^ mummy");
 	set_long(
 	"%^ORANGE%^This is a very terrifying looking mummy. The %^WHITE%^w%^WHITE%^r%^BOLD%^%^WHITE%^appin%^RESET%^%^WHITE%^g%^BOLD%^%^WHITE%^s%^RESET%^%^ORANGE%^ that cover its flesh are %^WHITE%^o%^WHITE%^l%^BOLD%^%^WHITE%^d%^RESET%^%^ORANGE%^ and %^BOLD%^%^WHITE%^wo%^RESET%^%^WHITE%^r%^WHITE%^n%^BOLD%^%^WHITE%^.%^RESET%^%^ORANGE%^ They are yellowing with age and are quite tattered. Despite the centuries of death and decay, this mummy still appears to be quite string. The eyes glow an %^BOLD%^%^RED%^an%^RESET%^%^RED%^g%^BOLD%^%^RED%^ry %^RED%^r%^RESET%^%^RED%^e%^BOLD%^%^RED%^d%^RESET%^%^ORANGE%^ and its %^BOLD%^%^WHITE%^t%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^e%^RESET%^%^WHITE%^t%^BOLD%^%^WHITE%^h%^RESET%^%^ORANGE%^ have been %^BOLD%^%^WHITE%^sh%^RESET%^%^WHITE%^a%^WHITE%^r%^BOLD%^%^WHITE%^pen%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^d%^RESET%^%^ORANGE%^ horribly. Its fingers are more like claws and standing near it you get a slight chill. The smell it gives off is incredibly disgusting."
 	);
@@ -42,8 +42,6 @@ void create()
 	set_attacks_num(4);
 	set_nat_weapon_type("thiefslashing");
 	set_damage(1,12);
-    set_funcs(({
-                ""
     set_resistance("negative energy",60);
     set_resistance("positive energy",-60);
 }
