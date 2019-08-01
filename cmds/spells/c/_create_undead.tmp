@@ -7,7 +7,8 @@ int num_mon;
 
 void fail();
 
-#DEFINE UNDEAD ({"ghoul","ghast","mummy","mohrg"});
+#DEFINE UNDEAD ({"ghoul","ghast","mummy","mohrg"})
+#DEFINE UNDEADDIR "/d/magic/mon/create_undead/"
 
 void create() {
     ::create();
@@ -30,15 +31,38 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
 
 void spell_effect(int prof) 
 {
-    object controller, undead;
+    object controller, undead, corpse, *inven=({});
     int lvl;
 
     //Parse args here
+    if(member_array(arg,UNDEAD)==-1)
+        arg = UNDEAD[random(sizeof(UNDEAD))];
 
-    //Check if undead pool is full and die if so
-    //dest_effect();
+    if((int)caster->query_property("raised")>cleverly)
+    {
+        tell_object(caster,"%^BOLD%^%^BLACK%^PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE%^RESET%^");
+        TO->remove();
+        return;
+    }
+    
+    inven=all_inventory(place);
+    filter_array(inven,(:$1->is_corpse():));
+    if(!sizeof(inven))
+    {
+        tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUCK OUT FIRST%^RESET%^%^RESET%^");
+        TO->remove();
+        return;            
 
-    //Controller stuff
+    }
+
+    undead=new(UNDEADDIR+arg);
+    if(!(undead))
+    {
+        tell_object(caster,"Something went wrong.");
+        TO->remove();
+        return;            
+    }
+    
     if(present("undead_controller",caster))
     {
         controller = present("undead_controller",caster);
@@ -49,8 +73,7 @@ void spell_effect(int prof)
         controller->set_caster(caster);
         controller->move(caster);
     }
-
-    //spawn mob here
+    
     
     //add controller
     controller->add_monster(undead);
