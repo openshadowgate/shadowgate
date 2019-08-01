@@ -7,8 +7,8 @@ int num_mon;
 
 void fail();
 
-#DEFINE UNDEAD ({"ghoul","ghast","mummy","mohrg"})
-#DEFINE UNDEADDIR "/d/magic/mon/create_undead/"
+#define UNDEAD ({"ghoul","ghast","mummy","mohrg"})
+#define UNDEADDIR "/d/magic/mon/create_undead/"
 
 void create() {
     ::create();
@@ -16,7 +16,7 @@ void create() {
     set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create undead [on ghoul|ghast|mummy|mohrg]");
-    set_description("Bla bla bla
+    set_description("Raising dead is pathetic art for the weak. A true necromancer's art is to change what was into something else, more potent and powerful, to serve his fell desires and scheming. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as soul used to fuel new shell is twisted and changed forever.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -27,6 +27,7 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
       "mage" : ([ "drop of blood" : 1, ]),
     ]));
     set_helpful_spell(1);
+    set_arg_needed();
 }
 
 void spell_effect(int prof) 
@@ -37,7 +38,7 @@ void spell_effect(int prof)
     if(member_array(arg,UNDEAD)==-1)
         arg = UNDEAD[random(sizeof(UNDEAD))];
 
-    if((int)caster->query_property("raised")>cleverly)
+    if((int)caster->query_property("raised")>clevel)
     {
         tell_object(caster,"%^BOLD%^%^BLACK%^PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE%^RESET%^");
         TO->remove();
@@ -51,7 +52,6 @@ void spell_effect(int prof)
         tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUCK OUT FIRST%^RESET%^%^RESET%^");
         TO->remove();
         return;            
-
     }
 
     undead=new(UNDEADDIR+arg);
@@ -61,6 +61,10 @@ void spell_effect(int prof)
         TO->remove();
         return;            
     }
+    inven[0]->remove();
+
+    tell_room(place,"%^BOLD%^%^GREEN%^The corpse %^GREEN%^t%^BLACK%^w%^GREEN%^i%^BLACK%^sts%^GREEN%^ and %^BLACK%^c%^GREEN%^h%^BLACK%^an%^GREEN%^g%^BLACK%^e%^GREEN%^s%^GREEN%^ under %^GREEN%^t%^GREEN%^h%^BLACK%^e %^BLACK%^f%^GREEN%^e%^BLACK%^ll %^BLACK%^ma%^GREEN%^g%^BLACK%^i%^GREEN%^c%^BLACK%^,%^GREEN%^ and then finally %^BLACK%^o%^GREEN%^b%^BLACK%^edien%^GREEN%^t%^BLACK%^l%^GREEN%^y%^GREEN%^ stands as a %^BLACK%^"+arg+"%^RESET%^",caster);
+    tell_object(caster,"%^BOLD%^%^BLACK%^THE %^WHITE%^"+capitalize(arg)+"%^BLACK%^ RAISES%^RESET%^");    
     
     if(present("undead_controller",caster))
     {
@@ -72,7 +76,7 @@ void spell_effect(int prof)
         controller->set_caster(caster);
         controller->move(caster);
     }
-    
+
     undead->set_property("raised",lvl);
     undead->set_property("minion",caster);
     undead->move(environment(caster));
@@ -87,7 +91,7 @@ void spell_effect(int prof)
     caster->add_follower(undead);
     controller->add_monster(undead);
 
-    lvl = undead->query_level();
+    lvl = undead->query_level()/2;
     caster->set_property("raised", lvl);
 
     dest_effect();

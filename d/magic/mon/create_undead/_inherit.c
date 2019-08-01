@@ -21,7 +21,7 @@ void protect()
 {
     object *foes, foe;
 
-    if(!opbjectp(master))
+    if(!objectp(master))
         return;
     
     call_out("protect",ROUND_LENGTH);

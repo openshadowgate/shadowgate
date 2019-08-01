@@ -11,7 +11,7 @@ void create()
 	::create();
 	set_name("ghast");
 	set_id(({"ghast","undead","monster"}));
-	set_short("%^RESET%^%^CYAN%^A %^RED%^h%^RED%^u%^BOLD%^%^RED%^manoid%^RESET%^%^CYAN%^ ghast");
+	set_short("%^BOLD%^%^CYAN%^A %^CYAN%^n%^BLACK%^i%^CYAN%^m%^BLACK%^b%^CYAN%^l%^CYAN%^e%^CYAN%^ ghast%^RESET%^");
 	set_long(
 	"%^RESET%^%^RED%^This disfigured creature seems to have once been humanoid in appearance, but its race is not recognizable in the form it has after transformation into fell abomination. It's flesh is mummified, yet the undead monster stenches horribly. It has a long tongue that falls out of the maw full of sharp teeth, its nails are sharp and polished.%^RESET%^"
 	);

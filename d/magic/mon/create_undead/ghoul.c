@@ -11,7 +11,7 @@ void create()
 	::create();
 	set_name("ghoul");
 	set_id(({"ghoul","undead","monster"}));
-	set_short("%^CYAN%^A %^RED%^h%^RED%^u%^BOLD%^%^RED%^manoid%^RESET%^%^CYAN%^ ghoul");
+	set_short("%^BOLD%^%^GREEN%^A %^BLACK%^r%^GREEN%^e%^BLACK%^ek%^GREEN%^i%^BLACK%^n%^GREEN%^g%^GREEN%^ with %^BLACK%^r%^GREEN%^o%^BLACK%^t%^GREEN%^ ghoul%^RESET%^");
 	set_long(
 	"%^RESET%^%^RED%^This disfigured creature seems to have once been humanoid in appearance, but its race is not recognizable in the form it has after transformation into fell abomination. It flesh still rots, although is seemingly stabilized, and the creature stenches horribly. It has a long tongue that falls out of the maw full of sharp teeth, its nails are sharp and polished.%^RESET%^"
 	);
