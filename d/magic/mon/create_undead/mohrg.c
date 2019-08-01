@@ -1,8 +1,9 @@
 //Met many times in the world
 #include <std.h>
 #include <daemons.h>
+#include "common.h"
 
-inherit WEAPONLESS;
+inherit UNDEADINHERIT;
 
 void create()
 {

@@ -2,8 +2,9 @@
 // http://www.d20srd.org/srd/monsters/ghoul.htm
 #include <std.h>
 #include <daemons.h>
+#include "common.h"
 
-inherit WEAPONLESS;
+inherit UNDEADINHERIT;
 
 void create()
 {

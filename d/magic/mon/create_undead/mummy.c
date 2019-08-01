@@ -1,7 +1,8 @@
 #include <std.h>
 #include <daemons.h>
+#include "common.h"
 
-inherit WEAPONLESS;
+inherit UNDEADINHERIT;
 
 void create()
 {
@@ -41,6 +42,8 @@ void create()
 	set_attacks_num(4);
 	set_nat_weapon_type("thiefslashing");
 	set_damage(1,12);
+    set_funcs(({
+                ""
     set_resistance("negative energy",60);
     set_resistance("positive energy",-60);
 }

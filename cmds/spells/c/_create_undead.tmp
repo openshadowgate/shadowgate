@@ -34,7 +34,6 @@ void spell_effect(int prof)
     object controller, undead, corpse, *inven=({});
     int lvl;
 
-    //Parse args here
     if(member_array(arg,UNDEAD)==-1)
         arg = UNDEAD[random(sizeof(UNDEAD))];
 
@@ -74,8 +73,18 @@ void spell_effect(int prof)
         controller->move(caster);
     }
     
-    
-    //add controller
+    undead->set_property("raised",lvl);
+    undead->set_property("minion",caster);
+    undead->move(environment(caster));
+    undead->set_max_hp(undead->query_hp()*2);
+    undead->set_hp(undead->query_max_hp());
+    undead->set_overall_ac(10-clevel);
+    undead->add_id("summoned monster");
+    undead->set_property("spell", TO);
+    undead->set_property("spell_creature", TO);
+    undead->set_property("minion", caster);
+    undead->control(caster);
+    caster->add_follower(undead);
     controller->add_monster(undead);
 
     lvl = undead->query_level();

@@ -59,13 +59,13 @@ void strike(object targ)
     
         
     tell_object(targ,"%^BOLD%^%^BLACK%^The assassin %^BLACK%^p%^RESET%^%^MAGENTA%^h%^BOLD%^%^BLACK%^ases%^BLACK%^ through your defenses, unleashing fierce %^BLACK%^fl%^RESET%^%^MAGENTA%^u%^BOLD%^%^BLACK%^r%^RESET%^%^MAGENTA%^r%^MAGENTA%^y%^BOLD%^ %^BLACK%^of %^BLACK%^bl%^RESET%^%^MAGENTA%^o%^BOLD%^%^BLACK%^w%^RESET%^%^MAGENTA%^s%^MAGENTA%^!");
-    tell_room(ETO,"%^BOLD%^%^BLACK%^The assassin %^BLACK%^phase%^RESET%^%^MAGENTA%^s%^BOLD%^%^BLACK%^ through%^RESET%^"+targ->QCN+"'%^BOLD%^%^BLACK%^s unleashing fierce %^BLACK%^f%^RESET%^%^MAGENTA%^l%^BOLD%^%^BLACK%^urr%^RESET%^%^MAGENTA%^y%^BOLD%^ %^BLACK%^of %^RESET%^%^MAGENTA%^b%^MAGENTA%^l%^BOLD%^%^BLACK%^o%^RESET%^%^MAGENTA%^w%^MAGENTA%^s%^BOLD%^%^BLACK%^!%^RESET%^",targ);
+    tell_room(ETO,"%^BOLD%^%^BLACK%^The assassin %^BLACK%^phase%^RESET%^%^MAGENTA%^s%^BOLD%^%^BLACK%^ through%^RESET%^ "+targ->QCN+"'%^BOLD%^%^BLACK%^s defenses unleashing fierce %^BLACK%^f%^RESET%^%^MAGENTA%^l%^BOLD%^%^BLACK%^urr%^RESET%^%^MAGENTA%^y%^BOLD%^ %^BLACK%^of %^RESET%^%^MAGENTA%^b%^MAGENTA%^l%^BOLD%^%^BLACK%^o%^RESET%^%^MAGENTA%^w%^MAGENTA%^s%^BOLD%^%^BLACK%^!%^RESET%^",targ);
    
     targ->cause_typed_damage(targ,0,roll_dice(10,8),"slashing");
 
     if(!targ->reflex_save(40))
     {
-        targ->set_paralyzed(roll_dice(1,4)*8, "%^BOLD%^%^BLACK%^You re %^BLACK%^re%^RESET%^%^MAGENTA%^c%^BOLD%^%^BLACK%^ov%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^ring%^BLACK%^ from %^BLACK%^fi%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^r%^RESET%^%^MAGENTA%^c%^BOLD%^%^BLACK%^e %^BLACK%^at%^RESET%^%^MAGENTA%^t%^MAGENTA%^a%^BOLD%^%^BLACK%^c%^RESET%^%^MAGENTA%^k%^BOLD%^%^BLACK%^!%^RESET%^");
+        targ->set_paralyzed(roll_dice(1,2)*8, "%^BOLD%^%^BLACK%^You re %^BLACK%^re%^RESET%^%^MAGENTA%^c%^BOLD%^%^BLACK%^ov%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^ring%^BLACK%^ from %^BLACK%^fi%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^r%^RESET%^%^MAGENTA%^c%^BOLD%^%^BLACK%^e %^BLACK%^at%^RESET%^%^MAGENTA%^t%^MAGENTA%^a%^BOLD%^%^BLACK%^c%^RESET%^%^MAGENTA%^k%^BOLD%^%^BLACK%^!%^RESET%^");
     }
     
     return 1;
@@ -87,15 +87,6 @@ void set_tripped(int time,string message)
     execute_attack();
     return 0;
 }
-
-
-void crit(object targ)
-{
-    tell_object(ETO, "The assassin studies the situation and manages to slip through defenses.");
-    targ->cause_typed_damage(targ,0,roll_dice(25,8),"piercing");
-    targ->set_paralyzed(8,"%^BOLD%^%^BLACK%^You re %^BLACK%^re%^RESET%^%^MAGENTA%^c%^BOLD%^%^BLACK%^ov%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^ring%^BLACK%^ from %^BLACK%^fi%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^r%^RESET%^%^MAGENTA%^c%^BOLD%^%^BLACK%^e %^BLACK%^at%^RESET%^%^MAGENTA%^t%^MAGENTA%^a%^BOLD%^%^BLACK%^c%^RESET%^%^MAGENTA%^k%^BOLD%^%^BLACK%^!%^RESET%^");
-}
-
 
 void heart_beat()
 {
@@ -131,9 +122,6 @@ void heart_beat()
     targ = TO->query_current_attacker();
     if(!objectp(targ))
         return;
-    if(!random(3))
-        crit(targ);
-
     return;
 }
 

@@ -49,7 +49,7 @@ void heart_beat()
         return;
 
     logintime = (int)ETO->query_login_time();
-    if(time() - 600 < logintime)
+    if(time() < logintime+600)
         return;
     
     if(present("voidhuntress",EETO))
@@ -67,7 +67,7 @@ void heart_beat()
     creature->add_attack_bonus(8+(level/8));
     creature->set_hd(level + 5,20);
     creature->set_mlevel("fighter",level);
-    creature->set_hp(level * 100);
+    creature->set_hp(ETO->query_max_hp()*3);
     creature->set_overall_ac(-1 * level -10);
     
     creature->move(EETO);
