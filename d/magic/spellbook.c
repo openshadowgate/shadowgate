@@ -42,7 +42,6 @@ string query_owner();
 void sort();
 void sort_two();
 private void swap(int i, int j);
-void do_old_spells_merge(object holder);
 void cull_non_school_spells(object holder);
 
 mapping spells = ([]);
@@ -88,6 +87,7 @@ void init() {
     add_action("offer","offer");
     add_action("mydesc","setdesc");
     add_action("report_spells","report");
+    add_action("remove_spell", "rmspell");    
     if((string)TP->query_name() == owner) {
         mastered = ({});
         masterflag = 0;
@@ -103,71 +103,28 @@ void init() {
             if(masterflag) tell_object(TP,"Mastered spells added successfully!");
         }
     }
-    do_old_spells_merge(TP);
-    if (avatarp(TP)) add_action("remove_spell", "rmspell");
+    validate_book(TP);
+
     if (avatarp(TP)) add_action("add_spell", "addspell");
     if (avatarp(TP)) add_action("add_all", "addall");
 }
 
-void do_old_spells_merge(object holder) {
-    int mergetracker;
-    mergetracker = 0;
-    if(!userp(holder)) return;
-    if(member_array("conjure earth elemental",keys(spells)) != -1) {
-      map_delete(spells,"conjure earth elemental");
-      mergetracker = 1;
+void validate_book(object holder) {
+    string *allspells;
+    string spell;
+    allspells = keys(MAGIC_D->query_index("mage"));
+    if(!sizeof(allspells))
+    {
+        tell_object(holder,"Something has gone very wrong with magic, keeping all spells for now.");
+        return;
     }
-    if(member_array("conjure air elemental",keys(spells)) != -1) {
-      map_delete(spells,"conjure air elemental");
-      mergetracker = 1;
-    }
-    if(member_array("conjure fire elemental",keys(spells)) != -1) {
-      map_delete(spells,"conjure fire elemental");
-      mergetracker = 1;
-    }
-    if(member_array("conjure water elemental",keys(spells)) != -1) {
-      map_delete(spells,"conjure water elemental");
-      mergetracker = 1;
-    }
-    if(mergetracker) {
-      tell_object(holder,"Vaping outdated elemental summons...");
-      if(member_array("conjure elemental",keys(spells)) == -1) {
-        tell_object(holder,"Adding new elemental summons...");
-        add_spell("conjure elemental");
-      }
-    }
-    if(member_array("know alignment",keys(spells)) != -1) {
-      map_delete(spells,"know alignment");
-      tell_object(holder,"Removing expired spell: know alignment...");
-    }
-    mergetracker = 0;
-    if(member_array("static field",keys(spells)) != -1) {
-      map_delete(spells,"static field");
-      mergetracker = 1;
-    }
-    if(member_array("sonic shield",keys(spells)) != -1) {
-      map_delete(spells,"sonic shield");
-      mergetracker = 1;
-    }
-    if(member_array("fly",keys(spells)) != -1) {
-      map_delete(spells,"fly");
-      add_spell("levitate");
-      tell_object(holder,"Vaping outdated spells: replacing fly with levitate.");
-    }
-    if(member_array("heart of stone",keys(spells)) != -1) {
-      map_delete(spells,"heart of stone");
-      holder->remove_mastered_spell("heart of stone");
-      tell_object(holder,"Vaping outdated necromancy school spell: heart of stone.");
-    }
-    if(member_array("seeming",keys(spells)) != -1) { //ditch seeming from all books - won't be in for a while
-      map_delete(spells,"seeming");
-      holder->remove_mastered_spell("seeming");
-      tell_object(holder,"Vaping outdated spell: seeming.");
-    }
-    if(member_array("passwall",keys(spells)) != -1) { //ditch passwall, now redundant
-      map_delete(spells,"passwall");
-      holder->remove_mastered_spell("passwall");
-      tell_object(holder,"Vaping outdated alteration school spell: passwall.");
+    foreach(spell in keys(spells))
+    {
+        if(member_array(spell,allspells) == -1)
+        {
+            map_delete(spells,spell);
+            tell_object(holder,"Spellbook vaping outdated spell: "+spell+".");
+        }
     }
 }
 
@@ -216,6 +173,11 @@ void remove_spellbook(string spell) {
 
 int remove_spell(string spell) {
     if (!spell) return 1;
+    if (!avatarp(TP))
+        if(owner != ETO->query_name())
+        {
+            write("You can't seem to figure out how to detach pages from this book."); 
+        }
     map_delete(spells, spell);
     return 1;
 }
@@ -526,6 +488,7 @@ int help(string str) {
 %^ORANGE%^<look book>%^RESET%^            To see a listing of spells in a spellbook
 %^ORANGE%^<look book by level>%^RESET%^   To see a listing of your spells, in order of spell level
 %^ORANGE%^<prepare>%^RESET%^              Refer to %^ORANGE%^<help prepare>%^RESET%^.
+%^ORANGE%^<rmspell %^ULINE%^SPELLNAME%^RESET%^%^ORANGE%^>%^RESET%^    To remove a spell from your book.
 %^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
 
 %^BOLD%^%^RED%^A mage must have spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
@@ -533,10 +496,9 @@ int help(string str) {
 
     
     if (avatarp(TP)) {
-        tell_object(TP, "Immortals can also:\n%^ORANGE%^<rmspell>%^RESET%^ spellname");
-        tell_object(TP, "%^ORANGE%^<addspell>%^RESET%^ spellname\n"
+        tell_object(TP, "Immortals can also:");
+        tell_object(TP, "%^ORANGE%^<addspell SPELLNAME>%^RESET%^\n"
 		"%^ORANGE%^<addall>%^RESET%^ - YOUR books only!\n"
-		"and %^ORANGE%^<resetdesc>%^RESET%^\n"
 	);
     }
 
@@ -574,16 +536,16 @@ void set_owner() {
         if (spells && sizeof(spells) != 0)
             return 1;
         schools = ({ "abjuration", "conjuration_summoning",
-                   "divination", "enchantment_charm",
-                   "illusion", "invocation_evocation", "necromancy",
-                   "alteration", "elemental"});
+                    "divination", "enchantment_charm",
+                    "illusion", "invocation_evocation", "necromancy",
+                    "alteration", "elemental"});
         sphere=tp->query_school();
         if (!sphere)
             sphere="invocation_evocation";
         spellnum = member_array(sphere, schools, 0);
         spl = ({"armor","armor","magic missile","sleep",
-               "color spray","magic missile", "chill touch",
-               "burning hands", "burning hands"})[spellnum];
+                    "color spray","magic missile", "chill touch",
+                    "burning hands", "burning hands"})[spellnum];
         set_spellbook(spl);
     }
     return 1;
