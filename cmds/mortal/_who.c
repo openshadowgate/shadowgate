@@ -117,12 +117,17 @@ string list_users(string *races, object tp)
                                 tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
                             }
             length = 43;
-
+ 
             if ( wizardp(who[i]) && who[i]->query_quietness() ) {
                 tmp += "%^BOLD%^%^CYAN%^Q %^RESET%^";
                 length -=2;
             }
 
+            if ( wizardp(who[i]) && who[i]->query_true_invis() ) {
+                tmp += "%^BOLD%^%^CYAN%^I %^RESET%^";
+                length -=2;
+            }
+            
             if (in_edit(who[i]) || in_input(who[i])) {
                 tmp += "%^BOLD%^**%^RESET%^ ";
                 length -=3;
@@ -203,7 +208,8 @@ int wizards(object who)
     if ((avatarp(TP)) && (TP==who)) return 1;
     if (!avatarp(who)) return 0;
     if(wizardp(who) && who->query("true_quietness")) return 0;
-    if ((who->query_quietness())&&(wizardp(who))&&(!wizardp(TP))) return 0;
+    if (who->query_quietness()&&avatarp(who)&&(!avatarp(TP))) return 0;
+    if (who->query_true_invis()&&avatarp(who)&&(!avatarp(TP))) return 0;    
     return 1;
 }
 

@@ -5,7 +5,7 @@ inherit NPC;
 void create()
 { 
     ::create();
-    set_name("Voidhuntress");
+    set_name("voidhuntress");
     set_id(({"outsider","assassin","voidhuntress"}));
     set_short("%^BOLD%^%^BLACK%^A%^RESET%^%^MAGENTA%^s%^BOLD%^%^BLACK%^sa%^RESET%^%^MAGENTA%^s%^MAGENTA%^s%^BOLD%^%^BLACK%^in%^RESET%^");
     set_long("%^BOLD%^%^BLACK%^This slim %^MAGENTA%^f%^RESET%^%^MAGENTA%^e%^BOLD%^%^MAGENTA%^mi%^RESET%^%^MAGENTA%^n%^BOLD%^%^MAGENTA%^ine %^RESET%^%^MAGENTA%^f%^BOLD%^%^MAGENTA%^i%^RESET%^%^MAGENTA%^g%^BOLD%^%^MAGENTA%^ur%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^ is dressed from head to toe in black outfit, with only her gloving %^MAGENTA%^viol%^RESET%^%^MAGENTA%^e%^BOLD%^%^MAGENTA%^t%^BLACK%^ eyes %^MAGENTA%^piercing%^BLACK%^ through black head bands. She carries an assortment of tools and weapons in numerous leather sheaths and pouches over her clothing.%^RESET%^

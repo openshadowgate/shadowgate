@@ -1,21 +1,22 @@
 #include <std.h>
 #include <terrain.h>
 #include "../assassin_den.h"
+
 inherit OBJECT;
 
 int tracker;
 
 void create() 
 {
-   ::create();
-   set_name("assassins mark");
-   set_id( ({ "mark999"}) );
-   set_short("");
-   set_long("");
-   set_weight(0);
-   set_property("no animate",1);
-   set_heart_beat(2);
-   tracker = time() + 3600+random(82800);
+    ::create();
+    set_name("assassins mark");
+    set_id( ({ "mark999"}) );
+    set_short("");
+    set_long("");
+    set_weight(0);
+    set_property("no animate",1);
+    set_heart_beat(2);
+    tracker = time() + 3600+random(82800);
 }
 
 int set_timer(int x)
@@ -45,7 +46,7 @@ void heart_beat()
         return;
     if(ETO->query_invis())
         return; 
-    if(present("elven assassin",EETO))
+    if(present("voidhuntress",EETO))
         return;
     
     creature = new(MON+"voidhuntress");
@@ -56,10 +57,10 @@ void heart_beat()
 
     creature->set_property("fighter_attacks_mod",level/5);
     creature->set_property("magic resistance",level + 30);
-    creature->add_damage_bonus(7+(level/7));
-    creature->add_attack_bonus(7+(level/7));
-    creature->set_hd(level + 10,20);
-    creature->set_mlevel("fighter",level + 10);
+    creature->add_damage_bonus(8+(level/8));
+    creature->add_attack_bonus(8+(level/8));
+    creature->set_hd(level + 5,20);
+    creature->set_mlevel("fighter",level);
     creature->set_hp(level * 100);
     creature->set_overall_ac(-1 * level -10);
     
