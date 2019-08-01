@@ -1,6 +1,6 @@
 //updated by Circe to allow psions 8/15/05
-//moved to /d/common 12/14/03 by Circe.  To be used as an inherit 
-//for all bracers to make maintenance easier (if we change them to be 
+//moved to /d/common 12/14/03 by Circe.  To be used as an inherit
+//for all bracers to make maintenance easier (if we change them to be
 //worn on arms, etc.  Do not remove this file.
 //No lore is in this file
 //Changed AC around after talk with circe - Cythera 7/05
@@ -127,16 +127,16 @@ void create(){
     }
     set_type("bracer");
     set_limbs(({"left arm", "right arm"}));
-    set_weight(10);
+    set_weight(2);
     set_wear( (:TO,"check":) );
     set_size(-1);
 }
 
 int check(){
    int level;
-   
-   if(objectp(ETO) && ETO->query_property("no bracers")) 
-   {    
+
+   if(objectp(ETO) && ETO->query_property("no bracers"))
+   {
        tell_object(ETO,"You are currently using an object that cannot be worn with bracers.");
        return 0;
    }
@@ -150,7 +150,7 @@ int check(){
 int is_metal() { return metal; }
 
 /*
-Taken out since it's now being used as an inherit, and it was messing with 
+Taken out since it's now being used as an inherit, and it was messing with
 the shorts being set.  Changed to use set_obvious_short.  Circe 1/17/04
 void set_property(string prop, mixed value) {
     ::set_property(prop, value);
