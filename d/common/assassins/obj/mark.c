@@ -28,6 +28,7 @@ void heart_beat()
 {
     object creature;
     int level;
+    int logintime;
     
     if(!objectp(ETO))
         return;
@@ -45,7 +46,12 @@ void heart_beat()
     if(EETO->query_property("no teleport"))
         return;
     if(ETO->query_invis())
-        return; 
+        return;
+
+    logintime = (int)ETO->query_login_time();
+    if(time() - 600 < logintime)
+        return;
+    
     if(present("voidhuntress",EETO))
         return;
     

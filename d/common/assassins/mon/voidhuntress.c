@@ -38,7 +38,7 @@ void create()
                     "fear",
                     "weird",}));
     set_property("cast and attack",1);
-    set_spell_chance(100);
+    set_spell_chance(13);
     set_funcs(({"strike"}));    
     set_func_chance(30);
     set_scrambling(1);
