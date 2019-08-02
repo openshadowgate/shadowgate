@@ -29,10 +29,7 @@ void spell_effect()
     tell_object(caster,"%^BOLD%^%^CYAN%^You gently touch corpses in the room, freezing them.%^RESET%^");
     tell_room(ENV(caster),"%^BOLD%^%^CYAN%^"+caster->QCN+" gently touches corpses in the room, freezing them.%^RESET%^",caster);
     spell_successful();
-    foreach(corpse in corpses)
-    {
-        corpse->remove_decay();
-    }
+    map_array(corpses,(:$1->remove_decay():));
     dest_effect();
     return;
 
