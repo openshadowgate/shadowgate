@@ -9,7 +9,8 @@ void create()
     set_syntax("cast CLASS gentle repose");
     set_spell_sphere("necromancy");    
     set_description("This spell preserves remains of the dead in the area, extending their decay time. Doing so effectively extends the time limit on raising that creature from the dead.");
-    set_save("will");
     set_helpful_spell(1);    
 }
+
+
 
