@@ -14,7 +14,7 @@ int *age_brackets() { return ({ 102, 175, 233, 350 }); }
 
 int *restricted_alignments(string subrace) {
     if(!subrace || subrace == "") return ({ 3, 6, 9 });
-    if(subrace == "aquatic elf") return ({ 2, 4, 6 });    
+    if(subrace == "aquatic elf") return ({ 1, 3, 4, 6, 7, 9 });    
     if(subrace == "fey'ri") return ({ 1, 4, 7 });
     if(subrace == "szarkai") return ({ 1, 2, 4, 5, 7, 8 }); 
     return ({ 3, 6, 9 });
