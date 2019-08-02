@@ -101,7 +101,7 @@ void spell_effect(int prof)
         caster->add_follower(undead);
         controller->add_monster(undead);
 
-        lvl = undead->query_level()/2;
+        lvl = undead->query_level()*2/3;
         caster->set_property("raised", lvl);
         if((int)caster->query_property("raised")>clevel)
         {
