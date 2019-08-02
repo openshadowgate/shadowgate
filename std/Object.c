@@ -434,11 +434,16 @@ mixed query_property(string prop)
                 if(FEATS_D->usable_feat(TO,"spell power")) num += 2;
             }
         }
-
         if((string)TO->query_race() == "human") {
           subrace = (string)TO->query("subrace");
           if(subrace) {
-            if(strsrch(subrace,"genasi") != -1) num += 1; // +1 clevel to genasi planetouched
+              if(strsrch(subrace,"genasi") != -1) num += 1;
+          }
+        }
+        if((string)TO->query_race() == "elf") {
+          subrace = (string)TO->query("subrace");
+          if(subrace) {
+              if(subrace == "aquatic elf") num += 1;
           }
         }
         num += props[prop];

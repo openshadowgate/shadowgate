@@ -133,7 +133,7 @@ mapping query_racial_innate(string subrace)
                                "daily uses" : -1, "delay" : 1, "uses left" : -1,	
                                "refresh time" : -1, "level required" : 0, 
                                "class specific" : 0]),
-                 "darkness" : (["type" : "spell", "casting level" : 0.5, 
+                 "water breathing" : (["type" : "spell", "casting level" : 1, 
                                 "daily uses" : 1, "delay" : 1, "uses left" : 1, 
                                 "refresh time" : -1, "level required" : 0, 
                                 "class specific" : 0]),]);				   
