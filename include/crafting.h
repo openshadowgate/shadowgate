@@ -80,6 +80,7 @@
     "dwarven waraxe":(["file":COMMONFILE"weapon/dwarvenwaraxe","units":3]),\
     "elven curved blade":(["file":COMMONFILE"weapon/elvencurvedblade","units":4]),\
     "dagger":(["file":COMMONFILE"weapon/dagger","units":1]),\
+    "estoc":(["file":COMMONFILE"weapon/estoc","units":3]),\
     "fan":(["file":COMMONFILE"weapon/fan","units":1]),\
     "falcata":(["file":COMMONFILE"weapon/longsword","units":3]),\
     "flail":(["file":COMMONFILE"weapon/flail","units":3]),\
