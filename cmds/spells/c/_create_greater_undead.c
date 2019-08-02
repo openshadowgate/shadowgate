@@ -4,15 +4,18 @@
 #include <rooms.h>
 inherit "/cmds/spells/c/_create_undead";
 
-#define UNDEAD ({"shadow","wraith","specter","devourer"})
+string* list_undead()
+{
+    return ({"shadow","wraith","spectre"});
+}
 
 void create()
 {
     ::create();
-    set_spell_name("create undead");
+    set_spell_name("create greater undead");
     set_spell_level(([ "mage" : 8, "cleric" : 8 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS create undead [on shadow|wraith|spectre|devourer]");
+    set_syntax("cast CLASS create greater undead [on shadow|wraith|spectre]");
     set_description("Next step in the art of necromancy is to use the very soul of the fallen to create a new form of undead. The being created walks in between the worlds and is truly terrifying as it can not be destroyed without arcane. The necromancer seen performing this ritual in civilized societies will certainly be noted.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^

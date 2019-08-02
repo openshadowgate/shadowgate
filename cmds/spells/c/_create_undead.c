@@ -7,7 +7,7 @@ int num_mon;
 
 void fail();
 
-#define UNDEAD ({"ghoul","ghast","mummy","mohrg"})
+
 #define UNDEADDIR "/d/magic/mon/create_undead/"
 
 void create()
@@ -31,6 +31,11 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_arg_needed();
 }
 
+string * list_undead()
+{
+    return ({"ghoul","ghast","mummy","mohrg"});
+}
+
 string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^GREEN%^You cut your %^BOLD%^%^GREEN%^wrists and %^GREEN%^s%^BLACK%^i%^GREEN%^n%^GREEN%^g%^GREEN%^ low in %^GREEN%^f%^BLACK%^ell%^GREEN%^ tongues.%^RESET%^");
@@ -39,11 +44,12 @@ string query_cast_string()
 
 void spell_effect(int prof) 
 {
-    object controller, undead, corpse, *corpses=({});
+    object controller, undead, corpse, *corpses=({}), *undeadl;
     int lvl;
 
-    if(member_array(arg,UNDEAD)==-1)
-        arg = UNDEAD[random(sizeof(UNDEAD))];
+    undeadl = TO->list_undead();
+    if(member_array(arg,undeadl)==-1)
+        arg = undeadl[random(sizeof(undeadl))];
 
     if((int)caster->query_property("raised")>clevel)
     {

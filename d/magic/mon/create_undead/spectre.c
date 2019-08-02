@@ -9,8 +9,8 @@ void create()
 	::create();
 	set_name("spectre");
 	set_id(({"spectre","undead","monster"}));
-	set_short("A @translucent @spectre");
-	set_long("This creature is almost @see-through in appearance, and is hovering jus above the ground. A long robe of shadows covers all but its head and hands. Its hands are more like claws than anything else, with long sharp fingernails on them. Its face is twisted by a mask of hatred, rage and pain. @(bwhite,white)Flowing @(bwhite,white)white wair trails down its back, ever blowing in a non-existand wind.");
+	set_short("%^CYAN%^A %^CYAN%^t%^CYAN%^r%^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^n%^BOLD%^%^BLACK%^s%^RESET%^%^CYAN%^l%^BOLD%^%^BLACK%^ucen%^RESET%^%^CYAN%^t %^CYAN%^s%^BOLD%^%^BLACK%^pe%^RESET%^%^CYAN%^c%^CYAN%^t%^CYAN%^r%^CYAN%^e");
+	set_long("%^CYAN%^This creature is almost %^BOLD%^%^BLACK%^s%^RESET%^%^CYAN%^e%^CYAN%^e%^BOLD%^%^BLACK%^-th%^RESET%^%^CYAN%^r%^BOLD%^%^BLACK%^ou%^RESET%^%^CYAN%^g%^BOLD%^%^BLACK%^h%^RESET%^%^CYAN%^ in appearance, and is hovering jus above the ground. A long robe of shadows covers all but its head and hands. Its hands are more like claws than anything else, with long sharp fingernails on them. Its face is twisted by a mask of hatred, rage and pain. %^BOLD%^%^WHITE%^Fl%^RESET%^%^WHITE%^o%^BOLD%^%^WHITE%^wing %^RESET%^%^WHITE%^w%^WHITE%^h%^BOLD%^%^WHITE%^ite%^RESET%^%^CYAN%^ wair trails down its back, ever blowing in a non-existand wind.");
     //Str Ø, Dex 16, Con Ø, Int 14, Wis 14, Cha 15
     set_stats("strenght",10);
     set_stats("dexterity",16);
@@ -53,7 +53,7 @@ void drain(object targ)
     int damage;
     tell_object(targ,"%^BLUE%^You feel your life force drain away!");
     tell_room(ETO,"%^BLUE%^"+targ->query_cap_name()+" stumbles back @weakly from the touch of the Wraith!",targ);
-    damage = roll_dice(TO->query_level(),2);
+    damage = roll_dice(TO->query_level(),3);
     targ->do_damage(targ->return_target_limb(),damage);
     TO->add_hp(-damage);
 }
