@@ -57,7 +57,7 @@ void create()
 void set_reward_type(string str)
 {
     rewardType = str;
-    if(rewardType != "tokens" && rewardType != "gold" && rewardType != "mats") rewardType = "gold";
+    if(rewardType != "gold" && rewardType != "mats") rewardType = "gold";
     return;
 }
 
