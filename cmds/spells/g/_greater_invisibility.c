@@ -1,4 +1,5 @@
 // New illusion spell based on chameleon. Nienne, 11/09.
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -15,8 +16,7 @@ void create() {
     set_description("This spell, available only to masters of illusion, allows the caster to enhance the normally fragile "
 "distortion an invisibility spell offers. The more powerful version of this spell will not fail even if the caster "
 "becomes involved in combat. However, due to the additional concentration required to maintain this stronger variant, the "
-"spell has a chance to drain from the caster every time he or she moves.\n\nNon-specialized mages cannot cast this "
-"spell.");
+"spell has a chance to drain from the caster every time he or she moves.");
     set_verbal_comp();
     set_somatic_comp();
     set_components(([

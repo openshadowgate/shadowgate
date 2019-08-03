@@ -1,4 +1,5 @@
 // lowlevel evocation school specialty spell. Nienne, 08/09.
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -16,8 +17,7 @@ void create() {
 "attempt to touch a foe, discharging it into them in a powerful shock. A caster will find it far easier to contact a foe "
 "who is carrying or wearing metal items, which will conduct the charge. While this spell can, at first, be considerably "
 "more painful than other spells of its sphere, a mage can only withhold so much charge in his fingertips, so it will not "
-"take a great deal of study before the spell reaches its highest potential.\n\nNon-specialized mages cannot cast this "
-"spell.");
+"take a great deal of study before the spell reaches its highest potential.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

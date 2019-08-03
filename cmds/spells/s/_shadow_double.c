@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <magic.h>
 #include <std.h>
 #include <spell.h>
@@ -18,8 +19,7 @@ void create() {
     set_syntax("cast CLASS shadow double");
     set_description("This spell will conjure a ghostly double of the caster, drawn from his or her own "
 "shadow. The shadow will automatically follow and protect you. Should you lose it, though, simply go into the room with "
-"it and <command shadow to follow>. This is a greater summons, and cannot be used simultaneously with other greater summons."
-"\n\nNon-specialized mages cannot cast this spell.");
+"it and <command shadow to follow>. This is a greater summons, and cannot be used simultaneously with other greater summons.");
     set_verbal_comp();
     set_somatic_comp();
     set_components(([

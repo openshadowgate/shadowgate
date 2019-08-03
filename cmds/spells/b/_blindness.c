@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 // midlevel necromancy school specialty spell. Nienne, 08/09.
 #include <spell.h>
 #include <magic.h>
@@ -15,8 +16,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS blindness on TARGET");
     set_description("By means of this spell, the caster attempts to steal the target's vision for a short while. It is "
-"not dispellable by normal magics, but will fade after only a short while.\n\nNon-specialized mages cannot cast this "
-"spell.");
+"not dispellable by normal magics, but will fade after only a short while.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

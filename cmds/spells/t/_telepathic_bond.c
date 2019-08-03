@@ -1,4 +1,5 @@
 // midlevel divination school specialty spell. Nienne, 10/09.
+//removed mention of non-secialized mages ~Circe~ 8/2/19
 #include <spell.h>
 #include <magic.h>
 inherit SPELL;
@@ -14,7 +15,7 @@ void create() {
     set_spell_sphere("greater divination");
     set_syntax("cast CLASS telepathic bond to TARGET");
     set_description("This spell allows the caster to reach out and touch the mind of a known person, allowing "
-"conversations without speech and potentially over vast distances.\n\nNon-specialized mages cannot cast this spell.");
+"conversations without speech and potentially over vast distances.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();

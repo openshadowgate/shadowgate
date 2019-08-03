@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <priest.h>
 inherit SPELL;
 
@@ -10,7 +11,7 @@ void create() {
     set_syntax("cast CLASS shield");
     set_description("This spell calls a protective shield into existance before the caster. It negates magic missiles, "
 "and provides a small bonus to armor class for its duration. Use of a physical shield will interfere with the spell and "
-"cause it to fade.\n\nNon-specialized mages cannot cast this spell.");
+"cause it to fade.");
     set_verbal_comp();
     set_somatic_comp();
      // school specific mage spell

@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <std.h>
 #include <priest.h>
 inherit SPELL;
@@ -12,7 +13,7 @@ void create(){
     set_syntax("cast CLASS fire shield");
     set_description("This spell will surround the caster's body in a roaring shield of flames.  It grants the caster a "
 "slight bonus to their armor class, and any opponent striking the caster must make a saving throw or take damage from the "
-"blistering heat.\n\nNon-specialized mages cannot cast this spell.");
+"blistering heat.");
     set_verbal_comp();
     set_somatic_comp();
     set_components(([

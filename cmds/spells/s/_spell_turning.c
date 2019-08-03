@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <priest.h>
 inherit SPELL;
 
@@ -13,7 +14,7 @@ void create() {
     set_description("The most skilled of abjurationists can use such a spell to raise a protective ward around themselves"
 ". While it holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of "
 "whether they are hostile or friendly. The ward will not reflect splash damage or AOE, but only direct-targetted spells. "
-"This spell does not stack with the 'reflection' or 'spell reflection' feats.\n\nNon-specialized mages cannot cast this spell.");
+"This spell does not stack with the 'reflection' or 'spell reflection' feats.");
     set_verbal_comp();
     set_somatic_comp();
      // school specific mage spell

@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -13,7 +14,7 @@ void create() {
     set_spell_sphere("alteration");
     set_syntax("cast CLASS darkvision");
     set_description("This spell will enhance the vision of the caster, allowing them better sight in areas of extreme "
-"light or darkness.\n\nNon-specialized mages cannot cast this spell.");
+"light or darkness.");
     set_verbal_comp();
     set_somatic_comp();
      // school specific mage spell

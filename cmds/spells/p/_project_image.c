@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <magic.h>
 #include <std.h>
 #include <spell.h>
@@ -18,8 +19,7 @@ void create() {
     set_description("This spell will conjure an illusionary image of the caster, which will seek out the specified target "
 "and convey the caster's thoughts by way of its own speech.  Likewise, it will convey the words of the target back to the "
 "caster.  To speak to the target, the caster should use the <tell> and <reply> commands as per telepathy effects.  Any "
-"attack upon the image will cause it to dissipate.  You can be rid of the image with <dismiss image>.\n\nNon-specialized "
-"mages cannot cast this spell.");
+"attack upon the image will cause it to dissipate.  You can be rid of the image with <dismiss image>.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();

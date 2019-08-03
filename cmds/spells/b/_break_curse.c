@@ -1,3 +1,4 @@
+//removed mention of non-specialized mages and sorcerers being unable to cast the spell ~Circe~ 8/2/19
 #include <std.h>
 #include <spell.h>
 inherit SPELL;
@@ -12,7 +13,7 @@ void create() {
     set_syntax("cast CLASS break curse on <object> [at <player>]");
     set_description("This powerful spell will break a curse that has been placed upon a magical item, unravelling the "
 "corrupted weave around it.  Only the most skilled of abjurers can attempt to disentangle enchantments in such a "
-"manner.\n\nSorcerers and non-specialized mages cannot cast this spell.");
+"manner.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
