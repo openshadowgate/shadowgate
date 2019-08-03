@@ -2136,12 +2136,14 @@ void write_messages() {
   mapping mail_stat;
   int i;
 
-  message("login", sprintf("\n        >>> Terminal currently set to %s <<<", getenv("TERM")), TO);
   // Supplanted by bboard mortal command. Mostly done by Styx.
   // Patch in login by garrett, moved up above mail and error messages by Styx 12/21/03 now that we have bboard next
-
+  message("login","\n",TO);
+  message("login","%^ORANGE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^", TO);
+  message("login","%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
+  message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);  
+  message("login","%^ORANGE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^", TO);
   force_me("bboard info");
-  tell_object(TO,"\n");
 
   mail_stat = (mapping)LOCALPOST_D->mail_status(query_name());
   if (mail_stat["unread"]) {
