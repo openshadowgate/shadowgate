@@ -134,26 +134,16 @@ void unwear() {
                   if (!answer) return 1;
           }
   }
+  if(!(int)ETO->query_property("silent_equip"))
+      if(stringp(unwear) && !query_property("funwear")) {
+          message("my_action", unwear, wornBy);
+          if(query_broken() != "" && !random(3))
+              message("my_action", "You notice your "+::query_short()+" is"+query_broken()+".",wornBy);
+      }
+      else message("my_action", "You remove your "+query_short()+".",
+                   wornBy);
 
-  if(stringp(unwear) && !query_property("funwear")) {
-     message("my_action", unwear, wornBy);
-// adding a message on remove to notice wear on items w/unwear funcs *Styx* 10/14/05
-     if(query_broken() != "" && !random(3))
-        message("my_action", "You notice your "+::query_short()+" is"+query_broken()+".",wornBy);
-   }
-   else message("my_action", "You remove your "+query_short()+".",
-     wornBy);
-
-// hijacking stat removal code to here instead. Nienne, 08/08
-/*              if((int)TO->query("strbonus")) do_remove_stat(wornBy,"strbonus");
-               if((int)TO->query("dexbonus")) do_remove_stat(wornBy,"dexbonus");
-               if((int)TO->query("conbonus")) do_remove_stat(wornBy,"conbonus");
-               if((int)TO->query("intbonus")) do_remove_stat(wornBy,"intbonus");
-               if((int)TO->query("wisbonus")) do_remove_stat(wornBy,"wisbonus");
-               if((int)TO->query("chabonus")) do_remove_stat(wornBy,"chabonus");
-*/
-   // new code for item bonus properties to replace all existing props/funcs. Nienne, 7/12.
-   if(itembonuses = TO->query_item_bonuses()) run_item_bonuses("remove",wornBy,itembonuses);
+  if(itembonuses = TO->query_item_bonuses()) run_item_bonuses("remove",wornBy,itembonuses);
 
    wornBy->remove_armour_from_limb(this_object(),
      actualLimbs);

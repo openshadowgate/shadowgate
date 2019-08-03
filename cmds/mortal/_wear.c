@@ -15,8 +15,8 @@ int cmd_wear(string str)
     mapping itembonuses;
  
     if (!objectp(TP)) { return 0; }
-    quiet = TP->query_property("silent_equip");
-    ultimate = TP->query_property("ultimate_equip");
+    quiet = (int)TP->query_property("silent_equip");
+    ultimate = (int)TP->query_property("ultimate_equip");
     if(!str || !stringp(str)) { return notify_fail("Wear what?\n"); }
   
     if (!ultimate && TP->query_bound()) 
@@ -200,13 +200,15 @@ int cmd_wear(string str)
         return 1;
     }
 
-    if(stringp(wear = ob->query_wear()) && !ob->query_property("fwear"))
-    {
-        message("my_action", wear, this_player());
-    }
-    else 
-    {
-        message("my_action", "You wear "+ob->query_short()+".", this_player());
+    if(!quiet){
+        if(stringp(wear = ob->query_wear()) && !ob->query_property("fwear"))
+        {
+            message("my_action", wear, this_player());
+        }
+        else 
+        {
+            message("my_action", "You wear "+ob->query_short()+".", this_player());
+        }
     }
 
     if(itembonuses = ob->query_item_bonuses()) 

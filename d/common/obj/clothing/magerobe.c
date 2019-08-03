@@ -29,22 +29,11 @@ void create() {
     set_ac(0);
     set_max_internal_encumbrance(21);
     set_property("no animate",1);
-    set_wear((:TO,"wear_stuff":));
 }
 
 mapping query_comp_map() { return comp; }
 
 void set_comp_map(mapping info) { comp = info; }
-
-
-int wear_stuff(){
-/*    if(!ETO->is_class("bard") && !ETO->is_class("psion") && !ETO->is_class("mage") && !ETO->is_class("sorcerer") && !ETO->is_class("psywarrior")) {
-      write("This garment isn't designed for one such as you.");
-      return 0;
-    } */
-    write("You realise there are small pockets in this garment. You could store components in here!");
-    return 1;
-}
 
 void init() {
    ::init();

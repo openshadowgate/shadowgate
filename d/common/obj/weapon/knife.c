@@ -19,6 +19,6 @@ set_id(({ "knife","dagger"}));
    set_weapon_speed(2);
    set_weapon_prof("simple");
    set_critical_threat_range(2);
-   set_critical_hit_multiplier(3);
+   set_critical_hit_multiplier(2);
    set_damage_type("piercing");
 }

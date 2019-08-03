@@ -364,11 +364,11 @@ int do_autowear() {
   to_wear = all_inventory()->query_wear_order();
   to_wear = filter_array(to_wear, "filter_autowear",TO);
   to_wear = sort_array(to_wear, "sort_autowear",TO);
-   set_property("silent_equip",1);
-   set_property("ultimate_equip",1);
+  TO->set_property("silent_equip",1);
+  TO->set_property("ultimate_equip",1);
   to_wear = filter_array(to_wear, "execute_autowear",TO);
-  remove_property("silent_equip");
-  remove_property("ultimate_equip");
+  TO->remove_property("silent_equip");
+  TO->remove_property("ultimate_equip");
 }
 
 void convert_to_new_class_type()
@@ -993,22 +993,15 @@ int quit()
     int x, cnum;
     object *inv, *spells_on;
 
-    //    if (!quitAllow) return notify_fail("Quit has been disabled.\n");
-    /* if (str) 
-    {
-        notify_fail("Quit what ?\n");
-        return 0;
-    }
-    */
-
     break_all_spells();  
     set_hidden(0);  
     set_magic_hidden(0);
     //YUCK_D->save_inventory(TO);
     //crash_money = 0;
     if (query_followers()) clear_followers();
+    TO->set_property("silent_equip",1);
     message("environment", "We hope you enjoyed playing ShadowGate and will be back soon.", TO);
-    message("environment", "Check out our website at https://shadowgate.org/ and consider voting for us on mudlistings.", TO);
+    message("environment", "Please consider voting for us on mudlistings.", TO);
     message("environment", "----", TO);        
     if(objectp(ETO)) { set_primary_start(file_name(ETO)); }
     else { set_primary_start("/d/shadow/room/pass/pass3"); }  
@@ -2140,12 +2133,11 @@ void write_messages() {
 
   // Supplanted by bboard mortal command. Mostly done by Styx.
   // Patch in login by garrett, moved up above mail and error messages by Styx 12/21/03 now that we have bboard next
-  message("login","\n",TO);
+  force_me("bboard info");
   message("login","%^ORANGE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^", TO);
   message("login","%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
   message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);  
   message("login","%^ORANGE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^", TO);
-  force_me("bboard info");
 
   mail_stat = (mapping)LOCALPOST_D->mail_status(query_name());
   if (mail_stat["unread"]) {

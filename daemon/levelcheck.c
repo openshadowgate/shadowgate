@@ -1,3 +1,5 @@
+inherit daemon;
+
 /**
  * This function returns colored version of levelcheck between players
  *
@@ -51,9 +53,9 @@ public int levelcheck(object first, object second)
 
     switch(low)
     {        
-    case 1..29: range = 5; break;
-    case 30..50: range = 10; break;
-    default: range = 0;
+    case 1..30: range = 5; break;
+    case 31..50: range = 7; break;
+    default: range = 7;
     }
 
     if(diff > range)

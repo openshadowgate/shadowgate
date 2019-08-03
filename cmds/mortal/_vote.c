@@ -2,26 +2,26 @@
 
 int cmd_vote(string str)
 {
-    write("%^GREEN%^  -=<%^ORANGE%^Vote for ShadowGate%^GREEN%^>=-%^RESET%^");
+    write("%^GREEN%^-=<%^ORANGE%^Vote for ShadowGate%^GREEN%^>=-%^RESET%^");
     write(
-"%^BOLD%^%^GREEN%^  We hope you enjoy playing ShadowGate!
-  Please, consider voting for us to bring more people into the game:
-     Top Mud Sites:     %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tms%^RESET%^%^BOLD%^%^GREEN%^
-     The Mud Connector: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tmc%^RESET%^%^BOLD%^%^GREEN%^
-  Thank you! "
+"%^BOLD%^%^GREEN%^We hope you enjoy playing ShadowGate!
+Please, consider voting for us to bring more people into the game:
+  Top Mud Sites:     %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tms%^RESET%^%^BOLD%^%^GREEN%^
+  The Mud Connector: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tmc%^RESET%^%^BOLD%^%^GREEN%^
+Thank you! "
         );        
     if(str == "social")
     {
-        write("%^GREEN%^  -=<%^ORANGE%^Social networks%^GREEN%^>=-%^RESET%^");
+        write("%^GREEN%^-=<%^ORANGE%^Social networks%^GREEN%^>=-%^RESET%^");
         write(
-"%^BOLD%^%^GREEN%^  Discord:   %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/discord-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^  Grapevine: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^  Mastodon:  %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/toot-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^  Github:    %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/github-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^  FaceBook:  %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/fbook-sg%^RESET%^%^BOLD%^%^GREEN%^"            );
+"%^BOLD%^%^GREEN%^Discord:   %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/discord-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^Grapevine: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^Mastodon:  %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/toot-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^Github:    %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/github-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^FaceBook:  %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/fbook-sg%^RESET%^%^BOLD%^%^GREEN%^"            );
     }
     else
-        write("%^BOLD%^%^GREEN%^  Use %^RESET%^%^ORANGE%^<vote social>%^BOLD%^%^GREEN%^ to list social networks we are in.%^RESET%^");
+        write("%^BOLD%^%^GREEN%^Use %^RESET%^%^ORANGE%^<vote social>%^BOLD%^%^GREEN%^ to list social networks we are in.%^RESET%^");
     return 1;
 }
 
