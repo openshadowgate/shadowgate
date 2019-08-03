@@ -173,6 +173,7 @@ int pray()
         int exploss, expdelta, exp, thelevel;
         int i;
         string myclass;
+        int charlvl;
 
         "/daemon/user_d.c"->scale_level_to(TP, TP->query_base_character_level());
         /* Subtracting exp to next level  */
@@ -186,7 +187,7 @@ int pray()
 
         exp = (int)TP->query_exp();
         expdelta = abs(EXP_NEEDED[thelevel+1]-EXP_NEEDED[thelevel]);
-        exploss = expdelta * (int)TP->query_character_level()/47;
+        exploss = expdelta * (int)TP->query_character_level()/49;
         log_file("deathlexp", TPQN+" lost "+exploss+" in resurrection at a church.\n");
         
         TP->set_general_exp(myclass,exp - exploss);
