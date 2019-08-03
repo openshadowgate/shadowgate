@@ -1007,7 +1007,9 @@ int quit()
     //YUCK_D->save_inventory(TO);
     //crash_money = 0;
     if (query_followers()) clear_followers();
-    message("environment", "Please rejoin the ShadowGate adventure REAL soon!!!", TO);    
+    message("environment", "We hope you enjoyed playing ShadowGate and will be back soon.", TO);
+    message("environment", "Check out our website at https://shadowgate.org/ and consider voting for us on mudlistings.", TO);
+    message("environment", "----", TO);        
     if(objectp(ETO)) { set_primary_start(file_name(ETO)); }
     else { set_primary_start("/d/shadow/room/pass/pass3"); }  
     if (TO->query_invis() && !wizardp(TO)) { TO->set_invis(); }

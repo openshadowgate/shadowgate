@@ -2,7 +2,7 @@
 
 int cmd_vote(string str)
 {
-    write("%^GREEN%^-=<%^ORANGE%^Vote for ShadowGate%^GREEN%^>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
+    write("%^GREEN%^  -=<%^ORANGE%^Vote for ShadowGate%^GREEN%^>=-%^RESET%^");
     write(
 "%^BOLD%^%^GREEN%^  We hope you enjoy playing ShadowGate!
   Please, consider voting for us to bring more people into the game:
@@ -12,14 +12,16 @@ int cmd_vote(string str)
         );        
     if(str == "social")
     {
-        write("%^GREEN%^-=<%^ORANGE%^Social networks%^GREEN%^>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
+        write("%^GREEN%^  -=<%^ORANGE%^Social networks%^GREEN%^>=-%^RESET%^");
         write(
 "%^BOLD%^%^GREEN%^  Discord:   %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/discord-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^  Mastodon:  %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/toot-sg%^RESET%^%^BOLD%^%^GREEN%^   @shadowgate@mastodon.sdf.org
-%^BOLD%^%^GREEN%^  Github:    %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/github-sg%^RESET%^%^BOLD%^%^GREEN%^ @shadowgate
+%^BOLD%^%^GREEN%^  Grapevine: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^  Mastodon:  %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/toot-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^  Github:    %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/github-sg%^RESET%^%^BOLD%^%^GREEN%^
 %^BOLD%^%^GREEN%^  FaceBook:  %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/fbook-sg%^RESET%^%^BOLD%^%^GREEN%^"            );
     }
-    write("%^GREEN%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
+    else
+        write("%^BOLD%^%^GREEN%^  Use %^RESET%^%^ORANGE%^<vote social>%^BOLD%^%^GREEN%^ to list social networks we are in.%^RESET%^");
     return 1;
 }
 
@@ -39,7 +41,7 @@ vote [social]
 
 This command will display ways for you to vote for the game on various listings to get the word out there and help to bring new players in!
 
-
+Use <vote social> to list social networks shadowgate is in.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
