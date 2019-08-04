@@ -1,4 +1,4 @@
-inherit daemon;
+inherit DAEMON;
 
 /**
  * This function returns colored version of levelcheck between players

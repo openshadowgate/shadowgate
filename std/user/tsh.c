@@ -93,75 +93,78 @@ string write_prompt()
         tmp = user_path((string)this_player()->query_name());
         tmp = tmp[0 .. strlen(tmp)-2];
         if(stringp(path) && sscanf(path, "/realms/%s", tmp) == 1)
-	    path = "~" + tmp;
-       if(!stringp(path)) path = ">";
+            path = "~" + tmp;
+        if(!stringp(path)) path = ">";
         if (avatarp(this_player())) {
-              am_invis=(!this_player()->query_true_invis())?".":"T";
-              am_invis+=(!this_player()->query_magic_hidden())?".":"M";
-              am_invis+=(!this_player()->query_hidden())?".":"S";
-          }
+            am_invis=(!this_player()->query_true_invis())?".":"T";
+            am_invis+=(!this_player()->query_magic_hidden())?".":"M";
+            am_invis+=(!this_player()->query_hidden())?".":"S";
+        }
         shape = TP->query_property("shapeshifted");
         if(objectp(shape)) { shape_race = (string)shape->query_shape_race(); }
         if(shape_race) 
         { 
-            prompt = replace_string( prompt, "$f", shape_race );
-            prompt = replace_string( prompt, "$F", capitalize(shape_race) );
+            prompt = replace_string(prompt, "$f", shape_race );
+            prompt = replace_string(prompt, "$F", capitalize(shape_race) );
         }
         else 
         { 
-            prompt = replace_string( prompt, "$f", "" ); 
-            prompt = replace_string( prompt, "$F", "" );
+            prompt = replace_string(prompt, "$f", "" ); 
+            prompt = replace_string(prompt, "$F", "" );
         }
         rage = (int)TP->query_property("raged");
         if(rage)
         {
-           prompt = replace_string( prompt, "$r", "Enraged" );
+            prompt = replace_string(prompt, "$r", "Enraged" );
         }
         else
         {
-           prompt = replace_string( prompt, "$r", "" );
+            prompt = replace_string(prompt, "$r", "" );
         }
         if((int)TP->query("maximum ki"))
         {
-            prompt = replace_string( prompt, "$k", ""+(int)TP->query("available ki"));
-            prompt = replace_string( prompt, "$K", ""+(int)TP->query("maximum ki"));
+            prompt = replace_string(prompt, "$k", ""+(int)TP->query("available ki"));
+            prompt = replace_string(prompt, "$K", ""+(int)TP->query("maximum ki"));
         }
         else 
         {
-            prompt = replace_string( prompt, "$k", "");
-            prompt = replace_string( prompt, "$K", "");
+            prompt = replace_string(prompt, "$k", "");
+            prompt = replace_string(prompt, "$K", "");
         }
         if((int)TP->query_mp()){
-           prompt = replace_string( prompt, "$p",
-            "" + (int)this_player()-> query_mp() );
+            prompt = replace_string(prompt, "$p",
+                                     "" + (int)this_player()-> query_mp() );
         }else{
-           prompt = replace_string( prompt, "$p",
-            "0");
+            prompt = replace_string(prompt, "$p",
+                                     "0");
         }
         if((int)TP->query_max_mp()){
-           prompt = replace_string( prompt, "$P",
-            "" + (int)this_player()-> query_max_mp() );
+            prompt = replace_string(prompt, "$P",
+                                     "" + (int)this_player()-> query_max_mp() );
         }else{
-           prompt = replace_string( prompt, "$P",
-            "0");
+            prompt = replace_string(prompt, "$P",
+                                     "0");
         }
-        prompt = replace_string( prompt, "$D", path );
-        prompt = replace_string( prompt, "$h",
-            "" + (int)this_player()-> query_hp() );
-        prompt = replace_string( prompt, "$H",
-            "" + (int)this_player()-> query_max_hp() );
-        prompt = replace_string( prompt, "\\n", "\n" );
-        prompt = replace_string( prompt, "$N", lower_case(mud_name()) );
-     prompt = replace_string(prompt, "$L", " "+this_object()->query_spoken());
-        prompt = replace_string( prompt, "$C", ""+query_cmd_num() );
+        prompt = replace_string(prompt, "$D", path );
+        prompt = replace_string(prompt, "$h",
+                                 "" + (int)this_player()-> query_hp() );
+        prompt = replace_string(prompt, "$H",
+                                 "" + (int)this_player()-> query_max_hp() );
+        prompt = replace_string(prompt, "\\n", "\n" );
+        prompt = replace_string(prompt, "$N", lower_case(mud_name()) );
+        prompt = replace_string(prompt, "$L", " "+this_object()->query_spoken());
+        prompt = replace_string(prompt, "$C", ""+query_cmd_num() );
         prompt = replace_string(prompt, "$S", ""+this_object()->query_condition_string());
         prompt = replace_string(prompt, "$W", ""+this_object()->query_wimpy()+"%");
-       prompt = replace_string(prompt, "$x", ""+this_player()->query_internal_encumbrance()); // Encumbrance
-       prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance()); // Max Encumbrance
+        prompt = replace_string(prompt, "$x", ""+this_player()->query_internal_encumbrance());
+        prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance());
+        prompt = replace_string(prompt, "$i", ""+hunger2string(this_player()));
+        prompt = replace_string(prompt, "$I", ""+thirst2string(this_player()));
+       
         if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");
         else prompt = replace_string(prompt, "$E", "No Essence");
-     if (avatarp(this_player()))
-              prompt = replace_string(prompt, "$I", am_invis);
+        if (avatarp(this_player()))
+            prompt = replace_string(prompt, "$I", am_invis);
         prompt += " ";
     } else {
         prompt = DEFAULT_PROMPT;
@@ -238,3 +241,46 @@ int queryTimeBlock(){
 int queryAdminBlock(){
     return aBlock;
 }
+
+
+string hunger2string(object obj)
+{
+    int max, hunger;
+    max = obj->query_formula();
+    max /=6;
+    hunger = obj->query_stuffed();
+    if(hunger < max)
+        return"Starving";
+    else if(hunger < (max * 2))
+        return "Very hungry";
+    else if(hunger < (max * 3))
+        return "Really hungry";
+    else if(hunger < (max * 4))
+        return "Hungry";
+    else if(hunger < (max * 5))
+        return "Not hungry";
+    else
+        return "Stuffed";
+}
+
+string thirst2string(object obj)
+{
+    int max, hunger;
+    max = obj->query_formula();
+    max /=6;
+    hunger = obj->query_stuffed();
+    if(hunger < max)
+        return"Parched";
+    else if(hunger < (max * 2))
+        return "Very thirsty";
+    else if(hunger < (max * 3))
+        return "Really thirsty";
+    else if(hunger < (max * 4))
+        return "Thirsty";
+    else if(hunger < (max * 5))
+        return "Not thirsty";
+    else
+        return "Parched";
+}
+
+

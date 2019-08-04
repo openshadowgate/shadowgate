@@ -46,6 +46,8 @@ Available codes:
   %^MAGENTA%^$r%^WHITE%^ rage status
   %^MAGENTA%^$x%^WHITE%^ Current encumbrance level
   %^MAGENTA%^$X%^WHITE%^ Maximum encumbrance level
+  %^MAGENTA%^$i%^WHITE%^ Current hunger level
+  %^MAGENTA%^$I%^WHITE%^ Maximum thirst level
   %^MAGENTA%^$S%^WHITE%^ condition
   %^MAGENTA%^$W%^WHITE%^ current wimpy %
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
