@@ -2,6 +2,11 @@
 #include <daemons.h>
 inherit SPELL;
 
+string *valid_forms()
+{
+    return ({"dragon"});
+}
+
 void create() 
 {
     ::create();
@@ -28,7 +33,6 @@ int preSpell(){
 
 void spell_effect(int prof) 
 {
-//just steal stuff from yuan-ti
 
     if (!objectp(caster)){
         TO->remove();
@@ -39,7 +43,6 @@ void spell_effect(int prof)
     spell_successful();
 
     caster->set_property("spelled", ({TO}) );
-    caster->set_property("spectral_hand",1);
     addSpellToCaster();
 }
 

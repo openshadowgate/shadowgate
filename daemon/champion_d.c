@@ -161,13 +161,15 @@ varargs void create_champion(object mon, int manual)
     {
         case 0..6:
             mod = 2;
+            mon->set_property("added short",({ "%^RESET%^ (%^BOLD%^%^WHITE%^Strong%^RESET%^)"}));
             break;
         case 7..8:
             mod = 3;
+            mon->set_property("added short",({ "%^RESET%^ (%^BOLD%^%^Elite%^RESET%^)"}));
             break;
         case 9:
             mod = 4;
-//            mon->set_property("added short",({ "%^BOLD%^%^MAGENTA%^ Heroic Champion%^RESET%^"}));
+            mon->set_property("added short",({ "%^RESET%^ (%^BOLD%^%^BLACK%^Heroic%^RESET%^)"}));
             break;
     }
     
