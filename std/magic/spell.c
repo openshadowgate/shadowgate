@@ -1843,9 +1843,13 @@ void define_clevel()
         if(FEATS_D->usable_feat(caster, "mastery of power")) clevel += 4;
     if (FEATS_D->usable_feat(caster, "eldritch conditioning"))
         clevel = caster->query_character_level();
-    if(caster->query_property("raged"))    
-        if (FEATS_D->usable_feat(caster, "ragecaster"))
-            clevel = caster->query_character_level() + 4;
+
+    if (FEATS_D->usable_feat(caster, "ragecaster"))
+    {
+        clevel = caster->query_character_level();
+        if(caster->query_property("raged"))    
+            clevel = 4;
+    }
     if((int)caster->query_property("empowered"))
         clevel += (int)caster->query_property("empowered");
     clevel = clevel<0?1:clevel;
