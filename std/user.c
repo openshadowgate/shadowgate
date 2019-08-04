@@ -2132,7 +2132,7 @@ void write_messages() {
   int i;
 
   force_me("bboard info");
-  message("login","%^ORANGE%^-=%^BOLD%^<%^BOLD%^%^WHITE%^Voting for ShadowGate%^ORANGE%^>%^RESET%^%^ORANGE%^=-%^RESET%^", TO);
+  message("login","\n%^ORANGE%^-=%^BOLD%^<%^BOLD%^%^WHITE%^Voting for ShadowGate%^ORANGE%^>%^RESET%^%^ORANGE%^=-%^RESET%^", TO);
   message("login","%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
   message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);  
   message("login","", TO);

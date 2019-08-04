@@ -1567,9 +1567,19 @@ void check_fizzle(object ob) {
         return;
     }
 
+    if(objectp(target))
+        if((int)target->query_property("spell invulnerability")>query_spell_level(spell_type))
+        {
+            tell_object(caster,"%^CYAN%^Your "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly.");
+            tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly .",caster);
+            caster->removeAdminBlock();
+            TO->remove();
+            return;
+        }
+    
     if (fizzle || place->query_property("no magic")) {
         tell_object(caster,"%^CYAN%^Your "+whatsit+" fizzles harmlessly.");
-        tell_room(place,caster->QCN+"'s "+whatsit+" fizzles harmlessly.");
+        tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" fizzles harmlessly.");
         caster->removeAdminBlock();
         TO->remove();
         return;
