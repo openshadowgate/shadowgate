@@ -44,10 +44,10 @@ Available codes:
   %^MAGENTA%^$L%^WHITE%^ current language
   %^MAGENTA%^$N%^WHITE%^ name of mud
   %^MAGENTA%^$r%^WHITE%^ rage status
-  %^MAGENTA%^$x%^WHITE%^ Current encumbrance level
-  %^MAGENTA%^$X%^WHITE%^ Maximum encumbrance level
-  %^MAGENTA%^$i%^WHITE%^ Current hunger level
-  %^MAGENTA%^$I%^WHITE%^ Maximum thirst level
+  %^MAGENTA%^$x%^WHITE%^ current encumbrance level
+  %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
+  %^MAGENTA%^$i%^WHITE%^ hunger level
+  %^MAGENTA%^$I%^WHITE%^ thirst level
   %^MAGENTA%^$S%^WHITE%^ condition
   %^MAGENTA%^$W%^WHITE%^ current wimpy %
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
@@ -56,6 +56,9 @@ Available codes:
 
 Avatars only:
   %^MAGENTA%^$I%^WHITE%^ shows True Invis / Mortal Invis / Stealthed status%^RESET%^
+
+Creators only:
+  %^MAGENTA%^$D%^WHITE%^ shows current directory
 
 %^CYAN%^EXAMPLE%^RESET%^
 
