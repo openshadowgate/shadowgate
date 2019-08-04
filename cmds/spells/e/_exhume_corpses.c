@@ -42,7 +42,7 @@ void spell_effect()
     int i;
 
     tell_room(place,"%^CYAN%^A low continuous thunder rolls over the place, and %^BOLD%^%^BLACK%^co%^RESET%^%^CYAN%^r%^BOLD%^%^BLACK%^p%^RESET%^%^CYAN%^s%^CYAN%^e%^BOLD%^%^BLACK%^s%^RESET%^%^CYAN%^ begin to materialize everywhere.");
-    for (i=0; i<clevel; i++)
+    for (i=0; i<clevel/2; i++)
     {
         object corpse;
         corpse = new(OB_CORPSE);
