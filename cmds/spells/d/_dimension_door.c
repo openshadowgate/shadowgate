@@ -10,7 +10,7 @@ object ob, endplace;
 void create(){
     ::create();
     set_author("nienne");
-    set_spell_name("dimension door");
+    set_spell_name("conjuration_summoning");
     set_spell_level(([ "bard" : 4, "psywarrior" : 4, "psion" : 4, "assassin" : 4, "mage" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS dimension door to LOCATION");

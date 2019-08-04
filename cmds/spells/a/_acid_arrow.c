@@ -168,6 +168,11 @@ void more_acid()
         dest_effect();
         return;
     }
+    if(target->query_hp()<0)
+    {
+        dest_effect();
+        return;
+    }
 }
 
 

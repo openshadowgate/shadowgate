@@ -22,7 +22,7 @@ void create() {
     set_syntax("cast CLASS stormrage");
     set_description("In using this spell, the caster calls upon the might of the weather, creating a powerful storm in an "
 "area.  The storm takes several rounds to develop and a few more to recede.  With it comes stinging winds, hail, and "
-"blasts of lightning.  Because the spell requires air to create its storm, it cannot be cast underwater.");
+"blasts of lightning. Unlike many other AOE, this spell will remain in place until casted dispells it.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");

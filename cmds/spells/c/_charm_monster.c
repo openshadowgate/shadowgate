@@ -24,9 +24,7 @@ void create() {
     set_description("Casting this divine prayer will allow a priest to attempt to charm a mob.  If the mob falls prey to "
 "the charm, they will stand in defense of the caster, and follow them around.  Caution should be exercised, for if you "
 "take any offensive actions against the charmed monster, the charm will end.   A caster may have only one charmed "
-"creature under their sway at one time.\n\n%^BOLD%^%^MAGENTA%^OOC\nPlease exercise caution and good role-playing skills "
-"when using this prayer.  Just because you have a monster charmed, does not mean people will react well to it in crowded "
-"places.");
+"creature under their sway at one time.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
