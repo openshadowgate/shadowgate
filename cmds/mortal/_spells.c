@@ -10,7 +10,6 @@ string *magic;
 int get_spells(object player, string myclass);
 int full_list(object player, string myclass);
 void add_spell(string spellname, int lvl);
-void line();
 void sort();
 void CleanUpSpellObjects();
 private void swap(int i, int j);
@@ -73,10 +72,8 @@ int cmd_spells(string str)
         tell_object(TP, "There are no spells available to the "+myclass+" class!");
         return 1;
     }
-    tell_object(TP, "\n%^BOLD%^%^CYAN%^Generating spell list as a %^ORANGE%^"+myclass+"%^CYAN%^:");
-    line();
+    tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list as a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
     tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 28) + arrange_string("Level", 8)+"Memorized");
-    line();
 
     if (args != "by level" && args != "expanded knowledge") sort();
     else sort_two();
@@ -86,8 +83,8 @@ int cmd_spells(string str)
         if(level && (spells[magic[x]] != level) ) { continue; } 
         write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 30)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 10)+(int)TP->query_memorized(myclass,magic[x]));
     }
+    tell_object(TP,"\n");
     CleanUpSpellObjects();
-    line();
     return 1;
 }
 
@@ -107,8 +104,6 @@ void CleanUpSpellObjects()
     }
     return;
 }
-
-void line() { write("%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"); }
 
 int get_spells(object player, string myclass) 
 {

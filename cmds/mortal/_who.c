@@ -156,15 +156,15 @@ string list_users(string *races, object tp)
             tmp += melnmarn+" ";
             //
             if (who[i]->query_property("inactive"))
-                tmp += "%^BOLD%^%^MAGENTA%^[INACTIVE]%^RESET%^";
+                tmp += "%^BOLD%^%^MAGENTA%^Inactive%^RESET%^";
             else if (interactive(who[i]) && query_idle(who[i]) > 60)
-                tmp += "%^BOLD%^%^BLUE%^[Idle "+(query_idle(who[i]) / 60)+"]%^RESET%^";
+                tmp += "%^BOLD%^%^BLUE%^Idle "+sprintf("%3d",(query_idle(who[i]) / 60))+"%^RESET%^";
             else
-                tmp += "%^RESET%^%^BLUE%^[Active]%^RESET%^";
+                tmp += "%^RESET%^%^BLUE%^Active%^RESET%^  ";
             
 
             if (PRISON_D->is_imprisoned((string)who[i]->query_name()))
-                tmp += "%^BOLD%^%^RED%^[In Jail]";
+                tmp += "%^BOLD%^%^RED%^In Jail";
             else
                 if(objectp(who[i]) && interactive(who[i]) && objectp(tp))
                 {

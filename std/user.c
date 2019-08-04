@@ -2131,13 +2131,11 @@ void write_messages() {
   mapping mail_stat;
   int i;
 
-  // Supplanted by bboard mortal command. Mostly done by Styx.
-  // Patch in login by garrett, moved up above mail and error messages by Styx 12/21/03 now that we have bboard next
   force_me("bboard info");
-  message("login","%^ORANGE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^", TO);
+  message("login","%^ORANGE%^-=%^BOLD%^<%^BOLD%^%^WHITE%^Voting for ShadowGate%^ORANGE%^>%^RESET%^%^ORANGE%^=-%^RESET%^", TO);
   message("login","%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
   message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);  
-  message("login","%^ORANGE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^", TO);
+  message("login","", TO);
 
   mail_stat = (mapping)LOCALPOST_D->mail_status(query_name());
   if (mail_stat["unread"]) {
