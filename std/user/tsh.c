@@ -159,7 +159,7 @@ string write_prompt()
         prompt = replace_string(prompt, "$x", ""+this_player()->query_internal_encumbrance());
         prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance());
         prompt = replace_string(prompt, "$i", ""+hunger2string(this_player()));
-        prompt = replace_string(prompt, "$I", ""+thirst2string(this_player()));
+        prompt = replace_string(prompt, "$o", ""+thirst2string(this_player()));
        
         if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");
         else prompt = replace_string(prompt, "$E", "No Essence");

@@ -1,27 +1,39 @@
-%^RESET%^%^CYAN%^The following classes are available:%^RESET%^
+%^CYAN%^NAME%^RESET%^
 
-    Barbarian
-    Bard
-    Cleric
-    Druid
-    Fighter
-    Mage
-    Monk
-    Paladin
-    Psion
-    Psywarrior
-    Ranger
-    Sorcerer
-    Thief
-    Warlock
+Classes on Shadowgate 
+
+%^CYAN%^DESCRIPTION%^RESET%^ 
+
+%^RESET%^%^BOLD%^%^WHITE%^The following classes are available:%^RESET%^
+
+%^MAGENTA%^Class       Description  
+%^CYAN%^Barbarian%^RESET%^   Tribal warriors that channel their rage to devastating effect. 		
+%^CYAN%^Bard%^RESET%^        Master entertainers that dabble in combat and the arcane arts.		
+%^CYAN%^Cleric%^RESET%^      Holy priests that draw power from their faith in a deity. 
+%^CYAN%^Druid%^RESET%^       Champions of nature with the ability to shape-shift. 	
+%^CYAN%^Fighter%^RESET%^     Diverse warriors with unrivaled martial prowess.
+%^CYAN%^Mage%^RESET%^        Wizards that weave magic through relentless study.
+%^CYAN%^Monk%^RESET%^        Martial art masters that fight unarmored and often unarmed. 
+%^CYAN%^Paladin%^RESET%^     Holy warriors and protectors, in service of a faith or cause. 
+%^CYAN%^Psion%^RESET%^       Mortals that bend the world to their will with their mind. 
+%^CYAN%^Psywarrior%^RESET%^  Warriors gifted with limited psionic powers.
+%^CYAN%^Ranger%^RESET%^      Hunters and warriors that gain divine powers from nature. 
+%^CYAN%^Sorcerer%^RESET%^    Mortals that master the art of magic through raw talent.
+%^CYAN%^Thief%^RESET%^       Masters of stealth and deceit that attack from the shadows.
+%^CYAN%^Warlock%^RESET%^     Mysterious mortals whose soul is suffused with perilous magic. 
 
 
-Each class has its own strengths and weaknesses, represented by a unique set of feats and abilities.  Some classes are restricted based on race, alignment and/or stats.  For information about each class, see %^BOLD%^%^WHITE%^<help CLASS>%^RESET%^.
+Each class has its own strengths and weaknesses, represented by a unique set of feats and abilities.  Some classes are restricted based on race, alignment and/or stats. 
 
-%^BOLD%^%^CYAN%^Multi-classing:%^RESET%^
-When you advance beyond level 10, 20, 30 and 40 you will be given the option to %^CYAN%^multi-class%^RESET%^.  To do so, simply type %^BOLD%^%^WHITE%^<advance NEW_CLASS>%^RESET%^ in an area that allows advancement and you will become a %^CYAN%^"multi-classed character"%^RESET%^.  When you reach the new bracket, you may choose to advance in your new or old class or even pick up a third.  Some classes have multi-class restrictions noted in their help-files.  Note that you must meet the requirements of any class that you decide to pick up.
+%^CYAN%^Multi-Class Characters:%^RESET%^
 
-%^BOLD%^%^CYAN%^Prestige Classes:%^RESET%^
-Additionally, when you advance past level 40 you may pick up a %^CYAN%^prestige class%^RESET%^.  These offer specialized and often more powerful abilities, but they come with a small range of prerequisites.  For more information on these, see %^BOLD%^%^WHITE%^<help prestige classes>%^RESET%^. 
+When you advance beyond level 10, 20, 30 and 40 you will be given the option to %^CYAN%^multi-class%^RESET%^.  To do so, simply type %^ORANGE%^<advance NEW-CLASS>%^RESET%^ in an area that allows advancement and you will become a "multi-classed character".  When you reach the new bracket, you may choose to advance in your new or old class or even pick up a third.  Some classes have multi-class restrictions noted in their help-files.  Note that you must meet the requirements of all of your classes. 
 
-%^CYAN%^See also: %^RESET%^ advance, stats, feats, races, alignments.
+%^CYAN%^Prestige Classes:%^RESET%^
+
+When you advance past level 40 you may pick up a %^CYAN%^prestige class%^RESET%^.  These offer specialized and often more powerful abilities, but they come with a small range of prerequisites.  For more information on these, see %^ORANGE%^<help prestige classes>%^RESET%^. 
+
+%^CYAN%^To get more information on a class, type %^RESET%^%^ORANGE%^<help CLASS>%^RESET%^%^CYAN%^. 
+
+%^CYAN%^SEE ALSO
+advance, abandon, stats, feats, skills, races, alignments.

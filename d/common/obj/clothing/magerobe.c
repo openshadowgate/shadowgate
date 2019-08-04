@@ -29,11 +29,16 @@ void create() {
     set_ac(0);
     set_max_internal_encumbrance(21);
     set_property("no animate",1);
+    set_wear((:TO,"wear_stuff":));
 }
 
 mapping query_comp_map() { return comp; }
 
 void set_comp_map(mapping info) { comp = info; }
+
+int wear_stuff(){
+    return 1; //Don't remove it since non-lambda closures save.
+}
 
 void init() {
    ::init();
