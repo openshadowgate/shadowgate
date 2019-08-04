@@ -194,7 +194,8 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
         if(TO->query_property("raged"))
             if(FEATS_D->usable_feat(TO,"raging healer"))
             {
-                if(random(4))
+                //(11/12)^7 = 0.54
+                if(random(12))
                 {
                     string raging_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds", "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds", "mass cure critical wounds", "regeneration", "aura of healing", "heal", "mass heal"});
                     if(member_array(spell,raging_healer_spells)!=-1)
