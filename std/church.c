@@ -198,7 +198,7 @@ int pray()
         //TP->set_XP_tax(0, 0, "death");
 
         /* Damaging enchanted inventory. */
-        stuff=deep_inventory(TP);
+        stuff=all_inventory(TP);
         for (i=0;i<sizeof(stuff);i++) 
         {
             if(!objectp(stuff[i]))
