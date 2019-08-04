@@ -37,6 +37,7 @@ void write_who(){
   j = sizeof(wizes);
   for(i=0;i<j;i++){
     if(!objectp(find_player(wizes[i]))) continue;
+    if(find_player(wizes[i])->query_true_invis()) continue;
     out += "Staff: "+CONVERTER->convertFromInput(find_player(wizes[i])->query_title())+"<br /><font color=\"#FFFFFF\">\n";
   }
   if(sizeof(wizes)) out +=  "<br />";

@@ -10,9 +10,9 @@ object ob, endplace;
 void create(){
     ::create();
     set_author("nienne");
-    set_spell_name("conjuration_summoning");
+    set_spell_name("dimension door");
     set_spell_level(([ "bard" : 4, "psywarrior" : 4, "psion" : 4, "assassin" : 4, "mage" : 4 ]));
-    set_spell_sphere("alteration");
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS dimension door to LOCATION");
     set_description("Through this spell the caster opens a 'door' in the fabric of reality, attuned only to themselves.  "
 "They can use this to step through to a location of their choice, only one that they have previously visited and found to "
