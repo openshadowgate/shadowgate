@@ -4,7 +4,7 @@
 
 inherit DAEMON;
 
-int cmd_clean_relationships(string str)
+int cmd_fixrecognized(string str)
 {
     object player;
     mapping relationships;
@@ -56,11 +56,11 @@ void help()
     write("
 %^CYAN%^NAME%^RESET%^
 
-clean_relationships - remove suicied, rid or vanished players from your memory
+fixrecognized - remove suicied, rid or vanished players from your memory
 
 %^CYAN%^SYNTAX%^RESET%^
 
-clean_relationships [all]
+fixrecognized [all]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -79,7 +79,7 @@ recognize
 
 You can use it on target by adding their name.
 
-<clean_relationships [NAME]>
+<fixrecognized [NAME]>
 
 ");
 }

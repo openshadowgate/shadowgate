@@ -63,18 +63,11 @@ string list_users(string *races, object tp)
     wizzes = sort_array(wizzes, "sort_by_level", this_object());
     who = sort_array(who, "sort_by_name", this_object());
 
-    belphy = "%^BOLD%^%^BLUE%^                           -=-=-=-=-=-=-=-=-=-=-\n";
-    belphy += "%^BOLD%^%^BLUE%^                        -=> %^BOLD%^%^GREEN%^S h a d o w G a t e%^BOLD%^%^BLUE%^ <=-\n";
-    belphy += "%^BOLD%^%^BLUE%^                     -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
+    belphy = "\n";
     if (sizeof(races) && max == 1)
-        belphy += "%^BOLD%^%^BLACK%^           --=>%^RESET%^%^WHITE%^ There is only one such adventurer online. %^BOLD%^%^BLACK%^<=--";
+        belphy += "%^GREEN%^--=%^BOLD%^< %^RESET%^%^WHITE%^There is only one such adventurer online.%^RESET%^%^GREEN%^%^BOLD%^ >%^RESET%^%^GREEN%^=--";
     else
-        if (max == 1)
-            belphy += "%^BOLD%^%^BLACK%^                --=>%^RESET%^%^WHITE%^ You are the only adventurer online! %^BOLD%^%^BLACK%^<=--";
-        else
-            belphy += "%^BOLD%^%^BLACK%^            --=>%^RESET%^%^WHITE%^ There are currently "+max+" adventurers online! %^BOLD%^%^BLACK%^<=--";
-    belphy +="\n";
-    belphy += "%^GREEN%^--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--";
+        belphy += "%^GREEN%^--=%^BOLD%^< %^RESET%^%^WHITE%^There are currently "+max+" adventurers online!%^RESET%^%^GREEN%^%^BOLD%^ >%^RESET%^%^GREEN%^=--";
     belphy +="\n";
 
     who = wizzes +who;
@@ -194,12 +187,12 @@ string list_users(string *races, object tp)
         tmp += arrange_string(" ", (43 - strlen("/daemon/filters_d.c"->filter_colors(rp_flags[i]->query_short())))) + "%^RESET%^%^BLUE%^[Active]%^RESET%^\n";
         belphy += tmp;
     }
-    belphy += "%^GREEN%^--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--\n";
     if(pointerp(worldEvents = WORLD_EVENTS_D->parsable_world_events(tp)))
     {
+        belphy+="%^GREEN%^--=%^BOLD%^< %^RESET%^%^ORANGE%^Active world events %^BOLD%^%^GREEN%^>%^RESET%^%^GREEN%^=--\n";
         foreach(tmp in worldEvents) { belphy += tmp +" event is currently active.\n"; continue; }
-        belphy += "%^GREEN%^--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--\n";
     }
+    belphy+="\n";
     return belphy;
 }
 
