@@ -64,10 +64,7 @@ string list_users(string *races, object tp)
     who = sort_array(who, "sort_by_name", this_object());
 
     belphy = "\n";
-    if (sizeof(races) && max == 1)
-        belphy += "%^GREEN%^--=%^BOLD%^< %^RESET%^%^WHITE%^There is only one such adventurer online.%^RESET%^%^GREEN%^%^BOLD%^ >%^RESET%^%^GREEN%^=--";
-    else
-        belphy += "%^GREEN%^--=%^BOLD%^< %^RESET%^%^WHITE%^There are currently "+max+" adventurers online!%^RESET%^%^GREEN%^%^BOLD%^ >%^RESET%^%^GREEN%^=--";
+    belphy += "%^GREEN%^--=%^BOLD%^< %^RESET%^%^WHITE%^There are "+max+" adventurers online!%^RESET%^%^GREEN%^%^BOLD%^ >%^RESET%^%^GREEN%^=--";
     belphy +="\n";
 
     who = wizzes +who;
