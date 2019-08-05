@@ -242,10 +242,11 @@ int sorcerer_master(string str)
              tell_object(TP,"You can only swap two spells of the same level, unless you have the spell knowledge feat.");
              return 1;
            }
+           knownbonus = 0;
            if(FEATS_D->usable_feat(TP,"spell knowledge"))
                knownbonus = 1;
            if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
-               knownbonus = 4;
+               knownbonus += 3;
            // run totals here to allow spell knowledge to exceed overall only by 2
            if(sizeof(sorcmap[spelllevel2]) >= available[(spelllevel2-1)]) { // if already at native cap on this level!
              for(i=1;i<10;i++) {
@@ -295,10 +296,11 @@ int sorcerer_master(string str)
            tell_object(TP,"You can't learn any further spells of level "+spelllevel+".");
            return 1;
          }
+         knownbonus = 0;
          if(FEATS_D->usable_feat(TP,"spell knowledge"))
              knownbonus = 1;
          if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
-             knownbonus = 4;
+             knownbonus += 4;
          // run totals here to allow spell knowledge to exceed overall only by 2
          for(i=1;i<10;i++) {
            myint = sizeof(sorcmap[i]);
