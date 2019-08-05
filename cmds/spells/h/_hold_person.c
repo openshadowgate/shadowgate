@@ -46,6 +46,7 @@ void spell_effect(int prof)
     {
         if (member_array((string)target->query_race(),VALID_BACKS) == -1)
         {
+            tell_object(caster,"%^BOLD%^Your target is not a person!%^RESET%^");
             dest_effect();
             return;
         }

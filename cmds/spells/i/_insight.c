@@ -53,17 +53,9 @@ int preSpell()
 
 void spell_effect(int prof){ 
     int duration;
-// removing multiclass distinction, no longer relevant under 3e. N, 3/17.
-//    if(sizeof(caster->query_classes()) == 1){ 
-        duration = (ROUND_LENGTH * 20) * clevel;
-        bonus = 2;
-        attk_bonus = clevel/8;
-/*    }else{ 
-        duration = (ROUND_LENGTH * 10) * clevel;
-        bonus = 1; 
-        attk_bonus = clevel/10;
-    }*/
-
+    duration = (ROUND_LENGTH * 20) * clevel;
+    bonus = 2;
+    attk_bonus = clevel/8;
     if(!present(target,place)){
         tell_object(caster,"Your target has left the area.");
         dest_effect();
@@ -99,8 +91,8 @@ void dest_effect()
     { 
         tell_object(target,"%^BOLD%^%^CYAN%^The sense of foresight fades.%^RESET%^");
         target->remove_property("foresight"); 
-        target->add_ac_bonus(-1*bonus);
-        target->add_attack_bonus(-1*attk_bonus);
+        target->add_ac_bonus(-bonus);
+        target->add_attack_bonus(-attk_bonus);
     }
     ::dest_effect();
    if(objectp(TO)) TO->remove();
