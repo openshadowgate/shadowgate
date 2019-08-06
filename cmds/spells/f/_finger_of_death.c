@@ -39,7 +39,7 @@ void spell_effect(int prof) {
     if((string)target->query_property("no death") || x || do_save(target,4))
     {
         tell_object(target,"%^BOLD%^The struggle is won, yet at a price.");
-        tell_room(place,"%^BOLD%^The soul survives, yet at a pririce.",target);
+        tell_room(place,"%^BOLD%^The soul survives, yet at a price.",target);
         damage_targ(target, target->query_target_limb(),sdamage,"negative energy");
         target->set_property("no_slay",({caster->query_name()}));
     } else {
