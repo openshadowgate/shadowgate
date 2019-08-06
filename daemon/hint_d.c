@@ -1,101 +1,56 @@
-// Hints Daemon
-// Gives hints out on apropos subjects.
-// Thorn@ShadowGate
-// 20 September 2001
-// /daemon/hint_d.c
-
 #include <std.h>
 #include <security.h>
 
-// DEBUG mode enabled on 1, 0 is off.  Make sure and set DEBUGGER
-// to yourself if you are testing this.
-#define DEBUG 0
-#define DEBUGGER "thorn"
-
-// #define SAVE_FILE "/daemon/save/hints"
-
-// 
-#define HDIR "/doc/hints"
-#define HPROP "hints"
+#define HFILE "/d/common/text/tips"
+#define FREQ 10
 
 inherit DAEMON;
 
-void initialize_daemon();
+//If nobody uses this it'll swap.
+static string *hints;
 
-string *files;
-mapping hints;
-
-void create() {
+void create()
+{
     ::create();
-
-  initialize_daemon();
+    remove_call_out("display_hint");
+    if(load_hints(HFILE))
+        display_hint();
 }
 
-void initialize_daemon() {
-	string *list;
-	string temp;
-	string data;
-	string *lines;
-	mixed *info;
-	int x;
-	
-	hints = ([ ]);
-	files = ({ });
-	list = stat(HDIR+"/");
-	for(x=0;x<sizeof(list);x++) {
-		temp = list[x];
-		info = stat(HDIR+"/"+temp, -1);
-		if((int)info[1] == -2) continue;
-		files += ({ temp });
-		if(DEBUG)
-        tell_object(find_player(DEBUGGER), temp);
-		data = read_file(HDIR+"/"+temp);
-		lines = explode(data, "\n");
-		hints[temp] = lines;
-	}
-	if(DEBUG)
-		tell_object(find_player(DEBUGGER), 
-			"\nInitialization complete.\n");
-	return;
+/**
+ * This one loads hints from a file into hints variable.  
+ *
+ * If a file grows too big, this fun should be replaced with line-by
+ * line read (like in _grep)
+ */
+int load_hints(string fname)
+{
+    if(!file_exists(fname))
+    {
+        return 0;
+    }
+    hints = explode(read_file(fname),"\n");
+    if(!pointerp(hints))
+        return 0;
+    return 1;
 }
 
-mapping dump() {
-	return hints;
+/**
+ * Display random hint to everyone
+ */
+void display_hint()
+{
+    object *people, peep;
+    people = filter_array(users(),(:$1->query("no hints"):));
+    if(sizeof(people))
+    {
+        string hint;
+        hint = hints[random(sizeof(hints))];
+        foreach(peep in people)
+        {
+            message("hint","%^BOLD%^%^CYAN%^[%^RESET%^%^CYAN%^HINT%^BOLD%^]%^RESET%^ "+hint, peep);
+        }
+    }
+    call_out("display_hint",FREQ);
 }
 
-string get_hint(string *apropos) {
-	int num, x;
-	string *hnts, *list, err;
-	
-	list = ({ });
-	if(apropos) {
-		for(x=0;x<sizeof(apropos);x++) {
-			if(member_array(apropos[x], keys(hints)) == -1)
-				continue;
-			list = list + ({ apropos[x] });
-		}
-	} 
-	else {
-		list = keys(hints);
-	}
-	if(!list)
-		return "*ERR: No such hint file.";
-	num = sizeof(list);
-	hnts = hints[list[random(num)]];
-	num = sizeof(hnts);
-	return hnts[random(num)];
-}
-
-int hint(object user, string topics) {
-	string hint, retval;
-	string *tlist;
-	
-	if(!user->getenv("HINTS")) return 0;
-	if(topics) {
-		tlist = explode(topics, " ");
-		hint = get_hint(tlist);
-	}
-	else hint = get_hint(0);
-	message("hint", "%^BOLD%^GREEN%^<hint>%^RESET%^ "+hint+"\n", user);
-	return 1;
-}

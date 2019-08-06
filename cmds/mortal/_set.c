@@ -53,10 +53,10 @@ int set_hints(string val)
         write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
         return 0;
     }
-    if (val == "off")
-        TP->delete("display hints");
+    if (val == "on")
+        TP->delete("no hints");
     else
-        TP->set("display hints", 0);
+        TP->set("no hints", 1);
     return 1;
 }
 
@@ -82,7 +82,7 @@ With this command you manipulate numerous mud settings:
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-score, threaten
+score, threaten, prompt, speech, adjective, describe
 ");
 }
 

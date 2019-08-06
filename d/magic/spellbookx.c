@@ -233,7 +233,6 @@ void flip(string str, int sl) {
     if (random(8) == 0) {
         tell_object(TP,"You flip to the next page.");
         tell_room(environment(TP),TPQCN+" flips to the next page in "+TP->query_possessive()+" book.", TP);
-        "/daemon/hint_d"->hint(TP, "mage");
     }
     temp -= 2;
     if (temp > 0)

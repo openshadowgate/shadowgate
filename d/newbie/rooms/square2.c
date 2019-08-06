@@ -68,7 +68,6 @@ NEWBIE
 
 void init() {
 	::init();
-	"/daemon/hint_d"->hint(TP, "newbie general");
 }
 
 void reset(){

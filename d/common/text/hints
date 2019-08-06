@@ -1,54 +1,49 @@
-%^CYAN%^All heroes need a trusty sidekick! See %^GREEN%^<help horse guide> %^CYAN%^to learn more.%^WHITE%^
-%^CYAN%^Anything you attack (or that attacks you), is assigned the ID "attacker". If you are having difficulties targeting npcs or mobs with your spells or feats, try directing them at "attacker".%^WHITE%^
-%^CYAN%^Applying your skill points to a single craft is recommended if you want to create magical gear. See %^GREEN%^<help craft> %^CYAN%^for more information!%^WHITE%^
-%^CYAN%^Bio quests can be a great way to earn some extra money, experience, or crafting materials. Please read %^GREEN%^<help biography> %^CYAN%^for more information.%^WHITE%^
-%^CYAN%^Casting complications? Kismet’s guide can help! %^GREEN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=123%^WHITE%^
-%^CYAN%^Coloring the text that appears when your character speaks is popular among our players, but did you know colored says can cause problems when interacting with coded npcs? To avoid this, make a separate alias for say with no colors.%^WHITE%^
-%^CYAN%^Crafters rejoice! Material vendors are out and about to sell you whatever sort of fabric, metal, wood, etc., that you need. You might even find a settled shop or two to buy quality materials to complete your projects.%^WHITE%^
-%^CYAN%^Customize your prompt however you would like! See %^GREEN%^<help prompt> %^CYAN%^to learn how!%^WHITE%^
-%^CYAN%^Did you know there’s a color editor to make adding colors to your descriptions easier? Find it here: %^GREEN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=11%^WHITE%^
-%^CYAN%^Don’t forget to apply your skill points!%^WHITE%^
-%^CYAN%^Ferries for the less walking-inclined connect Shadow and Tabor, and Tharis and Tabor. Docks can be found near their respective cities.%^WHITE%^
-%^CYAN%^Find a typo or a bug or you simply wish to offer an idea or a praise? Type %^GREEN%^<help game> %^CYAN%^to see your options!%^WHITE%^
-%^CYAN%^Find item collectors in some of the major cities who will award you exp for returning lost artifacts from across the realms!%^WHITE%^
-%^CYAN%^Food will spoil without warning if you keep it in your inventory for too long and make you sick. Luckily, waterskins never spoil (just remember to refill it in the general store that sold it to you).%^WHITE%^
-%^CYAN%^Found a cool piece of gear only to realize it doesn’t fit? No matter! Certain shopkeepers will resize it. Be warned, it isn’t cheap!%^WHITE%^
-%^CYAN%^Have an amazing plot idea you want to suggest to the avatars, or require their assistance is some manner? Use %^GREEN%^<avatarmail> %^CYAN%^to send them a direct message.%^WHITE%^
-%^CYAN%^If you find yourself stuck in a broken room, try %^GREEN%^<fixroom> %^CYAN%^or %^GREEN%^<fixmore> %^CYAN%^to reset the room.%^WHITE%^
-%^CYAN%^If you find yourself wearing a cursed magical item, a church will remove it for a fee. Many casters also have the power to break a curse, so it doesn’t hurt to ask around.%^WHITE%^
-%^CYAN%^Knocked out a bad guy (or a good guy, if YOU are the bad guy)? Use some rope to %^GREEN%^<bind> %^CYAN%^them before they regain consciousness! See %^GREEN%^<help bind> %^CYAN%^for more information and inspiration!%^WHITE%^
-%^CYAN%^Love ShadowGate and want to help us grow and thrive??! Please vote for us! Type %^BOLD%^%^GREEN%^VOTE %^RESET%^%^CYAN%^for information on how you can help. We truly appreciate it!%^WHITE%^
-%^CYAN%^Low on funds and can’t afford to rent or buy a boat? Ferries are available with stops at the Mainland, Laerad, Deku and Graez. Look for the local seaports to view your options.%^WHITE%^
-%^CYAN%^Magical equipment has a chance of being cursed! Be sure to have it identified or evaluated at any of the local churches. %^WHITE%^
-%^CYAN%^Make your own maps using the %^BOLD%^%^GREEN%^MMAP %^RESET%^%^CYAN%^command! See %^GREEN%^<help mmap> %^CYAN%^to learn more.%^WHITE%^
-%^CYAN%^Many major cities have portals that allow you to travel quickly between the cities and islands!%^WHITE%^
-%^CYAN%^Most quest givers will be prompted by simply saying hello. If this does not work, try looking at them. Usually their description will hint at the appropriate action.%^WHITE%^
-%^CYAN%^Need a little extra help in combat, or just feeling a little lonely? Visit the mercenary camp west of Shadow, and tell Sault you need to hire a mercenary.%^WHITE%^
-%^CYAN%^Need to slander someone’s good name, or let the world know of your heroic deeds? Try out the %^BOLD%^%^GREEN%^GOSSIP %^RESET%^%^CYAN%^command to learn how to spread some dirt.%^WHITE%^
-%^CYAN%^Please join us on Discord! %^GREEN%^https://bit.ly/discord-sg%^WHITE%^
-%^CYAN%^Remember to %^GREEN%^<save> %^CYAN%^before you %^GREEN%^<quit> %^CYAN%^to protect your gear and progress from unforeseen bugs.%^WHITE%^
-%^CYAN%^Tabor and Shadow both offer maps of their surrounding areas. Quite helpful for the well-prepared adventurer.%^WHITE%^
-%^CYAN%^Tabor and Verbobone have hired local wizards who will study or identify your gear for a small fee! Find them for more information.%^WHITE%^
-%^CYAN%^Telepaths are employed by major cities across the realms, should you need to communicate with someone across a distance. Just tell them who you need to speak to, and they will happily oblige (for a fee)!%^WHITE%^
-%^CYAN%^The %^BOLD%^%^GREEN%^BONUSES %^RESET%^%^CYAN%^will show you the things currently affecting your stats and rolls. Give it a try!%^WHITE%^
-%^CYAN%^The %^BOLD%^%^GREEN%^FLAG %^RESET%^%^CYAN%^command allows you to set preferences for how you gain experience, whether you want to be involved in PK, and it even allows you to flag a room for roleplay. See %^GREEN%^<help flag> %^CYAN%^for more information. %^WHITE%^
-%^CYAN%^The %^BOLD%^%^GREEN%^HIT %^RESET%^%^CYAN%^command allows you to kill something instantly that has fallen below 0 hps.%^WHITE%^
-%^CYAN%^The %^BOLD%^%^GREEN%^LIMBS %^RESET%^%^CYAN%^command allows you to see what gear is where on your body.%^WHITE%^
-%^CYAN%^The %^BOLD%^%^GREEN%^PEER %^RESET%^%^CYAN%^command allows you to look ahead for any dangers. %^GREEN%^<peer [direction] [# of rooms]>%^WHITE%^
-%^CYAN%^The %^BOLD%^%^GREEN%^PREPARE %^RESET%^%^CYAN%^command is one of the strongest resources in the caster's toolbox. Learn it! Use it! You’ll be happy you did. See %^GREEN%^<help prepare> %^CYAN%^to learn more!%^WHITE%^
-%^CYAN%^The %^BOLD%^%^GREEN%^THOUGHT %^RESET%^%^CYAN%^command lets you communicate your character’s thoughts so that only the immortals and avatars will know them! Just type %^GREEN%^<thought [msg]>%^CYAN%^.%^WHITE%^
-%^CYAN%^Tired of so much colorful combat spam? Typing %^BOLD%^%^GREEN%^BRIEFCOMBAT %^RESET%^%^CYAN%^will help.%^WHITE%^
-%^CYAN%^Typing %^BOLD%^%^GREEN%^RUMORS %^RESET%^%^CYAN%^shows you places appropriate for you to adventure, as well as if anyone is hanging out in the major cities or inns!%^WHITE%^
-%^CYAN%^Typing %^GREEN%^<flag> %^CYAN%^will show you your current flagged settings as well as any current bonus events happening!%^WHITE%^
-%^CYAN%^Upset your new boots don’t match the color of your eyes? Have no fear! %^BOLD%^%^GREEN%^ALTEROBJ %^RESET%^%^CYAN%^allows you to customize everything to your personal satisfaction. See %^GREEN%^<help alterobj> %^CYAN%^for more information.%^WHITE%^
-%^CYAN%^Use %^GREEN%^<get all coins> %^CYAN%^instead of %^GREEN%^<get coins> %^CYAN%^to pick all your piles up at once.%^WHITE%^
-%^CYAN%^Using %^BOLD%^%^GREEN%^NICKNAME %^RESET%^%^CYAN%^and %^BOLD%^%^GREEN%^ALIAS %^RESET%^%^CYAN%^can greatly reduce the amount of time it takes to enter commands.%^WHITE%^
-%^CYAN%^Using the %^BOLD%^%^GREEN%^BLOCK %^RESET%^%^CYAN%^command %^GREEN%^<block [direction]> %^CYAN%^can make it harder for your foes to flee.%^WHITE%^
-%^CYAN%^Using the %^BOLD%^%^GREEN%^BUFF %^RESET%^%^CYAN%^command allows casters to refresh their defensive spells in a single command. See %^GREEN%^<help buff> %^CYAN%^for more information!%^WHITE%^
-%^CYAN%^View Kismet’s brilliant Emote Guide to learn how to up your emoting game! %^GREEN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=83%^WHITE%^
-%^CYAN%^Want to pass through an area without being seen or heard? Trying using %^GREEN%^<sneak [direction]>%^CYAN%^. The more stealthy you are, the better chance you will have.%^WHITE%^
-%^CYAN%^You can disable these messages by typing %^GREEN%^<hint off>%^CYAN%^. Enable them by typing %^GREEN%^<hint on>%^CYAN%^. Or see all of them at once by typing %^GREEN%^<hint all>%^CYAN%^.%^WHITE%^
-%^CYAN%^You can track your own progress or keep character notes by using pcnotes. %^GREEN%^<help pcnotes> %^CYAN%^for more information!%^WHITE%^
-%^CYAN%^You can use the %^BOLD%^%^GREEN%^FORAGE %^RESET%^%^CYAN%^command to find food in the wilderness. You can also drink from some ponds and fountains.%^WHITE%^
-%^GREEN%^<Watch> %^CYAN%^your back to have more success at catching thief stabs!%^WHITE%^
-SETENV %^RESET%^%^CYAN%^allows you to control your screen settings, such as size and scrolling. See %^GREEN%^<help setenv> %^CYAN%^to learn more.%^WHITE%^
+%^CYAN%^All heroes need a trusty sidekick! See %^GREEN%^<help horse guide> %^CYAN%^to learn more.
+%^CYAN%^Anything you attack (or that attacks you), is assigned the ID "attacker". If you are having difficulties targeting npcs or mobs with your spells or feats, try directing them at "attacker".
+%^CYAN%^Applying your skill points to a single craft is recommended if you want to create magical gear. See %^GREEN%^<help craft> %^CYAN%^for more information!
+%^CYAN%^Coloring the text that appears when your character speaks is popular among our players, but did you know colored says can cause problems when interacting with coded npcs? To avoid this, make a separate alias for say with no colors.
+%^CYAN%^Crafters rejoice! Material vendors are out and about to sell you whatever sort of fabric, metal, wood, etc., that you need. You might even find a settled shop or two to buy quality materials to complete your projects.
+%^CYAN%^Customize your prompt however you would like! See %^GREEN%^<help prompt> %^CYAN%^to learn how!
+%^CYAN%^Did you know there's a visual color editor to make adding colors to your descriptions easier? Find it here: %^GREEN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=11
+%^CYAN%^Don't forget to apply your skill points! Check %^GREEN%^<help skills>.
+%^CYAN%^River ferries for the less walking-inclined connect Shadow and Tabor, and Tharis and Tabor. Docks can be found near their respective cities.
+%^CYAN%^Find a typo or a bug or you simply wish to offer an idea or a praise? Type %^GREEN%^<help game> %^CYAN%^to see your options!
+%^CYAN%^Find item collectors in some of the major cities who will award you exp for returning misplaced artifacts from across the realms!
+%^CYAN%^Found a cool piece of gear only to realize it doesn't fit? No matter! Certain shopkeepers will resize it. Be warned, it isn't cheap!
+%^CYAN%^Have an amazing plot idea you want to suggest to the avatars, or require their assistance is some manner? Use %^GREEN%^<avatarmail> %^CYAN%^to send them a direct message.
+%^CYAN%^If you find yourself stuck in a broken room, try %^GREEN%^<fixroom> %^CYAN%^or %^GREEN%^<fixmore> %^CYAN%^to reset the room.
+%^CYAN%^If you find yourself wearing a cursed magical item, a church will remove it for a fee. Many casters also have the power to break a curse, so it doesn't hurt to ask around.
+%^CYAN%^Knocked out a bad guy (or a good guy, if YOU are the bad guy)? Use some rope to %^GREEN%^<bind> %^CYAN%^them before they regain consciousness! See %^GREEN%^<help bind> %^CYAN%^for more information and inspiration!
+%^CYAN%^Love ShadowGate and want to help us grow and thrive??! Please vote for us! Type %^GREEN%^<vote> %^RESET%^%^CYAN%^for information on how you can help. We truly appreciate it!
+%^CYAN%^Low on funds and can't afford to rent or buy a boat? Sea ferries are available with stops at the Mainland, Laerad, Deku and Graez. Look for the local seaports to view your options.
+%^CYAN%^Magical equipment has a chance of being cursed! Be sure to have it identified or evaluated at any of the local churches. 
+%^CYAN%^Make your own maps using the %^GREEN%^<map> %^RESET%^%^CYAN%^command! See %^GREEN%^<help mmap> %^CYAN%^to learn more.
+%^CYAN%^Many major cities have portal service in psionic guilds that allow you to travel quickly between the cities and islands!
+%^CYAN%^Most quest givers will be prompted by simply saying 'hello'. If this does not work, try looking at them. Usually their description will hint at the appropriate action.
+%^CYAN%^Need a little extra help in combat, or just feeling a little lonely? Visit the mercenary camp west of Shadow, and tell Sault you need to hire a mercenary.
+%^CYAN%^Need to slander someone's good name, or let the world know of your heroic deeds? Try out the %^GREEN%^<gossip>  %^RESET%^%^CYAN%^command to learn how to spread some dirt.
+%^CYAN%^Please join us on Discord! %^ULINE%^%^GREEN%^https://bit.ly/discord-sg
+%^CYAN%^Tabor and Shadow both offer maps of their surrounding areas. Quite helpful for the well-prepared adventurer.
+%^CYAN%^Tabor and Verbobone have hired local wizards who will study or identify your gear for a small fee! Find them for more information.
+%^CYAN%^Telepaths are employed by major cities across the realms, should you need to communicate with someone across a distance. Just tell them who you need to speak to, and they will happily oblige (for a fee)!
+%^CYAN%^The %^GREEN%^<bonuses> %^RESET%^%^CYAN%^will show you the things currently affecting your stats and rolls. Give it a try!
+%^CYAN%^The %^BOLD%^%^GREEN%^FLAG %^RESET%^%^CYAN%^command allows you to set preferences for how you gain experience, whether you want to be involved in PK, and it even allows you to flag a room for roleplay. See %^GREEN%^<help flag> %^CYAN%^for more information. 
+%^CYAN%^The %^GREEN%^<hit> %^RESET%^%^CYAN%^command allows you to kill something instantly that has fallen below 0 hps.
+%^CYAN%^The %^GREEN%^<limbs> %^RESET%^%^CYAN%^command allows you to see what gear is where on your body.
+%^CYAN%^The %^GREEN%^<peer> %^RESET%^%^CYAN%^command allows you to look ahead for any dangers. Check %^GREEN%^<help peer>%^RESET%^
+%^CYAN%^The %^GREEN%^<prepare> %^RESET%^%^CYAN%^command is one of the strongest resources in the caster's toolbox. Learn it! Use it! You'll be happy you did. See %^GREEN%^<help prepare> %^CYAN%^to learn more!
+%^CYAN%^The %^GREEN%^<thought> %^RESET%^%^CYAN%^command lets you communicate your character's thoughts so that only the immortals and avatars will know them! Just type %^GREEN%^<thought %^ULINE%^MESSAGE%^RESET%^%^GREEN%^>%^CYAN%^.
+%^CYAN%^Tired of so much colorful combat spam? Typing %^GREEN%^<briefcombat> %^RESET%^%^CYAN%^will help.
+%^CYAN%^Typing %^GREEN%^<rumors> %^RESET%^%^CYAN%^shows you places appropriate for you to adventure, as well as if anyone is hanging out in the major cities or inns!
+%^CYAN%^Typing %^GREEN%^<flag> %^CYAN%^will show you your current flagged settings as well as any current bonus events happening!
+%^CYAN%^Upset your new boots don't match the color of your eyes? Have no fear! %^GREEN%^<alterobj> %^RESET%^%^CYAN%^allows you to customize everything to your personal satisfaction. See %^GREEN%^<help alterobj> %^CYAN%^for more information.
+%^CYAN%^Use %^GREEN%^<get all coins> %^CYAN%^instead of %^GREEN%^<get coins> %^CYAN%^to pick all your piles up at once.
+%^CYAN%^Using %^GREEN%^<nickname> %^RESET%^%^CYAN%^and %^GREEN%^<alias> %^RESET%^%^CYAN%^can greatly reduce the amount of time it takes to enter commands.
+%^CYAN%^Using the %^GREEN%^<block> %^RESET%^%^CYAN%^command %^GREEN%^<block %^ULINE%^DIRECTION%^RESET%^%^GREEN%^> %^CYAN%^can make it harder for your foes to flee.
+%^CYAN%^Using the %^GREEN%^<buff> %^RESET%^%^CYAN%^command allows casters to refresh their defensive spells in a single command. See %^GREEN%^<help buff> %^CYAN%^for more information!
+%^CYAN%^Want to pass through an area without being seen or heard? Trying using %^GREEN%^<sneak %^ULINE%^DIRECTION%^RESET%^%^GREEN%^>%^CYAN%^. The more stealthy you are, the better chance you will have.
+%^CYAN%^You can disable these messages with %^GREEN%^<set hints off> %^CYAN%^.
+%^CYAN%^You can track your own progress or keep character notes by using pcnotes. %^GREEN%^<help pcnotes> %^CYAN%^for more information!
+%^CYAN%^You can use the %^GREEN%^<forage> %^RESET%^%^CYAN%^command to find food in the wilderness. You can also drink from some ponds and fountains.
+%^GREEN%^<watch> %^CYAN%^your back to have more success at catching thief stabs!
+%^CYAN%^<set> allows you to change various settings, such as screen size, scrolling, current terminal. Check out %^GREEN%^<help set>%^CYAN%^.
