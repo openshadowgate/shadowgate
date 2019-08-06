@@ -27,7 +27,6 @@
 %^CYAN%^Tabor and Verbobone have hired local wizards who will study or identify your gear for a small fee! Find them for more information.
 %^CYAN%^Telepaths are employed by major cities across the realms, should you need to communicate with someone across a distance. Just tell them who you need to speak to, and they will happily oblige (for a fee)!
 %^CYAN%^The %^GREEN%^<bonuses> %^RESET%^%^CYAN%^will show you the things currently affecting your stats and rolls. Give it a try!
-%^CYAN%^The %^BOLD%^%^GREEN%^FLAG %^RESET%^%^CYAN%^command allows you to set preferences for how you gain experience, whether you want to be involved in PK, and it even allows you to flag a room for roleplay. See %^GREEN%^<help flag> %^CYAN%^for more information. 
 %^CYAN%^The %^GREEN%^<hit> %^RESET%^%^CYAN%^command allows you to kill something instantly that has fallen below 0 hps.
 %^CYAN%^The %^GREEN%^<limbs> %^RESET%^%^CYAN%^command allows you to see what gear is where on your body.
 %^CYAN%^The %^GREEN%^<peer> %^RESET%^%^CYAN%^command allows you to look ahead for any dangers. Check %^GREEN%^<help peer>%^RESET%^
@@ -47,3 +46,4 @@
 %^CYAN%^You can use the %^GREEN%^<forage> %^RESET%^%^CYAN%^command to find food in the wilderness. You can also drink from some ponds and fountains.
 %^GREEN%^<watch> %^CYAN%^your back to have more success at catching thief stabs!
 %^CYAN%^<set> allows you to change various settings, such as screen size, scrolling, current terminal. Check out %^GREEN%^<help set>%^CYAN%^.
+%^CYAN%^If you have multiple characters you can forward all incoming mail to one of them with internal %^GREEN%^<w>%^CYAN%^ command.

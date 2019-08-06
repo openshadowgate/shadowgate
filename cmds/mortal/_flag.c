@@ -411,10 +411,7 @@ void help()
     "\tflag roleplay flag | <on>\n"
     "\tflag player kill | <off>\n"
     "\tflag scaled level | <level> or <normal>\n"
-    "\tflag simple inventory | <on> or <off>\n"
-    "\tflag feature | vote <feature name> Yes, No, or Abstain\n"
-    "\tflag feature | view <feature name>\n"
-    "\tflag feature | notifications <on> or <off>\n");
+    "\tflag simple inventory | <on> or <off>\n");
     if(objectp(TP) && wizardp(TP))
     {
         write("\tflag feature | remove <feature name>\n"
@@ -433,15 +430,6 @@ write("\nThis command lets you adjust some various flags about your character.\n
 "in the rumors command.\n"
 );
 
-write("\nflag simple inventory | <on> or <off> will set whether or not you want to use a "
-"less cluttered inventory. This is off by default. Turning it <on> will set is so that "
-"only items you are not either wearing or wielding will show up with the <inventory> command. "
-"You are able to use the <eq> command to see only items which you are currently wielding or wearing. "
-"As of now (August, 2017) this does not impact the 'place' items are in your inventory. For example, "
-"if you are wielding a sword and are carrying another sword, which sword is the first or second sword ONLY "
-"depends on the way that it was moved into your inventory - IE the first sword (regardless of whether or not is is wielded) "
-"is sword 1.\n\n");
-
 write("flag scaled level | level will allow you to scale your level down to the specified "
 "<level> in order to adventure with or take part in plots with lower level characters. It is highly "
 "experimental, so use at your own risk, it is likely that it will tweaked as "
@@ -452,20 +440,5 @@ write("flag scaled level | level will allow you to scale your level down to the 
 "on and have a delay before it can be turned back off again, currently the delay is one week of "
 "real life time.\n");
 
-write("flag feature | vote <feature name> <yes>, <no>, or <abstain> - this lets you cast your vote, either yes "
-"or no for a feature with the name <feature name> that is currently up for vote.\n\n"
-"flag feature | view <feature name> - this lets you view more information about the feature name "
-"that you specify. Most notably the long description of it, IE what it will actually mean.\n\n"
-"flag feature | notifications <on> or <off> - by default you will get notifications about features that "
-"you have not yet voted for or notifications when features up for vote expire and are no longer up for "
-"vote.\n");
-
-if(objectp(TP) && wizardp(TP))
-{
-    write("flag feature | add - this will let you add a feature for player voting. You will be put into an "
-    "editor and will be allowed to specify the parameters of the feature.\n"
-    "flag feature | remove 'feature name' - this will let you remove a feature so that it is no longer up for "
-    "vote. You can only remove features that you personally add for voting unless you are an admin.\n");
-}
 write("See also: help pkilling, threaten");
 }
