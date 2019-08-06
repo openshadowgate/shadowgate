@@ -12,10 +12,10 @@ public string levelcheck_string(object first, object second)
 {
     switch(levelcheck(first,second))
     {
-    case 0: return "   %^RESET%^%^BOLD%^%^RED%^F%^RESET%^";
-    case 1: return "   %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^";
-    case 2: return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^";
-    default: return "   %^RESET%^%^BOLD%^%^RED%^F%^RESET%^";
+    case 0: return " %^RESET%^%^BOLD%^%^RED%^F%^RESET%^";
+    case 1: return " %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^";
+    case 2: return " %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^";
+    default: return " %^RESET%^%^BOLD%^%^RED%^F%^RESET%^";
     }
 }
 
