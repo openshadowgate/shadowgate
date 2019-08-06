@@ -44,7 +44,7 @@ mail [%^ORANGE%^%^ULINE%^NAME%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Without arguments will put you into mail client to read and manage your mail.
+Without arguments will put you into mail client to read and manage your mail. This client is coded to behave much like standard mail(1) on unix systems..
 
 With argument %^ORANGE%^%^ULINE%^NAME%^RESET%^ will put you into an editor where you can type mail for another player %^ORANGE%^%^ULINE%^NAME%^RESET%^. Recognized name won't work for this purpose, you must know name player used for character creation.
 

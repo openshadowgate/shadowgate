@@ -1,0 +1,8 @@
+%^ULINE%^%^CYAN%^Innate spells%^RESET%^
+
+Certain races and subraces have access to innate spells simply based on the nature of the race. For example, elves have access to the spell Commune, which lets them communicate with other elves telepathically. Commands associated with innate spells are:
+
+%^ORANGE%^<spells innate>%^RESET%^                To determine if you have any innate spells.
+%^ORANGE%^<cast innate SPELL ARGUMENTS>%^RESET%^  To cast an innate spell.
+
+%^CYAN%^See also: %^RESET%^recall, spells, cast, races, human ethnicities
