@@ -15,7 +15,6 @@ void create()
     feat_syntax("power_surge");
     feat_desc("Power surge allows the archpsion to turn his mental energy into increased strength with his powers. When an archpsion activates power surge, she will enter a state of intense concentration. When under attack, occasionally the concentration will empower her spells. These strengthened spells are difficult to maintain, however, and will only last for a short duration before the archpsion must recover his mental energies. Once the power is activated, it does not need to be activated again until death or something similar.");
     set_required_for(({"perfect manifesting","kinetic conversion"}));
-    psionic(1);
 }
 
 int allow_shifted() { return 0; }

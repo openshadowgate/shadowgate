@@ -11,7 +11,6 @@ void create()
     feat_name("battle psyche");
     feat_prereq("Warmind L7");
     feat_desc("The warmind has dedicated his mental energies to improving his skill and vitality in combat. He is able to better use the combatprescience feat and gains more health from psionic body.");
-    psionic(1);
     permanent(1);
 }
 

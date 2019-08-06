@@ -13,7 +13,6 @@ void create()
     feat_desc("With this feat, the mind blade becomes able to manifest powers in armor and while wielding a weapons, as if he had the feats armored manifester and combat manifester.");
     permanent(1);
     set_required_for(({"improved prescience","metabolic perfection"}));
-    psionic(1);
 }
 
 int allow_shifted() { return 0; }

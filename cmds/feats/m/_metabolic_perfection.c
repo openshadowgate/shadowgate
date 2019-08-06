@@ -13,7 +13,6 @@ void create()
     feat_prereq("Mindblade L7");
     feat_desc("With this feat, the mindblade is able to heal himself much more effectively with the true metabolism power. The power also will no longer expire unless the mindblade is rendered unconscious or killed.");
     permanent(1);
-    psionic(1);
 }
 
 int allow_shifted() { return 0; }

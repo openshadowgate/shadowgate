@@ -12,7 +12,6 @@ void create()
     feat_prereq("Archpsion L4, Power Surge");
     feat_desc("When the archpsion is damaged by kinetic objects it will restore a small amount of lost power points.");
     permanent(1);
-    psionic(1);
     set_required_for(({"perfect manifesting"}));
 }
 

@@ -12,7 +12,6 @@ void create()
     feat_prereq("Metamind L7");
     feat_desc("The metamind has focused his mental abilities into a keen weapon, allowing him to more effectively strike opponents with psionicweapon and greaterpsionicweapon. His powers are also slightly stronger.");
     permanent(1);
-    psionic(1);
 }
 
 int allow_shifted() { return 0; }

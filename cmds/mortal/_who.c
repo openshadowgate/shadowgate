@@ -63,9 +63,7 @@ string list_users(string *races, object tp)
     wizzes = sort_array(wizzes, "sort_by_level", this_object());
     who = sort_array(who, "sort_by_name", this_object());
 
-    belphy = "\n";
-    belphy += "%^GREEN%^--=%^BOLD%^< %^RESET%^%^WHITE%^There are "+max+" adventurers online!%^RESET%^%^GREEN%^%^BOLD%^ >%^RESET%^%^GREEN%^=--";
-    belphy +="\n";
+    belphy = "%^GREEN%^--=%^BOLD%^< %^RESET%^%^WHITE%^There are "+max+" adventurers online!%^RESET%^%^GREEN%^%^BOLD%^ >%^RESET%^%^GREEN%^=--\n";
 
     who = wizzes +who;
     max = sizeof(who);
@@ -189,7 +187,6 @@ string list_users(string *races, object tp)
         belphy+="%^GREEN%^--=%^BOLD%^< %^RESET%^%^ORANGE%^Active world events %^BOLD%^%^GREEN%^>%^RESET%^%^GREEN%^=--\n";
         foreach(tmp in worldEvents) { belphy += tmp +" event is currently active.\n"; continue; }
     }
-    belphy+="\n";
     return belphy;
 }
 

@@ -12,7 +12,6 @@ void create()
     feat_prereq("Warmind L1");
     feat_desc("The warmind gains the ability to innately shape their powers to avoid party members,  effectively granting them the perfect caster feat.");
     permanent(1);
-    psionic(1);
     set_required_for(({"mind over matter"}));
 }
 

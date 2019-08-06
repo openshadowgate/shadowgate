@@ -12,7 +12,6 @@ void create()
     feat_prereq("Archpsion L7");
     feat_desc("The Archpsion is so in tune with his mind that he can sometimes manifest powers without using any power points. This is based on the archpsion's intelligence stat.");
     permanent(1);
-    psionic(1);
 }
 
 int allow_shifted() { return 0; }

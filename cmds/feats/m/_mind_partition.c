@@ -12,7 +12,6 @@ void create()
     feat_desc("The mind partition feat grants the ability to repel mind-controlling affects through sheer will.");
     feat_prereq("Metamind L1");
     permanent(1);
-    psionic(1);
     set_required_for(({"mental fortress","perfect manifestation"}));
 }
 

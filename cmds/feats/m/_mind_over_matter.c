@@ -12,7 +12,6 @@ void create()
     feat_prereq("Warmind L4");
     feat_desc("The warmind's mental ability grants her exquisite control over her body, giving her the ability to heal certain hurts. The power true metabolism is added to her spell list.");
     permanent(1);
-    psionic(1);
 }
 
 int allow_shifted() { return 0; }

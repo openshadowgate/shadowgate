@@ -12,7 +12,6 @@ void create()
     feat_prereq("Metamind L4");
     feat_desc("Using only his strength of mind, the metamind is able to project a portion of himself onto the Astral plane. The power timeless body is added to his spell list.");
     permanent(1);
-    psionic(1);
 }
 
 int allow_shifted() { return 0; }
