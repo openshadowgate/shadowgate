@@ -16,4 +16,5 @@
 /daemon/placement_d
 /daemon/quests
 /daemon/wholist_d
+/daemon/hint_d
 

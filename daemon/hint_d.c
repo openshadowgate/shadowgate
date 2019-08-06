@@ -1,37 +1,21 @@
 #include <std.h>
 #include <security.h>
 
-#define HFILE "/d/common/text/tips"
-#define FREQ 10
+#define HFILE "/d/common/text/hints"
+#define FREQ 1260
 
 inherit DAEMON;
 
-//If nobody uses this it'll swap.
-static string *hints;
 
 void create()
 {
     ::create();
-    remove_call_out("display_hint");
-    if(load_hints(HFILE))
-        display_hint();
+    seteuid(getuid());
+    display_hint();
 }
 
-/**
- * This one loads hints from a file into hints variable.  
- *
- * If a file grows too big, this fun should be replaced with line-by
- * line read (like in _grep)
- */
-int load_hints(string fname)
+int clean_up()
 {
-    if(!file_exists(fname))
-    {
-        return 0;
-    }
-    hints = explode(read_file(fname),"\n");
-    if(!pointerp(hints))
-        return 0;
     return 1;
 }
 
@@ -41,14 +25,18 @@ int load_hints(string fname)
 void display_hint()
 {
     object *people, peep;
-    people = filter_array(users(),(:$1->query("no hints"):));
+    people = filter_array(users(),(:!$1->query("no hints"):));
     if(sizeof(people))
     {
+        string *hints; 
         string hint;
+        if(!file_exists(HFILE))
+            return;
+        hints = explode(read_file(HFILE),"\n"); // If hint file grows too big replace this one with line-by line read like in _grep
         hint = hints[random(sizeof(hints))];
         foreach(peep in people)
         {
-            message("hint","%^BOLD%^%^CYAN%^[%^RESET%^%^CYAN%^HINT%^BOLD%^]%^RESET%^ "+hint, peep);
+            message("hint","%^BOLD%^%^CYAN%^[%^RESET%^%^BLUE%^HINT%^BOLD%^%^CYAN%^]%^RESET%^ "+hint, peep);
         }
     }
     call_out("display_hint",FREQ);

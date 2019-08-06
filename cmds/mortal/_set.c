@@ -1,6 +1,7 @@
 #include <std.h>
+#include <daemons.h>
 
-#define VALID_SETTINGS ({"simpleinv","hints"})
+#define VALID_SETTINGS ({"simpleinv","hints","term"})
 
 int cmd_set(string args)
 {
@@ -49,7 +50,6 @@ int set_hints(string val)
     string *valid_values = ({"on","off"});
     if(member_array(val,valid_values)==-1)
     {
-        
         write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
         return 0;
     }
@@ -58,6 +58,19 @@ int set_hints(string val)
     else
         TP->set("no hints", 1);
     return 1;
+}
+
+int set_term(string val)
+{
+    string *valid_values;
+    valid_values = TERMINAL_D->query_terms();
+    if(member_array(val,valid_values)==-1)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+        return 0;
+    }
+    TP->setenv("TERM", val);
+    TP->reset_terminal();
 }
 
 void help()
@@ -77,8 +90,9 @@ set %^ORANGE%^%^ULINE%^SETTING%^RESET%^ %^ORANGE%^%^ULINE%^VALUE%^RESET%^
 
 With this command you manipulate numerous mud settings:
 
-%^GREEN%^hints %^MAGENTA%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in <inventory> command. When it is toggled off, you can see equipped inventory in <eq>. %^MAGENTA%^Default value is on.%^RESET%^
-%^GREEN%^simpleinv %^MAGENTA%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in <inventory> command. When it is toggled off, you can see equipped inventory in <eq>. %^MAGENTA%^Default value is off.%^RESET%^
+%^CYAN%^hints %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of periodic hints. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^simpleinv %^GREEN%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in %^ORANGE%^<inventory>%^RESET%^ command. When it is toggled off, you can see equipped inventory in %^ORANGE%^<eq>%^RESET%^. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
 
 %^CYAN%^SEE ALSO%^RESET%^
 
