@@ -121,10 +121,13 @@ give - give something to someone
 %^CYAN%^SYNTAX%^RESET%^
 
 give %^ORANGE%^%^ULINE%^ITEM%^RESET%^ to %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+give %^ORANGE%^%^ULINE%^AMOUNT%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^ coins to %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command will attempt to move an item from your inventory to %^ORANGE%^%^ULINE%^TARGET%^RESET%^'s inventory. It might fail if target already has too much on them.
+
+To give money, for example, use %^ORANGE%^<give 10 gold coins to Alice>%^RESET%^.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

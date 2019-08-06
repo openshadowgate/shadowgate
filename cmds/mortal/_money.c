@@ -41,7 +41,13 @@ money - look into your purse
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
+Money are mysterious substance that makes you happier when you have more of it.
+
 This command displays currency you have on yourself.
+
+%^ULINE%^%^CYAN%^Money conversions:%^RESET%^
+ 
+1 platinum = 5 gold = 10 electrum = 50 silver = 500 copper
 
 %^CYAN%^SEE ALSO%^RESET%^
 

@@ -66,7 +66,7 @@ describe - describe yourself
 
 %^CYAN%^SYNTAX%^RESET%^
 
-describe %^ORANGE%^%^ULINE%^TEX%^RESET%^T
+describe %^ORANGE%^%^ULINE%^TEXT%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -74,11 +74,11 @@ This command adds a description to you others will be able to see when they look
 
 To check how your look now, you can look at yourself by name, %^ORANGE%^<look %^ORANGE%^%^ULINE%^YOURNAME%^RESET%^%^ORANGE%^>%^RESET%^.
 
-Check %^ORANGE%^<help description>%^RESET%^ for any recomendations on what is expected to be seen in your description.
+Keep in mind that a description and adjectives are the means by which you describe your physical appearance to people. Stick to the facts, and do not add opinions. If you were to walk up to me in the street, you would not be able to tell if I was strong or evil or good. If you want people to come to a conclusion about you, you need to describe things about yourself factually. Do not try and tell the player what they should think about you.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-adjective, description, chfn, passwd, background, look, recognize
+adjective, chfn, passwd, background, look, recognize
 
 ");
 }
