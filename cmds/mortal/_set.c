@@ -5,7 +5,6 @@
 int cmd_set(string args)
 {
     string setting,value;
-    function fs;
     if(sscanf(args,"%s %s",setting,value)!=2)
     {
         write("You must specify both setting and value.");
@@ -16,13 +15,7 @@ int cmd_set(string args)
         write("Invalid setting.");
         return 1;
     }
-    fs = (:TO,"set_"+$1,setting:);
-    if(!functionp(fs))
-    {
-        write("Unable to find that setting.");
-        return 1;
-    }
-    if(!(*fs)(value))
+    if(!call_other(TO,"set_"+setting,value))
     {
         write("Unable to set "+setting+" to "+value+".");
         return 1;
