@@ -158,7 +158,7 @@ string *query_topics(string category) {
    switch(category) {
    case "*player general": return topics_dir(DIR_USER_HELP+"/");
    case "*policies": return topics_dir(DIR_POLICIES_HELP+"/");
-   case "*lore": return topics_dir(DIR_RULES_HELP+"/");       
+   case "*lore": return topics_dir(DIR_LORE_HELP+"/");       
    case "*rules": return topics_dir(DIR_RULES_HELP+"/");
    case "*guidelines": return topics_dir(DIR_GUIDELINES_HELP+"/");
    case "*dieties": case "*deities": return topics_dir(DIR_DEITIES_HELP+"/");

@@ -100,37 +100,44 @@ int cmd_lore(string str) {
 
 int help(){
    write(
-@OLI
-   lore:
-      Usage: lore <recite|teach|list|stop|review|edit> <story|song> <name> <optional player>
+"
+%^CYAN%^NAME%^RESET%^
 
-      Lore is the bard command that allows you to work with stories 
-      and songs you have written. 
+lore - manage stories
+
+%^CYAN%^SYNTAX%^RESET%^
+
+lore recite|teach|list|stop|review|edit sotry|song %^ORANGE%^%^ULINE%^NAME%^RESET%^ [%^ORANGE%^%^ULINE%^PLAYER%^RESET%^]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Lore is the bard command that allows you to work with stories       and songs you have written. 
       
-      You recite songs or stories of a particular name when you wish to
-      to perform them. 
-         lore recite song mylove
-      You list the types of songs or stories you know.
-         lore list song
-OLI
-     );
-   write(
-@OLI
-      You may teach a story or song to another bard. 
-      (Note: this is not implemented)
-         lore teach song mylove bob
-      You may stop reciting.
-         lore stop
-      You can review stories or songs already written.
-         lore review <story|song> <name>
-      You can delete stories or songs
-         lore delete 
-      You can edit stories or songs
-         lore edit <stories|songs> <name>
-      You will also need to refer to the commands song and story.
-OLI
+%^ORANGE%^<lore recite story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
+  You recite songs or stories of a particular %^ORANGE%^%^ULINE%^NAME%^RESET%^ when you wish to to perform them. 
 
+%^ORANGE%^<lore list story|song>%^RESET%^
+  You list the types of songs or stories you know.
 
+%^ORANGE%^<lore teach story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^ %^ORANGE%^%^ULINE%^PLAYER%^RESET%^%^ORANGE%^>%^RESET%^
+  You may teach a story or song to another bard. 
+
+%^ORANGE%^<lore stop>%^RESET%^
+  You may stop reciting.
+
+%^ORANGE%^<lore review story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
+  You can review stories or songs already written.
+
+%^ORANGE%^<lore delete story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
+  You can delete stories or songs
+
+%^ORANGE%^<lore edit stories|songs %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
+  You can edit stories or songs
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+story, song, languages, say, emoteat, pose
+"       
       );
    return 1;
 }

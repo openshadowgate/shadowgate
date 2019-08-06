@@ -43,7 +43,7 @@
 #define DIR_USER_HELP           DIR_HELP+"/user"
 #define DIR_AVATAR_HELP         DIR_HELP+"/avatar"
 #define DIR_RULES_HELP          DIR_USER_HELP+"/rules"
-#define DIR_LORE_HELP          DIR_USER_HELP+"/rules"
+#define DIR_LORE_HELP           DIR_USER_HELP+"/lore"
 #define DIR_POLICIES_HELP          DIR_USER_HELP+"/policies"
 #define DIR_GUIDELINES_HELP          DIR_USER_HELP+"/guidelines"
 #define DIR_DEITIES_HELP          DIR_USER_HELP+"/deities"
