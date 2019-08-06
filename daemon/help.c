@@ -67,7 +67,7 @@ static void help_menu(string category, string *topics, int ind) {
    message("info", "%^BOLD%^\nTo choose another category, enter the name of the category.", this_player());
    message("info", "%^BOLD%^To view help on any of the above topics, enter the name of the topic.", this_player());
    message("info", "%^BOLD%^To see the next page of topics, enter the <return> key.", this_player());
-   message("info", "%^BOLD%^To quit from help, enter \"q\" alone.",this_player());
+   message("info", "%^BOLD%^To quit from help, enter <exit>.",this_player());
    message("prompt", "%^YELLOW%^Selection: ", this_player());
    input_to("select_topic", category, topics, ind);
 }
@@ -77,7 +77,7 @@ static void select_topic(string str, string category, string *topics,int ind) {
       if(ind+32 < sizeof(topics)) help_menu(category, topics, ind+32);
       else help_menu(category, topics, ind);
       return;
-   } else if(str == "q") {
+   } else if(str == "exit") {
       message("help", "\nExit from help.", this_player());
       return;
    } else help(str, category, 1);
@@ -158,7 +158,7 @@ string *query_topics(string category) {
    switch(category) {
    case "*player general": return topics_dir(DIR_USER_HELP+"/");
    case "*policies": return topics_dir(DIR_POLICIES_HELP+"/");
-   case "*lore": return topics_dir(DIR_LORE_HELP+"/");       
+   case "*lore": return topics_dir(DIR_LORE_HELP+"/");
    case "*rules": return topics_dir(DIR_RULES_HELP+"/");
    case "*guidelines": return topics_dir(DIR_GUIDELINES_HELP+"/");
    case "*dieties": case "*deities": return topics_dir(DIR_DEITIES_HELP+"/");
@@ -307,21 +307,26 @@ static int find_help(string topic, string category, int menu) {
    case "*player general":
       if(!file_exists(tmp = DIR_USER_HELP+"/"+topic)) return 0;
       break;
-   case "*rules":
-      if(!file_exists(tmp = DIR_RULES_HELP+"/"+topic)) return 0;
-      break;
-   case "*lore":
-      if(!file_exists(tmp = DIR_RULES_HELP+"/"+topic)) return 0;
-      break;
    case "*feats":
        if(!file_exists(tmp = DIR_FEATS+"/"+topic[0..0]+"/_"+topic+".c")) return 0;
        if(!(ob = find_object_or_load(tmp)) || !function_exists("help", ob))
            return 0;
-//       tmp = ob;
         if(objectp(ob)) tmp = ob; // trying to fix a bug in help - garrett
        break;
+   case "*spells":
+      if(!file_exists(tmp = DIR_SPELLS"/"+topic[0..0]+"/_"+topic+".c")) return 0;
+      if(!(ob = find_object_or_load(tmp)) || !function_exists("help", ob))
+         return 0;
+      tmp = ob;
+      break;
    case "*policies":
       if(!file_exists(tmp = DIR_POLICIES_HELP+"/"+topic)) return 0;
+      break;
+   case "*rules":
+      if(!file_exists(tmp = DIR_RULES_HELP+"/"+topic)) return 0;
+      break;
+   case "*lore":
+      if(!file_exists(tmp = DIR_LORE_HELP+"/"+topic)) return 0;
       break;
    case "*dieties":
    case "*deities":
@@ -339,12 +344,6 @@ static int find_help(string topic, string category, int menu) {
    case "*skills":
      if(!file_exists(tmp = DIR_SKILLS_HELP+"/"+topic)) return 0;
      break;
-   case "*spells":
-      if(!file_exists(tmp = DIR_SPELLS"/"+topic[0..0]+"/_"+topic+".c")) return 0;
-      if(!(ob = find_object_or_load(tmp)) || !function_exists("help", ob))
-         return 0;
-      tmp = ob;
-      break;
    case "*align":
    case "*alignment":
      if(!file_exists(tmp = DIR_ALIGN_HELP+"/"+topic)) return 0;
