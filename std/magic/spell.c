@@ -1,32 +1,15 @@
-//      /std/magic/spell.c
-//      Spell System II
-//      Inheritable Spell File
-//      Thorn@ShadowGate
-//      5/13/95
-//      Modified heavily by Vashkar@ShadowGate
-//      Then made to work again by Tristan@ShadowGate
-//      And Grendel worked his magic, so all is good
-//      I'm back, Tristan Vashkar isn't coming back
-
-//      Additions for the Permanent Spell System
-//      Thorn@ShadowGate
-//      18 March 2001
-//  Added lines for making limb removal preclude spells needing somatic components but didn't activate it until I can test it and be sure that's what we want.  
-// Also compressed some of the short functions to one line for easier review/readability  *Styx* 10/15/05 last change 8/21/05
-// added queries to property("spell penetration") to be picked up by the "mod" value in MR checks. Nienne, 02/07
-// large-scale conversion to the new global spell system to allow for PrCs. Nienne, 05/10.
-
 #include <std.h>
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
-#include <spellcomponents.h>
 #include <schoolspells.h>
 #include <psions.h>
 #include <monks.h>
 
 #define NO_EFFECT -100
 inherit DAEMON;
+
+#include <spellcomponents.h>
 
 string spell_name,
        spell_type,

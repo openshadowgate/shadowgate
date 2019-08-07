@@ -6,8 +6,9 @@
 // taking the lock off non-casters; there's now no real extra benefit to them so no reason not to let them wear (unless specific items are geared to mages/etc). N, 10/15.
 #include <std.h>
 #include <move.h>
-#include <spellcomponents.h>
 inherit "/std/pocketarmour";
+
+#include <spellcomponents.h>
 
 mapping comp;
 string *comps;

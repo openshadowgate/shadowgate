@@ -10,8 +10,9 @@
 // to the functionality of this item; both function the same way.
 #include <std.h>
 #include <move.h>
-#include <spellcomponents.h>
 inherit OBJECT;
+
+#include <spellcomponents.h>
 
 mapping comp;
 string *comps;

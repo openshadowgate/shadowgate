@@ -4,10 +4,11 @@
 // removed components bag functionality, inheriting both causes issues --Yves 11/18
 #include <std.h>
 #include <move.h>
-#include <spellcomponents.h>
 #define BARD_COMP "/d/magic/store_comp"
 
 inherit "/d/common/obj/sheath/sheath_inherit.c";
+
+#include <spellcomponents.h>
 //inherit "/d/magic/comp_bag.c";
 
 void create()

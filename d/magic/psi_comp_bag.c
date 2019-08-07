@@ -1,25 +1,9 @@
-//changed from pouch to satchel after suggestions from psions to 
-//avoid conflicts with normal pouches.  ~Circe~ 9/27/05
-//   Adapted for Psionic characters by ~Circe~ 7/15/05
-//   Components Bag for Wizard Characters [v0.2]
-//   Thorn@Shadowgate
-//   10/10/94 [0.2: 12/7/94]
-//   General Wizard Class Items
-//   comp_bag.c
-
-//   0.2.1: New components list fun added; components saved to disk file, improved!
-//   0.2.2: New components producing fun added;
-
 #include <std.h>
 #include <move.h>
-//#include <psi_components.h>
-#include <spellcomponents.h>
-
 #define PSI_COMP "/d/magic/store_comp"
-// converted to generic mage comps in the move to single bags. N, 5/14
-
-//inherit OBJECT;
 inherit "/d/magic/comp_bag.c";
+
+#include <spellcomponents.h>
 
 void create() {
    ::create();
