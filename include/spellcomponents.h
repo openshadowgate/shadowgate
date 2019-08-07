@@ -91,8 +91,6 @@ string * MAGE_COMPONENTS = ({
 
 string *PSI_COMPONENTS = ({"adamite", "blue lace agate", "gray agate", "leopard agate", "banded amethyst", "amethyst", "blue amethyst"});
 
-string *BARDCOMPS = ({""});
-
 // had to be split into two defs; mud cannot handle the size of it in a single one.
 // any new components should be added to COMPONENTS2 in future. N, 5/14.
 // Just a note to anyone who comes by: what do you think compiller macro in c does? -- Il
@@ -382,4 +380,5 @@ mapping COMPONENTS1 = ([
 "zinc" : 50,
 "zoisite" : 52,
 ]);
+
 

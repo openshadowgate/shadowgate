@@ -30,25 +30,20 @@ void create() {
    set_short("A leather bag");
    set_long(
 @MAGICK
-           This is a small to medium-sized leather bag.  It is
-           only in this bag that you store the material components
-           for casting your spells.
+This is a small to medium-sized leather bag.  It is only in this bag that you store the material components for casting your spells.
 
-           To check what is in the bag type <components>.
-           To put a component into the bag type:
-           <put [component name] into components bag>
-           To retrieve components from the bag type:
-           <produce [quantity] [component name]>
-	     <produce [all] [component name]>
-           To see how many of a particular component you have, type:
-           <rummage for [component name]>
-           To produce all components in the bag at once, type:
-           <empty bag>
+To check what is in the bag type %^ORANGE%^<components>%^RESET%^.
+To put a component into the bag type:
+%^ORANGE%^<put %^ORANGE%^%^ULINE%^COMPONENT%^RESET%^%^ORANGE%^ into components bag>%^RESET%^
+To retrieve components from the bag type:
+%^ORANGE%^<produce %^ORANGE%^%^ULINE%^QUANTITY%^RESET%^%^ORANGE%^|all %^ORANGE%^%^ULINE%^COMPONENT%^RESET%^>%^RESET%^
+To see how many of a particular component you have, type:
+%^ORANGE%^<rummage for %^ORANGE%^%^ULINE%^COMMPONENT%^RESET%^%^ORANGE%^>%^RESET%^
+To produce all components in the bag at once, type:
+%^ORANGE%^<empty bag>%^RESET%^
 
-           %^BOLD%^%^RED%^NOTE:%^RESET%^ Make sure the bag you want to empty
-           is the first in your inventory.
-           This satchel will only hold those components needed for
-           spellcasting.
+%^BOLD%^%^RED%^N.B.:%^RESET%^ Make sure the bag you want to empty is the first in your inventory.
+This satchel will only hold those components needed for spellcasting.
 MAGICK
            );
 }
@@ -287,7 +282,6 @@ int query_value(){
    mapping compcosts;
 
    compcosts = COMPONENTS1;
-   compcosts += COMPONENTS2;
    k = ::query_value();
     keyss = keys(comp);
        for(i = 0;i<sizeof(keyss);i++){

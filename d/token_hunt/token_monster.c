@@ -57,14 +57,14 @@ void set_extra_items()
         ob->move(TO);
     }
 
-    if(TO->is_class("mage") || TO->is_class("psion") || TO->is_class("bard"))
+    if(TO->is_class("mage") || TO->is_class("psion"))
     {
         num = (int)TO->query_level();
         if(TO->is_class("mage")) 
         { 
             ob = new("/d/magic/comp_bag"); 
             ob->move(TO);
-            comp_keys = keys(COMPONENTS);
+            comp_keys = MAGE_COMPONENTS;
             for(i=0;i<num;i++)
             {
                 comps += ({ comp_keys[random(sizeof(comp_keys))] });
@@ -79,29 +79,13 @@ void set_extra_items()
             ob = new("/d/magic/psi_comp_bag");
             ob->move(TO);
 
-            comp_keys = keys(PSI_COMPONENTS);
+            comp_keys = PSI_COMPONENTS;
             for(i=0;i<num;i++)
             {
                 comps += ({ comp_keys[random(sizeof(comp_keys))] });
             }
             for(i=0;i<sizeof(comps);i++)
             {
-//                ob->remote_set_psi_comp(comps[i],roll_dice(1,num));
-                ob->remote_set_comp(comps[i],roll_dice(1,num));
-            }
-        }
-        if(TO->is_class("bard")) 
-        { 
-            ob = new("/d/magic/bard_comp_book"); 
-            ob->move(TO);
-            comp_keys = keys(BARDCOMPS);
-            for(i=0;i<num;i++)
-            {
-                comps += ({ comp_keys[random(sizeof(comp_keys))] });
-            }
-            for(i=0;i<sizeof(comps);i++)
-            {
-//                ob->remote_set_bard_comp(comps[i],roll_dice(1,num));
                 ob->remote_set_comp(comps[i],roll_dice(1,num));
             }
         }

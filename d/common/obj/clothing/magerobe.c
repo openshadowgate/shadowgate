@@ -81,11 +81,8 @@ int components(string which) {
       if (present("compx "+which, TP) != TO) return 0;
    }
    comps = keys(comp);
-   write("%^MAGENTA%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
-   write("%^GREEN%^BOLD%^Contents of this Arcane Garment%^RESET%^");
-   write("%^MAGENTA%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
+   write("%^MAGENTA%^--=%^BOLD%^< %^WHITE%^Contents of this Arcane Garment %^MAGENTA%^>%^RESET%^%^MAGENTA%^=--%^RESET%^");
    write(arrange_string("Component:", 30) + "Amount:");
-   write("%^MAGENTA%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
       sort();
    for(x = 0; x < sizeof(comps);x++) {
       amt = comp[comps[x]];
@@ -93,7 +90,6 @@ int components(string which) {
      else
       write("%^BLUE%^"+arrange_string(comps[x], 30) + amt);
    }
-   write("%^MAGENTA%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
    write("\n");
    return 1;
 }
@@ -266,7 +262,6 @@ int query_value(){
    mapping compcosts;
 
    compcosts = COMPONENTS1;
-   compcosts += COMPONENTS2;
    k = ::query_value();
    keyss = keys(comp);
    for(i = 0;i<sizeof(keyss);i++){

@@ -42,9 +42,6 @@ void set_shop_type(string str){
     if(str == "psion") {
       compset += PSI_COMPONENTS;
     }
-    if(str == "bard") {
-      compset += BARDCOMPS;
-    }
 }
 
 string query_shop_type() { return shoptype; }
