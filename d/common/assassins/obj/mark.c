@@ -5,8 +5,9 @@
 inherit OBJECT;
 
 int tracker;
+string reason;
 
-void create() 
+void create()
 {
     ::create();
     set_name("assassins mark");
@@ -17,6 +18,7 @@ void create()
     set_property("no animate",1);
     set_heart_beat(2);
     tracker = time() + 3600+random(82800);
+    reason = "";
 }
 
 int set_timer(int x)
@@ -24,12 +26,14 @@ int set_timer(int x)
     tracker = time()+x;
 }
 
+void set_reason(string why) { reason = why; }
+
 void heart_beat()
 {
     object creature;
     int level;
     int logintime;
-    
+
     if(!objectp(ETO))
         return;
     if(!objectp(EETO))
@@ -51,14 +55,14 @@ void heart_beat()
     logintime = (int)ETO->query_login_time();
     if(time() < logintime+600)
         return;
-    
+
     if(present("voidhuntress",EETO))
         return;
-    
+
     creature = new(MON+"voidhuntress");
-   
+
     tell_room(EETO, "%^RED%^An assassin steps out of shadows and attacks "+ ETO->QCN + "!");
-    
+
     level = ETO->query_character_level();
 
     creature->set_property("fighter_attacks_mod",level/5);
@@ -69,14 +73,14 @@ void heart_beat()
     creature->set_mlevel("fighter",level);
     creature->set_hp(ETO->query_max_hp()*3);
     creature->set_overall_ac(-1 * level -10);
-    
+
     creature->move(EETO);
     creature->force_me("speak undercommon");
     creature->force_me("speech %^BOLD%^%^MAGENTA%^pu%^RESET%^%^MAGENTA%^r%^MAGENTA%^r%^BOLD%^%^BLACK%^ in a %^RESET%^%^MAGENTA%^s%^MAGENTA%^m%^BOLD%^%^MAGENTA%^ok%^RESET%^%^MAGENTA%^y%^BOLD%^%^BLACK%^ voice%^RESET%^");
     creature->force_me("say %^BOLD%^%^MAGENTA%^You have been chosen to %^RED%^die%^MAGENTA%^.%^RESET%^");
     creature->set_target(ETO->query_name());
+    creature->set_reason(reason);
     creature->kill_ob(ETO);
     TO->remove();
     return;
 }
-
