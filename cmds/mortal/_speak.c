@@ -24,8 +24,24 @@ int cmd_speak(string str)
 
 int help()
 {
-    write("speak language");
-    write("This will set the language that you speak in says and tells");
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+speak - choose spoken language
+
+%^CYAN%^SYNTAX%^RESET%^
+
+speak %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This will set the language that you speak in says and tells.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+languages, say, yell, mail, communication
+");
     return 1;
 }
 

@@ -612,7 +612,7 @@ mixed can_cast(string spell)
         return 0;
     classes = (string)owner->query_classes();
     file = get_file(spell);
-    if(file == "")
+    if(file == "" || !file_exists(file))
     {
         tell_object(owner, "The spell " + spell + " can't be found.");
         return 0;

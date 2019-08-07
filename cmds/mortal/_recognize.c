@@ -49,19 +49,23 @@ int cmd_recognize(string str){
 int help(){
     write(
 @HELP
-Usage:
+%^CYAN%^NAME%^RESET%^
 
-recognize <who> as <some name>
+recognize - recognize someone
 
-Allows you to recognize another player by a description, if you do not
-know the person by name.
+%^CYAN%^SYNTAX%^RESET%^
 
+recognize %^ORANGE%^%^ULINE%^WHO%^RESET%^ as %^ORANGE%^%^ULINE%^NAME%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Allows you to recognize another player by an id, such as race, and assign them a %^ORANGE%^%^ULINE%^NAME%^RESET%^.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+fixrecognize, who, mail
 HELP
     );
-    if(avatarp(TP)){
-       write("As an immortal, you can <recognize all> to "
-          "recognize all players online as their real names.");
-    }
     return 1;
 }
 
