@@ -32,7 +32,7 @@
 %^CYAN%^The %^GREEN%^<peer> %^RESET%^%^CYAN%^command allows you to look ahead for any dangers. Check %^GREEN%^<help peer>%^RESET%^
 %^CYAN%^The %^GREEN%^<prepare> %^RESET%^%^CYAN%^command is one of the strongest resources in the caster's toolbox. Learn it! Use it! You'll be happy you did. See %^GREEN%^<help prepare> %^CYAN%^to learn more!
 %^CYAN%^The %^GREEN%^<thought> %^RESET%^%^CYAN%^command lets you communicate your character's thoughts so that only the immortals and avatars will know them! Just type %^GREEN%^<thought %^ULINE%^MESSAGE%^RESET%^%^GREEN%^>%^CYAN%^.
-%^CYAN%^Tired of so much colorful combat spam? Typing %^GREEN%^<briefcombat> %^RESET%^%^CYAN%^will help.
+%^CYAN%^Tired of so much colorful combat spam? Typing %^GREEN%^<set briefcombat off> %^RESET%^%^CYAN%^will help.
 %^CYAN%^Typing %^GREEN%^<rumors> %^RESET%^%^CYAN%^shows you places appropriate for you to adventure, as well as if anyone is hanging out in the major cities or inns!
 %^CYAN%^Typing %^GREEN%^<flag> %^CYAN%^will show you your current flagged settings as well as any current bonus events happening!
 %^CYAN%^Upset your new boots don't match the color of your eyes? Have no fear! %^GREEN%^<alterobj> %^RESET%^%^CYAN%^allows you to customize everything to your personal satisfaction. See %^GREEN%^<help alterobj> %^CYAN%^for more information.

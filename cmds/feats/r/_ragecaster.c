@@ -22,7 +22,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("raging_prophet") < 4)
+    if((int)ob->query_class_level("rage_prophet") < 4)
     {
         dest_effect();
         return 0;
