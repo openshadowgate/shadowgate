@@ -35,7 +35,7 @@ Alternatively, you can just %^ORANGE%^<look sky>%^RESET%^.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-help, setenv, weather, look
+help, set, weather, look
 
 "
 

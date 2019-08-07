@@ -149,7 +149,7 @@ Reminder, do no use information provided by others to harass them.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-finger, who, setenv, passwd
+finger, who, set, passwd, ignore
 "
   );
   return 1;

@@ -75,6 +75,6 @@ To remove all nicknames type %^ORANGE%^<nickname reset>%^RESET%^.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-alias, setopt, look, glance, score
+alias, set, look, glance, score
 ");
 }

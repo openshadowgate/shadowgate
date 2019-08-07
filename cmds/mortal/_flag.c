@@ -11,7 +11,7 @@ flag command
 #include <std.h>
 #include <security.h>
 
-#define SUPPORTEDFLAGS ({"experience gain", "character improvement tax", "roleplay flag", "player kill", "scaled level", "feature", "simple inventory"})
+#define SUPPORTEDFLAGS ({"experience gain", "character improvement tax", "roleplay flag", "player kill", "scaled level"})
 inherit DAEMON;
 void help();
 
@@ -103,7 +103,7 @@ int cmd_flag(string str)
         do_flag_display(TP);
         return 1;
     }
-    if(sscanf(str, "%s | %s", targ, arg) == 2)
+    if(sscanf(str, "%s . %s", targ, arg) == 2)
     {
         targ = lower_case(targ);
         if(member_array(targ, SUPPORTEDFLAGS) == -1)
@@ -170,79 +170,6 @@ int cmd_flag(string str)
                         tell_object(TP, "Voting for feature "+subarg+" has been removed. "+
                         "It will be cleared from the daemon on the next check. Or you can do "+
                         "eval FEATURE_D->check_features() to remove it now.");
-                        return 1;
-                    }
-                }
-                if(arg == "notifications" || arg == "notification")
-                {
-                    if(subarg == "Off" || subarg == "off")
-                    {
-                        TP->set("feature notifications", 1);
-                        tell_object(TP, "You will no longer periodically be notified "+
-                        "about features you can still vote on or when feature voting "+
-                        "ends.");
-                        return 1;
-                    }
-                    if(subarg == "On" || subarg == "on")
-                    {
-                        TP->delete("feature notifications");
-                        tell_object(TP, "You will now be periodically notified about "+
-                        "features you can still vote on and when feature voting ends.");
-                        return 1;
-                    }
-                    tell_object(TP, "Please specify on or off for feature notifications.");
-                    return 1;
-                }
-                if(arg == "vote")
-                {
-                    pieces = explode(subarg, " ");
-                    myVote = pieces[sizeof(pieces)-1];
-                    if(myVote != "Yes" && myVote != "yes" && myVote != "no" && myVote != "No" && myVote != "abstain" && myVote != "Abstain")
-                    {
-                        tell_object(TP, "Please vote yes, no, or abstain on a feature name. Thank you.");
-                        return 1;
-                    }
-                    subarg = implode(pieces[0..(sizeof(pieces)-2)], " ");
-                    res = FEATURE_D->can_vote_on_feature(TP, subarg, myVote);
-                    if(res == -8)
-                    {
-                        tell_object(TP, "Voting for "+subarg+" has ended.");
-                        return 1;
-                    }
-                    if(res == -1)
-                    {
-                        tell_object(TP, "Error on voting.");
-                        return 1;
-                    }
-                    else if(res == -4)
-                    {
-                        tell_object(TP, capitalize(subarg) + " is not a valid feature currently up for voting.");
-                        return 1;
-                    }
-                    else if(res == -5)
-                    {
-                        tell_object(TP, "It looks like you have already voted for "+subarg+". Thank you for the vote! "+
-                        "(Please Note: It is possible to get this notification in error if someone from your same ip "+
-                        "address has already voted.)");
-                        return 1;
-                    }
-                    else if(res == -6)
-                    {
-                        tell_object(TP, "Something has broken and your vote was not recorded. Please notify saide with "+
-                        "the syntax you used to vote.");
-                        return 1;
-                    }
-                    else if(res == 1)
-                    {
-                        tell_object(TP, "Thank you for voting "+myVote+" on the feature "+subarg+". Please note that "+
-                        "when considering features in the future immortals will give consideration to player votes, but "+
-                        "that votes alone may or may not dictate the installation of a particular feature.");
-                        return 1;
-                    }
-                    else
-                    {
-                        tell_object(TP, "Something has broken and your vote was not recorded. Please notify saide with "+
-                        "the syntax you used to vote.");
                         return 1;
                     }
                 }
@@ -405,40 +332,42 @@ int cmd_flag(string str)
 
 void help() 
 {
-    write("Syntax: flag\n"
-    "\tflag experience gain | <on> or <off>\n"
-    "\tflag character improvement tax | <amount>\n"
-    "\tflag roleplay flag | <on>\n"
-    "\tflag player kill | <off>\n"
-    "\tflag scaled level | <level> or <normal>\n"
-    "\tflag simple inventory | <on> or <off>\n");
-    if(objectp(TP) && wizardp(TP))
-    {
-        write("\tflag feature | remove <feature name>\n"
-        "\tflag feature | add\n");
-    }
-write("\nThis command lets you adjust some various flags about your character.\n"
-"flag by itself will show all flags and their current settings. \n\n"
-"flag experience gain | <on> or <off> will enable or disable your experience gain "
-"should you want to turn it off to remain a certain level longer. \n\n"
-"flag character improvement tax | <amount> will let you adjust the percentage "
-"of your experience gained that you want to apply toward your character "
-"improvement tax, should you have one. This cannot be less than 50 or greater than "
-"100.\n\n"
-"flag roleplay flag | <on> will fly a RP flag in your current environment. This will "
-"cause your current room to show up on the who list as a RP FLAG and will show up "
-"in the rumors command.\n"
-);
+    write("
+%^CYAN%^NAME%^RESET%^
 
-write("flag scaled level | level will allow you to scale your level down to the specified "
-"<level> in order to adventure with or take part in plots with lower level characters. It is highly "
-"experimental, so use at your own risk, it is likely that it will tweaked as "
-"issues become apparent. You cannot go below level 6 or above your own base character level. "
-"Using <normal> instead of a level will revert you back to your normal non scaled level.\n\n"
-"flag player kill | <off> will disable your pk immunity and allow you to take part in player "
-"kill interactions. Once you are killed out of player kill this flag will automatically turn back "
-"on and have a delay before it can be turned back off again, currently the delay is one week of "
-"real life time.\n");
+flag - manipulate player flags
 
-write("See also: help pkilling, threaten");
+%^CYAN%^SYNTAX%^RESET%^
+
+flag
+flag experience gain . [%^ORANGE%^%^ULINE%^ON%^RESET%^|%^ORANGE%^%^ULINE%^OFF%^RESET%^]
+flag character improvement tax . %^ORANGE%^%^ULINE%^AMOUNT%^RESET%^
+flag scaled level . %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal
+flag roleplay flag . %^ORANGE%^%^ULINE%^ON%^RESET%^
+flag player kill . %^ORANGE%^%^ULINE%^OFF%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command lets you adjust some various flags about your character. %^ORANGE%^<flag>%^RESET%^ by itself will show all flags and their current settings. 
+
+%^CYAN%^experience gain %^RESET%^
+  Will enable or disable your experience gain should you want to turn it off to remain a certain level longer. 
+
+%^CYAN%^character improvement tax %^RESET%^
+  Will let you adjust the percentage of your experience gained that you want to apply toward your character improvement tax, should you have one. This cannot be less than 50 or greater than 100.
+
+%^CYAN%^scaled level%^RESET%^
+  Will allow you to scale your level down to the specified %^ORANGE%^<level>%^RESET%^in order to adventure with or take part in plots with lower level characters. It is highlyexperimental, so use at your own risk, it is likely that it will tweaked as issues becomeapparent. You cannot go below level 6 or above your own base character level. Using%^ORANGE%^<normal>%^RESET%^ instead of a level will revert you back to your normal non scaled level.
+
+%^CYAN%^roleplay flag %^RESET%^
+  Will fly a RP flag in your current environment. This will causeyour current room to show up on the who list as a RP FLAG and will show up in the rumorscommand.
+
+%^CYAN%^player kill %^RESET%^
+  Will disable your pk immunity and allow you to take part in player kill interactions. Once you are killed out of player kill this flag will automatically turn back on and have a delay before it can be turned back off again, currently the delay is one week of real life time.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+set, chfn, score, pkilling, rules, death
+");
 }
+

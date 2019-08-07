@@ -49,6 +49,8 @@ With no argument, it will list the status of your lines (channels).
 
 With arguments on or off it will toggle all of your lines (channels) on or off.
 
+To disable just one line use the line name without an argument, e.g. to disable ooc line just type %^ORANGE%^<ooc>%^RESET%^.
+
 %^CYAN%^SEE ALSO%^RESET%^
 
 line use, tell, mail, bboard

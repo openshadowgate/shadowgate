@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-#define VALID_SETTINGS ({"simpleinv","hints","term","scrlines","scrwidth","logon_notify"})
+#define VALID_SETTINGS ({"hints","logon_notify","simpleinv","term","scrlines","scrwidth"})
 
 int cmd_set(string args)
 {
@@ -189,16 +189,16 @@ set show
 You can manipulate numerous mud settings:
 
 %^CYAN%^hints %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of periodic hints. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^logon_notify %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of people joining the game. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^simpleinv %^GREEN%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in %^ORANGE%^<inventory>%^RESET%^ command. When it is toggled off, you can see equipped inventory in %^ORANGE%^<eq>%^RESET%^. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
 %^CYAN%^scrlines %^GREEN%^NUMBER%^RESET%^\n  Set how many lines appear for paged information. %^MAGENTA%^Default value: 20%^RESET%^\n
 %^CYAN%^scrwidth %^GREEN%^NUMBER%^RESET%^\n  Set screen width for text wrapping. %^MAGENTA%^Default value: 75%^RESET%^\n
-
 To see current values use %^ORANGE%^<set show>%^RESET%^.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-score, threaten, prompt, speech, adjective, describe
+adjective, background, chfn, colors, describe, flag, lines, message, passwd, prompt, speech
 ");
 }
 

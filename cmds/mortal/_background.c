@@ -41,6 +41,6 @@ To remove your background type %^ORANGE%^<background remove>%^RESET%^.
 
 %^CYAN%^%^SEE ALSO%^%^RESET%^
 
-chfn, setenv, colors, emote
+gossip, chfn, set, colors, emote
 ");
 }

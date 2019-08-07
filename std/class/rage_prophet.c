@@ -4,7 +4,7 @@
 
 inherit DAEMON;
 
-#define BASE_CLASS find_object_or_load(DIR_CLASSES+"/psywarrior.c")
+#define BASE_CLASS find_object_or_load(DIR_CLASSES+"/barbarian.c")
 
 void create() 
 { 

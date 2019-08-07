@@ -72,6 +72,6 @@ Bane >
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-setenv, setopt, speech, adjective, describe
+set, set, speech, adjective, describe
 ");
 }
