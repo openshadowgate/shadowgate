@@ -292,7 +292,6 @@ int query_components_value(string myclass) {
     if(!sizeof(compkeys)) return 0;
     value = 0;
     compmap = COMPONENTS1;
-    compmap += COMPONENTS2;
     for(i=0;i<sizeof(compkeys);i++) {
       if(compmap[compkeys[i]]) value += (compmap[compkeys[i]] * components[myclass][compkeys[i]]);
     }

@@ -1,18 +1,18 @@
 #include <std.h>
 #include <daemons.h>
 
-#define VALID_SETTINGS ({"hints","logon_notify","simpleinv","brief","briefcombat","term","scrlines","scrwidth"})
+string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","brief_combat","term","scrlines","scrwidth"});
 
 int cmd_set(string args)
 {
     string setting,value;
-    if(args=="show")
+    if(!stringp(args))
     {
         string stng;
         write("%^BLUE%^--=%^BOLD%^<%^WHITE%^ Settings %^BLUE%^>%^RESET%^%^BLUE%^=--%^RESET%^");
         foreach(stng in VALID_SETTINGS)
         {
-            write("%^BOLD%^%^WHITE%^"+capitalize(stng)+": %^RESET%^"+(string)call_other(TO,"get_"+stng));
+            write("%^BOLD%^%^WHITE%^"+arrange_string(stng,14)+": %^RESET%^"+(string)call_other(TO,"get_"+stng));
         }
         return 1;
     }
@@ -192,7 +192,7 @@ string get_brief()
         return "on";
 }
 
-int set_briefcombat(string val)
+int set_brief_combat(string val)
 {
     string *valid_values = ({"on","off"});
     if(member_array(val,valid_values)==-1)
@@ -207,7 +207,7 @@ int set_briefcombat(string val)
     return 1;
 }
 
-string get_briefcombat()
+string get_brief_combat()
 {
     if(this_player()->query_verbose_combat())
         return "off";
@@ -227,7 +227,6 @@ set - manipulate various mud settings
 %^CYAN%^SYNTAX%^RESET%^
 
 set %^ORANGE%^%^ULINE%^SETTING%^RESET%^ %^ORANGE%^%^ULINE%^VALUE%^RESET%^
-set show
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -235,13 +234,13 @@ You can manipulate numerous mud settings:
 
 %^CYAN%^hints %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of periodic hints. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^logon_notify %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of people joining the game. %^MAGENTA%^Default value is on.%^RESET%^\n
-%^CYAN%^simpleinv %^GREEN%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in %^ORANGE%^<inventory>%^RESET%^ command. When it is toggled off, you can see equipped inventory in %^ORANGE%^<eq>%^RESET%^. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^brief %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of room's long description. Useful for screenreaders. %^MAGENTA%^Default value is off.%^RESET%^\n
-%^CYAN%^briefcombat %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of verbose combat. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^brief_combat %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of verbose combat. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^simpleinv %^GREEN%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in %^ORANGE%^<inventory>%^RESET%^ command. When it is toggled off, you can see equipped inventory in %^ORANGE%^<eq>%^RESET%^. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
 %^CYAN%^scrlines %^GREEN%^NUMBER%^RESET%^\n  Set how many lines appear for paged information. %^MAGENTA%^Default value: 20%^RESET%^\n
 %^CYAN%^scrwidth %^GREEN%^NUMBER%^RESET%^\n  Set screen width for text wrapping. %^MAGENTA%^Default value: 75%^RESET%^\n
-To see current values use %^ORANGE%^<set show>%^RESET%^.
+To see current values use %^ORANGE%^<set>%^RESET%^ without arguments.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
