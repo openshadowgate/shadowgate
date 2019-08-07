@@ -961,25 +961,6 @@ int use_XP_tax(int exp)
             }
         }
     }
-    if((int)"/daemon/config_d.c"->check_config("death") == 1)
-    {
-        if( (percent = _IRS["tax"]["death"]["percent"]))
-        {
-            if((duration = _IRS["tax"]["death"]["fall off"]))
-            {
-                if(duration > 0)
-                {
-                    if(percent >= 100)
-                    {
-                        log_file("tax", TO->query_cap_name()+": Death XP taxed to 1.");
-                        return 1;
-                    }
-                    adjustment -= adjustment * to_float(percent)/100;
-                    if(adjustment < 1) return 0;
-                }
-            }
-        }
-    }    
     if((int)"/daemon/config_d.c"->check_config("character improvement") == 1)
     {
         amt = _IRS["tax"]["improvement"]["amount"];
@@ -1002,12 +983,6 @@ int use_XP_tax(int exp)
             }
         }
     }
-    if ((int)TO->query_character_level()>20)
-    {
-        adjustment*=0.5;
-        adjustment*=1.0-((int)TO->query_character_level())/90.0;
-    }
-    
     //scaled level then don't gain any actual experience 
     if(intp("/daemon/user_d.c"->get_scaled_level(TO))) return 0;
     return to_int(adjustment);

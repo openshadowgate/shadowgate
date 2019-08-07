@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","brief_combat","expgain","term","scrlines","scrwidth"});
+string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","brief_combat","expgain","taxperc","term","scrlines","scrwidth"});
 
 int cmd_set(string args)
 {
@@ -230,12 +230,40 @@ int set_expgain(string val)
     return 1;
 }
 
-string get_expgain(string val)
+string get_expgain()
 {
     if(USER_D->no_exp(TP))
         return "off";
     else
         return "on";
+}
+
+int set_taxperc(string val)
+{
+    int perc;
+    if(!atoi(val))
+    {
+        write("%^BOLD%^%^RED%^Invalid value, must provide a number.%^RESET%^");
+        return 0;
+    }
+    perc = atoi(val);
+    if(perc<50)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, must be bigger than 50.%^RESET%^");
+        return 0;
+    }
+    if(perc>100)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, must be less than 100.%^RESET%^");
+        return 0;
+    }
+    USER_D->set_character_improvement_tax_percent(TP,perc);
+    return 1;
+}
+
+int get_taxperc()
+{
+    return sprintf("%d",USER_D->get_character_improvement_tax_percent(TP));
 }
 
 void help()

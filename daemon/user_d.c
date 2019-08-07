@@ -512,10 +512,16 @@ int toggle_no_exp(object who)
 int get_character_improvement_tax_percent(object who)
 {
     int ret;
-    if(!objectp(who)) return 50;
+    int lev;
+    if(!objectp(who))
+        return 50;
     ret = who->query("ctp");
-    if(ret < 50) return 50;
-    if(ret > 100) return 100;
+    lev = (int)who->query_character_level();
+    if(ret < 50)
+        ret= 50;
+    if(lev > 20)
+        ret += 100*lev/60-50;
+    if(ret > 100) ret = 100;
     return ret;
 }
 
@@ -526,22 +532,16 @@ int set_character_improvement_tax_percent(object who, int perc)
     perc = to_int(perc);    
     if(perc < 50) 
     {
-        tell_object(who, "%^BOLD%^%^RED%^Your %^CYAN%^character improvement"+
-        " tax%^RED%^ percentage cannot be set to less than 50.");
+        tell_object(who, "%^BOLD%^%^RED%^Your %^CYAN%^character improvement tax%^RED%^ percentage cannot be set to less than 50.");
         return 1;
     }
     if(perc > 100)
     {
-        tell_object(who, "%^BOLD%^%^RED%^Your %^CYAN%^character improvement"+
-        " tax%^RED%^ percentage cannot be set to more than 100.");
+        tell_object(who, "%^BOLD%^%^RED%^Your %^CYAN%^character improvement tax%^RED%^ percentage cannot be set to more than 100.");
         return 1;
     }
     cur = who->query("ctp");
     if(!cur || cur < 50 || cur > 100) cur = 50;
-    tell_object(who, "%^BOLD%^%^WHITE%^Adjusting your %^CYAN%^character improvement "+
-    "tax%^BOLD%^%^WHITE%^ from "+cur+" to "+perc+". This means that "+perc+"% of "+
-    "all future gained experience will go toward paying off any character improvement "+
-    "taxes that you have.%^RESET%^");
     who->set("ctp", perc);
     return 1;
 }
