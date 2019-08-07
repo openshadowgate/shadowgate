@@ -60,7 +60,7 @@ int wear_fun()
         return 0;
     }
    
-    tell_object(ETO,"%^WHITE%^%^BOLD%^You feel Mystra's blessings as you wear the soft robes.");
+    tell_object(ETO,"%^WHITE%^%^BOLD%^You feel Lysara's blessings as you wear the soft robes.");
     tell_room(EETO,"%^WHITE%^%^BOLD%^"+ETO->QCN+" smiles and slips on the soft robes.",ETO);
     return 1;
 }
