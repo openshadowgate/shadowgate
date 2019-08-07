@@ -36,7 +36,7 @@ void heart_beat()
         return;
     if(!interactive(ETO))
         return;
-    
+
     //send assassin if not in city
     if (tracker > time())
         return;
@@ -79,3 +79,4 @@ void heart_beat()
     TO->remove();
     return;
 }
+

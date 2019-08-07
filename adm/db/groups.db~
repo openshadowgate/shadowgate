@@ -1,0 +1,61 @@
+# /adm/etc/groups.db
+# from the Nightmare Mudlib
+# defines groups of euid's with similar access needs
+# system created by Descartes of Borg 01 august 1993
+# based on security ideas by Cygnus@Synergy
+#
+# file format:
+# (group name): list of members by euid
+# note... a creator's name is the euid for that creator
+# -------------------------------------------------------------
+
+#       superuser is for 2000 gods/1750 arches
+(superuser): nienne eris ilmarinen nuwisha 
+
+#       assist is for level 1500 elder
+(assist): Restore eris garrett ilmarinen lujke yves circe
+
+#       mudlib is a special one for 1500 elders who get mudlib access
+(mudlib): lujke ilmarinen
+(daemon): ilmarinen lujke circe
+
+#       misc groups
+(law_c): eris ilmarinen nienne nuwisha garrett circe
+(law): eris ilmarinen nienne nuwisha garrett circe
+(standard): Standard
+(classcoding): lujke ilmarinen 
+(tutor): loki garrett
+
+#       Closed directories (Wiz's private areas)
+# (thornclosed): thorn idris
+# (patorclosed): pator svaha rotor
+# (grendelclosed): grendel
+
+
+#       Teams
+(area):  circe essyllis garrett loki lujke nienne octothorpe 
+(areajr): yves
+(mentor): ares circe garrett lujke nienne
+(over): loki lujke octothorpe yves
+#(guilds): saide styx garrett nienne cythera lujke ares auppenser loki 
+#(god): ares saide
+(daemonassist): lujke nienne octothorpe 
+(daemonjr): uriel
+(help): kismet
+
+#
+#	Class coding teams 
+#       (with write access to certain /cmds and /std dirs)
+(wizard-coding): garrett nienne lujke octothorpe yves
+
+#       Areas of the game (/d)
+(attaya): lujke 
+(barrier): nienne
+(newbie): garrett
+(shadow): titania
+(underdark): aurgloroasa
+(daggermarsh): aurgloroasa
+(magic): aurgloroasa 
+(common): odin
+(islands): odin
+

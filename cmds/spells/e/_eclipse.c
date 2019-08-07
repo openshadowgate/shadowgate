@@ -56,7 +56,7 @@ int preSpell()
 
 void spell_effect(int prof) 
 {
-    if(!random(3))
+    if(!random(3)&&!present("mark999",caster))
     {
         object mark;
         mark = new("/d/common/assassins/obj/mark");
