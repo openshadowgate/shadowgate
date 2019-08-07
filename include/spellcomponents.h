@@ -91,7 +91,7 @@ string * MAGE_COMPONENTS = ({
 
 string *PSI_COMPONENTS = ({"adamite", "blue lace agate", "gray agate", "leopard agate", "banded amethyst", "amethyst", "blue amethyst"});
 
-string *BARDCOMPS = ({});
+string *BARDCOMPS = ({""});
 
 // had to be split into two defs; mud cannot handle the size of it in a single one.
 // any new components should be added to COMPONENTS2 in future. N, 5/14.

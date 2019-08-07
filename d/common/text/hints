@@ -1,3 +1,4 @@
+%^CYAN%^<set> allows you to change various settings, such as screen size, scrolling, current terminal. Check out %^GREEN%^<help set>%^CYAN%^.
 %^CYAN%^All heroes need a trusty sidekick! See %^GREEN%^<help horse guide> %^CYAN%^to learn more.
 %^CYAN%^Anything you attack (or that attacks you), is assigned the ID "attacker". If you are having difficulties targeting npcs or mobs with your spells or feats, try directing them at "attacker".
 %^CYAN%^Applying your skill points to a single craft is recommended if you want to create magical gear. See %^GREEN%^<help craft> %^CYAN%^for more information!
@@ -6,7 +7,6 @@
 %^CYAN%^Customize your prompt however you would like! See %^GREEN%^<help prompt> %^CYAN%^to learn how!
 %^CYAN%^Did you know there's a visual color editor to make adding colors to your descriptions easier? Find it here: %^GREEN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=11
 %^CYAN%^Don't forget to apply your skill points! Check %^GREEN%^<help skills>.
-%^CYAN%^River ferries for the less walking-inclined connect Shadow and Tabor, and Tharis and Tabor. Docks can be found near their respective cities.
 %^CYAN%^Find a typo or a bug or you simply wish to offer an idea or a praise? Type %^GREEN%^<help game> %^CYAN%^to see your options!
 %^CYAN%^Find item collectors in some of the major cities who will award you exp for returning misplaced artifacts from across the realms!
 %^CYAN%^Found a cool piece of gear only to realize it doesn't fit? No matter! Certain shopkeepers will resize it. Be warned, it isn't cheap!
@@ -22,7 +22,9 @@
 %^CYAN%^Most quest givers will be prompted by simply saying 'hello'. If this does not work, try looking at them. Usually their description will hint at the appropriate action.
 %^CYAN%^Need a little extra help in combat, or just feeling a little lonely? Visit the mercenary camp west of Shadow, and tell Sault you need to hire a mercenary.
 %^CYAN%^Need to slander someone's good name, or let the world know of your heroic deeds? Try out the %^GREEN%^<gossip>  %^RESET%^%^CYAN%^command to learn how to spread some dirt.
+%^CYAN%^People die if you kill them.
 %^CYAN%^Please join us on Discord! %^ULINE%^%^GREEN%^https://bit.ly/discord-sg
+%^CYAN%^River ferries for the less walking-inclined connect Shadow and Tabor, and Tharis and Tabor. Docks can be found near their respective cities.
 %^CYAN%^Tabor and Shadow both offer maps of their surrounding areas. Quite helpful for the well-prepared adventurer.
 %^CYAN%^Tabor and Verbobone have hired local wizards who will study or identify your gear for a small fee! Find them for more information.
 %^CYAN%^Telepaths are employed by major cities across the realms, should you need to communicate with someone across a distance. Just tell them who you need to speak to, and they will happily oblige (for a fee)!
@@ -33,8 +35,8 @@
 %^CYAN%^The %^GREEN%^<prepare> %^RESET%^%^CYAN%^command is one of the strongest resources in the caster's toolbox. Learn it! Use it! You'll be happy you did. See %^GREEN%^<help prepare> %^CYAN%^to learn more!
 %^CYAN%^The %^GREEN%^<thought> %^RESET%^%^CYAN%^command lets you communicate your character's thoughts so that only the immortals and avatars will know them! Just type %^GREEN%^<thought %^ULINE%^MESSAGE%^RESET%^%^GREEN%^>%^CYAN%^.
 %^CYAN%^Tired of so much colorful combat spam? Typing %^GREEN%^<set briefcombat off> %^RESET%^%^CYAN%^will help.
-%^CYAN%^Typing %^GREEN%^<rumors> %^RESET%^%^CYAN%^shows you places appropriate for you to adventure, as well as if anyone is hanging out in the major cities or inns!
 %^CYAN%^Typing %^GREEN%^<flag> %^CYAN%^will show you your current flagged settings as well as any current bonus events happening!
+%^CYAN%^Typing %^GREEN%^<rumors> %^RESET%^%^CYAN%^shows you places appropriate for you to adventure, as well as if anyone is hanging out in the major cities or inns!
 %^CYAN%^Upset your new boots don't match the color of your eyes? Have no fear! %^GREEN%^<alterobj> %^RESET%^%^CYAN%^allows you to customize everything to your personal satisfaction. See %^GREEN%^<help alterobj> %^CYAN%^for more information.
 %^CYAN%^Use %^GREEN%^<get all coins> %^CYAN%^instead of %^GREEN%^<get coins> %^CYAN%^to pick all your piles up at once.
 %^CYAN%^Using %^GREEN%^<nickname> %^RESET%^%^CYAN%^and %^GREEN%^<alias> %^RESET%^%^CYAN%^can greatly reduce the amount of time it takes to enter commands.
@@ -45,6 +47,3 @@
 %^CYAN%^You can track your own progress or keep character notes by using pcnotes. %^GREEN%^<help pcnotes> %^CYAN%^for more information!
 %^CYAN%^You can use the %^GREEN%^<forage> %^RESET%^%^CYAN%^command to find food in the wilderness. You can also drink from some ponds and fountains.
 %^GREEN%^<watch> %^CYAN%^your back to have more success at catching thief stabs!
-%^CYAN%^<set> allows you to change various settings, such as screen size, scrolling, current terminal. Check out %^GREEN%^<help set>%^CYAN%^.
-%^CYAN%^If you have multiple characters you can forward all incoming mail to one of them with internal %^GREEN%^<w>%^CYAN%^ command.
-%^CYAN%^People die if you kill them.
