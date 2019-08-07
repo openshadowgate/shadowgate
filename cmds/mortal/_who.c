@@ -104,7 +104,9 @@ string list_users(string *races, object tp)
                                 }
                                 tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
                             }
-            length = 43;
+            length = atoi(TP->getenv("SCREEN"))-32;
+            if(!length||length<18)
+                length=43;
  
             if ( wizardp(who[i]) && who[i]->query_quietness() ) {
                 tmp += "%^BOLD%^%^CYAN%^Q %^RESET%^";

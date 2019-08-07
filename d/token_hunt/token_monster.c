@@ -1,12 +1,11 @@
 //Added combat feats - Octothorpe 7/19/10
-
 #include <std.h>
-#include <components.h>
-#include <psi_components.h>
 #include <bardcomps.h>
 #include "token_hunt.h"
 
 inherit MONSTER;
+
+#include <components.h>
 
 #define CLASSES         ({"thief","mage","fighter","cleric","ranger","antipaladin","psion"})
 #define MULTICLASS      ([ "thief" : ({ "mage","fighter","psion" }), "mage" : ({ "thief","cleric","fighter" }), "cleric" : ({ "fighter","mage","psion" }), "psion" : ({ "fighter","thief","cleric" }), ])

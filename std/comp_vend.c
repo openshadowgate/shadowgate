@@ -5,12 +5,13 @@
 // if no shop type is set, the store will default to mage components. N, 5/14.
 #include <std.h>
 #include <money.h>
-#include <spellcomponents.h>
 #include <move.h>
 
 #define MAX_COMPONENTS 40
 #define COMP_PATH "/d/magic/store_comp"
 inherit NPC;
+
+#include <spellcomponents.h>
 
 string *Available, shoptype, *compset = ({});
 mapping Amount = ([]), compcosts = ([]);
@@ -24,7 +25,6 @@ string query_shop_type();
 void create(){
      ::create();
      compcosts = COMPONENTS1;
-     compcosts += COMPONENTS2;
 }
 
 void init() {
@@ -169,18 +169,12 @@ int __List(string str) {
    if(strsrch(str,"comp") == -1) return notify_fail("I don't sell those!\n");
    tell_room(ETO, TPQCN+" studies the list of components available.", TP);
    Available = sort_array(Available,"sort_strings",TO);
-   melnmarn = "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n";
+   melnmarn = "%^BOLD%^%^BLUE%^--=< %^WHITE%^Components %^BLUE%^>=-%^RESET%^\n";
    for(inc = 0; inc < sizeof(Available);inc++) {
       melnmarn += sprintf("%3d: ",inc);
-      melnmarn += sprintf("%%^GREEN%%^%-35s %%^YELLOW%%^%5d %%^RESET%%^%%^CYAN%%^gold%%^YELLOW%%^%6d %%^RESET%%^%%^CYAN%%^available\n",capitalize(Available[inc]),adjust_cost(compcosts[Available[inc]]),Amount[Available[inc]]);
-      if(((inc+1)%lines == 0) &&(inc > 1)) {
-         melnmarn += "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n";
-         melnmarn += "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n";
-      }
+      melnmarn += sprintf("%%^GREEN%%^%-35s %%^YELLOW%%^%5d %%^RESET%%^%%^CYAN%%^gold%%^YELLOW%%^%4d %%^RESET%%^%%^CYAN%%^stored\n",capitalize(Available[inc]),adjust_cost(compcosts[Available[inc]]),Amount[Available[inc]]);
    }
-   melnmarn += "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n";
-   melnmarn += "   %^CYAN%^Components bag                  %^YELLOW%^10 gold%^RESET%^\n";
-   melnmarn += "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n";
+   melnmarn += "     %^CYAN%^Components bag                         %^YELLOW%^10%^RESET%^%^CYAN%^ gold%^RESET%^\n";
    TP->more(explode(melnmarn,"\n"));
    return 1;
 }
@@ -226,24 +220,21 @@ int __Help(string nothing) {
    tell_room(ETO, TPQCN+" seems to be asking the shopkeeper for help.", TP);
    write(
 @MELNMARN
-        %^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^
-        %^BOLD%^%^GREEN%^Components Shop Help
-        %^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^
-        %^RESET%^%^CYAN%^There are 3 commands in the components shop. The shopkeeper 
-        understands 'help', 'buy' and 'list'. 
-        %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'list comp'
-        %^RESET%^%^CYAN%^The list command will list the components available in his 
-        shop.
-        %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'buy <# || name || components bag>'
-        %^RESET%^%^CYAN%^This will allow you to buy a component or components bag. 
-        You may either enter the item number, or the item name. 
-        Once you have made the request to buy an item, you will be 
-        asked how many of that component you wish to purchase.
-        IE: buy 14 (will buy item # 14)
-        IE: buy candle (will buy a candle)
-        %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'help shop'
-        %^RESET%^%^CYAN%^Displays this text.
-        %^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^
+%^BOLD%^%^BLUE%^--=<%^WHITE%^ Components Shop Help %^BLUE%^>=--%^RESET%^
+%^RESET%^%^CYAN%^There are 3 commands in the components shop. The shopkeeper 
+understands 'help', 'buy' and 'list'. 
+%^BOLD%^%^BLUE%^syntax: %^YELLOW%^'list comp'
+%^RESET%^%^CYAN%^The list command will list the components available in his 
+shop.
+%^BOLD%^%^BLUE%^syntax: %^YELLOW%^'buy <# || name || components bag>'
+%^RESET%^%^CYAN%^This will allow you to buy a component or components bag. 
+You may either enter the item number, or the item name. 
+Once you have made the request to buy an item, you will be 
+asked how many of that component you wish to purchase.
+IE: buy 14 (will buy item # 14)
+IE: buy candle (will buy a candle)
+%^BOLD%^%^BLUE%^syntax: %^YELLOW%^'help shop'
+%^RESET%^%^CYAN%^Displays this text.
 MELNMARN
         );
    return 1;

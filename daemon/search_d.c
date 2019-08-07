@@ -1,11 +1,11 @@
 #include <std.h>
 #include <daemons.h>
 #include <security.h>
-#include <components.h>
-#include <psi_components.h>
 #include <move.h>
 
 inherit DAEMON;
+
+#include <components.h>
 
 #define DEFAULT_CHANCE  ([ "mundane": 10,"misc": 10,"weapon": 10,"armor": 10,"jewelry": 10,"clothing": 10 ])
 #define SAVE_FILE       "/daemon/save/search_treasures"
@@ -1153,18 +1153,6 @@ object create_special_object(string file_name,object player)
         obj->set_name(name);
         obj->set_id(({name,"component"}));
         obj->set_short(capitalize(name)+" (a spell component)");
-        obj->set_long("             " + amount + " " +capitalize(name)+""
-            ". \n" + obj->query_long());
-        obj->set_comp_quantity(to_int(amount));
-        return obj;
-    case "/d/magic/store_psi_comp":
-        obj = new("/d/magic/store_psi_comp");
-        info = keys(PSI_COMPONENTS);
-        name = info[random(sizeof(info))];
-        amount = roll_dice(1,12);
-        obj->set_name(name);
-        obj->set_id(({name,"crystal"}));
-        obj->set_short(capitalize(name)+" (a psionic crystal)");
         obj->set_long("             " + amount + " " +capitalize(name)+""
             ". \n" + obj->query_long());
         obj->set_comp_quantity(to_int(amount));
