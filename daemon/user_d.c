@@ -515,34 +515,41 @@ int get_character_improvement_tax_percent(object who)
     int lev;
     if(!objectp(who))
         return 50;
-    ret = who->query("ctp");
     lev = (int)who->query_character_level();
+    if(lev>20&&lev<51)
+        ret = 50+50*lev/60;
+    else
+        ret = 50;
+    ret += who->query("ctp");
     if(ret < 50)
         ret= 50;
-    if(lev > 20)
-        ret += 100*lev/60-50;
-    if(ret > 100) ret = 100;
+    if(ret > 100)
+        ret = 100;
     return ret;
 }
 
 int set_character_improvement_tax_percent(object who, int perc)
 {
-    int cur;
+    int base, lev;
     if(!objectp(who)) return 0;
-    perc = to_int(perc);    
-    if(perc < 50) 
+    perc = to_int(perc);
+    lev = (int)who->query_character_level();
+    if(lev>20&&lev<51)
+        base = 50+50*lev/60;
+    else
+        base = 50;
+
+    if(perc<base)
     {
-        tell_object(who, "%^BOLD%^%^RED%^Your %^CYAN%^character improvement tax%^RED%^ percentage cannot be set to less than 50.");
-        return 1;
+        tell_object(who,"%^BOLD%^%^WHITE%^Your character improvement tax can't be less than %^CYAN%^"+base);
+        return 0;
     }
-    if(perc > 100)
+    if(perc>100)
     {
-        tell_object(who, "%^BOLD%^%^RED%^Your %^CYAN%^character improvement tax%^RED%^ percentage cannot be set to more than 100.");
-        return 1;
+        tell_object(who,"%^BOLD%^%^WHITE%^Your character improvement tax can't be more than %^CYAN%^100");
+        return 0;
     }
-    cur = who->query("ctp");
-    if(!cur || cur < 50 || cur > 100) cur = 50;
-    who->set("ctp", perc);
+    who->set("ctp", perc-base);
     return 1;
 }
 

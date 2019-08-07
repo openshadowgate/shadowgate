@@ -11,7 +11,7 @@ flag command
 #include <std.h>
 #include <security.h>
 
-#define SUPPORTEDFLAGS ({"experience gain", "character improvement tax", "roleplay flag", "player kill", "scaled level"})
+#define SUPPORTEDFLAGS ({"roleplay flag", "player kill", "scaled level"})
 inherit DAEMON;
 void help();
 
@@ -174,61 +174,6 @@ int cmd_flag(string str)
                     }
                 }
                 break;                
-            case "experience gain":
-                if(arg != "off" && arg != "on")
-                {
-                    tell_object(TP, "Valid arguments for the Experience gain are on or off.");
-                    return 1;
-                }
-                if(arg == "off" && "/daemon/user_d.c"->no_exp(TP))
-                {
-                    tell_object(TP, "Your experience gain is already disabled.");
-                    return 1;
-                }
-                else if(arg == "on" && !"/daemon/user_d.c"->no_exp(TP))
-                {
-                    tell_object(TP, "Your experience gain is already enabled.");
-                    return 1;
-                }
-                "/daemon/user_d.c"->toggle_no_exp(TP);
-                return 1;
-                break;
-            case "simple inventory":
-                if(arg != "off" && arg != "on")
-                {
-                    tell_object(TP, "Valid arguments for the simple inventory are on or off.");
-                    return 1;
-                }
-                if(arg == "off")
-                {
-                    if("/daemon/user_d.c"->get_flag(TP, "simple inventory") == "Off") 
-                    {
-                        tell_object(TP, "You are already using the normal inventory display.");
-                        return 1;
-                    }
-                    else 
-                    {
-                        tell_object(TP, "Switching to the original inventory display.");
-                        TP->delete("simple inventory");
-                        return 1;
-                    }
-                }
-                if(arg == "on")
-                {
-                    if("/daemon/user_d.c"->get_flag(TP, "simple inventory") == "On")
-                    {
-                        tell_object(TP, "You are already using the simplified inventory system.");
-                        return 1;
-                    }
-                    else 
-                    {
-                        tell_object(TP, "Switching to the simple inventory display.");
-                        TP->set("simple inventory", 1);
-                        return 1;
-                    }
-                }
-                return 1;
-                break;
             case "character improvement tax":
                 perc = to_int(arg);
                 if(perc < 50)
@@ -340,8 +285,6 @@ flag - manipulate player flags
 %^CYAN%^SYNTAX%^RESET%^
 
 flag
-flag experience gain . [%^ORANGE%^%^ULINE%^ON%^RESET%^|%^ORANGE%^%^ULINE%^OFF%^RESET%^]
-flag character improvement tax . %^ORANGE%^%^ULINE%^AMOUNT%^RESET%^
 flag scaled level . %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal
 flag roleplay flag . %^ORANGE%^%^ULINE%^ON%^RESET%^
 flag player kill . %^ORANGE%^%^ULINE%^OFF%^RESET%^
@@ -349,12 +292,6 @@ flag player kill . %^ORANGE%^%^ULINE%^OFF%^RESET%^
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command lets you adjust some various flags about your character. %^ORANGE%^<flag>%^RESET%^ by itself will show all flags and their current settings. 
-
-%^CYAN%^experience gain %^RESET%^
-  Will enable or disable your experience gain should you want to turn it off to remain a certain level longer. 
-
-%^CYAN%^character improvement tax %^RESET%^
-  Will let you adjust the percentage of your experience gained that you want to apply toward your character improvement tax, should you have one. This cannot be less than 50 or greater than 100.
 
 %^CYAN%^scaled level%^RESET%^
   Will allow you to scale your level down to the specified %^ORANGE%^<level>%^RESET%^in order to adventure with or take part in plots with lower level characters. It is highlyexperimental, so use at your own risk, it is likely that it will tweaked as issues becomeapparent. You cannot go below level 6 or above your own base character level. Using%^ORANGE%^<normal>%^RESET%^ instead of a level will revert you back to your normal non scaled level.
