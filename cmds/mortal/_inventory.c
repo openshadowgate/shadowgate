@@ -17,7 +17,7 @@ int worn_wielded(object ob)
     return 1;
 }
 
-int cmd_inventory() 
+int cmd_inventory()
 {
     object *items, *exclude = ({});
     int x,silly;
@@ -27,15 +27,10 @@ int cmd_inventory()
 
     alltext = "";
     set_property("information",1);
-    if(x=TP->light_blind(-1)) 
+    if(x=TP->light_blind(-1))
     {
         notify_fail(TP->light_blind_fail_message(x)+"\n");
         return 0;
-    }
-    if(TP->query_blind()) 
-    {
-        tell_object(TP,"You are blind, and can not see.");
-        return 1;
     }
     items = all_inventory(this_player());
     result = "%^BOLD%^%^CYAN%^You are carrying:\n%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
@@ -46,8 +41,8 @@ int cmd_inventory()
         stuff = TP->describe_item_contents(items);
     }
     else stuff = TP->describe_item_contents(({}));
-  
-    if(stuff != "") 
+
+    if(stuff != "")
     {
         stuff = "   %^BOLD%^%^GREEN%^"+stuff;
         stuff = replace_string(stuff,",","\n  %^GREEN%^%^BOLD%^");

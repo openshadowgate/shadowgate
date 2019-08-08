@@ -25,7 +25,7 @@ int armor_filter(object ob){
     return 0;
 }
 
-int cmd_cast(string str) 
+int cmd_cast(string str)
 {
     object targ, *armor,*wielded;
     int i,j, align, healharm, schoolspell,mylvl,*mapkeys;
@@ -38,7 +38,7 @@ int cmd_cast(string str)
         return 1;
     }
     type = "none";
-  
+
     if(TP->query_casting() && objectp(TP->query_property("spell_casting")))
         return notify_fail("You are already doing something!\n");
 
@@ -46,18 +46,18 @@ int cmd_cast(string str)
         return notify_fail("You are already doing something!\n");
 
 // clerical checks for spontaneous healing/harming casts
-    if (strsrch(str, "as healing") != -1) 
+    if (strsrch(str, "as healing") != -1)
     {
         healharm=1;
         str=replace_string(str,"as healing","",1);
-    } 
+    }
     else
     {
-        if (strsrch(str, "as harming") != -1 ) 
+        if (strsrch(str, "as harming") != -1 )
         {
             healharm=-1;
             str=replace_string(str,"as harming","",1);
-        } 
+        }
         else healharm = 0;
     }
 
@@ -94,10 +94,10 @@ int cmd_cast(string str)
 
     if(type == "monk" && align > 3)
         return notify_fail("You cannot use your monk spells unless you are of a lawful alignment!\n");
-    
+
     if((type == "paladin" || type == "antipaladin") && (align < 1 || align > 3))
         return notify_fail("You cannot use your paladin spells unless you are of a lawful alignment!\n");
-  
+
     if(type == "sorcerer") {
         known = TP->query_mastered_spells();
         if(member_array(str2,known) == -1) {
@@ -150,19 +150,19 @@ int cmd_cast(string str)
         }
     }
 
-    if(type == "bard") 
+    if(type == "bard")
     {
-        if(TP->is_wearing_type("armor") && !avatarp(TP)) 
+        if(TP->is_wearing_type("armor") && !avatarp(TP))
         {
             tell_object(TP,"You can't cast in all that armor.");
             return 1;
         }
     }
-    
+
     if(type == "monk")
     {
         known = TP->query_ki_spells();
-        if(member_array(str2,known) == -1) 
+        if(member_array(str2,known) == -1)
         {
             tell_object(TP,"You know no such ability!");
             return 1;
@@ -182,22 +182,22 @@ int cmd_cast(string str)
                 "with your ability to cast your monk spells!%^RESET%^");
                 return 1;
             }
-        }            
+        }
     }
-    
-    if(type == "wizard" || type == "mage" || type == "sorcerer" || type == "warlock") 
+
+    if(type == "wizard" || type == "mage" || type == "sorcerer" || type == "warlock")
     {
         armor = TP->all_armour();
         armor = distinct_array(armor);
         armor = filter_array(armor,"armor_filter",TO);
         if(FEATS_D->usable_feat(TP,"armored caster") || type == "warlock") armor = filter_array(armor,"light_armor_filter",TO);
     }
-    if(type == "psywarrior" || type == "psion") 
+    if(type == "psywarrior" || type == "psion")
     {
         if(FEATS_D->usable_feat(TP,"armored manifester") || FEATS_D->usable_feat(TP,"mind before matter"))
-        { 
-            armor = ({}); 
-        } 
+        {
+            armor = ({});
+        }
         else
         {
             armor = TP->all_armour();
@@ -208,32 +208,34 @@ int cmd_cast(string str)
     }
     if (FEATS_D->usable_feat(TP,"eldritch conditioning"))
         armor = ({});
-    if(sizeof(armor) && !avatarp(TP)) 
+    if(sizeof(armor) && !avatarp(TP))
     {
         tell_object(TP,"You cannot cast while wearing all that armor!");
         return 1;
     }
 
-    if(TP->query_property("shapeshifted") && type != "innate" && type != "druid" && (string)TP->query("relationship_profile") != "spell_alter_self_999") 
-    {
-        tell_object(TP,"You can only cast druid spells or innate abilities while shapeshifted.");
-        return 1;
-    }
+    if(strcmp((string)TP->query("relationship_profile"),"druid_")>0)
+        if(TP->query_property("shapeshifted") && type != "innate" && type != "druid")
+        {
+            tell_object(TP,"You can only cast druid spells or innate abilities while in druidic form.");
+            return 1;
+        }
+
 
     spell = replace_string(str2," ","_");
     tmp = "/cmds/spells/"+spell[0..0]+"/_"+spell+".c";
-    if(!file_exists(tmp)) 
+    if(!file_exists(tmp))
 	{
         write("Either that spell does not exist, or you do not know it!");
         return 1;
     }
 
-    if(healharm) 
+    if(healharm)
     {
         targ = find_object_or_load(tmp);
         if (healharm > 0) tmp = HEALS[(int)targ->query_spell_level(type)-1];
         else tmp = HARMS[(int)targ->query_spell_level(type)-1];
-        if(!file_exists(tmp)) 
+        if(!file_exists(tmp))
         {
             write("Garrett fucked up the spell conversions...");
             return 1;
@@ -268,7 +270,7 @@ cast
 
 %^CYAN%^SYNTAX%^RESET%^
 
-cast %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^ 
+cast %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^
 cast cleric %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming
 cast mage %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as school spell
 

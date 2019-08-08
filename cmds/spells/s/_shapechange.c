@@ -7,14 +7,14 @@ string *valid_forms()
     return ({"dragon"});
 }
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("shapechange");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS shapechange on balor|fire_giant|iron_golem|red_dragon");
-    set_description("With this spell you turn into a giant kittenzilla");
+    set_description("IN TESTING");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
@@ -31,14 +31,14 @@ int preSpell(){
       return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
 
     if (!objectp(caster)){
         TO->remove();
         return;
     }
-    new("/std/races/shapeshifted_races/mage_dragon.c")->init_shape(caster,"dragon"); 
+    new("/std/races/shapeshifted_races/mage_dragon.c")->init_shape(caster,"dragon");
 
     spell_successful();
 
@@ -48,7 +48,7 @@ void spell_effect(int prof)
 
 
 
-void dest_effect() 
+void dest_effect()
 {
     object shape;
 	if(objectp(caster))
@@ -58,5 +58,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
-
