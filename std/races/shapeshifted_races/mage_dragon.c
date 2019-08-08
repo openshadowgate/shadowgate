@@ -22,7 +22,7 @@ void create()
     set_limbs( ({ "maw","head","torso","right claw", "left claw", "right arm","right arm","left leg","left rear claw","right leg","right rear claw","tail","right wing","left wing" }) );
     set_attack_functions(([ "maw" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":) ]));
     set_ac_bonus(-6);
-    set_base_attack_num(4);
+    set_base_attack_num(2);
     set_castable(1);
     set_can_talk(1);
     set_shape_language("draconic");
@@ -68,7 +68,7 @@ int default_descriptions(object obj)
 int change_into_message(object obj)
 {
     if(!objectp(obj)) { return 0; }
-    tell_object(obj,"%^RESET%^%^GREEN%^You turn your mind elsewhere.");
+    tell_object(obj,"%^RESET%^%^RED%^You turn your mind elsewhere.");
     tell_object(obj,"%^RESET%^%^BOLD%^You can feel your body beginning to change!");
     tell_object(obj,"%^RESET%^%^BLUE%^You flap your wings and roar. You are DRAGON!");
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+" grows very still and appears to concentrate deeply.",obj);
@@ -102,7 +102,7 @@ int bite_attack(object tp, object targ)
     tell_object(tp,"%^RED%^You lightning quick bite deeply into "+targ->QCN+"'s "+(my_limb=targ->return_target_limb())+"!");
     tell_object(targ,"%^RED%^"+tp->QCN+" lightning quick bites deeply into your "+my_limb+"!");
     tell_room(ENV(tp),"%^RED%^"+tp->QCN+" snakes "+tp->QP+" lightning quick bites deeply into "+targ->QCN+"'s "+my_limb+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,8)+13,"piercing");
+    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,8),"piercing");
 
     //2d8+13
 }
@@ -112,7 +112,7 @@ int claw_attack(object tp, object targ)
     tell_object(tp,"%^RED%^You reach out and violently claw "+targ->QCN+"!");
     tell_object(targ,"%^RED%^"+tp->QCN+" reaches out and violently claws you!");
     tell_room(ENV(tp),"%^RED%^"+tp->QCN+" reaches out and violently claws "+targ->QCN+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,6)+13,"piercing");
+    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,6),"piercing");
 
     //2d6+13
 }
