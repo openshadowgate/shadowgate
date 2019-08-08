@@ -1,43 +1,41 @@
 %^CYAN%^NAME%^RESET%^
 
-Colors on Shadowgate 
+Colors on Shadowgate
 
 %^CYAN%^SYNTAX%^RESET%^
 
-Enable colors:   %^ORANGE%^setenv TERM ansi%^RESET%^
-Disable colors:  %^ORANGE%^setenv TERM unknown%^RESET%^
+Enable colors:   %^ORANGE%^<set tern ansi>%^RESET%^
+Disable colors:  %^ORANGE%^<set term unknown>%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-You can use setenv to choose whether to play the game with or without colors.  See %^ORANGE%^help setenv%^RESET%^ for more customization options. 
+You can use %^ORANGE%^<set>%^RESET%^ to choose whether to play the game with, without colors, or without certain types of colors. We support many terminal options, and more can be added. See %^ORANGE%^<help set>%^RESET%^ for more customization options.
 
-You can use colors to crayon your adjective and describe, as well as your say and speech pattern, emotes, books, letters, background and any item you craft. There are 15 colors available to players, all of which can be accessed using the color codes below.  They were first developed for Nightmare Mud by Pinkfish@Discworld.
-	 
+You can use colors to crayon your adjective and describe, as well as your say and speech pattern, emotes, books, letters, background and any item you craft. There are 15 colors available to players, all of which can be accessed using the color codes below. They were first developed for Nightmare Mud by Pinkfish@Discworld.
 
 %^CYAN%^%^ULINE%^Color Codes%^RESET%^
 
-The following color codes and their associated colors are available on Shadowgate:  
+The following color codes and their associated colors are available on Shadowgate:
 
-     %^RESET%^%^BLUE%^%%%^^^BLUE%%%^^^          %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^BLUE%%%^^^
-     %^RESET%^%^CYAN%^%%%^^^CYAN%%%^^^          %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^CYAN%%%^^^
-     %^RESET%^%^GREEN%^%%%^^^GREEN%%%^^^         %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^GREEN%%%^^^
-     %^RESET%^%^RED%^%%%^^^RED%%%^^^           %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^RED%%%^^^
-     %^RESET%^%^ORANGE%^%%%^^^ORANGE%%%^^^        %^BOLD%^%%%^^^YELLOW%%%^^^
-     %^RESET%^%^MAGENTA%^%%%^^^MAGENTA%%%^^^       %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^MAGENTA%%%^^^
-     %^RESET%^%%%^^^WHITE%%%^^^         %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^WHITE%%%^^^
-                       %^BOLD%^%^BLACK%^%%%^^^BOLD%%%^^^%%%^^^BLACK%%%^^^
+  %^RESET%^%^BLUE%^%%%^^^BLUE%%%^^^      %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^BLUE%%%^^^     %^RESET%^%^B_BLUE%^%^BLACK%^%%%^^^B_BLUE%%%^^^%^RESET%^
+  %^RESET%^%^CYAN%^%%%^^^CYAN%%%^^^      %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^CYAN%%%^^^     %^RESET%^%^B_CYAN%^%^BLACK%^%%%^^^B_CYAN%%%^^^%^RESET%^
+  %^RESET%^%^GREEN%^%%%^^^GREEN%%%^^^     %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^GREEN%%%^^^    %^RESET%^%^B_GREEN%^%^BLACK%^%%%^^^B_GREEN%%%^^^%^RESET%^
+  %^RESET%^%^RED%^%%%^^^RED%%%^^^       %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^RED%%%^^^      %^RESET%^%^B_RED%^%^BLACK%^%%%^^^B_RED%%%^^^%^RESET%^
+  %^RESET%^%^ORANGE%^%%%^^^ORANGE%%%^^^    %^BOLD%^%%%^^^YELLOW%%%^^^           %^RESET%^%^B_ORANGE%^%^BLACK%^%%%^^^B_ORANGE%%%^^^%^RESET%^
+  %^RESET%^%^MAGENTA%^%%%^^^MAGENTA%%%^^^   %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^MAGENTA%%%^^^  %^RESET%^%^B_MAGENTA%^%^BLACK%^%%%^^^B_MAGENTA%%%^^^%^RESET%^
+  %^RESET%^%%%^^^WHITE%%%^^^     %^BOLD%^%%%^^^BOLD%%%^^^%%%^^^WHITE%%%^^^    %^RESET%^%^B_WHITE%^%^BLACK%^%%%^^^B_WHITE%%%^^^%^RESET%^
+                %^BOLD%^%^BLACK%^%%%^^^BOLD%%%^^^%%%^^^BLACK%%%^^^    %^RESET%^%^B_BLACK%^%^WHITE%^%%%^^^B_BLACK%%%^^^%^RESET%^
 
-     %%%^^^BOLD%%%^^^          Sets all text following this code to its %^BOLD%^bold value%^RESET%^.
-     %%%^^^ULINE%%%^^^         Sets all text following this code to its %^ULINE%^underlined value%^RESET%^.     
-     %%%^^^RESET%%%^^^         Resets all colors and modifiers and sets color back to white.
-	 
+  %%%^^^BOLD%%%^^^    Sets all text following this code to its %^BOLD%^bold value%^RESET%^.
+  %%%^^^ULINE%%%^^^   Sets all text following this code to its %^ULINE%^underlined value%^RESET%^.
+  %%%^^^RESET%%%^^^   Resets all colors and modifiers and sets color back to white.
 
 %^CYAN%^%^ULINE%^Please note%^RESET%^
 
-     <>  Please %^RESET%^%^RED%^refrain%^RESET%^ from using plain black (%%%^^^BLACK%%%^^^), flashing and background colors. Plain black will meld into the background of most clients while flashing colors may disrupt their clients entirely. 
-     <>  %^RESET%^%^GREEN%^Remember %^RESET%^to put a %%%^^^RESET%%%^^^ at the start and end of all your colored works.
-	 
-	 
+ %^MAGENTA%^*%^RESET%^ %^RESET%^%^RED%^Refrain%^RESET%^ from using plain black (%%%^^^BLACK%%%^^^). Plain black will meld into the background of most clients.
+ %^MAGENTA%^*%^RESET%^ %^RESET%^%^GREEN%^Remember %^RESET%^to put a %%%^^^RESET%%%^^^ at the start and end of all your colored works.
+ %^MAGENTA%^*%^RESET%^ If you use background color make sure you're using high contrast color such as black. Otherwise many clients just won't see the text you've written. Most terminals default to bright colors for background colors.
+
 %^ULINE%^%^CYAN%^Trillet's "Color Code Preview/Generation Flash Application"
 
 You may also want to visit our Forum and look for the "Color Code Preview/Generation Flash Application" created by %^BOLD%^%^CYAN%^Trillet%^RESET%^:
@@ -46,8 +44,7 @@ You may also want to visit our Forum and look for the "Color Code Preview/Genera
 
 It is an awesome application that you can use to quickly color your creations.  As always, remember to add that %%%^^^RESET%%%^^^ where appropriate.
 
-
-%^CYAN%^EXAMPLES%^RESET%^ 
+%^CYAN%^EXAMPLES%^RESET%^
 
 %^RESET%^A %^BOLD%^%^CYAN%^bright %^BLUE%^blue %^RESET%^jacket%^RESET%^
 
@@ -61,18 +58,15 @@ It is an awesome application that you can use to quickly color your creations.  
 
 %%%^^^RESET%%%^^^%%%^^^MAGENTA%%%^^^A p%%%^^^BOLD%%%^^^u%%%^^^RESET%%%^^^%%%^^^MAGENTA%%%^^^rp%%%^^^BOLD%%%^^^l%%%^^^RESET%%%^^^MAGENTA%%%^^^e scarf%%%^^^RESET%%%^^^
 
-
 %^ULINE%^%^CYAN%^Troubleshooting
 
 If your colors look odd or cause problems, like color-bleeding or strange word-wrapping, please check your text for the following culprits:
 
-     <>  Have you added a <%%%^^^RESET%%%^^^> every time you wish to change from %^BOLD%^%^GREEN%^bright%^RESET%^ to %^GREEN%^dim%^RESET%^ colors?
-     <>  Have you added a <%%%^^^RESET%%%^^^> to the start and end of the text you wish to color?
-     <>  Have you ensured that there is a <%^GREEN%^ %%%^^^ %^RESET%^> at the start and end of each color, like this:  %%%^^^BOLD%%%^^^%%%^^^BLACK%%%^^^? 
-     <>  Are there any additional characters in your code, such an extra %^RESET%^%^GREEN%^%%^RESET%^ or %^RESET%^%^GREEN%^^%^RESET%^?
-
+ %^MAGENTA%^*%^RESET%^ Have you added a <%%%^^^RESET%%%^^^> every time you wish to change from %^BOLD%^%^GREEN%^bright%^RESET%^ to %^GREEN%^dim%^RESET%^ colors?
+ %^MAGENTA%^*%^RESET%^ Have you added a <%%%^^^RESET%%%^^^> to the start and end of the text you wish to color?
+ %^MAGENTA%^*%^RESET%^ Have you ensured that there is a <%^GREEN%^ %%%^^^ %^RESET%^> at the start and end of each color, like this:  %%%^^^BOLD%%%^^^%%%^^^BLACK%%%^^^?
+ %^MAGENTA%^*%^RESET%^ Are there any additional characters in your code, such an extra %^RESET%^%^GREEN%^%%^RESET%^ or %^RESET%^%^GREEN%^^%^RESET%^?
 
 %^CYAN%^SEE ALSO%^RESET%^
-  
-adjective, describe, speech, craft, setenv, color codes
 
+set, adjective, describe, speech, craft, setenv, color codes
