@@ -6,20 +6,20 @@ inherit DAEMON;
 
 //void do_wear_stat(object myplayer, object myitem, string mystat, int mymod);
 
-int cmd_wear(string str) 
+int cmd_wear(string str)
 {
     mixed *limbs;
     string ret, what, where, wear, unwear,ob_quest,*player_quests;
     int i, j, level, quiet, ultimate;
     object ob,*obs;
     mapping itembonuses;
- 
+
     if (!objectp(TP)) { return 0; }
     quiet = (int)TP->query_property("silent_equip");
     ultimate = (int)TP->query_property("ultimate_equip");
     if(!str || !stringp(str)) { return notify_fail("Wear what?\n"); }
-  
-    if (!ultimate && TP->query_bound()) 
+
+    if (!ultimate && TP->query_bound())
     {
         if (!quiet)
         TP->send_paralyzed_message("info",TP);
@@ -27,20 +27,20 @@ int cmd_wear(string str)
     }
 
     // Allow wearing by filename
-    if(ultimate && (strsrch(str,"#") != -1)) 
-    { 
+    if(ultimate && (strsrch(str,"#") != -1))
+    {
         if(!(ob = present(find_object(str), TP)))
-        if(!(sscanf(str, "%s on %s", what, where) != 2 && stringp(what) && (!(ob = present(find_object(what), TP )) /* && parse_objects(TP,what) != ob*/ )) ) 
+        if(!(sscanf(str, "%s on %s", what, where) != 2 && stringp(what) && (!(ob = present(find_object(what), TP )) /* && parse_objects(TP,what) != ob*/ )) )
         {
             notify_fail("You don't have that!\n");
             return 0;
         }
-    } 
-    else 
-    {   
+    }
+    else
+    {
         if(!(ob = present(str, TP)))
-        if(!(sscanf(str, "%s on %s", what, where) != 2 && stringp(what) && (!(ob = present(what, TP)) && parse_objects(this_player(), what) != ob)) ) 
-        { 
+        if(!(sscanf(str, "%s on %s", what, where) != 2 && stringp(what) && (!(ob = present(what, TP)) && parse_objects(this_player(), what) != ob)) )
+        {
             notify_fail("You don't have that!\n");
             return 0;
         }
@@ -60,7 +60,7 @@ int cmd_wear(string str)
             }
         }
     }
-    
+
     if((int)ob->query_property("level required"))
     {
         if((int)TP->query_character_level() < (int)ob->query_property("level required"))
@@ -83,21 +83,21 @@ int cmd_wear(string str)
             tell_object(TP,"You have not earned the right to make use of this item");
             return 1;
         }
-        
+
         for(i=0;i<sizeof(player_quests);i++)
         {
             player_quests[i] = FILTERS_D->filter_colors(player_quests[i]);
-            player_quests[i] = lower_case(player_quests[i]);  
+            player_quests[i] = lower_case(player_quests[i]);
             //tell_object(find_player("saide"), "player_quests[i] "+player_quests[i]);
         }
-        
+
         if(member_array(ob_quest, player_quests) == -1)
         {
             tell_object(TP,"You have not earned the right to make use of this item");
             return 1;
         }
     }
-    
+
     if(TP->query_property("shapeshifted"))
     {
         if( (base_name(ob) != "/d/azha/obj/gmr_ring") && (base_name(ob) != "/d/azha/obj/mr_ring") )
@@ -106,11 +106,11 @@ int cmd_wear(string str)
             return 1;
         }
     }
-    
-    // Allow wearing by filename...
-    if (!(quiet) && ob->query_property("silent_equip")) quiet = 1; 
 
-    if(ob->query_property("monsterweapon") && userp(TP)) 
+    // Allow wearing by filename...
+    if (!(quiet) && ob->query_property("silent_equip")) quiet = 1;
+
+    if(ob->query_property("monsterweapon") && userp(TP))
     {
         ob->remove();
         return 1;
@@ -118,7 +118,7 @@ int cmd_wear(string str)
 
     if(!ob->is_armour()) { return notify_fail("You can't wear that, it's not armor.\n"); }
     if(ob->query_wielded()) { return notify_fail("You can't wear something while wielding it.\n"); }
-    if(ob->query_worn()) 
+    if(ob->query_worn())
     {
         message("my_action", "You are already wearing that!", this_player());
         return 1;
@@ -128,48 +128,48 @@ int cmd_wear(string str)
     {
         message("my_action", "You cannot wear this. You do not have the required feat!",this_player());
         return 1;
-    } 
+    }
 
     if(ob->is_metal() && TP->is_class("druid"))
     {
         tell_object(TP,""+ob->query_short()+" is made of metal.  You cannot wear it as it would break your druidic oath.");
         return 1;
     }
-  
+
     if(TP->query_casting())
-    { 
+    {
         message("my_action", "You are too busy casting a spell to wear that!",this_player());
         return 1;
-    } 
-  
+    }
+
     if(!ob->mixable())
     {
         message("my_action", "You must remove your other armour first!",this_player());
         return 1;
-    }    
-  
+    }
+
     i = sizeof(limbs = ob->query_limbs());
     limbs = sort_array(limbs,"alphabetical_sort",FILTERS_D);
-    
-    while(i--) 
+
+    while(i--)
     {
         if(stringp(limbs[i])) { continue; }
         if((j=member_array(where, limbs[i])) != -1) { limbs[i] = limbs[i][j]; }
         else
-        {            
-            if(where) 
+        {
+            if(where)
             {
                 message("my_action", "You cannot wear this on your "+where+".",this_player());
                 return 1;
             }
-            else 
+            else
             {
                 message("my_action", "You must specify which limb you want this on.", this_player());
                 return 1;
             }
         }
     }
-   
+
     if(interactive(TP) && objectp(ETP) && ETP->query_property("IG_Jail") && (string)ob->query_type() != "clothing")
     {
         if (!quiet) { tell_object(TP, "You can only wear clothing while in jail."); }
@@ -178,12 +178,12 @@ int cmd_wear(string str)
 
     level = TP->query_highest_level();
     if(ob->query_property("enchantment"))
-    if (userp(TP) && (level/5 < ob->query_property("enchantment")) ) 
+    if (userp(TP) && (level/5 < ob->query_property("enchantment")) )
     {
         message("my_action", "You are not experienced enough to utilize this equipment",TP);
         return 1;
     }
-   
+
     if(!ultimate && (ob->query_property("enchantment") >= 0))
     {
         if((string *)TP->query_attackers()!=({}) && limbs[0] == "torso")
@@ -205,13 +205,13 @@ int cmd_wear(string str)
         {
             message("my_action", wear, this_player());
         }
-        else 
+        else
         {
             message("my_action", "You wear "+ob->query_short()+".", this_player());
         }
     }
 
-    if(itembonuses = ob->query_item_bonuses()) 
+    if(itembonuses = ob->query_item_bonuses())
     {
         ob->run_item_bonuses("equip",TP,itembonuses);
     }
@@ -221,13 +221,13 @@ int cmd_wear(string str)
         message("other_action", (string)this_player()->query_cap_name()+" wears "+ob->query_short()+".", environment(this_player()), ({ this_player() }));
     }
 
-    if (interactive(TP)) 
+    if (interactive(TP))
     {
         TP->set_property("wear_order",1);
         ob->remove_property("wear_order");
         ob->set_property("wear_order",""+(int)TP->query_property("wear_order")+"##"+TP->query_true_name()+"##"+what);
     }
-    
+
     POISON_D->is_object_poisoned(ob, TP, "wear", 1);
     ob->set_worn(TP);
     ob->set_actualLimbs(limbs);
@@ -253,8 +253,7 @@ This command will attempt to equip the given item_name.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-remove, wield, unwield, limbs, inv, eq, look
+wearall, remove, wield, unwield, limbs, inv, eq, look
 
 ");
 }
-

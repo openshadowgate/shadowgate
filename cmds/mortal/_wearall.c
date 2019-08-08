@@ -41,8 +41,19 @@ int cmd_wearall() {
 } /* end equip */
 
 void help() {
-   write("Syntax: wearall\n\n"
-         "This command allows you to wear all your armor.");
+    write("
+%^CYAN%^NAME%^RESET%^
+
+wearall - wear everything
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command allows you to wear all your armor.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+wear, remove, drop, wield
+");
 }
 
 int limbs_okay(object armor) {
