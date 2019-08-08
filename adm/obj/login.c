@@ -34,7 +34,7 @@ void receive_message(string cl, string msg);
 private void internal_remove();
 void remove();
 
-void create() 
+void create()
 {
     seteuid(UID_ROOT);
     __Name = "";
@@ -42,20 +42,20 @@ void create()
     __Player = 0;
 }
 
-static void logon() 
+static void logon()
 {
     int Z, ttl;
     call_out("idle", LOGON_TIMEOUT);
-    
+
     if(time() < __LoginTimeBuffer)
     {
         message("logon", "Please wait one second, login time buffer in effect.",TO);
         internal_remove();
         return;
-    }    
-    __LoginTimeBuffer = time() + 1;        
-        
-    if(catch(__Player = new(OB_USER))) 
+    }
+    __LoginTimeBuffer = time() + 1;
+
+    if(catch(__Player = new(OB_USER)))
     {
         if(catch(__Player = new("/adm/failsafe/user_failsafe")))
         {
@@ -73,20 +73,20 @@ static void logon()
 
     Z = random(5)+1;
     //message("logon", read_file(WELCOME+Z),this_object());
-    message("logon", "\n", this_object());    
+    message("logon", "\n", this_object());
     message("logon", "/daemon/welcome_d.c"->get_welcome(), this_object());
-    message("logon", "\n\n    Players Online: " +sizeof(real_users())+"\n    Last Reboot: " +last_reboot()+"\n", this_object());
+    message("logon", "\n\n  Players Online: " +sizeof(real_users())+"\n  Last Reboot: " +last_reboot()+"\n", this_object());
     if ("/adm/daemon/shutdown_d.c"->shuttingDown()) {
         ttl = "/adm/daemon/shutdown_d.c"->query_time_left();
-        if(ttl > 0) 
+        if(ttl > 0)
             message("logon", "\n<<< The MUD will be rebooting shortly. Reboot in "+ttl/60+" minute(s)! >>>\n", this_object());
-        else { 
+        else {
             message("logon", "\n<<< The MUD will reboot in under a minute! >>>\n", this_object());
             message("logon", "\n<<< Please consider waiting for a minute for the game to boot properly!!! >>>\n", this_object());
         }
     }
-    message("logon", "    E-mail: law@shadowgate.org\n    Website: https://shadowgate.org/\n", this_object());
-    message("logon", "    Host: shadowgate.org\n    Ports: 8080, 8443 (SSL)", this_object());    
+    message("logon", "  E-mail: law@shadowgate.org\n  Website: https://shadowgate.org/\n", this_object());
+    message("logon", "  Host: shadowgate.org\n  Ports: 8080, 8443 (SSL)", this_object());
     message("logon", "\n",this_object());
     message("logon", "\nWhat name do you choose? ", this_object());
     input_to("get_name");
@@ -348,13 +348,13 @@ static void ansi_test(string str) {
         return;
     }
     if (str == "Y") {
-        message("logon", "\nANSI supported turned on.  Use 'setenv TERM default' to turn it off.\n",this_object());
+        message("logon", "\nANSI supported turned on.  Use 'set term default' to turn it off later in the game.\n",this_object());
         __Player->setenv("TERM","ansi");
         __Player->reset_terminal();
     }
     if (str =="N") {
-        message("logon", "\nANSI supported turned off.  Use 'setenv TERM "+
-                "ansi' to turn it on.\n",this_object());
+        message("logon", "\nANSI supported turned off.  Use 'setenv term "+
+                "ansi' to turn it on later in the game.\n",this_object());
         __Player->setenv("TERM","default");
         __Player->reset_terminal();
     }
@@ -376,9 +376,8 @@ static void choose_gender(string str) {
     }
     __Player->set_gender(str);
     message("logon", sprintf("
-If you wish to be able to restore your password, enter your email in
-the form of user@host. Only staff members will be able to access this
-information. You can later change it.
+If you wish to be able to restore your password, enter your email in the
+form of user@host. You can later change this setting with chfn command.
 Your email address:", mud_name()), this_object());
     input_to("enter_email");
 }
@@ -394,12 +393,12 @@ static void enter_email(string str) {
         return;
     }
     __Player->set_email(str);
-    __Player->set_rname("Unknown");    
+    __Player->set_rname("Unknown");
     seteuid(UID_LOG);
     log_file("enter", sprintf("%s (new player): %s\n", __Name, ctime(time())));
     log_file("watch/new_players",sprintf("%s(%s) <%s> at %s from %s\n",__Name, str, __Player->query_email(),ctime(time()),query_ip_number()));
     seteuid(getuid());
-    exec_user();    
+    exec_user();
 }
 
 static void idle() {
@@ -407,7 +406,7 @@ static void idle() {
     internal_remove();
 }
 
-static void receive_message(string cl, string msg) 
+static void receive_message(string cl, string msg)
 {
     mapping TermInfo;
     if (cl != "logon") return;
@@ -426,4 +425,3 @@ void remove() {
     if (geteuid(previous_object()) != UID_ROOT) return;
     internal_remove();
 }
-
