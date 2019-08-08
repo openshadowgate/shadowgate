@@ -4,7 +4,12 @@
 
 inherit SHAPESHIFT;
 
-int breath_timer,death_timer,wing_timer,claw_timer,tail_timer;
+int clevel;
+
+void set_clevel(int x)
+{
+    clevel = x;
+}
 
 // all of the functions set in create below need to be there so it doesn't bug when trying to shapeshift -Ares
 // when making a new shape, be sure to include those functions or it'll fall back to the defaults
@@ -17,7 +22,7 @@ void create()
     set_limbs( ({ "maw","head","torso","right claw", "left claw", "right arm","right arm","left leg","left rear claw","right leg","right rear claw","tail","right wing","left wing" }) );
     set_attack_functions(([ "maw" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":) ]));
     set_ac_bonus(-6);
-    set_base_attack_num(2);
+    set_base_attack_num(4);
     set_castable(1);
     set_can_talk(1);
     set_shape_language("draconic");
@@ -45,8 +50,7 @@ int default_descriptions(object obj)
 
     obj->set_description("stands tall and deadly, covered in iron-hard scales from "+obj->QP+" horn "
         "covered head to "+obj->QP+" long tail.  A ridge of spines runs all the way down "+obj->QP+" back.  "
-        ""+obj->QP+" are folded at "+obj->QP+" sides.  "+obj->QS+"'s clawed hands are easily the size of "
-        "an ogre's fists.  Keenly intelligent eyes peer out at the world with deadly intent.");
+        ""+obj->QP+" are folded at "+obj->QP+" sides.  "+obj->QS+"'s clawed hands are easily the size of an ogre's fists.  Keenly intelligent eyes peer out at the world with deadly intent.");
 
     obj->setDescriptivePhrase("deadly $G $R");
 
@@ -95,10 +99,10 @@ int can_cast()
 int bite_attack(object tp, object targ)
 {
     string my_limb;
-    tell_object(tp,"%^RED%^You snake your neck around lightning quick and bite deeply into "+targ->QCN+"'s "+(my_limb=targ->return_target_limb())+"!");
-    tell_object(targ,"%^RED%^"+tp->QCN+" snakes "+tp->QP+" head around lightning quick and bites deeply into your "+my_limb+"!");
-    tell_room(ETP,"%^RED%^"+tp->QCN+" snakes "+tp->QP+" head around lightning quick and bites deeply into "+targ->QCN+"'s "+my_limb+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(2,8)+13,"piercing");
+    tell_object(tp,"%^RED%^You lightning quick bite deeply into "+targ->QCN+"'s "+(my_limb=targ->return_target_limb())+"!");
+    tell_object(targ,"%^RED%^"+tp->QCN+" lightning quick bites deeply into your "+my_limb+"!");
+    tell_room(ENV(tp),"%^RED%^"+tp->QCN+" snakes "+tp->QP+" lightning quick bites deeply into "+targ->QCN+"'s "+my_limb+"!",({tp,targ}));
+    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,8)+13,"piercing");
 
     //2d8+13
 }
@@ -107,8 +111,8 @@ int claw_attack(object tp, object targ)
 {
     tell_object(tp,"%^RED%^You reach out and violently claw "+targ->QCN+"!");
     tell_object(targ,"%^RED%^"+tp->QCN+" reaches out and violently claws you!");
-    tell_room(ETP,"%^RED%^"+tp->QCN+" reaches out and violently claws "+targ->QCN+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(2,6)+13,"piercing");
+    tell_room(ENV(tp),"%^RED%^"+tp->QCN+" reaches out and violently claws "+targ->QCN+"!",({tp,targ}));
+    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,6)+13,"piercing");
 
     //2d6+13
 }

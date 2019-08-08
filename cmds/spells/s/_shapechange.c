@@ -33,13 +33,17 @@ int preSpell(){
 
 void spell_effect(int prof)
 {
-
+    object shape;
+    int bonus;
     if (!objectp(caster)){
         TO->remove();
         return;
     }
     new("/std/races/shapeshifted_races/mage_dragon.c")->init_shape(caster,"dragon");
 
+    shape = caster->query_property("shapeshifted");
+    bonus = clevel/4+1;
+    shape->set_clevel(clevel);
     spell_successful();
 
     caster->set_property("spelled", ({TO}) );
