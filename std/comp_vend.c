@@ -47,51 +47,51 @@ void set_shop_type(string str){
 string query_shop_type() { return shoptype; }
 
 int __Buy(mixed str) {
-   object ob, newbag;
-   int number, cost;
-   string *not_allowed, response;
+    object ob, newbag;
+    int number, cost;
+    string *not_allowed, response;
 
     if(!sizeof(compset)) {
-      compset += MAGE_COMPONENTS;
-      add_dbs(({"alchemist"}));
+        compset += MAGE_COMPONENTS;
+        add_dbs(({"alchemist"}));
     }
     not_allowed = ({ "bound", "disabled" });
     if(disabled(TP, not_allowed)) return 1;
     if(disabled(TO, not_allowed)){
-      write("Do you really expect someone who cannot move to sell you something?");  
-	return 1;
+        write("Do you really expect someone who cannot move to sell you something?");
+        return 1;
     }
-   response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
-   if(!str) return notify_fail("Syntax: buy <itemname> || <itemnumber>\n");
-   if(member_array(str,({"bag","leather bag","components bag"})) != -1){
-      if(!TP->query_funds("gold",10)){
-         tell_room(ETO, response+"You do not have enough gold for a new components bag.");
-         return 1;
-      }
-      TP->use_funds("gold",10);
-	tell_room(ETO, response+"Here is your new components bag.");
-      newbag = new("/d/magic/comp_bag"); 
-      if (newbag->move(TP) != MOVE_OK){ 
-         newbag->move(ETP);
-         tell_room(ETO, response+"It seems your hands are full.  I'll "+
-            "just put this on the floor for you.");
-      }
-      return 1;
-   }
-   if(!sscanf(str,"%d",number)) {
-      if(member_array(str,Available) == -1) {
-	tell_room(ETO, response+"I do not have any "+str+" available at this time.");
-	return 1;
-      } else {
-         number = member_array(str,Available);
-      }
-      if(Amount[Available[number]] <= 0) {
-	tell_room(ETO, response+"I do not have any "+str+" available at this time.");
-	return 1;
-      }
-   }
-   if(number > sizeof(Available) || number < 0 || !sizeof(Available))
-      return notify_fail("There is no component number%^BOLD%^ "+number+"\n");
+    response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
+    if(!str) return notify_fail("Syntax: buy <itemname> || <itemnumber>\n");
+    if(member_array(str,({"bag","leather bag","components bag"})) != -1){
+        if(!TP->query_funds("gold",10)){
+            tell_room(ETO, response+"You do not have enough gold for a new components bag.");
+            return 1;
+        }
+        TP->use_funds("gold",10);
+        tell_room(ETO, response+"Here is your new components bag.");
+        newbag = new("/d/magic/comp_bag");
+        if (newbag->move(TP) != MOVE_OK){
+            newbag->move(ETP);
+            tell_room(ETO, response+"It seems your hands are full.  I'll "+
+                      "just put this on the floor for you.");
+        }
+        return 1;
+    }
+    if(!sscanf(str,"%d",number)) {
+        if(member_array(str,Available) == -1) {
+            tell_room(ETO, response+"I do not have any "+str+" available at this time.");
+            return 1;
+        } else {
+            number = member_array(str,Available);
+        }
+        if(Amount[Available[number]] <= 0) {
+            tell_room(ETO, response+"I do not have any "+str+" available at this time.");
+            return 1;
+        }
+    }
+    if(number > sizeof(Available) || number < 0 || !sizeof(Available))
+        return notify_fail("There is no component number%^BOLD%^ "+number+"\n");
     tell_room(ETO, response+"%^CYAN%^So, you want a little %^BOLD%^"+Available[number]+"%^RESET%^%^CYAN%^, do ya.. ");
 
     cost = adjust_cost(compcosts[Available[number]]);
@@ -158,7 +158,7 @@ int __List(string str) {
       add_dbs(({"alchemist"}));
     }
     not_allowed = ({ "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
    lines = to_int(TP->getenv("LINES"));
    lines -= 2;
@@ -177,7 +177,7 @@ int __List(string str) {
 }
 
 string sort_strings(string one,string two) {
-   return strcmp(one,two); 
+   return strcmp(one,two);
 }
 
 int set_components(int total) {
@@ -209,7 +209,7 @@ int set_components(int total) {
 string *query_components() {return Available;}
 
 mixed sort_items(object one,object two) {
-   return strcmp(one->query_short(),two->query_short()); 
+   return strcmp(one->query_short(),two->query_short());
 }
 
 int __Help(string nothing) {
@@ -218,15 +218,15 @@ int __Help(string nothing) {
    write(
 @MELNMARN
 %^BOLD%^%^BLUE%^--=<%^WHITE%^ Components Shop Help %^BLUE%^>=--%^RESET%^
-%^RESET%^%^CYAN%^There are 3 commands in the components shop. The shopkeeper 
-understands 'help', 'buy' and 'list'. 
+%^RESET%^%^CYAN%^There are 3 commands in the components shop. The shopkeeper
+understands 'help', 'buy' and 'list'.
 %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'list comp'
-%^RESET%^%^CYAN%^The list command will list the components available in his 
+%^RESET%^%^CYAN%^The list command will list the components available in his
 shop.
 %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'buy <# || name || components bag>'
-%^RESET%^%^CYAN%^This will allow you to buy a component or components bag. 
-You may either enter the item number, or the item name. 
-Once you have made the request to buy an item, you will be 
+%^RESET%^%^CYAN%^This will allow you to buy a component or components bag.
+You may either enter the item number, or the item name.
+Once you have made the request to buy an item, you will be
 asked how many of that component you wish to purchase.
 IE: buy 14 (will buy item # 14)
 IE: buy candle (will buy a candle)
