@@ -29,3 +29,8 @@ int change_outof_message(object obj) {
     tell_room(environment(obj),"%^RESET%^%^GREEN%^The glamer ripples once more and suddenly "+obj->QCN+" looks distinctly different!",obj);
     return 1;
 }
+
+int can_cast()
+{
+    return 1;
+}

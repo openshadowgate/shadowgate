@@ -19,7 +19,7 @@ string spell_name,
        cname,
        arg,
        my_diety,
-       mydiscipline, 
+       mydiscipline,
        *my_class,
        *immune,
        spell_domain,
@@ -59,7 +59,7 @@ int spell_level,
     reg_num,
     quest_spell,
     mage_only,
-    save_debug, 
+    save_debug,
     help_or_harm,
     casting_stat_bonus,
     wasreflected,
@@ -174,10 +174,10 @@ int preload_interface(
 
 //END prototypes
 
-int clean_up() { 
+int clean_up() {
     if(objectp(caster)) { return 1; }
     ::clean_up();
-    return 1; 
+    return 1;
 }
 
 void check_me()
@@ -185,7 +185,7 @@ void check_me()
     if(!objectp(caster))
     {
 	//adding this so that if a mob casts a spell
-	//such as chill touch on a player and the mob dies, 
+	//such as chill touch on a player and the mob dies,
 	//spell should not get removed if the target is still valid - Saide
 		if(query_target_required() && !objectp(target))
     	{
@@ -193,7 +193,7 @@ void check_me()
 			return;
 		}
     }
-	//believe this is really screwing spells, like 
+	//believe this is really screwing spells, like
 	//phantasmal killer, that are cast on a target but
 	//later don't require the target to still be alive up - Saide
     /*if(query_target_required() && !objectp(target))
@@ -322,7 +322,7 @@ string query_feat_required(string myclass) {
     return "me";
 }
 
-void startCasting() 
+void startCasting()
 {
     object *inven;
     int i,j,roll,targroll,displayflag;
@@ -371,19 +371,19 @@ object find_compbag(string component, int amnt, string myclass){
 // need this to prevent parties from killing each other because of reflection
 void remove_reflection_effects(object o_caster,object o_targ)
 {
-    if(objectp(o_caster)) 
+    if(objectp(o_caster))
     {
         o_caster->set_casting(0);
         original_caster = 0;
     }
 
-    if(objectp(o_targ)) 
+    if(objectp(o_targ))
     {
         o_targ->set_casting(0);
-        if(!o_targ->query_property("temp_perfect_caster")) 
-        { 
+        if(!o_targ->query_property("temp_perfect_caster"))
+        {
             o_targ = 0;
-            return; 
+            return;
         }
         o_targ->remove_property("temp_perfect_caster");
         o_targ->remove_temporary_feat("perfect caster");
@@ -398,16 +398,16 @@ void set_helpful_spell(int x)
 }
 
 
-int check_reflection() 
+int check_reflection()
 {
     int turnperc, flagz;
     object temp;
-    
+
     if(!objectp(caster)) { return 0; }
     if(!objectp(target)) { return 0; }
     if(target == caster)   { return 0; }
     if(target->query_unconscious() || target->query_ghost() || target->query_bound()) { return 0; }
-    
+
     //should prevent any spells labeled as helpful from being reflected - Saide
     if((int)TO->query_helpful()) return 0;
 
@@ -437,15 +437,15 @@ int check_reflection()
     if(turnperc < 0) turnperc = 0;
     if(!turnperc) return 0;
 
-    if(turnperc > roll_dice(1,100)) 
+    if(turnperc > roll_dice(1,100))
     {
-        if(!FEATS_D->usable_feat(target,"perfect caster")) 
+        if(!FEATS_D->usable_feat(target,"perfect caster"))
         {
             target->add_temporary_feat("perfect caster");
             target->set_property("temp_perfect_caster",1);
         }
 
-        if(flagz == 2) 
+        if(flagz == 2)
         {
             tell_object(target,"%^BOLD%^%^RED%^"+caster->QCN+"'s spell is reflected off of your "
                 "shield back at "+caster->QO+"!%^RESET%^");
@@ -453,12 +453,12 @@ int check_reflection()
                 ""+target->QCN+"'s shield!%^RESET%^");
             tell_room(environment(target),"%^BOLD%^%^RED%^"+caster->QCN+"'s spell is reflected "
                 "off of "+target->QCN+"'s shield!%^RESET%^",({caster,target}));
-            if(FEATS_D->usable_feat(target,"counter")) 
+            if(FEATS_D->usable_feat(target,"counter"))
             {
                 if(random(2)) { target->counter_attack(target); }
             }
         }
-        else 
+        else
         {
             tell_object(target,"%^BOLD%^%^RED%^"+caster->QCN+"'s spell bounces harmlessly off your "
                 "ward and reflects back at "+caster->QO+"!%^RESET%^");
@@ -470,11 +470,11 @@ int check_reflection()
         }
         original_caster = caster;
         original_target = target;
-        temp = caster;            
+        temp = caster;
         caster = target;
         target = temp;
         wasreflected = 1;
-        return 1; 
+        return 1;
     }
     return 0;
 }
@@ -489,8 +489,8 @@ void wizard_interface(object user, string type, string targ)
     string *comp_names, msg, whatsit, whatdo, improv, old_spell_type, featneeded, altclass,way;
     object *weaps, compbag, wildspell, wpcaster, shapeob;
     int nodo, i, casting_level;
-    
-    if(!type) 
+
+    if(!type)
     {
         tell_object(caster, "Something has gone wrong, the spell has no type specified!");
         TO->remove();
@@ -499,7 +499,7 @@ void wizard_interface(object user, string type, string targ)
     spell_type = type;
     if(spell_type == "antipaladin") spell_type = "paladin"; // casting til the antipaladin class is removed.
 
-    switch(type) 
+    switch(type)
     {
     case "psion": case "psywarrior":
         whatsit = "power"; whatdo = "manifest"; old_spell_type = "psionics";
@@ -524,7 +524,7 @@ void wizard_interface(object user, string type, string targ)
 
     if(user->is_class("psion")){ psyclass = "psion"; altclass = "psywarrior"; }
     if(user->is_class("psywarrior")){ psyclass = "psywarrior"; altclass = "psion"; }
-    
+
     if(user->is_class("psion") || user->is_class("psywarrior"))
     {
         if(FEATS_D->usable_feat(user,"expanded knowledge 3") && ((string)TO->query_spell_name() == (string)user->query("expanded_knowledge_3")))
@@ -565,7 +565,7 @@ void wizard_interface(object user, string type, string targ)
     }
 
     casting_level = query_spell_level(spell_type);
-  
+
     if(!casting_level)
     {
         tell_object(user, "The "+spell_type+" class cannot cast such a spell!\n");
@@ -579,8 +579,8 @@ void wizard_interface(object user, string type, string targ)
     if (!user) return 0;
 
     set_caster(user); ////
-    seteuid(getuid());    
-    
+    seteuid(getuid());
+
     if(query_aoe_spell())
     {
         if(sizeof(caster->query_property("aoe list"))>2)
@@ -589,21 +589,21 @@ void wizard_interface(object user, string type, string targ)
             ::remove();
             return;
         }
-        if(caster->has_aoe(query_spell_name())) 
+        if(caster->has_aoe(query_spell_name()))
         {
             tell_object(caster,"You can't concentrate on more than one area effect at a time!");
             ::remove();
             return;
         }
     }
-    
+
     cname = caster->query_name();
     //If we get an argument string from the cast command
-    if (targ) 
+    if (targ)
     {
         //If we DON'T need argument.  E.G. we want to specify
         //  a target object and not send args to the spell
-        if (!arg_needed) 
+        if (!arg_needed)
         {
             if ( (targ == "me") || (targ == "self") || (targ == "myself"))
                 target = caster;
@@ -613,20 +613,20 @@ void wizard_interface(object user, string type, string targ)
 
             if (!target && (objectp(targ) || stringp(targ)) )
                 target = present(targ, environment(caster));
-            if (!target) 
+            if (!target)
             {
                 tell_object(caster, "That is not here!");
                 TO->remove();
                 return;
             }
 
-            if ((!living(target)) && (!non_living_ok)) 
+            if ((!living(target)) && (!non_living_ok))
             {
                 tell_object(caster, "That is not a living being!");
                 TO->remove();
                 return;
             }
-        } 
+        }
         else
         {
             arg = targ;
@@ -641,16 +641,16 @@ void wizard_interface(object user, string type, string targ)
     }
 
     //We need a target, but we don't have one!
-    if(target_required) 
+    if(target_required)
     {
-        if (!targ) 
+        if (!targ)
         {
             tell_object(caster,"You must CHOOSE a target for this "+whatsit+"!");
             TO->remove();
             return;
         }
         if ((!(check_light(caster)) && target != caster && target != environment(caster)) ||
-        (caster->query_blind() && target != caster && target != environment(caster)) ) 
+        (caster->query_blind() && target != caster && target != environment(caster)) )
         {
             tell_object(caster,"You can't see your target!");
             TO->remove();
@@ -659,9 +659,9 @@ void wizard_interface(object user, string type, string targ)
     }
 
     //If you can't be in combat to cast the spell
-    if (peace) 
+    if (peace)
     {
-        if ((object *)caster->query_attackers() != ({})) 
+        if ((object *)caster->query_attackers() != ({}))
         {
             tell_object(caster,"You must be at peace to use this "+whatsit+".");
             TO->remove();
@@ -670,11 +670,11 @@ void wizard_interface(object user, string type, string targ)
     }
 
     //If you need to be able to move your hands to cast
-    if (somatic_comp) 
+    if (somatic_comp)
     {
-/* if we decide to check for having hands to support morph spells denial or lost hands 
+/* if we decide to check for having hands to support morph spells denial or lost hands
 * I think this should do it but it needs tested *Styx* 8/21/05
-*	if( (member_array("right hand", caster->query_limbs()) == -1) 
+*	if( (member_array("right hand", caster->query_limbs()) == -1)
 *  || (member_array("left hand", caster->query_limbs()) == -1) ) {
 *            tell_object(caster, "You have no hands with which to "+whatdo+" this "+whatsit+"!");
 *	    TO->remove();
@@ -687,7 +687,7 @@ void wizard_interface(object user, string type, string targ)
              (string)TP->query("relationship_profile") == "spell_alter_self_999" ||
              (string)TP->query("relationship_profile") == "shadow_apotheosis"))
         {
-            for (i=0;i<sizeof(weaps);i++) 
+            for (i=0;i<sizeof(weaps);i++)
             {
                 if(spell_type == "monk")
                 {
@@ -715,8 +715,8 @@ void wizard_interface(object user, string type, string targ)
                 nodo = 0;
             if (FEATS_D->usable_feat(caster,"bladesong") &&
                 sizeof(weaps)==1)
-                nodo = 0;                
-            if (nodo) 
+                nodo = 0;
+            if (nodo)
             {
                 tell_object(caster, "Your hands must be free to "+whatdo+" this "+whatsit+"!");
                 TO->remove();
@@ -745,52 +745,59 @@ void wizard_interface(object user, string type, string targ)
     // welcome to the new casting restrictions on melee-powered forms! Currently applies to druid shapeshifts (except elemental), as well as rage & transformation spells.
     // this only allows the casting of helpful spelltypes, and only if non- or self-targetted with no arguments. Ie. no complex casting or nuking. N, 10/15.
     if(caster->query_property("raged") ||
-       caster->query_property("transformed")) 
+       caster->query_property("transformed"))
     {
         if (!FEATS_D->usable_feat(caster, "ragecaster"))
         {
-            if(!help_or_harm) 
+            if(!help_or_harm)
             {
                 tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
                 TO->remove();
                 return;
             }
-            if(arg_needed || (target_required && target != caster)) 
+            if(arg_needed || (target_required && target != caster))
             {
                 tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
                 TO->remove();
                 return;
             }
-        }        
+        }
     }
     if(caster->query_property("shapeshifted"))
-        if((string)caster->query("relationship_profile") != "spell_alter_self_999" &&
-           (string)caster->query("relationship_profile") != "druid_elemental_999" &&
-           (string)caster->query("relationship_profile") != "shadow_apotheosis" &&
-           !FEATS_D->usable_feat(caster, "ragecaster")) 
     {
         shapeob = caster->query_property("shapeshifted");
-        if(!objectp(shapeob)) 
+        if(!objectp(shapeob))
         {
             tell_object(caster, "Your shapeshift has glitched! Please contact an imm.");
             TO->remove();
             return;
         }
-        if(!shapeob->can_cast()) 
+        if(strsrch((string)caster->query("relationship_profile"),"druid_")>=0)
+            if((string)caster->query("relationship_profile") != "druid_elemental_999" &&
+               !FEATS_D->usable_feat(caster, "ragecaster"))
+            {
+                if(!shapeob->can_cast())
+                {
+                    tell_object(caster, "You can't cast while shapeshifted unless you have the wild spellcraft feat.");
+                    TO->remove();
+                    return;
+                }
+                if(!help_or_harm)
+                { // only spells flagged as helpful work in these states
+                    tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
+                    TO->remove();
+                    return;
+                }
+                if(arg_needed || (target_required && target != caster))
+                { // only non-arg and non- or self-targetted spells
+                    tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
+                    TO->remove();
+                    return;
+                }
+            }
+        if(!shapeob->can_cast())
         {
-            tell_object(caster, "You can't cast while shapeshifted unless you have the wild spellcraft feat.");
-            TO->remove();
-            return;
-        }
-        if(!help_or_harm) 
-        { // only spells flagged as helpful work in these states
-            tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
-            TO->remove();
-            return;
-        }
-        if(arg_needed || (target_required && target != caster)) 
-        { // only non-arg and non- or self-targetted spells
-            tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
+            tell_object(caster, "You can't cast while in this form!");
             TO->remove();
             return;
         }
@@ -799,52 +806,34 @@ void wizard_interface(object user, string type, string targ)
     //Need components bag present
     if(sizeof(components) && !avatarp(caster) && spell_type != "monk")
     {
-        if(query_components_value(spell_type) > 100 || !(FEATS_D->usable_feat(caster,"eschew materials"))) 
+        if(query_components_value(spell_type) > 100 || !(FEATS_D->usable_feat(caster,"eschew materials")))
         {
-            if(!FEATS_D->usable_feat(caster,"spellmastery") || (spell_name != (string)caster->query("spellmastery_spell"))) 
+            if(!FEATS_D->usable_feat(caster,"spellmastery") || (spell_name != (string)caster->query("spellmastery_spell")))
             { // don't need comps for spellmastered one.
-                if((spell_type == "mage" || spell_type == "sorcerer") && !present("compx", caster) && sizeof(components["mage"])) 
+                if((spell_type == "mage" || spell_type == "sorcerer") && !present("compx", caster) && sizeof(components["mage"]))
                 {
                     tell_player(caster, "You need a components bag with components to cast this spell.");
-                    TO->remove();
-                    return;
-                }
-                if(spell_type == "bard" && !present("compx", caster) && sizeof(components["bard"])) 
-                {
-                    tell_player(caster, "You need a components bag with components to cast this spell.");
-                    TO->remove();
-                    return;
-                }
-                if (spell_type == "psion" && !present("compx", caster) && sizeof(components["psion"])) 
-                {
-                    tell_player(caster, "You need a crystals pouch with components to manifest this power.");
-                    TO->remove();
-                    return;
-                }
-                if (spell_type == "psywarrior" && !present("compx", caster) && sizeof(components["psywarrior"])) 
-                {
-                    tell_player(caster, "You need a crystals pouch with components to manifest this power.");
                     TO->remove();
                     return;
                 }
             }
         }
     }
-    if(spell_type == "sorcerer") 
+    if(spell_type == "sorcerer")
     {
         if (mapp(components["mage"])) comp_names = keys(components["mage"]);
     }
-    else if(spell_type == "monk") 
+    else if(spell_type == "monk")
     {
         comp_names = ({});
     }
-    else 
+    else
     {
         if (mapp(components[spell_type])) comp_names = keys(components[spell_type]);
     }
 
     //Check to see if the proper components are in place
-    for (x=0;x<sizeof(comp_names);x++) 
+    for (x=0;x<sizeof(comp_names);x++)
     {
         if(avatarp(caster)) break;
         if(FEATS_D->usable_feat(caster,"eschew materials") && (query_components_value(spell_type) < 101)) break;
@@ -855,19 +844,19 @@ void wizard_interface(object user, string type, string targ)
             TO->remove();
             return;
         }
-        if (spell_type == "bard" && !(find_compbag(comp_names[x], components["bard"][comp_names[x]], "bard"))) 
+        if (spell_type == "bard" && !(find_compbag(comp_names[x], components["bard"][comp_names[x]], "bard")))
         {
             tell_object(caster, "You do not have the required components to cast this spell!\n");
             TO->remove();
             return;
         }
-        if (spell_type == "psion" && !(find_compbag(comp_names[x], components["psion"][comp_names[x]], "psion"))) 
+        if (spell_type == "psion" && !(find_compbag(comp_names[x], components["psion"][comp_names[x]], "psion")))
         {
             tell_object(caster, "You do not have the required components to manifest this power!\n");
             TO->remove();
             return;
         }
-        if (spell_type == "psywarrior" && !(find_compbag(comp_names[x], components["psywarrior"][comp_names[x]], "psywarrior"))) 
+        if (spell_type == "psywarrior" && !(find_compbag(comp_names[x], components["psywarrior"][comp_names[x]], "psywarrior")))
         {
             tell_object(caster, "You do not have the required components to manifest this power!\n");
             TO->remove();
@@ -877,7 +866,7 @@ void wizard_interface(object user, string type, string targ)
 
     //Check to see if the caster can actually cast that spell.
     // using old_spell_type so the daemon doesn't have to be modified at this point.
-    // Psywarriors cannot use the old cast type 
+    // Psywarriors cannot use the old cast type
     if(caster->is_class("psywarrior"))
     {
         caster->set_cast_type("psywarrior");
@@ -898,7 +887,7 @@ void wizard_interface(object user, string type, string targ)
 
     //add psion when they switch to power points - remember to adjust for spellmastery, if they get it
     if(spell_type == "psywarrior" || (spell_type == "psion"))
-    { 
+    {
         mycost = check_point_cost(casting_level);
         if(!mycost)
         {
@@ -906,7 +895,7 @@ void wizard_interface(object user, string type, string targ)
             TO->remove();
             return;
         }
-        else 
+        else
         {
             mypp = caster->query_mp();
             if(mypp < mycost)
@@ -922,7 +911,7 @@ void wizard_interface(object user, string type, string targ)
     {
         way = caster->query("monk way");
         if(FEATS_D->usable_feat(caster,"grandmaster of the way")) { way = "grandmaster of the way"; }
-        
+
         if(!stringp(way))
         {
             tell_object(caster, "You do not have a monk specialization set. You must visit your temple and "+
@@ -948,9 +937,9 @@ void wizard_interface(object user, string type, string targ)
             tell_object(caster, "You do not have enough available ki to "+whatdo+" that "+whatsit+"!");
             TO->remove();
             return;
-        }        
+        }
     }
-    
+
     // time for a new check for feat-based spells! N, 7/15.
     featneeded = query_feat_required(spell_type);
     if(featneeded != "me" && !FEATS_D->usable_feat(caster,featneeded))
@@ -976,9 +965,9 @@ void wizard_interface(object user, string type, string targ)
         if(objectp(TO)) { TO->remove(); }
         return;
     }
-    
+
     supreme_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds", "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds", "mass cure critical wounds", "regeneration", "aura of healing", });
-        
+
     natures_gift_spells = ({ "faerie fire","entangle","animal messenger","spider climb","meld into nature",
         "wall of thorns","treestride","insect plague","wall of stone","regeneration" });
 
@@ -987,15 +976,15 @@ void wizard_interface(object user, string type, string targ)
     spell_name = replace_string(spell_name,"_"," ");
     improv = replace_string(improv,"_"," ");
 
-    if((!FEATS_D->usable_feat(caster,"spellmastery") || (spell_name != (string)caster->query("spellmastery_spell"))) && 
+    if((!FEATS_D->usable_feat(caster,"spellmastery") || (spell_name != (string)caster->query("spellmastery_spell"))) &&
     (!FEATS_D->usable_feat(caster,"supreme healer") || (member_array(spell_name,supreme_healer_spells) == -1)) &&
     (!FEATS_D->usable_feat(caster,"natures gift") || (member_array(spell_name,natures_gift_spells) == -1)) &&
-    (!FEATS_D->usable_feat(caster,"expanded knowledge 1") || (spell_name != (string)caster->query("expanded_knowledge_1"))) && 
-    (!FEATS_D->usable_feat(caster,"expanded knowledge 2") || (spell_name != (string)caster->query("expanded_knowledge_2"))) && 
+    (!FEATS_D->usable_feat(caster,"expanded knowledge 1") || (spell_name != (string)caster->query("expanded_knowledge_1"))) &&
+    (!FEATS_D->usable_feat(caster,"expanded knowledge 2") || (spell_name != (string)caster->query("expanded_knowledge_2"))) &&
     (!FEATS_D->usable_feat(caster,"expanded knowledge 3") || (spell_name != (string)caster->query("expanded_knowledge_3"))) &&
     ((!FEATS_D->usable_feat(caster,"body cognition") && !FEATS_D->usable_feat(caster,"mind over matter")) || (spell_name != "true metabolism")) &&
     ((!FEATS_D->usable_feat(caster,"presence of mind") && !FEATS_D->usable_feat(caster, "mental fortress")) || (spell_name != "timeless body")))
-    { 
+    {
 // only bother checking memorized if it's not spellmastered or part of expanded knowledge/epic feats
         if(!caster->check_memorized(spell_type,improv))
         {
@@ -1006,7 +995,7 @@ void wizard_interface(object user, string type, string targ)
     }
 
     caster->set_casting(1);
-    if (0) 
+    if (0)
     {
         if(target) TP->setAdminBlock(100);
         else TP->setAdminBlock(100);
@@ -1014,49 +1003,49 @@ void wizard_interface(object user, string type, string targ)
 
     tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
 
-    for (x=0;x<sizeof(comp_names);x++) 
+    for (x=0;x<sizeof(comp_names);x++)
     {
         if(avatarp(caster)) break;
         if(FEATS_D->usable_feat(caster,"eschew materials") && (query_components_value(spell_type) < 101)) break;
         if(FEATS_D->usable_feat(caster,"spellmastery") && (spell_name == (string)caster->query("spellmastery_spell"))) break; // don't need comps for spellmastered one.
         if (!components) break;
-        if(spell_type == "psion") 
+        if(spell_type == "psion")
         {
             compbag = find_compbag(comp_names[x], components["psion"][comp_names[x]], "psion");
             if(objectp(compbag)) compbag->use_comp(comp_names[x],components[spell_type][comp_names[x]]);
         }
-        if(spell_type == "psywarrior") 
+        if(spell_type == "psywarrior")
         {
             compbag = find_compbag(comp_names[x], components["psywarrior"][comp_names[x]], "psywarrior");
             if(objectp(compbag)) compbag->use_comp(comp_names[x],components["psywarrior"][comp_names[x]]);
         }
-        if(spell_type == "mage" || spell_type == "sorcerer") 
+        if(spell_type == "mage" || spell_type == "sorcerer")
         {
             compbag = find_compbag(comp_names[x], components["mage"][comp_names[x]], "mage");
             if(objectp(compbag)) compbag->use_comp(comp_names[x],components["mage"][comp_names[x]]);
         }
-        if(spell_type == "bard") 
+        if(spell_type == "bard")
         {
             compbag = find_compbag(comp_names[x], components["bard"][comp_names[x]], "bard");
             if(objectp(compbag)) compbag->use_comp(comp_names[x],components[spell_type][comp_names[x]]);
         }
     }
-    
+
 
     if(objectp(target)) { check_reflection(); } // this is needed for PCs, uses different function than mobs
     if(wasreflected) { caster->set_casting(0); }
 
     startCasting();
-    
+
     if(query_aoe_spell()) {
         caster->add_aoe(query_spell_name());
         if(stringp(aoe_message))
             place->set_property("aoe_messages",({ aoe_message }));
         else
-            place->set_property("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" })); 
+            place->set_property("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
     }
 
-    if(objectp(wildspell = WildMagicArea(environment(caster)))) 
+    if(objectp(wildspell = WildMagicArea(environment(caster))))
     {
         caster->remove_property("spell_casting");
         caster->set_property("spell_casting", wildspell);
@@ -1081,12 +1070,12 @@ void init_vars(object cast, object targ, object where, int lev)
 	place = where;
 	clevel = lev;
 }
-//End 
+//End
 
 //Filter Function to make sure spells like
-//mind net and whispering wind aren't being picked.... 
+//mind net and whispering wind aren't being picked....
 //may have to add more if it bugs or figure out a way to handle
-//these spells 
+//these spells
 
 mixed special_spell_handling(string which)
 {
@@ -1099,18 +1088,18 @@ mixed special_spell_handling(string which)
 //End filter function
 
 
-//This is the function that checks if an area is a wild magic area 
-//if it is - this function is going to figure out which new spell 
-//to make happen - or if a new spell will happen - basically 
+//This is the function that checks if an area is a wild magic area
+//if it is - this function is going to figure out which new spell
+//to make happen - or if a new spell will happen - basically
 //this is the meat of the wild magic code - Saide
 //Wanna have wild magic function with two properties set in the
-//room - the first one - set_property("wild magic", % chance) 
-//the second one - set_property("wild magic affect", 
+//room - the first one - set_property("wild magic", % chance)
+//the second one - set_property("wild magic affect",
 //({"same" || "random" || "specific class", For the type of spell - same class by default
-//"same level" || "random level" || "specific level", For the level of spell cast - same level 
+//"same level" || "random level" || "specific level", For the level of spell cast - same level
 //by default
-//"psion immune" - 1 for immune, 0 for not - 1 by default, since their powers are mental - Ungrim/Josephs 
-//thought and it makes sense 
+//"psion immune" - 1 for immune, 0 for not - 1 by default, since their powers are mental - Ungrim/Josephs
+//thought and it makes sense
 
 mixed WildMagicArea(object where)
 {
@@ -1125,25 +1114,25 @@ mixed WildMagicArea(object where)
     wmlev = slev;
     wmclass = spell_type;
 
-    if(!objectp(where)) 
+    if(!objectp(where))
     {
         return 0;
     }
 
-    if(where->query_property("wild magic") > roll_dice(1, 100)) 
+    if(where->query_property("wild magic") > roll_dice(1, 100))
     {
         wm_affect = where->query_property("wild magic affect");
-        if(!stringp(wm_notify = where->query_property("wild magic warning"))) 
+        if(!stringp(wm_notify = where->query_property("wild magic warning")))
         {
             wm_notify = "%^BOLD%^%^RED%^You sense an unseen force "+
             "manipulating your incantation!%^RESET%^";
         }
-        if(!sizeof(wm_affect)) 
+        if(!sizeof(wm_affect))
         {
-            //if(spell_type == "psion") return 0;		
+            //if(spell_type == "psion") return 0;
             rspell = MAGIC_D->query_random_spell(wmclass, wmlev);
             count = 0;
-            while(!special_spell_handling(rspell)) 
+            while(!special_spell_handling(rspell))
             {
                 count++;
                 if(count > 5) return 0;
@@ -1154,10 +1143,10 @@ mixed WildMagicArea(object where)
             nspell = new(file);
             nspell->init_vars(caster, target, place, clevel);
             tell_object(caster, wm_notify);
-            return nspell;			
+            return nspell;
         }
 
-        switch(sizeof(wm_affect)) 
+        switch(sizeof(wm_affect))
         {
             case 1:
                 wmclass = wm_affect[0];
@@ -1178,10 +1167,10 @@ mixed WildMagicArea(object where)
         if(wmlev == "random") wmlev = -1;
         if(!intp(wmlev)) wmlev = slev;
         if(psi_immune != 1) psi_immune = 0;
-        if(spell_type == "psion" && psi_immune == 1) return 0;	
+        if(spell_type == "psion" && psi_immune == 1) return 0;
         rspell = MAGIC_D->query_random_spell(wmclass, wmlev);
         count = 0;
-        while(!special_spell_handling(rspell)) 
+        while(!special_spell_handling(rspell))
         {
             count++;
             if(count > 5) return 0;
@@ -1195,33 +1184,33 @@ mixed WildMagicArea(object where)
         if(!objectp(place)) place = environment(caster);
         nspell->init_vars(caster, target, place, clevel);
         tell_object(caster, wm_notify);
-        
+
         if(!nspell->query_aoe_spell()) {
             caster->subtract_aoe(nspell->query_spell_name());
             if(stringp(aoe_message))
                 place->remove_property_value("aoe_messages",({ aoe_message }));
             else
-                place->remove_property_value("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" })); 
+                place->remove_property_value("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
         }
-        
+
         return nspell;
-            
+
     }
     return 0;
 }
 
-varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string classtype) 
+varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string classtype)
 {
     string msg, whatsit, whatdo, *myclasses;
     mixed innate_spells;
-    
+
     if(!objectp(TO)) { return; }
     if(!objectp(ob)) { return; }
 
     set_caster(ob);
     clevel = ob_level;
     seteuid(getuid());
-    
+
     if(classtype == "innate")
     {
         if(!(innate_spells = caster->query_innate_spells()))
@@ -1231,14 +1220,14 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
             TO->remove();
             return;
         }
-        if(member_array(spell_name, innate_spells) == -1) 
+        if(member_array(spell_name, innate_spells) == -1)
         {
             tell_object(caster, "You have no innate spell of "+
             spell_name+".");
             TO->remove();
             return;
         }
-        if(!caster->can_use_innate_ability(spell_name)) 
+        if(!caster->can_use_innate_ability(spell_name))
         {
             tell_object(caster, "You cannot use the innate spell "+
             spell_name+" at this time.");
@@ -1247,9 +1236,9 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         }
         if(clevel < 1) clevel = 1;
     }
-            
+
     myclasses = keys(spell_levels);
-    if (!sizeof(myclasses)) 
+    if (!sizeof(myclasses))
     {
         tell_object(caster, "No classes specified for this spell, contact a wiz.");
         TO->remove();
@@ -1261,7 +1250,7 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     else
         spell_type = myclasses[0];
 
-    if (member_array(spell_type,myclasses) == -1 && spell_type != "innate" && spell_type != "potion") 
+    if (member_array(spell_type,myclasses) == -1 && spell_type != "innate" && spell_type != "potion")
     {
         tell_object(caster, "Invalid caster class specified to "+
         "invoke this spell, contact a wiz.");
@@ -1269,9 +1258,9 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         return;
     }
 
-    if(spell_type == "psion" || spell_type == "psywarrior") 
-    { 
-        whatdo = "manifest"; 
+    if(spell_type == "psion" || spell_type == "psywarrior")
+    {
+        whatdo = "manifest";
         whatsit = "power";
     }
     else if(spell_type == "innate")
@@ -1279,41 +1268,41 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         whatdo = "use";
         whatsit = "innate spell";
     }
-    else 
+    else
     {
         whatdo = "cast";
         whatsit = "spell";
     }
 
     cname = caster->query_name();
-    
-    if (!targ && target_required) 
+
+    if (!targ && target_required)
     {
         tell_object(caster, "Target needed.");
         TO->remove();
         return;
     }
     if(!prof) prof == FULL_EFFECT;
-    
-    if(targ) 
+
+    if(targ)
     {
-        if (arg_needed) 
+        if (arg_needed)
         {
             arg = targ;
             place = environment(caster);
-        } 
+        }
         else
         {
             if(caster->is_room()) target = present(targ,caster);
             else if(objectp(environment(caster))) target = present(targ,environment(caster));
         }
-            
-        if(!target) 
+
+        if(!target)
         {
-            if(objectp(environment(caster)) && objectp(environment(environment(caster)))) 
+            if(objectp(environment(caster)) && objectp(environment(environment(caster))))
             {
                 if (environment(environment(caster))) target = present(targ,environment(environment(caster)));
-                if (!target) 
+                if (!target)
                 {
                     tell_object(caster, "That is not here!\n");
                     TO->remove();
@@ -1323,18 +1312,18 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         }
         place=environment(caster);
     }
- 
-    else 
+
+    else
     {
         if(objectp(environment(caster))) place=environment(caster);
-        else 
+        else
         {
             if(objectp(environment(environment(caster)))) place=environment(environment(caster));
         }
         if(interactive(place) && objectp(environment(environment(caster)))) place=environment(environment(caster));
     }
 
-    if(!objectp(place)) 
+    if(!objectp(place))
     {
         TO->remove();
         return;
@@ -1343,7 +1332,7 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     // giving them the ability to cast from items while they're interrupted -Ares
     // changing this so that it's only skipped for users (eg/ using contingency, items, scrolls etc),
     // as it is preventing any silence effects from working on NPCs/mobs. N, 8/12.
-    if(!userp(caster)) 
+    if(!userp(caster))
     {
         msg = caster->query_property("spell interrupt");
         if (!msg) msg = caster->get_static("spell interrupt");
@@ -1356,36 +1345,36 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     }
     define_base_damage_adjustment();
     define_base_damage(0);
-    
+
     if(!preSpell())
     {
         TO->remove();
         return;
     }
-    
+
     if(query_aoe_spell())
     {
-        if(caster->has_aoe(query_spell_name())) 
+        if(caster->has_aoe(query_spell_name()))
         {
             tell_object(caster,"You can't concentrate on more than one area effect at a time!");
             ::remove();
             return;
         }
     }
-    
+
     // moving this up here cuz otherwise the prof dies (for backfires) and it gets cast locked. N, 6/15.
-    if(spell_type == "potion") 
-    { 
+    if(spell_type == "potion")
+    {
         TO->spell_effect(prof);
         return 1;
     }
-    
-    if (living(caster) && base_name(PO) != "/d/magic/obj/contingency") 
+
+    if (living(caster) && base_name(PO) != "/d/magic/obj/contingency")
     {
         //part of the code that actually uses the innate spell - Saide
         if(spell_type == "innate")
         {
-            if(!caster->use_innate_ability(spell_name)) 
+            if(!caster->use_innate_ability(spell_name))
             {
                 tell_object(caster, "You cannot use the innate spell "+
                 spell_name+ " at this time!");
@@ -1396,9 +1385,9 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
         tell_room(environment(caster),caster->QCN+
             " begins to "+whatdo+" a "+whatsit+"!", caster);
-      
+
         if(objectp(target) && target != caster) { check_reflection(); }
-        
+
         if (cast_time)
         {
             place->set_round(TO,(int)place->query_stage()+cast_time);
@@ -1416,7 +1405,7 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
             else
                 place->set_property("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
         }
-    } 
+    }
     else
     {
         TO->spell_effect(prof);
@@ -1455,8 +1444,8 @@ string query_spell_sphere() { return spell_sphere; }
 string query_cast_string() { }
 int query_silent_casting() {  return silent_casting; }
 
-void set_caster(object ob){    
-   caster = ob; 
+void set_caster(object ob){
+   caster = ob;
    get_casting_stat();
 }
 
@@ -1558,7 +1547,7 @@ void check_fizzle(object ob) {
             TO->remove();
             return;
         }
-    
+
     if (fizzle || place->query_property("no magic")) {
         tell_object(caster,"%^CYAN%^Your "+whatsit+" fizzles harmlessly.");
         tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" fizzles harmlessly.");
@@ -1610,11 +1599,11 @@ void do_spell_blowup(int prof){
 }
 
 void spell_successful() //revoked exp bonuses from casting. This function seems redundant now? Nienne, 06/10.
-{ 
+{
     int stat;
     if (!objectp(TO) || !objectp(caster)) return;
     remove_reflection_effects(original_caster,original_target);
-    
+
     if(mycost && (caster->is_class("psion") || caster->is_class("psywarrior")) )
     {
         if(FEATS_D->usable_feat(caster,"perfect manifesting"))
@@ -1624,11 +1613,11 @@ void spell_successful() //revoked exp bonuses from casting. This function seems 
             if(random(100) < stat)
             {
                 tell_object(caster,"%^BOLD%^%^WHITE%^Your concentration is so perfect that you feel no loss of power points as you manifest the power!%^RESET%^");
-                return 1;               
-            }            
+                return 1;
+            }
         }
-        if(caster->query_property("clearcasting")) 
-        { 
+        if(caster->query_property("clearcasting"))
+        {
             caster->remove_property("clearcasting");
             tell_object(caster,"%^BOLD%^%^WHITE%^Your concentration is so great that you feel no loss of power points as you manifest the power!%^RESET%^");
             return 1;
@@ -1636,9 +1625,9 @@ void spell_successful() //revoked exp bonuses from casting. This function seems 
         mycost = mycost*-1;
         caster->add_mp(mycost);
         if((int)caster->query_mp() < 0) caster->set_mp(0); //fail safe to avoid problems with negative points
-        mycost = 0; // on the off chance something calls spell_successful() more than once, don't charge them twice 
+        mycost = 0; // on the off chance something calls spell_successful() more than once, don't charge them twice
     }
-    
+
     return 1;
 }
 
@@ -1653,16 +1642,16 @@ void before_cast_dest_effect()
             caster->subtract_aoe(query_spell_name());
         if(objectp(place)) {
             if(stringp(aoe_message))
-                place->remove_property_value("aoe_messages",({ aoe_message })); 
+                place->remove_property_value("aoe_messages",({ aoe_message }));
             else
-                place->remove_property_value("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" })); 
+                place->remove_property_value("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
         }
     }
     if(objectp(TO)) TO->remove();
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if(query_aoe_spell() &&
        objectp(caster) &&
@@ -1708,21 +1697,21 @@ varargs void damage_targ(object victim, string hit_limb, int wound, string damag
     nokill=1;
     if (!victim)
         return 1;
-    if (wound <= 0) 
+    if (wound <= 0)
     {
         victim->do_damage(hit_limb,wound);
         return;
     }
 
-    if(objectp(caster)) 
+    if(objectp(caster))
     {
-        if (caster->ok_to_kill(victim)) 
+        if (caster->ok_to_kill(victim))
         {
             nokill=0;
         }
     }
 
-    if (nokill) 
+    if (nokill)
     {
         sendDisbursedMessage(victim);
         return 1;
@@ -1748,7 +1737,7 @@ varargs void damage_targ(object victim, string hit_limb, int wound, string damag
     do_spell_damage(victim,hit_limb, wound,damage_type);
 }
 
-varargs void do_spell_damage( object victim, string hit_limb, int wound,string damage_type) 
+varargs void do_spell_damage( object victim, string hit_limb, int wound,string damage_type)
 {
     int nokill, reduction, spmod;
     string *limbs=({});
@@ -1762,10 +1751,10 @@ varargs void do_spell_damage( object victim, string hit_limb, int wound,string d
     if(!sizeof(limbs)) { return notify_fail(""+identify(victim)+" has no valid limbs."); }
 
     if(member_array(hit_limb,limbs) == -1) { hit_limb = limbs[random(sizeof(limbs))]; }
-    
-    if(objectp(caster)) 
-    { 
-        if(caster->ok_to_kill(victim)) { nokill=0; } 
+
+    if(objectp(caster))
+    {
+        if(caster->ok_to_kill(victim)) { nokill=0; }
     }
 
     // starting to port this over to 3e SR; caster level increases spell penetration automatically.
@@ -1780,18 +1769,18 @@ varargs void do_spell_damage( object victim, string hit_limb, int wound,string d
         sendDisbursedMessage(victim);
         return 1;
     }
-    if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }    
-    
+    if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }
+
     //victim->cause_typed_damage(victim,hit_limb,wound,damage_type);
-    //Changing this over to the below after witnessing instances where spells were never getting to the 
+    //Changing this over to the below after witnessing instances where spells were never getting to the
     //combat daemon to determine damage - was very strange - Saide, August 2017
-    
+
     wound = (int)COMBAT_D->typed_damage_modification(caster, victim, hit_limb, wound, damage_type);
-    
+
     victim->cause_damage_to(victim, hit_limb, wound);
-    
+
     //"/daemon/combat_d.c"->track_damage(caster, victim, wound);
-    
+
     if(objectp(victim))
     {
         victim->add_attacker(TO);
@@ -1802,10 +1791,10 @@ varargs void do_spell_damage( object victim, string hit_limb, int wound,string d
     return 1;
 }
 
-void define_clevel() 
+void define_clevel()
 {
     int highest;
-    
+
     clevel = caster->query_guild_level(spell_type);
 
     if(spell_type == "psion" || spell_type == "psywarrior")
@@ -1839,7 +1828,7 @@ void define_clevel()
     if (FEATS_D->usable_feat(caster, "ragecaster"))
     {
         clevel = caster->query_character_level();
-        if(caster->query_property("raged"))    
+        if(caster->query_property("raged"))
             clevel = 4;
     }
     if((int)caster->query_property("empowered"))
@@ -1913,10 +1902,10 @@ int query_base_damage()
 
 int preSpell() { return 1; }
 
-void spell_effect(int prof) 
-{ 
-	spell_successful(); //adding this call to hopefully fix any problems with 
-				  //a spell being reflected and the original caster 
+void spell_effect(int prof)
+{
+	spell_successful(); //adding this call to hopefully fix any problems with
+				  //a spell being reflected and the original caster
 				  //never being able to cast again - Saide
 
 }
@@ -1991,14 +1980,14 @@ int spell_kill(object victim, object caster) {
 }
 
 //updated to show arguments for spells that are on the list - Saide - May 5th, 2016
-string querySpellDisplay() 
+string querySpellDisplay()
 {
-    if (!objectp(target)) 
+    if (!objectp(target))
     {
         if(!query_arg()) return spell_name;
         return spell_name +" ("+query_arg()+")";
     }
-    else 
+    else
     {
         if(!query_arg()) return spell_name+" on "+target->getParsableName()+".";
         return spell_name + " (" +query_arg()+ ") on "+ target->getParsableName()+".";
@@ -2128,13 +2117,13 @@ void potion_dest_effect(int duration) {
   return;
 }
 
-void set_spell_domain(string domain) { 
-    if(stringp(domain)) spell_domain = domain; 
+void set_spell_domain(string domain) {
+    if(stringp(domain)) spell_domain = domain;
 }
 
 string get_spell_domain() { return spell_domain; }
 
-int spell_domain_check(object player) { 
+int spell_domain_check(object player) {
     string *domains;
     domains = player->query_divine_domain();
     if(!objectp(player))                                { return 0; }
@@ -2164,7 +2153,7 @@ int quest_spells_check(object player,string spell) {
     return 1;
 }
 
-void set_save(string save) { 
+void set_save(string save) {
     if(stringp(save)) { save_type = save; }
     return;
 }
@@ -2192,7 +2181,7 @@ void debug_saves(int num) {
 varargs int do_save(object targ,int mod) {
     string type,stat,*myclasses;
     int caster_bonus,target_level,num,casting_level, classbonus, i, classlvl;
-    mapping debug_map=([]);	
+    mapping debug_map=([]);
 
     if(!objectp(caster)) { return 1; }
 	if(!objectp(targ)) { return notify_fail("invalid target object."); }
@@ -2328,7 +2317,7 @@ varargs int do_save(object targ,int mod) {
 	}
 
     caster_bonus = caster_bonus * -1;
-	
+
 	if(intp(mod)) { caster_bonus += mod; }
 
 	if(save_debug)
@@ -2405,7 +2394,7 @@ object *ob_party(object obj)
 {
     string party_name;
     if(!objectp(obj)) { return ({}); }
-    
+
     party_name = obj->query_party();
     if(!party_name) { return ({ obj }); }
     return PARTY_D->query_party_members(party_name);
@@ -2417,22 +2406,22 @@ object *target_filter(object *targets)
     object *newtargs = ({});
     int i;
     targets -= ({ 0 });
-    
+
     if(!objectp(caster)) { return ({}); }
-    
+
     if(sizeof(targets))
     {
         targets = filter_array(targets,"is_non_immortal",FILTERS_D);
     }
-    
+
     if(!query_helpful())
     {
         if(FEATS_D->usable_feat(caster, "perfect caster") || FEATS_D->usable_feat(caster, "flawless control"))
         {
             if(sizeof(targets)) { targets = filter_array(targets, "perfect_filter", TO); }
         }
-        
-        if(sizeof(targets)) 
+
+        if(sizeof(targets))
         {
             if(stringp(get_save()) && get_save() == "reflex")
             {
@@ -2441,7 +2430,7 @@ object *target_filter(object *targets)
                     if(!evade_splash(targets[i])) { newtargs += ({ targets[i] }); }
                 }
                 return newtargs;
-            }        
+            }
         }
     }
 
@@ -2458,25 +2447,25 @@ int perfect_filter(object obj){
 
     if(!objectp(obj)) { return 0; }
     if(!objectp(caster)) { return 0; }
-    if(!interactive(caster) && !caster->is_merc()) 
-    { 
-        //basically adding this so that we can 
+    if(!interactive(caster) && !caster->is_merc())
+    {
+        //basically adding this so that we can
         //have monsters allied together and not
-        //hurting one another with aoe spells - 
+        //hurting one another with aoe spells -
         //as long as they have the perfect caster feat - Saide
         if(!caster->is_monster()) return 1;
         if(member_array(obj,(object)caster->query_followers()) != -1) { return 0; }
         ally = obj->query_property("allied_with");
         if(!objectp(ally)) return 1;
-        if(ally == caster) return 0;        
-        return 1; 
+        if(ally == caster) return 0;
+        return 1;
     }
     if(obj->id(""+(string)caster->query_name()+" retainer")) { return 0; } //to keep retainers from being hit by their caster's spells ~Circe~ 3/21/16
     party = ob_party(caster);
     party = distinct_array(party);
 
     if(member_array(obj,party) != -1) { return 0; } // 0 to filter out anybody in the party
-    
+
     //lets set the property minion on any summoned creatures
     //some already do - such as animate object
     //then check for this property - if it's an object check it against party members
@@ -2486,17 +2475,17 @@ int perfect_filter(object obj){
         if(ally == caster) { return 0; }
         if(member_array(ally, party) != -1) { return 0; }
     }
-    for(i=0;i<sizeof(party);i++) 
+    for(i=0;i<sizeof(party);i++)
     {
         if(!objectp(party[i]) && !living(party[i])) { continue; }
         followers += (object *)party[i]->query_followers();
-        if(objectp(party[i]->query_in_vehicle())) 
+        if(objectp(party[i]->query_in_vehicle()))
         {
             followers += ({ party[i]->query_in_vehicle() });
         }
         followers += ({ party[i] });
     }
-   
+
     if(member_array(obj,followers) != -1) { return 0; } // 0 to filter if it's following ANYONE in the party
     return 1;
 }
@@ -2508,7 +2497,7 @@ void get_casting_stat()
     if(!objectp(caster)) return;
     if(!interactive(caster))
     {
-        mycastingstat = "intelligence"; 
+        mycastingstat = "intelligence";
         return mycastingstat;
     }
     switch(spell_type)
@@ -2527,7 +2516,7 @@ void get_casting_stat()
     }
     casting_stat = mycastingstat;
     return mycastingstat;
-}   
+}
 
 string query_casting_stat() { return casting_stat; }
 
@@ -2568,10 +2557,10 @@ int race_immunity_check(object obj, string type)
 {
     string myrace,mysubrace;
     int num;
-    if(!objectp(obj)) { return 0; }    
+    if(!objectp(obj)) { return 0; }
     myrace = obj->query_race();
     mysubrace = obj->query("subrace");
-    
+
     switch(type)
     {
     case "sleep":
@@ -2588,10 +2577,10 @@ int race_immunity_check(object obj, string type)
             return 0;
         }
         return 0;
-        
+
     case "fear":
     case "fear silent":
-    
+
         switch(myrace)
         {
         case "half-elf":    num = 15;   break;
@@ -2600,12 +2589,12 @@ int race_immunity_check(object obj, string type)
         case "firbolg":     num = 8;    break;
         case "drow":        num = 30;   break;
         case "elf":         num = 35;   break;
-        case "human": 
+        case "human":
             if(mysubrace == "attayan") num = 200; break;
         default:            num = -100;   break;
         }
         if(FEATS_D->usable_feat(obj,"no fear of the flame")) num = 200; // fear immunity for L1 hellfire warlock class.
-        
+
         if(random(100) < num)
         {
             if((myrace == "human" && mysubrace == "attayan") || FEATS_D->usable_feat(obj,"no fear of the flame"))
@@ -2630,42 +2619,42 @@ int race_immunity_check(object obj, string type)
                 }
                 return 1;
             }
-        }        
+        }
         return 0;
-  
+
     default:
         return 0;
     }
-    
-    return 0;    
+
+    return 0;
 }
 
 int mind_immunity_check(object obj, string type)
 {
     if(!objectp(obj)) { return 0; }
-    
+
     // can add other types here if you want a different message to be sent,
     // easier to have these all in one place rather than duplicate the code in a dozen spells
     switch(type)
     {
     case "silent": // no messages
         if(FEATS_D->usable_feat(obj,"unyielding soul") || FEATS_D->usable_feat(obj, "presence of mind") || FEATS_D->usable_feat(obj, "mind partition")) { return 1; }
-        
+
     case "default":
     default:
         if(FEATS_D->usable_feat(obj,"unyielding soul"))
         {
             tell_object(obj, "%^BOLD%^%^WHITE%^You feel an invocation trying to take hold of your mind, but such is the strength of your soul that you manage to shake it off!%^RESET%^");
             tell_object(caster,"%^BOLD%^%^WHITE%^%^"+obj->QCN+" struggles momentarily, before shaking off the invocation's effects!%^RESET%^");
-            return 1;            
+            return 1;
         }
         if(FEATS_D->usable_feat(obj, "presence of mind") || FEATS_D->usable_feat(obj, "mind partition"))
         {
             tell_object(obj,"%^BOLD%^%^WHITE%^You feel a spell trying to take hold of your mind, but such is your mental strength that you manage to shake it off!%^RESET%^");
-            tell_object(caster,"%^BOLD%^%^WHITE%^%^"+obj->QCN+" struggles momentarily, before shaking off the spell's effects!%^RESET%^");            
+            tell_object(caster,"%^BOLD%^%^WHITE%^%^"+obj->QCN+" struggles momentarily, before shaking off the spell's effects!%^RESET%^");
             return 1;
         }
-    }    
+    }
     return 0;
 }
 
@@ -2755,4 +2744,3 @@ int save_me(string file)
 {
     if(!permanent) { return 0; }
 }
-

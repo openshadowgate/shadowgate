@@ -5,7 +5,7 @@ inherit SHAPESHIFT;
 void create(){
     ::create();
     set_attack_limbs( ({ "fangs" }) );
-    set_new_damage_type("piercing");    
+    set_new_damage_type("piercing");
     set_limbs( ({ "mouth","head","torso","right foreleg","right forepaw","left foreleg","left forepaw","right rear leg","right rear paw","left rear leg","left rear paw","tail" }) );
     set_attack_functions( ([ "fangs" : (:TO,"shape_attack":) ]) );
     set_ac_bonus(0);
@@ -73,11 +73,11 @@ int shape_attack(object tp, object targ){
     object etp,*attackers;
     string *specials=({}),*active_specials=({});
     int i,chance,dice;
- 
+
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();    
+    attackers = (object*)tp->query_attackers();
     if(!objectp(targ) && !sizeof(attackers)) { return 0; }
 
     chance = (int)tp->query_level();
@@ -88,8 +88,8 @@ int shape_attack(object tp, object targ){
     dice = ( chance / 4) + 2;
 
     if(roll_dice(1,100) > chance) { return roll_dice(2,dice); }
-    
-    // switch falls through intentionally 
+
+    // switch falls through intentionally
     switch(chance)
     {
         case 35..60: specials += ({ "blind" });
@@ -112,8 +112,8 @@ int shape_attack(object tp, object targ){
     while(roll_dice(1,100) < (chance - i));
     //////////////
 
-    
-  
+
+
     for(i=0;i<sizeof(active_specials);i++)
     {
         if(!objectp(tp) || !objectp(targ)) { return 0; }
@@ -129,7 +129,7 @@ int shape_attack(object tp, object targ){
 
             if(!targ->reflex_save(chance)) { targ->set_temporary_blinded(dice/2); }
             break;
-            
+
 
         case "heal":
 
@@ -201,10 +201,7 @@ int shape_attack(object tp, object targ){
     return roll_dice(2,dice);
 }
 
-int can_cast() 
-{ 
-    if(!objectp(query_owner())) { return 0; }
-    if(FEATS_D->usable_feat(query_owner(),"wild spellcraft")) { return 1; }
-    return can_cast_spells; 
+int can_cast()
+{
+    return 1;
 }
-

@@ -53,7 +53,7 @@ int shape_attack(object tp, object targ) { return 0; }
 int init_shape(object obj,string str){
     if(!objectp(obj)) { return 0; } //
     if(obj->query_property("altered") || obj->query_property("shapeshifted")) { return 0; } // can't shapeshift twice
-    obj->set_property("altered",shape = new(base_name(TO)+".c")); // makes a new shape and sets the shapeshifted property to it, this is where all the work is done, very important    
+    obj->set_property("altered",shape = new(base_name(TO)+".c")); // makes a new shape and sets the shapeshifted property to it, this is where all the work is done, very important
     shape->set_owner(obj);
     shape->change_into_message(obj);
     shape->set_base_profile((string)obj->query("relationship_profile"));
@@ -62,7 +62,7 @@ int init_shape(object obj,string str){
 
     if(objectp(to_object(DESC_D)))     {
         desc = new(DESC_D); //
-        if(!desc->restore_profile_settings(obj,shape->query_shape_profile())) { 
+        if(!desc->restore_profile_settings(obj,shape->query_shape_profile())) {
             shape->default_descriptions(obj);
             desc->initialize_profile(obj);
         }
@@ -84,5 +84,10 @@ int reverse_shape(object obj){
     obj->remove_property("altered");
     clean_me = 1;
     destruct(TO);
+    return 1;
+}
+
+int can_cast()
+{
     return 1;
 }
