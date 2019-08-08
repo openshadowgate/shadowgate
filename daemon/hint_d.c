@@ -28,7 +28,7 @@ void display_hint()
     people = filter_array(users(),(:!$1->query("no hints"):));
     if(sizeof(people))
     {
-        string *hints; 
+        string *hints;
         string hint;
         if(!file_exists(HFILE))
             return;
@@ -36,9 +36,8 @@ void display_hint()
         hint = hints[random(sizeof(hints))];
         foreach(peep in people)
         {
-            message("hint","%^BOLD%^%^CYAN%^[%^RESET%^%^BLUE%^HINT%^BOLD%^%^CYAN%^]%^RESET%^ "+hint, peep);
+            message("hint","%^BOLD%^%^CYAN%^[%^RESET%^%^BLUE%^HINT%^BOLD%^%^CYAN%^]%^RESET%^ "+hint+"%^RESET%^", peep);
         }
     }
     call_out("display_hint",FREQ);
 }
-
