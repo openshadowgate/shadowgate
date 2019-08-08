@@ -157,7 +157,7 @@ int set_logon_notify(string val)
     if(val == "off")
         this_player()->set_logon_notify(0);
     else
-        this_player()->set_logon_notify(0);            
+        this_player()->set_logon_notify(0);
     return 1;
 }
 
@@ -284,7 +284,7 @@ You can manipulate numerous mud settings:
 %^CYAN%^brief_combat %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of verbose combat. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^ULINE%^%^CYAN%^Experience points and tax:%^RESET%^
 
-%^CYAN%^expgain %^GREEN%^on|off%^RESET%^\n  This will turn on or off experience gain for your character. While it is on, you will get NO EXPERIENCE. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^expgain %^GREEN%^on|off%^RESET%^\n  This will turn on or off experience gain for your character. While it is off, you will get NO EXPERIENCE. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^taxperc %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  This will define how much of your experience gain goes towards paying off your experience tax. This value will grow with your levels, but you may force its increase via this setting. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^ULINE%^%^CYAN%^Terminal and display:%^RESET%^
 
@@ -298,4 +298,3 @@ To see current values use %^ORANGE%^<set>%^RESET%^ without arguments.
 adjective, background, chfn, colors, describe, flag, lines, message, passwd, prompt, speech
 ");
 }
-
