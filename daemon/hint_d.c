@@ -2,7 +2,7 @@
 #include <security.h>
 
 #define HFILE "/d/common/text/hints"
-#define FREQ 960
+#define FREQ 1260
 
 inherit DAEMON;
 
