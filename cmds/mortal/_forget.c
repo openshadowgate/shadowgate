@@ -1,12 +1,13 @@
+//added check to make sure what they type is a spell based on bug reports ~Circe~ 8/9/19
 #include <std.h>
+#include <daemons.h>
 
 #define SYNTAX "Syntax:  forget <classtype> <spellname>\n"
 
 inherit DAEMON;
 
-int cmd_forget(string str)
-{
-    string myclass, myspell;
+int cmd_forget(string str){
+    string myclass, myspell, file;
 
     if(!str) { return notify_fail("Forget what?\n"); }
     if(sscanf(str, "%s %s", myclass, myspell) != 2) { return notify_fail(SYNTAX); }
@@ -14,15 +15,20 @@ int cmd_forget(string str)
 
     if(myclass == "antipaladin") { myclass = "paladin"; }
     TP->set_property("forgetting spell",1);
-    if (!TP->forget_memorized(myclass,myspell,1)) 
-    { 
+    file = MAGIC_D->get_spell_file_name(myspell);
+
+    if (!TP->forget_memorized(myclass,myspell,1)){
         TP->remove_property("forgetting spell");
         return notify_fail("The spell, '"+myspell+"' is not in your memory! Use <fixspells> if this is wrong.\n"); 
-    }
-    else 
-    {
+    } else {
         TP->remove_property("forgetting spell");
-        tell_object(TP, "The spell, '"+myspell+"' has been forgotten successfully!");
+        file = MAGIC_D->get_spell_file_name(myspell);
+        if(!file_exists(file)){
+           myspell=capitalize(myspell);
+           tell_object(TP,""+myspell+" is not a spell!");
+        }else{
+           tell_object(TP, "The spell '"+myspell+"' has been forgotten successfully!");
+        }
     }
     return 1;
 }
