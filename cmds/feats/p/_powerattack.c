@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -11,7 +11,9 @@ void create()
     feat_name("powerattack");
     feat_prereq("Strength 13");
     feat_syntax("powerattack offensive|defensive|check");
-    feat_desc("The PowerAttack feat allows the character to shift their stance so that their attacks do more damage but it makes their attacks less likely to hit.");
+    feat_desc("The PowerAttack feat allows the character to shift their stance so that their attacks do more damage but it makes their attacks less likely to hit.
+
+This feat shift values between AC and damage bonus.");
     set_target_required(0);
     set_required_for(({"shatter","sunder","rush"}));
 }
@@ -120,4 +122,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

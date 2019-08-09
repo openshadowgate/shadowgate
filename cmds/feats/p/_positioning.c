@@ -6,7 +6,7 @@ inherit FEAT;
 
 int MAX;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -14,7 +14,9 @@ void create()
     feat_name("positioning");
     feat_prereq("Swipe");
     feat_syntax("positioning offensive|defensive|check");
-    feat_desc("This feat will allow characters to slightly shift between defensive and offensive combat, increasing or decreasing their accuracy and resistance");
+    feat_desc("This feat will allow characters to slightly shift between defensive and offensive combat, increasing or decreasing their accuracy and resistance.
+
+This feat shifts values between AC and attack bonus.");
     set_target_required(0);
     allow_blind(1);
 }
@@ -119,4 +121,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

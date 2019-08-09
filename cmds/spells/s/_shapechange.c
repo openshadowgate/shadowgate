@@ -5,7 +5,7 @@ int bonus;
 
 string *valid_forms()
 {
-    return ({"dragon","balor","golem"});
+    return ({"dragon","demon","golem"});
 }
 
 void create()
@@ -14,23 +14,29 @@ void create()
     set_spell_name("shapechange");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS shapechange on balor|golem|dragon");
-    set_description("IN TESTING");
+    set_syntax("cast CLASS shapechange on demon|golem|dragon");
+    set_description("With this spell you transform into one of several fearsome creatures. In the new form you won't be able to access your inventory, you won't be able to cast any spells, but you will posses mighty melee abilities.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
     set_helpful_spell(1);
 }
 
-int preSpell(){
-      object shape;
-      if(objectp(shape = caster->query_property("shapeshifted")) ||
-         objectp(shape = caster->query_property("altered")))
-      {
+int preSpell()
+{
+    object shape;
+    if(objectp(shape = caster->query_property("shapeshifted")) ||
+       objectp(shape = caster->query_property("altered")))
+    {
         tell_object(caster,"You are already in an alternative form!");
         return 0;
-      }
-      return 1;
+    }
+    if(member_array(arg,valid_forms())==-1)
+    {
+        tell_object(caster,"Invalid form, valid forms are: "+implode(valid_forms(),", "));
+        return;
+    }
+    return 1;
 }
 
 void spell_effect(int prof)
@@ -40,12 +46,7 @@ void spell_effect(int prof)
         TO->remove();
         return;
     }
-    if(member_array(args,valid_forms())==-1)
-    {
-        tell_object(caster,"Invalid form, valid forms are: "+implode(valid_forms(),", "));
-        return;
-    }
-    new("/std/races/shapeshifted_races/mage_dragon.c")->init_shape(caster,"dragon");
+    new("/std/races/shapeshifted_races/mage_"+arg+".c")->init_shape(caster,arg);
 
     shape = caster->query_property("shapeshifted");
     shape->set_clevel(clevel);

@@ -17,7 +17,7 @@ void create()
 {
     ::create();
 
-    set_attack_limbs( ({ "maw","right claw","left claw","tail" }) );
+    set_attack_limbs( ({ "maw","right claw","left claw"}) );
     set_new_damage_type("piercing");
     set_limbs( ({ "maw","head","torso","right claw", "left claw", "right arm","right arm","left leg","left rear claw","right leg","right rear claw","tail","right wing","left wing" }) );
     set_attack_functions(([ "maw" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":) ]));
@@ -34,7 +34,7 @@ void create()
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
     set_shape_bonus("damage resistance",10);
-    set_shape_bonus("magic resistance",10);
+    set_shape_bonus("spell damageresistance",10);
     set_shape_height(200+random(100));
     set_shape_weight(11000+random(5000));
 }
@@ -112,7 +112,7 @@ int claw_attack(object tp, object targ)
     tell_object(tp,"%^RED%^You reach out and violently claw "+targ->QCN+"!");
     tell_object(targ,"%^RED%^"+tp->QCN+" reaches out and violently claws you!");
     tell_room(ENV(tp),"%^RED%^"+tp->QCN+" reaches out and violently claws "+targ->QCN+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,6),"piercing");
+    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/4,6),"slashing");
 
     //2d6+13
 }
