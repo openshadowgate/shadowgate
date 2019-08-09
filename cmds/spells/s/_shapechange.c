@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS shapechange on demon|golem|dragon");
-    set_description("With this spell you transform into one of several fearsome creatures. In the new form you won't be able to access your inventory, you won't be able to cast any spells, but you will posses mighty melee abilities.");
+    set_description("With this spell you transform into one of several fearsome creatures. In the new form you won't be able to access your inventory, you won't be able to cast any spells, but you will posses mighty melee abilities. The potency of the form will grow with your power, but it won't benefit from transformation spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();

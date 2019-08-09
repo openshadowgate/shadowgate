@@ -2,7 +2,7 @@
 // lowering cost of removing curses & removing damage for needing a new symbol per discussions *Styx* 12/26/05
 // expanded domain selection to support a third clerical domain for those with the feat. N, 3/13.
 #include <std.h>
-#include <spell_domains.h> 
+#include <spell_domains.h>
 #include <daemons.h>
 // temp items can be revoked once choose is out of this file!! N, 1/18
 #include "/d/shadowgate/dieties.h"
@@ -127,7 +127,7 @@ int identify_curse(string str) {
 int pray()
 {
     string *classes;
-    
+
     if(!this_player()->query_ghost()) {
         notify_fail("The living do not need to pray for revival.\n");
         return 0;
@@ -139,7 +139,7 @@ int pray()
     TP->delete("just_been_pkilled");
     TP->remove_property("last_death");
     TP->set_property("last_death",time());
-    
+
     //Resetting status
     TP->set_hp(10);
     TP->set_blind(0);
@@ -151,7 +151,7 @@ int pray()
     TP->set_heal_rate(2);
     TP->add_stuffed(25);
     TP->add_quenched(25);
-    
+
     if(TP->is_class("cleric") ||
        TP->is_class("ranger") ||
        TP->is_class("paladin"))
@@ -182,14 +182,14 @@ int pray()
             myclass = TP->query("active_class");
         else
             myclass = TP->query_class();
-        
+
         classes = TP->query_classes();
 
         exp = (int)TP->query_exp();
         expdelta = abs(EXP_NEEDED[thelevel+1]-EXP_NEEDED[thelevel]);
-        exploss = expdelta * (int)TP->query_character_level()/109;
+        exploss = expdelta * (int)TP->query_character_level()/89;
         log_file("deathlexp", TPQN+" lost "+exploss+" in resurrection at a church.\n");
-        
+
         TP->set_general_exp(myclass,exp - exploss);
         TP->resetLevelForExp(0);
 
@@ -199,12 +199,12 @@ int pray()
 
         /* Damaging enchanted inventory. */
         stuff=all_inventory(TP);
-        for (i=0;i<sizeof(stuff);i++) 
+        for (i=0;i<sizeof(stuff);i++)
         {
             if(!objectp(stuff[i]))
                 continue;
             if (stuff[i]->is_armor() && stuff[i]->query_worn())
-                stuff[i]->set_not_equipped();            
+                stuff[i]->set_not_equipped();
             if (stuff[i]->query_wielded())
                 stuff[i]->set_not_inhand();
             if(stuff[i]->id("questob"))
@@ -213,7 +213,7 @@ int pray()
                 stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
         }
     }
-    
+
     return 1;
 }
 
@@ -413,7 +413,7 @@ int select_domain(string str)
 {
     string *possible_domains,*player_domains,*info,player_deity, temple_deity,selection, which;
     int num_classes;
-    
+
     if(!stringp(str)) { return 0; }
     info = explode(str," ");
     if(sizeof(info) < 2) { return 0; } // To prevent those annoying illegal index errors
@@ -457,9 +457,9 @@ int select_domain(string str)
             "%^YELLOW%^"+str+"%^BOLD%^%^WHITE%^!%^RESET%^");
             TP->set("monk way", str);
             "/daemon/user_d.c"->init_ki(TP);
-            return 1; 
+            return 1;
             break;
-        case "domain":        
+        case "domain":
             if(sizeof(info) > 2)
             {
                 tell_object(TP,"Syntax: <pick domain> <domain>   Please pick only one domain at a time.");
@@ -487,11 +487,11 @@ int select_domain(string str)
 
             if( TP->query("new_class_type") && FEATS_D->usable_feat(TP,"divine domain"))
             {
-                if(!sizeof(player_domains)) 
-                { 
+                if(!sizeof(player_domains))
+                {
                     TP->set_divine_domain(({ selection }));
                     tell_object(TP,"You have choosen to select the "+selection+" domain.\n");
-                    TP->set("domains_changed",1); 
+                    TP->set("domains_changed",1);
                     return 1;
                 }
                 if(sizeof(player_domains) < 2)
@@ -533,13 +533,13 @@ int select_domain(string str)
                 return 1;
             }
 
-            else    
+            else
             {
                 if(!sizeof(player_domains))
                 {
                     TP->set_divine_domain(({ selection }));
                     tell_object(TP,"You have choosen to select the "+selection+" domain.\n");
-                    TP->set("domains_changed",1); 
+                    TP->set("domains_changed",1);
                     //so they won't have to reset once they've chosen ~Circe~ 6/17/08
                     return 1;
                 }
@@ -597,7 +597,7 @@ int select_diety(string str) {
 
     old = TP->query_diety();
     symbol = present("holy symbol",TP);
-    if(old && old != "pan" && old != "godless") { 
+    if(old && old != "pan" && old != "godless") {
         tell_object(TP,"You have already chosen to follow "+capitalize(old)+"!");
         return 1;
     }
@@ -612,4 +612,3 @@ int select_diety(string str) {
     "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" %^BOLD%^%^CYAN%^chose to follow "+capitalize(str)+".");
     return 1;
 }
-

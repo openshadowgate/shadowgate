@@ -24,8 +24,8 @@ int calculate_feat_cost(object ob) {
     if(ob->query("free_feats")) { return 0; } // giving free feats when we remove some because they're obsolete
     level = ob->query_highest_level();
     if(level == 1) { return 0; }
-    if(!avatarp(ob)) 
-    { 
+    if(!avatarp(ob))
+    {
         exp = EXP_NEEDED[level + 1]/8;
 //        exp = EXP_NEEDED[level + 1] - EXP_NEEDED[level];
         return exp;
@@ -49,7 +49,7 @@ int remove_spell_mastery_spell(string str,object ob,string feat,string mytype){
         free = 0;
         return 1;
     }
-    
+
     tmp = "/cmds/spells/"+str[0..0]+"/_"+replace_string(str," ","_")+".c";
     if(!file_exists(tmp)) {
         tell_object(ob,"The spell "+str+" does not exist!");
@@ -82,7 +82,7 @@ int remove_spell_mastery_spell(string str,object ob,string feat,string mytype){
         free = 0;
         return 1;
     }
-    
+
     tell_object(ob,"%^YELLOW%^Setting your SpellMastery spell to %^BLUE%^"+str+"%^YELLOW%^ upon removal of greater spell mastery feat.%^RESET%^");
     amt = calculate_feat_cost(ob);
     if((int)"/daemon/config_d.c"->check_config("character improvement") == 0 && amt > 0)
@@ -101,7 +101,7 @@ int remove_spell_mastery_spell(string str,object ob,string feat,string mytype){
     {
         tell_object(ob,"%^YELLOW%^Are you sure you want to remove the feat "+
         feat+"?");
-    }    
+    }
     tell_object(ob,"Enter <yes> to remove the feat, anything else to abort.");
     input_to("confirm_remove",ob,feat,str);
     return 1;
@@ -123,7 +123,7 @@ int spell_mastery_spell(string str,object ob,string feat,string mytype){
         free = 0;
         return 1;
     }
-    
+
     tmp = "/cmds/spells/"+str[0..0]+"/_"+replace_string(str," ","_")+".c";
     if(!file_exists(tmp)) {
         tell_object(ob,"The spell "+str+" does not exist!");
@@ -132,12 +132,12 @@ int spell_mastery_spell(string str,object ob,string feat,string mytype){
     }
 
     spell = new(tmp);
-    for(i = 0;i<sizeof(myclasses);i++) 
+    for(i = 0;i<sizeof(myclasses);i++)
     {
         if(feat != "spellmastery") { continue; }
         if(myclasses[i] == "warlock") { continue; }// let's avert the warlocks taking this by mistake!
         // check for - greater than L0; either less than L3, or less than L6 for a mage either taking archmage & has spellmastery, or taking spellmastery & has archmage
-        
+
         level = spell->query_spell_level(myclasses[i]);
         if(level < 1) { continue; }
         if(level > 5) { continue; }
@@ -215,7 +215,7 @@ int spell_mastery_spell(string str,object ob,string feat,string mytype){
             input_to("confirm_add",ob,feat,str);
             spell->remove();
             return 1;
-    }   
+    }
     spell->remove();
     return 1;
 }
@@ -301,7 +301,7 @@ int expanded_knowledge_power(string str,object ob,string feat,string mytype){
     level = ob->query_class_level(activeclass);
 //Expanded Knowledge is different from Spellmastery and Spell Knowledge. The player has to use
 //one feat to take one power and can take a power from any psionic list, but only up to one level
-//below what he can currently cast (e.g. if he can cast 4th level powers, he can take only up to a 
+//below what he can currently cast (e.g. if he can cast 4th level powers, he can take only up to a
 //3rd level power). The powers are not cast for free. They use power points just like any others.
     if(activeclass == "psywarrior"){
        if(level >= 4) mymax++;
@@ -356,7 +356,7 @@ int expanded_knowledge_power(string str,object ob,string feat,string mytype){
         free = 0;
         return 1;
     }
-    
+
     switch(mytype)
     {
         case "sorc":
@@ -369,7 +369,7 @@ int expanded_knowledge_power(string str,object ob,string feat,string mytype){
             tell_object(ob,"%^YELLOW%^Setting your "+feat+" power to %^BLUE%^"+str+"%^YELLOW%^.%^RESET%^");
             break;
     }
-    
+
     if((int)"/daemon/config_d.c"->check_config("character improvement") == 0 && amt > 0)
     {
         tell_object(ob,"%^YELLOW%^Are you sure you want to add the feat "+
@@ -388,7 +388,7 @@ int expanded_knowledge_power(string str,object ob,string feat,string mytype){
         feat+"?");
     }
     tell_object(ob,"Enter <yes> to add the feat, anything else to abort.");
-    
+
     switch(mytype)
     {
         case "sorc":
@@ -430,7 +430,7 @@ int confirm_add(string str,object ob,string feat,string extradata) {
     if(feat == "expanded knowledge 3"){ ob->set("expanded_knowledge_3",extradata); }
     if(feat == "skill focus") { ob->set("skill_focus",extradata); }
     FEATS_D->add_my_feat(ob,"other",feat);
-    //moved this down - otherwise feats that require a specific level will 
+    //moved this down - otherwise feats that require a specific level will
     //never get added if the exp cost would cause you to lose a level - Saide
     if(!avatarp(TP))
     {
@@ -449,7 +449,7 @@ int confirm_add(string str,object ob,string feat,string extradata) {
                 "You must first reduce it before you can add this feat.");
                 return 1;
             }
-            if(price > 0) 
+            if(price > 0)
             {
                 tell_object(ob,"Incuring character improvement tax of "+price+". All future experience gained will be "+
                 "reduced by 50% until it is repaid.");
@@ -576,7 +576,7 @@ int confirm_remove(string str,object ob,string feat,string extradata)
                 "You must first reduce it before you can remove this feat.");
                 return 1;
             }
-            if(price > 0) 
+            if(price > 0)
             {
                 tell_object(ob,"Incuring character improvement tax of "+price+". All future experience gained will be "+
                 "reduced by 50% until it is repaid.");
@@ -683,39 +683,39 @@ int cmd_feats(string str){
         num_feats = TP->query("free_feats");
         feats = ({});
         for(i=0;i<sizeof(featkeys);i++) feats += otherfeats[featkeys[i]];
-	  
+
         //for fighter bonus feats - Saide
         otherfeats = TP->query_bonus_feats();
         featkeys = keys(otherfeats);
         for(i = 0;i < sizeof(featkeys);i++) feats += otherfeats[featkeys[i]];
 
-        // now run addition of any missing class feats; remove from bought 
+        // now run addition of any missing class feats; remove from bought
 	  // feats first if they already did
-        for(bonus = 0;bonus<sizeof(required);bonus++) 
+        for(bonus = 0;bonus<sizeof(required);bonus++)
 	    {
       	    category = "/std/class/"+required[bonus]+".c";
           	if(!file_exists(category)) continue;
             tmp = (string)TP->query_combat_spec(required[bonus]); // new combat spec code, N 1/14.
-            if(required[bonus] == "monk") 
+            if(required[bonus] == "monk")
             {
                 if(FEATS_D->usable_feat(TP, "grandmaster of the way")) tmp = "all";
                 else tmp = (string)TP->query("monk way");
-            }                
+            }
           	classfeats = category->class_featmap(tmp);
           	if(!mapp(classfeats)) continue;
           	featkeys = keys(classfeats);
-          	if(sizeof(featkeys)) 
+          	if(sizeof(featkeys))
 		    {
-            	for(i=0;i<sizeof(featkeys);i++) 
+            	for(i=0;i<sizeof(featkeys);i++)
 			    {
               		if((int)TP->query_class_level(required[bonus]) < featkeys[i]) continue;
              		subset = classfeats[featkeys[i]];
-              		for(j=0;j<sizeof(subset);j++) 
+              		for(j=0;j<sizeof(subset);j++)
 				    {
                 		my_lev = ((int)TP->query_level()) - (int)TP->query_class_level(required[bonus])+featkeys[i];
                 		if(!my_lev) my_lev = 1;
 
-                		if(member_array(subset[j],feats) != -1) 
+                		if(member_array(subset[j],feats) != -1)
 					    { // if they have this as a bought feat, revoke
 						    if((string)FEATS_D->get_feat_type(TP, subset[j]) != "bonus")
 						    {
@@ -741,10 +741,10 @@ int cmd_feats(string str){
         return 1;
     case "check":
 //        info -= ({ info[0] });
-//	  if(!sizeof(info)) 
+//	  if(!sizeof(info))
         if(sscanf(str,"%s %s", category, tmp) != 2)
-	  {  
-		tell_object(TP,"See <help feats> for syntax."); 
+	  {
+		tell_object(TP,"See <help feats> for syntax.");
 		return 1;
 	  }
 //        if(sizeof(info)) { tmp = implode(info," "); }
@@ -778,11 +778,9 @@ int cmd_feats(string str){
           return 1;
         }
 
-        tell_object(TP,"%^YELLOW%^At your level you are allowed %^BLUE%^"+MAX_ALLOWED+"%^RESET%^%^YELLOW%^ "
-            "feats.  You have currently used %^BLUE%^"+num_feats+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+allowed+"%^RESET%^%^YELLOW%^ left to use.%^RESET%^");
-        tell_object(TP,"%^YELLOW%^At your level it will cost you %^MAGENTA%^"+calculate_feat_cost(TP)+ " "
-            "%^YELLOW%^exp to add a new feat or to remove an old feat that you don't want.%^RESET%^");
+        tell_object(TP,"%^YELLOW%^You are allowed %^BLUE%^"+MAX_ALLOWED+"%^RESET%^%^YELLOW%^ "
+            "feats. You have used %^BLUE%^"+num_feats+" %^RESET%^%^YELLOW%^and you now have "
+            "%^BLUE%^"+allowed+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
 
 // combat feat allocation here
         BONUS_ALLOWED = 0;
@@ -799,9 +797,9 @@ int cmd_feats(string str){
         bonus       = BONUS_ALLOWED - num_bonus;
 
         if(BONUS_ALLOWED)
-          tell_object(TP,"%^YELLOW%^You also have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free combat "
-            "bonus feats.  You have currently used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left to use.%^RESET%^");
+          tell_object(TP,"%^YELLOW%^You have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free martial "
+            "bonus feats. You have used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
+            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
 
 // magic feat allocation here
         BONUS_ALLOWED = 0;
@@ -817,15 +815,15 @@ int cmd_feats(string str){
         bonus       = BONUS_ALLOWED - num_bonus;
 
         if(BONUS_ALLOWED)
-          tell_object(TP,"%^YELLOW%^You also have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free magic "
-            "bonus feats.  You have currently used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left to use.%^RESET%^");
+          tell_object(TP,"%^YELLOW%^You have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free spellcraft "
+            "bonus feats. You have used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
+            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
 
 // hybrid feat allocation here
         BONUS_ALLOWED = 0;
         for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],MELEECLASSES) != -1) continue; 
-          if(member_array(subset[i],CASTERCLASSES) != -1) continue; 
+          if(member_array(subset[i],MELEECLASSES) != -1) continue;
+          if(member_array(subset[i],CASTERCLASSES) != -1) continue;
           if(subset[i] == "psywarrior") j = ((int)TP->query_class_level(subset[i]) / 5); // psywarriors get 1 free hybrid feat per 7 levels
           else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
           if(j < 0) j = 0;
@@ -835,41 +833,31 @@ int cmd_feats(string str){
         bonus       = BONUS_ALLOWED - num_bonus;
 
         if(BONUS_ALLOWED)
-          tell_object(TP,"%^YELLOW%^You also have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free hybrid "
-            "bonus feats.  You have currently used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left to use.%^RESET%^");
+          tell_object(TP,"%^YELLOW%^You have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free hybrid "
+            "bonus feats. You have used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
+            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
 
 // free-cost feat allocation here
         if(TP->query("free_feats"))
         {
-            tell_object(TP,"%^B_RED%^%^BOLD%^%^CYAN%^You currently have %^RESET%^%^BLUE%^"+TP->query("free_feats")+" "
-                "%^B_RED%^%^BOLD%^%^CYAN%^free-cost feats.  These can be used to buy free feats or to remove "
-                "other feats that you have, if you have available feat slots (per above).  If you use them "
-                "to remove feats then when you run out of "
-                "free feats you will have to pay experience as normal to gain feats back.  Note:  You "
-                "still can only gain the amount of feats you are allowed at your level, these "
-                "free feats do not allow you to take more, they only make the feats have no experience "
-                "point cost.%^RESET%^");
+            tell_object(TP,"%^B_RED%^%^BOLD%^%^CYAN%^You currently have %^RESET%^%^BLUE%^"+TP->query("free_feats")+"%^BOLD%^%^CYAN%^ free-cost feats.
+%^BOLD%^%^RED%^N.B.%^RESET%^ You still can only gain the amount of feats you are allowed at your level, these free feats do not allow you to take more, they only make the feats have no experience point cost");
         }
-	  tell_object(TP, "%^YELLOW%^You can choose from the following list :  \n\n"+
-	  "%^BOLD%^%^CYAN%^Please Note - Some "+
-	  "feats require a two handed weapon to be wielded or a shield worn "+
-	  "in order for you to be able to take them, they will not show up in this "+
-	  "list unless that requirement is met.%^RESET%^");
+	  tell_object(TP, "%^YELLOW%^You can choose from the following list:");
 	  FEATS_D->display_feats(TP,TP,"allowed");
         return 1;
 
     case "add":
 //        info -= ({ info[0] });
-//        if(!sizeof(info)) 
+//        if(!sizeof(info))
         if(sscanf(str,"%s %s", category, tmp) != 2)
-        {  
-            tell_object(TP,"See <help feats> for syntax."); 
+        {
+            tell_object(TP,"See <help feats> for syntax.");
             return 1;
         }
-        
+
         tmp = replace_string(tmp,"_"," ");
-        
+
 //        if(sizeof(info)) { tmp = implode(info," "); }
 
         MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1;
@@ -898,7 +886,7 @@ int cmd_feats(string str){
             "normal before you can add any feats!");
             return 1;
         }
-        
+
         if((string)FEATS_D->get_category(tmp) == "EpicFeats")
         {
             if(!high_mortalp(TP) && CONFIG_D->check_config("HM") == 0)
@@ -936,7 +924,7 @@ int cmd_feats(string str){
                 "select a spell that you are currently able to cast that is up to "
                 "level 5.  You can pick any spell of levels 1 through 5 that you "
                 "are able to cast.%^RESET%^");
-            else 
+            else
                 tell_object(TP,"%^YELLOW%^In order to gain the spellmastery feat, you must "
                 "select a spell that you are currently able to cast that is level 1 "
                 "or level 2.  You can pick any spell of level 1 or level 2 that you "
@@ -1005,7 +993,7 @@ int cmd_feats(string str){
         }
 
         // allow_shifted()
-        
+
         for(i=0;i<sizeof(SHIFTING_CLASSES);i++)
         {
             if(TP->is_class(SHIFTING_CLASSES[i]))
@@ -1038,10 +1026,10 @@ int cmd_feats(string str){
 
     case "martial":
 //        info -= ({ info[0] });
-//	  if(!sizeof(info)) 
+//	  if(!sizeof(info))
         if(sscanf(str,"%s %s", category, tmp) != 2)
-	  {  
-		tell_object(TP,"See <help feats> for syntax."); 
+	  {
+		tell_object(TP,"See <help feats> for syntax.");
 		return 1;
 	  }
 //        if(sizeof(info)) { tmp = implode(info," "); }
@@ -1122,10 +1110,10 @@ int cmd_feats(string str){
 
     case "spellcraft":
 //        info -= ({ info[0] });
-//	  if(!sizeof(info)) 
+//	  if(!sizeof(info))
         if(sscanf(str,"%s %s", category, tmp) != 2)
-	  {  
-		tell_object(TP,"See <help feats> for syntax."); 
+	  {
+		tell_object(TP,"See <help feats> for syntax.");
 		return 1;
 	  }
 //        if(sizeof(info)) { tmp = implode(info," "); }
@@ -1208,7 +1196,7 @@ int cmd_feats(string str){
                 "select a spell that you are currently able to cast that is up to "
                 "level 5.  You can pick any spell of levels 1 through 5 that you "
                 "are able to cast.%^RESET%^");
-            else 
+            else
                 tell_object(TP,"%^YELLOW%^In order to gain the spellmastery feat, you must "
                 "select a spell that you are currently able to cast that is level 1 "
                 "or level 2.  You can pick any spell of level 1 or level 2 that you "
@@ -1263,10 +1251,10 @@ int cmd_feats(string str){
 
     case "hybrid":
 //        info -= ({ info[0] });
-//	  if(!sizeof(info)) 
+//	  if(!sizeof(info))
         if(sscanf(str,"%s %s", category, tmp) != 2)
-	  {  
-		tell_object(TP,"See <help feats> for syntax."); 
+	  {
+		tell_object(TP,"See <help feats> for syntax.");
 		return 1;
 	  }
 //        if(sizeof(info)) { tmp = implode(info," "); }
@@ -1279,8 +1267,8 @@ int cmd_feats(string str){
 
         BONUS_ALLOWED = 0;
         for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],MELEECLASSES) != -1) continue; 
-          if(member_array(subset[i],CASTERCLASSES) != -1) continue; 
+          if(member_array(subset[i],MELEECLASSES) != -1) continue;
+          if(member_array(subset[i],CASTERCLASSES) != -1) continue;
           if(subset[i] == "psywarrior") j = ((int)TP->query_class_level(subset[i]) / 5); // psywarriors get 1 free hybrid feat per 7 levels
           else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
           if(j < 0) j = 0;
@@ -1304,7 +1292,7 @@ int cmd_feats(string str){
             tell_object(TP, "You have a negative level and must have it removed before "+
             "you can add any feats!");
             return 1;
-        }        
+        }
         if(intp("/daemon/user_d.c"->get_scaled_level(TP)))
         {
             tell_object(TP, "You have scaled your level down and must revert it back to "+
@@ -1347,7 +1335,7 @@ int cmd_feats(string str){
                 "select a spell that you are currently able to cast that is up to "
                 "level 5.  You can pick any spell of levels 1 through 5 that you "
                 "are able to cast.%^RESET%^");
-            else 
+            else
                 tell_object(TP,"%^YELLOW%^In order to gain the spellmastery feat, you must "
                 "select a spell that you are currently able to cast that is level 1 "
                 "or level 2.  You can pick any spell of level 1 or level 2 that you "
@@ -1402,10 +1390,10 @@ int cmd_feats(string str){
 
     case "remove":
 //        info -= ({ info[0] });
-//	  if(!sizeof(info)) 
+//	  if(!sizeof(info))
         if(sscanf(str,"%s %s", category, tmp) != 2)
-	  {  
-		tell_object(TP,"See <help feats> for syntax."); 
+	  {
+		tell_object(TP,"See <help feats> for syntax.");
 		return 1;
 	  }
 //        if(sizeof(info)) { tmp = implode(info," "); }
@@ -1450,13 +1438,13 @@ int cmd_feats(string str){
                 return 1;
             }
             i = calculate_feat_cost(TP);
-            if((tmp == "archmage" || tmp == "greater spell mastery") && FEATS_D->has_feat(TP,"spellmastery")) 
-            {            
+            if((tmp == "archmage" || tmp == "greater spell mastery") && FEATS_D->has_feat(TP,"spellmastery"))
+            {
                 if((int)"/daemon/config_d.c"->check_config("character improvement") == 0 && i > 0)
                 {
                     tell_object(TP,"%^YELLOW%^Are you sure you want to remove the feat "
                         ""+tmp+"?  It will cost you %^MAGENTA%^"+i+"%^YELLOW%^ "
-                        "exp, and you will be required to re-confirm your spellmastery option.%^RESET%^");                    
+                        "exp, and you will be required to re-confirm your spellmastery option.%^RESET%^");
                 }
                 else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1 && i > 0)
                 {
@@ -1477,7 +1465,7 @@ int cmd_feats(string str){
                 input_to("remove_spell_mastery_spell",TP,tmp);
                 return 1;
             }
-    
+
             if((int)"/daemon/config_d.c"->check_config("character improvement") == 0 && i > 0)
             {
                 tell_object(TP,"%^YELLOW%^Are you sure you want to remove the feat "
@@ -1490,7 +1478,7 @@ int cmd_feats(string str){
                  "%^MAGENTA%^"+i+"%^YELLOW%^.  This tax will reduce all future "+
                  "experience gained by %^RED%^50%%^YELLOW%^ until it is repaid.%^RESET%^");
             }
-            else 
+            else
             {
                 tell_object(TP, "%^YELLOW%^Are you sure you want to remove the feat "+
                 tmp+"?");
@@ -1575,7 +1563,7 @@ Adding and removing normal feats will add to your character improvement tax (see
 
 exp tax, skills, stats, score, hp, bonuses
 ");
-    
+
     if(avatarp(TP))
     {
         write("
