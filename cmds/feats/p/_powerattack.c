@@ -13,7 +13,7 @@ void create()
     feat_syntax("powerattack offensive|defensive|check");
     feat_desc("The PowerAttack feat allows the character to shift their stance so that their attacks do more damage but it makes their attacks less likely to hit.
 
-This feat shift values between AC and damage bonus.");
+This feat shift values between attack and damage bonuses.");
     set_target_required(0);
     set_required_for(({"shatter","sunder","rush"}));
 }

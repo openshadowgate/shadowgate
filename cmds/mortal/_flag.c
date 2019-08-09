@@ -1,11 +1,11 @@
 /*=====================================================
-flag command 
-    supports turning off exp - flag noexp - gain no exp at all 
+flag command
+    supports turning off exp - flag noexp - gain no exp at all
     supports modifying character improvement tax percent - flag ctp % flag ctp 100
     supports setting up a RPFlag for current environment that will remain as long as
-    players are still there - flag rpflag 
-    rpflag will show up on rumors/a short description of the room on the who list 
-    pkflag 
+    players are still there - flag rpflag
+    rpflag will show up on rumors/a short description of the room on the who list
+    pkflag
 =====================================================*/
 #include <daemons.h>
 #include <std.h>
@@ -20,31 +20,24 @@ varargs void do_flag_display(object who, object targ)
     int x, j, remaining;
     string *activeEvents, eventName, notification, eventMsg, *featureVoting, featureName;
     string yesVotes = "", noVotes = "", featureAuthor, ExpiresIn, ETA;
-   
+
     if(!objectp(who)) return notify_fail("Something went wrong...");
     if(!objectp(targ) || !avatarp(targ)) targ = who;
     if(objectp(targ) && avatarp(targ) && targ != who)
     {
         tell_object(targ, "Flags for "+who->query_cap_name()+" as followed:\n");
     }
-    tell_object(targ, "\n"+arrange_string("%^BOLD%^%^WHITE%^Flag ", 30) + "Setting\n");    
+    tell_object(targ, "%^RESET%^--=%^BOLD%^< %^CYAN%^Flags%^WHITE%^ >%^RESET%^=--");
     for(x = 0;x < sizeof(SUPPORTEDFLAGS);x++)
     {
-        if(SUPPORTEDFLAGS[x] == "feature") 
-        {
-            j = 30 - strlen("feature notifications");
-            tell_object(targ, "%^BOLD%^%^WHITE%^Feature notifications"+ arrange_string(" ", j)+ "%^RESET%^"+"/daemon/user_d.c"->get_flag(who, "feature notifications"));
-            continue;
-        }
-        j = 30 - strlen(SUPPORTEDFLAGS[x]);
+        j = 14 - strlen(SUPPORTEDFLAGS[x]);
         tell_object(targ, "%^BOLD%^%^WHITE%^"+capitalize(SUPPORTEDFLAGS[x]) + arrange_string(" ", j)+ "%^RESET%^"+"/daemon/user_d.c"->get_flag(who, SUPPORTEDFLAGS[x]));
         continue;
     }
     if(pointerp(activeEvents = WORLD_EVENTS_D->parsable_world_events(who)))
     {
-        tell_object(targ, "\n%^BOLD%^%^CYAN%^Currently active events:%^RESET%^");
-        tell_object(targ, "\n"+arrange_string("%^BOLD%^%^WHITE%^Event Title ", 34) + arrange_string("Time ", 18) + "Event Affect\n");
-        
+        tell_object(targ, "\n--=%^BOLD%^< %^CYAN%^Active world events%^WHITE%^ >%^RESET%^=--");
+
         for(x = 0;x < sizeof(activeEvents);x++)
         {
             eventName = activeEvents[x];
@@ -54,8 +47,8 @@ varargs void do_flag_display(object who, object targ)
             eventMsg = "%^BOLD%^%^WHITE%^"+eventName + arrange_string(" ", j);
             j = 18 - strlen(parse_time(remaining));//strlen(remaining + " mins");
             eventMsg += parse_time(remaining) + arrange_string(" ", j) + notification;
-            tell_object(targ, eventMsg);            
-        }        
+            tell_object(targ, eventMsg);
+        }
     }
     if(pointerp(featureVoting = FEATURE_D->parsable_features(who)) && sizeof(featureVoting))
     {
@@ -63,7 +56,7 @@ varargs void do_flag_display(object who, object targ)
         tell_object(targ, "\n"+arrange_string("%^BOLD%^%^WHITE%^Feature Name ", 20) + arrange_string("Author", 10) + arrange_string("Yes", 4) + arrange_string("No", 4) + arrange_string("ETA", 10) + arrange_string("Expires In", 10)+"\n");
         for(x = 0;x < sizeof(featureVoting);x++)
         {
-            featureName = featureVoting[x];            
+            featureName = featureVoting[x];
             j = 20 - strlen(featureName);
             eventMsg = "%^BOLD%^%^WHITE%^"+featureName + arrange_string(" ", j);
             featureAuthor = FEATURE_D->get_feature_information(featureName, "Feature Author");
@@ -85,9 +78,9 @@ varargs void do_flag_display(object who, object targ)
             ExpiresIn = FEATURE_D->get_feature_information(featureName, "Voting Expires In");
             j = 10 - strlen(ExpiresIn);
             eventMsg += ExpiresIn + arrange_string(" ", j);
-            tell_object(targ, eventMsg);            
+            tell_object(targ, eventMsg);
             continue;
-        }        
+        }
     }
     return 1;
 }
@@ -112,13 +105,13 @@ int cmd_flag(string str)
             return 1;
         }
         switch(targ)
-        {            
+        {
             case "feature":
                 if(arg == "add")
                 {
                     if(!wizardp(TP)) return 0;
                     res = FEATURE_D->can_insert_feature(TP, "testcheckfeature");
-                    if(res == -1) 
+                    if(res == -1)
                     {
                         tell_object(TP, "Error.");
                         return 1;
@@ -173,7 +166,7 @@ int cmd_flag(string str)
                         return 1;
                     }
                 }
-                break;                
+                break;
             case "character improvement tax":
                 perc = to_int(arg);
                 if(perc < 50)
@@ -225,7 +218,7 @@ int cmd_flag(string str)
                 message("info","%^YELLOW%^"+capitalize(TP->query_name())+"'s %^MAGENTA%^PK immunity %^YELLOW%^has just been removed.%^RESET%^\n",users());
                 "/cmds/avatar/_note.c"->cmd_note("ckpt "+capitalize(TP->query_name())+" %^BOLD%^%^CYAN%^chose to remove PK immunity.%^RESET%^");
                 return 1;
-                break;          
+                break;
             case "scaled level":
                 //tell_object(TP, "This is temporarily disabled, pending finishing the code that "+
                 //"manipulates items to scale down with you.");
@@ -242,18 +235,18 @@ int cmd_flag(string str)
                     "/daemon/user_d.c"->scale_level_to(TP, base);
                     return 1;
                 }
-                perc = to_int(arg);               
+                perc = to_int(arg);
                 if(perc < 6)
                 {
                     tell_object(TP, "You cannot currently scale your level below level 6.");
                     return 1;
-                }                
+                }
                 if(perc > base)
                 {
                     tell_object(TP, "You cannot currently scale your level above your total "+
                     "character level of "+base+ " (please note: this does not include level adjusted "+
                     "races).");
-                    return 1;                    
+                    return 1;
                 }
                 if(perc == base)
                 {
@@ -272,10 +265,10 @@ int cmd_flag(string str)
         return 1;
     }
     do_flag_display(find_player(str), TP);
-    return 1;    
+    return 1;
 }
 
-void help() 
+void help()
 {
     write("
 %^CYAN%^NAME%^RESET%^
@@ -286,12 +279,12 @@ flag - manipulate player flags
 
 flag
 flag scaled level . %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal
-flag roleplay flag . %^ORANGE%^%^ULINE%^ON%^RESET%^
-flag player kill . %^ORANGE%^%^ULINE%^OFF%^RESET%^
+flag roleplay flag . on
+flag player kill . off
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command lets you adjust some various flags about your character. %^ORANGE%^<flag>%^RESET%^ by itself will show all flags and their current settings. 
+This command lets you adjust some various flags about your character. %^ORANGE%^<flag>%^RESET%^ by itself will show all flags and their current settings.
 
 %^CYAN%^scaled level%^RESET%^
   Will allow you to scale your level down to the specified %^ORANGE%^<level>%^RESET%^in order to adventure with or take part in plots with lower level characters. It is highlyexperimental, so use at your own risk, it is likely that it will tweaked as issues becomeapparent. You cannot go below level 6 or above your own base character level. Using%^ORANGE%^<normal>%^RESET%^ instead of a level will revert you back to your normal non scaled level.
@@ -307,4 +300,3 @@ This command lets you adjust some various flags about your character. %^ORANGE%^
 set, chfn, score, pkilling, rules, death
 ");
 }
-

@@ -20,7 +20,7 @@ mapping relmap;
 object shape;
 
 
-int cmd_who(string str) 
+int cmd_who(string str)
 {
     string *args, *races;
     //  mapping relmap;
@@ -28,10 +28,10 @@ int cmd_who(string str)
 
     races = ({});
 
-    if (str) 
+    if (str)
     {
         i = sizeof(args = explode(str, " "));
-        while (i--) 
+        while (i--)
             if (RACE_D->is_race(args[i])) races += ({ args[i]});
     }
     this_player()->more(explode(list_users(races, TP), "\n"));
@@ -39,7 +39,7 @@ int cmd_who(string str)
 }
 
 
-string race_color(object who) 
+string race_color(object who)
 {
     string tmp;
 
@@ -47,7 +47,7 @@ string race_color(object who)
     return tmp;
 }
 
-string list_users(string *races, object tp) 
+string list_users(string *races, object tp)
 {
     object *who, *wizzes, *rp_flags;
     mixed *deaths, *worldEvents;
@@ -58,7 +58,7 @@ string list_users(string *races, object tp)
     wizzes = filter_array(users(),"wizards",TO);
     who = users() + "/daemon/filters_d.c"->query_retired();
     who = filter_array(who, "which_users", this_object(), races);
-    max = sizeof(wizzes+who); 
+    max = sizeof(wizzes+who);
 
     wizzes = sort_array(wizzes, "sort_by_level", this_object());
     who = sort_array(who, "sort_by_name", this_object());
@@ -69,12 +69,12 @@ string list_users(string *races, object tp)
     max = sizeof(who);
 
     if (max)
-        for (i=0; i<max; i++) 
+        for (i=0; i<max; i++)
         {
             tmp = "";
             if ( (who[i]->query_position() == "Admin") )
-                tmp += "%^BOLD%^%^BLACK%^Admin %^BOLD%^%^BLACK%^------ "; 
-            else 
+                tmp += "%^BOLD%^%^BLACK%^Admin %^BOLD%^%^BLACK%^------ ";
+            else
                 if ( (who[i]->query_position() == "apprentice") )
                     tmp +=   "%^BOLD%^%^BLUE%^Apprentice %^BOLD%^%^BLACK%^- ";
                 else
@@ -85,17 +85,17 @@ string list_users(string *races, object tp)
                             tmp +=  "%^CYAN%^Overseer %^BOLD%^%^BLACK%^--- ";
                         else
                             if ( (who[i]->query_position() == "elder") )
-                                tmp +=  "%^BOLD%^%^MAGENTA%^Elder %^BOLD%^%^BLACK%^------ "; 
+                                tmp +=  "%^BOLD%^%^MAGENTA%^Elder %^BOLD%^%^BLACK%^------ ";
                             else
                                 if ((who[i]->query_position() == "arch") )
-                                    tmp +=  "%^BOLD%^%^ORANGE%^Arch %^BOLD%^%^BLACK%^------- "; 
+                                    tmp +=  "%^BOLD%^%^ORANGE%^Arch %^BOLD%^%^BLACK%^------- ";
                                 else {
                                 if (ctime(time())[4..9]=="Apr  1") rabbit="rabbit";
                                 else {
                                     if (ctime(time())[4..9]=="Nov 23") rabbit="turkey";
                                     else
                                         if (ctime(time())[4..9]=="May  1") rabbit="commie";
-                                        else 
+                                        else
                                     {
                                         if(((int)who[i]->query_login_time() + 60) > time()) rabbit = "someone";
                                         else if(objectp(shape = who[i]->query_property("shapeshifted"))) rabbit = (string)shape->query_shape_race();
@@ -107,7 +107,7 @@ string list_users(string *races, object tp)
             length = atoi(TP->getenv("SCREEN"))-32;
             if(!length||length<18)
                 length=43;
- 
+
             if ( wizardp(who[i]) && who[i]->query_quietness() ) {
                 tmp += "%^BOLD%^%^CYAN%^Q %^RESET%^";
                 length -=2;
@@ -117,13 +117,13 @@ string list_users(string *races, object tp)
                 tmp += "%^BOLD%^%^CYAN%^I %^RESET%^";
                 length -=2;
             }
-            
+
             if (in_edit(who[i]) || in_input(who[i])) {
                 tmp += "%^BOLD%^**%^RESET%^ ";
                 length -=3;
             }
             tmp += race_color(who[i]);
-            if (!who[i]->query_alignment()) 
+            if (!who[i]->query_alignment())
                 melnmarn = capitalize((string)who[i]->query_name())+" the new adventurer";
             else if (((int)who[i]->query_login_time() + 60) > time() && (who[i]->query_level() < BUILDER)) {
                 melnmarn = "is awakening";
@@ -131,7 +131,7 @@ string list_users(string *races, object tp)
                 melnmarn = (string)who[i]->query_title();
             else
                 melnmarn = "("+capitalize((string)who[i]->query_name())+")";
-            if (in_edit(who[i]) || in_input(who[i])) 
+            if (in_edit(who[i]) || in_input(who[i]))
             {
                 if (who[i]->query_invis());
                 else if(who[i]->query_title())
@@ -151,7 +151,7 @@ string list_users(string *races, object tp)
                 tmp += "%^BOLD%^%^BLUE%^Idle "+sprintf("%3d",(query_idle(who[i]) / 60))+"%^RESET%^";
             else
                 tmp += "%^RESET%^%^BLUE%^Active%^RESET%^  ";
-            
+
 
             if (PRISON_D->is_imprisoned((string)who[i]->query_name()))
                 tmp += "%^BOLD%^%^RED%^In Jail";
@@ -179,9 +179,9 @@ string list_users(string *races, object tp)
     rp_flags = "/daemon/user_d.c"->get_rp_flags();
     for(i = 0;i < sizeof(rp_flags);i++)
     {
-        if(!objectp(rp_flags[i])) continue;        
-        tmp = "%^MAGENTA%^ RP Flag%^BOLD%^%^BLACK%^ --- " + rp_flags[i]->query_short();
-        tmp += arrange_string(" ", (43 - strlen("/daemon/filters_d.c"->filter_colors(rp_flags[i]->query_short())))) + "%^RESET%^%^BLUE%^[Active]%^RESET%^\n";
+        if(!objectp(rp_flags[i])) continue;
+        tmp = "%^BOLD%^%^MAGENTA%^ RP Flag%^BOLD%^%^BLACK%^ --- " + rp_flags[i]->query_short();
+        tmp += arrange_string(" ", (43 - strlen("/daemon/filters_d.c"->filter_colors(rp_flags[i]->query_short()))))+"\n";
         belphy += tmp;
     }
     if(pointerp(worldEvents = WORLD_EVENTS_D->parsable_world_events(tp)))
@@ -192,13 +192,13 @@ string list_users(string *races, object tp)
     return belphy;
 }
 
-int wizards(object who) 
+int wizards(object who)
 {
     if ((avatarp(TP)) && (TP==who)) return 1;
     if (!avatarp(who)) return 0;
     if(wizardp(who) && who->query("true_quietness")) return 0;
     if (who->query_quietness()&&avatarp(who)&&(!avatarp(TP))) return 0;
-    if (who->query_true_invis()&&avatarp(who)&&(!avatarp(TP))) return 0;    
+    if (who->query_true_invis()&&avatarp(who)&&(!avatarp(TP))) return 0;
     return 1;
 }
 
@@ -302,17 +302,17 @@ string levelcheck_status(object tp, object other)
     diff = absolute_value(diff);
 
     switch(low)
-    {        
+    {
     case 1..29: range = 5; break;
     case 30..50: range = 10; break;
     default: return "";
     }
 
     if(diff > range) { return "   %^RESET%^%^BOLD%^%^RED%^F%^RESET%^"; }
-    
+
     if(tp->query("no pk")) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
     if(other->query("no pk")) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
-    
+
     if(tp->query_death_flag()) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
     if(other->query_death_flag()) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
 
@@ -322,7 +322,7 @@ string levelcheck_status(object tp, object other)
     return "   %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^";
 }
 
-void help() 
+void help()
 {
     write(
         "
@@ -332,7 +332,7 @@ who - show who is logged on
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-who [%^ULINE%^%^ORANGE%^RACE1%^RESET%^] [%^ULINE%^%^ORANGE%^RACE2%^RESET%^]... 
+who [%^ULINE%^%^ORANGE%^RACE1%^RESET%^] [%^ULINE%^%^ORANGE%^RACE2%^RESET%^]...
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -342,7 +342,7 @@ If argument is provided, filters players by races.
 
 %^CYAN%^PLAYER KILL FLAGS%^RESET%^
 
- %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^ in the end of the line indicates you're free to engage in player %^BOLD%^%^GREEN%^kill%^RESET%^ or adventures with that player. 
+ %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^ in the end of the line indicates you're free to engage in player %^BOLD%^%^GREEN%^kill%^RESET%^ or adventures with that player.
 
  %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^ means you're free to %^YELLOW%^adventure%^RESET%^ only and are forbidden to engage in player kill due to recent death or flag changes.
 
@@ -360,4 +360,3 @@ quietness, invis
 "
         );
 }
-
