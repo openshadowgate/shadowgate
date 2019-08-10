@@ -113,7 +113,7 @@ string list_users(string *races, object tp)
                 length -=2;
             }
 
-            if ( wizardp(who[i]) && who[i]->query_true_invis() ) {
+            if ( wizardp(who[i]) && who[i]->query_true_invis() && avatarp(tp) ) {
                 tmp += "%^BOLD%^%^CYAN%^I %^RESET%^";
                 length -=2;
             }
@@ -194,11 +194,14 @@ string list_users(string *races, object tp)
 
 int wizards(object who)
 {
-    if ((avatarp(TP)) && (TP==who)) return 1;
-    if (!avatarp(who)) return 0;
-    if(wizardp(who) && who->query("true_quietness")) return 0;
-    if (who->query_quietness()&&avatarp(who)&&(!avatarp(TP))) return 0;
-    if (who->query_true_invis()&&avatarp(who)&&(!avatarp(TP))) return 0;
+    if ((avatarp(TP)) && (TP==who))
+        return 1;
+    if (!avatarp(who))
+        return 0;
+    if(wizardp(who) && who->query("true_quietness"))
+        return 0;
+    if (who->query_quietness()&&avatarp(who)&&(!avatarp(TP)))
+        return 0;
     return 1;
 }
 
