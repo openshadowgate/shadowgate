@@ -1,6 +1,6 @@
+//Sat 10 Aug 2019 06:26:26 AM UTC removed verboten check -- Il
 // mods by Styx for eavesdropping nwp (originally by Grendel as a guild command) 10/16/02
 //modified to hopefully work with avsay to allow players to whisper "non-existent" avatar NPCS - Saide
-
 #include <std.h>
 
 inherit DAEMON;
@@ -37,7 +37,7 @@ int is_listening_to(object obj, object *targs)
 
 
 
-int cmd_whisper(string str) 
+int cmd_whisper(string str)
 {
    string who, msg, lang, pseudoname = 0;
    object ob, * people,*immortals,shape;
@@ -54,13 +54,13 @@ int cmd_whisper(string str)
    if (TP->query_gagged()) {
       return notify_fail(TP->query_gagged_message()+"\n");
    }
-   
+
    immortals = all_living(ETP);
    for(x = 0;x < sizeof(immortals);x++)
    {
        if(!avatarp(immortals[x])) continue;
        if(!mapp(tmp = immortals[x]->query("avsayprofile"))) continue;
-       if(who == tmp["Character Name"]) 
+       if(who == tmp["Character Name"])
        {
            who = lower_case(tmp["Character Name"]);
            ob = immortals[x];
@@ -68,39 +68,35 @@ int cmd_whisper(string str)
        }
        else continue;
    }
-   if(!objectp(ob)) 
+   if(!objectp(ob))
    {
         who = lower_case(who);
         ob = present(who,ETP);
    }
-   
+
    lang = TP->query_spoken();
     if(ob == TP) return notify_fail("You can whisper to yourself all you want, just don't whisper back.\n");
-   
-   if(!ob || !living(ob)) 
+
+   if(!ob || !living(ob))
    {
       notify_fail(capitalize(who) +" does not appear to be within whispering distance.\n");
       return 0;
    }
-   
+
    if(avatarp(TP))
-   {    
+   {
        tmp = TP->query("avsayprofile");
        if(mapp(tmp))
        {
            pseudoname = tmp["Character Name"];
            lang = tmp["Language"];
-           if(lang == "All" || "all") lang = "wizish";           
+           if(lang == "All" || "all") lang = "wizish";
        }
    }
-   
+
    immortals = all_living(ETP);
    immortals = filter_array(immortals,"is_listening_immortal",TO);
-    "/adm/daemon/verboten.c"->test_verboten(str, TP, "whisper");
-   //if(interactive(TP)) msg= "daemon/language_d"->translate(msg, lang,TP);
 
-// nwp stuff to send msg to eavesdropper, we do want to let the speaker's language prof 
-// (above) scramble if appropriate before passing it to the eavedropper *Styx*
    lis1 = TP->query_property("eavesdropper");
    lis2 = ob->query_property("eavesdropper");
    if(lis1 && objectp(lis1))      lis1->catch_eavesdrop(TP, ob, msg, lang);
@@ -117,9 +113,9 @@ This is the start, but may need other stuff
     for (i=0;i<sizeof(people);i++){
       if (avatarp(people[i])){
         tell_object(people[i], "%^CYAN%^"+TPQCN + "%^RESET%^%^CYAN%^"
-          +" whispers to " + ob->QCN + "%^RESET%^%^CYAN%^: %^RESET%^" 
+          +" whispers to " + ob->QCN + "%^RESET%^%^CYAN%^: %^RESET%^"
           + msg);
-      } 
+      }
     }
   }
 
@@ -147,7 +143,7 @@ This is the start, but may need other stuff
       return 1;
    }
 
-   if(ob->query_invis() && !TP->detecting_invis() && !pseudo) 
+   if(ob->query_invis() && !TP->detecting_invis() && !pseudo)
    {
       notify_fail(capitalize(who)+" does not appear to be within whispering distance.\n");
 // so it doesn't confirm to someone that they are thief hidden *Styx*  12/5/02
@@ -163,7 +159,7 @@ This is the start, but may need other stuff
       }
       return 0;
    }
-        
+
    if(avatarp(ob) && pseudo)
    {
        message("whisper","%^BOLD%^%^CYAN%^"+TPQCN+" whispers to you:  %^RESET%^"+msg,ob);
@@ -172,14 +168,14 @@ This is the start, but may need other stuff
        if(sizeof(immortals))
        {
             for(i=0;i<sizeof(immortals);i++)
-            {    
+            {
                 tell_object(immortals[i],"%^RESET%^%^BOLD%^"+TP->QCN+" whispers to "+ob->QCN+": "+msg+"%^RESET%^");
             }
-       }           
+       }
        return 1;
    }
-   
-   if(ob->is_player() && !interactive(ob)) 
+
+   if(ob->is_player() && !interactive(ob))
    {
       notify_fail(ob->query_cap_name()+" is link-dead and cannot hear you.\n");
       return 0;
@@ -188,7 +184,7 @@ This is the start, but may need other stuff
    if(stringp(pseudoname)) message("whisper","%^BOLD%^%^CYAN%^"+capitalize(pseudoname)+" whispers to you: %^RESET%^"+msg,ob);
    else message("whisper","%^BOLD%^%^CYAN%^"+TPQCN+" whispers to you:  %^RESET%^"+msg,ob);
    if(avatarp(ob) && ob->query_disguised())
-   {       
+   {
       message("whisper", "%^BOLD%^%^CYAN%^You whisper to "+capitalize(ob->query_vis_name())+": %^RESET%^"+msg, TP);
       tell_room(ETP,"%^CYAN%^"+TPQCN+ " whispers something to %^RESET%^" + capitalize(ob->query_vis_name())+".",({TP,ob}));
    }
@@ -209,7 +205,7 @@ This is the start, but may need other stuff
            tell_object(immortals[i],"%^RESET%^%^BOLD%^"+capitalize(TP->query_name())+" whispers to "+capitalize(ob->query_name())+": "+msg+"%^RESET%^");
        }
    }
-   
+
    immortals = filter_array(users(), "is_listening_to", TO, ({TP->query_name(), ob->query_name()}));
    if(sizeof(immortals))
    {
@@ -219,13 +215,13 @@ This is the start, but may need other stuff
            continue;
        }
    }
-   
+
    return 1;
 }
 
 void help() {
    write("Syntax: <whisper [player] [message]>\n\n"+
-        "This command is used to whisper a message to another " 
+        "This command is used to whisper a message to another "
         "player who is in the same room as you without other "
         "players being able to hear what you are saying.\n"
         "See also: say, emote, yell\n");

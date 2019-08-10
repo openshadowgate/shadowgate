@@ -17,35 +17,10 @@ int imm_filter(object obj,string *targ)
 }
 
 void tell_listening_immortals(string mess,object teller,object listener)
-{/*
-	object *listening_imms=({});
-	string teller_name,listener_name;
-	int i;
-
-	if(!stringp(mess)) { return; }
-	if(!objectp(teller)) { return; }
-	if(!objectp(listener)) { return; }
-	if(avatarp(teller) || avatarp(listener)) { return; }
-
-	teller_name = lower_case(teller->query_true_name());
-	listener_name = lower_case(listener->query_true_name());
-
-	listening_imms = children("/std/user.c");
-	listening_imms = filter_array(listening_imms,"imm_filter",TO,({ teller_name,listener_name }));
-
-	if(!sizeof(listening_imms)) { return; }
-
-	for(i=0;i<sizeof(listening_imms);i++)
-	{
-		tell_object(listening_imms[i],""+capitalize(teller_name)+" tells "+capitalize(listener_name)+": "+mess+"\n");
-	}
-	return;*/
+{
 }
-	
 
-
-
-object resolve_tell_playerob(string whom) { 
+object resolve_tell_playerob(string whom) {
   object ob;
   string real_whom, whom2;
 
@@ -77,39 +52,16 @@ int cmd_tell(string str) {
   string namestr;
   string *ignored;
   object ob;
-  //  string translated_real_who, mud;
-  
+
+
   if (!str || sscanf(str,"%s %s",who,msg) != 2) {
     notify_fail("usage: tell <player> <message>\n");
     return 0;
   }
-  
-  /*  Fuck this, we're not going to use it and it's breaking my mods.
-   *  - Garrett 10/18/2001.
-   *
-   *  if (sscanf(lower_case(who),"%s@%s",target,mud) == 2) {
-   *    if (!NETWORK_D->mud_exists(mud))
-   *      return notify_fail("That mud is not listed with "+mud_name()+".\n");
-   *    SERVICES_D->send_gtell(mud, target, msg);
-   *    return 1;
-   *  }
-   */
-  
 
-  /****************************
-  ob = find_player(who=lower_case(who));
-  translated_real_who=TP->realName(who);
-  
-  if (!objectp(ob) || (!avatarp(ob) && !avatarp(TP))) {
-    if (!(ob = find_player(translated_real_who))) {
-   
-  ****************/
   if (!objectp(ob=resolve_tell_playerob(who))) {
     if (!objectp(ob=resolve_tell_living(who, msg))) {
       notify_fail(capitalize(who)+NOT_HERE+"\n");
-      // This line causes a bug where you can 'tell' someone who's online and
-      // it'll return 'What?", or you tell someone who's offline, and it 
-      // returns that they're not here.
 
       return 0;
     } else {
@@ -120,14 +72,12 @@ int cmd_tell(string str) {
   if(ob->is_npc_psychic())
     sscanf(str,lower_case(ob->query_true_name())+" %s",msg);
 
-  if (!avatarp(TP) && !avatarp(ob) 
-      && !(pointerp(TP->query_property("allowed tell")) 
+  if (!avatarp(TP) && !avatarp(ob)
+      && !(pointerp(TP->query_property("allowed tell"))
 	&& member_array(ob->query_true_name(), (string *)TP->query_property("allowed tell")) != -1)) {
     notify_fail("What?");
     return 0;
   }
-   
-  "/adm/daemon/verboten.c"->test_verboten(str, TP, "reply");
 
   if(ob->query_true_invis() || TP->query_true_invis() || avatarp(TP) || avatarp(ob)) {} // empty intentionally
   else
@@ -137,7 +87,6 @@ int cmd_tell(string str) {
           tell_object(TP,"You can't send tells while shapeshifted.");
           return 1;
       }
-    //msg= "daemon/language_d"->translate(msg, TP->query_spoken(), TP);
   }
 
   ignored = ob->query_ignored();
@@ -145,9 +94,6 @@ int cmd_tell(string str) {
     TP->reset_ignored();
     ignored = TP->query_ignored();
   }
-
-  //  if (who == (string)TPQN)
-  //    return notify_fail("Crazy eh?\n");
 
   if(wizardp(ob) && (ob->query_highest_level() > TP->query_highest_level()) && (!member_group(getuid(TP), "superuser")) ){
     if(TP->query_invis())
@@ -164,15 +110,14 @@ int cmd_tell(string str) {
     return 1;
   }
 
-  if (ob->query_invis() && (int)ob->query_level() > (int)TP->query_level() && !member_group(getuid(TP), "superuser")) 
+  if (ob->query_invis() && (int)ob->query_level() > (int)TP->query_level() && !member_group(getuid(TP), "superuser"))
   {
     message("info", sprintf("%s%s", capitalize(who), NOT_HERE),this_player());
 
-    if (member_array(TPQN, ignored) == -1 || wizardp(TP)) 
+    if (member_array(TPQN, ignored) == -1 || wizardp(TP))
 	{
       message("reply", sprintf("%s is unaware of telling you: %s", namestr, msg), ob);
-	  tell_listening_immortals(msg,TP,ob);
-      if (!TP->query_disguised() || !wizardp(TP)) 
+      if (!TP->query_disguised() || !wizardp(TP))
 	  {
 		ob->set("reply", TP->getParsableName(ob));
       } else {
@@ -199,7 +144,6 @@ int cmd_tell(string str) {
   }
 
   message("reply", "%^BOLD%^%^RED%^"+ namestr + " tells you: %^RESET%^"+msg, ob);
-  tell_listening_immortals(msg,TP,ob);
   if (!TP->query_disguised() || !wizardp(TP)) {
     ob->set("reply", TP->getParsableName(ob));
   } else {
@@ -230,14 +174,21 @@ int cmd_tell(string str) {
 
 
 void help() {
-  message("help",
-	  "Syntax: <tell [player] [message]>\n"
-	  "        <tell [player]@[mud] [message]>\n\n"
-	  "Please note that tells only work when in telepathic communication with a person."
-	  "\n"
-	  "Sends the message to the player named either on this mud if no "
-	  "mud is specified, or to the player named on another mud when "
-	  "another mud is specified.\n\n"
-	  "See also: say, shout, yell, emote", this_player()
-          );
+    write("
+%^CYAN%^NAME%^RESET%^
+
+tell - tell something someone
+
+%^CYAN%^SYNTAX%^RESET%^
+
+tell %^ORANGE%^%^ULINE%^PLAYER%^RESET%^ %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+In telepathic communication you will be able to use %^ORANGE%^<tell>%^RESET%^ to privately tell someone something.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+reply, say, emote, yell, mail, communication
+");
 }

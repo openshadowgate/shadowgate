@@ -1,22 +1,20 @@
-// Author unknown (??)
-// Help added by Brian (1/28/92)
-
+//Sat 10 Aug 2019 06:26:26 AM UTC removed verboten check -- Il
 #include <std.h>
 #include <rooms.h>
 #include <langs.h>
 
 inherit DAEMON;
 
-int cmd_emote(string str) 
+int cmd_emote(string str)
 {
     int i;
     string first,tail,insert,*words=({}),lang,tmp="",temp,start_color,end_color;
     object *all,*pick;
     all = ({});
     pick = ({});
-    
+
     if(TP->query("emote loss")) return 0;
-    if(this_player()->query_ghost() && base_name(ETP) != DEATH_ROOM) 
+    if(this_player()->query_ghost() && base_name(ETP) != DEATH_ROOM)
     {
         notify_fail("A ghost has no feelings.\n");
         return 0;
@@ -53,7 +51,6 @@ int cmd_emote(string str)
       }
       return 1;
     }
-    "/adm/daemon/verboten.c"->test_verboten(str, TP, "emote");
     all -= ({TP});
     pick -= ({TP});
     if(sscanf(str," %s",tail)==1) insert = "";
@@ -61,7 +58,7 @@ int cmd_emote(string str)
     else insert = " ";
     if(!random(6) && interactive(TP) && !wizardp(TP)) {
 // added to stop spam from forced teaching, etc. *Styx*  2/17/03
-       if(!TP->query_forced()) {	
+       if(!TP->query_forced()) {
 	 if(file_size("/log/emotes/emote.log") > 150000) {
            cp("/log/emotes/emote.log","/log/emotes/emote.old");
            rm("/log/emotes/emote.log");
@@ -117,7 +114,7 @@ int cmd_emote(string str)
     */
 
     message("emote","You emote: "+  replace_string( capitalize((string)TPQN)+insert+str ,"#@&","\"")  ,TP);
-    
+
     if((int)TP->query_disguised() == 0)
     {
         if(!TP->query_invis())
@@ -128,8 +125,8 @@ int cmd_emote(string str)
             message("emote",TPQCN+insert+str,all);
         }
     }
-    
-    else if(!TP->query_invis()) 
+
+    else if(!TP->query_invis())
     {
         if(!TP->query_invis())
             message("emote",capitalize(TP->query_vis_name())+insert+str,ETP,TP);
@@ -139,7 +136,7 @@ int cmd_emote(string str)
             message("emote",capitalize(TP->query_vis_name())+insert+str,all);
         }
     }
-    
+
     else message("emote",TPQCN+insert+str,ETP,TP);
     return 1;
 }
@@ -156,7 +153,7 @@ emote %^ORANGE%^%^ULINE%^STRING%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Emote is a roleplay-tool that can be used to describe what your character does and how it reacts to its environment. You can describe your physical actions and gestures, as well as demeanor, appearance, facial expressions and body language. It will be seen by anyone in the room. 
+Emote is a roleplay-tool that can be used to describe what your character does and how it reacts to its environment. You can describe your physical actions and gestures, as well as demeanor, appearance, facial expressions and body language. It will be seen by anyone in the room.
 
 %^ORANGE%^%^ULINE%^STRING%^RESET%^ is the action you wish to describe. Your name will be added to the start of the emote automatically.
 
@@ -176,5 +173,4 @@ If you use %^ORANGE%^<emote sits down and relaxes.>%^RESET%^, everyone in the ro
 
 say, whisper, yell, emoteat, pose, colors, languages, emoteat guide
 ");
-} 
-
+}

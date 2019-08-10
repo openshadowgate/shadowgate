@@ -1,10 +1,3 @@
-//      /bin/user/_say.c
-//      from the Nightmare Mudlib
-//      the say command
-//      created by Descartes of Borg 930818
-// color added by Belphy@ShadowGate 940927
-//added functionality to support avsay profiles - I hope - Saide
-
 #include <std.h>
 #include <rooms.h>
 #include <langs.h>
@@ -16,7 +9,7 @@ string strip_colors(string sh)
     string output = "", *list = ({});
     string *words = ({});
     int i;
-    if(!sh) 
+    if(!sh)
     {
         return output;
     }
@@ -38,7 +31,7 @@ string strip_colors(string sh)
     return output;
 }
 
-int cmd_say(string str) 
+int cmd_say(string str)
 {
     object *people;
     object me = TP;
@@ -47,49 +40,47 @@ int cmd_say(string str)
     mapping tmp;
     int i;
 
-    if (TP->query_gagged()) 
+    if (TP->query_gagged())
     {
         return notify_fail(TP->query_gagged_message()+"\n");
     }
-    
+
     if(!objectp(ETP))
     {
         tell_object(TP,"You have no environment, please contact a wiz.");
         return 1;
     }
-   
-    if(this_player()->query_ghost() && base_name(ETP) != DEATH_ROOM) 
+
+    if(this_player()->query_ghost() && base_name(ETP) != DEATH_ROOM)
     {
         message("talk", "You howl pitifully.", this_player());
         message("talk", "You hear a pitiful howl.", environment(this_player()),({ this_player() }));
         return 1;
     }
-    
+
     if(avatarp(TP))
     {
         tmp = TP->query("avsayprofile");
     }
-    
-    
-    if(!str || str == "") 
+
+
+    if(!str || str == "")
     {
         notify_fail("You mutter to yourself.\n");
         return 0;
     }
-    
-    "/adm/daemon/verboten.c"->test_verboten(str, TP, "say");
-   
+
     if(!wizardp(TP)) { str = replace_string(str,"BLACK","BLUE"); }
-   
+
     if(interactive(TP) && (string)TP->query("last say") == str) { return notify_fail("You just said that.\n"); }
-    
+
     TP->set("last say",str);
 
     if(!TP->query("speech string") || replace_string((string)TP->query("speech string")," ","") == "")
     {
         speech = "say";
-    } 
-    else 
+    }
+    else
     {
         speech = TP->query("speech string");
         describe = TP->query("describe string");
@@ -102,12 +93,12 @@ int cmd_say(string str)
         lang = tmp["Language"];
         if(lang == "All" || lang == "all") lang = "wizish";
         describe = 0;
-        if(tmp["Speech"]) 
+        if(tmp["Speech"])
         {
             tmp2 = explode(tmp["Speech"], " ");
             speech = tmp2[0];
             tmp2 -= ({tmp2[0]});
-            if(sizeof(tmp2)) describe = implode(tmp2, " ");           
+            if(sizeof(tmp2)) describe = implode(tmp2, " ");
         }
         else
         {
@@ -118,21 +109,21 @@ int cmd_say(string str)
         if(tmp["Color"]) color = tmp["Color"];
         else color = "%^RESET%^";
     }
-    
+
     if(member_array(lang,ANIMAL_LANGS) != -1)
     {
-        emote = "%^BOLD%^%^MAGENTA%^"+TP->QCN+" "+"daemon/language_d"->query_animal_emotes(str,TP); 
+        emote = "%^BOLD%^%^MAGENTA%^"+TP->QCN+" "+"daemon/language_d"->query_animal_emotes(str,TP);
         //str = "daemon/language_d"->animal_translate(str,lang,TP);
     }
     else
     {
-        if(!TP->is_monster()) 
-        { 
-            //str= "daemon/language_d"->translate(str, lang, TP); 
+        if(!TP->is_monster())
+        {
+            //str= "daemon/language_d"->translate(str, lang, TP);
         }
     }
-    
-    
+
+
 
     if(describe)
     {
@@ -141,8 +132,8 @@ int cmd_say(string str)
         if(stringp(pseudoname)) message("say", "%^MAGENTA%^"+pseudoname+" "+speech+"'s "+describe+"%^RESET%^: "+color+str, ETP, me);
         else message("say","%^MAGENTA%^"+TPQCN+" "+speech+"s "+describe+"%^RESET%^: "+str,ETP,me);
         return 1;
-    } 
-    else 
+    }
+    else
     {
         if(emote) { message("animal_emote",emote,ETP,TP); }
         message("say","%^MAGENTA%^You "+speech+"%^RESET%^: "+str,TP);
@@ -155,7 +146,7 @@ int cmd_say(string str)
     }
 }
 
-void help() 
+void help()
 {
     write(
         "
