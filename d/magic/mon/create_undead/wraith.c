@@ -20,11 +20,11 @@ void create()
     set_stats("charisma",16);
 
 	set_property("undead",1);
-	set_level(15);    
+	set_level(15);
 	set_hd(5,12);
 	set_max_hp(random(35)+345);
 	set_hp(query_max_hp());
-    
+
 	set_body_type("human");
 	set_overall_ac(-24);
 	set_alignment(3);
@@ -33,7 +33,7 @@ void create()
 	set_race("shadow");
 	set_class("fighter");
 	set_mlevel("fighter",20);
-    
+
 	set_new_exp(20,"normal");
 	set_gender("neuter");
 	set_attack_limbs(({"right hand","left hand"}));
@@ -45,14 +45,14 @@ void create()
 
     set_property("magic",1);
 
-    set_hit_funcs( (["right hand":(:TO,"drain":)]) );        
+    set_hit_funcs( (["right hand":(:TO,"drain":)]) );
 }
 
 void drain(object targ)
 {
     int damage;
     tell_object(targ,"%^BLUE%^You feel your life force drain away!");
-    tell_room(ETO,"%^BLUE%^"+targ->query_cap_name()+" stumbles back @weakly from the touch of the Wraith!",targ);
+    tell_room(ETO,"%^BLUE%^"+targ->query_cap_name()+" stumbles back %^BOLD%^%^BLACK%^weekly%^RESET%^%^BLUE%^ from the touch of the Wraith!",targ);
     damage = roll_dice(TO->query_level(),2);
     targ->do_damage(targ->return_target_limb(),damage);
     TO->add_hp(-damage);
@@ -62,4 +62,3 @@ void set_paralyzed(int time,string message)
 {
     return 1;
 }
-    
