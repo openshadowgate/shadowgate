@@ -1,4 +1,4 @@
-string * MAGE_COMPONENTS = ({ 
+string * MAGE_COMPONENTS = ({
 "aluminum chaff",
 "amber rod",
 "bat guano",
@@ -79,7 +79,7 @@ string * MAGE_COMPONENTS = ({
 "sunstone",
 "talc",
 "tiny bag",
-"tiny chest"  
+"tiny chest",
 "tiny hearing trumpet",
 "vermilion",
 "water",
@@ -380,5 +380,3 @@ mapping COMPONENTS1 = ([
 "zinc" : 50,
 "zoisite" : 52,
 ]);
-
-

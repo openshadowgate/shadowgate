@@ -162,11 +162,9 @@ int __List(string str) {
 	return 1;
    lines = to_int(TP->getenv("LINES"));
    lines -= 2;
-   if(!str) return notify_fail("List what?\n");
-   if(strsrch(str,"comp") == -1) return notify_fail("I don't sell those!\n");
    tell_room(ETO, TPQCN+" studies the list of components available.", TP);
    Available = sort_array(Available,"sort_strings",TO);
-   melnmarn = "%^BOLD%^%^BLUE%^--=< %^WHITE%^Components %^BLUE%^>=-%^RESET%^\n";
+   melnmarn = "%^BOLD%^%^BLUE%^--=< %^WHITE%^Components %^BLUE%^>=--%^RESET%^\n";
    for(inc = 0; inc < sizeof(Available);inc++) {
       melnmarn += sprintf("%3d: ",inc);
       melnmarn += sprintf("%%^GREEN%%^%-35s %%^YELLOW%%^%5d %%^RESET%%^%%^CYAN%%^gold%%^YELLOW%%^%4d %%^RESET%%^%%^CYAN%%^stored\n",capitalize(Available[inc]),adjust_cost(compcosts[Available[inc]]),Amount[Available[inc]]);
@@ -217,21 +215,21 @@ int __Help(string nothing) {
    tell_room(ETO, TPQCN+" seems to be asking the shopkeeper for help.", TP);
    write(
 @MELNMARN
-%^BOLD%^%^BLUE%^--=<%^WHITE%^ Components Shop Help %^BLUE%^>=--%^RESET%^
-%^RESET%^%^CYAN%^There are 3 commands in the components shop. The shopkeeper
-understands 'help', 'buy' and 'list'.
-%^BOLD%^%^BLUE%^syntax: %^YELLOW%^'list comp'
-%^RESET%^%^CYAN%^The list command will list the components available in his
-shop.
-%^BOLD%^%^BLUE%^syntax: %^YELLOW%^'buy <# || name || components bag>'
-%^RESET%^%^CYAN%^This will allow you to buy a component or components bag.
-You may either enter the item number, or the item name.
-Once you have made the request to buy an item, you will be
-asked how many of that component you wish to purchase.
-IE: buy 14 (will buy item # 14)
-IE: buy candle (will buy a candle)
-%^BOLD%^%^BLUE%^syntax: %^YELLOW%^'help shop'
-%^RESET%^%^CYAN%^Displays this text.
+%^CYAN%^COMPONENT SHOP%^RESET%^
+
+Here you can buy some components for your spellcasting needs. The syntax is as follows:
+
+%^ORANGE%^<list comp>%^RESET%^
+  List available components.
+
+%^ORANGE%^<buy %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
+  Buy component. You will be prompted for quantity.
+
+%^ORANGE%^<buy components bag>%^RESET%^
+  Buy empty components bag.
+
+%^ORANGE%^<help shop>%^RESET%^
+  Display this screen.
 MELNMARN
         );
    return 1;
