@@ -8,9 +8,9 @@ object cast;
 
 void create(){
     ::create();
-    
+
     set_name("fire elemental");
-    set_id(({"fire","fire elemental","elemental","felemental"}));
+    set_id(({"fire","fire elemental","elemental","felemental","greater summon"}));
     set_short("%^RESET%^%^RED%^a %^BOLD%^f%^MAGENTA%^i%^RESET%^r%^BOLD%^%^RED%^e %^RESET%^%^RED%^elemental%^RESET%^");
     set_long("%^RESET%^%^RED%^Looming over eight feet tall, this "
              "%^BOLD%^f%^MAGENTA%^i%^RESET%^r%^BOLD%^%^RED%^e elemental "
@@ -45,7 +45,7 @@ void create(){
 
 void setup_elemental(object caster)
 {
-    int level;    
+    int level;
     if(!objectp(caster)) { return; }
     cast = caster;
     level = (int)caster->query_guild_level("mage");
@@ -67,6 +67,3 @@ void die(object obj)
     ::die(obj);
     return;
 }
-
-
-

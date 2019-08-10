@@ -8,9 +8,9 @@ object cast;
 
 void create(){
   ::create();
-    
+
     set_name("air elemental");
-    set_id(({"elemental","air elemental","aelemental"}));
+    set_id(({"elemental","air elemental","aelemental","greater summon"}));
     set_short("%^RESET%^%^CYAN%^an a%^BOLD%^%^WHITE%^i%^CYAN%^r %^RESET%^%^CYAN%^elemental%^RESET%^");
     set_long("%^RESET%^%^CYAN%^Like an eight-foot tall %^BOLD%^%^BLACK%^"
              "cyclone%^RESET%^%^CYAN%^, this elemental creates a miniature storm "
@@ -21,7 +21,7 @@ void create(){
              "elemental seem to dissipate into the wind, only to reform into a "
              "translucent shape of %^BOLD%^%^BLACK%^gray%^RESET%^%^CYAN%^, "
              "%^BOLD%^%^WHITE%^white%^RESET%^%^CYAN%^, and %^BOLD%^sky blue%^RESET%^%^CYAN%^.  Although it has no "
-             "visible eyes, this creature seems to have no trouble seeking out its enemies.%^RESET%^");    
+             "visible eyes, this creature seems to have no trouble seeking out its enemies.%^RESET%^");
     set_hd(4 + (4 *(random(3)+1)),1);
     set_hp(query_hd()*8);
     set_exp((query_hd()-6)* 1000 + 1000);
@@ -43,7 +43,7 @@ void create(){
 
 void setup_elemental(object caster)
 {
-    int level;    
+    int level;
     if(!objectp(caster)) { return; }
     cast = caster;
     level = (int)caster->query_guild_level("mage");
@@ -65,4 +65,3 @@ void die(object obj)
     ::die(obj);
     return;
 }
-

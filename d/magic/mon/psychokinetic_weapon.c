@@ -1,5 +1,5 @@
-//adjusting psychokinetic weapon to use a monster instead of an 
-//animated object until/unless the animate bug can be tracked down. 
+//adjusting psychokinetic weapon to use a monster instead of an
+//animated object until/unless the animate bug can be tracked down.
 //With an animated object, the mob eats half the caster's exp. ~Circe~ 12/7/15
 
 #include "summoned_monster.h"
@@ -10,7 +10,7 @@ object caster;
 void create(){
    ::create();
    set_name("ectoplasmic broad sword");
-   set_id(({"summoned monster","broad sword","ectoplasmic sword","ectoplasmic broad sword","sword"}));
+   set_id(({"summoned monster","broad sword","ectoplasmic sword","ectoplasmic broad sword","sword","greater summon"}));
    set_short("%^RESET%^%^MAGENTA%^an e%^CYAN%^c%^MAGENTA%^to"
        "%^BOLD%^p%^RESET%^%^MAGENTA%^la%^BOLD%^%^CYAN%^s%^RESET%^"
        "%^MAGENTA%^mi%^CYAN%^c %^RESET%^%^MAGENTA%^broad sword%^RESET%^");
@@ -32,7 +32,7 @@ void create(){
    remove_limb("head");
    remove_limb("right arm");
    remove_limb("right hand");
-   remove_limb("left arm");  
+   remove_limb("left arm");
    add_limb("blade","blade",50,0,2);
    add_limb("hilt","hilt",0,0,0);
    set_attack_limbs(({"blade"}));
@@ -51,6 +51,5 @@ void die(object obj){
    }
 }
 
-void set_caster(object whom){ caster = whom; return;} 
+void set_caster(object whom){ caster = whom; return;}
 object query_caster() { return caster; }
-

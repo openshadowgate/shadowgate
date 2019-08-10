@@ -16,7 +16,7 @@ void create(){
    int num;
    ::create();
    set_name("astral construct");
-   set_id(({"construct","astral construct"}));
+   set_id(({"construct","astral construct","greater summon"}));
    set_short("%^BOLD%^%^CYAN%^Astral Construct%^RESET%^");
 
    set_long("%^RESET%^%^CYAN%^Crafted from some sort of transluscent material, "+
@@ -113,8 +113,8 @@ void heart_beat(){
 
 /*   if(!TO->query_party()) {
        party = (string)caster->query_party();
-       if(!party) { 
-           party = ""+caster->query_name()+" party"; 
+       if(!party) {
+           party = ""+caster->query_name()+" party";
            "/adm/daemon/party_d.c"->add_member(caster,party);
            "/adm/daemon/party_d.c"->add_member(TO,party);
        }

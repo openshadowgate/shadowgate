@@ -51,9 +51,9 @@ string * path;       //  These variables added by Lujke, September 2005
 string destination;  //  to support the code for mobs to be able to walk to named
 int is_walking;      //  destinations
 int will_open;	     // addition by Ares for checks in move_around & pathfinder
-int will_avoid_traps; 
+int will_avoid_traps;
 int BONUS_ADDED;     // global flag to make sure the to hit bonus doesn't get added more than
-                     // once.  -Ares 
+                     // once.  -Ares
 static string *monster_feats; // added so monsters can have feats, use set_monster_feats(string *feats)
 
 int static_bab;      // going to try giving them a static bab that's uneffected by stats to try and help balance vs player armor class
@@ -90,7 +90,7 @@ void disable_catch_tell(int def_tell);
 void __TEST_INIT();
 void start_walking(string dest);  // These functions added by Lujke, September 2005
 void stop_walking();                // to support the code for monsters
-void reach_destination();         // to be able to find their way to a 
+void reach_destination();         // to be able to find their way to a
 void do_walk();                   // specified destination
 int query_walking();            //
 void will_open_doors(int num); // Will make wandering mobs open unlocked doors in their way -Ares 09/18/05
@@ -110,7 +110,7 @@ int useMonsterFlag;
 
 
 
-void create() 
+void create()
 {
    ::create();
    enable_commands();
@@ -136,17 +136,17 @@ void create()
    stage = 60;
    path = ({});
    monster_feats=({});
-   if(objectp(TO)) catch("/daemon/quests"->isMon(TO));   
+   if(objectp(TO)) catch("/daemon/quests"->isMon(TO));
 }
 
 int query_max_internal_encumbrance() { return 100 + (level * 10); }
 
-void reset() 
+void reset()
 {
     if(!objectp(TO)) { return; }
     catch("/daemon/quests"->isMon(TO));
     if(!objectp(ETO)) { return; }
-    ::reset();   	
+    ::reset();
 }
 
 void set_stabbed_func(mixed val) {
@@ -158,8 +158,8 @@ void set_stabbed_func(mixed val) {
       stabbed = val;
 }
 
-//added by Saide, December 1st, 2016. Apparently some 
-//game mobs are using set_mlevel(int lvl) - 
+//added by Saide, December 1st, 2016. Apparently some
+//game mobs are using set_mlevel(int lvl) -
 //hopefully this fixes them.
 /*varargs void set_mlevel(string str, int lev)
 {
@@ -170,7 +170,7 @@ void set_stabbed_func(mixed val) {
         cls = (string *)TO->query_classes();
         if(sizeof(cls)) str = cls[0];
         else str = "fighter";
-    }    
+    }
     return ::set_mlevel(str, lev);
 }*/
 
@@ -178,7 +178,7 @@ void set_monster_feats(string *feats)
 {
     string *valid_feats, *feats_check;
     int i;
-    
+
     if(!pointerp(feats)) { return; }
     feats_check = get_dir(DIR_FEATS+"/");
     valid_feats = ({});
@@ -189,14 +189,14 @@ void set_monster_feats(string *feats)
         continue;
     }
     //valid_feats = get_dir("/cmds/feats/");
-    
+
 
     for(i=0;i<sizeof(valid_feats);i++)
     {
         valid_feats[i] = replace_string(valid_feats[i],"_","",1);
         valid_feats[i] = replace_string(valid_feats[i],"_"," ");
         valid_feats[i] = replace_string(valid_feats[i],".c","");
-    }    
+    }
     for(i=0;i<sizeof(feats);i++)
     {
         if(member_array(feats[i],valid_feats) == -1) { continue; }
@@ -208,16 +208,16 @@ void set_monster_feats(string *feats)
 
 string *query_monster_feats() { return monster_feats; }
 
-void init() 
+void init()
 {
     mixed tmp;
     int i;
     string *temp=({});
-       
+
     if(!objectp(TO))                    { return; }
     if(!objectp(ETO))                   { return; }
     if(base_name(ETO) == ROOM_VOID)     { return; } // they don't need to call init() when they're in the void.
-    //moved call to ::init down here to see if it helps with 
+    //moved call to ::init down here to see if it helps with
     //the new() errors - Saide - June 2016
     ::init();
     if(!objectp(TO))                    { return; }
@@ -232,19 +232,19 @@ void init()
         if(objectp(TO)) { set_heart_beat(heart_beat_on = 1); }
     }
 
-    if(TP->is_player()) 
+    if(TP->is_player())
     {
-        if(tmp = query("aggressive")) 
+        if(tmp = query("aggressive"))
         {
-            if(intp(tmp) && tmp > (int)TP->query_stats("charisma")) 
+            if(intp(tmp) && tmp > (int)TP->query_stats("charisma"))
             {
                 if(TP->query_invis())
                 {
                     if(!query_property("invis attack")) { return; }
                 }
                 kill_ob(this_player(), 0);
-                call_out("kill_msg",1,this_player());         
-            } 
+                call_out("kill_msg",1,this_player());
+            }
             else
             {
                 if(!init_pause)
@@ -255,21 +255,21 @@ void init()
             }
         }
     }
-   
-    if(norm_int) 
+
+    if(norm_int)
     {
-        temp += keys(norm_int);        
+        temp += keys(norm_int);
         if(charmed_int) { temp+=keys(charmed_int); }
-        if(offend_int)  { temp+=keys(offend_int); }      
-        temp = distinct_array(temp);      
-        for(i=0;i<sizeof(temp);i++) 
+        if(offend_int)  { temp+=keys(offend_int); }
+        temp = distinct_array(temp);
+        for(i=0;i<sizeof(temp);i++)
         {
             add_action("check_action",temp[i],1);
         }
     }
 }
 
-void kill_msg(object tp) 
+void kill_msg(object tp)
 {
    tell_object(tp,"%^RED%^%^BOLD%^"+capitalize(this_object()->query_name())+" attacks you!%^RESET%^");
 }
@@ -334,9 +334,9 @@ void do_kit_stuff()
 
     hp     = (int)TO->query_hp();
     max_hp = (int)TO->query_max_hp();
-    
+
     if(hp >= max_hp) { return; }
-    
+
     diff = max_hp - hp;
     diff = diff / avg;
     if(diff > 4) { diff = 4; }
@@ -350,7 +350,7 @@ void do_kit_stuff()
     return;
 }
 
-void heart_beat() 
+void heart_beat()
 {
     string lang, pre;
     object ob3,ob2;
@@ -367,14 +367,14 @@ void heart_beat()
 Removing this for now until we can balance it a bit and figure out some guidelines.
 Removing it this way lets us keep all the code without having feats set on the mobs.
 ~Circe~ 525/13
-    if(!query("feats_enabled")) 
+    if(!query("feats_enabled"))
     {
         MONSTER_FEAT_D->setup_monster_feats(TO);
         set("feats_enabled", 1);
     }
 */
     //Lines 369-393 moved to the int move() function at the end of
-    //this file - in order to **attempt** to try to set up 
+    //this file - in order to **attempt** to try to set up
     //some monster stuff before peer kicks in - Saide, August 2017
     /*if(!TO->query_property("new_exp_set"))
     {
@@ -389,46 +389,46 @@ Removing it this way lets us keep all the code without having feats set on the m
             TO->set_property("new_exp_set",1);
         }
     }
-    
+
     if(!TO->query_property("champion_check"))
     {
         CHAMPION_D->champion_monster(TO);
     }*/
-    
-    //added to support assigning random treasure to monsters based on their level/hps 
+
+    //added to support assigning random treasure to monsters based on their level/hps
     //it is also possible to set_property("treasure type", A||B||C||D||E)
     //and set_property("treasure level", 5||10||15||20||25||30||35||40)
     //on a specific monster - this function call will assign the treasure - Saide - May 2016
     //if(!TO->query_property("has_random_treasure") && !TO->query_property("no_random_treasure")) "/daemon/random_monster_treasure_d.c"->assign_treasure(TO);
-    
-    
+
+
     player_age +=2;
     ok_to_heal ++;
     if(player_age > ok_to_heal) do_healing(calculate_healing());
     else calculate_healing();
     iterate_combat();
-    if(ok_to_attack()) 
+    if(ok_to_attack())
     {
         continue_attack();
     }
-    if(!stage) 
+    if(!stage)
     {
-        if(1) 
+        if(1)
         {
 // moved objectp check above creation of ob2 so it won't get stranded in memory by the objectp check kicking out of the function (without zapping the ob2 created). *Styx* 3/17/03
             if(!objectp(TO)) return;
             ob2 = new("/std/Object");
 
-            if(this_object()->query_poisoning()) 
+            if(this_object()->query_poisoning())
             {
                 ob2->set_name("Poison");
                 do_damage("torso",query_poisoning());
                 message("environment","You are getting weaker from Poison!",TO);
-                if(objectp(ob3=queryPoisoner())) 
+                if(objectp(ob3=queryPoisoner()))
                 {
                     add_attacker(ob3);
-                } 
-                else 
+                }
+                else
                 {
                     add_attacker(ob2);
                 }
@@ -459,7 +459,7 @@ Removing it this way lets us keep all the code without having feats set on the m
 
 /*
   switch(is_walking){
-    case 3: 
+    case 3:
       call_out ("do_walk", 2);
     case 2: //deliberately falling through
       call_out ("do_walk", 1);
@@ -475,28 +475,28 @@ object *ob_party(object ob)
 {
     object *party;
     string party_name;
-    
-    if(!objectp(TO) || !objectp(ob)) { return ({ob}); }        
-    party_name = ob->query_party();    
-    if(!party_name) { return ({ob}); }    
+
+    if(!objectp(TO) || !objectp(ob)) { return ({ob}); }
+    party_name = ob->query_party();
+    if(!party_name) { return ({ob}); }
     party = PARTY_D->query_party_members(party_name);
     return party;
 }
 
 
 
-void die(object ob) 
+void die(object ob)
 {
     object money_ob;
     object *contents,*party=({}),*live;
     int i, tmp_size, quest_exp;
     string *currs, quest_str;
-    
+
     if(!objectp(TO)) { return; }
     if(!objectp(ETO)) { return; }
-    
+
     if(!query_property("new_exp_set")) { set_new_exp(TO->query_highest_level(),"normal"); }
-    
+
     if(max_level)
     {
         live = all_living(ETO);
@@ -514,30 +514,30 @@ void die(object ob)
         }
     }
 
-    if(functionp(__Die)) 
+    if(functionp(__Die))
     {
         if(!((int)((*__Die)(ob)))) return;
-    } 
+    }
     else if(stringp(__Die))
     {
         tell_room(ETO,__Die,TO);
     }
-    else 
+    else
     {
         tell_room(ETO, "%^RED%^"+TO->QCN+" drops dead before you.%^RESET%^",TO);
-        if(ETO->query_property("arena")) 
+        if(ETO->query_property("arena"))
         {
             destall(TO);
             return;
         }
-    }    
-    
+    }
+
     if(query_property("add quest"))
     {
         quest_str = query_property("add quest");
         quest_exp = query_property("quest exp");
         if(!quest_exp) { quest_exp = query_level() * 1000; }
-        
+
         live = all_living(ETO);
         live = filter_array(live,"is_non_immortal_player",FILTERS_D);
         if(sizeof(live))
@@ -559,32 +559,32 @@ void die(object ob)
                 {
                     if( (!party[i]->query_ghost()) && // if they're dead, we'll assume they died here.  Might not always be true, but should be fairly often
                         (party[i]->query_death_place() != ETO) && // if they died to the monster but already prayed, their death place should be this monster's environment
-                        (strsrch(base_name(environment(party[i])),"/d/magic/room/") == -1)) { continue; } // if they are in /d/magic/room/, it might be inside of a web, ie the one cast by Vecna, so go ahead and add                    
+                        (strsrch(base_name(environment(party[i])),"/d/magic/room/") == -1)) { continue; } // if they are in /d/magic/room/, it might be inside of a web, ie the one cast by Vecna, so go ahead and add
                 }
-                
-                if(member_array(quest_str,party[i]->query_mini_quests()) != -1) { continue; }                
+
+                if(member_array(quest_str,party[i]->query_mini_quests()) != -1) { continue; }
                 party[i]->set_mini_quest(quest_str,quest_exp,quest_str);
-            }            
-        }       
+            }
+        }
     }
 
     tmp = make_corpse();
     tmp->move(ETO);
     tmp_size = sizeof( currs = query_currencies() );
-    
-    if(tmp_size && has_value()) 
+
+    if(tmp_size && has_value())
     {
         money_ob = new("/std/obj/coins");
-        for(i=0; i<tmp_size; i++) 
+        for(i=0; i<tmp_size; i++)
         {
             money_ob->add_money(currs[i], query_money(currs[i]));
             add_money(currs[i], -query_money(currs[i]));
         }
         money_ob->move(tmp);
     }
-    
+
     contents = all_inventory(this_object());
-    for(i=0;i<sizeof(contents);i++) 
+    for(i=0;i<sizeof(contents);i++)
     {
         if(!objectp(contents[i])) continue;
         if(contents[i]->query_property("monsterweapon") || !contents[i]->query_short())
@@ -594,7 +594,7 @@ void die(object ob)
         }
         else contents[i]->move(tmp);
     }
-   
+
     if(TO->query_property("riding"))
     {
         if(TO->query_owner() && objectp(TO->query_owner()))
@@ -636,7 +636,7 @@ varargs void move_player(mixed dest, string msg) {
    if(move(dest) == MOVE_OK) {
       if (query_property("posed"))
            remove_property("posed");
-      if(!id("summoned monster")) {
+      if(!id("summoned monster") || id("greater summon")) {
          if(!hiddenp(this_object()) && !(avatarp(TO) && query_invis())) {
             inv = all_inventory(prev);
             for(i=0, bzbd = sizeof(inv); i<bzbd; i++) {
@@ -677,7 +677,7 @@ varargs void move_player(mixed dest, string msg) {
 
 /* Call_out taken out of move_around by Hanse 1/4/93 */
 // *changes to respect files in restricted exit list (nogo) by Styx 8/2003
-// Added in checks for locked and unlocked doors, and the ability to open 
+// Added in checks for locked and unlocked doors, and the ability to open
 // unlocked ones -Ares 09/18/05
 void move_around() {
    string *exits,door;
@@ -705,7 +705,7 @@ void move_around() {
 //      (ETO->query_exit(exit))->init();  // *was-but we already have filename now, so this saves querying the exit again
          if(objectp(find_object_or_load(exitfile)))
          {
-             exitfile->init();                
+             exitfile->init();
              if(exit != "temple") { command(exit); }
          }
       }
@@ -761,7 +761,7 @@ void set_hd(int dice, int bonus) {      // sets the hit dice of a monster
    set_level(dice);
 }
 
-void do_exp(int dice,int bonus) 
+void do_exp(int dice,int bonus)
 {
    if(bonus > 0) dice++;
    if(bonus < 0) dice--;
@@ -830,7 +830,7 @@ void set_race(string  str)
 }
 
 
-void set_body_type(string str) 
+void set_body_type(string str)
 {
    mapping monster_bod;
    int mag, max_mag;
@@ -853,7 +853,7 @@ void set_body_type(string str)
    if(objectp(TO))
    {
     TO->set_fingers((int)RACE_D->query_monster_fingers(str));
-   
+
    // from weaponless_monsters.c
     TO->set_attack_limbs((string *)RACE_D->query_monster_wielding_limbs(str));
     TO->set_attacks_num(sizeof(TO->query_attack_limbs()));
@@ -873,15 +873,15 @@ void set_func_chance(int x) {
    func_chance = x;
 }
 
-void set_funcs(string *arr) 
+void set_funcs(string *arr)
 {
-    //changing this so that funcs can be changed - for fights 
+    //changing this so that funcs can be changed - for fights
     //with phases or whatever - Saide
-    //if(!funcs || funcs == ({})) funcs = arr;	
+    //if(!funcs || funcs == ({})) funcs = arr;
     if(pointerp(arr)) funcs = arr;
 }
 
-int query_func_chance() 
+int query_func_chance()
 {
     if(funcs)
         return func_chance;
@@ -927,7 +927,7 @@ string get_random_spell() {
    if(sizeof(spells["commands"]) <2) return spells["commands"][0];
    return spells["commands"][random(sizeof(spells["commands"]))];
 }
- 
+
 // These two functions remain for backwards Nightmare 1.* and 2.* compat
 
 void set_chats(int x, string *arr) {set_emotes(x, arr, 0);}
@@ -959,7 +959,7 @@ int test_heart() {
 
 int query_heart_status() {return heart_beat_on;}
 
-void receive_message(string cl, string msg) 
+void receive_message(string cl, string msg)
 {
     string str1,str2;
     if(!already_listened)
@@ -1160,9 +1160,9 @@ int has_stab_func() {
      return 1;
 }
 
-void set_max_level(int lvl) 
-{   
-    max_level = lvl; 
+void set_max_level(int lvl)
+{
+    max_level = lvl;
     if(intp(TO->query_highest_level()))
     {
         if(max_level < ((int)TO->query_highest_level() + 6)) max_level = ((int)TO->query_highest_level() + 6);
@@ -1197,16 +1197,16 @@ string query_short(){
     return descr;
 }
 
-string query_vis_cap_name(){ 
+string query_vis_cap_name(){
     return query_cap_name();
 }
 // More quick functions to make monsters act as players of a sort, I guess...
 // Garrett 02/02/02
-string getNameAsSeen(object ob) { 
-    return TO->query_name(); 
+string getNameAsSeen(object ob) {
+    return TO->query_name();
 }
-string getParsableName() { 
-    return capitalize(TO->query_name()); 
+string getParsableName() {
+    return capitalize(TO->query_name());
 }
 
 void saveMonster(string path){
@@ -1280,15 +1280,15 @@ varargs void do_walk(int iteration){
   if (is_walking == 0 || !stringp(destination)){
     return;
   }
-  if(file_name(ETO) == destination) {  
+  if(file_name(ETO) == destination) {
 // changed this from a waystation check that wasn't working Lujke September 16 2005
-    reach_destination();              
+    reach_destination();
     stop_walking();
     return;
   }
 
   startroom = ETO; // already done an objectp check on ETO
- 
+
 // If there is no path already set, find a the nearest waystation
 // if the mob is not already at one. Otherwise, find the next
 // waystation nearest the destination.
@@ -1308,7 +1308,7 @@ varargs void do_walk(int iteration){
     if (path == ({})){
       stop_walking();
       return;
-    } 
+    }
   }
 // Once the path is found, or if one was already set, take the next step along it
   step = path[0];
@@ -1320,9 +1320,9 @@ varargs void do_walk(int iteration){
 // additions by *Styx* 2/1/06
   if(will_open) {
      if(door=ETO->query_door(path[0])) {
- 	if(ETO->query_locked(door)) { 
+ 	if(ETO->query_locked(door)) {
 	   stop_walking();
-	   return; 
+	   return;
       	}
         if(!ETO->query_open(door))
 	   command("open "+door);
@@ -1334,7 +1334,7 @@ varargs void do_walk(int iteration){
 // has reached its destination and then trigger the appropriate
 // function if it has.  Then remove the step that has just been completed
 // from the remaining path array.
- 
+
   if (objectp(ETO)){
     if (file_name(ETO)==destination){
       // This will mean that the mob has reached the destination
@@ -1355,7 +1355,7 @@ varargs void do_walk(int iteration){
   if (iteration<1){
     switch(is_walking){
     case 3:
-      do_walk(1); 
+      do_walk(1);
     case 2: //deliberately falling through
       call_out("do_walk", 1, 1);
     case 1:
@@ -1430,7 +1430,7 @@ void set_new_exp(int level, string perc)
     {
     case "very low":
         div = 40; // 60% lower than normal ( 100 - 60 = 40)
-        break;        
+        break;
     case "low":
         div = 70; // 30% lower than normal ( 100 - 30 = 70)
         break;
@@ -1521,7 +1521,7 @@ void set_nat_weapon_type(string type)
 }
 
 
-string query_nat_weapon_type() 
+string query_nat_weapon_type()
 {
     return ::query_nat_weapon_type();
 }
@@ -1551,7 +1551,7 @@ int query_unarmed_damage()
 }
 
 
-int get_hand_damage(string limb1, int damage, object attacked) 
+int get_hand_damage(string limb1, int damage, object attacked)
 {
     return ::get_hand_damage(limb1,damage,attacked);
 }
@@ -1575,10 +1575,10 @@ void run(){
 }
 string *query_temporary_feats() { return ({}); }
 
-//a way to hijack some stuff happening on mob heart-beat that 
+//a way to hijack some stuff happening on mob heart-beat that
 //really messes up peer - Saide, August 2017
 int move(mixed dest)
-{    
+{
     if(!objectp(TO)) return ::move(dest);
     if(!TO->query_property("new_exp_set"))
     {
@@ -1593,16 +1593,16 @@ int move(mixed dest)
             TO->set_property("new_exp_set",1);
         }
     }
-    
+
     if(!TO->query_property("champion_check"))
     {
         CHAMPION_D->champion_monster(TO);
     }
-    
-    //added to support assigning random treasure to monsters based on their level/hps 
+
+    //added to support assigning random treasure to monsters based on their level/hps
     //it is also possible to set_property("treasure type", A||B||C||D||E)
     //and set_property("treasure level", 5||10||15||20||25||30||35||40)
     //on a specific monster - this function call will assign the treasure - Saide - May 2016
     if(!TO->query_property("has_random_treasure") && !TO->query_property("no_random_treasure")) "/daemon/random_monster_treasure_d.c"->assign_treasure(TO);
-    return ::move(dest);       
+    return ::move(dest);
 }

@@ -8,7 +8,7 @@ void create(){
 
    set_name("phantasmal killer");
    set_short("A slender humanoid figure");
-    set_id(({"figure","human","humanoid figure","phantasmal killer","killer"}));
+    set_id(({"figure","human","humanoid figure","phantasmal killer","killer","greater summon"}));
    set_long("Though seeming somewhat insubstantial, this creature "+
       "poses a very real threat to those it turns its empty gaze "+
       "upon.  It is strong and agile, bent upon protecting its "+
@@ -43,4 +43,3 @@ void die(object ob)
    remove();
    return;
 }
-

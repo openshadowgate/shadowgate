@@ -9,7 +9,7 @@ string fname, castname;
 void create(){
     ::create();
     set_name("outsider");
-    set_id(({"outsider"}));
+    set_id(({"outsider","greater summon"}));
     set("short","outsider");
     set("long","this is an outsider");
     set_hd(4,1);
@@ -33,7 +33,7 @@ void setup_beastie(object caster, int beastalign) {
     if(!objectp(caster)) { return; }
     cast = caster;
     seteuid(getuid());
-    castname = cast->query_name();    
+    castname = cast->query_name();
     fname = "/d/save/summons/"+castname+"/"+query_name();
     "/daemon/yuck_d"->load_inventory(this_object(),fname);
     myalign = beastalign;
@@ -304,7 +304,7 @@ void my_special(object target) {
 void die(object obj) {
     if(objectp(cast)) cast->remove_property("has_elemental");
     tell_room(ETO,"%^BOLD%^%^RED%^Unable to maintain corporeal form, outsider return to their home plane.%^RESET%^");
-    
+
     remove();
 }
 
@@ -328,7 +328,7 @@ void set_mylevel(int x){
    set_stats("constitution",20);
    set_stats("dexterity",5);
    set_property("effective_enchantment",(mylevel/7)+1);
-   set_max_internal_encumbrance(100);       
+   set_max_internal_encumbrance(100);
 }
 
 void defend(){
@@ -350,7 +350,7 @@ void defend(){
 int remove(){
     reset_all_status_effects();
     save_outsider();
-    all_inventory(TO)->remove();    
+    all_inventory(TO)->remove();
     ::remove();
 }
 
@@ -380,6 +380,3 @@ void save_outsider()
     mkdir(fname);
     "/daemon/yuck_d"->save_inventory(this_object(),fname);
 }
-
-
-

@@ -7,10 +7,10 @@ object cast;
 
 void create(){
   ::create();
-    
+
     set_name("water elemental");
-    set_id(({"elemental","water elemental","welemental"}));
-    
+    set_id(({"elemental","water elemental","welemental","greater summon"}));
+
     set_short("%^BOLD%^%^BLUE%^a w%^RESET%^%^CYAN%^a%^RESET%^%^BOLD%^t%^RESET%^e%^BOLD%^%^BLUE%^r elemental%^RESET%^");
     set_long("%^BOLD%^%^BLUE%^Like a tidal wave just before it crashes, this "
              "water elemental %^WHITE%^crests %^BLUE%^at just over eight feet tall.  "
@@ -39,7 +39,7 @@ void create(){
 
 void setup_elemental(object caster)
 {
-    int level;    
+    int level;
     if(!objectp(caster)) { return; }
     cast = caster;
     level = (int)caster->query_guild_level("mage");
@@ -61,4 +61,3 @@ void die(object obj)
     ::die(obj);
     return;
 }
-

@@ -9,7 +9,7 @@ string fname, castname;
 void create(){
     ::create();
     set_name("outsider");
-    set_id(({"outsider"}));
+    set_id(({"outsider","greater summon"}));
     set("short","outsider");
     set("long","This is an outsider. If you can see this, your warlock heritage is borked. Please contact a wiz.");
     set_hd(4,1);
@@ -32,12 +32,12 @@ void setup_beastie(object caster, int beastheritage) {
     if(!objectp(caster)) { return; }
     cast = caster;
     myheritage = beastheritage;
-    castname = cast->query_name();    
+    castname = cast->query_name();
     fname = "/d/save/summons/"+castname+"/"+query_name();
     "/daemon/yuck_d"->load_inventory(this_object(),fname);
     switch(myheritage) {
       case "celestial":
-        set_id(({"shiradi","resplendent shiradi","celestial","outsider","summoned monster"}));
+        set_id(({"shiradi","resplendent shiradi","celestial","outsider","summoned monster","greater summon"}));
         set_short("%^BOLD%^%^CYAN%^r%^WHITE%^e%^MAGENTA%^s%^WHITE%^p%^CYAN%^l%^WHITE%^e%^MAGENTA%^n%^WHITE%^d%^CYAN%^e%^WHITE%^n%^CYAN%^t s%^WHITE%^h%^CYAN%^i%^WHITE%^r%^MAGENTA%^a%^WHITE%^d%^CYAN%^i%^RESET%^");
         set_long("%^BOLD%^%^CYAN%^The %^MAGENTA%^regal %^CYAN%^figure before you bears some resemblance to an elf, bearing the delicate "
 "facial features and long tapered ears common to that race, but its stature is anything but elven, well over eight feet tall and boasting "
@@ -57,7 +57,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_nat_weapon_type("bludgeon");
       break;
       case "fey":
-        set_id(({"myconid","multicolored myconid","fey","outsider","summoned monster"}));
+        set_id(({"myconid","multicolored myconid","fey","outsider","summoned monster","greater summon"}));
         set_short("%^CYAN%^m%^BOLD%^%^RED%^u%^RESET%^%^CYAN%^l%^ORANGE%^t%^CYAN%^i%^YELLOW%^c%^RESET%^%^CYAN%^o%^GREEN%^l%^CYAN%^o%^BOLD%^%^GREEN%^r%^CYAN%^e%^RESET%^%^CYAN%^d m%^BOLD%^y%^WHITE%^c%^RESET%^%^CYAN%^o%^WHITE%^n%^BOLD%^%^RED%^i%^RESET%^%^CYAN%^d%^WHITE%^");
         set_long("%^CYAN%^This %^GREEN%^strange%^CYAN%^, %^GREEN%^mushroom-like %^CYAN%^creature stands at about eight feet tall, and looks "
 "to be solidly built with a thick frame and long woody arms with a large knobby %^BOLD%^%^WHITE%^fist %^RESET%^%^CYAN%^on the end of each. "
@@ -75,7 +75,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_nat_weapon_type("bludgeon");
       break;
       case "abyssal":
-        set_id(({"hezrou","abominable hezrou","demon","outsider","summoned monster"}));
+        set_id(({"hezrou","abominable hezrou","demon","outsider","summoned monster","greater summon"}));
         set_short("%^ORANGE%^a%^BOLD%^%^BLACK%^b%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^m%^RESET%^i%^ORANGE%^n%^BOLD%^%^BLACK%^a%^RESET%^%^GREEN%^b%^BOLD%^%^BLACK%^l%^RESET%^%^ORANGE%^e h%^BOLD%^%^BLACK%^e%^RESET%^%^ORANGE%^z%^GREEN%^r%^BOLD%^%^BLACK%^o%^RESET%^%^ORANGE%^u%^WHITE%^");
         set_long("%^ORANGE%^This %^BOLD%^%^BLACK%^hulking%^RESET%^%^ORANGE%^, toad-like demon is at least eight feet tall while "
 "standing upright. Its %^RED%^powerful %^ORANGE%^frame boasts limbs as thick as some tree trunks, and its large w%^GREEN%^e%^ORANGE%^b"
@@ -94,7 +94,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_nat_weapon_type("bludgeon");
       break;
       case "gloom":
-        set_id(({"bodak","nightmarish bodak","outsider","summoned monster"}));
+        set_id(({"bodak","nightmarish bodak","outsider","summoned monster","greater summon"}));
         set_short("%^BOLD%^%^BLACK%^n%^WHITE%^i%^RESET%^g%^BOLD%^h%^RESET%^t%^BOLD%^%^BLACK%^m%^RESET%^a%^BOLD%^r%^RESET%^i%^BOLD%^s%^BLACK%^h b%^WHITE%^o%^BLACK%^d%^RESET%^a%^BOLD%^%^BLACK%^k%^RESET%^");
         set_long("%^BOLD%^%^BLACK%^This %^RESET%^ghastly %^BOLD%^%^BLACK%^creature has about the same size and build as a human, "
 "but that is where the similarities end. %^RESET%^D%^BOLD%^e%^RESET%^a%^BOLD%^t%^RESET%^h%^BOLD%^l%^RESET%^y p%^BOLD%^a%^RESET%^le "
@@ -111,7 +111,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_nat_weapon_type("slashing");
       break;
       case "infernal":
-        set_id(({"devil","barbed devil","menacing barbed devil","outsider","summoned monster"}));
+        set_id(({"devil","barbed devil","menacing barbed devil","outsider","summoned monster","greater summon"}));
         set_short("%^BOLD%^%^BLACK%^m%^RED%^e%^RESET%^n%^BOLD%^%^RED%^a%^BLACK%^c%^RED%^i%^RESET%^%^RED%^n%^BOLD%^%^BLACK%^g b%^RESET%^%^RED%^a%^BOLD%^r%^BLACK%^b%^RED%^e%^BLACK%^d d%^RED%^e%^RESET%^v%^RED%^i%^BOLD%^%^BLACK%^l%^RESET%^");
         set_long("%^BOLD%^%^RED%^This fearsome %^BLACK%^devil %^RED%^stands at about seven feet tall, and its %^BLACK%^l%^RESET%^i"
 "%^BOLD%^t%^RESET%^h%^BOLD%^%^BLACK%^e%^RED%^, %^WHITE%^s%^BLACK%^i%^WHITE%^n%^RESET%^e%^BOLD%^%^BLACK%^w%^WHITE%^y %^RED%^body is "
@@ -200,7 +200,7 @@ void my_special(object target) {
 
 void die(object obj) {
     if(objectp(cast)) cast->remove_property("has_elemental");
-    tell_room(ETO,"%^BOLD%^%^RED%^Unable to maintain corporeal form, outsider return to their home plane.%^RESET%^");        
+    tell_room(ETO,"%^BOLD%^%^RED%^Unable to maintain corporeal form, outsider return to their home plane.%^RESET%^");
     remove();
 }
 
@@ -244,7 +244,7 @@ void defend(){
 
 int remove(){
     save_outsider();
-    all_inventory(TO)->remove();        
+    all_inventory(TO)->remove();
     ::remove();
 }
 
@@ -269,10 +269,8 @@ void save_outsider()
         return;
     if(!userp(cast))
         return;
-    seteuid(getuid());    
+    seteuid(getuid());
     mkdir("/d/save/summons/"+castname);
     mkdir(fname);
     "/daemon/yuck_d"->save_inventory(this_object(),fname);
 }
-
-

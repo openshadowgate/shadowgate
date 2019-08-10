@@ -7,10 +7,10 @@ string castname, fname;
 void create(){
     ::create();
     set_name("chest");
-    set_id(({"chest","secret chest","floating wooden chest"}));
+    set_id(({"chest","secret chest","floating wooden chest","greater summon"}));
     set_short("%^RESET%^%^CYAN%^Floating %^ORANGE%^wooden %^BOLD%^c%^RESET%^%^ORANGE%^h%^BOLD%^e%^RESET%^%^ORANGE%^s%^BOLD%^t%^RESET%^");
     set_long("%^RESET%^%^ORANGE%^This is an %^BOLD%^%^ORANGE%^iro%^BLACK%^n%^ORANGE%^-bound%^RESET%^%^ORANGE%^ wooden chest that appears to float. It is quite large and could probably fit a lot of things inside.%^RESET%^");
-    set_attacks_num(1);    
+    set_attacks_num(1);
     set_exp(1);
     set_gender("neuter");
     set_hp(40);
@@ -64,4 +64,3 @@ void save_chest()
     mkdir(fname);
     "/daemon/yuck_d"->save_inventory(this_object(),fname);
 }
-
