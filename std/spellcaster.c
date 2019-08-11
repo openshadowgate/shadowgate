@@ -200,7 +200,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
                     string raging_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds", "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds", "mass cure critical wounds", "regeneration", "aura of healing", "heal", "mass heal"});
                     if(member_array(spell,raging_healer_spells)!=-1)
                     {
-                        tell_object(TO,"%^RESET%^%^RED%^You're so angry that your spell preserves in memory!%^RESET%^");
+                        tell_object(TO,"%^RESET%^%^BOLD%^%^RED%^You're so angry that your spell preserves in memory!%^RESET%^");
                     }
                 }
             }
