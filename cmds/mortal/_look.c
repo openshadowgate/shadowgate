@@ -3,17 +3,17 @@
 //      the command to look at stuff so that you might see!
 //      written by Descartes of Borg 16 january 1993
 //      based on the _look.c from the TMI mudlib
- 
+
 #include <daemons.h>
 
 #include <std.h>
 
 inherit DAEMON;
- 
+
 varargs int examine_object(string str,object obj);
 void sky(string str);
 varargs void look_msg(object ob, string str, object obj);
- 
+
 
 void db(string str)
 {
@@ -24,7 +24,7 @@ void db(string str)
 
 
 
-int cmd_look(string str) 
+int cmd_look(string str)
 {
     string tmp,name,num;
     object obj;
@@ -35,7 +35,7 @@ int cmd_look(string str)
 
     if(str && str != "")
     {
-        if( stringp(str) ) 
+        if( stringp(str) )
         {
             if(sscanf(str, "at %s on %s",tmp,name) == 2)
             {
@@ -52,13 +52,13 @@ int cmd_look(string str)
 
             if(sscanf(str, "in %s", tmp) ==1 || sscanf(str, "at %s", tmp) == 1)
             {
-                if((sscanf(tmp, "%s %d", name, num) == 2 && name == "player") || tmp == "player") 
+                if((sscanf(tmp, "%s %d", name, num) == 2 && name == "player") || tmp == "player")
                 {
                     return notify_fail("You do not notice that here.\n");
                 }
                 return examine_object(tmp);
             }
-            else 
+            else
             {
                 if((sscanf(str, "%s %d", name, num) == 2 && name == "player") || str == "player")
                 {
@@ -99,12 +99,12 @@ int check_shifted(object tp,object ob)
 }
 
 
-varargs int examine_object(string str, object obj) 
+varargs int examine_object(string str, object obj)
 {
     object ob,wiz;
     object *obs, ob_list;
     int i;
- 
+
     if(!str) { return 0; }
 
     if(TP->query_blind())
@@ -112,26 +112,26 @@ varargs int examine_object(string str, object obj)
         write("You are blind and cannot see anything.");
         return 1;
     }
-    
+
     ob = environment(this_player());
-    
+
     if(!wizardp(TP)&&(wiz=present(str,ob))&&wizardp(wiz)&&wiz->query_invis())
     {
         return notify_fail("You do not notice that here.\n");
     }
 
-    if(TP->light_blind(0))  
+    if(TP->light_blind(0))
     {
         write(TP->light_blind_fail_message(TP->light_blind(1)));
         return 1;
     }
 
-    if(total_light(this_player()) < 1) 
-    { 
-        write("It is dark."); 
+    if(total_light(this_player()) < 1)
+    {
+        write("It is dark.");
     }
-    
-    if(ob->id(str)) 
+
+    if(ob->id(str))
     {
         look_msg(ob, str);
         if(this_player()->query_ansi())
@@ -153,17 +153,20 @@ varargs int examine_object(string str, object obj)
     {
         ob = present(str,obj);
     }
-    
-    if(ob) 
+
+    if(ob)
     {
-        if((ob->query_hidden() || ob->query_magic_hidden()) && (!TP->detecting_invis() && ob != TP))
+        if((ob->query_hidden() ||
+            (ob->query_magic_hidden() &&
+             !TP->detecting_invis())) &&
+           ob != TP)
         {
             if(objectp(obj)) { return notify_fail(""+obj->QCN+" doesn't seem to have that."); }
             else { return notify_fail("You do not notice that here.\n"); }
         }
 
         look_msg(ob, str, obj);
-        
+
         if(TP->query_ansi())
         {
             if(objectp(obj))
@@ -175,7 +178,7 @@ varargs int examine_object(string str, object obj)
                 //
                 TP->more(ansi_str( (string)ob->query_long(str) ));
             }
-        }        
+        }
         else
         {
             if(objectp(obj))
@@ -190,12 +193,12 @@ varargs int examine_object(string str, object obj)
         }
         return 1;
     }
-    
+
     ob = present(str, TP);
-    
-    if(ob) 
+
+    if(ob)
     {
-        if((ob->query_hidden() || ob->query_magic_hidden()) && !TP->detecting_invis())
+        if(ob->query_hidden() || (ob->query_magic_hidden() && !TP->detecting_invis()))
         {
             return notify_fail("You do not notice that here.\n");
         }
@@ -204,14 +207,14 @@ varargs int examine_object(string str, object obj)
         {
             return notify_fail("You don't notice that here.\n");
         }
-        
+
         look_msg(ob, str);
-        
+
         if(this_player()->query_ansi())
         {
             write(ansi_str( (string)ob->query_long(str) ));
         }
-        
+
         else
         {
             write((string)ob->query_long(str));
@@ -222,12 +225,12 @@ varargs int examine_object(string str, object obj)
     write("You do not notice that here.");
     return 1;
 }
- 
 
-varargs void look_msg(object ob, string str, object obj) 
+
+varargs void look_msg(object ob, string str, object obj)
 {
     if((int)this_player()->query_invis()) { return; }
-    
+
     if( ob != this_player() )
     {
         if(objectp(obj))
@@ -240,7 +243,7 @@ varargs void look_msg(object ob, string str, object obj)
             }
             return;
         }
-        if(living(ob)) 
+        if(living(ob))
         {
             tell_room(ETP,TPQCN+" looks over "+ob->query_cap_name()+ ".", ({ob,TP}));
             tell_object(ob, this_player()->query_cap_name() + " looks you over.");
@@ -249,23 +252,23 @@ varargs void look_msg(object ob, string str, object obj)
         tell_room(ETP,TPQCN+" looks over the "+str+".",TP);
     }
 }
- 
 
 
-void sky(string str) 
+
+void sky(string str)
 {
     string borg;
     int night, tmp;
 
     night = query_night();
-    
-    switch(str) 
+
+    switch(str)
     {
         case "sky":
-            
-            if(night) 
+
+            if(night)
             {
-                switch((int)EVENTS_D->query_week(time())) 
+                switch((int)EVENTS_D->query_week(time()))
                 {
                     case 0:  borg = "You see a moonless night sky."; break;
                     case 1: borg = "The crescent moon hovers in the night sky."; break;
@@ -276,10 +279,10 @@ void sky(string str)
             }
             else borg = "You see the sun up in the sky.";
             break;
-        
+
         case "sun":
-         
-            if(!night) 
+
+            if(!night)
             {
                 tmp = (int)EVENTS_D->query_hour(time());
                 if(tmp < 10) borg = "The sun hangs low in the eastern sky.";
@@ -293,7 +296,7 @@ void sky(string str)
 
         case "moon":
 
-            switch((int)EVENTS_D->query_week(time())) 
+            switch((int)EVENTS_D->query_week(time()))
             {
                 case 0: borg = "What moon?"; break;
                 case 1: borg = "A crescent moon."; break;
@@ -302,9 +305,9 @@ void sky(string str)
                 default: borg = "It looks like death!"; break;
             }
            break;
-        
+
         case "moons":
-            
+
             switch((int)EVENTS_D->query_week(time()))
             {
                 case 0: borg = "What moons?"; break;
@@ -316,7 +319,7 @@ void sky(string str)
     say(TPQCN+" looks at the "+str+".");
 }
 
-int help() 
+int help()
 {
     write(
         "
@@ -355,5 +358,3 @@ glance, peer, describe, setenv, terminal, brief
 );
     return 1;
 }
-
-

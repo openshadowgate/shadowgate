@@ -15,12 +15,12 @@ void look_msg(object ob, string str);
 int cmd_glance(string str) {
    string tmp,name,num;
    set_property("information",1);
-   
+
    if(TP->query_blind()) {
       write("You are blind and cannot see anything.");
       return 1;
    }
-   
+
    if(!str || str == "") {
 //      return examine_room();   changed to return the short instead
      TP->describe_current_room(0);
@@ -42,7 +42,7 @@ int cmd_glance(string str) {
    }
    return 1;
 }
- 
+
 int examine_object(string str) {
    object wiz,ob;
    int i;
@@ -61,15 +61,18 @@ int examine_object(string str) {
    if(total_light(TP) < 1) write("It is dark.");
    ob = present(str, ob);
    if(ob) {
-       if((ob->query_hidden() || ob->query_magic_hidden()) && (!TP->detecting_invis() &&  ob != TP))
-         return notify_fail("You do not notice that here.\n");
-      if(!living(ob)) return notify_fail("That is not a living thing.\n");
-      look_msg(ob,str);
-      if(TP->query_ansi())
-         write(ansi_str( (string)ob->query_desc(str) ));
-      else
-         write((string)ob->query_desc(str));
-      return 1;
+       if((ob->query_hidden() ||
+           (ob->query_magic_hidden() &&
+            !TP->detecting_invis()) &&
+           ob != TP))
+           return notify_fail("You do not notice that here.\n");
+       if(!living(ob)) return notify_fail("That is not a living thing.\n");
+       look_msg(ob,str);
+       if(TP->query_ansi())
+           write(ansi_str( (string)ob->query_desc(str) ));
+       else
+           write((string)ob->query_desc(str));
+       return 1;
    }
    write("You do not notice that here.");
    return 1;
@@ -82,8 +85,8 @@ int examine_room(){
 
     blah = "";
     all = all_living(ETP);
-    
-    
+
+
     if( (effective_light(TP) + TP->query_sight_bonus()) < 1 ) {
       write("It is too dark.");
       return 1;
@@ -102,13 +105,13 @@ int examine_room(){
     }
     if(blah == "")
         blah = "You see nobody else here.";
-        
+
     tell_object(TP, blah);
     if(!TP->query_invis())
         tell_room(ETP, TPQCN+" glances around the room.", ({TP}) );
     return 1;
 }
- 
+
 void look_msg(object ob, string str) {
    if((int)TP->query_invis()) return;
    if( ob != TP ) {
@@ -119,7 +122,7 @@ void look_msg(object ob, string str) {
 */
    }
 }
- 
+
 int help() {
    write("
 %^CYAN%^NAME%^RESET%^
