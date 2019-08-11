@@ -86,23 +86,25 @@ string describe_living_contents(object *exclude) {
       if((inv[i]->query_invis() && avatarp(inv[i])) || !inv[i]->is_detectable()) {
          continue;
       }
-      if((inv[i]->query_hidden() || inv[i]->query_magic_hidden()) && !TP->detecting_invis()) {
+      if(inv[i]->query_magic_hidden() && !TP->detecting_invis()) {
          continue;
       }
+      if(inv[i]->query_hidden())
+          continue;
       set_property("information",1);
       if(!(tmp = (string)inv[i]->query_short())) {
          remove_property("information");
          if(wizardp(inv[i]) || random(101)> (int)previous_object()->query_level()) continue;
       }
-      if(!tmp) 
+      if(!tmp)
          continue;
       else  {
          if (inv[i]->query_invis()) {
             tmp = "("+tmp+")";
          }
-         if(!list[tmp]) 
+         if(!list[tmp])
             list[tmp] = ({ inv[i]});
-         else 
+         else
             list[tmp] += ({ inv[i]});
       }
    }

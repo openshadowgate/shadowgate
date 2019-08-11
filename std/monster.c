@@ -641,9 +641,11 @@ varargs void move_player(mixed dest, string msg) {
             inv = all_inventory(prev);
             for(i=0, bzbd = sizeof(inv); i<bzbd; i++) {
                if(!living(inv[i]) || inv[i] == this_object()) continue;
-               if((query_hidden() || query_magic_hidden())  && !inv[i]->detecting_invis()) {
+               if(query_magic_hidden()  && !inv[i]->detecting_invis()) {
                   continue;
                }
+               if(query_hidden())
+                   continue;
                if(!msg || msg == "") message("mmout", query_mmout(inv[i]),inv[i]);
                else {
                   if(TO->query_in_vehicle() && objectp(TO->query_in_vehicle())) {
@@ -658,9 +660,11 @@ varargs void move_player(mixed dest, string msg) {
                if(!living(inv[i])) continue;
                if(inv[i] == this_object()) continue;
 
-               if((query_hidden() || query_magic_hidden())  && !inv[i]->detecting_invis()) {
-                  continue;
+               if(query_magic_hidden() && !inv[i]->detecting_invis()) {
+                   continue;
                }
+               if(query_hidden())
+                   continue;
                if(!msg || msg == "") message("mmin",query_mmin(inv[i]),inv[i]);
                else {
                   if(TO->query_in_vehicle() && objectp(TO->query_in_vehicle())) {

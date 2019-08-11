@@ -118,7 +118,7 @@ mapping relationships;
 mapping retinue;
 int retinue_level;
 
-//Feat stuff 
+//Feat stuff
 
 mapping __FEAT_DATA=([]);
 string *player_feats=({});
@@ -373,7 +373,7 @@ int do_autowear() {
 
 void convert_to_new_class_type()
 {
-    if(!CLASS_CONVERSION) { return; }    
+    if(!CLASS_CONVERSION) { return; }
     if(avatarp(TO)) { return; }
     if(!query("new_class_type")) {
       "/d/shadowgate/conversion/conversion1.c"->summon_me(TO);
@@ -396,13 +396,13 @@ void make_new_hitpoint_rolls(object obj)
     if(!obj->query("ranger_hp_rolled") && pointerp(obj->query("hp_array")) && obj->is_class("ranger"))
       obj->delete("hp_array"); //redo ranger hp after mod -N
     if(pointerp(obj->query("hp_array"))) { return; }
-    
+
     classes = (string *)obj->query_classes();
     old = (int)obj->query_max_hp();
 
-    for (i= 0;i< sizeof(classes);i++) 
-    {        
-        for (j=1;j<=(int)obj->query_class_level(classes[i]);j++) 
+    for (i= 0;i< sizeof(classes);i++)
+    {
+        for (j=1;j<=(int)obj->query_class_level(classes[i]);j++)
         {
             level++;
             hp += "/adm/daemon/advance_d"->get_hp_bonus(classes[i],query_base_stats("constitution"),level,obj);
@@ -414,7 +414,7 @@ void make_new_hitpoint_rolls(object obj)
     for(i=0;i<(int)obj->query_character_level()+1;i++)
     {
         hp += rolls[i];
-    }        
+    }
 
     //num = "/daemon/bonus_d.c"->query_con_bonus((int)TP->query_stats("constitution"));
     //num = num * (int)TP->query_highest_level();
@@ -483,7 +483,7 @@ void redo_my_languages() {
      }
   }
   set("new_langs_set3",1);
-  
+
   if(query("new_langs_set2")) { return; }
 
   if((int)TP->query_lang("ogrish")) {
@@ -522,8 +522,8 @@ void new_hm_cap() {
       tell_object(TP,"Non-HM level cap reset to level 30.");
 	  set("no advance",30);
 	  set("new_hm_cap_set",1);
-      if(member_array("Quest for the Swords",TP->query_quests()) == -1){ return;} 
-      set("advanced_player",1);  
+      if(member_array("Quest for the Swords",TP->query_quests()) == -1){ return;}
+      set("advanced_player",1);
    }
    if(CONFIG_D->check_config("HM") == 1)
    {
@@ -534,8 +534,8 @@ void new_hm_cap() {
        set("advanced_player", 1);
    }
    return;
-}   
-   
+}
+
 void cull_levels()
 {
     int i,cap,current_exp,needed_exp,lost_exp,total_lost=0;
@@ -575,7 +575,7 @@ void cull_levels()
 
     for(i=0;i<sizeof(classes);i++)
     {
-        if(query_class_level(classes[i]) <= cap) { continue; } 
+        if(query_class_level(classes[i]) <= cap) { continue; }
         current_exp = get_general_exp(classes[i]);
         needed_exp  = ADVANCE_D->get_exp(cap+1,classes[i],TP);
         lost_exp    = current_exp - needed_exp;
@@ -588,7 +588,7 @@ void cull_levels()
     resetLevelForExp(sizeof(classes)*-1);
     info = CMD_NOTE->format_checkpoint(query_name(),"%^RESET%^%^BOLD%^"+query_name()+" lost "+implode(display,"and")+" total lost: "+total_lost+"");
     TS_D->add_value_to_array("notes",query_name(),capitalize(query_name())+", "+ctime(time())+" "+info+"");
-    
+
     switch(player_position)
     {
     case "high mortal":
@@ -611,13 +611,13 @@ void cull_levels()
     return;
 }
 
-void do_encumbrance() 
-{   
+void do_encumbrance()
+{
     int encumbrance, extra;
-    if (query_stats("strength") <= 0 ) return;    
+    if (query_stats("strength") <= 0 ) return;
     encumbrance = MAX_ENCUMBRANCE[query_stats("strength")];
-    extra = query_property("extra encumbrance");    
-    set_max_internal_encumbrance(encumbrance + extra);    
+    extra = query_property("extra encumbrance");
+    set_max_internal_encumbrance(encumbrance + extra);
     return;
 }
 
@@ -642,8 +642,8 @@ int query_start_time() { return start_time; }
 
 void set_start_time(int time) { start_time = time; }
 
-int query_down_time() { 
-   if (down_time && (down_time < time()) && (int)TO->query_age() > ((int)TO->query("down_time_age") + 7200) ) 
+int query_down_time() {
+   if (down_time && (down_time < time()) && (int)TO->query_age() > ((int)TO->query("down_time_age") + 7200) )
    {
        down_time = 0;
        TO->delete("down_time_age");
@@ -654,7 +654,7 @@ int query_down_time() {
 
 void set_down_time(int time) { down_time = time; }
 
-void remove_down_time() { 
+void remove_down_time() {
     message("system","Your PK protection from your recent return has been lifted.",TO);
     TO->delete("down_time_age");
     down_time = 0;
@@ -779,101 +779,103 @@ int set_brief() {
   return 1;
 }
 
-int set_brief_combat() 
+int set_brief_combat()
 {
     if(!mapp(user_vars)) user_vars = ([]);
     user_vars["verbose_combat"] = !user_vars["verbose_combat"];
     return 1;
 }
 
-int query_verbose_combat() 
+int query_verbose_combat()
 {
     if(!mapp(user_vars)) user_vars = ([]);
     return user_vars["verbose_combat"];
 }
 
-varargs void move_player(mixed dest, string msg) 
+varargs void move_player(mixed dest, string msg)
 {
     object prev;
     object *inv;
     string here,going,temp1,temp2,temp3;
     int i, illum, bzbd, adj, tmp;
 
-    if(objectp(ETO)) 
-    { 
-        prev = ETO; 
+    if(objectp(ETO))
+    {
+        prev = ETO;
         here = file_name(prev);
     }
     else
     {
-        here = ROOM_VOID;        
-    }    
-    
-    if (stringp(dest)) 
+        here = ROOM_VOID;
+    }
+
+    if (stringp(dest))
     {
-        if (sscanf(dest,"/%s",temp1)!=1) 
+        if (sscanf(dest,"/%s",temp1)!=1)
         {
             sscanf(here,"/%s",temp1);
             going = "";
-            
-            while (sscanf(temp1,"%s/%s",temp2,temp3)==2) 
+
+            while (sscanf(temp1,"%s/%s",temp2,temp3)==2)
             {
 	            going = going + "/"+temp2;
 	            temp1 = temp3;
             }
-      
+
             temp1 = dest;
-            if (file_size(going+"/"+temp1+".c") != -1) 
+            if (file_size(going+"/"+temp1+".c") != -1)
             {
 	            dest = going +"/"+temp1;
             }
         }
     }
-  
-    if (query_in_vehicle()) 
+
+    if (query_in_vehicle())
     {
-        if (!query_in_vehicle()->move_forward()) 
+        if (!query_in_vehicle()->move_forward())
         {
             return;
         }
     }
-  
+
     if (query_property("posed"))
         remove_property("posed");
-  
-    if ( move(dest) != MOVE_OK ) 
+
+    if ( move(dest) != MOVE_OK )
     {
         write("You remain where you are.");
         return;
     }
-  
+
     reset_hidden_seen();
-  
-    if (!hiddenp(TO) && !(avatarp(TO) && query_true_invis())) 
+
+    if (!hiddenp(TO) && !(avatarp(TO) && query_true_invis()))
     {
         if(objectp(prev)) inv = all_inventory(prev);
-        
-        for (i=0, bzbd = sizeof(inv); i<bzbd; i++) 
+
+        for (i=0, bzbd = sizeof(inv); i<bzbd; i++)
         {
             if (!living(inv[i]) || inv[i] == TO) continue;
-            if ((query_hidden() || query_magic_hidden())  && !inv[i]->detecting_invis()) 
+            if (query_magic_hidden()  && !inv[i]->detecting_invis())
             {
 	            continue;
             }
-      
+            if (query_hidden())
+	            continue;
+
             if (!msg || msg == "") message("mmout", query_mmout(inv[i]),inv[i]);
-            else 
+            else
             {
-	            if (TO->query_in_vehicle() && objectp(TO->query_in_vehicle())) 
+	            if (TO->query_in_vehicle() && objectp(TO->query_in_vehicle()))
                 {
 	                message("mout",query_cap_name()+" rides "+TO->query_in_vehicle()->query_cap_name()+" "+msg+".",inv[i]);
-	            } 
+	            }
                 else message("mout", query_mout(msg,inv[i]), inv[i]);
             }
         }
-    
+
         inv = all_inventory(ETO);
-        for (i=0, bzbd = sizeof(inv); i<bzbd; i++) 
+        for (i=0, bzbd = sizeof(inv); i<bzbd; i++)
         {
             if (!living(inv[i])) continue;
             if (inv[i] == TO) continue;
@@ -881,22 +883,24 @@ varargs void move_player(mixed dest, string msg)
             else tmp = 0;
             if (tmp > random(101)) continue;
 
-            if ((query_hidden() || query_magic_hidden())  && !inv[i]->detecting_invis()) 
+            if (query_magic_hidden()  && !inv[i]->detecting_invis())
             {
 	            continue;
             }
-            
+            if (query_hidden())
+                continue;
+
             if (!msg || msg == "") message("mmin",query_mmin(inv[i]),inv[i]);
-            else 
+            else
             {
-	            if (TO->query_in_vehicle() && objectp(TO->query_in_vehicle())) 
+	            if (TO->query_in_vehicle() && objectp(TO->query_in_vehicle()))
                 {
 	                message("min", query_cap_name()+" enters riding "+TO->query_in_vehicle()->query_cap_name()+".", inv[i]);
-	            } 
+	            }
                 else message("min",query_min(inv[i]),inv[i]);
             }
         }
-    
+
         if (query_followers())
             move_followers(prev);
     }
@@ -914,7 +918,7 @@ int id(string str)
     if( !hold ) { return hold; }
 
     if ( sscanf(str, "%s %d",stuff, junk) != 2) { stuff = str; }
-    stuff = lower_case(stuff);  
+    stuff = lower_case(stuff);
     if(objectp(TP)) { known = (string)TP->knownAs(query_true_name());   }
 
     if(objectp(shape = TO->query_property("shapeshifted")))
@@ -926,8 +930,8 @@ int id(string str)
 
     if(str=="attacker") { return hold; }
     if (!objectp(TP) || avatarp(TP) || TP == TO || !userp(TP)) { return hold; }
-    if(stringp(known)) { known = lower_case(known); }  
-    if( stuff != known && stuff != "player" && stuff != query_race()) { return 0; }  
+    if(stringp(known)) { known = lower_case(known); }
+    if( stuff != known && stuff != "player" && stuff != query_race()) { return 0; }
     return hold;
 }
 
@@ -970,7 +974,7 @@ void create() {
 		  ]);
 }
 
-void remove() 
+void remove()
 {
   if(objectp(previous_object()))
   {
@@ -988,13 +992,13 @@ void remove()
 }
 
 
-int quit() 
+int quit()
 {
     int x, cnum;
     object *inv, *spells_on;
 
-    break_all_spells();  
-    set_hidden(0);  
+    break_all_spells();
+    set_hidden(0);
     set_magic_hidden(0);
     //YUCK_D->save_inventory(TO);
     //crash_money = 0;
@@ -1002,52 +1006,52 @@ int quit()
     TO->set_property("silent_equip",1);
     message("environment", "We hope you enjoyed playing ShadowGate and will be back soon.", TO);
     message("environment", "Please consider voting for us on mudlistings.", TO);
-    message("environment", "----", TO);        
+    message("environment", "----", TO);
     if(objectp(ETO)) { set_primary_start(file_name(ETO)); }
-    else { set_primary_start("/d/shadow/room/pass/pass3"); }  
+    else { set_primary_start("/d/shadow/room/pass/pass3"); }
     if (TO->query_invis() && !wizardp(TO)) { TO->set_invis(); }
     remove_stat_bonuses();
-    save_player( query_name() );  
-    if(objectp(ETO)) { message("emote",TO->QCN+" leaves the Shadowgate Adventure!",ETO); }
-    log_file("enter", query_name()+" (quit): "+ctime(time())+"\n");    
-    //  NOTIFY_D->logon_notify("%^YELLOW%^A player leaves the ShadowGate adventure.%^RESET%^",TO);    
+    save_player( query_name() );
+    if(objectp(ETO)) { message("emote",TO->QCN+" has left the game.",ETO); }
+    log_file("enter", query_name()+" (quit): "+ctime(time())+"\n");
+    //  NOTIFY_D->logon_notify("%^YELLOW%^A player leaves the ShadowGate adventure.%^RESET%^",TO);
     NOTIFY_D->mud_notify("left",TO);
     PLAYER_D->add_player_info();
-    LAWBOUNTY_D->add_hm_info(TO);    
-    TO->move("/d/shadowgate/freezer");    
-    inv = all_inventory(TO);    
+    LAWBOUNTY_D->add_hm_info(TO);
+    TO->move("/d/shadowgate/freezer");
+    inv = all_inventory(TO);
     for(x = 0;x < sizeof(inv);x++)
     {
         if(objectp(inv[x])) { inv[x]->unequip(); }
-    }  
+    }
     YUCK_D->save_inventory(TO);
     inv=all_inventory(TO);
-    
-    for (x=0;x<sizeof(inv);x++) 
+
+    for (x=0;x<sizeof(inv);x++)
     {
         //if(objectp(inv[x])) { inv[x]->unequip(); }
         if(objectp(inv[x])) { inv[x]->remove(); }
     }
-  
-    if(static_user["pets"]) 
+
+    if(static_user["pets"])
     {
-        for(x=0;x<sizeof(static_user["pets"]);x++) 
+        for(x=0;x<sizeof(static_user["pets"]);x++)
         {
-            if(objectp(static_user["pets"][x])) 
+            if(objectp(static_user["pets"][x]))
             {
                 static_user["pets"][x]->move(VOID);
                 static_user["pets"][x]->remove();
             }
         }
     }
-    
+
     "/adm/daemon/average_age_d.c"->register_player(TO);
     remove();
     return 1;
 }
 
 
-int dead_quit() 
+int dead_quit()
 {
     int x, cnum;
     object *inv, *spells_on;
@@ -1071,16 +1075,16 @@ int dead_quit()
     PLAYER_D->add_player_info();
     LAWBOUNTY_D->add_hm_info(TO);
     inv=all_inventory(TO);
-    for (x=0;x<sizeof(inv);x++) 
+    for (x=0;x<sizeof(inv);x++)
     {
         inv[x]->unequip();
         inv[x]->remove();
     }
-    if(static_user["pets"]) 
+    if(static_user["pets"])
     {
-        for(x=0;x<sizeof(static_user["pets"]);x++) 
+        for(x=0;x<sizeof(static_user["pets"]);x++)
         {
-            if(objectp(static_user["pets"][x])) 
+            if(objectp(static_user["pets"][x]))
             {
                 static_user["pets"][x]->move(VOID);
                 static_user["pets"][x]->remove();
@@ -1090,10 +1094,10 @@ int dead_quit()
     remove();
     return 1;
 }
- 
- 
+
+
 // * New Spell Breaking Function added 10-17-2002
-void break_all_spells() 
+void break_all_spells()
 {
     int cnum = 100;
     object *spells_on,shape, spell_ob;
@@ -1107,14 +1111,14 @@ void break_all_spells()
     }
 
     if (spells_on = query_property("dispellable spells") )
-    {    
-        while (( cnum-- > 0) && (sizeof(spells_on = query_property("dispellable spells")) > 0)) 
+    {
+        while (( cnum-- > 0) && (sizeof(spells_on = query_property("dispellable spells")) > 0))
         {
             if(sizeof(spells_on)) { spell_ob = spells_on[0]; }
             if(objectp(spell_ob))
             {
                 spell_ob->removeSpellFromCaster();
-                if(objectp(spell_ob)) 
+                if(objectp(spell_ob))
                 {
                     spell_ob->dest_effect();
                 }
@@ -1126,7 +1130,7 @@ void break_all_spells()
 
     if (spells_on = query_property("spelled") )
     {
-        while ((cnum-- > 0) && (sizeof(spells_on = query_property("spelled")) > 0)) 
+        while ((cnum-- > 0) && (sizeof(spells_on = query_property("spelled")) > 0))
         {
             if(sizeof(spells_on)) { spell_ob = spells_on[0]; }
             if(objectp(spell_ob))
@@ -1165,7 +1169,7 @@ void new_body() {
   set_max_mp( (stats["intelligence"])/2 );
   set_mp( (stats["intelligence"])/2 );
 */
-  if(TO->is_class("psywarrior")){ 
+  if(TO->is_class("psywarrior")){
      mylvl = (int)TO->query_prestige_level("psywarrior");
      mylvl--;
      if(mylvl < 0) mylvl = 0;
@@ -1173,7 +1177,7 @@ void new_body() {
      newmax = PWPOINTS[mylvl];
      TP->set_max_mp(newmax);
   }
-  if(TO->is_class("psion")){ 
+  if(TO->is_class("psion")){
      mylvl = (int)TO->query_prestige_level("psion");
      mylvl--;
      if(mylvl < 0) mylvl = 0;
@@ -1245,22 +1249,22 @@ void setup() {
   real_last_on = ctime(time());
   static_user["time_of_login"] = time();
   static_user["time_of_last_logout"]=query_quit_time();
-  if(!avatarp(TO)) 
+  if(!avatarp(TO))
   {
     static_user["down_time"]=down_time;
     if (query_quit_time() + _TWO_WEEKS_IN_SECONDS_ < time() )
     {
        down_time = time() + 7200;
-       //hopefully to faciliate requiring 8 hours of ptime 
+       //hopefully to faciliate requiring 8 hours of ptime
        //after a recent return - Saide
-       TO->set("down_time_age", TO->query_age());       
+       TO->set("down_time_age", TO->query_age());
     }
     if (down_time < time() && (int)TO->query_age() > ((int)TO->query("down_time_age") + 7200))
     {
         down_time = 0;
         TO->delete("down_time_age");
     }
-  } 
+  }
   if (!body) new_body();
   if (!birth) birth = time();
   do_encumbrance();
@@ -1268,21 +1272,21 @@ void setup() {
   fix_limbs();
   tsh::initialize();
   if (!primary_start) primary_start = getenv("start");
-   if (PERMA_DEATH_D->is_perma_deathed(query_name()) || 
-	(int)TO->query("in_the_afterlife")) 
+   if (PERMA_DEATH_D->is_perma_deathed(query_name()) ||
+	(int)TO->query("in_the_afterlife"))
 	{
            tmp=new(DEATH_ROOM);
               set_property("death_room",tmp);
                  move(tmp);
 
-      tell_room(ETO,query_cap_name()+" joins the ShadowGate adventure in the AFTERLIFE.",TO);
+      tell_room(ETO,query_cap_name()+" joins in the AFTERLIFE.",TO);
       NOTIFY_D->mud_notify("joined",this_player()," (IN THE AFTERLIFE)");
 	}    else if (PRISON_D->is_imprisoned(query_name())) {
       move(JAIL);
-      tell_room(ETO,query_cap_name()+" joins the ShadowGate adventure in JAIL.",TO);
+      tell_room(ETO,query_cap_name()+" joins in JAIL.",TO);
       NOTIFY_D->mud_notify("joined",this_player()," (IN OOC JAIL)");
     }
-    else 
+    else
     {
         if((string)TO->query("my_virtual_room"))
         {
@@ -1294,21 +1298,21 @@ void setup() {
             {
                // tell_object(TO, "ob is a valid object?");
                 if(move(ob) != MOVE_OK)
-                {                              
+                {
                     TO->delete("my_virtual_room");
                     if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp)==MOVE_OK))
-           
+
                     move(ROOM_START);
                     setenv("start", primary_start);
                     TO->delete("my_virtual_room");
                 }
             }
-            else 
+            else
             {
                 TO->delete("my_virtual_room");
                // tell_object(TO, "ob is NOT a valid object.");
                 if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp)==MOVE_OK))
-                move(ROOM_START);   
+                move(ROOM_START);
                 setenv("start", primary_start);
             }
         }
@@ -1341,8 +1345,8 @@ void setup() {
   if (!query("race")) {
     set_logon_notify(1);  /* default login/out messages turned on */
     move(ROOM_SETTER);
-    tell_room(ETO,query_cap_name() + " is a new ShadowGate adventurer.",TO);
-    NOTIFY_D->logon_notify("%^YELLOW%^"+capitalize(query_name())+" is a new ShadowGate adventurer.%^RESET%^",this_player());
+    tell_room(ETO,query_cap_name() + " is a new adventurer",TO);
+    NOTIFY_D->logon_notify("%^YELLOW%^"+capitalize(query_name())+" is a new adventurer%^RESET%^",this_player());
   } else {
     if (member_array(query("race"),query("id")) == -1) {
       add_id(query_race());
@@ -1355,7 +1359,7 @@ void setup() {
   if (query("race") == "drow") {
     if(query("subrace") == "ssri tel quessir") {
       delete("subrace");
-      TO->set_hair_color("white"); 
+      TO->set_hair_color("white");
       TO->set_eye_color("red");
       tell_object(TO,"A sense of loss fills you, as you look down at your once-again blackened hands, and your bone-white hair. "
 "It seems the elven high magical rite did its work...");
@@ -1375,7 +1379,7 @@ void setup() {
 // pickup for existing druids with the dragon feat, before it was tracked as an epic feat.
   if(FEATS_D->has_feat(TO,"wild shape dragon") && !(int)TO->query_epic_feats_gained()) TO->set_epic_feats_gained(1);
 
-    sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));    
+    sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));
     if (query_property("spell_points")) holder1 = query_property("spell_points");
     if (query_property("where block")) holder2 = query_property("where block");
     remove_all_properties();
@@ -1420,11 +1424,11 @@ void setup() {
 
   init_feats();
   load_autoload_obj(); /* Truilkan@TMI 01/18/92 MOVE THIS LINE & DIE - THORN */
-    /* code for the prison and new deaths... */   
-    
-    if(!TO->query("true_quietness")) 
+    /* code for the prison and new deaths... */
+
+    if(!TO->query("true_quietness"))
     {
-        tell_room(ETO,TOQCN+" joins the ShadowGate adventure.",TO);
+        tell_room(ETO,TOQCN+" joins",TO);
         NOTIFY_D->mud_notify("joined",this_player());
     }
     do_encumbrance();
@@ -1433,7 +1437,7 @@ void setup() {
   }
   age = time() - (int)TO->query_birthday();
   PLAYER_D->add_player_info();
-  if(!TO->query("true_quietness")) 
+  if(!TO->query("true_quietness"))
   {
       log_file("enter", query_name()+" (enter): "+ctime(time())+" from "+query_ip_name()+" with\n"+query_exp()+" exp, "+query_money("platinum")+" pl, "+query_money("gold")+" gd, "+query_money("electrum")+" el, "+query_money("silver")+" sl, "+query_money("copper")+" cp\n");
   }
@@ -1457,11 +1461,11 @@ void setup() {
     used_stamina = query_max_stamina() + 100;
   }
   TO->update_channels();
-  if(avatarp(TO) && (int)TO->query_level() > 100) 
-  { 
+  if(avatarp(TO) && (int)TO->query_level() > 100)
+  {
       if(!TO->query_true_invis())
       {
-         TO->set_true_invis(); 
+         TO->set_true_invis();
       }
   }
   static_user["verbose_moves"] = 1;
@@ -1510,14 +1514,14 @@ void init_spellcaster(){
   if(!query("Greset_cl_restr")){
     // FIXME
     // set_cl_spell_level_restricted(9);
-    // FIXME 
+    // FIXME
     // unrestrict_cl_spell("all");
     set("Greset_cl_restr", 1);
   }
   if( (is_class("mage") || is_class("bard")) && !query("Greset_mage_restr")){
     // FIXME
     // set_wiz_spell_level_restricted(9);
-    // FIXME 
+    // FIXME
     // unrestrict_wiz_spell("all");
     set("Greset_mage_restr", 1);
   }
@@ -1529,7 +1533,7 @@ void init_spellcaster(){
   }
 }
 
-void heart_beat() 
+void heart_beat()
 {
     object *inv;
     string *cns;
@@ -1544,10 +1548,10 @@ void heart_beat()
         player_age += 2;
         TO->count_down_timed_tax();
     }
-    else if(avatarp(TO)) 
+    else if(avatarp(TO))
     {
         if(!TO->query("true_quietness")) player_age += 2;
-    }      
+    }
     ok_to_heal ++;
     if (query_property("fled") < time()) {
         remove_property("fled");
@@ -1577,11 +1581,11 @@ void heart_beat()
     // changed to whichever is longer as recent rules state 4 RL day minimum to rejoin plots. N, 2/12.
     if(get_pk_death_flag())
 	{
-        if(!(int)TO->query("pk_death_age")) 
+        if(!(int)TO->query("pk_death_age"))
         {
             TO->set("pk_death_age", player_age);
         }
-        if(!(int)TO->query("pk_death_time")) 
+        if(!(int)TO->query("pk_death_time"))
         {
             TO->set("pk_death_time", (time() + PK_DEATH_RL_TIME));
             TO->set_death_time(TO->query("pk_death_time"));
@@ -1597,7 +1601,7 @@ void heart_beat()
             message("environment", "Autosaving.", TO);
         inv = all_inventory(TO);
         if(objectp(ETO))
-            set_primary_start(file_name(ETO)); 
+            set_primary_start(file_name(ETO));
         else
             set_primary_start("/d/shadow/room/pass/pass3");
         save_player(query_name());
@@ -1650,7 +1654,7 @@ void heart_beat()
             ob2->remove();
         }
         static_user["stage"] = 60;
-    } 
+    }
     static_user["stage"]--;
     if (dying > 0) {
         dying --;
@@ -1664,7 +1668,7 @@ void heart_beat()
     if (ok_to_attack()) {
         continue_attack();
     }
-    if (query_parrying() && (!sizeof(query_wielded()))) 
+    if (query_parrying() && (!sizeof(query_wielded())))
     {
         if(!FEATS_D->usable_feat(TO, "unarmed parry"))
         {
@@ -1737,7 +1741,7 @@ void heart_beat()
         if (sizeof(query_attackers()) == 0) static_user["stance"]++;
         else static_user["stance"] = 0;
     }
-    
+
     if(objectp(TO))
     {
         if(FEATS_D->usable_feat(TO,"regeneration")
@@ -1768,13 +1772,13 @@ void net_dead2() {
   else { set_primary_start("/d/shadow/room/pass/pass3"); }
   save_player(query_name());
   NOTIFY_D->mud_notify("disconnected from",this_player());
-  
+
   exclude = ({TO});
 
-  if(avatarp(TO)) { 
+  if(avatarp(TO)) {
     exclude += filter_array(all_living(ETO),"is_non_immortal_player",FILTERS_D);
   }
-    message("other_action", sprintf("%s is disconnected from the ShadowGate adventure.",getParsableName()), ETO, exclude);
+    message("other_action", sprintf("%s is disconnected",getParsableName()), ETO, exclude);
 
   TO->move_player(ROOM_FREEZER);
   if (query_snoop(TO))
@@ -1805,10 +1809,10 @@ void restart_heart() {
   }
   static_user["net_died_here"] = 0;
   exclude = ({TO});
-  if(avatarp(TO)) { 
+  if(avatarp(TO)) {
     exclude += filter_array(all_living(ETO),"is_non_immortal_player",FILTERS_D);
   }
-  tell_room(ETO,getParsableName()+" rejoins the ShadowGate adventure.",exclude);
+  tell_room(ETO,getParsableName()+" rejoins",exclude);
 //  NOTIFY_D->logon_notify("%^YELLOW%^"+capitalize(getParsableName())+" rejoins the ShadowGate adventure.%^RESET%^", this_player());
   NOTIFY_D->mud_notify("rejoined",this_player());
   register_channels();
@@ -1823,13 +1827,13 @@ void resetLevelForExp(int expLoss)
     int i, hp_loss,*rolls,tmp;
 
 //  ::resetLevelForExp(expLoss);
-    if (expLoss) 
+    if (expLoss)
     { // just to point out, general_exp_adjust_perc() calls class_exp_adjust_perc() which calls this function -Ares
         log_file("resetLevelForExp",identify(PO)+" needs to consider using general_exp_adjust_perc() function?\n");
     }
 
     add_exp(expLoss);
-    
+
     if(TO->query("new_class_type"))
     {
         if(active_class = (string)TO->query("active_class"));
@@ -1847,7 +1851,7 @@ void resetLevelForExp(int expLoss)
                 	hp_loss = ADVANCE_D->get_hp_bonus(active_class,
 			query_base_stats("constitution"),query_base_character_level(),TO);
                 	set_mlevel(active_class,query_class_level(active_class) - 1);
-                  
+
                 	rolls = (int*)TO->query("hp_array");
                 	tmp = 20;
                 	for(i= 0 ; i < query_base_character_level()+1; i++)
@@ -1866,7 +1870,7 @@ void resetLevelForExp(int expLoss)
 
         setenv("TITLE", (string)ADVANCE_D->get_new_title(TO));
         return;
-    }    
+    }
 
   if(myclass = get_dual_class()) { classes = ({ myclass }); }
   else { classes = query_classes(); }
@@ -1884,25 +1888,25 @@ void resetLevelForExp(int expLoss)
   setenv("TITLE", (string)ADVANCE_D->get_new_title(TO));
 }
 
-void reset_all_status_problems() 
+void reset_all_status_problems()
 {
     "/daemon/user_d.c"->reset_all_status_problems(TO);
 }
 
-mixed get_death_place() 
-{ 
+mixed get_death_place()
+{
     if(static_user["died_here"]) { return static_user["died_here"]; }
     return 0;
 }
 
-mixed query_death_place() { return get_death_place(); }    
+mixed query_death_place() { return get_death_place(); }
 
-nomask void die() 
+nomask void die()
 {
     object ob, corpse, money_ob, *stuff, klr,*keeping=({}),*debind=({});
     string *currs,curclass, seen, msg_death, reztype;
     int tmp, hp_loss, i,j, room,num;
-    if (wizardp(TO) && !query_killable() ) 
+    if (wizardp(TO) && !query_killable() )
     {
         message("death", "You are immortal and cannot die.", TO);
         return;
@@ -1926,11 +1930,11 @@ nomask void die()
     {
         klr->remove_fines_and_bounties(TO);
     }
-    if (ETO->query_property("arena")) 
+    if (ETO->query_property("arena"))
     {
         if (wizardp(klr) || !objectp(klr) || (!interactive(klr) && !klr->query_property("rabid mon") ) ||
         (TO->query_property("safe arena") && klr->query_property("safe arena")) ||
-        environment(klr)->query_property("arena entrance") ) 
+        environment(klr)->query_property("arena entrance") )
         {
             object *arenaman;
             tell_object(TO,"You have been defeated in combat.");
@@ -1948,14 +1952,14 @@ nomask void die()
     ghost = 1;
     ob = TO;
     add_stuffed(25);
-    add_quenched(25);    
+    add_quenched(25);
     static_user["died_here"] = environment(ob);
-  
+
     if(objectp(TO) && !avatarp(TO))
     {
-        if((int)TO->query("death level")) 
+        if((int)TO->query("death level"))
         {
-            if((int)TO->query_character_level() > (int)TO->query("death level")) 
+            if((int)TO->query_character_level() > (int)TO->query("death level"))
             {
                 TO->set("death level",(int)TO->query_character_level());
             }
@@ -1992,8 +1996,8 @@ nomask void die()
     "not like your own.", TO);
     if (!avatarp(TO) || !query_disguised()) seen = getParsableName();
     else seen = query_vis_name();
-    
-    switch(random(12)+1) 
+
+    switch(random(12)+1)
     {
         case 1:
             msg_death="%^BOLD%^%^RED%^The fires of hell blaze with an unholy light as "+seen+" succumbs to death's grip!";
@@ -2034,7 +2038,7 @@ nomask void die()
     }
     "/daemon/messaging_d"->first_death_message( "death",msg_death,all_inventory(ETO), ({ TO }) );
     "/daemon/messaging_d"->handle_death_messages(TO, TO->query_property("watching_death_objects"), TO->query("watching_death_objects"));
-    
+
     corpse = new(OB_CORPSE);
     if (!avatarp(TO) || !query_disguised()) corpse->set_name(getParsableName());
     else corpse->set_name(capitalize(query_vis_name()));
@@ -2045,14 +2049,14 @@ nomask void die()
     corpse->set_was_user(1);
     cease_all_attacks();
     reset_all_status_problems();
-    break_all_spells();    
+    break_all_spells();
     "/daemon/death_effects_d"->death_notification(TO);
-    if(objectp(klr) && klr->is_player() && TO->is_player()) 
+    if(objectp(klr) && klr->is_player() && TO->is_player())
     {
         TO->set("just_been_pkilled",1); // new to hopefully prevent missing PKflags.
         remove_all_pets(); // please only remove mounts on PK death now. N, 12/12.
-    }	
-    
+    }
+
     in_vehicle = 0;
     move("/d/shadowgate/death/death_room");
     if(query_property("rally")) remove_property("rally");
@@ -2134,7 +2138,7 @@ void write_messages() {
   force_me("bboard info");
   message("login","\n%^ORANGE%^-=%^BOLD%^<%^BOLD%^%^WHITE%^Voting for ShadowGate%^ORANGE%^>%^RESET%^%^ORANGE%^=-%^RESET%^", TO);
   message("login","%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
-  message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);  
+  message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);
   message("login","", TO);
 
   mail_stat = (mapping)LOCALPOST_D->mail_status(query_name());
@@ -2149,10 +2153,10 @@ void write_messages() {
       message("login", "\n        >>> You have reports in /log/reports/"+query_name()+" <<<", TO);
   }
   if (down_time) {
-     message("login", 
+     message("login",
 @GARRETT
-%^YELLOW%^You've been away for more than two weeks! We've given you a temporary PK 
-protection to help you get back in the game, it will expire 
+%^YELLOW%^You've been away for more than two weeks! We've given you a temporary PK
+protection to help you get back in the game, it will expire
 in one calendar days and two hours of play time, unless you are away for another two weeks...
 GARRETT
      , TO );
@@ -2181,29 +2185,29 @@ string query_title() {
 
   if ((avatarp(TO) || wizardp(TO)) && query_disguised()) return ::query_short();
   if (query_ghost()) return "A ghost";
-  
+
   if(query_death_flag()) { mod = "%^BOLD%^%^RED%^D %^GREEN%^"; }
   if(get_pk_death_flag() || TO->query("no pk")) mod = "%^BOLD%^%^MAGENTA%^PK %^GREEN%^";
   if (newbiep(TO)) mod = "%^BOLD%^%^CYAN%^N %^GREEN%^";
-  if(objectp(TP) && TP->knownAs(query_true_name())) 
+  if(objectp(TP) && TP->knownAs(query_true_name()))
   {
-    if(wizardp(TO) || TO == TP) 
+    if(wizardp(TO) || TO == TP)
     {
         known = query_name();
-    } else 
+    } else
     {
         known = TP->knownAs(query_true_name());
     }
   }
-  else 
+  else
   {
-    if(wizardp(TO)) 
+    if(wizardp(TO))
     {
         known = query_name();
-    }   
-    else 
+    }
+    else
     {
-        str = getWholeDescriptivePhrase();     
+        str = getWholeDescriptivePhrase();
         if(stringp(mod)) return (mod + str);
         return str;
     }
@@ -2212,11 +2216,11 @@ string query_title() {
   if( wizardp(TO) && TO->query("wiz titles") )
   {
     str = getenv( "TITLE" );
-    if ( !str ) 
+    if ( !str )
     {
         str = capitalize(known);
-    } 
-    else 
+    }
+    else
     {
         if( !sscanf(str, "%s$N%s", foo,fii) )
             str = capitalize(known) + " " + str;
@@ -2288,7 +2292,7 @@ string query_short() {
       descr = descr + "blindfolded ";
     }
 // added by Styx 5/22/03 - let's see if this works correctly often enough to be useful
-    if (query_paralyzed()) {  
+    if (query_paralyzed()) {
       descr = descr + "immobile";
     }
     descr = descr + ")";
@@ -2298,7 +2302,7 @@ string query_short() {
   }
   if(in_edit() || in_input())
      descr = descr + " %^BOLD%^%^CYAN%^*in edit*%^RESET%^";
-  if(query_property("working")) 
+  if(query_property("working"))
      descr = descr + " %^CYAN%^("+query_property("working")+")%^RESET%^";
   if(query_property("added short"))
   {
@@ -2325,7 +2329,7 @@ mixed *local_commands() {
   return commands();
 }
 
-nomask string query_position() 
+nomask string query_position()
 {
     if(member_group(this_object()->query_true_name(), "law")) return "Admin";
     return position;
@@ -2336,7 +2340,7 @@ int query_prestige_level(string the_class)
     string *base,*classes;
     object class_ob;
     int i,class_level;
-    
+
     classes = TO->query_classes();
     if(sizeof(classes == 1)) { return TO->query_class_level(the_class); }
     for(i=0;i<sizeof(classes);i++)
@@ -2349,7 +2353,7 @@ int query_prestige_level(string the_class)
         class_level = class_ob->caster_level_calcs(TO,the_class);
     }
     if(!class_level) { return TO->query_class_level(the_class); }
-    return class_level;    
+    return class_level;
 }
 
 nomask int query_level() {
@@ -2447,67 +2451,67 @@ void save_messages(string msg_class, string msg) {
   }
 }
 
-void receive_message(string msg_class, string msg) 
+void receive_message(string msg_class, string msg)
 {
     string *words, str, pre, post, intro, who, blah, blah2, known,the_lang,tmp="",temp, omsg, pname, owho;
     int i, max, x, do_wrap,first_words,second_words, true_msg;
     function fp;
     object ob;
     mapping TermInfo;
-    
+
     if(!stringp(msg)) { return; }
-    
-    while(sscanf(msg,"%s$&$%s$&$%s",blah,who,blah2) > 1) 
+
+    while(sscanf(msg,"%s$&$%s$&$%s",blah,who,blah2) > 1)
     {
-        if(!stringp(who)) { error("bad message "+msg); }      
+        if(!stringp(who)) { error("bad message "+msg); }
         owho = who;
         who = FILTERS_D->filter_colors(who);
         if (!avatarp(TO) && query_blind() && objectp(ob=find_player(lower_case(who))) && (!wizardp(ob)) )
         {
             known = "Someone";
         }
-        else 
+        else
         {
             if(!avatarp(TO)) { known = knownAs(who); }
             else { known = capitalize(who); }
-            
+
             if(!known)
             {
 	            ob = find_player(who);
-	            if(!objectp(ob) || wizardp(ob) || avatarp(TO)) 
+	            if(!objectp(ob) || wizardp(ob) || avatarp(TO))
                 {
 	                known = USERCALL->user_call(who,"getWholeDescriptivePhrase");
 	                if(!stringp(known)) known = capitalize(who);
-	            } 
-                else 
+	            }
+                else
                 {
 	                known = capitalize(ob->getWholeDescriptivePhrase());
 	            }
             }
-            else 
+            else
             {
 	            known = capitalize(known);
             }
-        }    
-        msg = replace_string(msg, "$&$"+owho+"$&$",known);  
-    }    
+        }
+        msg = replace_string(msg, "$&$"+owho+"$&$",known);
+    }
     //msg += "who = "+who + " and msg_class = "+msg_class;
-    switch (msg_class) 
+    switch (msg_class)
     {
-    case "room_exits": 
-        msg = "%^BOLD%^%^CYAN%^"+msg; 
+    case "room_exits":
+        msg = "%^BOLD%^%^CYAN%^"+msg;
         break;
-    case "smell": 
-        msg = "%^ORANGE%^"+msg; 
+    case "smell":
+        msg = "%^ORANGE%^"+msg;
         break;
-    case "listen": 
-        msg = "%^GREEN%^"+msg; 
+    case "listen":
+        msg = "%^GREEN%^"+msg;
         break;
-    case "tell": 
+    case "tell":
         if (sscanf(msg, "%s:%s", pre, post) == 2)
         msg = "%^BOLD%^RED%^"+pre+":%^RESET%^"+post;
         break;
-    case "shout": 
+    case "shout":
         if (sscanf(msg, "%s:%s", pre, post) == 2)
         msg = "%^BOLD%^BLUE%^"+pre+":%^RESET%^"+post;
         break;
@@ -2515,13 +2519,13 @@ void receive_message(string msg_class, string msg)
     case "min":
     case "mmout":
     case "mout":
-        msg = "%^BOLD%^GREEN%^"+msg; 
+        msg = "%^BOLD%^GREEN%^"+msg;
         break;
     case "living_item": case "Nliving_item":
-        msg = "%^BOLD%^RED%^"+msg; 
+        msg = "%^BOLD%^RED%^"+msg;
         break;
-    case "inanimate_item": case "Ninanimate_item": 
-        msg = "%^BOLD%^MAGENTA%^"+msg; 
+    case "inanimate_item": case "Ninanimate_item":
+        msg = "%^BOLD%^MAGENTA%^"+msg;
         break;
     case "animal_emote":
         msg = "%^RESET%^%^YELLOW%^"+msg;
@@ -2532,10 +2536,10 @@ void receive_message(string msg_class, string msg)
         {
             words = explode(msg,"#@&");
 		    //safeguard to see if this fixes shutdown problem which uses emote to deliver the message that you quit - Saide
-            ob = find_player(who);   
-            if(objectp(ob)) the_lang = (string)ob->query_spoken();  
-            else if(objectp(TP)) the_lang = (string)TP->query_spoken();  
-		    else the_lang = "common"; 
+            ob = find_player(who);
+            if(objectp(ob)) the_lang = (string)ob->query_spoken();
+            else if(objectp(TP)) the_lang = (string)TP->query_spoken();
+		    else the_lang = "common";
 
             if(sizeof(words))
             {
@@ -2565,7 +2569,7 @@ void receive_message(string msg_class, string msg)
                                 if(stringp(temp)) temp = "daemon/language_d"->animal_translate(temp,the_lang,TO);
                                 else temp = "daemon/language_d"->translate(words[i], the_lang, TO);
                             }
-                        
+
                             tmp += "\""+temp+"\"";
                         }
                     }
@@ -2576,56 +2580,56 @@ void receive_message(string msg_class, string msg)
         }
         break;
     }
-    
+
     if(!stringp(str=getenv("SCREEN"))) { str = "75"; }
     omsg = msg;
     x = atoi(str);
     //msg += "\nmsg_class = "+msg_class;
-    if (msg_class[0] == 'N') { msg_class = msg_class[1..sizeof(msg_class)-1]; }  
-    else if (msg_class != "prompt") 
-    { 
+    if (msg_class[0] == 'N') { msg_class = msg_class[1..sizeof(msg_class)-1]; }
+    else if (msg_class != "prompt")
+    {
         TermInfo = "/daemon/user_d.c"->myTerm(TO);
         msg = terminal_colour(msg + "%^RESET%^\n", TermInfo, x, 0);
         //msg += "%^RESET%^";
-        //msg = wrap(msg, x); 
+        //msg = wrap(msg, x);
     }
-    if (msg_class == "system" || msg_class == "more" || msg_class == "logon") 
+    if (msg_class == "system" || msg_class == "more" || msg_class == "logon")
     {
         if(msg_class == "logon") { TermInfo = "/daemon/user_d.c"->myTerm(TO, 1); }
         else TermInfo = "/daemon/user_d.c"->myTerm(TO);
         msg = terminal_colour(msg + "%^RESET%^\n", TermInfo, x, 0);
         receive(msg);
         return;
-    }  
+    }
     if (query_blocked(msg_class) && member_array(msg_class, OVERRIDE_IGNORE_MSG) == -1) { return; }
-    if (msg_class == "say" || msg_class == "whisper" || msg_class == "reply" || msg_class == "party" || msg_class == "honey" || msg_class == "tell") 
+    if (msg_class == "say" || msg_class == "whisper" || msg_class == "reply" || msg_class == "party" || msg_class == "honey" || msg_class == "tell")
     {
         if(sscanf(msg,"%s:%s:%s",intro, pname, str) != 3 && msg_class == "tell")
         {
             msg = msg;
         }
-        else 
+        else
         {
             if(msg_class != "tell") sscanf(msg,"%s:%s",intro,str);
-            ob = find_player(who);   
+            ob = find_player(who);
             if(!objectp(ob) && msg_class == "tell") the_lang = "wizish";
-            else if(objectp(ob)) the_lang = (string)ob->query_spoken();  
-            else if(objectp(TP)) the_lang = (string)TP->query_spoken();  
-            else the_lang = "common"; 
+            else if(objectp(ob)) the_lang = (string)ob->query_spoken();
+            else if(objectp(TP)) the_lang = (string)TP->query_spoken();
+            else the_lang = "common";
             // tell_object(TO, "who = "+identify(who));
             if(TO->query_property("understand_all_langs") || wizardp(TO)) { str = str; }
             else if(objectp(ob) && FEATS_D->usable_feat(ob, "tongue of the sun and moon")) { str = str; }
             else
-            {       
-                if(member_array(the_lang,ANIMAL_LANGS) == -1)            
-                { 
+            {
+                if(member_array(the_lang,ANIMAL_LANGS) == -1)
+                {
                     if(objectp(ob) && !FEATS_D->usable_feat(TO, "tongue of the sun and moon")) str = "/daemon/language_d"->translate(str, the_lang, ob);
                     str = "/daemon/language_d"->translate(str, the_lang, TO);
                     if(stringp(pname) && msg_class == "tell") msg = intro+":"+pname+": "+str+"\n";
-                    else msg = intro+":"+str+"\n"; 
+                    else msg = intro+":"+str+"\n";
                 }
-                else 
-                { 
+                else
+                {
                     first_words = sizeof(explode(str," "));
                     if(objectp(ob) && !FEATS_D->usable_feat(TO, "tongue of the sun and moon")) str = "daemon/language_d"->animal_translate(str,the_lang,ob);
                     str = "/daemon/language_d"->animal_translate(str, the_lang, TO);
@@ -2647,43 +2651,43 @@ void receive_message(string msg_class, string msg)
                 } // animal languages are handled differently -Ares
             }
         }
-//Next three lines Added by Lujke to make it possible to make 
+//Next three lines Added by Lujke to make it possible to make
 // players obey commands when drugged - also see obey_command func
         if (TO != ob && query_property("compliant")){
-                call_out("obey_command", 1, str, TP); 
-        } 
+                call_out("obey_command", 1, str, TP);
+        }
     }
-        
-    if (msg_class == "reading") 
+
+    if (msg_class == "reading")
     {
         msg = "daemon/language_d"->translate(msg,PO->query_language(),TO,1) + "\n";
     }
-    
+
     if (!static_user["term_info"]) { reset_terminal(); }
-  
+
     for (i=0, max=sizeof(words=explode(msg, "%^")); i<max; i++)
     {
-        if (static_user["term_info"][words[i]]) 
+        if (static_user["term_info"][words[i]])
         {
             words[i] = static_user["term_info"][words[i]];
         }
     }
-  
-    if (query_unconscious() && (member_array(msg_class, OVERRIDE_IGNORE_MSG) == -1 || msg_class == "say")&& !avatarp(TO)) 
+
+    if (query_unconscious() && (member_array(msg_class, OVERRIDE_IGNORE_MSG) == -1 || msg_class == "say")&& !avatarp(TO))
     {
         string name;
 
-        if (msg_class == "tell") 
+        if (msg_class == "tell")
         {
-            if (objectp(ETO)) 
+            if (objectp(ETO))
             {
 	            name = base_name(ETO);
 	            if (name[0..18] != "/d/shadowgate/death") { return; }
             }
-        } 
+        }
         else { return; }
     }
-  
+
     if (pointerp(static_user["saveable"]) && member_array(msg_class,static_user["saveable"]) != -1)
     {
         save_messages(msg_class, omsg);
@@ -2724,17 +2728,17 @@ void obey_command(string command, object commander){
     command = replace_string(command, "\n", "");
 
     if (!commander->isKnown(query_name())){
-        return;     
-    } 
+        return;
+    }
     if ((string)commander->knownAs(query_name())!=name){
-        return;     
-    }        
+        return;
+    }
     sscanf(command, "%s %s", comm, lang);
     if(member_array(comm,SAFE_DOM_CMDS)<0){
       tell_object (commander, "You can't force another player to do that, as"
         +" it would be open to abuse. Sorry.");
         return;
-    }   
+    }
     if (query_paralyzed()){
         para_message = query_paralyze_message();
         remove_paralyzed();
@@ -2876,7 +2880,7 @@ void set_mysites(string *borg) {
 void clear_quests()
 {
     if(!objectp(TO)) return;
-    if(!quests || !pointerp(quests)) 
+    if(!quests || !pointerp(quests))
     {
         quests = ({});
         return;
@@ -2886,7 +2890,7 @@ void clear_quests()
     quests = ({});
 }
 
-string *query_quests() 
+string *query_quests()
 {
     if (!quests) quests = ({});
     if(sizeof(quests)) CHAMPION_D->mass_monster_quests(quests);
@@ -2899,13 +2903,13 @@ int remove_quest(string str)
     if(!quests || !pointerp(quests)) quests = ({});
     if(!stringp(str) || member_array(str, quests) == -1) return 0;
     quests -= ({str});
-    log_file("quests", query_true_name() +" had "+str+" removed from "+TO->QP+ 
+    log_file("quests", query_true_name() +" had "+str+" removed from "+TO->QP+
     " quest list on "+ctime(time())+". Previous objects = "+identify(previous_object(-1))+
     ".%^RESET%^\n");
     return 1;
 }
 
-int set_quest(string str) 
+int set_quest(string str)
 {
     if (!quests || !pointerp(quests)) quests = ({});
     CHAMPION_D->add_monster_quest(str);
@@ -2918,7 +2922,7 @@ int set_quest(string str)
     return 1;
 }
 
-void revive(int xploss) 
+void revive(int xploss)
 {
     TO->delete("just_been_pkilled");
     //should set 25% exp tax on death for two hours - then an additional 5% on each death within two hours
@@ -3111,19 +3115,19 @@ void hide(int x) {
  * Add mini quest: name, exp, description.
  * If no description specified it will use name for it.
  */
-varargs int set_mini_quest(string str, int x, string desc) 
+varargs int set_mini_quest(string str, int x, string desc)
 {
     if(!objectp(TP))
-        return 0; 
+        return 0;
     if(!objectp(ETP))
-        return 0; 
+        return 0;
     if (!mini_quests)
         mini_quests = ([]);
     if(!str)
         return 0;
     CHAMPION_D->add_monster_quest(str);
     if(!desc)
-        desc = str;  
+        desc = str;
     if(mini_quests[str])
         return 0;
     else
@@ -3147,7 +3151,7 @@ int remove_mini_quest(string which) {
     return 1;
 }
 
-string *query_mini_quests() 
+string *query_mini_quests()
 {
     string *res;
     if (!mini_quests) res = ({});
@@ -3206,12 +3210,12 @@ static private register_channels()
     return;
 }
 
-string *query_restricted_channels() 
-{ 
+string *query_restricted_channels()
+{
     if(!pointerp(restricted_channels)) restricted_channels = ({});
     restricted_channels = distinct_array(restricted_channels);
     restricted_channels -= ({0});
-    return restricted_channels; 
+    return restricted_channels;
 }
 
 void restrict_channel(string ch) {
@@ -3240,15 +3244,15 @@ string query_first_site() {
 }
 
 //modified to allow saving in boats/other virtual rooms - Saide
-void set_primary_start(string str) 
+void set_primary_start(string str)
 {
     object ob;
     string file;
 
     if (!(ob = find_object_or_load(str))) return;
-    if(!clonep(ob)) 
+    if(!clonep(ob))
     {
-        if((string)TO->query("my_virtual_room")) 
+        if((string)TO->query("my_virtual_room"))
         {
             "/daemon/virtual_room_d.c"->remove_from_room_info((string)TO->query("my_virtual_room"), TO);
         }
@@ -3258,16 +3262,16 @@ void set_primary_start(string str)
         if(!virtualp(ob))
         {
             if(!objectp(TO)) return;
-            "/daemon/virtual_room_d.c"->register_virtual_room(ob);        
+            "/daemon/virtual_room_d.c"->register_virtual_room(ob);
             return;
         }
     }
-    
+
     if ( base_name(ob) == ROOM_FREEZER ) return;
-    if ( base_name(ob) == "/d/shadowgate/void" ) return;        
+    if ( base_name(ob) == "/d/shadowgate/void" ) return;
     if (base_name(ob) == JAIL ) return;
 //    if ( base_name(ob)[0..11] == "/d/av_rooms/") return;
-    setenv("start", primary_start = str);   
+    setenv("start", primary_start = str);
 }
 
 string query_primary_start() {
@@ -3308,14 +3312,14 @@ int query_thief_skill(string name) {
   return 0;
 
 //  if(!thief_skill_bonuses) thief_skill_bonuses = ([]);
-//  if(thief_skill_bonuses[name]) { 
+//  if(thief_skill_bonuses[name]) {
 //        return thief_skills[name] + thief_skill_bonuses[name];
 //  }
 //  else return thief_skills[name];
 }
 
 mapping query_thief_skill_map() {   // added to query full set *Styx*  8/20/05
-//  if(!thief_skills) 
+//  if(!thief_skills)
       return ([]);
 //  return thief_skills;
 }
@@ -3494,12 +3498,12 @@ void reduce_my_skills(string myclass) {
   return;
 }
 
-void reduce_guild_level(string myclass) 
+void reduce_guild_level(string myclass)
 {
     if(TO->query("new_class_type"))
     {
 	  //dont need to set this to -1 because whenever we do query_true_guild_level()
-	  //if guild level is > class level, it sets guild level to class 
+	  //if guild level is > class level, it sets guild level to class
 	  //level - the code above - resetLevelForExp - reduces mlevel (which is class level)
 	  //before this is called - Saide
         //TO->set_guild_level(class,(int)TO->query_true_guild_level(class)-1);
@@ -3508,17 +3512,17 @@ void reduce_guild_level(string myclass)
     }
     else
     {
-        if (myclass == "paladin" || myclass == "ranger") 
+        if (myclass == "paladin" || myclass == "ranger")
         {
-            if (myclass == "ranger") 
+            if (myclass == "ranger")
             {
                 TO->set_guild_level("cleric",(int)TO->query_class_level("ranger") - 7);
-            } 
-            else if (myclass == "paladin") 
+            }
+            else if (myclass == "paladin")
             {
                 TO->set_guild_level("cleric",(int)TO->query_class_level("paladin") - 8);
-            } 
-            else if (myclass == "antipaladin") 
+            }
+            else if (myclass == "antipaladin")
             {
                 TO->set_guild_level("cleric",(int)TO->query_class_level("antipaladin") - 8);
             }
@@ -3621,7 +3625,7 @@ string *query_rem_obs_sort() {
 
 mapping query_rem_rooms()
 {
-    //function that clears invalid rooms - IE rooms we kept in the game 
+    //function that clears invalid rooms - IE rooms we kept in the game
     //for one reason or another but that are no longer accessible to characters
     //Saide, December 2016
     rem_rooms = "/daemon/user_d.c"->check_rem_rooms(TO, rem_rooms_sort, rem_rooms);
@@ -3644,7 +3648,7 @@ object query_rem_room(string room)
 
     if(!destfile)
         return 0;
-    
+
     return destobj;
 }
 
@@ -3700,7 +3704,7 @@ string query_cap_name() {
      if(strsrch(junk, "/daemon/combat_d") == -1 || strsrch(junk, "/daemon/crayon_d") == -1) return hold;
      if(!avatarp(TO)) return hold;
   }*/
-    
+
   if (query_invis()) return hold;
 
   if(TO->query_ghost()) return hold;
@@ -3768,7 +3772,7 @@ int query_blinking() {
   return static_user["blinking"];
 }
 
-void set_blinking(int i) 
+void set_blinking(int i)
 {
     int num;
     if(FEATS_D->usable_feat(TO,"slippery caster"))
@@ -3960,7 +3964,7 @@ void convert_relationships()
 
     if(!objectp(TO)) { return; }
     if(avatarp(TO)) { return; }
-    if(TO->query("relationships_converted")) { return; }    
+    if(TO->query("relationships_converted")) { return; }
 
     temp = (mapping)TP->getRelationships();
     if(!sizeof(keys(temp))) { relationships = ([]);}
@@ -4039,7 +4043,7 @@ int remove_relationship(string name)
 
 mapping getRelationships()
 {
-    if (!relationships) 
+    if (!relationships)
     {
         relationships = ([]);
     }
@@ -4050,9 +4054,9 @@ int isKnown(string who)
 {
     mapping profiles = ([]);
     object obj;
-    string *profile_names=({}),profile;    
+    string *profile_names=({}),profile;
 
-    if (!relationships) 
+    if (!relationships)
     {
         relationships = ([]);
         return 0;
@@ -4091,10 +4095,10 @@ string knownAs(string who)
     string profile;
     object obj;
 
-    if(!isKnown(who)) { return 0; }  
+    if(!isKnown(who)) { return 0; }
 
     if(!TO->query("relationships_converted"))
-    {    
+    {
         return lower_case(relationships[who]);
     }
     else
@@ -4117,17 +4121,17 @@ string realName(string who)
 {
     mapping temp=([]);
     string *stuff,*names=({}),*profiles=({});
-    int i,j;    
+    int i,j;
 
     if(!TO->query("relationships_converted"))
     {
         stuff = keys(relationships);
         if(!stringp(who)) { return ""; }
         who = lower_case(who);
-      
-        for(i=0;i<sizeof(stuff);i++) 
+
+        for(i=0;i<sizeof(stuff);i++)
         {
-            if(lower_case(knownAs(stuff[i])) == who) 
+            if(lower_case(knownAs(stuff[i])) == who)
             {
                 return lower_case(stuff[i]);
             }
@@ -4155,32 +4159,32 @@ string realName(string who)
 string getNameAsSeen(object ob)
 {
     string known;
-    if(!objectp(ob)) 
+    if(!objectp(ob))
     {
-        if(objectp(TP)) 
+        if(objectp(TP))
         {
             ob = TP;
         }
     }
 
-    if(objectp(ob) && ob->knownAs(query_true_name())) 
+    if(objectp(ob) && ob->knownAs(query_true_name()))
     {
-        if(wizardp(TO)) 
+        if(wizardp(TO))
         {
             known = query_name();
-        } 
-        else 
+        }
+        else
         {
             known = ob->knownAs(query_true_name());
         }
-    } 
-    else 
+    }
+    else
     {
-        if(wizardp(TO)) 
+        if(wizardp(TO))
         {
             known = query_name();
-        } 
-        else 
+        }
+        else
         {
             return getWholeDescriptivePhrase();
         }
@@ -4224,9 +4228,9 @@ string getWholeDescriptivePhrase(){
   string phrase = getDescriptivePhrase();
   object shape;
 
-  if(!stringp(phrase)) 
+  if(!stringp(phrase))
   {
-    if(query_race() == "voadkyn") 
+    if(query_race() == "voadkyn")
     {
       phrase = "$B $G $R with $E eyes";
     }
@@ -4234,7 +4238,7 @@ string getWholeDescriptivePhrase(){
       phrase = "$B $G $R with $E eyes and $H hair";
   }
   if(strsrch(phrase,"$R") == -1)
-  { 
+  {
      if( (strsrch(phrase,"$SR") != -1) && query("subrace") !=0)
      {
         phrase = phrase;
@@ -4252,12 +4256,12 @@ string getWholeDescriptivePhrase(){
   str = replace_string(str,"$E",((query_eye_color()==0)?"":query_eye_color()));
   str = replace_string(str,"$H",(query_hair_color()==0?"":query_hair_color()));
   str = replace_string(str,"$G",query_gender());
-  
+
   if(objectp(shape = (object)query_property("shapeshifted")))
   {
       the_race = (string)shape->query_shape_race();
   }
-  
+
   if(!the_race)
   {
       if(query("subrace") != 0)
@@ -4320,16 +4324,16 @@ int query_death_age() {  return death_age; }
 void set_death_age(int x) { death_age = x; }
 
 void set_pk_death_flag() { pk_death_flag = 1; }
-void remove_pk_death_flag() 
-{ 
+void remove_pk_death_flag()
+{
 	if(objectp(TO)) TO->delete("pk_death_age");
 	if(objectp(TO)) TO->delete("pk_death_time");
-	pk_death_flag = 0; 
+	pk_death_flag = 0;
 }
 
 int get_pk_death_flag() { return ( pk_death_flag || down_time); }
 
-int query_death_flag() 
+int query_death_flag()
 {
    if(!avatarp(TO) && query("death level"))
    {
@@ -4350,7 +4354,7 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
   int _total_light;
   int _sight_bonus;
   int calc;
-  
+
   if (!objectp(TO)) return 0;
   if (!objectp(whichroom)) return 0;
   if (whichroom->query_property("ooc_room")) return 0;
@@ -4358,10 +4362,10 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
   if (geteuid(whichroom) == "Shadowgate") return 0;
   _total_light=total_light(whichroom);
   _sight_bonus=query_sight_bonus();
-  
+
   if (!D_BUG_D->user_new_light())
     return (_total_light + _sight_bonus - actionbonus < 0);
-  
+
   if (_sight_bonus * _total_light < 0)
     calc = _sight_bonus + _total_light;
   else
@@ -4373,7 +4377,7 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
     calc *= -1;
     _total_light *= -1;
   }
-  
+
   if (intp(actionbonus)) {
     if (calc > (0+actionbonus)) {
 
@@ -4774,7 +4778,7 @@ void remove_temporary_feat(string feat)
 
 
 
-void tidy_feats() 
+void tidy_feats()
 { //this function reassigns all feats in order rather than leaving holes when they are abandoned.
     mapping tempmap = ([]), bonusmap, othermap, hybridmap;
     int newpoint, i, j, MAX;
@@ -4785,15 +4789,15 @@ void tidy_feats()
     //start with reallocating the "other" feats; general player feats. These are 1, then every 3.
     newpoint = 1;
     othermap = query_other_feats();
-    
-    if(sizeof(keys(othermap))) 
+
+    if(sizeof(keys(othermap)))
     {
-        for(j = 0;j < MAX;j++) 
+        for(j = 0;j < MAX;j++)
         {
             subarray = othermap[j];
-            if(sizeof(subarray)) 
+            if(sizeof(subarray))
             {
-                for(i=0;i<sizeof(subarray);i++) 
+                for(i=0;i<sizeof(subarray);i++)
                 {
                     tempmap[newpoint] = ({ subarray[i] });
                     if(newpoint == 1) newpoint = 3;
@@ -4802,21 +4806,21 @@ void tidy_feats()
             }
         }
     }
-    
+
     set_other_feats(tempmap);
 
     //then run reallocation on combat feats if they have them. These are at 1 & every 5 thereafter; from 1 as fighter, from 21 as all other melee.
     subset = query_classes(); // this is to get the current level to assign the feat to
-    
-    if(sizeof(subset)) 
+
+    if(sizeof(subset))
     {
         newpoint = 0;
-        for(i=0;i<sizeof(subset);i++) 
+        for(i=0;i<sizeof(subset);i++)
         {
             if(member_array(subset[i],MELEECLASSES) == -1) newpoint += query_class_level(subset[i]);
-            else 
+            else
             {
-                if(subset[i] != "fighter" && subset[i] !=  "paladin") 
+                if(subset[i] != "fighter" && subset[i] !=  "paladin")
                 {
                     if(query_class_level(subset[i]) > 20) newpoint += 20;
                     else newpoint += query_class_level(subset[i]);
@@ -4827,15 +4831,15 @@ void tidy_feats()
         tempmap = ([]);
         newpoint += 1; // starting 1 level into each bracket!
         bonusmap = query_bonus_feats();
-      
-        if(sizeof(keys(bonusmap))) 
+
+        if(sizeof(keys(bonusmap)))
         {
-            for(j = 0;j < MAX;j++) 
+            for(j = 0;j < MAX;j++)
             {
                 subarray = bonusmap[j];
-                if(sizeof(subarray)) 
+                if(sizeof(subarray))
                 {
-                    for(i=0;i<sizeof(subarray);i++) 
+                    for(i=0;i<sizeof(subarray);i++)
                     {
                         tempmap[newpoint] = ({ subarray[i] });
                         newpoint = newpoint+5;
@@ -4843,18 +4847,18 @@ void tidy_feats()
                 }
             }
         }
-      
+
         set_bonus_feats(tempmap);
 
         //then run reallocation on sorc feats if they have them. These are every 5.
         newpoint = 0;
-      
-        for(i=0;i<sizeof(subset);i++) 
+
+        for(i=0;i<sizeof(subset);i++)
         {
             if(member_array(subset[i],CASTERCLASSES) == -1) newpoint += query_class_level(subset[i]);
-            else 
+            else
             {
-                if(subset[i] != "psion" && subset[i] != "sorcerer") 
+                if(subset[i] != "psion" && subset[i] != "sorcerer")
                 {
                     if(query_class_level(subset[i]) > 20) newpoint += 20;
                     else newpoint += query_class_level(subset[i]);
@@ -4865,15 +4869,15 @@ void tidy_feats()
         tempmap = ([]);
         newpoint += 1; // starting 1 level into each bracket!
         bonusmap = query_magic_feats();
-        
-        if(sizeof(keys(bonusmap))) 
+
+        if(sizeof(keys(bonusmap)))
         {
-            for(j = 0;j < MAX;j++) 
+            for(j = 0;j < MAX;j++)
             {
                 subarray = bonusmap[j];
-                if(sizeof(subarray)) 
+                if(sizeof(subarray))
                 {
-                    for(i=0;i<sizeof(subarray);i++) 
+                    for(i=0;i<sizeof(subarray);i++)
                     {
                         tempmap[newpoint] = ({ subarray[i] });
                         newpoint = newpoint+5;
@@ -4883,19 +4887,19 @@ void tidy_feats()
         }
         set_magic_feats(tempmap);
     }
-    
+
     //then run reallocation on hybrid feats if they have them. These are every 5 but need fixed to support psywarriors later.
     subset = query_classes(); // this is to get the current level to assign the feat to
-    
-    if(sizeof(subset)) 
+
+    if(sizeof(subset))
     {
         newpoint = 0;
-        for(i=0;i<sizeof(subset);i++) 
+        for(i=0;i<sizeof(subset);i++)
         {
             if(member_array(subset[i],HYBRIDCLASSES) == -1) newpoint += query_class_level(subset[i]);
-            else 
+            else
             {
-                if(subset[i] != "psywarrior") 
+                if(subset[i] != "psywarrior")
                 {
                     if(query_class_level(subset[i]) > 20) newpoint += 20;
                     else newpoint += query_class_level(subset[i]);
@@ -4906,15 +4910,15 @@ void tidy_feats()
         tempmap = ([]);
         newpoint += 1; // starting 1 level into each bracket!
         hybridmap = query_hybrid_feats();
-      
-        if(sizeof(keys(hybridmap))) 
+
+        if(sizeof(keys(hybridmap)))
         {
-            for(j = 0;j < MAX;j++) 
+            for(j = 0;j < MAX;j++)
             {
                 subarray = hybridmap[j];
-                if(sizeof(subarray)) 
+                if(sizeof(subarray))
                 {
-                    for(i=0;i<sizeof(subarray);i++) 
+                    for(i=0;i<sizeof(subarray);i++)
                     {
                         tempmap[newpoint] = ({ subarray[i] });
                         newpoint = newpoint+5;
@@ -4928,7 +4932,7 @@ void tidy_feats()
 
 
 
-string query_real_age_cat() 
+string query_real_age_cat()
 {
     string myfile, myrace;
     int *agecats;
@@ -4976,7 +4980,7 @@ int age_mod(string stat) {
    VENERABLE = ({ -3, -3, -3,  3,  3,  3 });
    agebracket = query_real_age_cat();
 
-    switch(stat) 
+    switch(stat)
     {
         case "strength": i = 0; break;
         case "dexterity": i = 1; break;
@@ -4986,16 +4990,16 @@ int age_mod(string stat) {
         case "charisma": i = 5; break;
         default: return 0; break;
     }
-    switch(agebracket) 
+    switch(agebracket)
     {
         case "child": return CHILD[i]; break;
-        case "middle": 
+        case "middle":
             if(FEATS_D->usable_feat(TO, "timeless body") && MIDDLE[i] < 1) return 0;
             return MIDDLE[i]; break;
-        case "old": 
+        case "old":
             if(FEATS_D->usable_feat(TO, "timeless body") && OLD[i] < 1) return 0;
             return OLD[i]; break;
-        case "venerable": 
+        case "venerable":
             if(FEATS_D->usable_feat(TO, "timeless body") && VENERABLE[i] < 1) return 0;
             return VENERABLE[i]; break;
         default: return 0; break;
@@ -5067,4 +5071,3 @@ int reactivate(string str,int when){
         return 1;
    return 1;
 }
-

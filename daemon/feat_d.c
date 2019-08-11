@@ -88,7 +88,7 @@ void obsolete_feat(object ob) {
         switch(bad_feats[i]) {
 
         case "greater spell focus":
-            
+
             removing_feats = ({ "armored caster","greater spell penetration","spell penetration","greater spell focus" });
             for(j=0;j<sizeof(removing_feats);j++) {
                 if(!has_feat(ob,removing_feats[j])) continue;
@@ -110,7 +110,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "crushingstrike":
-            
+
             removing_feats = ({ "crushingstrike","blade block","impale","light weapon","sweepingblow" });
             for(j=0;j<sizeof(removing_feats);j++) {
                 if(!has_feat(ob,removing_feats[j])) continue;
@@ -132,7 +132,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "lightning reflexes": case "iron will": case "great fortitude":
-            
+
             removing_feats = ({ "lightning reflexes","iron will","great fortitude","improved resistance","increased resistance" });
             for(j=0;j<sizeof(removing_feats);j++) {
                 if(!has_feat(ob,removing_feats[j])) continue;
@@ -171,7 +171,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "unassailable parry": //revoking feat for those now with the fighter or cavalier class parry feat
-            
+
             if(has_feat(ob,"unassailable parry") && has_feat(ob,"parry")) {
               mytype = get_feat_type(ob,"unassailable parry");
               if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free\
@@ -209,7 +209,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "calm": //revoking feat from non-bards
-            
+
             if(has_feat(ob,"calm") && !ob->is_class("bard")) {
               mytype = get_feat_type(ob,"calm");
               if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
@@ -225,7 +225,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "rapid shot": //revoking redundant archery feat
-            
+
             if(has_feat(ob,"rapid shot")) {
               mytype = get_feat_type(ob,"rapid shot");
               if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
@@ -241,7 +241,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "wild shape dragon": //revoking from non-hms if they had it before it was transferred.
-            
+
             if(has_feat(ob,"wild shape dragon") && !high_mortalp(ob) && CONFIG_D->check_config("HM") == 0) {
               mytype = get_feat_type(ob,"wild shape dragon");
               if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
@@ -257,7 +257,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "hardenedminions": //revoking from those without the new pre-reqs.
-            
+
             if(has_feat(ob,"hardenedminions") && !has_feat(ob,"spell power")) {
               mytype = get_feat_type(ob,"hardenedminions");
               if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
@@ -320,7 +320,7 @@ void obsolete_feat(object ob) {
             break;
 
         case "wild shape wolf":
-            
+
             removing_feats = ({ "wild shape cat","wild shape large animal","wild shape bear","wild shape small animal","wild shape wolf" });
             for(j=0;j<sizeof(removing_feats);j++) {
                 if(!has_feat(ob,removing_feats[j])) continue;
@@ -332,7 +332,7 @@ void obsolete_feat(object ob) {
                     "levelling feats, no free feats have been provided to replace them.  You may, however, "
                     "wish to <feats fix> as the druid class now has a new set of levelling feats.%^RESET%^");
             break;
-            
+
         case "archmage":
         case "body cognition":
         case "chronicler":
@@ -342,13 +342,13 @@ void obsolete_feat(object ob) {
         case "versatile arcanist":
         case "wild shape dragon":
         case "wild shape elemental":
-        
+
             removing_feats = ({ "archmage","body cognition","chronicler","presence of mind","shadow adept",
                     "shadowdancer", "versatile arcanist","wild shape dragon","wild shape elemental" });
-            for(j=0;j<sizeof(removing_feats);j++) 
+            for(j=0;j<sizeof(removing_feats);j++)
             {
                 if(!has_feat(ob,removing_feats[j])) continue;
-                
+
                 feat_ob = find_object_or_load("/cmds/feats/"+removing_feats[j][0..0]+"/_"+replace_string(removing_feats[j]," ","_")+".c");
                 if(objectp(feat_ob))
                 {
@@ -362,18 +362,18 @@ void obsolete_feat(object ob) {
                         }
                         if(removing_feats[j] == "shadowdancer")
                         {
-                            ob->InitInnate();                            
-                        }                        
+                            ob->InitInnate();
+                        }
                         if(removing_feats[j] == "versatile arcanist")
                         {
                             if(ob->query("elementalist")) { ob->delete("elementalist"); }
                             myspells = (string *)ob->query_mastered_spells();
-                            if(sizeof(myspells)) 
+                            if(sizeof(myspells))
                             {
                                 schoolspells = SCHOOLSPELLS;
-                                for(i=0;i<sizeof(myspells);i++) 
+                                for(i=0;i<sizeof(myspells);i++)
                                 {
-                                    if(member_array(myspells[i],schoolspells) != -1) 
+                                    if(member_array(myspells[i],schoolspells) != -1)
                                     {
                                         ob->remove_mastered_spell(myspells[i]);
                                     }
@@ -387,8 +387,8 @@ void obsolete_feat(object ob) {
                 }
             }
             update_usable(ob);
-            
-            if(num > freebs) 
+
+            if(num > freebs)
             {
                 tell_object(ob,"%^B_RED%^%^BOLD%^%^CYAN%^Most of the epic feats have been removed and "
                     "converted into prestige classes instead.  Receiving free feats for epic feats that "
@@ -396,7 +396,7 @@ void obsolete_feat(object ob) {
                 ob->set("free_feats",num);
             }
             break;
- 
+
         default:
             return;
         }
@@ -438,7 +438,7 @@ int can_gain_bonus_feat(object ob,string feat)
       if(member_array(myclasses[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
       if(myclasses[i] == "fighter" || myclasses[i] == "paladin")
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5); 
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
       else
           currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // melee classes @ L21 & every 5 levels thereafter
       if(currentlvl < 0) currentlvl = 0;
@@ -484,8 +484,8 @@ int can_gain_hybrid_feat(object ob,string feat){
     if(!sizeof(myclasses)) return 0;
     MAX_ALLOWED = 0;
     for(i=0;i<sizeof(myclasses);i++) {
-      if(member_array(myclasses[i],HYBRID) == -1) continue; 
-      if(myclasses[i] == "psywarrior") currentlvl = ((int)ob->query_class_level(myclasses[i]) / 5); 
+      if(member_array(myclasses[i],HYBRID) == -1) continue;
+      if(myclasses[i] == "psywarrior") currentlvl = ((int)ob->query_class_level(myclasses[i]) / 5);
       else currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
       if(currentlvl < 0) currentlvl = 0;
       MAX_ALLOWED += currentlvl;
@@ -539,7 +539,7 @@ int add_my_feat(object ob,string type,string feat)
         num_feats = (((int)ob->query_bonus_feats_gained()+1)*5);
         num += num_feats;
         num -= 4; // to move feats back to 1/6/11/16/21/etc
-        
+
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
@@ -581,19 +581,19 @@ int add_my_feat(object ob,string type,string feat)
         subset = ob->query_classes();
         if(!sizeof(subset)) return 0;
         num = 0;
-        for(i=0;i<sizeof(subset);i++) 
+        for(i=0;i<sizeof(subset);i++)
         {
             if(member_array(subset[i],HYBRID) == -1) num += ob->query_class_level(subset[i]);
-            else 
+            else
             {
-                if(subset[i] != "psywarrior") 
+                if(subset[i] != "psywarrior")
                 {
                     if(ob->query_class_level(subset[i]) > 20) num += 20;
                     else num += ob->query_class_level(subset[i]);
                 }
-            }          
+            }
         }
-        
+
         num_feats = (((int)ob->query_hybrid_feats_gained()+1)*5);
         num += num_feats;
         num -= 4; // to move feats back to 1/6/11/16/21/etc
@@ -608,7 +608,7 @@ int add_my_feat(object ob,string type,string feat)
         }
         else return 0;
     case "other":
-        if(gain_feat(ob,type,feat,level)) 
+        if(gain_feat(ob,type,feat,level))
         {
             num = (int)ob->query_other_feats_gained();
             if(!num) num = 0;
@@ -625,7 +625,7 @@ int add_my_feat(object ob,string type,string feat)
         }
         else return 0;
 
-    default: 
+    default:
         return 0;
     }
     return 0;
@@ -693,7 +693,7 @@ int can_remove_feat(object ob,string feat)
     file = DIR_FEATS+"/"+feat[0..0]+"/_"+feat+".c";
     //if(find_player("saide")) tell_object(find_player("saide"), "file = "+file);
     file = replace_string(file," ","_");
-    if(catch(myfeat = new(file))) { return 0; }    
+    if(catch(myfeat = new(file))) { return 0; }
     if(!objectp(myfeat)) { return 0; }
     needed_feats = myfeat->query_required_for();
     replaced_by = myfeat->query_replaced_by();
@@ -706,10 +706,10 @@ int can_remove_feat(object ob,string feat)
         for(i=0;i<sizeof(player_feats);i++)
         {
             if(player_feats[i] == feat) { continue; }
-            
-            if(member_array(player_feats[i],needed_feats) != -1) 
-            { 
-                
+
+            if(member_array(player_feats[i],needed_feats) != -1)
+            {
+
                 return 0;
             }
         }
@@ -752,18 +752,18 @@ varargs int gain_feat(object ob, string type, string feat,int level)
     if(!objectp(ob))   { return 0; }
     if(!stringp(type)) { return 0; }
     if(!stringp(feat)) { return 0; }
-    
+
     if(has_feat(ob,feat))            { return 0; }
-    
-    if(!meets_requirements(ob,feat)) 
-    { 
+
+    if(!meets_requirements(ob,feat))
+    {
         tell_object(ob,"You do not meet the prerequisites for the "
             "feat "+feat+".");
-        return 0; 
+        return 0;
     }
     if(get_category(feat) == "EpicFeats" && (int)ob->query_epic_feats_gained() > 0) {
         tell_object(ob,"You have already bought one epic feat, you can't buy another.");
-        return 0; 
+        return 0;
     }
     if(member_array(type,({"class","bonus","magic","other","hybrid"})) == -1) { return 0; }
 
@@ -859,7 +859,7 @@ int is_active(object ob,string feat)
     {
         if(!objectp(feats[i])) { continue; }
         names += ({ (string)feats[i]->query_feat_name() });
-    }        
+    }
     if(member_array(feat,names) == -1)  { return 0; }
     return 1;
 }
@@ -919,22 +919,22 @@ int usable_feat(object ob,string feat)
 {
     string *tmp,*feats;
     int i;
-    
+
     if(!objectp(ob))                    { return 0; }
     if(!stringp(feat))                  { return 0; }
-    if(!interactive(ob))                
-    { 
+    if(!interactive(ob))
+    {
         tmp = (string *)ob->query_monster_feats();
         if(!sizeof(tmp)) { return 0; }
         if(member_array(feat,tmp) == -1) { return 0; }
         else { return 1; }
     }
     if(!ob->query("new_class_type"))    { return 0; }
-    
+
     feats = (string*)ob->query_temporary_feats();
-    if(sizeof(feats)) 
-    { 
-        if(member_array(feat,feats) != -1) { return 1; } 
+    if(sizeof(feats))
+    {
+        if(member_array(feat,feats) != -1) { return 1; }
     }
 
     if(!avatarp(ob))
@@ -967,7 +967,7 @@ int level_to_use(object ob,string feat)
     if(!objectp(ob))        { return 0; }
     if(!stringp(feat))      { return 0; }
     if(!has_feat(ob,feat))  { return 0; }
-    
+
     player       = player_data(ob);
     player_level = player["level"];
     feat_level   = level_of_feat(ob,feat);
@@ -992,15 +992,15 @@ int can_use_shifted(object ob, string feat)
     if(catch(myfeat = new(file))) { return 0; }
     if(!objectp(myfeat)) { return 0; }
 
-    if(!myfeat->allow_shifted()) 
+    if(!myfeat->allow_shifted())
     {
         destruct(myfeat);
-        return 0; 
+        return 0;
     }
-    else 
+    else
     {
         destruct(myfeat);
-        return 1; 
+        return 1;
     }
 }
 
@@ -1046,7 +1046,7 @@ int has_feat(object ob, string feat)
     }
     if(!pointerp(feats))                { return 0; }
     if(!sizeof(feats))                  { return 0; }
-    if(member_array(feat,feats) == -1)  { return 0; }        
+    if(member_array(feat,feats) == -1)  { return 0; }
     return 1;
 }
 
@@ -1058,7 +1058,7 @@ int is_feat(string feat)
 
     tmp = get_all_feats();
     if(!mapp(tmp))      { return 0; }
-    //this should be doing the same thing - but hopefully will cut down on 
+    //this should be doing the same thing - but hopefully will cut down on
     //processing time and too long evaluation errors - Saide April 2016
     cats = values(tmp);
     if(!pointerp(cats)) { return 0; }
@@ -1068,7 +1068,7 @@ int is_feat(string feat)
         continue;
     }
     return 0;
-    
+
     /*cats = keys(tmp);
     if(!sizeof(cats))   { return 0; }
     for(i=0;i<sizeof(cats);i++)
@@ -1090,7 +1090,7 @@ string get_feat_type(object ob,string feat)
     mapping feats;
     string type,*tmp,*types;
     int i,j;
-    
+
     if(!objectp(ob))        { return 0; }
     if(!stringp(feat))      { return 0; }
     if(!has_feat(ob,feat))  { return 0; }
@@ -1137,7 +1137,7 @@ void remove_feat(object ob,string type, string feat)
     tmp -= ({ feat });
     feats[level] = tmp;
     if(is_permanent(ob,feat)) { reverse_permanent_feat(ob,feat); }
-    set_feats(ob,type,feats);        
+    set_feats(ob,type,feats);
     //redundant since query_player_feat works entirely differently now - Saide
     //take_feat(ob,feat);
     return;
@@ -1152,7 +1152,7 @@ varargs void add_feat(object ob, string type, string feat,int level)
     if(!stringp(feat))      { return; }
     if(!is_feat(feat))      { return; }
     if(has_feat(ob,feat))   { return; }
-    
+
     feats  = get_feats(ob,type);
     player = player_data(ob);
 
@@ -1183,7 +1183,7 @@ void take_feat(object ob,string feat)
     string *feats;
     if(!objectp(ob))    { return; }
     if(!stringp(feat))  { return; }
-    feats = ob->query_player_feats(); 
+    feats = ob->query_player_feats();
     feats -= ({ feat });
     ob->set_player_feats(feats);
     return;
@@ -1194,7 +1194,7 @@ void set_feats(object ob,string type,mapping feats)
     if(!objectp(ob))    { return; }
     if(!stringp(type))  { return; }
     if(!mapp(feats))    { return; }
-    
+
     switch(type)
     {
     case "class":
@@ -1238,10 +1238,10 @@ mapping get_feats(object ob,string type)
         feats = ob->query_other_feats();
         break;
     }
-    if(!mapp(feats)) 
-    { 
+    if(!mapp(feats))
+    {
         ob->init_feats();
-        return ([]); 
+        return ([]);
     }
     return feats;
 }
@@ -1276,9 +1276,9 @@ int calculate_psionic_feats(object ob){
    return num;
 }
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
     __ALL_FEATS = ([]);
     __USABLE_FEATS = ([]);
     build_feat_list();
@@ -1291,21 +1291,21 @@ void build_feat_list()
     int i, y;
 
     folders = get_dir(FEAT_FILE);
-    if(!sizeof(folders)) 
+    if(!sizeof(folders))
     {
         call_out("create",5); // An attempt to make the feat daemon kickstart itself if none of the feats load -Ares
-        return; 
-    }    
+        return;
+    }
     for(i=0;i<sizeof(folders);i++)
     {
         files = get_dir(FEAT_FILE + folders[i] + "/");
         for(y = 0; y < sizeof(files); y++)
-        {              
+        {
         // hopefully prevent backups an anything not ending in .c from bugging the daemon
             if(strsrch(files[y],".c") != (strlen(files[y]) - 2)) { continue; }
             //tell_object(find_player("saide"), "files[y] = "+files[y]);
             //continue;
-        
+
             file     = FEAT_FILE + "" + folders[i] + "/" + files[y]+"";
             file     = replace_string(file," ","_");
             category = file->query_feat_category();
@@ -1352,11 +1352,11 @@ string format_category(string cat)
     int i;
 
     tmp = explode(cat," ");
-    
+
     tmp[0] = capitalize(tmp[0]);
     tmp[0] = "%^RESET%^%^MAGENTA%^"+tmp[0]+"%^RESET%^";
     display = "\n"+IDT+arrange_string(tmp[0],(ALIGN_SPACER -1));
-    
+
     if(sizeof(tmp) == 2)
     {
         tmp[1] = capitalize(tmp[1]);
@@ -1405,7 +1405,7 @@ string format_feat(string feat,object targ) {
 
     if(feat == "")
         display = arrange_string(" ",LEVEL_SPACER)+arrange_string(" ",FEAT_SPACER);
-    else {    
+    else {
         display = arrange_string("%^RESET%^%^BOLD%^  "+tmp+"%^RESET%^",LEVEL_SPACER);
         //display += arrange_string(""+feat+"",FEAT_SPACER)+"%^RESET%^";
         display += arrange_string(""+pick_color(feat,targ)+feat+"",FEAT_SPACER)+"%^RESET%^";
@@ -1432,7 +1432,7 @@ string format_feat(string feat,object targ) {
 
     if(feat == "")
         display = arrange_string(" ",LEVEL_SPACER)+arrange_string(" ",FEAT_SPACER);
-    else {    
+    else {
         display = arrange_string("%^RESET%^%^BOLD%^  "+tmp+"",LEVEL_SPACER);
         //display += arrange_string(""+feat+"",FEAT_SPACER)+"%^RESET%^";
         display += arrange_string(pick_color(feat,targ)+feat+"",FEAT_SPACER)+"%^RESET%^";
@@ -1460,7 +1460,7 @@ string *format_feats(string *left,string *right,object targ)
         }
         if(i<sizeof(right))
         {
-            right_feat = format_feat(right[i],targ);            
+            right_feat = format_feat(right[i],targ);
         }
         else
         {
@@ -1484,7 +1484,7 @@ int is_feat_obsolete(string feat)
     if(!objectp(obj=find_object_or_load(str))) { return 0; }
     if(obj->is_obsolete()) { return 1; }
     return 0;
-}    
+}
 
 // Designed to dynamically update itself when we add new categories and feats, so we don't have
 // to mess with it again.  -Ares
@@ -1517,7 +1517,7 @@ void display_feats(object ob,object targ, string mytype)
     if(!targ->is_class("psion") && !targ->is_class("psywarrior") && !avatarp(targ)) { currentlist -= ({ "Psionics" }); }
     if(!targ->is_class("fighter") && !targ->is_class("cavalier") && !targ->is_class("paladin") && !targ->is_class("antipaladin") && !avatarp(targ)) { currentlist -= ({ "WeaponMastery" }); }
     if(!high_mortalp(targ) && !avatarp(targ) && CONFIG_D->check_config("HM") == 0) { currentlist -= ({ "EpicFeats" }); }
-    
+
     classes = targ->query_classes();
     for(i=0;i<sizeof(PRESTIGE_FEATS);i++)
     {
@@ -1526,14 +1526,14 @@ void display_feats(object ob,object targ, string mytype)
         if(avatarp(targ)) { continue; }
         currentlist -= ({ PRESTIGE_FEATS[i] });
     }
-    
+
 
     for(i=0;i<sizeof(categories);i++)
     {
         if(member_array(categories[i],currentlist) != -1) {
           temp = temp_feats[categories[i]];
-	    //added by saide to allow a player to get only 
-	    //a list of feats they are allowed to take 
+	    //added by saide to allow a player to get only
+	    //a list of feats they are allowed to take
 	    if(mytype == "allowed")
 	    {
 	    	  temp = filter_array(temp, "display_meets_requirements", TO, targ);
@@ -1567,15 +1567,13 @@ void display_feats(object ob,object targ, string mytype)
             right_cats += ({ categories[tmp] });
             i++;
         }
-    }    
-
-    tell_object(ob,FEAT_HEADER);
+    }
 
     for(i=0;i<sizeof(left_cats);i++)
     {
         left_column = feats[left_cats[i]];
         display_cat = left_cats[i];
-        
+
         if(i<sizeof(right_cats))
         {
             right_column = feats[right_cats[i]];
@@ -1591,7 +1589,6 @@ void display_feats(object ob,object targ, string mytype)
             display += ({ display_feats[j] });
         }
     }
-    display += ({ FEAT_FOOTER });
     ob->more(display);
     return;
 }

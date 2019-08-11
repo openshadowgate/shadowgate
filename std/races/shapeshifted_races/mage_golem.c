@@ -32,7 +32,7 @@ void create()
     set_shape_bonus("sight bonus",3);
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
-    set_shape_bonus("spell damage resistance",20);
+    set_shape_bonus("spell damage resistance",30);
     set_shape_height(900+random(100));
     set_shape_weight(5000+random(500));
 }
@@ -66,7 +66,7 @@ int change_into_message(object obj)
     if(!objectp(obj)) { return 0; }
     tell_object(obj,"%^RESET%^%^RED%^You turn your mind elsewhere.");
     tell_object(obj,"%^RESET%^%^BOLD%^You can feel your body beginning to change!");
-    tell_object(obj,"%^RESET%^%^BLUE%^You flap your wings and roar. You are a DEMON!");
+    tell_object(obj,"%^RESET%^%^BLUE%^Your stomp, sending a waves of rolling thunder. You are a GOLEM!");
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+" grows very still and appears to concentrate deeply.",obj);
     tell_room(environment(obj),"%^RESET%^%^YELLOW%^"+obj->QCN+" begins to change in front of your very eyes!",obj);
     tell_room(environment(obj),"%^RED%^Where "+obj->QCN+" once stood, now stands a DEMON!",obj);

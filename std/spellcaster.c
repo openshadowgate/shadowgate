@@ -64,7 +64,7 @@ int bonus_spell_slots_by_level(int lev, int num)
 	return num;
 }
 
-int bonus_spell_slots(int num) 
+int bonus_spell_slots(int num)
 {
     int extra;
     if(!intp(num) || !num) return num;
@@ -116,7 +116,7 @@ void set_cast_type(string str) { typeSpell = str; }
 int set_memorized(string myclass, string spell, int num) {
     int level;
 
-    
+
 
     if (!spells_memorized) resetMemorized();
     if (!num) num = 1;
@@ -146,7 +146,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
     int level,stat;
     mapping tmp;
     int i;
-    
+
     if (!spell) return 0;
     if (!spells_memorized) resetMemorized();
     if(myclass == "psywarrior") return 1;
@@ -161,7 +161,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
     if(!mapp(spells_memorized[myclass])) add_mem_class(myclass);
     if(forced!=1)
     {
-        if(TO->query_property("clearcasting")) 
+        if(TO->query_property("clearcasting"))
         {
             TO->remove_property("clearcasting");
             tell_object(TO,"%^BOLD%^%^WHITE%^Your concentration is so great that you keep memory of the spell even after its casting!%^RESET%^");
@@ -175,7 +175,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
             {
                 tell_object(TO,"%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^retain%^RESET%^%^MAGENTA%^ the spell in memory!%^RESET%^");
                 return 1;
-            }        
+            }
         }
         if(FEATS_D->usable_feat(TO,"natural perfection") ||
            FEATS_D->usable_feat(TO,"theurgic perfection"))
@@ -201,6 +201,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
                     if(member_array(spell,raging_healer_spells)!=-1)
                     {
                         tell_object(TO,"%^RESET%^%^BOLD%^%^RED%^You're so angry that your spell preserves in memory!%^RESET%^");
+                        return 1;
                     }
                 }
             }
@@ -262,7 +263,7 @@ int query_memorized(string myclass, string spell)
     }
 
     if(!mapp(spells_memorized[myclass])) add_mem_class(myclass);
-    
+
     // re-orders the memorized mapping to fit the spell level the master of versatility
     // is trying to cast, if it has enough spell levels possible to do so
     if(spell == "generic" && FEATS_D->usable_feat(TO, "master of versatility"))
@@ -283,7 +284,7 @@ int query_memorized(string myclass, string spell)
 
 
 
-int can_memorize(string myclass, string spell) 
+int can_memorize(string myclass, string spell)
 {
     int lvl, max, curr,class_level;
     string mystat, subrace;
@@ -447,7 +448,7 @@ int query_spell_level_restricted(string classname) {
       if(!sizeof(myclasses)) return 0;
       for(i = 0;i<sizeof(myclasses);i++) lost_spell_level[myclasses[i]] = 9;
     }
-    
+
     if(!lost_spell_level[classname]) return 0;
     return lost_spell_level[classname];
 }
@@ -491,11 +492,11 @@ void add_masterable(int adding) { // 42 to avoid array emptying
     masterable += ({adding});
 }
 
-string *query_mastered_spells() 
+string *query_mastered_spells()
 {
     string theschool,thediscipline,*schoolspells,*disciplinespells,*mymastered;
     mapping spellsbyschool,powersbydiscipline;
-    
+
     if(!masteredspells) masteredspells = ({});
     mymastered = masteredspells;
     if(TO->is_class("psion")) {
@@ -506,7 +507,7 @@ string *query_mastered_spells()
         if(sizeof(disciplinespells)) mymastered += powersbydiscipline[thediscipline];
       }
     }
-    if(TO->is_class("warlock")) 
+    if(TO->is_class("warlock"))
     {
         mymastered += (({ "eldritch blast", "eldritch claws","summon companion","eldritch bow" }));
         if((int)TO->query_class_level("warlock") > 1) mymastered += (({ "detect magic" }));
@@ -600,7 +601,7 @@ void prepare(string str, int temp, string myclass, int num) {
       }
       if(num > myneeded) num = myneeded;
       if(num > 5){
-         TO->add_mp(5); // began as 17 (points required for 9th level power), was way too fast. Trying 5, may need to be adjusted 
+         TO->add_mp(5); // began as 17 (points required for 9th level power), was way too fast. Trying 5, may need to be adjusted
          num = num-5;
          call_out("prepare", 2, str, temp, myclass, num);
          return 1;
@@ -609,10 +610,10 @@ void prepare(string str, int temp, string myclass, int num) {
          prepare2();
          return 1;
       }
-   } 
+   }
 
     if (temp > 0 && (can_memorize(myclass,str) == MEM_OK)) {
-      if(num > 1 && !random(3)) { 
+      if(num > 1 && !random(3)) {
         set_memorized(myclass,str,1);
         num--;
 	}
@@ -668,4 +669,3 @@ int has_aoe(string spellname)
     else
         return 0;
 }
-

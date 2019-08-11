@@ -3,6 +3,8 @@
 #include <magic.h>
 inherit DAEMON;
 
+string FLIGHT_ROOM = "/std/flying_room.c";
+
 int cmd_wing(string str)
 {
     object myshape;
@@ -20,7 +22,10 @@ int cmd_wing(string str)
         return notify_fail("Something went wrong with your shape.\n");
     if(TP->query_casting())
         return notify_fail("You're already casting a spell!\n");
+    return 1;
 }
+
+
 
 void help()
 {

@@ -33,7 +33,7 @@ void create()
     set_shape_bonus("sight bonus",3);
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
-    set_shape_bonus("spell damage resistance",20);
+    set_shape_bonus("spell damage resistance",30);
     set_shape_height(900+random(100));
     set_shape_weight(5000+random(500));
 }
@@ -70,7 +70,7 @@ int change_into_message(object obj)
     tell_object(obj,"%^RESET%^%^BLUE%^You flap your wings and roar. You are a DEMON!");
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+" grows very still and appears to concentrate deeply.",obj);
     tell_room(environment(obj),"%^RESET%^%^YELLOW%^"+obj->QCN+" begins to change in front of your very eyes!",obj);
-    tell_room(environment(obj),"%^RED%^Where "+obj->QCN+" once stood, now stands a DEMON!",obj);
+    tell_room(environment(obj),"%^BOLD%^%^RED%^Where "+obj->QCN+" once stood, now stands a DEMON!",obj);
     return 1;
 }
 
@@ -99,17 +99,17 @@ int claw_attack(object tp, object targ)
     rand = random(10);
     if(rand)
     {
-        tell_object(tp,"%^RED%^You rake your massive claws into "+targ->QCN+"'s flesh!");
-        tell_object(targ,"%^RED%^"+tp->QCN+" rakes its massive claws into your flesh!");
-        tell_room(ENV(tp),"%^RED%^"+tp->QCN+" rakes its massive claws into "+targ->QCN+"'s flesh!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/6,6),"slashing");
+        tell_object(tp,"%^RED%^You %^BOLD%^%^BLACK%^rake%^RESET%^%^RED%^ your massive claws into "+targ->QCN+"'s flesh!");
+        tell_object(targ,"%^RED%^"+tp->QCN+" %^BOLD%^%^BLACK%^rakes%^RESET%^%^RED%^ its massive claws into your flesh!");
+        tell_room(ENV(tp),"%^RED%^"+tp->QCN+" %^BOLD^%^BLACK%^rakes%^RESET%^%^RED%^ its massive claws into "+targ->QCN+"'s flesh!",({tp,targ}));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/5,6),"slashing");
     }
     else
     {
-        tell_object(tp,"%^RED%^You grab "+targ->QCN+" with both claws, then bite massive chunk of "+targ->QP+" flesh!");
-        tell_object(targ,"%^RED%^"+tp->QCN+" grabs you with both claws, then bites massive chunk of your flesh!");
-        tell_room(ENV(tp),"%^RED%^"+tp->QCN+" grabs "+targ->QCN+" with both claws, then bites massive chunk of "+targ->QP+" flesh!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/2,6),"piercing");
+        tell_object(tp,"%^BOLD%^%^RED%^%^You grab "+targ->QCN+" with both claws, then bite massive chunk of "+targ->QP+" flesh!");
+        tell_object(targ,"%^BOLD%^%^RED%^"+tp->QCN+" grabs you with both claws, then bites massive chunk of your flesh!");
+        tell_room(ENV(tp),"%^BOLD%^%^RED%^"+tp->QCN+" grabs "+targ->QCN+" with both claws, then bites massive chunk of "+targ->QP+" flesh!",({tp,targ}));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/3,6),"piercing");
     }
 
     //2d6+13
