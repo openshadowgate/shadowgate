@@ -37,7 +37,7 @@ void write_who(){
   j = sizeof(wizes);
   for(i=0;i<j;i++){
     if(!objectp(find_player(wizes[i]))) continue;
-    if(find_player(wizes[i])->query_true_invis()) continue;
+    if(find_player(wizes[i])->query_quietness()) continue;
     out += "Staff: "+CONVERTER->convertFromInput(find_player(wizes[i])->query_title())+"<br /><font color=\"#FFFFFF\">\n";
   }
   if(sizeof(wizes)) out +=  "<br />";
@@ -48,7 +48,7 @@ void write_who(){
     out += CONVERTER->convertFromInput(ob->query_title())+"<br /><font color=\"#FFFFFF\">\n";
   }
 
-  j = sizeof(names);											
+  j = sizeof(names);
   for(i=0;i<j;i++){
     if(!objectp(find_player(names[i]))) continue;
     out += CONVERTER->convertFromInput(find_player(names[i])->getWholeDescriptivePhrase())+"<br /><font color=\"#FFFFFF\">\n";
@@ -65,7 +65,7 @@ void write_who(){
   write_file(OUTPUT+"1",out);
   cp(OUTPUT+"1",OUTPUT);
   rm(OUTPUT+"1");
-  
+
   call_out("write_who",60);
 }
 
@@ -92,4 +92,3 @@ void create(){
   seteuid(getuid());
   write_who();
 }
-
