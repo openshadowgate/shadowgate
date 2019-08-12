@@ -94,7 +94,7 @@ int can_cast()
 
 int bite_attack(object tp, object targ)
 {
-    tell_object(tp,"%^BOLD%^%^BLACK%^ You sink your fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!");
+    tell_object(tp,"%^BOLD%^%^BLACK%^You sink your fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!");
     tell_object(targ,"%^BOLD%^%^BLACK%^"+tp->QCN+" sinks its fangs %^RED%^deep%^BLACK%^ into your flesh!");
     tell_room(ENV(tp),"%^BOLD%^%^BLACK%^"+tp->QCN+" sinks its fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!",({tp,targ}));
     targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/6,6),"piercing");
