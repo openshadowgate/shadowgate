@@ -33,7 +33,7 @@ int cmd_inventory()
         return 0;
     }
     items = all_inventory(this_player());
-    result = "%^BOLD%^%^CYAN%^You are carrying:\n%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
+    result = "%^BLUE%^--=%^BOLD%^< %^CYAN%^You are carrying%^BLUE%^ >%^RESET%^%^BLUE%^=--\n";
     if(USER_D->get_flag(TP, "simple inventory") == "On")
     {
         exclude = filter_array(items, "worn_wielded");
@@ -53,7 +53,6 @@ int cmd_inventory()
         result += "%^RED%^You are empty-handed.\n";
     else
         result = result + stuff;
-    result += "%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
     alltext += result;
     this_player()->more(explode(alltext,"\n"));
     return 1;

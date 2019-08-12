@@ -661,7 +661,7 @@ varargs void move_player(mixed dest, string msg) {
                if(inv[i] == this_object()) continue;
 
                if(query_magic_hidden() && !inv[i]->detecting_invis()) {
-                   continue;
+                  continue;
                }
                if(query_hidden())
                    continue;
