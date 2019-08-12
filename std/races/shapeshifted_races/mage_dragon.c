@@ -48,11 +48,11 @@ int default_descriptions(object obj)
 {
     if(!objectp(obj)) { return 0; }
 
-    obj->set_description("stands tall and deadly, covered in iron-hard scales from "+obj->QP+" horn "
+    obj->set_description("%^RESET%^%^RED%^ stands tall and deadly, covered in iron-hard scales from "+obj->QP+" horn "
         "covered head to "+obj->QP+" long tail.  A ridge of spines runs all the way down "+obj->QP+" back.  "
         ""+obj->QP+" are folded at "+obj->QP+" sides.  "+obj->QS+"'s clawed hands are easily the size of an ogre's fists.  Keenly intelligent eyes peer out at the world with deadly intent.");
 
-    obj->setDescriptivePhrase("deadly $G $R");
+    obj->setDescriptivePhrase("%^RESET%^%^RED%^deadly $R%^RESET%^");
 
     obj->set("speech string","growl");
     obj->set("describe string","angrily");
@@ -99,20 +99,22 @@ int can_cast()
 int bite_attack(object tp, object targ)
 {
     string my_limb;
-    tell_object(tp,"%^RED%^You lightning quick bite %^BOLD%^%^BLACK%^deeply%^RESET%^%^RED%^ into "+targ->QCN+"'s "+(my_limb=targ->return_target_limb())+"!");
-    tell_object(targ,"%^RED%^"+tp->QCN+" lightning quick bites %^BOLD%^%^BLACK%^deeply%^RESET%^ into your "+my_limb+"!");
-    tell_room(ENV(tp),"%^RED%^"+tp->QCN+" snakes "+tp->QP+" lightning quick bites %^BOLD^%^BLACK%^deeply%^RESET%^ into "+targ->QCN+"'s "+my_limb+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/3,8),"piercing");
-
-    //2d8+13
+    if(!random(3))
+    {
+        tell_object(tp,"%^RED%^You lightning quick bite %^BOLD%^%^BLACK%^deeply%^RESET%^%^RED%^ into "+targ->QCN+"'s "+(my_limb=targ->return_target_limb())+"!");
+        tell_object(targ,"%^RED%^"+tp->QCN+" lightning quick bites %^BOLD%^%^BLACK%^deeply%^RESET%^ into your "+my_limb+"!");
+        tell_room(ENV(tp),"%^RED%^"+tp->QCN+" snakes "+tp->QP+" lightning quick bites %^BOLD^%^BLACK%^deeply%^RESET%^ into "+targ->QCN+"'s "+my_limb+"!",({tp,targ}));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,8),"piercing");
+    }
 }
 
 int claw_attack(object tp, object targ)
 {
-    tell_object(tp,"%^RED%^You reach out and %^BOLD%^violently%^RESET^%^RED%^ claw "+targ->QCN+"!");
-    tell_object(targ,"%^RED%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^RED%^ claws you!");
-    tell_room(ENV(tp),"%^RED%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^RED%^ claws "+targ->QCN+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/3,6),"slashing");
-
-    //2d6+13
+    if(!random(3))
+    {
+        tell_object(tp,"%^RED%^You reach out and %^BOLD%^violently%^RESET^%^RED%^ claw "+targ->QCN+"!");
+        tell_object(targ,"%^RED%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^RED%^ claws you!");
+        tell_room(ENV(tp),"%^RED%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^RED%^ claws "+targ->QCN+"!",({tp,targ}));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"slashing");
+    }
 }

@@ -46,9 +46,9 @@ int default_descriptions(object obj)
 {
     if(!objectp(obj)) { return 0; }
 
-    obj->set_description("This Spider has a large plump abdomen, multiple eyes, and four pairs of segmented legs. Its body is covered with short, black bristles. Two gray stripes run the length of its back. Its eyes are bright red. The creature moves incredibly fast for a 15 foot long spider.");
+    obj->set_description("%^BOLD%^%^BLACK%^ has a large plump abdomen, multiple eyes, and four pairs of segmented legs. Its body is covered with short, black bristles. Two gray stripes run the length of its back. Its eyes are bright red. The creature moves incredibly fast for a 15 foot long spider.%^RESET%^");
 
-    obj->setDescriptivePhrase("gigantic $R");
+    obj->setDescriptivePhrase("%^BOLD%^%^BLACK%^gigantic $R%^RESET%^");
 
     obj->set("speech string","hiss");
     obj->set("describe string","calmly");
@@ -94,10 +94,11 @@ int can_cast()
 
 int bite_attack(object tp, object targ)
 {
-    tell_object(tp,"%^BOLD%^%^BLACK%^You sink your fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!");
-    tell_object(targ,"%^BOLD%^%^BLACK%^"+tp->QCN+" sinks its fangs %^RED%^deep%^BLACK%^ into your flesh!");
-    tell_room(ENV(tp),"%^BOLD%^%^BLACK%^"+tp->QCN+" sinks its fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/6,6),"piercing");
-
-    //2d6+13
+    if(!random(6))
+    {
+        tell_object(tp,"%^BOLD%^%^BLACK%^You sink your fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!");
+        tell_object(targ,"%^BOLD%^%^BLACK%^"+tp->QCN+" sinks its fangs %^RED%^deep%^BLACK%^ into your flesh!");
+        tell_room(ENV(tp),"%^BOLD%^%^BLACK%^"+tp->QCN+" sinks its fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!",({tp,targ}));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"piercing");
+    }
 }

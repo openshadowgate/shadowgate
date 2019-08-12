@@ -33,8 +33,8 @@ void create()
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
     set_shape_bonus("spell damage resistance",15);
-    set_shape_height(1);
-    set_shape_weight(4);
+    set_shape_height(6);
+    set_shape_weight(1);
 }
 
 string * query_subraces() {
@@ -46,9 +46,9 @@ int default_descriptions(object obj)
 {
     if(!objectp(obj)) { return 0; }
 
-    obj->set_description("This Spider has a large plump abdomen, multiple eyes, and four pairs of segmented legs. Its body is covered with short, black bristles. Two gray stripes run the length of its back. Its eyes are bright red. The creature moves incredibly fast for a 15 foot long spider.");
+    obj->set_description("%^BOLD%^%^GREEN%^ is about two and half feet tall with beautiful silver wings. It is dressed in brightly colored clothing. Its little wings flutter back and forth making a faint buzzing noise. Its hair is pink.%^RESET%^");
 
-    obj->setDescriptivePhrase("tiny $R");
+    obj->setDescriptivePhrase("%^BOL%^%^MAGENTA%^tiny $R%^RESET%^");
 
     obj->set("speech string","chirp");
     obj->set("describe string","cheerfully");
@@ -94,10 +94,12 @@ int can_cast()
 
 int claw_attack(object tp, object targ)
 {
-    tell_object(tp,"%^BOLD%^%^GREEN%^You furiously claw "+targ->QCN+"!");
-    tell_object(targ,"%^BOLD%^%^GREEN%^"+tp->QCN+" furiously claws you!");
-    tell_room(ENV(tp),"%^BOLD%^%^GREEN%^"+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
-    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/6,6),"slashing");
-
+    if(!random(6))
+    {
+        tell_object(tp,"%^BOLD%^%^GREEN%^You furiously claw "+targ->QCN+"!");
+        tell_object(targ,"%^BOLD%^%^GREEN%^"+tp->QCN+" furiously claws you!");
+        tell_room(ENV(tp),"%^BOLD%^%^GREEN%^"+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,8),"slashing");
+    }
     //2d6+13
 }

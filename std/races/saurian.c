@@ -26,7 +26,7 @@ int *stat_mods(string subrace) {
     switch(subrace)
     {
     case "hon-ele": return ({ 4, 2, 2, -4, -4, 0 }); break;
-    default: return ({ -2, 2, -2, 0, 2, 0 });
+    default: return ({ -2, 2, -2, 2, 0, 0 });
     }
 }
 
@@ -104,13 +104,13 @@ int weight_mod(string gender) {
     return 20;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 3;    
-    
+
+    map["num"]  = 3;
+
     switch(gender)
     {
     case "male":
@@ -130,12 +130,12 @@ mapping weight_values(string gender, int height)
         case 50..52: map["adjust"] = -15; map["die"] = 15; break;
         case 53..57: map["adjust"] = 0;   map["die"] = 10; break;
         case 58..60: map["adjust"] = 0;   map["die"] = 15; break;
-        case 61..63: map["adjust"] = 5;   map["die"] = 15; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 61..63: map["adjust"] = 5;   map["die"] = 15; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
 string *query_hair_colors(object who) { return ({"bald"}); }
@@ -157,5 +157,3 @@ string *query_eye_colors(object who) {
 string *query_subraces(object who) {
     return ({"lani-ele", "hon-ele"});
 }
-
-

@@ -20,7 +20,7 @@ void create()
     set_attack_limbs( ({ "right hand","left hand"}) );
     set_new_damage_type("piercing");
     set_limbs( ({ "head","torso","right hand", "left hand", "right arm","right arm","left leg","right leg",}) );
-    set_attack_functions(([ "right hand" : (:TO,"claw_attack":), "left hand" : (:TO,"claw_attack":) ]));
+    set_attack_functions(([ "right hand" : (:TO,"hand_attack":), "left hand" : (:TO,"hand_attack":) ]));
     set_ac_bonus(-6);
     set_base_attack_num(2);
     set_castable(1);
@@ -46,9 +46,9 @@ int default_descriptions(object obj)
 {
     if(!objectp(obj)) { return 0; }
 
-    obj->set_description(" standing at an impressive thirty feet tall, this statue is made of iron. Rust-free and gray, it is molded to look like a fighter wearing a full face helmet and plate armor. The statue has both hands resting on the pommel of a huge sword, the tip of which rests upon the ground in front of it.");
+    obj->set_description("%^BOLD%^%^BLUE%^ standing at an impressive thirty feet tall, this statue is made of iron. Rust-free and gray, it is molded to look like a fighter wearing a full face helmet and plate armor. The statue has both hands resting on the pommel of a huge sword, the tip of which rests upon the ground in front of it.%^RESET%^");
 
-    obj->setDescriptivePhrase("gigantic $G $R");
+    obj->setDescriptivePhrase("%^BOLD%^%^BLUE%^gigantic  $R%^RESET%^");
 
     obj->set("speech string","reverb");
     obj->set("describe string","calmly");
@@ -92,24 +92,22 @@ int can_cast()
     return 0;
 }
 
-int claw_attack(object tp, object targ)
+int hand_attack(object tp, object targ)
 {
     int rand;
     rand = random(10);
-    if(rand)
+    switch(rand)
     {
+    case 0..2:
         tell_object(tp,"%^BLUE%^You swing at "+targ->QCN+" with your mighty fists, the blows connecting solidly!");
         tell_object(targ,"%^BLUE%^"+tp->QCN+" swings at you with its mighty fists, the blows connecting solidly!");
         tell_room(ENV(tp),"%^BLUE%^"+tp->QCN+" swings at "+targ->QCN+" with its mighty fists, the blows connecting solidly!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/6,6),"bludgeoning");
-    }
-    else
-    {
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"bludgeoning");
+        break;
+    case 3:
         tell_object(tp,"%^BOLD%^%^BLUE%^You grasp your hands together above the head before bringing them down in unison at "+targ->QCN+"!");
         tell_object(targ,"%^BOLD%^%^BLUE%^"+tp->QCN+"grasps its hands together above the head before bringing them down in unison at you!");
         tell_room(ENV(tp),"%^BOLD%^%^BLUE%^"+tp->QCN+" grasps its hands together above the head before bringing them in unison at "+targ->QCN+"!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/2,6),"bludgeoning");
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,12),"bludgeoning");
     }
-
-    //2d6+13
 }
