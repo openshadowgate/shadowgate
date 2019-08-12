@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("polymorph self");
-    set_spell_level(([ "mage" : 9 ]));
+    set_spell_level(([ "mage" : 4, "ranger" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS polymorph self on spider|pixie|troll");
     set_verbal_comp();

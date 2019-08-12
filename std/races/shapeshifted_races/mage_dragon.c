@@ -34,7 +34,7 @@ void create()
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
     set_shape_bonus("damage resistance",15);
-    set_shape_bonus("spell damageresistance",15);
+    set_shape_bonus("spell damage resistance",15);
     set_shape_height(200+random(100));
     set_shape_weight(11000+random(5000));
 }
