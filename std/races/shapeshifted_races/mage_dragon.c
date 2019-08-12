@@ -39,7 +39,8 @@ void create()
     set_shape_weight(11000+random(5000));
 }
 
-string * query_subraces() {
+string * query_subraces()
+{
     return ({ "dragon" });
 }
 

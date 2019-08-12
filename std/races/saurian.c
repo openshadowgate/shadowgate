@@ -25,7 +25,7 @@ int *stat_mods(string subrace) {
     if(!subrace || subrace == "") return ({ -2, 2, -2, 0, 2, 0 });
     switch(subrace)
     {
-    case "hon-ele": return ({ 4, 2, 2, -4, -4, 0 }); break;
+    case "hon-ele": return ({ 2, 2, 0, -2, -2, 0 }); break;
     default: return ({ -2, 2, -2, 2, 0, 0 });
     }
 }
