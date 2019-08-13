@@ -50,16 +50,16 @@ int cmd_score(string str)
             tell_object(TP,"You cannot use this command as a builder or apprentice.");
             return 1;
         }
-        if(!(targ = find_player(str))) 
+        if(!(targ = find_player(str)))
         {
             return notify_fail("That person is not available for scoring.\n");
         }
-        
+
         else if ((targ = find_player(str))) {
             if((int)targ->query_level() > (int)TP->query_level())
             {
                 return notify_fail("That person is not available for scoring.\n");
-            }        
+            }
         }
    } else {
       targ = TP;
@@ -79,7 +79,7 @@ int cmd_score(string str)
 
    position = targ->query_position();
    //if(targ->query("advanced_player") && position != "high mortal") position = "advanced player";
- 
+
    if(OB_ACCOUNT->is_high_mortal((string)targ->query_true_name()) && position != "high mortal" && !avatarp(targ)) { position += " (high mortal)"; }
 
    else if(targ->query("ex_hm") && (position != "high mortal")) position +=" (ex-hm)";
@@ -112,7 +112,7 @@ int cmd_score(string str)
    age = targ->query_real_age()+" ("+targ->query_real_age_cat()+")";
    classes = targ->query_classes();
 
-   if(!avatarp(targ)) 
+   if(!avatarp(targ))
    {
        if(targ->query("new_class_type"))
        {
@@ -128,7 +128,7 @@ int cmd_score(string str)
           expnext = "/adm/daemon/advance_d"->get_exp(targ->query_class_level(classes[0])+1,classes[0], targ);
           expnext = expnext-exp;
           showexp = ""+expnext;
-          for(i=1;i<sizeof(classes);i++) 
+          for(i=1;i<sizeof(classes);i++)
           {
              exp = targ->get_general_exp(classes[i]);
              expnext = "/adm/daemon/advance_d"->get_exp(targ->query_class_level(classes[i])+1,classes[i], targ);
@@ -141,7 +141,7 @@ int cmd_score(string str)
       expnext = 0;
 
    exp = targ->query_exp();
-    
+
    if(targ->query("new_class_type"))
    {
        expnext = 0;
@@ -151,10 +151,10 @@ int cmd_score(string str)
        temp1 = strlen(implode(classes,"/"));
        for(i=0;i<sizeof(classes);i++)
        {
-           if(temp1 > 24)            
-           { 
+           if(temp1 > 24)
+           {
                if(strlen(classes[i]) > 7) { classstring += "/"+arrange_string(classes[i],7); }
-               else { classstring += "/"+classes[i]; }           
+               else { classstring += "/"+classes[i]; }
            }
            else { classstring += "/"+classes[i]; }
            levelstring += "/"+targ->query_class_level(classes[i]);
@@ -196,23 +196,21 @@ int cmd_score(string str)
         race_var = capitalize(targ->query_race())+" ("+capitalize(targ->query("subrace"))+")";
   }
   else {
-        race_var = capitalize(targ->query_race());	 
-  }   
+        race_var = capitalize(targ->query_race());
+  }
 
   if(objectp(shape = TP->query_property("shapeshifted")))
   {
       race_var = (string)shape->query_shape_race();
       race_var = capitalize(race_var);
   }
-    
+
     way = targ->query("monk way");
     if(FEATS_D->usable_feat(targ,"grandmaster of the way")) { way = "grandmaster of the way"; }
     classstring = replace_string(classstring,"_"," ");
-  
+
    stamina = targ->query_condition_string();
-   write(BOLD+BLUE+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-   write(BOLD+WHITE+title);
-   write(BOLD+BLUE+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+   write("\n%^BOLD%^%^GREEN%^"+title);
    melnmarn = sprintf("  %sPosition %s---- %s: %s%-20s       %sGender %s-- %s: %s%s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+CYAN,capitalize(position),BOLD+GREEN,RESET+WHITE,GREEN,CYAN,capitalize(targ->query_gender()));
    write(melnmarn);
    melnmarn = sprintf("  %sAlignment %s--- %s: %s%-20s       %sRace %s---- %s: %s",BOLD+GREEN,RESET+WHITE,GREEN,AL_COLOR[(int)targ->query_alignment()-1],capitalize(targ->query_al_title(targ->query_alignment())),BOLD+GREEN,RESET+WHITE,GREEN,race_var);
@@ -229,10 +227,10 @@ int cmd_score(string str)
    if(mapp(tmp_map))
    {
        if(mapp(tmp_map["improvement"]))
-       {           
+       {
            if(tmp_map["improvement"]["amount"] > 0)
            {
-               showexp += english_number(tmp_map["improvement"]["amount"]);               
+               showexp += english_number(tmp_map["improvement"]["amount"]);
            }
            if(tmp_map["death"]["percent"] > 0)
            {
@@ -252,9 +250,9 @@ int cmd_score(string str)
         write(sprintf("  %sDeity %s------- %s: %s%-20s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+BLUE,capitalize(targ->query_diety())));
    if (sizeof(spell_domains) == 3)
        write(sprintf("  %sDomain %s------ %s: %s%s/%-20s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+BLUE,capitalize(spell_domains[0]),capitalize(spell_domains[1]),capitalize(spell_domains[2])));
-   else if (sizeof(spell_domains) == 2)       
+   else if (sizeof(spell_domains) == 2)
        write(sprintf("  %sDomain %s------ %s: %s%s/%-20s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+BLUE,capitalize(spell_domains[0]),capitalize(spell_domains[1])));
-   else if (sizeof(spell_domains) == 1)       
+   else if (sizeof(spell_domains) == 1)
        write(sprintf("  %sDomain %s------ %s: %s%-20s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+BLUE,capitalize(spell_domains[0])));
 
    if (targ->query_school() && targ->query("warlock heritage"))
@@ -272,7 +270,7 @@ int cmd_score(string str)
  write(sprintf("  %sStyle %s------- %s: %s%-12s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+RED,targ->query_fighter_style()));
    if(stringp(way))
  write(sprintf("  %sDedication %s-- %s: %s%-20s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+CYAN,DEDICATIONS[way]));
- 
+
    melnmarn = sprintf("  %sHitPoints %s--- %s: %s%-64s       %sCarrying# %s%s: %s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE,hit,GREEN,RESET+WHITE,GREEN,encumbrance);
    write(melnmarn);
    melnmarn = sprintf("  %sArmor Class %s- %s: %s%-15s            %sBase Hit %s-%s: %s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE,""+BONUS_D->effective_ac(targ)+" + "+BONUS_D->ac_bonus(targ,targ)+"",GREEN,RESET+WHITE,GREEN,BOLD+WHITE+""+"/daemon/bonus_d.c"->new_bab(1, targ));
@@ -295,64 +293,49 @@ int cmd_score(string str)
    write(melnmarn);
    melnmarn = sprintf("  %sHair Color %s-- %s: %s%-20s       %sEye Color %s%s: %s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE,targ->query_hair_color(),BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE+targ->query_eye_color() );
    write(melnmarn);
-   
-   
-   //I am added play time to the score - as it is people that know they can just ask what their play time is - Why are we
-   //hiding something that has been fundamental to our game from players, more specifically 
-    //why are we hiding it from players who don't know to ask? - Saide - May 2016   
+
    race_var = "";
    if(targ->get_pk_death_flag())
    {
        race_var = "No";
    }
-   if(targ->query("no pk")) 
+   if(targ->query("no pk"))
    {
        race_var = "No";
    }
    if(race_var != "No") race_var = "Yes";
    melnmarn = sprintf("  %sPK Eligible %s- %s: %s%-20s       %sPlay Time %s%s: %s",BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE,race_var,BOLD+GREEN,RESET+WHITE,GREEN,BOLD+WHITE+parse_time((int)targ->query_age()) );
    write(melnmarn);
-   
-   
-  if (targ->get_pk_death_flag()) { 
-   write(BOLD+BLUE+"+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+");
+
+
+  if (targ->get_pk_death_flag()) {
     melnmarn=sprintf("%s under PK protection.",(targ==TP)?"You are":targ->query_name()+" is");
     if (targ->query_down_time()) melnmarn += "\nThis protection is due to a recent return, and will expire on: "+ctime(targ->query_down_time())+".";
-   	else 
+   	else
 	{
 // Generate a random drift for the PK estimate if they're not an immortal.
 		if (avatarp(TP))
 		{
 			i=0;
   		}
-		else 
+		else
 		{
-			if (undefinedp(i=(int)targ->query_property("pk_drift"))) 
+			if (undefinedp(i=(int)targ->query_property("pk_drift")))
 			{
 				targ->set_property("pk_drift",i=random(59)-29);
 			}
 		}
-	// Figure out which is the limiting factor on that flag. 
+	// Figure out which is the limiting factor on that flag.
 	temp1 = (int)targ->query("pk_death_age")*2 + PK_DEATH_FLAG_LOGIN_TIME;
-	temp1 -= (int)targ->query_player_age()*2; 
+	temp1 -= (int)targ->query_player_age()*2;
 
   	temp2=(int)targ->query_death_time()-time();
 
 	melnmarn += sprintf("\nThis Pk Flag will expire sometime before "+
 	"%s", ctime((int)targ->query_death_time() + (i * 60)));
-	//melnmarn +=sprintf("\nThis PK flag will expire in approximately %d minutes of "+
-	//"logged in time.", (temp1/60)+(i * 4));
-	
-	//melnmarn += sprintf("\nThis PK flag will expire in approximately %d minutes of "+
-	//"real time.", (temp2/60)+i);
-
-
-       //melnmarn +=sprintf("\nDebug Temp1: %d minutes.",(temp1/ 60));
-       //melnmarn +=sprintf("\nDebug Temp2: %d minutes.",(temp2/60));
   }
   write(melnmarn);
   }
-   write(BOLD+BLUE+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
    return 1;
 }
 
@@ -376,4 +359,3 @@ This command gives you overview of your character, listing many various facts ab
 hp, stats, biography, money, inventory, eq
 ");
 }
-
