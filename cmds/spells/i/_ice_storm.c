@@ -1,6 +1,6 @@
 //Ice Storm coded by Bane//
 //removed from druids for balance after discussion with Ts and players ~Circe~ 8/5/13
-#include <std.h>  
+#include <std.h>
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -24,10 +24,9 @@ void create() {
     set_components(([
       "mage" : ([ "pinch of special dust" : 1, "water" : 3, ]),
     ]));
-    set_save("reflex");
     set_immunities( ({"cold"}) );
     aoe_spell(1);
-    set_aoe_message("%^BOLD%^%^CYAN%^(scoured by sheets of ice)%^RESET%^"); 
+    set_aoe_message("%^BOLD%^%^CYAN%^(scoured by sheets of ice)%^RESET%^");
 }
 
 int preSpell() {
@@ -75,7 +74,7 @@ void execute_attack() {
     }
     foes = all_living(place);
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    
+
     foes = target_filter(foes);
 
     j = sizeof(foes);
@@ -118,14 +117,11 @@ void execute_attack() {
             if(!present(foes[i],place)) continue;
 
             target_limb = foes[i]->return_target_limb();
-            if(do_save(foes[i],0)) {
-              damage_targ(foes[i], target_limb, sdamage/2,element);
-            }
             else damage_targ(foes[i], target_limb, sdamage,element);
       }
       time+=1;
       if (present(caster,place) && caster != target && !caster->query_unconscious()) {
-            environment(CASTER)->addObjectToCombatCycle(TO,1);        
+            environment(CASTER)->addObjectToCombatCycle(TO,1);
       }
       else {
           dest_effect();
