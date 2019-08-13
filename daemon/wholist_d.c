@@ -20,6 +20,8 @@ void write_who(){
 ";
     gph="[1|Back to the root|/|server|port]
 
+Online:
+
 ";
 
     people = users();
@@ -31,6 +33,7 @@ void write_who(){
     peepnames+=map_array(wizes->query_title(),
                          (:"Staff: "+$1:));
     peepnames+=players->getWholeDescriptivePhrase();
+
     foreach(peep in peepnames)
     {
         if(peep=="0")
@@ -38,10 +41,10 @@ void write_who(){
         html+=CONVERTER->convertFromInput(peep)+"<br /><font color=\"#FFFFFF\">\n";
         gph+="  "+strip_colors(peep)+"\n";
     }
-
     html+="<br/><br/>
 </body>
 </html>";
+
     write_file(HTML_OUT,html,1);
     write_file(GEOMYIDAE_OUT,gph,1);
     call_out("write_who",60);
