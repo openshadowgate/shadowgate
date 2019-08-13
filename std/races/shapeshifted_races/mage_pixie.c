@@ -48,7 +48,7 @@ int default_descriptions(object obj)
 
     obj->set_description("%^BOLD%^%^GREEN%^ is about two and half feet tall with beautiful silver wings. It is dressed in brightly colored clothing. Its little wings flutter back and forth making a faint buzzing noise. Its hair is pink.%^RESET%^");
 
-    obj->setDescriptivePhrase("%^BOL%^%^MAGENTA%^tiny $R%^RESET%^");
+    obj->setDescriptivePhrase("%^BOLD%^%^MAGENTA%^tiny $R%^RESET%^");
 
     obj->set("speech string","chirp");
     obj->set("describe string","cheerfully");
@@ -69,7 +69,7 @@ int change_into_message(object obj)
     tell_object(obj,"%^BOLD%^%^GREEN%^You flap your wings and make a cute tiny roar. You are a pixie.");
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+" grows very still and appears to concentrate deeply.",obj);
     tell_room(environment(obj),"%^RESET%^%^YELLOW%^"+obj->QCN+" begins to change in front of your very eyes!",obj);
-    tell_room(environment(obj),"%^BOLD%^%^GREEN%^Where "+obj->QCN+" once stood, now flies a spider.",obj);
+    tell_room(environment(obj),"%^BOLD%^%^GREEN%^Where "+obj->QCN+" once stood, now flies a pixie.",obj);
     return 1;
 }
 
