@@ -117,7 +117,7 @@ void execute_attack() {
             if(!present(foes[i],place)) continue;
 
             target_limb = foes[i]->return_target_limb();
-            else damage_targ(foes[i], target_limb, sdamage,element);
+            damage_targ(foes[i], target_limb, sdamage,element);
       }
       time+=1;
       if (present(caster,place) && caster != target && !caster->query_unconscious()) {
