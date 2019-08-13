@@ -1,12 +1,13 @@
 #include <std.h>
 #include <html_converter.h>
 #define HTML_OUT "/d/save/wholist.html"
+#define GEOMYIDAE_OUT "/d/save/wholist.gph"
 inherit DAEMON;
 
 int clean_up(){return 1;}
 
 void write_who(){
-    string html;
+    string html, gph;
     object *people, *wizes, *players;
     string *peepnames=({});
     string peep;
@@ -16,6 +17,9 @@ void write_who(){
 <link href=\"wholist.css\" rel=\"stylesheet\" type=\"text/css\">
 </head>
 <body>
+";
+    gph="[1|Back to the root|/|server|port]
+
 ";
 
     people = users();
@@ -32,12 +36,14 @@ void write_who(){
         if(peep=="0")
             continue;
         html+=CONVERTER->convertFromInput(peep)+"<br /><font color=\"#FFFFFF\">\n";
+        gph+="  "+strip_colors(peep)+"\n";
     }
 
     html+="<br/><br/>
 </body>
 </html>";
     write_file(HTML_OUT,html,1);
+    write_file(GEOMYIDAE_OUT,gph,1);
     call_out("write_who",60);
 }
 
