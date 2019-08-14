@@ -117,10 +117,10 @@ void newbie_func(object who)
 {
     object ob;
     if(!objectp(who)) return;
-    
-    ob = new("/d/magic/bard_comp_book");
-    ob->move(who);
-    tell_object(who, "%^BOLD%^%^WHITE%^You are given a tome to help you out on your journey in ShadowGate.%^RESET%^");
+// Bards may not need spell books anymore? The spellbook was deleted and I didn't see easy backups.    
+//    ob = new("/d/magic/bard_comp_book");
+//    ob->move(who);
+//    tell_object(who, "%^BOLD%^%^WHITE%^You are given a tome to help you out on your journey in ShadowGate.%^RESET%^");
     return 1;
 }
 
