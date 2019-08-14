@@ -7,7 +7,7 @@ string *search_paths() { return ({ "/cmds/psion","/cmds/psionics" }); } // tempo
 
 int caster_class() { return 1; }
 
-string *restricted_races() { 
+string *restricted_races() {
     return ({ "beastman","bugbear","dwarf","elf","gnome","goblin",
         "orc","drow","firbolg","gnoll","half-ogre","ogre","ogre-mage",
         "voadkyn","wemic" });
@@ -30,18 +30,18 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) 
-{  
-    return ({ "simple weapon proficiency", 
+string *class_feats(string myspec)
+{
+    return ({ "simple weapon proficiency",
               "spell focus", });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "simple weapon proficiency", "spell focus", }), ]);
 }
 
 string *class_skills()
-{  
+{
     return ({ "academics","spellcraft" });
 }
 
@@ -64,10 +64,10 @@ string old_save_type() { return "psion"; }
 
 string new_save_type() { return "psion"; }
 
-void advanced_func(object player) 
-{ 
+void advanced_func(object player)
+{
     player->set_guild_level("psion",(int)player->query_class_level("psion"));
-    return; 
+    return;
 }
 
 int hit_dice() { return 6; }  // hit dice rolled for hitpoints each level
@@ -85,7 +85,7 @@ int max_stance_defensive() { return 1; }
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("psion");       
+    level = (int)player->query_prestige_level("psion");
 //    if(level > 20) { bonus = (level - 20) + 6; }
 //    else(bonus = level / 3);
     bonus = level / 2; // boosted to tabletop equiv
@@ -131,13 +131,7 @@ void newbie_func(object who)
 {
     object ob;
     if(!objectp(who)) return;
-    ob = new("/d/magic/psicrystal");
-    ob->move(who);	
-    ob = new("/d/magic/psi_comp_bag");
-    ob->move(who);
-    tell_object(who, "%^BOLD%^%^WHITE%^You are given a psicrystal and a pouch to aid you in "+
-    "the world of ShadowGate.%^RESET%^");
-}
+ }
 
 int caster_level_calcs(object player, string the_class)
 {
@@ -149,5 +143,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

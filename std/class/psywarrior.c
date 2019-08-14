@@ -10,7 +10,7 @@ string *search_paths() { return ({ "/cmds/psionics", "/cmds/psywarrior" }); } //
 
 int caster_class() { return 1; }
 
-string *restricted_races() { return ({"beastman", "bugbear", "centaur", "drow", "dwarf", "elf", "firbolg", "gnoll", "gnome", "goblin", "half-ogre", "halfling", "kobold", "minotaur", "ogre", "ogre-mage", "orc", "voadkyn", "wemic", }); } 
+string *restricted_races() { return ({"beastman", "bugbear", "centaur", "drow", "dwarf", "elf", "firbolg", "gnoll", "gnome", "goblin", "half-ogre", "halfling", "kobold", "minotaur", "ogre", "ogre-mage", "orc", "voadkyn", "wemic", }); }
 
 string *restricted_classes() { return ({ "cavalier","paladin","antipaladin","psion","mage","sorcerer","bard" }); }
 
@@ -29,30 +29,30 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) {  
+string *class_feats(string myspec) {
     return ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "armored manifester", "combat manifester" });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "armored manifester", "combat manifester" }), 5: ({ "psionicweapon" }), 11: ({ "combatprescience" }), 17: ({ "psionic body"}), ]);
 }
 
 string *class_skills()
-{  
-    return ({ "academics","athletics","endurance","perception" });  
+{
+    return ({ "academics","athletics","endurance","perception" });
 //climb, jump, and ride are class skills, so giving them athletics
 //giving them endurance in place of autohypnosis class skill
 }
 
-int skill_points() { return 4; } 
+int skill_points() { return 4; }
 
 string old_save_type() { return "fighter"; }
 
 string new_save_type() { return "fighter"; }
 
-void advanced_func(object player) { 
+void advanced_func(object player) {
     player->set_guild_level("psywarrior",(int)player->query_class_level("psywarrior"));
-    return; 
+    return;
 }
 
 int hit_dice() { return 10; }  // hit dice rolled for hitpoints each level
@@ -69,7 +69,7 @@ int max_stance_defensive() { return 4; }
 
 int attack_bonus(object player){
     int level,bonus;
-    level = (int)player->query_prestige_level("psywarrior");       
+    level = (int)player->query_prestige_level("psywarrior");
     bonus = (level*3) / 4; // boosted to tabletop equiv
     return bonus;
 }
@@ -103,12 +103,6 @@ void newbie_func(object who)
 {
     object ob;
     if(!objectp(who)) return;
-    ob = new("/d/magic/psicrystal");
-    ob->move(who);	
-    ob = new("/d/magic/psi_comp_bag");
-    ob->move(who);
-    tell_object(who, "%^BOLD%^%^WHITE%^You are given a psicrystal and a pouch to aid you in "+
-    "the world of ShadowGate.%^RESET%^");
 }
 
 int caster_level_calcs(object player, string the_class)
@@ -121,5 +115,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

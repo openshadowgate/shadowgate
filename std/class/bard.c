@@ -8,7 +8,7 @@ string *search_paths() { return ({ "/cmds/bard" }); } // temporary
 
 int caster_class() { return 1; }
 
-string *restricted_races() { 
+string *restricted_races() {
     return ({ "beastman","bugbear","dwarf","goblin","half-orc","hobgoblin",
         "kobold","orc","drow","firbolg","gnoll","half-drow","half-ogre","ogre","ogre-mage","voadkyn" });
 }
@@ -32,9 +32,9 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) 
-{  
-    return ({ "simple weapon proficiency", 
+string *class_feats(string myspec)
+{
+    return ({ "simple weapon proficiency",
             "martial weapon proficiency",
            "light armor proficiency",
            "medium armor proficiency",
@@ -42,12 +42,12 @@ string *class_feats(string myspec)
          "spell focus" });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
    return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency", "medium armor proficiency", "spell focus","rally","dodge" }), 5 : ({ "indomitable" }), 8 : ({ "anger" }), 11 : ({ "calm" }), 12 : ({ "tools of the trade" }), 14 : ({ "force of personality" }), 17 : ({ "charm" }), ]);
 }
 
 string *class_skills()
-{  
+{
 // disguise temporarily disabled, please restore the first line when the command is installed. N, 1/14.
 //    return ({ "academics","disguise","influence","spellcraft","athletics"});
     return ({ "academics","thievery","influence","spellcraft","athletics" });  //adding in athletics as tumble is a class skill
@@ -59,11 +59,11 @@ string old_save_type() { return "bard"; }
 
 string new_save_type() { return "bard"; }
 
-void advanced_func(object player) 
-{ 
+void advanced_func(object player)
+{
     player->set_guild_level("bard",(int)player->query_class_level("bard"));
-    player->set_advanced((int)player->query_advanced() + 1);    
-    return; 
+    player->set_advanced((int)player->query_advanced() + 1);
+    return;
 }
 
 int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
@@ -81,7 +81,7 @@ int max_stance_defensive() { return 4; }
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("bard");       
+    level = (int)player->query_prestige_level("bard");
 //    if(level > 20) { bonus = (level - 20) + 15; }
 //    else bonus = (level*3) / 4;
     bonus = (level*3) / 4; // boosted to tabletop equiv
@@ -117,10 +117,6 @@ void newbie_func(object who)
 {
     object ob;
     if(!objectp(who)) return;
-// Bards may not need spell books anymore? The spellbook was deleted and I didn't see easy backups.    
-//    ob = new("/d/magic/bard_comp_book");
-//    ob->move(who);
-//    tell_object(who, "%^BOLD%^%^WHITE%^You are given a tome to help you out on your journey in ShadowGate.%^RESET%^");
     return 1;
 }
 
@@ -134,5 +130,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
