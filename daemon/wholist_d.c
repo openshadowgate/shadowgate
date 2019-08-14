@@ -4,9 +4,13 @@
 #define GEOMYIDAE_OUT "/d/save/wholist.gph"
 inherit DAEMON;
 
-int clean_up(){return 1;}
+int clean_up()
+{
+    return 1;
+}
 
-void write_who(){
+void write_who()
+{
     string html, gph;
     object *people, *wizes, *players;
     string *peepnames=({});
