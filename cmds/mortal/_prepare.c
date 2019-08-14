@@ -765,8 +765,12 @@ void check_list(object obj, string list, string myclass)
     int *spell_levels = allocate(10);
     int i, j, k, current_spells;
 
-    if (!objectp(obj)) { return; }
-    if (!stringp(myclass) || myclass == "" || myclass == " ") { return; }
+    if (!objectp(obj))
+        return;
+    if (!stringp(myclass) || myclass == "" || myclass == " ")
+        return;
+    if (myclass == "bard" || myclass == "sorcerer")
+        return;
 
     lists = get_lists(obj);
     my_lists = keys(lists);
@@ -805,7 +809,7 @@ void check_list(object obj, string list, string myclass)
             continue;
 
         for (j = 0;j < sizeof(leveled_spells);j++)
-            if (all_spells[leveled_spells[j]] != i && leveled_spells[j] != "generic" )
+            if (all_spells[leveled_spells[j]] != i )
             {
                 tell_object(obj,"Spell "+leveled_spells[j]+" got updated. Check its helpfile.");
                 remove_spell_from_list(obj,leveled_spells[j],list,myclass,1);
