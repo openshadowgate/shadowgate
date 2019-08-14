@@ -51,7 +51,7 @@ Online:
 
     write_file(HTML_OUT,html,1);
     write_file(GEOMYIDAE_OUT,gph,1);
-    call_out("write_who",60);
+    call_out("write_who",90);
 }
 
 void create(){
