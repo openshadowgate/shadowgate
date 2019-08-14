@@ -46,7 +46,7 @@ int cmd_prepare(string str)
     int i, validfocus, times, sl, cl, rst, lvadj, temp;
     object *inven;
 
-    if(TP->query_bound() || TP->query_unconscious()) 
+    if(TP->query_bound() || TP->query_unconscious())
     {
         TP->send_paralyzed_message("info",TP);
         return 1;
@@ -54,16 +54,16 @@ int cmd_prepare(string str)
 
     if (TP->query_paralyzed()) { return notify_fail(TP->query_paralyze_message()); }
 
-    if (!str) 
+    if (!str)
     {
         HELP_D->help("prepare");
         return 1;
     }
 
     if (TP->query_property("berserked"))
-        return notify_fail("The rage in you prevents such concentration!\n"); 
+        return notify_fail("The rage in you prevents such concentration!\n");
     if (sizeof(TP->query_attackers()) > 0)
-        return notify_fail("You cannot prepare spells while in combat!\n"); 
+        return notify_fail("You cannot prepare spells while in combat!\n");
 
     arguments = explode(str," ");
 
@@ -78,7 +78,7 @@ int cmd_prepare(string str)
                 HELP_D->help("prepare");
                 return 1;
             }
-            
+
             first_list = arguments[1];
             second_list = arguments[4];
             if(first_list == second_list)
@@ -91,10 +91,10 @@ int cmd_prepare(string str)
             {
                 return notify_fail("Your class names must be the same");
             }
-            
+
             copy_list(TP, first_list, second_list, first_class);
             return 1;
-            
+
         case "add":
 
             if (sizeof(arguments) < 4)
@@ -174,15 +174,15 @@ int cmd_prepare(string str)
         }
     }
 
-    if (sscanf(str, "%s %s", myclass, args) != 2) 
-    { 
+    if (sscanf(str, "%s %s", myclass, args) != 2)
+    {
                 HELP_D->help("prepare");
                 return 1;
     }
 
     if(!can_prepare_as(myclass))
         return 1;
-    
+
     if (!TP->is_class(myclass) && !avatarp(TP)) { return notify_fail("You cannot cast spells as a " + myclass + "!\n"); }
 
     if(myclass == "monk")
@@ -196,12 +196,12 @@ int cmd_prepare(string str)
         tell_object(TP,"Warlocks don't need to prepare spells, just cast");
         return 1;
     }
-    
+
     if (myclass == "antipaladin") { myclass = "paladin"; }
 
     validfocus = 0;
 
-    
+
     if(myclass == "psywarrior" || myclass == "psion")
     {
         if (sscanf(str, "%s %s", myclass, args) != 2) { return notify_fail("Syntax: <prepare classname points [times x].>\n"); }
@@ -219,20 +219,20 @@ int cmd_prepare(string str)
     magic = ({});
     get_spells(TP,myclass);
     magic = keys(spells);
-    
+
     if (!sizeof(magic)) { return notify_fail("There are no spells available to the " + myclass + " class!"); }
 
     if (sscanf(args, "%s times %d", spellname, times) != 2) //multi-memorisation of a spell
-    { 
+    {
         spellname = args;
         times = 1;
     }
 
-    if(myclass != "bard" && myclass != "sorcerer") 
+    if(myclass != "bard" && myclass != "sorcerer")
     {
         if (member_array(spellname, magic) == -1) { return notify_fail("You don't know of a spell named " + spellname + " to prepare.\n"); }
     }
-    else 
+    else
     {
         if (sscanf(spellname, "level %d", sl) != 1) { return notify_fail("As a spontaneous caster, you need to <prepare myclass level x [times x]>.\n"); }
     }
@@ -252,7 +252,7 @@ int cmd_prepare(string str)
 
     cl = TP->query_guild_level(myclass);
 
-    if(cl > 9) 
+    if(cl > 9)
     {
 	    lvadj = 375/cl; //was lvadj = 1000/cl; lowering for testing - Octothorpe 10/5/17
 	    if(!lvadj) lvadj = 1;   // they say dividing by zero is reserved for god...
@@ -300,13 +300,13 @@ int cmd_prepare(string str)
     }
     TP->set_property("memorizing",TP);
     TP->prepare(spellname, temp, myclass, times);
-    return 1;  
+    return 1;
 }
 
 
-int get_spells(object player, string myclass) 
+int get_spells(object player, string myclass)
 {
-    spells=MAGIC_D->index_spells_for_player(player,myclass);    
+    spells=MAGIC_D->index_spells_for_player(player,myclass);
 }
 
 int prep_power_points(string myclass, int times)
@@ -335,18 +335,18 @@ int prep_power_points(string myclass, int times)
     tell_room(ETP, TPQCN+" closes "+TP->QP+" eyes, "
         "focusing silently.", TP);
     TP->set_property("memorizing",TP);
-    
+
     if(wait < time())
     {
         TP->prepare(spellname, temp, myclass, times);
         wait = time() + 1;
     }
 
-    return 1;  
+    return 1;
 }
 
 
-void add_spell(string spellname, int lvl) 
+void add_spell(string spellname, int lvl)
 {
     spellname = replace_string(spellname,"_","",1);
     spellname = replace_string(spellname,".c","",1);
@@ -357,7 +357,7 @@ void add_spell(string spellname, int lvl)
 
 
 
-// make a command to copy one list to another 
+// make a command to copy one list to another
 
 // stuff for prepared lists below this point -Ares
 
@@ -431,7 +431,7 @@ mapping filter_spells(mapping listed_spells, mapping memorized_spells)
     string *leveled_spells, *leveled_memorized_spells,spell;
     int i,count,add,subtract, spell_level;
 
-    leveled_spells = keys(listed_spells);    
+    leveled_spells = keys(listed_spells);
     leveled_memorized_spells = keys(memorized_spells);
 
     if (sizeof(leveled_spells))
@@ -442,15 +442,15 @@ mapping filter_spells(mapping listed_spells, mapping memorized_spells)
             subtract = 0;
             count = 0;
 
-            spell = leveled_spells[i];            
+            spell = leveled_spells[i];
             add = listed_spells[spell];
-            
+
             if(strsrch(spell, "level ") != -1)
             {
                 subtract = memorized_spells["generic"];
             }
 
-            else if (member_array(spell, leveled_memorized_spells) != -1) 
+            else if (member_array(spell, leveled_memorized_spells) != -1)
             {
                 subtract = memorized_spells[spell];
                 leveled_memorized_spells -= ({ spell });
@@ -495,15 +495,15 @@ mapping compare_spells(object obj, string list, string myclass)
     lists = get_lists(obj);
     current_list = get_current_list(lists, list);
     memorized_spells = (mapping)obj->query_all_memorized(myclass);
-    
+
     spell_levels = keys(current_list);
-    
-    if (!sizeof(spell_levels)) 
+
+    if (!sizeof(spell_levels))
     {
         tell_object(obj, "No spells currently in your " + list + " list.");
-        return 0; 
+        return 0;
     }
-    
+
     for (i = 0;i < sizeof(spell_levels);i++)
     {
         level_list = get_level_list(spell_levels[i], current_list);
@@ -517,9 +517,9 @@ mapping compare_spells(object obj, string list, string myclass)
         }
         memorized_level = memorized_spells[spell_levels[i]];
         leveled_add = filter_spells(level_list, memorized_level);
-        to_add_or_remove += ([spell_levels[i]:leveled_add]);        
+        to_add_or_remove += ([spell_levels[i]:leveled_add]);
     }
-    
+
     return to_add_or_remove;
 }
 
@@ -571,14 +571,14 @@ void prepare_list(object obj, string *spells, int delay, string myclass, int ind
     }
 
     spell = spells[index];
-    
+
     if ((int)obj->can_memorize(myclass, spell) != MEM_OK)
     {
         tell_object(obj, "No more spells to prepare " + spell + ", ending...");
         remove_call_out("prepare_list");
         return;
     }
-    
+
     if(wait < time())
     {
         wait = time() + 1;
@@ -587,8 +587,8 @@ void prepare_list(object obj, string *spells, int delay, string myclass, int ind
         index++;
     }
 
-    delay = roll_dice(4, 2); 
-    call_out("prepare_list", delay, obj, spells, delay, myclass, index);    
+    delay = roll_dice(4, 2);
+    call_out("prepare_list", delay, obj, spells, delay, myclass, index);
     return;
 }
 
@@ -616,7 +616,7 @@ void prepare_listed_spells(object obj, string list, string myclass)
         return;
 
     check_list(obj,list,myclass);
-    
+
     for (i = 0;i < sizeof(spell_levels);i++)
     {
         leveled_spells = to_prepare[spell_levels[i]];
@@ -661,7 +661,7 @@ void prepare_listed_spells(object obj, string list, string myclass)
         }
     }
 
-    class_level = (int)obj->query_guild_level(myclass);    
+    class_level = (int)obj->query_guild_level(myclass);
     delay = MEMORIZE_DELAY;
 
     if (class_level > 9)
@@ -764,7 +764,7 @@ void check_list(object obj, string list, string myclass)
     string *my_lists, *leveled_spells;
     int *spell_levels = allocate(10);
     int i, j, k, current_spells;
-    
+
     if (!objectp(obj)) { return; }
     if (!stringp(myclass) || myclass == "" || myclass == " ") { return; }
 
@@ -802,10 +802,10 @@ void check_list(object obj, string list, string myclass)
         leveled_spells = keys(level_list);
 
         if (!sizeof(leveled_spells))
-            continue; 
+            continue;
 
         for (j = 0;j < sizeof(leveled_spells);j++)
-            if (all_spells[leveled_spells[j]] != i )
+            if (all_spells[leveled_spells[j]] != i && leveled_spells[j] != "generic" )
             {
                 tell_object(obj,"Spell "+leveled_spells[j]+" got updated. Check its helpfile.");
                 remove_spell_from_list(obj,leveled_spells[j],list,myclass,1);
@@ -868,21 +868,21 @@ int add_spell_to_list(object obj, string spell, string list, string myclass)
     int result,spell_level,current_spells,max_spells;
 
     if (!objectp(obj)) { return 0; }
-    
+
     result = obj->can_memorize(myclass,spell);
 
-    if (result == SPELL_RESTRICTED)    
-    { 
+    if (result == SPELL_RESTRICTED)
+    {
         tell_object(obj,"Your use of "+spell+" has been restricted!\n");
         return 0;
     }
-    if (result == TOO_STUPID)          
-    { 
-        tell_object(obj,"You do not meet the stat requirement to use "+spell+".\n"); 
+    if (result == TOO_STUPID)
+    {
+        tell_object(obj,"You do not meet the stat requirement to use "+spell+".\n");
         return 0;
     }
-    if (result != MEM_OK)              
-    { 
+    if (result != MEM_OK)
+    {
         if (result != TOO_MANY)
         {
             tell_object(obj, "You cannot prepare the " + spell + " spell.\n");
@@ -902,8 +902,8 @@ int add_spell_to_list(object obj, string spell, string list, string myclass)
     max_spells = max_allowed(obj, myclass, spell_level);
     current_spells = num_current_spells(level_list);
 
-    if (current_spells >= max_spells) 
-    { 
+    if (current_spells >= max_spells)
+    {
         tell_object(obj,"You have too many level " + spell_level + " spells in your list right now.");
         return 0;
     }
@@ -964,22 +964,22 @@ void copy_list(object obj, string list_one, string list_two, string class_name)
     mapping lists,the_list;
     if(!objectp(obj)) { return; }
     tell_object(obj,"Attempting to copy "+list_one+" to "+list_two);
-    
+
     lists = (mapping)obj->query("prepared_lists");
-    
-    if(!mapp(lists)) 
+
+    if(!mapp(lists))
     {
         tell_object(TP,"You don't have any prepared lists.");
         return;
     }
     the_list = lists[list_one];
-    
+
     if(!mapp(the_list))
     {
         tell_object(TP,"You don't seem to have a list called "+list_one);
         return;
     }
-    
+
     lists[list_two] = the_list;
     obj->delete("prepared_lists");
     save_lists(obj, lists);
@@ -1013,33 +1013,33 @@ int can_prepare_as(string myclass)
     int i;
 
     if(myclass == "paladin" || myclass == "cleric") //divine check for holy symbol
-    { 
+    {
         inven = all_inventory(TP);
-        if(sizeof(inven)) 
+        if(sizeof(inven))
         {
-            for(i = 0;i<sizeof(inven);i++) 
+            for(i = 0;i<sizeof(inven);i++)
             {
-                if(inven[i]->is_holy_symbol()) 
+                if(inven[i]->is_holy_symbol())
                 {
                     if((string)inven[i]->query_diety() == (string)TP->query_diety() &&
                        (string)inven[i]->query_owner() == (string)TP->query_name())
                         validprep = 1;
                 }
             }
-        }        
+        }
         if (!validprep && !avatarp(TP))
         {
-            write("You need a dedicated holy symbol as a focus for your prayer!"); 
+            write("You need a dedicated holy symbol as a focus for your prayer!");
             return 0;
         }
     }
 
     if(myclass == "mage") //divine check for holy symbol
-    { 
+    {
         inven = all_inventory(TP);
-        if(sizeof(inven)) 
-            for(i = 0;i<sizeof(inven);i++) 
-                if(inven[i]->is_spellbook()) 
+        if(sizeof(inven))
+            for(i = 0;i<sizeof(inven);i++)
+                if(inven[i]->is_spellbook())
                     validprep = 1;
         if (!validprep && !avatarp(TP))
         {
@@ -1069,7 +1069,7 @@ int spell_in_grimoire(string spell,object obj,string myclass)
     return 1;
 }
 
-void help() 
+void help()
 {
     write("
 %^CYAN%^NAME%^RESET%^
@@ -1108,13 +1108,13 @@ Normal caster classes (clerics, mages, druids, paladins, rangers, assassins) may
 
 Spell lists are the feature that allows you to prepare spells in bulk and store lists of preparations for various purboses. Each casting %^ORANGE%^%^ULINE%^CLASS%^RESET%^ requires own spell list. You can not have lists of the same name even in different classes. Syntax goes as follows:
 
-%^ORANGE%^<prepare add %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^ 
+%^ORANGE%^<prepare add %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^
 
     Will add %^ORANGE%^%^ULINE%^SPELL%^RESET%^ of caster %^ORANGE%^%^ULINE%^CLASS%^RESET%^ to preparation list named %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^
 
-%^ORANGE%^<prepare remove %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^ 
+%^ORANGE%^<prepare remove %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^
 
-    Will remove %^ORANGE%^%^ULINE%^SPELL%^RESET%^ of caster %^ORANGE%^%^ULINE%^CLASS%^RESET%^ to preparation list named %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ 
+    Will remove %^ORANGE%^%^ULINE%^SPELL%^RESET%^ of caster %^ORANGE%^%^ULINE%^CLASS%^RESET%^ to preparation list named %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^
 
 %^ORANGE%^<prepare prepare %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^
 
@@ -1126,11 +1126,11 @@ Spell lists are the feature that allows you to prepare spells in bulk and store 
 
 %^ORANGE%^<prepare delete %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^
 
-    Will delete list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ for given %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^ 
+    Will delete list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ for given %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^
 
 %^ORANGE%^<prepare display %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^
 
-    Will show you list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ for given %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^ 
+    Will show you list %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ for given %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^
 
 %^ORANGE%^<prepare copy %^ORANGE%^%^ULINE%^LISTNAME%^RESET%^ %^ORANGE%^%^ULINE%^CLASS%^RESET%^ to %^ORANGE%^%^ULINE%^LISTNAME2%^RESET%^ %^ORANGE%^%^ULINE%^CLASS2%^RESET%^%^ORANGE%^>%^RESET%^
 
@@ -1160,5 +1160,3 @@ Now, to prepare first list you can type %^ORANGE%^<prepare prepare combat mage>%
 forget, cast, buff, dispell, spells, recall
 ");
 }
-
-
