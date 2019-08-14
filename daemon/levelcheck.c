@@ -1,6 +1,11 @@
 inherit DAEMON;
 
 /**
+ * @file
+ * @brief Levelcheck related functions
+ */
+
+/**
  * This function returns colored version of levelcheck between players
  *
  * @param first First player
@@ -52,10 +57,10 @@ public int levelcheck(object first, object second)
     diff = absolute_value(diff);
 
     switch(low)
-    {        
-    case 1..30: range = 5; break;
-    case 31..50: range = 7; break;
-    default: range = 7;
+    {
+    case 1..40: range = 5; break;
+    case 41..50: range = 6; break;
+    default: range = 5;
     }
 
     if(diff > range)
@@ -63,13 +68,12 @@ public int levelcheck(object first, object second)
 
     if(first->query("no pk")) return 2;
     if(second->query("no pk")) return 2;
-    
+
     if(first->query_death_flag()) return 2;
     if(second->query_death_flag()) return 2;
 
     if(first->get_pk_death_flag()) return 2;
     if(second->get_pk_death_flag()) return 2;
-    
+
     return 1;
 }
-
