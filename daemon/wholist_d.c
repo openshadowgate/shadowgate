@@ -15,6 +15,9 @@ void write_who()
     object *people, *wizes, *players;
     string *peepnames=({});
     string peep;
+
+    call_out("write_who",90);
+
     html="<!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +54,7 @@ Online:
 
     write_file(HTML_OUT,html,1);
     write_file(GEOMYIDAE_OUT,gph,1);
-    call_out("write_who",90);
+
 }
 
 void create(){
