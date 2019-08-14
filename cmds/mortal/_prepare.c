@@ -758,6 +758,15 @@ void display_list(object obj, string list, string myclass)
     return;
 }
 
+/**
+ * This will validate all spells from the list against spell index and
+ * will remove them if they no longer exist at their level or got
+ * removed from the game alltogether.
+ *
+ * @param obj owner of the list
+ * @param list name of the list
+ * @param myclass the character class the list belongs to
+ */
 void check_list(object obj, string list, string myclass)
 {
     mapping lists, current_list, level_list, all_spells;
