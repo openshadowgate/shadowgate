@@ -1,10 +1,11 @@
-%^ULINE%^%^CYAN%^Mail usage:%^RESET%^
+%^CYAN%^MAIL PROGRAM USE%^RESET%^
+
 %^ORANGE%^<a %^ORANGE%^%^ULINE%^GROUP%^RESET%^%^ORANGE%^ [%^ORANGE%^%^ULINE%^LIST%^RESET%^%^ORANGE%^]>%^RESET%^
   Adds a list of players to the group named. If no such group exists, it is created.
- 
+
 %^ORANGE%^<x %^ORANGE%^%^ULINE%^GROUP%^RESET%^%^ORANGE%^ [%^ORANGE%^%^ULINE%^LIST%^RESET%^%^ORANGE%^]>%^RESET%^
   Deletes a list of players from your mailing group. If no list is given, the entire group is deleted.
- 
+
 %^ORANGE%^<g [%^ORANGE%^%^ULINE%^GROUP%^RESET%^%^ORANGE%^]>%^RESET%^
   Shows the members of the group named. If no group is named, it shows thenames of all available groups, including those defined by the mud.
 
@@ -51,5 +52,3 @@ Set to 1 if you do not want to see all your mail headers when you first open you
 
 MAIL_DELETE_PROMPT
 Set to 1 if you want to be prompted before the deletion of letters when you exit the mailer.
-
-
