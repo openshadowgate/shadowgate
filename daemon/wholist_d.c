@@ -43,7 +43,7 @@ Online:
 
     foreach(peep in peepnames)
     {
-        if(peep=="0")
+        if(!stringp(peep))
             continue;
         html+=CONVERTER->convertFromInput(peep)+"<br /><font color=\"#FFFFFF\">\n";
         gph+="  "+strip_colors(peep)+"\n";
