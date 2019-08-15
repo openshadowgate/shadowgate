@@ -1,0 +1,26 @@
+%^CYAN%^NAME
+
+Mats - Magical crafting materials
+
+%^CYAN%^SYNTAX
+
+merge mats
+separate NUMBER mats
+
+%^CYAN%^DESCRIPTION 
+
+Mats are components required to imbue items with magical properties.  To use the mats, you will need the %^CYAN%^craft magical equipment feat%^RESET%^ and points in the appropriate skill. Even characters without the nessecary feat are well served to carry mats, as it is sometimes used as a currency among player characters.
+
+  %^ORANGE%^<look mats>%^RESET%^ will tell you how many mats you have.
+  %^ORANGE%^<merge mats>%^RESET%^ will let you merge two boxes of mats into one.
+  %^ORANGE%^<separate NUMBER mats>%^RESET%^ will let you put the specified number of mats into a box by themselves. 
+
+There are two common ways to get mats:
+
+  %^BOLD%^%^CYAN%^<>%^RESET%^ Completing a bio-quest rewards you with a decent amount of mats based on your level, provided you request this reward (see %^ORANGE%^<help bio-quests>%^RESET%^).   
+  
+  %^BOLD%^%^CYAN%^<>%^RESET%^ Magic items may be broken down into mats by using the %^ORANGE%^<disenchant ITEM>%^RESET%^ command. Please be careful not to disenchant the wrong item. 
+
+%^CYAN%^SEE ALSO
+
+disenchant, craft magical equipment, craft 

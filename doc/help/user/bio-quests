@@ -1,0 +1,40 @@
+%^CYAN%^NAME
+
+Bio-quests: Biography Quests
+
+%^CYAN%^SYNTAX
+
+biography quests request gold 
+biography quests request mats 
+ 
+ 
+%^CYAN%^DESCRIPTION 
+
+Biography Quests, also known as bio-quests, are special quests that you can partake in by using the syntax above.  Completing the quest gives you the chosen reward (mats or gold) and an amount of experience points based on your level.  If you do not specify either mats or gold, your reward will default to gold.  You can request one bio-quest per four hours, but you only gain the full reward every 24 hours. 
+
+Once you have requested a bio-quest, an item known as a %^CYAN%^"device"%^RESET%^ will appear in your inventory.  You may %^ORANGE%^<read device>%^RESET%^ for further instructions.  The device will stay with you for four hours or until you complete the quest, whichever comes first. %^ORANGE%^<gaze device>%^RESET%^ will tell you where you need to go to %^ORANGE%^<power device>%^RESET%^.  You will be then be taken to an alternate reality where you must search for %^CYAN%^"a fragment of reality"%^RESET%^, which may be found on the ground or on a monster. Get the fragment to complete the quest. 
+
+If you power the device while in a party with other players, you will be able to complete the quest together. All contributing players will receive a separate reward, as specified by the one who requested the quest.  You are also able to bring a merc on a bio-quest. 
+
+
+%^CYAN%^Please note:%^RESET%^
+
+An alternate reality is also known as a phased event. This means that you are taken to a location separate from other players.  No player can find you in the alternate reality, or come to your aid, but they can contact you or scry you through magical means. 
+
+
+%^CYAN%^Troubleshooting 
+
+There are some known issues with this quest, so please read the below carefully:
+
+  %^BOLD%^%^CYAN%^<> %^RESET%^It may take a while for a fragment to spawn and it might spawn in a hidden location.  If you cannot find a fragment within a reasonable amount of time (or if you have killed everything in the area), your  best option is to %^ORANGE%^<leave device>%^RESET%^ and try again after about 30 minutes.  This will allow the fragment time to respawn. 
+  
+  %^BOLD%^%^CYAN%^<> %^RESET%^If you find the fragment on a monster, please kill the monster in question before taking the fragment.  Should you try to steal it, your quest is very likely to bug and cheat you of your reward. 
+  
+  %^BOLD%^%^CYAN%^<> %^RESET%^If you find the fragment on the ground, please finish combat (kill everything that is attacking you), before picking up the fragment.  If you loot it while in active combat, your quest is very likely to bug and cheat you of your reward. 
+  
+  %^BOLD%^%^CYAN%^<>  %^RESET%^Always %^ORANGE%^<look>%^RESET%^ before you %^ORANGE%^<offerall>%^RESET%^ in an alternate reality, so that you do not accidentally offer your fragment.
+  
+
+%^CYAN%^SEE ALSO 
+
+party, money, mats, craft, disenchant
