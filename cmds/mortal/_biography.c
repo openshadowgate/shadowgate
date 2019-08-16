@@ -11,7 +11,7 @@
 #define VALID_ARGS ({"deaths", "kills", "quests"})
 inherit DAEMON;
 
-string safe_cap(string str) 
+string safe_cap(string str)
 {
     if(stringp(str)) return capitalize(str);
     else return capitalize(identify(str));
@@ -42,9 +42,9 @@ int display_kills(string who)
 
     if(!who)
         ob=this_player();
-    else 
+    else
     {
-        if(!wizardp(this_player())) ob = TP;            
+        if(!wizardp(this_player())) ob = TP;
         if(!ob=find_player(who))
             return notify_fail("No such person!\n");
     }
@@ -54,7 +54,7 @@ int display_kills(string who)
         tell_object(ob, "You haven't killed anything yet!\n");
         return 1;
     }
-    for(x=0;x<amt;) 
+    for(x=0;x<amt;)
     {
         if(x+2 < amt)
         {
@@ -80,24 +80,24 @@ int display_kills(string who)
 }
 
 
-int display_deaths(string str) 
+int display_deaths(string str)
 {
     int i, max, flag;
     mixed *deaths;
     string borg, tmp;
     object ob;
-    
+
     if(!objectp(TP)) return "";
     if(objectp(ob = find_player(str))) { deaths = (mixed *) ob->query_deaths(); flag = 1; }
     else deaths = (mixed *) TP->query_deaths();
 
-    if(!(deaths) || !(max = sizeof(deaths))) 
+    if(!(deaths) || !(max = sizeof(deaths)))
     {
         borg = HEAD;
         if(!flag) borg += "\n%^CYAN%^You have never experienced the pain of death.\n\n";
         else borg += "\n%^CYAN%^"+capitalize(str)+" has never experienced the pain of death.\n\n";
     }
-    else 
+    else
     {
         if(!flag) borg = "%^BOLD%^%^GREEN%^You have died %^RESET%^%^BOLD%^"+max+" %^GREEN%^times.\n";
         else borg = "%^BOLD%^%^GREEN%^"+capitalize(str)+" has died %^RESET%^%^BOLD%^"+max+"%^GREEN%^ times.\n";
@@ -107,7 +107,7 @@ int display_deaths(string str)
         write(borg);
         borg = "";
 
-        for(i=0; i<max; i++) 
+        for(i=0; i<max; i++)
         {
             borg += "%^BOLD%^%^RED%^"+arrange_string(safe_cap(deaths[i][0]), 20);
             tmp = "%^MAGENTA%^"+date(deaths[i][1])+" "+month(deaths[i][1])+
@@ -127,19 +127,19 @@ int display_quests(string mtarg, string str)
 {
     object targ;
     string *quests, borg, tmp, rewardType;
-    mapping minis;    
+    mapping minis;
     int i;
     object ob;
-    if(mtarg && avatarp(TP)) 
+    if(mtarg && avatarp(TP))
     {
-        if(!(mtarg = find_player(str)) || targ->query_highest_level() > TP->query_highest_level()) 
+        if(!(mtarg = find_player(str)) || targ->query_highest_level() > TP->query_highest_level())
         {
             tell_object(TP, "That person is not online.\n");
             return 1;
         }
     }
     else { targ = TP; }
-    if(targ == TP && !avatarp(TP) && strsrch(str, "request") != -1)    
+    if(targ == TP && !avatarp(TP) && strsrch(str, "request") != -1)
     {
         if(TP->query_character_level() < 5 || newbiep(TP))
         {
@@ -190,7 +190,7 @@ int display_quests(string mtarg, string str)
     }
     if(!check_permission(targ,TP)) { return 1; }
     if(targ == TP) { tmp = "You have"; }
-    else { tmp = capitalize(targ->query_name()) + " has"; }    
+    else { tmp = capitalize(targ->query_name()) + " has"; }
     borg = HEAD;
     borg += "%^YELLOW%^" + (string)targ->query_short()+"\n\n";
     minis = (mapping)targ->query_mini_quest_map();
@@ -200,7 +200,7 @@ int display_quests(string mtarg, string str)
     {
         string mquest, qname;
         borg += "%^CYAN%^" + tmp + " been rewarded for the following great deeds:\n";
-        
+
         foreach(mquest in keys(minis))
         {
             qname = minis[mquest][1];
@@ -211,7 +211,7 @@ int display_quests(string mtarg, string str)
         borg += "\n";
     }
     if(!sizeof(quests = targ->query_quests())) borg += "%^CYAN%^" + tmp + " not completed any quests.\n";
-    else 
+    else
     {
         borg += "%^CYAN%^" + tmp+ " completed the following quests:\n";
         i = sizeof(quests);
@@ -230,19 +230,19 @@ int cmd_biography(string str)
     int birth, birth2, byear;
     mixed *oh;
     string borg, tmp, arg, target;
-    if(stringp(str)) 
+    if(stringp(str))
     {
         sscanf(str, "%s %s", arg, str);
-        if(stringp(arg)) 
+        if(stringp(arg))
         {
-            if(user_exists(arg) && avatarp(TP)) 
+            if(user_exists(arg) && avatarp(TP))
             {
                 target = arg;
                 arg = str;
             }
         }
         else arg = str;
-    }            
+    }
     if(!stringp(str) || member_array(arg, VALID_ARGS) == -1)
     {
         borg = "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
@@ -277,7 +277,7 @@ int cmd_biography(string str)
 }
 
 int help() {
-   write( 
+   write(
 "
 %^CYAN%^NAME%^RESET%^
 
@@ -308,7 +308,6 @@ There are optional arguments:
 %^CYAN%^SEE ALSO%^RESET%^
 
 score, finger, flag, setenv
-
 "
    );
    return 1;
