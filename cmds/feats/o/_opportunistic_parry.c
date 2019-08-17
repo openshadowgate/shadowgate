@@ -11,7 +11,9 @@ void create()
     feat_category("Duelist");
     feat_name("opportunistic parry");
     feat_prereq("Positioning");
-    feat_desc("This feat will give you a chance based on your athletics skill to parry all attacks that are directed your way. This feat doesn't stack with Parry, you don't need it if you're fighter or paladin.");
+    feat_desc("This feat will give you a chance based on your athletics skill to parry all attacks that are directed your way. This feat doesn't stack with Parry, you don't need it if you're fighter or paladin.
+
+%^BOLD%^N.B.%^RESET%^ This feat doesn't stack with parry feat.");
     permanent(1);
 }
 
@@ -42,4 +44,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
