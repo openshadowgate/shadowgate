@@ -1432,22 +1432,22 @@ void set_new_exp(int level, string perc)
     switch(perc)
     {
     case "very low":
-        div = 40; // 60% lower than normal ( 100 - 60 = 40)
+        div = 40;
         break;
     case "low":
-        div = 70; // 30% lower than normal ( 100 - 30 = 70)
+        div = 50;
         break;
    case "normal":
-   div = 100;
-   break;
+       div = 60;
+       break;
     case "high":
-        div = 130; // 30% higher than normal ( 100 + 30 = 130)
+        div = 70;
         break;
     case "very high":
-        div = 160; // 60% higher than normal ( 100 + 60 = 160)
+        div = 80;
         break;
     case "boss":
-        div = 300; // 200% higher than normal ( 100 + 200 = 300)
+        div = 300;
         break;
     default:
         perc = "normal";
@@ -1461,7 +1461,7 @@ void set_new_exp(int level, string perc)
         exp = EXP_NEEDED[level + 1] - EXP_NEEDED[level]; // 1 level worth of exp
     }
 
-    exp = (exp / (level * 9));
+    exp = (exp / (level * 11));
 
     if(perc != "normal")
     {
