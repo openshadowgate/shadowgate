@@ -38,7 +38,7 @@ static mapping  INFO,
                 ENEMIES,
                 TIMERS;
 
-                
+
 static object   REAL_OWNER,
                 TEMP_OWNER,
                 OWNER,
@@ -74,13 +74,13 @@ void db(string str)
     object ob;
     ob = find_object_or_load("/realms/ares/workroom.c");
     if(objectp(ob)) { tell_object(ob,str); }
-    return;    
+    return;
 }
 
 void toggle_dismissed()
 {
     if(DISMISSED) { DISMISSED = 0; }
-    DISMISSED = 1;    
+    DISMISSED = 1;
 }
 
 int get_end_time() { return END_TIME; }
@@ -91,26 +91,26 @@ void fire_me()
 {
     object whistle;
     if(objectp(TEMP_OWNER)) { return; } // can't fire somebody else's merc
-    
+
     if(objectp(OWNER)) { whistle = present("merc_whistle_999",OWNER); }
-    if(objectp(whistle)) 
+    if(objectp(whistle))
     {
         tell_object(OWNER,"%^RESET%^%^BOLD%^%^GREEN%^The magical whistle vanishes as you terminate the mercenary contract.%^RESET%^");
-        whistle->remove(); 
+        whistle->remove();
     }
-    
+
     FIRED = 1;
     if(DOUBLE_PRICE)
-    {        
+    {
         HENCH_D->penalize(OWNER_NAME,"late");
     }
-    
+
     if(objectp(TO))
     {
         TO->move(HENCH_ROOM);
         TO->remove();
     }
-    return;    
+    return;
 }
 
 
@@ -120,94 +120,94 @@ string desc_me()
     race = (string)TO->query_race();
     gender = (string)TO->query_gender();
     name = capitalize((string)TO->query_name());
-    
+
     switch(race)
     {
     case "human":
-        
+
         switch(gender)
         {
         case "male":
-            
+
             desc = ""+name+" is tall for a human male, standing over six and a half feet in height.  He looks to be heavily built, "
             "but beneath all the armor it's difficult to tell how much of that bulk is muscle and how much is padding. A heavy helm "
             "covers his head and makes it difficult to make out many details.  What is clear is that he is still somewhat young.  Out "
             "of his teenaged years, but probably not yet into his thirties.  He carries himself with the easy grace of a man who has spent "
             "a lot of time wearing his armor and a lot of time wielding his weapon.  The armor and shield are well made, but lack any of the "
             "fancy adornments that are more typical of the gear adventurers wear.  Instead it looks like quality gear that is meant to be "
-            "mass produced.";        
+            "mass produced.";
             break;
-         
+
         case "female":
         default:
-        
+
             desc = ""+name+" is around average height for a female human, standing just under five and a half feet tall.  She has a slender, "
             "build but looks quite heavy in the suit of steel armor. A heavy helm prevents you from seeing much of her face, but long brownish "
             "hair sometimes escapes the confines of the headgear.  She seems to be youthful in age, probably out of her teens but not yet into "
             "her thirties.  She carries himself with the easy grace of someone who has spent a lot of time wearing heavy armor and has learned "
             "how to move in it.  The armor and shield are well made, but lack any of the fancy adornments that are more typical of the gear "
-            "adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";        
+            "adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";
             break;
         }
-        
+
         break;
-        
+
     case "half-orc":
-    
+
         switch(gender)
         {
         case "male":
-        
+
             desc = ""+name+" is tall for a half-orc, standing nearly six feet in height.  His body is very bulky beneath the suit of heavy "
             "armor.  A helm covers his head and face and makes it difficult to determine much about his appearance.  He seems to be of middle "
             "age for a half-orc.  He carries the heavy armor on his body as if it were a second skin, the considerable bulk of the metal armor doing "
             "nothing at all to slow down his movements.  The armor and shield are well made, but lack any of the fancy adornments that are "
-            "more typical of the gear adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";            
+            "more typical of the gear adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";
             break;
-            
+
         case "female":
         default:
-        
+
             desc = ""+name+" is about average height for a female half-orc, standing just a bit over five feet tall.  Her body is bulky beneath the suit "
             "of heavy armor.  A helm covers her face and makes it difficult to determine many of the details, save for the fact that she seems to be "
             "approaching middle age for a half-orc.  The armor seems to do very little to limit her movements, despite its weight and bulk.  The armor and "
             "shield are well made, but lack any of the fancy adornments that are more typical of the gear adventurers wear.  Instead it looks like quality "
-            "gear that is meant to be mass produced.";            
+            "gear that is meant to be mass produced.";
             break;
         }
-        
+
         break;
-        
+
     case "half-elf":
-    
+
         switch(gender)
         {
         case "male":
-        
+
             desc = ""+name+" is about average height for a half-elven male, standing a couple inches above five feet in height.  His body seems to be slender "
             "in build, with armor that fits very well to his torso.  He wears a heavy helm on his head that makes it difficult to make out many of the details.  "
             "His skin has the same smooth appearance as those that are very young, but it is difficult to be sure with those of elven blood.  His appearance would "
             "be very similar were he just out of his teenage years or well into his fifth decade of life.  The armor he wears does almost nothing to limit his movements, "
             "it seems to be so well crafted as to hinder him not at all.  The armor and shield are well made, but lack any of the fancy adornments that are more typical "
-            "of the gear adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";            
+            "of the gear adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";
             break;
-            
+
         case "female":
         default:
-        
+
             desc = ""+name+" is just under average height for a half-elven female, standing a couple inches shy of five feet.  Her body is quite slender in build and "
             "her armor has been form fitted to hug the contours.  She wears a heavy helm on her head that makes it difficult to determine many of the details of her "
             "appearance.  It is difficult to pinpoint her age by the texture of her skin, as those with elven blood would look much the same just out of their "
             "teenage years as they would going into their fifth decade of life.  The armor she wears does nothing to limit her movements, it seems to be so well crafted "
             "as to hinder her not at all.  The armor and shield are well made, but lack any of the fancy adornments that are more typical of the gear "
-            "adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";            
+            "adventurers wear.  Instead it looks like quality gear that is meant to be mass produced.";
             break;
         }
-        
-        break;        
-    }    
-    
-    return desc;    
+
+        break;
+    }
+
+    return desc;
 }
 
 
@@ -219,7 +219,7 @@ string choose_name(string race, int level)
 
     switch(level)
     {
-    case 0..10: 
+    case 0..10:
 
         if(race == "human")
         {
@@ -238,8 +238,8 @@ string choose_name(string race, int level)
 
         break;
 
-    case 11..20:    
-        
+    case 11..20:
+
         if(race == "human")
         {
             name = HUMAN_NAMES_20[random(sizeof(HUMAN_NAMES_20))];
@@ -257,8 +257,8 @@ string choose_name(string race, int level)
 
         break;
 
-    case 21..30:    
-        
+    case 21..30:
+
         if(race == "human")
         {
             name = HUMAN_NAMES_30[random(sizeof(HUMAN_NAMES_30))];
@@ -276,8 +276,8 @@ string choose_name(string race, int level)
 
         break;
 
-    default:        
-        
+    default:
+
         if(race == "human")
         {
             name = HUMAN_NAMES_40[random(sizeof(HUMAN_NAMES_40))];
@@ -348,14 +348,14 @@ void set_my_stats(string myclass,int level)
     high = 20 + (level / 7);
     mid  = 15 + (level / 9);
     low  = 10 + (level / 9);
-    
-    set_stats("strength",high);
+
+    set_stats("strength",low);
     set_stats("dexterity",mid);
     set_stats("constitution",high);
     set_stats("intelligence",low);
     set_stats("wisdom",high);
     set_stats("charisma",mid);
-    
+
     /*
     switch(class)
     {
@@ -408,14 +408,14 @@ void describe_me(string name, string myclass, string race, string gender)
 
 
 void equip_me()
-{    
+{
     int level;
     object obj;
-    
+
     if(!objectp(TO)) { return; }
-    
+
     level = (int)TO->query_level();
-    
+
     switch(level)
     {
     case 0..10:
@@ -437,7 +437,7 @@ void equip_me()
         TO->force_me("wear plate");
         break;
     }
-    
+
     obj = new("/d/common/obj/armour/shield");
     obj->set_property("no curse",1);
     obj->set_property("monsterweapon",1);
@@ -453,7 +453,7 @@ void equip_me()
     obj->set_short("%^RESET%^%^BOLD%^gleaming steel great helm");
     obj->move(TO);
     TO->force_me("wear helm");
-    
+
     obj = new("/d/common/obj/armour/gauntlets");
     obj->set_property("no curse",1);
     obj->set_property("monsterweapon",1);
@@ -461,7 +461,7 @@ void equip_me()
     obj->set_short("%^RESET%^%^BOLD%^polished mithril gauntlets");
     obj->move(TO);
     TO->force_me("wear gauntlets");
-    
+
     obj = new("/d/common/obj/armour/greaves");
     obj->set_property("no curse",1);
     obj->set_property("monsterweapon",1);
@@ -469,7 +469,7 @@ void equip_me()
     obj->set_short("%^RESET%^%^BOLD%^polished mithril greaves");
     obj->move(TO);
     TO->force_me("wear greaves");
-    
+
     obj = new("/d/common/obj/clothing/belt");
     obj->set_property("no curse",1);
     obj->set_property("monsterweapon",1);
@@ -477,18 +477,18 @@ void equip_me()
     obj->set_short("%^RESET%^%^YELLOW%^sturdy leather belt");
     obj->move(TO);
     TO->force_me("wear belt");
-    
+
     obj = new("/d/deku/armours/ring_p");
     obj->set_property("no curse",1);
     obj->set_property("monsterweapon",1);
     obj->set_property("enchantment",level/5);
     obj->move(TO);
     TO->force_me("wear ring");
-    
+
     switch(level)
     {
     case 0..9:
-    
+
         obj = new("/d/common/obj/weapon/longsword");
         obj->set_property("no curse",1);
         obj->set_property("monsterweapon",1);
@@ -496,44 +496,44 @@ void equip_me()
         obj->set_short("%^RESET%^%^RED%^a razor sharp longsword");
         obj->move(TO);
         TO->force_me("wield sword");
-        
+
         break;
-        
+
     case 10..20:
-    
+
         obj = new("/d/token_hunt/obj/low/stormrapier");
         obj->set_property("no curse",1);
         obj->set_property("monsterweapon",1);
         obj->set_property("enchantment",level/5);
         obj->move(TO);
         TO->force_me("wield sword");
-        
+
         break;
-        
+
     case 21..35:
-        
+
         obj = new("/d/tharis/barrow/obj/slayer");
         obj->set_property("no curse",1);
         obj->set_property("monsterweapon",1);
         obj->set_property("enchantment",level/5);
         obj->move(TO);
         TO->force_me("wield sword");
-        
+
         break;
-        
+
     default:
-    
+
         obj = new("/d/islands/common/obj/csabre");
         obj->set_property("no curse",1);
         obj->set_property("monsterweapon",1);
         obj->set_property("enchantment",level/5);
         obj->move(TO);
         TO->force_me("wield sword");
-        
+
         break;
     }
-    
-    
+
+
 }
 
 string *query_mini_quests()
@@ -541,17 +541,20 @@ string *query_mini_quests()
     return ({ "%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^" });
 }
 
-// this should get called for initial setup of the mercenary after the player hires it.  Sets all of the relevant details here
-// everything else the merc can do will be dialogue driven and level dependent
-// only going to have fighter/cleric to cut down on work
+/**
+ * This should get called for initial setup of the mercenary after the
+ * player hires it. Sets all of the relevant details here everything
+ * else the merc can do will be dialogue driven and level dependent
+ * only going to have fighter/cleric to cut down on work.
+ */
 varargs int setup_merc(string myclass, string race, object owner, string myname)
 {
     int level,mod;
     string name,gender;
     object whistle;
-    
+
     myclass = "cleric";
-    
+
     END_TIME = time() + DAY; // 24000 seconds
 
     if(!objectp(owner))
@@ -577,7 +580,7 @@ varargs int setup_merc(string myclass, string race, object owner, string myname)
 
     OWNER = owner;
     OWNER_NAME = OWNER->query_name();
-    
+
     set_body_type("human");
 
     level = (int)owner->query_character_level();
@@ -621,27 +624,21 @@ varargs int setup_merc(string myclass, string race, object owner, string myname)
 
     describe_me(name,myclass,race,gender);
 
-    set_monster_feats(({ "perfect caster","powerattack","blindfight","regeneration","resistance","combat reflexes","rush","scramble","damage resistance",
-                         "daze","shatter","defensive roll","evasion","expertise","force of personality","great fortitude","spell reflection",
-                         "spring attack","sunder","greater weapon focus","greater weapon specialization","tools of the trade","hardenedminions","toughness",
-                         "improved damage resistance","improved resistance","improved toughness","unyielding soul","increased resistance","weapon finesse",
-                         "indomitable","weapon focus","iron will","weapon specialization","knockdown","lightning reflexes","mobility","parry",
-                         "reflection","counter","shieldbash","deflection","shieldwall","armored caster","slippery caster","spell focus","spell penetration",
-                         "spell power","greater spell focus","greater spell penetration","greater spell power","thick skinned caster","tough skin","improved spell power" }));
+    set_monster_feats(({ "perfect caster","powerattack","blindfight","regeneration","resistance","combat reflexes","rush","scramble","damage resistance", "daze","shatter","defensive roll","evasion","expertise","force of personality","spell reflection", "spring attack","sunder","greater weapon focus","greater weapon specialization","hardenedminions","toughness", "improved damage resistance","improved resistance","improved toughness","unyielding soul","increased resistance",,"lightning reflexes","mobility","parry", "reflection","counter","shieldbash","deflection","shieldwall","armored caster","slippery caster","spell focus","spell penetration", "spell power","greater spell focus","greater spell penetration","greater spell power","thick skinned caster","improved spell power" }));
 
     TO->force_me("hardenedminions");
     OWNER->add_follower(TO);
     tell_object(OWNER,TO->QCN+" is now following you");
     equip_me();
     //TO->add_attack_bonus(level*2); // they don't seem to hit as well as players for some reason
-    TO->add_attack_bonus((level / 30)+2);
-    TO->add_damage_bonus((level / 30)+2);
-    mod = level / 8;
+    TO->add_attack_bonus((level / 32)+2);
+    TO->add_damage_bonus((level / 32)+2);
+    mod = level / 12;
     if(mod < 2) { mod = 2; }
     if(mod > 5) { mod = 5; }
     TO->set_property("fighter_attacks_mod",mod);
     TO->force_me("briefcombat");
-    
+
     if(!objectp(whistle = present("merc_whistle_999",owner)))
     {
         whistle = new(WHISTLE);
@@ -654,7 +651,7 @@ varargs int setup_merc(string myclass, string race, object owner, string myname)
     {
         if(whistle->query_end_time()) { END_TIME = whistle->query_end_time(); }
     }
-                         
+
 }
 
 
@@ -675,10 +672,8 @@ void sack_me()
     obj->set_property("no steal",1);
     obj->set_short("worn looking large canvas bag");
     obj->set_max_internal_encumbrance(1000000);
-    obj->move(TO);    
+    obj->move(TO);
 }
-
-
 
 void create()
 {
@@ -688,7 +683,7 @@ void create()
     PARTY_COUNTER = 0;
 
     ::create();
-    
+
     TO->set_stats("strength",15);
     TO->set_property("water breather",1);
     TO->set_property("demongate flying",1);
@@ -728,23 +723,23 @@ void take_item(object obj)
 {
     object sack;
     int num;
-    
+
     if(!objectp(obj)) { return; }
-    
+
     sack = present("sack",TO);
-    
+
     if(!objectp(sack)) { sack_me(); }
-    
+
     if(objectp(obj)) { obj->set_property("monsterweapon",1); }
-    
+
     tell_room(ETO,TO->QCN+" puts "+obj->query_short()+" into "+sack->query_short());
     num = obj->move(sack);
-    if(num != MOVE_OK) 
-    { 
+    if(num != MOVE_OK)
+    {
         obj->move("/d/shadowgate/void");
         obj->remove();
     }
-    return;    
+    return;
 }
 
 
@@ -753,14 +748,14 @@ void receive_given_item(object obj)
 {
     mapping map=([]);
     function func;
-    
+
     if(!objectp(obj)) { return; }
-    
+
     if(obj->id("kitxyz"))
     {
         map["delay"] = 0.9;
         map["counter"] = 0;
-        map["events"] = ([ 0 : (["say"      : "thanks, I'll hang on to these."]), 
+        map["events"] = ([ 0 : (["say"      : "thanks, I'll hang on to these."]),
                            1 : (["emote"    : "raises an eyebrow" ]),
                            2 : (["say"      : "and they're mine now, so don't get any ideas."]),
                            3 : (["endblank" : 0 ]), ]);
@@ -769,17 +764,17 @@ void receive_given_item(object obj)
         call_out("process_speech_event",map["delay"],map);
         return;
     }
-    
+
     func = (: call_other, TO, "take_item" :);
-    
+
     map["obj"] = obj;
     map["delay"] = 0.9;
     map["counter"] = 0;
-    map["events"] = ([ 0 : (["emote"      : "chuckles"]), 
+    map["events"] = ([ 0 : (["emote"      : "chuckles"]),
                        1 : (["say"        : "I'm sure I can get a few coins out of this."]),
                        2 : (["say"        : "and before you even ask, no, you're not getting it back."]),
                        3 : (["say"        : "I'm not a damn pack mule"]),
-                       4 : (["endfuncobj" : func ]), ]);    
+                       4 : (["endfuncobj" : func ]), ]);
     TALKING = 1;
     call_out("process_speech_event",map["delay"],map);
 
@@ -791,22 +786,22 @@ void protect_party()
 {
     object *allies=({});
     int i;
-    
+
     if(!objectp(TO)) { return; }
     if(!objectp(OWNER)) { return; }
-    
+
     allies = query_party();
     if(!sizeof(allies)) { return; }
-    
+
     for(i=0;i<sizeof(allies);i++)
     {
         if(!objectp(allies[i])) { continue; }
         if(!present(allies[i],ETO)) { continue; }
         if(allies[i] == TO) { continue; }
-        allies[i]->add_protector(TO);        
+        allies[i]->add_protector(TO);
     }
     tell_room(ETO,"%^RED%^"+TO->QCN+" takes up a protective stance.%^RESET%^");
-    return;    
+    return;
 }
 
 
@@ -817,10 +812,10 @@ int used_name(string *str)
     if(!sizeof(str)) { return 0; }
     names = ({ (string)TO->query_name(), "merc","mercenary","hireling","henchman" });
     for(i=0;i<sizeof(str);i++)
-    {    
+    {
         if(member_array(str[i],names) != -1) { return 1; }
     }
-    return 0;    
+    return 0;
 }
 
 
@@ -828,15 +823,15 @@ int filter_short_words(string str)
 {
     string name;
     name = (string)TO->query_name();
-    
+
     if(!stringp(str) || str == "") { return 0; }
     if(strlen(str) < 2) { return 0; }
     if(str == "merc") { return 0; }
     if(str == "mercenary") { return 0; }
     if(str == "henchman") { return 0; }
     if(str == "hireling") { return 0; }
-    if(str == name) { return 0; }    
-    return 1;    
+    if(str == name) { return 0; }
+    return 1;
 }
 
 // returns how many words in "words" were used in the "str"..  the closer the two strings are in size,
@@ -846,15 +841,15 @@ int used_words(string *words, string *str)
     int i,count=0;
     if(!sizeof(words)) { return 0; }
     if(!sizeof(str)) { return 0; }
-    
+
     str = filter_array(str,"filter_short_words",TO); // chops out words like and and the..  not useful for our purposes
-    
+
     for(i=0;i<sizeof(words);i++)
     {
-        if(member_array(words[i],str) != -1) { count++; }        
+        if(member_array(words[i],str) != -1) { count++; }
     }
 
-    return count;    
+    return count;
 }
 
 
@@ -867,7 +862,7 @@ mapping count_the_words(string *str,string *words)
     {
         map[str[i]] = used_words(explode(str[i]," "),words);
     }
-    return map;    
+    return map;
 }
 
 // this tries to pick a dialogue choice intelligently based on the words spoken by the player
@@ -882,24 +877,24 @@ string pick_dialogue(string *words)
     object *living=({});
     string *choice=({}),*the_keys=({}),*to_map=({}),*ikeys=({}),the_choice;
     int i,j,chance,pick,count,name_used;
-    
+
     living = all_living(ETO);
     // less chance they are talking to the henchman if there is more than one player in the room
     living = filter_array(living,"is_player",FILTERS_D);
     living = filter_array(living,"is_non_immortal_player",FILTERS_D);
     //living -= ({ OWNER });
-    
+
     chance = 100;
-    
+
     if(sizeof(living)) { chance = chance / sizeof(living); }
-    
-    if(used_name(words)) { chance += 100; name_used = 1; } 
-    
+
+    if(used_name(words)) { chance += 100; name_used = 1; }
+
     //tell_room(ETO,"words: "+identify(words));
-    
+
     to_map = ({ "heal" });
     choices["heal"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "poison","poisoned" });
     choices["poison"] = count_the_words(to_map,words);
 
@@ -908,41 +903,41 @@ string pick_dialogue(string *words)
 
     to_map = ({ "protect", "defend", "help" });
     choices["protect"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "fodder","snakes","summon","summon fodder","summon snakes","snake" });
     choices["fodder"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "food","thirsty","hungry","feast"});
     choices["food"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "dark", "see", "light" });
     choices["light"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "bright", "sun", "darkness" });
     choices["dark"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "animate", "animate object" });
     choices["animate object"] = count_the_words(to_map,words);
-  
+
     to_map = ({ "water breathing", "drown", "underwater", "water","breathe"});
     choices["water breathing"] = count_the_words(to_map,words);
-    
-    to_map = ({ "hello", "hi", "greetings", "salutations", "howdy", "hey", "good day", "good morning", 
-                "good afternoon", "good evening", "hiya", "heya", "heyya" });    
+
+    to_map = ({ "hello", "hi", "greetings", "salutations", "howdy", "hey", "good day", "good morning",
+                "good afternoon", "good evening", "hiya", "heya", "heyya" });
     choices["hello"] = count_the_words(to_map,words);
 
-    to_map = ({ "weather", "rain", "raining", "snow", "snowing", "night", "night time", "hot", "cold", "freezing" });    
+    to_map = ({ "weather", "rain", "raining", "snow", "snowing", "night", "night time", "hot", "cold", "freezing" });
     choices["weather"] = count_the_words(to_map,words);
 
     to_map = ({ "abilities",  "good", "skills", "feats","fight"});
     choices["abilities"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "cost", "much", "price", "expensive" });
     choices["prices"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "gold","platinum","coins","money","dosh","loot","treasure","gems","jewelry" });
     choices["love of money"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "give", "mine" });
     choices["give back"] = count_the_words(to_map,words);
 
@@ -951,7 +946,7 @@ string pick_dialogue(string *words)
 
     to_map = ({ "unit", "group" });
     choices["my unit"] = count_the_words(to_map,words);
-    
+
     to_map = ({ "worship", "god", "deity", "pray", "goddess", });
     choices["god"] = count_the_words(to_map,words);
 
@@ -960,7 +955,7 @@ string pick_dialogue(string *words)
 
     to_map = ({ "stupid", "useless", "idiot" });
     choices["insult"] = count_the_words(to_map,words);
-    
+
     the_keys = keys(choices);
 
     for(i=0;i<sizeof(the_keys);i++)
@@ -972,48 +967,48 @@ string pick_dialogue(string *words)
             if(map[ikeys[j]]) { choice_map[the_keys[i]] += map[ikeys[j]]; }
         }
     }
-    
+
     the_keys = keys(choice_map); // no real way to intelligently determine which one they meant to ask about here.. might as well return a random one
     if(!sizeof(the_keys)) { the_choice = "nothing"; }
     else
-    { 
-        the_choice = the_keys[random(sizeof(the_keys))];   
+    {
+        the_choice = the_keys[random(sizeof(the_keys))];
         chance += choice_map[the_choice];
         //tell_room(ETO,"chance: "+chance);
         if(random(100) > chance) { the_choice = "nothing"; }
     }
-    
+
     if(the_choice == "nothing" && name_used) { the_choice = "name"; }
-    
+
     //tell_room(ETO,"the_choice: "+the_choice);
-    
+
     return the_choice;
 }
 
 
 void process_speech_event(mapping map)
-{    
+{
     int counter;
     mapping events=([]),event=([]);
     string *key=({}),what;
-    
+
     if(!mapp(map)) { return; }
     if(!objectp(TO)) { return; }
-    
+
     counter = map["counter"];
-    
+
     events = map["events"];
     event = events[counter];
-    if(!mapp(events) || !sizeof(keys(events)) || !mapp(event)) 
+    if(!mapp(events) || !sizeof(keys(events)) || !mapp(event))
     {
         TALKING = 0;
         log_file("henchman_dialogue","dialogue error: "+map["dialogue"]+"\n\n  events: "+identify(events)+"\n\n  event: "+identify(event))+"\n\n\nEnd of error\n\n";
         //tell_room(ETO,"ERROR: No dialogue event mapping for "+map["dialogue"]+".");
-        return; 
+        return;
     }
     key = keys(event);
     what = implode(key,"");
-    
+
     switch(what)
     {
     case "emote":
@@ -1040,12 +1035,12 @@ void process_speech_event(mapping map)
     default:
         return;
     }
-    
+
     counter++;
     map["counter"] = counter;
 
     call_out("process_speech_event",map["delay"],map);
-    return;   
+    return;
 }
 
 
@@ -1055,83 +1050,83 @@ void parse_speech(string str, object obj)
     object *allies=({}),targ;
     string *words=({}),dialogue;
     function func;
-    int i,num,rand;    
-    
-    str = FILTERS_D->filter_colors(str);    
-    str = lower_case(str);    
+    int i,num,rand;
+
+    str = FILTERS_D->filter_colors(str);
+    str = lower_case(str);
     str = replace_string(str,",","");
     str = replace_string(str,".","");
     str = replace_string(str,"?","");
-    
+
     words = explode(str," ");
     if(!sizeof(words)) { return; }
-    
+
     dialogue = pick_dialogue(words);
-    
+
     map["delay"] = 1.1;
     map["counter"] = 0;
     map["obj"] = obj;
     map["events"] = ([]);
     map["dialogue"] = dialogue;
     map["str"] = "";
-    
+
     func = (: call_other,TO,"perform_action" :);
-    targ = 0;    
-    
+    targ = 0;
+
     TALKING = 1;
-    
+
     switch(dialogue)
-    {  
+    {
 
     case "heal":
-    
+
         map["str"] = "mass heal";
         FLAG = 1;
-    
+
         switch(random(2))
         {
-        case 0:        
+        case 0:
             temp[0] = ([ "emote"            : "nods" ]);
             temp[1] = ([ "say"              : "fine, I can heal you." ]);
-            temp[2] = ([ "endfuncobjstr"    : func ]);            
+            temp[2] = ([ "endfuncobjstr"    : func ]);
             break;
-            
+
         default:
             temp[0] = ([ "emote"            : "rolls "+TO->QP+" eyes." ]);
             temp[1] = ([ "say"              : "yeah, yeah, keep your panties on." ]);
-            temp[2] = ([ "endfuncobjstr"    : func ]); 
+            temp[2] = ([ "endfuncobjstr"    : func ]);
             break;
         }
         break;
-        
+
     case "poison":
-    
+
         allies = query_allies();
         for(i=0;i<sizeof(allies);i++)
         {
             if(!objectp(allies[i])) { continue; }
             if(environment(allies[i]) != ETO) { continue; }
             if(!POISON_D->is_poisoned(allies[i])) { continue; }
-            targ = allies[i];            
+            targ = allies[i];
         }
         if(objectp(targ))
         {
             map["str"] = "neutralize poison";
-            map["obj"] = targ;            
-            
+            map["obj"] = targ;
+
             switch(random(2))
             {
             case 0:
                 temp[0] = ([ "emote"            : "grimaces" ]);
                 temp[1] = ([ "say"              : "that poison is some nasty stuff, we better take care of that." ]);
                 temp[2] = ([ "endfuncobjstr"    : func ]);
-                break;                
+                break;
             default:
                 temp[0] = ([ "say"              : "you don't look so good." ]);
                 temp[1] = ([ "say"              : "lets see if we can get rid of that poison." ]);
                 temp[2] = ([ "endfuncobjstr"    : func ]);
                 break;
-            }            
+            }
         }
         else
         {
@@ -1153,12 +1148,12 @@ void parse_speech(string str, object obj)
                 temp[5] = ([ "endblank" : 0 ]);
                 break;
             }
-            
+
         }
         break;
 
     case "blind":
-    
+
         allies = query_allies();
         for(i=0;i<sizeof(allies);i++)
         {
@@ -1166,13 +1161,13 @@ void parse_speech(string str, object obj)
             if(allies[i] == TO) { TO->set_blind(0); continue; }
             if(environment(allies[i]) != ETO) { continue; }
             if(!allies[i]->query_blind()) { continue; }
-            targ = allies[i];            
+            targ = allies[i];
         }
         if(objectp(targ))
         {
             map["str"] = "cure blindness";
             map["obj"] = targ;
-            
+
             switch(random(2))
             {
             case 0:
@@ -1193,7 +1188,7 @@ void parse_speech(string str, object obj)
                 temp[6] = ([ "say"              : "that never gets old." ]);
                 temp[7] = ([ "endfuncobjstr"    : func ]);
                 break;
-            }            
+            }
         }
         else
         {
@@ -1233,14 +1228,14 @@ void parse_speech(string str, object obj)
             temp[2] = ([ "emote"        : "rolls "+TO->QP+" eyes" ]);
             temp[3] = ([ "endprotect"   : func ]);
             break;
-        }    
-    
+        }
+
         break;
 
     case "fodder":
-    
+
         map["str"] = "summon fodder";
-    
+
         if(!objectp(ETO)) { return; }
         if(ETO->query_property("no sticks"))
         {
@@ -1248,7 +1243,7 @@ void parse_speech(string str, object obj)
             temp[1] = ([ "say"      : "sorry, no sticks here.  I can't make any snakes." ]);
             temp[2] = ([ "emote"    : "frowns" ]);
             temp[3] = ([ "endblank" : 0 ]);
-            break;            
+            break;
         }
         if(has_fodder())
         {
@@ -1288,13 +1283,13 @@ void parse_speech(string str, object obj)
                 temp[0] = ([ "say"              : "snakes, coming right up." ]);
                 temp[1] = ([ "endfuncobjstr"    : func ]);
                 break;
-            }            
-        }        
+            }
+        }
         break;
 
     case "food":
-    
-        map["str"] = "food";        
+
+        map["str"] = "food";
         if(present("feast",ETO) || (present("pile of food",ETO) && present("pool of water",ETO)))
         {
             temp[0] = ([ "say"   : "don't you think there's already enough to eat and drink here?" ]);
@@ -1302,7 +1297,7 @@ void parse_speech(string str, object obj)
             break;
         }
         else
-        {        
+        {
             switch(random(2))
             {
             case 0:
@@ -1320,25 +1315,25 @@ void parse_speech(string str, object obj)
         break;
 
     case "light":
-    
+
         map["str"] = "light";
-        map["obj"] = TO;         
+        map["obj"] = TO;
         temp[0] = ([ "say"              : "let there be light." ]);
         temp[1] = ([ "endfuncobjstr"    : func ]);
         break;
 
     case "dark":
-    
+
         map["str"] = "darkness";
-        map["obj"] = TO;     
+        map["obj"] = TO;
         temp[0] = ([ "say"              : "fine, I can make it darker." ]);
-        temp[1] = ([ "endfuncobjstr"    : func ]);    
+        temp[1] = ([ "endfuncobjstr"    : func ]);
         break;
 
     case "animate object":
-    
+
         map["str"] = "animate object";
-        
+
         temp[0] = ([ "emote"            : "looks around" ]);
         temp[1] = ([ "emote"            : "hmms" ]);
         temp[2] = ([ "say"              : "I don't know.  I guess it's worth a shot." ]);
@@ -1347,23 +1342,23 @@ void parse_speech(string str, object obj)
         break;
 
     case "water breathing":
-    
-        map["str"] = "water breathing";        
+
+        map["str"] = "water breathing";
         for(i=0;i<sizeof(allies);i++)
         {
             if(!objectp(allies[i])) { continue; }
             if(allies[i] == TO) { continue; }
             if(environment(allies[i]) != ETO) { continue; }
             if(allies[i]->query_property("water breather")) { continue; }
-            targ = allies[i];            
+            targ = allies[i];
         }
-        
+
         if(objectp(targ))
-        {            
+        {
             map["obj"] = targ;
             temp[0] = ([ "emote"            : "nods" ]);
             temp[1] = ([ "say"              : "we wouldn't want you to drown now, would we?." ]);
-            temp[2] = ([ "endfuncobjstr"    : func ]);            
+            temp[2] = ([ "endfuncobjstr"    : func ]);
         }
         else
         {
@@ -1371,16 +1366,16 @@ void parse_speech(string str, object obj)
             temp[1] = ([ "emote"    : "shakes "+TO->QP+" head" ]);
             temp[2] = ([ "say"      : "I don't think anybody here is going to drown." ]);
             temp[3] = ([ "endblank" : 0 ]);
-        }       
+        }
 
         break;
 
 
 
     // conversation below here
-   
+
     case "hello":
-    
+
         switch(random(6))
         {
         case 0:
@@ -1403,7 +1398,7 @@ void parse_speech(string str, object obj)
             temp[1] = ([ "say"      : "a pleasure" ]);
             temp[2] = ([ "endblank" : 0 ]);
             break;
-            
+
         case 4:
             temp[0] = ([ "emote"    : "nods" ]);
             temp[1] = ([ "say"      : "heya" ]);
@@ -1419,13 +1414,13 @@ void parse_speech(string str, object obj)
         break;
 
     case "weather":
-    
+
         if(objectp(ETO) && ETO->query_property("indoors")) // don't bother talking about the weather when indoors
         {
             TALKING = 0;
             return;
         }
-    
+
         vars["season"] = season(time());
         vars["weather"] = WEATHER_D->get_weather(TO);
         vars["weather"] = FILTERS_D->filter_colors(vars["weather"]);
@@ -1433,31 +1428,31 @@ void parse_speech(string str, object obj)
         vars["climate"] = WEATHER_D->get_climate(TO);
         vars["time"] = TOD;
         vars["temp"] = WEATHER_D->get_temp(TO);
-        
+
         switch(random(4))
         {
         case 0: // temperature
-        
+
             switch(vars["temp"])
             {
             case 55..80:
-            
+
                 temp[0] = ([ "say"      : "It's too bad the temperature outside isn't like this all the time." ]);
-                temp[1] = ([ "endblank" : 0 ]);                
+                temp[1] = ([ "endblank" : 0 ]);
                 break;
-                
+
             case 81..94:
-            
+
                 temp[0] = ([ "emote"    : "mutters under "+TO->QP+" breath" ]);
                 temp[1] = ([ "say"      : "damn it's hot out here." ]);
-                temp[2] = ([ "endblank" : 0 ]);                
+                temp[2] = ([ "endblank" : 0 ]);
                 break;
-                
+
             case 95..200:
-            
+
                 switch((string)TO->query_gender())
                 {
-                case "male":                    
+                case "male":
                     temp[0] = ([ "emote"    : "pulls off "+TO->QP+" helm and wipes the sweat from "+TO->QP+" brow." ]);
                     temp[1] = ([ "say"      : "if it gets any hotter out here, my balls are going to boil like a couple of eggs." ]);
                     temp[2] = ([ "endblank" : 0 ]);
@@ -1468,14 +1463,14 @@ void parse_speech(string str, object obj)
                     temp[2] = ([ "say"      : "I'm cooking in this armor." ]);
                     temp[3] = ([ "endblank" : 0 ]);
                     break;
-                }                
+                }
                 break;
-                
+
             default:
-            
+
                 switch((string)TO->query_gender())
                 {
-                case "male":            
+                case "male":
                     temp[0] = ([ "emote"    : "shivers and rubs "+TO->QP+" hands together" ]);
                     temp[1] = ([ "say"      : "I hate the cold." ]);
                     temp[2] = ([ "endblank" : 0 ]);
@@ -1485,91 +1480,91 @@ void parse_speech(string str, object obj)
                     temp[1] = ([ "say"      : "this weather is not good when you're wearing a big suit of metal armor." ]);
                     temp[2] = ([ "endblank" : 0 ]);
                     break;
-                }                
-                break;                
-            }            
+                }
+                break;
+            }
             break;
-            
+
         case 1: // weather
-        
+
             if(member_array("cloudy",explode(vars["weather"]," ")) != -1)
             {
                 temp[0] = ([ "emote"    : "looks up towards the sky" ]);
                 temp[1] = ([ "say"      : "You think it's going to rain?" ]);
                 temp[2] = ([ "endblank" : 0 ]);
-                break;               
+                break;
             }
-            
+
             if(member_array("clear",explode(vars["weather"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "glances briefly upwards" ]);
                 temp[1] = ([ "say"      : "well, at least it's not cloudy out" ]);
                 temp[2] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("raining lightly",explode(vars["weather"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "damn rain, gets all in my armor and makes everything wet." ]);
                 temp[1] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("raining moderately",explode(vars["weather"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "it's really pouring down now." ]);
                 temp[1] = ([ "say"      : "all my stuff is drenched." ]);
                 temp[2] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("raining heavily",explode(vars["weather"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "holds "+TO->QP+" shield above "+TO->QP+" head to stop the rain." ]);
                 temp[1] = ([ "say"      : "I hope I don't drown in this downpour." ]);
                 temp[2] = ([ "say"      : "would be just my luck.. armor gets water tight and fills up with rain, and I drown in my own plate." ]);
                 temp[3] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("snowing lightly",explode(vars["weather"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "everything looks so peaceful when the snow first starts to fall." ]);
                 temp[1] = ([ "say"      : "you know, until we get blood all over it." ]);
                 temp[2] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("snowing moderately",explode(vars["weather"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "squints and peers into the distance." ]);
                 temp[1] = ([ "say"      : "can you see anything through this?" ]);
                 temp[2] = ([ "say"      : "if this snow starts falling much harder, it's going to be a full on blizzard." ]);
                 temp[3] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("snowing heavily",explode(vars["weather"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "I can barely see my own hand in front of my face." ]);
                 temp[1] = ([ "say"      : "maybe we should get indoors and out of this before we get burried and freeze to death" ]);
                 temp[2] = ([ "endblank" : 0 ]);
-                break;     
-            }        
+                break;
+            }
             break;
-            
+
         case 2: // climate
-        
+
             if(member_array("temperate",explode(vars["climate"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "you've got to love these temperate climates." ]);
                 temp[1] = ([ "say"      : "well, for most of the year at least." ]);
                 temp[2] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("tropical",explode(vars["climate"]," ")) != -1)
-            {   
+            {
                 temp[0] = ([ "emote"    : "looks around with a twisted half-smile, half-frown on "+TO->QP+" face." ]);
                 temp[1] = ([ "say"      : "I keep thinking I'm going to find a tropical paradise one day." ]);
                 temp[2] = ([ "say"      : "no monsters." ]);
@@ -1582,70 +1577,70 @@ void parse_speech(string str, object obj)
                 temp[9] = ([ "say"      : "no luck yet though." ]);
                 temp[10] = ([ "emote"    : "shrugs" ]);
                 temp[11] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("desert",explode(vars["climate"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "groans audibly." ]);
                 temp[1] = ([ "say"      : "I HATE the desert." ]);
                 temp[2] = ([ "say"      : "this armor is like an oven." ]);
                 temp[3] = ([ "say"      : "an oven that I'm wearing." ]);
                 temp[4] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("arctic",explode(vars["climate"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "I'm glad you brought us some place so cold." ]);
                 temp[1] = ([ "say"      : "I haven't lost a toe to frost bite in at least a week." ]);
                 temp[2] = ([ "emote"    : "rolls "+TO->QP+" eyes" ]);
                 temp[3] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("mountain",explode(vars["climate"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "keeps watching the sky warily" ]);
                 temp[1] = ([ "say"      : "the thing about mountains.." ]);
                 temp[2] = ([ "say"      : "dragons seem to like them." ]);
                 temp[3] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
             break;
-            
+
         case 3: // time of day
-        
+
             if(member_array("night",explode(vars["time"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "looks at the moon" ]);
                 temp[1] = ([ "emote"    : "looks around at the sky" ]);
                 temp[2] = ([ "say"      : "I've always liked night time" ]);
                 temp[3] = ([ "say"      : "especially if it's clear enough to see the stars." ]);
                 temp[4] = ([ "endblank" : 0 ]);
-                break;     
-            }   
-        
-            if(member_array("dawn",explode(vars["time"]," ")) != -1)
-            {                
-                temp[0] = ([ "say"      : "another day almost started" ]);
-                temp[1] = ([ "say"      : "some priest of Jarmila is jumping for joy right now." ]);
-                temp[2] = ([ "emote"    : "chuckles" ]);
-                temp[3] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
-            if(member_array("day",explode(vars["time"]," ")) != -1)
-            {                
+
+            if(member_array("dawn",explode(vars["time"]," ")) != -1)
+            {
                 temp[0] = ([ "say"      : "another day almost started" ]);
                 temp[1] = ([ "say"      : "some priest of Jarmila is jumping for joy right now." ]);
                 temp[2] = ([ "emote"    : "chuckles" ]);
                 temp[3] = ([ "endblank" : 0 ]);
-                break;     
-            }   
-        
+                break;
+            }
+
+            if(member_array("day",explode(vars["time"]," ")) != -1)
+            {
+                temp[0] = ([ "say"      : "another day almost started" ]);
+                temp[1] = ([ "say"      : "some priest of Jarmila is jumping for joy right now." ]);
+                temp[2] = ([ "emote"    : "chuckles" ]);
+                temp[3] = ([ "endblank" : 0 ]);
+                break;
+            }
+
             if(member_array("twilight",explode(vars["time"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "looks around warily, squinting at shadows" ]);
                 temp[1] = ([ "say"      : "the most dangerous part of the day, twilight." ]);
                 temp[2] = ([ "say"      : "still too light for low light vision to work well." ]);
@@ -1655,44 +1650,44 @@ void parse_speech(string str, object obj)
                 temp[6] = ([ "emote"    : "looks over "+TO->QP+" shoulder" ]);
                 temp[7] = ([ "say"      : "be wary." ]);
                 temp[8] = ([ "endblank" : 0 ]);
-                break;     
-            }            
+                break;
+            }
             break;
-            
+
         default: // season
-        
+
             if(member_array("summer",explode(vars["season"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "frowns" ]);
                 temp[1] = ([ "say"      : "summer..  well, at least it's not winter." ]);
                 temp[2] = ([ "emote"    : "chuckles" ]);
                 temp[3] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("autumn",explode(vars["season"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "fall is the most colorful time of the year." ]);
                 temp[1] = ([ "say"      : "if you're not in the tropics anyway." ]);
                 temp[2] = ([ "say"      : "or the arctic." ]);
                 temp[3] = ([ "emote"    : "hmms" ]);
                 temp[4] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("winter",explode(vars["season"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "say"      : "I can hardly ever get warm in the winter." ]);
                 temp[1] = ([ "say"      : "cold to the bones even with a fire, it seems." ]);
                 temp[2] = ([ "say"      : "I think it must be all in my head." ]);
                 temp[3] = ([ "emote"    : "shrugs" ]);
                 temp[4] = ([ "say"      : "I hate winter." ]);
                 temp[5] = ([ "endblank" : 0 ]);
-                break;     
+                break;
             }
-            
+
             if(member_array("spring",explode(vars["season"]," ")) != -1)
-            {                
+            {
                 temp[0] = ([ "emote"    : "smiles" ]);
                 temp[1] = ([ "say"      : "Ah, spring." ]);
                 temp[2] = ([ "say"      : "birds chirping, everything turning green again" ]);
@@ -1700,14 +1695,14 @@ void parse_speech(string str, object obj)
                 temp[4] = ([ "emote"    : "grins" ]);
                 temp[5] = ([ "say"      : "my favorite time of year." ]);
                 temp[6] = ([ "endblank" : 0 ]);
-                break;     
-            }            
+                break;
+            }
             break;
         }
         break;
 
     case "abilities":
-    
+
         switch(random(2))
         {
         case 0:
@@ -1739,13 +1734,13 @@ void parse_speech(string str, object obj)
             temp[12] = ([ "say"      : "a warrior priest that gets paid for "+TO->QP+" efforts." ]);
             temp[13] = ([ "emote"    : "grins" ]);
             temp[14] = ([ "endblank" : 0 ]);
-            break;                
+            break;
         }
 
         break;
 
-    case "prices":    
-    
+    case "prices":
+
         switch(random(2))
         {
         case 0:
@@ -1767,12 +1762,12 @@ void parse_speech(string str, object obj)
             temp[7] = ([ "say"      : "I do get my cut when you pay that big bill that I mentioned, afterall." ]);
             temp[8] = ([ "emote"    : "winks" ]);
             temp[9] = ([ "endblank" : 0 ]);
-            break;                
+            break;
         }
         break;
 
     case "love of money":
-    
+
         switch(random(2))
         {
         case 0:
@@ -1783,7 +1778,7 @@ void parse_speech(string str, object obj)
             temp[4] = ([ "say"      : "platinum and gold and silver and copper and even electrum." ]);
             temp[5] = ([ "say"      : "sometimes I daydream about mountains of the stuff." ]);
             temp[6] = ([ "say"      : "I would climb to the top then ride down on a sled made of solid gold." ]);
-            temp[7] = ([ "emote"    : "sighs wistfully" ]);            
+            temp[7] = ([ "emote"    : "sighs wistfully" ]);
             temp[8] = ([ "endblank" : 0 ]);
             break;
         case 1:
@@ -1791,14 +1786,14 @@ void parse_speech(string str, object obj)
             temp[1] = ([ "say"      : "did somebody say something about money?" ]);
             temp[2] = ([ "say"      : "that's my favorite subject." ]);
             temp[3] = ([ "endblank" : 0 ]);
-            break;                
+            break;
         }
 
         break;
 
     case "give back":
     case "pack mule":
-    
+
         switch(random(2))
         {
         case 0:
@@ -1816,12 +1811,12 @@ void parse_speech(string str, object obj)
             temp[2] = ([ "say"      : "if you give it to me, it's mine" ]);
             temp[3] = ([ "say"      : "end of discussion" ]);
             temp[4] = ([ "endblank" : 0 ]);
-            break;                
+            break;
         }
         break;
 
     case "big sack":
-    
+
         switch(random(2))
         {
         case 0:
@@ -1837,12 +1832,12 @@ void parse_speech(string str, object obj)
             temp[1] = ([ "say"      : "people drag me around to the most dangerous places." ]);
             temp[2] = ([ "say"      : "all kinds of monsters trying to kill me" ]);
             temp[3] = ([ "endblank" : 0 ]);
-            break;                
+            break;
         }
         break;
 
     case "my unit":
-    
+
         switch(random(2))
         {
         case 0:
@@ -1861,12 +1856,12 @@ void parse_speech(string str, object obj)
             temp[3] = ([ "say"      : "form a big mercenary band" ]);
             temp[4] = ([ "say"      : "profit" ]);
             temp[5] = ([ "endblank" : 0 ]);
-            break;                
+            break;
         }
         break;
 
     case "god":
-    
+
         switch(random(2))
         {
         case 0:
@@ -1881,14 +1876,14 @@ void parse_speech(string str, object obj)
             temp[2] = ([ "say"      : "bad for business" ]);
             temp[3] = ([ "emote"    : "chuckles" ]);
             temp[4] = ([ "say"      : "also, try not to get the customers killed" ]);
-            temp[5] = ([ "say"      : "which is also bad for business" ]);            
+            temp[5] = ([ "say"      : "which is also bad for business" ]);
             temp[6] = ([ "endblank" : 0 ]);
-            break;                
+            break;
         }
         break;
 
     case "insult":
-    
+
         switch(random(3))
         {
         case 0:
@@ -1905,12 +1900,12 @@ void parse_speech(string str, object obj)
             temp[0] = ([ "say"      : "are you talking to me, sweetie?" ]);
             temp[1] = ([ "say"      : "better make sure you've got your big girl pants on first" ]);
             temp[2] = ([ "endblank" : 0 ]);
-            break;              
+            break;
         }
         break;
-        
+
     case "name":
-    
+
         switch(random(6))
         {
         case 0:
@@ -1925,32 +1920,32 @@ void parse_speech(string str, object obj)
         case 2:
             temp[0] = ([ "say"      : "yes?" ]);
             temp[2] = ([ "endblank" : 0 ]);
-            break; 
+            break;
         case 3:
             temp[0] = ([ "say"      : "what is it?" ]);
             temp[2] = ([ "endblank" : 0 ]);
-            break; 
+            break;
         case 4:
             temp[0] = ([ "emote"    : "rolls "+TO->QP+" eyes" ]);
             temp[1] = ([ "say"      : "what now?" ]);
             temp[2] = ([ "endblank" : 0 ]);
-            break; 
+            break;
         case 5:
             temp[0] = ([ "emote"    : "sighs" ]);
             temp[1] = ([ "say"      : "yeah?" ]);
             temp[2] = ([ "endblank" : 0 ]);
-            break;           
+            break;
         }
         break;
-        
+
     default: // don't say or do anything here
         TALKING = 0;
-        return;        
+        return;
     }
-    
+
     map["events"] = temp;
     call_out("process_speech_event",map["delay"],map);
-    
+
 }
 
 
@@ -1958,21 +1953,21 @@ void parse_speech(string str, object obj)
 void receive_message(string cl,string msg)
 {
     if(cl != "emote") { return ::receive_message(cl,msg); }
-    
+
     if(ACTING) { return; }
     if(TALKING) { return; }
-    
 
-    
+
+
     //tell_room(ETO,"emote: "+cl);
     //tell_room(ETO,"msg: "+msg);
-    
+
 }
 
 
 
-void catch_say(string str) 
-{ 
+void catch_say(string str)
+{
     object *allies;
     if(TALKING) { return; }
     if(!interactive(TP)) { return; } // don't need them listening to monsters for now
@@ -1980,7 +1975,7 @@ void catch_say(string str)
     if(sizeof(TO->query_attackers())) { return; }
     allies = query_allies();
     if(member_array(TP,allies) == -1) { return; }
-    parse_speech(str,TP);    
+    parse_speech(str,TP);
     return;
 }
 
@@ -1991,7 +1986,7 @@ void catch_say(string str)
 void perform_random_emote()
 {
     parse_speech("weather",TO);
-    return;    
+    return;
 }
 
 // make sure the henchman is in combat with all of the owner's attackers
@@ -2005,25 +2000,25 @@ void adjust_attackers(object *attackers)
 
     for(i=0;i<sizeof(attackers);i++)
     {
-        if(!objectp(attackers[i])) 
+        if(!objectp(attackers[i]))
         {
             TO->remove_attacker(0);
-            continue; 
+            continue;
         }
         if(!objectp(ETO) || !objectp(environment(attackers[i])) || (ETO != environment(attackers[i])) )
         {
             TO->remove_attacker(attackers[i]);
             attackers[i]->remove_attacker(TO);
-            continue;            
-        }        
+            continue;
+        }
         if(attackers[i]->is_merc())
         {
             say("Yeah, the company would really like US to fight.  We better stop before we get our pay docked.");
             TO->remove_attacker(attackers[i]);
-            attackers[i]->remove_attacker(TO);            
+            attackers[i]->remove_attacker(TO);
         }
-        if(attackers[i] == OWNER) 
-        { 
+        if(attackers[i] == OWNER)
+        {
             say("Woah now, my contract forbids me from getting into a fight with you boss, I'm outta here.  Call me back "
                 "when you've calmed down.");
             TO->move(HENCH_ROOM);
@@ -2032,7 +2027,7 @@ void adjust_attackers(object *attackers)
             TO->cease_all_attacks();
             TO->force_me("dispell sticks into snakes");
             DITCHED = 1;
-            return; 
+            return;
         }
         if(interactive(attackers[i]) || attackers[i]->is_guardsman())
         {
@@ -2042,7 +2037,7 @@ void adjust_attackers(object *attackers)
             TO->cease_all_attacks();
             attackers[i]->remove_attacker(TO);
             DITCHED = 1;
-            return;            
+            return;
         }
         add_attacker(attackers[i]);
         attackers[i]->add_attacker(TO);
@@ -2082,17 +2077,17 @@ mapping refresh_enemies(object *attackers)
         if(!objectp(attackers[i])) { continue; }
 
         if(member_array(attackers[i],objs) == -1) { enemies += ([ attackers[i] : 1 ]); }
-        else 
-        { 
+        else
+        {
             count = ENEMIES[attackers[i]];
             count++;
-            enemies += ([ attackers[i] : count ]);            
+            enemies += ([ attackers[i] : count ]);
         }
     }
 
-    ENEMIES = enemies;    
+    ENEMIES = enemies;
     //tell_room(ETO,"ENEMIES: "+identify(ENEMIES));
-    return enemies;    
+    return enemies;
 }
 
 // checks various status effects, used to decide which actions to take in combat
@@ -2138,10 +2133,10 @@ void resolve_party()
     {
         party = ""+OWNER->query_name()+" party";
     }
-    
+
     members = PARTY_D->query_party_members(party);
     if(pointerp(members) && sizeof(members))
-    {    
+    {
         if(member_array(TO,members) != -1) { return; }
     }
 
@@ -2151,7 +2146,7 @@ void resolve_party()
         PARTY_D->remove_member(TO);
         PARTY_D->add_member(TO,party);
     }
-    
+
     // not 100% sure when this is happening, but sometimes the hireling is getting made the party leader.  We don't want this
     leader = PARTY_D->query_leader(party);
     if(objectp(leader))
@@ -2159,7 +2154,7 @@ void resolve_party()
         if(leader == TO)
         {
             PARTY_D->change_leader(OWNER);
-        }        
+        }
     }
 
     PARTY_COUNTER++;
@@ -2188,14 +2183,14 @@ void kit_me()
     int i,uses,level,num;
     object kit,newkit,sack;
     string type;
-    
+
     if(!objectp(TO)) { return; }
     if(!objectp(ETO)) { return; }
-    
+
     kit = present("kitxyz",TO);
-    
-    if(objectp(kit)) { uses = (int)kit->query_uses(); }    
-    
+
+    if(objectp(kit)) { uses = (int)kit->query_uses(); }
+
     level = (int)TO->query_level();
     switch(level)
     {
@@ -2212,21 +2207,21 @@ void kit_me()
         type = "/d/common/obj/potion/legendary_heal";
         break;
     }
-    
+
     sack = present("sack",TO);
     if(!objectp(sack)) { sack_me(); return; }
-    
+
     if(objectp(kit) && objectp(sack) && base_name(kit) != type)
     {
         tell_room(ETO,TO->QCN+" puts "+kit->query_short()+" into "+sack->query_short());
         num = kit->move(sack);
-        if(num != MOVE_OK) 
-        { 
+        if(num != MOVE_OK)
+        {
             kit->move("/d/shadowgate/void");
             kit->remove();
         }
         return;
-    } 
+    }
 
     if(!objectp(kit) || uses < 35)
     {
@@ -2244,7 +2239,7 @@ void kit_me()
         {
             newkit->move(TO);
             TO->force_me("combine kit with kit");
-        }              
+        }
 
     }
     if(objectp(kit = present("kitxyz",TO)))
@@ -2262,7 +2257,7 @@ int is_ally(object obj)
     if(obj == TO) { return 0; }
     if(obj == OWNER) { return 0; }
     if(member_array(obj,query_allies()) == -1) { return 0; }
-    return 1;   
+    return 1;
 }
 
 
@@ -2271,22 +2266,22 @@ int has_fodder()
     int i;
     object *live,*fodder=({});
     mixed tmp;
-    
+
     if(!objectp(TO)) { return 0; }
     if(!objectp(ETO)) { return 0; }
-    
+
     live = all_living(ETO);
-    
+
     if(!sizeof(live)) { return 0; }
-    
+
     for(i=0;i<sizeof(live);i++)
     {
         if(!objectp(live[i])) { continue; }
         if(!tmp = live[i]->query_property("minion")) { continue; }
         if(tmp != TO) { continue; }
-        fodder += ({ live[i] });    
+        fodder += ({ live[i] });
     }
-    return sizeof(fodder);    
+    return sizeof(fodder);
 }
 
 
@@ -2294,14 +2289,14 @@ string get_id(object obj)
 {
     string *ids=({});
     int i;
-    
+
     if(!objectp(obj)) { return ""; }
-    
+
     ids = (string*)obj->query_id();
     if(!pointerp(ids)) { return ""; }
     if(!sizeof(ids)) { return ""; }
-    
-    return ids[0];    
+
+    return ids[0];
 }
 
 
@@ -2320,42 +2315,42 @@ void perform_action(object obj,string action)
     int level,i,count;
     object *allies=({}),cast, targ;
     string *effects=({}),spell, targ_id;
-    
+
     if(!objectp(obj)) { return; }
     if(!objectp(TO)) { return; }
     if(TO->query_casting()) { return; }
-    
+
     level = (int)TO->query_level();
     level = level + (level / 2); // giving them a boost since they aren't very smart in how they use spells
-    ACTING = 1;    
-    
+    ACTING = 1;
+
     while(i < 20 && !target_check(targ))
     {
         targ_id = get_id(obj)+" "+i;
         targ = present(targ_id,ETO);
         i++;
     }
-    
+
     switch(action)
     {
     case "blade barrier":
-    
-        cast = new("/cmds/spells/b/_blade_barrier")->use_spell(TO,0,level,100,"cleric");        
+
+        cast = new("/cmds/spells/b/_blade_barrier")->use_spell(TO,0,level,100,"cleric");
         break;
-        
+
     case "aura of healing":
-    
+
         switch(level)
         {
             case 0..14: ACTING = 0; return;
             default:        spell = "/cmds/spells/a/_aura_of_healing";    break;
         }
-        
-        cast = new(spell)->use_spell(TO,0,level,100,"cleric");        
+
+        cast = new(spell)->use_spell(TO,0,level,100,"cleric");
         break;
-        
+
     case "mass heal":
-    
+
         allies = query_allies();
         if(!pointerp(allies) || !sizeof(allies)) { break; }
         for(i=0;i<sizeof(allies);i++)
@@ -2375,49 +2370,49 @@ void perform_action(object obj,string action)
             case 5..7:      spell = "_mass_cure_moderate_wounds";    break;
             case 8..11:     spell = "_mass_cure_serious_wounds";     break;
             case 12..15:    spell = "_mass_cure_critical_wounds";    break;
-            default:        spell = "_mass_heal";                    break;                
+            default:        spell = "_mass_heal";                    break;
             }
-            
+
             cast = new("/cmds/spells/m/"+spell)->use_spell(TO,obj,level,100,"cleric");
             return;
         }
-        
+
         break;
-        
+
     case "heal":
-    
+
         if(TIMERS["heal"] > time()) { break; }
         TIMERS["heal"] = time() + ROUND_LENGTH*3;
-        
+
         switch(level)
         {
             case 0..15:     spell = "/c/_cure_critical_wounds";        break;
             default:        spell = "/h/_heal";                        break;
         }
         if(environment(obj) != OTO) { return; }
-        cast = new("/cmds/spells"+spell)->use_spell(TO,obj,level,100,"cleric");        
+        cast = new("/cmds/spells"+spell)->use_spell(TO,obj,level,100,"cleric");
         break;
-            
+
     case "neutralize poison":
-    
+
         if(environment(obj) != OTO) { return; }
-        cast = new("/cmds/spells/n/_neutralize_poison")->use_spell(TO,obj,level,100,"cleric");    
+        cast = new("/cmds/spells/n/_neutralize_poison")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "remove paralysis":
-    
+
         if(environment(obj) != OTO) { return; }
-        cast = new("/cmds/spells/r/_remove_paralysis")->use_spell(TO,obj,level,100,"cleric");    
+        cast = new("/cmds/spells/r/_remove_paralysis")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "cure blindness":
-    
+
         if(environment(obj) != OTO) { return; }
-        cast = new("/cmds/spells/r/_remove_blindness")->use_spell(TO,obj,level,100,"cleric");    
+        cast = new("/cmds/spells/r/_remove_blindness")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "summon fodder":
-    
+
         if(time() < TIMERS["fodder"]) { return; }
         if(has_fodder() < 3)
         {
@@ -2425,60 +2420,60 @@ void perform_action(object obj,string action)
             new("/cmds/spells/s/_sticks_into_snakes")->use_spell(TO,0,level,100,"cleric");
             return;
         }
-        
-        break;    
-    
+
+        break;
+
     case "flame strike":
-    
+
         if(environment(obj) != OTO) { return; }
         new("/cmds/spells/f/_flame_strike")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "sound burst":
-    
+
         if(environment(obj) != OTO) { return; }
-        new("/cmds/spells/s/_sound_burst")->use_spell(TO,obj,level,100,"cleric");        
+        new("/cmds/spells/s/_sound_burst")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "greater dispel":
-    
+
         if(environment(obj) != OTO) { return; }
-        new("/cmds/spells/g/_greater_dispel_magic")->use_spell(TO,obj,level,100,"cleric");        
+        new("/cmds/spells/g/_greater_dispel_magic")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "shieldbash":
-    
+
         if(environment(obj) != OTO) { return; }
-        TO->force_me("shieldbash "+targ_id);    
+        TO->force_me("shieldbash "+targ_id);
         break;
-        
+
     case "shatter":
-    
+
         if(environment(obj) != OTO) { return; }
-        TO->force_me("shatter "+targ_id);    
+        TO->force_me("shatter "+targ_id);
         break;
-        
+
     case "disarm":
-    
+
         if(environment(obj) != OTO) { return; }
-        TO->force_me("disarm "+targ_id);    
-        break;   
-        
+        TO->force_me("disarm "+targ_id);
+        break;
+
     case "rush":
-    
+
         if(environment(obj) != OTO) { return; }
-        TO->force_me("rush "+targ_id);    
+        TO->force_me("rush "+targ_id);
         break;
 
     case "call lightning":
-    
+
         if(environment(obj) != OTO) { return; }
-        new("/cmds/spells/c/_call_lightning")->use_spell(TO,obj,level,100,"cleric");    
+        new("/cmds/spells/c/_call_lightning")->use_spell(TO,obj,level,100,"cleric");
         break;
 
     case "food":
     case "water":
-    
+
         switch(level)
         {
         case 0..15:
@@ -2487,34 +2482,34 @@ void perform_action(object obj,string action)
             break;
         default:
             new("/cmds/spells/h/_heroes_feast")->use_spell(TO,0,level,100,"cleric");
-            break;            
+            break;
         }
-        
+
         break;
-        
+
     case "animate object":
-    
+
         new("/cmds/spells/a/_animate_object")->use_spell(TO,"room",level,100,"cleric");
         break;
-        
+
     case "light":
-    
+
         if(environment(obj) != OTO) { return; }
         new("/cmds/spells/l/_light")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "darkness":
-    
+
         if(environment(obj) != OTO) { return; }
         new("/cmds/spells/d/_darkness")->use_spell(TO,obj,level,100,"cleric");
         break;
-        
+
     case "water breathing":
-        
+
         if(environment(obj) != OTO) { return; }
         new("/cmds/spells/w/_water_breathing")->use_spell(TO,obj,level,100,"cleric");
-        break;        
-    }    
+        break;
+    }
     return;
 }
 
@@ -2524,26 +2519,26 @@ void make_decision(object obj,string friendorfoe)
     object *attackers=({}),*spelled=({});
     string *effects,effect;
     int i,alive;
-    
+
     if(!objectp(TO)) { return ""; }
     if(!objectp(OWNER)) { return ""; }
     if(!objectp(obj)) { return ""; }
-    
+
     if(TO->query_casting()) { return; }
-    
-    effects = query_status_effects(obj);    
-    
+
+    effects = query_status_effects(obj);
+
     if(sizeof(effects))
     {
         for(i=0;i<sizeof(effects);i++)
         {
             effect = effects[i];
-    
+
             switch(friendorfoe)
             {
-            
+
             case "friend":
-            
+
                 switch(effect)
                 {
                     case "unconscious":
@@ -2552,29 +2547,29 @@ void make_decision(object obj,string friendorfoe)
 
                         perform_action(obj,"heal");
                         break;
-                        
+
                     case "paralyzed":
-                        
+
                         perform_action(obj,"remove paralysis");
                         break;
-                        
+
                     case "blind":
-                        
+
                         perform_action(obj,"cure blindness");
                         break;
-                        
+
                     case "poisoned":
-                    
+
                         perform_action(obj,"neutralize poison");
                         break;
                 }
-                
+
                 break;
-                
+
             default:
-            
-                if(!has_fodder()) 
-                { 
+
+                if(!has_fodder())
+                {
                     if(!ETO->query_property("no sticks"))
                     {
                         perform_action(obj,"summon fodder");
@@ -2583,37 +2578,34 @@ void make_decision(object obj,string friendorfoe)
                 }
 
                 attackers = TO->query_attackers();
-                
+
                 if(sizeof(attackers) > 2)
                 {
                     switch(random(3))
                     {
                     case 0:  perform_action(obj,"sound burst");  return;
-                    default: perform_action(obj,"flame strike"); return;                    
-                    }               
+                    default: perform_action(obj,"flame strike"); return;
+                    }
                 }
                 else
                 {
                     if(!random(4))
                     {
                         spelled = (object*)obj->query_property("spelled");
-                        if(pointerp(spelled) && ( sizeof(spelled) > 2)) { perform_action(obj,"greater dispel"); return; }                        
-                        if(obj->query_casting()) { perform_action(obj,"shieldbash"); return; }                        
-                        if(obj->query_stoneSkinned()) { perform_action(obj,"shatter"); return; }                        
-                        if(sizeof(obj->query_wielded())) { perform_action(obj, "disarm"); return; }
+                        if(pointerp(spelled) && ( sizeof(spelled) > 2)) { perform_action(obj,"greater dispel"); return; }
+                        if(obj->query_casting()) { perform_action(obj,"shieldbash"); return; }
                     }
                     switch(random(100))
                     {
-                        case 0..10: perform_action(obj,"rush"); return;
                         case 11..40: perform_action(obj,"call lightning"); return;
                         default: break; // don't do anything here, they should just have normal melee attacks some rounds
-                    }                    
-                }                
+                    }
+                }
                 break;
             }
         }
-    }    
-    return;   
+    }
+    return;
 }
 
 
@@ -2622,11 +2614,11 @@ void decision_matrix(object *allies,object *attackers)
     int i;
     if(!objectp(TO)) { return; }
     if(!objectp(OWNER)) { return; }
-    
+
     if(TO->query_casting()) { return; }
-    
+
     if(COMBAT_TIME && !sizeof(attackers))
-    {   
+    {
         if(!ETO->query_property("no sticks") && !has_fodder())
         {
             perform_action(TO,"summon fodder");
@@ -2638,13 +2630,13 @@ void decision_matrix(object *allies,object *attackers)
                 if(!objectp(allies[i])) { continue; }
                 if((int)allies[i]->query_hp() >= (int)allies[i]->query_max_hp()) { continue; }
                 perform_action(TO,"mass heal");
-                break;               
+                break;
             }
-        }            
+        }
         if(!TO->query_property((string)TO->query_name()+"_aura_of_healing")) { perform_action(TO,"aura of healing"); }
         if(!TO->query_property("blade barrier")) { perform_action(TO,"blade barrier"); }
     }
-    
+
     if(sizeof(attackers) && !ACTING) // priority order of self, owner, friends, enemies
     {
         make_decision(TO,"friend");
@@ -2667,7 +2659,7 @@ void decision_matrix(object *allies,object *attackers)
                 if(!objectp(attackers[i])) { continue; }
                 make_decision(attackers[i],"foe");
             }
-        }        
+        }
     }
     return;
 }
@@ -2677,21 +2669,21 @@ void set_temp_owner()
     int i;
     object *allies=({});
     allies = query_allies();
-    
+
     if(!pointerp(allies) || !sizeof(allies))
     {
         TEMP_OWNER = 0;
         return;
     }
-    
+
     for(i=0;i<sizeof(allies);i++)
     {
         if(!objectp(allies[i])) { continue; }
         if(allies[i] == TO) { continue; }
         if(allies[i]->query_ghost()) { continue; }
         TEMP_OWNER = allies[i];
-        return;        
-    }   
+        return;
+    }
     return;
 }
 
@@ -2705,23 +2697,23 @@ void party_check()
     int i,allowed,players=0,mercs=0;
     object *allies=({}),*hires=({});
     mapping map;
-    
-    allies = query_allies();    
+
+    allies = query_allies();
     if(!sizeof(allies)) { return; }
     for(i=0;i<sizeof(allies);i++)
     {
         if(!objectp(allies[i])) { continue; }
-        if(allies[i]->is_merc()) 
+        if(allies[i]->is_merc())
         {
             hires += ({ allies[i] });
-            mercs++; 
+            mercs++;
         }
-        players++;        
+        players++;
     }
-    
+
     allowed = players/3;
     if(!allowed) { allowed = 1; }
-    
+
     if(mercs > allowed)
     {
         for(i=0;i<sizeof(hires);i++)
@@ -2731,19 +2723,19 @@ void party_check()
             hires[i]->move(HENCH_ROOM);
             hires[i]->remove();
         }
-        
+
         map = ([]);
 
         map["delay"] = 0.9;
         map["counter"] = 0;
-        map["events"] = ([  1 : (["say"      : "our contract forbids more than one of us from working with any adventuring party of less than three."]), 
+        map["events"] = ([  1 : (["say"      : "our contract forbids more than one of us from working with any adventuring party of less than three."]),
                             2 : (["say"      : "the rest of us will go wait until you're done with your group." ]),
                             4 : (["say"      : "or you can sort it out yourselves."]),
                             5 : (["endblank" : 0 ]), ]);
         TALKING = 1;
         call_out("process_speech_event",map["delay"],map);
     }
-    return;   
+    return;
 }
 
 
@@ -2759,7 +2751,7 @@ int in_pkill()
         if(!objectp(attackers[i])) { continue; }
         if(interactive(attackers[i])) { return 1; }
     }
-    return 0;   
+    return 0;
 }
 
 
@@ -2771,28 +2763,28 @@ void heart_beat()
     ACTING = 0;
     BEAT = 0;
     if(FIRED && objectp(TO))
-    {        
+    {
         TO->move(HENCH_ROOM);
         TO->remove();
     }
-    
+
     if(!objectp(TO)) { return; }
-    
-    if((int)TO->query_hp() < 0) 
+
+    if((int)TO->query_hp() < 0)
     {
-        die(TO); 
+        die(TO);
         return;
     }
-    
+
     if(!TO->query_name()) { return; }
     if(!objectp(ETO)) { return; }
-    
+
     reset_condition();
-    
-    ::heart_beat(); 
-    
-    if(!objectp(OWNER)) 
-    {        
+
+    ::heart_beat();
+
+    if(!objectp(OWNER))
+    {
         TO->move(HENCH_ROOM);
         if(IDLE_TIME > 1000) { TO->remove(); }
         if(objectp(obj = find_player(OWNER_NAME))) // if they haven't timed out before the owner logs back in, then bond with the owner again
@@ -2800,13 +2792,13 @@ void heart_beat()
             OWNER = obj;
             return;
         }
-        return; 
+        return;
     }
 
     if(!objectp(MY_WHISTLE))
     {
-        if(!objectp(OWNER)) 
-        { 
+        if(!objectp(OWNER))
+        {
             TO->move(HENCH_ROOM);
             TO->remove();
             return;
@@ -2814,17 +2806,17 @@ void heart_beat()
         fire_me();
         return;
     }
-    
+
     party_check();
-    
+
     if(!FEATS_D->is_active(TO,"hardenedminions")) { TO->force_me("hardenedminions"); }
-    
+
     if(time() > END_TIME + DAY)
     {
         fire_me();
-        return;       
+        return;
     }
-    
+
     if((time() > (END_TIME + DAY - 600)) && !NOTIFIED_TWICE && (ETO == OTO))
     {
         map = ([]);
@@ -2832,16 +2824,16 @@ void heart_beat()
         map["delay"] = 0.9;
         map["counter"] = 0;
         map["events"] = ([  0 : (["emote"    : "frowns" ]),
-                            1 : (["say"      : "look boss, I like traveling with you and all."]), 
+                            1 : (["say"      : "look boss, I like traveling with you and all."]),
                             2 : (["say"      : "but we're just about at the far limit of my contract." ]),
                             4 : (["say"      : "A few more minutes and I have to leave, no matter what"]),
                             5 : (["endblank" : 0 ]), ]);
         TALKING = 1;
         NOTIFIED_TWICE = 1;
         call_out("process_speech_event",map["delay"],map);
-        return;        
+        return;
     }
-    
+
     if(time() > (END_TIME - 600) && (ETO == OTO))
     {
         if(!NOTIFIED && !sizeof(TO->query_attackers()))
@@ -2851,36 +2843,36 @@ void heart_beat()
             map["delay"] = 0.9;
             map["counter"] = 0;
             map["events"] = ([  0 : (["emote"    : "looks up at the sky" ]),
-                                1 : (["say"      : "my contract is about up boss."]), 
+                                1 : (["say"      : "my contract is about up boss."]),
                                 2 : (["say"      : "you'll have to pay double if you keep me longer than my contract lasts for." ]),
                                 4 : (["say"      : "just keep that in mind."]),
                                 5 : (["endblank" : 0 ]), ]);
             TALKING = 1;
             NOTIFIED = 1;
             call_out("process_speech_event",map["delay"],map);
-            return;           
-        }       
+            return;
+        }
     }
-    
+
     if((time() > END_TIME) && !DOUBLE_PRICE)
     {
         DOUBLE_PRICE = 1;
         HENCH_D->penalize(OWNER_NAME,"late");
-    }    
-    
+    }
+
     if(objectp(TEMP_OWNER))
     {
         if(environment(REAL_OWNER) == ETO)
         {
             TEMP_OWNER = 0;
             OWNER = REAL_OWNER;
-            
+
             map = ([]);
 
             map["delay"] = 0.9;
             map["counter"] = 0;
             map["events"] = ([  0 : (["emote"    : "smiles" ]),
-                                1 : (["say"      : "there you are, boss"]), 
+                                1 : (["say"      : "there you are, boss"]),
                                 2 : (["say"      : "glad Kelemvor didn't decide to keep you." ]),
                                 3 : (["emote"    : "mutters under "+TO->QP+" breath" ]),
                                 4 : (["say"      : "still lost my damn bonus though."]),
@@ -2888,17 +2880,17 @@ void heart_beat()
             TALKING = 1;
             call_out("process_speech_event",map["delay"],map);
             OWNER->add_follower(TO);
-            return;            
+            return;
         }
-    }    
-    
+    }
+
     if(ETO != OTO)
-    { 
+    {
         if((ALONE > 20) && !DITCHED)
         {
             TO->move(HENCH_ROOM);
             TO->cease_all_attacks();
-            ALONE = 0;            
+            ALONE = 0;
         }
         if((ETO != HENCH_ROOM) && !DITCHED) { ALONE++; }
         if(OWNER->query_ghost())
@@ -2909,13 +2901,13 @@ void heart_beat()
             {
                 REAL_OWNER = OWNER;
                 OWNER = TEMP_OWNER;
-                
+
                 map = ([]);
 
                 map["delay"] = 0.9;
                 map["counter"] = 0;
                 map["events"] = ([  0 : (["emote"    : "grimaces" ]),
-                                    1 : (["say"      : "well damn"]), 
+                                    1 : (["say"      : "well damn"]),
                                     2 : (["say"      : "there goes my bonus" ]),
                                     3 : (["emote"    : "sighs" ]),
                                     4 : (["say"      : "I guess I'll stick with somebody else unless my customer comes back."]),
@@ -2924,33 +2916,33 @@ void heart_beat()
                 call_out("process_speech_event",map["delay"],map);
                 OWNER->add_follower(TO);
                 return;
-            }           
-            
+            }
+
         }
         if(!DITCHED && can_follow(OTO) && !in_pkill())
         {
             // taking this out for now, see if it helps with the mercs getting lost
-            //if(sizeof(TO->query_attackers())) 
+            //if(sizeof(TO->query_attackers()))
             //{
             //    if(objectp(MY_WHISTLE) && !random(6)) { tell_object(OWNER,"%^GREEN%^The magical whistle vibrates, perhaps the mercenary can't reach you.%^RESET%^"); }
-            //    return; 
+            //    return;
             //}
             TO->move(OTO);
             say("yeah, yeah, I'm back now.  Lost you for a second.");
             OWNER->add_follower(TO);
         }
-    } 
+    }
 
     attackers = ({});
 
     if(!objectp(TO)) { return; }
-    
+
     if((int)TO->query_hp() < 0 ) { return; }
-    
+
     TO->force_me("combine kit with kit");
-    
+
     kit_me();
-    
+
     if(objectp(obj=present("kitxyz",TO))) { obj->set_property("monsterweapon",1); }
 
     resolve_party(); // joins owner's party or creates a new one.  Waits if owner drops party to give them enough time to join a different one before joining that one
@@ -2967,63 +2959,63 @@ void heart_beat()
     refresh_enemies(attackers); // keeps up with the enemies that we've been fighting, and how long we've been fighting them
     adjust_attackers(attackers); // make sure we're actually in combat with all of our enemies
 
-    if(sizeof(attackers)) 
-    { 
+    if(sizeof(attackers))
+    {
         COMBAT_TIME+=2;
         if(COMBAT_TIME > 100) { COMBAT_TIME = 100; }
         IDLE_TIME = 0;
     }
-    else 
-    { 
-        COMBAT_TIME--; 
+    else
+    {
+        COMBAT_TIME--;
         IDLE_TIME++;
-        if(IDLE_TIME > 30 && !random(20)) 
+        if(IDLE_TIME > 30 && !random(20))
         {
             perform_random_emote();
             IDLE_TIME = 0;
         }
-        
+
         if(present("ball of light",TO))
         {
             if(ETO == OTO)
             {
                 force_me("give ball of light to "+OWNER->query_name());
-            }            
+            }
         }
-        
+
         if(present("globe of darkness",TO))
         {
             if(ETO == OTO)
             {
                 force_me("give globe of darkness to "+OWNER->query_name());
-            }            
-        }        
+            }
+        }
     }
-    if(COMBAT_TIME < 0) { COMBAT_TIME = 0; }    
+    if(COMBAT_TIME < 0) { COMBAT_TIME = 0; }
     allies = query_allies();
-    decision_matrix(allies,attackers); // decide what to do here then do it    
+    decision_matrix(allies,attackers); // decide what to do here then do it
     return;
 }
 
 int can_follow(object room)
 {
     int i;
-    string room_name,tmp;    
+    string room_name,tmp;
     room_name = base_name(room);
-    
+
     if(!objectp(ETO)) { return 0; }
     if(!objectp(OTO)) { return 0; }
-    
+
     tmp = base_name(ETO);
     if(strsrch(tmp,"/d/magic/room/in_web") != -1) { return 0; }
     tmp = base_name(OTO);
-    if(strsrch(tmp,"/d/magic/room/in_web") != -1) { return 0; }    
-    
+    if(strsrch(tmp,"/d/magic/room/in_web") != -1) { return 0; }
+
     for(i=0;i<sizeof(EXCLUDED_ROOMS);i++)
     {
-        if(strsrch(EXCLUDED_ROOMS[i],room_name) != -1) { return 0; }       
+        if(strsrch(EXCLUDED_ROOMS[i],room_name) != -1) { return 0; }
     }
-    return 1;    
+    return 1;
 }
 
 void die(object ob)
@@ -3036,7 +3028,7 @@ void die(object ob)
             tell_object(OWNER,"The magical whistle vanishes with the mercenary's death.");
             MY_WHISTLE->remove();
             if(objectp(MY_WHISTLE)) { destruct(MY_WHISTLE); }
-        }       
+        }
     }
     ::die(ob);
     if(objectp(TO)) { TO->remove(); }

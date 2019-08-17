@@ -1,12 +1,7 @@
-//      /std/monster.c
-//      from the Nightmare mudlib
-//      inheritable code for npc's
-//      created by Descartes of Borg september 1992
-//  * added set_nogo() and made move_around() query the list of rooms from it to not enter for easier control of wandering mobs.   Note: moving mobs need a set_speed(x) in create - examples I've found all had set_moving(1) also but I don't believe that's actually needed
-//  *Styx*  8/6/03
-// Ares added ability to open doors in move_around, *Styx* added to do_walk for pathfinder
-// Added a to hit bonus in conjunction with Thaco change, to make mobs hit the same AC as
-// they always have -Ares 8/22/06
+/**
+ * @file
+ * @brief This is base inherit for all monsters
+ */
 
 #define PATHFINDER "/daemon/pathfinder_d.c"  // added by Lujke, September 2005
 
@@ -1260,15 +1255,11 @@ string query_destination(){
   return destination;
 }
 
-//////////Next few functions added by Lujke September 2005, to support
-///////// Mobs being able to find their way to specified destinations
-// *Styx* 2/1/06 adding to use will_open_doors() setting, borrowed from Ares' addition to move_around
-//// hurry() and run() options set by lujke, June 2017, to enable mobs to take 2 or 3 steps per heartbeat, so they get around more quickly
-
+/**
+ * This function moves the mob along the path towards the destination,
+ * if the is_walking variable has been set to 1
+ */
 varargs void do_walk(int iteration){
-// This function moves the mob along the path towards the destination, if
-// the is_walking variable has been set to 1
-
   string * finalpath, step, allsteps, door;
   object startroom, endroom, * rooms, scanner;
   int i;
@@ -1377,13 +1368,15 @@ void reach_destination(){
   // a virtual function, triggered when the mob gets to where it is going
 }
 
+/**
+ * Starts the mob walking towards its destination.
+ *
+ * @param dest should be the filename of the destination room, without
+ * the ".c" - i.e, exactly what is returned by
+ * file_name(<destination>) The destination MUST have been set up with
+ * waypoints, using the destinations_d.c daemon.
+ */
 void start_walking(string dest){
-  // This function starts the mob walking towards its destination. The
-  // string dest should be the filename of the destination room, without
-  // the ".c" - i.e, exactly what is returned by file_name(<destination>)
-  // *NOTE* The destination MUST have been set up with waypoints, using the
-  // destinations_d.c daemon.
-
   destination = dest;
   is_walking = 1;
   call_out("do_walk", 1);
@@ -1413,7 +1406,13 @@ int set_heart_beat(int flag) {
     //// if monsters start fucking up the world over, take the first line out.
 }
 
-
+/**
+ * Automatically Sets monster exp based on exp needed towards next level
+ *
+ * @param level monster level
+ * @param perc "very low" "low" "normal" "high" "very high" "boss",
+ *        defaults to "normal", percentile based exp level
+ */
 void set_new_exp(int level, string perc)
 {
     int exp,div;
@@ -1483,9 +1482,6 @@ void set_use_monster_flag(int f)
 {
    useMonsterFlag = f;
 }
-
-
-
 
 // Stuff from weaponless_monsters.c
 
@@ -1579,8 +1575,6 @@ void run(){
 }
 string *query_temporary_feats() { return ({}); }
 
-//a way to hijack some stuff happening on mob heart-beat that
-//really messes up peer - Saide, August 2017
 int move(mixed dest)
 {
     if(!objectp(TO)) return ::move(dest);
