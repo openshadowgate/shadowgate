@@ -6,13 +6,26 @@
 // Now a part of the TMI distribution mudlib.
 // Purpose: to remove a range from an array
 */
+
+/**
+ * @file
+ */
+
+/**
+ * Excludes a range from an array.
+ *
+ * @param *array Array to process
+ * @param from first range index
+ * @param to last range indes. Can me ommited.
+ * @return Modified array
+ */
 varargs mixed *exclude_array(mixed *array,int from, int to)
 {
    mixed *bottom,*top;
-   
+
    bottom = ({ });
    top = ({ });
-   
+
    if(!to) to = from;
    if(from > 0)
       bottom = array[0 .. from - 1];

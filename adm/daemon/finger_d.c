@@ -44,18 +44,17 @@ string general_finger_display() {
     finger += "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
     who = users();
     for (i=0; i<sizeof(who); i++) {
-        if (who[i]->query_invis() && who[i] != this_player()) continue;
         if (who[i]->query_quietness() && wizardp(who[i])) continue;
         if (!who[i]->query_name()) continue;
         if (avatarp(who[i]) && ((string)who[i]->query_vis_name() != (string)who[i]->query_name())) {
             finger += "%^YELLOW%^"+alig_str(capitalize((string)who[i]->query_vis_name()), 15);
             finger += "%^BOLD%^%^CYAN%^"+alig_str("Unknown", 30);
-            finger += "%^BOLD%^%^MAGENTA%^"+alig_str(query_idle_string(who[i], 0), 8);
+            finger += "%^BOLD%^%^MAGENTA%^"+alig_str(parse_time(query_idle(who[i])), 8);
             finger += "\n";
         } else {
             finger += "%^YELLOW%^"+alig_str(capitalize((string)who[i]->query_name()), 15);
             finger += "%^BOLD%^%^CYAN%^"+alig_str((string)who[i]->query_rname(), 30);
-            finger += "%^BOLD%^%^MAGENTA%^"+alig_str(query_idle_string(who[i], 0), 8);
+            finger += "%^BOLD%^%^MAGENTA%^"+alig_str(parse_time(query_idle(who[i])), 8);
             finger += "\n";
         }
     }
@@ -356,4 +355,3 @@ static void complete_variables() {
     //if (!race) race = "Unborn";
     if (!player_age) player_age = 0;
 }
-

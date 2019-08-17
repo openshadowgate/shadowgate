@@ -3,6 +3,13 @@
 //      an absolute value simul_efun
 //      created by Descartes 28 april 1993
 
+/**
+ * @file
+ */
+
+/**
+ * Deprecated. Use abs()
+ */
 int absolute_value(int x) {
-    return ( (x>-1) ? x : -x);
+    return abs(x);
 }

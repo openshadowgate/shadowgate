@@ -1,4 +1,13 @@
 #include <std.h>
+
+/**
+ * @file
+ */
+
+
+/**
+ * Returns online users with good alignment
+ */
 object * good(){
 //
     object * us;

@@ -1,4 +1,12 @@
 #include <std.h>
+
+/**
+ * @file
+ */
+
+/**
+ * Returns online users with evil alignment
+ */
 object * evil(){
 //
     object * us;

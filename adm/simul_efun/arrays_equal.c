@@ -3,6 +3,13 @@
 // same size, every member is the same and
 // in the same order
 
+/**
+ * @file
+ */
+
+/**
+ * Checks if two awways are equal
+ */
 int arrays_equal(mixed *one, mixed *two)
 {
     int i;

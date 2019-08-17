@@ -3,6 +3,13 @@
 //	converts a string to an int
 //	created by Descartes of Borg 16 april 1993
 
+/**
+ * @file
+ */
+
+/**
+ * Converts string's contents to integer
+ */
 int atoi(string str) {
     int x;
 

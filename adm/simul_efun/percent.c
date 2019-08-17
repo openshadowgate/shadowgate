@@ -3,7 +3,15 @@
 //	returns the percent one value is of another
 //	created by Descartes of Borg 15 april 1993
 
-float percent(mixed numerator, mixed denominator) 
+/**
+ * @file
+ * @brief
+ */
+
+/**
+ * Returns the percent one value is of another
+ */
+float percent(mixed numerator, mixed denominator)
 {
     float a, b;
 
@@ -14,6 +22,14 @@ float percent(mixed numerator, mixed denominator)
     return ((a/b)*100);
 }
 
+
+/**
+ * Sums an array
+ *
+ * @param *arr Array to sum
+ * @param ele How many elements to sum. Defaults to 0.
+ * @return Sum
+ */
 int sum_array(int *arr, int ele)
 {
     int sum = 0, i;
@@ -23,7 +39,7 @@ int sum_array(int *arr, int ele)
         if(i > (sizeof(arr)-1)) continue;
         if(!intp(arr[i])) continue;
         sum += arr[i];
-        continue;        
+        continue;
     }
     return sum;
 }

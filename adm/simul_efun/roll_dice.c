@@ -1,3 +1,15 @@
+/**
+ * @file
+ */
+
+
+/**
+ * Rolls a NdM dice
+ *
+ * @param num N
+ * @param sides M
+ * @reutn Sum of the roll
+ */
 int roll_dice(int num, int sides) {
   int x,cnt;
 

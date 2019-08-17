@@ -3,7 +3,17 @@
 // Bug in "here" option fixed by Pallando 93-05-26
 // "cwd" option added by Pallando 93-05-30
 */
+/**
+ * @file
+ */
 
+/**
+ * Resolves relative path into absolute
+ *
+ * @param curr Directory to resolve from. Defaults to current directory of this_player().
+ * @param tet Relative path string. Defaults to "."
+ * @return Absolute path
+ */
 string resolv_path(string curr, string tet) {
     int i;
     string *tmp;
@@ -21,7 +31,7 @@ string resolv_path(string curr, string tet) {
     if(sscanf(tet,"~/%s",t1))
       tet = user_path((string)this_player()->query_name()) + t1;
     else if(sscanf(tet,"~%s",t1))
-      tet = user_path(t1); 
+      tet = user_path(t1);
     else if(tet[0] != '/')
       tet = curr + "/" + tet;
 

@@ -1,7 +1,7 @@
 /*
 // File: simul_efun.c
 // This file holds a list of simulated efuns, that is loaded when
-// the game is booted.  
+// the game is booted.
 // Written by Buddha@TMI (2-19-92)
 // This file is part of the TMI distribution mudlib.
 // Please be considerate and retain the header file if you use it.
@@ -18,7 +18,6 @@ string identify(mixed a);
 #include "/adm/simul_efun/exclude_array.c"
 #include "/adm/simul_efun/find_object_or_load.c"
 #include "/adm/simul_efun/format_string.c"
-#include "/adm/simul_efun/idle.c"
 #include "/adm/simul_efun/path_file.c"
 #include "/adm/simul_efun/roll_dice.c"
 #include "/adm/simul_efun/substr.c"
@@ -37,7 +36,6 @@ string identify(mixed a);
 #include "/adm/simul_efun/to_object.c"
 #include "/adm/simul_efun/tell_player.c"
 #include "/adm/simul_efun/percent.c"
-#include "/adm/simul_efun/ansi.c"
 #include "/adm/simul_efun/effective_light.c"
 #include "/adm/simul_efun/newbiep.c"
 #include "/adm/simul_efun/interact.c"
@@ -50,10 +48,8 @@ string identify(mixed a);
 #include "/adm/simul_efun/alignment_ok.c"
 #include "/adm/simul_efun/visible.c"
 #include "/adm/simul_efun/domain_master.c"
-#include "/adm/simul_efun/pluralize.c"
 #include "/adm/simul_efun/format_page.c"
 #include "/adm/simul_efun/ordinal.c"
-#include "/adm/simul_efun/personal_log.c"
 #include "/adm/simul_efun/consolidate.c"
 #include "/adm/simul_efun/user_exists.c"
 #include "/adm/simul_efun/read_database.c"
@@ -64,7 +60,6 @@ string identify(mixed a);
 #include "/adm/simul_efun/events.c"
 #include "/adm/simul_efun/leaderp.c"
 #include "/adm/simul_efun/stringInSet.c"
-#include "/adm/simul_efun/str_to_int.c"
 #include "/adm/simul_efun/gender.c"
 #include "/adm/simul_efun/realmso.c"
 #include "/adm/simul_efun/destall.c"
