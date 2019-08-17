@@ -6,13 +6,13 @@
 
 %^CYAN%^ 2.%^RESET%^ Do not powergame in PK, i.e. don't kill far below your level. We have a way for you to tell the difference between character levels integrated into %^ORANGE%^<who>%^RESET%^ and %^ORANGE%^<levelcheck>%^RESET%^ commands, be sure to read %^ORANGE%^<help levelcheck>%^RESET%^ and %^ORANGE%^<help who>%^RESET%^ to familiarize yourself with them. However, if lower level is instigating PK interactions by stealing something, insulting you, spreading lies or rumors, or other things that can be considered to be actions of an assault. To begin this interaction, you must use the %^ORANGE%^<threaten>%^RESET%^ command first, and if the lower-level player continues course of their actions, you will then be allowed to engage in PK.
 
-%^CYAN%^ 3.%^RESET%^ Degree of OOC fairness is expected. Don't be a Dick: In all of your PK interactions, please keep in mind there is a legitimate, living breathing human being on the other side of the screen. Be excellent to each other. Always try to give them the best experience possible.  For example, it's very much not-fun to leave your victim unconscious for long spans of time. For example, looting someone for no other reason than to cause OOC grief makes you a dick. Looting someone naked makes you the biggest dick.
+%^CYAN%^ 3.%^RESET%^ Degree of OOC fairness is expected. In all of your PK interactions, please keep in mind there is a legitimate, living breathing human being on the other side of the screen. Be excellent to each other. Always try to give them the best experience possible. Some examples: it's very much not-fun to leave your victim unconscious for long spans of time. Looting someone for no other reason than to cause OOC grief makes you a dick. Looting someone naked makes you the biggest dick.
 
 %^CYAN%^ 4.%^RESET%^ It is forbidden to use level scaling to avoid player kill situations. However you're not allowed to start PK with scaled character without following previous rules and using %^ORANGE%^<threaten>%^RESET%^.
 
 %^CYAN%^ 5.%^RESET%^ Do not log or idle out, or go inactive for 30 minutes after last pk interraction, unless you ask and get an affirmative response, or there is an emergency. This is to prevent people from using idling and loging out as a shield. If 30 minute timer is up, either party is considered escaped and is free to log out. This rule covers battles with extensive teleportation.
 
-%^CYAN%^ 6.%^RESET%^ A player may opt out from roleplay that follows if it involves traumatic experience, e.g. torture, and call in %^ORANGE%^<fade to black>%^RESET%^, you are absolutely must respect it. In such case you must agree between yourselves the consequences of the traumatic experience. You both will be expected to RP the consequences. If you call %^ORANGE%^<fade to black>%^RESET%^, and your attacker continues on, you are allowed to disconnect and quit. If this happens, please contact staff via %^ORANGE%^<lawmail>%^RESET%^. 
+%^CYAN%^ 6.%^RESET%^ A player may opt out from roleplay that follows if it involves traumatic experience, e.g. torture, and call in %^ORANGE%^<fade to black>%^RESET%^, you are absolutely must respect it. In such case you must agree between yourselves the consequences of the traumatic experience. You both will be expected to RP the consequences. If you call %^ORANGE%^<fade to black>%^RESET%^, and your attacker continues on, you are allowed to disconnect and quit. If this happens, please contact staff via %^ORANGE%^<lawmail>%^RESET%^.
 
 CYAN%^ 7.%^RESET%^ Revenge killing (Killing a player because they killed you) and mulit-killing (Killing the same character a bunch of times, either yourself or by a proxy) is illegal, and will be considered harassment.
 
@@ -25,8 +25,7 @@ strip      strips the player of an item/money
 gag        gags the player
 ungag      removes the player's gag
 hit        deals a blow to the player with the intention of killing
-drag       starts to drag the player 
+drag       starts to drag the player
 drop       will drop the player
 
 %^MAGENTA%^See also:%^CYAN%^ death, rules, pk interactions, pkmail, fade to black, flag.%^RESET%^
-
