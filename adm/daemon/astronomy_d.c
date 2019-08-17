@@ -4,32 +4,48 @@
 
 #define DEFAULT_MSG "You do not see that here.\n"
 
+/**
+ * @file
+ * @brief Functions that handle astronomy calculations
+ */
+
 static mapping moons;
 private static mapping moonstate, moonphase, moonorbit;
 static string *moonphases;
 int in_eclipse;
 
-//name:description
+/**
+ * Map with moons
+ * name:description
+ */
 moons = (["sera":"%^BOLD%^%^WHITE%^silvery moon",
           "tyrannos":"%^BOLD%^%^BLACK%^pitch black moon%^RESET%^"]);
 
-//Moonshine is in illumination units. Some moons suck up the light because physics is a lie.
-//Argument to closure is current day of calendar month.
+/**
+ * Moonshine is in illumination units. Some moons suck up the light because physics is a lie.
+ * Argument to closure is current day of calendar month.
+ */
 moonshine = (["sera":(:(sin($1*PI/12)+1):),
               "tyrannos":(:-(sin($1*PI/13)+1)/2:)]);
 
-//Orbital anomaly (argument of periapsis + true anomaly) for an
-//observer, with values < 0 implying object is below the horizon.
-//Argument to closure is current hour of day.
+/**
+ * Orbital anomaly (argument of periapsis + true anomaly) for an
+ * observer, with values < 0 implying object is below the horizon.
+ * Argument to closure is current hour of day.
+ */
 moonorbit = (["sera":(:sin($1*PI*2*1/18):),
               "tyrannos":(:sin($1*PI*2*1/40):)]);
 
-//This is illumination to moonphase formulae. You need to convert illumination to [0:7] scale here.
-//Argument to closure is illumination.
+/**
+ * This is illumination to moonphase formulae. You need to convert illumination to [0:7] scale here.
+ * Argument to closure is illumination.
+ */
 moonphase = (["sera":(:to_int(round(abs($1)*7)/2):),
               "tyrannos":(:to_int(round(abs($1)*7)):)]);
 
-//Moon phases indexed by [0:7]. If you want custom moon phases for specific moon, well, good luck.
+/**
+ * Moon phases indexed by [0:7]. If you want custom moon phases for specific moon, well, good luck.
+ */
 moonphases = ({"new moon",
             "waxing crescent",
             "first quarter",
@@ -41,13 +57,17 @@ moonphases = ({"new moon",
             "new moon"
             });
 
-void create() 
+void create()
 {
     seteuid(getuid());
 }
 
 /**
  * Calculates moon illumination.
+ * Pulls closures from moonshine map.
+ *
+ * @param moon Moon name
+ * @return Illumination
  */
 float query_moon_state(string moon)
 {
@@ -58,6 +78,9 @@ float query_moon_state(string moon)
 
 /**
  * Returns numeric moon phase for the moon on a scale [0:7]
+ *
+ * @param moon Moon name
+ * @return Moonphase ∈ [0:7]
  */
 int query_moon_phase(string moon)
 {
@@ -69,6 +92,9 @@ int query_moon_phase(string moon)
 
 /**
  * Returns orbital anomaly of the moon for an observer.
+ *
+ * @param moon Moon name
+ * @return Angle ∈ [-pi:pi]
  */
 float query_moon_anomaly(string moon)
 {
@@ -81,6 +107,9 @@ float query_moon_anomaly(string moon)
 /**
  * Returns moon visibility assuming horizon is at h=0 rad (which makes
  * orbital inclination irrelevant)
+ *
+ * @param moon Moon name
+ * @return 0|1
  */
 int is_moon_visible(string moon)
 {
@@ -91,26 +120,29 @@ int is_moon_visible(string moon)
 
 /**
  * Return moon phase string for the moon
+ *
+ * @param moon Moon name
+ * @return Phase name
  */
 string query_moon_phase_string(string moon)
 {
-
     return moonphases[query_moon_phase(moon)];
 }
 
 /**
- * This function returns total moonlight. 
- *
+ * This function returns total moonlight.
  * It is used in calculating outside room illumination during the night.
+ *
+ * @return Moon light value in mud illumination units.
  */
-int query_moon_light() 
+int query_moon_light()
 {
     string moon;
     float light;
     light = 0.0;
     foreach(moon in keys(moons))
         light+=is_moon_visible(moon)?query_moon_state(moon):0;
-    
+
     return to_int(round(light));
 }
 
@@ -129,11 +161,11 @@ void set_eclipse()
 void remove_eclipse()
 {
     in_eclipse = 0;
-    message("info","%^BOLD%^%^BLACK%^The %^WHITE%^eclipse%^BLACK%^ is over!%^BOLD%^%^BLACK%^\n",users());    
+    message("info","%^BOLD%^%^BLACK%^The %^WHITE%^eclipse%^BLACK%^ is over!%^BOLD%^%^BLACK%^\n",users());
 }
 
 /**
- * This function removes eclipse flag
+ * This function checks whether eclipse is on
  */
 int query_eclipse()
 {
@@ -142,35 +174,41 @@ int query_eclipse()
 
 /**
  * This function is called from room object default items, /std/room/items
+ *
+ * @param str Argument of the look command.
+ * @return Sky description
  */
-string la_sky(string str) 
+string la_sky(string str)
 {
     string tod;
     string *phase;
     int ansi, i;
 
-    if(environment(this_player())->query_property("indoors")) 
+    if(environment(this_player())->query_property("indoors"))
     {
         return DEFAULT_MSG;
     }
-    basicsky(str);
-    
+    return basicsky(str);
+
 }
 
 /**
- * Primitive sky function, returns 
+ * Primitive sky description function
+ *
+ * @param str Argument fo the look command.
+ * @return Sky description
  */
-void basicsky(string str) 
+string basicsky(string str)
 {
     string borg;
     int night, tmp;
 
     night = query_night() || query_eclipse();
-    
-    switch(str) 
+
+    switch(str)
     {
     case "sky":
-        if(night) 
+        if(night)
         {
             string moon;
             borg="";
@@ -192,7 +230,7 @@ void basicsky(string str)
             borg = "What stars?";
         break;
     case "sun":
-        if(!night) 
+        if(!night)
         {
             tmp = (int)EVENTS_D->query_hour(time());
             if(tmp < 10) borg = "%^RED%^The sun hangs low in the eastern sky.%^RESET%^";
@@ -228,7 +266,7 @@ void basicsky(string str)
             borg=DEFAULT_MSG;
         break;
     }
-    write(borg);
+    return borg;
     say(TPQCN+" looks at the "+str+".");
 }
 
@@ -236,4 +274,3 @@ int clean_up()
 {
     return 0;
 }
-

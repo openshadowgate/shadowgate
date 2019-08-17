@@ -1,5 +1,17 @@
 #include <daemons.h>
 
+/**
+ * @file
+ * @brief These functions calculate room illumination in mud units
+ */
+
+/**
+ * Calculates light value for the night time, counting in moon light. Presumes the sky is visible.
+ *
+ * @param env Room the object is in
+ * @param light Base light value. It could be current light in the room, for example.
+ * @return Illumination in mud units
+ */
 int night_light(object env, int light)
 {
     return ((light-3)+
@@ -7,6 +19,12 @@ int night_light(object env, int light)
             ((int)env->query_property("night light")));
 }
 
+/**
+ * Calculates total light value for someone
+ *
+ * @param who Object you want to calculate illumination for
+ * @return Light in mud units
+ */
 int total_light(object who) {
     object *inv;
     object env;
@@ -22,7 +40,7 @@ int total_light(object who) {
     }
     i = sizeof(inv = all_inventory(env));
     light = (int)env->query_property("light");
-    while(i--) 
+    while(i--)
         light += (int)inv[i]->query_property("light");
     if(env->query_property("indoors"))
         return light;
@@ -43,4 +61,3 @@ int total_light(object who) {
     }
     return light;
 }
-

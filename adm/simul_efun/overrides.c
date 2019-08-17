@@ -1,23 +1,21 @@
-//      /adm/simul_efun/overrides.c
-//      from the Nightmare mudlib
-//      efun overriding code
-//      created by someone for Basis
-
-//      Developers granted limited snoop ability
-//      on ShadowGate
-//      Thorn -- 950517
-
 #include <security.h>
 #include <objects.h>
 #include <commands.h>
 #include <std.h>
-#include <new_exp_table.h> 
+#include <new_exp_table.h>
 
-object find_living(string str){
+/**
+ * @file
+ * @brief Overrides driver/vm efuns. These mostly have been added to
+ *        log and check for permissions.
+ */
+
+object find_living(string str)
+{
     string whom;
     object who;
     int i,j;
-    if (sscanf(geteuid(previous_object()),"%sobj",whom) > 0) 
+    if (sscanf(geteuid(previous_object()),"%sobj",whom) > 0)
     {
         if(member_group(whom, "law")) return efun::find_living(str);
         who = efun::find_living(str);
@@ -25,6 +23,7 @@ object find_living(string str){
     }
     return efun::find_living(str);
 }
+
 object find_player(string str){
     string whom;
     object *liv, who;
@@ -45,7 +44,8 @@ object find_player(string str){
         }
     }
     return who;
-} 
+}
+
 object *users() {
     string who;
     object *userList, *List;
@@ -62,7 +62,8 @@ object *users() {
         return List;
     }
     return efun::users();
-}   
+}
+
 void destruct(object destructee) {
     string destee, dester, a;
 
@@ -73,7 +74,6 @@ void destruct(object destructee) {
     if (!destee || dester==destee || dester==UID_ROOT ||
         dester==UID_DESTRUCT ||
         master()->query_member_group(dester, "superuser") ||
-        master()->query_member_group(dester, "wizard-coding") ||
         master()->query_member_group(dester, "assist") ||
         master()->query_member_group(dester, "over") ||
         master()->query_member_group(dester, "area"))
@@ -101,8 +101,7 @@ varargs void shutdown(int code) {
 varargs object snoop(object snooper, object snoopee) {
     if (!snoopee) return efun::snoop(snooper);
     if (!wizardp(snooper)) return 0;
-    if ((string)snooper->query_position() == "god" ) {
-
+    if ((string)snooper->query_position() == "Admin" ) {
         return efun::snoop(snooper, snoopee);
     }
     seteuid(UID_ROOT);
@@ -117,7 +116,7 @@ varargs object snoop(object snooper, object snoopee) {
             tell_object(snoopee, capitalize((string)snooper->query_name())+
                         " attempted to snoop you with Developer privileges!\n");
             seteuid(UID_ROOT);
-            write_file("/log/adm/developers", "**Developer snoop attempted by "+capitalize(TPQN)+" on "+ 
+            write_file("/log/adm/developers", "**Developer snoop attempted by "+capitalize(TPQN)+" on "+
                        capitalize((string)snoopee->query_name())+" at "+ctime(time())+"!**\n");
             seteuid(getuid());
             tell_object(snooper, "Developers may not snoop admins! Nice try, though.");
@@ -147,9 +146,7 @@ varargs object snoop(object snooper, object snoopee) {
 
 int exec(object to_obj, object from_obj) {
     string prev;
-
     prev = base_name(previous_object());
-//    tell_object(find_player("tristan"),"PO name = "+prev+" PO EUID = "+geteuid(previous_object()));
     if (prev == OB_LOGIN || geteuid(previous_object()) == UID_EXEC )
         return efun::exec(to_obj, from_obj);
 }
@@ -169,6 +166,7 @@ void write(string str) {
     if (this_player()) message("my_action", str, this_player());
     else efun::write(str);
 }
+
 object find_object(string str){
     string whom;
     object who;
@@ -225,7 +223,7 @@ int exp_for_level(int x)
 
 int total_exp_for_level(int x)
 {
-    if(!intp(x) || x < 0 || x > 100) return -1; //beyond the table. 
+    if(!intp(x) || x < 0 || x > 100) return -1; //beyond the table.
     return EXP_NEEDED[x];
 }
 
@@ -238,24 +236,30 @@ mixed first_letter(string str)
 int is_real_user(object ob)
 {
     if(!objectp(ob)) return 0;
-    if(base_name(ob) == OB_USER && !ob->query_true_invis()) return 1;
+    if(base_name(ob) == OB_USER && !ob->query_quietness()) return 1;
     return 0;
 }
 
+/**
+ * Returns list of players and non-quiet imms
+ */
 object *real_users()
 {
-    object *usrs = ({});        
+    object *usrs = ({});
     usrs = filter_array(users(), "is_real_user", TO);
     return usrs;
 }
 
+/**
+ * Hijacked because there is a function in contrib with the same name.
+ */
 string english_number(mixed x)
 {
     string *split, *len;
     int size, ct, flag;
-    if(!intp(x) && !floatp(x)) return x+"";    
+    if(!intp(x) && !floatp(x)) return x+"";
     if(strlen(x+"") <= 3) return x+"";
-    if(x < 0) 
+    if(x < 0)
     {
         x = absolute_value(x);
         flag = 1;
@@ -267,7 +271,7 @@ string english_number(mixed x)
     size--;
     ct = 0;
     while(size >= 0)
-    {        
+    {
         if(ct == 3)
         {
             len[size] = len[size] + ",";

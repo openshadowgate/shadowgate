@@ -1,10 +1,11 @@
-//     /adm/simul_efun/arrange_string.c
-//     from the Nightmare mudlib
-//     makes a string a certain length
-//     created by Descartes of Borg 23 december 1992
-//     modified to take into account ansi colour :) codes
-//       by Blodgett 10 september 1993 (europosis!)
+/**
+ * @file
+ * @brief Functions to arrange string layout.
+ */
 
+/**
+ * Removes colors from a string
+ */
 string strip_colors(string str)
 {
     string ret;
@@ -18,7 +19,24 @@ string strip_colors(string str)
     return replace_string(ret, "\b", "");
 }
 
-
+/**
+ * Arranges string.
+ * @code{.c}
+ * arrange_string("This is a long string.", 7);
+ * @endcode
+ * returns "This is".
+ * @code{.c}
+ * arrange_string("short", 15);
+ * @endcode
+ * returns "short          "
+ *
+ * @param str String to arrange
+ * @param x String length to which a string should be arranged.  If
+ * the first argument is longer than the specified length, then all
+ * remaining characters are chopped off.  If it is shorter,then the
+ * remaining characters will be filled with spaces. Defaults ot 79
+ * @return Arranged string
+ */
 varargs string arrange_string (string str, int x)
 {
     string *letters;
@@ -26,24 +44,24 @@ varargs string arrange_string (string str, int x)
     if(!x) x = 79;
     if(!stringp(str)) { if(intp(str)) { str = ""+str; } else { return ""; } }
     bare = strlen(strip_colors(str));
-    if(x == bare) return str;    
+    if(x == bare) return str;
     if(x < strlen(str))
     {
         NewLen = x;
         NewLen += (strlen(str) - bare);
         letters = explode(str, "");
         for(z = 0;z < sizeof(letters);z++)
-        {      
-            if(real_letters >= x) 
+        {
+            if(real_letters >= x)
             {
-                if(tmp2 != -1) 
+                if(tmp2 != -1)
                 {
                     if(tmp2 < z) NewLen = z;
                     else NewLen = tmp2;
                     break;
                 }
-                if(tmp1 != -1) 
-                {                 
+                if(tmp1 != -1)
+                {
                     NewLen = tmp1-1;
                     break;
                 }
@@ -57,8 +75,8 @@ varargs string arrange_string (string str, int x)
                 {
                     if(tmp1 != -1)
                     {
-                        if(tmp2 == -1) 
-                        {          
+                        if(tmp2 == -1)
+                        {
                             z++;
                             tmp2 = z;
                             tmp1 = -1;
@@ -73,19 +91,19 @@ varargs string arrange_string (string str, int x)
                     }
                     continue;
                 }
-            }            
+            }
             if(tmp2 == -1 && tmp1 == -1) real_letters++;
             if(tmp2 != -1 && tmp1 == -1) real_letters++;
             continue;
         }
         str = str[0..(NewLen-1)];
-    }    
+    }
     bare = strlen(strip_colors(str));
-    if(x == bare) return str; 
+    if(x == bare) return str;
     if(x >= bare)
-    {        
+    {
         z = x - bare;
-        while(z > 0) 
+        while(z > 0)
         {
             z--;
             str += " ";
@@ -95,4 +113,3 @@ varargs string arrange_string (string str, int x)
     }
     return str;
 }
-

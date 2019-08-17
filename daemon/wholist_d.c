@@ -4,6 +4,10 @@
 #define GEOMYIDAE_OUT "/d/save/wholist.gph"
 inherit DAEMON;
 
+/**
+ * @file
+ * @brief This true dameon writes list of online players for display outside of the game.
+ */
 int clean_up()
 {
     return 1;
@@ -31,10 +35,9 @@ Online:
 
 ";
 
-    people = users();
-    wizes = filter_array(filter_array(people,
-                                      (:wizardp($1):)),
-                         (:!$1->query_quietness():));
+    people = real_users();
+    wizes = filter_array(people,
+                         (:wizardp($1):));
     players = filter_array(people,
                            (:!wizardp($1):));
     peepnames+=map_array(wizes->query_title(),

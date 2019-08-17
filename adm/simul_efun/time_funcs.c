@@ -1,8 +1,15 @@
+/**
+ * @file
+ */
+
+/**
+ * Turns time interval in seconds into human readable format
+ */
 string parse_time(int t)
 {
    string str;
    if(!intp(t)) return "";
-   
+
    str=(t%60)+" s";
    t /= 60;
    if(t%60>0)
@@ -13,7 +20,10 @@ string parse_time(int t)
    t /= 24;
    if(t>0)
       str = t +" d "+str;
-   return str;   
+   return str;
 }
 
+/**
+ * Calculates time of last reboot
+ */
 string last_reboot() { return ctime(time() - uptime()); }

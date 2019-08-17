@@ -624,7 +624,7 @@ varargs int setup_merc(string myclass, string race, object owner, string myname)
 
     describe_me(name,myclass,race,gender);
 
-    set_monster_feats(({ "perfect caster","powerattack","blindfight","regeneration","resistance","combat reflexes","rush","scramble","damage resistance", "daze","shatter","defensive roll","evasion","expertise","force of personality","spell reflection", "spring attack","sunder","greater weapon focus","greater weapon specialization","hardenedminions","toughness", "improved damage resistance","improved resistance","improved toughness","unyielding soul","increased resistance",,"lightning reflexes","mobility","parry", "reflection","counter","shieldbash","deflection","shieldwall","armored caster","slippery caster","spell focus","spell penetration", "spell power","greater spell focus","greater spell penetration","greater spell power","thick skinned caster","improved spell power" }));
+    set_monster_feats(({ "perfect caster","powerattack","blindfight","regeneration","resistance","combat reflexes","rush","scramble","damage resistance", "daze","shatter","defensive roll","evasion","expertise","force of personality","spell reflection", "spring attack","sunder","greater weapon focus","greater weapon specialization","hardenedminions","toughness", "improved damage resistance","improved resistance","improved toughness","unyielding soul","increased resistance","lightning reflexes","mobility","parry", "reflection","counter","shieldbash","deflection","shieldwall","armored caster","slippery caster","spell focus","spell penetration", "spell power","greater spell focus","greater spell penetration","greater spell power","thick skinned caster","improved spell power" }));
 
     TO->force_me("hardenedminions");
     OWNER->add_follower(TO);

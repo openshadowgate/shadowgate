@@ -1,8 +1,8 @@
-/*    /adm/simul_efun/gender.c
- *    from Nightmare IV
- *    SimulEfuns for pronoun declinsion for different genders
- *    created by Descartes of Borg 931204
+/**
+ * @file
+ * @brief Funs for pronoun declinsion for different genders
  */
+
 
 string possessive(mixed val) {
     switch(objectp(val) ? (string)val->query_gender() : (string)val) {
