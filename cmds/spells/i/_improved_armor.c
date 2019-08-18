@@ -17,7 +17,7 @@ void create()
     set_spell_name("improved armor");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS armor [on TARGET]");
+    set_syntax("cast CLASS improved armor [on TARGET]");
     set_description("With this spell, the caster surrounds themselves with strong force field that absorbs weak attacks and spells. This spell won't work together with lesser variant, as it is essentially the same spell pumped with power.");
     set_verbal_comp();
     set_somatic_comp();
