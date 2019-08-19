@@ -12,7 +12,7 @@ string *restricted_races() {
         "firbolg","gnoll","half-ogre","ogre","wemic","ogre-mage" });
 }
 
-string *restricted_classes() { return ({ "mage","psion","psywarrior",}); }
+string *restricted_classes() { return ({ "mage","psion"}); }
 
 int *restricted_alignments() { return ({}); }
 

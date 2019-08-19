@@ -12,7 +12,7 @@ string *restricted_races() {
         "firbolg","gnoll","half-ogre","ogre","wemic","kobold","voadkyn" }); //voadkyn and kobold moved to sorcerer
 }
 
-string *restricted_classes() { return ({ "sorcerer","psion","psywarrior",}); }
+string *restricted_classes() { return ({ "sorcerer","psion"}); }
 
 int *restricted_alignments() { return ({}); }
 
