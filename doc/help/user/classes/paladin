@@ -3,14 +3,12 @@
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 12 strength, 12 wisdom, 12 charisma
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, dwarf (gold), halfling (strongheart), elf (sun), shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any non-chaotic
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ bard, barbarian, thief, psywarrior
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ bard, thief, psywarrior
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d12
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, endurance, influence
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: light armor proficiency, medium armor proficiency, heavy armor 
-   %^RESET%^proficiency, shield proficiency, simple weapon proficiency, martial 
-   %^RESET%^weapon proficiency, parry
+   %^RESET%^L1: light armor proficiency, medium armor proficiency, heavy armor proficiency, shield proficiency, simple weapon proficiency, martial weapon proficiency, parry
    %^RESET%^L2: smite
    %^RESET%^L3: divine health
    %^RESET%^L6: layonhands

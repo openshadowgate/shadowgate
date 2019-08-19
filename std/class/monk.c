@@ -10,13 +10,13 @@ string *search_paths() { return ({}); } // temporary
 
 int caster_class() { return 1; }
 
-string *restricted_races() 
-{ 
+string *restricted_races()
+{
     return ({"drow", "beastman", "bugbear", "centaur", "elf", "firbolg", "gnoll", "goblin", "halfling", "half-ogre", "half-orc",
     "hobgoblin", "kobold", "minotaur", "ogre", "ogre-mage", "orc", "voadkyn", "wemic", "yuan-ti"});
 }
 
-string *restricted_classes() { return ({ "bard", "barbarian", "paladin" }); }
+string *restricted_classes() { return ({ }); }
 
 int *restricted_alignments() { return ({4,5,6,7,8,9}); }
 
@@ -29,13 +29,13 @@ mapping stat_requirements() {
 // strong & weak saving throws. Fort, Ref, Will
 int *saving_throws() { return ({ 1,1,1 }); }
 
-string *combat_styles() 
+string *combat_styles()
 {
     return ({});
 }
 
-string *class_feats(string myspec) 
-{  
+string *class_feats(string myspec)
+{
     return ({ "simple weapon proficiency",
                 "unarmored defense",
                 "evasion",
@@ -52,20 +52,20 @@ string *class_feats(string myspec)
 
 //Bringing it in accordance with SRDs, Il.
 mapping class_featmap(string myspec)
-{  
+{
     mapping myMap;
     myMap = ([ 1 : ({ "simple weapon proficiency", "unarmored defense" }),
                2 : ({"dodge", "flurry of blows"}),
                5 : ({"stunning strike"}),
                7 : ({"evasion", "stillness of mind"}),
-               10: ({"purity of body"}),               
+               10: ({"purity of body"}),
                14: ({"diamond soul"}),
-               15: ({"timeless body"}),               
+               15: ({"timeless body"}),
                18: ({"empty body"}),
                19: ({"tongue of the sun and moon"}),
                20: ({"perfect self"}),
                21: ({"defensive roll"}),]);
-    
+
     switch(myspec)
     {
         case "way of the fist": case "all":
@@ -76,18 +76,18 @@ mapping class_featmap(string myspec)
 }
 
 string *class_skills()
-{  
+{
     return ({ "endurance", "athletics" });
 }
 
-string *way_skills(string way) 
+string *way_skills(string way)
 {
     string *mySkills;
     mySkills = ({ "endurance", "athletics" });
 
-    switch(way) 
+    switch(way)
     {
-        case "way of the elements": 
+        case "way of the elements":
             mySkills += ({"spellcraft", "academics"});
             break;
         case "way of the shadow":
@@ -106,10 +106,10 @@ string old_save_type() { return "monk"; }
 
 string new_save_type() { return "monk"; }
 
-void advanced_func(object player) 
-{ 
+void advanced_func(object player)
+{
     player->set_guild_level("monk",(int)player->query_class_level("monk"));
-    return; 
+    return;
 }
 
 int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
@@ -127,7 +127,7 @@ int max_stance_defensive() { return 1; }
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("monk");       
+    level = (int)player->query_prestige_level("monk");
     bonus = (level*3) / 4;
     return bonus;
 }
@@ -189,7 +189,7 @@ int effective_enchantment(object player)
     amt = ((int)player->query_guild_level("monk") / 6);
     if(FEATS_D->usable_feat(player, "enchanted fists")) amt += 1;
     return amt;
-}    
+}
 
 int critical_multiplier(object player)
 {
@@ -213,73 +213,73 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
 
-// going to put all the various monk checks in here for ease of updating 
+// going to put all the various monk checks in here for ease of updating
 varargs int monk_check(object player, string type, mixed extra)
 {
     if(!objectp(player)) { return 0; }
-    
+
     switch(type)
     {
     case "heal":
-        
+
         if(!sizeof(player->query_attackers())) { return 1; }
-    
+
         if(!objectp(extra) || extra != player) // only allowed to heal themselves in combat
-        { 
+        {
             tell_object(player, "%^YELLOW%^You can only heal yourself in combat.");
-            return 0; 
-        } 
-        if(player->query_class_level("monk") < 6) 
+            return 0;
+        }
+        if(player->query_class_level("monk") < 6)
         {
             tell_object(player, "%^YELLOW%^You must be level 6 to heal yourself in combat.");
-            return 0; 
+            return 0;
         }
-        if(player->query_property("wholeness of body") > time()) 
+        if(player->query_property("wholeness of body") > time())
         {
             tell_object(player,"%^YELLOW%^You can't heal yourself in combat again yet.");
-            return 0; 
+            return 0;
         }
-        if(player->query_alignment() > 3) 
+        if(player->query_alignment() > 3)
         {
             tell_object(player,"%^YELLOW%^You may only heal yourself in combat as a monk of lawful alignment");
-            return 0; 
+            return 0;
         }
-        if(!USER_D->can_spend_ki(player, 3)) 
+        if(!USER_D->can_spend_ki(player, 3))
         {
             tell_object(player,"%^YELLOW%^You don't have enough ki to heal yourself.");
-            return 0; 
+            return 0;
         }
-        if(!player->is_wielding("unarmed") && !player->is_wielding("small")) 
+        if(!player->is_wielding("unarmed") && !player->is_wielding("small"))
         {
             tell_object(player,"%^YELLOW%^You must be wielding only small weapons or unarmed to heal yourself in combat.");
-            return 0; 
+            return 0;
         }
-        if(!player->is_ok_armour("barb")) 
+        if(!player->is_ok_armour("barb"))
         {
             tell_object(player,"%^YELLOW%^You are wearing too much armor to heal yourself in combat.");
-            return 0; 
+            return 0;
         }
-        if( (player->query("monk way") != "way of the fist") && !FEATS_D->usable_feat(player, "grandmaster of the way")) 
+        if( (player->query("monk way") != "way of the fist") && !FEATS_D->usable_feat(player, "grandmaster of the way"))
         {
             tell_object(player,"%^YELLOW%^Only monks with the way of the fist or grandmaster of the ways may heal themselves in combat.");
-            return 0; 
+            return 0;
         }
-        return 1;   
+        return 1;
 
     case "way of the fist":
-        
+
         if(player->query("monk way") == "way of the fist" || FEATS_D->usable_feat(player,"grandmaster of the way")) { return 1; }
         return 0;
-        
+
     case "way of the shadow":
-    
+
         if(player->query("monk way") == "way of the shadow" || FEATS_D->usable_feat(player,"grandmaster of the way")) { return 1; }
         return 0;
-    
-    
+
+
     case "way of the elements":
 
         if(player->query("monk way") == "way of the elements" || FEATS_D->usable_feat(player,"grandmaster of the way")) { return 1; }

@@ -7,12 +7,12 @@ string *search_paths() { return ({  }); }
 
 int caster_class() { return 1; }
 
-string *restricted_races() { 
+string *restricted_races() {
     return ({ "beastman","bugbear","dwarf","hobgoblin","orc",
         "firbolg","gnoll","half-ogre","ogre","wemic","ogre-mage" });
 }
 
-string *restricted_classes() { return ({ "mage","psion","psywarrior","warlock" }); }
+string *restricted_classes() { return ({ "mage","psion","psywarrior",}); }
 
 int *restricted_alignments() { return ({}); }
 
@@ -29,18 +29,18 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) 
-{  
+string *class_feats(string myspec)
+{
     return ({ "simple weapon proficiency",
               "spell focus" });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "simple weapon proficiency", "spell focus", }) ]);
 }
 
 string *class_skills()
-{  
+{
     return ({ "academics","perception","influence","spellcraft" });
 }
 
@@ -50,10 +50,10 @@ string old_save_type() { return "mage"; }
 
 string new_save_type() { return "mage"; }
 
-void advanced_func(object player) 
-{ 
+void advanced_func(object player)
+{
     player->set_guild_level("sorcerer",(int)player->query_class_level("sorcerer"));
-    return; 
+    return;
 }
 
 int hit_dice() { return 6; }  // hit dice rolled for hitpoints each level
@@ -73,7 +73,7 @@ int max_stance_defensive() { return 1; }
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("sorcerer");       
+    level = (int)player->query_prestige_level("sorcerer");
 //    if(level > 20) { bonus = (level - 20) + 6; }
 //    else(bonus = level / 3);
     bonus = level / 2; // boosted to tabletop equiv
@@ -113,10 +113,10 @@ void newbie_func(object who)
     object ob, ob2;
     int i;
     if(!objectp(who)) return;
-    
+
     ob = new("/d/magic/comp_bag");
     ob->move(who);
-    
+
     tell_object(who, "%^BOLD%^%^WHITE%^You are given a bag for components "+
     "to help you out in the world of ShadowGate.%^RESET%^");
 }
@@ -131,5 +131,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

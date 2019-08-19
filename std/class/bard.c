@@ -13,7 +13,7 @@ string *restricted_races() {
         "kobold","orc","drow","firbolg","gnoll","half-drow","half-ogre","ogre","ogre-mage","voadkyn" });
 }
 
-string *restricted_classes() { return ({ "cavalier","paladin","antipaladin","psywarrior","monk" }); }
+string *restricted_classes() { return ({ }); }
 
 int *restricted_alignments() { // switched March 2016 to 3e standard, all non-lawful >> N <<
     return ({ 1, /*LG*/ 2, /*LN*/ 3, /*LE*/ });

@@ -4,7 +4,7 @@
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ drow, elf, half-drow, half-elf, human, ogre-mage, gnome,
    yuan-ti, shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ sorcerer, psion, psywarrior, warlock
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ sorcerer, psion, psywarrior,
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, dungeoneering, healing, spellcraft
@@ -15,7 +15,7 @@
    %^RESET%^L11: enchant
    %^RESET%^L17: craft magical equipment
    %^RESET%^Also: one bonus spellcraft feat at L21, and every five class levels thereafter
-   
+
 Mages are people who have devoted their lives to learning magic for the same reasons that motivate most people on a day-to-day basis: material gain, power, or merely the pure "fun" of the use of magic. They place no reliance on the power of faith for their craft, and their time spent learning magic takes away from any time they might spend learning fighting skills. They are very capable of learning, however, a diverse array of both defensive and offensive arcane spellcraft.
 
 Mages are highly protective of the "art" and guard their knowledge jealously. They spend years studying and will expect apprentices to do the same. They will also be very careful to insure that magic doesn't fall into the "wrong" hands.

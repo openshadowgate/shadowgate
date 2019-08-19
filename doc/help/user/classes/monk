@@ -3,7 +3,7 @@
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 dexterity, 15 wisdom
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ Human, Half-drow, Half-elf, Dwarf, Gnome, and Shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any lawful
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin, bard, barbarian
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ Reflex, Fort, and Will strong
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ Athletics, Endurance.
@@ -23,9 +23,9 @@
    %^RESET%^L21: defensive roll
    %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
 
-The monk is an enlightened warrior, able to transcend many of the bodily limits that hamper most others. They are typically from one order or another and have an affinity for the strict procedures that such an order imparts on them. 
+The monk is an enlightened warrior, able to transcend many of the bodily limits that hamper most others. They are typically from one order or another and have an affinity for the strict procedures that such an order imparts on them.
 
-They despise most tradional armor, finding that it gets in the way of their ability to perfect their inner self. Which is something that they dedicate their lives to. Most have an amazing ability to manipulate their own energies and that of others, which they refer to simply as "Ki", in profound ways, especially as they grow wiser. 
+They despise most tradional armor, finding that it gets in the way of their ability to perfect their inner self. Which is something that they dedicate their lives to. Most have an amazing ability to manipulate their own energies and that of others, which they refer to simply as "Ki", in profound ways, especially as they grow wiser.
 
 Some monks are known to use small weapons, almost as if they were an extension of themselves. Others prefer the feel of battle and thus limit themselves to using their bare hands. All monks are experts at using their body as a weapon. Some are very quick, using their dexterity in combat to both hit and deal damage, others are very strong and benefit from a higher strength stat.
 
@@ -35,21 +35,21 @@ Unarmed monks use the following damage table:
   Levels 21-30 : 1d10 damage
   Levels 31+   : 1d12 damage
 
-This is base damage only. By default a monk uses strength for unarmed attacks (for both hit and damage), however, a monk may choose the weapon finesse feat in order to use dexterity instead. 
+This is base damage only. By default a monk uses strength for unarmed attacks (for both hit and damage), however, a monk may choose the weapon finesse feat in order to use dexterity instead.
 
-Unarmed monks also receive a critical damage multiplier of their monk level divided by 10 + 1, a level 10 monk, for example would have a critical damage multiplier of 2. This means that a level 10 monk would do an additinal 2d6 damage on a critical hit. 
+Unarmed monks also receive a critical damage multiplier of their monk level divided by 10 + 1, a level 10 monk, for example would have a critical damage multiplier of 2. This means that a level 10 monk would do an additinal 2d6 damage on a critical hit.
 
-An unarmed monk also receives +1 to damage and hit, per six levels in their monk class. This is considered magical for purposes of bypassing monster weapon resistance and or special abilities. 
+An unarmed monk also receives +1 to damage and hit, per six levels in their monk class. This is considered magical for purposes of bypassing monster weapon resistance and or special abilities.
 
 Starting at level 3 you may dedicate to a particular emphasis of Ki, in any church or temple, by using %^ORANGE%^<pick WAY>%^RESET%^. The current known ways are:
   %^CYAN%^The Way of The Fist
   %^CYAN%^The Way of The Shadow
   %^CYAN%^The Way of The Elements %^RESET%^
 
-Monk feats, abilities, and spells require ki. Most monks receive 1 ki point per level starting at level 2. Ki regenerates passively. Ki regeneration rate is 1-2 every 10-20 seconds. A higher wisdom score reduces this time but never below 5 seconds. 
-      
-The %^ORANGE%^<ki>%^RESET%^ command is a command showing the abilities imparted to you by your dedication, your total and available ki, and how long until you passively regenerate more. 
-    
+Monk feats, abilities, and spells require ki. Most monks receive 1 ki point per level starting at level 2. Ki regenerates passively. Ki regeneration rate is 1-2 every 10-20 seconds. A higher wisdom score reduces this time but never below 5 seconds.
+
+The %^ORANGE%^<ki>%^RESET%^ command is a command showing the abilities imparted to you by your dedication, your total and available ki, and how long until you passively regenerate more.
+
 Flurry of blows, which is a very unique monk feature allowing extra attacks, functions somewhat differently depending on the particular dedication of any given monk.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, ki, way of the fist, way of the shadow, way of the elements, ki, prestige classes

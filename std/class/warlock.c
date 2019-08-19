@@ -1,5 +1,5 @@
 // note - magical crafting is not yet active at date of installation; deceive item is relevant to the class but
-// at this point I haven't worried about adding craft magical (or making their own feat). Should be considered 
+// at this point I haven't worried about adding craft magical (or making their own feat). Should be considered
 // at such time as the feat is actually active, as it is highly relevant to this class. N, 11/15.
 #include <std.h>
 inherit DAEMON;
@@ -14,7 +14,7 @@ string *restricted_races() { // irrelevant, this is handled in the race files
     return ({  });
 }
 
-string *restricted_classes() { return ({ "mage","sorcerer","psion","psywarrior",}); }
+string *restricted_classes() { return ({ "psion","psywarrior",}); }
 
 int *restricted_alignments() { return ({ 1,2,4,5 }); }
 
@@ -31,15 +31,15 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) {  
+string *class_feats(string myspec) {
     return ({ "simple weapon proficiency","spell focus","light armor proficiency" });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "simple weapon proficiency", "spell focus", "light armor proficiency" }), 7 : ({ "damage resistance", }), 9 : ({ "energy resistance" }), 12: ({ "craft magical equipment" }), 14 : ({ "improved damage resistance" }), 17 : ({ "regeneration" }) ]);
 }
 
-string *class_skills() {  
+string *class_skills() {
     return ({ "academics","athletics","influence","spellcraft" });
 }
 
@@ -49,9 +49,9 @@ string old_save_type() { return "mage"; }
 
 string new_save_type() { return "mage"; }
 
-void advanced_func(object player) { 
+void advanced_func(object player) {
     player->set_guild_level("warlock",(int)player->query_class_level("warlock"));
-    return; 
+    return;
 }
 
 int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
@@ -69,7 +69,7 @@ int max_stance_defensive() { return 1; }
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("warlock");       
+    level = (int)player->query_prestige_level("warlock");
 //    if(level > 20) { bonus = (level - 20) + 15; }
 //    else bonus = (level*3) / 4;
     bonus = (level*3) / 4;
@@ -129,5 +129,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

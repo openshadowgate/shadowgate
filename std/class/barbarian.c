@@ -9,7 +9,7 @@ int caster_class() { return 0; }
 
 string *restricted_races() { return ({}); }
 
-string *restricted_classes() { return ({ "paladin", "cavalier", "antipaladin" }); }
+string *restricted_classes() { return ({ "cavalier", "antipaladin" }); }
 
 int *restricted_alignments() { return ({ 1,2,3 }); }
 
@@ -36,7 +36,7 @@ string *class_feats(string myspec)
         "martial weapon proficiency",
         "rage",
         "powerattack",
-        "unarmored defense"        
+        "unarmored defense"
     });
 }
 /*Added unarmored defense - Octothorpe 1/15/16*/
@@ -45,7 +45,7 @@ mapping class_featmap(string myspec) {
 }
 
 string *class_skills()
-{  
+{
     return ({ "athletics", "dungeoneering", "endurance", "survival" });
 }
 
@@ -55,12 +55,12 @@ string old_save_type() { return "fighter"; }
 
 string new_save_type() { return "fighter"; }
 
-void advanced_func(object player) 
-{ 
-   
-player->set_guild_level("barbarian",(int)player->query_class_level("barbarian"));   
+void advanced_func(object player)
+{
 
-    return; 
+player->set_guild_level("barbarian",(int)player->query_class_level("barbarian"));
+
+    return;
 }
 
 int hit_dice() { return 14; }
@@ -78,7 +78,7 @@ int max_stance_defensive() { return 5; }
 int attack_bonus(object player)
 {
     int level;
-    level = (int)player->query_prestige_level("barbarian");       
+    level = (int)player->query_prestige_level("barbarian");
     return level;
 }
 
@@ -102,5 +102,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

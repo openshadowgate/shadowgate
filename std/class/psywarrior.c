@@ -12,7 +12,7 @@ int caster_class() { return 1; }
 
 string *restricted_races() { return ({"beastman", "bugbear", "centaur", "drow", "dwarf", "elf", "firbolg", "gnoll", "gnome", "goblin", "half-ogre", "halfling", "kobold", "minotaur", "ogre", "ogre-mage", "orc", "voadkyn", "wemic", }); }
 
-string *restricted_classes() { return ({ "cavalier","paladin","antipaladin","psion","mage","sorcerer","bard" }); }
+string *restricted_classes() { return ({ "psion","mage","sorcerer", }); }
 
 int *restricted_alignments() { return ({}); }
 

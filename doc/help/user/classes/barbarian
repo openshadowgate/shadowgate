@@ -3,13 +3,12 @@
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 13 strength, 13 constitution
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ any
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any non-lawful
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d14
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, dungeoneering, endurance, survival
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: light armor proficiency, medium armor proficiency, shield 
-   %^RESET%^proficiency, simple weapon proficiency, martial weapon proficiency, rage, powerattack, unarmored defense
+   %^RESET%^L1: light armor proficiency, medium armor proficiency, shield proficiency, simple weapon proficiency, martial weapon proficiency, rage, powerattack, unarmored defense
    %^RESET%^L4: dodge
    %^RESET%^L7: damage resistance
    %^RESET%^L11: greater rage, resistance
@@ -19,22 +18,22 @@
 
 The barbarian is a fearsome warrior that channels his rage to devastating
 effect in battle. Barbarians typically hail from the edge of civilization,
-or in some cases, even beyond it. Eschewing the extensive training and 
+or in some cases, even beyond it. Eschewing the extensive training and
 professionalism found commonly among fighters, the barbarian taps into his
 primal rage to more than make up for his lack of regimented training.
-   
-Strength and constitution are the main attributes of the barbarian. The 
+
+Strength and constitution are the main attributes of the barbarian. The
 higher the barbarian's strength, the better chance he has to hit and damage
-his enemy. A high constitution enables the barbarian to withstand more 
+his enemy. A high constitution enables the barbarian to withstand more
 punishment in the midst of a fray since they are always right in the middle
-of every battle they are in. A good dexterity is also recommended to 
+of every battle they are in. A good dexterity is also recommended to
 further allow him to avoid blows during combat.
 
-The barbarian's primary ability in battle is <rage>. Rage increases his 
+The barbarian's primary ability in battle is <rage>. Rage increases his
 innate strength, constitution, and will saves throughout its duration. This
-allows the barbarian to deal and take a great deal of damage, with its 
+allows the barbarian to deal and take a great deal of damage, with its
 effect and duration increasing as the barbarian gains levels.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, rage *feats, prestige classes
 
-%^RESET%^%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing %^RESET%^<bboard barbarian list>%^CYAN%^. 
+%^RESET%^%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing %^RESET%^<bboard barbarian list>%^CYAN%^.
