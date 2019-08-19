@@ -106,7 +106,6 @@ int retrieve_stuff(string str)
             "alternative world!%^RESET%^");
             return 1;
         }
-        sscanf(str, "request %s", rewardType);
         if(!stringp(rewardType)) rewardType = "gold";
         ob = new("/d/common/obj/special/alt_world_quest_item.c");
         ob->set_reward_type(rewardType);
