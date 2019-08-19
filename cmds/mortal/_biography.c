@@ -126,10 +126,9 @@ int display_deaths(string str)
 int display_quests(string mtarg, string str)
 {
     object targ;
-    string *quests, borg, tmp, rewardType;
+    string *quests, borg, tmp;
     mapping minis;
     int i;
-    object ob;
     if(mtarg && avatarp(TP))
     {
         if(!(mtarg = find_player(str)) || targ->query_highest_level() > TP->query_highest_level())
@@ -141,51 +140,7 @@ int display_quests(string mtarg, string str)
     else { targ = TP; }
     if(targ == TP && !avatarp(TP) && strsrch(str, "request") != -1)
     {
-        if(TP->query_character_level() < 5 || newbiep(TP))
-        {
-            tell_object(TP, "%^BOLD%^%^WHITE%^Not so fast tiny mortal... you are still too weak.\n\n"+
-            "I have no doubt that eventually you shall lend your aid in stemming the tide of what "+
-            "is brewing just beyond the veil of our world, but that time is not yet. Try again "+
-            "after you are above level 5.%^RESET%^");
-            return 1;
-        }
-        if(TP->query("last alt quest") > time())
-        {
-            tell_object(TP, "%^BOLD%^%^WHITE%^In order to prevent your being from "+
-            "faltering you must wait awhile longer before you request another "+
-            "device that will allow you to venture into the alternative worlds!%^RESET%^");
-            return 1;
-        }
-        if(objectp(present("saidealtworldquestitem", TP)))
-        {
-            tell_object(TP, "%^BOLD%^%^WHITE%^In order to prevent your being from shattering "+
-            "into fragments... you must be rid of the current device that you have, before you are "+
-            "able to request another.%^RESET%^");
-            return 1;
-        }
-        if(TP->query("alternative world") || ETP->query("alternative world"))
-        {
-            tell_object(TP, "%^BOLD%^%^WHITE%^In order to prevent your being from shattering "+
-            "into fragments... you are unable to request another device while within an "+
-            "alternative world!%^RESET%^");
-            return 1;
-        }
-        sscanf(str, "request %s", rewardType);
-        if(!stringp(rewardType)) rewardType = "gold";
-        ob = new("/d/common/obj/special/alt_world_quest_item.c");
-        ob->set_reward_type(rewardType);
-        ob->move(TP);
-        tell_object(TP, "%^BOLD%^%^WHITE%^What sounds like a thousand voices echo deep within your mind and seem to "+
-        "reverberate through your entire body.... \n\n"+
-        "Careful what you request tiny mortal, for a magic spreads across this realm, the likes of which has "+
-        "never before been. It is much bigger than you could ever possibly know....\n\n"+
-        "You now hold a device which presents a link to a world, much like your own, but twisted and different....\n\n"+
-        "Created by a God older than any worshipped by you mortals, this device will allow you entry into an area of "+
-        "this world. If you are brave enough then find a fragment of it, touch it, and you will, at least for a time, "+
-        "help to stem the flow.\n\n"+
-        "If you are succesful you shall be rewarded.%^RESET%^");
-        TP->delete("last alt quest");
-        TP->set("last alt quest", time() + 7200);
+        tell_object(TP,"%^BOLD%^Find a gnome and look at his wagon.%^RESET%^");
         return 1;
     }
     if(!check_permission(targ,TP)) { return 1; }

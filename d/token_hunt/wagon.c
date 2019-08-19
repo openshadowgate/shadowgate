@@ -12,24 +12,7 @@ void create()
 
     set_short("%^MAGENTA%^A small wagon, rounded with goods");
 
-    set_long("%^BOLD%^%^WHITE%^This small wagon comes complete with four thick walls "
-        "to keep all the supplies it is hauling safe and secure. Four large wheels "
-        "provide a sturdy means of transport and you notice that a fifth wheel is "
-        "strapped under the belly to provide for a quick repair should one of the "
-        "first four break. At the front a wide, flat seat provides a spot for the "
-        "driver to sit and guide the large, lumbering %^YELLOW%^triceratops %^WHITE%^that "
-        "pulls the wagon. Beside the driver's seat is a secure looking %^BLUE%^iron "
-        "chest %^WHITE%^with several %^MAGENTA%^magical runes %^WHITE%^decorating it. "
-        "More of these enchanted chests are located in the back of the wagon and every "
-        "one of them appears to be very well maintained. Draped over the sides of the "
-        "wagon are a number of %^MAGENTA%^%^BOLD%^b%^BLUE%^r%^MAGENTA%^igh%^BLUE%^t%^MAGENTA%^ly%^WHITE%^ "
-        "colored banners, each proclaiming that this is the fabled %^YELLOW%^Emporium "
-        "of Exotic Wares%^WHITE%^: A traveling warehouse of rare, fabulous things "
-        "that have been brought back from all over the realm and sold to the small "
-        "gnome that tends the traveling shop. %^RESET%^\n"
-        "You can see a list posted on the side of the wagon, maybe you "
-        "can 'read list'.  There's also a slot near the wagon wheel with a box "
-        "protruding from it.  You could probably 'retrieve box'");
+    set_long("%^BOLD%^%^WHITE%^This small wagon comes complete with four thick walls to keep all the supplies it is hauling safe and secure. Four large wheels provide a sturdy means of transport and you notice that a fifth wheel is strapped under the belly to provide for a quick repair should one of the first four break. At the front a wide, flat seat provides a spot for the driver to sit and guide the large, lumbering %^YELLOW%^triceratops %^WHITE%^that pulls the wagon. Beside the driver's seat is a secure looking %^BLUE%^iron chest %^WHITE%^with several %^MAGENTA%^magical runes %^WHITE%^decorating it. More of these enchanted chests are located in the back of the wagon and every one of them appears to be very well maintained. Draped over the sides of the wagon are a number of %^MAGENTA%^%^BOLD%^b%^BLUE%^r%^MAGENTA%^igh%^BLUE%^t%^MAGENTA%^ly%^WHITE%^ colored banners, each proclaiming that this is the fabled %^YELLOW%^Emporium of Exotic Wares%^WHITE%^: A traveling warehouse of rare, fabulous things that have been brought back from all over the realm and sold to the small gnome that tends the traveling shop. %^RESET%^\n You can see a list posted on the side of the wagon, maybe you can <read list>. There's also a slot near the wagon wheel with a box protruding from it. You could probably <retrieve box>. If you want to travel to alternate world, you should use dispenser for mysterous devices instead, and <retrieve device> this way.");
     set_weight(100000000);
 }
 
@@ -88,15 +71,60 @@ int read_list(string str)
     return 1;
 }
 
-int retrieve_box(string str)
+int retrieve_stuff(string str)
 {
     if(!stringp(str)) { return 0; }
-    if(str != "box" && str != "Box") { return 0; }
-
-    tell_object(TP,"You pull a box from the dispenser and it falls "
-        "onto the ground.");
-    new(FILE_PATH"tokens")->move(ETO);
-    return 1;
+    if(str == "box" || str == "Box")
+    {
+        tell_object(TP,"You pull a box from the dispenser and it falls onto the ground.");
+        new(FILE_PATH"tokens")->move(ETO);
+        return 1;
+    }
+    if(str == "device" || str == "Device")
+    {
+        object ob;
+        string rewardType;
+        tell_object(TP,"You pull a mysterious device from the dispenser and it falls into your hands.");
+        if(TP->query("last alt quest") > time())
+        {
+            tell_object(TP, "%^BOLD%^%^WHITE%^In order to prevent your being from "+
+            "faltering you must wait awhile longer before you request another "+
+            "device that will allow you to venture into the alternative worlds!%^RESET%^");
+            return 1;
+        }
+        if(objectp(present("saidealtworldquestitem", TP)))
+        {
+            tell_object(TP, "%^BOLD%^%^WHITE%^In order to prevent your being from shattering "+
+            "into fragments... you must be rid of the current device that you have, before you are "+
+            "able to request another.%^RESET%^");
+            return 1;
+        }
+        if(TP->query("alternative world") || ETP->query("alternative world"))
+        {
+            tell_object(TP, "%^BOLD%^%^WHITE%^In order to prevent your being from shattering "+
+            "into fragments... you are unable to request another device while within an "+
+            "alternative world!%^RESET%^");
+            return 1;
+        }
+        sscanf(str, "request %s", rewardType);
+        if(!stringp(rewardType)) rewardType = "gold";
+        ob = new("/d/common/obj/special/alt_world_quest_item.c");
+        ob->set_reward_type(rewardType);
+        ob->move(TP);
+        tell_object(TP, "%^BOLD%^%^WHITE%^What sounds like a thousand voices echo deep within your mind and seem to "+
+        "reverberate through your entire body.... \n\n"+
+        "Careful what you request tiny mortal, for a magic spreads across this realm, the likes of which has "+
+        "never before been. It is much bigger than you could ever possibly know....\n\n"+
+        "You now hold a device which presents a link to a world, much like your own, but twisted and different....\n\n"+
+        "Created by a God older than any worshipped by you mortals, this device will allow you entry into an area of "+
+        "this world. If you are brave enough then find a fragment of it, touch it, and you will, at least for a time, "+
+        "help to stem the flow.\n\n"+
+        "If you are succesful you shall be rewarded.%^RESET%^");
+        TP->delete("last alt quest");
+        TP->set("last alt quest", time() + 7200);
+        return 1;
+    }
+    return 0;
 }
 
 int request_marker(string str)
@@ -114,14 +142,13 @@ void init()
 {
     ::init();
     add_action("read_list","read");
-    add_action("retrieve_box","retrieve");
+    add_action("retrieve_stuff","retrieve");
     add_action("request_marker","request");
     if(!objectp(TP)) { return; }
-    if(avatarp(TP)) 
+    if(avatarp(TP))
     {
         tell_object(TP,"%^GREEN%^Type <request marker> to get a marker that will let "
             "you add additional directories to the places where mobs are allowed to "
             "spawn");
-    }    
+    }
 }
-
