@@ -7,13 +7,13 @@ string *search_paths() { return ({ "/cmds/thief" }); }
 
 int caster_class() { return 0; }
 
-string *restricted_races() { 
+string *restricted_races() {
     return ({ "firbolg","half-ogre","ogre","wemic" });
 }
 
-string *restricted_classes() { return ({ "cavalier","paladin","antipaladin" }); }
+string *restricted_classes() { return ({ }); }
 
-int *restricted_alignments() { 
+int *restricted_alignments() {
     return ({ });
 }
 
@@ -30,19 +30,19 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) 
-{  
-    return ({ "light armor proficiency", 
-              "simple weapon proficiency", 
+string *class_feats(string myspec)
+{
+    return ({ "light armor proficiency",
+              "simple weapon proficiency",
               "martial weapon proficiency" });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "dodge" }), 4 : ({ "combat reflexes" }), 7 : ({ "mobility" }), 11 : ({ "evasion" }), 12 : ({ "tools of the trade" }), 14 : ({ "scramble" }), 17 : ({ "spring attack" }) ]);
 }
 
 string *class_skills()
-{  
+{
     return ({ "athletics","dungeoneering","stealth","thievery" });
 }
 
@@ -52,11 +52,11 @@ string old_save_type() { return "thief"; }
 
 string new_save_type() { return "thief"; }
 
-void advanced_func(object player) 
+void advanced_func(object player)
 {
     player->set_guild_level("thief",(int)player->query_class_level("thief"));
     player->set_advanced((int)player->query_advanced() + 1);
-    return; 
+    return;
 }
 int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
@@ -73,7 +73,7 @@ int max_stance_defensive() { return 3; }
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("thief");       
+    level = (int)player->query_prestige_level("thief");
 //    if(level > 20) { bonus = (level - 20) + 15; }
 //    else bonus = (level*3) / 4;
     bonus = (level*3) / 4; // boosted to tabletop equiv
@@ -99,5 +99,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

@@ -3,13 +3,12 @@
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 dexterity
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ all except wemic, firbolg, ogre and half-ogre
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ reflex strong, fort/will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, dungeoneering, stealth, thievery
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon
-   proficiency, dodge
+   %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon proficiency, dodge
    %^RESET%^L4: combat reflexes
    %^RESET%^L7: mobility
    %^RESET%^L11: evasion
@@ -18,16 +17,9 @@
    %^RESET%^L17: spring attack
    %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
 
-The thief is the master of the shadows.  Their attacks are based on 
-surprise, jumping from the shadows to deal great damage upon a target. 
-%^ORANGE%^<stab>%^RESET%^ target will deal a great blow of damage to an unsuspecting foe, 
-dependent on the thief's stealth. They can also %^ORANGE%^<spy>%^RESET%^ on a target to 
-assess their belongings, hopefully without being noticed.
+The thief is the master of the shadows.  Their attacks are based on surprise, jumping from the shadows to deal great damage upon a target. %^ORANGE%^<stab>%^RESET%^ target will deal a great blow of damage to an unsuspecting foe, dependent on the thief's stealth. They can also %^ORANGE%^<spy>%^RESET%^ on a target to assess their belongings, hopefully without being noticed.
 
-Thieves can use nothing heavier than light armor types, as they rely on 
-speed and stealth. Various skills and commands will either take a penalty
-when wearing metal armor, or will simply not work at all. A high dexterity
-is very important and useful to thieves.
+Thieves can use nothing heavier than light armor types, as they rely on speed and stealth. Various skills and commands will either take a penalty when wearing metal armor, or will simply not work at all. A high dexterity is very important and useful to thieves.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, stab, stealth, prestige classes
 
