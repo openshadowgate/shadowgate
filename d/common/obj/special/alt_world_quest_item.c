@@ -35,11 +35,12 @@ void create()
     lastsFor = time() + 30000;
 }
 
-void set_reward_type(string str)
+inv set_reward_type(string str)
 {
     rewardType = str;
     if(rewardType != "gold" && rewardType != "mats") rewardType = "gold";
-    return;
+    tell_object(TP,"%^BOLD%^%^WHITE%^Alt reality reward type is set to %^CYAN%^"+rewardType+"%^WHITE%^!%^RESET%^");
+    return 1;
 }
 
 void setup_perimeters()
