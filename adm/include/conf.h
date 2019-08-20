@@ -1,6 +1,6 @@
 #define __nightmare__            3.2
-#define MUDLIB                   "ShadowGate/Nightmare Mudlib"
-#define MUDLIB_VERSION           "1.5/3.2"
+#define MUDLIB                   "ShadowGate"
+#define MUDLIB_VERSION           "999"
 
 #define MUD_IS_LOCKED 0
 
@@ -14,5 +14,4 @@
 #define MAX_USER_NAME_LENGTH     15
 #define LOCKED_ACCESS_ALLOWED    ({ "superuser", "assist" })
 
-#define MORTAL_POSITIONS         ({"newbie","player","avatar", "high mortal", "ambassador"})
-
+#define MORTAL_POSITIONS         ({"newbie","player","avatar", "high mortal"})

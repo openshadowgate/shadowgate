@@ -14,6 +14,16 @@
 // Comments:    Installed on Nightmare.
 */
 
+/**
+ * @file
+ */
+
+/**
+ * Checks whether an object is hidden. That is not the same as invisibility.
+ *
+ * @param ob Object
+ * @return 0 if is not hidden, 1 if is hidden
+ */
 int hiddenp( object ob )
 {
   string filename;

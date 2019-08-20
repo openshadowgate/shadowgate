@@ -5,6 +5,13 @@
 //      Author unknown, but thanks to the MudOS driver team for sprintf
 //      Moved to Nightmare by Pallando 93-05-28
 
+/**
+ * @file
+ */
+
+/**
+ * Wraps the string, adding newlines
+ */
 varargs string wrap(string str, int x)
 {
     if( !x ) {
@@ -25,5 +32,5 @@ varargs string wrap(string str, int x)
         rm(tmpfile);
         str += "\n*** TRUNCATED ***\n";
         return sprintf("%-=" + x + "s\n", str);
-    } 
+    }
 }

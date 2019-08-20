@@ -55,9 +55,9 @@ void advanced_func(object player) {
     return;
 }
 
-int hit_dice() { return 10; }  // hit dice rolled for hitpoints each level
+int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
-int default_hitpoints() { return 3; } // hitpoints per level above level 20
+int default_hitpoints() { return 4; } // hitpoints per level above level 20
 
 string armor_allowed() { return "fighter"; }
 
@@ -87,16 +87,10 @@ string query_casting_stat(){
 }
 
 // ADD THESE
+// NO
 mapping query_class_spells()
 {
-    return(([
-        1 : ({"vigor", "inertial armor", "mylight", "biofeedback", "weapon of energy", "call armor", "chameleon skin", "skate", "water breathing", "primal fear", "stomp", "prevenom", "detect aura"}),
-        2 : ({"thicken skin", "sustenance", "body adjustment", "animal affinity", "lions charge", "concealing amorpha", "energy emanation", "psionic identify", "incite bravery", "alter self"}),
-        3 : ({"touchsight", "dimension slide", "hostile empathic transfer", "escape detection", "evade burst", "detect remote viewing", "aura alteration", "expose weakness", "exhalation of the dragon"}),
-        4 : ({"dimension door", "inertial barrier", "psychokinetic weapon", "truevenom", "planar apotheosis", "body purification", "slip the bonds"}),
-        5 : ({"greater stomp", "catapsi", "empower weapon", "power resistance", "oak body", "biting cold"}),
-        6 : ({"breath of the black dragon","dispelling buffer", "mind over energy", "mind blank", "reaving dispel", "form of doom"}),
-    ]));
+    return(([ ]));
 }
 
 void newbie_func(object who)

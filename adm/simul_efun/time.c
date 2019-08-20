@@ -6,6 +6,11 @@
 #include <daemons.h>
 #include <clock.h>
 
+/**
+ * @file
+ * @brief Various time related functions
+ */
+
 int query_night() {
     return ((string)EVENTS_D->query_time_of_day() == "night");
 }
