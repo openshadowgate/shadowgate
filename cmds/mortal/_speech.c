@@ -39,18 +39,24 @@ int cmd_speech(string str)
 }
 
 int help(){
-   write(
-@OLI
-   speech <emote>
-   This will set your speech verb. Currently set to says
-   <speech wail>
-   will appear to others as
-   Bob wails: hey there
+   write("
+%^CYAN%^NAME%^RESET%^
 
-   <speech wail loudly>
-   will appear to others as
-   Bob wails loudly: hey there
-OLI
-   );
+speech - set your speech verb
+
+%^CYAN%^SYNTAX%^RESET%^
+
+speech %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This will set your speech verb. For example, if you use %^ORANGE%^<speech proclaim>%^RESET%^, everyone in the same room with you will see 'proclaims' after your name each time you speak.
+
+N.B. 's' is always added for others after the first word in description when they see your speech.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+message, describe, adjective, colors, emote, emoteat, set
+");
    return 1;
 }
