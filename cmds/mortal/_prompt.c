@@ -27,14 +27,14 @@ prompt [LINE]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This allows you to change your current prompt settings.  
+This allows you to change your current prompt settings.
 
 When used with no arguments, the prompt will reset to a default of
     %^BOLD%^BLACK%^-%^RED%^>%^RESET%^
 Otherwise the prompt will become whatever you type after the prompt
 command.
 
-Available codes: 
+Available codes:
   %^MAGENTA%^$F%^WHITE%^ capitalized shapeshifted form
   %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
   %^MAGENTA%^$h%^WHITE%^ current hp
@@ -48,11 +48,12 @@ Available codes:
   %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
   %^MAGENTA%^$i%^WHITE%^ hunger level
   %^MAGENTA%^$o%^WHITE%^ thirst level
+  %^MAGENTA%^$s%^WHITE%^ condition percent
   %^MAGENTA%^$S%^WHITE%^ condition
   %^MAGENTA%^$W%^WHITE%^ current wimpy %
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
   %^MAGENTA%^$k%^WHITE%^ available ki
-  %^MAGENTA%^$K%^WHITE%^ maximum ki 
+  %^MAGENTA%^$K%^WHITE%^ maximum ki
 
 Avatars only:
   %^MAGENTA%^$I%^WHITE%^ shows True Invis / Mortal Invis / Stealthed status%^RESET%^
@@ -64,7 +65,7 @@ Creators only:
 
 %^ORANGE%^<prompt Bane >>%^RESET%^
     would look like this
-Bane > 
+Bane >
 
 %^ORANGE%^<prompt $h/$H >>%^RESET%^
     would look like

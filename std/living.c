@@ -2,6 +2,12 @@
 //  inheritable code for living things
 //  created by Descartes of Borg september 1992
 
+/**
+ * @file
+ * @brief All living beings inherit
+ */
+
+
 #include <security.h>
 #include <daemons.h>
 #include <party.h>
@@ -133,7 +139,7 @@ string adjust_targeted_limb(object victim,string limb){
 
 void set_diety(string str) { diety = str; }
 
-string query_diety() 
+string query_diety()
 {
     if(stringp(diety)) return diety;
     else return "godless";
@@ -143,7 +149,7 @@ varargs void set_nwp(string name,int level,int seed){
 // placeholder that does nothing to prevent NPCs bugging as many are still set with nwps. N, 12/13
 }
 
-string query_race() 
+string query_race()
 {
   if (!objectp(TO)) return "";
   if (!avatarp(TO)) return query("race");
@@ -171,7 +177,7 @@ string query_message_in()
 
     profile = (string)TO->query("relationship_profile");
     message_map = (mapping)TO->query("message_map");
-    
+
     if(!profile) { return 0; }
     if(!mapp(message_map)) { return 0; }
     if(!mapp(message_map[profile])) { return 0; }
@@ -188,7 +194,7 @@ string query_message_out()
 
     profile = (string)TO->query("relationship_profile");
     message_map = (mapping)TO->query("message_map");
-    
+
     if(!profile) { return 0; }
     if(!mapp(message_map)) { return 0; }
     if(!mapp(message_map[profile])) { return 0; }
@@ -219,7 +225,7 @@ int query_num_attacks() {
 
 void set_parrying(int i) {parrying = i;}
 
-int query_parrying() 
+int query_parrying()
 {
     object *weapons;
     if(FEATS_D->usable_feat(TO,"parry"))
@@ -247,14 +253,14 @@ int query_parrying()
         if(!sizeof(weapons))
         {
             return 1;
-        }        
+        }
     }
     return parrying;
 }
 
 void set_scrambling(int i) {scrambling = i;}
 
-int query_scrambling() 
+int query_scrambling()
 {
     if (TO->query_tripped() || TO->query_in_vehicle() || (!TO->is_ok_armour("thief") && !TO->query_property("shapeshifted"))) { return 0; }
     if(FEATS_D->usable_feat(TO,"scramble")) { return 1; }
@@ -275,16 +281,16 @@ void heart_beat()
 {
     int myskill, mylevel, i;
 
-    if(!objectp(TO)) { return; }	 
-    
+    if(!objectp(TO)) { return; }
+
     POISON_D->ProcessPoisons(TO);
-    
+
     // new stab resets available chances once per round.
-    if(objectp(TO) && sizeof(TO->query_attackers())) 
+    if(objectp(TO) && sizeof(TO->query_attackers()))
     {
         if(TO->query_property("stabs_available"))
             TO->remove_property("stabs_available");
-        if(FEATS_D->usable_feat(TO,"combat reflexes")) 
+        if(FEATS_D->usable_feat(TO,"combat reflexes"))
         {
             i = (max(({(int)TO->query_guild_level("thief"),
                                 (int)TO->query_class_level("thief")
@@ -292,15 +298,15 @@ void heart_beat()
             TO->set_property("stabs_available",i);
         }
     }
-    
+
     if(TO->is_class("monk"))
     {
         "/daemon/user_d.c"->regenerate_ki(TO, (1 + random(2)), 1);
     }
     if(used_stamina > 0)
     {
-        if(!userp(TO)) 
-        { 
+        if(!userp(TO))
+        {
             used_stamina -= 10;
             if(used_stamina < 0) used_stamina = 0;
             return;
@@ -324,7 +330,7 @@ void heart_beat()
     }
 }
 
-void init_path() 
+void init_path()
 {
     string *DIR_CLASS;
     string tmp;
@@ -334,12 +340,12 @@ void init_path()
     classhold = query_classes();
     DIR_CLASS = ({});
 
-    for(i=0;i<sizeof(classhold);i++) 
+    for(i=0;i<sizeof(classhold);i++)
     {
         DIR_CLASS += ({DIR_CMDS+"/"+classhold[i]});
         if(classhold[i] == "antipaladin" || classhold[i] == "paladin")
         {
-            DIR_CLASS += ({DIR_CMDS+"/cavalier"});       
+            DIR_CLASS += ({DIR_CMDS+"/cavalier"});
         }
         continue;
     }
@@ -355,7 +361,7 @@ void init_path()
         search_path += ({ DIR_HM_CMDS});
     if(avatarp(TO) || wizardp(TO)) search_path += ({"/cmds/avatar"});
     if(dmp(TO) && !wizardp(TO)) search_path += ({DIR_CREATOR_CMDS, DIR_SYSTEM_CMDS, DIR_AMBASSADOR_CMDS});
-    if(wizardp(this_object())) 
+    if(wizardp(this_object()))
     {
         if(member_group(getuid(),"over")) search_path += ({DIR_OVER_CMDS});
             search_path += ({ DIR_CREATOR_CMDS});
@@ -400,7 +406,7 @@ int move(mixed dest) {
 
     if(!objectp(TO)) { return MOVE_OK; }
 
-      if (objectp(myCastedSpell = TO->query_property("spell_casting"))) 
+      if (objectp(myCastedSpell = TO->query_property("spell_casting")))
       {
          if(myCastedSpell->query_has_been_cast()) myCastedSpell->dest_effect();
          else myCastedSpell->before_cast_dest_effect();
@@ -422,11 +428,11 @@ void set_in_vehicle(object ob){
 
 void init_stats() {stats = ([]);}
 
-nomask static int cmd_hook(string cmd) 
+nomask static int cmd_hook(string cmd)
 {
    string file, verb;
    object shapeshift_restricted_commands;
-    if( (verb = query_verb()) != "quit" && (verb = query_verb()) != "stillness_of_mind" && query_paralyzed()) 
+    if( (verb = query_verb()) != "quit" && (verb = query_verb()) != "stillness_of_mind" && query_paralyzed())
     {
         TP->send_paralyzed_message("info",TO);
         //message("my_action", sprintf("%s", (string)this_player()->query_paralyze_message()),
@@ -451,17 +457,17 @@ nomask static int cmd_hook(string cmd)
          return(int)CHAT_D->do_chat(verb, cmd);
       else return 1;
    }
-   	if(TO->query_ghost() && !avatarp(TO)) 
+   	if(TO->query_ghost() && !avatarp(TO))
 	{
-		if(objectp(ETO)) 
+		if(objectp(ETO))
 		{
 			if(base_name(ETO) == DEATH_ROOM)
 			{
 				return(int)call_other(file, "cmd_"+verb, cmd);
 			}
-			else 
+			else
 			{
-				if(verb != "look" && verb != "tell" && verb != "reply" && verb != "pray") 
+				if(verb != "look" && verb != "tell" && verb != "reply" && verb != "pray")
 				{
 				      tell_object(TO,"You wail miserably.\n");
 				      tell_room(ETO,"A ghost wails miserably.\n",TO);
@@ -471,7 +477,7 @@ nomask static int cmd_hook(string cmd)
    		}
 		else
 		{
-			if(verb != "look" && verb != "tell" && verb != "reply" && verb != "pray") 
+			if(verb != "look" && verb != "tell" && verb != "reply" && verb != "pray")
 				{
 				      tell_object(TO,"You wail miserably.\n");
 				      tell_room(ETO,"A ghost wails miserably.\n",TO);
@@ -484,13 +490,13 @@ nomask static int cmd_hook(string cmd)
 
 // Added to support quest spells
 void set_quest_spells(string *spells) { quest_spells = spells; }
-void add_quest_spell(string spell) 
-{ 
+void add_quest_spell(string spell)
+{
     if(!pointerp(quest_spells) || !quest_spells)
     {
         quest_spells = ({});
     }
-    quest_spells += ({ spell }); 
+    quest_spells += ({ spell });
     return;
 }
 void remove_quest_spell(string spell)
@@ -505,10 +511,10 @@ string *query_quest_spells()
 }
 // Added to deal with priest spell domains.
 void set_divine_domain(string *domain) { divine_domain = domain; }
-string *query_divine_domain() 
-{   
-    if(!divine_domain || divine_domain == ({})) return ({}); 
-    return divine_domain; 
+string *query_divine_domain()
+{
+    if(!divine_domain || divine_domain == ({})) return ({});
+    return divine_domain;
 }
 
 string query_school() {
@@ -565,7 +571,7 @@ int force_me(string cmd) {
 }
 int query_ok_to_heal() { return ok_to_heal; }
 void adjust_ok_to_heal(int x) { ok_to_heal += x; }
-void do_healing(int x) 
+void do_healing(int x)
 {
    int tmp;
 
@@ -633,13 +639,13 @@ int calculate_healing() {
          }
       }
    }
-   if(query_stuffed()) 
+   if(query_stuffed())
    {
        if(!TO->query_property("sustenance") &&
           !FEATS_D->usable_feat(TO, "timeless body")) healing["stuffed"]--;
       if(healing["stuffed"] < 0) healing["stuffed"] = 0;
    }
-   if(query_quenched()) 
+   if(query_quenched())
    {
         if(!TO->query_property("sustenance") &&
            !FEATS_D->usable_feat(TO, "timeless body")) healing["quenched"]--;
@@ -653,13 +659,13 @@ void set_party(string str) {
    party = str;
 }
 
-void add_poisoning(int x) 
+void add_poisoning(int x)
 {
    	//if(!healing) healing = ([]);
    	//healing["poisoning"] += x;
    	//if(healing["poisoning"] < 0) healing["poisoning"] = 0;*/
-	//log what objects are calling this and 
-	//hopefully making it so that they 
+	//log what objects are calling this and
+	//hopefully making it so that they
 	//use the new poison system - Saide
 	if(x < 1) return;
 	POISON_D->ApplyPoison(TO, "any", previous_object());
@@ -676,9 +682,9 @@ object queryPoisoner() {
    return poisoner;
 }
 
-void set_stats(string str, int x) 
+void set_stats(string str, int x)
 {
-    if(stats[str] && ( stats[str] != x ) && interactive(TO) ) 
+    if(stats[str] && ( stats[str] != x ) && interactive(TO) )
     {
         log_file("stats", query_name()+" went from "+stats[str]+" to "+x+
         " in "+str+" ("+ctime(time())+")\n");
@@ -822,7 +828,7 @@ private static int traceFlag;
                "  (uid: "+getuid(tmp)+" "+file_name(tmp)+": "+
                ctime(time())+"\n");
    }
-  if (query_exp() < 0) 
+  if (query_exp() < 0)
        set_exp(sizeof(TO->query_classes()));
    if(wizardp(this_object()) || !this_object()->is_player()) return;
 * }
@@ -891,7 +897,7 @@ string base_desc() {
     return ::query_long();
 }
 
-string query_long(string unused) 
+string query_long(string unused)
 {
     object *inv,shape;
     string *tmp;
@@ -899,7 +905,7 @@ string query_long(string unused)
     int i, x, height, weight;
 
     if(this_object()->query_ghost()) { return "An ethereal presence.\n"; }
-   
+
    if(objectp(shape = TO->query_property("shapeshifted")))
    {
        the_race = (string)shape->query_shape_race();
@@ -911,23 +917,23 @@ string query_long(string unused)
 
     reg = "";
     pre = "%^CYAN%^%^BOLD%^You look over the "+the_race+".%^RESET%^\n";
-   
+
     if(::query_long("junk")) pre += "%^CYAN%^"+::query_long("junk")+"%^RESET%^\n";
-   
+
     if(TO->query_disguised() || (avatarp(TO) && TO->query_disguised()) )
     {
         if(description) pre += "%^GREEN%^"+capitalize(TO->query_vis_name())+" "+description+"%^RESET%^\n";
-    } 
-    
-    else 
+    }
+
+    else
     {
         if(description)
         {
-            if(userp(TO)) 
+            if(userp(TO))
             {
                 pre += "%^GREEN%^"+capitalize(TO->getNameAsSeen(TP))+" "+description+"%^RESET%^\n";
-            } 
-            else 
+            }
+            else
             {
                 pre += "%^GREEN%^"+capitalize(query_name())+" "+description+"%^RESET%^\n";
             }
@@ -949,7 +955,7 @@ string query_long(string unused)
         weight = (weight + random(2)) * 25;
         reg += "%^BOLD%^"+sub+" are approximately "+height+" inches tall and "+weight+" pounds.%^RESET%^\n";
     }
-   
+
     x = ((player_data["general"]["hp"]*100)/player_data["general"]["max_hp"]);
     if(x>90) reg += "%^YELLOW%^"+sub+" are in top shape.%^RESET%^\n";
     else if(x>75) reg += "%^WHITE%^%^BOLD%^"+sub+" are in decent shape.%^RESET%^\n";
@@ -962,7 +968,7 @@ string query_long(string unused)
     extra = "";
     stuff = describe_item_contents(({}));
     if(stuff == "") reg += sub+" are empty handed.\n";
-    else 
+    else
     {
         stuff = " "+stuff;
         stuff = replace_string(stuff,",","\n");
@@ -970,8 +976,8 @@ string query_long(string unused)
         reg += "%^GREEN%^%^BOLD%^"+sub+" are carrying:%^RESET%^\n"+
             "%^GREEN%^"+stuff+"%^RESET%^";
     }
-   
-    if(extra != "") { pre = pre + extra; }   
+
+    if(extra != "") { pre = pre + extra; }
     reg = pre + reg;
     return reg;
 }
@@ -1047,7 +1053,7 @@ int query_stats(string stat) {
     res += EQ_D->gear_bonus(TO, stat);
     //if(res > 59) { return 60; }
     if(res > 29) { return 30; }
-    if(res < 1) { return 1; }	
+    if(res < 1) { return 1; }
     else return res;  //return the base stat + the bonus + any poison damage
 								   //done to the stat - Saide
 }
@@ -1109,7 +1115,7 @@ int query_quenched() {
    else return 0;
 }
 
-int query_poisoning() 
+int query_poisoning()
 {
 	//old poison code, no longer applies - Saide
 	return 0;
@@ -1119,7 +1125,7 @@ int query_poisoning()
 
 string query_party() {return party;}
 
-//hidden alignment added because align mask did not work for 
+//hidden alignment added because align mask did not work for
 //some reason.  Trying this. Circe 8/1/05
 string query_al_title() {
    int al;
@@ -1220,7 +1226,7 @@ int query_attack_bonus() {
        ret += 3;
    if(FEATS_D->usable_feat(TO,"true strikes")&&
       sizeof(TO->query_wielded())==1)
-       ret += 3;         
+       ret += 3;
    return ret;
 }
 
@@ -1284,7 +1290,7 @@ void remove_save_bonuses() {
 //int add_named_effect( string unique_name, string type, mapping effects) {
 //}
 
-int query_hp_percent() 
+int query_hp_percent()
 {
     if(!query_hp() || !query_max_hp()) { return 0; }
    return(query_hp()*100)/query_max_hp();
@@ -1305,7 +1311,7 @@ void set_detecting_invis(int xx) {
     detecting_invis = xx;
 }
 
-int query_max_internal_encumbrance() 
+int query_max_internal_encumbrance()
 {
     int res,encumbrance, extra;
     if(!objectp(TO)) return 0;
@@ -1326,7 +1332,7 @@ void increment_stamina(int x)
     if(used_stamina < 0) used_stamina = 0;
     if(query_condition() < 0)
     {
-        send_paralyzed_message("info",TO); 
+        send_paralyzed_message("info",TO);
     }
 }
 
@@ -1538,7 +1544,7 @@ int query_prestige_level(string the_class)
     string *base,*classes;
     object class_ob;
     int i,class_level;
-    
+
     classes = TO->query_classes();
     if(sizeof(classes == 1)) { return TO->query_class_level(the_class); }
     for(i=0;i<sizeof(classes);i++)
@@ -1551,7 +1557,7 @@ int query_prestige_level(string the_class)
         class_level = class_ob->caster_level_calcs(TO,the_class);
     }
     if(!class_level) { return TO->query_class_level(the_class); }
-    return class_level;    
+    return class_level;
 }
 
 void reset_all_status_effects()
@@ -1563,11 +1569,11 @@ void reset_all_status_effects()
     TO->set_blind(0);
     TO->set_blindfolded(0);
     TO->set_temporary_blinded(0);
-    TO->set_tripped(0,0);                                                       
+    TO->set_tripped(0,0);
     TO->set_unconscious(0,0);
-    TO->set_gagged(0,0);                                                          
+    TO->set_gagged(0,0);
     TO->set_asleep(0,0);
-    TO->remove_paralyzed();          
+    TO->remove_paralyzed();
     TO->remove_all_disable();
     myFeats = (object *)TO->query_property("active_feats");
     if(pointerp(myFeats))
@@ -1585,4 +1591,3 @@ void reset_all_status_effects()
         TO->set_invis();
     }
 }
-

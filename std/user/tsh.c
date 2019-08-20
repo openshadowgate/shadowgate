@@ -4,6 +4,12 @@
 //      created by Truilkan@TMI 920205
 //      bug in $h & $H options fixed by Pallando@Nightmare 930709
 
+/**
+ * @file
+ * @brief Prompt substitution functions
+ */
+
+
 #include <std.h>
 #include <adt_defs.h>
 #include <commands.h>
@@ -25,7 +31,7 @@ string do_alias(string arg);
 string handle_history(string arg);
 int tsh(string file);
 
-int do_new() 
+int do_new()
 {
     string d1, d2;
 
@@ -102,14 +108,14 @@ string write_prompt()
         }
         shape = TP->query_property("shapeshifted");
         if(objectp(shape)) { shape_race = (string)shape->query_shape_race(); }
-        if(shape_race) 
-        { 
+        if(shape_race)
+        {
             prompt = replace_string(prompt, "$f", shape_race );
             prompt = replace_string(prompt, "$F", capitalize(shape_race) );
         }
-        else 
-        { 
-            prompt = replace_string(prompt, "$f", "" ); 
+        else
+        {
+            prompt = replace_string(prompt, "$f", "" );
             prompt = replace_string(prompt, "$F", "" );
         }
         rage = (int)TP->query_property("raged");
@@ -126,7 +132,7 @@ string write_prompt()
             prompt = replace_string(prompt, "$k", ""+(int)TP->query("available ki"));
             prompt = replace_string(prompt, "$K", ""+(int)TP->query("maximum ki"));
         }
-        else 
+        else
         {
             prompt = replace_string(prompt, "$k", "");
             prompt = replace_string(prompt, "$K", "");
@@ -154,13 +160,14 @@ string write_prompt()
         prompt = replace_string(prompt, "$N", lower_case(mud_name()) );
         prompt = replace_string(prompt, "$L", " "+this_object()->query_spoken());
         prompt = replace_string(prompt, "$C", ""+query_cmd_num() );
+        prompt = replace_string(prompt, "$s", ""+this_object()->query_condition_percent());
         prompt = replace_string(prompt, "$S", ""+this_object()->query_condition_string());
         prompt = replace_string(prompt, "$W", ""+this_object()->query_wimpy()+"%");
         prompt = replace_string(prompt, "$x", ""+this_player()->query_internal_encumbrance());
         prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance());
         prompt = replace_string(prompt, "$i", ""+hunger2string(this_player()));
         prompt = replace_string(prompt, "$o", ""+thirst2string(this_player()));
-       
+
         if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");
         else prompt = replace_string(prompt, "$E", "No Essence");
         if (avatarp(this_player()))
@@ -180,7 +187,7 @@ int adminBlock(){
     return aBlock || (timeBlock > time());
 }
 
-nomask string process_input(string arg) 
+nomask string process_input(string arg)
 {
     if(this_player()->query_property("memorizing") ) {
     this_player()->remove_property("memorizing");
@@ -282,5 +289,3 @@ string thirst2string(object obj)
     else
         return "Parched";
 }
-
-
