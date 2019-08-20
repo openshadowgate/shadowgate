@@ -48,9 +48,9 @@ Available codes:
   %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
   %^MAGENTA%^$i%^WHITE%^ hunger level
   %^MAGENTA%^$o%^WHITE%^ thirst level
-  %^MAGENTA%^$s%^WHITE%^ condition percent
-  %^MAGENTA%^$S%^WHITE%^ condition
-  %^MAGENTA%^$W%^WHITE%^ current wimpy %
+  %^MAGENTA%^$s%^WHITE%^ stamina percent
+  %^MAGENTA%^$S%^WHITE%^ stamina string
+  %^MAGENTA%^$W%^WHITE%^ current wimpy percent
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
   %^MAGENTA%^$k%^WHITE%^ available ki
   %^MAGENTA%^$K%^WHITE%^ maximum ki
