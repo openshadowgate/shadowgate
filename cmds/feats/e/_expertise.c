@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -76,7 +76,6 @@ void execute_feat()
         }
         caster->remove_property("combat_expertise");
         caster->set_property("combat_expertise",bonus + 1);
-        caster->set_property("empowered",-1);
         caster->add_ac_bonus(1);
         caster->add_attack_bonus(-1);
         tell_object(caster,"%^BOLD%^%^RED%^You shift your stance to better defend against attacks!%^RESET%^");
@@ -94,7 +93,6 @@ void execute_feat()
         }
         caster->remove_property("combat_expertise");
         caster->set_property("combat_expertise",bonus - 1);
-        caster->set_property("empowered",1);
         caster->add_ac_bonus(-1);
         caster->add_attack_bonus(1);
         tell_object(caster,"%^BOLD%^%^GREEN%^You shift your stance to fight more aggressively!%^RESET%^");
