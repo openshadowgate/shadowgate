@@ -3,7 +3,6 @@
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 12 strength, 12 wisdom, 12 charisma
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, dwarf (gold), halfling (strongheart), elf (sun), shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any non-chaotic
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ bard, thief, psywarrior
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d12
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, endurance, influence
@@ -17,9 +16,9 @@
    %^RESET%^L17: leadership
    %^RESET%^Also: one bonus melee feat at L1, and every five class levels thereafter
 
-Paladins are the protectors of their chosen patron in the realm of ShadowGate. They are cavaliers selected by their faith to battle their enemies and uphold their charge. A paladin's purpose varies according totheiry patron's charge, but protection and law are always part of their code of honor.
+Paladins are the protectors of their chosen patron in the realm of ShadowGate. They are holy (or unholy) warriors selected by their faith to battle their enemies and uphold their charge. A paladin's purpose varies according totheiry patron's charge, but protection and law are always part of their oaths.
 
-A knight must serve someone or some cause. They usually serve a lordor nobility, or the order of knighthood, while paladins serve a higher power, like deity. Only faiths with lawful clergy allowed permit knights to join their ranks. Paladins are granted a subset of divine spells based on their wisdom score, including spell to summon a powerful mount, as well as the ability to turn undead.
+A knight must serve someone or some cause. They serve a lord or nobility, or the order of knighthood, or a higher power directly, like deity. Only faiths with lawful clergy have required degree of order to induct a paladin. Paladins are granted a subset of divine spells based on their wisdom score, including spell to summon a powerful mount, as well as the ability to %^ORANGE%^<turn undead>%^RESET%^.
 
 %^CYAN%^Before playing a paladin, be sure to read %^ORANGE%^<help knights>%^CYAN%^. You will be expected to follow those guidelines.%^RESET%^
 

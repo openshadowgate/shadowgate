@@ -3,7 +3,6 @@
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 dexterity
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ all except wemic, firbolg, ogre and half-ogre
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ reflex strong, fort/will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, dungeoneering, stealth, thievery
@@ -20,6 +19,8 @@
 The thief is the master of the shadows.  Their attacks are based on surprise, jumping from the shadows to deal great damage upon a target. %^ORANGE%^<stab>%^RESET%^ target will deal a great blow of damage to an unsuspecting foe, dependent on the thief's stealth. They can also %^ORANGE%^<spy>%^RESET%^ on a target to assess their belongings, hopefully without being noticed.
 
 Thieves can use nothing heavier than light armor types, as they rely on speed and stealth. Various skills and commands will either take a penalty when wearing metal armor, or will simply not work at all. A high dexterity is very important and useful to thieves.
+
+Major part of thieves play is interaction with thieves guilds across the realms. Hidden within cities, they provide additional services, such as fencing and unique combat supplies.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, stab, stealth, prestige classes
 

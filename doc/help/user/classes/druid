@@ -3,13 +3,11 @@
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 wisdom
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ beastman, elf, firbolg, gnome (rock/forest), half-drow, half-elf, halfling (ghostwise), human (except tiefling and aasimar), voadkyn, yuan-ti
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ LN, NG, TN, NE, CN
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/will strong, reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ endurance, healing, perception, survival
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: light armor proficiency, medium armor proficiency, shield 
-   %^RESET%^proficiency, simple weapon proficiency, spell focus
+   %^RESET%^L1: light armor proficiency, medium armor proficiency, shield proficiency, simple weapon proficiency, spell focus
    %^RESET%^L3: tracklessstep
    %^RESET%^L4: shapeshift
    %^RESET%^L9: venom immunity
@@ -24,6 +22,6 @@ Druids are versatile and they can take many paths in their lives, becoming power
 
 %^CYAN%^Druidic oaths:%^RESET%^ Druids train with natural weapons and armor, and they further take traditional oaths that restrict them from using metal armor. Druids avoid carrying much worked metal at all, believing that it interferes with the pure nature of the wilds. The reasoning behind these oaths depend on the druid's background.
 
-%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, shapeshift, prestige classes 
+%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, shapeshift, prestige classes
 
 %^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard druid list>%^CYAN%^.%^RESET%^
