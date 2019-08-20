@@ -1,8 +1,14 @@
 // copy() is brought to you by Buddha@tmi-2!
 // It's expensive! Don't use it if you don't have to!
-// This is used to create a duplicate mapping or array that doesn't hold
-// any insecure pointers to other ones.
 
+/**
+ * @file
+ */
+
+/**
+ * This is used to create a duplicate mapping or array that doesn't hold
+ * any insecure pointers to other ones.
+ */
 mixed copy(mixed var) {
 	mixed res;
 	int i;
@@ -11,7 +17,7 @@ mixed copy(mixed var) {
 		mixed *index;
 		res = ([ ]);
 		index = keys(var);
-		for (i=0;i<sizeof(index);i++) 
+		for (i=0;i<sizeof(index);i++)
 			res[index[i]] = copy(var[index[i]]);
 		return res;
 	}
@@ -23,4 +29,3 @@ mixed copy(mixed var) {
 	}
 	else return var;
 }
-

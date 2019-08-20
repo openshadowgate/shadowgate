@@ -353,14 +353,9 @@ void init_path()
     if(query("is_assassin")) DIR_CLASS += ({DIR_CMDS+"/assassin"});
     search_path = DIR_CLASS + ({ DIR_MORTAL_CMDS, DIR_PROF_CMDS,  DIR_CLASS_CMDS});
     search_path += ({ "/cmds/feats" });
-//  if(tmp = (string)this_object()->query_guild())
-//      search_path += ({ DIR_GUILD_CMDS+"/"+tmp });
     if(ambassadorp(this_object()) || wizardp(this_object()))
         search_path += ({ DIR_AMBASSADOR_CMDS, DIR_SYSTEM_CMDS});
-    if(high_mortalp(this_object()) || avatarp(this_object()) || wizardp(this_object()))
-        search_path += ({ DIR_HM_CMDS});
     if(avatarp(TO) || wizardp(TO)) search_path += ({"/cmds/avatar"});
-    if(dmp(TO) && !wizardp(TO)) search_path += ({DIR_CREATOR_CMDS, DIR_SYSTEM_CMDS, DIR_AMBASSADOR_CMDS});
     if(wizardp(this_object()))
     {
         if(member_group(getuid(),"over")) search_path += ({DIR_OVER_CMDS});

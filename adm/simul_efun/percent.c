@@ -21,25 +21,3 @@ float percent(mixed numerator, mixed denominator)
     else b = (floatp(denominator) ? denominator : to_float(denominator));
     return ((a/b)*100);
 }
-
-
-/**
- * Sums an array
- *
- * @param *arr Array to sum
- * @param ele How many elements to sum. Defaults to 0.
- * @return Sum
- */
-int sum_array(int *arr, int ele)
-{
-    int sum = 0, i;
-    if(!intp(ele)) return sum;
-    for(i = 0;i < ele;i++)
-    {
-        if(i > (sizeof(arr)-1)) continue;
-        if(!intp(arr[i])) continue;
-        sum += arr[i];
-        continue;
-    }
-    return sum;
-}

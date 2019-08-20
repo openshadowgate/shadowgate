@@ -1,7 +1,7 @@
 /*
 // File: substr.c
 // This is a simul_efun module.
-// Original author: Sulam@TMI 
+// Original author: Sulam@TMI
 // This file is a part of the TMI distribution mudlib.
 // Please retain this header if you use it.
 // This function recursively replaces a key with a string.
@@ -16,6 +16,14 @@
 // solution can be found.
 */
 
+/**
+ * This function recursively replaces a key with a string.
+ *
+ * @param str Text to format
+ * @param match Substring to replace
+ * @param replace String to replace with
+ * @return String
+ */
 string
 substr(string str, string match, string replace)
 {
@@ -42,4 +50,3 @@ substr(string str, string match, string replace)
    reg += fii;
    return reg;
 }
-
