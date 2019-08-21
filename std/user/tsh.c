@@ -107,12 +107,14 @@ string write_prompt()
             am_invis+=(!this_player()->query_hidden())?".":"S";
         }
         shape = TP->query_property("shapeshifted");
-        if(!avatarp(TP))
         {
             int lvl = query_character_level();
-            int expcurlvl = EXP_NEEDED[lvl];
-            int expnextlvl = EXP_NEEDED[lvl+1];
-            expperc = (query_exp()-expcurlvl)*100/(expnextlvl-expcurlvl);
+            if(lvl>1&&lvl<100)
+            {
+                int expcurlvl = EXP_NEEDED[lvl];
+                int expnextlvl = EXP_NEEDED[lvl+1];
+                expperc = (query_exp()-expcurlvl)*100/(expnextlvl-expcurlvl);
+            }
         }
         if(objectp(shape)) { shape_race = (string)shape->query_shape_race(); }
         if(shape_race)
