@@ -12,7 +12,11 @@ void create()
 
     set_short("%^MAGENTA%^A small wagon, rounded with goods");
 
-    set_long("%^BOLD%^%^WHITE%^This small wagon comes complete with four thick walls to keep all the supplies it is hauling safe and secure. Four large wheels provide a sturdy means of transport and you notice that a fifth wheel is strapped under the belly to provide for a quick repair should one of the first four break. At the front a wide, flat seat provides a spot for the driver to sit and guide the large, lumbering %^YELLOW%^triceratops %^WHITE%^that pulls the wagon. Beside the driver's seat is a secure looking %^BLUE%^iron chest %^WHITE%^with several %^MAGENTA%^magical runes %^WHITE%^decorating it. More of these enchanted chests are located in the back of the wagon and every one of them appears to be very well maintained. Draped over the sides of the wagon are a number of %^MAGENTA%^%^BOLD%^b%^BLUE%^r%^MAGENTA%^igh%^BLUE%^t%^MAGENTA%^ly%^WHITE%^ colored banners, each proclaiming that this is the fabled %^YELLOW%^Emporium of Exotic Wares%^WHITE%^: A traveling warehouse of rare, fabulous things that have been brought back from all over the realm and sold to the small gnome that tends the traveling shop. %^RESET%^\n You can see a list posted on the side of the wagon, maybe you can <read list>. There's also a slot near the wagon wheel with a box protruding from it. You could probably <retrieve box>. If you want to travel to alternate world, you should use dispenser for mysterous devices instead, and <retrieve device> this way.");
+    set_long("%^BOLD%^%^WHITE%^This small wagon comes complete with four thick walls to keep all the supplies it is hauling safe and secure. Four large wheels provide a sturdy means of transport and you notice that a fifth wheel is strapped under the belly to provide for a quick repair should one of the first four break. At the front a wide, flat seat provides a spot for the driver to sit and guide the large, lumbering %^YELLOW%^triceratops %^WHITE%^that pulls the wagon. Beside the driver's seat is a secure looking %^BLUE%^iron chest %^WHITE%^with several %^MAGENTA%^magical runes %^WHITE%^decorating it. More of these enchanted chests are located in the back of the wagon and every one of them appears to be very well maintained. Draped over the sides of the wagon are a number of %^MAGENTA%^%^BOLD%^b%^BLUE%^r%^MAGENTA%^igh%^BLUE%^t%^MAGENTA%^ly%^WHITE%^ colored banners, each proclaiming that this is the fabled %^YELLOW%^Emporium of Exotic Wares%^WHITE%^: A traveling warehouse of rare, fabulous things that have been brought back from all over the realm and sold to the small gnome that tends the traveling shop.
+
+You can see a list posted on the side of the wagon, maybe you can <read list>.
+There's also a slot near the wagon wheel with a box protruding from it. You could probably <retrieve box>.
+There's also a second slot for mysterous devices. You could probably <retrieve device [with gold|mats]>.");
     set_weight(100000000);
 }
 
@@ -80,10 +84,12 @@ int retrieve_stuff(string str)
         new(FILE_PATH"tokens")->move(ETO);
         return 1;
     }
-    if(str == "device" || str == "Device")
+    if(regexp(str,"device"))
     {
         object ob;
         string rewardType;
+        if(sscanf(str,"device with %s",rewardType)!=1)
+            rewardType = "gold";
         tell_object(TP,"You pull a mysterious device from the dispenser and it falls into your hands.");
         if(TP->query("last alt quest") > time())
         {
@@ -106,7 +112,6 @@ int retrieve_stuff(string str)
             "alternative world!%^RESET%^");
             return 1;
         }
-        if(!stringp(rewardType)) rewardType = "gold";
         ob = new("/d/common/obj/special/alt_world_quest_item.c");
         ob->set_reward_type(rewardType);
         ob->move(TP);
@@ -118,9 +123,9 @@ int retrieve_stuff(string str)
         "Created by a God older than any worshipped by you mortals, this device will allow you entry into an area of "+
         "this world. If you are brave enough then find a fragment of it, touch it, and you will, at least for a time, "+
         "help to stem the flow.\n\n"+
-        "If you are succesful you shall be rewarded.%^RESET%^");
+        "If you are succesful you shall be rewarded.");
         TP->delete("last alt quest");
-        TP->set("last alt quest", time() + 7200);
+        TP->set("last alt quest", time() + 7000);
         return 1;
     }
     return 0;
