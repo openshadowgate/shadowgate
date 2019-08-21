@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("Archmage");
     feat_name("school familiarity");
     feat_prereq("Archmage L1");
-    feat_desc("Archmage becomes unrivaled in their knowledge of the school.  With the school familiarity feat, an archmage can extend the power of their school spells even further, significantly increasing their potency.");
+    feat_desc("Archmage becomes unrivaled in their knowledge of the school. With the school familiarity feat, an archmage can extend the power of their school spells even further, significantly increasing their potency at the expense of their opposing school.");
     permanent(1);
     set_required_for(({"greater spell mastery","arcane perfection"}));
 }
@@ -55,4 +55,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

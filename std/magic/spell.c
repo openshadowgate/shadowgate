@@ -1805,12 +1805,15 @@ void define_clevel()
     {
         if(spell_sphere == caster->query_school())
         {
-
             clevel += caster->query_guild_level("mage")/12;
-            if(FEATS_D->usable_feat(caster, "school familiarity")) clevel += 4;
-        } else if (spell_sphere == SCHOOL_OPPOSITION[caster->query_school()])
+            if(FEATS_D->usable_feat(caster, "school familiarity"))
+                clevel += 6;
+        }
+        else if (spell_sphere == SCHOOL_OPPOSITION[caster->query_school()])
         {
-            clevel -= caster->query_guild_level("mage")/6;
+            clevel -= caster->query_guild_level("mage")/12;
+            if(FEATS_D->usable_feat(caster, "school familiarity"))
+                clevel -= 6;
         }
         if(caster->is_class("shadow_adept"))
             if(FEATS_D->usable_feat(caster, "elusive spellcraft"))
