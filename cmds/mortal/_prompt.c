@@ -35,19 +35,20 @@ Otherwise the prompt will become whatever you type after the prompt
 command.
 
 Available codes:
-  %^MAGENTA%^$L%^WHITE%^ current language
-  %^MAGENTA%^$W%^WHITE%^ current wimpy percent
-  %^MAGENTA%^$h%^WHITE%^ current hp
+  %^MAGENTA%^$L%^WHITE%^ language
+  %^MAGENTA%^$e%^WHITE%^ exp to next level percent
+  %^MAGENTA%^$W%^WHITE%^ wimpy percent
+  %^MAGENTA%^$h%^WHITE%^ hp
   %^MAGENTA%^$H%^WHITE%^ maximum hp
   %^MAGENTA%^$i%^WHITE%^ hunger level
   %^MAGENTA%^$o%^WHITE%^ thirst level
   %^MAGENTA%^$s%^WHITE%^ stamina percent
   %^MAGENTA%^$S%^WHITE%^ stamina string
-  %^MAGENTA%^$x%^WHITE%^ current encumbrance level
+  %^MAGENTA%^$x%^WHITE%^ encumbrance level
   %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
   %^MAGENTA%^$F%^WHITE%^ capitalized shapeshifted form
   %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
-  %^MAGENTA%^$p%^WHITE%^ current power points
+  %^MAGENTA%^$p%^WHITE%^ power points
   %^MAGENTA%^$P%^WHITE%^ maximum power points
   %^MAGENTA%^$r%^WHITE%^ rage status
   %^MAGENTA%^$E%^WHITE%^ eldritch essence

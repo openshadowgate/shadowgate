@@ -9,12 +9,12 @@
  * @brief Prompt substitution functions
  */
 
-
 #include <std.h>
 #include <adt_defs.h>
 #include <commands.h>
 #include <daemons.h>
 #include <tsh.h>
+#include <new_exp_table.h>
 
 #define DEFAULT_PROMPT "%^BOLD%^%^BLACK%^-%^RED%^> "
 #define MAX_HIST_SIZE  50
@@ -91,7 +91,7 @@ string write_prompt()
 {
     object shape;
     string path, prompt, am_invis, tmp,shape_race;
-    int rage;
+    int rage, expperc;
     if( custom_prompt )
     {
         prompt = tsh_prompt;
@@ -107,6 +107,12 @@ string write_prompt()
             am_invis+=(!this_player()->query_hidden())?".":"S";
         }
         shape = TP->query_property("shapeshifted");
+        {
+            int lvl = query_character_level();
+            int expcurlvl = EXP_NEEDED[lvl];
+            int expnextlvl = EXP_NEEDED[lvl+1];
+            expperc = (query_exp()-expcurlvl)*100/(expnextlvl-expcurlvl);
+        }
         if(objectp(shape)) { shape_race = (string)shape->query_shape_race(); }
         if(shape_race)
         {
@@ -167,7 +173,7 @@ string write_prompt()
         prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance());
         prompt = replace_string(prompt, "$i", ""+hunger2string(this_player()));
         prompt = replace_string(prompt, "$o", ""+thirst2string(this_player()));
-
+        prompt = replace_string(prompt, "$e", ""+expperc);
         if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");
         else prompt = replace_string(prompt, "$E", "No Essence");
         if (avatarp(this_player()))
