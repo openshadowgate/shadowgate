@@ -107,6 +107,7 @@ string write_prompt()
             am_invis+=(!this_player()->query_hidden())?".":"S";
         }
         shape = TP->query_property("shapeshifted");
+        if(!avatarp(TP))
         {
             int lvl = query_character_level();
             int expcurlvl = EXP_NEEDED[lvl];
