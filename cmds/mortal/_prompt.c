@@ -35,30 +35,29 @@ Otherwise the prompt will become whatever you type after the prompt
 command.
 
 Available codes:
-  %^MAGENTA%^$F%^WHITE%^ capitalized shapeshifted form
-  %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
+  %^MAGENTA%^$L%^WHITE%^ current language
+  %^MAGENTA%^$W%^WHITE%^ current wimpy percent
   %^MAGENTA%^$h%^WHITE%^ current hp
   %^MAGENTA%^$H%^WHITE%^ maximum hp
-  %^MAGENTA%^$p%^WHITE%^ power points
-  %^MAGENTA%^$P%^WHITE%^ maximum power points
-  %^MAGENTA%^$L%^WHITE%^ current language
-  %^MAGENTA%^$N%^WHITE%^ name of mud
-  %^MAGENTA%^$r%^WHITE%^ rage status
-  %^MAGENTA%^$x%^WHITE%^ current encumbrance level
-  %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
   %^MAGENTA%^$i%^WHITE%^ hunger level
   %^MAGENTA%^$o%^WHITE%^ thirst level
   %^MAGENTA%^$s%^WHITE%^ stamina percent
   %^MAGENTA%^$S%^WHITE%^ stamina string
-  %^MAGENTA%^$W%^WHITE%^ current wimpy percent
+  %^MAGENTA%^$x%^WHITE%^ current encumbrance level
+  %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
+  %^MAGENTA%^$F%^WHITE%^ capitalized shapeshifted form
+  %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
+  %^MAGENTA%^$p%^WHITE%^ current power points
+  %^MAGENTA%^$P%^WHITE%^ maximum power points
+  %^MAGENTA%^$r%^WHITE%^ rage status
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
   %^MAGENTA%^$k%^WHITE%^ available ki
   %^MAGENTA%^$K%^WHITE%^ maximum ki
 
-Avatars only:
+Avatars+ only:
   %^MAGENTA%^$I%^WHITE%^ shows True Invis / Mortal Invis / Stealthed status%^RESET%^
 
-Creators only:
+Creators+ only:
   %^MAGENTA%^$D%^WHITE%^ shows current directory
 
 %^CYAN%^EXAMPLE%^RESET%^
