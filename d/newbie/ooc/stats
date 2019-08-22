@@ -2,7 +2,7 @@ Concerning stats...
 
 1.) How do I know my stats?
 
-The commands <score> and <stats> are available for your reference.
+The commands <%^BOLD%^score%^RESET%^> and <%^BOLD%^stats%^RESET%^> are available for your reference.
 
 2.) What do the stats mean?
 
@@ -24,5 +24,5 @@ You will find your experience on ShadowGate much better if you try to avoid deal
 
 3.) How do I raise my stats?
 
-Every few levels, you will receive a point that can be applied to any stat you choose. Each stat can be raised to a base number of 25. Certain spells and equipment can affect your stats as well, but no stat can reach beyond 30.
+Every few levels, you will receive a point that can be applied to any stat you choose. Each stat can be raised to a base number of 25. Certain spells and equipment can affect your stats as well, but no stat can reach beyond 30. Please note that age and race can affect your stats.
 

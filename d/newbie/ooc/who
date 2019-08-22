@@ -1,8 +1,8 @@
-Concerning typing <who>...
+Concerning typing <%^BOLD%^who%^RESET%^>...
 
 1.) Why do I not see any names on the "who" listing?
 
-People on the who listing are currently unknown to you. You will first have to <recognize> them before you will be able to call them by name (including yourself). This allows for player's to provide nicknames, or even false names, rather than their real name. Please see <help recognize> for more information.
+People on the who listing are currently unknown to you. You will first have to <%^BOLD%^recognize%^RESET%^> them before you will be able to call them by name (including yourself). This allows for player's to provide nicknames, or even false names, rather than their real name. Please see <%^BOLD%^help recognize%^RESET%^> for more information.
 
 2.) What does the letters K, A, and F after some names on the "who" list mean?
 
@@ -16,5 +16,5 @@ An %^BOLD%^%^RED%^F%^RESET%^ means you are forbidden to participate in both part
 
 and playerkilling with that person.
 
-Please see <help wholist> for more information.
+Please see <%^BOLD%^help wholist%^RESET%^> for more information.
 

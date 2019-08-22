@@ -2,19 +2,19 @@ Concerning hit points and how to heal...
 
 1.) What are hp?
 
-Hp refers to health points. Basically, if your health points go below zero you die. If you die you will lose some experience points, so dying will set you back a bit.
+Hp refers to health points. Basically, if your health points go below zero you die. If you die you will lose some experience points, so dying will set you back a bit. A high con will give you more hps.
 
 2.) How do I know my current hps?
 
-Type <score> or <hp>. There is also a way to set your prompt to show your hp after each command you enter, as well as other useful information, like your current language and your condition. A high con will give you more hps.
+Type %^BOLD%^<score>%^RESET%^ or %^BOLD%^<hp>%^RESET%^. You can also set your prompt to see this information, as well as other helpful information such as your condition. See %^BOLD%^<help prompt>%^RESET%^. 
 
 3.) Wait? Condition? What's that?
 
-Basically this is reflecting, the more you run around and the more you fight, the faster you get tired and worn out. You do get a boost to your condition when you enter combat, but you will lose your second wind shortly after you leave. A high endurance can help assure you do not tire out as quickly.
+Basically this is reflecting: the more you run around and the more you fight, the faster you get tired and worn out. You do get a boost to your condition when you enter combat, but you will lose your second wind shortly after you leave. A high endurance can help assure you do not tire out as quickly.
 
 4.) Well ok but now I went and attacked a farmer and have only 3 hp left from my max of 24. What can I do to solve this health problem?
 
-First, you can type : heal <your name> and try to use a natural ability that all players have to heal a few of you lost hps back. You can do this as much as you like but it takes time. Second, many of the major cities in Shadowgate have healers who, for a fee in gold, will provide healing services and sell healing potions. Third, certain players due to their class, will have healing spells or abilities. The regeneration feat also allows players to gain back their hp over time.
+First, you can type %^BOLD%^<heal name>%^RESET%^ and try to use a natural ability that all players have to heal a few of you lost hps back. You can do this as much as you like but it takes time. Second, many of the major cities in Shadowgate have healers who, for a fee in gold, will provide healing services and sell healing potions. Third, certain players due to their class, will have healing spells or abilities. The regeneration feat also allows players to gain back their hp over time.
 
 Lastly, some items that you may find within the Shadowgate world have the ability to heal. The most common would be healing potions that most healers will sell, for varying prices.
 

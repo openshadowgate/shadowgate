@@ -2,16 +2,16 @@ Concerning speaking...
 
 1) Why can I not understand anything I say?
 
-This would probably indicate that you are a non-human race, and are speaking a language other than the one that your parents raised you with. This makes it somewhat more challenging to play a non-human (common-speaking) race. <languages> will list the languages you do speak, and you can use the <speak> command to change your language to one that you can speak fluently.
+This would probably indicate that you are a non-human race, and are speaking a language other than the one that your parents raised you with. This makes it somewhat more challenging to play a non-human (common-speaking) race. <%^BOLD%^languages%^RESET%^> will list the languages you do speak, and you can use the <%^BOLD%^speak%^RESET%^> command to change your language to one that you can speak fluently.
 
 2) Okay, but doesn't this limit my RP?
 
-It is the opinion of the wizzes here on Shadowgate that everyone not knowing how to speak the same language at the outset causes more opportunities to RP rather than less. Perhaps you will meet someone not of your race who knows your language, or perhaps you may not bother, or be able to learn common for some reason. You can use the <teach> command to teach another player a language you know.
+It is the opinion of the wizzes here on Shadowgate that everyone not knowing how to speak the same language at the outset causes more opportunities to RP rather than less. Perhaps you will meet someone not of your race who knows your language, or perhaps you may not bother, or be able to learn common for some reason. You can use the <%^BOLD%^teach%^RESET%^> command to teach another player a language you know.
 
 3) How do I customize my says?
 
-There is a command called <speech>, which you can use to change how your speech will look. Please note that the before the first space of your speech pattern, an 's' will be appended to that word, so that:
+There is a command called <%^BOLD%^speech%^RESET%^>, which you can use to change how your speech will look. Please note that the before the first space of your speech pattern, an 's' will be appended to that word, so that:
 
-<speech says with a snarl> will result in it looking to others like: Relen sayss with a snarl
+<%^BOLD%^speech says with a snarl%^RESET%^> will result in it looking to others like: Relen sayss with a snarl
 
 ...which is probably not what you wanted.

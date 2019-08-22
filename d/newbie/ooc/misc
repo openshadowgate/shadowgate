@@ -2,17 +2,17 @@ Concerning other things...
 
 1.) What's AC? Why does it matter?
 
-Armour class or AC for short, is your armour defense rating. The better your AC rating, the harder you are to be hit. You can find your AC on your <score> card.
+Armour class or AC for short, is your armour defense rating. The better your AC rating, the harder you are to be hit. You can find your AC on your <%^BOLD%^score%^RESET%^> card.
 
 2.) What is alignment?
 
-Alignment is the basic attitude of your character towards morality and laws. To find out more about a specific alignment, type : help <alignment name>. The characters alignment will often be useful in determining how you will roleplay your character.
+Alignment is the basic attitude of your character towards morality and laws. To find out more about a specific alignment, type <%^BOLD%^help alignment-name%^RESET%^>. The characters alignment will often be useful in determining how you will roleplay your character.
 
 3.) How do I learn more about this mud?
 
-The first people you should talk to is other players. They are most familiar with many of the questions you might have. You can do this by using the newbie line. To use the newbie line type <newbie message>. You may also wish to join the Discord channel.
+The first people you should talk to is other players. They are most familiar with many of the questions you might have. You can do this by using the newbie line. To use the newbie line type <%^BOLD%^newbie message%^RESET%^>. You may also wish to join the Discord channel.
 
 4.) I have an idea for something new here, who do I tell?
 
-If it is a simple idea for an area, use the <idea> command. Please read <help game> for information on how to suggest an idea, report a typo, report a bug, or send some praise. You may also post in our forums, or bring up the topic for discussion on the OOG lines, as well as the Discord channel.
+Please read <%^BOLD%^help game%^RESET%^> for information on how to suggest an idea, report a typo, report a bug, or send some praise. You may also post in our forums, or bring up the topic for discussion on the OOG lines, as well as the Discord channel.
 

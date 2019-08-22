@@ -4,7 +4,7 @@ Starting out, you will have at least two items of interest in your inventory. On
 
 The first thing you might want to do is study your map, and figure out where to buy some basic equipment. There is also a general store which will sell you your basic adventuring needs, such as a lantern. Typing <%^BOLD%^help shop%^RESET%^> while in a shop will show you a list of available commands.
 
-This is also a good time to figure out what weapons, if any. You can <%^BOLD%^wield weaponname%^RESET%^> and <%^BOLD%^unwield weaponname>%^RESET%^. If you would like some additional information about your weapons, or any piece of gear, try using the <%^BOLD%^discern itemname%^RESET%^> command. 
+This is also a good time to figure out what weapons you want to use, if any. You can <%^BOLD%^wield weaponname%^RESET%^> and <%^BOLD%^unwield weaponname>%^RESET%^. If you would like some additional information about your weapons, or any piece of gear, try using the <%^BOLD%^discern itemname%^RESET%^> command. 
 
 If you do not use weapons, please familiarize yourself with preparing spells. Kismet has written a wonderful guide for preparing and casting spells, and you can find it here: %^CYAN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=123%^WHITE%^. Some useful commands are %^BOLD%^<help prepare%^RESET%^> or <%^BOLD%^master%^RESET%^>, depending on your class. We have a variety of casting classes and they each have their own style of preparing and casting spells.
 

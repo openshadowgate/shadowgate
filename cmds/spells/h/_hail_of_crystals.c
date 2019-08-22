@@ -4,7 +4,7 @@ inherit SPELL;
 
 int time,flag;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("hail of crystals");
@@ -23,7 +23,7 @@ void create()
     set_aoe_message("%^BOLD%^%^BLACK%^(shredded by shards of %^MAGENTA%^c%^RED%^r%^YELLOW%^y%^GREEN%^s%^CYAN%^t%^BLUE%^a%^RESET%^%^MAGENTA%^l%^BOLD%^%^BLACK%^)%^RESET%^");
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_object(caster,"%^BOLD%^%^WHITE%^With a flick of your wrist, "+
         "you send three crystals hurling through the air!");
@@ -37,53 +37,51 @@ void spell_effect(int prof)
 }
 
 
-void execute_attack() 
+void execute_attack()
 {
     object *foes;
     string target_limb;
     int i,damage;
-    
+
     if(!objectp(caster))
     {
         dest_effect();
         return;
     }
-    if (!flag) 
+    if (!flag)
     {
         flag = 1;
         ::execute_attack();
         return;
     }
-    
+
     foes = all_living(place);
     foes -= ({caster});
-    if(caster->query_followers()) { foes -= caster->query_followers(); }   
-    foes = target_filter(foes); 
+    if(caster->query_followers()) { foes -= caster->query_followers(); }
+    foes = target_filter(foes);
 
-//    tell_object(caster,"Debug: "+clevel);    
-    
     if(time > clevel)
     {
         dest_effect();
-    } 
-    else 
+    }
+    else
     {
         message("info","%^BOLD%^%^BLACK%^Shards of %^MAGENTA%^c%^RED%^r"+
             "%^YELLOW%^y%^GREEN%^s%^CYAN%^t%^BLUE%^a%^RESET%^%^MAGENTA%^l "+
             "%^BOLD%^%^BLACK%^slice through the sky, shearing everything "+
             "within the storm!", nearbyRoom(place,2));
+        define_base_damage(0); //lazy re-roll
+        damage = sdamage;
 
-        damage = (roll_dice(clevel,2) + random(clevel)); // higher damage than ice storm because it's a higher level and their only storm
-        
-        for (i=0;sizeof(foes),i<sizeof(foes);i++) 
+        for (i=0;sizeof(foes),i<sizeof(foes);i++)
         {
             if (!objectp(foes[i])) continue;
-            if (!objectp(caster)) 
+            if (!objectp(caster))
             {
                 dest_effect();
                 return;
             }
-            if (!present(caster,place) && caster != target) 
+            if (!present(caster,place) && caster != target)
             {
                 dest_effect();
                 return;
@@ -91,23 +89,23 @@ void execute_attack()
             if(!present(foes[i],place)) continue;
 
             target_limb = foes[i]->return_target_limb();
-            
-            if(do_save(foes[i],0)) 
+
+            if(do_save(foes[i],0))
             {
                 damage_targ(foes[i], target_limb, damage/2,"slashing");
             }
             else { damage_targ(foes[i], target_limb, damage,"slashing"); }
-            
+
             if(objectp(foes[i])) spell_kill(foes[i], caster);
         }
-        
+
         time++;
-        
-        if (present(caster,place) && caster != target) 
+
+        if (present(caster,place) && caster != target)
         {
-            environment(caster)->addObjectToCombatCycle(TO,1);        
-        } 
-        else 
+            environment(caster)->addObjectToCombatCycle(TO,1);
+        }
+        else
         {
             dest_effect();
             return;
@@ -116,7 +114,7 @@ void execute_attack()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     if(objectp(place)) tell_room(place,"%^BOLD%^%^WHITE%^The crystals churning in the air grind to dust and are blown away by the wind.");
     ::dest_effect();
