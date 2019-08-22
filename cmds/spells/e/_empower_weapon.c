@@ -9,7 +9,7 @@ void create() {
     ::create();
     set_spell_name("empower weapon");
     set_spell_level(([ "psywarrior" : 5 ]));
-    set_syntax("cast CLASS empower weapon on <weapon> as <power name> | <arguments to the power>");
+    set_syntax("cast CLASS empower weapon on WEAPON as POWER_NAME [. POWER_ARGS]");
     set_description("NOTE: This power may only be cast into a weapon and "
        "will not function without that weapon in your "
        "inventory. Also, the weapon can store only helpful powers, not those "
@@ -19,13 +19,11 @@ void create() {
        "to be called upon at a later time by typing <release>.  If the power reserved "
        "normally requires a target, that target will automatically be the manifester.  "
        "If you need to add arguments to the reserved power, you must add them at the "
-       "time of manifesting empower weapon.\n\nexample of usage: manifest empower "
-       "weapon on sword as dimension door | home\n\nNOTE: "
-       "You do need the | symbol if the power requires arguments such as a location.");
+       "time of manifesting empower weapon.\n\nexample of usage: <cast psywarrior empower "
+       "weapon on sword as dimension door . home>");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
-    set_peace_needed(1);
     set_casting_time(2);
 }
 
@@ -35,7 +33,7 @@ int preSpell() {
      tell_object(caster,"Please see the help file for information on how to cast this power.");
      return 0;
    }
-   if(sscanf(ARG,"%s as %s | %s",weapon,spell,args) != 3 && sscanf(ARG,"%s as %s",weapon,spell) != 2) {
+   if(sscanf(ARG,"%s as %s . %s",weapon,spell,args) != 3 && sscanf(ARG,"%s as %s",weapon,spell) != 2) {
       tell_object(caster,"You must specify at least a weapon and a power to use Empower Weapon. Please see the help file for syntax.");
       return 0;
    }
@@ -54,13 +52,13 @@ void spell_effect(int prof) {
    string spell, args, *comp_names, orgSpell, newtype, weapon, *mastered;
    int x, spellProf;
    object spellObj;
-  
+
    if (!ARG) {
       dest_effect();
       return;
    }
 
-   if(sscanf(ARG,"%s as %s | %s",weapon,spell,args) != 3){
+   if(sscanf(ARG,"%s as %s . %s",weapon,spell,args) != 3){
       args = 0;
       if(sscanf(ARG,"%s as %s",weapon,spell) != 2) {
          tell_object(caster,"You must specify at least a weapon and a power "
@@ -141,7 +139,7 @@ void spell_effect(int prof) {
    spellObj->set_caster(caster);
    spellProf = spellObj->calculate_prof_state();
    cont = new("/d/magic/obj/empowerer");
-  
+
    cont->set_prof((prof+spellProf)/2);
    cont->set_spell(spell);
    cont->set_args(args);

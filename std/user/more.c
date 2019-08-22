@@ -15,7 +15,7 @@ void do_help();
 void create() { __More = ([]); }
 
 void fixmore(){ __More = ([]);}
-varargs int more(mixed what, string cl, function endmore) 
+varargs int more(mixed what, string cl, function endmore)
 {
     string *tmp;
     if(!pointerp(what) && !stringp(what))
@@ -131,7 +131,7 @@ static void do_more(string cmd) {
     }
     message("N"+__More["class"], "\n", this_object());
     for(i=__More["current"];
-      i<__More["current"] + __More["screen"]; i++) {
+      i<__More["current"] + __More["total"]; i++) {
         if(i>= __More["total"]) {
           if(functionp(__More["endfun"])) (*__More["endfun"])();
           __More = ([]);
@@ -151,7 +151,7 @@ static void do_more(string cmd) {
   // Garrett.
 //    message("prompt", DEFAULT_MORE+"--More-- ("+
     message("prompt", ((string)TO->getenv("MOREPREFIX")?(string)TO->getenv("MOREPREFIX"):DEFAULT_MORE) +
-             "--More-- ("+ 
+             "--More-- ("+
       to_int(percent(__More["current"], __More["total"]))+"%) %^RESET%^", this_object());
     input_to("do_more");
     return;

@@ -11,7 +11,7 @@ void create() {
     set_spell_name("word of power");
     set_spell_level(([ "cleric" : 6 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS word of power [to <destination>]");
+    set_syntax("cast CLASS word of power [to DESTINATION]");
     set_description("Word of power will teleport you to a church of your choice.  For now, you can reach the following "
 "churches:\nShadow\nTharis\nAzha\nTabor\nMuul'daan\nAntioch\nTonovi\nTorm\nJuran\nKinaro\nVerbobone (Deku)\nGraez (Sangri"
 ")\nAsgard (Laerad)\nSeneca (Attaya)\nEldebaro (East Oasis)\nYou can also go to the temple of your deity by using <Temple> or <temple> as the "
@@ -117,7 +117,7 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-   if(where && 
+   if(where &&
       (where->query_property("teleport proof") ||
       place->query_property("teleport proof") ||
       !where->is_room())){
@@ -150,4 +150,3 @@ void dest_effect(){
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

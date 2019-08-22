@@ -15,7 +15,7 @@ void create() {
     set_spell_name("exigency");
     set_spell_level(([ "psion" : 6 ]));
     set_spell_sphere("invocation_evocation");
-    set_syntax("cast CLASS exigency on <enclave>");
+    set_syntax("cast CLASS exigency on ENCLAVE");
     set_description("Using this power, the psion can prepare a portion "
        "of her mind to execute a quick exit at a later time. The power "
        "can be manifested only when the psion is at peace, and she must "
@@ -75,7 +75,7 @@ void spell_effect(int prof){
       return;
    }
    cont= new("/d/magic/obj/exigency");
-  
+
    cont->set_args(ARG);
    cont->move(caster);
    tell_room(place,"%^BOLD%^%^RED%^A crystal held by "+caster->QCN+" "+

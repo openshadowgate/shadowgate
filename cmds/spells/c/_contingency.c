@@ -10,7 +10,7 @@ void create() {
     set_spell_name("contingency");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("invocation_evocation");
-    set_syntax("cast CLASS contingency on <spell name> (| <arguments to the spell>)");
+    set_syntax("cast CLASS contingency on SPELL_NAME [. SPELL_ARGS]");
     set_description("This spell allows you to put a spell in reserve, called upon at any time with the command <now>.  "
 "The target of the reserved spell is always the caster, but arguments can be specified for spells that require them.  You "
 "must carry a likeness of yourself, usually a small statue, when casting this spell./n/nexample of usage:  cast "
@@ -41,17 +41,17 @@ void spell_effect(int prof) {
   int x, spellProf, spelllevel;
   object spellObj;
 
-  
+
   if (!ARG) {
     dest_effect();
     return;
   }
-  
-  if (sscanf(ARG,"%s | %s",spell,args) != 2) {
+
+  if (sscanf(ARG,"%s . %s",spell,args) != 2) {
     spell = ARG;
     args = 0;
   }
-  
+
   orgSpell = spell;
   newtype = spell_type;
 
@@ -82,7 +82,7 @@ void spell_effect(int prof) {
   if (stringp(args) && !spell->query_arg_needed()) {
     args = 0;
   }
-  
+
   if (spell->query_components(newtype)) comp_names = keys(spell->query_components(newtype));
   for (x=0;x<sizeof(comp_names);x++) {
     if ((int)present("compx",caster)->query_comp(comp_names[x]) == 0) {
@@ -104,7 +104,7 @@ void spell_effect(int prof) {
   spellObj->set_caster(caster);
   spellProf = spellObj->calculate_prof_state();
   cont= new("/d/magic/obj/contingency");
-  
+
   cont->set_prof((prof+spellProf)/2);
   cont->set_spell(spell);
   cont->set_args(args);
