@@ -11,7 +11,8 @@
       This, however, can create situations where things are broken, both
       for the benefit and detriment of the player. This will also 
       introduce functionality that may conflict with other functionality.
-      We expect players to always report these situations.
+      We expect players to always report these situations. Please read
+	  <help game> for more information.
       
    B> Exploiting bugs is illegal. If you think you are getting 
       something too easily, then you probably are and it is most

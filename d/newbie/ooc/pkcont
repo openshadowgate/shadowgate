@@ -1,13 +1,13 @@
-We have implemented a new system of Pkilling (late 2000). Currently all pkill situations are defined as any combat that has a player or a player controled being (spell, monster, etc) in it. Currently any death that comes from a pkill situation will result in the dead player going "unconscious".  This will be relayed as being "at death's door".
-This concept is close but not the same as the death's door in D&D.  Currently there is no need to bandage a player to prevent them from dying.  That WILL be implemented later. Also players will gradually heal, based on constitution. Note, hostile monsters may very well see you unconscious and deal you a death blow. 
+Concerning (not) killing another player...
 
-Okay now pkilling results in unconscious players not dead players.  If you wish to finish a player off use the "hit" command. If a player is not bound or unconscious this will simply start combat.  Now what else can one do to a unconscious player? 
+Currently all pkill situations are defined as any combat that has a player or a player controlled being (spell, monster, etc) in it. When a player's hp falls below zero in a pkill situation, the player will fall unconscious.  This will be relayed as being "at death's door".
 
-A player with rope can bind an unconscious player. Binding will trap a player for an extended period of time. Nice players can of course unbind bound players. Bound or unconscious players are automatically hit and hit for full damage (give or take). 
+This concept is close but not the same as the death's door in D&D. Players will gradually heal, based on constitution, or you may <%^BOLD%^feed vial to playername%^RESET%^>. Be warned that hostile monsters may very well see you unconscious and deal you a death blow. 
 
-Bound players can be dragged. You need to be able to lift a lot of the players weight. If you are capable, you can drag the bound player with you. Of course at any time you can drop the player. Of course all good muggers will strip the body of the victim.  Pkilling is now more dynamic. Torture is feasible.  Kidnapping, imprisonment (and jail breaks) are feasible. Public hangings and executions. Blackmail for people's lives. 
+If you wish to finish a player off, use the <%^BOLD%^hit%^RESET%^> command. If a player is not bound or unconscious this will simply start combat. Now what else can one do to a unconscious player? 
 
->>>>>>>>>>>>>>>>>>NOTE<<<<<<<<<<<<<<<<<<<<<
-I will remind people that quit is not an IC command If you quit out of any of these situations as a means of escape you will find that it will not work the way you plan it. You will also be penalized heavily. 
+A player with rope can <%^BOLD%^bind%^RESET%^> an unconscious player. Binding will trap a player for an extended period of time. Nice players can of course <%^BOLD%^unbind%^RESET%^> bound players. Bound players can <%^BOLD%^struggle%^RESET%^> in an attempt to free themselves. The rope use skill aids both the act of binding, and struggling. You can also <%^BOLD%^blindfold%^RESET%^> and <%^BOLD%^gag%^RESET%^> a bound player.
 
-Please refer to rules 8 and 10 concerning how to play within the bounds of the game.
+Bound players can be dragged. You need to be able to lift a lot of the players weight. If you are capable, you can <%^BOLD%^drag%^RESET%^> the bound player with you. At any time you can <%^BOLD%^drop%^RESET%^> the player. Of course all good muggers will <%^BOLD%^strip%^RESET%^> the body of the victim.  Torture, kidnapping, imprisonment (and jail breaks), public hangings and executions, and blackmail are just a few suggestions of what to do with your victim.
+
+Please note, quitting is not an IC command. If you quit out of any of these situations as a means of escape you will find that it will not work the way you plan it. You will also be penalized heavily. 

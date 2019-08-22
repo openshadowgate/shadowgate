@@ -1,15 +1,17 @@
-22) Woo woo!  I found some monsters and crushed a few skulls!  Now
-    though my experience needed to advance in the <score> command list
+Concerning advancing...
+
+1.) Woo woo!  I found some monsters and crushed a few skulls!  Now
+
+    my experience needed to advance in the <%^BOLD%^score%^RESET%^> command list
+
     is in the negatives?!?  Am I bugged or do I have to do something
+
     to advance in levels?
 
-No your not bugged.  Yes you must do something to advance.  You go to any guild hall, class guild hall, room with a posting board present, the forkroad of shadow, any city center and type : advance. If you have gained the proper experience required and you have enough gold to pay for the cost of training your character on you, you will then
-receive your advancement of level.
+No you are not bugged.  Yes you must do something to advance.  You go to any room with a posting board present, church or dock and type <%^BOLD%^advance%^RESET%^>. If you have gained the proper experience required you will then receive your advancement of level.
 
-You continue to gain experience and it will carry over if you don't advance right away.  Also, every five levels you will have to find a special trainer in order to advance.  Typing '%^BOLD%^help advance%^RESET%^' will always tell you how much it will cost to advance and when you are 5th, 10th, etc. level it will give you a hint where you will find the trainer you need to advance next.  Signposts you may notice as you wander around mark their locations.
+You continue to gain experience and it will carry over if you don't advance right away.  Also, every five levels you will have to find a special trainer in order to advance.  Typing <%^BOLD%^help advance> %^RESET%^will give you a hint where you will find the trainer you need to advance next.  You, and only you, will notice a sign post marking where your trainer is camped in the rumored area. If you are struggling to find your trainer, let an imm know. We are here to help.
 
-For those of you who are multiclassed, you can also <advance class> to advance one of your classes without using the <pose> command to change which class you are acting as.
+Every ten levels you will be asked if you wish to add a class. If you decide to do so, follow the prompts, and you will begin a new life as a multi-classed player!
 
-25) I've heard of someone being called a High Mortal? What's that?
-
-A High Mortal is someone who has achieved a level of fame beyond ordinary mortals and is either well known for his or her deeds throughout the land, or has his or her name spoken in hushed tones, hopefully not to garner too much attention.  It is a level of status and it may be granted by any immortal who feels you meet the requirements.  The requirements and benefits are listed under <help highmortal>.
+You will need to seek out a special quest-giver and complete their task to advance from the 19th to the 20th level.

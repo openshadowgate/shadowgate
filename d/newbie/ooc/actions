@@ -1,15 +1,23 @@
-%^BOLD%^%^BLUE%^ - - - - - - - Message in/out, souls & emotes - - - - - - - -
+%^BOLD%^%^BLUE%^- Message in/out, souls & emotes -%^RESET%^
+
 In/out %^BOLD%^%^BLUE%^<message>%^RESET%^(s) are what others see when you enter and leave a room.  You can change it from just 'Bob enters.'  
 
 Type 'message in trudges in' to show 'Bob trudges in' when you enter a room.
 
 Type 'message out stumbles off' to show 'Bob stumbles off (east/west, etc.)' when you leave. 
 
-Type %^BOLD%^%^BLUE%^'review' %^RESET%^to see your current messages.  However, some you see there can't be set by mortals or are only for wizzes.  The %^BOLD%^%^GREEN%^$D%^RESET%^ at the end of MOUT is always there and fills in the Direction you leave by so your message out will always end with a direction.  
-Note - do NOT use the color black anywhere since for most displays it will be invisible.  Setting it to hide the direction you leave is considered cheating and will be dealt with accordingly.
+Type %^BOLD%^%^BLUE%^'review' %^RESET%^to see your current messages. However, some you see there can't be set by mortals or are only for wizzes. The %^BOLD%^%^GREEN%^$D %^RESET%^at the end of MOUT is always there and fills in the Direction you leave by so your message out will always end with a direction. 
+
+ 
+
+Note - do NOT use the color black anywhere since it won't work on some displays. Setting it to hide the direction you leave is considered cheating and will be dealt with accordingly.
 
 Emotes and souls
 
 Souls are pre-set emotes, or actions.  For instance, typing 'frown' shows 'You frown in intense concentration.'  Some can have a target, such as 'tackle <name>' will show you tackle that person to the ground.  They are simply for role-play and have no real effect whereas commands such as <kill> will cause you to attack and try to kill a mob (or other character once you leave newbiehood).  Type 'help souls' to see the list of pre-defined soul commands then try a few of them out.
 
-Emote is a command to allow you to portray any action.  They are strictly monitored to watch for abuse such as trying to get around language barriers so use them carefully or you'll lose them.  Bob typing 'emote leans against the wall.' will show the others in the room 'Bob leans against the wall.'  ':' is a pre-defined alias for emote so Bob could also type ':leans against the wall.'
+Emote is a command to allow you to portray any action. For example, Bob typing 'emote leans against the wall.' will show the others in the room 'Bob leans against the wall.'  ':' is a pre-defined alias for emote so Bob could also type ':leans against the wall.'
+
+Please use emotes respectfully, and do not force actions onto another player. It is better to type 'emote throws a knife, aimed right for Bob's head' rather than 'emote throws his knife and it lands directly in your left eye!'. It is best to allow the receiver of the emote to determine their reactions. Also, please do not use emotes to get past the language barrier.
+
+For a helpful guide on emoting, please read Kismet's guide, found on the forums at: https://shadowgate.org/forum/viewtopic.php?f=16&t=83

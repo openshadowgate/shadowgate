@@ -1,10 +1,20 @@
-Question #2 & related items from the FAQ file
+Concerning typing <who>...
 
-2) Why do I not see any names on the "who" listing?
- 
-People on the who listing are currently unknown to you. You will first have to <recognize> them, before you will be able to call them by name.  You can refer them to by race and a number. but you will also be included this list as well, so be careful.  Should you want to appear as something other than your race (Which is highly suggested...) please check out the command <adjective> and the help that comes with it.
+1.) Why do I not see any names on the "who" listing?
 
-2b) What these symbols on the who list mean?..
+People on the who listing are currently unknown to you. You will first have to <recognize> them before you will be able to call them by name (including yourself). This allows for player's to provide nicknames, or even false names, rather than their real name. Please see <help recognize> for more information.
 
-Be sure to read <help who>, if you want to know! Up to date information will be placed there.
+2.) What does the letters K, A, and F after some names on the "who" list mean?
+
+In the spirit of fun and fairness, ShadowGate has implemented a system to determine who is an appropriate party member for you, as well as who you are able to participate in playerkilling with.
+
+A %^BOLD%^%^GREEN%^K%^RESET%^ means you are free to party with, and engage in pk with, that person.
+
+An %^YELLOW%^A%^RESET%^ means you may adventure with, but not playerkill, that person.
+
+An %^BOLD%^%^RED%^F%^RESET%^ means you are forbidden to participate in both parties
+
+and playerkilling with that person.
+
+Please see <help wholist> for more information.
 

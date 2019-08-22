@@ -13,10 +13,10 @@ This is a series of posters, each with a name by topic for easy reference.  Brow
 %^BOLD%^pkilling       %^RESET%^Player killing basics
 %^BOLD%^pkcont         %^RESET%^Player killing continued
 %^BOLD%^stats          %^RESET%^Stats, score, stamina, etc.
-%^BOLD%^misc           %^RESET%^AC, alignment, ideas, reboot (shutdown)
+%^BOLD%^misc           %^RESET%^AC, alignment, ideas
 %^BOLD%^abbrev         %^RESET%^Common abbreviations
 %^BOLD%^healing        %^RESET%^HP, offer, offerall
-%^BOLD%^advancing      %^RESET%^Advancing in levels, what is a High Mortal?
+%^BOLD%^advancing      %^RESET%^Advancing in levels
 STYX
 	);
    set_short("A series of posters");

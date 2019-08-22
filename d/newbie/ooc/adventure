@@ -1,13 +1,21 @@
- + + + + + + + + + + Getting ready to go adventure!! + + + + + + + + + +
-=========================================================================
-Buy a map of the town from the scribe, or simply make your own as you go.  You will want to map as you adventure so you can find your way out of places or back to town when you get hungry and thirsty or need to sell things, etc.  You can %^BOLD%^<peer direction>%^RESET%^ to try to see what is ahead, especially the obvious exits.  Indoors, until you are high mortal, you can only peer one room and need to use %^BOLD%^<peer north 1>%^RESET%^, etc.  Outdoors you will see up to 10 or so rooms ahead or, if you only want to see the next five, you can <peer west 5>.
++ Getting ready to go adventure!! +
 
-Before you leave the city in search of adventure, you'll want to train in your weapon of choice.  Type '%^BOLD%^profs%^RESET%^' now to see what it is and how many proficiencies you have to apply to learning weapons to start out.  Type '%^BOLD%^help profs%^RESET%^' to read how weapon proficiencies work.  After training with the trainer, Mortius, or other combat, you'll need to %^BOLD%^<heal> %^RESET%^yourself or others until you can afford to buy healing kits or have cleric around to cast healing spells.
+Starting out, you will have at least two items of interest in your inventory. One is a map of Offestry, which is the area exclusively intended for helping newbies learn the game. The other is a strange mass, which will be your Offestry guide. It will give you important information, as well as provide you with quests and rewards as you progress.
 
-Mages, clerics, and bards will want to read about spells in the 'classes' room to learn how to use them.  Rangers and paladins receive clerical spells at higher levels so they will want to learn about those eventually also.  All classes have some special skills you'll need to read about in the help files and/or the '%^BOLD%^%^CYAN%^classes%^RESET%^' room.
+The first thing you might want to do is study your map, and figure out where to buy some basic equipment. There is also a general store which will sell you your basic adventuring needs, such as a lantern. Typing <%^BOLD%^help shop%^RESET%^> while in a shop will show you a list of available commands.
 
-It is acceptable to leave a room (if something isn't keeping you there) to heal, study, pray, or simply try to run away from something.  Reminder - it is illegal  to quit out of a combat situation, however.
+This is also a good time to figure out what weapons, if any. You can <%^BOLD%^wield weaponname%^RESET%^> and <%^BOLD%^unwield weaponname>%^RESET%^. If you would like some additional information about your weapons, or any piece of gear, try using the <%^BOLD%^discern itemname%^RESET%^> command. 
 
-You should look at everything you can in each room.  Often descriptions will give you hints on things you can do.  If there is a sign described for instance, you may want to %^BOLD%^<look sign> or <read sign>%^RESET%^.  There may be more to see about anything in the room, even walls or the ceiling.  Sometimes you might even have to specify which of something, such as %^BOLD%^<look west wall>%^RESET%^.
+If you do not use weapons, please familiarize yourself with preparing spells. Kismet has written a wonderful guide for preparing and casting spells, and you can find it here: %^CYAN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=123%^WHITE%^. Some useful commands are %^BOLD%^<help prepare%^RESET%^> or <%^BOLD%^master%^RESET%^>, depending on your class. We have a variety of casting classes and they each have their own style of preparing and casting spells.
 
-You will also want to try to search many things or do other actions to them.  Examples include %^BOLD%^search room, search pile, or search floor%^RESET%^ or actions such as %^BOLD%^move boulder, lift lever, climb rope%^RESET%^.  Sometimes a thesaurus is handy to look up other words that might work for the actions since the right word won't always be obvious.  
+Typing <%^BOLD%^skills%^RESET%^> will show you all of the available skills. All skills are available to anyone, but some classes are better than others at some. Your class skills are highlighted. You should have a few points available already, so go ahead and assign them. Likewise, if you have not yet assigned your first feat, go ahead and do so before heading out. See <%^BOLD%^help feats%^RESET%^> for more information. Additionally, each feat has its own individual help file, and some of them have certain pre-requisites.
+
+Just a few more tips for once you are on the road:
+
+* You can %^BOLD%^<peer direction> %^RESET%^to try to see what is ahead, especially the obvious exits. For example, typing %^BOLD%^<peer north 10> %^RESET%^will show you ten rooms ahead, if possible.
+
+* You can buy healing potions to heal yourself from the healer shop. You can also %^BOLD%^<heal> %^RESET%^yourself or others using the heal command. The skill is not required for basic healing, but having points applied to it certainly helps.
+
+* You should look at everything you can in each room.  Often descriptions will give you hints on things you can do.  If there is a sign described for instance, you may want to %^BOLD%^<look sign> or <read sign>%^RESET%^.  There may be more to see about anything in the room, even walls or the ceiling.  Sometimes you might even have to specify which of something, such as %^BOLD%^<look west wall>%^RESET%^.
+
+* You will also want to try to search many things or do other actions to them.  Examples include %^BOLD%^search room, search pile, or search floor %^RESET%^or actions such as %^BOLD%^move boulder, lift lever, climb rope%^RESET%^. 

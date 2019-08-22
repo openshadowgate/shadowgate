@@ -1,13 +1,14 @@
-8) Is player killing allowed?
- 
-Yes.  Players who are still newbies are protected in rule form (no longer by coding) from non-newbies.  There is NO protection of any sort from fellow newbies.  If you are still a newbie, it is important that you do not provoke non-newbies, including looting their corpses or even verbal antagonism  unless you are ready to accept the consequences.  Any offensive actions toward non-newbies revokes the rule keeping them from harming you.  Continued provocation of non-newbies visiting you in this area is likely to get your newbie status removed. 
- 
-Here are some excerpts from %^BOLD%^<help pkilling> %^RESET%^but you should read the complete help file very soon.
+Concerning the killing of other players...
+
+1.) Is player killing allowed?
+
+Playerkilling on ShadowGate is optional. All players are, by default, but to the exclusion of beast races, opted out of playerkilling. You can change this by typing <flag player kill . off>. It should be noted that there are certain circumstances which will temporarily flag you for non-pk again, such as a recent death or an extended absence. If you are not currently available to pk, you should avoid situations where the roleplay might turn aggressive. Additionally, you are only able to engage in pk with players who have a %^BOLD%^%^GREEN%^K%^RESET%^ next to their names on the wholist. If pk happens, we would appreciate it if you could send a <pkmail> so we can better understand the circumstances that led to it, and if any consequences are warranted. Please see <help pkmail> for more information.
+
 
 %^BOLD%^Commands Of Interest:
 =====================
-Bind - binds the player
-Unbind - unbinds the player
+bind - binds the player
+unbind - unbinds the player
 strip - strips the player of an item or entirely
 gag - gags the player
 ungag - removes the player's gag
