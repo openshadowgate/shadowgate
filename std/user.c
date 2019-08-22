@@ -1235,7 +1235,6 @@ void setup() {
 
   set_living_name(query_name());
   seteuid(getuid());
-  //  quitAllow = 1;
   set_heart_beat(1);
   if (!stats) init_stats();
   if (!skills) init_skills(0);
@@ -1244,8 +1243,8 @@ void setup() {
   init_living();
   basic_commands();
 
-  ip = query_ip_name(TO);
-  last_on = ctime(time()-7200-random(7201));
+  ip = query_ip_number(TO);
+  last_on = ctime(time());
   real_last_on = ctime(time());
   static_user["time_of_login"] = time();
   static_user["time_of_last_logout"]=query_quit_time();
@@ -1255,8 +1254,6 @@ void setup() {
     if (query_quit_time() + _TWO_WEEKS_IN_SECONDS_ < time() )
     {
        down_time = time() + 7200;
-       //hopefully to faciliate requiring 8 hours of ptime
-       //after a recent return - Saide
        TO->set("down_time_age", TO->query_age());
     }
     if (down_time < time() && (int)TO->query_age() > ((int)TO->query("down_time_age") + 7200))
@@ -1290,13 +1287,8 @@ void setup() {
     {
         if((string)TO->query("my_virtual_room"))
         {
-            //virtual_room_d will return the object if it exists and the daemon is tracking it
-            //otherwise will return 0 - if it does not exist will restore it if it is being
-            //tracked still - it is being tracked until all people who were saved in it leave
-            //it - Saide
             if(objectp(ob = "/daemon/virtual_room_d.c"->restore_virtual_room((string)TO->query("my_virtual_room"))))
             {
-               // tell_object(TO, "ob is a valid object?");
                 if(move(ob) != MOVE_OK)
                 {
                     TO->delete("my_virtual_room");
@@ -1356,29 +1348,6 @@ void setup() {
       add_id(query("subrace"));
     }
   }
-  if (query("race") == "drow") {
-    if(query("subrace") == "ssri tel quessir") {
-      delete("subrace");
-      TO->set_hair_color("white");
-      TO->set_eye_color("red");
-      tell_object(TO,"A sense of loss fills you, as you look down at your once-again blackened hands, and your bone-white hair. "
-"It seems the elven high magical rite did its work...");
-    }
-  }
-  if (is_class("antipaladin")) {
-    set_class("paladin");
-    set_mlevel("paladin",query_class_level("antipaladin"));
-    set_guild_level("paladin",query_guild_level("antipaladin"));
-    set_mlevel("antipaladin",0);
-    set_guild_level("antipaladin",0);
-    remove_class("antipaladin");
-    set_posed("paladin");
-    if((string)TO->query("active_class") == "antipaladin") TO->set("active_class","paladin");
-    tell_object(TO,"You have been converted to the paladin class! Please see <help paladin>.");
-  }
-// pickup for existing druids with the dragon feat, before it was tracked as an epic feat.
-  if(FEATS_D->has_feat(TO,"wild shape dragon") && !(int)TO->query_epic_feats_gained()) TO->set_epic_feats_gained(1);
-
     sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));
     if (query_property("spell_points")) holder1 = query_property("spell_points");
     if (query_property("where block")) holder2 = query_property("where block");
@@ -1386,7 +1355,7 @@ void setup() {
     set_property("where block",holder2);
     set_property("spell_points",holder1);
     set("reply",0);
-  if (!stringp(tmp = getenv("TERM"))) setenv("TERM", tmp = "unknown");
+  if (!stringp(tmp = getenv("TERM"))) setenv("TERM", tmp = "dumb");
   static_user["term_info"] = (mapping)TERMINAL_D->query_term_info(tmp);
   write_messages();
   set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));

@@ -1,6 +1,5 @@
 #PI
 /daemon/save
-/adm/db/access.db
 /adm/db/groups.db
 /adm/save
 /log
@@ -24,4 +23,3 @@
 
 #fixme
 *.o
-

@@ -21,6 +21,11 @@
 #define MIN_HIST_SIZE  20
 #define MAX_PUSHD_SIZE 50
 
+/**
+ * @file
+ * @brief shell implementation
+ */
+
 inherit CSTACK_ADT;       /* for pushd and popd */
 
 static string tsh_prompt;
@@ -198,18 +203,20 @@ int adminBlock(){
 
 nomask string process_input(string arg)
 {
-    if(this_player()->query_property("memorizing") ) {
-    this_player()->remove_property("memorizing");
-      message("damage","%^BOLD%^%^GREEN%^You stop your preparations to do something else!",this_object());
-
-   }
-   USER_D->process_pkill_input(this_player(), arg);
+    if(this_player()->query_property("memorizing") )
+    {
+        this_player()->remove_property("memorizing");
+        message("damage","%^BOLD%^%^GREEN%^You stop your preparations to do something else!",this_object());
+    }
+    USER_D->process_pkill_input(this_player(), arg);
     if( adminBlock() && arg != "quit") {
-     write("You are otherwise occupied.");
+        write("You are otherwise occupied.");
         arg = "";
     }
-    if(arg && arg != "") return do_alias(do_nicknames(handle_history(arg)));
-    else return arg;
+    if(arg && arg != "")
+        return do_alias(do_nicknames(handle_history(arg)));
+    else
+        return arg;
 }
 
 int tsh(string file) {
