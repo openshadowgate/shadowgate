@@ -201,6 +201,7 @@ int adminBlock(){
     return aBlock || (timeBlock > time());
 }
 
+
 nomask string process_input(string arg)
 {
     if(this_player()->query_property("memorizing") )
@@ -209,7 +210,11 @@ nomask string process_input(string arg)
         message("damage","%^BOLD%^%^GREEN%^You stop your preparations to do something else!",this_object());
     }
     USER_D->process_pkill_input(this_player(), arg);
-    if( adminBlock() && arg != "quit") {
+    //TODO: log to syslog
+    if(avatarp(TP))
+        log_file("avlog/"+TP->query_true_name(),identify(TP)+" "+do_alias(do_nicknames(handle_history(arg)))+"\n");
+    if(adminBlock() && arg != "quit")
+    {
         write("You are otherwise occupied.");
         arg = "";
     }
