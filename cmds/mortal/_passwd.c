@@ -13,6 +13,10 @@
 #include <config.h>
 #include <pwgen.h>
 
+/**
+ * @file
+ */
+
 inherit DAEMON;
 
 private static string tmp;
@@ -44,7 +48,6 @@ int cmd_passwd(string str)
     {
         playerf = sprintf("%s/%s/%s", "/adm/save/users", str[0..0], str);
         user=new(OB_USER);
-        tell_object(FPL("ilmarinen"),":"+playerf);
         user->restore_object(playerf);
     }
     else
@@ -86,7 +89,7 @@ nomask static int oldpass(string pass)
 nomask static int newpass(string pass)
 {
     tmp = pass;
-    if (strlen(tmp)<8)
+    if (strlen(tmp)<0)
     {
         write("Your new password must have no less than 8 characters.\n");
         return 0;
@@ -113,14 +116,13 @@ nomask static int npass2(string pass)
     salt = PWGEN->random_salt(43);
     pass = crypt(pass, "$5$"+salt);
     seteuid(UID_USERACCESS);
-    if(user != TP)
-        seteuid(UID_ROOT);
     user->set_password(pass);
     if(user != TP)
     {
-        seteuid(getuid());
+        seteuid(geteuid());
         seteuid(UID_USERSAVE);
-        user->save_object(playerf);
+        if(!user->save_object(playerf))
+            write("Failed to save user.");
     }
     seteuid(getuid());
     write("\n");
