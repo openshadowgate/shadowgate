@@ -1,4 +1,4 @@
-%^CYAN%^<set> allows you to change various settings, such as screen size, scrolling, current terminal. Check out %^GREEN%^<help set>%^CYAN%^.
+%^CYAN%^Using %^GREEN%^<set>%^CYAN%^, you can change various settings, such as screen size, scrolling, current terminal. Check out %^GREEN%^<help set>%^CYAN%^.
 %^CYAN%^All heroes need a trusty sidekick! See %^GREEN%^<help horse guide> %^CYAN%^to learn more.
 %^CYAN%^Anything you attack (or that attacks you), is assigned the ID "attacker". If you are having difficulties targeting npcs or mobs with your spells or feats, try directing them at "attacker".
 %^CYAN%^Applying your skill points to a single craft is recommended if you want to create magical gear. See %^GREEN%^<help craft> %^CYAN%^for more information!
@@ -46,4 +46,9 @@
 %^CYAN%^You can disable these messages with %^GREEN%^<set hints off> %^CYAN%^.
 %^CYAN%^You can track your own progress or keep character notes by using pcnotes. %^GREEN%^<help pcnotes> %^CYAN%^for more information!
 %^CYAN%^You can use the %^GREEN%^<forage> %^RESET%^%^CYAN%^command to find food in the wilderness. You can also drink from some ponds and fountains.
-%^GREEN%^<watch> %^CYAN%^your back to have more success at catching thief stabs!
+%^CYAN%^You can %^GREEN%^<watch> %^CYAN%^your back to have more success at catching thief stabs!
+%^CYAN%^The city of Shadow has its own IG message system. Find it in the northern part of the city.
+%^CYAN%^Want a different kind of adventure? Visit a gnome wagon and %^GREEN%^<retrieve device> %^CYAN%^to get started.
+%^CYAN%^Maps of the areas surrounding Shadow and Tabor can be found in the cities where the item collectors loiter.
+%^CYAN%^If you need to review the last round of a line conversations, or emotes, says, or tells, use %^GREEN%^<last>%^CYAN%^.
+%^CYAN%^A map of the entire mainland is available at: %^ULINE%^%^GREEN%^https://shadowgate.org/files/mainland.jpg 

@@ -1,185 +1,183 @@
 %^CYAN%^%^ULINE%^Shadowgate FAQ%^RESET%^
- 
+
 The following list are most of the frequently asked questions people new to Shadowgate have. Be sure you have read this whole thing and know that your question is unanswered before you go asking someone else. Everyone here is happy to help you, but you must understand that answering the same question over and over again when it is well documented is a bit annoying. That is why we have this faq document.
 
-%^MAGENTA%^************************************************************************%^RESET%^
+%^MAGENTA%^***%^RESET%^
 
-%^CYAN%^0. What is legal here?%^RESET%^
- 
-Up to date verson of rules should be available via %^ORANGE%^<help rules>%^RESET%^ command for your perusal and easy access. It is also important to read the file under %^ORANGE%^<help roleplaying>%^RESET%^. Reading and agreeing to the rules, and understanding the file on roleplaying is a condition of playing here.
+%^CYAN%^1. What is legal here?
 
-%^CYAN%^1. What is the first thing I should do here as a newbie?%^RESET%^
- 
-Type %^ORANGE%^<help features>%^RESET%^. Every command on Shadowgate should have a help file, but there are other help files as well. %^ORANGE%^<help features>%^RESET%^ will list those other help files for you. Some of the most important topics will be touched upon here, but it is not possible to cover them all. Just typing %^ORANGE%^<help>%^RESET%^ and browsing through the topics there so you know whathas help files for later will be useful also.
+Type %^ORANGE%^<help rules>%^RESET%^ to see our primary list. It is also important to read the file under %^ORANGE%^<help roleplaying>%^RESET%^. Reading and agreeing to the rules, and understanding the file on roleplaying is a condition of playing here.
 
-%^CYAN%^2. Why do I not see any names on the "who" listing?%^RESET%^
- 
-People on the who listing are currently unknown to you. You will first have to %^ORANGE%^<recognize>%^RESET%^ them, before you will be able to call them by name. You can refer them to by race and a number but you will also be included this list as well, so be careful. Should you want to appear as something other than your race (Which is highly suggested...) please check out the command %^ORANGE%^<adjective>%^RESET%^ and the help that comes with it.
+%^CYAN%^2. What is the first thing I should do here as a newbie?
 
-%^CYAN%^2.a. What does the number (1m, 10s, 28m, etc) after some names on the  "who" list mean?%^RESET%^
- 
-Anyone with a number after their name is idle. The number represents how long they have been idle (m for minutes, s for seconds). Idle time is simply the amount of time since their last command was entered.
- 
-%^CYAN%^2.b. What does [INACTIVE] after a player's name on who list mean?%^RESET%^
+Reading and understanding the rules is a great place to start. We also have many help files we suggest you read. And if you are comfortable doing so, use the newbie line %^ORANGE%^<newbie [message]>%^RESET%^ to ask questions. We're here to help.
 
-This indicates a player has set themselves into an inactive mode, likely because they have left the keyboard for a long time.
+%^CYAN%^3. Why do I not see any names on the "who" listing?
 
-%^CYAN%^3. Why can I not understand anything I say?%^RESET%^
+People on the who listing are currently unknown to you. You will first have to %^ORANGE%^<recognize>%^RESET%^ them, before you will be able to call them by name (including yourself). This allows for player's to provide nicknames, or even false names, rather than their real name. Please see %^ORANGE%^<help recognize>%^RESET%^ for more information.
 
-This would probably indicate that you are a non-human race, and are speaking a language other than the one that your parents raised you with. This makes it somewhat more challenging to play a non-human (common-speaking) race. %^ORANGE%^<languages>%^RESET%^ will list the languages you do speak, and you can use the %^ORANGE%^<speak>%^RESET%^ command to change your language to one that you know at 100%.
+%^CYAN%^3.b. What do the ** before and after a person's name on who list mean?
 
-%^CYAN%^4. How do I customize my says?%^RESET%^
+People who have the ** around their name means that their next command is being processed. In other words, they are either editing, posting on a bulletin board, or mailing (or something of that nature). It is considered polite not to bother someone who is in one of these situations, unless it is really important, or you know they won't mind.
+
+%^CYAN%^3.c. What does the letters K, A, and F after some names on the "who" list mean?
+
+In the spirit of fun and fairness, ShadowGate has implemented a system to determine who is an appropriate party member for you, as well as who you are able to participate in playerkilling with.
+
+A %^%^ORANGE%^%^ULINE%^BOLD%^RESET%^%^%^%^ORANGE%^%^ULINE%^GREEN%^RESET%^%^K%^%^ORANGE%^%^ULINE%^RESET%^RESET%^%^ means you are free to party with, and engage in pk with, that person.
+
+An %^%^ORANGE%^%^ULINE%^YELLOW%^RESET%^%^A%^%^ORANGE%^%^ULINE%^RESET%^RESET%^%^ means you may adventure with, but not playerkill, that person.
+
+An %^%^ORANGE%^%^ULINE%^BOLD%^RESET%^%^%^%^ORANGE%^%^ULINE%^RED%^RESET%^%^F%^%^ORANGE%^%^ULINE%^RESET%^RESET%^%^ means you are forbidden to participate in both parties
+
+and playerkilling with that person.
+
+Please see %^ORANGE%^<help wholist>%^RESET%^ for more information.
+
+%^CYAN%^3.d. What does "Inactive" after a player's name on who list mean?
+
+By typing %^ORANGE%^<inactive>%^RESET%^, a player can indicate they've gone afk and are not currently active participants in the world. Likewise, someone who has idled for too long will automatically be put into inactive mode.
+
+%^CYAN%^4. Why can I not understand anything I say?
+
+This would probably indicate that you are a non-human race, and are speaking a language other than the one that your parents raised you with. This makes it somewhat more challenging to play a non-human (common-speaking) race. %^ORANGE%^<languages>%^RESET%^ will list the languages you do speak, and you can use the %^ORANGE%^<speak>%^RESET%^ command to change your language to one that you can speak fluently.
+
+%^CYAN%^4.b. Okay, but doesn't this limit my %^ORANGE%^%^ULINE%^RP%^RESET%^?
+
+It is the opinion of the wizzes here on Shadowgate that everyone not knowing how to speak the same language at the outset causes more opportunities to play your role rather than less. Perhaps you will meet someone not of your race who knows your language, or perhaps you may not bother, or be able to learn common for some reason. You can use the %^ORANGE%^<teach>%^RESET%^ command to teach another player a language you know.
+
+%^CYAN%^4.c. How do I customize my says?
 
 There is a command called %^ORANGE%^<speech>%^RESET%^, which you can use to change how your speech will look. Please note that the before the first space of your speech pattern, an 's' will be appended to that word, so that:
 
-	speech says with a snarl
-...will result in it looking at others like:
+%^ORANGE%^<speech says with a snarl>%^RESET%^ will result in it looking to others like: Relen sayss with a snarl
 
-	Relen sayss with a snarl
 ...which is probably not what you wanted.
 
-Please also see the help files on %^ORANGE%^<color>%^RESET%^, %^ORANGE%^<alias>%^RESET%^ and %^ORANGE%^<nickname>%^RESET%^, as the former will let you change colors for your speech, and the latter two will save you quite a bit of typing.
+%^CYAN%^5. How do I send and read mail on Shadowgate?
 
-%^CYAN%^5. How do I send and read mail on Shadowgate?%^RESET%^
- 
-To enter into the mail server system of Shadowgate, simply type: %^ORANGE%^<mail>%^RESET%^. This will enter you into the mailer system. To mail a letter, it is best to rather than type : mail, to instead type : mail %^ORANGE%^<player name>%^RESET%^. Mail is considered an out-of-character tool, however.
+To enter into the mail server system of Shadowgate, simply type: %^ORANGE%^<mail>%^RESET%^. This will enter you into the mailer system. To mail a letter, it is best to rather than type : mail, to instead type : mail %^ORANGE%^<player name>%^RESET%^. Mail is considered an out-of-character tool, however. There is an in game mail system in the city of Shadow.
 
-%^CYAN%^6. How many quests do I have to do?%^RESET%^
- 
-Unlike many muds, within Shadowgate all quests are entirely optional. You do not have to do quests to advance in levels, with one major exception. Quests will grant a reward of ability, xp, items, treasure, etc for being completed and generally are something worth solving if you can or so desire.
+%^CYAN%^6. How many quests do I have to do?
 
-There are no quests that you need to join your class with the notable exception of cavaliers becoming paladins or antipaladins. However, finding your class hall can be considered a quest and a right of passage, so do not ask other people where it is located.
+Unlike many muds, within Shadowgate all quests are entirely optional. You do not have to do quests to advance in levels, with one major exception. There is a quest (Quest for the Swords) that is required to be completed by a level 19 player in order to advance to level 20. Other than that, quests will grant a reward of ability, xp, items, treasure, etc for being completed and generally are something worth solving if you can or so desire.
 
-%^CYAN%^7. What is a class?%^RESET%^
- 
-A class is considered your general way of life, akin to the modern expression of saying "I work in television". It does not specify exactly what it is I do, but it does suggest that I have certain talents I have gained through training and such which will last me throughout my life that may be manifest in many different manners. You can read list of classes during character creation, and view individual help files with %^ORANGE%^<help %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^, e.g. %^ORANGE%^<help fighter>%^RESET%^
+%^CYAN%^6.b. What is a class?
 
-If you are a multiclassed character, you are learning more than one trade at a time. This is slightly harder, but does have it's own benefits. You will need to often abide by the most restrictive of all of your classes when arm and armoring yourself. You may often find that, for mages, the armor allowed you by your other classes will interfere with your spellcasting abilities. Clerics will only be able to use blunt weapons to fight. Rogues will findtheir abilities impaired or impossible when wearing armor other than leather.
+A class is considered your general way of life, akin to the modern expression of saying "I work in television". It does not specify exactly what it is I do, but it does suggest that I have certain talents I have gained through training and such which will last me throughout my life that may be manifest in many different manners.
 
-%^CYAN%^8. Have you seen player X?%^RESET%^
- 
-type %^ORANGE%^<finger %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^ and you will get all of the information you need.
- 
-%^CYAN%^9. Why can't I wield this weapon?%^RESET%^
- 
-First, certain classes cannot wield certain weapons. You may have a weapon that you are not allowed to wield due to your class. Mages will encounter this quite often. This applies to armour as well. Second, you may be trying to wield or wear something which is restricted to players of a higher level than your current level. For example, a level 1 player cannot wield a magical longsword +4. Third, you may be trying wield a weapon that is designed for specific NPCs or monsters to use only. Lastly, You may be trying to wield a weapon that could only be used by the player who *first* discovered it at its proper location within the mud.
+If you are a multiclassed character, you are learning more than one trade at a time. This is slightly harder, but does have it's own benefits. You will need to often abide by the most restrictive of all of your classes when arm and armoring yourself. You may often find that, for mages, the armor allowed you by your other classes will interfere with your spellcasting abilities. Clerics will only be able to use blunt weapons to fight. Rogues will find their abilities impaired or impossible when wearing armor other than leather.
 
-%^CYAN%^10. Is player killing allowed?%^RESET%^
- 
-Yes. Pkilling is an unavoidable part of some %^ORANGE%^%^ULINE%^RP%^RESET%^ interactions. Read %^ORANGE%^<help pkilling>%^RESET%^ for details.
+You may also wish to read the individual help files for each class before making a decision. However, it should be noted that abandoning classes and beginning your training in a new one is permitted on ShadowGate.
 
-%^CYAN%^11. How do I know my stats?%^RESET%^
- 
+%^CYAN%^7. Have you seen player X?
+
+Type %^ORANGE%^<finger %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^ and you will get all of the information you need. Make sure they are recognized!
+
+%^CYAN%^8. Why can't I wield this weapon?
+
+You may be trying to wield or wear something which is restricted to players of a higher level than your current level. For example, a level 1 player cannot wield a magical longsword +4. Third, you may be trying to wield a weapon that is designed for specific %^ORANGE%^%^ULINE%^NPC%^RESET%^s or monsters to use only. Lastly, You may be trying to wield a weapon that could only be used by the player who *first* discovered it at its proper location within the mud. Please note that just because you can wield something, doesn't mean you can use it proficiently. Your weapons proficiencies can be found under the GeneralCombat Feats Tree.
+
+%^CYAN%^9. Is player killing allowed?
+
+Playerkilling on ShadowGate is optional. All players are, by default, but to the exclusion of beast races, opted out of playerkilling. You can change this by typing %^ORANGE%^<flag player kill . off>%^RESET%^. It should be noted that there are certain circumstances which will temporarily flag you for non-pk again, such as a recent death or an extended absence. If you are not currently available to pk, you should avoid situations where the roleplay might turn aggressive. Additionally, you are only able to engage in pk with players who have a %^%^ORANGE%^%^ULINE%^BOLD%^RESET%^%^%^%^ORANGE%^%^ULINE%^GREEN%^RESET%^%^K%^%^ORANGE%^%^ULINE%^RESET%^RESET%^%^ next to their names on the wholist. If pk happens, we would appreciate it if you could send a %^ORANGE%^<pkmail>%^RESET%^ so we can better understand the circumstances that led to it, and if any consequences are warranted. Please see %^ORANGE%^<help pkmail>%^RESET%^ for more information.
+
+%^CYAN%^10. How do I know my stats?
+
 The commands %^ORANGE%^<score>%^RESET%^ and %^ORANGE%^<stats>%^RESET%^ are available for your reference.
- 
-%^CYAN%^12. What do the stats mean?%^RESET%^
- 
-Stats are numerical representations of your basic physical make-up, which is determined when you first create your character. These stats are used in different relevant aspects of your mud life. Each class will have one or more stats that are key to their abilities. In addition, each nwp - see <help nwps> will have pre-requisite min. stat(s). The higher your score in the requirement(s), the easier it will be for you to learn that skill.
+
+%^CYAN%^10.b. What do the stats mean?
+
+Stats are numerical representations of your basic physical make-up, which is is determined when you first create your character. These stats are used in different relevant aspects of your mud life.
 
 Constitution determines how sturdy you are, which in basic terms, means it determines how healthy you are. A higher constitution will mean you gain extra hit points when you advance levels.
 
-Intelligence determines your capacity for using magic, namely, how successful your spell casting will be. If you are not a spell caster then intelligence has less of a bearing on your mud life.
+Intelligence determines your capacity for using magic, namely, how successful the spell casting of certain classes will be. If you are not a spell caster then intelligence has less of a bearing on your mud life.
 
-Dexterity factors into many different situations, among them are your resistance to being stolen from or backstabbed, your actual ability to do those to another, combat, and how well you can avoid being hit during combat. High dexterity provides an invisible bonus to your armour class (AC) rating.
+Dexterity factors into many different situations. It determines your ability to avoid blows, as well as affecting your athletic, stealth and thieving skills. Additionally, a high dexterity provides a bonus to your armour class (AC) rating.
 
-Strength alone determines naturally how much you are able to carry. It also, if high enough, will provide you with a bonus "to hit" when in combat, and will cause you blows to deal extra damage on top of the regular amount you normally would do.
+Strength alone determines naturally how much you are able to carry. It also, if high enough, will provide you with a bonus "to hit" when in combat, and will cause your blows to deal extra damage on top of the regular amount you normally would do.
 
-Wisdom determines your resistance to offensive magic. It is also adds to certain magical ability and spell casting. Clerics, paladins, and antipaladins all will find a high wisdom extremely helpful.
+Wisdom determines your resistance to offensive magic, as well as affects your perception skill. It is also adds to certain magical ability and spell casting. Clerics, paladins, and druids all will find a high wisdom extremely helpful.
 
-Charisma factors into your ability to get by normally aggressive monsters and in the buying and selling of goods. It also helps to define your character's looks and personality. The higher the charisma, the prettier and more charismatic your character should be. Be sure to read %^ORANGE%^<help charisma>%^RESET%^ and %^ORANGE%^<help describe>%^RESET%^.
+Charisma factors into your ability to get by normally aggressive monsters and in the buying and selling of goods. It also helps to define your character's looks and personality. The higher the charisma, the charismatic your character should be. This could be in the way of appearance, influence, or reputation. Sorcerers, Bards and Warlocks base their casting power on charisma.
 
-You will find your experience on ShadowGate much better if you try to avoid dealing with the numbers and let the MUD handle most of these for you. This is not to say, however, that you will be able to get away with portraying yourself as a beauty queen with the sweetest personality with a Charisma score of 8.
+You will find your experience on ShadowGate much better if you try to avoid dealing with the numbers and let the game handle most of these for you. This is not to say, however, that you will be able to get away with portraying yourself as a beauty queen with the sweetest personality with a Charisma score of 8.
 
-%^CYAN%^13. How do I raise my stats?%^RESET%^
- 
-Stats are constants more or less. What you start with is what you will likely have, or very close to it throughout your mud life. The only way for stats to change is through the passage of time and aging.
+%^CYAN%^10.c. How do I raise my stats?
 
-There are some items when used or worn that may provide a temporary increase in a stat. However, this bonus will vanish when the item is removed, lost, wears out, etc. However, the stat raises will not be put on your stats sheet, and you will have to discover these bonuses through the course of your play.
+Every few levels, you will receive a point that can be applied to any stat you choose. Each stat can be raised to a base number of 25. Certain spells and equipment can affect your stats as well, but no stat can reach beyond 30.
 
-%^CYAN%^14. What's AC? Why does it matter?%^RESET%^
+%^CYAN%^11. What's AC? Why does it matter?
 
-Armour class or AC for short, is your armour defense rating. The better your AC rating, the harder you are to be hit. There is also no way for you to know your armor class and this is quite intentional. 
+Armour class or %^ORANGE%^%^ULINE%^AC%^RESET%^ for short, is your armour defense rating. The better your AC rating, the harder you are to be hit. You can find your %^ORANGE%^%^ULINE%^AC%^RESET%^ on your %^ORANGE%^<score>%^RESET%^ card.
 
-%^CYAN%^15. What is alignment?%^RESET%^
+%^CYAN%^12. What is alignment?
 
-Alignment is the basic attitude of your character towards morality  and laws. To find out more about a specific alignment, %^ORANGE%^<help %^ORANGE%^%^ULINE%^ALIGNMENT%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^. The character's alignment is a critical aspect determining how you will roleplay.
+Alignment is the basic attitude of your character towards morality and laws. To find out more about a specific alignment, type %^ORANGE%^<help %^ORANGE%^%^ULINE%^ALIGNMENT_NAME%^RESET%^%^ORANGE%^>%^RESET%^. The characters alignment will often be useful in determining how you will roleplay your character.
 
-%^CYAN%^16. How do I learn more about this mud?%^RESET%^
- 
-The first people you should talk to are other newbies. They are most familiar with many of the questions you might have. You can do this by using the newbie line. To use the newbie line type %^ORANGE%^<newbie message>%^RESET%^. Do not ask the immortals questions about how to do things unless you have exhausted all other resources. High mortals (see %^ORANGE%^<help highmortal>%^RESET%^) are experienced and trusted players. They also  have the newbie line so they can help answer questions. All lines are %^ORANGE%^%^ULINE%^OOC%^RESET%^, read %^ORANGE%^<help line use>%^RESET%^. You can use your class lines for class-related questions or the inform line for other general  questions. The bulletin boards you see listed when you log in also contain valuable information. Type %^ORANGE%^<bboard next>%^RESET%^ to read through any unread posts. Just %^ORANGE%^<bboard>%^RESET%^ will list the boards and commands.
+%^CYAN%^13. How do I learn more about this mud?
 
-%^CYAN%^17. I have an idea for something new here, who do I tell?%^RESET%^
- 
-The comments board, forum, %^ORANGE%^<game>%^RESET%^ command, can be used for suggestions. However, please  take time to learn and understand the game before suggesting changes. You could also ask on a line if it's been suggested before. There  may be a good reason we would not want to do something you think  would be cool.
- 
-%^CYAN%^18. Well what are the staff ranks here?%^RESET%^
+The first people you should talk to is other players. They are most familiar with many of the questions you might have. You can do this by using the newbie line. To use the newbie line type %^ORANGE%^<newbie message>%^RESET%^. You may also wish to join the Discord channel.
 
-The ranking of the immortals from highest authority to lowest are as follows.
+%^CYAN%^14. I have an idea for something new here, who do I tell?
 
-  Arch
-  Elder
-  Overseer
-  Creator
-  Apprentice
-  Avatar
+If it is a simple idea for an area, use the %^ORANGE%^<idea>%^RESET%^ command. Please read %^ORANGE%^<help game>%^RESET%^ for information on how to suggest an idea, report a typo, report a bug, or send some praise. You may also post in our forums, or bring up the topic for discussion on the OOC lines, as well as the Discord channel.
 
-  Admin rank can be granted to all of the above
+%^CYAN%^15. Huh? An overseer rank? Well what are the staff ranks here then?
 
-%^CYAN%^N.B.%^RESET%^ Immortal, Wiz (sort for wizard) are generic terms for all the above. Avatars are like DM's. They guide players, stimulate, evaluate, and enforce RP, and generally deal with RP issues.
+It used to be quite complicated, but these days there are jsut two types of staff memebers: Avatars and Everyone Else. Avatars run plots and do your usual %^ORANGE%^%^ULINE%^GM%^RESET%^ stuff, while Everyone Else do Everything Else.
 
-%^CYAN%^20. What does `afk' mean?%^RESET%^
+%^CYAN%^16. Everyone is using strange abbreviations, what do they mean?
 
 A list of abbreviations:
- PK - Player killer
- HM - High mortal
- wiz - A term often used to refer to immortals
+ %^ORANGE%^%^ULINE%^PK%^RESET%^ - Player kill
+ wiz - A term often used to refer to staff members
+ immortal - The same as above
  afk - `away from keyboard'
  brb - `be right back'
  brt - `be right there'
- OOC - Out of character. Lines are considered OOC. Line usage is covered in <help lineuse>.
- IC - In character.	Knowledge your character knows. You may know who Vecna is from 	reading the latest book about him, but your character doesnot. For our views on books, please read <help rules>. but it	would be best to leave them elsewhere.
+ ooc - Out of character
+ ic  - In character
+ oog - Out of game
+ ig  - In Game
 
-%^CYAN%^21. How do I know what commands exist?%^RESET%^
+%^CYAN%^17. How do I see in color?
 
-Type %^ORANGE%^<help *player commands>%^RESET%^.
+Since not all terminals are capable of seeing in colour, Shadowgate will ask for your preference in creation. But if you have a color terminal supporting ansi escape codes (like a vt100 emulation), then you will want to experience Shadowgate in colour. %^ORANGE%^<help set>%^RESET%^ will show you options for colors, amongst other things.
 
-%^CYAN%^22. What are hp?%^RESET%^
+%^CYAN%^18. What are hp?
 
 Hp refers to health points. Basically, if your health points go below zero you die. If you die you will lose some experience points, so dying will set you back a bit.
 
-23. How do I know my current hps?
+%^CYAN%^18.b. How do I know my current hps?
 
-Type %^ORANGE%^<score>%^RESET%^ or %^ORANGE%^<hp>%^RESET%^. You can also set your prompt to show hps %^ORANGE%^<help prompt>%^RESET%^ after each command you enter, as well as other useful information, like your current language and your condition.
+Type %^ORANGE%^<score>%^RESET%^ or %^ORANGE%^<hp>%^RESET%^. There is also a way to set your prompt to show your hp after each command you enter, as well as other useful information, like your current language and your condition. A high con will give you more hps.
 
-%^CYAN%^24. Wait? Condition? What's that?%^RESET%^
+%^CYAN%^18.c. Wait? Condition? What's that?
 
-Basically this is reflecting that the more you run around and the more you fight, the faster you get tired and worn out. You do get a boost to your condition when you enter combat, but you will loose your second wind shortly after you leave.
+Basically this is reflecting, the more you run around and the more you fight, the faster you get tired and worn out. You do get a boost to your condition when you enter combat, but you will lose your second wind shortly after you leave. A high endurance can help assure you do not tire out as quickly.
 
-%^CYAN%^25. Well ok but now I went and attacked a farmer and have only 3 hp  left from my max of 24. What can I do to heal up?%^RESET%^
+%^CYAN%^18.d. Well ok but now I went and attacked a farmer and have only 3 hp left from my max of 24. What can I do to solve this health problem?
 
-First, you can type : %^ORANGE%^<help %^ORANGE%^%^ULINE%^YOUR_NAME%^RESET%^%^ORANGE%^>%^RESET%^ and try to use a natural ability that all players have to heal a few of you lost hps back  but this naturally takes time. If you learn the healing nwp, however, you can improve your ability to heal yourself. Also, many of the major  cities have healers who, for a fee in gold, will provide healing  services and sell healing potions. Third, some classes will have healing spells or abilities so you should get to know the abilities of those you meet.
+First, you can type : heal %^ORANGE%^<your name>%^RESET%^ and try to use a natural ability that all players have to heal a few of you lost hps back. You can do this as much as you like but it takes time. Second, many of the major cities in Shadowgate have healers who, for a fee in gold, will provide healing services and sell healing potions. Third, certain players due to their class, will have healing spells or abilities. The regeneration feat also allows players to gain back their hp over time.
 
-%^CYAN%^26. Ummm...a lot of the stuff I have been picking up is junk. Should  I just leave this stuff on the ground?%^RESET%^
+Lastly, some items that you may find within the Shadowgate world have the ability to heal. The most common would be healing potions that most healers will sell, for varying prices.
 
-No! It creates lag having useless items laying about. You should get removed from the game environment as soon as possible if it is `junk'. Either take the stuff you do not want to local stores and sell it for the money your character will likely need or type : offer %^ORANGE%^<item>%^RESET%^. This will remove the item and may heal you a slight bit.
+%^CYAN%^19. Ummm...a lot of the stuff I have been picking up is junk. Should I just leave this stuff on the ground?
 
-There is also the command %^ORANGE%^<offerall>%^RESET%^ which will get rid of whatever is laying about on the ground. Please note that this is an %^ORANGE%^%^ULINE%^OOC%^RESET%^ command to help clean up the mud and prevent more frequent reboots. There are rules about this command, and you should read that in %^ORANGE%^<help rules>%^RESET%^.
+No! It creates lag having useless items laying about. You should get removed from the game environment as soon as possible if it is `junk'. Either take the stuff you do not want to local stores and sell it as money is important and your character likely needs it, or type : offer %^ORANGE%^<item>%^RESET%^, and this will remove the item, as well as it may heal you a slight bit for each item you offer.
 
-%^CYAN%^27. Ok I know the game terms and I got a good idea on what is going on  but Shadowgate seems really big and I am confused as to where to start adventuring, where to get equip, where not to go etc.%^RESET%^
+There is also the command %^ORANGE%^<offerall>%^RESET%^ which will get rid of whatever is laying about on the ground. Please note that this is an OOC command to help clean up the mud.
 
-Ok. Yes it is a big place, and yes other players are not allowed to take you by the hand and lead you around. Think and act like a new adventurer in a strange land and you will be able to figure out how to get general ideas of where to explore next. You can also use the lines to ask others to form a party. Specify a place to meet and a general idea of where you want to go. Once you meet, play your role from there. It is always a good idea to make a map as you explore new areas.  There are maps available in many cities of the city itself but beyond that you'll need to map for yourself. Mini map, %^ORANGE%^<mmap>%^RESET%^ will help you to find a way a little.
+%^CYAN%^20. Ok I know the game terms and I got a good idea on what is going on but Shadowgate seems really big and I am confused as to where to start adventuring, where to get equip, where not to go etc.
 
-%^CYAN%^28. Woo woo! I found some monsters and crushed a few skulls! Now  though my experience needed to advance in the %^ORANGE%^<score>%^RESET%^ command list  is in the negatives?!? Am I bugged or do I have to do something to advance in levels?%^RESET%^
+Yes it is a big place, and yes high up players generally won't take you by the hand and lead you around. But asking them simple questions about things often will result in answers. But if you are a die hard soloist, it is suggested you find or make a map (see %^ORANGE%^<help mmap>%^RESET%^). You might want to pick up a weapon or some armour in the stores and perhaps a torch or lantern in case it gets dark while you are exploring. As a newbie, you will have a strange mass in your inventory that will provide you with helpful information as well as guide you through a few quests to help you learn the game. You will be rewarded with experience and gear for accomplishing the tasks it asks of you.
 
-No your not bugged. Yes you must do something to advance %^ORANGE%^<help advance>%^RESET%^. Once you have gained the proper experience and typed %^ORANGE%^<advance>%^RESET%^ at an appropriate location, you will gain the next level. Every 5 levels you will have to find your trainer. They mark their locations with those sign posts you see scattered around and you %^ORANGE%^<enter>%^RESET%^ their camp to be trained.
+%^CYAN%^21. Woo woo! I found some monsters and crushed a few skulls! Now though my experience needed to advance in the %^ORANGE%^<score>%^RESET%^%^CYAN%^ command list is in the negatives?!? Am I bugged or do I have to do something to advance in levels?
 
-For those of you who are multiclassed, you can also %^ORANGE%^<advance class>%^RESET%^ to advance one of your classes without using the %^ORANGE%^<pose>%^RESET%^ command to change which class you are acting as.
+No you are not bugged. Yes you must do something to advance. You go to any room with a posting board present, a church, or a dock, and type %^ORANGE%^<advance>%^RESET%^. If you have gained the proper experience, and met any other requirements, you will then receive your advancement of level. Every five levels, you will be prompted to seek out a special trainer, and there is a special quest which must be completed before advancing from 19th to 20th level.
 
-%^CYAN%^29. Okay why does it say I'm hitting myself with this new weapon I've found?%^RESET%^
+%^CYAN%^22. I just got something that said "Error! Contact a WIZ?" How do I do that?
 
-Simply put, you aren't proficient enough with that weapon, and that lack of skill makes it dangerous to yourself to use. Feats like 'martial weapon profficiency' grant you profficiencies in weapon types. 
-
-%^CYAN%^30. I just got something that said "Error! Contact a WIZ?" How do I do that?%^RESET%^
-
-First thing is you probably should try the command again. If this works then it was probably a one-time error. Should you be trapped in a room with no exits, we suggest the command %^ORANGE%^<fixmore>%^RESET%^ to try to fix the room, however, there are some areas that there will be no exits apparent, but the room still will not be broken. If the error continues, then you may need to seek higher assistance and aid.
-
+First thing is you probably should try the command again. If this works then it was probably a one-time error. Should you be trapped in a room with no exits, we suggest the commands %^ORANGE%^<fixroom>%^RESET%^ and %^ORANGE%^<fixmore>%^RESET%^ to try to fix the room, however, there are some areas that there will be no exits apparent, but the room still will not be broken. If the error continues, then you may need to seek higher assistance and aid.
