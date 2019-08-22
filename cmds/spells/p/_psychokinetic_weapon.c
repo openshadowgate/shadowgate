@@ -25,7 +25,7 @@ void create() {
     set_somatic_comp();
 }
 
-int preSpell() 
+int preSpell()
 {
 	if(caster->query_property("seeking_sword"))
 	{ //keeping the same variable so it cannot stack
@@ -73,20 +73,20 @@ void make_sword(){
     ob->set_stats("intelligence",1);
 /*
 Lowering attack stats based on feedback from players
-    ob->set_attacks_num((clevel/7)+1); 
+    ob->set_attacks_num((clevel/7)+1);
     ob->set_damage(1,(clevel/2));
     ob->set_stats("strength",18+(clevel/6));
 */
     dam = mylevel/4;
     if(dam < 1) dam = 1;
-    ob->set_attacks_num(2); 
+    ob->set_attacks_num(clevel/8+1);
     ob->set_damage(1,dam); //1d13ish max damage - previously was twice this with many more attacks
     ob->set_stats("strength",12+(dam/2));
     ob->set_overall_ac(5-mylevel);
     ob->set_hd(mylevel);
     ob->set_hp(mylevel*10);
     ob->set_max_hp(ob->query_hp());
-    ob->set_caster(caster);    
+    ob->set_caster(caster);
     ob->set_property("spell",TO);
     ob->set_property("spell", ({TO}) );
     ob->set_property("spell_creature", TO);

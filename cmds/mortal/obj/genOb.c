@@ -2,7 +2,6 @@
 #include <move.h>
 #include <crafting.h>
 #include <objects.h>
-#define MHEAD "%^BOLD%^BLUE%^"+repeat_string("-=",36)+"%^RESET%^"
 #define VMATERIALTYPES (["leatherworker" : ({"leather"}),\
                          "jeweller" : ({"metal", "wood"}),\
                          "armorsmith" : ({"metal"}),\
@@ -79,15 +78,15 @@ void inject_mapping(mapping mymap)
 }
 
 void init()
-{    
+{
     ::init();
-    if(!objectp(TO)) return;    
+    if(!objectp(TO)) return;
     if(!objectp(ETO))
     {
         TO->remove();
         return;
-    }    
-    switch(skill) 
+    }
+    switch(skill)
     {
       case "armorsmith": datamap = ARMORSMITH; break;
       case "weaponsmith": datamap = WEAPONSMITH; break;
@@ -109,7 +108,7 @@ void init()
         exit();
         return;
     }
-    
+
     if(skill == "weaponsmith" && !EETO->query_property("smithy"))
     {
         tell_object(ETO, "You must be in a smithy to forge new weapons.");
@@ -146,29 +145,20 @@ void display_menu_head()
 {
     if(!objectp(TO)) return;
     if(!objectp(ETO)) { exit(); return; }
-    tell_object(ETO, MHEAD);
-    tell_object(ETO, "\t%^BOLD%^%^WHITE%^"+capitalize(skill)+" crafting: %^BOLD%^%^MAGENTA%^"+capitalize(type)+"%^BOLD%^%^WHITE%^%^RESET%^");
-    tell_object(ETO, "\t\t%^BOLD%^%^GREEN%^"+capitalize(mymenu) + " menu%^RESET%^");
-    tell_object(ETO, MHEAD);
+    tell_object(ETO, "%^BOLD%^%^WHITE%^"+capitalize(skill)+" crafting: %^BOLD%^%^MAGENTA%^"+capitalize(type)+"%^BOLD%^%^WHITE%^%^RESET%^");
+    tell_object(ETO, "  %^BOLD%^%^GREEN%^"+capitalize(mymenu) + " menu%^RESET%^");
     return;
 }
 
-void display_menu_footer()
-{
-    if(!objectp(TO)) return;
-    if(!objectp(ETO)) { exit(); return; }
-    tell_object(ETO, MHEAD);
-    return;
-}
 
 void display_material_choices()
 {
-    int x; 
+    int x;
     string myShortDesc, myQuality;
     for(x = 0;x < sizeof(availMats);x++)
     {
         if(!objectp(availMats[x])) continue;
-        tell_object(ETO, "    "+(x+1)+".) "+availMats[x]->query_short() + " %^BOLD%^%^WHITE%^(%^BOLD%^%^MAGENTA%^"+availMats[x]->query_quality()+"%^BOLD%^%^WHITE%^)%^RESET%^");
+        tell_object(ETO, "  "+(x+1)+" "+availMats[x]->query_short() + " %^BOLD%^%^WHITE%^(%^BOLD%^%^MAGENTA%^"+availMats[x]->query_quality()+"%^BOLD%^%^WHITE%^)%^RESET%^");
         continue;
     }
     return;
@@ -183,7 +173,7 @@ void main_menu()
     for(x = 0;x < sizeof(MENUCHOICES);x++)
     {
         choice = MENUCHOICES[x];
-        msg = "    %^BOLD%^%^GREEN%^"+(x+1) +".) "+capitalize(choice)+". ";
+        msg = "  %^BOLD%^%^GREEN%^"+(x+1) +" "+capitalize(choice)+" ";
         switch(choice)
         {
             case "material":
@@ -206,7 +196,7 @@ void main_menu()
                      msg += "%^BOLD%^%^WHITE%^(%^BOLD%^%^MAGENTA%^"+keyMap["~NAME~"]+"%^BOLD%^%^WHITE%^)%^RESET%^";
                 }
                 else msg += UNSET;
-                break;               
+                break;
             case "size":
                 if(stringp(keyMap["~SIZE~"]))
                 {
@@ -242,18 +232,16 @@ void main_menu()
                 }
                 else msg += UNSET;
                 break;
-        }    
+        }
         tell_object(ETO, msg);
         continue;
     }
-    display_menu_footer();
-    tell_object(ETO, "%^BOLD%^%^WHITE%^Please select what you want to set up for your "+type+" by using the number to the left. \n\n"+
-    "For example entering %^BOLD%^%^CYAN%^2%^BOLD%^%^WHITE%^ will let you input the "+MENUCHOICES[1]+" for your "+type+".\n\n"+
-    "Entering %^BOLD%^%^GREEN%^**%^BOLD%^%^WHITE%^ will exit your crafting.%^RESET%^");
+    tell_object(ETO, "%^BOLD%^%^WHITE%^Select what you want to set up for your "+type+" by using the number to the left.\n"+
+    "Entering %^BOLD%^%^GREEN%^**%^BOLD%^%^WHITE%^ will exit and cancel your crafting.%^RESET%^");
     input_to("process_main_menu_choice", 0);
     return;
     //exit();
-    
+
 }
 
 void display_menu()
@@ -279,10 +267,8 @@ void material_choice()
     if(!objectp(TO)) return;
     if(!objectp(ETO)) { exit(); return; }
     display_material_choices();
-    display_menu_footer();
-    tell_object(ETO, "%^BOLD%^%^WHITE%^Please select one of the available materials to craft your "+type+ " from by using "+
-    "the number to the left.\n\nFor example, entering %^BOLD%^%^CYAN%^1%^BOLD%^%^WHITE%^ will cause you to select "+
-    "the %^BOLD%^%^MAGENTA%^"+availMats[0]->query_short()+" %^BOLD%^%^WHITE%^to craft your "+type+".");
+    tell_object(ETO, "%^BOLD%^%^WHITE%^Select one of the available materials to craft your "+type+ " from by using "+
+    "the number to the left.");
     input_to("choose_material", 0);
     return;
 }
@@ -319,15 +305,15 @@ void process_main_menu_choice(string f)
             display_menu();
             return;
         case "file name":
-            tell_object(ETO, "Please enter an unique (unused before) one word reference for this "+type+".");
+            tell_object(ETO, "Please enter an unique (unused before) file name for this "+type+".");
             input_to("files",0);
             return;
         case "name":
-            tell_object(ETO, "Please enter a name for this "+type+".");
+            tell_object(ETO, "Please enter a name for this "+type+". Don't use color codes.");
             input_to("names",0);
             return;
         case "size":
-            if(skill == "armorsmith" || skill == "leatherworker" || skill == "tailor" || skill == "jeweller") 
+            if(skill == "armorsmith" || skill == "leatherworker" || skill == "tailor" || skill == "jeweller")
             {
                 tell_object(ETO, "Please enter the size of your "+type+" as large, medium or small.");
                 input_to("size",0);
@@ -348,26 +334,20 @@ void process_main_menu_choice(string f)
             input_to("shortDesc",0);
             return;
         case "long description":
-            tell_object(ETO, "Please input the Long describe >Note use ** to end the long describe.  Don't quit in this field.");
+            tell_object(ETO, "Please input the Long description.");
+            tell_object(ETO, "Use ** to end the long describe. Don't quit in this field.");
             tell_object(ETO, "If you make a mistake, a ~r on an empty line will reset the long description.");
             tell_object(ETO, "Entering multiple lines is okay.");
-            tell_object(ETO, "To be safe, make sure you have no more than 15 lines of this length:");
-            tell_object(ETO, "%^BOLD%^|---------------------------------------------------------------|%^RESET%^");
+            tell_object(ETO, "The limit is 2000 characters, including color codes:");
             input_to("long", 0,"");
             return;
         case "lore":
-            if(OB_ACCOUNT->is_high_mortal((string)ETO->query_true_name()))
-            {
-                tell_object(ETO, "Please input the Lore >Note use ** to end the long describe.  Don't quit in this field.");
-                tell_object(ETO, "If you make a mistake, a ~r on an empty line will reset the long description.");
-                tell_object(ETO, "Entering multiple lines is okay.");
-                tell_object(ETO, "To be safe, make sure you have no more than 15 lines of this length:");
-                tell_object(ETO, "%^BOLD%^|---------------------------------------------------------------|%^RESET%^");
-                input_to("lore", 0,"");
-                return;
-            }
-            tell_object(ETO, "You must have a high mortal character in order to be able to set lore for an item.");
-            display_menu();
+            tell_object(ETO, "Please input the Lore.");
+            tell_object(ETO, "Use ** to end the long describe. Don't quit in this field.");
+            tell_object(ETO, "If you make a mistake, a ~r on an empty line will reset the long description.");
+            tell_object(ETO, "Entering multiple lines is okay.");
+            tell_object(ETO, "The limit is 2000 characters, including color codes:");
+            input_to("lore", 0,"");
             return;
         case "finish":
             if(final_check())
@@ -419,7 +399,7 @@ void choose_material(string f)
     }
     set_material(availMats[place]);
     keyMap["~SHORT~"] = 0;
-    tell_object(ETO, "You have chosen to use "+availMats[place]->query_short() + 
+    tell_object(ETO, "You have chosen to use "+availMats[place]->query_short() +
     " to craft your "+type+".");
     mymenu = "main";
     display_menu();
@@ -436,7 +416,7 @@ void files(string f)
         tell_object(ETO, "Please enter an unique (unused before) one word reference for this "+type+".");
         input_to("files",0);
         return;
-    }    
+    }
     if (file_size("/d/players/"+ETOQN) == -1) mkdir("/d/players/"+ETOQN);
     fileName = "/d/players/"+TPQN+"/"+f+".c";
     if (file_exists(fileName))
@@ -454,7 +434,7 @@ void names(string name)
 {
     if(!objectp(TO)) return;
     if(!objectp(ETO)) { exit(); return; }
-    if (!name) 
+    if (!name)
     {
         tell_object(ETO, "Please enter a name for this "+type+".");
         input_to("names",0);
@@ -470,13 +450,13 @@ void size(string size)
 {
     if(!objectp(TO)) return;
     if(!objectp(ETO)) { exit(); return; }
-    if (!size) 
+    if (!size)
     {
         tell_object(ETO, "Please enter the size of this object as large, medium or small.");
         input_to("size",0);
         return;
     }
-    if (size != "small" && size != "medium" && size != "large") 
+    if (size != "small" && size != "medium" && size != "large")
     {
         tell_object(ETO, "Please enter the size of this object as large, medium or small.");
         input_to("size",0);
@@ -551,14 +531,14 @@ void shortDesc(string shrt)
 	shrt = replace_string(shrt,"\"","'");
     keyMap["~SHORT~"] = shrt;
     display_menu();
-    return;   
+    return;
 }
 
-void long(string str, string longd) 
+void long(string str, string longd)
 {
     if(!objectp(TO)) return;
     if(!objectp(ETO)) { exit(); return; }
-    if(!str) 
+    if(!str)
     {
         tell_object(ETO,"Please input the Long describe >Note use ** to end the long describe.  Don't quit in this field.");
         tell_object(ETO, "If you make a mistake, a ~r on an empty line will reset the long description.");
@@ -574,7 +554,7 @@ void long(string str, string longd)
         input_to("long", 0,"");
         return;
     }
-    if(str != "**") 
+    if(str != "**")
     {
         longd += str + "\n";
         input_to("long", 0, longd);
@@ -586,11 +566,11 @@ void long(string str, string longd)
     return;
 }
 
-void lore(string str2, string lored) 
+void lore(string str2, string lored)
 {
     if(!objectp(TO)) return;
     if(!objectp(ETO)) { exit(); return; }
-    if(!str2) 
+    if(!str2)
     {
         tell_object(ETO, "Please input the Lore >Note use ** to end the long describe.  Don't quit in this field.");
         tell_object(ETO, "If you make a mistake, a ~r on an empty line will reset the long description.");
@@ -602,11 +582,11 @@ void lore(string str2, string lored)
     }
     if(str2 == "~r")
     {
-        tell_object(ETO, "Lore reset, please restart lore.");        
+        tell_object(ETO, "Lore reset, please restart lore.");
         input_to("lore", 0, "");
         return;
     }
-    if(str2 != "**") 
+    if(str2 != "**")
     {
         lored += str2 + "\n";
         input_to("lore", 0, lored);
@@ -628,7 +608,7 @@ int final_check()
     if(!pointerp(keyMap["~ID~"])) return 0;
     if(!stringp(keyMap["~SHORT~"])) return 0;
     if(!stringp(keyMap["~LONG~"])) return 0;
-    return 1;   
+    return 1;
 }
 
 void finish_object()
@@ -652,8 +632,8 @@ void finish_object()
       case 4..6: l += "\nBelow average quality"; break;
       case 7..9: l += "\nAverage quality"; break;
       case 10..12: l += "\nAbove average quality"; break;
-      case 13..15: l += "\nHigh quality"; break; 
-      default: l += "\nMastercrafted"; break; 
+      case 13..15: l += "\nHigh quality"; break;
+      default: l += "\nMastercrafted"; break;
     }
     keyMap["~LONG~"] = l;
 

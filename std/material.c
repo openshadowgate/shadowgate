@@ -115,7 +115,8 @@ int query_quality_type(){
 string query_long(string str){
    string hold;
    hold= ::query_long(str);
-   hold += " It appears to have approximately "+query_uses()+" units left.  If you have another material of the same type, you can <combine [material] with [material 2]>.";
+   hold += "
+It appears to have approximately "+query_uses()+" units left. If you have another material of the same type, you can <combine MATERIAL with MATERIAL2>.";
    return hold;
 }
 

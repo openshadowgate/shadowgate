@@ -15,7 +15,8 @@ void create(){
   set_limbs(({"torso"}));
   set_weight(15);
   set_value(0);
-  set_ac(4);
+  set_ac(8);
+  set("no curse",1);
   set_remove((:TO,"removeit":));
 }
 

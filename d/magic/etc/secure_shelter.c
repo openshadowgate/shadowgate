@@ -23,13 +23,7 @@ void create() {
    set_short("a small cottage");
    set_long(
 @SHELTER
-This is a small cottage, made of wood from what you can tell.  
-Even as you watch, it wavers as though through steam or intense 
-heat, or as though it were not entirely real.  Still, it would 
-likely offer some shelter from threats in the surrounding area.  
-You could likely <access cottage> to go inside and investigate.  
-If you are the one who created the portal, you may also <dismiss 
-cottage>.
+%^ORANGE%^This is a small cottage, made of wood from what you can tell. Even as you watch, it wavers as though through steam or intense heat, or as though it were not entirely real. Still, it would likely offer some shelter from threats in the surrounding area. You could likely %^MAGENTA%^<access cottage>%^ORANGE%^ to go inside and investigate. If you are the one who created the portal, you may also %^MAGENTA%^<dismiss cottage>%^ORANGE%^.
 SHELTER
    );
    set_property("no animate",1);

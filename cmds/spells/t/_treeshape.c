@@ -7,7 +7,7 @@ object skin;
 void create() {
     ::create();
     set_spell_name("treeshape");
-    set_spell_level(([ "ranger" : 3 ]));
+    set_spell_level(([ "ranger" : 3, "druid" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS treeshape");
     set_description("A ranger in harmony with the wild can cause their own body to take on the shape of a tree, growing "
@@ -30,7 +30,7 @@ int preSpell() {
     if(flag) {
         tell_object(caster,"You are already wearing armour!");
         return 0;
-    }    
+    }
     if((skin=present("barkskin",CASTER)) && skin!=TO){
         tell_object(CASTER,"You are already protected by a skin of bark.");
         return 0;

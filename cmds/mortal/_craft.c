@@ -47,7 +47,7 @@ void list_crafted(object player)
     if(!objectp(player)) { return; }
     name = lower_case(player->query_true_name());
     files = get_dir("/d/players/"+name+"/");
-    if(!sizeof(files)) 
+    if(!sizeof(files))
     {
         tell_object(player,"There are no files in your crafted directory.");
         return;
@@ -77,7 +77,7 @@ mixed check_file_valid(object player, string item)
 {
     string file_name, name;
     name      = lower_case(player->query_true_name());
-    file_name = "/d/players/"+name+"/"+item; 
+    file_name = "/d/players/"+name+"/"+item;
     if(!objectp(player)) return 0;
     if(!file_exists(file_name) && !file_exists(file_name+".c"))
     {
@@ -91,7 +91,7 @@ mixed check_file_valid(object player, string item)
 int filter_common_object(string str)
 {
     if(!stringp(str)) return 0;
-    if(strsrch(str, COMMONFILE) == -1) return 0;    
+    if(strsrch(str, COMMONFILE) == -1) return 0;
     return 1;
 }
 
@@ -117,7 +117,7 @@ void remake_item(object player, string item)
     item = replace_string(item, ".c", "");
     tmp_map += (["filename" : item, "~SHORT~" : obj->query("short"), "~LORE~" : obj->query_lore(),
                  "~ID~" : obj->query_id(), "~NAME~" : obj->query_name(),]);
-    size = obj->query_size();    
+    size = obj->query_size();
     switch(size)
     {
         case 1:
@@ -146,11 +146,11 @@ void remake_item(object player, string item)
     long_desc = implode(ld[0..place],"");
     tmp_map += (["~LONG~" : long_desc]);
     //tell_object(player, "tmp_map = "+identify(tmp_map));
-    
-    InhList = filter_array(deep_inherit_list(obj), "filter_common_object", TO);    
+
+    InhList = filter_array(deep_inherit_list(obj), "filter_common_object", TO);
     //tell_object(player, "InhList = "+identify(InhList));
     item_keys = keys(CRAFT_TO_CHECK);
-    
+
     for(x = 0;x < sizeof(item_keys);x++)
     {
         mymap = CRAFT_TO_CHECK[item_keys[x]];
@@ -165,22 +165,22 @@ void remake_item(object player, string item)
             break;
         }
         continue;
-    } 
+    }
     if(!stringp(myskill) || !stringp(mytype))
     {
         tell_object(player, "There is an error trying to remake your "+file_name+". "+
-        "Could not determine the skill type or the object type. Notify an immortal.");        
+        "Could not determine the skill type or the object type. Notify an immortal.");
     }
     else
     {
         ob = new("/cmds/mortal/obj/genOb");
         ob->inject_mapping(tmp_map);
-        ob->set_skill(myskill);   
+        ob->set_skill(myskill);
         ob->set_file(item);
         ob->set_type(mytype);
         ob->set_prof((int)TP->query_skill("craft, "+myskill));
         TP->set_property("working", "crafting");
-        ob->move(TP);        
+        ob->move(TP);
     }
     //tell_object(player, "mytype = "+mytype+" and myskill = "+myskill);
     if(objectp(obj)) obj->remove();
@@ -199,7 +199,7 @@ void preview_item(object player,string item)
     if(!objectp(obj = find_object(file_name)))
     {
         obj=new(file_name);
-	  if(!objectp(obj)) 
+	  if(!objectp(obj))
 	  {
 		tell_object(player, "Something went wrong and "+
 		"the file saved as "+item+" was not loaded "+
@@ -222,7 +222,7 @@ void preview_item(object player,string item)
 
 void delete_item(object player,string item)
 {
-    if(!stringp(check_file_valid(player, item))) return;    
+    if(!stringp(check_file_valid(player, item))) return;
     tell_object(player,"Do you really want to delete "+item+"?\n");
     tell_object(player,"Enter <yes> to delete "+item+", anything else "
         "to cancel");
@@ -236,7 +236,7 @@ void confirm(string str,object player,string item)
     if(!objectp(player)) { return; }
     if(!stringp(str))    { return help(); }
     if(!stringp(item))   { return help(); }
-    
+
     if(lower_case(str) != "yes")
     {
         tell_object(player,"Aborting...");
@@ -251,7 +251,7 @@ void confirm(string str,object player,string item)
     }
 
     tell_object(player,"Deleting "+item+"...");
-    rm(file_name);    
+    rm(file_name);
     return;
 }
 
@@ -259,14 +259,14 @@ int check_able_to_craft(object who)
 {
     object mysneak;
     if(!objectp(who)) return 0;
-    if(who->query_hidden()) 
+    if(who->query_hidden())
     {
         mysneak = present("TSR80",who);
         if(objectp(mysneak)) mysneak->force_cancel();
     }
-    if (who->query_used_craft_skills() > 25) 
-    { 
-        tell_object(who, "You have more applied skills than the current game cap. Please contact a wiz to reallocate."); 
+    if (who->query_used_craft_skills() > 25)
+    {
+        tell_object(who, "You have more applied skills than the current game cap. Please contact a wiz to reallocate.");
         return 0;
     }
     //retaining for posterity but why would being magically hidden prevent someone from seeing? - Saide, May 2017
@@ -317,7 +317,6 @@ void listitems(string str)
         }
         write(outpt);
     }
-    write("%^GREEN%^==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==%^RESET%^");
 }
 
 int cmd_craft(string str)
@@ -325,25 +324,25 @@ int cmd_craft(string str)
     int x;
     string *item_keys, *skill_keys, command, *info, myskill, previous_skill, tmp;
     object ob;
-    
-    if(!str) return notify_fail("See 'help craft' for syntax.");    
+
+    if(!str) return notify_fail("See 'help craft' for syntax.");
     if (sizeof((object *)TP->query_attackers())) return notify_fail("You're in combat, let's not do that now.\n");
     if (TP->query_property("working")) return notify_fail("You are already "+(string)TP->query_property("working")+".\n");
-    
+
     info = explode(str," ");
     command = info[0];
-    
+
     if(!stringp(command))
     {
         tell_object(TP, "See 'help craft' for syntax help.");
         return 1;
     }
-    
+
     if(command == "enchant")
     {
         if(!check_able_to_craft(TP)) return;
         if(FEATS_D->usable_feat(TP,"craft magical equipment"))
-        {                
+        {
             new("/cmds/mortal/obj/enchant_ob.c")->enchanting_menu();
             return 1;
         }
@@ -351,7 +350,7 @@ int cmd_craft(string str)
         {
             tell_object(TP,"You need either the feat craft magical equipment, or the feat imbue item in "
             "order to enchant items.");
-            return 1;        
+            return 1;
         }
     }
     else if(command == "crafted")
@@ -372,13 +371,13 @@ int cmd_craft(string str)
         return 1;
     }
     else if(command == "delete")
-    {   
+    {
         if(sizeof(info) != 2) { return help(); }
         delete_item(TP,info[1]);
         return 1;
     }
-    else if(command == "help") 
-    {     
+    else if(command == "help")
+    {
         if(sizeof(info) == 2) { return help(info[1]); }
         return help();
         return 1;
@@ -387,9 +386,9 @@ int cmd_craft(string str)
     {
         if(sizeof(info) != 2) { return help(); }
         remake_item(TP, info[1]);
-        return 1;        
+        return 1;
     }
-    
+
     if(!check_able_to_craft(TP)) return;
     item_keys = keys(CRAFT_TO_CHECK);
     command = implode(info, " ");
@@ -400,18 +399,18 @@ int cmd_craft(string str)
         if(member_array(command, skill_keys) == -1) continue;
         else
         {
-            if(stringp(myskill)) previous_skill = myskill; 
+            if(stringp(myskill)) previous_skill = myskill;
             myskill = item_keys[x];
             continue;
         }
         continue;
-    }    
+    }
     if(stringp(previous_skill))
     {
         info -= ({command});
-        if(sscanf(implode(info, " "), "with %s", tmp) == 1) myskill = tmp;        
-        if(stringp(tmp)) myskill = tmp;        
-    }   
+        if(sscanf(implode(info, " "), "with %s", tmp) == 1) myskill = tmp;
+        if(stringp(tmp)) myskill = tmp;
+    }
     if(!stringp(myskill))
     {
         tell_object(TP, "Unable to find a valid crafting skill that would allow you to craft "+command+
@@ -422,14 +421,14 @@ int cmd_craft(string str)
     {
         tell_object(TP, "No such skill. Proper skills are: "+implode(keys(CRAFT_TO_CHECK)," "));
         return 1;
-    }    
+    }
     ob = new("/cmds/mortal/obj/genOb");
     ob->init_mapping();
-    ob->set_skill(myskill);        
+    ob->set_skill(myskill);
     ob->set_type(command);
     ob->set_prof((int)TP->query_skill("craft, "+myskill));
     TP->set_property("working", "crafting");
-    ob->move(TP);        
+    ob->move(TP);
     return 1;
 }
 

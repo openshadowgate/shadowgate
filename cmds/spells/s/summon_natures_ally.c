@@ -9,13 +9,13 @@ void defend(object caster);
 
 object mon;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_sphere("conjuration_summoning");
     set_description("This spell will allow the caster to summon an animal from the nearby surrounds.  It will react "
         "aggressively to anyone attempting to harm the caster.  It will fight to the death, and when the spell's time is up, "
-        "it will return to its business.  Such creatures can only be summoned within the wilderness they call home.");
+        "it will return to its business.  Such creatures can only be summoned within the wilderness they call home. If this creature looses you it will return to home, and you'll have to recast this spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
@@ -88,7 +88,7 @@ spell_effect(int prof) {
         spell_kill(mon, caster);
         tell_object(caster, "%^BOLD%^%^YELLOW%^...and it attacks you!");
     }
-    if (target != caster) 
+    if (target != caster)
     {
         // adding additional 5 minute minimum
         call_out("check", 1, ({ 0, ((2 + clevel + query_spell_level()) * ROUND_LENGTH) + 300, caster, foes }) );

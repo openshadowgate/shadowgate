@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
@@ -21,7 +21,10 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if(!FEATS_D->has_feat(ob,"spellmastery") && !FEATS_D->has_feat(ob,"expanded knowledge 1") && !ob->is_class("warlock"))
+    if(!FEATS_D->has_feat(ob,"spellmastery") &&
+       !ob->is_class("warlock") &&
+       !ob->is_class("psion") &&
+       !ob->is_class("psywarrior"))
     {
         dest_effect();
         return 0;
@@ -56,4 +59,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

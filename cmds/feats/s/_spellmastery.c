@@ -24,7 +24,7 @@ void create() {
     feat_type("premanent");
     feat_category("MagicDamage");
     feat_name("spellmastery");
-    feat_prereq("Not Warlock");
+    feat_prereq("Not warlock, Not psion, Not psywarriow");
     feat_desc("When selecting the SpellMastery feat, the character will be prompted to pick a spell that they are able to cast. From that point forward the character will be able to cast that spell at will at any time without needing components or memorization. Only spells of 1st and 2nd level may be picked for SpellMastery. If you have more than one class able to use the same spell, the power of the SpellMastery (as well as armor checks, etc) will be based upon the highest of these.
 
 %^BOLD%^N.B.%^RESET%^ Spellmastery is not connected to <master> in any way. It just allows you to cast the spell without memorization or component cost. You still have to know the spell to cast it, have it in your spellbook, mastered or in your spell list.");
@@ -32,7 +32,7 @@ void create() {
     permanent(1);
     allow_tripped(1);
     set_required_for(({"spell power","improved spell power","greater spell power","hardenedminions","magic arsenal"}));
-    set_replaces_feat("expanded knowledge 1"); 
+    set_replaces_feat("expanded knowledge 1");
 }
 
 int allow_shifted() { return 1; }
@@ -42,13 +42,16 @@ int prerequisites(object ob){
     int i;
     if(!objectp(ob)) { return 0; }
 
-    if(ob->is_class("warlock")){
+    if(ob->is_class("warlock")||
+       ob->is_class("psion")||
+       ob->is_class("psywarrior"))
+    {
         return 0;
     }
     classes = (string *)ob->query_classes();
-    for(i=0;i<sizeof(classes);i++) 
+    for(i=0;i<sizeof(classes);i++)
     {
-        file = DIR_CLASSES+"/"+classes[i]+".c";        
+        file = DIR_CLASSES+"/"+classes[i]+".c";
         if(file->caster_class()) { return ::prerequisites(ob); }
     }
     return 0;
@@ -72,10 +75,9 @@ void execute_feat() {
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     remove_feat(TO);
     return;
 }
-
