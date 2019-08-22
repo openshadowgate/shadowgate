@@ -1,6 +1,6 @@
 //
 //	Written by Melnmarn@ShadowGate on 23 feb 1995.
-//	
+//
 //  cleaned up per T to allow to all super users and fix the copied stuff *Styx* 12/5/04
 
 #include <std.h>
@@ -33,7 +33,7 @@ int cmd_passchange(string str) {
 ((string)TP->query_name() != "tristan"))
               return 0;
 */
-     if(!str) 
+     if(!str)
       	 return help();
      if(sscanf(str,"%s %s", name, pos) != 2)
       	 return help();
@@ -48,11 +48,11 @@ int cmd_passchange(string str) {
 	seteuid(getuid());
 //    	ob->set_level(lev);
     	seteuid(UID_USERSAVE);
-	ob->save_player();	
-    } else { 
+	ob->save_player();
+    } else {
 	write(sprintf("You have changed %s's password to %s",name,pos));
     seteuid(UID_ROOT);
-    salt = PWGEN->random_salt(43); //Make it better someone
+    salt = PWGEN->random_salt(43);
     set_password(crypt(pos,"$5$"+salt));
     seteuid(getuid());
     seteuid(UID_USERSAVE);
@@ -88,7 +88,7 @@ passwd
 /*
 int check_position(string str, int level){
     mapping valid_pos;
-	valid_pos = (([ 
+	valid_pos = (([
 	"god": 2000,
 	"arch": 1750,
 	"elder":1500,
@@ -101,7 +101,7 @@ int check_position(string str, int level){
 	"player": 20,
 	]));
 
-	if( member_array(str,keys(valid_pos)) == -1) 
+	if( member_array(str,keys(valid_pos)) == -1)
 		return notify_fail("'"+str+" is not a valid position!\n");
 	if(( str == "player" ) && ( level <= 20 )) return 1;
 	if( valid_pos[str] != level)
@@ -110,4 +110,3 @@ int check_position(string str, int level){
 	return 1;
 }
 */
-

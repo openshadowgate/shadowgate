@@ -17,7 +17,7 @@ int
 cmd_passwd() {
     string name;
 
-    if(!this_player() || !userp(this_player()) || 
+    if(!this_player() || !userp(this_player()) ||
       (this_player() != this_player(1)) ||
       (this_player() != previous_object())
     ) {
@@ -36,7 +36,7 @@ cmd_passwd() {
 	notify_fail("Cannot change password for Guest.\n");
 	return 0;
     }
-    write("Changing password for "+name+" on Nightmare\n");
+    write("Changing password for "+name+".\n");
     write("Old password:");
     input_to("oldpass", 1);
     return 1;
@@ -45,7 +45,7 @@ cmd_passwd() {
 nomask static int oldpass(string pass) {
     string password;
 
-    if (!pass) return 0;    
+    if (!pass) return 0;
     seteuid(UID_USERACCESS);
     password = (string) this_player()->query_password();
     seteuid(getuid());
@@ -57,8 +57,8 @@ nomask static int oldpass(string pass) {
 
 nomask static int newpass(string pass) {
     tmp = pass;
-    if (strlen(tmp)<5) {
-	write("Your new password must have more than 5 characters.\n");
+    if (strlen(tmp)<8) {
+	write("Your new password must have no less than 8 characters.\n");
 	return 0;
     }
     write("\nAgain:");
@@ -68,7 +68,7 @@ nomask static int newpass(string pass) {
 
 nomask static int npass2(string pass) {
     string salt;
-    
+
     if (pass != tmp) {
 	write("The passwords must match.\n");
 	return 0;
@@ -77,7 +77,7 @@ nomask static int npass2(string pass) {
 	write("You must do this with out being forced.\n");
 	return 0;
     }
-    salt = PWGEN->random_salt(43); //Make it better someone
+    salt = PWGEN->random_salt(43);
     pass = crypt(pass, "$5$"+salt);
     seteuid(UID_USERACCESS);
     this_player()->set_password(pass);
