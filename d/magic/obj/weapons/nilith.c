@@ -33,6 +33,7 @@ void create(){
 "%^BOLD%^%^BLACK%^es.%^RESET%^");
    set_value(0);
    set_hit((:TO,"hit_func":));
+   set_property("able to cast",1);
 }
 
 int hit_func(object targ){

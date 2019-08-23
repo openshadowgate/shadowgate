@@ -29,6 +29,7 @@ void create()
 "a circle of %^BOLD%^g%^RESET%^%^GREEN%^r%^BOLD%^a%^RESET%^%^GREEN%^s%^BOLD%^s%^RESET%^");
         set_value(0);
         set_hit((:TO,"hit_func":));
+        set_property("able to cast",1);
 }
 int hit_func(object targ){
         targ = ETO->query_current_attacker();
@@ -37,7 +38,7 @@ int hit_func(object targ){
         if(!random(10)) {
         tell_object(ETO,"%^GREEN%^V%^BOLD%^i%^RESET%^%^GREEN%^n%^BOLD%^e"+
 "%^RESET%^%^GREEN%^s from the staff %^BOLD%^g%^ORANGE%^r%^GREEN%^o%^ORANGE%^w "+
-"%^RESET%^%^GREEN%^and %^ORANGE%^l%^BOLD%^%^GREEN%^as%^RESET%^%^ORANGE%^h %^GREEN%^around"+ 
+"%^RESET%^%^GREEN%^and %^ORANGE%^l%^BOLD%^%^GREEN%^as%^RESET%^%^ORANGE%^h %^GREEN%^around"+
         "%^BOLD%^%^ORANGE%^ "+targ->QCN+"'s%^GREEN%^body and start to %^BOLD%^%^RED%^c"+
 "%^RESET%^%^RED%^rus%^BOLD%^h %^BOLD%^%^ORANGE%^"+targ->QP+"!%^RESET%^");
         tell_object(targ,"%^BOLD%^%^GREEN%^V%^RESET%^%^ORANGE%^in"+

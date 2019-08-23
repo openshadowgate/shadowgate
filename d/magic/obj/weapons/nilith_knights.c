@@ -19,6 +19,7 @@ CYTHERA
 	);
 	set_value(0);
 	set_hit((:TO,"hit_func":));
+    set_property("able to cast",1);
 }
 int hit_func(object targ){
   	targ = ETO->query_current_attacker();
