@@ -61,6 +61,8 @@
     "robe":(["file":COMMONFILE"clothing/robe","units":4]),\
     "shirt":(["file":COMMONFILE"clothing/shirt","units":3]),\
     "shoes":(["file":COMMONFILE"clothing/shoes","units":2]),\
+    "small sack":(["file":COMMONFILE"misc/ssack","units":2]),\
+    "large sack":(["file":COMMONFILE"misc/sack","units":6]),\
 ])
 
 #define JEWEL ([\

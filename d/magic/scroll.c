@@ -7,17 +7,17 @@
 //      Modified 8/2/97 by Vetri
 //      Sets spellname randomly from among all up to
 //        certain level spells
-//  added int safe argument to change description for newbie scrolls that 
+//  added int safe argument to change description for newbie scrolls that
 //	can't be transcribed  *Styx*  2/13/03
 // adjusting randomness of level cast at and adding chance of autodestruct from rough handling by non-magi *Styx* 12/28/03, last change 8/15/03
 //adding set_av_spell to set actual levels on scrolls without the randomness.  Circe 7/23/04
 // Moved the check for whether a character can see the name of the spell
 // from the body of the set_desc function, to a stand alone function:
 // query_readable_by(ETO, TP)_by(object env, object viewer) Lujke 18 May 2005
-// This is to allow this check to be called by other objects (eg scroll 
+// This is to allow this check to be called by other objects (eg scroll
 // satchel)
 /* added some code in lines 227-237 to prevent scrolls retaining the id for the previous spell name when the spell is changed. Lujke May 31/05 moved in 6/12/05 *Styx*
-*/
+ */
 // Made 'me' be the caster, and prevented the scroll from disappearing if the target was mispelled -Ares 3/6/06
 
 #include <std.h>
@@ -27,6 +27,11 @@ inherit OBJECT;
 
 string spell, *readpassed;
 mapping readfailed;
+
+/**
+ * @file
+ */
+
 
 int level, usable;
 void set_spell_name(string str);
@@ -53,69 +58,71 @@ void create(){
 }
 
 void init() {
-   ::init();
-   set_long((:TO, "long_desc":));
+    ::init();
+    set_long((:TO, "long_desc":));
 // here down in init() and the crumble is all my new version *Styx* 12/28/03
-   if (ETO == TP && interactive(TP)) {
-      if(wizardp(TP))
-        add_action("set_scroll", "set");
-      if(base_name(TO) == "/d/magic/safe_scroll" || base_name(TO) == "/d/magic/scribed_scroll" || base_name(TO) == "/d/magic/newbie_scroll") {
-	 add_action("use_scroll", "use");
-         return;
-      }
-      if(TP->is_class("mage") || avatarp(TP)) {
-         add_action("transcribe", "transcribe");
-         add_action("use_scroll", "use");
-         if(random(20) > TP->query_level()+15) call_out("crumble", 1, TP);
-	 return;
-      }
-      if(TP->is_class("thief") || TP->is_class("bard") || TP->is_class("sorcerer") || TP->is_class("warlock")) {
-         add_action("use_scroll", "use");
-         if(random(20) > TP->query_level()+10) call_out("crumble", 1, TP);
-	  return;
-      }
-      if(random(20) > TP->query_level()+5) call_out("crumble", 1, TP);
-   }
+    if (ETO == TP && interactive(TP)) {
+        if(wizardp(TP))
+            add_action("set_scroll", "set");
+        if(base_name(TO) == "/d/magic/safe_scroll" ||
+           base_name(TO) == "/d/magic/scribed_scroll" ||
+           base_name(TO) == "/d/magic/newbie_scroll") {
+            add_action("use_scroll", "use");
+            return;
+        }
+        if(TP->is_class("mage") || avatarp(TP)) {
+            add_action("transcribe", "transcribe");
+            add_action("use_scroll", "use");
+            if(random(20) > TP->query_level()+15) call_out("crumble", 1, TP);
+            return;
+        }
+        if(TP->is_class("thief") || TP->is_class("bard") || TP->is_class("sorcerer") || TP->is_class("warlock")) {
+            add_action("use_scroll", "use");
+            if(random(20) > TP->query_level()+10) call_out("crumble", 1, TP);
+            return;
+        }
+        if(random(20) > TP->query_level()+5) call_out("crumble", 1, TP);
+    }
 }
 
 string long_desc() {
-   string long;
-   if(!objectp(TP)) return("This is a scroll with some undecipherable writing on it.");
-   if(!query_readable_by(TP,TP)) return("This is a scroll with some undecipherable writing on it.");
-   if(base_name(TO) == "/d/magic/safe_scroll" || base_name(TO) == "/d/magic/scribed_scroll" || base_name(TO) == "/d/magic/newbie_scroll") {
-     long = "This is a magic scroll of "+spell+". You can <use> it directly in order to properly study and learn more about the effects of the spell.  However, it cannot be transcribed.";
-     if(query_is_newbie())
-       long += "\n%^BOLD%^%^WHITE%^This particular scroll can be used only by someone under newbie protection.%^RESET%^";
-     return long;
-   }
-   return("This is a magic scroll of "+spell+".  You can <transcribe> it into your spell book or <use> it directly.");
+    string long;
+    if(!objectp(TP)) return("This is a scroll with some undecipherable writing on it.");
+    if(!query_readable_by(TP,TP)) return("This is a scroll with some undecipherable writing on it.");
+    if(base_name(TO) == "/d/magic/safe_scroll" || base_name(TO) == "/d/magic/scribed_scroll" || base_name(TO) == "/d/magic/newbie_scroll") {
+        long = "This is a magic scroll of "+spell+". You can <use> it directly in order to properly study and learn more about the effects of the spell.  However, it cannot be transcribed.";
+        if(query_is_newbie())
+            long += "\n%^BOLD%^%^WHITE%^This particular scroll can be used only by someone under newbie protection.%^RESET%^";
+        return long;
+    }
+    return("This is a magic scroll of "+spell+".  You can <transcribe> it into your spell book or <use> it directly.");
 }
 
 string query_short() {
-   if(!objectp(TP)) return("a scroll");
-   if(!query_readable_by(TP,TP)) return("a scroll");
-   return("a scroll of "+spell+"");
+    if(!objectp(TP)) return("a scroll");
+    if(!query_readable_by(TP,TP)) return("a scroll");
+    return("a scroll of "+spell+"");
 }
 
 void crumble(object targ) {
-   if(!objectp(TO))  return;
-   if(targ->query_true_invis()) return;
-   tell_room(ETP, "The scroll crumbles to dust, perhaps from age or improper handling.");
+    if(!objectp(TO))  return;
+    if(targ->query_true_invis()) return;
+    tell_room(ETP, "The scroll crumbles to dust, perhaps from age or improper handling.");
 /* Stefano pointed out he's been warning people about the dangers of novices handling scrolls but also pointed out it could become a cheap form of hurting someone, so I need a trap on give and plant to make a chance of this there too somehow eventually although with only a random chance it would be pretty expensive compared to the damage and not especially reliable.
-*/
-   if(!random(20)) {
-     tell_room(environment(targ),"%^YELLOW%^As the scroll crumbles it explodes from the release of the magical energy, shocking "+targ->QCN+"!", targ);
-     if(!"/daemon/saving_d"->saving_throw(targ,"spell")) {
-         tell_object(targ,"%^YELLOW%^As the scroll crumbles it explodes from the release of the magic energy and you get a serious jolt!");
-         if(newbiep(targ)) targ->do_damage("torso",roll_dice(2,4));
-	   else targ->do_damage("torso",roll_dice(4,6));
-     }
-     else {
-         tell_object(targ,"%^YELLOW%^As the scroll crumbles it explodes from the release of the magic energy and you get a harmful jolt!");
-         targ->do_damage("torso",roll_dice(2,6));
-     }
-   }
-   remove();
+ */
+    if(!random(20)) {
+        tell_room(environment(targ),"%^YELLOW%^As the scroll crumbles it explodes from the release of the magical energy, shocking "+targ->QCN+"!", targ);
+        if(!"/daemon/saving_d"->saving_throw(targ,"spell")) {
+            tell_object(targ,"%^YELLOW%^As the scroll crumbles it explodes from the release of the magic energy and you get a serious jolt!");
+            if(newbiep(targ)) targ->do_damage("torso",roll_dice(2,4));
+            else targ->do_damage("torso",roll_dice(4,6));
+        }
+        else {
+            tell_object(targ,"%^YELLOW%^As the scroll crumbles it explodes from the release of the magic energy and you get a harmful jolt!");
+            targ->do_damage("torso",roll_dice(2,6));
+        }
+    }
+    remove();
 }
 
 void set_spell(int mylevel){
@@ -157,26 +164,26 @@ void set_scroll(string str){
 
 void set_spell_name(string str)
 {
-    
-  //////////////////////////////////////////////////////////////////////
-  //This section added by Lujke May 31/05 to prevent scrolls 
-  // retaining the name of their old spell when the spell name is changed. 
-  ///////////////////////////////////////////////////////////////////////
-    string * old_id_list, tmp;    
+
+    //////////////////////////////////////////////////////////////////////
+    //This section added by Lujke May 31/05 to prevent scrolls
+    // retaining the name of their old spell when the spell name is changed.
+    ///////////////////////////////////////////////////////////////////////
+    string * old_id_list, tmp;
     int x;
     old_id_list = query_id();
     old_id_list -= ({ spell,"" }) ;
     set_id(old_id_list);
-  // End of added section //
+    // End of added section //
     spell = str;
     if(sscanf(spell, "%s%d", tmp, x) == 2)
     {
-        tmp = tmp + consolidate_number(x); 
-        add_id(tmp);        
+        tmp = tmp + consolidate_number(x);
+        add_id(tmp);
     }
     add_id(spell);
     set_long("This is a magic scroll of "+spell+".  You can "+
-        "<transcribe> it into your spell book or <use> it directly.");
+             "<transcribe> it into your spell book or <use> it directly.");
     return 1;
 }
 
@@ -189,8 +196,8 @@ int transcribe(string str){
     //string class;
 // added checks for bound, unconscious, blind, & light level 12/27/02 *Styx*
     if(TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
-       TP->send_paralyzed_message("info",TP);
-       return 1;
+        TP->send_paralyzed_message("info",TP);
+        return 1;
     }
     if (TP->light_blind(0)) return notify_fail("You cannot see well enough to read this.\n");
     if(TP->query_blind()) return notify_fail("How could you transcribe something you can't see??\n");
@@ -225,48 +232,35 @@ int use_scroll(string str){
     if (!(sscanf(str,"%s on %s",what,targ)==2))
         if (!(sscanf(str,"%s at %s",what,targ)==2))
             if (!(sscanf(str,"%s to %s",what,targ)==2)) {
-                what = str;		
+                what = str;
             }
-	//Added by Saide so the user can just use 'me' as a target to use a scroll on 
+	//Added by Saide so the user can just use 'me' as a target to use a scroll on
 	//themselves - 3/18/2007 - comment out if someone thinks it shouldnt be this way.
     if(targ == "me") targ = TP->query_name();
     if (!present(what,TP)) return 0;
     if (present(what,TP) != TO) return 0;
     if (!TP->is_class("thief") && !TP->is_class("bard") && !TP->is_class("mage") && !TP->is_class("sorcerer") && !TP->is_class("warlock")) return 0;
 
-    if(TP->query_property("shapeshifted")) 
+    if(TP->query_property("shapeshifted"))
     {
         tell_object(TP,"You can't read scrolls while shapeshifted.");
         return 1;
     }
 
     if(TP->query_bound() || TP->query_paralyzed() || TP->query_unconscious()) {
-      TP->send_paralyzed_message("info",TP);
-      return 1;
+        TP->send_paralyzed_message("info",TP);
+        return 1;
     }
     if(TP->query_gagged()) {
-      tell_object(TP,"You can't properly use a scroll while gagged!");
-      return 1;
+        tell_object(TP,"You can't properly use a scroll while gagged!");
+        return 1;
     }
-    if(TP->query_blind()) {
-      tell_object(TP,"Um, you can't exactly make good use of a scroll you can't even see!");
-      return 1;
-    }
-// taking this out; scroll should be easier than casting a spell & leave thieves/bards/etc with an option even when transformed/etc. N, 11/15.
-/*    if(TP->query_property("raged") || TP->query_property("transformed")) {
-      tell_object(TP,"You can't think clearly enough to use a scroll!");
-      return 1;
-    } */
-    if(!query_readable_by(TP,TP)) return notify_fail("You can't understand that scroll!\n");
     if(!TP->is_class("mage") && !TP->is_class("bard") && !TP->is_class("thief") && !TP->is_class("sorcerer") && !TP->is_class("warlock"))
         return notify_fail("Only a mage, bard, sorcerer, warlock or thief could figure out how to use this scroll!\n");
-    if(query_is_newbie() && !newbiep(TP)){ // newbie stuff added for newbie only scrolls in Offestry ~Circe~ 6/6/07
-       tell_object(TP,"%^BOLD%^You have outgrown the use of this scroll!");
-       return 1;
+    if(query_is_newbie() && !newbiep(TP)){
+        tell_object(TP,"%^BOLD%^You have outgrown the use of this scroll!");
+        return 1;
     }
-
-// Making scrolls now fire based on reader spellcraft (magical ability), rather than how fancy the writing on the page is. N, 8/15.
-//    lev = level?level:random(40)+1;
     lev = (int)TP->query_skill("spellcraft");
     if(lev < 1) lev = 1;
 
@@ -302,15 +296,15 @@ int query_scroll_level(){
 }
 
 int do_back_fire(object myuser){
-   int skill, diff;
+    int skill, diff;
 
-   skill = myuser->query_skill("spellcraft");
-   diff = query_spell_level()*3;
-   if((skill+roll_dice(1,20)) <= diff){
-      tell_object(TP,"Your scroll backfires!");
-      return 1; //no backfire if check is passed
-   }
-   return 0;
+    skill = myuser->query_skill("spellcraft");
+    diff = query_spell_level()*3;
+    if((skill+roll_dice(1,20)) <= diff){
+        tell_object(TP,"Your scroll backfires!");
+        return 1; //no backfire if check is passed
+    }
+    return 0;
 }
 
 int query_value(){
@@ -319,41 +313,41 @@ int query_value(){
 }
 
 int query_usable() {return usable;}
-//Added by Saide to test to make sure the query_readable_by() function is working 
+//Added by Saide to test to make sure the query_readable_by() function is working
 //correctly - 3/18/2007
 void set_usable(int x) { usable = x; }
 
 int query_readable_by(object env, object viewer){
-  string viewername;
-  int skill, diff;
-  // returns 0 if the viewer should not be able to see what spell
-  // is on the scroll, nonzero if they should be able to see it
+    string viewername;
+    int skill, diff;
+    // returns 0 if the viewer should not be able to see what spell
+    // is on the scroll, nonzero if they should be able to see it
 
-  if(!userp(TP)) return 1;
-  viewername = (string)viewer->query_name();
-  if(!readpassed) readpassed = ({});
-  if(!readfailed) readfailed = ([]);
-  if(member_array(viewername,readpassed) != -1) return 1;
-  if(!mapp(readfailed)) return 0; // to make those broken scrolls unreadable from when readfailed was an array.
-  skill = viewer->query_skill("spellcraft");
-  if(readfailed[viewername]) {
-    if(skill <= readfailed[viewername]) return 0;
-    map_delete(readfailed,viewername);
-  }
-  diff = 7+(query_spell_level()*3);
-  if((skill+roll_dice(1,20)) >= diff) {
-    readpassed += ({viewername});
-    return 1;
-  }
-  readfailed[viewername] = skill;
-  return 0;
+    if(!userp(TP)) return 1;
+    viewername = (string)viewer->query_name();
+    if(!readpassed) readpassed = ({});
+    if(!readfailed) readfailed = ([]);
+    if(member_array(viewername,readpassed) != -1) return 1;
+    if(!mapp(readfailed)) return 0; // to make those broken scrolls unreadable from when readfailed was an array.
+    skill = viewer->query_skill("spellcraft");
+    if(readfailed[viewername]) {
+        if(skill <= readfailed[viewername]) return 0;
+        map_delete(readfailed,viewername);
+    }
+    diff = 7+(query_spell_level()*3);
+    if((skill+roll_dice(1,20)) >= diff) {
+        readpassed += ({viewername});
+        return 1;
+    }
+    readfailed[viewername] = skill;
+    return 0;
 }
 
 void set_passed(string charname) {
-  if(!readpassed) readpassed = ({});
-  if(!readfailed) readfailed = ([]);
-  if(member_array(charname,readpassed) == -1) readpassed += ({charname});
-  if(readfailed[charname]) map_delete(readfailed,charname);
+    if(!readpassed) readpassed = ({});
+    if(!readfailed) readfailed = ([]);
+    if(member_array(charname,readpassed) == -1) readpassed += ({charname});
+    if(readfailed[charname]) map_delete(readfailed,charname);
 }
 
 string * query_passed() { return readpassed; }
@@ -362,9 +356,9 @@ mapping query_failed() { return readfailed; }
 string query_scroll_spell() { return spell;}
 
 void set_is_newbie(int x){
-   is_newbie = x;
+    is_newbie = x;
 }
 
 int query_is_newbie(){
-   return is_newbie;
+    return is_newbie;
 }
