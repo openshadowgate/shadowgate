@@ -137,7 +137,11 @@ void set_av_spell(int mylevel){
     mylevel=mylevel<1?1:mylevel;
     whichspells = keys(
         filter_mapping(
-            MAGIC_D->query_index("mage"),
+            MAGIC_D->query_index("mage")+
+            MAGIC_D->query_index("cleric")+
+            MAGIC_D->query_index("druid")+
+            MAGIC_D->query_index("ranger")+
+            MAGIC_D->query_index("paladin"),
             (:$2==$3:),mylevel));
     num = random(sizeof(whichspells));
     str = whichspells[num];
@@ -189,30 +193,35 @@ void set_spell_name(string str)
 
 string query_spell_name() { return spell;}
 
-int transcribe(string str){
+int transcribe(string str)
+{
     object book;
     int prev;
     int after;
-    //string class;
-// added checks for bound, unconscious, blind, & light level 12/27/02 *Styx*
-    if(TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
-        TP->send_paralyzed_message("info",TP);
-        return 1;
-    }
-    if (TP->light_blind(0)) return notify_fail("You cannot see well enough to read this.\n");
-    if(TP->query_blind()) return notify_fail("How could you transcribe something you can't see??\n");
-
-    if (!stringp(str)) return notify_fail("Transcribe what?\n");
-    if (present(str,TP) != TO) return 0;
+    if (TP->light_blind(0))
+        return notify_fail("You cannot see well enough to read this.\n");
+    if(TP->query_blind())
+        return notify_fail("How could you transcribe something you can't see??\n");
+    if (!stringp(str))
+        return notify_fail("Transcribe what?\n");
+    if (present(str,TP) != TO)
+        return 0;
     if (!(TP->is_class("mage") || avatarp(TP)))
-        return notify_fail("You don't know how to copy magical spells.\n");
+        return notify_fail("You don't know how to copy arcane spells.\n");
     book = present("bookx",TP);
-    if (!book) {
+    if (!book)
+    {
         notify_fail("You don't have a spell book to transcribe the spell into!\n");
         return 0;
     }
-    if(book->query_owner() != TPQN) return notify_fail("You can only transcribe into your own book.\n");
-    if(!query_readable_by(TP,TP)) return notify_fail("You can't understand that scroll!\n");
+    if(member_array(spell,keys(MAGIC_D->query_index("mage")))==-1)
+    {
+        notify_fail("You can only transcribe aracne spells");
+    }
+    if(book->query_owner() != TPQN)
+        return notify_fail("You can only transcribe into your own book.\n");
+    if(!query_readable_by(TP,TP))
+        return notify_fail("You can't understand that scroll!\n");
 
     write("%^ORANGE%^You carefully transcribe "+spell+" into your spellbook.\n");
     book->set_spellbook(spell);
@@ -239,7 +248,6 @@ int use_scroll(string str){
     if(targ == "me") targ = TP->query_name();
     if (!present(what,TP)) return 0;
     if (present(what,TP) != TO) return 0;
-    if (!TP->is_class("thief") && !TP->is_class("bard") && !TP->is_class("mage") && !TP->is_class("sorcerer") && !TP->is_class("warlock")) return 0;
 
     if(TP->query_property("shapeshifted"))
     {
@@ -255,8 +263,6 @@ int use_scroll(string str){
         tell_object(TP,"You can't properly use a scroll while gagged!");
         return 1;
     }
-    if(!TP->is_class("mage") && !TP->is_class("bard") && !TP->is_class("thief") && !TP->is_class("sorcerer") && !TP->is_class("warlock"))
-        return notify_fail("Only a mage, bard, sorcerer, warlock or thief could figure out how to use this scroll!\n");
     if(query_is_newbie() && !newbiep(TP)){
         tell_object(TP,"%^BOLD%^You have outgrown the use of this scroll!");
         return 1;
@@ -273,7 +279,6 @@ int use_scroll(string str){
     ob = new("/cmds/spells/"+spell[0..0]+"/_"+replace_string(spell," ","_"));
     if (ob->query_target_required() && !targ)
         return notify_fail("You need to specify a target to use that spell!\n");
-
     TP->set_property("spell_casting",ob);
     ob->use_spell(TP, targ, lev);
     remove();
