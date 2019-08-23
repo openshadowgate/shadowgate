@@ -2,6 +2,7 @@
 #include <html_converter.h>
 #define HTML_OUT "/d/save/wholist.html"
 #define GEOMYIDAE_OUT "/d/save/wholist.gph"
+#define STATSLOG "/d/save/onlinestats.log"
 inherit DAEMON;
 
 /**
@@ -57,7 +58,7 @@ Online:
 
     write_file(HTML_OUT,html,1);
     write_file(GEOMYIDAE_OUT,gph,1);
-
+    write_file(STATSLOG,time()+" "+sizeof(peepnames)+"\n",0);
 }
 
 void create(){
