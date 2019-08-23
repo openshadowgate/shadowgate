@@ -31,7 +31,7 @@ mixed *distinct_array(mixed *arr) {
 }
 
 /**
- * Sums an array
+ * Sums array of integers
  *
  * @param *arr Array to sum
  * @param ele How many elements to sum. Defaults to 0.
