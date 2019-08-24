@@ -33,7 +33,7 @@ void create(){
     set_long((:TO,"long_desc":));
     set_short("a scroll");
     set_spell(1);
-    set_weight(2);
+    set_weight(1);
     set_value(10);
 }
 
