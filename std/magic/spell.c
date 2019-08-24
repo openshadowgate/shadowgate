@@ -1832,7 +1832,7 @@ void define_clevel()
     {
         clevel = caster->query_character_level();
         if(caster->query_property("raged"))
-            clevel = 4;
+            clevel += 6;
     }
     if((int)caster->query_property("empowered"))
         clevel += (int)caster->query_property("empowered");

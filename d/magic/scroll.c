@@ -1,25 +1,3 @@
-//      A Magic Scroll
-//      Thorn@Shadowgate
-//      12/1/94
-//      General Wizard Class Items
-//      scroll.c
-//
-//      Modified 8/2/97 by Vetri
-//      Sets spellname randomly from among all up to
-//        certain level spells
-//  added int safe argument to change description for newbie scrolls that
-//	can't be transcribed  *Styx*  2/13/03
-// adjusting randomness of level cast at and adding chance of autodestruct from rough handling by non-magi *Styx* 12/28/03, last change 8/15/03
-//adding set_av_spell to set actual levels on scrolls without the randomness.  Circe 7/23/04
-// Moved the check for whether a character can see the name of the spell
-// from the body of the set_desc function, to a stand alone function:
-// query_readable_by(ETO, TP)_by(object env, object viewer) Lujke 18 May 2005
-// This is to allow this check to be called by other objects (eg scroll
-// satchel)
-/* added some code in lines 227-237 to prevent scrolls retaining the id for the previous spell name when the spell is changed. Lujke May 31/05 moved in 6/12/05 *Styx*
- */
-// Made 'me' be the caster, and prevented the scroll from disappearing if the target was mispelled -Ares 3/6/06
-
 #include <std.h>
 #include <spellsbylevel.h>
 #include <daemons.h>
@@ -28,10 +6,12 @@ inherit OBJECT;
 string spell, *readpassed;
 mapping readfailed;
 
+#define SCRL_CLASSES ({"paladin","ranger","cleric","druid","mage"})
+
 /**
  * @file
+ * @brief Magic scroll
  */
-
 
 int level, usable;
 void set_spell_name(string str);
@@ -60,28 +40,13 @@ void create(){
 void init() {
     ::init();
     set_long((:TO, "long_desc":));
-// here down in init() and the crumble is all my new version *Styx* 12/28/03
     if (ETO == TP && interactive(TP)) {
         if(wizardp(TP))
             add_action("set_scroll", "set");
-        if(base_name(TO) == "/d/magic/safe_scroll" ||
-           base_name(TO) == "/d/magic/scribed_scroll" ||
-           base_name(TO) == "/d/magic/newbie_scroll") {
-            add_action("use_scroll", "use");
-            return;
-        }
         if(TP->is_class("mage") || avatarp(TP)) {
             add_action("transcribe", "transcribe");
-            add_action("use_scroll", "use");
-            if(random(20) > TP->query_level()+15) call_out("crumble", 1, TP);
-            return;
         }
-        if(TP->is_class("thief") || TP->is_class("bard") || TP->is_class("sorcerer") || TP->is_class("warlock")) {
-            add_action("use_scroll", "use");
-            if(random(20) > TP->query_level()+10) call_out("crumble", 1, TP);
-            return;
-        }
-        if(random(20) > TP->query_level()+5) call_out("crumble", 1, TP);
+        add_action("use_scroll", "use");
     }
 }
 
@@ -132,16 +97,16 @@ void set_spell(int mylevel){
 
 void set_av_spell(int mylevel){
     string *whichspells,str;
-    int num;
+    int num,i;
+    mapping allspells=([]);
     mylevel=mylevel>9?9:mylevel;
     mylevel=mylevel<1?1:mylevel;
-    whichspells = keys(
-        filter_mapping(
-            MAGIC_D->query_index("mage")+
-            MAGIC_D->query_index("cleric")+
-            MAGIC_D->query_index("druid")+
-            MAGIC_D->query_index("ranger")+
-            MAGIC_D->query_index("paladin"),
+    for (i = 0; i< sizeof(SCRL_CLASSES); i++)
+    {
+        allspells+=MAGIC_D->query_index(SCRL_CLASSES[i]);
+    }
+    whichspells = keys(filter_mapping(
+            allspells,
             (:$2==$3:),mylevel));
     num = random(sizeof(whichspells));
     str = whichspells[num];
@@ -206,8 +171,6 @@ int transcribe(string str)
         return notify_fail("Transcribe what?\n");
     if (present(str,TP) != TO)
         return 0;
-    if (!(TP->is_class("mage") || avatarp(TP)))
-        return notify_fail("You don't know how to copy arcane spells.\n");
     book = present("bookx",TP);
     if (!book)
     {
@@ -218,14 +181,10 @@ int transcribe(string str)
     {
         notify_fail("You can only transcribe aracne spells");
     }
-    if(book->query_owner() != TPQN)
-        return notify_fail("You can only transcribe into your own book.\n");
     if(!query_readable_by(TP,TP))
         return notify_fail("You can't understand that scroll!\n");
-
-    write("%^ORANGE%^You carefully transcribe "+spell+" into your spellbook.\n");
+    write("%^ORANGE%^You carefully file "+spell+" into your spellbook.\n");
     book->set_spellbook(spell);
-    write("You finish and the scroll suddenly disappears in a wisp of smoke!\n");
     TO->remove();
     return 1;
 }
@@ -286,14 +245,8 @@ int use_scroll(string str){
 }
 
 int query_spell_level(){
-    int ret;
-    object scroll;
-    string tmp = "/cmds/spells/"+spell[0..0]+"/_"+replace_string(spell," ","_");
-    scroll = to_object(tmp);
-    if(!objectp(scroll)) return 1;
-    ret = (int)scroll->query_spell_level("mage");
-    if(!ret) ret = 1;
-    return ret;
+    return min(map_array(SCRL_CLASSES,
+                         (:MAGIC_D->query_spell_level($1,spell):)));
 }
 
 int query_scroll_level(){
@@ -322,25 +275,38 @@ int query_usable() {return usable;}
 //correctly - 3/18/2007
 void set_usable(int x) { usable = x; }
 
-int query_readable_by(object env, object viewer){
+/**
+ * Whether reader should be able to see what spell is on the scroll
+ *
+ * @return 0 if the reader is not allowed to see
+ */
+int query_readable_by(object env, object viewer)
+{
     string viewername;
     int skill, diff;
     // returns 0 if the viewer should not be able to see what spell
     // is on the scroll, nonzero if they should be able to see it
 
-    if(!userp(TP)) return 1;
+    if(!userp(TP))
+        return 1;
     viewername = (string)viewer->query_name();
-    if(!readpassed) readpassed = ({});
-    if(!readfailed) readfailed = ([]);
-    if(member_array(viewername,readpassed) != -1) return 1;
-    if(!mapp(readfailed)) return 0; // to make those broken scrolls unreadable from when readfailed was an array.
+    if(!readpassed)
+        readpassed = ({});
+    if(!readfailed)
+        readfailed = ([]);
+    if(member_array(viewername,readpassed) != -1)
+        return 1;
+    if(!mapp(readfailed))
+        return 0;
     skill = viewer->query_skill("spellcraft");
-    if(readfailed[viewername]) {
-        if(skill <= readfailed[viewername]) return 0;
+    if(readfailed[viewername])
+    {
+        if(skill <= readfailed[viewername])
+            return 0;
         map_delete(readfailed,viewername);
     }
-    diff = 7+(query_spell_level()*3);
-    if((skill+roll_dice(1,20)) >= diff) {
+    if(TP->qeury_skill("spellcraft")>query_spell_level())
+    {
         readpassed += ({viewername});
         return 1;
     }
