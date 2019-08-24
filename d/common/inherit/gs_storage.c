@@ -4,7 +4,7 @@
 #include "/d/common/common.h"
 inherit "std/room";
 
-void create() 
+void create()
 {
     ::create();
     set_property("no teleport",1);
@@ -22,8 +22,8 @@ if(base_name(TO) == "/d/common/inherit/gs_storage") return;
 // to load in their children.
 if(!present("bookxxx"))                    new(CMISC"book")->move(TO);
 if(!present("bookxxx") && !random(3))      new(CMISC"book")->move(TO);
-if(!present("canvasxxx"))                    new(CMISC"canvas")->move(TO);
-if(!present("canvasxxx") && !random(3))      new(CMISC"canvas")->move(TO);
+if(!present("canvasxxx"))                  new(CMISC"canvas")->move(TO);
+if(!present("canvasxxx") && !random(3))    new(CMISC"canvas")->move(TO);
 if(!present("chest") && !random(3))        new(CMISC"chest")->move(TO);
 if(!present("schest") && !random(6))       new(CMISC"schest")->move(TO);
 if(!present("large sack"))                 new(CMISC"sack")->move(TO);
@@ -49,22 +49,26 @@ if(!present("lkchest") && !random(8))      new(CMISC"lkchest")->move(TO);
 if (!present("weapsheath 1"))              new(CSHEATH"sheath_randomizer")->move(TO);
 if (!present("weapsheath 2"))              new(CSHEATH"sheath_randomizer")->move(TO);
 if (!present("weapsheath 3"))              new(CSHEATH"sheath_randomizer")->move(TO);
-if (!present("small sheath"))		       new(CSHEATH"sheath_small")->move(TO);
-if (!present("medium sheath"))		       new(CSHEATH"sheath_medium")->move(TO);
-if (!present("medium holster"))		       new(CSHEATH"sheath_mbludgeon")->move(TO);
-if (!present("weapsheath 5") && !random(2))new(CSHEATH"sheath_randomizer")->move(TO);
-if(!present("deck")) 		               new("/d/shadow/obj/misc/deckofcards")->move(TO);
-if(!present("die")) 		               new("/d/shadow/obj/misc/die")->move(TO);
-if(!present("die 2")) 		               new("/d/shadow/obj/misc/die")->move(TO);
+if (!present("small sheath"))              new(CSHEATH"sheath_small")->move(TO);
+if (!present("medium sheath"))             new(CSHEATH"sheath_medium")->move(TO);
+if (!present("medium holster"))            new(CSHEATH"sheath_mbludgeon")->move(TO);
+if (!present("weapsheath 5") && !random(2)) new(CSHEATH"sheath_randomizer")->move(TO);
+if(!present("deck"))                       new("/d/shadow/obj/misc/deckofcards")->move(TO);
+if(!present("die"))                        new("/d/shadow/obj/misc/die")->move(TO);
+if(!present("die 2"))                      new("/d/shadow/obj/misc/die")->move(TO);
 if(!present("bandage"))                    new(CMISC"bandage")->move(TO);
 if(!present("eyepatch") && !random(3))     new(CMISC"eyepatch")->move(TO);
-if(!present("soap")) 		               new(CMISC"soap")->move(TO);
-if(!present("parchment")) 	               new("/d/tharis/obj/parchment")->move(TO);
-if(!present("parchment 2")) 	           new("/d/tharis/obj/parchment")->move(TO);
-while(!present("paper 6")) 	               new(CMISC"paper")->move(TO);
-if(!present("dark lantern")) 	           new(CMISC"darkbeacon")->move(TO);
-if(!present("shield strap")) 	           new(CSHEATH"shieldstrap")->move(TO);
-if(!present("dark oil")) 	               new(CMISC"darkoil")->move(TO);
+if(!present("soap"))                       new(CMISC"soap")->move(TO);
+if(!present("parchment"))                  new("/d/tharis/obj/parchment")->move(TO);
+if(!present("parchment 2"))                new("/d/tharis/obj/parchment")->move(TO);
+if(!present("parchment 3"))                new("/d/tharis/obj/parchment")->move(TO);
+if(!present("scroll"))                     new("/d/magic/safe_scroll")->move(TO);
+if(!present("scroll 2"))                   new("/d/magic/safe_scroll")->move(TO);
+if(!present("scroll 3") && !random(3))     new("/d/magic/safe_scroll")->move(TO);
+while(!present("paper 6"))                 new(CMISC"paper")->move(TO);
+if(!present("dark lantern"))               new(CMISC"darkbeacon")->move(TO);
+if(!present("shield strap"))               new(CSHEATH"shieldstrap")->move(TO);
+if(!present("dark oil"))                   new(CMISC"darkoil")->move(TO);
 if(!random(3)) {
         while(!present("dart 3")) new("/d/shadow/room/city/cguild/fighter/dart")->move(TO);
     }
