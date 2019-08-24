@@ -40,6 +40,7 @@ string typeSpell;
 mapping spells_memorized;
 mapping lost_spells, lost_spell_level;
 mapping spell_skills;
+mapping mastered;
 string *masteredspells;
 int *masterable;
 int mypp, mymax, myneeded;

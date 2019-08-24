@@ -7,6 +7,8 @@
  * @file
  */
 
+mapping CLASSMAP=(["mage":MAGEKNOWN]);
+
 int cmd_masterproto(string args)
 {
 
