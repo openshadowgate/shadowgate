@@ -12,7 +12,7 @@ int cmd_sneak(string str) {
    int percent, score;
    string *exit,path;
    object ob;
-   
+
    exit = ({});
     if (TP->query_bound() || TP->query_tripped() || TP->query_unconscious()) {
         TP->send_paralyzed_message("info",TP);
@@ -44,7 +44,7 @@ int cmd_sneak(string str) {
     return notify_fail("You are too occupied to do that right now!\n");
   }
 //     if(ob = present("TSR80",TP))        ob->internal_remove();
-   
+
 /*   if(!TP->is_ok_armour("thief")) {
       write("You cannot sneak while wearing all that armor!");
       return 0;
@@ -72,7 +72,7 @@ int cmd_sneak(string str) {
    }
    percent = 20;
    score = TP->query_skill("stealth") + roll_dice(1,20);
-   if((int)TP->query_property("chameleoned") > 0){ 
+   if((int)TP->query_property("chameleoned") > 0){
       score += (int)TP->query_property("chameleoned");
 //      tell_object(TP,"Chameleon skin bonus = "+(int)TP->query_property("chameleoned")+".");
    }
@@ -83,10 +83,10 @@ int cmd_sneak(string str) {
 //   if(sizeof(TP->query_armour("torso"))) score += TP->skill_armor_mod(TP->query_armour("torso"));
 //   if(sizeof(TP->query_armour("left foot"))) score += TP->skill_armor_mod(TP->query_armour("left foot"));
 //   if(sizeof(TP->query_armour("right foot"))) score += TP->skill_armor_mod(TP->query_armour("right foot"));
-   if(score >=percent) 
+   if(score >=percent)
    {
        if(!TP->query_hidden()) { TP->set_hidden(1); }
-   } 
+   }
    else {
       write("You attempt to move unnoticed into the next room.");
       move_me(str);
@@ -94,7 +94,7 @@ int cmd_sneak(string str) {
        if(TP->query_hidden()) { TP->set_hidden(0);}
       return 1;
    }
-   write("You attempt to move unnoticed into the next room.");              
+   write("You attempt to move unnoticed into the next room.");
    move_me(str);
    if(environment(TP)->query_light()>3) {
       write("It is too bright. You can't find shadows.");
@@ -111,23 +111,23 @@ int cmd_sneak(string str) {
    return 1;
 }
 
-void move_me(string str) 
+void move_me(string str)
 {
    string path;
    int prof, increment;
 
    prof = TP->query_skill("stealth") + roll_dice(1,20);
    //increment = 6- (prof/10);
-   if((int)TP->query_property("chameleoned") > 0){ 
+   if((int)TP->query_property("chameleoned") > 0){
       prof += (int)TP->query_property("chameleoned");
 //      tell_object(TP,"Chameleon skin bonus = "+(int)TP->query_property("chameleoned")+".");
    }
 
    path = ETP->query_exit(str);
-   if(catch(call_other(path,"???"))) 
-   { 
+   if(catch(call_other(path,"???")))
+   {
        tell_object(TP,"You remain where you are.");
-       return; 
+       return;
    }
 
    //increment = TRAVEL_PENALTY[path->query_travel()];
@@ -135,12 +135,12 @@ void move_me(string str)
 
    if(increment < 0) increment = 0;
 
-   if((string)ETP->query_pre_exit_function(str) == "GoThroughDoor" || !TP->query_invis()) 
+   if((string)ETP->query_pre_exit_function(str) == "GoThroughDoor" || !TP->query_invis())
    {
       TP->force_me(str);
       TP->increment_stamina(increment);
-   } 
-   else 
+   }
+   else
    {
       TP->increment_stamina(increment);
       ETP->add_tracks(TP,"left",str);
@@ -149,4 +149,25 @@ void move_me(string str)
       environment(TP)->perform_post_exit(str);
       environment(TP)->do_sneak_func();
    }
+}
+
+void help()
+{
+    write("
+%^CYAN%^NAME%^RESET%^
+
+sneak - attempt to sneak
+
+%^CYAN%^SYNTAX%^RESET%^
+
+sneak %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+With this you attempt to sneak to another room in specified %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^. Success of this command will depend on your %^MAGENTA%^stealth%^RESET%^ skill.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+stealth, hide_in_shadows, steal, pp, spy
+");
 }
