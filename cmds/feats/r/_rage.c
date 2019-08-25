@@ -14,7 +14,7 @@ void create() {
    feat_category("Rampage");
    feat_prereq("Barbarian");
    feat_syntax("rage");
-   feat_desc("This feat allows the barbarian to enter a fit of furious rage, boosting their strength, constitution, and will. The ability will last longer, and grow stronger, as the barbarian gains levels. Rage can be turned off by typing rage again. 
+   feat_desc("This feat allows the barbarian to enter a fit of furious rage, boosting their strength, constitution, and will. The ability will last longer, and grow stronger, as the barbarian gains levels. Rage can be turned off by typing rage again.
 
 %^BOLD%^N.B.%^RESET%^ Being enraged means that you are maddened uncontrollably. This is *not* a state in which you can calmly participate in a normal conversation, undertake delicate tasks, cast offensive spells, solve problems, or pretty much do anything other than shout obscenities andkill things. This power won't work in conjunction with wimilar magical effects, such as rally, transformation, rage, berserker and fell flight.
 
@@ -47,6 +47,7 @@ int cmd_rage(string str) {
       tell_object(TP,"Use rage on or rage off.");
       return 1;
    }
+
    feat = new(base_name(TO));
    feat->setup_feat(TP,str);
    return 1;
@@ -55,7 +56,7 @@ int cmd_rage(string str) {
 void execute_feat() {
    object *featobs;
    int i;
-   if(!objectp(caster)) 
+   if(!objectp(caster))
    {
       dest_effect();
       return;
@@ -121,13 +122,13 @@ void execute_feat() {
             call_out("rage_me",ROUND_LENGTH);
             return;
          }
-   }      
+   }
 }
 
 void rage_me()
 {
    string *mytempfeats=({});
-   if(!objectp(caster)) 
+   if(!objectp(caster))
    {
         dest_effect();
         return;
@@ -138,91 +139,46 @@ void rage_me()
    basemax = caster->query_max_hp();
    myFlag = sizeof(caster->query_classes());
    if(FEATS_D->usable_feat(caster,"mighty rage"))
-   {    
-        if(myFlag == 1)
-        { 
-            caster->set_property("rage bonus", 1);
-            caster->add_stat_bonus("strength",10);
-            caster->add_stat_bonus("constitution",10);
-            caster->add_saving_bonus("will",4);
-            caster->add_ac_bonus(-2);
-        }
-        else 
-        {
-            caster->set_property("rage bonus", 2);
-            caster->add_stat_bonus("strength",5);
-            caster->add_stat_bonus("constitution",5);
-            caster->add_saving_bonus("will",3);
-            caster->add_ac_bonus(-4);
-        }      
-        caster->use_stamina(roll_dice(1,6));
-      if(pointerp(caster->query_temporary_feats()))
-      {
-        if(member_array("regeneration",(string*)caster->query_temporary_feats()) == -1)
-        {
-            caster->add_temporary_feat("regeneration");
-            caster->set_property("rage feat tracker", 1);
-        }
-      }
+   {
+       caster->set_property("rage bonus", 1);
+       caster->add_stat_bonus("strength",8);
+       caster->add_stat_bonus("constitution",8);
+       caster->add_saving_bonus("will",4);
+       caster->add_ac_bonus(-2);
+       caster->use_stamina(roll_dice(1,6));
+       if(pointerp(caster->query_temporary_feats()))
+       {
+           if(member_array("regeneration",(string*)caster->query_temporary_feats()) == -1)
+           {
+               caster->add_temporary_feat("regeneration");
+               caster->set_property("rage feat tracker", 1);
+           }
+       }
    }
    else if(FEATS_D->usable_feat(caster,"greater rage"))
    {
-       if(myFlag == 1)
-       {
-            caster->set_property("rage bonus", 3);
-            caster->add_stat_bonus("strength",6);
-            caster->add_stat_bonus("constitution",6);
-            caster->add_saving_bonus("will",3);
-            caster->add_ac_bonus(-2);
-            //caster->add_attack_bonus(8);
-            //caster->add_damage_bonus(8);
-            caster->use_stamina(roll_dice(1,6));
-        }
-        else
-        {
-            caster->set_property("rage bonus", 4);
-            caster->add_stat_bonus("strength",3);
-            caster->add_stat_bonus("constitution",3);
-            caster->add_saving_bonus("will",2);
-            caster->add_ac_bonus(-4);
-        }
+       caster->set_property("rage bonus", 3);
+       caster->add_stat_bonus("strength",6);
+       caster->add_stat_bonus("constitution",6);
+       caster->add_saving_bonus("will",3);
+       caster->add_ac_bonus(-2);
+       caster->use_stamina(roll_dice(1,6));
    }
    else
    {
-        if(myFlag == 1)
-        {
-            caster->set_property("rage bonus", 5);
-            caster->add_stat_bonus("strength",4);
-            caster->add_stat_bonus("constitution",4);
-            caster->add_saving_bonus("will",2);
-            caster->add_ac_bonus(-2);
-            //caster->add_attack_bonus(4);
-            //caster->add_damage_bonus(4);
-            caster->use_stamina(roll_dice(1,6));
-        }
-        else
-        {
-            caster->set_property("rage bonus", 6);
-            caster->add_stat_bonus("strength",2);
-            caster->add_stat_bonus("constitution",2);
-            caster->add_saving_bonus("will",1);
-            caster->add_ac_bonus(-4);
-        }
+       caster->set_property("rage bonus", 5);
+       caster->add_stat_bonus("strength",4);
+       caster->add_stat_bonus("constitution",4);
+       caster->add_saving_bonus("will",2);
+       caster->add_ac_bonus(-2);
+       caster->use_stamina(roll_dice(1,6));
    }
-   
-   cooldown = duration/2;
 
+   cooldown = duration/2;
    if(FEATS_D->usable_feat(caster,"spirit warrior"))
    {
        cooldown/=3;
-       if(myFlag == 1)
-       {
-           caster->set_missChance(caster->query_missChance()+ 33);
-       }
-       else 
-       {
-           caster->set_missChance(caster->query_missChance()-33);
-       }      
+       caster->set_missChance(caster->query_missChance()+ 75);
    }
    if(caster->query_property("using rage"))
    {
@@ -238,11 +194,6 @@ void rage_me()
    call_out("check",ROUND_LENGTH);
    call_out("dest_effect",duration);
    caster->set_property("active_feats", ({TO}));
-   //Need to test whether or not the following works correctly - Octothorpe 1/31/16
-   /*if(!FEATS_D->usable_feat(caster,"persistent rage"))
-   {
-      call_out("dest_effect",duration);
-   }*/
    return;
 }
 
@@ -287,7 +238,7 @@ void check()
             break;
          case 99:
             break;
-            
+
       }
    }
    call_out("check",ROUND_LENGTH);
@@ -296,7 +247,7 @@ void check()
 void dest_effect()
 {
     remove_call_out("check");
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         ::dest_effect();
         remove_feat(TO);
@@ -312,11 +263,9 @@ void dest_effect()
         switch(BonusFlag)
         {
             case 1:
-                caster->add_stat_bonus("strength",-10);
-                caster->add_stat_bonus("constitution",-10);
+                caster->add_stat_bonus("strength",-8);
+                caster->add_stat_bonus("constitution",-8);
                 caster->add_saving_bonus("will",-4);
-                //caster->add_attack_bonus(-12);
-                //caster->add_damage_bonus(-12);
                 caster->add_ac_bonus(2);
                 break;
             case 2:
@@ -329,8 +278,6 @@ void dest_effect()
                 caster->add_stat_bonus("strength",-6);
                 caster->add_stat_bonus("constitution",-6);
                 caster->add_saving_bonus("will",-3);
-                //caster->add_attack_bonus(-8);
-                //caster->add_damage_bonus(-8);
                 caster->add_ac_bonus(2);
                 caster->use_stamina(50);
                 break;
@@ -350,18 +297,18 @@ void dest_effect()
                 caster->add_ac_bonus(2);
                 caster->use_stamina(35);
                 break;
-            case 6:            
+            case 6:
                 caster->add_stat_bonus("strength",-2);
                 caster->add_stat_bonus("constitution",-2);
                 caster->add_saving_bonus("will",-1);
                 caster->add_ac_bonus(4);
                 caster->use_stamina(35);
-                break;                        
+                break;
         }
 
         if(FEATS_D->usable_feat(caster,"spirit warrior"))
         {
-            caster->set_missChance(caster->query_missChance()-33);
+            caster->set_missChance(caster->query_missChance()-75);
         }
 
         basemax = caster->query_max_hp();
@@ -375,7 +322,7 @@ void dest_effect()
         {
             caster->remove_temporary_feat("regeneration");
             feattracker = 0;
-        }  
+        }
         caster->remove_property("raged");
         caster->remove_property_value("added short",({" %^RED%^(enraged)%^RESET%^"}));
         tell_object(caster,"%^RED%^The overwhelming feeling of rage slips away and you are left feeling utterly exhausted.%^RESET%^");
@@ -385,4 +332,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
