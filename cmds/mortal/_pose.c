@@ -17,7 +17,7 @@ int cmd_pose(string str) {
       TP->send_paralyzed_message("info",TP);
       return 1;
    }
-Taken out to allow posing while bound for RP ~Circe~ 10/3/03 
+Taken out to allow posing while bound for RP ~Circe~ 10/3/03
 */
    if (!str) {
       return notify_fail("You need to specify how you want to pose.\n");
@@ -43,7 +43,7 @@ Taken out to allow posing while bound for RP ~Circe~ 10/3/03
 	TP->set_posed(myclass);
 	TP->setenv("TITLE",(string)ADVANCE_D->get_new_title(TP));
   	tell_object(TP,"You are now posing as a "+myclass+"!");
-	tell_object(TP,"If you meant to set a pose for your adjective, don't use a myclass name");
+	tell_object(TP,"If you meant to set a pose for your adjective, don't use a class name name");
   	return 1;
    }
    if(str == "clear") {
