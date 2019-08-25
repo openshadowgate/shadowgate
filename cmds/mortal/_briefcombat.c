@@ -25,12 +25,11 @@ briefcombat - toggle briefcombat mode
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Toggles you between brief combat and verbose combat modes. In brief combat mode you get shorter combat descriptions. 
+Toggles you between brief combat and verbose combat modes. In brief combat mode you get shorter combat descriptions.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-look, lines, setenv, brief
+look, lines, set, brief
 "
   );
 }
-

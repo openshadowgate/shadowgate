@@ -16,7 +16,7 @@ int cmd_cls() {
 
     if((str = (string)this_player()->getenv("TERM")) != "ansi" &&
       str != "xterm" && str != "ansi-status") {
-	notify_fail("You do not have ansi set.  Try <help setenv>.\n");
+	notify_fail("You do not have ansi set.  Try <help set>.\n");
 	return 0;
     }
     message("prompt", CLS, this_player());
@@ -37,7 +37,6 @@ It sends ANSI sequence to your terminal so you must support it, and have your te
 
 %^CYAN%^%^SEE ALSO%^RESET%^
 
-setenv, terminal
-
+set
 ");
 }

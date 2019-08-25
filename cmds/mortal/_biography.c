@@ -262,7 +262,7 @@ There are optional arguments:
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-score, finger, flag, setenv
+score, finger, flag, set
 "
    );
    return 1;

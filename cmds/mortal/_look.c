@@ -353,7 +353,7 @@ There is a special object named sky you can look at and see various effects, dep
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-glance, peer, describe, setenv, terminal, brief
+glance, peer, describe, set, terminal, brief
 "
 );
     return 1;

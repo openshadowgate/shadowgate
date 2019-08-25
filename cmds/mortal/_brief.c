@@ -29,7 +29,7 @@ Toggles you between brief and verbose modes. In brief mode you get shorter room 
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-look, lines, setenv
+look, lines, set
 "
   );
 }
