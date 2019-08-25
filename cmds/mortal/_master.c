@@ -11,7 +11,7 @@ mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "sorcerer":SORCKNOWN,
                    "psion":PSIONKNOWN,
                    "psywarrior":PWKNOWN,
-                   "walock":WARLOCKKNOWN]);
+                   "warlock":WARLOCKKNOWN]);
 
 int cmd_master(string args)
 {
@@ -25,9 +25,14 @@ int cmd_master(string args)
         write("%^ORANGE%^Your currently posed class doesn't master.");
         return 1;
     }
+    if(args == "fix")
+    {
+        validate_mastered();
+        return 1;
+    }
     if(!args || args == "map")
     {
-        int mylvl = TP->query_class_level(myclass);
+        int mylvl = TP->query_prestige_level(myclass);
         mapping spell_index = MAGIC_D->query_index(myclass);
         int i;
         int bonuslimit = 0;
@@ -50,7 +55,7 @@ int cmd_master(string args)
         if(TP->usable_feat("greater spell knowledge"))
             bonuslimit+=3;
         write("%^CYAN%^You can learn "+bonuslimit+" spells above limit due to your spell knowledge feat.");
-        write("%^CYAN%^Type %^ORANGE%^<master bonus>%^CYAN%^ to see any bonus spells");
+        write("%^CYAN%^Type %^ORANGE%^<master bonus>%^CYAN%^ to see any bonus spells.");
         return 1;
     }
     if(args == "list")
@@ -59,19 +64,22 @@ int cmd_master(string args)
         string *myspells = TP->query_mastered_base()[myclass];
         string spell;
         mixed *spellist=allocate(9);
+        int mylvl = TP->query_prestige_level(myclass);
         int i;
 
-        foreach(spell in myspells)
-        {
-            spellist[spell_index[spell]-1]=(spellist[spell_index[spell]-1]?spellist[spell_index[spell]-1]:({}))
-                +({spell}); //If LHS is not emply check
-        }
+        if(sizeof(myspells))
+            foreach(spell in myspells)
+            {
+                spellist[spell_index[spell]-1]=(spellist[spell_index[spell]-1]?spellist[spell_index[spell]-1]:({}))
+                    +({spell}); //If LHS is not emply check
+            }
 
         write("%^CYAN%^You have mastered:");
 
         for (i = 0; i < 9; i++)
-            write("%^CYAN%^Level "+(i+1)+": %^RESET%^"+
-                  (spellist[i]?implode(spellist[i],", "):"none")); //Non empty check
+            if(CLASSMAP[myclass][mylvl][i])
+                write("%^CYAN%^Level "+(i+1)+": %^RESET%^"+
+                      (spellist[i]?implode(spellist[i],", "):"none")); //Non empty check
         write("%^CYAN%^Type %^ORANGE%^<master bonus>%^CYAN%^ to see any bonus spells");
         return 1;
     }
@@ -130,7 +138,7 @@ int cmd_master(string args)
     }
     {
         mapping spell_index = MAGIC_D->query_index(myclass);
-        int mylvl = TP->query_class_level(myclass);
+        int mylvl = TP->query_prestige_level(myclass);
         int bonuslimit = 0;
         int *knownperlevel = allocate(9);
         int i;
@@ -184,6 +192,26 @@ int cmd_master(string args)
     return 1;
 }
 
+void validate_mastered()
+{
+    string myclass;
+    string myspell;
+    mapping mymastered = TP->query_mastered_base();
+
+    if(sizeof(mymastered))
+        foreach(myclass in keys(mymastered))
+        {
+            string * spell_index = keys(MAGIC_D->query_index(myclass));
+            foreach(myspell in mymastered[myclass])
+            {
+                if(member_array(myspell,spell_index)==-1)
+                {
+                    tell_object(TP,"Wrong spell, removing: "+myspell);
+                    TP->remove_mastered(myclass,myspell);
+                }
+            }
+        }
+}
 
 void help()
 {
