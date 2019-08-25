@@ -496,12 +496,18 @@ void add_masterable(int adding) { // 42 to avoid array emptying
 string *query_mastered_spells(string theclass)
 {
     string myclass;
+    string *retarray;
     if(!stringp(theclass))
         myclass = TO->query_class();
     else
         myclass = theclass;
 
-    return query_mastered_base()[myclass]+query_mastered_bonus()[myclass];
+    retarray=({});
+    if(member_array(myclass,keys(query_mastered_base()))>-1)
+        retarray+=query_mastered_base()[myclass];
+    if(member_array(myclass,keys(query_mastered_bonus()))>-1)
+        retarray+=query_mastered_bonus()[myclass];
+    return retarray;
 }
 
 /**
@@ -519,7 +525,7 @@ mapping query_mastered_base()
     }
 
     tmp = mastered;
-    return tmp;
+    return tmp?tmp:([]);
 }
 
 /**
@@ -585,9 +591,7 @@ mapping query_mastered_bonus()
             tmp["warlock"]+=({ "hellfire shield","infernal rain" });
     }
 
-
-    return tmp;
-
+    return tmp?tmp:([]);
 }
 
 void add_mastered(string myclass,string addspell)
