@@ -600,6 +600,8 @@ void add_mastered(string myclass,string addspell)
     tmp = query_mastered_base();
     if(!addspell) return;
     if(!myclass) return;
+    if(!sizeof(tmp[myclass]))
+        tmp[myclass] = ({});
     if(member_array(addspell,tmp[myclass]) == -1)
         tmp[myclass]+=({addspell});
     mastered = tmp;

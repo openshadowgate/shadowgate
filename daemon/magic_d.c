@@ -46,7 +46,7 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     spell_name = replace_string(spell_name,"_"," ");
     if (!spell_name) return 0;
     if(FEATS_D->usable_feat(target, "supreme healer") && member_array(spell_name, supreme_healer_spells) != -1) { return 1; }
-    
+
     if(FEATS_D->usable_feat(target,"expanded knowledge 1")){
        myexp = target->query("expanded_knowledge_1");
        if(spell_name == myexp) { return 1; }
@@ -71,8 +71,8 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     x = target->query_guild_level(spell_type);
     if (x < 1) return 0;
 
-    if(spell_type == "psywarrior") return 1; 
-    if(spell_type == "assassin") return 1;    
+    if(spell_type == "psywarrior") return 1;
+    if(spell_type == "assassin") return 1;
     if(spell_type == "cleric" || spell_type == "mage" || spell_type == "psion" || spell_type == "druid") {
       switch (spell_level) {
         case 1: return 1; break;
@@ -290,7 +290,7 @@ mapping index_spells_for_player(object player, string myclass)
 }
 
 
-mixed query_random_spell(string myclass, int lev) 
+mixed query_random_spell(string myclass, int lev)
 {
 	string ctype, cspell, *rspell;
 	int x;
@@ -301,27 +301,30 @@ mixed query_random_spell(string myclass, int lev)
     if(myclass == "sorcerer") myclass = "mage";
     if(lev < 0) {   return keys(allSpells[myclass])[random(sizeof(keys(allSpells[myclass])))]; }
     switch (myclass)
-    { 
+    {
         case "ranger": case "paladin":
             if(lev > 4) lev = 4;
         case "bard": case "psywarrior":
             if(lev > 6) lev = 6;
-        case "psion": case "mage": case "cleric": case "sorcerer": case "druid": 
+        case "psion": case "mage": case "cleric": case "sorcerer": case "druid":
             if(lev > 9) lev = 9;
     }
     rspell = ({});
     for(x = 0;x < sizeof(keys(allSpells[myclass]));x++)
-    {	
+    {
         cspell = keys(allSpells[myclass])[x];
         if(allSpells[myclass][cspell] == lev) rspell += ({cspell});
         continue;
     }
     if(!pointerp(rspell) || !sizeof(rspell)) {  return keys(allSpells[myclass])[random(sizeof(keys(allSpells[myclass])))]; }
-    return rspell[random(sizeof(rspell))];	
+    return rspell[random(sizeof(rspell))];
 }
 
 mixed *query_index(string myclass){
-    return allSpells[myclass];
+    string theclass = myclass;
+    if (theclass == "sorcerer")
+        theclass = "mage";
+    return allSpells[theclass];
 }
 
 int query_spell_level(string myclass, string spell){
@@ -436,7 +439,7 @@ void elemental_opportunist(object caster, object target)
     max = (int)caster->query_class_level("monk");
     if(!max) return;
     if(roll_dice(1, 100) > (max+random(20))) return;
-    max = (max / 5) + 1;    
+    max = (max / 5) + 1;
     if(objectp(EO = present("monkeledevice99x", caster)))
     {
         if((int)EO->query_my_guardians() < max)
@@ -452,15 +455,15 @@ void elemental_opportunist(object caster, object target)
         EO->set_caster(caster);
         EO->move(caster);
         EO->add_guardian();
-        return;       
+        return;
     }
-    return;    
+    return;
 }
 
 /**
  * Converts spell filename to spell name
  */
-string spell_file_to_spell_name(string spellfile) 
+string spell_file_to_spell_name(string spellfile)
 {
     spellfile = replace_string(spellfile,"_","",1);
     spellfile = replace_string(spellfile,".c","",1);
@@ -478,5 +481,3 @@ string get_spell_file_name(string spell)
 	if(!file_exists(spell)) return "";
 	return spell;
 }
-
-

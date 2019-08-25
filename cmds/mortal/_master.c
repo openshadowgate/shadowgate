@@ -93,7 +93,11 @@ int cmd_master(string args)
     {
         string *myspells = TP->query_mastered_base()[myclass];
         mapping spell_index = MAGIC_D->query_index(myclass);
-        string *savail = keys(filter_mapping(spell_index,(:$2==$3:),slvl))-myspells;
+        string *savail;
+
+        savail=keys(filter_mapping(spell_index,(:$2==$3:),slvl));
+        if(sizeof(myspells))
+            savail-=myspells;
 
         write("%^CYAN%^Spells available to master at level "+slvl+":%^RESET%^");
         if(sizeof(savail))
@@ -147,17 +151,19 @@ int cmd_master(string args)
                 write("%^ORANGE%^The spell %^BOLD%^%^RED%^"+args+"%^RESET%^%^ORANGE%^ does not exist.%^RESET%^");
                 return 1;
             }
-            if(member_array(args,myspells)>-1)
-            {
-                write("%^ORANGE%^You already know %^BOLD%^%^RED%^"+args+"%^RESET%^%^ORANGE%^.%^RESET%^");
-                return 1;
-            }
+            if(sizeof(myspells))
+                if(member_array(args,myspells)>-1)
+                {
+                    write("%^ORANGE%^You already know %^BOLD%^%^RED%^"+args+"%^RESET%^%^ORANGE%^.%^RESET%^");
+                    return 1;
+                }
         }
 
-        foreach(sname in myspells)
-        {
-            knownperlevel[spell_index[sname]-1]+=1;
-        }
+        if(sizeof(myspells))
+            foreach(sname in myspells)
+            {
+                knownperlevel[spell_index[sname]-1]+=1;
+            }
 
         mylvl = mylvl>50?50:mylvl;
 
