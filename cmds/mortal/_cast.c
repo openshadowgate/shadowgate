@@ -98,52 +98,11 @@ int cmd_cast(string str)
     if((type == "paladin" || type == "antipaladin") && (align < 1 || align > 3))
         return notify_fail("You cannot use your paladin spells unless you are of a lawful alignment!\n");
 
-    if(type == "sorcerer") {
-        known = TP->query_mastered_spells();
-        if(member_array(str2,known) == -1) {
-            tell_object(TP,"You haven't mastered such a spell!");
-            return 1;
-        }
-    }
-
-    if(type == "psywarrior" || type == "psion") {
-        known = TP->query_mastered_spells();
-        if(FEATS_D->usable_feat(TP,"expanded knowledge 1")){
-           if(TP->query("expanded_knowledge_1")){
-              myexp1 = TP->query("expanded_knowledge_1");
-              myexp = replace_string(myexp1," ","_");
-              myexp = "/cmds/spells/"+myexp[0..0]+"/_"+myexp+".c";
-    	        if(!file_exists(myexp)){
-                 tell_object(TP,"Something seems to be wrong with your Expanded Knowledge 1 power.");
-              }else{
-                 known += ({ myexp1 });
-              }
-           }
-        }
-        if(FEATS_D->usable_feat(TP,"expanded knowledge 2")){
-           if(TP->query("expanded_knowledge_2")){
-              myexp2 = TP->query("expanded_knowledge_2");
-              myexp = replace_string(myexp2," ","_");
-              myexp = "/cmds/spells/"+myexp[0..0]+"/_"+myexp+".c";
-              if(!file_exists(myexp)){
-   	           tell_object(TP,"Something seems to be wrong with your Expanded Knowledge 2 power.");
-              }else{
-                 known += ({ myexp2 });
-              }
-           }
-        }
-        if(FEATS_D->usable_feat(TP,"expanded knowledge 3")){
-           if(TP->query("expanded_knowledge_3")){
-              myexp3 = TP->query("expanded_knowledge_3");
-              myexp = replace_string(myexp3," ","_");
-              myexp = "/cmds/spells/"+myexp[0..0]+"/_"+myexp+".c";
-              if(!file_exists(myexp)){
-                 tell_object(TP,"Something seems to be wrong with your Expanded Knowledge 3 power.");
-              }else{
-                 known += ({ myexp3 });
-              }
-           }
-        }
+    if(type == "sorcerer" ||
+       type == "psion" ||
+       type == "psywarrior")
+    {
+        known = TP->query_mastered_spells(type);
         if(member_array(str2,known) == -1) {
             tell_object(TP,"You haven't mastered such a power!");
             return 1;
