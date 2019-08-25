@@ -31,7 +31,7 @@ int cmd_master(string args)
         int mylvl = TP->query_prestige_level(myclass);
         mapping spell_index = MAGIC_D->query_index(myclass);
         int i;
-        int bonuslimit = 0;
+        int bonuslimit;
         int *spelllevels = allocate(9);
         string sname;
         string *myspells = TP->query_mastered_base()[myclass];
@@ -46,11 +46,12 @@ int cmd_master(string args)
         for(i = 0; i < 9;i++)
             if(CLASSMAP[myclass][mylvl][i])
                 write("%^CYAN%^Level "+(i+1)+": %^RESET%^"+spelllevels[i]+" of "+CLASSMAP[myclass][mylvl][i]);
-        if(TP->usable_feat("spell knowledge"))
+        if(FEATS_D->usable_feat(TP,"spell knowledge"))
             bonuslimit+=2;
-        if(TP->usable_feat("greater spell knowledge"))
+        if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
             bonuslimit+=3;
-        write("%^CYAN%^You can learn "+bonuslimit+" spells above limit due to your spell knowledge feat.");
+        if(bonuslimit)
+            write("%^CYAN%^You can learn "+bonuslimit+" spells above limit due to your spell knowledge feat.");
         write("%^CYAN%^Type %^ORANGE%^<master bonus>%^CYAN%^ to see any bonus spells.");
         return 1;
     }
@@ -173,9 +174,9 @@ int cmd_master(string args)
                 if(knownperlevel[i]>CLASSMAP[myclass][mylvl][i])
                     bonuslimit-=knownperlevel[i]-CLASSMAP[myclass][mylvl][i];
             }
-            if(TP->usable_feat("spell knowledge"))
+            if(FEATS_D->usable_feat(TP,"spell knowledge"))
                 bonuslimit+=2;
-            if(TP->usable_feat("greater spell knowledge"))
+            if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
                 bonuslimit+=3;
         }
 
