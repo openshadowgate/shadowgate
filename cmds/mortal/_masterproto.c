@@ -11,8 +11,11 @@ mapping CLASSMAP=(["mage":MAGEKNOWN]);
 
 int cmd_masterproto(string args)
 {
+    write("%^CYAN%^You are posing as a %^BOLD%^%^WHITE%^"+TP->query_class());
+    if(!str)
+    {
 
-
+    }
 }
 
 

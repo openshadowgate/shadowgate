@@ -529,6 +529,29 @@ string *query_mastered_spells()
     return mymastered;
 }
 
+mapping query_mastered()
+{
+    mapping tmp;
+
+    if(!sizeof(tmp) && sizeof(masteredspells))
+    {
+        tell_object(FPL("ilmarinen"),":"+identify(TO->query_class()));
+        tmp[TO->query_class()]=masteredspells;
+    }
+    else
+        tmp = mastered;
+
+    if(FEATS_D->usable_feat(TO,"gift of the shadows"))
+        tmp[TO->query("shadow_adept_base_class")]+=({"umbral sight","shield of shadows","shadow double","shadow nova"});
+
+    if(TO->is_class("hellfire warlock"))
+        tmp["warlock"]+=({"brimstone blast"});
+    if(FEATS_D->usable_feat(TO,"infernal practitioner"))
+        tmp["warlock"]+=({ "hellfire shield","infernal rain" });
+
+    return tmp;
+}
+
 string *query_base_mastered_spells() {
     if(!masteredspells) masteredspells = ({});
     return masteredspells;
