@@ -71,10 +71,10 @@ void init() {
     int i, masterflag;
     ::init();
     if (!owner)
-	{	
+	{
         set_owner();
 	}
-    if(stringp(owner)) 
+    if(stringp(owner))
 	{
         if (lower_case(owner) != owner)
 		{
@@ -87,12 +87,12 @@ void init() {
     add_action("offer","offer");
     add_action("mydesc","setdesc");
     add_action("report_spells","report");
-    add_action("remove_spell", "rmspell");    
+    add_action("remove_spell", "rmspell");
     if((string)TP->query_name() == owner) {
         mastered = ({});
         masterflag = 0;
-        if(sizeof(TP->query_mastered_spells())) {
-            mastered += (string)TP->query_mastered_spells();
+        if(sizeof(TP->query_mastered_spells("mage"))) {
+            mastered += (string)TP->query_mastered_spells("mage");
 
             for(i = 0;i < sizeof(mastered); i++) {
                 if(member_array(mastered[i],keys(spells)) == -1) {
@@ -176,7 +176,7 @@ int remove_spell(string spell) {
     if (!avatarp(TP))
         if(owner != ETO->query_name())
         {
-            write("You can't seem to figure out how to detach pages from this book."); 
+            write("You can't seem to figure out how to detach pages from this book.");
         }
     map_delete(spells, spell);
     return 1;
@@ -227,9 +227,9 @@ int look(string str) {
     }
 
     line();
-  if (avatarp(TP)) write( 
+  if (avatarp(TP)) write(
 @GARRETT
-  Avatar functions: 
+  Avatar functions:
   	addspell [spellname] - to add a specific spell
 	rmspell [spellname] - to remove a specific spell
 	addall - to add all mage spells to your master book for reference
@@ -269,7 +269,7 @@ int memorize_spell(string str) {
 // adding ability to do x number of the same spell *Styx* 6/6/06
     if(sscanf(str,"%s times %d",splnm, num) == 2 || sscanf(str, "%s times", splnm) == 1 )  {
 	str = splnm;
-    }	
+    }
     if(num < 0)
         return notify_fail("You must specify a positive number.  Syntax is <memorize spellname> or <memorize spellname times # > - use the numeric such as 2.\n");
     if (!sl = query_spellbook(str))
@@ -344,7 +344,7 @@ object obt;
 **************/
     if (temp > 0 && ((int)TP->can_memorize("mage",str) == MEM_OK)) {
 // don't wait until the end for all to go in mem. in case they bail from a long set
- 	if(num > 1 && !random(3)) { 
+ 	if(num > 1 && !random(3)) {
 	    play->set_memorized("mage",str, 1);
 	    num--;
 	}
@@ -492,9 +492,9 @@ int help(string str) {
 %^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
 
 %^BOLD%^%^RED%^A mage must have spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
-    
 
-    
+
+
     if (avatarp(TP)) {
         tell_object(TP, "Immortals can also:");
         tell_object(TP, "%^ORANGE%^<addspell SPELLNAME>%^RESET%^\n"
@@ -626,10 +626,9 @@ int mydesc(string str) {
    str2 = "/daemon/filters_d"->filter_colors(str);
    if(strsrch(str2,"book") == -1 &&  strsrch(str2,"Book") == -1 &&
       strsrch(str2,"tome") == -1 && strsrch(str2,"Tome") == -1 &&
-      strsrch(str2,"grimoire") == -1 && strsrch(str2,"Grimoire") == -1 
+      strsrch(str2,"grimoire") == -1 && strsrch(str2,"Grimoire") == -1
        ) TO->set_short(""+str+" book%^RESET%^");
    else TO->set_short(""+str+"%^RESET%^");
    tell_object(TP,"%^WHITE%^%^BOLD%^Your spellbook will now appear as:%^RESET%^ "+TO->query_short());
    return 1;
 }
-
