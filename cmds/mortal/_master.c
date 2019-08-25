@@ -13,7 +13,7 @@ mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "psywarrior":PWKNOWN,
                    "walock":WARLOCKKNOWN]);
 
-int cmd_masterproto(string args)
+int cmd_master(string args)
 {
     string myclass = TP->query_class();
     int slvl;

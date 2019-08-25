@@ -357,28 +357,11 @@ void obsolete_feat(object ob) {
                         remove_my_feat(ob,removing_feats[j],1);
                         if(removing_feats[j] == "archmage")
                         {
-                            tell_object(ob,"removing your spellmastery spell, please see an imm to get it added again.");
                             ob->delete("spellmastery_spell");
                         }
                         if(removing_feats[j] == "shadowdancer")
                         {
                             ob->InitInnate();
-                        }
-                        if(removing_feats[j] == "versatile arcanist")
-                        {
-                            if(ob->query("elementalist")) { ob->delete("elementalist"); }
-                            myspells = (string *)ob->query_mastered_spells();
-                            if(sizeof(myspells))
-                            {
-                                schoolspells = SCHOOLSPELLS;
-                                for(i=0;i<sizeof(myspells);i++)
-                                {
-                                    if(member_array(myspells[i],schoolspells) != -1)
-                                    {
-                                        ob->remove_mastered_spell(myspells[i]);
-                                    }
-                                }
-                            }
                         }
 
                         tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
