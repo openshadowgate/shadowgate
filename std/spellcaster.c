@@ -493,63 +493,123 @@ void add_masterable(int adding) { // 42 to avoid array emptying
     masterable += ({adding});
 }
 
-string *query_mastered_spells()
+string *query_mastered_spells(string theclass)
 {
-    string theschool,thediscipline,*schoolspells,*disciplinespells,*mymastered;
-    mapping spellsbyschool,powersbydiscipline;
+    string myclass;
+    if(!stringp(theclass))
+        myclass = TO->query_class();
+    else
+        myclass = theclass;
 
-    if(!masteredspells) masteredspells = ({});
-    mymastered = masteredspells;
-    if(TO->is_class("psion")) {
-      thediscipline = (string)TO->query_discipline();
-      if(stringp(thediscipline) && thediscipline != "") {
-        powersbydiscipline = DISCIPLINESPELLSBYDISCIPLINE;
-        disciplinespells = powersbydiscipline[thediscipline];
-        if(sizeof(disciplinespells)) mymastered += powersbydiscipline[thediscipline];
-      }
-    }
-    if(TO->is_class("warlock"))
-    {
-        mymastered += (({ "eldritch blast", "eldritch claws","summon companion","eldritch bow" }));
-        if((int)TO->query_class_level("warlock") > 1) mymastered += (({ "detect magic" }));
-        if((int)TO->query_class_level("warlock") > 4) mymastered += (({ "eldritch chain" }));
-        if((int)TO->query_class_level("warlock") > 10) mymastered += (({ "eldritch glaive" }));
-        if((int)TO->query_class_level("warlock") > 14) mymastered += (({ "eldritch burst" }));
-    }
-    if(TO->is_class("hellfire warlock"))
-        mymastered += (({ "brimstone blast" }));
-    if(FEATS_D->usable_feat(TO,"mind over matter"))
-        mymastered += (({ "true metabolism" }));
-    if(FEATS_D->usable_feat(TO,"mental fortress"))
-        mymastered += (({ "timeless body" }));
-    if(FEATS_D->usable_feat(TO,"gift of the shadows"))
-        mymastered += (({ "umbral sight","shield of shadows","shadow double","shadow nova" }));
-    if(FEATS_D->usable_feat(TO,"infernal practitioner"))
-        mymastered += (({ "hellfire shield","infernal rain" }));
-    return mymastered;
+    return query_mastered_base()[myclass]+query_mastered_bonus()[myclass];
 }
 
-mapping query_mastered()
+/**
+ * Spells player mastered without any feats.
+ */
+mapping query_mastered_base()
 {
-    mapping tmp;
+    mapping tmp = mastered;
 
+    //2019 conversion
     if(!sizeof(tmp) && sizeof(masteredspells))
     {
-        tell_object(FPL("ilmarinen"),":"+identify(TO->query_class()));
-        tmp[TO->query_class()]=masteredspells;
+        mastered = allocate_mapping(1);
+        mastered[TO->query_class()]=masteredspells+({});
     }
-    else
-        tmp = mastered;
 
-    if(FEATS_D->usable_feat(TO,"gift of the shadows"))
-        tmp[TO->query("shadow_adept_base_class")]+=({"umbral sight","shield of shadows","shadow double","shadow nova"});
+    tmp = mastered;
+    return tmp;
+}
 
-    if(TO->is_class("hellfire warlock"))
-        tmp["warlock"]+=({"brimstone blast"});
-    if(FEATS_D->usable_feat(TO,"infernal practitioner"))
-        tmp["warlock"]+=({ "hellfire shield","infernal rain" });
+/**
+ * Returns bonus spells
+ */
+mapping query_mastered_bonus()
+{
+    mapping tmp = ([]);
+
+
+    {
+        if(FEATS_D->usable_feat(TO,"gift of the shadows"))
+        {
+            string baseclass = TO->query("shadow_adept_base_class");
+            tmp[baseclass]=({"umbral sight","shield of shadows","shadow double","shadow nova"});
+        }
+    }
+
+    {
+        if(TO->is_class("psion"))
+        {
+            string mydis = (string)TO->query_discipline();
+            mapping powersbydiscipline = DISCIPLINESPELLSBYDISCIPLINE;
+            if(sizeof(powersbydiscipline[mydis]))
+                tmp["psion"] = powersbydiscipline[mydis];
+        }
+    }
+
+    {
+        string theclass = TO->is_class("psion")?"psion":"psywarrior";
+        if (TO->is_class(theclass) && !tmp[theclass])
+            tmp[theclass]=({});
+
+        if(FEATS_D->usable_feat(TO,"expanded knowledge 1"))
+            tmp[theclass] += ({ "expanded_knowledge_1" });
+        if(FEATS_D->usable_feat(TO,"expanded knowledge 2"))
+            tmp[theclass] += ({ "expanded_knowledge_2" });
+        if(FEATS_D->usable_feat(TO,"expanded knowledge 3"))
+            tmp[theclass] += ({ "expanded_knowledge_3" });
+    }
+
+    {
+        if(FEATS_D->usable_feat(TO,"mind over matter"))
+            tmp["psywarrior"] += (({ "true metabolism" }));
+        if(FEATS_D->usable_feat(TO,"mental fortress"))
+            tmp["psywarrior"] += (({ "timeless body" }));
+    }
+
+    {
+        if(TO->is_class("warlock"))
+        {
+            tmp["warlock"] = (({ "eldritch blast", "eldritch claws", "summon companion", "eldritch bow", "detect magic" }));
+            if((int)TO->query_class_level("warlock") > 4) tmp["warlock"] += (({ "eldritch chain" }));
+            if((int)TO->query_class_level("warlock") > 10) tmp["warlock"] += (({ "eldritch glaive" }));
+            if((int)TO->query_class_level("warlock") > 14) tmp["warlock"] += (({ "eldritch burst" }));
+        }
+    }
+
+    {
+        if(TO->is_class("hellfire warlock"))
+            tmp["warlock"]+=({"brimstone blast"});
+        if(FEATS_D->usable_feat(TO,"infernal practitioner"))
+            tmp["warlock"]+=({ "hellfire shield","infernal rain" });
+    }
+
 
     return tmp;
+
+}
+
+void add_mastered(string myclass,string addspell)
+{
+    mapping tmp;
+    tmp = query_mastered_base();
+    if(!addspell) return;
+    if(!myclass) return;
+    if(member_array(addspell,tmp[myclass]) == -1)
+        tmp[myclass]+=({addspell});
+    mastered = tmp;
+}
+
+void remove_mastered(string myclass,string remspell)
+{
+    mapping tmp;
+    tmp = query_mastered_base();
+    if(!remspell) return;
+    if(!myclass) return;
+    if(member_array(remspell,tmp[myclass]) != -1)
+        tmp[myclass]-=({remspell});
+    mastered = tmp;
 }
 
 string *query_base_mastered_spells() {
@@ -575,6 +635,7 @@ void remove_mastered_spell(string remspell) {
 void reset_mastered() {
     masteredspells = 0;
     masterable = 0;
+    mastered = ([]);
 }
 
 void prepare(string str, int temp, string myclass, int num) {
