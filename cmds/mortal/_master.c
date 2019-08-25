@@ -25,11 +25,7 @@ int cmd_master(string args)
         write("%^ORANGE%^Your currently posed class doesn't master.");
         return 1;
     }
-    if(args == "fix")
-    {
-        validate_mastered();
-        return 1;
-    }
+    validate_mastered();
     if(!args || args == "map")
     {
         int mylvl = TP->query_prestige_level(myclass);
