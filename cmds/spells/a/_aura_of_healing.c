@@ -2,7 +2,7 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_author("garrett");
@@ -20,15 +20,15 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
    string cast;
 
-   if (interactive(CASTER)) 
+   if (interactive(CASTER))
    {
         cast = "%^CYAN%^"+YOU+" starts to concentrate and chant a worshipful incantation to "+MINE+" deity!";
-   } 
-   else 
+   }
+   else
    {
         cast = "%^CYAN%^"+YOU+" starts to concentrate and chant a long worshipful incantation !";
    }
@@ -42,7 +42,7 @@ int preSpell() {
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     if(!objectp(caster)){
         dest_effect();
@@ -53,17 +53,17 @@ void spell_effect(int prof)
         "god surround you!%^RESET%^");
     caster->set_property("spelled", ({TO}) );
     spell_successful();
-    addSpellToCaster();    
-    place->addObjectToCombatCycle(TO,1);        
+    addSpellToCaster();
+    place->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",ROUND_LENGTH*clevel*5);
 }
 
-void execute_attack() 
+void execute_attack()
 {
     object *people;
     object dude;
     int i;
-    
+
     ::execute_attack();
     if(!objectp(caster)){
         dest_effect();
@@ -79,7 +79,7 @@ void execute_attack()
         if(sizeof(party))
             for(i=0;i<sizeof(party);i++)
             {
-                if(environment(party[i]) == environment(caster)) 
+                if(environment(party[i]) == environment(caster))
                     people += ({ party[i] });
             }
     }
@@ -96,14 +96,16 @@ void execute_attack()
             damage_targ(dude,dude->return_target_limb(),-sdamage/2,"positive energy");
         }
     }
-    place->addObjectToCombatCycle(TO,1);        
+    place->addObjectToCombatCycle(TO,1);
 }
 
-void dest_effect() 
-{       
-    if(objectp(caster)) 
-    { 
-        caster->remove_property("aura_of_healing"); 
+void dest_effect()
+{
+    if(objectp(caster))
+    {
+        caster->remove_property("aura_of_healing");
+        tell_object(caster, "%^CYAN%^You feel the magical aura of energy from your "+
+            "god subside!%^RESET%^");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
