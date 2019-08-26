@@ -58,7 +58,6 @@
 #define QP query_possessive()
 #define QO query_objective()
 #define QS query_subjective()
-#define QNPC "/d/npc/QNPC.c"
 
 #define ENV(A) environment(A)
 #define FPL(A) find_player(A)

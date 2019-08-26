@@ -213,9 +213,7 @@ int look(string str) {
     write("\n%^BOLD%^%^CYAN%^This is $&$"+owner+"$&$'s spell book.  Its pages include the following spells:\n");
   else
     write("\n%^BOLD%^%^CYAN%^You do not realize who this spell book belongs to.  Its pages include the following spells:\n");
-    line();
-    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 28) + arrange_string("Level", 8)+"Memorized");
-    line();
+    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 26) + arrange_string("Level", 6)+"Memory");
 
     if(gtype != "level") sort();
     else sort_two();
@@ -223,10 +221,8 @@ int look(string str) {
     for (x=0;x<sizeof(magic);x++) {
         if (!temp1 = ""+TP->query_memorized("mage",magic[x]))
             temp1 = ""+0;
-        write("%^CYAN%^%^BOLD%^"+arrange_string(magic[x], 30)+"%^RESET%^%^CYAN%^"+arrange_string(get_spell_level(magic[x]),15)+arrange_string(temp1,15));
+        write("%^CYAN%^%^BOLD%^"+arrange_string(magic[x], 28)+"%^RESET%^%^CYAN%^"+arrange_string(get_spell_level(magic[x]),6)+arrange_string(temp1,6));
     }
-
-    line();
   if (avatarp(TP)) write(
 @GARRETT
   Avatar functions:
