@@ -4,14 +4,13 @@
 
 #include <std.h>
 #include <priest.h>
-//#define DELAY 1200
 
 inherit SPELL;
 int counter;
 int flag;
 int mybonus, newhp;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("auspicious bolt");
@@ -27,7 +26,7 @@ void create()
     set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^BLUE%^%^Crossing your arms before you,"+
         " you begin to intone a quick prayer.");
@@ -37,27 +36,19 @@ string query_cast_string()
     return "display";
 }
 
-int preSpell() 
+int preSpell()
 {
-    if (target->query_property("luckbolted")) 
+    if (target->query_property("luckbolted"))
     {
-        tell_object(caster,"Your target is already blessed with the luck of Tymora.");
+        tell_object(caster,"Your target is already blessed with the fates.");
         return 0;
     }
-/*
-    if ((int)target->query_property("luckbolt time")+DELAY > time()) {
-        tell_object(caster,"Your target already has their fortune altered.");
-        return 0;
-    }
-*/
     return 1;
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
-    int clevel,mybonus;
-    clevel = CLEVEL;
     newhp = random(clevel)+1;
     mybonus = random(clevel/10)+1;
     if(target == caster)
@@ -83,21 +74,20 @@ void spell_effect(int prof)
     target->add_damage_bonus(mybonus);
     target->set_property("luckbolted",1);
     target->set_property("spelled", ({TO}) );
-//    target->set_property("luckbolt time",time());
     spell_successful();
     addSpellToCaster();
 }
 
 void execute_attack()
 {
-    if (!flag) 
+    if (!flag)
     {
         ::execute_attack();
         flag = 1;
         return;
     }
-    
-    if (!objectp(target)) 
+
+    if (!objectp(target))
     {
         dest_effect();
         return;
@@ -110,7 +100,7 @@ void execute_attack()
     target->add_attack_bonus(mybonus);
     target->add_damage_bonus(mybonus);
     counter++;
-    if (counter > clevel) 
+    if (counter > clevel)
     {
         dest_effect();
         return;
@@ -120,10 +110,10 @@ void execute_attack()
 
 void dest_effect()
 {
-    if (objectp(target)) 
+    if (objectp(target))
     {
         target->add_extra_hp(-1* newhp);
-        if ((int)target->query_extra_hp() < 0) 
+        if ((int)target->query_extra_hp() < 0)
         {
             target->add_extra_hp(-1 * (int)target->query_extra_hp());
         }
