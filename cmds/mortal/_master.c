@@ -52,7 +52,6 @@ int cmd_master(string args)
             bonuslimit+=3;
         if(bonuslimit)
             write("%^CYAN%^You can learn "+bonuslimit+" spells above limit due to your spell knowledge feat.");
-        write("%^CYAN%^Type %^ORANGE%^<master bonus>%^CYAN%^ to see any bonus spells.");
         return 1;
     }
     if(args == "list")
@@ -76,18 +75,18 @@ int cmd_master(string args)
         for (i = 0; i < 9; i++)
             if(CLASSMAP[myclass][mylvl][i])
                 write("%^CYAN%^Level "+(i+1)+": %^RESET%^"+
-                      (spellist[i]?implode(spellist[i],", "):"none")); //Non empty check
-        write("%^CYAN%^Type %^ORANGE%^<master bonus>%^CYAN%^ to see any bonus spells");
-        return 1;
-    }
-    if(args == "bonus")
-    {
-        string *bonusspells = TP->query_mastered_bonus()[myclass];
-        write("%^CYAN%^Additional spells you know:%^RESET%^");
-        if(sizeof(bonusspells))
-            write(implode(bonusspells,", "));
-        else
-            write("none");
+                      (spellist[i]?implode(sort_array(spellist[i],1),", "):"none")); //Non empty check
+
+        {
+            string *bonusspells = TP->query_mastered_bonus()[myclass];
+
+            if(sizeof(bonusspells))
+            {
+                write("%^CYAN%^Additional spells you know:%^RESET%^");
+                write(implode(sort_array(bonusspells,1),", "));
+            }
+        }
+
         return 1;
     }
     if(sscanf(args,"level %d",slvl) == 1)
@@ -102,7 +101,7 @@ int cmd_master(string args)
 
         write("%^CYAN%^Spells available to master at level "+slvl+":%^RESET%^");
         if(sizeof(savail))
-            write(implode(savail,", "));
+            write(implode(sort_array(savail,1),", "));
         else
             write("none");
         return 1;

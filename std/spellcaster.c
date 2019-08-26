@@ -560,11 +560,11 @@ mapping query_mastered_bonus()
             tmp[theclass]=({});
 
         if(FEATS_D->usable_feat(TO,"expanded knowledge 1"))
-            tmp[theclass] += ({ "expanded_knowledge_1" });
+            tmp[theclass] += ({ TO->query("expanded_knowledge_1") });
         if(FEATS_D->usable_feat(TO,"expanded knowledge 2"))
-            tmp[theclass] += ({ "expanded_knowledge_2" });
+            tmp[theclass] += ({ TO->query("expanded_knowledge_2") });
         if(FEATS_D->usable_feat(TO,"expanded knowledge 3"))
-            tmp[theclass] += ({ "expanded_knowledge_3" });
+            tmp[theclass] += ({ TO->query("expanded_knowledge_3") });
     }
 
     {
