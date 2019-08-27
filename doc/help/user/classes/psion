@@ -14,19 +14,19 @@
 
 Psions are those gifted with psionic powers. Many people are born with latent psionic powers and may experience things such as deja vu, but only the psion can tap into these powers and develop them to their fullest. Psions are highly intelligent people and run the gamut of alignments, from kind-hearted sorts who wish to help those less fortunate to cunning types who wish to bend others to their wills.
 
-Psions gain powers simply through growing and learning. A psion has only so much capability, being limited by what his mind can do, but that aptitude can seem almost boundless in some. Psions come from many walks of life and have often concentrated on learning different things, so no two psions are really ever alike.
+A psion's path in life is determined through his discipline. It defines selection of bonus spells and additional class skills psion learns:
+ %^CYAN%^Egoist: %^RESET%^athletics, perception
+ %^CYAN%^Kineticist: %^RESET%^dungeoneering, influence
+ %^CYAN%^Nomad: %^RESET%^endurance, survival
+ %^CYAN%^Seer: %^RESET%^influence, perception
+ %^CYAN%^Shaper: %^RESET%^influence, endurance
+ %^CYAN%^Telepath: %^RESET%^influence, perception
 
-Finally, a psion's path in life is determined through his discipline. Though psions all share some common abilities and powers, each psion feels himself drawn towards a particular type of psionics and is one of an egoist, a telepath, a seer, a shaper, a nomad, or a kineticist. There are certain powers manifested by the masters of each discipline that no other discipline can replicate. Each discipline also has some class skills that differ from the others. In addition to the class skills listed above, the specific class skills granted to each discipline are as follows:
-%^CYAN%^Egoist: %^RESET%^athletics, perception
-%^CYAN%^Kineticist: %^RESET%^dungeoneering, influence
-%^CYAN%^Nomad: %^RESET%^endurance, survival
-%^CYAN%^Seer: %^RESET%^influence, perception
-%^CYAN%^Shaper: %^RESET%^influence, endurance
-%^CYAN%^Telepath: %^RESET%^influence, perception
+Psions learn their powers with %^ORANGE%^<master>%^RESET%^ command. When they %^ORANGE%^<cast>%^RESET%^ power, they expend power points they prepared with %^ORANGE%^<prepare>%^RESET%^ command. To see how many power points you have prepared use %^ORANGE%^<recall psion spells>%^RESET%^. The amount of power points psion expends depends on the spell power.
 
-Given their innate understanding of magic, psions also lend towards 
-learning means to improve their art naturally. They gain one free magic 
-feat for every five levels in the class.
+Psions are nearly pure caster class, altough some of them learn to substitute their martial weakness with potent self-altering powers.
+
+Psions can't cast in any armor or while wielding, but they can learn to do it.
 
 %^RESET%^%^CYAN%^See also:%^RESET%^ feats, stats, skills, spells, cast, prepare, buff, master, disciplines, discipline roleplay, prestige classes
 

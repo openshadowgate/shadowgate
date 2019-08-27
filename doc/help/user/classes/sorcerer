@@ -14,9 +14,9 @@
 
 Sorcerers are masters of arcane magic, but in a completely different sense to mages. Where a wizard will study and call upon the weave by theory and ritual, sorcerers instead harness raw talent and instinct to produce such spell effects. A typical sorcerer turns to an adventurer'slife to prove and improve their command of the magical arts.  While the latent talent is inborn, part of their soul, the development of such skill becomes a quest in and of itself for many. Many sorcerers, both good and evil, come to consider themselves above other, lesser mortals due to their talents.
 
-Sorcerers prepare themselves by drawing upon their inner strength, but do not memorize spells as wizards do. Instead, they may cast spontaneously of any spells they know, until they are spent and must prepare themselves anew.  While sorcerers are far more capable of enduring lengthy combat, as they don't study their art, they lack the diversity of a mage and may only cast of a smaller number of known spells (see %^ORANGE%^<help master>%^RESET%^).
+Sorcerers are spontaneous caster that uses %^ORANGE%^<master>%^RESET%^ command to learn new spells. They %^ORANGE%^<cast>%^RESET%^ any of spell they learned by expending prepared with %^ORANGE%^<prepare>%^RESET%^ command spell slot. You can see how many slots per level you have prepared with %^ORANGE%^<recall sorcerer spells>%^RESET%^.
 
-Given their innate understanding of magic, sorcerers also lend towards learning means to improve their art naturally. They gain one free magic feat for every five levels in the class.
+Sorcerers can't cast in any armor and must not wield while doing so, they can learn to cast in light armor.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, master, prestige classes
 

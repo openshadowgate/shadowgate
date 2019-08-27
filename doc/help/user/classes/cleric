@@ -22,6 +22,8 @@ Clerics %^ORANGE%^<cast>%^RESET%^ their spells by preparing them with %^ORANGE%^
 
 Clerics of good and neutral alignments may also spontaneously cast any prepared spell as a healing spell of the same level. Neutral and evil clerics may do likewise, but cast such spells spontaneously as damaging equivalents instead. To learn how to do it refer to %^ORANGE%^<help cast>%^RESET%^.
 
+Clerics can pick a spell domain from list of their deity at any church to learn additional spells.
+
 Clerics are versatile, they can choose both melee and spellcasting paths. Clerics can cast in army armor, but they must not wield while doing so.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, domains, deities, prestige classes
