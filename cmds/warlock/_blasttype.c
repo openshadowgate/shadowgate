@@ -23,7 +23,7 @@ int cmd_blasttype(string str) {
    }
    spellname = str+" blast";
    masteredspells = ({});
-   masteredspells += TP->query_mastered_bonus()["warlock"];
+   masteredspells += TP->query_mastered_spells("warlock");
    if(!sizeof(masteredspells)) {
      tell_object(TP,"%^BOLD%^%^WHITE%^You don't know any essences!%^RESET%^");
      return 1;
