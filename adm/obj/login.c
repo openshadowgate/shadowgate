@@ -353,12 +353,12 @@ static void ansi_test(string str) {
         __Player->reset_terminal();
     }
     if (str =="N") {
-        message("logon", "\nANSI supported turned off.  Use 'setenv term "+
-                "ansi' to turn it on later in the game.\n",this_object());
+        message("logon", "\nANSI supported turned off.  Use <set term "+
+                "ansi> to turn it on later in the game.\n",this_object());
         __Player->setenv("TERM","default");
         __Player->reset_terminal();
     }
-    message("logon", "\nPlease choose character gender"+
+    message("logon", "\nPlease choose character sex"+
             " (male or female) : ", this_player());
     input_to("choose_gender");
     return;
@@ -367,8 +367,7 @@ static void ansi_test(string str) {
 
 static void choose_gender(string str) {
     if (str != "male" && str != "female") {
-        message("logon", "\nCute, but pretend to be "+
-                "either male or female instead.\n",
+        message("logon", "\nOnly female or male are available at this time.\n",
                 this_object());
         message("logon", "Gender: ", this_object());
         input_to("choose_gender");
@@ -377,7 +376,7 @@ static void choose_gender(string str) {
     __Player->set_gender(str);
     message("logon", sprintf("
 If you wish to be able to restore your password, enter your email in the
-form of user@host. You can later change this setting with chfn command.
+form of user@host. You can later change this setting with <chfn> command.
 Your email address:", mud_name()), this_object());
     input_to("enter_email");
 }
@@ -387,7 +386,7 @@ static void enter_email(string str) {
 
     if (!str || str == "" || sscanf(str, "%s@%s", a, b) != 2) {
         message("logon", "\nEmail must be in the "+
-                "form user@host.\nEmail: ",
+                "user@host form.\nEmail: ",
                 this_object());
         input_to("enter_email");
         return;
