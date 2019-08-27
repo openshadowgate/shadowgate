@@ -1,13 +1,13 @@
 //     _report.c
-//     Created by Firedragon on 12/21/96 
-//adapted by Circe 7/27/04 to show general information rather than 
+//     Created by Firedragon on 12/21/96
+//adapted by Circe 7/27/04 to show general information rather than
 //actual HP to aid in rp.  Messages taken from _con.c
 
 #include <std.h>
 
 inherit DAEMON;
- 
-int cmd_report() 
+
+int cmd_report()
 {
    int x;
    string check, sub;
@@ -37,8 +37,8 @@ int cmd_report()
       tell_room(ETP,""+check+"",TP);
       return 1;
 }
- 
-void help() 
+
+void help()
 {
     write("
 %^CYAN%^NAME%^RESET%^
@@ -51,6 +51,6 @@ This command will display human-readable message about state of your health poin
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-con, score, look, hp
+con, score, look, hp, show
 ");
 }

@@ -52,6 +52,7 @@ int cmd_master(string args)
             bonuslimit+=3;
         if(bonuslimit)
             write("%^CYAN%^You can learn "+bonuslimit+" spells above limit due to your spell knowledge feat.");
+
         return 1;
     }
     if(args == "list")
@@ -243,6 +244,6 @@ Once per nine hours you can forget already known spell with %^ORANGE%^<master fo
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-cast, prepare, buff, spellbook, classes, warlock, psion, sorcerer, psywarrior.
+recall, cast, prepare, buff, spellbook, classes, warlock, psion, sorcerer, psywarrior, prompt, ki
 ");
 }

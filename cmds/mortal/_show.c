@@ -7,7 +7,7 @@ inherit DAEMON;
 int cmd_show(string str){
 	string who, what;
 	object ob,person;
-	
+
 	if(!str) return 0;
 	sscanf(str,"%s to %s",what,who);
 	if(!who) return 0;
@@ -42,8 +42,8 @@ With this command you can show an %^ORANGE%^%^ULINE%^ITEM%^RESET%^ to %^ORANGE%^
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-look, glance, inventory
-"        
+look, glance, inventory, report
+"
 	);
 
 }

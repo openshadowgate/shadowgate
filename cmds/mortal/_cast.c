@@ -231,7 +231,6 @@ cast
 
 cast %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^
 cast cleric %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming
-cast mage %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as school spell
 
 %^CYAN%^DESCRIPTION%^RESET%^
 

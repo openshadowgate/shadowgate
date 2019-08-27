@@ -16,9 +16,13 @@
 
 Clerics are as diverse a class as the pantheon of the realm, united only in their service to their deity. They draw their powers from their god/dessand must serve that patron's cause, or they may lose those powers as they lose favor with the diety. They spend much of their time in prayer and meditation to gain their spells, and to attempt to discern what their god/dess expects of them. Their insight and use of their wisdom grows as they spend their lives learning to understand people and their god/dess' teachings, and apply them to day to day life and furthering their cause,which includes attempting to convert others to their faith.
 
-Wisdom is of the utmost importance to clerics and only those with the highest wisdom are going to be worthy to cast the highest level spells. It is also recommended that they have a decent constitution. Most are moderately capable in melee combat, but not so much as a trained warrior. Clerics also have the ability to try to turn undead.
+Wisdom is of the utmost importance to clerics and only those with the highest wisdom are going to be worthy to cast the highest level spells. It is also recommended that they have a decent constitution. Most are moderately capable in melee combat, but not so much as a trained warrior.
 
-Clerics of good and neutral alignments may also spontaneously cast any prepared spell as a healing spell of the same level. Neutral and evil clerics may do likewise, but cast such spells spontaneously as damaging equivalents instead.
+Clerics %^ORANGE%^<cast>%^RESET%^ their spells by preparing them with %^ORANGE%^<prepare>%^RESET%^ command. They can cast any spell from their spell list you can see with %^ORANGE%^<spells cleric>%^RESET%^ command. They expend prepared spell from memory you can see with %^ORANGE%^<recall cleric spells>%^RESET%^.
+
+Clerics of good and neutral alignments may also spontaneously cast any prepared spell as a healing spell of the same level. Neutral and evil clerics may do likewise, but cast such spells spontaneously as damaging equivalents instead. To learn how to do it refer to %^ORANGE%^<help cast>%^RESET%^.
+
+Clerics are versatile, they can choose both melee and spellcasting paths. Clerics can cast in army armor, but they must not wield while doing so.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, domains, deities, prestige classes
 

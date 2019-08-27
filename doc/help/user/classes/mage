@@ -16,11 +16,15 @@
    %^RESET%^L17: craft magical equipment
    %^RESET%^Also: one bonus spellcraft feat at L21, and every five class levels thereafter
 
-Mages are people who have devoted their lives to learning magic for the same reasons that motivate most people on a day-to-day basis: material gain, power, or merely the pure "fun" of the use of magic. They place no reliance on the power of faith for their craft, and their time spent learning magic takes away from any time they might spend learning fighting skills. They are very capable of learning, however, a diverse array of both defensive and offensive arcane spellcraft.
+Mages are people who have devoted their lives to learning magic for the same reasons that motivate most people on a day-to-day basis: material gain, power, or merely the pure "fun" of the use of magic. Mages are highly protective of the "art" and guard their knowledge jealously. They spend years studying and will expect apprentices to do the same. They will also be very careful to insure that magic doesn't fall into the "wrong" hands.
 
-Mages are highly protective of the "art" and guard their knowledge jealously. They spend years studying and will expect apprentices to do the same. They will also be very careful to insure that magic doesn't fall into the "wrong" hands.
+Mages are pure caster class and are quite complicated and hard to master.
 
-Mages are able to <master> one spell of each level for free as they gain greater skill, to supplement those spells they learn from scrolls.
+The spellbook is main instrument mage uses. A mage can %^ORANGE%^<transcribe>%^RESET%^ some of the found scrolls into spellbook. Then mage can %^ORANGE%^<prepare>%^RESET%^ that spell, and commit it into memory you can see with %^ORANGE%^<recall mage spells>%^RESET%^ command. When mage uses %^ORANGE%^<cast>%^RESET%^, she expends prepared spell. Varius abilities you learn, like scribe and enchant, expand spell number availabe to you to cast.
+
+Spellbook offers additional inerface to your spell, refer to %^ORANGE%^<help spelbook>%^RESET%^ when you hold it.
+
+Mages are able to %^ORANGE%^<master>%^RESET%^ one spell every two levels. Such spells are automatically added to your spellbook.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ prepare, feats, stats, skills, spells, cast, buff, mage schools, master, prestige classes
 
