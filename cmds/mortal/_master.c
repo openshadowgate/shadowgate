@@ -188,7 +188,7 @@ int cmd_master(string args)
         }
         else
         {
-            write("%^ORANGE%^You have exceeded your limit for level "+spell_index[sarg]+" spells!%^RESET%^");
+            write("%^ORANGE%^You have exceeded your limit for level "+(spell_index[args])+" spells!%^RESET%^");
         }
     }
     return 1;
