@@ -35,24 +35,24 @@ void spell_effect(int prof){
     duration = clevel/12;
     duration=roll_dice(1,duration);
     duration=duration<2?2:duration;
-    
+
     foes = all_living(place);
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);    
+    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     foes = target_filter(foes);
-    
+
     tell_room(place,"%^BOLD%^%^WHITE%^Suddenly, everyone starts to float up!%^RESET%^");
 
     indoors=(int)place->query_property("indoors");
 
     newfoes=foes;
-    
+
     foreach(foe in foes)
     {
         if(do_save(foe))
         {
             tell_object(foe,"%^RESET%^%^WHITE%^%^BOLD%^You manage to grab something and hold to the ground!%^RESET%^");
             tell_room(place,"%^RESET%^%^WHITE%^%^BOLD%^"+foe->QCN+"%^BOLD%^%^WHITE%^ manages to hold to the ground!%^RESET%^",({foe}));
-            newfoes-=({foe});            
+            newfoes-=({foe});
             continue;
         }
         if((int)foe->query_property("flying"))
@@ -65,13 +65,13 @@ void spell_effect(int prof){
         tell_object(foe,"%^BOLD%^%^WHITE%^You start to float uncontrollably!");
         tell_room(place,"%^RESET%^"+foe->QCN+" starts to float uncontrollably!",({foe}));
     }
-    
+
     if(indoors)
         foreach(foe in newfoes)
         {
             define_base_damage(0);
-            tell_object(foe,"%^RESET%%^%^WHITE%^You smash into the ceiling!%^RESET%^");
-            tell_room(place,"%^RESET%%^"+foe->QCN+" smashes into the ceiling!%^RESET%^");
+            tell_object(foe,"%^RESET%^%^WHITE%^You smash into the ceiling!%^RESET%^");
+            tell_room(place,"%^RESET%^"+foe->QCN+" smashes into the ceiling!%^RESET%^");
             damage_targ(foe,"torso",sdamage,"untyped");
         }
     else
@@ -98,4 +98,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
