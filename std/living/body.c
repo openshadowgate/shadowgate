@@ -95,12 +95,12 @@ int cause_damage_to(object vic, string limb, int damage);
 //  This function initializes the variables
 //  This should only be called when there is NO limb data yet
 
-mapping query_body() 
+mapping query_body()
 {
    return body;
 }
 
-void init_limb_data() 
+void init_limb_data()
 {
     int i;
 
@@ -116,7 +116,7 @@ void init_limb_data()
    if(!magic)
       magic = ([ "points":0, "max points":0 ]);
    ac_armour = ({});
-   
+
    if(!mapp(resistances) || !sizeof(keys(resistances)))
    {
        resistances = ([]);
@@ -161,6 +161,11 @@ void add_max_hp_bonus(int hp)
     max_hp_bonus += hp;
 }
 
+int query_max_hp_bonus()
+{
+    return max_hp_bonus;
+}
+
 void set_diety(string str) {
    player_data["general"]["diety"] = str;
 }
@@ -180,22 +185,22 @@ int query_extra_hp() {
 void set_hp(int hp)
 {
     if(!query_max_hp()) player_data["general"]["max_hp"] = hp;
-    if(hp > TO->query_max_hp()) 
+    if(hp > TO->query_max_hp())
     {
         if(TO->is_player()) player_data["general"]["hp"] = query_max_hp();
-        else 
+        else
         {
             player_data["general"]["max_hp"] = hp;
             player_data["general"]["hp"] = hp;
         }
-    } 
+    }
     else
     {
         player_data["general"]["hp"] = hp;
     }
 }
 
-void set_stoneSkinned(int i) 
+void set_stoneSkinned(int i)
 {
     int num;
     if(i<0) return;
@@ -226,7 +231,7 @@ int will_save(int save)
     return "/daemon/saving_throw_d.c"->will_save(TO,(save * -1));
 }
 
-void set_missChance(int i) 
+void set_missChance(int i)
 {
     int num;
     if(i<0) return;
@@ -245,7 +250,7 @@ int query_missChance() {
    return missChance;
 }
 
-void set_shieldMiss(int i) 
+void set_shieldMiss(int i)
 {
     int num;
     if(i<0) return;
@@ -258,13 +263,13 @@ void add_shieldMiss(int i)
     shieldMiss += i;
 }
 
-int query_shieldMiss() 
+int query_shieldMiss()
 {
     object shield,*equip;
     int i,chance,enchant;
 
-    if(TO->is_wearing_type("shield") || TO->is_wearing_type("thiefshield")) 
-    { 
+    if(TO->is_wearing_type("shield") || TO->is_wearing_type("thiefshield"))
+    {
         chance = (shieldMiss + EQ_D->gear_bonus(TO, "shieldMiss"));
         if(FEATS_D->usable_feat(TO,"deflection")) { chance += 15; } // +15% for deflection feat(might need tweaking)
         chance += (int)TO->query_property("shieldwall_bonus");
@@ -289,7 +294,7 @@ int query_shieldMiss()
     else { return 0; }
 }
 
-void add_hp(int x) 
+void add_hp(int x)
 {
    int num;
 
@@ -358,11 +363,11 @@ void set_overall_ac(int x) {
    monster_ac = x;
 }
 
-void set_ac(int x) 
+void set_ac(int x)
 {
-	if(userp(TO)) 
+	if(userp(TO))
 	{
-		log_file("armor_class_changes", "\n\nAC SET : " + 
+		log_file("armor_class_changes", "\n\nAC SET : " +
 		TO->query_name() + " : AC changed from "+
 		"(ac = "+ac+") to (new ac = "+x+") : set_ac() called by "+
 		identify(previous_object())+".");
@@ -436,16 +441,16 @@ int remove_limb(string limb_name) {
 }
 
 //  This function returns a random limb
-string return_limb() 
+string return_limb()
 {
     if(sizeof(fake_limbs)) { return fake_limbs[random(sizeof(fake_limbs))]; }
    return limbs[random(sizeof(limbs))];
 }
 
 //  This function returns a random limb
-string return_target_limb() 
+string return_target_limb()
 {
-   if(sizeof(limbs) < 1) 
+   if(sizeof(limbs) < 1)
    {
       tell_object(TO,"You have no limbs. Please get a body");
       return "body";
@@ -463,13 +468,13 @@ string return_real_limb()
    else return limbs[random(sizeof(limbs))];
 }
 
-string *query_limbs() 
+string *query_limbs()
 {
     if(sizeof(fake_limbs)) { return fake_limbs; }
    return limbs;
 }
 
-int query_is_limb(string limb) 
+int query_is_limb(string limb)
 {
     if(sizeof(fake_limbs))
     {
@@ -485,17 +490,17 @@ int query_true_max_hp()
     return player_data["general"]["max_hp"];
 }
 
-int query_max_hp() 
+int query_max_hp()
 {
     int num, lvladj, mypsi;
     string file, myrace, subrace;
 
     if(!objectp(TO))
         return 0;
-    if(!interactive(TO)) 
-    { 
+    if(!interactive(TO))
+    {
         num = player_data["general"]["max_hp"];
-        num = WORLD_EVENTS_D->monster_modification_event(num, "health", TO); 
+        num = WORLD_EVENTS_D->monster_modification_event(num, "health", TO);
         return num;
     }
 
@@ -505,14 +510,14 @@ int query_max_hp()
     if(FEATS_D->usable_feat(TO,"toughness"))
         num += ((int)TO->query_level())/2;
     if(FEATS_D->usable_feat(TO,"improved toughness"))
-        num += TO->query_level(); 
-    if(FEATS_D->usable_feat(TO,"psionic body")) 
+        num += TO->query_level();
+    if(FEATS_D->usable_feat(TO,"psionic body"))
     {
        mypsi = 0;
        mypsi += FEATS_D->calculate_psionic_feats(TO);
        if(mypsi < 1) mypsi = 1;
-       mypsi = mypsi*5; 
-       if(FEATS_D->usable_feat(TO,"battle psyche")) { mypsi = mypsi * 3; } 
+       mypsi = mypsi*5;
+       if(FEATS_D->usable_feat(TO,"battle psyche")) { mypsi = mypsi * 3; }
        num += mypsi;
     }
 
@@ -531,7 +536,7 @@ int query_max_hp()
         num = WORLD_EVENTS_D->monster_modification_event(num, "health", TO);
         return num;
     }
-    num += player_data["general"]["max_hp"];    
+    num += player_data["general"]["max_hp"];
     return num;
 }
 
@@ -626,7 +631,7 @@ int cause_typed_damage(object targ, string limb, int damage, string type)
 {
     object attacker;
     int amt;
-    if(!objectp(attacker = targ->query_property("beingDamagedBy"))) attacker = previous_object();    
+    if(!objectp(attacker = targ->query_property("beingDamagedBy"))) attacker = previous_object();
     damage = (int)COMBAT_D->typed_damage_modification(attacker, targ, limb, damage, type);
     return targ->cause_damage_to(targ,limb,damage);
 }
@@ -664,13 +669,13 @@ void query_base_damage_type()
 // end resistance stuff    //
 /////////////////////////////
 
-int cause_damage_to(object vic, string limb, int damage) 
+int cause_damage_to(object vic, string limb, int damage)
 {
     if(!objectp(vic)) { return 0; }
     return vic->do_damage(limb, damage);
 }
 
-int do_damage(string limb, int damage) 
+int do_damage(string limb, int damage)
 {
     object myspl, attacker;
     int i,num,layers,lvladj,mypsi, mod;
@@ -683,9 +688,9 @@ int do_damage(string limb, int damage)
     {
         if(member_array(limb,fake_limbs) == -1) { limb = TO->return_target_limb(); }
     }
-    else if(member_array(limb,limbs) < 0) 
-    { 
-        limb = TO->return_target_limb(); 
+    else if(member_array(limb,limbs) < 0)
+    {
+        limb = TO->return_target_limb();
         real_limb = limb;
     }
     else
@@ -693,40 +698,40 @@ int do_damage(string limb, int damage)
         real_limb = limb;
     }
 
-    /*if (damage > 0 && TO->isPkill()) 
+    /*if (damage > 0 && TO->isPkill())
     {
        damage = ((damage*PK_DAMAGE_PERCENTAGE)/100);
     }*/
 
     // added to stop doing damage in pkills when a player is at -100% health.  Should prevent
    // MOST accidental pkills -Ares 4/12/06
-    if(query_hp() < (-1 * query_max_hp() ) ) 
-    { 
+    if(query_hp() < (-1 * query_max_hp() ) )
+    {
         if(damage > 0) { damage = 0; } // stuck this here so they'll heal if they're knocked out below -100% -Ares
-    }  
+    }
     if(!objectp(attacker = TO->query_property("beingDamagedBy"))) attacker = previous_object();
     damage = (int)COMBAT_D->damage_adjustment(attacker, TO, damage);
-    
+
     TO->set_magic_attack(0); // needed to keep track of bypassing stoneskin for the typed damage function -Ares
     TO->set_spell_attack(0);
-    
-    if (query_property("memorizing") && (damage > 0) ) 
+
+    if (query_property("memorizing") && (damage > 0) )
     {
         remove_property("memorizing");
-        message("damage","%^BOLD%^%^GREEN%^Your foe interrupts your mental activity!",TO); 
+        message("damage","%^BOLD%^%^GREEN%^Your foe interrupts your mental activity!",TO);
     }
 
-    if(query_extra_hp() && damage > 0) 
+    if(query_extra_hp() && damage > 0)
     {
         add_extra_hp(-1 * damage);
         //if(query_extra_hp() < 0)    player_data["general"]["hp"] += query_extra_hp();
-        if(query_extra_hp() < 0) 
+        if(query_extra_hp() < 0)
         {
             player_data["general"]["hp"] += query_extra_hp();
             add_extra_hp(0-query_extra_hp());
         }
-    } 
-    else 
+    }
+    else
     {
         if(!intp(player_data["general"]["hp"])) { init_limb_data(); }
         player_data["general"]["hp"] -= damage;
@@ -746,7 +751,7 @@ int do_damage(string limb, int damage)
 
 //      if(FEATS_D->usable_feat(TO,"toughness")) { num += TO->query_level(); }
 //      Halving toughness effect since it's only a low-end feat. Nienne, 03/10
-        
+
         if(FEATS_D->usable_feat(TO,"toughness")) { num += ((int)TO->query_level())/2; }
         if(FEATS_D->usable_feat(TO,"improved toughness")) { num += TO->query_level(); }
         if(FEATS_D->usable_feat(TO,"psionic body")) {
@@ -765,7 +770,7 @@ int do_damage(string limb, int damage)
           lvladj = (int)file->level_adjustment(subrace);
           if(lvladj) num += (lvladj*8); // LA races should have a flat 8hp per LA as "beast" levels from monster manual
         }
-       
+
         num += player_data["general"]["max_hp"];
     }
     else
@@ -778,15 +783,15 @@ int do_damage(string limb, int damage)
     //if(player_data["general"]["max_hp"] < player_data["general"]["hp"])
     //   player_data["general"]["hp"] = player_data["general"]["max_hp"];
 
-    if (query_max_hp()) 
+    if (query_max_hp())
     {
         message("damage","%^BOLD%^%^RED%^Hp: %^RESET%^"+query_hp()+"    "+(query_hp()*100)/query_max_hp()+"%",TO);
-    } 
-    else 
-    { 
+    }
+    else
+    {
         message("damage","%^BOLD%^%^RED%^Hp: %^RESET%^"+query_hp()+"    ERROR! Contact a Wiz!",TO);
     }
-    if(TO->query_property("damage tester")) 
+    if(TO->query_property("damage tester"))
     {
         tell_object(TO, "%^BOLD%^%^RED%^You took "+damage+" damage and received melee DR of "+mod+".");
     }
@@ -797,14 +802,14 @@ int do_damage(string limb, int damage)
 
 int query_base_ac() { return ac; }
 
-int query_ac() 
+int query_ac()
 {
     int myac, raceac,shifted_ac, myLev;
     string myfile, myrace, mysubrace;
     object shape;
 
     if(!userp(TO) && !TO->query_property("full ac"))
-        return monster_ac; 
+        return monster_ac;
     myac = (ac_bonus + EQ_D->gear_bonus(TO, "armor bonus"));
     if(FEATS_D->usable_feat(TO,"unarmored defense") && TO->is_ok_armour("barb"))
         myac += 6;
@@ -812,7 +817,7 @@ int query_ac()
         myac += (int)"/daemon/bonus_d.c"->query_stat_bonus(TO, "wisdom");
    if(FEATS_D->usable_feat(TO,"indomitable"))
        myac += 2;
-   if(FEATS_D->usable_feat(TO,"mobility") && !TO->query_paralyzed() && 
+   if(FEATS_D->usable_feat(TO,"mobility") && !TO->query_paralyzed() &&
       !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief"))
        myac += 4;
    if(!userp(TO))
@@ -840,7 +845,7 @@ int query_ac_bonus() {
    if(FEATS_D->usable_feat(TO,"indomitable")) myac += 2;
    if(FEATS_D->usable_feat(TO,"mobility") &&
       !TO->query_paralyzed() &&
-      !TO->query_tripped() && 
+      !TO->query_tripped() &&
       !TO->query_bound() &&
       TO->is_ok_armour("thief"))
        myac += 4;
@@ -859,23 +864,23 @@ void reset_ac_bonus() {
    ac_bonus = 0;
 }
 
-//Function to Apply/Remove bonuses to items - things such 
+//Function to Apply/Remove bonuses to items - things such
 //as attack/damage/light, etc.  On wear/unwear/wield/unwield
-//and possibly when a static object - such as an orb - 
+//and possibly when a static object - such as an orb -
 //is moved. - Saide
 //                      item           player
 void ApplyObjectBonuses(object ob, object targ, string which, string type)
-{ 
+{
     mapping info;
     string bonus_name, bonus_extra,*items=({}), *bskills;
 	mixed prop;
 	int cur_bonus = 0, x,i,num=0;
 	if(!objectp(ob)) return;
 	if(!objectp(targ)) return;
-	if(type == "wield" && !ob->is_weapon()) return;	
+	if(type == "wield" && !ob->is_weapon()) return;
 	if(type == "wear" && !ob->is_armor()) return;
 	if((type == "move" && ob->is_weapon()) || (type == "move" && ob->is_armor())) return;
-	if((type == "move" && !ob->is_weapon()) || (type == "move" && !ob->is_armor())) 
+	if((type == "move" && !ob->is_weapon()) || (type == "move" && !ob->is_armor()))
 	{
 		if(!ob->query_property("inanimate_bonus")) return;
 	}
@@ -889,7 +894,7 @@ void ApplyObjectBonuses(object ob, object targ, string which, string type)
 		prop = ob->query_property(bonus_name);
 		if(!prop) continue;
 		if(bonus_name == "skill bonus")
-		{		
+		{
 			if(!mapp(prop)) continue;
 			bskills = keys(prop);
 			for(i = 0; i < sizeof(bskills);i++)
@@ -910,13 +915,13 @@ void ApplyObjectBonuses(object ob, object targ, string which, string type)
 		}
 		if(!intp(cur_bonus)) continue;
 	    	if(which == "remove") cur_bonus = 0 - cur_bonus;
-		if(bonus_name == "attack bonus") 
+		if(bonus_name == "attack bonus")
 		{
             	targ->add_attack_bonus(cur_bonus);
 			continue;
 		}
 		if(bonus_name == "damage bonus")
-		{            
+		{
 			targ->add_damage_bonus(cur_bonus);
 			continue;
 		}
@@ -925,9 +930,9 @@ void ApplyObjectBonuses(object ob, object targ, string which, string type)
 			targ->add_sight_bonus(cur_bonus);
 			continue;
 		}
-		//making set_property("skill bonus") on items 
-		//to function as a mapping - and moving this up - 
-		//this way we can have objects that might 
+		//making set_property("skill bonus") on items
+		//to function as a mapping - and moving this up -
+		//this way we can have objects that might
 		//give 2 or 3 skill bonuses - Saide
 		/*if(bonus_name == "skill bonus")
 		{
@@ -947,15 +952,15 @@ void ApplyObjectBonuses(object ob, object targ, string which, string type)
 			targ->set_property(bonus_name, cur_bonus);
 			continue;
 		}
-		
+
 	}
 	return;
-		
+
 }
 //END OF BONUS APPLYING FUNCTION
 
 
-string equip_weapon_to_limb(object weap, string limb1, string limb2) 
+string equip_weapon_to_limb(object weap, string limb1, string limb2)
 {
    if(member_array(limb1, limbs) == -1)
       return "You have no "+limb1+"!\n";
@@ -987,7 +992,7 @@ string equip_weapon_to_limb(object weap, string limb1, string limb2)
    return 0;
 }
 
-int remove_weapon_from_limb(object ob) 
+int remove_weapon_from_limb(object ob)
 {
    int i;
    string *ind;
@@ -1008,7 +1013,7 @@ int remove_weapon_from_limb(object ob)
    return 1;
 }
 
-string size_ok(string type, object arm) 
+string size_ok(string type, object arm)
 {
    if(!userp(TO)) {
       arm->set_size(TO->query_size());
@@ -1112,7 +1117,7 @@ string stack_ok(string type, string limb) { //new function to moderate 3.5 style
      }
    }
    return 0;
-} 
+}
 
 string equip_armour_to_limb(object arm, string *limb) {
    int i, j, flag;
@@ -1137,7 +1142,7 @@ string equip_armour_to_limb(object arm, string *limb) {
       return "NO";
    body[limb[0]]["armour"] += ({type});
    body[limb[0]]["armour_ob"] += ({ arm});
-	if(userp(TO)) 
+	if(userp(TO))
 	{
 		log_file("armor_class_changes", "\n\nAC Change : " + TO->query_name() +" "+
 		"gained AC from "+identify(arm) + " - Ac went from ("+
@@ -1174,7 +1179,7 @@ int remove_armour_from_limb(object arm, string *limb) {
    }
 */
 
-	if(userp(TO)) 
+	if(userp(TO))
 	{
 		log_file("armor_class_changes", "\n\nAC Change : " + TO->query_name() +" "+
 		"lost AC from "+identify(arm) + " - Ac went from ("+
@@ -1253,14 +1258,14 @@ mixed is_wielding(string type)
 {
     object *weapons;
     int i;
-    
+
     weapons = TO->query_wielded();
     if(type == "unarmed" && !sizeof(weapons)) { return 1; }
     if(!sizeof(weapons)) { return 0; }
-    
+
     switch(type)
     {
-        case "dual wielding": 
+        case "dual wielding":
             if(sizeof(weapons) < 2) { return 0; }
             if(weapons[0] == weapons[1] || !weapons[0]->is_weapon() || !weapons[1]->is_weapon()) { return 0; }
             return 1;
@@ -1276,9 +1281,9 @@ mixed is_wielding(string type)
                 if(weapons[i]->is_lrweapon()) { return 1; }
             }
             return 0;
-        case "one handed":                        
+        case "one handed":
             if(sizeof(weapons == 1) && (weapons[0]->query_size() <= TO->query_size())) { return 1; }
-            return 0;            
+            return 0;
         case "size":
             return weapons->query_size();
         case "small":
@@ -1306,7 +1311,7 @@ mixed is_wielding(string type)
             }
             return 1;
     }
-    return 0;    
+    return 0;
 }
 
 
@@ -1374,7 +1379,7 @@ void add_wielding_limb(string str) {
    body[str]["wieldable"] = 1;
 }
 
-string *query_wielding_limbs() 
+string *query_wielding_limbs()
 {
    string *tmp;
    int i;
@@ -1622,7 +1627,7 @@ int is_on_limb(string theLimb, string type) {
 }
 
 
-void add_exp(int x) 
+void add_exp(int x)
 {
     int exp_diff, tot_exp;
     if(TO->query("new_class_type"))
@@ -1632,7 +1637,7 @@ void add_exp(int x)
         tot_exp = player_data["general"]["new_experience"];
         if(tot_exp >= (total_exp_for_level((CHARACTER_LEVEL_CAP+1)) - 1) && x > 0) return;
         exp_diff = (total_exp_for_level((CHARACTER_LEVEL_CAP+1)) - 1) - tot_exp;
-        if(x > exp_diff && x > 0) x = exp_diff;        
+        if(x > exp_diff && x > 0) x = exp_diff;
         //if(x <= 0) x = 0;
         player_data["general"]["new_experience"] += x;
         return;

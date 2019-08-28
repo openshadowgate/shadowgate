@@ -30,6 +30,9 @@ Also adding support for some other object checks
 
 #define DIFF_BONUS (["empowered" : ({"caster level", "empowered"}), "caster level" : ({"caster level", "empowered"})])
 
+/**
+ * @file
+ */
 
 #define BHEAD "%^BOLD%^%^BLUE%^\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
 inherit DAEMON;
@@ -37,29 +40,29 @@ inherit DAEMON;
 mapping BONUS_CATS = ([
                           "saving throw" : ({
                                   "fortitude",
-                                  "will",
-                                  "reflex"
+                                      "will",
+                                      "reflex"
                                       }),
                           "resistances" : ({
-                                      "cold iron resistance",
+                                  "acid resistance",
+                                      "bludgeoning resistance",
+                                      "cold resistance",
+                                      "damage resistance",
                                       "divine resistance",
+                                      "electricity resistance",
+                                      "fire resistance",
                                       "force resistance",
-                                          "mental resistance",
+                                      "magic resistance",
+                                      "mental resistance",
                                       "negative energy resistance",
+                                      "piercing resistance",
                                       "positive energy resistance",
                                       "silver resistance",
                                       "slashing resistance",
+                                      "sonic resistance",
+                                      "spell damage resistance",
                                       "untyped resistance",
-                                  "acid resistance",
-                                  "bludgeoning resistance",
-                                  "cold resistance",
-                                  "damage resistance",
-                                  "electricity resistance",
-                                  "fire resistance",
-                                  "magic resistance",
-                                  "piercing resistance",
-                                  "sonic resistance",
-                                  "spell damage resistance",
+                                      "cold iron resistance",
                                       }),
                           "stats" : ({
                                   "charisma",
@@ -109,6 +112,7 @@ mapping BONUS_CATS = ([
                                       "spell penetration",
                                       "temporary feats",
                                       "armor bonus",
+                                      "max hp bonus",
                                       }),]);
 
 
@@ -339,14 +343,14 @@ mixed all_active_bonuses(object who, int flag)
                 if(!objectp(item = items[y])) continue;
                 if(item->is_identified(myName))
                 {
-                    itemDisplay += "\n  "+item->query_short()+"%^BOLD%^%^GREEN%^ is granting (%^BOLD%^%^WHITE%^";
+                    itemDisplay += "\n  "+item->query_short()+"%^RESET%^ is granting (%^BOLD%^%^WHITE%^";
 
                     if(!pointerp(myItems[Bonus][item]))
                     {
                         itemDisplay += myItems[Bonus][item];
                     }
                     else itemDisplay += implode(myItems[Bonus][item], ", ");
-                    itemDisplay +=  "%^BOLD%^%^GREEN%^).";
+                    itemDisplay +=  "%^RESET%^).";
                 }
                 continue;
             }
@@ -369,54 +373,56 @@ mixed all_active_bonuses(object who, int flag)
         {
             switch(Bonus)
             {
-                case "sight bonus":
-                    totalBon = who->query_sight_bonus();
-                    break;
-                case "strength": case "dexterity": case "constitution": case "intelligence": case "wisdom": case "charisma":
-                    totalBon = who->query_stats(Bonus);
-                    dodisplay = 0;
-                    break;
-                case "fortitude": case "will": case "reflex":
-                    totalBon = SAVING_THROW_D->get_save(who, Bonus);
-                    break;
-                case "academics": case "athletics": case "craft, armorsmith": case "craft, jeweller": case "craft, leatherwork":
-                case "craft, tailor": case "craft, weaponsmith": case "craft, woodworker": case "disguise": case "dungeoneering":
-                case "endurance": case "healing": case "influence": case "perception": case "rope use": case "stealth":
-                case "spellcraft": case "survival": case "thievery":
-                    totalBon = who->query_skill(Bonus);
-                    dodisplay = 0;
-                    break;
-                case "attack bonus":
-                    totalBon = who->query_attack_bonus();
-                    break;
-                case "damage bonus":
-                    totalBon = who->query_damage_bonus();
-                    break;
-                case "armor bonus":
-                    totalBon = who->query_ac_bonus();
-                    break;
+            case "sight bonus":
+                totalBon = who->query_sight_bonus();
+                break;
+            case "strength": case "dexterity": case "constitution": case "intelligence": case "wisdom": case "charisma":
+                totalBon = who->query_stats(Bonus);
+                dodisplay = 0;
+                break;
+            case "fortitude": case "will": case "reflex":
+                totalBon = SAVING_THROW_D->get_save(who, Bonus);
+                break;
+            case "academics": case "athletics": case "craft, armorsmith": case "craft, jeweller": case "craft, leatherwork":
+            case "craft, tailor": case "craft, weaponsmith": case "craft, woodworker": case "disguise": case "dungeoneering":
+            case "endurance": case "healing": case "influence": case "perception": case "rope use": case "stealth":
+            case "spellcraft": case "survival": case "thievery":
+                totalBon = who->query_skill(Bonus);
+                dodisplay = 0;
+                break;
+            case "attack bonus":
+                totalBon = who->query_attack_bonus();
+                break;
+            case "damage bonus":
+                totalBon = who->query_damage_bonus();
+                break;
+            case "armor bonus":
+                totalBon = who->query_ac_bonus();
+                break;
+            case "max hp bonus":
+                totalBon = who->query_max_hp_bonus();
                 // misc bonuses held in set_property()
-                case "magic resistance": case "spell damage resistance": case "damage resistance": case "spell penetration":
-                    totalBon = who->query_property(Bonus);
-                    break;
-                case "caster level":
-                    totalBon = who->query_property("empowered");
-                    break;
-                case "shieldMiss":
-                    totalBon = who->query_shieldMiss();
-                    break;
-                case "fire resistance": case "cold resistance": case "water resistance": case "air resistance":
-                case "earth resistance": case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
-                case "silver resistance": case "cold iron resistance": case "electricity resistance": case "acid resistance": case "sonic resistance":
-                case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
-                case "mental resistance": case "light resistance": case "darkness resistance": case "nature resistance":
-                case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
-                case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
-                    totalBon = who->query_resistance(replace_string(Bonus, " resistance", ""));
-                    break;
-                case "temporary feats":
-                    totalBon = sizeof(who->query_temporary_feats());
-                    break;
+            case "magic resistance": case "spell damage resistance": case "damage resistance": case "spell penetration":
+                totalBon = who->query_property(Bonus);
+            break;
+            case "caster level":
+                totalBon = who->query_property("empowered");
+                break;
+            case "shieldMiss":
+                totalBon = who->query_shieldMiss();
+                break;
+            case "fire resistance": case "cold resistance": case "water resistance": case "air resistance":
+            case "earth resistance": case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
+            case "silver resistance": case "cold iron resistance": case "electricity resistance": case "acid resistance": case "sonic resistance":
+            case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
+            case "mental resistance": case "light resistance": case "darkness resistance": case "nature resistance":
+            case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
+            case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
+                totalBon = who->query_resistance(replace_string(Bonus, " resistance", ""));
+                break;
+            case "temporary feats":
+                totalBon = sizeof(who->query_temporary_feats());
+                break;
             }
         }
         if(!dodisplay && itemDisplay == "" || totalBon == 0)
@@ -425,26 +431,26 @@ mixed all_active_bonuses(object who, int flag)
         }
         if(Bonus == "temporary feats")
         {
-            myDisplay = "%^BOLD%^%^GREEN%^You have (%^BOLD%^%^WHITE%^"+totalBon+"%^BOLD%^%^GREEN%^)";
-            if(totalBon < 2) myDisplay += " %^BOLD%^%^WHITE%^Temporary Feat%^BOLD%^%^GREEN%^.%^RESET%^";
-            else myDisplay += " %^BOLD%^%^WHITE%^Temporary Feats%^BOLD%^%^GREEN%^.%^RESET%^";
+            myDisplay = "%^RESET%^You have (%^BOLD%^%^WHITE%^"+totalBon+"%^RESET%^)";
+            if(totalBon < 2) myDisplay += " %^BOLD%^%^WHITE%^Temporary Feat%^RESET%^.%^RESET%^";
+            else myDisplay += " %^BOLD%^%^WHITE%^Temporary Feats%^RESET%^.%^RESET%^";
         }
         else if(Bonus == "caster level")
         {
-            myDisplay = "%^BOLD%^%^GREEN%^Your %^BOLD%^%^WHITE%^"+capitalize(Bonus)+" bonus %^BOLD%^%^GREEN%^is "+
-            "(%^BOLD%^%^WHITE%^"+totalBon+"%^BOLD%^%^GREEN%^).";
+            myDisplay = "%^RESET%^%^BOLD%^%^WHITE%^"+capitalize(Bonus)+" bonus %^RESET%^is "+
+            "(%^BOLD%^%^WHITE%^"+totalBon+"%^RESET%^).";
         }
         else
         {
-            myDisplay = "%^BOLD%^%^GREEN%^Your %^BOLD%^%^WHITE%^"+capitalize(Bonus)+" %^BOLD%^%^GREEN%^is "+
-            "(%^BOLD%^%^WHITE%^"+totalBon+"%^BOLD%^%^GREEN%^).";
+            myDisplay = "%^RESET%^%^BOLD%^%^WHITE%^"+capitalize(Bonus)+" %^RESET%^is "+
+            "(%^BOLD%^%^WHITE%^"+totalBon+"%^RESET%^).";
         }
         if(itemDisplay != "") myDisplay += itemDisplay;
         if(member_array(Bonus, BONUS_CATS["stats"]) != -1)
         {
             if(!sizeof(statDisplay))
             {
-                 statDisplay = ({"%^GREEN%^-=%^BOLD%^<%^WHITE%^ Stats %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
+                 statDisplay = ({"%^BLUE%^-=%^BOLD%^<%^GREEN%^ Stats %^BLUE%^>%^RESET%^%^BLUE%^=-", myDisplay});
             }
             else statDisplay += ({myDisplay});
         }
@@ -452,7 +458,7 @@ mixed all_active_bonuses(object who, int flag)
         {
             if(!sizeof(skillDisplay))
             {
-                skillDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Skills %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
+                skillDisplay = ({"\n%^BLUE%^-=%^BOLD%^<%^GREEN%^ Skills %^BLUE%^>%^RESET%^%^BLUE%^=-", myDisplay});
             }
             else skillDisplay += ({myDisplay});
         }
@@ -460,7 +466,7 @@ mixed all_active_bonuses(object who, int flag)
         {
             if(!sizeof(savingDisplay))
             {
-                savingDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Saving Throws %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
+                savingDisplay = ({"\n%^BLUE%^-=%^BOLD%^<%^GREEN%^ Saving Throws %^BLUE%^>%^RESET%^%^BLUE%^=-", myDisplay});
             }
             else savingDisplay += ({myDisplay});
         }
@@ -468,7 +474,7 @@ mixed all_active_bonuses(object who, int flag)
         {
             if(!sizeof(resistanceDisplay))
             {
-                resistanceDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Resistances %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
+                resistanceDisplay = ({"\n%^BLUE%^-=%^BOLD%^<%^GREEN%^ Resistances %^BLUE%^>%^RESET%^%^BLUE%^=-", myDisplay});
             }
             else resistanceDisplay += ({myDisplay});
         }
@@ -476,7 +482,7 @@ mixed all_active_bonuses(object who, int flag)
         {
             if(!sizeof(miscDisplay))
             {
-                miscDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Miscellaneous %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
+                miscDisplay = ({"\n%^BLUE%^-=%^BOLD%^<%^GREEN%^ Miscellaneous %^BLUE%^>%^RESET%^%^BLUE%^=-", myDisplay});
             }
             else miscDisplay += ({myDisplay});
         }

@@ -94,12 +94,13 @@ give vision in nearly all circumstances.
 #include <daemons.h>
 #include <valid_bonuses.h>
 
+/**
+ * @file
+ */
 
 inherit DAEMON;
 
-
 void create() { ::create(); }
-
 
 varargs int valid_limb_check(object item, object tp)
 {
@@ -232,6 +233,7 @@ varargs int get_bonus_value(string bonus_name, string num, object item, object t
     case "damage bonus":                    value = num * 8;        break;
 
     case "sight bonus":                     value = num * 8;            break;
+    case "max hp bonus":                     value = num * 8;            break;
 
     case "magic resistance":                value = num * 1.5;            break;
 

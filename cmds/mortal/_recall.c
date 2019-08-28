@@ -4,8 +4,8 @@
 //     Written by Vashkar@ShadowGate
 //     Made to work by Grendel@Shadowgate
 
-//Updating this command to be prettier - codewise - and 
-//allow for the ability to do like recall priest spells 8 
+//Updating this command to be prettier - codewise - and
+//allow for the ability to do like recall priest spells 8
 //to recall only your level 8 priest spells - Saide 3/09
 
 #include <std.h>
@@ -19,7 +19,7 @@ string strtemp, *strarr;
 
 //if we add something here in the future
 //will need to add a case in the switch
-//in the function recall_spells() below 
+//in the function recall_spells() below
 //to support it
 
 #define FR "%^BOLD%^%^BLUE%^--==%^CYAN%^< %^BOLD%^%^WHITE%^"
@@ -36,23 +36,23 @@ int cmd_recall(string str) {
     if (str == "locations") {
         remembered=TP->query_rem_rooms();
         strarr=TP->query_rem_rooms_sort();
-        if (!remembered || sizeof(remembered) < 1 ) 
+        if (!remembered || sizeof(remembered) < 1 )
         {
             tell_object(TP, "You can't remember a single location.");
             return 1;
-        } 
-        else 
+        }
+        else
         {
             strarr = sort_array(strarr,"alphabetical_sort",FILTERS_D);
             num = sizeof(strarr);
 
             write("%^BOLD%^%^BLUE%^--==%^CYAN%^< %^WHITE%^ "+num+" Locations "+
                 "Remembered %^CYAN%^>%^BLUE%^==--%^RESET%^");
-            for (i=0;i<sizeof(strarr);i++) 	
+            for (i=0;i<sizeof(strarr);i++)
             {
-                if (!remembered[strarr[i]] || 
-                !file_exists(remembered[strarr[i]]+".c") || 
-                !find_object_or_load(remembered[strarr[i]])) 
+                if (!remembered[strarr[i]] ||
+                !file_exists(remembered[strarr[i]]+".c") ||
+                !find_object_or_load(remembered[strarr[i]]))
                 {
                     write("You seem to forgotten the location labeled "+strarr[i]+".");
                     strtemp = strarr[i];
@@ -76,7 +76,7 @@ int cmd_recall(string str) {
         tell_object(TP,"See <help ki>");
         return 1;
     }
-    if (str == "spells") 
+    if (str == "spells")
     {
         tell_object(TP, "Please specify which spells you "+
         "would like to recall: <recall classname spells>.");
@@ -88,18 +88,18 @@ int cmd_recall(string str) {
     	// No argument
    	remembered=TP->query_rem_obs();
    	strarr=TP->query_rem_obs_sort();
-   	if (!remembered || sizeof(remembered) < 1 ) 
+   	if (!remembered || sizeof(remembered) < 1 )
 	{
      	tell_object(TP, "You can't remember a single thing.");
        	return 1;
-   	} 
-	else 
+   	}
+	else
 	{
       	tell_object(TP, "%^BOLD%^%^BLUE%^--==%^CYAN%^< %^WHITE%^"+
 		"Things Remembered %^CYAN%^>%^BLUE%^==--%^RESET%^");
-       	for (i=0;i<sizeof(strarr);i++) 
+       	for (i=0;i<sizeof(strarr);i++)
 		{
-           	if ( !find_object_or_load(remembered[strarr[i]]+".c") ) 
+           	if ( !find_object_or_load(remembered[strarr[i]]+".c") )
 			{
            		strtemp = strarr[i];
            		temp = remembered;
@@ -114,15 +114,15 @@ int cmd_recall(string str) {
     	return 1;
 }
 
-void sort(string *arr) 
+void sort(string *arr)
 {
     int i,j;
 
     for (j=0;j<sizeof(arr);j++)
     {
-        for (i=sizeof(arr)-1;i>j;i--) 
+        for (i=sizeof(arr)-1;i>j;i--)
         {
-            if (arr[i] < arr[i-1]) 
+            if (arr[i] < arr[i-1])
             {
                 swap(arr,i-1,i);
             }
@@ -160,7 +160,7 @@ int *bonus_spell_slots(object ob, int *spells){
     	int i, extra, bon_lvl;
 
     	extra = (int)ob->query_property("bonus_spell_slots");
-   	for(i=0;i<sizeof(spells);i++) 
+   	for(i=0;i<sizeof(spells);i++)
 	{
       	if(!spells[i]) continue;
             if(intp(extra) && extra)
@@ -168,9 +168,9 @@ int *bonus_spell_slots(object ob, int *spells){
 			 spells[i] += extra;
 		}
 		bon_lvl = (int)ob->query_property("bonus_spell_slots_"+(i+1));
-		if(intp(bon_lvl) && bon_lvl) 	
-		{		
-			 spells[i] += bon_lvl;			
+		if(intp(bon_lvl) && bon_lvl)
+		{
+			 spells[i] += bon_lvl;
 		}
         	if(spells[i] < 0) spells[i] = 0;
     	}
@@ -189,14 +189,14 @@ mixed MakeTimeDisplay(int MyTime)
 	MySec = ""+((MyTime % HOUR) % MINUTE) / SECOND;
 	if(strlen(MySec) < 2) MySec = "0"+MySec;
 	return MyHour +":"+ MyMin +":"+MySec;
-} 
+}
 
 int recall_innate_spells(object who)
 {
 	int x, max, uses;
 	string MyMsg, tmp, MyUses;
 	mixed innate_spells;
-	if(!objectp(who)) return 0;	
+	if(!objectp(who)) return 0;
 	if(!(innate_spells = who->query_innate_spells())) return 0;
 	if(!sizeof(innate_spells)) return 0;
 	innate_spells = sort_array(innate_spells, "alphabetical_sort", FILTERS_D);
@@ -211,14 +211,14 @@ int recall_innate_spells(object who)
 			MyMsg += "\n%^BOLD%^%^WHITE%^"+sprintf("%-20s %-5s", tmp, "At Will");
 			MyMsg += "%^RESET%^";
 		}
-		else if(uses <= 0) 
+		else if(uses <= 0)
 		{
 			MyUses = "Refreshes In : ";
 			MyUses += MakeTimeDisplay((int)TP->query_innate_useable_time(innate_spells[x]));
 			MyMsg += "\n%^BOLD%^%^WHITE%^"+sprintf("%-20s %-5s", tmp, MyUses);// +"/"+max;
 			MyMsg += "%^RESET%^";
 		}
-		else 
+		else
 		{
 			MyMsg += "\n%^BOLD%^%^WHITE%^"+sprintf("%-20s %-5d", tmp, uses) +"/"+max;
 			MyMsg += "%^RESET%^";
@@ -227,7 +227,7 @@ int recall_innate_spells(object who)
 	tell_object(TP, MyMsg);
 	return 1;
 }
-		
+
 
 int recall_spells(string type, object who) {
 	int i, num, x, *max, cur = 0, flag, *lkeys, spell_level,class_level;
@@ -255,7 +255,7 @@ int recall_spells(string type, object who) {
         tell_object(TP,"You don't need to worry about prepared spells! Just <master> them and cast!");
         return 1;
       }
-      if(spell_type == "psywarrior" || spell_type == "psion"){ 
+      if(spell_type == "psywarrior" || spell_type == "psion"){
          if(!who->is_class(spell_type)){
             tell_object(who,"You cannot cast spells as a "+spell_type+"!");
             return 1;
@@ -302,7 +302,7 @@ int recall_spells(string type, object who) {
 
 	//Section of the code that determines if
 	//you can use the spells you requested to recall
-	//and if so it sets a few things so that the 
+	//and if so it sets a few things so that the
 	//code will know what to do later on - Saide
 
     if(spell_type == "wizard") spell_type = "mage";
@@ -323,10 +323,10 @@ int recall_spells(string type, object who) {
 	f_msg = "You have no "+spell_type+" spells prepared.";
 
 	dirl = "/cmds/spells/";
-    
+
     class_level = who->query_prestige_level(spell_type);
     if(!class_level) { class_level = who->query_class_level(spell_type); }
-    
+
 	max = WIZ_CALCS->query_max_spell_array(class_level, spell_type,who->query_stats(mystat));
     max = magic_arsenal_feat(who,max);
 	max = bonus_spell_slots(who, max);
@@ -337,9 +337,9 @@ int recall_spells(string type, object who) {
         }
       }
 
-	//End of the part of the code that determines whether 
+	//End of the part of the code that determines whether
 	//or not you can use the spells you're requesting
-	
+
     lkeys = keys(spells);
     lkeys = sort_array(lkeys, 1);
     if (sizeof(lkeys)) {
@@ -348,13 +348,13 @@ int recall_spells(string type, object who) {
 			ccolor = LEV_AND_COLORS[lkeys[x]];
 			if(spell_level != -1){
 				if(max[spell_level-1] != 0){
-					if(lkeys[x] != spell_level) continue;	
+					if(lkeys[x] != spell_level) continue;
 				}
 			}
 			skeys = keys(spells[lkeys[x]]);
 			if(sizeof(skeys)) {
-				tmp += ({"%^BOLD%^%^WHITE%^" + 
-				"  Level "+ lkeys[x] + " " +
+				tmp += ({"%^BOLD%^%^WHITE%^" +
+				"Level "+ lkeys[x] + " " +
 				spell_type +": "});
 				flag = sizeof(tmp);
 				sort(skeys);
@@ -362,7 +362,7 @@ int recall_spells(string type, object who) {
 			else{
 				if(max[x] == 0) continue;
 				tmp += ({"%^BOLD%^%^WHITE%^"+
-				"  Level "+lkeys[x]+ " "+
+				"Level "+lkeys[x]+ " "+
 				spell_type +": "});
 				cur = 0;
 				flag = sizeof(tmp);
@@ -374,18 +374,18 @@ int recall_spells(string type, object who) {
 				cur += to_int(num);
 			      if (!file_exists(dirl+name[0..0]+"/_"+replace_string(name, " ", "_")+".c")) continue;
 				tmp += ({ ccolor+
-				sprintf("    %-25s %-5d", name,num )+"\n"});
+				sprintf("  %-26s %-5d", name,num )+"\n"});
                   }
 			if(flag) {
 				tmp[flag-1] += cur+"/"+max[x]+"\n";
-		
+
 			}
 		}
         //tell_object(who, identify(tmp));
 		//tell_object(who,s_msg);
 		TP->more(explode(implode(tmp, " "), "\n"));
 		return 1;
-	} 
+	}
 	else{
 	     	tell_object(TP, f_msg);
 		return 1;
@@ -394,22 +394,22 @@ int recall_spells(string type, object who) {
 }
 
 
-void help() 
+void help()
 {
     write(
 @HELP
 Syntax: \trecall [locations]
 	  \trecall [classname] spells [#]
-	  \trecall [innate] spells 
-The <recall> command lets you view the objects you <remember>ed.  
+	  \trecall [innate] spells
+The <recall> command lets you view the objects you <remember>ed.
 <recall locations> will list the locations you <remember>ed.
-<recall classname spells> will list the spells you have prepared for 
-that class. Please note you can specify an optional [#] to specify 
-the spells prepared just for that level.  
+<recall classname spells> will list the spells you have prepared for
+that class. Please note you can specify an optional [#] to specify
+the spells prepared just for that level.
 <recall innate spells> will list any innate spells that your race has.
 
-For example recall cleric spells 3 - this will attempt to list the 
-level 3 cleric spells that you have memorized.  If you are unable 
+For example recall cleric spells 3 - this will attempt to list the
+level 3 cleric spells that you have memorized.  If you are unable
 to use level 3 cleric spells it will list all your cleric spells.
 
 See also: remember, unremember
