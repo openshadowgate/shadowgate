@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("bulls strength");
-    set_spell_level(([ "paladin" : 2, "cleric" : 2,"druid" : 2, "mage" : 2,"blackguard":2 ]));
+    set_spell_level(([ "paladin" : 2, "cleric" : 2,"druid" : 2, "mage" : 2,"paladin":2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS bulls strength on TARGET");
     set_description("This spell allows the caster to infuse their target with the strength of a bull, enhancing their raw brawn. This spell doesn't stack with similarly powerful spells of enhancement.");

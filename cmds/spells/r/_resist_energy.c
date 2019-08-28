@@ -11,7 +11,7 @@ string myelement;
 void create() {
     ::create();
     set_spell_name("resist energy");
-    set_spell_level(([ "paladin" : 2, "ranger" : 1, "druid" : 2, "mage" : 2, "blackguard" : 3 ]));
+    set_spell_level(([ "paladin" : 2, "ranger" : 1, "druid" : 2, "mage" : 2, "paladin" : 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS resist energy on <element>");
     set_description("This spell bestows the caster with a small amount of damage resistance against a selected element, "

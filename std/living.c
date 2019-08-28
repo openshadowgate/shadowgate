@@ -1218,7 +1218,7 @@ int query_attack_bonus() {
    if(FEATS_D->usable_feat(TO,"weapon focus"))
        ret += 2;
    if(FEATS_D->usable_feat(TO,"greater weapon focus"))
-       ret += 3;
+       ret += 6;
    if(FEATS_D->usable_feat(TO,"true strikes")&&
       sizeof(TO->query_wielded())==1)
        ret += 3;
@@ -1230,15 +1230,13 @@ int query_damage_bonus() {
    int ret, x;
    object *weap;
 
-   //weap = TO->query_wielded();
-   //for(x=0;x<sizeof(weap);x++) {
-   //   enc += (int)weap[x]->query_property("enchantment");
-   //}
    bonus = dbonus;
    ret = bonus;// + enc;
    ret += EQ_D->gear_bonus(TO, "damage bonus");
-   if(FEATS_D->usable_feat(TO,"weapon specialization")) ret += 2;
-   if(FEATS_D->usable_feat(TO,"greater weapon specialization")) ret += 3;
+   if(FEATS_D->usable_feat(TO,"weapon specialization"))
+       ret += 2;
+   if(FEATS_D->usable_feat(TO,"greater weapon specialization"))
+       ret += 6;
    return ret;
 }
 

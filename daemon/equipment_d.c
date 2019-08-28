@@ -1,23 +1,23 @@
 /*==============================================================================================================================================
 a daemon that handles calculating gear bonuses - in an attempt to make
-them easier to handle/degrade with gear damage 
+them easier to handle/degrade with gear damage
 
-Will require extensive lib support - for example - 
+Will require extensive lib support - for example -
 
 query_attack_bonus would not return a static number but would query this daemon for a bonus
-based on gear in inventory, that is equipped, or gives a static bonus for simply being 
+based on gear in inventory, that is equipped, or gives a static bonus for simply being
 held and then would modify this bonus based on current gear condition
 
-Also adding support for some other object checks    
-    
+Also adding support for some other object checks
+
     Function can_unequip_item(object who, object item, string myAction)
-    
+
         can I drop this? (called from Object.c)
-        
+
         can I unequip this? (called from body.c)
-       
+
     Function can_equip_item(object who, object item)
-    
+
         can I equip this? (called from body.c)
 
 ================================================================================================================================================*/
@@ -30,25 +30,89 @@ Also adding support for some other object checks
 
 #define DIFF_BONUS (["empowered" : ({"caster level", "empowered"}), "caster level" : ({"caster level", "empowered"})])
 
-#define BONUS_CATS (["saving throw" : ({"fortitude", "will", "reflex"}),\
-                    "resistances" : ({"damage resistance", "spell damage resistance", "magic resistance",\
-                    "fire resistance", "cold resistance", "electricity resistance", "acid resistance", "sonic resistance",\
-                    "bludgeoning resistance", "piercing resistance", "slashing resistance", "silver resistance",\
-                    "cold iron resistance", "positive energy resistance", "negative energy resistance", "force resistance",\
-                    "divine resistance", "untyped resistance", "mental resistance"}), "stats" : ({"strength", "dexterity", "wisdom",\
-                    "constitution", "intelligence", "charisma"}), "skills" : ({"academics", "athletics", "craft, armorsmith", \
-                    "craft, jeweller", "craft, leatherwork", "craft, tailor", "craft, weaponsmith", "craft, woodworker", "disguise",\
-                    "dungeoneering", "endurance", "healing", "influence", "perception", "rope use", "stealth", "spellcraft", "survival",\
-                    "thievery"}), "miscellaneous" : ({"armor bonus", "attack bonus", "damage bonus", "sight bonus", "caster level", "spell penetration",\
-                    "bonus spell slots", "shieldMiss", "bonus level zero spell slots", "bonus level one spell slots", "bonus level two spell slots",\
-                    "bonus level three spell slots", "bonus level four spell slots", "bonus level five spell slots", "bonus level six spell slots",\
-                    "bonus level seven spell slots", "bonus level eight spell slots", "bonus level nine spell slots", "temporary feats"}),])
-                    
+
 #define BHEAD "%^BOLD%^%^BLUE%^\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
 inherit DAEMON;
 
+mapping BONUS_CATS = ([
+                          "saving throw" : ({
+                                  "fortitude",
+                                  "will",
+                                  "reflex"
+                                      }),
+                          "resistances" : ({
+                                      "cold iron resistance",
+                                      "divine resistance",
+                                      "force resistance",
+                                          "mental resistance",
+                                      "negative energy resistance",
+                                      "positive energy resistance",
+                                      "silver resistance",
+                                      "slashing resistance",
+                                      "untyped resistance",
+                                  "acid resistance",
+                                  "bludgeoning resistance",
+                                  "cold resistance",
+                                  "damage resistance",
+                                  "electricity resistance",
+                                  "fire resistance",
+                                  "magic resistance",
+                                  "piercing resistance",
+                                  "sonic resistance",
+                                  "spell damage resistance",
+                                      }),
+                          "stats" : ({
+                                  "charisma",
+                                      "constitution",
+                                      "dexterity",
+                                      "intelligence",
+                                      "wisdom",
+                                      "strength",
+                                      }),
+                          "skills" : ({
+                                  "athletics",
+                                      "craft, armorsmith",
+                                      "craft, jeweller",
+                                      "craft, leatherwork",
+                                      "craft, tailor",
+                                      "craft, weaponsmith",
+                                      "craft, woodworker",
+                                      "dungeoneering",
+                                      "endurance",
+                                      "healing",
+                                      "influence",
+                                      "perception",
+                                      "rope use",
+                                      "spellcraft",
+                                      "stealth",
+                                      "survival",
+                                      "thievery",
+                                      "academics",
+                                      }),
+                          "miscellaneous" : ({
+                                  "attack bonus",
+                                      "bonus level eight spell slots",
+                                      "bonus level five spell slots",
+                                      "bonus level four spell slots",
+                                      "bonus level nine spell slots",
+                                      "bonus level one spell slots",
+                                      "bonus level seven spell slots",
+                                      "bonus level six spell slots",
+                                      "bonus level three spell slots",
+                                      "bonus level two spell slots",
+                                      "bonus level zero spell slots",
+                                      "bonus spell slots",
+                                      "caster level",
+                                      "damage bonus",
+                                      "shieldMiss",
+                                      "sight bonus",
+                                      "spell penetration",
+                                      "temporary feats",
+                                      "armor bonus",
+                                      }),]);
 
-//resistance 
+
+//resistance
 object *gear_to_include(object who, string bonus)
 {
     object *objs, *gear;
@@ -57,16 +121,16 @@ object *gear_to_include(object who, string bonus)
     int x,j;
     if(!objectp(who) || !stringp(bonus)) return ({});
     objs = all_inventory(who);
-    gear = ({});        
+    gear = ({});
     for(x = 0;x < sizeof(objs);x++)
     {
         if(!objectp(objs[x])) continue;
         if(objs[x]->query_worn() == who ||
-        objs[x]->query_wielded() == who || 
+        objs[x]->query_wielded() == who ||
         objs[x]->query_property("inanimate bonus"))
         {
             if(!mapp(tmpMap = objs[x]->query_item_bonuses())) continue;
-            
+
             if(objs[x]->query_property("inanimate bonus") && objs[x]->query_property("quest required"))
             {
                 ob_quest = objs[x]->query_property("quest required");
@@ -78,17 +142,17 @@ object *gear_to_include(object who, string bonus)
                 for(j=0;j<sizeof(player_quests);j++)
                 {
                     player_quests[j] = FILTERS_D->filter_colors(player_quests[j]);
-                    player_quests[j] = lower_case(player_quests[j]);                   
+                    player_quests[j] = lower_case(player_quests[j]);
                 }
                 if(member_array(ob_quest, player_quests) == -1) { continue; }
-            }              
+            }
             myBonuses = keys(tmpMap);
             if(member_array(bonus, VALID_DAMAGE_TYPES) != -1)
             {
-                if(member_array(bonus, myBonuses) == -1 && member_array(bonus + " resistance", myBonuses) == -1) continue;                
+                if(member_array(bonus, myBonuses) == -1 && member_array(bonus + " resistance", myBonuses) == -1) continue;
                 gear += ({objs[x]});
                 continue;
-            }            
+            }
             else
             {
                 if(member_array(bonus, keys(DIFF_BONUS)) != -1)
@@ -126,7 +190,7 @@ int bonus_spell_slots(object ob)
     res += ob->query_item_bonus("bonus_spell_slots_7");
     res += ob->query_item_bonus("bonus_spell_slots_8");
     res += ob->query_item_bonus("bonus_spell_slots_9");
-    return res;    
+    return res;
 }
 
 mixed gear_bonus(object who, string bonus, int flag)
@@ -138,9 +202,9 @@ mixed gear_bonus(object who, string bonus, int flag)
     mapping my_gear = ([]), tmp = ([]);
     if(!objectp(who) || !stringp(bonus)) return 0;
     //creates a list of gear that should be included in calculating a given bonus
-    //either equipped, worn, or gear with the inanimate bonus property on it 
+    //either equipped, worn, or gear with the inanimate bonus property on it
     //if(bonus == "caster level") bonus = "empowered";
-    if(!sizeof(gear = gear_to_include(who, bonus))) 
+    if(!sizeof(gear = gear_to_include(who, bonus)))
     {
         if(bonus == "temporary feats") return temp_feats;
         return 0;
@@ -170,7 +234,7 @@ mixed gear_bonus(object who, string bonus, int flag)
         }
         else
         {
-            if(bonus == "temporary feats") 
+            if(bonus == "temporary feats")
             {
                 check = item->query_item_bonus(bonus);
                 if(pointerp(check))
@@ -184,7 +248,7 @@ mixed gear_bonus(object who, string bonus, int flag)
                         continue;
                     }
                 }
-                else 
+                else
                 {
                     temp_feats += ({item->query_item_bonus(bonus)});
                     if(!my_gear[bonus]) my_gear += ([bonus : ([item : item->query_item_bonus(bonus)]), ]);
@@ -196,10 +260,10 @@ mixed gear_bonus(object who, string bonus, int flag)
         }
         if(!actual_amt) continue;
         if(actual_amt < 0 || (WORLD_EVENTS_D->stacking_bonus_active(who) && !WORLD_EVENTS_D->stacking_bonus_active(who, -1)))
-        {                   
+        {
             if(bonus == "sight bonus" && member_array((string)who->query_race(),PLAYER_D->night_races()) != -1) actual_amt = -1 * actual_amt;
             total += actual_amt;
-            if(!my_gear[bonus]) my_gear += ([bonus : ([ item : actual_amt ]), ]);    
+            if(!my_gear[bonus]) my_gear += ([bonus : ([ item : actual_amt ]), ]);
             else my_gear[bonus] += ([item : actual_amt]);
             actual_amt = 0;
             continue;
@@ -208,10 +272,10 @@ mixed gear_bonus(object who, string bonus, int flag)
         if(cond > 100 || undefinedp(cond)) cond = 100;
         else if(!cond) cond = 1;
         if(cond <= 70) actual_amt = (actual_amt * cond) / 100;
-        if(actual_amt > amt && !WORLD_EVENTS_D->stacking_bonus_active(who, -1)) 
-        {         
+        if(actual_amt > amt && !WORLD_EVENTS_D->stacking_bonus_active(who, -1))
+        {
             if(bonus == "sight bonus" && member_array((string)who->query_race(),PLAYER_D->night_races()) != -1) tmp = ([item : ([bonus : (actual_amt * -1)]),]);
-            else tmp = ([bonus : ([ item : actual_amt ]), ]);            
+            else tmp = ([bonus : ([ item : actual_amt ]), ]);
             amt = actual_amt;
         }
         actual_amt = 0;
@@ -226,10 +290,10 @@ mixed gear_bonus(object who, string bonus, int flag)
             else my_gear += ([bonuses[x] : tmp[bonuses[x]]]);
         }
         return my_gear;
-    }    
+    }
     if(bonus == "sight bonus" && member_array((string)who->query_race(),PLAYER_D->night_races()) != -1) amt = amt * -1;
     if(!flag && bonus != "temporary feats") return (total + amt);
-    if(!flag && bonus == "temporary feats") 
+    if(!flag && bonus == "temporary feats")
     {
         temp_feats = distinct_array(temp_feats);
         return temp_feats;
@@ -246,38 +310,25 @@ mixed all_active_bonuses(object who, int flag)
     if(!objectp(who)) return 0;
     myName = who->query_true_name();
     myBonuses = VALID_BONUSES;
-    if((x = member_array("empowered", myBonuses)) != -1) myBonuses[x] = "caster level";    
-    /*if((x = member_array("bonus_spell_slots_1", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_2", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_3", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_4", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_5", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_6", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_7", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_8", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";
-    if((x = member_array("bonus_spell_slots_9", myBonuses)) != -1) myBonuses[x] = "bonus spell slots";*/
+    if((x = member_array("empowered", myBonuses)) != -1) myBonuses[x] = "caster level";
     myBonuses = distinct_array(myBonuses);
     myBonuses = sort_array(myBonuses, 1);
     myItems = ([]);
     for(x = 0;x < sizeof(myBonuses);x++)
     {
-        //if(myBonuses[x] == "caster level") myBonuses[x] = "empowered";
-        if(!mapp(myTmp = gear_bonus(who, myBonuses[x], 1))) continue;        
+        if(!mapp(myTmp = gear_bonus(who, myBonuses[x], 1))) continue;
         if(!myItems[myBonuses[x]])
         {
             myItems += ([ myBonuses[x] : myTmp[myBonuses[x]], ]);
         }
-        else { myItems[myBonuses[x]] += myTmp[myBonuses[x]]; }    
+        else { myItems[myBonuses[x]] += myTmp[myBonuses[x]]; }
         if(myBonuses[x] == "empowered") myBonuses[x] = "caster level";
     }
-    //if(!sizeof(keys(myItems))) return "%^BOLD%^%^GREEN%^You currently have no identifiable bonuses from gear.%^RESET%^";
-    //myBonuses = keys(myItems);
-    //myBonuses = sort_array(myBonuses, 1);
     for(x = 0;x < sizeof(myBonuses);x++)
     {
         Bonus = myBonuses[x];
-        //if(Bonus == "caster level") Bonus = "empowered";
-        totalBon = 0;           
+
+        totalBon = 0;
         itemDisplay = "";
         dodisplay = 1;
         if(mapp(myItems[Bonus]))
@@ -285,18 +336,18 @@ mixed all_active_bonuses(object who, int flag)
             items = keys(myItems[Bonus]);
             for(y = 0; y < sizeof(items);y++)
             {
-                if(!objectp(item = items[y])) continue;            
+                if(!objectp(item = items[y])) continue;
                 if(item->is_identified(myName))
                 {
-                    itemDisplay += "\n\t"+item->query_short()+"%^BOLD%^%^GREEN%^ is granting (%^BOLD%^%^WHITE%^";
-                   
+                    itemDisplay += "\n  "+item->query_short()+"%^BOLD%^%^GREEN%^ is granting (%^BOLD%^%^WHITE%^";
+
                     if(!pointerp(myItems[Bonus][item]))
                     {
-                        itemDisplay += myItems[Bonus][item];                       
+                        itemDisplay += myItems[Bonus][item];
                     }
                     else itemDisplay += implode(myItems[Bonus][item], ", ");
-                    itemDisplay +=  "%^BOLD%^%^GREEN%^).";                    
-                }         
+                    itemDisplay +=  "%^BOLD%^%^GREEN%^).";
+                }
                 continue;
             }
         }
@@ -304,17 +355,16 @@ mixed all_active_bonuses(object who, int flag)
         {
             if(Bonus == "bonus_spell_slots")
             {
-                totalBon = who->query_property("bonus_spell_slots"); 
-                Bonus = "bonus spell slots";                
+                totalBon = who->query_property("bonus_spell_slots");
+                Bonus = "bonus spell slots";
             }
             else
             {
                 totalBon = who->query_property(Bonus);
-                SpellSlots = explode(Bonus, "_"); 
+                SpellSlots = explode(Bonus, "_");
                 Bonus = SpellSlots[0] + " level " +consolidate_number(to_int(SpellSlots[3])) + " " + SpellSlots[1] + " " +SpellSlots[2];
             }
         }
-        //if(Bonus == "empowered") Bonus = "caster level";
         else
         {
             switch(Bonus)
@@ -332,25 +382,25 @@ mixed all_active_bonuses(object who, int flag)
                 case "academics": case "athletics": case "craft, armorsmith": case "craft, jeweller": case "craft, leatherwork":
                 case "craft, tailor": case "craft, weaponsmith": case "craft, woodworker": case "disguise": case "dungeoneering":
                 case "endurance": case "healing": case "influence": case "perception": case "rope use": case "stealth":
-                case "spellcraft": case "survival": case "thievery": 
-                    totalBon = who->query_skill(Bonus); 
+                case "spellcraft": case "survival": case "thievery":
+                    totalBon = who->query_skill(Bonus);
                     dodisplay = 0;
                     break;
                 case "attack bonus":
-                    totalBon = who->query_attack_bonus(); 
+                    totalBon = who->query_attack_bonus();
                     break;
                 case "damage bonus":
                     totalBon = who->query_damage_bonus();
                     break;
                 case "armor bonus":
-                    totalBon = who->query_ac_bonus(); 
+                    totalBon = who->query_ac_bonus();
                     break;
                 // misc bonuses held in set_property()
                 case "magic resistance": case "spell damage resistance": case "damage resistance": case "spell penetration":
                     totalBon = who->query_property(Bonus);
-                    break;                
+                    break;
                 case "caster level":
-                    totalBon = who->query_property("empowered");                
+                    totalBon = who->query_property("empowered");
                     break;
                 case "shieldMiss":
                     totalBon = who->query_shieldMiss();
@@ -362,84 +412,79 @@ mixed all_active_bonuses(object who, int flag)
                 case "mental resistance": case "light resistance": case "darkness resistance": case "nature resistance":
                 case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
                 case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
-                    totalBon = who->query_resistance(replace_string(Bonus, " resistance", ""));     
+                    totalBon = who->query_resistance(replace_string(Bonus, " resistance", ""));
                     break;
                 case "temporary feats":
                     totalBon = sizeof(who->query_temporary_feats());
                     break;
             }
-        }        
-        if(!dodisplay && itemDisplay == "" || totalBon == 0) 
+        }
+        if(!dodisplay && itemDisplay == "" || totalBon == 0)
         {
             continue;
         }
-        if(Bonus == "temporary feats") 
+        if(Bonus == "temporary feats")
         {
             myDisplay = "%^BOLD%^%^GREEN%^You have (%^BOLD%^%^WHITE%^"+totalBon+"%^BOLD%^%^GREEN%^)";
-            if(totalBon < 2) myDisplay += " %^BOLD%^%^WHITE%^Temporary Feat%^BOLD%^%^GREEN%^.%^RESET%^";    
-            else myDisplay += " %^BOLD%^%^WHITE%^Temporary Feats%^BOLD%^%^GREEN%^.%^RESET%^"; 
+            if(totalBon < 2) myDisplay += " %^BOLD%^%^WHITE%^Temporary Feat%^BOLD%^%^GREEN%^.%^RESET%^";
+            else myDisplay += " %^BOLD%^%^WHITE%^Temporary Feats%^BOLD%^%^GREEN%^.%^RESET%^";
         }
-        else if(Bonus == "caster level") 
+        else if(Bonus == "caster level")
         {
             myDisplay = "%^BOLD%^%^GREEN%^Your %^BOLD%^%^WHITE%^"+capitalize(Bonus)+" bonus %^BOLD%^%^GREEN%^is "+
             "(%^BOLD%^%^WHITE%^"+totalBon+"%^BOLD%^%^GREEN%^).";
         }
         else
-        {            
+        {
             myDisplay = "%^BOLD%^%^GREEN%^Your %^BOLD%^%^WHITE%^"+capitalize(Bonus)+" %^BOLD%^%^GREEN%^is "+
             "(%^BOLD%^%^WHITE%^"+totalBon+"%^BOLD%^%^GREEN%^).";
         }
         if(itemDisplay != "") myDisplay += itemDisplay;
-        if(member_array(Bonus, BONUS_CATS["stats"]) != -1) 
+        if(member_array(Bonus, BONUS_CATS["stats"]) != -1)
         {
             if(!sizeof(statDisplay))
             {
-                 statDisplay = ({"\t\t%^BOLD%^%^WHITE%^Stats%^RESET%^"+BHEAD, myDisplay});
+                 statDisplay = ({"%^GREEN%^-=%^BOLD%^<%^WHITE%^ Stats %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
             }
             else statDisplay += ({myDisplay});
         }
-        else if(member_array(Bonus, BONUS_CATS["skills"]) != -1) 
+        else if(member_array(Bonus, BONUS_CATS["skills"]) != -1)
         {
             if(!sizeof(skillDisplay))
             {
-                skillDisplay = ({"\t\t%^BOLD%^%^WHITE%^Skills%^RESET%^"+BHEAD, myDisplay});
+                skillDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Skills %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
             }
             else skillDisplay += ({myDisplay});
         }
-        else if(member_array(Bonus, BONUS_CATS["saving throw"]) != -1) 
+        else if(member_array(Bonus, BONUS_CATS["saving throw"]) != -1)
         {
             if(!sizeof(savingDisplay))
             {
-                savingDisplay = ({"\t\t%^BOLD%^%^WHITE%^Saving Throws"+BHEAD, myDisplay});
+                savingDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Saving Throws %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
             }
             else savingDisplay += ({myDisplay});
         }
-        else if(member_array(Bonus, BONUS_CATS["resistances"]) != -1) 
+        else if(member_array(Bonus, BONUS_CATS["resistances"]) != -1)
         {
             if(!sizeof(resistanceDisplay))
             {
-                resistanceDisplay = ({"\t\t%^BOLD%^%^WHITE%^Resistances"+BHEAD, myDisplay});
+                resistanceDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Resistances %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
             }
             else resistanceDisplay += ({myDisplay});
         }
-        else if(member_array(Bonus, BONUS_CATS["miscellaneous"]) != -1) 
+        else if(member_array(Bonus, BONUS_CATS["miscellaneous"]) != -1)
         {
             if(!sizeof(miscDisplay))
             {
-                miscDisplay = ({"\t\t%^BOLD%^%^WHITE%^Miscellaneous%^RESET%^"+BHEAD, myDisplay});
+                miscDisplay = ({"\n%^GREEN%^-=%^BOLD%^<%^WHITE%^ Miscellaneous %^GREEN%^>%^RESET%^%^GREEN%^=-\n", myDisplay});
             }
             else miscDisplay += ({myDisplay});
         }
         continue;
     }
-    if(flag) return myItems;    
+    if(flag) return myItems;
     else
     {
-        if(sizeof(statDisplay)) statDisplay += ({BHEAD});
-        if(sizeof(skillDisplay)) skillDisplay += ({BHEAD});
-        if(sizeof(savingDisplay)) savingDisplay += ({BHEAD});
-        if(sizeof(resistanceDisplay)) resistanceDisplay += ({BHEAD});
-        if(sizeof(miscDisplay)) miscDisplay += ({BHEAD});
-        return (({BHEAD}) + statDisplay + skillDisplay + savingDisplay + resistanceDisplay + miscDisplay);
+        return (statDisplay + skillDisplay + savingDisplay + resistanceDisplay + miscDisplay);
     }
 }
