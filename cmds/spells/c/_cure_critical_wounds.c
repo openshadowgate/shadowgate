@@ -9,7 +9,7 @@ create() {
     ::create();
     set_author("pator");
     set_spell_name("cure critical wounds");
-    set_spell_level(([ "cleric" : 4, "bard" : 4,"druid" : 5, "paladin" : 4, "paladin" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "bard" : 4,"druid" : 5, "paladin" : 4, "paladin" : 4, "ranger" : 4 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS cure critical wounds on TARGET");
     set_description("This pray will heal large amounts of damage and wounds to the target.  As the caster's power grows, "
@@ -34,7 +34,7 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-	
+
     tell_room(place,"%^CYAN%^A solid field radiates inward toward "+HIM+"!",({caster,target}));
     if (interactive(caster)) {
         if (target!=caster)
@@ -53,4 +53,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("cause serious wounds");
-    set_spell_level(([ "cleric" : 3 ]));
+    set_spell_level(([ "cleric" : 3, "paladin" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS cause serious wounds on TARGET");
     set_description("When cast it makes a serious wound on the target monster. It is almost as powerful in inflicting "
@@ -45,4 +45,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -3,12 +3,12 @@
 inherit SPELL;
 
 
-void create() 
+void create()
 {
     ::create();
     set_author("pator");
     set_spell_name("cure serious wounds");
-    set_spell_level(([ "cleric" : 3, "bard" : 3, "paladin" : 4, "ranger" : 4,"druid" : 4 ]));
+    set_spell_level(([ "cleric" : 3, "bard" : 3, "paladin" : 3, "ranger" : 3,"druid" : 4 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS cure serious wounds on TARGET");
     set_description("This spell cures a large amount of wounds on one of "
@@ -22,15 +22,15 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     string cast;
 
-    if (interactive(caster)) 
+    if (interactive(caster))
     {
         cast = "%^CYAN%^"+YOU+" starts to mumble a long worshipful incantation!";
-    } 
-    else 
+    }
+    else
     {
         cast = "%^CYAN%^"+YOU+" starts to vibrate and a long worshipful"+
             " incantation to "+MINE+" deity sounds!";
@@ -39,11 +39,11 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_room(place,"%^CYAN%^A solid field radiates inward toward"+HIM+"!",({caster,target}));
-    
-    if(interactive(caster)) 
+
+    if(interactive(caster))
     {
         if (target!=caster)
         {
@@ -59,7 +59,7 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
