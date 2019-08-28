@@ -227,20 +227,25 @@ master - manage spells you know
 
 master
 master list
-master [%^ORANGE%^%^ULINE%^SPELL%^RESET%^]
+master level %^ORANGE%^%^ULINE%^NUM%^RESET%^
+master %^ORANGE%^%^ULINE%^SPELL%^RESET%^
 master forget %^ORANGE%^%^ULINE%^SPELL%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command is an extensive interface to your knowledge of spells. Some caster classes use it to learn spells, some don't. This command is essential for sorcerers, warlocks, psions and psywarriors. Without spell being on their mastered list they won't be able to cast it. Mages can expand their spell knowledge through this command, although the main way they obtain new spells is through the spellbook.
 
-Without an argument this command will display all available knowledge slots for each level.
+%^ORANGE%^<master>%^RESET%^
+  Without an argument this command will display all available knowledge slots for each level.
 
-To learn the %^ORANGE%^%^ULINE%^SPELL%^RESET%^, use %^ORANGE%^<master %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^ where %^ORANGE%^%^ULINE%^SPELL%^RESET%^ is the name of the spell you want to learn.
+%^ORANGE%^<master list>%^RESET%^
+  This will display list of spells you know grouped by level.
 
-To get a detailed list of all spells you mastered use %^ORANGE%^<master list>%^RESET%^.
+%^ORANGE%^<master %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^
+  With this command you will commit to learning a %^ORANGE%^%^ULINE%^SPELL%^RESET%^.
 
-Once per nine hours you can forget already known spell with %^ORANGE%^<master forget>%^RESET%^.
+%^ORANGE%^<master forget %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^
+  Once per 9 hours you can forget a %^ORANGE%^%^ULINE%^SPELL%^RESET%^ and learn a new one.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
