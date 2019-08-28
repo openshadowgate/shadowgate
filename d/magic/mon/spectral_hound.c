@@ -43,7 +43,8 @@ void setup(invoker,clevel)
 void bark()
 {
     if(objectp(caster))
-        tell_room(caster,"%^CYAN%^Your hound conveys a telepathic bark to you.%^RESET%^");
+        if(!random(5))
+            tell_room(caster,"%^CYAN%^Your hound conveys a telepathic bark to you.%^RESET%^");
 }
 
 void be_doggy()
@@ -69,7 +70,7 @@ void be_doggy()
         if(present(caster,ETO))
         {
             object * foes,foe;
-            foes = caster -> query_attackers();                    
+            foes = caster -> query_attackers();
             foreach(foe in foes)
             {
                 if(!objectp(foes))
@@ -99,5 +100,3 @@ void remove_hound()
     }
     destruct(TO);
 }
-
-
