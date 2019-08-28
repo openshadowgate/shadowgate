@@ -30,7 +30,7 @@ void spell_effect()
 
     poisonf = PDIR+POISONS[random(sizeof(POISONS))];
     targ = present(arg,place);
-    
+
     if(objectp(targ) &&
        !living(targ))
     {
@@ -45,10 +45,16 @@ void spell_effect()
         tell_room(place,"%^GREEN%^"+caster->QCN+" extends "+caster->QP+" hand and %^BOLD%^thorn%^RESET%^%^GREEN%^ flies out of it straight into %^BOLD%^"+targ->QCN+"%^RESET%^%^GREEN%^!",({caster}));
         POISON_D->ApplyPoison(targ,poisonf,caster,"injury");
         spell_kill(targ,caster);
-        dest_effect();    
+        dest_effect();
         return;
     }
     targ = present(arg,caster);
+    if(!objectp(targ))
+    {
+        tell_object(caster, "Cant find "+arg+" in your inventory!");
+        TO->remove();
+        return;
+    }
     if(!targ->is_weapon())
     {
         tell_object(caster, "That is not a weapon!");
@@ -68,7 +74,7 @@ void spell_effect()
             return;
         }
         wpn = targ;
-        
+
         pname = poisono->query_poison_name();
         wpn->set("PoisonDoses", clevel/5);
         wpn->set("PoisonType", pname);
@@ -78,16 +84,15 @@ void spell_effect()
         }
         wpn->set_property("temp_oiled","damage bonus acid 5");
         tell_object(caster, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_short()+" %^RESET%^%^GREEN%^as you move your hand along it.%^RESET%^");
-        tell_room(place, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_short()+" %^RESET%^%^GREEN%^as "+caster->QCN+" moves "+caster->QP+" hand along it.%^RESET%^",({caster}));        
-        dest_effect();    
+        tell_room(place, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_short()+" %^RESET%^%^GREEN%^as "+caster->QCN+" moves "+caster->QP+" hand along it.%^RESET%^",({caster}));
+        dest_effect();
         return;
     }
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO))
         TO->remove();
 }
-

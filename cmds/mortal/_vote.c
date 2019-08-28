@@ -2,17 +2,18 @@
 
 int cmd_vote(string str)
 {
-    write("%^GREEN%^-=<%^ORANGE%^Vote for ShadowGate%^GREEN%^>=-%^RESET%^");
+    write("%^GREEN%^-=%^BOLD%^< %^ORANGE%^Vote for ShadowGate%^GREEN%^ >%^RESET%^%^GREEN%^=-%^RESET%^");
     write(
 "%^BOLD%^%^GREEN%^We hope you enjoy playing ShadowGate!
 Please, consider voting for us to bring more people into the game:
-  Top Mud Sites:     %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tms%^RESET%^%^BOLD%^%^GREEN%^
-  The Mud Connector: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tmc%^RESET%^%^BOLD%^%^GREEN%^
+  Top Mud Sites:       %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tms%^RESET%^%^BOLD%^%^GREEN%^
+  The Mud Connector:   %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tmc%^RESET%^%^BOLD%^%^GREEN%^
+  Follow on Grapevine: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
 Thank you! "
-        );        
+        );
     if(str == "social")
     {
-        write("%^GREEN%^-=<%^ORANGE%^Social networks%^GREEN%^>=-%^RESET%^");
+        write("%^GREEN%^-=%^BOLD%^< %^ORANGE%^Social networks%^GREEN%^ >%^RESET%^%^GREEN%^=-%^RESET%^");
         write(
 "%^BOLD%^%^GREEN%^Discord:   %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/discord-sg%^RESET%^%^BOLD%^%^GREEN%^
 %^BOLD%^%^GREEN%^Grapevine: %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
@@ -46,7 +47,6 @@ Use <vote social> to list social networks shadowgate is in.
 %^CYAN%^SEE ALSO%^RESET%^
 
 who, score, mail
-"        
+"
         );
 }
-    
