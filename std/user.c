@@ -1,3 +1,7 @@
+/**
+ * @file
+ */
+
 #include <conf.h>
 #include "/d/shadowgate/dieties.h"
 #include <rooms.h>
@@ -1325,6 +1329,17 @@ void setup() {
 /*     set_posed("thief"); */
 /*   } */
 /*   if(query("is_assassin")) delete("is_assassin"); */
+
+   {
+       string racefile = "/std/races/"+query("race")+".c";
+       if(file_exists(racefile))
+           if(!query("no pk"))
+               if(racefile->is_pk_race(query("subrace")))
+               {
+                   delete("no pk");
+                   tell_object(TO,"%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
+               }
+   }
 
   register_channels();
   if (!original_site) original_site = query_ip_number(TO);

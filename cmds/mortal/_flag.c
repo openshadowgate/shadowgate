@@ -11,6 +11,11 @@ flag command
 #include <std.h>
 #include <security.h>
 
+/**
+ * @file
+ */
+
+
 #define SUPPORTEDFLAGS ({"roleplay flag", "player kill", "scaled level"})
 inherit DAEMON;
 void help();

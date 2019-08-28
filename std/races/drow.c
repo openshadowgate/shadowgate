@@ -1,7 +1,7 @@
 // Bonuses in lib: +2 vs charm spells and sleep immunity, see /std/magic/spell
 // character level +10 MR, /std/Object.c
 //unrestricting ranger based on talk with Nienne ~Circe~ 4/27/11
-//Changes made to integrate a new subrace - Ssri Tel Quessir - based 
+//Changes made to integrate a new subrace - Ssri Tel Quessir - based
 //on a plot run by Loki 11/1/11
 // Ssri Tel Quessir now removed by plot, major elven rite. N, 1/14.
 #include <std.h>
@@ -12,8 +12,8 @@ void create() { ::create(); }
 // age at which each age cat starts: normal, middle, old, venerable
 int *age_brackets() { return ({ 102, 175, 233, 350 }); }
 
-int *restricted_alignments(string subrace) { 
-    return ({ 1, 2, 4, 5, 7, 8 }); 
+int *restricted_alignments(string subrace) {
+    return ({ 1, 2, 4, 5, 7, 8 });
 }
 
 string *restricted_classes(string subrace) {
@@ -30,7 +30,7 @@ int *stat_mods(string subrace) { return ({ 0, 2, -2, 2, 0, 0 }); }
 
 mapping skill_mods(string subrace) { return ([ "perception" : 2 ]); }
 
-int level_adjustment(string subrace) { 
+int level_adjustment(string subrace) {
     return 2;
 }
 
@@ -40,8 +40,8 @@ int sight_bonus(string subrace) {
     return -2;
 }
 
-mapping daily_uses(string subrace) { 
-    return ([ "dancing lights" : 1, "faerie fire" : 1, "darkness" : 1 ]); 
+mapping daily_uses(string subrace) {
+    return ([ "dancing lights" : 1, "faerie fire" : 1, "darkness" : 1 ]);
 }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }
@@ -68,17 +68,17 @@ int fingers() { return 5; }
 string *wielding_limbs() { return ({ "right hand", "left hand" }); }
 
 mapping query_racial_innate(string subrace){
-        return (["dancing lights" : (["type" : "spell", "casting level" : 0.5, 
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				   "refresh time" : -1, "level required" : 0, 
-				   "class specific" : 0]), 
-		   "darkness" : (["type" : "spell", "casting level" : 0.5, 
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				   "refresh time" : -1, "level required" : 0, 
-				   "class specific" : 0]), 
-		   "faerie fire" : (["type" : "spell", "casting level" : 0.5, 
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				   "refresh time" : -1, "level required" : 0, 
+        return (["dancing lights" : (["type" : "spell", "casting level" : 0.5,
+				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+				   "refresh time" : -1, "level required" : 0,
+				   "class specific" : 0]),
+		   "darkness" : (["type" : "spell", "casting level" : 0.5,
+				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+				   "refresh time" : -1, "level required" : 0,
+				   "class specific" : 0]),
+		   "faerie fire" : (["type" : "spell", "casting level" : 0.5,
+				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+				   "refresh time" : -1, "level required" : 0,
 				   "class specific" : 0]), ]);
 }
 
@@ -121,13 +121,13 @@ int weight_mod(string gender) {
     return 6;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 3;    
-    
+
+    map["num"]  = 3;
+
     switch(gender)
     {
     case "male":
@@ -147,15 +147,15 @@ mapping weight_values(string gender, int height)
         case 55..60: map["adjust"] = -15; map["die"] = 15; break;
         case 61..69: map["adjust"] = 0;   map["die"] = 10; break;
         case 70..75: map["adjust"] = 0;   map["die"] = 15; break;
-        case 76..81: map["adjust"] = 15;  map["die"] = 15; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 76..81: map["adjust"] = 15;  map["die"] = 15; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({});
     cha = (int)who->query_stats("charisma");
@@ -187,4 +187,9 @@ string *query_eye_colors(object who) {
             break;
     }
     return choices;
+}
+
+int is_pk_race()
+{
+    return 1;
 }

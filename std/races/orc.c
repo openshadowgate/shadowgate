@@ -28,7 +28,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     if(!subrace || subrace == "") return ({ 2, 0, 2, 0, -2, -2 });
     switch(subrace) {
       case "mountain orc": return ({ 2, 0, 0, -2, 2, -2 }); break;
-      case "orog" : return ({ 4, -2, 0, 0, -2, 2 }); break; 
+      case "orog" : return ({ 4, -2, 0, 0, -2, 2 }); break;
       case "tanarukk" : return ({ 4, 2, 0, 0, -2, -4 }); break;
       default: return ({ 2, 0, 2, 0, -2, -2 }); break; // gray orc default
     }
@@ -130,13 +130,13 @@ int weight_mod(string gender) {
     return 12;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 6;    
-    
+
+    map["num"]  = 6;
+
     switch(gender)
     {
     case "male":
@@ -156,15 +156,15 @@ mapping weight_values(string gender, int height)
         case 56..58: map["adjust"] = -30; map["die"] = 15; break;
         case 59..65: map["adjust"] = 0;   map["die"] = 10; break;
         case 66..68: map["adjust"] = 0;   map["die"] = 15; break;
-        case 69..71: map["adjust"] = 10;  map["die"] = 17; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 69..71: map["adjust"] = 10;  map["die"] = 17; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({}), subrace;
     subrace = (string)who->query("subrace");
@@ -202,8 +202,13 @@ string *query_eye_colors(object who) {
 string *query_subraces(object who) {
     string *subraces;
     subraces = ({"gray orc"});
-    if(OB_ACCOUNT->is_experienced(who->query_true_name()) || OB_ACCOUNT->is_high_mortal(who->query_true_name()) || avatarp(who) || who->query("is_valid_npc")) {  
+    if(OB_ACCOUNT->is_experienced(who->query_true_name()) || OB_ACCOUNT->is_high_mortal(who->query_true_name()) || avatarp(who) || who->query("is_valid_npc")) {
         subraces += ({"mountain orc", "orog", "tanarukk"});
     }
     return subraces;
+}
+
+int is_pk_race()
+{
+    return 1;
 }

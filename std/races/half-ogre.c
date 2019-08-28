@@ -40,7 +40,7 @@ int *min_stats() { return ({ 14, 3, 14, 3, 2, 2 }); }
 int *max_stats() { return ({ 19, 12, 19, 12, 12, 8 }); }
 int *stat_adj() { return ({ 1, 0, 1, -1, 0, -1 }); }
 
-int is_restricted() { return 0; } // restricted races by approval
+int is_restricted() { return 1; } // restricted races by approval
 
 // Stuff needed to replace what was in the old race database
 

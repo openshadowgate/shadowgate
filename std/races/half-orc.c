@@ -90,12 +90,12 @@ int weight_mod(string gender) {
     return 12;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height) {
     mapping map=([]);
-    
-    map["num"]  = 6;    
-    
+
+    map["num"]  = 6;
+
     switch(gender)
     {
     case "male":
@@ -115,9 +115,9 @@ mapping weight_values(string gender, int height) {
         case 58..60: map["adjust"] = -15; map["die"] = 15; break;
         case 61..67: map["adjust"] = 0;   map["die"] = 10; break;
         case 68..70: map["adjust"] = 0;   map["die"] = 15; break;
-        case 71..73: map["adjust"] = 10;  map["die"] = 17; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 71..73: map["adjust"] = 10;  map["die"] = 17; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    return map;   
+    return map;
 }

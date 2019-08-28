@@ -1,7 +1,7 @@
 // Bonuses in lib: all subraces; +2 vs charm spells and sleep immunity, see /std/magic/spell.
 // added Szarkai for specialty character support - all modifiers per drow race. -N, 03/11.
 // Fey'ri new subrace. N, 1/14.
-// note - /d/shadowgate/colors/elf has manual subrace select so that szarkai don't appear. Wild elves are manually restricted 
+// note - /d/shadowgate/colors/elf has manual subrace select so that szarkai don't appear. Wild elves are manually restricted
 // also; the only case of a HM-restricted non-LA subrace in the game, so I didn't bother installing massive lib for it. N, 8/15.
 #include <std.h>
 #include <objects.h>
@@ -14,9 +14,9 @@ int *age_brackets() { return ({ 102, 175, 233, 350 }); }
 
 int *restricted_alignments(string subrace) {
     if(!subrace || subrace == "") return ({ 3, 6, 9 });
-    if(subrace == "aquatic elf") return ({ 1, 3, 4, 6, 7, 9 });    
+    if(subrace == "aquatic elf") return ({ 1, 3, 4, 6, 7, 9 });
     if(subrace == "fey'ri") return ({ 1, 4, 7 });
-    if(subrace == "szarkai") return ({ 1, 2, 4, 5, 7, 8 }); 
+    if(subrace == "szarkai") return ({ 1, 2, 4, 5, 7, 8 });
     return ({ 3, 6, 9 });
 }
 
@@ -46,7 +46,7 @@ string *restricted_deities(string subrace) {
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     if(!subrace || subrace == "") return ({ 0, 2, -2, 0, 0, 0 });
     switch(subrace) {
-      case "aquatic elf": return ({ 0, 2, -2, 2, 0, 0 }); break;        
+      case "aquatic elf": return ({ 0, 2, -2, 2, 0, 0 }); break;
       case "fey'ri": return ({ 0, 2, -2, 2, 0, 0 }); break;
       case "sun elf": return ({ 0, 0, -2, 2, 0, 0 }); break;
       case "szarkai": return ({ 0, 2, -2, 2, 0, 0 }); break;
@@ -59,9 +59,9 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
 mapping skill_mods(string subrace) {
     if(!subrace || subrace == "") return ([ "perception" : 2 ]);
     switch(subrace) {
-      case "aquatic elf": return ([ "perception" : 2, "spellcraft" : 2 ]); break;        
+      case "aquatic elf": return ([ "perception" : 2, "spellcraft" : 2 ]); break;
       case "fey'ri": return ([ "perception" : 2, "influence" : 2 ]); break;
-      case "szarkai": return ([ "perception" : 2]); break;          
+      case "szarkai": return ([ "perception" : 2]); break;
       default: return ([ "perception" : 2 ]); break;
     }
 }
@@ -87,7 +87,7 @@ int sight_bonus(string subrace) {
 mapping daily_uses(string subrace) {
     if(!subrace || subrace == "") return ([]);
     if(subrace == "szarkai") return ([ "dancing lights" : 1, "faerie fire" : 1, "darkness" : 1 ]);
-    if(subrace == "aquatic elf") return ([ "water breathing" : 1 ]);    
+    if(subrace == "aquatic elf") return ([ "water breathing" : 1 ]);
     if(subrace == "fey'ri") return ([ "darkness" : 1, "dimension door" : 1, "clairvoyance" : 1, "alter self" : -1 ]);
     return ([]);
 }
@@ -96,54 +96,54 @@ mapping query_racial_innate(string subrace)
 {
 	switch(subrace)
 	{
-    case "fey'ri" : 
-        return (["darkness" : (["type" : "spell", "casting level" : 0.5, 
-                                "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-                                "refresh time" : -1, "level required" : 0, 
-                                "class specific" : 0]), 
-                 "dimension door" : (["type" : "spell", "casting level" : 0.5, 
-                                      "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-                                      "refresh time" : -1, "level required" : 0, 
-                                      "class specific" : 0]), 
-                 "clairvoyance" : (["type" : "spell", "casting level" : 0.5, 
-                                    "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-                                    "refresh time" : -1, "level required" : 0, 
+    case "fey'ri" :
+        return (["darkness" : (["type" : "spell", "casting level" : 0.5,
+                                "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                "refresh time" : -1, "level required" : 0,
+                                "class specific" : 0]),
+                 "dimension door" : (["type" : "spell", "casting level" : 0.5,
+                                      "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                      "refresh time" : -1, "level required" : 0,
+                                      "class specific" : 0]),
+                 "clairvoyance" : (["type" : "spell", "casting level" : 0.5,
+                                    "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                    "refresh time" : -1, "level required" : 0,
                                     "class specific" : 0]),
-                 "alter self" : (["type" : "spell", "casting level" : 0.5, 
-                                  "daily uses" : -1, "delay" : 1, "uses left" : -1, 
-                                  "refresh time" : -1, "level required" : 0, 
+                 "alter self" : (["type" : "spell", "casting level" : 0.5,
+                                  "daily uses" : -1, "delay" : 1, "uses left" : -1,
+                                  "refresh time" : -1, "level required" : 0,
                                   "class specific" : 0]), ]);
         break;
-    case "szarkai" : 
-        return (["dancing lights" : (["type" : "spell", "casting level" : 0.5, 
-                                      "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-                                      "refresh time" : -1, "level required" : 0, 
-                                      "class specific" : 0]), 
-                 "darkness" : (["type" : "spell", "casting level" : 0.5, 
-                                "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-                                "refresh time" : -1, "level required" : 0, 
-                                "class specific" : 0]), 
-                 "faerie fire" : (["type" : "spell", "casting level" : 0.5, 
-                                   "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-                                   "refresh time" : -1, "level required" : 0, 
+    case "szarkai" :
+        return (["dancing lights" : (["type" : "spell", "casting level" : 0.5,
+                                      "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                      "refresh time" : -1, "level required" : 0,
+                                      "class specific" : 0]),
+                 "darkness" : (["type" : "spell", "casting level" : 0.5,
+                                "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                "refresh time" : -1, "level required" : 0,
+                                "class specific" : 0]),
+                 "faerie fire" : (["type" : "spell", "casting level" : 0.5,
+                                   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                   "refresh time" : -1, "level required" : 0,
                                    "class specific" : 0]), ]);
         break;
     case "aquatic elf":
-        return (["commune" : (["type" : "spell", "casting level" : 0.5, 
-                               "daily uses" : -1, "delay" : 1, "uses left" : -1,	
-                               "refresh time" : -1, "level required" : 0, 
+        return (["commune" : (["type" : "spell", "casting level" : 0.5,
+                               "daily uses" : -1, "delay" : 1, "uses left" : -1,
+                               "refresh time" : -1, "level required" : 0,
                                "class specific" : 0]),
-                 "water breathing" : (["type" : "spell", "casting level" : 1, 
-                                "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-                                "refresh time" : -1, "level required" : 0, 
-                                "class specific" : 0]),]);				   
+                 "water breathing" : (["type" : "spell", "casting level" : 1,
+                                "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                "refresh time" : -1, "level required" : 0,
+                                "class specific" : 0]),]);
         break;
-        
-    default: 
-        return (["commune" : (["type" : "spell", "casting level" : 0.5, 
-                               "daily uses" : -1, "delay" : 1, "uses left" : -1,	
-                               "refresh time" : -1, "level required" : 0, 
-                               "class specific" : 0]), ]);				   
+
+    default:
+        return (["commune" : (["type" : "spell", "casting level" : 0.5,
+                               "daily uses" : -1, "delay" : 1, "uses left" : -1,
+                               "refresh time" : -1, "level required" : 0,
+                               "class specific" : 0]), ]);
         break;
 	}
 	return 0;
@@ -211,13 +211,13 @@ int weight_mod(string gender) {
     return 6;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 3;    
-    
+
+    map["num"]  = 3;
+
     switch(gender)
     {
     case "male":
@@ -237,15 +237,15 @@ mapping weight_values(string gender, int height)
         case 50..52: map["adjust"] = -15; map["die"] = 15; break;
         case 53..57: map["adjust"] = 0;   map["die"] = 10; break;
         case 58..60: map["adjust"] = 0;   map["die"] = 15; break;
-        case 61..63: map["adjust"] = 5;   map["die"] = 15; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 61..63: map["adjust"] = 5;   map["die"] = 15; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     string *choices = ({}), subrace;
     int cha;
     cha = (int)who->query_stats("charisma");
@@ -347,8 +347,17 @@ string *query_subraces(object who) {
        OB_ACCOUNT->is_high_mortal(who->query_true_name()) ||
        avatarp(who) ||
        who->query("is_valid_npc"))
-    {  
+    {
         subraces += ({"wild elf", "fey'ri", "szarkai", "aquatic elf"});
     }
     return subraces;
+}
+
+int is_pk_race(string subrace)
+{
+    if(!subrace || subrace == "")
+        return 0;
+    if(subrace == "fey'ri" ||
+       subrace == "szarkai")
+        return 1;
 }

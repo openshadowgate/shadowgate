@@ -92,13 +92,13 @@ int weight_mod(string gender) {
     return 6;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 3;    
-    
+
+    map["num"]  = 3;
+
     switch(gender)
     {
     case "male":
@@ -118,24 +118,24 @@ mapping weight_values(string gender, int height)
         case 93..98:   map["adjust"] = -30; map["die"] = 30; break;
         case 99..111:  map["adjust"] = 0;   map["die"] = 20; break;
         case 112..117: map["adjust"] = 0;   map["die"] = 30; break;
-        case 118..124: map["adjust"] = 20;  map["die"] = 32; break;        
-        default:       map["adjust"] = 0;   map["die"] = 20; break;            
-        }       
+        case 118..124: map["adjust"] = 20;  map["die"] = 32; break;
+        default:       map["adjust"] = 0;   map["die"] = 20; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({});
     cha = (int)who->query_stats("charisma");
     cha -= 4;
     if(cha < 0) { cha = 0; }
-    switch(cha) 
+    switch(cha)
     {
     case 14..30:
-        choices += ({"ebony"});            
+        choices += ({"ebony"});
     case 0..13:
         choices += ({"black", "blue-black", "dark green"});
         break;
@@ -144,3 +144,8 @@ string *query_hair_colors(object who) {
 }
 
 string *query_eye_colors(object who) { return ({"purple"}); }
+
+int is_pk_race()
+{
+    return 1;
+}

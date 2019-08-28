@@ -111,9 +111,9 @@ mixed query_racial_innate(string subrace)
 	switch(subrace)
 	{
 		case "gray dwarf": case "duergar":
-			return (["invisibility" : (["type" : "spell", "casting level" : 0.5, 
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				   "refresh time" : -1, "level required" : 0, 
+			return (["invisibility" : (["type" : "spell", "casting level" : 0.5,
+				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+				   "refresh time" : -1, "level required" : 0,
 				   "class specific" : 0])]);
 			break;
 		default:
@@ -159,13 +159,13 @@ int weight_mod(string gender) {
     return 12;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 4;    
-    
+
+    map["num"]  = 4;
+
     switch(gender)
     {
     case "male":
@@ -185,15 +185,15 @@ mapping weight_values(string gender, int height)
         case 41..43: map["adjust"] = -20; map["die"] = 15; break;
         case 44..48: map["adjust"] = 0;   map["die"] = 10; break;
         case 49..51: map["adjust"] = 0;   map["die"] = 15; break;
-        case 52..54: map["adjust"] = 15;  map["die"] = 20; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 52..54: map["adjust"] = 15;  map["die"] = 20; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({}), subrace;
     cha = (int)who->query_stats("charisma");
@@ -247,7 +247,7 @@ varargs string *query_eye_colors(object who) {
         switch(cha) {
             case 18..30:
                 choices += ({"sable", "chocolate", "coffee"});
-            case 12..17: 
+            case 12..17:
                 choices += ({"hazel"});
             case 0..11:
                 choices += ({"brown"});
@@ -262,5 +262,14 @@ string *query_subraces(object who){
     string *subraces;
     subraces = ({"shield dwarf", "gold dwarf"});
     if(OB_ACCOUNT->is_experienced(who->query_true_name()) || OB_ACCOUNT->is_high_mortal(who->query_true_name()) || avatarp(who) || who->query("is_valid_npc")) subraces += ({"gray dwarf"});
-    return subraces;     
+    return subraces;
+}
+
+int is_pk_race(string subrace)
+{
+    if(!subrace || subrace == "")
+        return 0;
+    if(subrace == "duergar" ||
+       subrace == "gray dwarf")
+        return 1;
 }

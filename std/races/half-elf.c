@@ -65,10 +65,10 @@ mapping daily_uses(string subrace) {
 mapping query_racial_innate(string subrace) {
 	if(!subrace || subrace == "") return 0;
 	switch(subrace) {
-		case "tiefling": 
-				return (["light" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+		case "tiefling":
+				return (["light" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
 		default:
@@ -139,12 +139,12 @@ int weight_mod(string gender) {
     return 8;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height){
     mapping map=([]);
-    
-    map["num"]  = 3;    
-    
+
+    map["num"]  = 3;
+
     switch(gender)
     {
     case "male":
@@ -164,10 +164,19 @@ mapping weight_values(string gender, int height){
         case 58..60: map["adjust"] = -18; map["die"] = 18; break;
         case 61..66: map["adjust"] = -5;  map["die"] = 12; break;
         case 67..70: map["adjust"] = 0;   map["die"] = 18; break;
-        case 71..73: map["adjust"] = 10;  map["die"] = 20; break;        
-        default:     map["adjust"] = 0;   map["die"] = 12; break;            
-        }       
+        case 71..73: map["adjust"] = 10;  map["die"] = 20; break;
+        default:     map["adjust"] = 0;   map["die"] = 12; break;
+        }
     }
-    
-    return map;   
+
+    return map;
+}
+
+int is_pk_race(string subrace)
+{
+    if(!subrace || subrace == "")
+        return 0;
+    if(subrace == "fey'ri" ||
+       subrace == "szarkai")
+        return 1;
 }
