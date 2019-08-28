@@ -40,7 +40,7 @@ int *min_stats() { return ({ 14, 3, 14, 3, 2, 2 }); }
 int *max_stats() { return ({ 19, 12, 19, 12, 12, 8 }); }
 int *stat_adj() { return ({ 1, 0, 1, -1, 0, -1 }); }
 
-int is_restricted() { return 1; } // restricted races by approval
+int is_restricted() { return 0; } // restricted races by approval
 
 // Stuff needed to replace what was in the old race database
 
@@ -92,13 +92,13 @@ int weight_mod(string gender) {
     return 6;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 6;    
-    
+
+    map["num"]  = 6;
+
     switch(gender)
     {
     case "male":
@@ -118,15 +118,15 @@ mapping weight_values(string gender, int height)
         case 78..80: map["adjust"] = -20; map["die"] = 15; break;
         case 81..87: map["adjust"] = 0;   map["die"] = 10; break;
         case 88..90: map["adjust"] = 0;   map["die"] = 15; break;
-        case 91..93: map["adjust"] = 10;  map["die"] = 17; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 91..93: map["adjust"] = 10;  map["die"] = 17; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({});
     cha = (int)who->query_stats("charisma");
