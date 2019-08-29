@@ -13,7 +13,9 @@ void create()
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS reduce person");
-    set_description("When this spell is cast, humanoid caster will shrink twice in size. This spell will turn humans into halflings, firbolgs into humans. Halflings will turn into mice!");
+    set_description("When this spell is cast, humanoid caster will shrink twice in size. This spell will turn humans into halflings, firbolgs into humans. Halflings will turn into mice!
+
+With this spell you gain size AC bonus, bonus to dexterity and penalty to strength.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
@@ -51,7 +53,9 @@ void spell_effect(int prof)
         keepsize = 1;
     target->set_property("spelled", ({TO}) );
     target->set_property("enlarged",1);
-    target->add_ac_bonus(4);
+    target->add_ac_bonus(2);
+    target->add_stat_bonus("strength",-2);
+    target->add_stat_bonus("dexterity",2);
     call_out("dest_effect",ROUND_LENGTH*clevel);
     addSpellToCaster();
 }
@@ -63,7 +67,9 @@ void dest_effect()
     {
         if(!keepsize)
             target->set_size_bonus(0);
-        target->add_ac_bonus(-4);
+        target->add_ac_bonus(-2);
+        target->add_stat_bonus("strength",2);
+        target->add_stat_bonus("dexterity",-2);
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target, "%^YELLOW%^You grow back to normal!");
         tell_room(environment(target),"%^YELLOW%^"+target->QCN+" grows back to normal size.", target );

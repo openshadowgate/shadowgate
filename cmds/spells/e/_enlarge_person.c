@@ -12,7 +12,9 @@ void create()
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS enlarge person [on TARGET]");
-    set_description("When this spell is cast, humanoid caster will grow twice in size. This spell will turn halflings into humans, humans into firbolgs, and firbolgs into mountains.");
+    set_description("When this spell is cast, humanoid caster will grow twice in size. This spell will turn halflings into humans, humans into firbolgs, and firbolgs into mountains.
+
+With this spell you gan bonuses to constitution and strenght, gain penalty to AC and dexterity.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
@@ -43,7 +45,10 @@ void spell_effect(int prof)
 
     target->set_property("added short",({"%^YELLOW%^ (gigantic)%^RESET%^"}));
     target->set_size_bonus(1);
-    target->add_ac_bonus(-4);
+    target->add_ac_bonus(-2);
+    target->add_stat_bonus("strength",2);
+    target->add_stat_bonus("constitution",2);
+    target->add_stat_bonus("dexterity",-2);
     target->set_property("spelled", ({TO}) );
     target->set_property("enlarged",1);
     call_out("dest_effect",ROUND_LENGTH*clevel);
@@ -56,8 +61,11 @@ void dest_effect()
     if(objectp(target))
     {
         target->set_size_bonus(0);
-        target->add_ac_bonus(4);
+        target->add_ac_bonus(2);
         target->remove_property_value("spelled", ({TO}) );
+        target->add_stat_bonus("strength",-2);
+        target->add_stat_bonus("constitution",-2);
+        target->add_stat_bonus("dexterity",2);
         tell_object(target, "%^YELLOW%^You shrink back to normal!");
         tell_room(environment(target),"%^YELLOW%^"+target->QCN+" shrinks back to normal size.", target );
         target->remove_property("added short",({"%^YELLOW%^ (gigantic)%^RESET%^"}));
