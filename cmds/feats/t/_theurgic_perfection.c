@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("Hierophant");
     feat_name("theurgic perfection");
     feat_prereq("Hierophant L7");
-    feat_desc("As experienced theurgist, Hierophant gains ability to keep any cast spell in memory, with a change based on her wisdom.");
+    feat_desc("As experienced theurgist, Hierophant gains ability to keep any cast spell in memory, with a chance based on her wisdom.");
     permanent(1);
 }
 
@@ -54,4 +54,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
