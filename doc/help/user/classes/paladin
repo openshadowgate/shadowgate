@@ -22,11 +22,9 @@ A paladin serves someone or some cause. They serve a lord or nobility, or the or
 
 Paladins are granted a subset of divine utility spells based on their wisdom score, including spell to summon a powerful mount. You can see their spell list with %^ORANGE%^<spells paladin>%^RESET%^. Paladins %^ORANGE%^<prepare>%^RESET%^ spells from this list and commit it to memory, you can see list of spells in memory with %^ORANGE%^<recall paladin spells>%^RESET%^. When they %^ORANGE%^<cast>%^RESET%^ spell they expend spell from the memory.
 
-Paladins can cast their spells in any armor, but must not wield while doing so.
+Paladins can cast their spells in any armor, but must not wield while doing so as they rely bot on spelling and gestures in casting.
 
-Paladins rely on melee combat, and don't make good casters. Their combat powers come from martial feat tree.
-
-%^CYAN%^Before playing a paladin, be sure to read %^ORANGE%^<help knights>%^CYAN%^. It is recommended you follow those guidelines.%^RESET%^
+Paladins rely on melee combat and don't make good casters. Their combat powers come from martial feat tree.
 
 %^RESET%^%^CYAN%^See also:%^RESET%^ feats, stats, skills, spells, cast, prepare, buff, knights, deities, prestige classes
 
