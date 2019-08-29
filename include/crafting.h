@@ -1,4 +1,6 @@
-// New defines list for crafting skills.
+/**
+ * @file
+ */
 
 #define COMMONFILE "/d/common/obj/"
 
