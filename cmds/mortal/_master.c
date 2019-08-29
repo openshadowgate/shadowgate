@@ -204,12 +204,17 @@ void validate_mastered()
     if(sizeof(mymastered))
         foreach(myclass in keys(mymastered))
         {
-            string * spell_index = keys(MAGIC_D->query_index(myclass));
+            string *spell_index;
+            mapping index_map = MAGIC_D->query_index(myclass);
+            if(!sizeof(index_map))
+                spell_index = ({});
+            else
+                spell_index = keys(index_map);
             foreach(myspell in mymastered[myclass])
             {
                 if(member_array(myspell,spell_index)==-1)
                 {
-                    tell_object(TP,"Wrong spell, removing: "+myspell);
+                    tell_object(TP,"Wrong spell in class "+myclass+", removing: "+myspell);
                     TP->remove_mastered(myclass,myspell);
                 }
             }
