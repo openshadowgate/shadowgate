@@ -1,5 +1,6 @@
 #include <std.h>
 #include <magic.h>
+#include <daemons.h>
 inherit WEAPONLESS;
 
 object caster;
@@ -65,6 +66,7 @@ void be_doggy()
         livings = all_living(ETO);
         livings -= ({TO});
         livings -= ({caster});
+        livings = filter_array(livings, "is_non_immortal",FILTERS_D);
         if(sizeof(livings))
             bark();
         if(present(caster,ETO))

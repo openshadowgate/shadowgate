@@ -1332,6 +1332,7 @@ void setup() {
 
    {
        string racefile = "/std/races/"+query("race")+".c";
+       tell_object(FPL("ilmarinen"),":stuff happens");
        if(file_exists(racefile))
            if(!query("no pk"))
                if(racefile->is_pk_race(query("subrace")))
