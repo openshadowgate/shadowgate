@@ -1320,21 +1320,11 @@ void setup() {
         }
     }
 
-/*   if (is_class("assassin")) { */
-/*     set_class("thief"); */
-/*     set_mlevel("thief",query_class_level("assassin")); */
-/*     remove_class("assassin"); */
-/* //    set("is_assassin",1); */
-/* //    add_search_path("/cmds/assassin"); */
-/*     set_posed("thief"); */
-/*   } */
-/*   if(query("is_assassin")) delete("is_assassin"); */
-
    {
        string racefile = "/std/races/"+query("race")+".c";
-       tell_object(FPL("ilmarinen"),":stuff happens");
+
        if(file_exists(racefile))
-           if(!query("no pk"))
+           if(query("no pk"))
                if(racefile->is_pk_race(query("subrace")))
                {
                    delete("no pk");

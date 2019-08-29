@@ -5,7 +5,7 @@ inherit SPELL;
 
 int size;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("enlarge person");
@@ -19,12 +19,12 @@ void create()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     if(!target)
         target = caster;
-    
-    if (target->query_property("enlarged")) 
+
+    if (target->query_property("enlarged"))
     {
         tell_object(caster,"The spell is repelled by its own magic.");
         TO->remove();
@@ -35,7 +35,7 @@ void spell_effect(int prof)
         tell_object(caster,"The spell is repelled by similar magic.");
         TO->remove();
     }
-    
+
     spell_successful();
 
     tell_object(target,"%^YELLOW%^You grow twice in size!");
@@ -43,6 +43,7 @@ void spell_effect(int prof)
 
     target->set_property("added short",({"%^YELLOW%^ (gigantic)%^RESET%^"}));
     target->set_size_bonus(1);
+    target->add_ac_bonus(-4);
     target->set_property("spelled", ({TO}) );
     target->set_property("enlarged",1);
     call_out("dest_effect",ROUND_LENGTH*clevel);
@@ -50,11 +51,12 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
-{    
-    if(objectp(target)) 
+void dest_effect()
+{
+    if(objectp(target))
     {
         target->set_size_bonus(0);
+        target->add_ac_bonus(4);
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target, "%^YELLOW%^You shrink back to normal!");
         tell_room(environment(target),"%^YELLOW%^"+target->QCN+" shrinks back to normal size.", target );
@@ -64,4 +66,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
