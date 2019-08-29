@@ -1,6 +1,5 @@
 #include <std.h>
 #include <move.h>
-#include <crafting.h>
 #include <objects.h>
 #define VMATERIALTYPES (["leatherworker" : ({"leather"}),\
                          "jeweller" : ({"metal", "wood"}),\
@@ -13,6 +12,8 @@
 #define UNSET "%^BOLD%^%^WHITE%^(Unset)%^RESET%^"
 
 inherit OBJECT;
+
+#include <crafting.h>
 
 int prof;
 string file, type, material, color, skill, mymenu;

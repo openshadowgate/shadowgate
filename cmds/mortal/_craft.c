@@ -1,8 +1,9 @@
 #include <std.h>
 #include <daemons.h>
-#include <crafting.h>
 inherit DAEMON;
 inherit REFS_D;
+
+#include <crafting.h>
 
 #define VALID_TYPES ({"armorsmith","leatherworker","woodworker","tailor","weaponsmith","jeweller"})
 

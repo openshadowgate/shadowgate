@@ -1,9 +1,10 @@
 #include <std.h>
 #include "items.h"
-#include <crafting.h>
 #include <move.h>
 #include <langs.h>
 inherit OBJECT;
+
+#include <crafting.h>
 
 #define STATBONUSES (({ "constitution", "charisma", "dexterity", "strength", "intelligence", "wisdom" }))
 #define SKILLBONUSES (({ "academics", "athletics", "craft, armorsmith", "craft, jeweller", "craft, leatherworker", "craft, tailor", "craft, weaponsmith", "craft, woodworker",\
@@ -116,7 +117,7 @@ void check_ids(string str, string *ids) {
     write("Type ** to quit.");
     input_to("pref");
     return 1;
-}    
+}
 
 void short(string str) {
     if(!str) {
@@ -222,7 +223,7 @@ void check_long(string str, string longd) {
         return 1;
     }
     write("Please input the Long describe >Note use ** to end the long describe don't quit in this field.");
-    input_to("long", "");   
+    input_to("long", "");
     return 1;
 }
 
@@ -443,7 +444,7 @@ void check_stat_add(int mybonus, string str) {
 }
 
 void check_heart_beat(string str) {
-    if(str == "**") return exit(); 
+    if(str == "**") return exit();
     if(str == "n" || str == "N" || str == "No" || str == "no") {
         finish();
         return 1;
@@ -464,7 +465,7 @@ void check_heart_beat(string str) {
     input_to("check_heart_beat", str);
     return 1;
 }
-                
+
 void number_of_emotes(string str) {
     if(str == "**") return exit();
     if(to_int(str) < 1 || to_int(str) > 10) {
@@ -498,7 +499,7 @@ void grab_personal_emote(string str, string emote) {
         "Use $SUB to display he/she "+
         "(the subjective of the item possessor).\n");
         write("Type ** to quit.");
-        input_to("grab_personal_emote", str);       
+        input_to("grab_personal_emote", str);
         return 1;
     }
     emote = str;
@@ -521,7 +522,7 @@ void grab_room_emote(string str, string emote) {
         "the item possessor).\n");
         write("Type ** to quit.");
         input_to("grab_room_emote", str);
-        return 1;       
+        return 1;
     }
     emote = str;
     write(str+"\nYou entered the above for what the room sees for the emote "+
@@ -542,7 +543,7 @@ void check_personal_emote(string str, string emote) {
         "Use $SUB to display he/she (the subjective of the item "+
         "possessor).\n");
         write("Type ** to quit.");
-        input_to("grab_personal_emote", str);   
+        input_to("grab_personal_emote", str);
         return 1;
     }
     if(str == "Y" || str == "yes" || str == "y" || str == "Yes") {
@@ -561,7 +562,7 @@ void check_personal_emote(string str, string emote) {
         "item possessor).\n");
         write("Type ** to quit.");
         input_to("grab_room_emote", str);
-        return 1;               
+        return 1;
     }
     write(emote+"\nYou entered the above for what the item possessor sees for "+
     "the emote "+cur_emote+".\n  Is this correct, yes or no?");
@@ -572,7 +573,7 @@ void check_personal_emote(string str, string emote) {
 
 void check_room_emote(string str, string emote) {
     if(str == "**") return exit();
-    if(str == "n" || str == "No" || str == "no" || str == "N") {       
+    if(str == "n" || str == "No" || str == "no" || str == "N") {
         write("Input the message that the people in the room see for the "+
         "emote "+cur_emote+".\nUse $O to display the short of the object."+
         "\nUse $N to display the item possessor.\n"+
@@ -582,7 +583,7 @@ void check_room_emote(string str, string emote) {
         "item possessor).\n");
         write("Type ** to quit.");
         input_to("grab_room_emote", str);
-        return 1;       
+        return 1;
     }
     if(str == "y" || str == "Y" || str == "yes" || str == "Yes") {
         emote = replace_string(emote, "$O", "\"+query_short()+\"");
@@ -601,7 +602,7 @@ void check_room_emote(string str, string emote) {
             "Use $SUB to display he/she (the subjective of "+
             "the item possessor).\n");
             write("Type ** to quit.");
-            input_to("grab_personal_emote", str);   
+            input_to("grab_personal_emote", str);
             return 1;
         }
         else {

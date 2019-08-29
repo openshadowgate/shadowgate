@@ -1,4 +1,4 @@
-#include <std.h>  
+#include <std.h>
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -8,7 +8,7 @@ inherit SPELL;
 int timer,flag,stage,toggle,counter;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("visions from within");
@@ -30,7 +30,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_room(place,"%^RESET%^%^BOLD%^%^BLACK%^Fearsome %^BLACK%^n%^BLUE%^i%^BLUE%^g%^BLUE%^h%^BLACK%^tma%^BLUE%^r%^BLACK%^i%^BLUE%^s%^BLACK%^h %^BLUE%^c%^BLACK%^re%^BLUE%^a%^BLUE%^t%^BLACK%^ur%^BLUE%^e%^BLUE%^s%^BLACK%^ spring into being!%^RESET%^%^RESET%^");
     counter = clevel/2;
@@ -39,7 +39,7 @@ void spell_effect(int prof)
     execute_attack();
 }
 
-void execute_attack() 
+void execute_attack()
 {
     object *foes=({}),targ;
     int i;
@@ -49,7 +49,7 @@ void execute_attack()
         flag = 1;
         ::execute_attack();
         return;
-    }    
+    }
 
     if(!objectp(caster) || !objectp(place) || !present(caster,place)|| counter<0)
     {
@@ -84,8 +84,7 @@ void execute_attack()
 
 
 void dest_effect() {
-    if(objectp(place)) tell_object(place,"%^RESET%^%^BOLD%^%^GREEN%^The %^BLACK%^a%^BLACK%^c%^GREEN%^idic %^GREEN%^fo%^BLACK%^g%^GREEN%^ finally disperses!%^RESET%^%^RESET%^");
+    if(objectp(place)) tell_object(place,"%^BOLD%^%^BLUE%^The nightmares recede.%^RESET%^");
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
