@@ -102,6 +102,7 @@
     "rapier":(["file":COMMONFILE"weapon/rapier","units":2]),\
     "scythe":(["file":COMMONFILE"weapon/scythe","units":3]),\
     "shurikens":(["file":COMMONFILE"lrweapon/shurikens","units":1]),\
+    "darts":(["file":COMMONFILE"lrweapon/darts","units":1]),\
     "small hammer":(["file":COMMONFILE"weapon/hammer_sm","units":2]),\
     "two-handed sword":(["file":COMMONFILE"weapon/two_hand_sword","units":4]),\
     "small axe":(["file":COMMONFILE"weapon/handaxe","units":2]),\
@@ -114,6 +115,7 @@
     "carving":(["file":COMMONFILE"misc/carving","units":1,"type":"carving"]),\
     "crossbow":(["file":COMMONFILE"lrweapon/hcrossbow","units":3,"type":"lrweapon"]),\
     "drums":(["file":COMMONFILE"instruments/drum","units":2,"type":"instrument"]),\
+    "darts":(["file":COMMONFILE"lrweapon/darts","units":1]),\
     "flight arrows":(["file":COMMONFILE"lrweapon/flarrows","units":1,"type":"arrows"]),\
     "flute":(["file":COMMONFILE"instruments/flute","units":1,"type":"instrument"]),\
     "giant club":(["file":COMMONFILE"weapon/giant_club","units":5,"type":"weapon"]),\
