@@ -26,7 +26,7 @@ inherit "/std/lang";
                           360,365,370,375,380,385,390,395,400,405,410,415,420,425,430,435,440,445,450,455,460,465,470,475,480,485,495,500,505,510,\
                           515,520,525,530,535,540,545,550,555,565,576,585,590,595,600,605,610})
 
-#define SAVING_THROW ({"paralyzation_poison_death","rod_staff_wand","breath_weapon","petrification_polymorph","spell","will","reflex","fort"})
+#define SAVING_THROW ({"paralyzation_poison_death","rod_staff_wand","breath_weapon","petrification_polymorph","spell","will","reflex","fortitude"})
 
 int invis;
 int ok_to_heal, player_age, spell_interrupted;
