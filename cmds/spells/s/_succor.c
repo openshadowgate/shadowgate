@@ -11,7 +11,7 @@ void create(){
     set_spell_name("succor");
     set_spell_level(([ "cleric" : 9 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS succor DESTINATION");
+    set_syntax("cast CLASS succor to DESTINATION");
     set_description("The succor spell will transport the priest to a location that he or she has remembered from the "
 "'remembered location' list. To remember a new location, use 'remember here as <location>', to see a list of all "
 "remembered locations, use 'recall locations'. This spell must be cast while at peace.
@@ -51,7 +51,7 @@ void spell_effect(int prof) {
                 "in your mind, focusing to bring yourself to it.");
 
     spell_successful();
-    
+
     if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
     {
         tell_object(caster,"You sense something is wrong with your prayer and loose concentration.");
@@ -72,12 +72,10 @@ void spell_effect_next()
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
     }
-    dest_effect();    
+    dest_effect();
 }
 
 void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
-
