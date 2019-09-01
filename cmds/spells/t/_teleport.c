@@ -12,7 +12,7 @@ void create() {
     set_spell_name("teleport");
     set_spell_level(([ "mage" : 5 ]));
     set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS teleport to <location>");
+    set_syntax("cast CLASS teleport on LOCATION");
     set_description("The teleport spell will move the caster from his current location to a specified 'remembered "
 "location'.  The remember command is used to retain a location in the caster's memory, <remember here as cave> for example"
 ".  Then the caster can type <cast classname teleport to cave> and the the spell will move the caster to the location "
@@ -24,7 +24,7 @@ void create() {
     set_verbal_comp();
     set_arg_needed();
 	set_helpful_spell(1);
-    set_peace_needed(1);    
+    set_peace_needed(1);
 }
 
 string query_cast_string() {
@@ -72,12 +72,10 @@ void spell_effect_next()
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
     }
-    dest_effect();    
+    dest_effect();
 }
 
 void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
-

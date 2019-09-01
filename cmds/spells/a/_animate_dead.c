@@ -83,7 +83,7 @@ void spell_effect(int prof)
 
     for(i=0;i<sizeof(targs);i++) {
         undead=new(UNDEADDIR+"skeleton");
-        lvl = undead->query_level();
+        lvl = clevel/6;
 
         if(((num_mon + lvl) > clevel)) {
             undead->remove();
@@ -98,10 +98,16 @@ void spell_effect(int prof)
 
         targs[i]->remove();
         num_mon += lvl;
+
         undead->set_property("raised",clevel);
         undead->set_property("minion",caster);
         undead->move(environment(caster));
 
+        undead->set_guild_level("fighter",clevel*5/6);
+        undead->set_level(clevel*5/6);
+        undead->set_hd(clevel,6);
+
+        undead->set_max_hp(clevel*12);
         undead->set_hp(undead->query_max_hp());
         undead->set_overall_ac(10-clevel);
         undead->serve(caster);

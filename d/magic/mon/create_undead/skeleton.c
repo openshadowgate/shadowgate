@@ -15,10 +15,10 @@ void create(){
     set_class("fighter");
 
     set_guild_level("fighter",6);
-    set_level(6);
-    set_hd(6,6);
+    set_level(8);
+    set_hd(8,8);
 
-    set_max_hp(random(30)+155);
+    set_max_hp(random(30)+255);
     set_hp(query_max_hp());
 
     set_wielding_limbs(({"right hand","left hand"}));
@@ -59,7 +59,6 @@ void create(){
                     }));
 
     set_fighter_style("soldier");
-    set_func_chance(15);
     command("message in marches in.");
     command("message out marches $D.");
 }

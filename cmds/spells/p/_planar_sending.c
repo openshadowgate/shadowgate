@@ -53,7 +53,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    teleportee = present(TP->realName(targ),environment(caster));
+    teleportee = present(targ,environment(caster));
     if(!objectp(teleportee))
     {
      	tell_object(caster,"Your target not in this area, so the spell fails.");
@@ -69,7 +69,7 @@ void spell_effect(int prof) {
      	dest_effect();
      	return;
     }
-    
+
     tell_room(place,"%^BOLD%^%^BLUE%^Bright blue light envelops "+teleportee->QCN+"!%^RESET%^");
     spell_successful();
     call_out("do_sending",ROUND_LENGTH);
@@ -92,7 +92,7 @@ void do_sending()
     else
     {
         tell_room(place,"%^BOLD%^%^BLUE%^"+teleportee->QCN+"%^BOLD%^%^BLUE%^ vanishes!");
-        tell_room(endplace,"%^BOLD%^%^BLUE%^"+teleportee->QCN+"%^BOLD%^%^BLUE%^ appears from the flash of bright blue light!");
+        tell_room(endplace,"%^BOLD%^%^BLUE%^"+teleportee->QCN+"%^BOLD%^%^BLUE%^ appears in the flash of bright blue light!");
     }
     dest_effect();
 }
@@ -101,4 +101,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

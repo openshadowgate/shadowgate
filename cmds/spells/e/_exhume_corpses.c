@@ -5,7 +5,7 @@ inherit SPELL;
 
 #define DELAY 120
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("exhume corpses");
@@ -17,7 +17,7 @@ void create()
     evil_spell(1);
     set_components(([
       "mage" : ([ "bit of bone" : 1, "carbon" : 1]),
-    ]));    
+    ]));
 }
 
 int preSpell()
@@ -42,7 +42,7 @@ void spell_effect()
     int i;
 
     tell_room(place,"%^CYAN%^A low continuous thunder rolls over the place, and %^BOLD%^%^BLACK%^co%^RESET%^%^CYAN%^r%^BOLD%^%^BLACK%^p%^RESET%^%^CYAN%^s%^CYAN%^e%^BOLD%^%^BLACK%^s%^RESET%^%^CYAN%^ begin to materialize everywhere.");
-    for (i=0; i<clevel/2; i++)
+    for (i=0; i<clevel/12 + 1; i++)
     {
         object corpse;
         corpse = new(OB_CORPSE);
@@ -56,4 +56,3 @@ void spell_effect()
     }
     caster->set_property("exhume_corpses",time());
 }
-
