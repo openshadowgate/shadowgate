@@ -7,6 +7,8 @@
 inherit SPELL;
 int num_mon;
 
+#define UNDEADDIR "/d/magic/mon/create_undead/"
+
 void fail();
 
 void create() {
@@ -31,7 +33,7 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_helpful_spell(1);
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *targs=({}),*temp=({}),*inven=({}),undead,controller;
     int i,j,lvl,flag;
@@ -42,20 +44,20 @@ void spell_effect(int prof)
             return;
         }
         targs = ({target});
-    } 
+    }
     else {
         targs = all_inventory(environment(caster));
-        
+
         for(i=0;i<sizeof(targs);i++) {
             if(!targs[i]->is_corpse()) continue;
                 temp += ({ targs[i]});
         }
         targs = temp;
 
-        if(!sizeof(targs)) { 
+        if(!sizeof(targs)) {
             tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUCK OUT FIRST%^RESET%^%^RESET%^");
             TO->remove();
-            return;            
+            return;
         }
     }
 
@@ -77,9 +79,11 @@ void spell_effect(int prof)
         return;
     }
 
+    spell_successful();
+
     for(i=0;i<sizeof(targs);i++) {
-        undead = new("/d/magic/obj/undead"); 
-        lvl = targs[i]->make_new_body(undead);
+        undead=new(UNDEADDIR+"skeleton");
+        lvl = undead->query_level();
 
         if(((num_mon + lvl) > clevel)) {
             undead->remove();
@@ -88,27 +92,27 @@ void spell_effect(int prof)
             TO->remove();
             continue;
         }
-        
-        spell_successful();
+
         inven = all_inventory(targs[i]);
-        for(j=0;j<sizeof(inven);j++) inven[j]->move(undead);
+        inven->move(undead);
+
         targs[i]->remove();
         num_mon += lvl;
-        undead->set_property("raised",lvl);
+        undead->set_property("raised",clevel);
         undead->set_property("minion",caster);
         undead->move(environment(caster));
-        undead->set_max_hp(undead->query_hp()*2);
+
         undead->set_hp(undead->query_max_hp());
-        undead->set_overall_ac(10-clevel);        
+        undead->set_overall_ac(10-clevel);
         undead->serve(caster);
+
         undead->add_id("summoned monster");
         undead->set_property("spell", TO);
         undead->set_property("spell_creature", TO);
-        undead->set_property("minion", caster);        
-        undead->set_exp((int)undead->query_hd()*50);
+        undead->set_property("minion", caster);
         controller->add_monster(undead);
         caster->set_property("raised", lvl);
-    } 
+    }
     tell_object(caster,"%^BLUE%^You let your arms drop limply after completing the spell.");
     tell_room(place,"%^BOLD%^"+caster->QCN+" lets "+caster->QP+" arms drop limply.",caster);
     dest_effect();
@@ -137,4 +141,3 @@ string query_cast_string() {
     "into the shadows, then mixes something in his hands while "+
     "chanting in a deep, dark tone.";
 }
-
