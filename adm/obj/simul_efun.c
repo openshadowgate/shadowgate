@@ -78,3 +78,4 @@ string identify(mixed a);
 #include "/adm/simul_efun/get_dirs.c"
 #include "/adm/simul_efun/time_funcs.c"
 #include "/adm/simul_efun/array.c"
+#include "/adm/simul_efun/parse_command.c"
