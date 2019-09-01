@@ -54,9 +54,11 @@ void spell_effect(int prof) {
     }
 
     teleportee = present(targ,environment(caster));
-    if(!objectp(teleportee))
+    if(!teleportee)
+        present(TP->realName(targ),environment(caster));
+    if(!objectp(teleportee) || !teleportee)
     {
-     	tell_object(caster,"Your target not in this area, so the spell fails.");
+     	tell_object(caster,"Your target not in this area, thus the spell fails.");
      	tell_room(place,caster->QCN+" pauses and looks a little disoriented.",caster);
      	dest_effect();
      	return;

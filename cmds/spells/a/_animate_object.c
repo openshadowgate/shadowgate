@@ -10,7 +10,7 @@ object *animated, *monsters, control;
 int amount;
 
 
-int object_save(object thisob, mixed targ) 
+int object_save(object thisob, mixed targ)
 {
     if (!objectp(thisob)) return 0;
     if (!objectp(targ)) return 0;
@@ -25,7 +25,7 @@ int object_save(object thisob, mixed targ)
 }
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("animate object");
@@ -49,22 +49,22 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     return "%^BOLD%^%^GREEN%^"+caster->QCN+" studies "+caster->QP+" environment carefully then lifts "+caster->QP+" head to the sky and chants deeply some prayer.";
 }
 
 
-int preSpell() 
+int preSpell()
 {
-    if (!arg) 
+    if (!arg)
     {
         tell_object(caster,"%^BOLD%^You haven't focused your god's energy.");
         tell_room(place,"%^BOLD%^You feel the woosh of power flow by as it disperses unused!",caster);
         return 0;
     }
-    
-    if (present("devicex999", caster)) 
+
+    if (present("devicex999", caster))
     {
         tell_object(caster, "%^CYAN%^You are incapable of controlling two sets of beings.\n");
         return 0;
@@ -73,22 +73,22 @@ int preSpell()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *inven, *livings;
     int tlevel;
 
-    if(!objectp(caster)) 
-    { 
-        dest_effect(); 
-        return; 
+    if(!objectp(caster))
+    {
+        dest_effect();
+        return;
     }
-    
+
     if (!objectp(place)) { place = environment(caster); }
 
-    amount=(clevel - 6);
+    amount=clevel/12 + 1;
 
-    if (arg=="room") 
+    if (arg=="room")
     {
         inven   =  all_inventory(place);
         livings =  all_living(place);
@@ -99,26 +99,26 @@ void spell_effect(int prof)
         return;
     }
 
-    if(caster->is_player()) 
-    { 
+    if(caster->is_player())
+    {
         if(!objectp(target = present(caster->realName(arg),place)))
         {
             target = present(arg,place);
         }
     }
     else { target = present(arg,place); }
-    
-    if (objectp(target)) 
+
+    if (objectp(target))
     {
-        if(!interactive(target)) 
-        { 
-            spell_kill(target,caster); 
+        if(!interactive(target))
+        {
+            spell_kill(target,caster);
             target->set_property("animated by",({caster}));
-        }        
-        if (living(target) && !target->query_property("no animate")) 
+        }
+        if (living(target) && !target->query_property("no animate"))
         {
             tlevel = target->query_highest_level();
-            if(!do_save(target,2)) 
+            if(!do_save(target,2))
             {
                 inven = all_inventory(target);
                 tell_object(caster,"%^BLUE%^You send forth your god's power around "+target->QCN+".");
@@ -126,21 +126,21 @@ void spell_effect(int prof)
                 inven = filter_array(inven,"object_save",TO,target);
                 if (sizeof(inven)) { do_animate(inven); }
                 else { tell_room(place,"%^BLUE%^The spell's power fails to affect anything.."); }
-            } 
+            }
             else
             {
                 tell_room(place,"%^BLUE%^The spell's power fails to affect anything.");
             }
-        } 
-        else 
+        }
+        else
         {
             tell_object(caster,"%^BLUE%^You send forth your god's power around "+target->QCN+".");
             tell_room(place,"%^BLUE%^You see the power of "+caster->QCN+"'s god flow forth around "+
                 target->QCN+".",caster);
             do_animate(({target}));
         }
-    } 
-    else 
+    }
+    else
     {
         tell_object(caster,"%^BOLD%^You haven't focused your god's energy on something here.");
         tell_room(place,"%^BOLD%^You feel the woosh of power flow by as it disperses unused!",caster);
@@ -151,13 +151,13 @@ void spell_effect(int prof)
 }
 
 
-void do_animate(object *stuff) 
+void do_animate(object *stuff)
 {
     int i, j, block_time;
 
     j = sizeof(stuff);
-    
-    for (i=0;i<j;i++) 
+
+    for (i=0;i<j;i++)
     {
         if (!objectp(stuff[i])) continue;
         if (is_enchanted(stuff[i])) continue;
@@ -171,48 +171,48 @@ void do_animate(object *stuff)
         if (stuff[i]->is_corpse()) continue;
         if (amount < 1) break;
         if (stuff[i]->query_weight()>=10000)  continue;
-        if (stuff[i]->query_weight()>=500) 
+        if (stuff[i]->query_weight()>=500)
         {
             if (amount < 15)   continue;
-            if (sizeof(animated)==0) 
+            if (sizeof(animated)==0)
             {
                 make_animate(stuff[i]);
                 amount=0;
                 animated+=({stuff[i]});
-            } 
+            }
             else { continue; }
-        } 
-        else if ( stuff[i]->query_weight()>100) 
+        }
+        else if ( stuff[i]->query_weight()>100)
         {
             if (amount < 7) continue;
             make_animate(stuff[i]);
             amount-=7;
             animated += ({stuff[i]});
-        } 
-        else if (stuff[i]->query_weight() >= 50) 
+        }
+        else if (stuff[i]->query_weight() >= 50)
         {
             if (amount < 4) continue;
             make_animate(stuff[i]);
             amount-=4;
             animated += ({stuff[i]});
 
-        } 
-        else if (stuff[i]->query_weight() >= 25) 
+        }
+        else if (stuff[i]->query_weight() >= 25)
         {
             if (amount < 2) continue;
             make_animate(stuff[i]);
             amount-=2;
             animated += ({stuff[i]});
 
-        } 
-        else 
+        }
+        else
         {
             make_animate(stuff[i]);
             amount--;
             animated+=({stuff[i]});
         }
     }
-    
+
     control = new("/d/magic/obj/objectremote");
     control->set_mons(monsters);
     control->set_caster(caster);
@@ -221,16 +221,16 @@ void do_animate(object *stuff)
     control->set_property("spelled", ({TO}));
     control->set_property("spell", TO);
     call_out("dest_effect",( 2 + clevel) * 10);
-    block_time = (2 + sizeof(monsters) ) / 2; 
+    block_time = (2 + sizeof(monsters) ) / 2;
     caster->setAdminBlock(block_time);
     tell_object(caster,"%^BOLD%^%^YELLOW%^You begin concentrating on imposing your will on the objects.");
     call_out("release_block", block_time, caster);
 }
 
 
-void release_block(object caster) 
+void release_block(object caster)
 {
-    if (!objectp(caster)) 
+    if (!objectp(caster))
     {
         remove_call_out("dest_effect");
         dest_effect();
@@ -240,14 +240,14 @@ void release_block(object caster)
 }
 
 
-int is_enchanted(object item) 
+int is_enchanted(object item)
 {
      if (!objectp(item)) return 1;
      return item->query_property("enchantment");
 }
 
 
-void make_animate(object thing) 
+void make_animate(object thing)
 {
     object ob, *inven;
     string *limbs,type;
@@ -290,7 +290,7 @@ void make_animate(object thing)
         ob->set_damage(1,(int)thing->query_ac());
         ob->set_overall_ac(7-(int)thing->query_ac());
         ob->set_hd( ( ((int)thing->query_ac()*2) +1),8); //added +1 for cases=0
-        ob->set_max_hp(ob->query_hp());
+        ob->set_max_hp(12*clevel);
         cond = thing->query("condition");
         if (cond == 0) cond = 100;
         ob->set_hp((cond * (int)ob->query_max_hp())/100);
@@ -332,7 +332,7 @@ void make_animate(object thing)
             ob->set_nat_weapon_type("bludgeon");
             break;
         default:
-            break;     
+            break;
             // was return, but that would have skipped the next step if not a listed weapon type
         }
         ob->add_limb("body","body",0,0,0);   // added for these cases *Styx*
@@ -343,10 +343,10 @@ void make_animate(object thing)
         ob->set_overall_ac(5);
         //        ob->set_hd(15,8);      // wonder why hd is always 15 for weapons... *Styx*
         // changed to be based on wc's so it's more balanced *Styx* 12/03/02
-        ob->set_hd( (int)thing->query_wc()+(int)thing->query_large_wc(), 8);  
+        ob->set_hd( (int)thing->query_wc()+(int)thing->query_large_wc(), 8);
         ob->set_exp(100);
         ob->set_stats("strength",10);
-        ob->set_max_hp(ob->query_hp());
+        ob->set_max_hp(clevel*8);
         cond = thing->query("condition");
         if (cond == 0) cond = 100;
         ob->set_hp((cond * (int)ob->query_max_hp())/100);

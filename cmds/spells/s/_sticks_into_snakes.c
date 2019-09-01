@@ -31,13 +31,13 @@ void create() {
     set_helpful_spell(1);
 }
 
-int preSpell() 
+int preSpell()
 {
    if(place->query_property("no sticks")) {
       tell_object(caster,"There are no sticks in this area at all!");
       return 0;
    }
-   
+
     if (/*place->query_property("used sticks") || */present("snake 4",place)) {
       tell_object(caster,"There are no more sticks in this area, it's as if they have all been gathered away.");
         return 0;
@@ -47,7 +47,7 @@ int preSpell()
 
 
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     object mon,oldenv,*foes,*oldattackers,foe;
     int i,chooser,num,num2,numfoes,randnum,nummon,timestart;
@@ -59,19 +59,16 @@ spell_effect(int prof)
     }
 
     oldenv=environment(caster);
-//nummon was clevel*random(5) - random(5), max was 20
-// then was random(3)+clevel - random(6)
-//    nummon = clevel - random(4) - random(6);
-    nummon = (clevel/4) + random(3); // still intensely variable & doesn't scale up to top end. this should resolve all the way up!
-    if(nummon < 3) nummon = 3; // was 2, boosted to 3 per animate plants
-    if (nummon > 12) nummon = 12;   // was 15
+    nummon = (clevel/8);
+    if(nummon < 3) nummon = 3;
+    if (nummon > 12) nummon = 12;
     numfoes=(sizeof(caster->query_attackers()));
     mons=allocate(nummon);
 
-    for (num=1;num<=nummon;num++) 
+    for (num=1;num<=nummon;num++)
     {
         chooser = random(100) + clevel;
-        switch (chooser) 
+        switch (chooser)
         {
         case 0..70:
             mon = new("/d/magic/mon/gen_snake");
@@ -149,7 +146,7 @@ spell_effect(int prof)
     	call_out("check", 1, ({num, (2 + clevel) * ROUND_LENGTH,caster, foes}) );
 }
 
-int check(mixed *args) 
+int check(mixed *args)
 {
     int num, num2, timetowait, wherefound;
     object *foes, *newfoes;
@@ -160,13 +157,13 @@ int check(mixed *args)
 
     if(!sizeof(foes)) foes = ({});
 
-   	if (!caster || !objectp(caster)) 
+   	if (!caster || !objectp(caster))
     {
         dest_effect();
         return 1;
     }
     newfoes=caster->query_attackers();
-	//lets get rid of foes that were attacking 
+	//lets get rid of foes that were attacking
 	//the caster already (foes variable)
 	//tell_object(caster, "Newfoes = "+identify(newfoes));
 	//tell_object(caster, "Foes = "+identify(foes));
@@ -174,46 +171,46 @@ int check(mixed *args)
 	newfoes = distinct_array(newfoes);
 	//tell_object(caster, "Newfoes Now = "+identify(newfoes));
 
-    
-	if(sizeof(newfoes)) 
+
+	if(sizeof(newfoes))
 	{
         // these messages are way too spammy in combat
 		 //tell_object(caster,"%^BOLD%^%^YELLOW%^Your minions "+
 		//"come to your aid and attacks your enemies!");
-               		
+
 		//tell_room(environment(caster),"%^BOLD%^%^YELLOW%^"+
 		//caster->QCN+"'s minions come to "+
 		//caster->QP+" aid and attacks "+
 		//caster->QP+" enemies!", caster);
-               		
+
 		foes=newfoes;
 		defend(caster, foes);
 	}
 
-		
-      /*for (num2=0;num2<=sizeof(newfoes)-1;num2++) 
+
+      /*for (num2=0;num2<=sizeof(newfoes)-1;num2++)
 	{
       	wherefound = member_array(newfoes[num2], foes, 0);
-        	if (wherefound == -1) 
+        	if (wherefound == -1)
 		{
 	           	tell_object(caster,"%^BOLD%^%^YELLOW%^Your minions "+
 			"come to your aid and attacks your enemies!");
-                		
+
 			tell_room(environment(caster),"%^BOLD%^%^YELLOW%^"+
 			caster->QCN+"'s minions come to "+
 			caster->QP+" aid and attacks "+
 			caster->QP+" enemies!", caster);
-                		
+
 		      foes=newfoes;
 		      defend(caster, foes);
 			break;
            	}
     	}*/
 
-    if (num++ < timetowait) 
+    if (num++ < timetowait)
     {
         call_out("check", 1, ({num, timetowait, caster,foes}) );
-    } 
+    }
     else dest_effect();
 }
 
@@ -231,10 +228,10 @@ void defend(object caster, object *foes)
     for (num2=1;num2<=sizeof(mons);num2++)
     {
         mon=mons[num2-1];
-        
+
         if(!objectp(mon)) continue;
 
-        for (num=1;num<=numfoes;num++) 
+        for (num=1;num<=numfoes;num++)
         {
             if(!objectp(foes[num-1])) continue;
             mon->kill_ob(foes[num-1]);
@@ -250,15 +247,15 @@ void dest_effect()
     if (find_call_out("check") != -1) remove_call_out("check");
 //    firstflag=0;
     nummon=sizeof(mons);
-    for (num=0;num<=(nummon-1);num++) 
+    for (num=0;num<=(nummon-1);num++)
     {
-        if (mons[num] && objectp(mons[num])) 
+        if (mons[num] && objectp(mons[num]))
         {
             if (caster)
             {
-                
+
 //              if (firstflag==0) {
-                if (member_array(environment(mons[num]),wheretold)==-1 ) 
+                if (member_array(environment(mons[num]),wheretold)==-1 )
                 {
 //                  tell_object(CASTER, "Your summoned monsters vanish!");
 //                  tell_room(environment(caster), ""+CASTER->QCN+"'s summoned monsters turn back into sticks!", CASTER);
