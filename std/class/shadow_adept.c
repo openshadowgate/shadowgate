@@ -5,9 +5,9 @@ inherit DAEMON;
 
 //#define BASE_CLASS find_object_or_load(DIR_CLASSES+"/mage.c")
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 object base_class_ob(object ob)
@@ -35,21 +35,20 @@ string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_cla
 int *restricted_alignments() { return ({}); }
 
 
-string *restricted_gods() 
-{ 
-    return ({   "callamir","jarmila","kismet","kreysneothosies","lysara","nimnavanon","the faceless one","varda"}); 
+string *restricted_gods()
+{
+    return ({ "kismet" });
 }
 
 string requirements() // string version, maybe we'll need this, maybe not, can remove later if not
 {
     string str;
     str = "Prerequisites:\n"
-        "    Faith: Shar, Mask, or Bane\n"
         "    20 Mage or Sorcerer levels (level adjustments considered part of required levels)\n"
         "    40 Character levels\n"
         "    20 Intelligence or Charisma stat, before equipment modifiers\n";
-        
-    return str;    
+
+    return str;
 }
 
 
@@ -60,33 +59,33 @@ int prerequisites(object player)
     string race;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
+    adj = race_ob->level_adjustment(race);
     //skills = player->query_skills();
-    
+
     //if(!skills["spellcraft"] || skills["spellcraft"] < 20) { return 0; }
-    if(player->is_class("mage")) 
-    { 
+    if(player->is_class("mage"))
+    {
         if( (player->query_class_level("mage") + adj) < 20) { return 0; }
         if(player->query_base_stats("intelligence") < 20) { return 0; }
         player->set("shadow_adept_base_class","mage");
     }
-    if(player->is_class("sorcerer")) 
-    { 
+    if(player->is_class("sorcerer"))
+    {
         if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
         if(player->query_base_stats("charisma") < 20) { return 0; }
         player->set("shadow_adept_base_class","sorcerer");
     }
     if(player->query_level() < 40) { return 0; }
-    return 1;    
+    return 1;
 }
 
-mapping stat_requirements(object ob) 
-{ 
+mapping stat_requirements(object ob)
+{
     if(!objectp(ob) || ob->is_class("mage")) { return ([ "intelligence" : 20 ]); }
     return ([ "charisma" : 20 ]);
 }
@@ -105,30 +104,30 @@ int caster_level_calcs(object player, string the_class)
     {
         case "mage":
             level = player->query_class_level("mage");
-            level += player->query_class_level("shadow_adept");            
+            level += player->query_class_level("shadow_adept");
             return level;
         case "sorcerer":
             level = player->query_class_level("sorcerer");
-            level += player->query_class_level("shadow_adept");            
+            level += player->query_class_level("shadow_adept");
             return level;
         case "shadow_adept":
             level = player->query_class_level("shadow_adept");
             level += player->query_class_level("mage");
             level += player->query_class_level("sorcerer");
             return level;
-        
+
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "gift of the shadows" }), 4 : ({ "elusive spellcraft" }), 7 : ({ "shadow apotheosis" }), ]);
 }
 
 string *class_skills(object ob)
-{  
+{
     return base_class_ob(ob)->class_skills();
 }
 

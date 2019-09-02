@@ -540,7 +540,7 @@ mapping query_mastered_bonus()
         if(FEATS_D->usable_feat(TO,"gift of the shadows"))
         {
             string baseclass = TO->query("shadow_adept_base_class");
-            tmp[baseclass]=({"umbral sight","shield of shadows","shadow double","shadow nova"});
+            tmp[baseclass]=({"umbral sight","shield of shadows","darkbolt","shadow double","shadow nova"});
         }
     }
 

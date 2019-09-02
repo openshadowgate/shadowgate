@@ -9,7 +9,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("darkbolt");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 5, "mage" : 5 ]));
     set_spell_sphere("combat");
     set_spell_domain("darkness");
     set_syntax("cast CLASS darkbolt on TARGET");
@@ -20,6 +20,7 @@ void create() {
     set_target_required(1);
     splash_spell(1);
     set_save("reflex");
+    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
 }
 
 int preSpell(){
