@@ -4,7 +4,7 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_author("ares");
@@ -31,7 +31,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^You can feel a commanding pressence "+
         "building inside, as you chant the enthralling words of this prayer.");
@@ -40,10 +40,10 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int damage;
-    if (!present(target,place)) 
+    if (!present(target,place))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         dest_effect();
@@ -60,19 +60,19 @@ void spell_effect(int prof)
             spell_successful();
             dest_effect();
             return;
-        }      
-      
+        }
+
         tell_object(target,"%^YELLOW%^You lurch as the power of "+caster->QCN+"'s voice "
             "magically compells you to freeze in your tracks!");
         tell_room(place,"%^YELLOW%^"+target->QCN+" freezes in place, compelled by the "
             "power of "+caster->QCN+"'s voice!",target);
-        target->set_paralyzed(roll_dice(1,clevel)+10,"%^YELLOW%^You are magically compelled to stop!");
+        target->set_paralyzed(roll_dice(2,4)*8,"%^YELLOW%^You are magically compelled to stop!");
         target->set_disable(10,target);
         spell_successful();
         dest_effect();
         return;
     }
-    
+
     tell_object(caster,"%^BLUE%^%^BOLD%^The power of your voice slams into "+target->QCN+" but "
         ""+target->QS+" is able to resist!");
     tell_object(target,"%^BOLD%^%^BLUE%^The power of "+caster->QCN+"'s voice slams into you, but "
@@ -83,7 +83,7 @@ void spell_effect(int prof)
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

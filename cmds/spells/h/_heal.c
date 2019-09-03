@@ -6,7 +6,7 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("heal");
@@ -24,7 +24,7 @@ See also: heal *player commands");
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     string cast;
     if (interactive(caster))
@@ -40,40 +40,45 @@ string query_cast_string()
 }
 
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     int rnd;
-    if (interactive(caster)) 
+    if (interactive(caster))
     {
         // CAST UPON ONESELF
-        if ( caster == target ) 
-        { 
+        if ( caster == target )
+        {
             tell_object(caster, "You reach out and touch the tip of your nose and you heal yourself completely.");
             tell_room(place, YOU+" reaches out and touches the tip of "+caster->QP+" nose and heals "+caster->QO+"self.", ({ caster, target}) );
-        } 
-        else 
+        }
+        else
         {
             // caster =\= target
             tell_object(caster, "You reach out and touch the tip of "+target->QCN+"'s nose and you heal "+target->QO+" completely.");
             tell_object(target, YOU+" touches the tip of your nose and you are healed completely.");
             tell_room(place, YOU+" reaches out and touches the tip of "+target->QCN+"'s nose and heals "+target->QO+" completely.",({ caster, target}) );
         }
-    } 
-    else 
-    { 
+    }
+    else
+    {
         // OBJECT CALLS HEAL
         tell_room(environment(caster), caster->QCN+" sends a beam of energy to "+target->QCN+"'s nose and heals "+target->QO+".",({ caster, target }) );
         tell_object(target, caster->QCN+" sends a beam of energy to you nose nose and heals you.");
     }
 
-    rnd = - sdamage * 3/2;
+    rnd = - sdamage * 5/4;
+
+    if((target->query_race() == "undead" ||
+        target->query_property("undead")))
+        spell_kill(target,caster);
+
     damage_targ(target,target->return_target_limb(),rnd,"positive energy");
     target->remove_paralyzed();
     target->set_poisoning((-1)*(int)target->query_poisoning());
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

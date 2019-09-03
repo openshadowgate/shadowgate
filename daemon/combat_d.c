@@ -318,7 +318,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     targ->spell_attack(0);
     limb = targ->adjust_targeted_limb(attacker, limb);
     damage = targ->do_typed_damage_effects(attacker,limb,damage,type);
-    //if(find_player("saide") && userp(attacker)) tell_object(find_player("saide"), "Damage against "+identify(targ)+ " from "+identify(attacker)+" = "+damage+ " in typed_damage_modification");
     if(!targ->initialized_resistances()) { targ->init_limb_data(); }
 
     if(!stringp(type) || !targ->valid_resistance(type))
@@ -351,7 +350,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     if(objectp(targ) && FEATS_D->usable_feat(targ,"way of the learned pupil")){
-        USER_D->regenerate_ki(targ,1);        
+        USER_D->regenerate_ki(targ,1);
     }
 
     resist_perc = (int)targ->query_resistance_percent(type);
@@ -382,8 +381,24 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         damage = damage - resist;
         if(damage < 0) { damage = 0; }
     }
-    if(damage > 0 && type == "negative energy" && targ->query_property("heart of darkness")) {
-        damage = (damage * -1);
+
+    if(type == "negative energy")
+    {
+        if(targ->query_race() == "undead" ||
+           targ->query_property("undead") ||
+           targ->query_property("heart of darkness"))
+            damage = -abs(damage);
+        else
+            damage = abs(damage);
+    }
+
+    if(type == "positive energy")
+    {
+        if(targ->query_race() == "undead" ||
+           targ->query_property("undead"))
+            damage = abs(damage);
+        else
+            damage = -abs(damage);
     }
 
     if(damage > 0 && type != "force" && objectp(myEB = targ->query_property("empty body")))
@@ -411,14 +426,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             targ->set_spell_attack(1);
         }
     }
-
-    /*if(objectp(attacker) && attacker->query_true_name() == "saide")
-    {
-        tell_object(attacker, "You are attacking with");
-        if(attacker->query_spell_attack()) tell_object(attacker, "A spell");
-        else tell_object(attacker, "not a spell?");
-    }*/
-
 
     //basically I am modifying the "damage resistance" property to
     //work ONLY for physical type attacks - anything that causes
@@ -475,9 +482,9 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
     if(!objectp(attacker)) return;
     if(!objectp(weapon)) return;
 
-    if( FEATS_D->usable_feat(attacker, "shadow master") 
+    if( FEATS_D->usable_feat(attacker, "shadow master")
         && !attacker->query_property("shapeshifted") && objectp(weapon) && crit_hit) {
-        if(!random(3)) { 
+        if(!random(3)) {
             tell_object(attacker,"%^BLUE%^You strike "+target->QCN+" with precision as you channel your command of the shadows, and " +target->QS+ " blinks sightlessly!%^RESET%^");
             tell_object(target,"%^BLUE%^As "+attacker->QCN+" strikes you, your vision grows momentarily clouded!%^RESET%^");
             target->set_temporary_blinded(1,"Your vision is clouded!");
@@ -502,14 +509,14 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             tell_object(target,"%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");                  break;
         case "cold":
             tell_room(environment(target),"%^BLUE%^The projectile explodes with sharp shards of ice that pierce "+target->QCN+"%^RESET%^",({target}));
-            tell_object(target,"%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");      
+            tell_object(target,"%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");
             break;
         case "sonic":
             tell_room(environment(target),"%^CYAN%^The projectile explodes sonic scream that shatters "+target->QCN+"%^RESET%^",({target}));
             tell_object(target,"%^GREEN%^The missile explodes with sonic scream that shatters you%^RESET%^");             break;
         default:
             tell_room(environment(target),"%^RED%^The projectile explodes and scorches "+target->QCN+"%^RESET%^",({target}));
-            tell_object(target,"%^GREEN%^The missile explodes and burns you!%^RESET%^"); 
+            tell_object(target,"%^GREEN%^The missile explodes and burns you!%^RESET%^");
             break;
         }
         target->cause_typed_damage(target,target->return_target_limb(),roll_dice(attacker->query_character_level(),8),element);
@@ -777,9 +784,9 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
     damage = damage_done(attacker, weapon, damage, fired);
     if(!objectp(targ))
-        return; 
+        return;
     if(!objectp(attacker))
-        return; 
+        return;
 
     if(res = targ->query_property("weapon resistance") > 0)
     {
@@ -1109,7 +1116,7 @@ void send_messages(object attacker, int magic, object weapon, string what, int x
                 case "firearm":
                     me = "Bullet stuff";
                     you = "Bullet stuff";
-                    others = "Bullet stuff";                                        
+                    others = "Bullet stuff";
                     break;
                 case "blade": case "lash": case "knife": case "slashing": case "slash": case "thiefslashing": case "magicslashing":
 
@@ -3082,8 +3089,8 @@ varargs int check_death(object who, object pot)
     object spellthing, *attackers;
     if(!objectp(who)) return 0;
     if(who->query_combat_mapps("static vars", "dead")) return 1;
-    falling = who->query_property("falling");                                 // These lines added by 
-    if (userp(who) && who->query_hp() <1 && ( falling < time() - (__COMBAT_SPEED__*3)+4 ))  // Lujke to stop people 
+    falling = who->query_property("falling");                                 // These lines added by
+    if (userp(who) && who->query_hp() <1 && ( falling < time() - (__COMBAT_SPEED__*3)+4 ))  // Lujke to stop people
     {                                                                      // dying while
                                                                            // waiting for kits to hit
         who->set_property("falling", time());                             //

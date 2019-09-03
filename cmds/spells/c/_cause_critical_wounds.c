@@ -27,7 +27,7 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
- 
+
     if (!present(target, place)) {
         tell_object(caster, "%^CYAN%^"+target->QCN+" has escaped your grasp.");
         dest_effect();
@@ -40,9 +40,11 @@ void spell_effect(int prof) {
                 " from "+target->QCN+"!");
     tell_object(target,"%^CYAN%^%^BOLD%^A large aura pulses outward from your body"+
                 " siphoning off a critical bit of strength.");
- 
+
 	damage_targ(target,target->query_target_limb(),sdamage,"negative energy");
     spell_successful();
+    if(!(targ->query_race() == "undead" ||
+         targ->query_property("undead")))
     spell_kill(target,caster);
     dest_effect();
 }

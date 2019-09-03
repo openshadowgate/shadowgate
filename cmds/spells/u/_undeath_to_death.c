@@ -38,8 +38,7 @@ void spell_effect(int prof)
     {
         if(do_save(foe,8) ||
            foe->query_property("no death") ||
-           !((string)foe->query_race() == "undead") ||
-           !foe->query_property("undead"))
+           !(((string)foe->query_race() == "undead") || foe->query_property("undead")))
         {
             tell_object(foe,"%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
             tell_room(place,"%^ORANGE%^%^BOLD%^"+foe->QCN+" seems to be unaffected by the burst of light!",foe);

@@ -5,7 +5,7 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("wail of the banshee");
@@ -23,15 +23,15 @@ string query_cast_string() {
     return "%^BLUE%^"+caster->QCN+" starts to chant in tongues fell, a feeling of otherwordly horror fills the place.";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *foes, foe;
-    
+
     tell_object(caster,"%^BLUE%^You concentrate and release a HORRIBLE SCREAM in tongues of unlife.");
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM in fell tongues, you feel your soul is being ripped from your body.",caster);
 
     foes = all_living(place);
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);    
+    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     foes = target_filter(foes);
 
     foreach(foe in foes)
@@ -43,14 +43,14 @@ void spell_effect(int prof)
         {
             tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
             tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
-            damage_targ(foe, foe->query_target_limb(),1,"negative energy");
+            damage_targ(foe, foe->query_target_limb(),sdamage/2,"negative energy");
             continue;
         }
         tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
         tell_room(place,"%^BOLD%^%^BLUE%^"+foe->QCN+" screams as "+foe->QP+" soul is carved out from the body!",foe);
         damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"sonic");
     }
-    
+
     spell_successful();
     dest_effect();
 }
@@ -60,5 +60,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
-
