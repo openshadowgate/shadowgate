@@ -35,8 +35,11 @@ void spell_effect(int prof) {
     tell_object(target,"%^CYAN%^A solid aura pulses outward from your "+
                 "body siphoning off substantial bit of strength.");
 
+    if(!(target->query_race() == "undead" ||
+         target->query_property("undead")))
+        spell_kill(target,caster);
+
     damage_targ(target,target->query_target_limb(),sdamage,"negative energy");
-    spell_kill(target,caster);
     spell_successful();
     dest_effect();
 }

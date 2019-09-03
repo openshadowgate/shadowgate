@@ -40,9 +40,12 @@ void spell_effect(int prof) {
                 " a small bit of energy from "+target->QCN+"!");
     tell_object(target,"%^CYAN%^%^BOLD%^A small aura pulses outward from "+
                 "your body and siphons off small bit of your strength.");
- 
-	damage_targ(target,target->query_target_limb(),sdamage,"negative energy");
-    spell_kill(target,caster);
+
+    if(!(target->query_race() == "undead" ||
+         target->query_property("undead")))
+        spell_kill(target,caster);
+
+	damage_targ(target,target->query_target_limb(),sdamage*5/4,"negative energy");
     spell_successful();
     dest_effect();
 }

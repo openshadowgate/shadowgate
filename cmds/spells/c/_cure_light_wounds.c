@@ -39,7 +39,11 @@ void spell_effect(int prof) {
     tell_object(target,"%^CYAN%^A faint aura pulses from "+caster->QCN+" and into your body,"+
 		" restoring a small bit of strength.");
 
-    damage_targ(target,target->return_target_limb(), -sdamage,"positive energy");
+    if((target->query_race() == "undead" ||
+        target->query_property("undead")))
+        spell_kill(target,caster);
+
+    damage_targ(target,target->return_target_limb(), -sdamage*5/4,"positive energy");
     spell_successful();
     dest_effect();
 }

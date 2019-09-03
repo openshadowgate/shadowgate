@@ -51,9 +51,14 @@ void spell_effect(int prof)
                         "energy to "+HIM+"!");
         }
     }
+
+    if((target->query_race() == "undead" ||
+        target->query_property("undead")))
+        spell_kill(target,caster);
+
     tell_object(target,"%^CYAN%^A solid aura pulses from "+caster->QCN+" towards you,"+
         " restoring substantial bit of strength.");
-    damage_targ(target, target->return_target_limb(), -sdamage, "positive energy");
+    damage_targ(target, target->return_target_limb(), -sdamage*5/4, "positive energy");
     spell_successful();
     dest_effect();
 }

@@ -44,7 +44,10 @@ void spell_effect(int prof) {
     tell_object(target,"%^CYAN%^A solid field radiates from "+caster->QCN+", restoring a"+
                 " large bit of your strength.");
 
-    damage_targ(target,target->return_target_limb(), -sdamage,"positive energy");
+    damage_targ(target,target->return_target_limb(), -sdamage*5/4,"positive energy");
+    if((target->query_race() == "undead" ||
+        target->query_property("undead")))
+        spell_kill(target,caster);
     spell_successful();
     dest_effect();
 }

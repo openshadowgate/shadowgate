@@ -43,9 +43,9 @@ void spell_effect(int prof) {
 
 	damage_targ(target,target->query_target_limb(),sdamage,"negative energy");
     spell_successful();
-    if(!(targ->query_race() == "undead" ||
-         targ->query_property("undead")))
-    spell_kill(target,caster);
+    if(!(target->query_race() == "undead" ||
+         target->query_property("undead")))
+        spell_kill(target,caster);
     dest_effect();
 }
 
