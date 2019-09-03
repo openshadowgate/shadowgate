@@ -99,7 +99,7 @@ void spell_effect(int prof)
             {
                 tell_room(place,"%^BOLD%^%^BLACK%^A fell wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
-                    "life, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
+                    "death, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
                 tell_object(caster,"%^BOLD%^%^BLACK%^A fell "+
                     "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
                 tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
@@ -118,7 +118,7 @@ void spell_effect(int prof)
             {
                 tell_room(place,"%^BOLD%^%^BLACK%^A fell wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
-                    "life, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
+                    "death, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
                 tell_object(caster,"%^BOLD%^%^BLACK%^A fell "+
                     "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
                 tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
