@@ -32,7 +32,7 @@ void add_lock(string desc, int duration)
     item = ({who, desc, duration});
     locks += ([timekey:item]);
 
-    notify_wizzes("%^BOLD%^%^ORANGE%^"+who+"%^WHITE%^ added pledge lock on %^BOLD%^%^GREEN%^"+sprintf("%.26s",locks[timekey][1])+"%^WHITE%^.
+    notify_wizzes("%^BOLD%^%^ORANGE%^"+who+"%^WHITE%^ added pledge lock on %^BOLD%^%^GREEN%^"+locks[timekey][1]+"%^WHITE%^.
 It should expire in %^ORANGE%^"+parse_time(locks[timekey][2])+"%^RESET%^");
     save_object(SAVEF);
 }
