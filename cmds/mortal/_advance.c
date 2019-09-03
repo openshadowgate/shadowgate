@@ -5,7 +5,7 @@
 // removed deku from the L15 trainers (after saide's upgrades), moved laerad into the 25 bracket and archemond's down to 20. Nienne, 09/07.
 //removed Tharis forest and the Dark Forest from the list, as both of these areas are buggy and nearly impossible except for certain classes.  ~Circe~ 6/08
 //added new deku haunted house to level 25 areas - except for the basement - it changes so I didn't want to scare everyone off :P - Saide
-//Removed trainers for now following conversations with Ilmarinen and Yves. May be added back later if someone has time to really fix them ~Circe~ 9/3//19
+
 
 #include <daemons.h>
 #include <living.h>
@@ -754,7 +754,6 @@ int cmd_advance(string myclass)
                     TP->InitInnate();
 
 	                TP->use_funds("gold",train);
-/* removed by Circe
                     if(!TP->query("test_character") && ((string)TP->query("advance place") != "/d/newbie/ooc/trainer"))
                     {
                         "daemon/room_d"->remove_room(ETP->query_exit("out"));
@@ -763,7 +762,6 @@ int cmd_advance(string myclass)
                         ob = present("post",ETP);
                         if(objectp(ob)) { ob->remove(); }
                     }
-*/
                     TP->set("advance place",0);
 	                // Added 02/02/02 by Garrett at Styx's idea.
 	                "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" %^BOLD%^%^BLUE%^Met his/her trainer.");
@@ -782,7 +780,6 @@ int cmd_advance(string myclass)
                 }
 	            TP->set("last done",char_level-1);
             }
-/* removed by Circe
             else if(TP->query("advance place") && !TP->query("test_character"))
             {
 	            write("You know where you need to go. To be reminded type help advance");
@@ -790,7 +787,6 @@ int cmd_advance(string myclass)
                 TP->remove_property("multiclassing");
 	            return 1;
 	        }
-*/
             else if(char_level > 50)
             {
                 if(ADVANCE_D->advance(this_player(),myclass))
@@ -815,7 +811,6 @@ int cmd_advance(string myclass)
 	            return 1;
 	            }
 	        }
-/* removed by Circe
             else
             {
                 room=pick_room();
@@ -828,7 +823,6 @@ int cmd_advance(string myclass)
 	            write("At this point you must search out your master and learn from that learned one.");
 	            return 1;
             }
-*/
         }
         else
         {
@@ -865,7 +859,6 @@ int cmd_advance(string myclass)
     }
 }
 
-/* removed by Circe
 string pick_room()
 {
   int i,level,num;
@@ -902,7 +895,6 @@ string pick_room()
   TP->set("advance place",room);
   return room;
 }
-*/
 
 int help()
 {
@@ -939,7 +931,7 @@ int help()
     pick_fighter_style("",TP);
     pick_warlock_heritage("",TP);
     pick_human_subrace("",TP);
-/* removed by Circe
+
     if(wizardp(TP))
     {
         write("\n%^YELLOW%^Wizzes - To get a bugged training room to reset to another, use "
@@ -986,6 +978,5 @@ int help()
             "area, for instance.");
         return 1;
     }
-*/
     return 1;
 }

@@ -1,7 +1,6 @@
-//spell_kill added by Circe 6/4/07 to stop bugs with it not starting combat
-#include <priest.h>
+#include <std.h>
 
-inherit SPELL;
+inherit "/cmds/spells/h/_harm";
 
 void create() {
     ::create();
@@ -16,35 +15,4 @@ void create() {
     set_target_required(1);
     set_non_living_ok(1);
     set_immunities( ({ "spell_immunity"}) );
-}
-
-string query_cast_string() {
-    return "%^CYAN%^"+YOU+" starts to mumble a complicated incantation to "+MINE+" deity!";
-}
-
-void spell_effect(int prof) {
-    if (!present(target, place)) {
-        tell_object(caster, "%^CYAN%^"+target->QCN+" has escaped your grasp.");
-        dest_effect();
-        return;
-    }
-
-    tell_room(place,"%^CYAN%^A solid field radiates outward from "+HIM+"!",({caster,target}));
-   	tell_object(caster,"%^CYAN%^You siphon off a good portion of "+
-                "energy from "+target->QCN+"!");
-    tell_object(target,"%^CYAN%^A solid aura pulses outward from your "+
-                "body siphoning off substantial bit of strength.");
-
-    if(!(target->query_race() == "undead" ||
-         target->query_property("undead")))
-        spell_kill(target,caster);
-
-    damage_targ(target,target->query_target_limb(),sdamage,"negative energy");
-    spell_successful();
-    dest_effect();
-}
-
-void dest_effect() {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }

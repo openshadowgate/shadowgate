@@ -1,10 +1,6 @@
-//spell_kill added by Circe 6/4/07 to stop bugs with this spell not starting combat
-// Pator@ShadowGate
-// Revised at jul 31 1996
+#include <std.h>
 
-#include <priest.h>
-
-inherit SPELL;
+inherit "/cmds/spells/h/_harm";
 
 void create() {
     ::create();
@@ -20,36 +16,4 @@ void create() {
     set_target_required(1);
     set_non_living_ok(1);
     set_immunities( ({ "spell_immunity"}) );
-}
-
-string query_cast_string() {
-   return "%^BOLD%^%^CYAN%^"+YOU+" starts to mumble a long worshipful incantation to "+MINE+" deity!";
-}
-
-void spell_effect(int prof) {
-
-    if (!present(target, place)) {
-        tell_object(caster, "%^CYAN%^"+target->QCN+" has escaped your grasp.");
-        dest_effect();
-        return;
-    }
-
-    spell_successful();
-    tell_room(place,"%^BOLD%^%^CYAN%^A large field radiates outward from "+HIM+"!",({caster,target}));
-   	tell_object(caster,"%^BOLD%^%^CYAN%^You siphon off a critical portion of energy"+
-                " from "+target->QCN+"!");
-    tell_object(target,"%^CYAN%^%^BOLD%^A large aura pulses outward from your body"+
-                " siphoning off a critical bit of strength.");
-
-	damage_targ(target,target->query_target_limb(),sdamage,"negative energy");
-    spell_successful();
-    if(!(target->query_race() == "undead" ||
-         target->query_property("undead")))
-        spell_kill(target,caster);
-    dest_effect();
-}
-
-void dest_effect() {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }

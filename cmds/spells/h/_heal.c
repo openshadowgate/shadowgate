@@ -1,4 +1,3 @@
-
 // --==** /cmds/priest/_heal.c **==--
 // Modified by Pator@ShadowGate
 // August 25 1995
@@ -29,12 +28,12 @@ string query_cast_string()
     string cast;
     if (interactive(caster))
     {
-        cast = caster->QCN+" folds "+caster->QP+
+        cast = "%^BOLD%^%^WHITE%^"+caster->QCN+" folds "+caster->QP+
             " hands as "+caster->QS+" prays for a divine spell!\n";
     }
     else
     {
-        cast = caster->QCN+" calls for a divine spell!\n";
+        cast = "%^BOLD%^%^WHITE%^"+caster->QCN+" calls for a divine spell!\n";
     }
     return "\n"+cast;
 }
@@ -48,20 +47,20 @@ spell_effect(int prof)
         // CAST UPON ONESELF
         if ( caster == target )
         {
-            tell_object(caster, "%^BOLD%^You reach out and channel energy at yourself.");
-            tell_room(place, "%^BOLD%^"+YOU+" reaches out and channels energy at "+caster->QO+"self.", ({ caster, target}) );
+            tell_object(caster, "%^WHITE%^%^BOLD%^You reach out and channel energy at yourself.");
+            tell_room(place, "%^WHITE%^%^BOLD%^"+YOU+" reaches out and channels energy at "+caster->QO+"self.", ({ caster, target}) );
         }
         else
         {
-            tell_object(caster, "%^BOLD%^You reach out and channel energy at "+target->QCN+".");
-            tell_room(place, "%^BOLD%^"+YOU+" channels energy at "+target->QCN+".",({ caster}) );
+            tell_object(caster, "%^WHITE%^%^BOLD%^You reach out and channel energy at "+target->QCN+".");
+            tell_room(place, "%^WHITE%^%^BOLD%^"+YOU+" channels energy at "+target->QCN+".",({ caster}) );
         }
     }
     else
     {
         // OBJECT CALLS HEAL
-        tell_room(environment(caster), "%^BOLD%^"+caster->QCN+" sends a beam of energy at "+target->QCN+".",({ caster, target }) );
-        tell_object(target, "%^BOLD%^"+caster->QCN+" sends a beam of energy at you.");
+        tell_room(environment(caster), "%^WHITE%^%^BOLD%^"+caster->QCN+" sends a beam of energy at "+target->QCN+".",({ caster, target }) );
+        tell_object(target, "%^WHITE%^%^BOLD%^"+caster->QCN+" sends a beam of energy at you.");
     }
 
     rnd = - sdamage * 5/4;

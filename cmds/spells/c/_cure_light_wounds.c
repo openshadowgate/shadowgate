@@ -1,6 +1,6 @@
-#include <priest.h>
+#include <std.h>
 
-inherit SPELL;
+inherit "/cmds/spells/h/_heal";
 
 void create() {
     ::create();
@@ -16,39 +16,4 @@ void create() {
     set_target_required(1);
     set_non_living_ok(1);
 	set_helpful_spell(1);
-}
-
-string query_cast_string() {
-    string cast;
-
-    if (interactive(CASTER)) {
-      cast = "%^CYAN%^"+YOU+" starts to mumble a long worshipful"+
-		" incantation!";
-    } else {
-         	cast = "%^CYAN%^"+YOU+" starts to vibrate and a long "+
-			"worshipful incantation to "+MINE+" deity sounds!";
-    }
-}
-
-void spell_effect(int prof) {
-    tell_room(place,"%^CYAN%^A faint field radiates inward toward "+HIM+"!",({caster,target}));
-    if (interactive(caster)) {
-        if (target!=caster)
-             tell_object(caster,"%^CYAN%^You restore a small portion of energy to "+HIM+"!");
-    }
-    tell_object(target,"%^CYAN%^A faint aura pulses from "+caster->QCN+" and into your body,"+
-		" restoring a small bit of strength.");
-
-    if((target->query_race() == "undead" ||
-        target->query_property("undead")))
-        spell_kill(target,caster);
-
-    damage_targ(target,target->return_target_limb(), -sdamage*5/4,"positive energy");
-    spell_successful();
-    dest_effect();
-}
-
-void dest_effect() {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }
