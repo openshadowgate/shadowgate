@@ -72,7 +72,8 @@ void spell_effect(int prof)
        member_array(target,party_members) != -1 ||
        member_array(target,followers) != -1)
     {
-        targets = filter_array(distinct_array(party_members+(followers-attackers)),(:!$1->is_undead():));
+        targets = ({ caster });
+        targets += filter_array(distinct_array(party_members+(followers-attackers)),(:!$1->is_undead():));
     }
     else if(member_array(target,attackers) != -1)
     {
@@ -84,7 +85,6 @@ void spell_effect(int prof)
         targets = living;
     }
 
-    targets += ({ caster });
     targets = distinct_array(targets);
 
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" opens "+

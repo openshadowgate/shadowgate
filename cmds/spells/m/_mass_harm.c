@@ -20,7 +20,7 @@ void create()
     set_author("ares");
     set_spell_name("mass harm");
     set_spell_level(([ "cleric" : 9 ]));
-    set_spell_sphere("healing");
+    set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass harm on TARGET");
     set_description("This is a stronger version of harm spell. It acts like mass heal, but channels negative energy.");
     set_verbal_comp();
@@ -43,11 +43,11 @@ int preSpell()
 
 string query_cast_string()
 {
-    tell_object(caster,"%^BOLD%^%^CYAN%^Your voice rings out as you begin to "+
-        "chant a powerful prayer, gathering your divine energy into your hands.");
-    tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+"'s voice rings out as they"+
+    tell_object(caster,"%^BOLD%^%^BLACK%^Your voice rings out as you begin to "+
+        "chant a powerful prayer, gathering divine energy into your hands.");
+    tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+"'s voice rings out as they"+
         " begin to chant a powerful prayer.  Cupping "+caster->QP+" hands, "+
-        ""+caster->QS+" starts to gather divine energy.",caster);
+        ""+caster->QS+" starts to gather energy.",caster);
     return "display";
 }
 
@@ -69,6 +69,7 @@ void spell_effect(int prof)
        member_array(target,followers) != -1)
     {
         targets = filter_array(distinct_array(party_members+(followers-attackers)),(:$1->is_undead():));
+        targets += ({ caster });
     }
     else if(member_array(target,attackers) != -1)
     {
@@ -80,11 +81,10 @@ void spell_effect(int prof)
         targets = living;
     }
 
-    targets += ({ caster });
     targets = distinct_array(targets);
 
-    tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" opens "+
-        ""+caster->QP+" hands, releasing a brilliant wave of"+
+    tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" opens "+
+        ""+caster->QP+" hands, releasing a fell wave of"+
         " energy as "+caster->QS+" shouts out the final words "+
         "of the prayer.",caster);
 
@@ -95,36 +95,36 @@ void spell_effect(int prof)
         {
             if(!objectp(targets[i])) { continue; }
             if(!present(targets[i],place)) { continue; }
-            if(target->is_undead())
+            if(!target->is_undead())
             {
-                tell_room(place,"%^BOLD%^%^CYAN%^A brillaint wave moves through"+
+                tell_room(place,"%^BOLD%^%^BLACK%^A fell wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
                     "life, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
-                tell_object(caster,"%^BOLD%^%^CYAN%^A brilliant "+
-                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of life.");
-                tell_object(targets[i],"%^BOLD%^%^CYAN%^A brilliant "+
-                    "wave moves through you, carrying with it the essence of life.");
+                tell_object(caster,"%^BOLD%^%^BLACK%^A fell "+
+                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
+                tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
+                    "wave moves through you, carrying with it the essence of death.");
                 set_helpful_spell(0);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"positive energy");
+                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
                 spell_kill(targets[i],caster);
             }
             else if(targets[i] == caster)
             {
-                tell_object(targets[i],"%^BOLD%^%^CYAN%^A brilliant "+
-                    "wave moves through you, carrying with it the essence of life.");
-                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"positive energy");
+                tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
+                    "wave moves through you, carrying with it the essence of death.");
+                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"negative energy");
             }
             else
             {
-                tell_room(place,"%^BOLD%^%^CYAN%^A brillaint wave moves through"+
+                tell_room(place,"%^BOLD%^%^BLACK%^A fell wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
                     "life, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
-                tell_object(caster,"%^BOLD%^%^CYAN%^A brilliant "+
-                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of life.");
-                tell_object(targets[i],"%^BOLD%^%^CYAN%^A brilliant "+
-                    "wave moves through you, carrying with it the essence of life.");
+                tell_object(caster,"%^BOLD%^%^BLACK%^A fell "+
+                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
+                tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
+                    "wave moves through you, carrying with it the essence of death.");
                 set_helpful_spell(1);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"positive energy");
+                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
             }
         }
     }

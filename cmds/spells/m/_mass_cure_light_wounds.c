@@ -42,7 +42,7 @@ int preSpell()
 	return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^BLUE%^You press your hands together as"+
 		" you begin to chant a beneficial prayer.");
@@ -51,34 +51,35 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
-    string party;
     int i;
-	object *party_members = ({}),*attackers = ({}),*living = ({}),*targets = ({});
+    object *party_members = ({}),*attackers = ({}),*living = ({}),*targets = ({}), *followers = ({});
 
-    party = (string)caster->query_party();
-    if(party) { party_members = (object *)PARTY_OB->query_party_members(party); }
+    party_members = ob_party(caster);
     attackers = caster->query_attackers();
+    followers = caster->query_followers();
     living = all_living(place);
 
     if(!objectp(target)) { target = caster; }
 
-	if(target == caster || member_array(target,party_members) != -1)
-	{
-		targets = party_members;
-	}
-	else if(member_array(target,attackers) != -1)
-	{
-		targets = attackers;
-	}
-	else
-	{
-		living = filter_array(living,"is_non_immortal",FILTERS_D);
-		targets = living;
-	}
+    if(target == caster ||
+       member_array(target,party_members) != -1 ||
+       member_array(target,followers) != -1)
+    {
+        targets = ({ caster });
+        targets += filter_array(distinct_array(party_members+(followers-attackers)),(:!$1->is_undead():));
+    }
+    else if(member_array(target,attackers) != -1)
+    {
+        targets = filter_array(attackers,(:$1->is_undead():));
+    }
+    else
+    {
+        living = filter_array(living,"is_non_immortal",FILTERS_D);
+        targets = living;
+    }
 
-	targets += ({ caster });
 	targets = distinct_array(targets);
 
     tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" opens "+
@@ -101,7 +102,7 @@ void spell_effect(int prof)
 				    "out from "+targets[i]->QCN+" as you release a wave of energy.");
                 tell_object(targets[i],"%^BOLD%^%^BLUE%^A faint blue field "+
 				    "radiates out from you as "+caster->QCN+" releases a "+
-				    "wave of energy.");				
+				    "wave of energy.");
 				damage_targ(targets[i],targets[i]->return_target_limb(),calculate_healing(),"positive energy");
 				spell_kill(targets[i],caster);
 			}
@@ -112,7 +113,7 @@ void spell_effect(int prof)
 			else if(targets[i] == caster)
 			{
                 tell_object(targets[i],"%^BOLD%^%^BLUE%^A soft blue "+
-			        "glow envelopes you.");				
+			        "glow envelopes you.");
 				damage_targ(targets[i],targets[i]->return_target_limb(),(-1 * calculate_healing()),"positive energy");
 			}
 			else
@@ -124,7 +125,7 @@ void spell_effect(int prof)
 				    "out from "+targets[i]->QCN+" as you release a wave of energy.");
                 tell_object(targets[i],"%^BOLD%^%^BLUE%^A faint blue field "+
 				    "radiates out from you as "+caster->QCN+" releases a "+
-				    "wave of energy.");				
+				    "wave of energy.");
 				damage_targ(targets[i],targets[i]->return_target_limb(),(-1 *calculate_healing()),"positive energy");
 			}
 		}
@@ -137,14 +138,11 @@ void spell_effect(int prof)
 
 int calculate_healing()
 {
-    int num, max;
-    max = 25; // max amount of damage the spell can heal, for ease of adjustment -Ares
-    num = roll_dice(1,8) + (clevel/2);
-    if(num > max) { num = max; }
-    return num;
+    define_base_damage(-3);
+    return sdamage;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

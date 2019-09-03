@@ -13,7 +13,7 @@ int cmd_plock(string args)
         write("%^WHITE%^%^BOLD%^Currently active pledges:");
         foreach(key in keys(locks))
         {
-            write("%^BOLD%^%^BLUE%^"+key+" %^ORANGE%^"+sprintf("%8s",locks[key][0])+"%^GREEN%^ "+locks[key][1]+" %^ORANGE%^"+parse_time((key + locks[key][2]) - now));
+            write("%^BOLD%^%^BLUE%^"+key+" %^ORANGE%^"+arrange_string(locks[key][0],6)+"%^GREEN%^ "+locks[key][1]+" %^ORANGE%^"+parse_time((key + locks[key][2]) - now));
         }
         return 1;
     }
@@ -53,7 +53,7 @@ plock remove %^ORANGE%^%^ULINE%^KEY%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-With this command you can place a pladge on certain files so others know you'll be working on it for N %^ORANGE%^%^ULINE%^MINUTES%^RESET%^.
+With this command you can place a pledge on certain files so others know you'll be working on it for N %^ORANGE%^%^ULINE%^MINUTES%^RESET%^.
 
 Without an argument displays currently active pledges.
 

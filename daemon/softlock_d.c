@@ -34,6 +34,7 @@ void add_lock(string desc, int duration)
 
     notify_wizzes("%^BOLD%^%^ORANGE%^"+who+"%^WHITE%^ added pledge lock on %^BOLD%^%^GREEN%^"+locks[timekey][1]+"%^WHITE%^.
 It should expire in %^ORANGE%^"+parse_time(locks[timekey][2])+"%^RESET%^");
+    log_file("softlocks",who+" : "+locks[timekey][1]+" ("+locks[timekey][2]/60+"m)");
     save_object(SAVEF);
 }
 
