@@ -18,15 +18,11 @@ void create()
 {
     ::create();
     set_author("ares");
-    set_spell_name("mass heal");
+    set_spell_name("mass harm");
     set_spell_level(([ "cleric" : 9 ]));
     set_spell_sphere("healing");
-    set_syntax("cast CLASS mass heal on TARGET");
-    set_description("This is a stronger version of the priest spell, heal.  When cast without a target or on the caster "
-        "or any party member, it will heal the caster and any party members of the caster who are present in the area.  When cast "
-        "on a hostile, it will hit all hostiles in the immediate area, healing those that are living, and hurting those that are "
-        "undead.  When cast on a neutral creature that is neither in the caster's party or hostile to the caster, it will hit all "
-        "creatures in the area, healing those that are living and hurting those that are undead.");
+    set_syntax("cast CLASS mass harm on TARGET");
+    set_description("This is a stronger version of harm spell. It acts like mass heal, but channels negative energy.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -72,11 +68,11 @@ void spell_effect(int prof)
        member_array(target,party_members) != -1 ||
        member_array(target,followers) != -1)
     {
-        targets = filter_array(distinct_array(party_members+(followers-attackers)),(:!$1->is_undead():));
+        targets = filter_array(distinct_array(party_members+(followers-attackers)),(:$1->is_undead():));
     }
     else if(member_array(target,attackers) != -1)
     {
-        targets = filter_array(attackers,(:$1->is_undead():));
+        targets = filter_array(attackers,(:!$1->is_undead():));
     }
     else
     {

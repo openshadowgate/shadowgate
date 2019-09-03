@@ -10,10 +10,10 @@ int cmd_plock(string args)
         mapping locks = SOFTLOCK->query_locks();
         mixed key;
         int now = time();
-        write("%^BOLD%^Currently active pledges:");
+        write("%^WHITE%^%^BOLD%^Currently active pledges:");
         foreach(key in keys(locks))
         {
-            write("%^BLUE%^"+key+" %^ORANGE%^"+sprintf("%8s",locks[key][0])+"%^GREEN%^ "+locks[key][1]+" %^ORANGE%^"+parse_time((key + locks[key][2]) - now));
+            write("%^BOLD%^%^BLUE%^"+key+" %^ORANGE%^"+sprintf("%8s",locks[key][0])+"%^GREEN%^ "+locks[key][1]+" %^ORANGE%^"+parse_time((key + locks[key][2]) - now));
         }
         return 1;
     }

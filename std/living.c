@@ -1553,6 +1553,16 @@ int query_prestige_level(string the_class)
     return class_level;
 }
 
+/**
+ * Is this living undead based on the ways mud used to define
+ * undead. If you wish to mark something as undead use undead property
+ * from now on, not the race.
+ */
+int is_undead()
+{
+    return (query_race() == "undead" || query_property("undead"));
+}
+
 void reset_all_status_effects()
 {
     object *myFeats;
