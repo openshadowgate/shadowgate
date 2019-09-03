@@ -143,7 +143,7 @@ string *query_hair_colors(object who) {
 
 string *query_eye_colors(object who) { return ({"black", "brown"}); }
 
-in is_pk_race()
+int is_pk_race()
 {
     return 1;
 }
