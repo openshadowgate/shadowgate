@@ -2116,6 +2116,9 @@ void write_messages() {
   message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);
   message("login","", TO);
 
+  if(avatarp(TO))
+      force_me("plock");
+
   mail_stat = (mapping)LOCALPOST_D->mail_status(query_name());
   if (mail_stat["unread"]) {
     message("login", sprintf("\n        >>> %d of your %d %s are unread! <<<", mail_stat["unread"], mail_stat["total"], (mail_stat["total"]>1 ? "letters" : "letter")), TO);

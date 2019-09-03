@@ -27,8 +27,6 @@ void add_lock(string desc, int duration)
     int timekey = time();
     if(!who)
         return;
-    if (duration > 60*60*6)
-        return;
 
     item = allocate(3);
     item = ({who, desc, duration});
@@ -60,7 +58,7 @@ void remove_lock(int timekey)
         return;
 
     notify_wizzes("%^BOLD%^%^ORANGE%^"+who+"%^WHITE%^ removed pledge lock on %^BOLD%^%^GREEN%^"+sprintf("%.26s",locks[timekey][1])+"%^WHITE%^.
-It should have expired in %^ORANGE%^"+parse_time(time()-timekey+locks[timekey][2])+"%^RESET%^");
+It should have expired in %^ORANGE%^"+parse_time(time()-timekey-locks[timekey][2])+"%^RESET%^");
     map_delete(locks,timekey);
     save_object(SAVEF);
 }
