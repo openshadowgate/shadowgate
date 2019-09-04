@@ -5,7 +5,7 @@
 // removed deku from the L15 trainers (after saide's upgrades), moved laerad into the 25 bracket and archemond's down to 20. Nienne, 09/07.
 //removed Tharis forest and the Dark Forest from the list, as both of these areas are buggy and nearly impossible except for certain classes.  ~Circe~ 6/08
 //added new deku haunted house to level 25 areas - except for the basement - it changes so I didn't want to scare everyone off :P - Saide
-//Removed trainers for now following conversations with Ilmarinen and Yves. May be added back later if someone has time to really fix them ~Circe~ 9/3//19
+
 
 #include <daemons.h>
 #include <living.h>
@@ -586,32 +586,40 @@ int cmd_advance(string myclass)
 
     TP->remove_property("adding base class");
 
-    if(TP->query("no advance") && !OB_ACCOUNT->is_high_mortal(TP->query_true_name())){
-        if(TP->query("no advance") <= TP->query_highest_level()){
-            tell_object(TP,"%^BOLD%^%^CYAN%^Higher powers have deemed you unworthy to advance. Seek one out for guidance if you desire to know the reason.");
+    if(TP->query("no advance") && !OB_ACCOUNT->is_high_mortal(TP->query_true_name()))
+    {
+        if(TP->query("no advance") <= TP->query_highest_level())
+        {
+            tell_object(TP,"%^BOLD%^%^CYAN%^Higher powers have deemed you unworthy to advance. "
+                "Seek one out for guidance if you desire to know the reason.");
             return 1;
         }
     }
 
     if(strlen(myclass)) { myclass = replace_string(myclass," ","_"); }
 
-    if(POISON_D->is_poisoned(TP)){
+    if(POISON_D->is_poisoned(TP))
+    {
         tell_object(TP,"You should get your poison cured before you advance.");
         return 1;
     }
 
-    if(!myclass){
+    if(!myclass)
+    {
         if(TP->query("active_class")) { myclass = TP->query("active_class"); }
         else { myclass = TP->query_class(); }
     }
 
-    if(TP->query("new_class_type")){
+    if(TP->query("new_class_type"))
+    {
         char_level = (int)TP->query_character_level();
 
         if(char_level != 10 && char_level != 20 && char_level != 30 && char_level != 40
         && char_level != 50 && char_level != 60 && char_level != 70 && char_level != 80
-        && char_level != 90 && char_level != 100){
-            if(myclass != (string)TP->query("active_class")){
+        && char_level != 90 && char_level != 100)
+        {
+            if(myclass != (string)TP->query("active_class"))
+            {
                 tell_object(TP,"You may only advance in your active "
                     "class: "+TP->query("active_class")+"");
                 return 1;
@@ -620,24 +628,33 @@ int cmd_advance(string myclass)
 
         if(char_level == 10 || char_level == 20 || char_level == 30 || char_level == 40
         || char_level == 50 || char_level == 60 || char_level == 70 || char_level == 80
-        || char_level == 90 || char_level == 100){
-            if(member_array(myclass,TP->query_classes()) == -1){
-                if(!can_multiclass(TP,myclass)){
-                    if(TP->query_property("adding base class")){
+        || char_level == 90 || char_level == 100)
+        {
+            if(member_array(myclass,TP->query_classes()) == -1)
+            {
+                if(!can_multiclass(TP,myclass))
+                {
+                    if(TP->query_property("adding base class"))
+                    {
                         tell_object(TP,"Please enter a class to be your base class for "+myclass+".");
                         return 1;
                     }
                     tell_object(TP,"You are not allowed to become a "+myclass+"");
                     return 1;
-                }else{
+                }
+                else
+                {
                     TP->set_property("multiclassing",1);
                 }
             }
         }
 
-        if(member_array(myclass,TP->query_classes()) != -1){
-            if(char_level%10 == 0){
-                if(!TP->query("confirmed_level_"+char_level)){
+        if(member_array(myclass,TP->query_classes()) != -1)
+        {
+            if(char_level%10 == 0)
+            {
+                if(!TP->query("confirmed_level_"+char_level))
+                {
                     tell_object(TP,"%^B_RED%^%^CYAN%^Are you sure that you do not want to "
                     "take a new class at this level?  You will not get another "
                     "chance until level "+(char_level+10)+".%^RESET%^");
@@ -653,13 +670,17 @@ int cmd_advance(string myclass)
     lottc = this_player()->query_class_level(myclass);
     train = cost(myclass, lottc);
 
-    if(TP->query("new_class_type")){
-        if((int)TP->query_character_level() == MAX_LEVEL && !TP->query("test_character")){
+    if(TP->query("new_class_type"))
+    {
+        if((int)TP->query_character_level() == MAX_LEVEL && !TP->query("test_character"))
+        {
             tell_object(TP,"%^BOLD%^%^GREEN%^You have reached the pinnacle of your "
                 "ability. Congratulations. Unfortunately you can learn no more.");
             return 1;
         }
-    }else{
+    }
+    else
+    {
         tell_object(TP,"There is something wrong with your classes, please contact a wiz.");
         return 1;
         /*
@@ -680,42 +701,51 @@ int cmd_advance(string myclass)
 
     if ((avatarp(TP)) && (lottc >= 150) ) return 1;
 
-    if(!environment(this_player())->query_property("training")){
+    if(!environment(this_player())->query_property("training"))
+    {
         write("%^CYAN%^This is not the appropriate place for training!");
         return 1;
     }
-    if(TP->query("negative level")){
+    if(TP->query("negative level"))
+    {
         tell_object(TP, "%^BOLD%^%^RED%^You have incurred a negative level and must remove it "+
         "before you are able to advance.");
         return 1;
     }
-    if(intp("/daemon/user_d.c"->get_scaled_level(TP))){
+    if(intp("/daemon/user_d.c"->get_scaled_level(TP)))
+    {
         tell_object(TP, "%^BOLD%^%^RED%^You have scaled your level down and cannot advance "+
         "until your level is reset to normal.%^RESET%^");
         return 1;
-    }else{
+    }
+    else
+    {
         FEATS_D->update_usable(TP);
-        if(!TP->query_funds("gold",train)){
+//        initiate_psychic_powers(TP);
+        if(!TP->query_funds("gold",train))
+        {
 	        write("%^GREEN%^For some reason, you don't have enough money to "
 		        "offer the Gods for your training!");
 	        write("%^BOLD%^%^GREEN%^You will need "+cost(myclass,(int)TP->query_level())+" gold!");
 	        return 1;
-	  }
+	    }
 
-        if(TP->query("new_class_type")) {
-            char_level = (int)TP->query_character_level(); 
-        }else{
-            char_level = (int)TP->query_lowest_level();
-        }
+        if(TP->query("new_class_type")) { char_level = (int)TP->query_character_level(); }
+        else { char_level = (int)TP->query_lowest_level(); }
 
         if(TP->query_property("multiclassing")) { TP->set_class(myclass); }
 
-        if((char_level%5 == 0) && (int)TP->query("last done") < char_level){
-            if(ETP->query_property("Specialist") && (string)ETP->query_player() == (string)TPQN){
-                TP->set("last done",char_level);
-                if(ADVANCE_D->advance(this_player(),myclass)){
-                    if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
-                        tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
+        if((char_level%5 == 0) && (int)TP->query("last done") < char_level)
+        {
+	        if(ETP->query_property("Specialist") && (string)ETP->query_player() == (string)TPQN)
+            {
+	            TP->set("last done",char_level);
+                if(ADVANCE_D->advance(this_player(),myclass))
+                {
+                    if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level()))
+                    {
+                        tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please "
+                            "type <help stats>.%^RESET%^");
                     }
                     if(TP->query_property("multiclassing")) { do_multiclass(TP,myclass); }
                     add_class_feats(TP,myclass);
@@ -723,46 +753,83 @@ int cmd_advance(string myclass)
                     initiate_psychic_powers(TP);
                     TP->InitInnate();
 
-	              TP->use_funds("gold",train);
+	                TP->use_funds("gold",train);
+                    if(!TP->query("test_character") && ((string)TP->query("advance place") != "/d/newbie/ooc/trainer"))
+                    {
+                        "daemon/room_d"->remove_room(ETP->query_exit("out"));
+                        "daemon/room_d"->remove_room(ETP->query_exit("out")+".c");
+                        TP->force_me("out");
+                        ob = present("post",ETP);
+                        if(objectp(ob)) { ob->remove(); }
+                    }
                     TP->set("advance place",0);
 	                // Added 02/02/02 by Garrett at Styx's idea.
-	              "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" %^BOLD%^%^BLUE%^Met his/her trainer.");
-                    if (was_newbie != newbiep(TP)){
+	                "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" %^BOLD%^%^BLUE%^Met his/her trainer.");
+                    if (was_newbie != newbiep(TP))
+                    {
                         write("%^BOLD%^%^GREEN%^Congratulations, you are now a full-fledged player.\n"
                             "You may exit through the portal in this room when you are ready to "+
                             "adventure into the greater realm of ShadowGate!");
-                            while(objectp(present("charactercreationsetterobject", TP))){
+                            while(objectp(present("charactercreationsetterobject", TP)))
+                            {
                                 tell_object(TP, "The powerful object unattaches from you and fades away!");
                                 present("charactercreationsetterobject", TP)->remove();
                             }
-                        }
-                        return 1;
                     }
-                    TP->set("last done",char_level-1);
-                }else if(char_level > 50){
-                    if(ADVANCE_D->advance(this_player(),myclass)){
-                        if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
+	            return 1;
+                }
+	            TP->set("last done",char_level-1);
+            }
+            else if(TP->query("advance place") && !TP->query("test_character"))
+            {
+	            write("You know where you need to go. To be reminded type help advance");
+                if((int)TP->query_class_level(myclass) == 0) { TP->remove_class(myclass); }
+                TP->remove_property("multiclassing");
+	            return 1;
+	        }
+            else if(char_level > 50)
+            {
+                if(ADVANCE_D->advance(this_player(),myclass))
+                {
+                    if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level()))
+                    {
                         tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please "
                             "type <help stats>.%^RESET%^");
-                        }
+                    }
                     if(TP->query_property("multiclassing")) { do_multiclass(TP,myclass); }
                     add_class_feats(TP,myclass);
                     FEATS_D->update_usable(TP);
                     initiate_psychic_powers(TP);
                     TP->InitInnate();
-                    TP->use_funds("gold",train);
-                    if (was_newbie != newbiep(TP)){
+	                TP->use_funds("gold",train);
+                    if (was_newbie != newbiep(TP))
+                    {
                         write("%^GREEN%^Congratulations, you are now a full-fledged player.\n"
                             "You have heard of a gate to the south, that leads into foreign lands.  "
                             "It will provide passage to the next step of your adventure!");
-                     }
-                     return 1;
-                 }
-             }
-
-        }else{
-            if(ADVANCE_D->advance(this_player(),myclass)){
-                if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
+                    }
+	            return 1;
+	            }
+	        }
+            else
+            {
+                room=pick_room();
+	            while(!"daemon/room_d"->set_rooms(room,TPQN,TRNROOM))
+                {
+                    room=pick_room();
+	            }
+                if((int)TP->query_class_level(myclass) == 0) { TP->remove_class(myclass); }
+                TP->remove_property("multiclassing");
+	            write("At this point you must search out your master and learn from that learned one.");
+	            return 1;
+            }
+        }
+        else
+        {
+	        if(ADVANCE_D->advance(this_player(),myclass))
+            {
+                if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level()))
+                {
                     tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please "
                         "type <help stats>.%^RESET%^");
                 }
@@ -771,13 +838,14 @@ int cmd_advance(string myclass)
                 FEATS_D->update_usable(TP);
                 initiate_psychic_powers(TP);
                 TP->InitInnate();
-	          TP->use_funds("gold",train);
-                if (was_newbie != newbiep(TP)){
+	            TP->use_funds("gold",train);
+                if (was_newbie != newbiep(TP))
+                {
                     write("%^GREEN%^Congratulations, you are now a full-fledged player.\n"
                         "You have heard of a gate to the south, that leads into foreign lands.  "
                         "It will provide passage to the next step of your adventure!");
                 }
-	          return 1;
+	            return 1;
             }
         }
 
@@ -791,7 +859,6 @@ int cmd_advance(string myclass)
     }
 }
 
-/* removed by Circe
 string pick_room()
 {
   int i,level,num;
@@ -828,7 +895,6 @@ string pick_room()
   TP->set("advance place",room);
   return room;
 }
-*/
 
 int help()
 {
@@ -865,7 +931,7 @@ int help()
     pick_fighter_style("",TP);
     pick_warlock_heritage("",TP);
     pick_human_subrace("",TP);
-/* removed by Circe
+
     if(wizardp(TP))
     {
         write("\n%^YELLOW%^Wizzes - To get a bugged training room to reset to another, use "
@@ -912,6 +978,5 @@ int help()
             "area, for instance.");
         return 1;
     }
-*/
     return 1;
 }

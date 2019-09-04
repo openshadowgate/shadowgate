@@ -1,4 +1,3 @@
-//balanced for +6 - Yves 9/3/19
 // trade item for mephistar spear as there is no non-evil 2h equivalent (spear well outstrips the hammer).
 #include <std.h>
 inherit "/d/common/obj/weapon/shortsword.c";
@@ -33,10 +32,10 @@ void create(){
 "the spear could also be used to call upon Anhur's blessings, preventing foes from escaping the righteous storm held within the weapon. After the god's war and falling of Anhur, Kreysneothosies"
 "took up the mantle of %^YELLOW%^purging%^WHITE%^ the spire in honor of Anhur his Tsarven brother!%^RESET%^");
    set_property("lore difficulty",35);
-   set_property("enchantment",6);
-   set_item_bonus("attack bonus",5);
-   set_item_bonus("damage bonus",5);
-   set_item_bonus("sight bonus",5);
+   set_property("enchantment",5);
+   set_item_bonus("attack bonus",3);
+   set_item_bonus("damage bonus",3);
+   set_item_bonus("sight bonus",3);
    set_weight(8); //to match weight of spear since same weapon
    set_value(50000);
    set_hit((:TO,"hitme":));
@@ -79,24 +78,24 @@ int unwieldme(){
 
 int hitme(object targ){
    if(!objectp(targ)) return roll_dice(1,4);
-   if(random(100) > 40) return roll_dice(1,4);
+   if(random(3)) return roll_dice(1,4);
    switch(random(9)){
       case 0..1:
          tell_room(EETO,"%^BLUE%^"+ETO->QCN+" suddenly turns and slams the pommel of "+ETO->QP+" sword into "+targ->QCN+"'s face!%^RESET%^",({targ,ETO}));
          tell_object(targ,"%^BLUE%^"+ETO->QCN+" suddenly turns and slams the pommel of "+ETO->QP+" sword into your face!%^RESET%^!");
-         tell_object(ETO,"%^BLUE%^You turn suddenly and slam the pommel of your sword into "+targ->QCN+"'s face!%^RESET%^");
-         targ->set_paralyzed(roll_dice(2,8),"%^RED%^You are still reeling from the blow!%^RESET%^");
-         return roll_dice(2,8);
+         tell_object(ETO,"%^BLUE%^You turn suddenly and slam the pommel of your sword into "+targ->QCN+"'s face!%^RESET%^"); 
+         targ->set_paralyzed(roll_dice(2,6),"%^RED%^You are still reeling from the blow!%^RESET%^");
+         return roll_dice(2,6);
       case 2..3:
          tell_room(EETO,"%^BOLD%^%^BLACK%^"+ETO->QCN+" whirls "+ETO->QP+" sword effortlessly, becoming a veritable s%^BOLD%^%^CYAN%^t%^BOLD%^%^BLUE%^o%^BOLD%^%^BLACK%^rm of violence as "+ETO->QS+" slashes through "+ETO->QP+" foes in rapid succession!%^RESET%^",ETO);
          tell_object(ETO,"%^BOLD%^%^BLACK%^You whirl the sword effortlessly, becoming a veritable s%^BOLD%^%^CYAN%^t%^BOLD%^%^BLUE%^o%^BOLD%^%^BLACK%^rm of violence as you slash through your foes in rapid succession!%^RESET%^");
          ETO->execute_attack();
-         return roll_dice(2,6);
+         return roll_dice(1,4);
       case 4..8:
          tell_object(targ,"%^RED%^"+ETO->QCN+"'s blade slashes into you, discharging a sh%^YELLOW%^o%^RED%^c%^RESET%^%^RED%^ki%^ORANGE%^n%^RED%^g burst of %^BOLD%^%^CYAN%^a%^BLUE%^z%^CYAN%^u%^WHITE%^r%^CYAN%^e %^BLUE%^l%^WHITE%^i%^YELLOW%^g%^CYAN%^h%^BLUE%^t%^CYAN%^n%^WHITE%^i%^BLUE%^n%^CYAN%^g %^RESET%^%^RED%^that burn you horribly!%^RESET%^");
          tell_room(EETO,"%^RED%^"+ETO->QCN+"'s blade slashes into "+targ->QCN+", discharging a sh%^YELLOW%^o%^RED%^c%^RESET%^%^RED%^ki%^ORANGE%^n%^RED%^g burst of %^BOLD%^%^CYAN%^a%^BLUE%^z%^CYAN%^u%^WHITE%^r%^CYAN%^e %^BLUE%^l%^WHITE%^i%^YELLOW%^g%^CYAN%^h%^BLUE%^t%^CYAN%^n%^WHITE%^i%^BLUE%^n%^CYAN%^g%^RESET%^%^RED%^!%^RESET%^",({targ,ETO}));
          tell_object(ETO,"%^RED%^Your blade slashes into "+targ->QCN+", discharging a sh%^YELLOW%^o%^RED%^c%^RESET%^%^RED%^ki%^ORANGE%^n%^RED%^g burst of %^BOLD%^%^CYAN%^a%^BLUE%^z%^CYAN%^u%^WHITE%^r%^CYAN%^e %^BLUE%^l%^WHITE%^i%^YELLOW%^g%^CYAN%^h%^BLUE%^t%^CYAN%^n%^WHITE%^i%^BLUE%^n%^CYAN%^g%^RESET%^%^RED%^!%^RESET%^");
-         return roll_dice(4,8);
+         return roll_dice(3,6);
       }
    return 1;
 }
@@ -116,7 +115,7 @@ int transform(string str){
       notify_fail("Transform what?");
       return 0;
    }
-   if(str != "sword" && str != "sword of the vengeful storm" && str != "fang"){
+   if(str != "sword" && str != "sword of the vengeful storm" && str != "fang"){ 
       notify_fail("You can't transform that!");
       return 0;
    }
