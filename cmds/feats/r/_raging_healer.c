@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("RagingProphet");
     feat_name("raging healer");
     feat_prereq("Raging Prophet L1");
-    feat_desc("With this feat a raging prophet has a significant chance to preserve healing spell in memory while raging.");
+    feat_desc("With this feat a raging prophet has a significant chance to preserve any channeling spell in memory, but only while raging.");
     permanent(1);
 }
 
@@ -56,4 +56,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
