@@ -8,13 +8,14 @@
 inherit SPELL;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("meteor swarm");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS meteor swarm on TARGET");
+    set_damage_desc("half bludgeoning, half fire or versatile arcanist");
     set_description("When the meteor swarm spell is cast, the target creature is assaulted by a swarm of flaming meteors, "
         "doing considerable damage.  Any other beings in the path may be engulfed in the explosion and also have a chance to "
         "receive some damage.");
@@ -25,27 +26,27 @@ void create()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *foes, mycolor, element;
     int i;
-    
+
     if(!objectp(caster) || !objectp(place))
     {
         dest_effect();
         return;
     }
-    
-    if(!present(target,place)) 
+
+    if(!present(target,place))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         dest_effect();
         return;
     }
-    
+
     element = (string)caster->query("elementalist");
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":        mycolor = "%^GREEN%^";      break;
     case "electricity": mycolor = "%^ORANGE%^";     break;
@@ -53,8 +54,8 @@ void spell_effect(int prof)
     case "sonic":       mycolor = "%^MAGENTA%^";    break;
     default:            mycolor = "%^RED%^"; element = "fire";  break;
     }
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":
         tell_object(caster,"%^BOLD%^%^GREEN%^You finish your chant and the area hisses under an explosion of searing acid!");
@@ -93,40 +94,40 @@ void spell_effect(int prof)
         mycolor = "%^RED%^";
         break;
     }
-    
+
     spell_successful();
     spell_kill(target, caster);
     damage_targ(target, target->return_target_limb(), sdamage/2, element);
     damage_targ(target, target->return_target_limb(), sdamage/2, "bludgeoning");
-    
+
     foes = all_living(place);
     foes -= ({ target });
     foes -= ({ caster });
     foes = target_filter(foes);
 
-    if(!sizeof(foes)) 
+    if(!sizeof(foes))
     {
         dest_effect();
         return;
     }
 
-    for (i=0;i<sizeof(foes);i++) 
+    for (i=0;i<sizeof(foes);i++)
     {
         if(!objectp(foes[i])) { continue; }
         if(!spell_kill(target,caster)) { continue; }
-        
+
         tell_object(foes[i], ""+mycolor+"A meteor slams into you!");
         tell_room(place, ""+mycolor+"A meteor slams into "+foes[i]->QCN+"!", foes[i]);
-        
+
         damage_targ(foes[i], foes[i]->return_target_limb(), sdamage/2, element);
         damage_targ(foes[i], foes[i]->return_target_limb(), sdamage/2, "bludgeoning");
     }
-    
+
     dest_effect();
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

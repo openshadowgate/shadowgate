@@ -9,6 +9,7 @@ void create() {
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS greater ruin on TARGET");
+    set_damage_desc("untyped");
     set_description("With this spell mage attempts to disrupt the very creation of her target to transform them into nothing.");
     set_components(([
       "mage" : ([ "lodestone" : 1, ]),
@@ -38,4 +39,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

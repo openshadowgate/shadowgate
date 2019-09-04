@@ -7,13 +7,14 @@ inherit SPELL;
 
 string element;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("fireball");
     set_spell_level(([ "mage" : 3, "monk" : 7]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS fireball on TARGET");
+    set_damage_desc("fire, versatile arcanist");
     set_description("By casting this spell, a mage can aim and release a massive ball of fire at a target and those "
         "around him.  The fireball spell will wreak havoc on the caster's target and those who oppose him.  Damage done to those "
         "hit by the spell is 1d6 per level of the caster, subject to a maximum, halved if they manage to evade the brunt of the "
@@ -27,11 +28,11 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     element = (string)caster->query("elementalist");
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":
         tell_object(caster,"%^BOLD%^%^GREEN%^You chant rapidly, creating an orb of acid in your hand.%^RESET%^");
@@ -59,12 +60,12 @@ string query_cast_string()
         set_immunities(({"fire"}));
         break;
     }
-    
+
     return "display";
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *foes = ({});
     string YOU, HIM, tmp = "";
@@ -75,29 +76,29 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
- 
+
     if(!present(target, caster->is_room() ? caster : environment(caster) ))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         dest_effect();
         return;
     }
-    
+
     YOU = caster->QCN;
     HIM = target->QCN;
-    
+
     if(spell_type == "monk") { MAGIC_D->elemental_opportunist(caster, target); }
     spell_successful();
-    
+
     if(!living(caster)) { foes = all_living(environment(target)); }
     else { foes = caster->query_attackers(); }
-    
+
     foes -= ({ target});
     foes = target_filter(foes);
 
     if(interactive(caster)) { tmp = "'s finger"; }
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":
         tell_object(target,"%^BOLD%^%^GREEN%^An orb of acid speeds through the air from "+YOU+tmp+", heading straight for you!");
@@ -127,16 +128,16 @@ void spell_effect(int prof)
         break;
     }
 
-    if(do_save(target)) 
+    if(do_save(target))
     {
         damage_targ(target, "torso", to_int(sdamage / 2),element);
     }
-    else 
+    else
     {
         damage_targ(target, "torso", sdamage,element);
     }
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":
         tell_object(target,"%^BOLD%^%^WHITE%^The acid orb explodes as it hits you!",target);
@@ -164,10 +165,10 @@ void spell_effect(int prof)
     for(i=0;i<sizeof(foes);i++)
     {
         if(!objectp(foes[i])) { continue; }
-        
+
         if(!do_save(foes[i]))
-        {            
-            switch(element) 
+        {
+            switch(element)
             {
             case "acid":
                 tell_room(environment(foes[i]),"%^BOLD%^%^GREEN%^Acid sears into "+foes[i]->QCN+"'s flesh!",foes[i]);
@@ -194,7 +195,7 @@ void spell_effect(int prof)
         }
         else
         {
-            switch(element) 
+            switch(element)
             {
             case "acid":
                 tell_room(environment(foes[i]),"%^BOLD%^%^GREEN%^Acid splashes onto "+foes[i]->QCN+"!",foes[i]);
@@ -226,7 +227,7 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

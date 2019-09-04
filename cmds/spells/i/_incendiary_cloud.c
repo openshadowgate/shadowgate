@@ -19,9 +19,10 @@ void create(){
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS incendiary cloud");
+    set_damage_desc("fire or versatile arcanist");
     set_description("Upon casting this spell, the mage conjures "
        "a heaving mass of smoke and flames that blankets the area, "
-       "scorching those who dare attack the caster.  Like most fires, "
+       "scorching those who dare attack the caster. Like most fires, "
        "this one requires a brief time to build to a raging inferno "
        "before it fizzles out again, leaving devastation in its wake.  "
        "If the caster leaves the area, the cloud will dissipate. A "
@@ -70,7 +71,7 @@ void spell_effect(int prof){
     storm_room = PLACE;
     duration = 0;
     addSpellToCaster();
-    spell_successful();    
+    spell_successful();
     call_out("do_incendiary",1);
 }
 
@@ -95,7 +96,7 @@ void do_incendiary() {
     attackers = all_living(place);
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
-    
+
 
    attackers -= ({caster});
    if(sizeof(attackers)){

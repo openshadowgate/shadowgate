@@ -15,6 +15,7 @@ void create() {
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS powerword kill on TARGET");
+    set_damage_desc("negative energy");
     set_description("When the powerword kill spell is uttered, any creature of the mage's choice will drop dead if it has "
 "fewer current hit points then the mage's power. The target may still be weakened even if this is not the case, but "
 "creatures immune to death magic will be completely unaffected.");
@@ -60,7 +61,7 @@ void spell_effect(int prof) {
         tell_object(target,"%^BOLD%^You reel backward in utter agony, and the world around you goes black!");
         tell_room(place,"%^BOLD%^"+target->QCN+" screams in agony and then falls to the ground!",({target}));
         target_limb = target->return_target_limb();
-        damage_targ(target, target_limb, ((int)target->query_max_hp() + sdamage),"negative energy"); 
+        damage_targ(target, target_limb, ((int)target->query_max_hp() + sdamage),"negative energy");
     }
     dest_effect();
 }

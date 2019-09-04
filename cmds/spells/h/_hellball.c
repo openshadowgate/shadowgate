@@ -16,6 +16,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(1);
+    set_damage_desc("quater of each acid, fire, electricity and sonic");
     set_save("reflex");
     set_components(([
       "mage" : ([ "citric acid" : 1, "magnets" : 1, "small drum" : 1, "sulfur" : 1, ]),
@@ -31,7 +32,7 @@ void spell_effect(int prof){
     int i,admg;
 
     attackers = all_living(place);
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);    
+    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 
     tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" detonates ball of %^RED%^e%^BOLD%^l%^RESET%^%^GREEN%^e%^BOLD%^m%^RESET%^%^ORANGE%^e%^BOLD%^n%^RESET%^%^CYAN%^t%^BOLD%^a%^RESET%^%^MAGENTA%^l%^WHITE%^%^BOLD%^ power, directing currents of raw energy at "+caster->QP+" enemies!%^RESET%^");
@@ -52,7 +53,7 @@ void spell_effect(int prof){
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"acid");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"fire");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"electricity");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"sonic");        
+        damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"sonic");
     }
     spell_successful();
     dest_effect();
@@ -62,4 +63,3 @@ void dest_effect(){
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

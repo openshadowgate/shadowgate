@@ -12,6 +12,7 @@ void create() {
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS horrid wilting");
+    set_damage_desc("negative energy on living, nothing on undead");
     set_description("This spell sends a wave of necrotic energy at caster's living enemies, evaporating water and life from them.");
     set_verbal_comp();
     set_somatic_comp();
@@ -41,8 +42,7 @@ void spell_effect(int prof){
 
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i])) continue;
-        if (target->query_race()=="undead"||
-            target->query_property("undead")) continue;
+        if(target->is_undead())) continue;
         admg=sdamage/4;
         if(do_save(target))
         {
@@ -59,4 +59,3 @@ void dest_effect(){
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -6,14 +6,15 @@
 inherit SPELL;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("animus blast");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animus blast");
- set_description("This power enables a master of necromancy to unleash a blast of pure negative energy. Such is the power of the blast that it can also sap the life energy of those nearby, as well as its main target. In addition, the  blast of negative energy can re-awaken corpses within the vicinity, raising them as the servants of the caster. This  spell has no effect upon existing undead creatures. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
+    set_damage_desc("cold");
+    set_description("This power enables a master of necromancy to unleash a blast of pure negative energy. Such is the power of the blast that it can also sap the life energy of those nearby, as well as its main target. In addition, the  blast of negative energy can re-awaken corpses within the vicinity, raising them as the servants of the caster. This  spell has no effect upon existing undead creatures. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -28,7 +29,7 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_room(place,"%^BOLD%^%^CYAN%^The air around you seems to chill suddenly as "+caster->QCN+" raises "+caster->QP+" hands.%^RESET%^",caster);
     tell_object(caster,"%^BOLD%^%^CYAN%^You raise your hands to the heavens, drawing energy from your surroundings as the air takes on a sudden chill.%^RESET%^");
@@ -36,7 +37,7 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *attackers,*temp,*targs,undead;
     int i,j,num,nummon,flag;
@@ -44,9 +45,9 @@ void spell_effect(int prof)
     object controller;
 
     attackers = all_living(place);
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);    
+    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
-    
+
     if(!sizeof(attackers))
     {
         tell_object(caster,"%^BOLD%^%^WHITE%^As the energy reaches its peak, you fling your arms out to unleash its full "
@@ -61,23 +62,23 @@ void spell_effect(int prof)
         "force upon your foes!");
     tell_room(place,"%^BOLD%^%^WHITE%^The air seems to thicken around "+caster->QCN+"'s hands as "+caster->QS+" flings "
         +caster->QP+" arms out to unleash a shocking blast of chilling energy!%^RESET%^",caster);
-    
+
     for(i=0;i<sizeof(attackers);i++)
     {
         if(!objectp(attackers[i])) continue;
 
-        if(do_save(attackers[i])) 
+        if(do_save(attackers[i]))
         {
             tell_object(attackers[i],"%^BOLD%^You scramble away from the icy blast, but some of the chill still sinks into your bones!%^RESET%^");
             damage_targ(attackers[i],attackers[i]->return_target_limb(),(sdamage/2),"cold");
         }
-        else 
+        else
         {
             tell_object(attackers[i],"%^BOLD%^The biting chill sinks into your bones and saps your life!%^RESET%^");
             damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"cold");
         }
     }
-    
+
     spell_successful();
     if(present("undead_controller",caster)) {
         controller = present("undead_controller",caster);
@@ -93,9 +94,8 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

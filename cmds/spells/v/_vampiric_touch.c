@@ -18,9 +18,8 @@ create() {
     set_spell_level(([ "mage" : 3, "paladin" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS vampiric touch on TARGET");
-    set_description("This spell, when cast, will allow the mage to drain a certain amount of hit points from an opponent "
-"and add them to his own, if he makes a successful touch attack against the victim.  "
-"The spell will only heal the caster up to his maximum hit points.  Using negative energy, this spell is ineffective against the undead.");
+    set_damage_desc("negative energy on TARGET, untyped on self");
+    set_description("This spell, when cast, will allow the mage to drain a certain amount of hit points from an opponent and add them to his own, if he makes a successful touch attack against the victim. The spell will only heal the caster up to his maximum hit points. Using negative energy, this spell is ineffective against the undead, it heals caster with untyped damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

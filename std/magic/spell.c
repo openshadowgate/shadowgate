@@ -12,25 +12,26 @@ inherit DAEMON;
 #include <spellcomponents.h>
 
 string spell_name,
-       spell_type,
-       rspell_name,
-       spell_sphere,
-       cast_string,
-       cname,
-       arg,
-       my_diety,
-       mydiscipline,
-       *my_class,
-       *immune,
-       spell_domain,
-       save_type,
-       syntax,
-       description,
-       casting_stat,
-       psyclass,
-       aoe_message,
-       *supreme_healer_spells,
-       *natures_gift_spells;
+    spell_type,
+    rspell_name,
+    spell_sphere,
+    cast_string,
+    cname,
+    arg,
+    my_diety,
+    mydiscipline,
+    *my_class,
+    *immune,
+    spell_domain,
+    damage_desc,
+    save_type,
+    syntax,
+    description,
+    casting_stat,
+    psyclass,
+    aoe_message,
+    *supreme_healer_spells,
+    *natures_gift_spells;
 
 static int FULL_EFFECT = 100;
 
@@ -289,6 +290,11 @@ void set_description(string descript) {
 void set_syntax(string synt) {
     if(!synt) syntax = "";
     syntax = synt;
+}
+
+void set_damage_desc(string desc)
+{
+    damage_desc = desc;
 }
 
 void set_spell_duration() {    duration = 1; }
@@ -2649,17 +2655,30 @@ void help() {
             }
     }
     write("%^BOLD%^%^RED%^Class:%^RESET%^ "+printclass);
-    if(!spell_sphere) spell_sphere = "";
-    if(spell_sphere != "") write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(evil_spell?" [evil]":""));
-    if(!spell_domain) spell_domain = "";
-    if(spell_domain != "") write("%^BOLD%^%^RED%^Domain:%^RESET%^ "+spell_domain);
-    if(!mydiscipline) mydiscipline = "";
-    if(mydiscipline != "") write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
-    if(!save_type) save_type = "";
-    if(save_type != "") write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ "+save_type);
-    else write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ n/a");
-    if(!syntax) syntax = "contact a wiz - not initialized";
-    if(!description) description = "contact a wiz - not initialized";
+    if(!spell_sphere)
+        spell_sphere = "";
+    if(spell_sphere != "")
+        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(evil_spell?" [evil]":""));
+    if(!spell_domain)
+        spell_domain = "";
+    if(spell_domain != "")
+        write("%^BOLD%^%^RED%^Domain:%^RESET%^ "+spell_domain);
+    if(!mydiscipline)
+        mydiscipline = "";
+    if(mydiscipline != "")
+        write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
+    if(!save_type)
+        save_type = "";
+    if(save_type != "")
+        write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ "+save_type);
+    else
+        write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ n/a");
+    if(damage_desc != "")
+        write("%^BOLD%^%^RED%^Damage:%^RESET%^ "+damage_desc);
+    if(!syntax)
+        syntax = "contact a wiz - not initialized";
+    if(!description)
+        description = "contact a wiz - not initialized";
     write("%^BOLD%^%^RED%^Syntax:%^RESET%^ "+syntax+"\n");
     write(description+"\n");
 //fixed up some typos in the following messages ~Circe~ 7/29/19

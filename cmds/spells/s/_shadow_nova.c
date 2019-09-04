@@ -13,6 +13,7 @@ void create()
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS shadow nova");
+    set_damage_desc("untyped");
     set_description("This spell will send a burst of pure darkness out in a circle from the caster.  Any enemies "
         "caught in the area will suffer damage from the shadowy energy.  Those creatures who fail their save will find that "
         "the darkness also steals away their vision temporarily.");
@@ -37,7 +38,7 @@ void spell_effect(int prof)
 {
     object *attackers;
     int i;
-    
+
     attackers = caster->query_attackers();
     attackers = target_filter(attackers);
 
@@ -47,9 +48,9 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    
+
     tell_room(place,"%^MAGENTA%^The area is plunged momentarily into utter darkness!%^RESET%^");
-    
+
     for(i=0;i<sizeof(attackers);i++)
     {
         if(!objectp(attackers[i])) continue;
@@ -61,7 +62,7 @@ void spell_effect(int prof)
         tell_object(attackers[i],"%^BOLD%^%^CYAN%^The darkness burns with an unnatural chill as it passes over and through you!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
     }
-    
+
     spell_successful();
     dest_effect();
 }

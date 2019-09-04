@@ -1,4 +1,4 @@
-#include <std.h>  
+#include <std.h>
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -14,6 +14,7 @@ void create(){
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animus blizzard");
+    set_damage_desc("cold");
     set_description("This dark casting invokes a blizzard infused with negative energy in the area. The storms themselves pierce through flesh of casters enemies with fell cold, causing them to suffer greatly. Due to nature of this blizzard it can raise recently deceased creatures to the service of the caster, binding them temporarely to defend. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
@@ -44,7 +45,7 @@ void spell_effect()
 }
 
 
-void execute_attack() 
+void execute_attack()
 {
     object *foes=({}),targ;
     int i;
@@ -55,7 +56,7 @@ void execute_attack()
         flag = 1;
         ::execute_attack();
         return;
-    }    
+    }
 
     if(!objectp(caster) || !objectp(place) || !present(caster,place)|| counter<0)
     {
@@ -109,4 +110,3 @@ void dest_effect()
     if(objectp(TO))
         TO->remove();
 }
-

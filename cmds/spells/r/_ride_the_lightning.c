@@ -14,6 +14,7 @@ void create() {
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS ride the lightning on TARGET");
+    set_damage_desc("electricity or versatile arcanist");
     set_description("Developed by archmage Ramius, this spell, when cast, transforms you into a mass of living lightning and propels you toward your foes.  A versatile arcanist can manipulate the base element of this spell.");
     set_verbal_comp();
     set_somatic_comp();
