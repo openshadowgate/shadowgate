@@ -384,21 +384,21 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
     if(type == "negative energy")
     {
-        if(targ->query_race() == "undead" ||
-           targ->query_property("undead") ||
+        if(!!targ->is_undead() ||
            targ->query_property("heart of darkness"))
             damage = -abs(damage);
         else
             damage = abs(damage);
+        tell_object(FPL("ilmarinen"),":"+damage);
     }
 
     if(type == "positive energy")
     {
-        if(targ->query_race() == "undead" ||
-           targ->query_property("undead"))
+        if(targ->is_undead())
             damage = abs(damage);
         else
             damage = -abs(damage);
+        tell_object(FPL("ilmarinen"),":"+damage);
     }
 
     if(damage > 0 && type != "force" && objectp(myEB = targ->query_property("empty body")))

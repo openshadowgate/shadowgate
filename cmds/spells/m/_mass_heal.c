@@ -72,8 +72,8 @@ void spell_effect(int prof)
        member_array(target,party_members) != -1 ||
        member_array(target,followers) != -1)
     {
-        targets = ({ caster });
-        targets += filter_array(distinct_array(party_members+(followers-attackers)),(:!$1->is_undead():));
+        targets = filter_array(distinct_array(party_members+(followers-attackers)+({caster})),
+                               (:!$1->is_undead():));
     }
     else if(member_array(target,attackers) != -1)
     {
@@ -99,7 +99,7 @@ void spell_effect(int prof)
         {
             if(!objectp(targets[i])) { continue; }
             if(!present(targets[i],place)) { continue; }
-            if(target->is_undead())
+            if(!!target->is_undead())
             {
                 tell_room(place,"%^BOLD%^%^CYAN%^A brillaint wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
@@ -128,7 +128,7 @@ void spell_effect(int prof)
                 tell_object(targets[i],"%^BOLD%^%^CYAN%^A brilliant "+
                     "wave moves through you, carrying with it the essence of life.");
                 set_helpful_spell(1);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"positive energy");
+                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"positive energy");
             }
         }
     }

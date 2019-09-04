@@ -38,6 +38,11 @@ string query_cast_string()
 spell_effect(int prof)
 {
     int rnd;
+    if(!(target->is_undead()))
+    {
+        set_helpful_spell(0);
+        spell_kill(target,caster);
+    }
     if (interactive(caster))
     {
         if ( caster == target )
@@ -57,11 +62,8 @@ spell_effect(int prof)
         tell_object(target, "%^BOLD%^%^BLACK%^"+caster->QCN+" sends a beam of fell energy at you.");
     }
 
-    rnd = sdamage * 5/4;
+    rnd = - sdamage * 5/4;
     damage_targ(target,target->return_target_limb(),rnd,"negative energy");
-    if(!(target->query_race() == "undead" ||
-         target->query_property("undead")))
-        spell_kill(target,caster);
     target->remove_paralyzed();
     target->set_poisoning((-1)*(int)target->query_poisoning());
     dest_effect();
