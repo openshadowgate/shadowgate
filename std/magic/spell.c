@@ -2673,7 +2673,7 @@ void help() {
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ "+save_type);
     else
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ n/a");
-    if(damage_desc != "")
+    if(stringp(damage_desc))
         write("%^BOLD%^%^RED%^Damage:%^RESET%^ "+damage_desc);
     if(!syntax)
         syntax = "contact a wiz - not initialized";
