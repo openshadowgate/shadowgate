@@ -15,7 +15,7 @@ void dest_effect();
 create() {
     ::create();
     set_spell_name("vampiric touch");
-    set_spell_level(([ "mage" : 3 ]));
+    set_spell_level(([ "mage" : 3, "paladin" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS vampiric touch on TARGET");
     set_description("This spell, when cast, will allow the mage to drain a certain amount of hit points from an opponent "
@@ -62,12 +62,12 @@ spell_effect(int prof) {
             tell_object(caster,"%^BOLD%^%^CYAN%^You touch "+target->QCN+"'s "+target_limb+" draining the very life essence from "+target->QP+" veins!");
             hp_before = target->query_hp();
             damage_targ(target, target_limb, sdamage,"negative energy");
-            hp_before = hp_before*2/3; 
+            hp_before = hp_before*2/3;
             sdamage = sdamage*2/3;
             if (!objectp(target))
-                damage_targ(caster, target_limb, (-hp_before),"negative energy");
+                damage_targ(caster, target_limb, (-hp_before),"untyped");
             else
-                damage_targ(caster, target_limb, (-sdamage),"negative energy");
+                damage_targ(caster, target_limb, (-sdamage),"untyped");
         }
     } else {
         tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" fails to touch you!");
