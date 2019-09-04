@@ -39,10 +39,7 @@ spell_effect(int prof)
 {
     int rnd;
     if(!(target->is_undead()))
-    {
         set_helpful_spell(0);
-        spell_kill(target,caster);
-    }
     if (interactive(caster))
     {
         if ( caster == target )

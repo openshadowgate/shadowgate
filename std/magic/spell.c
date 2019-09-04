@@ -1692,48 +1692,12 @@ void sendDisbursedMessage(object victim){
 }
 
 varargs void damage_targ(object victim, string hit_limb, int wound, string damage_type) {
-    int nokill;
-
-    nokill=1;
     if (!victim)
         return 1;
-    if (wound <= 0)
-    {
-        victim->do_damage(hit_limb,wound);
+
+    if (!objectp(caster))
         return;
-    }
 
-    if(objectp(caster))
-    {
-        if (caster->ok_to_kill(victim))
-        {
-            nokill=0;
-        }
-    }
-
-    if (nokill)
-    {
-        sendDisbursedMessage(victim);
-        return 1;
-    }
-
-    if (!objectp(caster)) return;
-    if ( victim != caster &&victim != environment(caster) &&!nokill) {
-        if( present( victim, caster) || present( victim, environment(caster) ) ) {
-            spell_kill(victim,caster);
-            victim->add_attacker(caster);
-        } else {
-            victim->add_attacker(TO);
-            if(!objectp(victim) || victim->query_ghost()) return 1;
-            victim->remove_attacker(TO);
-        }
-    }
-    if (!nokill) victim->set_toattack(1);
-    // this calls do_spell_damage, which already checks spell resistance
- /*   if ( checkMagicResistance(victim,(int)caster->query_property("spell penetration"))) {
-        sendDisbursedMessage(victim);
-        return 1;
-    }*/
     do_spell_damage(victim,hit_limb, wound,damage_type);
 }
 
@@ -1754,14 +1718,13 @@ varargs void do_spell_damage( object victim, string hit_limb, int wound,string d
 
     if(objectp(caster))
     {
-        if(caster->ok_to_kill(victim)) { nokill=0; }
+        if(caster->ok_to_kill(victim))
+            nokill=0;
     }
 
-    // starting to port this over to 3e SR; caster level increases spell penetration automatically.
-    // current balance: MR feats vs MR resist feats. MR items vs SP items. clevel vs plat band/resist spell.
-    // currently this is still running on % numbers (d100), needs converted to d20 when MR is rescaled. N, 4/14.
-    spmod = clevel; // spmod = base spell penetration modifier
-    if(!spmod) spmod = 1;
+    spmod = clevel; // spmod = base spell penetration
+    if(!spmod)
+        spmod = 1;
     spmod += (int)caster->query_property("spell penetration"); // add spell pen to base caster level
 
     if(checkMagicResistance(victim,spmod) || nokill)
@@ -1771,23 +1734,31 @@ varargs void do_spell_damage( object victim, string hit_limb, int wound,string d
     }
     if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }
 
-    //victim->cause_typed_damage(victim,hit_limb,wound,damage_type);
-    //Changing this over to the below after witnessing instances where spells were never getting to the
-    //combat daemon to determine damage - was very strange - Saide, August 2017
-
     wound = (int)COMBAT_D->typed_damage_modification(caster, victim, hit_limb, wound, damage_type);
 
     victim->cause_damage_to(victim, hit_limb, wound);
 
-    //"/daemon/combat_d.c"->track_damage(caster, victim, wound);
-
-    if(objectp(victim))
+    if(victim != caster &&
+       victim != environment(caster) &&
+       !victim->query_ghost() &&
+       !nokill &&
+       wound > 0)
     {
-        victim->add_attacker(TO);
-        if(!objectp(victim)) return 1;
-        victim->check_death();
-        victim->remove_attacker(TO);
+        if(present(victim, caster) ||
+           present(victim, environment(caster)))
+        {
+            spell_kill(victim,caster);
+            victim->add_attacker(caster);
+        }
+        else
+        {
+            victim->add_attacker(TO);
+            victim->check_death();
+            victim->remove_attacker(TO);
+        }
+        victim->set_toattack(1);
     }
+
     return 1;
 }
 

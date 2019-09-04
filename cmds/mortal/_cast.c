@@ -5,11 +5,12 @@
 // Updated to use power points for psychic characters by ~Circe~ 9/17/15
 #include <std.h>
 #include <daemons.h>
-#include <cleric_spells.h>
 #include <schoolspells.h>
 #include <disciplinespells.h>
 
 inherit DAEMON;
+
+#include <cleric_spells.h>
 
 void help();
 
@@ -62,7 +63,7 @@ int cmd_cast(string str)
     }
 
 // here, type is the class casting the spell (eg/ mage), str2 is the spell name, tar is the target (or arguments)
-    if(!sscanf(str,"%s %s",type,str2)) return notify_fail("Syntax: <cast classname spell-syntax>\n");
+    if(!sscanf(str,"%s %s",type,str2)) return notify_fail("Syntax: <cast CLASS CAST_STRING>\n");
 
     if(!sscanf(str2,"%s on %s",str2,tar))
         if(!sscanf(str2,"%s at %s",str2,tar))
@@ -229,8 +230,8 @@ cast
 
 %^CYAN%^SYNTAX%^RESET%^
 
-cast %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^
-cast cleric %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming
+cast %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^
+cast cleric %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -252,8 +253,8 @@ Neutral clerics can do both.
 
 For example, if you have light spell prepared you can cast it as cure/cause light wounds the next way:
 
-    %^ORANGE%^<cast cleric cure light wounds on %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^as healing>%^RESET%^
-    %^ORANGE%^<cast cleric cure light wounds on %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^as harming>%^RESET%^
+    %^ORANGE%^<cast cleric light as healing on %^ORANGE%^%^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
+    %^ORANGE%^<cast cleric light as harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
 
 Positive energy heals living and harms undead.
 Negative energy harms living and heals undead.

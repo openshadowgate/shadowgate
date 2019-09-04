@@ -389,7 +389,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             damage = -abs(damage);
         else
             damage = abs(damage);
-        tell_object(FPL("ilmarinen"),":"+damage);
     }
 
     if(type == "positive energy")
@@ -398,7 +397,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             damage = abs(damage);
         else
             damage = -abs(damage);
-        tell_object(FPL("ilmarinen"),":"+damage);
     }
 
     if(damage > 0 && type != "force" && objectp(myEB = targ->query_property("empty body")))

@@ -106,7 +106,6 @@ void spell_effect(int prof)
                     "wave moves through you, carrying with it the essence of death.");
                 set_helpful_spell(0);
                 damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
-                spell_kill(targets[i],caster);
             }
             else if(targets[i] == caster)
             {
