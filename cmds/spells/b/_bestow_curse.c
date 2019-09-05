@@ -15,15 +15,12 @@ void create() {
     set_spell_level(([ "mage" : 4 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS bestow curse on TARGET");
+    set_damage_desc("clevel / 8 to all skills, attack and damage bonus, caster level");
     set_description("By means of this spell, the caster places a curse upon the target that will weaken them considerably"
 ", lowering their defenses and their combat abilities. It is not dispellable by normal magics, but will fade over time.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-     // school specific mage spell
-    set_components(([
-      "mage" : ([ "charcoal" : 2, ]),
-    ]));
     set_save("will");
 }
 
