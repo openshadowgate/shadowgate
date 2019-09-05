@@ -46,8 +46,8 @@ void spell_effect(int prof)
         target->add_stat_bonus("strength",bonus);
         target->add_stat_bonus("dexterity",bonus);
         target->set_property("boneshattered");
-        call_out("dest_effect",duration);
         duration = (ROUND_LENGTH) * clevel;
+        call_out("dest_effect",duration);
     }
     else
         TO->dest_effect();
