@@ -40,9 +40,12 @@ void spell_effect(int prof){
         return;
     }
 
-    for(i=0;i<sizeof(attackers);i++){
-        if(!objectp(attackers[i])) continue;
-        if(target->is_undead())) continue;
+    for(i=0;i<sizeof(attackers);i++)
+    {
+        if(!objectp(attackers[i]))
+            continue;
+        if(target->is_undead())
+            continue;
         admg=sdamage/4;
         if(do_save(target))
         {
