@@ -1361,7 +1361,8 @@ void setup() {
     set_property("where block",holder2);
     set_property("spell_points",holder1);
     set("reply",0);
-  if (!stringp(tmp = getenv("TERM"))) setenv("TERM", tmp = "dumb");
+  if (!stringp(tmp = getenv("TERM")))
+      setenv("TERM", tmp = "dumb");
   static_user["term_info"] = (mapping)TERMINAL_D->query_term_info(tmp);
   write_messages();
   set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
@@ -1398,8 +1399,7 @@ void setup() {
    }
 
   init_feats();
-  load_autoload_obj(); /* Truilkan@TMI 01/18/92 MOVE THIS LINE & DIE - THORN */
-    /* code for the prison and new deaths... */
+  load_autoload_obj();
 
     if(!TO->query("true_quietness"))
     {
@@ -1426,15 +1426,22 @@ void setup() {
       load_pets();
   }
   convert_kills();
-  if (query_property("inactive")) remove_property("inactive");
-  if (query_invis() && !wizardp(TO)) set_invis();
+  if (query_property("inactive"))
+      remove_property("inactive");
+  if (query_invis() && !wizardp(TO))
+      set_invis();
   setup_messages();
   init_mud_guilds();
   init_spellcaster();
 
-  if(query_condition() < -100) {
+  if(query_condition() < -100)
+  {
     used_stamina = query_max_stamina() + 100;
   }
+  //This is a work-around to make undead players great again, since
+  //is_undead() picks up on property.
+  if(query("undead"))
+      set_property("undead",1);
   TO->update_channels();
   if(avatarp(TO) && (int)TO->query_level() > 100)
   {
