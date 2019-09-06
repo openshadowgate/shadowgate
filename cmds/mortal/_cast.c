@@ -96,8 +96,8 @@ int cmd_cast(string str)
     if(type == "monk" && align > 3)
         return notify_fail("You cannot use your monk spells unless you are of a lawful alignment!\n");
 
-    if((type == "paladin" || type == "antipaladin") && (align < 1 || align > 3))
-        return notify_fail("You cannot use your paladin spells unless you are of a lawful alignment!\n");
+    if((type == "paladin" ) && (align < 7))
+        return notify_fail("You cannot use your paladin spells if you're of chaotic alignment!\n");
 
     if(type == "sorcerer" ||
        type == "psion" ||
