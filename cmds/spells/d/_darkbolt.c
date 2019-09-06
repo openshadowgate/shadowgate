@@ -13,6 +13,7 @@ void create() {
     set_spell_sphere("combat");
     set_spell_domain("darkness");
     set_syntax("cast CLASS darkbolt on TARGET");
+    set_damage_desc("divine");
     set_description("This spell will hurl a bolt of pure evil at the target.  If the target is able to move in time, then "
 "they will only suffer some of the damage.  This spell may also hit some of those who are standing near the target.");
     set_verbal_comp();

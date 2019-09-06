@@ -8,13 +8,14 @@ inherit SPELL;
 string YOU, HIM, element;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("cone of cold");
     set_spell_level(([ "mage" : 5, "monk" : 15]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS cone of cold on TARGET");
+    set_damage_desc("delayed cold");
     set_description("By casting this spell, you form a massive white cone of icy cold towards your target.  Not only does "
         "this spell increase damagewise as the caster increases in level, but also, the chance of hitting an unintended target in "
         "addition to the intentional one increases too.  The mage will try to aim the spell at only hostile targets, but this is "
@@ -28,7 +29,7 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     if(spell_type == "monk")
     {
@@ -38,7 +39,7 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     if(!objectp(caster))
     {
@@ -50,10 +51,10 @@ void spell_effect(int prof)
     HIM = target->QCN;
 
     element = (string)caster->query("elementalist");
-    
+
     if(interactive(caster))
     {
-        switch(element) 
+        switch(element)
         {
         case "acid":
             tell_object(caster, "%^GREEN%^The crystal pulses with a short-lived, s%^YELLOW%^i%^RESET%^%^ORANGE%^c%^GREEN%^kly green light that slightly burns your hands.%^RESET%^");
@@ -78,7 +79,7 @@ void spell_effect(int prof)
                 tell_object(caster, "%^CYAN%^Your body shivers violently as you exhale the arctic air!%^RESET%^");
                 tell_room(place, "%^CYAN%^"+YOU+"'s body trembles violently as "+caster->QS+" exhales the arctic air!%^RESET%^", ({caster}));
             }
-            else 
+            else
             {
                 tell_object(caster, "%^CYAN%^Slowly your crystal chills to an icy cold, making your hands tremble.%^RESET%^");
                 tell_room(place, "%^CYAN%^"+YOU+"'s hands tremble violently as "+caster->QS+" grasps the crystal.", ({caster}) );
@@ -91,18 +92,18 @@ void spell_effect(int prof)
 }
 
 
-void zapper() 
+void zapper()
 {
     string before, after, size;
     object *inven, *hits = ({});
     int i;
-    
+
     if(!objectp(caster))
     {
         dest_effect();
         return;
     }
-    
+
     if(!objectp(target) || !objectp(place) || !present(target, place))
     {
         if(spell_type == "monk")
@@ -117,16 +118,16 @@ void zapper()
         dest_effect();
         return;
     }
-    
+
     if(spell_type == "monk") { MAGIC_D->elemental_opportunist(caster, target); }
-    
+
     spell_successful();
-    
+
     size = "avalanche";
     if (clevel < 15) size = "gush";
     if (clevel < 20) size = "flood";
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":
         tell_room(place,"%^BOLD%^%^BLACK%^A cyclone of deadly %^RESET%^%^GREEN%^a%^BOLD%^%^GREEN%^ci%^RESET%^%^GREEN%^d %^BOLD%^%^BLACK%^bursts forth from the crystal, directly toward "+HIM+"!%^RESET%^",target);
@@ -161,8 +162,8 @@ void zapper()
 
     inven = all_living(environment(caster));
     inven = target_filter(inven);
-    
-    
+
+
     if(sizeof(inven))
     {
         for(i=0;i<sizeof(inven);i++)
@@ -170,13 +171,13 @@ void zapper()
             if(!objectp(inven[i])) { continue; }
             if(inven[i] == caster) { continue; }
             if(inven[i] == target) { continue; }
-            if(random(100) < clevel) 
-            { 
+            if(random(100) < clevel)
+            {
                 hits += ({ inven[i] });
                 continue;
             }
-            if(random(500) < clevel) 
-            { 
+            if(random(500) < clevel)
+            {
                 hits += ({ inven[i] });
                 continue;
             }
@@ -184,12 +185,12 @@ void zapper()
     }
 
     if(sizeof(hits))
-    {  
-        for (i = 0;i < sizeof(hits);i++) 
+    {
+        for (i = 0;i < sizeof(hits);i++)
         {
             if(!objectp(hits[i])) { continue; }
 
-            switch(element) 
+            switch(element)
             {
             case "acid":
                 tell_object(hits[i],"%^BOLD%^%^GREEN%^The corrosive vapor washes over you.\n%^BLUE%^The flesh-eating acid drains your vitality and sears your flesh!");
@@ -213,8 +214,8 @@ void zapper()
                 tell_room(place,"%^BOLD%^%^CYAN%^The icy cold clears "+hits[i]->QCN+" from its path, wreaking damage as it goes!",({caster,hits[i]}));
                 break;
             }
-            
-            if(do_save(hits[i])) 
+
+            if(do_save(hits[i]))
             {
                 damage_targ(hits[i],"torso",sdamage/2,element);
             }
@@ -224,8 +225,8 @@ void zapper()
             }
         }
     }
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":
         tell_object(target,"%^BOLD%^%^GREEN%^The %^RESET%^%^ORANGE%^f%^WHITE%^l%^ORANGE%^e%^BOLD%^%^BLACK%^s%^RESET%^%^ORANGE%^h%^BOLD%^%^GREEN%^-%^RESET%^%^GREEN%^e%^MAGENTA%^a%^GREEN%^ti%^RED%^n%^GREEN%^g %^BOLD%^%^GREEN%^vapor all but %^CYAN%^drowns %^GREEN%^everything in its path.\nIt slams mercilessly into you, draining "+target->QP+" vitality and leaving "+target->QO+" %^RED%^screaming %^BOLD%^%^GREEN%^in pain!%^RESET%^");
@@ -249,14 +250,14 @@ void zapper()
         tell_room(place,"%^BOLD%^%^CYAN%^"+YOU+"'s fearful frost slams into "+HIM+"!!", ({caster, target}) );
       break;
     }
-    
+
     if(do_save(target)) { sdamage = sdamage/2; }
     damage_targ(target, "torso", sdamage, element);
     dest_effect();
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
