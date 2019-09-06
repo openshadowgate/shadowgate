@@ -1854,9 +1854,9 @@ void define_base_damage(int adjust)
         switch(slevel)
         {
         case 1: sdamage = roll_dice(clevel,4); break;
-        case 2: sdamage = roll_dice(clevel,5); break;
+        case 2: sdamage = roll_dice(clevel,4)+roll_dice(1,clevel/2); break;
         case 3: sdamage = roll_dice(clevel,6); break;
-        case 4: sdamage = roll_dice(clevel,7); break;
+        case 4: sdamage = roll_dice(clevel,6)+roll_dice(1,clevel/2); break;
         case 5: sdamage = roll_dice(clevel,8); break;
         case 6: sdamage = roll_dice(clevel,8)+roll_dice(1,clevel/2); break;
         case 7: sdamage = roll_dice(clevel,9); break;
