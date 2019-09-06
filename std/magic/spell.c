@@ -1859,9 +1859,9 @@ void define_base_damage(int adjust)
         case 4: sdamage = roll_dice(clevel,6)+roll_dice(1,clevel/2); break;
         case 5: sdamage = roll_dice(clevel,8); break;
         case 6: sdamage = roll_dice(clevel,8)+roll_dice(1,clevel/2); break;
-        case 7: sdamage = roll_dice(clevel,9); break;
-        case 8: sdamage = roll_dice(clevel,9)+roll_dice(1,clevel/2); break;
-        case 9: sdamage = roll_dice(clevel,10); break;
+        case 7: sdamage = roll_dice(clevel,10); break;
+        case 8: sdamage = roll_dice(clevel,10)+roll_dice(1,clevel/2); break;
+        case 9: sdamage = roll_dice(clevel,12); break;
         case 10..20: sdamage = roll_dice(clevel,10); break;
         default: sdamage = roll_dice(clevel,6); break;
         }
