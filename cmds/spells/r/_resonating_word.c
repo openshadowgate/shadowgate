@@ -14,6 +14,7 @@ void create(){
     set_spell_level(([ "bard" : 5, "mage" : 7 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS resonating word on TARGET");
+    set_damage_desc("sonic");
     set_description("The caster uses a word of power to cause potentially lethal vibrations in the chosen target. Its effects "
 "are only subtle to begin with, but quickly become destructive. Those with a greater degree of fortitude may be able to "
 "withstand the worst of its effects.");
@@ -75,7 +76,7 @@ void second_hit() {
 }
 
 void last_hit() {
-   define_base_damage(-3);    
+   define_base_damage(-3);
    if(!objectp(target)) {
        dest_effect();
        return;

@@ -36,7 +36,7 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        if(do_save(foe,8) ||
+        if(do_save(foe,6) ||
            foe->query_property("no death") ||
            ((string)foe->query_race() == "undead") ||
            foe->query_property("undead"))

@@ -15,6 +15,7 @@ void create()
     set_spell_level(([ "mage":7,"cleric":7,"bard":5]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS visions from within");
+    set_damage_desc("mental");
     set_description("With this spell the caster shares own nightmares with everyone in the area.");
     set_verbal_comp();
     set_somatic_comp();

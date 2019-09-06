@@ -8,13 +8,14 @@ string element;
 void dest_effect();
 void paralysis(mixed *arg2);
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("chain lightning");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS chain lightning on TARGET");
+    set_damage_desc("electricity or versatile arcanist");
     set_description("Chain lightning causes a great bolt of electrical energy to attack your target.  After the bolt has "
         "attacked your target, the lightning bolt has enough energy to continue jumping around the room, damaging other people "
         "and anything else that happens to be in the room. A versatile arcanist can manipulate the base element of this spell.");
@@ -27,10 +28,10 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     element = (string)caster->query("elementalist");
-    switch(element) 
+    switch(element)
     {
     case "acid":
         tell_object(caster,"%^BOLD%^%^GREEN%^You rub the fur onto your glass rod, charging it with power. You then touch a pin with the rod and begin chanting the spell, even as they begin to bubble and shift before your eyes!%^RESET%^");
@@ -58,7 +59,7 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *inven, *hits;
     int damage, i,j, number, level, bonus;
@@ -72,7 +73,7 @@ void spell_effect(int prof)
     level = clevel;
     number = level;
 
-    if (!present(target,environment(caster))) 
+    if (!present(target,environment(caster)))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         dest_effect();
@@ -91,7 +92,7 @@ void spell_effect(int prof)
 
     inven = target_filter(inven);
 
-    switch(element) 
+    switch(element)
     {
     case "acid":
         tell_object(target,"%^BOLD%^%^GREEN%^A %^BLACK%^hissing %^GREEN%^jet of %^RESET%^%^GREEN%^a%^RED%^c%^GREEN%^id %^BOLD%^%^GREEN%^leaps from the %^RESET%^%^RED%^co%^ORANGE%^r%^RED%^ro%^ORANGE%^d%^RED%^i%^ORANGE%^n%^RED%^g %^BOLD%^%^GREEN%^pin and surges toward you!%^RESET%^");
@@ -115,7 +116,7 @@ void spell_effect(int prof)
         break;
     }
 
-    if(do_save(target,0)) 
+    if(do_save(target,0))
     {
         damage_targ(target,target->return_target_limb(),sdamage/2,element);
     }
@@ -123,10 +124,10 @@ void spell_effect(int prof)
     {
         damage_targ(target,target->return_target_limb(),sdamage,element);
     }
-    
+
     spell_kill(target, caster);
 
-    switch(element) 
+    switch(element)
     {
     case "acid":
         tell_room(place,"%^RESET%^%^GREEN%^Having been set free, the %^BOLD%^%^GREEN%^a%^YELLOW%^c%^GREEN%^id %^RESET%^%^GREEN%^chooses its own path!");
@@ -145,12 +146,12 @@ void spell_effect(int prof)
         break;
     }
 
-    while (number > 0 &&  sizeof(inven) != 0) 
+    while (number > 0 &&  sizeof(inven) != 0)
     {
         number -= 1;
         i = random(sizeof(inven));
 
-        if (!objectp(inven[i])) 
+        if (!objectp(inven[i]))
         {
             inven -= ({inven[i]});
             continue;
@@ -164,16 +165,16 @@ void spell_effect(int prof)
 
         if(!userp(inven[i])) spell_kill(inven[i], caster);
 
-        if(do_save(inven[i],0)) 
+        if(do_save(inven[i],0))
         {
             damage_targ(inven[i],"torso",damage/2,element);
         }
-        else 
+        else
         {
             damage_targ(inven[i],"torso",damage,element);
         }
-        
-        switch(element) 
+
+        switch(element)
         {
         case "acid":
             tell_object(inven[i],"%^BOLD%^%^GREEN%^The bolt leaps toward you, burning you and doing a good deal of damage!");
@@ -197,7 +198,7 @@ void spell_effect(int prof)
             break;
         }
 
-        if (!objectp(caster)) 
+        if (!objectp(caster))
         {
             dest_effect();
             return;
@@ -205,7 +206,7 @@ void spell_effect(int prof)
         inven -= ({ inven[i] }); // each target can only be hit once!
     }
 
-    switch(element) 
+    switch(element)
     {
     case "acid":
         tell_room(place,"%^RESET%^%^GREEN%^The acid finally %^CYAN%^di%^GREEN%^s%^CYAN%^so%^BOLD%^%^BLUE%^l%^RESET%^%^GREEN%^v%^CYAN%^es %^GREEN%^away, the last of its energy spent!");
@@ -223,12 +224,12 @@ void spell_effect(int prof)
         tell_room(place,"%^BOLD%^%^GREEN%^The electricity finally disperses itself, the last of its energy spent!");
         break;
     }
-    
+
     dest_effect();
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

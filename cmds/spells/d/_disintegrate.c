@@ -17,6 +17,7 @@ void create() {
     set_spell_sphere("invocation_evocation");
     set_spell_domain("destruction");
     set_syntax("cast CLASS disintegrate on TARGET");
+    set_damage_desc("force");
     set_description("This spell sends a powerful line of destructive energy at the target.  If the target resists, then "
 "they are able to avoid most of the damage, but if the spell hits successfully, then the target suffers great damage and "
 "the objects in his or her inventory may also be damaged.");
@@ -29,7 +30,7 @@ void create() {
     set_save("fort");
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^RED%^The world around you takes on a crimson"+
         " tone as you shout out your incantation.");
@@ -38,7 +39,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int check;
 
@@ -96,7 +97,7 @@ void damage_stuff(object target)
     if(!objectp(target)) { return; }
     stuff = all_inventory(target);
     if(!sizeof(stuff)) { return; }
-    
+
     for(i=0;i<sizeof(stuff);i++)
     {
         if(object_save(stuff[i])) { continue; }
@@ -117,7 +118,7 @@ int object_save(object obj)
     return 1;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

@@ -12,7 +12,8 @@ void create()
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS wail of the banshee");
-    set_description("A caster invokes a horrible arcane scream that kills everything living in sight.");
+    set_damage_desc("negative energy to living");
+    set_description("A caster invokes a horrible arcane scream that kills everything living in sight. Those who withstand the scream still suffer a little.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("fort");
@@ -36,7 +37,7 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        if(do_save(foe,8) ||
+        if(do_save(foe,6) ||
            foe->query_property("no death") ||
            (string)foe->query_race() == "undead" ||
            foe->query_property("undead"))

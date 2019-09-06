@@ -14,6 +14,7 @@ void create() {
     set_spell_level(([ "mage" : 6, "bard" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS eyebite on TARGET");
+    set_damage_desc("clevel/12 to attack and damage bonuses, to caster level, to all skills");
     set_description("With this spell caster imbues her eyes with dread power, glancing upon her enemies she curses them. This curse works its worst on weaker enemies, paralyzing them in fear.");
     set_save("fort");
     set_verbal_comp();
@@ -57,7 +58,7 @@ void spell_effect(int prof) {
     {
         tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you cower before "+caster->QCN+"!%^RESET%^");
         tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" cowers in terror!%^RESET%^",target);
-        target->force_me("flee");        
+        target->force_me("flee");
         target->set_paralyzed(roll_dice(1,3)*8,"You cannot contain your fear to do that!");
     }
     if(target->query_character_level()-10+roll_dice(2,10)<clevel-10)
@@ -82,7 +83,6 @@ void dest_effect() {
         for(i=0;i<sizeof(CORE_SKILLS);i++)
             caster->add_skill_bonus(CORE_SKILLS[i],bonus);
         caster->add_saving_bonus("all",bonus);
-        target->remove_property("cursed");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
