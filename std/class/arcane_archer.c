@@ -4,9 +4,9 @@
 
 inherit DAEMON;
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 object base_class_ob(object ob)
@@ -18,7 +18,7 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","bard","druid","cleric", "warlock" }); }
+string *query_base_classes() { return ({ "mage","sorcerer","bard","druid","cleric", }); }
 
 int has_base_class_set(object obj)
 {
@@ -49,8 +49,8 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
         "    20 Mage, Sorcerer, Bard, Cleric or Druid levels (level adjustments considered part of required levels)\n"
         "    40 Character levels\n"
         "    Preciseshot\n";
-        
-    return str;    
+
+    return str;
 }
 
 
@@ -61,48 +61,43 @@ int prerequisites(object player)
     string race;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
+    adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
-    
+
     if(!FEATS_D->usable_feat(player,"preciseshot")) { return 0; }
-    if(player->is_class("sorcerer")) 
-    { 
+    if(player->is_class("sorcerer"))
+    {
         if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
-        
+
         player->set("arcane_archer_base_class","sorcerer");
     }
-    if(player->is_class("mage")) 
-    { 
+    if(player->is_class("mage"))
+    {
         if( (player->query_class_level("mage") + adj) < 20) { return 0; }
         player->set("arcane_archer_base_class","mage");
     }
-    if(player->is_class("bard")) 
-    { 
+    if(player->is_class("bard"))
+    {
         if( (player->query_class_level("bard") + adj) < 20) { return 0; }
         player->set("arcane_archer_base_class","bard");
     }
-    if(player->is_class("warlock")) 
-    { 
-        if( (player->query_class_level("warlock") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","warlock");
-    }
-    if(player->is_class("druid")) 
-    { 
+    if(player->is_class("druid"))
+    {
         if( (player->query_class_level("druid") + adj) < 20) { return 0; }
         player->set("arcane_archer_base_class","druid");
     }
-    if(player->is_class("cleric")) 
-    { 
+    if(player->is_class("cleric"))
+    {
         if( (player->query_class_level("cleric") + adj) < 20) { return 0; }
         player->set("arcane_archer_base_class","cleric");
     }
     if(player->query_level() < 40) { return 0; }
-    return 1;    
+    return 1;
 }
 
 mapping stat_requirements(object ob) { return base_class_ob(ob)->stat_requirements(); }
@@ -119,18 +114,18 @@ int caster_level_calcs(object player, string the_class)
     string base;
     if(!objectp(player)) { return 0; }
     base = player->query("arcane_archer_base_class");
-    
+
     level = player->query_class_level(base);
-    level += player->query_class_level("arcane_archer");            
+    level += player->query_class_level("arcane_archer");
     return level;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "arcane arrows" }), 4 : ({ "timestop volley" }), 7 : ({ "death arrow" }), ]);
 }
 
 string *class_skills(object ob)
-{  
+{
     return base_class_ob(ob)->class_skills();
 }
 
