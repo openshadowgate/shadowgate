@@ -53,7 +53,7 @@ void spell_effect(int prof) {
         return;
     }
     arg = lower_case(arg);
-    if (!(targ = find_player(caster->realName(arg)))) {        
+    if (!(targ = find_player(caster->realName(arg)))) {
         tell_object(CASTER,capitalize(targ)+" cannot be found to establish a link.\n");
         TO->remove();
         return;
@@ -83,7 +83,7 @@ void do_summon(object target) {
         return;
     }
    endplace = environment(target);
-   if(endplace && 
+   if(endplace &&
       (endplace->query_property("teleport proof") || place->query_property("teleport proof") || !endplace->is_room())){
       startpower = place->query_property("teleport proof");
       endpower = endplace->query_property("teleport proof");
@@ -99,7 +99,7 @@ void do_summon(object target) {
    caster->set_property("spell summon time",time());
    success = 0;
 
-   if(!do_save(target,0)) success = 1; 
+   if(!do_save(target,-2)) success = 1;
    else {
      success = 0;
      if(do_save(caster,bonus*(-1))) fail = 1;
@@ -119,7 +119,7 @@ void do_summon(object target) {
         target->move_player(environment(caster));
         dest_effect();
         return;
-    } 
+    }
     else {
         tell_object(target,"%^BOLD%^%^BLUE%^You feel a strange tugging at your soul, before "+caster->QCN+" suddenly "
 "appears before you!");
