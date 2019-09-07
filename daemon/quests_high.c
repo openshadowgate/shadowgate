@@ -44,8 +44,6 @@ inherit DAEMON;
 #define SENUND "/d/attaya/senund/"+
 #define DEKU "/d/deku/hhouse/mon/"+
 
-
-
 mapping MONSTERS = ([
                         ANTIOCH "ruins/mons/demon.c" : 656000 ,
                         ATTAYA "mon/bishimon.c" : 1240000 ,

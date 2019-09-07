@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @brief collector quest item setter
+ */
+
+
 #include <std.h>
 
 #define LOW "/daemon/quests_low"
@@ -89,4 +95,3 @@ void removeQuest(string name){
 }
 
 int cleanup(){return 1;}
-
