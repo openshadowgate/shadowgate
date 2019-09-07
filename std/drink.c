@@ -11,7 +11,7 @@
 inherit OBJECT;
 
 string my_mess, your_mess;
-int poison, healing, spoilTime;
+int poison, healing;
 
 void set_my_mess(string mess);
 void set_your_mess(string mess);
@@ -46,7 +46,7 @@ int save_me(string file) {
 void set_name(string str) {
    set_my_mess("You drink some "+str+".\n");
    set_your_mess("drinks some "+str+".\n");
-//   set_weight(210);  
+//   set_weight(210);
 // that weight thing looks really wrong but I'm thinking this function never gets used or ???*Styx*
    ::set_name(str);
 }
@@ -95,67 +95,57 @@ void set_type(string str) { set("type", str); }
 
 string query_type() { return query("type"); }
 
-int drink(string str) 
+int drink(string str)
 {
     object myDisease;
     string myType;
     if(!id(str)) return 0;
-  
+
    /* Plura 930202 */
-    if(ETO != TP) 
+    if(ETO != TP)
     {
         tell_object(TP,"You must get it first.\n");
         return 1;
     }
-    if(query("type") == "soft drink") 
+    if(query("type") == "soft drink")
     {
-        if(!TP->add_quenched(query("strength")*20)) 
+        if(!TP->add_quenched(query("strength")*20))
         {
             tell_object(TP, "You are too bloated to drink that!\n");
             return 1;
         }
     }
-    else if(query("type") == "caffeine") 
+    else if(query("type") == "caffeine")
     {
-        if((int)TP->query_intox() < query("strength")) 
+        if((int)TP->query_intox() < query("strength"))
         {
             tell_object(TP,"You do not feel the need for that right now.\n");
             return 1;
         }
-        if(!TP->add_quenched(query("strength")*10)) 
+        if(!TP->add_quenched(query("strength")*10))
         {
             tell_object(TP,"You are too bloated to drink that!\n");
-            return 1;  
+            return 1;
         }
         TP->add_intox(-(query("strength")/2)*10);
     }
-    else if(query("type") == "alcoholic") 
+    else if(query("type") == "alcoholic")
     {
-        if(!TP->add_intox(query("strength")*10)) 
+        if(!TP->add_intox(query("strength")*10))
         {
             tell_object(TP,"You are just about to pass out as it is.\n");
             return 1;
         }
     }
-    else if(query("type") == "water") 
+    else if(query("type") == "water")
     {
-        if(!TP->add_quenched(query("strength")*50)) 
+        if(!TP->add_quenched(query("strength")*50))
         {
             tell_object(TP,"Your stomach is sloshing already!\n");
             return 1;
         }
     }
     myType = query("type");
-    if(myType == "water" || myType == "caffeine" || myType == "soft drink")
-    {
-        if((time() + random(10000)) >= spoilTime)
-        {
-            myDisease = new("/d/common/obj/diseases/food_poisoning.c");
-            myDisease->move(TP);
-            myDisease->do_infection(TP);
-            if(objectp(myDisease)) myDisease->remove();        
-        }    
-    }
     TP->add_hp(healing);
     //changed from TP->heal(healing); to stop damage to SS Circe 1/17/05
     write(my_mess);
@@ -166,11 +156,11 @@ int drink(string str)
     return 1;
 }
 
-void clone_empty(object tp) 
+void clone_empty(object tp)
 {
    object empty;
    string empty_name;
-   
+
    if(!query("empty name")) set("empty name", "bottle");
    empty_name = query("empty name");
    empty = new("std/Object");
@@ -185,9 +175,3 @@ void clone_empty(object tp)
 }
 
 int is_drink() { return 1; }
-
-int set_spoilTime(int x)
-{
-    spoilTime = (time() + x);
-}
-int query_spoilTime() { return spoilTime; }

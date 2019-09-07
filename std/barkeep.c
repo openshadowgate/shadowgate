@@ -46,9 +46,9 @@ void set_menu(string *item_names, string *types, int *strengths) {
     }
 }
 
-void set_my_mess(string *msg) { 
+void set_my_mess(string *msg) {
     int i;
-   
+
     for(i=0; i<sizeof(menu_items); i++) {
     	menu[menu_items[i]]["my message"] = msg[i];
     }
@@ -56,7 +56,7 @@ void set_my_mess(string *msg) {
 
 void set_your_mess(string *msg) {
     int i;
- 
+
     for(i=0; i<sizeof(menu_items); i++) {
 	menu[menu_items[i]]["your message"] = msg[i];
     }
@@ -92,7 +92,7 @@ void set_currency(string str) {
 
 int price(object tp, int strength) {
     int cost;
-    cost = to_int(strength);    
+    cost = to_int(strength);
     if(!tp->query_funds(currency, cost)) return 0;
     tp->use_funds(currency, cost);
     return cost;
@@ -112,23 +112,23 @@ void set_up_ids(object ob, string myName, string type)
     {
         tmp = explode(myName, " ");
         tmp -= ({"a", "an", "of", "the"});
-        if(sizeof(tmp)) 
-        { 
-            foreach(string myId in tmp) 
-            { 
+        if(sizeof(tmp))
+        {
+            foreach(string myId in tmp)
+            {
                 ob->add_id(myId);
                 continue;
-            } 
+            }
         }
     }
-    return;    
+    return;
 }
 
 int buy(string str) {
     int i, cost;
-    object ob;    
+    object ob;
     if(!objectp(TP) || !objectp(TO)) return 0;
-    if(!str) 
+    if(!str)
     {
         tell_object(TP, query_cap_name()+" says: What is it you would like?\n");
         return 0;
@@ -166,7 +166,6 @@ int buy(string str) {
     ob->set_weight(1);
     //1/2 RL day + 1/2 RL day from purchase to time it's spoiled
     //consuming when time+random(10000) > spoilTime a chance of getting sick
-    ob->set_spoilTime(43200 + random(43200));
     i = menu[str]["strength"];
     set("cointype","silver");
     ob->set_value(0);

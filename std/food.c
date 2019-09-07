@@ -10,7 +10,7 @@
 #include <move.h>
 inherit OBJECT;
 
-int strength, poison, raw, spoilTime, is_drink, healing;
+int strength, poison, raw, is_drink, healing;
 string my_mess, your_mess, short_desc, long_desc, name, alias, alt_id;
 
 void set_my_mess(string mess);
@@ -25,17 +25,16 @@ void set_canSave(int x);
 void set_type(string str);
 string query_type();
 
-void init() 
+void init()
 {
     ::init();
     add_action("eat","eat");
     add_action("drink", "drink");
 }
 
-void create() 
+void create()
 {
     ::create();
-    spoilTime = time() + (43200 + random(43200));
     set_weight(1);
     is_drink = 0;
 }
@@ -44,13 +43,13 @@ void create()
   //invalid as of February 2017 - all food/drink items save
 void set_canSave(int x) { set("canSave", x); }
 
-int save_me(string file) 
+int save_me(string file)
 {
    //if(!query("canSave"))   return 1;
    ::save_me(file);
 }
 
-void set_name(string str) 
+void set_name(string str)
 {
     if(!is_drink)
     {
@@ -67,7 +66,7 @@ void set_name(string str)
 
 void set_empty_name(string str) { set("empty name", str); }
 
-void set_strength(int x) 
+void set_strength(int x)
 {
     strength = x;
 // also making it so weight is only set if it's 0, *Styx* 12/24/03
@@ -76,7 +75,7 @@ void set_strength(int x)
        set_weight(1);
 }
 
-void set_poison(int x) 
+void set_poison(int x)
 {
     poison = x;
 	if(x > 0)
@@ -98,9 +97,9 @@ void set_raw(int x){
 }
 //added by Circe to go with campfires and cookable meats 7/27/04
 
-void set_type(string str) 
-{ 
-    set("type", str); 
+void set_type(string str)
+{
+    set("type", str);
     if(str == "water" || str == "alcoholic" || str == "caffeine" || str == "soft drink") is_drink = 1;
 }
 
@@ -109,9 +108,8 @@ string query_type() { return query("type"); }
 int query_raw() { return raw; }
 int query_strength() { return strength; }
 //eat action
-int eat(string str) 
+int eat(string str)
 {
-    object myDisease;
     if(!id(str)) return 0;
     if(is_drink) return 0;
     if(TP->query_current_attacker()) {
@@ -124,79 +122,62 @@ int eat(string str)
     }
     write(my_mess);
 	POISON_D->is_object_poisoned(TO, TP, "eat", 1);
-    if((time() + random(10000)) >= spoilTime)
-    {
-        myDisease = new("/d/common/obj/diseases/food_poisoning.c");
-        myDisease->move(TP);
-        myDisease->do_infection(TP);
-        if(objectp(myDisease)) myDisease->remove();        
-    }    
     say(TPQCN+" "+your_mess);
     remove();
     return 1;
 }
 
-int drink(string str) 
+int drink(string str)
 {
     object myDisease;
     string myType;
     if(!id(str)) return 0;
     if(!is_drink) return 0;
    /* Plura 930202 */
-    if(ETO != TP) 
+    if(ETO != TP)
     {
         tell_object(TP,"You must get it first.\n");
         return 1;
     }
-    if(query("type") == "soft drink") 
+    if(query("type") == "soft drink")
     {
-        if(!TP->add_quenched(strength*20)) 
+        if(!TP->add_quenched(strength*20))
         {
             tell_object(TP, "You are too bloated to drink that!\n");
             return 1;
         }
     }
-    else if(query("type") == "caffeine") 
+    else if(query("type") == "caffeine")
     {
-        if((int)TP->query_intox() < strength) 
+        if((int)TP->query_intox() < strength)
         {
             tell_object(TP,"You do not feel the need for that right now.\n");
             return 1;
         }
-        if(!TP->add_quenched(strength*10)) 
+        if(!TP->add_quenched(strength*10))
         {
             tell_object(TP,"You are too bloated to drink that!\n");
-            return 1;  
+            return 1;
         }
         TP->add_intox(-(strength/2)*10);
     }
-    else if(query("type") == "alcoholic") 
+    else if(query("type") == "alcoholic")
     {
-        if(!TP->add_intox(strength*10)) 
+        if(!TP->add_intox(strength*10))
         {
             tell_object(TP,"You are just about to pass out as it is.\n");
             return 1;
         }
     }
-    else if(query("type") == "water") 
+    else if(query("type") == "water")
     {
-        if(!TP->add_quenched(strength*50)) 
+        if(!TP->add_quenched(strength*50))
         {
             tell_object(TP,"Your stomach is sloshing already!\n");
             return 1;
         }
     }
     myType = query("type");
-    if(myType == "water" || myType == "caffeine" || myType == "soft drink")
-    {
-        if((time() + random(10000)) >= spoilTime)
-        {
-            myDisease = new("/d/common/obj/diseases/food_poisoning.c");
-            myDisease->move(TP);
-            myDisease->do_infection(TP);
-            if(objectp(myDisease)) myDisease->remove();        
-        }    
-    }
     TP->add_hp(healing);
     //changed from TP->heal(healing); to stop damage to SS Circe 1/17/05
     write(my_mess);
@@ -207,11 +188,11 @@ int drink(string str)
     return 1;
 }
 
-void clone_empty(object tp) 
+void clone_empty(object tp)
 {
     object empty;
     string empty_name;
-   
+
     if(!query("empty name")) set("empty name", "bottle");
     empty_name = query("empty name");
     empty = new("std/Object");
@@ -225,17 +206,15 @@ void clone_empty(object tp)
     if(empty->move(tp) != MOVE_OK) empty->remove();
 }
 
-int is_drink() 
-{ 
+int is_drink()
+{
     if(is_drink) return 1;
-    return 0;    
+    return 0;
 }
-int set_spoilTime(int x) { spoilTime = (time() + x); }
-int query_spoilTime() { return spoilTime; }
-int is_food() 
-{ 
+int is_food()
+{
     if(!is_drink) return 1;
-    return 0; 
+    return 0;
 }
 
 void set_healing(){
