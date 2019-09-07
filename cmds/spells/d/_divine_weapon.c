@@ -12,11 +12,9 @@ void create() {
     set_spell_level(([ "cleric" : 2, "paladin" : 1,"druid" : 2 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS divine weapon");
-    set_description("It is not uncommon for a priest or knight to be drawn into combat to protect her faith or deity.  "
-"For that reason the gods have blessed their servants with a prayer that grants them a divine weapon.  Each faith has a "
-"different weapon, some say magical copies of the favored weapons on their patron gods.  With this spell, a divine "
-"spellcaster will create a magical weapon in their hand.\n\n*NOTE*\nEach weapon will have a few keywords to it, but all "
-"will have the name of the weapon and 'weapon' for purpose of wielding, unwielding, and showing it off.");
+    set_description("It is not uncommon for a priest or knight to be drawn into combat to protect her faith or deity. For that reason the gods have blessed their servants with a prayer that grants them a divine weapon.  Each faith has a different weapon, some say magical copies of the favored weapons on their patron gods.  With this spell, a divine spellcaster will create a magical weapon in their hand.
+
+%^BOLD%^%^RED%^N.B.:%^RESET%^ Each weapon will have a few keywords to it, but all will have the name of the weapon and 'weapon' for purpose of wielding, unwielding, and showing it off.");
     set_verbal_comp();
     set_somatic_comp();
         set_helpful_spell(1);
