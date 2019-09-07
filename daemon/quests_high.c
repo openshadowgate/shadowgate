@@ -57,61 +57,57 @@
 #define DEKU "/d/deku/hhouse/mon/"+
 
 
-      //DROW "mon/fwitch.c":135000, \
-      //DROW "mon/emisary.c":135000, \
-      //DROW "mon/smonk.c":136000, \
-
-#define MONSTERS ([  \
-      ANTIOCH "ruins/mons/demon.c": 820000, \
-      ATTAYA "mon/bishimon.c":1550000, \
-      ATTAYA "mon/ashtar.c":1550000, \
-      ATTAYA "mon/callista.c":2000000, \
-      ATTAYA "mon/intruder.c":7500000, \
-      ATTAYA "mon/phaeton.c":2000000, \
-      ATTAYA "mon/judatac.c":1800000, \
-      ATTAYA "mon/volkerps.c":1500000, \
-      ATTAYA "mon/magus.c":1900000, \
-      ATTAYA "mon/io.c":1900000, \
-      ATTAYA "mon/hunter.c":2250000, \
-      ATTAYA "mon/roper.c":2250000, \
-      DERRO "mon/elemental.c": 375000, \
-      ISLANDS "argentrock/mon/watcher.c":600000,\
-      ISLANDS "argentrock/mon/batlin.c":5950000,\
-      ISLANDS "argentrock/mon/jarkunish.c":1950000,\
-      ISLANDS "argentrock/mon/kronibus.c":1950000, \
-      ISLANDS "argentrock/mon/fernibus.c":1950000, \
-      ISLANDS "common/mon/cruisertetron.c":6250000, \
-      ISLANDS "tonerra/mon/edragon.c":2250000, \
-      ISLANDS "tonerra/mon/mmonk.c":570000, \
-      ISLANDS "tonerra/mon/tombt.c":1500000, \
-      ISLANDS "tonerra/mon/ibrandul.c":6000000, \
-      ISLANDS "tonerra/mon/nativek.c":1410000, \
-      ISLANDS "tonerra/mon/nativewd.c":365000,  \
-      LAERAD "mon/dragon.c":1400000, \
-      D_MARSH "tower/mon/dragon.c":2720000, \
-      D_MARSH "tower/mon/knight.c":1500000, \
-      D_MARSH "tower/mon/vecna.c":7500000, \
-      D_MARSH "tower/mon/angel.c":1500000, \
-	  D_MARSH "tower/mon/grimmy.c":2500000, \
-	  D_MARSH "tower/mon/nico.c":2500000, \
-	  D_MARSH "tower/mon/render.c":5500000, \
-      OGRE "mobs/ahstuz.c":850000, \
-      SENUND "mon/elseroad.c":790000, \
-      SENUND "mon/gambrill.c":420000, \
-      SENUND "mon/geilfuss.c":460000, \
-      SENUND "mon/priest.c":450000, \
-      DEKU "zhour_husk.c":800000,\
-      DEKU "arag_dyne.c":800000,\
-      DEKU "assassin.c":750000,\
-      DEKU "narameon.c":750000,\
-      DEKU "bandit_l.c":800000,\
-      DEKU "black_beast.c":450000,\
-      DEKU "aurus_devar_bones.c":2500000,\
-     ])
-
 #include <security.h>
 
 inherit DAEMON;
+
+mapping MONSTERS = ([
+                        ANTIOCH "ruins/mons/demon.c" : 102500 ,
+                        ATTAYA "mon/bishimon.c" : 193750 ,
+                        ATTAYA "mon/ashtar.c" : 193750 ,
+                        ATTAYA "mon/callista.c" : 250000 ,
+                        ATTAYA "mon/intruder.c" : 937500 ,
+                        ATTAYA "mon/phaeton.c" : 250000 ,
+                        ATTAYA "mon/judatac.c" : 225000 ,
+                        ATTAYA "mon/volkerps.c" : 187500 ,
+                        ATTAYA "mon/magus.c" : 237500 ,
+                        ATTAYA "mon/io.c" : 237500 ,
+                        ATTAYA "mon/hunter.c" : 281250 ,
+                        ATTAYA "mon/roper.c" : 281250 ,
+                        DERRO "mon/elemental.c" : 46875 ,
+                        ISLANDS "argentrock/mon/watcher.c" : 75000 ,
+                        ISLANDS "argentrock/mon/batlin.c" : 743750 ,
+                        ISLANDS "argentrock/mon/jarkunish.c" : 243750 ,
+                        ISLANDS "argentrock/mon/kronibus.c" : 243750 ,
+                        ISLANDS "argentrock/mon/fernibus.c" : 243750 ,
+                        ISLANDS "common/mon/cruisertetron.c" : 781250 ,
+                        ISLANDS "tonerra/mon/edragon.c" : 281250 ,
+                        ISLANDS "tonerra/mon/mmonk.c" : 71250 ,
+                        ISLANDS "tonerra/mon/tombt.c" : 187500 ,
+                        ISLANDS "tonerra/mon/ibrandul.c" : 750000 ,
+                        ISLANDS "tonerra/mon/nativek.c" : 176250 ,
+                        ISLANDS "tonerra/mon/nativewd.c" : 45625 ,
+                        LAERAD "mon/dragon.c" : 175000 ,
+                        D_MARSH "tower/mon/dragon.c" : 340000 ,
+                        D_MARSH "tower/mon/knight.c" : 187500 ,
+                        D_MARSH "tower/mon/vecna.c" : 937500 ,
+                        D_MARSH "tower/mon/angel.c" : 187500 ,
+                        D_MARSH "tower/mon/grimmy.c" : 312500 ,
+                        D_MARSH "tower/mon/nico.c" : 312500 ,
+                        D_MARSH "tower/mon/render.c" : 687500 ,
+                        OGRE "mobs/ahstuz.c" : 106250 ,
+                        SENUND "mon/elseroad.c" : 98750 ,
+                        SENUND "mon/gambrill.c" : 52500 ,
+                        SENUND "mon/geilfuss.c" : 57500 ,
+                        SENUND "mon/priest.c" : 56250 ,
+                        DEKU "zhour_husk.c" : 100000 ,
+                        DEKU "arag_dyne.c" : 100000 ,
+                        DEKU "assassin.c" : 93750 ,
+                        DEKU "narameon.c" : 93750 ,
+                        DEKU "bandit_l.c" : 100000 ,
+                        DEKU "black_beast.c" : 56250 ,
+                        DEKU "aurus_devar_bones.c" : 312500 ,
+                        ]);
 
 mapping __Quests, __Rooms, __Monsters;
 mapping __Removal;
@@ -134,22 +130,22 @@ static void SAVE()
 void create()
 {
     ::create();
-    
+
     __Quests = ([]);
     __Monsters = ([]);
     __Rooms = ([]);
     __Removal = ([]);
-    
+
     seteuid(UID_DAEMONSAVE);
     restore_object(SAVE_QUESTS);
-    
+
     if(!__Quests)   { __Quests = ([]); }
     if(!__Monsters) { __Monsters = ([]); }
     if(!__Rooms)    { __Rooms = ([]); }
     if(!__Removal)  { __Removal == ([]); }
-    
+
     SAVE();
-    
+
     test_quests();
     set_heart_beat(30);
 }
@@ -177,7 +173,7 @@ void newMon()
 
     name = makeObject();
     flag = 0;
-    while (member_array(name, keys(__Quests)) != -1) 
+    while (member_array(name, keys(__Quests)) != -1)
     {
         name = makeObject();
         flag++;
@@ -185,7 +181,7 @@ void newMon()
     }
     file = keys(MONSTERS)[random(sizeof(keys(MONSTERS)))];
     flag = 0;
-    while (member_array(file, keys(__Monsters)) != -1) 
+    while (member_array(file, keys(__Monsters)) != -1)
     {
         file = keys(MONSTERS)[random(sizeof(keys(MONSTERS)))];
         flag++;
@@ -199,7 +195,7 @@ void newMon()
     __Monsters[file] = ({date,name});
 
     reDate = date+86400+random(86400*1);
-    
+
     while(__Removal[reDate])
     {
         reDate = date+86400+random(86400*5);
@@ -210,7 +206,7 @@ void newMon()
         file->set_invis();
         short = file->query_short();
         file->set_invis();
-    } 
+    }
     else
     {
         short = file->query_short();
@@ -261,53 +257,53 @@ void newRoom()
 
     name = makeObject();
     flag = 0;
-    while (member_array(name, keys(__Quests)) != -1) 
+    while (member_array(name, keys(__Quests)) != -1)
     {
         name = makeObject();
         flag++;
         if(flag > 20) return; // failsafe
     }
 
-    if(!sizeof(files)) 
+    if(!sizeof(files))
     {
         seteuid(UID_LOG);
         log_file("Misc_Errors", "Error finding files in chosen dir:  "+dir+" by "+TO->query_name()+" on "+ctime(time())+".\n");
         seteuid(getuid());
         return;
-    }   
-    
+    }
+
     while(dir[strlen(dir)-1] != '/')
     {
         dir = dir[0..strlen(dir)-2];
     }
-    
+
     file =  files[random(sizeof(files))];
     flag = 0;
-    
-    while (member_array(file, keys(__Rooms)) != -1 || undefinedp((dir+file)->query_short())) 
+
+    while (member_array(file, keys(__Rooms)) != -1 || undefinedp((dir+file)->query_short()))
     {
         file =  files[random(sizeof(files))];
         flag++;
         if(flag > 20) return; // failsafe
     }
 
-   
-    
+
+
     file = dir+file;
     date = time();
 
     reDate = date+86400+random(86400*5);
-    
+
     while(__Removal[reDate])
     {
         reDate = date+86400+random(86400*5);
         continue;
     }
-    
+
     __Rooms[file] = ({date,name,0});
     __Removal[reDate] = name;
     __Quests[name] = ({"room",file,exp,file->query_short(), reDate});
-    
+
     if(!file_exists(OBSTORE date+".c"))
     {
         write_file(OBSTORE date+".c","inherit \""+QOBJECT+"\";");
@@ -343,8 +339,8 @@ void test_quests()
     {
         newRoom();
         newMon();
-    } 
-    else 
+    }
+    else
     {
         newRoom();
     }
@@ -362,29 +358,29 @@ void isMon(object ob)
     file = base_name(ob)+".c";
 
     if(member_array(file, keys(__Monsters)) == -1) { return; }
-    
+
     if(sizeof(__Monsters[file]) < 3) { __Monsters[file] += ({0}); }
-    
+
     if(__Monsters[file][2]) { return; }
-    
+
     name = __Monsters[file][1];
     date = __Monsters[file][0];
 
     date = date + ".c";
-    
+
     if(present(name,ob)) return;
 
     if(!file_exists(OBSTORE date))
     {
         write_file(OBSTORE date,"inherit \""+QOBJECT+"\";");
     }
-    
+
     obj = find_object(OBSTORE date);
 
     if(!clonep(obj))
     {
         obj = new(OBSTORE date);
-    }   
+    }
     else { return; }
 
     sscanf(name,"%s %s %s",hold1, thing, hold2);
@@ -410,11 +406,11 @@ void isRoom(object ob)
     file = base_name(ob)+".c";
 
     if(member_array(file, keys(__Rooms)) == -1) { return; }
-    
+
     if(sizeof(__Rooms[file]) < 3) { __Rooms[file] += ({0}); }
-    
+
     if(__Rooms[file][2]) { return; }
-    
+
     name = __Rooms[file][1];
     date = __Rooms[file][0];
 
@@ -425,15 +421,15 @@ void isRoom(object ob)
     {
         write_file(OBSTORE date,"inherit \""+QOBJECT+"\";");
     }
-    
+
     obj = find_object(OBSTORE date);
-    
+
     if(!clonep(obj))
     {
         obj = new(OBSTORE date);
     }
     else { return; }
-    
+
     sscanf(name,"%s %s %s",hold1, thing, hold2);
     obj->set_name(thing);
     obj->set_short(name);
@@ -450,8 +446,8 @@ createDumby(object ob)
 {
     string thing;
     object obj;
-    
-    if(random(500)) 
+
+    if(random(500))
     {
         return;
     }
@@ -488,7 +484,7 @@ void gotten(string name)
 {
     if(__Quests[name])
     {
-        if(__Quests[name][0] == "monster") 
+        if(__Quests[name][0] == "monster")
         {
             __Monsters[__Quests[name][1]][2]=1;
         }
@@ -504,21 +500,21 @@ void gotten(string name)
 void resetItem(string name)
 {
     if (!__Quests[name]) return;
-    
+
     if(__Quests[name][0] == "room")
     {
         __Quests[name][3] = __Quests[name][1]->query_short();
         __Rooms[__Quests[name][1]][2] = 0;
-    } 
-    else 
+    }
+    else
     {
         if(__Quests[name][1]->query_invis())
         {
             __Quests[name][1]->set_invis();
             __Quests[name][3] = __Quests[name][1]->query_short();
             __Quests[name][1]->set_invis();
-        } 
-        else 
+        }
+        else
         {
             __Quests[name][3] = __Quests[name][1]->query_short();
         }
@@ -533,9 +529,9 @@ int claimExp(string name, object player, int level)
     mapping used;
     string file,date;
     int exp, level2;
-    
+
     //write("name = "+name);
-    
+
     if(member_array(name, keys(__Quests)) == -1) { return 0; }
     if(!pointerp(__Quests[name])) { return 0; }
 
@@ -546,34 +542,34 @@ int claimExp(string name, object player, int level)
     {
         date = __Rooms[file][0];
         map_delete(__Rooms,file);
-    } 
-    else 
+    }
+    else
     {
         date = __Monsters[file][0];
         map_delete(__Monsters,file);
     }
-    
+
     map_delete(__Quests,name);
     rm(OBSTORE date+".c");
-    
-   tell_object(player,"%^BOLD%^%^BLUE%^You have claimed "+name+"!");    
-    seteuid(UID_LOG);    
-    log_file("rquests",capitalize(player->query_name())+"("+player->query_highest_level()+") retrieved the "+name+" ["+file+"] for "+exp+" at "+ctime(time())+".\n");    
+
+   tell_object(player,"%^BOLD%^%^BLUE%^You have claimed "+name+"!");
+    seteuid(UID_LOG);
+    log_file("rquests",capitalize(player->query_name())+"("+player->query_highest_level()+") retrieved the "+name+" ["+file+"] for "+exp+" at "+ctime(time())+".\n");
     seteuid(getuid());
-    
+
     level2 = player->query_highest_level();
     if(level2 < level)
     exp = (((100 * level2)/level)*exp)/100;
 
-    if(!player->query("miniquest_exp")) 
+    if(!player->query("miniquest_exp"))
     {
         player->set("miniquest_exp", exp);
-    } 
-    else 
+    }
+    else
     {
         player->set("miniquest_exp", (exp + player->query("miniquest_exp")) );
     }
-    
+
     player->add_exp(exp);
     test_quests();
     SAVE();
@@ -590,36 +586,36 @@ void removeQuest(string name)
     string file,date;
     int reDate;
     int exp;
-    
+
     if(member_array(name, keys(__Quests)) == -1) { return 0; }
-    
+
     if(!pointerp(__Quests[name]))
     {
         map_delete(__Quests,name);
         return;
     }
-    
+
     file = __Quests[name][1];
     exp = __Quests[name][2];
     reDate = __Quests[name][4];
-    
+
     if(__Quests[name][0] == "room")
     {
-        if( __Rooms[file]) 
+        if( __Rooms[file])
         {
             date = __Rooms[file][0];
             map_delete(__Rooms,file);
         }
-    } 
-    else 
+    }
+    else
     {
-        if( __Monsters[file]) 
+        if( __Monsters[file])
         {
             date = __Monsters[file][0];
             map_delete(__Monsters,file);
         }
     }
-    
+
     map_delete(__Quests,name);
     map_delete(__Removal, reDate);
     rm(OBSTORE date+".c");

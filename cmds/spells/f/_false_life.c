@@ -11,7 +11,7 @@ void create() {
     set_spell_level(([ "mage" : 2, "bard" : 2 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS false life [on TARGET]");
-    set_description("With this spell, caster harnesses powers of unlife to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
+    set_description("With this spell, caster harnesses flow of negative energies to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
     set_components(([
       "mage" : ([ "drop of blood":1, "crane's feather":1, ]),
     ]));
@@ -36,7 +36,7 @@ int preSpell()
     return 1;
 }
 
-void spell_effect() 
+void spell_effect()
 {
     if(!target)
         target = caster;
@@ -51,7 +51,7 @@ void spell_effect()
         TO->remove();
         return;
     }
-    
+
     if (caster == target) {
         tell_object(caster,"%^BLUE%^You slowly summon inner strength, lending the force of your will to the strength of your body.");
         tell_room(environment(caster),"%^BLUE%^You see a wave of force surround and strengthen "+caster->QCN+"'s body.",({caster}));
@@ -70,7 +70,7 @@ void spell_effect()
 
 void dest_effect()
 {
-    if(objectp(target)) 
+    if(objectp(target))
     {
        target->add_max_hp_bonus(-bonus);
        target->remove_property_value("spelled", ({TO}) );
@@ -80,4 +80,3 @@ void dest_effect()
     if(objectp(TO))
         TO->remove();
 }
-
