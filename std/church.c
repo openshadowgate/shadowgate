@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Church parent object
+ */
+
 // Added pre_exit_functions to keep ghosts from leaving - Styx 4/20/02
 // lowering cost of removing curses & removing damage for needing a new symbol per discussions *Styx* 12/26/05
 // expanded domain selection to support a third clerical domain for those with the feat. N, 3/13.
@@ -13,6 +18,8 @@
 #define FUNDS "/daemon/templefunds_d.c"
 #include <new_exp_table.h>
 inherit ROOM;
+
+
 
 void initialize_ob(string pcname,object myob);
 void init() {

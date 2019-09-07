@@ -7,6 +7,12 @@
 mapping alias;
 mapping xverb;
 
+/**
+ * @file
+ * @brief Alias management
+ */
+
+
 void add_alias(string verb, string cmd);
 
 void init_aliases() {
@@ -92,7 +98,7 @@ string do_xverb(string str) {
 
 string do_alias(string str) {
   string *words, tmp, ret;
-  
+
   if (!str || str == "")
     return "";
   tmp = do_xverb(str);

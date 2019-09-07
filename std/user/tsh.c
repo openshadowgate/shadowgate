@@ -6,7 +6,7 @@
 
 /**
  * @file
- * @brief Prompt substitution functions
+ * @brief Interactive shell
  */
 
 #include <std.h>

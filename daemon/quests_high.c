@@ -1,35 +1,23 @@
-//Increased XP on most of the drops - Octothorpe 7/16/09
-//Updated Ogres drop for Ahstuz - Octothorpe 5/28/09
-// changed by Circe to accommodate mid quest list.  7/4/04
-// removing low level and broken rooms -Ares
 #include <std.h>
+#include <security.h>
+
+inherit DAEMON;
+
+/**
+ * @file
+ * @brief endgame collector items
+ */
 
 #define COLORS ({"%^RED%^red", "%^BLUE%^blue","%^CYAN%^cyan","%^GREEN%^green","%^MAGENTA%^magenta","%^YELLOW%^yellow","white","%^ORANGE%^orange","%^BOLD%^%^BLACK%^black"})
 #define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl","knife","scroll","tablet","hat","tome","rod","statue","figurine","amulet","talisman","slippers","flask","candle","mirror","rug","brooch","egg","scarf", "sphere","cube","stone","crown","amulet"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good","neutrality","the sun","the earth","the moon","the land","the sky","force","darkness","light","control","destiny","fortitude","cowardice","death","health","life","shielding","the universe","horror","beauty","comeliness","humility","pride","truth","lies","weakness","strength","nature","terror","fear","courage","wonder"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good","neutrality","the sun","the earth","the moon","the land","the sky","force","darkness","light","control","destiny","fortitude","cowardice","death","health","life","shielding","the universe","horror","beauty","comeliness","humility","pride","truth","lies","weakness","strength","nature","terror","fear","courage","wonder", "socmos"})
 
 #define SAVE_QUESTS "/daemon/save/quests_high"
 
-//#define MED_H1 ({"/d/dagger/drow/rooms/", "/d/attaya/beach", "/d/islands/tonerra/path/",\
-//"/d/islands/tonerra/mountain/", "/d/antioch/ruins/rooms/ruins",\
-//"/d/dagger/marsh/swamp/rooms/m", "/d/dagger/arctic/rooms/lake/",\
-//"/d/dagger/arctic/rooms/cave/", "/d/tharis/barrow/rooms/pi"})
-
 #define MED_H1 ({"/d/attaya", "/d/islands/tonerra/path/", "/d/islands/tonerra/mountain/", "/d/dagger/marsh/swamp/rooms/m", "/d/dagger/arctic/rooms/lake/", "/d/dagger/arctic/rooms/cave/", })
 
-//#define MED_H2 ({"/d/dagger/drow/temple/rooms/", "/d/attaya/jungle/", "/d/islands/common/aramanth/room",\
-//"/d/islands/argentrock/rooms/", "/d/laerad/cavern1/", "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/derro/rooms/c",\
-//"/d/islands/dallyh/marsh/rooms/", "/d/dagger/arctic/rooms/uw/" })
-
 #define MED_H2 ({"/d/attaya", "/d/islands/common/aramanth/room", "/d/islands/argentrock/rooms/", "/d/laerad/cavern1/", "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/arctic/rooms/cave/" })
-
-
-//added the deku haunted house here and added some of the boss monsters to the list of mobs - Saide - April 2016
-//#define HIGH ({"/d/islands/tonerra/monastary/m", "/d/attaya/base/base", "/d/attaya/base/wall",\
-//"/d/dagger/marsh/tower/rooms/", "/d/dagger/ogres/rooms/", "/d/deku/hhouse/rooms/", "/d/tharis/barrow/rooms/tr",\
-//"/d/antioch/ruins/portal/", "/d/laerad/cavern2/", "/d/islands/common/eldebaro/newrooms/"})
-
 
 #define HIGH ({"/d/islands/tonerra/monastary/m", "/d/attaya/base/", "/d/dagger/ogres/rooms/", "/d/deku/hhouse/rooms/","/d/dagger/marsh/tower/rooms/", "/d/antioch/ruins/portal/", "/d/laerad/cavern2/" })
 
@@ -57,56 +45,53 @@
 #define DEKU "/d/deku/hhouse/mon/"+
 
 
-#include <security.h>
-
-inherit DAEMON;
 
 mapping MONSTERS = ([
-                        ANTIOCH "ruins/mons/demon.c" : 102500 ,
-                        ATTAYA "mon/bishimon.c" : 193750 ,
-                        ATTAYA "mon/ashtar.c" : 193750 ,
-                        ATTAYA "mon/callista.c" : 250000 ,
-                        ATTAYA "mon/intruder.c" : 937500 ,
-                        ATTAYA "mon/phaeton.c" : 250000 ,
-                        ATTAYA "mon/judatac.c" : 225000 ,
-                        ATTAYA "mon/volkerps.c" : 187500 ,
-                        ATTAYA "mon/magus.c" : 237500 ,
-                        ATTAYA "mon/io.c" : 237500 ,
-                        ATTAYA "mon/hunter.c" : 281250 ,
-                        ATTAYA "mon/roper.c" : 281250 ,
-                        DERRO "mon/elemental.c" : 46875 ,
-                        ISLANDS "argentrock/mon/watcher.c" : 75000 ,
-                        ISLANDS "argentrock/mon/batlin.c" : 743750 ,
-                        ISLANDS "argentrock/mon/jarkunish.c" : 243750 ,
-                        ISLANDS "argentrock/mon/kronibus.c" : 243750 ,
-                        ISLANDS "argentrock/mon/fernibus.c" : 243750 ,
-                        ISLANDS "common/mon/cruisertetron.c" : 781250 ,
-                        ISLANDS "tonerra/mon/edragon.c" : 281250 ,
-                        ISLANDS "tonerra/mon/mmonk.c" : 71250 ,
-                        ISLANDS "tonerra/mon/tombt.c" : 187500 ,
-                        ISLANDS "tonerra/mon/ibrandul.c" : 750000 ,
-                        ISLANDS "tonerra/mon/nativek.c" : 176250 ,
-                        ISLANDS "tonerra/mon/nativewd.c" : 45625 ,
-                        LAERAD "mon/dragon.c" : 175000 ,
-                        D_MARSH "tower/mon/dragon.c" : 340000 ,
-                        D_MARSH "tower/mon/knight.c" : 187500 ,
-                        D_MARSH "tower/mon/vecna.c" : 937500 ,
-                        D_MARSH "tower/mon/angel.c" : 187500 ,
-                        D_MARSH "tower/mon/grimmy.c" : 312500 ,
-                        D_MARSH "tower/mon/nico.c" : 312500 ,
-                        D_MARSH "tower/mon/render.c" : 687500 ,
-                        OGRE "mobs/ahstuz.c" : 106250 ,
-                        SENUND "mon/elseroad.c" : 98750 ,
-                        SENUND "mon/gambrill.c" : 52500 ,
-                        SENUND "mon/geilfuss.c" : 57500 ,
-                        SENUND "mon/priest.c" : 56250 ,
-                        DEKU "zhour_husk.c" : 100000 ,
-                        DEKU "arag_dyne.c" : 100000 ,
-                        DEKU "assassin.c" : 93750 ,
-                        DEKU "narameon.c" : 93750 ,
-                        DEKU "bandit_l.c" : 100000 ,
-                        DEKU "black_beast.c" : 56250 ,
-                        DEKU "aurus_devar_bones.c" : 312500 ,
+                        ANTIOCH "ruins/mons/demon.c" : 656000 ,
+                        ATTAYA "mon/bishimon.c" : 1240000 ,
+                        ATTAYA "mon/ashtar.c" : 1240000 ,
+                        ATTAYA "mon/callista.c" : 1600000 ,
+                        ATTAYA "mon/intruder.c" : 6000000 ,
+                        ATTAYA "mon/phaeton.c" : 1600000 ,
+                        ATTAYA "mon/judatac.c" : 1440000 ,
+                        ATTAYA "mon/volkerps.c" : 1200000 ,
+                        ATTAYA "mon/magus.c" : 1520000 ,
+                        ATTAYA "mon/io.c" : 1520000 ,
+                        ATTAYA "mon/hunter.c" : 1800000 ,
+                        ATTAYA "mon/roper.c" : 1800000 ,
+                        DERRO "mon/elemental.c" : 300000 ,
+                        ISLANDS "argentrock/mon/watcher.c" : 480000 ,
+                        ISLANDS "argentrock/mon/batlin.c" : 4760000 ,
+                        ISLANDS "argentrock/mon/jarkunish.c" : 1560000 ,
+                        ISLANDS "argentrock/mon/kronibus.c" : 1560000 ,
+                        ISLANDS "argentrock/mon/fernibus.c" : 1560000 ,
+                        ISLANDS "common/mon/cruisertetron.c" : 5000000 ,
+                        ISLANDS "tonerra/mon/edragon.c" : 1800000 ,
+                        ISLANDS "tonerra/mon/mmonk.c" : 456000 ,
+                        ISLANDS "tonerra/mon/tombt.c" : 1200000 ,
+                        ISLANDS "tonerra/mon/ibrandul.c" : 4800000 ,
+                        ISLANDS "tonerra/mon/nativek.c" : 1128000 ,
+                        ISLANDS "tonerra/mon/nativewd.c" : 292000 ,
+                        LAERAD "mon/dragon.c" : 1120000 ,
+                        D_MARSH "tower/mon/dragon.c" : 2176000 ,
+                        D_MARSH "tower/mon/knight.c" : 1200000 ,
+                        D_MARSH "tower/mon/vecna.c" : 6000000 ,
+                        D_MARSH "tower/mon/angel.c" : 1200000 ,
+                        D_MARSH "tower/mon/grimmy.c" : 2000000 ,
+                        D_MARSH "tower/mon/nico.c" : 2000000 ,
+                        D_MARSH "tower/mon/render.c" : 4400000 ,
+                        OGRE "mobs/ahstuz.c" : 680000 ,
+                        SENUND "mon/elseroad.c" : 632000 ,
+                        SENUND "mon/gambrill.c" : 336000 ,
+                        SENUND "mon/geilfuss.c" : 368000 ,
+                        SENUND "mon/priest.c" : 360000 ,
+                        DEKU "zhour_husk.c" : 640000 ,
+                        DEKU "arag_dyne.c" : 640000 ,
+                        DEKU "assassin.c" : 600000 ,
+                        DEKU "narameon.c" : 600000 ,
+                        DEKU "bandit_l.c" : 640000 ,
+                        DEKU "black_beast.c" : 360000 ,
+                        DEKU "aurus_devar_bones.c" : 2000000 ,
                         ]);
 
 mapping __Quests, __Rooms, __Monsters;

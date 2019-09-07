@@ -1,26 +1,24 @@
-// added #define GEN_LIST and int query_generic_list() for use by low quest listing
-// *Styx*  1/15/03
-// *Styx* 10/4/03 - adding Kildare & Orc camps
-// *Styx* 12/12/03 - adding new Koenig, Yntala, Deku keep & tweaked some mobs & values
-//changing to be two lists - low and mid by Circe 6/26/04
-// *Styx* 7/05 - misc. additions & adjustments per bug reports & various suggestions
-
-// Lujke 09/16 minor change to correct Tharis locations to newtharis directory
-
 #include <std.h>
+#include <security.h>
+
+/**
+ * @file
+ * @brief Midgame collector items
+ */
+
+
+inherit DAEMON;
 
 #define COLORS ({"%^RED%^red", "%^BLUE%^blue","%^CYAN%^cyan", "%^GREEN%^green", "%^MAGENTA%^magenta", "%^YELLOW%^yellow","white","%^ORANGE%^orange","%^BOLD%^%^BLACK%^black"})
 
 #define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl", "knife", "scroll", "tablet","hat","tome","rod","statue","figurine","amulet", "talisman", "slippers", "flask","candle","mirror","rug","brooch","egg","scarf", "sphere", "cube", "stone", "crown", "amulet"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder", "kittens"})
 
 #define SAVE_QUESTS "/daemon/save/quests_mid"
 
-//removed deku haunted house form here - moved the dungeon in the keep with the werewolves in HMID1 - Saide - April, 2016
 #define LMID1 ({"/d/deku/plains/", "/d/deku/fortress/", "/d/deku/keep/rooms/t", "/d/deku/plains/", "/d/deku/forest/", "/d/islands/pirates/cove/path", })
 
-//"/d/tharis/palace/rooms/", removed from the below - Saide
 #define LMID2 ({"/d/tharis/newtharis/sewers", "/d/barriermnts/ruins/room/", "/d/deku/sanctuary/sewer/", "/d/azha/theater/rooms/", "/d/deku/forest/fire_tunnel/rooms/"})
 
 #define MED ({"/d/deku/keep/rooms/blacktonguelair", "/d/laerad/parnelli/asgard/sewer/rooms/", "/d/islands/pirates/cove/boat", "/d/underdark/mines/room/", "/d/islands/pirates/caves/", "/d/antioch/valley/rooms/e", "/d/antioch/valley/rooms/dt"})
@@ -30,18 +28,7 @@
 #define HMID2 ({"/d/laerad/parnelli/systyquah/", "/d/antioch/valley/rooms/v", "/d/antioch/valley/rooms/g", "/d/islands/dallyh/forest/rooms/", "/d/tharis/barrow/rooms/mound", "/d/barriermnts/bpeak/rooms/",\
 "/d/barriermnts/lothwaite/rooms/bt", "/d/dagger/derro/rooms/c", "/d/deku/mausoleum/rooms/"})
 
-/*
-#define GEN_LIST ({ "Island of Deku", "Laerad Wasteland", "A Swamp", "Laerad Plains", "Parnelli Forest", "Antioch Valley", "Dark Trails", "Dagger Swamp", "Amazon Forest", "Orc camp", "Tharis Palace", "Tharis sewers", "Forest south of Tabor", "Blacktongue's Keep" })
-*/
-
-// added HMID1 & HMDID2 in a second time each to increase chances there *Styx*  1/15/03
-
-// note:  make sure the list of areas & values correspond in count!
-// NOTE:  The values set are a base and random(1/2) of that gets added to it *Styx* 6/05
 #define AREAS ({ LMID1, LMID2, MED, HMID1, HMID2})
-//#define AREA_VALUE ({ 30000, 35000, 40000, 45000, 50000})
-//increased bases by .15 - Saide - May 2016 - old values are above
-//#define AREA_VALUE ({45000, 52500, 60000, 67500, 75000})
 #define AREA_VALUE ({100000, 120000, 140000, 160000, 180000})
 
 #define MAXSIZE 20
@@ -63,63 +50,55 @@
 #define BARRIER "/d/barriermnts/ruins/mon/"+
 #define SANCT "/d/deku/sanctuary/mon/"+
 
+mapping MONSTERS = ([
+                        ANTIOCH "valley/mons/bear.c": 75000,
+                        DEKU "monster/jarrow.c":75000,
+                        DEKU "monster/lord.c":75000,
+                        DEKU "monster/serpent.c":78000,
+                        DEKU "fortress/monster/nightmare.c":78000,
+                        DEKU "keep/monster/lord.c":80000,
+                        DEKU "keep/monster/ingmar.c":75000,
+                        DEKU "keep/monster/siere.c":88000,
+                        DEKU "keep/monster/lordblacktongue.c":125000,
+                        DEKU "keep/monster/shaltul.c":78000,
+                        DEKU "keep/monster/telair.c":78000,
+                        DEKU "monster/skel-king.c":86000,
+                        DEKU "monster/hill.c":75000,
+                        SANCT "balkour.c":97500,
+                        SANCT "auica.c":95000,
+                        SANCT "everardus.c":80000,
+                        AZHA "mon/alradin.c":97500,
+                        AZHA "mon/alsura.c":94000,
+                        AZHA "theater/mons/mashiva.c":84000,
+                        AZHA "theater/mons/marion_bard.c":86000,
+                        AZHA "theater/mons/marion_ranger.c":86000,
+                        AZHA "theater/mons/ivashka_harpy.c":92000,
+                        DERRO "mon/cook.c": 12000,
+                        DERRO "mon/fireking.c": 125000,
+                        "/d/dagger/road/mon/thorby.c": 125000,
+                        "/d/darkwood/yntala/mon/lepking.c": 86000,
+                        "/d/islands/coralsea/mon/coral_captain.c": 90000,
+                        ISLANDS "pirates/mon/firstmate.c":90000,
+                        ISLANDS "pirates/mon/piratecaptain.c":95000,
+                        ISLANDS "pirates/mon/shadowmonster.c":105000,
+                        ISLANDS "pirates/mon/cedwin.c":105000,
+                        THARIS "barrow/mon/knight.c":95000,
+                        THARIS "barrow/mon/krykoth.c":95000,
+                        THARIS "monsters/forestd.c":200000,
+                        THARIS "monsters/steeldragon.c":200000,
+                        THARIS "monsters/black_mage.c":90000,
+                        THARIS "monsters/white_mage.c":90000,
+                        LAERAD "mon/skuz.c":102000,
+                        LAERAD "mon/anti.c":102000,
+                        LAERAD "mon/paladin.c":104000,
+                        LAERAD "parnelli/asgard/sewer/mons/lking.c":105000,
+                        BARRIER "mage.c":90000,
+                        BARRIER "wyvern.c":90000,
+                        D_MARSH "swamp/mon/harv.c":94500,
+                        UNDERDARK "mines/mon/kobsorc.c":94500,
+                        UNDERDARK "mines/mon/gnowarden.c":94500,
+                        ]);
 
-// NOTE:  The values set are a base and random(1/2) of that gets added to it *Styx* 6/05
-//increased based by 1.5 - Saide - May 2016
-// Removed       THARIS "monsters/merve.c":48000, \  from list below
-// as he is not in game at present. Lujke September 2016
-#define MONSTERS ([  \
-      ANTIOCH "valley/mons/bear.c": 75000,\
-      DEKU "monster/jarrow.c":75000, \
-      DEKU "monster/lord.c":75000, \
-      DEKU "monster/serpent.c":78000, \
-      DEKU "fortress/monster/nightmare.c":78000, \
-      DEKU "keep/monster/lord.c":80000, \
-      DEKU "keep/monster/ingmar.c":75000,\
-      DEKU "keep/monster/siere.c":88000,\
-      DEKU "keep/monster/lordblacktongue.c":125000,\
-      DEKU "keep/monster/shaltul.c":78000,\
-      DEKU "keep/monster/telair.c":78000,\
-      DEKU "monster/skel-king.c":86000, \
-      DEKU "monster/hill.c":75000, \
-      SANCT "balkour.c":97500, \
-      SANCT "auica.c":95000, \
-      SANCT "everardus.c":80000, \
-      AZHA "mon/alradin.c":97500, \
-      AZHA "mon/alsura.c":94000, \
-      AZHA "theater/mons/mashiva.c":84000, \
-      AZHA "theater/mons/marion_bard.c":86000, \
-      AZHA "theater/mons/marion_ranger.c":86000, \
-      AZHA "theater/mons/ivashka_harpy.c":92000, \
-      DERRO "mon/cook.c": 12000, \
-      DERRO "mon/fireking.c": 125000, \
-      "/d/dagger/road/mon/thorby.c": 125000, \
-	  "/d/darkwood/yntala/mon/lepking.c": 86000, \
-	  "/d/islands/coralsea/mon/coral_captain.c": 90000, \
-      ISLANDS "pirates/mon/firstmate.c":90000, \
-      ISLANDS "pirates/mon/piratecaptain.c":95000, \
-      ISLANDS "pirates/mon/shadowmonster.c":105000,\
-      ISLANDS "pirates/mon/cedwin.c":105000,\
-      THARIS "barrow/mon/knight.c":95000, \
-      THARIS "barrow/mon/krykoth.c":95000, \
-      THARIS "monsters/forestd.c":200000, \
-      THARIS "monsters/steeldragon.c":200000, \
-      THARIS "monsters/black_mage.c":90000, \
-      THARIS "monsters/white_mage.c":90000, \
-      LAERAD "mon/skuz.c":102000, \
-      LAERAD "mon/anti.c":102000, \
-      LAERAD "mon/paladin.c":104000, \
-      LAERAD "parnelli/asgard/sewer/mons/lking.c":105000, \
-	  BARRIER "mage.c":90000,\
-	  BARRIER "wyvern.c":90000,\
-      D_MARSH "swamp/mon/harv.c":94500, \
-	  UNDERDARK "mines/mon/kobsorc.c":94500, \
-	  UNDERDARK "mines/mon/gnowarden.c":94500, \
-])
-
-#include <security.h>
-
-inherit DAEMON;
 
 mapping __Quests, __Rooms, __Monsters;
 mapping __Removal;
@@ -465,7 +444,7 @@ int claimExp(string name, object player, int level){
    } else {
 	player->set("miniquest_exp", (exp + player->query("miniquest_exp")) );
    }
-   if(find_player("saide")) 
+   if(find_player("saide"))
    {
        tell_object(find_player("saide"), "player = "+identify(player) + " should be gaining "+exp+" exp. Quest item level = "+level+" level2 = "+level2);
    }

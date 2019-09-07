@@ -1,25 +1,21 @@
-//Decraesing XP slightly since it was getting out of hand for the lowbie levels - Octothorpe 10/28/10
-//Increased XP on most of the drops - Octothorpe 7/16/09
-// changed by Circe to accommodate mid quest list.  7/4/04
-// added #define GEN_LIST and int query_generic_list() for use by low quest listing
-// *Styx*  1/15/03
-// *Styx* 10/4/03 - adding Kildare & Orc camps
-// *Styx* 12/12/03 - adding new Koenig, Yntala, Deku keep & tweaked some mobs & values
-// *Styx* 6/8/05 - not sure who split off the mid ones but some of my old comments are clearly out of date, adding new areas & mobs & adjusting per some bug reports
-// Turning up the exp on these and making it so people above level -Ares
-
 #include <std.h>
+#include <security.h>
+
+inherit DAEMON;
+
+/**
+ * @file
+ * @brief Lowgame collector items
+ */
+
 
 #define COLORS ({"%^RED%^red", "%^BLUE%^blue","%^CYAN%^cyan", "%^GREEN%^green", "%^MAGENTA%^magenta", "%^YELLOW%^yellow","white","%^ORANGE%^orange","%^BOLD%^%^BLACK%^black"})
 
 #define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl", "knife", "scroll", "tablet","hat","tome","rod","statue","figurine","amulet", "talisman", "slippers", "flask","candle","mirror","rug","brooch","egg","scarf", "sphere", "cube", "stone", "crown", "amulet"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder", "sploosh"})
 
 #define SAVE_QUESTS "/daemon/save/quests_low"
-
-// was before >> #define LOW ({"/d/shadow/room/mountain/", "/d/deku/plains/", "/d/deku/open/", "/d/koenig/foothills/rooms/", "/d/shadow/room/cave/"})  
-// removing foothills until they are redone *Styx* 10/4/03
 
 #define LOW ({"/d/koenig/streams/", "/d/koenig/village/",  "/d/shadow/room/kildare/rooms/cave", "/d/shadow/room/forest/road", "/d/shadow/room/farm/room/cellar", "/d/shadow/room/farm/room/farm", "/d/koenig/fields/room/"})
 
@@ -29,32 +25,14 @@
 
 #define HMID1 ({ "/d/shadow/room/kildare/rooms/nest",  "/d/darkwood/camps/rooms/orcamp/", "/d/darkwood/yntala/rooms/forest1", "/d/darkwood/yntala/rooms/forest2", "/d/darkwood/yntala/rooms/uw", "/d/shadow/room/feyren/rooms/" })
 
-// not sure why this was specifically in the list above "/d/shadow/room/mountain/cave33" *Styx* 6/8/05
-
-/*
-#define GEN_LIST ({ "Island of Deku", "Town of Muileann", "A Crypt", "Darkwood Forest", "Laerad Wasteland", "Meadowlands", "A Swamp", "Koenig area", "Laerad Plains", "Parnelli Forest", "Antioch Valley", "Dagger Swamp", "Amazon Forest", "Echoes Mountains", "Dragon's Den Caverns", "Twisting Mountain Trail", "Orc camp", "Tharis Palace", "Tharis sewers", "Forest south of Tabor", "Blacktongue's Keep" })
-*/
-
 #define GEN_LIST ({ "Town of Muileann", "An underground crypt", "Darkwood Forest", "Meadowlands", "Rapidly flowing stream", "Ruins of Koenig", "A rocky path", "Cornfield", "Echoes Mountains", "Dragon's Den Caverns", "Twisting Mountain Trail", "Kildare Glen", "Farmyard", "Elven village", "Abandoned, ransacked village", "Goblin Stronghold", "A small cave", "Bestial nest" })
-
-// added HMID1 & HMDID2 in a second time each to increase chances there *Styx*  1/15/03
-
-//note:  make sure the list of areas & values correspond in count!
-// NOTE:  The values set are a base and random(1/2) of that gets added to it *Styx* 6/05
 
 #define AREAS ({LOW, LMID1, LMID1, LMID2, HMID1})
 
-//modifying to be 1/10th of level 10 needed exp 
-//for the highest value so goes 1/18 of level 10, 1/16, 1/14, 1/12, 1/10 - Saide - May 2016
-//#define AREA_VALUE ({7100, 8000, 9100, 10600, 12800})
-// bumping up exp again to encourage chasing these
 #define AREA_VALUE ({36000, 48000, 60000, 72000, 88000})
-//old values before above change 
-//#define AREA_VALUE ({3000, 3500, 4075, 6250, 7500})
 
 #define MAXSIZE 25
 
-// this should probably be moved from /realms, /d/shadowgate/quests/ might be a good place but need to be sure it won't break existing ones to have both for a while, etc.
 #define QOBJECT "/realms/tristan/qobject.c"
 
 #define OBSTORE "/d/save/quests/"+
@@ -71,53 +49,38 @@
 #define KOENIG "/d/koenig/town/"+
 #define SHADOW "/d/shadow/"+
 
-// see note on change to mix of mob vs. rooms in test_quests below *Styx* 
-// yes, I mean for some of them to have extra chances too *Styx*
-// NOTE:  The values set are a base and random(1/2) of that gets added to it *Styx* 6/05
-
-//these numbers will have half of the amount added to them and then multiplied by 2-3 - Saide
-#define MONSTERS ([  \
-      GOBLIN "mon/king.c":20600,\
-      GOBLIN "mon/king.c":20600,\
-      GOBLIN "mon/rogue.c":15100,\
-      GOBLIN "mon/gobass.c":15100,\
-      KOENIG "mon/thess.c":15100,\
-	  KOENIG "mon/magglerak.c": 18000,\
-      KOENIG "mon/cryptkeeper.c": 20600,\
-      KOENIG "mon/crysmon1.c":18000,\
-      KOENIG "mon/gentleman.c":22800,\
-      KOENIG "mon/donner.c":18000,\
-      KOENIG "mon/headcook.c":18000,\
-      KOENIG "mon/decapus.c":17100,\
-      KOENIG "mon/mansnake.c":17100,\
-      KOENIG "mon/concubine.c":18000,\
-      KOENIG "mon/butler.c":17100,\
-      KOENIG "mon/welemental.c":19100,\
-      SHADOW "room/mountain/mons/koboldf.c":18500,\
-      SHADOW "room/mountain/mons/koboldf.c":18500,\
-      SHADOW "room/kildare/mon/peryking.c":19500,\
-      SHADOW "room/kildare/mon/peryking.c":19500,\
-      SHADOW "room/mountain/mons/ogreking.c":19100,\
-      SHADOW "room/mountain/mons/grakulan.c":19500,\
-      "/d/darkwood/camps/mon/gore.c":19500,\
-      SHADOW "room/feyren/mon/ashilla.c": 22800,\
-	  SHADOW "room/feyren/mon/feyren.c": 22800,\
-	  SHADOW "room/feyren/mon/ahyriquel.c":22800,\
-      THARIS "conforest/mons/orcchief.c":19100,\
-      SHADOW "room/farm/mon/sea_hag.c":17100,\
-      SHADOW "room/farm/mon/hildegard.c":17100,\
-      "/d/koenig/mon/ogremage.c":18000,\
-      ])
-/*
-   took these out for now at least to lower frequency in Muileann
-      KOENIG "mon/fbhut.c":1500, \
-      KOENIG "mon/bhuttolo.c":1500, \
-      KOENIG "mon/bhutmstolo.c":1500, \
-*/
-
-#include <security.h>
-
-inherit DAEMON;
+mapping MONSTERS = ([
+                        GOBLIN "mon/king.c":20600,
+                        GOBLIN "mon/king.c":20600,
+                        GOBLIN "mon/rogue.c":15100,
+                        GOBLIN "mon/gobass.c":15100,
+                        KOENIG "mon/thess.c":15100,
+                        KOENIG "mon/magglerak.c": 18000,
+                        KOENIG "mon/cryptkeeper.c": 20600,
+                        KOENIG "mon/crysmon1.c":18000,
+                        KOENIG "mon/gentleman.c":22800,
+                        KOENIG "mon/donner.c":18000,
+                        KOENIG "mon/headcook.c":18000,
+                        KOENIG "mon/decapus.c":17100,
+                        KOENIG "mon/mansnake.c":17100,
+                        KOENIG "mon/concubine.c":18000,
+                        KOENIG "mon/butler.c":17100,
+                        KOENIG "mon/welemental.c":19100,
+                        SHADOW "room/mountain/mons/koboldf.c":18500,
+                        SHADOW "room/mountain/mons/koboldf.c":18500,
+                        SHADOW "room/kildare/mon/peryking.c":19500,
+                        SHADOW "room/kildare/mon/peryking.c":19500,
+                        SHADOW "room/mountain/mons/ogreking.c":19100,
+                        SHADOW "room/mountain/mons/grakulan.c":19500,
+                        "/d/darkwood/camps/mon/gore.c":19500,
+                        SHADOW "room/feyren/mon/ashilla.c": 22800,
+                        SHADOW "room/feyren/mon/feyren.c": 22800,
+                        SHADOW "room/feyren/mon/ahyriquel.c":22800,
+                        THARIS "conforest/mons/orcchief.c":19100,
+                        SHADOW "room/farm/mon/sea_hag.c":17100,
+                        SHADOW "room/farm/mon/hildegard.c":17100,
+                        "/d/koenig/mon/ogremage.c":18000,
+                        ]);
 
 mapping __Quests, __Rooms, __Monsters;
 mapping __Removal;
@@ -300,7 +263,7 @@ void test_quests(){
    if(random(5)) return;
 
 // was random(6)<3 but puts too many on mobs in Muileann for this group *Styx* 6/05
-   if(random(8)<3) {  
+   if(random(8)<3) {
       newRoom();
 	newMon();
    } else {

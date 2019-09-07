@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief a standard object that sells spell components in shops
+ */
+
 //      /std/comp_vend.c
 //      a standard object that sells spell components in shops
 //      created by Melnmarn@ShadowGate

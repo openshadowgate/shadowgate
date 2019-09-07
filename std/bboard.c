@@ -6,7 +6,7 @@
 //      Bulletin Board object version 1.5
 //      Added optional permissions checking for read
 //      and/or post
-//      Added optional queue logic 
+//      Added optional queue logic
 //      Thorn@ShadowGate
 //      12 December 2000
 // Pator@ShadowGate Aug 14, 2003
@@ -19,6 +19,11 @@
 #include <security.h>
 
 inherit OBJECT;
+
+/**
+ * @file
+ * @brief Bboard base object
+ */
 
 int max_posts;
 string location, board_id;
@@ -59,7 +64,7 @@ void init() {
 int post_message(string str) {
 	if(queue) check_queue();
 	if(restricted_post) {
-		if(!valid_user(TP)) { 
+		if(!valid_user(TP)) {
 			write("You may not post to this board.");
 			return 1;
 		}
@@ -101,7 +106,7 @@ int reply_message(string str) {
 
 	if(queue) check_queue();
 	if(restricted_post) {
-		if(!valid_user(TP)) { 
+		if(!valid_user(TP)) {
 			write("You may not post to this board.");
 			return 1;
 		}
@@ -201,7 +206,7 @@ int read_message(string str) {
     string *lines;
 
 	if(restricted_read) {
-		if(!valid_user(TP)) 
+		if(!valid_user(TP))
 			return write("You may not read this board.");
 	}
 	if(queue) check_queue();
@@ -216,7 +221,7 @@ int read_message(string str) {
         notify_fail("No more messages.\n");
         return 0;
     }
-    write("%^GREEN%^Message "+number+":%^RESET%^");    
+    write("%^GREEN%^Message "+number+":%^RESET%^");
     if(query_ooc_board())
     {
         write("%^GREEN%^From: "+msg["owner"]);
@@ -249,7 +254,7 @@ string query_long(string junk) {
 
     borg = ::query_long();
 	if(restricted_read) {
-		if(!valid_user(TP)) { 
+		if(!valid_user(TP)) {
 			borg += "\nYou may not read this board.\n";
 			return borg;
 		}
@@ -270,7 +275,7 @@ string show_top(string junk) {
 
 	borg = "";
     if(restricted_read) {
-        if(!valid_user(TP)) { 
+        if(!valid_user(TP)) {
             borg += "\nYou may not read this board.\n";
             return borg;
         }
@@ -368,12 +373,12 @@ string display_new( string id ) {
     mixed *read_by;
     int maxi,i, newposts;
     string str;
-    
+
     if(!id)
         return 0;
 	if(restricted_read && restricted_post) {
 		if(!TP) return 0;
-		if(!valid_user(TP)) { 
+		if(!valid_user(TP)) {
 			return " {No access}";
 		}
 	}
@@ -398,16 +403,16 @@ string display_new( string id ) {
     if(newposts)
         str+="%^YELLOW%^";
     str+=sprintf("%2d",newposts)+"%^RESET%^%^GREEN%^ out of "+sprintf("%2d",maxi)+"%^BOLD%^%^BLACK%^]%^RESET%^";
-    
-        
+
+
 	if(restricted_read) {
-		if(!valid_user(TP)) { 
+		if(!valid_user(TP)) {
 			str+= "%^BOLD%^%^BLACK%^[Write only]%^RESET%^";
 		}
 	}
 	if(restricted_post) {
 		if(!TP) return 0;
-		if(!valid_user(TP)) { 
+		if(!valid_user(TP)) {
 			str+= "%^BOLD%^%^BLACK%^[Read only]%^RESET%^";
 		}
 	}
@@ -437,11 +442,11 @@ string query_short()
 }
 
 // Checks for a property to be set in the player for them to
-// be allowed to post to or read this board.  Wizzes and avatars 
-// may also use this board. - v1.5 thorn 001212 
+// be allowed to post to or read this board.  Wizzes and avatars
+// may also use this board. - v1.5 thorn 001212
 int valid_user(object user) {
 	int inc;
-	
+
 	if(avatarp(user)) return 1;
 	for(inc=0;inc<sizeof(allowed);inc++) {
 		if(user->query_property(allowed[inc])) return 1;
@@ -450,38 +455,38 @@ int valid_user(object user) {
 }
 
 // Sets whether the permissions are checked on this board
-// before posting. - v1.5 thorn 001212 
+// before posting. - v1.5 thorn 001212
 void set_restricted_post() { restricted_post = 1; }
 
 // Sets whether the permissions are checked on this board
-// before allowing reading or listing. - v1.5 thorn 001212 
+// before allowing reading or listing. - v1.5 thorn 001212
 void set_restricted_read() { restricted_read = 1; }
 
 // Sets the properties required in a user to be able to post to
-// this board. - v1.5 thorn 001212 
+// this board. - v1.5 thorn 001212
 void set_allowed(string *arr) {
 	allowed = arr;
 }
 
 // Returns the properties required in a user to be able to post
-// to this board. - v1.5 thorn 001212 
+// to this board. - v1.5 thorn 001212
 string *query_allowed() { return allowed; }
 
 // If queue behavior is selected, then anytime the number of
 // posts reaches max_posts, the first post on the board is
-// removed on init(); - v1.5 thorn 001212 
+// removed on init(); - v1.5 thorn 001212
 int check_queue() {
 	int posts;
-	
+
 	posts = (int)BBOARD_D->get_num_posts(board_id);
     while(posts >= max_posts) {
 		BBOARD_D->remove_message(board_id, 0);
-		posts--;				
+		posts--;
     }
     return posts - max_posts;
 }
 
-// Set queue behavior in this board. - v1.5 thorn 001212 
+// Set queue behavior in this board. - v1.5 thorn 001212
 void set_queue() {
 	if(max_posts) queue = 1;
 }
@@ -491,4 +496,3 @@ int do_purge() {
   BBOARD_D->purge_read(board_id);
   return 1;
 }
-

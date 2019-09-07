@@ -5,6 +5,11 @@
     created by Descartes of Borg 931204
 */
 
+/**
+ * Read and display files
+ */
+
+
 #define DEFAULT_MORE "%^BOLD%^%^BLACK%^%^B_WHITE%^"
 #define TO this_object()
 static private mapping __More;

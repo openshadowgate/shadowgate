@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @brief Nicknames subst
+ */
+
+
 mapping nicknames;
 
 string do_nicknames(string str)
@@ -28,7 +34,7 @@ string do_nicknames(string str)
          if(nicknames[words[i]])
             words[i] = nicknames[words[i]];
    }
-   
+
    ret = implode(words, " ");
 
    return ret;
