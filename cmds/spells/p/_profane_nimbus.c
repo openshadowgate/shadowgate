@@ -43,7 +43,7 @@ void spell_effect(int prof)
     int duration;
     duration = (ROUND_LENGTH * 10) * clevel;
 
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^You feel your gods power warding you from the evil!");
+    tell_object(caster,"%^BOLD%^%^MAGENTA%^You feel your gods power warding you from the good!");
     tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" is suddenly surrounded by halo of darkness!",caster);
 
     caster->set_property("spelled", ({TO}));
@@ -67,9 +67,9 @@ void execute_attack()
     if(strikes > clevel)                        { dest_effect(); return; }
 
     attackers = filter_array(caster->query_attackers(),(:
-                                                        $1 == 1 ||
-                                                        $1 == 4 ||
-                                                        $1 == 7
+                                                        $1->query_alignment() == 1 ||
+                                                        $1->query_alignment() == 4 ||
+                                                        $1->query_alignment() == 7
                                                         :));
 
     if(!sizeof(attackers))
