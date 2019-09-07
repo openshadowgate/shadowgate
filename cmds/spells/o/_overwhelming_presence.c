@@ -22,9 +22,12 @@ string query_cast_string() {
 
 void spell_effect(int prof){
     object *attackers, targ;
-    int i;
+    int i, die;
     attackers = caster->query_attackers();
     attackers = target_filter(attackers);
+
+    die=clevel/4;
+    die=die<4?4:die;
 
     tell_room(place,"%^YELLOW%^"+caster->QCN+" basks in the light of divinity!%^RESET%^");
     for(i=0;i<sizeof(attackers);i++)
@@ -34,7 +37,7 @@ void spell_effect(int prof){
         targ = attackers[i];
         if(!do_save(targ,0))
         {
-            targ->set_tripped(roll_dice(1,4),"%^BOLD%^You're prostrating in ave of "+caster->QCN+"'s divinity!%^RESET%^",4);
+            targ->set_tripped(roll_dice(1,die),"%^BOLD%^You're prostrating in awe of "+caster->QCN+"'s divinity!%^RESET%^",die);
             tall_room(ENV(targ),"%^YELLOW%^"+targ->QCN+" prostrates itself before "+caster->QCN+"!");
             if(!targ->query_property("overwhelming_presence"))
             {
