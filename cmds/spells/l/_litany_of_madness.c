@@ -13,7 +13,7 @@ void create()
     set_spell_level(([ "paladin" : 4 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS litany of madness TARGET");
-    set_damage_desc("confuses target");
+    set_damage_desc("continuously confuses target");
     set_description("This litany is a sermon of madness. The target is confused. At the start of each of its turns, it can make a Will saving throw against the confused effect. If the target fails the save, it continues to be confused. If it makes the save, the effect ends. This spell won't work together with other litanies.");
     set_verbal_comp();
     set_somatic_comp();
@@ -48,12 +48,12 @@ void check_confusion()
 {
     if(!objectp(target))
         dest_effect();
-    if(counter>(clevel/8+4))
+    if(counter>(clevel/12+4))
         dest_effect();
 
     counter++;
 
-    if(!do_save(target,2))
+    if(!do_save(target,-2))
     {
         CONFUSION->confuse(caster,target);
         call_out("check_confusion",ROUND_LENGTH);
@@ -61,6 +61,7 @@ void check_confusion()
     else
     {
         tell_room(ENV(target),"%^BOLD%^%^WHITE%^"+target->QCN+" shakes off the confusion.");
+        spell_kill(target,caster);
         dest_effect();
     }
 }
