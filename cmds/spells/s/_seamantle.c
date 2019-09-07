@@ -1,5 +1,6 @@
 #include <spell.h>
 #include <clock.h>
+#include <magic.h>
 inherit SPELL;
 
 int abonus;
@@ -9,7 +10,7 @@ int duration;
 
 void create() {
     ::create();
-    set_spell_name("foresight");
+    set_spell_name("seamantle");
     set_spell_level(([ "mage" : 8, "druid" : 8 ]));
     set_spell_sphere("conjuration");
     set_syntax("cast CLASS seamantle");
