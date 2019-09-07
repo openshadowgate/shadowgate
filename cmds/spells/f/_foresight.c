@@ -13,12 +13,11 @@ void create() {
     set_spell_level(([ "mage" : 7, "bard" : 5 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS foresight [on TARGET]");
-    set_description("The caster uses this spell to heighten their awareness for a time, allowing them to perceive fragments of their immediate future. This allows them to react pre-emptively to many threats, defending better against attacks that they can see coming before they actually land, and they may even be able avoid the death itself.
-
-This spells grants (1 + (caster level) / 12) reflex, (1 + (caster level) / 16) to armor bonus and protection from death effects.");
+    set_damage_desc("clvel/16 to armor bonus, clevel/12 to reflex save, death effects ward");
+    set_description("The caster uses this spell to heighten their awareness for a time, allowing them to perceive fragments of their immediate future. This allows them to react pre-emptively to many threats, defending better against attacks that they can see coming before they actually land, and they may even be able avoid the death itself.");
     set_verbal_comp();
     set_somatic_comp();
-    
+
     set_components(([
                         "mage" : ([ "pearl" : 2, ]),
                         ]));
@@ -36,15 +35,15 @@ void spell_effect(int prof)
 
     if (!target)
         target = caster;
-    
-    if (!present(target,environment(caster))) 
+
+    if (!present(target,environment(caster)))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         TO->remove();
         return;
     }
-    
-    if (target->query_property("foresighted")) 
+
+    if (target->query_property("foresighted"))
     {
         tell_object(caster,"%^CYAN%^The spell is repelled by its own magic.%^RESET%^\n");
         TO->remove();
@@ -52,12 +51,12 @@ void spell_effect(int prof)
 
     spell_successful();
 
-    if (target == caster) 
+    if (target == caster)
     {
         tell_object(caster,"%^CYAN%^You feel the very future itself.\n");
         tell_room(place,"%^CYAN%^"+caster->QCN+" opens and closes their eyes, looking distanced from the surroundings.\n", caster );
     }
-    else 
+    else
     {
         tell_object(target,"%^CYAN%^You feel the very future itself.\n");
         tell_room(place,"%^CYAN%^"+target->QCN+" opens and closes their eyes, looking distanced from the surroundings.\n", target );
@@ -76,9 +75,9 @@ void spell_effect(int prof)
     call_out("dest_effect", duration);
 }
 
-void test() 
-{    
-    if (!objectp(target)) 
+void test()
+{
+    if (!objectp(target))
     {
         remove();
         return;
@@ -89,16 +88,16 @@ void test()
         dest_effect();
         return;
     }
-    
+
     call_out("test", 10);
     return 0;
 }
 
-void dest_effect() 
-{    
+void dest_effect()
+{
     if (find_call_out("test") != -1) remove_call_out("test");
-    
-    if(objectp(target)) 
+
+    if(objectp(target))
     {
         target->add_ac_bonus(- abonus);
             target->add_saving_bonus("reflex",- rbonus);
@@ -108,10 +107,9 @@ void dest_effect()
         tell_object(target, "%^CYAN%^The future no longer is present in your mind.");
         target->remove_property("foresighted");
     }
-    
+
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
 
 string query_cast_string() { return "%^CYAN%^"+caster->QCN+" holds and disappears two pearls into non-existence."; }
-

@@ -10,6 +10,7 @@ void create() {
     set_spell_level(([ "bard" : 1,"druid" : 1, "paladin" : 1, "mage" : 1, "cleric" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS resistance");
+    set_damage_desc("clevel/12 but no more than 4 to saving throws");
     set_description("By this spell, the caster imbues themselves with a small amount of resistance to harm.  The spell grants small bonus to will, fortitude and reflex.");
     set_verbal_comp();
     set_somatic_comp();
@@ -30,18 +31,18 @@ spell_effect(int prof) {
         tell_room(place,"%^GREEN%^The last note fades as "+caster->QCN+" glances around.",caster);
     }
     bonus = clevel/12;
-    caster->add_saving_bonus("reflex",bonus);
-    caster->add_saving_bonus("fortitude",bonus);
-    caster->add_saving_bonus("will",bonus);            
+
+    bonus = bonus<1?1:bonus;
+    bonus = bonus>4?4:bonus;
+
+    caster->add_saving_bonus("all",bonus);
     spell_successful();
     addSpellToCaster();
 }
 
 void dest_effect() {
     if(objectp(caster)) {
-        caster->add_saving_bonus("reflex",-bonus);
-        caster->add_saving_bonus("fortitude",-bonus);
-        caster->add_saving_bonus("will",-bonus);            
+        caster->add_saving_bonus("all",-bonus);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

@@ -1,4 +1,4 @@
-/*Part of combat code is duplicated in this file. A similar duplication was causing problems in weaponless_monsters, 
+/*Part of combat code is duplicated in this file. A similar duplication was causing problems in weaponless_monsters,
 and I removed it there. If/when this file becomes active, please explore the duplications and see if they should be removed. ~Circe~ 2/12/13*/
 
 //For hand to hand monsters
@@ -9,9 +9,12 @@ and I removed it there. If/when this file becomes active, please explore the dup
 
 inherit "/std/spellcaster";
 
+/**
+ * @file
+ * @brief Weaponless combatans
+ */
 
 static mapping static_weaponless = ([]);
-
 
 void set_damage(int num, int dice);
 void set_attacks_num(int number);
@@ -82,7 +85,7 @@ void set_nat_weapon_type(string type)
 }
 
 
-string query_nat_weapon_type() 
+string query_nat_weapon_type()
 {
     return static_weaponless["weapon_type"];
 }
@@ -96,7 +99,7 @@ void set_attack_limbs(string *limbs)
 
 
 string *query_attack_limbs()
-{ 
+{
     return static_weaponless["attack_limbs"];
 }
 
@@ -124,7 +127,7 @@ mapping return_attack_funcs()
     return static_weaponless["attack_funcs"];
 }
 
-int get_hand_damage(string limb1, int damage, object attacked) 
+int get_hand_damage(string limb1, int damage, object attacked)
 {
     return "/daemon/combat_d.c"->get_hand_damage(TO, limb1, damage, attacked);
 }
@@ -133,7 +136,7 @@ int query_unarmed_damage()
 {
     if(objectp(TO))
     {
-        if(userp(TO)) return (int)"/daemon/combat_d.c"->calculate_unarmed_damage(TO);       
+        if(userp(TO)) return (int)"/daemon/combat_d.c"->calculate_unarmed_damage(TO);
     }
     return roll_dice(static_weaponless["num_dice"],static_weaponless["type"]);
 }

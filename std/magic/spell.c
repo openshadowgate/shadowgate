@@ -11,6 +11,12 @@ inherit DAEMON;
 
 #include <spellcomponents.h>
 
+/**
+ * @file
+ * @brief Parent for all spells
+ */
+
+
 string spell_name,
     spell_type,
     rspell_name,
@@ -1832,7 +1838,11 @@ void define_base_damage_adjustment()
 
 void define_base_damage(int adjust)
 {
-    if(spell_type=="warlock")
+    if(query_aoe_spell()||query_traveling_aoe_spell())
+    {
+        sdamage = roll_dice(clevel,2);
+    }
+    else if(spell_type=="warlock")
     {
         string blasttype;
         blasttype = (string)caster->query("warlock_blast_type");
@@ -1840,9 +1850,6 @@ void define_base_damage(int adjust)
             sdamage = roll_dice(clevel,10);
         else
             sdamage = roll_dice(clevel,8);
-        if(query_aoe_spell()||
-           query_traveling_aoe_spell())
-            sdamage = roll_dice(clevel,3);
     }
     else
     {
@@ -1865,14 +1872,12 @@ void define_base_damage(int adjust)
         case 10..20: sdamage = roll_dice(clevel,10); break;
         default: sdamage = roll_dice(clevel,6); break;
         }
-        if(query_aoe_spell()||query_traveling_aoe_spell())
-        {
-            sdamage = roll_dice(clevel,2);
-        }
     }
-    if (FEATS_D->is_active(caster,"eldritch warfare"))
-        if (sdamage>300)
-            sdamage = 200+roll_dice(10,5);
+
+    if(FEATS_D->is_active(caster,"eldritch warfare"))
+        if(sdamage>100)
+            sdamage = 75+roll_dice(10,5);
+
 }
 
 int query_base_damage()
@@ -2674,7 +2679,7 @@ void help() {
     else
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ n/a");
     if(stringp(damage_desc))
-        write("%^BOLD%^%^RED%^Damage:%^RESET%^ "+damage_desc);
+        write("%^BOLD%^%^RED%^Spell effect:%^RESET%^ "+damage_desc);
     if(!syntax)
         syntax = "contact a wiz - not initialized";
     if(!description)

@@ -1,6 +1,7 @@
 // midlevel enchantment school specialty spell. Nienne, 08/09.
 #include <priest.h>
 #include <skills.h>
+#include <magic.h>
 inherit SPELL;
 
 int skillbonus, thacobonus;
@@ -12,6 +13,7 @@ void create() {
     set_spell_level(([ "mage" : 3, "bard" : 4 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS heroism (on TARGET)");
+    set_damage_desc("clevel/12 to attack and damage bonus, saving throws, clevel/18 to skills");
     set_description("This spell allows the caster to draw upon their personal presence and charm, granting them or an ally"
 " a bonus to morale on attacks, saves and core skills. It does not stack with other morale-boosting spells, such as good "
 "hope.");
@@ -59,18 +61,22 @@ void spell_effect(int prof) {
       }
     }
     spell_successful();
-    thacobonus = (clevel+9)/10; // +1 per 10 level bracket
-    if(thacobonus > 4) thacobonus = 4;
+    thacobonus = clevel/12; // +1 per 10 level bracket
+    if(thacobonus < 1)
+        thacobonus = 4;
+    if(thacobonus > 4)
+        thacobonus = 4;
     if(prof == -100) thacobonus = thacobonus*(-1);
     target->add_attack_bonus(thacobonus);
     target->add_saving_bonus("all",thacobonus);
-    skillbonus = (clevel+19)/20; // +1 bonus til L20, +2 bonus til L40
-    if(skillbonus > 2) skillbonus = 2;
+    skillbonus = clevel/18; // +1 bonus til L20, +2 bonus til L40
+    if(skillbonus < 1)
+        skillbonus = 1;
     if(prof == -100) skillbonus = skillbonus*(-1);
     for(i=0;i<sizeof(CORE_SKILLS);i++)
       target->add_skill_bonus(CORE_SKILLS[i],skillbonus);
     target->set_property("morale-boost",1);
-    call_out("dest_effect", 1800 + (clevel * 10));
+    call_out("dest_effect", clevel*3*ROUND_LENGTH);
     spell_successful();
     if(prof != -100) addSpellToCaster();
 }
@@ -78,7 +84,7 @@ void spell_effect(int prof) {
 void dest_effect()
 {
     int i;
-    
+
     if(objectp(target)) {
       if(thacobonus < 0) tell_object(target,"%^CYAN%^Your confidence finally returns!%^RESET%^");
       else {
