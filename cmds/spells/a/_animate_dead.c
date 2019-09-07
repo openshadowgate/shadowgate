@@ -110,7 +110,8 @@ void spell_effect(int prof)
         undead->set_max_hp(clevel*10);
         undead->set_hp(undead->query_max_hp());
         undead->set_overall_ac(5-clevel);
-        undead->serve(caster);
+        undead->control(caster);
+        caster->add_follower(undead);
 
         undead->add_id("summoned monster");
         undead->set_property("spell", TO);

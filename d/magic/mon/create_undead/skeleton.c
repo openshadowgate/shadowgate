@@ -1,5 +1,7 @@
 #include <std.h>
-inherit MONSTER;
+#include "common.h"
+
+inherit UNDEADINHERIT;
 
 void create(){
 
@@ -58,7 +60,6 @@ void create(){
                     "rush"
                     }));
 
-    set_property("swarm",1);
     set_fighter_style("soldier");
     command("message in marches in.");
     command("message out marches $D.");
