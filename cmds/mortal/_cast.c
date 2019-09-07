@@ -81,7 +81,6 @@ int cmd_cast(string str)
             return 1;
         }
         if((align % 3 == 1 && healharm < 0) || (align % 3 == 0 && healharm > 0)) {
-//            tell_object(TP,"Picking up base alignment "+TP->query_true_align()+".");
             write("Sorry, your alignment does not allow you to do that!");
             return 1;
         }
@@ -89,15 +88,6 @@ int cmd_cast(string str)
         if (str2[0] == ' ') str2=replace_string(str2," ","",1);
         if (str2[strlen(str2)-1] == ' ') str2=arrange_string(str2,strlen(str2)-1);
     }
-
-    if(type == "bard" && align < 4)
-        return notify_fail("You cannot use your bard spells unless you are of a non-lawful alignment!\n");
-
-    if(type == "monk" && align > 3)
-        return notify_fail("You cannot use your monk spells unless you are of a lawful alignment!\n");
-
-    if((type == "paladin" ) && (align < 7))
-        return notify_fail("You cannot use your paladin spells if you're of chaotic alignment!\n");
 
     if(type == "sorcerer" ||
        type == "psion" ||

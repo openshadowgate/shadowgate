@@ -6,6 +6,11 @@
 #include <disciplinespells.h>
 inherit "/std/innate";
 
+/**
+ * @file
+ */
+
+
 void set_cast_type(string str);
 
 int set_memorized(string myclass, string spell, int num);
