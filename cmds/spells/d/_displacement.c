@@ -110,7 +110,7 @@ void dest_effect() {
           "distortion.%^RESET%^",caster);
         chance = (int)caster->query_missChance()-30;
         caster->set_missChance(chance);
-        caster->remove_property("added short",({"%^BOLD%^%^MAGENTA%^ (slightly distorted)%^RESET%^"}));
+        caster->remove_property_value("added short",({"%^BOLD%^%^MAGENTA%^ (slightly distorted)%^RESET%^"}));
       }
       caster->remove_property("amorpha");
     }
