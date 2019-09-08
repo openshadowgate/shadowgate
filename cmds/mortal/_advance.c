@@ -693,7 +693,7 @@ int cmd_advance(string myclass){
          if(ETP->query_property("Specialist") && (string)ETP->query_player() == (string)TPQN){
 //            TP->set("last done",char_level);
             if(ADVANCE_D->advance(this_player(),myclass)){
-               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 
+               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
                   && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
                   tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
                }
@@ -738,7 +738,7 @@ int cmd_advance(string myclass){
 */
 	   }else if(char_level > 50){
             if(ADVANCE_D->advance(this_player(),myclass)){
-               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 
+               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
                   && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
                   tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
                }
@@ -758,7 +758,7 @@ int cmd_advance(string myclass){
 	      }
 	   }else{
             if(ADVANCE_D->advance(this_player(),myclass)){
-               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 
+               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
                   && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
                   tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
                }
@@ -793,7 +793,7 @@ int cmd_advance(string myclass){
          }
       }else{
          if(ADVANCE_D->advance(this_player(),myclass)){
-            if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0 
+            if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
                && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
                tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
             }
@@ -858,86 +858,31 @@ string pick_room()
 
 int help()
 {
-    string costing;
-    int i, flag_noneeded = 0;
-    string *classes, room,place,hold1,hold2;
-    mixed needed_room;
 
-    classes = TP->query_classes();
+    write("
+%^CYAN%^NAME%^RESET%^
 
-    write("This is the command used to advance your character.  Advancement may");
-    write("only occur in a designated training area.  You will also need to have");
-    write("enough experience for that next level!  Designated");
-    write("training areas include, but are not limited to:\n");
-    write("Churches, rooms with boards, and docks\n");
+advance - increase your level
 
-    if(TP->query("new_class_type"))
-    {
-        write("%^BOLD%^When your character has enough experience to advance to levels "
-        "10, 20 and 30, you may instead choose to advance in another class.  You will "
-        "retain all of the abilities of your current class and you will get any new "
-        "abilities that your new class allows.  Only certain class and race combinations "
-        "are allowed.  Please see the individual help files for your race and the class "
-        "that you would like to become for more information.%^RESET%^");
-        if((int)TP->query_character_level() == 10 || (int)TP->query_character_level() == 20 || (int)TP->query_character_level() == 30)
-        {
-            write("%^BOLD%^%^YELLOW%^You are able to multiclass when you advance this level, in "
-            "order to multiclass to a different class, type advance <class_name>%^RESET%^");
-        }
-    }
+%^CYAN%^SYNTAX%^RESET%^
+
+advance [CLASS_NAME]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This is the command used to advance your character. Advancement may only occur in a designated training area.  You will also need to have enough experience for that next level! Designated training areas include, but are not limited to: churches, rooms with boards
+
+When your character has enough experience to advance to levels 10, 20 and 30, you may instead choose to advance in another class. You will retain all of the abilities of your current class and you will get any new abilities that your new class allows. Only certain class and race combinations are allowed. Please see the individual help files for your race and the class that you would like to become for more information.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+abandon, score, classes
+");
 
     pick_mage_school("",TP);
     pick_psion_discipline("",TP);
     pick_fighter_style("",TP);
     pick_warlock_heritage("",TP);
     pick_human_subrace("",TP);
-
-    if(wizardp(TP))
-    {
-        write("\n%^YELLOW%^Wizzes - To get a bugged training room to reset to another, use "
-            "eval return find_player(\"name\")->set(\"advance place\", 0)");
-    }
-/*
-    if(((int)TP->query_lowest_level())%5 == 0 && ((int)TP->query("last done") != (int)TP->query_lowest_level()) && (!avatarp(TP)))
-    {
-        if((int)TP->query_lowest_level() == 5 && file_exists("/d/newbie/ooc/trainer.c") && !TP->query("test_character"))
-        {
-            TP->set("advance place", "/d/newbie/ooc/trainer");
-            return 1;
-        }
-        if(stringp(room = TP->query("advance place")))
-        {
-            if(strsrch(room, "/d/islands/common/eldebaro/newrooms/") != -1 && TP->query_character_level() < 46) TP->delete("advance place");
-            if(strsrch(room, "/d/islands/dallyh/marsh/") != -1) TP->delete("advance place");
-        }
-        if((int)TP->query_lowest_level() > 5 && (string)TP->query("advance place") == "/d/newbie/ooc/trainer") TP->set("advance place", 0);
-        if(!(room = TP->query("advance place")) && !TP->query("test_character"))
-        {
-            room = pick_room();
-            while(!"daemon/room_d"->set_rooms(room,TPQN,TRNROOM))
-            {
-                room=pick_room();
-            }
-        }
-        else
-        {
-            if((string)"/daemon/room_d"->query_needed(room) != ""+TPQN+"&"+TRNROOM+"" )
-            {
-                while(!"/daemon/room_d"->set_rooms(room,TPQN,TRNROOM))
-                {
-                    room=pick_room();
-                }
-            }
-        }
-
-        sscanf(room,"/d/%s/%s/%s",place,hold1,hold2);
-        write("Word of mouth tells you your master is camping in the "+place+" area.");
-        write("Someone mentions that it was in an area that looks like:\n"+room->query_short());
-        write("\nNote that an area is a *general* area.  The roads and "
-            "buildings just outside of Shadow City are in the Shadow "
-            "area, for instance.");
-        return 1;
-    }
-*/
     return 1;
 }
