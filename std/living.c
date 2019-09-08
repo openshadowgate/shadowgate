@@ -637,13 +637,17 @@ int calculate_healing() {
    if(query_stuffed())
    {
        if(!TO->query_property("sustenance") &&
-          !FEATS_D->usable_feat(TO, "timeless body")) healing["stuffed"]--;
+          !FEATS_D->usable_feat(TO, "timeless body") &&
+          !TO->is_undead())
+           healing["stuffed"]--;
       if(healing["stuffed"] < 0) healing["stuffed"] = 0;
    }
    if(query_quenched())
    {
         if(!TO->query_property("sustenance") &&
-           !FEATS_D->usable_feat(TO, "timeless body")) healing["quenched"]--;
+           !FEATS_D->usable_feat(TO, "timeless body") &&
+           !TO->is_undead())
+            healing["quenched"]--;
         if(healing["quenched"] < 0) healing["quenched"] = 0;
    }
    if(query_poisoning()) add_poisoning(-1);

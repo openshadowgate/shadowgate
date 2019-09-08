@@ -4956,10 +4956,6 @@ int age_mod(string stat) {
    string agebracket, *CHILD, *MIDDLE, *OLD, *VENERABLE;
 // these go as per /std/races: str, dex, con, int, wis, cha. Arrays list cumulative modifiers.
    CHILD =     ({ -1,  1, -1, -1, -1,  1 });
-/*   MIDDLE =    ({ -1,  0, -1,  1,  1,  0 });
-   OLD =       ({ -3, -2, -2,  1,  2,  0 });
-   VENERABLE = ({ -4, -3, -3,  2,  3,  0 }); */
-// adjusted from old modifiers to 3e standard. Nienne, 6/13.
    MIDDLE =    ({ -1, -1, -1,  1,  1,  1 });
    OLD =       ({ -2, -2, -2,  2,  2,  2 });
    VENERABLE = ({ -3, -3, -3,  3,  3,  3 });
@@ -4979,13 +4975,19 @@ int age_mod(string stat) {
     {
         case "child": return CHILD[i]; break;
         case "middle":
-            if(FEATS_D->usable_feat(TO, "timeless body") && MIDDLE[i] < 1) return 0;
+            if((FEATS_D->usable_feat(TO, "timeless body") || TO->is_undead()) &&
+               MIDDLE[i] < 1)
+                return 0;
             return MIDDLE[i]; break;
         case "old":
-            if(FEATS_D->usable_feat(TO, "timeless body") && OLD[i] < 1) return 0;
+            if((FEATS_D->usable_feat(TO, "timeless body") || TO->is_undead()) &&
+               OLD[i] < 1)
+                return 0;
             return OLD[i]; break;
         case "venerable":
-            if(FEATS_D->usable_feat(TO, "timeless body") && VENERABLE[i] < 1) return 0;
+            if((FEATS_D->usable_feat(TO, "timeless body") || TO->is_undead()) &&
+               VENERABLE[i] < 1)
+                return 0;
             return VENERABLE[i]; break;
         default: return 0; break;
    }
