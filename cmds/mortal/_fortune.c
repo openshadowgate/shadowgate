@@ -11,3 +11,8 @@ int cmd_fortune()
 
     return 1;
 }
+
+void help()
+{
+    write("%^BLUE%^You do need help, don't you?%^RESET%^");
+}
