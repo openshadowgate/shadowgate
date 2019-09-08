@@ -850,11 +850,11 @@ advance - increase your level
 
 %^CYAN%^SYNTAX%^RESET%^
 
-advance [CLASS_NAME]
+advance [%^ORANGE%^%^ULINE%^CLASS_NAME%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This is the command used to advance your character. Advancement may only occur in a designated training area.  You will also need to have enough experience for that next level! Designated training areas include, but are not limited to: churches, rooms with boards
+This is the command used to advance your character. Advancement may only occur in a designated training area. You will also need to have enough experience for that next level! Designated training areas include, but are not limited to: churches, rooms with boards
 
 When your character has enough experience to advance to levels 10, 20 and 30, you may instead choose to advance in another class. You will retain all of the abilities of your current class and you will get any new abilities that your new class allows. Only certain class and race combinations are allowed. Please see the individual help files for your race and the class that you would like to become for more information.
 
