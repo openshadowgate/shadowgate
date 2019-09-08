@@ -1325,6 +1325,8 @@ int query_encumbrance_percent(){
 
 void increment_stamina(int x)
 {
+    if(TO->is_undead())
+        return;
     used_stamina += x;
     if(used_stamina < 0) used_stamina = 0;
     if(query_condition() < 0)
@@ -1337,6 +1339,7 @@ void use_stamina(int x)
 {
     if(!x) { x = 1; }
     x = x * (query_encumbrance_percent()/25 +1);
+
     //had redundant code that did the same thing as the following function
     //Saide - June 2016
     increment_stamina(x);
