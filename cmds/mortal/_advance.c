@@ -609,10 +609,19 @@ int cmd_advance(string myclass){
 //Multiclassing code
    if(TP->query("new_class_type")){
       char_level = (int)TP->query_character_level();
-      if(char_level != 10 && char_level != 20 && char_level != 30 && char_level != 40
-         && char_level != 50 && char_level != 60 && char_level != 70 && char_level != 80
-         && char_level != 90 && char_level != 100){
-         if(myclass != (string)TP->query("active_class")){
+      if(char_level != 10 &&
+         char_level != 20 &&
+         char_level != 30 &&
+         char_level != 40 &&
+         char_level != 50 &&
+         char_level != 60 &&
+         char_level != 70 &&
+         char_level != 80 &&
+         char_level != 90 &&
+         char_level != 100)
+      {
+         if(myclass != (string)TP->query("active_class"))
+         {
             tell_object(TP,"You may only advance in your active class: "+TP->query("active_class")+"");
             return 1;
          }
@@ -638,8 +647,7 @@ int cmd_advance(string myclass){
       if(member_array(myclass,TP->query_classes()) != -1){
          if(char_level%10 == 0){
             if(!TP->query("confirmed_level_"+char_level)){
-               tell_object(TP,"%^B_RED%^%^CYAN%^Are you sure that you do not want to take a new class at this level?  You will not get another "
-                    "chance until level "+(char_level+10)+".%^RESET%^");
+               tell_object(TP,"%^B_RED%^%^CYAN%^Are you sure that you do not want to take a new class at this level?  You will not get another chance until level "+(char_level+10)+".%^RESET%^");
                tell_object(TP,"Enter <yes> to confirm that you DO NOT want to add another class, anything else to abort.");
                input_to("confirm_advance",TP,char_level,myclass);
                return 1;
@@ -726,16 +734,6 @@ int cmd_advance(string myclass){
                }
 	         return 1;
             }
-//	      TP->set("last done",char_level-1);
-/*
-         }else if(TP->query("advance place") && !TP->query("test_character")){
-            write("You know where you need to go. To be reminded type help advance");
-            if((int)TP->query_class_level(myclass) == 0){
-               TP->remove_class(myclass);
-            }
-            TP->remove_property("multiclassing");
-	      return 1;
-*/
 	   }else if(char_level > 50){
             if(ADVANCE_D->advance(this_player(),myclass)){
                if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
@@ -776,20 +774,6 @@ int cmd_advance(string myclass){
                }
                return 1;
             }
-
-/*
-            room=pick_room();
-	      while(!"daemon/room_d"->set_rooms(room,TPQN,TRNROOM)){
-               room=pick_room();
-	      }
-            if((int)TP->query_class_level(myclass) == 0){
-               TP->remove_class(myclass);
-            }
-            TP->remove_property("multiclassing");
-	      write("At this point you must search out your master and learn from that learned one.");
-	      return 1;
-         }
-*/
          }
       }else{
          if(ADVANCE_D->advance(this_player(),myclass)){

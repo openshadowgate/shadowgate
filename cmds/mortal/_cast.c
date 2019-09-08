@@ -135,12 +135,17 @@ int cmd_cast(string str)
         }
     }
 
-    if(type == "wizard" || type == "mage" || type == "sorcerer" || type == "warlock")
+    if(type == "wizard" ||
+       type == "mage" ||
+       type == "sorcerer" ||
+       type == "warlock")
     {
         armor = TP->all_armour();
         armor = distinct_array(armor);
         armor = filter_array(armor,"armor_filter",TO);
-        if(FEATS_D->usable_feat(TP,"armored caster") || type == "warlock") armor = filter_array(armor,"light_armor_filter",TO);
+        if(FEATS_D->usable_feat(TP,"armored caster") ||
+           type == "warlock")
+            armor = filter_array(armor,"light_armor_filter",TO);
     }
     if(type == "psywarrior" || type == "psion")
     {
