@@ -7,7 +7,7 @@ int mod, duration, extra;
 void check();
 
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -58,22 +58,22 @@ void execute_feat()
         return;
     }
     ::execute_feat();
-    
-    if((int)caster->query_property("using instant feat")) 
+
+    if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
         return;
     }
-    
+
     caster->set_property("using instant feat",1);
     tell_object(caster,"%^RESET%^%^ORANGE%^You pluck the very essence of "
         "planning from the air around you, giving you insight into battle.%^RESET%^");
     tell_room(place,"%^RESET%^%^ORANGE%^Strange symbols flash in "
         ""+caster->QCN+"'s eyes as "+caster->QS+" gives a warcry.%^RESET%^",caster);
-        
+
     mod = ((int)caster->query_guild_level("psywarrior") +9)/10;
-    
+
     intelligence = (int)caster->query_stats("intelligence");
     if(intelligence < 1) intelligence = 1; //shouldn't be possible, but you never know
     switch(intelligence)
@@ -84,12 +84,12 @@ void execute_feat()
     case 21..23: mod += 3;  break;
     default:     mod += 4;  break;
     }
-    
+
     if(FEATS_D->usable_feat(caster,"battle psyche")) { extra = 4; }
-    
+
     caster->add_attack_bonus(mod + extra);
     caster->add_damage_bonus(mod + extra);
-    
+
     duration = (int)caster->query_guild_level("psywarrior")/10;
     if(duration < 1) duration = 1;
     duration += 5;
@@ -102,9 +102,9 @@ void execute_feat()
 }
 
 
-void execute_attack() 
+void execute_attack()
 {
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
@@ -156,7 +156,7 @@ void check()
                 caster->execute_attack();
             }
         }
-        if(FEATS_D->usable_feat("battle psyche"))
+        if(FEATS_D->usable_feat(caster, "battle psyche"))
         {
             tell_object(caster,"%^BOLD%^%^RED%^Your mental dedication to battle guides "
                 "you into an opening for a perfect strike!");
@@ -172,7 +172,7 @@ void dest_effect()
     ::dest_effect();
     mod = mod + extra;
     mod = mod*(-1);
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         remove_feat(TO);
         return;
@@ -184,4 +184,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

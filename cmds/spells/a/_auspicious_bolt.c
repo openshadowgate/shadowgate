@@ -64,7 +64,7 @@ void spell_effect(int prof)
            "striking "+target->QO+"!",({target,caster}));
         tell_object(target,"%^BOLD%^%^BLUE%^"+caster->QCN+" points "+caster->QP+" "+
             "palm at you and an iridescent bolt flies forth, striking you!"+
-            "\n %^CYAN%^You feel your fate shifting!");
+            "\n%^CYAN%^You feel your fate shifting!");
         tell_object(caster,"%^BOLD%^%^BLUE%^You point the palm of your hand "+
             "at "+target->QCN+" and feel luck surge through you, striking"+
            " "+target->QO+" in an iridescent bolt!");
@@ -78,34 +78,29 @@ void spell_effect(int prof)
     addSpellToCaster();
 }
 
+//taken from aegis of fate since previous iteration was not working properly
 void execute_attack()
 {
-    if (!flag)
-    {
-        ::execute_attack();
-        flag = 1;
-        return;
+    if (!objectp(target)){
+       dest_effect();
+       return;
     }
-
-    if (!objectp(target))
-    {
-        dest_effect();
-        return;
+    ::execute_attack();
+    if(!random(10)){
+        tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" is surrounded by a surge of energy.", target);
+        tell_object(target,"%^BOLD%^%^BLUE%^You are surrounded by iridescent energy.");
+        target->add_attack_bonus(-1 * mybonus);
+        target->add_damage_bonus(-1 * mybonus);
+        mybonus = random(clevel/10)+1;
+        target->add_attack_bonus(mybonus);
+        target->add_damage_bonus(mybonus);
+        counter++;
     }
-    tell_room(place,"%^BOLD%^%^BLUE%^"+target->QCN+" is surrounded by a surge of energy.", target);
-    tell_object(target,"%^BOLD%^%^BLUE%^You are surrounded by iridescent energy.");
-    target->add_attack_bonus(-1 * mybonus);
-    target->add_damage_bonus(-1 * mybonus);
-    mybonus = random(clevel/10)+1;
-    target->add_attack_bonus(mybonus);
-    target->add_damage_bonus(mybonus);
-    counter++;
-    if (counter > clevel)
-    {
-        dest_effect();
-        return;
+    if (counter > clevel){
+       dest_effect();
+       return;
     }
-    place->addObjectToCombatCycle(TO,1);
+    environment(target)->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect()
@@ -121,7 +116,7 @@ void dest_effect()
         target->add_damage_bonus(-1 * mybonus);
         target->remove_property("luckbolted");
         tell_object(target,"%^BOLD%^%^BLUE%^The energy around you fades away.");
-        tell_room(place,"%^BOLD%^%^BLUE%^The iridescent force around "+target->QCN+" fades away.", target);
+        tell_room(environment(target),"%^BOLD%^%^BLUE%^The iridescent force around "+target->QCN+" fades away.", target);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
