@@ -1,13 +1,18 @@
+/**
+ * @file
+ * @brief New character generation
+ */
+
 /*****************************************************************************************
 At some point people stopped to update this comment. Some data might be irrelevant.
 
-Should allow any player the ability to recreate themselves up to the point at which they are no longer a newbie - supports 
+Should allow any player the ability to recreate themselves up to the point at which they are no longer a newbie - supports
 resetting choices up to the point when the character is ready to be finalized
-resetting race/myclass/subrace essentially requires everything chosen after 
+resetting race/myclass/subrace essentially requires everything chosen after
 either of those to be rechosen - removes the inventory of the player and sets them back to level 1
-most other resets do not work this way 
+most other resets do not work this way
 stats being reset requires that hair color/eye color and body type be chosen
-alignment being reset requires rechoosing "unique" choice (mage school, discipline, etc.) and deity 
+alignment being reset requires rechoosing "unique" choice (mage school, discipline, etc.) and deity
 
 
 Order of char creation
@@ -17,28 +22,28 @@ Unique myclass choice moved after alignment - simply because of the way that war
 Current Order = myclass -> race -> subrace -> [GENETICS] stats -> hair color -> eye color -> height -> weight -> body type -> age [END GENETICS] -> alignment -> unique myclass choice -> deity -> review -> finalize
 
 This order can be changed relatively easily though there are a few places in the code in which it will need to be changed
-the function build_restrictions() is used for myclass/race and will need to point to the appropriate place 
-stats are mostly seperate - so they will also need to point to the correct place 
-other than that the function choose() would need to be modified 
+the function build_restrictions() is used for myclass/race and will need to point to the appropriate place
+stats are mostly seperate - so they will also need to point to the correct place
+other than that the function choose() would need to be modified
 order is controlled by the MyPlace string variable - this seemed the simplest way to me
 
 in the future any new classes/races will be automatically used when added to their proper folders in /std/races or /std/class
 
 genetics.h contains tester information, stats, height, weight, body type, age stuff, and
-it contains RESET_TYPES which is greatly important to the reset function 
-there are numerous reset functions() that greatly depend on the order 
-above 
+it contains RESET_TYPES which is greatly important to the reset function
+there are numerous reset functions() that greatly depend on the order
+above
 
-also adding "Recommended Stats" to genetics.h to contain what stats will look like when 
-the recommended command is used during the stat phase of creation. 
+also adding "Recommended Stats" to genetics.h to contain what stats will look like when
+the recommended command is used during the stat phase of creation.
 
 blurbs.h contains short information for myclass/race/subrace/deity selections
 
 hair and eye colors, as well as subraces are now located in the correct race file in /std/races/
 
-unique myclass - stuff - such as warlock heritages are located in the correct myclass file in /std/myclass 
+unique myclass - stuff - such as warlock heritages are located in the correct myclass file in /std/myclass
 myclass files that previously received items at the end of creation have a function at the end
-of their files to be ran when a character is finalized 
+of their files to be ran when a character is finalized
 
 the function name is newbie_func() - so if a new myclass needs to receive something or an old one for that matter
 simply add this function in the myclass file - see /std/myclass/mage.c for an example
@@ -110,7 +115,7 @@ void build_weight();
 void build_body_type();
 void build_age();
 void build_alignment();
-void build_deity();   
+void build_deity();
 void build_final();
 //END OF CHARACTER BUILDING FUNCTIONS
 
@@ -142,11 +147,11 @@ void pick_deity();
 mixed display_my_character();
 void build_restrictions(string type);
 
-//Confirmation prompt for when reset is used 
-//after creation this will be changed 
-//to be available only up to the point where 
+//Confirmation prompt for when reset is used
+//after creation this will be changed
+//to be available only up to the point where
 //they are no longer newbies and only from places
-//where they could advance in Level 
+//where they could advance in Level
 void confirm_reset(string str, string what)
 {
     if(str != "yes")
@@ -157,7 +162,7 @@ void confirm_reset(string str, string what)
     }
     else
     {
-        if(!stringp(what) && what != "") 
+        if(!stringp(what) && what != "")
         {
             tell_object(ETO, "\nResetting character and beginning anew!");
             ETO->move("/d/shadowgate/setter");
@@ -170,12 +175,12 @@ void confirm_reset(string str, string what)
     }
     return;
 }
-//END 
+//END
 
 
-//storing everything possible in the mapping up until they review/accept it all 
-//this will hopefully allow for them to make changes up until that point should they want 
-//to do so - could be possible to even allow them the ability to reset all the way up 
+//storing everything possible in the mapping up until they review/accept it all
+//this will hopefully allow for them to make changes up until that point should they want
+//to do so - could be possible to even allow them the ability to reset all the way up
 //until they are no longer a newbie - Saide
 
 //Reset Functions
@@ -183,7 +188,7 @@ varargs void full_reset()
 {
         MyCharacterInfo = (["stats" : ([ "charisma" : 6, "intelligence" : 6, "dexterity" : 6, "constitution" : 6, "wisdom" : 6, "strength" : 6]) ]);
         MyCharacterInfo += (["race" : (["race name" : "NIL", "hair color" : "NIL", "eye color" : "NIL", "height" : 0, "weight" : 0, "age" : 0, "restricted alignments" : ({}), "subrace" : "NIL" ]) ]);
-        MyCharacterInfo += (["myclass" : (["minimum stats" : ([]), "myclass name" : "NIL", "available races" : ({}), "restricted alignments" : ({}), "available subraces" : ({}) ]) ]);    
+        MyCharacterInfo += (["myclass" : (["minimum stats" : ([]), "myclass name" : "NIL", "available races" : ({}), "restricted alignments" : ({}), "available subraces" : ({}) ]) ]);
         MyCharacterInfo["myclass"] += (["alignment" : 0, "align title" : "NIL", "deity" : "NIL", "unique choice" : "NIL", "unique type" : "NIL" ]);
         MyCharacterInfo["race"] += (["psuedo race" : "NIL", "weight choice" : "NIL", "height choice" : "NIL", "age choice" : "NIL", "body type" : "NIL"]);
         BuildArray = ({});
@@ -226,14 +231,14 @@ void clear_age()
     MyCharacterInfo["race"]["age choice"] = "NIL";
 }
 
-void clear_hair() 
-{ 
-    MyCharacterInfo["race"]["hair color"] = "NIL"; 
+void clear_hair()
+{
+    MyCharacterInfo["race"]["hair color"] = "NIL";
 }
 
-void clear_eyes() 
-{ 
-    MyCharacterInfo["race"]["eye color"] = "NIL"; 
+void clear_eyes()
+{
+    MyCharacterInfo["race"]["eye color"] = "NIL";
 }
 
 void clear_body_type()
@@ -247,7 +252,7 @@ void clear_weight()
     MyCharacterInfo["race"]["weight choice"] = "NIL";
 }
 
-void clear_height() 
+void clear_height()
 {
     MyCharacterInfo["race"]["height"] = 0;
     MyCharacterInfo["race"]["height choice"] = "NIL";
@@ -275,7 +280,7 @@ varargs void reset_character_info(string what, int flag)
     if(!flag)
     {
         if(!objectp(EETO)) return 0;
-        if(!EETO->query_property("training")) 
+        if(!EETO->query_property("training"))
         {
             tell_object(ETO, "In order to reset anything with the object you must be in a place "+
             "that allows you to advance!");
@@ -293,7 +298,7 @@ varargs void reset_character_info(string what, int flag)
             tell_object(ETO, "\nERROR: You have not yet made it to the "+what+" step in creation!");
             return 1;
         }
-        else if(what == "race" || what == "class" || "what" == "subrace") 
+        else if(what == "race" || what == "class" || "what" == "subrace")
         {
             tell_object(ETO, "\nWARNING: This will reset your "+what+" choice and ALL others made after it. Do you wish to continue?");
         }
@@ -302,7 +307,7 @@ varargs void reset_character_info(string what, int flag)
         input_to("confirm_reset", what);
         return 1;
     }
-    if(!stringp(what) || what == "") 
+    if(!stringp(what) || what == "")
     {
         full_reset();
         MyPlace = "myclass";
@@ -325,7 +330,7 @@ varargs void reset_character_info(string what, int flag)
                     clear_deity();
                     if(FirstBuild) { BuildArray = ({"alignment", "unique", "deity"}); EndAt = "finalize"; }
                 }
-                else 
+                else
                 {
                     clear_unique();
                     if(FirstBuild) { BuildArray = ({"unique"}); EndAt = "finalize"; }
@@ -446,7 +451,7 @@ void create()
     set_property("soulbound", 1);
     StartFrom = "";
     reset_character_info("", 1);
-    FinalFlag = 1;    
+    FinalFlag = 1;
 }
 
 void init()
@@ -459,7 +464,7 @@ void init()
     add_action("reroll", "reroll");
     add_action("add_stat", "add");
     add_action("ShowStep", "review");
-    add_action("choose","pick");  
+    add_action("choose","pick");
     add_action("display_my_character", "check");
     add_action("finalize_character", "finalize");
     add_action("brief", "brief");
@@ -481,7 +486,7 @@ int brief(string str)
     if(!objectp(TO)) return 0;
     if(!objectp(ETO)) return 0;
     if(base_name(EETO) != "/d/shadowgate/setter") return 0;
-    if(MyBrief) 
+    if(MyBrief)
     {
         MyBrief = 0;
         tell_object(ETO, "\n%^BOLD%^%^WHITE%^Turning %^BOLD%^%^CYAN%^off brief "+
@@ -538,47 +543,47 @@ void display_stats(int flag)
     tell_object(ETO, "%^BOLD%^%^GREEN%^ dexterity    --- %^BOLD%^%^WHITE%^"+MyCharacterInfo["stats"]["dexterity"]);
     tell_object(ETO, "%^BOLD%^%^GREEN%^ constitution --- %^BOLD%^%^WHITE%^"+MyCharacterInfo["stats"]["constitution"]);
     tell_object(ETO, "%^BOLD%^%^GREEN%^ wisdom       --- %^BOLD%^%^WHITE%^"+MyCharacterInfo["stats"]["wisdom"]);
-    tell_object(ETO, "%^BOLD%^%^GREEN%^ charisma     --- %^BOLD%^%^WHITE%^"+MyCharacterInfo["stats"]["charisma"]);   
+    tell_object(ETO, "%^BOLD%^%^GREEN%^ charisma     --- %^BOLD%^%^WHITE%^"+MyCharacterInfo["stats"]["charisma"]);
     header();
-    
-    if(bonus == 0) 
-    {    
+
+    if(bonus == 0)
+    {
         tell_object(ETO, "\n%^BOLD%^%^WHITE%^You are finished. Please type %^MAGENTA%^done%^WHITE%^ to continue or "
-        "%^MAGENTA%^reroll%^WHITE%^ to start again.%^RESET%^");        
+        "%^MAGENTA%^reroll%^WHITE%^ to start again.%^RESET%^");
         if(flag) return;
     }
     else if(flag != 1) tell_object(ETO, "%^YELLOW%^You have "+bonus+" points left to add.%^RESET%^");
-    if(flag == 2) tell_object(ETO, "%^BOLD%^%^YELLOW%^ Syntax: add # to stat");   
-    
+    if(flag == 2) tell_object(ETO, "%^BOLD%^%^YELLOW%^ Syntax: add # to stat");
+
     if(bonus && member_array(MyCharacterInfo["myclass"]["myclass name"], keys(RECOMMENDED_STATS)) != -1)
     {
         tell_object(ETO, "\n%^BOLD%^%^WHITE%^You may type <%^CYAN%^recommended%^BOLD%^%^WHITE%^> to have "+
         "your stats automatically set to what is recommended for your myclass.");
     }
-    if(bonus) 
+    if(bonus)
     {
         tell_object(ETO, "\n%^BOLD%^%^WHITE%^You may type <%^CYAN%^random%^BOLD%^%^WHITE%^> to have "+
-        "your stats completely randomized.%^RESET%^");    
+        "your stats completely randomized.%^RESET%^");
     }
     return;
 }
 
-int add_stat(string str) 
+int add_stat(string str)
 {
     int amount;
     string stat;
     if(MyPlace != "stats") return 0;
-    if(!str) 
+    if(!str)
     {
         display_stats(2);
         return 1;
     }
-    if(sscanf(str,"%d to %s",amount,stat)!= 2) 
+    if(sscanf(str,"%d to %s",amount,stat)!= 2)
     {
         tell_object(ETO, "%^BOLD%^%^YELLOW%^Syntax: add # to stat");
         return 1;
     }
-    if(amount > bonus) 
+    if(amount > bonus)
     {
         tell_object(ETO, "%^BOLD%^%^RED%^ You have only %^WHITE%^"+bonus+"%^BOLD%^%^RED%^ points left to apply.");
         return 1;
@@ -589,17 +594,17 @@ int add_stat(string str)
     if(stat == "con") stat = "constitution";
     if(stat == "cha") stat = "charisma";
     if(stat == "wis") stat = "wisdom";
-    if(member_array(stat, STATS) == -1) 
+    if(member_array(stat, STATS) == -1)
     {
         tell_object(ETO, "%^BOLD%^%^CYAN%^Try a stat that you have.");
         return 1;
     }
-    if((int)MyCharacterInfo["stats"][stat]+amount > 18 ) 
+    if((int)MyCharacterInfo["stats"][stat]+amount > 18 )
     {
         tell_object(ETO, "%^BOLD%^%^RED%^That score will exceed 18. %^WHITE%^Please reenter.");
         return 1;
     }
-    if(amount < 0) 
+    if(amount < 0)
     {
         tell_object(ETO, "%^BOLD%^%^GREEN%^You cannot subtract points. Please %^WHITE%^reroll%^GREEN%^ if you need to start again.");
         return 1;
@@ -607,10 +612,10 @@ int add_stat(string str)
     MyCharacterInfo["stats"][stat] += amount;
     bonus -= amount;
     display_stats(0);
-    return 1;    
+    return 1;
 }
 
-int reroll() 
+int reroll()
 {
     if(MyPlace != "stats") return 0;
     bonus = MAXPOINTS;
@@ -619,13 +624,13 @@ int reroll()
     return 1;
 }
 
-int okdone() 
+int okdone()
 {
     if(MyPlace != "stats" || bonus) return 0;
     ETO->set_stats("charisma", MyCharacterInfo["stats"]["charisma"]);
     if(MyCharacterInfo["race"]["subrace"] != "NIL") ETO->set("subrace", MyCharacterInfo["race"]["subrace"]);
     MyPlace = "hair color";
-    ProcessStep();    
+    ProcessStep();
     return 1;
 }
 
@@ -634,7 +639,7 @@ int recommended()
     string temp, stat, *temp_stats;
     mapping recommended_stats;
     int x;
-    
+
     if(!objectp(TO)) return 0;
     if(!objectp(ETO)) return 0;
     if(MyPlace != "stats") return 0;
@@ -671,7 +676,7 @@ int randomize()
             if(cur_stat == 18) continue;
             to_inc = 1 + random(2) + random(3);
             if((bonus - to_inc) <= 0) { to_inc = bonus; bonus = 0; }
-            else bonus -= to_inc;            
+            else bonus -= to_inc;
             if((cur_stat + to_inc) > 18)
             {
                 cur_stat += to_inc;
@@ -698,7 +703,7 @@ mixed display_my_character()
 {
     string temp, r, c, re, tmp, b, g, em, MyFile, by;
     int i, len, *race_mods, flag;
-    
+
     r = "%^BOLD%^%^GREEN%^";
     c = "%^BOLD%^%^WHITE%^";
     b = "%^BOLD%^%^BLACK%^";
@@ -707,7 +712,7 @@ mixed display_my_character()
     em = "%^BOLD%^%^CYAN%^";
     by = "%^BOLD%^%^YELLOW%^";
     len = 16;
-    
+
     //if(MyPlace != "finalize") return 0;
     tell_object(ETO, "\n%^BOLD%^%^WHITE%^Your current choices are as follows, please note that character name "+
     "and gender CANNOT be reset.\n");
@@ -721,11 +726,11 @@ mixed display_my_character()
     }
     tell_object(ETO, "\t"+arrange_string(r+"Race "+b+"---------------------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["race name"]));
     tmp = MyCharacterInfo["race"]["subrace"];
-    if(tmp != "NIL") 
+    if(tmp != "NIL")
     {
         tell_object(ETO, "\t"+arrange_string(r+"Subrace "+b+"--------------", len)+g+ " : "+re+c+capitalize(tmp));
     }
-    tmp = MyCharacterInfo["race"]["psuedo race"]; 
+    tmp = MyCharacterInfo["race"]["psuedo race"];
     if(tmp != "NIL")
     {
         tell_object(ETO, "\t"+arrange_string(r+"Parent Lineage "+b+"------------", len)+g+ " : "+re+c+capitalize(tmp));
@@ -735,7 +740,7 @@ mixed display_my_character()
     {
         temp = MyCharacterInfo["race"]["subrace"];
         if(temp != "NIL") race_mods = MyFile->stat_mods(temp);
-        else race_mods = MyFile->stat_mods("");        
+        else race_mods = MyFile->stat_mods("");
     }
     for(i = 0;i < sizeof(STATS);i++)
     {
@@ -743,7 +748,7 @@ mixed display_my_character()
         temp += re+c+ arrange_string(MyCharacterInfo["stats"][STATS[i]], 6);
         if(pointerp(race_mods))
         {
-            if(race_mods[i] != 0) 
+            if(race_mods[i] != 0)
             {
                 if(race_mods[i] > 0) temp += " (+"+em+race_mods[i]+re+c+")";
                 else temp += " (%^BOLD%^%^RED%^"+race_mods[i]+re+c+")";
@@ -761,7 +766,7 @@ mixed display_my_character()
     tell_object(ETO, "\t"+arrange_string(r+"Age "+b+"--------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["age choice"]));
     tell_object(ETO, "\t"+arrange_string(r+"Alignment "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["align title"]));
     tell_object(ETO, "\t"+arrange_string(r+"Deity "+b+"------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["deity"]));
-    
+
     tell_object(ETO, "\n"+c+"Please note that you may "+em+"reset "+c+
     "any of these choices up to the point at which you are no longer a newbie "+
     "character."+re);
@@ -769,21 +774,21 @@ mixed display_my_character()
     tell_object(ETO, "\n"+c+"If you choose to reset class, race, subrace, or parent lineage, you will "+
     em+"LOSE"+c+" ALL of your "+em+"INVENTORY (except for vials)"+c+", "+em+"EXPERIENCE"+c+", and be set to "+em+"LEVEL 1"+
     c+". You will also be moved back to the start of creation.");
-    
+
     tell_object(ETO, "\n"+by+"Syntax example: "+c+"<"+em+"reset class"+c+
     "> will reset your class and every decision made after it. NOTE: resetting race, myclass, or subrace will "+
     "reset every choice made after it and will reset your character and inventory. %^RESET%^");
     tell_object(ETO, "\n"+by+"NOTE: "+c+"<"+em+"reset hair color"+c+">"+
     " will reset only your hair color, most resets work this way though some are dependent on others. For example, "+
     "resetting stats will also reset hair and eye color."+re);
-    
+
     if(flag)
     {
         tell_object(ETO, "\n"+by+"NOTE:"+c+" Racial stat modifiers are shown next to your stats above. These will be "+
         "applied when your character is finalized. "+em+"Numbers"+c+" indicate an increase, %^BOLD%^%^RED%^"+
         "numbers"+c+" indicate a decrease.");
     }
-    
+
     if(MyPlace == "finalize" && !BeenBuilt)
     {
         tell_object(ETO, "\n"+c+"If you are happy with your current choices "+
@@ -799,7 +804,7 @@ mixed display_my_character()
 //END
 
 
-//Character Building/Finalizing Functions 
+//Character Building/Finalizing Functions
 void finalize_character()
 {
     object desc;
@@ -809,7 +814,7 @@ void finalize_character()
     //doing this only the first time they finalize (hopefully)
     BeenBuilt = 1;
     if(FirstBuild == 1)
-    {    
+    {
         ETO->convert_relationships();
     }
     if(objectp(to_object("/daemon/description_d")))
@@ -902,7 +907,7 @@ void build_deity()
     }
     ETO->delete("god change");
     ETO->set("god changed",1);
-    ETO->add_mp(ETO->query_max_mp()); 
+    ETO->add_mp(ETO->query_max_mp());
     return 1;
 }
 
@@ -936,7 +941,7 @@ void build_final()
     }
     ETO->set("new_hp_rolled_two",1);
     ETO->set("no pk",1);
-    ETO->set("new_hm_cap_set",1);    
+    ETO->set("new_hm_cap_set",1);
     ETO->set("new_stat_type2", 1);
     classes = ETO->query_classes();
     i = sizeof(classes);
@@ -953,7 +958,7 @@ void build_final()
     ETO->add_hp(TP->query_max_hp());
     ETO->update_channels();
     ETO->new_body();
-    ETO->init_skills("blah");  
+    ETO->init_skills("blah");
     ETO->set("align ok",1);
     for(j=0;j<i;j++) ETO->add_search_path("/cmds/"+classes[j]);
     if(ETO->is_class("psywarrior"))
@@ -965,16 +970,16 @@ void build_final()
         "to prepare your points for use.%^RESET%^");
     }
     ETO->force_me("fixspells");
-    ETO->force_me("save");    
+    ETO->force_me("save");
     feats = (int)ETO->query_other_feats_gained();
     feats += (int)ETO->query("free_feats");
     ETO->clear_feats();
     ETO->set("free_feats",feats);
-    ADVANCE_D->advance(TP,classes[0]);  
+    ADVANCE_D->advance(TP,classes[0]);
     ETO->set("active myclass", classes[0]);
     ETO->set("new_class_type", 1);
     ETO->set_posed(classes[0]);
-    if(ETO->query("new_class_type")) catch("/cmds/mortal/_advance.c"->add_class_feats(ETO,ETO->query_class()));    
+    if(ETO->query("new_class_type")) catch("/cmds/mortal/_advance.c"->add_class_feats(ETO,ETO->query_class()));
     ETO->set("hp_array",0);
     ETO->make_new_hitpoint_rolls(ETO);
     ETO->delete("stat_points_gained");
@@ -1090,11 +1095,11 @@ void build_myclasses()
         myclass = classes[i];
         ETO->set_guild_level(myclass,0);
         ETO->set_mlevel(myclass,0);
-        ETO->remove_class(myclass);        
+        ETO->remove_class(myclass);
         if(myclass == "mage" || myclass == "bard") { ETO->set_school(0); }
         if(myclass == "mage" || myclass == "sorcerer" || myclass == "psywarrior" || myclass == "warlock" || myclass == "psion") { ETO->reset_mastered(); }
         if(myclass == "psion") { ETO->set_discipline(0); }
-        if(myclass == "warlock") { ETO->delete("warlock heritage"); }       
+        if(myclass == "warlock") { ETO->delete("warlock heritage"); }
         if(myclass == "cleric" || myclass == "ranger" || myclass == "paladin" || myclass == "antipaladin") { ETO->set_divine_domain(({})); }
         if(myclass == "fighter") { TP->set_fighter_style(0); }
         continue;
@@ -1112,8 +1117,8 @@ void build_myclasses()
 }
 //END OF BUILDING FUNCTIONS
 
-//Function that uses MyPlace Variable to execute functions 
-//relating to customization choices a player can make 
+//Function that uses MyPlace Variable to execute functions
+//relating to customization choices a player can make
 void ShowStep()
 {
     if(MyPlace == "class") MyPlace = "myclass";
@@ -1144,7 +1149,7 @@ void ShowStep()
         case "deity":
             pick_deity();
             break;
-        case "hair color": case "eye color": 
+        case "hair color": case "eye color":
         case "height": case "weight": case "body type":
         case "age":
             pick_genetics();
@@ -1161,11 +1166,11 @@ void set_myPlace(string str) { MyPlace = str; }
 
 int ProcessStep()
 {
-    if(!stringp(MyPlace)) 
+    if(!stringp(MyPlace))
     {
         reset_character_info();
     }
-    if(EndAt != "") 
+    if(EndAt != "")
     {
         if(pointerp(BuildArray))
         {
@@ -1176,7 +1181,7 @@ int ProcessStep()
     }
     ShowStep();
 }
-//End 
+//End
 
 
 //Function that builds a list of character classes
@@ -1186,29 +1191,29 @@ void do_character_class()
     int i;
     object class_ob;
     myname = TP->query_name();
-    //all possible classes - Saide   
+    //all possible classes - Saide
     possible_classes = get_dir("/std/class/*.c");
     possible_classes = explode(implode(possible_classes, ""), ".c");
     my_choices = ({});
-    if(sizeof(possible_classes)) 
+    if(sizeof(possible_classes))
     {
-        for(i=0;i<sizeof(possible_classes);i++) 
-        {            
-            //not requiring that knights start as cavaliers anymore - myclass is 
+        for(i=0;i<sizeof(possible_classes);i++)
+        {
+            //not requiring that knights start as cavaliers anymore - myclass is
             //pretty pointless outside of that - Saide
             if(possible_classes[i] == "cavalier" || possible_classes[i] == "antipaladin") continue;
             //if(possible_classes[i] == "antipaladin") continue;
             //Tester info added for ease of testing new classes ~Circe~ 9/3/15
-            
+
             class_ob = find_object_or_load("/std/class/"+possible_classes[i]+".c");
             if(objectp(class_ob) && class_ob->is_prestige_class()) { continue; }
-            
+
             if(sizeof(TESTCLASS))
             {
                 if(member_array(possible_classes[i],TESTCLASS) != -1)
                 {
                     if(member_array(myname,TESTERS) == -1){ continue; }
-                }                              
+                }
             }
             my_choices += ({possible_classes[i]});
             continue;
@@ -1218,7 +1223,7 @@ void do_character_class()
 }
 //end
 
-//Display the list of choices a player can make 
+//Display the list of choices a player can make
 void display_my_choices()
 {
     int i;
@@ -1226,7 +1231,7 @@ void display_my_choices()
     if(!objectp(TO)) return;
     if(member_array(MyPlace, DONTSORT) == -1) my_choices = filter_array(my_choices, "alphabetical_sort", FILTERS_D);
     header();
-    for(i=0;i<sizeof(my_choices);i++) 
+    for(i=0;i<sizeof(my_choices);i++)
     {
         tell_object(ETO, "  %^BOLD%^%^MAGENTA%^"+capitalize(my_choices[i])+"");
     }
@@ -1236,7 +1241,7 @@ void display_my_choices()
 }
 //End
 
-//Function that auto picks a choice if there is only 1 option 
+//Function that auto picks a choice if there is only 1 option
 int check_choices()
 {
     if(!sizeof(my_choices)) return 0;
@@ -1248,9 +1253,9 @@ int check_choices()
 //END
 
 
-//Function for building unique choices list for classes that have uncommon choices 
-//such as psion discipline, mage school, or fighter style 
-//special case in this function to point them to the help 
+//Function for building unique choices list for classes that have uncommon choices
+//such as psion discipline, mage school, or fighter style
+//special case in this function to point them to the help
 //files for their unique choice
 void pick_my_unique()
 {
@@ -1258,7 +1263,7 @@ void pick_my_unique()
     if(!objectp(ETO)) return;
     if(!objectp(TO)) return;
     MyFile = "/std/class/"+ MyCharacterInfo["myclass"]["myclass name"] +".c";
-    if(!file_exists(MyFile)) 
+    if(!file_exists(MyFile))
     {
         tell_object(ETO, "ERROR: Could not find your class file, please notify a wiz!");
         return;
@@ -1277,7 +1282,7 @@ void pick_my_unique()
         display_my_choices();
         tell_object(ETO,"%^BOLD%^%^WHITE%^Type %^BOLD%^<%^CYAN%^pick "+my_choices[0]+"%^BOLD%^%^WHITE%^> to set your "+unique+
         " to "+my_choices[0]+".");
-        temp = "%^BOLD%^%^WHITE%^You may review <%^CYAN%^help "+UNIQUE_HELP[unique];  
+        temp = "%^BOLD%^%^WHITE%^You may review <%^CYAN%^help "+UNIQUE_HELP[unique];
         temp += "%^BOLD%^%^WHITE%^> to get further information.%^RESET%^";
         tell_object(ETO, temp);
         return;
@@ -1301,7 +1306,7 @@ void pick_race()
     tell_object(ETO, "%^BOLD%^%^WHITE%^Note: only races with no level adjustment can be rolled in creation, unless you have already linked to an account with experienced characters.\n");
     tell_object(ETO, "%^BOLD%^%^WHITE%^Please refer to <help request characters> for details on playing level-adjustment races.\n");
     tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick racename%^BLACK%^> %^WHITE%^to pick your race.");
-    tell_object(ETO, "%^YELLOW%^Syntax example: %^WHITE%^pick "+my_choices[0]+" %^YELLOW%^will make you a "+my_choices[0]+".");   
+    tell_object(ETO, "%^YELLOW%^Syntax example: %^WHITE%^pick "+my_choices[0]+" %^YELLOW%^will make you a "+my_choices[0]+".");
 }
 //END
 
@@ -1313,13 +1318,13 @@ void pick_special(string str)
     if(!objectp(TO)) return;
     if(!stringp(str)) str = MyCharacterInfo["race"]["race name"];
     if(!stringp(str)) return;
-    if(str == "half-orc") 
+    if(str == "half-orc")
     {
         my_choices = ({"human", "orc"});
         tell_object(ETO, "\n%^BOLD%^%^GREEN%^You may decide which parent "+
         "you take after the most, your human side or your orcish side.");
     }
-    else if(str == "half-elf") 
+    else if(str == "half-elf")
     {
         my_choices = ({"human", "elf"});
         tell_object(ETO, "\n%^BOLD%^%^GREEN%^You may decide which parent you take after "+
@@ -1346,12 +1351,12 @@ void pick_sub_race()
         display_my_choices();
     }
     tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick subrace%^BLACK%^> %^WHITE%^to pick your subrace.");
-    tell_object(ETO, "%^YELLOW%^Syntax example: %^WHITE%^pick "+my_choices[0]+" %^YELLOW%^will make you a "+my_choices[0]+".");  
-    if(MyCharacterInfo["race"]["race name"] == "human" || MyCharacterInfo["race"]["pseudo race"] == "human") 
+    tell_object(ETO, "%^YELLOW%^Syntax example: %^WHITE%^pick "+my_choices[0]+" %^YELLOW%^will make you a "+my_choices[0]+".");
+    if(MyCharacterInfo["race"]["race name"] == "human" || MyCharacterInfo["race"]["pseudo race"] == "human")
     {
         tell_object(ETO, "%^BOLD%^You may type help <%^BOLD%^%^CYAN%^human ethnicities%^RESET%^%^BOLD%^> to see relevant in depth information about each of the above.%^RESET%^");
     }
-    else 
+    else
     {
         tell_object(ETO, "%^BOLD%^You may type help <%^BOLD%^%^CYAN%^"+MyCharacterInfo["race"]["race name"]+"%^RESET%^%^BOLD%^> to see relevant in depth information about each of the above.%^RESET%^");
     }
@@ -1359,7 +1364,7 @@ void pick_sub_race()
 //END
 
 
-//genetics related choices - such as hair/eye color, height, weight, body type, and age 
+//genetics related choices - such as hair/eye color, height, weight, body type, and age
 void pick_genetics()
 {
     int x, max_weight, *weights;
@@ -1395,7 +1400,7 @@ void pick_genetics()
         case "age":
             my_choices = AGES;
 //            if(MyCharacterInfo["race"]["race name"] == "shade") my_choices -= ({"child"});
-            break;     
+            break;
         case "weight":
             my_choices = keys(WEIGHT_CATS);
             if(!sizeof(my_choices)) tell_object(ETO, "%^BOLD%^%^MAGENTA%^Error generating "+MyPlace+" list - please contact a wiz.");
@@ -1410,7 +1415,7 @@ void pick_genetics()
             tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick "+my_choices[0]+"%^BLACK%^> %^WHITE%^"+
             "to set your "+MyPlace+" to "+WEIGHT_CATS[my_choices[0]]["choice"]+".");
             return;
-            break;        
+            break;
         case "body type":
             weights = PLAYER_D->calc_weight(ETO, (int)MyCharacterInfo["race"]["weight"]);
             max_weight = weights[1];
@@ -1422,7 +1427,7 @@ void pick_genetics()
             else if(targ > 110 && targ <= 120) targ = 5;
             else if(targ > 120 && targ <= 130) targ = 6;
             else targ = 7;
-            my_choices = BODY_TYPES[to_int(targ)];            
+            my_choices = BODY_TYPES[to_int(targ)];
             break;
     }
     if(check_choices()) return;
@@ -1430,27 +1435,27 @@ void pick_genetics()
     else display_my_choices();
     if(sizeof(my_choices)) { tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick "+my_choices[0]+"%^BLACK%^> %^WHITE%^to set your "+MyPlace+" to "+my_choices[0]+"."); }
     return;
-    
+
 }
 //END
 
 
 //Function that shows available classes
-void pick_class() 
+void pick_class()
 {
     if(!objectp(ETO)) return;
     if(!objectp(TO)) return;
-    tell_object(ETO, "%^BOLD%^%^RED%^A grand voice booms from within your mind.");   
+    tell_object(ETO, "%^BOLD%^%^RED%^A grand voice booms from within your mind.");
     tell_object(ETO, "%^BOLD%^You must choose one of the following classes to join:");
     if(!sizeof(my_choices)) tell_object(ETO, "%^BOLD%^%^MAGENTA%^Error generating myclass list - please contact a wiz.");
-    else 
+    else
     {
         display_my_choices();
     }
     tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick classname%^BLACK%^> %^WHITE%^to choose your myclass.");
     tell_object(ETO, "%^YELLOW%^Ex%^BLACK%^: %^WHITE%^pick fighter%^RESET%^ to join the fighter myclass.");
     tell_object(ETO, "%^YELLOW%^Note%^BOLD%^%^BLACK%^: %^WHITE%^You can <%^CYAN%^review%^WHITE%^> to see this information again at any time.%^RESET%^");
-    tell_object(ETO, "%^WHITE%^You may also do <%^CYAN%^help classname%^WHITE%^> in order to see detailed information about any given myclass.%^RESET%^"); 
+    tell_object(ETO, "%^WHITE%^You may also do <%^CYAN%^help classname%^WHITE%^> in order to see detailed information about any given myclass.%^RESET%^");
     return 1;
 }
 //END
@@ -1466,51 +1471,51 @@ void pick_alignment()
     my_choices -= MyCharacterInfo["race"]["restricted alignments"];
     my_choices -= MyCharacterInfo["myclass"]["restricted alignments"];
     if(!sizeof(my_choices)) tell_object(ETO, "%^BOLD%^%^MAGENTA%^Error generating alignment list - please contact a wiz.");
-    
+
     tell_object(ETO, "%^YELLOW%^You must now select an alignment. Your race and myclass allow the following options:");
     header();
-    for(i=1;i<10;i++) 
+    for(i=1;i<10;i++)
     {
-        if(member_array(i,my_choices) != -1) 
+        if(member_array(i,my_choices) != -1)
         {
             x = i;
-            switch(i) 
+            switch(i)
             {
                 case 1:
                     astr = "Lawful Good";
-                    tell_object(ETO, "%^BOLD%^%^CYAN%^  1.) Lawful Good"); 
+                    tell_object(ETO, "%^BOLD%^%^CYAN%^  1.) Lawful Good");
                     break;
-                case 2: 
+                case 2:
                     astr = "Lawful Neutral";
-                    tell_object(ETO, "%^BOLD%^%^CYAN%^  2.) Lawful Neutral"); 
+                    tell_object(ETO, "%^BOLD%^%^CYAN%^  2.) Lawful Neutral");
                     break;
-                case 3: 
+                case 3:
                     astr = "Lawful Evil";
-                    tell_object(ETO, "%^BOLD%^%^CYAN%^  3.) Lawful Evil"); 
+                    tell_object(ETO, "%^BOLD%^%^CYAN%^  3.) Lawful Evil");
                     break;
-                case 4: 
+                case 4:
                     astr = "Neutral Good";
-                    tell_object(ETO, "%^BOLD%^%^CYAN%^  4.) Neutral Good"); 
+                    tell_object(ETO, "%^BOLD%^%^CYAN%^  4.) Neutral Good");
                     break;
-                case 5: 
+                case 5:
                     astr = "True Neutral";
-                    tell_object(ETO,"%^BOLD%^%^CYAN%^  5.) True Neutral"); 
+                    tell_object(ETO,"%^BOLD%^%^CYAN%^  5.) True Neutral");
                     break;
-                case 6: 
+                case 6:
                     astr = "Neutral Evil";
-                    tell_object(ETO,"%^BOLD%^%^CYAN%^  6.) Neutral Evil"); 
+                    tell_object(ETO,"%^BOLD%^%^CYAN%^  6.) Neutral Evil");
                     break;
-                case 7: 
+                case 7:
                     astr = "Chaotic Good";
-                    tell_object(ETO, "%^BOLD%^%^CYAN%^  7.) Chaotic Good"); 
+                    tell_object(ETO, "%^BOLD%^%^CYAN%^  7.) Chaotic Good");
                     break;
-                case 8: 
+                case 8:
                     astr = "Chaotic Neutral";
-                    tell_object(ETO,"%^BOLD%^%^CYAN%^  8.) Chaotic Neutral"); 
+                    tell_object(ETO,"%^BOLD%^%^CYAN%^  8.) Chaotic Neutral");
                     break;
-                case 9: 
+                case 9:
                     astr = "Chaotic Evil";
-                    tell_object(ETO,"%^BOLD%^%^CYAN%^  9.) Chaotic Evil"); 
+                    tell_object(ETO,"%^BOLD%^%^CYAN%^  9.) Chaotic Evil");
                     break;
                 default: tell_object(ETO, "%^BOLD%^%^RED%^There has been an error selecting your alignment! Please contact a wiz."); break;
             }
@@ -1527,7 +1532,7 @@ void pick_deity()
 {
     int inc, align, myrace, mysubrace;
     string myfile, *badgods, *names, temp;
-    
+
     my_choices = ({});
     align = MyCharacterInfo["myclass"]["alignment"];
     myrace = MyCharacterInfo["race"]["race name"];
@@ -1571,8 +1576,8 @@ void pick_deity()
 }
 
 
-//Function that builds a list of restrictions 
-//currently handles restrictions for myclass and race 
+//Function that builds a list of restrictions
+//currently handles restrictions for myclass and race
 //myclass restriction sets up available races and subraces
 //race restriction sets up available subraces for a particular race given the myclass and race choice
 void build_restrictions(string type)
@@ -1582,17 +1587,17 @@ void build_restrictions(string type)
     string ThisSubRace, *temp_data, targ;
     mapping minimumstatsmap;
     int i, y, rflag = 1;
-    
+
     switch(type)
     {
         //builds myclass based restrictions - IE races/alignments related to myclass/minimum stats - Saide
         case "myclass":
             available_races = ({});
-            available_subraces = ({});            
+            available_subraces = ({});
             possible_races = get_dir("/std/races/*.c");
             possible_races = explode(implode(possible_races, ""), ".c");
             //tell_object(ETO, "possible races = "+identify(possible_races));
-            if(!pointerp(possible_races)) 
+            if(!pointerp(possible_races))
             {
                 tell_object(ETO, "ERROR: Generating a list of possible races!");
                 return;
@@ -1616,7 +1621,7 @@ void build_restrictions(string type)
             {
                 MyFile = "/std/races/"+possible_races[i]+".c";
                 if(!file_exists(MyFile)) continue;
-                temp_data = MyFile->restricted_classes("");   
+                temp_data = MyFile->restricted_classes("");
                 if(MyFile->is_restricted() && rflag)
                 {
                     if(OB_ACCOUNT->is_experienced(ETO->query_true_name()) || OB_ACCOUNT->is_high_mortal(ETO->query_true_name())) rflag = 0;
@@ -1627,30 +1632,30 @@ void build_restrictions(string type)
                 if(member_array(MyClass, temp_data) == -1) available_races += ({possible_races[i]});
                 //tell_object(ETO, "RACE OB existed!");
                 possible_subraces = MyFile->query_subraces(ETO);
-                if(pointerp(possible_subraces)) 
+                if(pointerp(possible_subraces))
                 {
                     for(y = 0;y < sizeof(possible_subraces);y++)
                     {
                         ThisSubRace = possible_subraces[y];
                         temp_data = MyFile->restricted_classes(ThisSubRace);
-                        if(!pointerp(temp_data)) 
+                        if(!pointerp(temp_data))
                         {
-                            available_subraces += ({ThisSubRace});                            
+                            available_subraces += ({ThisSubRace});
                             continue;
                         }
                         else
                         {
-                            if(member_array(MyClass, temp_data) == -1) 
+                            if(member_array(MyClass, temp_data) == -1)
                             {
                                 if(member_array(ThisSubRace, available_subraces) == -1) available_subraces += ({ThisSubRace});
                                 if(member_array(possible_races[i], available_races) == -1) available_races += ({possible_races[i]});
-                                
+
                             }
                             continue;
                         }
-                    }                   
+                    }
                     continue;
-                }                
+                }
                 //tell_object(ETO, "RACE OB DOES NOT EXIST for "+possible_races[i]+"!");
                 continue;
             }
@@ -1661,7 +1666,7 @@ void build_restrictions(string type)
             break;
         case "race": case "subrace":
             MyFile = "/std/races/"+MyCharacterInfo["race"]["race name"] +".c";
-            if(!file_exists(MyFile)) 
+            if(!file_exists(MyFile))
             {
                 tell_object(ETO, "ERROR: Could not find your race file.");
                 return;
@@ -1674,10 +1679,10 @@ void build_restrictions(string type)
             }
             if(type == "subrace") break;
             available_subraces = ({});
-            
+
             if(MyCharacterInfo["race"]["psuedo race"] != "NIL") targ = MyCharacterInfo["race"]["psuedo race"];
             else targ = MyCharacterInfo["race"]["race name"];
-            
+
             MyFile = "/std/races/"+targ+".c";
             if(file_exists(MyFile))
             {
@@ -1688,11 +1693,11 @@ void build_restrictions(string type)
                     if(member_array(possible_subraces[i], temp_data) != -1) available_subraces += ({possible_subraces[i]});
                     continue;
                 }
-            }      
+            }
             else tell_object(ETO, "Failed to find a valid race obj");
             MyCharacterInfo["myclass"]["available subraces"] = available_subraces;
             //no subraces
-            if(!sizeof(available_subraces)) 
+            if(!sizeof(available_subraces))
             {
                 if((targ = MyCharacterInfo["race"]["psuedo race"]) != "NIL")
                 {
@@ -1701,10 +1706,10 @@ void build_restrictions(string type)
                     else if(targ == "human") MyCharacterInfo["myclass"]["available subraces"] = "/std/races/human.c"->query_subraces(ETO);
                     else MyPlace = "stats";
                 }
-                else MyPlace = "stats";           
+                else MyPlace = "stats";
             }
             break;
-    }   
+    }
 }
 //END
 
@@ -1713,7 +1718,7 @@ void extra_display(string str)
 {
     string temp = "\n";
     if(!objectp(ETO)) return;
-    if(stringp(str)) 
+    if(stringp(str))
     {
         if(MyPlace == "special") temp += "%^BOLD%^%^WHITE%^You have chosen take after your %^BOLD%^%^CYAN%^"+str+"%^BOLD%^%^WHITE%^ parent.%^RESET%^";
         else if(MyPlace == "unique") temp += "%^BOLD%^%^WHITE%^You have chosen %^BOLD%^%^CYAN%^"+str+ "%^BOLD%^%^WHITE%^ for your %^BOLD%^%^CYAN%^"+unique+"%^BOLD%^%^WHITE%^.%^RESET%^";
@@ -1727,7 +1732,7 @@ void extra_display(string str)
 //END
 
 //Displays a list of blurbs based on where the player is in the system
-//these should be contained in /d/shadowgate/blurbs.h 
+//these should be contained in /d/shadowgate/blurbs.h
 //currently supports race, myclass, and subrace - provides
 //a brief description of each to a player with brieff mode off (default)
 //so that they have an idea of what they are picking
@@ -1754,12 +1759,12 @@ void display_blurb(string str)
             break;
     }
     tell_object(ETO, "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n%^RESET%^");
-    if(MyPlace == "unique") 
+    if(MyPlace == "unique")
     {
         tell_object(ETO, "Are you sure that you want to pick the %^BOLD%^%^CYAN%^"+unique+" "+str+
         "%^RESET%^? Enter %^BOLD%^%^CYAN%^yes%^RESET%^ to confirm or anything else to abort.");
     }
-    else 
+    else
     {
         tell_object(ETO, "Are you sure that you want to pick the %^BOLD%^%^CYAN%^"+MyPlace+" "+str+
         "%^RESET%^? Enter %^BOLD%^%^CYAN%^yes%^RESET%^ to confirm or anything else to abort.");
@@ -1770,7 +1775,7 @@ void display_blurb(string str)
 
 
 //Confirms a choice when there is extra information
-//IE - do you want to be an elf given what the blurb shows about them? 
+//IE - do you want to be an elf given what the blurb shows about them?
 void confirm_my_choice(string str, string choice)
 {
     if(!stringp(str))
@@ -1790,22 +1795,22 @@ void confirm_my_choice(string str, string choice)
 //END
 
 //Checks the current choices list to make sure the choice
-//the player entered is in that list 
+//the player entered is in that list
 int check_my_choice(string str)
 {
     if(MyPlace == "deity" && str == "godless") return 0; // needed this in to bypass without breaking the deities array!
     if(member_array(str,my_choices) == -1) {
-        tell_object(ETO, "\n%^BOLD%^%^RED%^Sorry but %^MAGENTA%^"+str+"%^BOLD%^%^RED%^ is not a valid choice for you."); 
+        tell_object(ETO, "\n%^BOLD%^%^RED%^Sorry but %^MAGENTA%^"+str+"%^BOLD%^%^RED%^ is not a valid choice for you.");
         return 1;
-    }     
+    }
     return 0;
 }
 //END
 
-//Arguable the most important function in the 
+//Arguable the most important function in the
 //code - this actually checks a decision and sets it - handles
 //all decisions except for stats - which are assigned, instead of picked
-varargs int choose(string str, int flag) 
+varargs int choose(string str, int flag)
 {
     int numcl, x,ex;
     string *possible_races, *temp_data;
@@ -1817,7 +1822,7 @@ varargs int choose(string str, int flag)
     {
         case "myclass":
             if(check_my_choice(str)) { pick_class(); return 1; }
-            if(!flag && !MyBrief) 
+            if(!flag && !MyBrief)
             {
                 temp_data = keys(CLASS_BLURBS);
                 if(member_array(str, temp_data) != -1)
@@ -1830,12 +1835,12 @@ varargs int choose(string str, int flag)
             extra_display(str);
             MyCharacterInfo["myclass"]["myclass name"] = str;
             MyPlace = "race";
-            build_restrictions("myclass");     
+            build_restrictions("myclass");
             ProcessStep();
             break;
         case "race":
             if(check_my_choice(str)) { pick_race(); return 1; }
-            if(!flag && !MyBrief) 
+            if(!flag && !MyBrief)
             {
                 temp_data = keys(RACE_BLURBS);
                 if(member_array(str, temp_data) != -1)
@@ -1857,10 +1862,10 @@ varargs int choose(string str, int flag)
             else
             {
                 MyPlace = "subrace";
-                build_restrictions("race"); 
+                build_restrictions("race");
                 ProcessStep();
                 break;
-            }            
+            }
             break;
         case "special":
             if(check_my_choice(str)) { pick_special(MyCharacterInfo["race"]["race name"]); return 1; }
@@ -1889,8 +1894,8 @@ varargs int choose(string str, int flag)
             ProcessStep();
             break;
         case "subrace":
-            if(check_my_choice(str)) { pick_sub_race(); return 1; } 
-            if(!flag && !MyBrief) 
+            if(check_my_choice(str)) { pick_sub_race(); return 1; }
+            if(!flag && !MyBrief)
             {
                 temp_data = keys(SUB_RACE_BLURBS);
                 if(member_array(str, temp_data) != -1)
@@ -1913,7 +1918,7 @@ varargs int choose(string str, int flag)
                 pick_alignment();
                 return 1;
             }
-            
+
             astr = VALID_AL_TITLES[to_int(str)];
             tell_object(ETO, "\n%^YELLOW%^Your alignment is set to "+astr+".");
             extra_display(0);
@@ -1927,7 +1932,7 @@ varargs int choose(string str, int flag)
             break;
         case "unique":
             if(check_my_choice(str)) { pick_my_unique(); return 1;}
-            if(!flag && !MyBrief) 
+            if(!flag && !MyBrief)
             {
                 temp_data = keys(UNIQUE_BLURBS);
                 if(member_array(unique, temp_data) != -1)
@@ -1994,7 +1999,7 @@ varargs int choose(string str, int flag)
             MyPlace = "alignment";
             ProcessStep();
             break;
-    }   
+    }
     return 1;
 }
 //END
