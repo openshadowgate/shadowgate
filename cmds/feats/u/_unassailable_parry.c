@@ -10,7 +10,9 @@ void create()
     feat_category("TwoWeapons");
     feat_name("unassailable parry");
     feat_prereq("Improved two weapon fighting");
-    feat_desc("Unassailable parry is a passive feat that allows a chance at parrying attacks based on your athletics skill. You must be wielding a second weapon before receiving the parry chance.");
+    feat_desc("Unassailable parry is a passive feat that allows a chance at parrying attacks based on your athletics skill. You must be wielding a second weapon before receiving the parry chance.
+
+%^BOLD%^N.B.%^RESET%^ Parry, unassailable parry, unarmed parry and blade block feats do not stack. Just one will work at a time.");
     permanent(1);
 }
 
@@ -53,4 +55,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

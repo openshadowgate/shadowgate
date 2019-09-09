@@ -726,7 +726,8 @@ void wizard_interface(object user, string type, string targ)
             if (FEATS_D->usable_feat(caster,"eldritch conditioning"))
                 nodo = 0;
             if (FEATS_D->usable_feat(caster,"bladesong") &&
-                sizeof(weaps)==1)
+                sizeof(weaps)==1 &&
+                !caster->is_wearing_type("shield"))
                 nodo = 0;
             if (nodo)
             {

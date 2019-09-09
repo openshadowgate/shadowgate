@@ -13,7 +13,9 @@ void create()
     feat_category("TwoHandedWeapons");
     feat_name("blade block");
     feat_prereq("Sweepingblow");
-    feat_desc("The Blade Block feat will give you a chance based on your athletics skill to parry all attacks that are directed your way.");
+    feat_desc("The Blade Block feat will give you a chance based on your athletics skill to parry all attacks that are directed your way.
+
+%^BOLD%^N.B.%^RESET%^ Parry, unassailable parry, unarmed parry and blade block feats do not stack. Just one will work at a time.");
     permanent(1);
     set_required_for(({"impale","light weapon","strength of arm"}));
 }
@@ -45,4 +47,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

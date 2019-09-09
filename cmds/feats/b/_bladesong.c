@@ -12,7 +12,7 @@ void create()
     feat_type("permanent");
     feat_category("Duelist");
     feat_name("bladesong");
-    feat_desc("With this feat one learns how to use just one hand to channel their spells. The caster can use their spells while wielding a weapon in their second hand.");
+    feat_desc("With this feat one learns how to use just one hand to channel their spells. The caster can use their spells while wielding a weapon in their second hand. This feat requiers you not to wield a second weapon or shield to work.");
     permanent(1);
 }
 
@@ -38,4 +38,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
