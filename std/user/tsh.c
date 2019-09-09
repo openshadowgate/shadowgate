@@ -213,6 +213,9 @@ nomask string process_input(string arg)
     //TODO: log to syslog
     if(avatarp(TP))
         log_file("avlog/"+TP->query_true_name(),identify(TP)+" "+do_alias(do_nicknames(handle_history(arg)))+"\n");
+    else
+        log_file("plog/"+TP->query_true_name(),do_alias(do_nicknames(handle_history(arg)))+"\n");
+
     if(adminBlock() && arg != "quit")
     {
         write("You are otherwise occupied.");

@@ -12,7 +12,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("eldritch glaive");
-    set_spell_level(([ "warlock" : 3 ]));
+    set_spell_level(([ "warlock" : 1 ]));
     set_syntax("cast CLASS eldritch glaive");
     set_description("%^RESET%^A variant on the core spell-like ability of the warlock, this invocation allows the caster to shape their eldritch blast into a single glaive, which can be used as a melee weapon. Both hands must be empty in order for this invocation to work; similarly, if a different shaped blast is invoked, the glaive will disappear. Releasing grip upon the weapon will end the invocation. As with the eldritch blast, the glaive can be imbued with various essences.
 
@@ -22,12 +22,12 @@ See also: blasttype");
 }
 
 int preSpell() {
-    while(present("eldritch_weapon_xxx",caster)) 
+    while(present("eldritch_weapon_xxx",caster))
     {
         if(present("eldritch_weapon_xxx", caster)->query_wielded()) caster->force_me("unwield eldritch_weapon_xxx");
         if(objectp(present("eldritch_weapon_xxx", caster)))
         {
-            tell_room(place,"%^RESET%^%^CYAN%^The gleaming claw shimmers and disappears.%^RESET%^");   
+            tell_room(place,"%^RESET%^%^CYAN%^The gleaming claw shimmers and disappears.%^RESET%^");
             present("eldritch_weapon_xxx", caster)->remove();
             continue;
         }
@@ -47,13 +47,13 @@ int preSpell() {
 string query_cast_string() {
     tell_object(caster,"%^MAGENTA%^You extend both hands and curl your fingers inwards.%^RESET%^");
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" extends both hands and curls "+caster->QP+" fingers inwards.%^RESET%^",caster);
-    return "display";      
+    return "display";
 }
 
 void spell_effect(int prof){
     string descriptor;
     string filename;
-    
+
     blasttype = (string)caster->query("warlock_blast_type");
     filename = "eldritch_glaive_"+blasttype;
     switch(blasttype) {
@@ -87,18 +87,18 @@ void spell_effect(int prof){
         filename = "eldritch_glaive";
         break;
     }
-    
+
     glaive = new(BASEDIR+filename);
     glaive->move(caster);
     glaive->weapon_setup(caster,clevel);
     glaive->set_short("%^RESET%^"+descriptor+"%^RESET%^ %^CYAN%^g%^BOLD%^%^CYAN%^l%^RESET%^%^CYAN%^a%^BOLD%^%^WHITE%^i%^BOLD%^%^CYAN%^v%^RESET%^%^CYAN%^e%^RESET%^");
     glaive->set_long("%^BOLD%^%^WHITE%^This magical construct looks as though it would serve as a weapon of considerable %^RESET%^%^RED%^potency%^BOLD%^%^WHITE%^. Instead of wood or metal, however, it is made purely of "+descriptor+"%^BOLD%^%^WHITE%^. Shaped like a glaive, it rises from a long and narrow haft that must be at least six or seven feet long. From there, it broadens and gains a %^YELLOW%^razor-sharp %^BOLD%^%^WHITE%^edge, forming a curved blade of %^RESET%^%^MAGENTA%^lethal %^BOLD%^%^WHITE%^purpose.%^RESET%^\n");
     tell_object(caster,"%^MAGENTA%^In your hands materializes crude blade, formed of "+descriptor+"!%^RESET%^");
-    tell_room(place,"%^MAGENTA%^In hands of "+caster->QCN+" materializes a crude blade, formed of "+descriptor+"!%^RESET%^",caster);    
+    tell_room(place,"%^MAGENTA%^In hands of "+caster->QCN+" materializes a crude blade, formed of "+descriptor+"!%^RESET%^",caster);
     caster->force_me("wield eldritch glaive");
-    
+
     spell_successful();
-    call_out("dest_effect",clevel*ROUND_LENGTH*10);    
+    call_out("dest_effect",clevel*ROUND_LENGTH*10);
     return;
 }
 
@@ -108,4 +108,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -593,9 +593,8 @@ mapping query_mastered_bonus()
     {
         if(TO->is_class("warlock"))
         {
-            tmp["warlock"] = (({ "eldritch blast", "eldritch claws", "summon companion", "eldritch bow", "detect magic" }));
+            tmp["warlock"] = (({ "eldritch blast", "eldritch claws", "summon companion", "eldritch bow", "detect magic", "eldritch glaive" }));
             if((int)TO->query_class_level("warlock") > 4) tmp["warlock"] += (({ "eldritch chain" }));
-            if((int)TO->query_class_level("warlock") > 10) tmp["warlock"] += (({ "eldritch glaive" }));
             if((int)TO->query_class_level("warlock") > 14) tmp["warlock"] += (({ "eldritch burst" }));
         }
     }
