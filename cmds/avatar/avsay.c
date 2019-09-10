@@ -1,11 +1,11 @@
-//avsay - a concept to let avatars set up profiles for "fake" npcs in order 
+//avsay - a concept to let avatars set up profiles for "fake" npcs in order
 //to use the say command to speak as them for plots - that will hopefully
-//allow players to be able to retrieve stuff via last say, last whisper, etc. 
+//allow players to be able to retrieve stuff via last say, last whisper, etc.
 
 #include <std.h>
 #include "items.h"
 #include <move.h>
-#include <langs.h>
+
 #include <money.h>
 #include <valid_bonuses.h>
 #include "types.h"
@@ -15,6 +15,8 @@
 #include <daemons.h>
 
 inherit OBJECT;
+
+#include <langs.h>
 
 #include "valid_weapons.h"
 
@@ -56,7 +58,7 @@ string strip_colors(string sh)
     string output = "", *list = ({});
     string *words = ({});
     int i;
-    if(!sh) 
+    if(!sh)
     {
         return output;
     }
@@ -79,7 +81,7 @@ string strip_colors(string sh)
 }
 
 string repeat_string(string rep, int amt)
-{	
+{
     string tmp = "";
     if(!stringp(rep)) return "";
     amt = to_int(amt);
@@ -88,7 +90,7 @@ string repeat_string(string rep, int amt)
     {
         amt--;
         tmp += rep;
-    }		
+    }
     return tmp;
 }
 
@@ -112,26 +114,26 @@ void do_response(string msg, string msg_type)
     }
     if(msg_type == "msg")
     {
-        tmp_string = rdec+"\t\t\t\tResponse";	
+        tmp_string = rdec+"\t\t\t\tResponse";
         tmp_string += repeat_string(" ", (42 - strlen(strip_colors(tmp_string)))) + rdec;
         tmp_string = msg_header + "\n" + tmp_string + "\n" + msg_header + "\n" + msg + "\n";
     }
     write(tmp_string);
 }
 
-void init() 
+void init()
 {
-    ::init();   
+    ::init();
     cur_menu = "main";
     update_this_menu();
     display_menu();
-    input_to("pick_menu_item");	
+    input_to("pick_menu_item");
 }
 
 void ResetAll(string otype)
 {
     ProfileInfo = (["Character Name" : "NIL", "Speech" : "NIL", "Language" : "NIL", "Profile Name" : "NIL"]);
-	cur_menu = "main";	
+	cur_menu = "main";
 	RestoredProfile = "";
 	update_this_menu();
 	display_menu();
@@ -145,7 +147,7 @@ void update_this_menu()
     if(cur_menu == "main")
     {
         ThisMenu += MainMenu + AllMenus;
-    }	
+    }
     if(cur_menu == "Restore Profile")
     {
         ThisMenu += get_dir("/d/avatars/"+TPQN+"/profiles/*.o") + ({"Back"});
@@ -170,7 +172,7 @@ void display_menu()
     {
         count++;
         if(x < 9) { num = " " + count + " "; }
-        else { num = count + " "; }			
+        else { num = count + " "; }
         tmp_str = "\t" + num + PAD + capitalize(ThisMenu[x]) + " ";
         tmp_str += repeat_string(" ", (30 - strlen(strip_colors(tmp_str))));
         tmp_str += CheckStatus(ThisMenu[x]+"");
@@ -183,12 +185,12 @@ void display_menu()
     }
     tmp_display += menu_header + "\nPlease Select One of The Above Options.\n"+
     "Input ** At any time to exit.\n" + menu_header;
-   
+
     tell_object(TP, tmp_display);
 }
 
-//FUNCTION for picking a menu item and directing to the right 
-//submenu/request for input, etc; 
+//FUNCTION for picking a menu item and directing to the right
+//submenu/request for input, etc;
 
 void pick_menu_item(string str)
 {
@@ -196,7 +198,7 @@ void pick_menu_item(string str)
     string true_input;
     if(str == "**") exit();
     max = sizeof(ThisMenu);
-    input = to_int(str);	
+    input = to_int(str);
     if(input > max || input < 1)
     {
         do_response("You have entered "+hl(""+input+"")+".  Please input a number from "+
@@ -210,7 +212,7 @@ void pick_menu_item(string str)
     //input_to("pick_menu_item");
     return 1;
 }
-//END 
+//END
 
 
 void show_category(string input)
@@ -222,7 +224,7 @@ void show_category(string input)
         exit();
         return;
     }
-    
+
     if(input == "Clear All")
     {
         do_response("Are you sure you wish to "+hl(input)+"?\n"+
@@ -230,8 +232,8 @@ void show_category(string input)
         "Proceed, y/n? **NOTE** This will not remove a saved profile.", "warning");
         input_to("check_clear_all");
         return 1;
-    }    
-    
+    }
+
     if(input == "Profile Name" || input == "Character Name" || input == "Speech"
     || input == "Color")
     {
@@ -241,7 +243,7 @@ void show_category(string input)
             " that you want for this profile.", "msg");
             input_to("set_profile_info", input);
         }
-        else 
+        else
         {
             do_response("Are you sure that you want to change "+
             "the "+hl(input)+"? It is currently set to "+
@@ -259,16 +261,16 @@ void show_category(string input)
         input_to("pick_menu_item");
         return 1;
     }
-    
+
     if(input == "Language")
-    {        
+    {
         cur_menu = "Language";
         update_this_menu();
         display_menu();
         input_to("pick_menu_item");
         return 1;
     }
-    
+
     if(input == "Default Profile")
     {
         do_response("Setting your profile to "+hl(input)+" which "+
@@ -278,13 +280,13 @@ void show_category(string input)
         input_to("pick_menu_item");
         return 1;
     }
-    
+
     if(cur_menu == "Language")
     {
        /* if(input == "Back")
         {
             cur_menu = "main";
-            update_this_menu(); 
+            update_this_menu();
             display_menu();
             input_to("pick_menu_item");
             return 1;
@@ -295,7 +297,7 @@ void show_category(string input)
         input_to("pick_menu_item");
         return 1;
     }
-    
+
     if(input == "Restore Profile")
     {
         cur_menu = "Restore Profile";
@@ -309,23 +311,23 @@ void show_category(string input)
         input_to("pick_menu_item");
         return 1;
     }
-    
+
     if(cur_menu == "Restore Profile")
     {
         if(input == "Back")
         {
             cur_menu = "main";
-            update_this_menu(); 
+            update_this_menu();
             display_menu();
             input_to("pick_menu_item");
             return 1;
         }
         restore_avsay_profile(input);
-        RestoredProfile = input;    
+        RestoredProfile = input;
         display_menu();
         input_to("pick_menu_item");
         return 1;
-    }    
+    }
 }
 
 void manual_set_and_save_avsay_profile(mapping tmp)
@@ -340,7 +342,7 @@ void save_avsay_profile(string str)
 {
     seteuid(UID_ROOT);
     if(!get_dir("/d/avatars/"+TPQN+"/profiles/")) mkdir("/d/avatars/"+TPQN+"/profiles");
-    
+
     //TP->delete("avsayprofile");
     //TP->set("avsayprofile", ProfileInfo);
     save_object("/d/avatars/"+TPQN+"/profiles/"+str, 1);
@@ -354,11 +356,11 @@ void restore_avsay_profile(string myprofile)
     {
         tell_object(TP, "Attemping to restore profile "+myprofile);
         myprofile = replace_string(myprofile, ".o", "");
-        restore_object("/d/avatars/"+TPQN+"/profiles/"+myprofile, 1);    
+        restore_object("/d/avatars/"+TPQN+"/profiles/"+myprofile, 1);
        // TP->delete("avsayprofile");
        // TP->set("avsayprofile", ProfileInfo);
-    }    
-    seteuid(getuid());   
+    }
+    seteuid(getuid());
 }
 
 
@@ -401,7 +403,7 @@ void check_replace_profile(string str, string mystr)
 void change_profile_info(string str, string arg)
 {
     if(str == "**") return exit();
-    
+
     if(lower_case(str[0..0]) == "y")
     {
         do_response("Please enter the "+hl(arg)+
@@ -409,7 +411,7 @@ void change_profile_info(string str, string arg)
         input_to("set_profile_info", arg);
         return 1;
     }
-    
+
     do_response("Aborting... not changing "+hl(arg)+".", "msg");
     display_menu();
     input_to("pick_menu_item");
@@ -427,30 +429,30 @@ void set_profile_info(string str, string arg)
         input_to("set_profile_info");
         return 1;
     }
-    
+
     if(arg == "Profile Name")
     {
         str = lower_case(str);
         str = replace_string(str, " ", "_");
     }
-    
-    if(arg == "Profile Name" && file_exists("/d/avatars/"+TPQN+"/profiles/"+str+".o")) 
+
+    if(arg == "Profile Name" && file_exists("/d/avatars/"+TPQN+"/profiles/"+str+".o"))
     {
         do_response("A profile with the name "+hl(str)+" already exists. Do you want to save over it?", "warning");
         input_to("check_replace_profile", str);
         return 1;
     }
-    
+
     do_response(capitalize(arg)+" set to \n"+
     hl(str), "msg");
-    
+
     ProfileInfo[arg] = str;
     display_menu();
     input_to("pick_menu_item");
-    
-    return 1;	
+
+    return 1;
 }
-    
+
 
 string CheckStatus(string which)
 {
@@ -458,13 +460,13 @@ string CheckStatus(string which)
     string cl = "%^YELLOW%^)%^RESET%^";
     //Color for Needed
     string nc = "%^BOLD%^%^WHITE%^";
-    //Reset 
+    //Reset
     string rs = "%^RESET%^";
     //Color for something that's set
     string sc = "%^BOLD%^%^GREEN%^";
     //Color for something that's set to Default
     string de = "%^BOLD%^%^RED%^";
-    //Color for something that's not set, but also not 
+    //Color for something that's not set, but also not
     //required
     string tmp;
     string unc = "%^BOLD%^%^CYAN%^";
@@ -473,50 +475,50 @@ string CheckStatus(string which)
     string set_str = op + sc + "Set" + cl;
     string unset_str = op + unc + "Unset"+ cl;
     string default_str = op + de + "Default" + cl;
-	
+
     if(which == "Profile Name" || which == "Character Name")
     {
         if(ProfileInfo[which] == "NIL" || ProfileInfo[which] == "")
         {
-            return needed_str;	
+            return needed_str;
         }
         else { return op + sc + ProfileInfo[which] + cl; }
     }
-    
+
     if(which == "Speech" || which == "Language")
     {
         if(ProfileInfo[which] == "NIL" || ProfileInfo[which] == "") return "";
         else { return op + sc + ProfileInfo[which] + cl; }
-    }  
-    
+    }
+
     if(which == "Color")
     {
         if(ProfileInfo[which] == "NIL" || ProfileInfo[which] == "") return "";
         else { return op + sc + ProfileInfo[which] + "color%^RESET%^"+ cl; }
     }
-    
+
     if(which == "Restore Profile")
     {
         tmp = op + sc + sizeof(get_dir("/d/avatars/"+TPQN+"/profiles/*.o"));
         tmp += " available" + cl;
         return tmp;
     }
-    
+
     if(cur_menu == "Language")
     {
         if(which == ProfileInfo["Language"]) return selected_str;
-    }    
+    }
 
     if(cur_menu == "Restore Profile")
     {
         if(which == RestoredProfile) return selected_str;
     }
     return "";
-}	
+}
 
 void activate_profile()
 {
-    if(ProfileInfo["Profile Name"] == "NIL" || ProfileInfo["Character Name"] == "NIL") 
+    if(ProfileInfo["Profile Name"] == "NIL" || ProfileInfo["Character Name"] == "NIL")
 	{
         do_response("You need to specify a profile name and character name first or load one!", "warning");
 		return;
@@ -524,12 +526,12 @@ void activate_profile()
     do_response("Activating profile "+ProfileInfo["Profile Name"]+". Have Fun!", "msg");
     TP->delete("avsayprofile");
     TP->set("avsayprofile", ProfileInfo);
-    return;    
+    return;
 }
 
-void exit() 
+void exit()
 {
-	if(ProfileInfo["Profile Name"] == "NIL" || ProfileInfo["Character Name"] == "NIL") 
+	if(ProfileInfo["Profile Name"] == "NIL" || ProfileInfo["Character Name"] == "NIL")
 	{
         tell_object(TP, "Exiting without a profile assigned.");
 		remove();

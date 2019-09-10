@@ -1,16 +1,21 @@
 // added $np and $pp *Styx*  2/17/03.  Changed to make thieves unhidden when used so they can be noticed.  Circe 10/26/03  Updated help file.  Kismet 5/29/19
 
+/**
+ * @file
+ */
+
 #include <std.h>
-#include <langs.h>
 
 #define EMOTE "/cmds/mortal/_emote"
 
 inherit DAEMON;
 
+#include <langs.h>
+
 int help();
 
 int cmd_emoteat(string str){
-    
+
     string roomMsg, targetMsg,lang,*words=({}),start_color,end_color,tmp="",temp;
     string who, what;
     object obj;
@@ -22,7 +27,7 @@ int cmd_emoteat(string str){
         return help();
     }
 
-    
+
     // stuff to include speech inside of emotes
     words = explode(str,"\"");
 
@@ -70,9 +75,9 @@ int cmd_emoteat(string str){
 
     str = tmp;
     // end stuff to include speech inside of emotes
-    
 
-    if (sscanf(str , "%s %s",who,what) != 2) 
+
+    if (sscanf(str , "%s %s",who,what) != 2)
     {
         return help();
     }
@@ -112,15 +117,15 @@ int cmd_emoteat(string str){
     targetMsg = replace_string(targetMsg,"$O","you");
     targetMsg = replace_string(targetMsg,"$np","your");
     targetMsg = replace_string(targetMsg,"$pp","yours");
-    
- 
+
+
   if (interactive(TP)) {
            if(file_size("/log/emotes/emoteat.log") > 150000) {
            cp("/log/emotes/emoteat.log","/log/emotes/emoteat.old");
            rm("/log/emotes/emoteat.log");
          }
          write_file("/log/emotes/emoteat.log",capitalize(TPQN)+">"+obj->query_name()+":"+targetMsg+"\n");
- 
+
             }
 
     message("emote",roomMsg,ETP,({TP,obj}));
@@ -135,7 +140,7 @@ void help(){
 @OLI
 %^CYAN%^NAME%^RESET%^
 
-emoteat - directs an emote towards a living target.  
+emoteat - directs an emote towards a living target.
 
 %^CYAN%^SYNTAX%^RESET%^
 
@@ -147,37 +152,37 @@ emoteat - directs an emote towards a living target.
 
 %^CYAN%^%^ULINE%^Summary:%^RESET%^
 
-Emoteat is an extension of emote (%^ORANGE%^<help emote>%^RESET%^) that allows you to %^CYAN%^emote at%^RESET%^ someone by directing your action towards that person (your target).  By using the codes below, you tell your target and everyone else in the room exactly who you are adressing.  We feel this increases immersion and improves communication.  It uses the recognize system (%^ORANGE%^<help recognize>%^RESET%^), so it is seen differently depending on which names people have you and your target recognized as.  It is also seen differently by you, your target and everyone else in the room respectively. 
+Emoteat is an extension of emote (%^ORANGE%^<help emote>%^RESET%^) that allows you to %^CYAN%^emote at%^RESET%^ someone by directing your action towards that person (your target).  By using the codes below, you tell your target and everyone else in the room exactly who you are adressing.  We feel this increases immersion and improves communication.  It uses the recognize system (%^ORANGE%^<help recognize>%^RESET%^), so it is seen differently depending on which names people have you and your target recognized as.  It is also seen differently by you, your target and everyone else in the room respectively.
 
 %^ORANGE%^%^ULINE%^TARGET%^RESET%^ is the creature you are directing your emote at. %^ORANGE%^%^ULINE%^STRING%^RESET%^ is the action you wish to describe. Your name will be added to the start of the emote automatically.
 
 %^CYAN%^%^ULINE%^Speech Within Emotes:%^RESET%^
 
-It is possible to use speech within emotes when using the emoteat tool.  To do so, put the text you wish to say inside quotation marks.  The spoken text will be displayed in the language you are currently speaking (%^ORANGE%^<help languages>%^RESET%^). 
+It is possible to use speech within emotes when using the emoteat tool.  To do so, put the text you wish to say inside quotation marks.  The spoken text will be displayed in the language you are currently speaking (%^ORANGE%^<help languages>%^RESET%^).
 
 %^CYAN%^%^ULINE%^A Word of Caution:%^RESET%^
 
-While you are free to emote at any living target (including NPCs and mounts), please remember that you only control your own character and any extensions thereof (your followers, your familiar, your horse, etc).  Refrain from using emoteat to feign control over coded NPC's in the game world (see %^ORANGE%^<help emoteat guide>%^RESET%^ for clarification). 
+While you are free to emote at any living target (including NPCs and mounts), please remember that you only control your own character and any extensions thereof (your followers, your familiar, your horse, etc).  Refrain from using emoteat to feign control over coded NPC's in the game world (see %^ORANGE%^<help emoteat guide>%^RESET%^ for clarification).
 
 %^CYAN%^%^ULINE%^Codes:%^RESET%^
 
-Refer to the list below for the %^CYAN%^codes %^WHITE%^that can be used with emoteat. The column named %^CYAN%^Result%^RESET%^ shows how the code will be seen by %^GREEN%^you%^WHITE%^, %^MAGENTA%^your target %^WHITE%^and %^BOLD%^%^BLACK%^everyone else in the room %^RESET%^respectively. 
+Refer to the list below for the %^CYAN%^codes %^WHITE%^that can be used with emoteat. The column named %^CYAN%^Result%^RESET%^ shows how the code will be seen by %^GREEN%^you%^WHITE%^, %^MAGENTA%^your target %^WHITE%^and %^BOLD%^%^BLACK%^everyone else in the room %^RESET%^respectively.
 
- CODE     DESCRIPTION     RESULT AS SEEN BY:  %^GREEN%^You %^WHITE%^| %^MAGENTA%^Your Target %^WHITE%^| %^BOLD%^%^BLACK%^Room 
-%^RESET%^	
+ CODE     DESCRIPTION     RESULT AS SEEN BY:  %^GREEN%^You %^WHITE%^| %^MAGENTA%^Your Target %^WHITE%^| %^BOLD%^%^BLACK%^Room
+%^RESET%^
  %^MAGENTA%^$N   %^WHITE%^-  Your target's name                -  %^GREEN%^Name %^WHITE%^| %^MAGENTA%^You %^WHITE%^| %^BOLD%^%^BLACK%^Name
  %^BOLD%^%^MAGENTA%^$np  %^RESET%^-  Target's name in possessive form  -  %^GREEN%^Name's %^WHITE%^| %^MAGENTA%^Your %^WHITE%^| %^BOLD%^%^BLACK%^Name's
  %^RESET%^%^RED%^$P   %^WHITE%^-  Possessive form of the target     -  %^GREEN%^His/Her %^WHITE%^| %^MAGENTA%^Your %^WHITE%^| %^BOLD%^%^BLACK%^His/Her
  %^BOLD%^%^RED%^$pp  %^RESET%^-  Plural possessive form of target  -  %^GREEN%^His/Hers %^WHITE%^| %^MAGENTA%^Yours %^WHITE%^| %^BOLD%^%^BLACK%^His/Hers
- %^BLUE%^$S   %^RESET%^-  Subjective form of target         -  %^GREEN%^He/She %^WHITE%^| %^MAGENTA%^You %^WHITE%^| %^BOLD%^%^BLACK%^He/She%^RESET%^	
+ %^BLUE%^$S   %^RESET%^-  Subjective form of target         -  %^GREEN%^He/She %^WHITE%^| %^MAGENTA%^You %^WHITE%^| %^BOLD%^%^BLACK%^He/She%^RESET%^
  %^BOLD%^%^CYAN%^$O   %^RESET%^-  Objective form of target          -  %^GREEN%^Him/Her %^WHITE%^| %^MAGENTA%^You %^WHITE%^| %^BOLD%^%^BLACK%^Him/Her
- %^RESET%^									 			
+ %^RESET%^
  %^GREEN%^$M   %^WHITE%^-  Your own name%^RESET%^                     -  %^GREEN%^You %^WHITE%^| %^BOLD%^%^BLACK%^Your Name
 
-%^RESET%^%^CYAN%^Please note:%^RESET%^  While the game replaces the above codes with the proper pronouns, it does not add an "s" to the end of verbs.  As a courtesy to other players, please add it yourself.   
+%^RESET%^%^CYAN%^Please note:%^RESET%^  While the game replaces the above codes with the proper pronouns, it does not add an "s" to the end of verbs.  As a courtesy to other players, please add it yourself.
 
 
-%^CYAN%^EXAMPLES%^RESET%^ 
+%^CYAN%^EXAMPLES%^RESET%^
 
 In our first example, Karen types:
   %^ORANGE%^<%^RESET%^emoteat %^MAGENTA%^charlie %^WHITE%^Nodding thoughtfully at %^BOLD%^%^MAGENTA%^$np %^RESET%^words, %^GREEN%^$M%^RESET%^ smiles at %^BOLD%^%^CYAN%^$O%^RESET%^, before saying "Yes, I agree."%^ORANGE%^>
@@ -189,9 +194,9 @@ In our first example, Karen types:
   %^WHITE%^Nodding thoughtfully at %^BOLD%^%^MAGENTA%^your %^RESET%^words, %^GREEN%^Karen %^WHITE%^smiles at %^BOLD%^%^CYAN%^you%^RESET%^, before saying "Yes, I agree.".
 
 %^BOLD%^%^BLACK%^The room would see:
-  %^RESET%^Nodding thoughtfully at %^BOLD%^%^MAGENTA%^Charlie's %^RESET%^words, %^GREEN%^Karen %^WHITE%^smiles at %^BOLD%^%^CYAN%^him%^RESET%^, before saying "Yes, I agree.". 
+  %^RESET%^Nodding thoughtfully at %^BOLD%^%^MAGENTA%^Charlie's %^RESET%^words, %^GREEN%^Karen %^WHITE%^smiles at %^BOLD%^%^CYAN%^him%^RESET%^, before saying "Yes, I agree.".
 
- 
+
 %^RESET%^In another example, %^GREEN%^Karen %^WHITE%^types:
   %^ORANGE%^<%^WHITE%^emoteat %^MAGENTA%^charlie %^WHITE%^smiles at %^MAGENTA%^$N %^WHITE%^as %^BOLD%^%^BLUE%^$S %^RESET%^approaches and gladly takes %^RED%^$P %^WHITE%^offered hand.%^ORANGE%^>
 
@@ -205,14 +210,14 @@ In our first example, Karen types:
   %^RESET%^%^GREEN%^Karen %^WHITE%^smiles at %^MAGENTA%^Charlie %^WHITE%^as %^BOLD%^%^BLUE%^he %^RESET%^approaches and gladly takes %^RED%^his %^WHITE%^offered hand.
 
 If Charlie has Karen recognized as Linda, he would instead see:
-  %^GREEN%^Linda%^RESET%^ smiles at %^MAGENTA%^you%^RESET%^ (...). 
+  %^GREEN%^Linda%^RESET%^ smiles at %^MAGENTA%^you%^RESET%^ (...).
 
-For more examples and nifty ways to use emoteat, please visit our emoteat guide at %^ORANGE%^<help emoteat guide>%^RESET%^.  For a quick list of codes, see %^ORANGE%^<help emoteat codes>%^RESET%^.  
+For more examples and nifty ways to use emoteat, please visit our emoteat guide at %^ORANGE%^<help emoteat guide>%^RESET%^.  For a quick list of codes, see %^ORANGE%^<help emoteat codes>%^RESET%^.
 
-%^CYAN%^SEE ALSO%^RESET%^ 
+%^CYAN%^SEE ALSO%^RESET%^
 
-emote, emoteat guide, emoteat codes, pose, colors, languages, recognize, say, whisper, yell  
+emote, emoteat guide, emoteat codes, pose, colors, languages, recognize, say, whisper, yell
 OLI
     );
         return 1;
-} 
+}

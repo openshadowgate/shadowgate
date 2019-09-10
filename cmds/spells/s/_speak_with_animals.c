@@ -1,7 +1,8 @@
 #include <std.h>
-#include <langs.h>
 #include <daemons.h>
 inherit SPELL;
+
+#include <langs.h>
 
 int theProf;
 
@@ -54,5 +55,3 @@ void dest_effect() {
 }
 
 void do_spell_blowup(int prof){ MAGIC_D->fizzile(TO); }
-
-

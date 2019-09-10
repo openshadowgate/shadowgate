@@ -273,3 +273,16 @@ int is_pk_race(string subrace)
        subrace == "gray dwarf")
         return 1;
 }
+
+string *query_languages(string subrace)
+{
+    switch(subrace)
+    {
+    case "duergar": case "grey dwarf":
+        return (["required":({"dwarvish","undercommon"}),"optional":({"gnomish","goblin","orcish","common"})]);
+        break;
+    default:
+        return (["required":({"dwarvish","common"}),"optional":({"gnomish","goblin","orcish","undercommon"})]);
+        break;
+    }
+}

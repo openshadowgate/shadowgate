@@ -1,8 +1,9 @@
 #include <std.h>
 #include <rooms.h>
-#include <langs.h>
 
 inherit DAEMON;
+
+#include <langs.h>
 
 string strip_colors(string sh)
 {

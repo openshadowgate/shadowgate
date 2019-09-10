@@ -160,3 +160,8 @@ int is_pk_race()
 {
     return 1;
 }
+
+string *query_languages(string subrace)
+{
+    return (["required":({"goblin","undercommon"}),"optional":({"orcish","kobold","giant",})]);
+}

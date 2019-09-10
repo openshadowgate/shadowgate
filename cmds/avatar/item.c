@@ -1,8 +1,10 @@
 #include <std.h>
+
+inherit OBJECT;
+
+#include <langs.h>
 #include "items.h"
 #include <move.h>
-#include <langs.h>
-inherit OBJECT;
 
 #include <crafting.h>
 

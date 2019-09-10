@@ -1,9 +1,9 @@
 //Sat 10 Aug 2019 06:26:26 AM UTC removed verboten check -- Il
 #include <std.h>
 #include <rooms.h>
-#include <langs.h>
-
 inherit DAEMON;
+
+#include <langs.h>
 
 int cmd_emote(string str)
 {

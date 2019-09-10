@@ -290,7 +290,7 @@ void listitems(string str)
     }
 
     craftitems = CRAFT_TO_CHECK[str];
-    write("%^GREEN%^-%^BOLD%^%^WHITE%^<Name>%^RESET%^%^GREEN%^----------%^RESET%^%^BOLD%^<Units>%^RESET%^%^GREEN%^---%^RESET%^%^BOLD%^<Type>%^RESET%^%^GREEN%^--------------%^BOLD%^%^WHITE%^<Limbs>%^RESET%^%^GREEN%^--------------------");
+    write("%^GREEN%^-%^BOLD%^%^WHITE%^<Name>%^RESET%^%^GREEN%^----------%^RESET%^%^BOLD%^<Units>%^RESET%^%^GREEN%^---%^RESET%^%^BOLD%^<Type>%^RESET%^%^GREEN%^--------------%^BOLD%^%^WHITE%^<Limbs>%^RESET%^%^GREEN%^-");
     foreach(item in sort_array(keys(craftitems),1))
     {
         outpt="%^CYAN%^";
