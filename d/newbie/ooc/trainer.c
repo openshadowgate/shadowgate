@@ -81,11 +81,11 @@ void init()
     if(!objectp(TP)) return;
     if(userp(TP))
     {
-        if((string)TPQN == myPlayer)
-        {
+//        if((string)TPQN == myPlayer)
+//        {
             if(!objectp(myTrainer)) set_for(TP);
             else if(myTrainer != TP) set_for(TP);
-        }
+//        }
     }
     return;
 }
