@@ -7,7 +7,7 @@ create() {
    set_name("pistol");
    set_short("A pistol");
    set_long("This is primitive single-barrel firearm with flintlock mechanism that fires paper cartriges.");
-   set_weight(5);
+   set_weight(4);
    set_size(1);
    set_value(1000);
 

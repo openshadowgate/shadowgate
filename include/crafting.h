@@ -77,9 +77,16 @@
 ])
 
 #define WEAPONSMITH ([\
-    "arquebus":(["file":COMMONFILE"lrweapon/arquebus","units":5]), \
+    "arquebus":(["file":COMMONFILE"lrweapon/arquebus","units":8]), \
+    "pistol":(["file":COMMONFILE"lrweapon/pistol","units":4]), \
+    "cannon":(["file":COMMONFILE"lrweapon/cannon","units":60]), \
+    "musket":(["file":COMMONFILE"lrweapon/musket","units":9]), \
+    "culverin":(["file":COMMONFILE"lrweapon/culverin","units":40]), \
+    "hackbut":(["file":COMMONFILE"lrweapon/hackbut","units":18]), \
+    "cartrige":(["file":COMMONFILE"lrweapon/cartrige","units":1]), \
+    "grapeshot":(["file":COMMONFILE"lrweapon/grapeshot","units":1]), \
+    "cannonball":(["file":COMMONFILE"lrweapon/cannonball","units":20]), \
     "bastard sword":(["file":COMMONFILE"weapon/bastard","units":3]),\
-    "cannon":(["file":COMMONFILE"lrweapon/cannon","units":15]), \
     "claw":(["file":COMMONFILE"weapon/claw","units":2]),\
     "dwarven waraxe":(["file":COMMONFILE"weapon/dwarvenwaraxe","units":3]),\
     "elven curved blade":(["file":COMMONFILE"weapon/elvencurvedblade","units":4]),\
@@ -99,7 +106,6 @@
     "mace":(["file":COMMONFILE"weapon/mace","units":3]),\
     "medium axe":(["file":COMMONFILE"weapon/battle_axe","units":3]),\
     "medium hammer":(["file":COMMONFILE"weapon/warhammer","units":3]),\
-    "pistol":(["file":COMMONFILE"lrweapon/pistol","units":3]), \
     "polearm":(["file":COMMONFILE"weapon/halberd","units":4]),\
     "rapier":(["file":COMMONFILE"weapon/rapier","units":2]),\
     "scythe":(["file":COMMONFILE"weapon/scythe","units":3]),\

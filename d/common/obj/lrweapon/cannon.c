@@ -7,21 +7,16 @@ create() {
    set_name("cannon");
    set_short("A cannon");
    set_long("This is an artillery cannon. Someone really big decided to use it as a handgun.");
+   set_ammon("cannonball");
+   set_two_handed();
+   set_weight(60);
+   set_size(2);
 
-   set_weight(30);
-   set_size(4);
-   set_value(150);
-   set_two_handed();
-   set_critical_hit_multiplier(30);
-   set_type("bludgeon");
-   set_two_handed();
-   set_lr_prof_type("gun");
-   set_weapon_prof("simple");
-   set_prof_type("club");
-   set_rate_of_fire(4);
-   set_range(2,10,18);
-   set_ammo("bullet");
-   set_decay_rate(100);
+   set_range(4,8,12);
+   set_wc(2,12);
+   set_large_wc(2,14);
+   set_critical_hit_multiplier(6);
+
+   set_value(4000);
    set_weapon_speed(1);
-   set_damage_type("bludgeoning");
 }
