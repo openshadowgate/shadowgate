@@ -28,7 +28,7 @@ int *restricted_alignments(string subrace) {
     switch(subrace) {
     case "tiefling": return ({ 1, 4, 7 }); break;
     case "aasimar": return ({ 3, 6, 9 }); break;
-    case "feytouched": return ({ 1,2,3,5 }); break;          
+    case "feytouched": return ({ 1,2,3,5 }); break;
     default: return ({}); break;
     }
 }
@@ -39,7 +39,7 @@ string *restricted_classes(string subrace) {
       case "aasimar": return ({ "druid" });
       case "air genasi": case "earth genasi": case "fire genasi": case "water genasi":  return ({ "warlock" });
     }
-    return ({}); 
+    return ({});
 }
 
 // this only affects rolling in creation; does not prevent dedication to a deity in-game, to allow for character evolution. N, 3/16.
@@ -51,7 +51,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
       case "aasimar": return ({ 0, 0, 0, -2, 2, 2 }); break;
       case "air genasi": return ({ 0, 2, 0, 2, -2, -2 }); break;
       case "earth genasi": return ({ 2, 0, 2, -2, 0, -2 }); break;
-      case "feytouched": return ({ 0, 2, -2, 0, 0, 2 }); break;          
+      case "feytouched": return ({ 0, 2, -2, 0, 0, 2 }); break;
       case "fire genasi": return ({ 0, 0, 0, 2, 0, -2 }); break;
       case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
       case "water genasi": return ({ 0, 0, 2, 0, 0, -2 }); break;
@@ -64,7 +64,7 @@ mapping skill_mods(string subrace) {
     switch(subrace) {
       case "tiefling": return ([ "stealth" : 2, "disguise" : 2 ]); break;
       case "aasimar": return ([ "perception" : 2, "influence" : 2 ]); break;
-      case "feytouched": return ([ "perception" : 2, "influence" : 2 ]); break;          
+      case "feytouched": return ([ "perception" : 2, "influence" : 2 ]); break;
       case "heartlander": return ([ "influence" : 1 ]); break;
       case "zin'charu": case "zincharu": return ([ "spellcraft" : 1 ]); break;
       case "attayan": return ([ "academics" : 1]); break;
@@ -78,7 +78,7 @@ int level_adjustment(string subrace) {
     if(subrace == "tiefling" ||
        subrace == "aasimar" ||
        subrace == "air genasi" ||
-       subrace == "feytouched" ||       
+       subrace == "feytouched" ||
        subrace == "earth genasi" ||
        subrace == "fire genasi" ||
        subrace == "water genasi")
@@ -125,54 +125,54 @@ mapping daily_uses(string subrace) {
 mapping query_racial_innate(string subrace)
 {
 	if(!subrace || subrace == "") return 0;
-	switch(subrace) 
+	switch(subrace)
 	{
-		case "tiefling": 
-				return (["darkness" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+		case "tiefling":
+				return (["darkness" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
 		case "aasimar":
-				return (["light" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+				return (["light" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
 		case "feytouched":
-				return (["faerie fire" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+				return (["faerie fire" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
 		case "air genasi":
-                                return (["levitate" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+                                return (["levitate" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
-		case "earth genasi": 
-				return (["ghost step" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+		case "earth genasi":
+				return (["ghost step" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
 		case "fire genasi":
-				return (["handfire" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+				return (["handfire" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
 		case "water genasi":
-				return (["water breathing" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+				return (["water breathing" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 1, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
-		case "zin'charu": case "zincharu": 
-				return (["detect magic" : (["type" : "spell", "casting level" : 0.5, 
-				"daily uses" : 3, "delay" : 1, "uses left" : 1, 
-				"refresh time" : -1, "level required" : 0, 
+		case "zin'charu": case "zincharu":
+				return (["detect magic" : (["type" : "spell", "casting level" : 0.5,
+				"daily uses" : 3, "delay" : 1, "uses left" : 1,
+				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
 		default:
@@ -244,13 +244,13 @@ int weight_mod(string gender) {
     return 8;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 8;    
-    
+
+    map["num"]  = 8;
+
     switch(gender)
     {
     case "male":
@@ -270,15 +270,15 @@ mapping weight_values(string gender, int height)
         case 55..60: map["adjust"] = -10; map["die"] = 14; break;
         case 61..69: map["adjust"] = -5;  map["die"] = 10; break;
         case 70..75: map["adjust"] = 0;   map["die"] = 15; break;
-        case 76..81: map["adjust"] = 15;  map["die"] = 15; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 76..81: map["adjust"] = 15;  map["die"] = 15; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({}), subrace;
     subrace = (string)who->query("subrace");
@@ -440,7 +440,7 @@ string *query_eye_colors(object who) {
     return choices;
 }
 
-string *query_subraces(object who) 
+string *query_subraces(object who)
 {
     string *subraces;
     subraces = ({"heartlander","zin'charu","aesatri","attayan","tsarven","morinnen","tonaz'tlacar","senzokuan","maalish"});
@@ -448,8 +448,13 @@ string *query_subraces(object who)
        OB_ACCOUNT->is_high_mortal(who->query_true_name()) ||
        avatarp(who) ||
        who->query("is_valid_npc"))
-    { 
+    {
         subraces += ({ "tiefling","aasimar","feytouched","air genasi","earth genasi","fire genasi","water genasi" });
     }
     return subraces;
+}
+
+string *query_languages(string subrace)
+{
+    return (["required":({"common",}),"optional":({"halfling","orcish","dwarvish","gnomish",})]);
 }

@@ -372,6 +372,9 @@ string *query_languages(string subrace)
     case "fey'ri":
         return (["required":({"abyssal","common"}),"optional":({"drow","undercommon","orcish","elven"})]);
         break;
+    case "aquatic elf":
+        return (["required":({"aquan","common"}),"optional":({"elven","drow",})]);
+        break;
     default:
         return (["required":({"elven","common"}),"optional":({"halfling","gnomish","orcish",})]);
         break;

@@ -81,12 +81,12 @@ int weight() { return 7000; }
 mixed query_racial_innate(string subrace)
 {
 	if(!subrace || subrace == "") return 0;
-	switch(subrace) 
+	switch(subrace)
 	{
 		case "ghostwise halfling" :
-			return (["telepathic bond" : (["type" : "spell", "casting level" : 0.5, 
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				   "refresh time" : -1, "level required" : 0, 
+			return (["telepathic bond" : (["type" : "spell", "casting level" : 0.5,
+				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+				   "refresh time" : -1, "level required" : 0,
 			         "class specific" : 0]),
 	                     "ghost step" : (["type" : "spell", "casting level" : 0.5,
 				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
@@ -144,13 +144,13 @@ int weight_mod(string gender) {
     return 1;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 5;    
-    
+
+    map["num"]  = 5;
+
     switch(gender)
     {
     case "male":
@@ -170,15 +170,15 @@ mapping weight_values(string gender, int height)
         case 30..34: map["adjust"] = -10; map["die"] = 6; break;
         case 35..41: map["adjust"] = 0;   map["die"] = 4; break;
         case 42..46: map["adjust"] = 0;   map["die"] = 6; break;
-        case 47..50: map["adjust"] = 5;   map["die"] = 6; break;        
-        default:     map["adjust"] = 0;   map["die"] = 4; break;            
-        }       
+        case 47..50: map["adjust"] = 5;   map["die"] = 6; break;
+        default:     map["adjust"] = 0;   map["die"] = 4; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     string *choices = ({}), subrace;
     int cha;
     cha = (int)who->query_stats("charisma");
@@ -240,4 +240,9 @@ string *query_eye_colors(object who) {
 
 string *query_subraces(object who) {
     return ({"lightfoot halfling", "strongheart halfling", "ghostwise halfling"});
+}
+
+string *query_languages(string subrace)
+{
+    return (["required":({"halfling","common"}),"optional":({"elven","gnomish","dwarvish",})]);
 }

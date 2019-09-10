@@ -157,3 +157,8 @@ string *query_eye_colors(object who) {
 string *query_subraces(object who) {
     return ({"lani-ele", "hon-ele"});
 }
+
+string *query_languages(string subrace)
+{
+    return (["required":({"common","saurian",}),"optional":({"elven","abyssal",})]);
+}

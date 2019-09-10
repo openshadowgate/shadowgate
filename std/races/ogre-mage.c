@@ -55,22 +55,22 @@ int fingers() { return 5; }
 
 mapping query_racial_innate(string subrace)
 {
-	return (["sleep" : (["type" : "spell", "casting level" : 0.5, 
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1, 
-				   "refresh time" : -1, "level required" : 0, 
+	return (["sleep" : (["type" : "spell", "casting level" : 0.5,
+				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+				   "refresh time" : -1, "level required" : 0,
 				   "class specific" : 0]),
 		   "darkness" : (["type" : "spell", "casting level" : 0.5,
 				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
 				   "refresh time" : -1, "level required" : 0,
 				   "class specific" : 0]),
-		   "fly"      : (["type" : "spell", "casting level" : 0.5, 
+		   "fly"      : (["type" : "spell", "casting level" : 0.5,
 				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
 				   "refresh time" : -1, "level required" : 0,
 				   "class specific" : 0]),
-		   "cone of cold" : (["type" : "spell", "casting level" : 0.5, 
+		   "cone of cold" : (["type" : "spell", "casting level" : 0.5,
 				    "daily uses" : 1, "delay" : 1, "uses left" : 1,
 			 	    "refresh time" : -1, "level required" : 0,
-				    "class specific" : 0]), ]);		   
+				    "class specific" : 0]), ]);
 }
 
 string *wielding_limbs() { return ({ "right hand", "left hand" }); }
@@ -114,13 +114,13 @@ int weight_mod(string gender) {
     return 8;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 4;    
-    
+
+    map["num"]  = 4;
+
     switch(gender)
     {
     case "male":
@@ -140,15 +140,15 @@ mapping weight_values(string gender, int height)
         case 96..98:   map["adjust"] = -20; map["die"] = 15; break;
         case 99..105:  map["adjust"] = 0;   map["die"] = 10; break;
         case 106..108: map["adjust"] = 0;   map["die"] = 15; break;
-        case 109..111: map["adjust"] = 10;  map["die"] = 17; break;        
-        default:       map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 109..111: map["adjust"] = 10;  map["die"] = 17; break;
+        default:       map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({});
     cha = (int)who->query_stats("charisma");
@@ -166,3 +166,8 @@ string *query_hair_colors(object who) {
 }
 
 string *query_eye_colors(object who) { return ({"dark brown", "black"}); }
+
+string *query_languages(string subrace)
+{
+    return (["required":({"common","giant",}),"optional":({"undercommon","orcish","gnomish","dwarvish",})]);
+}

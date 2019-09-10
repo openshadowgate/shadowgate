@@ -180,3 +180,8 @@ int is_pk_race(string subrace)
        subrace == "szarkai")
         return 1;
 }
+
+string *query_languages(string subrace)
+{
+    return (["required":({"common",}),"optional":({"elven","halfling","orcish","undercommon","dwarvish",})]);
+}

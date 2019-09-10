@@ -186,3 +186,8 @@ int is_pk_race()
 {
     return 1;
 }
+
+string *query_languages(string subrace)
+{
+    return (["required":({"common",}),"optional":({"abyssal","yuan-ti","infernal",})]);
+}

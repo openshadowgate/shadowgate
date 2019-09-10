@@ -31,17 +31,17 @@ int sight_bonus(string subrace) { return 2; }
 mapping daily_uses(string subrace) { return (["dancing lights":1,"headbutt":1,"faerie fire":1]); }
 
 mapping query_racial_innate(string subrace) {
-	return (["dancing lights" : (["type" : "spell", "casting level" : 0.5, 
-		"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-		"refresh time" : -1, "level required" : 0, 
+	return (["dancing lights" : (["type" : "spell", "casting level" : 0.5,
+		"daily uses" : 1, "delay" : 1, "uses left" : 1,
+		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]),
-	"faerie fire" : (["type" : "spell", "casting level" : 0.5, 
-		"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-		"refresh time" : -1, "level required" : 0, 
+	"faerie fire" : (["type" : "spell", "casting level" : 0.5,
+		"daily uses" : 1, "delay" : 1, "uses left" : 1,
+		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]),
-	"headbutt" : (["type" : "spell", "casting level" : 1, 
-		"daily uses" : 1, "delay" : 1, "uses left" : 1, 
-		"refresh time" : -1, "level required" : 0, 
+	"headbutt" : (["type" : "spell", "casting level" : 1,
+		"daily uses" : 1, "delay" : 1, "uses left" : 1,
+		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]),]);
 }
 
@@ -106,13 +106,13 @@ int weight_mod(string gender) {
     return 8;
 }
 
-// used by /daemon/player_d 
+// used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
     mapping map=([]);
-    
-    map["num"]  = 3;    
-    
+
+    map["num"]  = 3;
+
     switch(gender)
     {
     case "male":
@@ -132,15 +132,15 @@ mapping weight_values(string gender, int height)
         case 50..52: map["adjust"] = -15; map["die"] = 15; break;
         case 53..57: map["adjust"] = 0;   map["die"] = 10; break;
         case 58..60: map["adjust"] = 0;   map["die"] = 15; break;
-        case 61..63: map["adjust"] = 5;   map["die"] = 15; break;        
-        default:     map["adjust"] = 0;   map["die"] = 10; break;            
-        }       
+        case 61..63: map["adjust"] = 5;   map["die"] = 15; break;
+        default:     map["adjust"] = 0;   map["die"] = 10; break;
+        }
     }
-    
-    return map;   
+
+    return map;
 }
 
-string *query_hair_colors(object who) { 
+string *query_hair_colors(object who) {
     int cha;
     string *choices = ({});
     cha = (int)who->query_stats("charisma");
@@ -170,3 +170,7 @@ string *query_eye_colors(object who) {
     return choices;
 }
 
+string *query_languages(string subrace)
+{
+    return (["required":({"common","sylvan",}),"optional":({"elven","halfling","gnomish",})]);
+}

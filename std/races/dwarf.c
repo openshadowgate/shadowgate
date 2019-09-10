@@ -279,7 +279,7 @@ string *query_languages(string subrace)
     switch(subrace)
     {
     case "duergar": case "grey dwarf":
-        return (["required":({"dwarvish","undercommon"}),"optional":({"gnomish","goblin","orcish","common"})]);
+        return (["required":({"dwarvish","undercommon","deep"}),"optional":({"gnomish","goblin","common"})]);
         break;
     default:
         return (["required":({"dwarvish","common"}),"optional":({"gnomish","goblin","orcish","undercommon"})]);

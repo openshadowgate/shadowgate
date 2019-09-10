@@ -212,3 +212,16 @@ int is_pk_race()
 {
     return 1;
 }
+
+string *query_languages(string subrace)
+{
+    switch(subrace)
+    {
+    case "thanarukk":
+        return (["required":({"infernal","undercommon"}),"optional":({"drow","goblin","kobold",})]);
+        break;
+    default:
+        return (["required":({"orcish","common"}),"optional":({"drow","goblin","kobold","elven",})]);
+        break;
+    }
+}

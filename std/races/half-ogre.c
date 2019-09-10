@@ -142,3 +142,8 @@ string *query_hair_colors(object who) {
 }
 
 string *query_eye_colors(object who) { return ({"blue", "brown", "gray"}); }
+
+string *query_languages(string subrace)
+{
+    return (["required":({"common","giant",}),"optional":({"orcish","undercommon","dwarvish","gnomish",})]);
+}

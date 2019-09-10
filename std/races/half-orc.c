@@ -121,3 +121,8 @@ mapping weight_values(string gender, int height) {
     }
     return map;
 }
+
+string *query_languages(string subrace)
+{
+    return (["required":({"common","orcish",}),"optional":({"giant","undercommon","dwarvish","gnomish",})]);
+}
