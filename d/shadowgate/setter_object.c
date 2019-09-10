@@ -187,7 +187,7 @@ void confirm_reset(string str, string what)
 varargs void full_reset()
 {
         MyCharacterInfo = (["stats" : ([ "charisma" : 6, "intelligence" : 6, "dexterity" : 6, "constitution" : 6, "wisdom" : 6, "strength" : 6]) ]);
-        MyCharacterInfo += (["race" : (["race name" : "NIL", "hair color" : "NIL", "eye color" : "NIL", "height" : 0, "weight" : 0, "age" : 0, "restricted alignments" : ({}), "subrace" : "NIL" ]) ]);
+        MyCharacterInfo += (["race" : (["race name" : "NIL", "hair color" : "NIL", "eye color" : "NIL", "height" : 0, "weight" : 0, "age" : 0, "restricted alignments" : ({}), "subrace" : "NIL", "bonus language": "NIL" ]) ]);
         MyCharacterInfo += (["myclass" : (["minimum stats" : ([]), "myclass name" : "NIL", "available races" : ({}), "restricted alignments" : ({}), "available subraces" : ({}) ]) ]);
         MyCharacterInfo["myclass"] += (["alignment" : 0, "align title" : "NIL", "deity" : "NIL", "unique choice" : "NIL", "unique type" : "NIL" ]);
         MyCharacterInfo["race"] += (["psuedo race" : "NIL", "weight choice" : "NIL", "height choice" : "NIL", "age choice" : "NIL", "body type" : "NIL"]);
@@ -241,7 +241,7 @@ void clear_eyes()
     MyCharacterInfo["race"]["eye color"] = "NIL";
 }
 
-void clear_eyes()
+void clear_bonus_language()
 {
     MyCharacterInfo["race"]["bonus language"] = "NIL";
 }
@@ -366,7 +366,7 @@ varargs void reset_character_info(string what, int flag)
                 clear_subrace();
                 build_restrictions("myclass");
                 build_restrictions("race");
-                if(FirstBuild) { BuildArray = ({"special", "subrace", "stats", "hair color", "eye color"}); EndAt = "finalize"; }
+                if(FirstBuild) { BuildArray = ({"special", "subrace", "stats", "hair color", "eye color", "bonus language"}); EndAt = "finalize"; }
                 break;
             case "subrace":
                 clear_subrace();
@@ -387,7 +387,7 @@ varargs void reset_character_info(string what, int flag)
                 break;
             case "stats":
                 clear_stats();
-                if(FirstBuild) { BuildArray = ({"stats", "hair color", "eye color"}); EndAt = "finalize"; }
+                if(FirstBuild) { BuildArray = ({"stats", "hair color", "eye color", "bonus language"}); EndAt = "finalize"; }
                 break;
             case "hair color":
                 clear_hair();
@@ -413,6 +413,10 @@ varargs void reset_character_info(string what, int flag)
             case "age":
                 clear_age();
                 if(FirstBuild) { BuildArray = ({"age"}); EndAt = "finalize"; }
+                break;
+            case "bonus language":
+                clear_bonus_language();
+                if(FirstBuild) { BuildArray = ({"bonus language"}); EndAt = "finalize"; }
                 break;
             case "alignment":
                 clear_alignment();
@@ -720,25 +724,25 @@ mixed display_my_character()
 
     //if(MyPlace != "finalize") return 0;
     tell_object(ETO, "\n%^BOLD%^%^WHITE%^Your current choices are as follows, please note that character name "+
-    "and gender CANNOT be reset.\n");
-    tell_object(ETO, "\t"+arrange_string(r+"Character Name "+b+"--------", len) +g+" : "+re+c+capitalize(ETO->query_name()));
-    tell_object(ETO, "\t"+arrange_string(r+"Gender "+b+"----------------", len) +g+" : "+re+c+capitalize(ETO->query_gender()));
-    tell_object(ETO, "\t"+arrange_string(r+"Class "+b+"-----------------", len) +g+" : "+arrange_string(re+c+capitalize(MyCharacterInfo["myclass"]["myclass name"]), (len-4)));
+    "and sex CANNOT be reset.\n");
+    tell_object(ETO, "  "+arrange_string(r+"Character Name "+b+"--------", len) +g+" : "+re+c+capitalize(ETO->query_name()));
+    tell_object(ETO, "  "+arrange_string(r+"Sex "+b+"-------------------", len) +g+" : "+re+c+capitalize(ETO->query_gender()));
+    tell_object(ETO, "  "+arrange_string(r+"Class "+b+"-----------------", len) +g+" : "+arrange_string(re+c+capitalize(MyCharacterInfo["myclass"]["myclass name"]), (len-4)));
     tmp = MyCharacterInfo["myclass"]["unique type"];
     if(tmp != "NIL")
     {
-        tell_object(ETO, "\t"+arrange_string(r+tmp +b+" -------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["unique choice"]));
+        tell_object(ETO, "  "+arrange_string(r+tmp +b+" -------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["unique choice"]));
     }
-    tell_object(ETO, "\t"+arrange_string(r+"Race "+b+"---------------------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["race name"]));
+    tell_object(ETO, "  "+arrange_string(r+"Race "+b+"---------------------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["race name"]));
     tmp = MyCharacterInfo["race"]["subrace"];
     if(tmp != "NIL")
     {
-        tell_object(ETO, "\t"+arrange_string(r+"Subrace "+b+"--------------", len)+g+ " : "+re+c+capitalize(tmp));
+        tell_object(ETO, "  "+arrange_string(r+"Subrace "+b+"--------------", len)+g+ " : "+re+c+capitalize(tmp));
     }
     tmp = MyCharacterInfo["race"]["psuedo race"];
     if(tmp != "NIL")
     {
-        tell_object(ETO, "\t"+arrange_string(r+"Parent Lineage "+b+"------------", len)+g+ " : "+re+c+capitalize(tmp));
+        tell_object(ETO, "  "+arrange_string(r+"Parent Lineage "+b+"------------", len)+g+ " : "+re+c+capitalize(tmp));
     }
     MyFile = "/std/races/"+MyCharacterInfo["race"]["race name"]+".c";
     if(file_exists(MyFile))
@@ -749,7 +753,7 @@ mixed display_my_character()
     }
     for(i = 0;i < sizeof(STATS);i++)
     {
-        temp = "\t"+arrange_string(r + capitalize(STATS[i]) +b+" ----------", len)+g+" : ";
+        temp = "  "+arrange_string(r + capitalize(STATS[i]) +b+" ----------", len)+g+" : ";
         temp += re+c+ arrange_string(MyCharacterInfo["stats"][STATS[i]], 6);
         if(pointerp(race_mods))
         {
@@ -763,14 +767,15 @@ mixed display_my_character()
         tell_object(ETO, temp);
         continue;
     }
-    tell_object(ETO, "\t"+arrange_string(r+"Hair Color "+b+"-------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["hair color"]));
-    tell_object(ETO, "\t"+arrange_string(r+"Eye Color "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["eye color"]));
-    tell_object(ETO, "\t"+arrange_string(r+"Height "+b+"-----------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["height choice"]));
-    tell_object(ETO, "\t"+arrange_string(r+"Weight "+b+"-----------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["weight choice"]));
-    tell_object(ETO, "\t"+arrange_string(r+"Body Type "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["body type"]));
-    tell_object(ETO, "\t"+arrange_string(r+"Age "+b+"--------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["age choice"]));
-    tell_object(ETO, "\t"+arrange_string(r+"Alignment "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["align title"]));
-    tell_object(ETO, "\t"+arrange_string(r+"Deity "+b+"------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["deity"]));
+    tell_object(ETO, "  "+arrange_string(r+"Hair Color "+b+"-------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["hair color"]));
+    tell_object(ETO, "  "+arrange_string(r+"Eye Color "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["eye color"]));
+    tell_object(ETO, "  "+arrange_string(r+"Height "+b+"-----------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["height choice"]));
+    tell_object(ETO, "  "+arrange_string(r+"Weight "+b+"-----------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["weight choice"]));
+    tell_object(ETO, "  "+arrange_string(r+"Body Type "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["body type"]));
+    tell_object(ETO, "  "+arrange_string(r+"Age "+b+"--------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["age choice"]));
+    tell_object(ETO, "  "+arrange_string(r+"Bonus Lang "+b+"--------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["bonus language"]));
+    tell_object(ETO, "  "+arrange_string(r+"Alignment "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["align title"]));
+    tell_object(ETO, "  "+arrange_string(r+"Deity "+b+"------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["deity"]));
 
     tell_object(ETO, "\n"+c+"Please note that you may "+em+"reset "+c+
     "any of these choices up to the point at which you are no longer a newbie "+
@@ -785,7 +790,7 @@ mixed display_my_character()
     "reset every choice made after it and will reset your character and inventory. %^RESET%^");
     tell_object(ETO, "\n"+by+"NOTE: "+c+"<"+em+"reset hair color"+c+">"+
     " will reset only your hair color, most resets work this way though some are dependent on others. For example, "+
-    "resetting stats will also reset hair and eye color."+re);
+    "resetting stats will also reset hair, eye color and bonus language."+re);
 
     if(flag)
     {
@@ -863,6 +868,9 @@ void finalize_character()
                 break;
             case "age":
                 build_age();
+                break;
+            case "bonus language":
+                build_bonus_language();
                 break;
             case "alignment":
                 build_alignment();
@@ -1019,7 +1027,7 @@ void build_eyes()
     ETO->set_eye_color(MyCharacterInfo["race"]["eye color"]);
 }
 
-void build_bonus_lang()
+void build_bonus_language()
 {
     if(!objectp(TO)) return;
     if(!objectp(ETO)) return;
@@ -1162,7 +1170,7 @@ void ShowStep()
             break;
         case "hair color": case "eye color":
         case "height": case "weight": case "body type":
-        case "age":
+        case "age": case "bonus language":
             pick_genetics();
             break;
         case "finalize":
@@ -1404,6 +1412,12 @@ void pick_genetics()
             break;
         case "eye color":
             my_choices = MyFile->query_eye_colors(ETO);
+            break;
+        case "bonus language":
+            if(MyFile->query_languages()["optional"])
+                my_choices = MyFile->query_languages()["optional"];
+            else
+                my_choices = ({"common","undercommon"});
             break;
         case "height":
             my_choices = HEIGHTS;
@@ -2007,6 +2021,16 @@ varargs int choose(string str, int flag)
             extra_display(str);
             MyCharacterInfo["race"]["age choice"] = str;
             MyCharacterInfo["race"]["age"] = AGE_CATS[str];
+            if(MyCharacterInfo["stats"]["intelligence"]>16)
+                MyPlace = "bonus language";
+            else
+                MyPlace = "alignment";
+            ProcessStep();
+            break;
+        case "bonus language":
+            if(check_my_choice(str)) { pick_genetics(); return 1;}
+            extra_display(str);
+            MyCharacterInfo["race"]["bonus language"] = str;
             MyPlace = "alignment";
             ProcessStep();
             break;

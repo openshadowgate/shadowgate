@@ -2,8 +2,8 @@
 // also maxing % to learn more than one based on int.
 // last change was 9/03 *Styx* 9/16/06
 //fixed the subtract_lang_overload() function so that garble will work
-//changed query_all_langs() so that if its 0 in the langoverload 
-//mapping it add it and thus you shouldn't see a bunch of 
+//changed query_all_langs() so that if its 0 in the langoverload
+//mapping it add it and thus you shouldn't see a bunch of
 //0's in the languages command - Saide - June 2008
 // Bumping base common/undercommon to 75+ as per bunneez approved. Nienne, 04/09.
 //Bumping up to full fluency (100) for base common/undercommon, per Tsera & Nienne's approval - Octothorpe 10/11/13
@@ -35,12 +35,12 @@ void set_lang(string type, int level) {
    subgrammar[type] = 1;
 }
 
-mapping query_all_langs() 
+mapping query_all_langs()
 {
    	mapping ret;
    	string *langs;
    	int i;
-   
+
    	if(!__Lang) init_lang();
    	ret=([]);
    	ret += __Lang;
@@ -84,50 +84,29 @@ int add_lang(string type) {
 }
 
 void init_lang() {
-   string race;
-   int intel;
-   int x,i,j;
-   __Lang = ([]);
-   _grammar = ([]);
-   subgrammar = ([]);
+    string racefile;
+    string *langs, i;
+    string race;
 
-   intel = TO->query_stats("intelligence");
-   race = TO->query_race();
-   if(!race || race == "") return;
-   if(!LANGS[race]) {
-      race = "human";
-   }
-// adding a +1 to the random(intel) rolls so it doesn't come out 0 and preclude learning at all *Styx*  9/1/2003
-   if(strsrch(race,"half-") != -1) {  // used to include  && intel > 8 (*Styx* 9/06)
-     /*if(random(2)) {
-       set_lang("common",100);
-       set_lang(LANGS[race][0], (random(intel)+1) * 4);
-     } else {
-       set_lang("common",(75 + random(5)) );  // was (55 + random(intel))
-       set_lang(LANGS[race][0],100);
-     }*/
-       set_lang("common",100);
-       set_lang(LANGS[race][0],100);
-   } else {
-     set_lang(LANGS[race][0],100);
-   }
-// was at the end, moving up so everyone gets common *Styx* 9/06
-// altered so beast/underdark races get undercommon instead as default.
-   if(member_array(TO->query_race(),PLAYER_D->night_races()) == -1) { // if is not a night race
-     if(!query_lang("common"))   // removed the intel > 8 && *Styx* 9/06
-       set_lang("common",100);  // was (55 + random(intel))
-   }
-   else {
-     if(!query_lang("common") && !query_lang("undercommon"))
-       set_lang("undercommon",100);
-   }
-   j = INTS[intel]-3;  // changing from 2 to 3 to leave one slot open
-   if(sizeof(LANGS[race]) < 2) return; // this won't apply now but I'll leave it *Styx*
+    __Lang = ([]);
+    _grammar = ([]);
+    subgrammar = ([]);
 
-   for(i=0;i<j;i++) {
-      x = random(sizeof(LANGS[race])-1) +1;
-      set_lang(LANGS[race][x],(random(intel)+5) * 4);  // adding +5 to int roll *Styx* 9/06
-   }
+    race = TO->query_race();
+    if(!race || race == "")
+        return;
+
+    racefile = "/std/races/"+race+".c";
+    if(!file_exists(racefile))
+        return;
+    if(!arrayp(racefile->query_languages()["required"]))
+        return;
+
+    langs = racefile->query_languages()["required"];
+    foreach(i in langs)
+    {
+        set_lang(i,100);
+    }
 }
 
 void set_grammar(string type, int level) {
@@ -167,7 +146,7 @@ void add_grammar(string type, int level) {
 //        return;
 // to slow down the last 10% of proficiency *Styx* 9/06
    if( (query_lang(type) > 90)  && random(25 - intel) )
-	return;	
+	return;
    needed = query_lang(type) - intel;
    if(needed < 1) needed = 1;
    subgrammar[type]+=level;
