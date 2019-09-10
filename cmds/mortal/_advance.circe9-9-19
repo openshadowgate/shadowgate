@@ -581,7 +581,7 @@ int confirm_advance(string str,object ob,int level,string myclass)
 int cmd_advance(string myclass){
    int i,j,k,lottc,train,was_newbie,char_level;
    string *rooms,*dirs,room,dir,*search_paths;
-   object ob,newbroom;
+   object ob;
 
    TP->remove_property("adding base class");
 
@@ -725,16 +725,8 @@ int cmd_advance(string myclass){
                TP->set("advance place",0);
                "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" %^BOLD%^%^BLUE%^Met his/her trainer.");
                if (was_newbie != newbiep(TP)){
-                  write("%^YELLOW%^You are whisked away to a mysterious location!%^RESET%^");
-                  newbroom=find_object_or_load("/d/newbie/ooc/trainer.c");
-                  if(!objectp(newbroom)){
-                     write("Oops! There has been an error. Please contact a wiz.");
-                     return 1;
-                  }
-                  TP->move(newbroom);
                   write("%^BOLD%^%^GREEN%^Congratulations, you are now a full-fledged player.\nYou may exit through the portal in this "
                      "room when you are ready to adventure into the greater realm of ShadowGate!%^RESET%^");
-                  TP->force_me("look");
                   while(objectp(present("charactercreationsetterobject", TP))){
                      tell_object(TP, "The powerful object unattaches from you and fades away!");
                      present("charactercreationsetterobject", TP)->remove();
@@ -777,16 +769,8 @@ int cmd_advance(string myclass){
                TP->InitInnate();
                TP->use_funds("gold",train);
                if(was_newbie != newbiep(TP)){
-                  write("%^YELLOW%^You are whisked away to a mysterious location!%^RESET%^");
-                  newbroom=find_object_or_load("/d/newbie/ooc/trainer.c");
-                  if(!objectp(newbroom)){
-                     write("Oops! There has been an error. Please contact a wiz.");
-                     return 1;
-                  }
-                  TP->move(newbroom);
-                  write("%^BOLD%^%^GREEN%^Congratulations, you are now a full-fledged player.\nYou may exit through the portal in this "
-                     "room when you are ready to adventure into the greater realm of ShadowGate!%^RESET%^");
-                  TP->force_me("look");
+                  write("%^GREEN%^Congratulations, you are now a full-fledged player.\nYou have heard of a gate to the south, "
+                     "that leads into foreign lands.  It will provide passage to the next step of your adventure!%^RESET%^");
                }
                return 1;
             }
@@ -806,16 +790,8 @@ int cmd_advance(string myclass){
             TP->InitInnate();
             TP->use_funds("gold",train);
             if(was_newbie != newbiep(TP)){
-               write("%^YELLOW%^You are whisked away to a mysterious location!%^RESET%^");
-               newbroom=find_object_or_load("/d/newbie/ooc/trainer.c");
-               if(!objectp(newbroom)){
-                  write("Oops! There has been an error. Please contact a wiz.");
-                  return 1;
-               }
-               TP->move(newbroom);
-               write("%^BOLD%^%^GREEN%^Congratulations, you are now a full-fledged player.\nYou may exit through the portal in this "
-                  "room when you are ready to adventure into the greater realm of ShadowGate!%^RESET%^");
-               TP->force_me("look");
+               write("%^GREEN%^Congratulations, you are now a full-fledged player.\nYou have heard of a gate to the south, "
+                  "that leads into foreign lands.  It will provide passage to the next step of your adventure!%^RESET%^");
             }
 	      return 1;
          }
