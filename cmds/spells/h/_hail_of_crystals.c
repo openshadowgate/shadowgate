@@ -17,7 +17,6 @@ void create()
         "party members, or any beings following him.  The power becomes longer lasting as the shaper grows stronger.");
     set_verbal_comp();
     set_somatic_comp();
-    set_components(([ "psion" : ([ "tourmaline" : 1, ]), ]));
     set_save("fort");
     aoe_spell(1);
     set_aoe_message("%^BOLD%^%^BLACK%^(shredded by shards of %^MAGENTA%^c%^RED%^r%^YELLOW%^y%^GREEN%^s%^CYAN%^t%^BLUE%^a%^RESET%^%^MAGENTA%^l%^BOLD%^%^BLACK%^)%^RESET%^");

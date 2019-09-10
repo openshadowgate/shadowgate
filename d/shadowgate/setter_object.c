@@ -1414,8 +1414,11 @@ void pick_genetics()
             my_choices = MyFile->query_eye_colors(ETO);
             break;
         case "bonus language":
-            if(MyFile->query_languages()["optional"])
-                my_choices = MyFile->query_languages()["optional"];
+            if(MyFile->query_languages())
+            {
+                if(arrayp((MyFile->query_languages())["optional"]))
+                    my_choices = MyFile->query_languages()["optional"];
+            }
             else
                 my_choices = ({"common","undercommon"});
             break;
@@ -2021,9 +2024,9 @@ varargs int choose(string str, int flag)
             extra_display(str);
             MyCharacterInfo["race"]["age choice"] = str;
             MyCharacterInfo["race"]["age"] = AGE_CATS[str];
-            if(MyCharacterInfo["stats"]["intelligence"]>16)
-                MyPlace = "bonus language";
-            else
+            /* if(MyCharacterInfo["stats"]["intelligence"]>16) */
+            /*     MyPlace = "bonus language"; */
+            /* else */
                 MyPlace = "alignment";
             ProcessStep();
             break;
