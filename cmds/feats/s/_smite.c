@@ -20,7 +20,7 @@ int allow_shifted() { return 0; }
 
 int prerequisites(object ob){
     if(!objectp(ob)) return 0;
-    if(ob->query_class_level("paladin") < 2 || (int)ob->query_alignment() > 3) {
+    if(ob->query_class_level("paladin") < 2 || (int)ob->query_alignment() > 6) {
         dest_effect();
         return 0;
     }
@@ -122,4 +122,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-
