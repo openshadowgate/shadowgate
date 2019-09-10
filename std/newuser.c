@@ -77,7 +77,7 @@ mapping relationships;
 mapping retinue;
 int retinue_level;
 
-//Feat stuff 
+//Feat stuff
 
 mapping __FEAT_DATA=([]);
 string *player_feats=({});
@@ -287,8 +287,8 @@ int quit_start(string str) {
 }
 
 int query_verbose() { return static_user["verbose_moves"]; }
-int set_brief() 
-{ 
+int set_brief()
+{
     static_user["verbose_moves"] = !static_user["verbose_moves"];
     return 1;
 }
@@ -311,7 +311,7 @@ int id(string str)
     if( !hold ) { return hold; }
 
     if ( sscanf(str, "%s %d",stuff, junk) != 2) { stuff = str; }
-    stuff = lower_case(stuff);  
+    stuff = lower_case(stuff);
     if(objectp(TP)) { known = (string)TP->knownAs(query_true_name());   }
 
     if(objectp(shape = TO->query_property("shapeshifted")))
@@ -323,12 +323,12 @@ int id(string str)
 
     if(str=="attacker") { return hold; }
     if (!objectp(TP) || avatarp(TP) || TP == TO || !userp(TP)) { return hold; }
-    if(stringp(known)) { known = lower_case(known); }  
-    if( stuff != known && stuff != "player" && stuff != query_race()) { return 0; }  
+    if(stringp(known)) { known = lower_case(known); }
+    if( stuff != known && stuff != "player" && stuff != query_race()) { return 0; }
     return hold;
 }
 
-void create() 
+void create()
 {
     more::create();
     weaponless_users::create();
@@ -360,11 +360,11 @@ void create()
 		  "protectors":({}),
 		  "blinking":0,
           "verbose_moves" : 1,
-          "verbose_combat" : 1,
+          "verbose_combat" : 0,
 		  ]);
 }
 
-void remove() 
+void remove()
 {
     if(objectp(previous_object()))
     {
@@ -388,12 +388,12 @@ void new_body() { return USERUC_D->new_body(TO); }
 void setup_messages() { return USERUC_D->setup_messages(TO); }
 void check_guilds() { return USERUC_D->check_guilds(TO); }
 
-void setup() 
-{      
+void setup()
+{
     if (member_array(query_position(), MORTAL_POSITIONS) == -1) enable_wizard();
-    set_living_name(query_name());  
-    seteuid(getuid());  
-    tsh::initialize();   
+    set_living_name(query_name());
+    seteuid(getuid());
+    tsh::initialize();
     USERUC_D->setup(TO);
     set_heart_beat(1);
 }
@@ -403,15 +403,15 @@ void init_spellcaster() { return USERUC_D->init_spellcaster(TO); }
 void reduce_dying() { dying--; }
 int query_dying() { return dying; }
 
-void heart_beat() 
+void heart_beat()
 {
     ::heart_beat();
     if(!objectp(TO)) return;
     return USERUC_D->user_heart_beat(TO);
 }
- 
+
 void net_dead2() { return USERUC_D->net_dead2(TO); }
-void net_dead() 
+void net_dead()
 {
     set_property("disc",1);
     if (query_attackers() != ({}))
@@ -425,7 +425,7 @@ void resetLevelForExp(int expLoss) { return USERUC_D->resetLevelForExp(TO, expLo
 void reset_all_status_problems() { "/daemon/user_d.c"->reset_all_status_problems(TO); }
 void die() { return USERUC_D->die(TO); }
 
-void set_rname(string rname) 
+void set_rname(string rname)
 {
     if (geteuid(previous_object()) != UID_ROOT && geteuid(previous_object()) != UID_USERACCESS) return;
     real_name = rname;
@@ -439,7 +439,7 @@ string query_email() { if (email) return email;return "???@" + ip; }
 string query_rname() { return real_name ? real_name : "???"; }
 string query_password() { return password; }
 
-void set_password(string pass) 
+void set_password(string pass)
 {
     string salt;
     salt = PWGEN->random_salt(43); //Make it better someone
@@ -447,7 +447,7 @@ void set_password(string pass)
     save_player( query_name() );
 }
 
-void set_email(string e) { 
+void set_email(string e) {
   if (geteuid(previous_object()) != UID_ROOT && geteuid(previous_object()) != UID_USERACCESS) return 0;
   if (this_player(1) != this_player()) return 0;
   email = e;
@@ -455,7 +455,7 @@ void set_email(string e) {
 }
 
 string get_path() { return cpath; }
-void set_path(string path) 
+void set_path(string path)
 {
     int foo;
     if (geteuid(previous_object()) != geteuid(TO)) return;
@@ -465,7 +465,7 @@ void set_path(string path)
 }
 
 void write_messages() { return USERUC_D->write_messages(TO); }
-string query_title() 
+string query_title()
 {
     if ((avatarp(TO) || wizardp(TO)) && query_disguised()) return ::query_short();
     return USERUC_D->query_title(TO);
@@ -485,25 +485,25 @@ string query_short() { return USERUC_D->query_short(TO); }
 
 mixed *local_commands()
 {
-    if (geteuid(previous_object()) != UID_ROOT && geteuid(previous_object()) != UID_USERACCESS) 
+    if (geteuid(previous_object()) != UID_ROOT && geteuid(previous_object()) != UID_USERACCESS)
     {
         message("my_action", "You aren't authorized to check this information.",TO);
         return({});
-    } 
+    }
     return commands();
 }
 
-nomask string query_position() 
+nomask string query_position()
 {
     if(member_group(this_object()->query_true_name(), "law")) return "Admin";
     return position;
 }
 
-nomask int query_level() 
+nomask int query_level()
 {
     int i,x,tmp;
     if(TO->query("new_class_type") && !avatarp(TO)) { return (int)TO->query_character_level(); }
-    if (!mlevels || mlevels  == ([])) 
+    if (!mlevels || mlevels  == ([]))
     {
         if (query_classes() == ({})) return 0;
         mlevels = ([query_classes()[0]:level]);
@@ -515,11 +515,11 @@ nomask int query_level()
 void set_position(string pos)
 {
     if(!USERUC_D->set_position(TO, pos)) return;
-    else position = pos;    
+    else position = pos;
     init_path();
 }
 
-void set_level(int lev) 
+void set_level(int lev)
 {
     string str;
     if (!intp(lev)) return;
@@ -527,7 +527,7 @@ void set_level(int lev)
     set_mlevel(query_class(),lev);
     PLAYER_D->add_player_info();
     log_file("advance", TO->query_name()+" advanced to level "+lev+".\n");
-    if (position == "high mortal" && level < 20) 
+    if (position == "high mortal" && level < 20)
     {
         position = "player";
         search_path -= ({ DIR_HM_CMDS});
@@ -547,27 +547,27 @@ string *query_messages(string myclass)
     return static_user["pastMessages"][myclass];
 }
 
-void save_messages(string msg_class, string msg) 
+void save_messages(string msg_class, string msg)
 {
     int i,j;
     if (member_array(msg_class,static_user["saveable"]) == -1) return;
-    if ((j = sizeof(static_user["pastMessages"][msg_class])) > MAXSTOREDMESSAGES) 
+    if ((j = sizeof(static_user["pastMessages"][msg_class])) > MAXSTOREDMESSAGES)
     {
-        for (i=0;i<j-1;i++) 
+        for (i=0;i<j-1;i++)
         {
             static_user["pastMessages"][msg_class][i] = static_user["pastMessages"][msg_class][i+1];
         }
         static_user["pastMessages"][msg_class][j-1] = msg;
-    } 
-    else 
+    }
+    else
     {
         static_user["pastMessages"][msg_class]+= ({msg});
     }
 }
 
-void receive_message(string msg_class, string msg) 
-{ 
-    msg = USERUC_D->receive_message(TO, msg_class, msg); 
+void receive_message(string msg_class, string msg)
+{
+    msg = USERUC_D->receive_message(TO, msg_class, msg);
     if(!stringp(msg)) return;
     receive(msg);
     return;
@@ -600,18 +600,18 @@ void obey_command(string command, object commander){
     command = replace_string(command, "\n", "");
 
     if (!commander->isKnown(query_name())){
-        return;     
-    } 
+        return;
+    }
     if ((string)commander->knownAs(query_name())!=name){
-        return;     
-    }        
+        return;
+    }
     sscanf(command, "%s %s", comm, lang);
-    if (comm == "withdraw" || comm == "suicide" || comm == "choose" 
+    if (comm == "withdraw" || comm == "suicide" || comm == "choose"
              || comm == "forsake" || comm == "offerall"){
       tell_object (commander, "You can't force another player to do that, as"
         +" it would be open to abuse. Sorry.");
         return;
-    }   
+    }
     if (query_paralyzed()){
         para_message = query_paralyze_message();
         remove_paralyzed();
@@ -628,7 +628,7 @@ void obey_command(string command, object commander){
 
 void receive_snoop(string str) { receive_message("snoop","%"+str); }
 void catch_tell(string str) { receive(str); }
-void add_guild(string str) 
+void add_guild(string str)
 {
     if (!str)
         return;
@@ -639,7 +639,7 @@ void add_guild(string str)
     return;
 }
 
-void remove_guild(string str) 
+void remove_guild(string str)
 {
     if(!str) return;
     guild -= ({str});
@@ -896,7 +896,7 @@ void hide(int x) {
   set_hide(x);
 }
 
-int set_mini_quest(string str, int x, string desc) 
+int set_mini_quest(string str, int x, string desc)
 {
     if(!objectp(TP)) { return 0; }
     if(!objectp(ETP)) { return 0; }
@@ -1219,7 +1219,7 @@ void remove_all_pets() {
 
 void reduce_my_skills(string myclass) { return; }
 
-void reduce_guild_level(string myclass) 
+void reduce_guild_level(string myclass)
 {
     if(TO->query("new_class_type"))
     {
@@ -1228,17 +1228,17 @@ void reduce_guild_level(string myclass)
     }
     else
     {
-        if (myclass == "paladin" || myclass == "ranger") 
+        if (myclass == "paladin" || myclass == "ranger")
         {
-            if (myclass == "ranger") 
+            if (myclass == "ranger")
             {
                 TO->set_guild_level("cleric",(int)TO->query_class_level("ranger") - 7);
-            } 
-            else if (myclass == "paladin") 
+            }
+            else if (myclass == "paladin")
             {
                 TO->set_guild_level("cleric",(int)TO->query_class_level("paladin") - 8);
-            } 
-            else if (myclass == "antipaladin") 
+            }
+            else if (myclass == "antipaladin")
             {
                 TO->set_guild_level("cleric",(int)TO->query_class_level("antipaladin") - 8);
             }
@@ -1312,7 +1312,7 @@ string *query_rem_obs_sort() { return rem_obs_sort; }
 
 mapping query_rem_rooms()
 {
-    //function that clears invalid rooms - IE rooms we kept in the game 
+    //function that clears invalid rooms - IE rooms we kept in the game
     //for one reason or another but that are no longer accessible to characters
     //Saide, December 2016
     rem_rooms = "/daemon/user_d.c"->check_rem_rooms(TO, rem_rooms_sort, rem_rooms);
@@ -1413,7 +1413,7 @@ object * query_protectors() {
 void set_protectors(object *blah) { static_user["protectors"] = blah; }
 int query_blinking() { return static_user["blinking"]; }
 
-void set_blinking(int i) 
+void set_blinking(int i)
 {
     int num;
     if(FEATS_D->usable_feat(TO,"slippery caster"))
@@ -1478,7 +1478,7 @@ string *query_ignored() {
 
 void reset_age() { start_age = 0; }
 void setPlayerAgeCat(int age, string str) {
-    if (age > -21 && age < 501) 
+    if (age > -21 && age < 501)
     {
         ageCat = age;
         reset_age();
@@ -1507,7 +1507,7 @@ int query_start_age() {
   case "human": start_age = 16+(16*ageCat)/100 + random(4);    break;
   case "elf": start_age = 100+(100*ageCat)/100  + roll_dice(5,6); break;
   case "satyr": start_age = 100+(100*ageCat)/100  + roll_dice(5,6); break;
-  case "shade": start_age = 100+(100*ageCat)/100  + roll_dice(5,6); break;            
+  case "shade": start_age = 100+(100*ageCat)/100  + roll_dice(5,6); break;
   case "drow": start_age = 100+(100*ageCat)/100  + roll_dice(5,6); break;
   case "half-drow": start_age = 15+(15*ageCat)/100 + random(4); break;
   case "half-elf": start_age = 16+(16*ageCat)/100 + random(6);  break;
@@ -1576,7 +1576,7 @@ void convert_relationships()
 
     if(!objectp(TO)) { return; }
     if(avatarp(TO)) { return; }
-    if(TO->query("relationships_converted")) { return; }    
+    if(TO->query("relationships_converted")) { return; }
 
     temp = (mapping)TP->getRelationships();
     if(!sizeof(keys(temp))) { relationships = ([]);}
@@ -1655,7 +1655,7 @@ int remove_relationship(string name)
 
 mapping getRelationships()
 {
-    if (!relationships) 
+    if (!relationships)
     {
         relationships = ([]);
     }
@@ -1666,9 +1666,9 @@ int isKnown(string who)
 {
     mapping profiles = ([]);
     object obj;
-    string *profile_names=({}),profile;    
+    string *profile_names=({}),profile;
 
-    if (!relationships) 
+    if (!relationships)
     {
         relationships = ([]);
         return 0;
@@ -1707,10 +1707,10 @@ string knownAs(string who)
     string profile;
     object obj;
 
-    if(!isKnown(who)) { return 0; }  
+    if(!isKnown(who)) { return 0; }
 
     if(!TO->query("relationships_converted"))
-    {    
+    {
         return lower_case(relationships[who]);
     }
     else
@@ -1733,17 +1733,17 @@ string realName(string who)
 {
     mapping temp=([]);
     string *stuff,*names=({}),*profiles=({});
-    int i,j;    
+    int i,j;
 
     if(!TO->query("relationships_converted"))
     {
         stuff = keys(relationships);
         if(!stringp(who)) { return ""; }
         who = lower_case(who);
-      
-        for(i=0;i<sizeof(stuff);i++) 
+
+        for(i=0;i<sizeof(stuff);i++)
         {
-            if(lower_case(knownAs(stuff[i])) == who) 
+            if(lower_case(knownAs(stuff[i])) == who)
             {
                 return lower_case(stuff[i]);
             }
@@ -1771,32 +1771,32 @@ string realName(string who)
 string getNameAsSeen(object ob)
 {
     string known;
-    if(!objectp(ob)) 
+    if(!objectp(ob))
     {
-        if(objectp(TP)) 
+        if(objectp(TP))
         {
             ob = TP;
         }
     }
 
-    if(objectp(ob) && ob->knownAs(query_true_name())) 
+    if(objectp(ob) && ob->knownAs(query_true_name()))
     {
-        if(wizardp(TO)) 
+        if(wizardp(TO))
         {
             known = query_name();
-        } 
-        else 
+        }
+        else
         {
             known = ob->knownAs(query_true_name());
         }
-    } 
-    else 
+    }
+    else
     {
-        if(wizardp(TO)) 
+        if(wizardp(TO))
         {
             known = query_name();
-        } 
-        else 
+        }
+        else
         {
             return getWholeDescriptivePhrase();
         }
@@ -1840,9 +1840,9 @@ string getWholeDescriptivePhrase(){
   string phrase = getDescriptivePhrase();
   object shape;
 
-  if(!stringp(phrase)) 
+  if(!stringp(phrase))
   {
-    if(query_race() == "voadkyn") 
+    if(query_race() == "voadkyn")
     {
       phrase = "$B $G $R with $E eyes";
     }
@@ -1850,7 +1850,7 @@ string getWholeDescriptivePhrase(){
       phrase = "$B $G $R with $E eyes and $H hair";
   }
   if(strsrch(phrase,"$R") == -1)
-  { 
+  {
      if( (strsrch(phrase,"$SR") != -1) && query("subrace") !=0)
      {
         phrase = phrase;
@@ -1868,12 +1868,12 @@ string getWholeDescriptivePhrase(){
   str = replace_string(str,"$E",((query_eye_color()==0)?"":query_eye_color()));
   str = replace_string(str,"$H",(query_hair_color()==0?"":query_hair_color()));
   str = replace_string(str,"$G",query_gender());
-  
+
   if(objectp(shape = (object)query_property("shapeshifted")))
   {
       the_race = (string)shape->query_shape_race();
   }
-  
+
   if(!the_race)
   {
       if(query("subrace") != 0)
@@ -1934,16 +1934,16 @@ int query_death_age() {  return death_age; }
 void set_death_age(int x) { death_age = x; }
 
 void set_pk_death_flag() { pk_death_flag = 1; }
-void remove_pk_death_flag() 
-{ 
+void remove_pk_death_flag()
+{
 	if(objectp(TO)) TO->delete("pk_death_age");
 	if(objectp(TO)) TO->delete("pk_death_time");
-	pk_death_flag = 0; 
+	pk_death_flag = 0;
 }
 
 int get_pk_death_flag() { return ( pk_death_flag || down_time); }
 
-int query_death_flag() 
+int query_death_flag()
 {
     if(!avatarp(TO) && query("death level"))
     {
@@ -1964,7 +1964,7 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
   int _total_light;
   int _sight_bonus;
   int calc;
-  
+
   if (!objectp(TO)) return 0;
   if (!objectp(whichroom)) return 0;
   if (whichroom->query_property("ooc_room")) return 0;
@@ -1972,10 +1972,10 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
   if (geteuid(whichroom) == "Shadowgate") return 0;
   _total_light=total_light(whichroom);
   _sight_bonus=query_sight_bonus();
-  
+
   if (!D_BUG_D->user_new_light())
     return (_total_light + _sight_bonus - actionbonus < 0);
-  
+
   if (_sight_bonus * _total_light < 0)
     calc = _sight_bonus + _total_light;
   else
@@ -1987,7 +1987,7 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
     calc *= -1;
     _total_light *= -1;
   }
-  
+
   if (intp(actionbonus)) {
     if (calc > (0+actionbonus)) {
 
