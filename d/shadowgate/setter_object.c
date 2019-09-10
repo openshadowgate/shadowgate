@@ -241,6 +241,11 @@ void clear_eyes()
     MyCharacterInfo["race"]["eye color"] = "NIL";
 }
 
+void clear_eyes()
+{
+    MyCharacterInfo["race"]["bonus language"] = "NIL";
+}
+
 void clear_body_type()
 {
     MyCharacterInfo["race"]["body type"] = "NIL";
@@ -1014,6 +1019,12 @@ void build_eyes()
     ETO->set_eye_color(MyCharacterInfo["race"]["eye color"]);
 }
 
+void build_bonus_lang()
+{
+    if(!objectp(TO)) return;
+    if(!objectp(ETO)) return;
+    ETO->set_lang(MyCharacterInfo["race"]["bonus language"],100);
+}
 
 void build_subrace()
 {
