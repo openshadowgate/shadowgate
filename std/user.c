@@ -952,7 +952,7 @@ void create() {
   level = 1;
   set_weight(500);
   static_user["verbose_moves"] = 1;
-  user_vars["verbose_combat"] = 1;
+  user_vars["verbose_combat"] = 0;
   TO->set_diety("pan");
   enable_commands();
   set_max_internal_encumbrance(MAX_ENCUMBRANCE[7]);

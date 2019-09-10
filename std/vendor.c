@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Standart vendor parent object
+ */
+
 //      /std/shop.c
 //      a standard object that sells things in shops
 //      created by Melnmarn @ ShadowGate
@@ -9,19 +14,19 @@
 /*  changed to have vendors seem more interactive, esp. to indicate to room that someone is interracting with the vendor   *Styx*  Jan. 03
     added to have vendor tell what skill is needed on show command *Styx*  2/13/03
     also added to deny buying if no coin type is set (solve kit problem)
-*/ 
+*/
 //changed it so that you cannot buy, sell or get an appraisal from an unconscious vendor *tsera* 4/2/04
 /*
 Changed by Circe 3/19/05
-This change should make it so we can set a maximum level on 
+This change should make it so we can set a maximum level on
 the vendor that will control the value and/or power of items
 that can be sold in the shop.  Essentially, vendors will have
-a property set_mymaxvalue() that will be a number 1-40.  
+a property set_mymaxvalue() that will be a number 1-40.
 This will make it so that anything above a certain value
-(defined below) or a certain enchantment will still be sold, 
+(defined below) or a certain enchantment will still be sold,
 but won't go into the shop's storage area to be re-sold to the
 public.  The set_mymaxvalue() should be basically the level
-of the players who should frequent the area. 
+of the players who should frequent the area.
 */
 
 //Minor change 6/14/05 by ~Circe~ to allow showing by size.
@@ -106,7 +111,7 @@ int adjustment_cost(object ob)
         bonus = bonus?bonus:0;
     }
     if(!enchant && (ob->is_armour() || ob->is_weapon())) enchant = 3;
-    
+
     cost = (int)ob->query_property("repair cost");
     if(!cost)
     {
@@ -114,13 +119,13 @@ int adjustment_cost(object ob)
         cost=-(565*x*x*x-12165*x*x+11600*x-4500)/9;
         x = bonus;
         cost+=-(500*x*x*2-6500*x)/3;
-        ob->set_property("repair cost", cost);        
+        ob->set_property("repair cost", cost);
     }
 
     return adjust_cost(cost);
 }
 
-int __Buy(string str) 
+int __Buy(string str)
 {
     object ob;
     string tmp;
@@ -132,10 +137,10 @@ int __Buy(string str)
         return 1;
     }
     not_allowed = ({ "bound", "disabled", "unconscious" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
     if(disabled(TO, not_allowed)){
-      write("Do you really expect someone who cannot move to sell you something?");  
+      write("Do you really expect someone who cannot move to sell you something?");
 	return 1;
     }
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
@@ -190,7 +195,7 @@ int __Buy(string str)
        }
     }
 //added the above faction stuff to allow for faction-specific
-//items.  ~Circe~ 11/24/07     
+//items.  ~Circe~ 11/24/07
 /*Below stuff about levelrestrict is set up to allow restriction of items to certain levels ~Circe~ 1/19/08*/
     if(ob->query_property("levelrestrict")){
        lvl = ob->query_property("levelrestrict");
@@ -222,10 +227,10 @@ int __Sell(string str) {
         write("Try 'sell <object>'!");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
-    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){  
-      write("Do you really expect a person who cannot move to buy something?");  
+    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){
+      write("Do you really expect a person who cannot move to buy something?");
 	return 1;
     }
     if (!should_interact(TP)) {
@@ -269,13 +274,13 @@ int __Sell(string str) {
         tell_room(ETO, response+"Please unwield that before selling it.");
         return 1;
     }
-	//Added by Saide to support the new soulbound/ownered 
+	//Added by Saide to support the new soulbound/ownered
 	//item code - 3/21/2007
-	if(ob->query_item_owner_prop("sale_clear")) 
+	if(ob->query_item_owner_prop("sale_clear"))
 	{
 		ob->clear_item_owners();
 	}
-	//this mymax check is here so it will bypass this code if the vendor has no max set 
+	//this mymax check is here so it will bypass this code if the vendor has no max set
 	//This starts the maxvalue code.  Circe 3/19/05
 	if(mymax = TO->query_mymaxvalue())
 	{
@@ -324,7 +329,7 @@ int __Sell(string str) {
        	}
     	}
     	//this ends the maxvalue code
-             
+
     	value = value - (value/3);
 
     	value = adjust_cost(value,1);
@@ -332,12 +337,12 @@ int __Sell(string str) {
     	tell_room(ETO, TPQCN+" sells "+(string)ob->query_short()+".",TP);
    	tell_object(TP, "You sell "+(string)ob->query_short()+
 	" for "+value + " " +ob->query_cointype()+".");
-    	if (ob->query_destroy()) 
-	{ 
-		"/daemon/search_d.c"->add_object(ob); 
-		ob->remove(); 
+    	if (ob->query_destroy())
+	{
+		"/daemon/search_d.c"->add_object(ob);
+		ob->remove();
 	}
-    	else 
+    	else
 	{
 //                 "/daemon/search_d.c"->add_object(ob);// added to populate the search table -Ares
 // was glitching & spamming the bug log, commenting out til it can be fixed. N, 4/14.
@@ -356,10 +361,10 @@ int __Show(string str) {
         write("Try 'show <object>'.");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
-    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){  
-      write("Get real.");  
+    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){
+      write("Get real.");
 	return 1;
     }
     if(sscanf(str, "%s to %s",what, whom) == 2)
@@ -377,20 +382,20 @@ int __Show(string str) {
     tell_room(ETO, TOQCN+" shows "+TPQCN+" "+(string)ob->query_short()+".", TP);
     message("info", (string)ob->query_long(), TP);
 // added to have vendor tell them the skillneeded per requests *Styx*  2/13/03
-    if(ob->is_weapon()) 
+    if(ob->is_weapon())
     {
-	    if(ob->is_lrweapon()) 
+	    if(ob->is_lrweapon())
         {
             if(TP->query("new_class_type"))
             {
 	            tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says: %^RESET%^To use this as a ranged weapon, you'll have to visit the archery range and train in the use of "+ob->query_weapon_prof()+" weapon proficiency.");
             }
-            else 
+            else
             {
                 tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says: %^RESET%^To use this as a ranged weapon, you'll have to visit the archery range and train in the use of "+ob->query_lr_prof_type()+".");
             }
         }
-	    else 
+	    else
         {
             if(TP->query("new_class_type"))
             {
@@ -402,7 +407,7 @@ int __Show(string str) {
             }
         }
     }
-    if(ob->is_armor()) 
+    if(ob->is_armor())
     {
        if(TP->query("new_class_type"))
        {
@@ -432,9 +437,9 @@ int __Show(string str) {
     return 1;
 }
 
-//Changed to have a "Quantity" section 
+//Changed to have a "Quantity" section
 //Saide - November, 2016
-int __List(string str) 
+int __List(string str)
 {
     mapping myItems;
     object *inv, *myInv, *mySame;
@@ -442,7 +447,7 @@ int __List(string str)
     int i, x, j, myVal, k, l, m;
     if(!objectp(TO)) return 0;
     if(!objectp(TP)) return 0;
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
     tell_room(ETO, TPQCN+" looks over the shop's inventory and price list.", TP);
     while (!__Eco["storage object"]) {
@@ -461,7 +466,7 @@ int __List(string str)
     myInv = ({});
     mySame = ({});
     tmp = ({});
-    
+
     for(x = 0; x < sizeof(inv);x++)
     {
         if(!objectp(inv[x])) continue;
@@ -469,21 +474,21 @@ int __List(string str)
         myCoin = inv[x]->query_cointype();
         myType = types(inv[x]);
         if(!myType) myType = "";
-        myVal = inv[x]->query_value();        
+        myVal = inv[x]->query_value();
         if(myItems[myShort])
         {
-            if(myItems[myShort]["type"] == myType && myItems[myShort]["coin"] == myCoin 
+            if(myItems[myShort]["type"] == myType && myItems[myShort]["coin"] == myCoin
             && myItems[myShort]["value"] == myVal && myItems[myShort]["short"] == myShort)
             {
                 myItems[myShort]["quantity"]++;
                 if(member_array(inv[x], mySame) == -1 && member_array(myShort, tmp) == -1)
                 {
                     mySame += ({inv[x]});
-                    tmp += ({myShort});                              
+                    tmp += ({myShort});
                 }
                 continue;
             }
-            else 
+            else
             {
                 myInv += ({inv[x]});
                 continue;
@@ -500,20 +505,20 @@ int __List(string str)
             continue;
         }
     }
-    
+
     inv = (myInv + mySame);
     inv = sort_array(inv,"sort_items",TO);
     i = sizeof(inv);
     //write("%^YELLOW%^ Description			  Cost			 Type");
     write(sprintf("%%^YELLOW%%^%-38s %-8s %-10s %-5s", "Description", "Stock", "Type", "Cost"));
     write("%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-    for (x=0, tmp = ({}); x<i; x++) 
+    for (x=0, tmp = ({}); x<i; x++)
     {
         //stolen from ares token vendor to fix line wrap + color problem.
         myShort = inv[x]->query_short();
         j =strlen("/daemon/filters_d.c"->filter_colors(inv[x]->query_short()));
-        j = 38 - j;       
-                
+        j = 38 - j;
+
         if(myItems[myShort] && member_array(inv[x], myInv) == -1)
         {
             k = strlen(""+adjust_cost(myItems[myShort]["value"]));
@@ -522,13 +527,13 @@ int __List(string str)
             l = 10 - l;
             m = strlen(""+myItems[myShort]["quantity"]);
             m = 4 - m;
-            
+
             tmp += ({"%^BOLD%^%^GREEN%^" + arrange_string(myItems[myShort]["short"], 40) + "  %^BOLD%^%^WHITE%^"+
             myItems[myShort]["quantity"] + arrange_string(" ", m) + " "+myItems[myShort]["type"] + arrange_string(" ", l)+
             " " + adjust_cost(myItems[myShort]["value"]) + arrange_string(" ", k)+"%^BOLD%^%^YELLOW%^"+myItems[myShort]["coin"]+
             "%^RESET%^"});
-        } 
-        else 
+        }
+        else
         {
             myType = types(inv[x]);
             if(!myType) myType = "";
@@ -541,7 +546,7 @@ int __List(string str)
                     "1" + arrange_string(" ", m) + " " +myType + arrange_string(" ",l) + " " +
                     adjust_cost((int)inv[x]->query_value()) + arrange_string(" ", k) + "%^BOLD%^%^WHITE%^"+inv[x]->query_cointype()});
         }
-        if (( ( x%17 ) == 0 ) && ( x > 15 ) ) 
+        if (( ( x%17 ) == 0 ) && ( x > 15 ) )
         {
             tmp += ({"%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="});
             if (x == 17) tmp += ({" "});
@@ -563,10 +568,10 @@ int __Value(string str) {
         write("Try 'value <object>'.");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
-    if(disabled(TO, ({"unconscious", "disabled"})) ){  
-      write("Do you really expect an unconscious person to give you an appraisal?");  
+    if(disabled(TO, ({"unconscious", "disabled"})) ){
+      write("Do you really expect an unconscious person to give you an appraisal?");
 	return 1;
     }
     if (!should_interact(TP)) {
@@ -597,7 +602,7 @@ int __Value(string str) {
     value = value - (value/3);
     value = adjust_cost(value,1);
     cost = (int)ob->query_property("repair cost");
-   
+
     if(!cost)
     {
         if(ob->query_property("enchantment"))
@@ -619,21 +624,21 @@ int __Value(string str) {
             default:
                 cost = enchant * ((4 + roll_dice(1,4))*1200);
                 break;
-        }    
+        }
         if(!cost) cost = 100 + random(200);
-        ob->set_property("repair cost", cost);        
+        ob->set_property("repair cost", cost);
     }
-    
+
     cost = adjust_cost(cost);
 
     cn = ob->query_cointype();
-    
+
     tell_room(ETO, response+TPQCN+", I will offer you "+value+" "+cn+" for it. I can also restore it "+
     "to a pristine condition for "+cost+" "+cn+".", TP);
-    
+
     tell_object(TP, response+"I will offer you "+value+" "+cn+" for it. I can also restore it "+
-    "to a pristine condition for "+cost+" "+cn+".");   
-    
+    "to a pristine condition for "+cost+" "+cn+".");
+
     return 1;
 }
 
@@ -670,7 +675,7 @@ static int __SellAll() {
 
     cp=0;sp=0;ep=0;gp=0;pp=0;
     if(!objectp(TO)) return 0;
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	    return 1;
 
     if (!(i = sizeof(inv = all_inventory(TP)))) {
@@ -716,7 +721,7 @@ static int __SellAll() {
 }
 
 mixed sort_items(object one,object two) {
-    return strcmp(one->query_short(),two->query_short()); 
+    return strcmp(one->query_short(),two->query_short());
 }
 
 void set_storage_room(string str) {
@@ -741,7 +746,7 @@ void set_items_allowed( string str) {
     if (!(TO->query_property("generic db")))  return;
     if (str == "all" || str == "weapon") {
 // removing the generic databases from being automatically added
-// too spammy now that we have specific ones set or these manually added 
+// too spammy now that we have specific ones set or these manually added
 // in the most needed places  *Styx*  12/7/02
 //        set_db("weapons");
     }
@@ -780,11 +785,11 @@ int check_allowed(object ob) {
     }
     if (strcmp("armor",(string)this_object()->query_items_allowed()) == 0) {
         if (ob->is_armour()) return 1;
-        else return 0; 
+        else return 0;
     }
     if (strcmp("weapon",(string)this_object()->query_items_allowed()) == 0) {
         if (ob->is_weapon()) return 1;
-        else return 0; 
+        else return 0;
     }
     if((string)this_object()->query_items_allowed() == "material"){ return ob->is_material();}
     if (member_array((string)this_object()->query_items_allowed(),ob->query_id(),0) == -1)
@@ -800,7 +805,7 @@ void __Help(string str) {
 
 Shops of this type have next commands:
 
-%^ORANGE%^<buy %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^ 
+%^ORANGE%^<buy %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
 
     Buy %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
 
@@ -816,7 +821,7 @@ Shops of this type have next commands:
 
     Show you an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
 
-%^ORANGE%^<repair %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^ 
+%^ORANGE%^<repair %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
 
     Repair an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
 
@@ -824,7 +829,7 @@ Shops of this type have next commands:
 
     Evaluate cost of repairing an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
 
-%^ORANGE%^<repair all>%^RESET%^ 
+%^ORANGE%^<repair all>%^RESET%^
 
     Repair everything in your inventory.
 
@@ -844,14 +849,14 @@ void inventory() {
     int i, value;
     string tmp;
     if(!objectp(TO)) return 0;
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	    return 1;
 
     if (!(i = sizeof(inv = all_inventory(TP)))) {
         write("You don't have anything!");
         return 1;
     }
-    write("%^CYAN%^The shop clerk looks over your inventory.");   
+    write("%^CYAN%^The shop clerk looks over your inventory.");
     while (i--) {
         tmp = "";
          if ((check_allowed(inv[i]) == 0)||(!(value = (int)inv[i]->query_value()))) {
@@ -874,11 +879,11 @@ void inventory() {
 string types(object ob) {
     string type;
     string ret;
-    if (ob->is_lrweapon() || ob->is_weapon()) 
-    {        
+    if (ob->is_lrweapon() || ob->is_weapon())
+    {
         //type = (string)ob->get_weapon_prof();
         type = (string)ob->query_weapon_prof();
-    } 
+    }
     else if(ob->is_armour())
     {
         if((string)ob->query_type() == "clothing") { type = "clothing"; }
@@ -1025,8 +1030,8 @@ int repair_obj(object ob)
 
     str=ob->query_short();
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
-    
-    if (check_allowed(ob) == 0) 
+
+    if (check_allowed(ob) == 0)
     {
         tell_room(ETO, response+"Sorry, I don't deal in "+str+"!");
         return 1;
@@ -1064,10 +1069,10 @@ int repair_obj(object ob)
     }
 
     cointype = (string)ob->query_cointype();
-    if ((int)this_player()->query_money(cointype) < cost) 
+    if ((int)this_player()->query_money(cointype) < cost)
     {
         convert_money(cointype,cost);
-        if ((int)this_player()->query_money(cointype) < cost) 
+        if ((int)this_player()->query_money(cointype) < cost)
         {
             tell_room(ETO, response+TPQCN+", you don't have enough money for that!", TP);
 	        tell_object(TP, response+"You don't have enough money.");
@@ -1088,26 +1093,26 @@ int repair_obj(object ob)
     return 1;
 }
 
-int __Repair(string str) 
+int __Repair(string str)
 {
     object ob;
     string *not_allowed, response, objstr;
     mixed *costarray;
     int costsum;
     if(!objectp(TO)) return 0;
-    if (!str) 
+    if (!str)
     {
         write("Try <repair ITEM> or <repair all>");
         return 1;
     }
 
     not_allowed = ({ "bound", "disabled", "unconscious" });
-    
+
     if(disabled(TP, not_allowed)) {	return 1; }
-    
+
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
-    
-    if (!should_interact(TP)) 
+
+    if (!should_interact(TP))
     {
         force_me("glare "+TPQN);
         force_me("say Leave my shop, scum, I will not serve you.");
@@ -1204,10 +1209,10 @@ int __Resize(string str) {
     not_allowed = ({ "bound", "disabled", "unconscious" });
     if(disabled(TP, not_allowed)) {	return 1; }
     if(disabled(TO, not_allowed)) {
-	write("Do you really expect someone who cannot move to repair something?");  
+	write("Do you really expect someone who cannot move to repair something?");
 	return 1;
     }
-    
+
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
     if (!should_interact(TP)) {
         force_me("glare "+TPQN);
@@ -1240,9 +1245,9 @@ int __Resize(string str) {
         return 1;
     }
     mysize = (int)TP->query_size();
-    if((int)ob->query_size() == -1 || (int)ob->query_size() == mysize) 
+    if((int)ob->query_size() == -1 || (int)ob->query_size() == mysize)
     {
-        if(!adjust_limb_fit(ob, TP, 0)) 
+        if(!adjust_limb_fit(ob, TP, 0))
         {
             tell_room(ETO,response+"That "+str+" is already in your size!");
             return 1;

@@ -7,7 +7,7 @@ create() {
    set_name("cannon");
    set_short("A cannon");
    set_long("This is an artillery cannon. Someone really big decided to use it as a handgun.");
-   set_ammon("cannonball");
+   set_ammo("cannonball");
    set_two_handed();
    set_weight(60);
    set_size(2);

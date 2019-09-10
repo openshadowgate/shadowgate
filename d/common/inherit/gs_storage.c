@@ -63,7 +63,7 @@ void reset()
     if(!present("soap"))                       new(CMISC"soap")->move(TO);
     for (i = 0; i < 5; i++)
         if(!present("parchment "+i))                  new("/d/tharis/obj/parchment")->move(TO);
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < 13; i++)
         if(!present("scroll "+i))              new("/d/magic/safe_scroll")->move(TO);
     while(!present("paper 6"))                 new(CMISC"paper")->move(TO);
     if(!present("dark lantern"))               new(CMISC"darkbeacon")->move(TO);

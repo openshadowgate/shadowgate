@@ -17,7 +17,7 @@
    "half-elf":({"elven","gnomish","halfling","orcish","dwarvish"}),\
    "halfling":({"halfling","dwarvish","elven","gnomish"}),\
    "human":({"common","dwarvish","gnomish","orcish","halfling","elven","undercommon"}),\
-   "beastman":({"beast","halfling","gnomish","orcish"}),\
+   "beastkin":({"beast","halfling","gnomish","orcish"}),\
    "bugbear":({"goblin","orcish"}),\
    "goblin":({"goblin","kobold","orcish"}),\
    "hobgoblin":({"goblin","orcish","kobold"}),\
