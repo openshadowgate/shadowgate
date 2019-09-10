@@ -1,3 +1,9 @@
+/**
+ * @file
+ 8 @brief Various combat subroutines
+ */
+
+
 //Daemon that handles Combat related stuff
 //Currently handling checks for shieldmiss/concealing amorpha
 //damage modifications from body.c - including stoneskin checks, typed damage modifications, etc.
