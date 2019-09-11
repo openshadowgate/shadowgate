@@ -8,6 +8,7 @@ void create(){
    set_name("grapeshot");
    set_short("pouch of grapeshot cartriges");
    set_long("These are small paper cartriges, with alchemical charge at one end and grapeshot balls at the other.");
+   set_weight(1);
    set_ammo_type("grapeshot");
 
    set_shots(250);

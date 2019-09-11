@@ -9,6 +9,7 @@ void create(){
    set_short("pouch of cartriges");
    set_long("These are small paper cartriges, with alchemical charge at one end and bullet at the other.");
    set_ammo_type("cartrige");
+   set_weight(1);
 
    set_shots(250);
    set_value(1);
