@@ -352,6 +352,7 @@ varargs void reset_character_info(string what, int flag)
                 clear_body_type();
                 clear_age();
                 clear_alignment();
+                clear_bonus_language();
                 clear_deity();
                 build_restrictions("myclass");
                 FirstBuild = 0;
@@ -364,6 +365,7 @@ varargs void reset_character_info(string what, int flag)
                 clear_hair();
                 clear_eyes();
                 clear_subrace();
+                clear_bonus_language();
                 build_restrictions("myclass");
                 build_restrictions("race");
                 if(FirstBuild) { BuildArray = ({"special", "subrace", "stats", "hair color", "eye color", "bonus language"}); EndAt = "finalize"; }
@@ -378,6 +380,7 @@ varargs void reset_character_info(string what, int flag)
                 clear_body_type();
                 clear_age();
                 clear_alignment();
+                clear_bonus_language();
                 clear_deity();
                 build_restrictions("myclass");
                 build_restrictions("race");
@@ -485,7 +488,7 @@ void header()
 {
     if(!objectp(TO)) return;
     if(!objectp(ETO)) return;
-    tell_object(ETO, "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^");
+    tell_object(ETO, "");
 }
 
 
@@ -773,7 +776,8 @@ mixed display_my_character()
     tell_object(ETO, "  "+arrange_string(r+"Weight "+b+"-----------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["weight choice"]));
     tell_object(ETO, "  "+arrange_string(r+"Body Type "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["body type"]));
     tell_object(ETO, "  "+arrange_string(r+"Age "+b+"--------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["age choice"]));
-    tell_object(ETO, "  "+arrange_string(r+"Bonus Lang "+b+"--------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["bonus language"]));
+    if(MyCharacterInfo["stats"]["intelligence"]>16)
+        tell_object(ETO, "  "+arrange_string(r+"Bonus Language "+b+"---------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["bonus language"]));
     tell_object(ETO, "  "+arrange_string(r+"Alignment "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["align title"]));
     tell_object(ETO, "  "+arrange_string(r+"Deity "+b+"------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["deity"]));
 
@@ -870,7 +874,6 @@ void finalize_character()
                 build_age();
                 break;
             case "bonus language":
-                build_bonus_language();
                 break;
             case "alignment":
                 build_alignment();
@@ -1071,6 +1074,8 @@ void build_race()
     if(!objectp(ETO)) return;
     ETO->set_race(MyCharacterInfo["race"]["race name"]);
     ETO->init_lang();
+    if(MyCharacterInfo["stats"]["intelligence"]>16)
+        build_bonus_language();
 }
 
 void build_age()
@@ -1392,7 +1397,9 @@ void pick_genetics()
     mixed targ;
     if(!objectp(ETO)) return;
     if(!objectp(TO)) return;
-    if(MyPlace == "eye color" || MyPlace == "hair color")
+    if(MyPlace == "eye color" ||
+       MyPlace == "hair color" ||
+       MyPlace == "bonus language")
     {
         if(MyCharacterInfo["race"]["psuedo race"] != "NIL") targ = MyCharacterInfo["race"]["psuedo race"];
         else targ = MyCharacterInfo["race"]["race name"];
@@ -1414,13 +1421,14 @@ void pick_genetics()
             my_choices = MyFile->query_eye_colors(ETO);
             break;
         case "bonus language":
-            if(MyFile->query_languages())
-            {
-                if(arrayp((MyFile->query_languages())["optional"]))
-                    my_choices = MyFile->query_languages()["optional"];
-            }
+        {
+            string * langs;
+            langs = MyFile->query_languages()["optional"];
+            if(sizeof(langs))
+                my_choices = langs;
             else
                 my_choices = ({"common","undercommon"});
+        }
             break;
         case "height":
             my_choices = HEIGHTS;
@@ -1573,7 +1581,7 @@ void pick_deity()
     badgods = ({});
     if(file_exists(myfile)) badgods += (string *)myfile->restricted_deities(mysubrace);
     names -= badgods;
-    if(temp == "paladin" || temp == "cleric" || temp == "cavalier" || temp == "monk") // clergy/orders
+    if(temp == "paladin" || temp == "cleric") // clergy/orders
     {
         for(inc = 0; inc < sizeof(names);inc ++)
         {
@@ -2024,9 +2032,9 @@ varargs int choose(string str, int flag)
             extra_display(str);
             MyCharacterInfo["race"]["age choice"] = str;
             MyCharacterInfo["race"]["age"] = AGE_CATS[str];
-            /* if(MyCharacterInfo["stats"]["intelligence"]>16) */
-            /*     MyPlace = "bonus language"; */
-            /* else */
+            if(MyCharacterInfo["stats"]["intelligence"]>16)
+                MyPlace = "bonus language";
+            else
                 MyPlace = "alignment";
             ProcessStep();
             break;

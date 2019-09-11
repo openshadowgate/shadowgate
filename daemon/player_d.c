@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief a daemon to keep track of player progress
+ */
+
 //      /adm/daemon/player_d.c
 //      from the Nightmare Mudlib
 //      a daemon to keep track of player progress
@@ -25,7 +30,7 @@ mapping *query_player_list() {return player_list;}
 varargs void add_player_info(object ob) {
   int exp, x;
   int i;
-    
+
   if(!objectp(ob)) { if(!(ob = previous_object()) || !userp(ob)) return; }
   if(avatarp(ob)) {
     i = sizeof(player_list);
@@ -108,29 +113,29 @@ int add_kill(string str) {
   return x;
 }
 
-string query_monster(int x) 
+string query_monster(int x)
 {
     if( x <= sizeof(monsters))
     {
         if(!monsters[x]) return "unknown";
         else return monsters[x];
-    } 
-    else if (x-15000 <= sizeof(monsters2)) 
+    }
+    else if (x-15000 <= sizeof(monsters2))
     {
         x = x-15000;
         if(!monsters2[x]) return "unknown";
         else return monsters2[x];
-    } 
-    else if (x-30000 <= sizeof(monsters3)) 
+    }
+    else if (x-30000 <= sizeof(monsters3))
     {
         x = x-30000;
         if(!monsters3[x]) return "unknown";
         else return monsters3[x];
-    } 
-    else if (x-45000 <= sizeof(monsters4)) 
+    }
+    else if (x-45000 <= sizeof(monsters4))
     {
         x = x-45000;
-        if(!monsters4[x]) return "unknown";    
+        if(!monsters4[x]) return "unknown";
         else return monsters4[x];
     }
     else if(x-60000 <= sizeof(monsters5))
@@ -932,7 +937,7 @@ int *calc_weight(object play, int wpct) {
       }
     }
     num = 4;
-    break;  
+    break;
   case "goblin":
     if(gender == "male") {
       base  = 72;
@@ -1442,7 +1447,7 @@ int *calc_weight(object play, int wpct) {
       }
     }
     num = 4;
-    break;    
+    break;
   default:
     base = 140;
     num = 8;
