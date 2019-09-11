@@ -31,9 +31,9 @@
 
     **Tells the guard what to do if it catches a bad race
     set_race_action("kill" || "capture" || "expel");
-                                                     
+
     **Sets all 'bad races' for the area
-    set_bad_races({ "race1","race2",..."raceN"});    
+    set_bad_races({ "race1","race2",..."raceN"});
 
     **Sets the message the guard says when it first encounters a bad race
     **Should have a message set for each race set with set_bad_races
@@ -59,8 +59,8 @@
     void set_expel_location("location");
 
     **This is an optional setting, if you want for the bad races that get
-    **captured by your guards to be taken to a different jail, or to some 
-    **other room, such as a public torture place, or to be sacrificed to 
+    **captured by your guards to be taken to a different jail, or to some
+    **other room, such as a public torture place, or to be sacrificed to
     **some beast
 
     void set_capture_location("location");
@@ -73,11 +73,11 @@
     void do_special_combat_actions();
 
     **This function can be overridden with a call to ::put_in_jail() if
-    **you want for your guards to do anything special before putting 
+    **you want for your guards to do anything special before putting
     **someone in their cell.  Such as beating, maiming, etc.
     void put_in_jail();
 
-    **This function MUST be overridden if you want your guards to do 
+    **This function MUST be overridden if you want your guards to do
     **anything special to bad races they capture.  This MUST be set also
     **if the capture_location, and jail_location are different.
     **Note:  //DO NOT// call ::capture()
@@ -85,7 +85,7 @@
     void capture();
 
     **This function MUST be overridden if you have set the race_action("expel")
-    **and the expel_location.  It will do any special action you specify 
+    **and the expel_location.  It will do any special action you specify
     **when the guard reaches the expel location, Such as drop off the victim
     **and start walking back to it's post.  Note: //DO NOT// call ::expel()
     void expel();
@@ -93,7 +93,7 @@
     **This is a global variable for the captive, once they've been caught
     **so your guards know who to use and abuse
     captive;
-    
+
     **Useful if you want to use ranks, but /NOT/ necessary, if the HD of
     **the guard are <= the number, it returns "rank"
     string set_ranks( ([ 10 : "rank1", 20 : "rank2", N : "rankN" ]) );
@@ -109,7 +109,7 @@ inherit NPC;
 
 mapping race_messages=([]);
 string *bad_races=({}),race_action,area_guarded,temple_guarded,jail_location,expel_location,capture_location;
-int is_stuck=0; // just in case the guard doesn't have a place to go 
+int is_stuck=0; // just in case the guard doesn't have a place to go
 object captive; // tracks the dragged player so they can be put in jail
 object *bad_people = ({}); // using this to track who the guard has been in a fight with
 
@@ -169,7 +169,7 @@ string set_ranks(mapping ranks) // Probably don't need this, but I guess we have
     if(!query_hd())  return error("GUARDSMAN set_hd() must be set before set_ranks().\n");
 
     lvl = query_hd();
-    
+
     if(sizeof(keys(ranks)))
     {
         hd = sort_array(keys(ranks),"numerical_sort",FILTERS_D);
@@ -195,7 +195,7 @@ void set_guarding(string where) { area_guarded = where; return; }
 void set_temple_guard(string deity)
 {
     deity = lower_case(deity);
-    if(member_array(deity,VALID_GODS) != -1) 
+    if(member_array(deity,VALID_GODS) != -1)
     {
         temple_guarded = deity;
     }
@@ -231,13 +231,13 @@ string query_capture_location()
 
 int is_guardsman() { return 1; }
 
-string query_race_action() { if(race_action) return race_action; } 
+string query_race_action() { if(race_action) return race_action; }
 
 int query_bad_race(object live)
 {
     if(!objectp(live)) { return 0; }
     if(!bad_races)     { return 0; }
-    if(member_array((string)live->query_race(),bad_races) != -1 && !live->query_property("shapeshifted")) { return 1; }
+    if(member_array((string)live->query_visual_race(),bad_races) != -1) { return 1; }
     return 0;
 }
 
@@ -247,17 +247,17 @@ string query_race_message(object targ)
     if(!objectp(targ)) { return 0; }
 
     races = keys(race_messages);
-    if(member_array((string)targ->query_race(),races) != -1)
+    if(member_array((string)targ->query_visual_race(),races) != -1)
     {
-        return race_messages[(string)targ->query_race()];
+        return race_messages[(string)targ->query_visual_race()];
     }
     return 0;
 }
 
 string query_guarding() { return area_guarded; }
 
-int is_guard(string area) 
-{ 
+int is_guard(string area)
+{
     if(query_guarding() == area) { return 1; }
     else return 0;
 }
@@ -343,7 +343,7 @@ void remove_fines_and_bounties(object live)
 {
     if(!objectp(live)) { return 0; }
     if(!live->is_player()) { return 0; }
-    
+
     if(AREALISTS_D->is_wanted(live,query_guarding(),TO))
     {
         AREALISTS_D->remove_wanted(live,query_guarding(),TO);
@@ -360,14 +360,14 @@ void remove_fines_and_bounties(object live)
 }
 
 // This function is somewhat complicated, in an attempt to get quick reaction
-// from the guards when new threats enter the area.  It checks each time 
+// from the guards when new threats enter the area.  It checks each time
 // do_battle is called, for all people from the wanted list, bad races, and
 // current attackers that are currenly in the room.  It then checks for all
 // the local guards that are in the room, and sticks them all into battle.
 // This will prevent 50 guards from all yelling the same message before they
 // attack, and also get them fighting at the same time.  The guards will also
 // protect anyone who is a jailer of their areas.  This would make for a very
-// interesting player vs player battle if you attack someone inside their 
+// interesting player vs player battle if you attack someone inside their
 // fortress
 
 void do_battle(object live)
@@ -378,7 +378,7 @@ void do_battle(object live)
     if(!objectp(TO))   { return 0; }
     if(present("trainer",ETO)) { return 0; } // to prevent "training accidents"
     living = all_living(ETO);
-    
+
     guards    = filter_array(living,"is_local_guard",TO);
     targets   = filter_array(living,"wanted",TO);
     races     = filter_array(living,"is_bad_race",TO);
@@ -386,8 +386,8 @@ void do_battle(object live)
     sparring  = filter_array(living,"is_sparring",TO);
     attackers = query_attackers();
 
-    if(member_array(live,attackers) == -1)  
-    { 
+    if(member_array(live,attackers) == -1)
+    {
         if(!is_jailer(live) && !is_sparring(live))  { targets += ({ live}); }
     }
     if(sizeof(races))                               { targets += races; }
@@ -401,7 +401,7 @@ void do_battle(object live)
         for(n=0;n<sizeof(jailers);n++) // protect jailers if they get attacked
         {
             if(member_array(jailers[n],sparring) != -1) { continue; }
-        
+
             if(member_array(guards[i],jailers[n]->query_protectors()) == -1)
             {
                 if(member_array(guards[i],jailers[n]->query_attackers()) !=-1) { continue; }
@@ -416,14 +416,14 @@ void do_battle(object live)
         }
 
         for(j=0;j<sizeof(targets);j++)
-        {    
+        {
             if(guards[i] == targets[j]) { continue; }
             if(is_local_guard(targets[j])) { continue; }
             if(is_jailer(targets[j])) { continue; }
-            add_to_wanted(targets[j]);            
+            add_to_wanted(targets[j]);
             if(targets[j]->query_unconscious() || targets[j]->query_bound()) { continue; } // hopefully to prevent overkill
             if(member_array(targets[j],guards[i]->query_attackers()) == -1 && !guards[i]->query_unconscious())
-            {   
+            {
                 tell_object(guards[i],"You attack "+targets[j]->QCN+"!");
                 tell_object(targets[j],""+guards[i]->QCN+" attacks you!");
                 tell_room(environment(guards[i]),""+guards[i]->QCN+" attacks "
@@ -454,7 +454,7 @@ void do_special_combat_actions() {}
 
 //int clean_up() { return 1; }  // not sure if we want this here or not?
 
-void heart_beat() 
+void heart_beat()
 {
     int i;
     object *living;
@@ -466,21 +466,21 @@ void heart_beat()
       put_in_jail();
       return;
     }
-// found it needs a check so they don't try to attack unconscious *Styx* 12/26/05  
+// found it needs a check so they don't try to attack unconscious *Styx* 12/26/05
     if(TO->query_unconscious())  return;
     if(!sizeof(query_attackers())) { if(random(2)) return; }
 
     living = all_living(ETO);
     living -= ({ TO });
     if(!sizeof(living)) { return; }
-    for (i =0;i<sizeof(living);i++) 
+    for (i =0;i<sizeof(living);i++)
     {
         if(!objectp(living[i])) { continue; }
         interactions(living[i]);
     }
-    return; 
+    return;
 }
-void interactions(object live) 
+void interactions(object live)
 {
     if (!objectp(live)) { return; }
     if(is_walking || is_stuck) { return; } // important, this checks from monster.c to see if the guard is walking to it's destination
@@ -497,23 +497,23 @@ void race_action(object live)
 {
     if(!objectp(live)) { return; }
 
-    if(sizeof(query_attackers())) 
-    { 
+    if(sizeof(query_attackers()))
+    {
         if(!live->query_unconscious()) { do_battle(live); }
         return;
-    }  
+    }
 
     if(live->query_unconscious())
     {
         switch(query_race_action())
         {
-        case "kill":        
+        case "kill":
             command("say "+KILL_MSG);
             command("hit "+live->query_name());
             return;
         case "capture":
             capture_target(live,"capture");
-            return;    
+            return;
         case "expel":
             capture_target(live,"expel");
             return;
@@ -527,7 +527,7 @@ void race_action(object live)
         case "capture":
             command("say "+RACE_CAPTURE_MSG);
             capture_target(live,"capture");
-            return;    
+            return;
         case "expel":
             command("say "+EXPEL_MSG);
             capture_target(live,"expel");
@@ -541,14 +541,14 @@ void race_action(object live)
         {
         case "capture":
             capture_target(live,"capture");
-            return;    
+            return;
         case "expel":
             capture_target(live,"expel");
             return;
         }
     }
 
-    if (member_array(live, query_attackers()) == -1 && !live->query_bound()) 
+    if (member_array(live, query_attackers()) == -1 && !live->query_bound())
     {
         if(query_race_message(live))
         {
@@ -562,31 +562,31 @@ void race_action(object live)
 void do_laws(object live)
 {
     if(!objectp(live)) { return; }
-    if(sizeof(query_attackers())) 
-    { 
+    if(sizeof(query_attackers()))
+    {
         if(!live->query_unconscious()) { do_battle(live); }
         return;
-    }        
-    if(live->query_unconscious()) 
-    { 
-        capture_target(live,"jail"); 
+    }
+    if(live->query_unconscious())
+    {
+        capture_target(live,"jail");
         command("say "+CAPTURE_MSG);
-        return; 
+        return;
     }
-    if(live->query_bound() && !live->query_property("draggee")) 
-    { 
+    if(live->query_bound() && !live->query_property("draggee"))
+    {
         command("say "+JAIL_MSG);
-        capture_target(live,"jail"); 
-        return; 
+        capture_target(live,"jail");
+        return;
     }
 
-    if(live->query_property("draggee")) 
-    { 
-        capture_target(live,"jail"); 
-        return; 
+    if(live->query_property("draggee"))
+    {
+        capture_target(live,"jail");
+        return;
     }
 
-    if (member_array(live, query_attackers()) == -1 && !live->query_bound()) 
+    if (member_array(live, query_attackers()) == -1 && !live->query_bound())
     {
         command("yell "+ARREST_MSG);
         do_battle(live);
@@ -594,13 +594,13 @@ void do_laws(object live)
     return;
 }
 
-void capture_target(object live,string action) 
+void capture_target(object live,string action)
 {
     int need;
     if(!objectp(live)) { return; }
-    if(!live->query_unconscious() && !live->query_bound()) 
-    { 
-        do_battle(live); return; 
+    if(!live->query_unconscious() && !live->query_bound())
+    {
+        do_battle(live); return;
     }
     if(!live->query_bound())
     {
@@ -640,9 +640,9 @@ void take_to_jail(string action)
     switch(action)
     {
     case "jail":
-        
-        if(!jail_location) 
-        { 
+
+        if(!jail_location)
+        {
             is_stuck = 1;
             command("say I don't have a jail to go to, I'll hang on to you for now.");
             return;
@@ -658,8 +658,8 @@ void take_to_jail(string action)
         start_walking(jail_location);
         return;
     case "expel":
-        if(!expel_location) 
-        { 
+        if(!expel_location)
+        {
             is_stuck = 1;
             command("say I don't know where to expel you to, I'll hang on to you for now.");
             return;
@@ -675,8 +675,8 @@ void take_to_jail(string action)
         return;
     case "capture":
         if(!capture_location) { capture_location = jail_location; }
-        if(!capture_location) 
-        { 
+        if(!capture_location)
+        {
             is_stuck = 1;
             command("say I don't have a location to go to, I'll hang on to you for now.");
             return;
