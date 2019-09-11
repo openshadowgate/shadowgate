@@ -61,9 +61,10 @@ void reset()
     if(!present("bandage"))                    new(CMISC"bandage")->move(TO);
     if(!present("eyepatch") && !random(3))     new(CMISC"eyepatch")->move(TO);
     if(!present("soap"))                       new(CMISC"soap")->move(TO);
+    if(!present("bloodshard"))                 new("/d/common/obj/special/bloodshard")->move(TO);
     for (i = 0; i < 5; i++)
         if(!present("parchment "+i))                  new("/d/tharis/obj/parchment")->move(TO);
-    for (i = 0; i < 13; i++)
+    for (i = 0; i < 9; i++)
         if(!present("scroll "+i))              new("/d/magic/safe_scroll")->move(TO);
     while(!present("paper 6"))                 new(CMISC"paper")->move(TO);
     if(!present("dark lantern"))               new(CMISC"darkbeacon")->move(TO);

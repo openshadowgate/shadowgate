@@ -511,7 +511,6 @@ int __List(string str)
     i = sizeof(inv);
     //write("%^YELLOW%^ Description			  Cost			 Type");
     write(sprintf("%%^YELLOW%%^%-38s %-8s %-10s %-5s", "Description", "Stock", "Type", "Cost"));
-    write("%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     for (x=0, tmp = ({}); x<i; x++)
     {
         //stolen from ares token vendor to fix line wrap + color problem.
@@ -546,15 +545,7 @@ int __List(string str)
                     "1" + arrange_string(" ", m) + " " +myType + arrange_string(" ",l) + " " +
                     adjust_cost((int)inv[x]->query_value()) + arrange_string(" ", k) + "%^BOLD%^%^WHITE%^"+inv[x]->query_cointype()});
         }
-        if (( ( x%17 ) == 0 ) && ( x > 15 ) )
-        {
-            tmp += ({"%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="});
-            if (x == 17) tmp += ({" "});
-            tmp += ({sprintf("%%^YELLOW%%^%-38s %-8s %-10s %-5s", "Description", "Stock", "Type", "Cost")});
-            tmp += ({"%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="});
-        }
     }
-    tmp += ({"%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="});
     TP->more(tmp);
     return 1;
 }
