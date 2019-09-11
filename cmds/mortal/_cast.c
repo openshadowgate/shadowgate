@@ -62,8 +62,16 @@ int cmd_cast(string str)
         else healharm = 0;
     }
 
-// here, type is the class casting the spell (eg/ mage), str2 is the spell name, tar is the target (or arguments)
-    if(!sscanf(str,"%s %s",type,str2)) return notify_fail("Syntax: <cast CLASS CAST_STRING>\n");
+    if(regexp(str,implode("/daemon/player_d"->list_classes(),"|")+"|innate"))
+    {
+        if(!sscanf(str,"%s %s",type,str2))
+            return notify_fail("Syntax: <cast CLASS CAST_STRING>\n");
+    }
+    else
+    {
+        type = TP->query_class();
+        str2 = str;
+    }
 
     if(!sscanf(str2,"%s on %s",str2,tar))
         if(!sscanf(str2,"%s at %s",str2,tar))
@@ -225,12 +233,12 @@ cast
 
 %^CYAN%^SYNTAX%^RESET%^
 
-cast %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^
-cast cleric %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^
+cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Ivokes %^ORANGE%^%^ULINE%^SPELL%^RESET%^ using character's %^ORANGE%^%^ULINE%^CLASS%^RESET%^.
+Ivokes %^ORANGE%^%^ULINE%^SPELL%^RESET%^ using character's %^ORANGE%^%^ULINE%^CLASS%^RESET%^. If %^ORANGE%^%^ULINE%^CLASS%^RESET%^ is ommited uses currently posed class you can change with %^ORANGE%^<pose>%^RESET%^. If you're single class character, uses your only class.
 
 A %^ORANGE%^%^ULINE%^SPELL%^RESET%^ might or might not have arguments.
 

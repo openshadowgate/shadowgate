@@ -1470,4 +1470,52 @@ string * night_races() {
   return ({ "drow", "half-drow", "bugbear", "kobold", "hobgoblin", "gnoll", "orc", "lich", "ogre", "ogre-mage", "goblin", "minotaur" });
 }
 
+string *list_base_classes()
+{
+    string *possible_classes, *classlist = ({}),myname;
+    int i;
+    object class_ob;
+    myname = TP->query_name();
+    possible_classes = get_dir("/std/class/*.c");
+    possible_classes = explode(implode(possible_classes, ""), ".c");
+    if(sizeof(possible_classes))
+    {
+        for(i=0;i<sizeof(possible_classes);i++)
+        {
+            if(possible_classes[i] == "cavalier" ||
+               possible_classes[i] == "antipaladin")
+                continue;
+            class_ob = find_object_or_load("/std/class/"+possible_classes[i]+".c");
+            if(objectp(class_ob) &&
+               class_ob->is_prestige_class())
+                continue;
+            classlist += ({possible_classes[i]});
+        }
+    }
+    return classlist;
+}
+
+string *list_classes()
+{
+    string *possible_classes, *classlist = ({}),myname;
+    int i;
+    object class_ob;
+    myname = TP->query_name();
+    possible_classes = get_dir("/std/class/*.c");
+    possible_classes = explode(implode(possible_classes, ""), ".c");
+    if(sizeof(possible_classes))
+    {
+        for(i=0;i<sizeof(possible_classes);i++)
+        {
+            if(possible_classes[i] == "cavalier" ||
+               possible_classes[i] == "antipaladin")
+                continue;
+            class_ob = find_object_or_load("/std/class/"+possible_classes[i]+".c");
+            classlist += ({possible_classes[i]});
+        }
+    }
+    return classlist;
+}
+
+
 int sizeof_monsters() { return sizeof(monsters4);}

@@ -1,9 +1,8 @@
-/*====================================
-New User Daemon to cut out some functions
-from the user chain - starting small - Saide, November 2016
+/**
+ * @file
+ * @brief User daemon
+ */
 
-
-=====================================*/
 #include <std.h>
 #include <daemons.h>
 #include <class_types.h>
@@ -13,6 +12,8 @@ from the user chain - starting small - Saide, November 2016
 
 inherit DAEMON;
 mapping RP_FLAGS;
+
+
 
 void process_pkill_input(object who, mixed arg)
 {
@@ -40,11 +41,11 @@ void reset_all_status_problems(object who)
     who->set_blind(0);
     who->set_blindfolded(0);
     who->set_temporary_blinded(0);
-    who->set_tripped(0,0);                                                       
+    who->set_tripped(0,0);
     who->set_unconscious(0,0);
-    who->set_gagged(0,0);                                                          
+    who->set_gagged(0,0);
     who->set_asleep(0,0);
-    who->remove_paralyzed();          
+    who->remove_paralyzed();
     who->remove_all_disable();
     myFeats = (object *)who->query_property("active_feats");
     if(pointerp(myFeats))
@@ -72,14 +73,14 @@ mixed check_rem_rooms(object who, string *arr, mapping rem)
     int x, y, flag = 0;
     string *INVALID = ({"/d/deku/dark/", "/d/islands/common/eldebaro/rooms/", "/d/islands/dallyh/marsh/rooms"});
     string match, *tmp = ({});
-    if(!objectp(who)) return rem; 
+    if(!objectp(who)) return rem;
     if(!pointerp(arr)) return rem;
     if(!mapp(rem)) return rem;
     for(x = 0;x < sizeof(arr);x++)
     {
         if(!stringp(rem[arr[x]]) || rem[arr[x]] == "") continue;
         for(y = 0;y < sizeof(INVALID);y++)
-        {            
+        {
             match = rem[arr[x]];
             if(!stringp(match)) continue;
             //tell_object(who, "match = "+match);
@@ -95,8 +96,8 @@ mixed check_rem_rooms(object who, string *arr, mapping rem)
             continue;
         }
         continue;
-    }        
-    if(flag) 
+    }
+    if(flag)
     {
         arr -= tmp;
         who->set_rem_rooms(rem, arr);
@@ -148,7 +149,7 @@ string *query_ki_spells(object ob)
 }
 
 void remove_ki_spell(object ob, string str)
-{    
+{
     string *ki_spells;
     if(!objectp(ob)) return;
     if(!stringp(str)) return;
@@ -206,7 +207,7 @@ varargs void regenerate_ki(object ob, int amount, int pass)
 int sort_ki_spells(int kiLev, int compLev)
 {
     if(compLev >= kiLev) return 1;
-    return 0;    
+    return 0;
 }
 
 void init_ki_spells(object ob, string myWay)
@@ -217,19 +218,19 @@ void init_ki_spells(object ob, string myWay)
     if(!objectp(ob)) return;
     if(!stringp(myWay)) return;
     if(FEATS_D->usable_feat(ob,"grandmaster of the way")) { myWay = "grandmaster of the way"; }
-    
+
     if(myWay != "way of the shadow" && myWay != "way of the elements" && myWay != "grandmaster of the way") return;
     myLev = ob->query_prestige_level("monk");
     myMastered = ob->query_ki_spells();
-    ShouldHave = ({});            
+    ShouldHave = ({});
     if(!mapp(kiSpells = KI_SPELLS[myWay])) return;
     //tell_object(find_player("noobermonker"),"kiSpells: "+identify(kiSpells));
     kiLevels = keys(kiSpells);
-    if(!sizeof(kiLevels)) return;    
-    //should sort the array so that only 
-    //ki spell levels of less than or equal to the 
-    //monk's level show up 
-    kiLevels = filter_array(kiLevels, "sort_ki_spells", "/daemon/user_d.c", myLev);    
+    if(!sizeof(kiLevels)) return;
+    //should sort the array so that only
+    //ki spell levels of less than or equal to the
+    //monk's level show up
+    kiLevels = filter_array(kiLevels, "sort_ki_spells", "/daemon/user_d.c", myLev);
     //tell_object(find_player("noobermonker"), "kiLevels = "+identify(kiLevels));
 
     for(x = 0;x < sizeof(kiLevels);x++)
@@ -238,7 +239,7 @@ void init_ki_spells(object ob, string myWay)
         continue;
     }
     //tell_object(find_player("noobermonker"), "ShouldHave = "+identify(ShouldHave));
-    myMastered -= ShouldHave;   
+    myMastered -= ShouldHave;
     //tell_object(find_player("noobermonker"), "myMastered = "+identify(myMastered));
     if(sizeof(myMastered))
     {
@@ -261,7 +262,7 @@ void init_ki_spells(object ob, string myWay)
             continue;
         }
     }
-    return;    
+    return;
 }
 
 void init_ki(object ob)
@@ -297,7 +298,7 @@ void init_ki(object ob)
             init_ki_spells(ob, myWay);
             return;
         }
-        else 
+        else
         {
             ob->delete("ki spells");
             return;
@@ -341,7 +342,7 @@ void clean_up_old_flags()
     if(!pointerp(misc_flags = keys(RP_FLAGS))) return;
     to_add = ({});
     for(x = 0;x < sizeof(misc_flags);x++)
-    {          
+    {
         if(misc_flags[x] == "MiscFlags") continue;
         oroom = RP_FLAGS[misc_flags[x]];
         OldRoom = find_object_or_load(oroom);
@@ -354,25 +355,25 @@ void clean_up_old_flags()
         {
             map_delete(RP_FLAGS, misc_flags[x]);
             continue;
-        }        
+        }
         if(!objectp(player = find_player(misc_flags[x])))
         {
             map_delete(RP_FLAGS, misc_flags[x]);
             to_add += ({oroom});
             continue;
-        }        
+        }
         if(environment(player) != OldRoom)
         {
             map_delete(RP_FLAGS, misc_flags[x]);
             to_add += ({oroom});
             continue;
         }
-    }    
-    if(!pointerp(misc_flags = RP_FLAGS["MiscFlags"])) 
+    }
+    if(!pointerp(misc_flags = RP_FLAGS["MiscFlags"]))
     {
         if(sizeof(to_add)) RP_FLAGS["MiscFlags"] = to_add;
         return;
-    }    
+    }
     to_remove = ({});
     for(x = 0;x < sizeof(misc_flags);x++)
     {
@@ -387,13 +388,13 @@ void clean_up_old_flags()
         {
             to_remove += ({oroom});
             continue;
-        }        
+        }
     }
     misc_flags -= to_remove;
     misc_flags += to_add;
     misc_flags = distinct_array(misc_flags);
     RP_FLAGS["MiscFlags"] = misc_flags;
-    
+
     return;
 }
 
@@ -425,7 +426,7 @@ mixed *get_rp_flags()
         room_file = RP_FLAGS[rpflags[x]];
         if(!objectp(CurRoom = find_object_or_load(room_file))) continue;
         RP_ROOMS += ({CurRoom});
-        continue;        
+        continue;
     }
     if(sizeof(RP_ROOMS)) { RP_ROOMS = distinct_array(RP_ROOMS); return RP_ROOMS; }
     return ({});
@@ -440,13 +441,13 @@ void setup_rp_flag(object who)
     if(!mapp(RP_FLAGS) || !sizeof(keys(RP_FLAGS))) RP_FLAGS = ([]);
     if(!objectp(environment(who))) return;
     clean_up_old_flags();
-    rname = base_name(environment(who));    
+    rname = base_name(environment(who));
     cur_flags = keys(RP_FLAGS);
     myName = who->query_true_name();
     if(member_array(myName, cur_flags) == -1)
     {
         RP_FLAGS += ([myName : rname ]);
-        return 1;        
+        return 1;
     }
     else
     {
@@ -478,12 +479,12 @@ void setup_rp_flag(object who)
                 {
                     cur_misc_flags = RP_FLAGS["MiscFlags"];
                     if(member_array(oname, cur_misc_flags) != -1) cur_misc_flags -= ({oname});
-                    RP_FLAGS["MiscFlags"] = cur_misc_flags;                    
+                    RP_FLAGS["MiscFlags"] = cur_misc_flags;
                 }
             }
         }
         return 1;
-    }    
+    }
 }
 
 int toggle_no_exp(object who)
@@ -596,7 +597,7 @@ mixed get_flag(object who, string flag)
 }
 
 varargs mixed get_scaled_class_level(object who, string myclass)
-{   
+{
     float bc, tl;
     int clvl, sc;
     if(!objectp(who)) return "NIL";
@@ -646,15 +647,15 @@ void scale_level_to(object who, int lev)
             if(!objectp(inv[i])) continue;
             if(inv[i]->query_worn() || inv[i]->query_wielded())
             {
-                if((string)inv[i]->query("scaledfor") == myName) 
+                if((string)inv[i]->query("scaledfor") == myName)
                 {
                     inv[i]->run_item_bonuses("remove",who,inv[i]->query_item_bonuses());
                     inv[i]->delete("scaledlevel");
                     inv[i]->delete("scaledfor");
                     inv[i]->run_item_bonuses("equip",who,inv[i]->query_item_bonuses());
                 }
-                if(inv[i]->query_ac() && inv[i]->is_armour()) ac -= (int)inv[i]->query_ac();                
-            }            
+                if(inv[i]->query_ac() && inv[i]->is_armour()) ac -= (int)inv[i]->query_ac();
+            }
             else if((string)inv[i]->query("scaledfor") == myName)
             {
                 inv[i]->delete("scaledlevel");
@@ -672,10 +673,10 @@ void scale_level_to(object who, int lev)
         tell_object(who, "%^BOLD%^%^WHITE%^You scale your character level down to "+lev+
         " please NOTE this is highly experimental as Saide tries to work out any unforseen "+
         "kinks so use at YOUR OWN RISK and immediately BUG REPORT anything out of whack.");
-        hp_perc = percent(who->query_hp(), who->query_max_hp());    
+        hp_perc = percent(who->query_hp(), who->query_max_hp());
         //tell_object(who, "hp_perc = "+hp_perc);
         who->set("scaledlevel", lev);
-        new_hp = (to_float(who->query_max_hp()) / 100) * hp_perc;   
+        new_hp = (to_float(who->query_max_hp()) / 100) * hp_perc;
         //tell_object(who, "new_hp = "+new_hp);
         who->set_hp(to_int(new_hp));
         inv = deep_inventory(who);
@@ -692,21 +693,21 @@ void scale_level_to(object who, int lev)
                 inv[i]->set("scaledlevel", lev);
                 inv[i]->set("scaledfor", myName);
                 inv[i]->run_item_bonuses("equip",who,inv[i]->query_item_bonuses());
-                if(inv[i]->query_ac() && inv[i]->is_armour()) ac -= (int)inv[i]->query_ac();                
-            }            
-            else 
+                if(inv[i]->query_ac() && inv[i]->is_armour()) ac -= (int)inv[i]->query_ac();
+            }
+            else
             {
                 inv[i]->set("scaledlevel", lev);
                 inv[i]->set("scaledfor", myName);
             }
             continue;
         }
-        who->set_ac(ac);        
+        who->set_ac(ac);
         return 1;
     }
 }
 
-varargs mapping myTerm(object who, int flag) 
+varargs mapping myTerm(object who, int flag)
 {
     string ret, term;
     mapping tmp;
@@ -732,14 +733,14 @@ string *determine_lines(object who)
     restricted_channels = who->query_restricted_channels();
 
     mychannels = ({"dev", "inform", "newbie", "ooc", "question"});
-    
+
     if (avatarp(who))
     {
         mychannels += ({ "discuss", "petition", "question", "wiz"});
     }
-  
+
     if (member_group(who->query_true_name(),"law_c"))
-        mychannels += ({ "law" });    
+        mychannels += ({ "law" });
     CHAT_D->add_user(mychannels, who);
     return mychannels;
 }
@@ -756,4 +757,3 @@ mixed query_mini_quest_info(object who, string quest, string qInfo)
     if(qInfo == "time") return whoQuests[quest][0];
     return whoQuests[quest][1];
 }
-
