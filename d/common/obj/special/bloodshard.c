@@ -65,7 +65,7 @@ void do_teleport(object who)
         return;
     tell_object(TP,"%^BOLD%^%^RED%^You feel a pull on the soul, then outside power drags you elsewhere.%^RESET%^");
 
-    log_file("bloodshards",who->QCN);
+    log_file("bloodshards",who->QCN+" "+file_name(ENV(who)));
 
     who->move_player("/d/darkwood/room/road18.c","with a loud clap");
     who->set_paralyzed(36*8,"%^BOLD%^%^WHITE%^You are in pain and shock from your abrupt teleportation.%^RESET%^"); //3 minutes
