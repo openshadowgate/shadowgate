@@ -15,7 +15,7 @@ void create()
     set_long("%^RED%^This elongated piece of %^RED%^dark %^RED%^re%^BOLD%^%^RED%^d%^RESET%^ %^RED%^glass%^BOLD%^%^RED%^,%^RESET%^%^RED%^ known as bloodshard, seems to %^RED%^fl%^BOLD%^%^RED%^o%^RESET%^%^RED%^w%^RED%^ in its irregular %^RED%^sh%^BOLD%^%^RED%^a%^RED%^p%^RESET%^%^RED%^e%^RED%^ at a slow pace. Just by looking at it you experience.. Some form of discomfort. Perhaps even pain? Yet is warm on touch and doesn't feels dangerous. Closer, you can see an etching in unknown tongue, yet you still can %^BOLD%^%^BLACK%^<read bloodshard>%^RESET%^%^RED%^ and understand what it says.
 ");
 
-    set_lore("Regardless of the origin of powers within, this piece of bloodglass will teleport to safety when broken, even from deepest dungeons.");
+    set_lore("Regardless of the origin of powers within, this piece of bloodglass will teleport to relative safety when broken, even from the deepest dungeons.");
     set_read("%^BOLD%^%^RED%^IN DESPERATION <BREAK BLOODSHARD> TO AVOID YOUR MORTAL MISERY%^RESET%^");
     set_language("wizish");
 
@@ -69,7 +69,7 @@ void do_teleport(object who)
 
     who->move_player("/d/darkwood/room/road18.c","with a loud clap");
     who->set_paralyzed(36*8,"%^BOLD%^%^WHITE%^You are in pain and shock from your abrupt teleportation.%^RESET%^"); //3 minutes
-    who->set_hp(1);
+    who->do_damage(who->query_hp()-1,"torso");
     who->set_property("bloodshard",time());
 
     TO->remove();
