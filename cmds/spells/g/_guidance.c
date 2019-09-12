@@ -49,18 +49,18 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
     string god;
 
     duration = (ROUND_LENGTH * 20) * clevel;
-        
+
     god = (string)caster->query_diety();
     if(!god) { god = "nature"; }
 
-    if(sizeof(caster->query_classes()) == 1) { bonus = 2; }
-    else { bonus = 1; }
+    bonus = clevel/24+1;
+    bonus = bonus>2?2:bonus;
 	if(target == caster)
     {
        tell_room(place,"%^BOLD%^%^GREEN%^"+target->QCN+" glows with a "
@@ -88,7 +88,7 @@ void spell_effect(int prof)
     spell_successful();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if(objectp(target))
     {

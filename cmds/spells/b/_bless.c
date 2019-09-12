@@ -35,7 +35,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^YELLOW%^You begin to chant a delicate prayer.");
 	tell_room(place,"%^YELLOW%^"+caster->QCN+" begins a delicate prayer"+
@@ -46,7 +46,9 @@ string query_cast_string()
 void spell_effect(int prof) {
     int duration;
     duration = (ROUND_LENGTH * 20) * clevel;
-    bonus = 1;
+
+    bonus = clevel/24+1;
+    bonus = bonus>2?2:bonus;
 
     if((string)TO->query_spell_type() == "potion") {
       if(target->query_property("blessed")) {

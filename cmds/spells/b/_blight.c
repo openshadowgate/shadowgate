@@ -8,7 +8,7 @@ inherit SPELL;
 
 int bonus;
 
-void create() 
+void create()
 {
     ::create();
     set_author("ares");
@@ -40,7 +40,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^GREEN%^You begin to chant a delicate prayer.");
     tell_room(place,"%^GREEN%^"+caster->QCN+" begins a delicate prayer"+
@@ -48,11 +48,12 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 20) * clevel;
-    bonus = 1;
+    bonus = clevel/24+1;
+    bonus = bonus>2?2:bonus;
 	if(target == caster)
     {
         tell_room(place,"%^BOLD%^%^RED%^A profane aura surrounds "+caster->QCN+""+
@@ -77,7 +78,7 @@ void spell_effect(int prof)
      spell_successful();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if(objectp(target))
     {

@@ -45,8 +45,8 @@ void spell_effect(int prof) {
 
     target = caster;
     duration = (ROUND_LENGTH * 20) * clevel;
-    bonus = (clevel/15)+1;
-    if(bonus > 4) bonus = 4;
+        bonus = clevel/18+1;
+    bonus = bonus>3?3:bonus;
 
     tell_room(place,"%^ORANGE%^The ground rumbles beneath"+
             " "+caster->QCN+"'s for a moment.",target);
