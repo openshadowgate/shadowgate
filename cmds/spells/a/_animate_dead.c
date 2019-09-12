@@ -104,6 +104,8 @@ void spell_effect(int prof)
         undead->move(environment(caster));
 
         undead->set_guild_level("fighter",clevel);
+        undead->set_weap_enchant(clevel/12);
+        undead->set_skill("perception",clevel);
         undead->set_level(clevel);
         undead->set_hd(clevel,6);
 

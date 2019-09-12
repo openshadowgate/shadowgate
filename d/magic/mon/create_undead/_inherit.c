@@ -5,7 +5,7 @@
 inherit WEAPONLESS;
 
 object master;
-
+object weapon;
 
 void control(object caster)
 {
@@ -13,7 +13,7 @@ void control(object caster)
         return;
     if(!present(caster,environment(TO)))
         return;
-    master = caster;    
+    master = caster;
     call_out("protect",ROUND_LENGTH);
 }
 
@@ -23,7 +23,7 @@ void protect()
 
     if(!objectp(master))
         return;
-    
+
     call_out("protect",ROUND_LENGTH);
     foes=master->query_attackers();
 
@@ -37,4 +37,9 @@ void protect()
     }
 }
 
-
+void set_weap_enchant(int level)
+{
+    if(objectp(weapon))
+        if(weapon->is_weapon())
+            weapon->set_property("enchantment",level);
+}
