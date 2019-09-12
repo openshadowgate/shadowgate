@@ -19,7 +19,7 @@ void create()
 
 string query_casting_string()
 {
-    return "%^BLUE%^With a shout and a body wide flex, "+caster->QCN+" starts to cast a spell.";
+    return "%^BOLD%^%^GREEN%^W%^CYAN%^i%^GREEN%^th %^RESET%^%^GREEN%^b%^MAGENTA%^o%^BOLD%^%^GREEN%^u%^RESET%^%^GREEN%^n%^BOLD%^d%^CYAN%^l%^GREEN%^es%^RESET%^%^GREEN%^s %^BOLD%^%^MAGENTA%^j%^CYAN%^o%^MAGENTA%^y %^GREEN%^a %^RESET%^%^CYAN%^s%^BOLD%^%^GREEN%^o%^RESET%^%^MAGENTA%^n%^BOLD%^%^GREEN%^g is s%^CYAN%^a%^RESET%^%^CYAN%^n%^BOLD%^%^GREEN%^g.%^RESET%^";
 }
 
 int preSpell()
@@ -51,16 +51,18 @@ void spell_effect()
         return;
     }
 
-    if (caster == target) {
-        tell_object(caster,"%^BLUE%^You slowly summon inner strength, lending the force of your will to the strength of your body.");
-        tell_room(environment(caster),"%^BLUE%^You see a wave of force surround and strengthen "+caster->QCN+"'s body.",({caster}));
-    } else {
-        tell_object(caster,"%^BLUE%^You slowly summon inner strength, lending the force of your will to strengthen "+target->QCN+"'s body.");
-        tell_object(target,"%^BLUE%^You feel the force of "+caster->QCN+"'s will strengthen your body.");
-        tell_room(environment(caster),"%^BLUE%^You see a wave of force surround and strengthen "+target->QCN+"'s body.",({target}));
-    }
+    tell_object(caster,"%^BOLD%^%^GREEN%^A song of life embraces "+target->QCN+"'s body.");
+    tell_object(target,"%^BOLD%^%^GREEN%^Joy, joy fills your body.");
+
     bonus = 4*clevel;
-    target->add_max_hp_bonus(bonus);
+    if(target->is_undead())
+    {
+        tell_object(target,"%^BOLD%^%^BLACK%^BUT JOY IS NOT OUR WAY%^RESET%^");
+        target->add_max_hp_bonus(-bonus);
+        spell_kill(target,caster);
+    }
+    else
+        target->add_max_hp_bonus(bonus);
     target->set_property("spelled",({TO}));
     target->set_property("spell_bonus_hp",1);
     spell_successful();
