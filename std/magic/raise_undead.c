@@ -1,6 +1,6 @@
 #include <std.h>
 
-void raise_ghosts(int clevel, int limit, int power, object caster, object controller)
+void raise_ghosts(int clevel, int limit, object caster, object controller)
 {
     object *temp, *targs, undead, target;
     int i, j, nummon, lvl, raised;
@@ -63,7 +63,7 @@ void raise_ghosts(int clevel, int limit, int power, object caster, object contro
         undead->set_property("minion",caster);
         undead->move(environment(caster));
         undead->serve(caster);
-        undead->set_max_hp(power*6+50); //d6
+        undead->set_max_hp(clevel*6+50); //d6
         undead->set_hp(undead->query_max_hp());
         undead->set_overall_ac(10-clevel);
         undead->set_property("spell", TO);

@@ -35,15 +35,6 @@ int preSpell() {
       tell_object(caster,"%^BOLD%^%^WHITE%^You can't channel your own power into yourself!%^RESET%^");
       return 0;
     }
-// this just makes hybrids cumbersome, to lose the weapon and have to cast a spell and then re-cast the weapons. Removing for now. N, 3/17.
-/*    while(present("eldritch_weapon_xxx",caster)) {
-      caster->force_me("unwield eldritch_weapon_xxx");
-      flag = 1;
-    }
-    if(flag) {
-      if(flag > 1) tell_object(caster,"%^CYAN%^You reshape your eldritch blast and the weapons disappear!%^RESET%^");
-      else tell_object(caster,"%^CYAN%^You reshape your eldritch blast and the weapon disappears!%^RESET%^");
-    } */
     return 1;
 }
 
@@ -115,12 +106,6 @@ void spell_effect(int prof) {
       damage_targ(target, target->return_target_limb(), damage, element);
       if(FEATS_D->usable_feat(caster,"hellfire blast")) do_hellfire_damage(target,"full");
       do_secondary(target);
-/*    }
-    else {
-      tell_object(caster,"%^MAGENTA%^In a single motion you direct a blast of "+descriptor+" at "+target->QCN+", but it misses!%^RESET%^");
-      tell_object(target,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" at you, but it misses!%^RESET%^");
-      tell_room(place,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" at "+target->QCN+", but it misses!%^RESET%^",({ caster, target}) );
-    } */
     dest_effect();
 }
 

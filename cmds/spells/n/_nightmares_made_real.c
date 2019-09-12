@@ -13,6 +13,7 @@ void create() {
     set_spell_name("nightmares made real");
     set_spell_level(([ "warlock" : 3 ]));
     set_syntax("cast CLASS nightmares made real");
+    set_damage_desc("negative energy");
     set_description("By means of this invocation, the warlock cloaks the surrounding area in a horrific dreamscape "
 "interwoven with planar energy, making any terrain look, sound and smell like something out of a nightmare. Writhing "
 "vegetation, disembodied limbs, animated corpses, smoking pits, miasmic vapors, vile stenches, or anything else that "
@@ -26,7 +27,7 @@ void create() {
     set_aoe_message("%^RESET%^%^GREEN%^(warped by horrifying %^CYAN%^phantasms%^GREEN%^)%^RESET%^");
 }
 
-string query_cast_string(){ 
+string query_cast_string(){
    tell_object(caster,"%^GREEN%^You wave your arms, and the air around you sh%^BOLD%^%^GREEN%^i%^RESET%^%^GREEN%^mmers and rip%^CYAN%^pl%^GREEN%^es.%^RESET%^");
    tell_room(place,"%^GREEN%^"+caster->QCN+" waves "+caster->QP+" arms, and the air around you sh%^BOLD%^%^GREEN%^i%^RESET%^%^GREEN%^mmers and rip%^CYAN%^pl%^GREEN%^es.%^RESET%^",caster);
    return "display";
@@ -38,7 +39,7 @@ void spell_effect(int prof){
    tell_room(PLACE,"%^GREEN%^"+caster->QCN+" completes "+caster->QP+" spell, as the world around you suddenly descends into a state of %^BLUE%^n%^CYAN%^ig%^BLUE%^htm%^MAGENTA%^a%^BLUE%^re%^GREEN%^!%^RESET%^",caster);
    caster->set_property("spelled", ({TO}));
    addSpellToCaster();
-   spell_successful();    
+   spell_successful();
    call_out("dest_effect",duration);
 }
 
@@ -74,7 +75,7 @@ void execute_attack(){
       return;
    } */
    if(present(caster,place) && caster != target && !caster->query_unconscious()) {
-       place->addObjectToCombatCycle(TO,1);        
+       place->addObjectToCombatCycle(TO,1);
    }
    else {
        dest_effect();
@@ -95,7 +96,7 @@ int nightmare_effects(object obj){
    set_save("will");
    if(do_save(obj,0)){
       tell_object(obj,"%^GREEN%^You will away the illusion, though the planar energy still tears at your body!%^RESET%^");
-      tell_room(room,"%^GREEN%^"+obj->QCN+" seems to see past the worst of the nightmarish visions!%^RESET%^",obj);        
+      tell_room(room,"%^GREEN%^"+obj->QCN+" seems to see past the worst of the nightmarish visions!%^RESET%^",obj);
       damage_targ(obj,obj->return_target_limb(),damage/2,"negative energy");
    }
    else{

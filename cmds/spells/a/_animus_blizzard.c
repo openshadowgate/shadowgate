@@ -95,7 +95,7 @@ void execute_attack()
         controller->move(caster);
     }
 
-    "/std/magic/raise_undead"->raise_ghosts(clevel, clevel/12, 3/2, caster, controller);
+    "/std/magic/raise_undead"->raise_ghosts(clevel, clevel/12,caster, controller);
 
     counter--;
     place->addObjectToCombatCycle(TO,1);

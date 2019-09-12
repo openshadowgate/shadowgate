@@ -12,6 +12,7 @@ void create()
     set_spell_level(([ "cleric" : 6, "druid" : 7 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS heal on TARGET");
+    set_damage_desc("positive energy");
     set_description("%^RESET%^This spell will channel huge amount of positive energy into target and will allow the caster to cure massive amount damage from wounds and diseases.
 
 See also: heal *player commands");

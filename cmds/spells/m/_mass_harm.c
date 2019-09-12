@@ -1,11 +1,3 @@
-// mass heal
-// cures party members if not given a target, if no party it just cures the caster.
-// if aimed at an attacker, it hits all attackers, healing living targets and hurting
-// undead targets.  If cast at a neutral, it hits all things in the room, healing
-// living things, and hurting undead.
-// Don't know wtf I was thinking when I originally made this, I've simplified the
-// code, hopefully getting rid of some of the bugs. -Ares
-
 #include <std.h>
 #include <magic.h>
 #include <party.h>
@@ -22,6 +14,7 @@ void create()
     set_spell_level(([ "cleric" : 9 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass harm on TARGET");
+    set_damage_desc("negative energy");
     set_description("This is a stronger version of harm spell. It acts like mass heal, but channels negative energy.");
     set_verbal_comp();
     set_somatic_comp();
