@@ -4,18 +4,13 @@
 #include <rooms.h>
 inherit "/cmds/spells/c/_create_undead";
 
-string* list_undead()
-{
-    return ({"shadow","wraith","spectre"});
-}
-
 void create()
 {
     ::create();
     set_spell_name("create greater undead");
     set_spell_level(([ "mage" : 8, "cleric" : 8 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS create greater undead [on shadow|wraith|spectre]");
+    set_syntax("cast CLASS create greater undead");
     set_description("Next step in the art of necromancy is to use the very soul of the fallen to create a new form of undead. The being created walks in between the worlds and is truly terrifying as it can not be destroyed without arcane. The necromancer seen performing this ritual in civilized societies will certainly be noted.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
@@ -36,3 +31,20 @@ string query_cast_string()
     return "%^BOLD%^%^CYAN%^"+caster->QCN+" cuts "+caster->QP+"%^BOLD%^%^CYAN%^wrists and %^CYAN%^s%^BLACK%^i%^CYAN%^n%^CYAN%^g%^BLACK%^s%^CYAN%^ low in %^CYAN%^f%^BLACK%^ell%^CYAN%^ tongues.%^RESET%^";
 }
 
+string undead_to_raise()
+{
+    return "skelemage";
+}
+
+void setup_undead_scaling(object undead)
+{
+    undead->set_guild_level("mage",clevel*4/5);
+    undead->set_mlevel("mage",clevel*4/5);
+    undead->set_skill("spellcraft",clevel);
+    undead->set_skill("perception",clevel);
+    undead->set_level(clevel);
+    undead->set_hd(clevel,8);
+    undead->set_max_hp(clevel*12+100);
+    undead->set_hp(undead->query_max_hp());
+    undead->set_overall_ac(10-clevel);
+}

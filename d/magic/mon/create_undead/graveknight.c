@@ -8,8 +8,8 @@ void create(){
     ::create();
     set_name("graveknight");
     set_id(({"skeleton","graveknight","undead"}));
-    set_short("%^BOLD%^%^BLACK%^s%^WHITE%^k%^BLACK%^e%^WHITE%^l%^BLACK%^e%^WHITE%^t%^BLACK%^a%^WHITE%^l %^BLACK%^c%^WHITE%^h%^BLACK%^a%^WHITE%^m%^BLACK%^p%^WHITE%^i%^BLACK%^o%^WHITE%^n%^RESET%^");
-    set_long("%^BOLD%^%^WHITE%^Before you stands an undead creature, a humanoid skeleton holding a sword and a shield in its skeletal hands. Its bones float in fell aura forming resemblance of a kith being, %^RED%^its eyes glow red with graft of undeath's hatred towards the life.");
+    set_short("%^BOLD%^%^BLACK%^g%^RED%^r%^BLACK%^a%^RED%^v%^BLACK%^e%^RED%^k%^BLACK%^n%^RED%^i%^BLACK%^g%^RED%^h%^BLACK%^t%^RESET%^");
+    set_long("%^BOLD%^%^WHITE%^Before you stands an undead creature, a humanoid skeleton holding a halberd in its skeletal hands. Its bones float in fell aura forming resemblance of a kith being, %^RED%^its eyes glow red with graft of undeath's hatred towards the life.");
     set_race("undead");
     set_gender("male");
 
@@ -44,7 +44,7 @@ void create(){
         stuff->set_property("monsterweapon", 1);
         stuff->move(TO);
         weapon = stuff;
-        command("wield sword");
+        command("wield halberd");
         stuff = new("/d/common/obj/armour/chain");
         stuff->set_property("monsterweapon", 1);
         stuff->move(TO);
@@ -55,8 +55,9 @@ void create(){
     add_search_path("/cmds/fighter");
 
     set_monster_feats(({
-                "counter",
-                    "reflection",
+                "strength of arm",
+                    "blade block",
+                    "light weapon",
                     }));
 
     set_fighter_style("soldier");

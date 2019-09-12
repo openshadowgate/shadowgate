@@ -7,7 +7,6 @@ int num_mon;
 
 void fail();
 
-
 #define UNDEADDIR "/d/magic/mon/create_undead/"
 
 void create()
@@ -16,7 +15,7 @@ void create()
     set_spell_name("create undead");
     set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS create undead [on ghoul|ghast|mummy|mohrg]");
+    set_syntax("cast CLASS create undead");
     set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something else, more potent and powerful, to serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel new shell is twisted and changed forever.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
@@ -31,9 +30,9 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_arg_needed();
 }
 
-string * list_undead()
+string undead_to_raise()
 {
-    return ({"ghoul","ghast","mummy","mohrg"});
+    return "graveknight";
 }
 
 string query_cast_string()
@@ -42,14 +41,10 @@ string query_cast_string()
     return "%^BOLD%^%^GREEN%^"+caster->QCN+" cuts "+caster->QP+"%^BOLD%^%^GREEN%^wrists and %^GREEN%^s%^BLACK%^i%^GREEN%^n%^GREEN%^g%^BLACK%^s%^GREEN%^ low in %^GREEN%^f%^BLACK%^ell%^GREEN%^ tongues.%^RESET%^";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object controller, undead, corpse, *corpses=({}), *undeadl;
     int lvl;
-
-    undeadl = TO->list_undead();
-    if(member_array(arg,undeadl)==-1)
-        arg = undeadl[random(sizeof(undeadl))];
 
     if((int)caster->query_property("raised")>clevel)
     {
@@ -57,30 +52,30 @@ void spell_effect(int prof)
         TO->remove();
         return;
     }
-    
+
     corpses=all_inventory(ENV(caster));
     corpses=filter_array(corpses,(:(int)$1->is_corpse()==1:));
     if(!sizeof(corpses))
     {
         tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUCK OUT FIRST%^RESET%^%^RESET%^");
         TO->remove();
-        return;            
+        return;
     }
 
-    tell_room(place,"%^BOLD%^%^GREEN%^The corpses %^GREEN%^t%^BLACK%^w%^GREEN%^i%^BLACK%^st%^GREEN%^ and %^BLACK%^c%^GREEN%^h%^BLACK%^an%^GREEN%^g%^BLACK%^e%^GREEN%^s%^GREEN%^ under %^GREEN%^t%^GREEN%^h%^BLACK%^e %^BLACK%^f%^GREEN%^e%^BLACK%^ll %^BLACK%^ma%^GREEN%^g%^BLACK%^i%^GREEN%^c%^BLACK%^,%^GREEN%^ and then finally %^BLACK%^o%^GREEN%^b%^BLACK%^edien%^GREEN%^t%^BLACK%^l%^GREEN%^y%^GREEN%^ stands as %^BLACK%^"+arg+"s%^RESET%^",caster);
+    tell_room(place,"%^BOLD%^%^GREEN%^The corpses %^GREEN%^t%^BLACK%^w%^GREEN%^i%^BLACK%^st%^GREEN%^ and %^BLACK%^c%^GREEN%^h%^BLACK%^an%^GREEN%^g%^BLACK%^e%^GREEN%^s%^GREEN%^ under %^GREEN%^t%^GREEN%^h%^BLACK%^e %^BLACK%^f%^GREEN%^e%^BLACK%^ll %^BLACK%^ma%^GREEN%^g%^BLACK%^i%^GREEN%^c%^BLACK%^,%^GREEN%^ and then finally %^BLACK%^o%^GREEN%^b%^BLACK%^edien%^GREEN%^t%^BLACK%^l%^GREEN%^y%^GREEN%^ stands as %^BLACK%^"+undead_to_raise()+"%^RESET%^",caster);
     corpse = corpses[0];
-    undead=new(UNDEADDIR+arg);
+    undead=new(UNDEADDIR+undead_to_raise());
     if(!(undead))
     {
         tell_object(caster,"Something went wrong.");
         TO->remove();
-        return;            
+        return;
     }
     corpse->remove();
 
 
-    tell_object(caster,"%^BOLD%^%^BLACK%^THE %^WHITE%^"+capitalize(arg)+"%^BLACK%^ RAISES%^RESET%^");    
-    
+    tell_object(caster,"%^BOLD%^%^BLACK%^THE %^WHITE%^"+capitalize(undead_to_raise())+"%^BLACK%^ RAISES%^RESET%^");
+
     if(present("undead_controller",caster))
     {
         controller = present("undead_controller",caster);
@@ -94,19 +89,21 @@ void spell_effect(int prof)
 
     undead->set_property("raised",lvl);
     undead->set_property("minion",caster);
+
     undead->move(environment(caster));
-    undead->set_max_hp(undead->query_hp()*2);
-    undead->set_hp(undead->query_max_hp());
-    undead->set_overall_ac(10-clevel);
+
+    setup_undead_scaling(undead);
+
     undead->add_id("summoned monster");
     undead->set_property("spell", TO);
     undead->set_property("spell_creature", TO);
     undead->set_property("minion", caster);
+
     undead->control(caster);
     caster->add_follower(undead);
     controller->add_monster(undead);
 
-    lvl = undead->query_level()/2;
+    lvl = clevel/4;
     caster->set_property("raised", lvl);
 
     dest_effect();
@@ -114,9 +111,21 @@ void spell_effect(int prof)
     return;
 }
 
+void setup_undead_scaling(object undead)
+{
+    undead->set_guild_level("fighter",clevel);
+    undead->set_weap_enchant(clevel/12);
+    undead->set_skill("athletics",clevel);
+    undead->set_skill("perception",clevel);
+    undead->set_level(clevel);
+    undead->set_hd(clevel,8);
+    undead->set_max_hp(clevel*12+100);
+    undead->set_hp(undead->query_max_hp());
+    undead->set_overall_ac(10-clevel);
+}
+
 void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();;
 }
-
