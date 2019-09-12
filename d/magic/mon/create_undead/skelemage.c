@@ -7,7 +7,7 @@ void create(){
 
     ::create();
     set_name("skelemage");
-    set_id(({"skeleton","skelemage","undead"}));
+    set_id(({"skeleton","skelemage","undead","mage skeleton"}));
     set_short("%^CYAN%^m%^BOLD%^ag%^RESET%^%^CYAN%^e %^BOLD%^%^BLACK%^s%^CYAN%^k%^BLACK%^e%^CYAN%^l%^BLACK%^e%^CYAN%^t%^BLACK%^o%^CYAN%^n%^RESET%^");
     set_long("%^BOLD%^%^WHITE%^Before you floats an undead creature, a humanoid skeleton in tattered robes, holding a spellbook. Its bones float in fell aura forming resemblance of a kith being, %^RED%^its eyes glow red with graft of undeath's hatred towards the life.");
     set_race("undead");

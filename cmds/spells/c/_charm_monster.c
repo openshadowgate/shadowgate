@@ -1,5 +1,5 @@
-// charm monster 
-// still needs to go through some testing. 
+// charm monster
+// still needs to go through some testing.
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -17,7 +17,7 @@ void end_charmed(object target,object caster);
 void create() {
     ::create();
     set_spell_name("charm monster");
-    set_spell_level(([ "cleric" : 7, "bard" : 3, "mage" : 1 ]));
+    set_spell_level(([ "cleric" : 7, "bard" : 3, "mage" : 1, "ranger" : 2 ]));
     set_spell_sphere("enchantment_charm");
     set_spell_domain("charm");
     set_syntax("cast CLASS charm monster on TARGET");
@@ -41,7 +41,7 @@ int preSpell() {
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^BLUE%^%^Blowing on your twirling hands,"+
         " a howling gale begins to form behind you.");
@@ -50,15 +50,15 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     string *myids;
-    if(!present(target,environment(caster))) 
+    if(!present(target,environment(caster)))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.");
         dest_effect();
         return;
-    }    
+    }
     if(caster->query_property("has charmed monster"))
     {
         tell_object(caster,"You already have a charmed monster, you can't have another.");
@@ -95,10 +95,10 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    if(!target->is_player()) 
-    { 
+    if(!target->is_player())
+    {
         // doesn't work on monsters with custom "aggressive" functions defined
-        if(!intp(agg=target->query("aggressive")))  
+        if(!intp(agg=target->query("aggressive")))
         {
             tell_object(caster,"That one can't be charmed!");
             dest_effect();
@@ -154,7 +154,7 @@ void charm(object targ,object cast)
 
     if(!objectp(targ)) return;
     if(!objectp(cast)) return;
-    
+
     min    = ROUND_LENGTH * 10;
     max    = ROUND_LENGTH * 50;
     room   = environment(cast);
@@ -176,7 +176,7 @@ void charm(object targ,object cast)
         tell_object(cast,"%^BOLD%^%^MAGENTA%^"+targ->QCN+" falls under your"+
 		    " charm and comes to your defence!");
         tell_room(room,"%^BOLD%^%^MAGENTA%^"+targ->QCN+"  and comes to "+
-		    ""+cast->QCN+" defence.",({ cast, targ}) );		
+		    ""+cast->QCN+" defence.",({ cast, targ}) );
         cast->set_property("has charmed monster",1);
         targ->set_property("is charmed",1);
         targ->cease_all_attacks();
@@ -201,10 +201,10 @@ void charm(object targ,object cast)
 void still_charmed(object targ,object cast)
 {
     if(do_save(targ,modifier))
-    //if(SAVING_D->saving_throw(targ, "spell", modifier)) 
-    { 
-        end_charmed(targ,cast); 
-        return; 
+    //if(SAVING_D->saving_throw(targ, "spell", modifier))
+    {
+        end_charmed(targ,cast);
+        return;
     }
     call_out("still_charmed",duration,targ,cast);
     return;
@@ -212,17 +212,17 @@ void still_charmed(object targ,object cast)
 
 void end_charmed(object targ,object cast)
 {
-    if(!objectp(targ)) { dest_effect(); return; } 
+    if(!objectp(targ)) { dest_effect(); return; }
     tell_object(targ,"%^MAGENTA%^You blink and look around, "+
 		"realizing you are no longer charmed.");
     tell_room(environment(targ),"%^MAGENTA%^"+targ->QCN+" blinks and "+
-		"looks around strangely.",targ);    
+		"looks around strangely.",targ);
     if(!objectp(cast)) { dest_effect(); return; }
     cast->remove_property("has charmed monster");
     if(agg) { targ->set("aggressive",agg); }
     if(member_array(targ,cast->query_followers()) != -1) { cast->remove_follower(targ); }
     cast->remove_protector(targ);
-    
+
     if(!do_save(targ,4))
     //if(!SAVING_D->saving_throw(targ,"spell",4))
     {
@@ -234,14 +234,14 @@ void end_charmed(object targ,object cast)
 			""+cast->QCN+" in a rage!",({targ,cast}) );
             spell_kill(targ,cast);
         }
-    }    
+    }
 
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
-    
+
     if(objectp(target) && target->query_property("is charmed"))
     {
         target->remove_property("is charmed");

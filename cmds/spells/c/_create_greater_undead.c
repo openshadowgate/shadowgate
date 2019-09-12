@@ -38,8 +38,8 @@ string undead_to_raise()
 
 void setup_undead_scaling(object undead)
 {
-    undead->set_guild_level("mage",clevel*4/5);
-    undead->set_mlevel("mage",clevel*4/5);
+    undead->set_guild_level("mage",clevel*5/6);
+    undead->set_mlevel("mage",clevel*5/6);
     undead->set_skill("spellcraft",clevel);
     undead->set_skill("perception",clevel);
     undead->set_level(clevel);
