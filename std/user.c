@@ -2172,7 +2172,7 @@ string query_title() {
   if (query_ghost()) return "A ghost";
 
   if(query_death_flag()) { mod = "%^BOLD%^%^RED%^D %^GREEN%^"; }
-  if(get_pk_death_flag() || TO->query("no pk")) mod = "%^BOLD%^%^MAGENTA%^PK %^GREEN%^";
+  if(get_pk_death_flag() || TO->query("no pk")) mod = "%^BOLD%^%^MAGENTA%^NoPK %^GREEN%^";
   if (newbiep(TO)) mod = "%^BOLD%^%^CYAN%^N %^GREEN%^";
   if(objectp(TP) && TP->knownAs(query_true_name()))
   {

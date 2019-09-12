@@ -202,7 +202,7 @@ int cmd_flag(string str)
                 tell_object(TP, "You are now flying a RP flag!");
                 return 1;
             case "player kill":
-                if(arg != "off")
+                if(arg != "on")
                 {
                     tell_object(TP, "You are only able to turn off your pkill protection.");
                     return 1;
@@ -285,7 +285,7 @@ flag - manipulate player flags
 flag
 flag scaled level . %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal
 flag roleplay flag . on
-flag player kill . off
+flag player kill . on
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
