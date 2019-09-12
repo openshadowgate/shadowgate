@@ -11,13 +11,14 @@ inherit SPELL;
 int time,first_execute;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("fire storm");
     set_spell_level(([ "cleric" : 8, "druid" : 7, "monk" : 17 ]));
     set_spell_sphere("elemental fire");
     set_syntax("cast CLASS fire storm");
+    set_damage_desc("fire");
     set_description("When the fire storm spell is cast, the whole area is shot through with sheets of roaring flame.  Any "
         "target in the area of effect takes damage every round while the spell is in effect, but does not damage the caster.  "
         "This spell does not work in conjunction with the monsoon priest spell.");
@@ -28,7 +29,7 @@ void create()
     set_aoe_message("%^BOLD%^%^RED%^(ablaze with sheets of flame)%^RESET%^");
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_object(caster,"%^RED%^You wave your hands around summoning the fury of the elemental plane of fire!");
     tell_room(place,"%^RED%^"+caster->QCN+" waves "+caster->QP+" hands around summoning the fury of the elemental plane of fire!",caster);
@@ -41,79 +42,79 @@ void spell_effect(int prof)
 }
 
 
-void execute_attack() 
+void execute_attack()
 {
     string target_limb;
     object *foes;
     int i, damage;
-    
-    if(!objectp(place)) 
+
+    if(!objectp(place))
     {
         dest_effect();
         return;
     }
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
     }
-    
-    if (!first_execute) 
+
+    if (!first_execute)
     {
         first_execute++;
         ::execute_attack();
         return;
     }
-    
+
     foes = all_living(place);
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);    
+    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     foes = target_filter(foes);
 
-    if (time > clevel || !present(caster,place)) 
+    if (time > clevel || !present(caster,place))
     {
         dest_effect();
         return;
     }
 
-    if (!present(caster,place)) 
+    if (!present(caster,place))
     {
         dest_effect();
         return;
     }
-    
+
     if(spell_type == "monk" && sizeof(foes)) { MAGIC_D->elemental_opportunist(caster, foes[0]); }
-    
+
     damage = roll_dice(clevel,4);
-    
+
     tell_room(place,"%^BOLD%^RED%^Sheets of flame rage across the area incinerating everything in sight!");
-    
-    for(i=0;sizeof(foes),i<sizeof(foes);i++) 
+
+    for(i=0;sizeof(foes),i<sizeof(foes);i++)
     {
         if(!objectp(foes[i])) continue;
         if(foes[i] == caster) continue;
         if(!present(foes[i],place)) continue;
         if(interactive(foes[i]) && foes[i]->query_level() < 6) continue;
-        if(do_save(foes[i],0)) 
+        if(do_save(foes[i],0))
         {
             damage = damage/2;
         }
 
         target_limb = foes[i]->return_target_limb();
         damage_targ(foes[i], target_limb, damage,"fire");
-        if(present(caster, place)) 
+        if(present(caster, place))
         {
             if (objectp(foes[i])) spell_kill(foes[i],caster);
         }
     }
-    
+
     time++;
-    
-    if (present(caster,place) && !caster->query_unconscious()) 
+
+    if (present(caster,place) && !caster->query_unconscious())
     {
         place->addObjectToCombatCycle(TO,1);
         return;
     }
-    else 
+    else
     {
         dest_effect();
         return;
@@ -121,14 +122,14 @@ void execute_attack()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
-    if(objectp(place)) 
+    if(objectp(place))
     {
         tell_room(place,"%^BOLD%^%^RED%^The fire storm weakens and dissipates.");
         place->remove_property_value("spelled", ({TO}) );
     }
-    if(objectp(caster)) 
+    if(objectp(caster))
     {
         caster->remove_property_value("spelled", ({TO}) );
     }

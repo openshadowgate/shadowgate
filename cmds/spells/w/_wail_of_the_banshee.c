@@ -12,7 +12,7 @@ void create()
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS wail of the banshee");
-    set_damage_desc("negative energy to living");
+    set_damage_desc("sonic to living");
     set_description("A caster invokes a horrible arcane scream that kills everything living in sight. Those who withstand the scream still suffer a little.");
     set_verbal_comp();
     set_somatic_comp();
@@ -44,7 +44,7 @@ void spell_effect(int prof)
         {
             tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
             tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
-            damage_targ(foe, foe->query_target_limb(),sdamage/2,"negative energy");
+            damage_targ(foe, foe->query_target_limb(),sdamage/2,"sonic");
             continue;
         }
         tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");

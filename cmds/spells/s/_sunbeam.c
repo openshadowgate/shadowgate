@@ -9,6 +9,7 @@ void create() {
     set_spell_level(([ "druid" : 7 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sunbeam on TARGET");
+    set_damage_desc("untyped, 1.5 times to undead");
     set_description("This spell will create a beam of pure light aimed at the target.  A target who fails to avoid the "
         "sunbeam will take damage from the pure sunlight and may be momentarily blinded.  Undead hit by the spell will "
         "suffer additional damage.");
@@ -27,7 +28,7 @@ void spell_effect(int prof) {
     string target_limb;
 
     spell_successful();
-    
+
     if (environment(caster) != environment(target)) {
         tell_object(caster,"Your target has left your range.\n");
         dest_effect();
@@ -52,7 +53,7 @@ void spell_effect(int prof) {
         tell_object(target,"%^BOLD%^"+caster->QCN+"'s beam of light hits you head on, burning you with its intensity.");
         tell_room(place,"%^BOLD%^"+caster->QCN+"'s beam of light hits "+target->QCN+" head on, burning "+target->QO+" with its intensity!",({target, caster}));
         target->set_temporary_blinded(1);
-    } 
+    }
     else {
         if(evade_splash(target)) { dest_effect(); return; }
         tell_object(caster,"%^BLUE%^"+target->QCN+" dodges at the last instant, avoiding the worst of the damage from your beam of light!");
