@@ -63,7 +63,7 @@ void spell_effect()
     }
     else
     {
-        int duration = clevel * ROUND_LENGTH;
+        int duration = clevel * ROUND_LENGTH * 5;
         tell_object(target,"%^BOLD%^%^GREEN%^You feel more healthy and joyful.");
         target->add_max_hp_bonus(bonus);
         target->set_property("spelled",({TO}));

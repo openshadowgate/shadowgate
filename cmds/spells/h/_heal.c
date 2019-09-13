@@ -66,7 +66,7 @@ spell_effect(int prof)
         tell_object(target, "%^WHITE%^%^BOLD%^"+caster->QCN+" sends a beam of energy at you.");
     }
 
-    rnd = - sdamage * 5/4;
+    rnd = - sdamage * 7/6;
     damage_targ(target,target->return_target_limb(),rnd,"positive energy");
     target->remove_paralyzed();
     target->set_poisoning((-1)*(int)target->query_poisoning());
