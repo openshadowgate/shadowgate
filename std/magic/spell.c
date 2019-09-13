@@ -1356,7 +1356,7 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
             return;
         }
     }
-    define_base_damage_adjustment();
+    define_base_spell_level_bonus();
     define_base_damage(0);
 
     if(!preSpell())

@@ -26,7 +26,7 @@ int preSpell()
 {
     if(!target)
         target = caster;
-    if(target->query_property("spell_bonus_hp") &&
+    if(target->query_property("kiss of feywild") &&
        !target->is_undead())
     {
         tell_object(caster,"The spell is repelled by similar magic.");
@@ -62,23 +62,43 @@ void spell_effect()
     }
     else
     {
+        int duration = clevel * ROUND_LENGTH;
         tell_object(target,"%^BOLD%^%^GREEN%^You feel more healthy and joyful.");
         target->add_max_hp_bonus(bonus);
-        target->set_property("spell_bonus_hp",1);
         target->set_property("spelled",({TO}));
-    }
 
-    spell_successful();
-    addSpellToCaster();
+        spell_successful();
+        addSpellToCaster();
+
+        execute_attack();
+
+        call_out("dest_effect",duration);
+    }
+}
+
+void execute_attack()
+{
+    ::execute_attack();
+    if(!objectp(caster)){
+        dest_effect();
+        return;
+    }
+    place = environment(caster); // In the case caster moves
+
+    if((int)caster->query_hp() < (int)caster->query_max_hp())
+    {
+        tell_object(caster,"%^BOLD%^%^GREEN%^The %^MAGENTA%^song%^GREEN%^ %^CYAN%^heals%^GREEN%^ some of your wounds%^RESET%^");
+        damage_targ(caster,caster->return_target_limb(),roll_dice(1,clevel),"positive energy");
+    }
+    place->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect()
 {
     if(objectp(target))
     {
-       target->add_max_hp_bonus(-bonus);
        target->remove_property_value("spelled", ({TO}) );
-       target->remove_property("spell_bonus_hp");
+       target->remove_property("kiss of feywild");
     }
     ::dest_effect();
     if(objectp(TO))
