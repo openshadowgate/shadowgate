@@ -299,7 +299,7 @@ string thirst2string(object obj)
     int max, hunger;
     max = obj->query_formula();
     max /=6;
-    hunger = obj->query_stuffed();
+    hunger = obj->query_quenched();
     if(hunger < max)
         return"Parched";
     else if(hunger < (max * 2))
