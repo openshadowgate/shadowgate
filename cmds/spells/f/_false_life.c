@@ -11,6 +11,7 @@ void create() {
     set_spell_level(([ "mage" : 2, "bard" : 2 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS false life [on TARGET]");
+    set_damage_desc("clevel*2 hitpoints bonus");
     set_description("With this spell, caster harnesses flow of negative energies to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
     set_components(([
       "mage" : ([ "drop of blood":1, "crane's feather":1, ]),

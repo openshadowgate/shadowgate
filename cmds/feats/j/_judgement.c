@@ -35,7 +35,7 @@ void create() {
     allow_blind(1);
 }
 
-int allow_shifted() { return 1; } 
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob){
     if(!objectp(ob)) return 0;
@@ -58,7 +58,7 @@ int cmd_rally(string str){
 void execute_feat(){
     object *inven, *partied;
     int i;
-    if((int)caster->query_property("using rally") > time())     {
+    if((int)caster->query_property("using rally")) {
         tell_object(caster,"You can't try to rally your allies again yet!");
         dest_effect();
         return;
@@ -78,7 +78,7 @@ void execute_feat(){
     cur_players = ({});
     partied = PARTY_D->query_party_members(caster->query_party());
     if(!sizeof(partied)) partied = ({ caster });
-  
+
     if(sizeof(all_living(ETP))) { inven += all_living(ETP); }
     for(i = 0;i<sizeof(inven);i++) {
         if(userp(inven[i]) && (member_array(inven[i],partied) != -1) && !inven[i]->query_true_invis())
@@ -122,7 +122,7 @@ void do_rally(){
     for(i=0;i<sizeof(cur_players);i++){
       switch(mytype) {
         case "spells":
-          cur_players[i]->set_property("spell penetration",(mod*5)); 
+          cur_players[i]->set_property("spell penetration",(mod*5));
           cur_players[i]->set_property("empowered",mod);
         break;
         case "defenses":
@@ -138,7 +138,7 @@ void do_rally(){
       tell_object(cur_players[i],"%^YELLOW%^You feel invigorated and ready for battle!%^RESET%^");
     }
     tell_object(caster,"%^BOLD%^%^WHITE%^You finish inspiring your comrades.%^RESET%^");
-    caster->set_property("using rally",time() + duration);
+    caster->set_property("using rally", 1);
     call_out("check",ROUND_LENGTH);
     call_out("dest_effect",duration);
     caster->set_property("active_feats", ({TO}));
@@ -158,7 +158,7 @@ void dest_effect(){
     string *holding;
     ::dest_effect();
     mod = mod*(-1);
-    if(!sizeof(cur_players)) 
+    if(!sizeof(cur_players))
     {
       remove_feat(TO);
       return;
@@ -168,7 +168,7 @@ void dest_effect(){
       tell_object(cur_players[i],"%^BOLD%^%^CYAN%^You feel the effects of the bard's song wear off.%^RESET%^");
       switch(mytype) {
         case "spells":
-          cur_players[i]->set_property("spell penetration",(mod*5)); 
+          cur_players[i]->set_property("spell penetration",(mod*5));
           cur_players[i]->set_property("empowered",mod);
         break;
         case "defenses":
@@ -187,7 +187,7 @@ void dest_effect(){
       cur_players[i]->remove_property("rally");
       if(sizeof(holding)) cur_players[i]->set_property("rally",holding);
     }
+    if(objectp(caster)) caster->remove_property("using rally");
     remove_feat(TO);
     return;
 }
-
