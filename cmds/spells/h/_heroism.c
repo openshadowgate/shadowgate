@@ -12,8 +12,8 @@ void create() {
     set_spell_name("heroism");
     set_spell_level(([ "mage" : 3, "bard" : 4 ]));
     set_spell_sphere("enchantment_charm");
-    set_syntax("cast CLASS heroism (on TARGET)");
-    set_damage_desc("clevel/12 to attack and damage bonus, saving throws, clevel/18 to skills");
+    set_syntax("cast CLASS heroism [on TARGET]");
+    set_damage_desc("+2 to attack and damage bonus, saving throws, skills");
     set_description("This spell allows the caster to draw upon their personal presence and charm, granting them or an ally"
 " a bonus to morale on attacks, saves and core skills. It does not stack with other morale-boosting spells, such as good "
 "hope.");
@@ -25,6 +25,11 @@ void create() {
       "mage" : ([ "vermilion" : 2, ]),
     ]));
 	set_helpful_spell(1);
+}
+
+int query_heroism_bonus()
+{
+    return 2;
 }
 
 int preSpell(){
@@ -61,17 +66,11 @@ void spell_effect(int prof) {
       }
     }
     spell_successful();
-    thacobonus = clevel/12; // +1 per 10 level bracket
-    if(thacobonus < 1)
-        thacobonus = 4;
-    if(thacobonus > 4)
-        thacobonus = 4;
+    thacobonus = query_heroism_bonus();
     if(prof == -100) thacobonus = thacobonus*(-1);
     target->add_attack_bonus(thacobonus);
     target->add_saving_bonus("all",thacobonus);
-    skillbonus = clevel/18; // +1 bonus til L20, +2 bonus til L40
-    if(skillbonus < 1)
-        skillbonus = 1;
+    skillbonus = query_heroism_bonus();
     if(prof == -100) skillbonus = skillbonus*(-1);
     for(i=0;i<sizeof(CORE_SKILLS);i++)
       target->add_skill_bonus(CORE_SKILLS[i],skillbonus);
