@@ -3,7 +3,8 @@
 #include <magic.h>
 inherit FEAT;
 
-void create() {
+void create()
+{
     ::create();
     feat_type("instant");
     feat_category("DivineSpellcraft");
@@ -18,24 +19,28 @@ void create() {
 
 int allow_shifted() { return 1; }
 
-int prerequisites(object ob){
+int prerequisites(object ob)
+{
     return 0;
     if(!objectp(ob)) return 0;
-    if(!ob->is_class("bard")) {
+    if(!ob->is_class("inqusitor"))
+    {
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
 }
 
-int cmd_rally(string str){
+int cmd_rally(string str)
+{
     object feat;
     if(!objectp(TP)) { return 0; }
     //if(!stringp(str)) { return 0; }
     return 1;
 }
 
-void execute_feat(){
+void execute_feat()
+{
 
     return;
 }
@@ -44,14 +49,17 @@ void do_rally(){
     return;
 }
 
-void check(){
-    if(!objectp(caster)){
+void check()
+{
+    if(!objectp(caster))
+    {
         dest_effect();
         return;
     }
     call_out("check",ROUND_LENGTH);
 }
 
-void dest_effect(){
+void dest_effect()
+{
     return;
 }
