@@ -12,14 +12,14 @@ void create()
     set_spell_level(([ "druid" : 4, "bard" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS kiss of feywild [on TARGET]");
-    set_damage_desc("increased max hp points on living, positive energy on undead");
-    set_description("Lo, Their Endless Host, the Harbingers of Life, Mercy and Kindness Followed Where'er She Walked, Where Her Court Will be Held. This chant increases amount of hitpoints if cast on living, and acts as damaging spell if cast on undead.");
+    set_damage_desc("increased max hp points on living");
+    set_description("Lo, Their Endless Host, the Harbingers of Life, Mercy and Kindness Followed Where'er She Walked, Where Her Court Will be Held.");
 	set_helpful_spell(1);
 }
 
 string query_casting_string()
 {
-    return "%^GREEN%^W%^CYAN%^i%^GREEN%^th %^RESET%^%^GREEN%^b%^MAGENTA%^o%^BOLD%^%^GREEN%^u%^RESET%^%^GREEN%^n%^BOLD%^d%^CYAN%^l%^GREEN%^es%^RESET%^%^GREEN%^s %^BOLD%^%^MAGENTA%^j%^CYAN%^o%^MAGENTA%^y %^GREEN%^a %^RESET%^%^CYAN%^s%^BOLD%^%^GREEN%^o%^RESET%^%^MAGENTA%^n%^BOLD%^%^GREEN%^g is s%^CYAN%^a%^RESET%^%^CYAN%^n%^BOLD%^%^GREEN%^g.%^RESET%^";
+    return "%^GREEN%^With %^CYAN%^b%^BOLD%^ou%^RESET%^%^CYAN%^n%^BOLD%^d%^RESET%^%^CYAN%^l%^BOLD%^es%^RESET%^%^CYAN%^s %^MAGENTA%^j%^BOLD%^o%^RESET%^%^MAGENTA%^y %^GREEN%^a song of l%^BOLD%^if%^RESET%^%^GREEN%^e is sang.%^WHITE%^";
 }
 
 int preSpell()
@@ -52,21 +52,21 @@ void spell_effect()
         return;
     }
 
-    tell_object(caster,"%^BOLD%^%^GREEN%^A song of life embraces "+target->QCN+"'s body.");
-    tell_object(target,"%^BOLD%^%^GREEN%^Joy, joy fills your soul.");
-
-    bonus = 3*clevel;
+    bonus = 2*clevel;
+    tell_room(place,"%^BOLD%^%^GREEN%^A song of life embraces "+target->QCN+"'s body.");
     if(target->is_undead())
     {
         tell_object(target,"%^BOLD%^%^BLACK%^BUT JOY IS %^WHITE%^NOT%^BLACK%^ YOUR WAY%^RESET%^");
-        damage_targ(target,target->return_target_limb(),sdamage,"positive energy");
+        tell_object(caster,"%^BOLD%^%^BLACK%^You feel your spell repelled...%^RESET%^");
+        TO->remove();
     }
     else
     {
+        tell_object(target,"%^BOLD%^%^GREEN%^You feel more healthy and joyful.");
         target->add_max_hp_bonus(bonus);
         target->set_property("spell_bonus_hp",1);
+        target->set_property("spelled",({TO}));
     }
-    target->set_property("spelled",({TO}));
 
     spell_successful();
     addSpellToCaster();

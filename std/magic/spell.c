@@ -963,7 +963,7 @@ void wizard_interface(object user, string type, string targ)
     }
 
     define_clevel();
-    define_base_damage_adjustment();
+    define_base_spell_level_bonus();
     define_base_damage(0);
 
     msg = caster->get_static("spell interrupt");
@@ -1823,7 +1823,7 @@ void define_clevel()
     clevel = clevel<0?1:clevel;
 }
 
-void define_base_damage_adjustment()
+void define_base_spell_level_bonus()
 {
     sdamage_adjustment = 0;
     if (query_splash_spell())
@@ -1832,8 +1832,6 @@ void define_base_damage_adjustment()
         sdamage_adjustment-=2;
     if(spell_type=="bard")
         sdamage_adjustment+=1;
-    if(spell_type=="warlock")
-        sdamage_adjustment+=4;
     sdamage_adjustment=sdamage_adjustment<0?0:sdamage_adjustment;
 }
 
