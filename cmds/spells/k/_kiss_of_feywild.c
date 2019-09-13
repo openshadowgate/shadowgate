@@ -53,7 +53,6 @@ void spell_effect()
         return;
     }
 
-    bonus = 2*clevel;
     tell_room(place,"%^BOLD%^%^GREEN%^A song of life embraces "+target->QCN+"'s body.");
     if(target->is_undead())
     {
@@ -65,7 +64,6 @@ void spell_effect()
     {
         int duration = clevel * ROUND_LENGTH * 5;
         tell_object(target,"%^BOLD%^%^GREEN%^You feel more healthy and joyful.");
-        target->add_max_hp_bonus(bonus);
         target->set_property("spelled",({TO}));
 
         spell_successful();
