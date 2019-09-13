@@ -8,7 +8,7 @@ int bonus;
 void create() {
     ::create();
     set_spell_name("false life");
-    set_spell_level(([ "mage" : 2 ]));
+    set_spell_level(([ "mage" : 2, "bard" : 2 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS false life [on TARGET]");
     set_description("With this spell, caster harnesses flow of negative energies to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
@@ -16,6 +16,11 @@ void create() {
       "mage" : ([ "drop of blood":1, "crane's feather":1, ]),
     ]));
 	set_helpful_spell(1);
+}
+
+int query_fl_power()
+{
+    return 2;
 }
 
 string query_casting_string()
@@ -60,7 +65,7 @@ void spell_effect()
         tell_object(target,"%^BLUE%^You feel the force of "+caster->QCN+"'s will strengthen your body.");
         tell_room(environment(caster),"%^BLUE%^You see a wave of force surround and strengthen "+target->QCN+"'s body.",({target}));
     }
-    bonus = 4*clevel;
+    bonus = query_fl_power()*clevel;
     target->add_max_hp_bonus(bonus);
     target->set_property("spelled",({TO}));
     target->set_property("spell_bonus_hp",1);
