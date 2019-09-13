@@ -1,6 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 #include <spell.h>
+#include <magic.h>
 inherit SPELL;
 
 int bonus;
@@ -12,7 +13,7 @@ void create()
     set_spell_level(([ "druid" : 4, "bard" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS kiss of feywild [on TARGET]");
-    set_damage_desc("increased max hp points on living");
+    set_damage_desc("adds passive spelled regeneration to living");
     set_description("Lo, Their Endless Host, the Harbingers of Life, Mercy and Kindness Followed Where'er She Walked, Where Her Court Will be Held.");
 	set_helpful_spell(1);
 }
