@@ -63,6 +63,7 @@ void dest_effect()
         tell_object(target,"%^BOLD%^%^WHITE%^Your fatigue recedes, you feel power and finesse returning.");
         target->add_stat_bonus("strength",-bonus);
         target->add_stat_bonus("dexterity",-bonus);
+        target->remove_property("boneshattered");
     }
     if(objectp(TO))
         TO->remove();
