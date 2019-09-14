@@ -87,7 +87,7 @@ void execute_attack()
     if((int)caster->query_hp() < (int)caster->query_max_hp())
     {
         tell_object(caster,"%^BOLD%^%^GREEN%^The %^MAGENTA%^song%^GREEN%^ %^CYAN%^heals%^GREEN%^ some of your wounds%^RESET%^");
-        damage_targ(caster,caster->return_target_limb(),roll_dice(1,clevel),"positive energy");
+        damage_targ(caster,caster->return_target_limb(),-roll_dice(1,clevel),"positive energy");
     }
     place->addObjectToCombatCycle(TO,1);
 }
