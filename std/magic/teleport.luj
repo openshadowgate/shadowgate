@@ -14,10 +14,6 @@ int object_can_be_teleported(object teleportee, object destination, int clevel)
         return 0;
     if (destination->is_flight_room())
         return 0;
-    if (teleportee->query_property("teleport proof") -9 + random(20) > clevel )
-    {
-      return 0;
-    } 
 
     if(destination->query_property("no teleport") ||
        environment(teleportee)->query_property("no teleport"))
@@ -25,10 +21,10 @@ int object_can_be_teleported(object teleportee, object destination, int clevel)
 
     {
         int startpower, endpower;
-        startpower = environment(teleportee)->query_property("teleport proof");
-        endpower = destination->query_property("teleport proof");
-        if((clevel -9 + random (20) < startpower) ||
-           (clevel -9 + random (20) < endpower) )
+     	startpower = environment(teleportee)->query_property("teleport proof");
+     	endpower = destination->query_property("teleport proof");
+        if((clevel < startpower) ||
+           (clevel < endpower))
             return 0;
     }
     return 1;
@@ -104,3 +100,4 @@ string *dir_listing(string tempfil) {
         get_dir(retval+"*.c"),(:$2+$1:),
         retval);
 }
+
