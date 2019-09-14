@@ -19,7 +19,6 @@ void create() {
 "hope.");
     set_verbal_comp();
     set_somatic_comp();
-     // school specific mage spell
     set_target_required(1);
     set_components(([
       "mage" : ([ "vermilion" : 2, ]),

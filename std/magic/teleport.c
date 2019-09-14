@@ -1,14 +1,15 @@
+/**
+ * @file
+ * @brief Teleport functions and checks. You can either include it or use as a "daemon" object.
+ * Note that stric types are enabled for this object
+ */
+
 #include <std.h>
 
+#pragma strict_types
 int object_can_be_teleported(object teleportee, object destination, int clevel)
 {
-    if(!objectp(destination)) //I'm going to rant. So I declared a
-                              //contract in function definiton,
-                              //stating that clearly I expect this to
-                              //be an object, yet if I pass anything
-                              //but an object into this function, it
-                              //still will process it?.. The fuck we
-                              //need types for then?
+    if(!objectp(destination))
         return 0;
     if(!destination->is_room())
         return 0;
@@ -17,7 +18,7 @@ int object_can_be_teleported(object teleportee, object destination, int clevel)
     if (teleportee->query_property("teleport proof") -9 + random(20) > clevel )
     {
       return 0;
-    } 
+    }
 
     if(destination->query_property("no teleport") ||
        environment(teleportee)->query_property("no teleport"))
@@ -39,7 +40,7 @@ object scatter_destination(mixed destination)
     string fname;
     string *files;
     object destobj;
-    
+
     fname=base_name(destination);
 
     files = dir_listing(fname);
@@ -89,9 +90,9 @@ mixed teleport_object(object invoker, mixed teleportee, mixed destination, int c
 
     if(!object_can_be_teleported(tped,destroom,clevel))
         return 0;
-    
+
     tped->move_player(destroom);
-    
+
     return destroom;
 }
 

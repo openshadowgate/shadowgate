@@ -39,6 +39,8 @@ string query_cast_string()
 spell_effect(int prof)
 {
     int rnd;
+
+    set_helpful_spell(1);
     if(!(target->is_undead()))
         set_helpful_spell(0);
     if (interactive(caster))

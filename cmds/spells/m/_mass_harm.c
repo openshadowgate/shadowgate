@@ -50,6 +50,7 @@ void spell_effect(int prof)
     int i;
     object *party_members = ({}),*attackers = ({}),*living = ({}),*targets = ({}), *followers = ({});
 
+    set_helpful_spell(1);
     party_members = ob_party(caster);
     attackers = caster->query_attackers();
     followers = caster->query_followers();
@@ -66,6 +67,7 @@ void spell_effect(int prof)
     }
     else if(member_array(target,attackers) != -1)
     {
+        set_helpful_spell(0);
         targets = filter_array(attackers,(:!$1->is_undead():));
     }
     else

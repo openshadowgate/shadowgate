@@ -1,11 +1,3 @@
-// mass heal
-// cures party members if not given a target, if no party it just cures the caster.
-// if aimed at an attacker, it hits all attackers, healing living targets and hurting
-// undead targets.  If cast at a neutral, it hits all things in the room, healing
-// living things, and hurting undead.
-// Don't know wtf I was thinking when I originally made this, I've simplified the
-// code, hopefully getting rid of some of the bugs. -Ares
-
 #include <std.h>
 #include <magic.h>
 #include <party.h>
@@ -62,6 +54,7 @@ void spell_effect(int prof)
     int i;
     object *party_members = ({}),*attackers = ({}),*living = ({}),*targets = ({}), *followers = ({});
 
+    set_helpful_spell(1);
     party_members = ob_party(caster);
     attackers = caster->query_attackers();
     followers = caster->query_followers();
@@ -78,6 +71,7 @@ void spell_effect(int prof)
     }
     else if(member_array(target,attackers) != -1)
     {
+        set_helpful_spell(0);
         targets = filter_array(attackers,(:$1->is_undead():));
     }
     else
