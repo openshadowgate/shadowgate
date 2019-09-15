@@ -10,7 +10,7 @@ void create() {
     feat_category("ArcaneSpellcraft");
     feat_name("scribe");
     feat_syntax("scribe SPELL_NAME");
-    feat_prereq("Mage, Sorcerer, Cleric, Bard");
+    feat_prereq("Mage, Sorcerer, Cleric, Bard, Paladin");
     feat_desc("This feat allows a character to use their knowledge of the arcane to scribe simple scrolls of spells they already know. Such scrolls are only good for a single use. You must have an empty parchment sheet in your inventory for scribe to work. It has to be parchment, other writing materials won't do.
 
 SPELL_NAME
@@ -75,7 +75,7 @@ void execute_feat()
     tell_object(caster, "%^BOLD%^You sit and start to scribe "+str+" onto the parchment.");
 
     call_out("scribe",level*2, str, caster, ob);
-    caster->set_paralyzed(level*2,"You are scribing the spell.");
+    caster->set_paralyzed(level*2*8,"You are scribing the spell.");
     tell_object(caster, "Hit <return> to cancel. This will waste the parchment.");
     input_to("cancel",1,ob, str);
     return;
