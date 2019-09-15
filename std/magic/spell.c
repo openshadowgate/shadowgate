@@ -2077,6 +2077,9 @@ varargs int checkMagicResistance(object victim, int mod)
       if((string)caster->query("warlock_blast_type") == "vitriolic") return 0;
     }
 
+    if(help_or_harm)
+        return 0;
+
     if(victim->query_property("magic resistance")) { res = (int)victim->query_property("magic resistance"); }
 
     if( (roll_dice(1,100) + mod) > res ) { return 0; }
