@@ -1,7 +1,7 @@
 #include <std.h>
 inherit DAEMON;
 
-int is_prestige_class() { return 1; } // temporary for testing
+int is_prestige_class() { return 1; } // temporary to block in rolling
 
 void create() { ::create(); }
 
@@ -10,24 +10,22 @@ string *search_paths() { return ({  }); }
 int caster_class() { return 1; }
 
 string *restricted_races() {
-    return ({ "beastman","bugbear","dwarf","goblin","half-orc","hobgoblin",
-        "kobold","orc","drow","firbolg","gnoll","half-drow","half-ogre","ogre","ogre-mage","voadkyn" });
+    return ({ "beastkin", "dwarf", "firbolg", "gnome", "halfling", "centaur", "ogre-mage", "satyr", "voadkyn", "elf", "wemic", "bugbear", "gnoll", "hobgoblin", "kobold", "minotaur", "ogre", "orc" });
 }
 
 string *restricted_classes() { return ({ }); }
 
-int *restricted_alignments() { // switched March 2016 to 3e standard, all non-lawful >> N <<
-    return ({ 1, /*LG*/ 2, /*LN*/ 3, /*LE*/ });
+int *restricted_alignments() {
+    return ({ 7, 8, 9, });
 }
 
 string *restricted_gods() { return ({}); }
 
 mapping stat_requirements() {
-    return ([ "charisma" : 15 ]);
+    return ([ "charisma" : 13, "wisdom" : 13, "strength" : 13 ]);
 }
 
-// strong & weak saving throws. Fort, Ref, Will
-int *saving_throws() { return ({ 0,1,1 }); }
+int *saving_throws() { return ({ 1,0,1 }); }
 
 string *combat_styles() {
     return ({});
@@ -36,25 +34,24 @@ string *combat_styles() {
 string *class_feats(string myspec)
 {
     return ({ "simple weapon proficiency",
-            "martial weapon proficiency",
-           "light armor proficiency",
-           "medium armor proficiency",
-          "dodge",
-         "spell focus" });
+                "martial weapon proficiency",
+                "exotic weapon proficiency",
+                "light armor proficiency",
+                "medium armor proficiency",
+                "spell focus",
+                "shield proficiency"});
 }
 
 mapping class_featmap(string myspec) {
-   return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency", "medium armor proficiency", "spell focus","rally","dodge" }), 5 : ({ "indomitable" }), 8 : ({ "anger" }), 11 : ({ "calm" }), 12 : ({ "tools of the trade" }), 14 : ({ "force of personality" }), 17 : ({ "charm" }), ]);
+    return ([ 1 : class_feats()+({"stern gaze"}), 4: ({"judgment"}), 6: ({"teamwork"}) 8: ({"second judgment"}), 11: ({"stalwart defense"}), 16 : ({"third judgment"}), 17 : ({"slayer"}), 20 : ({"true judgment"})]);
 }
 
 string *class_skills()
 {
-// disguise temporarily disabled, please restore the first line when the command is installed. N, 1/14.
-//    return ({ "academics","disguise","influence","spellcraft","athletics"});
-    return ({ "academics","thievery","influence","spellcraft","athletics" });  //adding in athletics as tumble is a class skill
+    return ({ "preception","survival","athletics","academics","influence" });
 }
 
-int skill_points() { return 6; }
+int skill_points() { return 5; }
 
 string old_save_type() { return "bard"; }
 
@@ -62,7 +59,7 @@ string new_save_type() { return "bard"; }
 
 void advanced_func(object player)
 {
-    player->set_guild_level("bard",(int)player->query_class_level("bard"));
+    player->set_guild_level("inquisitor",(int)player->query_class_level("inquisitor"));
     player->set_advanced((int)player->query_advanced() + 1);
     return;
 }
@@ -71,21 +68,19 @@ int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
 int default_hitpoints() { return 3; } // hitpoints per level above level 20
 
-string armor_allowed() { return "bard"; }
+string armor_allowed() { return "fighter"; }
 
-string weapons_allowed() { return "bard"; }
+string weapons_allowed() { return "fighter"; }
 
-int max_stance_offensive() { return 4; }
+int max_stance_offensive() { return 5; }
 
-int max_stance_defensive() { return 4; }
+int max_stance_defensive() { return 5; }
 
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("bard");
-//    if(level > 20) { bonus = (level - 20) + 15; }
-//    else bonus = (level*3) / 4;
-    bonus = (level*3) / 4; // boosted to tabletop equiv
+    level = (int)player->query_prestige_level("inquisitor");
+    bonus = (level*3) / 4; // boosted
     return bonus;
 }
 
@@ -93,7 +88,7 @@ int number_of_attacks(object player)
 {
     int num;
     if(!objectp(player)) { return 0; }
-    num = "/daemon/bonus_d.c"->attack_bonus("bard",player->query_class_level("bard"),player);
+    num = "/daemon/bonus_d.c"->attack_bonus("inquisitor",player->query_class_level("inquisitor"),player);
     num = num / 7;
     return num;
 }
@@ -104,14 +99,7 @@ string query_casting_stat(){
 
 mapping query_class_spells()
 {
-    return(([
-        1 : ({"cure light wounds","dancing lights","daze","detect magic","expedious retreat","flare","legend lore","mending","monster summoning 1","resistance","sleep","summon companion","summon swarm","whispering wind" }),
-        2 : ({"blindness","cats grace","cure moderate wounds","darkness","eagles splendor","foxs cunning","garble","hold person","invisibility","misdirection","monster summoning 2","sound burst","tongues" }),
-        3 : ({"charm monster","clairvoyance","crushing despair","cure serious wounds","daylight","detect invisibility","dispel magic","displacement","fear","glitterdust","good hope","monster summoning 3","phantom steed" }),
-        4 : ({"break curse","cure critical wounds","detect scrying","dimension door","freedom of movement","heroism","monster summoning 4","neutralize poison","secure shelter","shout" }),
-        5 : ({"cacophonic shield","false vision","forgotten melody","greater dispel magic","healing circle","monster summoning 5","warriors constitution" }),
-        6 : ({"animate object","greater shout","heroes feast","listening shadow","monster summoning 6","project image","regeneration" }),
-    ]));
+    return(([]));
 }
 
 void newbie_func(object who)
@@ -127,7 +115,7 @@ int caster_level_calcs(object player, string the_class)
     if(!objectp(player)) { return 0; }
     switch(the_class)
     {
-        case "bard":
+        case "inquisitor":
         default:
             return player->query_class_level(the_class);
     }

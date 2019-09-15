@@ -23,7 +23,7 @@ void create()
     feat_type("instant");
     feat_category("DivineSpellcraft");
     feat_name("rally");
-    feat_syntax("judgement TYPE");
+    feat_syntax("judgment FIRST [SECOND [THIRD]]");
     feat_prereq("Heh");
     feat_desc("");
 //    set_required_for(({"second judgement","third judgement"}));
@@ -45,7 +45,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_judgement(string str)
+int cmd_judgment(string str)
 {
     string first, second, third;
     if(!objectp(TP))
