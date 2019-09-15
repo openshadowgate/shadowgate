@@ -16,6 +16,8 @@
 #include <tsh.h>
 #include <new_exp_table.h>
 
+#define ABLOCK_WHITELIST ({"quit"})+TP->query_channels()
+
 #define DEFAULT_PROMPT "%^BOLD%^%^BLACK%^-%^RED%^> "
 #define MAX_HIST_SIZE  50
 #define MIN_HIST_SIZE  20
@@ -216,11 +218,13 @@ nomask string process_input(string arg)
     else
         log_file("plog/"+TP->query_true_name(),do_alias(do_nicknames(handle_history(arg)))+"\n");
 
-    if(adminBlock() && arg != "quit")
-    {
-        write("You are otherwise occupied.");
-        arg = "";
-    }
+    if(adminBlock())
+        if(member_array(arg,ABLOCK_WHITELIST)==-1)
+        {
+            write("You are otherwise occupied.");
+            arg = "";
+        }
+
     if(arg && arg != "")
         return do_alias(do_nicknames(handle_history(arg)));
     else

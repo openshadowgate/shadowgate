@@ -10,13 +10,13 @@ int do_quality(object ob, int percent);
 int cmd_alterobj(string str) {
     object ob, invisobj;
     int percent;
-    //if(!high_mortalp(TP) && !avatarp(TP) && !OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()))  
+    //if(!high_mortalp(TP) && !avatarp(TP) && !OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()))
      //   return notify_fail("Sorry, only hms and above are allowed.\n");
-    if(!str) 
+    if(!str)
         return notify_fail("alterobj what?\n");
-    if(!ob = present(str, TP)) 
+    if(!ob = present(str, TP))
 	return notify_fail("The "+str+" must be in your possession.\n");
-    if(!objectp(ob) || living(ob)) 
+    if(!objectp(ob) || living(ob))
 	return notify_fail("ERROR somthing went wrong here...\n");
     if(ob->query_worn() || ob->query_wielded())
 	return notify_fail("You can't work effectively with that worn or wielded.\n");
@@ -116,7 +116,7 @@ void enter_long(string str, object ob, string quality){
       return;
     }
     ob->set_long(str + quality);
-    if(ob->query_possible_to_close()) 
+    if(ob->query_possible_to_close())
     {
         write("You are altering a container that can open and close. "+
         "Please input the OPEN LONG description for it and then <enter>. Make "+
@@ -125,8 +125,8 @@ void enter_long(string str, object ob, string quality){
         "OPEN LONG description is: \n"+ob->query_open_long_desc()+"%^RESET%^\n");
         input_to("enter_open_long", ob, quality);
         return;
-    }   
-    
+    }
+
     write("The obvious short is what is seen if the item is not identified.");
     if(ob->query_obvious_short()) {
         write("Please enter the new obvious short to replace the current one "
@@ -184,9 +184,9 @@ void enter_closed_long(string str, object ob, string quality)
         error();
         return;
     }
-    
+
     ob->set_closed_long(str + quality);
-      
+
     write("The obvious short is what is seen if the item is not identified.");
     if(ob->query_obvious_short()) {
         write("Please enter the new obvious short to replace the current one "
@@ -198,7 +198,7 @@ void enter_closed_long(string str, object ob, string quality)
     write("You may enter an obvious short for this item or just <enter> to skip.");
     input_to("enter_obvious_short",ob);
     return;
-    
+
 }
 
 
@@ -256,13 +256,13 @@ int do_nwps(object ob) {
       if (!ob->query_property("repairtype")) {
         if(ob->is_armor()) type = ob->query_type();
         switch(type) {
-          case "clothing" : 
+          case "clothing" :
 	      prof = (int)TP->query_nwp("tailoring");
 	      msg = "tailor";				   break;
-          case "ring" :     
+          case "ring" :
             prof = (int)TP->query_nwp("jewelling");
             msg = "jewel";				   break;
-          default:  	  
+          default:
 	      prof = (int)TP->query_nwp("armorsmithing");
 	      msg = "armorsmith";			   break;
         }
@@ -406,9 +406,9 @@ int do_quality(object ob, int percent) {
       case 110..124:    quality =  "\nAbove average quality";
         break;
       case 125..151:    quality =  "\nHigh quality";
-        break; 
+        break;
       default:          quality =  "\nMastercrafted";
-        break; 
+        break;
     }
     return quality;
 }
@@ -426,16 +426,15 @@ alterobj %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will allow you to change the long and short descriptions of an item if you are skilled enough in the appropriate crafting skill. 
+This command will allow you to change the long and short descriptions of an item if you are skilled enough in the appropriate crafting skill.
 
 This is considered an %^CYAN%^in character action%^RESET%^ and it is highly inadvisable to change item material and describe item you won't normally see in that limb slot. For example:
  %^RED%^*%^RESET%^ Making wooden crown golden is illegal.
  %^RED%^*%^RESET%^ Altering pants to be hat isn't legal, as such a hat would be worn in legs slots.
  %^GREEN%^*%^RESET%^ Making glasses from a circlet, skirt from breeches, handbands from gloves considered to be legal.
 
-Be vary about what you change. Some items have their descriptions edged in their special abilities, so these should be changed with special care.
+Be wary about what you change. Some items have their descriptions edged in their special abilities, so these should be changed with special care.
 
 %^CYAN%^SEE ALSO%^RESET%^
 discern, skills, craft, repair");
 }
-
