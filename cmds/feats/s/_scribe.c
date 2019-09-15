@@ -27,7 +27,8 @@ int prerequisites(object ob) {
     if(!ob->is_class("mage") &&
        !ob->is_class("sorcerer") &&
        !ob->is_class("cleric") &&
-       !ob->is_class("bard"))
+       !ob->is_class("bard") &&
+       !ob->is_class("paladin"))
     {
         dest_effect();
         return 0;
