@@ -10,7 +10,7 @@ void create() {
     feat_category("ArcaneSpellcraft");
     feat_name("scribe");
     feat_syntax("scribe SPELL_NAME");
-    feat_prereq("Mage, Sorcerer, Cleric, Bard, Paladin");
+    feat_prereq("Bard, Cleric, Druid, Mage, Paladin, Sorcerer");
     feat_desc("This feat allows a character to use their knowledge of the arcane to scribe simple scrolls of spells they already know. Such scrolls are only good for a single use. You must have an empty parchment sheet in your inventory for scribe to work. It has to be parchment, other writing materials won't do.
 
 SPELL_NAME
@@ -28,7 +28,8 @@ int prerequisites(object ob) {
        !ob->is_class("sorcerer") &&
        !ob->is_class("cleric") &&
        !ob->is_class("bard") &&
-       !ob->is_class("paladin"))
+       !ob->is_class("paladin") &&
+       !ob->is_class("druid"))
     {
         dest_effect();
         return 0;
@@ -104,8 +105,9 @@ void scribe(string spell, object tp, object paper){
     tell_room(environment(tp),"%^BOLD%^"+tp->query_cap_name()+" finishes "+tp->QP+" scribing.",tp);
     scroll = new ("/d/magic/scroll");
     scroll->set_spell_name(spell);
-    scroll->set_passed((string)tp->query_name()); //let scribers automatically read their own scrolls. Nienne, 07/09.
+    scroll->set_passed((string)tp->query_name());
     scroll->move(environment(tp));
+    tp->forget_memorized(tp->query_class(),spell);
     tp->remove_paralyzed();
     paper->remove();
     tell_object(tp,"Hit return to continue.");

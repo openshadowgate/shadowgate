@@ -68,11 +68,13 @@ You can <use> it directly in order to properly study and learn more about the ef
 
 string query_short()
 {
+    string color = MAGIC_D->query_spell_level("mage",spell)?"%^ORANGE%^":"%^WHITE%^";
+
     if(!objectp(TP))
-        return("%^RESET%^%^ORANGE%^scr%^BOLD%^o%^RESET%^%^ORANGE%^ll%^RESET%^");
+        return("%^RESET%^"+color+"scr%^BOLD%^o%^RESET%^"+color+"ll%^RESET%^");
     if(!query_readable_by(TP,TP))
-        return("%^RESET%^%^ORANGE%^scr%^BOLD%^o%^RESET%^%^ORANGE%^ll%^RESET%^");
-    return("%^RESET%^%^ORANGE%^scr%^BOLD%^o%^RESET%^%^ORANGE%^ll of "+spell+"%^RESET%^");
+        return("%^RESET%^"+color+"scr%^BOLD%^o%^RESET%^"+color+"ll%^RESET%^");
+    return("%^RESET%^"+color+"scr%^BOLD%^o%^RESET%^"+color+"ll of "+spell+"%^RESET%^");
 }
 
 void crumble(object targ) {
