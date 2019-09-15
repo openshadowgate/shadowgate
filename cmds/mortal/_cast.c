@@ -98,6 +98,7 @@ int cmd_cast(string str)
     }
 
     if(type == "sorcerer" ||
+       type == "inquisitor" ||
        type == "psion" ||
        type == "psywarrior")
     {
@@ -208,8 +209,15 @@ int cmd_cast(string str)
     if(!tar) tar = 0;
     targ = new(tmp);
     if (healharm) targ->set_property("improvised",spell);
+
     spell = "level "+(int)tmp->query_spell_level(type); //spontaneous caster classes!
-    if (type == "bard" || type == "sorcerer" || type == "psywarrior" || type == "psion") targ->set_property("improvised",spell);
+
+    if (type == "bard" ||
+        type == "sorcerer" ||
+        type == "inquisitor" ||
+        type == "psywarrior" ||
+        type == "psion")
+        targ->set_property("improvised",spell);
     TP->remove_property("spell_casting");
     TP->set_property("spell_casting",targ);
     if(type != "innate")

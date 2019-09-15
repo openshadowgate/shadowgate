@@ -1431,6 +1431,7 @@ string query_name() {        return spell_name; }
 
 int query_spell_level(string classtype) {
   if(!mapp(spell_levels)) spell_levels = ([]);
+
 // safeguards til we can filter the old class types out of the system. Nienne, 05/10
   if(classtype == "priest" && spell_levels["cleric"]) return spell_levels["cleric"];
   if(classtype == "priest" && spell_levels["ranger"]) return spell_levels["ranger"];
@@ -1439,7 +1440,10 @@ int query_spell_level(string classtype) {
   if(classtype == "wizard" && spell_levels["bard"]) return spell_levels["bard"];
   if(classtype == "psionics" && spell_levels["psion"]) return spell_levels["psion"];
   if(classtype == "sorcerer") return spell_levels["mage"];
-  if(!spell_levels[classtype]) return 0;
+
+
+  if(!spell_levels[classtype])
+      return 0;
   return spell_levels[classtype];
 }
 

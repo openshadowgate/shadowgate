@@ -122,12 +122,12 @@ void set_cast_type(string str) { typeSpell = str; }
 int set_memorized(string myclass, string spell, int num) {
     int level;
 
-
-
     if (!spells_memorized) resetMemorized();
     if (!num) num = 1;
     if (!spell) return 0;
-    if(myclass == "bard" || myclass == "sorcerer") { //get spontaneous settings
+    if(myclass == "bard" ||
+       myclass == "sorcerer" ||
+       myclass == "inquisitor") { //get spontaneous settings
       if(sscanf(spell,"level %d",level) != 1) return 0;
       spell = "generic";
     }
@@ -160,6 +160,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
     if(myclass == "psion") return 1;
     if(myclass == "warlock") return 1;
     if(myclass == "bard" ||
+       myclass == "inquisitor" ||
        myclass == "sorcerer") { //get spontaneous settings
       if(sscanf(spell,"level %d",level) != 1)
           level = (int)MAGIC_D->query_spell_level(myclass,spell);
@@ -228,7 +229,9 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
             }
     }
 
-    if(myclass == "bard" || myclass == "sorcerer") {
+    if(myclass == "bard" ||
+       myclass == "inquisitor" ||
+       myclass == "sorcerer") {
         spells_memorized[myclass][level][spell] = spells_memorized[myclass][level][spell] - 1;
 
         if (spells_memorized[myclass][level][spell] <= 0) {
@@ -274,7 +277,9 @@ int query_memorized(string myclass, string spell)
         if(member_array(spell,myknown) != -1) return 1;
         return 0;
     }
-    if(myclass == "bard" || myclass == "sorcerer")
+    if(myclass == "bard" ||
+       myclass == "inquisitor" ||
+       myclass == "sorcerer")
     {
       if(sscanf(spell,"level %d",lvl) != 1)
           lvl = (int)MAGIC_D->query_spell_level(myclass,spell);
@@ -317,7 +322,10 @@ int can_memorize(string myclass, string spell)
     string mystat, subrace;
 
     if (!spells_memorized) resetMemorized();
-    if(myclass == "bard" || myclass == "sorcerer") { //get spontaneous settings
+    if(myclass == "bard" ||
+       myclass == "inquisitor" ||
+       myclass == "sorcerer")
+    {
       if(sscanf(spell,"level %d",lvl) != 1) return 0;
     }
     else {
