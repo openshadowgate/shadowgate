@@ -96,8 +96,9 @@ void dest_effect()
 {
     if(objectp(target))
     {
-       target->remove_property_value("spelled", ({TO}) );
-       target->remove_property("kiss of feywild");
+        tell_object(target,"%^BOLD%^%^GREEN%^The elation you felt begins to ebb as life's realities return.%^RESET%^");
+        target->remove_property_value("spelled", ({TO}) );
+        target->remove_property("kiss of feywild");
     }
     ::dest_effect();
     if(objectp(TO))

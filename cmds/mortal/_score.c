@@ -192,12 +192,13 @@ int cmd_score(string str)
    title += title_tmp;
    spell_domains = targ->query_divine_domain();
 
-  if(targ->query("subrace")) {
-        race_var = capitalize(targ->query_race())+" ("+capitalize(targ->query("subrace"))+")";
-  }
-  else {
-        race_var = capitalize(targ->query_race());
-  }
+   race_var = capitalize(targ->query_race());
+
+  if(targ->query("subrace"))
+      race_var += ", "+targ->query("subrace");
+
+   if(targ->is_undead())
+       race_var += ", undead";
 
   if(objectp(shape = TP->query_property("shapeshifted")))
   {
