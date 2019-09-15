@@ -159,8 +159,12 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
     if(myclass == "monk") return 1;
     if(myclass == "psion") return 1;
     if(myclass == "warlock") return 1;
-    if(myclass == "bard" || myclass == "sorcerer") { //get spontaneous settings
-      if(sscanf(spell,"level %d",level) != 1) return 0;
+    if(myclass == "bard" ||
+       myclass == "sorcerer") { //get spontaneous settings
+      if(sscanf(spell,"level %d",level) != 1)
+          level = (int)MAGIC_D->query_spell_level(myclass,spell);
+      if (!level)
+          return 0;
       spell = "generic";
     }
 
@@ -270,13 +274,19 @@ int query_memorized(string myclass, string spell)
         if(member_array(spell,myknown) != -1) return 1;
         return 0;
     }
-    if(myclass == "bard" || myclass == "sorcerer") { //get spontaneous settings
-      if(sscanf(spell,"level %d",lvl) != 1) return 0;
+    if(myclass == "bard" || myclass == "sorcerer")
+    {
+      if(sscanf(spell,"level %d",lvl) != 1)
+          lvl = (int)MAGIC_D->query_spell_level(myclass,spell);
+      if (!lvl)
+          return 0;
       spell = "generic";
     }
-    else {
+    else
+    {
       lvl = (int)MAGIC_D->query_spell_level(myclass,spell);
-      if (!lvl) return 0;
+      if (!lvl)
+          return 0;
     }
 
     if(!mapp(spells_memorized[myclass])) add_mem_class(myclass);
