@@ -15,7 +15,8 @@ string *restricted_races() {
 
 string *restricted_classes() { return ({ }); }
 
-int *restricted_alignments() {
+int *restricted_alignments()
+{
     return ({ 7, 8, 9, });
 }
 
@@ -43,7 +44,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : class_feats()+({"stern gaze"}), 4: ({"judgment"}), 6: ({"teamwork"}) 8: ({"second judgment"}), 11: ({"stalwart defense"}), 16 : ({"third judgment"}), 17 : ({"slayer"}), 20 : ({"true judgment"})]);
+    return ([ 1 : class_feats()+({"stern gaze","divine domain"}), 4: ({"judgment"}), 5: ({"bane"}) 6: ({"teamwork"}) 8: ({"second judgment"}), 11: ({"stalwart defense"}), 16 : ({"third judgment"}), 17 : ({"slayer"}), 20 : ({"true judgment"})]);
 }
 
 string *class_skills()
