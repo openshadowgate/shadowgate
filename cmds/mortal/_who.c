@@ -180,7 +180,7 @@ string list_users(string *races, object tp)
     for(i = 0;i < sizeof(rp_flags);i++)
     {
         if(!objectp(rp_flags[i])) continue;
-        tmp = "%^BOLD%^%^MAGENTA%^ RP Flag%^BOLD%^%^BLACK%^ --- " + rp_flags[i]->query_short();
+        tmp = "%^BOLD%^%^MAGENTA%^ RP Spear%^BOLD%^%^BLACK%^ -- " + rp_flags[i]->query_short();
         tmp += arrange_string(" ", (43 - strlen("/daemon/filters_d.c"->filter_colors(rp_flags[i]->query_short()))))+"\n";
         belphy += tmp;
     }

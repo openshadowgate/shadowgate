@@ -1,4 +1,5 @@
 #include <std.h>
+#include <daemons.h>
 #include <html_converter.h>
 #define HTML_OUT "/d/save/wholist.html"
 #define GEOMYIDAE_OUT "/d/save/wholist.gph"
@@ -41,9 +42,10 @@ Online:
                          (:wizardp($1):));
     players = filter_array(people,
                            (:!wizardp($1):));
-    peepnames+=map_array(wizes->query_title(),
+    peepnames += map_array(wizes->query_title(),
                          (:"Staff: "+$1:));
-    peepnames+=players->getWholeDescriptivePhrase();
+    peepnames += players->getWholeDescriptivePhrase();
+    peepnames += map_array(USER_D->get_rp_flags()->query_short(),(:"%^BOLD%^%^MAGENTA%^RP Spear:%^RESET%^ "+$1+"%^RESET%^":));
 
     foreach(peep in peepnames)
     {
