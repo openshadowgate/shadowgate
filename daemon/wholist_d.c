@@ -45,7 +45,8 @@ Online:
     peepnames += map_array(wizes->query_title(),
                          (:"Staff: "+$1:));
     peepnames += players->getWholeDescriptivePhrase();
-    peepnames += map_array(USER_D->get_rp_flags()->query_short(),(:"%^BOLD%^%^MAGENTA%^RP Spear:%^RESET%^ "+$1+"%^RESET%^":));
+    peepnames += map_array(USER_D->get_rp_flags()->query_short(),
+                           (:"RP Spear: "+$1:));
 
     foreach(peep in peepnames)
     {

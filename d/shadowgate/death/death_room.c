@@ -14,30 +14,16 @@ void init(){
     if(!wizardp(this_player()))
 	add_action("filter_act", "", 1);
     if((int)TP->query_hp() < 1) { TP->set_hp(1); }
-    //going to shorten the death sequence if 
+    //going to shorten the death sequence if
     //it is not a pkill - Saide, November 2016
     if(!TP->query("just_been_pkilled"))
     {
-        tell_object(TP, "\n%^BOLD%^%^WHITE%^You find yourself "+
-       "standing in a large, open space with %^RESET%^mists "+
-       "%^BOLD%^%^WHITE%^that obscure any distance.  Rising up "+
-       "before you is a simple oaken chair with a high back, upon which is seated a somber "+
-       "and serene woman.  %^BLACK%^Dark hair %^WHITE%^frames her "+
-       "ageless face, while a robe of gray rests about her shoulders "+
-       "like a pall.  Her fingers rest upon the chair's arm, and you "+
-       "note the three %^BLACK%^m%^RESET%^i%^BOLD%^%^WHITE%^s%^RESET%^m"+
-       "%^BOLD%^%^BLACK%^a%^RESET%^t%^BOLD%^%^WHITE%^c%^RESET%^h"+
-       "%^BOLD%^%^BLACK%^e%^RESET%^d %^BOLD%^%^WHITE%^rings she wears.  "+
-       "As her %^RESET%^%^CYAN%^steady gaze %^BOLD%^%^WHITE%^falls upon "+
-       "you, you realise that this must be the Lady of Fate - Lysara.  "+
-       "In agony, you try to recall all you have done that might warrant "+
-       "the deity's attention, and you squirm as you wait to hear "+
-       "what she will say.  Finally, she speaks...\n");
+        tell_object(TP, "\n%^BOLD%^%^WHITE%^You find yourself standing in a large, open space with %^RESET%^mists %^BOLD%^%^WHITE%^that obscure any distance. Rising up before you is a simple oaken chair with a high back, upon which is seated a somber and serene woman. %^BLACK%^Dark hair %^WHITE%^frames her ageless face, while a robe of gray rests about her shoulders like a pall. Her fingers rest upon the chair's arm, and you note the three %^BLACK%^m%^RESET%^i%^BOLD%^%^WHITE%^s%^RESET%^m %^BOLD%^%^BLACK%^a%^RESET%^t%^BOLD%^%^WHITE%^c%^RESET%^h %^BOLD%^%^BLACK%^e%^RESET%^d %^BOLD%^%^WHITE%^rings she wears. As her %^RESET%^%^CYAN%^steady gaze %^BOLD%^%^WHITE%^falls upon you, you realise that this must be the Lady of Fate - Lysara. In agony, you try to recall all you have done that might warrant the deity's attention, and you squirm as you wait to hear what she will say. Finally, she speaks...\n");
 
 
         call_out("end_death", 8, TP);
         WHICH_CALL_OUT = "end_death";
-        return;        
+        return;
     }
     if(TP->query_property("trial"))
     {
@@ -73,13 +59,13 @@ int filter_act(string str)
     {
     case "tell":
     case "reply":
-        //to allow speak with dead to work while you're a ghost 
+        //to allow speak with dead to work while you're a ghost
         //even if you aren't in the afterlife - Saide
 	  if(sizeof(TP->query_property("allowed tell")))
 	  {
 		return 0;
 	  }
-    case "say":		
+    case "say":
     case "shout":
         write("You let out a haunting wail\n");
         break;
@@ -103,7 +89,7 @@ void begin_death(object tp)
          "immortal because it just saved you from a lengthy "+
          "spiel.  Well, get back in there and get cracking!  "+
          "I'm sure you can think of something productive to do.");
-         if(wizardp(tp)) { 
+         if(wizardp(tp)) {
             tell_object(tp,"P.S.  If you want to see the whole death sequence, add "+
             "the property 'long death' to yourself.%^RESET%^\n");
          }
@@ -193,7 +179,7 @@ void tris1(object tp){
     object tmp;
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-	if(PERMA_DEATH_D->is_perma_deathed(tp->query_name())) 
+	if(PERMA_DEATH_D->is_perma_deathed(tp->query_name()))
 	{
             tell_object(tp,"%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice "+
             "echoes around you%^RESET%^: "+capitalize(tp->query_true_name())+
@@ -209,12 +195,12 @@ void tris1(object tp){
 		"has been tossed into the afterlife, while "+
 		tp->query_subjective()+" awaits the decision of the "+
 		"gods.%^RESET%^",all_inventory(environment(tp)), ({ tp }) );
-		
+
 		tmp = new(DEATH_ROOM);
 		if(tp->query_property("death_room")) tp->remove_property("death_room");
 		tp->set_property("death_room", tmp);
 		tp->move(tmp);
-		//I figure this shit is easier than trying to edit a bunch of 
+		//I figure this shit is easier than trying to edit a bunch of
 		//stuff to make it so they can interact while in the afterlife - Saide
 		//just set them back to a ghost when they leave the room again
 		//tp->set_ghost(0);
@@ -748,7 +734,7 @@ void end_death3(object tp){
     tell_object(tp, "A mist forms "+
     "over your eyes.  When you open them again, you are in a "+
     "strange room filled with portals.\n\n");
-    if(tp->query_highest_level() < 7) { tp->move_player("/d/shadowgate/death/death_exit_offestry"); } 
+    if(tp->query_highest_level() < 7) { tp->move_player("/d/shadowgate/death/death_exit_offestry"); }
     else { tp->move_player("/d/shadowgate/death/death_exit"); }
     return;
 }
