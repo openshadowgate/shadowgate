@@ -19,7 +19,7 @@ void create() {
 	" reasonable price.  A %^BOLD%^%^GREEN%^sign on the wall %^RESET%^lists"
 	" what mounts are available with prices and"
 	" includes the following warning:\n'%^YELLOW%^War horses are specially trained to"
- 	" serve cavaliers only.  Horses require some degree of riding skill,"
+ 	" serve paladins only.  Horses require some degree of riding skill,"
 	" so novice riders should begin with donkeys.  No refunds given if you"
 	" cannot handle the animal you purchase.%^RESET%^'\n"
 	);

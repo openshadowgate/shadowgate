@@ -804,7 +804,7 @@ Shops of this type have next commands:
 
     Sell %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
 
-%^ORANGE%^<list %^ORANGE%^%^ULINE%^TYPE%^RESET%^%^ORANGE%^>%^RESET%^
+%^ORANGE%^<list [%^ORANGE%^%^ULINE%^TYPE%^RESET%^%^ORANGE%^]>%^RESET%^
 
     List shop inventoryfiltering by %^ORANGE%^%^ULINE%^TYPE%^RESET%^.
 
@@ -831,6 +831,8 @@ Shops of this type have next commands:
 %^ORANGE%^<inventory>%^RESET%^
 
     Evaluate items in your inventory.
+
+%^CYAN%^N.B.%^RESET%^ You can refer to a second item on the list with %^ORANGE%^%^ULINE%^ITEM%^RESET%^ %^ORANGE%^%^ULINE%^NUMBER%^RESET%^, e.g. %^ORANGE%^<show flask 2>%^RESET%^ will force vendor to show you the second flask.
 ");
     return 1;
 }

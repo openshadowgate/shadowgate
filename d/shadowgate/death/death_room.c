@@ -18,11 +18,24 @@ void init(){
     //it is not a pkill - Saide, November 2016
     if(!TP->query("just_been_pkilled"))
     {
-        tell_object(TP, "\n%^BOLD%^%^WHITE%^You find yourself standing in a large, open space with %^RESET%^mists %^BOLD%^%^WHITE%^that obscure any distance. Rising up before you is a simple oaken chair with a high back, upon which is seated a somber and serene woman. %^BLACK%^Dark hair %^WHITE%^frames her ageless face, while a robe of gray rests about her shoulders like a pall. Her fingers rest upon the chair's arm, and you note the three %^BLACK%^m%^RESET%^i%^BOLD%^%^WHITE%^s%^RESET%^m %^BOLD%^%^BLACK%^a%^RESET%^t%^BOLD%^%^WHITE%^c%^RESET%^h %^BOLD%^%^BLACK%^e%^RESET%^d %^BOLD%^%^WHITE%^rings she wears. As her %^RESET%^%^CYAN%^steady gaze %^BOLD%^%^WHITE%^falls upon you, you realise that this must be the Lady of Fate - Lysara. In agony, you try to recall all you have done that might warrant the deity's attention, and you squirm as you wait to hear what she will say. Finally, she speaks...\n");
 
+        if(TP->is_undead())
+        {
 
-        call_out("end_death", 8, TP);
-        WHICH_CALL_OUT = "end_death";
+            tell_object(TP,"\n%^BOLD%^WHITE%^You briefly see a large, open space...\n");
+            tell_object(TP,"\n%^BOLD%^BLACK%^GO AWAY. I HAVE %^WHITE%^NO TIME%^BLACK%^ FOR YOUR FOOLISHNESS\n");
+            call_out("end_death3", 8, TP);
+            WHICH_CALL_OUT = "end_death3";
+        }
+        else
+        {
+
+            tell_object(TP, "\n%^BOLD%^%^WHITE%^You find yourself standing in a large, open space with %^RESET%^mists %^BOLD%^%^WHITE%^that obscure any distance. Rising up before you is a simple oaken chair with a high back, upon which is seated a somber and serene woman. %^BLACK%^Dark hair %^WHITE%^frames her ageless face, while a robe of gray rests about her shoulders like a pall. Her fingers rest upon the chair's arm, and you note the three %^BLACK%^m%^RESET%^i%^BOLD%^%^WHITE%^s%^RESET%^m %^BOLD%^%^BLACK%^a%^RESET%^t%^BOLD%^%^WHITE%^c%^RESET%^h %^BOLD%^%^BLACK%^e%^RESET%^d %^BOLD%^%^WHITE%^rings she wears. As her %^RESET%^%^CYAN%^steady gaze %^BOLD%^%^WHITE%^falls upon you, you realise that this must be the Lady of Fate - Lysara. In agony, you try to recall all you have done that might warrant the deity's attention, and you squirm as you wait to hear what she will say. Finally, she speaks...\n");
+
+            call_out("end_death", 8, TP);
+            WHICH_CALL_OUT = "end_death";
+
+        }
         return;
     }
     if(TP->query_property("trial"))
