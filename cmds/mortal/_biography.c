@@ -7,7 +7,6 @@
 #include <clock.h>
 #include <std.h>
 #define SHOW_KILL (string)PLAYER_D->query_monster
-#define HEAD "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n"
 #define VALID_ARGS ({"deaths", "kills", "quests"})
 inherit DAEMON;
 
@@ -74,7 +73,6 @@ int display_kills(string who)
         else { x++; }
     }
     tell_object(TP, sprintf("%%^BOLD%%^%%^GREEN%%^You have killed %%^WHITE%%^%d %%^GREEN%%^monsters.",amt),);
-    tell_object(TP,HEAD);
     TP->more(display);
     return 1;
 }
@@ -93,15 +91,13 @@ int display_deaths(string str)
 
     if(!(deaths) || !(max = sizeof(deaths)))
     {
-        borg = HEAD;
-        if(!flag) borg += "\n%^CYAN%^You have never experienced the pain of death.\n\n";
-        else borg += "\n%^CYAN%^"+capitalize(str)+" has never experienced the pain of death.\n\n";
+        if(!flag) borg = "\n%^CYAN%^You have never experienced the pain of death.\n\n";
+        else borg = "\n%^CYAN%^"+capitalize(str)+" has never experienced the pain of death.\n\n";
     }
     else
     {
         if(!flag) borg = "%^BOLD%^%^GREEN%^You have died %^RESET%^%^BOLD%^"+max+" %^GREEN%^times.\n";
         else borg = "%^BOLD%^%^GREEN%^"+capitalize(str)+" has died %^RESET%^%^BOLD%^"+max+"%^GREEN%^ times.\n";
-        borg += HEAD;
         borg += "You have been brought into the grasp of death by:\n";
         borg += sprintf("%-20s%-24s%-26s\n","Enemy","IC Date","RL DateTime");
         write(borg);
@@ -118,7 +114,6 @@ int display_deaths(string str)
             borg = "";
         }
     }
-    borg += HEAD;
     this_player()->more(explode(borg, "\n"));
     return 1;
 }
@@ -146,8 +141,7 @@ int display_quests(string mtarg, string str)
     if(!check_permission(targ,TP)) { return 1; }
     if(targ == TP) { tmp = "You have"; }
     else { tmp = capitalize(targ->query_name()) + " has"; }
-    borg = HEAD;
-    borg += "%^YELLOW%^" + (string)targ->query_short()+"\n\n";
+    borg = "%^YELLOW%^" + (string)targ->query_short()+"\n\n";
     minis = (mapping)targ->query_mini_quest_map();
     if(!sizeof(minis))
         borg += "%^CYAN%^" + tmp+" no meaningful accomplishments.\n";
@@ -173,7 +167,6 @@ int display_quests(string mtarg, string str)
         while(i--) { borg += sprintf("%-16s\n",quests[i]); }
         borg += "\n%^YELLOW%^";
     }
-    borg += HEAD;
     TP->more(explode(borg, "\n"));
     return 1;
 }
@@ -200,8 +193,7 @@ int cmd_biography(string str)
     }
     if(!stringp(str) || member_array(arg, VALID_ARGS) == -1)
     {
-        borg = "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
-        borg += "%^YELLOW%^" + (string)this_player()->query_short();
+        borg = "%^RESET%^%^BLUE%^-=%^BOLD%^< %^GREEN%^" + (string)this_player()->query_short() +" %^BLUE%^>%^RESET%^%^BLUE%^=-";
         birth = (int)TP->query_birthday();
         birth2 = birth - (int)TP->query_start_age() * YEAR;
         byear = year(birth2);
@@ -221,7 +213,6 @@ int cmd_biography(string str)
         borg += "%^MAGENTA%^You have completed %^BOLD%^%^CYAN%^"+sizeof(TP->query_quests())+"%^RESET%^%^MAGENTA%^ quests.%^RESET%^\n";
         borg += "%^MAGENTA%^You have %^BOLD%^CYAN%^"+TP->query_quest_points()+"%^RESET%^MAGENTA%^ quest points.%^RESET%^\n";
         borg += "%^MAGENTA%^You have entered the realm of death %^BOLD%^%^CYAN%^"+sizeof(TP->query_deaths())+"%^RESET%^%^MAGENTA%^ times.%^RESET%^\n";
-        borg += "%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
         this_player()->more(explode(borg, "\n"));
         return 1;
     }
