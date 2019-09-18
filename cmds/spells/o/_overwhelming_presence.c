@@ -38,7 +38,7 @@ void spell_effect(int prof){
         if(!do_save(targ,0))
         {
             targ->set_tripped(roll_dice(1,die),"%^BOLD%^You're prostrating in awe of "+caster->QCN+"'s divinity!%^RESET%^",die);
-            tall_room(ENV(targ),"%^YELLOW%^"+targ->QCN+" prostrates itself before "+caster->QCN+"!");
+            tell_room(ENV(targ),"%^YELLOW%^"+targ->QCN+" prostrates itself before "+caster->QCN+"!");
             if(!targ->query_property("overwhelming_presence"))
             {
                 targ->set_property("overwhelming_presence",1);
