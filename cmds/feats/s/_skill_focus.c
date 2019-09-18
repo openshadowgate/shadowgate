@@ -6,13 +6,15 @@ inherit FEAT;
 
 int FLAG;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("premanent");
     feat_category("NonCombat");
     feat_name("skill focus");
-    feat_desc("Skill Focus allows the selection of one non-class skill, which the character will then be skilled at as per a class skill. Note that if multiclassing in future causes the skill to be a class skill naturally, this feat will have no effect. It must be abandoned and regained in order to select a different skill focus. Crafting skills cannot be taken by way of this feat."+(FEATS_D->usable_feat(TP,"skill focus")?" 
+    feat_desc("Skill Focus allows the selection of one non-class skill, which the character will then be skilled at as per a class skill.
+
+%^BOLD%^N.B.%^RESET%^ If multiclassing in future causes the skill to be a class skill (skill on the class helpfile), this feat will have no effect. It must be abandoned and regained in order to select a different skill focus. Crafting skills cannot be taken by way of this feat."+(FEATS_D->usable_feat(TP,"skill focus")?"
 
 "+"%^YELLOW%^You have chosen your skill focus as: %^BOLD%^%^WHITE%^"+TP->query("skill_focus")+".":""));
     permanent(1);
