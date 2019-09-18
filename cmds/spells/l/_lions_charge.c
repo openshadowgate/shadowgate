@@ -9,6 +9,7 @@ void create() {
     set_spell_name("lions charge");
     set_spell_level(([ "psywarrior" : 2 ]));
     set_syntax("cast CLASS lions charge on TARGET");
+    set_save("reflex");
     set_description("When manifesting this power, the psionic character "
        "charges toward her foe and attempts to knock him down. The damage "
        "done will depend on any weapon the psionic character has wielded.");
@@ -58,29 +59,28 @@ void spell_effect(int prof) {
            enchant = (int)myweapon->query_property("enchantment");
            if(enchant < 0) enchant = 0;
            bonus += enchant;
-            
+
         }
     }
-    if(!thaco(target,bonus)){
+    if(do_save(target,0)){
         tell_object(caster,"%^BOLD%^%^RED%^You charge straight past "
            ""+target->QCN+", missing "+target->QO+" entirely!%^RESET%^");
         tell_object(target,"%^BOLD%^%^RED%^You sidestep, avoiding "+caster->QCN+"'s charge!%^RESET%^");
         tell_room(place,"%^BOLD%^%^RED%^"+target->QCN+" sidesteps, "
            "avoiding "+caster->QCN+"'s charge!%^RESET%^", ({caster, target}));
-//Because this is a spell, the caster does not get attacks that round, and the target is not stunned, I am removing the tripped possibility
         spell_successful();
         dest_effect();
         return;
     }
 
-    damage = roll_dice(6,mylevel); //higher than scorcher, which is an AOE, but lower than rush, may need to be adjusted
+    damage = sdamage*7/6;
     if(objectp(myweapon)){
         if((int)target->query_size() < 3) damage += myweapon->query_damage();
         else damage += myweapon->query_large_damage();
-    }else if(caster->query_property("shapeshifted")){ 
+    }else if(caster->query_property("shapeshifted")){
         damage += (int)caster->get_hand_damage();
     }
-    
+
     damage += "/daemon/bonus_d"->damage_bonus(caster->query_stats("intellience"));
     damage += (int)caster->query_damage_bonus();
 
