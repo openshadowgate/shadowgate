@@ -61,15 +61,30 @@ int break_fun(string args)
 
 void do_teleport(object who)
 {
+    object *stuff;
+    int i;
+
     if(!objectp(who))
         return;
-    tell_object(TP,"%^BOLD%^%^RED%^You feel a pull on the soul, then outside power drags you elsewhere.%^RESET%^");
+    tell_object(who,"%^BOLD%^%^RED%^You feel a pull on the soul, then outside power drags you elsewhere.%^RESET%^");
 
     log_file("bloodshards",who->QCN+" "+file_name(ENV(who)));
 
+    stuff=all_inventory(who);
+    for (i=0;i<sizeof(stuff);i++)
+    {
+        if(!objectp(stuff[i]))
+            continue;
+        if(stuff[i]->id("questob"))
+        {
+            tell_object(who,"%^BOLD%^%^RED%^The mist consumes your "+stuff[i]->query_short()+"!%^RESET%^");
+            stuff[i]->remove();
+        }
+    }
+
     who->move_player("/d/darkwood/room/road18.c","with a loud clap");
     who->set_paralyzed(36*8,"%^BOLD%^%^WHITE%^You are in pain and shock from your abrupt teleportation.%^RESET%^"); //3 minutes
-    who->do_damage(who->query_hp()-1,"torso");
+    who->do_damage("torso",who->query_hp()-1);
     who->set_property("bloodshard",time());
 
     TO->remove();
