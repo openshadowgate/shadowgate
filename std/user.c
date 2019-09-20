@@ -1247,7 +1247,7 @@ void setup() {
   init_living();
   basic_commands();
 
-  ip = query_ip_number(TO);
+  ip = "127.0.0.1";
   last_on = ctime(time());
   real_last_on = ctime(time());
   static_user["time_of_login"] = time();
@@ -1411,10 +1411,6 @@ void setup() {
   }
   age = time() - (int)TO->query_birthday();
   PLAYER_D->add_player_info();
-  if(!TO->query("true_quietness"))
-  {
-      log_file("enter", query_name()+" (enter): "+ctime(time())+" from "+query_ip_name()+" with\n"+query_exp()+" exp, "+query_money("platinum")+" pl, "+query_money("gold")+" gd, "+query_money("electrum")+" el, "+query_money("silver")+" sl, "+query_money("copper")+" cp\n");
-  }
   NEWS_D->read_news();
   if (!(PRISON_D->is_imprisoned(query_name()))) {
     if(!query_body_type() && query_race() != "unborn")
