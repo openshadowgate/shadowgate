@@ -68,8 +68,6 @@ void do_teleport(object who)
         return;
     tell_object(who,"%^BOLD%^%^RED%^You feel a pull on the soul, then outside power drags you elsewhere.%^RESET%^");
 
-    log_file("bloodshards",who->QCN+" "+file_name(ENV(who))+"\n");
-
     stuff=all_inventory(who);
     for (i=0;i<sizeof(stuff);i++)
     {
@@ -86,6 +84,8 @@ void do_teleport(object who)
     who->set_paralyzed(36*8,"%^BOLD%^%^WHITE%^You are in pain and shock from your abrupt teleportation.%^RESET%^"); //3 minutes
     who->do_damage("torso",who->query_hp()-1);
     who->set_property("bloodshard",time());
+
+    log_file("bloodshards",idenitify(who)+" "+file_name(ENV(who))+"\n");
 
     TO->remove();
 }
