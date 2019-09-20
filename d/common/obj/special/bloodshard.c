@@ -68,7 +68,7 @@ void do_teleport(object who)
         return;
     tell_object(who,"%^BOLD%^%^RED%^You feel a pull on the soul, then outside power drags you elsewhere.%^RESET%^");
 
-    log_file("bloodshards",who->QCN+" "+file_name(ENV(who)));
+    log_file("bloodshards",who->QCN+" "+file_name(ENV(who))+"\n");
 
     stuff=all_inventory(who);
     for (i=0;i<sizeof(stuff);i++)
