@@ -13,6 +13,7 @@ void create()
     set_spell_sphere("combat");
     set_spell_domain("vigilance");
     set_syntax("cast CLASS orders oath on TARGET");
+    set_damage_desc("paralyzed for 2d4 rounds");
     set_description("This spell magically enhances the power of the caster's voice.  The spell takes the form of a single "
         "spoken word, 'halt'.  The target need not understand the language of the spell for the magic to work.");
     set_verbal_comp();
@@ -51,7 +52,7 @@ void spell_effect(int prof)
     }
     caster->force_me("yell %^BOLD%^%^WHITE%^H%^YELLOW%^A%^WHITE%^L%^YELLOW%^T%^WHITE%^!");
     //    if(!SAVING_D->saving_throw(target,"spell",0))
-    if(!do_save(target))
+    if(!do_save(target,0))
     {
         if(mind_immunity_check(target, "default"))
         {
