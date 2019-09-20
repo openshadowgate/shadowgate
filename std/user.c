@@ -1333,7 +1333,6 @@ void setup() {
    }
 
   register_channels();
-  if (!original_site) original_site = query_ip_number(TO);
   if (!sizeof(query_aliases())) {
     message("environment", "Resetting alias data.", TO);
     init_aliases();
