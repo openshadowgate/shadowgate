@@ -64,6 +64,7 @@ mapping MONSTERS = ([
                         ISLANDS "argentrock/mon/kronibus.c" : 1560000 ,
                         ISLANDS "argentrock/mon/fernibus.c" : 1560000 ,
                         ISLANDS "common/mon/cruisertetron.c" : 5000000 ,
+                        "/d/antioch/wild/mount/muln/mon/muln.c" : 1800000 ,
                         ISLANDS "tonerra/mon/edragon.c" : 1800000 ,
                         ISLANDS "tonerra/mon/mmonk.c" : 456000 ,
                         ISLANDS "tonerra/mon/tombt.c" : 1200000 ,
