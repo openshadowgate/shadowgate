@@ -9,7 +9,7 @@ void create() {
     set_spell_level(([ "druid" : 7 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sunbeam on TARGET");
-    set_damage_desc("untyped, 1.5 times to undead");
+    set_damage_desc("untyped, 1.25 times more to undead");
     set_description("This spell will create a beam of pure light aimed at the target.  A target who fails to avoid the "
         "sunbeam will take damage from the pure sunlight and may be momentarily blinded.  Undead hit by the spell will "
         "suffer additional damage.");
@@ -36,7 +36,7 @@ void spell_effect(int prof) {
     }
 
     if(target->query_property("undead") || target->query_race("undead"))
-        sdamage = (sdamage * 3) / 2;
+        sdamage = (sdamage * 5) / 4;
 
     target_limb = target->return_target_limb();
 

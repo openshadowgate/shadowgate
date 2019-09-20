@@ -504,7 +504,10 @@ int query_max_hp()
         return num;
     }
 
-    num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("constitution"));
+    if(TO->is_undead())
+        num = 8; //always good
+    else
+        num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("constitution"));
     num = num * (int)TO->query_highest_level();
 
     if(FEATS_D->usable_feat(TO,"toughness"))
