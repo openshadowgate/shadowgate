@@ -7,24 +7,24 @@ mixed * arealist = ({});
 arealist = ({
         ({"Offestry" ,1,6,}),
             ({"Ekibi Caverns (Ekibi Ridge)" ,6,10,}),
-            ({"Gobgob" ,6,10,}),
-            ({"Darkwood Forest" ,8,10,}),
+            ({"Gobgob (Goblin Fortress)" ,6,10,}),
+            ({"Darkwood Forest (Rhapsody)" ,8,10,}),
             ({"Dragon's Den Caverns" ,8,10,}),
             ({"Grasslands/Meadowlands" ,8,10,}),
-            ({"Orc Cave" ,8,10,}),
+            ({"Orc Cave (Koenig)" ,8,10,}),
             ({"Echoes Mountains" ,8,12,}),
-            ({"Centaur Meadow (Darkwood Side)" ,10,12,}),
+            ({"Centaur Meadow (Yntala, Darkwood Side)" ,10,12,}),
             ({"Cryptkeeper's Lair" ,10,12,}),
             ({"Gentleman's Tower" ,10,12,}),
             ({"Gore's Hoarde" ,10,12,}),
             ({"Kildare Glen" ,10,12,}),
             ({"Muileann" ,10,12,}),
             ({"Piaf's Farm" ,10,12,}),
-            ({"Pyramid (Darkwood Side)" ,10,12,}),
-            ({"Underwater Tunnels (Darkwood Side)" ,10,12,}),
-            ({"Yntala Forest" ,10,12,}),
+            ({"Pyramid (Yntala, Darkwood Side)" ,10,12,}),
+            ({"Underwater Tunnels (Centaur Meadow)" ,10,12,}),
+            ({"Yntala Forest (Tabor)" ,10,12,}),
             ({"Feyren Farm (West of Shadow)" ,10,15,}),
-            ({"Nereid's Cove" ,10,15,}),
+            ({"Nereid's Cove (Koenig)" ,10,15,}),
             ({"Dark Trail (East of Antioch)" ,12,15,}),
             ({"Deep Gnome Cavern (Charu Mountains)" ,12,15,}),
             ({"King's Forest (Slightly southwest of Antioch)" ,12,15,}),
@@ -92,6 +92,7 @@ arealist = ({
             ({"Oubliette (Crystal Tower)",30,35,}),
             ({"Lava Tubes (Tonerra)",33,42,}),
             ({"Arkhon's Lair" ,35,40,}),
+            ({"Atoyatl Jungle" ,35,50,}),
             ({"Forest on Argentrock Island",35,40,}),
             ({"Batlin's House (Argentrock)",35,50,}),
             ({"Crystal Tower",40,45 ,}),
@@ -120,7 +121,7 @@ int cmd_rumors(string args)
         if(lev >= area[1] && lev <= area[2])
         {
             dispflag = 1;
-            color ="%^GREEN%^";
+            color ="%^GREEN%^%^BOLD%^";
         }
         if(area[2] < lev)
             color ="%^ORANGE%^";
@@ -129,7 +130,7 @@ int cmd_rumors(string args)
             color ="%^RED%^";
 
         if(allflag||dispflag)
-            write("%^CYAN%^"+sprintf("%2d",area[1])+"-"+sprintf("%2d",area[2])+color+" "+area[0]+"%^RESET%^");
+            write("%^CYAN%^"+sprintf("%2d",area[1])+"-"+sprintf("%2d",area[2])+color+"  "+area[0]+"%^RESET%^");
     }
     return 1;
 }
