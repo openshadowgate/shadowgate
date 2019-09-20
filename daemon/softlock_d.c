@@ -59,7 +59,7 @@ void remove_lock(int timekey)
         return;
 
     notify_wizzes("%^BOLD%^%^ORANGE%^"+who+"%^WHITE%^ removed pledge lock on %^BOLD%^%^GREEN%^"+sprintf("%.26s",locks[timekey][1])+"%^WHITE%^.
-It should have expired in %^ORANGE%^"+parse_time(time()-timekey-locks[timekey][2])+"%^RESET%^");
+It should have expired in %^ORANGE%^"+parse_time((timekey+locks[timekey][2])-time())+"%^RESET%^");
     map_delete(locks,timekey);
     save_object(SAVEF);
 }
