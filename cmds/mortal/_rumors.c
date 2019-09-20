@@ -1,150 +1,127 @@
 #include <std.h>
-inherit DAEMON;
 
-#define SEARCHES ([ "/d/shadow/room/city" : "Shadow", "/d/shadow/juran/city" : "Juran",\
-"/d/shadow/room/muuldaan/rooms/" : "Muul'daan", "/d/darkwood/tabor/room/" : "Tabor", "/d/azha/town/" : "Azha",\
-"/d/darkwood/camps/rooms/town/" : "Synoria", "/d/tharis/newtharis/rooms" : "Tharis", "/d/antioch/antioch2/rooms" : "Antioch",\
-"/d/dagger/tonovi/town" : "Tonovi", "/d/dagger/Torm/city" : "Torm", "/d/dagger/kinaro/" : "Kinaro",\
-"/d/attaya/newseneca/rooms" : "Seneca", "/d/deku/town" : "Verbobone", "/d/undead/rooms/town" : "Graez",\
-"/d/darkwood/room/rhapsody" : "the Rhapsody inn", "/d/dagger/exchange/rooms/" : "the Exchange",\
-"/d/player_houses/innaeli/rooms/bsb1" : "the Bloody Scourge inn", ])
-#define AREAMAP ([ 3 : ({ "Offestry and surrounds" }), 9 : ({ "the Echoes mountains", "the goblin stronghold", "the Meadowlands" }), 11 : ({ "Kildare", "Yntala forest", "Feyren Farm" }), 13 : ({ "Muileann" }), 16 : ({ "the dark trail", "the Barrow Downs" }), 18 : ({ "Berionessa Peak", "Laerad plains", "Deku forest" }), 22 : ({ "northern Drow underdark", "the Moonstone vale", "Derro tunnels" }), 25 : ({ "the Dark Forest", "Kinaro underdark", "Aramanth island" }), 28 : ({ "Tonerra", "the Coral Sea", "Graez island" }), 40 : ({ "Lava tubes", "the Marsh of Fear", "The island of Eldebaro"}), 45 : ({"Within The Ancient Marsh of Dallyh"})])
-//I have turned up the azha theather to be a level 16 group area - from a player point of view it seems like lvl 14 or 11 is a bit low for the area - the monsters have a lot of health 
-//and some of them stab a lot - Saide - April 2016
-#define GROUPMAP ([ 9 : ({ "the orc encampment" }), 16 : ({ "Azha theater" }), 16 : ({ "Archemond's ruins" }), 18 : ({ "Tharis forest", "Deku keep" }), 22 : ({ "Lothwaite barrows", "Laerad caverns", "the Altar of Fire" }), 25 : ({ "the Ogre caverns", "Fire plains", "Sanctuary" }), 28 : ({ "Island of Dreams" }), 32 : ({ "Argentrock island" }), 35 : ({ "Attaya jungle", "Demongate", "the Crystalline Tower" }), 38 : ({ "Arkhon's lair" }), 50 : ({ "Klauth's lair" }) ])
-#define QUESTMAP ([ 3 : ({ "Sirith's task, near the graveyard east of Offestry.", "the artifact of Kilgore Keep, in the keep west of Offestry",/* "the Elven Journal, in the forest east of Offestry", "recover the Golden Crown, in the forest east of Offestry"*/ }), \
-9 : ({ "Rosinden's mission, in the Ekibi Cavern, north of the meadowlands." }), \
-11 : ({ "the Stolen Pipe, from a dwarf or kobold in the Echoes Mountains", "Piaf's dilemma, at Piaf's farm, along the streams north of Tabor" }), \
-13 : ({ "the Riddle quest, hidden by the streams north of Tabor", "Muileann's restless soul, in the town of Muileann, east of the crossroads north of Shadow" }), \
-14 : ({ "the mystery of the Desert Sun Theater, in the Azha Theater, on the east edge of town" }), \
-16 : ({ "Sionne's final rest, in the ruins on a side path towards Lothwaite", "Isolate the Githyanki, in the southern Shadow Desert" }), \
-22 : ({ "the Drow temple, in the northern Dagger underdark", "the spirit of Lothwaite, in the barrows beneath Lothwaite", "Friend of the Stones, in the Derro caves in northern Dagger" }), \
-25 : ({ "sealing the gate to the Hells, in the caverns of the Ogrish hordes, in northern Dagger", "Hansoth's demise, in the Laerad Caverns" }), \
-28 : ({ "Lucid Dreams, on the island of Ovadexel" }), \
-38 : ({ "Shar's failed deed, in the lava tubes beneath Tonerra" }) ])
+mixed * arealist = ({});
 
-string run_area_query(object myplayer);
+//sort -t, -nk2
+arealist = ({
+        ({"Offestry" ,1,6,}),
+            ({"Ekibi Caverns (Ekibi Ridge)" ,6,10,}),
+            ({"Gobgob" ,6,10,}),
+            ({"Darkwood Forest" ,8,10,}),
+            ({"Dragon's Den Caverns" ,8,10,}),
+            ({"Grasslands/Meadowlands" ,8,10,}),
+            ({"Orc Cave" ,8,10,}),
+            ({"Echoes Mountains" ,8,12,}),
+            ({"Centaur Meadow (Darkwood Side)" ,10,12,}),
+            ({"Cryptkeeper's Lair" ,10,12,}),
+            ({"Gentleman's Tower" ,10,12,}),
+            ({"Gore's Hoarde" ,10,12,}),
+            ({"Kildare Glen" ,10,12,}),
+            ({"Muileann" ,10,12,}),
+            ({"Piaf's Farm" ,10,12,}),
+            ({"Pyramid (Darkwood Side)" ,10,12,}),
+            ({"Underwater Tunnels (Darkwood Side)" ,10,12,}),
+            ({"Yntala Forest" ,10,12,}),
+            ({"Feyren Farm (West of Shadow)" ,10,15,}),
+            ({"Nereid's Cove" ,10,15,}),
+            ({"Dark Trail (East of Antioch)" ,12,15,}),
+            ({"Deep Gnome Cavern (Charu Mountains)" ,12,15,}),
+            ({"King's Forest (Slightly southwest of Antioch)" ,12,15,}),
+            ({"Spider Nests" ,12,15,}),
+            ({"Antioch Ruins (East of Antioch)" ,15,20,}),
+            ({"Dry Rum Cove (00 55) ",15,20,}),
+            ({"Githyanki Fortress (East of Shadow)" ,15,20,}),
+            ({"Purple Worm Lair (Southeast of Antioch)" ,15,20,}),
+            ({"Shadowlord's Forest (Deku) ",15,20,}),
+            ({"Shadowlord's Fortress (Deku) ",15,20,}),
+            ({"Shadowlord's Graveyard (Deku) ",15,20,}),
+            ({"Tharis Forest" ,15,20,}),
+            ({"The Vale" ,15,20,}),
+            ({"The Dark Forest (Bordering The Vale)" ,18,25,}),
+            ({"Altar of Fire (Deku) ",20,25,}),
+            ({"Amazon Forest (Dallyh) ",20,25,}),
+            ({"Archemond's Mansion (Near Lothwaite)" ,20,25,}),
+            ({"Barrier Mountains (South of Torm)" ,20,25,}),
+            ({"Barrow Downs (Dagger Mountains)" ,20,25,}),
+            ({"Dagger Marsh" ,20,25,}),
+            ({"Drow Underdark (Dagger Mountains)" ,20,25,}),
+            ({"Firbolg Barrows (In Lothwaite)" ,20,25,}),
+            ({"Gnoll Encampment (Laerad) ",20,25,}),
+            ({"God's Plains (Laerad) ",20,25,}),
+            ({"Lizardman Sewers (Laerad) ",20,25,}),
+            ({"Misty Grove" ,20,25,}),
+            ({"Parnelli Forest (Laerad) ",20,25,}),
+            ({"Sanctuary Ruins (Deku) ",20,25,}),
+            ({"Sanctuary Sewers (Deku) ",20,25,}),
+            ({"Sanctuary Tower (Deku) ",20,25,}),
+            ({"Swamp of Death (Laerad) ",20,25,}),
+            ({"Wasteland (Laerad) ",20,25,}),
+            ({"attlefield (Graez) ",20,30,}),
+            ({"BlackTongue's Keep (Deku) ",20,30,}),
+            ({"Coral Reef (Sea 08 62) ",20,30,}),
+            ({"Derro Tunnels (Dagger Mountains)" ,20,30,}),
+            ({"Graez City ",20,30,}),
+            ({"Marsh (Graez) ",20,30,}),
+            ({"Minotaur Maze (Graez) ",20,30,}),
+            ({"Mountains (Graez) ",20,30,}),
+            ({"Shadowlord's Mausoleum (Deku) ",20,30,}),
+            ({"Tonerra Monastery ",20,35,}),
+            ({"Dino Island (30 20) ",25,30,}),
+            ({"Dojo (Laerad) ",25,30,}),
+            ({"Drow Temple " ,25,30,}),
+            ({"Ice Caves (Dagger Mountains)" ,25,30,}),
+            ({"Laerad Caverns ",25,30,}),
+            ({"Lower Aramanth Island ",25,30,}),
+            ({"Marsh of Fear" ,25,30,}),
+            ({"Ogre Caverns  (Dagger Mountains)" ,25,30,}),
+            ({"Ovadexel Island (21 46) ",25,30,}),
+            ({"Plane of Fire" ,25,30,}),
+            ({"Tonerra Jungle ",25,30,}),
+            ({"Tonerra Native Village ",25,30,}),
+            ({"Assassin Tunnels ",30,35,}),
+            ({"Attaya Jungle ",30,35,}),
+            ({"Black Stairway (Crystal Tower) ",30,35,}),
+            ({"Demongate" ,30,35,}),
+            ({"Devil Tunnels ",30,35,}),
+            ({"Geonslu's Lair (Tonerra) ",30,35,}),
+            ({"Haunted House (Deku) ",30,35,}),
+            ({"Ice Island (30 16) ",30,35,}),
+            ({"Kinaro Underdark (Beneath Kinaro)" ,30,35,}),
+            ({"Muln's Lair (Charu Mountains)" ,30,35,}),
+            ({"Oubliette (Crystal Tower) ",30,35,}),
+            ({"Lava Tubes (Tonerra) ",33,42,}),
+            ({"Arkhon's Lair " ,35,40,}),
+            ({"Forest on Argentrock Island ",35,40,}),
+            ({"Batlin's House (Argentrock) ",35,50,}),
+            ({"Crystal Tower ",40,45 ,}),
+            ({"Ibrandul's Temple (Tonerra) ",40,45,}),
+            ({"Shoreline on Argentrock Island ",40,45,}),
+            ({"Eldebaro Island (07 51) ",40,50,}),
+            ({"Klauth's Lair ",40,50,}),
+            ({"Dallyh Marsh (Dallyh) ",45,50,}),
+            ({"Mysterious Plateau (Aramanth) ",45,50,}),
+                });
 
-int cmd_rumors()
+int cmd_rumors(string args)
 {
-  int i, j, mylevel, mymin, mymax, *mapkeys;
-  string *places, theloc, placelist, searchlist, *myareas;
-  object *peo, *rp_flags;
+    mixed * area;
+    int lev = TP->query_character_level();
+    int allflag = 0;
 
-// start query for player locations
-  places = ({});
-  peo = ({});
-  peo = users();
-  if(member_array(TP,peo) != -1) peo -= ({ TP }); // remove self
-  
-  if(!sizeof(peo)) 
-  {
-    tell_object(TP,"%^BOLD%^%^CYAN%^There are no rumors of adventurers passing through any nearby cities.%^RESET%^\n");
-  }
-  else {
-    searchlist = keys(SEARCHES);
-    if(!sizeof(searchlist)) {
-      tell_object(TP,"%^BOLD%^%^CYAN%^There has been an error generating the player list - please notify a wiz.%^RESET%^\n");
-      return 1;
+    if(args == "all")
+        allflag = 1;
+    write("%^BOLD%^Levels Area");
+    foreach(area in arealist)
+    {
+        if(lev >= area[1] && lev <= area[2])
+            write("%^RESET%^"+sprintf("%2d",area[1])+"%^BOLD%^-%^RESET%^"+sprintf("%2d",area[2])+"%^GREEN%^  "+area[0]+"%^RESET%^");
+        else if(allflag)
+            write("%^RESET%^"+sprintf("%2d",area[1])+"%^BOLD%^-%^RESET%^"+sprintf("%2d",area[2])+"%^RED%^  "+area[0]+"%^RESET%^");
     }
-    for(i = 0; i < sizeof(peo); i++) {
-      if(!objectp(environment(peo[i]))) continue;
-      if(peo[i]->query_true_invis()) continue;
-      theloc = base_name(environment(peo[i]));
-      for(j = 0;j < sizeof(searchlist); j++) {
-        if((strsrch(theloc,searchlist[j]) != -1) && (member_array(SEARCHES[searchlist[j]],places) == -1))
-          places += ({ SEARCHES[searchlist[j]] });
-      }
-    }
-
-    if(!sizeof(places))
-      tell_object(TP,"%^BOLD%^%^CYAN%^There are no rumors of adventurers passing through any nearby cities.%^RESET%^\n");
-    else {
-      placelist = "%^BOLD%^%^CYAN%^There are rumors of adventurers recently passing through "+implode(places,", ")+".%^RESET%^\n";
-      tell_object(TP,placelist);
-    }
-  }
-
-  rp_flags = "/daemon/user_d.c"->get_rp_flags();
-  if(i = sizeof(rp_flags)) 
-  {
-      if(i == 1) tell_object(TP, "There is currently one role play flag flying. In the following location:\n"+rp_flags[0]->query_short()+".\n");
-      else 
-      {
-        tell_object(TP, "There are currently "+i+" role play flags flaying. In the following locations:\n");
-        places = rp_flags->query_short();
-        tell_object(TP, implode(places[0..(sizeof(places)-2)], ", ")+ " and "+places[sizeof(places)-1]+"\n");
-      }
-  }  
-  places = ({});
-// start query for appropriate adventuring areas
-  myareas = ({});
-  mylevel = TP->query_level();
-
-  switch(mylevel) {
-    case 1..20: mymin = mylevel - 3; mymax = mylevel + 3; break;
-    default: mymin = mylevel - 4; mymax = mylevel + 4; break;
-    break;
-  }
-
-// solo areas
-  mapkeys = keys(AREAMAP);
-  if(!sizeof(mapkeys)) {
-    tell_object(TP,"%^BOLD%^%^GREEN%^There has been an error generating base areas - please notify a wiz.%^RESET%^\n");
     return 1;
-  }
-  for(i = 0; i < sizeof(mapkeys); i++) if(mapkeys[i] >= mymin && mapkeys[i] <= mymax) myareas += AREAMAP[mapkeys[i]];
-  if(!sizeof(myareas))
-    tell_object(TP,"%^BOLD%^%^GREEN%^There are no well-known areas appropriate alone at your level.%^RESET%^\n");
-  else {
-    placelist = "%^BOLD%^%^GREEN%^Areas that may be appropriate for you to adventure in alone are "+implode(myareas,", ")+".%^RESET%^\n";
-    tell_object(TP,placelist);
-  }
-
-// group areas
-  mapkeys = ({});
-  myareas = ({});
-  mapkeys = keys(GROUPMAP);
-  if(!sizeof(mapkeys)) {
-    tell_object(TP,"%^BOLD%^%^CYAN%^There has been an error generating group areas - please notify a wiz.%^RESET%^\n");
-    return 1;
-  }
-  for(i = 0; i < sizeof(mapkeys); i++) if(mapkeys[i] >= mymin && mapkeys[i] <= mymax) myareas += GROUPMAP[mapkeys[i]];
-  if(!sizeof(myareas))
-    tell_object(TP,"%^BOLD%^%^CYAN%^There are no well-known areas appropriate for a group of your level.%^RESET%^\n");
-  else {
-    placelist = "%^BOLD%^%^CYAN%^Areas that may be appropriate for you to adventure in with a group are "+implode(myareas,", ")+".%^RESET%^\n";
-    tell_object(TP,placelist);
-  }
-
-// quests
-  mapkeys = ({});
-  myareas = ({});
-  mapkeys = keys(QUESTMAP);
-  if(!sizeof(mapkeys)) {
-    tell_object(TP,"%^BOLD%^%^GREEN%^There has been an error generating the quest list - please notify a wiz.%^RESET%^");
-    return 1;
-  }
-  for(i = 0; i < sizeof(mapkeys); i++) if(mapkeys[i] >= mymin && mapkeys[i] <= mymax) myareas += QUESTMAP[mapkeys[i]];
-  if(!sizeof(myareas))
-    tell_object(TP,"%^BOLD%^%^GREEN%^There are no quests considered appropriate for your level.%^RESET%^");
-  else {
-    placelist = "%^BOLD%^%^GREEN%^Quests that may be possible for you to complete include:%^RESET%^\n%^RESET%^%^ORANGE%^-"+implode(myareas,"\n%^RESET%^%^ORANGE%^-")+"%^RESET%^\n";
-    tell_object(TP,placelist);
-  }
-
-  if(mylevel == 19 && !TP->query_hm_quest()) {
-    tell_object(TP,"%^BOLD%^%^CYAN%^You must complete the Quest of the Swords before you can advance to the next level. You've heard that a woman in hut along the road north of Shadow city can get you started.%^RESET%^");
-  }
-  return 1;
 }
 
-int help(){
-    write(
-@OLI
-%^BOLD%^%^CYAN%^    <rumors>%^RESET%^
-    This command will reveal any recent rumors of adventurers passing through major city areas, as well as information about regions of the mud that may be of interest to you.  All of this is considered to be in-character information, as rumors that could be gathered from citizens or shopkeepers, psychics, and other roaming NPCs.
-OLI
-    );
-    return 1;
+void help()
+{
+
 }
