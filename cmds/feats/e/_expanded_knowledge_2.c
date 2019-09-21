@@ -15,7 +15,7 @@ int cmd_expanded_knowledge_2(string args)
         return 1;
     }
 
-    if(FEAT_CMD->expanded_knowledge_power(args,TP,"expanded knowledge 1","normal"))
+    if(FEAT_CMD->expanded_knowledge_power(args,TP,"expanded knowledge 2","normal"))
         TP->set("expanded_knowledge_change",time());
 
     return 1;
