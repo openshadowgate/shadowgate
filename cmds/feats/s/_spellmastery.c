@@ -24,6 +24,7 @@ void create() {
     feat_type("premanent");
     feat_category("MagicDamage");
     feat_name("spellmastery");
+    feat_syntax("spellmastery SPELLNAME");
     feat_prereq("Not warlock, Not psion, Not psywarriow");
     feat_desc("When selecting the SpellMastery feat, the character will be prompted to pick a spell that they are able to cast. From that point forward the character will be able to cast that spell at will at any time without needing components or memorization. Only spells of 1st and 2nd level may be picked for SpellMastery. If you have more than one class able to use the same spell, the power of the SpellMastery (as well as armor checks, etc) will be based upon the highest of these.
 
@@ -33,6 +34,43 @@ void create() {
     allow_tripped(1);
     set_required_for(({"spell power","improved spell power","greater spell power","hardenedminions","magic arsenal"}));
     set_replaces_feat("expanded knowledge 1");
+}
+
+int cmd_spellmastery(string args)
+{
+    int cancastflag;
+    string * myclasses, myclass;
+
+    if(TP->query("spellmastery_change") > time() - 60*60*24*3)
+    {
+        write("%^BOLD%^%^WHITE%^You can change your mastered spell only once in three days or by retaking this feat.");
+        return 1;
+    }
+
+    if(FEATS_D->usable_feat(TP,"greater spell mastery"))
+    {
+        write("Use <greater_spell_mastery SPELL NAME>");
+        return 1;
+    }
+
+    cancastflag = 0;
+    myclasses = TP->query_classes();
+    foreach(myclass in myclasses)
+    {
+        if(member_array(args,keys(MAGIC_D->index_spells_for_player(TP,myclass)))!=-1)
+            cancastflag++;
+    }
+
+    if(!cancastflag)
+    {
+        write("None of your classes can cast this spell.");
+        return 1;
+    }
+
+    TP->set("spellmastery_change",time());
+    TP->set("spellmastery_spell",args);
+
+    return 1;
 }
 
 int allow_shifted() { return 1; }

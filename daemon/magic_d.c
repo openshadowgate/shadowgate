@@ -240,7 +240,7 @@ void index_spells(){
 }
 
 /**
- * Filters spellist based on player class and feats.
+ * Filters spellist based on player class and feats and returns it.
  */
 mapping index_spells_for_player(object player, string myclass)
 {

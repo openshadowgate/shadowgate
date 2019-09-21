@@ -3,12 +3,31 @@
 
 inherit FEAT;
 
+#define FEAT_CMD "/cmds/mortal/_feats"
+
+int cmd_expanded_knowledge_2(string args)
+{
+    int ret;
+
+    if(TP->query("expanded_knowledge_change")>time()-60*60*24*3)
+    {
+        write("%^BOLD%^%^BLACK%^Too soon, once per three days, go away.");
+        return 1;
+    }
+
+    if(FEAT_CMD->expanded_knowledge_power(args,TP,"expanded knowledge 1","normal"))
+        TP->set("expanded_knowledge_change",time());
+
+    return 1;
+}
+
 void create() {
     ::create();
     feat_type("permanent");
     feat_category("Psionics");
     feat_name("expanded knowledge 2");
     feat_prereq("Psywarrior L21, Psion L11");
+    feat_syntax("expanded_knowledge_2 SPELLNAME");
     feat_desc("This feat allows a psionic character to master an additional power of any level up to one less than he can cast. The selected power may be from any psionic power list, even those normally reserved for a specific discipline.");
     permanent(1);
     psionic(1);
@@ -22,7 +41,7 @@ int prerequisites(object ob) {
     if(ob->query_class_level("psywarrior") < 21 && ob->query_class_level("psion") < 11) {
         dest_effect();
         return 0;
-    }    
+    }
     if(!FEATS_D->has_feat(ob,"expanded knowledge 1")){
         dest_effect();
         return 0;
@@ -53,4 +72,3 @@ void dest_effect() {
     remove_feat(TO);
     return;
 }
-
