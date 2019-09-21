@@ -318,7 +318,7 @@ string mybonus(object who, string stat)
     if(!objectp(who)) return "";
     bonus = BONUS_D->query_stat_bonus(who, stat);
     if(bonus > 0) return "+"+bonus;
-    else return ""+bonus;
+    else return " "+bonus;
 }
 
 string stat_display(int stat, int cur_stat)

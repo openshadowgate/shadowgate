@@ -40,7 +40,7 @@ string get_board()
     return "bugboard";
 }
 
-int cmd_game(string str) 
+int cmd_game(string str)
 {
     string arg, mtitle;
     if(!str)
@@ -70,7 +70,7 @@ int cmd_game(string str)
     return 1;
 }
 
-void do_post(string arg, string mtitle) 
+void do_post(string arg, string mtitle)
 {
     string trash;
     object ob;
@@ -82,7 +82,7 @@ void do_post(string arg, string mtitle)
     varg = arg;
     switch(arg)
     {
-        case "bug":                 
+        case "bug":
             write("You are about to post to a board for the wizzes saying there is a "
             "bug related to %^BOLD%^%^YELLOW%^"+mtitle+"%^RESET%^.  If you "
             "specified 'here', it will report the specific room you are "
@@ -91,7 +91,7 @@ void do_post(string arg, string mtitle)
             "try.  %^BOLD%^Please type in your message below.%^RESET%^  Any "
             "details you can provide about what was wrong, "
             "including a copy/paste or details of events just before the "
-            "error are usually helpful.\n");           
+            "error are usually helpful.\n");
             break;
         case "typo":
             write("You are about to post to a board for the immortals saying there is a "
@@ -113,38 +113,38 @@ void do_post(string arg, string mtitle)
             "continues to work on improving the game and you may or may not receive "+
             "a response.\n");
             break;
-    }    
-    if(mtitle == "here") 
+    }
+    if(mtitle == "here")
     {
         file = base_name(ETP);
         title = file;
     }
-    else if(ob = present(mtitle,TP) || ob = present(mtitle, ETP) ) 
+    else if(ob = present(mtitle,TP) || ob = present(mtitle, ETP) )
     {
         file = base_name(ob);
         title = file;
     }
-    if(!file) 
+    if(!file)
     {
         title = mtitle;
-        file = base_name(ETP); 
-    }              
+        file = base_name(ETP);
+    }
     rm(DIR_TMP+"/"+geteuid(previous_object())+"."+varg);
     previous_object()->edit(DIR_TMP+"/"+geteuid(previous_object())+"."+varg,
     "end_edit", TO);
 }
 
-end_edit() 
+end_edit()
 {
     string *lines;
     string tmpfile;
     tmpfile = file+":\n"+read_file(DIR_TMP+"/"+geteuid(TP)+"."+varg);
-    lines = explode(wrap(replace_string(tmpfile, "\n", " "), 72), "\n");
+    lines = explode(wrap(tmpfile, 72), "\n");
     rm("/tmp/"+TPQN+"."+varg);
     report(lines);
 }
- 
-report(string *lines) 
+
+report(string *lines)
 {
     string who, trash, *elements, rep, mlog;
     int x;
@@ -153,11 +153,11 @@ report(string *lines)
     elements = explode(file, "/");
     if(elements[0] == "realms") who = elements[1];
     else if(elements[0] == "d") who = elements[1];
-    else who = 0;    
-    switch(varg) 
+    else who = 0;
+    switch(varg)
     {
         case "bug": case "typo": case "idea":
-            rep = capitalize(varg) + " reported by "+capitalize(TPQN)+" " +ctime(time())+":\n";            
+            rep = capitalize(varg) + " reported by "+capitalize(TPQN)+" " +ctime(time())+":\n";
             break;
         case "praise":
             rep = capitalize(varg) + " given by "+capitalize(TPQN)+" " +ctime(time())+":\n";
@@ -166,16 +166,16 @@ report(string *lines)
     mlog = TLOG[varg];
     seteuid(UID_LOG);
     log_file(mlog, rep);
-    if(who) log_file("reports/"+who, rep);               
+    if(who) log_file("reports/"+who, rep);
     x = -1;
-    while(++x < sizeof(lines)) 
+    while(++x < sizeof(lines))
     {
         log_file(mlog, lines[x]+"\n");
         if(who) log_file("reports/"+who, lines[x]+"\n");
     }
     message = lines[0]+"\n";
     x=0;
-    while(++x < sizeof(lines)) 
+    while(++x < sizeof(lines))
     {
         message += lines[x]+"\n";
     }
@@ -183,12 +183,12 @@ report(string *lines)
     +base_name(ETP)+"\non "+ctime(time())+" related to %^BOLD%^"
     +file+"%^RESET%^.\n\n";
     //  title = file;
-    if (strlen(title) > 30) 
+    if (strlen(title) > 30)
     {
         while(strlen(title) > 29)
             sscanf(title, "%s/%s", trash, title);
         title = "~" + title;
-    }        
+    }
     seteuid(UID_CRESAVE);
     "/adm/daemon/bboard_d.c"->direct_post(get_board(),capitalize(TPQN),title,message);
     seteuid(getuid());
@@ -196,8 +196,8 @@ report(string *lines)
     write(capitalize(varg)+" reported!  Thank you!\n");
     return 1;
 }
- 
-void abort() 
+
+void abort()
 {
     notify_fail(capitalize(varg)+" report aborted.\n");
     rm("/tmp/"+TPQN+"."+varg);
@@ -222,9 +222,9 @@ game praise here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTI
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command lets you report a bug, typo, an idea, or even offer praise. If you are using the bug version of the command please ask for a wiz and state that you want to report a bug with a brief description of the problem before reporting it. A player or immortal may know if it's not a bug or it may help a wiz be able to get important information before time passes. 
+This command lets you report a bug, typo, an idea, or even offer praise. If you are using the bug version of the command please ask for a wiz and state that you want to report a bug with a brief description of the problem before reporting it. A player or immortal may know if it's not a bug or it may help a wiz be able to get important information before time passes.
 
-All versions of the command work with a %^ORANGE%^%^ULINE%^TARGET%^RESET%^, so if you can look at something with the targetid then using this command will report that id (in order to help immortals know exactly what item you are referencing). 
+All versions of the command work with a %^ORANGE%^%^ULINE%^TARGET%^RESET%^, so if you can look at something with the targetid then using this command will report that id (in order to help immortals know exactly what item you are referencing).
 
 Using here will report the room that you are currently in.
 
