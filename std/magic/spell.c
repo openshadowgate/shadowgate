@@ -1854,6 +1854,10 @@ void define_base_damage(int adjust)
         else
             sdamage = roll_dice(clevel,8);
     }
+    else if(spell_type=="monk")
+    {
+        sdamage = roll_dice(clevel,10);
+    }
     else
     {
         int slevel;
