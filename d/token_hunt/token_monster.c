@@ -60,9 +60,9 @@ void set_extra_items()
     if(TO->is_class("mage") || TO->is_class("psion"))
     {
         num = (int)TO->query_level();
-        if(TO->is_class("mage")) 
-        { 
-            ob = new("/d/magic/comp_bag"); 
+        if(TO->is_class("mage"))
+        {
+            ob = new("/d/magic/comp_bag");
             ob->move(TO);
             comp_keys = MAGE_COMPONENTS;
             for(i=0;i<num;i++)
@@ -472,7 +472,7 @@ void set_inventory(string level)
                 "/d/dagger/derro/obj/moblemanspants",
                 "/d/deku/armors/ring_p",
                 "/d/islands/common/obj/obj-old-nienne/shimmeringcape2",
-                "/d/antioch/ruins/obj/neutralgloves", 
+                "/d/antioch/ruins/obj/neutralgloves",
                 "/d/azha/obj/gmr_ring",});
     HIGH_H = ({ "/d/common/obj/armour/fullplate",
                 "/d/common/obj/armour/helm",
@@ -516,7 +516,7 @@ void set_inventory(string level)
         if(MYCLASS_TWO)
         {
             if(member_array(MYCLASS_TWO,CLASS_STYLES[tmp[i]]) != -1)
-            {                
+            {
                 style_two = tmp[i];
             }
         }
@@ -591,7 +591,7 @@ void set_inventory(string level)
 //        tell_object(find_player("nienne"),equipment[i]);
         if(!file_exists(equipment[i]+".c")) { continue; }
         if(!objectp(ob = new(equipment[i]))) { continue; }
-        
+
         if(level == "low")
         {
             ob->remove_property("enchantment");
@@ -613,16 +613,16 @@ void class_setup()
     set_race(MYTYPE);
     add_id(MYTYPE);
     add_id(MYCLASS);
-    
+
     if(MYTYPE == "wemic") { set_body_type("wemic"); }
     else { set_body_type("human"); }
-    
+
     set_size(SIZES[MYTYPE]);
-    
+
     set_class(MYCLASS);
-    if(MYCLASS_TWO) 
-    { 
-        set_class(MYCLASS_TWO); 
+    if(MYCLASS_TWO)
+    {
+        set_class(MYCLASS_TWO);
         add_id(MYCLASS_TWO);
     }
 
@@ -644,7 +644,7 @@ void class_setup()
         }
     }
     set_mlevel(MYCLASS,level);
-    
+
     switch(MYCLASS)
     {
     case "cleric":
@@ -747,7 +747,7 @@ void initial_setup()
         "antipaladin"   : "%^RESET%^%^RED%^A gallant "+MYGENDER+" "+MYTYPE+" with "+MYEYE+"%^RESET%^%^RED%^ eyes and "+MYHAIR+"%^RESET%^%^RED%^ hair",
         "psion"         : "%^RESET%^%^RED%^An introspective "+MYGENDER+" "+MYTYPE+" with "+MYEYE+"%^RESET%^%^RED%^ eyes and "+MYHAIR+"%^RESET%^%^RED%^ hair"
              ]);
-    
+
     set_short(SHORTS[MYCLASS]);
 
     switch(MYCLASS)
@@ -854,9 +854,9 @@ string query_monster_level()
     return MONSTER_LEVEL;
 }
 
-void set_monster_level(string level) 
-{ 
-    MONSTER_LEVEL = level; 
+void set_monster_level(string level)
+{
+    MONSTER_LEVEL = level;
     initial_setup();
 }
 
@@ -864,7 +864,7 @@ void horse_me()
 {
     object ob;
     set_nwp("riding",50);
-    ob = new("/d/shadow/room/city/cguild/paladin/war_horse.c");
+    ob = new("/d/common/mounts/war_horse");
     ob->set_owner(TO);
     ob->set_property("water breather",1);
     ob->set_level((int)TO->query_level());
@@ -916,15 +916,15 @@ void create()
     set_id(({"monster","token monster","shifter","shapeshifter"}));
     set_property("add kits",50);
     set_alignment(9);
-    set_nogo(({"/d/islands/common/aramanth/mountain11"}));	
+    set_nogo(({"/d/islands/common/aramanth/mountain11"}));
     set_property("demongate flying",1);
     set_property("water breather",1);
     set_property("no death",1);
-    
+
     //set_speed(1); // remove after they've finished bug finding
     //set_moving(1);
     //set_speed(1);
-    
+
     set_monster_feats(({ "spell focus",
                          "spell penetration",
                          "perfect caster",
@@ -1175,9 +1175,9 @@ void combat_action(string action)
             if(!objectp(attackers[i])) { continue; }
             TO->force_me("shatter "+attackers[i]->query_name()+"");
         }
-        break;			
+        break;
     case "dispel":
-        if(!TO->query_property("my_dispel_timer") || (int)TO->query_property("my_dispel_timer") < time())            
+        if(!TO->query_property("my_dispel_timer") || (int)TO->query_property("my_dispel_timer") < time())
         {
             if(!cast_check(TO)) { break; }
             TO->remove_property("my_dispel_timer");
@@ -1387,7 +1387,7 @@ void level_reaction(int num,object target)
 {
     object room;
     if(!objectp(TO)) { return; }
-    if(!objectp(target)) { return; }   
+    if(!objectp(target)) { return; }
     if(!objectp(room=environment(target))) { return; }
     if(ETO != room) { return; }
 
@@ -1450,7 +1450,7 @@ void level_test()
                 return;
             }
         }
-    } 
+    }
 }
 
 void enemy_test()
@@ -1492,15 +1492,15 @@ void split_vials()
 void heart_beat()
 {
     int i;
-    object *attackers=({}); 
+    object *attackers=({});
 
     if(!objectp(TO)) { return; }
     if(!objectp(ETO)) { return; }
-    
+
     level_test();
-   
+
     ::heart_beat();
-    
+
     if(!objectp(TO)) { return; }
     if(!objectp(ETO)) { return; }
 
@@ -1510,7 +1510,7 @@ void heart_beat()
     if(objectp(TO) && TO->is_class("antipaladin"))
     {
         if(!TO->query_in_vehicle())
-        {   
+        {
             TO->force_me("mount horse");
             TO->force_me("unwield lance");
             TO->force_me("wield sword");
@@ -1521,10 +1521,10 @@ void heart_beat()
             TO->force_me("wield lance");
         }
     }
-    
+
     if(!objectp(TO)) { return; }
     enemy_test();
-    attackers = TO->query_attackers();    
+    attackers = TO->query_attackers();
     if(sizeof(attackers))
     {
         for(i=0;i<sizeof(attackers);i++)
@@ -1566,7 +1566,7 @@ void die(object ob)
     case "low":  type = "copper"; num = roll_dice(1,8) + 4; break;
     }
     if(!objectp(TO)) { return; }
-    for(i=0;i<num;i++) 
+    for(i=0;i<num;i++)
     {
         token = new(FILE_PATH"single_token.c");
         token->set_token_type(type);
@@ -1575,12 +1575,12 @@ void die(object ob)
     ::die(ob);
 }
 
-int cmd_stab(string str) 
+int cmd_stab(string str)
 {
     if(!objectp(TP)) { return 0; }
     if(!objectp(TO)) { return 0; }
-    if(TO->id(str)) 
-    { 
+    if(TO->id(str))
+    {
         ENEMIES += ({ TP });
         return 0;
     }
@@ -1593,5 +1593,3 @@ void init()
     add_action("cmd_stab","stab");
     return;
 }
-
-
