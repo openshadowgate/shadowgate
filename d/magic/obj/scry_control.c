@@ -1,14 +1,14 @@
 // Scry Control
 // For use with /daemon/ic_scry_locate_d
 // Controls a scry object which collects information and passes
-// it back to the observer.   This control allows the user to 
+// it back to the observer.   This control allows the user to
 // control the scrying that the object is doing, as well as to
 // allow any spells to be cast though the scrying device.
 // Thorn@ShadowGate
 // 2 January 2001
 // scry_control.c
-// Scry power stuff added by ~Circe~ since it seems to have been 
-// intended from the beginning but was missing.  This will 
+// Scry power stuff added by ~Circe~ since it seems to have been
+// intended from the beginning but was missing.  This will
 // hopefully help fix the problem of scry blockers always working
 // 6/20/08
 
@@ -35,7 +35,7 @@ int power;
 
 void create(){
   ::create();
-  
+
   set_name("scry_control");
   set_property("no detect",1);
   set_id(({"scryx333"}));
@@ -60,14 +60,14 @@ void init() {
   //	add_action("cast","cast");
 }
 
-void dest_me() 
-{ 
-    if(objectp(parent)) 
+void dest_me()
+{
+    if(objectp(parent))
 	{
-		if(query_property("parent_destroying")) return; 
+		if(query_property("parent_destroying")) return;
 		parent->set_property("scry_ob_destroying", 1);
-		parent->dest_effect(); 
-	} 
+		parent->dest_effect();
+	}
 }
 
 int move(mixed dest){
@@ -139,11 +139,11 @@ void no_move() { no_move = 1; }
 // If this object is not a spell.
 void no_spell() { no_spell = 1; }
 
-// This call initiates the self-destruct sequence for this scry 
-// attempt.  It will use the scry and locate daemon call to 
+// This call initiates the self-destruct sequence for this scry
+// attempt.  It will use the scry and locate daemon call to
 // properly clean up any objects or properties that are left
 // over and exit gracefully.
-void self_destruct() 
+void self_destruct()
 {
     dest_me();
   	SCRY_D->stop_scry(TO, 0);
@@ -160,7 +160,7 @@ To start scrying a person................ <scry person [name]>
 To start scrying a location.............. <scry location [name]>
 To stop scrying.......................... <stop scrying>
 
-Note: You must use the remember command to designate locations for 
+Note: You must use the remember command to designate locations for
 scrying.  You also must recognize a person as something to scry them.
 
 While scrying:
@@ -214,7 +214,7 @@ int scry(string str) {
         write("%^BOLD%^RED%^Why don't you just look in a mirror or something?");
         return 1;
       }
-      
+
       // This change below should give a miss chance based on scrying
       // someone by their true name without that name being recognized by
       // the caster. 1 in 4 chance of getting the right parson, as per DMG
@@ -250,7 +250,7 @@ int scry(string str) {
           return 1;
        }
     }
-    
+
     if(!objectp(target)) {
       write("%^BOLD%^RED%^You can't get a fix on that!");
       return 1;
@@ -273,7 +273,7 @@ int scry(string str) {
           return 1;
        }
     }
-    
+
   }
   else {
     write("Usage: scry person <name>  OR  "
@@ -348,7 +348,7 @@ int peer(string str) {
   write("%^BOLD%^GREEN%^The image zooms out briefly, granting a glance...");
   scry_object->look_room(environment(scry_object));
   return 1;
-}	
+}
 
 int look(string str) {
   if(str != "through "+alias) return 0;
@@ -361,14 +361,15 @@ int look(string str) {
      return 1;
   }
   write("%^BOLD%^GREEN%^The image zooms out, giving you a long look around...");
-  scry_object->long_look_room(environment(scry_object));
+  if(objectp(scry_object))
+      scry_object->long_look_room(environment(scry_object));
   return 1;
 }
 
 int recognize(string str) {
   string who,as;
   object ob;
-  
+
   if(!str) {
     return 0;
   }
@@ -401,14 +402,14 @@ int cast(string str) {
   int align;
   string str2,tmp;
   string type, spell, tar;
-  
+
   if(TP != target) return 0;
-  
+
   if(!str){
     write("Cast what on/at what?");
     return 0;
   }
-  
+
   if(!sscanf(str,"%s %s through "+alias,type,str2))
     if(!sscanf(str,"%s %s through "+alias,type,str2))
       if(!sscanf(str,"%s %s through "+alias,type,str2))
@@ -418,7 +419,7 @@ int cast(string str) {
     if(!sscanf(str,"%s %s at %s",type,str2,tar))
       if(!sscanf(str,"%s %s to %s",type,str2,tar))
 	str2 = str;
-  
+
   if(!member_array(str2, ALLOWED_SPELLS)) {
     write("You cannot cast that spell with this "+alias+".");
     return 1;
@@ -438,15 +439,15 @@ int cast(string str) {
     flag = 0;
     armor = TP->all_armour();
     i = sizeof(armor);
-    
+
     for(j=0;j<i;j++){
-      if((string)armor[j]->query_type()!="clothing" && 
-	 (string)armor[j]->query_type()!="bracer" && 
-	 (string)armor[j]->query_type()!="ring" && 
+      if((string)armor[j]->query_type()!="clothing" &&
+	 (string)armor[j]->query_type()!="bracer" &&
+	 (string)armor[j]->query_type()!="ring" &&
 	 !armor[j]->query_property("magicarmor")) {
 	if(TP->is_class("bard") &&
-	   ((string)armor[j]->query_type() == "chain" || 
-	    (string)armor[j]->query_type() == "leather")) 
+	   ((string)armor[j]->query_type() == "chain" ||
+	    (string)armor[j]->query_type() == "leather"))
 	  continue;
 	flag = 1;
 	break;
@@ -456,7 +457,7 @@ int cast(string str) {
       write("You cannot cast while wearing all that armor!");
       return 1;
     }
-  }  
+  }
   tmp = "/cmds/spells/"+spell[0..0]+"/_"+spell+".c";
   if(!file_exists(tmp)){
     tmp = "/cmds/spells/"+spell[0..0]+"/_"+spell+".c";
@@ -477,7 +478,7 @@ int remember(string str) {
   string filename;
   mapping remembered;
   string name;
-  
+
   if (!str) return 0;
   if (sscanf(str,"through mirror as %s",name) || sscanf(str,"through ball as %s",name) || sscanf(str,"through crystal ball as %s",name) || sscanf(str,"through "+alias+" as %s",name)) {
 //stuff for crystal ball added by Circe 6/4/07
@@ -488,7 +489,7 @@ int remember(string str) {
      write("You cannot do that in your current state!");
      return 1;
   }
-    
+
     remembered = TP->query_rem_rooms();
   if (!objectp(scry_object)) return notify_fail("Something is wrong with the scrying sensor. Please contact a wiz.\n");
     ob = environment(scry_object);
