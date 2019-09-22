@@ -1,3 +1,12 @@
+/**
+ * @file
+ * @brief feats command
+ */
+
+/*
+ * Some of functions in this file have an external use.
+ */
+
 //updated to include Psionics category for psions/psywarriors
 //~Circe~ 9/3/15
 #include <std.h>
