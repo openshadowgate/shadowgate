@@ -13,7 +13,7 @@ void create()
     set_spell_level(([ "druid" : 4, "bard" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS kiss of feywild [on TARGET]");
-    set_damage_desc("adds passive spelled regeneration to living");
+    set_damage_desc("on living, fast healing 2 (passive regeneration 2d12 per round)");
     set_description("Lo, Their Endless Host, the Harbingers of Life, Mercy and Kindness Followed Where'er She Walked, Where Her Court Will be Held.");
 	set_helpful_spell(1);
 }
@@ -65,31 +65,11 @@ void spell_effect()
         int duration = clevel * ROUND_LENGTH * 5;
         tell_object(target,"%^BOLD%^%^GREEN%^You feel more healthy and joyful.");
         target->set_property("spelled",({TO}));
-
+        target->set_property("fast healing",2);
         spell_successful();
         addSpellToCaster();
-
-        execute_attack();
-
         call_out("dest_effect",duration);
     }
-}
-
-void execute_attack()
-{
-    ::execute_attack();
-    if(!objectp(caster)){
-        dest_effect();
-        return;
-    }
-    place = environment(caster); // In the case caster moves
-
-    if((int)caster->query_hp() < (int)caster->query_max_hp())
-    {
-        tell_object(caster,"%^BOLD%^%^GREEN%^The %^MAGENTA%^song%^GREEN%^ %^CYAN%^heals%^GREEN%^ some of your wounds%^RESET%^");
-        damage_targ(caster,caster->return_target_limb(),-roll_dice(1,clevel),"positive energy");
-    }
-    place->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect()
@@ -98,6 +78,7 @@ void dest_effect()
     {
         tell_object(target,"%^BOLD%^%^GREEN%^The elation you felt begins to ebb as life's realities return.%^RESET%^");
         target->remove_property_value("spelled", ({TO}) );
+        target->set_property("fast healing",-2);
         target->remove_property("kiss of feywild");
     }
     ::dest_effect();
