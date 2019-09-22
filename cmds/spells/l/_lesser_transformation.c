@@ -3,16 +3,17 @@
 #include <magic.h>
 inherit SPELL;
 
-int abonus; 
+int abonus;
 int duration;
 
 void create() {
     ::create();
     set_spell_name("lesser transformation");
-    set_spell_level(([ "psion" : 7 ])); 
+    set_spell_level(([ "psion" : 7 ]));
     set_spell_sphere("alteration");
     set_discipline("egoist");
     set_syntax("cast CLASS lesser transformation");
+    set_damage_desc("clevel / 16 + 1 bonus to athletics skill and reflex save, half that to number of attacks");
     set_description("A lesser form of transformation that yet, however, requires greater subtlety in casting to avoid ill-effects will reshape casters in a minor way, empowering their muscles and granting better prowess in the combat. Much less powerful than its greater version it won't impede casters ability to use offensive spells. This spell will be overwritten by similar effects, such as rage and transformation.");
     set_verbal_comp();
     set_somatic_comp();
@@ -33,19 +34,18 @@ void spell_effect(int prof)
     abonus = 1 + (clevel / 16);
     duration = 1800 + (clevel * 10);
 
-
     tell_object(caster,"%^MAGENTA%^You feel agitated as your muscles tense.");
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" seems agitated and restless as "+caster->QP+" muscles become tensed.%^RESET%^",caster);
-    
-    caster->set_property("fighter_attacks_mod",abonus);
+
+    caster->set_property("fighter_attacks_mod",abonus/2+1);
     caster->add_skill_bonus("athletics",abonus);
     caster->add_saving_bonus("reflex",abonus);
     caster->set_property("lesser_transformation",1);
-    caster->set_property("spelled", ({TO}) );    
+    caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
     call_out("dest_effect",(clevel*20));
-    //TODO: add test that checks for rage/transformation and calls dest_effect    
+    //TODO: add test that checks for rage/transformation and calls dest_effect
     call_out("validate_conditions",ROUND_LENGTH*2);
 }
 
@@ -66,7 +66,7 @@ void dest_effect()
 {
     if(find_call_out("validate_conditions") != -1)
         remove_call_out("validate_conditions");
-    if(objectp(caster)) 
+    if(objectp(caster))
     {
         caster->remove_property("lesser_transformation");
         caster->set_property("fighter_attacks_mod",-abonus);
@@ -80,4 +80,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
