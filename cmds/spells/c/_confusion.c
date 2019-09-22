@@ -17,9 +17,12 @@ void create(){
     set_spell_sphere("enchantment_charm");
     set_spell_domain("trickery");
     set_syntax("cast CLASS confusion on TARGET");
+    set_damage_desc("confusion on target");
     set_description("This spell will attempt to confuse the target and make them do random things.  They might babble "
 "incoherently, attack the closest thing to them, or simply wander away.  When used on a player, it simply causes them to "
-"stand and stare blankly.");
+"stand and stare blankly.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -63,7 +66,7 @@ void spell_effect(int prof){
         TO->dest_effect();
         return;
     }else{
-        
+
         if(mind_immunity_check(target, "default"))
         {
             target->add_attacker(caster);
@@ -72,7 +75,7 @@ void spell_effect(int prof){
             dest_effect();
             return;
         }
-        
+
         if(target->is_player()){
             tell_object(target,"%^MAGENTA%^Your mind suddenly becomes overwhelmed with "
                 "jumbled thoughts and images, and you stand confused!");
@@ -185,9 +188,9 @@ void dest_effect(){
             if(objectp(TO)) TO->remove();
             return;
         }
-    }        
+    }
     if(find_call_out("confuse_em")) remove_call_out("confuse_em");
-    //added the below check for objectp after environment bugs when the 
+    //added the below check for objectp after environment bugs when the
     //target had died.  Circe 9/19/05
     if(objectp(mytarg)){
        tell_object(mytarg,"%^MAGENTA%^Suddenly, your mind clears and "+
