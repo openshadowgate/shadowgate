@@ -16,7 +16,9 @@ void create()
     set_damage_desc("untyped");
     set_description("This spell will send a burst of pure darkness out in a circle from the caster.  Any enemies "
         "caught in the area will suffer damage from the shadowy energy.  Those creatures who fail their save will find that "
-        "the darkness also steals away their vision temporarily.");
+        "the darkness also steals away their vision temporarily.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(1);

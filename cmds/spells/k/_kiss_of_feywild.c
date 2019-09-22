@@ -13,8 +13,10 @@ void create()
     set_spell_level(([ "druid" : 4, "bard" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS kiss of feywild [on TARGET]");
-    set_damage_desc("on living, fast healing 2 (passive regeneration 2d20 per round)");
-    set_description("Lo, Their Endless Host, the Harbingers of Life, Mercy and Kindness Followed Where'er She Walked, Where Her Court Will be Held.");
+    set_damage_desc("on living, fast healing 2");
+    set_description("Lo, Their Endless Host, the Harbingers of Life, Mercy and Kindness Followed Where'er She Walked, Where Her Court Will be Held.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
 	set_helpful_spell(1);
 }
 
@@ -30,7 +32,7 @@ int preSpell()
     if(target->query_property("kiss of feywild") &&
        !target->is_undead())
     {
-        tell_object(caster,"The spell is repelled by similar magic.");
+        tell_object(caster,"%^BOLD%^%^BLACK%^You feel your spell repelled...");
         TO->remove();
         return 0;
     }
@@ -62,7 +64,7 @@ void spell_effect()
     }
     else
     {
-        int duration = clevel * ROUND_LENGTH * 5;
+        int duration = clevel * ROUND_LENGTH * 10;
         tell_object(target,"%^BOLD%^%^GREEN%^You feel more healthy and joyful.");
         target->set_property("spelled",({TO}));
         target->set_property("fast healing",2);
