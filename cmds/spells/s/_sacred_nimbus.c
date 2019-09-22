@@ -66,7 +66,7 @@ void execute_attack()
     if(!objectp(caster))                        { dest_effect(); return; }
     if(strikes > clevel)                        { dest_effect(); return; }
 
-    attackers = filter_array(caster->query_attackers(),(:!($1->query_alignment() % 3):));
+    attackers = filter_array(caster->query_attackers(),(:!(objectp($1)?($1->query_alignment() % 3):0):));
 
     if(!sizeof(attackers))
     {
