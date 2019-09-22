@@ -13,7 +13,7 @@ void create()
     set_spell_level(([ "druid" : 4, "bard" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS kiss of feywild [on TARGET]");
-    set_damage_desc("on living, fast healing 2 (passive regeneration 2d12 per round)");
+    set_damage_desc("on living, fast healing 2 (passive regeneration 2d20 per round)");
     set_description("Lo, Their Endless Host, the Harbingers of Life, Mercy and Kindness Followed Where'er She Walked, Where Her Court Will be Held.");
 	set_helpful_spell(1);
 }
