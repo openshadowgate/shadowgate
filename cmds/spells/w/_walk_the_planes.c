@@ -174,7 +174,7 @@ void move_caster(object endplace, int prof) {
       }
     }
 
-    if(!sizeof(presentparty)) 
+    if(!sizeof(presentparty))
     { // teleporting alone!
       followers = caster->query_followers();
       if(sizeof(followers)) {
@@ -267,11 +267,11 @@ void move_caster(object endplace, int prof) {
       if(sizeof(followers)) {
         presentparty += followers;
         for(i=0;i<sizeof(followers);i++) {
-            if(!objectp(followers[i])) 
+            if(!objectp(followers[i]))
             {
                 presentparty -= ({followers[i]});
                 continue;
-            }            
+            }
             if(member_array(followers[i],presentparty) != -1) continue;
             //followers[i]->set_following(0);
             //caster->remove_follower(followers[i]);
@@ -282,9 +282,8 @@ void move_caster(object endplace, int prof) {
     }
     if(caster->query_hp() < caster->query_max_hp()){ // the travel heals the caster if injured!
       tell_object(caster,"%^BOLD%^%^CYAN%^You feel refreshed by your brief passage across the planes!%^RESET%^");
-      healed = ((roll_dice(6,4))+(clevel*2)); // equiv to a cure serious
-      healed *= -1;
-      damage_targ(caster,"torso", healed,"positive energy");
+      healed = -sdamage*5/4;
+      damage_targ(caster,"torso", -healed,"untyped");
     }
     dest_effect();
 }
