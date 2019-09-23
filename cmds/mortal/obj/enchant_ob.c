@@ -14,8 +14,6 @@
 
 #define CRAFTING_CLASSES ({ "mage","warlock" }) // classes that are innate crafters get a bonus to their crafting DC check
 
-#define HEADER "\n%^RESET%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n"
-
 inherit DAEMON;
 
 int DEST_TIMER;
@@ -207,11 +205,9 @@ int check_materials(object tp,int amt)
 
     if(count < amt)
     {
-        db(tp,  ""+HEADER+"\n"
-                "%^RESET%^%^BOLD%^%^YELLOW%^You don't seem to have enough enchanting materials for that.  You "
+        db(tp,  "%^RESET%^%^BOLD%^%^YELLOW%^You don't seem to have enough enchanting materials for that.  You "
                 "only seem to have %^RESET%^%^BOLD%^%^MAGENTA%^"+count+"%^RESET%^%^BOLD%^%^YELLOW%^, but you "
-                "need %^RESET%^%^BOLD%^%^MAGENTA%^"+amt+"%^RESET%^%^BOLD%^%^YELLOW%^.\n"
-                ""+HEADER+"");
+                "need %^RESET%^%^BOLD%^%^MAGENTA%^"+amt+"%^RESET%^%^BOLD%^%^YELLOW%^.\n");
         return 0;
     }
 
@@ -232,18 +228,18 @@ int bonus_allowed(object tp, object item, string bonus, int amt)
     {
         if(member_array(bonus,VALID_BONUSES) == -1)
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^The bonus %^RESET%^%^BOLD%^%^MAGENTA%^"+bonus+"%^RESET%^%^BOLD%^%^YELLOW%^ appears to be "
                     "invalid.  If you think this is wrong please notify a wiz.\n"
-                    ""+HEADER+"");
+                    );
             return 0;
         }
         if(member_array(bonus,restricted_skills) != -1)
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^The following skills have been restricted and can no longer be crafted "
                     "on items: %^RESET%^%^BOLD%^%^MAGENTA%^"+implode(restricted_skills," - ")+"\n"
-                    ""+HEADER+"\n");
+                    );
             return 0;
         }
     }
@@ -252,27 +248,27 @@ int bonus_allowed(object tp, object item, string bonus, int amt)
     {
         if(item->query_type() != "shield")
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^You can only enchant shields with the %^RESET%^%^BOLD%^%^MAGENTA%^shieldMiss%^RESET%^%^BOLD%^%^YELLOW%^ bonus, your "
                     ""+item->query_short()+" %^RESET%^%^BOLD%^%^YELLOW%^appears to be a %^RESET%^%^BOLD%^%^MAGENTA%^"+item->query_type()+"%^RESET%^%^BOLD%^%^YELLOW%^ instead.\n"
-                    ""+HEADER+"");
+                    );
             return 0;
         }
     }
 
     if(!CHECK_D->valid_limb_check(item,tp))
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^Your "+item->query_short()+"%^RESET%^%^BOLD%^%^YELLOW%^ appears to have invalid limbs set, please contact a wiz.\n"
-                ""+HEADER+"");
+                );
         return 0;
     }
 
     if(item->is_instrument() || item->is_ammo())
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^You are not allowed to enchant instruments or ammo.\n"
-                ""+HEADER+"");
+                );
         return 0;
     }
 
@@ -282,16 +278,16 @@ int bonus_allowed(object tp, object item, string bonus, int amt)
     {
         if(strsrch(files[i],"/d/common/obj/sheath/") != -1)
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^Sorry, you are not allowed to enchant sheaths.\n"
-                    ""+HEADER+"");
+                    );
             return 0;
         }
         if(strsrch(files[i],"/d/common/obj/misc/carving") != -1)
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^You are not allowed to enchant carvings.\n"
-                    ""+HEADER+"");
+                    );
             return 0;
         }
     }
@@ -311,10 +307,10 @@ int bonus_allowed(object tp, object item, string bonus, int amt)
 
     if(bonus == "enchantment" && flat_level > (tp->query_character_level() - 7))
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^You can't create an item with an enchantment that high.  The max level enchantment that "
                 "you can create is %^RESET%^%^BOLD%^%^MAGENTA%^"+((tp->query_character_level() - 7) / 7)+"%^RESET%^%^BOLD%^%^YELLOW%^.\n"
-                ""+HEADER+"");
+                );
         return 0;
     }
 
@@ -334,12 +330,12 @@ int bonus_allowed(object tp, object item, string bonus, int amt)
         {
             if(!avatarp(tp) || sizeof(bonus_names) >= 3)
             {
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "%^RESET%^%^BOLD%^%^YELLOW%^No item can have more than three different "
                         "bonuses.  A weapon or armor special counts as one bonus, and the magical "
                         "property of the item also counts as a bonus.  For example, "
                         "a +1 sword with a +1 sight bonus counts as two bonuses.\n"
-                        ""+HEADER+"");
+                        );
                 return 0;
             }
         }
@@ -370,26 +366,26 @@ int bonus_allowed(object tp, object item, string bonus, int amt)
 
     if(flat_level == 0 && bonus != "enchantment")
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^Your item is not yet enchanted. %^RESET%^%^BOLD%^%^MAGENTA%^(+'s)%^RESET%^%^BOLD%^%^YELLOW%^  %^RESET%^%^BOLD%^%^YELLOW%^The first thing that you "
                 "must do to enchant an item is increase it's base %^RESET%^%^BOLD%^%^MAGENTA%^enchantment%^RESET%^%^BOLD%^%^YELLOW%^ property to make it magical enough "
                 "to hold the properties that you wish to put on it.\n"
-                "%^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^enchant %^RESET%^%^BOLD%^%^MAGENTA%^<item> %^RESET%^%^BOLD%^%^GREEN%^1 enchantment\n"
-                ""+HEADER+"");
+                "%^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^enchant %^RESET%^%^BOLD%^%^MAGENTA%^ITEM %^RESET%^%^BOLD%^%^GREEN%^1 enchantment\n"
+                );
         return 0;
     }
 
 
     if(value > flat_level)
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^A %^RESET%^%^BOLD%^%^MAGENTA%^"+bonus+" %^RESET%^%^BOLD%^%^YELLOW%^bonus "
                 "of %^RESET%^%^BOLD%^%^MAGENTA%^"+amt+" %^RESET%^%^BOLD%^%^YELLOW%^would require a base item level "
                 "of %^RESET%^%^BOLD%^%^MAGENTA%^"+value+"%^RESET%^%^BOLD%^%^YELLOW%^.  The item you "
                 "are trying to add the bonus to is only level "
                 "%^RESET%^%^BOLD%^%^MAGENTA%^"+flat_level+"%^RESET%^%^BOLD%^%^YELLOW%^.  This level is determined by "
                 "the item's base enchantment level.  You must increase its base enchantment first.\n"
-                ""+HEADER+"");
+                );
         return 0;
     }
 
@@ -406,19 +402,19 @@ int special_allowed(object tp, object item, mapping special_info)
     type = special_info["type"];
     if(!type)
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^B_RED%^%^BOLD%^%^CYAN%^You don't seem to have a special type set, please contact a wiz.%^RESET%^"
-                ""+HEADER+"");
+                );
         return 0;
     }
 
     if(!item->query_property("enchantment"))
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^Only magical items can be enchanted to have specials.  To encahnt your "
                 ""+item->query_short()+" please use %^RESET%^%^BOLD%^%^GREEN%^enchant "
-                "%^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt> \"enchantment\"%^RESET%^\n"
-                ""+HEADER+"");
+                "%^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT \"enchantment\"%^RESET%^\n"
+                );
         return 0;
     }
 
@@ -426,11 +422,11 @@ int special_allowed(object tp, object item, mapping special_info)
     {
         if(member_array(type, allowed_armor) == -1)
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^A %^RESET%^%^BOLD%^%^MAGENTA%^"+type+" %^RESET%^%^BOLD%^%^YELLOW%^bonus "
                     "is not allowed for armors, only the following specials are allowed for armors: \n"
                     "    %^RESET%^%^BOLD%^%^MAGENTA%^"+implode(allowed_armor,", ")+".\n"
-                    ""+HEADER+"");
+                    );
             return 0;
         }
         if(item->query_property("struck")) { specials = explode(item->query_property("struck"),", "); }
@@ -438,10 +434,10 @@ int special_allowed(object tp, object item, mapping special_info)
         {
             if(member_array(type, specials) != -1)
             {
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "Your "+item->query_short()+" already seems to have a "+type+" specials.  You can have more "
                         "than one special on an item, but they must be different types of specials.\n"
-                        ""+HEADER+"");
+                        );
                 return 0;
             }
         }
@@ -450,11 +446,11 @@ int special_allowed(object tp, object item, mapping special_info)
     {
         if(member_array(type, allowed_weapon) == -1)
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^A %^RESET%^%^BOLD%^%^MAGENTA%^"+type+" %^RESET%^%^BOLD%^%^YELLOW%^bonus "
                     "is not allowed for weapons, only the following specials are allowed for weapons:\n"
                     "    %^RESET%^%^BOLD%^%^MAGENTA%^"+implode(allowed_weapon,", ")+".\n"
-                    ""+HEADER+"");
+                    );
             return 0;
         }
         if(item->query_property("hit")) { specials = explode(item->query_property("hit"),", "); }
@@ -462,10 +458,10 @@ int special_allowed(object tp, object item, mapping special_info)
         {
             if(member_array(type, specials) != -1)
             {
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "Your "+item->query_short()+" already seems to have a "+type+" specials.  You can have more "
                         "than one special on an item, but they must be different types of specials.\n"
-                        ""+HEADER+"");
+                        );
                 return 0;
             }
         }
@@ -475,11 +471,11 @@ int special_allowed(object tp, object item, mapping special_info)
 
     if(member_array(type,specials) != -1)
     {
-        db(tp,  ""+HEADER+"\n"
+        db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^Your "+item->query_short()+" %^RESET%^%^BOLD%^%^YELLOW%^already "
                 "has a %^RESET%^%^BOLD%^%^MAGENTA%^"+type+" %^RESET%^%^BOLD%^%^YELLOW%^special, and "
                 "can't have another of the same type.\n"
-                ""+HEADER+"");
+                );
         return 0;
     }
 
@@ -543,11 +539,11 @@ int do_exp_cost(object tp, object item, int cost)
     {
         if((int)tp->set_XP_tax(exp_cost, 0, "improvement") == -1)
         {
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                 "%^RESET%^%^BOLD%^%^YELLOW%^You don't have enough exp left to spend to enchant your "
                 ""+item->query_short()+".  It would require %^RESET%^%^BOLD%^%^MAGENTA%^"+exp_cost+" "
                 "%^RESET%^%^BOLD%^%^YELLOW%^experience points.\n"
-                ""+HEADER+"");
+                );
             return 0;
         }
 
@@ -1192,7 +1188,7 @@ int enchanting_menu(string str, mapping map)
 
         case "list":
 
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^The following bonuses are available for enchanting an item: \n\n"
 
                     ""+sort_valid_bonuses()+"\n\n"
@@ -1207,7 +1203,7 @@ int enchanting_menu(string str, mapping map)
 
                     "%^RESET%^%^BOLD%^%^YELLOW%^Armors are allowed the following specials : \n%^RESET%^%^BOLD%^%^GREEN%^"+implode(allowed_armor,", ")+"\n\n"
                     "%^RESET%^%^BOLD%^%^YELLOW%^Weapons are allowed the following specials : \n%^RESET%^%^BOLD%^%^GREEN%^"+implode(allowed_weapon,", ")+".\n"
-                    ""+HEADER+"");
+                    );
 
             input_to("enchanting_menu",map);
             return;
@@ -1221,14 +1217,14 @@ int enchanting_menu(string str, mapping map)
             {
                 if(type != "special" && sscanf(str, "cost %s %d %s", thing, amt, type) != 3)
                 {
-                    db(tp,  ""+HEADER+"\n"
-                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: cost %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt> <type>  \n"
+                    db(tp,
+                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: cost %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT TYPE  \n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^cost bracers 2 attack bonus \n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^cost bracers 1 enchantment \n\n"
-                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: cost %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt>%^RESET%^%^BOLD%^%^YELLOW%^ special %^RESET%^%^BOLD%^%^MAGENTA%^<type> \n"
+                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: cost %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT%^RESET%^%^BOLD%^%^YELLOW%^ special %^RESET%^%^BOLD%^%^MAGENTA%^TYPE \n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^cost sword 1 special stun\n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^cost bracers 1 special bleed\n"
-                            ""+HEADER+"\n"
+
                             "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
                     input_to("enchanting_menu",map);
@@ -1238,9 +1234,9 @@ int enchanting_menu(string str, mapping map)
 
             if(!objectp(item = present(thing, tp)))
             {
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "%^RESET%^%^BOLD%^%^YELLOW%^Can't find "+thing+" %^RESET%^%^BOLD%^%^YELLOW%^please make sure it's the first "+thing+" %^RESET%^%^BOLD%^%^YELLOW%^in your inventory.\n"
-                        ""+HEADER+"\n"
+
                         "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
                 input_to("enchanting_menu",map);
@@ -1249,10 +1245,10 @@ int enchanting_menu(string str, mapping map)
 
             if(!check_player_crafted(item))
             {
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "%^RESET%^%^BOLD%^%^YELLOW%^You are only allowed to enchant player made mastercrafted items that have "
                         "not been tainted by unusual enchanting techniques.\n"
-                        ""+HEADER+"\n"
+
                         "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
                 input_to("enchanting_menu",map);
@@ -1281,11 +1277,11 @@ int enchanting_menu(string str, mapping map)
 
                 cost = calculate_cost(tp,item, "special", 1, special);
 
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "%^RESET%^%^BOLD%^%^YELLOW%^It would require %^RESET%^%^BOLD%^%^MAGENTA%^"+cost+" %^RESET%^%^BOLD%^%^YELLOW%^crafting "
                         "materials to enchant "+item->query("short")+" %^RESET%^%^BOLD%^%^YELLOW%^with "
                         "a %^RESET%^%^BOLD%^%^MAGENTA%^"+special+" %^RESET%^%^BOLD%^%^YELLOW%^special.\n"
-                        ""+HEADER+"\n"
+
                         "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
                 input_to("enchanting_menu",map);
@@ -1302,10 +1298,10 @@ int enchanting_menu(string str, mapping map)
 
             cost = calculate_cost(tp,item,type,amt);
 
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^It would require %^RESET%^%^BOLD%^%^MAGENTA%^"+cost+" %^RESET%^%^BOLD%^%^YELLOW%^crafting "
                     "materials to enchant "+item->query("short")+" %^RESET%^%^BOLD%^%^YELLOW%^with %^RESET%^%^BOLD%^%^MAGENTA%^"+amt+" "+type+"%^RESET%^%^BOLD%^%^YELLOW%^.\n"
-                    ""+HEADER+"\n"
+
                     "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
             input_to("enchanting_menu",map);
@@ -1320,14 +1316,14 @@ int enchanting_menu(string str, mapping map)
             {
                 if(type != "special" && sscanf(str, "enchant %s %d %s", thing, amt, type) != 3)
                 {
-                    db(tp,  ""+HEADER+"\n"
-                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: enchant %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt> <type> \n"
+                    db(tp,
+                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: enchant %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT TYPE \n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^enchant bracers 2 attack bonus \n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^enchant bracers 1 enchantment \n"
-                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: enchant %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt> %^RESET%^%^BOLD%^%^YELLOW%^special %^RESET%^%^BOLD%^%^MAGENTA%^<type> \n"
+                            "%^RESET%^%^BOLD%^%^YELLOW%^Syntax: enchant %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT %^RESET%^%^BOLD%^%^YELLOW%^special %^RESET%^%^BOLD%^%^MAGENTA%^TYPE \n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^enchant sword 1 special stun\n"
                             "    %^RESET%^%^BOLD%^%^YELLOW%^example: %^RESET%^%^BOLD%^%^GREEN%^enchant bracers 1 special poison\n"
-                            ""+HEADER+"\n"
+
                             "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
                     input_to("enchanting_menu",map);
@@ -1337,9 +1333,9 @@ int enchanting_menu(string str, mapping map)
 
             if(amt < 0)
             {
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "Sorry, negative numbers are not allowed.\n"
-                        ""+HEADER+"\n"
+
                         "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
                 input_to("enchanting_menu",map);
@@ -1348,9 +1344,9 @@ int enchanting_menu(string str, mapping map)
 
             if(!objectp(item = present(thing, tp)))
             {
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "%^RESET%^%^BOLD%^%^YELLOW%^Can't find "+thing+" %^RESET%^%^BOLD%^%^YELLOW%^please make sure it's the first "+thing+" %^RESET%^%^BOLD%^%^YELLOW%^in your inventory.\n"
-                        ""+HEADER+"\n"
+
                         "%^RESET%^%^BOLD%^%^GREEN%^Press any key to continue...");
 
                 input_to("enchanting_menu",map);
@@ -1385,7 +1381,7 @@ int enchanting_menu(string str, mapping map)
                 map["item"] = item;
                 map["tp"] = tp;
 
-                db(tp,  ""+HEADER+"\n"
+                db(tp,
                         "%^RESET%^%^BOLD%^%^GREEN%^You have decided to enchant your "
                         ""+item->query("short")+" %^RESET%^%^BOLD%^%^GREEN%^with "
                         "a %^RESET%^%^BOLD%^%^MAGENTA%^"+special+" special.  %^RESET%^%^BOLD%^%^MAGENTA%^(Specials are "
@@ -1399,7 +1395,7 @@ int enchanting_menu(string str, mapping map)
                         "enter %^RESET%^%^BOLD%^%^MAGENTA%^<yes>%^RESET%^%^BOLD%^%^YELLOW%^.  "
                         "Enter %^RESET%^%^BOLD%^%^MAGENTA%^<no> %^RESET%^%^BOLD%^%^YELLOW%^to use the "
                         "default special messages or anything else to abort and return to the menu."
-                        ""+HEADER+"\n");
+                        );
 
                 input_to("enchanting_menu",map);
                 return;
@@ -1435,7 +1431,7 @@ int enchanting_menu(string str, mapping map)
             if(strsrch(message,"USER ") == 0) { message = replace_string(message,"USER ","",1); }
             else if(strsrch(message, "user ") == 0) { message = replace_string(message, "user ","",1); }
 
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$T  %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Your attacker or target's name\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TS %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Subjective for target %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^he%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^she\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TO %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Objective for target  %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^him%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^her\n"
@@ -1460,7 +1456,7 @@ int enchanting_menu(string str, mapping map)
 
             db(tp,"%^RESET%^%^BOLD%^%^YELLOW%^If you are happy with this message, "
                 "please enter %^RESET%^%^BOLD%^%^MAGENTA%^<yes> %^RESET%^%^BOLD%^%^YELLOW%^otherwise enter %^RESET%^%^BOLD%^%^MAGENTA%^<no>%^RESET%^%^BOLD%^%^YELLOW%^\n"
-                ""+HEADER+"\n");
+                );
 
             map["confirmation type"] = "user message";
             map["user message"] = message;
@@ -1484,7 +1480,7 @@ int enchanting_menu(string str, mapping map)
             if(strsrch(message,"TARGET ") == 0) { message = replace_string(message,"TARGET ","",1); }
             else if(strsrch(message, "target ") == 0) { message = replace_string(message, "target ","",1); }
 
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$T  %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Your attacker or target's name\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TS %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Subjective for target %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^he%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^she\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TO %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Objective for target  %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^him%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^her\n"
@@ -1509,7 +1505,7 @@ int enchanting_menu(string str, mapping map)
 
             db(tp,"%^RESET%^%^BOLD%^%^YELLOW%^If you are happy with this message, please "
                 "enter %^RESET%^%^BOLD%^%^MAGENTA%^<yes> %^RESET%^%^BOLD%^%^YELLOW%^otherwise enter %^RESET%^%^BOLD%^%^MAGENTA%^<no>\n"
-                ""+HEADER+"\n");
+                );
 
             map["confirmation type"] = "target message";
             map["target message"] = message;
@@ -1533,7 +1529,7 @@ int enchanting_menu(string str, mapping map)
             if(strsrch(message,"ROOM ") == 0) { message = replace_string(message,"ROOM ","",1); }
             else if(strsrch(message, "room ") == 0) { message = replace_string(message, "room ","",1); }
 
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$T  %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Your attacker or target's name\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TS %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Subjective for target %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^he%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^she\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TO %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Objective for target  %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^him%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^her\n"
@@ -1558,7 +1554,7 @@ int enchanting_menu(string str, mapping map)
 
             db(tp,"%^RESET%^%^BOLD%^%^YELLOW%^If you are happy with this message, please "
                 "enter %^RESET%^%^BOLD%^%^MAGENTA%^<yes>%^RESET%^%^BOLD%^%^YELLOW%^ otherwise enter %^RESET%^%^BOLD%^%^MAGENTA%^<no>\n"
-                ""+HEADER+"\n");
+                );
 
             map["confirmation type"] = "room message";
             map["room message"] = message;
@@ -1629,7 +1625,7 @@ int enchanting_menu(string str, mapping map)
             }
 
 
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$T  %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Your attacker or target's name\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TS %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Subjective for target %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^he%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^she\n"
                     "  %^RESET%^%^BOLD%^%^MAGENTA%^$TO %^RESET%^%^BOLD%^= %^RESET%^%^BOLD%^%^GREEN%^Objective for target  %^RESET%^%^BOLD%^- %^RESET%^%^BOLD%^%^MAGENTA%^him%^RESET%^%^BOLD%^/%^RESET%^%^BOLD%^%^MAGENTA%^her\n"
@@ -1686,8 +1682,6 @@ int enchanting_menu(string str, mapping map)
                             "%^RESET%^%^BOLD%^%^YELLOW%^You sweep your "+item->query_short()+" %^RESET%^%^BOLD%^%^YELLOW%^at Casualty, knocking him to the ground!\n");
                 }
 
-                db(tp,""+HEADER+"\n");
-
                 map["confirmation type"] = "user message";
                 input_to("enchanting_menu",map);
                 return;
@@ -1735,7 +1729,6 @@ int enchanting_menu(string str, mapping map)
                             "%^RESET%^%^BOLD%^%^YELLOW%^"+tp->QCN+" sweeps "+tp->QP+" "+item->query_short()+"%^RESET%^%^BOLD%^%^YELLOW%^ at you, knocking you to the ground!\n");
                 }
 
-                db(tp,""+HEADER+"\n");
 
                 input_to("enchanting_menu",map);
                 return;
@@ -1779,7 +1772,6 @@ int enchanting_menu(string str, mapping map)
                             "%^RESET%^%^BOLD%^%^YELLOW%^"+tp->QCN+" sweeps "+tp->QP+" "+item->query_short()+"%^RESET%^%^BOLD%^%^YELLOW%^ at Casualty, knocking him to the ground!\n");
                 }
 
-                db(tp,""+HEADER+"\n");
 
                 input_to("enchanting_menu",map);
                 return;
@@ -1869,7 +1861,6 @@ int enchanting_menu(string str, mapping map)
                             "%^RESET%^%^BOLD%^%^YELLOW%^You sweep your "+item->query_short()+" %^RESET%^%^BOLD%^%^YELLOW%^at Casualty, knocking him to the ground!\n");
                 }
 
-                db(tp,""+HEADER+"\n");
 
                 input_to("enchanting_menu",map);
                 return;
@@ -1919,7 +1910,6 @@ int enchanting_menu(string str, mapping map)
                             "%^RESET%^%^BOLD%^%^YELLOW%^"+tp->QCN+" sweeps "+tp->QP+" "+item->query_short()+"%^RESET%^%^BOLD%^%^YELLOW%^ at you, knocking you to the ground!\n");
                 }
 
-                db(tp,""+HEADER+"\n");
 
                 input_to("enchanting_menu",map);
                 return;
@@ -1965,7 +1955,6 @@ int enchanting_menu(string str, mapping map)
                             "%^RESET%^%^BOLD%^%^YELLOW%^"+tp->QCN+" sweeps "+tp->QP+" "+item->query_short()+"%^RESET%^%^BOLD%^%^YELLOW%^ at Casualty, knocking him to the ground!\n");
                 }
 
-                db(tp,""+HEADER+"\n");
 
                 input_to("enchanting_menu",map);
                 return;
@@ -1976,31 +1965,32 @@ int enchanting_menu(string str, mapping map)
 
         default:
 
-            db(tp,  ""+HEADER+"\n"
+            db(tp,
 
-                    "%^RESET%^%^BOLD%^%^GREEN%^Welcome to the enchanting menu.  You see this menu if you are trying to "
-                    "magically enchant equipment.  You have the following options available:\n\n"
+                    "%^RESET%^%^BOLD%^%^GREEN%^Welcome to the enchanting menu. You see this menu if you are trying to "
+                    "magically enchant equipment. You have the following options available:\n\n"
 
-                    "%^RESET%^%^BOLD%^%^YELLOW%^Exit || q \n"
+                    "%^RESET%^%^BOLD%^%^YELLOW%^exit \n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^Leaves the menu and stops the enchanting process.\n\n"
 
-                    "%^RESET%^%^BOLD%^%^YELLOW%^List \n"
+                    "%^RESET%^%^BOLD%^%^YELLOW%^list \n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^Lists all the available bonuses that you can add to or improve\n\n"
 
-                    "%^RESET%^%^BOLD%^%^YELLOW%^Cost %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt> <type> \n"
-                    "    %^RESET%^%^BOLD%^%^GREEN%^Will tell you the cost to enchant %^RESET%^%^BOLD%^%^MAGENTA%^<item> with %^RESET%^%^BOLD%^%^MAGENTA%^<amt>%^RESET%^%^BOLD%^%^GREEN%^ of \n"
-                    "    %^RESET%^%^BOLD%^%^MAGENTA%^<type>%^RESET%^%^BOLD%^%^GREEN%^ bonus.\n\n"
+                    "%^RESET%^%^BOLD%^%^YELLOW%^cost %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT TYPE \n"
+                    "    %^RESET%^%^BOLD%^%^GREEN%^Will tell you the cost to enchant %^RESET%^%^BOLD%^%^MAGENTA%^ITEM%^GREEN%^ with %^RESET%^%^BOLD%^%^MAGENTA%^AMOUNT%^RESET%^%^BOLD%^%^GREEN%^ of \n"
+                    "    %^RESET%^%^BOLD%^%^MAGENTA%^TYPE%^RESET%^%^BOLD%^%^GREEN%^ bonus.\n\n"
 
-                    "%^RESET%^%^BOLD%^%^YELLOW%^Cost %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt>%^RESET%^%^BOLD%^%^YELLOW%^ special %^RESET%^%^BOLD%^%^MAGENTA%^<type>%^RESET%^%^BOLD%^%^YELLOW%^  example: cost sword 1 special stun\n"
-                    "    %^RESET%^%^BOLD%^%^GREEN%^When the %^RESET%^%^BOLD%^%^MAGENTA%^<special> %^RESET%^%^BOLD%^%^GREEN%^argument is %^RESET%^%^BOLD%^%^MAGENTA%^\"special\"%^RESET%^%^BOLD%^%^GREEN%^, the next argument \n"
+                    "%^RESET%^%^BOLD%^%^YELLOW%^cost %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT%^RESET%^%^BOLD%^%^YELLOW%^ special %^RESET%^%^BOLD%^%^MAGENTA%^TYPE%^RESET%^%^BOLD%^%^YELLOW%^"
+                    "    example: cost sword 1 special stun\n"
+                    "    %^RESET%^%^BOLD%^%^GREEN%^When the %^RESET%^%^BOLD%^%^MAGENTA%^SPECIAL %^RESET%^%^BOLD%^%^GREEN%^argument is %^RESET%^%^BOLD%^%^MAGENTA%^\"special\"%^RESET%^%^BOLD%^%^GREEN%^, the next argument \n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^can be one of the weapon or armor special types, damage, stun, \n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^etc.  All of the specials require the same amount of materials.\n\n"
 
-                    "%^RESET%^%^BOLD%^%^YELLOW%^Enchant %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt> <type>\n"
+                    "%^RESET%^%^BOLD%^%^YELLOW%^enchant %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT TYPE\n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^This will enchant an item with either an enchantment (additional +)\n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^or with one of the item bonuses, (attack bonus, damage bonus, etc)\n\n"
 
-                    "%^RESET%^%^BOLD%^%^YELLOW%^Enchant %^RESET%^%^BOLD%^%^MAGENTA%^<item> <amt> %^RESET%^%^BOLD%^%^YELLOW%^special %^RESET%^%^BOLD%^%^MAGENTA%^<type>\n"
+                    "%^RESET%^%^BOLD%^%^YELLOW%^enchant %^RESET%^%^BOLD%^%^MAGENTA%^ITEM AMOUNT %^RESET%^%^BOLD%^%^YELLOW%^special %^RESET%^%^BOLD%^%^MAGENTA%^TYPE\n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^This will enchant an item with a special function.  This function \n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^will have a chance to hit on attack with weapons and when you are \n"
                     "    %^RESET%^%^BOLD%^%^GREEN%^getting hit with armor.  You will be asked if you would like to \n"
@@ -2010,7 +2000,7 @@ int enchanting_menu(string str, mapping map)
                     "\n    %^RESET%^%^BOLD%^%^YELLOW%^Please note that the menu is only case sensative when adding \n"
                     "    special messages to an item.  The %^RESET%^%^BOLD%^%^MAGENTA%^USER%^RESET%^%^BOLD%^%^GREEN%^, %^RESET%^%^BOLD%^%^MAGENTA%^TARGET%^RESET%^%^BOLD%^%^GREEN%^, %^RESET%^%^BOLD%^%^YELLOW%^and %^RESET%^%^BOLD%^%^MAGENTA%^ROOM %^RESET%^%^BOLD%^%^YELLOW%^tags to \n"
                     "    identify which person should see the message should be in caps.\n"
-                    ""+HEADER+"");
+                );
 
             input_to("enchanting_menu", map);
             return;
