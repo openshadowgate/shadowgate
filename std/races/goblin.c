@@ -126,33 +126,18 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(object who) {
-    int cha;
+string *query_hair_colors(string subrace) {
     string *choices = ({});
-    cha = (int)who->query_stats("charisma");
-    switch(cha) {
-        case 16..30:
-            choices += ({"dark brown"});
-        case 0..15:
-            choices += ({"black"});
-            break;
-    }
+    choices += ({"dark brown"});
+    choices += ({"black"});
     return choices;
 }
 
-string *query_eye_colors(object who) {
-    int cha;
+string *query_eye_colors(string subrace, int cha) {
     string *choices = ({});
-    cha = (int)who->query_stats("charisma");
-    switch(cha) {
-        case 18..30:
-            choices += ({"amber"});
-        case 16..17:
-            choices += ({"crimson"});
-        case 0..15:
-            choices += ({"red", "yellow"});
-            break;
-    }
+    choices += ({"amber"});
+    choices += ({"crimson"});
+    choices += ({"red", "yellow"});
     return choices;
 }
 

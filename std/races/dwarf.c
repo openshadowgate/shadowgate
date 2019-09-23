@@ -193,66 +193,34 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(object who) {
-    int cha;
-    string *choices = ({}), subrace;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+string *query_hair_colors(string subrace) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "shield dwarf") {
-        cha -= 2;
-        switch(cha) {
-            case 16..30:
-                choices += ({"golden"});
-            case 12..15:
-                choices += ({"scarlet", "crimson", "blonde"});
-            case 0..11:
-                choices += ({"brown", "red", "gray", "white"});
-                break;
-        }
+        choices += ({"golden"});
+        choices += ({"scarlet", "crimson", "blonde"});
+        choices += ({"brown", "red", "gray", "white"});
     }
 
     else if(subrace == "gold dwarf") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"ebony"});
-            case 14..15:
-                choices += ({"sable"});
-            case 0..13:
-                choices += ({"black", "brown"});
-                break;
-        }
+        choices += ({"ebony"});
+        choices += ({"sable"});
+        choices += ({"black", "brown"});
     }
     if(subrace == "gray dwarf") { return ({"bald"}); }
     return choices;
 }
 
-varargs string *query_eye_colors(object who) {
-    string *choices = ({}), subrace;
-    int cha;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+varargs string *query_eye_colors(string subrace) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "shield dwarf") {
-        cha -= 2;
-        switch(cha) {
-            case 16..30:
-                choices += ({"silver", "emerald", "sapphire"});
-            case 12..15:
-                choices += ({"azure"});
-            case 0..11:
-                choices += ({"blue", "green"});
-                break;
-        }
+        choices += ({"silver", "emerald", "sapphire"});
+        choices += ({"azure"});
+        choices += ({"blue", "green"});
     }
     if(subrace == "gold dwarf") {
-        switch(cha) {
-            case 18..30:
-                choices += ({"sable", "chocolate", "coffee"});
-            case 12..17:
-                choices += ({"hazel"});
-            case 0..11:
-                choices += ({"brown"});
-                break;
-        }
+        choices += ({"sable", "chocolate", "coffee"});
+        choices += ({"hazel"});
+        choices += ({"brown"});
     }
     if(subrace == "gray dwarf") { return ({"black"}); }
     return choices;

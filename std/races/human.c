@@ -278,158 +278,83 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(string subrace, int cha) {
+string *query_hair_colors(string subrace) {
     string *choices = ({});
-    if(subrace == "tiefling" ||
-       subrace == "air genasi" ||
-       subrace == "earth genasi" ||
-       subrace == "fire genasi" ||
-       subrace == "water genasi")
-        cha -= 2;
-    if(subrace == "aasimar"||
-       subrace == "feytouched")
-        cha += 2;
-
     if(!stringp(subrace) ||
        member_array(subrace,({"aasimar", "feytouched","tiefling","air genasi","earth genasi","fire genasi","water genasi","heartlander"})) != -1) {
-        switch(cha) {
-            case 18..40:
-                choices += ({"ebony", "golden", "silver"});
-            case 14..17:
-                choices += ({"sable", "auburn", "scarlet", "crimson"});
-            case 0..13:
-                choices += ({"black", "brown", "blonde", "red", "white", "gray", "bald"});
-                break;
-        }
+        choices += ({"ebony", "golden", "silver"});
+        choices += ({"sable", "auburn", "scarlet", "crimson"});
+        choices += ({"black", "brown", "blonde", "red", "white", "gray", "bald"});
     }
     if(subrace == "air genasi") { // extras for specific planetouched subtypes
-      choices += ({ "light blue" });
+        choices += ({ "light blue" });
     }
     if(subrace == "water genasi") { // extras for specific planetouched subtypes
-      if(cha > 13) choices += ({ "blue-green" });
-      choices += ({ "green" });
+        choices += ({ "blue-green" });
+        choices += ({ "green" });
     }
     if(subrace == "senzokuan" || subrace == "maalish" || subrace == "zin'charu" || subrace == "tonaz'tlacar") {
-        switch(cha) {
-            case 18..40:
-                choices += ({"ebony"});
-            case 14..17:
-                choices += ({"sable"});
-            case 0..13:
-                choices += ({"black", "brown", "white", "gray", "bald"});
-                break;
-        }
+        choices += ({"ebony"});
+        choices += ({"sable"});
+        choices += ({"black", "brown", "white", "gray", "bald"});
     }
     if(subrace == "attayan" || subrace == "morinnen" || subrace == "tsarven") {
-        switch(cha) {
-            case 18..40:
-                choices += ({"ebony"});
-            case 14..17:
-                choices += ({"sable", "auburn", "scarlet", "crimson"});
-            case 0..13:
-                choices += ({"black", "brown", "red", "white", "gray", "bald"});
-                break;
-        }
+        choices += ({"ebony"});
+        choices += ({"sable", "auburn", "scarlet", "crimson"});
+        choices += ({"black", "brown", "red", "white", "gray", "bald"});
     }
     if(subrace == "aesatri") {
-        switch(cha) {
-            case 18..40:
-                choices += ({"golden", "silver"});
-            case 14..17:
-                choices += ({"auburn", "scarlet", "crimson"});
-            case 0..13:
-                choices += ({"blonde", "red", "white", "gray", "bald"});
-                break;
-        }
+        choices += ({"golden", "silver"});
+        choices += ({"auburn", "scarlet", "crimson"});
+        choices += ({"blonde", "red", "white", "gray", "bald"});
     }
     return choices;
 }
 
-string *query_eye_colors(string subrace, int cha) {
+string *query_eye_colors(string subrace) {
     string *choices = ({});
-    if(subrace == "tiefling" ||
-       subrace == "air genasi" ||
-       subrace == "earth genasi" ||
-       subrace == "fire genasi" ||
-       subrace == "water genasi")
-        cha -= 2;
-    if(subrace == "aasimar" ||
-        subrace == "feytouched")
-        cha += 2;
-
     if(!stringp(subrace) ||
        member_array(subrace,({"aasimar","feytouched","tiefling","air genasi","earth genasi","fire genasi","water genasi","heartlander","attayan"})) != -1) {
-        switch(cha) {
-            case 18..40:
-                choices += ({"violet", "purple", "silver"});
-            case 16..17:
-                choices += ({"emerald", "sapphire", "yellow", "amber"});
-            case 14..15:
-                choices += ({"azure", "cyan", "sable", "chocolate", "coffee"});
-            case 10..13:
-                choices += ({"green", "hazel"});
-            case 0..9:
-                choices += ({"brown", "blue", "gray"});
-                break;
-        }
+        choices += ({"violet", "purple", "silver"});
+        choices += ({"emerald", "sapphire", "yellow", "amber"});
+        choices += ({"azure", "cyan", "sable", "chocolate", "coffee"});
+        choices += ({"green", "hazel"});
+        choices += ({"brown", "blue", "gray"});
     }
     if(subrace == "water genasi") { // extras for specific planetouched subtypes
-      if(cha > 15) choices += ({ "aquamarine" });
-      choices += ({ "blue-green" });
+        choices += ({ "aquamarine" });
+        choices += ({ "blue-green" });
     }
     if(subrace == "earth genasi") { // extras for specific planetouched subtypes
-      choices += ({ "black" });
+        choices += ({ "black" });
     }
     if(subrace == "tiefling") { // extras for specific planetouched subtypes
-      choices += ({ "red" });
+        choices += ({ "red" });
     }
     if(subrace == "aasimar" ||
-        subrace == "feytouched") { // extras for specific planetouched subtypes
-      if(cha > 17) choices += ({ "golden" });
-      if(cha > 15) choices += ({ "topaz" });
+       subrace == "feytouched") { // extras for specific planetouched subtypes
+        choices += ({ "golden" });
+        choices += ({ "topaz" });
     }
     if(subrace == "senzokuan" || subrace == "maalish" || subrace == "morinnen" || subrace == "tsarven") {
-        switch(cha) {
-            case 18..40:
-                choices += ({"yellow", "amber"});
-            case 14..17:
-                choices += ({"sable", "chocolate", "coffee"});
-            case 10..13:
-                choices += ({"hazel"});
-            case 0..9:
-                choices += ({"brown", "gray"});
-                break;
-        }
+        choices += ({"yellow", "amber"});
+        choices += ({"sable", "chocolate", "coffee"});
+        choices += ({"hazel"});
+        choices += ({"brown", "gray"});
     }
     if(subrace == "tonaz'tlacar") {
-        switch(cha) {
-            case 18..40:
-                choices += ({"silver"});
-            case 16..17:
-                choices += ({"emerald", "yellow", "amber"});
-            case 14..15:
-                choices += ({"sable", "chocolate", "coffee"});
-            case 10..13:
-                choices += ({"green", "hazel"});
-            case 0..9:
-                choices += ({"brown", "gray"});
-                break;
-        }
+        choices += ({"silver"});
+        choices += ({"emerald", "yellow", "amber"});
+        choices += ({"sable", "chocolate", "coffee"});
+        choices += ({"green", "hazel"});
+        choices += ({"brown", "gray"});
     }
     if(subrace == "aesatri" || subrace == "zin'charu") {
-        switch(cha) {
-            case 18..40:
-                choices += ({"violet", "purple", "silver"});
-            case 16..17:
-                choices += ({"emerald", "sapphire"});
-            case 14..15:
-                choices += ({"azure", "cyan"});
-            case 10..13:
-                choices += ({"green"});
-            case 0..9:
-                choices += ({"blue", "gray"});
-                break;
-        }
+        choices += ({"violet", "purple", "silver"});
+        choices += ({"emerald", "sapphire"});
+        choices += ({"azure", "cyan"});
+        choices += ({"green"});
+        choices += ({"blue", "gray"});
     }
     return choices;
 }

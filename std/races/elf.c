@@ -245,97 +245,48 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(object who) {
-    string *choices = ({}), subrace;
-    int cha;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+string *query_hair_colors(string subrace) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "moon elf" || subrace = "aquatic elf") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"silver", "platinum", "ebony"});
-            case 12..15:
-                choices += ({"blue"});
-            case 0..11:
-                choices += ({"black"});
-                break;
-        }
+        choices += ({"silver", "platinum", "ebony"});
+        choices += ({"blue"});
+        choices += ({"black"});
     }
     if(subrace == "sun elf" || subrace == "fey'ri") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"golden", "crimson", "scarlet", "auburn", "ebony"});
-            case 12..15:
-                choices += ({"red"});
-            case 0..11:
-                choices += ({"blonde", "black"});
-                break;
-        }
+        choices += ({"golden", "crimson", "scarlet", "auburn", "ebony"});
+        choices += ({"red"});
+        choices += ({"blonde", "black"});
     }
     if(subrace == "szarkai") {
         choices += ({"white","silver","bald"});
     }
     if(subrace == "wood elf" || subrace == "wild elf") {
-        if(subrace == "wood elf") cha -= 2;
-        switch(cha) {
-            case 16..30:
-                choices += ({"golden", "crimson", "scarlet", "auburn", "ebony"});
-            case 12..15:
-                choices += ({"red", "blonde", "sable"});
-            case 0..11:
-                choices += ({"brown", "black"});
-                break;
-        }
+        choices += ({"golden", "crimson", "scarlet", "auburn", "ebony"});
+        choices += ({"red", "blonde", "sable"});
+        choices += ({"brown", "black"});
     }
     return choices;
 }
 
-string *query_eye_colors(object who) {
-    string *choices = ({}), subrace;
-    int cha;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+string *query_eye_colors(string subrace, int cha) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "moon elf" || subrace = "aquatic elf") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"sapphire", "azure", "cyan"});
-            case 14..15:
-                choices += ({"emerald"});
-            case 0..13:
-                choices += ({"green", "blue"});
-                break;
-        }
+        choices += ({"sapphire", "azure", "cyan"});
+        choices += ({"emerald"});
+        choices += ({"green", "blue"});
     }
     if(subrace == "sun elf" || subrace == "fey'ri") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"emerald", "golden"});
-            case 14..15:
-                choices += ({"amber"});
-            case 0..13:
-                choices += ({"green"});
-                break;
-        }
+        choices += ({"emerald", "golden"});
+        choices += ({"amber"});
+        choices += ({"green"});
     }
     if(subrace == "szarkai") {
-        switch(cha)
-        {
-        case 16..30:
-            choices += ({"violet","purple"});
-        case 0..15:
-            choices += ({"red"});
-            break;
-        }
+        choices += ({"violet","purple"});
+        choices += ({"red"});
     }
     else if(subrace == "wood elf" || subrace == "wild elf") {
-        if(subrace == "wood elf") cha -= 2;
-        switch(cha) {
-            case 16..30:
-                choices += ({"emerald", "sable"});
-            case 0..15:
-                choices += ({"brown", "green", "hazel"});
-                break;
-        }
+        choices += ({"emerald", "sable"});
+        choices += ({"brown", "green", "hazel"});
     }
     return choices;
 }

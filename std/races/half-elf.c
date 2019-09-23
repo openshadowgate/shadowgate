@@ -10,10 +10,6 @@ int *age_brackets() { return ({ 18, 45, 60, 90 }); }
 
 int *restricted_alignments(string subrace) {
     if(!subrace || subrace == "") return ({});
-    switch(subrace) {
-      case "tiefling": return ({ 1, 4, 7 }); break;
-      default: return ({}); break;
-    }
 }
 
 string *restricted_classes(string subrace) { return ({ "cavalier", "paladin" }); }

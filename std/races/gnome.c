@@ -220,64 +220,34 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(object who) {
-    string *choices = ({}), subrace;
-    int cha;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+string *query_hair_colors(string subrace) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "rock gnome") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"silver", "golden"});
-            case 0..15:
-                choices += ({"brown", "blonde", "gray", "white", "bald"});
-                break;
-        }
+        choices += ({"silver", "golden"});
+        choices += ({"brown", "blonde", "gray", "white", "bald"});
     }
     if(subrace == "forest gnome") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"ebony"});
-            case 12..15:
-                choices += ({"sable"});
-            case 0..11:
-                choices += ({"black", "brown"});
-                break;
-        }
+        choices += ({"ebony"});
+        choices += ({"sable"});
+        choices += ({"black", "brown"});
     }
     if(subrace == "deep gnome") {
-        if((string)who->query_gender() != "male") { return ({"gray", "white"}); }
-        else { return ({"bald"}); }
+        choices += ({"gray", "white", "bald"});
     }
     return choices;
 }
 
-string *query_eye_colors(object who) {
-    string *choices = ({}), subrace;
-    int cha;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+string *query_eye_colors(string subrace) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "rock gnome") {
-        switch(cha) {
-            case 18..30:
-                choices += ({"violet", "amethyst"});
-            case 14..17:
-                choices += ({"sapphire", "azure"});
-            case 0..13:
-                choices += ({"blue", "gray"});
-                break;
-        }
+        choices += ({"violet", "amethyst"});
+        choices += ({"sapphire", "azure"});
+        choices += ({"blue", "gray"});
     }
     else if(subrace == "forest gnome") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"sable", "chocolate", "coffee", "emerald", "sapphire"});
-            case 12..15:
-                choices += ({"brown", "hazel", "azure"});
-            case 0..11:
-                choices += ({"green", "blue"});
-                break;
-        }
+        choices += ({"sable", "chocolate", "coffee", "emerald", "sapphire"});
+        choices += ({"brown", "hazel", "azure"});
+        choices += ({"green", "blue"});
     }
     if(subrace == "deep gnome") { return ({"black", "gray"}); }
     return choices;

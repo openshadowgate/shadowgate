@@ -178,62 +178,32 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(object who) {
-    string *choices = ({}), subrace;
-    int cha;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+string *query_hair_colors(string subrace) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "lightfoot halfling") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"ebony", "golden"});
-            case 12..15:
-                choices += ({"sable", "auburn", "scarlet", "crimson"});
-            case 0..11:
-                choices += ({"black", "brown", "blonde", "red"});
-                break;
-        }
+        choices += ({"ebony", "golden"});
+        choices += ({"sable", "auburn", "scarlet", "crimson"});
+        choices += ({"black", "brown", "blonde", "red"});
     }
     else if(subrace == "ghostwise halfling" || subrace == "strongheart halfling") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"ebony"});
-            case 12..15:
-                choices += ({"sable"});
-            case 0..11:
-                choices += ({"black", "brown"});
-                break;
-        }
+        choices += ({"ebony"});
+        choices += ({"sable"});
+        choices += ({"black", "brown"});
     }
     return choices;
 }
 
-string *query_eye_colors(object who) {
-    string *choices = ({}), subrace;
-    int cha;
-    cha = (int)who->query_stats("charisma");
-    subrace = (string)who->query("subrace");
+string *query_eye_colors(string subrace) {
+    string *choices = ({});
     if(!stringp(subrace) || subrace == "lightfoot halfling") {
-        switch(cha) {
-            case 18..30:
-                choices += ({"emerald", "sapphire"});
-            case 14..17:
-                choices += ({"azure", "sable", "chocolate", "coffee"});
-            case 0..13:
-                choices += ({"blue", "green", "brown", "hazel"});
-                break;
-        }
+        choices += ({"emerald", "sapphire"});
+        choices += ({"azure", "sable", "chocolate", "coffee"});
+        choices += ({"blue", "green", "brown", "hazel"});
     }
     if(subrace == "ghostwise halfling" || subrace == "strongheart halfling") {
-        switch(cha) {
-            case 16..30:
-                choices += ({"sable", "chocolate", "coffee"});
-            case 12..15:
-                choices += ({"brown"});
-            case 0..11:
-                choices += ({"black"});
-                break;
-        }
+        choices += ({"sable", "chocolate", "coffee"});
+        choices += ({"brown"});
+        choices += ({"black"});
     }
     return choices;
 }
