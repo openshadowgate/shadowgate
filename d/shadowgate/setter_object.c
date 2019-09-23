@@ -1415,15 +1415,17 @@ void pick_genetics()
     switch(MyPlace)
     {
         case "hair color":
-            my_choices = MyFile->query_hair_colors(ETO);
+            my_choices = MyFile->query_hair_colors(MyCharacterInfo["race"]["subrace"],
+                                                   MyCharacterInfo["stats"]["charisma"]);
             break;
         case "eye color":
-            my_choices = MyFile->query_eye_colors(ETO);
+            my_choices = MyFile->query_eye_colors(MyCharacterInfo["race"]["subrace"],
+                                                  MyCharacterInfo["stats"]["subrace"]);
             break;
         case "bonus language":
         {
             string * langs;
-            langs = MyFile->query_languages()["optional"];
+            langs = MyFile->query_languages(MyCharacterInfo["race"]["subrace"])["optional"];
             if(sizeof(langs))
                 my_choices = langs;
             else

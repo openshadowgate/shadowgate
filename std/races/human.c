@@ -278,11 +278,8 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(object who) {
-    int cha;
-    string *choices = ({}), subrace;
-    subrace = (string)who->query("subrace");
-    cha = (int)who->query_stats("charisma");
+string *query_hair_colors(string subrace, int cha) {
+    string *choices = ({});
     if(subrace == "tiefling" ||
        subrace == "air genasi" ||
        subrace == "earth genasi" ||
@@ -348,11 +345,8 @@ string *query_hair_colors(object who) {
     return choices;
 }
 
-string *query_eye_colors(object who) {
-    int cha;
-    string *choices = ({}), subrace;
-    subrace = (string)who->query("subrace");
-    cha = (int)who->query_stats("charisma");
+string *query_eye_colors(string subrace, int cha) {
+    string *choices = ({});
     if(subrace == "tiefling" ||
        subrace == "air genasi" ||
        subrace == "earth genasi" ||

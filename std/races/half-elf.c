@@ -22,60 +22,28 @@ string *restricted_deities(string subrace) { return ({}); }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     if(!subrace || subrace == "") return ({ 0, 0, 0, 0, 0, 0 });
-    switch(subrace) {
-      case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
-      default: return ({ 0, 0, 0, 0, 0, 0 }); break;
-    }
 }
 
 mapping skill_mods(string subrace) {
     if(!subrace || subrace == "") return ([ "influence" : 2 ]);
-    switch(subrace) {
-      case "tiefling": return ([ "stealth" : 2, "disguise" : 2 ]); break;
-      default: return ([ "influence" : 2 ]); break;
-    }
 }
 
 int level_adjustment(string subrace) {
     if(!subrace || subrace == "") return 0;
-    switch(subrace) {
-      case "tiefling": return 1; break;
-      default: return 0; break;
-    }
 }
 
 int natural_AC(string subrace) { return 0; }
 
 int sight_bonus(string subrace) {
     if(!subrace || subrace == "") return 1;
-    switch(subrace) {
-      case "tiefling": return 2; break;
-      default: return 1; break;
-    }
 }
 
 mapping daily_uses(string subrace) {
     if(!subrace || subrace == "") return ([]);
-    switch(subrace) {
-      case "tiefling": return ([ "light" : 1 ]); break;
-      default: return ([]); break;
-    }
 }
 
 mapping query_racial_innate(string subrace) {
 	if(!subrace || subrace == "") return 0;
-	switch(subrace) {
-		case "tiefling":
-				return (["light" : (["type" : "spell", "casting level" : 0.5,
-				"daily uses" : 1, "delay" : 1, "uses left" : 1,
-				"refresh time" : -1, "level required" : 0,
-				"class specific" : 0])]);
-				break;
-		default:
-			return 0;
-			break;
-	}
-	return 0;
 }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }
