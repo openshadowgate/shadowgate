@@ -283,7 +283,7 @@ void move_caster(object endplace, int prof) {
     if(caster->query_hp() < caster->query_max_hp()){ // the travel heals the caster if injured!
       tell_object(caster,"%^BOLD%^%^CYAN%^You feel refreshed by your brief passage across the planes!%^RESET%^");
       healed = -sdamage*5/4;
-      damage_targ(caster,"torso", -healed,"untyped");
+      damage_targ(caster,"torso", healed,"untyped");
     }
     dest_effect();
 }
