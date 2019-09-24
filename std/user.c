@@ -1411,7 +1411,6 @@ void setup() {
   }
   age = time() - (int)TO->query_birthday();
   PLAYER_D->add_player_info();
-  NEWS_D->read_news();
   if (!(PRISON_D->is_imprisoned(query_name()))) {
     if(!query_body_type() && query_race() != "unborn")
       move_player("/realms/vetri/bodyhold");
