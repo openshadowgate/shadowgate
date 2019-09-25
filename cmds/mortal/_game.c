@@ -4,8 +4,8 @@
 #include <std.h>
 #include <dirs.h>
 #include <security.h>
-#define VALID_ARGS ({"bug", "typo", "praise", "idea"})
-#define TLOG (["bug" : "bugs", "typo" : "typos", "praise" : "praise", "idea" : "ideas"])
+#define VALID_ARGS ({"bug", "typo", "idea"})
+#define TLOG (["bug" : "bugs", "typo" : "typos", "idea" : "ideas"])
 inherit DAEMON;
 
 void do_post(string arg, string mtitle);
@@ -32,9 +32,6 @@ string get_board()
             break;
         case "idea":
             return "ideasboard";
-            break;
-        case "praise":
-            return "praiseboard";
             break;
     }
     return "bugboard";
@@ -101,11 +98,6 @@ void do_post(string arg, string mtitle)
             "%^RESET%^Feel free to copy/paste the relevant text from your screen "
             "and please indicate the corrections needed.\n");
             break;
-        case "praise":
-            write("You are about to post praise to a board for the immortals to "+
-            "see. We appreciate acknowledgement that our efforts are appreciated. "+
-            "Thank you for taking the time to let us know that you enjoy something!\n");
-            break;
         case "idea":
             write("You are about to post an idea to a board for the immortals to see. "+
             "Please note that all ideas are considered, regardless of where or who "+
@@ -158,9 +150,6 @@ report(string *lines)
     {
         case "bug": case "typo": case "idea":
             rep = capitalize(varg) + " reported by "+capitalize(TPQN)+" " +ctime(time())+":\n";
-            break;
-        case "praise":
-            rep = capitalize(varg) + " given by "+capitalize(TPQN)+" " +ctime(time())+":\n";
             break;
     }
     mlog = TLOG[varg];
@@ -218,11 +207,10 @@ game - help the game
 game bug here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
 game typo here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
 game idea here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
-game praise here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command lets you report a bug, typo, an idea, or even offer praise. If you are using the bug version of the command please ask for a wiz and state that you want to report a bug with a brief description of the problem before reporting it. A player or immortal may know if it's not a bug or it may help a wiz be able to get important information before time passes.
+This command lets you report a bug, typo, an idea. If you are using the bug version of the command please ask for a wiz and state that you want to report a bug with a brief description of the problem before reporting it. A player or immortal may know if it's not a bug or it may help a wiz be able to get important information before time passes.
 
 All versions of the command work with a %^ORANGE%^%^ULINE%^TARGET%^RESET%^, so if you can look at something with the targetid then using this command will report that id (in order to help immortals know exactly what item you are referencing).
 

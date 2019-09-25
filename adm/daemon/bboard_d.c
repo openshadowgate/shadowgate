@@ -7,14 +7,14 @@
 #include <dirs.h>
 #include <security.h>
 #include <bboard.h>
- 
+
 inherit DAEMON;
 
 mapping *posts;
 mixed *read_by;
 static string *edit_ok;
 static string current;
- 
+
 int valid_edit(int x, string id);
 string when(int x);
 mixed *sub_array(mixed *arr, int x);
@@ -27,7 +27,7 @@ void create() {
     posts = ({});
     read_by = ({});
 }
- 
+
 int remove_message(string id, int number) {
     if(!id || number < 0)
         return BAD_DATA;
@@ -51,7 +51,7 @@ int remove_message(string id, int number) {
     save_object(DIR_BOARDS+"/"+current);
     return BBOARD_OK;
 }
- 
+
 int edit_note(string id, int number) {
     string *lines;
     string file;
@@ -77,10 +77,10 @@ int edit_note(string id, int number) {
     read_by = sub_array(read_by, number);
     return BBOARD_OK;
 }
- 
+
 int post_message(string id, string title) {
     string body;
- 
+
     if(!id || !title) return BAD_DATA;
     if(id != current) {
         if(file_size(DIR_BOARDS+"/"+id+".o") < 0) {
@@ -110,7 +110,7 @@ int post_message(string id, string title) {
           "message": body,
        ]) });
     } else {
-   
+
       posts += ({ ([
          "owner": (string)this_player()->query_name(),
          "date": time(),
@@ -151,7 +151,7 @@ int post_message_ingame(string id, string title, string body) {
           "message": body,
        ]) });
     } else {
-   
+
       posts += ({ ([
          "owner": (string)this_player()->query_name(),
          "date": time(),
@@ -166,7 +166,7 @@ int post_message_ingame(string id, string title, string body) {
     save_object(DIR_BOARDS+"/"+current);
     return BBOARD_OK;
 }
- 
+
 mapping get_message(string id, int number) {
     if(!id || number <0) return 0;
     if(current != id) {
@@ -214,15 +214,11 @@ string format_board_message(mapping post,int index,int readby)
     string str;
     int itime;
     str = "";
-    str +=("%^BOLD%^%^BLACK%^[%^BOLD%^%^CYAN%^"+(index+1>9 ?(index+1): " "+(index+1))+"%^BLACK%^]%^RESET%^");
-    if(readby == -1)
-        str +=("*");
-    else
-        str += (" ");
+    str +=((readby==-1?"%^WHITE%^{":"%^GREEN%^[")+"%^BOLD%^"+(index+1>9 ?(index+1): " "+(index+1))+"%^RESET%^"+(readby==-1?"%^WHITE%^}":"%^GREEN%^]"));
     itime = post["date"];
     if(PO->query_ooc_board()||avatarp(TP))
-        str += "%^BOLD%^%^GREEN%^"+arrange_string(capitalize(post["owner"]),10)+"%^BOLD%^%^BLACK%^|%^RESET%^";
-    str += arrange_string(post["title"],30) +"%^BOLD%^%^BLACK%^|%^RESET%^";
+        str += "%^BOLD%^%^GREEN%^"+arrange_string(capitalize(post["owner"]),10)+"%^RESET%^%^BLUE%^|%^ORANGE%^";
+    str += arrange_string(post["title"],atoi(TP->getenv("SCREEN"))-42) +"%^RESET%^%^BLUE%^|%^RESET%^%^GREEN%^";
     if(PO->query_ooc_board())
         str += (when(itime)+"\n");
     else
@@ -257,7 +253,7 @@ string display_board(string id) {
     }
     return borg;
 }
- 
+
 string display_board_top(string id) {
     string borg;
     int i,showposts,itime;
@@ -394,7 +390,7 @@ void clean_up() { return; }
 // Direct posting interface - thorn 001212
 int direct_post(string id, string poster, string title, string msg) {
     string body;
-        
+
     if(!id || !title) return BAD_DATA;
     if(id != current) {
         if(file_size(DIR_BOARDS+"/"+id+".o") < 0) {
@@ -407,7 +403,7 @@ int direct_post(string id, string poster, string title, string msg) {
             restore_object(DIR_BOARDS+"/"+current);
         }
     }
-    body = msg;  
+    body = msg;
     posts += ({ ([
        "owner": poster,
        "date": time(),
@@ -441,4 +437,3 @@ int purge_read(string id) {
     save_object(DIR_BOARDS+"/"+current);
     return 1;
 }
-

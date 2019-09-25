@@ -1,4 +1,4 @@
-//adapted from hmboard command to provide universal remote 
+//adapted from hmboard command to provide universal remote
 //board read/post/etc. ability for ooc boards *Styx*  9/2002
 //improvements to provide login listing by Garrett
 // next option added by Styx per Grendel's suggestion 8/2003
@@ -7,13 +7,38 @@
 #include <daemons.h>
 #include <objects.h>
 
-#define BBOARDS ( ({"main", "comment", "announcement", "rid", "hm", "newbie", "bard", "cavalier",\
-                    "cleric", "fighter", "mage", "paladin", "ranger", "thief", "psion", "druid", "barbarian", "psywarrior",\
-                    "warlock", "monk", "avatar", "pkmail", "avatarmail", "lib", "wiz", "bugs", "typos", "praise", "ideas"}))
 inherit DAEMON;
 
+string * BBOARDS=({
+        "comment",
+            "announcement",
+            "newbie",
+            "barbarian",
+            "bard",
+            "cleric",
+            "druid",
+            "fighter",
+            "mage",
+            "monk",
+            "paladin",
+            "psion",
+            "psywarrior",
+            "ranger",
+            "thief",
+            "warlock",
+            "avatar",
+            "pkmail",
+            "avatarmail",
+            "lib",
+            "wiz",
+            "bugs",
+            "typos",
+            "ideas"
+            });
+
+
 int check_access(string my_command, string which_board);
-int do_all_info() 
+int do_all_info()
 {
     int iter, board_count, new_count;
     string board_spam;
@@ -22,11 +47,11 @@ int do_all_info()
     iter=sizeof(BBOARDS);
     board_spam="\n";
     board_count = new_count = 0;
-    while (iter--) 
+    while (iter--)
     {
         if (!check_access("info",BBOARDS[iter])) continue;
         if(!file_exists("/d/common/boards/"+BBOARDS[iter]+"board.c")) continue;
-        
+
         board = present("board",find_object_or_load("/d/common/boards/"+BBOARDS[iter]+"board"));
         board_count ++;
         if (!objectp(board))
@@ -36,28 +61,28 @@ int do_all_info()
             board = present("board", tmp);
             if(!objectp(board)) continue;
         }
-        if (board->has_new()) 
+        if (board->has_new())
             new_count+=board->has_new();
-        board_spam += "  "+board->query_remote_short();        
+        board_spam += "%^ORANGE%^"+board->query_remote_short();
         board_spam += "\n";
     }
     board_spam = replace_string(board_spam,"OOC ","");
     board_spam = replace_string(board_spam," unread","");
     write(board_spam);
-    write("To access these %^MAGENTA%^OOC%^RESET%^ virtual boards, use %^ORANGE%^<bboard next>%^RESET%^%^ or %^ORANGE%^<help bboard>%^RESET%^%^RESET%^ for more information and examples.%^RESET%^");
+    write("%^GREEN%^To access these %^BOLD%^%^OOC%^RESET%^%^GREEN%^ virtual boards, use %^ORANGE%^<bboard next>%^GREEN%^%^ or %^ORANGE%^<help bboard>%^GREEN%^%^GREEN%^ for more information and examples.%^GREEN%^");
     if (new_count) write("%^BOLD%^%^MAGENTA%^You have %^YELLOW%^"+new_count+"%^MAGENTA%^ unread posts!");
 }
 
-int check_access(string my_command, string which_board) 
+int check_access(string my_command, string which_board)
 {
     if ((base_name(ETP) == "/d/shadowgate/jail") && (member_array(my_command,({"read","info","next" }) ) == -1 ) )
         return 0;
-    switch (which_board) 
+    switch (which_board)
     {
         case "assassin":
             if (TP->query("is_assassin") || avatarp(TP)) return 1;
             else return 0;
-            break;  
+            break;
         case "hm":
             if (high_mortalp(TP) || OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) || avatarp(TP)) return 1;
             else return 0;
@@ -66,11 +91,11 @@ int check_access(string my_command, string which_board)
             if (newbiep(TP) || high_mortalp(TP) || OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) || avatarp(TP)) return 1;
             else return 0;
             break;
-        case "main": case "comment":
+        case "comment":
             return 1;
             break;
         case "announcement": case "rid":
-            switch (my_command) 
+            switch (my_command)
             {
                 case "answer": case "post": case "edit": case "remove":
                     if(avatarp(TP)) return 1;
@@ -79,9 +104,9 @@ int check_access(string my_command, string which_board)
                 default:
                     return 1;
                     break;
-            }    
+            }
         case "mage":
-            if (TP->is_class("sorcerer") || TP->is_class("bard") || avatarp(TP)) return 1;   
+            if (TP->is_class("sorcerer") || TP->is_class("bard") || avatarp(TP)) return 1;
             if(TP->is_class(which_board)) return 1;
             else return 0;
             break;
@@ -98,7 +123,7 @@ int check_access(string my_command, string which_board)
             if(avatarp(TP)) return 1;
             else return 0;
             break;
-        case "bugs": case "typos": case "wiz": case "lib": 
+        case "bugs": case "typos": case "wiz": case "lib":
         case "praise": case "ideas":
             if(wizardp(TP)) return 1;
             else return 0;
@@ -114,35 +139,35 @@ int check_access(string my_command, string which_board)
     return 0;
 }
 
-int cmd_bboard(string str) 
+int cmd_bboard(string str)
 {
     object board, tmp;
     string which, command, myclass;
     mixed what;
     int ret, ok, iter, number;
 
-    if (!TP->query_level()) return notify_fail("Please create a character before using this command!"); 
+    if (!TP->query_level()) return notify_fail("Please create a character before using this command!");
     if(!str) {
         do_all_info();
         return 1;
     }
-    if(str == "next") 
-    {  
+    if(str == "next")
+    {
         iter=sizeof(BBOARDS);
-        while (iter--) 
+        while (iter--)
         {
             if (!check_access("info",BBOARDS[iter])) continue;
             if(!file_exists("/d/common/boards/"+BBOARDS[iter]+"board.c")) continue;
             board = present("board",find_object_or_load("/d/common/boards/"+BBOARDS[iter]+"board"));
-            if (!objectp(board)) 
+            if (!objectp(board))
             {
                 tmp = find_object_or_load("/d/common/boards/"+BBOARDS[iter]+"board")->reset();
                 if(!objectp(tmp)) continue;
                 board = present("board", tmp);
                 if(!objectp(board)) continue;
-            } 
+            }
             if((int)BBOARD_D->get_new_post(board->query_board_id(), (string)TP->query_true_name()) == -1) { continue; }
-            if( (int)BBOARD_D->get_new_post(board->query_board_id(), (string)TPQN) == sizeof( (mapping *)BBOARD_D->query_posts(board->query_board_id())) ) continue; 
+            if( (int)BBOARD_D->get_new_post(board->query_board_id(), (string)TPQN) == sizeof( (mapping *)BBOARD_D->query_posts(board->query_board_id())) ) continue;
             write("Message read from the %^YELLOW%^"+BBOARDS[iter]+" board%^RESET%^.");
             return board->read_message();
         }
@@ -158,8 +183,8 @@ int cmd_bboard(string str)
     if( which == "info" || (which == "all" && command=="info") ) {
         do_all_info();
         return 1;
-    }   
-    if(member_array(which, BBOARDS) == -1) { 
+    }
+    if(member_array(which, BBOARDS) == -1) {
         write("That is not a valid board name, please try again or "
               "check the list in <help bboard>.");
         return 1;
@@ -221,7 +246,7 @@ int cmd_bboard(string str)
     }
   return ret;
 }
-  
+
 
 int help(){
   int i;
@@ -233,7 +258,7 @@ bboard - read and access boards
 
 %^CYAN%^SYNTAX%^RESET%^
 
-bboard %^ORANGE%^%^ULINE%^NAME%^RESET%^ post %^ORANGE%^%^ULINE%^TITLE%^RESET%^ 
+bboard %^ORANGE%^%^ULINE%^NAME%^RESET%^ post %^ORANGE%^%^ULINE%^TITLE%^RESET%^
 bboard %^ORANGE%^%^ULINE%^NAME%^RESET%^ [read|answer|remove|view] [%^ORANGE%^%^ULINE%^POST_NUMBER%^RESET%^]
 bboard %^ORANGE%^%^ULINE%^NAME%^RESET%^ list
 bboard %^ORANGE%^%^ULINE%^NAME%^RESET%^ readall
