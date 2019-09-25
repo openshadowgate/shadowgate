@@ -263,9 +263,10 @@ string query_long(string junk) {
     borg += "\n%^GREEN%^There are %^YELLOW%^"+(int)BBOARD_D->get_num_posts(board_id)+"%^RESET%^%^GREEN%^ messages posted.\n";
     borg += (string)BBOARD_D->display_board(board_id);
     borg += "
-Board commands: %^ORANGE%^<post %^ORANGE%^%^ULINE%^TITLE%^RESET%^%^ORANGE%^>%^RESET%^, %^ORANGE%^<edit %^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^>%^RESET%^, %^ORANGE%^<read [%^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^]>%^RESET%^,
-                %^ORANGE%^<answer %^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^>%^RESET%^, %^ORANGE%^<remove %^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^>%^RESET%^, %^ORANGE%^<readall%^ORANGE%^>%^RESET%^.
-                %^ORANGE%^<top%^ORANGE%^>%^RESET%^ to show the 20 latest posts.
+%^GREEN%^Board commands:
+%^ORANGE%^<post %^ORANGE%^%^ULINE%^TITLE%^RESET%^%^ORANGE%^>%^RESET%^, %^ORANGE%^<edit %^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^>%^RESET%^, %^ORANGE%^<read [%^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^]>%^RESET%^, %^ORANGE%^<answer %^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^>%^RESET%^, %^ORANGE%^<remove %^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^>%^RESET%^
+%^ORANGE%^<top%^ORANGE%^>%^GREEN%^ to show the 20 latest posts
+%^ORANGE%^<readall%^ORANGE%^>%^GREEN%^ to mark everything as read
 ";
     return borg;
 }
