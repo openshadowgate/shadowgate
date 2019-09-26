@@ -1843,7 +1843,7 @@ void define_base_damage(int adjust)
 {
     if(query_aoe_spell()||query_traveling_aoe_spell())
     {
-        sdamage = roll_dice(clevel,2);
+        sdamage = roll_dice(1,20)*(clevel/18+1);
     }
     else if(spell_type=="warlock")
     {
@@ -1877,7 +1877,7 @@ void define_base_damage(int adjust)
         case 8: sdamage = roll_dice(clevel,9)+roll_dice(1,clevel/2); break;
         case 9: sdamage = roll_dice(clevel,10); break;
         case 10..20: sdamage = roll_dice(clevel,10); break;
-        default: sdamage = roll_dice(clevel,6); break;
+        default: sdamage = roll_dice(clevel,8); break;
         }
     }
 
