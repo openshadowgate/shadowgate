@@ -20,7 +20,7 @@ static int current_page;
 
 int stuff(string str);
 void set_stuff(string str,string stuff);
-void set_author(string alias);   
+void set_author(string alias);
 int remove_page(string str);
 int turn_page(string str);
 int show_contents();
@@ -65,7 +65,7 @@ void SAVE(string file);
 void RESTORE(string file);
 
 
-void create() 
+void create()
 {
     __BookData = ([]);
     ::create();
@@ -113,9 +113,7 @@ int stuff(string str)
     if(!check_status()) { return 1; }
     str = lower_case(str);
     if(str != "short" && str != "long" && str != "title") { return 0; }
-    if(str == "short" && __BookShort) { return notify_fail("That has already been set.\n"); }
-    if(str == "long" && __BookLong) { return notify_fail("That has already been set.\n"); }
-    write("Please enter the "+str+" for the book");
+    write("Enter the "+str+" for the book");
     write("Enter ** to abort");
     input_to("set_stuff",str);
     return 1;
@@ -160,7 +158,7 @@ void set_stuff(string str,string stuff)
                     return;
                 }
             }
-        }      
+        }
         if(!invalid_character_check(str,TP)) { return 1; }
         __Title = str;
         set_title(__Title);
@@ -220,15 +218,15 @@ int remove_page(string str)
         for(j=0;j<sizeof(pages);j++)
         {
             numbers = pages[page_keys[j]];
-            if(numbers["page"][0] == page ) 
-            { 
+            if(numbers["page"][0] == page )
+            {
                 new_page = pages[page_keys[j]];
                 map_delete(pages,page_keys[j]);
                 if(!sizeof(keys(chapters[chap_keys[i]]))) { map_delete(chapters,chap_keys[i]); }
                 break;
             }
         }
-    }    
+    }
     if(!new_page) { return notify_fail("There is no page: "+page+"."); }
     new_keys = keys(new_page);
     ob = new("/d/common/obj/misc/paper.c");
@@ -244,7 +242,7 @@ int remove_page(string str)
     set_page_numbers();
     tell_room(ETP,"%^BOLD%^"+TP->QCN+" tears a page from "+__Title+".%^RESET%^",TP);
     tell_object(TP,"%^BOLD%^You tear page "+page+" out of "+__Title+".%^RESET%^");
-    
+
     return 1;
 }
 
@@ -254,7 +252,7 @@ int turn_page(string str)
     string page;
     if(!check_status()) { return 1; }
 
-    if(sscanf(str, "to page %d",num) == 1) 
+    if(sscanf(str, "to page %d",num) == 1)
     {
         if(!last_page) { return 1; }
         if(num < 1) { num = 1; }
@@ -266,22 +264,22 @@ int turn_page(string str)
         tell_object(TP,"%^BOLD%^You open up "+__Title+"%^RESET%^%^BOLD%^ and "
             "turn to page "+num+".%^RESET%^");
 
-        return 1; 
-    }    
-    if(sscanf(str,"%s back",page) == 1) 
-    { 
+        return 1;
+    }
+    if(sscanf(str,"%s back",page) == 1)
+    {
         if(!last_page) { return 1; }
-        current_page--; 
+        current_page--;
         if(current_page < 1) { current_page = 1; }
-        read_page(current_page); 
+        read_page(current_page);
         tell_room(ETP,"%^BOLD%^"+TP->QCN+" flips back through the "
             "pages of "+__Title+".%^RESET%^",TP);
         tell_object(TP,"%^BOLD%^You flip back through the pages "
             "of "+__Title+".%^RESET%^");
         return 1;
     }
-    if(sscanf(str,"%s",page) == 1) 
-    { 
+    if(sscanf(str,"%s",page) == 1)
+    {
         if(!last_page) { return 1; }
         if(lower_case(page) != "page") { return 0; }
         current_page++;
@@ -301,7 +299,7 @@ int turn_page(string str)
 int sort_chapters(string one,string two)
 {
     string tmp1,tmp2;
-    int len1,len2,num1,num2;    
+    int len1,len2,num1,num2;
     one = FILTERS_D->filter_colors(one);
     two = FILTERS_D->filter_colors(two);
     len1 = strlen(one);
@@ -322,7 +320,7 @@ int show_contents()
     if(!objectp(TP)) { return 1; }
     if(!check_status()) { return 1; }
     chapters = query_chapter_names();
-    
+
     if(!sizeof(chapters)) { return notify_fail("The book is still empty!\n"); }
 
     center = strlen(FILTERS_D->filter_colors(__Title));
@@ -352,9 +350,9 @@ int check_page(string str)
 {
     object page;
     page = present(str,TP);
-    if(!objectp(page)) 
-    { 
-        return notify_fail(""+str+" not in your inventory, try add paper, add paper 2,etc"); 
+    if(!objectp(page))
+    {
+        return notify_fail(""+str+" not in your inventory, try add paper, add paper 2,etc");
     }
     if(!check_status()) { return 1; }
     if(page->id("component")) { return notify_fail("You can't put that in a book."); }
@@ -387,7 +385,7 @@ mapping get_page(int page)
             numbers = pages[page_keys[j]];
             if(numbers["page"][0] == page ) { return numbers; }
         }
-    }    
+    }
     return ([]);
 }
 
@@ -402,7 +400,7 @@ int chapter_start_page(string chapter)
     page_keys = keys(pages);
     if(!sizeof(page_keys)) { return -1; }
     numbers = pages[page_keys[0]];
-    return numbers["page"][0];  
+    return numbers["page"][0];
 }
 
 void read_page(int page)
@@ -418,7 +416,7 @@ void read_page(int page)
 
     center = strlen(FILTERS_D->filter_colors(__Title));
     center = 33 - center;
-    center = center/2; 
+    center = center/2;
     writing = keys(page_data);
 
     set("language","wizish");
@@ -441,10 +439,10 @@ void read_page(int page)
 
 void add_page(string chapter,object page)
 {
-    mapping chapters=([]),page_data=([]); 
+    mapping chapters=([]),page_data=([]);
     string *languages=({}),*writings=({});
     int i;
-    
+
     if(!page->query("language list")) { return notify_fail("No blank pages allowed.\n"); }
     if(!page->query("read"))          { return notify_fail("No blank pages allowed.\n"); }
     if(!stringp(chapter))             { return notify_fail("You must enter a chapter name.\n"); }
@@ -457,7 +455,7 @@ void add_page(string chapter,object page)
     languages += page->query("language list");
     writings  += ({ "\t\t\t%^BOLD%^"+chapter+"%^RESET%^\n" });
     writings  += page->query("read");
-  
+
     page_data["page"] = ({ 0 });
 
     for(i=0;i<sizeof(writings);i++)
@@ -471,7 +469,7 @@ void add_page(string chapter,object page)
     tell_room(ETP,"%^BOLD%^"+TP->QCN+" adds a page to "+__Title+".%^RESET%^",TP);
     tell_object(TP,"%^BOLD%^You add a page to "+__Title+".%^RESET%^");
     page->remove();
-    
+
     return;
 }
 
@@ -499,7 +497,7 @@ void set_page_numbers()
             numbers["page"] = ({ count });
         }
         set_last_page(count);
-    }    
+    }
     return;
 }
 
@@ -603,12 +601,12 @@ int help(string str)
 
 int check_status()
 {
-    if(TP->query_bound() || TP->query_unconcious() || TP->query_paralyzed() || TP->query_tripped()) 
+    if(TP->query_bound() || TP->query_unconcious() || TP->query_paralyzed() || TP->query_tripped())
     {
         TP->send_paralyzed_message("info",TP);
         return 0;
     }
-    if (TP->query_blind()) 
+    if (TP->query_blind())
     {
         notify_fail("You are blind and cannot see anything.\n");
         return 0;
@@ -622,7 +620,7 @@ int check_status()
 void check_forgery(object player)
 {
     if(!objectp(player)) { return; }
-    if(query_library_book()) { set_modified(1); }   
+    if(query_library_book()) { set_modified(1); }
     return;
 }
 
