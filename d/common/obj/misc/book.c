@@ -112,7 +112,9 @@ int stuff(string str)
     if(!str) { return 0; }
     if(!check_status()) { return 1; }
     str = lower_case(str);
-    if(str != "short" && str != "long" && str != "title") { return 0; }
+    if(str != "short" &&
+       str != "long" &&
+       str != "title") { return 0; }
     write("Enter the "+str+" for the book");
     write("Enter ** to abort");
     input_to("set_stuff",str);
@@ -564,38 +566,42 @@ int help(string str)
     if(sscanf(str,"%s",tmp) != 1)       { return 0; }
     if(tmp != "book" && tmp != "books") { return 0; }
 
-    write("\tThis book can be used to store papers, both for \n"
-          "\tthe purpose of organization, and to create meaningful \n"
-          "\ttomes of information.  The following functions are \n"
-          "\tavailable:\n"
-          "\t%^RED%^add <page>%^RESET%^ where <page> is a sheet of paper or parchment \n"
-          "\tin your inventory.  You will be prompted to enter the \n"
-          "\tname of the chapter the page belongs in.  Chapter names \n"
-          "\tcan be anything you choose.  Spelling and capitalization \n"
-          "\tmust be exact for adding additional pages into the chapter.\n"
-          "\t%^RED%^remove page <number>%^RESET%^ will remove the page <number> from the \n"
-          "\tbook and return it to your inventory.\n"
-          "\t%^RED%^turn page%^RESET%^ will flip forward through the pages from your \n"
-          "\tcurrent page.\n"
-          "\t%^RED%^turn page back%^RESET%^ will flip backwards through the pages from \n"
-          "\tyour current page.\n"
-          "\t%^RED%^turn to <page>%^RESET%^ will turn to the page number you specify \n"
-          "\twith <page>.\n"
-          "\t%^RED%^set long%^RESET%^ will set the long description of the book, what \n"
-          "\tyou see when looking at it.  This can only be done once.\n"
-          "\t%^RED%^set short%^RESET%^ will set the short description of the book, what \n"
-          "\tis seen in your inventory.  This can only be done once.\n"
-          "\t%^RED%^set title%^RESET%^ will change the title of the book.  It can be \n"
-          "\tchanged as many times as necessary.\n"
-          "\t%^RED%^contents%^RESET%^ will list the contents of the book by chapter.  The \n"
-          "\tpage number the chapter starts on will also be displayed.\n"
-          "\t%^CYAN%^About Authors%^RESET%^ -When the book is modified for the first time \n"
-          "\tyou will be prompted to enter the author's alias.  You will \n"
-          "\tbe recognized as the author of the book regardless of what \n"
-          "\talias you enter.  This is for use with libraries which will \n"
-          "\tallow you to continue to modify your own books at a later time.\n");
+   write(
+"%^CYAN%^BOOKS%^RESET%^
+This book can be used to store papers, both for the purpose of organization, and to create meaningful tomes of information. The following functions are available:
 
-    return 1;
+%^ORANGE%^<add %^ORANGE%^%^ULINE%^PAGE%^RESET%^%^ORANGE%^>%^RESET%^
+  Where %^ORANGE%^%^ULINE%^PAGE%^RESET%^ is a sheet of paper or parchment in your inventory. You will be prompted to enter the name of the chapter the page belongs in. Chapter names can be anything you choose. Spelling and capitalization must be exact for adding additional pages into the chapter.
+
+%^ORANGE%^<remove page %^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^ORANGE%^>%^RESET%^
+  Will remove the page %^ORANGE%^%^ULINE%^NUMBER%^RESET%^ from the book and return it to your inventory.
+
+%^ORANGE%^<turn page>%^RESET%^
+  Will flip forward through the pages from your current page.
+
+%^ORANGE%^<turn page back>%^RESET%^
+  Will flip backwards through the pages from your current page.
+
+%^ORANGE%^<turn to %^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^ORANGE%^>%^RESET%^
+  Will turn to the page number you specify with %^ORANGE%^%^ULINE%^PAGE%^RESET%^.
+
+%^ORANGE%^<set long>%^RESET%^
+  Will set the long description of the book, what you see when looking at it. This can only be done once.
+
+%^ORANGE%^<set short>%^RESET%^
+  Will set the short description of the book, what is seen in your inventory. This can only be done once.
+
+%^ORANGE%^<set title>%^RESET%^
+  Will change the title of the book. It can be changed as many times as necessary.
+
+%^ORANGE%^<contents>%^RESET%^
+  Will list the contents of the book by chapter. The page number the chapter starts on will also be displayed.
+
+%^ULINE%^%^CYAN%^About Authors%^RESET%^
+When the book is modified for the first time you will be prompted to enter the author's alias. You will be recognized as the author of the book regardless of what alias you enter. This is for use with libraries which will allow you to continue to modify your own books at a later time.
+");
+
+   return 1;
 }
 
 
