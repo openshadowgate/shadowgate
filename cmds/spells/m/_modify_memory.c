@@ -7,14 +7,14 @@ create() {
     set_spell_name("modify memory");
     set_spell_level(([ "assassin" : 4, "bard": 4, "psion" : 4 ]));
     set_spell_sphere("enchantment_charm");
-    set_discipline("telepath");    
+    set_discipline("telepath");
     set_syntax("cast CLASS modify memory on TARGET");
     set_description("This spell alters victim's memory so they won't remember who you are. Should their will falter they will forget your name and will be momentarily dazed.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
     set_silent_casting(1);
-    set_save("will");    
+    set_save("will");
 }
 
 string query_cast_string()
@@ -36,11 +36,11 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    
+
     if(!do_save(target,-4)){
         spell_successful();
         tell_object(caster,"%^BLUE%^You sense your memory attempt succeeded, and your victim is momentarily dazed.%^RESET%^");
-        target->set_paralyzed(roll_dice(1,3),"%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted.%^RESET%^");
+        target->set_paralyzed(roll_dice(1,3)*8,"%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted.%^RESET%^");
         target->remove_relationship(caster->query_true_name());
     }
     tell_object(caster,"%^BLUE%^You sense your memory altering attemp failed.%^RESET%^");
@@ -52,4 +52,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
