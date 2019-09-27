@@ -1,5 +1,5 @@
 // Airbolt
-//Cleaned up a bit and brought into balance with other 5th level 
+//Cleaned up a bit and brought into balance with other 5th level
 //bolt spells by ~Circe~ 4/24/08 during the rebalancing of domains
 #include <std.h>
 #include <daemons.h>
@@ -17,6 +17,7 @@ void create()
     set_spell_sphere("elemental air");
     set_spell_domain("air");
     set_syntax("cast CLASS airbolt on TARGET");
+    set_damage_desc("bludgeoning");
     set_description("This spell enables a priest to concentrate the air around him into a powerful gust of wind. The "
         "priest chooses the target of the spell, and there is a chance that the target is knocked off balance and will drop what "
         "he or she is holding.  In addition, the gale force winds may hit others who are standing near the target.");
@@ -77,7 +78,7 @@ void spell_effect(int prof)
         for(i=0;i<sizeof(attackers);i++)
         {
             if(!objectp(attackers[i])) { continue; }
-           
+
             if(attackers[i] == target)
             {
                 tell_object(target,"%^BOLD%^%^BLUE%^The gale conjured "+
@@ -85,9 +86,9 @@ void spell_effect(int prof)
                 tell_room(environment(target),"%^BOLD%^%^BLUE%^"+
                     ""+target->QCN+" is knocked backwards with the "+
                     "gale force wind.%^RESET%^",target);
-              
+
                 spell_kill(attackers[i],caster);
-              
+
                 if(!do_save(target))
                 {
                     if(!random(2))
@@ -112,7 +113,7 @@ void spell_effect(int prof)
                         target->set_tripped(random(2)+1,"%^BOLD%^"+
                             "%^BLUE%^You are knocked flat by the gale winds.");
                     }
-                    if(objectp(attackers[i])) damage_targ(attackers[i],"torso",dam,"bludgeoning"); 
+                    if(objectp(attackers[i])) damage_targ(attackers[i],"torso",dam,"bludgeoning");
                 }
                 else
                 {
@@ -145,7 +146,7 @@ void spell_effect(int prof)
                         "winds.%^RESET%^");
                     damage_targ(attackers[i],"torso",dam/2,"bludgeoning");
                 }
-            }  
+            }
         }
     }
     else

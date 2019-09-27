@@ -10,7 +10,8 @@ void create() {
     set_spell_level(([ "mage" : 7, "druid" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS finger of death on TARGET");
-    set_description("Finger of death pulls the darkness in close around the caster as the caster attempts to free the soul of the target from its coil, be they alive or undead, effectively killing them.");
+    set_damage_desc("negative energy");
+    set_description("Finger of death pulls the darkness in close around the caster as the caster attempts to free the soul of the target from its coil, be they alive or undead, effectively killing them. Target able to withstand the spell will receive standard damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("fort");
@@ -22,7 +23,7 @@ string query_cast_string() {
 
 void spell_effect(int prof) {
     int x;
-    
+
     if (!objectp(target) || !objectp(caster)){
         if(objectp(TO)) TO->remove();
         return;
@@ -30,10 +31,10 @@ void spell_effect(int prof) {
     define_base_damage(-5);
     place = environment(caster);
 
-    spell_successful();    
+    spell_successful();
 
-    if(pointerp(target->query_property("no_slay"))) 
-        if(member_array(caster->query_name(),target->query_property("no_slay")) != -1) 
+    if(pointerp(target->query_property("no_slay")))
+        if(member_array(caster->query_name(),target->query_property("no_slay")) != -1)
             x = 1;
 
     if((string)target->query_property("no death") || x || do_save(target,4))

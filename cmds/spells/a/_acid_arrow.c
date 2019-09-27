@@ -9,13 +9,14 @@ inherit SPELL;
 string target_limb, element;
 int num;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("acid arrow");
     set_spell_level(([ "mage" : 2 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS acid arrow on TARGET");
+    set_damage_desc("acid, versatile arcanist");
     set_description("When throwing a dart at a victim and casting the acid arrow spell, the dart will turn into an "
         "acidic arrow with the aim and speed as if fired by a fighter of the caster's spell level.  Damage will be inflicted "
         "immediately upon hitting the target, then the acid will seep through the victim's veins, doing more damage per combat "
@@ -29,11 +30,11 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     element = (string)caster->query("elementalist");
-    
-    switch(element) 
+
+    switch(element)
     {
     case "cold":        set_immunities( ({ "cold"}) );          break;
     case "electricity": set_immunities( ({ "electricity"}) );   break;
@@ -41,12 +42,12 @@ string query_cast_string()
     case "sonic":       set_immunities( ({ "sonic"}) );         break;
     default:            element = "acid";                       break;
     }
-    
+
     return caster->QCN+" shouts out magical words in a powerful voice while holding a dart in "+caster->QP+" grasp.";
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     string coloring, arrowtype, shortmsg;
     int need, roll;
@@ -57,14 +58,14 @@ void spell_effect(int prof)
         return;
     }
 
-    if(!objectp(target) || !present(target,place)) 
+    if(!objectp(target) || !present(target,place))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         dest_effect();
         return;
     }
-    
-    if(!caster->ok_to_kill(target)) 
+
+    if(!caster->ok_to_kill(target))
     {
         dest_effect();
         return 1;
@@ -74,7 +75,7 @@ void spell_effect(int prof)
     need = (int)"/daemon/bonus_d.c"->thaco(clevel,"fighter") - ((int)target->query_ac());
     roll = random(20) + 1;
 
-    switch(element) 
+    switch(element)
     {
     case "cold":        coloring = "%^CYAN%^";      arrowtype = "an icy";       shortmsg = "Ice sears";             break;
     case "electricity": coloring = "%^ORANGE%^";    arrowtype = "a charged";    shortmsg = "Static jolts";          break;
@@ -82,14 +83,14 @@ void spell_effect(int prof)
     case "sonic":       coloring = "%^MAGENTA%^";   arrowtype = "a buzzing";    shortmsg = "Reverberations echo";   break;
     default:            coloring = "%^GREEN%^";     arrowtype = "an acidic";    shortmsg = "Acid burns";            break;
     }
-    
-    if (interactive(caster)) 
+
+    if (interactive(caster))
     {
         tell_object(caster,"%^BOLD%^"+coloring+"You launch a dart out of your hand, aiming it at "+target->QCN+"!");
         tell_object(target,"%^BOLD%^"+coloring+""+caster->QCN+" launches a dart out of "+caster->QP+" hand, aiming it at you!");
         tell_room(environment(target),"%^BOLD%^"+coloring+""+caster->QCN+" launches a dart out of "+caster->QP+" hand, aiming it at "+target->QCN+"!",({ caster,target}) );
-        
-        if ( roll < need && roll != 20 ) 
+
+        if ( roll < need && roll != 20 )
         {
             tell_object(caster,""+coloring+"Your dart explodes into "+arrowtype+" arrow and zips past "+target->QP+" "+target_limb+".");
             tell_object(target,""+coloring+""+caster->QCN+"'s dart explodes into "+arrowtype+" arrow and zips past you.");
@@ -97,55 +98,55 @@ void spell_effect(int prof)
             dest_effect();
             return 1;
         }
-        
+
         tell_object(caster,"%^BOLD%^"+coloring+"Your dart explodes into "+arrowtype+" arrow and pierces "+target->QP+" "+target_limb+"!");
         tell_object(target,"%^BOLD%^"+coloring+""+caster->QCN+"'s dart explodes into "+arrowtype+" arrow and pierces your "+target_limb+"!\n%^RESET%^"+coloring+shortmsg+" through your veins.");
         tell_room(environment(target),"%^BOLD%^"+coloring+""+caster->QCN+"'s dart explodes into "+arrowtype+" arrow and pierces "+target->QCN+"'s "+target_limb+"!",({ caster,target}) );
         spell_successful();
-    } 
-    else 
+    }
+    else
     {
         tell_object(target,"%^BOLD%^"+coloring+"A dart flies from "+caster->QCN+", aiming directly at you!");
         tell_room(place,"%^BOLD%^"+coloring+"A dart flies from "+caster->QCN+", aiming directly at "+target->QCN+"!",({ target}) );
-        
-        if ( roll < need && roll != 20 ) 
+
+        if ( roll < need && roll != 20 )
         {
             tell_object(target,""+coloring+"The dart explodes into "+arrowtype+" arrow and zips past you.");
             tell_room(place,""+coloring+"The dart explodes into "+arrowtype+" arrow and zips past "+target->QCN+".", ({ target}) );
             dest_effect();
             return 1;
         }
-        
+
         tell_object(target,"%^BOLD%^"+coloring+"The dart explodes into "+arrowtype+" arrow and pierces your "+target_limb+"!\n%^RESET%^"+coloring+shortmsg+" through your veins.");
         tell_room(place,"%^BOLD%^"+coloring+"The dart explodes into "+arrowtype+" arrow and pierces "+target->QCN+"'s "+target_limb+"!",({ target}) );
         spell_successful();
     }
 
     damage_targ(target, target_limb, sdamage, element);
-    spell_kill(target,caster); 
-    
+    spell_kill(target,caster);
+
     if(!objectp(target))
     {
         dest_effect();
     }
-    
+
     num = (clevel / 3);
     if(num) { call_out("more_acid", ROUND_LENGTH); }
     else { dest_effect(); }
 }
 
 
-void more_acid() 
-{    
-    if(!objectp(target)) 
+void more_acid()
+{
+    if(!objectp(target))
     {
         dest_effect();
         return;
     }
-   
+
     death_check(target);
-   
-    switch(element) 
+
+    switch(element)
     {
     case "cold":        tell_object(target,"%^CYAN%^Pain floods through your "+target_limb+" as the icy chill continues to burn.");         break;
     case "electricity": tell_object(target,"%^ORANGE%^Pain floods through your "+target_limb+" as the charged dart jolts you again.");      break;
@@ -155,13 +156,13 @@ void more_acid()
     }
     define_base_damage(0);//lazy re-roll
     damage_targ(target, target_limb, sdamage/2,element);
-    
-    if (!target && objectp(TO)) 
+
+    if (!target && objectp(TO))
     {
         dest_effect();
         return;
     }
-    
+
     if (num-- > 0) { call_out("more_acid", ROUND_LENGTH); }
     else
     {
@@ -176,13 +177,13 @@ void more_acid()
 }
 
 
-void dest_effect() 
-{  
+void dest_effect()
+{
     if (find_call_out("more_acid") != -1) remove_call_out("more_acid");
-    
-    if(objectp(target)) 
+
+    if(objectp(target))
     {
-        switch(element) 
+        switch(element)
         {
         case "cold":        tell_object(target,"%^CYAN%^The icy chill finally recedes.");                   break;
         case "electricity": tell_object(target,"%^ORANGE%^The static jolts finally recede.");               break;
@@ -191,10 +192,10 @@ void dest_effect()
         default:            tell_object(target,"%^GREEN%^The burning of the acid finally recedes.");        break;
         }
     }
-    
+
     ::dest_effect();
     if(objectp(TO)) { TO->remove(); }
-    
+
     else {
         log_file("debug.log","ERROR - TO (this object) invalid "+
         "object in dest_effect for Acid Arrow - By Saide to "+

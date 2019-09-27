@@ -12,6 +12,7 @@ create() {
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS magic missile on TARGET");
+    set_damage_desc("force");
     set_description("Magic missile will shoot darts of magical energy from your hand and they will fly towards your "
 "target with the unfailing ability to hit it.  The damage it causes increases by level.");
     set_verbal_comp();
