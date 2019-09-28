@@ -63,7 +63,7 @@ int prerequisites(object player)
     return 1;
 }
 
-mapping stat_requirements() { return ([ "strength" : 15, "dexterity" : 15 ]); }
+mapping stat_requirements() { return ([ "wisdom" : 15 ]); }
 
 int *saving_throws() { return BASE_CLASS->saving_throws(); }
 
