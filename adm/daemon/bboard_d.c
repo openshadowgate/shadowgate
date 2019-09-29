@@ -213,12 +213,14 @@ string format_board_message(mapping post,int index,int readby)
 {
     string str;
     int itime;
+    int scrwidth = atoi(TP->getenv("SCREEN"));
+    scrwidth = scrwidth?scrwidth:75;
     str = "";
     str +=((readby==-1?"%^WHITE%^{":"%^GREEN%^[")+"%^BOLD%^"+(index+1>9 ?(index+1): " "+(index+1))+"%^RESET%^"+(readby==-1?"%^WHITE%^}":"%^GREEN%^]"));
     itime = post["date"];
     if(PO->query_ooc_board()||avatarp(TP))
         str += "%^BOLD%^%^GREEN%^"+arrange_string(capitalize(post["owner"]),10)+"%^RESET%^%^BLUE%^|%^ORANGE%^";
-    str += arrange_string(post["title"],atoi(TP->getenv("SCREEN"))-42) +"%^RESET%^%^BLUE%^|%^RESET%^%^GREEN%^";
+    str += arrange_string(post["title"],scrwidth-42) +"%^RESET%^%^BLUE%^|%^RESET%^%^GREEN%^";
     if(PO->query_ooc_board())
         str += (when(itime)+"\n");
     else
