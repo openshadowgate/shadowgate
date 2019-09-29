@@ -57,3 +57,4 @@
 %^CYAN%^Using %^GREEN%^<my>%^CYAN%^ can help you differentiate between items on the ground and in your inventory. For example, %^GREEN%^<look my bag>%^CYAN%^ or %^GREEN%^<look my boots>%^CYAN%^, will target your inventory.
 %^CYAN%^Area guides found in our forums can help you find your way. Visit: %^ULINE%^%^GREEN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=134%^RESET%^
 %^CYAN%^Use %^GREEN%^<set term ansi-no-black>%^CYAN%^ if you can't see black colors.
+%^CYAN%^You can manipulate your mood with %^GREEN%^<fortune>%^RESET%^ command.
