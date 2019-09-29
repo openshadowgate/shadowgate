@@ -1726,7 +1726,7 @@ void heart_beat()
                 add_hp(roll_dice(2,4));
         if(query_property("fast healing"))
             if(query_hp() < query_max_hp())
-                add_hp(roll_dice(query_property("fast healing"),20));
+                add_hp(roll_dice(query_property("fast healing"),12));
         if(FEATS_D->usable_feat(TO,"mighty resilience") &&
            !TO->query_property("stab_resilience"))
         {
