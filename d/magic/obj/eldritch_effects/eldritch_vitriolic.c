@@ -36,6 +36,13 @@ void heart_beat() {
    if(ETO != myvictim) { TO->remove(); return; }
    if(!active) { active = 1; return; } // was double-ticking first round, this should delay the first damage tick.
 
+   if(myvictim->query_hp()<-myvictim->query_max_hp() ||
+      myvictim->query_ghost())
+   {
+       tell_object(myvictim,"%^GREEN%^The searing acid finally fades from your skin.%^RESET%^");
+       tell_room(environment(myvictim),"%^GREEN%^The searing acid finally fades from "+myvictim->QCN+"'s skin.%^RESET%^",myvictim);
+       TO->remove();
+   }
    dmg = roll_dice(2,6)+dmgboost;
    tell_object(myvictim,"%^GREEN%^Searing acid continues to burn through your skin!%^RESET%^");
    myvictim->cause_typed_damage(myvictim,"torso",dmg,"acid");
