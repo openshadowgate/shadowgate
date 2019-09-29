@@ -26,7 +26,7 @@ string *restricted_classes(string subrace)
     if(!subrace || subrace == "") { return ({ "cavalier", "paladin", "ranger", "psion", "psywarrior", "druid" }); }
     switch(subrace)
     {
-      case "svirfneblin": case "deep gnome": return ({ "cavalier", "paladin", "ranger", "psion", "psywarrior", "bard", "druid", "warlock" }); break;
+      case "svirfneblin": case "deep gnome": return ({ "cavalier", "paladin", "psion", "psywarrior", "bard", "druid", "warlock" }); break;
       case "forest gnome": return ({ "cavalier", "paladin", "psion", "psywarrior", }); break;
       case "rock gnome" : return ({ "cavalier","paladin","psion","psywarrior" }); break;
       default: return ({ "cavalier", "paladin", "ranger", "psion", "psywarrior", "druid" }); break;
@@ -255,10 +255,10 @@ string *query_eye_colors(string subrace) {
 
 string *query_subraces(object who) {
     string *subraces;
-    subraces = ({"rock gnome", "forest gnome"});
-    if(OB_ACCOUNT->is_experienced(who->query_true_name()) || avatarp(who) || who->query("is_valid_npc")) {
-        subraces += ({"deep gnome"});
-    }
+    subraces = ({"rock gnome", "forest gnome", "deep gnome"});
+    /* if(OB_ACCOUNT->is_experienced(who->query_true_name()) || avatarp(who) || who->query("is_valid_npc")) { */
+    /*     subraces += ({"deep gnome"}); */
+    /* } */
     return subraces;
 }
 
