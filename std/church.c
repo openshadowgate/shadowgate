@@ -194,7 +194,7 @@ int pray()
 
         exp = (int)TP->query_exp();
         expdelta = abs(EXP_NEEDED[thelevel+1]-EXP_NEEDED[thelevel]);
-        exploss = expdelta * thelevel/89;
+        exploss = expdelta * thelevel/119;
         log_file("deathlexp", TPQN+" lost "+exploss+" in resurrection at a church.\n");
 
         TP->set_general_exp(myclass,exp - exploss);
