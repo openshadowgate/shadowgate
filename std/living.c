@@ -1572,6 +1572,11 @@ int is_undead()
             query("undead")) || 0;
 }
 
+int is_vampire()
+{
+    return (query("vampire")) || 0;
+}
+
 void reset_all_status_effects()
 {
     object *myFeats;

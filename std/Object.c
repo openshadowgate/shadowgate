@@ -534,6 +534,7 @@ mixed query_property(string prop)
             if(subrace == "maalish") num += 5; // +5 SR for human Maalish ethnicity
           }
         }
+        if(TO->is_vampire()) num+=10;
         if(FEATS_D->usable_feat(TO,"resistance")) num+= 2;
         if(FEATS_D->usable_feat(TO, "increased resistance")) num += 4;
         if(FEATS_D->usable_feat(TO, "improved resistance")) num += 6;

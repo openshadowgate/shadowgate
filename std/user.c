@@ -1435,7 +1435,11 @@ void setup() {
   //This is a work-around to make undead players great again, since
   //is_undead() picks up on property.
   if(query("undead"))
+  {
       set_property("undead",1);
+      if(query("vampire"))
+          set_property("fast healing",5);
+  }
   TO->update_channels();
   if(avatarp(TO) && (int)TO->query_level() > 100)
   {
