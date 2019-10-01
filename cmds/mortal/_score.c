@@ -192,13 +192,24 @@ int cmd_score(string str)
    title += title_tmp;
    spell_domains = targ->query_divine_domain();
 
+
    race_var = capitalize(targ->query_race());
 
-  if(targ->query("subrace"))
-      race_var += ", "+targ->query("subrace");
+   if(targ->query("subrace"))
+   {
+       if(strsrch(targ->query("subrace"),targ->query_race())<0)
+           race_var = capitalize(targ->query("subrace"))+" "+race_var;
+       else
+           race_var = capitalize(targ->query("subrace"));
+   }
 
    if(targ->is_undead())
-       race_var += ", undead";
+   {
+       if(targ->is_vampire())
+           race_var = "Vampyr "+race_var;
+       else
+           race_var = "Undead "+race_var;
+   }
 
   if(objectp(shape = TP->query_property("shapeshifted")))
   {

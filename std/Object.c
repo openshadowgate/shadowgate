@@ -526,6 +526,7 @@ mixed query_property(string prop)
         num += props[prop];
         return num;
     }*/
+
     if(prop == "spell damage resistance")
     {
         if((string)TO->query_race() == "human") {
@@ -534,17 +535,25 @@ mixed query_property(string prop)
             if(subrace == "maalish") num += 5; // +5 SR for human Maalish ethnicity
           }
         }
-        if(TO->is_vampire()) num+=10;
         if(FEATS_D->usable_feat(TO,"resistance")) num+= 2;
         if(FEATS_D->usable_feat(TO, "increased resistance")) num += 4;
         if(FEATS_D->usable_feat(TO, "improved resistance")) num += 6;
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "spell damage resistance"));
     }
+    if(TO->is_vampire())
+    {
+        if(prop == "spell damage resistance")
+            num+=10;
+        if(prop == "silver resistance")
+            num+=10;
+        if(prop == "electricity resistance")
+            num+=10;
+    }
 
-        //Added this to allow for a temporary enchantment property - Saide
-        if(prop == "enchantment")
-        {
+    //Added this to allow for a temporary enchantment property - Saide
+    if(prop == "enchantment")
+    {
         if(objectp(ETO) && props[prop] > 0)
         {
             if(intp(scaled = TO->query("scaledlevel")) && scaled > 0 && living(ETO))
@@ -560,10 +569,10 @@ mixed query_property(string prop)
             }
         }
         if(props["temporary enchantment"])
-                {
-                        return props[prop] + props["temporary enchantment"];
-                }
+        {
+            return props[prop] + props["temporary enchantment"];
         }
+    }
     if(prop == "soulbound")
     {
         if(TO->is_sheath())
