@@ -204,25 +204,8 @@ int recall_innate_spells(object who)
 	for(x = 0;x < sizeof(innate_spells);x++)
 	{
 		tmp = capitalize(innate_spells[x]);
-		uses = (int)TP->query_innate_ability_uses_remaining(innate_spells[x]);
-		max = (int)TP->query_innate_ability_total_uses(innate_spells[x]);
-		if(uses == -1 && max == -1)
-		{
 			MyMsg += "\n%^BOLD%^%^WHITE%^"+sprintf("%-20s %-5s", tmp, "At Will");
 			MyMsg += "%^RESET%^";
-		}
-		else if(uses <= 0)
-		{
-			MyUses = "Refreshes In : ";
-			MyUses += MakeTimeDisplay((int)TP->query_innate_useable_time(innate_spells[x]));
-			MyMsg += "\n%^BOLD%^%^WHITE%^"+sprintf("%-20s %-5s", tmp, MyUses);// +"/"+max;
-			MyMsg += "%^RESET%^";
-		}
-		else
-		{
-			MyMsg += "\n%^BOLD%^%^WHITE%^"+sprintf("%-20s %-5d", tmp, uses) +"/"+max;
-			MyMsg += "%^RESET%^";
-		}
 	}
 	tell_object(TP, MyMsg);
 	return 1;

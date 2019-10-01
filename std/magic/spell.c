@@ -1384,17 +1384,6 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
 
     if (living(caster) && base_name(PO) != "/d/magic/obj/contingency")
     {
-        //part of the code that actually uses the innate spell - Saide
-        if(spell_type == "innate")
-        {
-            if(!caster->use_innate_ability(spell_name))
-            {
-                tell_object(caster, "You cannot use the innate spell "+
-                spell_name+ " at this time!");
-                TO->remove();
-                return;
-            }
-        }
         tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
         tell_room(environment(caster),caster->QCN+
             " begins to "+whatdo+" a "+whatsit+"!", caster);

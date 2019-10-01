@@ -1,3 +1,4 @@
+
 #include <std.h>
 #include <daemons.h>
 
@@ -17,6 +18,13 @@ void create()
     set_somatic_comp();
     set_save("reflex");
     splash_spell(1);
+}
+
+string query_cast_string()
+{
+	tell_object(caster,"%^BOLD%^%^MAGENTA%^You can feel heat raising of the ground as you chant.");
+	tell_room(place,"%^BOLD%^%^MAGENTA%^You feel heat raising of the ground as"+caster->QS+" chants.",caster);
+	return "display";
 }
 
 void spell_effect(int prof)
