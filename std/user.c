@@ -1730,12 +1730,21 @@ void heart_beat()
                 add_hp(roll_dice(2,4));
         if(query_property("fast healing"))
             if(query_hp() < query_max_hp())
-                add_hp(roll_dice(query_property("fast healing"),12));
+                add_hp(roll_dice(query_property("fast healing"),TO->query_level()/3));
         if(FEATS_D->usable_feat(TO,"mighty resilience") &&
            !TO->query_property("stab_resilience"))
         {
             TO->set_property("stab_resilience",TO->query_level()/10);
         }
+        if(is_vampire())
+            if(!ETO->query_property("indoors"))
+                if(EVENTS_D->query_time_of_day()=="day")
+                    if(!random(3))
+                    {
+                        TO->do_damage("torso",query_max_hp()/3);
+                        tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
+                        tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
+                    }
     }
 }
 

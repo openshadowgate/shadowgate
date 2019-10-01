@@ -267,30 +267,11 @@ varargs mixed query(string what, mixed element) {
     res = 0;
     if(!ob_data) init_ob();
     if(!stringp(what)) return 0;
-    if(what == "negative levels")
-    {
-        what = "negative level";
-        query_flag = 1;
-    }
     if(!ob_data[what]) return 0;
     if(!element)
-    {
-        if(what == "negative level")
-        {
-            if(!query_flag) { res = ob_data[what]; }
-            else if(query_flag && mapp(ob_data[what]))
-            {
-                tmp = values(ob_data[what]);
-                for(i = 0;i < sizeof(tmp);i++)
-                {
-                    if(intp(tmp[i])) res += tmp[i];
-                    continue;
-                }
-            }
-        }
-        else res = ob_data[what];
-    }
-    else if( stringp(element) ) res = ob_data[what][element];
+        res = ob_data[what];
+    else if( stringp(element) )
+        res = ob_data[what][element];
     else if( (intp(element)) && pointerp(ob_data[what]) &&
              (element < sizeof(ob_data[what])) ) res = ob_data[what][element];
     if( pointerp(res) && previous_object() != this_object() ) res += ({});

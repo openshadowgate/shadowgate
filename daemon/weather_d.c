@@ -47,14 +47,12 @@ void setup(){
 void weather()
 {
 	restore_object(SAVE_WEATHER);
-    
-	write("%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+
     write("%^BOLD%^%^GREEN%^Time of Day:%^YELLOW%^ "+capitalize(TOD));
-	write("%^BOLD%^%^GREEN%^Climate    : %^YELLOW%^"+capitalize(get_climate(TP)));	
-	write("%^BOLD%^%^GREEN%^Season     : %^YELLOW%^"+capitalize(season(time())));	
+	write("%^BOLD%^%^GREEN%^Climate    : %^YELLOW%^"+capitalize(get_climate(TP)));
+	write("%^BOLD%^%^GREEN%^Season     : %^YELLOW%^"+capitalize(season(time())));
 	write("%^BOLD%^%^GREEN%^Weather    : "+get_weather(TP));
 	write("%^BOLD%^%^GREEN%^Average Daily Temperature: %^RED%^"+get_temp(TP));
-	write("%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 
 	return;
 }
@@ -63,7 +61,7 @@ string get_climate(object obj)
 {
     string temp;
     temp = get_zone(obj);
-    return __CLIMATE[temp];    
+    return __CLIMATE[temp];
 }
 
 string get_weather(object obj)
@@ -71,20 +69,20 @@ string get_weather(object obj)
     string weather;
     weather = Check_Weather(obj);
     if(!weather) { weather = "You are indoors"; }
-    return weather;    
+    return weather;
 }
 
 int get_temp(object obj)
 {
     string temp;
     int temperature;
-    
+
     temp = get_zone(obj);
     if(!__CLIMATE) { return 0; }
     if(!__WEATHER) { return 0; }
-    
+
     if(member_array(temp,keys(__CLIMATE)) == -1) { temp = "STANDARD"; }
-    
+
     switch(__CLIMATE[temp])
     {
 		case "temperate": temperature = 70;break;
@@ -102,8 +100,8 @@ int get_temp(object obj)
 		case "spring"   : temperature -= 15;break;
 		default : break;
 	}
-    
-    return temperature;    
+
+    return temperature;
 }
 
 
@@ -128,7 +126,7 @@ void saveit(){
 }
 
 
-void set_climate(string str, object ob){ 
+void set_climate(string str, object ob){
     string temp;
 	restore_object(SAVE_WEATHER);
    	if(!__CLIMATE) {__CLIMATE = ([]);}
@@ -153,7 +151,7 @@ mixed Check_Weather(object ob){
 	set_climate("temperate", ob);
    }
    if(environment(ob)->query_property("indoors")) return 0;
-   if(environment(ob)->query_weather()) 
+   if(environment(ob)->query_weather())
 	return environment(ob)->query_weather();
 // adding special weather for deserts, seldom getting anything but dry *Styx* 1/16/04
    if(__CLIMATE[temp] == "desert") {
@@ -172,7 +170,7 @@ mixed Check_Weather(object ob){
 	  return "%^BOLD%^%^BLUE%^It is raining "+WEATHER[__WEATHER[temp]]+".%^RESET%^";
    } else {
 // fixed to correct spelling from "artic" 1/16/04
-      if(__CLIMATE[temp] == "arctic")  
+      if(__CLIMATE[temp] == "arctic")
           return "%^BOLD%^%^CYAN%^It is very cold and "+WEATHER[__WEATHER[temp]]+".";
         else
 	  return "%^BOLD%^%^CYAN%^It is "+WEATHER[__WEATHER[temp]]+".";
@@ -184,7 +182,7 @@ void Do_Weather(){
     mixed *pair;
     int inc;
 
-    restore_object(SAVE_WEATHER);    
+    restore_object(SAVE_WEATHER);
     if(!__WEATHER) return;
    if(TO->query_weather()) return;
     thekeys = keys(__CLIMATE);
@@ -232,14 +230,14 @@ void Do_Weather(){
 void adjust_weather(string temp){
     int tmp;
 	switch(season(time())){
-		case "summer": tmp = 3; break; 
+		case "summer": tmp = 3; break;
 		case "autumn": tmp = 5; break;
 		case "winter": tmp = 4; break;
 		case "spring": tmp = 5; break;
 		default: return;
 	}
 	if(random(10) < tmp) {
-		if(__WEATHER[temp] == max_weather) { 
+		if(__WEATHER[temp] == max_weather) {
 			__WEATHER[temp]--; return; }
 		__WEATHER[temp]++;
 	}
