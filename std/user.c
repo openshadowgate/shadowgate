@@ -1739,12 +1739,11 @@ void heart_beat()
         if(is_vampire())
             if(!ETO->query_property("indoors"))
                 if(EVENTS_D->query_time_of_day()=="day")
-                    if(!random(3))
-                    {
-                        TO->do_damage("torso",query_max_hp()/3);
-                        tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
-                        tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
-                    }
+                {
+                    TO->do_damage("torso",query_max_hp()/4);
+                    tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
+                    tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
+                }
     }
 }
 

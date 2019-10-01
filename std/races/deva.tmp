@@ -16,7 +16,7 @@ string *restricted_classes(string subrace) { return ({ "druid", "ranger" }); }
 
 // this only affects rolling in creation; does not prevent dedication to a deity in-game, to allow for character evolution. N, 3/16.
 string *restricted_deities(string subrace) {
-    return ({ "jarmila","kreysneothosies","callamir","the faceless one","lysara","kismet","nimnavanon","varda" });
+    return ({ "the faceless one","lysara","kismet","lord shadow","nilith" });
 }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
@@ -31,22 +31,26 @@ int natural_AC(string subrace) { return 0; }
 
 int sight_bonus(string subrace) { return 3; }
 
-mapping daily_uses(string subrace) { return ([ "darkness" : 1, "invisibility" : 1, "shadow stride" : 1, "shadow travel" : 1 ]); }
+mapping daily_uses(string subrace) { return ([]); }
 
 mapping query_racial_innate(string subrace) {
-	return (["darkness" : (["type" : "spell", "casting level" : 0.5,
+	return (["light" : (["type" : "spell", "casting level" : 0.5,
 		"daily uses" : 1, "delay" : 1, "uses left" : 1,
 		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]),
-	"invisibility" : (["type" : "spell", "casting level" : 0.5,
+	"divine weapon" : (["type" : "spell", "casting level" : 0.5,
 		"daily uses" : 1, "delay" : 1, "uses left" : 1,
 		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]),
-	"shadow stride" : (["type" : "spell", "casting level" : 0.5,
+	"divine shield" : (["type" : "spell", "casting level" : 0.5,
 		"daily uses" : 1, "delay" : 1, "uses left" : 1,
 		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]),
-	"shadow travel" : (["type" : "spell", "casting level" : 0.5,
+	"dimension door" : (["type" : "spell", "casting level" : 0.5,
+		"daily uses" : 1, "delay" : 1, "uses left" : 1,
+		"refresh time" : -1, "level required" : 0,
+		"class specific" : 0]),
+	"angelic form" : (["type" : "spell", "casting level" : 0.5,
 		"daily uses" : 1, "delay" : 1, "uses left" : 1,
 		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]), ]);
