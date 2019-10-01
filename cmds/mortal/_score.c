@@ -188,10 +188,8 @@ int cmd_score(string str)
    temp1 = strlen(title_tmp);
    temp2 = 78 - temp1;
    temp1 = temp2 / 2;
-   title = arrange_string(" ",temp1);
-   title += title_tmp;
+   title = "%^RESET%^%^GREEN%^--=%^BOLD%^<%^WHITE%^ "+title_tmp+ " %^BOLD%^%^GREEN%^>%^RESET%^%^GREEN%^=--%^RESET%^";
    spell_domains = targ->query_divine_domain();
-
 
    race_var = capitalize(targ->query_race());
 

@@ -22,16 +22,13 @@ void init(){
         if(TP->is_undead())
         {
 
-            tell_object(TP,"\n%^BOLD%^WHITE%^You briefly see a large, open space...\n");
-            tell_object(TP,"\n%^BOLD%^BLACK%^GO AWAY. I HAVE %^WHITE%^NO TIME%^BLACK%^ FOR YOUR FOOLISHNESS\n");
-            call_out("end_death3", 8, TP);
-            WHICH_CALL_OUT = "end_death3";
+            tell_object(TP,"\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you stuggle the stream of souls, and turn to elsewhere...\n");
+            call_out("end_death0_undead", 5, TP);
         }
         else if(TP->query("subrace")=="feytouched")
         {
-            tell_object(TP,"%^BOLD%^%^BLACK%^Your final breath is ripped from your lungs, and you feel yourself falling, falling, falling into the earth. The %^RESET%^%^ORANGE%^hard ground %^BOLD%^%^BLACK%^embraces you like an old lover, warm, familiar. %^RESET%^Home%^BOLD%^%^BLACK%^. %^RESET%^");
-            tell_object(TP,"%^BOLD%^%^WHITE%^The burdens of your world s%^RESET%^p%^BOLD%^%^BLACK%^ir%^RESET%^a%^BOLD%^l away, replaced by something so much more. More %^GREEN%^v%^RESET%^%^GREEN%^i%^MAGENTA%^b%^BOLD%^ra%^RESET%^%^MAGENTA%^n%^GREEN%^c%^BOLD%^y%^WHITE%^, more %^ORANGE%^li%^RESET%^g%^ORANGE%^h%^BOLD%^t%^WHITE%^, more %^MAGENTA%^m%^RESET%^%^MAGENTA%^a%^BOLD%^gic%^WHITE%^, as you fall freely now, faster, as weightless as %^RESET%^s%^BOLD%^%^BLACK%^t%^WHITE%^ar%^RESET%^s%^BOLD%^hi%^BLACK%^n%^RESET%^e%^BOLD%^.%^RESET%^");
-            call_out("end_death_feytouched", 8, TP);
+            tell_object(TP,"%^BOLD%^%^BLACK%^Your final breath is ripped from your lungs, and you feel yourself falling, falling, falling into the earth. The %^RESET%^%^ORANGE%^hard ground %^BOLD%^%^BLACK%^embraces you like an old lover, warm, familiar. %^RESET%^Home%^BOLD%^%^BLACK%^. %^RESET%^\n");
+            call_out("end_death0_feytouched", 5, TP);
         }
         else
         {
@@ -758,68 +755,112 @@ void end_death3(object tp){
     return;
 }
 
-void end_death_feytouched(object tp)
+void end_death0_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^RESET%^%^CYAN%^The %^BOLD%^pulse %^RESET%^%^CYAN%^of the new land beats to the rhythm of your own. %^WHITE%^");
+    tell_object(TP,"%^BOLD%^%^WHITE%^The burdens of your world s%^RESET%^p%^BOLD%^%^BLACK%^ir%^RESET%^a%^BOLD%^l away, replaced by something so much more. More %^GREEN%^v%^RESET%^%^GREEN%^i%^MAGENTA%^b%^BOLD%^ra%^RESET%^%^MAGENTA%^n%^GREEN%^c%^BOLD%^y%^WHITE%^, more %^ORANGE%^li%^RESET%^g%^ORANGE%^h%^BOLD%^t%^WHITE%^, more %^MAGENTA%^m%^RESET%^%^MAGENTA%^a%^BOLD%^gic%^WHITE%^, as you fall freely now, faster, as weightless as %^RESET%^s%^BOLD%^%^BLACK%^t%^WHITE%^ar%^RESET%^s%^BOLD%^hi%^BLACK%^n%^RESET%^e%^BOLD%^.%^RESET%^\n");
+    call_out("end_death1_feytouched", 5, tp);
+}
+void end_death1_feytouched(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"%^RESET%^%^CYAN%^The %^BOLD%^pulse %^RESET%^%^CYAN%^of the new land beats to the rhythm of your own. %^WHITE%^\n");
     call_out("end_death2_feytouched", 5, tp);
 }
 void end_death2_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^RESET%^%^MAGENTA%^Pulse. Filling you with life untainted.%^WHITE%^");
+    tell_object(TP,"%^RESET%^%^MAGENTA%^Pulse. Filling you with life untainted.%^WHITE%^\n");
     call_out("end_death3_feytouched", 5, tp);
 }
 void end_death3_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^BOLD%^%^MAGENTA%^Pulse. Filling you with magic unfettered. %^RESET%^");
+    tell_object(TP,"%^BOLD%^%^MAGENTA%^Pulse. Filling you with magic unfettered. %^RESET%^\n");
     call_out("end_death4_feytouched", 5, tp);
 }
 void end_death4_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^BOLD%^%^CYAN%^Pulse. Boundaries constructed in a lifetime a world away begin to unravel. You try to cling to the memories but feel them splintering apart.%^RESET%^");
+    tell_object(TP,"%^BOLD%^%^CYAN%^Pulse. Boundaries constructed in a lifetime a world away begin to unravel. You try to cling to the memories but feel them splintering apart.%^RESET%^\n");
     call_out("end_death5_feytouched", 10, tp);
 }
 void end_death5_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^BOLD%^%^GREEN%^With a jolt, you find yourself standing in a verdant, primitive %^RESET%^%^GREEN%^forest %^BOLD%^surrounded by tangled trees, their %^RESET%^%^ORANGE%^branches %^BOLD%^%^GREEN%^lost to the %^RESET%^mists %^BOLD%^%^GREEN%^far overhead. You are awestruck in the presence of this living, breathing place. An entity as ancient as the beginning of time. %^RESET%^");
+    tell_object(TP,"%^BOLD%^%^GREEN%^With a jolt, you find yourself standing in a verdant, primitive %^RESET%^%^GREEN%^forest %^BOLD%^surrounded by tangled trees, their %^RESET%^%^ORANGE%^branches %^BOLD%^%^GREEN%^lost to the %^RESET%^mists %^BOLD%^%^GREEN%^far overhead. You are awestruck in the presence of this living, breathing place. An entity as ancient as the beginning of time. %^RESET%^\n");
     call_out("end_death6_feytouched", 5, tp);
 }
 void end_death6_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^RESET%^%^GREEN%^A million eyes watch you. The rustling of the leaves speak your name... a greeting. Or is it a %^BOLD%^warning%^RESET%^%^GREEN%^? %^WHITE%^");
+    tell_object(TP,"%^RESET%^%^GREEN%^A million eyes watch you. The rustling of the leaves speak your name... a greeting. Or is it a %^BOLD%^warning%^RESET%^%^GREEN%^? %^WHITE%^\n");
     call_out("end_death7_feytouched", 5, tp);
 }
 void end_death7_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^RESET%^%^CYAN%^The %^BOLD%^pulse %^RESET%^%^CYAN%^of the world continues to beat against your very essence, shattering edges. And this bright land without limitations begins to %^BOLD%^%^BLACK%^consume %^RESET%^%^CYAN%^your senses...%^WHITE%");
+    tell_object(TP,"%^RESET%^%^CYAN%^The %^BOLD%^pulse %^RESET%^%^CYAN%^of the world continues to beat against your very essence, shattering edges. And this bright land without limitations begins to %^BOLD%^%^BLACK%^consume %^RESET%^%^CYAN%^your senses...%^WHITE%^\n");
     call_out("end_death8_feytouched", 5, tp);
 }
 void end_death8_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^BOLD%^%^WHITE%^Your surroundings start to b%^RESET%^lu%^BOLD%^%^BLACK%^r %^WHITE%^until you feel as if your heart might burst with %^GREEN%^v%^RESET%^%^GREEN%^it%^BOLD%^al%^RESET%^%^GREEN%^it%^BOLD%^y%^WHITE%^, and your mind might %^BLACK%^crack %^WHITE%^into pieces, or overflow with the %^RESET%^%^RED%^c%^BOLD%^%^MAGENTA%^ol%^RESET%^%^RED%^o%^MAGENTA%^r%^BOLD%^s of m%^RESET%^%^MAGENTA%^a%^BOLD%^gi%^RESET%^%^RED%^c%^BOLD%^%^WHITE%^, or become one with the %^CYAN%^wild s%^RESET%^%^CYAN%^o%^BOLD%^ng %^WHITE%^of an %^GREEN%^u%^RESET%^%^GREEN%^n%^ORANGE%^t%^BOLD%^%^GREEN%^am%^RESET%^%^GREEN%^e%^BOLD%^d %^RESET%^%^ORANGE%^w%^GREEN%^o%^BOLD%^rl%^RESET%^%^GREEN%^d%^BOLD%^%^WHITE%^.%^RESET%^");
-    call_out("end_death9_feytouched", 5, tp);
+    tell_object(TP,"%^BOLD%^%^WHITE%^Your surroundings start to b%^RESET%^lu%^BOLD%^%^BLACK%^r %^WHITE%^until you feel as if your heart might burst with %^GREEN%^v%^RESET%^%^GREEN%^it%^BOLD%^al%^RESET%^%^GREEN%^it%^BOLD%^y%^WHITE%^, and your mind might %^BLACK%^crack %^WHITE%^into pieces, or overflow with the %^RESET%^%^RED%^c%^BOLD%^%^MAGENTA%^ol%^RESET%^%^RED%^o%^MAGENTA%^r%^BOLD%^s of m%^RESET%^%^MAGENTA%^a%^BOLD%^gi%^RESET%^%^RED%^c%^BOLD%^%^WHITE%^, or become one with the %^CYAN%^wild s%^RESET%^%^CYAN%^o%^BOLD%^ng %^WHITE%^of an %^GREEN%^u%^RESET%^%^GREEN%^n%^ORANGE%^t%^BOLD%^%^GREEN%^am%^RESET%^%^GREEN%^e%^BOLD%^d %^RESET%^%^ORANGE%^w%^GREEN%^o%^BOLD%^rl%^RESET%^%^GREEN%^d%^BOLD%^%^WHITE%^.%^RESET%^\n");
+    call_out("end_death9_feytouched", 15, tp);
 }
 void end_death9_feytouched(object tp)
 {
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
-    tell_object(TP,"%^BOLD%^%^BLACK%^From within yourself, a voice:%^RESET%^
-%^RESET%^%^ORANGE%^\"You do not belong here. Not yet.\"%^WHITE%^");
+    tell_object(TP,"%^BOLD%^%^BLACK%^From within yourself, a voice:%^RESET%^\n
+%^RESET%^%^ORANGE%^\"You do not belong here. Not yet.\"%^WHITE%^\n");
     call_out("end_death3", 5, tp);
+    WHICH_CALL_OUT = "end_death3";
+}
+
+void end_death0_undead(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^BOLD%^BLACK%^WEAK.\n");
+    call_out("end_death1_undead",5,tp);
+}
+void end_death1_undead(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^BOLD%^BLACK%^YOU ARE WEAK.\n");
+    call_out("end_death2_undead",5,tp);
+}
+void end_death2_undead(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^BOLD%^BLACK%^PATHETIC.\n");
+    call_out("end_death3_undead",5,tp);
+}
+void end_death3_undead(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^BOLD%^BLACK%^I HAVE %^WHITE%^NO TIME%^BLACK%^ FOR YOUR FOOLISHNESS.\n");
+    call_out("end_death4_undead",5,tp);
+}
+void end_death4_undead(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^BOLD%^BLACK%^GO AWAY.\n");
+    call_out("end_death3", 5, TP);
     WHICH_CALL_OUT = "end_death3";
 }

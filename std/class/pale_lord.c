@@ -97,8 +97,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Base Class Levels\n"
-        "    40 Character Levels\n"
-        "    Godless";
+        "    Faith: Godless or Nilith";
     return str;
 }
 

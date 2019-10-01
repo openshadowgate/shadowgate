@@ -193,11 +193,16 @@ int pray()
         classes = TP->query_classes();
 
         exp = (int)TP->query_exp();
+
         expdelta = abs(EXP_NEEDED[thelevel+1]-EXP_NEEDED[thelevel]);
         exploss = expdelta * thelevel/119;
         log_file("deathlexp", TPQN+" lost "+exploss+" in resurrection at a church.\n");
 
+        if(exp > EXP_NEEDED[thelevel+1])
+            exploss*=2;
+
         TP->set_general_exp(myclass,exp - exploss);
+
         TP->resetLevelForExp(0);
 
         /* Adding death tax */

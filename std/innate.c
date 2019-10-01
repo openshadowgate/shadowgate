@@ -55,13 +55,24 @@ void InitInnate()
     //Template based spells go here as well
     if(is_undead())
     {
-        InnateAbilities += (["darkvision"    : (["type" : "spell", "daily uses" : -1,"level required" : 0,])]);
+        InnateAbilities += ([
+                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,])
+                                ]);
     }
 
     // adding in feat-based innate spells here! N, 11/16
 
     feat_spells = ([]);
 
+    if(FEATS_D->usable_feat(TO,"undead cohort"))
+    {
+        feat_spells += ([
+                            "vampiric touch" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                            "animate dead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                            "create undead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                            "create greater undead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+            ]);
+    }
     if(FEATS_D->usable_feat(TO,"one with the shadows")) // shadow stride -1, darkvision -1, shadow double 1
     {
         feat_spells += ([

@@ -13,10 +13,8 @@ void create() {
     set_property("no teleport", 1);
     set_property("indoors", 1);
     set_long(
-            "%^MAGENTA%^%^BOLD%^Beyond the Veil%^RESET%^
-%^MAGENTA%^You are floating in a strange void. Before you there are many gateways to the mortal plane, each leading into a different church. 
-
-%^RED%^%^BOLD%^A letters of tongue unknown %^ORANGE%^b%^BOLD%^%^RED%^u%^ORANGE%^rn%^RED%^ in front of you.
+            "%^WHITE%^%^BOLD%^Beyond the Veil%^RESET%^
+%^RED%^%^BOLD%^A letters of tongue unknown %^ORANGE%^b%^BOLD%^%^RED%^u%^ORANGE%^rn%^RED%^ in front of you:
 %^BOLD%^%^%^TO MOVE ON, CHOOSE THE EXIT THAT LEADS TO THE CHURCH THAT YOU WISH TO RETURN TO AND YOU SHALL MOVE THERE. BEWARE: THIS GATEWAY IS ONE WAY.%^RESET%^
 "
             );
@@ -45,11 +43,11 @@ void create() {
                 ]) );
 
     set_invis_exits(({"accept","cancel"}));
-    set_pre_exit_functions(({"accept","cancel","temple"}),({"get_the_verb","get_the_verb","pick_temple"}));    
+    set_pre_exit_functions(({"accept","cancel","temple"}),({"get_the_verb","get_the_verb","pick_temple"}));
 
 }
 
-void init() 
+void init()
 {
     string waswhere = "";
     object newbie_church;
@@ -65,7 +63,7 @@ void init()
         TP->move_player(newbie_church);
         return;
     }
-    if(TP->get_perma_death() > time() && ((object)TP->query_last_location()) == find_object_or_load("/d/shadowgate/death/death_room")) 
+    if(TP->get_perma_death() > time() && ((object)TP->query_last_location()) == find_object_or_load("/d/shadowgate/death/death_room"))
     {
         TP->dead_quit();
     }
@@ -89,4 +87,3 @@ int pick_temple(string str)
     }
     return 0;
 }
-
