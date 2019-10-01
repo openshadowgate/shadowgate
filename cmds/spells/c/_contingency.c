@@ -14,7 +14,7 @@ void create() {
     set_description("This spell allows you to put a spell in reserve, called upon at any time with the command <now>.  "
 "The target of the reserved spell is always the caster, but arguments can be specified for spells that require them.  You "
 "must carry a likeness of yourself, usually a small statue, when casting this spell./n/nexample of usage:  cast "
-"contingency on teleport | <remembered location>");
+"contingency on teleport . REMEMBERED_LOCATION");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();

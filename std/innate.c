@@ -1,19 +1,12 @@
-//Innate Abilities - Saide
-//Want InnateAbilities to look like
-//(["ability name" :
-//({"ability type" - spell or another type of ability
-//level mod - think like 0.5 (for casting of a spell at half their level)
-//uses per day - 1 for most abilities
-//delay before refreshing in days - 1 will refresh at the next midnight, 2 at midnight
-//a day later
-//uses left - how many more times can they use it
-//time it must be before they can use it again
-//level required to use it
-//class specific - checks the level of this class
-//if it's set and level required is greater than 0])
-//(["mirror image" : (["type" : "spell", "casting level " : 0.5,
-//"daily uses" : 2, "delay" : 1, "uses left" : 2, "refresh time" : -1,
-//"level required" : 0, "class specific" : 0]), ])
+/**
+ * @file
+ * @brief Innate abilities
+ *
+ * This file may contain remnants of previvous system. In current
+ * varsion all innate abilities are cast at clevel equal to charlevel
+ * and at will
+ */
+
 #include <std.h>
 #include <daemons.h>
 
@@ -61,11 +54,20 @@ void InitInnate()
 
 
     // adding in feat-based innate spells here! N, 11/16
+    //Template based spells go here as well
     feat_spells = ([]);
+
+    tell_object(FPL("ilmarinen"),":"+"Here");
+    if(is_undead())
+    {
+        feat_spells += ([
+            "darkvision"    : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            ]);
+    }
 
     if(FEATS_D->usable_feat(TO,"one with the shadows")) // shadow stride -1, darkvision -1, shadow double 1
     {
-        feat_spells = ([
+        feat_spells += ([
             "shadow stride" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             "darkvision"    : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             "shadow double" : (["type" : "spell", "casting level" : 1, "daily uses" : 1,  "delay" : 1, "uses left" : 1,  "refresh time" : -1, "level required" : 0, "class specific" : 0]),
@@ -73,7 +75,7 @@ void InitInnate()
     }
     if(FEATS_D->usable_feat(TO,"command the stone")) // meld into stone -1, stoneskin 1, earthquake 2, conjure elemental -1
     {
-        feat_spells = ([
+        feat_spells += ([
             "meld into stone" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             "stone body"    : (["type" : "spell", "casting level" : 1, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             "earthquake" : (["type" : "spell", "casting level" : 1, "daily uses" : 4,  "delay" : 1, "uses left" : 2,  "refresh time" : -1, "level required" : 0, "class specific" : 0]),
@@ -146,25 +148,9 @@ void add_bonus_innate(mapping BonusInnate)
         {
             BonusInnate[tmp[x]] += (["type" : "spell"]);
         }
-        if(!BonusInnate[tmp[x]]["casting level"])
-        {
-            BonusInnate[tmp[x]] += (["casting level" : 0.5]);
-        }
         if(!BonusInnate[tmp[x]]["daily uses"])
         {
-            BonusInnate[tmp[x]] += (["daily uses" : 1]);
-        }
-        if(!BonusInnate[tmp[x]]["uses left"])
-        {
-            BonusInnate[tmp[x]] += (["uses left" : 1]);
-        }
-        if(!BonusInnate[tmp[x]]["refresh time"])
-        {
-            BonusInnate[tmp[x]] += (["refresh time" : -1]);
-        }
-        if(!BonusInnate[tmp[x]]["delay"])
-        {
-            BonusInnate[tmp[x]] += (["delay" : 1]);
+            BonusInnate[tmp[x]] += (["daily uses" : -1]);
         }
         continue;
     }
@@ -211,37 +197,6 @@ mixed query_innate_spells()
     return 0;
 }
 
-
-int meets_innate_level_requirement(string ability)
-{
-    int lvl;
-    mixed class_req;
-    if(!mapp(InnateAbilities)) InitInnate();
-    if(!mapp(InnateAbilities)) return;
-    if(member_array(ability, keys(InnateAbilities)) == -1) return 0;
-    if(!mapp(InnateAbilities[ability])) return 0;
-    lvl = InnateAbilities[ability]["level required"];
-    if(stringp(class_req = InnateAbilities[ability]["class specific"]))
-    {
-        if(intp(lvl))
-        {
-            if(lvl)
-            {
-                if((int)TO->query_class_level(class_req) < lvl) return 0;
-            }
-        }
-    }
-    else if(intp(lvl))
-    {
-        if(lvl)
-        {
-            if((int)TO->query_highest_level() < lvl) return 0;
-        }
-    }
-    return 1;
-}
-
-
 int can_use_innate_ability(string ability)
 {
     mixed tmp;
@@ -249,26 +204,7 @@ int can_use_innate_ability(string ability)
     if(!mapp(InnateAbilities)) return;
     if(member_array(ability, keys(InnateAbilities)) == -1) return 0;
     if(!mapp(InnateAbilities[ability])) return 0;
-    if(!meets_innate_level_requirement(ability)) return 0;
-    if(InnateAbilities[ability]["uses left"] == -1) return 1;
-    if(time() >= InnateAbilities[ability]["refresh time"]
-    && InnateAbilities[ability]["refresh time"] != -1)
-    {
-        InnateAbilities[ability]["uses left"] = InnateAbilities[ability]["daily uses"];
-        InnateAbilities[ability]["refresh time"] = -1;
-        if(InnateAbilities[ability]["remove time"])
-        {
-            if(InnateAbilities[ability]["temp granted"] == 2)
-            {
-                map_delete(InnateAbilities, ability);
-                return 0;
-            }
-            InnateAbilities[ability]["remove time"] = -1;
-        }
-        return 1;
-    }
-    if(InnateAbilities[ability]["uses left"] > 0) return 1;
-    return 0;
+    return 1;
 }
 
 
@@ -286,8 +222,7 @@ int query_innate_ability_total_uses(string ability)
     if(!mapp(InnateAbilities)) return;
     if(member_array(ability, keys(InnateAbilities)) == -1) return 0;
     if(!mapp(InnateAbilities[ability])) return 0;
-    if(!meets_innate_level_requirement(ability)) return 0;
-    return InnateAbilities[ability]["daily uses"];
+    return -1;
 }
 
 int query_innate_ability_level(string ability)
@@ -295,14 +230,7 @@ int query_innate_ability_level(string ability)
     int lvl, mod;
     string MyClass;
     if(!can_use_innate_ability(ability)) return 0;
-    if(stringp(MyClass = InnateAbilities[ability]["class specific"]))
-    {
-        lvl = (int)TO->query_class_level(MyClass);
-    }
-    else
-    {
-        lvl = (int)TO->query_highest_level();
-    }
+    lvl = (int)TO->query_highest_level();
     lvl = to_int(lvl);
     if(lvl < 1) lvl = 1;
     return lvl;
