@@ -52,18 +52,15 @@ void InitInnate()
         }
     }
 
-
-    // adding in feat-based innate spells here! N, 11/16
     //Template based spells go here as well
-    feat_spells = ([]);
-
-    tell_object(FPL("ilmarinen"),":"+"Here");
     if(is_undead())
     {
-        feat_spells += ([
-            "darkvision"    : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            ]);
+        InnateAbilities += (["darkvision"    : (["type" : "spell", "daily uses" : -1,"level required" : 0,])]);
     }
+
+    // adding in feat-based innate spells here! N, 11/16
+
+    feat_spells = ([]);
 
     if(FEATS_D->usable_feat(TO,"one with the shadows")) // shadow stride -1, darkvision -1, shadow double 1
     {

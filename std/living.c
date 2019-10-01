@@ -1567,7 +1567,9 @@ int query_prestige_level(string the_class)
  */
 int is_undead()
 {
-    return (query_race() == "undead" || query_property("undead")) || 0;
+    return (query_race() == "undead" ||
+            query_property("undead") ||
+            query("undead")) || 0;
 }
 
 void reset_all_status_effects()
