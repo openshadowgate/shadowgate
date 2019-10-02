@@ -87,7 +87,8 @@ void action(string command)
         return 0;
     if(sscanf(command,"%s %s",temp, temp2) != 2)
         temp=command;
-    if(member_array(temp,SAFE_DOM_CMDS)<0) return 0;
+    if(userp(slave))
+        if(member_array(temp,SAFE_DOM_CMDS)<0) return 0;
     disabled=1;
     if(slave)
         slave->set_property("dominated",1);
@@ -102,4 +103,3 @@ set_spell(object ob)
     spell=ob;
     return 1;
 }
-

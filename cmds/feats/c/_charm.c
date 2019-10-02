@@ -13,13 +13,15 @@ void create() {
     feat_category("Performance");
     feat_syntax("charm TARGET");
     feat_prereq("Calm, Bard L17");
-    feat_desc("Successful use of this feat will cause the targetted opponent to calm down, and become much more amenable to suggestions of the character.");
+    feat_desc("Successful use of this feat will cause the targetted opponent to calm down, and become much more amenable to suggestions of the character.
+
+%^BOLD%^N.B.%^RESET%^ If used on players this spell provide you only with limited subset of allowed commands.");
     feat_name("charm");
     set_target_required(1);
     set_save("will");
 }
 
-int allow_shifted() { return 1; } 
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob){
     if(!objectp(ob)) return 0;
@@ -50,7 +52,7 @@ void execute_feat(){
         return;
     }
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -168,7 +170,7 @@ void dest_effect(){
     }
     if (!caster)
         destruct(TO);
-    remove_feat(TO);    
+    remove_feat(TO);
     ::dest_effect();
     if(objectp(TO)) TO->remove();
     return;

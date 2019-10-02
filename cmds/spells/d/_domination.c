@@ -17,7 +17,9 @@ void create() {
     set_discipline("telepath");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS domination on TARGET");
-    set_description("By casting domination successfully, you will gain control over a chosen target. You can order the victim to do whatever is within his/her capability. For example, if the caster uses <cast domination on targetname>, targetname is the victim of the spell. Next, the mage can use <make targetname do kill kobold> or <make targetname emote kisses your feet>. The spell can be ended with <free targetname>.");
+    set_description("By casting domination successfully, you will gain control over a chosen target. You can order the victim to do whatever is within his/her capability. For example, if the caster uses <cast domination on targetname>, targetname is the victim of the spell. Next, the mage can use <make targetname do kill kobold> or <make targetname emote kisses your feet>. The spell can be ended with <free targetname>.
+
+%^BOLD%^%^RED%^N.B.%^RESET%^ If used on players this spell provide you only with limited subset of allowed commands.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -55,7 +57,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    if(do_save(target)) 
+    if(do_save(target))
     {
         tell_object(caster,"%^GREEN%^Your attempt to overcome the willpower of "+target->QCN+" has failed!");
         tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" tries to control your mind!\n%^RESET%^%^GREEN%^You manage to fight "+caster->QO+" off!");
@@ -65,7 +67,7 @@ void spell_effect(int prof) {
         if(objectp(TO)) TO->remove();
         return;
     }
-    
+
     if(mind_immunity_check(target, "default"))
     {
         target->add_attacker(caster);
@@ -77,7 +79,7 @@ void spell_effect(int prof) {
 
     duration=60+clevel*60;
     duration=duration>300?300:duration;
-    
+
     tell_object(caster,"%^GREEN%^You break into "+target->QCN+"'s mind and "
         "overcome "+target->QP+" willpower!");
     spell_successful();
@@ -132,4 +134,3 @@ void dest_effect() {
 void set_quitting() {
     quitting=1;
 }
-
