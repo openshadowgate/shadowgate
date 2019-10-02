@@ -22,7 +22,7 @@ void init(){
         if(TP->is_undead())
         {
 
-            tell_object(TP,"\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you stuggle the stream of souls, and turn to elsewhere...\n");
+            tell_object(TP,"\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you struggle the stream of souls, and turn to elsewhere...\n");
             call_out("end_death0_undead", 5, TP);
         }
         else if(TP->query("subrace")=="feytouched")
