@@ -1,0 +1,29 @@
+%^BOLD%^%^BLACK%^Vampires:
+
+%^BOLD%^%^BLACK%^Standard alignments allowed:%^RESET%^%^MAGENTA%^ any
+%^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^MAGENTA%^ any
+%^BOLD%^%^BLACK%^Faiths allowed:%^RESET%^%^MAGENTA%^ godless
+
+%^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
+%^MAGENTA%^ * fast healing 5
+%^MAGENTA%^ * innate spells
+%^MAGENTA%^   * blood drain
+%^MAGENTA%^   * children of the night
+%^MAGENTA%^   * create spawn
+%^MAGENTA%^   * twilight shape
+%^MAGENTA%^   * spider climb
+%^MAGENTA%^ * resistances
+%^MAGENTA%^   + 10 spell damage resistance
+%^MAGENTA%^   + 10 electricity resistance
+%^MAGENTA%^   + 10 cold resistance
+%^MAGENTA%^   - 10 fire resistance
+%^MAGENTA%^   - 10 silver resistance
+%^MAGENTA%^ * sunlight damage
+
+%^BOLD%^%^BLACK%^Description:
+A vampire is an acquired template over undead template. Thus it inherits all properties of the undead. However, the way vampire come into existence and the existence itself are cardinally different from that of usual undead monsters.
+
+%^BOLD%^%^BLACK%^Player characters:
+%^MAGENTA%^Don't be mistaken: you play a true monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
+
+%^BOLD%^%^BLACK%^See also:%^RESET%^%^MAGENTA%^ races, undead, status effects

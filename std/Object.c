@@ -526,10 +526,14 @@ mixed query_property(string prop)
     {
         if(prop == "spell damage resistance")
             num+=10;
-        if(prop == "silver resistance")
-            num+=10;
         if(prop == "electricity resistance")
             num+=10;
+        if(prop == "cold resistance")
+            num+=10;
+        if(prop == "fire resistance")
+            num-=10;
+        if(prop == "silver resistance")
+            num-=10;
     }
 
     //Added this to allow for a temporary enchantment property - Saide

@@ -4,12 +4,8 @@
 %^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^ORANGE%^ any
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
-%^ORANGE%^ - no con stat
-%^ORANGE%^ - no hunger or thirst
-%^ORANGE%^ - no aging
-%^ORANGE%^ - disease immunity
-%^ORANGE%^ - night vision
-%^ORANGE%^ - indefatigability
+%^ORANGE%^ - undead body: no con stat, no hunger or thirst, no aging, no diseases, no fatigue
+%^ORANGE%^ - innate darkvision spell
 %^ORANGE%^ - effects of negative and positive energy are reversed
 
 %^BOLD%^%^BLACK%^Description:

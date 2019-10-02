@@ -9,7 +9,7 @@ Confused creature experiences various effects based on d100 roll:
  %^ORANGE%^72..100%^RESET%^ It attacks random living present in the same room
 
 %^CYAN%^%^ULINE%^Fast healing%^RESET%^
-A creature with the fast healing special quality regains hit points at an exceptional rate. This gives grade d20 dies of passive regeneration each round. For example, fast healing 2 gives 2d20 regeneration per round.
+A creature with the fast healing special quality regains hit points at an exceptional rate. This gives grade*level/3 points of passive regeneration each round. For example, fast healing 2 gives 6 hp regeneration to level 10 monster per round.
 
 %^CYAN%^%^ULINE%^Fear%^RESET%^
 Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to loose will to fight.
