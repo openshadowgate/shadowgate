@@ -1697,17 +1697,17 @@ void sendDisbursedMessage(object victim){
     return 1;
 }
 
-varargs void damage_targ(object victim, string hit_limb, int wound, string damage_type) {
+varargs int damage_targ(object victim, string hit_limb, int wound, string damage_type) {
     if (!victim)
         return 1;
 
     if (!objectp(caster))
-        return;
+        return 1;
 
     do_spell_damage(victim,hit_limb, wound,damage_type);
 }
 
-varargs void do_spell_damage( object victim, string hit_limb, int wound,string damage_type)
+varargs int do_spell_damage( object victim, string hit_limb, int wound,string damage_type)
 {
     int nokill, reduction, spmod;
     string *limbs=({});
@@ -1738,6 +1738,15 @@ varargs void do_spell_damage( object victim, string hit_limb, int wound,string d
         sendDisbursedMessage(victim);
         return 1;
     }
+
+    if((int)victim->query_property("spell invulnerability")>query_spell_level(spell_type))
+    {
+        tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
+        tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
+        TO->remove();
+        return 1;
+    }
+
     if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }
 
     wound = (int)COMBAT_D->typed_damage_modification(caster, victim, hit_limb, wound, damage_type);

@@ -13,6 +13,7 @@ void create()
     evil_spell(1);
     set_verbal_comp();
     set_somatic_comp();
+    set_silent_casting(1);
     set_target_required(1);
 }
 
