@@ -245,10 +245,16 @@ void dest_effect()
     if(objectp(target) && target->query_property("is charmed"))
     {
         target->remove_property("is charmed");
+
     }
     if(objectp(caster) && worked)
     {
         caster->remove_property("has charmed monster");
+    }
+    if(objectp(caster) &&
+       objectp(target))
+    {
+        caster->remove_follower(target);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
