@@ -13,7 +13,7 @@ void create() {
     set_spell_name("planar apotheosis");
     set_spell_level(([ "psywarrior" : 4 ]));
     set_spell_sphere("combat");
-    set_syntax("cast CLASS planar apotheosis on <celestial|fiendish>");
+    set_syntax("cast CLASS planar apotheosis on CELESTIAL|FIENDISH");
     set_description("When manifesting this power, the psionic character "
       "chooses to embrace the powers of either the celestial or the fiendish. "
       "The planar energy chosen grants special resistances and imbues the "
