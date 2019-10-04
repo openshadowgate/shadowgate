@@ -1680,9 +1680,12 @@ void heart_beat()
         calculate_healing();
     if (interactive(TO))
     {
-        if ( (query_idle(TO) > 7200) && (!avatarp(TO)) && (!TO->query("test_character")) )
+        if ( (query_idle(TO) > 7260) &&
+             (!avatarp(TO)) &&
+             (!TO->query("test_character")) &&
+             (TO->query("persist_login")))
         {
-            "/daemon/messaging_d.c"->avatars_message("notify","%^BOLD%^Imm: %^YELLOW%^<< "+TPQN + " has idled out. ["+query_time_logged_in()+"] >>%^RESET%^", ({ }) );
+            "/daemon/messaging_d.c"->avatars_message("notify","%^BOLD%^%^YELLOW%^<< "+TPQN + " has idled out. ["+query_time_logged_in()+"] >>%^RESET%^", ({ }) );
             TO->force_me("quit");
         }
         if ((query_idle(TO) > 600) && (!avatarp(TO)) && (!TO->query("test_character")) && (!TO->query_property("inactive")))

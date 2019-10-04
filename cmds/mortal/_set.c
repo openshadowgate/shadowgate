@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","brief_combat","expgain","taxperc","term","scrlines","scrwidth"});
+string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","taxperc","term","scrlines","scrwidth"});
 
 int cmd_set(string args)
 {
@@ -192,6 +192,29 @@ string get_brief()
         return "on";
 }
 
+int set_persist(string val)
+{
+    string *valid_values = ({"on","off"});
+    if(member_array(val,valid_values)==-1)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+        return 0;
+    }
+    if(this_player()->query("persist_login")&&val=="off")
+        this_player()->set("persist_login",1);
+    if(!this_player()->query("persist_login")&&val=="off")
+        this_player()->delete("persist_login");
+    return 1;
+}
+
+int get_persist(string val)
+{
+    if(this_player()->query("persist_login"))
+        return "on";
+    else
+        return "off";
+}
+
 int set_brief_combat(string val)
 {
     string *valid_values = ({"on","off"});
@@ -282,6 +305,7 @@ You can manipulate numerous mud settings:
 %^CYAN%^simpleinv %^GREEN%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in %^ORANGE%^<inventory>%^RESET%^ command. When it is toggled off, you can see equipped inventory in %^ORANGE%^<eq>%^RESET%^. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^brief %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of room's long description. Useful for screenreaders. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^brief_combat %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of verbose combat. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^persist %^GREEN%^on|off%^RESET%^\n  Turning persistent login will allow you not to idle out upon reaching a timeout. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^ULINE%^%^CYAN%^Experience points and tax:%^RESET%^
 
 %^CYAN%^expgain %^GREEN%^on|off%^RESET%^\n  This will turn on or off experience gain for your character. While it is off, you will get NO EXPERIENCE. %^MAGENTA%^Default value is on.%^RESET%^\n
