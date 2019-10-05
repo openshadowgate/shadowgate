@@ -1597,6 +1597,10 @@ void heart_beat()
         if(query_quenched() < (max / 6)) {
             write("Your mouth is dry and you're feeling parched from thirst.");
         }
+        if(TO->is_vampire())
+            if(query_bloodlust() < (max / 6)) {
+                write("%^RED%^Youre going insane from bloodlust.");
+            }
     }
     if (!static_user["stage"]) {
         if (!wizardp(TO) && query_level() && query_level() >1) {

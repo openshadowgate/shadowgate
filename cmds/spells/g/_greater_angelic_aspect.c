@@ -35,7 +35,7 @@ void create(){
     set_spell_level(([ "cleric": 8, "paladin": 4, "mage": 8 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS greater angelic aspect");
-    set_damage_desc("levitating, AC4, darkvision, 50 DR to Acid and Cold, 10 DR to Fire, Electricity deathward");
+    set_damage_desc("levitating, AC4, darkvision, 50 DR to Acid and Cold, 10 DR to Fire, Electricity, deathward");
     set_description("You take on an aspect of an angelic being, including some of its physical characteristics. This spell won't last outside of combat.");
     set_verbal_comp();
     set_somatic_comp();

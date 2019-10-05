@@ -80,11 +80,25 @@ void test()
     attackers = caster->query_attackers();
     if(!sizeof(attackers))
     {
-        tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality return as angelic aspect fades.");
-        dest_effect();
+        tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality wavers...");
+        call_out("test2",ROUND_LENGTH*10);
     }
     else
         call_out("test",ROUND_LENGTH*5);
+}
+
+void test2()
+{
+    object * attackers;
+    if(!objectp(caster))
+        dest_effect();
+    attackers = caster->query_attackers();
+    if(sizeof(attackers))
+    {
+        call_out("test",ROUND_LENGTH*5);
+    }
+    dest_effect();
+    tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality return as angelic aspect fades.");
 }
 
 void dest_effect()

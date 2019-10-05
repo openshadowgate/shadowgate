@@ -636,12 +636,13 @@ int calculate_healing() {
    }
    if(query_stuffed())
    {
-       if(!TO->query_property("sustenance") &&
-          !FEATS_D->usable_feat(TO, "timeless body") &&
-          !TO->is_undead())
+       if(!(TO->query_property("sustenance") ||
+            FEATS_D->usable_feat(TO, "timeless body") ||
+            (TO->is_undead())))
            healing["stuffed"]--;
       if(healing["stuffed"] < 0) healing["stuffed"] = 0;
    }
+
    if(query_quenched())
    {
         if(!TO->query_property("sustenance") &&
@@ -650,6 +651,15 @@ int calculate_healing() {
             healing["quenched"]--;
         if(healing["quenched"] < 0) healing["quenched"] = 0;
    }
+
+   if(query_bloodlust())
+       if(TO->is_vampire())
+       {
+           healing["bloodlust"]--;
+           if(healing["bloodlust"] < 0)
+               healing["bloodlust"] = 0;
+       }
+
    if(query_poisoning()) add_poisoning(-1);
    return query_intox()+query_stuffed()+query_quenched();
 }
@@ -882,6 +892,22 @@ int add_quenched(int x) {
    return 1;
 }
 
+int add_bloodlust(int x) {
+    if(!TO->is_vampire())
+        return 1;
+    if(x>0)
+        x = x*250;
+    if( (HEALING_FORMULA - healing["bloodlust"]) < (HEALING_FORMULA / 6))
+        return 0;
+    if(x+healing["bloodlust"] > HEALING_FORMULA)
+        healing["bloodlust"] = HEALING_FORMULA;
+    else
+        healing["bloodlust"] += x;
+    if(healing["bloodlust"] < 0)
+        healing["bloodlust"] = 0;
+    return 1;
+}
+
 void add_stat_bonus(string stat, int amount) {
    if(!stat_bonus) stat_bonus = ([]);
    if(stat_bonus[stat]) stat_bonus[stat] += amount;
@@ -1112,6 +1138,15 @@ int query_stuffed() {
 int query_quenched() {
    if(healing) return healing["quenched"];
    else return 0;
+}
+
+int query_bloodlust() {
+    if(!TO->query_vampire())
+        return 0;
+    if(healing)
+        return healing["bloodlust"];
+    else
+        return 0;
 }
 
 int query_poisoning()
