@@ -1,39 +1,47 @@
 %^BOLD%^%^BLACK%^Vampires:
 
-%^BOLD%^%^BLACK%^Standard alignments allowed:%^RESET%^%^MAGENTA%^ any
-%^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^MAGENTA%^ any
-%^BOLD%^%^BLACK%^Faiths allowed:%^RESET%^%^MAGENTA%^ godless
+%^BOLD%^%^BLACK%^Standard alignments allowed:%^RESET%^%^RED%^ any
+%^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^RED%^ any
+%^BOLD%^%^BLACK%^Faiths allowed:%^RESET%^%^RED%^ godless
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
-%^MAGENTA%^ * fast healing 5
-%^MAGENTA%^ * innate spells
-%^MAGENTA%^   * blood drain
-%^MAGENTA%^   * children of the night
-%^MAGENTA%^   * create spawn
-%^MAGENTA%^   * dominate
-%^MAGENTA%^   * spider climb
-%^MAGENTA%^   * twilight shape
-%^MAGENTA%^ * resistances
-%^MAGENTA%^   + 10 spell damage resistance
-%^MAGENTA%^   + 10 electricity resistance
-%^MAGENTA%^   + 10 cold resistance
-%^MAGENTA%^   - 10 fire resistance
-%^MAGENTA%^   - 10 silver resistance
-%^MAGENTA%^ * sunlight damage
+%^RED%^ * can use %^MAGENTA%^<drain>%^RED%^ command
+%^RED%^ * innate spells
+%^RED%^   * children of the night
+%^RED%^   * create spawn
+%^RED%^   * twilight shape
+%^RED%^   * dominate
+%^RED%^   * spider climb
+%^RED%^   * darkvision
+%^RED%^ * resistances
+%^RED%^   + 10 spell damage resistance
+%^RED%^   + 10 electricity resistance
+%^RED%^   + 10 cold resistance
+%^RED%^   - 10 fire resistance
+%^RED%^   - 10 silver resistance
+%^RED%^ * fast healing 5
+%^RED%^ * sunlight damage
+%^RED%^ * blood hunger
 
 %^BOLD%^%^BLACK%^Description:
-%^MAGENTA%^A vampire is an acquired template over undead template. Thus it inherits all properties of the undead and that of parent race. However, the way vampire come into existence and the existence itself are cardinally different from that of usual undead monsters.
+%^RED%^A vampire is an acquired template over undead template. Thus it inherits all properties of the undead and that of parent race. However, the way vampire come into existence and the existence itself are cardinally different from that of usual undead monsters.
+
+%^RED%^Unlike common higher undead vampires have demonic origin on the world of Eera. Although many rumours of their origin circulate, academia inclines to believe that true vampires have come into existence when a succubus kisses the mortal it truly loves. In three days the kith mortal dies and raises with the next dusk in its grave as a vampire.
+
+%^RED%^It is unclear whether vampires can share this curse with mortals as evidence is scarce. There are some stories of careless adventurers catching this gift as a disease, but vampirism is so rare only few have material to study it beyond theoretical speculations.
+
+%^RED%^Perhaps of demonic nature of their origin or for some other reason, Vampires are not connected to The Covenant, they follow own path upon death. Rare vampire chooses to serve divinity as both don't often see a point in that. They are universally hated by all faiths that abhor undead, of course, but churches tolerant to undead ignore them general principle - vampires are too rare to be bothered with. Even church of Nilith haven't defined their status.
 
 %^BOLD%^%^BLACK%^Hunger:
-%^MAGENTA%^"Hunger" is perhaps a misleading term to describe a vampire’s lust for flesh, consciousness, or youth. As unliving things, they technically require no sustenance, and yet ravenousness is often considered a key characteristic of those who walk without life. In truth, this desire is driven not by need, but by psychological greed. Feasting grants the undead no physical nourishment, but does fill them with a pleasure and power they can’t attain by any other means. For undead, the act of feeding can be likened to that of an addict satiating her inner demon. The basest monsters pursue their addiction to the exclusion of anything else, but vampires and other greater undead are closer to functioning addicts—simultaneously managing their hunger and their more high-minded schemes. If denied living nectar for too long, however, even the sharpest creatures hurl themselves at whichever warm, soft parts of the living they most covet.
+%^RED%^"Hunger" is perhaps a misleading term to describe a vampire's lust for flesh, consciousness, or youth. As unliving things, they technically require no sustenance, and yet ravenousness is often considered a key characteristic of those who walk without life. In truth, this desire is driven not by need, but by psychological greed. Feasting grants the undead no physical nourishment, but does fill them with a pleasure and power they can’t attain by any other means. For undead, the act of feeding can be likened to that of an addict satiating her inner demon. The basest monsters pursue their addiction to the exclusion of anything else, but vampires and other greater undead are closer to functioning addicts—simultaneously managing their hunger and their more high-minded schemes. If denied living nectar for too long, however, even the sharpest creatures hurl themselves at whichever warm, soft parts of the living they most covet.
 
-%^MAGENTA%^For vampires, managing their hunger is an integral part of unlife. Some revel in the feast, but for others it is nothing but a constant source of stress and shame.
+%^RED%^For vampires, managing their hunger is an integral part of unlife. Some revel in the feast, but for others it is nothing but a constant source of stress and shame.
 
-%^MAGENTA%^Vampires hunger is defined by her blood hunger parameter. When it drops to 0, vampire will enter into wassail, a frenzy state that however preserves their mind. Vampire will no longer be able to maintain her physical form and will change into Nosferatu, a powerful vampire being. In such a state vampire gains true strengths of their existence, becoming significantly more powerful. Its claw attacks become powerful and will heal it. In this state, however, a vampire will turn into dust instantly upon the contact with true sunlight.
+%^RED%^Vampires hunger is defined by her blood hunger parameter. When it drops to zero, vampire will enter into wassail - a frenzy state that unlike rage preserves their mind. Vampire will no longer be able to maintain her physical form and will change into Nosferatu, a powerful undead being. In such a state vampire gains true strengths of their existence, becoming significantly more powerful. Its claw become powerful weapons that will heal it. In this state, however, a vampire will turn into dust instantly upon a contact with true sunlight.
 
-%^MAGENTA%^To return to sanity and kith form a vampire must to satisfy her hunger by draining living victims.
+%^RED%^To return to sanity and kith form a vampire must to satisfy her hunger by draining living victims.
 
 %^BOLD%^%^BLACK%^Player characters:
-%^MAGENTA%^Don't be mistaken: you play a true monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
+%^RED%^Vampires are not your little sisters crystalline brooding anti-heroes. Don't be mistaken: you play a true monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
 
-%^BOLD%^%^BLACK%^See also:%^RESET%^%^MAGENTA%^ races, undead, status effects
+%^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects
