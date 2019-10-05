@@ -2,7 +2,7 @@
 
 %^BOLD%^%^BLACK%^Standard alignments allowed:%^RESET%^%^RED%^ any
 %^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^RED%^ any
-%^BOLD%^%^BLACK%^Faiths allowed:%^RESET%^%^RED%^ godless
+%^BOLD%^%^BLACK%^Faiths allowed:%^RESET%^%^RED%^ preferably godless
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
 %^RED%^ * can use %^MAGENTA%^<drain>%^RED%^ command
@@ -26,22 +26,20 @@
 %^BOLD%^%^BLACK%^Description:
 %^RED%^A vampire is an acquired template over undead template. Thus it inherits all properties of the undead and that of parent race. However, the way vampire come into existence and the existence itself are cardinally different from that of usual undead monsters.
 
-%^RED%^Unlike common higher undead vampires have demonic origin on the world of Eera. Although many rumours of their origin circulate, academia inclines to believe that true vampires have come into existence when a succubus kisses the mortal it truly loves. In three days the kith mortal dies and raises with the next dusk in its grave as a vampire.
+%^RED%^Unlike common higher undead vampires have demonic origin in the world. Although many rumours of their origin circulate, academia inclines to believe that true vampires come into existence when a succubus kisses the mortal it truly loves. In three days the mortal dies and raises with the next dusk from the grave as a vampire. It is unclear whether vampires can share the curse with mortals as evidence is scarce. There are some stories of careless adventurers catching this gift as a disease, but vampirism is so rare only few have the material to study it beyond theoretical speculations.
 
-%^RED%^It is unclear whether vampires can share this curse with mortals as evidence is scarce. There are some stories of careless adventurers catching this gift as a disease, but vampirism is so rare only few have material to study it beyond theoretical speculations.
-
-%^RED%^Perhaps of demonic nature of their origin or for some other reason, Vampires are not connected to The Covenant, they follow own path upon death. Rare vampire chooses to serve divinity as both don't often see a point in that. They are universally hated by all faiths that abhor undead, of course, but churches tolerant to undead ignore them general principle - vampires are too rare to be bothered with. Even church of Nilith haven't defined their status.
+%^RED%^Perhaps because of demonic nature of their origin or for some other reason Vampires are not connected to The Covenant, they follow own path upon death. Rare vampire chooses to serve divinity as both don't often see a point in that. They are universally hated by all faiths that abhor undead, of course, but churches tolerant to undead ignore them general principle - vampires are too rare to be bothered with. Even church of Nilith haven't defined their status.
 
 %^BOLD%^%^BLACK%^Hunger:
-%^RED%^"Hunger" is perhaps a misleading term to describe a vampire's lust for flesh, consciousness, or youth. As unliving things, they technically require no sustenance, and yet ravenousness is often considered a key characteristic of those who walk without life. In truth, this desire is driven not by need, but by psychological greed. Feasting grants the undead no physical nourishment, but does fill them with a pleasure and power they can’t attain by any other means. For undead, the act of feeding can be likened to that of an addict satiating her inner demon. The basest monsters pursue their addiction to the exclusion of anything else, but vampires and other greater undead are closer to functioning addicts—simultaneously managing their hunger and their more high-minded schemes. If denied living nectar for too long, however, even the sharpest creatures hurl themselves at whichever warm, soft parts of the living they most covet.
+%^RED%^"Hunger" is perhaps a misleading term to describe a vampire's lust for flesh, consciousness, or youth. As unliving things, they technically require no sustenance, and yet ravenousness is often considered a key characteristic of those who walk without life. In truth, this desire is driven not by need, but by psychological greed. Feasting grants the undead no physical nourishment, but does fill them with a pleasure and power they can’t attain by any other means. For undead, the act of feeding can be likened to that of an addict satiating her inner demon. The basest monsters pursue their addiction to the exclusion of anything else, but vampires and other greater undead are closer to functioning addicts—simultaneously managing their hunger and their more high-minded schemes.
 
 %^RED%^For vampires, managing their hunger is an integral part of unlife. Some revel in the feast, but for others it is nothing but a constant source of stress and shame.
 
 %^RED%^Vampires hunger is defined by her blood hunger parameter. When it drops to zero, vampire will enter into wassail - a frenzy state that unlike rage preserves their mind. Vampire will no longer be able to maintain her physical form and will change into Nosferatu, a powerful undead being. In such a state vampire gains true strengths of their existence, becoming significantly more powerful. Its claw become powerful weapons that will heal it. In this state, however, a vampire will turn into dust instantly upon a contact with true sunlight.
 
-%^RED%^To return to sanity and kith form a vampire must to satisfy her hunger by draining living victims.
+%^RED%^To return to sanity in mortal form a vampire must satisfy her hunger by draining living victims.
 
 %^BOLD%^%^BLACK%^Player characters:
-%^RED%^Vampires are not your little sisters crystalline brooding anti-heroes. Don't be mistaken: you play a true monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
+%^RED%^Vampires are not your little sisters crystalline brooding anti-heroes. Don't be mistaken: you play a truly alien monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
 
 %^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects
