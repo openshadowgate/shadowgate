@@ -1640,6 +1640,22 @@ void heart_beat()
         static_user["stage"] = 60;
     }
     static_user["stage"]--;
+    if(TO->is_vampire())
+    {
+        if(!TO->query_property("shapeshifted"))
+            if(!TO->query_bloodlust())
+            {
+                new("/std/races/shapeshifted_races/vampire_vassail.c")->init_shape(TO,"vampire");
+            }
+        if(query_quenched() > (max / 6))
+            if(TO->query_property("shapeshifted"))
+                if(TO->query("relationship_profile")=="vampire_wassail_999")
+                {
+                    object shape;
+                    if(objectp(shape = TO->query_property("shapeshifted")))
+                        shape->reverse_shape(TO);
+                }
+    }
     if (dying > 0) {
         dying --;
         message("environment","You are slowly slipping closer to death.",TO);
@@ -1747,7 +1763,10 @@ void heart_beat()
             if(!ETO->query_property("indoors"))
                 if(EVENTS_D->query_time_of_day()=="day")
                 {
-                    TO->do_damage("torso",query_max_hp()/4);
+                    if(TO->query("relationship_profile")=="vampire_wassail_999")
+                        TO->do_damage("torso",query_max_hp()*3);
+                    else
+                        TO->do_damage("torso",query_max_hp()/8);
                     tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
                     tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
                 }

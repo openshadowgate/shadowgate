@@ -24,6 +24,15 @@
 %^BOLD%^%^BLACK%^Description:
 %^MAGENTA%^A vampire is an acquired template over undead template. Thus it inherits all properties of the undead and that of parent race. However, the way vampire come into existence and the existence itself are cardinally different from that of usual undead monsters.
 
+%^BOLD%^%^BLACK%^Hunger:
+%^MAGENTA%^"Hunger" is perhaps a misleading term to describe a vampire’s lust for flesh, consciousness, or youth. As unliving things, they technically require no sustenance, and yet ravenousness is often considered a key characteristic of those who walk without life. In truth, this desire is driven not by need, but by psychological greed. Feasting grants the undead no physical nourishment, but does fill them with a pleasure and power they can’t attain by any other means. For undead, the act of feeding can be likened to that of an addict satiating her inner demon. The basest monsters pursue their addiction to the exclusion of anything else, but vampires and other greater undead are closer to functioning addicts—simultaneously managing their hunger and their more high-minded schemes. If denied living nectar for too long, however, even the sharpest creatures hurl themselves at whichever warm, soft parts of the living they most covet.
+
+%^MAGENTA%^For vampires, managing their hunger is an integral part of unlife. Some revel in the feast, but for others it is nothing but a constant source of stress and shame.
+
+%^MAGENTA%^Vampires hunger is defined by her blood hunger parameter. When it drops to 0, vampire will enter into wassail, a frenzy state that however preserves their mind. Vampire will no longer be able to maintain her physical form and will change into Nosferatu, a powerful vampire being. In such a state vampire gains true strengths of their existence, becoming significantly more powerful. Its claw attacks become powerful and will heal it. In this state, however, a vampire will turn into dust instantly upon the contact with true sunlight.
+
+%^MAGENTA%^To return to sanity and kith form a vampire must to satisfy her hunger by draining living victims.
+
 %^BOLD%^%^BLACK%^Player characters:
 %^MAGENTA%^Don't be mistaken: you play a true monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
 

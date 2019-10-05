@@ -3,6 +3,7 @@
 inherit SPELL;
 
 string ashort;
+int cond_test=0;
 
 void effect(int direction)
 {
@@ -58,7 +59,7 @@ string query_cast_string()
 void spell_effect()
 {
 
-    ashort = "%^RESET%^%^ORANGE%^ (%^WHITE%^%^BOLD%^tr%^ORANGE%^a%^WHITE%^iled by fe%^RESET%^%^ORANGE%^a%^BOLD%^th%^RESET%^e%^ORANGE%^r%^BOLD%^%^WHITE%^ed w%^RESET%^i%^ORANGE%^n%^BOLD%^%^WHITE%^g%^ORANGE%^s%^BOLD%^%^ORANGE%^)";
+    ashort = "%^RESET%^%^ORANGE%^ (%^WHITE%^%^BOLD%^tr%^ORANGE%^a%^WHITE%^iled by fe%^RESET%^%^ORANGE%^a%^BOLD%^th%^RESET%^e%^ORANGE%^r%^BOLD%^%^WHITE%^ed w%^RESET%^i%^ORANGE%^n%^BOLD%^%^WHITE%^g%^ORANGE%^s%^RESET%^%^ORANGE%^)";
     if(!(caster->query_alignment()%3))
         ashort = "%^RESET%^%^BOLD%^%^MAGENTA%^ (%^BOLD%^%^BLACK%^t%^RESET%^%^MAGENTA%^ra%^BOLD%^%^BLACK%^i%^RESET%^%^MAGENTA%^le%^BOLD%^%^BLACK%^d by %^RESET%^%^MAGENTA%^bl%^BOLD%^%^BLACK%^ack %^RESET%^%^MAGENTA%^w%^BOLD%^%^BLACK%^in%^RESET%^%^MAGENTA%^g%^BOLD%^%^BLACK%^s%^RESET%^%^BOLD%^%^MAGENTA%^)%^RESET%^";
 
@@ -69,7 +70,27 @@ void spell_effect()
     caster->set_property("spelled", ({TO}) );
     addSpellToCaster();
     spell_successful();
-    call_out("test",ROUND_LENGTH*5);
+    execute_attack();
+}
+
+void execute_attack()
+{
+    object * attackers;
+    ::execute_attack();
+    if(!objectp(caster)){
+        dest_effect();
+        return;
+    }
+
+    if(!objectp(caster))
+        dest_effect();
+    attackers = caster->query_attackers();
+    if(!sizeof(attackers) && !cond_test)
+    {
+        tell_object(caster,"%^BOLD%^%^WHITE%^You begin to feel your mortality...");
+        cond_test=1;
+        call_out("test",ROUND_LENGTH*12);
+    }
 }
 
 void test()
@@ -78,27 +99,13 @@ void test()
     if(!objectp(caster))
         dest_effect();
     attackers = caster->query_attackers();
-    if(!sizeof(attackers))
-    {
-        tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality wavers...");
-        call_out("test2",ROUND_LENGTH*10);
-    }
-    else
-        call_out("test",ROUND_LENGTH*5);
-}
-
-void test2()
-{
-    object * attackers;
-    if(!objectp(caster))
-        dest_effect();
-    attackers = caster->query_attackers();
     if(sizeof(attackers))
     {
-        call_out("test",ROUND_LENGTH*5);
+        cond_test=0;
+        return;
     }
-    dest_effect();
     tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality return as angelic aspect fades.");
+    dest_effect();
 }
 
 void dest_effect()

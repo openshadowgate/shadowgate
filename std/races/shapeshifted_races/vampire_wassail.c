@@ -24,6 +24,12 @@ void create()
     set_shape_bonus("intelligence",2);
     set_shape_bonus("wisdom",2);
     set_shape_bonus("charisma",4);
+    set_shape_bonus("empowered",6);
+
+    set_ac_bonus(-6);
+
+    set_shape_bonus("fire resistance",-100);
+    set_shape_bonus("silver resistance",-100);
 }
 
 int default_descriptions(object obj)
@@ -76,7 +82,7 @@ int claw_attack(object tp, object targ)
         tell_object(targ,"%^BOLD%^%^RED%^"+tp->QCN+" furiously claws you!");
         tell_room(ENV(tp),"%^BOLD%^%^RED%^"+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,12),"slashing");
-        tp->cause_typed_damage(tp,"torso",-roll_dice(clevel,6),"negative energy");
+        tp->cause_typed_damage(tp,"torso",-roll_dice(clevel,18),"negative energy");
     }
 }
 
