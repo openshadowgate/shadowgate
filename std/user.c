@@ -1456,6 +1456,7 @@ void setup() {
     TO->set_sphere(0);
     if(TO->is_class("cleric")) TO->set_divine_domain(({}));
   }
+  force_me("look");
 }
 
 //should automatically remove anyone from a guild if the guild is removed

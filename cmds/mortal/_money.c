@@ -46,8 +46,22 @@ Money are mysterious substance that makes you happier when you have more of it.
 This command displays currency you have on yourself.
 
 %^ULINE%^%^CYAN%^Money conversions:%^RESET%^
- 
+
 1 platinum = 5 gold = 10 electrum = 50 silver = 500 copper
+
+%^ULINE%^%^CYAN%^Charu numerals:%^RESET%^
+
+I 1
+V 5
+X 10
+L 50
+C 100
+D 500
+M 1000
+
+Left number to larger subtracts.
+Right number to larger adds.
+Stortest way to write a number prevails in common use.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
