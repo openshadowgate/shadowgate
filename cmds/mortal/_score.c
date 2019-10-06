@@ -204,7 +204,7 @@ int cmd_score(string str)
    if(targ->is_undead())
    {
        if(targ->is_vampire())
-           race_var = "Vampyr "+race_var;
+           race_var = "Vampire "+race_var;
        else
            race_var = "Undead "+race_var;
    }

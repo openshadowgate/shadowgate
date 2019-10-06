@@ -13,7 +13,7 @@ void create()
     set_base_attack_num(4);
     set_castable(1);
     set_can_talk(1);
-    set_shape_race("vampire");
+    set_shape_race("vampyr");
     set_shape_profile("vampire_wassail_999");
     set_shape_bonus("perception",6);
     set_shape_bonus("survival",6);
@@ -59,7 +59,7 @@ int change_into_message(object obj)
     tell_room(environment(obj),"%^RED%^Suddenly "+obj->QCN+" drops to "+obj->QP+" his knees, eyes closed.",obj);
     tell_room(environment(obj),"%^RED%^"+obj->QCN+" wavers a little, then its limbs start to grow, "+obj->QP+" skin turns gray, wings grow from the back.",obj);
     tell_room(environment(obj),"%^RED%^"+obj->QCN+" opens the eyes. There is supernatural hunger in them.",obj);
-    tell_room(environment(obj),"%^RED%^%^BOLD%^"+obj->QCN+" is now a vampire.",obj);
+    tell_room(environment(obj),"%^RED%^%^BOLD%^"+obj->QCN+" is now a vampyr in wassail.",obj);
     return 1;
 }
 
@@ -76,14 +76,11 @@ int change_outof_message(object obj)
 
 int claw_attack(object tp, object targ)
 {
-    if(!random(6))
-    {
         tell_object(tp,"%^BOLD%^%^RED%^You furiously claw "+targ->QCN+"!");
         tell_object(targ,"%^BOLD%^%^RED%^"+tp->QCN+" furiously claws you!");
         tell_room(ENV(tp),"%^BOLD%^%^RED%^"+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(1,12),"slashing");
         tp->cause_typed_damage(tp,"torso",-roll_dice(1,18),"negative energy");
-    }
 }
 
 int can_cast()

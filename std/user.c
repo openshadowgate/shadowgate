@@ -1600,7 +1600,7 @@ void heart_beat()
         }
         if(TO->is_vampire())
             if(query_bloodlust() < (max / 6)) {
-                write("%^RED%^Youre going insane from bloodlust.");
+                write("%^RED%^Bloodlust drives you insane.");
             }
     }
     if (!static_user["stage"]) {
