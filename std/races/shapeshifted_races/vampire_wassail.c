@@ -57,7 +57,7 @@ int change_into_message(object obj)
     tell_object(obj,"%^RED%^%^BOLD%^You are in wassail.");
 
     tell_room(environment(obj),"%^RED%^Suddenly "+obj->QCN+" drops to "+obj->QP+" his knees, eyes closed.",obj);
-    tell_room(environment(obj),"%^RED%^"+obj->QCN+" wavers a little, then its limbs start to grow, "+obj->QP+"skin turns gray, wings grow from the back.",obj);
+    tell_room(environment(obj),"%^RED%^"+obj->QCN+" wavers a little, then its limbs start to grow, "+obj->QP+" skin turns gray, wings grow from the back.",obj);
     tell_room(environment(obj),"%^RED%^"+obj->QCN+" opens the eyes. There is supernatural hunger in them.",obj);
     tell_room(environment(obj),"%^RED%^%^BOLD%^"+obj->QCN+" is now a vampire.",obj);
     return 1;
@@ -81,8 +81,8 @@ int claw_attack(object tp, object targ)
         tell_object(tp,"%^BOLD%^%^RED%^You furiously claw "+targ->QCN+"!");
         tell_object(targ,"%^BOLD%^%^RED%^"+tp->QCN+" furiously claws you!");
         tell_room(ENV(tp),"%^BOLD%^%^RED%^"+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,12),"slashing");
-        tp->cause_typed_damage(tp,"torso",-roll_dice(clevel,18),"negative energy");
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(1,12),"slashing");
+        tp->cause_typed_damage(tp,"torso",-roll_dice(1,18),"negative energy");
     }
 }
 

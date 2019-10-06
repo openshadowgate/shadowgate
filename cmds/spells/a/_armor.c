@@ -1,6 +1,6 @@
-//      Armor 
+//      Armor
 //      Thorn@Shadowgate w/ lots of help from Melnmarn
-//      1/19/95 
+//      1/19/95
 //      Wizard Spells
 //      armor.c
 //      Modified and updated by Vashkar
@@ -11,7 +11,7 @@ inherit SPELL;
 int benchmark,tally,bonus;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("armor");
@@ -27,14 +27,23 @@ void create()
     set_helpful_spell(1);
 }
 
+int preSpell()
+{
+    if (target->query_property("armoured"))
+    {
+        tell_object(caster,"The spell is repelled by its own magic.");
+        return 0;
+    }
+    return 1;
+}
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     bonus = 4;
 
     if (!target) target = caster;
-    
-    if (!present(target,environment(caster))) 
+
+    if (!present(target,environment(caster)))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         TO->remove();
@@ -44,13 +53,7 @@ void spell_effect(int prof)
     benchmark = target->query_hp();
     tally = 0;
 
-    if (target->query_property("armoured")) 
-    {
-        tell_object(caster,"The spell is repelled by its own magic.");
-        TO->remove();
-    }
-
-    if (!target->is_ok_armour("mage")) 
+    if (!target->is_ok_armour("mage"))
     {
         tell_object(caster,"The spell can not offer protection to those wearing armor.");
         if(objectp(TO)) { TO->remove(); }
@@ -59,7 +62,7 @@ void spell_effect(int prof)
 
     spell_successful();
 
-    if (target == caster) 
+    if (target == caster)
     {
         tell_object(caster,"%^BOLD%^%^CYAN%^A magical shield shimmers around you as "
             "the leather vanishes from your hand!");
@@ -68,7 +71,7 @@ void spell_effect(int prof)
             "hand!.", caster );
     }
 
-    else 
+    else
     {
         tell_object(caster,"%^BOLD%^%^CYAN%^A magical shield shimmers around "
             ""+target->QCN+" as the leather vanishes from your hand!");
@@ -86,39 +89,39 @@ void spell_effect(int prof)
 }
 
 
-void test() 
-{    
+void test()
+{
     int max_damage, add_tally, thp;
-    
-    if (!objectp(target)) 
+
+    if (!objectp(target))
     {
         remove();
         return;
     }
 
-    if (!target->is_ok_armour("mage")) 
+    if (!target->is_ok_armour("mage"))
     {
         tell_object(caster,"The spell can not offer protection to those wearing armor.");
         TO->dest_effect();
         return;
     }
-    
+
     if (!objectp(target))
     {
         dest_effect();
         return;
     }
-    
+
     call_out("test", 7);
     return 0;
 }
 
 
-void dest_effect() 
-{    
+void dest_effect()
+{
     if (find_call_out("test") != -1) remove_call_out("test");
-    
-    if(objectp(target)) 
+
+    if(objectp(target))
     {
         target->add_ac_bonus(-1 * bonus);
         target->remove_property_value("spelled", ({TO}) );
@@ -126,7 +129,7 @@ void dest_effect()
         tell_room(environment(target),"%^CYAN%^"+target->QCN+" glows briefly.", target );
         target->remove_property("armoured");
     }
-    
+
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
