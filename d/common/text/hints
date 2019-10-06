@@ -55,7 +55,7 @@
 %^CYAN%^Bonuses of the same type usually don't stack.
 %^CYAN%^Stuck in a dungeon and see no way out? Break a bloodshard, which can be bought at any general store. And if you don't have one? Well, there is always a final option... You can kill yourself with %^ORANGE%^<kill %^ORANGE%^%^ULINE%^YOURNAME%^RESET%^%^ORANGE%^>%^CYAN%^.%^RESET%^
 %^CYAN%^Using %^GREEN%^<my>%^CYAN%^ can help you differentiate between items on the ground and in your inventory. For example, %^GREEN%^<look my bag>%^CYAN%^ or %^GREEN%^<look my boots>%^CYAN%^, will target your inventory.
-%^CYAN%^Area guides found in our forums can help you find your way. Visit: %^ULINE%^%^GREEN%^https://shadowgate.org/forum/viewtopic.php?f=16&t=134%^RESET%^
+%^CYAN%^If you don't know where to go or where to hunt, use %^GREEN%^<rumors>%^CYAN%^ command to list areas appropriate to your level.
 %^CYAN%^Use %^GREEN%^<set term ansi-no-black>%^CYAN%^ if you can't see black colors.
 %^CYAN%^You can manipulate your mood with %^GREEN%^<fortune>%^RESET%^ command.
 %^CYAN%^Everything is hard until you learn.
