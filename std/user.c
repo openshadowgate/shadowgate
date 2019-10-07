@@ -1648,7 +1648,7 @@ void heart_beat()
             {
                 new("/std/races/shapeshifted_races/vampire_wassail.c")->init_shape(TO,"vampire");
             }
-        if(query_bloodlust() > (max / 6))
+        if(query_bloodlust() > (1000))
             if(TO->query_property("shapeshifted"))
                 if(TO->query("relationship_profile")=="vampire_wassail_999")
                 {

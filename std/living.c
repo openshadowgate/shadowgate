@@ -1142,7 +1142,7 @@ int query_quenched() {
 }
 
 int query_bloodlust() {
-    if(!TO->query_vampire())
+    if(!TO->is_vampire())
         return 0;
     if(healing)
         return healing["bloodlust"];
