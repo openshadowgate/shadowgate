@@ -900,8 +900,8 @@ int add_quenched(int x) {
 int add_bloodlust(int x) {
     if(!TO->is_vampire())
         return 1;
-    if(x+healing["bloodlust"] > 10000)
-        healing["bloodlust"] = 10000;
+    if(x+healing["bloodlust"] > 20000)
+        healing["bloodlust"] = 20000;
     else
         healing["bloodlust"] += x;
     if(healing["bloodlust"] < 0)
