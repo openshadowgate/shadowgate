@@ -1,26 +1,23 @@
 // note: lib-based bonuses not in the template here:
-// regen: /std/user.c in heart_beat()
 // MR: /std/Object.c in query_property section
-// on-use "shadowstep" command: /cmds/mortal/_shadowstep.c
 #include <std.h>
 inherit DAEMON;
 
 void create() { ::create(); }
 
 // age at which each age cat starts: normal, middle, old, venerable
-int *age_brackets() { return ({ 18, 300, 450, 600 }); }
+int *age_brackets() { return ({ 18, 500, 1450, 2000 }); }
 
-int *restricted_alignments(string subrace) { return ({ 1, 2, 4, 5, 7, 8 }); }
+int *restricted_alignments(string subrace) { return ({ 2,3,6,8,9 }); }
 
-string *restricted_classes(string subrace) { return ({ "druid", "ranger" }); }
+string *restricted_classes(string subrace) { return ({ }); }
 
-// this only affects rolling in creation; does not prevent dedication to a deity in-game, to allow for character evolution. N, 3/16.
 string *restricted_deities(string subrace) {
-    return ({ "the faceless one","lysara","kismet","lord shadow","nilith" });
+    return ({ "lord shadow","lysara","kismet","ryorik","nilith","the faceless one" });
 }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    return ({ 0, 0, 2, 0, 0, 2 });
+    return ({ 0, 2, 0, 0, 0, 2 });
 }
 
 mapping skill_mods(string subrace) { return ([ "stealth" : 2, ]); }
@@ -34,45 +31,24 @@ int sight_bonus(string subrace) { return 3; }
 mapping daily_uses(string subrace) { return ([]); }
 
 mapping query_racial_innate(string subrace) {
-	return (["light" : (["type" : "spell", "casting level" : 0.5,
-		"daily uses" : 1, "delay" : 1, "uses left" : 1,
-		"refresh time" : -1, "level required" : 0,
-		"class specific" : 0]),
-	"divine weapon" : (["type" : "spell", "casting level" : 0.5,
-		"daily uses" : 1, "delay" : 1, "uses left" : 1,
-		"refresh time" : -1, "level required" : 0,
-		"class specific" : 0]),
-	"divine shield" : (["type" : "spell", "casting level" : 0.5,
-		"daily uses" : 1, "delay" : 1, "uses left" : 1,
-		"refresh time" : -1, "level required" : 0,
-		"class specific" : 0]),
-	"dimension door" : (["type" : "spell", "casting level" : 0.5,
-		"daily uses" : 1, "delay" : 1, "uses left" : 1,
-		"refresh time" : -1, "level required" : 0,
-		"class specific" : 0]),
-	"angelic form" : (["type" : "spell", "casting level" : 0.5,
-		"daily uses" : 1, "delay" : 1, "uses left" : 1,
-		"refresh time" : -1, "level required" : 0,
-		"class specific" : 0]), ]);
+	return (["light" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "darkness" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "divine weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "divine shield" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "dimension door" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "angelic aspect" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),                          ]);
 }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }
 
-// ---------------------------------------------------------------------------------------------------
-// Below: mods prior to racial overhaul; some may still be in use in some places. -N, 10/10.
-
-// stats in order: str, dex, con, int, wis, cha
 int *min_stats() { return ({ 3, 3, 3, 3, 3, 3 }); }
 int *max_stats() { return ({ 18, 18, 18, 18, 18, 18 }); }
 int *stat_adj()  { return ({ 0, 0, 0, 0, 0, 0 }); }
 
 int is_restricted() { return 1; } // restricted races by approval
 
-// Stuff needed to replace what was in the old race database
+string race_name() { return "deva"; }
 
-string race_name() { return "shade"; }
-
-// gets used in a forumla based on con to determine actual weight
 int weight() { return 9999; }
 
 int fingers() { return 5; }
@@ -154,17 +130,19 @@ mapping weight_values(string gender, int height)
 
 string *query_hair_colors(string who) {
     string *choices = ({});
-    choices += ({"ebony"});
-    choices += ({"sable"});
-    choices += ({"black", "brown", "gray"});
+    choices += ({"ebony", "golden", "silver"});
+    choices += ({"sable", "auburn", "scarlet", "crimson"});
+    choices += ({"black", "brown", "blonde", "red", "white", "gray", "bald"});
     return choices;
 }
 
 string *query_eye_colors(string who) {
     string *choices = ({});
-    choices += ({"violet", "purple"});
-    choices += ({"sable", "chocolate", "coffee"});
-    choices += ({"black", "gray", "brown"});
+    choices += ({"violet", "purple", "silver"});
+    choices += ({"emerald", "sapphire", "yellow", "amber"});
+    choices += ({"azure", "cyan", "sable", "chocolate", "coffee"});
+    choices += ({"green", "hazel"});
+    choices += ({"brown", "blue", "gray"});
     return choices;
 }
 
@@ -175,5 +153,5 @@ int is_pk_race()
 
 string *query_languages(string subrace)
 {
-    return (["required":({"common",}),"optional":({"abyssal","yuan-ti","infernal",})]);
+    return (["required":({"common","elven","celestial",}),"optional":({"gnomish","halfling","sylvan",})]);
 }

@@ -484,6 +484,7 @@ mixed query_property(string prop)
           }
         }
         if((string)TO->query_race() == "shade") num += 10;
+        if((string)TO->query_race() == "deva") num += 10;
         if((string)TO->query_race() == "yuan-ti") num += 10;
         if((string)TO->query_race() == "drow" ||
            (string)TO->query("subrace") == "szarkai" &&
