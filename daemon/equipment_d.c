@@ -112,6 +112,7 @@ mapping BONUS_CATS = ([
                                       "spell penetration",
                                       "temporary feats",
                                       "armor bonus",
+                                      "fast healing",
                                       "max hp bonus",
                                       }),]);
 
@@ -410,6 +411,9 @@ mixed all_active_bonuses(object who, int flag)
                 break;
             case "shieldMiss":
                 totalBon = who->query_shieldMiss();
+                break;
+            case "fast healing":
+                totalBon = who->query_property("fast healing");
                 break;
             case "fire resistance": case "cold resistance": case "water resistance": case "air resistance":
             case "earth resistance": case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":

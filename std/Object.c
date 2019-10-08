@@ -444,7 +444,7 @@ mixed query_property(string prop)
     if(prop == "fast healing")
         if(TO->is_vampire())
         {
-            int blst = (20000-(int)ob->query_bloodlust())/4000-1;
+            int blst = (20000-(int)TO->query_bloodlust())/4000-1;
             num -= blst<0?0:blst;
         }
 

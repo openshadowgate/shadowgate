@@ -1,10 +1,10 @@
 //Doing it this way per garrett's suggestion - this way, if somewhere down the
-//road we want specific bonuses to only work on specific types of 
+//road we want specific bonuses to only work on specific types of
 //equipment/items - Saide - June 2008
 //shieldMiss added by ~Circe~ 2/28/13 to support new shield function.
 // removed invalid energy types per notes in damage_types.h; removing percentages altogether. N, 8/15
 //score -bonuses - will let players see all bonuses from items that they have
-//identified - so make sure to update this file whenever any new bonuses get added 
+//identified - so make sure to update this file whenever any new bonuses get added
 //Saide - February 2017
 // removing 'temporary feats' option until someone wants to code it properly. It's doing nothing but
 // sitting as a string on the item right now and costing the enchant anyway. N, 11/17.
@@ -12,6 +12,8 @@
 #define VALID_ARMOR_BONUSES ({"armor bonus", \
     "attack bonus", \
     "damage bonus", \
+    "max hp bonus", \
+    "fast healing", \
     "sight bonus", \
     "magic resistance", \
     "spell damage resistance",\
@@ -74,7 +76,7 @@
     "survival", \
     "thievery", \
     })
-    
+
 #define VALID_WEAPON_BONUSES ({ })
 
 #define VALID_OTHER_BONUSES ({ })

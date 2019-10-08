@@ -1748,12 +1748,16 @@ void heart_beat()
             if(!ETO->query_property("indoors"))
                 if(EVENTS_D->query_time_of_day()=="day")
                 {
-                    if(TO->query("relationship_profile")=="vampire_wassail_999")
-                        TO->do_damage("torso",query_max_hp()*3);
+                    if((int)TO->query_bloodlust()/2000<8)
+                    {
+                        TO->do_damage("torso",query_max_hp()/6);
+                        tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
+                        tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
+                    }
                     else
-                        TO->do_damage("torso",query_max_hp()/8);
-                    tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
-                    tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
+                    {
+                        tell_object(TO,"%^BOLD%^%^ORANGE%^You feel discomfort under the sun.");
+                    }
                 }
     }
 }

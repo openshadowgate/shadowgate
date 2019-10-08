@@ -659,11 +659,12 @@ int calculate_healing() {
 
    if(query_bloodlust())
        if(TO->is_vampire())
-       {
-           healing["bloodlust"]--;
-           if(healing["bloodlust"] < 0)
-               healing["bloodlust"] = 0;
-       }
+           if(!TO->query_property("inactive"))
+           {
+               healing["bloodlust"]--;
+               if(healing["bloodlust"] < 0)
+                   healing["bloodlust"] = 0;
+           }
 
    if(query_poisoning()) add_poisoning(-1);
    return query_intox()+query_stuffed()+query_quenched();
@@ -1076,6 +1077,14 @@ int query_stats(string stat) {
    //return stats[stat] + x;
     res = x+y+z;
     res = WORLD_EVENTS_D->monster_modification_event(res, stat, TO);
+    if(TO->is_vampire())
+        if(stat=="strength"||
+           stat=="charisma")
+        {
+            int blst = (20000-(int)TO->query_bloodlust())/4000-1;
+            res -= blst<0?0:blst;
+        }
+
     res += EQ_D->gear_bonus(TO, stat);
     //if(res > 59) { return 60; }
     if(res > 29) { return 30; }
