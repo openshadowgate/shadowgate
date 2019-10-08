@@ -441,6 +441,13 @@ mixed query_property(string prop)
         return (num + EQ_D->gear_bonus(TO, "spell penetration"));
     }
 
+    if(prop == "fast healing")
+        if(TO->is_vampire())
+        {
+            int blst = (20000-(int)ob->query_bloodlust())/4000-1;
+            num -= blst<0?0:blst;
+        }
+
     if(prop == "spell dcs") { // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
         if(FEATS_D->usable_feat(TO,"spell focus"))         { num += 2; }
         num += props["empowered"];
@@ -511,6 +518,8 @@ mixed query_property(string prop)
 
     if(prop == "spell damage resistance")
     {
+        if(TO->is_vampire())
+            num+=10;
         if((string)TO->query_race() == "human") {
           subrace = (string)TO->query("subrace");
           if(subrace) {
@@ -522,19 +531,6 @@ mixed query_property(string prop)
         if(FEATS_D->usable_feat(TO, "improved resistance")) num += 6;
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "spell damage resistance"));
-    }
-    if(TO->is_vampire())
-    {
-        if(prop == "spell damage resistance")
-            num+=10;
-        if(prop == "electricity resistance")
-            num+=10;
-        if(prop == "cold resistance")
-            num+=10;
-        if(prop == "fire resistance")
-            num-=10;
-        if(prop == "silver resistance")
-            num-=10;
     }
 
     //Added this to allow for a temporary enchantment property - Saide

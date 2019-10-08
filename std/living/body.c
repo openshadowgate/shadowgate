@@ -611,6 +611,17 @@ int query_resistance(string res) {
       if((string)TO->query("warlock heritage") == "gloom" && res == "cold") myres += 10;
       if((string)TO->query("warlock heritage") == "infernal" && res == "fire") myres += 10;
     }
+
+    if(TO->is_vampire())
+    {
+        if(res == "electricity")
+            myres+=10;
+        if(res == "cold")
+            myres+=10;
+        if(res == "silver")
+            myres+=10;
+    }
+
     if(FEATS_D->usable_feat(TO,"no fear of the flame") && res == "fire") myres += 10;
     return (myres + EQ_D->gear_bonus(TO, res));
 }

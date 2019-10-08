@@ -1599,7 +1599,7 @@ void heart_beat()
             write("Your mouth is dry and you're feeling parched from thirst.");
         }
         if(TO->is_vampire())
-            if(query_bloodlust() < (max / 6)) {
+            if(query_bloodlust() < (20000 / 6)) {
                 write("%^RED%^Bloodlust drives you insane.");
             }
     }
@@ -1641,22 +1641,6 @@ void heart_beat()
         static_user["stage"] = 60;
     }
     static_user["stage"]--;
-    if(TO->is_vampire())
-    {
-        if(!TO->query_property("shapeshifted"))
-            if(!TO->query_bloodlust())
-            {
-                new("/std/races/shapeshifted_races/vampire_wassail.c")->init_shape(TO,"vampire");
-            }
-        if(query_bloodlust() > (1000))
-            if(TO->query_property("shapeshifted"))
-                if(TO->query("relationship_profile")=="vampire_wassail_999")
-                {
-                    object shape;
-                    if(objectp(shape = TO->query_property("shapeshifted")))
-                        shape->reverse_shape(TO);
-                }
-    }
     if (dying > 0) {
         dying --;
         message("environment","You are slowly slipping closer to death.",TO);

@@ -10,7 +10,7 @@ mapping save_info=([]);
 
 void create() { ::create(); }
 
-varargs void do_save(object ob, int dc, string type, raw_save) 
+varargs void do_save(object ob, int dc, string type, raw_save)
 {
     int *saves,num,save,roll1,i,level,statbonus,mod;
     string *classes,file;
@@ -59,7 +59,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     // step 4: let's move all the misc saving throw bonuses here so we don't muddy the waters! Confusing enough that DCs are a negative mod.
     switch(type) {
       case "fort": case "fortitude":
-        mod = (int)ob->query_saving_bonus("fortitude");	
+        mod = (int)ob->query_saving_bonus("fortitude");
         if((string)ob->query_race() == "human" && (string)ob->query("subrace") == "aesatri") mod += 1; // aesatri racial +1 to fort saves
       break;
       case "reflex":
@@ -77,6 +77,11 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     if(FEATS_D->usable_feat(ob,"resistance")) mod += 2; // resistance feat is +2 to all saves
     if(FEATS_D->usable_feat(ob,"force of personality")) mod += ((int)ob->query_stats("charisma") -10)/2; // charisma bonus from force of personality to all saves
     save_info["misc_modifiers"] = mod;
+    {
+        if(type=="will")
+            if(ob->is_vampire())
+                mod -= (20000-(int)ob->query_bloodlust())/2000;
+    }
     save += mod;
     if(raw_save) return save;
     //tell_object(find_player("saide"), "save now = "+save+", mod = "+mod);
@@ -89,7 +94,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     save_info["final_saving_throw"] = save;
     //hijacking dc here, if it's positive, make it negative - Saide, December 2016
     //should work okay - if dc is positive then there is no way
-    //anyone would EVER fail their saving throw 
+    //anyone would EVER fail their saving throw
     if(dc > 0) dc *= -1;
     roll1 = roll_dice(1,20) + save + dc; // note that the mod is inclusive of all bonuses as well as the DC (which is added as a negative)
     //tell_object(find_player("saide"), "save = "+save+", statbonus = "+statbonus +", roll1 = "+roll1);
@@ -123,41 +128,41 @@ void check_save(object ob)
             if(ob->spend_ki(1)) return 1;
         }
     }
-    return 0;            
+    return 0;
 }
 
-int fort_save(object ob, int dc) 
-{ 
+int fort_save(object ob, int dc)
+{
     do_save(ob,dc,"fort");
-    if(check_save(ob)) do_save(ob,dc,"fort");      
+    if(check_save(ob)) do_save(ob,dc,"fort");
     return save_info["save_result"];
 }
 
-mapping debug_fort_save(object ob, int dc) { 
+mapping debug_fort_save(object ob, int dc) {
     do_save(ob,dc,"fort");
     return save_info;
 }
 
-int reflex_save(object ob, int dc) 
-{ 
+int reflex_save(object ob, int dc)
+{
     do_save(ob,dc,"reflex");
-    if(check_save(ob)) do_save(ob,dc,"reflex");  
+    if(check_save(ob)) do_save(ob,dc,"reflex");
     return save_info["save_result"];
 }
 
-mapping debug_reflex_save(object ob, int dc) { 
+mapping debug_reflex_save(object ob, int dc) {
     do_save(ob,dc,"reflex");
     return save_info;
 }
 
-int will_save(object ob,int dc) 
-{ 
+int will_save(object ob,int dc)
+{
     do_save(ob,dc,"will");
-    if(check_save(ob)) do_save(ob,dc,"will");  
+    if(check_save(ob)) do_save(ob,dc,"will");
     return save_info["save_result"];
 }
 
-mapping debug_will_save(object ob,int dc) { 
+mapping debug_will_save(object ob,int dc) {
     do_save(ob,dc,"will");
     return save_info;
 }

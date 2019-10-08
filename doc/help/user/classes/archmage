@@ -3,11 +3,9 @@
 
 %^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
 %^RESET%^%^CYAN%^             %^RESET%^ Level 20 Mage
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the spellcraft skill
 %^RESET%^%^CYAN%^             %^RESET%^ 20 Base Intelligence (before equipment modifiers)
 
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ drow, elf, half-drow, half-elf, human, 
-               ogre-mage, gnome, yuan-ti
+%^RESET%^%^CYAN%^Races allowed:%^RESET%^ see Base Class
 
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
 %^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ sorcerer, psion, psywarrior
@@ -15,7 +13,7 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, dungeoneering, healing, spellcraft
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: school familiarity 
+   %^RESET%^L1: school familiarity
    %^RESET%^L4: greater spell mastery
    %^RESET%^L7: arcane perfection
 

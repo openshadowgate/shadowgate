@@ -27,16 +27,6 @@ void create()
     set_helpful_spell(1);
 }
 
-int preSpell()
-{
-    if (target->query_property("armoured"))
-    {
-        tell_object(caster,"The spell is repelled by its own magic.");
-        return 0;
-    }
-    return 1;
-}
-
 void spell_effect(int prof)
 {
     bonus = 4;
