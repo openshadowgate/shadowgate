@@ -29,11 +29,9 @@ int preSpell()
 {
     if(!target)
         target = caster;
-    if(target->query_property("kiss of feywild") &&
-       !target->is_undead())
+    if(target->query_property("kiss_of_feywild"))
     {
         tell_object(caster,"%^BOLD%^%^BLACK%^You feel your spell repelled...");
-        TO->remove();
         return 0;
     }
     return 1;
@@ -68,6 +66,7 @@ void spell_effect()
         tell_object(target,"%^BOLD%^%^GREEN%^You feel more healthy and joyful.");
         target->set_property("spelled",({TO}));
         target->set_property("fast healing",2);
+        target->set_property("kiss_of_feywild",1);
         spell_successful();
         addSpellToCaster();
         call_out("dest_effect",duration);
@@ -81,7 +80,7 @@ void dest_effect()
         tell_object(target,"%^BOLD%^%^GREEN%^The elation you felt begins to ebb as life's realities return.%^RESET%^");
         target->remove_property_value("spelled", ({TO}) );
         target->set_property("fast healing",-2);
-        target->remove_property("kiss of feywild");
+        target->remove_property("kiss_of_feywild");
     }
     ::dest_effect();
     if(objectp(TO))

@@ -27,6 +27,17 @@ void create()
     set_helpful_spell(1);
 }
 
+int preSpell()
+{
+    if (!target) target = caster;
+    if(target->query_property("armoured"))
+    {
+        tell_object(caster,"%^BOLD%^%^BLACK%^You feel your spell repelled...");
+        return 0;
+    }
+    return 1;
+}
+
 void spell_effect(int prof)
 {
     bonus = 4;
