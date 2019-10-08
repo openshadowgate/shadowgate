@@ -16,9 +16,9 @@ void create() {
 
   L4 Wolf. Variants: coyote, fox, hyena, jackal, wolverine, worg
   L4 Small Animal. Variants: ferret, lizard, mole, mongoose, monkey, rabbit, raccoon, rat, skunk, squirrel
-  L11 Bear. Variants: grizzly bear, kodiak bear, polar bear, black bear, brown bear
+  L11 Bear. Variants: grizzly bear, kodiak bear, polar bear, black bear, brown bear, panda
   L11 Large animal. Variants: ape, bison, boar, buffalo, camel, deer, goat, horse, moose
-  L14 Bird. Variants: crow, eagle, falcon, hawk, owl, raven, vulture
+  L14 Bird. Variants: crow, eagle, falcon, hawk, owl, raven, vulture, goose
   L17 Cat. Variants: cheetah, jaguar, leopard, lion, lynx, ocelot, panther, tiger
 
 Dragon: refer to <help wild shape dragon>
@@ -168,7 +168,7 @@ void change_me() {
         unshift();
         shape->init_shape(caster,subrace);
         return;
-        
+
     case "cat":
         if((int)caster->query_class_level("druid") < 17) {
             tell_object(caster,"You must be at least L17 druid in order to shapeshift into a cat.");
@@ -213,7 +213,7 @@ void change_me() {
 
 
     default:
-        if(!objectp(shape = caster->query_property("shapeshifted"))) { 
+        if(!objectp(shape = caster->query_property("shapeshifted"))) {
           // hijacking for a plot-related character setup! N, 2/15
           if((string)caster->query_name() == "thellanora") {
             unshift();
@@ -225,7 +225,7 @@ void change_me() {
         return;
     }
 
-    ::execute_feat(); 
+    ::execute_feat();
     return;
 }
 

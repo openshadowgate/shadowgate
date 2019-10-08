@@ -12,11 +12,11 @@ void create()
     ::create();
 
     set_attack_limbs( ({ "maw","right claw","left claw" }) );
-    set_new_damage_type("piercing");    
+    set_new_damage_type("piercing");
     set_limbs( ({ "mouth","head","torso","right claw", "left claw", "right foreleg","right forepaw","left foreleg","left forepaw","right rear leg","right rear paw","left rear leg","left rear paw" }) );
     set_attack_functions(([ "maw" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":) ]));
     set_ac_bonus(5); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
-    set_base_attack_num(1); 
+    set_base_attack_num(1);
     set_castable(0);
     set_can_talk(0);
     set_shape_race("bear");
@@ -34,7 +34,7 @@ void create()
 }
 
 string * query_subraces() {
-    return ({ "bear","grizzly bear","kodiak bear","polar bear","black bear","brown bear" });
+    return ({ "bear","grizzly bear","kodiak bear","polar bear","black bear","brown bear","panda" });
 }
 
 // custom descriptions here, override this function
@@ -88,15 +88,15 @@ int change_outof_message(object obj)
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+"'s muscles slacken and "+obj->QS+" gets a far-away look in "+obj->QP+" eyes.",obj);
     tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, shrinking and quickly loosing fur!",obj);
     tell_room(environment(obj),"%^RESET%^%^GREEN%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
-    
+
     return 1;
 }
 
-int can_cast() 
-{ 
+int can_cast()
+{
     if(!objectp(query_owner())) { return 0; }
     if(FEATS_D->usable_feat(query_owner(),"wild spellcraft")) { return 1; }
-    return can_cast_spells; 
+    return can_cast_spells;
 }
 
 int bite_attack(object tp, object targ) // bear bite attack significantly more likely to heal
@@ -104,11 +104,11 @@ int bite_attack(object tp, object targ) // bear bite attack significantly more l
     object etp,*attackers;
     string *specials=({}),*active_specials=({}),my_limb;
     int i,chance,dice;
- 
+
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();    
+    attackers = (object*)tp->query_attackers();
     if(!objectp(targ) && !sizeof(attackers)) { return 0; }
 
     chance = (int)tp->query_guild_level("druid");
@@ -119,16 +119,16 @@ int bite_attack(object tp, object targ) // bear bite attack significantly more l
     if(chance > 9 && !FEATS_D->usable_feat(TP,"savage instincts i")) { chance = 9; }
 
     dice = ( chance / 4) + 2;
-    
-    if(FEATS_D->usable_feat(tp,"perfect predator")) 
-    { 
-        dice += 3; 
+
+    if(FEATS_D->usable_feat(tp,"perfect predator"))
+    {
+        dice += 3;
         tp->add_hp(dice*2); // twice as much healing on the bear form, since it's the tank form
     }
 
     if(roll_dice(1,100) > chance) { return roll_dice(3,dice); }
-    
-    // switch falls through intentionally 
+
+    // switch falls through intentionally
     switch(chance)
     {
         case 35..60: specials += ({ "heal" });
@@ -152,7 +152,7 @@ int bite_attack(object tp, object targ) // bear bite attack significantly more l
     //////////////
 
     set_new_damage_type("piercing");
-  
+
     for(i=0;i<sizeof(active_specials);i++)
     {
         if(!objectp(tp) || !objectp(targ)) { return 0; }
@@ -208,11 +208,11 @@ int claw_attack(object tp, object targ)
     object etp,*attackers;
     string *specials=({}),*active_specials=({}),my_limb;
     int i,chance,dice;
- 
+
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();    
+    attackers = (object*)tp->query_attackers();
     if(!objectp(targ) && !sizeof(attackers)) { return 0; }
 
     chance = (int)tp->query_guild_level("druid");
@@ -223,8 +223,8 @@ int claw_attack(object tp, object targ)
     dice = ( chance / 3) + 2;
 
     if(roll_dice(1,100) > chance) { return roll_dice(3,dice); }
-    
-    // switch falls through intentionally 
+
+    // switch falls through intentionally
     switch(chance)
     {
         case 35..60: specials += ({ "high damage" });
@@ -248,7 +248,7 @@ int claw_attack(object tp, object targ)
     //////////////
 
     set_new_damage_type("bludgeoning");
-  
+
     for(i=0;i<sizeof(active_specials);i++)
     {
         if(!objectp(tp) || !objectp(targ)) { return 0; }

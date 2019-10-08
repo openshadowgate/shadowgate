@@ -89,7 +89,7 @@ int change_outof_message(object obj)
 
 int can_cast()
 {
-    return 0;
+    return 1;
 }
 
 int bite_attack(object tp, object targ)

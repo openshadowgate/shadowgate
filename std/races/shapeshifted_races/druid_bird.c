@@ -9,7 +9,7 @@ void create() {
     ::create();
 
     set_attack_limbs( ({ "mouth" }) );
-    set_new_damage_type("piercing");    
+    set_new_damage_type("piercing");
     set_limbs( ({ "beak","head","torso","right claw", "left claw","tail","right wing","left wing" }) );
 //    set_attack_functions(([ "beak" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":) ])); //will add combat later maybe. N, 3/15.
     set_attack_functions( ([ "beak" : (:TO,"shape_attack":), "right claw" : (:TO,"shape_attack":), "left claw" : (:TO,"shape_attack":) ]) );
@@ -27,7 +27,7 @@ void create() {
 }
 
 string * query_subraces() {
-    return ({ "bird","raven","owl","hawk","crow","vulture","eagle","falcon" });
+    return ({ "bird","raven","owl","hawk","crow","vulture","eagle","falcon","goose" });
 }
 
 
@@ -74,7 +74,7 @@ int change_outof_message(object obj)
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+"'s body grows still "+obj->QS+" gets a far-away look in "+obj->QP+" eyes.",obj);
     tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, elongating and curving!",obj);
     tell_room(environment(obj),"%^RESET%^%^GREEN%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
-    
+
     return 1;
 }
 
@@ -85,9 +85,9 @@ int shape_attack(object tp, object targ)
     return 0;
 }
 
-int can_cast() 
-{ 
+int can_cast()
+{
     if(!objectp(query_owner())) { return 0; }
     if(FEATS_D->usable_feat(query_owner(),"wild spellcraft")) { return 1; }
-    return can_cast_spells; 
+    return can_cast_spells;
 }
