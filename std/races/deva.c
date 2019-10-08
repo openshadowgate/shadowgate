@@ -20,7 +20,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     return ({ 0, 2, 0, 0, 0, 2 });
 }
 
-mapping skill_mods(string subrace) { return ([ "stealth" : 2, ]); }
+mapping skill_mods(string subrace) { return ([ "perception" : 2, "survival": 2 ]); }
 
 int level_adjustment(string subrace) { return 3; }
 
@@ -36,6 +36,11 @@ mapping query_racial_innate(string subrace) {
              "divine weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
              "divine shield" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
              "dimension door" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "invisibility" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "break curse" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "sacred nimbus" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "cure critical wounds" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "cleanse disease" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
              "angelic aspect" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),                          ]);
 }
 

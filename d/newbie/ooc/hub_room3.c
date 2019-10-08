@@ -18,9 +18,9 @@ void create() {
         set_short("%^MAGENTA%^OOC area hub to tutorial/info. rooms");
         set_long("This room leads to the %^BOLD%^<tutorial>%^RESET%^ and a series of %^BOLD%^<info>%^RESET%^ rooms to help answer player's questions about how to get started and get the most from playing in ShadowGate.  When you have been through those and are ready to begin your adventure, the exit to the %^BOLD%^<city>%^RESET%^ will take you to the town square of Offestry.  You can return here anytime to look for answers to other questions you may have or refresh your memory.
 
-There is also a special exit %^CYAN%^<portal>%^WHITE%^ here, closed to common players.
+There is also a special exit %^CYAN%^%^BOLD%^<portal>%^RESET%^ here, closed to common players.
 
-%^WHITE%^If you would prefer to %^CYAN%^skip Offestry%^WHITE%^ you may use the %^CYAN%^<bypass>%^WHITE%^ command to leave at this point.%^RESET%^");
+%^WHITE%^If you would prefer to %^CYAN%^skip Offestry%^WHITE%^ you may use the %^CYAN%^%^BOLD%^<bypass>%^RESET%^ command to leave at this point.%^RESET%^");
         set_items(([
         ]));
         set_exits(([
@@ -32,7 +32,7 @@ There is also a special exit %^CYAN%^<portal>%^WHITE%^ here, closed to common pl
         set_pre_exit_functions(({"portal", "city"}),({"GoThroughDoor", "getmap"}));
 }
 
-void init() 
+void init()
 {
     ::init();
     add_action("bypass_func", "bypass");
@@ -73,7 +73,7 @@ int bypass_func(string str)
     myRoom = new("/d/newbie/ooc/trainer");
     myRoom->set_for(TP);
     TP->move_player(myRoom);
-    return 1;    
+    return 1;
 }
 
 int getmap() {
@@ -82,7 +82,7 @@ int getmap() {
         tell_object(TP,"%^RED%^An obviously excited town citizen aproaches "+
         "you and exclaims:  %^RESET%^I see you don't have a map of "+
         "the town, we can't have that, take one!");
-        
+
         tell_room(TO,"%^RED%^An obviously excited town citizen "+
         "approaches "+TPQCN+"%^RED%^ and says something to "+TP->QO+
         ".%^RESET%^",TP);
