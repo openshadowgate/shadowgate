@@ -44,12 +44,12 @@ void spell_effect(int prof){
     {
         if(!objectp(attackers[i]))
             continue;
-        if(target->is_undead())
+        if(attackers[i]->is_undead())
             continue;
-        admg=sdamage/4;
-        if(do_save(target))
+        admg=sdamage;
+        if(do_save(attackers[i]))
         {
-            admg=admg/2;
+            admg/=2;
         }
         tell_object(attackers[i],"%^BLUE%^Your flesh is withered with fell power!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"negative energy");

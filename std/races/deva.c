@@ -41,6 +41,7 @@ mapping query_racial_innate(string subrace) {
              "sacred nimbus" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
              "cure critical wounds" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
              "cleanse disease" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+             "holy smite" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
              "angelic aspect" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),                          ]);
 }
 

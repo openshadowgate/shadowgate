@@ -77,13 +77,12 @@ void execute_attack()
 {
     object * attackers;
     ::execute_attack();
-    if(!objectp(caster)){
+    if(!objectp(caster))
+    {
         dest_effect();
         return;
     }
 
-    if(!objectp(caster))
-        dest_effect();
     attackers = caster->query_attackers();
     if(!sizeof(attackers) && !cond_test)
     {
@@ -99,11 +98,9 @@ void test()
     if(!objectp(caster))
         dest_effect();
     attackers = caster->query_attackers();
+    cond_test=0;
     if(sizeof(attackers))
-    {
-        cond_test=0;
         return;
-    }
     tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality return as angelic aspect fades.");
     dest_effect();
 }
