@@ -15,6 +15,7 @@
 beastkin:0:8000:5:right hand;left hand:0:0:0:0:2:-2:human:2:2
 bugbear:-2:8000:5:right hand;left hand:1:0:-1:0:0:0:human:2:0
 centaur:2:10000:5:right hand;left hand:4:2:-2:0:2:0:centaur:3:2
+deva:3:9999:5:right hand;left hand:0:2:0:0:0:2:human:2:0
 drow:-2:8000:5:right hand;left hand:0:0:5:8:3:1:human:2:0
 elf:3:8000:5:right hand;left hand:0:0:5:8:3:1:human:2:0
 firbolg:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:7
@@ -65,4 +66,3 @@ thri-kreen:4:10000:5:upper right hand;upper left hand;right hand;left hand;lower
 titan:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:4:5
 troll:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:9
 with:0:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:0
-
