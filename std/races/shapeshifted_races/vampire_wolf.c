@@ -34,7 +34,7 @@ int default_descriptions(object obj)
 
     obj->set_description("is covered from snout to tail in smooth black fur. A maw of razor sharp teeth and keen eyes shows that the wolf is a natural predator in its own environment. Every step it takes reveals lean muscles under the heavy coat of fur.");
 
-    obj->setDescriptivePhrase("lean black $R with intense green eyes");
+    obj->setDescriptivePhrase("lean black $R with intense red eyes");
 
     obj->set("speech string","growl");
     obj->set("describe string","angrily");

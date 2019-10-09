@@ -69,7 +69,9 @@ void InitInnate()
                                 "twilight shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "dominate" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "gaseous form" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "spider climb" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),                                                                                                                                                                ]);
+                                "spider climb" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "sleep" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                ]);
     }
 
     // adding in feat-based innate spells here! N, 11/16

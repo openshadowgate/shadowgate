@@ -11,7 +11,7 @@ void create()
     set_spell_level(([ "innate" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create spawn");
-    set_description("With this spell a vampire can use recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead do, but is unique to vampires.");
+    sset_description("With this spell a vampire can use recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead do, but is unique to vampires.");
     evil_spell(1);
     set_helpful_spell(1);
     set_arg_needed();
@@ -30,7 +30,9 @@ string undead_to_raise()
 void setup_undead_scaling(object undead)
 {
     undead->set_guild_level("mage",clevel*5/6);
+    undead->set_guild_level("fighter",clevel*5/6);
     undead->set_mlevel("mage",clevel*5/6);
+    undead->set_mlevel("fighter",clevel*5/6);
     undead->set_skill("spellcraft",clevel);
     undead->set_skill("perception",clevel);
     undead->set_level(clevel);

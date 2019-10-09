@@ -42,6 +42,7 @@ Available codes:
   %^MAGENTA%^$H%^WHITE%^ maximum hp
   %^MAGENTA%^$i%^WHITE%^ hunger level
   %^MAGENTA%^$o%^WHITE%^ thirst level
+  %^MAGENTA%^$B%^WHITE%^ blood hunger saturation percentile
   %^MAGENTA%^$s%^WHITE%^ stamina percent
   %^MAGENTA%^$S%^WHITE%^ stamina string
   %^MAGENTA%^$x%^WHITE%^ encumbrance level

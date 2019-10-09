@@ -43,7 +43,13 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_stats("wisdom",18);
     set_stats("charisma",22);
 
-    set_alignment(9);
+    set_spells(({"vampiric touch",
+                    "eyebite",
+                    }));
+    set_spell_chance(33);
+    set_property("cast and attack",1);
+
+    set_alignment(6);
 
     {
         object stuff;
