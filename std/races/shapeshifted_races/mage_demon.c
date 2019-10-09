@@ -34,8 +34,8 @@ void create()
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
     set_shape_bonus("spell damage resistance",30);
-    set_shape_height(900+random(100));
-    set_shape_weight(5000+random(500));
+    set_shape_height(180+random(10));
+    set_shape_weight(4000+random(500));
 }
 
 string * query_subraces() {
