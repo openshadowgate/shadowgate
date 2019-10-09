@@ -19,7 +19,12 @@ void init(){
     if(!TP->query("just_been_pkilled"))
     {
 
-        if(TP->is_undead())
+        if(TP->is_vampire())
+        {
+            tell_object(TP,"\n%^BOLD%^CYAN%^You turn into dark mist and let the wind carry you into the darkness... After a while of wandering, you hear a faint song...\n");
+            call_out("end_death0_vampire", 5, TP);
+        }
+        else if(TP->is_undead())
         {
 
             tell_object(TP,"\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you struggle the stream of souls, and turn to elsewhere...\n");
@@ -861,6 +866,43 @@ void end_death4_undead(object tp)
     if(!objectp(tp)) return;
     if(!present(tp, TO)) return;
     tell_object(TP,"\n%^BOLD%^BLACK%^GO AWAY.\n");
+    call_out("end_death3", 5, TP);
+    WHICH_CALL_OUT = "end_death3";
+}
+
+void end_death0_vampire(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^CYAN%^Come with me in the twilight of a summer night for a while\n");
+    call_out("end_death1_vampire",5,tp);
+}
+void end_death1_vampire(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^CYAN%^Tell me of a story never ever told in the past\n");
+    call_out("end_death2_vampire",5,tp);
+}
+void end_death2_vampire(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^CYAN%^Take me back to the land where my yearnings were born\n");
+    call_out("end_death3_vampire",5,tp);
+}
+void end_death3_vampire(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^CYAN%^The key to open the door is in your hand\n");
+    call_out("end_death4_vampire",5,tp);
+}
+void end_death4_vampire(object tp)
+{
+    if(!objectp(tp)) return;
+    if(!present(tp, TO)) return;
+    tell_object(TP,"\n%^CYAN%^Now fly me there\n");
     call_out("end_death3", 5, TP);
     WHICH_CALL_OUT = "end_death3";
 }

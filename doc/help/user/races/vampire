@@ -20,24 +20,27 @@
 %^RED%^   + 10 cold resistance
 %^RED%^   + 10 silver resistance
 %^RED%^ * fast healing 5
-%^RED%^ * sunlight damage
-%^RED%^ * blood hunger
+%^RED%^ * blood hunger causes negative effects
+%^RED%^   * sunlight damage
+%^RED%^   * damage to will
+%^RED%^   * damage to cha and str score
+%^RED%^   * damage to fast healing
 
 %^BOLD%^%^BLACK%^Description:
-%^RED%^A vampire is an acquired template over undead template. Thus it inherits all properties of the undead and that of parent race. However, the way vampire come into existence and the existence itself are cardinally different from that of usual undead monsters.
+%^RED%^A vampire is an acquired template over the undead template. Thus it inherits all the properties of the undead template, and also that of the parent race. However, the way vampires come into existence, and the existence itself, are cardinally different from that of other undead monsters.
 
-%^RED%^Unlike common higher undead vampires have demonic origin in the world. Although many rumours of their origin circulate, academia inclines to believe that true vampires come into existence when a succubus kisses the mortal it truly loves. In three days the mortal dies and raises with the next dusk from the grave as a vampire. It is unclear whether vampires can share the curse with mortals as evidence is scarce. There are some stories of careless adventurers catching this gift as a disease, but vampirism is so rare only few have the material to study it beyond theoretical speculations.
+%^RED%^Unlike common higher undead, vampires have a demonic origin in the world. Although there is much speculation over their origin, academia is inclined to believe that true vampires come into existence when a succubus kisses the mortal it truly loves. In three days, the mortal will die and then raise from the grave as a vampire with the next dusk. Evidence is scarce as to whether vampires can share the curse with mortals. There are some stories of careless adventurers catching the curse as a disease, but vampirism is so rare that only a few have the resources to study it beyond theoretical speculations.
 
-%^RED%^Perhaps because of demonic nature of their origin or for some other reason Vampires are not connected to The Covenant, they follow own path upon death. Rare vampire chooses to serve divinity as both don't often see a point in that. They are universally hated by all faiths that abhor undead, of course, but churches tolerant to undead ignore them general principle - vampires are too rare to be bothered with. Even church of Nilith haven't defined their status.
+%^RED%^Perhaps because of the demonic nature of their origin, or for some other reasons, vampires are not connected to The Covenant. They follow own path upon death. Vampires that choose to serve a deity are rare, simply seeing no point to it. They are, of course, universally hated by all faiths that abhor undead.  Churches tolerant to undead tend to ignore them on the general principle that vampires are too rare to be bothered with. Not even the church of Nilith has clairified their position.
 
 %^BOLD%^%^BLACK%^Hunger:
-%^RED%^"Hunger" is perhaps a misleading term to describe a vampire's lust for consciousness. As unliving things, they technically require no sustenance, and yet ravenousness is often considered a key characteristic of those who walk without life. In truth, this desire is driven not by need, but by psychological greed. Feasting grants the undead no physical nourishment, but does fill them with a pleasure and power they can’t attain by any other means. For undead, the act of feeding can be likened to that of an addict satiating her inner demon. The basest monsters pursue their addiction to the exclusion of anything else, but vampires and other greater undead are closer to functioning addicts—simultaneously managing their hunger and their more high-minded schemes.
+%^RED%^Hunger is perhaps a misleading term to describe a vampire's lust for consciousness. As unliving things, they technically require no sustenance, and yet "ravenous" is often considered a key characteristic of those who walk without life. In truth, this desire is driven not by need, but by psychological greed. Feasting grants the undead no physical nourishment, but it does fill them with a pleasure and power they cannot attain by any other means. For undead, the act of feeding can be likened to that of an addict satiating her inner demons. The basest monsters pursue their addiction to the exclusion of anything else, but vampires and other greater undead are closer to functioning addicts, simultaneously managing their hunger and their more high-minded schemes.
 
 %^RED%^For vampires, managing their hunger is an integral part of unlife. Some revel in the feast, but for others it is nothing but a constant source of stress and shame.
 
-%^RED%^Vampire's hunger is defined by her blood hunger parameter. Vampires fast healing, str and cha stats, will save will deteriorate as hunger increases. At highest hunger vampire will receive -10 penatly to strenght, charisma, will, and -4 to fast healing, the sun will also become deadly for her. To return to sanity a vampire must satisfy her hunger by draining living victims with %^MAGENTA%^<drain>%^RED%^ command.
+%^RED%^A vampire's hunger is defined by her blood hunger parameter. A vampire's fast healing, str and cha stats, as well as will saves will deteriorate as hunger increases. At its highest hunger, the vampire will receive -10 penalty to strength, charisma, will, and -4 to fast healing. The sun will also become deadly for her. To return to sanity, a vampire must satisfy her hunger by draining living victims with the <drain> command.
 
 %^BOLD%^%^BLACK%^Player characters:
-%^RED%^Vampires are not your little sisters crystalline brooding anti-heroes. Don't be mistaken: you play a truly alien monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
+%^RED%^Vampires are not your little sister's crystalline brooding anti-heroes. Don't be mistaken: you play a truly alien monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal will always be your own survival.
 
 %^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects, weather

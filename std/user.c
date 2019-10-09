@@ -2041,17 +2041,21 @@ nomask void die()
     "/daemon/messaging_d"->first_death_message( "death",msg_death,all_inventory(ETO), ({ TO }) );
     "/daemon/messaging_d"->handle_death_messages(TO, TO->query_property("watching_death_objects"), TO->query("watching_death_objects"));
 
-    corpse = new(OB_CORPSE);
-    if (!avatarp(TO) || !query_disguised()) corpse->set_name(getParsableName());
-    else corpse->set_name(capitalize(query_vis_name()));
-    corpse->add_id("corpse of "+query_vis_name()); // adds name to corpse ids -Ares 8/29/05-
-    corpse->copy_body(TO);
-    corpse->move(ETO);
-    corpse->set_true_name(query_true_name());
-    corpse->set_was_user(1);
+    if(!TO->is_vampire())
+    {
+        corpse = new(OB_CORPSE);
+        if (!avatarp(TO) || !query_disguised()) corpse->set_name(getParsableName());
+        else corpse->set_name(capitalize(query_vis_name()));
+        corpse->add_id("corpse of "+query_vis_name()); // adds name to corpse ids -Ares 8/29/05-
+        corpse->copy_body(TO);
+        corpse->move(ETO);
+        corpse->set_true_name(query_true_name());
+        corpse->set_was_user(1);
+    }
     cease_all_attacks();
     reset_all_status_problems();
     break_all_spells();
+
     "/daemon/death_effects_d"->death_notification(TO);
     if(objectp(klr) && klr->is_player() && TO->is_player())
     {
