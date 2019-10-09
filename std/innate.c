@@ -60,17 +60,16 @@ void InitInnate()
                                 ]);
     }
 
-    /* if(is_vampire()) */
-    /* { */
-    /*     InnateAbilities += ([ */
-    /*                             "blood drain" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]), */
-    /*                             "children of the night" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]), */
-    /*                             "create spawn" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]), */
-    /*                             "dominate" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]), */
-    /*                             "vampiric shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]), */
-    /*                             "gaseus form" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]), */
-    /*                             "spider climb" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),                                                                                                                                                                ]); */
-    /* } */
+    if(is_vampire())
+    {
+        InnateAbilities += ([
+                                "children of the night" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "create spawn" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "twilight shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "dominate" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "gaseous form" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "spider climb" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),                                                                                                                                                                ]);
+    }
 
     // adding in feat-based innate spells here! N, 11/16
 

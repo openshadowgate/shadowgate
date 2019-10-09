@@ -402,6 +402,7 @@ mixed all_active_bonuses(object who, int flag)
                 break;
             case "max hp bonus":
                 totalBon = who->query_max_hp_bonus();
+                break;
                 // misc bonuses held in set_property()
             case "magic resistance": case "spell damage resistance": case "damage resistance": case "spell penetration":
                 totalBon = who->query_property(Bonus);

@@ -5,6 +5,17 @@
 string type;
 int draining = 0;
 
+string *TARGMSGS = ({
+        "You feel your life leaves you with the blood lost.",
+            "The cold spreads from the bite stop.",
+            "You are oblivious and blissful as the life leaves you.",
+            "Everything is serene and calm.",
+            "You wish you could be held like that for ever",
+            "You feel small stream of blood running down your neck",
+            "Cold but pleasant, this kiss is.",
+            "Is this love? But you will die.",
+    });
+
 int cmd_drain(string args)
 {
     string targ;
@@ -56,9 +67,11 @@ int cmd_drain(string args)
     }
 
     // 10 minutes?
-    add_action("stop_drain","stop");
+
     TP->set_paralyzed(400, "%^BOLD%^%^BLACK%^You are held in place %^RED%^feeding%^BLACK%^ of "+targobj->QCN+"!%^RESET%^
-%^BOLD%^%^BLACK%^Use %^RED%^<stop>%^BLACK%^ to stop feeding.%^RESET%^");
+%^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
+    tell_object(TP,"%^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
+    input_to("stop_drain",1);
     draining = 1;
     drain_process(targobj);
     TP->add_bloodlust(20000);
@@ -75,23 +88,23 @@ int verify_conditions(object target)
 
 void stop_drain()
 {
-    TP->set_paralyzed(0);
+    TP->remove_paralyzed(0);
     tell_object(TP,"%^BOLD%^%^RED%^You retract your %^BLACK%^fa%^RED%^n%^BLACK%^gs%^RED%^ and float backwars.%^RESET%^");
-    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" %^BOLD%^%^RED%^stops %^RED%^f%^BLACK%^e%^RED%^e%^RED%^d%^BLACK%^i%^RED%^n%^BLACK%^g%^RED%^ and floats backwards.%^RESET%^");
-    draining=1;
+    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" %^BOLD%^%^RED%^stops %^RED%^f%^BLACK%^e%^RED%^e%^RED%^d%^BLACK%^i%^RED%^n%^BLACK%^g%^RED%^ and floats backwards.%^RESET%^",TP);
+    draining=0;
 }
 
 void drain_process(object target)
 {
     if(!objectp(target))
     {
-        tell_object(TP,"%^BOLD%^%^RED%^Your victim has escaped!%^RESET%^");
+        tell_object(TP,"%^BOLD%^%^RED%^Your victim is no longer here.%^RESET%^");
         stop_drain();
         return;
     }
     if(ENV(target)!=ETP)
     {
-        tell_object(TP,"%^BOLD%^%^RED%^Your victim has escaped!%^RESET%^");
+        tell_object(TP,"%^BOLD%^%^RED%^Your victim is no longer here.%^RESET%^");
         stop_drain();
         return;
     }
@@ -112,7 +125,13 @@ void drain_process(object target)
         stop_drain();
         return;
     }
-    write("Feeding message");
+    if(type=="health")
+        drain_health(target);
+    else
+        drain_life(target);
+    tell_object(TP,"%^BOLD%^%^RED%^Fresh blood runs down your tongue.");
+    tell_object(target,"%^RED%^"+TARGMSGS[random(sizeof(TARGMSGS))]+"%^RESET%^");
+    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" leaning over "+target->QCN+", with face in the neck.%^RESET%^",TP);
     call_out("drain_process",ROUND_LENGTH,target);
 }
 
@@ -140,5 +159,25 @@ void drain_life(object target)
 
 void help()
 {
-    write("");
+    write(
+"%^CYAN%^NAME%^RESET%^
+
+drain - drain someone's blood
+
+%^CYAN%^SYNTAX%^RESET%^
+
+drain %^ORANGE%^%^ULINE%^TARGET%^RESET%^ [for life|health]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Draining is an activity vampires engage in when they are hungry.
+
+A vampire must drain proper kith race, such as human, or elf, or shade, to saturate her hunger. Draining other vampires or undead creatures will not work.
+
+Feeding just once saturates vampires bloodlust for a while. Draining can be done for two effects. By default and without argument, draining for life will heal the vampire, while draining for health will increase max health bonus, but no more than double vampire's base maximum hp.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+vampire, undead, recall
+");
 }
