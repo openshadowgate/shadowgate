@@ -445,7 +445,9 @@ mixed query_property(string prop)
         if(TO->is_vampire())
         {
             int blst = (20000-(int)TO->query_bloodlust())/4000-1;
+            num = props[prop];
             num -= blst<0?0:blst;
+            return num;
         }
 
     if(prop == "spell dcs") { // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.

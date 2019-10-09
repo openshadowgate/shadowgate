@@ -50,19 +50,9 @@ ghost:-5:999999:5:right hand;left hand:0:0:4:2:0:-2:human:2:4
 alaghi:0:10000:5:right hand;left hand:2:0:-2:0:0:0:alaghi:3:6
 demon:3:10000:5:right hand;left hand:0:0:0:0:0:0:human:3:8
 devil:3:10000:5:right hand;left hand:0:0:0:0:0:0:human:3:8
-draconian:4:10000:5:right hand;left hand:0:0:0:0:0:0:draconian:3:4
 dragon:12:100000:3::5:5:5:5:5:5:dragon:3:12
-elven-dragon:4:100000:5:right hand;left hand:5:5:5:5:5:5:elven-dragon:3:4
-fey:0:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:0
 giant:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:5
-golem:5:999999:5:right hand;left hand:0:0:0:0:0:0:human:4:7
 illithid:-4:10000:5:right hand;left hand;primary right tentacle;primary left tentacle;secondary right tentacle;secondary left tentacle:0:0:0:0:0:0:flayer:2:4
 kender:2:7000:5:right hand;left hand:-2:-3:-1:0:9:-4:human:1:0
-lich:-5:999999:5:right hand;left hand:0:0:4:2:0:-2:human:2:4
 lupine:4:999999:3:right forepaw;left forepaw:0:0:0:0:0:0:quadruped:2:4
-pegataur:4:10000:5:right hand;left hand:0:0:0:0:0:0:pegataur:3:4
-skeleton:-5:999999:5:right hand;left hand:0:0:4:2:0:-2:human:2:4
-thri-kreen:4:10000:5:upper right hand;upper left hand;right hand;left hand;lower right hand;lower left hand:0:0:0:0:0:0:sixarms:3:2
-titan:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:4:5
 troll:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:9
-with:0:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:0

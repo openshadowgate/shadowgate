@@ -1,8 +1,11 @@
 #include <std.h>
+#include <daemon.h>
+
+string type;
 
 int cmd_drain(string args)
 {
-    string targ,type;
+    string targ;
     object targobj;
     if (!TP->is_vampire()&&
         !avatarp(TP))
@@ -47,6 +50,28 @@ int cmd_drain(string args)
     }
     write("all ok");
     return 1;
+}
+
+void drain_health(object target)
+{
+    int dam;
+    if(TP->query_max_hp_bonus() > TP->query_max_hp_base())
+    {
+        tell_object(TP,"%^BOLD%^%^RED%^You are too infused as it is. Continuing to drain for life.%^RESET%^");
+        type = "life";
+    }
+    dam = roll_dice(TP->query_level(),4);
+    target->cause_typed_damage(target,"torso",dam,"negative energy");
+    caster->add_max_hp_bonus(dam);
+    //target->cause_typed_damage(caster,"torso",dam,"negative energy");
+}
+
+void drain_health(object target)
+{
+    int dam;
+    dam = roll_dice(TP->query_level(),4);
+    target->cause_typed_damage(target,"torso",dam,"negative energy");
+    target->cause_typed_damage(caster,"torso",dam,"negative energy");
 }
 
 void help()

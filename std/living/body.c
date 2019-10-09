@@ -490,7 +490,7 @@ int query_true_max_hp()
     return player_data["general"]["max_hp"];
 }
 
-int query_max_hp()
+int query_max_hp_base()
 {
     int num, lvladj, mypsi;
     string file, myrace, subrace;
@@ -528,8 +528,6 @@ int query_max_hp()
        num += mypsi;
     }
 
-    num+=max_hp_bonus;
-
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
     file = DIR_RACES+"/"+myrace+".c";
@@ -545,6 +543,11 @@ int query_max_hp()
     }
     num += player_data["general"]["max_hp"];
     return num;
+}
+
+int query_max_hp()
+{
+    return query_max_hp_base() + query_max_hp_bonus();
 }
 
 int query_hp() {
