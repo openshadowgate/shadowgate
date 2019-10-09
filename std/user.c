@@ -1756,7 +1756,8 @@ void heart_beat()
                     }
                     else
                     {
-                        tell_object(TO,"%^BOLD%^%^ORANGE%^You feel discomfort under the sun.");
+                        if(!random(9))
+                            tell_object(TO,"%^ORANGE%^You feel discomfort under the sun.");
                     }
                 }
     }

@@ -68,10 +68,9 @@ int cmd_drain(string args)
 
     // 10 minutes?
 
-    TP->set_paralyzed(400, "%^BOLD%^%^BLACK%^You are held in place %^RED%^feeding%^BLACK%^ of "+targobj->QCN+"!%^RESET%^
-%^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
     tell_object(TP,"%^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
-    input_to("stop_drain",1);
+    add_action("stop_drain","");
+    input_to("stop_drain",0);
     draining = 1;
     drain_process(targobj);
     TP->add_bloodlust(20000);
@@ -89,7 +88,7 @@ int verify_conditions(object target)
 void stop_drain()
 {
     TP->remove_paralyzed(0);
-    tell_object(TP,"%^BOLD%^%^RED%^You retract your %^BLACK%^fa%^RED%^n%^BLACK%^gs%^RED%^ and float backwars.%^RESET%^");
+    tell_object(TP,"%^BOLD%^%^RED%^You retract your %^BLACK%^fa%^RED%^n%^BLACK%^gs%^RED%^ and float backwards.%^RESET%^");
     tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" %^BOLD%^%^RED%^stops %^RED%^f%^BLACK%^e%^RED%^e%^RED%^d%^BLACK%^i%^RED%^n%^BLACK%^g%^RED%^ and floats backwards.%^RESET%^",TP);
     draining=0;
 }
@@ -120,32 +119,34 @@ void drain_process(object target)
     {
         return;
     }
-    if(target->query_hp()<-100)
+    if(target->query_hp()<-(target->query_max_hp()/5))
     {
         stop_drain();
         return;
+    }
+    if(TP->query_max_hp_bonus() > TP->query_max_hp_base() && type == "health")
+    {
+        tell_object(TP,"%^BOLD%^%^RED%^You feel too infused as it is. You continue to drain for life.%^RESET%^");
+        type = "life";
     }
     if(type=="health")
         drain_health(target);
     else
         drain_life(target);
+    TP->set_paralyzed(ROUND_LENGTH*8, "%^BOLD%^%^BLACK%^You are held in place %^RED%^feeding%^BLACK%^ of "+target->QCN+"!%^RESET%^
+%^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
     tell_object(TP,"%^BOLD%^%^RED%^Fresh blood runs down your tongue.");
     tell_object(target,"%^RED%^"+TARGMSGS[random(sizeof(TARGMSGS))]+"%^RESET%^");
-    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" is leaning over "+target->QCN+", with face in the neck.%^RESET%^",TP);
+    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" is leaning over "+target->QCN+"'s neck%^RESET%^",TP);
     call_out("drain_process",ROUND_LENGTH,target);
 }
 
 void drain_health(object target)
 {
     int dam;
-    if(TP->query_max_hp_bonus() > TP->query_max_hp_base())
-    {
-        tell_object(TP,"%^BOLD%^%^RED%^You are too infused as it is. Continuing to drain for life.%^RESET%^");
-        type = "life";
-    }
     dam = roll_dice(TP->query_level(),6);
     target->cause_typed_damage(target,"torso",dam,"negative energy");
-    TP->add_max_hp_bonus(dam);
+    TP->add_max_hp_bonus(dam*2);
     //target->cause_typed_damage(caster,"torso",dam,"negative energy");
 }
 
