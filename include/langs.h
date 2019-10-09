@@ -1,15 +1,12 @@
-#define ALL_LANGS ({"common","dwarvish","gnomish","goblin","kobold","orcish","halfling","drow","elven","undercommon","giant","beast","yuan-ti"})
+#define ALL_LANGS ({"common","dwarvish","gnomish","goblin","kobold","orcish","halfling","drow","elven","undercommon","giant","beast","yuan-ti","saurian","aquan"})
 
 #define ANIMAL_LANGS ({ "sylvan" })
 
+#define OUTSIDER_LANGS ({ "infernal","abyssal","celestial" })
+
 #define OLD_LANGS ({"firbolg","voadkyn","ogre-magi","hobgoblin","wemic","gnollish","beastman","bugbear","ogrish"})
 
-// added - undercommon, giant, beast, as new languages. Nienne, 02/08.
-// removed ogrish - moved ogres and ogre-magi to giant as per 3e standard. Nienne, 01/10.
-// also note the #define above is repeated in /daemon/language_d instead of it using this file for some reason
-// adding in some animal languages for use with shapeshifting and animals.  These don't behave exactly
-// the same as standard languages, so they shouldn't be given to any races on character creation -Ares
-
+//No longer in use. Refer to race files.
 #define LANGS ([\
    "dwarf":({"dwarvish","gnomish","halfling","orcish","goblin","undercommon"}),\
    "elf":({"elven","gnomish","halfling","orcish"}),\
