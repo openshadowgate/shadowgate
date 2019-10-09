@@ -50,54 +50,54 @@ inherit DAEMON;
 #define BARRIER "/d/barriermnts/ruins/mon/"+
 #define SANCT "/d/deku/sanctuary/mon/"+
 
-mapping MONSTERS = ([
-                        ANTIOCH "valley/mons/bear.c": 75000,
-                        DEKU "monster/jarrow.c":75000,
-                        DEKU "monster/lord.c":75000,
-                        DEKU "monster/serpent.c":78000,
-                        DEKU "fortress/monster/nightmare.c":78000,
-                        DEKU "keep/monster/lord.c":80000,
-                        DEKU "keep/monster/ingmar.c":75000,
-                        DEKU "keep/monster/siere.c":88000,
-                        DEKU "keep/monster/lordblacktongue.c":125000,
-                        DEKU "keep/monster/shaltul.c":78000,
-                        DEKU "keep/monster/telair.c":78000,
-                        DEKU "monster/skel-king.c":86000,
-                        DEKU "monster/hill.c":75000,
-                        SANCT "balkour.c":97500,
-                        SANCT "auica.c":95000,
-                        SANCT "everardus.c":80000,
-                        AZHA "mon/alradin.c":97500,
-                        AZHA "mon/alsura.c":94000,
-                        AZHA "theater/mons/mashiva.c":84000,
-                        AZHA "theater/mons/marion_bard.c":86000,
-                        AZHA "theater/mons/marion_ranger.c":86000,
-                        AZHA "theater/mons/ivashka_harpy.c":92000,
-                        DERRO "mon/cook.c": 12000,
-                        DERRO "mon/fireking.c": 125000,
-                        "/d/dagger/road/mon/thorby.c": 125000,
-                        "/d/darkwood/yntala/mon/lepking.c": 86000,
-                        "/d/islands/coralsea/mon/coral_captain.c": 90000,
-                        ISLANDS "pirates/mon/firstmate.c":90000,
-                        ISLANDS "pirates/mon/piratecaptain.c":95000,
-                        ISLANDS "pirates/mon/shadowmonster.c":105000,
-                        ISLANDS "pirates/mon/cedwin.c":105000,
-                        THARIS "barrow/mon/knight.c":95000,
-                        THARIS "barrow/mon/krykoth.c":95000,
-                        THARIS "monsters/forestd.c":200000,
-                        THARIS "monsters/steeldragon.c":200000,
-                        THARIS "monsters/black_mage.c":90000,
-                        THARIS "monsters/white_mage.c":90000,
-                        LAERAD "mon/skuz.c":102000,
-                        LAERAD "mon/anti.c":102000,
-                        LAERAD "mon/paladin.c":104000,
-                        LAERAD "parnelli/asgard/sewer/mons/lking.c":105000,
-                        BARRIER "mage.c":90000,
-                        BARRIER "wyvern.c":90000,
-                        D_MARSH "swamp/mon/harv.c":94500,
-                        UNDERDARK "mines/mon/kobsorc.c":94500,
-                        UNDERDARK "mines/mon/gnowarden.c":94500,
-                        ]);
+#define MONSTERS ([\
+                        ANTIOCH "valley/mons/bear.c": 75000,\
+                        DEKU "monster/jarrow.c":75000,\
+                        DEKU "monster/lord.c":75000,\
+                        DEKU "monster/serpent.c":78000,\
+                        DEKU "fortress/monster/nightmare.c":78000,\
+                        DEKU "keep/monster/lord.c":80000,\
+                        DEKU "keep/monster/ingmar.c":75000,\
+                        DEKU "keep/monster/siere.c":88000,\
+                        DEKU "keep/monster/lordblacktongue.c":125000,\
+                        DEKU "keep/monster/shaltul.c":78000,\
+                        DEKU "keep/monster/telair.c":78000,\
+                        DEKU "monster/skel-king.c":86000,\
+                        DEKU "monster/hill.c":75000,\
+                        SANCT "balkour.c":97500,\
+                        SANCT "auica.c":95000,\
+                        SANCT "everardus.c":80000,\
+                        AZHA "mon/alradin.c":97500,\
+                        AZHA "mon/alsura.c":94000,\
+                        AZHA "theater/mons/mashiva.c":84000,\
+                        AZHA "theater/mons/marion_bard.c":86000,\
+                        AZHA "theater/mons/marion_ranger.c":86000,\
+                        AZHA "theater/mons/ivashka_harpy.c":92000,\
+                        DERRO "mon/cook.c": 12000,\
+                        DERRO "mon/fireking.c": 125000,\
+                        "/d/dagger/road/mon/thorby.c": 125000,\
+                        "/d/darkwood/yntala/mon/lepking.c": 86000,\
+                        "/d/islands/coralsea/mon/coral_captain.c": 90000,\
+                        ISLANDS "pirates/mon/firstmate.c":90000,\
+                        ISLANDS "pirates/mon/piratecaptain.c":95000,\
+                        ISLANDS "pirates/mon/shadowmonster.c":105000,\
+                        ISLANDS "pirates/mon/cedwin.c":105000,\
+                        THARIS "barrow/mon/knight.c":95000,\
+                        THARIS "barrow/mon/krykoth.c":95000,\
+                        THARIS "monsters/forestd.c":200000,\
+                        THARIS "monsters/steeldragon.c":200000,\
+                        THARIS "monsters/black_mage.c":90000,\
+                        THARIS "monsters/white_mage.c":90000,\
+                        LAERAD "mon/skuz.c":102000,\
+                        LAERAD "mon/anti.c":102000,\
+                        LAERAD "mon/paladin.c":104000,\
+                        LAERAD "parnelli/asgard/sewer/mons/lking.c":105000,\
+                        BARRIER "mage.c":90000,\
+                        BARRIER "wyvern.c":90000,\
+                        D_MARSH "swamp/mon/harv.c":94500,\
+                        UNDERDARK "mines/mon/kobsorc.c":94500,\
+                        UNDERDARK "mines/mon/gnowarden.c":94500,\
+                        ])
 
 
 mapping __Quests, __Rooms, __Monsters;

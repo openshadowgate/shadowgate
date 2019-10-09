@@ -44,54 +44,54 @@ inherit DAEMON;
 #define SENUND "/d/attaya/senund/"+
 #define DEKU "/d/deku/hhouse/mon/"+
 
-mapping MONSTERS = ([
-                        ANTIOCH "ruins/mons/demon.c" : 656000 ,
-                        ATTAYA "mon/bishimon.c" : 1240000 ,
-                        ATTAYA "mon/ashtar.c" : 1240000 ,
-                        ATTAYA "mon/callista.c" : 1600000 ,
-                        ATTAYA "mon/intruder.c" : 6000000 ,
-                        ATTAYA "mon/phaeton.c" : 1600000 ,
-                        ATTAYA "mon/judatac.c" : 1440000 ,
-                        ATTAYA "mon/volkerps.c" : 1200000 ,
-                        ATTAYA "mon/magus.c" : 1520000 ,
-                        ATTAYA "mon/io.c" : 1520000 ,
-                        ATTAYA "mon/hunter.c" : 1800000 ,
-                        ATTAYA "mon/roper.c" : 1800000 ,
-                        DERRO "mon/elemental.c" : 300000 ,
-                        ISLANDS "argentrock/mon/watcher.c" : 480000 ,
-                        ISLANDS "argentrock/mon/batlin.c" : 4760000 ,
-                        ISLANDS "argentrock/mon/jarkunish.c" : 1560000 ,
-                        ISLANDS "argentrock/mon/kronibus.c" : 1560000 ,
-                        ISLANDS "argentrock/mon/fernibus.c" : 1560000 ,
-                        ISLANDS "common/mon/cruisertetron.c" : 5000000 ,
-                        "/d/antioch/wild/mount/muln/mon/muln.c" : 1800000 ,
-                        ISLANDS "tonerra/mon/edragon.c" : 1800000 ,
-                        ISLANDS "tonerra/mon/mmonk.c" : 456000 ,
-                        ISLANDS "tonerra/mon/tombt.c" : 1200000 ,
-                        ISLANDS "tonerra/mon/ibrandul.c" : 4800000 ,
-                        ISLANDS "tonerra/mon/nativek.c" : 1128000 ,
-                        ISLANDS "tonerra/mon/nativewd.c" : 292000 ,
-                        LAERAD "mon/dragon.c" : 1120000 ,
-                        D_MARSH "tower/mon/dragon.c" : 2176000 ,
-                        D_MARSH "tower/mon/knight.c" : 1200000 ,
-                        D_MARSH "tower/mon/vecna.c" : 6000000 ,
-                        D_MARSH "tower/mon/angel.c" : 1200000 ,
-                        D_MARSH "tower/mon/grimmy.c" : 2000000 ,
-                        D_MARSH "tower/mon/nico.c" : 2000000 ,
-                        D_MARSH "tower/mon/render.c" : 4400000 ,
-                        OGRE "mobs/ahstuz.c" : 680000 ,
-                        SENUND "mon/elseroad.c" : 632000 ,
-                        SENUND "mon/gambrill.c" : 336000 ,
-                        SENUND "mon/geilfuss.c" : 368000 ,
-                        SENUND "mon/priest.c" : 360000 ,
-                        DEKU "zhour_husk.c" : 640000 ,
-                        DEKU "arag_dyne.c" : 640000 ,
-                        DEKU "assassin.c" : 600000 ,
-                        DEKU "narameon.c" : 600000 ,
-                        DEKU "bandit_l.c" : 640000 ,
-                        DEKU "black_beast.c" : 360000 ,
-                        DEKU "aurus_devar_bones.c" : 2000000 ,
-                        ]);
+#define MONSTERS ([\
+                        ANTIOCH "ruins/mons/demon.c" : 656000 ,\
+                        ATTAYA "mon/bishimon.c" : 1240000 ,\
+                        ATTAYA "mon/ashtar.c" : 1240000 ,\
+                        ATTAYA "mon/callista.c" : 1600000 ,\
+                        ATTAYA "mon/intruder.c" : 6000000 ,\
+                        ATTAYA "mon/phaeton.c" : 1600000 ,\
+                        ATTAYA "mon/judatac.c" : 1440000 ,\
+                        ATTAYA "mon/volkerps.c" : 1200000 ,\
+                        ATTAYA "mon/magus.c" : 1520000 ,\
+                        ATTAYA "mon/io.c" : 1520000 ,\
+                        ATTAYA "mon/hunter.c" : 1800000 ,\
+                        ATTAYA "mon/roper.c" : 1800000 ,\
+                        DERRO "mon/elemental.c" : 300000 ,\
+                        ISLANDS "argentrock/mon/watcher.c" : 480000 ,\
+                        ISLANDS "argentrock/mon/batlin.c" : 4760000 ,\
+                        ISLANDS "argentrock/mon/jarkunish.c" : 1560000 ,\
+                        ISLANDS "argentrock/mon/kronibus.c" : 1560000 ,\
+                        ISLANDS "argentrock/mon/fernibus.c" : 1560000 ,\
+                        ISLANDS "common/mon/cruisertetron.c" : 5000000 ,\
+                        "/d/antioch/wild/mount/muln/mon/muln.c" : 1800000 ,\
+                        ISLANDS "tonerra/mon/edragon.c" : 1800000 ,\
+                        ISLANDS "tonerra/mon/mmonk.c" : 456000 ,\
+                        ISLANDS "tonerra/mon/tombt.c" : 1200000 ,\
+                        ISLANDS "tonerra/mon/ibrandul.c" : 4800000 ,\
+                        ISLANDS "tonerra/mon/nativek.c" : 1128000 ,\
+                        ISLANDS "tonerra/mon/nativewd.c" : 292000 ,\
+                        LAERAD "mon/dragon.c" : 1120000 ,\
+                        D_MARSH "tower/mon/dragon.c" : 2176000 ,\
+                        D_MARSH "tower/mon/knight.c" : 1200000 ,\
+                        D_MARSH "tower/mon/vecna.c" : 6000000 ,\
+                        D_MARSH "tower/mon/angel.c" : 1200000 ,\
+                        D_MARSH "tower/mon/grimmy.c" : 2000000 ,\
+                        D_MARSH "tower/mon/nico.c" : 2000000 ,\
+                        D_MARSH "tower/mon/render.c" : 4400000 ,\
+                        OGRE "mobs/ahstuz.c" : 680000 ,\
+                        SENUND "mon/elseroad.c" : 632000 ,\
+                        SENUND "mon/gambrill.c" : 336000 ,\
+                        SENUND "mon/geilfuss.c" : 368000 ,\
+                        SENUND "mon/priest.c" : 360000 ,\
+                        DEKU "zhour_husk.c" : 640000 ,\
+                        DEKU "arag_dyne.c" : 640000 ,\
+                        DEKU "assassin.c" : 600000 ,\
+                        DEKU "narameon.c" : 600000 ,\
+                        DEKU "bandit_l.c" : 640000 ,\
+                        DEKU "black_beast.c" : 360000 ,\
+                        DEKU "aurus_devar_bones.c" : 2000000 ,\
+                        ])
 
 mapping __Quests, __Rooms, __Monsters;
 mapping __Removal;

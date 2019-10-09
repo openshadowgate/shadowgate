@@ -13,7 +13,7 @@ inherit DAEMON;
 
 #define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl", "knife", "scroll", "tablet","hat","tome","rod","statue","figurine","amulet", "talisman", "slippers", "flask","candle","mirror","rug","brooch","egg","scarf", "sphere", "cube", "stone", "crown", "amulet"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder", "sploosh"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder",})
 
 #define SAVE_QUESTS "/daemon/save/quests_low"
 
@@ -49,38 +49,38 @@ inherit DAEMON;
 #define KOENIG "/d/koenig/town/"+
 #define SHADOW "/d/shadow/"+
 
-mapping MONSTERS = ([
-                        GOBLIN "mon/king.c":20600,
-                        GOBLIN "mon/king.c":20600,
-                        GOBLIN "mon/rogue.c":15100,
-                        GOBLIN "mon/gobass.c":15100,
-                        KOENIG "mon/thess.c":15100,
-                        KOENIG "mon/magglerak.c": 18000,
-                        KOENIG "mon/cryptkeeper.c": 20600,
-                        KOENIG "mon/crysmon1.c":18000,
-                        KOENIG "mon/gentleman.c":22800,
-                        KOENIG "mon/donner.c":18000,
-                        KOENIG "mon/headcook.c":18000,
-                        KOENIG "mon/decapus.c":17100,
-                        KOENIG "mon/mansnake.c":17100,
-                        KOENIG "mon/concubine.c":18000,
-                        KOENIG "mon/butler.c":17100,
-                        KOENIG "mon/welemental.c":19100,
-                        SHADOW "room/mountain/mons/koboldf.c":18500,
-                        SHADOW "room/mountain/mons/koboldf.c":18500,
-                        SHADOW "room/kildare/mon/peryking.c":19500,
-                        SHADOW "room/kildare/mon/peryking.c":19500,
-                        SHADOW "room/mountain/mons/ogreking.c":19100,
-                        SHADOW "room/mountain/mons/grakulan.c":19500,
-                        "/d/darkwood/camps/mon/gore.c":19500,
-                        SHADOW "room/feyren/mon/ashilla.c": 22800,
-                        SHADOW "room/feyren/mon/feyren.c": 22800,
-                        SHADOW "room/feyren/mon/ahyriquel.c":22800,
-                        THARIS "conforest/mons/orcchief.c":19100,
-                        SHADOW "room/farm/mon/sea_hag.c":17100,
-                        SHADOW "room/farm/mon/hildegard.c":17100,
-                        "/d/koenig/mon/ogremage.c":18000,
-                        ]);
+#define MONSTERS ([\
+                        GOBLIN "mon/king.c":20600,\
+                        GOBLIN "mon/king.c":20600,\
+                        GOBLIN "mon/rogue.c":15100,\
+                        GOBLIN "mon/gobass.c":15100,\
+                        KOENIG "mon/thess.c":15100,\
+                        KOENIG "mon/magglerak.c": 18000,\
+                        KOENIG "mon/cryptkeeper.c": 20600,\
+                        KOENIG "mon/crysmon1.c":18000,\
+                        KOENIG "mon/gentleman.c":22800,\
+                        KOENIG "mon/donner.c":18000,\
+                        KOENIG "mon/headcook.c":18000,\
+                        KOENIG "mon/decapus.c":17100,\
+                        KOENIG "mon/mansnake.c":17100,\
+                        KOENIG "mon/concubine.c":18000,\
+                        KOENIG "mon/butler.c":17100,\
+                        KOENIG "mon/welemental.c":19100,\
+                        SHADOW "room/mountain/mons/koboldf.c":18500,\
+                        SHADOW "room/mountain/mons/koboldf.c":18500,\
+                        SHADOW "room/kildare/mon/peryking.c":19500,\
+                        SHADOW "room/kildare/mon/peryking.c":19500,\
+                        SHADOW "room/mountain/mons/ogreking.c":19100,\
+                        SHADOW "room/mountain/mons/grakulan.c":19500,\
+                        "/d/darkwood/camps/mon/gore.c":19500,\
+                        SHADOW "room/feyren/mon/ashilla.c": 22800,\
+                        SHADOW "room/feyren/mon/feyren.c": 22800,\
+                        SHADOW "room/feyren/mon/ahyriquel.c":22800,\
+                        THARIS "conforest/mons/orcchief.c":19100,\
+                        SHADOW "room/farm/mon/sea_hag.c":17100,\
+                        SHADOW "room/farm/mon/hildegard.c":17100,\
+                        "/d/koenig/mon/ogremage.c":18000,\
+                        ])
 
 mapping __Quests, __Rooms, __Monsters;
 mapping __Removal;
@@ -140,7 +140,7 @@ void newMon(){
    while (member_array(name, keys(__Quests)) != -1) {
       name = makeObject();
    }
-   file = keys(MONSTERS)[random(sizeof(keys(MONSTERS)))];
+   file = (keys(MONSTERS))[random(sizeof(keys(MONSTERS)))];
 
    while (member_array(file, keys(__Monsters)) != -1) {
       file = keys(MONSTERS)[random(sizeof(keys(MONSTERS)))];
