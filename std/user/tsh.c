@@ -183,6 +183,7 @@ string write_prompt()
         prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance());
         prompt = replace_string(prompt, "$i", ""+hunger2string(this_player()));
         prompt = replace_string(prompt, "$o", ""+thirst2string(this_player()));
+        prompt = replace_string(prompt, "$B", ""+bloodlust2string(this_player()));
         prompt = replace_string(prompt, "$e", ""+expperc);
         if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");
         else prompt = replace_string(prompt, "$E", "No Essence");
@@ -296,6 +297,26 @@ string hunger2string(object obj)
         return "Not hungry";
     else
         return "Stuffed";
+}
+
+string bloodlust2string(object obj)
+{
+    int max, hunger;
+    max = 20000;
+    max /=6;
+    hunger = obj->query_stuffed();
+    if(hunger < max)
+        return"Starving";
+    else if(hunger < (max * 2))
+        return "Very bloodthirsty";
+    else if(hunger < (max * 3))
+        return "Really bloodthirsty";
+    else if(hunger < (max * 4))
+        return "Bloodtrhirsty";
+    else if(hunger < (max * 5))
+        return "Not bloodtrhirsty";
+    else
+        return "Saturated";
 }
 
 string thirst2string(object obj)

@@ -8,12 +8,12 @@
 %^RED%^ * can use %^MAGENTA%^<drain>%^RED%^ command
 %^RED%^ * cha score used for hp bonus
 %^RED%^ * innate spells
-%^RED%^   * children of the night
 %^RED%^   * create spawn
-%^RED%^   * twilight shape
-%^RED%^   * dominate
-%^RED%^   * spider climb
 %^RED%^   * darkvision
+%^RED%^   * dominate
+%^RED%^   * gaseous form
+%^RED%^   * spider climb
+%^RED%^   * twilight shape
 %^RED%^ * resistances
 %^RED%^   + 10 spell damage resistance
 %^RED%^   + 10 electricity resistance
@@ -35,9 +35,9 @@
 
 %^RED%^For vampires, managing their hunger is an integral part of unlife. Some revel in the feast, but for others it is nothing but a constant source of stress and shame.
 
-%^RED%^Vampire's hunger is defined by her blood hunger parameter. Vampires fast healing, str and cha stats, will save will deteriorate as hunger increases. At highest hunger vampire will receive -10 penatly to strenght, charisma, will, and -4 to fast healing, the sun will also become deadly for her. To return to sanity in mortal form a vampire must satisfy her hunger by draining living victims with %^MAGENTA%^<drain>%^RED%^ command.
+%^RED%^Vampire's hunger is defined by her blood hunger parameter. Vampires fast healing, str and cha stats, will save will deteriorate as hunger increases. At highest hunger vampire will receive -10 penatly to strenght, charisma, will, and -4 to fast healing, the sun will also become deadly for her. To return to sanity a vampire must satisfy her hunger by draining living victims with %^MAGENTA%^<drain>%^RED%^ command.
 
 %^BOLD%^%^BLACK%^Player characters:
 %^RED%^Vampires are not your little sisters crystalline brooding anti-heroes. Don't be mistaken: you play a truly alien monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal always will be own survival.
 
-%^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects
+%^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects, weather

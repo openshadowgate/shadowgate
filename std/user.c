@@ -1750,7 +1750,7 @@ void heart_beat()
                 {
                     if((int)TO->query_bloodlust()/2000<8)
                     {
-                        TO->do_damage("torso",query_max_hp()/6);
+                        TO->do_damage("torso",query_max_hp()/4);
                         tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
                         tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
                     }

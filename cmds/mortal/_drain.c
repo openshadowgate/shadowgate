@@ -172,6 +172,8 @@ drain %^ORANGE%^%^ULINE%^TARGET%^RESET%^ [for life|health]
 
 Draining is an activity vampires engage in when they are hungry.
 
+Your %^ORANGE%^%^ULINE%^TARGET%^RESET%^ must be either asleep, paralyzed, grappled or unconscious to be drained.
+
 A vampire must drain proper kith race, such as human, or elf, or shade, to saturate her hunger. Draining other vampires or undead creatures will not work.
 
 Feeding just once saturates vampires bloodlust for a while. Draining can be done for two effects. By default and without argument, draining for life will heal the vampire, while draining for health will increase max health bonus, but no more than double vampire's base maximum hp.

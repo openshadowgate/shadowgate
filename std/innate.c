@@ -57,13 +57,14 @@ void InitInnate()
     {
         InnateAbilities += ([
                                 "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "animate dead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 ]);
     }
 
     if(is_vampire())
     {
         InnateAbilities += ([
-                                "children of the night" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+//                                "children of the night" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "create spawn" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "twilight shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "dominate" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
