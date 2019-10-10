@@ -1756,6 +1756,8 @@ void heart_beat()
                     }
                 }
     }
+    if(TO->query_hp()<-(TO->query_max_hp()*4/5))
+        TO->die();
 }
 
 void net_dead2() {
