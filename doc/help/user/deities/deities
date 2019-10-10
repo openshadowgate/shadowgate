@@ -1,28 +1,45 @@
 %^BOLD%^%^BLUE%^The world of ShadowGate is pantheistic and includes many deities who may be worshipped by mortals.  While any mortal may make offerings to any deity to appease him or her, each mortal is also encouraged to choose a patron who will help guide the mortal's life.  These are the deities and their spheres of influence.
 
-%^BOLD%^%^GREEN%^Deity: Spheres of Influence
-  %^BOLD%^%^WHITE%^-%^GREEN%^Domains
-%^BOLD%^%^WHITE%^--------------------------------------------------
 %^BOLD%^%^BLUE%^Callamir: Luck/Trickery
-  %^BOLD%^%^WHITE%^*%^BLUE%^good, charm, air, travel, trickery
+  %^BOLD%^%^BLUE%^Domains :%^BLUE%^ good, charm, air, travel, trickery
+  %^BOLD%^%^BLUE%^Allies  :%^BLUE%^ Jarmila
+  %^BOLD%^%^BLUE%^Enemies :%^BLUE%^ The Faceless One, Lord Shadow
 %^BOLD%^%^RED%^Jarmila: Light/Love
-  %^BOLD%^%^WHITE%^*%^RED%^good, renewal, sun, protection, fire
+  %^BOLD%^%^RED%^Domains :%^RED%^ good, renewal, sun, protection, fire
+  %^BOLD%^%^RED%^Allies  :%^RED%^ Callamir, Kreysneothosies, Lysara
+  %^BOLD%^%^RED%^Enemies :%^BLUE%^ Lord Shadow, Nilith, The Faceless One
 %^CYAN%^Kismet: Magic/Knowledge
-  %^BOLD%^*%^RESET%^%^CYAN%^creation, knowledge, mentalism, magic
+  %^CYAN%^Domains :%^CYAN%^%^CYAN%^ creation, knowledge, mentalism, magic
+  %^CYAN%^Allies  :%^CYAN%^%^CYAN%^ none
+  %^CYAN%^Enemies :%^CYAN%^%^CYAN%^ none
 %^BOLD%^Kreysneothosies: Home/Protection
-  %^BOLD%^*protection, vigilance, strength, earth
+  %^BOLD%^Domains : protection, vigilance, strength, earth
+  %^BOLD%^Allies  : Jarmila, Lysara
+  %^BOLD%^Enemies : The Faceless One, Nilith
 %^BOLD%^%^BLACK%^Lord Shadow: Darkness/Tyranny
-  %^BOLD%^*%^BLACK%^evil, cold, tyranny, suffering, darkness
+  %^BOLD%^%^BLACK%^Domains :%^BOLD%^%^BLACK%^ evil, cold, tyranny, suffering, darkness
+  %^BOLD%^%^BLACK%^Allies  :%^BOLD%^%^BLACK%^ none
+  %^BOLD%^%^BLACK%^Enemies :%^BOLD%^%^BLACK%^ Jarmila, Callamir, Lysara
 %^BOLD%^%^MAGENTA%^Lysara: Death/Fate
-  %^BOLD%^*%^MAGENTA%^travel, fate, repose, moon, water
+  %^BOLD%^%^MAGENTA%^Domains :%^MAGENTA%^ travel, fate, repose, moon, water
+  %^BOLD%^%^MAGENTA%^Allies  :%^MAGENTA%^ Kreysneothosies, Jarmila
+  %^BOLD%^%^MAGENTA%^Enemies :%^MAGENTA%^ Nilith, Lord Shadow
 %^ORANGE%^Nilith: Undeath/War
-  %^BOLD%^*%^RESET%^%^ORANGE%^war, strength, evil, destruction
-%^GREEN%^%^Nimnavanon: Forests/Weather
-  %^BOLD%^*%^RESET%^%^GREEN%^storms, plant, animal, earth, destruction
-%^BOLD%^%^%^WHITE%^The Faceless One: Murder/Deception
-  %^BOLD%^*%^BOLD%^%^WHITE%^trickery, illusion, cavern, darkness, evil
+  %^ORANGE%^Domains :%^ORANGE%^%^ORANGE%^ war, strength, evil, destruction
+  %^ORANGE%^Allies  :%^ORANGE%^%^ORANGE%^ none
+  %^ORANGE%^Enemies :%^ORANGE%^%^ORANGE%^ Lysara, Kreysneothosies, Jarmila, Nimnavanon
+%^GREEN%^Nimnavanon: Forests/Weather
+  %^GREEN%^Domains :%^GREEN%^%^GREEN%^ storms, plant, animal, earth, destruction
+  %^GREEN%^Allies  :%^GREEN%^%^GREEN%^ Ryorik
+  %^GREEN%^Enemies :%^GREEN%^%^GREEN%^ Nilith
+%^RED%^The Faceless One: Murder/Deception
+  %^RED%^Domains :%^RED%^ trickery, illusion, cavern, darkness, evil
+  %^RED%^Allies  :%^RED%^ none
+  %^RED%^Enemies :%^RED%^ Jarmila, Callamir, Kreysneothosies
 %^BOLD%^%^CYAN%^Ryorik: Elements/Natural Disasters
-  %^BOLD%^*%^BOLD%^%^CYAN%^air, earth, fire, water
+  %^BOLD%^%^CYAN%^Domains :%^BOLD%^%^CYAN%^ air, earth, fire, water
+  %^BOLD%^%^CYAN%^Allies  :%^BOLD%^%^CYAN%^ Nimnavanon
+  %^BOLD%^%^CYAN%^Enemies :%^BOLD%^%^CYAN%^ None
 
 %^BOLD%^%^WHITE%^Each divinity has own set of allies and enemies. Being an ally or enemy does not necessarily mean you must aid or kill on sight. Determine the best course of action for your character based on your character's beliefs, the other individual(s) in question, and past actions and interactions with the individuals or their faith. Refer to their helpfiles for allies and enemies.
 
