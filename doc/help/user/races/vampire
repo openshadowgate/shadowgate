@@ -39,9 +39,11 @@
 
 %^RED%^For vampires, managing their hunger is an integral part of unlife. Some revel in the feast, but for others it is nothing but a constant source of stress and shame.
 
-%^RED%^A vampire's hunger is defined by her blood hunger parameter. A vampire's fast healing, str and cha stats, as well as will saves will deteriorate as hunger increases. At its highest hunger, the vampire will receive -10 penalty to strength, charisma, will, and -4 to fast healing. The sun will also become deadly for her. To return to sanity, a vampire must satisfy her hunger by draining living victims with the %^BLUE%^<drain>%^RED%^ command.
+%^RED%^A vampire's hunger is defined by her blood hunger parameter. A vampire's fast healing, str and cha stats, as well as will saves will deteriorate as hunger increases. At its highest hunger, the vampire will receive -10 penalty to strength, charisma, will, and -4 to fast healing. The sun will also become deadly for her. To return to sanity, a vampire must satisfy her hunger by draining living victims.
 
 %^BOLD%^%^BLACK%^Player characters:
-%^RED%^Vampires are not your little sister's crystalline brooding anti-heroes. Don't be mistaken: you play a truly alien monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal will always be your own survival.
+%^RED%^Vampires are not your little sister's crystalline brooding anti-heroes. Don't be mistaken: you play a truly alien monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal will always be your own survival. Improper roleplay and carelessness will lead to your death.
+
+%^RED%^Your hunger is tracked with %^BLUE%^$B%^RED%^ parameter on the prompt and in the %^BLUE%^<score>%^RED%^. You can saturate it with the %^BLUE%^<drain>%^RED%^ command. Draining can be done for both health, increasing max hp points, and life, healing oneself. Just one feeding is sufficient to reset saturation.
 
 %^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects, weather, the covenant
