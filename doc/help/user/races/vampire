@@ -9,9 +9,9 @@
 %^RED%^ * cha score used for hp bonus
 %^RED%^ * innate spells
 %^RED%^   * create spawn
-%^RED%^   * night swarm
 %^RED%^   * dominate
 %^RED%^   * gaseous form
+%^RED%^   * night swarm
 %^RED%^   * sleep
 %^RED%^   * spider climb
 %^RED%^   * twilight shape
@@ -44,4 +44,4 @@
 %^BOLD%^%^BLACK%^Player characters:
 %^RED%^Vampires are not your little sister's crystalline brooding anti-heroes. Don't be mistaken: you play a truly alien monster whose motives and thinking has nothing to do with those that mortals share. Your primary goal will always be your own survival.
 
-%^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects, weather
+%^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, status effects, weather, the covenant
