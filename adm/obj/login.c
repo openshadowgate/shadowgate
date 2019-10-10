@@ -358,7 +358,7 @@ static void ansi_test(string str) {
         __Player->setenv("TERM","default");
         __Player->reset_terminal();
     }
-    message("logon", "\nPlease choose character sex"+
+    message("logon", "\nPlease choose character gender"+
             " (male or female) : ", this_player());
     input_to("choose_gender");
     return;
