@@ -214,21 +214,6 @@ int scry(string str) {
         write("%^BOLD%^RED%^Why don't you just look in a mirror or something?");
         return 1;
       }
-
-      // This change below should give a miss chance based on scrying
-      // someone by their true name without that name being recognized by
-      // the caster. 1 in 4 chance of getting the right parson, as per DMG
-      // and Crystal Ball entries.  1 in 3 chance of them getting someone
-      // random if they miss.
-    }
-    else {
-      if (avatarp(TP) || !random(4)) {
-        if (avatarp(TP)) write("You know who you're looking for.");
-        target = find_player(targ);
-      }
-      else {
-        if (!random(3)) target = find_miss(TP,find_player(targ));
-      }
     }
     if(!objectp(target)) {
       write("%^BOLD%^%^RED%^The target of your spell is not here!");
@@ -518,15 +503,4 @@ mapping shorten( int newsize, mapping remembered ) {
   return remembered;
 }
 
-object find_miss(object play, object victim) {
-  object * userarray;
-  object randobj;
-
-  userarray = users();
-  userarray -= ({ 0,play,victim });
-  if (!sizeof(userarray)) return 0;
-  randobj = userarray[random(sizeof(userarray))];
-  if (avatarp(randobj)) return 0;
-  else return randobj;
-}
 // EOF is here/
