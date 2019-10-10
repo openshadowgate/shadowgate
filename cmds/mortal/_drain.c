@@ -124,7 +124,7 @@ void drain_process(object target)
         stop_drain();
         return;
     }
-    if(TP->query_max_hp_bonus() > TP->query_max_hp_base() && type == "health")
+    if(TP->query_max_hp_bonus() > (TP->query_max_hp_base()/2 ) && type == "health")
     {
         tell_object(TP,"%^BOLD%^%^RED%^You feel too infused as it is. You continue to drain for life.%^RESET%^");
         type = "life";
@@ -177,7 +177,7 @@ Your %^ORANGE%^%^ULINE%^TARGET%^RESET%^ must be either asleep, paralyzed, grappl
 
 A vampire must drain proper kith race, such as human, or any race on %^ORANGE%^<help races>%^RESET%^ to saturate her hunger. Draining lesser creature, other vampires or undead creatures will not work.
 
-Feeding just once saturates vampires bloodlust for a while. Draining can be done for two effects. By default and without an argument, draining for life will heal the vampire, while draining for health will increase max health bonus, but no more than double vampire's base maximum hp.
+Feeding just once saturates vampires bloodlust for a while. Draining can be done for two effects. By default and without an argument, draining for life will heal the vampire, while draining for health will increase max health bonus, but no over than half of vampire's base maximum hp.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

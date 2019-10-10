@@ -1749,16 +1749,12 @@ void heart_beat()
             if(!ETO->query_property("indoors"))
                 if(EVENTS_D->query_time_of_day()=="day")
                 {
-                    if((int)TO->query_bloodlust()/2000<8)
+                    if((int)TO->query_bloodlust()/200<95)
                     {
-                        TO->do_damage("torso",query_max_hp()/4);
-                        tell_object(TO,"%^BOLD%^%^ORANGE%^The sun burns your putrid flesh!");
-                        tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+" burns flamelessly.%^RESET%^",TO);
-                    }
-                    else
-                    {
-                        if(!random(9))
-                            tell_object(TO,"%^ORANGE%^You feel discomfort under the sun.");
+                        TO->do_damage("torso",((query_max_hp()/2)*(20000-TO->query_bloodlust()))/20000);
+                        tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
+                        if(!random(5))
+                            tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+"'s skin smokes flamelessly.%^RESET%^",TO);
                     }
                 }
     }
