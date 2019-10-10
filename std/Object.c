@@ -443,12 +443,14 @@ mixed query_property(string prop)
 
     if(prop == "fast healing")
         if(TO->is_vampire())
-        {
-            int blst = (20000-(int)TO->query_bloodlust())/4000-1;
-            num = props[prop];
-            num -= blst<0?0:blst;
-            return num;
-        }
+            if(ETO->query_property("indoors"))
+                if(!EVENTS_D->query_time_of_day()=="day")
+                {
+                    int blst = (20000-(int)TO->query_bloodlust())/4000-1;
+                    num = props[prop]+5;
+                    num -= blst<0?0:blst;
+                    return num<0?0:num;
+                }
 
     if(prop == "spell dcs") { // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
         if(FEATS_D->usable_feat(TO,"spell focus"))         { num += 2; }

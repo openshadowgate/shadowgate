@@ -1437,8 +1437,6 @@ void setup() {
   if(query("undead"))
   {
       set_property("undead",1);
-      if(query("vampire"))
-          set_property("fast healing",5);
       InitInnate();
   }
   TO->update_channels();
@@ -1751,7 +1749,7 @@ void heart_beat()
                 {
                     if((int)TO->query_bloodlust()/200<95)
                     {
-                        TO->do_damage("torso",((query_max_hp()/2)*(20000-TO->query_bloodlust()))/20000);
+                        TO->do_damage("torso",((query_max_hp())*(20000-TO->query_bloodlust()))/20000);
                         tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
                         if(!random(5))
                             tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+"'s skin smokes flamelessly.%^RESET%^",TO);
