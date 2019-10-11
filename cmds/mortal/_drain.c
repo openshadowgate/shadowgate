@@ -82,7 +82,8 @@ int verify_conditions(object target)
 {
     return (target->query_asleep() ||
             target->query_unconscious() ||
-            target->query_paralyzed());
+            target->query_paralyzed() ||
+            target->query_bound());
 }
 
 void stop_drain()
@@ -144,7 +145,7 @@ void drain_process(object target)
 void drain_health(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(),6);
+    dam = roll_dice(TP->query_level(),8);
     target->cause_typed_damage(target,"torso",dam,"negative energy");
     TP->add_max_hp_bonus(dam*2);
     //target->cause_typed_damage(caster,"torso",dam,"negative energy");
@@ -153,7 +154,7 @@ void drain_health(object target)
 void drain_life(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(),6);
+    dam = roll_dice(TP->query_level(),8);
     target->cause_typed_damage(target,"torso",dam,"negative energy");
     target->cause_typed_damage(TP,"torso",dam*2,"negative energy");
 }
@@ -173,7 +174,7 @@ drain %^ORANGE%^%^ULINE%^TARGET%^RESET%^ [for life|health]
 
 Draining is an activity vampires engage in when they are hungry.
 
-Your %^ORANGE%^%^ULINE%^TARGET%^RESET%^ must be either asleep, paralyzed, grappled or unconscious to be drained.
+Your %^ORANGE%^%^ULINE%^TARGET%^RESET%^ must be either asleep, paralyzed, grappled, bound or unconscious to be drained.
 
 A vampire must drain proper kith race, such as human, or any race on %^ORANGE%^<help races>%^RESET%^ to saturate her hunger. Draining lesser creature, other vampires or undead creatures will not work.
 
