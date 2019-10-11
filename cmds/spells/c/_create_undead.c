@@ -105,7 +105,7 @@ void spell_effect(int prof)
     caster->add_follower(undead);
     controller->add_monster(undead);
 
-    lvl = clevel/4;
+    lvl = clevel/3;
     caster->set_property("raised", lvl);
 
     dest_effect();
