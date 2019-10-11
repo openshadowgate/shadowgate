@@ -76,7 +76,7 @@ void spell_effect(int prof)
     corpse->remove();
 
 
-    tell_object(caster,"%^BOLD%^%^BLACK%^THE %^WHITE%^"+capitalize(undead_to_raise())+"%^BLACK%^ RAISES%^RESET%^");
+    tell_object(caster,"%^BOLD%^%^BLACK%^THE %^WHITE%^"+capitalize(replace_string(undead_to_raise(),"_"," "))+"%^BLACK%^ RISES%^RESET%^");
 
     if(present("undead_controller",caster))
     {
