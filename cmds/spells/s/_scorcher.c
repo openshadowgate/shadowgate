@@ -17,6 +17,7 @@ void create() {
     set_spell_level(([ "mage" : 2, ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS scorcher on TARGET");
+    set_damage_desc("fire or versatile arcanist");
     set_description("When a mage casts this ferocious spell, fire blazes out of the caster's hand towards a target, "
 "burning through all in the way.  The mage will make an effort to aim at only attackers, but this is not always "
 "possible. While the spell will reliably hit the primary target, a quick opponent may avoid being caught by the "

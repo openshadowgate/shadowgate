@@ -60,6 +60,14 @@ int cmd_drain(string args)
         return 0;
     }
 
+    if(targobj->query_property("spell_creature") ||
+       targobj->query_property("spelled") ||
+       targobj->query("not living"))
+    {
+        notify_fail("Don't feed on phantoms.\n");
+        return 0;
+    }
+
     if(!(verify_conditions(targobj)))
     {
         notify_fail("Your target is not incapacitated.\n");

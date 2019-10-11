@@ -8,6 +8,7 @@ void create() {
     set_spell_name("disrupt undead");
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("necromancy");
+    set_damage_desc("positive energy on undead");
     set_syntax("cast CLASS disrupt undead on TARGET");
     set_description("With this spell caster directs a ray of positive energy that severely harms undead.");
     set_verbal_comp();
@@ -19,7 +20,7 @@ spell_effect(int prof) {
 
     if((string)target->query_race() != "undead" && !target->query_property("undead"))
         tell_object(caster,"%^YELLOW%^As your target is not undead, the spell fizzles harmlessly.");
-        
+
     spell_successful();
     if (interactive(caster)) {
         tell_object(caster,"%^YELLOW%^You chant sonorously and direct a ray of light at "+target->QCN+"!");
@@ -35,4 +36,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

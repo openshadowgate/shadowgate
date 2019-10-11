@@ -30,7 +30,7 @@ void spell_effect(int prof) {
     int i;
     tell_room(place,"%^RED%^A swarm of bats flies into the area and surround "+caster->QCN+".%^RESET%^");
     for (i=0;i<prof/12;i++) {
-        ob = new("/d/magic/mon/pbat");
+        ob = new("/d/magic/mon/vbat");
         ob->move(place);
         caster->add_protector(ob);
         ob->set_property("spelled", ({TO}) );
