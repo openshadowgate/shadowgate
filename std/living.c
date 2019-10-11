@@ -643,6 +643,7 @@ int calculate_healing() {
    {
        if(!(TO->query_property("sustenance") ||
             FEATS_D->usable_feat(TO, "timeless body") ||
+            TO->query_property("inactive") ||
             (TO->is_undead())))
            healing["stuffed"]--;
       if(healing["stuffed"] < 0) healing["stuffed"] = 0;
@@ -652,6 +653,7 @@ int calculate_healing() {
    {
         if(!TO->query_property("sustenance") &&
            !FEATS_D->usable_feat(TO, "timeless body") &&
+           !TO->query_property("inactive") &&
            !TO->is_undead())
             healing["quenched"]--;
         if(healing["quenched"] < 0) healing["quenched"] = 0;

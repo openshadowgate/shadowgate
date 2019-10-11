@@ -13,13 +13,13 @@ void create() {
     set_required_for(({}));
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
-int prerequisites(object ob) 
+int prerequisites(object ob)
 {
    if(!objectp(ob)) { return 0; }
 
-   if((int)ob->query_class_level("monk") < 14) 
+   if((int)ob->query_class_level("monk") < 14)
    {
       dest_effect();
       return 0;
@@ -28,7 +28,7 @@ int prerequisites(object ob)
    return ::prerequisites(ob);
 }
 
-void execute_feat() 
+void execute_feat()
 {
     ::execute_feat();
     dest_effect();

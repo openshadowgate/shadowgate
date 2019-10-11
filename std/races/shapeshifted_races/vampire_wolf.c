@@ -156,9 +156,9 @@ int shape_attack(object tp, object targ)
 
         case "trip":
 
-            tell_object(tp,"%^RESET%^%^GREEN%^You dig your teeth into "+targ->QCN+"'s shoulder and drag "+targ->QO+" to the ground!");
-            tell_object(targ,"%^RESET%^%^GREEN%^"+tp->QCN+" digs "+tp->QP+" teeth into your shoulder and drags you to the ground!");
-            tell_room(etp,"%^RESET%^%^GREEN%^"+tp->QCN+" digs "+tp->QP+" teeth into "+targ->QCN+"'s shoulder and drags "+targ->QO+" to the ground!",({tp,targ}));
+            tell_object(tp,"%^RESET%^%^RED%^You dig your teeth into "+targ->QCN+"'s shoulder and drag "+targ->QO+" to the ground!");
+            tell_object(targ,"%^RESET%^%^RED%^"+tp->QCN+" digs "+tp->QP+" teeth into your shoulder and drags you to the ground!");
+            tell_room(etp,"%^RESET%^%^RED%^"+tp->QCN+" digs "+tp->QP+" teeth into "+targ->QCN+"'s shoulder and drags "+targ->QO+" to the ground!",({tp,targ}));
 
             if(!targ->fort_save(chance)) { targ->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!"); }
             break;
@@ -179,11 +179,11 @@ int shape_attack(object tp, object targ)
                break;
             }else{
 
-            tell_object(tp,"%^RESET%^%^MAGENTA%^You lower your head and circle around "+targ->QCN+" before lunging, "
+            tell_object(tp,"%^RESET%^%^RED%^You lower your head and circle around "+targ->QCN+" before lunging, "
                 "knocking "+targ->QO+" off balance!");
-            tell_object(targ,"%^RESET%^%^MAGENTA%^"+tp->QCN+" lowers "+tp->QP+" head and circles around you before "
+            tell_object(targ,"%^RESET%^%^RED%^"+tp->QCN+" lowers "+tp->QP+" head and circles around you before "
                 "lunging and knocking you off balance and unable to move!");
-            tell_room(etp,"%^RESET%^%^MAGENTA%^"+tp->QCN+" lowers "+tp->QP+" head and circles around "+targ->QCN+" "
+            tell_room(etp,"%^RESET%^%^RED%^"+tp->QCN+" lowers "+tp->QP+" head and circles around "+targ->QCN+" "
                 "before lunging and knocking "+targ->QO+" off balance!",({tp,targ}));
 
             targ->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to regain your balance!");
@@ -193,18 +193,18 @@ int shape_attack(object tp, object targ)
 
         case "extra attack":
 
-            tell_object(tp,"%^RESET%^%^BOLD%^You hit the ground and twist, immediately launching another quick attack at "+targ->QCN+"!");
-            tell_object(targ,"%^RESET%^%^BOLD%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at you!");
-            tell_room(etp,"%^RESET%^%^BOLD%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at "+targ->QCN+"!",({tp,targ}));
+            tell_object(tp,"%^RESET%^%^BOLD%^%^BLACK%^You hit the ground and twist, immediately launching another quick attack at "+targ->QCN+"!");
+            tell_object(targ,"%^RESET%^%^BOLD%^%^BLACK%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at you!");
+            tell_room(etp,"%^RESET%^%^BOLD%^%^BLACK%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at "+targ->QCN+"!",({tp,targ}));
 
             tp->execute_attack();
             break;
 
         case "low damage":
 
-            tell_object(tp,"%^RESET%^%^BOLD%^%^GREEN%^You quickly snap inside "+targ->QCN+"'s defenses and bite a vulnerable spot!");
-            tell_object(targ,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" quickly snaps inside of your defenses and bites you!");
-            tell_room(etp,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" quickly snaps inside of "+targ->QCN+"'s defenses and bites "+targ->QO+"!",({tp,targ}));
+            tell_object(tp,"%^RESET%^%^BOLD%^%^RED%^You quickly snap inside "+targ->QCN+"'s defenses and bite a vulnerable spot!");
+            tell_object(targ,"%^RESET%^%^BOLD%^%^RED%^"+tp->QCN+" quickly snaps inside of your defenses and bites you!");
+            tell_room(etp,"%^RESET%^%^BOLD%^%^RED%^"+tp->QCN+" quickly snaps inside of "+targ->QCN+"'s defenses and bites "+targ->QO+"!",({tp,targ}));
 
             targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,2),get_new_damage_type());
             break;

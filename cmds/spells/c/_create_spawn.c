@@ -42,7 +42,7 @@ void setup_undead_scaling(object undead)
     undead->set_skill("perception",clevel);
     undead->set_level(clevel);
     undead->set_hd(clevel,8);
-    undead->set_max_hp(clevel*12+100);
+    undead->set_max_hp(clevel*10+100);
     undead->set_hp(undead->query_max_hp());
     undead->set_overall_ac(10-clevel);
 }

@@ -14,10 +14,12 @@ void create()
     feat_desc("A monk that is unarmored and unarmed, or wielding small weapons, may attempt to still her mind, freeing herself from all movement impairing affects. This focus is intense and requires the use of 2 ki. Furthemore, the monk must wait a period of time being being able to focus her mind in such a way again.");
 }
 
+int allow_shifted() { return 1; }
+
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if((int)ob->query_class_level("monk") < 7 || (int)ob->query_alignment() > 3) 
+    if((int)ob->query_class_level("monk") < 7 || (int)ob->query_alignment() > 3)
     {
         dest_effect();
         return 0;
@@ -25,7 +27,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_stillness_of_mind(string str) 
+int cmd_stillness_of_mind(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
@@ -54,41 +56,41 @@ int check_can_use()
         if((int)weapons[x]->query_size() > 1)
         {
             tell_object(caster, "%^BOLD%^%^GREEN%^Your "+weapons[x]->query_short()+
-            " interferes with your stillness of mind!%^RESET%^");            
+            " interferes with your stillness of mind!%^RESET%^");
             return 0;
         }
         continue;
-    }    
+    }
     if(!caster->is_ok_armour("barb"))
     {
         tell_object(caster, "%^BOLD%^%^GREEN%^Your armor interferes "+
-        "with your stillness of mind!%^RESET%^");        
+        "with your stillness of mind!%^RESET%^");
         return 0;
-    }    
+    }
     if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 2))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to still "+
         "your mind!%^RESET%^");
-        return 0;       
-    }   
+        return 0;
+    }
     return 1;
 }
 
-void execute_feat() 
+void execute_feat()
 {
     ::execute_feat();
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
-    }    
+    }
     if(caster->query_bound())
     {
         caster->send_paralyzed_message("info",caster);
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat")) 
+    if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
@@ -104,7 +106,7 @@ void execute_feat()
     {
         dest_effect();
         return;
-    }    
+    }
     if(!caster->query_tripped() && !caster->query_paralyzed())
     {
         tell_object(caster, "%^BOLD%^%^CYAN%^You are suffering from no ailment "+
@@ -124,7 +126,7 @@ void execute_feat()
         tell_object(caster, "%^CYAN%^You lack the needed ki to still "+
         "your mind!%^RESET%^");
         dest_effect();
-        return; 
+        return;
     }
     tell_object(caster, "%^BOLD%^%^CYAN%^You focus intenting, stilling your "+
     "mind and envisioning yourself free to move about at will!%^RESET%^");
@@ -137,7 +139,7 @@ void execute_feat()
     caster->set_tripped(0);
     caster->set_paralyzed(0);
     caster->set_property("using stillness of mind", time());
-    dest_effect();   
+    dest_effect();
     return;
 }
 
@@ -146,4 +148,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-
