@@ -74,6 +74,6 @@ Bane >
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-set, set, speech, adjective, describe
+set, set, speech, adjective, describe, history
 ");
 }

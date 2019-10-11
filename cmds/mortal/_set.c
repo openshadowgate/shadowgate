@@ -319,6 +319,6 @@ To see current values use %^ORANGE%^<set>%^RESET%^ without arguments.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-adjective, background, chfn, colors, describe, flag, lines, message, passwd, prompt, speech
+adjective, background, chfn, colors, describe, flag, lines, message, passwd, prompt, speech, history
 ");
 }
