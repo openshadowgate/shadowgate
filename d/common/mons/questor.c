@@ -10,15 +10,15 @@ void create()
     make_me();
     set_body_type("human");
     set_class("fighter");
-    set_class("mage");    
-    set("aggressive",2);    
+    set_class("mage");
+    set("aggressive",2);
     set_hd(50,8);
     set_hp(25000);
     set_alignment(5);
     set_class("mage");
     set_mlevel("mage",70);
     set_guild_level("mage",70);
-    set_guild_level("fighter",70);    
+    set_guild_level("fighter",70);
     set_stats("intelligence",28);
     set_stats("wisdom",20);
     set_stats("strength",20);
@@ -27,7 +27,7 @@ void create()
     set_stats("constitution",28);
     set_property("magic",1);
     set_new_exp(100,"boss");
-    set_property("cast and attack",1);    
+    set_property("cast and attack",1);
     set_spells(({"sunburst",
                     "hellball",
                     "hellball",
@@ -72,6 +72,7 @@ void thank()
                 "Are you still here?",
                 "Be gone",
                 "Bugger off.",
+                "Drop dead.",
                 "Could you bring something nice next time?",
                 "Did you know that... Nevermind, get lost.",
                 "Do that again and maybe I will hire assassins to kill you.",
@@ -116,4 +117,3 @@ void die(object ob)
     WORLD_EVENTS_D->inject_event((["A rare opportunity" : (["start message": "For the next two hours all experience gained will award an additional 33%!","event type" : "exp bonus", "length" : 120, "notification" : "33% Bonus Exp","event name" : "A rare opportunity", "modifier" : 33,"announce" : 1, "announce to" : "world" ]),]));
     ::die(ob);
 }
-
