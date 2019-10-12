@@ -109,6 +109,7 @@ void drain_process(object target)
         stop_drain();
         return;
     }
+
     if(ENV(target)!=ETP)
     {
         tell_object(TP,"%^BOLD%^%^RED%^Your victim is no longer here.%^RESET%^");
@@ -137,6 +138,7 @@ void drain_process(object target)
         tell_object(TP,"%^BOLD%^%^RED%^You feel too infused as it is. You continue to drain for life.%^RESET%^");
         type = "life";
     }
+    log_file("vampdrain",TP->query_name()+" drains "+target->query_name());
     if(type=="health")
         drain_health(target);
     else
