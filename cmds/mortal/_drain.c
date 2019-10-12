@@ -61,7 +61,6 @@ int cmd_drain(string args)
     }
 
     if(targobj->query_property("spell_creature") ||
-       targobj->query_property("spelled") ||
        targobj->query("not living"))
     {
         notify_fail("Don't feed on phantoms.\n");
@@ -146,7 +145,8 @@ void drain_process(object target)
 %^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
     tell_object(TP,"%^BOLD%^%^RED%^Fresh blood runs down your tongue.");
     tell_object(target,"%^RED%^"+TARGMSGS[random(sizeof(TARGMSGS))]+"%^RESET%^");
-    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" is leaning over "+target->QCN+"'s neck%^RESET%^",TP);
+    if(!random(7))
+        tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" is leaning over "+target->QCN+"'s neck%^RESET%^",TP);
     call_out("drain_process",ROUND_LENGTH,target);
 }
 

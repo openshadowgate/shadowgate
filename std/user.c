@@ -1747,9 +1747,9 @@ void heart_beat()
             if(!ETO->query_property("indoors"))
                 if(EVENTS_D->query_time_of_day()=="day")
                 {
-                    if((int)TO->query_bloodlust()/200<95)
+                    if((int)TO->query_bloodlust()/200<91)
                     {
-                        TO->do_damage("torso",((query_max_hp()/2)*(20000-TO->query_bloodlust()))/20000);
+                        TO->do_damage("torso",((query_max_hp()*3/4)*(20000-TO->query_bloodlust()))/20000);
                         tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
                         if(!random(5))
                             tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+"'s skin smokes flamelessly.%^RESET%^",TO);
