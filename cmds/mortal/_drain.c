@@ -67,6 +67,12 @@ int cmd_drain(string args)
         return 0;
     }
 
+    if(targobj->query_property("garlic_scent"))
+    {
+        notify_fail("Strong odor of garlic prevents you from draining them.\n");
+        return 0;
+    }
+
     if(!(verify_conditions(targobj)))
     {
         notify_fail("Your target is not incapacitated.\n");
