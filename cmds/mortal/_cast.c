@@ -178,12 +178,13 @@ int cmd_cast(string str)
         return 1;
     }
 
-    if(strsrch((string)TP->query("relationship_profile"),"druid_")>=0)
-        if(TP->query_property("shapeshifted") && type != "innate" && type != "druid")
-        {
-            tell_object(TP,"You can only cast druid spells or innate abilities while in druidic form.");
-            return 1;
-        }
+    if(TP->query("relationship_profile"))
+        if(strsrch((string)TP->query("relationship_profile"),"druid_")>=0)
+            if(TP->query_property("shapeshifted") && type != "innate" && type != "druid")
+            {
+                tell_object(TP,"You can only cast druid spells or innate abilities while in druidic form.");
+                return 1;
+            }
 
 
     spell = replace_string(str2," ","_");

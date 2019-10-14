@@ -57,7 +57,8 @@ string long_desc() {
     if(!query_readable_by(TP,TP))
         return("This is a scroll with some undecipherable writing on it.");
     if(base_name(TO) == "/d/magic/safe_scroll" ||
-       base_name(TO) == "/d/magic/newbie_scroll")
+       base_name(TO) == "/d/magic/newbie_scroll" &&
+       (member_array(spell,keys(MAGIC_D->query_index("mage")))!=-1))
     {
         long = "%^ORANGE%^This is a magic scroll of "+spell+".
 You can <use> it directly in order to properly study and learn more about the effects of the spell. It cannot be transcribed.%^RESET%^";
