@@ -130,8 +130,8 @@ void drain_process(object target)
     }
     if(!verify_conditions(target))
     {
-        tell_object(TP,"%^BOLD%^%^RED%^"+target+"%^BOLD%^%^RED%^comes to %^BLACK%^sen%^RED%^s%^BLACK%^es%^RED%^ and %^BLACK%^str%^RED%^u%^RED%^g%^BLACK%^gl%^RED%^e%^RED%^s%^RED%^ out of your grip!%^RESET%^");
-        tell_room(ETP,"%^BOLD%^%^RED%^"+target+"%^BOLD%^%^RED%^comes to %^BLACK%^sen%^RED%^s%^BLACK%^es%^RED%^ and %^BLACK%^str%^RED%^u%^RED%^g%^BLACK%^gl%^RED%^e%^RED%^s%^RED%^ out of "+TP->QCN+"'s grip!%^RESET%^",TP);
+        tell_object(TP,"%^BOLD%^%^RED%^"+target->QCN+"%^BOLD%^%^RED%^comes to %^BLACK%^sen%^RED%^s%^BLACK%^es%^RED%^ and %^BLACK%^str%^RED%^u%^RED%^g%^BLACK%^gl%^RED%^e%^RED%^s%^RED%^ out of your grip!%^RESET%^");
+        tell_room(ETP,"%^BOLD%^%^RED%^"+target->QCN+"%^BOLD%^%^RED%^comes to %^BLACK%^sen%^RED%^s%^BLACK%^es%^RED%^ and %^BLACK%^str%^RED%^u%^RED%^g%^BLACK%^gl%^RED%^e%^RED%^s%^RED%^ out of "+TP->QCN+"'s grip!%^RESET%^",TP);
         tell_object(target,"%^BOLD%^%^RED%^You %^RED%^f%^RED%^i%^BLACK%^nally%^RED%^ come to senses and struggle out of%^RESET%^ "+TP->QCN+"'s grip!");
         stop_drain();
         return;
