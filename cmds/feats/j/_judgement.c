@@ -12,7 +12,7 @@ string * JUDGEMENT_TYPES = ({
             "purity",
             "resiliency",
             "resistance",
-            "smiting"
+//            "smiting"
 });
 
 string * active_judgements = ({});
@@ -45,18 +45,46 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_judgment(string str)
+int cmd_judgment(string args)
 {
     string first, second, third;
     if(!objectp(TP))
         return 0;
+    if(!sizeof(TP->query_attackers()))
+    {
+        tell_object(TP,"You can't use judgement outside of combat.");
+        return 1;
+    }
+    if(TP->query_property("active_judgements"))
+    {
+        string * judgements = TP->query_property("active_judgements");
+        active_judgements(judgements,-1);
+    }
+
+    sscanf(args,"%s %s %s",first, second, third);
+    clevel = TP->query_guild_level("inquisitor");
+    if(first!="")
+        if(member_array(first,JUDGEMENT_TYPES)!=-1)
+        {
+            active_judgements+=({first});
+        }
+        else
+        {
+            tell_object(TP,"You can't use judgement outside of combat.");
+            return 1;
+        }
+
     return 1;
 }
 
-void execute_feat()
+void activate_judgements(string * judgements,int direction)
 {
-    clevel = TP->query_guild_level("inquisitor");
-    return;
+    string j;
+    foreach(j in judgements)
+    {
+        if(member_array(j,JUDGEMENT_TYPES)!=-1)
+            call_other(TO,"judgement_"+j,direction);
+    }
 }
 
 void judgement_destruction(int direction)
@@ -68,15 +96,9 @@ void judgement_destruction(int direction)
 
 void judgement_healing(int direction)
 {
-    if(direction>0)
-        call_out("fast_healing",ROUND_LENGTH);
-    else
-        remove_call_out("fast_healing");
-}
-void fast_healing()
-{
-    caster->add_hp(1,clevel);
-    call_out("fast_healing",ROUND_LENGTH);
+    int bonus;
+    bonus = clevel/18+1;
+    caster->set_property("fast_healing",bonus*direction);
 }
 
 void judgement_justice(int direction)

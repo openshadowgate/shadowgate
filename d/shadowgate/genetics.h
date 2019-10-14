@@ -14,11 +14,11 @@
                       "5" : (["display name" : "5 ...", "value" : 85 + random(50), "choice" : "Between Average and Heavy",]),\
                       "6" : (["display name" : "6 ...", "value" : 90 + random(50), "choice" : "Between Average and Heavy",]),\
                       "7" : (["display name" : "7 Heavy", "value" : 95 + random(60), "choice" : "Heavy"]), ])
-                      
+
 #define MAXPOINTS 56 // 92 total points minus 36 starting points (6 per stat). -N, 10/10.
 
-#define TESTCLASS ({})
-#define TESTERS ({})
+#define TESTCLASS ({"inquisitor"})
+#define TESTERS ({"noobriel"})
 // stats in order: str, dex, con, int, wis, cha
 #define STATS ({"strength","dexterity","constitution", "intelligence", "wisdom" ,"charisma"})
 
@@ -27,7 +27,7 @@
                       4 : ({"svelte", "average", "plump"}), 5 : ({"well-built", "hardy", "stocky"}), 6: ({"portly", "stout", "brawny"}),\
                       7 : ({"massive", "rotund", "heavy"}), ])
 
-               
+
 #define UNIQUE_HELP (["School Name" : "mage schools", "Fighting Style" : "styles", "Discipline Name" : "disciplines", "Warlock Heritage" : "warlock heritages"])
 
 #define DONTSORT ({"age", "height", "body type"})
@@ -43,7 +43,7 @@
 
 #define STEPVALUES (["class" : 1, "race" : 2, "special" : 3, "subrace" : 4, "stats" : 5, "hair color" : 6, "eye color" : 7, "height" : 8, "weight" : 9,\
                      "body type" : 10, "age" : 11, "alignment" : 12, "unique" : 13, "deity" : 14, "finalize" : 15])
-                     
+
 #define RECOMMENDED_STATS (["fighter" : (["strength" : 18, "constitution" : 18, "dexterity" : 18, "wisdom" : 13, "intelligence" : 13, "charisma" : 12]),\
                             "mage" : (["strength" : 14, "constitution" : 18, "dexterity" : 14, "wisdom" : 15, "intelligence" : 18, "charisma" : 13]),\
                             "cleric" : (["strength" : 18, "wisdom" : 18, "constitution" : 18, "dexterity" : 12, "intelligence" : 13, "charisma" : 13]),\
@@ -59,4 +59,3 @@
                             "ranger" : (["dexterity" : 18, "wisdom" : 16, "strength" : 16, "constitution" : 18, "intelligence" : 12, "charisma" : 12]),\
                             "monk" : (["dexterity" : 18, "wisdom" : 18, "constitution" : 16, "intelligence" : 12, "charisma" : 12, "strength" : 16]),\
                             "cavalier" : (["strength" : 18, "charisma" : 18, "wisdom" : 18, "constitution" : 16, "intelligence" : 11, "dexterity" : 11]),])
-                            
