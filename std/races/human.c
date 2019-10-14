@@ -55,6 +55,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
       case "fire genasi": return ({ 0, 0, 0, 2, 0, -2 }); break;
       case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
       case "water genasi": return ({ 0, 0, 2, 0, 0, -2 }); break;
+      case "dhampir": return ({ 0, 0, 0, 0, 0, 2 }); break;
       default: return ({ 0, 0, 0, 0, 0, 0 }); break;
     }
 }
@@ -81,7 +82,8 @@ int level_adjustment(string subrace) {
        subrace == "feytouched" ||
        subrace == "earth genasi" ||
        subrace == "fire genasi" ||
-       subrace == "water genasi")
+       subrace == "water genasi" ||
+       subrace == "dhampir")
         return 1;
     return 0;
 }
@@ -145,6 +147,14 @@ mapping query_racial_innate(string subrace)
 				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
 				break;
+        case "dhampir":
+                return ([
+                        "invisibility" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+                         "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+                         "gaseous form" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
+                        ]);
+                        ;
+               break;
 		case "air genasi":
                                 return (["levitate" : (["type" : "spell", "casting level" : 0.5,
 				"daily uses" : 1, "delay" : 1, "uses left" : 1,
@@ -368,7 +378,7 @@ string *query_subraces(object who)
        avatarp(who) ||
        who->query("is_valid_npc"))
     {
-        subraces += ({ "tiefling","aasimar","feytouched","air genasi","earth genasi","fire genasi","water genasi" });
+        subraces += ({ "tiefling","aasimar","feytouched","air genasi","earth genasi","fire genasi","water genasi" ,"dhampir"});
     }
     return subraces;
 }
