@@ -28,7 +28,7 @@ int preSpell() {
 void spell_effect(int prof) {
     object ob;
     int i;
-    tell_room(place,"%^RED%^A swarm of bats flies into the area and surround "+caster->QCN+".%^RESET%^");
+    tell_room(place,"%^RED%^A swarm of bats flies into the area and surrounds "+caster->QCN+".%^RESET%^");
     for (i=0;i<prof/12;i++) {
         ob = new("/d/magic/mon/vbat");
         ob->move(place);
