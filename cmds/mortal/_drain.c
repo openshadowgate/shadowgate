@@ -48,6 +48,12 @@ int cmd_drain(string args)
         return 0;
     }
 
+    if(!TP->ok_to_kill(targobj))
+    {
+        notify_fail("Feeding from this is beneath you.\n");
+        return 0;
+    }
+
     if(targobj->is_undead())
     {
         notify_fail("You should eat fresh food.\n");
