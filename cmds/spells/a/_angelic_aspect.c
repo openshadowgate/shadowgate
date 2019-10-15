@@ -47,6 +47,7 @@ int preSpell()
     if(caster->query_property("angelic_aspect"))
     {
         tell_object(caster,"%^BOLD%^%^WHITE%^You're already infused with this aspect.%^RESET%^");
+        return 0;
     }
     return 1;
 }
