@@ -19,7 +19,7 @@ void create()
     set_read("%^BOLD%^%^RED%^IN DESPERATION <BREAK BLOODSHARD> TO AVOID YOUR MORTAL MISERY%^RESET%^");
     set_language("wizish");
 
-    set_value(10000);
+    set_value(6000);
 }
 
 void init()
@@ -81,7 +81,7 @@ void do_teleport(object who)
     }
 
     who->move_player("/d/darkwood/room/road18.c","with a loud clap");
-    who->set_paralyzed(36*8,"%^BOLD%^%^WHITE%^You are in pain and shock from your abrupt teleportation.%^RESET%^"); //3 minutes
+    who->set_asleep(36*ROUND_LENGTH, "You are stunned into slumber after shock of sudden teleportation!");
     who->do_damage("torso",who->query_hp()-1);
     who->set_property("bloodshard",time());
 

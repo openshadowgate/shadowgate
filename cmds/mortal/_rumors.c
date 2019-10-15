@@ -3,7 +3,7 @@
 mixed * arealist = ({});
 
 //sort -t, -nk2
-//DO NOT USE COMMA IN THE LIST BELOW.
+//DO NOT USE COMMA IN THE LIST BELOW, because it breaks sorting
 arealist = ({
         ({"Offestry" ,1,6,}),
             ({"Ekibi Caverns (Ekibi Ridge)" ,6,10,}),
