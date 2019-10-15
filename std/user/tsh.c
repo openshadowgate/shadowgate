@@ -215,9 +215,9 @@ nomask string process_input(string arg)
     USER_D->process_pkill_input(this_player(), arg);
     //TODO: log to syslog
     if(avatarp(TP))
-        log_file("avlog/"+TP->query_true_name(),identify(TP)+" "+do_alias(do_nicknames(handle_history(arg)))+"\n");
+        log_file("avlog/"+TP->query_true_name(),identify(TP)+" "+do_alias(do_nicknames(handle_history(arg)))+"\n",1);
     else
-        log_file("plog/"+TP->query_true_name(),do_alias(do_nicknames(handle_history(arg)))+"\n");
+        log_file("plog/"+TP->query_true_name(),do_alias(do_nicknames(handle_history(arg)))+"\n",1);
 
     if(adminBlock())
         if(member_array(arg,ABLOCK_WHITELIST)==-1)
