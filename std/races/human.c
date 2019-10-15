@@ -55,7 +55,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
       case "fire genasi": return ({ 0, 0, 0, 2, 0, -2 }); break;
       case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
       case "water genasi": return ({ 0, 0, 2, 0, 0, -2 }); break;
-      case "dhampir": return ({ 0, 0, 0, 0, 0, 2 }); break;
+      case "dhampir": return ({ 0, 2, -2, 0, 0, 2 }); break;
       default: return ({ 0, 0, 0, 0, 0, 0 }); break;
     }
 }
@@ -66,6 +66,7 @@ mapping skill_mods(string subrace) {
       case "tiefling": return ([ "stealth" : 2, "disguise" : 2 ]); break;
       case "aasimar": return ([ "perception" : 2, "influence" : 2 ]); break;
       case "feytouched": return ([ "perception" : 2, "influence" : 2 ]); break;
+      case "dhampir": return ([ "perception" : 2, "influence" : 2 ]); break;
       case "heartlander": return ([ "influence" : 1 ]); break;
       case "zin'charu": case "zincharu": return ([ "spellcraft" : 1 ]); break;
       case "attayan": return ([ "academics" : 1]); break;
