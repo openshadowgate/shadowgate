@@ -8,7 +8,7 @@ inherit FEAT;
 void create() {
     ::create();
     feat_type("permanent");
-    feat_category("GeneralCombat");
+    feat_category("TwoHandedWeapons");
     feat_name("titan grip");
     feat_prereq("Strength 19");
     feat_desc("This reflects your outstanding strength, and permits you to wield very large two-handed weapons that otherwise would be too large for you. With this feat, small character can wield two-handed medium weapons and medium-sized character can wield giant two handed weapons.
