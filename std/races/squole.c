@@ -3,7 +3,7 @@ inherit DAEMON;
 
 void create() { ::create(); }
 
-int *age_brackets() { return ({ 12, 22, 60, 80 }); }
+int *age_brackets() { return ({ 12, 22, 80, 120 }); }
 
 int *restricted_alignments(string subrace) { return ({ 1,3,7,9 }); }
 
@@ -127,12 +127,12 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(string who) { return ({"bald"}); }
-
 string *query_eye_colors(string subrace) {
-    string *choices = ({});
-    choices += ({"green","blue","red"});
-    return choices;
+    return ({"green","blue","red"});
+}
+
+string *query_hair_colors(string subrace) {
+    return ({"green","blue","red"});
 }
 
 string *query_subraces(object who) {

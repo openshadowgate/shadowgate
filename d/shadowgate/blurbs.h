@@ -82,12 +82,12 @@
                     "defensive combat, excelling in restorative magic and able to cast while wearing "\
                     "a shield and armor. Each deity offers three domains that a cleric may choose to "\
                     "specialize in, granting them potent spells that reflect their god's nature."
-                    
+
 #define MONK        "The monk is an enlightened warrior, able to transend many of the bodily limits "\
                     "that hamper most others. They are typically from one order or another and have "\
                     "an affinity for the strict procedures that such an order imparts on them. Because "\
                     "of this they are only able to be a lawful alignment."
-                    
+
 #define CLASS_BLURBS (["mage" : MAGE, "fighter" : FIGHTER, "cleric" : CLERIC, "psion" : PSION, "psywarrior" : PSYWARRIOR,\
                      "druid" : DRUID, "warlock" : WARLOCK, "bard" : BARD, "sorcerer" : SORCERER,\
                      "barbarian" : BARBARIAN, "thief" : THIEF, "paladin" : PALADIN, \
@@ -196,7 +196,7 @@
                     "Shadows, through a ritual known only to the people known as the Shadovar. They "\
                     "are granted an exceptional lifespan and many other boons by this ritual, but in "\
                     "return must serve Shar wholeheartedly, lest they lose their powerful gifts."
-                    
+
 #define RACE_BLURBS (["shade" : SHADE, "centaur" : CENTAUR, "minotaur" : MINOTAUR, "yuan-ti" : YUAN_TI, "ogre" : OGRE, "ogre-mage" : OGRE_MAGE, "gnoll" : GNOLL, "hobgoblin" : HOBGOBLIN, "bugbear" : BUGBEAR, "wemic" : WEMIC, "satyr":SATYR, "voadkyn" : VOADKYN, "half-drow" : HALF_DROW, "drow" : DROW, "goblin" : GOBLIN, "kobold" : KOBOLD, "orc" : ORC, "firbolg" : FIRBOLG, "beastkin" : BEASTKIN, "halfling" : HALFLING, "gnome" : GNOME, "elf" : ELF, "dwarf" : DWARF, "half-ogre" : HALF_OGRE, "half-elf" : HALF_ELF, "half-orc" : HALF_ORC, "human" : HUMAN])
 //dwarf subraces
 #define GOLD_DWARF  "Gold dwarves take pride in their honor and heritage, and are known for their "\
@@ -206,7 +206,7 @@
 #define SHIELD_DWARF "Shield dwarves are often mistrustful of outsiders, but their militaristic "\
                      "prowess is legendary. Their constitution is such that they are resistant to "\
                      "many spells and poisons."
-                     
+
 #define GRAY_DWARF  "Gray dwarves are deep-dwelling dwarves fond of evil and cruelty. Just as sturdy "\
                     "as their surface-dwelling cousins, they are the only dwarves with any psionic "\
                     "ability."
@@ -214,13 +214,13 @@
 #define SUN_ELF     "Sun elves are proud masters of magic, mistrustful of other races. Keenly "\
                     "intelligent and perceptive, but their constitutions are often on the frail "\
                     "side."
-                    
+
 #define MOON_ELF    "Moon elves are the most sociable and outgoing of all the elven races. Quick on "\
-                    "their feet and fond of traveling."              
+                    "their feet and fond of traveling."
 
 #define WOOD_ELF    "Wood elves live in harmony with nature. They are some of the most gifted "\
                     "warriors amongst elven kind, but are often mistrustful of magic."
-                    
+
 #define WILD_ELF    "Wild elves are one of the oldest of the elven races. Elusive and feral, they "\
                     "shun civilized races."
 
@@ -232,7 +232,7 @@
                     " by their underdark masters look as normal albino elves. Their blood is the"\
                     " blood of drow, though, they are born and raised in underdark societies."
 
-//gnome sub races                    
+//gnome sub races
 #define ROCK_GNOME  "Rock gnomes are the most common of their kind, fun-loving and fond of nature. "\
                     "Hardy despite their small size, they are adept at fighting goblins."
 
@@ -243,10 +243,10 @@
 #define DEEP_GNOME  "Deep gnomes are a subterranean and stealthy people, fond of crafts and "\
                     "illusions. Though often of good intentions, they tend toward a dour and "\
                     "cheerless nature."
-                        
+
 #define LIGHTFOOT_HALFLING  "Lightfoot halflings are a cheerful and fleet-footed people. Their size limits "\
                             "their strength, yet they are said to have an almost supernatural lucky streak."
-                            
+
 #define STRONGHEART_HALFLING "Strongheart halflings are an orderly people who take pride in tradition. "\
                              "Proficient in martial combat, they are surprisingly sturdy despite their small "\
                              "size."
@@ -254,11 +254,11 @@
 #define GHOSTWISE_HALFLING  "Ghostwise halflings are a primitive and insular people who shun civilization. "\
                             "Light on their feet, and possessed of minor telepathic ability."
 
-                            
+
 //orc sub races
 #define GRAY_ORC    "Gray orcs are savage and nomadic creatures who trust to instinct and violence "\
                     "in most situations. Strong and hardy, but not possessed of great wisdom."
-                    
+
 #define MOUNTAIN_ORC    "Mountain orcs are a savage and crude race who take pleasure in violence and "\
                         "warfare. Possessed of great strength and vitality, but not prone to great "\
                         "insight."
@@ -266,7 +266,7 @@
 #define OROG        "Orogs are orcs who dwell deep underground, skilled in crafting the tools of "\
                     "war. They are possessed of an overwhelming strength, and are an imposing sight "\
                     "in battle."
-                    
+
 #define TANARUKK    "Tanarukk are orcs whose lineage stems in part from a demon, granting them great "\
                     "strength and speed. Every bit as savage as their normal cousins, they bear the "\
                     "bodily traits of their demonic ancestors."
@@ -293,7 +293,7 @@
 #define TIEFLING    "A tiefling is a human whose lineage stems in part from the Lower Planes. Often "\
                     "shunned for their fiendish traits, they more often than not succumb to the "\
                     "darker urges of the heritage."
-                    
+
 #define SUB_RACE_BLURBS (["tiefling" : TIEFLING,\
     "aasimar" : AASIMAR,\
     "earth genasi" : EARTH_GENASI,\
@@ -360,7 +360,7 @@
                     "patron to intercede on their behalf, should they meet an untimely end. Please note "\
                     "that the strain of escaping the afterlife without divine intervention will inflict "\
                     "a much greater toll on your character!"
-                    
+
 #define DEITY_BLURBS (["callamir" : CALLAMIR, "jarmila" : JARMILA, "kismet" : KISMET,\
                        "kreysneothosies" : KREYSNEO, "lord shadow" : LORDSHADOW, "lysara" : LYSARA,\
                        "nimnavanon" : NIMNAVANON, "the faceless one" : FACELESSONE, "varda" : VARDA,\
@@ -394,7 +394,7 @@
 
 #define NECROMANCY      "Necromancy is the art of manipulating life and death. Practitioners of this "\
                         "school master spells that can curse and harm opponents, and even restore life "\
-                        "to the dead."                        
+                        "to the dead."
 
 #define SHAPER          "A shaper gives form to the formless, calling upon the matter of the Astral "\
                         "Plane to great effect. Capable of molding ectoplasm into all manner of forms, "\
@@ -418,7 +418,7 @@
 #define TELEPATH        "A telepath is a master of the mind, wielding thought itself as a tool and "\
                         "weapon. Capable of manipulating the mental states of others, and communicating "\
                         "effortlessly across long distances."
-                       
+
 #define CELESTIAL       "A warlock with the celestial pact is relatively rare, and serves various "\
                         "good-hearted beings in exchange for magic and power."
 
@@ -439,4 +439,4 @@
                         "invocation_evocation" : EVOCATION, "necromancy" : NECROMANCY, "alteration" : ALTERATION]),\
                         "Discipline Name" : (["egoist" : EGOIST, "kineticist" : KINETICIST, "nomad" : NOMAD,\
                         "seer" : SEER, "shaper" : SHAPER, "telepath" : TELEPATH,]), "Warlock Heritage" : (["celestial" : CELESTIAL,\
-                        "fey" : FEY, "abyssal" : ABYSSAL, "gloom" : GLOOM, "infernal" : INFERNAL,]),])                        
+                        "fey" : FEY, "abyssal" : ABYSSAL, "gloom" : GLOOM, "infernal" : INFERNAL,]),])

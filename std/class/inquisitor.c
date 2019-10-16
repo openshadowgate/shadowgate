@@ -79,10 +79,11 @@ int max_stance_defensive() { return 5; }
 
 int attack_bonus(object player)
 {
-    int level,bonus;
-    level = (int)player->query_prestige_level("inquisitor");
-    bonus = (level*3) / 4; // boosted
-    return bonus;
+    /* int level,bonus; */
+    /* level = player->query_prestige_level("inquisitor"); */
+    /* bonus = (level*3) / 4; // boosted */
+ /* return bonus; */
+    return 0;
 }
 
 int number_of_attacks(object player)

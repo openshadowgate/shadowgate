@@ -1,14 +1,20 @@
-%^BOLD%^%^BLUE%^Squole:
+%^BOLD%^%^BLUE%^Dhampir:
 
-%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^0
-%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 dexterity, +2 constitution, -2 intelligence
-%^BOLD%^%^BLUE%^Skill adjustments: +2 perception
-%^BOLD%^%^BLUE%^Misc bonuses: elemental resistance equal to character level based on a subrace
+%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^1 (requires an account with a lvl 30 character)
+%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 dexterity, -2 constitution, +2 charisma
+%^BOLD%^%^BLUE%^Skill adjustments: +2 perception, +2 influence
+%^BOLD%^%^BLUE%^Innate spells: %^RESET%^invisibility, darkvision, gaseous form
 
-%^BOLD%^%^BLUE%^Standard alignments: %^RESET%^TN, LE, LN, NG, CN
-%^BOLD%^%^BLUE%^Classes allowed: %^RESET%^any but warlock, psion, psywarrior
-%^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^12-20
-%^BOLD%^%^BLUE%^Average life span: %^RESET%^65
+%^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any
+%^BOLD%^%^BLUE%^Classes allowed: %^RESET%^any
+%^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^16-19
+%^BOLD%^%^BLUE%^Average life span: %^RESET%^110
 
 %^BOLD%^%^BLUE%^Description:
-Squoles are relatively new race of sentient para-elemental beings. They don't form own societies and their individual personal goal is always aligned with integration into human society, and so far they have done it well. The first squoles shared the same form that of that of a fit and muscular male human. Later, they adopted an additional form; a slender and well-proportioned female. Due to having humanoid shape and rather neutral personalities they assimilate into human cities without any trouble, taking on vast variety of professions.
+Known as ghoul-blooded or half-vampires, those cursed to live as dhampirs know a miserable half-life. Born from mothers infected with vampirism in the final days of their pregnancy, or sired by freshly spawned vampire fathers, dhampirs live with remnants of the curse of vampirism in their mortal blood. Although the taint grants these rare souls eerie abilities, such as sensing in the night, so too are they cursed with a measure of their accursed parents' ravenous natures, making many just as dangerous, unpredictable and alien as vampires themselves.
+
+Tall and slender and with well-defined musculature, dhampirs look like statuesque humans of unearthly beauty. Their hair, eye, and skin colors resemble unnerving versions of their mothers'; many possess a ghastly pallor, particularly in the sunlight, while those with dark complexions often possess skin the color of a bruise.
+
+While many dhampirs can pass as humans in ideal conditions, their features are inevitably more pronounced and they move with an unnaturally fluid grace. All dhampirs have elongated incisors. While not true fangs, these teeth are sharp enough to draw blood, and many suffer a reprehensible desire to indulge in sanguinary delights, despite the fact that the act provides most no physical benefit.
+
+%^BOLD%^%^BLUE%^See also: human, vampire, undead
