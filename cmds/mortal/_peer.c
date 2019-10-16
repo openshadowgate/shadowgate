@@ -10,17 +10,23 @@ void help();
 int do_lp(string str);
 
 
-int cmd_peer(string str) 
+int cmd_peer(string str)
 {
     int y;
-    if (!str) 
+    if (!str)
     {
         help();
         return 1;
     }
 
+    if(TP->query_race()=="squole")
+    {
+        tell_object(TP,"Squoles can't peer as they don't see through usual means.");
+        return 1;
+    }
+
     sscanf(str, "%s %d",str,amt);
-    if (!str) 
+    if (!str)
     {
         help();
         return 1;
@@ -31,11 +37,11 @@ int cmd_peer(string str)
     }
     //above added by Circe to allow limiting of peer on a room level. 12/19/04
 
-    if (TP->query_bound()) 
+    if (TP->query_bound())
     {  // was from peer
     /*       TP->send_paralyzed_message("info",TP);
         return 1;
-    changing to allow after a bug report questioning it but limiting to one 
+    changing to allow after a bug report questioning it but limiting to one
     room (they aren't blind but might have limited mobility) *Styx* 11/17/04
     */
         write("Your mobility is limited but you may manage to see a room or two away.");
@@ -48,7 +54,7 @@ int cmd_peer(string str)
 
     y = 1;
 
-    while (amt-- && y != 0) 
+    while (amt-- && y != 0)
     {
         y = do_lp(str);
     }
@@ -59,7 +65,7 @@ int cmd_peer(string str)
 }
 
 
-int do_lp(string str) 
+int do_lp(string str)
 {
     string *dirlist, *destlist,*exits,*doors=({});
     string ret, tmp, l;
@@ -69,7 +75,7 @@ int do_lp(string str)
     int i, x;
 
     if(!objectp(TP)) return 0;
-    if(TP->query_blind()) 
+    if(TP->query_blind())
     {
         tell_object(TP, "You are blind.");
         return 0;
@@ -80,7 +86,7 @@ int do_lp(string str)
         tell_object(TP, TP->light_blind_fail_message(x));
         return 0;
     }
-        
+
     if(!sizeof(dirlist = (string *)current->query_exits()))
     {
         tell_object(TP, "There appears to be no way out of here.");
@@ -91,7 +97,7 @@ int do_lp(string str)
     {
         str = (string)current->query_full_direction(str);
     }
-        
+
     if(i == -1 && (i=member_array(str,dirlist)) == -1)
     {
         tell_object(TP, "You cannot see far in that direction.");
@@ -104,15 +110,15 @@ int do_lp(string str)
         return 0;
     }
 
-    if( (tmp = (string)current->query_door(dirlist[i])) && !current->query_open(tmp)) 
+    if( (tmp = (string)current->query_door(dirlist[i])) && !current->query_open(tmp))
     {
         tell_object(TP, "The "+tmp+" blocks your view.");
         return 0;
     }
 
-    if(ETP->query_property("no peer")) 
+    if(ETP->query_property("no peer"))
     {
-        if(ETP->query_peer_message() == 0) 
+        if(ETP->query_peer_message() == 0)
         {
             tell_object(TP, "You cannot see out of this room.");
             return 0;
@@ -123,34 +129,34 @@ int do_lp(string str)
             return 0;
         }
     }
-    
-    if(ETP->is_ship_room()) 
+
+    if(ETP->is_ship_room())
     {
         dest = present(dest,environment(environment(this_player())));
-    }    
-    /*if (TP->light_blind_remote(0,dest,amt)) 
+    }
+    /*if (TP->light_blind_remote(0,dest,amt))
     {
         message("my_action",TP->light_blind_fail_message(TP->light_blind_remote(0,dest,amt)),TP);
-    } */  
-    else if(dest->query_property("no peer")) 
-    {       
-        if(dest->query_peer_message() == 0) 
+    } */
+    else if(dest->query_property("no peer"))
+    {
+        if(dest->query_peer_message() == 0)
         {
             tell_object(TP, "You can not see into that room.");
             return 0;
         }
-        else 
+        else
         {
             tell_object(TP,""+dest->query_peer_message()+"");
             return 0;
         }
-    }    
+    }
     else if(TP->query("alternative world") && ALT_WORLD_D->alt_world_border(dest, TP->query("alternative world")))
     {
         ALT_WORLD_D->alt_world_border_messages(TP, dest);
         return 0;
     }
-    else 
+    else
     {
         if(!objectp(dest))
         {
@@ -167,7 +173,7 @@ int do_lp(string str)
         for(i=0,sizeof(exits)>0;i<sizeof(exits);i++)
         {
             if(!dest->query_door(exits[i])) { continue; }
-            doors += ({ exits[i] });            
+            doors += ({ exits[i] });
         }
         for(i=0,sizeof(doors)>0;i<sizeof(doors);i++)
         {
@@ -175,9 +181,9 @@ int do_lp(string str)
             room = find_object_or_load(tmp);
             if(objectp(room)) { room->set_had_players(); }
         }
-        
+
         count++;
-        
+
         message("room_description", (string)dest->query_short(0) + "%^RESET%^ - %^MAGENTA%^"+count+"%^RESET%^" || "Unknown" ,this_player());
         message("room_exits", (string)dest->query_short_exits(), this_player());
         message("room_effects", (string)dest->query_effects(), this_player());
@@ -193,7 +199,7 @@ int do_lp(string str)
 }
 
 
-void help() 
+void help()
 {
     write("
 %^CYAN%^NAME%^RESET%^

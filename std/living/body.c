@@ -615,6 +615,16 @@ int query_resistance(string res) {
       if((string)TO->query("warlock heritage") == "infernal" && res == "fire") myres += 10;
     }
 
+    if(TO->query_race()=="squole")
+    {
+        string subrace = TO->query("subrace");
+        if(stringp(subrace))
+            if((subrace=="ice" && res == "cold") ||
+               (subrace=="magma" && res == "fire") ||
+               (subrace=="ooze" && res == "acid"))
+                myres += TO->query_character_level();
+    }
+
     if(TO->is_vampire())
     {
         if(res == "electricity")
