@@ -7,7 +7,7 @@ string *search_paths() { return ({ "/cmds/ranger" }); } // temporary
 
 int caster_class() { return 1; }
 
-string *restricted_races() { 
+string *restricted_races() {
     return ({ "bugbear","dwarf","gnome","goblin","half-orc","halfling","hobgoblin","kobold","orc",
                 "firbolg","gnoll","half-ogre","ogre","ogre-mage" });
 }
@@ -33,30 +33,31 @@ string *combat_styles() {
     return ({ "dual wield", "archery" });
 }
 
-string *class_feats(string myspec) {  
+string *class_feats(string myspec) {
     return ({ "ambidexterity",
-              "light armor proficiency", 
-              "simple weapon proficiency", 
+              "light armor proficiency",
+              "simple weapon proficiency",
               "martial weapon proficiency",
-              "track" });
+              "track",
+              "evasion"});
 }
 
 mapping class_featmap(string myspec) { // "dual wield" is default setting
-    if(!myspec || myspec == "") 
-      return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
+    if(!myspec || myspec == "")
+        return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
 
     switch(myspec) {
       case "archery":
-        return ([ 1 : ({ "point blank shot", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }),  ]);
+          return ([ 1 : ({ "point blank shot", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye", "evasion" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }),  ]);
       break;
       default:
-        return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
+          return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
       break;
     }
 }
 
 string *class_skills()
-{  
+{
     return ({ "athletics","endurance","stealth","survival" });
 }
 
@@ -66,7 +67,7 @@ string old_save_type() { return "ranger"; }
 
 string new_save_type() { return "ranger"; }
 
-void advanced_func(object player) 
+void advanced_func(object player)
 {
     player->set_guild_level("ranger",(int)player->query_class_level("ranger"));
 }
@@ -86,7 +87,7 @@ int max_stance_defensive() { return 5; }
 int attack_bonus(object player)
 {
     int level;
-    level = (int)player->query_prestige_level("ranger");       
+    level = (int)player->query_prestige_level("ranger");
     return level;
 }
 
@@ -123,5 +124,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
