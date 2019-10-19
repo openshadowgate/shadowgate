@@ -9,21 +9,15 @@ void create(){
     set_name("vampire");
     set_id(({"vampire knight","vampire","undead","Vampire knight"}));
     set_short("%^RESET%^%^RED%^Vampire %^BOLD%^%^BLACK%^knight%^RESET%^");
-    set_long("%^RED%^Before you floats a powerful humanoid figure encased into heavy armour, wielding a huge two-handed sword. It's skin is gray, ears are bat like and eyes glow with undead red hatred towards all living. Despite being in heavy armor it floats above the ground with ease and moves with supernatural agility.
-
-Like spells of the family this spell will contribute towards your undead pool size.
-
-To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
-To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
-    set_race("undead");
+    set_long("%^RED%^Before you floats a powerful humanoid figure encased into heavy armour, wielding a huge two-handed sword. It's skin is gray, ears are bat like and eyes glow with undead red hatred towards all living. Despite being in heavy armor it floats above the ground with ease and moves with supernatural agility.");
+    set_race("human");
     set_gender("male");
 
     set_size(2);
     set_class("fighter");
 
     set_guild_level("fighter",6);
+    set_guild_level("mage",6);
     set_level(8);
     set_hd(8,8);
 
@@ -43,13 +37,14 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_stats("wisdom",18);
     set_stats("charisma",22);
 
-    set_spells(({"vampiric touch",
-                    "eyebite",
-                    }));
-    set_spell_chance(33);
     set_property("cast and attack",1);
+    set_spells(({"cause blindness",
+                    "dispel magic",
+                    "orders oath",
+                    "call lightning"}));
+    set_spell_chance(25);
 
-    set_alignment(6);
+    set_alignment(3);
 
     {
         object stuff;
@@ -62,7 +57,11 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
         stuff = new("/d/common/obj/armour/plate");
         stuff->set_property("monsterweapon", 1);
         stuff->move(TO);
-        command("wear chain");
+        command("wear plate");
+        stuff = new("/d/common/obj/armour/greaves");
+        stuff->set_property("monsterweapon", 1);
+        stuff->move(TO);
+        command("wear greaves");
     }
 
     add_search_path("/cmds/feats");

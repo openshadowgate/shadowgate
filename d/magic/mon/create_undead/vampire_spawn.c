@@ -45,15 +45,15 @@ void create(){
     set_alignment(9);
 
     set_funcs(({"blood_drain"}));
-    set_func_chance(85);
+    set_func_chance(50);
     set_property("cast and attack",1);
 
-    add_limb("mouth",0,0,0);
-    set_attack_limbs(({"right hand","left hand","mouth"}));
+    add_limb("jaw",0,0,0);
+    set_attack_limbs(({"right hand","left hand","jaw"}));
     set_wielding_limbs( ({"left hand","right hand"}) );
 
     set_nat_weapon_type("piercing");
-    set_damage(2,8);
+    set_damage(3,6);
 
     add_search_path("/cmds/feats");
     add_search_path("/cmds/fighter");
@@ -70,24 +70,24 @@ void create(){
     command("message out stumbles to $D.");
 }
 
-void blood_drain(object targ)
+int blood_drain(object targ)
 {
     string what;
     if(!objectp(targ))
-        return;
+        return 0;
     if(!objectp(TO))
-        return;
+        return 0;
     if(!objectp(ETO))
-        return;
+        return 0;
     if(targ->is_undead())
-        return;
+        return 0;
     if(targ->query_property("garlic_scent"))
-       return;
+       return 0;
     what = (!random(2))?"%^BOLD%^bite":"%^BOLD%^%^BLUE%^claw";
     tell_room(ETO,"%^RED%^A vampire spawn violently "+what+"s%^RESET%^%^RED%^ "+targ->QCN+"!",targ);
     tell_object(targ,"%^RED%^You feel your life draining away as vampire spawn "+what+"s%^RESET%^%^RED%^ you "+targ->QCN+"!",targ);
-    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1,8), "negative energy");
-    targ->cause_typed_damage(TO, "torso", -roll_dice(1,12)*2, "negative energy");
+    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(query_level(),8), "negative energy");
+    targ->cause_typed_damage(TO, "torso", -roll_dice(query_level(),12)*2, "negative energy");
 }
 
 void init()

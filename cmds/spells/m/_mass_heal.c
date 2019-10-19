@@ -12,6 +12,7 @@ void create()
     set_author("ares");
     set_spell_name("mass heal");
     set_spell_level(([ "cleric" : 9 ]));
+    set_affixed_spell_level(9);
     set_spell_sphere("healing");
     set_syntax("cast CLASS mass heal on TARGET");
     set_damage_desc("positive energy");

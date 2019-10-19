@@ -5,6 +5,7 @@ void create() {
     ::create();
     set_spell_name("mass cause critical wounds");
     set_spell_level(([ "cleric" : 8 ]));
+    set_affixed_spell_level(8);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass cause critical wounds [on TARGET]");
     set_description("This is a stronger version of the priest spell, cause critical wounds.  When cast on a target, it "

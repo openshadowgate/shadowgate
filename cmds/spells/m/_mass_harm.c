@@ -12,6 +12,7 @@ void create()
     set_author("ares");
     set_spell_name("mass harm");
     set_spell_level(([ "cleric" : 9 ]));
+    set_affixed_spell_level(9);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass harm on TARGET");
     set_damage_desc("negative energy");

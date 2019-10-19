@@ -5,6 +5,7 @@ void create() {
     ::create();
     set_spell_name("mass cause light wounds");
     set_spell_level(([ "cleric" : 5, "bard" : 5 ]));
+    set_affixed_spell_level(5);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass cause light wounds [on TARGET]");
     set_description("This is a stronger version of the priest spell, cause light wounds.  When cast on a target, it will "

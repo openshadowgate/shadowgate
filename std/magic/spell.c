@@ -47,6 +47,7 @@ int spell_level,
     silent_casting,
     target_required,
     spell_duration,
+    affixed_level,
     clevel,
     sdamage,
     sdamage_adjustment,
@@ -263,6 +264,14 @@ void set_spell_level(mapping levels) {
     for(i=0;i<sizeof(levelkeys);i++) {
       if(spell_levels[levelkeys[i]] > spell_level) spell_level = spell_levels[levelkeys[i]];
     }
+}
+
+void set_affixed_spell_level(int x)
+{
+    if(x)
+        affixed_level = x;
+    else
+        affixed_level = 1;
 }
 
 void set_components(mapping temp) {
@@ -1423,6 +1432,8 @@ int query_spell_level(string classtype) {
   if(!mapp(spell_levels)) spell_levels = ([]);
 
 // safeguards til we can filter the old class types out of the system. Nienne, 05/10
+  if(affixed_level)
+      return affixed_level;
   if(classtype == "priest" && spell_levels["cleric"]) return spell_levels["cleric"];
   if(classtype == "priest" && spell_levels["ranger"]) return spell_levels["ranger"];
   if(classtype == "priest" && spell_levels["paladin"]) return spell_levels["paladin"];
@@ -1546,7 +1557,8 @@ void check_fizzle(object ob) {
     }
 
     if(objectp(target))
-        if(spell_type!="warlock")
+        if(!(spell_type=="warlock" ||
+             spell_type=="monk"))
             if((int)target->query_property("spell invulnerability")>query_spell_level(spell_type))
             {
                 tell_object(caster,"%^CYAN%^Your "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly.");
@@ -1741,7 +1753,8 @@ varargs int do_spell_damage( object victim, string hit_limb, int wound,string da
         return 1;
     }
 
-    if(spell_type!="warlock")
+    if(!(spell_type=="warlock"||
+         spell_type=="monk"))
         if((int)victim->query_property("spell invulnerability")>query_spell_level(spell_type))
         {
             tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
@@ -2671,7 +2684,7 @@ void help() {
                 else printclass += ", "+classkeys[i]+" L"+spell_levels[classkeys[i]];
             }
     }
-    write("%^BOLD%^%^RED%^Class:%^RESET%^ "+printclass);
+    write("%^BOLD%^%^RED%^Class:%^RESET%^ "+(affixed_level?("(L"+affixed_level+" fixed) "):"")+printclass);
     if(!spell_sphere)
         spell_sphere = "";
     if(spell_sphere != "")
