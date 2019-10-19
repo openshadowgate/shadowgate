@@ -136,7 +136,7 @@ void spell_effect(int prof)
 int calculate_healing(object targ)
 {
     define_base_damage(-3);
-    return sdamage;
+    return sdamage*7/6;
 }
 
 void dest_effect()

@@ -1,5 +1,5 @@
 //pryingeyes.c - for Prying Eyes spell by >> N <<
-//Silverwatcher, shadowlistener, and innereye are 
+//Silverwatcher, shadowlistener, and innereye are
 //essentially the same file.  If you make a change to
 //one, please check to see if the others need it as well.
 
@@ -28,7 +28,7 @@ void create(){
     set_body_type("eye");
     set_invis();
     /* set_property("no detect",1);     */
-    
+
     add_limb("body","",0,0,0);
 }
 
@@ -52,8 +52,10 @@ void die(object ob){
 }
 
 void heart_beat(){
-    if(!objectp(caster)) return;
-    if(!objectp(follower)) return;
+    if(!objectp(caster))
+        self_destruct();
+    if(!objectp(follower))
+        self_destruct();
     if(ETO != environment(follower))
         move(environment(follower));
     if(ETO->query_property("no scry")) self_destruct();
@@ -106,7 +108,7 @@ void self_destruct() {
     casterobj = find_player(caster);
     if(objectp(casterobj)){
         spells += casterobj->query_property("dispellable spells");
-        for(i=0;i<sizeof(spells);i++){  
+        for(i=0;i<sizeof(spells);i++){
             if(objectp(spells[i])){
                 if(!spells[i]->query_target_object()){
                     if((string)spells[i]->query_spell_name() == "prying eyes"){
@@ -124,5 +126,3 @@ void self_destruct() {
 
 int is_priest_scry(){ return 1; }
 int is_scry_object(){ return 1; }
-
-
