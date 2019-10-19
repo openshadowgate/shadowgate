@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("EldritchKnight");
     feat_name("eldritch conditioning");
     feat_prereq("Eldritch Knight L1");
-    feat_desc("As eldrich knight embodies worlds of magic and martial combat, they learn to cast in armor with a weapon in their hand. The spells they use will be always at full potency of their class.");
+    feat_desc("As eldrich knight embodies worlds of magic and martial combat, they learn to cast in armor with a weapon in their hand. The spells of their base class will be always at character level potency.");
     permanent(1);
     set_required_for(({"improved prescience","metabolic perfection"}));
 }

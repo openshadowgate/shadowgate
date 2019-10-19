@@ -358,16 +358,18 @@ static void ansi_test(string str) {
         __Player->setenv("TERM","default");
         __Player->reset_terminal();
     }
-    message("logon", "\nPlease choose character gender"+
-            " (male or female) : ", this_player());
+    message("logon", "\nChoose character gender"+
+            " (male, female, neuter) : ", this_player());
     input_to("choose_gender");
     return;
 
 }
 
 static void choose_gender(string str) {
-    if (str != "male" && str != "female") {
-        message("logon", "\nOnly female or male are available at this time.\n",
+    if (str != "male" &&
+        str != "female" &&
+        str != "neuter") {
+        message("logon", "\nOnly female, male or neuter are available at this time.\n",
                 this_object());
         message("logon", "Gender: ", this_object());
         input_to("choose_gender");

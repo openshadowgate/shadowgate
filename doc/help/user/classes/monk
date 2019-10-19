@@ -9,18 +9,18 @@
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
 
 %^RESET%^%^CYAN%^Base Monk:%^RESET%^
-   %^RESET%^L1: simple weapon proficiency, unarmored defense.
-   %^RESET%^L2: flurry of blows and dodge
-   %^RESET%^L5: stunning strike
-   %^RESET%^L7: evasion, stillness of mind
-   %^RESET%^L10: purity of body
-   %^RESET%^L14: diamond soul
-   %^RESET%^L15: timeless body
-   %^RESET%^L18: empty body
-   %^RESET%^L19: tongue of the sun and moon
-   %^RESET%^L20: perfect self
-   %^RESET%^L21: defensive roll
-   %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
+ %^RESET%^L1: simple weapon proficiency, unarmored defense.
+ %^RESET%^L2: flurry of blows and dodge
+ %^RESET%^L5: stunning strike
+ %^RESET%^L7: evasion, stillness of mind
+ %^RESET%^L10: purity of body
+ %^RESET%^L14: diamond soul
+ %^RESET%^L15: timeless body
+ %^RESET%^L18: empty body
+ %^RESET%^L19: tongue of the sun and moon
+ %^RESET%^L20: perfect self
+ %^RESET%^L21: defensive roll
+ %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
 
 The monk is an enlightened warrior, able to transcend many of the bodily limits that hamper most others. They are typically from one order or another and have an affinity for the strict procedures that such an order imparts on them.
 
@@ -29,10 +29,10 @@ They despise most tradional armor, finding that it gets in the way of their abil
 Some monks are known to use small weapons, almost as if they were an extension of themselves. Others prefer the feel of battle and thus limit themselves to using their bare hands. All monks are experts at using their body as a weapon. Some are very quick, using their dexterity in combat to both hit and deal damage, others are very strong and benefit from a higher strength stat.
 
 Unarmed monks use the following damage table:
-  Levels 1-10  : 1d6 damage
-  Levels 11-20 : 1d8 damage
-  Levels 21-30 : 1d10 damage
-  Levels 31+   : 1d12 damage
+ Levels 1-10 : 1d6 damage
+ Levels 11-20 : 1d8 damage
+ Levels 21-30 : 1d10 damage
+ Levels 31+ : 1d12 damage
 
 This is base damage only. By default a monk uses strength for unarmed attacks (for both hit and damage), however, a monk may choose the weapon finesse feat in order to use dexterity instead.
 
@@ -41,9 +41,9 @@ Unarmed monks also receive a critical damage multiplier of their monk level divi
 An unarmed monk also receives +1 to damage and hit, per six levels in their monk class. This is considered magical for purposes of bypassing monster weapon resistance and or special abilities.
 
 Starting at level 3 you may dedicate to a particular emphasis of Ki, in any church or temple, by using %^ORANGE%^<pick WAY>%^RESET%^. The current known ways are:
-  %^CYAN%^The Way of The Fist
-  %^CYAN%^The Way of The Shadow
-  %^CYAN%^The Way of The Elements %^RESET%^
+ %^CYAN%^The Way of The Fist
+ %^CYAN%^The Way of The Shadow
+ %^CYAN%^The Way of The Elements %^RESET%^
 
 Monk feats, abilities, and spells require ki. Most monks receive 1 ki point per level starting at level 2. Ki regenerates passively. Ki regeneration rate is 1-2 every 10-20 seconds. A higher wisdom score reduces this time but never below 5 seconds.
 

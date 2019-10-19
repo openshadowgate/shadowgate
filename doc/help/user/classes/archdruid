@@ -2,35 +2,24 @@
 %^RESET%^%^CYAN%^Archdruid:
 
 %^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Druid
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Survival Skill
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Wisdom (before equipment modifiers)
-
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ beastman, elf, firbolg, gnome (rock/forest), 
-               half-drow, half-elf, halfling (ghostwise), 
-               human (except tiefling and aasimar), voadkyn
-
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ LN, NG, TN, NE, CN
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ n/a
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/will strong, reflex weak
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ disguise, healing, perception, survival
-              **disguise temporarily substituted to endurance until installed
+%^RESET%^%^CYAN%^ %^RESET%^ Level 20 Druid
+%^RESET%^%^CYAN%^ %^RESET%^ 20 Points Spent in the Survival Skill
+%^RESET%^%^CYAN%^ %^RESET%^ 20 Base Wisdom (before equipment modifiers)
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: wild shape elemental
-   %^RESET%^L4: natures gift
-   %^RESET%^L7: natural perfection
+ %^RESET%^L1: wild shape elemental
+ %^RESET%^L4: natures gift
+ %^RESET%^L7: natural perfection
 
 An archdruid has spent his life mastering the flow of nature through
-the world around him.  He becomes so in tune with the natural world that
-he is able to channel it with near perfection.  At first level an archdruid
-is able to take the form of an elemental and gain some powers that an 
-elemental of the corresponding element would have.  At fourth level an
+the world around him. He becomes so in tune with the natural world that
+he is able to channel it with near perfection. At first level an archdruid
+is able to take the form of an elemental and gain some powers that an
+elemental of the corresponding element would have. At fourth level an
 archdruid has learned some spells so well that she can cast them without
 needing to prepare them in advance and can cast them an unlimited amount
-of times per day.  At seventh level, an archdruid has become so in sync 
-with the natural world that she has a chance, based on her wisdom score, 
+of times per day. At seventh level, an archdruid has become so in sync
+with the natural world that she has a chance, based on her wisdom score,
 to retain in memory any spells that she casts.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, prepare

@@ -1,37 +1,18 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
 %^RESET%^%^CYAN%^Chronicler:
 
-%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Bard
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Academics Skill
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Charisma (before equipment modifiers)
+%^RESET%^%^CYAN%^Requirements:
+%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^ %^RESET%^ Level 20 Bard
+%^RESET%^%^CYAN%^ %^RESET%^ 20 Points Spent in the Academics Skill
+%^RESET%^%^CYAN%^ %^RESET%^ 20 Base Charisma (before equipment modifiers)
 
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ half-elf, human, wemic, elf (moon, sun), 
-               gnome (rock, forest), dwarf (shield, gold), firbolg, 
-               halfling (lightfoot, strongheart)
-
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any non-lawful
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ reflex/will strong, fort weak
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, disguise, influence, spellcraft, athletics
-              **disguise temporarily substituted to thievery until installed
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: fated
-   %^RESET%^L4: timeweaver
-   %^RESET%^L7: temporal displacement
+ %^RESET%^L1: fated
+ %^RESET%^L4: timeweaver
+ %^RESET%^L7: temporal displacement
 
-    A chronicler is a specialized bard, so masterful at embellishing or
-altering a tale so as to magically make it true.  He or she can snatch
-glimpses of the past and future as though it were part of the present, 
-gaining a greater understanding of history, and small hints of what the
-future brings.  Using this insight and his or her own glib storyteller's
-art, the chronicler can retell the past or future to change time just 
-enough to keep themselves and their allies safe.  A chronicler uses her 
-charisma instead of intelligence for all academics checks and a level 
-one chronicler becomes immune to death spells and effects.  At level 
-four a chronicler can manipulate time in a limited capacity.  The spells
-timestop and foresight are added to his or her spell list.
+A chronicler is a specialized bard, so masterful at embellishing oraltering a tale so as to magically make it true. He or she can snatchglimpses of the past and future as though it were part of the present, gaining a greater understanding of history, and small hints of what thefuture brings. Using this insight and his or her own glib storyteller'sart, the chronicler can retell the past or future to change time just enough to keep themselves and their allies safe. A chronicler uses her charisma instead of intelligence for all academics checks and a level one chronicler becomes immune to death spells and effects. At level four a chronicler can manipulate time in a limited capacity. The spellstimestop and foresight are added to his or her spell list.
 
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, prepare, lore, story, song

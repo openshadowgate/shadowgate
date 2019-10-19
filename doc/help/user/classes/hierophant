@@ -1,22 +1,16 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
-%^RESET%^%^CYAN%^Archmage:
+%^RESET%^%^CYAN%^Hierophant:
 
-%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Cleric or Druid
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the spellcraft skill
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Wisdom (before equipment modifiers)
+%^RESET%^%^CYAN%^Requirements:
+%^RESET%^ Level 40 Character
+%^RESET%^ Level 20 Cleric or Druid
+%^RESET%^ 20 Points Spent in the spellcraft skill
+%^RESET%^ 20 Base Wisdom (before equipment modifiers)
 
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ see Base Class
-
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ see Base Class
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: mastery of power
-   %^RESET%^L4: greater arsenal
-   %^RESET%^L7: theurgic perfection
+ %^RESET%^L1: mastery of power
+ %^RESET%^L4: greater arsenal
+ %^RESET%^L7: theurgic perfection
 
 Hierophant is an experienced theurgist, well versed in magic of The Power. They are known for their connection to forces beyond, able to cast more spells with increased potency, sometimes seemingly never exhausting themselves. Though their spells are weaker that spells of archmages, powers they posses are substantially efficient for combat and peace. At first level they learn true power of source of their magic. At forth level, they learn to have more spells in memory. And finally, at seventh level they gain ability to preserve cast spells in memory.
 

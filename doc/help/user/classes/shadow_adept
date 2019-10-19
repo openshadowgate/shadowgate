@@ -1,33 +1,14 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
 %^RESET%^%^CYAN%^Shadow Adept:
 
-%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Mage or Level 20 Sorcerer
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Intelligence or Charisma (before equipment modifiers)
-
-%^RESET%^%^BOLD%^%^GREEN%^For Mage Shadow Adepts:
-
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ see mage
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ see mage
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ see mage
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ see mage
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, dungeoneering, healing, spellcraft
-
-%^RESET%^%^BOLD%^%^GREEN%^For Sorcerer Shadow Adepts:
-
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ see sorcerer
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ see sorcerer
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ see sorcerer
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, perception, influence, spellcraft
-
-%^RESET%^%^BOLD%^%^GREEN%^For All Shadow Adepts:
+%^RESET%^%^CYAN%^Requirements:
+%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^ %^RESET%^ Level 20 Mage or Level 20 Sorcerer
+%^RESET%^%^CYAN%^ %^RESET%^ 20 Base Intelligence or Charisma (before equipment modifiers)
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: gift of the shadows
-   %^RESET%^L4: elusive spellcraft
-   %^RESET%^L7: shadow apotheosis
+ %^RESET%^L1: gift of the shadows
+ %^RESET%^L4: elusive spellcraft
+ %^RESET%^L7: shadow apotheosis
 
 %^RESET%^Flickering, wavering, dancing between the border of light and darkness, their innate magic is drawn from the dark and gloomy reflection of the Shadow Plane. Perhaps they traveled briefly through a shadow crossing, unknowingly bringing back with themselves a wisp of the starkly colorless Plane of Shadow that is now their inseparable part, or maybe they are just innately in tune with the nature of the Shadow Weave itself. It's been rumored they gained powers from ancient goddess of oblivion, but now she is dead... Who knows. Perhaps someone else took her mantle of control, or mayhaps it floats freely for mystical souls to tap onto.

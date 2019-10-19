@@ -1,117 +1,148 @@
-//     _hp.c
-//     Command <hp> is quick and alot easier than status.
-//     Created by Firedragon on 12/21/96 
-//Updated by ~Circe~ 4/29/11 so avatars and above could use it on other targets
-// Updated by ~Circe~ 9/25/15 to include power points for psionic characters
- 
 #include <std.h>
+#include <clock.h>
+#include <rooms.h>
+#include <new_exp_table.h>
+#include <objects.h>
+#include <daemons.h>
 
-#define RED     "%^RED%^"
-#define GREEN   "%^GREEN%^"
-#define YELLOW  "%^YELLOW%^"
-#define BOLD    "%^BOLD%^"
+mixed * genoutput(object targ)
+{
+    mixed * output=({});
 
-inherit DAEMON;
+    output+=({({"Health Points","%^RESET%^%^"+targ->query_hp()+"%^BOLD%^%^GREEN%^/%^WHITE%^"+targ->query_max_hp()})});
+    output+=({({"Carrying","%^RESET%^%^"+targ->query_internal_encumbrance()+"%^BOLD%^%^GREEN%^/%^WHITE%^"+targ->query_max_internal_encumbrance()})});
 
-string posxxx;
+    if(!(targ->is_undead() ||
+         FEATS_D->usable_feat(targ,"timeless body")))
+    {
+        int max = targ->query_formula();
+        int cur, perc;
+        cur = targ->query_stuffed();
+        perc = cur*100/max;
+        output+=({({"Hunger",arrange_string(hunger2str(perc)+"            ",10) + "%^BOLD%^ ("+perc+"%)"})});
+        cur = targ->query_quenched();
+        perc = cur*100/max;
+        output+=({({"Hunger",arrange_string(thirst2str(perc)+"          ",10) + "%^BOLD%^ ("+perc+"%)"})});
+        cur = targ->query_intox();
+        perc = cur*100/max;
+        output+=({({"Intox",arrange_string(intox2str(perc)+"          ",10) + "%^BOLD%^ ("+perc+"%)"})});
+    }
+    else if(targ->is_vampire())
+    {
+        output+=({({"%^BOLD%^%^RED%^Blood Hunger",thirst2str(targ->query_bloodlust()/200)+ "%^BOLD%^%^RED%^ ("+targ->query_bloodlust()/200+"%)"})});
+    }
+    if(POISON_D->is_poisoned(targ))
+    {
+        output+=({({"Poison","%^RED%^Poisoned"})});
+    }
 
+    if(!targ->is_undead())
+    {
+        output+=({({"Condition","%^BOLD%^%^MAGENTA%^"+targ->query_condition_string()})});
+    }
 
- 
-int cmd_hp(string str) {
-  int temp1, temp2, max;
-  string hunger, thirst, sober, poison;
-  object targ;
-    if (str && avatarp(TP)) {
-        if(!objectp(TP)) { return 0; }
-        posxxx = lower_case((string)TP->query_position());
-        if(posxxx == "builder" || posxxx == "apprentice")
-        {
-            tell_object(TP,"You cannot use this command as a builder or apprentice.");
-            return 1;
-        }
-        if(!(targ = find_player(str))) 
+    return output;
+}
+
+int cmd_hp(string args)
+{
+    mixed *output=({}), oline;
+    object targ;
+    int arrange = 14;
+
+    if (args && avatarp(TP))
+    {
+        if(!(targ = find_player(args)))
         {
             return notify_fail("That person is not available for scoring.\n");
         }
-        
-        else if ((targ = find_player(str))) {
+
+        else if ((targ = find_player(args)))
+        {
             if((int)targ->query_level() > (int)TP->query_level())
             {
                 return notify_fail("That person is not available for scoring.\n");
-            }        
+            }
         }
-   } else {
-      targ = TP;
-   }
+    }
+    else
+    {
+        targ = TP;
+    }
 
-   max = targ->query_formula();
-   temp1 = targ->query_stuffed();
-   temp2 = max / 6;
-   if(temp1 < temp2) hunger = BOLD+RED+"Starving";
-   else if(temp1 < (temp2 * 2)) hunger = RED+"Very hungry";
-   else if(temp1 < (temp2 * 3)) hunger = RED+"Really hungry";
-   else if(temp1 < (temp2 * 4)) hunger = YELLOW+"Hungry";
-   else if(temp1 < (temp2 * 5)) hunger = GREEN+"Not hungry";
-   else hunger = BOLD+GREEN+"Stuffed";
-   temp1 = targ->query_quenched();
-   temp2 = max / 6;
-   if(temp1 < temp2) thirst = BOLD+RED+"Parched             ";
-   else if(temp1 < (temp2 * 2)) thirst = RED+"Very thirsty        ";
-   else if(temp1 < (temp2 * 3)) thirst = RED+"Really thirsty      ";
-   else if(temp1 < (temp2 * 4)) thirst = YELLOW+"Thirsty             ";
-   else if(temp1 < (temp2 * 5)) thirst = GREEN+"Not thirsty         ";
-   else thirst = BOLD+GREEN+"Quenched            ";
-   temp1 = targ->query_intox();
-   temp2 = max / 5;
-   if(temp1 == 0) sober = GREEN+"Sober          ";
-   else if(temp1 < temp2) sober = YELLOW+"Buzzed         ";
-   else if(temp1 < (temp2 * 2)) sober = YELLOW+"Tipsy          ";
-   else if(temp1 < (temp2 * 3)) sober = RED+"Lipped         ";
-   else if(temp1 < (temp2 * 4)) sober = RED+"Drunk          ";
-   else sober = BOLD+RED+"Wasted         ";
-   poison = "";
-   if((int)targ->query_poisoning() > 0) {
-        poison = "\n%^RESET%^Poison:  %^RED%^Poisoned";
-   }
- 
-   if(targ != TP){
-      write("%^BOLD%^%^WHITE%^Basic information for %^CYAN%^"+targ->QCN+" %^WHITE%^is as follows:%^RESET%^");
-   }
-  write("%^WHITE%^HP: %^BOLD%^%^GREEN%^"+ targ->query_hp()
-	+"%^WHITE%^/%^RESET%^%^GREEN%^"+ targ->query_max_hp() 
-	+"  %^WHITE%^EXP: %^BOLD%^%^GREEN%^"+ targ->query_exp()
-	//+"  %^RESET%^AC: %^BOLD%^%^GREEN%^"+ targ->query_ac()
-	+"  %^RESET%^Carrying: %^BOLD%^%^GREEN%^"+targ->query_internal_encumbrance()
-	+"%^WHITE%^/%^RESET%^%^GREEN%^"+ targ->query_max_internal_encumbrance()
-      +"%^RESET%^\nStamina: %^CYAN%^"+targ->query_condition_string()
-	+"%^RESET%^\nIntox:  "+sober
-	+"%^RESET%^\nHunger:  "+hunger+"  %^RESET%^Thirst:  "+thirst+"%^RESET%^"+
-    poison
-	);
-  if(targ->is_class("psion") || targ->is_class("psywarrior")){
-      write("%^RESET%^Power Points: %^BOLD%^%^GREEN%^"+targ->query_mp()+"%^RESET%^/%^GREEN%^"+targ->query_max_mp()+"");
-  }
-  if(targ->is_class("monk") && (int)targ->query_class_level("monk") > 1)
-  {
-      write("%^RESET%^Ki: %^BOLD%^%^CYAN%^"+targ->query("available ki")+"%^RESET%^/%^CYAN%^"+targ->query("maximum ki")+"");
-  }
-  return 1;
+    output = genoutput(targ);
+
+    foreach(oline in output)
+    {
+        write("%^BOLD%^%^GREEN%^ "+arrange_string(oline[0]+"%^BOLD%^%^BLACK%^ --------------",arrange)+"%^RESET%^%^GREEN%^ : %^RESET%^"+oline[1]);
+    }
+
+    return 1;
 }
 
+string hunger2str(int perc)
+{
+    if(perc > 100*5/6)
+        return "%^BOLD%^%^GREEN%^Stuffed%^RESET%^";
+    if(perc > 100*4/6)
+        return "%^GREEN%^Not hungry%^RESET%^";
+    if(perc > 50)
+        return "%^YELLOW%^Hungry%^RESET%^";
+    if(perc > 100/3)
+        return "%^RED%^Really hungry%^RESET%^";
+    if(perc > 100/6)
+        return "%^RED%^Very hungry%^RESET%^";
+
+    return "%^RED%^%^BOLD%^Starving%^RESET%^";
+}
+
+string thirst2str(int perc)
+{
+    if(perc > 100*5/6)
+        return "%^BOLD%^%^GREEN%^Quenched%^RESET%^";
+    if(perc > 100*4/6)
+        return "%^GREEN%^Not thirsty%^RESET%^";
+    if(perc > 50)
+        return "%^YELLOW%^Thirsty%^RESET%^";
+    if(perc > 100/3)
+        return "%^RED%^Really thirsty%^RESET%^";
+    if(perc > 100/6)
+        return "%^RED%^Very thirsty%^RESET%^";
+    return "%^RED%^%^BOLD%^Parched%^RESET%^";
+}
+
+string intox2str(int perc)
+{
+    if(perc > 100*5/6)
+        return "%^BOLD%^%^RED%^Wasted%^RESET%^";
+    if(perc > 100*4/6)
+        return "%^RED%^Drunk%^RESET%^";
+    if(perc > 50)
+        return "%^ORANGE%^Lipped%^RESET%^";
+    if(perc > 100/3)
+        return "%^ORANGE%^Tipsy%^RESET%^";
+    if(perc > 100/6)
+        return "%^GREEN%^Buzzed%^RESET%^";
+    return "%^GREEN%^%^BOLD%^Sober%^RESET%^";
+}
 
 void help() {
     write("
 %^CYAN%^NAME%^RESET%^
 
-hp - display hitpoints, stamina, carrying capacity
+hp - show your condition");
+    if(avatarp(TP)) write("
+%^CYAN%^SYNTAX%^RESET%^
 
+hp [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]");
+    write(
+        "
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command displays briefly your status.
+This command gives you overview of your condition.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-score, report, stats, skills, languages, inventory
+score, money, stats, biography, inventory, eq
 ");
-  
 }

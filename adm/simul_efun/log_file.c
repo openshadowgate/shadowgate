@@ -15,19 +15,12 @@
  */
 varargs void log_file(string fl, string msg, int continous)
 {
-    string ofname;
-
-
     if(!stringp(fl)) error("Bad argument 1 to log_file().\n");
     if(!stringp(msg)) msg = identify(msg);
     if(strsrch(fl, "..") != -1) error("Illegal file reference.\n");
     seteuid(UID_ROOT);
-    if(continous)
-        ofname = sprintf("%s.%d", fl,time());
-    else
-        ofname = sprintf("%s.old", fl);
     if(file_size(fl = sprintf("%s/%s", DIR_LOGS, fl)) > MAX_LOG_SIZE)
-      rename(fl, ofname);
+      rename(fl, sprintf("%s.old", fl));
     msg = ctime(time()) + " : " +msg;
     write_file(fl, msg);
     seteuid(UID_MUDLIB);

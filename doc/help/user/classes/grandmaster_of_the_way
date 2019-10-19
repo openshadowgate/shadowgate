@@ -1,34 +1,17 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
 %^RESET%^%^CYAN%^Grandmaster of the Way:
 
-%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Monk
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Athletics Skill
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Wisdom (before equipment modifiers)
-
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ Human, Half-drow, Half-elf, Dwarf, Gnome, and Shade
-
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any lawful
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ paladin, bard, barbarian
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ Reflex, Fort, and Will strong
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ Athletics, Endurance.
+%^RESET%^%^CYAN%^Requirements:
+%^RESET%^ Level 40 Character
+%^RESET%^ Level 20 Monk
+%^RESET%^ 20 Points Spent in the Athletics Skill
+%^RESET%^ 20 Base Wisdom (before equipment modifiers)
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: way of the learned pupil 
-   %^RESET%^L4: way of the merciful soul
-   %^RESET%^L7: grandmaster of the way
+ %^RESET%^L1: way of the learned pupil
+ %^RESET%^L4: way of the merciful soul
+ %^RESET%^L7: grandmaster of the way
 
-The Grandmaster of the way is a monk who has dedicated his
-life to mastering the various arts of the way.  He is able
-to absorb damage from attacks to regenerate a small amount
-of ki and he is able to mercifully end the life of opponents
-who are sufficiently injured.  Finally at the peak of his
-achievement, a grandmaster of the way is able to use all of
-the abilities of the way of the fist, the way of the shadow
-and the way of the elements.  He does not, however, learn
-the skills of the other ways.
+The Grandmaster of the way is a monk who has dedicated hislife to mastering the various arts of the way. He is ableto absorb damage from attacks to regenerate a small amountof ki and he is able to mercifully end the life of opponentswho are sufficiently injured. Finally at the peak of hisachievement, a grandmaster of the way is able to use all ofthe abilities of the way of the fist, the way of the shadowand the way of the elements. He does not, however, learnthe skills of the other ways.
 
-%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, stats, ki, 
-          way of the fist, way of the shadow, way of the elements.
-          monk
+%^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, stats, ki, way of the fist, way of the shadow, way of the elements. monk

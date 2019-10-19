@@ -15,7 +15,7 @@ void create(){
     set_property("magic",1);
     set_casting_time(1);
     set_helpful_spell(1);
-    set_feats_required(([ "warlock" : "infernal practitioner"]));    
+    set_feats_required(([ "warlock" : "infernal practitioner"]));
 }
 
 string query_cast_string(){
@@ -33,7 +33,7 @@ int preSpell(){
 }
 
 void spell_effect(int prof){
-    int duration; 
+    int duration;
     duration = (ROUND_LENGTH * 10) * clevel; // Might need tweaked -Ares
      tell_room(place,"%^BOLD%^%^BLACK%^A sphere of b%^RESET%^%^RED%^a%^BOLD%^%^BLACK%^leful fla%^BOLD%^%^RED%^m%^BOLD%^%^BLACK%^e roars to life around "+caster->QCN+", heat radiating against your skin!%^RESET%^",caster);
     tell_object(caster,"%^BOLD%^%^BLACK%^B%^RESET%^%^RED%^a%^BOLD%^%^BLACK%^leful fla%^BOLD%^%^RED%^m%^BOLD%^%^BLACK%^es roar to life around you, their fury focussed outwards!%^RESET%^");
@@ -68,7 +68,7 @@ void execute_attack(){
         max     = max/2;
         attacks = attacks/2;
     }
-    
+
     if(!random(10)){
         tell_room(place,"%^RESET%^%^RED%^"+caster->QCN+"'s blazing shield pulses and surges with radiant energy!",caster);
         tell_object(caster,"%^RESET%^%^RED%^Your blazing shield pulses and surges with radiant energy!");
@@ -78,6 +78,7 @@ void execute_attack(){
         return;
     }
     define_base_damage(0);//lazy re-roll
+    sdamage/=2;
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i])) { continue; }
         tell_object(caster,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to you, and your hellish shield burns "+attackers[i]->QO+" horribly!");
@@ -95,18 +96,18 @@ void execute_attack(){
        return;
     }
 //This spell didn't end when it was out of attacks
-//like it was supposed to.  Adding the above to see 
+//like it was supposed to.  Adding the above to see
 //if that will do it.  ~Circe~ 6/2/08
     place->addObjectToCombatCycle(TO,1);
     return;
 }
 
 void dest_effect(){
-    if(objectp(caster)){ 
+    if(objectp(caster)){
         tell_room(environment(caster),"%^RED%^The infernal shield flickers and vanishes from around "+caster->QCN+".",caster);
         tell_object(caster,"%^RED%^Your infernal shield flickers and then vanishes.");
-        caster->remove_property("blade barrier"); 
-	    caster->remove_property_value("added short",({"%^RED%^ (wreathed in ominous flames)%^RESET%^"}));    
+        caster->remove_property("blade barrier");
+	    caster->remove_property_value("added short",({"%^RED%^ (wreathed in ominous flames)%^RESET%^"}));
     }
    ::dest_effect();
    if(objectp(TO)) TO->remove();

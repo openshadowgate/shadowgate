@@ -1,22 +1,15 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
 %^RESET%^%^CYAN%^Stonelord:
 
-%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 in Base Class (selected when advancing)
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Ranks in the Endurance Skill
-
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ dwarf, earth genasi (human, half-elf, half-orc)
-
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Requirements:
+%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^ %^RESET%^ Level 20 in Base Class (selected when advancing)
+%^RESET%^%^CYAN%^ %^RESET%^ 20 Ranks in the Endurance Skill
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: earthen blood
-   %^RESET%^L4: mighty resilience
-   %^RESET%^L7: command the stone
+ %^RESET%^L1: earthen blood
+ %^RESET%^L4: mighty resilience
+ %^RESET%^L7: command the stone
 
 Dwarves live and die among the stones, learning and living their secrets. It is said that the very earth itself whispers to them - and certainly, to a select few individuals, it does. These dwarves are known as Stonelords. Gaining a connection beyond even that of most of their kind, they can draw upon the infinite reserves of power hidden within the earth at their feet, shaping it to their will. While dwarven fighters and paladins are the most common stonelords, any class can take up this calling. They usually work within dwarven communities as protectors and leaders.
 

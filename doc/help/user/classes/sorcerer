@@ -2,17 +2,17 @@
 
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 charisma
 %^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow, elf, drow, halfling,
-   gnome, voadkyn, kobold, goblin, orc (tanarukk), yuan-ti, shade
+ gnome, voadkyn, kobold, goblin, orc (tanarukk), yuan-ti, shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
 %^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, psion
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, perception, influence, spellcraft
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: simple weapon proficiency, spell focus
-   %^RESET%^Also: one bonus spellcraft feat at L1, and every five class levels thereafter
+ %^RESET%^L1: simple weapon proficiency, spell focus
+ %^RESET%^Also: one bonus spellcraft feat at L1, and every five class levels thereafter
 
-Sorcerers are masters of arcane magic, but in a completely different sense to mages. Where a wizard will study and call upon the weave by theory and ritual, sorcerers instead harness raw talent and instinct to produce such spell effects. A typical sorcerer turns to an adventurer'slife to prove and improve their command of the magical arts.  While the latent talent is inborn, part of their soul, the development of such skill becomes a quest in and of itself for many. Many sorcerers, both good and evil, come to consider themselves above other, lesser mortals due to their talents.
+Sorcerers are masters of arcane magic, but in a completely different sense to mages. Where a wizard will study and call upon the weave by theory and ritual, sorcerers instead harness raw talent and instinct to produce such spell effects. A typical sorcerer turns to an adventurer'slife to prove and improve their command of the magical arts. While the latent talent is inborn, part of their soul, the development of such skill becomes a quest in and of itself for many. Many sorcerers, both good and evil, come to consider themselves above other, lesser mortals due to their talents.
 
 Sorcerers are spontaneous caster that uses %^ORANGE%^<master>%^RESET%^ command to learn new spells. They %^ORANGE%^<cast>%^RESET%^ any of spell they learned by expending spell slot prepared with %^ORANGE%^<prepare>%^RESET%^ command. You can see how many slots per level you have prepared with %^ORANGE%^<recall sorcerer spells>%^RESET%^.
 

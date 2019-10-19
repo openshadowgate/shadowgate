@@ -13,7 +13,9 @@ void create() {
     set_syntax("cast CLASS regeneration on TARGET");
     set_description("This spell will cause the target to continuously regenerate a small amount of health over a long "
 "period of time.  It cannot be used on the same target more than once, and does not work in conjunction with the feat "
-"of the same name.");
+"of the same name.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ regeneration *feats");
     set_verbal_comp();
     set_target_required(1);
 	set_helpful_spell(1);

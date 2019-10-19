@@ -26,8 +26,14 @@ string query_cast_string() {
     CASTER->QP+" hands, gathering in energy.";
 }
 
+int set_darkness_power()
+{
+    return 1;
+}
+
 void spell_effect(int prof) {
-    int level; 
+    int level;
+    int power = set_darkness_power();
 
     level = clevel;
     if (interactive(caster)) {
@@ -41,17 +47,17 @@ void spell_effect(int prof) {
         //level = (( 11 - level ) * 2 );
 
         tell_room(place, caster->QCN+ " causes the room to darken.",caster);
-    }  
+    }
     if(level > 20) level = 20;
-    ob = new("/cmds/priest/obj/dark");
+    ob = new("/d/magic/obj/darkness");
     call_out("dest_effect", 1800 + (level * 10));
     ob->set_property("spell", TO);
     ob->set_property("spelled", ({TO}) );
 
     if (!target)
-        ob->move((TP));
+        ob->move((TP),power);
     else
-        ob->move((target));
+        ob->move((target),power);
     spell_successful();
 }
 

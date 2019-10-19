@@ -6,9 +6,9 @@ create() {
    set_id(({ "musket", "gun"}));
    set_name("musket");
    set_short("A musket");
-   set_ammo("cartrige");
+   set_ammo("cartridge");
 
-   set_long("This long-barreled firearm has a much greater range than a pistol. It shoots paper cartriges.");
+   set_long("This long-barreled firearm has a much greater range than a pistol. It shoots paper cartridges.");
    set_two_handed();
    set_weight(9);
    set_size(2);

@@ -21,15 +21,11 @@ int cmd_money(string str) {
      tell_room(ETP,this_player()->query_cap_name()+" comes up with empty pockets.",TP);
         return 1;
     }
-    tell_room(ETP,this_player()->query_cap_name()+" fishes through "+
-      this_player()->query_possessive()+" pockets examining some money.",TP);
     write("%^BOLD%^%^CYAN%^In your pockets you find these coins:");
-    write("%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     for(i=0, tmp = sizeof(currs); i<tmp; i++) {
-        borg = sprintf("     %%^CYAN%%^%-10s%%^MAGENTA%%^:  %%^GREEN%%^%s %%^BOLD%%^%%^GREEN%%^coins.",capitalize(currs[i]),english_number(this_player()->query_money(currs[i])));
+        borg = sprintf(" %%^CYAN%%^%-10s%%^MAGENTA%%^:  %%^GREEN%%^%s %%^BOLD%%^%%^GREEN%%^coins.",capitalize(currs[i]),english_number(this_player()->query_money(currs[i])));
     	write((borg));
     }
-    write("%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     return 1;
 }
 
@@ -65,7 +61,7 @@ Stortest way to write a number prevails in common use.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-inventory, eq, score
+inventory, eq, score, give, pp, steal
 "
     );
 }

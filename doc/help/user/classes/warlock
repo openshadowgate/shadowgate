@@ -7,13 +7,13 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, athletics, influence, spellcraft
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: simple weapon proficiency, light armor proficiency, spell focus
-   %^RESET%^L7: damage resistance
-   %^RESET%^L9: energy resistance
-   %^RESET%^L12: craft magical equipment
-   %^RESET%^L14: improved damage resistance
-   %^RESET%^L17: regeneration
-   %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
+ %^RESET%^L1: simple weapon proficiency, light armor proficiency, spell focus
+ %^RESET%^L7: damage resistance
+ %^RESET%^L9: energy resistance
+ %^RESET%^L12: craft magical equipment
+ %^RESET%^L14: improved damage resistance
+ %^RESET%^L17: regeneration
+ %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
 
 A warlock is a being whose soul is suffused with perilous magic, whetherby willing or unwilling means. They do not approach magic through themedium of spells, much as a mage or sorcerer might. Instead, they caninvoke magic through simply an act of will, resulting in a limited butpowerful array of magical aids, trickery, and powerful blasts of eldrichpower. While these effects are not spells, as spell-like abilities theyare subject to most of the same factors, and benefit from most of thesame feats and other empowerments, unless otherwise specified. Giventheir simple somatic attributes, warlock invocations can be cast in lightarmor.
 

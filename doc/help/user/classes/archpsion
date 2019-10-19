@@ -1,32 +1,17 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
 %^RESET%^%^CYAN%^Archpsion:
 
-%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Psion
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the Spellcraft Skill
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Base Intelligence (before equipment modifiers)
-
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, 
-               half-drow, kobold, hobgoblin, yuan-ti, 
-               halfling (ghostwise), dwarf (duergar)
-               
-%^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, sorcerer, psywarrior
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, spellcraft (see below)
+%^RESET%^%^CYAN%^Requirements:
+%^RESET%^ Level 40 Character
+%^RESET%^ Level 20 Psion
+%^RESET%^ 20 Points Spent in the Spellcraft Skill
+%^RESET%^ 20 Base Intelligence (before equipment modifiers)
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: power surge
-   %^RESET%^L4: kinetic conversion
-   %^RESET%^L7: perfect manifesting
+ %^RESET%^L1: power surge
+ %^RESET%^L4: kinetic conversion
+ %^RESET%^L7: perfect manifesting
 
-The archpsion is the psions what the archmage is to mages.  An archpsion
-has the ability to turn his concentration into stronger spells for short
-bursts of improved power.  Once an archpsion reaches level four, he can
-also transfer damage from kinetic based attacks directly into power points.
-Finally, once an archpsion reaches level seven, he is able to concentrate
-so perfectly on the act of manifesting his powers that sometimes no power
-points will be used when manifesting.
+The archpsion is the psions what the archmage is to mages. An archpsion has the ability to turn his concentration into stronger spells for short bursts of improved power. Once an archpsion reaches level four, he can also transfer damage from kinetic based attacks directly into power points. Finally, once an archpsion reaches level seven, he is able to concentrate so perfectly on the act of manifesting his powers that sometimes no power points will be used when manifesting.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, prepare, disciplines, master

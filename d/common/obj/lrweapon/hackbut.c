@@ -6,7 +6,7 @@ create() {
    set_id(({ "hackbut", "gun"}));
    set_name("hackbut");
    set_short("A hackbut");
-   set_ammo("cartrige");
+   set_ammo("cartridge");
 
    set_long("This double-length rifle uses a pair of trunnions to mount its barrel into a swiveling mechanism fastened to a lightweight, two-wheeled carriage.");
    set_two_handed();

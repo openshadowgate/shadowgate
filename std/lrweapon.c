@@ -137,11 +137,6 @@ int __Shoot(string str) {
 
     if(!ammo = present(TO->query_ammo(),ETO))
         return notify_fail("You don't have any "+query_ammo()+" for this "+query_name()+"!\n");
-//   if(ammo->query_shots() < 1) { // changing to support unlimited quivers. N, 1/13.
-    if(!ammo->query_shots()) {
-        ETO->command("unwield bow");
-        return notify_fail("You're out of ammunition.\n");
-    }
     if(reload && userp(ETO)) {
         write("You are reloading");
         return 1;
@@ -150,7 +145,7 @@ int __Shoot(string str) {
         return notify_fail("Yeah that monster might let you do that.\n");
 
 //Following code borrowed from /cmds/mortal/_peer, to fix problems with players with sight bonuses not being able to shoot in the dark - Lujke
-    x = TP->light_blind(0); 
+    x = TP->light_blind(0);
     if(x)
     {
         tell_object(TP, TP->light_blind_fail_message(x));
@@ -192,7 +187,7 @@ int __Shoot(string str) {
 
     if(distance > query_range(2))
         return notify_fail("This weapon will not shoot that far!\n");
-    if (current->query_door(dir) 
+    if (current->query_door(dir)
         && !current->query_open(current->query_door(dir))) {
         write("There seems to be a closed door between you and your target.");
         return 1;
@@ -202,7 +197,7 @@ int __Shoot(string str) {
         if (autoAim && present(target,current)) {
             break;
         }
-     
+
         if(inc < distance-1) {
 
             roomList[inc+1] = current;
@@ -222,14 +217,14 @@ int __Shoot(string str) {
                     return notify_fail("You can not shoot from the outdoors to the indoors!\n");
             }
         }
-        if (current->query_door(dir) 
+        if (current->query_door(dir)
             && !current->query_open(current->query_door(dir))) {
             write("There seems to be a closed door between you and your target.");
             return 1;
         }
     }
     //following lines moved here to correct light blindness calculations - Lujke
-    x = TP->light_blind_remote(0, current, distance); 
+    x = TP->light_blind_remote(0, current, distance);
     tell_object(TP, "x = " + x + ", room = " + base_name(env) + ", distance = " + distance);
     if (x !=0)
     {
@@ -250,7 +245,6 @@ int __Shoot(string str) {
 
     tell_object(ETO,"You load your "+query_name()+" with "+query_ammo()+" and shoot "+dir+"!");
     message("combat", capitalize(query_ammo())+" flies "+dir+".\n", roomList, ETP);
-    ammo->use_shots();
 
     reloadCount++;
     if(reloadCount == calc_speed()) {
@@ -276,7 +270,7 @@ int __Shoot(string str) {
     thaco = ETO->Thaco(1,foe,TO);
     flag = 1;
     whom = foe->query_cap_name();
-    
+
     if(autoAim) {
         for(inc = 0;inc < sizeof(roomList);inc++) {
             if(!objectp(roomList[inc])) {
@@ -311,15 +305,15 @@ int __Shoot(string str) {
             damage = query_damage();
 
         damage = damage_done(foe, damage);
-      
+
         damage += TP->query_property("damage bonus");
-      
+
         if (perfect || mPerfect) {
             damage=damage*4;
         }
         tell_room(current,"A "+ capitalize(query_ammo())+" from "+fdir+" hits "+whom+"!",foe);
 //Bows are erroring all over the place on the line about querying a hit message, and I can't
-//seem to find where any are set on standard ammo. Removing this for now to see if it 
+//seem to find where any are set on standard ammo. Removing this for now to see if it
 //fixes the errors. ~Circe~ 4/30/13
         write("You hit "+whom+"!");
         tell_object(foe,"A "+ capitalize(query_ammo())+" from "+fdir+" hits you!");
@@ -342,14 +336,11 @@ int __Shoot(string str) {
             return 1;
         }
     }
-    if(ammo->query_shots() == 0){
-        ammo->discard_quiver();
-    }
-//above added by Circe with help from g to hopefully fix problem 
+//above added by Circe with help from g to hopefully fix problem
 //with the arrows desting before the damage is done.  12/20/04
 //   ammo->use_shots();  moved up to fix bugs of not using ammo *Styx*  11/14/04
     if(!userp(foe) && living(foe)){
-        env = environment(foe); 
+        env = environment(foe);
         file = base_name(EETO);
         if(foe->query_paralyzed() || ((object *)foe->query_attackers()!= ({})
                                       && (member_array(ETO,foe->query_attackers()) == -1 && !present(ETO,EETO)))) {
@@ -390,7 +381,7 @@ void move_monster(object foe, object player) {
 
     roomList = targets[foe];
     if(!pointerp(roomList) || !sizeof(roomList)) {
-        return;                     
+        return;
     }
 
     current = roomList[sizeof(roomList)-1];

@@ -116,10 +116,7 @@ int eat(string str)
         tell_object(TP, "You are too busy to eat anything!\n");
         return 1;
     }
-    if(!TP->add_stuffed(strength)) {
-	write("You are way too full for that!\n");
-	return 1;
-    }
+    TP->add_stuffed(strength);
     write(my_mess);
 	POISON_D->is_object_poisoned(TO, TP, "eat", 1);
     say(TPQCN+" "+your_mess);
@@ -140,13 +137,7 @@ int drink(string str)
         return 1;
     }
     if(query("type") == "soft drink")
-    {
-        if(!TP->add_quenched(strength*20))
-        {
-            tell_object(TP, "You are too bloated to drink that!\n");
-            return 1;
-        }
-    }
+        TP->add_quenched(strength*20);
     else if(query("type") == "caffeine")
     {
         if((int)TP->query_intox() < strength)
@@ -154,11 +145,7 @@ int drink(string str)
             tell_object(TP,"You do not feel the need for that right now.\n");
             return 1;
         }
-        if(!TP->add_quenched(strength*10))
-        {
-            tell_object(TP,"You are too bloated to drink that!\n");
-            return 1;
-        }
+        TP->add_quenched(strength*10);
         TP->add_intox(-(strength/2)*10);
     }
     else if(query("type") == "alcoholic")
@@ -171,11 +158,7 @@ int drink(string str)
     }
     else if(query("type") == "water")
     {
-        if(!TP->add_quenched(strength*50))
-        {
-            tell_object(TP,"Your stomach is sloshing already!\n");
-            return 1;
-        }
+        TP->add_quenched(strength*50);
     }
     myType = query("type");
     TP->add_hp(healing);

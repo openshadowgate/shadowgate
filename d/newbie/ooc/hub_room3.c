@@ -103,7 +103,7 @@ int getmap() {
 int GoThroughDoor() {
    if(!userp(TP)) return 0;
    if(avatarp(TP)) return 1;
-   if(newbiep(TP) || (!high_mortalp(TP) && !avatarp(TP) && !TP->query("ex_hm") && !TP->query("n_ambassador") && !OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()))) {
+   if(newbiep(TP)) {
       write("This portal is reserved for high mortals to return from visiting here.  "
 	"Please seek out the proper exit to the lands beyond when you are ready.  "
 	"If you are not a newbie and are here, you shouldn't be so take the long "

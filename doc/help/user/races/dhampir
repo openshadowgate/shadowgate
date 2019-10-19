@@ -2,7 +2,8 @@
 
 %^BOLD%^%^BLUE%^Level adjustment: %^RESET%^1 (requires an account with a lvl 30 character)
 %^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 dexterity, -2 constitution, +2 charisma
-%^BOLD%^%^BLUE%^Skill adjustments: +2 perception, +2 influence
+%^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+2 perception, +2 influence
+%^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^negative energy affinity
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^invisibility, darkvision, gaseous form
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any
@@ -17,4 +18,4 @@ Tall and slender and with well-defined musculature, dhampirs look like statuesqu
 
 While many dhampirs can pass as humans in ideal conditions, their features are inevitably more pronounced and they move with an unnaturally fluid grace. All dhampirs have elongated incisors. While not true fangs, these teeth are sharp enough to draw blood, and many suffer a reprehensible desire to indulge in sanguinary delights, despite the fact that the act provides most no physical benefit.
 
-%^BOLD%^%^BLUE%^See also: human, vampire, undead
+%^BOLD%^%^BLUE%^See also: %^RESET%^human, vampire, undead

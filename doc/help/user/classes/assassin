@@ -1,23 +1,18 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
 %^RESET%^%^CYAN%^Assassin:
 
-%^RESET%^%^CYAN%^Requirements:%^RESET%^ Level 40 Character
-%^RESET%^%^CYAN%^             %^RESET%^ Level 20 Base class
-%^RESET%^%^CYAN%^             %^RESET%^ 16 Base Intelligence
-%^RESET%^%^CYAN%^             %^RESET%^ 20 Points Spent in the stealth skill
-%^RESET%^%^CYAN%^             %^RESET%^ "Price of The Void" quest completed
-
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ see Base Class
+%^RESET%^%^CYAN%^Requirements:
+%^RESET%^ Level 40 Character
+%^RESET%^%^CYAN%^ %^RESET%^ Level 20 Base class
+%^RESET%^%^CYAN%^ %^RESET%^ 16 Base Intelligence
+%^RESET%^%^CYAN%^ %^RESET%^ 20 Points Spent in the stealth skill
+%^RESET%^%^CYAN%^ %^RESET%^ "Price of The Void" quest completed
 
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any Evil
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ psion, psywarrior, monk
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Saving throws:%^RESET%^ see Base Class
-%^RESET%^%^CYAN%^Class Skills:%^RESET%^ see Base Class
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
-   %^RESET%^L1: crit
-   %^RESET%^L4: combat critical
-   %^RESET%^L7: void stalker
+ %^RESET%^L1: crit
+ %^RESET%^L4: combat critical
+ %^RESET%^L7: void stalker
 
 Warning: This class is not yet implemented.
 

@@ -1385,8 +1385,9 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     if (living(caster) && base_name(PO) != "/d/magic/obj/contingency")
     {
         tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
-        tell_room(environment(caster),caster->QCN+
-            " begins to "+whatdo+" a "+whatsit+"!", caster);
+        if(spell_type!="innate")
+            tell_room(environment(caster),caster->QCN+
+                      " begins to "+whatdo+" a "+whatsit+"!", caster);
 
         if(objectp(target) && target != caster) { check_reflection(); }
 
@@ -1545,14 +1546,15 @@ void check_fizzle(object ob) {
     }
 
     if(objectp(target))
-        if((int)target->query_property("spell invulnerability")>query_spell_level(spell_type))
-        {
-            tell_object(caster,"%^CYAN%^Your "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly.");
-            tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly .",caster);
-            caster->removeAdminBlock();
-            TO->remove();
-            return;
-        }
+        if(spell_type!="warlock")
+            if((int)target->query_property("spell invulnerability")>query_spell_level(spell_type))
+            {
+                tell_object(caster,"%^CYAN%^Your "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly.");
+                tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly .",caster);
+                caster->removeAdminBlock();
+                TO->remove();
+                return;
+            }
 
     if (fizzle || place->query_property("no magic")) {
         tell_object(caster,"%^CYAN%^Your "+whatsit+" fizzles harmlessly.");
@@ -1739,13 +1741,14 @@ varargs int do_spell_damage( object victim, string hit_limb, int wound,string da
         return 1;
     }
 
-    if((int)victim->query_property("spell invulnerability")>query_spell_level(spell_type))
-    {
-        tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
-        tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
-        TO->remove();
-        return 1;
-    }
+    if(spell_type!="warlock")
+        if((int)victim->query_property("spell invulnerability")>query_spell_level(spell_type))
+        {
+            tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
+            tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
+            TO->remove();
+            return 1;
+        }
 
     if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }
 
@@ -1811,8 +1814,9 @@ void define_clevel()
     if(spell_type == "cleric" ||
        spell_type == "druid")
         if(FEATS_D->usable_feat(caster, "mastery of power")) clevel += 4;
-    if (FEATS_D->usable_feat(caster, "eldritch conditioning"))
-        clevel = caster->query_character_level();
+    if(FEATS_D->usable_feat(caster, "eldritch conditioning"))
+        if(spell_type == caster->query("eldritch_knight_base_class"))
+            clevel = caster->query_character_level();
 
     if (FEATS_D->usable_feat(caster, "ragecaster"))
     {
@@ -1839,7 +1843,8 @@ void define_base_spell_level_bonus()
 
 void define_base_damage(int adjust)
 {
-    if(query_aoe_spell()||query_traveling_aoe_spell())
+    if(query_aoe_spell() ||
+       query_traveling_aoe_spell())
     {
         sdamage = roll_dice(1,20)*(clevel/18+1);
     }
@@ -1881,7 +1886,7 @@ void define_base_damage(int adjust)
 
     if(FEATS_D->is_active(caster,"eldritch warfare"))
         if(sdamage>100)
-            sdamage = 75+roll_dice(10,5);
+            sdamage = 50+roll_dice(10,5);
 
 }
 

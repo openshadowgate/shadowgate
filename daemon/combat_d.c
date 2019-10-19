@@ -390,8 +390,9 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
     if(type == "negative energy")
     {
-        if(!!targ->is_undead() ||
-           targ->query_property("heart of darkness"))
+        if(targ->is_undead() ||
+           targ->query_property("heart of darkness") ||
+           targ->query("subrace")=="dhampir")
             damage = -abs(damage);
         else
             damage = abs(damage);
@@ -399,7 +400,8 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
     if(type == "positive energy")
     {
-        if(targ->is_undead())
+        if(targ->is_undead() ||
+           targ->query("subrace")=="dhampir")
             damage = abs(damage);
         else
             damage = -abs(damage);

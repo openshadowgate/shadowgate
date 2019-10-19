@@ -12,7 +12,8 @@ void create()
     set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS circle of death");
-    set_description("The caster draws a circle around herself and channels negative energy ourwards, destroying undead creatures that are not able to withstand it, but not affecting at all those of the strong will.");
+    set_damage_desc("negative energy to living");
+    set_description("The caster draws a circle around herself and channels negative energy outwards, destroying living creatures that are not able to withstand it, but not affecting at all those of the strong will.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -38,8 +39,7 @@ void spell_effect(int prof)
     {
         if(do_save(foe,6) ||
            foe->query_property("no death") ||
-           ((string)foe->query_race() == "undead") ||
-           foe->query_property("undead"))
+           foe->is_undead())
         {
             tell_object(foe,"%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
             tell_room(place,"%^BLUE%^%^BOLD%^"+foe->QCN+" seems to be unaffected by the fell powers!",foe);
