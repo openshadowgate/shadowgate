@@ -1116,6 +1116,9 @@ void build_race()
     ETO->init_lang();
     if(MyCharacterInfo["stats"]["intelligence"]>16)
         build_bonus_language();
+    if(OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
+       OB_ACCOUNT->is_high_mortal(ETO->query_true_name()))
+        build_template();
 }
 
 void build_age()
