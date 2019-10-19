@@ -26,6 +26,7 @@
 %^RED%^   * damage to will
 %^RED%^   * damage to cha and str score
 %^RED%^   * damage to fast healing
+%^RED%^ * can't be raised after discorporation
 
 %^BOLD%^%^BLACK%^Description:
 %^RED%^A vampire is an acquired template over the undead template. Thus it inherits all the properties of the undead template, and also that of the parent race. However, the way vampires come into existence, and the existence itself, are cardinally different from that of other undead monsters.
