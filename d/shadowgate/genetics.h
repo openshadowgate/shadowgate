@@ -5,6 +5,8 @@
 
 #define HEIGHTS ({"short", "average", "tall"})
 
+#define TEMPLATES ({"none","undead", "vampire"})
+
 #define HEIGHT_CATS (["short" : 1 + random(30), "average" : 31 + random(40), "tall" : 71 + random(30) ])
 
 #define WEIGHT_CATS (["1" : (["display name" : "1 Scrawny", "value" : 50 + random(60), "choice" : "Scrawny",]),\

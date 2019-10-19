@@ -187,7 +187,7 @@ void confirm_reset(string str, string what)
 varargs void full_reset()
 {
         MyCharacterInfo = (["stats" : ([ "charisma" : 6, "intelligence" : 6, "dexterity" : 6, "constitution" : 6, "wisdom" : 6, "strength" : 6]) ]);
-        MyCharacterInfo += (["race" : (["race name" : "NIL", "hair color" : "NIL", "eye color" : "NIL", "height" : 0, "weight" : 0, "age" : 0, "restricted alignments" : ({}), "subrace" : "NIL", "bonus language": "NIL" ]) ]);
+        MyCharacterInfo += (["race" : (["race name" : "NIL", "hair color" : "NIL", "eye color" : "NIL", "height" : 0, "weight" : 0, "age" : 0, "restricted alignments" : ({}), "subrace" : "NIL", "bonus language": "NIL", "template" : "NIL" ]) ]);
         MyCharacterInfo += (["myclass" : (["minimum stats" : ([]), "myclass name" : "NIL", "available races" : ({}), "restricted alignments" : ({}), "available subraces" : ({}) ]) ]);
         MyCharacterInfo["myclass"] += (["alignment" : 0, "align title" : "NIL", "deity" : "NIL", "unique choice" : "NIL", "unique type" : "NIL" ]);
         MyCharacterInfo["race"] += (["psuedo race" : "NIL", "weight choice" : "NIL", "height choice" : "NIL", "age choice" : "NIL", "body type" : "NIL"]);
@@ -244,6 +244,13 @@ void clear_eyes()
 void clear_bonus_language()
 {
     MyCharacterInfo["race"]["bonus language"] = "NIL";
+}
+
+void clear_template()
+{
+    MyCharacterInfo["race"]["template"] = "NIL";
+    ETO->delete("undead");
+    ETO->delete("vampire");
 }
 
 void clear_body_type()
@@ -353,6 +360,7 @@ varargs void reset_character_info(string what, int flag)
                 clear_age();
                 clear_alignment();
                 clear_bonus_language();
+                clear_template();
                 clear_deity();
                 build_restrictions("myclass");
                 FirstBuild = 0;
@@ -366,6 +374,7 @@ varargs void reset_character_info(string what, int flag)
                 clear_eyes();
                 clear_subrace();
                 clear_bonus_language();
+                clear_template();
                 build_restrictions("myclass");
                 build_restrictions("race");
                 if(FirstBuild) { BuildArray = ({"special", "subrace", "stats", "hair color", "eye color", "bonus language"}); EndAt = "finalize"; }
@@ -381,6 +390,7 @@ varargs void reset_character_info(string what, int flag)
                 clear_age();
                 clear_alignment();
                 clear_bonus_language();
+                clear_template();
                 clear_deity();
                 build_restrictions("myclass");
                 build_restrictions("race");
@@ -420,6 +430,10 @@ varargs void reset_character_info(string what, int flag)
             case "bonus language":
                 clear_bonus_language();
                 if(FirstBuild) { BuildArray = ({"bonus language"}); EndAt = "finalize"; }
+                break;
+            case "template":
+                clear_bonus_language();
+                if(FirstBuild) { BuildArray = ({"template"}); EndAt = "finalize"; }
                 break;
             case "alignment":
                 clear_alignment();
@@ -778,6 +792,8 @@ mixed display_my_character()
     tell_object(ETO, "  "+arrange_string(r+"Age "+b+"--------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["age choice"]));
     if(MyCharacterInfo["stats"]["intelligence"]>16)
         tell_object(ETO, "  "+arrange_string(r+"Bonus Language "+b+"---------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["bonus language"]));
+    if(stringp(MyCharacterInfo["race"]["template"]))
+        tell_object(ETO, "  "+arrange_string(r+"Template "+b+"---------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["race"]["template"]));
     tell_object(ETO, "  "+arrange_string(r+"Alignment "+b+"--------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["align title"]));
     tell_object(ETO, "  "+arrange_string(r+"Deity "+b+"------------------", len)+g+" : "+re+c+capitalize(MyCharacterInfo["myclass"]["deity"]));
 
@@ -874,6 +890,10 @@ void finalize_character()
                 build_age();
                 break;
             case "bonus language":
+                build_bonus_language();
+                break;
+            case "template":
+                build_template();
                 break;
             case "alignment":
                 build_alignment();
@@ -1037,6 +1057,26 @@ void build_bonus_language()
     ETO->set_lang(MyCharacterInfo["race"]["bonus language"],100);
 }
 
+void build_template()
+{
+    string template = MyCharacterInfo["race"]["template"];
+    if(!objectp(TO)) return;
+    if(!objectp(ETO)) return;
+    if(template=="undead" ||
+       template=="Undead")
+    {
+        ETO->set("undead",1);
+        ETO->set_property("undead",1);
+    }
+    if(template=="vampire" ||
+       template=="Vampire")
+    {
+        ETO->set("undead",1);
+        ETO->set_property("undead",1);
+        ETO->set("vampire",1);
+    }
+}
+
 void build_subrace()
 {
     int x;
@@ -1175,7 +1215,7 @@ void ShowStep()
             break;
         case "hair color": case "eye color":
         case "height": case "weight": case "body type":
-        case "age": case "bonus language":
+        case "age": case "bonus language": case "template":
             pick_genetics();
             break;
         case "finalize":
@@ -1429,6 +1469,9 @@ void pick_genetics()
             else
                 my_choices = ({"common","undercommon"});
         }
+            break;
+        case "template":
+            my_choices = TEMPLATES;
             break;
         case "height":
             my_choices = HEIGHTS;
@@ -2024,6 +2067,17 @@ varargs int choose(string str, int flag)
             if(check_my_choice(str)) { pick_genetics(); return 1;}
             extra_display(str);
             MyCharacterInfo["race"]["body type"] = str;
+            if(OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
+               OB_ACCOUNT->is_high_mortal(ETO->query_true_name()))
+                MyPlace = "template";
+            else
+                MyPlace = "age";
+            ProcessStep();
+            break;
+        case "template":
+            if(check_my_choice(str)) { pick_genetics(); return 1;}
+            extra_display(str);
+            MyCharacterInfo["race"]["template"] = str;
             MyPlace = "age";
             ProcessStep();
             break;

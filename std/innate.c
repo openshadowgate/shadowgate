@@ -83,6 +83,7 @@ void InitInnate()
         feat_spells += ([
                             "vampiric touch" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                             "animate dead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                            "exhume corpses" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                             "create undead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                             "create greater undead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
             ]);
