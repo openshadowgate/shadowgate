@@ -37,7 +37,7 @@ void heart_beat()
     return;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^MAGENTA%^Twinkling motes of light gather"+
 		" in your hands as you sing your prayer.");
@@ -50,7 +50,7 @@ string query_cast_string()
 int preSpell()
 {
     if(!objectp(target))
-    { 
+    {
         tell_object(caster,"You need a target for this spell.");
         return 0;
     }
@@ -65,8 +65,8 @@ int preSpell()
 void spell_effect(int prof) {
     int duration;
 // SC/MC separation removed; no point on 3e system as it will simply scale with class levels.
-    duration = (ROUND_LENGTH * 10) * clevel;
-    bonus = clevel/10; 
+    duration = (ROUND_LENGTH * 3/2) * clevel;
+    bonus = clevel/10;
 
     if(!present(target,place)) {
         tell_object(caster,"Your target has left the area.");
@@ -101,7 +101,7 @@ void spell_effect(int prof) {
 }
 
 void dest_effect(){
-    if(objectp(target)) { 
+    if(objectp(target)) {
 	    tell_room(place,"%^BOLD%^%^MAGENTA%^The twinkling motes of light "+
 		    "around "+target->QCN+" fade away.");
 	    tell_object(target,"%^MAGENTA%^%^BOLD%^The twinkling motes of "+
