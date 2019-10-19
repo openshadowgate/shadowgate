@@ -3,21 +3,15 @@
 
 inherit UNDEADINHERIT;
 
+//https://www.d20pfsrd.com/bestiary/monster-listings/undead/vampire/vampire-spawn
 void create(){
 
     ::create();
     set_name("vampire");
-    set_id(({"vampire knight","vampire","undead","Vampire knight"}));
-    set_short("%^RESET%^%^RED%^Vampire %^BOLD%^%^BLACK%^knight%^RESET%^");
-    set_long("%^RED%^Before you floats a powerful humanoid figure encased into heavy armour, wielding a huge two-handed sword. It's skin is gray, ears are bat like and eyes glow with undead red hatred towards all living. Despite being in heavy armor it floats above the ground with ease and moves with supernatural agility.
-
-Like spells of the family this spell will contribute towards your undead pool size.
-
-To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
-To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
-    set_race("undead");
+    set_id(({"vampire spawn","vampire","undead","Vampire spawn","spawn"}));
+    set_short("%^RESET%^%^BLUE%^V%^BOLD%^%^BLUE%^ampi%^RESET%^%^BLUE%^r%^BOLD%^%^BLUE%^e %^BLUE%^s%^RESET%^%^BLUE%^p%^BOLD%^%^BLUE%^a%^RESET%^%^BLUE%^w%^BOLD%^%^BLUE%^n%^RESET%^");
+    set_long("%^RED%^A disfigured humanoid figure stands in front of you. It is hard to say what it has been in its former life. Its skin is gray, it is slightly crouching its lithe athletic body on its elongated limbs. It has long bat-like ears, and the face is disfigured with the large jaw that has long fangs protruding out of the mouth. Its eyes glow red with supernatural hatred and hunger.");
+    set_race("human");
     set_gender("male");
 
     set_size(2);
@@ -35,47 +29,79 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_property("vampire",1);
     set_body_type("human");
     set_property("full attacks",1);
+    set_property("fast healing",5);
 
-    set_stats("strength",22);
-    set_stats("dexterity",22);
+    set_property("spell damage resistance",5);
+    set_property("silver resistance",5);
+    set_property("electricity resistance",5);
+
+    set_stats("strength",14);
+    set_stats("dexterity",14);
     set_stats("constitution",10);
-    set_stats("intelligence",18);
-    set_stats("wisdom",18);
-    set_stats("charisma",22);
+    set_stats("intelligence",12);
+    set_stats("wisdom",14);
+    set_stats("charisma",18);
 
-    set_spells(({"vampiric touch",
-                    "eyebite",
-                    }));
-    set_spell_chance(33);
+    set_alignment(9);
+
+    set_funcs(({"blood_drain"}));
+    set_func_chance(85);
     set_property("cast and attack",1);
 
-    set_alignment(6);
+    add_limb("mouth",0,0,0);
+    set_attack_limbs(({"right hand","left hand","mouth"}));
+    set_wielding_limbs( ({"left hand","right hand"}) );
 
-    {
-        object stuff;
-
-        stuff = new("/d/common/obj/weapon/bastard_two");
-        stuff->set_property("monsterweapon", 1);
-        stuff->move(TO);
-        weapon = stuff;
-        command("wield halberd");
-        stuff = new("/d/common/obj/armour/plate");
-        stuff->set_property("monsterweapon", 1);
-        stuff->move(TO);
-        command("wear chain");
-    }
+    set_nat_weapon_type("piercing");
+    set_damage(2,8);
 
     add_search_path("/cmds/feats");
     add_search_path("/cmds/fighter");
 
     set_monster_feats(({
-                "strength of arm",
-                    "blade block",
-                    "light weapon",
+                "toughness",
+                    "regeneration",
                     "rush",
+                    "parry"
                     }));
 
     set_fighter_style("soldier");
-    command("message in floats in.");
-    command("message out floats $D.");
+    command("message in stumbles in.");
+    command("message out stumbles to $D.");
+}
+
+void blood_drain(object targ)
+{
+    string what;
+    if(!objectp(targ))
+        return;
+    if(!objectp(TO))
+        return;
+    if(!objectp(ETO))
+        return;
+    if(targ->is_undead())
+        return;
+    if(targ->query_property("garlic_scent"))
+       return;
+    what = (!random(2))?"%^BOLD%^bite":"%^BOLD%^%^BLUE%^claw";
+    tell_room(ETO,"%^RED%^A vampire spawn violently "+what+"s%^RESET%^%^RED%^ "+targ->QCN+"!",targ);
+    tell_object(targ,"%^RED%^You feel your life draining away as vampire spawn "+what+"s%^RESET%^%^RED%^ you "+targ->QCN+"!",targ);
+    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1,8), "negative energy");
+    targ->cause_typed_damage(TO, "torso", -roll_dice(1,12)*2, "negative energy");
+}
+
+void init()
+{
+    if(!TO->query_property("gaseous form"))
+        new("/cmds/spells/g/_gaseous_form.c")->use_spell(TO,TO,100,100,"mage");
+    ::init();
+}
+
+
+int die()
+{
+    tell_room(ETO,"%^BLUE%^A vampire spawn turns into dust.");
+    TO->remove();
+    ::die();
+    return 1;
 }
