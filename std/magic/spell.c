@@ -1885,8 +1885,7 @@ void define_base_damage(int adjust)
     }
 
     if(FEATS_D->is_active(caster,"eldritch warfare"))
-        if(sdamage>100)
-            sdamage = 50+roll_dice(10,5);
+        sdamage = roll_dice(6,sdamage/8);
 
 }
 
