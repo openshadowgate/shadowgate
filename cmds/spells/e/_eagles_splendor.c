@@ -16,9 +16,6 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    set_components(([
-      "bard" : ([ "conceit" : 1, ]),
-    ]));
 	set_helpful_spell(1);
 }
 
