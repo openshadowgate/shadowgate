@@ -66,7 +66,7 @@ void InitInnate()
         InnateAbilities += ([
                                 "create spawn" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "twilight shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "dominate" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "domination" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "gaseous form" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "night swarm" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "spider climb" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
