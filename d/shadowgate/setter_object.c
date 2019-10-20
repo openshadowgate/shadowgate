@@ -2070,8 +2070,9 @@ varargs int choose(string str, int flag)
             if(check_my_choice(str)) { pick_genetics(); return 1;}
             extra_display(str);
             MyCharacterInfo["race"]["body type"] = str;
-            if(OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
-               OB_ACCOUNT->is_high_mortal(ETO->query_true_name()))
+            if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
+                OB_ACCOUNT->is_high_mortal(ETO->query_true_name())) &&
+                MyCharacterInfo["stats"]["constitution"]==10)
                 MyPlace = "template";
             else
                 MyPlace = "age";
