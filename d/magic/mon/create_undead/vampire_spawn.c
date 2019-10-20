@@ -92,8 +92,9 @@ int blood_drain(object targ)
 
 void init()
 {
-    if(!TO->query_property("gaseous form"))
-        new("/cmds/spells/g/_gaseous_form.c")->use_spell(TO,TO,100,100,"mage");
+    if(!TO->query_casting())
+        if(!TO->query_property("gaseous form"))
+            new("/cmds/spells/g/_gaseous_form.c")->use_spell(TO,TO,100,100,0);
     ::init();
 }
 

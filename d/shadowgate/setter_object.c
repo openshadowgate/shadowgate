@@ -2071,8 +2071,7 @@ varargs int choose(string str, int flag)
             extra_display(str);
             MyCharacterInfo["race"]["body type"] = str;
             if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
-                OB_ACCOUNT->is_high_mortal(ETO->query_true_name())) &&
-                MyCharacterInfo["stats"]["constitution"]==10)
+                OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
                 MyPlace = "template";
             else
                 MyPlace = "age";
