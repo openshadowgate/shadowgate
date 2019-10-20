@@ -8,7 +8,7 @@ void create() {
     feat_category("Presence");
     feat_name("indomitable");
     feat_prereq("Charisma 15");
-    feat_desc("Indomitable is a passive feat that grants a small luck bonus to armor class, allowing the character to better evade blows.");
+    feat_desc("Indomitable is a passive feat that grants a small static luck bonus to armor class (+2), allowing the character to better evade blows.");
     permanent(1);
     set_required_for(({"force of personality","anger","calm","unyielding soul","leadership"}));
 }
@@ -46,4 +46,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-
