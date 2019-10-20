@@ -211,7 +211,7 @@ string basicsky(string str)
         if(night)
         {
             string moon;
-            borg="";
+            borg="%^BLUE%^You see a dark night sky.\n";
             foreach(moon in keys(moons))
                 if(is_moon_visible(moon))
                     borg+="%^RESET%^%^BLUE%^You see a "+query_moon_phase_string(moon)+" "+moons[moon]+".\n";
