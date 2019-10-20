@@ -127,12 +127,6 @@ int can_multiclass(object ob,string myclass) {
     classes            += ({ myclass });
     if(!sizeof(classes)) { return 1; }
 
-    if(sizeof(classes) > 4)
-    {
-        tell_object(ob,"%^RED%^You may only have a maximum of four different classes.");
-        return 1;
-    }
-
     if(level == 10 && ob->query("lvl_10_class")) {
         tell_object(ob,"%^RED%^You may not multiclass again until level 20.");
         return 0;
