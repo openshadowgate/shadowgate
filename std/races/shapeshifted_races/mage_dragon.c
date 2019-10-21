@@ -113,7 +113,7 @@ int claw_attack(object tp, object targ)
 {
     if(!random(3))
     {
-        tell_object(tp,"%^RED%^You reach out and %^BOLD%^violently%^RESET^%^RED%^ claw "+targ->QCN+"!");
+        tell_object(tp,"%^RED%^You reach out and %^BOLD%^violently%^RESET%^%^RED%^ claw "+targ->QCN+"!");
         tell_object(targ,"%^RED%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^RED%^ claws you!");
         tell_room(ENV(tp),"%^RED%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^RED%^ claws "+targ->QCN+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"slashing");
