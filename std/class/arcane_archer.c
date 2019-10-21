@@ -138,9 +138,9 @@ string new_save_type(object ob) { return base_class_ob(ob)->new_save_type(); }
 // unsure on this one, will have to investigate
 void advanced_func(object player) { return base_class_ob(player)->advance_func(player); }
 
-int hit_dice(object ob) { return base_class_ob(ob)->hit_dice(); }  // hit dice rolled for hitpoints each level
+int hit_dice(object ob) { return 8; }  // hit dice rolled for hitpoints each level
 
-int default_hitpoints(object ob) { return base_class_ob(ob)->default_hitpoints(); } // hitpoints per level above level 20
+int default_hitpoints(object ob) { return 4; } // hitpoints per level above level 20
 
 string armor_allowed(object ob) { return base_class_ob(ob)->armor_allowed(); }
 
@@ -150,7 +150,7 @@ int max_stance_offensive(object ob) { return base_class_ob(ob)->max_stance_offen
 
 int max_stance_defensive(object ob) { return base_class_ob(ob)->max_stance_defensive(); }
 
-int attack_bonus(object player) { return 0; }
+int attack_bonus(object player) { return 6; }
 
 int number_of_attacks(object player) { return base_class_ob(player)->number_of_attacks(player); }
 

@@ -683,7 +683,7 @@ int cmd_feats(string str){
           TP->clear_feats();
           num_feats = ((int)TP->query_level()/3)+1;
           TP->set("free_feats",num_feats);
-          if(!avatarp(TP)) tell_object(TP,"%^BOLD%^%^RED%^You have been given a feat wipe following the glitch on 18th September 2015. Please reallocate your feats before going back out.%^RESET%^");
+          if(!avatarp(TP)) tell_object(TP,"%^BOLD%^%^RED%^You have been given a feat wipe. Please reallocate your feats before going back out.%^RESET%^");
         }
 
         // first pickup current "other" feats that were bought
