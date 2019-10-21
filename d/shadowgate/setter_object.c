@@ -1989,7 +1989,11 @@ varargs int choose(string str, int flag)
             }
             extra_display(str);
             MyCharacterInfo["race"]["subrace"] = str;
-            MyPlace = "stats";
+            if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
+                OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
+                MyPlace = "template";
+            else
+                MyPlace = "stats";
             build_restrictions("subrace");
             ProcessStep();
             break;
@@ -2070,18 +2074,14 @@ varargs int choose(string str, int flag)
             if(check_my_choice(str)) { pick_genetics(); return 1;}
             extra_display(str);
             MyCharacterInfo["race"]["body type"] = str;
-            if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
-                OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
-                MyPlace = "template";
-            else
-                MyPlace = "age";
+            MyPlace = "age";
             ProcessStep();
             break;
         case "template":
             if(check_my_choice(str)) { pick_genetics(); return 1;}
             extra_display(str);
             MyCharacterInfo["race"]["template"] = str;
-            MyPlace = "age";
+            MyPlace = "stats";
             ProcessStep();
             break;
         case "age":
