@@ -55,7 +55,8 @@ Available codes:
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
   %^MAGENTA%^$k%^WHITE%^ available ki
   %^MAGENTA%^$K%^WHITE%^ maximum ki
-  %^MAGENTA%^$T%^WHITE%^ time of day
+  %^MAGENTA%^$T%^WHITE%^ time of day (word)
+  %^MAGENTA%^$t%^WHITE%^ time of day (clock)
 
 Avatars+ only:
   %^MAGENTA%^$I%^WHITE%^ shows True Invis / Mortal Invis / Stealthed status%^RESET%^

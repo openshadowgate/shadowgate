@@ -59,7 +59,7 @@ void execute_feat() {
         write("This object already has magic instilled in it.");
         return 1;
     }
-    if((string *)TP->query_attackers() != ({})) 
+    if((string *)TP->query_attackers() != ({}))
     {
         tell_object(TP, "You are far too busy fighting to do that right now!");
         return 1;
@@ -151,7 +151,7 @@ void spell_charges(string str, object ob, string spell, string file){
 void spell_level(string str,object ob, string spell, string file, int charges){
     int level, expdrain;
     object spellcopy;
-    
+
     if(str == "~q") {
         return;
     }
@@ -165,9 +165,9 @@ void spell_level(string str,object ob, string spell, string file, int charges){
     expdrain = (9900*level-5000)/49*charges;
     write("%^BOLD%^%^GREEN%^The enchantment is almost prepared, and will drain you of %^RED%^"+expdrain+"%^RED%^ exp.");
     write("Type 'yes' to complete the enchantment, or anything else to cancel.");
-    input_to("do_enchant",0,ob,spell,file,charges,level,expdrain); 
+    input_to("do_enchant",0,ob,spell,file,charges,level,expdrain);
 }
- 
+
 void do_enchant(string str,object ob, string spell, string file, int charges, int level, int expdrain){
     int i;
     mapping components;
@@ -177,49 +177,6 @@ void do_enchant(string str,object ob, string spell, string file, int charges, in
     if(str != "yes") {
         write("The enchantment fizzles and is lost.");
         return;
-    }
-
-    if (caster->is_class("psion"))
-        components = file->query_components("psion");        
-    else
-        components = file->query_components("mage");        
-
-    bag = present("compx",caster);
-     if(!objectp(bag)){
-	write("You are not carrying your components bag.");
-	return;
-    }
-    if (components) {
-        names = keys(components);
-        if (!objectp(bag)) {
-            write("You don't have a components bag.");
-            return;
-        }
-        for (i=0;i< sizeof(names);i++) {
-            if(bag->query_comp(names[i]) < (charges * components[names[i]])){
-                write("You lack the "+names[i]+" to cast that many.");
-                return;
-            }
-        }
-    }
-
-    if (level > 10 && level < 20) {
-        diamond = "diamond";
-    } else if (level > 19) {
-        diamond = "large diamond";
-    } else {
-        diamond = "small diamond";
-    }
-    
-    if (bag->query_comp(diamond) < 1) {
-        write("You need a "+diamond+" as a component to cast at that level.");
-        return;
-    }
-    bag->use_comp(diamond,1);
-    if (components) {
-        for (i=0;i< sizeof(names);i++) {
-            bag->use_comp(names[i],(charges * components[names[i]]));
-        }
     }
 
     if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
@@ -236,7 +193,7 @@ void do_enchant(string str,object ob, string spell, string file, int charges, in
                 "You must first reduce it before you can enchant this item.");
             return 1;
         }
-        if(expdrain > 0) 
+        if(expdrain > 0)
         {
             tell_object(caster,"Incuring character improvement tax of "+expdrain+". All future experience gained will be "+
                 "reduced by 50% until it is repaid.");
@@ -263,4 +220,3 @@ void dest_effect() {
     remove_feat(TO);
     return;
 }
-

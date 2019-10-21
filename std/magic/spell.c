@@ -826,21 +826,7 @@ void wizard_interface(object user, string type, string targ)
     }
 
     //Need components bag present
-    if(sizeof(components) && !avatarp(caster) && spell_type != "monk")
-    {
-        if(query_components_value(spell_type) > 100 || !(FEATS_D->usable_feat(caster,"eschew materials")))
-        {
-            if(!FEATS_D->usable_feat(caster,"spellmastery") || (spell_name != (string)caster->query("spellmastery_spell")))
-            { // don't need comps for spellmastered one.
-                if((spell_type == "mage" || spell_type == "sorcerer") && !present("compx", caster) && sizeof(components["mage"]))
-                {
-                    tell_player(caster, "You need a components bag with components to cast this spell.");
-                    TO->remove();
-                    return;
-                }
-            }
-        }
-    }
+
     if(spell_type == "sorcerer")
     {
         if (mapp(components["mage"])) comp_names = keys(components["mage"]);
@@ -852,38 +838,6 @@ void wizard_interface(object user, string type, string targ)
     else
     {
         if (mapp(components[spell_type])) comp_names = keys(components[spell_type]);
-    }
-
-    //Check to see if the proper components are in place
-    for (x=0;x<sizeof(comp_names);x++)
-    {
-        if(avatarp(caster)) break;
-        if(FEATS_D->usable_feat(caster,"eschew materials") && (query_components_value(spell_type) < 101)) break;
-        if(FEATS_D->usable_feat(caster,"spellmastery") && (spell_name == (string)caster->query("spellmastery_spell"))) break; // don't need comps for spellmastered one.
-        if ((spell_type == "mage" || spell_type == "sorcerer") && !(find_compbag(comp_names[x], components["mage"][comp_names[x]], "mage")))
-        {
-            tell_object(caster, "You do not have the required components to cast this spell!\n");
-            TO->remove();
-            return;
-        }
-        if (spell_type == "bard" && !(find_compbag(comp_names[x], components["bard"][comp_names[x]], "bard")))
-        {
-            tell_object(caster, "You do not have the required components to cast this spell!\n");
-            TO->remove();
-            return;
-        }
-        if (spell_type == "psion" && !(find_compbag(comp_names[x], components["psion"][comp_names[x]], "psion")))
-        {
-            tell_object(caster, "You do not have the required components to manifest this power!\n");
-            TO->remove();
-            return;
-        }
-        if (spell_type == "psywarrior" && !(find_compbag(comp_names[x], components["psywarrior"][comp_names[x]], "psywarrior")))
-        {
-            tell_object(caster, "You do not have the required components to manifest this power!\n");
-            TO->remove();
-            return;
-        }
     }
 
     //Check to see if the caster can actually cast that spell.
@@ -1024,35 +978,6 @@ void wizard_interface(object user, string type, string targ)
     }
 
     tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
-
-    for (x=0;x<sizeof(comp_names);x++)
-    {
-        if(avatarp(caster)) break;
-        if(FEATS_D->usable_feat(caster,"eschew materials") && (query_components_value(spell_type) < 101)) break;
-        if(FEATS_D->usable_feat(caster,"spellmastery") && (spell_name == (string)caster->query("spellmastery_spell"))) break; // don't need comps for spellmastered one.
-        if (!components) break;
-        if(spell_type == "psion")
-        {
-            compbag = find_compbag(comp_names[x], components["psion"][comp_names[x]], "psion");
-            if(objectp(compbag)) compbag->use_comp(comp_names[x],components[spell_type][comp_names[x]]);
-        }
-        if(spell_type == "psywarrior")
-        {
-            compbag = find_compbag(comp_names[x], components["psywarrior"][comp_names[x]], "psywarrior");
-            if(objectp(compbag)) compbag->use_comp(comp_names[x],components["psywarrior"][comp_names[x]]);
-        }
-        if(spell_type == "mage" || spell_type == "sorcerer")
-        {
-            compbag = find_compbag(comp_names[x], components["mage"][comp_names[x]], "mage");
-            if(objectp(compbag)) compbag->use_comp(comp_names[x],components["mage"][comp_names[x]]);
-        }
-        if(spell_type == "bard")
-        {
-            compbag = find_compbag(comp_names[x], components["bard"][comp_names[x]], "bard");
-            if(objectp(compbag)) compbag->use_comp(comp_names[x],components[spell_type][comp_names[x]]);
-        }
-    }
-
 
     if(objectp(target)) { check_reflection(); } // this is needed for PCs, uses different function than mobs
     if(wasreflected) { caster->set_casting(0); }
@@ -2725,23 +2650,6 @@ void help() {
     if(splash_spell)
         write("%^BOLD%^%^RED%^Splash spell:%^RESET%^ This is a splash damage spell. It has a chance of affecting multiple targets at the price of the spell level.");
 
-    if(mapp(components)) {
-      compskeys = keys(components);
-      if(sizeof(compskeys)) {
-        for(i = 0;i < sizeof(compskeys); i++) {
-          compmap = components[compskeys[i]];
-          mapkeys = keys(compmap);
-          if(!sizeof(mapkeys)) continue;
-          if(compskeys[i] == "mage" && !mage_only) printcomps = "%^BOLD%^%^RED%^Components, mage/sorc:%^RESET%^ "+mapkeys[0]+" x"+compmap[mapkeys[0]];
-          else printcomps = "%^BOLD%^%^RED%^Components, "+compskeys[i]+":%^RESET%^ "+mapkeys[0]+" x"+compmap[mapkeys[0]];
-          if(sizeof(mapkeys) > 1) {
-            for(j = 1;j < sizeof(mapkeys); j++) printcomps += ", "+mapkeys[j]+" x"+compmap[mapkeys[j]];
-          }
-          if(query_components_value(compskeys[i]) < 101) printcomps += " (or none with eschew materials feat)";
-          write(printcomps);
-        }
-      }
-    }
     if(mapp(feats_required)) {
       compskeys = ([]);
       compskeys = keys(feats_required);
