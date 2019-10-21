@@ -48,11 +48,11 @@ void weather()
 {
 	restore_object(SAVE_WEATHER);
 
-    write("%^BOLD%^%^GREEN%^Time of Day:%^YELLOW%^ "+capitalize(TOD));
-	write("%^BOLD%^%^GREEN%^Climate    : %^YELLOW%^"+capitalize(get_climate(TP)));
-	write("%^BOLD%^%^GREEN%^Season     : %^YELLOW%^"+capitalize(season(time())));
-	write("%^BOLD%^%^GREEN%^Weather    : "+get_weather(TP));
-	write("%^BOLD%^%^GREEN%^Average Daily Temperature: %^RED%^"+get_temp(TP));
+    write("%^BOLD%^%^GREEN%^ Time of Day    %^RESET%^%^GREEN%^: %^YELLOW%^"+capitalize(TOD));
+	write("%^BOLD%^%^GREEN%^ Climate        %^RESET%^%^GREEN%^: %^YELLOW%^"+capitalize(get_climate(TP)));
+	write("%^BOLD%^%^GREEN%^ Season         %^RESET%^%^GREEN%^: %^YELLOW%^"+capitalize(season(time())));
+	write("%^BOLD%^%^GREEN%^ Weather        %^RESET%^%^GREEN%^: "+get_weather(TP));
+	write("%^BOLD%^%^GREEN%^ Temperature    %^RESET%^%^GREEN%^: %^RED%^"+get_temp(TP));
 
 	return;
 }
