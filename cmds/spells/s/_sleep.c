@@ -21,12 +21,8 @@ create()
     set_spell_name("sleep");
     set_spell_level(([ "mage" : 1, "bard" : 1, "psion" : 1, "assassin" : 1 ]));
     set_spell_sphere("enchantment_charm");
-    set_syntax("cast CLASS sleep on TARGET");
-    set_description("Upon casting the sleep spell, 2d4 HD of monsters will fall asleep.  Attacks on the sleepers will "
-        "awaken them; normal noise won't, however.  Monsters with 4 HD + 3hp will not be affected.");
-    set_verbal_comp();
-    set_somatic_comp();
-    set_target_required(1);
+    set_syntax("cast CLASS sleep [on TARGET]");
+    set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead.");
     set_save("will");
 }
 
@@ -38,18 +34,20 @@ spell_effect(int prof)
 
     success = 0;
 
-    time = ((clevel * 5 * prof ) / 100);
-    if (time > 300) time = 300;
+    time = ((clevel * 5) / 100);
+    if (time > 360) time = 360;
 
-    prospective = all_inventory(place);
-    prospective = target_filter(prospective);
+    if(!objectp(target))
+    {
+        prospective = all_inventory(place);
+        prospective = target_filter(prospective);
+    }
+    else
+        prospective = ({target});
 
     party = ob_party(caster);
 
-    counter = 0;
     targets = ({target});
-
-    max_hd = ((int)DICE_D->roll_dice(4)) + ((int)DICE_D->roll_dice(4)) - (4*(4-prof/25));
 
     for (x=0;x < sizeof(prospective);x++)
     {
@@ -58,9 +56,8 @@ spell_effect(int prof)
         if(!caster->ok_to_kill(prospective[x])) continue;
 
         target2 = prospective[x];
-        counter += target2->query_level();
 
-        if(do_save(target2,0)) { continue; }
+        if(do_save(target2,-2)) { continue; }
 
         myrace = (string)target2->query_race();
 
@@ -68,18 +65,14 @@ spell_effect(int prof)
 
         if(mind_immunity_check(target2, "default"))
         {
-            target2->add_attacker(caster);
-            damage_targ(target2, target2->return_target_limb(), roll_dice(1,8),"untyped");
+            damage_targ(target2, target2->return_target_limb(), roll_dice(1,8),"mental");
             continue;
         }
 
         if (!success)
         {
-            spell_successful();
             success = 1;
         }
-
-        if (counter >= max_hd) break;
 
         tell_room(environment(target2),"%^CYAN%^%^BOLD%^"+target2->QCN+" wavers for a bit, then falls to the ground in a deep slumber.", target2);
         tell_object(target2, "%^CYAN%^%^BOLD%^You suddenly become drowsy and fall asleep.");
@@ -87,6 +80,7 @@ spell_effect(int prof)
         target2->set_property("spelled", ({TO}) );
         targets += ({target2});
     }
+    spell_successful();
     if(!success)
     {
         tell_object(caster, "%^CYAN%^%^BOLD%^Your sleep attempt fails to affect anything.%^RESET%^");

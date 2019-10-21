@@ -60,8 +60,13 @@ string query_cast_string()
 void spell_effect()
 {
 
+    int align = caster->query_alignment();
+
     ashort = "%^RESET%^%^ORANGE%^ (%^WHITE%^%^BOLD%^tr%^ORANGE%^a%^WHITE%^iled by fe%^RESET%^%^ORANGE%^a%^BOLD%^th%^RESET%^e%^ORANGE%^r%^BOLD%^%^WHITE%^ed w%^RESET%^i%^ORANGE%^n%^BOLD%^%^WHITE%^g%^ORANGE%^s%^RESET%^%^ORANGE%^)";
-    if(!(caster->query_alignment()%3))
+
+    if( align == 2 || align == 5 || align == 8)
+        ashort = " %^RESET%^(%^CYAN%^tr%^BOLD%^ai%^RESET%^%^CYAN%^l%^BOLD%^e%^RESET%^%^CYAN%^d b%^BOLD%^y e%^RESET%^%^CYAN%^th%^BOLD%^e%^RESET%^%^CYAN%^r%^BOLD%^ea%^RESET%^%^CYAN%^l w%^BOLD%^i%^RESET%^%^CYAN%^ngs%^WHITE%^)";
+    else if(!(align%3))
         ashort = "%^RESET%^%^BOLD%^%^MAGENTA%^ (%^BOLD%^%^BLACK%^t%^RESET%^%^MAGENTA%^ra%^BOLD%^%^BLACK%^i%^RESET%^%^MAGENTA%^le%^BOLD%^%^BLACK%^d by %^RESET%^%^MAGENTA%^bl%^BOLD%^%^BLACK%^ack %^RESET%^%^MAGENTA%^w%^BOLD%^%^BLACK%^in%^RESET%^%^MAGENTA%^g%^BOLD%^%^BLACK%^s%^RESET%^%^BOLD%^%^MAGENTA%^)%^RESET%^";
 
     tell_room(ENV(caster),"%^BOLD%^%^WHITE%^As "+caster->QCN+" finishes the chant, feathery "+(!(caster->query_alignment()%3)?"%^BLACK%^black%^WHITE%^":"white")+" wings sprout from "+caster->QP+" shoulders!%^RESET%^");
@@ -111,6 +116,7 @@ void dest_effect()
     if(objectp(caster))
     {
         caster->remove_property_value("added short",({ashort}));
+        tell_room(ENV(caster),"%^BOLD%^%^WHITE%^Ethereal wings that trailed "+caster->QCN+" retract.%^RESET%^");
         effect(-1);
     }
     ::dest_effect();

@@ -22,7 +22,7 @@ void create() {
 }
 
 string query_cast_string() {
-    if(spell_type == "ranger") 
+    if(spell_type == "ranger")
     {
         tell_object(caster,"%^GREEN%^Closing your eyes, you focus upon your "
         "surroundings and attune your senses.%^RESET%^");
@@ -35,7 +35,7 @@ string query_cast_string() {
         "attempt to heighten your senses.%^RESET%^");
         tell_room(place, caster->QCN+"%^BOLD%^%^BLACK%^ begins focusing intently!%^RESET%^", caster);
     }
-    else 
+    else
     {
         tell_object(caster,"%^ORANGE%^Passing a hand over your eyes, you draw on the weave to heighten your "
         "senses.%^RESET%^");
@@ -46,7 +46,7 @@ string query_cast_string() {
 }
 
 int preSpell() {
-    if(caster->query_property("darkvision")) 
+    if(caster->query_property("darkvision"))
     {
         tell_object(caster,"Your senses are already heightened.");
         return 0;
@@ -56,11 +56,10 @@ int preSpell() {
 
 void spell_effect(int prof) {
     int duration;
-    duration = (ROUND_LENGTH * 20) * clevel;
     target = caster;
     if(member_array((string)target->query_race(),PLAYER_D->night_races()) != -1) modifier = -10;
     else modifier = 8;
-    if(spell_type == "ranger") 
+    if(spell_type == "ranger")
     {
         tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+"'s eyes open again, alert and bright, and "+caster->QS+" looks around.",caster);
         tell_object(caster,"%^BOLD%^%^GREEN%^You open your eyes again, and find "
@@ -73,7 +72,7 @@ void spell_effect(int prof) {
         tell_room(place, caster->QCN+"%^BOLD%^%^CYAN%^'s eyes glaze over for a brief moment "+
         "before flashing back to normal!%^RESET%^", caster);
     }
-    else 
+    else
     {
         tell_room(place,"%^ORANGE%^A %^RED%^crimson glow%^ORANGE%^ becomes apparent around "+target->QCN+"'s "
         "irises.%^RESET%^",target);
@@ -84,14 +83,13 @@ void spell_effect(int prof) {
     target->add_sight_bonus(modifier);
     target->set_property("spelled",({TO}));
     target->set_property("darkvision",1);
-    call_out("dest_effect",duration);
 }
 
-void dest_effect() 
+void dest_effect()
 {
-    if(objectp(target)) 
+    if(objectp(target))
     {
-        if(spell_type == "ranger") 
+        if(spell_type == "ranger")
         {
             tell_object(target,"%^BOLD%^%^GREEN%^You blink, and realise your alert "
             "focus has faded, with your vision restored to normal.");
