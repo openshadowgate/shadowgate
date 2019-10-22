@@ -88,7 +88,7 @@ WEAPONSMITH = ([
                    "musket":(["file":COMMONFILE"lrweapon/musket","units":9]),
                    "culverin":(["file":COMMONFILE"lrweapon/culverin","units":40]),
                    "hackbut":(["file":COMMONFILE"lrweapon/hackbut","units":18]),
-                   "cartrige":(["file":COMMONFILE"lrweapon/cartrige","units":1]),
+                   "cartridge":(["file":COMMONFILE"lrweapon/cartridge","units":1]),
                    "grapeshot":(["file":COMMONFILE"lrweapon/grapeshot","units":1]),
                    "cannonball":(["file":COMMONFILE"lrweapon/cannonball","units":20]),
                    "bastard sword":(["file":COMMONFILE"weapon/bastard","units":3]),

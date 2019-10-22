@@ -9,7 +9,7 @@ create() {
    set_long("This is an artillery cannon. Someone really big decided to use it as a handgun.");
    set_ammo("cannonball");
    set_two_handed();
-   set_weight(60);
+   set_weight(40);
    set_size(2);
 
    set_range(4,8,12);
