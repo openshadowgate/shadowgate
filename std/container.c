@@ -12,7 +12,7 @@
                           515,520,525,530,535,540,545,550,555,565,576,585,590,595,600,605,610})
 inherit OBJECT;
 //These were static - removed the static part to see if it
-//will fix the problem with lockable chests 
+//will fix the problem with lockable chests
 //being able to receive items even while locked - Saide
 private static int internal_encumbrance;
 private int possible_to_close;
@@ -50,7 +50,7 @@ void set_possible_to_close(int pos) {
    possible_to_close = pos;
 }
 
-int query_internal_encumbrance() 
+int query_internal_encumbrance()
 {
 	object *this_inven=({});
 	int i,weight;
@@ -69,7 +69,7 @@ int query_internal_encumbrance()
     return internal_encumbrance;
 }
 
-int query_max_internal_encumbrance() 
+int query_max_internal_encumbrance()
 {
    return max_internal_encumbrance;
 }
@@ -132,7 +132,7 @@ string describe_living_contents(object *exclude) {
       continue;
     }
 
-    if(inv[i]->query_hidden() && !work->detecting_invis()) { continue; }
+    if(inv[i]->query_hidden() && !avatarp(work)) { continue; }
     if(inv[i]->query_hidden() && !living(inv[i])) { continue; }
 
     TO->set_property("information",1);
@@ -140,26 +140,15 @@ string describe_living_contents(object *exclude) {
       TO->remove_property("information");
       if(wizardp(inv[i]) || random(101)> (int)previous_object()->query_level()) continue;
     }
-    if(!tmp) 
+    if(!tmp)
       continue;
     else  {
-/******* moving to user.c so it shows everywhere consistently & use new death & pk flags 
-** *Styx* 9/23/06
-**    if (objectp(inv[i]) && userp(inv[i])) {
-**	if (x=sizeof(deaths=(mixed *)inv[i]->query_deaths())){
-**	  death_time = deaths[x-1][1];
-**	  if ((time() - death_time) < 1800)
-**	    tmp = "%^BOLD%^%^RED%^D %^BOLD%^%^GREEN%^" + tmp;
-**      }
-**  	  if (newbiep(inv[i])) tmp = "%^BOLD%^%^CYAN%^N%^BOLD%^%^RED%^ "+tmp;
-**    }
-********/
       if (inv[i]->query_invis()) {
-	tmp = "("+tmp+")";
+          tmp = (inv[i]->query_magic_hidden()?"%^RESET%^%^CYAN%^(inv)":"%^RESET%^%^ORANGE%^(hid)")+"%^RESET%^ "+tmp;
       }
-      if(!list[tmp]) 
+      if(!list[tmp])
 	list[tmp] = ({ inv[i]});
-      else 
+      else
 	list[tmp] += ({ inv[i]});
     }
   }
@@ -172,7 +161,7 @@ string describe_living_contents(object *exclude) {
   return ret;
 }
 
-string describe_item_contents(object *exclude) 
+string describe_item_contents(object *exclude)
 {
     object *inv,shape,ob,eto,*temp=({});
     mapping list;
@@ -186,10 +175,10 @@ string describe_item_contents(object *exclude)
         temp = inv;
         for(i=0;i<sizeof(inv);i++)
         {
-            if(!objectp(ob = inv[i])) 
+            if(!objectp(ob = inv[i]))
             {
                 temp -= ({ 0 });
-                continue; 
+                continue;
             }
 
             eto = environment(ob);
@@ -206,19 +195,19 @@ string describe_item_contents(object *exclude)
 
         //temp = inv - temp;
     }
-    
+
     if(pointerp(exclude)) { exclude += temp; }
     else { exclude = temp; }
 
     i = sizeof(inv = filter_array((all_inventory(this_object())-exclude),"filter_non_living", TO));
     if(!i) { return ""; }
     list = ([]);
-    
-    while(i--) 
+
+    while(i--)
     {
         if(!objectp(TO)) { continue; }
         if(inv[i]->query_magic_hidden() && (!TO->detecting_invis() || !inv[i]->is_detectable())) { continue; }
-        if(inv[i]->query_hidden() && !TO->detecting_invis()) { continue; }
+        if(inv[i]->query_hidden() && !avatarp(TO)) { continue; }
         if(inv[i]->query_hidden() && !living(inv[i])) { continue; }
         if(inv[i]->is_disease()) continue;
         TO->set_property("information",1);
@@ -226,9 +215,9 @@ string describe_item_contents(object *exclude)
         TO->remove_property("information");
         if(tmp == "") continue;
         if( (temp=explode(tmp," ")) == ({}) ) continue;
-        if (inv[i]->query_hidden() || inv[i]->query_magic_hidden()) 
+        if (inv[i]->query_hidden() || inv[i]->query_magic_hidden())
         {
-            tmp = "("+tmp+")";
+            tmp = "%^ORANGE%^(hid)%^RESET%^ "+tmp;
         }
         if(!list[tmp]) list[tmp] = ({ inv[i]});
         else list[tmp] += ({inv[i]});
@@ -242,9 +231,9 @@ string describe_item_contents(object *exclude)
     else if(i==1)
     return ret+", and "+consolidate(sizeof(list[shorts[0]]), shorts[0])+
         " are here.\n";
-    else 
+    else
     {
-        while(i--) 
+        while(i--)
         {
             if(!i) ret += ", and ";
             else ret += ", ";

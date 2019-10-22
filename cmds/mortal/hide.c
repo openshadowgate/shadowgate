@@ -12,7 +12,7 @@ void set_player_name(string str);
 void dest_fun();
 int force_cancel();
 
-void set_player(object obj) 
+void set_player(object obj)
 {
     player = obj;
 //   if (objectp(find_player("garrett"))) tell_object(find_player("garrett"),identify(obj));
@@ -22,7 +22,7 @@ void set_room(object rm) { if (objectp(rm)) current_room = rm; }
 
 object query_player() { return player; }
 
-void create() 
+void create()
 {
     int score;
     ::create();
@@ -46,14 +46,14 @@ void heart_beat()
     return;
 }
 
-void init() 
+void init()
 {
     ::init();
 
     if(objectp(player)) { current_room=environment(player); }
-    
+
     call_out("test_invis",5);
-  
+
     add_action("cancel_inv","quit");
     add_action("cancel_inv","cast");
     add_action("cancel_inv","kill");
@@ -61,44 +61,29 @@ void init()
     add_action("cancel_inv","stab");
     add_action("force_cancel","step");  // changed to use force_cancel()
     add_action("cancel_inv", "yell");
-
-/* Addding force_cancel() to allow interractions with npcs while hidden to force 
-coming out of shadows with no message to the player.  Cancel_invis() returns 0 
-so player->force_me("step") was giving a what as though it didn't work.  That also 
-gave away the forced action.  
-Adding buy, etc. as an action here doesn't work consistently.  If the init on the
-mob is after the init on this object, this one apparently gets ignored.
-*Styx*  10/23/02
-*/
-
 }
 
 
-int cancel_inv() 
+int cancel_inv()
 {
-    if(!objectp(player)) 
+    if(!objectp(player))
     {
         dest_fun();
         return 0;
     }
     if(player->query_hidden()) { player->set_hidden(0); }
-    //if(player->query_invis()) { player->set_invis(); }
     call_out("dest_fun",1);
     return 0;
 }
 
-int force_cancel() 
+int force_cancel()
 {
   cancel_inv();
   return 1;
-//    if(player->query_hidden()) { player->set_hidden(0); }
-//    //if(player->query_invis()) { player->set_invis(); }
-//    call_out("dest_fun",1);
-//    return 1;
 }
 
 
-void dest_fun() 
+void dest_fun()
 {
     if(objectp(player))
     {
@@ -108,36 +93,32 @@ void dest_fun()
     ::remove();
 }
 
-void test_invis() 
+void test_invis()
 {
     int percent;
-    int score;  
+    int score;
 
     if(!objectp(player)) { return; }
-   
+
       if(player->query_in_vehicle() && objectp(player->query_in_vehicle()))
     {
         cancel_inv();
-//if (objectp(find_player("garrett"))) tell_object(find_player("garrett"),sprintf("Player: %s, vehicle.",identify(player)));
         return;
     }
 
-    if(environment(player)!=current_room) 
+    if(environment(player)!=current_room)
     {
         percent=20;
         score = player->query_skill("stealth") + roll_dice(1,20);
-//   if (objectp(find_player("garrett"))) tell_object(find_player("garrett"),sprintf("Score+d20: %d, Diff: %d.",score,percent));
-
 
    if(sizeof(TP->query_armour("torso"))) score += TP->skill_armor_mod(TP->query_armour("torso"));
    if(sizeof(TP->query_armour("left foot"))) score += TP->skill_armor_mod(TP->query_armour("left foot"));
    if(sizeof(TP->query_armour("right foot"))) score += TP->skill_armor_mod(TP->query_armour("right foot"));
-//if (objectp(find_player("garrett"))) tell_object(find_player("garrett"),sprintf("ModScore+d20: %d, Diff: %d.",score,percent));
         if(score <percent) { force_cancel(); }
         else current_room = environment(player);
     }
-   
-    if (!player->query_hidden()) 
+
+    if (!player->query_hidden())
     {
         call_out("dest_fun",1);
         return 1;
@@ -147,13 +128,11 @@ void test_invis()
 
 int save_me(string file) {return 0;}
 
-
 int remove() {
   object temp;
   temp = find_object_or_load("/cmds/mortal/_sneak.c");
   if (PO != temp)
     log_file("reports/hide","PO: "+identify(PO)+". At: "+ctime(time())+".\n");
-//  call_out("dest_fun",1);
     dest_fun();
     ::remove();
 }

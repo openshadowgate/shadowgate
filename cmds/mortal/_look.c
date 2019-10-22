@@ -159,7 +159,8 @@ varargs int examine_object(string str, object obj)
         if((ob->query_hidden() ||
             (ob->query_magic_hidden() &&
              !TP->detecting_invis())) &&
-           ob != TP)
+           ob != TP &&
+           !avatarp(TP))
         {
             if(objectp(obj)) { return notify_fail(""+obj->QCN+" doesn't seem to have that."); }
             else { return notify_fail("You do not notice that here.\n"); }
