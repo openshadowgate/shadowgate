@@ -7,7 +7,7 @@ int benchmark,tally,bonus;
 
 #define DELAY 10800
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("eclipse");
@@ -21,7 +21,7 @@ void create()
     evil_spell(1);
     set_components(([
       "mage" : ([ "large diamond" : 13]),
-    ]));    
+    ]));
 }
 
 string query_cast_string()
@@ -54,9 +54,9 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
-    if(!random(3)&&!present("mark999",caster))
+    if(!random(19)&&!present("mark999",caster))
     {
         object mark;
         mark = new("/d/common/assassins/obj/mark");
@@ -74,11 +74,8 @@ void step_two()
     ASTRONOMY_D->set_eclipse();
 }
 
-void dest_effect() 
-{    
+void dest_effect()
+{
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
-
-

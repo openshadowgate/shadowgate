@@ -1325,7 +1325,8 @@ void setup() {
 
        if(file_exists(racefile))
            if(query("no pk"))
-               if(racefile->is_pk_race(query("subrace")))
+               if(racefile->is_pk_race(query("subrace")) ||
+                  TO->is_undead())
                {
                    delete("no pk");
                    tell_object(TO,"%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
@@ -1745,7 +1746,8 @@ void heart_beat()
         }
         if(is_vampire())
             if(!ETO->query_property("indoors"))
-                if(EVENTS_D->query_time_of_day()=="day")
+                if(EVENTS_D->query_time_of_day()=="day" &&
+                   !ASTRONOMY_D->query_eclipse())
                 {
                     if((int)TO->query_bloodlust()/200<91)
                     {
