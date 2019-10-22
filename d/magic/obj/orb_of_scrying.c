@@ -13,23 +13,23 @@ void dest_effect();
 void create()
 {
     ::create();
-   
+
     set_name("orb of scrying");
-    
+
     set_id(({ "orb", "scrying orb","orb of scrying","crystal ball","ball" }));
-	
+
     set_short("%^RESET%^orb %^MAGENTA%^of %^CYAN%^s%^RESET%^c%^BOLD%^r%^CYAN%^ying%^RESET%^");
-	
+
     set_obvious_short("%^CYAN%^a hazy crystal ball%^RESET%^");
-	
+
     set_long("%^CYAN%^This fist sized ball looks to be made from fragile glass but "
         "a surprising aura of strength radiates outwards from it.  A glowing blue mist "
         "swirls inside of the orb and murky shapes can almost be made out in its depths.%^RESET%^");
-    
+
     set_weight(5);
-    
+
     set_value(12000);
-	
+
     set_lore("%^BOLD%^Adventurers first reported seeing these orbs in the forests north of "
         "Asgard.  Since those initial reports, more of the orbs have been located throughout "
         "the realms.  The first adventurers who found the orbs met their untimely end by abusing "
@@ -37,20 +37,20 @@ void create()
         "and see events at a distance.  But the stories also say that doing so begins a drain on a person's "
         "soul.  The longer a person watches the images inside the orb, the more deadly the drain becomes.  "
         "One must be careful to %^MAGENTA%^stop%^RESET%^%^BOLD%^ before the drain becomes too great.%^RESET%^");
-    
+
     set_property("lore difficulty",20);
 
     set_heart_beat(4);
 }
 
-void init() 
+void init()
 {
     ::init();
     add_action("lookin","gaze");
     add_action("stop_scrying","stop");
 }
 
-int lookin(string str) 
+int lookin(string str)
 {
     string *map_keys,real;
     int i,matches,num,duration,power,cost;
@@ -65,14 +65,14 @@ int lookin(string str)
 
     if(!ETO->is_player()) { return 0; }
 
-    if(!str) 
+    if(!str)
     {
         notify_fail("What?\n");
         return 0;
     }
 
     target = lower_case(str);
-    
+
     if(!stringp(real = (string)ETO->realName(target)))
     {
         tell_object(ETO,"%^CYAN%^The mist inside of the orb shifts for a moment but then "
@@ -81,15 +81,15 @@ int lookin(string str)
     }
 
     target = find_player(real);
-    
-    if(!target || target->query_true_invis()) 
+
+    if(!target || target->query_true_invis())
     {
         tell_object(ETO,"%^CYAN%^The mist inside of the orb shifts for a moment but then "
             "nothing happens.%^RESET%^");
         return 1;
     }
 
-    if(target == TP) 
+    if(target == TP)
     {
         tell_object(ETO,"%^CYAN%^An image of yourself peers back at you for an instant and "
             "then it is gone!%^RESET%^");
@@ -110,27 +110,10 @@ int lookin(string str)
         "the mist begins to clear and is replaced by a crystal clear image!%^RESET%^");
 
     tell_object(ETO,"%^GREEN%^You feel a tug at your soul as the orb begins to do your bidding!%^RESET%^");
-    
-    //ETO->add_exp(-1*(to_int((int)ETO->query_exp() * 0.008)));
-    cost = to_int((int)ETO->query_exp() * 0.008);
-    
-    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
-    {
-        ETO->add_exp(cost * -1);
-    }
-    else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1)
-    {
-        if((int)ETO->set_XP_tax(cost, 0, "improvement") == -1)
-        {
-            tell_object(ETO, "The orb shudders violently as it attempts to draw from your life-force.");
-            ETO->cause_damage_to(ETO,"head",roll_dice(3,100));
-            return 1;
-        }
-    }
 
     scry_control = new("/d/magic/obj/eye_orb");
     scry_control->set_caster(ETO);
-    power = 25 + random(20);
+    power = 16;
     scry_control->set_scry_power(power);
     scry_control->set_target(target);
     scry_control->move(environment(target));
@@ -159,7 +142,7 @@ void heart_beat()
 
     if(!objectp(ETO)) { return; }
 
-    if(!ETO->is_player()) 
+    if(!ETO->is_player())
     {
         if(sizeof(drainees))
         {
@@ -185,7 +168,7 @@ void heart_beat()
     }
 
     step++;
-       
+
     hunger += (int)ETO->query_character_level() * 10;
 
     //ETO->add_exp(-1*hunger);
@@ -211,14 +194,14 @@ void heart_beat()
 
     //debug
     //tell_object(ETO,"exp loss: "+hunger+"");
-    
+
     if(step == 1)
     {
         switch(hunger)
         {
 
         case 0..1000:
-            
+
             tell_object(ETO,"%^CYAN%^You feel a slight pull in your chest.");
             break;
 
@@ -261,7 +244,7 @@ void remove()
 
     if(!objectp(ETO)) { return; }
 
-    if(!ETO->is_player()) 
+    if(!ETO->is_player())
     {
         if(sizeof(drainees))
         {
@@ -272,14 +255,14 @@ void remove()
             }
         }
     }
- 
+
     return ::remove();
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
-    if(objectp(scry_control)) 
+    if(objectp(scry_control))
     {
         SCRY_D->stop_scry(scry_control, 0);
         scry_control->dest_me();
@@ -298,7 +281,7 @@ void dest_effect()
     return;
 }
 
-void control_failure() 
+void control_failure()
 {
     TO->remove_call_out("dest_effect");
     if(objectp(ETO))

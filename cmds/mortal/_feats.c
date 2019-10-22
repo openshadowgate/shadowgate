@@ -698,8 +698,16 @@ int cmd_feats(string str){
         featkeys = keys(otherfeats);
         for(i = 0;i < sizeof(featkeys);i++) feats += otherfeats[featkeys[i]];
 
+        if(FEATS_D->has_feat(TP,"eschew materials"))
+        {
+            FEATS_D->remove_my_feat(TP,"eschew materials",1);
+            TP->set("free_feats",1);
+            tell_object(TP,"%^BOLD%^%^MAGENTA%^Your feat %^CYAN%^eschew materials%^MAGENTA%^ has been refunded.%^RESET%^");
+        }
+
         // now run addition of any missing class feats; remove from bought
-	  // feats first if they already did
+        // feats first if they already did
+
         for(bonus = 0;bonus<sizeof(required);bonus++)
 	    {
       	    category = "/std/class/"+required[bonus]+".c";

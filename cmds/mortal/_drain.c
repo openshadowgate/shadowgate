@@ -109,7 +109,6 @@ void stop_drain()
 {
     TP->remove_paralyzed(0);
     tell_object(TP,"%^BOLD%^%^RED%^You retract your %^BLACK%^fa%^RED%^n%^BLACK%^gs%^RED%^ and float backwards.%^RESET%^");
-    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" %^BOLD%^%^RED%^stops %^RED%^f%^BLACK%^e%^RED%^e%^RED%^d%^BLACK%^i%^RED%^n%^BLACK%^g%^RED%^ and floats backwards.%^RESET%^",TP);
     draining=0;
 }
 
