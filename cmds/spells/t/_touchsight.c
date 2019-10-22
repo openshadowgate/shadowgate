@@ -43,6 +43,7 @@ spell_effect(int prof) {
     caster->set_detecting_invis(1);
     caster->add_sight_bonus(3);
     caster->set_property("spelled", ({TO}) );
+    addSpellToCaster();
     call_out("dest_effect", clevel * ROUND_LENGTH *2);
 }
 

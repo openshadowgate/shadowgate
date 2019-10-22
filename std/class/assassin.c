@@ -109,8 +109,6 @@ int prerequisites(object player)
     base = player->query("assassin_base_class");
     if(!base) { return 0; }
     if(!player->is_class(base)) { return 0; }
-    if((player->query_class_level(base) + adj) < 20) { return 0; }
-    if(player->query_level() < 40) { return 0; }
     return 1;
 }
 
@@ -135,7 +133,7 @@ int caster_level_calcs(object player, string the_class)
 }
 
 mapping class_featmap(string myspec) {
-    /* return ([ 1 : ({ "crit" }), 4 : ({ "hide in plain sight" }), 7 : ({ "void hunter" }), ]); */
+    /* return ([ 1 : ({ "crit" }), 4 : ({ "hide in plain sight" }), 7 : ({ "void stalker" }), ]); */
 }
 
 string *class_skills(object ob)

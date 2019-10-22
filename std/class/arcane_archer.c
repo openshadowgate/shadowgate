@@ -47,7 +47,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Mage, Sorcerer, Bard, Cleric or Druid levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
         "    Preciseshot\n";
 
     return str;
@@ -96,7 +95,6 @@ int prerequisites(object player)
         if( (player->query_class_level("cleric") + adj) < 20) { return 0; }
         player->set("arcane_archer_base_class","cleric");
     }
-    if(player->query_level() < 40) { return 0; }
     return 1;
 }
 

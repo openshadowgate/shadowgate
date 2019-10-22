@@ -45,7 +45,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Mage or Sorcerer levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
         "    20 Intelligence or Charisma stat, before equipment modifiers\n";
 
     return str;
@@ -80,7 +79,6 @@ int prerequisites(object player)
         if(player->query_base_stats("charisma") < 20) { return 0; }
         player->set("shadow_adept_base_class","sorcerer");
     }
-    if(player->query_level() < 40) { return 0; }
     return 1;
 }
 

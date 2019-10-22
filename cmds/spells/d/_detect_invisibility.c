@@ -54,14 +54,7 @@ void spell_effect(int prof) {
     caster->set_property("spelled", ({TO}) );
 //    call_out("dest_effect", clevel * 5 * ROUND_LENGTH);
     clevel = ((clevel*prof)/100);
-    if (clevel < 1 ){
-        dest_effect();
-        return;
-    }
-    if (prof <100 && random(100) > prof) {
-        call_out("flip",random(20),0);    
-    } 
-   else addSpellToCaster();
+    addSpellToCaster();
     call_out("dest_effect", clevel * ROUND_LENGTH);
 }
 
