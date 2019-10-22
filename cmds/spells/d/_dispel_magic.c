@@ -54,6 +54,7 @@ void spell_effect(int prof) {
     caster = query_caster();
     place = query_place();
     arg = query_arg();
+    clevel = query_clevel() + dispel_power();
 
     tell_room(place, "%^BOLD%^The air shimmers as "+caster->QCN+" %^BOLD%^%^WHITE%^completes a spell.", caster);
     tell_object(caster, "%^BOLD%^The air in the area begins to shimmer.");
@@ -75,7 +76,7 @@ void spell_effect(int prof) {
         allinv += ({targ});
     }
 
-    for (i = 0;i < sizeof(allinv);i++) {
+    for (i = 0;i < sizeof(allinv), i < clevel/12+1;i++) {
         if (!objectp(allinv[i])) continue;
         if(!caster->ok_to_kill(allinv[i])) continue;
         if (allinv[i]->query_property("spelled"))
