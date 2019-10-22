@@ -4,9 +4,9 @@
 
 inherit DAEMON;
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 object base_class_ob(object ob)
@@ -19,13 +19,13 @@ object base_class_ob(object ob)
 }
 
 
-string *query_base_classes(object obj) 
+string *query_base_classes(object obj)
 {
     string base;
     if(!objectp(obj)) { return ({}); }
     base = obj->query("assassin_base_class");
     if(!base) { return ({}); }
-    return ({ base }); 
+    return ({ base });
 }
 
 
@@ -56,7 +56,7 @@ int set_base_class(object obj, string choice)
     }
     classes = obj->query_classes();
     if(!sizeof(classes)) { return 0; }
-    if(member_array(choice,classes) == -1) { return 0; }    
+    if(member_array(choice,classes) == -1) { return 0; }
     obj->set("assassin_base_class",choice);
     return 1;
 }
@@ -86,7 +86,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
         "    20 Points Spent in Stealth Skill\n"
         "    16 Intelligence\n";
 
-    return str;    
+    return str;
 }
 
 
@@ -97,21 +97,21 @@ int prerequisites(object player)
     string race, base;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
-    skills = player->query_skills();    
+    adj = race_ob->level_adjustment(race);
+    skills = player->query_skills();
     if(skills["stealth"] < 20) { return 0; }
     if(player->query_base_stats("intelligence") < 16) { return 0; }
     base = player->query("assassin_base_class");
     if(!base) { return 0; }
     if(!player->is_class(base)) { return 0; }
-    if((player->query_class_level(base) + adj) < 20) { return 0; }    
+    if((player->query_class_level(base) + adj) < 20) { return 0; }
     if(player->query_level() < 40) { return 0; }
-    return 1;    
+    return 1;
 }
 
 mapping stat_requirements(object ob) { return base_class_ob(ob)->stat_requirements(); }
@@ -128,18 +128,18 @@ int caster_level_calcs(object player, string the_class)
     string base;
     if(!objectp(player)) { return 0; }
     base = player->query("assassin_base_class");
-    
+
     level = player->query_class_level(base);
-    level += player->query_class_level("assassin");            
+    level += player->query_class_level("assassin");
     return level;
 }
 
-mapping class_featmap(string myspec) {  
-    /* return ([ 1 : ({ "gift of the shadows" }), 4 : ({ "shield of whirling steel" }), 7 : ({ "masters parry" }), ]); */
+mapping class_featmap(string myspec) {
+    /* return ([ 1 : ({ "crit" }), 4 : ({ "hide in plain sight" }), 7 : ({ "void hunter" }), ]); */
 }
 
 string *class_skills(object ob)
-{  
+{
     return base_class_ob(ob)->class_skills();
 }
 
@@ -176,10 +176,9 @@ void process_newbie_choice(object who, string str) { return base_class_ob(who)->
 
 string query_casting_stat(object ob) { return base_class_ob(ob)->query_casting_stat(); }
 
-mapping query_class_spells(object ob) { return (([ 
+mapping query_class_spells(object ob) { return (([
         /* 1 : ({"alter self","detect poison","fog cloud","sleep","light","prevenom"}), */
         /* 2 : ({"cats grace","bears endurance","foxs cunning","darkness","invisibility","ghost step","spider climb"}), */
         /* 3 : ({"misdirection","truevenom","protection from scrying"}), */
         /* 4 : ({"freedom of movement", "greater invisibility","clairvoyance","dimension door"}),  */
 ])); }
-
