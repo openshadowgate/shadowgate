@@ -354,7 +354,9 @@ void startCasting()
 
     inven = all_living(ETP);
     roll = TP->query_skill("spellcraft")+ roll_dice(1,20);
-    displaystring = (string)TO->query_cast_string()+"\n"; // need to ensure query_cast_string is only triggered ONCE or it will spam cast messages!!
+    if(TP->usable_feat("elusive spellcraft"))
+        roll += roll_dice(1,20);
+    displaystring = (string)TO->query_cast_string()+"\n";
     if(displaystring == "0\n") displaystring = "%^BOLD%^%^WHITE%^"+TPQCN+" starts casting a spell.%^RESET%^\n";
     if(displaystring == "display\n") displayflag = 1;
     if(!TP->query_invis() && userp(target)) printstring = "%^YELLOW%^You recognize this spell as "+spell_name+", aimed at "+target->QCN+"!%^RESET%^";

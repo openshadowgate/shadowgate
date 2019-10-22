@@ -12,14 +12,14 @@
 #define MAX_HP_LIMIT_III 250
 #define TIER_I 1
 #define TIER_II (TIER_I   * 5)
-#define TIER_III (TIER_II * 3)
-#define TIER_IV (TIER_III * 3)
+#define TIER_III (TIER_II * 5)
+#define TIER_IV (TIER_III * 5)
 inherit ROOM;
 
 int cl, cs, cc, np, bp, cb, bnp, cd, rnl;
 string name;
 
-//newbie_heal stuff added by Circe for lower-cost healing 
+//newbie_heal stuff added by Circe for lower-cost healing
 //vials usable by newbies only 6/3/07
 //If you are going to sell the newbie-only potions in the shop,
 //set_newbie_heal(1); in create for the shop.  Note that this
@@ -39,7 +39,7 @@ void create() {
     np = 150;
     bp = 30;
     cb = 150;
-    cd = 1000;
+    cd = 750;
     rnl = 15000;
     name = "The Healer";
 }
@@ -78,7 +78,7 @@ int read_list(string str){
           "cb    cure your blindness               for "+ADJUST_COST(cb)+" gold \n"
           "cd    cure your diseases                for "+ADJUST_COST(cd)+" gold \n"
           "rnl   remove 1 negative level           for "+ADJUST_COST(rnl)+" gold \n"
-          "%^BOLD%^%^MAGENTA%^-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n"          
+          "%^BOLD%^%^MAGENTA%^-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n"
     );
     if(query_newbie_heal()){
        write("bnp : buy a newbie healing potion for "+ADJUST_COST(bnp*TIER_I)+" gold \n");
@@ -112,9 +112,9 @@ string query_long(string str){
 void cure_wounds(string str) {
     object ob;
    int fundage;
-    if(TP->query_hidden())   
+    if(TP->query_hidden())
 	TP->force_me("step");
-    
+
     if(!(ob = present(lower_case(name)))){
         tell_object(TP, "The healer is not here right now.");
         return 1;
@@ -186,9 +186,9 @@ void cure_disease(string str)
     object ob, *inv, *ppl;
     int x, i;
     string curemsg;
-    if(TP->query_hidden())   
+    if(TP->query_hidden())
 	TP->force_me("step");
-    
+
     if(!(ob = present( lower_case(name)))){
         tell_object(TP, "The healer is not here right now.");
         return 1;
@@ -212,8 +212,8 @@ void cure_disease(string str)
         tell_room(TO, "%^MAGENTA%^"+name+" says:  %^RESET%^That's not enough money you have there, sorry.");
         return 1;
     }
-    //TP->add_poisoning(-(int)TP->query_poisoning());	
-	
+    //TP->add_poisoning(-(int)TP->query_poisoning());
+
     tell_object(TP,name+" tosses a soft white powder all over the room!");
     tell_room(TO, name+" collects some money and then tosses a soft white powder all over room!", TP);
     ppl = all_inventory(TO);
@@ -232,7 +232,7 @@ void cure_disease(string str)
         for(i = 0; i < sizeof(inv);i++)
         {
             if(!objectp(inv[i])) continue;
-            "/daemon/disease_d.c"->cure_diseases(ob, inv[i]);            
+            "/daemon/disease_d.c"->cure_diseases(ob, inv[i]);
             continue;
         }
     }
@@ -244,9 +244,9 @@ void remove_negative_level(string str)
 {
     object ob;
     int neg_levels;
-    if(TP->query_hidden())  
+    if(TP->query_hidden())
 	TP->force_me("step");
-    
+
     if(!(ob = present( lower_case(name)))){
         tell_object(TP, "The healer is not here right now.");
         return 1;
@@ -271,18 +271,18 @@ void remove_negative_level(string str)
         tell_room(TO, "%^MAGENTA%^"+name+" says: %^RESET%^You're not suffering from that at the moment, so I can't help you.");
         return 1;
     }
-    if(!TP->query_funds("gold",ADJUST_COST((rnl*neg_levels)))) 
+    if(!TP->query_funds("gold",ADJUST_COST((rnl*neg_levels))))
     {
 //        tell_object(TP, "You don't have enough money!");
         tell_room(TO, name+" seems to be negotiating with "+TPQCN+".", TP);
         tell_room(TO, "%^MAGENTA%^"+name+" says:  %^RESET%^That's not enough money you have there, sorry.");
         tell_object(TP, "%^BOLD%^%^CYAN%^"+name+"%^BOLD%^%^CYAN%^ whispers to you: %^RESET%^You'll need "+
-        ADJUST_COST((rnl*neg_levels))+" gold coins for me to be able to fix you!");        
+        ADJUST_COST((rnl*neg_levels))+" gold coins for me to be able to fix you!");
         tell_room(TO, "%^BOLD%^%^CYAN%^"+name+"%^BOLD%^%^CYAN%^ whispers something to "+TPQCN+"%^BOLD%^%^CYAN%^.%^RESET%^", TP);
         return 1;
     }
-    //TP->add_poisoning(-(int)TP->query_poisoning());	
-	
+    //TP->add_poisoning(-(int)TP->query_poisoning());
+
     tell_object(TP,name+" administers a clear bitter liquid that removes your negative levels.");
     tell_room(TO, name+" collects some money and then administers a clear liquid to "+TPQCN+".", TP);
     "/daemon/disease_d.c"->cure_disease(TO, TP);
@@ -294,9 +294,9 @@ void remove_negative_level(string str)
 void neut_poison(string str)
 {
     object ob;
-    if(TP->query_hidden())   
+    if(TP->query_hidden())
 	TP->force_me("step");
-    
+
     if(!(ob = present( lower_case(name)))){
         tell_object(TP, "The healer is not here right now.");
         return 1;
@@ -320,8 +320,8 @@ void neut_poison(string str)
 	tell_room(TO, "%^MAGENTA%^"+name+" says:  %^RESET%^That's not enough money you have there, sorry.");
         return 1;
     }
-    //TP->add_poisoning(-(int)TP->query_poisoning());	
-	
+    //TP->add_poisoning(-(int)TP->query_poisoning());
+
     tell_object(TP,name+" administers an antidote that cures your poisoning.");
     tell_room(TO, name+" collects some money and then administers an antidote to "+TPQCN+".", TP);
     POISON_D->clear_poisons_by_dc(TP, 1000, 0);
@@ -335,10 +335,10 @@ void buy_potion(string str){
     object ob2;
     string verb;
     verb = query_verb();
-    if(TP->query_hidden())   
+    if(TP->query_hidden())
 	TP->force_me("step");
 
-    
+
     if(!(ob2 = present( lower_case(name)))){
         tell_object(TP, "The healer is not here right now.");
         return 1;
@@ -358,17 +358,17 @@ void buy_potion(string str){
     }
 
 
-    if ((TP->query_max_hp() < MAX_HP_LIMIT) && (verb == "bxp")) { 
+    if ((TP->query_max_hp() < MAX_HP_LIMIT) && (verb == "bxp")) {
       ob2->force_me("emote looks at you and sternly shakes his head.");
       ob2->force_me("say I can't sell that to you, my other clients would riot!");
       return 1;
     }
-    if ((TP->query_max_hp() < MAX_HP_LIMIT_II) && (verb == "bap")) { 
+    if ((TP->query_max_hp() < MAX_HP_LIMIT_II) && (verb == "bap")) {
       ob2->force_me("emote looks at you and sternly shakes his head.");
       ob2->force_me("say I can't sell that to you, my other clients would riot!");
       return 1;
     }
-    if ((TP->query_max_hp() < MAX_HP_LIMIT_III) && (verb == "blp")) { 
+    if ((TP->query_max_hp() < MAX_HP_LIMIT_III) && (verb == "blp")) {
       ob2->force_me("emote looks at you and sternly shakes his head.");
       ob2->force_me("say I can't sell that to you, my other clients would riot!");
       return 1;
@@ -445,7 +445,7 @@ void buy_potion(string str){
        }
         TP->use_funds("gold",funds);
         return 1;
-/*   }  Changed above to move kit to room so it's not orphaned in memory if they can't carry it.  
+/*   }  Changed above to move kit to room so it's not orphaned in memory if they can't carry it.
 Changed again to max 50 at a time to solve typo problems with kits to large to split up.
 Styx  3/16/03
   write("You can't carry any more!");  (was stranding objects in memory)*Styx*
@@ -455,9 +455,9 @@ Styx  3/16/03
 
 void cure_blindness(string str) {
     object ob;
-    if(TP->query_hidden())   
+    if(TP->query_hidden())
 	TP->force_me("step");
-    
+
     if(!(ob = present( lower_case(name)))) {
         tell_object(TP, "The healer is not here right now.");
         return 1;
