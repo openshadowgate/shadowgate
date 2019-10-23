@@ -5,7 +5,7 @@ inherit FEAT;
 
 int fired;
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 35
 
 void create() {
     ::create();
@@ -44,7 +44,7 @@ void execute_feat() {
     mapping tempmap;
     object ammo, *weapons;
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -144,6 +144,7 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^shattered%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using shatter");
     caster->set_property("using shatter",newmap);
 
@@ -168,15 +169,15 @@ void execute_attack() {
 
     mod = clevel+roll_dice(1,4);
     	if (skinned > mod) target->set_stoneSkinned(skinned - mod);
-    	else 
+    	else
 	{
 		target->set_stoneSkinned(0);
-		//following hijacked from body.c to actually get rid of stoneskin 
+		//following hijacked from body.c to actually get rid of stoneskin
 		//or iron body if the target has those spells cast on them - Saide
 		if(target->query_property("spelled"))
 		{
-			while(objectp(myspl = MAGIC_D->get_spell_from_array(target->query_property("spelled"), "stoneskin")) || 
-			objectp(myspl = MAGIC_D->get_spell_from_array(target->query_property("spelled"), "iron body"))) 
+			while(objectp(myspl = MAGIC_D->get_spell_from_array(target->query_property("spelled"), "stoneskin")) ||
+			objectp(myspl = MAGIC_D->get_spell_from_array(target->query_property("spelled"), "iron body")))
             	{
             		target->remove_property_value("spelled", ({myspl}));
             		myspl->dest_effect();

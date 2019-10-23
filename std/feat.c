@@ -718,7 +718,7 @@ int allow_shifted() {return 0;};
 
 void delay_msg(int delay, string message)
 {
-    MESSAGING_D->delay_local_message(delay,"info",message,({caster}));
+    MESSAGING_D->delay_local_message(delay,"info","\n  "+message+"\n",({caster}));
 }
 
 void help(){

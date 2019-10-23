@@ -5,7 +5,7 @@ inherit FEAT;
 
 int fired;
 
-#define FEATTIMER 30; 
+#define FEATTIMER 30
 
 void create() {
     ::create();
@@ -43,7 +43,7 @@ void execute_feat() {
     mapping tempmap;
     object ammo, *weapons;
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -133,10 +133,11 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^disarmed%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using disarm");
     caster->set_property("using disarm",newmap);
 
-    if(!(res = thaco(target))) 
+    if(!(res = thaco(target)))
     {
         tell_object(caster,"%^RED%^"+target->QCN+" twists away quickly, leaving "
             "you off balance!%^RESET%^");
@@ -163,7 +164,7 @@ void execute_attack() {
         dest_effect();
         return;
     }
-    
+
     if(fired) {
         tell_object(caster,"%^BOLD%^%^CYAN%^Your shot flies true, knocking "
             +target->QCN+"'s weapon from "+target->QP+" grasp.");

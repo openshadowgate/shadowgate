@@ -6,7 +6,7 @@ inherit FEAT;
 int mod, fired, in_shapeshift;
 void refix();
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 35
 
 void create() {
     ::create();
@@ -45,7 +45,7 @@ void execute_feat() {
     mapping tempmap;
     object ammo, *weapons;
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -118,6 +118,7 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^sundered%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using sunder");
     caster->set_property("using sunder",newmap);
 
@@ -156,4 +157,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

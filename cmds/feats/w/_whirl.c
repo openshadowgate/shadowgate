@@ -46,7 +46,7 @@ int cmd_whirl(string str) {
 void execute_feat(){
     int attack_count;
     object *weapons;
-       
+
     if((int)caster->query_property("using whirl") > time() && !FEATS_D->usable_feat(caster,"whirling dervish")) {
         tell_object(caster,"You can't try to whirl again so soon!");
         dest_effect();
@@ -58,7 +58,7 @@ void execute_feat(){
         return;
     }
     ::execute_feat();
-    if(!objectp(caster)) { 
+    if(!objectp(caster)) {
         dest_effect();
         return;
     }
@@ -139,6 +139,8 @@ void execute_attack(){
 
     caster->remove_property("using whirl");
     caster->set_property("using whirl", time() + 35 );
+    if(!FEATS_D->usable_feat(caster,"whirling dervish"))
+        delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^whirl%^WHITE%^ again.%^RESET%^");
 
     for(i=0;i<sizeof(attackers);i++) {
         if(!objectp(attackers[i])) continue;
@@ -151,9 +153,9 @@ void execute_attack(){
         dam += caster->query_damage_bonus();
         dam += roll_dice(clevel,5)+roll_dice(2,8);
 
-        if(!present(attackers[i],environment(caster))) { 
-            tell_object(caster,"%^RED%^That target is no longer in range!%^RESET%^"); 
-            continue; 
+        if(!present(attackers[i],environment(caster))) {
+            tell_object(caster,"%^RED%^That target is no longer in range!%^RESET%^");
+            continue;
         }
         if(sizeof(weapons)) {
           if(!(res = thaco(attackers[i]))) {
@@ -168,8 +170,8 @@ void execute_attack(){
           }
         }
 
-        if(attackers[i]->query_property("weapon resistance") || res == -1) 
-        { 
+        if(attackers[i]->query_property("weapon resistance") || res == -1)
+        {
             if(!hit) hit = -1;
             if(stringp(caster->query("featMiss")))
             {
@@ -177,10 +179,10 @@ void execute_attack(){
                 caster->delete("featMiss");
                 continue;
             }
-            if(enchant < attackers[i]->query_property("weapon resistance")) 
+            if(enchant < attackers[i]->query_property("weapon resistance"))
             {
-                tell_object(attackers[i],"%^BOLD%^"+caster->QCN+" hits you with an ineffective barrage of attacks.%^RESET%^");                
-                continue;                
+                tell_object(attackers[i],"%^BOLD%^"+caster->QCN+" hits you with an ineffective barrage of attacks.%^RESET%^");
+                continue;
             }
         }
         display_messages(attackers[i],caster);
@@ -249,20 +251,20 @@ void dest_effect() {
 void display_messages(object targ,object player) {
     if(!objectp(targ)) return;
     if(!objectp(player)) return;
-   
+
     switch(random(5)) {
     case 0:
         tell_object(targ,"%^BOLD%^%^GREEN%^"+player->QCN+" executes a flurry of attacks on you!");
         break;
-     
+
     case 1:
         tell_object(targ,"%^BOLD%^%^BLUE%^"+player->QCN+" turns quickly and hits you with a series of deadly accurate attacks!");
         break;
-     
+
     case 2:
         tell_object(targ,"%^RESET%^%^GREEN%^"+player->QCN+" seems to pick up speed as "+player->QS+" attacks you witth deadly accuracy!");
         break;
-     
+
     case 3:
         if(in_shapeshift) {
           tell_object(targ,"%^BOLD%^%^MAGENTA%^"+player->QCN+" dances deftly around you as "+player->QS+" swings "+player->query_possessive()+" weapons in graceful, fluid motions that seem to never cease coming!");
@@ -271,7 +273,7 @@ void display_messages(object targ,object player) {
           tell_object(targ,"%^BOLD%^%^MAGENTA%^"+player->QCN+" dances deftly around you as "+player->QS+" swings "+player->query_possessive()+" weapons in graceful, fluid motions that seem to never cease coming!");
         }
         break;
-     
+
     case 4:
         if(in_shapeshift) {
           tell_object(targ,"%^RESET%^%^BLUE%^"+player->QCN+" suddenly turns and directs "+player->QP+" attacks at you...  "+player->QP+" becomes a blur of fangs and claws as "+caster->QS+" hits you!");

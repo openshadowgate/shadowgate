@@ -2,7 +2,7 @@
 #include <daemons.h>
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -41,7 +41,7 @@ int cmd_sweepingblow(string str)
 void execute_feat()
 {
     object *weapons;
-    
+
     if(!objectp(caster))
     {
         dest_effect();
@@ -53,7 +53,7 @@ void execute_feat()
         return;
     }
 
-    if((int)caster->query_property("using sweeping blow") > time() && !FEATS_D->usable_feat(caster,"wade through")) 
+    if((int)caster->query_property("using sweeping blow") > time() && !FEATS_D->usable_feat(caster,"wade through"))
     {
         tell_object(caster,"It's too soon to use sweeping blow again yet!");
         dest_effect();
@@ -117,6 +117,7 @@ void execute_attack()
 
     caster->remove_property("using sweeping blow");
     caster->set_property("using sweeping blow",(time() + 35));
+    delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^sweepingblow%^WHITE%^ again.%^RESET%^");
 
     ::execute_attack();
 
@@ -151,9 +152,9 @@ void execute_attack()
         dest_effect();
         return;
     }
-    
+
     if(FEATS_D->usable_feat(caster,"the reaping")) { reaping = 1; }
-    
+
 
     for(i=0;i<sizeof(attackers);i++)
     {
@@ -176,7 +177,7 @@ void execute_attack()
                 tell_object(attackers[i],"%^BOLD%^%^GREEN%^"+caster->QCN+"'s "+weapons[0]->query_short()+" hits you with "
                     "such force that it knocks you flat onto the ground!");
                 attackers[i]->set_tripped(clevel / 10, "%^BOLD%^%^GREEN%^You are trying to get up!");
-            }            
+            }
         }
         else if(res == -1)
         {
@@ -184,9 +185,9 @@ void execute_attack()
             if(stringp(caster->query("featMiss")))
             {
                 tell_object(caster, caster->query("featMiss")+" " +query_feat_name()+"!");
-                caster->delete("featMiss");            
+                caster->delete("featMiss");
             }
-        }       
+        }
         continue;
     }
 
@@ -203,7 +204,7 @@ void execute_attack()
         if(reaping)
         {
             mod = clevel*4;
-            
+
             if(caster->query_hp() < caster->query_max_hp())
             {
                 diff = caster->query_max_hp() - caster->query_hp();
@@ -222,7 +223,7 @@ void execute_attack()
             {
                 caster->add_extra_hp(mod - caster->query_extra_hp());
             }
-            
+
             tell_object(caster,"%^BOLD%^%^RED%^You are filled with bloodlust and eagerness for battle as you reap your foes!");
         }
 
@@ -239,4 +240,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

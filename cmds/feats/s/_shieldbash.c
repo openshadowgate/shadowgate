@@ -9,11 +9,11 @@ int FLAG;
 
 // Three things are necessary to set in create in all feats.  First, the type of feat
 // either instant or duration or permanent.  The type of feat will tell the inherit
-// how to interact with it.  Second, the category of the feat.  This will tell the 
+// how to interact with it.  Second, the category of the feat.  This will tell the
 // mortal command _feats.c, what to display the feat as in the list.  And finally the
 // name of the feat.  This is also used in the display of the feat's name in the feats
 // command and for farious functions related to the feat in the feat daemon
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -32,13 +32,13 @@ void create()
 int allow_shifted() { return 0; }
 
 // This is the function that tells the feat if the player is able to buy/gain it.  It
-// also gets called every time the feat is used.  If at any time the player fails to 
+// also gets called every time the feat is used.  If at any time the player fails to
 // meet the prerequisites, they will be unable to use the feat.  For example, if a feat
 // requires an 18 strength, and a monster drains their strength so it's at 16, they will
-// not be able to use the feat until they recover their strength.  
-// ***** NOTE *****  Each feat in a chain should only have the feat before it as a 
-// prerequisite.  For example.. two weapon fighting requires ambidexterity, improved 
-// two weapon fighting requires ambidexterity and two weapon fighting.  Only add 
+// not be able to use the feat until they recover their strength.
+// ***** NOTE *****  Each feat in a chain should only have the feat before it as a
+// prerequisite.  For example.. two weapon fighting requires ambidexterity, improved
+// two weapon fighting requires ambidexterity and two weapon fighting.  Only add
 // the last feat in the chain to the list of prerequisites because the feat daemon
 // will loop through the whole list every time the feat is called. (many, many, many times)
 int prerequisites(object ob)
@@ -47,7 +47,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-// For instant feats, you need the int cmd_command_name(string str) structure.  This is to 
+// For instant feats, you need the int cmd_command_name(string str) structure.  This is to
 // make sure that the correct arguments get passed along to the feat.  Instant feats are those
 // feats that act like commands.  They usually will have targets and will do something directly
 // to either the target, or to the caster
@@ -68,24 +68,24 @@ int cmd_shieldbash(string str)
 
 // execute_feat() is where the work of the feat begins to take place.  execute_feat() is called
 // from setup_feat() so you don't have to call it directly.  You must make a call to ::execute_feat()
-// inside of your execute_feat() function in order to make sure it goes through all the checks 
-// needed to make sure the caster is capable of using the feat, and make sure the target gets 
+// inside of your execute_feat() function in order to make sure it goes through all the checks
+// needed to make sure the caster is capable of using the feat, and make sure the target gets
 // assigned.  Once you've called ::execute_feat(), the rest of the feat will work like any ordinary
 // command.  You MUST CALL dest_effect() when you want the feat to end, or it will error.
 void execute_feat()
 {
     mapping tempmap;
-    // ::execute_feat This handles assigning single targets for feats with one target.  
+    // ::execute_feat This handles assigning single targets for feats with one target.
     // It also runs through prerequisite checks to make sure the caster is able to use the feat.
-    ::execute_feat(); 
-    if(!objectp(target)) 
-    { 
+    ::execute_feat();
+    if(!objectp(target))
+    {
         // It's very important that dest_effect() is called when the feat ends.  If not, it
         // will break combat in the room where the feat was used
         dest_effect();
         return;
     }
-    
+
     if((int)caster->query_property("using instant feat")) {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
@@ -169,6 +169,7 @@ void execute_attack()
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
+    delay_msg(25,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^shieldbashed%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using shieldbash");
     caster->set_property("using shieldbash",newmap);
 
@@ -211,17 +212,17 @@ void execute_attack()
         "and staggers back in pain as "+target->QS+" is slammed hard!%^RESET%^",({target,caster}));
     target->set_paralyzed(roll_dice(6,4),"%^MAGENTA%^You are trying to regain your senses!%^RESET%^");
     target->do_damage("head",dam);
-    
-    if(!objectp(target)) 
+
+    if(!objectp(target))
     {
         dest_effect();
         return;
     }
-    
+
     mod = dam;
     mod += clevel - (int)target->query_highest_level();
     mod = mod * -1;
-    // You have to calculate your opposed modifiers for the new saving throws manually.  
+    // You have to calculate your opposed modifiers for the new saving throws manually.
     // In this case, I use the damage of the shieldbash, plus or minus the level difference.
     // NEGATIVE modifiers will help the caster, which is what we want because target modifiers
     // are already added in the saving throw daemon.
@@ -232,8 +233,8 @@ void execute_attack()
         {
             target->set_static("spell interrupt","%^RED%^Your head is still hazy from being "
                 "slammed with "+caster->QCN+"'s shield!%^RESET%^");
-        } 
-        else 
+        }
+        else
         {
             target->spell_interrupt("spell interrupt","%^RED%^Your head is still hazy from being "
                 "slammed with "+caster->QCN+"'s shield!%^RESET%^");
@@ -270,4 +271,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

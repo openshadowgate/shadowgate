@@ -6,7 +6,7 @@ int fired, in_shapeshift;
 
 void timer(object tp);
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -14,7 +14,7 @@ void create()
     feat_name("knockdown");
     feat_prereq("Expertise");
     feat_syntax("knockdown TARGET");
-    feat_desc("Knockdown is an instant combat feat that can be used to try to knock an opponent off of his or her feet. The command requires a target to work, and will use a small amount of stamina. 
+    feat_desc("Knockdown is an instant combat feat that can be used to try to knock an opponent off of his or her feet. The command requires a target to work, and will use a small amount of stamina.
 
 A druid with the 'mastery of fang and claw' feat may also use this feat while in wolf form, even if it has not been purchased directly.");
     set_target_required(1);
@@ -45,15 +45,15 @@ int cmd_knockdown(string str)
 void execute_feat()
 {
     object ammo, *weapons;
-    if((int)caster->query_property("using knockdown") > time()) 
+    if((int)caster->query_property("using knockdown") > time())
     {
         tell_object(caster,"You can't try to knock someone down yet!");
         dest_effect();
         return;
     }
     ::execute_feat();
-    if(!objectp(target)) 
-    { 
+    if(!objectp(target))
+    {
         dest_effect();
         return;
     }
@@ -89,8 +89,8 @@ void execute_feat()
     caster->use_stamina(roll_dice(1,6));
     caster->set_property("using instant feat",1);
     caster->remove_property("using knockdown");
-//    caster->set_property("using knockdown",time() + 15);
-    caster->set_property("using knockdown",time() + 30); //doubled timer to be on par with whirl etc. Nienne, 08/09.
+    delay_msg(30,"%^BOLD%^%^WHITE%^You can %^CYAN%^knockdown%^WHITE%^ again.%^RESET%^");
+    caster->set_property("using knockdown",time() + 30);
     spell_kill(target,caster);
     return;
 }
@@ -168,7 +168,7 @@ void timer(object tp)
 {
    if(!objectp(tp))  return;  // added because it's in a callout *Styx*
    if(!tp->query_property("using knockdown")) dest_effect();
-   if(!sizeof(tp->query_attackers())) { 
+   if(!sizeof(tp->query_attackers())) {
         tp->remove_property("using knockdown");
         dest_effect();
         return;

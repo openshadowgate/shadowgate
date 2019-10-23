@@ -5,7 +5,7 @@
 #include <magic.h>
 inherit FEAT;
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 35
 
 void create() {
     ::create();
@@ -58,6 +58,7 @@ void execute_feat() {
         return;
     }
     delay = time() + FEATTIMER;
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^psionicweapon%^WHITE%^ again.%^RESET%^");
     caster->set_property("using instant feat",1);
     caster->remove_property("using smite");
     caster->set_property("using smite",delay);
@@ -123,4 +124,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

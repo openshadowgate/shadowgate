@@ -2,11 +2,11 @@
 #include <daemons.h>
 inherit FEAT;
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 35
 
 int in_shapeshift;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -32,7 +32,7 @@ int prerequisites(object ob)
         dest_effect();
         return 0;
     }
-    if(!FEATS_D->has_feat(ob,"sweepingblow")) 
+    if(!FEATS_D->has_feat(ob,"sweepingblow"))
     {
         dest_effect();
         return 0;
@@ -55,8 +55,8 @@ void execute_feat()
     object *weapons;
     string type;
     mapping tempmap;
-        
-    ::execute_feat(); 
+
+    ::execute_feat();
     if(!objectp(caster))
     {
         dest_effect();
@@ -95,8 +95,8 @@ void execute_feat()
           return;
         }
     }
-    if(!objectp(target) || !present(target,place)) 
-    { 
+    if(!objectp(target) || !present(target,place))
+    {
         tell_object(caster,"You don't have a target!");
         dest_effect();
         return;
@@ -135,12 +135,12 @@ void execute_attack()
     int i,dam,mod,enchant,timerz,mult,reaping,diff, res;
     mapping tempmap, newmap;
 
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
     }
-    
+
     caster->remove_property("using instant feat");
     ::execute_attack();
     weapons = caster->query_wielded();
@@ -202,6 +202,7 @@ void execute_attack()
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^impaled%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using impale");
     caster->set_property("using impale",newmap);
     if(!(res = thaco(target,enchant)))
@@ -213,7 +214,7 @@ void execute_attack()
         tell_room(place,"%^BOLD%^%^MAGENTA%^"+target->QCN+" sidesteps "+caster->QCN+"'s attack "
             "at the last instant, leaving "+caster->QP+" open to attack!%^RESET%^", ({caster, target}));
         caster->set_paralyzed(roll_dice(1,6),"%^YELLOW%^You are trying to get back into "
-            "position!%^RESET%^");       
+            "position!%^RESET%^");
         dest_effect();
         return;
     }
@@ -233,7 +234,7 @@ void execute_attack()
         return;
     }
     if(FEATS_D->usable_feat(caster,"the reaping")) { reaping = 1; }
-    
+
     mult = 8; // this was 4, which was average damage of about 60 hitpoints at level 50, average of about 24 damage at level 20...
     if(reaping) { mult = 16; }
 
@@ -279,7 +280,7 @@ void execute_attack()
             "and unable to move!%^RESET%^",({target,caster}));
         target->set_paralyzed(roll_dice(2,4),"%^YELLOW%^You are struggling to move!%^RESET%^");
     }
-    
+
     if(objectp(target_two)) {
         switch(type) {
         case "sharp":
@@ -304,7 +305,7 @@ void execute_attack()
                 "into "+target_two->QCN+"!%^RESET%^",({target,target_two,caster}));
             break;
         }
-    
+
         if(!do_save(target_two,mod)) {
             tell_object(target_two,"%^BOLD%^%^YELLOW%^The attack staggers you, knocking you off "
                 "balance!%^RESET%^");
@@ -315,21 +316,21 @@ void execute_attack()
         }
     }
 
-    if(target->query_property("weapon resistance")) 
+    if(target->query_property("weapon resistance"))
     {
         if(enchant < (int)target->query_property("weapon resistance"))
         {
             target->do_damage(target->return_target_limb(),0);
         }
     }
-    else 
+    else
     {
         target->do_damage(target->return_target_limb(),dam);
     }
-    
-    if(objectp(target_two)) 
+
+    if(objectp(target_two))
     {
-        if(target_two->query_property("weapon resistance")) 
+        if(target_two->query_property("weapon resistance"))
         {
             if(enchant < (int)target_two->query_property("weapon resistance"))
             {
@@ -343,13 +344,13 @@ void execute_attack()
 
         newmap += ([ target_two : timerz ]);
     }
-    
-    
+
+
     if(reaping)
     {
         if(objectp(target_two)) { mod = clevel * 3; }
         else { mod = to_int(clevel * 1.5); }
-        
+
         if(caster->query_hp() < caster->query_max_hp())
         {
             diff = caster->query_max_hp() - caster->query_hp();
@@ -368,7 +369,7 @@ void execute_attack()
         {
             caster->add_extra_hp(mod - caster->query_extra_hp());
         }
-        
+
         tell_object(caster,"%^BOLD%^%^RED%^You are filled with bloodlust and eagerness for battle as you reap your foes!");
     }
 

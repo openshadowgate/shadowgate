@@ -5,7 +5,7 @@
 inherit FEAT;
 
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -33,7 +33,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_shield_charge(string str) 
+int cmd_shield_charge(string str)
 {
     object feat;
     if(!objectp(TP)) { return 0; }
@@ -47,30 +47,30 @@ int cmd_shield_charge(string str)
 void execute_feat()
 {
     ::execute_feat();
-    
+
     if(!objectp(caster) || !objectp(environment(caster)))
     {
         dest_effect();
         return;
     }
-    
+
     place = environment(caster);
 
-    if((int)caster->query_property("using instant feat")) 
+    if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
         return;
     }
-    
-    if((int)caster->query_property("using shield charge") > time()) 
+
+    if((int)caster->query_property("using shield charge") > time())
     {
         tell_object(caster,"You can't try to shield charge again so soon!");
         dest_effect();
         return;
     }
-    
-    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed()) 
+
+    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
     {
         caster->send_paralyzed_message("info",TP);
         dest_effect();
@@ -83,7 +83,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    
+
     caster->use_stamina(roll_dice(1,6));
     caster->set_property("using instant feat",1);
 
@@ -96,63 +96,63 @@ void execute_attack()
     object room, *followers, *attackers;
     string door;
     int i,open, locked,charging_direction,level, doing;
-    
-    if(!objectp(caster) || !objectp(environment(caster))) 
+
+    if(!objectp(caster) || !objectp(environment(caster)))
     {
         dest_effect();
         return;
     }
     caster->remove_property("using instant feat");
     ::execute_attack();
-    
-    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed()) 
+
+    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
     {
         caster->send_paralyzed_message("info",TP);
         dest_effect();
         return;
     }
-    
+
     if(place->query_exit(arg) != "/d/shadowgate/void")
     {
         place = environment(caster);
-        
+
         room = find_object_or_load(place->query_exit(arg));
-        
+
         if(!objectp(room) || room->query_property("no phase") || place->query_property("no phase")) // check for a door too
         {
             tell_object(caster,"You can't seem to shield charge to the "+arg+".");
             dest_effect();
             return;
         }
-        
+
         if(door = place->query_door(arg))
         {
             open = place->query_open(door);
             if(!open)
             {
-                locked = place->query_locked(door);            
+                locked = place->query_locked(door);
             }
             if(locked)
             {
                 tell_object(caster,"You can't shield charge through that "+door+"!");
                 dest_effect();
                 return;
-            }        
-        }        
-        
+            }
+        }
+
         followers = caster->query_followers();
         charging_direction = 1;
         doing = 1;
 
     }
-    
+
     attackers = caster->query_attackers();
-    
+
     if(sizeof(attackers))
     {
         level = caster->query_character_level();
         level += roll_dice(1,10); // might need adjustment
-        
+
         for(i=0;i<sizeof(attackers);i++)
         {
             if(!objectp(attackers[i])) { continue; }
@@ -176,22 +176,23 @@ void execute_attack()
                     "knocking your teeth loose!\n%^RESET%^%^GREEN%^You are sent sprawling to the ground!");
                 tell_room(place,"%^RESET%^%^BOLD%^%^BLUE%^"+caster->QCN+" slams into "+attackers[i]->QCN+" with "+caster->QP+" shield, knocking "
                     ""+attackers[i]->QO+" flat on "+attackers[i]->QP+" back!",({attackers[i],caster}));
-                attackers[i]->set_tripped(level / 10, "%^RESET%^%^GREEN%^You are trying to stand up again!");                
+                attackers[i]->set_tripped(level / 10, "%^RESET%^%^GREEN%^You are trying to stand up again!");
             }
             doing = 1;
             attackers[i]->cause_typed_damage(attackers[i],attackers[i]->return_target_limb(), roll_dice(6, level), "bludgeoning");
         }
-        
+
         tell_object(caster,"%^MAGENTA%^You charge through the area with your shield, sending opponents scattering!");
         caster->remove_property("using shield charge");
         caster->set_property("using shield charge", time() + 35 );
+        delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^shield charge%^WHITE%^ again.%^RESET%^");
     }
-    
-    
 
-    
+
+
+
     if(charging_direction)
-    {    
+    {
         caster->remove_property("using shield charge");
         caster->set_property("using shield charge", time() + 35 );
         if(door && !open)
@@ -203,11 +204,11 @@ void execute_attack()
         {
             tell_object(caster,"%^YELLOW%^You CHARGE to the "+arg+" behind your shield!");
         }
-        
+
         caster->clear_followers();
         caster->move(room);
 
-        
+
         if(sizeof(followers))
         {
             for(i=0;i<sizeof(followers);i++)
@@ -230,12 +231,12 @@ void execute_attack()
                     caster->add_follower(followers[i]);
                 }
             }
-        }        
+        }
         caster->force_me("look");
     }
-    
 
-    
+
+
     if(!doing)
     {
         tell_object(caster,"You really wish you had something to charge into with your shield");
@@ -243,14 +244,13 @@ void execute_attack()
     }
 
     dest_effect();
-    return;    
+    return;
 }
 
 
 void dest_effect()
-{    
+{
     ::dest_effect();
     remove_feat(TO);
     return;
 }
-

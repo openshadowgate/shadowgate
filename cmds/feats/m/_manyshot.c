@@ -39,7 +39,7 @@ int cmd_manyshot(string str) {
 void execute_feat(){
     int ammoleft, i;
     object *weapons, ammo;
-       
+
     if((int)caster->query_property("using manyshot") > time()) {
         tell_object(caster,"You can't try to fire so many arrows again so soon!");
         dest_effect();
@@ -51,7 +51,7 @@ void execute_feat(){
         return;
     }
     ::execute_feat();
-    if(!objectp(caster)) { 
+    if(!objectp(caster)) {
         dest_effect();
         return;
     }
@@ -93,7 +93,7 @@ void execute_feat(){
     }
     if((ammoleft > 0) && (hits > ammoleft)) hits = ammoleft; // if they don't have enough arrows to hit all targets, only as many hits as arrows left.
     for(i=0;i<hits;i++) ammo->use_shots(); // burn off an arrow for each hit they're about to attempt.
-    
+
     tell_object(caster,"%^BOLD%^You grasp for a handful of arrows, ready to unleash a rapid barrage!\n%^RESET%^");
     tell_room(environment(caster),"%^MAGENTA%^"+caster->QCN+" grasps a handful of arrows and begins unleashing them in a rapid barrage!\n%^RESET%^",caster);
     caster->use_stamina(roll_dice(1,6));
@@ -143,6 +143,7 @@ void execute_attack(){
 
     caster->remove_property("using manyshot");
     caster->set_property("using manyshot", time() + 35 );
+    delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^manyshot%^WHITE%^ again.%^RESET%^");
 
     if(hits > sizeof(attackers)) hits = sizeof(attackers); // if some targets have since died, don't bother hitting them.
     for(i=0;i<sizeof(attackers);i++) {
@@ -154,9 +155,9 @@ void execute_attack(){
 
         dam += roll_dice((int)caster->query_level(),5)+roll_dice(2,8); // this is copied per whirl; please modify if changed.
 
-        if(!present(attackers[i],environment(caster))) { 
-            tell_object(caster,"%^RED%^That target is no longer in range!%^RESET%^"); 
-            continue; 
+        if(!present(attackers[i],environment(caster))) {
+            tell_object(caster,"%^RED%^That target is no longer in range!%^RESET%^");
+            continue;
         }
         if(!thaco(attackers[i]))
         {
@@ -164,7 +165,7 @@ void execute_attack(){
             tell_object(attackers[i],"%^CYAN%^"+caster->QCN+" sends a barrage of attacks your way, but you dodge quickly out of the way!%^RESET%^");
             continue;
         }
-        if(attackers[i]->query_property("weapon resistance")) { 
+        if(attackers[i]->query_property("weapon resistance")) {
             if(enchant < attackers[i]->query_property("weapon resistance")) {
                 tell_object(attackers[i],"%^BOLD%^"+caster->QCN+" hits you with an ineffective barrage of attacks.%^RESET%^");
                 continue;
@@ -217,24 +218,24 @@ void dest_effect() {
 void display_messages(object targ,object player) {
     if(!objectp(targ)) return;
     if(!objectp(player)) return;
-   
+
     switch(random(5)) {
     case 0:
         tell_object(targ,"%^BOLD%^%^GREEN%^"+player->QCN+" unleashes a volley of arrows at you!");
         break;
-     
+
     case 1:
         tell_object(targ,"%^BOLD%^%^BLUE%^"+player->QCN+" drops to one knee and launches a rapid series of shots at you!");
         break;
-     
+
     case 2:
         tell_object(targ,"%^RESET%^%^GREEN%^"+player->QCN+"'s bowstring hums as "+player->QS+" fires shot after shot at you!");
         break;
-     
+
     case 3:
         tell_object(targ,"%^BOLD%^%^MAGENTA%^"+player->QCN+" becomes a blur of movement, another arrow nocked even as the first leaves "+player->QP+" bowstring!");
         break;
-     
+
     case 4:
         tell_object(targ,"%^RESET%^%^BLUE%^"+player->QCN+" moves faster than you can follow, firing a hail of shots your way!");
         break;

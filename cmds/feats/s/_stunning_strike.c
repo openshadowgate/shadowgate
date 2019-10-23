@@ -21,7 +21,7 @@ int allow_shifted() { return 1; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if((int)ob->query_class_level("monk") < 5 || (int)ob->query_alignment() > 3) 
+    if((int)ob->query_class_level("monk") < 5 || (int)ob->query_alignment() > 3)
     {
         dest_effect();
         return 0;
@@ -29,7 +29,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_stunning_strike(string str) 
+int cmd_stunning_strike(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
@@ -54,49 +54,49 @@ int check_can_use()
         if((int)weapons[x]->query_size() > 1)
         {
             tell_object(caster, "%^BOLD%^%^GREEN%^Your "+weapons[x]->query_short()+
-            " interferes with your stunning strike attempt!%^RESET%^");            
+            " interferes with your stunning strike attempt!%^RESET%^");
             return 0;
         }
         continue;
-    }    
+    }
     if(!caster->is_ok_armour("barb"))
     {
         tell_object(caster, "%^BOLD%^%^GREEN%^Your armor interferes "+
-        "with your stunning strike attempt!%^RESET%^");        
+        "with your stunning strike attempt!%^RESET%^");
         return 0;
-    }    
-    if(caster->query_in_vehicle()) 
+    }
+    if(caster->query_in_vehicle())
     {
-        tell_object(caster,"You cannot use stunning strike while mounted!");        
+        tell_object(caster,"You cannot use stunning strike while mounted!");
         return 0;
-    }   
+    }
     if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 1))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
-        "a stunning strike!%^RESET%^");      
-        return 0;       
-    }   
+        "a stunning strike!%^RESET%^");
+        return 0;
+    }
     return 1;
 }
 
-void execute_feat() 
+void execute_feat()
 {
     mapping tempmap;
     object *weapons;
     int x;
     ::execute_feat();
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
-    }    
+    }
     if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
     {
         caster->send_paralyzed_message("info",caster);
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat")) 
+    if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
@@ -108,7 +108,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if(target == caster) 
+    if(target == caster)
     {
         tell_object(caster,"You cannot use stunning strike on yourself!");
         dest_effect();
@@ -127,15 +127,15 @@ void execute_feat()
         return;
     }
     tempmap = caster->query_property("using stunning strike");
-    if(mapp(tempmap)) 
+    if(mapp(tempmap))
     {
-        if(tempmap[target] > time()) 
+        if(tempmap[target] > time())
         {
             tell_object(caster,"That target is still wary of such an attack!");
             dest_effect();
             return;
         }
-    }    
+    }
     if(!check_can_use())
     {
         dest_effect();
@@ -144,13 +144,13 @@ void execute_feat()
     caster->use_stamina(roll_dice(1,6));
     caster->set_property("using instant feat",1);
     spell_kill(target,caster);
-    
+
     tell_object(caster, "%^BOLD%^%^CYAN%^You focus intently on manipulating the ki in "+
     target->QCN+"%^BOLD%^%^CYAN%^'s body!%^RESET%^");
-    
+
     tell_object(target, caster->QCN+"%^BOLD%^%^CYAN%^ begins focusing intently on "+
     "you!%^RESET%^");
-    
+
     if(objectp(place))
     {
         tell_room(place, caster->QCN+"%^BOLD%^%^CYAN%^ begins focusing intently "+
@@ -159,7 +159,7 @@ void execute_feat()
     return;
 }
 
-void execute_attack() 
+void execute_attack()
 {
     int damage, timerz, i, DC;
     object *keyz, shape, *weapons, myweapon;
@@ -173,12 +173,12 @@ void execute_attack()
     caster->remove_property("using instant feat");
     ::execute_attack();
 
-    if(caster->query_unconscious()) 
+    if(caster->query_unconscious())
     {
         dest_effect();
         return;
     }
-    if(!objectp(target) || !present(target,place)) 
+    if(!objectp(target) || !present(target,place))
     {
         tell_object(caster,"Your target has eluded you!");
         dest_effect();
@@ -189,38 +189,39 @@ void execute_attack()
         dest_effect();
         return;
     }
-    
+
     if(!caster->spend_ki(1))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
-        "a stunning strike!%^RESET%^");      
+        "a stunning strike!%^RESET%^");
         dest_effect();
         return;
     }
-    
+
     tempmap = caster->query_property("using stunning strike"); // adding per-target tracking. -N, 9/10.
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
     keyz = keys(tempmap);
-    for(i=0;i<sizeof(keyz);i++) 
-    { 
+    for(i=0;i<sizeof(keyz);i++)
+    {
         if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
         continue;
     }
     timerz = time() + 60;
     tempmap += ([ target : timerz ]);
+    delay_msg(60,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^sunning striken%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using stunning strike");
     caster->set_property("using stunning strike",tempmap);
 
     weapons = caster->query_wielded();
     if(sizeof(weapons)) myweapon = weapons[0];
-    
+
     if(!thaco(target, 0, 1))
     {
         tell_object(caster, "%^BOLD%^%^CYAN%^You miss your stunning strike on "+target->QCN+
-        "%^BOLD%^%^CYAN%^!%^RESET%^");        
+        "%^BOLD%^%^CYAN%^!%^RESET%^");
         tell_object(target, caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused strike at you, "+
-        "but you manage to avoid it just in time!%^RESET%^");        
+        "but you manage to avoid it just in time!%^RESET%^");
         if(objectp(environment(caster)))
         {
             tell_room(environment(caster), caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused "+
@@ -232,10 +233,10 @@ void execute_attack()
     }
     tell_object(caster, "%^BOLD%^%^CYAN%^Your stunning strike slams into "+target->QCN+
     "!%^RESET%^");
-    
+
     tell_object(target, caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused strike, "+
     "connecting squarely with you!%^RESET%^");
-    
+
     if(objectp(environment(caster)))
     {
         tell_room(environment(caster), caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused strike "+
@@ -259,10 +260,10 @@ void execute_attack()
     }
     tell_object(target, "%^BOLD%^%^RED%^Your entire body shudders violently for a brief "+
     "instant and suddenly you are completely unable to move!%^RESET%^");
-    
+
     target->set_paralyzed((ROUND_LENGTH * 2), "%^BOLD%^%^RED%^The impact of "+
     "the strike has left you unable to move!%^RESET%^");
-    
+
     if(objectp(environment(caster)))
     {
         tell_room(environment(caster), target->QCN+"%^BOLD%^%^WHITE%^'s "+
@@ -278,4 +279,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

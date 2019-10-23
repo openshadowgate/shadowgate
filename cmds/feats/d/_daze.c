@@ -5,7 +5,7 @@ inherit FEAT;
 
 int FLAG, fired;
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 35
 
 void create() {
     ::create();
@@ -45,7 +45,7 @@ void execute_feat() {
     mapping tempmap;
     object ammo, *weapons;
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -116,6 +116,7 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^dazed%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using daze");
     caster->set_property("using daze",newmap);
 
@@ -146,7 +147,7 @@ void execute_attack() {
         dest_effect();
         return;
     }
-    
+
     mod = clevel;
     mod += clevel - (int)target->query_level();
     mod = mod * -1;
@@ -207,4 +208,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

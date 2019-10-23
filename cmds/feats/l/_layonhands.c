@@ -4,7 +4,7 @@
 #include "/d/shadowgate/dieties.h"
 inherit FEAT;
 
-#define FEATTIMER 45; 
+#define FEATTIMER 45
 
 void create() {
     ::create();
@@ -42,7 +42,7 @@ void execute_feat() {
     int delay;
     string mygawd, *mygawds;
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -52,6 +52,7 @@ void execute_feat() {
         return;
     }
     delay = time() + FEATTIMER;
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^layonhands%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using layonhands");
     caster->set_property("using layonhands",delay);
     return;

@@ -31,7 +31,7 @@ int prerequisites(object ob){
     return ::prerequisites(ob);
 }
 
-int cmd_spinning_kick(string str) 
+int cmd_spinning_kick(string str)
 {
     object feat;
     if(!objectp(TP)) { return 0; }
@@ -44,25 +44,25 @@ void execute_feat()
 {
     int attack_count;
     object *weapons;
-       
+
     if((int)caster->query_property("using spinning kick") > time()) {
         tell_object(caster,"You can't use spinning kick again so soon!");
         dest_effect();
         return;
     }
-    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed()) 
+    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
     {
         caster->send_paralyzed_message("info",TP);
         dest_effect();
         return;
     }
     ::execute_feat();
-    if(!objectp(caster)) 
-    { 
+    if(!objectp(caster))
+    {
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat")) 
+    if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
@@ -75,7 +75,7 @@ void execute_feat()
       return;
     }
     weapons = caster->query_wielded();
-    if(sizeof(weapons)) 
+    if(sizeof(weapons))
     {
         tell_object(caster,"%^YELLOW%^You must be unarmed to use this feat!\n");
         dest_effect();
@@ -83,7 +83,7 @@ void execute_feat()
     }
     tell_object(caster,"%^BOLD%^You center yourself, preparing your body to launch a series of devasting attacks!\n%^RESET%^");
     tell_room(environment(caster),"%^WHITE%^"+caster->QCN+" seems to center "+caster->QO+"self, preparing "+caster->QP+" body!\n%^RESET%^",caster);
-    
+
     caster->use_stamina(roll_dice(1,6));
     caster->set_property("using instant feat",1);
     spell_kill(target,caster);
@@ -123,8 +123,9 @@ void execute_attack()
     }
     caster->remove_property("using spinning kick");
     caster->set_property("using spinning kick", time() + 35 );
+    delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^spinning_kick%^WHITE%^ again.%^RESET%^");
 
-    for(i=0;i<sizeof(attackers);i++) 
+    for(i=0;i<sizeof(attackers);i++)
     {
         if(!objectp(attackers[i])) continue;
         enchant = 0;
@@ -133,23 +134,23 @@ void execute_attack()
             enchant = (int)"/std/class/monk.c"->effective_enchantment(caster);
         }
         dam = caster->query_unarmed_damage();
-        dam += enchant;        
-        dam += caster->query_damage_bonus();        
+        dam += enchant;
+        dam += caster->query_damage_bonus();
         dam += roll_dice((int)caster->query_level(),5)+roll_dice(2,8);
 
-        if(!present(attackers[i],environment(caster))) 
-        { 
-            tell_object(caster,"%^RED%^That target is no longer in range!%^RESET%^"); 
-            continue; 
+        if(!present(attackers[i],environment(caster)))
+        {
+            tell_object(caster,"%^RED%^That target is no longer in range!%^RESET%^");
+            continue;
         }
-        if(!(res = thaco(attackers[i]))) 
+        if(!(res = thaco(attackers[i])))
         {
             tell_object(attackers[i],"%^CYAN%^"+caster->QCN+" spins and jumps toward you, launching a series of kicks, but you manage to avoid them!%^RESET%^");
             continue;
-          
+
         }
         if(attackers[i]->query_property("weapon resistance") || res == -1)
-        { 
+        {
             if(!hit) hit = -1;
             if(stringp(caster->query("featMiss")))
             {
@@ -157,7 +158,7 @@ void execute_attack()
                 caster->delete("featMiss");
                 continue;
             }
-            if(enchant < attackers[i]->query_property("weapon resistance")) 
+            if(enchant < attackers[i]->query_property("weapon resistance"))
             {
                 tell_object(attackers[i],"%^BOLD%^"+caster->QCN+" hits you with an ineffective barrage of kicks!%^RESET%^");
                 continue;
@@ -168,7 +169,7 @@ void execute_attack()
         hit = 1;
         continue;
     }
-    if(!hit) 
+    if(!hit)
     {
 	    tell_object(caster,"%^BOLD%^You fail to land a strike on anything and almost fall over in the process!");
 	    tell_room(environment(caster),"%^BOLD%^"+caster->QCN+" almost falls over and has to scramble to hold on to it!",caster);
@@ -176,7 +177,7 @@ void execute_attack()
     }
     else if(hit > 0)
     {
-        switch(random(5)) 
+        switch(random(5))
         {
             case 0:
                 tell_object(caster,"%^BOLD%^%^GREEN%^You land a series of kicks on your foes!");
@@ -196,8 +197,8 @@ void execute_attack()
                 break;
             case 4:
                 tell_object(caster,"%^RESET%^%^BLUE%^You focus intently on your enemies... launching one kick after another!");
-                tell_room(environment(caster),"%^RESET%^%^BLUE%^"+caster->QCN+" suddenly turns and focuses intently on "+caster->QP+" enemies...  "+caster->QS+" launches one kick after another!",({target,caster}));            
-                break;   
+                tell_room(environment(caster),"%^RESET%^%^BLUE%^"+caster->QCN+" suddenly turns and focuses intently on "+caster->QP+" enemies...  "+caster->QS+" launches one kick after another!",({target,caster}));
+                break;
         }
     }
     dest_effect();
@@ -213,11 +214,11 @@ void display_messages(object targ,object player)
 {
     if(!objectp(targ)) return;
     if(!objectp(player)) return;
-   
+
     switch(random(5))
     {
         case 0:
-            tell_object(target,"%^BOLD%^%^GREEN%^"+player->QCN+" lands a series of kicks on you!");                
+            tell_object(target,"%^BOLD%^%^GREEN%^"+player->QCN+" lands a series of kicks on you!");
             break;
         case 1:
             tell_object(target,"%^BOLD%^%^BLUE%^"+player->QCN+" spins quickly striking you with a series of well placed kicks!");
@@ -229,7 +230,7 @@ void display_messages(object targ,object player)
             tell_object(target,"%^BOLD%^%^MAGENTA%^"+player->QCN+" moves around you with a fluid grace as "+player->QS+" launches a series kicks!");
             break;
         case 4:
-            tell_object(target,"%^RESET%^%^BLUE%^"+player->QCN+" focuses intently on you... "+player->QS+" almost seems to blur as "+player->QS+" launches one kick after another!");               
+            tell_object(target,"%^RESET%^%^BLUE%^"+player->QCN+" focuses intently on you... "+player->QS+" almost seems to blur as "+player->QS+" launches one kick after another!");
             break;
     }
 }

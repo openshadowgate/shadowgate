@@ -9,7 +9,7 @@ inherit FEAT;
 object *targets;
 void smack_em(object ob);
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 35
 
 void create() {
     ::create();
@@ -64,10 +64,11 @@ void execute_feat() {
         dest_effect();
         return;
     }
-    
+
     tell_object(caster,"%^RESET%^%^BOLD%^You focus your mind, preparing to unleash a psionic attack.");
-    
+
     delay = time() + FEATTIMER;
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^greaterpsionicweapon%^WHITE%^ again.%^RESET%^");
     caster->set_property("using instant feat",1);
     caster->remove_property("using smite");
     caster->set_property("using smite",delay);
@@ -88,9 +89,9 @@ void execute_attack() {
         dest_effect();
         return;
     }
-    
+
     if(FEATS_D->usable_feat(caster,"mind wave")) { extra = 4; } // might need tweaking, will have to watch
-    
+
     chamod = ((int)caster->query_stats("intelligence") - 10)/2;
     chamod = chamod -1 + extra;
     targets = caster->query_attackers();
@@ -136,12 +137,12 @@ void smack_em(object ob){
 //    ::execute_attack();
     if(FEATS_D->usable_feat(caster,"mind wave")) { extra = 4; } // might need tweaking, will have to watch
     chamod = ((int)caster->query_stats("intelligence") - 10)/2;
-    chamod = chamod -1 + extra; 
+    chamod = chamod -1 + extra;
     caster->set_property("magic",1);
     tell_object(ob,"%^BOLD%^%^CYAN%^The psychic energy unleashed "
        "by "+caster->QCN+" ravages your mind once more!%^RESET%^");
     dmg = roll_dice(clevel,chamod);
-    dmg += clevel; 
+    dmg += clevel;
     dmg = dmg/2;
     caster->cause_damage_to(ob,"head",dmg);
     caster->set_property("magic",-1);

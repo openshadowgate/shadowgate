@@ -49,7 +49,7 @@ void execute_feat() {
     mapping tempmap;
     int rtime;
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -61,7 +61,7 @@ void execute_feat() {
         dest_effect();
         return;
     }
-    
+
     if((int)caster->query_property("using instant feat")) {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
@@ -140,7 +140,8 @@ void execute_attack() {
 
     target->remove_property("rushed at");
     target->set_property("rushed at",time());
-    
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^rushed%^WHITE%^ again.%^RESET%^");
+
     if(objectp(weapon = caster->query_wielded()))
     {
         enchant = (int)weapon[0]->query_property("enchantment");
@@ -173,7 +174,7 @@ void execute_attack() {
         return;
     }
     damage = roll_dice(clevel,8); // up to d8 on a trial basis
-    
+
     if(objectp(weapon))
     {
         if((int)target->query_size() < 3) damage += weapon[0]->query_damage();
@@ -183,13 +184,13 @@ void execute_attack() {
     {
         damage += (int)caster->get_hand_damage();
     }
-    
+
     damage += "/daemon/bonus_d"->damage_bonus(caster->query_stats("strength"));
     damage += (int)caster->query_damage_bonus();
 
     if(target->query_property("weapon resistance"))
     {
-        if(enchant < (int)target->query_property("weapon resistance")) 
+        if(enchant < (int)target->query_property("weapon resistance"))
         {
             damage = 0;
         }
@@ -238,7 +239,7 @@ void rush_mess(object play,object targ){
 
     if(play->query_property("shapeshifted"))
     {
-        tell_object(play,"%^BOLD%^%^GREEN%^You roar and dip your head, sprinting straight at "+targ->QCN+"!");				
+        tell_object(play,"%^BOLD%^%^GREEN%^You roar and dip your head, sprinting straight at "+targ->QCN+"!");
         tell_object(targ,"%^BOLD%^%^GREEN%^Suddenly, "+play->QCN+" roars and dips "+play->QP+" head, sprinting straight at you!");
         tell_room(etp,"%^BOLD%^%^GREEN%^Suddenly "+play->QCN+" roars and dips "+play->QP+" head, sprinting straight at "+targ->QCN+"!",({play,targ}));
         return;
@@ -326,7 +327,7 @@ void miss_mess(object play,object targ) {
 
     if(play->query_property("shapeshifted"))
     {
-        tell_object(play,"%^BOLD%^%^GREEN%^"+targ->QCN+" dodges to the side at the last instant and you tumble end over end, loosing your footing!");				
+        tell_object(play,"%^BOLD%^%^GREEN%^"+targ->QCN+" dodges to the side at the last instant and you tumble end over end, loosing your footing!");
         tell_object(targ,"%^BOLD%^%^GREEN%^You dodge to the side at the last instant and "+play->QCN+" tumbles end over end, loosing "+play->QP+" footing!");
         tell_room(etp,"%^BOLD%^%^GREEN%^Suddenly "+targ->QCN+" dodges to the side at the last instant and "+play->QCN+" tumbles end over end, loosing "+play->QP+" footing!",({play,targ}));
         return;
@@ -421,7 +422,7 @@ void hit_mess(object play,object targ){
 
     if(play->query_property("shapeshifted"))
     {
-        tell_object(play,"%^BOLD%^%^GREEN%^You stagger "+targ->QCN+" backwards as the full force of your body slams into "+targ->QO+"!");				
+        tell_object(play,"%^BOLD%^%^GREEN%^You stagger "+targ->QCN+" backwards as the full force of your body slams into "+targ->QO+"!");
         tell_object(targ,"%^BOLD%^%^GREEN%^You are staggered backwards as the full force of "+play->QCN+"'s body slams into you!");
         tell_room(etp,"%^BOLD%^%^GREEN%^"+targ->QCN+" staggers backwards as the full force of "+play->QCN+"'s body slams into "+targ->QO+"!",({play,targ}));
         return;
@@ -506,4 +507,3 @@ void hit_mess(object play,object targ){
 	}
 	return;
 }
-

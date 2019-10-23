@@ -3,7 +3,7 @@
 #include <magic.h>
 inherit FEAT;
 
-#define FEATTIMER 35; //five rounds equivalent on current rate. -N, 9/10.
+#define FEATTIMER 35
 
 void create() {
     ::create();
@@ -40,7 +40,7 @@ void execute_feat() {
     mapping tempmap;
     object *weapons, ammo;
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -157,6 +157,7 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
+    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^preciseshot%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using preciseshot");
     caster->set_property("using preciseshot",newmap);
 
@@ -226,4 +227,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-
