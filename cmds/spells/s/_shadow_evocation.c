@@ -10,7 +10,7 @@ void create()
     set_spell_level(([ "mage" : 5, "bard" : 5 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shadow evocation on SPELL_NAME [on SPELL_ARGS]");
-    set_description("You tap energy from the Plane of Shadow to cast a quasi-real, illusory version of a sorcerer or wizard evocation spell of 4th level or lower.
+    set_description("You tap energy from the Plane of Shadow to cast a quasi-real, illusory version of a spell or your class of 4th level or lower.
 
 %^BOLD%^%^RED%^E.G.%^RESET%^ <cast mage shadow evocation on fireball on goblin>");
     set_arg_needed(1);
@@ -36,17 +36,6 @@ int preSpell()
         return 0;
     }
 
-    if(spell_type == "sorcerer")
-    {
-        string * known;
-        known = TP->query_mastered_spells(spell_type);
-        if(member_array(spl,known) == -1)
-        {
-            tell_object(TP,"You haven't mastered such a power!");
-            return 0;
-        }
-    }
-
     spl = replace_string(spl, " ", "_");
     splfn = "/cmds/spells/"+spl[0..0]+"/_"+spl+".c";
 
@@ -64,9 +53,10 @@ int preSpell()
         return 0;
     }
 
-    spell_to_cast->wizard_interface(TP,spell_type,sargs);
+    spell_to_cast->use_spell(TP,sargs,clevel,100,spell_type);
     dest_effect();
     return 1;
+
 }
 
 void dest_effect(){

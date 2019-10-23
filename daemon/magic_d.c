@@ -289,6 +289,53 @@ mapping index_spells_for_player(object player, string myclass)
     return tmp;
 }
 
+/**
+ * Filters index by unrestricted spells only
+ */
+mapping index_unrestricted_spells(string myclass)
+{
+    mapping all_spells,tmp;
+    string *all_spell_names, spellfile, featneeded,domain;
+    int lvl,i,j,k;
+    object spell;
+
+    if (myclass == "sorcerer")
+        myclass = "mage";
+
+    all_spells = query_index(myclass);
+    if(!sizeof(all_spells))
+        return ([]);
+    all_spell_names=keys(all_spells);
+    all_spell_names=map_array(all_spell_names,(:MAGIC_D->get_spell_file_name($1):));
+    all_spells= ([]);
+    tmp=([]);
+    foreach(spellfile in all_spell_names)
+    {
+        if(catch(spell = new(spellfile)))
+            continue;
+        featneeded = spell->query_feat_required(myclass);
+        if(!(lvl = spell->query_spell_level(myclass)))
+            continue;
+        if(featneeded != "me")
+            continue;
+        if(myclass=="psion")
+        {
+            domain = spell->query_discipline();
+            if(domain &&
+               domain != "me")
+                continue;
+        }
+        if(myclass=="cleric")
+        {
+            domain = spell->get_spell_domain();
+            if(domain &&
+               domain != "")
+                continue;
+        }
+        tmp[spell->query_spell_name()]=lvl;;
+    }
+    return tmp;
+}
 
 mixed query_random_spell(string myclass, int lev)
 {

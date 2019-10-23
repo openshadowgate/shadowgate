@@ -1688,7 +1688,7 @@ void heart_beat()
         if ( (query_idle(TO) > 7260) &&
              (!avatarp(TO)) &&
              (!TO->query("test_character")) &&
-             (TO->query("persist_login")))
+             (!!(TO->query("persist_login"))))
         {
             "/daemon/messaging_d.c"->avatars_message("notify","%^BOLD%^%^YELLOW%^<< "+TPQN + " has idled out. ["+query_time_logged_in()+"] >>%^RESET%^", ({ }) );
             TO->force_me("quit");
