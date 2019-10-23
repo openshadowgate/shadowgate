@@ -34,8 +34,9 @@ spell_effect(int prof)
 
     success = 0;
 
-    time = ((clevel * 5) / 100);
-    if (time > 360) time = 360;
+    time = clevel*ROUND_LENGTH*2;
+    if(time > 300)
+        time = 300;
 
     if(!objectp(target))
     {
@@ -48,7 +49,6 @@ spell_effect(int prof)
     party = ob_party(caster);
 
     targets = ({target});
-
     for (x=0;x < sizeof(prospective);x++)
     {
         if(!objectp(prospective[x])) continue;
@@ -79,6 +79,7 @@ spell_effect(int prof)
         target2->set_asleep(time, "You are asleep!");
         target2->set_property("spelled", ({TO}) );
         targets += ({target2});
+
     }
     spell_successful();
     if(!success)

@@ -34,12 +34,12 @@ void spell_effect(int prof)
     attackers = caster->query_attackers();
     attackers = target_filter(attackers);
 
+    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" utters a quick invocation and puddles of liquid obsidian appear under "+caster->QP+" enemies!%^RESET%^");
     if(!sizeof(attackers))
     {
         dest_effect();
         return;
     }
-    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" utters a quick invocation and puddles of liquid obsidian appear under "+caster->QP+" enemies!%^RESET%^",caster);
     for(i=0;i<sizeof(attackers);i++)
     {
         if(!objectp(attackers[i]))

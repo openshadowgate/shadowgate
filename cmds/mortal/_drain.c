@@ -139,6 +139,13 @@ void drain_process(object target)
     {
         return;
     }
+    if(target->query_asleep())
+        if(target->query_hp()<target->query_max_hp_base()/4)
+        {
+            tell_object(target,"%^RED%^You feel something is terribly wrong and wake up!");
+            target->set_asleep(0,0);
+        }
+
     if(target->query_hp()<-(target->query_max_hp()/5))
     {
         stop_drain();

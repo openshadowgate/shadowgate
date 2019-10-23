@@ -10,10 +10,15 @@ void create()
     set_spell_level(([ "mage" : 5, "bard" : 5 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shadow evocation on SPELL_NAME [on SPELL_ARGS]");
-    set_description("You tap energy from the Plane of Shadow to cast a quasi-real, illusory version of a spell or your class of 4th level or lower.
+    set_description("You tap energy from the Plane of Shadow to cast a quasi-real, illusory version of an evocation mage spell of 4th level or lower.
 
 %^BOLD%^%^RED%^E.G.%^RESET%^ <cast mage shadow evocation on fireball on goblin>");
     set_arg_needed(1);
+}
+
+string shadow_school()
+{
+    return "invocation_evocation";
 }
 
 int preSpell()
@@ -30,9 +35,12 @@ int preSpell()
         return 0;
     }
 
-    if(sscanf(arg, "%s on %s", spl, sargs)<1)
+    if(sscanf(arg, "%s on %s", spl, sargs)!=2)
+        spl = arg;
+
+    if(!stringp(spl))
     {
-        tell_object(caster,"You must provide arguments to this spell!");
+        tell_object(caster,"You must provide another spell to this spell!");
         return 0;
     }
 
@@ -44,17 +52,22 @@ int preSpell()
         tell_object(TP,"Either that spell does not exist, or you do not know it!");
         return 0;
     }
-
+    if(!sargs || sargs == "" || !stringp(sargs))
+        sargs = "";
     spell_to_cast = new(splfn);
-    slevel = spell_to_cast->query_spell_level(spell_type);
+    if(spell_to_cast->query_spell_sphere()!=shadow_school())
+    {
+        tell_object(TP,"Only evocation school spells are allowed!");
+        return 0;
+    }
+
+    slevel = spell_to_cast->query_spell_level("mage");
     if(slevel > max_level || slevel == 0)
     {
         tell_object(TP,"This spell is too powerful for shadow evocation!");
         return 0;
     }
-
-    spell_to_cast->use_spell(TP,sargs,clevel,100,spell_type);
-    dest_effect();
+    spell_to_cast->use_spell(TP,sargs,clevel,100,"mage");
     return 1;
 
 }
