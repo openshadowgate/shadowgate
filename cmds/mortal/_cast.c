@@ -74,7 +74,10 @@ int cmd_cast(string str)
     }
 
     if(!sscanf(str2,"%s on %s",str2,tar))
-        tar = 0;
+        if(!sscanf(str2,"%s at %s",str2,tar))
+            if(!sscanf(str2,"%s to %s",str2,tar))
+                if(!sscanf(str2,"%s as %s",str2, tar))
+                    tar = 0;
 
     if(!TP->is_class(type) && !avatarp(TP) && type != "innate")
         return notify_fail("You can't cast spells as a "+type+"!\n");
@@ -239,7 +242,7 @@ cast
 
 %^CYAN%^SYNTAX%^RESET%^
 
-cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^
+cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [on|as|at|to %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
 cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^

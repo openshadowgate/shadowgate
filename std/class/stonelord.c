@@ -73,9 +73,7 @@ string requirements() { // string version, maybe we'll need this, maybe not, can
     string str;
     str = "Prerequisites:\n"
         "    20 Base Class Levels\n"
-        "    40 Character Levels\n"
-        "    20 Points Spent in Endurance Skill\n"
-        "    Dwarf or Eath Genasi Race\n";
+        "    Dwarf or Eath Genasi Subrace Race (human, half-elf, half-orc)\n";
     return str;
 }
 
@@ -96,12 +94,10 @@ int prerequisites(object player) {
     if(!objectp(race_ob)) { return 0; }
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
-    if(skills["endurance"] < 20) { return 0; }
     base = player->query("stonelord_base_class");
     if(!base) { return 0; }
     if(!player->is_class(base)) { return 0; }
     if((player->query_class_level(base) + adj) < 20) { return 0; }
-    if(player->query_level() < 40) { return 0; }
     return 1;
 }
 
