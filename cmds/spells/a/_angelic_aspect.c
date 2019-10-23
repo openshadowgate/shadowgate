@@ -107,6 +107,8 @@ void test()
     cond_test=0;
     if(sizeof(attackers))
         return;
+    if(ENV(caster)->is_flight_room())
+        return;
     tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality return as angelic aspect fades.");
     dest_effect();
 }
