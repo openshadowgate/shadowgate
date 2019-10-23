@@ -143,7 +143,7 @@ void execute_attack(){
 
     caster->remove_property("using manyshot");
     caster->set_property("using manyshot", time() + 35 );
-    delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^manyshot%^WHITE%^ again.%^RESET%^");
+    delay_messid_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^manyshot%^WHITE%^ again.%^RESET%^");
 
     if(hits > sizeof(attackers)) hits = sizeof(attackers); // if some targets have since died, don't bother hitting them.
     for(i=0;i<sizeof(attackers);i++) {

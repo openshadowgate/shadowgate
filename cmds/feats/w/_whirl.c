@@ -140,7 +140,7 @@ void execute_attack(){
     caster->remove_property("using whirl");
     caster->set_property("using whirl", time() + 35 );
     if(!FEATS_D->usable_feat(caster,"whirling dervish"))
-        delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^whirl%^WHITE%^ again.%^RESET%^");
+        delay_messid_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^whirl%^WHITE%^ again.%^RESET%^");
 
     for(i=0;i<sizeof(attackers);i++) {
         if(!objectp(attackers[i])) continue;

@@ -2239,6 +2239,7 @@ void clean_attacker_flags(object who)
     who->remove_property("using manyshot");
     who->remove_property("using spinning kick");
     who->remove_property("using smite");
+    who->remove_property("messids"); //Feat messages tracking
 }
 
 int sight_adjustment(object who)

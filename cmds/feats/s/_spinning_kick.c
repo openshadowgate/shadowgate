@@ -123,7 +123,7 @@ void execute_attack()
     }
     caster->remove_property("using spinning kick");
     caster->set_property("using spinning kick", time() + 35 );
-    delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^spinning_kick%^WHITE%^ again.%^RESET%^");
+    delay_messid_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^spinning_kick%^WHITE%^ again.%^RESET%^");
 
     for(i=0;i<sizeof(attackers);i++)
     {

@@ -117,7 +117,8 @@ void execute_attack()
 
     caster->remove_property("using sweeping blow");
     caster->set_property("using sweeping blow",(time() + 35));
-    delay_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^sweepingblow%^WHITE%^ again.%^RESET%^");
+    if(!FEATS_D->usable_feat(caster,"wade through"))
+        delay_messid_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^sweepingblow%^WHITE%^ again.%^RESET%^");
 
     ::execute_attack();
 

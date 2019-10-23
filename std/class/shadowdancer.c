@@ -4,9 +4,9 @@
 inherit DAEMON;
 
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 object base_class_ob(object ob)
@@ -39,13 +39,12 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Ranger or Thief levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
-        "    20 Base Dexterity (before equipment modifiers)"
-        "    15 Ranks in Stealth Skill\n";
-        "    15 Ranks in Athletics Skill\n";
-        
-    return str;    
+        "    20 Ranger or Thief levels\n"
+        "    20 Base Dexterity\n"
+        "    10 Ranks spent in Stealth Skill\n";
+        "    10 Ranks spent in Athletics Skill\n";
+
+    return str;
 }
 
 
@@ -56,32 +55,31 @@ int prerequisites(object player)
     string race;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
+    adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
-    
-    if(!skills["stealth"] || skills["stealth"] < 15) { return 0; }
-    if(!skills["athletics"] || skills["athletics"] < 15) { return 0; }
-    if(player->is_class("ranger")) 
-    { 
+
+    if(!skills["stealth"] || skills["stealth"] < 10) { return 0; }
+    if(!skills["athletics"] || skills["athletics"] < 10) { return 0; }
+    if(player->is_class("ranger"))
+    {
         if( (player->query_class_level("ranger") + adj) < 20) { return 0; }
         player->set("shadowdancer_base_class","ranger");
     }
-    if(player->is_class("thief")) 
-    { 
+    if(player->is_class("thief"))
+    {
         if( (player->query_class_level("thief") + adj) < 20) { return 0; }
         player->set("shadowdancer_base_class","thief");
     }
-    if(player->query_level() < 40) { return 0; }
-    return 1;    
+    return 1;
 }
 
-mapping stat_requirements(object ob) 
-{ 
+mapping stat_requirements(object ob)
+{
     return ([ "dexterity" : 20 ]);
 }
 
@@ -99,25 +97,25 @@ int caster_level_calcs(object player, string the_class)
     {
         case "thief":
             level = player->query_class_level("thief");
-            level += player->query_class_level("shadowdancer");            
+            level += player->query_class_level("shadowdancer");
             return level;
         case "ranger":
             level = player->query_class_level("ranger");
-            level += player->query_class_level("shadowdancer");            
+            level += player->query_class_level("shadowdancer");
             return level;
         case "shadowdancer":
             level = player->query_class_level("shadowdancer");
             level += player->query_class_level("thief");
             level += player->query_class_level("ranger");
             return level;
-        
+
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "one with the shadows" }), 4 : ({ "shadow master" }), 7 : ({ "shadow jump" }), ]);
 }
 

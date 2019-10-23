@@ -724,6 +724,16 @@ void delay_subject_msg(object subject, int delay, string message)
 {
     MESSAGING_D->delay_subject_message(subject,delay,"info","\n"+message+"\n",({caster}));
 }
+/**
+ * This one uses messids property to track which feats are cleared in
+ * combat_d after combat ends. If such feat is cleared message for it
+ * won't be displayed.
+ */
+void delay_messid_msg(int delay, string message)
+{
+    MESSAGING_D->delay_messid_message(caster,time(),delay,"info","\n"+message+"\n",({caster}));
+}
+
 
 void help(){
     string name,

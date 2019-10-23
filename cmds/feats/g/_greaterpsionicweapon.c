@@ -68,7 +68,7 @@ void execute_feat() {
     tell_object(caster,"%^RESET%^%^BOLD%^You focus your mind, preparing to unleash a psionic attack.");
 
     delay = time() + FEATTIMER;
-    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^greaterpsionicweapon%^WHITE%^ again.%^RESET%^");
+    delay_messid_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^greaterpsionicweapon%^WHITE%^ again.%^RESET%^");
     caster->set_property("using instant feat",1);
     caster->remove_property("using smite");
     caster->set_property("using smite",delay);

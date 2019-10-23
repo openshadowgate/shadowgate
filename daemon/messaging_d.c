@@ -75,6 +75,35 @@ void delay_subject_message(object subject, int delay, string type, string what, 
     call_out("subject_message", delay, subject, type, what, recievers, excluded);
 }
 
+/**
+ * This one uses messids property to track which feats are cleared in
+ * combat_d after combat ends. If such feat is cleared message for it
+ * won't be displayed.
+ */
+void delay_messid_message(object ob, int  messid, int delay, string type, string what, object * recievers, object * excluded)
+{
+    if(!objectp(ob))
+        return;
+    ob->set_property("messids",({messid}));
+    call_out("messid_message", delay, ob, messid, type, what, recievers, excluded);
+}
+
+void messid_message(object ob, int messid, string type, string what, object * recievers, object * excluded)
+{
+    int * messids;
+    if(!objectp(ob))
+        return;
+    messids = ob->query_property("messids");
+    if(!arrayp(messids))
+        return;
+
+    if(member_array(messid,messids)!=-1)
+    {
+        message(type,what,recievers,excluded);
+        ob->remove_property_value("messids",({messid}));
+    }
+}
+
 void subject_message(object subject, string type, string what, object * recievers, object * excluded)
 {
     if(objectp(subject))

@@ -5,39 +5,27 @@ inherit SHAPESHIFT;
 
 int trip_timer;
 
-// all of the functions set in create below need to be there so it doesn't bug when trying to shapeshift -Ares
-// when making a new shape, be sure to include those functions or it'll fall back to the defaults
 void create()
 {
     ::create();
 
     set_attack_limbs( ({ "right hand","left hand" }) );
-    set_new_damage_type("slashing");
-    set_limbs( ({ "head","torso","right arm", "left arm", "right hand", "left hand" }) );
     set_attack_functions(([ "right hand" : (:TO,"shape_attack":), "left hand" : (:TO,"shape_attack":) ]));
-    set_ac_bonus(0);
-    set_base_attack_num(0);
+    set_ac_bonus(2);
+    set_base_attack_num(4);
     set_castable(1);
-    set_can_talk(0);
-    set_shape_race("elemental");
+    set_can_talk(1);
+    set_shape_race("vampire");
     set_shape_profile("vampire_lord_999");
-    set_shape_bonus("perception",2);
-    set_shape_bonus("spellcraft",4);
-    set_shape_bonus("sight bonus",3);
+    set_shape_bonus("perception",6);
+    set_shape_bonus("spellcraft",6);
+    set_shape_bonus("sight bonus",6);
     set_shape_bonus("water breather",1);
     set_shape_bonus("empowered",2);
-    set_shape_bonus("spell penetration",4);
     set_shape_bonus("damage resistance",10);
-    set_shape_bonus("magic resistance",10);
-    set_shape_height(200+random(40));
-    set_shape_weight(5000+random(2000));
+    set_shape_bonus("spell damage resistance",10);
 }
 
-string * query_subraces() {
-    return ({ "elemental","fire elemental","water elemental","air elemental","earth elemental" });
-}
-
-// custom descriptions here, override this function
 int default_descriptions(object obj)
 {
     if(!objectp(obj)) { return 0; }
@@ -47,19 +35,17 @@ int default_descriptions(object obj)
         "either side. The torso trails down to a formless mass that moves over the ground somehow. "
         "The being is unsettling at best, its intimidating bulk being something not of this plane.");
 
-    obj->setDescriptivePhrase("shifting $R");
+    obj->setDescriptivePhrase("imposing $R");
 
     obj->set("speech string","voice");
     obj->set("describe string","eerily");
 
-    obj->force_me("message in moves in");
-    obj->force_me("message out moves off to the $D");
+    obj->force_me("message in flies in");
+    obj->force_me("message out flies off $D");
 
     return 1;
 }
 
-
-// custom shapeshift messages here, override this function
 int change_into_message(object obj)
 {
     if(!objectp(obj)) { return 0; }
