@@ -13,7 +13,7 @@ void create() {
     set_spell_level(([ "mage" : 3, "bard" : 4 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS heroism [on TARGET]");
-    set_damage_desc("+2 to attack and damage bonus, saving throws, skills");
+    set_damage_desc("+2 to attack bonus, saving throws, skills");
     set_description("This spell allows the caster to draw upon their personal presence and charm, granting them or an ally"
 " a bonus to morale on attacks, saves and core skills. It does not stack with other morale-boosting spells, such as good "
 "hope.");

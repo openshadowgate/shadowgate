@@ -74,10 +74,7 @@ int cmd_cast(string str)
     }
 
     if(!sscanf(str2,"%s on %s",str2,tar))
-        if(!sscanf(str2,"%s at %s",str2,tar))
-            if(!sscanf(str2,"%s to %s",str2,tar))
-                if(!sscanf(str2,"%s as %s",str2, tar))
-                    tar = 0;
+        tar = 0;
 
     if(!TP->is_class(type) && !avatarp(TP) && type != "innate")
         return notify_fail("You can't cast spells as a "+type+"!\n");
@@ -191,7 +188,6 @@ int cmd_cast(string str)
     tmp = "/cmds/spells/"+spell[0..0]+"/_"+spell+".c";
     if(!file_exists(tmp))
 	{
-        tell_object(FPL("ilmarinen"),":"+tmp);
         write("Either that spell does not exist, or you do not know it!");
         return 1;
     }

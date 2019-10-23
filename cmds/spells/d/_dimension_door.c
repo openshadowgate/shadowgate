@@ -13,7 +13,7 @@ void create(){
     set_spell_name("dimension door");
     set_spell_level(([ "bard" : 4, "psywarrior" : 4, "psion" : 4, "assassin" : 4, "mage" : 4 ]));
     set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS dimension door to LOCATION");
+    set_syntax("cast CLASS dimension door on LOCATION");
     set_description("Through this spell the caster opens a 'door' in the fabric of reality, attuned only to themselves.  "
 "They can use this to step through to a location of their choice, only one that they have previously visited and found to "
 "resonate with their soul.  A great deal of concentration is required to enact such a spell, so the spell can be easily "
@@ -40,7 +40,7 @@ void spell_effect(int prof){
     if(!objectp(caster)) return 0;
     if(objectp(place)) place = environment(caster);
     name = caster->QCN;
-    
+
     spell_successful();
 
     if(!tempstr) tempstr = "";
@@ -81,7 +81,7 @@ void spell_effect(int prof){
         dest_effect();
         return;
     }
-    if(endplace && 
+    if(endplace &&
       (endplace->query_property("teleport proof")||
       place->query_property("teleport proof")||
       !endplace->is_room()||

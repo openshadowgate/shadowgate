@@ -1749,6 +1749,8 @@ void heart_beat()
                 if(EVENTS_D->query_time_of_day()=="day" &&
                    !ASTRONOMY_D->query_eclipse())
                 {
+                    if(TO->query_hp()<-(TO->query_max_hp()*4/5))
+                        TO->die();
                     if((int)TO->query_bloodlust()/200<91)
                     {
                         TO->do_damage("torso",((query_max_hp()*3/4)*(20000-TO->query_bloodlust()))/20000);
@@ -1758,8 +1760,7 @@ void heart_beat()
                     }
                 }
     }
-    if(TO->query_hp()<-(TO->query_max_hp()*4/5))
-        TO->die();
+
 }
 
 void net_dead2() {
