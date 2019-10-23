@@ -4,9 +4,11 @@
 #include <teleport.h>
 inherit DAEMON;
 
+#define WING_DELAY 120
+
 string * flyraces = ({"deva"});
 string * flysubraces = ({"fey'ri","rock gnome"});
-string * flyprofiles = ({"druid_bird_999","druid_dragon_999","vampire_bat_999"});
+string * flyprofiles = ({"druid_bird_999","druid_dragon_999","mage_dragon_999","mage_demon_999","vampire_bat_999","vampire_lord_999"});
 
 string WINGO = "/cmds/mortal/obj/wingObj.c";
 
@@ -36,9 +38,15 @@ int cmd_wing(string args)
         return 1;
     }
 
+    if(TP->query_property("wing delay")+WING_DELAY > time())
+    {
+        tell_object(TP,"Your wings are tired, you'll have to wait a bit.");
+        return 1;
+    }
+
     if(!(dest = TP->query_rem_room(args)))
     {
-        tell_object(TP,"You can't remember "+args);
+        tell_object(TP,"You can't remember "+args+".");
         return 1;
     }
 
@@ -54,13 +62,15 @@ int cmd_wing(string args)
         return 1;
     }
 
-    if(!TELEPORT->object_can_be_teleported(TP,find_object_or_load(dest),256))
+    if(!TELEPORT->object_can_be_teleported(TP,find_object_or_load(dest),TP->query_character_level()/2))
     {
         tell_object(TP,"Something prevents you from flying there.");
         return 1;
     }
 
-    tell_room(ETP,"%^BOLD%^%^WHITE%^"+TP->QCN+" flaps "+TP->QP+" wings and off "+TP->QO+" goes.%^RESET%^");
+    TP->remove_property("wing delay");
+    TP->set_property("wing delay",time());
+    tell_room(ETP,"%^BOLD%^%^WHITE%^"+TP->QCN+" flaps "+TP->QP+" wings and off "+TP->QS+" goes.%^RESET%^");
     new(WINGO)->setup(TP,dest);
 
     return 1;
@@ -81,7 +91,7 @@ wing %^ORANGE%^%^ULINE%^DESTINATION%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Wing allows you to move between locations, albeit much slower than teleportation. To use this command you must have wings sufficiently large to overcome winds (bird, bat, dragon, angelic aspect, fell flight, fey'ri, deva). This command will allow you to escape the combat, but you can be intercepted during the flight.
+Wing allows you to move between locations, albeit much slower than teleportation. To use this command you must have wings sufficiently large to overcome winds (bird, bat, dragon, angelic aspect, fell flight, fey'ri, deva and others). This command will allow you to escape the combat, but you can be intercepted during the flight.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

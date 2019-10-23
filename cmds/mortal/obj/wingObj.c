@@ -61,36 +61,21 @@ void flystep()
     }
 
     if(step==0)
-    {
         flroom->change_stage("initial climb");
-        flyee->force_me("look");
-    }
     else if(step == 4)
-    {
         flroom->change_stage("climbing");
-        flyee->force_me("look");
-    }
-    else if(step == 6)
-    {
+    else if(step == 8)
         flroom->change_stage("soaring");
-        flyee->force_me("look");
-    }
     else if(step == 24)
-    {
         flroom->change_stage("landing");
-        flyee->force_me("look");
-    }
-    else if(step == 26)
-    {
+    else if(step == 28)
         flroom->change_stage("final landing");
-        flyee->force_me("look");
-    }
-    else if(step > 30)
+    else if(step > 32)
     {
-        tell_object(flyee,"%^BOLD%^%^WHITE%^You have arrived at your destination.%^RESET%^");
         tell_room(destination,"%^BOLD%^%^WHITE%^"+flyee->QCN+" descends into the area from the sky.%^RESET%^");
         flyee->move(destination);
         flyee->force_me("look");
+        tell_object(flyee,"%^BOLD%^%^WHITE%^You have arrived at your destination.%^RESET%^");
         TO->remove();
         return;
     }

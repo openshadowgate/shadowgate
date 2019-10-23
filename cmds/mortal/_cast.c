@@ -191,6 +191,7 @@ int cmd_cast(string str)
     tmp = "/cmds/spells/"+spell[0..0]+"/_"+spell+".c";
     if(!file_exists(tmp))
 	{
+        tell_object(FPL("ilmarinen"),":"+tmp);
         write("Either that spell does not exist, or you do not know it!");
         return 1;
     }
