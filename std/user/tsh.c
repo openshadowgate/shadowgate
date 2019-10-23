@@ -181,8 +181,8 @@ string write_prompt()
         prompt = replace_string(prompt, "$W", ""+this_object()->query_wimpy()+"%");
         prompt = replace_string(prompt, "$x", ""+this_player()->query_internal_encumbrance());
         prompt = replace_string(prompt, "$X", ""+this_player()->query_max_internal_encumbrance());
-        prompt = replace_string(prompt, "$i", ""+hunger2string(this_player()));
-        prompt = replace_string(prompt, "$o", ""+thirst2string(this_player()));
+        prompt = replace_string(prompt, "$i", ""+hunger2str(this_player()));
+        prompt = replace_string(prompt, "$o", ""+thirst2str(this_player()));
         prompt = replace_string(prompt, "$T", ""+EVENTS_D->query_time_of_day());
         prompt = replace_string(prompt, "$t", ""+hour(time())+":"+minutes(time()));
         prompt = replace_string(prompt, "$B", ""+bloodlust2string(this_player()));
@@ -281,26 +281,6 @@ int queryAdminBlock(){
 }
 
 
-string hunger2string(object obj)
-{
-    int max, hunger;
-    max = obj->query_formula();
-    max /=6;
-    hunger = obj->query_stuffed();
-    if(hunger < max)
-        return"Starving";
-    else if(hunger < (max * 2))
-        return "Very hungry";
-    else if(hunger < (max * 3))
-        return "Really hungry";
-    else if(hunger < (max * 4))
-        return "Hungry";
-    else if(hunger < (max * 5))
-        return "Not hungry";
-    else
-        return "Stuffed";
-}
-
 string bloodlust2string(object obj)
 {
     int max, hunger;
@@ -309,22 +289,43 @@ string bloodlust2string(object obj)
     return ""+hunger/200;
 }
 
-string thirst2string(object obj)
+string hunger2str(object player)
 {
-    int max, hunger;
-    max = obj->query_formula();
-    max /=6;
-    hunger = obj->query_quenched();
-    if(hunger < max)
-        return"Parched";
-    else if(hunger < (max * 2))
-        return "Very thirsty";
-    else if(hunger < (max * 3))
-        return "Really thirsty";
-    else if(hunger < (max * 4))
-        return "Thirsty";
-    else if(hunger < (max * 5))
-        return "Not thirsty";
-    else
-        return "Parched";
+    int max = player->query_formula();
+    int cur, perc;
+    cur = player->query_stuffed();
+    perc = cur*100/max;
+
+    if(perc > 100*5/6)
+        return "%^BOLD%^%^GREEN%^Stuffed%^RESET%^";
+    if(perc > 100*4/6)
+        return "%^GREEN%^Not hungry%^RESET%^";
+    if(perc > 50)
+        return "%^YELLOW%^Hungry%^RESET%^";
+    if(perc > 100/3)
+        return "%^RED%^Really hungry%^RESET%^";
+    if(perc > 100/6)
+        return "%^RED%^Very hungry%^RESET%^";
+
+    return "%^RED%^%^BOLD%^Starving%^RESET%^";
+}
+
+string thirst2str(object player)
+{
+    int max = player->query_formula();
+    int cur, perc;
+    cur = player->query_stuffed();
+    perc = cur*100/max;
+
+    if(perc > 100*5/6)
+        return "%^BOLD%^%^GREEN%^Quenched%^RESET%^";
+    if(perc > 100*4/6)
+        return "%^GREEN%^Not thirsty%^RESET%^";
+    if(perc > 50)
+        return "%^YELLOW%^Thirsty%^RESET%^";
+    if(perc > 100/3)
+        return "%^RED%^Really thirsty%^RESET%^";
+    if(perc > 100/6)
+        return "%^RED%^Very thirsty%^RESET%^";
+    return "%^RED%^%^BOLD%^Parched%^RESET%^";
 }

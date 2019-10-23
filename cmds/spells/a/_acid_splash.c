@@ -13,7 +13,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    set_immunities( ({ "acid"}) );    
+    set_immunities( ({ "acid"}) );
 }
 
 spell_effect(int prof) {
@@ -31,4 +31,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

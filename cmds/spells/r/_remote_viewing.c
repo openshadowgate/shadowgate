@@ -7,7 +7,7 @@
 
 #define CONTROL "/d/magic/obj/mcrystal_ball"
 #define SCRY_D "/daemon/ic_scry_locate_d"
-#define DELAY 300 
+#define DELAY 300
 
 inherit SPELL;
 
@@ -64,18 +64,18 @@ void spell_effect(int prof) {
     int num,bonus,power,mylevel;
     int duration;
     string *ids,myname;
-    
+
     ::spell_effect();
-    
+
     spell_successful();
-    
+
     if(!objectp(target)) {
         tell_room(place,"%^BOLD%^RED%^The stones fall to the floor "+
            "as "+caster->QCN+" looks around, confused.",caster);
         tell_object(caster,"%^BOLD%^RED%^The target of your spell is not here!");
         TO->remove();
 		return;
-    }        
+    }
     if(caster->is_class("psywarrior")){
       mylevel = caster->query_guild_level("psywarrior");
     }else{
@@ -87,7 +87,7 @@ void spell_effect(int prof) {
         tell_room(place,"%^BOLD%^RED%^The stones fall to the floor "+
            "as "+caster->QCN+" looks around, confused.",caster);
         tell_object(caster,"%^BOLD%^RED%^The focus of your power "+
-           "must be a crystal ball or mirror.");
+           "must be a crystal ball.");
         TO->remove();
 		return;
     }
@@ -109,7 +109,7 @@ void spell_effect(int prof) {
        "%^BLUE%^You focus on the "+myname+" as the crystals spin "+
        "faster, causing the "+myname+" to %^CYAN%^glow %^BLUE%^"+
        "faintly.");
-        
+
     target->set_property("spelled",({TO}));
     target->set_property("magic mirror",1);
     tell_object(caster,"%^BOLD%^YELLOW%^To learn the commands for this "
@@ -121,7 +121,7 @@ void spell_effect(int prof) {
 	scry_control->set_parent(TO);
       bonus = caster->query_stats(casting_stat);
       bonus = bonus-10;
-      power = mylevel + random(6) + bonus; 
+      power = mylevel + random(6) + bonus;
 	scry_control->set_scry_power(power);
 	scry_control->move(environment(target));
     duration = 60+ (10 * mylevel);
@@ -158,7 +158,7 @@ void control_failure() {
 int checkMirror(object mirror) {
     string *ids;
     int value;
-    
+
     if(!objectp(mirror)) return 0;
     value = mirror->query_value();
     if(value < 1000) return 0;
