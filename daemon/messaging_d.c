@@ -65,7 +65,18 @@ void delay_death_message(string type, string what, object * excluded) {
      users_message(type, what, excluded + avatars() );
 }
 
-void delay_local_message(int delay, string type, string what, object * recievers, object * excluded)
+void delay_message(int delay, string type, string what, object * recievers, object * excluded)
 {
     call_out("local_message", delay, type, what, recievers, excluded);
+}
+
+void delay_subject_message(object subject, int delay, string type, string what, object * recievers, object * excluded)
+{
+    call_out("subject_message", delay, subject, type, what, recievers, excluded);
+}
+
+void subject_message(object subject, string type, string what, object * recievers, object * excluded)
+{
+    if(objectp(subject))
+        message(type,what,recievers,excluded);
 }

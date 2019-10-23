@@ -118,7 +118,7 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
-    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^sundered%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target, FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^sundered%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using sunder");
     caster->set_property("using sunder",newmap);
 

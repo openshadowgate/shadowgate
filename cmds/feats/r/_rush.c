@@ -140,7 +140,7 @@ void execute_attack() {
 
     target->remove_property("rushed at");
     target->set_property("rushed at",time());
-    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^rushed%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target,FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^rushed%^WHITE%^ again.%^RESET%^");
 
     if(objectp(weapon = caster->query_wielded()))
     {

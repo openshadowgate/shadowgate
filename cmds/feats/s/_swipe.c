@@ -164,7 +164,7 @@ void execute_attack()
             map_delete(tempmap, keyz[i]);
 
     timerz = time() + 25;
-    delay_msg(25,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^swiped%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target,25,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^swiped%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
     caster->remove_property("using swipe");
     caster->set_property("using swipe",tempmap);

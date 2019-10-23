@@ -133,7 +133,7 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
-    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^disarmed%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target, FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^disarmed%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using disarm");
     caster->set_property("using disarm",newmap);
 

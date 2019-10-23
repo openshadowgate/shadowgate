@@ -209,7 +209,7 @@ void execute_attack()
     }
     timerz = time() + 60;
     tempmap += ([ target : timerz ]);
-    delay_msg(60,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^sunning striken%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target,60,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^sunning striken%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using stunning strike");
     caster->set_property("using stunning strike",tempmap);
 

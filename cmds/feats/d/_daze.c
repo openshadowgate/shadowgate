@@ -116,7 +116,7 @@ void execute_attack() {
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target : timerz ]);
-    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^dazed%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target,FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^dazed%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using daze");
     caster->set_property("using daze",newmap);
 
