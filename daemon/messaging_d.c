@@ -1,12 +1,7 @@
-// Daemon to do different sorts of broadcast messaging to users.
-// Is this too simple for it? Possibly.
-
 #include <std.h>
 inherit DAEMON ;
 
 int clean_up() { TO->remove(); return 1; }
-
-
 
 int is_wizard(object ob) {
   if(!objectp(ob)) return 0;
@@ -68,4 +63,9 @@ void first_death_message(string type, string what, object * receivers, object * 
 void delay_death_message(string type, string what, object * excluded) {
      avatars_message(type, "%^BOLD%^%^WHITE%^Mortal:"+what, ({ }));
      users_message(type, what, excluded + avatars() );
+}
+
+void delay_local_message(int delay, string type, string what, object * recievers, object * excluded)
+{
+    call_out("local_message", delay, type, what, recievers, excluded);
 }

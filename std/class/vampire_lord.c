@@ -148,7 +148,6 @@ string old_save_type(object ob) { return base_class_ob(ob)->old_save_type(); }
 
 string new_save_type(object ob) { return base_class_ob(ob)->new_save_type(); }
 
-// unsure on this one, will have to investigate
 void advanced_func(object player) { return base_class_ob(player)->advance_func(player); }
 
 int hit_dice(object ob) { return base_class_ob(ob)->hit_dice(); }  // hit dice rolled for hitpoints each level

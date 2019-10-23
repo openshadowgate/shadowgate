@@ -58,7 +58,7 @@ string feat_category,
     feat_type,
     feat_desc,
     feat_syntax,
-    feat_prereq,        
+    feat_prereq,
     arg,
     save_type,
     *required_for=({}),
@@ -110,15 +110,15 @@ void set_replaces_feat(mixed feat)
     else replaced_by += ({feat});
 }
 
-int prerequisites(object ob) 
+int prerequisites(object ob)
 {
     object class_ob;
     string *class_names, *pfeats;
     mapping prestige_feats;
     int i, fail = 0;
-    
+
     class_names = ob->query_classes();
-    
+
     for(i=0;sizeof(class_names),i<sizeof(class_names);i++)
     {
         class_ob = find_object_or_load(DIR_CLASSES+"/"+class_names[i]+".c");
@@ -131,9 +131,9 @@ int prerequisites(object ob)
             if(pointerp(prestige_feats[flev])) pfeats += prestige_feats[flev];
             continue;
         }
-        if(member_array(feat_name, pfeats) != -1 && !class_ob->prerequisites(ob)) 
-        { 
-            fail = 1; 
+        if(member_array(feat_name, pfeats) != -1 && !class_ob->prerequisites(ob))
+        {
+            fail = 1;
             break;
         }
     }
@@ -142,7 +142,7 @@ int prerequisites(object ob)
         dest_effect();
         return 0;
     }
-    return 1; 
+    return 1;
 }
 
 int remove()
@@ -459,9 +459,9 @@ int get_thaco(int level, string myclass,object ob)
 }
 
 
-//modifying this function to use the process_hit function inside of bonus_d that calculates hits now 
+//modifying this function to use the process_hit function inside of bonus_d that calculates hits now
 //including a check to see if the feat is deflected/ignored by shields or concealing amorpha, etc. - Saide
-//flag = 1 for a touch attack type feat 
+//flag = 1 for a touch attack type feat
 varargs int thaco(object targ, int mod, int flag)
 {
     object weap, *weaps;
@@ -478,24 +478,24 @@ varargs int thaco(object targ, int mod, int flag)
     if(roll == 20) return 1;
     if(!roll) return 0;
     //if they hit but not with a roll of 20 - Saide
-    else 
+    else
     {
-        //if they did not get their attack deflected - a hit 
+        //if they did not get their attack deflected - a hit
         //touch attacks allow for deflection attempts according to what I have read - Saide
         //giving feats a chance based on level vs target level to bypass deflection/concealing amorpha
         //against mobs anyway - Saide
-        if((userp(caster) && !userp(targ)) && (roll_dice(1,(int)caster->query_level()) > roll_dice(1, (int)targ->query_level()))) 
+        if((userp(caster) && !userp(targ)) && (roll_dice(1,(int)caster->query_level()) > roll_dice(1, (int)targ->query_level())))
         {
             return 1;
         }
-        if((int)"/daemon/combat_d.c"->extra_hit_calcs(caster, targ, weap, targ->return_target_limb())) 
+        if((int)"/daemon/combat_d.c"->extra_hit_calcs(caster, targ, weap, targ->return_target_limb()))
         {
             return 1;
         }
         //some type of deflection - making these *misses* behave differently than regular misses - Saide, May 2017
         return -1;
     }
-    return 1;    
+    return 1;
 }
 
 
@@ -610,7 +610,7 @@ void dest_effect()
 void allow_blind(int num)
 {
     allowblind = num;
-    return;    
+    return;
 }
 
 int status_check()
@@ -668,17 +668,17 @@ varargs object *ob_party(object ob, string str)
     object *party, *extra=({});
     string party_name;
     int i;
-    
+
     if(!objectp(ob)) { return ({ob}); }
-    
+
     party_name = ob->query_party();
-    
+
     if(!party_name) { return ({ob}); }
-    
+
     party = PARTY_D->query_party_members(party_name);
-    
+
     if(str != "all") { return party; }
-    
+
     for(i=0;i<sizeof(party);i++)
     {
         if(!objectp(party[i])) { continue; }
@@ -697,11 +697,11 @@ object query_active_feat(string name)
     object obj,*active_feats;
     string feat_name;
     int i;
-    
+
     if(!FEATS_D->is_active(caster,name)) { return 0; }
-    
+
     active_feats = caster->query_property("active_feats");
-    
+
     for(i=0;sizeof(active_feats),i<sizeof(active_feats);i++)
     {
         if(!objectp(active_feats[i])) { continue; }
@@ -710,11 +710,16 @@ object query_active_feat(string name)
         obj = active_feats[i];
         break;
     }
-    
+
     return obj;
 }
 
 int allow_shifted() {return 0;};
+
+void delay_msg(int delay, string message)
+{
+    MESSAGING_D->delay_local_message(delay,"info",message,({caster}));
+}
 
 void help(){
     string name,
@@ -742,7 +747,5 @@ void help(){
     if (allow_shifted())
         write("%^BOLD%^%^WHITE%^This feat will work in shapeshifted form.");
     if (psionic)
-        write("%^BOLD%^%^WHITE%^This is a psionic feat. It will improve your psionic body ability.");    
+        write("%^BOLD%^%^WHITE%^This is a psionic feat. It will improve your psionic body ability.");
 }
-
-
