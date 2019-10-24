@@ -12,7 +12,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("eldritch bow");
-    set_spell_level(([ "warlock" : 3 ]));
+    set_spell_level(([ "warlock" : 1 ]));
     set_syntax("cast CLASS eldritch bow");
     set_description("A variant on the core spell-like ability of the warlock, this invocation allows "
 "the caster to shape their eldritch blast into a single bow, which can be used as a melee weapon. "
@@ -25,12 +25,12 @@ void create() {
 }
 
 int preSpell() {
-    while(present("eldritch_weapon_xxx",caster)) 
+    while(present("eldritch_weapon_xxx",caster))
     {
         if(present("eldritch_weapon_xxx", caster)->query_wielded()) caster->force_me("unwield eldritch_weapon_xxx");
         if(objectp(present("eldritch_weapon_xxx", caster)))
         {
-            tell_room(place,"%^RESET%^%^CYAN%^The gleaming claw shimmers and disappears.%^RESET%^");   
+            tell_room(place,"%^RESET%^%^CYAN%^The gleaming claw shimmers and disappears.%^RESET%^");
             present("eldritch_weapon_xxx", caster)->remove();
             continue;
         }
@@ -50,13 +50,13 @@ int preSpell() {
 string query_cast_string() {
     tell_object(caster,"%^MAGENTA%^You extend both hands and curl your fingers inwards.%^RESET%^");
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" extends both hands and curls "+caster->QP+" fingers inwards.%^RESET%^",caster);
-    return "display";      
+    return "display";
 }
 
 void spell_effect(int prof){
     string descriptor;
     string filename;
-    
+
     blasttype = (string)caster->query("warlock_blast_type");
     filename = "eldritch_bow_"+blasttype;
     switch(blasttype) {
@@ -90,7 +90,7 @@ void spell_effect(int prof){
         filename = "eldritch_bow";
         break;
     }
-    
+
     bow = new(BASEDIR+filename);
     bow->move(caster);
     bow->weapon_setup(caster,clevel);
@@ -98,11 +98,11 @@ void spell_effect(int prof){
     bow->set_short("%^RESET%^"+descriptor+"%^RESET%^ %^CYAN%^b%^BOLD%^%^CYAN%^o%^RESET%^%^CYAN%^w%^RESET%^");
     bow->set_long("%^BOLD%^%^WHITE%^This magical construct looks as though it would serve as a weapon of considerable %^RESET%^%^RED%^potency%^BOLD%^%^WHITE%^. Instead of wood or metal, however, it is made purely of "+descriptor+"%^RESET%^%^BOLD%^. Its curved like a bow, with thin, %^RESET%^%^CYAN%^translucent%^RESET%^%^BOLD%^ string connecting the arms.");
     tell_object(caster,"%^MAGENTA%^In your hands materializes a crude %^CYAN%^bow%^MAGENTA%^, formed of "+descriptor+"!%^RESET%^");
-    tell_room(place,"%^MAGENTA%^In hands of "+caster->QCN+" materializes a %^CYAN%^bow%^MAGENTA%^, formed of "+descriptor+"!%^RESET%^",caster);    
+    tell_room(place,"%^MAGENTA%^In hands of "+caster->QCN+" materializes a %^CYAN%^bow%^MAGENTA%^, formed of "+descriptor+"!%^RESET%^",caster);
     caster->force_me("wield eldritch bow");
-    
+
     spell_successful();
-    call_out("dest_effect",clevel*ROUND_LENGTH*10);    
+    call_out("dest_effect",clevel*ROUND_LENGTH*10);
     return;
 }
 
@@ -113,4 +113,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
