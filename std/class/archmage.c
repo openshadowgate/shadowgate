@@ -31,7 +31,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Mage levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
         "    20 Intelligence stat, before equipment modifiers\n";
 
     return str;
@@ -54,7 +53,6 @@ int prerequisites(object player)
     skills = player->query_skills();
 
     if( (player->query_class_level("mage") + adj) < 20) { return 0; }
-    if(player->query_level() < 40) { return 0; }
     if(player->query_base_stats("intelligence") < 20) { return 0; }
     return 1;
 }
