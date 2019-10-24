@@ -248,9 +248,18 @@ void clear_bonus_language()
 
 void clear_template()
 {
+    string template = MyCharacterInfo["race"]["template"];
+    string tpfn;
     MyCharacterInfo["race"]["template"] = "NIL";
-    ETO->delete("undead");
-    ETO->delete("vampire");
+
+    if(!objectp(TO)) return;
+    if(!objectp(ETO)) return;
+
+    tpfn = "/std/acquired_template/"+template+".c";
+    if(!file_exists(tpfn))
+        return;
+
+    tpfn->remove_template(ETO);
 }
 
 void clear_body_type()
@@ -655,7 +664,11 @@ int okdone()
     if(MyPlace != "stats" || bonus) return 0;
     ETO->set_stats("charisma", MyCharacterInfo["stats"]["charisma"]);
     if(MyCharacterInfo["race"]["subrace"] != "NIL") ETO->set("subrace", MyCharacterInfo["race"]["subrace"]);
-    MyPlace = "hair color";
+    if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
+        OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
+        MyPlace = "template";
+    else
+        MyPlace = "hair color";
     ProcessStep();
     return 1;
 }
@@ -1060,21 +1073,16 @@ void build_bonus_language()
 void build_template()
 {
     string template = MyCharacterInfo["race"]["template"];
+    string tpfn;
+
     if(!objectp(TO)) return;
     if(!objectp(ETO)) return;
-    if(template=="undead" ||
-       template=="Undead")
-    {
-        ETO->set("undead",1);
-        ETO->set_property("undead",1);
-    }
-    if(template=="vampire" ||
-       template=="Vampire")
-    {
-        ETO->set("undead",1);
-        ETO->set_property("undead",1);
-        ETO->set("vampire",1);
-    }
+
+    tpfn = "/std/acquired_template/"+template+".c";
+    if(!file_exists(tpfn))
+        return;
+
+    tpfn->apply_template(ETO);
 }
 
 void build_subrace()
@@ -1474,7 +1482,12 @@ void pick_genetics()
         }
             break;
         case "template":
-            my_choices = TEMPLATES;
+        {
+            string possible_templates;
+            possible_templates = explode(implode(get_dir("/std/acquired_template/*.c"), ""), ".c");
+
+            my_choices = possible_templates;
+        }
             break;
         case "height":
             my_choices = HEIGHTS;
@@ -1989,11 +2002,7 @@ varargs int choose(string str, int flag)
             }
             extra_display(str);
             MyCharacterInfo["race"]["subrace"] = str;
-            if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
-                OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
-                MyPlace = "template";
-            else
-                MyPlace = "stats";
+            MyPlace = "stats";
             build_restrictions("subrace");
             ProcessStep();
             break;
@@ -2081,7 +2090,7 @@ varargs int choose(string str, int flag)
             if(check_my_choice(str)) { pick_genetics(); return 1;}
             extra_display(str);
             MyCharacterInfo["race"]["template"] = str;
-            MyPlace = "stats";
+            MyPlace = "hair color";
             ProcessStep();
             break;
         case "age":
