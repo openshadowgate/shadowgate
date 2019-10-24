@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "innate" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS werewolf shape on werewolf|wolf");
-    set_description("With this power werewolf can transform itself into another form, that being of a huge wolf or humanoid wolf-like being. First form acts much like your common wolf in combat. Hybrid form is a bit weaker but allows to cast and speak, if werewolf chooses to do so. Both alternate forms give the werewolf significant weakness to silver damage, better night vision and full base attack.
+    set_description("With this power werewolf can transform itself into another form, that being of a huge wolf or humanoid wolf-like being. First form acts much like your common wolf in combat, with powerful specials. Hybrid form looks a lot like original humanoid form, with wolf-like ears and soft fur cover. Both forms provide bonuses to physical attributes and armor class, sight, attack, damage, perception, survival bonuses and weakness to silver.
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ You can set alternative description, speech string and adjective for these forms.");
     set_arg_needed();
@@ -48,15 +48,16 @@ void spell_effect(int prof)
     }
     new("/std/races/shapeshifted_races/werewolf_"+arg+".c")->init_shape(caster,arg);
 
-    shape = caster->query_property("shapeshifted");
+    if(caster->query_property("shapeshifted"))
+        shape = caster->query_property("shapeshifted");
+    else
+        shape = caster->query_property("altered");
 
     bonus = clevel/4+1;
     caster->add_attack_bonus(bonus);
     caster->add_damage_bonus(bonus);
     caster->set_property("dance-of-cuts",1); //Full BAB
     spell_successful();
-
-    caster->set_property("spelled", ({TO}) );
     addSpellToCaster();
 }
 
@@ -68,7 +69,12 @@ void dest_effect()
         caster->add_attack_bonus(-bonus);
         caster->add_damage_bonus(-bonus);
         caster->set_property("dance-of-cuts",-1);
-        if(objectp(shape = caster->query_property("shapeshifted"))) shape->reverse_shape(caster);
+        if(caster->query_property("shapeshifted"))
+            shape = caster->query_property("shapeshifted");
+        else
+            shape = caster->query_property("altered");
+        if(objectp(shape))
+            shape->reverse_shape(caster);
 	}
     ::dest_effect();
     if(objectp(TO)) TO->remove();

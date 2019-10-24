@@ -77,10 +77,10 @@ void InitInnate()
     if(is_werewolf())
     {
         InnateAbilities += ([
-                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "werewolf shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "heart of the wild" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "commune with nature" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "heart of the wild" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "werewolf shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 ]);
     }
 
