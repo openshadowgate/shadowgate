@@ -9,7 +9,7 @@ void create()
     ::create();
     set_spell_name("obsidian flow");
     set_spell_level(([ "druid" : 4, "mage" : 4 ]));
-    set_spell_sphere("invocation_evocation");
+    set_spell_sphere("alteration");
     set_spell_domain("sun");
     set_syntax("cast CLASS obsidian flow");
     set_damage_desc("fire, trips targets");

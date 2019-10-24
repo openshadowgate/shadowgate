@@ -73,7 +73,7 @@ void obsolete_feat(object ob) {
         "blade block","unassailable parry","greater two weapon fighting","two weapon defense","calm","rapid shot",
         "wild shape dragon","hardenedminions","slippery caster","thick skinned caster","wild shape wolf",
         "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer",
-        "versatile arcanist","wild shape dragon","wild shape elemental" });
+                "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials" });
         //"persistent rage","unyielding rage"
 
     for(i=0;i<sizeof(obsolete);i++) {
@@ -333,6 +333,11 @@ void obsolete_feat(object ob) {
                     "wish to <feats fix> as the druid class now has a new set of levelling feats.%^RESET%^");
             break;
 
+        case "eschew materials":
+            remove_my_feat(ob,"eschew materials",1);
+            ob->set("free_feats",1);
+            tell_object(ob,"%^BOLD%^%^MAGENTA%^Your feat %^CYAN%^eschew materials%^MAGENTA%^ has been refunded.%^RESET%^");
+            break;
         case "archmage":
         case "body cognition":
         case "chronicler":
@@ -503,6 +508,8 @@ int add_my_feat(object ob,string type,string feat)
             num += 1;
             ob->set_class_feats_gained(num);
             update_usable(ob);
+            if(feat == "grandmaster of the way")
+                TP->init_ki();
             return 1;
         }
         else return 0;

@@ -433,6 +433,7 @@ int confirm_add(string str,object ob,string feat,string extradata) {
     if((int)TP->query("free_feats")) {
         TP->set("free_feats",((int)TP->query("free_feats") - 1));
     }
+
     if(feat == "spellmastery" || feat == "archmage" || feat == "greater spell mastery") { ob->set("spellmastery_spell",extradata); }
     if(feat == "expanded knowledge 1"){ ob->set("expanded_knowledge_1",extradata); }
     if(feat == "expanded knowledge 2"){ ob->set("expanded_knowledge_2",extradata); }
@@ -697,13 +698,6 @@ int cmd_feats(string str){
         otherfeats = TP->query_bonus_feats();
         featkeys = keys(otherfeats);
         for(i = 0;i < sizeof(featkeys);i++) feats += otherfeats[featkeys[i]];
-
-        if(FEATS_D->has_feat(TP,"eschew materials"))
-        {
-            FEATS_D->remove_my_feat(TP,"eschew materials",1);
-            TP->set("free_feats",1);
-            tell_object(TP,"%^BOLD%^%^MAGENTA%^Your feat %^CYAN%^eschew materials%^MAGENTA%^ has been refunded.%^RESET%^");
-        }
 
         // now run addition of any missing class feats; remove from bought
         // feats first if they already did
