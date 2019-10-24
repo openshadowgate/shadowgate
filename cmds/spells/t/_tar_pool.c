@@ -12,7 +12,7 @@ void create()
     set_spell_domain("sun");
     set_syntax("cast CLASS tar pool");
     set_damage_desc("fire, trips targets");
-    set_description("You convert a layer of the ground to hot tar. Creatures in the area when the tar appears take fire damage and must succeed at a reflex save or become entangled..");
+    set_description("You convert a layer of the ground to hot tar. Creatures in the area when the tar appears take fire damage and must succeed at a reflex save or become entangled. Successful save will allow enemies to jump out of the pool before tar becomes viscous, but the heat will still harm them.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
@@ -45,6 +45,8 @@ void spell_effect(int prof)
             continue;
 
         dmg = sdamage;
+        tell_object(attackers[i],"%^BOLD%^Heat raising from the tar burns you!%^RESET%^");
+        damage_targ(attackers[i],attackers[i]->return_target_limb(),dmg,"fire");
         if(!do_save(attackers[i],0))
         {
 
@@ -54,10 +56,8 @@ void spell_effect(int prof)
         }
         else
         {
-            tell_room("%^BLACK%^"+attackers[i]->QCN+" jumps up just in time and avoids being stuck in the tar, yet heat still burns "+attackers[i]->QO+"!");
+            tell_room("%^BLACK%^"+attackers[i]->QCN+" jumps up just in time and avoids being stuck in the tar!");
         }
-        tell_object(attackers[i],"%^BOLD%^Heat raising from the tar burns you!%^RESET%^");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),dmg,"fire");
     }
     spell_successful();
     dest_effect();
