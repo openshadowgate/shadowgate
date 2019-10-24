@@ -14,7 +14,7 @@ void create()
     set_spell_sphere("combat");
     set_syntax("cast CLASS sacred nimbus");
     set_damage_desc("divine to evil");
-    set_description("You are surrounded by a nimbus of golden light shaped like your god’s holy symbol or a symbol of your faith. Any evil creature attacking you will be burned by the light.");
+    set_description("You are surrounded by a nimbus of golden light shaped like your god's holy symbol or a symbol of your faith. Any evil creature attacking you will be burned by the light.");
     set_property("magic",1);
     traveling_aoe_spell(1);
 }
