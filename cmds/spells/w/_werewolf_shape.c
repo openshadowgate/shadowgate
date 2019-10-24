@@ -5,7 +5,7 @@ int bonus;
 
 string *valid_forms()
 {
-    return ({"hybrid","wolf",});
+    return ({"werewolf","wolf",});
 }
 
 void create()
@@ -14,12 +14,10 @@ void create()
     set_spell_name("werewolf shape");
     set_spell_level(([ "innate" : 1 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS werewolf shape on hybrid|wolf");
+    set_syntax("cast CLASS werewolf shape on werewolf|wolf");
     set_description("With this power werewolf can transform itself into another form, that being of a huge wolf or humanoid wolf-like being. First form acts much like your common wolf in combat. Hybrid form is a bit weaker but allows to wield a weapon, cast and speak, if werewolf chooses to do so. Both alternate forms give the werewolf significant weakness to silver damage, better night vision and full base attack.
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ You can set alternative description, speech string and adjective for these forms.");
-    set_verbal_comp();
-    set_somatic_comp();
     set_arg_needed();
     set_helpful_spell(1);
 }

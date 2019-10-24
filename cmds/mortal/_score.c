@@ -26,6 +26,8 @@ mixed * genoutput(object targ)
             else
                 race_var = "Undead "+race_var;
         }
+        if(targ->is_werewolf())
+            race_var = "Werewolf "+race_var;
         if(objectp(shape = TP->query_property("shapeshifted")))
         {
             race_var = (string)shape->query_shape_race();

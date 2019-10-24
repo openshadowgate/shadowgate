@@ -9,12 +9,12 @@ void create()
 
     set_attack_limbs( ({ "maw" }) );
     set_new_damage_type("piercing");
-    set_limbs( ({ "mouth","head","torso","waist ","left arm","left hand","right arm","right hand","left leg","left foor","right leg", ,"right food", "tail", "maw" }) );
+    set_limbs( ({ "mouth","head","torso","waist ","left arm","left hand","right arm","right hand","left leg","left foor","right leg" ,"right food", "tail", "maw" }) );
     set_attack_functions( ([ "maw" : (:TO,"shape_attack":) ]) );
     set_base_attack_num(2);
     set_castable(1);
     set_can_talk(1);
-    set_shape_race("hybrid");
+    set_shape_race("werewolf");
     set_shape_profile("werewolf_hybrid_999");
     set_shape_bonus("perception",2);
     set_shape_bonus("survival",2);
@@ -129,7 +129,7 @@ int shape_attack(object tp, object targ)
         tell_room(etp,"%^RESET%^%^ORANGE%^"+tp->QCN+" snarls angrily and lunches, tearing deeply into "+targ->QCN+"'s flank!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,4),get_new_damage_type());
         break;
-z
+
     case "stun":
         if(!random(3)){
 
