@@ -1624,6 +1624,11 @@ int is_vampire()
     return (query("vampire")) || 0;
 }
 
+int is_werewolf()
+{
+    return (query("werewolf")) || 0;
+}
+
 void reset_all_status_effects()
 {
     object *myFeats;
