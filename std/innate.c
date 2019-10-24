@@ -79,6 +79,8 @@ void InitInnate()
         InnateAbilities += ([
                                 "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "werewolf shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "heart of the wild" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "commune with nature" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 ]);
     }
 

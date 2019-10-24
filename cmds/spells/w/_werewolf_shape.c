@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "innate" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS werewolf shape on werewolf|wolf");
-    set_description("With this power werewolf can transform itself into another form, that being of a huge wolf or humanoid wolf-like being. First form acts much like your common wolf in combat. Hybrid form is a bit weaker but allows to wield a weapon, cast and speak, if werewolf chooses to do so. Both alternate forms give the werewolf significant weakness to silver damage, better night vision and full base attack.
+    set_description("With this power werewolf can transform itself into another form, that being of a huge wolf or humanoid wolf-like being. First form acts much like your common wolf in combat. Hybrid form is a bit weaker but allows to cast and speak, if werewolf chooses to do so. Both alternate forms give the werewolf significant weakness to silver damage, better night vision and full base attack.
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ You can set alternative description, speech string and adjective for these forms.");
     set_arg_needed();
@@ -49,7 +49,7 @@ void spell_effect(int prof)
     new("/std/races/shapeshifted_races/werewolf_"+arg+".c")->init_shape(caster,arg);
 
     shape = caster->query_property("shapeshifted");
-    shape->set_clevel(clevel);
+
     bonus = clevel/4+1;
     caster->add_attack_bonus(bonus);
     caster->add_damage_bonus(bonus);

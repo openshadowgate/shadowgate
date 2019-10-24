@@ -51,7 +51,6 @@ void spell_effect(int prof)
     new("/std/races/shapeshifted_races/vampire_"+arg+".c")->init_shape(caster,arg);
 
     shape = caster->query_property("shapeshifted");
-    shape->set_clevel(clevel);
     bonus = clevel/4+1;
     caster->add_attack_bonus(bonus);
     caster->add_damage_bonus(bonus);

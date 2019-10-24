@@ -10,6 +10,9 @@ mixed * genoutput(object targ)
     mixed * output=({});
 
     output+=({({"Health Points","%^RESET%^%^"+targ->query_hp()+"%^BOLD%^%^GREEN%^/%^WHITE%^"+targ->query_max_hp()})});
+    if(targ->is_class("psion") ||
+       targ->is_class("psywarrior"))
+        output+=({({"Power Points","%^RESET%^%^"+targ->query_mp()+"%^BOLD%^%^GREEN%^/%^WHITE%^"+targ->query_max_mp()})});
     output+=({({"Carrying","%^RESET%^%^"+targ->query_internal_encumbrance()+"%^BOLD%^%^GREEN%^/%^WHITE%^"+targ->query_max_internal_encumbrance()})});
 
     if(!(targ->is_undead() ||
