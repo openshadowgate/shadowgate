@@ -146,6 +146,12 @@ void more_acid()
 
     death_check(target);
 
+    if(target->query_hp()<0)
+    {
+        dest_effect();
+        return;
+    }
+
     switch(element)
     {
     case "cold":        tell_object(target,"%^CYAN%^Pain floods through your "+target_limb+" as the icy chill continues to burn.");         break;
