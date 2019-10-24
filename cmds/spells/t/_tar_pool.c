@@ -45,7 +45,7 @@ void spell_effect(int prof)
             continue;
 
         dmg = sdamage;
-        tell_object(attackers[i],"%^BOLD%^Heat raising from the tar burns you!%^RESET%^");
+        tell_object(attackers[i],"%^BOLD%^Heat raising of the tar burns you!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),dmg,"fire");
         if(!do_save(attackers[i],0))
         {
@@ -56,6 +56,7 @@ void spell_effect(int prof)
         }
         else
         {
+            tell_object(attackers[i],"%^BOLD%^%^BLACK%^You jump up in time and avoid being stuck.%^RESET%^");
             tell_room("%^BLACK%^"+attackers[i]->QCN+" jumps up just in time and avoids being stuck in the tar!");
         }
     }
