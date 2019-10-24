@@ -20,9 +20,10 @@ void create()
     set_shape_bonus("perception",2);
     set_shape_bonus("survival",4);
     set_shape_bonus("cold resistance",5);
+    set_shape_bonus("silver resistance",-33);
     set_shape_bonus("sight bonus",3);
-    set_shape_bonus("damage bonus",1);
-    set_shape_bonus("attack bonus",1);
+    set_shape_bonus("damage bonus",2);
+    set_shape_bonus("attack bonus",2);
     set_shape_height(30+random(12));
     set_shape_weight(90+random(50));
     set_shape_mastery_feat("knockdown");
@@ -34,7 +35,7 @@ int default_descriptions(object obj)
 
     obj->set_description("is covered from snout to tail in smooth black fur. A maw of razor sharp teeth and keen eyes shows that the wolf is a natural predator in its own environment. Every step it takes reveals lean muscles under the heavy coat of fur.");
 
-    obj->setDescriptivePhrase("lean black $R with intense white");
+    obj->setDescriptivePhrase("lean black $R with intense white eyes");
 
     obj->set("speech string","growl");
     obj->set("describe string","angrily");
@@ -87,129 +88,91 @@ int can_cast()
 int shape_attack(object tp, object targ)
 {
     object etp,*attackers;
-    string *specials=({}),*active_specials=({});
+    string *specials=({});
     int i,chance,dice;
 
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();
-    if(!objectp(targ) && !sizeof(attackers)) { return 0; }
-
     chance = (int)tp->query_level()+10;
 
     if(chance > 70) { chance = 70; }
 
     dice = ( chance / 4) + 2;
 
-    if(roll_dice(1,100) > chance) { return roll_dice(2,dice); }
+    if(roll_dice(1,100) > chance)
+        return roll_dice(2,dice);
 
-    // switch falls through intentionally
-    switch(chance)
+    specials = ({ "blind",
+            "heal",
+            "trip",
+            "high damage",
+            "stun",
+            "extra attack",
+            "low damage" });
+
+    switch(specials[random(sizeof(specials))])
     {
-        case 45..70: specials += ({ "blind" });
-        case 40..44: specials += ({ "heal" });
-        case 32..39: specials += ({ "trip" });
-        case 20..31: specials += ({ "high damage" });
-        case 15..19: specials += ({ "stun" });
-        case 10..14: specials += ({ "extra attack" });
-        default:     specials += ({ "low damage"  });
-    }
 
-    i=0;
-
-    do
-    {
-        active_specials += ({ specials[random(sizeof(specials))] });
-        i += 5;
-    }
-    while(roll_dice(1,100) < (chance - i));
+    case "blind":
+        tell_object(tp,"%^RESET%^%^GREEN%^You leap up and savagely tear at "+targ->QCN+"'s eyes, narrowly missing!");
+        tell_object(targ,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" leaps up and tears at your face, nearly ripping your eyes out!");
+        tell_room(etp,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" leaps up and tears at "+targ->QCN+"'s face, nearly ripping out "+targ->QP+" eyes!",({tp,targ}));
+        if(!targ->reflex_save(chance)) { targ->set_temporary_blinded(dice/2); }
+        break;
 
 
-    for(i=0;i<sizeof(active_specials);i++)
-    {
-        if(!objectp(tp) || !objectp(targ)) { return 0; }
+    case "heal":
+        tell_object(tp,"%^RESET%^%^BOLD%^%^CYAN%^You pull on "+targ->QCN+"'s essence with your attack, draining "+targ->QO+" and restoring some of your vital health!");
+        tell_object(targ,"%^RESET%^%^GREEN%^"+tp->QCN+"'s pulls at your essence, leaving you drained!");
+        tell_room(etp,"%^RESET%^%^BLUE%^"+tp->QCN+"'s wounds look less severe after "+tp->QS+" attacks "+targ->QCN+"!",({tp,targ}));
+        tp->do_damage(tp->return_target_limb(),(dice * -1 * 2));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),dice*2,get_new_damage_type());
+        break;
 
-        switch(active_specials[i])
-        {
+    case "trip":
+        tell_object(tp,"%^RESET%^%^GREEN%^You dig your teeth into "+targ->QCN+"'s shoulder and drag "+targ->QO+" to the ground!");
+        tell_object(targ,"%^RESET%^%^GREEN%^"+tp->QCN+" digs "+tp->QP+" teeth into your shoulder and drags you to the ground!");
+        tell_room(etp,"%^RESET%^%^GREEN%^"+tp->QCN+" digs "+tp->QP+" teeth into "+targ->QCN+"'s shoulder and drags "+targ->QO+" to the ground!",({tp,targ}));
+        if(!targ->fort_save(chance)) { targ->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!"); }
+        break;
 
-        case "blind":
+    case "high damage":
+        tell_object(tp,"%^RESET%^%^YELLOW%^You snarl angrily and lunge, tearing deeply into "+targ->QCN+"'s flank!");
+        tell_object(targ,"%^RESET%^%^ORANGE%^"+tp->QCN+" snarls angrily and lunges, tearing painfully into your side!");
+        tell_room(etp,"%^RESET%^%^ORANGE%^"+tp->QCN+" snarls angrily and lunches, tearing deeply into "+targ->QCN+"'s flank!",({tp,targ}));
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,4),get_new_damage_type());
+        break;
 
-            tell_object(tp,"%^RESET%^%^GREEN%^You leap up and savagely tear at "+targ->QCN+"'s eyes, narrowly missing!");
-            tell_object(targ,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" leaps up and tears at your face, nearly ripping your eyes out!");
-            tell_room(etp,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" leaps up and tears at "+targ->QCN+"'s face, nearly ripping out "+targ->QP+" eyes!",({tp,targ}));
-
-            if(!targ->reflex_save(chance)) { targ->set_temporary_blinded(dice/2); }
-            break;
-
-
-        case "heal":
-
-            tell_object(tp,"%^RESET%^%^BOLD%^%^CYAN%^You pull on "+targ->QCN+"'s essence with your attack, draining "+targ->QO+" and restoring some of your vital health!");
-            tell_object(targ,"%^RESET%^%^GREEN%^"+tp->QCN+"'s pulls at your essence, leaving you drained!");
-            tell_room(etp,"%^RESET%^%^BLUE%^"+tp->QCN+"'s wounds look less severe after "+tp->QS+" attacks "+targ->QCN+"!",({tp,targ}));
-
-            tp->do_damage(tp->return_target_limb(),(dice * -1 * 2));
-            targ->cause_typed_damage(targ,targ->return_target_limb(),dice*2,get_new_damage_type());
-            break;
-
-
-        case "trip":
-
-            tell_object(tp,"%^RESET%^%^GREEN%^You dig your teeth into "+targ->QCN+"'s shoulder and drag "+targ->QO+" to the ground!");
-            tell_object(targ,"%^RESET%^%^GREEN%^"+tp->QCN+" digs "+tp->QP+" teeth into your shoulder and drags you to the ground!");
-            tell_room(etp,"%^RESET%^%^GREEN%^"+tp->QCN+" digs "+tp->QP+" teeth into "+targ->QCN+"'s shoulder and drags "+targ->QO+" to the ground!",({tp,targ}));
-
-            if(!targ->fort_save(chance)) { targ->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!"); }
-            break;
-
-        case "high damage":
-
-            tell_object(tp,"%^RESET%^%^YELLOW%^You snarl angrily and lunge, tearing deeply into "+targ->QCN+"'s flank!");
-            tell_object(targ,"%^RESET%^%^ORANGE%^"+tp->QCN+" snarls angrily and lunges, tearing painfully into your side!");
-            tell_room(etp,"%^RESET%^%^ORANGE%^"+tp->QCN+" snarls angrily and lunches, tearing deeply into "+targ->QCN+"'s flank!",({tp,targ}));
-
-            targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,4),get_new_damage_type());
-            break;
-
-
-        case "stun":
-            if(!random(3)){
-//               tell_object(tp,"%^B_BLUE%^%^BOLD%^%^GREEN%^You failed to stun "+targ->QCN+". ~Debugging Message~%^RESET%^");
-               break;
-            }else{
+    case "stun":
+        if(!random(3)){
 
             tell_object(tp,"%^RESET%^%^GREEN%^You lower your head and circle around "+targ->QCN+" before lunging, "
-                "knocking "+targ->QO+" off balance!");
+                        "knocking "+targ->QO+" off balance!");
             tell_object(targ,"%^RESET%^%^GREEN%^"+tp->QCN+" lowers "+tp->QP+" head and circles around you before "
-                "lunging and knocking you off balance and unable to move!");
+                        "lunging and knocking you off balance and unable to move!");
             tell_room(etp,"%^RESET%^%^GREEN%^"+tp->QCN+" lowers "+tp->QP+" head and circles around "+targ->QCN+" "
-                "before lunging and knocking "+targ->QO+" off balance!",({tp,targ}));
+                      "before lunging and knocking "+targ->QO+" off balance!",({tp,targ}));
 
             targ->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to regain your balance!");
-            break;
-            }
-
-
-        case "extra attack":
-
-            tell_object(tp,"%^RESET%^%^BOLD%^%^BLACK%^You hit the ground and twist, immediately launching another quick attack at "+targ->QCN+"!");
-            tell_object(targ,"%^RESET%^%^BOLD%^%^BLACK%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at you!");
-            tell_room(etp,"%^RESET%^%^BOLD%^%^BLACK%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at "+targ->QCN+"!",({tp,targ}));
-
-            tp->execute_attack();
-            break;
-
-        case "low damage":
-
-            tell_object(tp,"%^RESET%^%^BOLD%^%^GREEN%^You quickly snap inside "+targ->QCN+"'s defenses and bite a vulnerable spot!");
-            tell_object(targ,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" quickly snaps inside of your defenses and bites you!");
-            tell_room(etp,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" quickly snaps inside of "+targ->QCN+"'s defenses and bites "+targ->QO+"!",({tp,targ}));
-
-            targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,2),get_new_damage_type());
-            break;
-
         }
+        break;
+
+    case "extra attack":
+
+        tell_object(tp,"%^RESET%^%^BOLD%^%^BLACK%^You hit the ground and twist, immediately launching another quick attack at "+targ->QCN+"!");
+        tell_object(targ,"%^RESET%^%^BOLD%^%^BLACK%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at you!");
+        tell_room(etp,"%^RESET%^%^BOLD%^%^BLACK%^"+tp->QCN+" hits the ground and twists, immediately launching another attack at "+targ->QCN+"!",({tp,targ}));
+        tp->execute_attack();
+        break;
+
+    case "low damage":
+        tell_object(tp,"%^RESET%^%^BOLD%^%^GREEN%^You quickly snap inside "+targ->QCN+"'s defenses and bite a vulnerable spot!");
+        tell_object(targ,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" quickly snaps inside of your defenses and bites you!");
+        tell_room(etp,"%^RESET%^%^BOLD%^%^GREEN%^"+tp->QCN+" quickly snaps inside of "+targ->QCN+"'s defenses and bites "+targ->QO+"!",({tp,targ}));
+
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,2),get_new_damage_type());
+        break;
     }
 
     return roll_dice(2,dice);
