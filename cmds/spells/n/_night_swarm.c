@@ -1,4 +1,5 @@
 #include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 object *mons = ({});
@@ -47,7 +48,7 @@ void spell_effect(int prof) {
         mons += ({ob});
     }
     addSpellToCaster();
-    call_out("dest_effect",clevel*(prof/25));
+    call_out("dest_effect",clevel*ROUND_LENGTH*5);
 }
 
 void dest_effect() {
