@@ -94,12 +94,16 @@ int can_cast()
 
 int claw_attack(object tp, object targ)
 {
+    string RND_COLORS = ({"%^BOLD%^%^GREEN%^","%^BOLD%^%^MAGENTA%^","%^MAGENTA%^","%^CYAN%^","%^BOLD%^%^CYAN%^"});
+    string clr = RND_COLORS[random(sizeof(RND_COLORS))];
     if(!random(6))
     {
-        tell_object(tp,"%^BOLD%^%^GREEN%^You furiously claw "+targ->QCN+"!");
-        tell_object(targ,"%^BOLD%^%^GREEN%^"+tp->QCN+" furiously claws you!");
-        tell_room(ENV(tp),"%^BOLD%^%^GREEN%^"+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
+        tell_object(tp, clr+"You furiously claw "+targ->QCN+"!");
+        tell_object(targ, clr+tp->QCN+" furiously claws you!");
+        tell_room(ENV(tp), clr+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,8),"slashing");
     }
+
+    return roll_dice(2,6);
     //2d6+13
 }

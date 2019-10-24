@@ -110,4 +110,5 @@ int hand_attack(object tp, object targ)
         tell_room(ENV(tp),"%^BOLD%^%^BLUE%^"+tp->QCN+" grasps its hands together above the head before bringing them in unison at "+targ->QCN+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,12),"bludgeoning");
     }
+    return roll_dice(1,12);
 }

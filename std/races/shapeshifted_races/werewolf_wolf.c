@@ -22,8 +22,8 @@ void create()
     set_shape_bonus("cold resistance",5);
     set_shape_bonus("silver resistance",-33);
     set_shape_bonus("sight bonus",3);
-    set_shape_bonus("damage bonus",2);
-    set_shape_bonus("attack bonus",2);
+    set_shape_bonus("damage bonus",3);
+    set_shape_bonus("attack bonus",3);
     set_shape_height(30+random(12));
     set_shape_weight(90+random(50));
     set_shape_mastery_feat("knockdown");
@@ -35,7 +35,7 @@ int default_descriptions(object obj)
 
     obj->set_description("is covered from snout to tail in smooth black fur. A maw of razor sharp teeth and keen eyes shows that the wolf is a natural predator in its own environment. Every step it takes reveals lean muscles under the heavy coat of fur.");
 
-    obj->setDescriptivePhrase("lean black $R with intense white eyes");
+    obj->setDescriptivePhrase("lean black $R with dark blue fur");
 
     obj->set("speech string","growl");
     obj->set("describe string","angrily");

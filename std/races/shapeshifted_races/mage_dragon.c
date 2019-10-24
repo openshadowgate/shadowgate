@@ -107,6 +107,7 @@ int bite_attack(object tp, object targ)
         tell_room(ENV(tp),"%^RED%^"+tp->QCN+" snakes "+tp->QP+" lightning quick bites %^BOLD^%^BLACK%^deeply%^RESET%^ into "+targ->QCN+"'s "+my_limb+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,8),"piercing");
     }
+    return roll_dice(1,8);
 }
 
 int claw_attack(object tp, object targ)
@@ -118,4 +119,6 @@ int claw_attack(object tp, object targ)
         tell_room(ENV(tp),"%^RED%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^RED%^ claws "+targ->QCN+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"slashing");
     }
+
+    return roll_dice(2,6);
 }

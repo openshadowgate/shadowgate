@@ -114,4 +114,5 @@ int claw_attack(object tp, object targ)
         tell_room(ENV(tp),"%^GREEN%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^GREEN%^ claws "+targ->QCN+"!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"slashing");
     }
+    return roll_dice(2,6);
 }

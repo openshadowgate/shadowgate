@@ -112,5 +112,7 @@ int claw_attack(object tp, object targ)
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel/3,6),"piercing");
     }
 
+    return roll_dice(2,6);
+
     //2d6+13
 }

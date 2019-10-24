@@ -74,6 +74,14 @@ void InitInnate()
                                 ]);
     }
 
+    if(is_werewolf())
+    {
+        InnateAbilities += ([
+                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "werewolf shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                ]);
+    }
+
     // adding in feat-based innate spells here! N, 11/16
 
     feat_spells = ([]);

@@ -101,4 +101,5 @@ int bite_attack(object tp, object targ)
         tell_room(ENV(tp),"%^BOLD%^%^BLACK%^"+tp->QCN+" sinks its fangs %^RED%^deep%^BLACK%^ into "+targ->QCN+"'s flesh!",({tp,targ}));
         targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"piercing");
     }
+    return roll_dice(2,6);
 }
