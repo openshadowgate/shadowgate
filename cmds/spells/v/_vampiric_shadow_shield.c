@@ -73,11 +73,11 @@ void execute_attack()
             continue;
         if(attackers[i]->is_undead())
             continue;
-        tell_room(room,"%^BOLD%^%^BLUE%^Shadows around "+caster->QCN+" caress "+attackers[i]->QCN+"  as "+attackers[i]->QS+" strikes "+caster->QO+"!",({caster,target}));
-        tell_object(caster,"%^BOLD%^%^BLUE%^%^"+attackers[i]->QCN+" is caressed by the shield of shadows as "+attackers[i]->QS+" strikes you!");
-        tell_object(attackers[i],"%^BOLD%^%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
-        damage_targ(caster,caster->return_target_limb(),-sdamage/2,"untyped");
+        tell_room(room,"%^BLUE%^Shadows around "+caster->QCN+" caress "+attackers[i]->QCN+"  as "+attackers[i]->QS+" strikes "+caster->QO+"!",({caster,target}));
+        tell_object(caster,"%^BLUE%^%^"+attackers[i]->QCN+" is caressed by the shield of shadows as "+attackers[i]->QS+" strikes you!");
+        tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
+        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/4,"negative energy");
+        caster->add_hp(sdamage/12);
     }
     room->addObjectToCombatCycle(TO,1);
 }

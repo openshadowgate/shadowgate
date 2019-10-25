@@ -44,7 +44,7 @@ void spell_effect(int prof)
     string undeadtype,myrace;
     object controller;
 
-    attackers = all_living(place);
+    attackers = caster->query_attackers();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 
