@@ -4,6 +4,8 @@
 #include <spell.h>
 inherit SPELL;
 
+int flag;
+
 void create(){
     ::create();
     set_spell_name("hellfire shield");
@@ -42,6 +44,7 @@ void spell_effect(int prof){
     caster->set_property("added short",({"%^RED%^ (wreathed in ominous flames)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
+    environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",duration);
     return;
 }
@@ -58,7 +61,12 @@ void execute_attack(){
     if(!objectp(caster)) { dest_effect(); return; }
     if(!objectp(place))  { dest_effect(); return; }
 
-    ::execute_attack();
+    if(!flag) {
+        ::execute_attack();
+        flag = 1;
+        return;
+    }
+
     if(!objectp(caster)) { dest_effect(); return; }
     attackers   = caster->query_attackers();
     max         = clevel/10;
@@ -78,7 +86,6 @@ void execute_attack(){
         return;
     }
     define_base_damage(0);//lazy re-roll
-    sdamage/=2;
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i])) { continue; }
         tell_object(caster,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to you, and your hellish shield burns "+attackers[i]->QO+" horribly!");

@@ -3,6 +3,8 @@
 #include <priest.h>
 inherit SPELL;
 
+int flag;
+
 void create(){
     ::create();
     set_author("nienne");
@@ -53,7 +55,7 @@ void spell_effect(int prof){
     caster->add_property("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
     addSpellToCaster();
     spell_successful();
-    execute_attack();
+    environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",duration);
 }
 
@@ -61,7 +63,11 @@ void execute_attack(){
     object *attackers,room;
     int i;
 
-    ::execute_attack();
+   if(!flag) {
+      ::execute_attack();
+      flag = 1;
+      return;
+   }
     if(!objectp(caster)){
         dest_effect();
         return;

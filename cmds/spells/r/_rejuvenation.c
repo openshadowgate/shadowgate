@@ -1,10 +1,6 @@
-//Rejuvenation - new spell for the Renewal domain by
-//~Circe~ based on Regeneration by Ares
-//part of the rebalancing of domains
-//Note that this spell *will* be able to stack with regeneration
-
 #include <std.h>
 #include <clock.h>
+#include <magic.h>
 
 inherit SPELL;
 
@@ -16,9 +12,9 @@ void create(){
     set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("healing");
     set_spell_domain("renewal");
-    set_syntax("cast CLASS rejuvenation");
-    set_description("This spell will grant the caster the power of renewal, giving him a small amount of healing each "
-"round for a long period of time.");
+    set_syntax("cast CLASS rejuvenation [on TARGET]");
+    set_damage_desc("fast healing 2");
+    set_description("This spell will grant the caster the power of renewal, giving him a small amount of healing each round for a long period of time.");
     set_verbal_comp();
     set_property("magic",1);
 	set_helpful_spell(1);
@@ -34,58 +30,55 @@ string query_cast_string(){
     return "display";
 }
 
+int preSpell()
+{
+    if(!target)
+        target = caster;
+    if(target->query_property("rejuvenation"))
+    {
+        tell_object(caster,"%^BOLD%^%^WHITE%^You feel your spell repelled...");
+        return 0;
+    }
+    return 1;
+}
+
 void spell_effect(int prof){
-    duration = (clevel * HOUR)/25;
-    if(duration > (HOUR)) { duration = HOUR; } // max duration of 1 game hour
-    duration = time() + duration; // gives the exact second when the spell should end
+    int duration = clevel * ROUND_LENGTH * 10;
+    if(!target)
+        target = caster;
 
-    tell_room(place,"%^ORANGE%^A %^BOLD%^radiant light %^RESET%^%^ORANGE%^"+
-       "bathes "+caster->QCN+" briefly!",caster);
-    tell_object(caster,"%^ORANGE%^You feel warmth as a %^BOLD%^radiant "+
-       "light %^RESET%^%^ORANGE%^surrounds you briefly!%^RESET%^");
-    caster->set_property("spelled", ({TO}));
-    addSpellToCaster();
+    if(!objectp(target))
+    {
+        TO->remove();
+        return;
+    }
+    if(!objectp(caster))
+    {
+        TO->remove();
+        return;
+    }
+
+    tell_room(place,"%^BOLD%^%^ORANGE%^A radiant light bathes "+target->QCN+" briefly.");
+    target->set_property("spelled",({TO}));
+    target->set_property("fast healing",2);
+    target->set_property("kiss_of_feywild",1);
     spell_successful();
-    execute_attack();
+    addSpellToCaster();
+    call_out("dest_effect",duration);
 }
 
-void execute_attack(){
-    int hp,max_hp;
-    object room;
 
-    if(!objectp(caster)) { dest_effect(); return; }
 
-    ::execute_attack();
-    if((time()) > duration){
-        tell_object(caster,"%^ORANGE%^You feel cold as the warmth of "+
-           "the light leaves you.%^RESET%^");
-        dest_effect();
-        return;
+void dest_effect()
+{
+    if(objectp(target))
+    {
+        tell_object(target,"%^BOLD%^%^ORANGE%^The elation the light gave fades.%^RESET%^");
+        target->remove_property_value("spelled", ({TO}) );
+        target->set_property("fast healing",-2);
+        target->remove_property("rejuvenation");
     }
-    hp     = (int)caster->query_hp();
-    max_hp = (int)caster->query_max_hp();
-//    room   = environment(caster);
-//Moving these to a no_clean room to see if it stops bugs
-//~Circe~ 6/1/08
-    room = "/d/magic/room/regen_room";
-    if(hp >= max_hp){
-        room->addObjectToCombatCycle(TO,1);
-        return;
-    }
-/*
-    if(caster->query_property("berserked")){
-        tell_object(room,"The berserker rage fights off the healing.");
-        room->addObjectToCombatCycle(TO,1);
-        return;
-    }
-Removing to help balance Berserker (level 7 domain spell) ~Circe~ 5/17/13
-*/
-    tell_object(caster,"%^ORANGE%^The light adds a bit of strength to you!%^RESET%^");
-    caster->add_hp(roll_dice(1,6));
-    room->addObjectToCombatCycle(TO,1);
-}
-
-void dest_effect(){
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if(objectp(TO))
+        TO->remove();
 }

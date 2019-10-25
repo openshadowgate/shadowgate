@@ -6,6 +6,8 @@
 
 inherit SPELL;
 
+int flag;
+
 void create()
 {
     ::create();
@@ -45,7 +47,7 @@ void spell_effect(int prof)
         caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    execute_attack();
+    environment(caster)->addObjectToCombatCycle(TO,1);
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         call_out("dest_effect",ROUND_LENGTH*clevel*5);
 
@@ -53,7 +55,11 @@ void spell_effect(int prof)
 
 void execute_attack()
 {
-    ::execute_attack();
+    if(!flag) {
+        ::execute_attack();
+        flag = 1;
+        return;
+    }
     if(!objectp(caster)){
         dest_effect();
         return;
@@ -64,7 +70,7 @@ void execute_attack()
     {
         tell_object(caster,"%^BOLD%^%^CYAN%^You make a mental adjustment, healing some of your wounds!%^RESET%^");
         tell_room(place,"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
-        damage_targ(caster,caster->return_target_limb(),-sdamage/2,"positive energy");
+        damage_targ(caster,caster->return_target_limb(),-sdamage,"positive energy");
     }
     place->addObjectToCombatCycle(TO,1);
 }
