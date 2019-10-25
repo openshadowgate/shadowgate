@@ -41,7 +41,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BLUE%^You complete your chant and are surrounded by restless shadows!");
     caster->set_property("vampiric shadow shield",1);
     caster->set_property("spelled", ({TO}) );
-    caster->add_property("added short",({"%^BLUE%^ (%^BOLD^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
+    caster->set_property("added short",({"%^BLUE%^ (%^BOLD^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
     environment(caster)->addObjectToCombatCycle(TO,1);

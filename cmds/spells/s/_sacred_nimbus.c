@@ -4,6 +4,7 @@
 
 inherit SPELL;
 
+int flag;
 int strikes;
 
 void create()
@@ -51,6 +52,7 @@ void spell_effect(int prof)
     caster->set_property("added short",({"%^YELLOW%^ (in halo of light)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
+    environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",duration);
     return;
 }
@@ -62,7 +64,11 @@ void execute_attack()
 
     if(!objectp(caster))                        { dest_effect(); return; }
     if(!objectp(place = environment(caster)))   { dest_effect(); return; }
-    ::execute_attack();
+    if(!flag) {
+        ::execute_attack();
+        flag = 1;
+        return;
+    }
     if(!objectp(caster))                        { dest_effect(); return; }
     if(strikes > clevel)                        { dest_effect(); return; }
 
@@ -92,7 +98,7 @@ void execute_attack()
     tell_room(place,"%^BOLD%^%^YELLOW%^The halo around "+caster->QCN+" burns "+targ->QCN+"!",({targ,caster}));
 
     strikes++;
-    damage_targ(targ,targ->return_target_limb(),damage,"divine");
+    damage_targ(targ,targ->return_target_limb(),sdamage,"divine");
 
     place->addObjectToCombatCycle(TO,1);
     return;

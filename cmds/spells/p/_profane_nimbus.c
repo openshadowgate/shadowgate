@@ -5,6 +5,7 @@
 inherit SPELL;
 
 int strikes;
+int flag;
 
 void create()
 {
@@ -51,6 +52,7 @@ void spell_effect(int prof)
     caster->set_property("added short",({"%^BOLD%^%^MAGENTA%^ (in halo of darkness)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
+    environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",duration);
     return;
 }
@@ -62,7 +64,11 @@ void execute_attack()
 
     if(!objectp(caster))                        { dest_effect(); return; }
     if(!objectp(place = environment(caster)))   { dest_effect(); return; }
-    ::execute_attack();
+    if(!flag) {
+        ::execute_attack();
+        flag = 1;
+        return;
+    }
     if(!objectp(caster))                        { dest_effect(); return; }
     if(strikes > clevel)                        { dest_effect(); return; }
 
