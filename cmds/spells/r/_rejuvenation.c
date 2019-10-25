@@ -61,16 +61,16 @@ void execute_attack(){
            "the light leaves you.%^RESET%^");
         dest_effect();
         return;
-    }    
+    }
     hp     = (int)caster->query_hp();
     max_hp = (int)caster->query_max_hp();
 //    room   = environment(caster);
 //Moving these to a no_clean room to see if it stops bugs
 //~Circe~ 6/1/08
     room = "/d/magic/room/regen_room";
-    if(hp >= max_hp){ 
+    if(hp >= max_hp){
         room->addObjectToCombatCycle(TO,1);
-        return; 
+        return;
     }
 /*
     if(caster->query_property("berserked")){
@@ -80,8 +80,8 @@ void execute_attack(){
     }
 Removing to help balance Berserker (level 7 domain spell) ~Circe~ 5/17/13
 */
-    tell_object(caster,"%^YELLOW%^The light adds a bit of strength to you!%^RESET%^");
-    damage_targ(caster,caster->return_target_limb(),(-1 * roll_dice(1,6)),"positive energy");
+    tell_object(caster,"%^ORANGE%^The light adds a bit of strength to you!%^RESET%^");
+    caster->add_hp(roll_dice(1,6));
     room->addObjectToCombatCycle(TO,1);
 }
 
