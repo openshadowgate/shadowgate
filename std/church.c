@@ -215,14 +215,19 @@ int pray()
         {
             if(!objectp(stuff[i]))
                 continue;
+            if(!stuff[i])
+                continue;
             if (stuff[i]->is_armor() && stuff[i]->query_worn())
                 stuff[i]->set_not_equipped();
             if (stuff[i]->query_wielded())
                 stuff[i]->set_not_inhand();
-            if(stuff[i]->id("questob"))
-                stuff[i]->remove();
-            if((int)stuff[i]->query_property("enchantment")>0)
-                stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
+            if(objectp(stuff[i]))
+            {
+                if(stuff[i]->id("questob"))
+                    stuff[i]->remove();
+                if(stuff[i]->query_property("enchantment")>0)
+                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
+            }
         }
     }
 
