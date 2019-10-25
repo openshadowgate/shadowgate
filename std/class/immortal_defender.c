@@ -5,9 +5,9 @@
 inherit DAEMON;
 
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 object base_class_ob(object ob)
@@ -42,49 +42,43 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     str = "Prerequisites:\n"
         "    Counter Feat (WeaponAndShield Tree)\n"
         "    20 Fighter or Paladin Levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
-        "    20 Endurance Skill\n"
         "    20 Constitution stat, before equipment modifiers\n";
-        
-    return str;    
+
+    return str;
 }
 
 
 int prerequisites(object player)
 {
-    mapping skills;
     object race_ob;
     string race;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
-    skills = player->query_skills();
-    
+    adj = race_ob->level_adjustment(race);
+
     if(!FEATS_D->usable_feat(player,"counter")) { return 0; }
-    if(!skills["endurance"] || skills["endurance"] < 20) { return 0; }
     if(player->query_base_stats("constitution") < 20) { return 0; }
-    if(player->is_class("fighter")) 
-    { 
+    if(player->is_class("fighter"))
+    {
         if( (player->query_class_level("fighter") + adj) < 20) { return 0; }
-        
+
         player->set("immortal_defender_base_class","fighter");
     }
-    if(player->is_class("paladin")) 
-    { 
+    if(player->is_class("paladin"))
+    {
         if( (player->query_class_level("paladin") + adj) < 20) { return 0; }
         player->set("immortal_defender_base_class","paladin");
     }
-    if(player->query_level() < 40) { return 0; }
-    return 1;    
+    return 1;
 }
 
-mapping stat_requirements(object ob) 
-{ 
+mapping stat_requirements(object ob)
+{
     return ([ "constitution" : 20 ]);
 }
 
@@ -102,25 +96,25 @@ int caster_level_calcs(object player, string the_class)
     {
         case "fighter":
             level = player->query_class_level("fighter");
-            level += player->query_class_level("immortal_defender");            
+            level += player->query_class_level("immortal_defender");
             return level;
         case "paladin":
             level = player->query_class_level("paladin");
-            level += player->query_class_level("immortal_defender");            
+            level += player->query_class_level("immortal_defender");
             return level;
         case "immortal_defender":
             level = player->query_class_level("immortal_defender");
             level += player->query_class_level("fighter");
             level += player->query_class_level("paladin");
             return level;
-        
+
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "defenders presence" }), 4 : ({ "shield charge" }), 7 : ({ "shield master" }), ]);
 }
 

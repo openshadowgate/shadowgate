@@ -4,9 +4,9 @@
 
 inherit DAEMON;
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 object base_class_ob(object ob)
@@ -19,7 +19,7 @@ object base_class_ob(object ob)
 }
 
 
-string *query_base_classes(object obj) 
+string *query_base_classes(object obj)
 {
     return ({"druid","cleric"});
 }
@@ -43,12 +43,12 @@ int set_base_class(object obj, string choice)
     }
     classes = obj->query_classes();
     if(!sizeof(classes)) { return 0; }
-    if(member_array(choice,classes) == -1) { return 0; }    
+    if(member_array(choice,classes) == -1) { return 0; }
     obj->set("hierophant_base_class",choice);
     return 1;
 }
 
-int requires_base_class_set() { return 1; } 
+int requires_base_class_set() { return 1; }
 
 int is_prestige_class() { return 1; }
 
@@ -66,14 +66,14 @@ int *restricted_alignments(object ob) {
 
 string *restricted_gods(object ob) { return base_class_ob(ob)->restricted_gods(); }
 
-string requirements() 
+string requirements()
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Points Spent in Spellcraft Skill\n"
+        "    10 Points Spent in Spellcraft Skill\n"
         "    20 Wisdom\n";
 
-    return str;    
+    return str;
 }
 
 
@@ -84,21 +84,21 @@ int prerequisites(object player)
     string race, base;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
-    skills = player->query_skills();    
-    if(skills["spellcraft"] < 20) { return 0; }
+    adj = race_ob->level_adjustment(race);
+    skills = player->query_skills();
+    if(skills["spellcraft"] < 10) { return 0; }
     if(player->query_base_stats("wisdom") < 20) { return 0; }
     base = player->query("hierophant_base_class");
     if(!base) { return 0; }
     if(!player->is_class(base)) { return 0; }
-    if((player->query_class_level(base) + adj) < 20) { return 0; }    
+    if((player->query_class_level(base) + adj) < 20) { return 0; }
     if(player->query_level() < 40) { return 0; }
-    return 1;    
+    return 1;
 }
 
 mapping stat_requirements(object ob) { return base_class_ob(ob)->stat_requirements(); }
@@ -115,18 +115,18 @@ int caster_level_calcs(object player, string the_class)
     string base;
     if(!objectp(player)) { return 0; }
     base = player->query("hierophant_base_class");
-    
+
     level = player->query_class_level(base);
-    level += player->query_class_level("hierophant");            
+    level += player->query_class_level("hierophant");
     return level;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "mastery of power" }), 4 : ({ "greater arsenal" }), 7 : ({ "theurgic perfection" }), ]);
 }
 
 string *class_skills(object ob)
-{  
+{
     return base_class_ob(ob)->class_skills();
 }
 
@@ -162,6 +162,5 @@ void process_newbie_choice(object who, string str) { return base_class_ob(who)->
 
 string query_casting_stat(object ob) { return base_class_ob(ob)->query_casting_stat(); }
 
-mapping query_class_spells(object ob) { return (([ 
+mapping query_class_spells(object ob) { return (([
 ])); }
-

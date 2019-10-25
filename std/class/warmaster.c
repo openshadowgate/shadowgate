@@ -85,8 +85,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Base Class Levels\n"
-        "    40 Character Levels\n"
-        "    20 Points Spent in Endurance Skill\n"
         "    Strength of Arm\n";
 
     return str;
@@ -95,7 +93,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 
 int prerequisites(object player)
 {
-    mapping skills;
     object race_ob;
     string race, base;
     int adj;
@@ -106,14 +103,11 @@ int prerequisites(object player)
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
     adj = race_ob->level_adjustment(race);
-    skills = player->query_skills();
-    if(skills["endurance"] < 20) { return 0; }
     base = player->query("warmaster_base_class");
     if(!base) { return 0; }
     if(!player->is_class(base)) { return 0; }
     if((player->query_class_level(base) + adj) < 20) { return 0; }
     if(!FEATS_D->usable_feat(player,"strength of arm")) { return 0; }
-    if(player->query_level() < 40) { return 0; }
     return 1;
 }
 

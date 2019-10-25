@@ -5,9 +5,9 @@ inherit DAEMON;
 
 #define BASE_CLASS find_object_or_load(DIR_CLASSES+"/sorcerer.c")
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 string *query_base_classes() { return ({ "sorcerer" }); }
@@ -30,12 +30,10 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Ranks in the Spellcraft Skill\n"
         "    20 Sorcerer levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
         "    20 Charisma stat, before equipment modifiers\n";
-        
-    return str;    
+
+    return str;
 }
 
 
@@ -46,19 +44,17 @@ int prerequisites(object player)
     string race;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
+    adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
-    
-    if(!skills["spellcraft"] || skills["spellcraft"] < 20) { return 0; }
-    if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }    
-    if(player->query_level() < 40) { return 0; }
+
+    if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
     if(player->query_base_stats("charisma") < 20) { return 0; }
-    return 1;    
+    return 1;
 }
 
 mapping stat_requirements() { return ([ "charisma" : 20 ]); }
@@ -78,21 +74,21 @@ int caster_level_calcs(object player, string the_class)
         case "versatile_arcanist":
         case "sorcerer":
             level = player->query_class_level("sorcerer");
-            level += player->query_class_level("versatile_arcanist");            
+            level += player->query_class_level("versatile_arcanist");
             return level;
-        
+
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "greater spell knowledge" }), 4 : ({ "master of elements" }), 7 : ({ "master of versatility" }), ]);
 }
 
 string *class_skills()
-{  
+{
     return BASE_CLASS->class_skills();
 }
 
@@ -140,11 +136,11 @@ mapping reorder_memorized(object ob, int lvl)
 {
     mapping memorized = ([]);
     int i, j, total, num, needed, *levels = allocate(10);
-    
+
     if(!objectp(ob)) { return ([]); }
-    
+
     memorized = ob->query_all_memorized("sorcerer");
-    
+
     for(i=1;i<10;i++)
     {
         num = memorized[i]["generic"];
@@ -154,7 +150,7 @@ mapping reorder_memorized(object ob, int lvl)
 
     // if we don't have enough total spell levels then there's nothing to do, return original memorized mapping
     if(total < lvl) { return memorized; }
-    
+
     needed = lvl;
 
     while(needed && (j < 100) )
@@ -163,10 +159,10 @@ mapping reorder_memorized(object ob, int lvl)
         if(lvl > 1)
         {
             for( i = (lvl - 1); i > 0; i--) // first run in descending order
-            {    
+            {
                 if(!levels[i]) { continue; }
                 if( (needed - i) < 0) { continue; }
-                needed = needed - i;            
+                needed = needed - i;
                 levels[i] = levels[i] - 1;
             }
         }
@@ -176,7 +172,7 @@ mapping reorder_memorized(object ob, int lvl)
             for(i = 1; i < 10; i++)
             {
                 if(!levels[i]) { continue; }
-                if( (needed - i) < 0) { continue; }                
+                if( (needed - i) < 0) { continue; }
                 needed = needed - i;
                 levels[i] = levels[i] - 1;
             }
@@ -188,15 +184,15 @@ mapping reorder_memorized(object ob, int lvl)
             for(i=2;i<10;i++)
             {
                 if(!levels[i]) { continue; }
-                
+
                 levels[1] = i;
                 levels[i] = levels[i] - 1;
             }
         }
     }
-    
+
     if(!needed) { levels[lvl] = 1; }
-    
+
     for(i=1;i<sizeof(levels);i++)
     {
         if(!levels[i]) { levels[i] = 0; }
@@ -205,12 +201,3 @@ mapping reorder_memorized(object ob, int lvl)
 
     return memorized;
 }
-
-
-
-
-
-
-
-
-

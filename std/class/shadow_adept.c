@@ -53,7 +53,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 
 int prerequisites(object player)
 {
-    mapping skills;
     object race_ob;
     string race;
     int adj;
@@ -64,9 +63,7 @@ int prerequisites(object player)
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
     adj = race_ob->level_adjustment(race);
-    //skills = player->query_skills();
 
-    //if(!skills["spellcraft"] || skills["spellcraft"] < 20) { return 0; }
     if(player->is_class("mage"))
     {
         if( (player->query_class_level("mage") + adj) < 20) { return 0; }

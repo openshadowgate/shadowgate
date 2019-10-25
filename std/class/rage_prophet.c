@@ -6,9 +6,9 @@ inherit DAEMON;
 
 #define BASE_CLASS find_object_or_load(DIR_CLASSES+"/barbarian.c")
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 object base_class_ob(object ob)
@@ -41,10 +41,9 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Barbarian Levels\n"
-        "    40 Character Levels\n"
         "    Spell focus\n";
-        
-    return str;    
+
+    return str;
 }
 
 int prerequisites(object player)
@@ -54,18 +53,17 @@ int prerequisites(object player)
     string race, base;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
-    skills = player->query_skills();    
+    adj = race_ob->level_adjustment(race);
+    skills = player->query_skills();
 
-    if((player->query_class_level("barbarian") + adj) < 20) { return 0; }    
+    if((player->query_class_level("barbarian") + adj) < 20) { return 0; }
     if(!FEATS_D->usable_feat(player,"spell focus")) { return 0; }
-    if(player->query_level() < 40) { return 0; }
-    return 1;    
+    return 1;
 }
 
 mapping stat_requirements(object ob) { return BASE_CLASS->stat_requirements(); }
@@ -86,7 +84,7 @@ int caster_level_calcs(object player, string the_class)
         case "barbarian":
         case "rage_prophet":
             level = player->query_class_level("barbarian");
-            level += player->query_class_level("rage_prophet");            
+            level += player->query_class_level("rage_prophet");
             return level;
         default:
             return player->query_class_level(the_class);
@@ -95,12 +93,12 @@ int caster_level_calcs(object player, string the_class)
     return level;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "raging healer" }), 4 : ({ "ragecaster" }), 7 : ({ "spirit warrior" }), ]);
 }
 
 string *class_skills()
-{  
+{
     return BASE_CLASS->class_skills();
 }
 
@@ -138,4 +136,3 @@ void process_newbie_choice(object who, string str) { return BASE_CLASS->process_
 string query_casting_stat() { return BASE_CLASS->query_casting_stat(); }
 
 mapping query_class_spells() { return BASE_CLASS->query_class_spells(); }
-

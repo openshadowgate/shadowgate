@@ -6,9 +6,9 @@ inherit DAEMON;
 
 #define BASE_CLASS find_object_or_load(DIR_CLASSES+"/monk.c")
 
-void create() 
-{ 
-    ::create(); 
+void create()
+{
+    ::create();
 }
 
 string *query_base_classes() { return ({ "monk" }); }
@@ -31,35 +31,29 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Ranks in the Athletics Skill\n"
         "    20 Monk Levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
         "    20 Wisdom stat, before equipment modifiers\n";
-        
-    return str;    
+
+    return str;
 }
 
 
 int prerequisites(object player)
 {
-    mapping skills;
     object race_ob;
     string race;
     int adj;
     if(!objectp(player)) { return 0; }
-    
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);    
-    skills = player->query_skills();
-    
-    if(!skills["athletics"] || skills["athletics"] < 20) { return 0; }
-    if( (player->query_class_level("monk") + adj) < 20) { return 0; }    
-    if(player->query_level() < 40) { return 0; }
+    adj = race_ob->level_adjustment(race);
+
+    if( (player->query_class_level("monk") + adj) < 20) { return 0; }
     if(player->query_base_stats("wisdom") < 20) { return 0; }
-    return 1;    
+    return 1;
 }
 
 mapping stat_requirements() { return ([ "wisdom" : 20 ]); }
@@ -79,32 +73,32 @@ int caster_level_calcs(object player, string the_class)
         case "grandmaster_of_the_way":
         case "monk":
             level = player->query_class_level("monk");
-            level += player->query_class_level("grandmaster_of_the_way");            
+            level += player->query_class_level("grandmaster_of_the_way");
             return level;
-        
+
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "way of the learned pupil" }), 4 : ({ "way of the merciful soul" }), 7 : ({ "grandmaster of the way" }), ]);
 }
 
 string *class_skills()
-{  
+{
     return BASE_CLASS->class_skills();
 }
 
-string *way_skills(string way) 
+string *way_skills(string way)
 {
     string *mySkills;
     mySkills = ({ "endurance", "athletics" });
 
-    switch(way) 
+    switch(way)
     {
-        case "way of the elements": 
+        case "way of the elements":
             mySkills += ({"spellcraft", "academics"});
             break;
         case "way of the shadow":
@@ -164,7 +158,7 @@ int effective_enchantment(object player)
     amt = ((int)player->query_guild_level("monk") / 6);
     if(FEATS_D->usable_feat(player, "enchanted fists")) amt += 1;
     return amt;
-}    
+}
 
 int critical_multiplier(object player)
 {

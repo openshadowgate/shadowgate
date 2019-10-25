@@ -34,7 +34,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
         "    Mastery of Fang and Claw\n"
         "    Savage Instincts II\n"
         "    20 Druid levels (level adjustments considered part of required levels)\n"
-        "    40 Character levels\n"
         "    20 Strength or Dexterity stat, before equipment modifiers\n";
 
     return str;
@@ -58,7 +57,6 @@ int prerequisites(object player)
     if(!FEATS_D->usable_feat(player,"savage instincts ii")) { return 0; }
     if(!FEATS_D->usable_feat(player,"mastery of fang and claw")) { return 0; }
     if( (player->query_class_level("druid") + adj) < 20) { return 0; }
-    if(player->query_level() < 40) { return 0; }
     if(player->query_base_stats("strength") < 20 && player->query_base_stats("dexterity") < 20) { return 0; }
     return 1;
 }
