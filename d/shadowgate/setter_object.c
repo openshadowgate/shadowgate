@@ -1763,11 +1763,15 @@ void build_restrictions(string type)
                 temp_data = MyFile->restricted_classes("");
                 if(MyFile->is_restricted() && rflag)
                 {
-                    if(OB_ACCOUNT->is_experienced(ETO->query_true_name()) || OB_ACCOUNT->is_high_mortal(ETO->query_true_name())) rflag = 0;
+                    if(OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
+                       OB_ACCOUNT->is_high_mortal(ETO->query_true_name()))
+                        rflag = 0;
                     if(avatarp(ETO)) rflag = 0;
                     if(ETO->query("is_valid_npc")) rflag = 0;
                     if(rflag) continue;
                 }
+                if(MyFile->is_gender_locked(MyCharacterInfo["race"]["gender"]))
+                    continue;
                 if(member_array(MyClass, temp_data) == -1) available_races += ({possible_races[i]});
                 //tell_object(ETO, "RACE OB existed!");
                 possible_subraces = MyFile->query_subraces(ETO);
