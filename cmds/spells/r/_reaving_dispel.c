@@ -1,4 +1,5 @@
 // Psywarrior dispel - tries to dispel 1 effect per round
+//updated by ~Circe~ 10/26/19 to fix bugs and use current code
 #include <std.h>
 #include <magic.h>
 #include <daemons.h>
@@ -14,10 +15,7 @@ void create(){
     set_spell_name("reaving dispel");
     set_spell_level(([ "psywarrior" : 6, "psion" : 8 ]));
     set_syntax("cast CLASS reaving dispel on TARGET");
-    set_description("This power will create a mark on the target that "
-       "will attempt to dispel one magical effect per round for the duration, "
-       "causing damage with each succcessful dispel. "
-       "The duration and power are both based on the psionic character's level.");
+    set_description("This power will create a mark on the target that will attempt to dispel one magical effect per round for the duration, causing damage with each succcessful dispel. The duration and power are both based on the psionic character's level.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -52,18 +50,9 @@ void spell_effect(int prof){
       mylevel = caster->query_guild_level("psywarrior");
    }
 
-   tell_object(caster,"%^BOLD%^%^BLUE%^You focus your %^CYAN%^gaze %^BLUE%^on "
-      ""+target->QCN+" and seek to unravel the m%^CYAN%^a%^BLUE%^gi%^RESET%^c"
-      "%^BOLD%^%^BLUE%^al pr%^RESET%^o%^BOLD%^%^BLUE%^te%^CYAN%^c%^BLUE%^ti"
-      "%^RESET%^%^CYAN%^o%^BOLD%^%^BLUE%^ns surrounding "+target->QO+".%^RESET%^");
-   tell_object(target,"%^BOLD%^%^BLUE%^"+caster->QCN+"'s eyes flash %^RESET%^s%^BOLD%^i"
-      "%^RESET%^%^CYAN%^lv%^BOLD%^e%^RESET%^%^CYAN%^r%^RESET%^y %^CYAN%^bl%^BOLD%^u"
-      "%^RESET%^%^CYAN%^e %^BOLD%^%^BLUE%^as "+caster->QS+" focuses "+caster->QP+" "
-      "%^CYAN%^gaze %^BLUE%^on you.%^RESET%^");
-   tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+"'s eyes flash %^RESET%^s%^BOLD%^i"
-      "%^RESET%^%^CYAN%^lv%^BOLD%^e%^RESET%^%^CYAN%^r%^RESET%^y %^CYAN%^bl%^BOLD%^u"
-      "%^RESET%^%^CYAN%^e %^BOLD%^%^BLUE%^as "+caster->QS+" focuses "+caster->QP+" "
-      "%^CYAN%^gaze %^BLUE%^on "+target->QCN+".%^RESET%^",({caster,target}));
+   tell_object(caster,"%^BOLD%^%^BLUE%^You focus your %^CYAN%^gaze %^BLUE%^on "+target->QCN+" and seek to unravel the m%^CYAN%^a%^BLUE%^gi%^RESET%^c%^BOLD%^%^BLUE%^al pr%^RESET%^o%^BOLD%^%^BLUE%^te%^CYAN%^c%^BLUE%^ti%^RESET%^%^CYAN%^o%^BOLD%^%^BLUE%^ns surrounding "+target->QO+".%^RESET%^");
+   tell_object(target,"%^BOLD%^%^BLUE%^"+caster->QCN+"'s eyes flash %^RESET%^s%^BOLD%^i%^RESET%^%^CYAN%^lv%^BOLD%^e%^RESET%^%^CYAN%^r%^RESET%^y %^CYAN%^bl%^BOLD%^u%^RESET%^%^CYAN%^e %^BOLD%^%^BLUE%^as "+caster->QS+" focuses "+caster->QP+" %^CYAN%^gaze %^BLUE%^on you.%^RESET%^");
+   tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+"'s eyes flash %^RESET%^s%^BOLD%^i%^RESET%^%^CYAN%^lv%^BOLD%^e%^RESET%^%^CYAN%^r%^RESET%^y %^CYAN%^bl%^BOLD%^u%^RESET%^%^CYAN%^e %^BOLD%^%^BLUE%^as "+caster->QS+" focuses "+caster->QP+" %^CYAN%^gaze %^BLUE%^on "+target->QCN+".%^RESET%^",({caster,target}));
    rune = new("/d/magic/obj/reaving_dispeller.c");
    rune->move(target);
    rune->set_caster(caster);

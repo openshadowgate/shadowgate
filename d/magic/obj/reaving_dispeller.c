@@ -156,14 +156,14 @@ void checkDispel(object ob){
 //    tell_object(mycast,"Roll: "+roll+" vs. DC: "+DC+"");
 
    roll = roll + clevel;
-   dam = roll_dice(1,clevel);
+   dam = roll_dice(clevel,2);
    dam += clevel;
    if(roll >= DC){ 
       tell_object(caster,"%^BOLD%^You dispel "+target->QCN+"'s "+ob->query_spell_name()+"!%^RESET%^");
       target->remove_property_value("spelled", ({ob}));
       tell_object(target,"%^BOLD%^You feel a searing pain as your "+ob->query_spell_name()+" "
          "is ripped away from you!%^RESET%^");
-      caster->cause_damage_to(target,target->return_target_limb(),dam);
+      target->do_damage(target->return_target_limb(),dam);
       ob->dest_effect();
       return; 
    }else{
