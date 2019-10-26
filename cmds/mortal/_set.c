@@ -200,9 +200,9 @@ int set_persist(string val)
         write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
         return 0;
     }
-    if(this_player()->query("persist_login")&&val=="off")
+    if(val=="on")
         this_player()->set("persist_login",1);
-    if(!this_player()->query("persist_login")&&val=="off")
+    if(val=="off")
         this_player()->delete("persist_login");
     return 1;
 }
