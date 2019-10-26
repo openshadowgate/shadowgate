@@ -2476,13 +2476,17 @@ int light_armor_filter(object ob) {
 
 int evade_splash(object splashtarg) {
    object *worn;
+   int evbonus = 0;
 
    if(!FEATS_D->usable_feat(splashtarg,"evasion")) return 0; // can't evade without the feat active!
    worn = splashtarg->all_armour();
    worn = distinct_array(worn);
    worn = filter_array(worn,"light_armor_filter",TO);
-   if(sizeof(worn)) return 0; // wearing something too heavy!
-   if(!do_save(splashtarg)) { return 0; }
+//allowing users of Evade Burst to avoid damage per spell and class abilities ~Circe~ 10/26/19
+   if(sizeof(worn) && !splashtarg->query_property("evadeburst")) return 0; //wearing something too heavy!
+   if(splashtarg->query_property("evadeburst")) evbonus += splashtarg->query_property("evadeburst");
+       
+   if(!do_save(splashtarg,evbonus)) return 0;
 
    tell_object(splashtarg,"%^BOLD%^%^WHITE%^You scramble out of the spell's path!%^RESET%^");
    tell_room(place,"%^BOLD%^%^WHITE%^"+splashtarg->QCN+" scrambles out of spell's path!%^RESET%^",splashtarg);
