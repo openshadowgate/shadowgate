@@ -1,4 +1,4 @@
-#define pwLEVEL_1 ({"vigor", "inertial armor", "mylight", "biofeedback", "weapon of energy", "call armor", "chameleon skin", "skate", "water breathing", "primal fear", "stomp", "prevenom", "detect aura"})
+#define pwLEVEL_1 ({"vigor", "inertial armor", "mylight", "resistance", "weapon of energy", "call armor", "chameleon skin", "skate", "water breathing", "primal fear", "stomp", "prevenom", "detect aura"})
 
 #define pwLEVEL_2 ({"thicken skin", "sustenance", "body adjustment", "animal affinity", "lions charge", "concealing amorpha", "energy emanation", "psionic identify", "incite bravery", "alter self"})
 
@@ -12,7 +12,7 @@
 
 #define psLEVEL_1 ({"detect aura","inertial armor","matter agitation","mind thrust","minor prescience","mylight","skate","sleep","vigor","water breathing","weapon of energy"})
 
-#define psLEVEL_2 ({"alter self","biofeedback","cloud mind","concealing amorpha","genesis","id insinuation","psionic identify","sustenance","swarm of crystals","tongues"})
+#define psLEVEL_2 ({"alter self","resistance","cloud mind","concealing amorpha","genesis","id insinuation","psionic identify","sustenance","swarm of crystals","tongues"})
 
 #define psLEVEL_3 ({"aura alteration","body adjustment","dispel psionics","energy bolt","energy retort","eradicate invisibility","time hop","touchsight"})
 
