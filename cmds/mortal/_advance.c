@@ -188,6 +188,21 @@ int can_multiclass(object ob,string myclass) {
             return 0;
         }
 
+        {
+            string clss;
+            string tmp;
+
+            foreach(clss in ob->query_classes())
+            {
+                tmp = DIR_CLASSES+"/"+clss+".c";
+                if(tmp->is_prestige_class())
+                {
+                    tell_object(ob,"You can't take two prestige classes at the same time.");
+                    return 0;
+                }
+            }
+        }
+
         if(file->requires_base_class_set() && !file->has_base_class_set(ob))
         {
             tell_object(ob,"The class "+myclass+" requires that you choose a base class in order to "
