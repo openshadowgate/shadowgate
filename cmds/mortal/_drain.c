@@ -88,8 +88,8 @@ int cmd_drain(string args)
     // 10 minutes?
 
     tell_object(TP,"%^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
-    add_action("stop_drain","");
-    input_to("stop_drain",0);
+    add_action("cancel_drain","");
+    input_to("cancel_drain",0);
     draining = 1;
     drain_process(targobj);
     TP->add_bloodlust(20000);
@@ -103,6 +103,12 @@ int verify_conditions(object target)
             target->query_unconscious() ||
             target->query_paralyzed() ||
             target->query_bound());
+}
+
+void cancel_drain()
+{
+    if(draining)
+        stop_drain();
 }
 
 void stop_drain()

@@ -30,7 +30,9 @@ void init(){
             tell_object(TP,"\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you struggle the stream of souls, and turn to elsewhere...\n");
             call_out("end_death0_undead", 5, TP);
         }
-        else if(TP->query("subrace")=="feytouched")
+        else if(TP->query("subrace")=="feytouched" ||
+                TP->query("race") == "satyr" ||
+                TP->query("race") == "dryad")
         {
             tell_object(TP,"%^BOLD%^%^BLACK%^Your final breath is ripped from your lungs, and you feel yourself falling, falling, falling into the earth. The %^RESET%^%^ORANGE%^hard ground %^BOLD%^%^BLACK%^embraces you like an old lover, warm, familiar. %^RESET%^Home%^BOLD%^%^BLACK%^. %^RESET%^\n");
             call_out("end_death0_feytouched", 5, TP);
