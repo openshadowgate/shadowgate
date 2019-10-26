@@ -41,7 +41,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BLUE%^You complete your chant and are surrounded by restless shadows!");
     caster->set_property("vampiric shadow shield",1);
     caster->set_property("spelled", ({TO}) );
-    caster->set_property("added short",({"%^BLUE%^ (%^BOLD^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
+    caster->set_property("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
     environment(caster)->addObjectToCombatCycle(TO,1);
@@ -92,7 +92,7 @@ void dest_effect(){
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^The shadows retreat, leaving "+caster->QCN+" vulnerable once again.");
         caster->remove_property("vampiric shadow shield");
         caster->add_ac_bonus(-2);
-        caster->remove_property("added short",({"%^BLUE%^ (%^BOLD^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
+        caster->remove_property_value("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

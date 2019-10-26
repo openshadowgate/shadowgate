@@ -103,7 +103,7 @@ void dest_effect(){
             "fades away, leaving "+caster->QCN+" vulnerable once again.",caster);
         caster->remove_property("fire shield");
         caster->add_ac_bonus(-2);
-	  caster->remove_property("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
+	  caster->remove_property_value("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
