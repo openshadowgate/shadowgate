@@ -358,41 +358,19 @@ static void ansi_test(string str) {
         __Player->setenv("TERM","default");
         __Player->reset_terminal();
     }
-    message("logon", "\nChoose character gender"+
-            " (male, female, neuter) : ", this_player());
-    input_to("choose_gender");
-    return;
-
-}
-
-static void choose_gender(string str) {
-    if (str != "male" &&
-        str != "female" &&
-        str != "neuter") {
-        message("logon", "\nOnly female, male or neuter are available at this time.\n",
-                this_object());
-        message("logon", "Gender: ", this_object());
-        input_to("choose_gender");
-        return;
-    }
-    __Player->set_gender(str);
+    __Player->set_gender("neuter");
     message("logon", sprintf("
-If you wish to be able to restore your password, enter your email in the
-form of user@host. You can later change this setting with <chfn> command.
+If you wish to be able to restore your password, enter your email. You
+can later change this setting with <chfn> command.
 Your email address:", mud_name()), this_object());
     input_to("enter_email");
+    return;
+
 }
 
 static void enter_email(string str) {
     string a, b;
 
-    if (!str || str == "" || sscanf(str, "%s@%s", a, b) != 2) {
-        message("logon", "\nEmail must be in the "+
-                "user@host form.\nEmail: ",
-                this_object());
-        input_to("enter_email");
-        return;
-    }
     __Player->set_email(str);
     __Player->set_rname("Unknown");
     seteuid(UID_LOG);

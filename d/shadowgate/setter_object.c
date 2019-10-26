@@ -187,7 +187,7 @@ void confirm_reset(string str, string what)
 varargs void full_reset()
 {
         MyCharacterInfo = (["stats" : ([ "charisma" : 6, "intelligence" : 6, "dexterity" : 6, "constitution" : 6, "wisdom" : 6, "strength" : 6]) ]);
-        MyCharacterInfo += (["race" : (["race name" : "NIL", "hair color" : "NIL", "eye color" : "NIL", "height" : 0, "weight" : 0, "age" : 0, "restricted alignments" : ({}), "subrace" : "NIL", "bonus language": "NIL", "template" : "NIL" ]) ]);
+        MyCharacterInfo += (["race" : (["gender": "neuter", "race name" : "NIL", "hair color" : "NIL", "eye color" : "NIL", "height" : 0, "weight" : 0, "age" : 0, "restricted alignments" : ({}), "subrace" : "NIL", "bonus language": "NIL", "template" : "none" ]) ]);
         MyCharacterInfo += (["myclass" : (["minimum stats" : ([]), "myclass name" : "NIL", "available races" : ({}), "restricted alignments" : ({}), "available subraces" : ({}) ]) ]);
         MyCharacterInfo["myclass"] += (["alignment" : 0, "align title" : "NIL", "deity" : "NIL", "unique choice" : "NIL", "unique type" : "NIL" ]);
         MyCharacterInfo["race"] += (["psuedo race" : "NIL", "weight choice" : "NIL", "height choice" : "NIL", "age choice" : "NIL", "body type" : "NIL"]);
@@ -213,6 +213,11 @@ void clear_stats()
 void clear_race()
 {
     MyCharacterInfo["race"]["race name"] = "NIL";
+}
+
+void clear_gender()
+{
+    MyCharacterInfo["race"]["gender"] = "neuter";
 }
 
 void clear_special()
@@ -250,7 +255,7 @@ void clear_template()
 {
     string template = MyCharacterInfo["race"]["template"];
     string tpfn;
-    MyCharacterInfo["race"]["template"] = "NIL";
+    MyCharacterInfo["race"]["template"] = "none";
 
     if(!objectp(TO)) return;
     if(!objectp(ETO)) return;
@@ -356,6 +361,26 @@ varargs void reset_character_info(string what, int flag)
                     clear_unique();
                     if(FirstBuild) { BuildArray = ({"unique"}); EndAt = "finalize"; }
                 }
+                break;
+            case "gender":
+                clear_gender();
+                clear_race();
+                clear_subrace();
+                clear_stats();
+                clear_hair();
+                clear_eyes();
+                clear_height();
+                clear_weight();
+                clear_body_type();
+                clear_age();
+                clear_alignment();
+                clear_bonus_language();
+                clear_template();
+                clear_deity();
+                build_restrictions("myclass");
+                FirstBuild = 0;
+                ETO->remove_XP_tax("all");
+                EndAt = "";
                 break;
             case "race":
                 clear_race();
@@ -756,7 +781,7 @@ mixed display_my_character()
     tell_object(ETO, "\n%^BOLD%^%^WHITE%^Your current choices are as follows, please note that character name "+
     "and sex CANNOT be reset.\n");
     tell_object(ETO, "  "+arrange_string(r+"Character Name "+b+"--------", len) +g+" : "+re+c+capitalize(ETO->query_name()));
-    tell_object(ETO, "  "+arrange_string(r+"Sex "+b+"-------------------", len) +g+" : "+re+c+capitalize(ETO->query_gender()));
+    tell_object(ETO, "  "+arrange_string(r+"Gender "+b+"----------------", len) +g+" : "+re+c+MyCharacterInfo["race"]["gender"]);
     tell_object(ETO, "  "+arrange_string(r+"Class "+b+"-----------------", len) +g+" : "+arrange_string(re+c+capitalize(MyCharacterInfo["myclass"]["myclass name"]), (len-4)));
     tmp = MyCharacterInfo["myclass"]["unique type"];
     if(tmp != "NIL")
@@ -921,6 +946,7 @@ void finalize_character()
     }
     build_stats();
     build_myclasses();
+    build_gender();
     build_race();
     build_subrace();
     build_hair();
@@ -1116,6 +1142,13 @@ void build_stats()
     ETO->delete("stat_points_gained");
 }
 
+void build_gender()
+{
+    if(!objectp(TO)) return;
+    if(!objectp(ETO)) return;
+    ETO->set_gender(MyCharacterInfo["race"]["gender"]);
+}
+
 void build_race()
 {
     if(!objectp(TO)) return;
@@ -1201,6 +1234,9 @@ void ShowStep()
     {
         case "myclass": case "class":
             do_character_class();
+            break;
+        case "gender":
+            pick_gender();
             break;
         case "race":
             pick_race();
@@ -1384,6 +1420,14 @@ void pick_race()
     tell_object(ETO, "%^YELLOW%^Syntax example: %^WHITE%^pick "+my_choices[0]+" %^YELLOW%^will make you a "+my_choices[0]+".");
 }
 //END
+
+void pick_gender()
+{
+    if(!objectp(ETO)) return;
+    if(!objectp(TO)) return;
+    my_choices = ({"neuter","female","male"});
+    display_my_choices();
+}
 
 //Function for half-elf/half-orcs, or others that need to be able
 //to pick a lineage
@@ -1929,8 +1973,14 @@ varargs int choose(string str, int flag)
             }
             extra_display(str);
             MyCharacterInfo["myclass"]["myclass name"] = str;
-            MyPlace = "race";
+            MyPlace = "gender";
             build_restrictions("myclass");
+            ProcessStep();
+            break;
+        case "gender":
+            if(check_my_choice(str)) { pick_gender(); return 1; }
+            MyCharacterInfo["race"]["gender"] = str;
+            MyPlace = "race";
             ProcessStep();
             break;
         case "race":
