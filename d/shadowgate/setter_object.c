@@ -1425,7 +1425,7 @@ void pick_gender()
 {
     if(!objectp(ETO)) return;
     if(!objectp(TO)) return;
-    my_choices = ({"neuter","female","male"});
+    my_choices = ({"female","male","neuter"});
     display_my_choices();
 
     tell_object(ETO, "%^BOLD%^%^WHITE%^Gender defines adjectives the game will use for you.\n");
