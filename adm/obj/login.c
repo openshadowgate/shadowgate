@@ -362,7 +362,7 @@ static void ansi_test(string str) {
     message("logon", sprintf("
 If you wish to be able to restore your password, enter your email. You
 can later change this setting with <chfn> command.
-Your email address:", mud_name()), this_object());
+Your email address: ", mud_name()), this_object());
     input_to("enter_email");
     return;
 

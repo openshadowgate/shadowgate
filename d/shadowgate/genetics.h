@@ -1,11 +1,9 @@
-#define AGES ({"normal", "middle aged", "old", "venerable"})
+#define AGES ({"child", "normal", "middle aged", "old", "venerable"})
 
 #define AGE_CATS  (["child" : -10 - random(8), "normal" : random(30), "middle aged" : 60 + random(60), "old" : 100 + random(140),\
                     "venerable" : 250 + random(250)])
 
 #define HEIGHTS ({"short", "average", "tall"})
-
-#define TEMPLATES ({"none","undead", "vampire"})
 
 #define HEIGHT_CATS (["short" : 1 + random(30), "average" : 31 + random(40), "tall" : 71 + random(30) ])
 
@@ -34,7 +32,7 @@
 
 #define DONTSORT ({"age", "height", "body type"})
 
-#define RESETTYPES ([ "age" : "age", "height" : "height", "body type" : "body type", "weight" : "weight", "lineage" : "special", "parent lineage" : "special",\
+#define RESETTYPES ([ "age" : "age", "gender" : "gender", "height" : "height", "body type" : "body type", "weight" : "weight", "lineage" : "special", "parent lineage" : "special", \
                       "school name" : "unique", "fighting style" : "unique", "school" : "unique", "mage school" : "unique", "discipline" : "unique",\
                       "psion discipline" : "unique", "class" : "class", "discipline name" : "unique",\
                       "Character Class" : "class", "character class" : "class", "race" : "race", "Race" : "race", "Subrace" : "subrace", "subrace" : "subrace",\

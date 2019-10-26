@@ -1427,6 +1427,13 @@ void pick_gender()
     if(!objectp(TO)) return;
     my_choices = ({"neuter","female","male"});
     display_my_choices();
+
+    tell_object(ETO, "%^BOLD%^%^WHITE%^Gender defines adjectives the game will use for you.\n");
+    tell_object(ETO, "%^BOLD%^%^WHITE%^Adventurers are exceptional individuals whose roles always exceed those of the common folk and as such all professions are available to all genders no matter the culture they come from.\n");
+    tell_object(ETO, "%^BOLD%^%^WHITE%^Note: %^RESET%^some races are locked to a specific gender.\n");
+
+    tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick gendername%^BLACK%^> %^WHITE%^to pick your gender.");
+    tell_object(ETO, "%^YELLOW%^Syntax example: %^WHITE%^pick male %^YELLOW%^will make you a male.");
 }
 
 //Function for half-elf/half-orcs, or others that need to be able
@@ -1978,13 +1985,13 @@ varargs int choose(string str, int flag)
             extra_display(str);
             MyCharacterInfo["myclass"]["myclass name"] = str;
             MyPlace = "gender";
-            build_restrictions("myclass");
             ProcessStep();
             break;
         case "gender":
             if(check_my_choice(str)) { pick_gender(); return 1; }
             MyCharacterInfo["race"]["gender"] = str;
             MyPlace = "race";
+            build_restrictions("myclass");
             ProcessStep();
             break;
         case "race":
