@@ -358,7 +358,7 @@ static void ansi_test(string str) {
         __Player->setenv("TERM","default");
         __Player->reset_terminal();
     }
-    __Player->set_gender("neuter");
+    __Player->set_gender("other");
     message("logon", sprintf("
 If you wish to be able to restore your password, enter your email. You
 can later change this setting with <chfn> command.

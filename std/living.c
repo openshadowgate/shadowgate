@@ -1233,7 +1233,7 @@ void adjust_biorhythms() {
 }
 
 void set_gender(string str) {
-   if(str != "male" && str != "female" && str != "neuter") return;
+   if(str != "male" && str != "female" && str != "neuter" && str != "other") return;
    gender = str;
 }
 

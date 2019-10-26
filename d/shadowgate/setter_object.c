@@ -1425,13 +1425,11 @@ void pick_gender()
 {
     if(!objectp(ETO)) return;
     if(!objectp(TO)) return;
-    my_choices = ({"female","male","neuter"});
+    my_choices = ({"female","male","other"});
     display_my_choices();
 
-    tell_object(ETO, "%^BOLD%^%^WHITE%^Gender defines adjectives the game will use for you.\n");
-    tell_object(ETO, "%^BOLD%^%^WHITE%^Adventurers are exceptional individuals whose roles always exceed those of the common folk and as such all professions are available to all genders no matter the culture they come from.\n");
+    tell_object(ETO, "\n%^BOLD%^%^WHITE%^Gender defines adjectives the game will use for you.\n");
     tell_object(ETO, "%^BOLD%^%^WHITE%^Note: %^RESET%^some races are locked to a specific gender.\n");
-
     tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick gendername%^BLACK%^> %^WHITE%^to pick your gender.");
     tell_object(ETO, "%^YELLOW%^Syntax example: %^WHITE%^pick male %^YELLOW%^will make you a male.");
 }
