@@ -119,7 +119,7 @@ int caster_level_calcs(object player, string the_class)
 }
 
 mapping class_featmap(string myspec) {
-//    return ([ 1 : ({ "gift of the shadows" }), 4 : ({ "elusive spellcraft" }), 7 : ({ "shadow apotheosis" }), ]);
+//    return ([ 1 : ({ "hemomancy" }), 4 : ({ "aramanth" }), 7 : ({ "blood cauldron" }), ]);
 }
 
 string *class_skills(object ob)
