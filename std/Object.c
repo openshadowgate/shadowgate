@@ -443,7 +443,7 @@ mixed query_property(string prop)
 
     if(prop == "fast healing")
         if(TO->is_vampire())
-            if(TO->is_in_sunlight())
+            if(!TO->is_in_sunlight())
             {
                 int blst = (20000-(int)TO->query_bloodlust())/4000-1;
                 num = props[prop]+5;

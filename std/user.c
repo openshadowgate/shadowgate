@@ -1695,10 +1695,10 @@ void heart_beat()
         if ((query_idle(TO) > 600) && (!avatarp(TO)) && (!TO->query("test_character")) && (!TO->query_property("inactive")))
         {
             if(TO && TO->query_forced()) return 1;
-            tell_object(TP, wrap("%^CYAN%^%^BOLD%^You have idled for too long, forcing inactive mode ON.\n Press RETURN to re-activate, otherwise you will be disconnected in 2 hours."));
+            tell_object(TP, wrap("%^WHITE%^%^BOLD%^You haven't been doing anything and fall into slumber.\n Press RETURN to wake up."));
             TO->set_property("inactive", 1);
             TO->force_me("save");
-            tell_room(environment(TO), TPQCN+" idled for too long and went into INACTIVE mode.\n",
+            tell_room(environment(TO), TPQCN+" falls into slumber.\n",
                       ({ TO }) );
             input_to("reactivate",1,time());
         }
@@ -1734,7 +1734,7 @@ void heart_beat()
         if(FEATS_D->usable_feat(TO,"regeneration") ||
            query_race() == "shade")
             if(query_hp() < query_max_hp())
-                add_hp(roll_dice(1,TO->query_level())/3);
+                add_hp(roll_dice(1,TO->query_level())/4);
         if(query_property("fast healing"))
             if(query_hp() < query_max_hp())
                 add_hp(roll_dice(query_property("fast healing"),TO->query_level()/3));
@@ -5072,25 +5072,25 @@ int is_neutral(object obj)
 
 int reactivate(string str,int when){
         TO->remove_property("inactive");
-        tell_object(TO, "Inactive mode is OFF.\n");
+        tell_object(TO, "You wake up from the slumber.\n");
         if((time()-when) <= 60)
-           tell_object(TO,"You have been inactive for "+(time()-when)+" seconds.");
+           tell_object(TO,"You have been napping for "+(time()-when)+" seconds.");
         else
-           tell_object(TO,"You have been inactive for "+((time()-when)/60)+" minutes.");
-        tell_room(environment(TO), TPQCN+" goes ACTIVE.\n", ({TO}) );
+           tell_object(TO,"You have been napping for "+((time()-when)/60)+" minutes.");
+        tell_room(environment(TO), TPQCN+" wakes up.\n", ({TO}) );
         return 1;
    return 1;
 }
 
 int is_in_sunlight()
 {
-    if(ETO->query_property("indoors"))
+    if(EVENTS_D->query_time_of_day()!="day")
         return 0;
-    if(ASTRONOMY_D->query_eclipse())
+    if(ETO->query_property("indoors"))
         return 0;
     if(WEATHER_D->query_clouds(TO)>3)
         return 0;
-    if(EVENTS_D->query_time_of_day()!="day")
+    if(ASTRONOMY_D->query_eclipse())
         return 0;
     return 1;
 }
