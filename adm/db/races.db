@@ -17,6 +17,8 @@ bugbear:-2:8000:5:right hand;left hand:1:0:-1:0:0:0:human:2:0
 centaur:2:10000:5:right hand;left hand:4:2:-2:0:2:0:centaur:3:2
 deva:3:9999:5:right hand;left hand:0:2:0:0:0:2:human:2:0
 drow:-2:8000:5:right hand;left hand:0:0:5:8:3:1:human:2:0
+dryad:2:10000:5:right hand;left hand:0:0:0:0:0:0:human:2:4
+dwarf:2:6000:4:right hand;left hand:2:4:-1:4:3:-4:human:2:0
 elf:3:8000:5:right hand;left hand:0:0:5:8:3:1:human:2:0
 firbolg:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:7
 gnoll:-2:8000:5:right hand;left hand:1:0:-1:0:0:0:human:3:0
@@ -31,18 +33,17 @@ hobgoblin:-2:8000:5:right hand;left hand:0:0:0:0:0:-1:human:2:0
 human:0:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:0
 kobold:-2:5000:5:right hand;left hand:-1:-1:0:0:0:0:human:1:0
 minotaur:-2:10000:5:right hand;left hand;right horn;left horn:0:0:0:0:0:0:minotaur:3:2
+nymph:3:8000:5:right hand;left hand:0:0:5:8:3:1:human:2:0
 ogre-mage:-2:13000:5:right hand;left hand:1:1:-1:0:0:-1:human:3:6
 ogre:-1:10000:5:right hand;left hand:2:2:-2:0:0:-2:human:3:5
 orc:-2:6000:5:right hand;left hand:1:0:0:0:0:-2:human:2:0
 satyr:2:10000:5:right hand;left hand:0:0:0:0:0:0:minotaur:2:4
-dryad:2:10000:5:right hand;left hand:0:0:0:0:0:0:human:2:4
 saurian:2:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:2
-squole:2:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:2
 shade:3:9999:5:right hand;left hand:0:2:0:0:0:2:human:2:0
-wemic:2:10000:5:right hand;left hand:2:2:0:0:2:-2:wemic:3:4
+squole:2:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:2
 voadkyn:2:10000:5:right hand;left hand:1:-1:0:0:2:-2:human:3:2
+wemic:2:10000:5:right hand;left hand:2:2:0:0:2:-2:wemic:3:4
 yuan-ti:2:10000:5:right hand;left hand:0:0:0:0:0:0:human:2:0
-dwarf:2:6000:4:right hand;left hand:2:4:-1:4:3:-4:human:2:0
 
 
 #Service races

@@ -32,6 +32,7 @@ void init(){
         }
         else if(TP->query("subrace")=="feytouched" ||
                 TP->query("race") == "satyr" ||
+                TP->query("race") == "nymph" ||
                 TP->query("race") == "dryad")
         {
             tell_object(TP,"%^BOLD%^%^BLACK%^Your final breath is ripped from your lungs, and you feel yourself falling, falling, falling into the earth. The %^RESET%^%^ORANGE%^hard ground %^BOLD%^%^BLACK%^embraces you like an old lover, warm, familiar. %^RESET%^Home%^BOLD%^%^BLACK%^. %^RESET%^\n");
