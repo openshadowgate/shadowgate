@@ -1744,20 +1744,18 @@ void heart_beat()
             TO->set_property("stab_resilience",TO->query_level()/10);
         }
         if(is_vampire())
-            if(!ETO->query_property("indoors"))
-                if(EVENTS_D->query_time_of_day()=="day" &&
-                   !ASTRONOMY_D->query_eclipse())
+            if(TO->is_in_sunlight())
+            {
+                if(TO->query_hp()<-(TO->query_max_hp()*4/5))
+                    TO->die();
+                else
                 {
-                    if(TO->query_hp()<-(TO->query_max_hp()*4/5))
-                        TO->die();
-                    if((int)TO->query_bloodlust()/200<91)
-                    {
-                        TO->do_damage("torso",((query_max_hp()*3/4)*(20000-TO->query_bloodlust()))/20000);
-                        tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
-                        if(!random(5))
-                            tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+"'s skin smokes flamelessly.%^RESET%^",TO);
-                    }
+                    TO->do_damage("torso",(query_max_hp()/8));
+                    tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
+                    if(!random(5))
+                        tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+"'s skin smokes flamelessly.%^RESET%^",TO);
                 }
+            }
     }
 
 }
@@ -5090,7 +5088,7 @@ int is_in_sunlight()
         return 0;
     if(ASTRONOMY_D->query_eclipse())
         return 0;
-    if(WEATHER_D->query_clouds()>3)
+    if(WEATHER_D->query_clouds(TO)>3)
         return 0;
     if(EVENTS_D->query_time_of_day()!="day")
         return 0;

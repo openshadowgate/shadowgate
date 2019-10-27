@@ -443,8 +443,7 @@ mixed query_property(string prop)
 
     if(prop == "fast healing")
         if(TO->is_vampire())
-            if( ETO->query_property("indoors") ||
-                EVENTS_D->query_time_of_day()!="day")
+            if(TO->is_in_sunlight())
             {
                 int blst = (20000-(int)TO->query_bloodlust())/4000-1;
                 num = props[prop]+5;
