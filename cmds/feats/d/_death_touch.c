@@ -7,13 +7,13 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("ArcaneArcher");
-    feat_name("death arrow");
-    feat_syntax("death_arrow TARGET");
-    feat_prereq("Arcane archer L7");
-    feat_desc("The archer imbues one missile with power of negative energy, and shoots it. Upon release, such projectile can kill the target instantly, or cause severe damage if the target is warded against death effects. Such missile will never miss its target.");
+    feat_category("PaleLord");
+    feat_name("death touch");
+    feat_syntax("death_touch TARGET");
+    feat_prereq("Pale Lord L7");
+    feat_desc("A final step for Pale Lord is to construct a conduit, a point he can release the power of the death itself. To do so he cuts off own hand, treats it with mummifying solutions, then lays a network of fell spells over it and attaches it back. Such hand can release negative energy on demand, ripping the souls of living and healing the undead.");
     set_target_required(1);
-    set_save("fort");
+    set_save("will");
 }
 
 int allow_shifted() { return 0; }
@@ -21,7 +21,7 @@ int allow_shifted() { return 0; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if((int)ob->query_class_level("arcane_archer") < 7)
+    if((int)ob->query_class_level("pale_lord") < 7)
     {
         dest_effect();
         return 0;
@@ -36,22 +36,6 @@ int cmd_death_arrow(string str)
     if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
-    return 1;
-}
-
-int check_can_use()
-{
-    object *weapons;
-    int x;
-    if(!objectp(caster)) return 0;
-    weapons = caster->query_wielded();
-    if(!sizeof(weapons))
-        return 0;
-    if(!weapons[0]->is_lrweapon()) {
-        tell_object(caster,"%^YELLOW%^You can't imbue projectile with death power without ranged weapon!%^RESET%^");
-        dest_effect();
-        return;
-    }
     return 1;
 }
 
@@ -90,19 +74,13 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if(target == caster)
-    {
-        tell_object(caster,"There are better ways to kill yourself!");
-        dest_effect();
-        return;
-    }
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
-    tempmap = caster->query_property("using death arrow");
+    tempmap = caster->query_property("using death touch");
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())
@@ -112,16 +90,10 @@ void execute_feat()
             return;
         }
     }
-    if(!check_can_use())
-    {
-        dest_effect();
-        return;
-    }
     caster->set_property("using instant feat",1);
-    spell_kill(target,caster);
 
-    tell_object(caster, "%^RESET%^%^BLUE%^You whisper few syllables in tongues of unlife and imbue arrow with fell power!%^RESET%^");
-    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" whispers a few fell syllables over "+caster->QP+"!%^RESET%^");
+    tell_object(caster, "%^RESET%^%^BLUE%^You point a finger at "+target->QCN+".%^RESET%^");
+    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" points a finger at "+target->QCN+".%^RESET%^");
     return;
 }
 
@@ -155,13 +127,15 @@ void execute_attack()
         dest_effect();
         return;
     }
-    if(!check_can_use())
+
+    if(target->is_undead())
     {
-        dest_effect();
+        tell_room(place,"%^BLUE%^"+target->QCN+" is healed completely!%^RESET%^",caster);
+        target->add_hp(target->query_max_hp());
         return;
     }
 
-    tempmap = caster->query_property("using death arrow");
+    tempmap = caster->query_property("using death touch");
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
     keyz = keys(tempmap);
@@ -170,30 +144,31 @@ void execute_attack()
         if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
         continue;
     }
-    timerz = time() + 120;
-    delay_subject_msg(target,120,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^death arrowed%^WHITE%^ again.%^RESET%^");
+    timerz = time() + 180;
+    delay_subject_msg(target,180,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^death touched%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
-    caster->remove_property("using death arrow");
-    caster->set_property("using death arrow",tempmap);
+    caster->remove_property("using death touch");
+    caster->set_property("using death touch",tempmap);
 
     weapons = caster->query_wielded();
     if(sizeof(weapons)) myweapon = weapons[0];
 
-    tell_object(caster, "%^BOLD%^%^BLUE%^Your deadly missile pierces into "+target->QCN+", releasing %^BOLD%^%^BLACK%^fell powers%^BLUE%^!%^RESET%^");
-    tell_room(place, "%^BOLD%^%^BLUE%^"+caster->QCN+"'s %^BLACK%^fell missile%^BLUE%^ pierces into "+target->QCN+"!%^RESET%^",caster);
+    tell_object(caster,"%^BLUE%^A ray of deadly negative energy releases of your finger and hits "+target->QCN+"!");
+    tell_room(place,"%^BLUE%^A ray of death releases of "+caster->QCN+"'s finger and hits "+target->QCN+"!",caster);
 
-    bonusdc = clevel+16;
+    bonusdc = clevel+22;
     if((string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
-        tell_object(target,"%^BOLD%^The struggle for your soul is won, yet at a %^BOLD%^%^BLUE%^price%^WHITE%^.");
-        tell_room(place,"%^BOLD%^The soul survives, yet the coil %^BLACK%^suffers%^WHITE%^!",target);
-        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,8),"negative energy");
+        tell_object(target,"%^BOLD%^Your soul struggles, but manages to survive.");
+        tell_room(place,"%^BOLD%^%^BLUE%^"+target->QCN+" is harmed but manages to survive the death!",target);
+        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,10),"negative energy");
     } else {
         tell_room(place,"%^BOLD%^%^WHITE%^The soul is pushed beyond %^MAGENTA%^the veil%^WHITE%^ from its coil!");
         tell_room(place,"%^BOLD%^%^WHITE%^The lifeless husk of "+target->QCN+" drops to the ground!",target);
         tell_object(target,"%^BOLD%^%^MAGENTA%^Your soul is ripped from you body!\n");
         target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"negative energy");
     }
+
     dest_effect();
     return;
 }

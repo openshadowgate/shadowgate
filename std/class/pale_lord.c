@@ -97,15 +97,14 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Base Class Levels\n"
-        "    Must not be undead\n"
-        "    Faith: Godless or Nilith";
+        "    Must not be undead\n";
     return str;
 }
 
 int prerequisites(object player)
 {
     object race_ob;
-    string race, base, deity;
+    string race, base;
     int adj;
     if(!objectp(player))
         return 0;
@@ -118,11 +117,7 @@ int prerequisites(object player)
         return 0;
     adj = race_ob->level_adjustment(race);
     base = player->query("pale_master_base_class");
-    deity = player->query_diety();
     if(player->is_undead())
-        return 0;
-    if(deity != "godless" ||
-       deity != "nilith")
         return 0;
     if(!base)
         return 0;
