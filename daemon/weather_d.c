@@ -180,6 +180,8 @@ mixed Check_Weather(object ob){
 int query_clouds(object ob)
 {
     string temp;
+    if(!objectp(ob))
+        return 0;
     temp = get_zone(ob);
     return __WEATHER[temp];
 }

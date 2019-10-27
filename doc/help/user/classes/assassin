@@ -3,15 +3,19 @@
 
 %^RESET%^%^CYAN%^Requirements:
 %^RESET%^ 16 Base Intelligence
+%^RESET%^ 10 Ranks in Stealth
 
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any Evil
+%^RESET%^%^CYAN%^Classes allowed:%^RESET%^ any but psionic
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: crit
  %^RESET%^L4: hide in plain sight
  %^RESET%^L7: void stalker
 
-Warning: This class is not yet implemented.
-
 Deadly professionals, assassins come from various backgrounds to serve one purpose of silent murder for boon. Assassins lean towards stealthy approach in their craft, stalking and studying their victim before executing a deadly attack. In combat, hover, an assassin should not be underestimated as they learn the main rule about preparation very soon in their training: always be. They gain knowledge in arcane and stealthy arts, learn spells and powers to aid in their missions. Assassins receive their own normal caster set of spells that functions like clerical casting. They learn death attack, and learn to use its variant in combat. They learn how to find their victim anywhere. Finally, they become part of... *Suddenly, the narrator drops dead*
+
+Assassins are arcane casters foremost and are granted a subset of arcane utility spells based on their intelligence score. You can see their spell list with %^ORANGE%^<spells assassin>%^RESET%^. Assassins %^ORANGE%^<prepare>%^RESET%^ spells from this list and commit it to memory, you can see list of spells in memory with %^ORANGE%^<recall assassin spells>%^RESET%^. When they %^ORANGE%^<cast>%^RESET%^ spell they expend spell from the memory.
+
+Assassins can cast their spells in any armor, but must not wield while doing so as they rely bot on spelling and gestures in casting.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, prepare, prestige classes

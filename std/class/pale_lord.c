@@ -88,7 +88,7 @@ string *restricted_races(object ob) { return base_class_ob(ob)->restricted_races
 
 string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes(); }
 
-int *restricted_alignments(object ob) { return ({1, 2, 4, 7, 8});}
+int *restricted_alignments(object ob) { return ({1,4,7});}
 
 string *restricted_gods(object ob) { return base_class_ob(ob)->restricted_gods(); }
 

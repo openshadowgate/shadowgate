@@ -71,7 +71,7 @@ int caster_class(object ob) { return 1; }
 
 string *restricted_races(object ob) { return base_class_ob(ob)->restricted_races(); }
 
-string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes(); }
+string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes() +({"psion","psywarrior"}); }
 
 int *restricted_alignments(object ob) {
     return ({ 1, 2, 4, 5, 7, 8 });

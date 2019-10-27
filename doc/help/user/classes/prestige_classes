@@ -3,27 +3,28 @@
 %^RESET%^%^MAGENTA%^Prestige Class         Base Class
 
 %^RESET%^%^CYAN%^Arcane Archer          %^RESET%^Any arcane caster
-%^RESET%^%^CYAN%^Bladeweaver            %^RESET%^Any
-%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any but psionic
-%^RESET%^%^CYAN%^Stonelord              %^RESET%^Any
-%^RESET%^%^CYAN%^Warmaster              %^RESET%^Any
-%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian
-%^RESET%^%^CYAN%^Chronicler             %^RESET%^Bard
 %^RESET%^%^CYAN%^Archdruid              %^RESET%^Druid
 %^RESET%^%^CYAN%^Archmage               %^RESET%^Mage
-%^RESET%^%^CYAN%^Grandmaster of the Way %^RESET%^Monk
 %^RESET%^%^CYAN%^Archpsion              %^RESET%^Psion
-%^RESET%^%^CYAN%^Mindblade              %^RESET%^Psion
-%^RESET%^%^CYAN%^Metamind               %^RESET%^Psywarrior
-%^RESET%^%^CYAN%^Warmind                %^RESET%^Psywarrior
-%^RESET%^%^CYAN%^Shadowdancer           %^RESET%^Thief or Ranger
-%^RESET%^%^CYAN%^Shadow Adept           %^RESET%^Mage or Sorcerer
-%^RESET%^%^CYAN%^Versatile Arcanist     %^RESET%^Sorcerer
-%^RESET%^%^CYAN%^Primeval Champion      %^RESET%^Druid
-%^RESET%^%^CYAN%^Immortal Defender      %^RESET%^Fighter or Paladin
-%^RESET%^%^CYAN%^Radiant Servant        %^RESET%^Cleric
-%^RESET%^%^CYAN%^Hierophant             %^RESET%^Cleric or Druid
+%^RESET%^%^CYAN%^Assassin               %^RESET%^Any but psionic
+%^RESET%^%^CYAN%^Bladeweaver            %^RESET%^Any
+%^RESET%^%^CYAN%^Chronicler             %^RESET%^Bard
+%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any but psionic
+%^RESET%^%^CYAN%^Grandmaster of the Way %^RESET%^Monk
 %^RESET%^%^CYAN%^Hellfire Warlock       %^RESET%^Warlock
+%^RESET%^%^CYAN%^Hierophant             %^RESET%^Cleric or Druid
+%^RESET%^%^CYAN%^Immortal Defender      %^RESET%^Fighter or Paladin
+%^RESET%^%^CYAN%^Metamind               %^RESET%^Psywarrior
+%^RESET%^%^CYAN%^Mindblade              %^RESET%^Psion
+%^RESET%^%^CYAN%^Primeval Champion      %^RESET%^Druid
+%^RESET%^%^CYAN%^Radiant Servant        %^RESET%^Cleric
+%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian
+%^RESET%^%^CYAN%^Shadow Adept           %^RESET%^Mage or Sorcerer
+%^RESET%^%^CYAN%^Shadowdancer           %^RESET%^Thief or Ranger
+%^RESET%^%^CYAN%^Stonelord              %^RESET%^Any
+%^RESET%^%^CYAN%^Versatile Arcanist     %^RESET%^Sorcerer
+%^RESET%^%^CYAN%^Warmaster              %^RESET%^Any
+%^RESET%^%^CYAN%^Warmind                %^RESET%^Psywarrior
 
 Prestige classes are similar to standard classes, but their abilities are more specialized and often more powerful. Prestige classes on Shadowgate can only be taken starting at level 40 and have a maximum of 10 levels. Some prestige classes have steep requirements, such a minimum amount of levels in a base class, a certain feat, skill or similar.
 

@@ -16,9 +16,6 @@ void create() {
 "after a brief interval, while the very strongest of opponents may manage to resist the effect entirely.");
     set_verbal_comp();
     set_somatic_comp();
-    set_components(([
-      "mage" : ([ "quicksilver" : 3, ]),
-    ]));
     set_feats_required(([ "bard" : "timeweaver" ]));
 }
 
