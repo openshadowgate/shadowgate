@@ -86,7 +86,7 @@ int caster_class(object ob) { return base_class_ob(ob)->caster_class(); }
 
 string *restricted_races(object ob) { return base_class_ob(ob)->restricted_races(); }
 
-string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes(); }
+string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes() + ({"psion","psywarrior"}); }
 
 int *restricted_alignments(object ob) { return ({1,4,7});}
 
@@ -97,16 +97,15 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Base Class Levels\n"
+        "    Must not be undead\n"
         "    Faith: Godless or Nilith";
     return str;
 }
 
-
 int prerequisites(object player)
 {
-    mapping skills;
     object race_ob;
-    string race, base;
+    string race, base, deity;
     int adj;
     if(!objectp(player))
         return 0;
@@ -118,19 +117,18 @@ int prerequisites(object player)
     if(!objectp(race_ob))
         return 0;
     adj = race_ob->level_adjustment(race);
-    skills = player->query_skills();
-    if(skills["endurance"] < 20)
-        return 0;
     base = player->query("pale_master_base_class");
+    deity = player->query_diety();
+    if(player->is_undead())
+        return 0;
+    if(deity != "godless" ||
+       deity != "nilith")
+        return 0;
     if(!base)
         return 0;
     if(!player->is_class(base))
         return 0;
     if((player->query_class_level(base) + adj) < 20)
-        return 0;
-    if(!FEATS_D->usable_feat(player,"strength of arm"))
-        return 0;
-    if(player->query_level() < 40)
         return 0;
     return 1;
 }
@@ -154,7 +152,7 @@ int caster_level_calcs(object player, string the_class)
 }
 
 mapping class_featmap(string myspec) {
-//    return ([ 1 : ({ "undead graft" }), 4 : ({ "undead cohort" }), 7 : ({ "death touch" }), ]);
+    return ([ 1 : ({ "undead graft" }), 4 : ({ "undead cohort" }), 7 : ({ "death touch" }), ]);
 }
 
 string *class_skills(object ob)

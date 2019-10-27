@@ -182,7 +182,7 @@ int query_clouds(object ob)
     string temp;
     if(!objectp(ob))
         return 0;
-    temp = get_zone(ob);
+    temp = get_zone(ENV(ob));
     return __WEATHER[temp];
 }
 

@@ -570,6 +570,7 @@ mapping query_mastered_bonus()
     mapping tmp = ([]);
 
 
+    if(TO->is_class("mage") || TO->is_class("sorcerer"))
     {
         if(FEATS_D->usable_feat(TO,"gift of the shadows"))
         {
@@ -588,9 +589,13 @@ mapping query_mastered_bonus()
         }
     }
 
+    if(TO->is_class("psion") || TO->is_class("psywarrior"))
     {
         string theclass = TO->is_class("psion")?"psion":"psywarrior";
         if (TO->is_class(theclass) && !tmp[theclass])
+            tmp[theclass]=({});
+
+        if(!arrayp(tmp[theclass]))
             tmp[theclass]=({});
 
         if(FEATS_D->usable_feat(TO,"expanded knowledge 1"))
@@ -601,6 +606,7 @@ mapping query_mastered_bonus()
             tmp[theclass] += ({ TO->query("expanded_knowledge_3") });
     }
 
+    if(TO->is_class("psywarrior"))
     {
         if(FEATS_D->usable_feat(TO,"mind over matter"))
             tmp["psywarrior"] += (({ "true metabolism" }));
@@ -617,6 +623,7 @@ mapping query_mastered_bonus()
         }
     }
 
+    if(TO->is_class("warlock"))
     {
         if(TO->is_class("hellfire warlock"))
             tmp["warlock"]+=({"brimstone blast"});
