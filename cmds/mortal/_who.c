@@ -84,8 +84,7 @@ string list_users(string *races, object tp)
             else {
                 if(((int)who[i]->query_login_time() + 60) > time())
                     rabbit = "someone";
-                else if(objectp(shape = who[i]->query_property("shapeshifted")) ||
-                        objectp(shape = who[i]->query_property("altered")))
+                else if(objectp(shape = who[i]->query_property("shapeshifted")))
                     rabbit = (string)shape->query_shape_race();
                 else rabbit=who[i]->query_race();
 

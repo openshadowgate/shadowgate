@@ -1750,9 +1750,9 @@ void heart_beat()
                     TO->die();
                 else
                 {
-                    TO->do_damage("torso",(query_max_hp()/8));
+                    TO->do_typed_damage(TO,"torso",(query_max_hp()/10)+1,"fire");
                     tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
-                    if(!random(5))
+                    if(!random(12))
                         tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+"'s skin smokes flamelessly.%^RESET%^",TO);
                 }
             }
