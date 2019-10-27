@@ -87,6 +87,13 @@ void execute_feat()
         dest_effect();
         return;
     }
+
+    if(FEATS_D->usable_feat(target,"undead graft"))
+    {
+        tell_object(TP,"%^BOLD%^%^WHITE%^"+target->QCN+" glares at you as you were about to phase behind "+target->QO+".");
+        return;
+    }
+
     tempmap = caster->query_property("using crit");
     if(mapp(tempmap))
     {

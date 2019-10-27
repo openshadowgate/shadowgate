@@ -459,6 +459,8 @@ mixed query_property(string prop)
 
     if(prop == "damage resistance")
     {
+
+        if(FEATS_D->usable_feat(TO,"undead graft"))               { num += 10; }
         if(FEATS_D->usable_feat(TO,"damage resistance"))          { num += 2; }
         if(FEATS_D->usable_feat(TO,"improved damage resistance")) { num += 3; }
         num += props[prop];
