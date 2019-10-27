@@ -1607,6 +1607,7 @@ void heart_beat()
             ob2 = new("/std/Object");
             if (!ETO->query_property("no starve") &&
                 !TO->query_property("inactive") &&
+                !TO->is_undead() &&
                 !TO->query_ghost() &&
                 random(2)){
                 if (!TO->query_stuffed())
@@ -1619,7 +1620,7 @@ void heart_beat()
                     do_damage("torso",roll_dice(2,6));
                     message("environment","You are getting weaker from Thirst!",TO);
                 }
-                if (query_hp()<0)
+                if(TO->query_hp()<-(TO->query_max_hp()*4/5))
                 {
                     TO->add_death("Emaciation");
                     die();
@@ -1756,10 +1757,8 @@ void heart_beat()
                 }
                 else
                 {
-                    TO->do_typed_damage(TO,"torso",(query_max_hp()/10)+1,"fire");
+                    TO->cause_typed_damage(TO,"torso",(query_max_hp()/8)+1,"fire");
                     tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
-                    if(!random(12))
-                        tell_room(ETO,"%^BOLD%^%^BLACK%^"+TO->QCN+"'s skin smokes flamelessly.%^RESET%^",TO);
                 }
             }
     }
@@ -2056,6 +2055,8 @@ nomask void die()
         corpse->set_true_name(query_true_name());
         corpse->set_was_user(1);
     }
+    else
+        tell_room(ETO,query_vis_name()+" turns into smoke.");
     cease_all_attacks();
     reset_all_status_problems();
     break_all_spells();

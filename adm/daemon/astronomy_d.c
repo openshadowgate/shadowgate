@@ -206,7 +206,7 @@ string basicsky(string str)
     night = query_night() || query_eclipse();
 
     if(WEATHER_D->query_clouds(TP)>3)
-        borg = (night?"%^BLUE%^":"%^WHITE")+"The sky is covered with dense clouds.%^RESET%^";
+        borg = (night?"%^BLUE%^":"%^BLUE%^%^BOLD%^")+"The sky is covered with dense clouds.%^RESET%^";
     else
         switch(str)
         {
