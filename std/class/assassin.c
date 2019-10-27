@@ -83,7 +83,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Points Spent in Stealth Skill\n"
+        "    10 Points Spent in Stealth Skill\n"
         "    16 Intelligence\n";
 
     return str;
@@ -104,7 +104,7 @@ int prerequisites(object player)
     if(!objectp(race_ob)) { return 0; }
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
-    if(skills["stealth"] < 20) { return 0; }
+    if(skills["stealth"] < 10) { return 0; }
     if(player->query_base_stats("intelligence") < 16) { return 0; }
     base = player->query("assassin_base_class");
     if(!base) { return 0; }
@@ -133,7 +133,7 @@ int caster_level_calcs(object player, string the_class)
 }
 
 mapping class_featmap(string myspec) {
-    /* return ([ 1 : ({ "crit" }), 4 : ({ "hide in plain sight" }), 7 : ({ "void stalker" }), ]); */
+    return ([ 1 : ({ "crit" }), 4 : ({ "hide in plain sight" }), 7 : ({ "void stalker" }), ]);
 }
 
 string *class_skills(object ob)

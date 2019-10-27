@@ -7,11 +7,11 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("ArcaneArcher");
-    feat_name("death arrow");
-    feat_syntax("death_arrow TARGET");
-    feat_prereq("Arcane archer L7");
-    feat_desc("The archer imbues one missile with power of negative energy, and shoots it. Upon release, such projectile can kill the target instantly, or cause severe damage if the target is warded against death effects. Such missile will never miss its target.");
+    feat_category("Assassin");
+    feat_name("crit");
+    feat_syntax("crit TARGET");
+    feat_prereq("Assassin L1");
+    feat_desc("You perform a devastating attack that has a chance to kill your enemy instantly. The save throw gets a bonus from your intelligence score. If your target succeeds the save, either by being warded against death ot by being studry, it will still suffer greatly.");
     set_target_required(1);
     set_save("fort");
 }
@@ -21,7 +21,7 @@ int allow_shifted() { return 0; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if((int)ob->query_class_level("arcane_archer") < 7)
+    if((int)ob->query_class_level("assassin") < 1)
     {
         dest_effect();
         return 0;
@@ -29,29 +29,13 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_death_arrow(string str)
+int cmd_crit(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
     if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
-    return 1;
-}
-
-int check_can_use()
-{
-    object *weapons;
-    int x;
-    if(!objectp(caster)) return 0;
-    weapons = caster->query_wielded();
-    if(!sizeof(weapons))
-        return 0;
-    if(!weapons[0]->is_lrweapon()) {
-        tell_object(caster,"%^YELLOW%^You can't imbue projectile with death power without ranged weapon!%^RESET%^");
-        dest_effect();
-        return;
-    }
     return 1;
 }
 
@@ -102,7 +86,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    tempmap = caster->query_property("using death arrow");
+    tempmap = caster->query_property("using crit");
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())
@@ -112,6 +96,7 @@ void execute_feat()
             return;
         }
     }
+
     if(!check_can_use())
     {
         dest_effect();
@@ -120,15 +105,14 @@ void execute_feat()
     caster->set_property("using instant feat",1);
     spell_kill(target,caster);
 
-    tell_object(caster, "%^RESET%^%^BLUE%^You whisper few syllables in tongues of unlife and imbue arrow with fell power!%^RESET%^");
-    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" whispers a few fell syllables over "+caster->QP+"!%^RESET%^");
+    tell_object(caster, "%^BOLD%^%^WHITE%^You study the place and your target, preparing yourself for jump.%^RESE%^");
     return;
 }
 
 void execute_attack()
 {
-    int damage, timerz, i, DC;
-    object *keyz, shape, *weapons, myweapon, qob;
+    int damage, timerz, i, bonusdc;
+    object *keyz, qob;
     mapping tempmap;
 
     if(!objectp(caster))
@@ -160,7 +144,7 @@ void execute_attack()
         return;
     }
 
-    tempmap = caster->query_property("using death arrow");
+    tempmap = caster->query_property("using crit");
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
     keyz = keys(tempmap);
@@ -169,28 +153,31 @@ void execute_attack()
         if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
         continue;
     }
-    timerz = time() + 180;
-    delay_subject_msg(target,180,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^death arrowed%^WHITE%^ again.%^RESET%^");
+    timerz = time() + 120;
+    delay_subject_msg(target,120,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^crit%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
-    caster->remove_property("using death arrow");
-    caster->set_property("using death arrow",tempmap);
+    caster->remove_property("using crit");
+    caster->set_property("using crit",tempmap);
 
-    weapons = caster->query_wielded();
-    if(sizeof(weapons)) myweapon = weapons[0];
+    tell_object(caster, "%^RESET%^You find vulnerable spot to attack "+target->QCN+" at.%^RESET%^");
 
-    tell_object(caster, "%^BOLD%^%^BLUE%^Your deadly missile pierces into "+target->QCN+", releasing %^BOLD%^%^BLACK%^fell powers%^BLUE%^!%^RESET%^");
-    tell_room(place, "%^BOLD%^%^BLUE%^"+caster->QCN+"'s %^BLACK%^fell missile%^BLUE%^ pierces into "+target->QCN+"!%^RESET%^",caster);
-
-    if((string)target->query_property("no death") ||do_save(target,2))
+    bonusdc = BONUS_D->query_stat_bonus(caster, "intelligence");
+    if((string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
-        tell_object(target,"%^BOLD%^The struggle for your soul is won, yet at a %^BOLD%^%^BLUE%^price%^WHITE%^.");
-        tell_room(place,"%^BOLD%^The soul survives, yet the coil %^BLACK%^suffers%^WHITE%^!",target);
-        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,8),"negative energy");
+        int todamage;
+        tell_object(target,"%^BOLD%^%^WHITE%^The immense pain spreads from your back!!%^RESET%^");
+        tell_room(place,"%^BOLD%^%^WHITE%^You almost didn't see a shadow behind "+target->QCN+"'s back!",({target,caster}));
+        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+" and try put an end to them, but "+target->QS+" withstand your assault.");
+        if(target->query_max_hp()<caster->query_max_hp())
+            todamage = roll_dice(clevel,8);
+        else
+            todamage = roll_dice(clevel,8)+roll_dice(clevel,bonusdc);
+        target->cause_typed_damage(target, target->query_target_limb(),todamage,"untyped");
     } else {
-        tell_room(place,"%^BOLD%^%^WHITE%^The soul is pushed beyond %^MAGENTA%^the veil%^WHITE%^ from its coil!");
-        tell_room(place,"%^BOLD%^%^WHITE%^The lifeless husk of "+target->QCN+" drops to the ground!",target);
-        tell_object(target,"%^BOLD%^%^MAGENTA%^Your soul is ripped from you body!\n");
-        target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"negative energy");
+        tell_object(target,"%^BOLD%^%^WHITE%^Wait, what?! How did it happen?!%^RESET%^");
+        tell_room(place,"%^BOLD%^%^WHITE%^You almost didn't see a shadow behind "+target->QCN+"'s back!",({target,caster}));
+        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+" and put an end to them with swift motion.");
+        target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"untyped");
     }
     dest_effect();
     return;
