@@ -91,7 +91,7 @@ wing %^ORANGE%^%^ULINE%^DESTINATION%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Wing allows you to move between locations, albeit much slower than teleportation. To use this command you must have wings sufficiently large to overcome winds (bird, bat, dragon, angelic aspect, fell flight, fey'ri, deva and others). This command will allow you to escape the combat, but you can be intercepted during the flight.
+Wing allows you to move between locations, albeit much slower than teleportation. To use this command you must have wings sufficiently large enough to overcome winds (bird, bat, dragon, angelic aspect, fell flight, fey'ri, deva and others). This command will allow you to escape combat, but you can be intercepted during the flight.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

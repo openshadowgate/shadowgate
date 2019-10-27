@@ -51,7 +51,7 @@ string list_users(string *races, object tp)
 {
     object *who, *wizzes, *rp_flags;
     mixed *deaths, *worldEvents;
-    string mark, belphy, tmp, *person, melnmarn, title, rabbit;
+    string mark, belphy, tmp, *person, melnmarn, title, rabbit, position;
     int i,j,maxj, max, x,length,inc,num,death_time;
     int gre;
 
@@ -68,42 +68,33 @@ string list_users(string *races, object tp)
     who = wizzes +who;
     max = sizeof(who);
 
+
     if (max)
         for (i=0; i<max; i++)
         {
+            position = who[i]->query_position();
             tmp = "";
-            if ( (who[i]->query_position() == "Admin") )
+            if (position == "Admin" ||
+                position == "apprentice" ||
+                position == "creator" ||
+                position == "overseer" ||
+                position == "elder" ||
+                position == "arch")
                 tmp += "%^BOLD%^%^BLACK%^Admin %^BOLD%^%^BLACK%^------ ";
-            else
-                if ( (who[i]->query_position() == "apprentice") )
-                    tmp +=   "%^BOLD%^%^BLUE%^Apprentice %^BOLD%^%^BLACK%^- ";
-                else
-                    if ( (who[i]->query_position() == "creator") )
-                        tmp += "%^GREEN%^Creator %^BOLD%^%^BLACK%^---- ";
-                    else
-                        if ( (who[i]->query_position() == "overseer") )
-                            tmp +=  "%^CYAN%^Overseer %^BOLD%^%^BLACK%^--- ";
-                        else
-                            if ( (who[i]->query_position() == "elder") )
-                                tmp +=  "%^BOLD%^%^MAGENTA%^Elder %^BOLD%^%^BLACK%^------ ";
-                            else
-                                if ((who[i]->query_position() == "arch") )
-                                    tmp +=  "%^BOLD%^%^ORANGE%^Arch %^BOLD%^%^BLACK%^------- ";
-                                else {
-                                if (ctime(time())[4..9]=="Apr  1") rabbit="rabbit";
-                                else {
-                                    if (ctime(time())[4..9]=="Nov 23") rabbit="turkey";
-                                    else
-                                        if (ctime(time())[4..9]=="May  1") rabbit="commie";
-                                        else
-                                    {
-                                        if(((int)who[i]->query_login_time() + 60) > time()) rabbit = "someone";
-                                        else if(objectp(shape = who[i]->query_property("shapeshifted"))) rabbit = (string)shape->query_shape_race();
-                                        else rabbit=who[i]->query_race();
-                                    }
-                                }
-                                tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
-                            }
+            else {
+                if(((int)who[i]->query_login_time() + 60) > time())
+                    rabbit = "someone";
+                else if(objectp(shape = who[i]->query_property("shapeshifted")) ||
+                        objectp(shape = who[i]->query_property("altered")))
+                    rabbit = (string)shape->query_shape_race();
+                else rabbit=who[i]->query_race();
+
+                if (ctime(time())[4..9]=="Apr  1") rabbit="rabbit";
+                if (ctime(time())[4..9]=="Nov 23") rabbit="turkey";
+                if (ctime(time())[4..9]=="May  1") rabbit="commie";
+                if (ctime(time())[4..9]=="Oct 31") rabbit="pumpkin";
+                tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
+            }
             length = atoi(TP->getenv("SCREEN"))-32;
             if(!length||length<18)
                 length=43;
