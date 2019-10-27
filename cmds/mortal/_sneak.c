@@ -164,7 +164,7 @@ sneak %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-With this you attempt to sneak to another room in specified %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^. Success of this command will depend on your %^MAGENTA%^stealth%^RESET%^ skill.
+With this you attempt to sneak to another room in specified %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^. Success of this command will depend on your %^MAGENTA%^stealth%^RESET%^ skill and light levels in the room.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

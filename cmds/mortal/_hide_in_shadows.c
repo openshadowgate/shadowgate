@@ -3,7 +3,7 @@ inherit DAEMON;
 
 object current_room, obj;
 
-int cmd_hide_in_shadows() 
+int cmd_hide_in_shadows()
 {
    int myskill;
    object ob;
@@ -30,7 +30,7 @@ int cmd_hide_in_shadows()
       return 0;
    }
    myskill = TP->query_skill("stealth") + roll_dice(1,20);
-   if((int)TP->query_property("chameleoned") > 0){ 
+   if((int)TP->query_property("chameleoned") > 0){
       myskill += (int)TP->query_property("chameleoned");
 //      tell_object(TP,"Chameleon skin bonus = "+(int)TP->query_property("chameleoned")+".");
    }
@@ -50,7 +50,7 @@ int cmd_hide_in_shadows()
       write("You attempt to hide in the shadows.");
       TP->set_hidden(1);
       } else {
-      if(ob = present("TSR80",TP)) ob->dest_fun();   
+      if(ob = present("TSR80",TP)) ob->dest_fun();
       write("You attempt to hide in the shadows.");
       tell_room(environment(TP),"You see "+TPQCN+" attempt to hide in the shadows.",TP);
       return 1;
@@ -71,7 +71,7 @@ hide_in_shadows - try to hide in plain sight
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will let you attempt to hide in plain sight, making you invisible to other beings. You won't be able to tell if you're hidden, though. Success of this command will depend on your stealth skill.
+This command will let you attempt to hide in plain sight, making you invisible to other beings. You won't be able to tell if you're hidden, though. Success of this command will depend on your stealth skill and light levels in the room.
 
 To become visible again, use %^ORANGE%^<step>%^RESET%^ to step out of shadows.
 
