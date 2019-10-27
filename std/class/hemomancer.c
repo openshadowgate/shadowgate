@@ -45,6 +45,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    Is A Vampire\n"
+        "    20 intelligence and charisma\n"
         "    10 Points spent in spellcraft\n"
         "    20 Levels of Mage or Sorcerer\n";
 
@@ -57,6 +58,7 @@ int prerequisites(object player)
     object race_ob;
     string race;
     int adj;
+    mapping skills;
     if(!objectp(player)) { return 0; }
 
     race = player->query("subrace");
@@ -65,26 +67,32 @@ int prerequisites(object player)
     if(!objectp(race_ob)) { return 0; }
     adj = race_ob->level_adjustment(race);
 
+    if(player->query_base_stats("intelligence") < 20 &&
+       player->query_base_stats("charisma") < 20)
+        return 0;
+
+    if(!player->is_vampire())
+        return 0;
+
+    skills = player->query_skills();
+    if(skills["spellcraft"] < 10) { return 0; }
+
     if(player->is_class("mage"))
     {
-        if( (player->query_class_level("mage") + adj) < 20) { return 0; }
-        if(player->query_base_stats("intelligence") < 20) { return 0; }
+        if( (player->query_class_level("mage") + adj) < 20)
+            return 0;
         player->set("hemomancer_base_class","mage");
     }
     if(player->is_class("sorcerer"))
     {
-        if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
-        if(player->query_base_stats("charisma") < 20) { return 0; }
+        if( (player->query_class_level("sorcerer") + adj) < 20)
+            return 0;
         player->set("hemomancer_base_class","sorcerer");
     }
     return 1;
 }
 
-mapping stat_requirements(object ob)
-{
-    if(!objectp(ob) || ob->is_class("mage")) { return ([ "intelligence" : 20 ]); }
-    return ([ "charisma" : 20 ]);
-}
+mapping stat_requirements(object ob) { return base_class_ob(ob)->stat_requirements(); }
 
 int *saving_throws(object ob) { return base_class_ob(ob)->saving_throws(); }
 

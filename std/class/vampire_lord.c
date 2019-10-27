@@ -83,9 +83,9 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Base Class Levels\n"
-        "    Any evil\n"
-        "    A vampire\n";
+        "    A vampire\n"
+        "    20 Base Class Levels\n";
+
 
     return str;
 }
