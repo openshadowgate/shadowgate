@@ -8,7 +8,7 @@ void create() {
     feat_category("Stonelord");
     feat_name("earthen blood");
     feat_prereq("Stonelord L1");
-    feat_desc("This feat represents the initial infusion of the Stonelord with the raw power of the earth. It affords an immunity to venoms and poisons of all kinds.");
+    feat_desc("This feat represents the initial infusion of the Stonelord with the raw power of the earth. It affords an immunity to venoms and poisons of all kinds. They also gain immunity against death effects.");
     permanent(1);
     set_required_for(({"mighty resilience", "command the stone"}));
 }

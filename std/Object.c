@@ -510,8 +510,8 @@ mixed query_property(string prop)
     if(prop == "no death")
     {
         if(FEATS_D->usable_feat(TO,"death ward")) return 1;
-        if(FEATS_D->usable_feat(TO,"chronicler")) return 1;
         if(FEATS_D->usable_feat(TO,"fated")) { return 1; }
+        if(FEATS_D->usable_feat(TO,"earthen blood")) { return 1; }
     }
 // spellturning is now handled in spell.c to prevent stacking feats.
 /*    if(prop == "spellturning")
