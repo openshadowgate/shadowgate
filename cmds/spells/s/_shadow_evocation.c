@@ -21,6 +21,11 @@ string shadow_school()
     return "invocation_evocation";
 }
 
+string query_cast_string()
+{
+    return "%^BLUE%^"+caster->QCN+" whispers an invocation.";
+}
+
 int preSpell()
 {
     int max_level = query_spell_level(spell_type) - 1;

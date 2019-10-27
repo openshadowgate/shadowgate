@@ -51,8 +51,11 @@ void spell_effect(int prof) {
     if(level > 20) level = 20;
     ob = new("/d/magic/obj/darkness");
     call_out("dest_effect", 1800 + (level * 10));
-    ob->set_property("spell", TO);
-    ob->set_property("spelled", ({TO}) );
+    if(objectp(ob))
+    {
+        ob->set_property("spell", TO);
+        ob->set_property("spelled", ({TO}) );
+    }
 
     if (!target)
         ob->move((TP),power);
