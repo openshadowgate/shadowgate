@@ -2056,7 +2056,7 @@ nomask void die()
         corpse->set_was_user(1);
     }
     else
-        tell_room(ETO,query_vis_name()+" turns into smoke.");
+        tell_room(ETO,capitalize(query_vis_name())+" turns into smoke.");
     cease_all_attacks();
     reset_all_status_problems();
     break_all_spells();
