@@ -11,7 +11,7 @@ void create()
     feat_name("crit");
     feat_syntax("crit TARGET");
     feat_prereq("Assassin L1");
-    feat_desc("You perform a devastating attack that has a chance to kill your enemy instantly. The save throw gets a bonus from your intelligence score. If your target succeeds the save, either by being warded against death ot by being studry, it will still suffer greatly.");
+    feat_desc("You perform a devastating attack that has a chance to kill your enemy instantly. The save throw gets a bonus from your intelligence score. If your target succeeds the save, either by being warded against death ot by being studry, thay will still suffer greatly.");
     set_target_required(1);
     set_save("fort");
 }
@@ -128,7 +128,10 @@ void execute_feat()
 
     bonusdc = clevel+10;
     bonusdc += BONUS_D->query_stat_bonus(caster, "intelligence");
-    if((string)target->query_property("no death") || do_save(target,-bonusdc))
+    if(target->query_property("no death") ||
+       target->query_race()=="squole" ||
+       target->is_undead() ||
+       do_save(target,-bonusdc))
     {
         int todamage;
         tell_object(target,"%^BOLD%^%^WHITE%^The immense pain spreads from your back!!%^RESET%^");
