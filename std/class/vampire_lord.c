@@ -75,7 +75,7 @@ string *restricted_races(object ob) { return base_class_ob(ob)->restricted_races
 
 string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes(); }
 
-int *restricted_alignments(object ob) { return ({1,4,7,8,9}); }
+int *restricted_alignments(object ob) { return ({1,2,4,5,7,8}); }
 
 string *restricted_gods(object ob) { return base_class_ob(ob)->restricted_gods(); }
 
@@ -84,7 +84,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Base Class Levels\n"
-        "    Any non-good and non-chaotic\n"
+        "    Any evil\n"
         "    A vampire\n";
 
     return str;

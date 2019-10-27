@@ -1620,7 +1620,10 @@ void heart_beat()
                     message("environment","You are getting weaker from Thirst!",TO);
                 }
                 if (query_hp()<0)
+                {
+                    TO->add_death("Emaciation");
                     die();
+                }
             }
             if (TO->query_poisoning()) {
                 ob2->set_name("Poison");
@@ -1747,7 +1750,10 @@ void heart_beat()
             if(TO->is_in_sunlight())
             {
                 if(TO->query_hp()<-(TO->query_max_hp()*4/5))
+                {
+                    TO->add_death("Sunlight");
                     TO->die();
+                }
                 else
                 {
                     TO->do_typed_damage(TO,"torso",(query_max_hp()/10)+1,"fire");
