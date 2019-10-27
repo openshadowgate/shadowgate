@@ -23,14 +23,9 @@ int cmd_listdeaths(string str) {
 //    string *lines,*test;
     object ob;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
-   if(posxxx == "builder" || posxxx == "apprentice")
-   {
-       tell_object(TP,"You cannot use this command as a builder or apprentice.");
-       return 1;
-   }
 
   if (!stringp(str)) return 0;
     ob=find_player(lower_case(str));

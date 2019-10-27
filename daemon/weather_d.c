@@ -177,6 +177,13 @@ mixed Check_Weather(object ob){
    }
 }
 
+int query_clouds(object ob)
+{
+    string temp;
+    temp = get_zone(ob);
+    return __WEATHER[temp];
+}
+
 void Do_Weather(){
     string temp,*thekeys;
     mixed *pair;
