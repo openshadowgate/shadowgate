@@ -26,22 +26,20 @@ int prerequisites(object ob) {
     return ::prerequisites(ob);
 }
 
-int cmd_tracklessstep(string str) {
+int cmd_hide_in_plain_sight(string str) {
     object feat;
     if(!objectp(TP))
         return;
-    feat = new(base_name(TO));
-    feat->setup_feat(TP,"");
+    caster->set_hidden(1);
+    obj = new("/cmds/feats/obj/hide_in_plain.c");
+    obj->set_player(caster);
+    obj->move(caster);
     return 1;
 }
 
 void execute_feat() {
     object obj;
     ::execute_feat();
-    caster->set_hidden(1);
-    obj = new("/cmds/mortal/obj/hide_in_plain.c");
-    obj->set_player(caster);
-    obj->move(caster);
 }
 
 void dest_effect() {

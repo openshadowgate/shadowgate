@@ -71,7 +71,7 @@ hide_in_shadows - try to hide in plain sight
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will let you attempt to hide in plain sight, making you invisible to other beings. You won't be able to tell if you're hidden, though. Success of this command will depend on your stealth skill and light levels in the room.
+This command will let you attempt to hide in plain sight, making you invisible to other beings. You won't be able to tell if you're hidden, though. Success of this command will depend on your stealth skill.
 
 To become visible again, use %^ORANGE%^<step>%^RESET%^ to step out of shadows.
 

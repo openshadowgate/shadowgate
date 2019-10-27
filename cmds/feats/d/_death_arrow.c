@@ -127,7 +127,8 @@ void execute_feat()
 
 void execute_attack()
 {
-    int damage, timerz, i, DC;
+    int damage, timerz, i;
+    int bonusdc;
     object *keyz, shape, *weapons, myweapon, qob;
     mapping tempmap;
 
@@ -181,7 +182,8 @@ void execute_attack()
     tell_object(caster, "%^BOLD%^%^BLUE%^Your deadly missile pierces into "+target->QCN+", releasing %^BOLD%^%^BLACK%^fell powers%^BLUE%^!%^RESET%^");
     tell_room(place, "%^BOLD%^%^BLUE%^"+caster->QCN+"'s %^BLACK%^fell missile%^BLUE%^ pierces into "+target->QCN+"!%^RESET%^",caster);
 
-    if((string)target->query_property("no death") ||do_save(target,2))
+    bonusdc = clevel+16;
+    if((string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
         tell_object(target,"%^BOLD%^The struggle for your soul is won, yet at a %^BOLD%^%^BLUE%^price%^WHITE%^.");
         tell_room(place,"%^BOLD%^The soul survives, yet the coil %^BLACK%^suffers%^WHITE%^!",target);

@@ -42,8 +42,9 @@ int cmd_crit(string str)
 void execute_feat()
 {
     mapping tempmap;
-    object *weapons;
     int x;
+    int damage, timerz, i, bonusdc;
+    object *keyz, qob;
     ::execute_feat();
     if(!objectp(target))
     {
@@ -97,53 +98,10 @@ void execute_feat()
         }
     }
 
-    if(!check_can_use())
-    {
-        dest_effect();
-        return;
-    }
     caster->set_property("using instant feat",1);
     spell_kill(target,caster);
 
-    tell_object(caster, "%^BOLD%^%^WHITE%^You study the place and your target, preparing yourself for jump.%^RESE%^");
-    return;
-}
-
-void execute_attack()
-{
-    int damage, timerz, i, bonusdc;
-    object *keyz, qob;
-    mapping tempmap;
-
-    if(!objectp(caster))
-    {
-        dest_effect();
-        return;
-    }
-    caster->remove_property("using instant feat");
-    ::execute_attack();
-    if(!objectp(target))
-    {
-        dest_effect();
-        return;
-    }
-    if(caster->query_unconscious())
-    {
-        dest_effect();
-        return;
-    }
-    if(!objectp(target) || !present(target,place))
-    {
-        tell_object(caster,"Your target has eluded you!");
-        dest_effect();
-        return;
-    }
-    if(!check_can_use())
-    {
-        dest_effect();
-        return;
-    }
-
+    tell_object(caster, "%^BOLD%^%^WHITE%^You study the place and your target, preparing yourself for a jump.%^RESET%^");
     tempmap = caster->query_property("using crit");
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
@@ -153,21 +111,22 @@ void execute_attack()
         if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
         continue;
     }
-    timerz = time() + 120;
-    delay_subject_msg(target,120,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^crit%^WHITE%^ again.%^RESET%^");
+    timerz = time() + 90;
+    delay_subject_msg(target,90,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^crit%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
     caster->remove_property("using crit");
     caster->set_property("using crit",tempmap);
 
     tell_object(caster, "%^RESET%^You find vulnerable spot to attack "+target->QCN+" at.%^RESET%^");
 
-    bonusdc = BONUS_D->query_stat_bonus(caster, "intelligence");
-    if((string)target->query_property("no death") ||do_save(target,-bonusdc))
+    bonusdc = clevel+10;
+    bonusdc += BONUS_D->query_stat_bonus(caster, "intelligence");
+    if((string)target->query_property("no death") || do_save(target,-bonusdc))
     {
         int todamage;
         tell_object(target,"%^BOLD%^%^WHITE%^The immense pain spreads from your back!!%^RESET%^");
         tell_room(place,"%^BOLD%^%^WHITE%^You almost didn't see a shadow behind "+target->QCN+"'s back!",({target,caster}));
-        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+" and try put an end to them, but "+target->QS+" withstand your assault.");
+        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+", but "+target->QS+" withstands your assault.");
         if(target->query_max_hp()<caster->query_max_hp())
             todamage = roll_dice(clevel,8);
         else
@@ -176,9 +135,22 @@ void execute_attack()
     } else {
         tell_object(target,"%^BOLD%^%^WHITE%^Wait, what?! How did it happen?!%^RESET%^");
         tell_room(place,"%^BOLD%^%^WHITE%^You almost didn't see a shadow behind "+target->QCN+"'s back!",({target,caster}));
-        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+" and put an end to them with swift motion.");
+        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+" and put an end to them with a swift motion.");
         target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"untyped");
     }
+    return;
+}
+
+void execute_attack()
+{
+    if(!objectp(caster))
+    {
+        dest_effect();
+        return;
+    }
+    caster->remove_property("using instant feat");
+    ::execute_attack();
+
     dest_effect();
     return;
 }
