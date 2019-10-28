@@ -56,6 +56,15 @@ void spell_effect(int prof)
     bonus = clevel/4+1;
     caster->add_attack_bonus(bonus);
     caster->add_damage_bonus(bonus);
+    caster->add_sight_bonus(3);
+    caster->add_stat_bonus("strength",2);
+    caster->add_stat_bonus("dexterity",2);
+    caster->add_stat_bonus("constitution",2);
+    caster->add_stat_bonus("wisdom",2);
+    caster->set_resistance("silver",-50);
+    caster->set_resistance("cold",10);
+    caster->add_skill_bonus("perception",4);
+    caster->add_skill_bonus("survival",4);
     caster->set_property("dance-of-cuts",1); //Full BAB
     spell_successful();
     addSpellToCaster();
@@ -68,6 +77,15 @@ void dest_effect()
     {
         caster->add_attack_bonus(-bonus);
         caster->add_damage_bonus(-bonus);
+        caster->add_sight_bonus(-3);
+        caster->add_stat_bonus("strength",-2);
+        caster->add_stat_bonus("dexterity",-2);
+        caster->add_stat_bonus("constitution",-2);
+        caster->add_stat_bonus("wisdom",-2);
+        caster->set_resistance("cold",10);
+        caster->set_resistance("silver",50);
+        caster->add_skill_bonus("perception",-4);
+        caster->add_skill_bonus("survival",-4);
         caster->set_property("dance-of-cuts",-1);
         if(caster->query_property("shapeshifted"))
             shape = caster->query_property("shapeshifted");

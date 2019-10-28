@@ -184,7 +184,7 @@ string write_prompt()
         prompt = replace_string(prompt, "$i", ""+hunger2str(this_player()));
         prompt = replace_string(prompt, "$o", ""+thirst2str(this_player()));
         prompt = replace_string(prompt, "$T", ""+EVENTS_D->query_time_of_day());
-        prompt = replace_string(prompt, "$t", ""+hour(time())+":"+minutes(time()));
+        prompt = replace_string(prompt, "$t", ""+sprintf("%2d",hour(time()))+":"+sprintf("%2d",minutes(time())));
         prompt = replace_string(prompt, "$B", ""+bloodlust2string(this_player()));
         prompt = replace_string(prompt, "$e", ""+expperc);
         if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");

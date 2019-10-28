@@ -71,6 +71,7 @@ void spell_effect(int prof) {
    detector->set_detect_power(power);
    duration = 8 * (int)CLEVEL;
    call_out("dest_effect", duration);
+   addSpellToCaster();
    return;
 }
 

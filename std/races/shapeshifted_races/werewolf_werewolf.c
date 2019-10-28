@@ -15,17 +15,6 @@ void create()
     set_can_talk(1);
     set_shape_race("werewolf");
     set_shape_profile("werewolf_hybrid_999");
-    set_shape_bonus("perception",4);
-    set_shape_bonus("survival",4);
-    set_shape_bonus("cold resistance",5);
-    set_shape_bonus("silver resistance",-50);
-    set_shape_bonus("sight bonus",3);
-    set_shape_bonus("damage bonus",3);
-    set_shape_bonus("attack bonus",3);
-    set_shape_bonus("strength",2);
-    set_shape_bonus("dexterity",2);
-    set_shape_bonus("constitution",2);
-    set_shape_bonus("wisdom",2);
 }
 
 int default_descriptions(object obj)
@@ -83,10 +72,6 @@ int init_shape(object obj,string str){
     obj->set_property("altered",shape = new(base_name(TO)+".c")); // makes a new shape and sets the shapeshifted property to it, this is where all the work is done, very important
     shape->set_owner(obj);
     shape->change_into_message(obj);
-    shape->apply_bonuses(shape->query_owner());
-    shape->set_old_attack_limbs((string*)obj->query_attack_limbs()); //
-    obj->set_attack_limbs(shape->query_attack_limbs()); //
-    obj->set_fake_limbs(shape->query_limbs()); //
     shape->set_base_profile((string)obj->query("relationship_profile"));
     obj->set("relationship_profile",shape->query_shape_profile());
     obj->add_id(obj->query_race());
@@ -105,9 +90,7 @@ int reverse_shape(object obj){
     if(!objectp(obj)) { return 3; }
     if(!objectp(shape = obj->query_property("altered"))) { return 5; }
     obj->set("relationship_profile",shape->query_base_profile());
-    obj->set_attack_limbs(shape->query_old_attack_limbs()); //
-    obj->remove_fake_limbs(); //
-    shape->reverse_bonuses(shape->query_owner());
+
     if(objectp(to_object(DESC_D))) {
         desc = new(DESC_D);
         desc->restore_profile_settings(obj,shape->query_base_profile());

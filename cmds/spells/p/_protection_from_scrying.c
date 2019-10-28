@@ -4,7 +4,7 @@
 // the spell level of the caster
 // Thorn@ShadowGate
 // 4 January 2001
-// Updated by ~Circe~ with slightly different block power 
+// Updated by ~Circe~ with slightly different block power
 // to match the scry power added to scrying spells 6/20/08
 
 #include <spell.h>
@@ -45,7 +45,7 @@ void create() {
 }
 
 int preSpell() {
-    if (!query_arg()) { 
+    if (!query_arg()) {
         target = caster;
         return 1;
     }
@@ -95,7 +95,7 @@ void spell_effect(int prof) {
         	return;
         }
     }
-    if(target == place) 
+    if(target == place)
         tell_room(place,"%^BOLD%^GREEN%^For a brief moment, the air around "+
             "you shimmers with magical static.");
     else
@@ -121,9 +121,10 @@ Previous block power
     int_bonus = int_bonus-10;
     power = CLEVEL + int_bonus + random(6);
     blocker->set_block_power(power);
-//new block power by ~Circe~ to match scry power and add a 
+//new block power by ~Circe~ to match scry power and add a
 //touch of randomness
     duration = 9 * (int)CLEVEL;
+    addSpellToCaster();
     call_out("dest_effect", duration);
     return;
 }
