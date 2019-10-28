@@ -61,11 +61,7 @@ void execute_attack(){
     if(!objectp(caster)) { dest_effect(); return; }
     if(!objectp(place))  { dest_effect(); return; }
 
-    if(!flag) {
-        ::execute_attack();
-        flag = 1;
-        return;
-    }
+    ::execute_attack();
 
     if(!objectp(caster)) { dest_effect(); return; }
     attackers   = caster->query_attackers();

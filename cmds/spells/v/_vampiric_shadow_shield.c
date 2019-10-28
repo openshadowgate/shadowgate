@@ -44,7 +44,6 @@ void spell_effect(int prof)
     caster->set_property("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
-    environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",duration);
 }
 
@@ -53,11 +52,7 @@ void execute_attack()
     object *attackers,room;
     int i;
 
-    if(!flag) {
-        ::execute_attack();
-        flag = 1;
-        return;
-    }
+    ::execute_attack();
     if(!objectp(caster))
     {
         dest_effect();
@@ -72,7 +67,7 @@ void execute_attack()
         room->addObjectToCombatCycle(TO,1);
         return;
     }
-    for(i=0;i<sizeof(attackers)&&i<6;i++)
+    for(i=0;i<sizeof(attackers)&&i<8;i++)
     {
         if(do_save(attackers[i],0))
             continue;
@@ -82,7 +77,7 @@ void execute_attack()
         tell_object(caster,"%^BLUE%^%^"+attackers[i]->QCN+" is caressed by the shield of shadows as "+attackers[i]->QS+" strikes you!");
         tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
-        caster->add_hp(sdamage/6);
+        caster->add_hp(sdamage/4);
     }
     room->addObjectToCombatCycle(TO,1);
 }
@@ -91,7 +86,6 @@ void dest_effect(){
     if(objectp(caster)){
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^The shadows retreat, leaving "+caster->QCN+" vulnerable once again.");
         caster->remove_property("vampiric shadow shield");
-        caster->add_ac_bonus(-2);
         caster->remove_property_value("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
     }
     ::dest_effect();

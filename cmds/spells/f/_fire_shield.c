@@ -55,7 +55,6 @@ void spell_effect(int prof){
     caster->add_property("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
     addSpellToCaster();
     spell_successful();
-    environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",duration);
 }
 
@@ -63,11 +62,7 @@ void execute_attack(){
     object *attackers,room;
     int i;
 
-   if(!flag) {
-      ::execute_attack();
-      flag = 1;
-      return;
-   }
+    ::execute_attack();
     if(!objectp(caster)){
         dest_effect();
         return;
