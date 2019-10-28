@@ -5,7 +5,7 @@
 
 inherit SPELL;
 
-create() 
+create()
 {
     ::create();
     set_spell_name("wall of stone");
@@ -15,6 +15,7 @@ create()
     set_description("This command will cause a wall of rubble to appear on an exit, preventing travel in that direction "
         "until all of the rubble has been cleared away.  The more powerful the caster, the larger the rubble "
         "wall that must be removed.");
+    set_spell_sphere("conjuration_summoning");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed(1);
@@ -45,7 +46,7 @@ int preSpell()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_object(caster,"%^ORANGE%^You can feel the earth begin to tremble as it heeds your command!");
     tell_room(place,"%^ORANGE%^The earth begins to tremble as it heeds "+caster->QCN+"'s command!",caster);
@@ -62,7 +63,7 @@ void block_exit(string exit)
     place->set_property("wall of stone",1);
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if(objectp(place)) { place->remove_property("wall of stone"); }
     ::dest_effect();
