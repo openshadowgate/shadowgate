@@ -246,10 +246,10 @@ int set_expgain(string val)
         write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
         return 0;
     }
-    if(val=="on"&&USER_D->no_exp(TP))
-        TP->toggle_no_exp(TP);
-    if(val=="off"&&USER_D->no_exp(TP))
-        TP->toggle_no_exp(TP);
+    if(val=="on"&&(USER_D->no_exp(TP)))
+        USER_D->toggle_no_exp(TP);
+    if(val=="off"&&(!USER_D->no_exp(TP)))
+        USER_D->toggle_no_exp(TP);
     return 1;
 }
 
