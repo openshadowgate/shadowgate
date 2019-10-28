@@ -1786,19 +1786,16 @@ combat_counters["tripped"] = 100; }
 
     if (combat_vars["asleep"])
     {
-        if (combat_counters["asleep"] > (25 - (int)who->query_stats("constitution")) )
+        combat_vars["asleep"]--;
+        vars = 1;
+        combat_counters["asleep"] = 0;
+        if (!combat_vars["asleep"])
         {
-            combat_vars["asleep"]--;
-            vars = 1;
-            combat_counters["asleep"] = 0;
-            if (!combat_vars["asleep"])
+            if(!who->query_invis() && objectp(EWHO))
             {
-                if(!who->query_invis() && objectp(EWHO))
-                {
-                    tell_room(EWHO, "%^GREEN%^You notice "+who->QCN+" waking up.%^RESET%^", who);
-                }
-                message("combat","%^BOLD%^%^BLUE%^You have awakened.",who);
+                tell_room(EWHO, "%^GREEN%^You notice "+who->QCN+" waking up.%^RESET%^", who);
             }
+            message("combat","%^BOLD%^%^BLUE%^You have awakened.",who);
         }
         combat_counters["asleep"]++;
         counters = 1;
@@ -1856,10 +1853,17 @@ varargs void set_tripped(object who, int severity, string message, int special)
     return;
 }
 
+/**
+ * Sets target asleep
+ *
+ * @param who target
+ * @param xxx time in rounds
+ * @param message Message displayed to sleeper
+ */
 void set_asleep(object who, int xxx, string message)
 {
     if(!objectp(who)) return;
-    who->adjust_combat_mapps("vars", "asleep", xxx);
+    who->adjust_combat_mapps("vars", "asleep", (xxx>120?120:xxx));
     who->adjust_combat_mapps("messages", "asleep", message);
 }
 

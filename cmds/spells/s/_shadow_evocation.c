@@ -14,16 +14,12 @@ void create()
 
 %^BOLD%^%^RED%^E.G.%^RESET%^ <cast mage shadow evocation on fireball on goblin>");
     set_arg_needed(1);
+    set_silent_casting(1);
 }
 
 string shadow_school()
 {
     return "invocation_evocation";
-}
-
-string query_cast_string()
-{
-    return "%^BLUE%^"+caster->QCN+" whispers an invocation.";
 }
 
 int preSpell()
@@ -40,6 +36,7 @@ int preSpell()
         return 0;
     }
 
+    tell_room(place,"%^BLUE%^"+caster->QCN+" whispers an invocation.";);
     if(sscanf(arg, "%s on %s", spl, sargs)!=2)
         spl = arg;
 

@@ -34,9 +34,9 @@ spell_effect(int prof)
 
     success = 0;
 
-    time = clevel*ROUND_LENGTH*2;
-    if(time > 300)
-        time = 300;
+    time = clevel*2;
+    if(time > 60)
+        time = 60;
 
     if(!objectp(target))
     {

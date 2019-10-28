@@ -19,7 +19,6 @@ void set_spell(int level);
 void set_av_spell(int level);
 int do_back_fire(object myuser);
 void crumble(object targ);
-int query_readable_by(object env, object viewer);//added by Lujke 13/05/05
 void set_is_newbie(int x);  //newbie stuff added by Circe 6/6/07
 int query_is_newbie();
 int is_newbie;
@@ -54,8 +53,6 @@ string long_desc() {
     string long;
     if(!objectp(TP))
         return("This is a scroll with some undecipherable writing on it.");
-    if(!query_readable_by(TP,TP))
-        return("This is a scroll with some undecipherable writing on it.");
     if(base_name(TO) == "/d/magic/safe_scroll" ||
        base_name(TO) == "/d/magic/newbie_scroll" &&
        (member_array(spell,keys(MAGIC_D->query_index("mage")))!=-1))
@@ -72,8 +69,6 @@ string query_short()
     string color = MAGIC_D->query_spell_level("mage",spell)?"%^ORANGE%^":"%^WHITE%^";
 
     if(!objectp(TP))
-        return("%^RESET%^"+color+"scr%^BOLD%^o%^RESET%^"+color+"ll%^RESET%^");
-    if(!query_readable_by(TP,TP))
         return("%^RESET%^"+color+"scr%^BOLD%^o%^RESET%^"+color+"ll%^RESET%^");
     return("%^RESET%^"+color+"scr%^BOLD%^o%^RESET%^"+color+"ll of "+spell+"%^RESET%^");
 }
@@ -189,8 +184,6 @@ int transcribe(string str)
     {
         notify_fail("You can only transcribe aracne spells");
     }
-    if(!query_readable_by(TP,TP))
-        return notify_fail("You can't understand that scroll!\n");
     write("%^ORANGE%^You carefully file "+spell+" into your spellbook.\n");
     book->set_spellbook(spell);
     TO->remove();
@@ -280,42 +273,6 @@ int query_usable() {return usable;}
 //correctly - 3/18/2007
 void set_usable(int x) { usable = x; }
 
-/**
- * Whether reader should be able to see what spell is on the scroll
- *
- * @return 0 if the reader is not allowed to see
- */
-int query_readable_by(object env, object viewer)
-{
-    string viewername;
-    int skill, diff;
-
-    if(!userp(TP))
-        return 1;
-    viewername = (string)viewer->query_name();
-    if(!readpassed)
-        readpassed = ({});
-    if(!readfailed)
-        readfailed = ([]);
-    if(member_array(viewername,readpassed) != -1)
-        return 1;
-    if(!mapp(readfailed))
-        return 0;
-    skill = viewer->query_skill("spellcraft");
-    if(readfailed[viewername])
-    {
-        if(skill <= readfailed[viewername])
-            return 0;
-        map_delete(readfailed,viewername);
-    }
-    if(skill > query_spell_level()*3)
-    {
-        readpassed += ({viewername});
-        return 1;
-    }
-    readfailed[viewername] = skill;
-    return 0;
-}
 
 void set_passed(string charname) {
     if(!readpassed) readpassed = ({});
