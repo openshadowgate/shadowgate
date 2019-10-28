@@ -8,7 +8,7 @@ void create(){
    ::create();
 
    set_name("vampire bat");
-   set_short("%^RESET%^%^RED%^A bat");
+   set_short("%^RESET%^%^RED%^bat");
    set_long("%^RESET%^%^RED%^This is a bat, flying creature with sharp fangs and glowing red eyes.");
    set_id(({"bat","vampire bat"}));
    set("not living",1);
