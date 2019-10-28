@@ -1,10 +1,11 @@
-// Monster Summoning 1 - Coded by Vashkar@shadowgate
-// moved monster files to /d/magic/mon central location Ares/Styx 1/29/05
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
-inherit "/cmds/spells/m/monster_summoning.c";
+
+inherit SPELL;
+
+object *monsters = ({});
+int duration;
 
 create() {
     ::create();
@@ -13,28 +14,133 @@ create() {
     set_syntax("cast CLASS monster summoning 1");
 }
 
-object createMon(){
-        int chooser=random(10);
-        switch (chooser) {
-        case(1): return new("/d/magic/mon/kobold.c");
-            break;
-        case(2): return new("/d/magic/mon/gnoll.c");
-            break;
-        case(3): return new("/d/magic/mon/goblin.c");
-            break;
-        case(4): return new("/d/magic/mon/orc.c");
-            break;
-        case(5): return new("/d/magic/mon/hobgoblin.c");
-            break;
-        case(6): return new("/d/magic/mon/giantrat.c");
-            break;
-        case(7): return new("/d/magic/mon/giantbat.c");
-            break;
-        case(8): return new("/d/magic/mon/rat.c");
-            break;
-        case(9): return new("/d/magic/mon/bat.c");
-            break;
-        case(0): return new("/d/magic/mon/bandits.c");
-            break;
+
+int preSpell()
+{
+    if(present(caster->query_name()+" monster 2",place))
+    {
+        tell_object(caster,"There are already too many monsters.");
+        return 0;
+    }
+
+    return 1;
+}
+
+
+int spell_effect(int prof)
+{
+    object monster;
+    int num,i;
+
+    if(!objectp(caster))
+    {
+        dest_effect();
+        return;
+    }
+
+    num = roll_dice(2,4);
+
+    for(i=0;i<num;i++)
+    {
+        monster = new("/d/magic/mon/astral_defender.c");
+        if(!objectp(monster)) { continue; }
+
+        monsters += ({ monster });
+
+        monster->set("aggressive",1);
+        monster->remove_property("swarm");
+        monster->set_mlevel("fighter",clevel);
+        monster->set_guild_level("fighter",clevel);
+        monster->set_attacks_num(2);
+        monster->set_p_desc(query_spell_level(spell_type));
+        monster->set_hp(query_spell_level(spell_type)*10+clevel);
+        monster->set_property("spelled",({TO}));
+        monster->set_property("spell_creature",TO);
+        monster->set_property("spell",TO);
+        monster->add_id("summoned monster","miniature monster",caster->query_name()+" monster");
+        monster->set_stats("strength",14);
+        monster->set_stats("dexterity",14);
+        monster->set_stats("constitution",14);
+        monster->set_new_exp(1,"low");
+        monster->set_property("minion", caster);
+        monster->move(environment(caster));
+        caster->add_follower(monster);
+        caster->add_protector(monster);
+
+        tell_room(place,"%^CYAN%^Reality rips and astral prism manifests itself to protect "+caster->QCN+"!%^RESET%^",caster);
+        tell_object(caster,"%^CYAN%^Reality rips and astral prism manifests itself to protect you!%^RESET%^");
+    }
+
+    duration = time() + 300 + (ROUND_LENGTH * clevel);
+
+    addSpellToCaster();
+    spell_successful();
+
+    check();
+}
+
+
+void check()
+{
+    object monster,*attackers,att;
+    int i,j;
+
+    monsters -= ({ 0 });
+
+    if( (!objectp(caster)) || (time() > duration) || (!sizeof(monsters)) || (!objectp(place = environment(caster))) )
+    {
+        dest_effect();
+        return;
+    }
+
+    for(i=0;i<sizeof(monsters);i++)
+    {
+        if(!objectp(monster = monsters[i])) { continue; }
+
+        if(!present(monster,place))
+        {
+            tell_room(environment(monster),"%^YELLOW%^With its creator gone, "+monster->QCN+" turns back into a piece of regular foliage.");
+            monster->move("/d/shadowgate/void");
+            monster->remove();
+            continue;
         }
+
+        caster->add_protector(monster);
+        caster->add_follower(monster);
+
+        if(!sizeof(attackers = (object*)caster->query_attackers())) { continue; }
+
+        for(j=0;j<sizeof(attackers);j++)
+        {
+            if(!objectp(att = attackers[j])) { continue; }
+            if(member_array(att,(object*)monster->query_attackers()) != -1) { continue; }
+
+            monster->kill_ob(att,0);
+        }
+    }
+    call_out("check",5);
+}
+
+
+void dest_effect()
+{
+    int i;
+
+    if(objectp(caster))
+    {
+        removeSpellFromCaster();
+        tell_object(caster,"%^ORANGE%^%^BOLD%^Summoned prisms vanish!.");
+    }
+
+    if(sizeof(monsters))
+    {
+        for(i=0;i<sizeof(monsters);i++)
+        {
+            if(!objectp(monsters[i])) { continue; }
+            monsters[i]->move("/d/shadowgate/void");
+            monsters[i]->remove();
+        }
+    }
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
 }
