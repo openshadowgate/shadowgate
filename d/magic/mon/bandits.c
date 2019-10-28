@@ -10,9 +10,9 @@ void create() {
 	set("race", "human");
 	set_gender("male");
 	set("short", "A bandit");
-	set("long", 
+	set("long",
 @MELNMARN
-You are looking at a rugged, well traveled bandit. 
+You are looking at a rugged, well traveled bandit.
 He looks hungry, and blood-thirsty. Watch your back
 around these guys. They don't look very trustworthy.
 MELNMARN
@@ -45,9 +45,3 @@ MELNMARN
 //	set_moving(2);
 
 }
-
-
-
-
-
-

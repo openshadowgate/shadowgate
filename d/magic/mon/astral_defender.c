@@ -2,7 +2,7 @@
 
 inherit MONSTER;
 
-string COLORS = ({"%^BLUE%^","%^BLUE%^","%^BLUE%^","%^ORANGE%^","%^RED%^","%^MAGENTA%^","%^GREEN%^","%^CYAN%^","%^WHITE%^"});
+string COLORS = ({"%^BLUE%^","%^RED%^","%^BLUE%^","%^RED%^","%^ORANGE%^","%^MAGENTA%^","%^GREEN%^","%^CYAN%^","%^WHITE%^"});
 
 int create()
 {

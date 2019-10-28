@@ -59,9 +59,7 @@ spell_effect(int prof)
     }
 
     oldenv=environment(caster);
-    nummon = (clevel/8);
-    if(nummon < 3) nummon = 3;
-    if (nummon > 12) nummon = 12;
+    nummon = 8;
     numfoes=(sizeof(caster->query_attackers()));
     mons=allocate(nummon);
 
@@ -114,6 +112,8 @@ spell_effect(int prof)
         if(!objectp(mon)) { continue; }
         mon->set("aggressive", 1);
         mon->remove_property("swarm");
+        mon->set_max_hp(clevel*6+30);
+        mon->set_hp(clevel*6+30);
         mon->set_property("spelled", ({TO}));
         mon->set_property("spell_creature", TO);
         mon->set_property("spell", TO);

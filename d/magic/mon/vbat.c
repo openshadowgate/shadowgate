@@ -11,16 +11,11 @@ void create(){
    set_short("%^RESET%^%^RED%^bat");
    set_long("%^RESET%^%^RED%^This is a bat, flying creature with sharp fangs and glowing red eyes.");
    set_id(({"bat","vampire bat"}));
-   set("not living",1);
-
-   set_long(
-@OLI
-   %^CYAN%^This is a large bat
-OLI
-   );
+   set_long("%^CYAN%^This is a large bat.");
    set_race("bat");
    set_gender("male");
-    set_property("no animate",1);
+   set_property("no animate",1);
+   set_class("fighter");
    set_body_type("fowl");
    set_hd(10,1);
    set_stats("strength",10);

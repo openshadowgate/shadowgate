@@ -55,15 +55,13 @@ int spell_effect(int prof)
         monster->set_mlevel("fighter",clevel);
         monster->set_guild_level("fighter",clevel);
         monster->set_attacks_num(2);
+        monster->set_hd(clevel,1);
         monster->set_p_desc(query_spell_level(spell_type)-1);
-        monster->set_hp(query_spell_level(spell_type)*12+clevel*2);
+        monster->set_hp((query_spell_level(spell_type)+clevel)*6+20);
         monster->set_property("spelled",({TO}));
         monster->set_property("spell_creature",TO);
         monster->set_property("spell",TO);
         monster->add_id(caster->query_true_name()+"_monster");
-        monster->set_stats("strength",14);
-        monster->set_stats("dexterity",14);
-        monster->set_stats("constitution",14);
         monster->set_new_exp(1,"low");
         monster->set_property("minion", caster);
         monster->move(environment(caster));
@@ -132,7 +130,7 @@ void dest_effect()
     if(objectp(caster))
     {
         removeSpellFromCaster();
-        tell_object(caster,"%^ORANGE%^%^BOLD%^Summoned prisms vanish!.");
+        tell_object(caster,"%^ORANGE%^%^BOLD%^Summoned prisms vanish!");
     }
 
     if(sizeof(monsters))
