@@ -81,7 +81,7 @@ void do_teleport(object who)
     }
 
     who->move_player("/d/darkwood/room/road18.c","with a loud clap");
-    who->set_asleep(36*ROUND_LENGTH, "You are stunned into slumber after shock of sudden teleportation!");
+    who->set_paralyzed(8*120, "You are stunned into slumber after shock of sudden teleportation!");
     who->do_damage("torso",who->query_hp()-1);
     who->set_property("bloodshard",time());
 
