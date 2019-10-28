@@ -21,8 +21,6 @@ void create()
     set_shape_bonus("survival",4);
     set_shape_bonus("cold resistance",5);
     set_shape_bonus("sight bonus",3);
-    set_shape_bonus("damage bonus",1);
-    set_shape_bonus("attack bonus",1);
     set_shape_height(30+random(12));
     set_shape_weight(90+random(50));
     set_shape_mastery_feat("knockdown");
@@ -164,7 +162,7 @@ int shape_attack(object tp, object targ)
 
     if(chance > 50) { chance = 50; }
 
-    dice = ( chance / 4) + 2;
+    dice = ( chance / 5) + 2;
 
     if(roll_dice(1,100) > chance)
         return roll_dice(2,dice);
