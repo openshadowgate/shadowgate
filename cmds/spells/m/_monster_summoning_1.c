@@ -12,12 +12,15 @@ create() {
     set_spell_name("monster summoning 1");
     set_spell_level(([ "mage" : 1, "bard" : 1, "cleric" : 1, "paladin":1 ]));
     set_syntax("cast CLASS monster summoning 1");
+    set_spell_sphere("conjuration_summoning");
+    set_description("This spell will summon astral defenders of equivalent power to protect the caster. They will react aggressively to anyone attempting to harm the caster. They will fight till slain, and when the casting time is up, the monsters will vanish.");
+
 }
 
 
 int preSpell()
 {
-    if(present(caster->query_name()+" monster 2",place))
+    if(present(caster->query_name()+"_monster 3",place))
     {
         tell_object(caster,"There are already too many monsters.");
         return 0;
@@ -38,7 +41,7 @@ int spell_effect(int prof)
         return;
     }
 
-    num = roll_dice(2,4);
+    num = 4+roll_dice(1,4);
 
     for(i=0;i<num;i++)
     {
@@ -52,12 +55,12 @@ int spell_effect(int prof)
         monster->set_mlevel("fighter",clevel);
         monster->set_guild_level("fighter",clevel);
         monster->set_attacks_num(2);
-        monster->set_p_desc(query_spell_level(spell_type));
-        monster->set_hp(query_spell_level(spell_type)*10+clevel);
+        monster->set_p_desc(query_spell_level(spell_type)-1);
+        monster->set_hp(query_spell_level(spell_type)*12+clevel*2);
         monster->set_property("spelled",({TO}));
         monster->set_property("spell_creature",TO);
         monster->set_property("spell",TO);
-        monster->add_id("summoned monster","miniature monster",caster->query_name()+" monster");
+        monster->add_id(caster->query_true_name()+"_monster");
         monster->set_stats("strength",14);
         monster->set_stats("dexterity",14);
         monster->set_stats("constitution",14);

@@ -10,7 +10,7 @@ int duration;
 void check();
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("animate plants");
@@ -27,9 +27,9 @@ void create()
 }
 
 
-int preSpell() 
+int preSpell()
 {
-    if(place->query_property("no sticks")) 
+    if(place->query_property("no sticks"))
     {
         tell_object(caster,"You can't seem to find any plants here at all.");
         return 0;
@@ -45,13 +45,13 @@ int preSpell()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
    return "%^GREEN%^"+caster->QCN+" waves "+caster->QP+" hand in a slow arc towards the ground and the foilage begins to come alive!";
 }
 
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     object plant;
     int num,i;
@@ -62,15 +62,13 @@ spell_effect(int prof)
         return;
     }
 
-    num = (clevel/4) + random(3);
-    if(num < 3) { num = 3; }
-    if(num > 12) { num = 12; }
+    num = 8;
 
     for(i=0;i<num;i++)
     {
         plant = new("/d/magic/mon/plant.c");
         if(!objectp(plant)) { continue; }
-        
+
         plants += ({ plant });
 
         plant->set("aggressive",1);
@@ -78,11 +76,11 @@ spell_effect(int prof)
         plant->set_mlevel("fighter",clevel);
         plant->set_guild_level("fighter",clevel);
         plant->set_attacks_num(0);
-        plant->set_hp(clevel+30);
+        plant->set_hp(clevel*3+30);
         plant->set_property("spelled",({TO}));
         plant->set_property("spell_creature",TO);
         plant->set_property("spell",TO);
-        plant->add_id("summoned monster","miniature plant");        
+        plant->add_id("summoned monster","miniature plant");
         plant->set_short("miniature plant");
         plant->set_stats("strength",14);
         plant->set_stats("dexterity",14);
@@ -125,7 +123,7 @@ void check()
     {
         if(!objectp(plant = plants[i])) { continue; }
 
-        if(!present(plant,place)) 
+        if(!present(plant,place))
         {
             tell_room(environment(plant),"%^YELLOW%^With its creator gone, "+plant->QCN+" turns back into a piece of regular foliage.");
             plant->move("/d/shadowgate/void");
@@ -140,9 +138,9 @@ void check()
 
         for(j=0;j<sizeof(attackers);j++)
         {
-            if(!objectp(att = attackers[j])) { continue; }            
+            if(!objectp(att = attackers[j])) { continue; }
             if(member_array(att,(object*)plant->query_attackers()) != -1) { continue; }
-            
+
             plant->kill_ob(att,0);
         }
     }
@@ -160,13 +158,13 @@ void dest_effect()
         removeSpellFromCaster();
         tell_object(caster,"%^GREEN%^Your animated plants loose their magical energy and turn back into ordinary foliage.");
     }
-    
+
     if(sizeof(plants))
     {
         for(i=0;i<sizeof(plants);i++)
         {
             if(!objectp(plants[i])) { continue; }
-            
+
             tell_room(environment(plants[i]),"%^BOLD%^%^GREEN%^"+plants[i]->QCN+" stops moving and changes back into a piece of ordinary foliage.");
             plants[i]->move("/d/shadowgate/void");
             plants[i]->remove();
@@ -176,4 +174,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

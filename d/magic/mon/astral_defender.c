@@ -8,7 +8,7 @@ int create()
 {
     ::create();
 	set_name("defender");
-    set_id(({"astral defender","monster","defender"}));
+    set_id(({"astral defender","monster","defender","prism","floating prism"}));
     set_race("construct");
 	set_gender("neuter");
 	set_short("%^RESET%^%^CYAN%^fl%^BOLD%^oa%^RESET%^%^CYAN%^t%^BOLD%^i%^RESET%^%^CYAN%^ng pr%^BOLD%^i%^RESET%^%^CYAN%^sm%^WHITE%^");
