@@ -295,12 +295,12 @@ void set_weapons()
         }
         if(TO->is_class("ranger"))
         {
-            ob = new("/d/islands/common/obj/obj-old-nienne/rdblade");
+            ob = new("/d/islands/common/obj/rdblade");
             ob->set_property("monsterweapon",1);
             ob->set_size((int)TO->query_size());
             ob->move(TO);
             TO->force_me("wield sword");
-            ob = new("/d/islands/common/obj/obj-old-nienne/rdblade");
+            ob = new("/d/islands/common/obj/rdblade");
             ob->set_property("monsterweapon",1);
             ob->set_size((int)TO->query_size());
             ob->move(TO);
@@ -309,7 +309,7 @@ void set_weapons()
         }
         if(TO->is_class("fighter"))
         {
-            ob = new("/d/islands/common/obj/obj-old-nienne/rdblade");
+            ob = new("/d/islands/common/obj/rdblade");
             ob->set_property("monsterweapon",1);
             ob->set_size((int)TO->query_size());
             ob->move(TO);
@@ -318,7 +318,7 @@ void set_weapons()
         }
         if(TO->is_class("antipaladin"))
         {
-            ob = new("/d/islands/common/obj/obj-old-nienne/rdblade");
+            ob = new("/d/islands/common/obj/rdblade");
             ob->set_property("monsterweapon",1);
             ob->set_size((int)TO->query_size());
             ob->move(TO);
@@ -466,12 +466,12 @@ void set_inventory(string level)
     string style_one,style_two,style,*tmp=({}),*equipment=({});
     object ob;
 
-    HIGH_G = ({ "/d/islands/common/obj/obj-old-nienne/boots",
+    HIGH_G = ({ "/d/islands/common/obj/boots",
                 "/realms/loki/ogres/obj/bloodrobe",
                 "/d/antioch/ruins/obj/ruby_circlet",
                 "/d/dagger/derro/obj/moblemanspants",
                 "/d/deku/armors/ring_p",
-                "/d/islands/common/obj/obj-old-nienne/shimmeringcape2",
+                "/d/islands/common/obj/shimmeringcape2",
                 "/d/antioch/ruins/obj/neutralgloves",
                 "/d/azha/obj/gmr_ring",});
     HIGH_H = ({ "/d/common/obj/armour/fullplate",
