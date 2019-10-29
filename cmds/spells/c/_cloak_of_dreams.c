@@ -35,7 +35,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BLUE%^You feel you're surrounded by dreams.");
     caster->set_property("cloak of dreams",1);
     caster->set_property("spelled", ({TO}) );
-    caster->set_property("added short",({"%^RESET%^%^BLUE%^ (in a dreamy visage)%^RESET%^"}));
+    caster->set_property("added short",({"%^RESET%^%^BLUE%^ (dreamy visage)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
     call_out("dest_effect",duration);
@@ -66,7 +66,7 @@ void execute_attack()
             continue;
         tell_room(room,"%^BLUE%^"+attackers[i]->QCN+" falls asleep looking at "+caster->QCN+".%^RESET%^",({attackers[i]}));
         tell_object(attackers[i],"%^BLUE%^You fall asleep looking at a dreamy visage of "+caster->QCN+".%^RESET%^");
-        attackers[i]->set_asleep(clevel/2, "You are asleep!");
+        attackers[i]->set_asleep(6, "You are asleep!");
     }
     room->addObjectToCombatCycle(TO,1);
 }
@@ -75,7 +75,7 @@ void dest_effect(){
     if(objectp(caster)){
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^The visage around "+caster->QCN+" retreats.%^RESET%^");
         caster->remove_property("cloak of dreams");
-        caster->remove_property_value("added short",({"%^RESET%^%^BLUE%^ (in dreamy visage)%^RESET%^"}));
+        caster->remove_property_value("added short",({"%^RESET%^%^BLUE%^ (dreamy visage)%^RESET%^"}));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
