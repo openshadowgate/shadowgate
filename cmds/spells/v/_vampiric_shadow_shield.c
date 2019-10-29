@@ -3,6 +3,7 @@
 inherit SPELL;
 
 int flag;
+int lastattack;
 
 void create()
 {
@@ -44,6 +45,7 @@ void spell_effect(int prof)
     caster->set_property("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
+    execute_attack();
     call_out("dest_effect",duration);
 }
 
@@ -62,11 +64,12 @@ void execute_attack()
     attackers = caster->query_attackers();
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
-    if(!sizeof(attackers))
-    {
-        room->addObjectToCombatCycle(TO,1);
+    if(lastattack == time())
         return;
-    }
+    room->addObjectToCombatCycle(TO,1);
+    lastattack = time();
+    if(!sizeof(attackers))
+        return;
     for(i=0;i<sizeof(attackers)&&i<8;i++)
     {
         if(do_save(attackers[i],0))
@@ -79,7 +82,6 @@ void execute_attack()
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
         caster->add_hp(sdamage/4);
     }
-    room->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect(){

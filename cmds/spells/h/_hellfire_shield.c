@@ -5,6 +5,7 @@
 inherit SPELL;
 
 int flag;
+int lastattack;
 
 void create(){
     ::create();
@@ -77,10 +78,12 @@ void execute_attack(){
         tell_room(place,"%^RESET%^%^RED%^"+caster->QCN+"'s blazing shield pulses and surges with radiant energy!",caster);
         tell_object(caster,"%^RESET%^%^RED%^Your blazing shield pulses and surges with radiant energy!");
     }
-    if(!sizeof(attackers)){
-        place->addObjectToCombatCycle(TO,1);
+    if(lastattack == time())
         return;
-    }
+    place->addObjectToCombatCycle(TO,1);
+    lastattack = time();
+    if(!sizeof(attackers))
+        return;
     define_base_damage(0);//lazy re-roll
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i])) { continue; }
@@ -91,17 +94,13 @@ void execute_attack(){
         if(attacks < 0)     { attacks = 0; }
         if(hits < attacks)  { hits = attacks; }
         for(j=0;j<max;j++){
-            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/8,"untyped");
         }
     }
     if(attacks == 0){
        dest_effect();
        return;
     }
-//This spell didn't end when it was out of attacks
-//like it was supposed to.  Adding the above to see
-//if that will do it.  ~Circe~ 6/2/08
-    place->addObjectToCombatCycle(TO,1);
     return;
 }
 

@@ -4,6 +4,7 @@
 inherit SPELL;
 
 int flag;
+int lastattack;
 
 void create(){
     ::create();
@@ -52,9 +53,10 @@ void spell_effect(int prof){
     caster->set_property("fire shield",1);
     caster->set_property("spelled", ({TO}) );
     caster->add_ac_bonus(2);
-    caster->add_property("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
+    caster->set_property("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
     addSpellToCaster();
     spell_successful();
+    execute_attack();
     call_out("dest_effect",duration);
 }
 
@@ -71,10 +73,12 @@ void execute_attack(){
     attackers = caster->query_attackers();
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
-    if(!sizeof(attackers)){
-        room->addObjectToCombatCycle(TO,1);
+    if(lastattack == time())
         return;
-    }
+    room->addObjectToCombatCycle(TO,1);
+    lastattack = time();
+    if(!sizeof(attackers))
+        return;
     for(i=0;i<sizeof(attackers);i++){
         if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
         tell_room(room,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" is burned by the blistering "
@@ -87,7 +91,6 @@ void execute_attack(){
             ""+caster->QCN+"!");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");
     }
-    room->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect(){
