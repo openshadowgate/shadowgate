@@ -13,8 +13,7 @@ void create() {
     set_syntax("cast CLASS spell turning");
     set_description("The most skilled of abjurationists can use such a spell to raise a protective ward around themselves"
 ". While it holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of "
-"whether they are hostile or friendly. The ward will not reflect splash damage or AOE, but only direct-targetted spells. "
-"This spell does not stack with the 'reflection' or 'spell reflection' feats.");
+"whether they are hostile or friendly. The ward will not reflect splash damage or AOE, but only direct-targetted spells.");
     set_verbal_comp();
     set_somatic_comp();
      // school specific mage spell
@@ -25,7 +24,8 @@ void create() {
 }
 
 int preSpell(){
-   if(member_array("spell reflection",(string*)caster->query_temporary_feats()) != -1) {
+    if(caster->query_property("spellturning"))
+    {
       tell_object(CASTER,"You are already under the influence of such an effect.");
       return 0;
    }
@@ -48,10 +48,7 @@ void spell_effect(int prof) {
       tell_room(place,"%^BOLD%^%^MAGENTA%^A glyph appears in a bright flare of light before "+caster->QCN+", and then "
 "vanishes!%^RESET%^",caster);
     }
-    if(member_array("spell reflection",(string*)caster->query_temporary_feats()) == -1) {
-      caster->add_temporary_feat("spell reflection");
-      feattracker = 1;
-    }
+    caster->set_property("spellturning",clevel/2+5);
     call_out("dest_effect", 1800 + (clevel * 10));
     spell_successful();
     addSpellToCaster();
@@ -59,9 +56,10 @@ void spell_effect(int prof) {
 
 void dest_effect(){
     int i;
-    if(objectp(CASTER)) {
+    if(objectp(CASTER))
+    {
       tell_object(caster,"%^MAGENTA%^You feel the protective spell ward fade from you.%^RESET%^");
-      if(feattracker == 1) caster->remove_temporary_feat("spell reflection");
+      caster->set_property("spellturning",-(clevel/2+5));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

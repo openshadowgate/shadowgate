@@ -1,10 +1,11 @@
 #include <spell.h>
+#include <magic.h>
 inherit SPELL;
 
 void create()
 {
     ::create();
-    set_spell_name("ruin");
+    set_spell_name("spellscar");
     set_spell_level(([ "cleric" : 8, "mage" : 8 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS spellscar");
@@ -14,7 +15,7 @@ void create()
 
 int preSpell()
 {
-    if(ENV(caster)->query_property("wild magic"))
+    if(place->query_property("wild magic"))
     {
       tell_object(caster,"You feel your attempt to cast the spell repelled.");
       return 0;
@@ -22,24 +23,27 @@ int preSpell()
    return 1;
 }
 
-int spell_effect()
+void spell_effect()
 {
     tell_room(place,"%^RESET%^%^WHITE%^All colors in the area suddenly turn mute.%^RESET%^");
 
-    EETO->set_property("wild magic", clevel);
-    EETO->set_property("wild magic affect", ({"random", "random level", 0}));
+    place->set_property("wild magic", clevel);
+    place->set_property("wild magic affect", ({"random", "random level", 0}));
 
     spell_successful();
     caster->set_property("spelled", ({TO}) );
     addSpellToCaster();
 
-    call_out("dest_effect",30 + (clevel*10));
+    call_out("dest_effect",(clevel/4+5)*ROUND_LENGTH);
 
-    return 1;
+    call_out("notify_effect",ROUND_LENGTH*2);
 }
 
-void execute_attack()
+#define RND_COLORS ({"%^CYAN%^","%^MAGENTA%^","%^ORANGE%^","%^BLUE%^"})
+
+void notify_effect()
 {
+    string color = RND_COLORS[random(sizeof(RND_COLORS))];
     if(!objectp(caster))
     {
         dest_effect();
@@ -50,16 +54,21 @@ void execute_attack()
         dest_effect();
         return;
     }
+    if(!place->query_property("wild magic"))
+    {
+        dest_effect();
+        return;
+    }
     if(!random(3))
-        message("info", "%^RESET%^%^CYAN%^The colors suddenly turn %^BOLD%^%^CYAN%^v%^RESET%^%^CYAN%^i%^BOLD%^%^CYAN%^b%^RESET%^%^CYAN%^r%^BOLD%^%^CYAN%^a%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^t%^RESET%^%^CYAN%^ and %^BOLD%^%^CYAN%^saturat%^RESET%^%^CYAN%^e%^BOLD%^%^CYAN%^d%^RESET%^%^CYAN%^!", nearbyRoom(place,2));
-    environment(CASTER)->addObjectToCombatCycle(TO,1);
+        message("info", "%^RESET%^"+color+"The colors suddenly turn %^BOLD%^"+color+"v%^RESET%^"+color+"i%^BOLD%^"+color+"b%^RESET%^"+color+"r%^BOLD%^"+color+"a%^RESET%^"+color+"n%^BOLD%^"+color+"t%^RESET%^"+color+" and %^BOLD%^"+color+"saturat%^RESET%^"+color+"e%^BOLD%^"+color+"d%^RESET%^"+color+"!", nearbyRoom(place,2));
+    call_out("notify_effect",ROUND_LENGTH*2);
 }
 
 void dest_effect()
 {
     if(objectp(place))
     {
-        tell_room(place,"%^RESET%^%^WHITE%^The area regains its colors");
+        tell_room(place,"%^BOLD%^%^WHITE%^The area regains its colors");
         place->remove_property("wild magic");
         place->remove_property("wild magic affect");
     }

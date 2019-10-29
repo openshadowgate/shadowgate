@@ -458,6 +458,7 @@ int check_reflection()
 
     turnperc += (int)target->query_property("spellturning");
     if(turnperc < 0) turnperc = 0;
+    if(turnperc > 85) turnperc = 85;
     if(!turnperc) return 0;
 
     if(turnperc > roll_dice(1,100))
@@ -1503,6 +1504,15 @@ void check_fizzle(object ob) {
         return;
     }
 
+    if (clevel < place->query_property("antimagic field"))
+    {
+        tell_object(caster,"%^CYAN%^Your "+whatsit+" fizzles harmlessly.");
+        tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" fizzles harmlessly.");
+        caster->removeAdminBlock();
+        TO->remove();
+        return;
+    }
+
     prof = TO->calculate_prof_state();
 
 /*
@@ -1682,7 +1692,8 @@ varargs int do_spell_damage( object victim, string hit_limb, int wound,string da
 
     if(!(spell_type=="warlock"||
          spell_type=="monk"))
-        if((int)victim->query_property("spell invulnerability")>query_spell_level(spell_type))
+        if(victim->query_property("spell invulnerability")>query_spell_level(spell_type) ||
+           place->query_property("antimagic field")>clevel)
         {
             tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
             tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
@@ -2485,7 +2496,7 @@ int evade_splash(object splashtarg) {
 //allowing users of Evade Burst to avoid damage per spell and class abilities ~Circe~ 10/26/19
    if(sizeof(worn) && !splashtarg->query_property("evadeburst")) return 0; //wearing something too heavy!
    if(splashtarg->query_property("evadeburst")) evbonus += splashtarg->query_property("evadeburst");
-       
+
    if(!do_save(splashtarg,evbonus)) return 0;
 
    tell_object(splashtarg,"%^BOLD%^%^WHITE%^You scramble out of the spell's path!%^RESET%^");
