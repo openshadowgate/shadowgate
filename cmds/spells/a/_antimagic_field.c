@@ -10,7 +10,7 @@ void create()
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS antimagic field");
     set_damage_desc("triggers wild magic in the area");
-    set_description("An invisible barrier is placed in the area. Any spell cast must be cast at a greater strength or it fizzle out. Any ongoing spells will cause no damage if their power is lower that of the caster. ");
+    set_description("An invisible barrier is placed in the area. Any spell or spell-like ability cast must be cast at a greater strength or it fizzle out. Any ongoing spells will cause no damage if their power is lower that of the caster. ");
 }
 
 int preSpell()
