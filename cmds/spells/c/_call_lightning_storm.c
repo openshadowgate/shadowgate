@@ -45,14 +45,14 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    int duration; 
+    int duration;
     duration = (ROUND_LENGTH * 10) * clevel; // Might need tweaked -Ares
 
     tell_object(caster,"%^YELLOW%^Your eyes suddenly snap open wide as you feel the cr%^RESET%^a%^BOLD%^c%^YELLOW%^k%^RESET%^%^YELLOW%^le "
         "of static energy fill your body!");
     tell_room(place,"%^YELLOW%^"+caster->QCN+"'s eyes suddenly snap open wide and you can see electricity "
         "dancing dangerously in them!",caster);
-    
+
     caster->set_property("spelled", ({TO}));
     caster->set_property("call lightning storm",1);
     caster->set_property("added short",({"%^YELLOW%^ (crackling with electrical energy)%^RESET%^"}));
@@ -72,7 +72,7 @@ void execute_attack()
     ::execute_attack();
     if(!objectp(caster))                        { dest_effect(); return; }
     if(strikes > clevel)                        { dest_effect(); return; } // one lightning strike per level
-    
+
     if(!random(15))
     {
         tell_room(place,"%^YELLOW%^Electricity pops and crackles, dancing in the air around "+caster->QCN+"!",caster);
@@ -92,14 +92,11 @@ void execute_attack()
         targ = attackers[random(sizeof(attackers))];
         i++;
     }
+    place->addObjectToCombatCycle(TO,1);
     if(!objectp(targ))
-    {
-        place->addObjectToCombatCycle(TO,1);
         return;
-    }
 
-    define_base_damage(-9);
-    
+    damage = sdamage;
     if(!do_save(targ))
     {
         tell_object(caster,"%^BOLD%^%^YELLOW%^A bolt of electricity leaps out from your body and zaps "+targ->QCN+" painfully!");
@@ -119,7 +116,6 @@ void execute_attack()
         damage_targ(targ,targ->return_target_limb(),damage/2,"electricity");
     }
 
-    place->addObjectToCombatCycle(TO,1);
     return;
 }
 
@@ -127,13 +123,13 @@ void execute_attack()
 void dest_effect()
 {
     if(objectp(caster))
-    { 
+    {
         tell_object(caster,"%^RESET%^%^BOLD%^With a final loud pop, the electrical energy coursing through your "
             "body dissipates in an instant.");
         tell_room(environment(caster),"%^RESET%^%^BOLD%^With a final loud pop, the electrical energy coursing through "
-            ""+caster->QCN+"'s body dissipates in an instant.",caster);        
+            ""+caster->QCN+"'s body dissipates in an instant.",caster);
         caster->remove_property("call lightning storm");
-	    caster->remove_property_value("added short",({"%^YELLOW%^ (crackling with electrical energy)%^RESET%^"}));    
+	    caster->remove_property_value("added short",({"%^YELLOW%^ (crackling with electrical energy)%^RESET%^"}));
     }
     ::dest_effect();
     if(objectp(TO)) { TO->remove(); }
