@@ -47,8 +47,12 @@ void spell_effect(int prof){
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i])) continue;
 
-        if((string)attackers[i]->query_race() == "undead" || attackers[i]->query_property("undead")) dmg = sdamage * 5/4;
-        else dmg = sdamage;
+        if(attackers[i]->is_vampire())
+            dmg = sdamage * 2;
+        else if((string)attackers[i]->query_race() == "undead" || attackers[i]->query_property("undead"))
+            dmg = sdamage * 5/4;
+        else
+            dmg = sdamage;
 
         if(do_save(attackers[i],0)) {
           if(evade_splash(attackers[i])) continue;

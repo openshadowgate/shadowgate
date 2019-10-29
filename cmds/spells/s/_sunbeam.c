@@ -35,8 +35,10 @@ void spell_effect(int prof) {
         return;
     }
 
-    if(target->query_property("undead") || target->query_race("undead"))
-        sdamage = (sdamage * 5) / 4;
+    if(target->is_vampire())
+        sdamage *= 2;
+    else if(target->is_undead())
+        sdamage *= 5/4;
 
     target_limb = target->return_target_limb();
 
