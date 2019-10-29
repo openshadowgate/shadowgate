@@ -13,7 +13,7 @@ void create()
 {
     ::create();
     set_spell_name("poison");
-    set_spell_level(([ "cleric" : 4, "druid" : 3, "paladin" : 4, "assassin" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "druid" : 3, "paladin" : 4, "assassin" : 1 ]));
     set_spell_sphere("combat");
     set_syntax("cast CLASS poison on TARGET|WEAPON");
     set_description("With this spell you create a natural poison and either envenom your target with it, or apply it to a weapon in your possession.");

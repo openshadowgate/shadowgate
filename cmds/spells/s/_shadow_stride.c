@@ -3,13 +3,13 @@
 #include <spell.h>
 inherit SPELL;
 
-#define DELAY 180 //3 min delay 
+#define DELAY 180 //3 min delay
 
 void create() {
     ::create();
     set_author("nienne");
     set_spell_name("shadow stride");
-    set_spell_level(([ "innate" : 1, "monk" : 7]));
+    set_spell_level(([ "innate" : 1, "monk" : 7, "assassin" : 1]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS shadow stride on <direction>");
     set_description("This spell allows the caster to step into the nearest shadow, "
@@ -60,7 +60,7 @@ void spell_effect(int prof) {
     }
     tell_object(caster,"%^RESET%^%^BLUE%^You slip just for a second into the shadows, "
 "and use their concealment to stride towards the "+arg+" exit.%^RESET%^");
-    if(!caster->query_invis()){   
+    if(!caster->query_invis()){
        tell_room(place,"%^RESET%^%^BLUE%^"+caster->QCN+" glances over the shadows "
 "towards the "+arg+" exit just before "+caster->QS+" vanishes!%^RESET%^",caster);
     }

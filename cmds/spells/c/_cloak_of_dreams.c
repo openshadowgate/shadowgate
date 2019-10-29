@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("cloak of dreams");
-    set_spell_level(([ "mage" : 6, "bard" : 5]));
+    set_spell_level(([ "mage" : 6, "bard" : 5, "assassin" : 3]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS cloak of dreams");
     set_damage_desc("perpetually puts present livings to sleep");

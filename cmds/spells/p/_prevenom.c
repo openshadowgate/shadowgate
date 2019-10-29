@@ -11,7 +11,7 @@ string myshort, mypname, pname;
 void create() {
     ::create();
     set_spell_name("prevenom");
-    set_spell_level(([ "psywarrior" : 1, "assassin" : 1 ]));
+    set_spell_level(([ "psywarrior" : 1, ]));
     set_spell_sphere("combat");
     set_syntax("cast CLASS prevenom on <weapon>");
     set_description("Upon using this power, the psionic character manifests "

@@ -11,7 +11,7 @@ void create(){
     ::create();
     set_author("nienne");
     set_spell_name("shadow travel");
-    set_spell_level(([ "innate" : 1 ]));
+    set_spell_level(([ "innate" : 1, "assassin": 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS shadow travel to <location>");
     set_description("Through this spell the caster attunes themselves with a nearby shadow and steps into it, allowing "
@@ -67,7 +67,7 @@ void spell_effect(int prof){
         dest_effect();
         return;
     }
-    if(endplace && 
+    if(endplace &&
       (endplace->query_property("teleport proof") ||
       place->query_property("teleport proof") ||
       !endplace->is_room())){

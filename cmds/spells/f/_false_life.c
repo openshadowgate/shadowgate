@@ -8,7 +8,7 @@ int bonus;
 void create() {
     ::create();
     set_spell_name("false life");
-    set_spell_level(([ "mage" : 2, "bard" : 2 ]));
+    set_spell_level(([ "mage" : 2, "bard" : 2 , "assassin" : 3]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS false life [on TARGET]");
     set_damage_desc("clevel*2 hitpoints bonus");

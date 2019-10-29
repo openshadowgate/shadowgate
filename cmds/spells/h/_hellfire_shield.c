@@ -50,12 +50,6 @@ void spell_effect(int prof){
     return;
 }
 
-// Works differently from the book version since I didn't want it to be another wall of fire
-// The blades reach out and touch anybody that's attacking the caster, hitting them a max
-// amount of times each equal to 1/10th of the caster's level until a total of caster
-// level attacks have been executed.  It will stop if it runs out of attacks or if no targets
-// are left who haven't already been hit.
-
 void execute_attack(){
     object *attackers = ({});
     int attacks,max,damage,hits,i,j;
@@ -89,13 +83,7 @@ void execute_attack(){
         if(!objectp(attackers[i])) { continue; }
         tell_object(caster,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to you, and your hellish shield burns "+attackers[i]->QO+" horribly!");
         tell_room(place,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to "+caster->QCN+", and the hellish shield burns "+attackers[i]->QO+" horribly!",caster);
-        hits = (max / 2) + (roll_dice(1,(max/2))); // hit at least half of the max times
-        attacks -= hits;
-        if(attacks < 0)     { attacks = 0; }
-        if(hits < attacks)  { hits = attacks; }
-        for(j=0;j<max;j++){
-            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/8,"untyped");
-        }
+        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
     }
     if(attacks == 0){
        dest_effect();

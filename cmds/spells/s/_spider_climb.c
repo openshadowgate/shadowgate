@@ -4,7 +4,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("spider climb");
-    set_spell_level(([ "mage" : 2,"druid" : 2, "spider climb" : 2 ]));
+    set_spell_level(([ "mage" : 2,"druid" : 2, "assassin" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS spider climb");
     set_description("A caster willing to swallow both a drop of bitumen and a live spider, can use this to draw upon the "

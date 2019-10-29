@@ -7,6 +7,7 @@
 inherit SPELL;
 
 int flag;
+int lastattack;
 
 void create()
 {
@@ -42,7 +43,7 @@ void spell_effect(int prof)
         define_base_damage(-6);
     tell_object(caster, "%^RED%^You focus your energies so that your body will repair itself!%^RESET%^");
     if(FEATS_D->usable_feat(caster,"metabolic perfection"))
-        sdamage*=4/3;
+        sdamage*=5/4;
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         caster->set_property("spelled", ({TO}) );
     spell_successful();
@@ -65,6 +66,10 @@ void execute_attack()
         return;
     }
     place = environment(caster); // In the case caster moves
+    if(lastattack == time())
+        return;
+    place->addObjectToCombatCycle(TO,1);
+    lastattack = time();
 
     if((int)caster->query_hp() < (int)caster->query_max_hp())
     {
@@ -72,7 +77,6 @@ void execute_attack()
         tell_room(place,"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
         damage_targ(caster,caster->return_target_limb(),-sdamage,"positive energy");
     }
-    place->addObjectToCombatCycle(TO,1);
 }
 
 
