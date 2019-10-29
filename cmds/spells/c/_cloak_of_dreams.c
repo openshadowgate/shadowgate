@@ -54,6 +54,7 @@ void execute_attack()
     }
     room      = environment(caster);
     attackers = all_inventory(room);
+    attackers -= ({caster});
     attackers -= caster->query_followers();
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
