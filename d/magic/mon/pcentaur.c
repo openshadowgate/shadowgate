@@ -8,7 +8,7 @@ void create(){
    ::create();
 
    set_name("phantom centaur");
-   set_short("Shimmering phantom centaur");
+   set_short("%^RESET%^%^RED%^Shimmering phantom centaur");
    set_id(({"centaur","phantom","phantom centaur"}));
    set("not living",1);
 
@@ -17,7 +17,7 @@ void create(){
    set_long(
 @OLI
    %^CYAN%^This shimmering form is a centaur. Translucent in some form, it seems very real
-in another. 
+in another.
 OLI
    );
    set_race("centaur");
@@ -42,4 +42,3 @@ void die(object ob){
    remove();
    return;
 }
-

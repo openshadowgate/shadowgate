@@ -8,14 +8,14 @@ void create(){
    ::create();
 
    set_name("phantom bat");
-   set_short("Shimmering phantom bat");
+   set_short("%^RESET%^%^RED%^Shimmering phantom bat");
    set_id(({"bat","phantom","phantom bat"}));
    set("not living",1);
 
    set_long(
 @OLI
    %^CYAN%^This shimmering form is a large bat. Translucent in some form, it seems very real
-in another. 
+in another.
 OLI
    );
    set_race("bat");
@@ -41,4 +41,3 @@ void die(object ob){
    remove();
    return;
 }
-

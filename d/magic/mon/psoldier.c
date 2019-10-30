@@ -8,7 +8,7 @@ void create(){
    ::create();
 
    set_name("phantom soldier");
-   set_short("Shimmering phantom soldier");
+   set_short("%^RESET%^%^RED%^Shimmering phantom soldier");
    set("not living",1);
 
    set_id(({"soldier","phantom","phantom soldier"}));
@@ -34,7 +34,7 @@ void die(object ob){
    int i;
    tell_room(ETO,"%^RED%^The phantom soldier shimmers and is dispelled.");
 // added by *Styx* 10/12/02 to remove swords when they dispel
-   for(i=0;i<sizeof(all_inventory(TO));i++) 
+   for(i=0;i<sizeof(all_inventory(TO));i++)
 	all_inventory(TO)[i]->remove();
    remove();
    return;
