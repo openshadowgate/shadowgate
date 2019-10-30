@@ -42,10 +42,6 @@ int cmd_hide_in_shadows()
      write("You can't hide while you're riding.");
      return 1;
    }
-   if((int)environment(TP)->query_light() > 3) {
-      write("It is too bright, there are no shadows.");
-      return 1;
-   }
    if(myskill >= 20) {
       write("You attempt to hide in the shadows.");
       TP->set_hidden(1);

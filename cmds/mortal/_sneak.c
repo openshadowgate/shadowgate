@@ -96,12 +96,6 @@ int cmd_sneak(string str) {
    }
    write("You attempt to move unnoticed into the next room.");
    move_me(str);
-   if(environment(TP)->query_light()>3) {
-      write("It is too bright. You can't find shadows.");
-         if(ob = present("TSR80",TP)) ob->dest_fun();
-      if(TP->query_hidden()) { TP->set_hidden(0); }
-      return 1;
-   }
    seteuid(getuid());
    if(!objectp(ob=present("TSR80",TP)))
      ob= new("/cmds/mortal/hide.c");
