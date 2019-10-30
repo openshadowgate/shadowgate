@@ -69,7 +69,7 @@ void spell_effect(int prof) {
       return;
    }
    detector->set_detect_power(power);
-   duration = 8 * (int)CLEVEL;
+   duration = 6 * clevel * ROUND_LENGTH;
    call_out("dest_effect", duration);
    addSpellToCaster();
    return;

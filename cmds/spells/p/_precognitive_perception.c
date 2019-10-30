@@ -8,7 +8,7 @@ int bonus;
 void create()
 {
     ::create();
-    set_spell_name("precognitivi perception");
+    set_spell_name("precognitive perception");
     set_spell_level(([ "mage" : 4, "bard" : 4 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS precognitive perception on TARGET");
