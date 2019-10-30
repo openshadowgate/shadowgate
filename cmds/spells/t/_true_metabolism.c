@@ -66,8 +66,10 @@ void execute_attack()
         return;
     }
     place = environment(caster); // In the case caster moves
-    if(lastattack == time())
+    if(lastattack == time()){
+        place->addObjectToCombatCycle(TO,1);
         return;
+    }
     place->addObjectToCombatCycle(TO,1);
     lastattack = time();
 
