@@ -12,7 +12,7 @@ void create()
     set_spell_level(([ "mage" : 6, "bard" : 6 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS impenetrable veil on TARGET");
-    set_damage_desc("half of clevel stealth skill");
+    set_damage_desc("half of clevel to stealth checks on sneaking");
     set_description("You raise a shadowy veil around your target, making it harder to detect them.");
     set_arg_needed();
 	set_helpful_spell(1);
@@ -21,7 +21,7 @@ void create()
 int preSpell()
 {
     if (!target) target = caster;
-    if(target->query_property("impenetrable veil"))
+    if(target->query_property("chameleoned"))
     {
         tell_object(caster,"The target is already under the influence of similar effect");
     }
@@ -45,21 +45,18 @@ spell_effect()
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" with a swift chant raises a wall of shadows around "+target->QCN+".%^RESET%^");
 
     bonus=clevel/2+1;
-    target->add_skill_bonus("stealth",bonus);
     target->set_property("spelled", ({TO}) );
-    target->set_property("impenetrable veil",1);
+    target->set_property("chameleoned",clevel/2);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*(clevel/8+1));
 }
 
 void dest_effect()
 {
     if(objectp(target))
     {
-        target->add_skill_bonus("stealth",-bonus);
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target,"%^MAGENTA%^The veil granted fades.%^RESET%^");
-        target->remove_property("impenetrable veil");
+        target->remove_property("chameleoned");
     }
     ::dest_effect();
     if(objectp(TO))
