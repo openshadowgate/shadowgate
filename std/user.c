@@ -1750,7 +1750,7 @@ void heart_beat()
         if(FEATS_D->usable_feat(TO,"undead graft") &&
            !TO->query_property("stab_resilience"))
         {
-            TO->set_property("stab_resilience",(TO->query_level()-1)/20+1);
+            TO->set_property("stab_resilience",(TO->query_level()-1)/20);
         }
         if(is_vampire())
             if(TO->is_in_sunlight())
