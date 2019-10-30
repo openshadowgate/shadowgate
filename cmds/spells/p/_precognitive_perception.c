@@ -49,7 +49,7 @@ spell_effect()
     target->set_property("spelled", ({TO}) );
     target->set_property("precognitive perception",1);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*clevel*3);
+    call_out("dest_effect",ROUND_LENGTH*(clevel/8+1));
 }
 
 void dest_effect()
