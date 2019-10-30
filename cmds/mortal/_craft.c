@@ -341,6 +341,11 @@ int cmd_craft(string str)
 
     if(command == "enchant")
     {
+        if(!ETP->is_lab())
+        {
+            tell_object(TP,"You must be in a laboratory to enchant items.");
+            return 1;
+        }
         if(!check_able_to_craft(TP)) return;
         if(FEATS_D->usable_feat(TP,"craft magical equipment"))
         {
@@ -349,8 +354,7 @@ int cmd_craft(string str)
         }
         else
         {
-            tell_object(TP,"You need either the feat craft magical equipment, or the feat imbue item in "
-            "order to enchant items.");
+            tell_object(TP,"You need the feat craft magical equipment in order to enchant items.");
             return 1;
         }
     }
