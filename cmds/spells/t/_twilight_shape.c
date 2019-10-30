@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "innate" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS twilight shape on bat|wolf");
-    set_description("With this spell a vampire can change her body into a bat or a wolf. Bat is a tiny flying creature incapable of combat, while wolf form provides a vampire with the same strenghts as druidic wolf form.
+    set_description("With this spell a vampire can change her body into a bat or a wolf. Bat is a tiny flying creature incapable of combat, while wolf form provides a vampire with the same strenghts as druidic wolf form. In addition, bat form can use <wing> command.
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ You can set alternative description, speech string and adjective for these forms.");
     set_verbal_comp();

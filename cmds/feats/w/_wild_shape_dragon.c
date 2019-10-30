@@ -12,7 +12,7 @@ void create() {
     feat_name("wild shape dragon");
     feat_prereq("Primeval Champion L1");
     feat_syntax("shapeshift dragon");
-    feat_desc("Having this feat will allow the character access to the shapeshift feat. The shapeshift feat is used to change into animal form. <shapeshift dragon> will transform the user into a young dragon. Despite the young age of the dragon that the character can change into, it is still a powerful predator. The iron-hard scales that cover the character's skin will increase his or her resistance to damage and the dragon's powerful muscles will make the character much stronger.");
+    feat_desc("Having this feat will allow the character access to the shapeshift feat. The shapeshift feat is used to change into animal form. <shapeshift dragon> will transform the user into a young dragon. Despite the young age of the dragon that the character can change into, it is still a powerful predator. The iron-hard scales that cover the character's skin will increase his or her resistance to damage and the dragon's powerful muscles will make the character much stronger. In addition, dragon form can use <wing> command.");
     permanent(1);
     allow_blind(1);
 }
@@ -51,4 +51,3 @@ void dest_effect() {
     remove_feat(TO);
     return;
 }
-
