@@ -1762,7 +1762,7 @@ void heart_beat()
                 }
                 else
                 {
-                    TO->cause_typed_damage(TO,"torso",(query_max_hp()/6)+1,"fire");
+                    TO->cause_typed_damage(TO,"torso",(query_max_hp()/8)+1,"fire");
                     tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
                 }
             }

@@ -3,6 +3,7 @@
 inherit OBJECT;
 
 int duration;
+int dpower;
 
 void create() {
     ::create();
@@ -24,6 +25,7 @@ varargs int move(mixed dest, int power) {
 
     if(!power)
         power = 2;
+    dpower = power;
     if (objectp(ETO))
         environment(this_object())->set_property("light", power);
     x = ::move(dest);
@@ -35,7 +37,7 @@ varargs int move(mixed dest, int power) {
 
 remove() {
     if (objectp(ETO))
-        ETO->set_property("light",2);
+        ETO->set_property("light",dpower);
     tell_room(environment(TO),"A globe has dissipated.");
 
     return ::remove();

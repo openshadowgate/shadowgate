@@ -109,6 +109,7 @@ mapping BONUS_CATS = ([
                                       "damage bonus",
                                       "shieldMiss",
                                       "sight bonus",
+                                      "light",
                                       "spell penetration",
                                       "temporary feats",
                                       "armor bonus",
@@ -415,6 +416,9 @@ mixed all_active_bonuses(object who, int flag)
                 break;
             case "fast healing":
                 totalBon = who->query_property("fast healing");
+                break;
+            case "light":
+                totalBon = who->query_property("light");
                 break;
             case "fire resistance": case "cold resistance": case "water resistance": case "air resistance":
             case "earth resistance": case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
