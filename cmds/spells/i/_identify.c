@@ -11,7 +11,7 @@ void create() {
     set_spell_name("identify");
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("divination");
-    set_syntax("cast CLASS identify on <object>");
+    set_syntax("cast CLASS identify on OBJECT");
     set_description("This is the spell for you to identify the enchantment of items (usually equipment, though it may "
 "show attributes of other objects also).  The item must be in your inventory or the room where you are.  NOTE: Anyone in "
 "the same room with you will also know the enchantment of that item.");
@@ -35,10 +35,10 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-    
+
 //    if ((string) caster->query_name() == "garrett") {
 //      tell_object(find_player("garrett"),((environment(caster)->is_lab())?"1 ":"0 ") + identify(environment(caster)) + ":" + prof);
-//      
+//
 //    }
     if((!environment(caster)->is_lab()) && (prof < 100)) {
         tell_object(caster,"You fail to identify anything about this object, you lack the materials to adequately discern its magical nature.");
