@@ -10,7 +10,7 @@ void create() {
     ::create();
     set_spell_name("darkbolt");
     set_spell_level(([ "cleric" : 5, "mage" : 5 ]));
-    set_spell_sphere("combat");
+    set_spell_sphere("necromancy");
     set_spell_domain("darkness");
     set_syntax("cast CLASS darkbolt on TARGET");
     set_damage_desc("divine");

@@ -6,6 +6,7 @@ void create() {
     set_author("nienne");
     set_spell_name("shield of shadows");
     set_spell_level(([ "mage" : 1 ]));
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS shield of shadows");
     set_description("This spell calls a protective shield into existance before the caster, crafted of the stuff of "
 "shadows. While it may seem intangible, it will negate magic missiles, and provides a small bonus to armor class for "
@@ -53,7 +54,7 @@ void spell_effect(int prof) {
 void test() {
     object *armour;
     int i;
-//This was if (!objectp(target)) and the spell was dissipating immediately. 
+//This was if (!objectp(target)) and the spell was dissipating immediately.
 //Changing it to caster to see if that fixes the problem. ~Circe~ 2/10/13
     if (!objectp(caster)) {
         dest_effect();

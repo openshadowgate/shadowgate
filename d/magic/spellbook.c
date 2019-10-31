@@ -39,13 +39,12 @@ void set_owner();
 int offer(string str);
 int add_all();
 string query_owner();
-void sort();
-void sort_two();
 private void swap(int i, int j);
 void cull_non_school_spells(object holder);
 
 mapping spells = ([]);
-string *magic, *mID, bookdesc;
+string *magic;
+string *mID, bookdesc;
 string owner;
 int restore, *spells_at_level, *in_mind;
 
@@ -186,13 +185,18 @@ int look(string str) {
     object ob;
     int x;
     string tmp, gtype, temp1;
+    string filter;
 
     tmp = ({});
 
     if (!str)
         return 0;
 
-    sscanf(str, "%s by %s", str, gtype);
+    if(regexp(str,".* by .*"))
+        sscanf(str, "%s by %s", str, gtype);
+    if(regexp(str,".* of .*"))
+        sscanf(str, "%s of %s", str, filter);
+
     if(!gtype) gtype = "name";
 
     if (!ob=present(str,TP))
@@ -205,19 +209,43 @@ int look(string str) {
     }
 
     magic = keys(spells);
+
+    if(stringp(filter))
+    {
+        if(regexp(filter,"[0-9]+"))
+        {
+            magic = filter_array(magic,(:MAGIC_D->query_index_row($1)["levels"]["mage"]==$2:),atoi(filter));
+        }
+        else
+        {
+            magic = filter_array(magic,(:MAGIC_D->query_index_row($1)["sphere"]==$2:),filter);
+            gtype = "level";
+        }
+    }
+
   if (TP->isKnown(owner))
     write("\n%^BOLD%^%^CYAN%^This is $&$"+owner+"$&$'s spell book.  Its pages include the following spells:\n");
   else
     write("\n%^BOLD%^%^CYAN%^You do not realize who this spell book belongs to.  Its pages include the following spells:\n");
-    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 26) + arrange_string("Level", 6)+"Memory");
 
-    if(gtype != "level") sort();
-    else sort_two();
+    switch(gtype)
+    {
+    case "level":
+        sort_by_lev();
+        break;
+    case "school":
+        sort_by_lev();
+        sort_by_school();
+        break;
+    default:
+        sort();
+        break;
+    }
 
+
+    write("%^BOLD%^%^CYAN%^"+arrange_string("Spell name", 26)+" "+arrange_string("School",4)+" "+arrange_string("Level",6));
     for (x=0;x<sizeof(magic);x++) {
-        if (!temp1 = ""+TP->query_memorized("mage",magic[x]))
-            temp1 = ""+0;
-        write("%^CYAN%^%^BOLD%^"+arrange_string(magic[x], 28)+"%^RESET%^%^CYAN%^"+arrange_string(get_spell_level(magic[x]),6)+arrange_string(temp1,6));
+        write("%^CYAN%^"+arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),6));
     }
   if (avatarp(TP)) write(
 @GARRETT
@@ -479,6 +507,9 @@ int help(string str) {
 
 %^ORANGE%^<look book>%^RESET%^            To see a listing of spells in a spellbook
 %^ORANGE%^<look book by level>%^RESET%^   To see a listing of your spells, in order of spell level
+%^ORANGE%^<look book by school>%^RESET%^  To see a listing of your spells, in order of spell school
+%^ORANGE%^<look book of LEVEL>%^RESET%^   To see a listing of your spells of a given LEVEL
+%^ORANGE%^<look book of SCHOOL>%^RESET%^  To see a listing of your spells of a given SHOOL
 %^ORANGE%^<prepare>%^RESET%^              Refer to %^ORANGE%^<help prepare>%^RESET%^.
 %^ORANGE%^<rmspell %^ULINE%^SPELLNAME%^RESET%^%^ORANGE%^>%^RESET%^    To remove a spell from your book.
 %^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
@@ -571,7 +602,19 @@ void sort() {
             }
         }
 }
-void sort_two() {
+
+void sort_by_school() {
+    int i,j;
+
+    for (j=0;j<sizeof(magic);j++)
+        for (i=sizeof(magic)-1;i>j;i--) {
+            if (MAGIC_D->query_index_row(magic[i])["sphere"] < MAGIC_D->query_index_row(magic[i-1])["sphere"]) {
+                swap(i-1,i);
+            }
+        }
+}
+
+void sort_by_lev() {
     int i,j;
 
     for (j=0;j<sizeof(magic);j++)

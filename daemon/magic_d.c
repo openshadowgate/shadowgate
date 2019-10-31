@@ -258,7 +258,7 @@ void build_index()
               spelltable = ([]);
 
               spelltable["levels"]=level;
-              spelltable["sphere"]=str2->query_spell_sphere();
+              spelltable["sphere"]=str2->query_spell_sphere(); //aka school
               spelltable["discipline"]=str2->query_discipline();
               spelltable["domain"]=str2->get_spell_domain();
               spelltable["feats"]=str2->query_feats_required();
@@ -269,6 +269,14 @@ void build_index()
       }
     }
     return 1;
+}
+
+/**
+ * Returns some of the spell properties
+ */
+mapping query_index_row(string spell)
+{
+    return spellIndex[spell];
 }
 
 int print_index()
