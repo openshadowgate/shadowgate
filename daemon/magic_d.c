@@ -279,18 +279,6 @@ mapping query_index_row(string spell)
     return spellIndex[spell];
 }
 
-int print_index()
-{
-    mixed spelltbl;
-    string key;
-
-    foreach(key in keys(spellIndex))
-    {
-        write(key+":"+identify(spellIndex[key]));
-    }
-    return 1;
-}
-
 /**
  * Filters spellist based on player class and feats and returns it.
  */

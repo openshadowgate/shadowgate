@@ -24,33 +24,29 @@ int cmd_spells(string str)
     mapping hate;
 
     if (!str) return notify_fail("Check <help spells> for syntax.\n");
-    
+
     if(sscanf(str, "%s of level %d", myclass, level) == 2)
     {
-        args = "of level "+level;        
+        args = "of level "+level;
     }
-    
-    if (sscanf(str, "%s %s", myclass, args) != 2) 
+
+    if (sscanf(str, "%s %s", myclass, args) != 2)
     {
         myclass = str;
         args = "by name";
     }
-    
+
     spells = ([]);
     magic = ({});
     tmp = ({});
-    
-    if(myclass == "innate") 
+
+    if(myclass == "innate")
     {
         tell_object(TP,"%^BOLD%^You're probably looking for <recall innate spells>!");
         TP->force_me("recall innate spells");
         return 1;
     }
 
-    if(myclass == "monk")
-    {
-        tell_object(TP, "%^BOLD%^Use <ki> command or refer to <help monk> or <help WAY>");
-    }
     if(myclass == "antipaladin") myclass = "paladin";
     if(args == "expanded knowledge")
     {
@@ -61,30 +57,36 @@ int cmd_spells(string str)
         }
         full_list(TP,myclass);
     }
-    else 
+    else
     {
         get_spells(TP,myclass);
     }
     magic = keys(spells);
     hate = TP->query_all_memorized(myclass);
-    if(!sizeof(magic)) 
+    if(!sizeof(magic))
     {
         tell_object(TP, "There are no spells available to the "+myclass+" class!");
         return 1;
     }
-    tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list as a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
-    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 28) + arrange_string("Level", 8)+"Memorized");
+    tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
+    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 26) + arrange_string("Level", 8)+"Memorized");
 
-    if (args != "by level" && args != "expanded knowledge") sort();
-    else sort_two();
+    if (args != "by level" && args != "expanded knowledge")
+        sort();
+    else
+        sort_two();
 
-    for (x = 0; x < sizeof(magic);x++) 
+    for (x = 0; x < sizeof(magic);x++)
     {
-        if(level && (spells[magic[x]] != level) ) { continue; } 
-        write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 30)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 10)+(int)TP->query_memorized(myclass,magic[x]));
+        if(level && (spells[magic[x]] != level) ) { continue; }
+        write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 10)+(int)TP->query_memorized(myclass,magic[x]));
     }
     tell_object(TP,"\n");
     CleanUpSpellObjects();
+    if(myclass == "monk")
+    {
+        tell_object(TP, "%^BOLD%^Use <ki> command or refer to <help monk> or <help WAY>");
+    }
     return 1;
 }
 
@@ -95,7 +97,7 @@ void CleanUpSpellObjects()
     //tell_object(find_player("saide"), "It is getting here... spell objects should be cleaned up");
     for(x = 0;x < sizeof(ToClean);x++)
     {
-        if(objectp(ToClean[x])) 
+        if(objectp(ToClean[x]))
         {
             //tell_object(find_player("saide"), ToClean[x]->query_name()+ " being cleaned.");
             ToClean[x]->remove();
@@ -105,12 +107,12 @@ void CleanUpSpellObjects()
     return;
 }
 
-int get_spells(object player, string myclass) 
+int get_spells(object player, string myclass)
 {
     spells=MAGIC_D->index_spells_for_player(player,myclass);
 }
 
-int full_list(object player, string myclass) 
+int full_list(object player, string myclass)
 {
     mapping tmp;
     tmp=MAGIC_D->index_spells_for_player(player,"psion")+MAGIC_D->index_spells_for_player(player,"psywarrior");
@@ -121,22 +123,22 @@ int full_list(object player, string myclass)
 }
 
 
-void add_spell(string spellname, int lvl) 
+void add_spell(string spellname, int lvl)
 {
     spellname = MAGIC_D->spell_file_to_spell_name(spellname);
     spells[spellname] = lvl;
 }
 
 
-void sort() 
+void sort()
 {
     int i,j;
 
     for (j=0;j<sizeof(magic);j++)
     {
-        for (i=sizeof(magic)-1;i>j;i--) 
+        for (i=sizeof(magic)-1;i>j;i--)
         {
-            if (magic[i] < magic[i-1]) 
+            if (magic[i] < magic[i-1])
             {
                 swap(i-1,i);
             }
@@ -145,7 +147,7 @@ void sort()
 }
 
 
-private void swap(int i, int j) 
+private void swap(int i, int j)
 {
     string tmp;
 
@@ -155,7 +157,7 @@ private void swap(int i, int j)
 }
 
 
-void sort_two() 
+void sort_two()
 {
     int i,j;
     mapping tmp,tmp2;
@@ -163,9 +165,9 @@ void sort_two()
 
     for (j=0;j<sizeof(magic);j++)
     {
-        for (i=sizeof(magic)-1;i>j;i--) 
+        for (i=sizeof(magic)-1;i>j;i--)
         {
-            if (spells[magic[i]] < spells[magic[i-1]]) 
+            if (spells[magic[i]] < spells[magic[i-1]])
             {
                 swap(i-1,i);
             }
@@ -179,9 +181,9 @@ int *magic_arsenal_feat(object ob, int *spells)
 {
     int i;
 
-    if(FEATS_D->usable_feat(ob,"magic arsenal")) 
+    if(FEATS_D->usable_feat(ob,"magic arsenal"))
     {
-        for(i=0;i<sizeof(spells);i++) 
+        for(i=0;i<sizeof(spells);i++)
         {
             if(!spells[i]) continue;
             spells[i] += 2;
@@ -200,7 +202,7 @@ int *bonus_spell_slots(object ob, int *spells)
     extra = (int)ob->query_property("bonus_spell_slots");
     if(!intp(extra) || !extra) { return spells; }
 
-    for(i=0;i<sizeof(spells);i++) 
+    for(i=0;i<sizeof(spells);i++)
     {
         if(!spells[i]) continue;
         spells[i] += extra;
@@ -210,7 +212,7 @@ int *bonus_spell_slots(object ob, int *spells)
 }
 
 
-void help() 
+void help()
 {
     write(
 "
@@ -238,4 +240,3 @@ prepare, buff, recall, cast, dispell
 "
         );
 }
-

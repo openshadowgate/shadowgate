@@ -88,9 +88,9 @@ string list_users(string *races, object tp)
                     rabbit = (string)shape->query_shape_race();
                 else rabbit=who[i]->query_race();
 
-                if (ctime(time())[4..9]=="Apr  1") rabbit="rabbit";
+                if (ctime(time())[4..9]=="Apr  1") rabbit="%^WHITE%^rabbit";
                 if (ctime(time())[4..9]=="Nov 23") rabbit="turkey";
-                if (ctime(time())[4..9]=="May  1") rabbit="commie";
+                if (ctime(time())[4..9]=="May  1") rabbit="%^RED%^commie";
                 if (ctime(time())[4..9]=="Oct 31") rabbit="%^ORANGE%^pumpkin";
                 tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
             }

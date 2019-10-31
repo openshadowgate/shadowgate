@@ -219,7 +219,7 @@ int look(string str) {
         }
         else
         {
-            magic = filter_array(magic,(:MAGIC_D->query_index_row($1)["sphere"]==$2:),filter);
+            magic = filter_array(magic,(:MAGIC_D->query_index_row($1)["sphere"][0..3]==$2[0..3]:),filter);
             gtype = "level";
         }
     }
@@ -443,11 +443,6 @@ int add_spell(string str) {
         return 1;
     str = lower_case(str);
 
-/* We don't need to log this too
-   seteuid(UID_LOG);
-       log_file("addspell",capitalize(TPQN)+" added "+str+" to "+owner+"'s spellbook.\n");
-    seteuid(getuid());
-*/
     if (set_spellbook(str) && avatarp(TP))
         write("Spell added successfully.");
     return 1;
@@ -510,10 +505,15 @@ int help(string str) {
 %^ORANGE%^<look book by level>%^RESET%^   To see a listing of your spells, in order of spell level
 %^ORANGE%^<look book by school>%^RESET%^  To see a listing of your spells, in order of spell school
 %^ORANGE%^<look book of LEVEL>%^RESET%^   To see a listing of your spells of a given LEVEL
-%^ORANGE%^<look book of SCHOOL>%^RESET%^  To see a listing of your spells of a given SHOOL
-%^ORANGE%^<prepare>%^RESET%^              Refer to %^ORANGE%^<help prepare>%^RESET%^.
+%^ORANGE%^<look book of SCHOOL>%^RESET%^  To see a listing of your spells of a given SCHOOL
 %^ORANGE%^<rmspell %^ULINE%^SPELLNAME%^RESET%^%^ORANGE%^>%^RESET%^    To remove a spell from your book.
 %^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
+
+To cast spells use %^ORANGE%^<cast>%^RESET%^.
+To prepare spells use %^ORANGE%^<prepare>%^RESET%^.
+To remove spells from prepared use %^ORANGE%^<forget>%^RESET%^.
+To master spells use %^ORANGE%^<master>%^RESET%^.
+To recast buffs use %^ORANGE%^<buff>%^RESET%^.
 
 %^BOLD%^%^WHITE%^A mage %^ULINE%^must%^RESET%^%^BOLD%^%^WHITE%^ have a spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
 
@@ -567,7 +567,7 @@ int add_all() {
     string *all_spells;
     int x;
 
-    all_spells = keys((mixed *)MAGIC_D->query_index("mage"));
+    all_spells = keys(MAGIC_D->query_index("mage"));
     for(x = 0;x<sizeof(all_spells);x++){
         add_spell(all_spells[x]);
     }
