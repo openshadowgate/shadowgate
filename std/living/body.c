@@ -163,7 +163,7 @@ void add_max_hp_bonus(int hp)
 
 int query_max_hp_bonus()
 {
-    return max_hp_bonus>query_true_max_hp()?query_true_max_hp():max_hp_bonus;
+    return max_hp_bonus;
 }
 
 void set_diety(string str) {
