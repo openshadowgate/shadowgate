@@ -137,17 +137,18 @@ string query_moon_phase_string(string moon)
  */
 int query_moon_light()
 {
-    string moon;
-    float light;
-    int night;
-    night = query_night() || query_eclipse();
-    if(!night)
-        return 0;
-    light = 0.0;
-    foreach(moon in keys(moons))
-        light+=is_moon_visible(moon)?query_moon_state(moon):0;
+    /* string moon; */
+    /* float light; */
+    /* int night; */
+    /* night = query_night() || query_eclipse(); */
+    /* if(!night) */
+    /*     return 0; */
+    /* light = 0.0; */
+    /* foreach(moon in keys(moons)) */
+    /*     light+=is_moon_visible(moon)?query_moon_state(moon):0; */
 
-    return to_int(round(light));
+    /* return to_int(round(light)); */
+    return 0;
 }
 
 /**
