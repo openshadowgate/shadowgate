@@ -136,17 +136,13 @@ void set_spellbook(string spell) {
     string a_buggy_spell;
     string spell_file;
     int spell_level;
-    if (spell) {
-        spell_file="/cmds/spells/"+spell[0..0]+"/_"+replace_string(spell," ","_")+".c";
-        if (file_exists(spell_file)) {
-            if (a_buggy_spell = catch(spell_level=spell_file->query_spell_level("mage")))
-	      write(a_buggy_spell + ": "+ spell_file );
-            if (!spell_level) return;
-            if (!spell) return;
-            spells[spell] = spell_level;
-            return 1;
-        }
-        return 0;
+    mapping spell_index = MAGIC_D->query_index("mage");
+
+    if (spell)
+    {
+        if(member_array(spell,keys(spell_index))==-1)
+            return;
+        spells[spell] = spell_index[spell];
     }
     return 0;
 }
@@ -487,9 +483,7 @@ int help(string str) {
 %^ORANGE%^<rmspell %^ULINE%^SPELLNAME%^RESET%^%^ORANGE%^>%^RESET%^    To remove a spell from your book.
 %^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
 
-%^BOLD%^%^RED%^A mage must have spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
-
-
+%^BOLD%^%^RED%^A mage must have a spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
 
     if (avatarp(TP)) {
         tell_object(TP, "Immortals can also:");
@@ -501,7 +495,6 @@ int help(string str) {
     if (WIZ_LEV) {
         line();
         tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell level:", 18)+"Number allowed:      Memorized:     [Your level: "+TP->query_class_level("mage")+"]");
-        line();
 
         in_mind = allocate(10);
         in_mind = (int)WIZ_CALCS->query_max_spell_array(WIZ_LEV, "mage",(int)TP->query_stats("intelligence"));
@@ -513,8 +506,6 @@ int help(string str) {
             if(!tmp) tmp = "0";
             tell_object(TP, "%^CYAN%^"+arrange_string((x+1), 18) + arrange_string(tmp,21) + TP->query_num_spells_level("mage",x+1));
         }
-
-        line();
     }
     return 1;
 }

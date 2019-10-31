@@ -205,41 +205,34 @@ object get_spell_from_array(object *spellary, string spellname) {
 }
 
 /**
- * Ads all spells to allSpells property.
+ * Ads all spells to allSpells property. class:spells:level mapping
  */
-void index_spells(){
-    string *all_spells, str2, *dirset, mapkeys;
-    int x, i, j;
-    mapping level;
+void index_spells()
+{
+
+    string key, tclass;
+
+    build_index();
 
     allSpells = ([]);
-    dirset = get_dir(DIR_SPELLS+"/");
-    if(sizeof(dirset)) {
-      for(i = 0;i < sizeof(dirset); i++) {
-        if(file_size(DIR_SPELLS+"/"+dirset[i]) == -2) {
-          all_spells = get_dir(DIR_SPELLS+"/"+dirset[i]+"/_*.c");
-          for (x=0 ; x < sizeof(all_spells); x++) {
-            all_spells[x] = replace_string(all_spells[x],"_","",1);
-            all_spells[x] = replace_string(all_spells[x],".c","",1);
-            all_spells[x] = replace_string(all_spells[x],"_"," ");
-            str2 = DIR_SPELLS+"/"+dirset[i]+"/_"+replace_string(all_spells[x]," ","_")+".c";
-            if(file_exists(str2)) {
-              if(catch(level = str2->query_spell_level_map())) continue;
-              if(!mapp(level)) continue;
-              mapkeys = keys(level);
-              if(!sizeof(mapkeys)) continue;
-              for(j = 0;j < sizeof(mapkeys);j++) {
-                if(!mapp(allSpells[mapkeys[j]])) allSpells[mapkeys[j]] = ([]);
-                allSpells[mapkeys[j]][all_spells[x]] = level[mapkeys[j]];
-              }
-            }
-          }
+
+    foreach(key in keys(spellIndex))
+    {
+        if(!sizeof(spellIndex[key]["levels"]))
+            continue;
+        foreach(tclass in keys(spellIndex[key]["levels"]))
+        {
+            if(!mapp(allSpells[tclass]))
+                allSpells[tclass] = ([]);
+            allSpells[tclass]+=([key:spellIndex[key]["levels"][tclass]]);
         }
-      }
     }
-    return 1;
 }
 
+/**
+ * Adds all spells to spellIndex property. spell:spelltable mapping;
+ * spelltable contains at least levels map
+ */
 void build_index()
 {
     string *all_spells, str2, *dirset;
@@ -265,8 +258,9 @@ void build_index()
               spelltable = ([]);
 
               spelltable["levels"]=level;
-              spelltable["sphere"]=str2->query_school();
-              spelltable["discipline"]=str2->query_school();
+              spelltable["sphere"]=str2->query_spell_sphere();
+              spelltable["discipline"]=str2->query_discipline();
+              spelltable["domain"]=str2->get_spell_domain();
               spelltable["feats"]=str2->query_feats_required();
               spellIndex += ([ all_spells[x] : spelltable]);
             }
@@ -277,9 +271,16 @@ void build_index()
     return 1;
 }
 
-int ret_index()
+int print_index()
 {
-    return sizeof(spellIndex);
+    mixed spelltbl;
+    string key;
+
+    foreach(key in keys(spellIndex))
+    {
+        write(key+":"+identify(spellIndex[key]));
+    }
+    return 1;
 }
 
 /**
@@ -291,6 +292,8 @@ mapping index_spells_for_player(object player, string myclass)
     string *all_spell_names, spellfile, featneeded,domain;
     int lvl,i,j,k;
     object spell;
+    string playerdisc = player->query_discipline();
+    string * playerdom = player->query_divine_domain();
 
     if (myclass == "sorcerer")
         myclass = "mage";
@@ -299,35 +302,35 @@ mapping index_spells_for_player(object player, string myclass)
     if(!sizeof(all_spells))
         return ([]);
     all_spell_names=keys(all_spells);
-    all_spell_names=map_array(all_spell_names,(:MAGIC_D->get_spell_file_name($1):));
+    all_spell_names=keys(spellIndex);
     all_spells= ([]);
     tmp=([]);
     foreach(spellfile in all_spell_names)
     {
-        if(catch(spell = new(spellfile)))
+
+        if(!(lvl = spellIndex[spellfile]["levels"][myclass]))
             continue;
-        featneeded = spell->query_feat_required(myclass);
-        if(!(lvl = spell->query_spell_level(myclass)))
-            continue;
-        if(featneeded != "me" && !FEATS_D->usable_feat(player,featneeded))
+
+        featneeded = spellIndex[spellfile]["feats"][myclass];
+        if(featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player,featneeded))
             continue;
         if(myclass=="psion")
         {
-            domain = spell->query_discipline();
+            domain = spellIndex[spellfile]["discipline"];
             if(domain &&
                domain != "me" &&
-               domain != player->query_discipline())
+               domain != playerdisc)
                 continue;
         }
         if(myclass=="cleric")
         {
-            domain = spell->get_spell_domain();
+            domain = spellIndex[spellfile]["domain"];
             if(domain &&
                domain != "" &&
-               member_array(domain,player->query_divine_domain()) == -1)
+               member_array(domain,playerdom) == -1)
                 continue;
         }
-        tmp[spell->query_spell_name()]=lvl;;
+        tmp[spellfile]=lvl;;
     }
     return tmp;
 }
@@ -349,33 +352,33 @@ mapping index_unrestricted_spells(string myclass)
     if(!sizeof(all_spells))
         return ([]);
     all_spell_names=keys(all_spells);
-    all_spell_names=map_array(all_spell_names,(:MAGIC_D->get_spell_file_name($1):));
+    all_spell_names=keys(spellIndex);
     all_spells= ([]);
     tmp=([]);
     foreach(spellfile in all_spell_names)
     {
-        if(catch(spell = new(spellfile)))
+
+        if(!(lvl = spellIndex[spellfile]["levels"][myclass]))
             continue;
-        featneeded = spell->query_feat_required(myclass);
-        if(!(lvl = spell->query_spell_level(myclass)))
-            continue;
-        if(featneeded != "me")
+
+        featneeded = spellIndex[spellfile]["feats"][myclass];
+        if(featneeded != "me" && stringp(featneeded))
             continue;
         if(myclass=="psion")
         {
-            domain = spell->query_discipline();
+            domain = spellIndex[spellfile]["discipline"];
             if(domain &&
                domain != "me")
                 continue;
         }
         if(myclass=="cleric")
         {
-            domain = spell->get_spell_domain();
+            domain = spellIndex[spellfile]["domain"];
             if(domain &&
                domain != "")
                 continue;
         }
-        tmp[spell->query_spell_name()]=lvl;;
+        tmp[spellfile]=lvl;;
     }
     return tmp;
 }
