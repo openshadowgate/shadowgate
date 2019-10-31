@@ -14,7 +14,6 @@ void create()
     set_damage_desc("perpetually puts present livings to sleep");
     set_description("You become dreamy to look at, that is, everyone who looks at you might fall asleep if their will is weak.");
     set_save("will");
-
 }
 
 int preSpell()
