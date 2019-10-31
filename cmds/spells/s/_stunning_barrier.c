@@ -11,12 +11,11 @@ void create()
     set_spell_name("stunning barrier");
     set_spell_level(([ "cleric" : 1, "inquisitor" : 1, "paladin" : 1, "mage":1 , "psion": 1 , "psywarrior" : 1]));
     set_spell_sphere("abjuration");
-    set_syntax("cast CLASS abjuration");
+    set_syntax("cast CLASS stunning barrier");
     set_damage_desc("briefly stuns first enemy");
     set_description("You are closely surrounded by a barely visible magical field. It provides impact bonus to your armor and minor ability to deflect all kinds of incoming power. When struck it will discharge at first enemy, briefly stunning them.");
     set_save("will");
     set_helpful_spell(1);
-    traveling_aoe_spell(1);
 }
 
 int preSpell()
@@ -31,8 +30,6 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    int duration;
-    duration = (ROUND_LENGTH * 3) * clevel;
     tell_room(place,"%^BLUE%^A field of force around "+caster->QCN+" briefly becomes visible.",caster);
     tell_object(caster,"%^BLUE%^A field of force raises around you.");
     caster->set_property("stunning barrier",1);
@@ -40,7 +37,6 @@ void spell_effect(int prof)
     addSpellToCaster();
     spell_successful();
     execute_attack();
-    call_out("dest_effect",duration);
 }
 
 void execute_attack()
@@ -71,7 +67,7 @@ void execute_attack()
         tell_object(attackers[0],"%^CYAN%^A field of force disperses at you as you assault "+caster->QCN+".%^RESET%^");
         tell_object(caster,"%^CYAN%^The force field discharges at "+attackers[0]->QCN+".%^RESET%^");
         tell_room(room,"%^CYAN%^"+attackers[0]->QCN+" seems stunned as "+attackers[0]->QS+" strike "+caster->QCN+".%^RESET%^.",({caster,attackers[0]}));
-        attackers[0]->set_paralyzed(roll_dice(1,3)*8,"%^CYAN%^You're stunned by the stike of force!%^RESET%^");
+        attackers[0]->set_paralyzed(roll_dice(1,2)*8,"%^CYAN%^You're stunned by the stike of force!%^RESET%^");
         dest_effect();
     }
 }
