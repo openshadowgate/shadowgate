@@ -35,6 +35,9 @@ Invisible creatures can not be seen by other creatures unless they have the true
 %^CYAN%^%^ULINE%^Magic resistance/spell penetration%^RESET%^
 Magic resistance increases your chance to disperse spell targeted at you while spell penetration increases chance of your spells not to be dispersed. All creatures gain innate magic resistance and penetration of their caster levels.
 
+%^CYAN%^%^ULINE%^Max health points bonus%^RESET%^
+This effect adds its power directly to maximum of your health points. Its value, however, can't exceed base value of your maximum health points.
+
 %^CYAN%^%^ULINE%^Paralysis%^RESET%^
 A paralyzed creature cannot act. Paralyzed players can not enter many commands.
 
@@ -44,11 +47,11 @@ Prone or staggered creatures can not use most weapons for the duration of the ef
 %^CYAN%^%^ULINE%^Regeneration%^RESET%^
 A creature gets 2d4 regeneration per round as part of its innate ability to heal.
 
-%^CYAN%^%^ULINE%^Sleeping%^RESET%^
-An asleep creature functions like under paralysis, but any attack directed at will wake them and stop the effect.
-
 %^CYAN%^%^ULINE%^Sight bonus%^RESET%^
 This effects adds to the light value of the room, but only for the caster.
+
+%^CYAN%^%^ULINE%^Sleeping%^RESET%^
+An asleep creature functions like under paralysis, but any attack directed at will wake them and stop the effect.
 
 %^CYAN%^%^ULINE%^Spell damage resistance/damage resistance^RESET%^
 These effects subtract their value from damage or spell damage received.
