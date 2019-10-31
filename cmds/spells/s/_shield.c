@@ -48,14 +48,14 @@ void spell_effect(int prof) {
     spell_successful();
     addSpellToCaster();
 //    call_out("dest_effect",20 + (clevel*2));
-    call_out("dest_effect",20 + (clevel*10));
+    call_out("dest_effect",(clevel*10)*ROUND_LENGTH);
     call_out("test", ROUND_LENGTH);
 }
 
 void test() {
     object *armour;
     int i;
-//This was if (!objectp(target)) and the spell was dissipating immediately. 
+//This was if (!objectp(target)) and the spell was dissipating immediately.
 //Changing it to caster to see if that fixes the problem. ~Circe~ 2/10/13
     if (!objectp(caster)) {
         dest_effect();
