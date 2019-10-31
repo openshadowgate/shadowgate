@@ -4,6 +4,7 @@ inherit SPELL;
 
 string ashort;
 int cond_test=0;
+int lastattack;
 
 void effect(int direction)
 {
@@ -82,6 +83,7 @@ void spell_effect()
 void execute_attack()
 {
     object * attackers;
+    object room;
     ::execute_attack();
     if(!objectp(caster))
     {
@@ -90,11 +92,19 @@ void execute_attack()
     }
 
     attackers = caster->query_attackers();
+
+    if(lastattack == time())
+        return;
+
+    room=ENV(caster);
+    room->addObjectToCombatCycle(TO,1);
+    lastattack = time();
+
     if(!sizeof(attackers) && !cond_test)
     {
         tell_object(caster,"%^BOLD%^%^WHITE%^You begin to feel your mortality...");
         cond_test=1;
-        call_out("test",ROUND_LENGTH*12);
+        call_out("test",ROUND_LENGTH*8);
     }
 }
 
@@ -118,7 +128,7 @@ void dest_effect()
     if(objectp(caster))
     {
         caster->remove_property_value("added short",({ashort}));
-        tell_room(ENV(caster),"%^BOLD%^%^WHITE%^Ethereal wings that trailed "+caster->QCN+" retract.%^RESET%^");
+        tell_room(ENV(caster),"%^BOLD%^%^WHITE%^Ethereal wings that trailed "+caster->QCN+" fade.%^RESET%^");
         effect(-1);
     }
     ::dest_effect();

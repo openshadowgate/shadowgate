@@ -4,12 +4,12 @@ inherit SPELL;
 
 void create() {
     ::create();
-    set_spell_name("disjunction");
+    set_spell_name("siphon magic");
     set_spell_level(([ "mage" : 5, "cleric" : 5 ]));
     set_spell_sphere("abjuration");
     set_syntax(
-"cast CLASS disjunction on OBJECT");
-    set_description("This spell disconnects beneficial magic from an object and allows it to float freely, forever lost in the weave. Object must be present in caster's inventory.");
+"cast CLASS siphon magic on OBJECT2 into OBJECT2");
+    set_description("");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -21,8 +21,8 @@ string query_casting_string() {
 }
 
 int preSpell() {
-   if(!arg) {
-       tell_object(caster, "You must specify what to deenchant.");
+    if(sscanf(arg,"%s into %s")!=2) {
+       tell_object(caster, "You must specify both object you take magic from and object you transfer it to.");
        return 0;
    }
    return 1;
@@ -30,7 +30,8 @@ int preSpell() {
 
 void spell_effect(int prof)
 {
-    object ob;
+    string sob, sob2;
+    object ob, ob2;
     int enchantment;
 
     ob = present(arg,caster);
