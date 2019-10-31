@@ -11,13 +11,13 @@ Confused creatures experience various effects based on a d100 roll:
  %^ORANGE%^52...71%^RESET%^ It falls asleep
  %^ORANGE%^72..100%^RESET%^ It attacks random living things present in the same room
 
-%^CYAN%^%^ULINE%^Damage bonus^RESET%^
+%^CYAN%^%^ULINE%^Damage bonus%^RESET%^
 This effects adds directly to damage of your melee attacks.
 
-%^CYAN%^%^ULINE%^Enchantment, +N^RESET%^
+%^CYAN%^%^ULINE%^Enchantment, +N%^RESET%^
 Value of the enchantment is added to either both attack and damage bonus, if the item is a weapon, or to armor class of the wielder if item is jewelry, cloth or armor.
 
-%^CYAN%^%^ULINE%^Energy type resistance^RESET%^
+%^CYAN%^%^ULINE%^Energy type resistance%^RESET%^
 Such effects as fire resistance or silver resistance subtract their value from damage received. I.e. 50 points of fire resistance would make 150 points of fire damage as 100.
 
 %^CYAN%^%^ULINE%^Fast healing%^RESET%^
@@ -47,7 +47,7 @@ A creature gets 2d4 regeneration per round as part of its innate ability to heal
 %^CYAN%^%^ULINE%^Sleeping%^RESET%^
 An asleep creature functions like under paralysis, but any attack directed at will wake them and stop the effect.
 
-%^CYAN%^%^ULINE%^Sight bonus^RESET%^
+%^CYAN%^%^ULINE%^Sight bonus%^RESET%^
 This effects adds to the light value of the room, but only for the caster.
 
 %^CYAN%^%^ULINE%^Spell damage resistance/damage resistance^RESET%^
