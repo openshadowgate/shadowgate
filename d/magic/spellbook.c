@@ -42,8 +42,9 @@ string query_owner();
 private void swap(int i, int j);
 void cull_non_school_spells(object holder);
 
-mapping spells = ([]);
 string *magic;
+mapping spells = ([]);
+
 string *mID, bookdesc;
 string owner;
 int restore, *spells_at_level, *in_mind;
@@ -514,7 +515,7 @@ int help(string str) {
 %^ORANGE%^<rmspell %^ULINE%^SPELLNAME%^RESET%^%^ORANGE%^>%^RESET%^    To remove a spell from your book.
 %^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
 
-%^BOLD%^%^RED%^A mage must have a spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
+%^BOLD%^%^WHITE%^A mage %^ULINE%^must%^RESET%^%^BOLD%^%^WHITE%^ have a spellbook to use %^ORANGE%^<prepare>%^RESET%^ command!");
 
     if (avatarp(TP)) {
         tell_object(TP, "Immortals can also:");
@@ -523,21 +524,6 @@ int help(string str) {
 	);
     }
 
-    if (WIZ_LEV) {
-        line();
-        tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell level:", 18)+"Number allowed:      Memorized:     [Your level: "+TP->query_class_level("mage")+"]");
-
-        in_mind = allocate(10);
-        in_mind = (int)WIZ_CALCS->query_max_spell_array(WIZ_LEV, "mage",(int)TP->query_stats("intelligence"));
-        in_mind = magic_arsenal_feat(TP,in_mind);
-        in_mind = bonus_spell_slots(TP,in_mind);
-
-        for (x = 0; x < 9;x++) {
-            tmp = in_mind[x];
-            if(!tmp) tmp = "0";
-            tell_object(TP, "%^CYAN%^"+arrange_string((x+1), 18) + arrange_string(tmp,21) + TP->query_num_spells_level("mage",x+1));
-        }
-    }
     return 1;
 }
 
