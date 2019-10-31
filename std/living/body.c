@@ -153,12 +153,13 @@ void set_max_hp(int hp) {
 
 void set_max_hp_bonus(int hp)
 {
-    max_hp_bonus = hp;
+    max_hp_bonus = hp>query_true_max_hp()?query_true_max_hp():hp;
 }
 
 void add_max_hp_bonus(int hp)
 {
     max_hp_bonus += hp;
+    max_hp_bonus = max_hp_bonus>query_true_max_hp()?query_true_max_hp():max_hp_bonus;
 }
 
 int query_max_hp_bonus()
