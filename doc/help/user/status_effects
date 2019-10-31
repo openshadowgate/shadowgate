@@ -1,5 +1,8 @@
 %^CYAN%^STATUS EFFECTS%^RESET%^
 
+%^CYAN%^%^ULINE%^Attack bonus^RESET%^
+This effects adds to chance of your melee attacks to land a hit.
+
 %^CYAN%^%^ULINE%^Confused%^RESET%^
 Confused creatures experience various effects based on a d100 roll:
  %^ORANGE%^ 1...11%^RESET%^ It attacks the confuser
@@ -8,17 +11,29 @@ Confused creatures experience various effects based on a d100 roll:
  %^ORANGE%^52...71%^RESET%^ It falls asleep
  %^ORANGE%^72..100%^RESET%^ It attacks random living things present in the same room
 
+%^CYAN%^%^ULINE%^Damage bonus^RESET%^
+This effects adds directly to damage of your melee attacks.
+
+%^CYAN%^%^ULINE%^Enchantment, +N^RESET%^
+Value of the enchantment is added to either both attack and damage bonus, if the item is a weapon, or to armor class of the wielder if item is jewelry, cloth or armor.
+
+%^CYAN%^%^ULINE%^Energy type resistance^RESET%^
+Such effects as fire resistance or silver resistance subtract their value from damage received. I.e. 50 points of fire resistance would make 150 points of fire damage as 100.
+
 %^CYAN%^%^ULINE%^Fast healing%^RESET%^
 A creature with the fast healing special quality regains hit points at an exceptional rate. This gives grade*level/3 points of passive regeneration each round. For example, fast healing 2 gives 6 hp regeneration to a level 10 monster per round.
 
 %^CYAN%^%^ULINE%^Fear%^RESET%^
 Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight.
 
+%^CYAN%^%^ULINE%^Hidden%^RESET%^
+Hidden creatures can not be seen by others, as they are hiding in shadows. The room must have less than 3 light levels for anyone to be able to hide in it. You can <search> the room for hidden creatures or use glitterdust to reveal them. <search> reveals the hidden creatures only for you. Hidden creatures are marked with %^ORANGE%^(hid)%^RESET%^ before their name when revealed.
+
 %^CYAN%^%^ULINE%^Invisible%^RESET%^
 Invisible creatures can not be seen by other creatures unless they have the true sight or other ways to detect invisibility. Glitterdust and similar effects will reveal invisible creatures too. Invisible creatures are marked with %^CYAN%^(inv)%^RESET%^ before their name, that is, if you are able to see them.
 
-%^CYAN%^%^ULINE%^Hidden%^RESET%^
-Hidden creatures can not be seen by others, as they are hiding in shadows. The room must have less than 3 light levels for anyone to be able to hide in it. You can <search> the room for hidden creatures or use glitterdust to reveal them. <search> reveals the hidden creatures only for you. Hidden creatures are marked with %^ORANGE%^(hid)%^RESET%^ before their name when revealed.
+%^CYAN%^%^ULINE%^Magic resistance/spell penetration%^RESET%^
+Magic resistance increases your chance to disperse spell targeted at you while spell penetration increases chance of your spells not to be dispersed. All creatures gain innate magic resistance and penetration of their caster levels.
 
 %^CYAN%^%^ULINE%^Paralysis%^RESET%^
 A paralyzed creature cannot act. Paralyzed players can not enter many commands.
@@ -29,5 +44,16 @@ Prone or staggered creatures can not use most weapons for the duration of the ef
 %^CYAN%^%^ULINE%^Regeneration%^RESET%^
 A creature gets 2d4 regeneration per round as part of its innate ability to heal.
 
+%^CYAN%^%^ULINE%^Sleeping%^RESET%^
+An asleep creature functions like under paralysis, but any attack directed at will wake them and stop the effect.
+
+%^CYAN%^%^ULINE%^Sight bonus^RESET%^
+This effects adds to the light value of the room, but only for the caster.
+
+%^CYAN%^%^ULINE%^Spell damage resistance/damage resistance^RESET%^
+These effects subtract their value from damage or spell damage received.
+
 %^CYAN%^%^ULINE%^Temporary blinded%^RESET%^
 Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell.
+
+%^CYAN%^See also:%^RESET%^ attributes, bonuses, stats, skills, score, hp
