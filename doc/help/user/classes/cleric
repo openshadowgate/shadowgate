@@ -18,7 +18,7 @@ Clerics are as diverse a class as the pantheon of the realm, united only in thei
 
 Wisdom is of the utmost importance to clerics and only those with the highest wisdom are going to be worthy to cast the highest level spells. It is also recommended that they have a decent constitution. Most are moderately capable in melee combat, but not so much as a trained warrior.
 
-Clerics %^ORANGE%^<cast>%^RESET%^ their spells by preparing them with %^ORANGE%^<prepare>%^RESET%^ command. They can cast any spell from their spell list you can see with %^ORANGE%^<spells cleric>%^RESET%^ command. They expend prepared spell from memory you can see with %^ORANGE%^<recall cleric spells>%^RESET%^.
+Clerics prepare their spells with the %^ORANGE%^<prepare>%^RESET%^ command. They can cast any spell from their spell list you can see with the %^ORANGE%^<spells cleric>%^RESET%^ command. To cast they use the %^ORANGE%^<cast>%^RESET%^ command. They expend prepared spells from memory when they cast. They can see currently prepared spells with %^ORANGE%^<recall cleric spells>%^RESET%^.
 
 Clerics of good and neutral alignments may also spontaneously cast any prepared spell as a healing spell of the same level. Neutral and evil clerics may do likewise, but cast such spells spontaneously as damaging equivalents instead. To learn how to do it refer to %^ORANGE%^<help cast>%^RESET%^.
 

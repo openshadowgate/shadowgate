@@ -22,7 +22,7 @@ Bards are great entertainers and tend to be enjoyable companions on anadventure.
 
 They dabble in being flexible in many areas of combat, rather than being a master of one. They have a rogue's basic combat ability, aswell as six levels of arcane spells, which unlike most casters can beused spontaneously. Their casting abilities are based upon their charismascore. They also have the ability to remember and recite %^ORANGE%^<lore>%^RESET%^ that theyhave been told about.
 
-Bard is a spontaneous caster with free choice of cast spells. What it means is that all spells from the bard spell list, %^ORANGE%^<spells bard>%^RESET%^, are available to you. You %^ORANGE%^<cast>%^RESET%^ spells by expending a prepared with %^ORANGE%^<prepare>%^RESET%^ command spell level slot. You can see how many spells slots per level are availabe to you with %^ORANGE%^<recall bard spells>%^RESET%^.
+Bard is a spontaneous caster with a free choice of spells to cast from the bard list. All spells from the bard spell list, %^ORANGE%^<spells bard>%^RESET%^, are available to the bard. They %^ORANGE%^<cast>%^RESET%^ spells by expending a prepared with the %^ORANGE%^<prepare>%^RESET%^ command spell level slot. They can see how many spells slots per level are availabe to you with %^ORANGE%^<recall bard spells>%^RESET%^.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, stats, skills, spells, cast, buff, prepare, story, song, lore, prestige classes
 

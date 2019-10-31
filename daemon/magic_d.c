@@ -24,6 +24,7 @@ inherit DAEMON;
 
 void index_spells();
 mapping allSpells;
+mapping spellIndex = ([]);
 
 void create(){
     ::create();
@@ -237,6 +238,48 @@ void index_spells(){
       }
     }
     return 1;
+}
+
+void build_index()
+{
+    string *all_spells, str2, *dirset;
+    int x, i, j;
+    mapping level, spelltable, featmap;
+
+    spellIndex = ([]);
+    dirset = get_dir(DIR_SPELLS+"/");
+    if(sizeof(dirset)) {
+      for(i = 0;i < sizeof(dirset); i++) {
+        if(file_size(DIR_SPELLS+"/"+dirset[i]) == -2) {
+          all_spells = get_dir(DIR_SPELLS+"/"+dirset[i]+"/_*.c");
+          for (x=0 ; x < sizeof(all_spells); x++) {
+            all_spells[x] = replace_string(all_spells[x],"_","",1);
+            all_spells[x] = replace_string(all_spells[x],".c","",1);
+            all_spells[x] = replace_string(all_spells[x],"_"," ");
+            str2 = DIR_SPELLS+"/"+dirset[i]+"/_"+replace_string(all_spells[x]," ","_")+".c";
+            if(file_exists(str2))
+            {
+              if(catch(level = str2->query_spell_level_map())) continue;
+              if(!mapp(level))
+                  continue;
+              spelltable = ([]);
+
+              spelltable["levels"]=level;
+              spelltable["sphere"]=str2->query_school();
+              spelltable["discipline"]=str2->query_school();
+              spelltable["feats"]=str2->query_feats_required();
+              spellIndex += ([ all_spells[x] : spelltable]);
+            }
+          }
+        }
+      }
+    }
+    return 1;
+}
+
+int ret_index()
+{
+    return sizeof(spellIndex);
 }
 
 /**

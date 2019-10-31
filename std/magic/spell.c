@@ -343,6 +343,12 @@ string query_feat_required(string myclass) {
     return "me";
 }
 
+mapping query_feats_required() {
+    if(!feats_required)
+        feats_required = ([]);
+    return feats_required;
+}
+
 void startCasting()
 {
     object *inven;

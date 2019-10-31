@@ -52,7 +52,7 @@ void spell_effect(int prof)
     ob->remove_property("enchantment");
     ob->set_property("enchantment",--enchantment);
     tell_object(caster,"%^BOLD%^%^MAGENTA%^As you spell syllables enchantment on "+ob->query_short()+"%^BOLD%^%^MAGENTA%^ becomes weaker.%^RESET%^");
-    tell_room(room,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" voices a few syllables over "+ob->query_short()+".%^RESET%^");
+    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" voices a few syllables over "+ob->query_short()+".%^RESET%^");
 
     dest_effect();
 }

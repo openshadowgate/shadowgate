@@ -20,7 +20,7 @@ Druids are champions of nature, though they claim no power over it. Instead, a d
 
 %^CYAN%^Druidic oaths:%^RESET%^ Druids train with natural weapons and armor, and they further take traditional oaths that restrict them from using metal armor. Druids avoid carrying much worked metal at all, believing that it interferes with the pure nature of the wilds. The reasoning behind these oaths depend on the druid's background.
 
-Druids %^ORANGE%^<cast>%^RESET%^ their spells by preparing them with %^ORANGE%^<prepare>%^RESET%^ command. They can cast any spell from their spell list you can see with %^ORANGE%^<spells druid>%^RESET%^ command. They expend prepared spell from memory you can see with %^ORANGE%^<recall druid spells>%^RESET%^.
+Druids prepare their spells with the %^ORANGE%^<prepare>%^RESET%^ command. They can cast any spell from their spell list you can see with the %^ORANGE%^<spells druid>%^RESET%^ command. To cast they use the %^ORANGE%^<cast>%^RESET%^ command. They expend prepared spells from memory when they cast. They can see currently prepared spells with %^ORANGE%^<recall druid spells>%^RESET%^.
 
 Druids are versatile and they can take many paths in their lives, becoming powerfull spellcaster or preferring feral lives in shapes of fearsome beasts, or even using their potential for martial combat in their humanoid form.
 

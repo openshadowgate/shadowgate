@@ -20,7 +20,7 @@ Mages are people who have devoted their lives to learning magic for the same rea
 
 Mages are pure caster class, they are quite complicated and are hard to master.
 
-The spellbook is main instrument mage uses. A mage can %^ORANGE%^<transcribe>%^RESET%^ some of the found scrolls into spellbook. Then mage can %^ORANGE%^<prepare>%^RESET%^ that spell to commit it into memory. A mage can view already prepared spells with %^ORANGE%^<recall mage spells>%^RESET%^ command. When mage uses %^ORANGE%^<cast>%^RESET%^, she expends prepared spell. Varius abilities you learn, like scribe and enchant, expand spell number availabe to you to cast.
+The spellbook is main instrument mage uses. A mage can %^ORANGE%^<transcribe>%^RESET%^ some of the found scrolls into spellbook. Then mage can %^ORANGE%^<prepare>%^RESET%^ that spell to commit it into memory. A mage can view already prepared spells with %^ORANGE%^<recall mage spells>%^RESET%^ command. When mage uses %^ORANGE%^<cast>%^RESET%^, she expends prepared spell. A mage can %^ORANGE%^<forget>%^RESET%^ already prepared spell to free a spell slot for another spell. Varius abilities you learn, like scribe and enchant, expand spell number availabe to you to cast.
 
 Spellbook offers additional inerface to your spells. Refer to %^ORANGE%^<help spelbook>%^RESET%^ when you hold one.
 
