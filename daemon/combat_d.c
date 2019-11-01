@@ -412,12 +412,22 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         return 0;
     }
 
+    if(damage > 0)
+        if(attacker->is_living())
+            if(targ->query_property("shadowform"))
+            {
+                int sf_pwr = targ->query_property("shadowform");
+                if(!"/daemon/saving_throw_d"->will_save(attacker,-sf_pwr))
+                {
+                    damage/=5;
+                }
+            }
+
     if(targ->query_verbose_combat())
     {
         if(damage > 0) { tell_object(targ,"You take "+type+" damage."); }
         if(damage < 0) { tell_object(targ,"You are healed by "+type+" damage."); }
     }
-
 
     if(objectp(attacker))
     {

@@ -55,8 +55,8 @@ void spell_effect(int prof){
             dwpn = new("/d/magic/obj/weapons/"+normalizedDeity+"");
         }
         ench = clevel/7;
-        if(ench < 1) ench = 1;
-        if(ench > 5) ench = 5;
+        if(ench < 0) ench = 0;
+        if(ench > 9) ench = 9;
         dwpn->set_property("enchantment",ench);
         while((int)(dwpn->query_property("enchantment")) < 0)
         {
