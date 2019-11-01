@@ -54,14 +54,14 @@ int clean_mons()
     {
         if(!objectp(mons[i])) { continue; }
         temp += ({ mons[i] });
-        pool += mons->query_level();
+        pool += (int)mons[i]->query_level();
     }
     if(!sizeof(temp))
     {
         if(objectp(TO)) { TO->remove(); }
         return 1;
     }
-    pool*=4/5;
+    pool*=7/8;
     if(caster->query_property("raised")!=pool)
     {
         caster->remove_property("raised");

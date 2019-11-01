@@ -31,6 +31,12 @@ int cmd_drain(string args)
         notify_fail("Target required.\n");
         return 0;
     }
+    if(args == "nullify")
+    {
+        write("The health you gained expends.");
+        TP->set_max_hp_bonus(0);
+        return 1;
+    }
 
     if(sscanf(args,"%s for %s",targ,type)!=2)
     {
@@ -203,6 +209,7 @@ drain - drain someone's blood
 %^CYAN%^SYNTAX%^RESET%^
 
 drain %^ORANGE%^%^ULINE%^TARGET%^RESET%^ [for life|health]
+drain nullify
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -213,6 +220,8 @@ Your %^ORANGE%^%^ULINE%^TARGET%^RESET%^ must be either asleep, paralyzed, grappl
 A vampire must drain proper kith race, such as human, or any race on %^ORANGE%^<help races>%^RESET%^ to saturate her hunger. Draining lesser creature, other vampires or undead creatures will not work.
 
 Feeding just once saturates vampires bloodlust for a while. Draining can be done for two effects. By default and without an argument, draining for life will heal the vampire, while draining for health will increase max health bonus, but no over than half of vampire's base maximum hp.
+
+With 'nullify' argument you can get rid of positive max hp bonus.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
