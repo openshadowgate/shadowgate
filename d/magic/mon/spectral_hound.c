@@ -44,8 +44,7 @@ void setup(invoker,clevel)
 void bark()
 {
     if(objectp(caster))
-        if(!random(5))
-            tell_room(caster,"%^CYAN%^Your hound conveys a telepathic bark to you.%^RESET%^");
+        tell_room(caster,"%^CYAN%^Your hound conveys a telepathic bark to you.%^RESET%^");
 }
 
 void be_doggy()
