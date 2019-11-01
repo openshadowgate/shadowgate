@@ -66,7 +66,7 @@ void spell_effect(int prof)
 
     targets = distinct_array(targets);
 
-    tell_room(place,"%^BOLD%^%^BLUE%^Silver pin makes a black rip in the air, and fell energy tendrils furiously rips from it!");
+    tell_room(place,"%^BOLD%^%^BLUE%^The silver pin makes a black rip in the air, and fell energy tendrils furiously rip out of it!");
 
     if(sizeof(targets))
     {
