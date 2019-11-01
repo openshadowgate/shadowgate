@@ -253,7 +253,7 @@ Psions and psywarriors may specify suffix \"expanded knowledge\" to view all spe
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-prepare, buff, recall, cast, dispell
+prepare, forget, buff, recall, cast, dispell
 "
         );
 }
