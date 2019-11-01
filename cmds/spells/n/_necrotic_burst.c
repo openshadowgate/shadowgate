@@ -18,8 +18,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    splash_spell(1);
-    set_components(([ "mage" : (["drop of blood":1, "silver pin":1  ]), ]));
+    set_helpful_spell(1);
     set_save("reflex");
 }
 
@@ -35,64 +34,89 @@ string query_cast_string()
 
 void spell_effect(int prof)
 {
-    object *foes = ({}), foe;
-    string YOU, HIM, tmp = "";
     int i;
+    object *party_members = ({}),*attackers = ({}),*living = ({}),*targets = ({}), *followers = ({});
 
-    if(!objectp(caster))
+    set_helpful_spell(1);
+    party_members = ob_party(caster);
+    attackers = caster->query_attackers();
+    followers = caster->query_followers();
+    living = all_living(place);
+
+    if(!objectp(target)) { target = caster; }
+
+    if(target == caster ||
+       member_array(target,party_members) != -1 ||
+       member_array(target,followers) != -1)
     {
-        dest_effect();
-        return;
+        targets = filter_array(distinct_array(party_members+(followers-attackers))+({caster}),
+                               (:!!$1->is_undead():));
+    }
+    else if(member_array(target,attackers) != -1)
+    {
+        set_helpful_spell(0);
+        targets = filter_array(attackers,(:!$1->is_undead():));
+    }
+    else
+    {
+        /* living = filter_array(living,"is_non_immortal",FILTERS_D); */
+        /* living = target_filter(living); */
+        targets = ({target});;
     }
 
-    YOU = caster->QCN;
-    HIM = target->QCN;
+    targets = distinct_array(targets);
 
-    spell_successful();
-
-    if(!living(caster))
-        foes = all_living(environment(target));
-    else
-        foes = caster->query_attackers();
-
-    foes -= ({ target});
-    foes = target_filter(foes);
-
-    element = "fire";
     tell_room(place,"%^BOLD%^%^BLUE%^Silver pin makes a black rip in the air, and fell energy tendrils furiously rips from it!");
 
-    if(do_save(target))
+    if(sizeof(targets))
     {
-        damage_targ(target, "torso", to_int(sdamage / 2),"negative energy");
-    }
-    else
-    {
-        damage_targ(target, "torso", sdamage,"negative energy");
+        for(i=0;i<sizeof(targets);i++)
+        {
+            int healamnt = calculate_healing();
+            if(!objectp(targets[i])) { continue; }
+            if(!present(targets[i],place)) { continue; }
+            if(!target->is_undead())
+            {
+                tell_room(place,"%^BLUE%^A fell wave moves through"+
+                    " "+targets[i]->QCN+" carrying with it the essence of "+
+                    "death.",({ targets[i],caster }));
+                tell_object(caster,"%^BLUE%^A fell "+
+                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
+                tell_object(targets[i],"%^BLUE%^A fell "+
+                    "wave moves through you, carrying with it the essence of death.");
+                set_helpful_spell(0);
+                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
+            }
+            else if(targets[i] == caster)
+            {
+                tell_object(targets[i],"%^BLUE%^A fell "+
+                    "wave moves through you, carrying with it the essence of death.");
+                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"negative energy");
+            }
+            else
+            {
+                if(do_save(target,0))
+                    healamnt/=2;
+                tell_room(place,"%^BLUE%^A fell wave moves through"+
+                    " "+targets[i]->QCN+" carrying with it the essence of "+
+                    "death.",({ targets[i],caster }));
+                tell_object(caster,"%^BLUE%^A fell "+
+                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
+                tell_object(targets[i],"%^BLUE%^A fell "+
+                    "wave moves through you, carrying with it the essence of death.");
+                set_helpful_spell(1);
+                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
+            }
+        }
     }
 
-    for(i=0;i<sizeof(foes);i++)
-    {
-        define_base_damage(0); //lazy re-roll
-        if(!objectp(foes[i])) { continue; }
-        if(!do_save(foes[i]))
-        {
-            tell_room(environment(foes[i]),"%^BLUE%^The fell tendrils caress "+foes[i]->QCN+"!",foes[i]);
-            tell_object(foes[i],"%^BLUE%^The fell tendril caresses you!");
-            damage_targ(foes[i], "torso", sdamage, "negative energy");
-        }
-        else
-        {
-            tell_room(environment(foes[i]),"%^BLUE%^"+foes[i]->QCN+" barely dodges fell energy tendrill!",foes[i]);
-            tell_object(foes[i],"%^BLUE%^You barely dodge fell energy tendril!");
-            damage_targ(foes[i], "torso", sdamage / 2, "negative energy");
-        }
-    }
+    spell_successful();
     dest_effect();
+    return;
 }
 
-
-void dest_effect()
+int calculate_healing(object targ)
 {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    define_base_damage(-3);
+    return sdamage;
 }

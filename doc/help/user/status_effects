@@ -53,7 +53,7 @@ This effects adds to the light value of the room, but only for the caster.
 %^CYAN%^%^ULINE%^Sleeping%^RESET%^
 An asleep creature functions like under paralysis, but any attack directed at will wake them and stop the effect.
 
-%^CYAN%^%^ULINE%^Spell damage resistance/damage resistance^RESET%^
+%^CYAN%^%^ULINE%^Spell damage resistance/damage resistance%^RESET%^
 These effects subtract their value from damage or spell damage received.
 
 %^CYAN%^%^ULINE%^Temporary blinded%^RESET%^
