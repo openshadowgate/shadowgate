@@ -1607,6 +1607,11 @@ int query_prestige_level(string the_class)
     return class_level;
 }
 
+int is_living()
+{
+    return 1;
+}
+
 /**
  * Is this living undead based on the ways mud used to define
  * undead. If you wish to mark something as undead use undead property
