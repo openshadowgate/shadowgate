@@ -344,8 +344,7 @@ string query_feat_required(string myclass) {
 }
 
 mapping query_feats_required() {
-    if(!feats_required)
-        feats_required = ([]);
+    if(!feats_required) feats_required = ([]);
     return feats_required;
 }
 
@@ -986,7 +985,8 @@ void wizard_interface(object user, string type, string targ)
         else TP->setAdminBlock(100);
     }
 
-    tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
+    if(!silent_casting)
+        tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
 
     if(objectp(target)) { check_reflection(); } // this is needed for PCs, uses different function than mobs
     if(wasreflected) { caster->set_casting(0); }
@@ -1327,7 +1327,8 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
 
     if (living(caster) && base_name(PO) != "/d/magic/obj/contingency")
     {
-        tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
+        if(!silent_casting)
+            tell_object(caster,"You begin to "+whatdo+" the "+whatsit+"!");
         if(spell_type!="innate")
             tell_room(environment(caster),caster->QCN+
                       " begins to "+whatdo+" a "+whatsit+"!", caster);

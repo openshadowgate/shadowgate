@@ -34,7 +34,8 @@ spell_effect()
 
     spell_successful();
 
-    tell_room(place,"%^BLUE%^"+caster->QCN+" with a swift chant turns into shadow..%^RESET%^");
+    tell_room(place,"%^BLUE%^"+caster->QCN+" with a swift chant turns into shadow.%^RESET%^",({caster}));
+    tell_object(caster,"%^BLUE%^You turn into shadow.%^RESET%^");
 
     bonus=clevel/2+1;
     target->set_property("spelled", ({TO}) );

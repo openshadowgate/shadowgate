@@ -69,6 +69,7 @@ void spell_effect(int prof) {
     blocker->set_block_power(CLEVEL + wis_bonus);
     blocker->set_ranger_block(1);
     duration = 9 * (int)CLEVEL;
+    addSpellToCaster();
     call_out("dest_effect", duration);
     return;
 }

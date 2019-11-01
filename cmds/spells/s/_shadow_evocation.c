@@ -36,7 +36,7 @@ int preSpell()
         return 0;
     }
 
-    tell_room(place,"%^BLUE%^"+caster->QCN+" whispers an invocation.");
+    tell_room(place,"%^BLUE%^"+caster->QCN+" whispers in a soft voice.");
     if(sscanf(arg, "%s on %s", spl, sargs)!=2)
         spl = arg;
 
