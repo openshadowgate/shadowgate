@@ -4,7 +4,7 @@ inherit SPELL;
 
 object eyes,remote;
 string theName;
-#define DELAY 180 
+#define DELAY 120
 
 void create(){
     ::create();
@@ -101,7 +101,7 @@ void dest_effect(){
       caster->remove_property("remote scrying");
       caster->remove_property("remote scrying time");
       caster->set_property("remote scrying time",time());
-      tell_object(caster,"Your concentration on places afar fades.");      
+      tell_object(caster,"Your concentration on places afar fades.");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

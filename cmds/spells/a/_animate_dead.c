@@ -123,6 +123,7 @@ void spell_effect(int prof)
         undead->set_property("minion", caster);
         controller->add_monster(undead);
         caster->set_property("raised", lvl);
+        undead->set_property("raised", lvl);
     }
     tell_object(caster,"%^BLUE%^You let your arms drop limply after completing the spell.");
     tell_room(place,"%^BOLD%^"+caster->QCN+" lets "+caster->QP+" arms drop limply.",caster);

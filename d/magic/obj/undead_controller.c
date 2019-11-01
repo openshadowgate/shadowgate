@@ -38,6 +38,7 @@ object *query_mons() { return mons; }
 
 object query_caster() { return caster; }
 
+
 void add_monster(object obj)
 {
     if(!objectp(obj)) { return; }
@@ -48,25 +49,26 @@ int clean_mons()
 {
     object *temp=({});
     int i;
-    int pool = 0;
+    int poolsize;
 
     for(i=0;i<sizeof(mons);i++)
     {
         if(!objectp(mons[i])) { continue; }
         temp += ({ mons[i] });
-        pool += (int)mons[i]->query_level();
+        poolsize += (int)mons[i]->query_property("raised");
     }
     if(!sizeof(temp))
     {
         if(objectp(TO)) { TO->remove(); }
         return 1;
     }
-    pool*=7/8;
-    if(caster->query_property("raised")!=pool)
+
+    if(caster->query_property("raised")!=poolsize)
     {
         caster->remove_property("raised");
-        caster->set_property("raised",pool);
+        caster->set_property("raised",poolsize);
     }
+
     mons = temp;
     return 0;
 }
