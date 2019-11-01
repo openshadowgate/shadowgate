@@ -16,9 +16,6 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
-    set_components(([
-                        "mage" : ([ "piece of mirror" : 1 ]),
-    ]));
 	set_helpful_spell(1);
 }
 
@@ -37,9 +34,8 @@ int preSpell() {
 void spell_effect() {
     object ob;
     int i,max;
-    max=roll_dice(1,4)+clevel/3;
-    max=max>20?20:max;
-    tell_room(place,"%^GREEN%^"+max+" copies of "+caster->QCN+"%^RESET%^%^GREEN%^ pop into being!%^RESET%^");
+    max=4;
+    tell_room(place,"%^GREEN%^Four copies of "+caster->QCN+"%^RESET%^%^GREEN%^ pop into being!%^RESET%^");
     for (i=0;i<max;i++) {
         ob = new("/d/magic/mon/illusion");
         ob->move(place);
@@ -48,12 +44,13 @@ void spell_effect() {
         ob->set_property("spell_creature", TO);
         ob->set_property("spell", TO);
         ob->set_property("minion", caster);
-        ob->set_max_hp(1);
+        ob->set_max_hp(clevel*12+50);
+        ob->set_hp(clevel*12+50);
         ob->set_id(({(string)caster->query_name()}));
         ob->set_race((string)caster->query_race());
         ob->set_gender((string)caster->query_gender());
         ob->set_short((string)caster->getWholeDescriptivePhrase());
-        ob->set_long((string)caster->getWholeDescriptivePhrase() + " " +(string)caster->query_description());   
+        ob->set_long((string)caster->getWholeDescriptivePhrase() + " " +(string)caster->query_description());
         ob->set_overall_ac(-clevel);
         ob->set_exp(0);
         ob->add_id("summoned monster");
@@ -68,7 +65,7 @@ void spell_effect() {
 void dest_effect() {
     int i;
     for (i=0;i<sizeof(mons);i++) {
-        if (objectp(mons[i])) 
+        if (objectp(mons[i]))
         {
             if(objectp(caster))
             {
@@ -79,10 +76,9 @@ void dest_effect() {
     }
     removeSpellFromCaster();
     ::dest_effect();
-    if(objectp(TO)) 
+    if(objectp(TO))
     {
         TO->move("/d/shadowgate/void");
         TO->remove();
     }
 }
-
