@@ -12,7 +12,7 @@ void create() {
     ::create();
     set_spell_name("resist energy");
     set_spell_level(([ "paladin" : 2, "ranger" : 1, "druid" : 2, "mage" : 2, "paladin" : 3 ]));
-    set_spell_sphere("alteration");
+    set_spell_sphere("abjuration");
     set_syntax("cast CLASS resist energy on <element>");
     set_description("This spell bestows the caster with a small amount of damage resistance against a selected element, "
 "increasing with the caster's level. Elements that can be chosen are acid, cold, electricity, fire, or sonic.");
@@ -39,7 +39,7 @@ void spell_effect(int prof) {
       dest_effect();
       return;
     }
-  
+
     if (member_array(ARG,OKTYPES) == -1) {
       tell_object(caster,"%^YELLOW%^The spell fizzles as you fail to concentrate on an element. Only acid, cold, electricity, fire, or sonic can be resisted.%^RESET%^");
       dest_effect();

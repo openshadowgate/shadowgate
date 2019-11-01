@@ -8,12 +8,12 @@ int current;
 string target_limb;
 
 
-void create() 
+void create()
 {
     ::create();
     set_author("nienne");
     set_spell_name("mind fog");
-    set_spell_level(([ "mage" : 6, "bard" : 5 ]));
+    set_spell_level(([ "mage" : 5, "bard" : 5 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS mind fog on TARGET");
     set_description("Known only to some of the most powerful enchanters of the realm, this spell does no visible damage "
@@ -34,10 +34,10 @@ void create()
 string query_cast_string() { return "%^YELLOW%^"+caster->QCN+" splays "+caster->QP+" fingers to cast a handful of glittering dust toward you.%^RESET%^"; }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int bonus;
-    
+
     tell_room(place,"%^YELLOW%^"+target->QCN+"'s eyes become unfocussed...%^RESET%^",({caster,target}));
     tell_object(caster,"%^YELLOW%^You cast a handful of glittering dust towards "+target->QCN+", interwoven with an "
         "enchantment of the mind...%^RESET%^");
@@ -53,7 +53,7 @@ void spell_effect(int prof)
             dest_effect();
             return;
         }
-      
+
         spell_successful();
         damage_targ(target,"head",roll_dice(1,clevel),"mental");
         tell_object(target,"%^BOLD%^%^WHITE%^A heavy feeling descends upon you, leaving it difficult to think straight!%^RESET%^");
@@ -69,7 +69,7 @@ void spell_effect(int prof)
         call_out("next",ROUND_LENGTH,target);
         return;
     }
-    
+
     tell_object(target,"%^YELLOW%^Your thoughts grow a little hazy, but you fight off the feeling!%^RESET%^");
     tell_object(caster,"%^YELLOW%^"+target->QCN+" seems to fend off your spell!%^RESET%^");
     tell_room(place,"%^YELLOW%^"+target->QCN+" snaps back to normal!%^RESET%^",({caster,target}));
