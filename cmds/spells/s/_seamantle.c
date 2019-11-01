@@ -12,7 +12,7 @@ void create() {
     ::create();
     set_spell_name("seamantle");
     set_spell_level(([ "mage" : 8, "druid" : 8 ]));
-    set_spell_sphere("conjuration");
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS seamantle");
     set_damage_desc("8 to AC, 4 to reflex save for clevel/4+4 rounds");
     set_description("You surround yourself with column of water, or control currents of water you're already in, to shield yourself from harm. Such mantle is powerful shield, yet maintaining it for long periods of time is nearly impossible even for an experienced caster.");

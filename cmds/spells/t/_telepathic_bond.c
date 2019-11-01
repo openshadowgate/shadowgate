@@ -12,7 +12,7 @@ void create() {
     set_author("nienne");
     set_spell_name("telepathic bond");
     set_spell_level(([ "mage" : 5 ]));
-    set_spell_sphere("greater divination");
+    set_spell_sphere("divination");
     set_syntax("cast CLASS telepathic bond to TARGET");
     set_description("This spell allows the caster to reach out and touch the mind of a known person, allowing "
 "conversations without speech and potentially over vast distances.");
@@ -56,7 +56,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-	if(who->query_ghost()) 
+	if(who->query_ghost())
 	{
 		tell_object(CASTER, capitalize(arg) + " cannot be found to establish a "+
 		"link.");

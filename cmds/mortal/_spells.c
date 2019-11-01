@@ -69,13 +69,13 @@ int cmd_spells(string str)
         return 1;
     }
     tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
-    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 24) + arrange_string("Level", 6)+"Memorized");
+    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 24) + arrange_string("Level", 6));
 
     if (args != "by level" && args != "expanded knowledge")
         sort();
     if (args == "by school" && (myclass == "mage" || myclass == "sorcerer"))
     {
-        sort_by_lev();
+        sort();
         sort_by_school();
     }
     else
@@ -84,7 +84,7 @@ int cmd_spells(string str)
     for (x = 0; x < sizeof(magic);x++)
     {
         if(level && (spells[magic[x]] != level) ) { continue; }
-        write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 6)+(int)TP->query_memorized(myclass,magic[x]));
+        write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 4)+(myclass=="mage"||myclass=="sorcerer"?"  "+MAGIC_D->query_index_row(magic[x])["sphere"]:""));
     }
     tell_object(TP,"\n");
     CleanUpSpellObjects();
@@ -239,7 +239,7 @@ spells - list spells
 
 %^CYAN%^SYNTAX%^RESET%^
 
-spells %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [by level|of level %^ORANGE%^%^ULINE%^NUM%^RESET%^|expanded knowledge]
+spells %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [by level|by school|of level %^ORANGE%^%^ULINE%^NUM%^RESET%^|expanded knowledge]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 

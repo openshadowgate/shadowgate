@@ -14,7 +14,7 @@ void create() {
     ::create();
     set_spell_name("rage");
     set_spell_level(([ "cleric" : 7, "bard" : 2, "mage": 3 ]));
-    set_spell_sphere("enchantment");
+    set_spell_sphere("enchantment_charm");
     set_spell_domain("animal");
     set_syntax("cast CLASS rage");
     set_description("%^RESET%^This spell allows the caster to enter a fit of furious rage, making them deadly in combat for the duration. The ability will last longer, and grow stronger, as the caster gains levels.
@@ -29,8 +29,8 @@ void create() {
     set_helpful_spell(1);
 }
 
-string query_cast_string() 
-{ 
+string query_cast_string()
+{
 	tell_object(caster,"%^RED%^A red haze clouds your vision as you feel a rage"+
 		" moving through your body.");
 	tell_room(place,"%^RED%^"+caster->QCN+" rolls "+caster->QP+" eyes back"+
@@ -52,7 +52,7 @@ int preSpell(){
 }
 
 void spell_effect(int prof) {
-    
+
     tell_room(place,"%^BOLD%^%^RED%^The essence of battle and the rage of war falls upon "+caster->QCN+".",caster);
     tell_object(caster, "%^BOLD%^%^RED%^The essence of battle and the rage of war falls upon you.");
 
@@ -76,7 +76,7 @@ void rage(){
         }
         caster->execute_attack();
         if(sizeof(caster->query_classes()) == 1){
-           caster->execute_attack(); 
+           caster->execute_attack();
         }
     }
 
@@ -89,7 +89,7 @@ void rage(){
 
 void dest_effect() {
    if(objectp(caster)) {
-      if(caster->query_property("raged")){	
+      if(caster->query_property("raged")){
          tell_object(caster,"%^GREEN%^The rage leaves you.%^RESET%^");
          tell_room(environment(caster),"%^GREEN%^The rage lifts from "+caster->QCN+".",caster);
          caster->add_attack_bonus(-1*mybonus);
