@@ -69,17 +69,22 @@ int cmd_spells(string str)
         return 1;
     }
     tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
-    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 26) + arrange_string("Level", 8)+"Memorized");
+    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 24) + arrange_string("Level", 6)+"Memorized");
 
     if (args != "by level" && args != "expanded knowledge")
         sort();
+    if (args == "by school" && (myclass == "mage" || myclass == "sorcerer"))
+    {
+        sort_by_lev();
+        sort_by_school();
+    }
     else
         sort_two();
 
     for (x = 0; x < sizeof(magic);x++)
     {
         if(level && (spells[magic[x]] != level) ) { continue; }
-        write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 10)+(int)TP->query_memorized(myclass,magic[x]));
+        write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 6)+(int)TP->query_memorized(myclass,magic[x]));
     }
     tell_object(TP,"\n");
     CleanUpSpellObjects();
@@ -175,6 +180,18 @@ void sort_two()
     }
 
 }
+
+void sort_by_school() {
+    int i,j;
+
+    for (j=0;j<sizeof(magic);j++)
+        for (i=sizeof(magic)-1;i>j;i--) {
+            if (MAGIC_D->query_index_row(magic[i])["sphere"] < MAGIC_D->query_index_row(magic[i-1])["sphere"]) {
+                swap(i-1,i);
+            }
+        }
+}
+
 
 
 int *magic_arsenal_feat(object ob, int *spells)
