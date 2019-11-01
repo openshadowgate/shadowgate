@@ -84,7 +84,7 @@ int cmd_spells(string str)
     for (x = 0; x < sizeof(magic);x++)
     {
         if(level && (spells[magic[x]] != level) ) { continue; }
-        write("%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 4)+(myclass=="mage"||myclass=="sorcerer"?"  "+MAGIC_D->query_index_row(magic[x])["sphere"]:""));
+        tell_object(TP,"%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 4)+(myclass=="mage"||myclass=="sorcerer"?"  "+MAGIC_D->query_index_row(magic[x])["sphere"]:""));
     }
     tell_object(TP,"\n");
     CleanUpSpellObjects();

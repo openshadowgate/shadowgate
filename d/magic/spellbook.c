@@ -246,7 +246,7 @@ int look(string str) {
 
     write("%^BOLD%^%^CYAN%^"+arrange_string("Spell name", 26)+" "+arrange_string("School",4)+" "+arrange_string("Level",6));
     for (x=0;x<sizeof(magic);x++) {
-        write("%^CYAN%^"+arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),6));
+        tell_object(TP,"%^CYAN%^"+arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),6));
     }
   if (avatarp(TP)) write(
 @GARRETT
