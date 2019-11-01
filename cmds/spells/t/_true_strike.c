@@ -32,14 +32,13 @@ void spell_effect(int prof) {
         tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" touches "+target->QCN+", they both seem lethargic for a moment.");
     }
     target->set_property("attack bonus",clevel);
-    target->set_property("raised resistance",1);
     addSpellToCaster();
     call_out("dest_effect",ROUND_LENGTH*2,lower);
 }
 
 void dest_effect()
 {
-    if(objectp(target)) 
+    if(objectp(target))
     {
         tell_object(target,"%^BOLD%^%^CYAN%^An insight into future events fades%^RESET%^");
         target->set_property("attack bonus",-clevel);
@@ -47,4 +46,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -6,7 +6,10 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
     int i, j, nummon, lvl, raised;
     string undeadtype, myrace;
 
-    nummon = (int)caster->query_property("raised");
+    if(objectp(caster))
+        nummon = (int)caster->query_property("raised");
+    else
+        nummon = 0;
     if (nummon > clevel)
         return 0;
 
