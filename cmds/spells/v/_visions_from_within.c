@@ -66,7 +66,7 @@ void execute_attack()
     for(i=0;i<sizeof(foes);i++) {
         if(!objectp(targ = foes[i]))
             continue;
-        if(do_save(targ,-4))
+        if(do_save(targ,4))
         {
             tell_object(targ,"%^RESET%^%^BOLD%^%^BLACK%^Nigh%^BLUE%^t%^BLACK%^mar%^BLUE%^e%^BLACK%^s%^BLACK%^ pierce into your mind, but you manage to shrug some of them.%^RESET%^%^RESET%^");
             damage_targ(targ,targ->return_target_limb(),sdamage/2,"mental");
