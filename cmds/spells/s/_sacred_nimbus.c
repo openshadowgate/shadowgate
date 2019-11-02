@@ -6,6 +6,7 @@ inherit SPELL;
 
 int flag;
 int strikes;
+int lastattack;
 
 void create()
 {
@@ -57,51 +58,36 @@ void spell_effect(int prof)
     return;
 }
 
-void execute_attack()
-{
-    object *attackers = ({}),targ;
-    int i,damage;
+void execute_attack(){
+    object *attackers,room;
+    int i;
 
-    if(!objectp(caster))                        { dest_effect(); return; }
-    if(!objectp(place = environment(caster)))   { dest_effect(); return; }
-    if(!flag) {
-        ::execute_attack();
-        flag = 1;
+    ::execute_attack();
+    if(!objectp(caster)){
+        dest_effect();
         return;
     }
-    if(!objectp(caster))                        { dest_effect(); return; }
-    if(strikes > clevel)                        { dest_effect(); return; }
-
-    attackers = filter_array(caster->query_attackers(),(:!(objectp($1)?($1->query_alignment() % 3):0):));
-
+    room      = environment(caster);
+    attackers = filter_array(caster->query_attackers(),(:
+                                                        $1->query_alignment() == 3 ||
+                                                        $1->query_alignment() == 6 ||
+                                                        $1->query_alignment() == 9
+                                                        :));
+    if(lastattack == time())
+        return;
+    room->addObjectToCombatCycle(TO,1);
+    lastattack = time();
     if(!sizeof(attackers))
-    {
-        place->addObjectToCombatCycle(TO,1);
         return;
+    define_base_damage(0);
+    tell_room(room,"%^BOLD%^%^ORANGE%^The light around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
+    tell_object(caster,"%^BOLD%^%^ORANGE%^The light around you falls upon your enemies!");
+    for(i=0;i<sizeof(attackers);i++){
+        if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
+        tell_object(attackers[i],"%^BOLD%^%^ORANGE%^You are burned by the light as you strike "
+            ""+caster->QCN+"!");
+        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"divine");
     }
-
-    while(!objectp(targ) && (i < sizeof(attackers)))
-    {
-        targ = attackers[random(sizeof(attackers))];
-        i++;
-    }
-    if(!objectp(targ))
-    {
-        place->addObjectToCombatCycle(TO,1);
-        return;
-    }
-
-    define_base_damage(-9);
-
-    tell_object(caster,"%^BOLD%^%^YELLOW%^The light burns "+targ->QCN+" painfully!");
-    tell_object(targ,"%^BOLD%^%^YELLOW%^The halo around "+caster->QCN+"'s body burns your very soul!");
-    tell_room(place,"%^BOLD%^%^YELLOW%^The halo around "+caster->QCN+" burns "+targ->QCN+"!",({targ,caster}));
-
-    strikes++;
-    damage_targ(targ,targ->return_target_limb(),sdamage,"divine");
-
-    place->addObjectToCombatCycle(TO,1);
-    return;
 }
 
 

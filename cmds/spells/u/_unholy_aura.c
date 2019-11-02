@@ -52,51 +52,33 @@ void spell_effect(int prof)
     return;
 }
 
-void execute_attack()
-{
-    object *attackers = ({}),targ;
-    int i,damage;
+void execute_attack(){
+    object *attackers,room;
+    int i;
 
-    if(!objectp(caster))                        { dest_effect(); return; }
-    if(!objectp(place = environment(caster)))   { dest_effect(); return; }
-    if(!flag) {
-        ::execute_attack();
-        flag = 1;
+    ::execute_attack();
+    if(!objectp(caster)){
+        dest_effect();
         return;
     }
-    if(!objectp(caster))                        { dest_effect(); return; }
-    if(strikes > clevel)                        { dest_effect(); return; }
-
+    room      = environment(caster);
+    attackers = filter_array(caster->query_attackers());
+    if(lastattack == time())
+        return;
+    room->addObjectToCombatCycle(TO,1);
+    lastattack = time();
     if(!sizeof(attackers))
-    {
-        place->addObjectToCombatCycle(TO,1);
         return;
+    define_base_damage(0);
+    tell_room(room,"%^BOLD%^%^BLACK%^The darkness around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
+    tell_object(caster,"%^BOLD%^%^BLACK%^The darkness around you falls upon your enemies!");
+    for(i=0;i<sizeof(attackers);i++){
+        if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
+        tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the darkness as you strike "
+            ""+caster->QCN+"!");
+        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
     }
-
-    while(!objectp(targ) && (i < sizeof(attackers)))
-    {
-        targ = attackers[random(sizeof(attackers))];
-        i++;
-    }
-    if(!objectp(targ))
-    {
-        place->addObjectToCombatCycle(TO,1);
-        return;
-    }
-
-    define_base_damage(-9);
-
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^The darkness burns "+targ->QCN+" painfully!");
-    tell_object(targ,"%^BOLD%^%^MAGENTA%^The halo around "+caster->QCN+"'s body burns your very soul!");
-    tell_room(place,"%^BOLD%^%^MAGENTA%^The halo around "+caster->QCN+" burns "+targ->QCN+"!",({targ,caster}));
-
-    strikes++;
-    damage_targ(targ,targ->return_target_limb(),damage,"untyped");
-
-    place->addObjectToCombatCycle(TO,1);
-    return;
 }
-
 
 void dest_effect()
 {
@@ -105,7 +87,7 @@ void dest_effect()
         tell_object(caster,"%^RESET%^%^BOLD%^The halo around you fades.");
         caster->remove_property("nimbus");
         caster->add_ac_bonus(-2);
-	    caster->remove_property_value("added short",({"%^BOLD%^%^BLACK%^ (in a fell)%^RESET%^"}));
+	    caster->remove_property_value("added short",({"%^BOLD%^%^BLACK%^ (in a fell halo)%^RESET%^"}));
     }
     ::dest_effect();
     if(objectp(TO)) { TO->remove(); }

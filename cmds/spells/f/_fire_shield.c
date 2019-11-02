@@ -45,7 +45,7 @@ int preSpell(){
 
 void spell_effect(int prof){
     int duration;
-    duration = (ROUND_LENGTH * 3) * clevel;
+    duration = (ROUND_LENGTH * 6) * clevel;
     tell_room(place,"%^YELLOW%^"+caster->QCN+" completes "+caster->QP+" evocation and is "
         "surrounded by roaring flames!",caster);
     tell_object(caster,"%^YELLOW%^You complete your evocation and are surrounded by "
@@ -71,22 +71,17 @@ void execute_attack(){
     }
     room      = environment(caster);
     attackers = caster->query_attackers();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
     if(lastattack == time())
         return;
     room->addObjectToCombatCycle(TO,1);
     lastattack = time();
     if(!sizeof(attackers))
         return;
+    define_base_damage(0);
+    tell_room(room,"%^BOLD%^%^RED%^Flames around "+caster->QCN+" burn "+caster->QP+" enemies!",({caster,target}));
+    tell_object(caster,"%^BOLD%^%^RED%^Flames of your shire field burn your enemies!");
     for(i=0;i<sizeof(attackers);i++){
         if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
-        tell_room(room,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" is burned by the blistering "
-            "shield of flames around "+caster->QCN+" as "+attackers[i]->QS+" strikes "
-            ""+caster->QO+"!",({caster,target}));
-        tell_object(caster,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" is burned by the shield of "
-            "flames as "+attackers[i]->QS+" strikes you!");
-//changed the below - was tell_object(target... which was sending the message to the caster ~Circe~ 7/29/19
         tell_object(attackers[i],"%^BOLD%^%^RED%^You are burned by the shield of flames as you strike "
             ""+caster->QCN+"!");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");

@@ -37,7 +37,7 @@ int preSpell()
 void spell_effect(int prof)
 {
     int duration;
-    duration = (ROUND_LENGTH * 3) * clevel;
+    duration = (ROUND_LENGTH * 6) * clevel;
     tell_room(place,"%^BLUE%^"+caster->QCN+" completes "+caster->QP+" the chant and is surrounded by restless shadows.",caster);
     tell_object(caster,"%^BLUE%^You complete your chant and are surrounded by restless shadows!");
     caster->set_property("vampiric shadow shield",1);
@@ -62,25 +62,27 @@ void execute_attack()
     }
     room      = environment(caster);
     attackers = caster->query_attackers();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
     if(lastattack == time())
         return;
     room->addObjectToCombatCycle(TO,1);
     lastattack = time();
     if(!sizeof(attackers))
         return;
-    for(i=0;i<sizeof(attackers)&&i<8;i++)
+
+    tell_room(room,"%^BLUE%^Shadows around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
+    tell_object(caster,"%^BLUE%^%^Shadows around you caress your enemies.");
+    define_base_damage(0);
+    for(i=0;i<sizeof(attackers);i++)
     {
         if(do_save(attackers[i],0))
             continue;
         if(attackers[i]->is_undead())
             continue;
-        tell_room(room,"%^BLUE%^Shadows around "+caster->QCN+" caress "+attackers[i]->QCN+"  as "+attackers[i]->QS+" strikes "+caster->QO+"!",({caster,target}));
-        tell_object(caster,"%^BLUE%^%^"+attackers[i]->QCN+" is caressed by the shield of shadows as "+attackers[i]->QS+" strikes you!");
+
         tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
-        caster->add_hp(sdamage/4);
+        if(i<8)
+            caster->add_hp(sdamage/4);
     }
 }
 
