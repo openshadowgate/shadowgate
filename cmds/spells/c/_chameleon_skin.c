@@ -52,7 +52,7 @@ void spell_effect(int prof) {
     }else{
        mylevel = caster->query_guild_level("psywarrior");
     }
-    mybonus = (mylevel/4) + 10;
+    mybonus = (mylevel/2) + 1;
 //    caster->add_skill_bonus("stealth",mybonus);
     caster->set_property("chameleoned",mybonus);
 //Because this was affecting other thief things (stab, etc.), I have adjusted only sneak and hide in shadows to take chameleoned into account ~C~ 11/28/15
