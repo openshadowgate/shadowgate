@@ -87,22 +87,24 @@ void init_lang() {
     string racefile;
     string *langs, i;
     string race;
+    string subrace;
 
     __Lang = ([]);
     _grammar = ([]);
     subgrammar = ([]);
 
     race = TO->query_race();
+    subrace = TO->query("subrace");
     if(!race || race == "")
         return;
 
     racefile = "/std/races/"+race+".c";
     if(!file_exists(racefile))
         return;
-    if(!arrayp(racefile->query_languages()["required"]))
+    if(!arrayp(racefile->query_languages(subrace)["required"]))
         return;
 
-    langs = racefile->query_languages()["required"];
+    langs = racefile->query_languages(subrace)["required"];
     foreach(i in langs)
     {
         set_lang(i,100);

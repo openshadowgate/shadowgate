@@ -622,10 +622,20 @@ void wizard_interface(object user, string type, string targ)
         }
         if(caster->has_aoe(query_spell_name()))
         {
-            tell_object(caster,"You can't concentrate on more than one area effect at a time!");
+            tell_object(caster,"You can't concentrate on more than one area effect of the type!");
             ::remove();
             return;
         }
+    }
+
+    if(query_traveling_aoe_spell())
+    {
+        if(caster->query_property("travaoe"))
+        {
+            tell_object(caster,"You can't concentrate on that many travaoe effects!");
+        }
+        ::remove();
+        return;
     }
 
     cname = caster->query_name();
@@ -1314,10 +1324,20 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     {
         if(caster->has_aoe(query_spell_name()))
         {
-            tell_object(caster,"You can't concentrate on more than one area effect at a time!");
+            tell_object(caster,"You can't concentrate on more than one area effect of the type!");
             ::remove();
             return;
         }
+    }
+
+    if(query_traveling_aoe_spell())
+    {
+        if(caster->query_property("travaoe"))
+        {
+            tell_object(caster,"You can't concentrate on that many travaoe effects!");
+        }
+        ::remove();
+        return;
     }
 
     // moving this up here cuz otherwise the prof dies (for backfires) and it gets cast locked. N, 6/15.
@@ -1614,6 +1634,10 @@ void before_cast_dest_effect()
                 place->remove_property_value("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
         }
     }
+    if(query_traveling_aoe_spell())
+    {
+        caster->remove_property("travaoe");
+    }
     if(objectp(TO)) TO->remove();
     return;
 }
@@ -1624,6 +1648,10 @@ void dest_effect()
        objectp(caster) &&
        caster->has_aoe(query_spell_name()))
         caster->subtract_aoe(query_spell_name());
+    if(query_traveling_aoe_spell() &&
+       objectp(caster))
+        caster->remove_property("travaoe");
+
     before_cast_dest_effect();
     return;
 }
@@ -1635,6 +1663,9 @@ int remove()
        objectp(caster) &&
        caster->has_aoe(query_spell_name()))
         caster->subtract_aoe(query_spell_name());
+    if(query_traveling_aoe_spell() &&
+       objectp(caster))
+        caster->remove_property("travaoe");
     return ::remove();
 }
 
