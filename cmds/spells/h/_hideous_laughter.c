@@ -1,12 +1,12 @@
 // Hideous Laughter
-/* Completely re-hashed the spell, to make its duration more reliable and 
-  avoid the random infinite_length bug that seemed to be caused by relying 
+/* Completely re-hashed the spell, to make its duration more reliable and
+  avoid the random infinite_length bug that seemed to be caused by relying
   on set_tripped for the duration.
   New function set_length added, and length variable changed to global, to
   keep it constant between different functions.
   All changed noted where they are made.
   Old version saved as _hideous_laughter.lujke
-  
+
   Lujke September 25 2005
 */
 #include <spell.h>
@@ -21,11 +21,12 @@ void check(int a,int b);
 void set_length();
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("hideous laughter");
     set_spell_level(([ "mage" : 2 ]));
+    set_sorc_bloodlines(({"boreal"}));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS hideous laughter on TARGET");
     set_description("Hideous Laughter, when cast, will force the target to laugh at anything that comes to mind.  The "
@@ -45,7 +46,7 @@ void create()
 string query_cast_string() { return caster->QCN+" hurls some mini tarts at "+target->QCN+" while waving a feather around."; }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int roundspassed, intelligence, modifier;
     modifier = 0;
@@ -57,19 +58,19 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-  
-    if (!spell_kill(target,caster)) 
+
+    if (!spell_kill(target,caster))
     {
         dest_effect();
         return;
     }
-    
+
     if ((intelligence >= 5) && (intelligence <= 7))   modifier = -4;
     if ((intelligence >= 8) && (intelligence <= 12))  modifier = -3;
     if ((intelligence >= 13) && (intelligence <= 14)) modifier = -2;
     if ((intelligence >= 15) && (intelligence <= 16)) modifier = -1;
 
-    if ((target->query_stats("intelligence") < 4) || (do_save(target,modifier))) 
+    if ((target->query_stats("intelligence") < 4) || (do_save(target,modifier)))
     {
         // Some additional code put in for the result of the target making its save. Now set so that
         // The target will attack if it makes its save. Lujke September 25 1005
@@ -77,7 +78,7 @@ void spell_effect(int prof)
             " at you, but nothing about it strikes you as funny.");
         tell_object(caster,"%^ORANGE%^You caper around in what should be an amusing manner and throw"
             " minute tarts at " + target->QCN + " but " + target->QS + " doesn't look amused.");
-        tell_room(environment(target),"%^ORANGE%^"+caster->QCN+" capers around and throws some minute tarts at " 
+        tell_room(environment(target),"%^ORANGE%^"+caster->QCN+" capers around and throws some minute tarts at "
             +target->QCN + ", who looks distinctly unamused." , ({target, caster}));
         if(!interactive(target))
         {
@@ -87,8 +88,8 @@ void spell_effect(int prof)
         }
         // End of additional 'target reaction' code
         dest_effect();
-    } 
-    else  
+    }
+    else
     {
         if(mind_immunity_check(target, "default"))
         {
@@ -97,8 +98,8 @@ void spell_effect(int prof)
             spell_successful();
             dest_effect();
             return;
-        }        
-        
+        }
+
         spell_successful();
         set_length();
         target->set_property("spelled", ({TO}) );
@@ -117,7 +118,7 @@ void set_length()
         length = 0;
         return;
     }
-    
+
     switch (clevel)
     {
     case 0..6:
@@ -145,14 +146,14 @@ void set_length()
     case 19:     int_adjust = 4;   break;
     default:     int_adjust = 4 + ((int)target->query_stats("intelligence")-19)/2;
     }
-    
+
     length = random(baselength) + baselength/2;
     switch(length)
     {
     case 0..4: length -= int_adjust/2; break;
-    default:   length -= int_adjust;  
+    default:   length -= int_adjust;
     }
-  
+
     if ((int)target->query_level()>clevel)
     {
         length -= (clevel - (int)target->query_level())/4;
@@ -164,12 +165,12 @@ void set_length()
 }
 
 
-void check(int roundspassed, int prof) 
+void check(int roundspassed, int prof)
 {
     int strength;
     int  num, roundstowait;
-    
-    if (!objectp(target)) 
+
+    if (!objectp(target))
     {
         dest_effect();
         return;
@@ -180,23 +181,23 @@ void check(int roundspassed, int prof)
     //    caster->force_me("say rounds passed: " + roundspassed);
     //  }
     death_check(target);
-    
-    if(roundspassed == 0) 
+
+    if(roundspassed == 0)
     {
         tell_object(target,"%^BOLD%^%^YELLOW%^You collapse into an uncontrollable laughter!");
         tell_room(environment(target),"%^BOLD%^%^YELLOW%^"+target->QCN+" collapses into a seemingly uncontrollable laughter!", target);
 
-        //  The previous tripped setting seemed to be giving unfeasibly long 'tripped' durations for the spell. 
+        //  The previous tripped setting seemed to be giving unfeasibly long 'tripped' durations for the spell.
         //  I have noticed 'tripped' being a bit uncontrollable in other settings, so I have now made it
         //  so the spell sets a long tripped duration on each 'check', then clears it by using set_tripped(0)
         //  when the target should stand up. This should make the spell much more controllable, but does
         //  have the side effect of clearing any pre-existing 'trip' effects.
         //  Lujke September 25 2005
-        //    target->set_tripped(length/3 +1,"You are on the floor rolling in laughter!"); 
- 
-        target->set_tripped(4,"You are on the floor rolling in laughter!"); 
+        //    target->set_tripped(length/3 +1,"You are on the floor rolling in laughter!");
 
-        if(!target->query_property("laughter")) 
+        target->set_tripped(4,"You are on the floor rolling in laughter!");
+
+        if(!target->query_property("laughter"))
         {
             stat_change(target,"strength",-2);
             str = 1;
@@ -206,17 +207,17 @@ void check(int roundspassed, int prof)
         return;
     }
 
-    target->set_tripped(4,"You are on the floor rolling in laughter!"); 
+    target->set_tripped(4,"You are on the floor rolling in laughter!");
 
-    if(roundspassed < roundstowait) 
+    if(roundspassed < roundstowait)
     {
         tell_object(target,"%^ORANGE%^The laughter lessens as you attempt to regain your footing.");
         tell_room(environment(target),"%^ORANGE%^"+target->QCN+" begins to control "+target->QP+" laughter and tries to struggle to "+target->QP+" feet.", target);
-        target->set_tripped(4,"You are on the floor rolling in laughter!"); 
+        target->set_tripped(4,"You are on the floor rolling in laughter!");
         call_out("check", ROUND_LENGTH, ++roundspassed, prof);
         return;
-    } 
-    else 
+    }
+    else
     {
         tell_object(target,"%^ORANGE%^You manage to stand, yet you still can't resist giggling and snickering.");
         tell_room(environment(target),"%^ORANGE%^"+target->QCN+" manages to stand up.", target);
@@ -236,20 +237,20 @@ void check(int roundspassed, int prof)
 
 void check2(int roundsleft, int prof)
 {
-    if (!objectp(target)) 
+    if (!objectp(target))
     {
         dest_effect();
         return;
     }
-    if (!objectp(environment(target))) 
+    if (!objectp(environment(target)))
     {
         dest_effect();
         return;
     }
 
-    if (--roundsleft > 0) 
+    if (--roundsleft > 0)
     {
-        switch (random(6)) 
+        switch (random(6))
         {
         case(0):
             tell_object(target,"You giggle.");
@@ -279,15 +280,15 @@ void check2(int roundsleft, int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
-  
+
     // not sure the finds are working so trying just removing without the check *Styx* 11/17/04
     //  if(find_call_out("check") != -1)
     remove_call_out("check");
     //  if(find_call_out("check2") != -1)
     remove_call_out("check2");
-    if((objectp(target))) 
+    if((objectp(target)))
     {
         //      && (member_array(TO,(object *)target->query_property("spelled")!= -1))) {
         //    tell_object(target,"You still exist..");
@@ -297,13 +298,13 @@ void dest_effect()
         target->set_tripped(0); // added by Lujke September 25 2005, to let the target get up if
                                 // the spell is dispelled
 
-        /*  The tripped setting probably needs removed too in the case of a dispel 
-        (one of the bug reports showed the tripped message still going after the dispel).  
-        However, I'm not sure offhand how to best do that and not kill other valid 
-        tripped settings so I'll just leave this as a reminder for now.  *Styx*  
-        - from above that *might* to be removed)  
+        /*  The tripped setting probably needs removed too in the case of a dispel
+        (one of the bug reports showed the tripped message still going after the dispel).
+        However, I'm not sure offhand how to best do that and not kill other valid
+        tripped settings so I'll just leave this as a reminder for now.  *Styx*
+        - from above that *might* to be removed)
         target->set_tripped(length/3 +1,"You are on the floor rolling in laughter!");
-        */     
+        */
         tell_object(target, "%^ORANGE%^You feel much more serious.");
         tell_room(environment(target), "%^ORANGE%^"+target->QCN+" stops smiling.", target);
     }

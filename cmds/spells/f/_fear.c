@@ -1,5 +1,5 @@
 //Updated by ~Circe~ 5/11/08 with rebalancing of domains
-//They will no longer drop everything, have a chance to 
+//They will no longer drop everything, have a chance to
 //unwield/drop weapons, and a chance to cower instead of run.
 //changed from Cyric to Bane by Circe 4/14/04
 //_fear.c
@@ -17,6 +17,7 @@ void create()
     set_spell_level(([ "cleric" : 5, "bard" : 3, "mage" : 4, "psion" : 6 ]));
     set_spell_sphere("enchantment_charm");
     set_spell_domain("tyranny");
+    set_sorc_bloodlines(({"daemon"}));
     set_syntax("cast CLASS fear");
     set_description("Fear sends a wave of horrid thoughts and images out "+
         "toward the foes around the caster, possibly "+
@@ -41,13 +42,13 @@ void spell_effect(int prof)
     int i,j, percent, x, hits,bonus;
     string *ids, MyType;
     object *weapons;
-    
+
     tell_object(caster,"%^BLUE%^You send a cone of dark images and "+
         "deep-seeded fears forth from your hand.");
 
-    if(!living(caster)) 
+    if(!living(caster))
     {
-        if(!objectp(target)) 
+        if(!objectp(target))
         {
             dest_effect();
             return;
@@ -55,14 +56,14 @@ void spell_effect(int prof)
         inven = all_living(environment(target));
         inven = filter_array(inven, "is_non_immortal",FILTERS_D);
         if(member_array(caster,inven) != -1) { inven -= ({caster}); }
-    } 
-    else 
+    }
+    else
     {
         inven = caster->query_attackers();
         inven -= ({caster});
         inven = filter_array(inven, "is_non_immortal",FILTERS_D);
     }
-    
+
     inven = distinct_array(inven);
     inven = target_filter(inven);
 
@@ -70,8 +71,8 @@ void spell_effect(int prof)
     if(hits < 1) hits = 1;
     if(hits > 10) hits = 10;
     newinven = ({});
-    
-    if(hits < sizeof(inven)) 
+
+    if(hits < sizeof(inven))
     {
         while(hits > 0)
         {
@@ -83,20 +84,20 @@ void spell_effect(int prof)
         }
         inven = newinven;
     }
-    
+
     if(!sizeof(inven))
     {
         dest_effect();
         return;
     }
-    
-    for (i=0;i<sizeof(inven);i++) 
+
+    for (i=0;i<sizeof(inven);i++)
     {
         if (!objectp(inven[i])) continue;
         if (wizardp(inven[i])) continue;
 
         MyType = (string)TO->query_spell_type();
-        switch (MyType) 
+        switch (MyType)
         {
         case "cleric":  bonus = (int)caster->query_stats("wisdom");         break;
         case "bard":    bonus = (int)caster->query_stats("charisma");       break;
@@ -106,8 +107,8 @@ void spell_effect(int prof)
         bonus = (bonus - 10) / 2;
         if(bonus < 0) bonus = 0;
         bonus = bonus*(-1);
-        
-        if(do_save(inven[i],bonus)) 
+
+        if(do_save(inven[i],bonus))
         {
             tell_object(inven[i], "%^BLUE%^You fight back some "+
                 "horrid images magically placed in your mind.");
@@ -115,13 +116,13 @@ void spell_effect(int prof)
                 "before regaining composure.",inven[i]);
             continue;
         }
-        
+
         if(race_immunity_check(inven[i], "fear"))
         {
             inven[i]->add_attacker(caster);
             continue;
         }
-        
+
         if(mind_immunity_check(inven[i], "default"))
         {
             inven[i]->add_attacker(caster);
@@ -129,7 +130,7 @@ void spell_effect(int prof)
             continue;
         }
 
-        
+
         tell_object(inven[i],"%^BLUE%^Images of horror and terror "+
             "flood your mind. You fight them all, but finally they "+
             "grip your mind and you tremble.");
@@ -137,7 +138,7 @@ void spell_effect(int prof)
         tell_room(place, "%^BLUE%^Sheer horror contorts "+
             ""+inven[i]->QCN+"'s face. "+inven[i]->QS+" breaks in "+
             "fear and trembles.",inven[i]);
-        
+
         if(clevel+random(10) > (int)inven[i]->query_highest_level()+random(10))
         {
             tell_object(inven[i],"%^BOLD%^%^BLUE%^Unable to contain "+
@@ -145,7 +146,7 @@ void spell_effect(int prof)
             tell_room(environment(inven[i]),"%^BOLD%^%^BLUE%^"+
                 ""+inven[i]->QCN+" cowers in terror!%^RESET%^",inven[i]);
             weapons = inven[i]->query_wielded();
-            if(sizeof(weapons) && inven[i]->query_property("no disarm")) 
+            if(sizeof(weapons) && inven[i]->query_property("no disarm"))
             {
                 tell_object(inven[i],"%^CYAN%^You lose your grip "+
                     "on your weapons!%^RESET%^");

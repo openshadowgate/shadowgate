@@ -14,6 +14,7 @@ void create() {
     set_spell_sphere("alteration");
     set_syntax("cast CLASS reverse gravity");
     set_damage_desc("untyped");
+    set_sorc_bloodlines(({"boreal"}));
     set_description("This spell reverses gravity in an area, causing all unattached objects and creatures within that area to fall upward and reach the top of the area in 1 round. If some solid object (such as a ceiling) is encountered in this fall, falling objects and creatures strike it in the same manner as they would during a normal downward fall, getting damaged. If an object or creature reaches the top of the area without striking anything, it remains there, until the spell ends, as if it was under normal gravity. At the end of the spell duration, affected objects and creatures fall downward. Ouch!");
     set_verbal_comp();
     set_somatic_comp();

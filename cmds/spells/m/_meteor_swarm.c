@@ -15,6 +15,7 @@ void create()
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS meteor swarm on TARGET");
+    set_sorc_bloodlines(({"boreal"}));
     set_damage_desc("half bludgeoning, half fire or versatile arcanist");
     set_description("When the meteor swarm spell is cast, the target creature is assaulted by a swarm of flaming meteors, "
         "doing considerable damage.  Any other beings in the path may be engulfed in the explosion and also have a chance to "

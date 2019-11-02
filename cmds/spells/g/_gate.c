@@ -10,18 +10,19 @@ object endplace, beastie;
 void do_summons();
 void do_travel(string destination);
 
-void create() 
+void create()
 {
     ::create();
     set_author("nienne");
     set_spell_name("gate");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("conjuration_summoning");
+    set_sorc_bloodlines(({"celestial"}));
     set_syntax("cast CLASS gate on summoning
         cast CLASS gate on travel | location");
-    set_description("The spell of gate is only available to the most skilled of conjurers, and holds twofold uses to its casting. 
+    set_description("The spell of gate is only available to the most skilled of conjurers, and holds twofold uses to its casting.
 
-The first is the use of the conjured portal as a means of transit, both for the caster and his allies, to a specified location previously memorized. 
+The first is the use of the conjured portal as a means of transit, both for the caster and his allies, to a specified location previously memorized.
 
 The second is the use of the portal to draw forth a powerful planar creature under the control of the caster, to act as a servant and/or a protector. This is a greater summons, and cannot be used simultaneously with other greater summons. You can give it weapons and equipment if you wish so, outsider will bring them back from outer planes.
 To command outsider, use %^ORANGE%^<command outsider to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^.
@@ -36,21 +37,21 @@ To dismiss outsider, %^ORANGE%^<dismiss outsider>%^RESET%^.");
     set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
 	return "%^GREEN%^"+caster->QCN+
 	" steps forward and commences the first short-clipped syllables of a spell.";
 }
 
-int preSpell() 
+int preSpell()
 {
     string destination;
-    if(arg == "summoning" && (caster->query_property("has_elemental") || caster->query_property("mages_sword"))) 
+    if(arg == "summoning" && (caster->query_property("has_elemental") || caster->query_property("mages_sword")))
     {
         tell_object(caster,"You already have a powerful summoned creature under your control.");
         return 0;
     }
-    if (sscanf(arg,"%s | %s",purpose,destination) != 2 && arg != "summoning") 
+    if (sscanf(arg,"%s | %s",purpose,destination) != 2 && arg != "summoning")
     {
         tell_object(caster, "Syntax: cast mage gate on summoning OR \n\t"+
         "cast mage gate on travel | location");
@@ -59,23 +60,23 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     string destination;
-    if (!objectp(caster)) 
+    if (!objectp(caster))
     {
         TO->remove();
         return;
     }
     arg = lower_case(arg);
-    if(arg == "summoning") 
+    if(arg == "summoning")
     {
         do_summons();
         return;
     }
-    if (sscanf(arg,"%s | %s",purpose,destination) == 2) 
+    if (sscanf(arg,"%s | %s",purpose,destination) == 2)
     {
-        if(purpose == "travel") 
+        if(purpose == "travel")
         {
             do_travel(destination);
             return;
@@ -87,14 +88,14 @@ void spell_effect(int prof)
     return;
 }
 
-void do_summons() 
+void do_summons()
 {
-    if (!objectp(caster)) 
+    if (!objectp(caster))
     {
         TO->remove();
         return;
     }
-    if (environment(caster) != place) 
+    if (environment(caster) != place)
     {
         tell_object(caster,"Your movement causes the spellcasting to fail.");
         tell_room(place,caster->QCN+" stops casting and looks a little disoriented.",caster);
@@ -112,16 +113,16 @@ void do_summons()
     call_out("do_summons_2",ROUND_LENGTH);
 }
 
-void do_summons_2() 
+void do_summons_2()
 {
     int myalign, beastalign;
     object device;
-    if (!objectp(caster)) 
+    if (!objectp(caster))
     {
         TO->remove();
         return;
     }
-    if (environment(caster) != place) 
+    if (environment(caster) != place)
     {
         tell_object(caster,"Your movement causes the spellcasting to fail.");
         tell_room(place,caster->QCN+" stops casting and looks a little disoriented.",caster);
@@ -150,23 +151,23 @@ void do_summons_2()
     beastie->set_property("minion", caster);
     beastie->move(place);
     beastie->setup_beastie(caster,beastalign);
-    beastie->set_caster(caster);        
+    beastie->set_caster(caster);
     beastie->set_mylevel(clevel);
 
     caster->set_property("has_elemental",1);
     addSpellToCaster();
 }
 
-void do_travel(string destination) 
+void do_travel(string destination)
 {
     string file;
     mapping tmp;
-    if (!objectp(caster)) 
+    if (!objectp(caster))
     {
         TO->remove();
         return;
     }
-    if (environment(caster) != place) 
+    if (environment(caster) != place)
     {
         tell_object(caster,"Your movement causes the spellcasting to fail.");
         tell_room(place,caster->QCN+" stops casting and looks a little disoriented.",caster);
@@ -207,30 +208,30 @@ void do_travel(string destination)
     call_out("do_travel_2",ROUND_LENGTH,file);
 }
 
-void do_travel_2(string file) 
+void do_travel_2(string file)
 {
     int mypower, startpower, endpower, bonus, portnum;
-    if (!objectp(caster)) 
+    if (!objectp(caster))
     {
         TO->remove();
         return;
     }
-    if (environment(caster) != place) 
+    if (environment(caster) != place)
     {
         tell_object(caster,"Your movement causes the spellcasting to fail.");
         tell_room(place,caster->QCN+" stops casting and looks a little disoriented.",caster);
         TO->remove();
         return;
     }
-    if(file) 
+    if(file)
     {
         if(!(endplace = find_object_or_load(file))) file = 0;
     }
-    if(endplace && (endplace->query_property("no teleport") || 
-    place->query_property("no teleport") || 
+    if(endplace && (endplace->query_property("no teleport") ||
+    place->query_property("no teleport") ||
     !endplace->is_room())) file = 0;
 
-    if(endplace && (endplace->query_property("teleport proof") || 
+    if(endplace && (endplace->query_property("teleport proof") ||
     place->query_property("teleport proof")))
     {
         startpower = place->query_property("teleport proof");
@@ -255,7 +256,7 @@ void do_travel_2(string file)
     "faster of their own accord. Finally they shimmer into "+
     "being as an ovoid portal within the air, offering travel to another place.%^RESET%^");
 
-    if(member_array("portal", place->query_exits()) == -1) 
+    if(member_array("portal", place->query_exits()) == -1)
     {
         place->add_exit(file,"portal");
     }
@@ -294,23 +295,23 @@ void do_travel_2(string file)
     call_out("dest_effect",ROUND_LENGTH*clevel);
 }
 
-void dest_effect() 
+void dest_effect()
 {
     string CreatedExit;
-    if(purpose == "travel") 
+    if(purpose == "travel")
     {
         tell_room(place,"%^GREEN%^The portal ripples and then abruptly vanishes!%^RESET%^");
         tell_room(endplace,"%^GREEN%^The portal ripples and then abruptly "+
         "vanishes!%^RESET%^");
-        if(CreatedExit = TO->query_property("MyCreatedEnter")) 
+        if(CreatedExit = TO->query_property("MyCreatedEnter"))
         {
             if(objectp(place)) place->remove_exit(CreatedExit);
         }
         else if(objectp(place)) place->remove_exit("portal");
-        if(CreatedExit = TO->query_property("MyCreatedExit")) 
+        if(CreatedExit = TO->query_property("MyCreatedExit"))
         {
             if(objectp(endplace)) endplace->remove_exit(CreatedExit);
-        }   
+        }
         else if(objectp(endplace)) endplace->remove_exit("portal");
     }
     if(objectp(caster) && arg == "summoning") caster->remove_property("has_elemental");

@@ -18,6 +18,7 @@ create() {
     set_description("This will create a small ball of light, which will light your way. You can cast it on an object or "
 "player which it will follow, instead of the caster.");
     set_non_living_ok();
+    set_sorc_bloodlines(({"celestial"}));
     set_target_required(1);
     set_helpful_spell(1);
 }
@@ -29,7 +30,7 @@ string query_cast_string() {
 }
 
 spell_effect(int prof) {
-    int level; 
+    int level;
 
     if (interactive(caster)) {
         tell_object(caster, "You create a mystical light source.");
@@ -38,7 +39,7 @@ spell_effect(int prof) {
             tell_object(target, caster->QCN+" touches you and a light appears.\n");
     } else {
         tell_room(place, caster->QCN+ " creates a mystical light source.",caster);
-    }  
+    }
 
     if(level > 20) level = 20;
     ob = new("/d/magic/obj/light");

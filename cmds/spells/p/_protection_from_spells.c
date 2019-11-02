@@ -10,6 +10,7 @@ void create() {
     set_spell_name("protection from spells");
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("abjuration");
+    set_sorc_bloodlines(({"astral"}));
     set_syntax("cast CLASS protection from spells on TARGET");
     set_description("Using this power will allow a mage or sorcerer to temporarily raise the target's "
 "resistance to spells of all kinds.  This is only a temporary state, however, and will fade after a "
@@ -71,7 +72,7 @@ void spell_effect(int prof) {
 
 void dest_effect(){
 
-    if(objectp(target)) 
+    if(objectp(target))
     {
         target->set_property("spell damage resistance",(-1*lower));
         tell_room(environment(target),"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "
@@ -82,4 +83,3 @@ void dest_effect(){
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -13,6 +13,7 @@ void create() {
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS lightning arc");
     set_damage_desc("electricity");
+    set_sorc_bloodlines(({"daemon"}));
     set_description("You generate an arc of lightning between at least two targets. It connects between them and causes damage to everything in its path. This spell requires at least two opponents to work. An agile opponent might step out of its way and avoid some of the energy.");
     set_verbal_comp();
     set_somatic_comp();

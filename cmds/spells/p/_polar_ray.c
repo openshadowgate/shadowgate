@@ -18,6 +18,7 @@ create()
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS polar ray on TARGET");
     set_damage_desc("cold");
+    set_sorc_bloodlines(({"boreal"}));
     set_description("A blue-white ray of freezing air and ice springs from casters hand as she touches her target, freezing them.");
     set_verbal_comp();
     set_somatic_comp();

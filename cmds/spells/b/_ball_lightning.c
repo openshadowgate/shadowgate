@@ -6,13 +6,14 @@ inherit SPELL;
 string element;
 
 
-void create() 
+void create()
 {
     ::create();
     set_author("cythera");
     set_spell_name("ball lightning");
     set_spell_level(([ "mage" : 5 ]));
     set_spell_sphere("conjuration_summoning");
+    set_sorc_bloodlines(({"celestial"}));
     set_syntax("cast CLASS ball lightning on TARGET");
     set_description("This spell allows for a mage to conjure forth at least three balls of lightning, which they can then "
         "hurl at a target. As the mage's power grows, she will find it easier to summon a greater number of lightning balls, "
@@ -24,11 +25,11 @@ void create()
 }
 
 
-string query_cast_string() 
-{    
+string query_cast_string()
+{
     element = (string)caster->query("elementalist");
-    
-    switch(element) 
+
+    switch(element)
     {
     case "acid":
         tell_object(caster,"%^RESET%^%^GREEN%^As you chant rapidly, %^CYAN%^dr%^GREEN%^o%^CYAN%^p%^GREEN%^l%^CYAN%^ets %^GREEN%^of %^BOLD%^%^GREEN%^a%^YELLOW%^c%^GREEN%^id %^RESET%^%^GREEN%^begin to form in your hand.%^RESET%^");
@@ -60,7 +61,7 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int num, numdarts;
     string hardness;
@@ -70,12 +71,12 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    
-    spell_successful();    
-    
-    if (interactive(caster)) 
+
+    spell_successful();
+
+    if (interactive(caster))
     {
-        switch(element) 
+        switch(element)
         {
         case "acid":
             tell_object(caster,"%^RESET%^%^GREEN%^The %^CYAN%^dr%^GREEN%^o%^CYAN%^p%^GREEN%^l%^CYAN%^ets %^GREEN%^begin to form into spheres.%^RESET%^");
@@ -98,11 +99,11 @@ void spell_effect(int prof)
             tell_room(place,"%^BOLD%^%^CYAN%^The sparks of lighting in "+caster->QCN+"'s hands form into balls.%^RESET%^",caster);
             break;
         }
-    }    
-    
+    }
+
     if(clevel) { numdarts = (clevel+1) / 5; }
     else       { numdarts = (caster->query_guild_level("mage") + 1) / 5; }
-    
+
     switch (1 + sdamage / numdarts)
     {
     case 2:  hardness = "stinging"; break;
@@ -110,10 +111,10 @@ void spell_effect(int prof)
     case 4:  hardness = "shocking"; break;
     default: hardness = "blasting"; break;
     }
-        
-    if(numdarts > 1) 
+
+    if(numdarts > 1)
     {
-        switch(element) 
+        switch(element)
         {
         case "acid":
             tell_object(caster,"%^BOLD%^%^GREEN%^"+numdarts+" spheres of %^RESET%^%^RED%^corrosive %^BOLD%^%^GREEN%^ac%^YELLOW%^i%^GREEN%^d speed forward from your hand, s%^RESET%^%^GREEN%^p%^BOLD%^%^GREEN%^l%^CYAN%^a%^GREEN%^sh%^YELLOW%^i%^GREEN%^ng their deadly contents onto "+target->QCN+"!%^RESET%^");
@@ -141,10 +142,10 @@ void spell_effect(int prof)
             tell_room(place,"%^BOLD%^%^WHITE%^"+numdarts+" balls of lighting fly from "+caster->QCN+"'s hand, "+hardness+" "+target->QCN+"!",({caster, target}) );
             break;
         }
-    } 
-    else 
+    }
+    else
     {
-        switch(element) 
+        switch(element)
         {
         case "acid":
             tell_object(caster,"%^BOLD%^%^GREEN%^A sphere of %^RESET%^%^RED%^corrosive %^BOLD%^%^GREEN%^ac%^YELLOW%^i%^GREEN%^d speed forward from your hand, s%^RESET%^%^GREEN%^p%^BOLD%^%^GREEN%^l%^CYAN%^a%^GREEN%^sh%^YELLOW%^i%^GREEN%^ng its deadly contents onto "+target->QCN+"!%^RESET%^");
@@ -173,7 +174,7 @@ void spell_effect(int prof)
             break;
         }
     }
-    
+
     damage_targ(target, target->return_target_limb(), sdamage, element);
     dest_effect();
     return;

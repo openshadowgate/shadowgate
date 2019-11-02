@@ -1,6 +1,6 @@
 #include <magic.h>
 #include <std.h>
-#include <spell.h>
+#include <spell.h>2
 inherit SPELL;
 
 object *animated, *monsters, control;
@@ -15,6 +15,7 @@ void create() {
     set_spell_level(([ "mage" : 7 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS mages sword");
+    set_sorc_bloodlines(({"celestial"}));
     set_description("This spell will create a floating and controllable sword for you that you can use to attack your "
 "enemies.  The sword will automatically follow and protect you.  Should you lose it, though, simply go into the room with "
 "it and <command sword to follow>. This is a greater summons, and cannot be used simultaneously with other greater summons.");

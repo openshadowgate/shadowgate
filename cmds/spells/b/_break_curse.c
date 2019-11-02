@@ -10,7 +10,7 @@ void create() {
     set_spell_level(([ "mage" : 4, "bard" : 4, "paladin" : 3, "cleric" : 8 ]));
     set_spell_sphere("abjuration");
     set_spell_domain("magic");
-    set_sorc_bloodlines(({"astral"}));
+    set_sorc_bloodlines(({"astral","celestial"}));
     set_syntax("cast CLASS break curse on <object> [at <player>]");
     set_description("This powerful spell will break a curse that has been placed upon a magical item, unravelling the "
 "corrupted weave around it.  Only the most skilled of abjurers can attempt to disentangle enchantments in such a "

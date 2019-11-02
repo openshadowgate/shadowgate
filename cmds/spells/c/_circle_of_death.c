@@ -12,6 +12,7 @@ void create()
     set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS circle of death");
+    set_sorc_bloodlines(({"daemon"}));
     set_damage_desc("negative energy to living");
     set_description("The caster draws a circle around herself and channels negative energy outwards, destroying living creatures that are not able to withstand it, but not affecting at all those of the strong will.");
     set_verbal_comp();

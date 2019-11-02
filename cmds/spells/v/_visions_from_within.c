@@ -19,6 +19,7 @@ void create()
     set_description("With this spell the caster shares own nightmares with everyone in the area.");
     set_verbal_comp();
     set_somatic_comp();
+    set_sorc_bloodlines(({"daemon"}));
     set_save("will");
     set_components((["mage":(["rose petals":3,"slug":1])]));
     aoe_spell(1);

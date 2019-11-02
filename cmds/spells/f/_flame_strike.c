@@ -33,7 +33,7 @@ void create() {
     set_save("reflex");
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     place = environment(caster);
     YOU=caster->QCN;
@@ -49,7 +49,7 @@ void spell_effect(int prof)
     }
     HIM=target->QCN;
     foes=caster->query_attackers();
-    
+
     foes = target_filter(foes);
 
     if (member_array(target,foes) != -1)

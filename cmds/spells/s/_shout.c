@@ -15,6 +15,7 @@ create() {
     set_spell_level(([ "mage" : 4, "bard" : 4 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shout on TARGET");
+    set_sorc_bloodlines(({"boreal"}));
     set_description("This spell allows for the mage to magically enchant and enhance their voice to deliver a strong sonic attack against one target.  The amplified voice can knock some targets off balance for a moment, forcing them to spend some time for the ringing in their ears to pass.");
     set_verbal_comp();
     set_somatic_comp();
@@ -31,7 +32,7 @@ spell_effect(int prof) {
     int num;
     string target_limb;
     spell_successful();
-    
+
     if (environment(caster) != environment(target)) {
         tell_object(caster,"Your target has left your range.\n");
         dest_effect();
