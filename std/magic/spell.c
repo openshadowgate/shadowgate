@@ -633,9 +633,9 @@ void wizard_interface(object user, string type, string targ)
         if(caster->query_property("travaoe"))
         {
             tell_object(caster,"You can't concentrate on that many travaoe effects!");
+            ::remove();
+            return;
         }
-        ::remove();
-        return;
     }
 
     cname = caster->query_name();
@@ -1335,9 +1335,9 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         if(caster->query_property("travaoe"))
         {
             tell_object(caster,"You can't concentrate on that many travaoe effects!");
+            ::remove();
+            return;
         }
-        ::remove();
-        return;
     }
 
     // moving this up here cuz otherwise the prof dies (for backfires) and it gets cast locked. N, 6/15.

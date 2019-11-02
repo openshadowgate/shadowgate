@@ -82,7 +82,7 @@ void execute_attack()
         tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
         if(i<8)
-            caster->add_hp(sdamage/4);
+            caster->add_hp(sdamage/16);
     }
 }
 
