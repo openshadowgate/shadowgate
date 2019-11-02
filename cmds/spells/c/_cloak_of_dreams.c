@@ -56,12 +56,13 @@ void execute_attack()
     attackers -= ({caster});
     attackers -= caster->query_followers();
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
+    attackers = filter_array(attackers,(:$1->is_living():));
+    attackers = filter_array(attackers,(:!$1->is_undead():));
+    attackers = filter_array(attackers,(:!$1->query_asleep():));
     attackers = target_filter(attackers);
     for(i=0;i<sizeof(attackers)&&i<6;i++)
     {
         if(do_save(attackers[i],4))
-            continue;
-        if(attackers[i]->is_undead())
             continue;
         tell_room(room,"%^BLUE%^"+attackers[i]->QCN+" falls asleep looking at "+caster->QCN+".%^RESET%^",({attackers[i]}));
         tell_object(attackers[i],"%^BLUE%^You fall asleep looking at a dreamy visage of "+caster->QCN+".%^RESET%^");

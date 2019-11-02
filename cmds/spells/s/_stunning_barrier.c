@@ -21,7 +21,7 @@ void create()
 
 int preSpell()
 {
-    if(caster->query_property("studdning barrier"))
+    if(caster->query_property("stunning barrier"))
     {
         tell_object(caster,"You are already protected by this spell.");
         return 0;

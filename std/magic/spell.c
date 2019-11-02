@@ -1013,6 +1013,9 @@ void wizard_interface(object user, string type, string targ)
             place->set_property("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
     }
 
+    if(query_traveling_aoe_spell())
+        caster->set_property("travaoe",1);
+
     if(objectp(wildspell = WildMagicArea(environment(caster))))
     {
         caster->remove_property("spell_casting");
