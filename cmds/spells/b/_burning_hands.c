@@ -1,4 +1,4 @@
-//      Burning Hands 
+//      Burning Hands
 //      Thorn@Shadowgate
 //      10/16/94
 //      Totally modified and updated by Vashkar
@@ -19,6 +19,7 @@ void create() {
     set_spell_name("burning hands");
     set_spell_level(([ "mage" : 1, "monk" : 3 ]));
     set_spell_sphere("alteration");
+    set_sorc_bloodlines(({"elemental"}));
     set_syntax("cast CLASS burning hands on TARGET");
     set_description("This spell begins by the caster fanning out his hands while chanting the spell.  Flames will flare "
 "out and do a small amount of damage to the target and those near him. A versatile arcanist can manipulate the base element "
@@ -59,10 +60,10 @@ void spell_effect(int prof) {
     else {
         allies = ({caster});
     }
-    
+
     if (sizeof(caster->query_classes()) == 1) {
         targets -= allies;
-        if (caster->query_followers()) 
+        if (caster->query_followers())
             targets -= caster->query_followers();
     }
     element = (string)caster->query("elementalist");

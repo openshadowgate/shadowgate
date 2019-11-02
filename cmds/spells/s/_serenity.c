@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS serenity");
     set_damage_desc("mental");
-    set_sorc_bloodlines(({"celestial"}));
+    set_sorc_bloodlines(({"celestial","destiny"}));
     set_description("This spell sends a serene song into mind of everyone present. Those who attack you will feel mental pain of overcoming contradiction. Strong-willed will shrug this song off.");
     splash_spell(1);
     set_save("will");

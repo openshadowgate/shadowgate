@@ -15,6 +15,7 @@ void create()
     set_spell_level(([ "mage" : 7,]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS delayed fireball on TARGET");
+    set_sorc_bloodlines(({"elemental"}));
     set_damage_desc("delayed fire");
     set_description("The spell functions much like fireball, but at a greater potency, and as such takes more time to build its blast.");
     set_verbal_comp();

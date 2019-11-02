@@ -19,6 +19,7 @@ void create(){
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS incendiary cloud");
+    set_sorc_bloodlines(({"elemental"}));
     set_damage_desc("fire or versatile arcanist");
     set_description("Upon casting this spell, the mage conjures "
        "a heaving mass of smoke and flames that blankets the area, "
