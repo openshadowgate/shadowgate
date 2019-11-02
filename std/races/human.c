@@ -103,6 +103,7 @@ int sight_bonus(string subrace) {
        subrace == "aasimar" ||
        subrace == "air genasi" ||
        subrace == "earth genasi" ||
+       subrace == "dhampir" ||
        subrace == "fire genasi" ||
        subrace == "water genasi" ||
        subrace == "feytouched")

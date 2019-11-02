@@ -519,6 +519,9 @@ void init()
     ::init();
     if(!objectp(TP)) return;
     if(!interactive(TP)) return;
+    if(userp(TP))
+        if(!newbiep(TP))
+            TO->remove();
     add_action("reset_character_info","reset");
     add_action("okdone","done");
     add_action("reroll", "reroll");
