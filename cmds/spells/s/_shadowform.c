@@ -21,9 +21,11 @@ void create()
 
 int preSpell()
 {
+    target = caster;
     if(target->query_property("shadowform"))
     {
-        tell_object(caster,"The target is already under the influence of similar effect");
+        tell_object(caster,"You are already under the influence of similar effect");
+        return 0;
     }
     return 1;
 }
@@ -42,7 +44,7 @@ spell_effect()
     target->set_property("shadowform",clevel);
     target->set_property("added short",({"%^RESET%^%^BLUE%^ (shadow)%^RESET%^"}));
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*(clevel/4+1));
+    call_out("dest_effect",ROUND_LENGTH*(clevel/6+1));
 }
 
 void dest_effect()
@@ -52,7 +54,7 @@ void dest_effect()
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target,"%^BLUE%^You feel yourself again as shadowform disappears.%^RESET%^");
         target->remove_property_value("added short",({"%^RESET%^%^BLUE%^ (shadow)%^RESET%^"}));
-        target->remove_property("chameleoned");
+        target->remove_property("shadowform");
     }
     ::dest_effect();
     if(objectp(TO))
