@@ -32,17 +32,17 @@ int get_level_block(int num)
 int get_exp_cost(object obj,int num)
 {
     int level,cost,extra;
-    
+
     int level_adjust;
-    string race,subrace,file;    
-    
+    string race,subrace,file;
+
     if(!objectp(obj)) { return 0; }
 
     race = (string)obj->query_race();
     subrace = (string)obj->query("subrace");
     file = "/std/races/"+race+".c";
     if(file_exists(file))
-    {       
+    {
         level_adjust = (int)file->level_adjustment(subrace);
     }
 
@@ -69,9 +69,9 @@ int confirm_drop(string str,string theclass,int drop,int cost)
         tell_object(TP,"%^BOLD%^Aborting...%^RESET%^");
         return 1;
     }
-    
+
     log_file("abandoned_classes",""+TP->query_true_name()+" abandoned "+TP->QP+" "+theclass+" class, loosing "+drop+" levels and "+(int)cost+" exp "+ctime(time())+"\n");
-    
+
     class_ob = find_object_or_load(DIR_CLASSES+"/"+theclass+".c");
     if(objectp(class_ob)) { class_ob->remove_base_class(TP); }
     //tell_object(TP, "cost = "+cost);
@@ -123,7 +123,7 @@ int confirm_drop(string str,string theclass,int drop,int cost)
     {
         TP->set_guild_level(theclass,0);
         TP->set_mlevel(theclass,0);
-        TP->remove_class(theclass);        
+        TP->remove_class(theclass);
         tell_object(TP,"%^BOLD%^Removing class %^MAGENTA%^"+theclass+"%^RESET%^%^BOLD%^...%^RESET%^");
         TP->restrict_channel(theclass);
     }
@@ -155,7 +155,7 @@ int confirm_drop(string str,string theclass,int drop,int cost)
         TP->set_divine_domain(({}));
         tell_object(TP,"%^BOLD%^Clearing domains... you may reassign these at a church/temple if you still have class levels.");
     }
-    
+
     tell_object(TP,"%^BOLD%^Rebuilding class feats...%^RESET%^");
     classes = (string *)TP->query_classes();
     for(i=0;i<sizeof(classes);i++)
@@ -208,7 +208,7 @@ int cmd_abandon(string str)
         tell_object(TP,"%^BOLD%^You don't have a class yet, try this later.%^RESET%^");
         return 1;
     }
-    
+
     for(i=0;i<sizeof(classes);i++)
     {
         class_ob = find_object_or_load(DIR_CLASSES+"/"+classes[i]+".c");
@@ -217,9 +217,11 @@ int cmd_abandon(string str)
             tell_object(TP, "There's something wrong with one of your classes, please contact a wiz and try again later.");
             return 1;
         }
-        if(class_ob->is_prestige_class() && str != classes[i])
+        if(class_ob->is_prestige_class() &&
+           str != classes[i] &&
+           member_array(str,class_ob->query_base_classes()) !=-1)
         {
-            tell_object(TP, "You must abandon any prestige classes before abandoning regular class levels.");
+            tell_object(TP, "You must abandon any prestige classes before abandoning base class levels.");
             return 1;
         }
     }
@@ -242,7 +244,7 @@ int cmd_abandon(string str)
         "before you are able to abandon.");
         return 1;
     }
-    if(intp("/daemon/user_d.c"->get_scaled_level(TP))) 
+    if(intp("/daemon/user_d.c"->get_scaled_level(TP)))
     {
         tell_object(TP, "%^BOLD%^%^RED%^You have scaled your level down and cannot abandon "+
         "until your level is reset to normal.%^RESET%^");
@@ -297,7 +299,7 @@ abandon %^ORANGE%^%^ULINE%^CLASS%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will allow a player to abandon a class completely or allow them to abandon enough levels in the class to drop them back down to the nearest multiclass level block. A player must be level 11 or higher in order to be able to use this command. It will drop a level 11-20 player down to level 10, a 21-30 player to level 20, and a 31-40 level player to level 30. 
+This command will allow a player to abandon a class completely or allow them to abandon enough levels in the class to drop them back down to the nearest multiclass level block. A player must be level 11 or higher in order to be able to use this command. It will drop a level 11-20 player down to level 10, a 21-30 player to level 20, and a 31-40 level player to level 30.
 
 All of your feats and skills will be reset when you abandon a class, but you will be allowed to pick an amount of free feats that are equal to the amount of feats you previously had. You can't spend more free feats than you are allowed at your current level, but they will remain until you have gained enough levels to use them later, even if you abandon more levels or classes before that time.
 
