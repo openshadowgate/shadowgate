@@ -13,6 +13,7 @@ void create() {
     set_spell_name("greater teleport");
     set_spell_level(([ "mage" : 7 ]));
     set_spell_sphere("conjuration_summoning");
+    set_sorc_bloodlines(({"abyssal"}));
     set_syntax("cast CLASS greater teleport on LOCATION");
     set_description("This greater version of teleport allow mage to travel to her destination, without change to arrive off target, bringing all her followers with her.
 
@@ -33,7 +34,7 @@ string query_cast_string()
 void spell_effect(int prof)
 {
     endplace = caster->query_rem_room(arg);
-    
+
     spell_successful();
 
     if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
@@ -54,7 +55,7 @@ void spell_effect_next()
 
     object *party, *presentparty, *followers, endplace;
     int i, healed;
-    
+
     presentparty = ({});
     followers = caster->query_followers();
     if(sizeof(followers))
@@ -90,11 +91,11 @@ void spell_effect_next()
         presentparty += followers;
         for(i=0;i<sizeof(followers);i++)
         {
-            if(!objectp(followers[i])) 
+            if(!objectp(followers[i]))
             {
                 presentparty -= ({followers[i]});
                 continue;
-            }            
+            }
             if(member_array(followers[i],presentparty) != -1)
                 continue;
         }
@@ -108,4 +109,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -315,7 +315,7 @@ void set_damage_desc(string desc)
 
 void set_spell_duration() {    duration = 1; }
 void set_spell_sphere(string sphere) { spell_sphere = sphere; }
-void set_sorc_bloodline(string * bloodlines) { sorc_bloodlines = bloodlines; }
+void set_sorc_bloodlines(string * bloodlines) { sorc_bloodlines = bloodlines; }
 void set_cast_string(string str) {  cast_string = str; }
 void set_silent_casting(int a) {    silent_casting = a; }
 void set_target_required(int a) {   target_required = a; }
@@ -2657,7 +2657,7 @@ void help() {
     if(mydiscipline != "")
         write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
     if(pointerp(sorc_bloodlines))
-        write("%^BOLD%^%^RED%^Bloodlines:%^RESET%^ "+implode(sorc_bloodlines,", "));
+        write("%^BOLD%^%^RED%^Bloodline:%^RESET%^ "+implode(sorc_bloodlines,", "));
     if(!save_type)
         save_type = "";
     if(save_type != "")

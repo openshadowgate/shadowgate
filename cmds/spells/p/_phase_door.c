@@ -5,13 +5,14 @@ inherit SPELL;
 string where, *exits, dest_name;
 object dest;
 
-#define DELAY 180 //3 min delay 
+#define DELAY 180 //3 min delay
 
 void create() {
     ::create();
     set_spell_name("phase door");
     set_spell_level(([ "psion" : 7, "mage" : 7 ]));
     set_spell_sphere("alteration");
+    set_sorc_bloodlines(({"aberrant"}));
     set_syntax("cast CLASS phase door on DIRECTION");
     set_description("With this spell the caster can teleport a short distance away, through doors or any exits. The spell can be used in combat and allows for fast escape, yet it will be barred by magically sealed doors. After phasing a door, caster must wait a while before she can do it again.");
     set_verbal_comp();
@@ -77,7 +78,7 @@ void spell_effect(int prof) {
   }else{
      mylevel = caster->query_guild_level("psion");
   }
-  if(!caster->query_invis()){   
+  if(!caster->query_invis()){
      tell_room(place,"%^BOLD%^%^BLACK%^A muted %^RESET%^%^RED%^p"+
         "%^ORANGE%^r%^YELLOW%^i%^RESET%^%^GREEN%^s%^CYAN%^m"+
         "%^BLUE%^a%^MAGENTA%^t%^RED%^i%^ORANGE%^c %^BOLD%^%^BLACK%^"+
@@ -116,4 +117,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

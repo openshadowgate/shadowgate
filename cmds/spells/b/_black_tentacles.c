@@ -16,6 +16,7 @@ void create() {
     set_spell_level(([ "mage" : 4 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS black tentacles");
+    set_sorc_bloodlines(({"aberrant"}));
     set_description("This spell summons up a mass of writhing black "+
 	"tentacles from the earth at your feet. These will "+
 	"ensnare anything nearby to slow their escape, and attempt to "+
@@ -38,7 +39,7 @@ int preSpell()
    	return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
 	tell_object(caster,"%^BLUE%^You kneel down, whispering your "+
 	"summons through the earth.%^RESET%^");
@@ -56,8 +57,8 @@ void spell_effect(int prof)
     	inven -= ({caster});
     	inven = filter_array(inven,"is_non_immortal",FILTERS_D);
     inven = target_filter(inven);
-    
-    	if(!sizeof(inven)) 
+
+    	if(!sizeof(inven))
 	{
       	tell_object(caster,"%^CYAN%^From just beneath the earth "+
 		"at your feet, you feel the shiver of the tentacles as "
@@ -73,11 +74,11 @@ void spell_effect(int prof)
 	"writhe up out of the earth, coiling and "
 	"grasping at anything within reach!%^RESET%^");
 
-    	for(i=0;i<sizeof(inven);i++) 
+    	for(i=0;i<sizeof(inven);i++)
         {
             if(!objectp(inven[i])) { continue; }
-            if(random((int)inven[i]->query_stats("strength") + 
-                      roll_dice(1,20)) < random(clevel+8)) 
+            if(random((int)inven[i]->query_stats("strength") +
+                      roll_dice(1,20)) < random(clevel+8))
             {
                 tell_object(inven[i],"%^CYAN%^One manages to wrap about your "+
                             "leg and ensnare you!");
@@ -91,12 +92,12 @@ void spell_effect(int prof)
             	caught += ({ inven[i] });
             	continue;
         	}
-        	if(random((int)inven[i]->query_stats("dexterity") + 
-                      1) < roll_dice(1,25) && random(2)) 
+        	if(random((int)inven[i]->query_stats("dexterity") +
+                      1) < roll_dice(1,25) && random(2))
             {
                 tell_object(inven[i],"%^CYAN%^You stumble as one of the "+
                             "tentacles almost knocks you from your feet!");
-		
+
                 tell_room(place,"%^CYAN%^"+inven[i]->QCN+
                           " stumbles as a tentacle knocks "+inven[i]->QO+" from "+
                           inven[i]->QP+" feet!",inven[i]);
@@ -112,39 +113,39 @@ void spell_effect(int prof)
     	call_out("do_tentacles",ROUND_LENGTH);
 }
 
-void do_tentacles() 
+void do_tentacles()
 {
 	object *removing;
     int i;
 	//tell_object(caster, "PLACE = "+identify(PLACE));
-    if(!present(caster,PLACE)) 
+    if(!present(caster,PLACE))
 	{
       	dest_effect();
         return;
     }
-    if(caster->query_unconscious()) 
+    if(caster->query_unconscious())
 	{
       	dest_effect();
         return;
     }
-    inven = filter_array(inven, "is_non_immortal",FILTERS_D);    
+    inven = filter_array(inven, "is_non_immortal",FILTERS_D);
     inven = target_filter(inven);
-    if(!sizeof(inven)) 
+    if(!sizeof(inven))
 	{
       	dest_effect();
         return;
     }
-    if(worked >= duration) 
+    if(worked >= duration)
 	{
       	dest_effect();
         return;
     }
     worked++;
     removing = ({});
-    for(i=0;i<sizeof(inven);i++) 
+    for(i=0;i<sizeof(inven);i++)
 	{
       	if(!objectp(inven[i])) continue;
-        if(!present(inven[i],PLACE)) 
+        if(!present(inven[i],PLACE))
 		{
             inven[i]->remove_property_value("added short",
                                             ({ "%^GREEN%^ (entangled)%^RESET%^%^CYAN%^"}));
@@ -154,24 +155,24 @@ void do_tentacles()
     inven -= removing;
     caught -= removing;
 
-    if(!sizeof(inven)) 
+    if(!sizeof(inven))
 	{
       	dest_effect();
         return;
     }
     removing = ({});
-    if(sizeof(caught)) 
+    if(sizeof(caught))
 	{
-        for(i=0;sizeof(caught) > 0,i<sizeof(caught);i++) 
+        for(i=0;sizeof(caught) > 0,i<sizeof(caught);i++)
 		{
             if(!objectp(caught[i])) { continue; }
-            if(random((int)caught[i]->query_stats("strength") + roll_dice(1,20)) < random(clevel+8)) 
+            if(random((int)caught[i]->query_stats("strength") + roll_dice(1,20)) < random(clevel+8))
 			{
                 tell_object(caught[i],"%^CYAN%^The tentacle squeezes the life from you!");
                 tell_room(place,"%^CYAN%^The tentacle squeezes around "+caught[i]->QCN+"!",caught[i]);
                 damage_targ(caught[i], caught[i]->query_target_limb(), mydam,"bludgeoning");
             }
-            else 
+            else
 			{
                 tell_object(caught[i],"%^CYAN%^You rip free of the tentacle!");
                 tell_room(place,"%^CYAN%^"+caught[i]->QCN+
@@ -182,11 +183,11 @@ void do_tentacles()
         }
     }
     caught -= removing;
-    for(i=0;i<sizeof(inven);i++) 
+    for(i=0;i<sizeof(inven);i++)
 	{
       	if(!objectp(inven[i])) continue;
         if(inven[i]->query_tripped()) continue;
-        if(random((int)inven[i]->query_stats("dexterity") + 1) < roll_dice(1,25) && random(2)) 
+        if(random((int)inven[i]->query_stats("dexterity") + 1) < roll_dice(1,25) && random(2))
 		{
 			tell_object(inven[i],"%^CYAN%^You stumble as one of the "+
                         "tentacles almost knocks you from your feet!");
@@ -200,14 +201,14 @@ void do_tentacles()
     call_out("do_tentacles",ROUND_LENGTH);
 }
 
-void dest_effect() 
+void dest_effect()
 {
 	int i;
-    if(worked) 
+    if(worked)
 	{
       	tell_room(place,"%^CYAN%^The writhing tentacles shiver "+
                   "and crumble into dust, fading before your eyes.%^RESET%^");
-      	for(i=0;i<sizeof(inven);i++) 
+      	for(i=0;i<sizeof(inven);i++)
 		{
             if(!objectp(inven[i])) { continue; }
             inven[i]->remove_property_value("added short",

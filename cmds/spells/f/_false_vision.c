@@ -18,6 +18,7 @@ void create() {
     set_spell_name("false vision");
     set_spell_level(([ "bard" : 5, "mage" : 5 ]));
     set_spell_sphere("illusion");
+    set_sorc_bloodlines(({"aberrant"}));
     set_syntax("cast CLASS false vision [on TARGET]");
     set_description("This illusion is designed to foil the attempts of scrying upon the caster. While active, anyone scrying out the caster will have to contest their strength. Should they succeed, the scrying will continue as normal.If they fail, they will instead be met with a vision designed to touch at their innermost fears, to disrupt their scrying attempt and encourage them not to try again.");
     set_verbal_comp();
@@ -31,7 +32,7 @@ void create() {
 }
 
 int preSpell() {
-    if (!query_arg()) { 
+    if (!query_arg()) {
         target = caster;
         return 1;
     }

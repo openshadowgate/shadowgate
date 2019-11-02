@@ -6,12 +6,13 @@ inherit SPELL;
 
 int mydiff;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("bulls strength");
     set_spell_level(([ "paladin" : 2, "cleric" : 2,"druid" : 2, "mage" : 2,"paladin":2 ]));
     set_spell_sphere("alteration");
+    set_sorc_bloodlines(({"abyssal"}));
     set_syntax("cast CLASS bulls strength on TARGET");
     set_description("This spell allows the caster to infuse their target with the strength of a bull, enhancing their raw brawn. This spell doesn't stack with similarly powerful spells of enhancement.");
     set_verbal_comp();
@@ -20,7 +21,7 @@ void create()
     set_helpful_spell(1);
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     if(!objectp(caster))
     {
@@ -28,7 +29,7 @@ void spell_effect(int prof)
         return;
     }
     if(objectp(place)) place = environment(caster);
-    
+
     if((int)target->query_property("augmentation"))
     {
         tell_object(caster,"%^YELLOW%^"+target->QCN+" is already under the influence of a similar spell.");
@@ -39,20 +40,20 @@ void spell_effect(int prof)
         reverse_spell();
         return;
     }
-    
+
     if((string)TO->query_spell_type() == "potion")
     {
         tell_object(caster,"%^CYAN%^As the potion warms your stomach, you feel your strength grow.%^RESET%^");
     }
-    else 
+    else
     {
-        if(target == caster) 
+        if(target == caster)
         {
             tell_object(caster,"%^YELLOW%^You intone the spell of transformation upon yourself, and your muscles ripple with "
                 "newfound strength!%^RESET%^");
             tell_room(place,"%^YELLOW%^"+caster->QCN+" intones a spell over "+caster->QO+"self.%^RESET%^",caster);
         }
-        else 
+        else
         {
             tell_object(caster,"%^YELLOW%^You intone the spell of transformation over "+target->QCN+"!%^RESET%^");
             tell_object(target,"%^YELLOW%^"+caster->QCN+" intones a spell over you, and your muscles ripple with newfound "
@@ -60,17 +61,17 @@ void spell_effect(int prof)
             tell_room(place,"%^YELLOW%^"+caster->QCN+" intones a spell over "+target->QCN+".%^RESET%^",({caster,target}));
         }
     }
-    
+
     mydiff = 2;
     if(target->query_stats("strength") > 28) mydiff = 1;
     if(target->query_stats("strength") > 29) mydiff = 0;
-    
-    if(mydiff) 
+
+    if(mydiff)
     {
         target->add_stat_bonus("strength",mydiff);
         target->set_property("augmentation",1);
     }
-    
+
     spell_successful();
     addSpellToTarget();
 }
@@ -78,14 +79,14 @@ void spell_effect(int prof)
 
 void dest_effect()
 {
-    if(objectp(target) && mydiff) 
+    if(objectp(target) && mydiff)
     {
         if((string)TO->query_spell_type() == "potion") tell_object(target,"%^RESET%^%^RED%^The potion's enhancement fades from you.%^RESET%^");
         else tell_object(target,"%^RESET%^%^RED%^The spell's enhancement fades from you.%^RESET%^");
         target->add_stat_bonus("strength",(-1)*mydiff);
         target->set_property("augmentation",-1);
     }
-    
+
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
@@ -98,7 +99,7 @@ void reverse_spell()
     mydiff = -2;
     if(target->query_stats("strength") < 4) mydiff = -1;
     if(target->query_stats("strength") < 3) mydiff = 0;
-    if(mydiff) 
+    if(mydiff)
     {
         target->add_stat_bonus("strength",mydiff);
         target->set_property("augmentation",1);

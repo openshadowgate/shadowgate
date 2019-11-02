@@ -1,6 +1,6 @@
 //Iron Body by ~Circe~ 7/25/05
 //Note:  I altered this from stoneskin and left it using the SS
-//variables because I do not want psions to be able to stack this 
+//variables because I do not want psions to be able to stack this
 //spell with mage stoneskin.
 // upgraded to the book vers, self-only DR15. Better than stoneskin (and does not stack). N, 5/15.
 #include <spell.h>
@@ -13,6 +13,7 @@ void create() {
     set_spell_level(([ "psion" : 8, "mage" : 8 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS iron body");
+    set_sorc_bloodlines(({"aberrant"}));
     set_description("By using this power, the caster lends some of his psychic energy or arcane spellcraft to "
 "protect himself. It causes the caster to gain a strong resistance to physical attacks, as well as immunity "
 "to most standard poisons. It does not work together with stoneskin.");
@@ -25,7 +26,7 @@ void create() {
 }
 
 int preSpell(){
-    if(caster->query_stoneSkinned() || caster->query_property("iron body")){ 
+    if(caster->query_stoneSkinned() || caster->query_property("iron body")){
         tell_object(caster,"You already have protection of this nature!");
         return 0;
     }
@@ -92,7 +93,7 @@ void dest_effect() {
       tell_object(caster,"%^BOLD%^%^GREEN%^Your body glows faintly "+
         "green before you feel your extra protection fade away!%^RESET%^");
     }
-    else { 
+    else {
       tell_room(environment(caster),"%^BOLD%^%^BLACK%^"+caster->QCN+
         "'s skin %^RESET%^%^ORANGE%^sh%^YELLOW%^i%^RESET%^%^ORANGE%^mmers "+
         "%^BOLD%^%^BLACK%^before returning to normal.%^RESET%^",caster);
@@ -108,4 +109,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

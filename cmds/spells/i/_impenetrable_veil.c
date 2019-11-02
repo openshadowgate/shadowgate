@@ -11,6 +11,7 @@ void create()
     set_spell_name("impenetrable veil");
     set_spell_level(([ "mage" : 6, "bard" : 6 ]));
     set_spell_sphere("abjuration");
+    set_sorc_bloodlines(({"aberrant"}));
     set_syntax("cast CLASS impenetrable veil on TARGET");
     set_damage_desc("half of clevel to stealth checks on sneaking");
     set_description("You raise a shadowy veil around your target, making it harder to detect them.");

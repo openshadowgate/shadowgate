@@ -12,6 +12,7 @@ void create() {
     set_spell_name("transformation");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("alteration");
+    set_sorc_bloodlines(({"abyssal"}));
     set_syntax("cast CLASS transformation");
     set_description("An experienced mage can use this spell to reshape their own body into a powerful fighting "
 "machine. It adds extensive physical prowess to the caster, as well as a degree of resilience, but comes at a "
@@ -58,7 +59,7 @@ void spell_effect(int prof) {
     caster->add_saving_bonus("fort",5);
     caster->add_ac_bonus(4);
     caster->set_property("transformed",1);
-    if(pointerp(caster->query_temporary_feats())) 
+    if(pointerp(caster->query_temporary_feats()))
     {
         if(member_array("martial weapon proficiency",(string*)caster->query_temporary_feats()) == -1)
         {
