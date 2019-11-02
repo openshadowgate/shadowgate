@@ -10,24 +10,17 @@ int flag;
 void create()
 {
     ::create();
-    set_spell_name("profane nimbus");
-    set_spell_level(([ "cleric" : 5, "paladin" : 4 ]));
-    set_spell_sphere("combat");
-    set_syntax("cast CLASS profane nimbus");
-    set_damage_desc("divine to good");
-    set_description("You are surrounded by a nimbus of darkness shaped like your god’s holy symbol or a symbol of your faith. Any good creature attacking you will be scorched by the darkness.");
+    set_spell_name("unholy aura");
+    set_spell_level(([ "mage" : 8, "cleric" : 8 ]));
+    set_spell_sphere("abjuration");
+    set_sorc_bloodlines(({"abyssal"}));
+    set_syntax("cast CLASS unholy aura");
+    set_damage_desc("untyped, 2 AC");
+    set_description("You are surrounded by an aura of evil that will harm all your opponents and will slightly protect you. This is nimbus-family spell that won't work with other nimbuses.");
     set_property("magic",1);
     traveling_aoe_spell(1);
     evil_spell(1);
 }
-
-string query_cast_string()
-{
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^You growl a quiet plea to your divine patron.");
-    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" growls a quiet plea under "+caster->QP+" breath.",caster);
-    return "display";
-}
-
 
 int preSpell()
 {
@@ -45,14 +38,15 @@ void spell_effect(int prof)
     int duration;
     duration = (ROUND_LENGTH * 10) * clevel;
 
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^You feel your gods power warding you from the good!");
+    tell_object(caster,"%^BOLD%^%^MAGENTA%^You feel fell powers power warding you from the good!");
     tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" is suddenly surrounded by halo of darkness!",caster);
 
     caster->set_property("spelled", ({TO}));
     caster->set_property("nimbus",1);
-    caster->set_property("added short",({"%^BOLD%^%^MAGENTA%^ (in halo of darkness)%^RESET%^"}));
+    caster->set_property("added short",({"%^BOLD%^%^BLACK%^ (in a fell halo)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
+    caster->add_ac_bonus(2);
     environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("dest_effect",duration);
     return;
@@ -72,12 +66,6 @@ void execute_attack()
     }
     if(!objectp(caster))                        { dest_effect(); return; }
     if(strikes > clevel)                        { dest_effect(); return; }
-
-    attackers = filter_array(caster->query_attackers(),(:
-                                                        $1->query_alignment() == 1 ||
-                                                        $1->query_alignment() == 4 ||
-                                                        $1->query_alignment() == 7
-                                                        :));
 
     if(!sizeof(attackers))
     {
@@ -103,7 +91,7 @@ void execute_attack()
     tell_room(place,"%^BOLD%^%^MAGENTA%^The halo around "+caster->QCN+" burns "+targ->QCN+"!",({targ,caster}));
 
     strikes++;
-    damage_targ(targ,targ->return_target_limb(),damage,"divine");
+    damage_targ(targ,targ->return_target_limb(),damage,"untyped");
 
     place->addObjectToCombatCycle(TO,1);
     return;
@@ -116,7 +104,8 @@ void dest_effect()
     {
         tell_object(caster,"%^RESET%^%^BOLD%^The halo around you fades.");
         caster->remove_property("nimbus");
-	    caster->remove_property_value("added short",({"%^BOLD%^%^MAGENTA%^ (in halo of darkness)%^RESET%^"}));
+        caster->add_ac_bonus(-2);
+	    caster->remove_property_value("added short",({"%^BOLD%^%^BLACK%^ (in a fell)%^RESET%^"}));
     }
     ::dest_effect();
     if(objectp(TO)) { TO->remove(); }

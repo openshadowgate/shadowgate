@@ -9,6 +9,7 @@ void create() {
     set_spell_sphere("abjuration");
     set_syntax(
 "cast CLASS disjunction on OBJECT");
+    set_sorc_bloodlines(({"accursed"}));
     set_description("This spell disconnects beneficial magic from an object and allows it to float freely, forever lost in the weave. Object must be present in caster's inventory.");
     set_verbal_comp();
     set_somatic_comp();

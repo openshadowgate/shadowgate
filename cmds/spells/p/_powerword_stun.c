@@ -1,6 +1,6 @@
 //Powerword Stun coded by Bane//
-//After discussions with other Imms, I've removed the save but lowered 
-//the duration to make it more in line with the books. 
+//After discussions with other Imms, I've removed the save but lowered
+//the duration to make it more in line with the books.
 //Microcosm got the same changes. ~Circe~ 8/6/13
 #include <std.h>
 #include <spell.h>
@@ -15,6 +15,7 @@ void create() {
     set_spell_name("powerword stun");
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("enchantment_charm");
+    set_sorc_bloodlines(({"arcane"}));
     set_syntax("cast CLASS powerword stun on TARGET");
     set_description("When the powerword stun spell is uttered, any creature of the caster's choice is stunned, reeling "
 "and unable to think coherently or to act for a duration dependent on the creature's current hit points.");
@@ -69,7 +70,7 @@ void spell_effect(int prof) {
         spell_successful();
         dest_effect();
         return;
-    } 
+    }
 
    current = target->query_hp();
    hpmax = target->query_max_hp();

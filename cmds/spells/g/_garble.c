@@ -14,13 +14,14 @@ void create() {
     set_spell_level(([ "mage" : 3, "bard" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS garble on TARGET");
+    set_sorc_bloodlines(({"accursed"}));
     set_description("This will remove from the target the ability to understand, both read and write any language. This should not change the ability to teach the language.");
     set_verbal_comp();
     set_target_required(1);
     set_components(([
       "mage" : ([ "clay model ziggurat" : 1, ]),
     ]));
-    set_save("will"); 
+    set_save("will");
 }
 
 query_cast_string() {
@@ -42,8 +43,8 @@ void spell_effect(int prof) {
       }
       tell_object(target,"%^BOLD%^You start to feel knowledge you "+
 	"had leave your mind, you feel yourself know less but not what you now don't know.");
-    	spell_successful();    
-    	for (i =0;i<sizeof(ALL_LANGS);i++) 
+    	spell_successful();
+    	for (i =0;i<sizeof(ALL_LANGS);i++)
 	{
       	target->subtract_lang_overload(ALL_LANGS[i],prof);
     	}
@@ -54,10 +55,10 @@ void spell_effect(int prof) {
 
 void dest_effect() {
     int i;
-    
-    if (objectp(target)) 
+
+    if (objectp(target))
     {
-	    	for (i =0;i<sizeof(ALL_LANGS);i++) 
+	    	for (i =0;i<sizeof(ALL_LANGS);i++)
 		{
           		target->add_lang_overload(ALL_LANGS[i],theProf);
     		}

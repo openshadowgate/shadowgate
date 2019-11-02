@@ -15,9 +15,10 @@ void see_changes();
 void create() {
     ::create();
     set_spell_name("true seeing");
-    set_spell_level(([ "cleric" : 2,"druid" : 7 ]));
+    set_spell_level(([ "cleric" : 2,"druid" : 7, "mage" : 7 ]));
     set_spell_sphere("divination");
     set_spell_domain("magic");
+    set_sorc_bloodlines(({"arcane"}));
     set_syntax("cast CLASS true seeing");
     set_description("This spell will allow the caster to see through all magical and non magical attempts at "
 "invisibility.");
@@ -26,7 +27,7 @@ void create() {
 	set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BLUE%^Closing your eyes, you begin to chant in an even tone.");
 	tell_room(place,"%^BLUE%^"+caster->QCN+" closes "+
@@ -44,7 +45,7 @@ int preSpell()
     return 1;
 }
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     oldenv=environment(caster);
     spell_successful();
@@ -58,7 +59,7 @@ spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
 
     if (caster) {

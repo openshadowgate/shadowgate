@@ -10,6 +10,7 @@ void create() {
     set_spell_level(([ "mage" : 4, "bard" : 4, "paladin" : 3, "cleric" : 8 ]));
     set_spell_sphere("abjuration");
     set_spell_domain("magic");
+    set_sorc_bloodlines(({"astral"}));
     set_syntax("cast CLASS break curse on <object> [at <player>]");
     set_description("This powerful spell will break a curse that has been placed upon a magical item, unravelling the "
 "corrupted weave around it.  Only the most skilled of abjurers can attempt to disentangle enchantments in such a "
@@ -66,9 +67,9 @@ void spell_effect(int prof) {
         what = arg;
         who = 0;
     }
-    if(!who) ob = present(what,caster); 
+    if(!who) ob = present(what,caster);
     else {
-        if((string)caster->realName(who) != "") who = (string)caster->realName(who);   
+        if((string)caster->realName(who) != "") who = (string)caster->realName(who);
         if(!ob2 = present(who, place)) {
             tell_object(caster,"That person isn't here.");
             dest_effect();

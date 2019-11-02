@@ -14,6 +14,7 @@ void create() {
     set_spell_name("touch of idiocy");
     set_spell_level(([ "mage" : 2 ]));
     set_spell_sphere("enchantment_charm");
+    set_sorc_bloodlines(({"accursed"}));
     set_syntax("cast CLASS touch of idiocy on TARGET");
     set_description("With a touch, you reduce the target's mental faculties. Your successful melee touch attack applies a 1d6 penalty to the target’s Intelligence, Wisdom, and Charisma scores.");
     set_verbal_comp();
@@ -21,7 +22,7 @@ void create() {
     set_target_required(1);
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int roll;
     ::spell_effect();
@@ -32,7 +33,7 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    spell_kill(target,caster); 
+    spell_kill(target,caster);
     roll = BONUS_D->process_hit(caster, target, 1, 0, 0, 1);
     if(!roll || roll == -1 && ! caster->query_property("spectral_hand"))
     {
@@ -61,7 +62,7 @@ void spell_effect(int prof)
 void dest_effect() {
     target=query_orig_targ();
     remove_call_out("dest_effect");
-    if(objectp(target)) 
+    if(objectp(target))
     {
         tell_object(target, "You recover your mental abilities.\n");
         target->remove_property("idiocied");

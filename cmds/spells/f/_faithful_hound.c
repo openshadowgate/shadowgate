@@ -16,6 +16,7 @@ void create()
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS faithful hound");
     set_damage_desc("piercing");
+    set_sorc_bloodlines(({"astral"}));
     set_description("With this spell you conjure up an invisible spectral dog. It will stay in the area for a while and bark telepathically if someone approaches. If attacked, it will defend itself, and if someone attacks you it will defend you as well.");
 	set_helpful_spell(1);
 }

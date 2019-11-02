@@ -11,6 +11,7 @@ void create() {
     set_spell_name("scintilating pattern");
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("illusion");
+    set_sorc_bloodlines(({"accursed"}));
     set_syntax("cast CLASS scintilating pattern");
     set_damage_desc("mass confusion");
     set_description("This casting summons forward illusionary patter that briefly captivates and confuses enemies.");

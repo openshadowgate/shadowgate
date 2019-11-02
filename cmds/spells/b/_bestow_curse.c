@@ -13,6 +13,7 @@ void create() {
     set_author("nienne");
     set_spell_name("bestow curse");
     set_spell_level(([ "mage" : 4 ]));
+    set_sorc_bloodlines(({"accursed"}));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS bestow curse on TARGET");
     set_damage_desc("clevel / 8 to all skills, attack and damage bonus, caster level");

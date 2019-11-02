@@ -2,8 +2,8 @@
 // Thorn
 // 29 December 2000
 
-// Scry power stuff added by ~Circe~ 6/20/08 to fix problems with 
-// a scry blocker always thwarting scry, no matter the level of 
+// Scry power stuff added by ~Circe~ 6/20/08 to fix problems with
+// a scry blocker always thwarting scry, no matter the level of
 // the casters involved.
 //changed to have delay for followers - they should not be better spies than pc mages - Tsera
 // duration on all scrying spells (and between-cast delays where relevant) rebalanced. Nienne, 5/15.
@@ -28,6 +28,7 @@ void create() {
     set_spell_name("magic mirror");
     set_spell_level(([ "mage" : 7, "bard" : 6 ]));
     set_spell_sphere("divination");
+    set_sorc_bloodlines(({"astral"}));
     set_syntax("cast CLASS magic mirror on <object> (a scrying mirror)");
     set_description("By means of this spell, the wizard changes a normal mirror into a scrying device similar to a "
 "crystal ball. The details of the use of such a scrying device can be accessed by typing <help mirror> after a successful "
@@ -102,7 +103,7 @@ void spell_effect(int prof) {
             "mirror!");
         TO->remove();
                 return;
-    }            
+    }
     if(!checkMirror(target)) {
         tell_room(place,"%^BOLD%^RED%^"+caster->QCN+" chants, "
            "but nothing seems to happen.",caster);
@@ -113,9 +114,9 @@ void spell_effect(int prof) {
     }
     tell_room(place,"%^BOLD%^GREEN%^As "+caster->QCN+" chants, "
         "a faint glow flickers around the "+target->query_name()+" and then slowly becomes "
-        "constant.",caster);       
+        "constant.",caster);
     tell_object(caster,"%^BOLD%^GREEN%^As you chant, a faint glow flickers "
-        "around the "+target->query_name()+" and then slowly becomes constant.");        
+        "around the "+target->query_name()+" and then slowly becomes constant.");
     target->set_property("spelled",({TO}));
     target->set_property("magic mirror",1);
     tell_object(caster,"%^BOLD%^YELLOW%^To learn the commands for this "
@@ -129,7 +130,7 @@ void spell_effect(int prof) {
 //updated again by ~Circe~ 9/16/11 to use bonuses correctly
       bonus = caster->query_stats(casting_stat);
       bonus = bonus-10;
-      power = CLEVEL + random(6) + bonus; 
+      power = CLEVEL + random(6) + bonus;
 //random(6) provides 0-5, allowing for some randomness
     scry_control->set_scry_power(power);
 //End bonus stuff

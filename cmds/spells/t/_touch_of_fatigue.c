@@ -1,4 +1,4 @@
-//      Chill Touch 
+//      Chill Touch
 #include <std.h>
 #include <spell.h>
 #include <magic.h>
@@ -10,12 +10,13 @@ inherit SPELL;
 string target_limb, element;
 
 
-create() 
+create()
 {
     ::create();
     set_spell_name("touch of fatigue");
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("necromancy");
+    set_sorc_bloodlines(({"accursed"}));
     set_syntax("cast CLASS touch of fatigue on TARGET");
     set_description("With this spell you touch the victim, channeling negative energy through your hand and fatiguing them.");
     set_verbal_comp();
@@ -27,15 +28,15 @@ create()
 string query_cast_string() { return "%^BLUE%^"+caster->QCN+" utters a chant."; }
 
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     string mycolor, myhue, myhue2, myfeeling;
     int bonus, roll;
-    
+
     if(!objectp(caster) || !objectp(target))
     {
         target = 0;
-        dest_effect();        
+        dest_effect();
         return;
     }
 
@@ -43,7 +44,7 @@ spell_effect(int prof)
 
     bonus = 0;
 
-    if (!present(target,environment(caster))) 
+    if (!present(target,environment(caster)))
     {
         tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
         target = 0;
@@ -52,8 +53,8 @@ spell_effect(int prof)
     }
 
     roll = BONUS_D->process_hit(caster, target, 1, bonus, 0, 1);
-    
-    if(!roll || roll == -1 && ! caster->query_property("spectral_hand")) 
+
+    if(!roll || roll == -1 && ! caster->query_property("spectral_hand"))
     {
         tell_object(caster,""+mycolor+"You try and touch "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand, but miss!");
         tell_object(target,""+mycolor+caster->QCN+"'s "+myhue+" hand gropes for your "+target_limb+" unsuccessfully.");
@@ -62,14 +63,14 @@ spell_effect(int prof)
         dest_effect();
         return;
     }
-    
-    if(!"/daemon/combat_d.c"->extra_hit_calcs(caster, target)) 
+
+    if(!"/daemon/combat_d.c"->extra_hit_calcs(caster, target))
     {
         target = 0;
         dest_effect();
         return;
     }
-    
+
     tell_object(caster,"%^BLUE%^You reach out and touch "+target->QCN+"'s "+target_limb+" with your hand.");
     tell_object(target,"%^BLUE%^"+caster->QCN+" touches your "+target_limb+".\n%^WHITE%^A feeling of tiredness runs through you...");
     tell_room(place,"%^BLUE%^"+caster->QCN+" reaches out and touches "+target->QCN+"'s "+target_limb+"...",({ caster, target}) );
@@ -80,9 +81,8 @@ spell_effect(int prof)
 
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

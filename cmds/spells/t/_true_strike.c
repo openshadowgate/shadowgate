@@ -10,6 +10,7 @@ void create() {
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS true strike on TARGET");
+    set_sorc_bloodlines(({"astral"}));
     set_description("Gaining insight on future events, caster can grant anyone knowledge of how to exploit it to make a strikes unlikely to miss for the next one round.
 
 %^BOLD%^See also:%^RESET%^ true strikes *feats");
