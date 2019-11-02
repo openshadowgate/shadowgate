@@ -10,9 +10,10 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("entangle");
-    set_spell_level(([ "cleric" : 1, "ranger" : 1,"druid" : 1 ]));
+    set_spell_level(([ "cleric" : 1, "ranger" : 1,"druid" : 1,"mage":1 ]));
     set_spell_sphere("conjuration_summoning");
     set_spell_domain("plant");
+    set_sorc_bloodlines(({"fey"}));
     set_syntax("cast CLASS entangle");
     set_description("This spell causes the foliage and insects to come alive in the area around the caster.  They will "
 "attempt to impede the movement of all creatures in the area.  Those creatures that pass a strength check will have their "
@@ -31,7 +32,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^GREEN%^Kneeling, you press your hand to the"+
         " ground as you begin to whisper your prayer.");
@@ -41,7 +42,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int i;
 
@@ -90,15 +91,15 @@ void execute_attack()
         for(i=0;i<sizeof(inven);i++)
         {
             if(!objectp(inven[i])) { continue; }
-            if(!present(inven[i],room)) 
-            { 
+            if(!present(inven[i],room))
+            {
                 inven[i]->remove_property_value("added short",({ "%^GREEN%^( entangled )%^RESET%^%^CYAN%^"}));
             }
         }
     }
 }
 
-void dest_effect() 
+void dest_effect()
 {
     int i;
     tell_room(place,"%^GREEN%^The vegeation in the area shrinks as all returns to normal.");

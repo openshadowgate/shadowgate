@@ -15,6 +15,7 @@ void create()
     set_spell_name("phantasmal poison");
     set_spell_level(([ "mage" : 4, ]));
     set_spell_sphere("illusion");
+    set_sorc_bloodlines(({"fey"}));
     set_syntax("cast CLASS phantasmal poison on WEAPON");
     set_description("You create a phantasm of an oily green phantasmal poison on the target weapon.");
     set_arg_needed(1);

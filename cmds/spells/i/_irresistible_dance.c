@@ -13,6 +13,7 @@ void create() {
     set_spell_level(([ "bard" : 6, "mage" : 8 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS irresistible dance on TARGET");
+    set_sorc_bloodlines(({"fey"}));
     set_description("The subject feels an undeniable urge to dance and begins doing so, complete with foot shuffling and tapping. The spell effect makes it hard for the subject to do anything other than caper and prance in place.");
     set_verbal_comp();
     set_somatic_comp();
@@ -38,11 +39,11 @@ void spell_effect(int prof) {
     tell_object(target,"%^ORANGE%^You begin dancing, which significantly distracts you from moving as desired!%^RESET%^");
     tell_room(place,"%^ORANGE%^"+target->QCN+" begins uncontrollably dancing!%^RESET%^",target);
     target->add_ac_bonus(-bonus);
-    target->add_saving_bonus("reflex",-bonus);    
+    target->add_saving_bonus("reflex",-bonus);
     target->set_property("irresistible_dance",1);
     call_out("dancing_echo",ROUND_LENGTH);
     duration = (ROUND_LENGTH * 2) * clevel;
-    call_out("dest_effect",duration);    
+    call_out("dest_effect",duration);
     spell_successful();
 }
 
@@ -63,7 +64,7 @@ void dest_effect() {
     {
         tell_object(target,"%^ORANGE%^Finally! You no longer feel compelled to dance.%^RESET%^");
         tell_room(environment(target),"%^ORANGE%^"+target->QCN+"'s silly dancing comes to an end.%^RESET%^",target);
-        target->add_ac_bonus(bonus);        
+        target->add_ac_bonus(bonus);
         target->add_saving_bonus("reflex",bonus);
         target->remove_property("irresistible_dance");
     }
