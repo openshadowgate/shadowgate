@@ -24,6 +24,7 @@ int preSpell()
     if(target->query_property("precognitive perception"))
     {
         tell_object(caster,"The target is already under the influence of similar effect");
+        return 0;
     }
     return 1;
 }
