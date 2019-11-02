@@ -10,7 +10,7 @@ void create(){
     ::create();
     set_author("nienne");
     set_spell_name("prying eyes");
-    set_spell_level(([ "mage" : 9, "psion" : 8, "bard" : 6 ]));
+    set_spell_level(([ "mage" : 5, "psion" : 8, "bard" : 6 ]));
     set_spell_sphere("divination");
     set_discipline("seer");
     set_syntax("cast CLASS prying eyes on TARGET");
