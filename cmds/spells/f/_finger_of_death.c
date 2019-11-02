@@ -11,7 +11,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS finger of death on TARGET");
     set_damage_desc("negative energy");
-    set_sorc_bloodlines(({"accursed"}));
+    set_sorc_bloodlines(({"accursed","ghoul"}));
     set_description("Finger of death pulls the darkness in close around the caster as the caster attempts to free the soul of the target from its coil, be they alive or undead, effectively killing them. Target able to withstand the spell will receive standard damage.");
     set_verbal_comp();
     set_somatic_comp();

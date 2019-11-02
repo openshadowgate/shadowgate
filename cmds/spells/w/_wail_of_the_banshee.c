@@ -13,6 +13,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS wail of the banshee");
     set_damage_desc("sonic to living");
+    set_sorc_bloodlines(({"ghoul"}));
     set_description("A caster invokes a horrible arcane scream that kills everything living in sight. Those who withstand the scream still suffer a little.");
     set_verbal_comp();
     set_somatic_comp();

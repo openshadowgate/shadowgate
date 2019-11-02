@@ -17,6 +17,7 @@ void create() {
     set_spell_name("ray of enfeeblement");
     set_spell_level(([ "mage" : 2 ]));
     set_spell_sphere("necromancy");
+    set_sorc_bloodlines(({"ghoul"}));
     set_syntax("cast CLASS ray of enfeeblement on TARGET");
     set_description("A coruscating ray springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject takes a penalty to Strength equal to 1d6+1 per two caster levels (maximum 1d6+5).");
     set_verbal_comp();
@@ -24,7 +25,7 @@ void create() {
     set_target_required(1);
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int roll;
     ::spell_effect();
@@ -35,7 +36,7 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    spell_kill(target,caster); 
+    spell_kill(target,caster);
     roll = BONUS_D->process_hit(caster, target, 1, 0, 0, 1);
     if(!roll || roll == -1 && ! caster->query_property("spectral_hand"))
     {
@@ -54,7 +55,7 @@ void spell_effect(int prof)
         origstr = target->query_base_stats("strength");
         adjust=roll_dice(1,6);
         adjust+=(clevel/2>5)?5:clevel/2;
-        if(adjust < 0)  adjust = 0;   
+        if(adjust < 0)  adjust = 0;
         if( (origstr - adjust) < 5)
             adjust = origstr - 5;       // don't let adjusted str go below 5
         target->add_stat_bonus("strength", -adjust);
@@ -68,7 +69,7 @@ void spell_effect(int prof)
 void dest_effect() {
     target=query_orig_targ();
     remove_call_out("dest_effect");
-    if(objectp(target)) 
+    if(objectp(target))
     {
         tell_object(target, "You recover your strength.\n");
         target->remove_property("enfeebled");
