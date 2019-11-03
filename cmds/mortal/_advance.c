@@ -13,6 +13,7 @@
 #include <dirs.h>
 #include <objects.h>
 #include <psions.h>
+#include <bloodlines.h>
 #include "/d/shadowgate/genetics.h"
 
 #define MAX_TEST_LEVEL 60
@@ -512,6 +513,43 @@ int pick_warlock_heritage(string str,object ob) {
     return 1;
 }
 
+int pick_sorc_bloodline(string str,object ob) {
+    string *bloodlines, bloodline, mymessage;
+    int i;
+
+    if(!objectp(ob)) return 0;
+    if(!ob->is_class("sorcerer")) return 0;
+    if(ob->query_bloodline()) return 0;
+
+    if(str=="abort")
+        return 1;
+
+    if(member_array(str,keys(BLOODLINE_DESC))!=-1)
+    {
+        bloodline = str;
+    }
+    else
+    {
+        tell_object(ob,"  %^YELLOW%^Bloodlines");
+        mymessage = "";
+        foreach(bloodline in keys(BLOODLINE_DESC))
+        {
+            mymessage+="  "+bloodline+"\n";
+        }
+
+        tell_object(ob,mymessage);
+        tell_object(ob,"%^BOLD%^Enter your bloodline.");
+        tell_object(ob,"%^RED%^Type <abort> to exit if you need to look at help files before making your choice.");
+        input_to("pick_sorc_bloodline",ob);
+        return 1;
+    }
+
+    ob->set_bloodline(bloodline);
+    tell_object(ob,"%^CYAN%^You have chosen for you bloodline to be "+capitalize(bloodline)+".");
+    return 1;
+}
+
+
 int initiate_psychic_powers(object ob){
    int psylvl, mymax, newmax;
    string myclass;
@@ -900,6 +938,7 @@ abandon, score, classes
     pick_psion_discipline("",TP);
     pick_fighter_style("",TP);
     pick_warlock_heritage("",TP);
+    pick_sorc_bloodline("",TP);
     pick_human_subrace("",TP);
     return 1;
 }

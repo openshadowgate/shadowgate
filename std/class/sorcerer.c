@@ -1,6 +1,8 @@
 #include <std.h>
 inherit DAEMON;
 
+#include <bloodlines.h>
+
 void create() { ::create(); }
 
 string *search_paths() { return ({  }); }
@@ -107,6 +109,16 @@ mapping query_class_spells()
     9 : ({"animus blast","dimensional lock","freedom of movement","gate","hellball","meteor swarm","monster summoning 7","phantasmal killer","powerword kill","prying eyes","timestop" }),
     ]));
 }
+
+string newbie_choice() { return "Bloodline"; }
+string *query_newbie_stuff() { return keys(BLOODLINE_DESC); }
+void process_newbie_choice(object who, string str)
+{
+    if(!objectp(who) || !stringp(str))
+        return;
+    who->set_bloodline(str);
+}
+
 
 void newbie_func(object who)
 {

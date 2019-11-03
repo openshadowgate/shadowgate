@@ -1,4 +1,4 @@
-%^CYAN%^%^ULINE%^Chools of arcane magic%^RESET%^
+%^CYAN%^%^ULINE%^Shools of arcane magic%^RESET%^
 
 Mages are able to select a school of specialty upon creation.
 
@@ -6,16 +6,14 @@ Mages are able to select a school of specialty upon creation.
 
 A school gives mages degree of specialization. Spells of that school become more potent, while spells of opposing school become weaker, with power difference growing as mage learns.
 
-%^CYAN%^School Opposing school
-%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^
- Abjuration Conjuration_Summoning
- Alteration Conjuration_Summoning
- Conjuration_Summoning Alteration
- Divination Illusion
- Enchantment_Charm Illusion
- Illusion Enchantment_Charm
- Invocation_Evocation Conjuration_Summoning
- Necromancy Divination
-%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^
+%^CYAN%^School         Opposing school
+ Abjuration             Conjuration_Summoning
+ Alteration             Conjuration_Summoning
+ Conjuration_Summoning  Alteration
+ Divination             Illusion
+ Enchantment_Charm      Illusion
+ Illusion               Enchantment_Charm
+ Invocation_Evocation   Conjuration_Summoning
+ Necromancy             Divination
 
 %^CYAN%^See also:%^RESET%^ mage, archmage, shadow adept, cast, prepare

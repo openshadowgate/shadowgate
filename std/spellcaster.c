@@ -4,6 +4,7 @@
 #include <magic.h>
 #include <schoolspells.h>
 #include <disciplinespells.h>
+#include <bloodlines.h>
 inherit "/std/innate";
 
 /**
@@ -569,16 +570,6 @@ mapping query_mastered_bonus()
 {
     mapping tmp = ([]);
 
-
-    if(TO->is_class("mage") || TO->is_class("sorcerer"))
-    {
-        if(FEATS_D->usable_feat(TO,"gift of the shadows"))
-        {
-            string baseclass = TO->query("shadow_adept_base_class");
-            tmp[baseclass]=({"umbral sight","shield of shadows","darkbolt","shadow double","shadow nova"});
-        }
-    }
-
     {
         if(TO->is_class("psion"))
         {
@@ -586,6 +577,28 @@ mapping query_mastered_bonus()
             mapping powersbydiscipline = DISCIPLINESPELLSBYDISCIPLINE;
             if(sizeof(powersbydiscipline[mydis]))
                 tmp["psion"] = powersbydiscipline[mydis];
+        }
+    }
+
+    {
+        if(TO->is_class("sorcerer"))
+        {
+
+            string mybl = (string)TO->query_bloodline();
+
+            if(stringp(mybl))
+                tmp["sorcerer"] = BLOODLINE_SPELLS[mybl];
+        }
+    }
+
+    if(TO->is_class("mage") || TO->is_class("sorcerer"))
+    {
+        if(FEATS_D->usable_feat(TO,"gift of the shadows"))
+        {
+            string baseclass = TO->query("shadow_adept_base_class");
+            if(!arrayp(tmp[baseclass]))
+                tmp[baseclass]=({});
+            tmp[baseclass]+=({"umbral sight","shield of shadows","darkbolt","shadow double","shadow nova"});
         }
     }
 
