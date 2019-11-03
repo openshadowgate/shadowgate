@@ -74,6 +74,8 @@ void execute_attack()
     define_base_damage(0);
     for(i=0;i<sizeof(attackers);i++)
     {
+        if(!objectp(attackers[i]))
+            continue;
         if(do_save(attackers[i],0))
             continue;
         if(attackers[i]->is_undead())

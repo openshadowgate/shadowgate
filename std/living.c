@@ -37,6 +37,7 @@ string description;
 string background;
 string sphere_of_influence;
 string school_of_magic;
+string sorc_bloodline;
 string psion_discipline;
 //by Circe, for psions 7/16/05
 string *divine_domain = ({}); // For cleric domains -Ares 4/7/07
@@ -521,8 +522,12 @@ string query_school() {
    return school_of_magic;
 }
 
-void set_school(string str) {
-   school_of_magic = str;
+string query_bloodline() {
+   return sorc_bloodline;
+}
+
+void set_bloodline(string str) {
+    sorc_bloodline = str;
 }
 
 string query_discipline() {
