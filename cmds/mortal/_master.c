@@ -201,6 +201,7 @@ void validate_mastered()
     string myclass;
     string myspell;
     mapping mymastered = TP->query_mastered_base();
+    mapping mymasteredbonus = TP->query_mastered_bonus();
 
     if(sizeof(mymastered))
         foreach(myclass in keys(mymastered))
@@ -216,6 +217,11 @@ void validate_mastered()
                 if(member_array(myspell,spell_index)==-1)
                 {
                     tell_object(TP,"Wrong spell in class "+myclass+", removing: "+myspell);
+                    TP->remove_mastered(myclass,myspell);
+                }
+                if(member_array(myspell,mymasteredbonus[myclass])!=-1)
+                {
+                    tell_object(TP,"Spell gained as a bonus for "+myclass+", removing: "+myspell);
                     TP->remove_mastered(myclass,myspell);
                 }
             }
