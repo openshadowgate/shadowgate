@@ -14,7 +14,6 @@ void create()
     set_spell_name("shapechange");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("alteration");
-    set_sorc_bloodlines(({"aberrant","fey"}));
     set_syntax("cast CLASS shapechange on demon|golem|dragon");
     set_description("With this spell you transform into one of several fearsome creatures. In the new form you won't be able to access your inventory, but you will posses mighty melee abilities. The potency of the form will grow with your power, but it won't benefit from transformation spell. In addition, demon and dragon forms can use <wing> command to travel.
 

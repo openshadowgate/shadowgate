@@ -13,7 +13,6 @@ void create() {
     set_spell_level(([ "bard" : 6, "mage" : 8 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS irresistible dance on TARGET");
-    set_sorc_bloodlines(({"fey"}));
     set_description("The subject feels an undeniable urge to dance and begins doing so, complete with foot shuffling and tapping. The spell effect makes it hard for the subject to do anything other than caper and prance in place.");
     set_verbal_comp();
     set_somatic_comp();

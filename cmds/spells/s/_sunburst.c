@@ -13,7 +13,6 @@ void create(){
     set_spell_sphere("invocation_evocation");
     set_spell_domain("sun");
     set_syntax("cast CLASS sunburst");
-    set_sorc_bloodlines(({"celestial"}));
     set_damage_desc("untyped, 1.25 times more to undead");
     set_description("This spell will send the light of the sun radiating out in a circle from the caster.  Any enemies caught in the area will suffer damage from the pure light of the sun.  Undead creatures suffer more damage than normal ones, and those creatures who fail their save are blinded by the light.");
     set_verbal_comp();

@@ -12,7 +12,6 @@ void create() {
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS horrid wilting");
-    set_sorc_bloodlines(({"daemon","ghoul"}));
     set_damage_desc("negative energy on living, nothing on undead");
     set_description("This spell sends a wave of necrotic energy at caster's living enemies, evaporating water and life from them.");
     set_verbal_comp();

@@ -11,7 +11,6 @@ void create()
     set_spell_name("stunning barrier");
     set_spell_level(([ "cleric" : 1, "inquisitor" : 1, "paladin" : 1, "mage":1 , "psion": 1 , "psywarrior" : 1]));
     set_spell_sphere("abjuration");
-    set_sorc_bloodlines(({"destined"}));
     set_syntax("cast CLASS stunning barrier");
     set_damage_desc("briefly stuns first enemy");
     set_description("You are closely surrounded by a barely visible magical field. It provides impact bonus to your armor and minor ability to deflect all kinds of incoming power. When struck it will discharge at first enemy, briefly stunning them.");

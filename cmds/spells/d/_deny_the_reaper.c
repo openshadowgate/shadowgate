@@ -10,7 +10,6 @@ void create()
     set_spell_name("deny the reaper");
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("necromancy");
-    set_sorc_bloodlines(({"destiny"}));
     set_syntax("cast CLASS deny the reaper on TARGET (dead player's name)");
     set_description("This spell will send out necromantic energies to snatch a dead person away from the afterlife. The deceased will be returned to the site of death and revived. A successfully revived person will be barely alive and need significant healing, due to the strain of being dragged away from death's embrace, and will still be weakened by the touch of death despite their restoration.");
     set_verbal_comp();

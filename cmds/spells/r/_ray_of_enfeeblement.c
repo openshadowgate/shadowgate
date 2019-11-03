@@ -17,7 +17,6 @@ void create() {
     set_spell_name("ray of enfeeblement");
     set_spell_level(([ "mage" : 2 ]));
     set_spell_sphere("necromancy");
-    set_sorc_bloodlines(({"ghoul"}));
     set_syntax("cast CLASS ray of enfeeblement on TARGET");
     set_description("A coruscating ray springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject takes a penalty to Strength equal to 1d6+1 per two caster levels (maximum 1d6+5).");
     set_verbal_comp();

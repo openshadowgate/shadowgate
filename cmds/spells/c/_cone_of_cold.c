@@ -15,7 +15,6 @@ void create()
     set_spell_level(([ "mage" : 5, "monk" : 15]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS cone of cold on TARGET");
-    set_sorc_bloodlines(({"boreal","elemental"}));
     set_damage_desc("delayed cold");
     set_description("By casting this spell, you form a massive white cone of icy cold towards your target.  Not only does "
         "this spell increase damagewise as the caster increases in level, but also, the chance of hitting an unintended target in "

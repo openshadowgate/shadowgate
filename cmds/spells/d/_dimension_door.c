@@ -14,7 +14,6 @@ void create(){
     set_spell_level(([ "bard" : 4, "psywarrior" : 4, "psion" : 4, "mage" : 4 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS dimension door on LOCATION");
-    set_sorc_bloodlines(({"arcane"}));
     set_description("Through this spell the caster opens a 'door' in the fabric of reality, attuned only to themselves.  "
 "They can use this to step through to a location of their choice, only one that they have previously visited and found to "
 "resonate with their soul.  A great deal of concentration is required to enact such a spell, so the spell can be easily "

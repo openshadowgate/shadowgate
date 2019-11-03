@@ -18,7 +18,6 @@ create() {
     set_description("This will create a small ball of light, which will light your way. You can cast it on an object or "
 "player which it will follow, instead of the caster.");
     set_non_living_ok();
-    set_sorc_bloodlines(({"celestial"}));
     set_target_required(1);
     set_helpful_spell(1);
 }

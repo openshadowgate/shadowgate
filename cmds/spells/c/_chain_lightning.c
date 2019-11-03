@@ -15,7 +15,6 @@ void create()
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS chain lightning on TARGET");
-    set_sorc_bloodlines(({"elemental"}));
     set_damage_desc("electricity or versatile arcanist");
     set_description("Chain lightning causes a great bolt of electrical energy to attack your target.  After the bolt has "
         "attacked your target, the lightning bolt has enough energy to continue jumping around the room, damaging other people "

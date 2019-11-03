@@ -13,7 +13,6 @@ void create(){
     set_spell_level(([ "mage" : 3, "bard" : 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS haste");
-    set_sorc_bloodlines(({"astral"}));
     set_description("This spell considerably speeds up the caster, and those allies in his or "
 "her immediate vicinity. It grants all affected targets an extra attack if they are striking "
 "in melee, as well as a small bonus to AC, reflex saves and athletics. This spell does not work "

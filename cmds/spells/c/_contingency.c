@@ -10,7 +10,6 @@ void create() {
     set_spell_name("contingency");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("invocation_evocation");
-    set_sorc_bloodlines(({"astral"}));
     set_syntax("cast CLASS contingency on SPELL_NAME [. SPELL_ARGS]");
     set_description("This spell allows you to put a spell in reserve, called upon at any time with the command <now>.  "
 "The target of the reserved spell is always the caster, but arguments can be specified for spells that require them.  You "

@@ -15,7 +15,6 @@ void create() {
     set_spell_name("wall of fire");
     set_spell_level(([ "mage" : 4, "monk" : 13]));
     set_spell_sphere("invocation_evocation");
-    set_sorc_bloodlines(({"elemental"}));
     set_syntax("cast CLASS wall of fire [on <exit>]");
     set_description("The spell, wall of fire, is an impressive spell for the magi indeed.  The wizard can cast the wall "
 "around himself, protectively, or in front of an exit, so all who pass through that exit will be scorched by the flames.  "

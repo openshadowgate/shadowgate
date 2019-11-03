@@ -13,9 +13,7 @@ void create()
     set_spell_name("eclipse");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("conjuration_summoning");
-    set_sorc_bloodlines(({"accursed"}));
     set_syntax("cast CLASS eclipse");
-    set_sorc_bloodlines(({"daemon"}));
     set_description("With this powerful ritual a mage moves Tyrannos in front of the sun, temporarily turning day into the night. The heavenly body then will stay in the sky for a long while, but eventually will return back to its orbit.");
     set_helpful_spell(1);
     evil_spell(1);

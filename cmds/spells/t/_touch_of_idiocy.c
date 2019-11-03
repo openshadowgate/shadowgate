@@ -14,7 +14,6 @@ void create() {
     set_spell_name("touch of idiocy");
     set_spell_level(([ "mage" : 2 ]));
     set_spell_sphere("enchantment_charm");
-    set_sorc_bloodlines(({"accursed","daemon"}));
     set_syntax("cast CLASS touch of idiocy on TARGET");
     set_description("With a touch, you reduce the target's mental faculties. Your successful melee touch attack applies a 1d6 penalty to the target’s Intelligence, Wisdom, and Charisma scores.");
     set_verbal_comp();

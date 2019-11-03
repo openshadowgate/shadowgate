@@ -18,7 +18,6 @@ void create() {
     set_spell_level(([ "cleric" : 2,"druid" : 7, "mage" : 7 ]));
     set_spell_sphere("divination");
     set_spell_domain("magic");
-    set_sorc_bloodlines(({"arcane"}));
     set_syntax("cast CLASS true seeing");
     set_description("This spell will allow the caster to see through all magical and non magical attempts at "
 "invisibility.");

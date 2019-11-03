@@ -17,7 +17,6 @@ void create()
     set_spell_name("gate");
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("conjuration_summoning");
-    set_sorc_bloodlines(({"celestial"}));
     set_syntax("cast CLASS gate on summoning
         cast CLASS gate on travel | location");
     set_description("The spell of gate is only available to the most skilled of conjurers, and holds twofold uses to its casting.

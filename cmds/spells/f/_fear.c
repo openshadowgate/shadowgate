@@ -17,7 +17,6 @@ void create()
     set_spell_level(([ "cleric" : 5, "bard" : 3, "mage" : 4, "psion" : 6 ]));
     set_spell_sphere("enchantment_charm");
     set_spell_domain("tyranny");
-    set_sorc_bloodlines(({"daemon","ghoul"}));
     set_syntax("cast CLASS fear");
     set_description("Fear sends a wave of horrid thoughts and images out "+
         "toward the foes around the caster, possibly "+

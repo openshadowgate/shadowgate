@@ -15,7 +15,6 @@ void create()
     set_spell_level(([ "mage" : 5 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS secret chest");
-    set_sorc_bloodlines(({"destiny"}));
     set_description("This spell calls to a floating extraplanar chest that will follow the caster everywhere, and even defend him, although poorly. The primary function of this chest is to store caster's equipment and be dispelled. If you keep it around, be aware: it is easy to steal from it. This is a greater summon and won't work with spells of such class, such as gate and conjure elemental.
 
 To command chest, use %^ORANGE%^<command chest to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^.

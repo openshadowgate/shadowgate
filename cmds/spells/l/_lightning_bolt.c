@@ -14,7 +14,6 @@ void create() {
     set_spell_level(([ "mage" : 3 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS lightning bolt on TARGET");
-    set_sorc_bloodlines(({"celestial"}));
     set_description("This spell, when cast, will allow you to hurl a lightning bolt at your target.  The blazing "
 "electricity will inflict 1d6 points of damage per level of the caster, subject to a maximum, reduced if they make their "
 "save. A versatile arcanist can manipulate the base element of this spell.");

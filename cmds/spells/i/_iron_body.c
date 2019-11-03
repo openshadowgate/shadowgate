@@ -13,7 +13,6 @@ void create() {
     set_spell_level(([ "psion" : 8, "mage" : 8 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS iron body");
-    set_sorc_bloodlines(({"aberrant"}));
     set_description("By using this power, the caster lends some of his psychic energy or arcane spellcraft to "
 "protect himself. It causes the caster to gain a strong resistance to physical attacks, as well as immunity "
 "to most standard poisons. It does not work together with stoneskin.");

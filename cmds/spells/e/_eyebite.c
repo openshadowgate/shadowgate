@@ -13,7 +13,6 @@ void create() {
     set_spell_name("eyebite");
     set_spell_level(([ "mage" : 6, "bard" : 6 ]));
     set_spell_sphere("necromancy");
-    set_sorc_bloodlines(({"accursed","fey"}));
     set_syntax("cast CLASS eyebite on TARGET");
     set_damage_desc("clevel/12 to attack and damage bonuses, to caster level, to all skills");
     set_description("With this spell caster imbues her eyes with dread power, glancing upon her enemies she curses them. This curse works its worst on weaker enemies, paralyzing them in fear.");

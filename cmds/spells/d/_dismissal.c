@@ -6,7 +6,6 @@ void create() {
     set_spell_name("dismissal");
     set_spell_level(([ "mage" : 5, "cleric" : 4, "inquisitor" : 4, ]));
     set_spell_sphere("abjuration");
-    set_sorc_bloodlines(({"abyssal"}));
     set_syntax("cast CLASS dismissal");
     set_damage_desc("destroys spelled creatures");
     set_description("This spell forces summoned creatures that attack you to be dismissed.");

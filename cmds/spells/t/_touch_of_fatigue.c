@@ -16,7 +16,6 @@ create()
     set_spell_name("touch of fatigue");
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("necromancy");
-    set_sorc_bloodlines(({"accursed","daemon","ghoul"}));
     set_syntax("cast CLASS touch of fatigue on TARGET");
     set_description("With this spell you touch the victim, channeling negative energy through your hand and fatiguing them.");
     set_verbal_comp();

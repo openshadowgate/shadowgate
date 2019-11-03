@@ -17,7 +17,6 @@ void create()
     set_spell_level(([ "psion" : 1, "mage" : 2, "bard" : 3, "assassin" : 4 ]));
     set_discipline("seer");
     set_spell_sphere("divination");
-    set_sorc_bloodlines(({"destiny"}));
     set_syntax("cast CLASS clairvoyance on TARGET");
     set_description("A skilled seer can attempt to gain a brief image of a target. All they will see is a second's "
         "glimpse of their surroundings, and who else may be nearby. Anti-scrying effects will block this spell.");

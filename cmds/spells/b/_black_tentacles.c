@@ -16,7 +16,6 @@ void create() {
     set_spell_level(([ "mage" : 4 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS black tentacles");
-    set_sorc_bloodlines(({"aberrant"}));
     set_description("This spell summons up a mass of writhing black "+
 	"tentacles from the earth at your feet. These will "+
 	"ensnare anything nearby to slow their escape, and attempt to "+

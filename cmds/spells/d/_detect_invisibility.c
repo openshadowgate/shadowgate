@@ -17,7 +17,6 @@ void create() {
     set_spell_name("detect invisibility");
     set_spell_level(([ "mage" : 2, "bard" : 3 ]));
     set_spell_sphere("divination");
-    set_sorc_bloodlines(({"aberrant"}));
     set_syntax("cast CLASS detect invisibility");
     set_description("Detect invisibility will let a mage see all magically invisible and even hidden people in the near vicinity. The spell's duration gets longer as the mage grows in level.");
     set_verbal_comp();

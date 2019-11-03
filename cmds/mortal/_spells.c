@@ -73,7 +73,7 @@ int cmd_spells(string str)
 
     if (args != "by level" && args != "expanded knowledge")
         sort();
-    if (args == "by school" && (myclass == "mage" || myclass == "sorcerer"))
+    else if (args == "by school" && (myclass == "mage" || myclass == "sorcerer"))
     {
         sort();
         sort_by_school();

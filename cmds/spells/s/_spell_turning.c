@@ -11,7 +11,6 @@ void create() {
     set_spell_level(([ "mage" : 7 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS spell turning");
-    set_sorc_bloodlines(({"destiny"}));
     set_description("The most skilled of abjurationists can use such a spell to raise a protective ward around themselves"
 ". While it holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of "
 "whether they are hostile or friendly. The ward will not reflect splash damage or AOE, but only direct-targetted spells.");

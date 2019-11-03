@@ -12,7 +12,6 @@ void create() {
     set_spell_name("transformation");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("alteration");
-    set_sorc_bloodlines(({"abyssal","boreal"}));
     set_syntax("cast CLASS transformation");
     set_description("An experienced mage can use this spell to reshape their own body into a powerful fighting "
 "machine. It adds extensive physical prowess to the caster, as well as a degree of resilience, but comes at a "

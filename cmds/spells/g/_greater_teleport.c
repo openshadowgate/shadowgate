@@ -13,7 +13,6 @@ void create() {
     set_spell_name("greater teleport");
     set_spell_level(([ "mage" : 7 ]));
     set_spell_sphere("conjuration_summoning");
-    set_sorc_bloodlines(({"abyssal"}));
     set_syntax("cast CLASS greater teleport on LOCATION");
     set_description("This greater version of teleport allow mage to travel to her destination, without change to arrive off target, bringing all her followers with her.
 

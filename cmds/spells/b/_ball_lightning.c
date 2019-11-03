@@ -13,7 +13,6 @@ void create()
     set_spell_name("ball lightning");
     set_spell_level(([ "mage" : 5 ]));
     set_spell_sphere("conjuration_summoning");
-    set_sorc_bloodlines(({"celestial"}));
     set_syntax("cast CLASS ball lightning on TARGET");
     set_description("This spell allows for a mage to conjure forth at least three balls of lightning, which they can then "
         "hurl at a target. As the mage's power grows, she will find it easier to summon a greater number of lightning balls, "

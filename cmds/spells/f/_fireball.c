@@ -15,7 +15,6 @@ void create()
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS fireball on TARGET");
     set_damage_desc("fire, versatile arcanist");
-    set_sorc_bloodlines(({"elemental"}));
     set_description("By casting this spell, a mage can aim and release a massive ball of fire at a target and those "
         "around him.  The fireball spell will wreak havoc on the caster's target and those who oppose him.  Damage done to those "
         "hit by the spell is 1d6 per level of the caster, subject to a maximum, halved if they manage to evade the brunt of the "

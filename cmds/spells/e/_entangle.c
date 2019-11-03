@@ -13,7 +13,6 @@ void create() {
     set_spell_level(([ "cleric" : 1, "ranger" : 1,"druid" : 1,"mage":1 ]));
     set_spell_sphere("conjuration_summoning");
     set_spell_domain("plant");
-    set_sorc_bloodlines(({"fey"}));
     set_syntax("cast CLASS entangle");
     set_description("This spell causes the foliage and insects to come alive in the area around the caster.  They will "
 "attempt to impede the movement of all creatures in the area.  Those creatures that pass a strength check will have their "

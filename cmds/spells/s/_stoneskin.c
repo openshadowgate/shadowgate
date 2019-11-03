@@ -12,7 +12,6 @@ void create() {
     set_spell_name("stoneskin");
     set_spell_level(([ "mage" : 4,"druid" : 5, "monk" : 11]));
     set_spell_sphere("abjuration");
-    set_sorc_bloodlines(({"abyssal"}));
     set_syntax("cast CLASS stoneskin on TARGET");
     set_description("This spell causes the target to take less damage from to a certain number of attacks, based on the level of "
 "the caster. It does not work together with iron body.");

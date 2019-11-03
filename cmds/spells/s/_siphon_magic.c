@@ -11,7 +11,6 @@ void create() {
     set_spell_sphere("abjuration");
     set_syntax(
 "cast CLASS siphon magic on OBJECT2 into OBJECT2");
-    set_sorc_bloodlines(({"arcane"}));
     set_description("With this spell you can transfer enchantment value between objects of the same type.");
     set_verbal_comp();
     set_somatic_comp();

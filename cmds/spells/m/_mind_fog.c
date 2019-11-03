@@ -16,7 +16,6 @@ void create()
     set_spell_level(([ "mage" : 5, "bard" : 5 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS mind fog on TARGET");
-    set_sorc_bloodlines(({"fey"}));
     set_description("Known only to some of the most powerful enchanters of the realm, this spell does no visible damage "
         "to the victim.  Instead, it serves to cloud the mind of the target, leaving them unable to think clearly, which "
         "incapacitates the use of spells or powers.  This power is rightly feared by spellcasters all over the realms.");
