@@ -555,18 +555,6 @@ int confirm_remove(string str,object ob,string feat,string extradata)
     if(feat == "expanded knowledge 2"){ ob->delete("expanded_knowledge_2"); }
     if(feat == "expanded knowledge 3"){ ob->delete("expanded_knowledge_3"); }
     if(feat == "skill focus") { ob->delete("skill_focus"); }
-    if(feat == "versatile arcanist") { // gotta remove any school spells plox! N, 8/15.
-      if(ob->query("elementalist")) ob->delete("elementalist");
-      myspells = (string *)ob->query_mastered_spells();
-      if(sizeof(myspells)) {
-        schoolspells = SCHOOLSPELLS;
-        for(i=0;i<sizeof(myspells);i++) {
-          if(member_array(myspells[i],schoolspells) != -1) {
-            ob->remove_mastered_spell(myspells[i]);
-          }
-        }
-      }
-    }
 
     price = calculate_feat_cost(ob);
     if(!avatarp(TP))
