@@ -216,7 +216,7 @@ void validate_mastered()
             {
                 if(member_array(myspell,spell_index)==-1)
                 {
-                    tell_object(TP,"Wrong spell in class "+myclass+", removing: "+myspell);
+                    tell_object(TP,"Wrong spell in "+myclass+" class, removing: "+myspell);
                     TP->remove_mastered(myclass,myspell);
                 }
                 if(member_array(myspell,mymasteredbonus[myclass])!=-1)

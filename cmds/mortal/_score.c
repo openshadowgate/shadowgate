@@ -74,7 +74,7 @@ mixed * genoutput(object targ)
             output+=({({"Speciality","%^BOLD%^%^CYAN%^"+targ->query_school()})});
     if(targ->is_class("sorcerer"))
         if(stringp(targ->query_bloodline()))
-            output+=({({"Bloodline","%^BOLD%^%^CYAN%^"+targ->query_bloodline()})});
+            output+=({({"Bloodline","%^BOLD%^%^RED%^"+capitalize(targ->query_bloodline())})});
     if(targ->is_class("psion"))
         if(stringp(targ->query_discipline()))
             output+=({({"Discipline","%^BOLD%^%^CYAN%^"+targ->query_discipline()})});
