@@ -219,11 +219,12 @@ void validate_mastered()
                     tell_object(TP,"Wrong spell in "+myclass+" class, removing: "+myspell);
                     TP->remove_mastered(myclass,myspell);
                 }
-                if(member_array(myspell,mymasteredbonus[myclass])!=-1)
-                {
-                    tell_object(TP,"Spell gained as a bonus for "+myclass+", removing: "+myspell);
-                    TP->remove_mastered(myclass,myspell);
-                }
+                if(arrayp(mymasteredbonus[myclass]))
+                    if(member_array(myspell,mymasteredbonus[myclass])!=-1)
+                    {
+                        tell_object(TP,"Spell gained as a bonus for "+myclass+", removing: "+myspell);
+                        TP->remove_mastered(myclass,myspell);
+                    }
             }
         }
 }
