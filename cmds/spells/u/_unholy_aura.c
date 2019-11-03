@@ -6,6 +6,7 @@ inherit SPELL;
 
 int strikes;
 int flag;
+int lastattack;
 
 void create()
 {
@@ -61,7 +62,7 @@ void execute_attack(){
         return;
     }
     room      = environment(caster);
-    attackers = filter_array(caster->query_attackers());
+    attackers = caster->query_attackers();
     if(lastattack == time())
         return;
     room->addObjectToCombatCycle(TO,1);
