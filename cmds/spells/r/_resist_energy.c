@@ -14,8 +14,9 @@ void create() {
     set_spell_level(([ "paladin" : 2, "ranger" : 1, "druid" : 2, "mage" : 2, "paladin" : 3 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS resist energy on <element>");
-    set_description("This spell bestows the caster with a small amount of damage resistance against a selected element, "
-"increasing with the caster's level. Elements that can be chosen are acid, cold, electricity, fire, or sonic.");
+    set_description("This spell bestows the caster with a small amount of damage resistance against a selected element, increasing with the caster's level. Elements that can be chosen are acid, cold, electricity, fire, or sonic.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
     set_arg_needed();
 	set_helpful_spell(1);
@@ -64,7 +65,7 @@ void spell_effect(int prof) {
       tell_room(place,"%^CYAN%^"+caster->QCN+" invokes a protective ward about "+caster->QO+"self.%^RESET%^",caster);
     }
     if(reversed) caster->set_resistance(ARG,-clevel);
-    else caster->set_resistance(ARG,clevel);
+    else caster->set_resistance(ARG,clevel*3/2);
     caster->set_property("castspellresist",1);
     didbuff = 1;
     spell_successful();
