@@ -25,7 +25,7 @@ int cmd_buff(string str)
 
     if (!objectp(TP)) { return 0; }
 
-    
+
     if (!stringp(str) || str == "" || str == " ")
     {
         oldob = present("buffobxyz", TP);
@@ -84,7 +84,7 @@ int cmd_buff(string str)
             }
         }
         buffs = get_buffs(TP);
-        delete_buff(TP, spell_name);        
+        delete_buff(TP, spell_name);
         buffs[spell_name] = (["target":target, "special" : special]);
         tell_object(TP, "Adding buff: " + spell_name + "");
         if (target) { tell_object(TP, "target: " + target); }
@@ -127,7 +127,7 @@ int cmd_buff(string str)
         }
 
         display += ({ "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Buffs to be Cast %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^\n" });
-        
+
         for (i = 0;i < sizeof(temp);i++)
         {
             spell_name = temp[i];
@@ -137,16 +137,16 @@ int cmd_buff(string str)
             else normal_buffs += ({ spell_name });
         }
 
-        if (sizeof(normal_buffs)) 
-        { 
+        if (sizeof(normal_buffs))
+        {
             for (i = 0;i < sizeof(normal_buffs);i++)
             {
                 display += ({ "    %^RESET%^%^BOLD%^%^GREEN%^" + normal_buffs[i] + "" });
             }
         }
-        
-        if (sizeof(targeted_buffs)) 
-        { 
+
+        if (sizeof(targeted_buffs))
+        {
             display += ({ "" });
             for (i = 0;i < sizeof(targeted_buffs);i++)
             {
@@ -157,8 +157,8 @@ int cmd_buff(string str)
             }
         }
 
-        if (sizeof(special_buffs)) 
-        {             
+        if (sizeof(special_buffs))
+        {
             display += ({ "" });
             for (i = 0;i < sizeof(special_buffs);i++)
             {
@@ -181,19 +181,19 @@ string parse_special(object obj,string str)
     string special,*temp;
     if (!stringp(str) || str == "" || str == " ") { return 0; }
     if (strsrch(str, "|") == -1) { return 0; }
-    if (strsrch(str, "cast") == -1) 
+    if (strsrch(str, "cast") == -1)
     {
         write("You must have cast in your syntax for special cast strings.  Syntax <buff add spell name | cast class spell name arguments>");
         return -1;
     }
     special = replace_string(str, "| ", "", 1);
     temp = explode(special, " ");
-    if (sizeof(temp) < 3) 
+    if (sizeof(temp) < 3)
     {
         write("Syntax <buff add spell name | cast class spell name arguments>");
-        return -1; 
-    }    
-    if (!obj->is_class(temp[1]))
+        return -1;
+    }
+    if (!obj->is_class(temp[1]) && temp[1] != "innate")
     {
         write("You don't seem to have the class " + temp[1] + ".");
         return -1;
@@ -237,13 +237,13 @@ string parse_spell(string str)
     if (does_spell_exist(str)) { return str; }
     position = strsrch(str, " |");
     if (position == -1) { position = strsrch(str," $"); }
-    if (position != -1) 
-    { 
+    if (position != -1)
+    {
         str = arrange_string(str, position);
         if (does_spell_exist(str)) { return str; }
-        else 
-        { 
-            write("The spell " + str + " doesn't seem to exist.\n"); 
+        else
+        {
+            write("The spell " + str + " doesn't seem to exist.\n");
             return 0;
         }
     }
@@ -282,7 +282,7 @@ int delete_buff(object obj, string spell)
 {
     mapping buffs;
     if (!objectp(obj)) { return 0; }
-    buffs = get_buffs(obj);    
+    buffs = get_buffs(obj);
     buffs = map_delete(buffs, spell);
     save_buffs(obj, buffs);
     return 1;
@@ -328,9 +328,9 @@ buff - cast stored list of spells
 
 buff
 buff list
-buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ 
-buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ | cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^ 
-buff remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ 
+buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^
+buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ | cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^
+buff remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^
 buff clear
 
 %^CYAN%^DESCRIPTION%^RESET%^

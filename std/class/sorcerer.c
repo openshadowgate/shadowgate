@@ -111,7 +111,7 @@ mapping query_class_spells()
 }
 
 string newbie_choice() { return "Bloodline"; }
-string *query_newbie_stuff() { return keys(BLOODLINE_DESC); }
+string *query_newbie_stuff() { return sort_array(keys(BLOODLINE_DESC),1); }
 void process_newbie_choice(object who, string str)
 {
     if(!objectp(who) || !stringp(str))
