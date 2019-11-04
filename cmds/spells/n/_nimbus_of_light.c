@@ -1,4 +1,4 @@
-//Adjusted by ~Circe~ to give an attack bonus based on 
+//Adjusted by ~Circe~ to give an attack bonus based on
 //level as well.  5/25/08 rebalancing domains
 // nimbus of light
 #include <std.h>
@@ -16,8 +16,9 @@ void create(){
     set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("divination");
     set_spell_domain("sun");
+    set_damage_desc("AC, attack, sight bonuses");
     set_syntax("cast CLASS nimbus of light");
-    set_description("This spell will surround the caster in a protective nimbus of light.  The light will make the caster "
+    set_description("This spell will surrounds the caster in a protective nimbus of light.  The light will make the caster "
 "more difficult to hit, and at the same time improve the caster's vision.");
     set_verbal_comp();
 	set_helpful_spell(1);
@@ -45,13 +46,13 @@ int preSpell(){
 void spell_effect(int prof){
     int duration, modifier;
 // removing multiclass distinction, no longer relevant under 3e. N, 3/17.
-//    if(sizeof(caster->query_classes()) == 1){ 
-       armor_bonus = 2; 
+//    if(sizeof(caster->query_classes()) == 1){
+       armor_bonus = 2;
        attk_bonus = clevel/10;
-/*    }else{ 
-       armor_bonus = 1; 
+/*    }else{
+       armor_bonus = 1;
        attk_bonus = clevel/12;
-//Has a lower attack bonus than Foresight because 
+//Has a lower attack bonus than Foresight because
 //it also gives a sight bonus
     } */
     duration = (ROUND_LENGTH * 20) * clevel;
@@ -82,7 +83,7 @@ void spell_effect(int prof){
 //~Circe~ 10/29/13
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if(objectp(caster))
     {
