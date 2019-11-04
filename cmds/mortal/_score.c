@@ -69,12 +69,15 @@ mixed * genoutput(object targ)
         output+=({({"Deity","%^BOLD%^%^MAGENTA%^"+capitalize(targ->query_diety())})});
     if(stringp(targ->query_sphere()))
         output+=({({"Sphere","%^BOLD%^%^BLUE%^"+targ->query_sphere()})});
-    if(targ->is_class("mage"))
-        if(stringp(targ->query_school()))
-            output+=({({"Speciality","%^BOLD%^%^CYAN%^"+targ->query_school()})});
     if(targ->is_class("sorcerer"))
         if(stringp(targ->query_bloodline()))
             output+=({({"Bloodline","%^BOLD%^%^RED%^"+capitalize(targ->query_bloodline())})});
+    if(targ->is_class("warlock"))
+        if(stringp(targ->query("warlock heritage")))
+            output+=({({"Heritage","%^BOLD%^%^MAGENTA%^"+capitalize(targ->query("warlock heritage"))})});
+    if(targ->is_class("mage"))
+        if(stringp(targ->query_school()))
+            output+=({({"Speciality","%^BOLD%^%^CYAN%^"+targ->query_school()})});
     if(targ->is_class("psion"))
         if(stringp(targ->query_discipline()))
             output+=({({"Discipline","%^BOLD%^%^CYAN%^"+targ->query_discipline()})});
