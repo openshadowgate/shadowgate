@@ -21,7 +21,7 @@ Value of the enchantment is added to either both attack and damage bonus, if the
 Such effects as fire resistance or silver resistance subtract their value from damage received. I.e. 50 points of fire resistance would make 150 points of fire damage as 100.
 
 %^CYAN%^%^ULINE%^Fast healing%^RESET%^
-A creature with the fast healing special quality regains hit points at an exceptional rate. This gives (grade)d(level/3) points of passive regeneration each round. For example, fast healing 2 gives 2d3 hp regeneration to a level 10 monster per round.
+A creature with the fast healing special quality regains hit points at an exceptional rate. This gives (grade)d(level/4) points of passive regeneration each round. For example, fast healing 2 gives 2d2 hp regeneration to a level 10 monster per round.
 
 %^CYAN%^%^ULINE%^Fear%^RESET%^
 Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight.

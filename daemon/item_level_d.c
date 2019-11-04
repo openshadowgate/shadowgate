@@ -326,6 +326,8 @@ varargs int get_bonus_value(string bonus_name, string num, object item, object t
     case "survival":
     case "thievery":                        value = num * 8;        break;
 
+    //Misc
+    case "fast healing":                    value = num * 20;       break;
     }
 
     return abs(to_int(value));

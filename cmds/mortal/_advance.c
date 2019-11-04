@@ -365,7 +365,7 @@ int pick_mage_school(string str,object ob)
 
     if(!objectp(ob)) { return 0; }
 
-    if(!ob->is_class("mage") && !ob->is_class("bard")) { return 1; }
+    if(!ob->is_class("mage")) { return 1; }
     if(ob->query_school()) { return 1; }
 
     switch(str)

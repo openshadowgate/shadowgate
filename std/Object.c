@@ -442,6 +442,7 @@ mixed query_property(string prop)
     }
 
     if(prop == "fast healing")
+    {
         if(TO->is_vampire())
             if(!TO->is_in_sunlight())
             {
@@ -450,6 +451,7 @@ mixed query_property(string prop)
                 num -= blst<0?0:blst;
                 return num<0?0:num;
             }
+    }
 
     if(prop == "spell dcs") { // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
         if(FEATS_D->usable_feat(TO,"spell focus"))         { num += 2; }
