@@ -262,7 +262,6 @@ void build_index()
               spelltable["discipline"]=str2->query_discipline();
               spelltable["domain"]=str2->get_spell_domain();
               spelltable["feats"]=str2->query_feats_required();
-              spelltable["bloodlines"]=str2->query_sorc_bloodlines();
               spellIndex += ([ all_spells[x] : spelltable]);
             }
           }

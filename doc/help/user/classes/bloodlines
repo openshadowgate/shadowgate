@@ -1,5 +1,6 @@
 %^CYAN%^%^ULINE%^Sorcerer Bloodlines%^RESET%^
 
+aberrant  : There is a taint in your blood, one that is alien and bizarre.
 abyssal   : Generations ago, a demon spread its filth into your heritage.
 accursed  : Someone cursed one of your ancestors.
 arcane    : Your family has always been skilled in the eldritch art of magic.
@@ -17,47 +18,35 @@ undead    : One of your ancestors was quite dead.
 
 %^CYAN%^%^ULINE%^Granted spells%^RESET%^
 
-%^CYAN%^abyssal
- acid splash,      darkness,            acid orb,            fear,
- domination,       impenetrable veil,   acid fog,            unholy aura
-%^CYAN%^accursed
- touch of fatigue, touch of idiocy,     garble,              bestow curse,
- ruin,             eyebite,             powerword blind,     spellscar
-%^CYAN%^arcane
- identify,         mirror image,        dispel magic,        break curse,
- siphon magic,     repulsion,           foresight,           screen
-%^CYAN%^astral
- flare,            invisibility,        blink,               suppress wild magic,
- dismissal,        contingency,         greater teleport,    antimagic field
-%^CYAN%^boreal
- enlarge person,   bears endurance,     rage,                stoneskin,
- cone of cold,     transformation,      true strike,         polar ray
-%^CYAN%^celestial
- light,            eagles splendor,     lightning bolt,      shout,
- angelic aspect,   serenity,            project image,       protection from spells
-%^CYAN%^elemental
- burning hands,    scorcher,            fireball,            ice storm,
- cone of cold,     chain lightning,     incendiary cloud,    meteor swarm
-%^CYAN%^fey
- dancing lights,   glitterdust,         phantom steed,       confusion,
- domination,       eyebite,             reverse gravity,     irresistible dance
-%^CYAN%^ghoul
- chill touch,      ray of enfeeblement, vampiric touch,      boneshatter,
- teleport,         circle of death,     finger of death,     horrid wilting
-%^CYAN%^infernal
- infernal healing, scorcher,            fireball,            fire shield,
- mind fog,         hellfire ray,        finger of death,     powerword stun
-%^CYAN%^possessed
- sleep,            blindness,           displacement,        phantasmal killer,
- false vision      eyebite,             visions from within, euphoric tranquility
-%^CYAN%^shadow
- touch of fatigue, alter self,          phantom steed,       shadowform,
- angelic aspect,   shadow alteration,   umbral strike,       greater shadow evocation
-%^CYAN%^stormborn
- shocking grasp,   lightning bolt,      gust of wind,        lightning arc,
- chain lightning,  phase door,          stormbolts,          ride the lightning
-%^CYAN%^undead
- chill touch,      spectral hand,       necrotic burst,      animate dead,
- create undead,    exhume corpses,      finger of death,     create greater undead
+%^CYAN%^aberrant:
+enlarge person%^MAGENTA%^,%^RESET%^ detect invisibility%^MAGENTA%^,%^RESET%^ tongues%^MAGENTA%^,%^RESET%^ black tentacles%^MAGENTA%^,%^RESET%^ prying eyes%^MAGENTA%^,%^RESET%^ impenetrable veil%^MAGENTA%^,%^RESET%^ phase door%^MAGENTA%^,%^RESET%^ shapechange
+%^CYAN%^abyssal:
+acid splash%^MAGENTA%^,%^RESET%^ darkness%^MAGENTA%^,%^RESET%^ acid orb%^MAGENTA%^,%^RESET%^ fear%^MAGENTA%^,%^RESET%^ domination%^MAGENTA%^,%^RESET%^ impenetrable veil%^MAGENTA%^,%^RESET%^ acid fog%^MAGENTA%^,%^RESET%^ unholy aura
+%^CYAN%^accursed:
+touch of fatigue%^MAGENTA%^,%^RESET%^ touch of idiocy%^MAGENTA%^,%^RESET%^ garble%^MAGENTA%^,%^RESET%^ bestow curse%^MAGENTA%^,%^RESET%^ ruin%^MAGENTA%^,%^RESET%^ eyebite%^MAGENTA%^,%^RESET%^ powerword blind%^MAGENTA%^,%^RESET%^ spellscar
+%^CYAN%^arcane:
+identify%^MAGENTA%^,%^RESET%^ mirror image%^MAGENTA%^,%^RESET%^ dispel magic%^MAGENTA%^,%^RESET%^ break curse%^MAGENTA%^,%^RESET%^ siphon magic%^MAGENTA%^,%^RESET%^ repulsion%^MAGENTA%^,%^RESET%^ foresight%^MAGENTA%^,%^RESET%^ screen
+%^CYAN%^astral:
+flare%^MAGENTA%^,%^RESET%^ invisibility%^MAGENTA%^,%^RESET%^ blink%^MAGENTA%^,%^RESET%^ suppress wild magic%^MAGENTA%^,%^RESET%^ dismissal%^MAGENTA%^,%^RESET%^ contingency%^MAGENTA%^,%^RESET%^ greater teleport%^MAGENTA%^,%^RESET%^ antimagic field
+%^CYAN%^boreal:
+enlarge person%^MAGENTA%^,%^RESET%^ bears endurance%^MAGENTA%^,%^RESET%^ rage%^MAGENTA%^,%^RESET%^ stoneskin%^MAGENTA%^,%^RESET%^ cone of cold%^MAGENTA%^,%^RESET%^ transformation%^MAGENTA%^,%^RESET%^ true strike%^MAGENTA%^,%^RESET%^ polar ray
+%^CYAN%^celestial:
+light%^MAGENTA%^,%^RESET%^ eagles splendor%^MAGENTA%^,%^RESET%^ lightning bolt%^MAGENTA%^,%^RESET%^ shout%^MAGENTA%^,%^RESET%^ angelic aspect%^MAGENTA%^,%^RESET%^ serenity%^MAGENTA%^,%^RESET%^ project image%^MAGENTA%^,%^RESET%^ protection from spells
+%^CYAN%^elemental:
+burning hands%^MAGENTA%^,%^RESET%^ scorcher%^MAGENTA%^,%^RESET%^ fireball%^MAGENTA%^,%^RESET%^ ice storm%^MAGENTA%^,%^RESET%^ cone of cold%^MAGENTA%^,%^RESET%^ chain lightning%^MAGENTA%^,%^RESET%^ incendiary cloud%^MAGENTA%^,%^RESET%^ meteor swarm
+%^CYAN%^fey:
+dancing lights%^MAGENTA%^,%^RESET%^ glitterdust%^MAGENTA%^,%^RESET%^ phantom steed%^MAGENTA%^,%^RESET%^ confusion%^MAGENTA%^,%^RESET%^ domination%^MAGENTA%^,%^RESET%^ eyebite%^MAGENTA%^,%^RESET%^ reverse gravity%^MAGENTA%^,%^RESET%^ irresistible dance
+%^CYAN%^ghoul:
+chill touch%^MAGENTA%^,%^RESET%^ ray of enfeeblement%^MAGENTA%^,%^RESET%^ vampiric touch%^MAGENTA%^,%^RESET%^ boneshatter%^MAGENTA%^,%^RESET%^ teleport%^MAGENTA%^,%^RESET%^ circle of death%^MAGENTA%^,%^RESET%^ finger of death%^MAGENTA%^,%^RESET%^ horrid wilting
+%^CYAN%^infernal:
+infernal healing%^MAGENTA%^,%^RESET%^ scorcher%^MAGENTA%^,%^RESET%^ fireball%^MAGENTA%^,%^RESET%^ fire shield%^MAGENTA%^,%^RESET%^ mind fog%^MAGENTA%^,%^RESET%^ hellfire ray%^MAGENTA%^,%^RESET%^ finger of death%^MAGENTA%^,%^RESET%^ powerword stun
+%^CYAN%^possessed:
+sleep%^MAGENTA%^,%^RESET%^ blindness%^MAGENTA%^,%^RESET%^ displacement%^MAGENTA%^,%^RESET%^ phantasmal killer%^MAGENTA%^,%^RESET%^ false visioneyebite%^MAGENTA%^,%^RESET%^ visions from within%^MAGENTA%^,%^RESET%^ euphoric tranquility
+%^CYAN%^shadow:
+touch of fatigue%^MAGENTA%^,%^RESET%^ alter self%^MAGENTA%^,%^RESET%^ phantom steed%^MAGENTA%^,%^RESET%^ shadowform%^MAGENTA%^,%^RESET%^ angelic aspect%^MAGENTA%^,%^RESET%^ shadow alteration%^MAGENTA%^,%^RESET%^ umbral strike%^MAGENTA%^,%^RESET%^ greater shadow evocation
+%^CYAN%^stormborn:
+shocking grasp%^MAGENTA%^,%^RESET%^ lightning bolt%^MAGENTA%^,%^RESET%^ gust of wind%^MAGENTA%^,%^RESET%^ lightning arc%^MAGENTA%^,%^RESET%^ chain lightning%^MAGENTA%^,%^RESET%^ phase door%^MAGENTA%^,%^RESET%^ stormbolts%^MAGENTA%^,%^RESET%^ ride the lightning
+%^CYAN%^undead:
+chill touch%^MAGENTA%^,%^RESET%^ spectral hand%^MAGENTA%^,%^RESET%^ necrotic burst%^MAGENTA%^,%^RESET%^ animate dead%^MAGENTA%^,%^RESET%^ create undead%^MAGENTA%^,%^RESET%^ exhume corpses%^MAGENTA%^,%^RESET%^ finger of death%^MAGENTA%^,%^RESET%^ create greater undead
 
-%^CYAN%^See also:%^RESET%^ sorcerer, versatile arcanist, shadow adept, cast, prepare
+%^CYAN%^See also:%^RESET%^ sorcerer%^MAGENTA%^,%^RESET%^ versatile arcanist%^MAGENTA%^,%^RESET%^ shadow adept%^MAGENTA%^,%^RESET%^ cast%^MAGENTA%^,%^RESET%^ prepare
