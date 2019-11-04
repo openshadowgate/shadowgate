@@ -1194,9 +1194,6 @@ int enchanting_menu(string str, mapping map)
                     ""+sort_valid_bonuses()+"\n\n"
 
 // please remove this blurb once temp feats are back in.
-                    "%^RESET%^%^BOLD%^%^YELLOW%^Please note %^BOLD%^%^GREEN%^temporary feats%^YELLOW%^ have "
-                    "%^RESET%^%^BOLD%^%^YELLOW%^been removed from the available list pending a code fix.\n\n"
-
                     "%^RESET%^%^BOLD%^%^YELLOW%^In addition, you are also able to increase the base "
                     "%^RESET%^%^BOLD%^%^GREEN%^enchantment %^RESET%^%^BOLD%^%^YELLOW%^of an item.  You "
                     "are also able to give an item specials.\n\n"

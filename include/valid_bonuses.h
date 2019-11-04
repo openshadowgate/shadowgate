@@ -13,7 +13,6 @@
     "attack bonus", \
     "damage bonus", \
     "max hp bonus", \
-    "fast healing", \
     "light", \
     "sight bonus", \
     "magic resistance", \
