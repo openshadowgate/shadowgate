@@ -102,7 +102,7 @@ void spell_effect(int prof) {
    power = CLEVEL + wis_bonus + random(6);
    blocker->set_block_power(power);
    spell_successful();
-   addSpellToCaster();   
+   addSpellToCaster();
    duration = 8 * (int)CLEVEL;
    call_out("dest_effect", duration);
    return;
@@ -110,10 +110,14 @@ void spell_effect(int prof) {
 
 void dest_effect(){
 
-   if(objectp(caster)) caster->remove_property_value("spelled", ({TO}) );
+   if(objectp(caster))
+   {
+       tell_object(caster,"%^CYAN%^%^BOLD%^The illusion protected you from scrying fades.%^RESET%^");
+       caster->remove_property_value("spelled", ({TO}) );
+   }
    if(objectp(detector)) detector->self_destruct();
    if(objectp(blocker)) blocker->self_destruct();
-   
+
    ::dest_effect();
    if(objectp(TO)) TO->remove();
 }
