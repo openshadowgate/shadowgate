@@ -30,8 +30,6 @@ int preSpell() {
     return 1;
 }
 
-
-
 void spell_effect(int prof)
 {
     if(!objectp(caster)){
@@ -48,9 +46,8 @@ void spell_effect(int prof)
         caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    environment(caster)->addObjectToCombatCycle(TO,1);
-    if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
-        call_out("dest_effect",ROUND_LENGTH*clevel*5);
+    execute_attack();
+    counter = clevel*5;
 
 }
 
@@ -61,17 +58,13 @@ void execute_attack()
         flag = 1;
         return;
     }
-    if(!objectp(caster)){
+
+    place = ENV(caster);
+    if(!objectp(caster) || !objectp(place) || counter<0)
+    {
         dest_effect();
         return;
     }
-    place = environment(caster); // In the case caster moves
-    if(lastattack == time()){
-        place->addObjectToCombatCycle(TO,1);
-        return;
-    }
-    place->addObjectToCombatCycle(TO,1);
-    lastattack = time();
 
     if((int)caster->query_hp() < (int)caster->query_max_hp())
     {
@@ -79,6 +72,9 @@ void execute_attack()
         tell_room(place,"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
         damage_targ(caster,caster->return_target_limb(),-sdamage,"positive energy");
     }
+    place->addObjectToCombatCycle(TO,1);
+    if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
+        counter--;
 }
 
 

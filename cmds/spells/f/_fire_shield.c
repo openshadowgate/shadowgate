@@ -72,7 +72,7 @@ void execute_attack(){
 
     place = ENV(caster);
 
-    if(!objectp(caster) || !objectp(place) || !present(caster,place)|| counter<0)
+    if(!objectp(caster) || !objectp(place) || counter<0)
     {
         dest_effect();
         return;

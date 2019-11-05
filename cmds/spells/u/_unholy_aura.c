@@ -4,9 +4,7 @@
 
 inherit SPELL;
 
-int strikes;
-int flag;
-int lastattack;
+int timer,flag,stage,toggle,counter;
 
 void create()
 {
@@ -47,37 +45,43 @@ void spell_effect(int prof)
     addSpellToCaster();
     spell_successful();
     caster->add_ac_bonus(2);
-    environment(caster)->addObjectToCombatCycle(TO,1);
+    execute_attack();
     call_out("dest_effect",duration);
     return;
 }
 
 void execute_attack(){
-    object *attackers,room;
+    object *attackers;
     int i;
 
-    ::execute_attack();
-    if(!objectp(caster)){
+    if(!flag)
+    {
+        flag = 1;
+        ::execute_attack();
+        return;
+    }
+
+    if(!objectp(caster) || !objectp(place))
+    {
         dest_effect();
         return;
     }
-    room      = environment(caster);
+    place      = environment(caster);
     attackers = caster->query_attackers();
-    if(lastattack == time())
-        return;
-    room->addObjectToCombatCycle(TO,1);
-    lastattack = time();
-    if(!sizeof(attackers))
-        return;
-    define_base_damage(0);
-    tell_room(room,"%^BOLD%^%^BLACK%^The darkness around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
-    tell_object(caster,"%^BOLD%^%^BLACK%^The darkness around you falls upon your enemies!");
-    for(i=0;i<sizeof(attackers);i++){
-        if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
-        tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the darkness as you strike "
-            ""+caster->QCN+"!");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
+
+    if(sizeof(attackers))
+    {
+        define_base_damage(0);
+        tell_room(place,"%^BOLD%^%^BLACK%^The darkness around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
+        tell_object(caster,"%^BOLD%^%^BLACK%^The darkness around you falls upon your enemies!");
+        for(i=0;i<sizeof(attackers);i++){
+            if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
+            tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the darkness as you strike "
+                        ""+caster->QCN+"!");
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
+        }
     }
+    place->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect()
