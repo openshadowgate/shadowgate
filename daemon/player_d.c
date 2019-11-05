@@ -1503,13 +1503,11 @@ string *list_classes()
     myname = TP->query_name();
     possible_classes = get_dir("/std/class/*.c");
     possible_classes = explode(implode(possible_classes, ""), ".c");
+    possible_classes -= ({"cavalier","antipaladin"});
     if(sizeof(possible_classes))
     {
         for(i=0;i<sizeof(possible_classes);i++)
         {
-            if(possible_classes[i] == "cavalier" ||
-               possible_classes[i] == "antipaladin")
-                continue;
             class_ob = find_object_or_load("/std/class/"+possible_classes[i]+".c");
             classlist += ({possible_classes[i]});
         }
