@@ -64,7 +64,7 @@ void spell_effect(int prof)
     int matches, i, bonus, scrypower, stop;
     mapping map;
 
-    if(!arg)
+    if(!arg || !stringp(arg))
     {
         tell_object(caster,"You must focus upon a target!");
         if(objectp(TO)) TO->remove();

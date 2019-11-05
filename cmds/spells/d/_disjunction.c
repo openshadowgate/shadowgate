@@ -11,7 +11,7 @@ void create() {
 "cast CLASS disjunction on OBJECT");
     set_description("This spell disconnects beneficial magic from an object and allows it to float freely, forever lost in the weave. Object must be present in caster's inventory.
 
-This spell uses 27 182 gp as a material component.");
+This spell uses 14 142 gp as a material component.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -27,7 +27,7 @@ int preSpell() {
        tell_object(caster, "You must specify what to deenchant.");
        return 0;
    }
-   if(!caster->query_funds("gold", 27182))
+   if(!caster->query_funds("gold", 14142))
    {
        tell_object(caster, "You don't have enough money.");
        return 0;
@@ -48,16 +48,16 @@ void spell_effect(int prof)
         return;
     }
 
-   if(!caster->query_funds("gold", 27182))
+   if(!caster->query_funds("gold", 14142))
    {
        tell_object(caster, "You don't have enough money.");
        return;
    }
 
-   caster->use_funds("gold",27182);
+   caster->use_funds("gold",14142);
 
     enchantment = ob->query_property("enchantment");
-    if(enchantment<1)
+    if(enchantment<0)
     {
         tell_object(caster,"%^BOLD%^%^MAGENTA%^You cannot unravel magic of this object further.%^RESET%^");
         dest_effect();
