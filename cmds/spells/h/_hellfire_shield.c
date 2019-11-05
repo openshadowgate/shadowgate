@@ -4,8 +4,7 @@
 #include <spell.h>
 inherit SPELL;
 
-int flag;
-int lastattack;
+int timer,flag,stage,toggle,counter;
 
 void create(){
     ::create();
@@ -18,6 +17,7 @@ void create(){
     set_property("magic",1);
     set_casting_time(1);
     set_helpful_spell(1);
+    traveling_aoe_spell(1);
     set_feats_required(([ "warlock" : "infernal practitioner"]));
 }
 
@@ -36,8 +36,6 @@ int preSpell(){
 }
 
 void spell_effect(int prof){
-    int duration;
-    duration = (ROUND_LENGTH * 10) * clevel; // Might need tweaked -Ares
      tell_room(place,"%^BOLD%^%^BLACK%^A sphere of b%^RESET%^%^RED%^a%^BOLD%^%^BLACK%^leful fla%^BOLD%^%^RED%^m%^BOLD%^%^BLACK%^e roars to life around "+caster->QCN+", heat radiating against your skin!%^RESET%^",caster);
     tell_object(caster,"%^BOLD%^%^BLACK%^B%^RESET%^%^RED%^a%^BOLD%^%^BLACK%^leful fla%^BOLD%^%^RED%^m%^BOLD%^%^BLACK%^es roar to life around you, their fury focussed outwards!%^RESET%^");
     caster->set_property("spelled", ({TO}));
@@ -45,51 +43,47 @@ void spell_effect(int prof){
     caster->set_property("added short",({"%^RED%^ (wreathed in ominous flames)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
-    environment(caster)->addObjectToCombatCycle(TO,1);
-    call_out("dest_effect",duration);
-    return;
+    execute_attack();
+    counter = 10 * clevel;
 }
 
 void execute_attack(){
-    object *attackers = ({});
-    int attacks,max,damage,hits,i,j;
-    if(!objectp(caster)) { dest_effect(); return; }
-    if(!objectp(place))  { dest_effect(); return; }
 
-    ::execute_attack();
+    object *attackers,room;
+    int i;
 
-    if(!objectp(caster)) { dest_effect(); return; }
-    attackers   = caster->query_attackers();
-    max         = clevel/10;
-    attacks     = clevel;
-    place       = environment(caster);
-    if(sizeof(caster->query_classes()) > 1){
-        max     = max/2;
-        attacks = attacks/2;
+    if(!flag)
+    {
+        flag = 1;
+        ::execute_attack();
+        return;
     }
+
+    place = ENV(caster);
+    if(!objectp(caster) || !objectp(place) || counter<0)
+    {
+        dest_effect();
+        return;
+    }
+
+    attackers = caster->query_attackers();
 
     if(!random(10)){
         tell_room(place,"%^RESET%^%^RED%^"+caster->QCN+"'s blazing shield pulses and surges with radiant energy!",caster);
         tell_object(caster,"%^RESET%^%^RED%^Your blazing shield pulses and surges with radiant energy!");
     }
-    if(lastattack == time())
-        return;
+    if(sizeof(attackers))
+    {
+        define_base_damage(0);//lazy re-roll
+        for(i=0;i<sizeof(attackers);i++){
+            if(!objectp(attackers[i])) { continue; }
+            tell_object(caster,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to you, and your hellish shield burns "+attackers[i]->QO+" horribly!");
+            tell_room(place,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to "+caster->QCN+", and the hellish shield burns "+attackers[i]->QO+" horribly!",caster);
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
+        }
+    }
     place->addObjectToCombatCycle(TO,1);
-    lastattack = time();
-    if(!sizeof(attackers))
-        return;
-    define_base_damage(0);//lazy re-roll
-    for(i=0;i<sizeof(attackers);i++){
-        if(!objectp(attackers[i])) { continue; }
-        tell_object(caster,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to you, and your hellish shield burns "+attackers[i]->QO+" horribly!");
-        tell_room(place,"%^BOLD%^%^RED%^"+attackers[i]->QCN+" gets a little too close to "+caster->QCN+", and the hellish shield burns "+attackers[i]->QO+" horribly!",caster);
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
-    }
-    if(attacks == 0){
-       dest_effect();
-       return;
-    }
-    return;
+    counter--;
 }
 
 void dest_effect(){

@@ -318,12 +318,12 @@ int do_strike(object play, object vic)
     else
         play->kill_ob(vic,1);
 
-    i = 10; // bonuses to defender
+    i = 28; // bonuses to defender
     if (vic->query_in_vehicle()) i += 2;
     if (vic->query_watched()) i += 5;
     vic->add_attacker(play);
     play->add_attacker(vic);
-    if (((int)play->query_skill("stealth") + roll_dice(1,20)) < ((int)vic->query_skill("perception")+ i))
+    if (((int)play->query_skill("stealth") + roll_dice(4,12)) < ((int)vic->query_skill("perception")+ i))
     {
         tell_object(play,"%^BOLD%^"+vic->QCN+" %^BOLD%^was obviously watching "+vic->QP+" back and catches you.");
         tell_object(vic,"%^BOLD%^You catch "+play->QCN+" %^BOLD%^trying to stab you.");

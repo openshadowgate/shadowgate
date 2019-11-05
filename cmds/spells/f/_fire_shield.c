@@ -3,8 +3,7 @@
 #include <priest.h>
 inherit SPELL;
 
-int flag;
-int lastattack;
+int timer,flag,stage,toggle,counter;
 
 void create(){
     ::create();
@@ -57,35 +56,46 @@ void spell_effect(int prof){
     addSpellToCaster();
     spell_successful();
     execute_attack();
-    call_out("dest_effect",duration);
+    counter = 6*clevel;
 }
 
 void execute_attack(){
-    object *attackers,room;
+    object *foes=({}),targ;
     int i;
 
-    ::execute_attack();
-    if(!objectp(caster)){
+    if(!flag)
+    {
+        flag = 1;
+        ::execute_attack();
+        return;
+    }
+
+    place = ENV(caster);
+
+    if(!objectp(caster) || !objectp(place) || !present(caster,place)|| counter<0)
+    {
         dest_effect();
         return;
     }
-    room      = environment(caster);
-    attackers = caster->query_attackers();
-    if(lastattack == time())
-        return;
-    room->addObjectToCombatCycle(TO,1);
-    lastattack = time();
-    if(!sizeof(attackers))
-        return;
-    define_base_damage(0);
-    tell_room(room,"%^BOLD%^%^RED%^Flames around "+caster->QCN+" burn "+caster->QP+" enemies!",({caster,target}));
-    tell_object(caster,"%^BOLD%^%^RED%^Flames of your shire field burn your enemies!");
-    for(i=0;i<sizeof(attackers);i++){
-        if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
-        tell_object(attackers[i],"%^BOLD%^%^RED%^You are burned by the shield of flames as you strike "
-            ""+caster->QCN+"!");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");
+
+    foes = caster->query_attackers();
+
+    if(sizeof(foes))
+    {
+        define_base_damage(0);//reroll each turn
+        tell_room(place,"%^BOLD%^%^RED%^Flames around "+caster->QCN+" burn "+caster->QP+" enemies!",({caster,target}));
+        tell_object(caster,"%^BOLD%^%^RED%^Flames of your shire field burn your enemies!");
+
+        define_base_damage(0);
+        for(i=0;i<sizeof(attackers);i++){
+            if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
+            tell_object(attackers[i],"%^BOLD%^%^RED%^You are burned by the shield of flames as you strike "
+                        ""+caster->QCN+"!");
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");
+        }
     }
+    place->addObjectToCombatCycle(TO,1);
+    counter--;
 }
 
 void dest_effect(){

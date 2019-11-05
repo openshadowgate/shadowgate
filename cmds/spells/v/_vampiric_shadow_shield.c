@@ -2,8 +2,7 @@
 #include <priest.h>
 inherit SPELL;
 
-int flag;
-int lastattack;
+int timer,flag,stage,toggle,counter;
 
 void create()
 {
@@ -46,7 +45,7 @@ void spell_effect(int prof)
     addSpellToCaster();
     spell_successful();
     execute_attack();
-    call_out("dest_effect",duration);
+    counter = 6*clevel;
 }
 
 void execute_attack()
@@ -54,38 +53,44 @@ void execute_attack()
     object *attackers,room;
     int i;
 
-    ::execute_attack();
-    if(!objectp(caster))
+    if(!flag)
+    {
+        flag = 1;
+        ::execute_attack();
+        return;
+    }
+
+    place = ENV(caster);
+    if(!objectp(caster) || !objectp(place) || !present(caster,place)|| counter<0)
     {
         dest_effect();
         return;
     }
-    room      = environment(caster);
+
     attackers = caster->query_attackers();
-    if(lastattack == time())
-        return;
-    room->addObjectToCombatCycle(TO,1);
-    lastattack = time();
-    if(!sizeof(attackers))
-        return;
 
-    tell_room(room,"%^BLUE%^Shadows around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
-    tell_object(caster,"%^BLUE%^%^Shadows around you caress your enemies.");
-    define_base_damage(0);
-    for(i=0;i<sizeof(attackers);i++)
+    if(sizeof(attackers))
     {
-        if(!objectp(attackers[i]))
-            continue;
-        if(do_save(attackers[i],0))
-            continue;
-        if(attackers[i]->is_undead())
-            continue;
+        define_base_damage(0);
+        tell_room(place,"%^BLUE%^Shadows around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
+        tell_object(caster,"%^BLUE%^%^Shadows around you caress your enemies.");
+        for(i=0;i<sizeof(attackers);i++)
+        {
+            if(!objectp(attackers[i]))
+                continue;
+            if(do_save(attackers[i],0))
+                continue;
+            if(attackers[i]->is_undead())
+                continue;
 
-        tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
-        if(i<8)
-            caster->add_hp(sdamage/16);
+            tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
+            if(i<8)
+                caster->add_hp(sdamage/16);
+        }
     }
+    place->addObjectToCombatCycle(TO,1);
+    counter--;
 }
 
 void dest_effect(){
