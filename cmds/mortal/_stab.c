@@ -318,7 +318,7 @@ int do_strike(object play, object vic)
     else
         play->kill_ob(vic,1);
 
-    i = 24; // bonuses to defender
+    i = 26; // bonuses to defender
     if (vic->query_in_vehicle()) i += 2;
     if (vic->query_watched()) i += 5;
     vic->add_attacker(play);
