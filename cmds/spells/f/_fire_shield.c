@@ -57,7 +57,6 @@ void spell_effect(int prof){
     spell_successful();
     counter = 6*clevel;
     execute_attack();
-
 }
 
 void execute_attack(){

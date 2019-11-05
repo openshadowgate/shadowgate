@@ -45,8 +45,8 @@ void spell_effect(int prof)
     spell_successful();
     addSpellToCaster();
     counter = clevel*5;
+    place->addObjectToCombatCycle(TO,1);
     execute_attack();
-
 }
 
 void execute_attack()
@@ -59,14 +59,12 @@ void execute_attack()
 
     place = environment(caster);
 
-    tell_room(place,":1"+identify(TO));
     if(!objectp(caster) || !objectp(place) || counter<0)
     {
 
         dest_effect();
         return;
     }
-    tell_room(place,":2"+identify(TO));
     define_base_damage(0);
     if(FEATS_D->usable_feat(caster,"metabolic perfection"))
         sdamage*=5/4;

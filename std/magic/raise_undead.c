@@ -14,6 +14,8 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
         return 0;
 
     temp=({});
+    if(!environment(caster))
+        return;
     targs=all_inventory(environment(caster));
 
     for(i=0;i<sizeof(targs);i++)

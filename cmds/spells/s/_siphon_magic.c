@@ -11,7 +11,9 @@ void create() {
     set_spell_sphere("abjuration");
     set_syntax(
 "cast CLASS siphon magic on OBJECT2 into OBJECT2");
-    set_description("With this spell you can transfer enchantment value between objects of the same type.");
+    set_description("With this spell you can transfer enchantment value between objects of the same type.
+
+This spell uses 66 260 gp as a material component.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -32,6 +34,11 @@ int preSpell()
         return 0;
     }
     fob = present(sfob,caster);
+    if(!caster->query_funds("gold", 66260))
+    {
+        tell_object(caster, "You don't have enough money.");
+        return 0;
+    }
     if (!objectp(fob))
     {
         tell_object(caster,"The first object is not present.");
@@ -89,13 +96,21 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
+    if(!caster->query_funds("gold", 66260))
+    {
+        tell_object(caster, "You don't have enough money.");
+        return;
+    }
+
+    caster->use_funds("gold",66260);
+
 
     enchantment = fob->query_property("enchantment");
 
     fob->remove_property("enchantment");
     tob->remove_property("enchantment");
     tob->set_property("enchantment",enchantment);
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^As you spell syllables power on "+fob->query_short()+"%^BOLD%^%^MAGENTA%^ transfers to "+tob->query_short()+"%^BOLD%^%^MAGENTA%^.%^RESET%^");
-    tell_room(caster,"%^BOLD%^%^MAGENTA%^You see soft glow flowing from "+fob->query_short()+"%^BOLD%^%^MAGENTA%^ into "+tob->query_short()+"%^BOLD%^%^MAGENTA%^.%^RESET%^",({caster}));
+    tell_object(caster,"%^BOLD%^%^MAGENTA%^You place "+fob->query_short()+"%^BOLD%^%^MAGENTA%^ over "+tob->query_short()+"%^BOLD%^%^MAGENTA%^ and melt a golden pile beneath them, the vapor transfers the magic.%^RESET%^");
+    tell_room(caster,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" places "+fob->query_short()+"%^BOLD%^%^MAGENTA%^ over "+tob->query_short()+"%^BOLD%^%^MAGENTA%^ and melts a pile of gold beneath them into a vapor that carries magic.%^RESET%^",({caster}));
     dest_effect();
 }

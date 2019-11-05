@@ -9,7 +9,9 @@ void create() {
     set_spell_sphere("abjuration");
     set_syntax(
 "cast CLASS disjunction on OBJECT");
-    set_description("This spell disconnects beneficial magic from an object and allows it to float freely, forever lost in the weave. Object must be present in caster's inventory.");
+    set_description("This spell disconnects beneficial magic from an object and allows it to float freely, forever lost in the weave. Object must be present in caster's inventory.
+
+This spell uses 27 182 gp as a material component.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -23,6 +25,11 @@ string query_casting_string() {
 int preSpell() {
    if(!arg) {
        tell_object(caster, "You must specify what to deenchant.");
+       return 0;
+   }
+   if(!caster->query_funds("gold", 27182))
+   {
+       tell_object(caster, "You don't have enough money.");
        return 0;
    }
    return 1;
@@ -41,6 +48,14 @@ void spell_effect(int prof)
         return;
     }
 
+   if(!caster->query_funds("gold", 27182))
+   {
+       tell_object(caster, "You don't have enough money.");
+       return;
+   }
+
+   caster->use_funds("gold",27182);
+
     enchantment = ob->query_property("enchantment");
     if(enchantment<1)
     {
@@ -51,8 +66,8 @@ void spell_effect(int prof)
 
     ob->remove_property("enchantment");
     ob->set_property("enchantment",enchantment-1);
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^As you spell syllables enchantment on "+ob->query_short()+"%^BOLD%^%^MAGENTA%^ becomes weaker.%^RESET%^");
-    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" voices a few syllables over "+ob->query_short()+".%^RESET%^");
+    tell_object(caster,"%^BOLD%^%^MAGENTA%^As the metal vapor raises it carries away the magic of "+ob->query_short()+"%^BOLD%^%^MAGENTA%^ and it becomes weaker.%^RESET%^");
+    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" voices a few syllables and evaparates a pile of gold under "+ob->query_short()+".%^RESET%^");
 
     dest_effect();
 }
