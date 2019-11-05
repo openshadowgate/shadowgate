@@ -61,12 +61,13 @@ void execute_attack(){
         return;
     }
 
+    place      = environment(caster);
     if(!objectp(caster) || !objectp(place))
     {
         dest_effect();
         return;
     }
-    place      = environment(caster);
+
     attackers = caster->query_attackers();
 
     if(sizeof(attackers))

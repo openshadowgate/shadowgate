@@ -7,7 +7,7 @@
 inherit SPELL;
 
 int flag;
-int lastattack;
+int timer,flag,stage,toggle,counter;
 
 void create()
 {

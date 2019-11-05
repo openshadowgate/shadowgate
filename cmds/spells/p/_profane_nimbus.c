@@ -4,9 +4,7 @@
 
 inherit SPELL;
 
-int strikes;
-int flag;
-int lastattack;
+int timer,flag,stage,toggle,counter;
 
 void create()
 {
@@ -54,7 +52,7 @@ void spell_effect(int prof)
     caster->set_property("added short",({"%^BOLD%^%^MAGENTA%^ (in halo of darkness)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
-    environment(caster)->addObjectToCombatCycle(TO,1);
+    execute_attack();
     call_out("dest_effect",duration);
     return;
 }
@@ -63,32 +61,38 @@ void execute_attack(){
     object *attackers,room;
     int i;
 
-    ::execute_attack();
-    if(!objectp(caster)){
+    if(!flag)
+    {
+        flag = 1;
+        ::execute_attack();
+        return;
+    }
+
+    room      = environment(caster);
+    if(!objectp(caster) || !objectp(room))
+    {
         dest_effect();
         return;
     }
-    room      = environment(caster);
     attackers = filter_array(caster->query_attackers(),(:
                                                         $1->query_alignment() == 1 ||
                                                         $1->query_alignment() == 4 ||
                                                         $1->query_alignment() == 7
                                                         :));
-    if(lastattack == time())
-        return;
-    room->addObjectToCombatCycle(TO,1);
-    lastattack = time();
-    if(!sizeof(attackers))
-        return;
-    define_base_damage(0);
-    tell_room(room,"%^BOLD%^%^BLACK%^The darkness around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
-    tell_object(caster,"%^BOLD%^%^BLACK%^The darkness around you falls upon your enemies!");
-    for(i=0;i<sizeof(attackers);i++){
-        if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
-        tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the darkness as you strike "
-            ""+caster->QCN+"!");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"divine");
+
+    if(sizeof(attackers))
+    {
+        define_base_damage(0);
+        tell_room(room,"%^BOLD%^%^BLACK%^The darkness around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
+        tell_object(caster,"%^BOLD%^%^BLACK%^The darkness around you falls upon your enemies!");
+        for(i=0;i<sizeof(attackers);i++){
+            if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
+            tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the darkness as you strike "
+                        ""+caster->QCN+"!");
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"divine");
+        }
     }
+    room->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect()
