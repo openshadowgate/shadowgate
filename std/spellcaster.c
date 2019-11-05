@@ -266,7 +266,7 @@ int query_memorized(string myclass, string spell)
     if(myclass == "psywarrior") return 1;
     if(myclass == "psion") return 1;
     if(myclass == "warlock"){
-       myknown = TO->query_mastered_spells();
+       myknown = TO->query_mastered_spells(myclass);
        if(!sizeof(myknown)) return 0;
        if(member_array(spell,myknown) != -1) return 1;
        return 0;

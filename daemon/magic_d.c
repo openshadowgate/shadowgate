@@ -67,6 +67,7 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
        if(spell_name == "timeless body") { return 1; }
     }
 
+    tell_room(ENV(target),":here2");
     if (!target->query_memorized(spell_type,spell_name)) return 0;
 
     x = target->query_guild_level(spell_type);
@@ -122,6 +123,7 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
         case 4: if (x > 14) return 1;break;
       }
     }
+
     if(spell_type == "warlock") {
       switch (spell_level) {
         case 1: return 1; break;

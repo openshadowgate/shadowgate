@@ -877,6 +877,7 @@ void wizard_interface(object user, string type, string targ)
          !"/daemon/magic_d"->can_cast(caster, casting_level, spell_type, improv, spell_duration) ) )
     {
         tell_object(caster, "You cannot "+whatdo+" that "+whatsit+".\n");
+        tell_room(ENV(caster),":here");
         TO->remove();
         return;
     }
