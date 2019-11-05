@@ -2,11 +2,11 @@
 //Circe 7/29/05
 //Adjusted by ~Circe~ 1/13/16 to improve healing
 #include <std.h>
+#include <daemons.h>
 #include <priest.h>
 
 inherit SPELL;
 
-int flag;
 int timer,flag,stage,toggle,counter;
 
 void create()
@@ -40,14 +40,12 @@ void spell_effect(int prof)
     if(caster->is_class("psywarrior"))
         define_base_damage(-6);
     tell_object(caster, "%^RED%^You focus your energies so that your body will repair itself!%^RESET%^");
-    if(FEATS_D->usable_feat(caster,"metabolic perfection"))
-        sdamage*=5/4;
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    execute_attack();
     counter = clevel*5;
+    execute_attack();
 
 }
 
@@ -59,12 +57,20 @@ void execute_attack()
         return;
     }
 
-    place = ENV(caster);
+    place = environment(caster);
+
+    tell_room(place,":1"+identify(TO));
     if(!objectp(caster) || !objectp(place) || counter<0)
     {
+
         dest_effect();
         return;
     }
+    tell_room(place,":2"+identify(TO));
+    define_base_damage(0);
+    if(FEATS_D->usable_feat(caster,"metabolic perfection"))
+        sdamage*=5/4;
+
 
     if((int)caster->query_hp() < (int)caster->query_max_hp())
     {

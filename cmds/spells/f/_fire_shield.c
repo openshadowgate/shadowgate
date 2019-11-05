@@ -55,8 +55,9 @@ void spell_effect(int prof){
     caster->set_property("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
     addSpellToCaster();
     spell_successful();
-    execute_attack();
     counter = 6*clevel;
+    execute_attack();
+
 }
 
 void execute_attack(){
