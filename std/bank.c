@@ -1,4 +1,4 @@
-// /std/bank.c 
+// /std/bank.c
 // <<==-- Coded By Fire Dragon --==>>
 // Adjusted by Thorn 970209
 
@@ -45,12 +45,12 @@ int exchange(string str) {
    int amount, amt, amt2, diff, original, check;
 
    if(!str) {
-      notify_fail("Correct syntax: <exchange # type for type>\n"+
+      notify_fail("Correct syntax: <exchange NUM TYPE for TYPE>\n"+
                   "ex: <exchange 100 gold for copper>\n");
       return 0;
    }
    if(sscanf(str, "%d %s for %s", amount, from, to) !=3) {
-      notify_fail("Correct syntax: <exchange # type for type\nex: "
+      notify_fail("Correct syntax: <exchange NUM TYPE for TYPE\nex: "
                   "<exchange 100 gold for copper>\n");
       return 0;
    }
@@ -74,11 +74,11 @@ int exchange(string str) {
       write("The bank does not support "+to+".\n");
       return 0;
    }
-//Some of the calcs seem unnecessary, but I'm retaining them while reordering to avoid 
+//Some of the calcs seem unnecessary, but I'm retaining them while reordering to avoid
 //the player losing money when they don't have enough for the exchange, hence the new variable ~Circe~ 12/16/15
-   original = amount; 
+   original = amount;
    amt = amount;
-   val = amount * (int)ECONOMY_D->currency_rate(from);  
+   val = amount * (int)ECONOMY_D->currency_rate(from);
    amount = to_int(val / (int)ECONOMY_D->currency_rate(to));
    check = (amount*90)/100;
    if(check < 1){
@@ -97,7 +97,7 @@ int exchange(string str) {
    return 1;
 }
 
-varargs int close(string str, int quiet) 
+varargs int close(string str, int quiet)
 {
     int i;
     mapping money;
@@ -113,17 +113,17 @@ varargs int close(string str, int quiet)
         }
     }
     money = (mapping)BANK_D->query_balance((string)this_player()->query_name(), BANK_ID );
-    if(!money || money == ([])) 
+    if(!money || money == ([]))
     {
         if(!quiet)
         {
-            write("The teller says: You have no account here to close!");
+            write("%^MAGENTA%^The teller says%^RESET%^: You have no account here to close!");
             tell_room(ETP,TPQCN+" tries to close a non-existant account!",TP);
             return 1;
         }
         else return 0;
    }
-    for(i=0; i<sizeof(HARD_CURRENCIES); i++) 
+    for(i=0; i<sizeof(HARD_CURRENCIES); i++)
     {
         if(money[HARD_CURRENCIES[i]])
             this_player()->add_money(HARD_CURRENCIES[i],money[HARD_CURRENCIES[i]]);
@@ -165,13 +165,13 @@ int balance(string str) {
    }
    money = (mapping)BANK_D->query_balance((string)this_player()->query_name(), BANK_ID);
    if(!money || money == ([])) {
-      write("The teller says: You have no account here!");
+      write("%^MAGENTA%^The teller says%^RESET%^: You have no account here!");
       return 1;
    }
    tell_room(ETP,TPQCN+" receives a piece of paper from the teller.",TP);
    write("\n\n The teller looks up your account. He writes something down");
    write(" on a small piece of paper and hands it to you. On the paper");
-   write(" you see the following:\n");   
+   write(" you see the following:\n");
    for(i=0; i<sizeof(HARD_CURRENCIES); i++) {
       printf("%-10s : %-15s coins\n",capitalize(HARD_CURRENCIES[i]),english_number(money[HARD_CURRENCIES[i]]));
    }
@@ -184,11 +184,11 @@ int deposit(string str) {
    int x, amount, amount2;
 
    if(!str) {
-      notify_fail("Correct syntax: <deposit [amount] [type]>\n");
+      notify_fail("Correct syntax: <deposit AMOUNT TYPE>\n");
       return 0;
    }
    if(sscanf(str, "%d %s", amount, type) != 2) {
-      notify_fail("Correct syntax: <deposit [amount] [type]>\n");
+      notify_fail("Correct syntax: <deposit AMOUNT TYPE>\n");
       return 0;
    }
    if(TP->query_bound() || TP->query_unconscious()){
@@ -196,7 +196,7 @@ int deposit(string str) {
       return 1;
    }
    if((int)this_player()->query_money(type) < amount) {
-      notify_fail("The teller says: You do not have that much money!\n");
+      write("%^MAGENTA%^The teller says%^RESET%^: You do not have that much money!\n");
       return 0;
    }
 
@@ -205,14 +205,14 @@ int deposit(string str) {
    if(x != TRANSACTION_OK) {
       switch(x) {
       case NO_ACCOUNT:
-         notify_fail("The teller says: You have no account here!\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: You have no account here!\n");
          break;
       case BAD_MONEY:
-         notify_fail("The teller says: That is not a real money type!\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: That is not a real money type!\n");
          break;
-      default: notify_fail("The teller says: You can't do that!\n");
+      default: write("%^MAGENTA%^The teller says%^RESET%^: You can't do that!\n");
       }
-      return 0;
+      return 1;
    }
    this_player()->add_money(type, -amount);
    this_player()->force_me("save");
@@ -226,15 +226,15 @@ int withdraw(string str) {
    int x, amount;
 
    if(!str) {
-      notify_fail("Correct syntax: <withdraw [amount] [type]>\n");
+      notify_fail("Correct syntax: <withdraw AMOUNT TYPE>\n");
       return 0;
    }
    if(sscanf(str, "%d %s", amount, type) != 2) {
-      notify_fail("Correct syntax: <withdraw [amount] [type]>\n");
+      notify_fail("Correct syntax: <withdraw AMOUNT TYPE>\n");
       return 0;
    }
    if(TP->query_ghost()){
-      notify_fail("You must be living to do that.\n");
+      notify_fail("Ghosts cant hold money.\n");
       return 1;
    }
    if(TP->query_bound() || TP->query_unconscious()){
@@ -242,21 +242,21 @@ int withdraw(string str) {
       return 1;
    }
    if(amount < 0) {
-      notify_fail("The teller says: That would be a neat trick!\n");
+      write("%^MAGENTA%^The teller says%^RESET%^: That would be a neat trick!\n");
       return 0;
    }
    x = (int)BANK_D->withdraw((string)this_player()->query_name(), BANK_ID, amount, type);
    if(x != TRANSACTION_OK) {
       switch(x) {
       case NO_ACCOUNT:
-         notify_fail("The teller says: You have no account here!\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: You have no account here!\n");
          break;
       case BAD_MONEY:
-         notify_fail("The teller says: That is not a real money type!\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: That is not a real money type!\n");
          break;
-      default: notify_fail("The teller says: You can't do that!\n");
+      default: write("%^MAGENTA%^The teller says%^RESET%^: You can't do that!\n");
       }
-      return 0;
+      return 1;
    }
 
    //amount = (amount*90)/100;
@@ -270,21 +270,19 @@ int read(string str) {
    if(str != "sign") return notify_fail("Read what?\n");
    write(
 @MELNMARN
-%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-%^BOLD%^%^GREEN%^      You may do any of the following at this bank....
-%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-%^BOLD%^Open account%^BLACK%^ ------------------------ %^RESET%^%^CYAN%^Will open an account for you. 
-%^BOLD%^Close account%^BLACK%^ ----------------------- %^RESET%^%^CYAN%^Closes your account.
-%^BOLD%^Balance%^BLACK%^ ----------------------------- %^RESET%^%^CYAN%^Gives your account balance info.
-%^BOLD%^Deposit <#> <type>%^BLACK%^ ------------------ %^RESET%^%^CYAN%^Deposits # of currency of type.
-%^BOLD%^Withdraw <#> <type>%^BLACK%^ ----------------- %^RESET%^%^CYAN%^Withdraws # of currency of type.
-%^BOLD%^Exchange <#> <type1> for <type2>%^BLACK%^ ---- %^RESET%^%^CYAN%^Exchanges currencies.
-%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-%^BOLD%^Note: a 10% service fee will be charged to all transactions.%^RESET%^
+
+%^CYAN%^%^BOLD%^Open account%^BLACK%^ ----------------- %^RESET%^: %^CYAN%^Will open an account for you.
+%^CYAN%^BOLD%^Close account%^BLACK%^ ---------------- %^RESET%^: %^CYAN%^Closes your account.
+%^CYAN%^%^BOLD%^Balance%^BLACK%^ ---------------------- %^RESET%^: %^CYAN%^Gives your account balance info.
+%^CYAN%^%^BOLD%^Deposit NUM TYPE%^BLACK%^ ------------- %^RESET%^: %^CYAN%^Deposits NUM of currency of TYPE.
+%^CYAN%^%^BOLD%^Withdraw NUM TYPE%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
+%^CYAN%^BOLD%^Exchange NUM TYPE for TYPE2%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
+
+%^BOLD%^A 10% service fee will be charged to all transactions.%^RESET%^
 MELNMARN
    );
    if(archp(TP)) {
-      write("\nAlso, admdeposit (x) (type) (player name)\nadmwithdraw (x) (type) (player name)\n"); 
+      write("\nAlso, admdeposit (x) (type) (player name)\nadmwithdraw (x) (type) (player name)\n");
    }
    return 1;
 }
@@ -310,11 +308,11 @@ int admdeposit(string str) {
    int x, amount;
 
    if(!str) {
-      notify_fail("Correct syntax: <admdeposit [amount] [type] [player]>\n");
+      notify_fail("Correct syntax: <admdeposit AMOUNT TYPE PLAYER>\n");
       return 0;
    }
    if(sscanf(str, "%d %s %s", amount, type, player) != 3) {
-      notify_fail("Correct syntax: <admdeposit [amount] [type] [player]>\n");
+      notify_fail("Correct syntax: <admdeposit AMOUNT TYPE PLAYER>\n");
       return 0;
    }
    x = (int)BANK_D->deposit(
@@ -323,12 +321,12 @@ int admdeposit(string str) {
    if(x != TRANSACTION_OK) {
       switch(x) {
       case NO_ACCOUNT:
-         notify_fail("The teller says: Hmm, that account does not exist, my lord!\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: Hmm, that account does not exist, my lord!\n");
          break;
       case BAD_MONEY:
-         notify_fail("The teller says: That is not a real money type, my lord.\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: That is not a real money type, my lord.\n");
          break;
-      default: notify_fail("The teller says: I am too puny to do that, my lord.\n");
+      default: write("%^MAGENTA%^The teller says%^RESET%^: I am too puny to do that, my lord.\n");
       }
       return 0;
    }
@@ -341,15 +339,15 @@ int admwithdraw(string str) {
    int x, amount;
 
    if(!str) {
-      notify_fail("Correct syntax: <admwithdraw [amount] [type] [player]>\n");
+      notify_fail("Correct syntax: <admwithdraw AMOUNT TYPE PLAYER>\n");
       return 0;
    }
    if(sscanf(str, "%d %s %s", amount, type, player) != 3) {
-      notify_fail("Correct syntax: <admwithdraw [amount] [type] [player]>\n");
+      notify_fail("Correct syntax: <admwithdraw AMOUNT TYPE PLAYER>\n");
       return 0;
    }
    if(amount < 0) {
-      notify_fail("The teller says: Account is empty, my lord!\n");
+      write("%^MAGENTA%^The teller says%^RESET%^: Account is empty, my lord!\n");
       return 0;
    }
    x = (int)BANK_D->withdraw(
@@ -358,12 +356,12 @@ int admwithdraw(string str) {
    if(x != TRANSACTION_OK) {
       switch(x) {
       case NO_ACCOUNT:
-         notify_fail("The teller says: Hmm, that account does not exist, my lord!\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: Hmm, that account does not exist, my lord!\n");
          break;
       case BAD_MONEY:
-         notify_fail("The teller says: That is not a real money type, my lord.\n");
+         write("%^MAGENTA%^The teller says%^RESET%^: That is not a real money type, my lord.\n");
          break;
-      default: notify_fail("The teller says: I am too puny to do that, my lord.\n");
+      default: write("%^MAGENTA%^The teller says%^RESET%^: I am too puny to do that, my lord.\n");
       }
       return 0;
    }

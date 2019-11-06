@@ -9,6 +9,7 @@ void create() {
 "They would be good for day-to-day activities and travel.");
     set_weight(4);
     set_value(5);
+    set_property("repairtype",({"tailor","armorsmith","leatherworker"}));
     set_type("clothing");
     set_limbs( ({ "left foot","right foot" }) );
     set_ac(0);

@@ -1,5 +1,5 @@
 #define ACCOUNTS_DIR		"/adm/save/accounts/"
-#define LISCENSED_BANKS           ({"shadow","juran","tharis","seneca", "asgard","daggerdale", "torm","tonovi","azha","dagger","deku","newbie","graez","attaya", "antioch", "daroldralych" })
+#define LISCENSED_BANKS           ({"shadow","juran","tharis","seneca", "asgard","daggerdale", "torm","tonovi","azha","dagger","deku","newbie","graez","attaya", "antioch", "daroldralych", })
 
 #define TRANSACTION_OK		0
 #define NO_ACCOUNT		1
