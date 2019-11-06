@@ -48,6 +48,7 @@ void spell_effect(int prof) {
         mons += ({ob});
     }
     addSpellToCaster();
+    call_out("dest_effect",clevel*6*ROUND_LENGTH);
 }
 
 void dest_effect() {
