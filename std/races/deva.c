@@ -8,7 +8,7 @@ void create() { ::create(); }
 // age at which each age cat starts: normal, middle, old, venerable
 int *age_brackets() { return ({ 18, 500, 1450, 2000 }); }
 
-int *restricted_alignments(string subrace) { return ({ 2,3,6,8,9 }); }
+int *restricted_alignments(string subrace) { return ({ 2,3,6,8,9,5 }); }
 
 string *restricted_classes(string subrace) { return ({ }); }
 
