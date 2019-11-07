@@ -1,10 +1,8 @@
 %^RESET%^%^CYAN%^Sorcerer:
 
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 charisma
-%^RESET%^%^CYAN%^Races allowed:%^RESET%^ human, half-elf, half-orc, half-drow, elf, drow, halfling,
- gnome, voadkyn, kobold, goblin, orc (tanarukk), yuan-ti, shade
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage, psion
+%^RESET%^%^CYAN%^Cannot multiclass with:%^RESET%^ mage
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, perception, influence, spellcraft
