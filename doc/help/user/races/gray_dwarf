@@ -7,7 +7,7 @@
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^invisibility
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any non-good
-%^BOLD%^%^BLUE%^Classes allowed: %^RESET%^fighter, thief, cleric, psion, barbarian, monk, psywarrior.
+%^BOLD%^%^BLUE%^Classes restricted: %^RESET%^mage, bard, ranger, paladin, sorcerer, druid, warlock
 %^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^41-70
 %^BOLD%^%^BLUE%^Average life span: %^RESET%^350
 

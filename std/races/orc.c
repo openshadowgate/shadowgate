@@ -12,10 +12,10 @@ int *age_brackets() { return ({ 15, 30, 40, 50 }); }
 int *restricted_alignments(string subrace) { return ({ 1, 4, 5, 7 }); }
 
 string *restricted_classes(string subrace) {
-  if(!subrace || subrace == "") return ({ "bard", "cavalier", "paladin", "mage", "psion", "psywarrior", "sorcerer", "monk", "druid", "warlock" });
+  if(!subrace || subrace == "") return ({ "bard",  "paladin", "mage", "psion", "psywarrior", "sorcerer", "monk", "druid", "warlock" });
   switch(subrace) {
-     case "tanarukk": return ({ "bard", "cavalier", "paladin", "mage", "psion", "psywarrior", "monk", "druid" }); break;
-     default: return ({ "bard", "cavalier", "paladin", "mage", "psion", "psywarrior", "sorcerer", "monk", "druid", "warlock" }); break;
+     case "tanarukk": return ({ "bard",  "paladin", "mage", "psion", "psywarrior", "monk", "druid" }); break;
+     default: return ({ "bard",  "paladin", "mage", "psion", "psywarrior", "sorcerer", "monk", "druid", "warlock" }); break;
    }
 }
 

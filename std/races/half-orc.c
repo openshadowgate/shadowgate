@@ -10,7 +10,7 @@ int *age_brackets() { return ({ 14, 30, 40, 60 }); }
 int *restricted_alignments(string subrace) { return ({}); }
 
 string *restricted_classes(string subrace) {
-  return ({ "mage", "bard", "cavalier", "paladin", "monk" });
+  return ({ "mage", "bard",  "paladin", "monk" });
 }
 
 string *restricted_deities(string subrace) { return ({}); }

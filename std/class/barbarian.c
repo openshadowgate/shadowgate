@@ -9,7 +9,7 @@ int caster_class() { return 0; }
 
 string *restricted_races() { return ({}); }
 
-string *restricted_classes() { return ({ "cavalier", "antipaladin" }); }
+string *restricted_classes() { return ({  "antipaladin" }); }
 
 int *restricted_alignments() { return ({ 1,2,3 }); }
 

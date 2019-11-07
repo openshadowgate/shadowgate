@@ -9,7 +9,7 @@ int *age_brackets() { return ({ 10, 33, 44, 65 }); }
 int *restricted_alignments(string subrace) { return ({ 1, 2, 4, 5, 7 }); }
 
 string *restricted_classes(string subrace) {
-    return ({ "mage", "bard", "psion", "psywarrior", "cavalier", "paladin", "monk", "warlock", "cleric" });
+    return ({ "mage", "bard", "psion", "psywarrior",  "paladin", "monk", "warlock", "cleric" });
 }
 
 // this only affects rolling in creation; does not prevent dedication to a deity in-game, to allow for character evolution. N, 3/16.

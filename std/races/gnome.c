@@ -23,13 +23,13 @@ int *restricted_alignments(string subrace) { return ({ 3, 6, 9 }); }
 
 string *restricted_classes(string subrace)
 {
-    if(!subrace || subrace == "") { return ({ "cavalier", "paladin", "ranger", "psion", "psywarrior", "druid" }); }
+    if(!subrace || subrace == "") { return ({  "paladin", "ranger", "psion", "psywarrior", "druid" }); }
     switch(subrace)
     {
-      case "svirfneblin": case "deep gnome": return ({ "cavalier", "paladin", "psion", "psywarrior", "bard", "druid", "warlock" }); break;
-      case "forest gnome": return ({ "cavalier", "paladin", "psion", "psywarrior", }); break;
-      case "rock gnome" : return ({ "cavalier","paladin","psion","psywarrior" }); break;
-      default: return ({ "cavalier", "paladin", "ranger", "psion", "psywarrior", "druid" }); break;
+      case "svirfneblin": case "deep gnome": return ({  "paladin", "psion", "psywarrior", "bard", "druid", "warlock" }); break;
+      case "forest gnome": return ({  "paladin", "psion", "psywarrior", }); break;
+      case "rock gnome" : return ({ "paladin","psion","psywarrior" }); break;
+      default: return ({  "paladin", "ranger", "psion", "psywarrior", "druid" }); break;
     }
 }
 

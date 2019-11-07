@@ -61,7 +61,7 @@ void advanced_func(object player)
 
     level = (int)player->query_character_level();
 
-    player->set_guild_level("cavalier",(int)player->query_class_level("cavalier"));
+    player->set_guild_level((int)player->query_class_level("cavalier"));
 
     prof = 100;
 
@@ -103,7 +103,7 @@ int number_of_attacks(object player)
 {
     int num;
     if(!objectp(player)) { return 0; }
-    num = "/daemon/bonus_d.c"->attack_bonus("cavalier",player->query_class_level("cavalier"),player);
+    num = "/daemon/bonus_d.c"->attack_bonus(player->query_class_level("cavalier"),player);
     num = num / 7;
     return num;
 }

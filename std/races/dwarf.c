@@ -18,11 +18,11 @@ int *restricted_alignments(string subrace) {
 }
 
 string *restricted_classes(string subrace) {
-    if(!subrace || subrace == "") return ({ "mage", "ranger", "psion", "psywarrior", "cavalier", "paladin", "sorcerer", "druid", "warlock" });
+    if(!subrace || subrace == "") return ({ "mage", "ranger", "psion", "psywarrior", "paladin", "sorcerer", "druid", "warlock" });
     switch(subrace) {
-      case "duergar": case "gray dwarf": return ({ "mage", "bard", "ranger", "cavalier", "paladin", "sorcerer", "druid", "warlock" }); break;
+      case "duergar": case "gray dwarf": return ({ "mage", "bard", "ranger", "paladin", "sorcerer", "druid", "warlock" }); break;
       case "gold dwarf": return ({ "mage", "ranger", "psion", "psywarrior", "sorcerer", "druid", "warlock" }); break;
-      default: return ({ "mage", "ranger", "psion", "psywarrior", "cavalier", "paladin", "sorcerer", "druid", "warlock" }); break;
+      default: return ({ "mage", "ranger", "psion", "psywarrior", "paladin", "sorcerer", "druid", "warlock" }); break;
     }
 }
 
