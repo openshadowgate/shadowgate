@@ -5,7 +5,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("disjunction");
-    set_spell_level(([ "mage" : 5, "cleric" : 5 ]));
+    set_spell_level(([ "mage" : 9, "cleric" : 9 ]));
     set_spell_sphere("abjuration");
     set_syntax(
 "cast CLASS disjunction on OBJECT");
