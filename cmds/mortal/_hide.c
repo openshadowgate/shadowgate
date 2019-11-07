@@ -1,4 +1,4 @@
-//changed 11/5/03 by Circe so that you could not hide things while 
+//changed 11/5/03 by Circe so that you could not hide things while
 //bound or blind.  Last changed Feb 21, 2003
 //altered again by Circe 11/21/04 to allow for chance for others
 //to spot you.
@@ -49,8 +49,8 @@ int cmd_hide(string str)
     num = num / 2;
     prof = num;
     prof+=2;
-    max_hide_level = (prof/2 + (int)TP->query_highest_level()/2);
-    hide_level = roll_dice(1,max_hide_level);
+    max_hide_level = (prof + (int)TP->query_character_level()/2);
+    hide_level = max_hide_level;
 
     item = present(what, TP);
     if (!objectp(item)) {
@@ -75,18 +75,17 @@ int cmd_hide(string str)
         container = ETP;
     }
    if( (prof) > 12)  {
-      delay = 2;
+      delay = 1;
    } else {
       delay = (15 - prof);
    }
-   
+
    if(!TP->query_time_delay("concealment",delay)) {
-      notify_fail("You need more time to figure out exactly how to manage "
-         "that with any degree of success.\n");
+      notify_fail("You need more time to figure out exactly how to manage that with any degree of success.\n");
       return 0;
    }
    TP->set_time_delay("concealment");
- 
+
     if(living(container) && container != TP && !container->query_bound() && !container->query_unconscious() && !container->query_paralyzed()){
         tell_object(container,"%^BOLD%^"+TPQCN+" tried to hide something on you.");
        return notify_fail("They won't allow you to do that.\n");
@@ -103,7 +102,7 @@ int cmd_hide(string str)
             notify_fail("You can not do that.\n");
         }
     }
-    
+
     if (container == TP && present(item,container)) { flag = 1; } // added 6-12-05 by Ares
 
     if (!flag) {
@@ -126,10 +125,9 @@ int cmd_hide(string str)
           opposed = (int)targ->query_skill("thievery");
           opposed = opposed / 2;
           if(targ == TP) continue;
-          if((prof+random(5)) < opposed /*(int)targ->query_nwp("concealment")*/)
+          if((prof) < opposed /*(int)targ->query_nwp("concealment")*/)
           {
-              tell_object(targ,"You notice "+TPQCN+" looking around "+
-                  "suspiciously.");
+              tell_object(targ,"You notice "+TPQCN+" looking around suspiciously.");
           }
        }
     }
@@ -147,8 +145,7 @@ int cmd_hide(string str)
           if(targ == TP) continue;
           if(prof < (opposed /*((int)targ->query_nwp("concealment")*/+random(5)))
           {
-             tell_object(targ,"You notice "+TPQCN+" looking around "+
-                "suspiciously.");
+             tell_object(targ,"You notice "+TPQCN+" looking around suspiciously.");
           }
        }
     }
@@ -177,4 +174,3 @@ Success of this action is based on your thievery skill, and you won't be able to
 glance, look, spy, search, steal
 ");
 }
-
