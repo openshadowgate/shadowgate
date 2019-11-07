@@ -7,7 +7,7 @@
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^NG, CG, CN
 %^BOLD%^%^BLUE%^Genders allowed: %^RESET%^female
-%^BOLD%^%^BLUE%^Classes allowed:%^RESET%^ bard, druid, mage, sorcerer, warlock, thief
+%^BOLD%^%^BLUE%^Classes restricted:%^RESET%^ paladin, fighter, barbarian, psion, psywarrior, monk, ranger
 %^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^90
 %^BOLD%^%^BLUE%^Average life span: %^RESET%^900
 

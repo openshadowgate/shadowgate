@@ -7,7 +7,7 @@
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^none
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any
-%^BOLD%^%^BLUE%^Classes allowed: %^RESET%^All, except for paladin
+%^BOLD%^%^BLUE%^Classes restricted: %^RESET%^paladin
 %^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^16-21
 %^BOLD%^%^BLUE%^Average life span: %^RESET%^155
 

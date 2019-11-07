@@ -6,8 +6,8 @@
 %^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^DR5 vs acid/cold/electricity
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^light
 
-%^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any non-evil
-%^BOLD%^%^BLUE%^Classes allowed: %^RESET%^any except druid
+%^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any
+%^BOLD%^%^BLUE%^Classes restricted: %^RESET%^druid
 %^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^16-19
 %^BOLD%^%^BLUE%^Average life span: %^RESET%^110
 

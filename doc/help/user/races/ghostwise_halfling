@@ -7,7 +7,7 @@
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^ghost step, telepathic bond
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any non-evil
-%^BOLD%^%^BLUE%^Classes allowed: %^RESET%^fighter, cleric, thief, ranger, druid, psion, barbarian, psywarrior.
+%^BOLD%^%^BLUE%^Classes restricted: %^RESET%^mage, bard,  paladin, sorcerer, monk, warlock
 %^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^21-32
 %^BOLD%^%^BLUE%^Average life span: %^RESET%^150
 

@@ -7,7 +7,7 @@
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^fly, darkness, sleep, cone of cold
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^LN, LE, NE
-%^BOLD%^%^BLUE%^Classes allowed: %^RESET%^fighter, mage, thief, sorcerer, barbarian, warlock
+%^BOLD%^%^BLUE%^Classes restricted: %^RESET%^cleric, bard, ranger, psion, psywarrior,  paladin, monk, druid
 %^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^21-24
 %^BOLD%^%^BLUE%^Average life span: %^RESET%^195
 
