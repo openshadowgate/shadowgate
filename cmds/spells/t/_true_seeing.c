@@ -36,9 +36,9 @@ string query_cast_string()
 
 int preSpell()
 {
-    if(caster->detecting_invis())
+    if(caster->detecting_invis() || caster->true_seeing())
     {
-        tell_object(caster, "You are already detecting invisible.");
+        tell_object(caster, "You are already detecting invisible or true seeing.");
         return 0;
     }
     return 1;
@@ -52,9 +52,10 @@ spell_effect(int prof)
               caster->QCN+"'s eyes snap open and flash "+
               "bright white for an instant.",caster);
     tell_object(caster,"%^BOLD%^Your eyes snap open and flash bright white for an instant.");
-    caster->set_detecting_invis(1);
+    caster->set_true_seeing(1);
     caster->set_property("spelled", ({TO}) );
     call_out("dest_effect", clevel * ROUND_LENGTH);
+    addSpellToCaster();
 }
 
 
@@ -68,7 +69,7 @@ void dest_effect()
                   " closes "+caster->QP+" eyes tightly in apparent "+
                   "pain, then they flutter open and "+caster->QS+""+
                   " peers around.",caster);
-        caster->set_detecting_invis(0);
+        caster->set_true_seeing(0);
         caster->remove_property_value("spelled", ({TO}) );
     }
     ::dest_effect();

@@ -824,7 +824,9 @@ int id(string str) {
             }
         }
     }
-    if(str == "attacker" && objectp(TP) && !avatarp(TO) && (!TO->query_invis() || TP->detecting_invis())){
+    if(str == "attacker" && objectp(TP) && !avatarp(TO) && (!TO->query_invis() ||
+                                                            TP->detecting_invis()))
+    {
        if(member_array(TO,TP->query_attackers()) != -1) return 1;
      }
 
@@ -1349,7 +1351,7 @@ int get()
     POISON_D->is_object_poisoned(TO, TP, "get", 1);
     if(TO->is_trapped("get"))
         TO->execute_trap("get", TP);
-      if(TO->query_hidden() || TO->query_magic_hidden()) return TP->detecting_invis();
+    if(TO->query_hidden() || TO->query_magic_hidden()) return TP->detecting_invis();
     return 1;
 }
 

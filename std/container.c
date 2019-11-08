@@ -132,7 +132,7 @@ string describe_living_contents(object *exclude) {
       continue;
     }
 
-    if(inv[i]->query_hidden() && !avatarp(work)) { continue; }
+    if(inv[i]->query_hidden() && !(avatarp(work)||work->true_seeing())) { continue; }
     if(inv[i]->query_hidden() && !living(inv[i])) { continue; }
 
     TO->set_property("information",1);
@@ -207,7 +207,7 @@ string describe_item_contents(object *exclude)
     {
         if(!objectp(TO)) { continue; }
         if(inv[i]->query_magic_hidden() && (!TO->detecting_invis() || !inv[i]->is_detectable())) { continue; }
-        if(inv[i]->query_hidden() && !avatarp(TO)) { continue; }
+        if(inv[i]->query_hidden() && !(avatarp(TO)||TO->true_seeing())) { continue; }
         if(inv[i]->query_hidden() && !living(inv[i])) { continue; }
         if(inv[i]->is_disease()) continue;
         TO->set_property("information",1);

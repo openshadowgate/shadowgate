@@ -1354,7 +1354,7 @@ void set_draggee(object drag){
 }
 
 int detecting_invis() {
-    return detecting_invis || ETO->query_property("no invis") || avatarp(TO);
+    return detecting_invis || true_seeing || ETO->query_property("no invis") || avatarp(TO);
 }
 
 void set_detecting_invis(int xx) {
@@ -1362,7 +1362,7 @@ void set_detecting_invis(int xx) {
 }
 
 int true_seeing() {
-    return detecting_invis || ETO->query_property("no invis") || avatarp(TO);
+    return true_seeing || ETO->query_property("no invis") || avatarp(TO);
 }
 
 void set_true_seeing(int xx) {

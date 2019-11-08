@@ -156,9 +156,8 @@ varargs int examine_object(string str, object obj)
 
     if(ob)
     {
-        if((ob->query_hidden() ||
-            (ob->query_magic_hidden() &&
-             !TP->detecting_invis())) &&
+        if(((ob->query_hidden() && !TP->true_seeing())||
+            (ob->query_magic_hidden() && !TP->detecting_invis())) &&
            ob != TP &&
            !avatarp(TP))
         {
@@ -199,7 +198,8 @@ varargs int examine_object(string str, object obj)
 
     if(ob)
     {
-        if(ob->query_hidden() || (ob->query_magic_hidden() && !TP->detecting_invis()))
+        if((ob->query_hidden() && !TP->true_seeing()) ||
+           (ob->query_magic_hidden() && !TP->detecting_invis()))
         {
             return notify_fail("You do not notice that here.\n");
         }

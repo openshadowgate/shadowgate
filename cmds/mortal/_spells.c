@@ -71,12 +71,12 @@ int cmd_spells(string str)
     tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
     tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 24) + arrange_string("Level", 6));
 
-    if (args != "by level" && args != "expanded knowledge")
-        sort();
     if (args == "by school" && (myclass == "mage" || myclass == "sorcerer"))
     {
         sort_by_school();
     }
+    if (args != "by level" && args != "expanded knowledge")
+        sort();
     else
         sort_two();
 
