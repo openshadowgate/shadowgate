@@ -1626,6 +1626,7 @@ int is_undead()
 {
     return (query_race() == "undead" ||
             query_property("undead") ||
+            member_array("undead",query_id()) != -1 ||
             query("undead")) || 0;
 }
 
