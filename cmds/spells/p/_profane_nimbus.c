@@ -74,11 +74,13 @@ void execute_attack(){
         dest_effect();
         return;
     }
-    attackers = filter_array(caster->query_attackers(),(:
-                                                        $1->query_alignment() == 1 ||
-                                                        $1->query_alignment() == 4 ||
-                                                        $1->query_alignment() == 7
-                                                        :));
+    attackers = filter_array(caster->query_attackers(),(:$1->is_living():));
+    attackers = filter_array(attackers,
+                             (:
+                              $1->query_alignment() == 1 ||
+                              $1->query_alignment() == 4 ||
+                              $1->query_alignment() == 7
+                              :));
 
     if(sizeof(attackers))
     {

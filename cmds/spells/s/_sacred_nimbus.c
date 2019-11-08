@@ -73,12 +73,13 @@ void execute_attack(){
         return;
     }
 
-    attackers = filter_array(caster->query_attackers(),(:
-                                                        $1->query_alignment() == 3 ||
-                                                        $1->query_alignment() == 6 ||
-                                                        $1->query_alignment() == 9
-                                                        :));
-    room->addObjectToCombatCycle(TO,1);
+    attackers = filter_array(caster->query_attackers(),(:$1->is_living():));
+    attackers = filter_array(attackers,
+                             (:
+                              $1->query_alignment() == 3 ||
+                              $1->query_alignment() == 6 ||
+                              $1->query_alignment() == 9
+                              :));
     if(sizeof(attackers))
     {
         define_base_damage(0);
@@ -91,7 +92,7 @@ void execute_attack(){
             damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"divine");
         }
     }
-    place->addObjectToCombatCycle(TO,1);
+    room->addObjectToCombatCycle(TO,1);
 }
 
 
