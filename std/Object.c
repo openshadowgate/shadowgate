@@ -532,7 +532,8 @@ mixed query_property(string prop)
     if(prop == "spell damage resistance")
     {
         if(TO->is_vampire())
-            num+=10;
+            if(!TO->is_in_sunlight())
+                num+=10;
         if((string)TO->query_race() == "human") {
           subrace = (string)TO->query("subrace");
           if(subrace) {
