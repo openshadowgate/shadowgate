@@ -12,7 +12,7 @@ void create()
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS cloak of dreams");
     set_damage_desc("perpetually puts present livings to sleep");
-    set_description("You become dreamy to look at, that is, everyone who looks at you might fall asleep if their will is weak.");
+    set_description("You become dreamy to look at, that is, everyone who looks at you might fall asleep if their will is weak. This spell won't have an effect if you're hidden or invisible, even if they are seeing the invisible.");
     set_save("will");
 }
 
@@ -52,21 +52,25 @@ void execute_attack()
         return;
     }
     room      = environment(caster);
-    attackers = all_inventory(room);
-    attackers -= ({caster});
-    attackers -= caster->query_followers();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
-    attackers = filter_array(attackers,(:$1->is_living():));
-    attackers = filter_array(attackers,(:!$1->is_undead():));
-    attackers = filter_array(attackers,(:!$1->query_asleep():));
-    attackers = target_filter(attackers);
-    for(i=0;i<sizeof(attackers)&&i<6;i++)
+    if(!caster->query_hidden() &&
+       !caster->query_invis())
     {
-        if(do_save(attackers[i],4))
-            continue;
-        tell_room(room,"%^BLUE%^"+attackers[i]->QCN+" falls asleep looking at "+caster->QCN+".%^RESET%^",({attackers[i]}));
-        tell_object(attackers[i],"%^BLUE%^You fall asleep looking at a dreamy visage of "+caster->QCN+".%^RESET%^");
-        attackers[i]->set_asleep(6, "You are asleep!");
+        attackers = all_inventory(room);
+        attackers -= ({caster});
+        attackers -= caster->query_followers();
+        attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
+        attackers = filter_array(attackers,(:$1->is_living():));
+        attackers = filter_array(attackers,(:!$1->is_undead():));
+        attackers = filter_array(attackers,(:!$1->query_asleep():));
+        attackers = target_filter(attackers);
+        for(i=0;i<sizeof(attackers)&&i<6;i++)
+        {
+            if(do_save(attackers[i],4))
+                continue;
+            tell_room(room,"%^BLUE%^"+attackers[i]->QCN+" falls asleep looking at "+caster->QCN+".%^RESET%^",({attackers[i]}));
+            tell_object(attackers[i],"%^BLUE%^You fall asleep looking at a dreamy visage of "+caster->QCN+".%^RESET%^");
+            attackers[i]->set_asleep(6, "You are asleep!");
+        }
     }
     room->addObjectToCombatCycle(TO,1);
 }

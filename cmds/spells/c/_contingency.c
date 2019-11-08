@@ -82,22 +82,6 @@ void spell_effect(int prof) {
     args = 0;
   }
 
-  if (spell->query_components(newtype)) comp_names = keys(spell->query_components(newtype));
-  for (x=0;x<sizeof(comp_names);x++) {
-    if ((int)present("compx",caster)->query_comp(comp_names[x]) == 0) {
-      tell_player(caster, "You do not have the required components to cast this spell!\n");
-      dest_effect();
-      return;
-    }
-  }
-
-  for (x=0;x<sizeof(comp_names);x++) {
-    if (!components) break;
-    present("compx", caster)->use_comp(comp_names[x],components[comp_names[x]]);
-  }
-  if (present("remotexoli",caster)) {
-    present("remotexoli",caster)->remove(0);
-  }
   caster->forget_spell(spell_type,orgSpell);
   spellObj = new(spell);
   spellObj->set_caster(caster);

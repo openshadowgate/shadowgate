@@ -60,68 +60,21 @@ int now() {
     if(!spell) return 0;
     if(flag) return 0;
     flag = 1;
-    if(TP->is_class("bard")) {
-        if(!TP->is_ok_armour("bard")) {
-            write("The spell conflicts with your armor and dies");
-            call_out("remove",1);
-            return 1;
-        }
-   }
 
-   armor = TP->all_armour();
-    armor = filter_array(armor,"armor_filter",find_object_or_load("/cmds/mortal/_cast.c"));
-        if(FEATS_D->usable_feat(TP,"armored caster")) armor =
-filter_array(armor,"light_armor_filter",find_object_or_load("/cmds/mortal/_cast.c"));
-
-      if(sizeof(armor) && !avatarp(TP)) {tell_object(TP,"The spell conflicts with your armor and dies!");
-       call_out("remove",1);
-      return 1;
-    }
-     //if(TP->is_class("mage")) {
-    //if(!TP->is_ok_armour("mage")) {
-    //write("The spell conflicts with your armor and dies");
-    //call_out("remove",1);
-    //return 1;
-   //}
- //}
 
     if(!deep_present("statue of "+capitalize(TP->query_name()),TP)){
 	write("The image of yourself is missing, the contingency fails.\n");
       remove();
        return 1;
     }
-    if(TP->is_class("bard"))
-        level = TP->query_guild_level("bard");
-    else
-        level = TP->query_guild_level("mage");
 
-    if((string)TP->query_name() == "tristan") {
-        tell_object(TO,"prof = "+prof);
-    }
     spellobj = new(spell);
-    if(prof >= 100) {
-        if(!stringp(args)) {
-            spellobj->use_spell(TP,TP->query_name(),level, prof);
-        }
-        else {
-            spellobj->use_spell(TP,args,level, prof);
-        }
-    }
-    else if(prof < random(100)) {
-        if(!stringp(args)) {
-            spellobj->use_spell(TP,TP->query_name(),level, prof);
-        }
-        else {
-            spellobj->use_spell(TP,args,level, prof);
-        }
+
+    if(!stringp(args) || args == "") {
+        spellobj->use_spell(TP,"",level, prof);
     }
     else {
-        if(!stringp(args)) {
-            spellobj->use_spell(TP,TP->query_name(),level, prof);
-        }
-        else {
-            spellobj->use_spell(TP,args,level, prof);
-        }
+        spellobj->use_spell(TP,args,level, prof);
     }
 
     call_out("remove",1);
@@ -134,4 +87,3 @@ int drop() {
 
 int is_detectable() { return 0; }
 int query_invis() { return 1; }
-
