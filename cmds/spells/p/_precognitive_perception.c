@@ -46,7 +46,7 @@ spell_effect()
     tell_room(place,"%^CYAN%^"+caster->QCN+" with a swift chant touches "+target->QCN+"'s eyes.%^RESET%^");
 
     bonus=clevel/2+1;
-    target->add_skill_bonus("stealth",bonus);
+    target->add_skill_bonus("perception",bonus);
     target->set_property("spelled", ({TO}) );
     target->set_property("precognitive perception",1);
     addSpellToCaster();
@@ -57,7 +57,7 @@ void dest_effect()
 {
     if(objectp(target))
     {
-        target->add_skill_bonus("stealth",-bonus);
+        target->add_skill_bonus("perception",-bonus);
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target,"%^CYAN%^The precognitive insights retreat.%^RESET%^");
         target->remove_property("precognitive perception");
