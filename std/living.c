@@ -55,6 +55,7 @@ object poisoner;
 object draggee;
 int tolerance, tolerance_flag, used_stamina;
 static int detecting_invis;
+static int true_seeing;
 mapping time_delay;
 static function * pre_exit_funcs;
 static function * post_exit_funcs;
@@ -1358,6 +1359,14 @@ int detecting_invis() {
 
 void set_detecting_invis(int xx) {
     detecting_invis = xx;
+}
+
+int true_seeing() {
+    return detecting_invis || ETO->query_property("no invis") || avatarp(TO);
+}
+
+void set_detecting_invis(int xx) {
+    true_seeing = xx;
 }
 
 int query_max_internal_encumbrance()

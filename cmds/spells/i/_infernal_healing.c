@@ -55,7 +55,7 @@ void spell_effect()
         return;
     }
 
-    tell_room(place,"%^BOLD%^%^RED%^"+target->QCN+"%^BOLD%^%^RED%^'s veins burn %^BLACK%^infernal %^BLACK%^re%^RED%^d%^RED%^ through the skin.%^RESET%^");
+    tell_room(place,"%^BOLD%^%^RED%^"+target->QCN+"%^BOLD%^%^RED%^'s veins burn %^BLACK%^infernal %^BLACK%^re%^RED%^d%^RED%^ through the skin.%^RESET%^",caster);
     {
         int duration = clevel * ROUND_LENGTH * 10;
         tell_object(target,"%^BOLD%^%^RED%^You feel your blood %^BLACK%^bur%^RED%^n%^BLACK%^i%^RED%^n%^BLACK%^g %^RED%^a%^BLACK%^w%^RED%^a%^RED%^y%^RED%^ your wounds.%^RESET%^

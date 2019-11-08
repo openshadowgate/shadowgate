@@ -42,7 +42,7 @@ string query_owner();
 private void swap(int i, int j);
 void cull_non_school_spells(object holder);
 
-string *magic;
+static string *magic;
 mapping spells = ([]);
 
 string *mID, bookdesc;
