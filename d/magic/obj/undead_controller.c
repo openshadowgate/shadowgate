@@ -63,11 +63,8 @@ int clean_mons()
         return 1;
     }
 
-    if(caster->query_property("raised")!=poolsize)
-    {
-        caster->remove_property("raised");
-        caster->set_property("raised",poolsize);
-    }
+    caster->remove_property("raised");
+    caster->set_property("raised",poolsize);
 
     mons = temp;
     return 0;
@@ -104,6 +101,7 @@ int poolsize(string str)
 {
     int pool;
 
+    clean_mons();
     pool=(int)caster->query_property("raised");
     if (pool)
         tell_object(caster,"%^BOLD%^%^BLACK%^YOUR UNDEAD POOL IS FILLED WITH %^WHITE%^"+pool+"%^BLACK%^ LEVELS.%^RESET%^");

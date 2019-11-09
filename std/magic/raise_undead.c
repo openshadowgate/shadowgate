@@ -84,5 +84,4 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
 
     if(raised)
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^The chilling energy ripples through the nearby corpses, drawing their spirits to "+caster->QCN+"'s defense!%^RESET%^",caster);
-    caster->set_property("raised",nummon);
 }

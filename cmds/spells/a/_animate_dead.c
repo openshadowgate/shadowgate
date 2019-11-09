@@ -91,7 +91,7 @@ void spell_effect(int prof)
             tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ISERY%^RESET%^%^RESET%^");
             tell_room(environment(caster),"%^CYAN%^"+caster->QCN+" seems to strain doing something.%^RESET%^", caster);
             TO->remove();
-            continue;
+            return;
         }
 
         inven = all_inventory(targs[i]);
@@ -100,7 +100,7 @@ void spell_effect(int prof)
         targs[i]->remove();
         num_mon += lvl;
 
-        undead->set_property("raised",clevel);
+        undead->set_property("raised",lvl);
         undead->set_property("minion",caster);
         undead->move(environment(caster));
 
@@ -123,7 +123,6 @@ void spell_effect(int prof)
         undead->set_property("minion", caster);
         controller->add_monster(undead);
         caster->set_property("raised", lvl);
-        undead->set_property("raised", lvl);
     }
     tell_object(caster,"%^BLUE%^You let your arms drop limply after completing the spell.");
     tell_room(place,"%^BOLD%^"+caster->QCN+" lets "+caster->QP+" arms drop limply.",caster);
