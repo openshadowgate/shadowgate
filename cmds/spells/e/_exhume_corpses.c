@@ -3,7 +3,7 @@
 #include <magic.h>
 inherit SPELL;
 
-#define DELAY 120
+#define DELAY 45
 
 void create()
 {
@@ -15,9 +15,6 @@ void create()
     set_description("With this art the necromancer taps onto the natural flow of negative energies and uses them to track and summon corpses, from various places in the world to the place he is in. The corpses summoned are that of common folk and thus are weak. This spell by itself does nothing to the souls of the deceased, yet the reason why necromancer calls to it is obvious, and thus only evil caster will ever call to it. Using this spell in civilized lands attracts unneeded attention.");
     set_helpful_spell(1);
     evil_spell(1);
-    set_components(([
-      "mage" : ([ "bit of bone" : 1, "carbon" : 1]),
-    ]));
 }
 
 int preSpell()
@@ -42,7 +39,7 @@ void spell_effect()
     int i;
 
     tell_room(place,"%^CYAN%^A low continuous thunder rolls over the place, and %^BOLD%^%^BLACK%^co%^RESET%^%^CYAN%^r%^BOLD%^%^BLACK%^p%^RESET%^%^CYAN%^s%^CYAN%^e%^BOLD%^%^BLACK%^s%^RESET%^%^CYAN%^ begin to materialize everywhere.");
-    for (i=0; i<clevel/12 + 1; i++)
+    for (i=0; i<clevel/10 + 1; i++)
     {
         object corpse;
         corpse = new(OB_CORPSE);

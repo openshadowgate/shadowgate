@@ -45,31 +45,7 @@ void spell_effect(int prof) {
     caster->set_property("heart of darkness",1);
     caster->set_property("no death",1);
 
-    file = DIR_CLASSES+"/fighter.c";
-    if(!file_exists(file)) {
-        tell_object(caster,"There is an error loading the fighter class file, please notify a wiz with this message.");
-        TO->remove();
-        return;
-    }
-    dice = file->hit_dice(); 
-    newhp = 20;
-    targlevel = caster->query_level();
-
-    for(i=0;i<targlevel;i++) {
-      roll_1 = roll_dice(1,dice);
-      roll_2 = roll_dice(1,dice);
-      if(roll_1 > roll_2) newhp += roll_1;
-      else newhp += roll_2;
-    }
-    bonuses = ((int)caster->query_stats("constitution") - 10)/2;
-    if(FEATS_D->has_feat(caster,"toughness")) bonuses++;
-    if(FEATS_D->has_feat(caster,"improved toughness")) bonuses++;
-    newhp = newhp + (targlevel*bonuses);
-    
-    newhp = newhp - (int)caster->query_max_hp();
-    newhp = newhp - (int)caster->query_extra_hp();
-    if (newhp < 0) newhp = 0;
-    caster->add_extra_hp(newhp);
+    caster->add_max_hp_bonus(clevel*5/2);
     spell_successful();
     addSpellToCaster();
 }
@@ -81,10 +57,7 @@ void dest_effect(){
       tell_room(environment(caster),"%^RED%^"+caster->QCN+" lets out a sigh and seems to relax.%^RESET%^",caster);
       caster->set_property("no death",-1);
       caster->set_property("heart of darkness",-1);
-      caster->add_extra_hp(-1* newhp);
-      if ((int)caster->query_extra_hp() < 0) {
-        caster->add_extra_hp(-1 * (int)caster->query_extra_hp());
-      }
+      caster->add_max_hp_bonus(-clevel*5/2);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
