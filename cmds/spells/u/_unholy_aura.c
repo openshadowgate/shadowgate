@@ -13,7 +13,7 @@ void create()
     set_spell_level(([ "mage" : 8, "cleric" : 8 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS unholy aura");
-    set_damage_desc("untyped, 2 AC");
+    set_damage_desc("untyped, 4 AC, 4 to all saves");
     set_description("You are surrounded by an aura of evil that will harm all your opponents and will slightly protect you. This is nimbus-family spell that won't work with other nimbuses.");
     set_property("magic",1);
     traveling_aoe_spell(1);
@@ -44,7 +44,8 @@ void spell_effect(int prof)
     caster->set_property("added short",({"%^BOLD%^%^BLACK%^ (in a fell halo)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
-    caster->add_ac_bonus(2);
+    caster->add_saving_bonus("all",4);
+    caster->add_ac_bonus(4);
     execute_attack();
     call_out("dest_effect",duration);
     return;
@@ -91,7 +92,8 @@ void dest_effect()
     {
         tell_object(caster,"%^RESET%^%^BOLD%^The halo around you fades.");
         caster->remove_property("nimbus");
-        caster->add_ac_bonus(-2);
+        caster->add_ac_bonus(-4);
+        caster->add_saving_bonus("all",-4);
 	    caster->remove_property_value("added short",({"%^BOLD%^%^BLACK%^ (in a fell halo)%^RESET%^"}));
     }
     ::dest_effect();

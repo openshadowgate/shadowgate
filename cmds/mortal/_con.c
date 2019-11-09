@@ -33,7 +33,8 @@ int cmd_con(string str)
             output += "%^BOLD%^Attackers:\n";
             for (i = 0; i < sizeof(attackers); ++i)
             {
-                output+="%^BOLD%^%^RED%^"+sprintf("%2d",i+1)+":%^RESET%^ "+obj_cond(attackers[i])+"\n";
+                if(objectp(attackers[i]))
+                    output+="%^BOLD%^%^RED%^"+sprintf("%2d",i+1)+":%^RESET%^ "+obj_cond(attackers[i])+"\n";
             }
             write(output);
         }
