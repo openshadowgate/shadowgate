@@ -69,7 +69,8 @@ void execute_attack(){
         return;
     }
 
-    attackers = filter_array(caster->query_attackers(),(:$1->is_living():));
+    attackers = filter_array(caster->query_attackers(),(:objectp($1):));
+    attackers = filter_array(attackers,(:$1->is_living():));
 
     if(sizeof(attackers))
     {
