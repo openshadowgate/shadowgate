@@ -2221,6 +2221,7 @@ varargs int do_save(object targ,int mod) {
         break;
     case "bard":
     case "sorcerer":
+    case "warlock":
 	if(save_debug) tell_object(caster,"Caster's casting stat:  Charisma");
         stat = "charisma";
         break;
