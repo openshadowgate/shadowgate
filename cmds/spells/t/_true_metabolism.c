@@ -45,7 +45,7 @@ void spell_effect(int prof)
     spell_successful();
     addSpellToCaster();
     counter = clevel*5;
-    place->addObjectToCombatCycle(TO,1);
+//    place->addObjectToCombatCycle(TO,1);
     execute_attack();
 }
 
