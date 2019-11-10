@@ -15,4 +15,4 @@ Squoles are a relatively new race of sentient para-elemental beings. They don't 
 
 Although the first squoles looked alike, modern variants evolved to mimic the human race very well. They look a lot like humans, despite their flesh being essentially a form of slime, ooze or magma. Diversity among the squoles is found mostly in the color of their "skin", which can come in every color of the rainbow. The race actually consists of three subspecies, each affected by a different aspect of the nearest paraelemental planes, which is reflected in their color and the type of energy that they are at home with. They have very limited affinity to polymorphism, allowing them to slightly adjust the shape of their body.
 
-Squoles are blind by nature, but by using a sensitivity to vibrations, the squole maneuvers and fights as well as a sighted creature within a limited range. Thus, they can't use the <peer> command.
+Squoles are blind by nature, but by using a sensitivity to vibrations, the squole maneuvers and fights as well as a sighted creature within a limited range. Thus, <peer> command will display only neighboring rooms.

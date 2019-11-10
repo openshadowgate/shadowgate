@@ -22,16 +22,21 @@ int cmd_con(string str)
     int x, y, z;
     string sub, check, pre;
 
-    if(!str)
+    if(!str||regexp(str,"[0-9]+"))
     {
         string output = "";
         object * attackers = TP->query_attackers();
         int i;
+        int param;
+        param = atoi(str);
+
+        if(!param||param>sizeof(attackers))
+            param = sizeof(attackers);
 
         if(sizeof(attackers))
         {
-            output += "%^BOLD%^Attackers:\n";
-            for (i = 0; i < sizeof(attackers); ++i)
+            output += "%^BOLD%^Attackers ("+param+" of "+sizeof(attackers)+"):\n";
+            for (i = 0; i < sizeof(attackers)&&i<param; ++i)
             {
                 if(objectp(attackers[i]))
                     output+="%^BOLD%^%^RED%^"+sprintf("%2d",i+1)+":%^RESET%^ "+obj_cond(attackers[i])+"\n";

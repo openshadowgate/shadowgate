@@ -19,11 +19,6 @@ int cmd_peer(string str)
         return 1;
     }
 
-    if(TP->query_race()=="squole")
-    {
-        tell_object(TP,"Squoles can't peer as they don't see through usual means.");
-        return 1;
-    }
 
     sscanf(str, "%s %d",str,amt);
     if (!str)
@@ -51,6 +46,9 @@ int cmd_peer(string str)
     if (!amt || !intp(amt)) amt = 5;
     else if (amt > 20) amt = 20;  // peer was 20 so we'll use that now
     current = ETP;
+
+    if(TP->query_race()=="squole")
+        amt = 1;
 
     y = 1;
 
