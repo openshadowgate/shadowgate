@@ -305,7 +305,7 @@ string *query_hair_colors(string subrace) {
         choices += ({"sable"});
         choices += ({"black", "brown", "white", "gray", "bald"});
     }
-    if(subrace == "attayan" || subrace == "morinnen" || subrace == "tsarven") {
+    if(subrace == "attayan" || subrace == "morinnen" || subrace == "tsarven" || subrace == "dhampir") {
         choices += ({"ebony"});
         choices += ({"sable", "auburn", "scarlet", "crimson"});
         choices += ({"black", "brown", "red", "white", "gray", "bald"});
@@ -343,7 +343,7 @@ string *query_eye_colors(string subrace) {
         choices += ({ "golden" });
         choices += ({ "topaz" });
     }
-    if(subrace == "senzokuan" || subrace == "maalish" || subrace == "morinnen" || subrace == "tsarven") {
+    if(subrace == "senzokuan" || subrace == "maalish" || subrace == "morinnen" || subrace == "tsarven" || subrace == "dhampir") {
         choices += ({"yellow", "amber"});
         choices += ({"sable", "chocolate", "coffee"});
         choices += ({"hazel"});
