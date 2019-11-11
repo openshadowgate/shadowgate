@@ -20,8 +20,6 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
-    set_heart_beat(1);
-//trying heart_beat since the combat approach is not working ~Circe~ 11/10/19
 }
 
 int preSpell() {
@@ -47,31 +45,47 @@ void spell_effect(int prof)
     spell_successful();
     addSpellToCaster();
     counter = clevel*5;
-//    place->addObjectToCombatCycle(TO,1);
-//    execute_attack();
+    place->addObjectToCombatCycle(TO,1);
+    execute_attack();
 }
 
-void heart_beat(){
+void execute_attack()
+{
+    if(!flag) {
+        ::execute_attack();
+        flag = 1;
+        return;
+    }
 
-    if(!objectp(caster) || !objectp(environment(caster)) || counter<0){
+    place = environment(caster);
+
+    if(!objectp(caster) || !objectp(place) || counter<0)
+    {
+
         dest_effect();
         return;
     }
     define_base_damage(0);
     if(FEATS_D->usable_feat(caster,"metabolic perfection"))
         sdamage*=5/4;
-    if((int)caster->query_hp() < (int)caster->query_max_hp()){
+
+
+    if((int)caster->query_hp() < (int)caster->query_max_hp())
+    {
         tell_object(caster,"%^BOLD%^%^CYAN%^You make a mental adjustment, healing some of your wounds!%^RESET%^");
-        tell_room(environment(caster),"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
+        tell_room(place,"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
         damage_targ(caster,caster->return_target_limb(),-sdamage,"positive energy");
     }
+    place->addObjectToCombatCycle(TO,1);
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         counter--;
 }
 
 
-void dest_effect(){
-    if(objectp(caster)){
+void dest_effect()
+{
+    if(objectp(caster))
+    {
         caster->remove_property("true metabolism");
         tell_object(caster,"%^CYAN%^You feel the hyper awareness of your body's injuries fade away.%^RESET%^");
     }
