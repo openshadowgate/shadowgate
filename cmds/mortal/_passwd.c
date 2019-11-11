@@ -43,12 +43,14 @@ int cmd_passwd(string str)
         notify_fail("You must act of your own free will.\n");
         return 0;
     }
-    if(str &&
+    //dis doesn't work, can't call restore somewhy
+    if(str != "" &&
        member_group(geteuid(TP), "law_c"))
     {
         playerf = sprintf("%s/%s/%s", "/adm/save/users", str[0..0], str);
         user=new(OB_USER);
         user->restore_object(playerf);
+        playerf = str;
     }
     else
     {
@@ -115,15 +117,8 @@ nomask static int npass2(string pass)
     }
     salt = PWGEN->random_salt(43);
     pass = crypt(pass, "$5$"+salt);
-    seteuid(UID_USERACCESS);
+    seteuid(UID_ROOT);
     user->set_password(pass);
-    if(user != TP)
-    {
-        seteuid(geteuid());
-        seteuid(UID_USERSAVE);
-        if(!user->save_object(playerf))
-            write("Failed to save user.");
-    }
     seteuid(getuid());
     write("\n");
     return 1;
