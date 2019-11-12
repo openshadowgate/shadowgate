@@ -2260,7 +2260,28 @@ varargs int do_save(object targ,int mod) {
 
     caster_bonus += casting_level;
 
-    num = clevel;
+    myclasses = caster->query_classes();
+    num = 0;
+    if(sizeof(myclasses)) {
+      for(i=0;i<sizeof(myclasses);i++) {
+        if(myclasses[i] == spell_type) { // only give bonuses for current caster class past L20
+          classlvl = caster->query_class_level(spell_type);
+          classlvl -= 20;
+          if(classlvl < 0) classlvl = 0;
+          if(is_caster(spell_type)) num += (classlvl+1)/2;
+          else num += classlvl/3;
+        }
+        else {
+          if(caster->query("new_class_type")) { // don't run this for 2e style classing, eg/ mobs; they already have full in all classes.
+            classlvl = caster->query_class_level(myclasses[i]);
+            if(classlvl < 0) classlvl = 0;
+            if(is_caster(spell_type)) num += (classlvl+1)/2;
+            else num += classlvl/3;
+          }
+        }
+      }
+    }
+
     if(save_debug) tell_object(caster,"Bonus from non-class and L20+ class levels: "+num+"");
     caster_bonus += num;
     num = 0;
