@@ -80,7 +80,8 @@ int spell_level,
     traveling_aoe_spell,
     splash_spell,
     permanent,
-    evil_spell;
+    evil_spell,
+    mental_spell;
 
 
 
@@ -329,6 +330,8 @@ void set_healing_spell(int num) { healing_spell = num; }
 int query_healing_spell() { return healing_spell; }
 void evil_spell(int num) { evil_spell = num; }
 int query_evil_spell() { return evil_spell; }
+void mental_spell(int num) { mental_spell = num; }
+int query_mental_spell() { return mental_spell; }
 void splash_spell(int num) { splash_spell = num; }
 int query_splash_spell() {return splash_spell;}
 void set_aoe_message(string str) { aoe_message = str; }
@@ -2623,7 +2626,8 @@ int mind_immunity_check(object obj, string type)
     switch(type)
     {
     case "silent": // no messages
-        if(FEATS_D->usable_feat(obj,"unyielding soul") || FEATS_D->usable_feat(obj, "presence of mind") || FEATS_D->usable_feat(obj, "mind partition")) { return 1; }
+        if(FEATS_D->usable_feat(obj,"unyielding soul") ||
+           FEATS_D->usable_feat(obj, "mind partition")) { return 1; }
 
     case "default":
     default:
@@ -2663,7 +2667,7 @@ void help() {
     if(!spell_sphere)
         spell_sphere = "";
     if(spell_sphere != "")
-        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(evil_spell?" [evil]":""));
+        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(evil_spell?" [evil]":"")+(mental_spell?" [mental]":""));
     if(!spell_domain)
         spell_domain = "";
     if(spell_domain != "")
