@@ -54,6 +54,7 @@ void spell_effect(int prof){
         }
         eyes = new("/d/magic/obj/pryingeyes");
         eyes->set_caster(caster);
+        eyes->set_eye_color(caster->query_eye_color());
         eyes->set_property("spell",TO);
         eyes->set_property("spelled", ({TO}) );
         bonus = caster->query_stats("intelligence");
@@ -77,6 +78,7 @@ void spell_effect(int prof){
             }
             eyes = new("/d/magic/obj/pryingeyes");
             eyes->set_caster(caster);
+            eyes->set_eye_color(caster->query_eye_color());
             eyes->set_property("spell",TO);
             eyes->set_property("spelled", ({TO}) );
             eyes->set_target(ob);
@@ -101,7 +103,7 @@ void dest_effect(){
       caster->remove_property("remote scrying");
       caster->remove_property("remote scrying time");
       caster->set_property("remote scrying time",time());
-      tell_object(caster,"Your concentration on places afar fades.");
+      tell_object(caster,"%^BOLD%^Your concentration on places afar fades.");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
