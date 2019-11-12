@@ -20,14 +20,13 @@ void create(){
     set_id(({"eye", "prying eye"}));
     set_long("%^BOLD%^%^WHITE%^It is small and perfectly round %^BOLD%^floati%^BLUE%^ng e%^CYAN%^ye%^RESET%^.");
     set_short("%^BOLD%^floati%^BLUE%^ng e%^CYAN%^ye%^RESET%^");
+
     set_hd(1,2);
     set_hp(10);
     set_max_hp(10);
     set_new_exp(1, "very low");
     set_race("eye");
     set_body_type("eye");
-    set_invis();
-    /* set_property("no detect",1);     */
 
     add_limb("body","",0,0,0);
 }
