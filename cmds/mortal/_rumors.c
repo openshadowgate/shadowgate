@@ -121,6 +121,7 @@ areas = ([
              "/d/deku/town" : "Verbobone",
              "/d/undead/rooms/town" : "Graez",
              "/d/darkwood/room/rhapsody" : "the Rhapsody inn",
+             "/d/dagger/exchange" : "the Exchange",
              "/d/player_houses/innaeli/rooms/bsb1" : "the Bloody Scourge inn",
              ]);
 
