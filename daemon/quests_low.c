@@ -33,7 +33,7 @@ inherit DAEMON;
 
 #define MAXSIZE 25
 
-#define QOBJECT "/realms/tristan/qobject.c"
+#define QOBJECT "/d/common/misc/qobject.c"
 
 #define OBSTORE "/d/save/quests/"+
 
@@ -196,10 +196,13 @@ string *NotValidDir()
 void newRoom(){
    string name, file, dir, *files;
    int i,exp, date, reDate;
+   int flag;
 
    i= random(4);
    dir = AREAS[i][random(sizeof(AREAS[i]))];
    files = get_dir(dir+"*.c");
+   if(sizeof(files)==1 && member_array(files[0], keys(__Rooms)) != -1)
+       return;
 // lowering the adder to half to narrow range for better reasonableness *Styx* 6/12/05
    exp = AREA_VALUE[i] + (random(AREA_VALUE[i])/2);
    name = makeObject();
@@ -217,8 +220,13 @@ void newRoom(){
 
    file =  files[random(sizeof(files))];
 
-   while (member_array(file, keys(__Rooms)) != -1) {
+   flag = 0;
+   while (member_array(file, keys(__Rooms)) != -1 ||
+          member_array(file, values(map(__Quests,(:$2[1]:)))) != -1)
+   {
       file =  files[random(sizeof(files))];
+        flag++;
+        if(flag > 20) return; // failsafe
    }
 
    while(dir[strlen(dir)-1] != '/'){
@@ -343,7 +351,6 @@ void isRoom(object ob){
    obj->move(ob);
 }
 
-
 mapping queryQuests(){
    return __Quests;
 }
@@ -431,6 +438,22 @@ int claimExp(string name, object player, int level){
 
 int clean_up(){
    return 1;
+}
+
+int clear_quests()
+{
+    string name;
+    seteuid(UID_DAEMONSAVE);
+    restore_object(SAVE_QUESTS);
+
+    foreach(name in keys(__Quests))
+    {
+        removeQuest(name);
+    }
+
+    SAVE();
+
+    test_quests();
 }
 
 void removeQuest(string name){

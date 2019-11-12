@@ -134,7 +134,6 @@ void create()
     set_heart_beat(30);
 }
 
-
 string makeObject()
 {
     int i,j,k;
@@ -237,6 +236,8 @@ void newRoom()
     dir = AREAS[i][random(sizeof(AREAS[i]))];
 
     files = get_dir(dir+"*.c");
+   if(sizeof(files)==1 && member_array(files[0], keys(__Rooms)) != -1)
+       return;
     exp = AREA_VALUE[i] + (random(AREA_VALUE[i])/2);
 
     name = makeObject();
@@ -264,14 +265,14 @@ void newRoom()
     file =  files[random(sizeof(files))];
     flag = 0;
 
-    while (member_array(file, keys(__Rooms)) != -1 || undefinedp((dir+file)->query_short()))
+    while (member_array(file, keys(__Rooms)) != -1 ||
+           member_array(file, values(map(__Quests,(:$2[1]:)))) != -1 ||
+           undefinedp((dir+file)->query_short()))
     {
         file =  files[random(sizeof(files))];
         flag++;
         if(flag > 20) return; // failsafe
     }
-
-
 
     file = dir+file;
     date = time();
@@ -563,6 +564,26 @@ int claimExp(string name, object player, int level)
 
 int clean_up() { return 1; }
 
+int clear_quests()
+{
+    string name;
+
+    foreach(name in keys(__Quests))
+    {
+        removeQuest(name);
+    }
+
+    seteuid(UID_DAEMONSAVE);
+    SAVE();
+
+    test_quests();
+}
+
+void validate_quests()
+{
+    string name;
+
+}
 
 void removeQuest(string name)
 {

@@ -214,11 +214,14 @@ string *NotValidDir()
 void newRoom(){
    string name, file, dir, *files;
    int i,exp, date, reDate;
+   int flag;
 // changing this to check for size of the areas list rather than being hard coded *Styx* 7/13/05
 //   i= random(7);
    i = random(sizeof(AREAS));
    dir = AREAS[i][random(sizeof(AREAS[i]))];
    files = get_dir(dir+"*.c");
+   if(sizeof(files)==1 && member_array(files[0], keys(__Rooms)) != -1)
+       return;
 // lowering the adder to half to narrow range for better reasonableness *Styx* 6/12/05
    exp = AREA_VALUE[i] + (random(AREA_VALUE[i])/2);
    name = makeObject();
@@ -236,8 +239,14 @@ void newRoom(){
 
    file =  files[random(sizeof(files))];
 
-   while (member_array(file, keys(__Rooms)) != -1) {
-      file =  files[random(sizeof(files))];
+   flag = 0;
+   while (member_array(file, keys(__Rooms)) != -1 ||
+          member_array(file, values(map(__Quests,(:$2[1]:)))) != -1)
+   {
+       flag++;
+       file =  files[random(sizeof(files))];
+       if(flag>20)
+           return;
    }
 
    while(dir[strlen(dir)-1] != '/'){
@@ -457,6 +466,22 @@ int claimExp(string name, object player, int level){
 
 int clean_up(){
    return 1;
+}
+
+int clear_quests()
+{
+    string name;
+    seteuid(UID_DAEMONSAVE);
+    restore_object(SAVE_QUESTS);
+
+    foreach(name in keys(__Quests))
+    {
+        removeQuest(name);
+    }
+
+    SAVE();
+
+    test_quests();
 }
 
 void removeQuest(string name){

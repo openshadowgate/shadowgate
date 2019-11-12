@@ -105,14 +105,14 @@ int read_list(string str)
         exp = quests[item][2];
         name = quests[item][3];
         if(which =="monster"){
-           questlist += item+"%^RESET%^ possessed by \n  "+name;
+           questlist += "Retrieve the "+item+"%^RESET%^ possessed by \n  "+name;
            if(wizardp(TP)) {
                 questlist += "%^BOLD%^%^GREEN%^%^ ("+file+")%^RESET%^";
            }
            questlist += "\n";
         }
         else if(which =="room"){
-           questlist += item+"%^RESET%^ last seen in\n  "+name;
+           questlist += "Retrieve the "+item+"%^RESET%^ last seen in\n  "+name;
            if(wizardp(TP)) {
                 questlist += " %^BOLD%^%^GREEN%^("+file+")%^RESET%^";
            }
