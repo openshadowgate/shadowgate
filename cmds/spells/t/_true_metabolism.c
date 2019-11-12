@@ -1,6 +1,7 @@
 //somewhat based on Aura of Healing by Garrett
 //Circe 7/29/05
 //Adjusted by ~Circe~ 1/13/16 to improve healing
+//trying heart_beat since the combat approach is not working ~Circe~ 11/10/19
 #include <std.h>
 #include <daemons.h>
 #include <priest.h>
@@ -21,7 +22,7 @@ void create()
     set_somatic_comp();
     set_helpful_spell(1);
     set_heart_beat(1);
-//trying heart_beat since the combat approach is not working ~Circe~ 11/10/19
+
 }
 
 int preSpell() {
@@ -29,8 +30,7 @@ int preSpell() {
       tell_object(caster,"You are already under the effects of this power!");
         return 0;
     }
-    counter = clevel*10;
-//added because it was sometimes desting as soon as cast based on when heartbeat was called
+    counter = clevel*5+4;
     return 1;
 }
 
@@ -48,23 +48,25 @@ void spell_effect(int prof)
         caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    counter = clevel*10;
-//    place->addObjectToCombatCycle(TO,1);
-//    execute_attack();
+    counter = clevel*5+4;
 }
 
-void heart_beat(){
-
+void heart_beat()
+{
     if(!objectp(caster) || !objectp(environment(caster)) || counter<0){
         dest_effect();
         return;
     }
-    define_base_damage(0);
-    if(FEATS_D->usable_feat(caster,"metabolic perfection"))
-        sdamage*=5/4;
+    if(caster->query_unconcious()){
+        dest_effect();
+        return;
+    }
+    define_base_damage(0);//lazy reroll
     if((int)caster->query_hp() < (int)caster->query_max_hp()){
         tell_object(caster,"%^BOLD%^%^CYAN%^You make a mental adjustment, healing some of your wounds!%^RESET%^");
         tell_room(environment(caster),"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
+        if(FEATS_D->usable_feat(caster,"metabolic perfection"))
+            sdamage*=5/4;
         damage_targ(caster,caster->return_target_limb(),-sdamage,"positive energy");
     }
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))

@@ -2,6 +2,8 @@
 
 inherit SPELL;
 
+int counter;
+
 void create()
 {
     ::create();
@@ -17,6 +19,7 @@ void create()
     set_property("magic",1);
     set_helpful_spell(1);
     traveling_aoe_spell(1);
+    set_heart_beat(1);
 }
 
 
@@ -39,6 +42,7 @@ int preSpell() {
       tell_object(caster,"You are already under the effects of this spell!");
         return 0;
     }
+    counter = clevel*10 + 4;
     return 1;
 }
 
@@ -54,24 +58,24 @@ void spell_effect(int prof)
     caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    place->addObjectToCombatCycle(TO,1);
-    call_out("dest_effect",ROUND_LENGTH*clevel*5);
+    counter = clevel*10 + 4;
 }
 
-void execute_attack()
+void heart_beat()
 {
     object *people;
     object dude;
     int i;
 
-    ::execute_attack();
-    if(!objectp(caster)){
+    if(!objectp(caster) || !objectp(environment(caster)) || counter<0){
         dest_effect();
         return;
     }
+
     place = environment(caster); // In the case caster moves
 
     people = ({});
+
     if(caster->query_party())
     {
         object *party;
@@ -86,17 +90,18 @@ void execute_attack()
     if(member_array(caster,people)==-1)
         people+=({caster});
 
-    define_base_damage(0);
-    foreach(dude in people)
-    {
-        if((int)dude->query_hp() < (int)dude->query_max_hp())
+    define_base_damage(0);//lazy reroll
+    if(sizeof(people))
+        foreach(dude in people)
         {
-            tell_object(dude,"%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
-            tell_room(place,"%^CYAN%^Some of "+dude->QCN+"'s wounds seem to heal!%^RESET%^",caster);
-            damage_targ(dude,dude->return_target_limb(),-sdamage/2,"positive energy");
+            if((int)dude->query_hp() < (int)dude->query_max_hp())
+            {
+                tell_object(dude,"%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
+                tell_room(place,"%^CYAN%^Some of "+dude->QCN+"'s wounds seem to heal!%^RESET%^",caster);
+                damage_targ(dude,dude->return_target_limb(),-sdamage,"untyped");
+            }
         }
-    }
-    place->addObjectToCombatCycle(TO,1);
+    counter --;
 }
 
 void dest_effect()

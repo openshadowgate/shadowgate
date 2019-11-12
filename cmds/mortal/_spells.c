@@ -119,7 +119,7 @@ int get_spells(object player, string myclass)
 int full_list(object player, string myclass)
 {
     mapping tmp;
-    tmp=MAGIC_D->index_spells_for_player(player,"psion")+MAGIC_D->index_spells_for_player(player,"psywarrior");
+    tmp=MAGIC_D->query_index("psion")+MAGIC_D->query_index("psywarrior");
     if(myclass=="psywarrior")
         spells=filter_mapping(tmp,(:$2<6:));
     else

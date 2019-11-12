@@ -463,7 +463,8 @@ int check_reflection()
         if(flagz==1||flagz==2)
             turnperc = 15;
 
-    turnperc += (int)target->query_property("spellturning");
+    if((int)target->query_property("spellturning"))
+        turnperc = (int)target->query_property("spellturning");
     if(turnperc < 0) turnperc = 0;
     if(turnperc > 85) turnperc = 85;
     if(!turnperc) return 0;
