@@ -29,6 +29,8 @@ int preSpell() {
       tell_object(caster,"You are already under the effects of this power!");
         return 0;
     }
+    counter = clevel*10;
+//added because it was sometimes desting as soon as cast based on when heartbeat was called
     return 1;
 }
 
@@ -46,7 +48,7 @@ void spell_effect(int prof)
         caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    counter = clevel*5;
+    counter = clevel*10;
 //    place->addObjectToCombatCycle(TO,1);
 //    execute_attack();
 }
