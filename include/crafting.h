@@ -121,6 +121,7 @@ WEAPONSMITH = ([
                    "small axe":(["file":COMMONFILE"weapon/handaxe","units":2]),
                    "shortsword":(["file":COMMONFILE"weapon/shortsword","units":2]),
                    "waveblade":(["file":COMMONFILE"weapon/waveblade","units":1]),
+                   "wand":(["file":COMMONFILE"weapon/club","units":1,"type":"weapon"]),
                    ]);
 
 mapping WOODWORK = ([]);
@@ -156,6 +157,7 @@ WOODWORK = ([
                 "tower shield":(["file":COMMONFILE"armour/shield","units":3]),
                 "guitar":(["file":COMMONFILE"instruments/guitar","units":2,"type":"instrument"]),
                 "lute":(["file":COMMONFILE"instruments/lute","units":2,"type":"instrument"]),
+                "wand":(["file":COMMONFILE"weapon/club","units":1,"type":"weapon"]),
                 ]);
 
 #define CRAFT_TO_CHECK ([ "woodworker" : WOODWORK, "weaponsmith" : WEAPONSMITH, "jeweller" : JEWEL, \
