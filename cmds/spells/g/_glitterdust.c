@@ -44,16 +44,16 @@ string query_cast_string() {
     return "display";
 }
 
-void spell_effect(int prof) { 
+void spell_effect(int prof) {
     int duration, i;
     object *inven;
-    duration = (ROUND_LENGTH * 3) * clevel;
+    duration = (ROUND_LENGTH) * clevel+4;
 
     inven = all_living(environment(caster));
     inven = filter_array(inven, "is_non_immortal",FILTERS_D);
     inven = target_filter(inven);
 
-    tell_room(place,"%^BOLD%^%^WHITE%^The motes of dust descend to outline everything in a fine coat that s%^YELLOW%^p%^WHITE%^ark%^YELLOW%^l%^WHITE%^es with pinpoints of light!");
+    tell_room(place,"%^BOLD%^%^WHITE%^The motes of dust descend to outline everything in a fine coat that s%^YELLOW%^p%^WHITE%^ark%^YELLOW%^l%^WHITE%^es with pinpoints of light!%^RESET%^");
     spell_successful();
 
     targets = ({});
@@ -75,7 +75,7 @@ void spell_effect(int prof) {
 
 void dest_effect(){
     int i;
-    if(sizeof(targets)) { 
+    if(sizeof(targets)) {
       for(i=0;i<sizeof(targets);i++) {
         if(!objectp(targets[i])) continue;
         tell_room(place,"%^YELLOW%^The sparkling dust finally fades from "+targets[i]->QCN+"'s skin.",targets[i]);
