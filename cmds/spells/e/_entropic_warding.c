@@ -56,7 +56,8 @@ void spell_effect(int prof) {
     active = 1;
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect",20 + (clevel*10));
+
+    call_out("dest_effect",(clevel*8+4)*ROUND_LENGTH);
 }
 
 void dest_effect() {
