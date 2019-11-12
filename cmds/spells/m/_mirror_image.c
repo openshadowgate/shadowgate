@@ -44,9 +44,9 @@ void spell_effect() {
         ob->set_property("spell_creature", TO);
         ob->set_property("spell", TO);
         ob->set_property("minion", caster);
-        ob->set_max_hp(clevel*12+50);
-        ob->set_hp(clevel*12+50);
-        ob->set_id(({(string)caster->query_name()}));
+        ob->set_max_hp(clevel*18+30);
+        ob->set_hp(clevel*18+30);
+        ob->add_id(caster->query_true_name()+"_illusion");
         ob->set_race((string)caster->query_race());
         ob->set_gender((string)caster->query_gender());
         ob->set_short((string)caster->getWholeDescriptivePhrase());
@@ -57,6 +57,7 @@ void spell_effect() {
         ob->add_id(caster->query_name()+"illusion");
         mons += ({ob});
         caster->add_follower(ob);
+        caster->add_protector(ob);
     }
     addSpellToCaster();
     call_out("dest_effect",clevel*ROUND_LENGTH);

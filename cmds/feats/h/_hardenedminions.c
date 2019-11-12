@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -47,7 +47,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    ::execute_feat(); 
+    ::execute_feat();
 
     tell_object(caster,"%^BOLD%^You close your eyes and concentrate, letting your will lend "
         "strength to your minions%^RESET%^");
@@ -64,6 +64,8 @@ int phantom_filter(object obj)
     if(!objectp(obj)) { return 0; }
     if(obj->id("phantom")) { return 1; }
     if(obj->id("psychic warrior")) { return 1; }
+    if(obj->id("illusion")) { return 1; }
+    if(obj->id("vampire bat")) { return 1; }
     return 0;
 }
 
@@ -87,9 +89,9 @@ int adjust_minion(object minion, int bonus, int hpbonus)
             minion->remove_property("hardened_minion_bonus");
             minion->remove_property("hardened_minion_hpbonus");
             minion->remove_property("added short");
-        }       
+        }
         else return 0;
-    }    
+    }
     if(!minion->query_property("hardened_minion")) minion->set_property("hardened_minion", 1);
     minion->add_ac_bonus(bonus);
     minion->add_stat_bonus("strength",bonus);
@@ -127,15 +129,15 @@ void execute_me()
 
     minions   = all_inventory(environment(caster));
     minions   = filter_array(minions,"phantom_filter",TO);
-    minions   += all_living(environment(caster));    
+    minions   += all_living(environment(caster));
     followers = (object *)caster->query_followers();
     bonus     = (int)caster->query_highest_level() + caster->query_property("empowered");
     bonus     = (bonus / 10) + 1;
     hpbonus   = bonus*20;
-    //Attempting to recode this so that the bonus to monsters is less based on the number of 
-    //them that exist - Saide 
-    
-    //first 1 - 3 fodder get the full bonus 
+    //Attempting to recode this so that the bonus to monsters is less based on the number of
+    //them that exist - Saide
+
+    //first 1 - 3 fodder get the full bonus
     //next 4 - 6 fodder get half the bonus
     //next 7 - 10 fodder get 1/3 the bonus
     //greater than 10 get no bonus - Saide
@@ -152,14 +154,14 @@ void execute_me()
         if(minions[i]->is_merc()) { continue; }
         if(base_name(minions[i]) == "/d/token_hunt/token_monster") { continue; }
         if(minions[i]->query_property("minion") != caster && !minions[i]->query_property("spell_creature")) { continue; }
-        if(minions[i]->query_property("hardened_minion")) 
-        { 
+        if(minions[i]->query_property("hardened_minion"))
+        {
             count++;
             minions_to_impact += ({minions[i]});
-            continue; 
+            continue;
         }
         count++;
-        minions_to_impact += ({minions[i]});       
+        minions_to_impact += ({minions[i]});
     }
 
     for(i=0;i<sizeof(minions_to_impact);i++)
@@ -179,7 +181,7 @@ void execute_me()
             rb = bonus/3;
             rhpb = hpbonus/3;
         }
-        else 
+        else
         {
             rb = 0;
             rhpb = 0;
@@ -193,7 +195,7 @@ void execute_me()
             "double "+minions_to_impact[i]->QP+" size and begins to glow!%^RESET%^",caster);
         }
     }
-    
+
     //environment(caster)->addObjectToCombatCycle(TO,1);
     call_out("execute_me",3);
 
@@ -207,4 +209,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
