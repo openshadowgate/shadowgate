@@ -92,13 +92,11 @@ int read_list(string str)
             "%^BOLD%^and claimed here for an appropriate reward for low and mid levels.\n"
             "%^BOLD%^There is another board for the much greater challenges to be sought\n"
             "%^BOLD%^once you have conquered these areas and have proven yourself worthy.\n";
-        questlist += "%^BOLD%^%^CYAN%^"
-            "====================================================================\n%^RESET%^";
+        questlist += "\n%^RESET%^";
     }
     quests = QUEST_D->queryQuests();
     questkeys = keys(quests);
-    questlist = "%^BOLD%^The following quests are available:\n";
-    questlist += "%^BOLD%^%^CYAN%^-=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-\n%^RESET%^";
+    questlist = "%^BOLD%^The following quests are available:\n\n";
     for(i=0;i<sizeof(questkeys);i++){
         item = questkeys[i];
         if(!pointerp(quests[item])) continue;
@@ -107,14 +105,14 @@ int read_list(string str)
         exp = quests[item][2];
         name = quests[item][3];
         if(which =="monster"){
-           questlist += "Retrieve the "+item+"%^RESET%^ possessed by \n  "+name;
+           questlist += item+"%^RESET%^ possessed by \n  "+name;
            if(wizardp(TP)) {
                 questlist += "%^BOLD%^%^GREEN%^%^ ("+file+")%^RESET%^";
            }
            questlist += "\n";
         }
         else if(which =="room"){
-           questlist += "Retrieve the "+item+"%^RESET%^ last seen in\n  "+name;
+           questlist += item+"%^RESET%^ last seen in\n  "+name;
            if(wizardp(TP)) {
                 questlist += " %^BOLD%^%^GREEN%^("+file+")%^RESET%^";
            }

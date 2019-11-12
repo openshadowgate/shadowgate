@@ -538,7 +538,7 @@ int claimExp(string name, object player, int level)
 
    tell_object(player,"%^BOLD%^%^BLUE%^You have claimed "+name+"!");
     seteuid(UID_LOG);
-    log_file("rquests",capitalize(player->query_name())+"("+player->query_highest_level()+") retrieved the "+name+" ["+file+"] at "+ctime(time())+".\n");
+    log_file("rquests",capitalize(player->query_name())+"("+player->query_highest_level()+") retrieved the "+name+" ["+file+"].\n");
     seteuid(getuid());
 
     level2 = player->query_highest_level();
