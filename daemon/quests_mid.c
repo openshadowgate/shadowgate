@@ -32,7 +32,7 @@ inherit DAEMON;
 #define AREA_VALUE ({100000, 120000, 140000, 160000, 180000})
 
 #define MAXSIZE 20
-#define QOBJECT "/realms/tristan/qobject.c"
+#define QOBJECT "/d/common/obj/misc/qobject.c"
 #define OBSTORE "/d/save/quests/"+
 
 #define ANTIOCH "/d/antioch/"+
@@ -261,6 +261,9 @@ void newRoom(){
      reDate = date+86400+random(86400*5);
      continue;
    }
+
+   if(member_array(file, values(map(__Quests,(:$2[1]:)))) != -1)
+       return;
 
    __Rooms[file] = ({date,name,0});
    __Removal[reDate] = name;

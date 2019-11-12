@@ -33,7 +33,7 @@ inherit DAEMON;
 
 #define MAXSIZE 25
 
-#define QOBJECT "/d/common/misc/qobject.c"
+#define QOBJECT "/d/common/obj/misc/qobject.c"
 
 #define OBSTORE "/d/save/quests/"+
 
@@ -238,6 +238,9 @@ void newRoom(){
    reDate = date+86400+random(86400*5);
    while(__Removal[reDate])
      reDate = date+86400+random(86400*5);
+
+   if(member_array(file, values(map(__Quests,(:$2[1]:)))) != -1)
+       return;
 
    __Rooms[file] = ({date,name,0});
    __Removal[reDate] = name;
