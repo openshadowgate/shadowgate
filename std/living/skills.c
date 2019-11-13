@@ -42,7 +42,7 @@ int query_guild_level(string str);
 void set_guild_level(string str, int i);
 varargs void set_mlevel(string str, int lev);
 
-//This way we can do TP->is_valid_skill(skillname) 
+//This way we can do TP->is_valid_skill(skillname)
 //to see if something is actually a valid skill or not - Saide
 int is_valid_skill(string str);
 
@@ -106,15 +106,15 @@ int query_true_guild_level(string str)
     return guilds[str];
 }
 
-int query_guild_level(string str) 
+int query_guild_level(string str)
 {
     object class_ob;
     string *classes,*base;
     int i,num = 0, res;
 
     if(!str) { return 0; }
-    if(!guilds) 
-    { 
+    if(!guilds)
+    {
         guilds = ([]);
         return 0;
     }
@@ -122,17 +122,17 @@ int query_guild_level(string str)
     if(TO->query("new_class_type") && sizeof((string *)TO->query_classes()))
     {
         classes = (string *)TO->query_classes();
-        
+
         for(i=0;i<sizeof(classes);i++)
-        {            
-            class_ob = find_object_or_load(DIR_CLASSES+"/"+classes[i]+".c");            
+        {
+            class_ob = find_object_or_load(DIR_CLASSES+"/"+classes[i]+".c");
             if(!objectp(class_ob)) { continue; }
             if(classes[i] == "ranger" || classes[i] == "paladin" || classes[i] == "antipaladin")
             {
                 if(str == "cleric") { continue; }
-            }            
-            if(!class_ob->is_prestige_class()) 
-            { 
+            }
+            if(!class_ob->is_prestige_class())
+            {
                 if(classes[i] == str) { continue; }
                 num += (int)TO->query_class_level(classes[i]) / 2; // if it's not a prestige class, add half of the levels as normal
                 continue;
@@ -142,16 +142,16 @@ int query_guild_level(string str)
                 base = class_ob->query_base_classes();
                 if(member_array(str,base) == -1) { continue; }
                 num += (int)TO->query_class_level(classes[i]);
-            }            
-        }  
-        
-        if(intp(TO->query("negative levels", str))) return guilds[str] + num + (int)TO->query("negative level", str) + res;        
+            }
+        }
+
+        if(intp(TO->query("negative levels", str))) return guilds[str] + num + (int)TO->query("negative level", str) + res;
         return guilds[str] + num + res;
     }
     return guilds[str] + res;
 }
 
-void set_guild_level(string str, int i) 
+void set_guild_level(string str, int i)
 {
     if(!guilds) guilds = ([]);
     guilds[str] = i;
@@ -272,13 +272,15 @@ int query_skill(string skill) {
     else x= 0;
 
     myclasses = this_object()->query_classes();
-    for(i = 0;i<sizeof(myclasses);i++) 
+    for(i = 0;i<sizeof(myclasses);i++)
     {
         mylevel = this_object()->query_class_level(myclasses[i]);
         file = DIR_CLASSES+"/"+myclasses[i]+".c";
-        if(file_exists(file)) 
+        if(file_exists(file))
         {
             myclassskills = (string *)file->class_skills(TO);
+
+
             if(myclasses[i] == "psion" || (TO->is_class("psion") && (int)file->is_prestige_class()))
             {
                 mydisc = this_object()->query_discipline();
@@ -289,10 +291,14 @@ int query_skill(string skill) {
                 mydisc = TO->query("monk way");
                 myclassskills = (string *)(DIR_CLASSES+"/monk.c")->way_skills(mydisc);
             }
-            if(member_array(skill,myclassskills) != -1 || 
-            (FEATS_D->usable_feat(this_object(),"skill focus") && ((string)this_object()->query("skill_focus") == skill))) 
+            if(member_array(skill,myclassskills) != -1 ||
+               (FEATS_D->usable_feat(this_object(),"skill focus") &&
+                ((string)this_object()->query("skill_focus") == skill)))
                 x += (mylevel/2);
-            else x += (mylevel/5); 
+            else if(FEATS_D->usable_feat("tricky spells") && (skill == "spellcraft" || skill = "stealth"))
+                x += (mylevel/2);
+            else
+                x += (mylevel/5);
         }
     }
 
@@ -317,7 +323,7 @@ int query_skill(string skill) {
       x += query_skill_bonus(skill);
     }
 
-    //Give static bonus for psywarrior epic feats 
+    //Give static bonus for psywarrior epic feats
     if((skill == "endurance" || skill == "athletics") && FEATS_D->usable_feat(TO,"body cognition")) x += 2;
     if((skill == "endurance" || skill == "athletics") && TO->is_class("warmind")) x += 2;
     if((skill == "academics" || skill == "spellcraft") && FEATS_D->usable_feat(TO,"presence of mind")) x += 2;
@@ -347,7 +353,7 @@ mapping query_skills() {
     return skillSet;
 }
 
-void set_skill(string str, int x) 
+void set_skill(string str, int x)
 {
     if(!skills[str]) skills[str] = 0;
     skills[str] = x;
@@ -369,7 +375,7 @@ void add_skill_bonus(string skill, int amount){
     skill_bonuses[skill] = skill_bonuses[skill]+amount;
 }
 
-varargs void set_class(string str, int x) 
+varargs void set_class(string str, int x)
 {
     if(!classes)
     {
@@ -384,11 +390,11 @@ varargs void set_class(string str, int x)
     else
     {
         if(member_array(str,classes) != -1) return;
-            
+
         if(sizeof(classes) > 4)
         {
             classes[3]=str;
-            if(intp(x)) 
+            if(intp(x))
             {
                 TO->set_mlevel(str, x);
                 set_guild_level(str, x);
@@ -441,7 +447,7 @@ varargs void set_mlevel(string str, int lev)
 {
   if(member_array(str, classes) == -1) return;
   if(!mlevels || mlevels == ([]))
-  { 
+  {
     mlevels = ([str:lev]);
   }
   else mlevels[str] = lev;
@@ -453,7 +459,7 @@ int query_class_level(string str)
 {
     if(mlevels && mlevels != ([]) && mlevels[str] && objectp(TO))
     {
-        if(intp("/daemon/user_d.c"->get_scaled_class_level(TO))) { return "/daemon/user_d.c"->get_scaled_class_level(TO, str); }      
+        if(intp("/daemon/user_d.c"->get_scaled_class_level(TO))) { return "/daemon/user_d.c"->get_scaled_class_level(TO, str); }
         if(intp(TO->query("negative levels", str))) { return mlevels[str] + (int)TO->query("negative level", str); }
         return mlevels[str];
     }
@@ -467,7 +473,7 @@ int query_base_class_level(string str)
 }
 
 //Added for advance - so that drow and other races
-//dont count their level_adjustment in the advance 
+//dont count their level_adjustment in the advance
 //command - Saide
 int query_base_character_level()
 {
@@ -483,7 +489,7 @@ int query_base_character_level()
 	return num;
 }
 
-int query_character_level() 
+int query_character_level()
 {
     int i,num,lvladjust;
     string myrace,mysubrace,file;
@@ -491,8 +497,8 @@ int query_character_level()
 
     if(!TO->is_player()) { return query_highest_level(); }
 
-    for(i=0;i<sizeof(classes);i++) 
-    {        
+    for(i=0;i<sizeof(classes);i++)
+    {
         //changed this to allow hijacking of query_class_level for negative levels - Saide
         //if(mlevels && mlevels != ([]) && mlevels[classes[i]]) num += mlevels[classes[i]];
         num += query_base_class_level(classes[i]);
@@ -577,7 +583,7 @@ void set_dual_class(string dual){
 int is_singleClass()
 {
     if(TO->query("new_class_type")) { return 1; }
-    return dualClass || sizeof(classes) == 1; 
+    return dualClass || sizeof(classes) == 1;
 }
 
 string get_dual_class(){    return dualClass; }
@@ -586,9 +592,9 @@ void __internal_add_exp(int x){
     int exp,i, s;
     string *cls;
 
-    if(TO->query("new_class_type")) 
-    { 
-        ::add_exp(x); 
+    if(TO->query("new_class_type"))
+    {
+        ::add_exp(x);
         return;
     }
 
@@ -601,7 +607,7 @@ void __internal_add_exp(int x){
         ::add_general_exp("blah",exp);
         return;
     }
- 
+
     s = sizeof(classes);
     //conversion!!!!
     if (intp(::query_exp()) && s) {
@@ -620,7 +626,7 @@ void __internal_add_exp(int x){
         cls = query_classes();
         s = sizeof(cls);
         exp = x/sizeof(cls);
-    
+
         for (i=0;i<s;i++) {
             ::add_general_exp(cls[i],exp);
         }
@@ -673,10 +679,10 @@ int query_lowest_level(){
   if(!mlevels ||mlevels == ([])) return 0;
    if(!classes || classes == ({})) return 0;
 
-   if(TO->query("new_class_type") && !avatarp(TO)) 
-   { 
+   if(TO->query("new_class_type") && !avatarp(TO))
+   {
       if(intp(TO->query("negative levels"))) return query_character_level() + (int)TO->query("negative level");
-      return query_character_level(); 
+      return query_character_level();
    }
 
    cls = query_classes();
@@ -718,8 +724,8 @@ int query_highest_level(){
   if(!mlevels || mlevels == ([])) return 0;
   if(!objectp(TO)) { return 0; }
 
-  if(TO->query("new_class_type") && !avatarp(TO)) 
-  { 
+  if(TO->query("new_class_type") && !avatarp(TO))
+  {
      if(intp(TO->query("negative levels"))) return query_character_level() + (int)TO->query("negative levels");
      else return query_character_level();
   }
@@ -742,7 +748,7 @@ int query_highest_level(){
 
   return hold;
 
-  //} 
+  //}
   //return du;
 }
 
@@ -755,14 +761,14 @@ int reinit_mlevels() {
 
 void resetLevelForExp(int expLoss) {  return; }
 
-void init_IRS() 
+void init_IRS()
 {
-    if(!mapp(_IRS)) 
+    if(!mapp(_IRS))
     {
         _IRS= ([ "levelcap": ([ "level":-1, "meter":0 ]),
         "rest": ([ "rate":0, "meter":0 ]),
-        "tax" : (["timed" : (["percent" : 0, "fall off" : 0]), 
-                "improvement" : (["amount" : 0]), 
+        "tax" : (["timed" : (["percent" : 0, "fall off" : 0]),
+                "improvement" : (["amount" : 0]),
                 "death" : (["percent" : 0, "fall off" : 0]), ]), ]);
         return;
     }
@@ -770,13 +776,13 @@ void init_IRS()
         _IRS["rest"] = ([ "rate": 0, "meter":0 ]);
     if (!mapp(_IRS["levelcap"]))
         _IRS["levelcap"] = ([ "level":-1, "meter":0 ]);
-    if (!mapp(_IRS["tax"]) ) 
+    if (!mapp(_IRS["tax"]) )
     {
-        _IRS["tax"] = ([ "timed" : (["percent" : 0, "fall off" : 0]), 
-                         "improvement" : ([ "amount" : 0 ]), 
+        _IRS["tax"] = ([ "timed" : (["percent" : 0, "fall off" : 0]),
+                         "improvement" : ([ "amount" : 0 ]),
                          "death" : ([ "percent" : 0, "fall off" : 0]), ]);
-    } 
-    else 
+    }
+    else
     {
         if(!mapp(_IRS["tax"]["timed"]))
             _IRS["tax"]["timed"] = ([ "percent" : 0, "fall off" : 0]);
@@ -788,7 +794,7 @@ void init_IRS()
   return;
 }
 
-int has_XP_levelcap() 
+int has_XP_levelcap()
 {
     int levelcap;
     levelcap = query("no advance");
@@ -823,14 +829,14 @@ varargs void set_XP_tax(int percent, int duration, string tax)
     }
     //make sure it's a valid tax type - Saide
     if(tax != "timed" && tax != "death" && tax != "improvement") return;
-    
+
     switch(tax)
     {
         case "timed":
             _IRS["tax"]["timed"]["percent"] += percent;
             if(duration != -1)
             {
-                _IRS["tax"]["timed"]["fall off"] += duration;    
+                _IRS["tax"]["timed"]["fall off"] += duration;
             }
             else _IRS["tax"]["timed"]["fall off"] = -1;
             //permenant tax - can work either as a penalty if set to positive
@@ -848,20 +854,20 @@ varargs void set_XP_tax(int percent, int duration, string tax)
             _IRS["tax"]["death"]["percent"] = percent;
             _IRS["tax"]["death"]["fall off"] = 7200;
             break;
-        case "improvement":        
+        case "improvement":
             cost = EXP_NEEDED[query_character_level()+1];
-            if((_IRS["tax"]["improvement"]["amount"] + percent) > cost && percent > 0) return -1; 
+            if((_IRS["tax"]["improvement"]["amount"] + percent) > cost && percent > 0) return -1;
             //if((_IRS["tax"]["improvement"]["amount"] + percent) > EXP_NEEDED[((int)TP->query_character_level()+1)]) return -1; // bugging here, breaking up to track down issue
             _IRS["tax"]["improvement"]["amount"] += percent;
             if(_IRS["tax"]["improvement"]["amount"] < 0) _IRS["tax"]["improvement"]["amount"] = 0;
             break;
     }
-    return;            
+    return;
 }
 
 void remove_XP_tax(string which)
 {
-    switch(which) 
+    switch(which)
     {
         case "timed" :
             if(!mapp(_IRS) || !mapp(_IRS["tax"]) || !mapp(_IRS["tax"]["timed"])) init_IRS();
@@ -906,17 +912,17 @@ void count_down_timed_tax()
     if(!mapp(_IRS["tax"]["death"])) init_IRS();
     if(!mapp(_IRS["tax"]["improvement"])) init_IRS();
     count = _IRS["tax"]["timed"]["fall off"];
-    if(count != -1) 
+    if(count != -1)
     {
         count -= 2;
-        if(count <= 0) 
+        if(count <= 0)
         {
             _IRS["tax"]["timed"]["fall off"] = 0;
             _IRS["tax"]["timed"]["percent"] = 0;
         }
         else _IRS["tax"]["timed"]["fall off"] = count;
-    }    
-    count = _IRS["tax"]["death"]["fall off"];    
+    }
+    count = _IRS["tax"]["death"]["fall off"];
     if(!count) return;
     else
     {
@@ -932,13 +938,13 @@ void count_down_timed_tax()
     return;
 }
 
-int use_XP_tax(int exp) 
+int use_XP_tax(int exp)
 {
     float adjustment;
-    int percent, duration, amt, ctp; //ctp = character improvement tax percent 
+    int percent, duration, amt, ctp; //ctp = character improvement tax percent
 
     if (exp < 0) return exp;     // No tax on negative XP.
-    
+
     if(!mapp(_IRS)) init_IRS();
     if(!mapp(_IRS["tax"])) init_IRS();
     if(!mapp(_IRS["tax"]["timed"])) init_IRS();
@@ -951,7 +957,7 @@ int use_XP_tax(int exp)
         {
             if(duration == -1 || duration > 0)
             {
-                if(percent >= 100) 
+                if(percent >= 100)
                 {
                     log_file("tax",TO->query_cap_name()+": Timed XP taxed to 1.");
                     return 1;
@@ -969,7 +975,7 @@ int use_XP_tax(int exp)
             ctp = "/daemon/user_d.c"->get_character_improvement_tax_percent(TO);
             ctp = (adjustment * to_float(ctp))/100;
             ctp = to_int(ctp);
-            if(ctp >= amt) 
+            if(ctp >= amt)
             {
                 adjustment -= amt;
                 _IRS["tax"]["improvement"]["amount"] = 0;
@@ -983,12 +989,12 @@ int use_XP_tax(int exp)
             }
         }
     }
-    //scaled level then don't gain any actual experience 
+    //scaled level then don't gain any actual experience
     if(intp("/daemon/user_d.c"->get_scaled_level(TO))) return 0;
     return to_int(adjustment);
 }
 
-int has_XP_tax() 
+int has_XP_tax()
 {
     if(!mapp(_IRS)) init_IRS();
     if(!mapp(_IRS["tax"])) init_IRS();
@@ -1005,16 +1011,16 @@ int has_XP_rest() {
   return 0;
 }
 
-int use_XP_rest(int exp) 
+int use_XP_rest(int exp)
 {
   return exp;
 }
 
-void log_exp(int x, string type, object tmp) 
+void log_exp(int x, string type, object tmp)
 {
     object awardedFrom;
     if(!userp(TO)) return;
-    if((x > 1000 || x < -1000)) 
+    if((x > 1000 || x < -1000))
     {
         if(!objectp(awardedFrom = TO->query_property("GainedExpFrom"))) awardedFrom = previous_object();
         log_file("exp", "<<<"+
@@ -1085,10 +1091,10 @@ int resolve_auto_tax(int exp)
 
     //going back to non-reverse-tax calcs, for normal or taxed exp.
     limit = limit + 1; // was +5; not sure why we were adding an extra 5 hours to each level's PT reqs?
-    
+
     // if this is set here, it will not clear an autotax once a person catches up -Ares
     //if(hours > limit) { return exp; }
-    
+
     // eg player has only 18 hours ptime
     // 11 =  29  -   18
 
@@ -1116,12 +1122,12 @@ int resolve_auto_tax(int exp)
     return to_int(exp * (mod *0.01));
 }
 
-void add_exp(int exp) 
+void add_exp(int exp)
 {
 // adding to stop mobs from getting out of control fighting each other *Styx* 12/25/05
   if(!userp(TO))
     return;
-  if(exp < 1) 
+  if(exp < 1)
   {
       return __internal_add_exp(exp);
   }
@@ -1129,7 +1135,7 @@ void add_exp(int exp)
   if(userp(TO) && (exp >0) && TO->query_party()) {
     PARTY_OB->calculate_exp(TO->query_party(), exp, previous_object());
     return;
-  }  
+  }
   if("/daemon/user_d.c"->no_exp(TO) && exp > 0) return;
   if (has_XP_levelcap() && (exp > 0))
     return;
@@ -1146,7 +1152,7 @@ void add_exp(int exp)
 
 void party_exp(int exp, object tmp){
 
-  if("/daemon/user_d.c"->no_exp(TO)) return;  
+  if("/daemon/user_d.c"->no_exp(TO)) return;
   if(exp > 0) exp = WORLD_EVENTS_D->check_exp_events(exp, TO);
   if (has_XP_levelcap() && (exp > 0))
     return;
@@ -1164,7 +1170,7 @@ void party_exp(int exp, object tmp){
 
 void fakeparty_exp(int exp, object tmp){
 
-  if("/daemon/user_d.c"->no_exp(TO)) return;  
+  if("/daemon/user_d.c"->no_exp(TO)) return;
   if(exp > 0) exp = WORLD_EVENTS_D->check_exp_events(exp, TO);
   if (has_XP_levelcap() && (exp > 0))
     return;
@@ -1180,9 +1186,9 @@ void fakeparty_exp(int exp, object tmp){
 
 }
 
-void fix_exp(int exp, object tmp) 
+void fix_exp(int exp, object tmp)
 {
-  if("/daemon/user_d.c"->no_exp(TO)) return; 
+  if("/daemon/user_d.c"->no_exp(TO)) return;
   if(exp > 0) exp = WORLD_EVENTS_D->check_exp_events(exp, TO);
   if (has_XP_levelcap() && (exp > 0))
     return;
@@ -1197,7 +1203,7 @@ void fix_exp(int exp, object tmp)
 
 void quest_exp(int exp, object tmp)
 {
-  if("/daemon/user_d.c"->no_exp(TO)) return; 
+  if("/daemon/user_d.c"->no_exp(TO)) return;
   if(exp > 0) exp = WORLD_EVENTS_D->check_exp_events(exp, TO);
   if (has_XP_levelcap() && exp > 0)
     return;
@@ -1212,7 +1218,7 @@ void quest_exp(int exp, object tmp)
 
 void partyquest_exp(int exp, object tmp){
 
-  if("/daemon/user_d.c"->no_exp(TO)) return; 
+  if("/daemon/user_d.c"->no_exp(TO)) return;
   if(exp > 0) exp = WORLD_EVENTS_D->check_exp_events(exp, TO);
   if (has_XP_levelcap() && (exp > 0))
     return;
@@ -1278,7 +1284,7 @@ int general_exp_adjust_perc(int perc) {
   if (myclass = get_dual_class()) {
       classes = ({myclass});
   } else {
-      classes = TO->query_classes(); 
+      classes = TO->query_classes();
   }
   tmp = PO;
   oldexp = TO->query_exp();

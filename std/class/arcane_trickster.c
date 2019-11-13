@@ -12,18 +12,18 @@ void create()
 object base_class_ob(object ob)
 {
     object class_ob;
-    if(!objectp(ob) || !ob->query("arcane_archer_base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
-    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("arcane_archer_base_class")+".c"); }
+    if(!objectp(ob) || !ob->query("arcane_trickster_base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
+    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("arcane_trickster_base_class")+".c"); }
     if(!objectp(class_ob)) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","bard","druid","cleric", }); }
+string *query_base_classes() { return ({ "mage","sorcerer","cleric","druid","thief" }); }
 
 int has_base_class_set(object obj)
 {
     if(!objectp(obj)) { return 0; }
-    if(obj->query("arcane_archer_base_class")) { return 1; }
+    if(obj->query("arcane_trickster_base_class")) { return 1; }
     return 0;
 }
 
@@ -46,12 +46,12 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Mage, Sorcerer, Bard, Cleric or Druid levels (level adjustments considered part of required levels)\n"
-        "    Preciseshot\n";
-
+        "    10 Mage, Sorcerer, Cleric, Druid levels (level adjustments considered part of required levels)\n"
+        "    10 Thief (level adjustments considered part of required levels)\n"
+        "    10 Points Spent in Stealth Skill\n"
+        "    10 Points Spent in Spellcraft Skill\n";
     return str;
 }
-
 
 int prerequisites(object player)
 {
@@ -68,33 +68,30 @@ int prerequisites(object player)
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
 
-    if(!FEATS_D->usable_feat(player,"preciseshot")) { return 0; }
     if(player->is_class("sorcerer"))
     {
-        if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
+        if( (player->query_class_level("sorcerer") + adj) < 10) { return 0; }
 
-        player->set("arcane_archer_base_class","sorcerer");
+        player->set("arcane_trickster_base_class","sorcerer");
     }
     if(player->is_class("mage"))
     {
-        if( (player->query_class_level("mage") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","mage");
-    }
-    if(player->is_class("bard"))
-    {
-        if( (player->query_class_level("bard") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","bard");
+        if( (player->query_class_level("mage") + adj) < 10) { return 0; }
+        player->set("arcane_trickster_base_class","mage");
     }
     if(player->is_class("druid"))
     {
-        if( (player->query_class_level("druid") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","druid");
+        if( (player->query_class_level("druid") + adj) < 10) { return 0; }
+        player->set("arcane_trickster_base_class","druid");
     }
     if(player->is_class("cleric"))
     {
-        if( (player->query_class_level("cleric") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","cleric");
+        if( (player->query_class_level("cleric") + adj) < 10) { return 0; }
+        player->set("arcane_trickster_base_class","cleric");
     }
+    if( (player->query_class_level("thief") + adj) < 10) { return 0; }
+    if(skills["stealth"] < 10) { return 0; }
+    if(skills["spellcraft"] < 10) { return 0; }
     return 1;
 }
 
@@ -111,15 +108,15 @@ int caster_level_calcs(object player, string the_class)
     int level;
     string base;
     if(!objectp(player)) { return 0; }
-    base = player->query("arcane_archer_base_class");
+    base = player->query("arcane_trickster_base_class");
 
-    level = player->query_class_level(base);
-    level += player->query_class_level("arcane_archer");
+    level = player->query_class_level(base)+player->query_class_level("thief");
+    level += player->query_class_level("arcane_trickster");
     return level;
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "arcane arrows" }), 4 : ({ "timestop volley" }), 7 : ({ "death arrow" }), ]);
+    return ([ 1 : ({ "tricky spells" }), 4 : ({ "invisible thief" }), 7 : ({ "surprise spells" }), ]);
 }
 
 string *class_skills(object ob)
@@ -136,13 +133,13 @@ string new_save_type(object ob) { return base_class_ob(ob)->new_save_type(); }
 // unsure on this one, will have to investigate
 void advanced_func(object player) { return base_class_ob(player)->advance_func(player); }
 
-int hit_dice(object ob) { return 10; }  // hit dice rolled for hitpoints each level
+int hit_dice(object ob) { return 8; }  // hit dice rolled for hitpoints each level
 
 int default_hitpoints(object ob) { return base_class_ob(ob)->default_hitpoints(); } // hitpoints per level above level 20
 
-string armor_allowed(object ob) { return base_class_ob(ob)->armor_allowed(); }
+string armor_allowed(object ob) { return "thief"; }
 
-string weapons_allowed(object ob) { return base_class_ob(ob)->weapons_allowed(); }
+string weapons_allowed(object ob) { return "thief"; }
 
 int max_stance_offensive(object ob) { return base_class_ob(ob)->max_stance_offensive(); }
 
