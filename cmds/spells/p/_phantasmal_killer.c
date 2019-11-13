@@ -16,6 +16,7 @@ void create(){
     set_spell_domain("illusion");
     set_syntax("cast CLASS phantasmal killer on TARGET");
     set_description("This spell is cast upon a target and creates a figment of that target's imagination by drawing upon his deepest fears. Onlookers will see simply a vaguely humanoid shape at first, while the creature will soon take on the form of whatever frightens the target most. The creature's strength depends partly upon drawing on the target's fears and partly upon the caster's strength. Once the killer is unleashed, it becomes a force unto itself, protecting the caster but otherwise attacking at will. This is a greater summons, and cannot be used simultaneously with other greater summons.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -84,7 +85,7 @@ void spell_effect(int prof){
    ob->force_me("protect "+caster->query_name());
    caster->add_follower(ob);
    ob->force_me("kill "+target->query_name()+"");
-  
+
    ob->add_id("summoned monster");
    ob->add_id(caster->query_name()+"monster");
    caster->set_property("phantasmal_killer",ob);
@@ -102,4 +103,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

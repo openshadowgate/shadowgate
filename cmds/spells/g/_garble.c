@@ -15,6 +15,7 @@ void create() {
     set_spell_sphere("alteration");
     set_syntax("cast CLASS garble on TARGET");
     set_description("This will remove from the target the ability to understand, both read and write any language. This should not change the ability to teach the language.");
+    mental_spell();
     set_verbal_comp();
     set_target_required(1);
     set_components(([
@@ -34,7 +35,7 @@ void spell_effect(int prof) {
     	object ob;
 	theProf = prof;
 	tell_object(caster,"%^BOLD%^You start to cast garble.");
-      if(do_save(target,0)) {
+    if(do_save(target,0)||mind_immunity_damage(target)) {
          tell_object(target,"%^RED%^You feel an assault upon your mind but shake it off!%^RESET%");
          tell_object(caster,"%^RED%^"+target->QCN+" %^RESET%^%^RED%^shakes off the effects or your spell!%^RESET%^");
          if(objectp(TO)) TO->remove();

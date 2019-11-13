@@ -26,6 +26,7 @@ void create() {
     set_syntax("cast CLASS color spray");
     set_description("Color spray, when cast, will cause a blinding light of mixed colors to flash from the caster.  All "
 "creatures not in the caster's party can be blinded temporarily by this, or even knocked unconscious.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     success = 0;
@@ -82,7 +83,7 @@ void spell_effect(int prof) {
                 else {
                     damage(target,2);
                 }
-            } 
+            }
         } else {
             damage(target,1);
         }
@@ -94,10 +95,10 @@ void spell_effect(int prof) {
 void damage(object who, int effect) {
     if (!objectp(who)) return;
     switch (effect) {
-    case 0: 
+    case 0:
         tell_object(who,"You manage to quickly turn your head before you are dazzled by the bright light.");
         return 1;
-    case 1: 
+    case 1:
         if (!success) {
             success = 1;
             spell_successful();
@@ -155,7 +156,7 @@ void restore_sight(object who){
 
 void dest_effect() {
 int i;
-    
+
     for(i=0;i<sizeof(targets);i++){
         if( !objectp(targets[i])) continue;
         restore_sight(targets[i]);

@@ -9,7 +9,7 @@ inherit SPELL;
 object blocker, temp, temp2;
 int FLAG;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("mind blank");
@@ -20,13 +20,11 @@ void create()
         "The mental fortress provides the same benefits as the Escape "
         "Detection power as well as offering additional protection "
         "against mind-affecting spells and powers.");
-    set_verbal_comp();
-    set_somatic_comp();
     set_helpful_spell(1);
 }
 
 
-int preSpell() 
+int preSpell()
 {
     if(temp2 = caster->query_property("mind blank"))
     {
@@ -41,7 +39,7 @@ int preSpell()
         }
         return 0;
     }
-   
+
     if(temp = caster->query_property("block scrying"))
     {
         if(!objectp(temp))
@@ -59,7 +57,7 @@ int preSpell()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_room(environment(caster),"%^BOLD%^%^BLACK%^"+caster->QCN+" lifts a hand, and "
         "c%^RESET%^%^CYAN%^r%^BOLD%^y%^GREEN%^st%^CYAN%^a%^RESET%^"
@@ -77,7 +75,7 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int num, int_bonus,power, mylevel;
     int duration;
@@ -99,7 +97,7 @@ void spell_effect(int prof)
             return;
         }
     }
-    
+
     if(caster->is_class("psion")) { mylevel = caster->query_guild_level("psion"); }
     else { mylevel = caster->query_guild_level("psywarrior"); }
 
@@ -117,10 +115,10 @@ void spell_effect(int prof)
         "around you, bathing you in %^CYAN%^i%^BOLD%^%^CYAN%^r%^RESET%^"
         "%^CYAN%^id%^RESET%^e%^CYAN%^s%^BOLD%^c%^BLACK%^e%^RESET%^%^CYAN%^n%^RESET%^c"
         "%^CYAN%^e %^MAGENTA%^before winking out of existence.%^RESET%^");
-   
+
     TmpFeats = caster->query_temporary_feats();
     if(!sizeof(TmpFeats)) TmpFeats = ({});
-    
+
     if(member_array("unyielding soul",TmpFeats) != -1 || FEATS_D->usable_feat(caster,"unyielding soul") ||
     member_array("presence of mind",TmpFeats) != -1 || FEATS_D->usable_feat(caster,"presence of mind") ||
     member_array("mind partition",TmpFeats) != -1 || FEATS_D->usable_feat(caster,"mind partition"))
@@ -134,19 +132,19 @@ void spell_effect(int prof)
         caster->add_temporary_feat("unyielding soul");
         FLAG = 1;
     }
-   
+
     caster->set_property("spelled",({TO}));
     caster->set_property("mind blank",1);
     blocker = SCRY_D->add_block_scrying(caster);
-   
-    if(!objectp(blocker)) 
+
+    if(!objectp(blocker))
     {
         tell_object(caster,"%^BOLD%^RED%^Something is wrong that "
             "a wiz might want to look at!%^RESET%^");
         dest_effect();
         return;
     }
-    
+
     int_bonus = caster->query_stats(casting_stat);
     int_bonus = int_bonus-8; //bonus of +2 because this is much higher level than other scry blocks, including the other one for psywarriors
     power = mylevel + int_bonus + random(6);
@@ -159,7 +157,7 @@ void spell_effect(int prof)
 
 void dest_effect() {
     if(objectp(blocker)) blocker->self_destruct();
-    if(objectp(caster)) 
+    if(objectp(caster))
     {
         caster->remove_property_value("spelled", ({TO}) );
         if(FLAG)

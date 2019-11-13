@@ -10,6 +10,7 @@ create() {
     set_discipline("telepath");
     set_syntax("cast CLASS modify memory on TARGET");
     set_description("This spell alters victim's memory so they won't remember who you are. Should their will falter they will forget your name and will be momentarily dazed.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -37,7 +38,7 @@ void spell_effect(int prof)
         return;
     }
 
-    if(!do_save(target,-4)){
+    if(!(do_save(target,-4)&&mind_immunity_damage(target))){
         spell_successful();
         tell_object(caster,"%^BLUE%^You sense your memory attempt succeeded, and your victim is momentarily dazed.%^RESET%^");
         target->set_paralyzed(roll_dice(1,3)*8,"%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted.%^RESET%^");

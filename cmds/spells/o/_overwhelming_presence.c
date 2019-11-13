@@ -11,6 +11,7 @@ void create() {
     set_syntax("cast CLASS overwhelming presence");
     set_damage_desc("trips attackers, 1d6 to wisdom");
     set_description("Your presence inspires incredible awe in your enemies. Those who fail to overcome it, will fall to their knees and prostrate themselves before you. Their mental abilities will suffer for a long while.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -35,7 +36,7 @@ void spell_effect(int prof){
         if(!objectp(attackers[i]))
             continue;
         targ = attackers[i];
-        if(!do_save(targ,0))
+        if(!(do_save(targ,0)&&mind_immunity_damage(targ)))
         {
             targ->set_tripped(roll_dice(1,die),"%^BOLD%^You're prostrating in awe of "+caster->QCN+"'s divinity!%^RESET%^",die);
             tell_room(ENV(targ),"%^YELLOW%^"+targ->QCN+" prostrates itself before "+caster->QCN+"!");

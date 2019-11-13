@@ -11,9 +11,8 @@ void create() {
     set_syntax("cast CLASS mind thrust on TARGET");
     set_description("Mind thrust will cause the psion to manifest random psychic energy, directing it at a target.  The "
 "target feels confused and in pain, much like an excrutiating migraine.  The damage caused grows with the psion's power.");
-    set_verbal_comp();
-    set_somatic_comp();
     set_target_required(1);
+    mental_spell();
 }
 
 spell_effect(int prof) {

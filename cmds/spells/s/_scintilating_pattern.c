@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("illusion");
     set_syntax("cast CLASS scintilating pattern");
     set_damage_desc("mass confusion");
-    set_description("This casting summons forward illusionary patter that briefly captivates and confuses enemies.");
+    set_description("This casting summons forward illusionary patter that briefly captivates and confuses enemies that are weaker than the spell.");
     splash_spell(1);
 }
 
@@ -32,7 +32,7 @@ void spell_effect(int prof){
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i]))
             continue;
-        if(attackers[i]->query_level()<clevel)
+        if(attackers[i]->query_level()<clevel && !mind_immunity_damage(attackers[i]))
         {
             tell_room(place,"%^MAGENTA%^Spirals capitvate "+attackers[i]+"!");
             "/std/magic/confusion"->confuse(caster,attackers[i]);

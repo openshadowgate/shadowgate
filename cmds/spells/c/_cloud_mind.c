@@ -15,6 +15,7 @@ void create() {
 "longer see the target.  The effect moves with the target, making him for all practical purposes invisible.  The power "
 "will fail if the target becomes involved in a fight or decides to <appear>.  It may also wear off over time, though it "
 "generally lasts quite awhile.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);

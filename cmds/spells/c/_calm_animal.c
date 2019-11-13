@@ -13,6 +13,7 @@ void create() {
     set_syntax("cast CLASS calm animal on TARGET");
     set_description("This will pacify an animal that is engaged in combat.  Once tried, the creature will not be "
 "fooled by further attempts.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -61,7 +62,7 @@ void spell_effect(int prof) {
       return;
     }
     spell_successful();
-    if(do_save(target,0)) {
+    if(do_save(target,0)||mind_immunity_damage(target)) {
       tell_object(caster,"%^BOLD%^"+target->QCN+" pays no heed to your attempt, and instead turns upon you!\n");
       tell_object(target,"%^BOLD%^You feel a spell attempt to influence you, and turn upon "+caster->QCN+" in a rage!\n");
       spell_kill(target,caster);

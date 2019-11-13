@@ -7,6 +7,7 @@
 %^ORANGE%^ - undead body: no con stat, no hunger or thirst, no aging, no diseases, no fatigue
 %^ORANGE%^ - innate darkvision and animate dead spells
 %^ORANGE%^ - effects of negative and positive energy are reversed
+%^ORANGE%^ - mind-affecting powers damage but don't affect the mind
 
 %^BOLD%^%^BLACK%^Description:
 %^ORANGE%^"Undead" is a template that can be applied to any living creature in order to transform it into a monster of undeath such as a zombie, animated skeleton, or a vampire, or to creatures that are innately unique such as mohrgs, wights.
