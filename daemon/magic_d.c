@@ -418,6 +418,8 @@ mixed *query_index(string myclass){
 }
 
 int query_spell_level(string myclass, string spell){
+    if (myclass == "sorcerer")
+        myclass = "mage";
     if(!allSpells[myclass]) return 0;
     if(!allSpells[myclass][spell]) return 0;
     return allSpells[myclass][spell];

@@ -82,7 +82,7 @@ void dest_effect()
         caster->add_stat_bonus("dexterity",-2);
         caster->add_stat_bonus("constitution",-2);
         caster->add_stat_bonus("wisdom",-2);
-        caster->set_resistance("cold",10);
+        caster->set_resistance("cold",-10);
         caster->set_resistance("silver",50);
         caster->add_skill_bonus("perception",-4);
         caster->add_skill_bonus("survival",-4);
