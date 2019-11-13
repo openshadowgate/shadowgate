@@ -140,7 +140,7 @@ void execute_feat()
         if(target->query_max_hp()<caster->query_max_hp())
             todamage = roll_dice(clevel,8);
         else
-            todamage = roll_dice(clevel,8)+roll_dice(clevel,bonusdc);
+            todamage = roll_dice(clevel,8)+roll_dice(1,bonusdc);
         target->cause_typed_damage(target, target->query_target_limb(),todamage,"untyped");
     } else {
         tell_object(target,"%^BOLD%^%^WHITE%^Wait, what?! How did it happen?!%^RESET%^");
