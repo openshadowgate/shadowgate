@@ -54,10 +54,8 @@ void spell_effect(int prof)
     //    if(!SAVING_D->saving_throw(target,"spell",0))
     if(!do_save(target,0))
     {
-        if(mind_immunity_check(target, "default"))
+        if(mind_immunity_damage(target, "default"))
         {
-            target->add_attacker(caster);
-            damage_targ(target, target->return_target_limb(), sdamage,"untyped");
             spell_successful();
             dest_effect();
             return;

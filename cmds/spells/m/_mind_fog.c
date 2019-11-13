@@ -19,6 +19,7 @@ void create()
     set_description("Known only to some of the most powerful enchanters of the realm, this spell does no visible damage "
         "to the victim.  Instead, it serves to cloud the mind of the target, leaving them unable to think clearly, which "
         "incapacitates the use of spells or powers.  This power is rightly feared by spellcasters all over the realms.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -45,10 +46,8 @@ void spell_effect(int prof)
     // extremely unnecessary; just the d20 in the saving throw calculations can make this incredibly easy to hit with
     if(!do_save(target,0))
     {
-        if(mind_immunity_check(target, "default"))
+        if(mind_immunity_damage(target, "default"))
         {
-            target->add_attacker(caster);
-            damage_targ(target, target->return_target_limb(), roll_dice(6,8),"mental");
             spell_successful();
             dest_effect();
             return;

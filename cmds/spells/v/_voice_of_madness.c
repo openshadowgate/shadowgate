@@ -14,6 +14,7 @@ void create(){
     set_description("This invocation will call upon beings beyond, unfathomable and terrifying, to whisper in the ears "
         "of the target. A weak-willed target will become overwhelmed by the maddening voices, and may babble incoherently, attack "
         "the closest thing to them, or simply wander away.  When used on a player, it simply causes them to stand and stare blankly.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -48,16 +49,14 @@ spell_effect(int prof){
         return;
     }
     else{
-        
-        if(mind_immunity_check(target, "default"))
+
+        if(mind_immunity_damage(target, "default"))
         {
-            target->add_attacker(caster);
-            damage_targ(target, target->return_target_limb(), roll_dice(2,8),"untyped");
             spell_successful();
             dest_effect();
             return;
-        } 
-      
+        }
+
         if(target->is_player()){
             tell_object(target,"%^BOLD%^%^CYAN%^Your mind becomes overwhelmed with jumbled thoughts and images, and you stand confused!%^RESET%^");
             tell_object(caster,"%^BOLD%^%^CYAN%^"+target->QCN+" is overcome with confusion, and stands staring into space!%^RESET%^");
@@ -90,7 +89,7 @@ void confuse_em(object mytarg){
         TO->dest_effect();
         return;
     }
-   
+
     if(rnds < total){
         switch(random(100)){
         case 0..10:   if(!present(caster,environment(mytarg))) TO->dest_effect();
@@ -150,9 +149,9 @@ void dest_effect(){
             if(objectp(TO)) TO->remove();
             return;
         }
-    }        
+    }
     if(find_call_out("confuse_em")) remove_call_out("confuse_em");
-    //added the below check for objectp after environment bugs when the 
+    //added the below check for objectp after environment bugs when the
     //target had died.  Circe 9/19/05
     if(objectp(target)){
         tell_object(target,"%^CYAN%^Suddenly, your mind clears and you feel in control again!");
@@ -160,5 +159,5 @@ void dest_effect(){
     }
     ::dest_effect();
     if(objectp(TO)) { TO->remove(); }
-    
+
 }

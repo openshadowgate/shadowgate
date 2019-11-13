@@ -24,6 +24,9 @@ create()
     set_syntax("cast CLASS sleep [on TARGET]");
     set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead.");
     set_save("will");
+    set_verbal_comp();
+    set_somatic_comp();
+    mental_spell();
 }
 
 
@@ -63,9 +66,8 @@ spell_effect(int prof)
 
         if(race_immunity_check(target2, "sleep")) { continue; }
 
-        if(mind_immunity_check(target2, "default"))
+        if(mind_immunity_damage(target2, "default"))
         {
-            damage_targ(target2, target2->return_target_limb(), roll_dice(1,8),"mental");
             continue;
         }
 

@@ -23,6 +23,7 @@ void create()
         "terrifying them.  It can make the creature briefly flee in fright, "+
         "or it may make him drop his weapons and cower before "+
         "the caster.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -122,10 +123,8 @@ void spell_effect(int prof)
             continue;
         }
 
-        if(mind_immunity_check(inven[i], "default"))
+        if(mind_immunity_damage(inven[i], "default"))
         {
-            inven[i]->add_attacker(caster);
-            damage_targ(inven[i], inven[i]->return_target_limb(), roll_dice(5,8),"untyped");
             continue;
         }
 

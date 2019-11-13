@@ -13,8 +13,8 @@ void create() {
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS powerword blind on TARGET");
     set_description("When the powerword stun blind is uttered, any creature of the caster's choice is blinded, reeling and unable to think coherently or to act for a duration dependent on the creature's current hit points.");
+    mental_spell();
     set_verbal_comp();
-    set_silent_casting(1);
     set_target_required(1);
     set_save("will");
 }
@@ -30,26 +30,38 @@ void spell_effect(int prof) {
     tell_object(caster,"%^BOLD%^%^GREEN%^You take in a deep breath and scream the words, 'SIGTHUS DISAPPEERUS!!!'");
     tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" takes in a deep breath and screams the words, 'SIGTHUS DISAPPEERUS!!!'",({caster}));
 
-    if(mind_immunity_check(target, "default"))
-    {
-        target->add_attacker(caster);
-        damage_targ(target, target->return_target_limb(), roll_dice(7,8),"mental");
+       if (checkMagicResistance(target,10 - prof/10)) {
+       sendDisbursedMessage(target);
+       dest_effect();
+       return;
+   }
+
+   if(mind_immunity_damage(target))
+   {
         spell_successful();
         dest_effect();
         return;
-    }
+   }
 
-    if(!do_save(target,-2))
-    {
-        tell_room(place,"%^BOLD%^%^WHITE%^"+target->QCN+" blinks rapidly then stares around blindly.%^RESET%^");
-        target->set_temporary_blinded(roll_dice(2,4));
-    }
-    else
-    {
-        tell_object(caster,"%^BOLD%^%^GREEN%^Nothing happens, they resisted blindness.");
-        tell_object(target,"%^BOLD%^%^WHITE%^You shake it off, whatever that was.");
-    }
-
+   current = target->query_hp();
+   hpmax = target->query_max_hp();
+   x = (current*100)/hpmax;
+   if(x>90){
+      tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, slightly blinded by the power of your spell!");
+      tell_object(target,"%^BOLD%^You reel backward, slightly blinded by the power of "+caster->QCN+"'s spell!");
+      tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, slightly blinded by the power of "+caster->QCN+"'s spell!",({caster, target}));
+      target->set_temporary_blinded(roll_dice(4,2),"The force of the spell has left you blinded.");
+   }else if(x>50){
+      tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, blinded by the power of your spell!");
+      tell_object(target,"%^BOLD%^You reel backward, blinded by the power of "+caster->QCN+"'s spell!");
+      tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, blinded by the power of "+caster->QCN+"'s spell!",({caster, target}));
+      target->set_temporary_blinded(roll_dice(8,2),"The force of the spell has left you blinded.");
+   }else{
+      tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, completely blinded by the power of your spell!");
+      tell_object(target,"%^BOLD%^You reel backward, completely blinded by the power of "+caster->QCN+"'s spell!");
+      tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, completely blinded by the power of "+caster->QCN+"'s spell!",({caster, target}));
+      target->set_temporary_blinded(roll_dice(8,2),"The force of the spell has left you blinded.");
+   }
 
    spell_successful();
    dest_effect();

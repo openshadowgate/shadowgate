@@ -18,8 +18,7 @@ void create() {
 "unable to think, cast spells, or manifest powers.  This power is rightly feared by psions and mages all over the "
 "realms.");
     set_immunities( ({ "spell_immunity"}) );
-    set_verbal_comp();
-    set_somatic_comp();
+    mental_spell();
     set_target_required(1);
     set_save("will");
 }
@@ -29,32 +28,30 @@ string query_cast_string() {
        "palms up.%^RESET%^";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int bonus;
-    
+
     tell_room(place,"%^BOLD%^%^BLUE%^A low humming surrounds "+caster->QCN+", "+
         "focusing itself on "+target->QCN+"!%^RESET%^",({caster,target}));
     tell_object(caster,"%^BOLD%^%^BLUE%^You create an intense humming and "+
         "direct its energy towards "+target->QCN+"!%^RESET%^");
-    
-    if(!do_save(target,0)) 
+
+    if(!do_save(target,0))
     { // revoking the old bonus; the d20 in saving throw rolls should be more than enough -Nienne
 
-        if(mind_immunity_check(target, "default"))
+        if(mind_immunity_damage(target, "default"))
         {
-            target->add_attacker(caster);
-            damage_targ(target, target->return_target_limb(), roll_dice(5,8),"mental");
             spell_successful();
             dest_effect();
             return;
         }
-      
+
         spell_successful();
         damage_targ(target,"head",roll_dice(1,clevel),"mental");
         tell_object(target,"%^BOLD%^%^CYAN%^A deafening %^WHITE%^white noise %^CYAN%^floods your "+
             "mind, making it impossible to think!%^RESET%^");
-        tell_object(caster,"%^BOLD%^%^CYAN%^"+target->QCN+" has fallen prey to "+ 
+        tell_object(caster,"%^BOLD%^%^CYAN%^"+target->QCN+" has fallen prey to "+
             "your psychic noise!%^RESET%^");
         if(interactive(target))
         {
@@ -69,7 +66,7 @@ void spell_effect(int prof)
         call_out("next",ROUND_LENGTH,target);
         return;
     }
-    
+
     spell_successful();
     tell_object(target,"%^RESET%^%^MAGENTA%^A low humming fills your mind, but "+
         "you fight off its power!%^RESET%^");

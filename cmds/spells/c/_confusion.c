@@ -23,6 +23,7 @@ void create(){
 "stand and stare blankly.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -67,10 +68,8 @@ void spell_effect(int prof){
         return;
     }else{
 
-        if(mind_immunity_check(target, "default"))
+        if(mind_immunity_damage(target, "default"))
         {
-            target->add_attacker(caster);
-            damage_targ(target, target->return_target_limb(), sdamage,"untyped");
             spell_successful();
             dest_effect();
             return;

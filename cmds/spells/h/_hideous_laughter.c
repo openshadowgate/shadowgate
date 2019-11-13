@@ -31,6 +31,7 @@ void create()
     set_description("Hideous Laughter, when cast, will force the target to laugh at anything that comes to mind.  The "
         "victim will fall to the ground cracking up and then, eventually, will barely stand up again.  The victim will still see "
         "humor in many things and will still be slightly weakened due to the laughing, until the spell finally wears off.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -90,10 +91,8 @@ void spell_effect(int prof)
     }
     else
     {
-        if(mind_immunity_check(target, "default"))
+        if(mind_immunity_damage(target))
         {
-            target->add_attacker(caster);
-            damage_targ(target, target->return_target_limb(), roll_dice(2,8),"untyped");
             spell_successful();
             dest_effect();
             return;

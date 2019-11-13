@@ -19,6 +19,7 @@ void create() {
     set_description("When the powerword kill spell is uttered, any creature of the mage's choice will drop dead if it has "
 "fewer current hit points then the mage's power. The target may still be weakened even if this is not the case, but "
 "creatures immune to death magic will be completely unaffected.");
+    mental_spell();
     set_verbal_comp();
     set_silent_casting(1);
     set_target_required(1);
@@ -42,7 +43,7 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-    if (target->query_property("no death")) {
+    if (target->query_property("no death") || mind_immunity_damage(target)) {
         tell_object(target,"%^BOLD%^You feel a tug at your life force, but shrug it off easily!");
         tell_room(place,"%^BOLD%^"+target->QCN+" seems to shrug the spell off effortlessly.",({target}));
         dest_effect();

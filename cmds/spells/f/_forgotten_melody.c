@@ -25,6 +25,7 @@ void create()
         "of the target listeners.  This prevents them from doing anything involving concentration due to their infatuation with "
         "the song.  The caster does not have to continue singing, as the spell's effects are that the targets become lost in "
         "trying to figure out the tune.");
+    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -69,13 +70,13 @@ void spell_effect(int prof)
     tell_object(caster,"%^BOLD%^%^MAGENTA%^You raise your voice in a strangely"+
         " familiar song.");
     spell_kill(target,caster);
-    
+
     inven = caster->query_attackers();
     inven += ({target});
     inven = distinct_array(inven);
     inven = target_filter(inven);
     targets = ({});
-    
+
     for (i=0;i<sizeof(inven);i++)
     {
         if ((int)inven[i]->query_lang(lang) < 50)
@@ -97,19 +98,17 @@ void spell_effect(int prof)
                 " captivated by it, but it flees your mind.\n");
             continue;
         }
-      
-        if(mind_immunity_check(inven[i], "default"))
+
+        if(mind_immunity_damage(inven[i], "default"))
         {
-            inven[i]->add_attacker(caster);
-            damage_targ(inven[i], inven[i]->return_target_limb(), roll_dice(5,8),"untyped");
             continue;
         }
 
         targets += ({inven[i]});
     }
-    
+
     length = ([]);
-    
+
     for (i=0;i<sizeof(targets);i++)
     {
         tell_object(targets[i],"%^BOLD%^%^MAGENTA%^You hear the song, its refrain rolling"+
@@ -121,7 +120,7 @@ void spell_effect(int prof)
         {
             targets[i]->set_static("spell interrupt","%^BOLD%^%^CYAN%^You can't concentrate"+
                 " on anything but this song that's stuck in your head.");
-        } 
+        }
         else
         {
             targets[i]->set_property("spell interrupt","%^BOLD%^%^CYAN%^You can't "+
@@ -135,7 +134,7 @@ void spell_effect(int prof)
 void next()
 {
     int i;
-    object *done; 
+    object *done;
     count++;
     done = ({});
     for (i=0;i<sizeof(targets);i++)

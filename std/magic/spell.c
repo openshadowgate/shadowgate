@@ -328,9 +328,9 @@ void traveling_aoe_spell(int num) { traveling_aoe_spell = num; }
 int query_traveling_aoe_spell() { return traveling_aoe_spell; }
 void set_healing_spell(int num) { healing_spell = num; }
 int query_healing_spell() { return healing_spell; }
-void evil_spell(int num) { evil_spell = num; }
+void evil_spell(int num) { evil_spell = 1; }
 int query_evil_spell() { return evil_spell; }
-void mental_spell(int num) { mental_spell = num; }
+void mental_spell() { mental_spell = 1; }
 int query_mental_spell() { return mental_spell; }
 void splash_spell(int num) { splash_spell = num; }
 int query_splash_spell() {return splash_spell;}
@@ -2638,7 +2638,7 @@ int race_immunity_check(object obj, string type)
     return 0;
 }
 
-int mind_immunity_check(object obj, string type)
+varargs int mind_immunity_check(object obj, string type)
 {
     if(!objectp(obj)) { return 0; }
 
@@ -2648,11 +2648,12 @@ int mind_immunity_check(object obj, string type)
     {
     case "silent": // no messages
         if(FEATS_D->usable_feat(obj,"unyielding soul") ||
+           obj->is_undead() ||
            FEATS_D->usable_feat(obj, "mind partition")) { return 1; }
 
     case "default":
     default:
-        if(FEATS_D->usable_feat(obj,"unyielding soul"))
+        if(FEATS_D->usable_feat(obj,"unyielding soul") || obj->is_undead())
         {
             tell_object(obj, "%^BOLD%^%^WHITE%^You feel an invocation trying to take hold of your mind, but such is the strength of your soul that you manage to shake it off!%^RESET%^");
             tell_object(caster,"%^BOLD%^%^WHITE%^%^"+obj->QCN+" struggles momentarily, before shaking off the invocation's effects!%^RESET%^");
@@ -2666,6 +2667,17 @@ int mind_immunity_check(object obj, string type)
         }
     }
     return 0;
+}
+
+int mind_immunity_damage(object obj)
+{
+    if(mind_immunity_check(obj))
+    {
+        damage_targ(target, target->return_target_limb(), sdamage,"mental");
+        return 1;
+    }
+    else
+        return 0;
 }
 
 void help() {
@@ -2688,7 +2700,7 @@ void help() {
     if(!spell_sphere)
         spell_sphere = "";
     if(spell_sphere != "")
-        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(evil_spell?" [evil]":"")+(mental_spell?" [mental]":""));
+        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(evil_spell?" [evil]":"")+(mental_spell?" [mind-affecting]":""));
     if(!spell_domain)
         spell_domain = "";
     if(spell_domain != "")
@@ -2705,6 +2717,8 @@ void help() {
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ "+save_type);
     else
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ n/a");
+    if(verbal_comp||somatic_comp)
+        write("%^BOLD%^%^RED%^Components:%^RESET%^ "+(verbal_comp?"Verbal ":"")+(somatic_comp?"Somatic ":""));
     if(stringp(damage_desc))
         write("%^BOLD%^%^RED%^Spell effect:%^RESET%^ "+damage_desc);
     if(!syntax)

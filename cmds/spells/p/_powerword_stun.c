@@ -18,6 +18,7 @@ void create() {
     set_syntax("cast CLASS powerword stun on TARGET");
     set_description("When the powerword stun spell is uttered, any creature of the caster's choice is stunned, reeling "
 "and unable to think coherently or to act for a duration dependent on the creature's current hit points.");
+    mental_spell();
     set_verbal_comp();
     set_silent_casting(1);
     set_target_required(1);
@@ -51,25 +52,12 @@ void spell_effect(int prof) {
        return;
    }
 
-// converting to the same formula as Microcosm by Circe's design, hp-%-based duration. Nienne, 10/09
-/*
-   if(do_save(target,-1*(clevel/7))){
-       tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, but shakes off the power of your spell!");
-       tell_object(target,"%^BOLD%^You reel backward, but shakes off the power of "+caster->QCN+"'s spell!");
-       tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, but shakes off the power of "+caster->QCN+"'s spell!",({caster, target}));
-       dest_effect();
-       return;
-   }
-*/
-
-    if(mind_immunity_check(target, "default"))
-    {
-        target->add_attacker(caster);
-        damage_targ(target, target->return_target_limb(), roll_dice(7,8),"mental");
+   if(mind_immunity_damage(target))
+   {
         spell_successful();
         dest_effect();
         return;
-    }
+   }
 
    current = target->query_hp();
    hpmax = target->query_max_hp();
@@ -78,17 +66,17 @@ void spell_effect(int prof) {
       tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, slightly dazed by the power of your spell!");
       tell_object(target,"%^BOLD%^You reel backward, slightly dazed by the power of "+caster->QCN+"'s spell!");
       tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, slightly dazed by the power of "+caster->QCN+"'s spell!",({caster, target}));
-      target->set_paralyzed(roll_dice(4,2)*4*prof/100,"The force of the spell has left you stunned.");
+      target->set_paralyzed(roll_dice(4,2)*4,"The force of the spell has left you stunned.");
    }else if(x>50){
       tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, stunned by the power of your spell!");
       tell_object(target,"%^BOLD%^You reel backward, stunned by the power of "+caster->QCN+"'s spell!");
       tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, stunned by the power of "+caster->QCN+"'s spell!",({caster, target}));
-      target->set_paralyzed(roll_dice(8,2)*4*prof/100,"The force of the spell has left you stunned.");
+      target->set_paralyzed(roll_dice(8,2)*4,"The force of the spell has left you stunned.");
    }else{
       tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, completely stunned by the power of your spell!");
       tell_object(target,"%^BOLD%^You reel backward, completely stunned by the power of "+caster->QCN+"'s spell!");
       tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, completely stunned by the power of "+caster->QCN+"'s spell!",({caster, target}));
-      target->set_paralyzed(roll_dice(8,2)*6*prof/100,"The force of the spell has left you stunned.");
+      target->set_paralyzed(roll_dice(8,2)*6,"The force of the spell has left you stunned.");
    }
    spell_successful();
    dest_effect();
