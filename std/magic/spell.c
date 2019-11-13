@@ -1641,10 +1641,11 @@ void before_cast_dest_effect()
                 place->remove_property_value("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
         }
     }
-    if(query_traveling_aoe_spell())
-    {
-        caster->remove_property("travaoe");
-    }
+    if(objectp(caster))
+        if(query_traveling_aoe_spell())
+        {
+            caster->remove_property("travaoe");
+        }
     if(objectp(TO)) TO->remove();
     return;
 }

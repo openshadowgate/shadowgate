@@ -2,7 +2,7 @@
 
 inherit SPELL;
 
-int counter;
+int counter=4;
 
 void create()
 {
@@ -18,7 +18,6 @@ void create()
     set_somatic_comp();
     set_property("magic",1);
     set_helpful_spell(1);
-    traveling_aoe_spell(1);
     set_heart_beat(1);
 }
 
@@ -90,7 +89,7 @@ void heart_beat()
     if(member_array(caster,people)==-1)
         people+=({caster});
 
-    define_base_damage(0);//lazy reroll
+    define_base_damage(-6);//lazy reroll
     if(sizeof(people))
         foreach(dude in people)
         {
