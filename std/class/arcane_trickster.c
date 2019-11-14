@@ -4,6 +4,12 @@
 
 inherit DAEMON;
 
+/**
+ * Just like with assassin an arcane trickster has some kind of
+ * "special behavior": for her 10 levels of arcane trickstery she'll
+ * get both caster and stab levels.
+ */
+
 void create()
 {
     ::create();

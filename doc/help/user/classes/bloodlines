@@ -1,5 +1,8 @@
 %^CYAN%^%^ULINE%^Sorcerer Bloodlines%^RESET%^
 
+Sorcerer bloodlines represent the source of sorcerer's affinity with the weave. Long time ago, one of her ancestors got in touch with greater powers and this had left a faint trace in her bloodline, which is sufficient only to give her affinity to the weave. Sorcerer bloodlines define bonus spells she gets.
+
+%^CYAN%^Suggested possible interpretations of bloodlines:
 aberrant  : There is a taint in your blood, one that is alien and bizarre.
 abyssal   : Generations ago, a demon spread its filth into your heritage.
 accursed  : Someone cursed one of your ancestors.
@@ -7,6 +10,7 @@ arcane    : Your family has always been skilled in the eldritch art of magic.
 astral    : One of your ancestors spend some time on astral plane.
 boreal    : Your barbaric ancestry burns in your blood.
 celestial : Someone down the line shared a bed with angels.
+draconic  : A dragon interbred with your bloodline.
 elemental : The power of the elements resides in you.
 fey       : The capricious nature of the fey runs in your family.
 ghoul     : One of your ancestors wasn't quite alive.
@@ -32,6 +36,8 @@ flare%^MAGENTA%^,%^RESET%^ invisibility%^MAGENTA%^,%^RESET%^ blink%^MAGENTA%^,%^
 enlarge person%^MAGENTA%^,%^RESET%^ bears endurance%^MAGENTA%^,%^RESET%^ rage%^MAGENTA%^,%^RESET%^ stoneskin%^MAGENTA%^,%^RESET%^ cone of cold%^MAGENTA%^,%^RESET%^ transformation%^MAGENTA%^,%^RESET%^ true strike%^MAGENTA%^,%^RESET%^ polar ray
 %^CYAN%^celestial:
 light%^MAGENTA%^,%^RESET%^ eagles splendor%^MAGENTA%^,%^RESET%^ lightning bolt%^MAGENTA%^,%^RESET%^ shout%^MAGENTA%^,%^RESET%^ angelic aspect%^MAGENTA%^,%^RESET%^ serenity%^MAGENTA%^,%^RESET%^ project image%^MAGENTA%^,%^RESET%^ protection from spells
+%^CYAN%^draconic:
+armor%^MAGENTA%^,%^RESET%^ resist energy%^MAGENTA%^,%^RESET%^ fireball%^MAGENTA%^,%^RESET%^ fear%^MAGENTA%^,%^RESET%^ acid breath%^MAGENTA%^,%^RESET%^ disintegrate%^MAGENTA%^,%^RESET%^ protection from spells%^MAGENTA%^,%^RESET%^ shapechange
 %^CYAN%^elemental:
 burning hands%^MAGENTA%^,%^RESET%^ scorcher%^MAGENTA%^,%^RESET%^ fireball%^MAGENTA%^,%^RESET%^ ice storm%^MAGENTA%^,%^RESET%^ cone of cold%^MAGENTA%^,%^RESET%^ chain lightning%^MAGENTA%^,%^RESET%^ incendiary cloud%^MAGENTA%^,%^RESET%^ meteor swarm
 %^CYAN%^fey:

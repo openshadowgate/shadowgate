@@ -6,6 +6,7 @@
 "astral":"One of your ancestors spend some time on astral plane.",\
 "boreal":"Your barbaric ancestry burns in your blood.",\
 "celestial":"Someone down the line shared a bed with angels.",\
+"draconic":"At some point in your family's history, a dragon interbred with your bloodline",\
 "elemental":"The power of the elements resides in you.",\
 "fey":"The capricious nature of the fey runs in your family.",\
 "ghoul":"One of your ancestors wasn't quite alive.",\
@@ -24,6 +25,7 @@
 "astral":({"flare","invisibility","blink","suppress wild magic","dismissal","contingency","greater teleport","antimagic field"}),\
 "boreal":({"enlarge person","bears endurance","rage","stoneskin","cone of cold","transformation","true strike","polar ray"}),\
 "celestial":({"light","eagles splendor","lightning bolt","shout","angelic aspect","serenity","project image","protection from spells"}),\
+"draconic":({"armor","resist energy","fireball","fear","acid breath","disintegrate","protection from spells","shapechange"}),\
 "elemental":({"burning hands","scorcher","fireball","ice storm","cone of cold","chain lightning","incendiary cloud","meteor swarm"}),\
 "fey":({"dancing lights","glitterdust","phantom steed","confusion","domination","eyebite","reverse gravity","irresistible dance"}),\
 "ghoul":({"chill touch","ray of enfeeblement","vampiric touch","boneshatter","teleport","circle of death","finger of death","horrid wilting"}),\
