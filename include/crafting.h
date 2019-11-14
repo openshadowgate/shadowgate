@@ -126,38 +126,45 @@ WEAPONSMITH = ([
 
 mapping WOODWORK = ([]);
 WOODWORK = ([
-                "bolts":(["file":COMMONFILE"lrweapon/hquarrels","units":1,"type":"arrows"]),
-                "carving":(["file":COMMONFILE"misc/carving","units":1,"type":"carving"]),
-                "crossbow":(["file":COMMONFILE"lrweapon/hcrossbow","units":3,"type":"lrweapon"]),
-                "darts":(["file":COMMONFILE"lrweapon/darts","units":1]),
-                "drums":(["file":COMMONFILE"instruments/drum","units":2,"type":"instrument"]),
-                "flight arrows":(["file":COMMONFILE"lrweapon/flarrows","units":1,"type":"arrows"]),
-                "flute":(["file":COMMONFILE"instruments/flute","units":1,"type":"instrument"]),
+                "cane":(["file":COMMONFILE"weapon/club","units":1,"type":"weapon"]),
                 "giant club":(["file":COMMONFILE"weapon/giant_club","units":5,"type":"weapon"]),
                 "lance":(["file":COMMONFILE"weapon/hhlance","units":4,"type":"weapon"]),
-                "lap-harp":(["file":COMMONFILE"instruments/lap-harp","units":2,"type":"instrument"]),
                 "large club":(["file":COMMONFILE"weapon/club_lg","units":4,"type":"weapon"]),
                 "large spear":(["file":COMMONFILE"weapon/spear_lg","units":4,"type":"weapon"]),
-                "long bow":(["file":COMMONFILE"lrweapon/longbow","units":3,"type":"lrweapon"]),
-                "lyre":(["file":COMMONFILE"instruments/lyre","units":2,"type":"instrument"]),
-                "mandolin":(["file":COMMONFILE"instruments/mandolin","units":2,"type":"instrument"]),
                 "medium club":(["file":COMMONFILE"weapon/mclub","units":3,"type":"weapon"]),
                 "medium spear":(["file":COMMONFILE"weapon/mspear","units":3,"type":"weapon"]),
                 "medium staff":(["file":COMMONFILE"weapon/mstaff","units":3,"type":"weapon"]),
                 "nunchucks":(["file":COMMONFILE"weapon/nunchucks","units":1,"type":"weapon"]),
-                "pan pipes":(["file":COMMONFILE"instruments/panpipes","units":1,"type":"instrument"]),
-                "pipe":(["file":COMMONFILE"misc/pipe","units":1,"type":"carving"]),
                 "quarter staff":(["file":COMMONFILE"weapon/quarter_staff","units":4,"type":"weapon"]),
-                "sheath arrows":(["file":COMMONFILE"lrweapon/arrows","units":1,"type":"arrows"]),
-                "shield":(["file":COMMONFILE"armour/mshield","units":2]),
-                "short bow":(["file":COMMONFILE"lrweapon/shortbow","units":2,"type":"lrweapon"]),
+                "rod":(["file":COMMONFILE"weapon/club","units":1,"type":"weapon"]),
                 "small club":(["file":COMMONFILE"weapon/club","units":2,"type":"weapon"]),
                 "small spear":(["file":COMMONFILE"weapon/spear_sm","units":2,"type":"weapon"]),
                 "small spear":(["file":COMMONFILE"weapon/sstaff","units":2,"type":"weapon"]),
-                "tower shield":(["file":COMMONFILE"armour/shield","units":3]),
+
+                "crossbow":(["file":COMMONFILE"lrweapon/hcrossbow","units":3,"type":"lrweapon"]),
+                "darts":(["file":COMMONFILE"lrweapon/darts","units":1,"type":"lrweapon"]),
+                "long bow":(["file":COMMONFILE"lrweapon/longbow","units":3,"type":"lrweapon"]),
+                "short bow":(["file":COMMONFILE"lrweapon/shortbow","units":2,"type":"lrweapon"]),
+
+                "drums":(["file":COMMONFILE"instruments/drum","units":2,"type":"instrument"]),
+                "flute":(["file":COMMONFILE"instruments/flute","units":1,"type":"instrument"]),
                 "guitar":(["file":COMMONFILE"instruments/guitar","units":2,"type":"instrument"]),
+                "lap-harp":(["file":COMMONFILE"instruments/lap-harp","units":2,"type":"instrument"]),
                 "lute":(["file":COMMONFILE"instruments/lute","units":2,"type":"instrument"]),
-                "wand":(["file":COMMONFILE"weapon/club","units":1,"type":"weapon"]),
+                "lyre":(["file":COMMONFILE"instruments/lyre","units":2,"type":"instrument"]),
+                "mandolin":(["file":COMMONFILE"instruments/mandolin","units":2,"type":"instrument"]),
+                "pan pipes":(["file":COMMONFILE"instruments/panpipes","units":1,"type":"instrument"]),
+
+                "shield":(["file":COMMONFILE"armour/mshield","units":2]),
+                "tower shield":(["file":COMMONFILE"armour/shield","units":3]),
+
+                "bolts":(["file":COMMONFILE"lrweapon/hquarrels","units":1,"type":"arrows"]),
+                "flight arrows":(["file":COMMONFILE"lrweapon/flarrows","units":1,"type":"arrows"]),
+                "sheath arrows":(["file":COMMONFILE"lrweapon/arrows","units":1,"type":"arrows"]),
+
+                "carving":(["file":COMMONFILE"misc/carving","units":1,"type":"carving"]),
+                "pipe":(["file":COMMONFILE"misc/pipe","units":1,"type":"carving"]),
+                "wand":(["file":COMMONFILE"weapon/wand","units":1,"type":"weapon"]),
                 ]);
 
 #define CRAFT_TO_CHECK ([ "woodworker" : WOODWORK, "weaponsmith" : WEAPONSMITH, "jeweller" : JEWEL, \
