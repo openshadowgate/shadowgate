@@ -8,9 +8,9 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("ArcaneTrickster");
-    feat_name("tricky spells");
-    feat_prereq("Arcane Trickster L1");
-    feat_desc("An arcane trickster learns how to cast from shadows, therefore learns more both about shadows and casting. Her spellcraft and stealth skills become focused.");
+    feat_name("surprise spells");
+    feat_prereq("Arcane Trickster L7");
+    feat_desc("An arcane trickster knows when to cast her spells. Spells she casts on prone, paralyzed or incapacitated opponents will always deal half of the damage more.");
     permanent(1);
 }
 
@@ -20,7 +20,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("arcane_trickster") < 1)
+    if((int)ob->query_class_level("arcane_trickster") < 7)
     {
         dest_effect();
         return 0;

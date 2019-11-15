@@ -49,8 +49,8 @@ void init() {
 int cancel_inv() {
    if(player->query_magic_hidden())
       player->set_magic_hidden(0);
+   tell_object(player,"You become visible again.");
    call_out("dest_fun",1);
-
    return 1;
 }
 

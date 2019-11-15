@@ -9,6 +9,7 @@ void create() {
     feat_type("instant");
     feat_category("ArcaneTrickster");
     feat_name("invisible thief");
+    feat_prereq("Arcane Trickster L4");
     feat_syntax("invisible_thief, step");
     feat_desc("An arcane trickster continues to merge her understanding of stealthy and arcane arts. She learns to become invisible like under greater invisibility spell as a free action.
 
@@ -29,13 +30,24 @@ int prerequisites(object ob) {
 }
 
 int cmd_invisible_thief(string str) {
-    object invisob;
+    object feat;
     if(!objectp(TP)) { return 0; }
+    feat = new(base_name(TO));
+    feat->setup_feat(TP,"");
+    return 1;
+}
+
+void execute_feat()
+{
+    object invisob;
+    ::execute_feat();
+    tell_object(caster,"%^CYAN%^You simply disappear.%^RESET%^");
     invisob=new("/d/magic/obj/invisobgreater.c");
     invisob->set_player_name(caster->query_name());
-    invisob->set_mychance(clevel/2);
+    invisob->set_mychance(clevel);
     invisob->move(caster);
-    return 1;
+    dest_effect();
+    return;
 }
 
 void dest_effect() {

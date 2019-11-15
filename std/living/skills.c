@@ -292,8 +292,8 @@ int query_skill(string skill) {
                 myclassskills = (string *)(DIR_CLASSES+"/monk.c")->way_skills(mydisc);
             }
             if(member_array(skill,myclassskills) != -1 ||
-               (FEATS_D->usable_feat("tricky spells") && (skill == "spellcraft" || skill == "stealth")) ||
-               (FEATS_D->usable_feat(this_object(),"skill focus") && ((string)this_object()->query("skill_focus") == skill)))
+               (FEATS_D->usable_feat(TO,"tricky spells") && (skill == "spellcraft" || skill == "stealth")) ||
+               (FEATS_D->usable_feat(TO,"skill focus") && ((string)this_object()->query("skill_focus") == skill)))
                 x += (mylevel/2);
             else
                 x += (mylevel/5);
