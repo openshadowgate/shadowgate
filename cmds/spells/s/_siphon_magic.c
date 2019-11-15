@@ -73,6 +73,11 @@ int preSpell()
         tell_object(caster,"The first object must be enchanted.");
         return 0;
     }
+    if(tob->query_property("player enchanted"))
+    {
+        tell_object(caster,"The second object must not be enchanted by adventurers.");
+        return 0;
+    }
     if(tob->query_property("enchantment")>fob->query_property("enchantment"))
     {
         tell_object(caster,"The second object must not have higher enchantment than the first one.");
