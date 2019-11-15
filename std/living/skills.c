@@ -139,7 +139,7 @@ int query_guild_level(string str)
             }
             else
             {
-                base = class_ob->query_base_classes();
+                base = class_ob->query_base_classes(TO);
                 if(member_array(str,base) == -1) { continue; }
                 num += (int)TO->query_class_level(classes[i]);
             }
