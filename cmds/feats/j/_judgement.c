@@ -12,8 +12,8 @@ void create()
     feat_category("Inquisition");
     feat_name("rally");
     feat_syntax("judgment FIRST [SECOND [THIRD]]");
-    feat_prereq("Heh");
-    feat_desc("");
+    feat_prereq("Inquisitor L1");
+    feat_desc("Inquisitors have unusual");
 //    set_required_for(({"second judgement","third judgement"}));
     set_target_required(0);
     allow_blind(1);
