@@ -161,8 +161,11 @@ int unarmed_damage(object player)
         case 21..30:
             amt = roll_dice(1, 10);
             break;
-        case 31..50:
+        case 31..40:
             amt = roll_dice(1, 12);
+            break;
+        case 41..50:
+            amt = roll_dice(1, 14);
             break;
        /*     break;
         case 26..30:
@@ -194,7 +197,7 @@ int effective_enchantment(object player)
 int critical_multiplier(object player)
 {
     if(!objectp(player)) return 0;
-    return ((int)player->query_guild_level("monk") / 10);
+    return ((int)player->query_guild_level("monk") / 10+1);
 }
 
 int critical_damage(object player)

@@ -28,12 +28,13 @@ They despise most tradional armor, finding that it gets in the way of their abil
 Some monks are known to use small weapons, almost as if they were an extension of themselves. Others prefer the feel of battle and thus limit themselves to using their bare hands. All monks are experts at using their body as a weapon. Some are very quick, using their dexterity in combat to both hit and deal damage, others are very strong and benefit from a higher strength stat.
 
 Unarmed monks use the following damage table:
- Levels 1-10 : 1d6 damage
+ Levels  1-10 : 1d6 damage
  Levels 11-20 : 1d8 damage
  Levels 21-30 : 1d10 damage
- Levels 31+ : 1d12 damage
+ Levels 31-40 : 1d12 damage
+ Levels 41-50 : 1d14 damage
 
-This is base damage only. By default a monk uses strength for unarmed attacks (for both hit and damage), however, a monk may choose the weapon finesse feat in order to use dexterity instead.
+By default a monk uses strength for unarmed attacks (for both hit and damage), however, a monk may choose the weapon finesse feat in order to use dexterity instead.
 
 Unarmed monks also receive a critical damage multiplier of their monk level divided by 10 + 1, a level 10 monk, for example would have a critical damage multiplier of 2. This means that a level 10 monk would do an additinal 2d6 damage on a critical hit.
 
