@@ -11,7 +11,7 @@ void create()
     feat_name("quivering palm");
     feat_syntax("quivering_palm TARGET");
     feat_prereq("Monk L17, Way of The Fist or Grandmaster of The Way");
-    feat_desc("A monk specialized in the way of the fist, that is unarmored and unarmed, or wielding small weapons, may attempt a quivering palm attack on a target. In order for the attempt to be successful the monk must have at least 3 available Ki and must land a touch attack on the target. If successful a brief period of time later the target must roll a successful fortitude saving throw or be set to 0 health. Against certain monsters or if the saving throw is successful the target will take 1d6 damage per monk level.");
+    feat_desc("A monk specialized in the way of the fist, that is unarmored and unarmed, or wielding small weapons, may attempt a quivering palm attack on a target. In order for the attempt to be successful the monk must have at least 3 available Ki and must land a touch attack on the target. If successful a brief period of time later the target must roll a successful fortitude saving throw or be set to 0 health. Against certain monsters or if the saving throw is successful the target will take 1d8 damage per monk level.");
     set_target_required(1);
     set_save("fort");
 }
@@ -33,14 +33,14 @@ int prerequisites(object ob)
     }
     if((int)ob->query_alignment() > 3)
     {
-        
+
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
 }
 
-int cmd_quivering_palm(string str) 
+int cmd_quivering_palm(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
@@ -66,55 +66,55 @@ int check_can_use()
         if((int)weapons[x]->query_size() > 1)
         {
             tell_object(caster, "%^BOLD%^%^GREEN%^Your "+weapons[x]->query_short()+
-            " interferes with your quivering palm attempt!%^RESET%^");            
+            " interferes with your quivering palm attempt!%^RESET%^");
             return 0;
         }
         continue;
-    }    
+    }
     if(!caster->is_ok_armour("barb"))
     {
         tell_object(caster, "%^BOLD%^%^GREEN%^Your armor interferes "+
-        "with your quivering palm attempt!%^RESET%^");        
+        "with your quivering palm attempt!%^RESET%^");
         return 0;
-    }    
-    if(caster->query_in_vehicle()) 
+    }
+    if(caster->query_in_vehicle())
     {
-        tell_object(caster,"You cannot use quivering palm while mounted!");        
+        tell_object(caster,"You cannot use quivering palm while mounted!");
         return 0;
-    }   
+    }
     if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 3))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
-        "quivering palm.%^RESET%^");      
-        return 0;       
-    }   
+        "quivering palm.%^RESET%^");
+        return 0;
+    }
     return 1;
 }
 
-void execute_feat() 
+void execute_feat()
 {
     mapping tempmap;
     object *weapons;
     int x;
     ::execute_feat();
     if(!objectp(target))
-    { 
+    {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
-    }    
+    }
     if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
     {
         caster->send_paralyzed_message("info",caster);
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat")) 
+    if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
@@ -126,7 +126,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if(target == caster) 
+    if(target == caster)
     {
         tell_object(caster,"You cannot use quivering palm on yourself!");
         dest_effect();
@@ -139,15 +139,15 @@ void execute_feat()
         return;
     }
     tempmap = caster->query_property("using quivering palm");
-    if(mapp(tempmap)) 
+    if(mapp(tempmap))
     {
-        if(tempmap[target] > time()) 
+        if(tempmap[target] > time())
         {
             tell_object(caster,"That target is still wary of such an attack!");
             dest_effect();
             return;
         }
-    }    
+    }
     if(!check_can_use())
     {
         dest_effect();
@@ -156,13 +156,13 @@ void execute_feat()
     caster->use_stamina(roll_dice(1,6));
     caster->set_property("using instant feat",1);
     spell_kill(target,caster);
-    
+
     tell_object(caster, "%^BOLD%^%^CYAN%^You focus intently on manipulating the ki in "+
     target->QCN+"%^BOLD%^%^CYAN%^'s body!%^RESET%^");
-    
+
     tell_object(target, caster->QCN+"%^BOLD%^%^CYAN%^ begins focusing intently on "+
     "you!%^RESET%^");
-    
+
     if(objectp(place))
     {
         tell_room(place, caster->QCN+"%^BOLD%^%^CYAN%^ begins focusing intently "+
@@ -171,7 +171,7 @@ void execute_feat()
     return;
 }
 
-void execute_attack() 
+void execute_attack()
 {
     int damage, timerz, i, DC;
     object *keyz, shape, *weapons, myweapon, qob;
@@ -189,12 +189,12 @@ void execute_attack()
         dest_effect();
         return;
     }
-    if(caster->query_unconscious()) 
+    if(caster->query_unconscious())
     {
         dest_effect();
         return;
     }
-    if(!objectp(target) || !present(target,place)) 
+    if(!objectp(target) || !present(target,place))
     {
         tell_object(caster,"Your target has eluded you!");
         dest_effect();
@@ -205,38 +205,39 @@ void execute_attack()
         dest_effect();
         return;
     }
-    
+
     if(!caster->spend_ki(3))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
-        "quivering palm!%^RESET%^");      
+        "quivering palm!%^RESET%^");
         dest_effect();
         return;
     }
-    
-    tempmap = caster->query_property("using quivering palm"); 
+
+    tempmap = caster->query_property("using quivering palm");
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
     keyz = keys(tempmap);
-    for(i=0;i<sizeof(keyz);i++) 
-    { 
+    for(i=0;i<sizeof(keyz);i++)
+    {
         if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
         continue;
     }
-    timerz = time() + 240;
+    timerz = time() + 120;
+    delay_subject_msg(target,120,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^quivered palm%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
     caster->remove_property("using quivering palm");
     caster->set_property("using quivering palm",tempmap);
 
     weapons = caster->query_wielded();
     if(sizeof(weapons)) myweapon = weapons[0];
-    
+
     if(!(int)BONUS_D->process_hit(caster, target, 1, myweapon, 0, 1))
     {
         tell_object(caster, "%^BOLD%^%^CYAN%^You miss your quivering palm attack on "+target->QCN+
-        "%^BOLD%^%^CYAN%^!%^RESET%^");        
+        "%^BOLD%^%^CYAN%^!%^RESET%^");
         tell_object(target, caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused strike at you, "+
-        "but you manage to avoid it just in time!%^RESET%^");        
+        "but you manage to avoid it just in time!%^RESET%^");
         if(objectp(environment(caster)))
         {
             tell_room(environment(caster), caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused "+
@@ -248,17 +249,17 @@ void execute_attack()
     }
     tell_object(caster, "%^BOLD%^%^CYAN%^Your quivering palm slams into "+target->QCN+
     "!%^RESET%^");
-    
+
     tell_object(target, caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused strike, "+
     "connecting squarely with you!%^RESET%^");
-    
+
     if(objectp(environment(caster)))
     {
         tell_room(environment(caster), caster->QCN+"%^BOLD%^%^CYAN%^ launches a focused strike "+
         "on "+target->QCN+"%^BOLD%^%^CYAN%^ connecting squarely with "+target->QO+
         "!%^RESET%^", ({caster, target}));
     }
-    
+
     qob = new("/cmds/feats/obj/quivering_object");
     DC = (int)caster->query_class_level("monk");
     DC += (int)"/daemon/bonus_d.c"->query_stat_bonus(caster, "wisdom");
@@ -275,4 +276,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

@@ -24,7 +24,7 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","cleric","druid","thief" }); }
+string *query_base_classes() { return ({ "mage","sorcerer","cleric","druid","thief", "bard" }); }
 
 int has_base_class_set(object obj)
 {
@@ -52,7 +52,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    10 Mage, Sorcerer, Cleric, Druid levels (level adjustments considered part of required levels)\n"
+        "    10 Mage, Sorcerer, Cleric, Druid, Bard levels (level adjustments considered part of required levels)\n"
         "    10 Thief (level adjustments considered part of required levels)\n"
         "    10 Points Spent in Stealth Skill\n"
         "    10 Points Spent in Spellcraft Skill\n";
@@ -85,6 +85,11 @@ int prerequisites(object player)
         if( (player->query_class_level("mage") + adj) < 10) { return 0; }
         player->set("arcane_trickster_base_class","mage");
     }
+    if(player->is_class("bard"))
+    {
+        if( (player->query_class_level("cleric") + adj) < 10) { return 0; }
+        player->set("arcane_trickster_base_class","bard");
+    }
     if(player->is_class("druid"))
     {
         if( (player->query_class_level("druid") + adj) < 10) { return 0; }
@@ -103,7 +108,7 @@ int prerequisites(object player)
 
 mapping stat_requirements(object ob) { return base_class_ob(ob)->stat_requirements(); }
 
-int *saving_throws(object ob) { return base_class_ob(ob)->saving_throws(); }
+int *saving_throws(object ob) { return ({0,1,1}); }
 
 string *combat_styles() { return ({}); }
 
