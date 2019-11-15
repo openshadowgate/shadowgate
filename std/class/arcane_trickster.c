@@ -24,7 +24,7 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","cleric","druid","thief", "bard" }); }
+string *query_base_classes() { return ({ "mage","sorcerer","thief", "bard" }); }
 
 int has_base_class_set(object obj)
 {
@@ -52,7 +52,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    10 Mage, Sorcerer, Cleric, Druid, Bard levels (level adjustments considered part of required levels)\n"
+        "    10 Mage, Sorcerer, Bard levels (level adjustments considered part of required levels)\n"
         "    10 Thief (level adjustments considered part of required levels)\n"
         "    10 Points Spent in Stealth Skill\n"
         "    10 Points Spent in Spellcraft Skill\n";

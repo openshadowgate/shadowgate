@@ -1,4 +1,5 @@
 #include <std.h>
+#include <magic.h>
 
 inherit OBJECT;
 
@@ -34,6 +35,23 @@ void setup_judgement(object mycaster, int myclevel)
     clevel = myclevel;
 }
 
+void activate_judgements(string * judgements)
+{
+    if(sizeof(active_judgements))
+    {
+        apply_judgements(active_judgements,-1);
+    }
+    active_judgements = judgements;
+    apply_judgements(judgements,1);
+    tell_object(caster,"%^BOLD%^%^WHITE%^You with a mere will you call out to the arcane for the strength.");
+    call_out("check",ROUND_LENGTH);
+}
+
+string * query_judgement_types()
+{
+    return JUDGEMENT_TYPES;
+}
+
 void apply_judgements(string * judgements,int direction)
 {
     string j;
@@ -57,7 +75,7 @@ void judgement_healing(int direction)
 {
     int bonus;
     bonus = clevel/18+1;
-    caster->set_property("fast_healing",bonus*direction);
+    caster->set_property("fast healing",bonus*direction);
 }
 
 void judgement_justice(int direction)
@@ -98,13 +116,14 @@ void check()
 {
     if(!objectp(caster))
     {
-        dest_effect();
+        TO->remove();
         return;
     }
     if(!sizeof(caster->query_attackers()))
     {
         tell_object(caster,"%^BOLD%^%^CYAN%^As the battle comes to an end your arcane zeal recedes.%^RESET%^");
-        dest_effect();
+        apply_judgements(active_judgements,-1);
+        TO->remove();
         return;
     }
     call_out("check",ROUND_LENGTH);
