@@ -169,8 +169,12 @@ int scramble_stab(object stabber, object victim)
 
         if(victim->query_property("weapon resistance"))
         {
-            if(!objectp(weapon)) { damage = 0; }
-            else if (weapon->query_property("enchantment") < victim->query_property("weapon resistance")) { damage = 0; }
+            int enchantment, resistance;
+            enchantment = 0; //default 0
+            resistance = (int) victim->query_property("weapon resistance");
+            if(!objectp(weapon)) {enchantment = (int) COMBAT_D->unarmed_enchantment(TP);}
+            else if(objectp(weapon)) {enchantment = (int) weapon->query_property("enchantment");}
+            if (enchantment < resistance) { damage = 0; }
         }
 
         if (stabber->is_class("thief"))
@@ -284,8 +288,12 @@ varargs int get_stab_damage(object player,object target,object weapon)
     {
         if(target->query_property("weapon resistance"))
 	    {
-		    if(!objectp(weapon)) { damage = 0; }
-		    else if (weapon->query_property("enchantment") < target->query_property("weapon resistance")) { damage = 0; }
+            int enchantment, resistance;
+            enchantment = 0; //default 0
+            resistance = (int) target->query_property("weapon resistance");
+            if(!objectp(weapon)) {enchantment = (int) COMBAT_D->unarmed_enchantment(TP);}
+            else if(objectp(weapon)) {enchantment = (int) weapon->query_property("enchantment");}
+            if (enchantment < resistance) { damage = 0; }
         }
     }
 

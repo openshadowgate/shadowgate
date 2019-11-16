@@ -80,7 +80,7 @@ string list_users(string *races, object tp)
                 position == "overseer" ||
                 position == "elder" ||
                 position == "arch")
-                tmp += "%^BOLD%^%^BLACK%^Admin %^BOLD%^%^BLACK%^------ ";
+                tmp += "%^BOLD%^%^BLACK%^Wizard %^BOLD%^%^BLACK%^----- ";
             else {
                 if(((int)who[i]->query_login_time() + 60) > time())
                     rabbit = "someone";
