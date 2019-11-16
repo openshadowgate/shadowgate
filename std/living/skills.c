@@ -321,12 +321,7 @@ int query_skill(string skill) {
       x += query_skill_bonus(skill);
     }
 
-    //Give static bonus for psywarrior epic feats
-    if((skill == "endurance" || skill == "athletics") && FEATS_D->usable_feat(TO,"body cognition")) x += 2;
-    if((skill == "endurance" || skill == "athletics") && TO->is_class("warmind")) x += 2;
-    if((skill == "academics" || skill == "spellcraft") && FEATS_D->usable_feat(TO,"presence of mind")) x += 2;
-    if((skill == "academics" || skill == "spellcraft") && TO->is_class("metamind")) x += 2;
-    if((skill == "perception" || skill == "stealth") && FEATS_D->usable_feat(TO, "shadow perception")) x += 2;
+    if((skill == "perception" || skill == "stealth") && FEATS_D->usable_feat(TO, "shadow perception")) x += 4;
     return x;
 }
 
