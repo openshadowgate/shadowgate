@@ -15,7 +15,7 @@ void create()
     feat_prereq("Inquisitor L1");
     feat_desc("Inquisitors have an unusual affinity to pronounce a judgement on their foes, to strengthen themselves with a channeled powers. At the beginning they can choose just one power to pronounce, but as inquisitor grows in power he learns to control up to three such powers. Changing the power is a free action, but any powers an inquisitor has will retreat after the combat and can not be summoned unless already in the combat.
 
-List of judgements to choose from:
+The list of judgements to choose from:
 
 %^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them damage bonus point per every three levels.
 
