@@ -8,16 +8,16 @@ void create() {
     feat_category("KiEnhancement");
     feat_name("shadow perception");
     feat_prereq("Monk L10, Way of The Shadow or Grandmaster of The Way");
-    feat_desc("A monk who is dedicated to the way of the shadows  has a way of perceiving and hiding in shadows that most can never hope to  achieve. This feat represents this ability, granting a +2 to both stealth  and perception.\n NOTE: This feat only functions while unarmored.");
+    feat_desc("A monk who is dedicated to the way of the shadows  has a way of perceiving and hiding in shadows that most can never hope to  achieve. This feat represents this ability, granting a +5 to both stealth  and perception.\n NOTE: This feat only functions while unarmored.");
     permanent(1);
     set_required_for(({}));
 }
 
-int prerequisites(object ob) 
+int prerequisites(object ob)
 {
    if(!objectp(ob)) { return 0; }
 
-   if((int)ob->query_class_level("monk") < 10 || (int)ob->query_alignment() > 3) 
+   if((int)ob->query_class_level("monk") < 10 || (int)ob->query_alignment() > 3)
    {
       dest_effect();
       return 0;
@@ -35,7 +35,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-void execute_feat() 
+void execute_feat()
 {
     ::execute_feat();
     dest_effect();

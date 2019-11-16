@@ -278,9 +278,9 @@ void init_ki(object ob)
     {
         if(myWay == "way of the elements" || myWay == "grandmaster of the way")
         {
-            newmax = to_int((int)ob->query_prestige_level("monk")*2);
+            newmax = to_int((int)ob->query_guild_level("monk")*2);
         }
-        else newmax = (int)ob->query_prestige_level("monk");
+        else newmax = (int)ob->query_guild_level("monk");
     }
     else newmax = (int)ob->query_class_level("monk");
     if(!intp(avail = (int)ob->query("available ki"))) avail = newmax;

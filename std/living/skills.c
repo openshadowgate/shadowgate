@@ -321,7 +321,7 @@ int query_skill(string skill) {
       x += query_skill_bonus(skill);
     }
 
-    if((skill == "perception" || skill == "stealth") && FEATS_D->usable_feat(TO, "shadow perception")) x += 4;
+    if((skill == "perception" || skill == "stealth") && FEATS_D->usable_feat(TO, "shadow perception")) x += 5;
     return x;
 }
 
