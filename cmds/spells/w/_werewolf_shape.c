@@ -54,8 +54,6 @@ void spell_effect(int prof)
         shape = caster->query_property("altered");
 
     bonus = clevel/4+1;
-    caster->add_attack_bonus(bonus);
-    caster->add_damage_bonus(bonus);
     caster->add_sight_bonus(3);
     caster->add_stat_bonus("strength",2);
     caster->add_stat_bonus("dexterity",2);
@@ -75,8 +73,6 @@ void dest_effect()
     object shape;
 	if(objectp(caster))
     {
-        caster->add_attack_bonus(-bonus);
-        caster->add_damage_bonus(-bonus);
         caster->add_sight_bonus(-3);
         caster->add_stat_bonus("strength",-2);
         caster->add_stat_bonus("dexterity",-2);
