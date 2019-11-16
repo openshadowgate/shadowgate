@@ -94,6 +94,7 @@ int reverse_shape(object obj){
     if(objectp(to_object(DESC_D))) {
         desc = new(DESC_D);
         desc->restore_profile_settings(obj,shape->query_base_profile());
+
     }
     shape->change_outof_message(obj);
     shape->set_owner(0);

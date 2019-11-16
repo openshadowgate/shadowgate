@@ -35,7 +35,6 @@ string *combat_styles() {
 string *class_feats(string myspec)
 {
     return ({ "simple weapon proficiency",
-                "martial weapon proficiency",
                 "exotic weapon proficiency",
                 "light armor proficiency",
                 "medium armor proficiency",

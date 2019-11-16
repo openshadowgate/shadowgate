@@ -1379,10 +1379,11 @@ void setup() {
 
     if(TO->query("relationship_profile"))
     {
+
         if(objectp(to_object("/daemon/description_d")))
         {
             ob = new("/daemon/description_d");
-            ob->set("relationship_profile","default");
+            TO->set("relationship_profile","default");
             if(!ob->restore_profile_settings(TO,"default")) // restore description of default profile on login
             {
                 ob->initialize_profile(TO);
@@ -1433,8 +1434,9 @@ void setup() {
   {
     used_stamina = query_max_stamina() + 100;
   }
-  //This is a work-around to make undead players great again, since
-  //is_undead() picks up on property.
+
+  //Some parts of the game still refer to property "undead" in
+  //determining whether target is an undead.
   if(query("undead"))
       set_property("undead",1);
 
