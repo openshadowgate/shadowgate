@@ -13,7 +13,7 @@ int apply_template(object ob)
     return 1;
 }
 
-int remove_remplate(object ob)
+int remove_template(object ob)
 {
     ob->delete("werewolf");
     return 1;
