@@ -24,7 +24,7 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","thief", "bard" }); }
+string *query_base_classes() { return ({ "mage","sorcerer","cleric","druid","thief", "bard" }); }
 
 int has_base_class_set(object obj)
 {
@@ -45,14 +45,13 @@ string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_cla
 
 int *restricted_alignments() { return ({}); }
 
-
 string *restricted_gods() { return ({}); }
 
 string requirements() // string version, maybe we'll need this, maybe not, can remove later if not
 {
     string str;
     str = "Prerequisites:\n"
-        "    10 Mage, Sorcerer, Bard levels (level adjustments considered part of required levels)\n"
+        "    10 Mage, Sorcerer, Cleric, Druid, Bard levels (level adjustments considered part of required levels)\n"
         "    10 Thief (level adjustments considered part of required levels)\n"
         "    10 Points Spent in Stealth Skill\n"
         "    10 Points Spent in Spellcraft Skill\n";

@@ -73,7 +73,7 @@ int confirm_drop(string str,string theclass,int drop,int cost)
     log_file("abandoned_classes",""+TP->query_true_name()+" abandoned "+TP->QP+" "+theclass+" class, loosing "+drop+" levels and "+(int)cost+" exp "+ctime(time())+"\n");
 
     class_ob = find_object_or_load(DIR_CLASSES+"/"+theclass+".c");
-    if(objectp(class_ob)) { class_ob->remove_base_class(TP); }
+    if(objectp(class_ob)&&TP->query_class_level("theclass")<11) { class_ob->remove_base_class(TP); }
     //tell_object(TP, "cost = "+cost);
     TP->set("active_class",theclass);
     TP->add_exp(-cost);

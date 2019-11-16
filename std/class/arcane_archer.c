@@ -18,7 +18,7 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","bard", }); }
+string *query_base_classes() { return ({ "mage","sorcerer","bard","druid","cleric","warlock" }); }
 
 int has_base_class_set(object obj)
 {
@@ -46,7 +46,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Mage, Sorcerer, Bard, Cleric or Druid levels (level adjustments considered part of required levels)\n"
+        "    20 Mage, Sorcerer, Bard, Cleric, Druid or Warlock levels (level adjustments considered part of required levels)\n"
         "    Preciseshot\n";
 
     return str;
@@ -136,7 +136,7 @@ string new_save_type(object ob) { return base_class_ob(ob)->new_save_type(); }
 // unsure on this one, will have to investigate
 void advanced_func(object player) { return base_class_ob(player)->advance_func(player); }
 
-int hit_dice(object ob) { return 10; }  // hit dice rolled for hitpoints each level
+int hit_dice(object ob) { return 8;}  // hit dice rolled for hitpoints each level
 
 int default_hitpoints(object ob) { return base_class_ob(ob)->default_hitpoints(); } // hitpoints per level above level 20
 

@@ -21,7 +21,15 @@ object base_class_ob(object ob)
 }
 
 
-string *query_base_classes() { return ({ "mage","sorcerer","bard", }); }
+string *query_base_classes(object obj)
+{
+    string base;
+    if(!objectp(obj)) { return ({}); }
+    base = obj->query("eldritch_knight_base_class");
+    if(!base) { return ({}); }
+    return ({ base });
+}
+
 
 void remove_base_class(object obj)
 {
@@ -65,7 +73,7 @@ int caster_class(object ob) { return base_class_ob(ob)->caster_class(); }
 
 string *restricted_races(object ob) { return base_class_ob(ob)->restricted_races(); }
 
-string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes(); }
+string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes()+({"psion","psywarrior"}); }
 
 int *restricted_alignments(object ob) { return base_class_ob(ob)->restricted_alignments(); }
 
@@ -76,7 +84,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Sorcerer, Mage or Bard Levels\n"
+        "    20 Base Class Levels\n"
         "    Spell focus\n"
         "    Martial Weapon Proficiency\n";
 
@@ -102,24 +110,8 @@ int prerequisites(object player)
     if(!base) { return 0; }
     if(!player->is_class(base)) { return 0; }
     if((player->query_class_level(base) + adj) < 20) { return 0; }
+    if(!FEATS_D->usable_feat(player,"spell focus")) { return 0; }
     if(!FEATS_D->usable_feat(player,"martial weapon proficiency")) { return 0; }
-
-    if(player->is_class("sorcerer"))
-    {
-        if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
-
-        player->set("arcane_archer_base_class","sorcerer");
-    }
-    if(player->is_class("mage"))
-    {
-        if( (player->query_class_level("mage") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","mage");
-    }
-    if(player->is_class("bard"))
-    {
-        if( (player->query_class_level("bard") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","bard");
-    }
     return 1;
 }
 
