@@ -30,7 +30,7 @@ string query_cast_string() {
 
 int preSpell()
 {
-    if(target->query_property("protection from spells"))
+    if(target->query_property("raised resitance"))
     {
         tall_object(caster,"The target is already under the influence of a similar effect.");
         return 0;
@@ -75,7 +75,7 @@ void spell_effect(int prof) {
     }
     lower = clevel/3;
     target->set_property("spell damage resistance",lower);
-    target->set_property("protection from spells",1);
+    target->set_property("raised resistance",1);
     addSpellToCaster();
     call_out("dest_effect",80 + clevel*8,lower);
 }
@@ -85,7 +85,7 @@ void dest_effect(){
     if(objectp(target))
     {
         target->set_property("spell damage resistance",(-1*lower));
-        target->remove_property("protection from spells");
+        target->remove_property("raised resistance");
         tell_room(environment(target),"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "
         "a wave of energy dissipates from the air around "+target->QCN+".%^RESET%^",target);
         tell_object(target,"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "
