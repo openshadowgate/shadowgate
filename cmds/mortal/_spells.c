@@ -50,11 +50,6 @@ int cmd_spells(string str)
     if(myclass == "antipaladin") myclass = "paladin";
     if(args == "expanded knowledge")
     {
-        if(!TP->is_class("psion") && !TP->is_class("psywarrior"))
-        {
-            tell_object(TP,"You cannot take the expanded knowledge feats!");
-            return 1;
-        }
         full_list(TP,myclass);
     }
     else
@@ -71,14 +66,17 @@ int cmd_spells(string str)
     tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
     tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 24) + arrange_string("Level", 6));
 
-    if (args == "by school" && (myclass == "mage" || myclass == "sorcerer"))
+    sort();
+
+    if (regexp(args,"(by level)|(expanded knowledge)"))
+    {
+        sort_two();
+    }
+
+    if (regexp(args,"by school") && (myclass == "mage" || myclass == "sorcerer"))
     {
         sort_by_school();
     }
-    if (args != "by level" && args != "expanded knowledge")
-        sort();
-    else
-        sort_two();
 
     for (x = 0; x < sizeof(magic);x++)
     {
@@ -238,7 +236,8 @@ spells - list spells
 
 %^CYAN%^SYNTAX%^RESET%^
 
-spells %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [by level|by school|of level %^ORANGE%^%^ULINE%^NUM%^RESET%^|expanded knowledge]
+spells %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [by level] [by school]
+spells %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [of level %^ORANGE%^%^ULINE%^NUM%^RESET%^|expanded knowledge]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
