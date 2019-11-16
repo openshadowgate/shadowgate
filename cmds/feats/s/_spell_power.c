@@ -23,6 +23,7 @@ int prerequisites(object ob)
 
     if(!FEATS_D->has_feat(ob,"spellmastery") &&
        !ob->is_class("warlock") &&
+       !ob->is_class("monk") &&
        !ob->is_class("psion") &&
        !ob->is_class("psywarrior"))
     {
