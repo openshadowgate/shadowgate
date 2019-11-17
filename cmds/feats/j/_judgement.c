@@ -10,7 +10,7 @@ void create()
     ::create();
     feat_type("instant");
     feat_category("Inquisition");
-    feat_name("rally");
+    feat_name("judgement");
     feat_syntax("judgement FIRST [SECOND [THIRD]]");
     feat_prereq("Inquisitor L1");
     feat_desc("Inquisitors have an unusual affinity to pronounce a judgement on their foes, to strengthen themselves with a channeled powers. At the beginning they can choose just one power to pronounce, but as inquisitor grows in power he learns to control up to three such powers. Changing the power is a free action, but any powers an inquisitor has will retreat after the combat and can not be summoned unless already in the combat.
@@ -40,9 +40,8 @@ int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {
-    return 0;
     if(!objectp(ob)) return 0;
-    if(!ob->is_class("inqusitor"))
+    if(!ob->is_class("inquisitor"))
     {
         dest_effect();
         return 0;

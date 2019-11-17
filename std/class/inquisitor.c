@@ -1,7 +1,7 @@
 #include <std.h>
 inherit DAEMON;
 
-int is_prestige_class() { return 1; } // temporary to block in rolling
+int is_prestige_class() { return 0; }
 
 void create() { ::create(); }
 
@@ -43,7 +43,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : class_feats()+({"judgement"}),3:({"force of personality"}), 5: ({"bane"}), 6: ({"leadership"}), 8: ({"second judgement"}), 11: ({"stalwart"}), 16 : ({"third judgement"}), 17 : ({"slayer"}), 20 : ({"true judgement"})]);
+    return ([ 1 : class_feats()+({"judgement"}),3:({"force of personality"}), 6: ({"leadership"}), 8: ({"second judgement"}), 11: ({"stalwart"}), 16 : ({"third judgement"}), 17 : ({"slayer"}), 20 : ({"true judgement"})]);
 }
 
 string *class_skills()
@@ -53,9 +53,9 @@ string *class_skills()
 
 int skill_points() { return 5; }
 
-string old_save_type() { return "bard"; }
+string old_save_type() { return "cleric"; }
 
-string new_save_type() { return "bard"; }
+string new_save_type() { return "cleric"; }
 
 void advanced_func(object player)
 {

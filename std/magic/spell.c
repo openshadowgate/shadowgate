@@ -2445,6 +2445,14 @@ object *target_filter(object *targets)
                 }
                 return newtargs;
             }
+            if(stringp(get_save()) && (get_save() == "fort" || get_save() == "will"))
+            {
+                for(i=0;i<sizeof(targets);i++)
+                {
+                    if(!stalwart_splash(targets[i])) { newtargs += ({ targets[i] }); }
+                }
+                return newtargs;
+            }
         }
     }
 
@@ -2551,6 +2559,12 @@ int light_armor_filter(object ob) {
     return 0;
 }
 
+int medium_armor_filter(object ob) {
+    if(!objectp(ob)) { return 0; }
+    if((string)ob->query_armor_prof() == "medium") { return 1; }
+    return 0;
+}
+
 int evade_splash(object splashtarg) {
    object *worn;
    int evbonus = 0;
@@ -2567,6 +2581,22 @@ int evade_splash(object splashtarg) {
 
    tell_object(splashtarg,"%^BOLD%^%^WHITE%^You scramble out of the spell's path!%^RESET%^");
    tell_room(place,"%^BOLD%^%^WHITE%^"+splashtarg->QCN+" scrambles out of spell's path!%^RESET%^",splashtarg);
+   return 1;
+}
+
+int stalwart_splash(object splashtarg) {
+   object *worn;
+   int evbonus = 0;
+
+   if(!FEATS_D->usable_feat(splashtarg,"stalwart")) return 0; // can't evade without the feat active!
+   worn = splashtarg->all_armour();
+   worn = distinct_array(worn);
+   worn = filter_array(worn,"medium_armor_filter",TO);
+
+   if(!do_save(splashtarg,evbonus)) return 0;
+
+   tell_object(splashtarg,"%^BOLD%^%^WHITE%^You endure the spell!%^RESET%^");
+   tell_room(place,"%^BOLD%^%^WHITE%^"+splashtarg->QCN+" endures through the spell!%^RESET%^",splashtarg);
    return 1;
 }
 

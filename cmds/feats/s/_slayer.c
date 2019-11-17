@@ -13,7 +13,7 @@ void create() {
     feat_name("slayer");
     feat_syntax("slayer JUDGEMENT");
     feat_prereq("Inquisitor L17");
-    feat_desc("");
+    feat_desc("This feat represents inquisitors specialization. He can choose a type of judgement to empower: juch judgement will be used as if inqusitor was five levels above.");
     permanent(1);
     allow_tripped(1);
 }
@@ -23,16 +23,16 @@ int cmd_slayer(string args)
     int cancastflag;
     string * myclasses, myclass;
 
-    if(TP->query("slayer_change") > time() - 60*60*24)
+    if(TP->query("slayer_change") > time() - 60*60*24*7)
     {
-        write("%^BOLD%^%^WHITE%^You can change your slayer judgement only once in a day.");
+        write("%^BOLD%^%^WHITE%^You can change your slayer judgement only once in a week.");
         return 1;
     }
     JUDGEMENT_TYPES = "/cmds/feats/obj/judgement"->query_judgement_types();
 
     if(member_array(args,JUDGEMENT_TYPES)==-1)
     {
-        write("%^BOLD%^%^RED%^No such judgement.%^RESET%^");
+        write("%^BOLD%^%^RED%^No such judgement. Allowed types are: %^RESET%^"+implode(JUDGEMENT_TYPES," "));
         return 1;
     }
 

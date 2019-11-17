@@ -10,7 +10,7 @@ void create()
     feat_category("Inquisition");
     feat_name("third judgement");
     feat_prereq("Inquisitor L8");
-    feat_desc("An inquisitor learns to proclaim a third judgement lonside the first during the combat.");
+    feat_desc("The inquisitor learns to proclaim a third judgement lonside the first during the combat.");
     permanent(1);
 }
 

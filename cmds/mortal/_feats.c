@@ -70,7 +70,9 @@ int remove_spell_mastery_spell(string str,object ob,string feat,string mytype){
     for(i = 0;i<sizeof(myclasses);i++) {
         if((int)spell->query_spell_level(myclasses[i]) > 0 && (int)spell->query_spell_level(myclasses[i]) < 3) {
             okclasses += ({ myclasses[i] }); // classes that allow it as a L1-2 spell only
-            if(myclasses[i] == "bard" || myclasses[i] == "sorcerer") { num++; }
+            if(myclasses[i] == "bard" ||
+               myclasses[i] == "inquisitor" ||
+               myclasses[i] == "sorcerer") { num++; }
         }
     }
 
@@ -153,7 +155,9 @@ int spell_mastery_spell(string str,object ob,string feat,string mytype){
         if(level < 3)
         {
             okclasses += ({ myclasses[i] });
-            if(myclasses[i] == "bard" || myclasses[i] == "sorcerer") { num++; }
+            if(myclasses[i] == "bard" ||
+               myclasses[i] == "inquisitor" ||
+               myclasses[i] == "sorcerer") { num++; }
             continue;
         }
         if(myclasses[i] != "mage" && myclasses[i] != "archmage") { continue; }

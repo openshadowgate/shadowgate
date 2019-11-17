@@ -1503,6 +1503,7 @@ void display_feats(object ob,object targ, string mytype)
     }
 
     if(!targ->is_class("bard") && !avatarp(targ)) { currentlist -= ({ "Performance" }); }
+    if(!targ->is_class("inquisitor") && !avatarp(targ)) { currentlist -= ({ "Inquisition" }); }
     if(!targ->is_class("druid") && !avatarp(targ)) { currentlist -= ({ "WildernessLore" }); currentlist -= ({ "SavageCombat" }); }
     if(!targ->is_class("psion") && !targ->is_class("psywarrior") && !avatarp(targ)) { currentlist -= ({ "Psionics" }); }
     if(!targ->is_class("fighter") && !targ->is_class("cavalier") && !targ->is_class("paladin") && !targ->is_class("antipaladin") && !avatarp(targ)) { currentlist -= ({ "WeaponMastery" }); }

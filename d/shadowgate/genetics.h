@@ -52,6 +52,7 @@
                             "druid" : (["strength" : 18, "wisdom" : 18, "constitution" : 18, "dexterity" : 12, "intelligence" : 13, "charisma" : 13]),\
                             "warlock" : (["charisma" : 18, "constitution" : 18, "strength" : 16, "dexterity" : 13, "intelligence" : 14, "wisdom" : 13]),\
                             "bard" : (["charisma" : 18, "constitution" : 18, "dexterity" : 18, "strength" : 14, "intelligence" : 12, "wisdom" : 12]),\
+                            "inquisitor" : (["charisma" : 18, "constitution" : 18, "dexterity" : 14, "strength" : 18, "intelligence" : 12, "wisdom" : 12]),\
                             "sorcerer" : (["charisma" : 18, "constitution" : 18, "intelligence" : 14, "dexterity" : 16, "strength" : 14, "wisdom" : 12]),\
                             "barbarian" : (["strength" : 18, "constitution" : 18, "dexterity" : 16, "wisdom" : 14, "intelligence" : 13, "charisma" : 13]),\
                             "thief" : (["dexterity" : 18, "constitution" : 18, "strength" : 15, "intelligence" : 15, "wisdom" : 13, "charisma" : 13]),\

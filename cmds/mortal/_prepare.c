@@ -228,7 +228,9 @@ int cmd_prepare(string str)
         times = 1;
     }
 
-    if(myclass != "bard" && myclass != "sorcerer")
+    if(myclass != "bard" &&
+       myclass != "sorcerer" &&
+       myclass != "inquisitor")
     {
         if (member_array(spellname, magic) == -1) { return notify_fail("You don't know of a spell named " + spellname + " to prepare.\n"); }
     }
@@ -239,7 +241,9 @@ int cmd_prepare(string str)
 
     if (times < 1) { return notify_fail("You need to memorize " + spellname + " at least once.\n"); }
 
-    if (myclass != "bard" && myclass != "sorcerer") { sl = spells[spellname]; }
+    if (myclass != "bard" &&
+        myclass != "inquisitor" &&
+        myclass != "sorcerer") { sl = spells[spellname]; }
 
     rst = TP->can_memorize(myclass,spellname);
     if (rst == TOO_MANY)            { return notify_fail("You have prepared all of the spells that you are allowed at this level.\n"); }
@@ -377,13 +381,12 @@ int max_allowed(object obj, string myclass, int level)
         stat = "wisdom";
         break;
 
-    case "bard": case "sorcerer":
+    case "bard": case "sorcerer": case "inquisitor":
 
         stat = "charisma";
         break;
 
     default:
-
         stat = "intelligence";
         break;
     }
@@ -778,7 +781,7 @@ void check_list(object obj, string list, string myclass)
         return;
     if (!stringp(myclass) || myclass == "" || myclass == " ")
         return;
-    if (myclass == "bard" || myclass == "sorcerer")
+    if (myclass == "bard" || myclass == "sorcerer" || myclass == "inquisitor")
         return;
 
     lists = get_lists(obj);
@@ -906,7 +909,9 @@ int add_spell_to_list(object obj, string spell, string list, string myclass)
     lists = get_lists(obj);
     current_list = get_current_list(lists, list);
 
-    if(myclass == "sorcerer" || myclass == "bard")
+    if(myclass == "sorcerer" ||
+       myclass == "inquisitor" ||
+       myclass == "bard")
         spell_level = to_int(replace_string(spell,"level ",""));
     else
         spell_level = MAGIC_D->query_spell_level(myclass, spell);

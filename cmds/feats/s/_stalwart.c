@@ -4,20 +4,19 @@ inherit FEAT;
 
 void create() {
     ::create();
-    feat_type("permanent");
-    feat_category("Presence");
-    feat_name("force of personality");
-    feat_desc("This passive feat grants an additional amount  equivalent to the character's charisma bonus, to all of their saving throws.");
-    feat_prereq("Indomitable");
+    feat_type("premanent");
+    feat_category("DamageResistance");
+    feat_name("stalwart");
+    feat_prereq("Improved toughness");
+    feat_desc("This passive feat grants the character the ability to entirely avoid damage from certain spells. Any spell that allows damage to be halved by a successful fortitude or will save, will instead cause no damage if the save is made. A failed save will still result in full damage being taken. This feat is only effective in medium armor.");
     permanent(1);
-    set_required_for(({"unyielding soul","leadership"}));
 }
 
 int allow_shifted() { return 1; }
 
 int prerequisites(object ob){
     if(!objectp(ob)) return 0;
-    if(!FEATS_D->has_feat(ob,"indomitable")&&!ob->is_class("inquisitor")) {
+    if(!FEATS_D->has_feat(ob,"improved toughness")&&!ob->is_class("inquisitor")) {
       dest_effect();
       return 0;
     }

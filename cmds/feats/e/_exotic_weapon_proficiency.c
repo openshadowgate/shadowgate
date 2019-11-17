@@ -20,7 +20,7 @@ int prerequisites(object ob)
 {
    if(!objectp(ob)) {return 0; }
 
-   if(!FEATS_D->has_feat(ob,"martial weapon proficiency"))
+   if(!FEATS_D->has_feat(ob,"martial weapon proficiency")&&!ob->is_class("inquisitor"))
    {
       dest_effect();
       return 0;
@@ -54,4 +54,3 @@ void dest_effect()
    remove_feat(TO);
    return;
 }
-

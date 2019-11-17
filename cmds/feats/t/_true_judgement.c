@@ -103,7 +103,7 @@ void execute_feat()
     caster->set_property("using instant feat",1);
 
     tell_object(caster, "%^RESET%^%^BLUE%^You point a finger at "+target->QCN+" and proclaim the true judgement.%^RESET%^");
-    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" points a finger at "+target->QCN+" and proclaims the judgement of death.%^RESET%^");
+    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" points a finger at "+target->QCN+" and proclaims the judgement of death.%^RESET%^",caster);
     return;
 }
 
