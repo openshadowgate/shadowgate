@@ -5,12 +5,12 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_author("pator");
     set_spell_name("cleanse disease");
-    set_spell_level(([ "cleric" : 4, "bard" : 4, "paladin" : 4, "ranger" : 3, "druid" : 3 ]));
+    set_spell_level(([ "cleric" : 4, "bard" : 4, "paladin" : 4, "ranger" : 3, "druid" : 3,"inquisitor":3 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS cleanse disease on TARGET");
     set_description("This spell will attempt to cleanse any diseases present on the TARGET. Success is based on "+
@@ -22,11 +22,11 @@ void create()
 	set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     string cast;
 
-    if (interactive(CASTER)) 
+    if (interactive(CASTER))
     {
          cast = "%^CYAN%^"+YOU+" starts to intone a long "+
 		" incantation!";
@@ -36,11 +36,11 @@ string query_cast_string()
     }
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     string res;
 	tell_room(place, "%^BOLD%^%^WHITE%^A brilliant white aura briefly envelopes "+HIM+"!",({caster, target}));
-    if (interactive(caster)) 
+    if (interactive(caster))
     {
         if (target!=caster)
         {
@@ -50,7 +50,7 @@ void spell_effect(int prof)
 
     }
     if(living(target)) tell_object(target, "%^BOLD%^%^WHITE%^A brilliant white aura envelopes you as "+caster->QCN+" attempts to cleanse you!%^RESET%^");
-    res = DISEASE_D->cure_diseases(caster, target);    	
+    res = DISEASE_D->cure_diseases(caster, target);
     if(res == "")
     {
         tell_room(place, HIM+" appears no different", ({target}));
@@ -66,7 +66,7 @@ void spell_effect(int prof)
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

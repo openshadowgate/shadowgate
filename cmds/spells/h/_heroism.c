@@ -10,7 +10,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("heroism");
-    set_spell_level(([ "mage" : 3, "bard" : 4 ]));
+    set_spell_level(([ "mage" : 3, "bard" : 4,"inquisitor":3 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS heroism [on TARGET]");
     set_damage_desc("+2 to attack bonus, saving throws, skills");

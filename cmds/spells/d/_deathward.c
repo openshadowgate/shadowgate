@@ -4,11 +4,11 @@ inherit SPELL;
 
 object skin;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("deathward");
-    set_spell_level(([ "paladin" : 4,"druid" : 5 ]));
+    set_spell_level(([ "paladin" : 4,"druid" : 5,"inquisitor":4 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS deathward");
     set_description("Those most blessed of the gods can call upon their favor to ward away the very hand of death itself."
@@ -21,7 +21,7 @@ void create()
 
 int preSpell()
 {
-    if(caster->query_property("no death")) 
+    if(caster->query_property("no death"))
     {
         tell_object(caster,"You are already under the influence of a similar effect.");
         return 0;
@@ -35,7 +35,7 @@ string query_cast_string() { return "%^RED%^"+caster->QCN+" invokes "+caster->QP
 
 void spell_effect(int prof)
 {
-    if (!objectp(caster) || !objectp(place)) 
+    if (!objectp(caster) || !objectp(place))
     {
         dest_effect();
         return;
@@ -50,9 +50,9 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
-    if(objectp(caster)) 
+    if(objectp(caster))
     {
         tell_object(caster,"%^BOLD%^%^WHITE%^You feel the protection of your god fade from you.%^RESET%^");
         caster->set_property("no death",-1);

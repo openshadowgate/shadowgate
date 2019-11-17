@@ -10,7 +10,7 @@ int reversed;
 void create() {
     ::create();
     set_spell_name("stoneskin");
-    set_spell_level(([ "mage" : 4,"druid" : 5, "monk" : 11]));
+    set_spell_level(([ "mage" : 4,"druid" : 5, "monk" : 11,"inquisitor":4]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS stoneskin on TARGET");
     set_description("This spell causes the target to take less damage from to a certain number of attacks, based on the level of "

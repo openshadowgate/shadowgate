@@ -5,7 +5,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("remove paralysis");
-    set_spell_level(([ "cleric" : 3, "paladin" : 2 ]));
+    set_spell_level(([ "cleric" : 3, "paladin" : 2, "inquisitor" : 2 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS remove paralysis on TARGET");
     set_description("This spell will remove any paralysis from its target. Negates hold spells, and paralysis spells.");

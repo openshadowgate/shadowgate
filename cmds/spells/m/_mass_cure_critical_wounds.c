@@ -5,7 +5,7 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("mass cure critical wounds");
-    set_spell_level(([ "cleric" : 8,"druid" : 9 ]));
+    set_spell_level(([ "cleric" : 8,"druid" : 9,"inquisitor":5 ]));
     set_affixed_spell_level(8);
     set_spell_sphere("healing");
     set_syntax("cast CLASS mass cure critical wounds on TARGET");

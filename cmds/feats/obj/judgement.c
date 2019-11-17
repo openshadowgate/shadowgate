@@ -114,7 +114,7 @@ void judgement_purity(int direction, int power)
 void judgement_resiliency(int direction, int power)
 {
     int bonus;
-    bonus = power / 5 + 1;
+    bonus = power + 1;
     caster->set_property("spell damage resistance",bonus*direction);
 }
 

@@ -7,7 +7,7 @@ int lower;
 void create() {
     ::create();
     set_spell_name("true strike");
-    set_spell_level(([ "mage" : 1 ]));
+    set_spell_level(([ "mage" : 1, "inquisitor" : 1 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS true strike on TARGET");
     set_description("Gaining insight on future events, caster can grant anyone knowledge of how to exploit it to make a strikes unlikely to miss for the next one round.

@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("undeath is death");
-    set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6,"inquisitor":6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS undeath is death");
     set_damage_desc("positive energy to undead");

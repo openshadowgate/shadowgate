@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("cythera/pator");
     set_spell_name("magic vestments");
-    set_spell_level(([ "cleric" : 4 ]));
+    set_spell_level(([ "cleric" : 4,"inquisitor" : 3 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS magic vestments");
     set_description("Calling for a blessing from their deity, the cleric can recieve magical vestments that will protect "
@@ -29,7 +29,7 @@ int preSpell() {
     int j, i, flag;
     armour = caster->query_armour("torso");
     j = sizeof(armour);
-    for (i=0;i<j;i++) 
+    for (i=0;i<j;i++)
     {
         if(!FEATS_D->usable_feat(caster,"armored caster"))
         {
@@ -43,7 +43,7 @@ int preSpell() {
     if(flag) {
         tell_object(caster,"%^BOLD%^You are already wearing armour!%^RESET%^");
         return 0;
-    }    
+    }
 	if((vestments=present("vestments",CASTER))&&vestments!=TO){
    	tell_object(CASTER,"You have already recieved the protection from"+
 	""+capitalize(CASTER->query_diety())+".");

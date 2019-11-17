@@ -8,7 +8,7 @@ int lower;
 void create() {
     ::create();
     set_spell_name("protection from spells");
-    set_spell_level(([ "mage" : 8 ]));
+    set_spell_level(([ "mage" : 8,"inquisitor":5 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS protection from spells on TARGET");
     set_description("Using this power will allow a mage or sorcerer to temporarily raise the target's "

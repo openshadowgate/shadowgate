@@ -9,7 +9,7 @@ mixed endplace;
 void create(){
     ::create();
     set_spell_name("succor");
-    set_spell_level(([ "cleric" : 9 ]));
+    set_spell_level(([ "cleric" : 9,"inquisitor":4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS succor to DESTINATION");
     set_description("The succor spell will transport the priest to a location that he or she has remembered from the "

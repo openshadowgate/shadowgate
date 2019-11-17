@@ -8,7 +8,7 @@ create() {
     ::create();
     set_author("pator");
     set_spell_name("remove blindness");
-    set_spell_level(([ "cleric" : 3, "paladin" : 3,"druid" : 3 ]));
+    set_spell_level(([ "cleric" : 3, "paladin" : 3,"druid" : 3, "inquisitor" : 2 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS remove blindness on TARGET");
     set_description("When you cast this spell you can bring more light into the eyes of the target. You can't cure "

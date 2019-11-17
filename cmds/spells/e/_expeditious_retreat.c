@@ -6,7 +6,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("expeditious retreat");
-    set_spell_level(([ "bard" : 1, "mage" : 1 ]));
+    set_spell_level(([ "bard" : 1, "mage" : 1, "inquisitor":1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS expeditious retreat on <direction>");
     set_description("By means of this spell, the caster increases their movement speed dramatically for a few seconds, in "

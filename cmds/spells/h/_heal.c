@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("heal");
-    set_spell_level(([ "cleric" : 6, "druid" : 7 ]));
+    set_spell_level(([ "cleric" : 6, "druid" : 7,"inquisitor":6 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS heal on TARGET");
     set_damage_desc("positive energy");

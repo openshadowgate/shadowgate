@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("circle of death");
-    set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6, "inquisitor":6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS circle of death");
     set_damage_desc("negative energy to living");

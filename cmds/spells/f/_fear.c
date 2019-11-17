@@ -14,7 +14,7 @@ void create()
 {
     ::create();
     set_spell_name("fear");
-    set_spell_level(([ "cleric" : 5, "bard" : 3, "mage" : 4, "psion" : 6 ]));
+    set_spell_level(([ "cleric" : 5, "bard" : 3, "mage" : 4, "psion" : 6, "inquisitor":4 ]));
     set_spell_sphere("enchantment_charm");
     set_spell_domain("tyranny");
     set_syntax("cast CLASS fear");

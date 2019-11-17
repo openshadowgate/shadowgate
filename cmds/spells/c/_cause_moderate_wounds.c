@@ -6,7 +6,7 @@ void create() {
     ::create();
     set_author("cythera");
     set_spell_name("cause moderate wounds");
-    set_spell_level(([ "cleric" : 2,"paladin":2 ]));
+    set_spell_level(([ "cleric" : 2,"paladin":2, "inquisitor" : 2 ]));
     set_affixed_spell_level(2);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS cause moderate wounds on TARGET");

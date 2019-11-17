@@ -7,7 +7,7 @@ object feattracker1, feattracker2;
 void create() {
     ::create();
     set_spell_name("divine favor");
-    set_spell_level(([ "paladin" : 3 ]));
+    set_spell_level(([ "paladin" : 3, "inquisitor":1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS divine favor");
     set_description("Calling upon the strength of their patron, a holy knight can gain a bonus to attack and damage rolls.  This spell does not stack with fighter feats for bonus attack and damage rolls.");

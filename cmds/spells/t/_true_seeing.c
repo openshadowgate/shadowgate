@@ -15,7 +15,7 @@ void see_changes();
 void create() {
     ::create();
     set_spell_name("true seeing");
-    set_spell_level(([ "cleric" : 2,"druid" : 7, "mage" : 7 ]));
+    set_spell_level(([ "cleric" : 2,"druid" : 7, "mage" : 7,"inquisitor":5 ]));
     set_spell_sphere("divination");
     set_spell_domain("magic");
     set_syntax("cast CLASS true seeing");

@@ -782,6 +782,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
     else if(!weapon || weapon == attacker || attacker->query_property("shapeshifted"))
     {
+
         if(attacker->query_unarmed_damage())
         {
             damage = get_hand_damage(attacker, (string)attacker->return_target_limb(), damage, targ);
@@ -793,6 +794,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
             if(targ->query_unconscious() || targ->query_bound()) { damage = 4; }
             else damage = random(4);
         }
+
         if(FEATS_D->usable_feat(attacker,"weapon finesse"))
             damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
         else damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("strength"));
@@ -1479,8 +1481,11 @@ int calculate_unarmed_damage(object attacker)
             case 21..30:
                 return roll_dice(1,8);
                 break;
-            case 31..50:
+            case 31..40:
                 return roll_dice(1,10);
+                break;
+            case 41..50:
+                return roll_dice(1,12);
                 break;
         }
     }

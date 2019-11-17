@@ -10,7 +10,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("greater invisibility");
-    set_spell_level(([ "mage" : 4, "bard" : 4, "assassin" : 4 ]));
+    set_spell_level(([ "mage" : 4, "bard" : 4, "assassin" : 4,"inquisitor":4 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS greater invisibility");
     set_description("This spell, available only to masters of illusion, allows the caster to enhance the normally fragile "
@@ -46,7 +46,7 @@ void spell_effect(int prof) {
       tell_room(place,"%^MAGENTA%^"+caster->QCN+" lets out a gentle %^CYAN%^t%^GREEN%^r%^CYAN%^i%^GREEN%^l%^CYAN%^l%^MAGENTA%^. "
 "Even as the sound escapes "+caster->QP+" lips "+caster->QS+" starts %^RESET%^fading %^MAGENTA%^away!%^RESET%^",caster);
     }
-    addSpellToCaster();    
+    addSpellToCaster();
     call_out("targ_vanish",2);
 }
 

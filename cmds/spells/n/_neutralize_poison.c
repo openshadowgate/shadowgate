@@ -4,7 +4,7 @@ inherit SPELL;
 create() {
     ::create();
     set_spell_name("neutralize poison");
-    set_spell_level(([ "cleric" : 4, "bard" : 4, "paladin" : 4, "ranger" : 3, "druid" : 3 ]));
+    set_spell_level(([ "cleric" : 4, "bard" : 4, "paladin" : 4, "ranger" : 3, "druid" : 3,"inquisitor":4 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS neutralize poison on TARGET");
     set_description("This spell will attempt to remove any poisons on the target. The power of "+
@@ -16,7 +16,7 @@ create() {
 	set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     string cast;
     if ( interactive(CASTER) )
@@ -26,7 +26,7 @@ string query_cast_string()
     return cast;
 }
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
  	mixed tmp;
     int duration,level;
@@ -35,36 +35,36 @@ spell_effect(int prof)
     level += roll_dice(1,20);
     //level = CASTER->query_level() + (CASTER->query_level()/7);
 
-	
-    if ( interactive(CASTER) ) 
+
+    if ( interactive(CASTER) )
     {
         set_cast_string(YOU+" prays for a divine spell !\n");
 
         tell_object(CASTER, "You cast neutralize poison on "+HIM+".");
         tell_room(PLACE,YOU+" casts a spell on "+HIM+".",({ CASTER, TARGET}) );
-        if(!POISON_D->is_poisoned(TARGET)) 
-		{	
-            if(CASTER != TARGET) 
+        if(!POISON_D->is_poisoned(TARGET))
+		{
+            if(CASTER != TARGET)
             {
                 tell_object(CASTER, HIM+" is not poisoned!");
                 tell_object(TARGET, "You are not poisoned, "+YOU+"'s spell fails "+
-                "to neutralize anything."); 
+                "to neutralize anything.");
             }
             else
-            { 
+            {
                 tell_object(CASTER, "You are not poisoned!");
             }
         }
-        else 
+        else
         {
             tmp = POISON_D->clear_poisons_by_dc(TARGET, level, 0);
-            if(!tmp) 
+            if(!tmp)
             {
                 if(CASTER != TARGET)
                 {
                     tell_object(CASTER, "You are unable to neutralize the "+
 					"poison affecting "+HIM+"!");
-					if(interactive(TARGET)) 
+					if(interactive(TARGET))
 					{
 						tell_object(TARGET, YOU+" is unable to neutralize the "+
 						"poison affecting you!");
@@ -82,11 +82,11 @@ spell_effect(int prof)
 				{
 					tell_object(CASTER, "You neutralize the following from "+HIM+". "+
 					tmp);
-					if(interactive(TARGET)) 
+					if(interactive(TARGET))
 					{
 						tell_object(TARGET, YOU+" neutralizes the following poison "+
 						"affecting you. "+tmp);
-					}	
+					}
 				}
 				else
 				{
@@ -94,15 +94,15 @@ spell_effect(int prof)
 					"affecting you. "+tmp);
 				}
 			}
-		}        	
-    } 
-	else 
+		}
+    }
+	else
 	{
         tell_room(PLACE,YOU+" casts a spell on "+HIM+".",({ CASTER}) );
         if (interactive(TARGET))
 		{
 
-			if(!POISON_D->is_poisoned(TARGET)) 
+			if(!POISON_D->is_poisoned(TARGET))
 			{
             		tell_object(TARGET, "You are not poisoned, "+YOU+"'s spell fails "+
 				"to neutralize anything.");
@@ -110,7 +110,7 @@ spell_effect(int prof)
 			else
 			{
 				tmp = POISON_D->clear_poisons_by_dc(TARGET, level, 0);
-				if(!tmp) 
+				if(!tmp)
 				{
 					tell_object(TARGET, YOU+" is unable to neutralize the "+
 					"poison affecting you!");

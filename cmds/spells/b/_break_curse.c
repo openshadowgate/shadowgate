@@ -7,7 +7,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("break curse");
-    set_spell_level(([ "mage" : 4, "bard" : 4, "paladin" : 3, "cleric" : 8 ]));
+    set_spell_level(([ "mage" : 4, "bard" : 4, "paladin" : 3, "cleric" : 8,"inquisitor":3 ]));
     set_spell_sphere("abjuration");
     set_spell_domain("magic");
     set_syntax("cast CLASS break curse on <object> [at <player>]");

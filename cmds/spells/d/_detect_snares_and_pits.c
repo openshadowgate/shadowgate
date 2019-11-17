@@ -16,7 +16,7 @@ void create() {
     ::create();
     set_author("circe");
     set_spell_name("detect snares and pits");
-    set_spell_level(([ "druid" : 1, "ranger" : 1 ]));
+    set_spell_level(([ "druid" : 1, "ranger" : 1, ]));
     set_spell_sphere("alteration");
     set_syntax ("cast CLASS detect snares and pits");
     set_description("Upon casting this spell, the caster's chance "

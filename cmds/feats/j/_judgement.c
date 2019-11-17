@@ -29,7 +29,9 @@ The list of judgements to choose from:
 
 %^BOLD%^Purity:%^RESET%^ The inquisitor is protected from the vile taint of her foes, gaining a sacred bonus to all saves, worth of a point per every five levels.
 
-%^BOLD%^Resiliency:%^RESET%^ This judgment makes the inquisitor resistant to harm, granting them one point of spell damage resistance per five levels.
+%^BOLD%^Resiliency:%^RESET%^ This judgment makes the inquisitor resistant to harm, granting him one point of spell damage resistance per level.
+
+%^BOLD%^See also:%^RESET%^ status effects
 ");
 //    set_required_for(({"second judgement","third judgement"}));
     set_target_required(0);

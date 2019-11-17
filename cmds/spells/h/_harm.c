@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("harm");
-    set_spell_level(([ "cleric" : 6 ]));
+    set_spell_level(([ "cleric" : 6,"inquisitor":6 ]));
     set_affixed_spell_level(6);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS harm on TARGET");
