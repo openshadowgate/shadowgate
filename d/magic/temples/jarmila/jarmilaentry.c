@@ -21,7 +21,7 @@ void create() {
    set_smell("default","The sweet smell of flowers fills the air.");
    set_listen("default","Gentle music drifts from somewhere in the temple.");
    set_exits(([
-      "south": "/d/antioch/antioch2/rooms/trail5",
+      "southeast": "/d/antioch/antioch2/rooms/trail6",
       "temple": "/d/magic/temples/jarmila/jarmila",
    ]));
 }
