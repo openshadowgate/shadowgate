@@ -869,6 +869,8 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
 
     skill = skill + roll;
 
+    skill += "/daemon/bonus_d.c"->query_stat_bonus(tp,"inelligence");
+
     if(flag) // external check, used for disenchanting, unsure if we need fail/pass messages for that
     {
         if(roll == 1 || (DC > skill)) { return 0; }
