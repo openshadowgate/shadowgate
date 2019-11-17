@@ -184,11 +184,11 @@ void execute_attack()
                 tell_room(environment(caster),"%^BOLD%^%^GREEN%^"+caster->QCN+" lands a series of kicks on "+caster->QP+" foes!",({target,caster}));
                 break;
             case 1:
-                tell_object(caster,"%^BOLD%^%^BLUE%^You spin quickly striking your opponets with a series of well placed kicks!");
+                tell_object(caster,"%^BOLD%^%^BLUE%^You spin quickly striking your opponents with a series of well placed kicks!");
                 tell_room(environment(caster),"%^BOLD%^%^BLUE%^"+caster->QCN+" spins quickly striking "+caster->QP+" opponents with a series of well placed kicks!",({target,caster}));
                 break;
             case 2:
-                tell_object(caster,"%^RESET%^%^GREEN%^You spin about rapidly picking up speed as you slam into your opponets with a series of kicks!");
+                tell_object(caster,"%^RESET%^%^GREEN%^You spin about rapidly picking up speed as you slam into your opponents with a series of kicks!");
                 tell_room(environment(caster),"%^RESET%^%^GREEN%^"+caster->QCN+" seems to pick up speed as "+caster->QS+" spins about rapidly and slams "+caster->QP+" opponents with a series of kicks!",({target,caster}));
                 break;
             case 3:
