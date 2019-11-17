@@ -9,10 +9,11 @@ void create()
     feat_type("instant");
     feat_category("PaleLord");
     feat_name("death touch");
-    feat_syntax("death_touch TARGET");
+    feat_syntax("death_touch [TARGET]");
     feat_prereq("Pale Lord L7");
-    feat_desc("A final step for Pale Lord is to construct a conduit, a point he can release the power of the death itself. To do so he cuts off own hand, treats it with mummifying solutions, then lays a network of fell spells over it and attaches it back. Such hand can release negative energy on demand, ripping the souls of living and healing the undead.");
-    set_target_required(1);
+    feat_desc("A final step for Pale Lord is to construct a conduit, a point he can release the power of the death itself. To do so he cuts off own hand, treats it with mummifying solutions, then lays a network of fell spells over it and attaches it back. Such hand can release negative energy on demand, ripping the souls of living and healing the undead.
+
+If used without an argument this feat will pick up a random attacker.");
     set_save("will");
 }
 
@@ -33,7 +34,6 @@ int cmd_death_arrow(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -45,11 +45,21 @@ void execute_feat()
     object *weapons;
     int x;
     ::execute_feat();
+    tempmap = caster->query_property("using death touch");
     if(!objectp(target))
     {
-        tell_object(caster, "That is not here!");
-        dest_effect();
-        return;
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
     }
     if(!objectp(caster))
     {
@@ -80,7 +90,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    tempmap = caster->query_property("using death touch");
+
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())

@@ -11,8 +11,8 @@ void create()
     set_terrain(STONE_BUILDING);
     set_travel(PAVED_ROAD);
 	set_long(
-	"You are standing in the Offestry library, a quiet building on the north side of"+
-	" town. There are few windows here, the room is mostly lit by oil lamps that hang"+
+	"You are in the Offestry library, a quiet building on the south side of"+
+	" the street. There are few windows here, the room is mostly lit by oil lamps that hang"+
 	" on the walls and from the ceiling. There are rows of shelves filled with books."+
 	" Some of the books appear to be very ancient and worn, others seem much newer and"+
 	" only have a thin lair of dust on them. It doesn't seem like this place gets many"+

@@ -71,7 +71,7 @@ void ready(string str)
         switch(TP->query_level()) 
         {
             case 0..3:  
-                tell_room(TP, "%^YELLOW%^As leave the protection of the city, "+
+                tell_room(TP, "%^YELLOW%^As you leave the protection of the city, "+
                 "you realize it might be wise to wield your weapons and be prepared "+
                 "for battle.%^RESET%^");
                 break;
