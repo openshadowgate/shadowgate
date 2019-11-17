@@ -11,8 +11,9 @@ void create()
     feat_name("quivering palm");
     feat_syntax("quivering_palm TARGET");
     feat_prereq("Monk L17, Way of The Fist or Grandmaster of The Way");
-    feat_desc("A monk specialized in the way of the fist, that is unarmored and unarmed, or wielding small weapons, may attempt a quivering palm attack on a target. In order for the attempt to be successful the monk must have at least 3 available Ki and must land a touch attack on the target. If successful a brief period of time later the target must roll a successful fortitude saving throw or be set to 0 health. Against certain monsters or if the saving throw is successful the target will take 1d8 damage per monk level.");
-    set_target_required(1);
+    feat_desc("A monk specialized in the way of the fist, that is unarmored and unarmed, or wielding small weapons, may attempt a quivering palm attack on a target. In order for the attempt to be successful the monk must have at least 3 available Ki and must land a touch attack on the target. If successful a brief period of time later the target must roll a successful fortitude saving throw or be set to 0 health. Against certain monsters or if the saving throw is successful the target will take 1d8 damage per monk level.
+
+If used without an argument this feat will pick up a random attacker.");
     set_save("fort");
 }
 
@@ -44,11 +45,7 @@ int cmd_quivering_palm(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
-    if(!TP->is_class("monk")) return 0;
-    if((int)TP->query_class_level("monk") < 17) return 0;
     if((string)TP->query("monk way") != "way of the fist" && !FEATS_D->usable_feat(TP, "grandmaster of the way")) return 0;
-    if((int)TP->query_alignment() > 3) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -184,11 +181,24 @@ void execute_attack()
     }
     caster->remove_property("using instant feat");
     ::execute_attack();
+    tempmap = caster->query_property("using quivering palm");
+
     if(!objectp(target))
     {
-        dest_effect();
-        return;
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
     }
+
     if(caster->query_unconscious())
     {
         dest_effect();
@@ -214,7 +224,7 @@ void execute_attack()
         return;
     }
 
-    tempmap = caster->query_property("using quivering palm");
+
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
     keyz = keys(tempmap);

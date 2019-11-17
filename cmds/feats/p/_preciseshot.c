@@ -12,8 +12,9 @@ void create() {
     feat_name("preciseshot");
     feat_prereq("Deadeye");
     feat_syntax("preciseshot TARGET");
-    feat_desc("The character can attempt to fire a shot at a foe with as much of their accuracy behind it as they can, in the hope of dealing heavier damage and making them stumble. Holding a weapon in one position requires some amount of dexterity, as well as proper aiming. Weapon might slip and thus lead to missfire!");
-    set_target_required(1);
+    feat_desc("The character can attempt to fire a shot at a foe with as much of their accuracy behind it as they can, in the hope of dealing heavier damage and making them stumble. Holding a weapon in one position requires some amount of dexterity, as well as proper aiming. Weapon might slip and thus lead to missfire!
+
+If used without an argument this feat will pick up a random attacker.");
     set_save("reflex");
     set_required_for(({"shot on the run"}));
 }
@@ -30,7 +31,6 @@ int prerequisites(object ob){
 int cmd_preciseshot(string str) {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -45,6 +45,21 @@ void execute_feat() {
         return;
     }
     tempmap = caster->query_property("using preciseshot");
+    if(!objectp(target))
+    {
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to impale.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
+    }
     if(mapp(tempmap)) {
         if(tempmap[target] > time()) {
           tell_object(caster,"That target is still wary of such an attack!");

@@ -16,9 +16,10 @@ void create()
     feat_prereq("Sweeping Blow, Blade block or Parry");
     feat_desc("The Impale feat has a chance of impaling your target or staggering them back into another attacker. Both targets will take damage and have a chance to be stunned.
 
+If used without an argument this feat will pick up a random attacker. Be aware that this power affects multiple targets.
+
 A druid with the 'mastery of fang and claw' feat may also use this feat while in dragon form, even if it has not been purchased directly.");
     set_save("fort");
-    set_target_required(1);
     set_required_for(({"light weapon","strength of arm"}));
 }
 
@@ -44,7 +45,6 @@ int cmd_impale(string str)
 {
     object feat;
     if(!objectp(TP)) { return 0; }
-    if(!stringp(str)) { return 0; }
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -61,6 +61,22 @@ void execute_feat()
     {
         dest_effect();
         return;
+    }
+    tempmap = caster->query_property("using impale");
+    if(!objectp(target))
+    {
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to impale.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
     }
     if((int)caster->query_property("using instant feat")) {
         tell_object(caster,"You are already in the middle of using a feat!");
@@ -87,7 +103,7 @@ void execute_feat()
         return;
       }
     }
-    tempmap = caster->query_property("using impale");
+
     if(mapp(tempmap)) {
         if(tempmap[target] > time()) {
           tell_object(caster,"That target is still wary of such an attack!");

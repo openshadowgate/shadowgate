@@ -10,9 +10,11 @@ void create()
     feat_category("Duelist");
     feat_name("swipe");
     feat_prereq("Opportunity strikes");
-    feat_syntax("swipe TARGET");
-    feat_desc("With this characters can perform a tactical swipe, aming their weapon at an opponent with precision and strength put into strike.");
-    set_target_required(1);
+    feat_syntax("swipe [TARGET]");
+    feat_desc("With this characters can perform a tactical swipe, aming their weapon at an opponent with precision and strength put into strike.
+
+If used without an argument this feat will pick up a random attacker.
+");
     set_save("reflex");
 }
 
@@ -31,7 +33,6 @@ int cmd_swipe(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -62,6 +63,24 @@ void execute_feat()
         dest_effect();
         return;
     }
+
+    tempmap = caster->query_property("using swipe");
+
+    if(!objectp(target))
+    {
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to swipe.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
+    }
     if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
     {
         caster->send_paralyzed_message("info",caster);
@@ -86,19 +105,13 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if(!objectp(target))
-    {
-        tell_object(caster, "That is not here!");
-        dest_effect();
-        return;
-    }
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
-    tempmap = caster->query_property("using swipe");
+
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())

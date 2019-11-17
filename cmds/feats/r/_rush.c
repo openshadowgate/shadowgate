@@ -16,13 +16,14 @@ void create() {
     ::create();
     feat_type("instant");
     feat_category("MeleeDamage");
-    feat_syntax("rush TARGET");
+    feat_syntax("rush [TARGET]");
     feat_prereq("powerattack");
     feat_desc("The character can attempt to rush at a foe with their weapon, throwing as much force as they can behind it in the hope of dealing damage and knocking them over. Missing, however, will send the character sprawling.
 
+If used without an argument this feat will pick up a random attacker.
+
 %^BOLD%^N.B.%^RESET%^ This feat only works with standard melee combat on foot. It takes quite different feats to <charge> from horseback, or to land a <preciseshot> with a ranged weapon.");
     feat_name("rush");
-    set_target_required(1);
     set_save("fort");
 }
 
@@ -38,7 +39,6 @@ int prerequisites(object ob){
 int cmd_rush(string str) {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -49,9 +49,17 @@ void execute_feat() {
     mapping tempmap;
     int rtime;
     ::execute_feat();
-    if(!objectp(target)) {
-        dest_effect();
-        return;
+    if(!objectp(target))
+    {
+        object * attackers = caster->query_attackers();
+        attackers = filter_array(attackers,(:$1->query_property("rushed at")+FEATTIMER < time():));
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to rush.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
     }
 
     rtime = (int)target->query_property("rushed at");
