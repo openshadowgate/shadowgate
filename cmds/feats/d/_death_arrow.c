@@ -9,10 +9,11 @@ void create()
     feat_type("instant");
     feat_category("ArcaneArcher");
     feat_name("death arrow");
-    feat_syntax("death_arrow TARGET");
+    feat_syntax("death_arrow [TARGET]");
     feat_prereq("Arcane archer L7");
-    feat_desc("The archer imbues one missile with power of negative energy, and shoots it. Upon release, such projectile can kill the target instantly, or cause severe damage if the target is warded against death effects. Such missile will never miss its target.");
-    set_target_required(1);
+    feat_desc("The archer imbues one missile with power of negative energy, and shoots it. Upon release, such projectile can kill the target instantly, or cause severe damage if the target is warded against death effects. Such missile will never miss its target.
+
+If used without an argument this feat will pick up a random attacker.");
     set_save("fort");
 }
 
@@ -33,7 +34,6 @@ int cmd_death_arrow(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -61,12 +61,6 @@ void execute_feat()
     object *weapons;
     int x;
     ::execute_feat();
-    if(!objectp(target))
-    {
-        tell_object(caster, "That is not here!");
-        dest_effect();
-        return;
-    }
     if(!objectp(caster))
     {
         dest_effect();
@@ -96,13 +90,29 @@ void execute_feat()
         dest_effect();
         return;
     }
+    tempmap = caster->query_property("using death arrow");
+    if(!objectp(target))
+    {
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
+    }
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
-    tempmap = caster->query_property("using death arrow");
+
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())

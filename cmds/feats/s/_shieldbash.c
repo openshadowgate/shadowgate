@@ -19,11 +19,12 @@ void create()
     feat_type("instant");
     feat_category("WeaponAndShield");
     feat_name("shieldbash");
-    feat_syntax("shieldbash TARGET");
-    feat_desc("Shieldbash is an instant effect feat that  can be used to slam a shield into the target and stun them for  a brief time. In addition, if the target fails to make a  fortitude save, they will be unable to cast spells for a brief time  after the shieldbash.");
+    feat_syntax("shieldbash [TARGET]");
+    feat_desc("Shieldbash is an instant effect feat that  can be used to slam a shield into the target and stun them for  a brief time. In addition, if the target fails to make a  fortitude save, they will be unable to cast spells for a brief time  after the shieldbash.
+
+If used without an argument this feat will pick up a random attacker.");
     // Sets the type of saving throw to use, same as used in spell.c
     set_save("fort");
-    set_target_required(1);
     // This tells the feat daemon what feats this one is required for, it's needed for
     // removing feats from players so they don't remove one that they are going to need
     set_required_for(({"shieldwall","deflection","reflection","counter"}));
@@ -55,7 +56,6 @@ int cmd_shieldbash(string str)
 {
     object feat;
     if(!objectp(TP)) { return 0; }
-    if(!stringp(str)) { return 0; }
     // After you get TP, which will be caster, you can pass it along to setup_feat.  MUST BE
     // an object IE feat = new(base_name(TO)).  **If it's not an object, it will error**  This
     // will be the case with all instant type feats that act like commands.  str is optional,
@@ -78,13 +78,6 @@ void execute_feat()
     // ::execute_feat This handles assigning single targets for feats with one target.
     // It also runs through prerequisite checks to make sure the caster is able to use the feat.
     ::execute_feat();
-    if(!objectp(target))
-    {
-        // It's very important that dest_effect() is called when the feat ends.  If not, it
-        // will break combat in the room where the feat was used
-        dest_effect();
-        return;
-    }
 
     if((int)caster->query_property("using instant feat")) {
         tell_object(caster,"You are already in the middle of using a feat!");
@@ -98,6 +91,22 @@ void execute_feat()
         return;
     }
     tempmap = caster->query_property("using shieldbash");
+
+    if(!objectp(target))
+    {
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to shieldbash.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
+    }
     if(mapp(tempmap)) {
         if(tempmap[target] > time()) {
           tell_object(caster,"That target is still wary of such an attack!");

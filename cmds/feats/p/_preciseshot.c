@@ -40,11 +40,8 @@ void execute_feat() {
     mapping tempmap;
     object *weapons, ammo;
     ::execute_feat();
-    if(!objectp(target)) {
-        dest_effect();
-        return;
-    }
     tempmap = caster->query_property("using preciseshot");
+
     if(!objectp(target))
     {
         object * attackers = caster->query_attackers();
@@ -52,14 +49,16 @@ void execute_feat() {
         {
             attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
         }
+
         if(!sizeof(attackers))
         {
-            tell_object(caster,"%^BOLD%^Nobody to impale.%^RESET%^");
+            tell_object(caster,"%^BOLD%^Nobody can be affected.%^RESET%^");
             dest_effect();
             return;
         }
         target = attackers[random(sizeof(attackers))];
     }
+
     if(mapp(tempmap)) {
         if(tempmap[target] > time()) {
           tell_object(caster,"That target is still wary of such an attack!");

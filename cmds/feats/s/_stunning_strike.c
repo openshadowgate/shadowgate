@@ -10,9 +10,10 @@ void create()
     feat_category("KiOffense");
     feat_name("stunning strike");
     feat_prereq("Monk L5");
-    feat_syntax("stunning_strike TARGET");
-    feat_desc("A monk that is unarmored and unarmed, or wielding small weapons, may attempt a stunning strike on a target. In order for the attempt to be successful the monk must have at least 1 available Ki, must land a touch attack on the target, and the target must fail a fortitude save with a DC of the Monk's level.");
-    set_target_required(1);
+    feat_syntax("stunning_strike [TARGET]");
+    feat_desc("A monk that is unarmored and unarmed, or wielding small weapons, may attempt a stunning strike on a target. In order for the attempt to be successful the monk must have at least 1 available Ki, must land a touch attack on the target, and the target must fail a fortitude save with a DC of the Monk's level.
+
+If used without an argument this feat will pick up a random attacker.");
     set_save("fort");
 }
 
@@ -33,10 +34,6 @@ int cmd_stunning_strike(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
-    if(!TP->is_class("monk")) return 0;
-    if((int)TP->query_class_level("monk") < 5) return 0;
-    if((int)TP->query_alignment() > 3) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -114,19 +111,31 @@ void execute_feat()
         dest_effect();
         return;
     }
+    tempmap = caster->query_property("using stunning strike");
+
     if(!objectp(target))
     {
-        tell_object(caster, "That is not here!");
-        dest_effect();
-        return;
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
     }
+
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
-    tempmap = caster->query_property("using stunning strike");
+
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())

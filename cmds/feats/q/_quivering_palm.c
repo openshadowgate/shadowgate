@@ -9,7 +9,7 @@ void create()
     feat_type("instant");
     feat_category("KiOffense");
     feat_name("quivering palm");
-    feat_syntax("quivering_palm TARGET");
+    feat_syntax("quivering_palm [TARGET]");
     feat_prereq("Monk L17, Way of The Fist or Grandmaster of The Way");
     feat_desc("A monk specialized in the way of the fist, that is unarmored and unarmed, or wielding small weapons, may attempt a quivering palm attack on a target. In order for the attempt to be successful the monk must have at least 3 available Ki and must land a touch attack on the target. If successful a brief period of time later the target must roll a successful fortitude saving throw or be set to 0 health. Against certain monsters or if the saving throw is successful the target will take 1d8 damage per monk level.
 
@@ -94,11 +94,23 @@ void execute_feat()
     object *weapons;
     int x;
     ::execute_feat();
+
+    tempmap = caster->query_property("using quivering palm");
+
     if(!objectp(target))
     {
-        tell_object(caster, "That is not here!");
-        dest_effect();
-        return;
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
     }
     if(!objectp(caster))
     {
@@ -135,7 +147,6 @@ void execute_feat()
         dest_effect();
         return;
     }
-    tempmap = caster->query_property("using quivering palm");
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())
@@ -181,23 +192,6 @@ void execute_attack()
     }
     caster->remove_property("using instant feat");
     ::execute_attack();
-    tempmap = caster->query_property("using quivering palm");
-
-    if(!objectp(target))
-    {
-        object * attackers = caster->query_attackers();
-        if(mapp(tempmap))
-        {
-            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
-        }
-        if(!sizeof(attackers))
-        {
-            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
-            dest_effect();
-            return;
-        }
-        target = attackers[random(sizeof(attackers))];
-    }
 
     if(caster->query_unconscious())
     {

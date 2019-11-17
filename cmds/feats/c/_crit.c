@@ -9,10 +9,11 @@ void create()
     feat_type("instant");
     feat_category("Assassin");
     feat_name("crit");
-    feat_syntax("crit TARGET");
+    feat_syntax("crit [TARGET]");
     feat_prereq("Assassin L1");
-    feat_desc("You perform a devastating attack that has a chance to kill your enemy instantly. The save throw gets a bonus from your intelligence score. If your target succeeds the save, either by being warded against death ot by being studry, thay will still suffer greatly.");
-    set_target_required(1);
+    feat_desc("You perform a devastating attack that has a chance to kill your enemy instantly. The save throw gets a bonus from your intelligence score. If your target succeeds the save, either by being warded against death ot by being studry, thay will still suffer greatly.
+
+If used without an argument this feat will pick up a random attacker.");
     set_save("fort");
 }
 
@@ -33,7 +34,6 @@ int cmd_crit(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) return 0;
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -46,11 +46,21 @@ void execute_feat()
     int damage, timerz, i, bonusdc;
     object *keyz, qob;
     ::execute_feat();
+    tempmap = caster->query_property("using crit");
     if(!objectp(target))
     {
-        tell_object(caster, "That is not here!");
-        dest_effect();
-        return;
+        object * attackers = caster->query_attackers();
+        if(mapp(tempmap))
+        {
+            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+        }
+        if(!sizeof(attackers))
+        {
+            tell_object(caster,"%^BOLD%^Nobody to crit.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
     }
     if(!objectp(caster))
     {
@@ -94,7 +104,7 @@ void execute_feat()
         return;
     }
 
-    tempmap = caster->query_property("using crit");
+
     if(mapp(tempmap))
     {
         if(tempmap[target] > time())
@@ -109,7 +119,6 @@ void execute_feat()
     spell_kill(target,caster);
 
     tell_object(caster, "%^BOLD%^%^WHITE%^You study the place and your target, preparing yourself for a jump.%^RESET%^");
-    tempmap = caster->query_property("using crit");
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
     keyz = keys(tempmap);
