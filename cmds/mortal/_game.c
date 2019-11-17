@@ -212,11 +212,11 @@ game idea here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTION
 
 This command lets you report a bug, typo, an idea. If you are using the bug version of the command please ask for a wiz and state that you want to report a bug with a brief description of the problem before reporting it. A player or immortal may know if it's not a bug or it may help a wiz be able to get important information before time passes.
 
-All versions of the command work with a %^ORANGE%^%^ULINE%^TARGET%^RESET%^, so if you can look at something with the targetid then using this command will report that id (in order to help immortals know exactly what item you are referencing).
+All versions of the command work with a %^ORANGE%^%^ULINE%^TARGET%^RESET%^, so if you can look at something with the target id then using this command will report that id (in order to help immortals know exactly what item you are referencing).
 
-Using here will report the room that you are currently in.
+Using 'here' will report the room that you are currently in.
 
-You can also enter a %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^, for example, if a bug is not directly related to an object or theroom that you are in. When using a description please be concise, you may elaborate within theeditor for the command.
+You can also enter a %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^, for example, if a bug is not directly related to an object or the room that you are in. When using a description please be concise, you may elaborate within the editor for the command.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
