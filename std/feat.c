@@ -392,39 +392,21 @@ void execute_feat()
         return;
     }
 
+    if(arg == "me" || arg == "myself" || arg == "self")
+        target = caster;
+    else if(arg == "here" || arg == "room")
+        target = place;
+    else if(arg)
+        target = present(arg,place);
+
+
     if(target_required())
     {
-        if(!objectp(target))
+        if(!arg)
         {
-            if(!arg)
-            {
-                tell_object(caster,"You need to designate a target for this feat.");
-                TO->remove();
-                return;
-            }
-            if(arg == "me" || arg == "myself" || arg == "self")
-            {
-                target = caster;
-            }
-            else if(arg == "here" || arg == "room")
-            {
-                target = place;
-            }
-            else
-            {
-                if(!objectp(target = present(arg,place)))
-                {
-                    tell_object(caster,"That is not here!");
-                    TO->remove();
-                    return;
-                }
-            }
-            if(!living(target))
-            {
-                tell_object(caster,"You need to designate a living target.");
-                TO->remove();
-                return;
-            }
+            tell_object(caster,"You need to designate a target for this feat.");
+            TO->remove();
+            return;
         }
         if(!objectp(target))
         {
@@ -432,6 +414,13 @@ void execute_feat()
             TO->remove();
             return;
         }
+        if(!living(target))
+        {
+            tell_object(caster,"You need to designate a living target.");
+            TO->remove();
+            return;
+        }
+
         if(!caster->ok_to_kill(target))
         {
             tell_object(caster,"That target can not be attacked right now.");

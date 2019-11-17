@@ -785,7 +785,8 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
         if(attacker->query_unarmed_damage())
         {
             damage = get_hand_damage(attacker, (string)attacker->return_target_limb(), damage, targ);
-            if(targ->query_unconscious() || targ->query_bound()) { damage = damage*2; }
+            if(objectp(targ))
+                if(targ->query_unconscious() || targ->query_bound()) { damage = damage*2; }
         }
         else
         {
