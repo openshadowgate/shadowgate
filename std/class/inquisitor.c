@@ -43,7 +43,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : class_feats()+({"judgement"}),3:({"force of personality"}), 6: ({"leadership"}), 8: ({"second judgement"}), 11: ({"stalwart"}), 16 : ({"third judgement"}), 17 : ({"slayer"}), 20 : ({"true judgement"})]);
+    return ([ 1 : class_feats()+({"judgement"}),3:({"force of personality"}), 6: ({"leadership"}), 8: ({"second judgement"}), 11: ({"stalwart"}), 14: ({"exploint weakness"}),16 : ({"third judgement"}), 17 : ({"slayer"}), 20 : ({"true judgement"})]);
 }
 
 string *class_skills()

@@ -443,16 +443,11 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         }
     }
 
-    //basically I am modifying the "damage resistance" property to
-    //work ONLY for physical type attacks - anything that causes
-    //some type of physical damage - spell damage resistance will work
-    //on anything that causes any other type of damage - Saide, June, 2017
     if((int)targ->query_property("damage resistance") && member_array(type, PHYSICAL_DAMAGE_TYPES) != -1)
     {
         if(damage > 0)
         {
             reduction = (int)targ->query_property("damage resistance");
-            //basically 1 point in the set_property("magic") ignores 10 points of damage resistance - Saide
             if(attacker->query_property("magic"))
             {
                 mod = (int)attacker->query_property("magic") * 10;
@@ -687,6 +682,10 @@ instantly to the "
                 mult += 1;
                 if((int)wielded[0]->query_size() == 1) mult += 1;
             }
+        }
+        else if(FEATS_D->usable_feat(attacker, "exploit weakness") && !attacker->query_property("shapeshifted"))
+        {
+            mult += 2;
         }
         crit_dam = 0;
         while(mult > 0)
