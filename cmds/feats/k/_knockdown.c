@@ -182,20 +182,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
-int help()
-{
-    write("%^RESET%^%^BOLD%^Name:           Knockdown\n"
-          "%^RESET%^%^BOLD%^Type:           %^RESET%^%^BOLD%^%^CYAN%^Instant\n"
-          "%^RESET%^%^BOLD%^Syntax:         %^RESET%^knockdown <target>\n"
-          "%^RESET%^%^BOLD%^Prerequisites:  %^RESET%^13 Intelligence\n"
-          "%^RESET%^%^BOLD%^                %^RESET%^Expertise\n\n"
-        "%^RESET%^%^BOLD%^\tKnockdown is an instant combat feat that "
-        "can be used to try to knock an opponent off of his or her "
-        "feet.  The command requires a target to work, and will use "
-        "a small amount of stamina.\n"
-        "A druid with the 'mastery of fang and claw' feat may also "
-        "use this feat while in wolf form, even if it has not been "
-        "purchased directly.");
-    return 1;
-}

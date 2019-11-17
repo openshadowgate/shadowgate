@@ -7,14 +7,14 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("PaleLord");
-    feat_name("death touch");
-    feat_syntax("death_touch [TARGET]");
-    feat_prereq("Pale Lord L7");
-    feat_desc("A final step for Pale Lord is to construct a conduit, a point he can release the power of the death itself. To do so he cuts off own hand, treats it with mummifying solutions, then lays a network of fell spells over it and attaches it back. Such hand can release negative energy on demand, ripping the souls of living and healing the undead.
+    feat_category("Inquisition");
+    feat_name("true judgement");
+    feat_syntax("true_judgement [TARGET]");
+    feat_prereq("Inquisitor L20");
+    feat_desc("At 20th level, an inquisitor can call true judgment down upon a foe during combat. The inquisitor can invoke true judgment on a foe. Once declared, the target must make a fortitude save or die. Targets warded from death or targets that succeeded a save throw won't be affected.
 
 If used without an argument this feat will pick up a random attacker.");
-    set_save("will");
+    set_save("fort");
 }
 
 int allow_shifted() { return 0; }
@@ -22,7 +22,7 @@ int allow_shifted() { return 0; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if((int)ob->query_class_level("pale_lord") < 7)
+    if((int)ob->query_class_level("inquisitor") < 20)
     {
         dest_effect();
         return 0;
@@ -30,7 +30,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_death_touch(string str)
+int cmd_true_judgement(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
@@ -45,7 +45,7 @@ void execute_feat()
     object *weapons;
     int x;
     ::execute_feat();
-    tempmap = caster->query_property("using death touch");
+    tempmap = caster->query_property("using true judgement");
     if(!objectp(target))
     {
         object * attackers = caster->query_attackers();
@@ -102,8 +102,8 @@ void execute_feat()
     }
     caster->set_property("using instant feat",1);
 
-    tell_object(caster, "%^RESET%^%^BLUE%^You point a finger at "+target->QCN+".%^RESET%^");
-    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" points a finger at "+target->QCN+".%^RESET%^");
+    tell_object(caster, "%^RESET%^%^BLUE%^You point a finger at "+target->QCN+" and proclaim the true judgement.%^RESET%^");
+    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" points a finger at "+target->QCN+" and proclaims the judgement of death.%^RESET%^");
     return;
 }
 
@@ -138,14 +138,7 @@ void execute_attack()
         return;
     }
 
-    if(target->is_undead())
-    {
-        tell_room(place,"%^BLUE%^"+target->QCN+" is healed completely!%^RESET%^",caster);
-        target->add_hp(target->query_max_hp());
-        return;
-    }
-
-    tempmap = caster->query_property("using death touch");
+    tempmap = caster->query_property("using true judgement");
     if(!mapp(tempmap)) tempmap = ([]);
     if(tempmap[target]) map_delete(tempmap,target);
     keyz = keys(tempmap);
@@ -154,29 +147,25 @@ void execute_attack()
         if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
         continue;
     }
-    timerz = time() + 180;
-    delay_subject_msg(target,180,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^death touched%^WHITE%^ again.%^RESET%^");
+    timerz = time() + 240;
+    delay_subject_msg(target,240,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^true judged again%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
-    caster->remove_property("using death touch");
-    caster->set_property("using death touch",tempmap);
+    caster->remove_property("using true judgement");
+    caster->set_property("using true judgement",tempmap);
 
-    weapons = caster->query_wielded();
-    if(sizeof(weapons)) myweapon = weapons[0];
-
-    tell_object(caster,"%^BLUE%^A ray of deadly negative energy releases of your finger and hits "+target->QCN+"!");
+    tell_object(caster,"%^BLUE%^A ray of deadly raw power releases of your finger and hits "+target->QCN+"!");
     tell_room(place,"%^BLUE%^A ray of death releases of "+caster->QCN+"'s finger and hits "+target->QCN+"!",caster);
 
     bonusdc = clevel+22;
-    if((string)target->query_property("no death") ||do_save(target,-bonusdc))
+    if(!(string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
-        tell_object(target,"%^BOLD%^Your soul struggles, but manages to survive.");
-        tell_room(place,"%^BOLD%^%^BLUE%^"+target->QCN+" is harmed but manages to survive the death!",target);
-        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,10),"negative energy");
+        tell_room(place,"%^BOLD%^%^BLUE%^"+target->QCN+" is utterly unaffected by the judgement!",target);
+        tell_object(target,"%^BOLD%^%^BLUE%^You are utterly unaffected by the judgement!");
     } else {
-        tell_room(place,"%^BOLD%^%^WHITE%^The soul is pushed beyond %^MAGENTA%^the veil%^WHITE%^ from its coil!");
-        tell_room(place,"%^BOLD%^%^WHITE%^The lifeless husk of "+target->QCN+" drops to the ground!",target);
+        tell_room(place,"%^BOLD%^%^MAGENTA%^The soul is pushed beyond %^MAGENTA%^the veil%^MAGENTA%^ from its coil!");
+        tell_room(place,"%^BOLD%^%^MAGENTA%^The lifeless husk of "+target->QCN+" drops to the ground!",target);
         tell_object(target,"%^BOLD%^%^MAGENTA%^Your soul is ripped from you body!\n");
-        target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"negative energy");
+        target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"untyped");
     }
 
     dest_effect();

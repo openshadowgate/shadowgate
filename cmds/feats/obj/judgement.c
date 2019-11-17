@@ -1,5 +1,6 @@
 #include <std.h>
 #include <magic.h>
+#include <daemons.h>
 
 inherit OBJECT;
 
@@ -55,60 +56,65 @@ string * query_judgement_types()
 void apply_judgements(string * judgements,int direction)
 {
     string j;
+    int power;
     foreach(j in judgements)
     {
         if(member_array(j,JUDGEMENT_TYPES)!=-1)
         {
-            call_other(TO,"judgement_"+j,direction);
+            power = clevel;
+            if(FEATS_D->usable_feat(caster,"slayer"))
+                if(caster->query("slayer_judgement")==j)
+                    power+=5;
+            call_other(TO,"judgement_"+j,direction,power);
         }
     }
 }
 
-void judgement_destruction(int direction)
+void judgement_destruction(int direction, int power)
 {
     int bonus;
-    bonus = clevel / 3 + 1;
+    bonus = power / 3 + 1;
     caster->add_damage_bonus(bonus*direction);
 }
 
-void judgement_healing(int direction)
+void judgement_healing(int direction, int power)
 {
     int bonus;
-    bonus = clevel/18+1;
+    bonus = power/18+1;
     caster->set_property("fast healing",bonus*direction);
 }
 
-void judgement_justice(int direction)
+void judgement_justice(int direction, int power)
 {
     int bonus;
-    bonus = clevel / 5 + 1;
+    bonus = power / 5 + 1;
     caster->add_attack_bonus(bonus*direction);
 }
 
-void judgement_piercing(int direction)
+void judgement_piercing(int direction, int power)
 {
-    caster->set_property("spell penetration",(clevel+10)*direction);
-    caster->set_property("empowered",(clevel/12+1)*direction);
+    caster->set_property("spell penetration",(power+10)*direction);
+    caster->set_property("empowered",(power/12+1)*direction);
 }
 
-void judgement_protection(int direction)
+void judgement_protection(int direction, int power)
 {
     int bonus;
-    bonus = clevel / 5 + 1;
+    bonus = power / 5 + 1;
     caster->add_ac_bonus(bonus*direction);
 }
 
-void judgement_purity(int direction)
+void judgement_purity(int direction, int power)
 {
     int bonus;
-    bonus = clevel / 5 + 1;
+    bonus = power / 5 + 1;
     caster->add_saving_bonus("all",bonus);
 }
 
-void judgement_resiliency(int direction)
+void judgement_resiliency(int direction, int power)
 {
     int bonus;
-    bonus = clevel / 5 + 1;
+    bonus = power / 5 + 1;
     caster->set_property("spell damage resistance",bonus*direction);
 }
 
