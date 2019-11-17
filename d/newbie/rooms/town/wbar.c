@@ -10,7 +10,7 @@ void create()
     set_travel(PAVED_ROAD);
 	set_short("The Dancing Ogre");
 	set_long(
-	"You are standing in a bar known as the Dancing Ogre, which is on the west side of"+
+	"You are in a bar known as the Dancing Ogre, which is on the west side of"+
 	" the town. It is a rather lively establishment, and it looks like there's quite a"+
 	" crowd in here already. There are still a couple tables empty if you want to sit"+
 	" down, as well as a few seats open at the bar. The place looks like it's seen its"+
@@ -77,7 +77,7 @@ int read_menu(string str)
 
 	obj = present("barkeep");
 
-    if((str == "board" || str == "dark board" || str == "stained board") 
+    if((str == "board" || str == "dark board" || str == "stained board")
     && obj = present("dartboard")) {
         write("If ya master the game of darts here, sign yer name!");
         names = obj->query_mastery_list();
@@ -89,7 +89,7 @@ int read_menu(string str)
             tell_object(TP,"["+(x+1)+"] %^RED%^"+names[x]+"%^RESET%^\n");
         }
         return 1;
-    } 
+    }
 
 	if(str == "menu" && !present("barkeep")) {
 		write("The menu is covered in the barkeepers blood and can't be read!");
