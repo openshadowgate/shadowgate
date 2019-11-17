@@ -11,7 +11,7 @@ void create() {
    set_name("A conference room");
    set_short("%^RESET%^%^ORANGE%^A conference room%^RESET%^");
    set_long("%^RESET%^%^ORANGE%^A conference room%^RESET%^\n"
-"You are standing in what once was most likely a conference room.  There is a "
+"You are in what once was most likely a conference room.  There is a "
 "large rectangular %^RED%^table %^RESET%^in the middle with chairs around it, "
 "and a very crude %^GREEN%^map %^RESET%^of the surrounding areas placed its "
 "centre.  Two %^CYAN%^paintings %^RESET%^have been hung upon the north and "
