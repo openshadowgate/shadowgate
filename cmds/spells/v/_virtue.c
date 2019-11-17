@@ -6,7 +6,7 @@ int newhp;
 void create() {
     ::create();
     set_spell_name("virtue");
-    set_spell_level(([ "paladin" : 1 ]));
+    set_spell_level(([ "paladin" : 1,"inquisitor":1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS virtue");
     set_description("This spell bestows a small blessing upon the caster, increasing their resilience.");
@@ -15,7 +15,7 @@ void create() {
 	set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     return "%^BOLD%^%^BLUE%^"+caster->QCN+" lowers "+caster->QP+" head and speaks a prayer.";
 }
@@ -31,11 +31,11 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object Vob;
     int bonus, diff;
-    if (!objectp(caster) || !objectp(environment(caster))) 
+    if (!objectp(caster) || !objectp(environment(caster)))
     {
         TO->remove();
         return;
@@ -44,19 +44,19 @@ void spell_effect(int prof)
     tell_object(caster,"%^BOLD%^%^BLUE%^The truth and valor of your cause fills you!");
     tell_room(environment(caster),"%^BOLD%^%^BLUE%^"+caster->QCN+"'s skin takes on a glow of health!",caster);
 
-    
+
     newhp = clevel + 10;
-    
+
     caster->add_max_hp_bonus(newhp);
     caster->set_property("spell_bonus_hp",1);
     caster->set_property("spelled",({TO}));
     addSpellToCaster();
-    spell_successful();        
+    spell_successful();
 }
 
-void dest_effect() 
+void dest_effect()
 {
-    if(objectp(caster)) 
+    if(objectp(caster))
 	{
             tell_object(caster, "%^BOLD%^%^BLUE%^The truth and valor of your cause fades away!%^RESET%^");
             tell_room(environment(caster), "%^BOLD%^%^BLUE%^The healthy glow of "+caster->QCN+

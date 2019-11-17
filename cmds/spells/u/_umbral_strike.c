@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("umbral strike");
-    set_spell_level(([ "druid" : 7, "mage" : 7 ]));
+    set_spell_level(([ "druid" : 7, "mage" : 7,"inquisitor":6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS darkbolt on TARGET");
     set_damage_desc("half cold, half negative energy");

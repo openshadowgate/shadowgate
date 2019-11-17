@@ -9,7 +9,7 @@ object ob;
 void create() {
     ::create();
     set_spell_name("darkness");
-    set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 2, "monk" : 3, "assassin": 2, "paladin":2]));
+    set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 2, "monk" : 3, "assassin": 2, "paladin":2,"inquisitor":1]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS darkness on TARGET");
     set_description("This will create a globe of darkness, which will overcome normal light sources. You can cast it on "
