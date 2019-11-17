@@ -13,7 +13,7 @@ void create() {
    set_long("%^RESET%^%^ORANGE%^A conference room%^RESET%^\n"
 "You are in what once was most likely a conference room.  There is a "
 "large rectangular %^RED%^table %^RESET%^in the middle with chairs around it, "
-"and a very crude %^GREEN%^map %^RESET%^of the surrounding areas placed its "
+"and a very crude %^GREEN%^map %^RESET%^of the surrounding areas placed in it's "
 "centre.  Two %^CYAN%^paintings %^RESET%^have been hung upon the north and "
 "south walls, adding a little color to the otherwise drab room, despite that "
 "they are mostly faded.  A lone %^BOLD%^%^WHITE%^pedestal %^RESET%^with a "
