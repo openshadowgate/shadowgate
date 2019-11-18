@@ -8,6 +8,7 @@ create() {
     ::create();
     set_spell_name("inspiring recovery");
     set_spell_level(([ "cleric" : 6, "ranger" : 4, "paladin" : 4, "inquisitor" : 6 ]));
+    set_affixed_spell_level(6);
     set_spell_sphere("healing");
     set_syntax("cast CLASS inspiring recovery on TARGET");
     set_damage_desc("positive/negative energy");
