@@ -17,8 +17,8 @@
 
 #define MAXPOINTS 56 // 92 total points minus 36 starting points (6 per stat). -N, 10/10.
 
-#define TESTCLASS ({"inquisitor"})
-#define TESTERS ({"noobriel"})
+#define TESTCLASS ({})
+#define TESTERS ({})
 // stats in order: str, dex, con, int, wis, cha
 #define STATS ({"strength","dexterity","constitution", "intelligence", "wisdom" ,"charisma"})
 

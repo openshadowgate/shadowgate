@@ -48,6 +48,13 @@
                     "charm and wit, bards employ a blend of illusions and enchantments to befuddle "\
                     "their enemies and empower their allies."
 
+#define INQUIS      "Grim and determined, the inquisitor roots out enemies of the faith,"\
+                    "using trickery and guile when righteousness and purity is not"\
+                    "enough. Although inquisitors are dedicated to a deity, they are above"\
+                    "many of the normal rules and conventions of the church. They answer to"\
+                    "their deity and their own sense of justice alone, and are willing to"\
+                    "take extreme measures to meet their goals."
+
 #define WARLOCK     "Warlocks are dark and chaotic casters, bound to a pact with a powerful "\
                     "otherworldly being. Their invocations are the most limited of any caster, but "\
                     "in exchange are able to wear light armor, and may invoke their powers endlessly "\
@@ -91,7 +98,7 @@
 #define CLASS_BLURBS (["mage" : MAGE, "fighter" : FIGHTER, "cleric" : CLERIC, "psion" : PSION, "psywarrior" : PSYWARRIOR,\
                      "druid" : DRUID, "warlock" : WARLOCK, "bard" : BARD, "sorcerer" : SORCERER,\
                      "barbarian" : BARBARIAN, "thief" : THIEF, "paladin" : PALADIN, \
-                     "ranger" : RANGER, "monk" : MONK])
+                       "ranger" : RANGER, "monk" : MONK, "inquisitor" : INQUIS])
 
 #define HUMAN       "Humans are perhaps the most prolific and adaptable race, capable of any class "\
                     "or alignment. They possess many different ethnicities, and may gain a small "\

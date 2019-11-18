@@ -10,7 +10,7 @@ create() {
     ::create();
     set_author("pator");
     set_spell_name("create food");
-    set_spell_level(([ "cleric" : 3, "paladin" : 2 ]));
+    set_spell_level(([ "cleric" : 3, "paladin" : 2, "inquisitor" : 1 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS create food");
     set_description("This spell creates a pile of edible food. You can eat some if you wish. The higher level the caster, "

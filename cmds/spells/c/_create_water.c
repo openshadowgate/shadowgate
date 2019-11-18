@@ -8,12 +8,12 @@ inherit SPELL;
 object drinks;
 
 
-create() 
+create()
 {
     ::create();
     set_author("pator");
     set_spell_name("create water");
-    set_spell_level(([ "cleric" : 1, "paladin" : 1,"druid" : 1 ]));
+    set_spell_level(([ "cleric" : 1, "paladin" : 1,"druid" : 1, "inquisitor" : 1 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS create water");
     set_description("This spell creates a pool of drinkable water. You can drink from the pool, to quench your thirst.");
@@ -23,9 +23,9 @@ create()
 }
 
 
-int preSpell() 
+int preSpell()
 {
-    if (present("pool of water", place)) 
+    if (present("pool of water", place))
     {
         tell_object(caster, "There is already a pool of water here.");
         return 0;
@@ -34,7 +34,7 @@ int preSpell()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object where;
     int d1,d2,duration, amount;
@@ -42,7 +42,7 @@ void spell_effect(int prof)
     d1 = 1;
     d2 = 1;
     duration = 1;
-    if( interactive(caster) ) 
+    if( interactive(caster) )
     {
         set_verbal_comp();
         set_somatic_comp();
@@ -50,9 +50,9 @@ void spell_effect(int prof)
         tell_room(place, YOU+" makes a pool of water.", caster);
         drinks= new("/cmds/priest/obj/water.c");
         where = environment(caster);
-    } 
-    else 
-    {        
+    }
+    else
+    {
         tell_room(place, YOU+" conjures a puddle of clean water.", ({ caster}));
         drinks= new("/cmds/priest/obj/water.c");
         where = place;
@@ -73,9 +73,9 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
-    if (objectp(drinks)) 
+    if (objectp(drinks))
     {
         drinks->remove();
         tell_room(ROOM,"The pool of water just vanishes!");
