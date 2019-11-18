@@ -756,7 +756,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
             if(fired)
             {
                 damage += get_lrdamage(attacker, weapon, targ);
-                if(FEATS_D->usable_feat(attacker,"deadeye")) { damage += BONUS_D->damage_bonus(attacker->query_stats("dexterity")); }
+                if(FEATS_D->usable_feat(attacker,"point blank shot")) { damage += BONUS_D->damage_bonus(attacker->query_stats("dexterity")); }
             }
         }
         else
@@ -912,7 +912,7 @@ int damage_done(object attacker, object weap, int damage, int isranged)
                 }
                 if(FEATS_D->usable_feat(attacker, "opportunity strikes"))
                 {
-                    prof = to_int(prof*1.75);
+                    prof = to_int(prof*1.6);
                 }
             }
         }
