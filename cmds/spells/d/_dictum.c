@@ -1,0 +1,67 @@
+#include <std.h>
+#include <spell.h>
+
+inherit SPELL;
+
+create()
+{
+    ::create();
+    set_spell_name("dictum");
+    set_spell_level(([ "cleric" : 7, "inquisitor" : 6 ]));
+    set_spell_sphere("invocation_evocation");
+    set_syntax("cast CLASS dictum on TARGET");
+    set_description("You proclaim a word of power, staggering,  paralyzing or killing your target.");
+    set_verbal_comp();
+    set_somatic_comp();
+    set_target_required(1);
+    set_save("will");
+}
+
+string query_cast_string()
+{
+    tell_object(caster,"%^BOLD%^You can feel an orderly pressence building inside.");
+    tell_room(place,"%^BOLD%^"+caster->QCN+" chants in an orderly fashion.",caster);
+    return "display";
+}
+
+
+void spell_effect()
+{
+    int ldiff;
+
+    ldiff=(clevel-target->query_level());
+
+    caster->force_me("yell %^WHITE%^%^BOLD%^DIE.");
+
+    if(!do_save(target,4))
+    {
+        tell_room(place,"%^BOLD%^"+target->QCN+" is blasted to the groud with the power of the voice.",target);
+        tell_object(target,"%^BOLD%^%^You are blasted to the ground with the power of the voice.");
+        target->set_tripped(roll_dice(1,4),"%^BOLD%^You are trying to regain your footing.");
+    }
+
+    if(ldiff>4)
+    {
+        int duration;
+        tell_room(place,"%^BOLD%^"+target->QCN+" stops for a moment with thoughtful expression.",target);
+        tell_object(target,"%^BOLD%^%^You are stunned by the command.");
+        duration(2,4);
+        if(do_save(target,4))
+            duration = 8*roll_dice(1,4);
+        target->set_paralyzed(duration,"You are stunned by command you just heard.");
+    }
+
+    if(ldiff>9)
+    {
+        if(!(do_dave(target,4)||
+             target->query_property("no death")))
+        {
+            tell_room(place,"%^BOLD%^Upon hearing the words "+target->QCN+" simply dies!",target);
+            tell_object(target,"%^BOLD%^YOU OBEY AND DIE.");
+            damage_targ(target,target->query_target_limb(),target->query_max_hp()*2,"mental");
+        }
+    }
+
+    dest_effect();
+    return;
+}

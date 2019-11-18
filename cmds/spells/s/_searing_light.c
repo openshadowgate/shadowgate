@@ -13,7 +13,7 @@ void create(){
     ::create();
     set_author("saide");
     set_spell_name("searing light");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 5, "inquisitor" :3 ]));
     set_spell_sphere("sun");
     set_spell_domain("sun");
     set_syntax("cast CLASS searing light on TARGET");
@@ -58,7 +58,7 @@ spell_effect(int prof){
     attackers = target_filter(attackers);
     attackers += ({ target });
     attackers = distinct_array(attackers);
-    
+
     if(sizeof(attackers)){
         for(i=0;i<sizeof(attackers);i++){
             if(!objectp(attackers[i])) { continue; }

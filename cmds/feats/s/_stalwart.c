@@ -8,7 +8,7 @@ void create() {
     feat_category("DamageResistance");
     feat_name("stalwart");
     feat_prereq("Improved toughness");
-    feat_desc("This passive feat grants the character the ability to entirely avoid damage from certain spells. Any spell that allows damage to be halved by a successful fortitude or will save, will instead cause no damage if the save is made. A failed save will still result in full damage being taken. This feat is only effective in medium armor.");
+    feat_desc("This passive feat grants the character the ability to entirely avoid damage from certain spells. Any spell that allows damage to be halved by a successful fortitude or will save, will instead cause no damage if the save is made. A failed save will still result in full damage being taken. This feat is only effective in medium, light or no armor.");
     permanent(1);
 }
 

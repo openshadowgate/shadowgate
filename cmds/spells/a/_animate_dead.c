@@ -14,7 +14,7 @@ void fail();
 void create() {
     ::create();
     set_spell_name("animate dead");
-    set_spell_level(([ "mage" : 4, "cleric" : 3, "paladin" : 3 ]));
+    set_spell_level(([ "mage" : 4, "cleric" : 3, "paladin" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animate dead [on TARGET]");
     set_damage_desc("raises skeletal champions");
