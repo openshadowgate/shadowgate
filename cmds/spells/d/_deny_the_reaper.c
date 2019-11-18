@@ -13,7 +13,7 @@ void create()
     set_syntax("cast CLASS deny the reaper on TARGET");
     set_description("This spell will send out necromantic energies to snatch a dead person away from the afterlife. The deceased will be returned to the site of death and placed into its body. Some of the negative energy will be spend to slightly restore it, but the deceased will return significantly weakened. A successfully revived person will be barely alive and need significant healing. This spell requires a fresh body of the deceased to function.
 
-The TARGET must be the recognized name of the dead player.");
+The TARGET must be the recognized name of the dead player or their corpse. You don't need to know the name to use this spell on a corpse.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -38,12 +38,8 @@ void spell_effect(int prof)
         return;
     }
 
-    if(!arg)
-    {
-        tell_object(caster,"syntax: cast CLASS deny the reaper on TARGET");
-        dest_effect();
-        return;
-    }
+    if(corpse=present(arg,place))
+        arg = corpse->query_original_name();
 
     what = "corpse of $&$"+caster->realName(lower_case(arg))+"$&$";
     targ = find_player(caster->realName(lower_case(arg)));

@@ -13,7 +13,7 @@ void create() {
     set_syntax("cast CLASS resurrection on TARGET");
     set_description("Praying to their diety for a miracle, a priest can attempt to resurrect a slainally back to life. The resurrection, if successful, will restore the corpseback to life and full of health. The spell is somewhat draining on the priest,for channeling large ammounts of divine power can be exhausting. The targetwill suffer significantly less from the death due to theintervention of the priest. Unlike lower spells this spell will work on targets whose corpse is not present.
 
-The TARGET must be the recognized name of the dead player.");
+The TARGET must be the recognized name of the dead player or their corpse. You don't need to know the name to use this spell on a corpse.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -44,6 +44,10 @@ spell_effect(int prof) {
     object corpse, targ;
 
     ::spell_effect();
+
+    if(corpse=present(arg,place))
+        arg = corpse->query_original_name();
+
     what = "corpse of $&$"+caster->realName(lower_case(arg))+"$&$";
     targ = find_player(caster->realName(lower_case(arg)));
     if (!targ) {

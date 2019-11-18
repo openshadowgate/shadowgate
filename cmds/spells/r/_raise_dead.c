@@ -12,7 +12,7 @@ create() {
     set_syntax("cast CLASS raise dead on TARGET");
     set_description("This spell will revive a dead player when cast upon their corpse. The deceasedwill be returned to the site of death and revived. Note it is similar to beingrevived in a church as the person will be barely alive and need significanthealing. The target will suffer somewhat less from the death due to the intervention of the priest.
 
-The TARGET must be the recognized name of the dead player.");
+The TARGET must be the recognized name of the dead player or their corpse. You don't need to know the name to use this spell on a corpse.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -43,6 +43,10 @@ spell_effect(int prof) {
     object corpse, targ;
 
     ::spell_effect();
+
+    if(corpse=present(arg,place))
+        arg = corpse->query_original_name();
+
     what = "corpse of $&$"+caster->realName(lower_case(arg))+"$&$";
     targ = find_player(caster->realName(lower_case(arg)));
     if (!targ) {
