@@ -40,16 +40,19 @@ string what_alignment(int align)
 }
 
 spell_effect(int prof) {
-    string what;
+    string what, theirname;
     object corpse, targ;
 
     ::spell_effect();
 
-    if(corpse=present(arg,place))
-        arg = corpse->query_original_name();
+    if(objectp(corpse=present(arg,place)))
+        theirname = corpse->query_original_name();
+    else
+        theirname = caster->realName(lower_case(arg));
 
-    what = "corpse of $&$"+caster->realName(lower_case(arg))+"$&$";
-    targ = find_player(caster->realName(lower_case(arg)));
+    targ = find_player(theirname);
+
+    what = "corpse of $&$"+theirname+"$&$";
     if (!targ) {
         tell_object(caster,"You can only revive interactive players.");
         dest_effect();

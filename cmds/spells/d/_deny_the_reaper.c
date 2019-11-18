@@ -26,23 +26,20 @@ The TARGET must be the recognized name of the dead player or their corpse. You d
 
 void spell_effect(int prof)
 {
-    string what;
+    string what, theirname;
     object corpse;
     object targ;
 
     ::spell_effect();
 
-    if(!objectp(caster))
-    {
-        dest_effect();
-        return;
-    }
+    if(objectp(corpse=present(arg,place)))
+        theirname = corpse->query_original_name();
+    else
+        theirname = caster->realName(lower_case(arg));
 
-    if(corpse=present(arg,place))
-        arg = corpse->query_original_name();
+    targ = find_player(theirname);
 
-    what = "corpse of $&$"+caster->realName(lower_case(arg))+"$&$";
-    targ = find_player(caster->realName(lower_case(arg)));
+    what = "corpse of $&$"+theirname+"$&$";
 
     if(!targ)
     {
