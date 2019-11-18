@@ -10,8 +10,10 @@ void create()
     set_spell_name("deny the reaper");
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS deny the reaper on TARGET (dead player's name)");
-    set_description("This spell will send out necromantic energies to snatch a dead person away from the afterlife. The deceased will be returned to the site of death and revived. A successfully revived person will be barely alive and need significant healing, due to the strain of being dragged away from death's embrace, and will still be weakened by the touch of death despite their restoration.");
+    set_syntax("cast CLASS deny the reaper on TARGET");
+    set_description("This spell will send out necromantic energies to snatch a dead person away from the afterlife. The deceased will be returned to the site of death and placed into its body. Some of the negative energy will be spend to slightly restore it, but the deceased will return significantly weakened. A successfully revived person will be barely alive and need significant healing. This spell requires a fresh body of the deceased to function.
+
+The TARGET must be the recognized name of the dead player.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -100,10 +102,9 @@ void spell_effect(int prof)
     targ->set("RaisingExpLoss",0);
     targ->set("RaisingType","deny the reaper");
 
-    tell_object(targ,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul.  You sense "
+    tell_object(targ,"%^RESET%^%^WHITE%^%^BOLD%^You can feel a strong pull on your soul.  You sense "
         "tendrils of arcane energy trying to steal you away from the afterlife!\n"
-        "Type <accept> to return to life, or <cancel> to leave your fate in Lysara's "
-        "hands.%^RESET%^");
+        "Type %^ORANGE%^<accept>%^WHITE%^ to return to life, or %^ORANGE%^<cancel>%^WHITE%^.%^RESET%^");
 
     if(objectp(corpse)) corpse->remove();
     dest_effect();
