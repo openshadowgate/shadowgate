@@ -63,10 +63,10 @@ void heart_beat()
 {
     if (!objectp(TO)) { return; }
 
-    if (!objectp(ETO)) 
+    if (!objectp(ETO))
     {
         if (objectp(TO)) { TO->remove(); }
-        return; 
+        return;
     }
 
     if (my_room != EETO)
@@ -113,7 +113,7 @@ void heart_beat()
             sort_spells(); // normal, targeted, special
         }
     }
-    
+
     if (!objectp(TO)) { return; }
 
     cast_normal_spells();
@@ -173,24 +173,24 @@ void cast_special_spells()
                     return;
                 }
 
-                if (strsrch(special, "$T") != -1) 
-                { 
-                    party_special += ({ spell }); 
+                if (strsrch(special, "$T") != -1)
+                {
+                    party_special += ({ spell });
                     continue;
                 }
-                
+
                 if (strsrch(special, "$") != -1)
                 {
                     special_specials += ({ spell });
                     continue;
                 }
 
-                if (strsrch(special, "$") == -1) 
-                { 
-                    normal_special_spells += ({ spell }); 
+                if (strsrch(special, "$") == -1)
+                {
+                    normal_special_spells += ({ spell });
                     continue;
                 }
-            }        
+            }
         }
 
         if (sizeof(normal_special_spells))
@@ -343,7 +343,7 @@ void cast_special_spells()
                     return;
                 }
             }
-        }    
+        }
     }
 }
 
@@ -396,7 +396,7 @@ void cast_targeted_spells()
 
                 myclass = cast_check(spell);
                 name = (string)owner->knownAs((string)my_target->query_true_name());
-                
+
                 owner->force_me("cast " + myclass + " " + spell + " on " + name);
                 special_target_spells_cast += ({ spell });
                 return;
@@ -473,7 +473,7 @@ void cast_targeted_spells()
                     party_targets[my_target]["party_target_spells_cast"] = been_cast;
                     party_targets[my_target]["party_target_spells"] = to_cast;
                     return;
-                }         
+                }
             }
         }
     }
@@ -491,15 +491,15 @@ void cast_normal_spells()
 
     if (owner->query_casting()) { return; }
 
-    for (i = 0;i < sizeof(normal_spells);i++)    
+    for (i = 0;i < sizeof(normal_spells);i++)
     {
         spell = normal_spells[i];
-        if (member_array(spell, normal_spells_cast) != -1) { continue; }        
+        if (member_array(spell, normal_spells_cast) != -1) { continue; }
 
-        if (has_spell(owner, spell)) 
+        if (has_spell(owner, spell))
         {
             normal_spells_cast += ({ spell });
-            continue; 
+            continue;
         }
 
         file = get_file(spell);
@@ -537,7 +537,7 @@ int has_spell(object target, string spell)
     if (!objectp(target)) { target = owner; }
 
     if (pointerp(target->query_property("spelled"))) { spells = (object)target->query_property("spelled"); }
-    if (pointerp(target->query_property("dispellable spells"))) { spells = spells + (object)target->query_property("dispellable spells"); }    
+    if (pointerp(target->query_property("dispellable spells"))) { spells = spells + (object)target->query_property("dispellable spells"); }
 
     if (pointerp(owner->query_property("spelled"))) { owner_spells = (object)owner->query_property("spelled"); }
     if (pointerp(owner->query_property("dispellable spells"))) { owner_spells = owner_spells + (object)owner->query_property("dispellable spells"); }
@@ -554,7 +554,7 @@ int has_spell(object target, string spell)
             continue;
         }
     }
-    
+
     if (sizeof(spells))
     {
         for (i = 0;i < sizeof(spells);i++)
@@ -593,7 +593,7 @@ string get_class(string spell)
     {
         myclass = classes[i];
         level = (int)file->query_spell_level(myclass);
-        if (myclass == "bard" || myclass == "sorcerer")
+        if (myclass == "bard" || myclass == "sorcerer" || myclass == "inquisitor")
         {
             if (owner->can_memorize(myclass, "level " + level)) { return myclass; }
         }
@@ -606,7 +606,7 @@ mixed can_cast(string spell)
 {
     string *classes,first_letter,myclass,file,improv;
     int i,level;
-    
+
     owner_check();
     if (!stringp(spell) || spell == "" || spell == " ")
         return 0;
@@ -625,7 +625,7 @@ mixed can_cast(string spell)
         if (MAGIC_D->can_cast(owner, level, myclass, improv, 0))
             return myclass;
         if (MAGIC_D->can_cast(owner, level, myclass, spell, 0))
-            return myclass; 
+            return myclass;
     }
     tell_object(owner, "You can't cast the spell " + spell + ", please make sure you have it prepared.");
     return 0;
@@ -643,8 +643,8 @@ void sort_spells()
         spell = spells[i];
         buff = buffs[spell];
         if (buff["special"]) { special_spells += ({ spell }); }
-        else if (buff["target"]) 
-        { 
+        else if (buff["target"])
+        {
             targeted_spells += ({ spell });
             if (buff["target"] == "$T") { party_target_spells += ({ spell }); }
             else { special_target_spells += ({ spell }); }
@@ -744,4 +744,3 @@ void owner_check()
 
 void save_me(string file) { return 1; }
 void restore_me(string file) { return 1; }
-

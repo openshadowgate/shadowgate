@@ -2179,7 +2179,7 @@ int calculate_bonus(int stat) {
 
 int is_caster(string myclass) {
    string *casterclasses;
-   casterclasses = (({ "mage", "sorcerer", "cleric", "druid", "bard", "psion", "psywarrior" }));
+   casterclasses = (({ "mage", "sorcerer", "cleric", "druid", "bard", "psion", "psywarrior", "inquisitor" }));
    if(member_array(myclass,casterclasses) != -1) return 1;
    return 0;
 }
@@ -2525,17 +2525,30 @@ void get_casting_stat()
     }
     switch(spell_type)
     {
-    case "wizard":  case "mage":        mycastingstat = "/std/class/mage.c"->query_casting_stat(caster);        break;
-    case "psion":   case "psionics":    mycastingstat = "/std/class/psion.c"->query_casting_stat(caster);       break;
-    case "priest":  case "cleric":      mycastingstat = "/std/class/cleric.c"->query_casting_stat(caster);      break;
-    case "ranger":                      mycastingstat = "/std/class/ranger.c"->query_casting_stat(caster);      break;
-    case "paladin": case "antipaladin": mycastingstat = "/std/class/paladin.c"->query_casting_stat(caster);     break;
-    case "druid":                       mycastingstat = "/std/class/druid.c"->query_casting_stat(caster);       break;
-    case "bard":                        mycastingstat = "/std/class/bard.c"->query_casting_stat(caster);        break;
-    case "sorcerer":                    mycastingstat = "/std/class/sorcerer.c"->query_casting_stat(caster);    break;
-    case "warlock":                     mycastingstat = "/std/class/warlock.c"->query_casting_stat(caster);     break;
-    case "psywarrior":                  mycastingstat = "/std/class/psywarrior.c"->query_casting_stat(caster);  break;
-    default:                            mycastingstat = "intelligence";                                         break;
+    case "wizard": case "mage":
+        mycastingstat = "/std/class/mage.c"->query_casting_stat(caster); break;
+    case "psion": case "psionics":
+        mycastingstat = "/std/class/psion.c"->query_casting_stat(caster); break;
+    case "priest": case "cleric":
+        mycastingstat = "/std/class/cleric.c"->query_casting_stat(caster); break;
+    case "ranger":
+        mycastingstat = "/std/class/ranger.c"->query_casting_stat(caster); break;
+    case "paladin": case "antipaladin":
+        mycastingstat = "/std/class/paladin.c"->query_casting_stat(caster); break;
+    case "druid":
+        mycastingstat = "/std/class/druid.c"->query_casting_stat(caster); break;
+    case "bard":
+        mycastingstat = "/std/class/bard.c"->query_casting_stat(caster); break;
+    case "sorcerer":
+        mycastingstat = "/std/class/sorcerer.c"->query_casting_stat(caster); break;
+    case "inquisitor":
+        mycastingstat = "/std/class/inquisitor.c"->query_casting_stat(caster); break;
+    case "warlock":
+        mycastingstat = "/std/class/warlock.c"->query_casting_stat(caster); break;
+    case "psywarrior":
+        mycastingstat = "/std/class/psywarrior.c"->query_casting_stat(caster); break;
+    default:
+        mycastingstat = "intelligence"; break;
     }
     casting_stat = mycastingstat;
     return mycastingstat;

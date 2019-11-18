@@ -48,7 +48,7 @@ mapping class_featmap(string myspec) {
 
 string *class_skills()
 {
-    return ({ "preception","survival","athletics","academics","influence" });
+    return ({ "perception","survival","athletics","academics","influence" });
 }
 
 int skill_points() { return 5; }
@@ -66,7 +66,7 @@ void advanced_func(object player)
 
 int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
-int default_hitpoints() { return 3; } // hitpoints per level above level 20
+int default_hitpoints() { return 4; } // hitpoints per level above level 20
 
 string armor_allowed() { return "fighter"; }
 
@@ -94,7 +94,7 @@ int number_of_attacks(object player)
 }
 
 string query_casting_stat(){
-   return "charisma";
+   return "wisdom";
 }
 
 mapping query_class_spells()

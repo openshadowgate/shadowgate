@@ -100,7 +100,7 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
         case 9: if (x > 17) return 1;break; // was > 29
       }
     }
-    if(spell_type == "bard") {
+    if(spell_type == "bard" || spell_type == "inquisitor") {
       switch (spell_level) {
         case 1: if (x > 1)  return 1;break;
         case 2: if (x > 3)  return 1;break;
@@ -394,7 +394,7 @@ mixed query_random_spell(string myclass, int lev)
     {
         case "ranger": case "paladin":
             if(lev > 4) lev = 4;
-        case "bard": case "psywarrior":
+        case "bard": case "psywarrior": case "inquisitor":
             if(lev > 6) lev = 6;
         case "psion": case "mage": case "cleric": case "sorcerer": case "druid":
             if(lev > 9) lev = 9;

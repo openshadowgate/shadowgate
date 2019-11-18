@@ -294,9 +294,11 @@ int recall_spells(string type, object who) {
 	if(!who->is_class(spell_type)) return 0;
 
     switch(spell_type) {
-      case "cleric": case "paladin": case "antipaladin": case "ranger": case "druid": mystat = "wisdom"; break;
-      case "bard": case "sorcerer": mystat = "charisma"; break;
-      default: mystat = "intelligence"; break;
+    case "cleric": case "paladin": case "antipaladin": case "ranger": case "druid": case "inquisitor":
+        mystat = "wisdom"; break;
+    case "bard": case "sorcerer":
+        mystat = "charisma"; break;
+    default: mystat = "intelligence"; break;
     }
       if(spell_type == "antipaladin") spells = who->query_all_memorized("paladin");
       else spells = who->query_all_memorized(spell_type);
