@@ -4,11 +4,11 @@ inherit SPELL;
 object who;
 string whoname, whocname, cname, Ccname;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("speak with dead");
-    set_spell_level(([ "psion" : 7, "cleric" : 9 ]));
+    set_spell_level(([ "psion" : 7, "cleric" : 9, "inquisitor" : 3 ]));
     set_discipline("telepath");
     set_spell_sphere("divination");
     set_syntax("cast CLASS speak with dead to TARGET");
@@ -20,12 +20,12 @@ void create()
     set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
 	return "%^CYAN%^"+YOU+" closes "+MINE+" eyes and concentrates deeply.";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
 	string arg;
     string *ignored, *casterallowed, *targallowed;
@@ -36,7 +36,7 @@ void spell_effect(int prof)
         return;
     }
    	 arg = lower_case(ARG);
-    if (!(who = find_player(caster->realName(arg)))) 
+    if (!(who = find_player(caster->realName(arg))))
 	{
       	tell_object(CASTER,capitalize(arg)+" cannot be found within the "+
             "land of the dead to establish a link.\n");
@@ -47,59 +47,59 @@ void spell_effect(int prof)
     whoname = who->query_name();
     whocname = who->QCN;
     Ccname = CASTER->QCN;
-    if (avatarp(who) && !who->query_disguised()) 
+    if (avatarp(who) && !who->query_disguised())
 	{
       	tell_object(CASTER,capitalize(arg)+" cannot be found within the land "+
 		"of the dead to establish a link.\n");
         	TO->remove();
         	return;
     }
-   	if(avatarp(who) && arg == (string)who->query_true_name()) 
+   	if(avatarp(who) && arg == (string)who->query_true_name())
 	{
       	tell_object(CASTER,capitalize(arg)+" cannot be found within the land of "+
 		"the dead to establish a link.\n");
       	TO->remove();
       	return;
    	}
-    if (arg == cname) 
+    if (arg == cname)
 	{
       	tell_object(CASTER,"You cannot establish a link with yourself.\n");
         	TO->remove();
         	return;
     	}
-    if (who->query_invis() && (int)who->query_level() > (int)CASTER->query_level()) 
+    if (who->query_invis() && (int)who->query_level() > (int)CASTER->query_level())
 	{
       	tell_object(CASTER,capitalize(arg)+" cannot be found within the land of "+
             "the dead to establish a link.\n");
         TO->remove();
         return;
     }
-    if (who->is_player() && !interactive(who)) 
+    if (who->is_player() && !interactive(who))
 	{
       	tell_object(CASTER, who->QCN+" is link-dead and cannot hear you.\n");
         TO->remove();
         return;
     }
-	if(!who->query_ghost()) 
+	if(!who->query_ghost())
 	{
 		tell_object(CASTER,capitalize(arg)+" cannot be found within the land "+
 		"of the dead to establish a link.\n");
 		TO->remove();
 		return;
 	}
-    if (who->query_blocked("tell")) 
+    if (who->query_blocked("tell"))
 	{
       	write(who->QCN+" is currently blocking all tells.");
         	TO->remove();
         	return;
     }
     ignored = who->query_ignored();
-    if (!ignored) 
+    if (!ignored)
 	{
       	who->reset_ignored();
         ignored = who->query_ignored();
     }
-    if ((member_array(cname, ignored) != -1)) 
+    if ((member_array(cname, ignored) != -1))
 	{
       	tell_object(CASTER, who->QCN+" is ignoring you.\n");
         TO->remove();
@@ -110,7 +110,7 @@ void spell_effect(int prof)
     if (!casterallowed) casterallowed = ({});
     if (!targallowed) targallowed = ({});
     if (member_array(cname,targallowed) != -1
-    && member_array(whoname,casterallowed) != -1) 
+    && member_array(whoname,casterallowed) != -1)
 	{
         tell_object(CASTER,"You already have a mental link with "+who->QCN+".\n");
         TO->remove();
@@ -136,12 +136,12 @@ void dest_effect() {
 
     casterallowed = ({});
     targallowed = ({});
-    if (objectp(CASTER)) 
+    if (objectp(CASTER))
     {
         CASTER->remove_property_value("spelled", ({TO}) );
         casterallowed = CASTER->query_property("allowed tell");
         if (pointerp(casterallowed))
-        if (member_array(whoname,casterallowed) != -1) 
+        if (member_array(whoname,casterallowed) != -1)
         {
             casterallowed = casterallowed - ({whoname});
             CASTER->remove_property("allowed tell");
@@ -149,10 +149,10 @@ void dest_effect() {
             tell_object(CASTER,"%^RED%^Your mental link with "+whocname+" has been ended.\n");
         }
     }
-    if (objectp(who)) 
+    if (objectp(who))
     {
         targallowed = (string *)who->query_property("allowed tell");
-        if (member_array(cname,targallowed) != -1) 
+        if (member_array(cname,targallowed) != -1)
         {
             targallowed = targallowed - ({cname});
             who->remove_property("allowed tell");

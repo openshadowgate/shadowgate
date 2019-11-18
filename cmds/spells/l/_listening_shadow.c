@@ -1,5 +1,5 @@
 //altered by ~Circe~ so that the caster may have only 1 up at a time,
-//cannot move around after casting, and has a delay before being 
+//cannot move around after casting, and has a delay before being
 //able to cast again after discussions with other wizzes
 //rebalancing domains 5/10/08
 //_listening_shadow
@@ -9,14 +9,14 @@ inherit SPELL;
 
 object shadow,remote;
 string theName;
-#define DELAY 300 
-//This *should* equal a 5 minute delay, I think.  That's the 
+#define DELAY 300
+//This *should* equal a 5 minute delay, I think.  That's the
 //intention anyway.  ~Circe~ 5/10/08
 
 void create(){
     ::create();
     set_spell_name("listening shadow");
-    set_spell_level(([ "cleric" : 8, "assassin" : 4 ]));
+    set_spell_level(([ "cleric" : 8, "assassin" : 4, "inquisitor" : 3 ]));
     set_spell_sphere("divination");
     set_spell_domain("darkness");
     set_syntax("cast CLASS listening shadow on TARGET");
@@ -58,7 +58,7 @@ void spell_effect(int prof){
            tell_object(caster,"Something blocks your attempt!");
            return;
         }
-//new power stuff by ~Circe~ 6/20/08 to be in line with 
+//new power stuff by ~Circe~ 6/20/08 to be in line with
 //other scry spells
         if(query_spell_type() == "bard") bonus = caster->query_stats("charisma");
         else bonus = caster->query_stats("wisdom");
@@ -91,7 +91,7 @@ void spell_effect(int prof){
                 tell_object(caster,"Something blocks your attempt!");
                 return;
             }
-//new power stuff by ~Circe~ 6/20/08 to be in line with 
+//new power stuff by ~Circe~ 6/20/08 to be in line with
 //other scry spells
             if(query_spell_type() == "bard") bonus = caster->query_stats("charisma");
             else bonus = caster->query_stats("wisdom");
