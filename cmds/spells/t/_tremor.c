@@ -1,6 +1,6 @@
 // Changing damage to be clevel,4 after overall agreement on webboard. Dinji - 10/21
-//Making it so if they fail the save, they will always get tripped - 
-//Before there was a chance that the message would go through but 
+//Making it so if they fail the save, they will always get tripped -
+//Before there was a chance that the message would go through but
 //tripped would be set to 0. ~Circe~ 5/5/08 Rebalancing domains
 
 #include <std.h>
@@ -11,7 +11,7 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("tremor");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 5, "inquisitor" : 2 ]));
     set_spell_sphere("combat");
     set_spell_domain("destruction");
     set_syntax("cast CLASS tremor");
@@ -22,7 +22,7 @@ void create(){
     set_save("reflex");
 }
 
-string query_cast_string(){ 
+string query_cast_string(){
 	tell_object(caster,"%^ORANGE%^A low rumble echoes around you, as "+
 		"you begin the words of this prayer.");
 	tell_room(place,"%^ORANGE%^A low rumble can be heard as "+caster->QCN+""+

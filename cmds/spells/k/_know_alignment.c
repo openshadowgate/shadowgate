@@ -6,7 +6,7 @@ inherit SPELL;
 create() {
     ::create();
     set_spell_name("know alignment");
-    set_spell_level(([ "cleric" : 2 ]));
+    set_spell_level(([ "cleric" : 2, "inquisitor" : 2 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS know alignment on TARGET");
     set_description("Allows the caster to learn the target's alignment. This can be foiled by certain illusion magics.");
