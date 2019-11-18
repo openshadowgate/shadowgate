@@ -104,11 +104,15 @@ spell_effect(int prof) {
         if(caster->is_undead())
         {
             tell_room(place,"%^BLUE%^"+caster->QCN+" points "+caster->QP+" hand at "+target->QCN+" and channels a beam of darkness energy into them!");
+            if(!target->is_undead())
+                set_helpful_spell(0);
             damage_targ(target, "torso", sdamage,"negative energy");
         }
         else
         {
             tell_room(place,"%^ORANGE%^"+caster->QCN+" points "+caster->QP+" hand at "+target->QCN+" and channels a beam of light into them!");
+            if(target->is_undead())
+                set_helpful_spell(0);
             damage_targ(target, "torso", sdamage,"positive energy");
         }
     }
