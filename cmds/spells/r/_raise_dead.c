@@ -9,11 +9,10 @@ create() {
     set_spell_name("raise dead");
     set_spell_level(([ "cleric" : 5, "druid" : 4, "paladin" : 4, "bard" : 4, "inquisitor" : 4 ]));
     set_spell_sphere("healing");
-    set_syntax("cast CLASS raise dead on TARGET (dead player's name)");
-    set_description("This spell will revive a dead player when cast upon their corpse.  The deceased will be returned to "
-"the site of death and revived.  Note it is similar to being revived in a church as the person will be barely alive and "
-"need significant healing.  The target will suffer somewhat less from the death (lower exp. loss) due to the intervention "
-"of the priest.\n\nSee also: help pkilling, help rules\n");
+    set_syntax("cast CLASS raise dead on TARGET");
+    set_description("This spell will revive a dead player when cast upon their corpse. The deceasedwill be returned to the site of death and revived. Note it is similar to beingrevived in a church as the person will be barely alive and need significanthealing. The target will suffer somewhat less from the death due to the intervention of the priest.
+
+The TARGET must be the recognized name of the dead player.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -88,7 +87,7 @@ spell_effect(int prof) {
     targ->set("RaisingRoom",base_name(environment(caster)));
     targ->set("RaisingExpLoss",(-10+(random(2)+random(3)+1)));
     targ->set("RaisingType","raise dead");
-    tell_object(targ,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul. You sense that a faithful of "+capitalize((string)caster->query_diety())+" is trying to return you to life!\nType <accept> to return to life, or <cancel> to leave your fate in Lysara's hands.%^RESET%^");
+    tell_object(targ,"%^RESET%^%^WHITE%^%^BOLD%^You can feel a pull on your soul. You sense that a faithful of "+capitalize((string)caster->query_diety())+" is trying to return you to life!\nType %^ORANGE%^<accept>%^WHITE%^ to return to life, or %^ORANGE%^<cancel>%^WHITE%^ to leave your fate in Lysara's hands.%^RESET%^");
     corpse->remove();
     dest_effect();
 }

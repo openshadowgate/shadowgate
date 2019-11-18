@@ -8,14 +8,12 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("resurrection");
-    set_spell_level(([ "cleric" : 9 ]));
+    set_spell_level(([ "cleric" : 9,"druid":9 ]));
     set_spell_sphere("healing");
-    set_syntax("cast CLASS resurrection on TARGET (dead player's name)");
-    set_description("Praying to their diety for a miracle, a priest can attempt to resurrect a slain ally back to life.  "
-"The resurrection, if successful, will restore the corpse back to life and full of health.  The spell is somewhat "
-"draining on the priest, for channeling large ammounts of divine power can be exhausting.  The target will suffer "
-"significantly less (lower exp. loss) from the death due to the intervention of the priest.\n\nSee also:  help pkilling, "
-"help rules");
+    set_syntax("cast CLASS resurrection on TARGET");
+    set_description("Praying to their diety for a miracle, a priest can attempt to resurrect a slainally back to life. The resurrection, if successful, will restore the corpseback to life and full of health. The spell is somewhat draining on the priest,for channeling large ammounts of divine power can be exhausting. The targetwill suffer significantly less from the death due to theintervention of the priest. Unlike lower spells this spell will work on targets whose corpse is not present.
+
+The TARGET must be the recognized name of the dead player.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -75,32 +73,25 @@ spell_effect(int prof) {
         dest_effect();
         return;
     }
-    if (!corpse = present(what,environment(caster))) {
-        tell_object(caster,capitalize(arg)+"'s corpse is not here.");
-        tell_object(targ,caster->QCN+" fails to resurrect you.");
-        dest_effect();
-        return;
-    }
     tell_object(caster,"You can feel the power of "+capitalize((string)caster->query_diety())+" flow out "
         "to "+targ->QCN+"'s soul, and know that "+targ->QS+" life is in "+targ->QP+" own hands now.");
     tell_room(environment(caster),"The power of "+caster->QCN+"'s spell flows through the area as "+caster->QS+" "
         "tries to bring "+targ->QCN+" back to life!",caster);
-    
+
     targ->set("RaisingPriestGod",caster->query_diety());
     targ->set("RaisingPriestAlignment",caster->query_alignment());
     targ->set("RaisingRoom",base_name(environment(caster)));
     targ->set("RaisingExpLoss",(-5));
-    targ->set("RaisingType","resurrection");   
-    tell_object(targ,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul.  You sense "
+    targ->set("RaisingType","resurrection");
+    tell_object(targ,"%^RESET%^%^BOLD%^%^WHITE%^You can feel a pull on your soul.  You sense "
         "that a "+capitalize(what_alignment((int)caster->query_alignment()))+" faithful "
         "of "+capitalize((string)caster->query_diety())+" is trying to return you to "
-        "life!\nType <accept> to return to life, or <cancel> to leave your "
-        "fate in Lysara's hands.%^RESET%^");
+        "life!\nType %^ORANGE%^<accept>%^WHITE%^ to return to life, or %^ORANGE%^<cancel>%^WHITE%^ to leave your "
+        "fate to a chance.%^RESET%^");
     //targ->revive(-5);
     //targ->set_heart_beat(1);
     //targ->cease_all_attacks();
     //targ->move_player(environment(caster));
-    corpse->remove();
 	//targ->set_hp(targ->query_max_hp());
 	caster->use_stamina(25);
     dest_effect();
