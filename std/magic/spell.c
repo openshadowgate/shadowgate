@@ -2229,6 +2229,7 @@ varargs int do_save(object targ,int mod) {
     case "cleric":
     case "ranger":
     case "paladin":
+    case "inquisitor":
     case "antipaladin":
     case "druid":
     case "monk":

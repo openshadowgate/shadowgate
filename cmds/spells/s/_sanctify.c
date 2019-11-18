@@ -12,7 +12,7 @@ string roomName;
 void create() {
     ::create();
     set_spell_name("sanctify");
-    set_spell_level(([ "cleric" : 4, "paladin" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "paladin" : 4, "inquisitor" : 4 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS sanctify");
     set_description("Calling on the power of his or her god, the caster creates a protected place for him or herself to "
@@ -47,7 +47,7 @@ void spell_effect(int prof) {
     call_out("dest_effect", (ROUND_LENGTH * 20 * clevel * prof)/100);
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if (find_call_out("dest_effect")) { remove_call_out("dest_effect"); }
      if (objectp(portal))    portal->end_magic();

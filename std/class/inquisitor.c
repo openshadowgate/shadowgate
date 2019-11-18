@@ -23,7 +23,7 @@ int *restricted_alignments()
 string *restricted_gods() { return ({}); }
 
 mapping stat_requirements() {
-    return ([ "charisma" : 13, "wisdom" : 13, "strength" : 13 ]);
+    return ([ "wisdom" : 15, ]);
 }
 
 int *saving_throws() { return ({ 1,0,1 }); }
