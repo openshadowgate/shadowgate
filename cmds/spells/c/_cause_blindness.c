@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("pator");
     set_spell_name("cause blindness");
-    set_spell_level(([ "cleric" : 3, "paladin" : 3 ]));
+    set_spell_level(([ "cleric" : 3, "paladin" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS cause blindness on TARGET");
     set_description("By touching your opponent's eyes, you take the light from "+
@@ -25,10 +25,10 @@ void create() {
     set_save("reflex");
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int clevel,effect, bonus;
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
@@ -42,13 +42,13 @@ void spell_effect(int prof)
 
 
     place = environment(caster);
-    if (environment(target)!=place) 
+    if (environment(target)!=place)
     {
         tell_object(caster,"%^BOLD%^Your target has left the area!%^RESET%^");
         dest_effect();
         return;
     }
-    
+
     if (CASTER->query_invis() && !CASTER->query_true_invis()) CASTER->set_invis();
 
     spell_successful();
@@ -62,8 +62,8 @@ void spell_effect(int prof)
     tell_object(target,"%^YELLOW%^Radiant streams of light swirl with dark shadows"+
         " around "+caster->QCN+"'s hand as "+caster->QS+" reaches out to touch you!");
 
-    if(do_save(target,0)) 
-    { 
+    if(do_save(target,0))
+    {
         tell_object(caster,"%^YELLOW%^The shadows and light burst from your "+
         "hand, but do not seem to affect "+target->QCN+".");
         tell_room(place,"%^YELLOW%^The shadows and light burst from "+
@@ -73,12 +73,12 @@ void spell_effect(int prof)
         caster->QCN+"'s hand, but you are unaffected!");
         dest_effect();
         return;
-    }   
+    }
     tell_object(caster,"%^YELLOW%^The shadows and light burst from your hand, "+
         "rendering "+target->QCN+" blind.");
     tell_room(place,"%^YELLOW%^The shadows and light burst from "+caster->QCN+"'s "+
         "hand, sending "+target->QCN+" stumbling blindly.",({target,caster}));
-    tell_object(target,"%^YELLOW%^The shadows and light burst from "+	
+    tell_object(target,"%^YELLOW%^The shadows and light burst from "+
     caster->QCN+"'s hand, removing your sight!");
     target->set_blind(1);
 
@@ -88,19 +88,19 @@ void spell_effect(int prof)
     call_out("test", ROUND_LENGTH);
 }
 
-void test() 
+void test()
 {
-    if (!objectp(target)) 
+    if (!objectp(target))
     {
         dest_effect();
         return;
     }
-    if(!target->query_blind()) 
+    if(!target->query_blind())
     { //effect has already been removed
         dest_effect();
         return;
     }
-    if(combatrounds < 1 || normrounds < 1) 
+    if(combatrounds < 1 || normrounds < 1)
     { // can effect once either hits zero
         target->set_blind(0);
         dest_effect();
@@ -112,7 +112,7 @@ void test()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

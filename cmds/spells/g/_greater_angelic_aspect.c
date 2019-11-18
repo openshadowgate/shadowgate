@@ -32,7 +32,7 @@ void effect(int direction)
 void create(){
     ::create();
     set_spell_name("greater angelic aspect");
-    set_spell_level(([ "cleric": 8, "paladin": 4, "mage": 8 ]));
+    set_spell_level(([ "cleric": 8, "paladin": 4, "mage": 8, ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS greater angelic aspect");
     set_damage_desc("levitating, AC4, darkvision, 50 DR to Acid and Cold, 10 DR to Fire, Electricity, deathward");

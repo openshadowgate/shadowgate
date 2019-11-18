@@ -9,7 +9,7 @@ void create(){
     ::create();
     set_author("circe");
     set_spell_name("righteous might");
-    set_spell_level(([ "cleric" : 2 ]));
+    set_spell_level(([ "cleric" : 2 ,]));
     set_spell_sphere("alteration");
     set_spell_domain("strength");
     set_syntax("cast CLASS righteous might");

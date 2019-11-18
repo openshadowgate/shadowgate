@@ -11,7 +11,7 @@ void dest_effect();
 void create() {
     ::create();
     set_spell_name("sound burst");
-    set_spell_level(([ "bard" : 2, "cleric" : 2 ]));
+    set_spell_level(([ "bard" : 2, "cleric" : 2, "inquisitor" : 2 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sound burst on TARGET");
     set_description("This spell enhances a simple click of the fingers, reaching the target with an ear-shattering pitch "
@@ -29,7 +29,7 @@ string query_cast_string() {
     return "%^BOLD%^%^CYAN%^"+caster->QCN+" raises a hand, fingertips touching.";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int num, damage, size, i;
     object *attackers, *inven, *hits, *ownparty, *SpellMasterySpells;
@@ -52,7 +52,7 @@ void spell_effect(int prof)
 
     spell_successful();
     damage = sdamage;
-	
+
     tell_room(place, "%^CYAN%^%^BOLD%^"+caster->QCN+" snaps "+caster->QP+" fingers clearly in a gesture towards "
         +target->QCN+", who staggers back and clutches "+target->QP+" ears!",({caster, target}) );
     tell_object(caster, "%^CYAN%^%^BOLD%^You snap your fingers clearly with a gesture towards "+target->QCN+", who "
@@ -70,7 +70,7 @@ void spell_effect(int prof)
     if(pointerp(target->query_attackers())) hits += target->query_attackers();
     hits -= ({caster});
     hits -= ({ target });
-    
+
     hits = target_filter(hits);
 
     size = random(clevel);
@@ -96,16 +96,16 @@ void dest_effect() {
 	object *SpellMasterySpells;
       if(objectp(caster))
 	{
-		if(sizeof(SpellMasterySpells = caster->query_property("spellmastery_spells"))) 
+		if(sizeof(SpellMasterySpells = caster->query_property("spellmastery_spells")))
 		{
 			if(member_array(TO, SpellMasterySpells) != -1)
 			{
 				SpellMasterySpells -= ({TO});
 				caster->remove_property("spellmastery_spells");
-				if(sizeof(SpellMasterySpells)) 
+				if(sizeof(SpellMasterySpells))
 				{
 					caster->set_property("spellmastery_spells",
-					SpellMasterySpells);	
+					SpellMasterySpells);
 				}
 			}
 		}

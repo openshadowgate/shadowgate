@@ -15,7 +15,7 @@ void dest_effect();
 create() {
     ::create();
     set_spell_name("vampiric touch");
-    set_spell_level(([ "mage" : 3, "paladin" : 3 ]));
+    set_spell_level(([ "mage" : 3, "paladin" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS vampiric touch on TARGET");
     set_damage_desc("negative energy on TARGET, untyped on self");
