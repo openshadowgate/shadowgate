@@ -67,6 +67,8 @@ void spell_effect(int prof) {
         tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" faints!%^RESET%^",target);
         target->set_unconscious(roll_dice(1,2)*8,"You're unconcious!");
     }
+    target->set_property("spelled", ({TO}) );
+    addSpellToCaster();
     call_out("dest_effect",duration);
     spell_successful();
 }
@@ -80,6 +82,7 @@ void dest_effect() {
         target->add_damage_bonus(bonus);
         target->add_attack_bonus(bonus);
         target->set_property("empowered",bonus);
+        target->remove_property_value("spelled", ({TO}) );
         for(i=0;i<sizeof(CORE_SKILLS);i++)
             caster->add_skill_bonus(CORE_SKILLS[i],bonus);
         caster->add_saving_bonus("all",bonus);
