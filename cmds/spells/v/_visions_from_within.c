@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("visions from within");
-    set_spell_level(([ "mage":7,"cleric":7,"bard":5]));
+    set_spell_level(([ "mage":7,"cleric":7,"bard":5, "inquisitor" : 6]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS visions from within");
     set_damage_desc("mental");

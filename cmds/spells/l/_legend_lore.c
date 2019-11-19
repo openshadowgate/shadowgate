@@ -8,7 +8,7 @@ int i;
 void create() {
     ::create();
     set_spell_name("legend lore");
-    set_spell_level(([ "bard" : 1, "mage" : 6 ]));
+    set_spell_level(([ "bard" : 1, "mage" : 6, "inquisitor" : 6 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS legend lore on <object>");
     set_description("This spell grants the caster a second's insight into the nature of an item, revealing both magical "
@@ -31,7 +31,7 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-    
+
     ob = present(arg,environment(caster));
     if (!ob) ob = present(arg,caster);
 

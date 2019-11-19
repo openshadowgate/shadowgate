@@ -11,7 +11,7 @@ create() {
     ::create();
     set_author("ares");
     set_spell_name("heroes feast");
-    set_spell_level(([ "cleric" : 6, "bard" : 6 ]));
+    set_spell_level(([ "cleric" : 6, "bard" : 6, "inquisitor" : 6 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS heroes feast");
     set_description("This spell will allow the caster to create a huge table, filled with delectable treats and succulent "
@@ -23,17 +23,17 @@ create() {
     set_helpful_spell(1);
 }
 
-int preSpell() 
+int preSpell()
 {
-    if(present("heroes feast", place)) 
-    { 
+    if(present("heroes feast", place))
+    {
         tell_object(caster, "There is already a banquet table here.");
         return 0;
     }
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
 

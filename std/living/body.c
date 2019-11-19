@@ -156,9 +156,19 @@ void set_max_hp_bonus(int hp)
     max_hp_bonus = hp;
 }
 
-void add_max_hp_bonus(int hp)
+int add_max_hp_bonus(int hp)
 {
-    max_hp_bonus += hp;
+
+    if(max_hp_bonus>=(query_max_hp_base()))
+    {
+        max_hp_bonus=query_max_hp_base();
+        return 0;
+    }
+    else
+    {
+        max_hp_bonus += hp;
+        return 1;
+    }
 }
 
 int query_max_hp_bonus()
