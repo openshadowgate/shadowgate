@@ -84,6 +84,12 @@ void execute_feat()
         dest_effect();
         return;
     }
+    if(!objectp(place))
+    {
+        tell_object(caster, "You're not there!");
+        dest_effect();
+        return;
+    }
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");
@@ -166,12 +172,12 @@ void execute_attack()
     tell_object(caster,"%^BLUE%^A ray of deadly negative energy releases of your finger and hits "+target->QCN+"!");
     tell_room(place,"%^BLUE%^A ray of death releases of "+caster->QCN+"'s finger and hits "+target->QCN+"!",caster);
 
-    bonusdc = clevel+22;
+    bonusdc = clevel+12;
     if((string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
         tell_object(target,"%^BOLD%^Your soul struggles, but manages to survive.");
         tell_room(place,"%^BOLD%^%^BLUE%^"+target->QCN+" is harmed but manages to survive the death!",target);
-        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,10),"negative energy");
+        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,8),"negative energy");
     } else {
         tell_room(place,"%^BOLD%^%^WHITE%^The soul is pushed beyond %^MAGENTA%^the veil%^WHITE%^ from its coil!");
         tell_room(place,"%^BOLD%^%^WHITE%^The lifeless husk of "+target->QCN+" drops to the ground!",target);
