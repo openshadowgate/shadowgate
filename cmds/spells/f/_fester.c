@@ -11,7 +11,7 @@ void create()
     set_spell_level(([ "inquisitor" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS fester on TARGET");
-    set_damage_desc("positive energy resistance");
+    set_damage_desc("resistance to healing spells");
     set_description("Necrotic energy permeates the target, blocking some of energy flow, impeding their healing abilities.");
     set_verbal_comp();
     set_somatic_comp();
@@ -21,6 +21,16 @@ void create()
 string query_cast_string()
 {
     return "%^MAGENTA%^"+caster->QCN+" proclaims and incantation, darkness forms behind "+caster->QO+".";
+}
+
+int preSpell()
+{
+    if (target->query_property("fester"))
+    {
+        tell_object(caster,"%^BOLD%^The spell is repelled forcibly.");
+        return 0;
+    }
+    return 1;
 }
 
 void spell_effect()
@@ -40,9 +50,7 @@ void spell_effect()
 
     lower = 4*clevel;
 
-    target->set_property("positive energy resistance",lower);
-
-    target->set_property("fester",1);
+    target->set_property("fester",lower);
     call_out("dest_effect",clevel*ROUND_LENGTH,lower);
 }
 
@@ -50,7 +58,6 @@ void dest_effect()
 {
     if(objectp(target))
     {
-        target->set_property("positive energy resistance",-lower);
         target->remove_property("fester");
     }
     ::dest_effect();

@@ -1,7 +1,7 @@
 // mark of justice
-//Adjusted by ~Circe~ 4/26/08 to be a more useful tool 
-//in investigation.  Made 5th level and will give an 
-//actual scry rather than just a brief glimpse of where 
+//Adjusted by ~Circe~ 4/26/08 to be a more useful tool
+//in investigation.  Made 5th level and will give an
+//actual scry rather than just a brief glimpse of where
 //the target is.
 #include <std.h>
 #include <magic.h>
@@ -16,7 +16,7 @@ void create(){
     ::create();
     set_author("ares");
     set_spell_name("mark of justice");
-    set_spell_level(([ "cleric" : 5, "paladin" : 4 ]));
+    set_spell_level(([ "cleric" : 5, "paladin" : 4, "inquisitor" : 4 ]));
     set_spell_sphere("divination");
     set_spell_domain("vigilance");
     set_syntax("cast CLASS mark of justice on TARGET");
@@ -99,7 +99,7 @@ void spell_effect(int prof){
 }
 
 /*
-Removing the execute_attack stuff since this is supposed 
+Removing the execute_attack stuff since this is supposed
 to be generally a quiet scry spell now
 void execute_attack(){
     object room;

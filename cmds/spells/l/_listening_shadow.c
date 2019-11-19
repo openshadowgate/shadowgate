@@ -16,7 +16,7 @@ string theName;
 void create(){
     ::create();
     set_spell_name("listening shadow");
-    set_spell_level(([ "cleric" : 8, "assassin" : 4, "inquisitor" : 3 ]));
+    set_spell_level(([ "cleric" : 8, "assassin" : 4, ]));
     set_spell_sphere("divination");
     set_spell_domain("darkness");
     set_syntax("cast CLASS listening shadow on TARGET");

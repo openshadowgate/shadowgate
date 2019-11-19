@@ -407,6 +407,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             damage = -abs(damage);
     }
 
+
     if(damage > 0 && type != "force" && objectp(myEB = targ->query_property("empty body")))
     {
         return 0;
@@ -443,6 +444,16 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         }
     }
 
+    if(targ->query_property("fester") && damage < 0)
+    {
+        damage += targ->query_property("fester");
+        if(damage>0)
+        {
+            damage = 0;
+            return damage;
+        }
+    }
+
     if((int)targ->query_property("damage resistance") && member_array(type, PHYSICAL_DAMAGE_TYPES) != -1)
     {
         if(damage > 0)
@@ -466,6 +477,8 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             }
         }
     }
+
+
 
     if((int)targ->query_property("spell damage resistance") && member_array(type, (VALID_DAMAGE_TYPES - PHYSICAL_DAMAGE_TYPES)) != -1)
     {
