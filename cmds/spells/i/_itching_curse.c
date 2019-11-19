@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("itching curse");
-    set_spell_level(([ "paladin" : 1, "bard" : 1, "druid" : 1, "inquisitor" : 1, "wizard" : 1 ]));
+    set_spell_level(([ "paladin" : 1, "bard" : 1, "druid" : 1, "inquisitor" : 1, "mage" : 1 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS itching curse TARGET");
     set_description("You curse someone with itching curse. Annoying! This spell must be evil.");
@@ -39,7 +39,7 @@ void spell_effect()
 
     if(do_save(target,0))
     {
-        tell_object(target,"%^GREEN%^You concentrate and ignore effects of the curse.%^RESET%^");
+        tell_object(target,"%^GREEN%^You concentrate and ignore effects of the itchy curse.%^RESET%^");
         tell_object(caster,"%^GREEN%^"+target->QCN+" shakes the curse off.%^RESET%^");
         ::dest_effect();
         TO->remove();
