@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "bard" : 1, "inquisitor" : 1, "mage" : 1, "psion" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS forced quiet on TARGET");
-    set_description("");
+    set_description("Not yet in. With a gesture, you muffle sound around the target's mouth, making them less talkative.");
     set_save("will");
     set_verbal_comp();
     set_somatic_comp();
