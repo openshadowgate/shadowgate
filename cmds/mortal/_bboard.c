@@ -18,6 +18,7 @@ string * BBOARDS=({
             "bard",
             "cleric",
             "druid",
+            "inquisitor",
             "fighter",
             "mage",
             "monk",
