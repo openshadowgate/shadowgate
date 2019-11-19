@@ -339,21 +339,22 @@ int can_memorize(string myclass, string spell)
     curr = query_num_spells_level(myclass,lvl);
     max = 0;
     switch(myclass) {
-      case "cleric": case "paladin": case "ranger": case "druid": mystat = "wisdom"; break;
-      case "bard": case "sorcerer": mystat = "charisma"; break;
-      default: mystat = "intelligence"; break;
+    case "cleric": case "paladin": case "ranger": case "druid": case "inquisitor":
+        mystat = "wisdom"; break;
+    case "bard": case "sorcerer":
+        mystat = "charisma"; break;
+    default:
+        mystat = "intelligence"; break;
     }
 
     class_level = TO->query_prestige_level(myclass); // calculated in /std/user.c
 
-    //override til palis are merged
     if(myclass == "paladin" && !TO->is_class("paladin") && TO->is_class("antipaladin"))
     {
-        //max = WIZ_CALCS->query_spell_limit(lvl, query_class_level("antipaladin"), myclass, (int)TO->query_stats(mystat));
         max = WIZ_CALCS->query_spell_limit(lvl, class_level, myclass, (int)TO->query_stats(mystat));
     }
     else max = WIZ_CALCS->query_spell_limit(lvl, class_level, myclass, (int)TO->query_stats(mystat));
-    //else max = WIZ_CALCS->query_spell_limit(lvl, query_class_level(myclass), myclass, (int)TO->query_stats(mystat));
+
     max = magic_arsenal_feat(max);
     max = bonus_spell_slots(max);
     max = bonus_spell_slots_by_level(lvl, max);
