@@ -12,6 +12,7 @@ void create()
     set_spell_level(([ "paladin" : 1, "bard" : 1, "druid" : 1, "inquisitor" : 1, "mage" : 1 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS itching curse on TARGET");
+    set_damage_desc("reduced skills, attack bonus, saves by 1 point");
     set_description("You curse someone with itching curse. Annoying! This spell must be evil.");
     set_save("will");
     set_verbal_comp();
@@ -46,7 +47,7 @@ void spell_effect()
         return;
     }
 
-    call_out("dest_effect",clevel*ROUND_LENGTH+5);
+    call_out("dest_effect",(clevel+5)*ROUND_LENGTH);
     call_out("itch_itch",ROUND_LENGTH);
 
     for(i=0;i<sizeof(CORE_SKILLS);i++)
