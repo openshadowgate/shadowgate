@@ -8,15 +8,13 @@ string whoname, whocname, cname, Ccname;
 void create() {
     ::create();
     set_spell_name("sending");
-    set_spell_level(([ "psion" : 2 ]));
+    set_spell_level(([ "psion" : 2, "inquisitor" : 4 ]));
     set_discipline("telepath");
     set_spell_sphere("divination");
     set_syntax("cast CLASS sending to TARGET");
     set_description("This power allows a brief message to be sent to the target.  The target cannot respond, and the "
 "telepath's message must be shorter than 200 characters.  If the message is too long, the power fails.  Likewise, if the "
 "target is ignoring the psion or incapacitated in some way, the power will fail.");
-    set_verbal_comp();
-    set_somatic_comp();
     set_non_living_ok(0);
     set_arg_needed();
     set_silent_casting(1);
@@ -25,7 +23,7 @@ void create() {
 
 void spell_effect(int prof) {
     string arg;
-    string *ignored, *casterallowed, *targallowed;    
+    string *ignored, *casterallowed, *targallowed;
 
     spell_successful();
     arg = lower_case(ARG);

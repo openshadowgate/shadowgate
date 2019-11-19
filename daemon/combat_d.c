@@ -444,6 +444,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         }
     }
 
+    //Healing effects reduction on typed damage
     if(targ->query_property("fester") && damage < 0)
     {
         damage += targ->query_property("fester");
