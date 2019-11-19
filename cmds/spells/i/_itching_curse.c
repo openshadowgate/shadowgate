@@ -11,7 +11,7 @@ void create()
     set_spell_name("itching curse");
     set_spell_level(([ "paladin" : 1, "bard" : 1, "druid" : 1, "inquisitor" : 1, "mage" : 1 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS itching curse TARGET");
+    set_syntax("cast CLASS itching curse on TARGET");
     set_description("You curse someone with itching curse. Annoying! This spell must be evil.");
     set_save("will");
     set_verbal_comp();
