@@ -10,10 +10,10 @@ void create() {
     set_spell_name("contingency");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("invocation_evocation");
-    set_syntax("cast CLASS contingency on SPELL_NAME [. SPELL_ARGS]");
+    set_syntax("cast CLASS contingency on SPELL_NAME [SPELL_ARGS]");
     set_description("This spell allows you to put a spell in reserve, called upon at any time with the command <now>. The target of the reserved spell is always the caster, but arguments can be specified for spells that require them. You must carry a likeness of yourself, usually a small statue, when casting this spell.
 
-Example of usage:  cast contingency on teleport . REMEMBERED_LOCATION");
+Example of usage:  cast contingency on teleport on REMEMBERED_LOCATION");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -46,7 +46,7 @@ void spell_effect(int prof) {
     return;
   }
 
-  if (sscanf(ARG,"%s . %s",spell,args) != 2) {
+  if (sscanf(ARG,"%s %s",spell,args) != 2) {
     spell = ARG;
     args = 0;
   }
@@ -97,9 +97,11 @@ void spell_effect(int prof) {
   // Changed by Garrett to actually be dismissable and dispellable.
   // The spell is WAY overpowered if it's not dispellable.
   // Garrett
+  // Changed by ilmarinen to make int not dispellable.
+  // The spell is WAY underpowered if it is dispellable.
+  // Ilmarinen
   set_heart_beat(15);
   addSpellToCaster();
-  caster->set_property("spelled",({TO}));
   //  dest_effect();
 }
 
