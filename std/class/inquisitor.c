@@ -80,7 +80,7 @@ int attack_bonus(object player)
 {
     int level,bonus;
     level = player->query_prestige_level("inquisitor");
-    bonus = (level*3) / 4; // boosted
+    bonus = (level*3) / 4; //Slightly below y=x ,like clerics
     return bonus;
 }
 
