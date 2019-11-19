@@ -71,10 +71,10 @@ int now() {
     spellobj = new(spell);
 
     if(!stringp(args) || args == "") {
-        spellobj->use_spell(TP,"",level, prof);
+        spellobj->use_spell(TP,"",level, prof,"mage");
     }
     else {
-        spellobj->use_spell(TP,args,level, prof);
+        spellobj->use_spell(TP,args,level, prof,"mage");
     }
 
     call_out("remove",1);
