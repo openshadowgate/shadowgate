@@ -14,6 +14,7 @@ void create()
     set_spell_name("cone of cold");
     set_spell_level(([ "mage" : 5, "monk" : 15]));
     set_spell_sphere("invocation_evocation");
+    set_monk_way("way of the elementa");
     set_syntax("cast CLASS cone of cold on TARGET");
     set_damage_desc("delayed cold");
     set_description("By casting this spell, you form a massive white cone of icy cold towards your target.  Not only does "

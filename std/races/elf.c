@@ -23,11 +23,11 @@ int *restricted_alignments(string subrace) {
 string *restricted_classes(string subrace) {
     if(!subrace || subrace == "") return ({ "psion", "psywarrior", "paladin", "monk" });
     switch(subrace) {
-    case "aquatic elf": return ({ "psion", "psywarrior", "paladin", "monk"}); break;
+    case "aquatic elf": return ({ "psion", "psywarrior", "paladin", "monk","inquisitor"}); break;
     case "fey'ri": return ({ "psion", "psywarrior", "monk", "druid" }); break;
     case "sun elf": return ({ "psion", "psywarrior", "monk", "druid" }); break;
     case "szarkai": return ({ "psion", "psywarrior", "paladin", "monk", "druid" }); break;
-    case "wild elf": return ({ "bard", "mage", "psion", "psywarrior", "paladin", "monk" }); break;
+    case "wild elf": return ({ "bard", "mage", "psion", "psywarrior", "paladin", "monk", "inquisitor" }); break;
     case "wood elf": return ({ "mage", "psion", "psywarrior", "paladin", "monk" }); break;
     default: return ({ "psion", "psywarrior", "paladin", "monk" }); break;
     }

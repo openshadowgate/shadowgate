@@ -4,7 +4,6 @@
 #include <daemons.h>
 #include <schoolspells.h>
 #include <psions.h>
-#include <monks.h>
 
 #define NO_EFFECT -100
 inherit DAEMON;
@@ -29,7 +28,7 @@ string spell_name,
     *my_class,
     *immune,
     spell_domain,
-    * sorc_bloodlines,
+    monk_way,
     damage_desc,
     save_type,
     syntax,
@@ -316,7 +315,7 @@ void set_damage_desc(string desc)
 
 void set_spell_duration() {    duration = 1; }
 void set_spell_sphere(string sphere) { spell_sphere = sphere; }
-void set_sorc_bloodlines(string * bloodlines) { sorc_bloodlines = bloodlines; }
+void set_monk_way(string myway) { monk_way = myway; }
 void set_cast_string(string str) {  cast_string = str; }
 void set_silent_casting(int a) {    silent_casting = a; }
 void set_target_required(int a) {   target_required = a; }
@@ -914,18 +913,12 @@ void wizard_interface(object user, string type, string targ)
 
         if(!stringp(way))
         {
-            tell_object(caster, "You do not have a monk specialization set. You must visit your temple and "+
-            "choose one!");
+            tell_object(caster, "You do not have a monk specialization set. Visit a temple and choose one!");
             TO->remove();
             return;
         }
-        if(!KI_COST[way])
-        {
-            tell_object(caster, "Something is wrong with the ki cost for this "+whatsit+". Please contact a wiz.");
-            TO->remove();
-            return;
-        }
-        mycost = KI_COST[way][spell_name];
+        mycost = query_spell_level("monk")/2;
+        mycost = mycost>6?6:mycost;
         if(!mycost)
         {
             tell_object(caster, "Something is wrong with the ki cost for this "+whatsit+". Please contact a wiz.");
@@ -1423,7 +1416,7 @@ mapping query_components(string classtype) {
 
 string query_spell_type() {  return spell_type; }
 string query_spell_sphere() { return spell_sphere; }
-string * query_sorc_bloodlines() { return sorc_bloodlines; }
+string query_monk_way() { return monk_way; }
 string query_cast_string() { }
 int query_silent_casting() {  return silent_casting; }
 
@@ -2762,8 +2755,8 @@ void help() {
         mydiscipline = "";
     if(mydiscipline != "")
         write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
-    if(pointerp(sorc_bloodlines))
-        write("%^BOLD%^%^RED%^Bloodline:%^RESET%^ "+implode(sorc_bloodlines,", "));
+    if(monk_way != "")
+        write("%^BOLD%^%^RED%^Monk way:%^RESET%^ "+monk_way);
     if(!save_type)
         save_type = "";
     if(save_type != "")

@@ -19,6 +19,7 @@ void create() {
     set_spell_name("burning hands");
     set_spell_level(([ "mage" : 1, "monk" : 3 ]));
     set_spell_sphere("alteration");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS burning hands on TARGET");
     set_description("This spell begins by the caster fanning out his hands while chanting the spell.  Flames will flare "
 "out and do a small amount of damage to the target and those near him. A versatile arcanist can manipulate the base element "
