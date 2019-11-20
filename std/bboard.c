@@ -400,21 +400,21 @@ string display_new( string id ) {
 
     str=" ";
 
-    str+="%^BOLD%^%^BLACK%^[%^RESET%^%^GREEN%^";
+    str+="%^GREEN%^(";
     if(newposts)
         str+="%^YELLOW%^";
-    str+=sprintf("%2d",newposts)+"%^RESET%^%^GREEN%^ out of "+sprintf("%2d",maxi)+"%^BOLD%^%^BLACK%^]%^RESET%^";
+    str+=sprintf("%2d",newposts)+"%^GREEN%^ out of "+sprintf("%2d",maxi)+")%^RESET%^";
 
 
 	if(restricted_read) {
 		if(!valid_user(TP)) {
-			str+= "%^BOLD%^%^BLACK%^[Write only]%^RESET%^";
+			str+= "%^GREEN%^[Write only]%^RESET%^";
 		}
 	}
 	if(restricted_post) {
 		if(!TP) return 0;
 		if(!valid_user(TP)) {
-			str+= "%^BOLD%^%^BLACK%^[Read only]%^RESET%^";
+			str+= "%^GREEN%^[Read only]%^RESET%^";
 		}
 	}
     return str;

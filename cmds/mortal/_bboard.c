@@ -24,7 +24,6 @@ string * BBOARDS=({
             "monk",
             "paladin",
             "psion",
-            "psywarrior",
             "ranger",
             "thief",
             "warlock",
@@ -108,17 +107,13 @@ int check_access(string my_command, string which_board)
                     break;
             }
         case "mage":
-            if (TP->is_class("sorcerer") || TP->is_class("bard") || avatarp(TP)) return 1;
+            if (TP->is_class("sorcerer") || avatarp(TP)) return 1;
             if(TP->is_class(which_board)) return 1;
             else return 0;
             break;
         case "psion":
-            if(TP->is_class("psywarrior") || avatarp(TP)) return 1;
+            if(TP->is_class("psywarrior") || TP->is_class("psion") ||avatarp(TP)) return 1;
             if (TP->is_class(which_board)) return 1;
-            else return 0;
-            break;
-        case "cavalier":
-            if ((TP->is_class("paladin")) || (TP->is_class("antipaladin")) || avatarp(TP)) return 1;
             else return 0;
             break;
         case "avatar": case "pkmail": case "avatarmail":
