@@ -16,7 +16,8 @@ void create()
     ::create();
     set_spell_name("fire storm");
     set_spell_level(([ "cleric" : 8, "druid" : 7, "monk" : 17 ]));
-    set_spell_sphere("elemental fire");
+    set_spell_sphere("invocation_evocation");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS fire storm");
     set_damage_desc("fire");
     set_description("When the fire storm spell is cast, the whole area is shot through with sheets of roaring flame.  Any "

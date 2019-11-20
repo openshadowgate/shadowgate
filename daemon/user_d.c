@@ -223,7 +223,7 @@ void init_ki_spells(object ob, string myWay)
     myLev = ob->query_prestige_level("monk");
     myMastered = ob->query_ki_spells();
     ShouldHave = ({});
-    if(!mapp(kiSpells = KI_SPELLS[myWay])) return;
+    if(!mapp(kiSpells = MAGIC_D->index_ki_spells_by_level(ob))) return;
     //tell_object(find_player("noobermonker"),"kiSpells: "+identify(kiSpells));
     kiLevels = keys(kiSpells);
     if(!sizeof(kiLevels)) return;

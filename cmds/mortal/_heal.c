@@ -4,52 +4,52 @@
 #include <magic.h>
 inherit DAEMON;
 
-int cmd_heal(string str) 
+int cmd_heal(string str)
 {
     string targ_id;
     int mount, mod, success, prof, paratime, delay, diff, healed, toheal;
     int x, combat_ok = 0;
     object targ, *weapons,class_ob;
 
-    if (TP->query_bound() || TP->query_paralyzed()) 
+    if (TP->query_bound() || TP->query_paralyzed())
     {
         TP->send_paralyzed_message("info",TP);
         return 1;
-    }    
+    }
     if(!str)
     {
         return help();
-    }    
-    if(TP->query_disable()) 
+    }
+    if(TP->query_disable())
     {
         write("%^YELLOW%^You are still busy healing other wounds.%^RESET%^");
         return 1;
     }
-    if(targ = present(str,ETP)) 
+    if(targ = present(str,ETP))
     {
-        if(targ->query_true_invis() || (targ->query_invis() && !TP->detecting_invis() && targ != TP) ) 
+        if(targ->query_true_invis() || (targ->query_invis() && !TP->detecting_invis() && targ != TP) )
         {
             notify_fail("You don't see that target here now do you?\n");
             return 0;
         }
     }
-    
+
     if(!objectp(targ))
     {
         tell_object(TP, "You don't see that target here.");
         return 1;
     }
-    
+
     if(sizeof(TP->query_attackers()) && TP->is_class("monk"))
     {
-        class_ob = find_object_or_load(DIR_CLASSES+"/monk.c");    
+        class_ob = find_object_or_load(DIR_CLASSES+"/monk.c");
         if(class_ob->monk_check(TP, "heal", targ)) { combat_ok = 1; }
     }
     if((object)TP->query_attackers() != ({}) && !combat_ok)
     {
         return notify_fail("Get real, not while fighting!\n\n");
     }
-   
+
     if(combat_ok && TP == targ)
     {
         if((int)TP->query_hp() >= (int)TP->query_max_hp())
@@ -60,36 +60,36 @@ int cmd_heal(string str)
         }
         tell_object(TP, "%^BOLD%^%^CYAN%^You focus your mind, drawing on energy deep inside "+
         "yourself as you attempt to make your body whole again!%^RESET%^");
-        if(objectp(ETP)) 
+        if(objectp(ETP))
         {
             tell_room(ETP, TPQCN+"%^BOLD%^%^CYAN%^ begins focusing intently and you "+
             "watch in awe as some of "+TP->QP+" wounds mend on their own!%^RESET%^", TP);
         }
-        TP->add_hp((int)TP->query_class_level("monk") * 8);
+        TP->add_hp((int)TP->query_guild_level("monk") * 12);
         TP->remove_property("wholeness of body");
         TP->set_property("wholeness of body", (time() + 20));//was  90 + random(90)));
         TP->spend_ki(3);
         return 1;
     }
-   
+
     if(targ->query_hp() >= targ->query_max_hp() )
     {
         return notify_fail("That target doesn't need healing.\n");
     }
 
     prof = TP->query_skill("healing");
-   
+
     targ_id = targ->query_cap_name();
-   
+
     diff = targ->query_level();
     if(!diff) diff = 10;
-   
+
     if(!interactive(targ)) { notify_fail("Another bug fixed :)\n"); }
 
     if(TP->query_blind())     prof = 0;
-    
+
     paratime = 3; // setting a default timer for use, but increasing effectiveness with skill. N, 8/13
-    
+
     if(!TP->query_time_delay("healing",paratime) && !combat_ok)
     {
         return notify_fail("You need more time to study the wounds and prepare before you try again.\n");
@@ -102,13 +102,13 @@ int cmd_heal(string str)
     TP->set_disable(paratime,targ);
     call_out("notify_done",paratime*ROUND_LENGTH);
     TP->set_time_delay("healing");
-   
-    if(TP == targ) 
+
+    if(TP == targ)
     {
         write("%^BOLD%^%^CYAN%^You slowly start tending to your wounds...%^RESET%^");
         tell_room(ETP,"%^BOLD%^%^CYAN%^"+TPQCN+" begins to tend to "+TPQP+" wounds.%^RESET%^", TP);
-    } 
-    else 
+    }
+    else
     {
         write("%^BOLD%^%^CYAN%^You start tending to "+targ_id+"'s wounds.%^RESET%^");
         tell_object(targ,"%^BOLD%^%^CYAN%^"+TPQCN+" begins to tend to your wounds.%^RESET%^");
@@ -116,13 +116,13 @@ int cmd_heal(string str)
     }
 
     // changed this to a variable for success, defined above as before if NWPs don't kick in
-    if(!success) 
+    if(!success)
     {
         write("%^BOLD%^Your attempt begins to falter!%^RESET%^");
         if(TP != targ)
         tell_room(ETP,"%^GREEN%^%^BOLD%^You see a worried expression cross "+TPQCN+"'s face.",TP);
-    } 
-    else 
+    }
+    else
     {
         write("%^BOLD%^%^YELLOW%^The wounds slowly heal!%^RESET%^");
         if(TP != targ)
@@ -140,7 +140,7 @@ int cmd_heal(string str)
 
         targ->add_hp(healed);
     }
-   
+
     return 1;
 }
 
@@ -150,7 +150,7 @@ void notify_done()
         tell_object(TP,"%^CYAN%^%^BOLD%^You finish tending to wounds.%^RESET%^");
 }
 
-void help() 
+void help()
 {
    write(
 "

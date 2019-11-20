@@ -12,12 +12,13 @@ inherit SPELL;
 int time;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("monsoon");
     set_spell_level(([ "cleric" : 8, "monk" : 17]));
     set_spell_sphere("elemental water");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS monsoon");
     set_description("When the monsoon spell is cast, the surrounding area is engulfed in a raging storm of water.  Any "
         "target in the area of effect takes damage every round while the spell is in effect, but does not damage the caster.  "
@@ -30,7 +31,7 @@ void create()
 
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_object(caster,"%^BOLD%^%^CYAN%^You wave your hands around summoning the fury of a watery storm from the skies above!");
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" waves "+caster->QP+" hands around summoning the fury of a watery storm from the skies above!",caster);
@@ -42,19 +43,19 @@ void spell_effect(int prof)
 }
 
 
-void do_storm() 
+void do_storm()
 {
     object *foes;
     string target_limb;
     int i,damage;
-    
-    if(!objectp(place)) 
+
+    if(!objectp(place))
     {
         dest_effect();
         return;
     }
-    
-    if(!objectp(caster)) 
+
+    if(!objectp(caster))
     {
         dest_effect();
         return;
@@ -70,19 +71,19 @@ void do_storm()
     }
 
     if(spell_type == "monk" && sizeof(foes)) { MAGIC_D->elemental_opportunist(caster, foes[0]); }
-    
+
     damage = roll_dice(clevel,4);
-    
+
     tell_room(place,"%^BOLD%^CYAN%^A raging storm of water and winds roars through the area damaging everything in sight!");
     foes -= ({caster});
-    for (i=0;sizeof(foes),i<sizeof(foes);i++) 
+    for (i=0;sizeof(foes),i<sizeof(foes);i++)
     {
         if(!objectp(foes[i])) continue;
         if(foes[i] == caster) continue;
         if(!present(foes[i],place)) continue;
         if (interactive(foes[i]) && foes[i]->query_level() < 6) continue;
-        
-        if(do_save(foes[i],0)) { damage = damage/2; }        
+
+        if(do_save(foes[i],0)) { damage = damage/2; }
         target_limb = foes[i]->return_target_limb();
         damage_targ(foes[i], target_limb, damage,"cold");
         if(present(caster, place))
@@ -90,15 +91,15 @@ void do_storm()
             if (objectp(foes[i])) spell_kill(foes[i],caster);
         }
     }
-    
+
     time++;
-    
-    if(present(caster,place) && !caster->query_unconscious()) 
+
+    if(present(caster,place) && !caster->query_unconscious())
     {
         call_out("do_storm",10);
         return;
     }
-    else 
+    else
     {
         dest_effect();
         return;
@@ -106,14 +107,14 @@ void do_storm()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
-    if(objectp(place)) 
+    if(objectp(place))
     {
         tell_room(place,"%^BOLD%^%^CYAN%^The monsoon weakens and dissipates.");
         place->remove_property_value("spelled", ({TO}) );
     }
-    if(objectp(caster)) 
+    if(objectp(caster))
     {
         caster->remove_property_value("spelled", ({TO}) );
     }

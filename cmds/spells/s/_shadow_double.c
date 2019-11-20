@@ -14,8 +14,9 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("shadow double");
-    set_spell_level(([ "mage" : 7 ]));
+    set_spell_level(([ "mage" : 7, "monk" : 13 ]));
     set_spell_sphere("illusion");
+    set_monk_way("way of the shadow");
     set_syntax("cast CLASS shadow double");
     set_description("This spell will conjure a ghostly double of the caster, drawn from his or her own "
 "shadow. The shadow will automatically follow and protect you. Should you lose it, though, simply go into the room with "

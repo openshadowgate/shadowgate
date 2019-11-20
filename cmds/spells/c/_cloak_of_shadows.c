@@ -12,7 +12,7 @@ void create() {
     set_author("nienne");
     set_spell_name("cloak of shadows");
     set_spell_level(([ "monk" : 11, "warlock" : 4 ]));
-    set_monk_way("way of the shadows");
+    set_monk_way("way of the shadow");
     set_syntax("cast CLASS cloak of shadows on <vision|divination>");
     set_description("This invocation allows the warlock to draw a curtain of shadow energy around "
 "him, concealing him from normal and magical detection attempts. It can be used in two ways, though "

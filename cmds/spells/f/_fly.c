@@ -13,6 +13,7 @@ void create() {
     set_spell_name("fly");
     set_spell_level(([ "monk" : 3]));
     set_spell_sphere("alteration");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS fly on TARGET");
     set_description("See new spell: levitate.");
     set_verbal_comp();
@@ -21,19 +22,19 @@ void create() {
 	set_helpful_spell(1);
 }
 
-int preSpell() 
-{    
+int preSpell()
+{
     if(spell_type == "monk") target = caster;
-    if(!objectp(target)) 
-    {       
+    if(!objectp(target))
+    {
         tell_object(caster,"This spell requires a target.");
-        return 0;        
+        return 0;
     }
 	if(target->query_in_vehicle()) {
 		tell_object(caster,"You can't cast this on a mounted target.");
 		return 0;
 	}
-    if((int)target->query_property("flying")) 
+    if((int)target->query_property("flying"))
     {
         tell_object(caster,"Your target is already levitating!");
         return 0;
@@ -41,7 +42,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
      tell_object(caster,"%^BOLD%^%^BLUE%^%^You hair begins to stir around"+
         " in a light breeze.");
@@ -51,7 +52,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 10) * clevel;

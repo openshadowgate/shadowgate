@@ -13,6 +13,7 @@ void create()
     set_spell_name("fireball");
     set_spell_level(([ "mage" : 3, "monk" : 7]));
     set_spell_sphere("invocation_evocation");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS fireball on TARGET");
     set_damage_desc("fire, versatile arcanist");
     set_description("By casting this spell, a mage can aim and release a massive ball of fire at a target and those "

@@ -11,6 +11,7 @@ void create() {
     set_spell_level(([ "monk" : 11 ]));
     set_discipline("way of the elements");
     set_spell_sphere("way of the elements");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS gale fist on TARGET");
     set_description("This spell creates an enormous fist of tangible air above the target. "+
     "The fist will rapidly smash the target after a short delay, sometimes more than once, "+
@@ -25,7 +26,7 @@ void create() {
     set_somatic_comp();
     set_target_required(1);
     set_save("will");
-    set_components(([        
+    set_components(([
     ]));
 }
 
@@ -70,10 +71,10 @@ void do_hits()
     }
     tell_room(place, "%^BOLD%^%^CYAN%^The fist slams down rapidly into "+
     target->QCN+"%^BOLD%^%^CYAN%^!%^RESET%^");
-    
+
     tell_object(target, "%^BOLD%^%^CYAN%^The enormous fist slams down rapidly "+
     "into you!%^RESET%^");
-    
+
     dam = sdamage;
     if(!do_save(target))
     {
@@ -82,7 +83,7 @@ void do_hits()
             tell_object(target, "%^BOLD%^%^CYAN%^You crumple to the ground from the impact of the fist!%^RESET%^");
             //may need tweaked - Saide
             target->set_paralyzed(roll_dice(1,clevel), "%^BOLD%^%^RED%^You are still recovering from the impact!%^RESET%^");
-            tell_room(place, target->QCN+"%^BOLD%^%^CYAN%^ crumples to the ground from the impact of the fist!%^RESET%^", target);            
+            tell_room(place, target->QCN+"%^BOLD%^%^CYAN%^ crumples to the ground from the impact of the fist!%^RESET%^", target);
         }
     }
     else dam /= 2;
@@ -98,18 +99,18 @@ void do_hits()
     {
         call_out("do_hits", ROUND_LENGTH);
         return;
-    }    
+    }
 }
 
 void spell_effect(int prof)
 {
-   
+
     if(!objectp(caster))
     {
         dest_effect();
         return;
     }
-    
+
     if(!objectp(target))
     {
         dest_effect();
@@ -131,19 +132,19 @@ void spell_effect(int prof)
     tell_object(caster, "%^BOLD%^%^WHITE%^You focus your inner ki and "+
     "release it with a %^BOLD%^%^BLACK%^DEAFENING%^BOLD%^%^WHITE%^ "+
     "%^BOLD%^%^CYAN%^whoosh%^BOLD%^%^WHITE%^!%^RESET%^");
-    
+
     tell_room(place, caster->QCN+"%^BOLD%^%^WHITE%^'s hands snap backwards "+
     "creating a %^BOLD%^%^BLACK%^DEAFENING%^BOLD%^%^WHITE%^ "+
     "%^BOLD%^%^CYAN%^whoosh%^BOLD%^%^WHITE%^!%^BOLD%^%^BLACK%^", caster);
-    
+
     tell_room(place, "%^BOLD%^%^CYAN%^An enormous fist of tangible "+
     "%^BOLD%^%^WHITE%^air%^BOLD%^%^CYAN%^ appears above "+target->QCN+"%^BOLD%^%^CYAN%^!%^RESET%^", target);
-    
+
     tell_object(target, "%^BOLD%^%^CYAN%^An enormous fist of tangible "+
     "%^BOLD%^%^WHITE%^air%^BOLD%^%^CYAN%^ appears above you!%^RESET%^");
     caster->set_property("gale fist", 1);
     max = (clevel / 10) + 1;
-    call_out("do_hits", ROUND_LENGTH);    
+    call_out("do_hits", ROUND_LENGTH);
     return;
 }
 

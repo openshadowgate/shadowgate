@@ -12,6 +12,7 @@ void create()
     set_spell_name("hold person");
     set_spell_level(([ "mage" : 3, "bard" : 2, "cleric" : 2, "monk" : 5, "inquisitor" : 2]));
     set_spell_sphere("enchantment_charm");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS hold person on TARGET");
     set_description("This spell will hold its target for rounds that reflect the level of the caster.");
     mental_spell();

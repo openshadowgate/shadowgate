@@ -10,7 +10,8 @@ create()
     ::create();
     set_spell_name("wall of stone");
     set_spell_level(([ "mage" : 5, "druid" : 6, "monk" : 9]));
-    set_spell_sphere("earth");
+    set_spell_sphere("conjuration_summoning");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS wall of stone on <exit>");
     set_description("This command will cause a wall of rubble to appear on an exit, preventing travel in that direction "
         "until all of the rubble has been cleared away.  The more powerful the caster, the larger the rubble "

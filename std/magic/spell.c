@@ -917,7 +917,7 @@ void wizard_interface(object user, string type, string targ)
             TO->remove();
             return;
         }
-        mycost = query_spell_level("monk")/2;
+        mycost = query_spell_level("monk")/3;
         mycost = mycost>6?6:mycost;
         if(!mycost)
         {

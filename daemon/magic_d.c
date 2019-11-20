@@ -260,6 +260,7 @@ void build_index()
 
               spelltable["levels"]=level;
               spelltable["sphere"]=str2->query_spell_sphere(); //aka school
+              spelltable["way"]=str2->query_monk_way();
               spelltable["discipline"]=str2->query_discipline();
               spelltable["domain"]=str2->get_spell_domain();
               spelltable["feats"]=str2->query_feats_required();
@@ -290,6 +291,7 @@ mapping index_spells_for_player(object player, string myclass)
     int lvl,i,j,k;
     object spell;
     string playerdisc = player->query_discipline();
+    string playerway = player->query("monk way");
     string * playerdom = player->query_divine_domain();
 
     if (myclass == "sorcerer")
@@ -325,6 +327,15 @@ mapping index_spells_for_player(object player, string myclass)
             if(domain &&
                domain != "" &&
                member_array(domain,playerdom) == -1)
+                continue;
+        }
+        if(myclass=="monk"&&
+           !player->is_class("grandmaster_of_the_way"))
+        {
+            domain = spellIndex[spellfile]["way"];
+            if(domain &&
+               domain != "" &&
+               domain != playerway)
                 continue;
         }
         tmp[spellfile]=lvl;;
@@ -376,6 +387,26 @@ mapping index_unrestricted_spells(string myclass)
                 continue;
         }
         tmp[spellfile]=lvl;;
+    }
+    return tmp;
+}
+
+/**
+ * level:spells mapping for monks
+ *
+ * This is compatibility function for old way of defining monk spells
+ * in monk.h
+ */
+mapping index_ki_spells_by_level(object player)
+{
+    mapping tmp=([]);
+    mapping sindex = index_spells_for_player(player,"monk");
+    string key;
+    foreach(key in keys(sindex))
+    {
+        if(!pointerp(tmp[sindex[key]]))
+            tmp+=([sindex[key]:({})]);
+        tmp[sindex[key]]+=({key});
     }
     return tmp;
 }

@@ -17,6 +17,7 @@ void create() {
     set_spell_name("shadow sight");
     set_spell_level(([ "monk" : 9 ]));
     set_spell_sphere("divination");
+    set_monk_way("way of the shadow");
     set_syntax("cast CLASS shadow sight");
     set_description("This spell allows the caster to see into the shadows to know what "+
     "may be hidden there, including creatures and objects that are normally or magically hidden. "+
@@ -52,11 +53,11 @@ void spell_effect(int prof)
     caster->QCN+"'s eyes snap open and flash a "+
     "deep black for a instant before returning to their normal shade of "+
     (string)caster->query_eye_color()+".",caster);
-    
+
     tell_object(caster,"%^BOLD%^%^BLACK%^Your eyes snap open and flash deep black "+
     "for an instant before returning to their normal shade of "+
     (string)caster->query_eye_color()+"!%^RESET%^");
-    
+
     caster->set_detecting_invis(1);
     caster->set_property("spelled", ({TO}) );
     clevel = ((clevel*prof)/100);
@@ -67,8 +68,8 @@ void spell_effect(int prof)
     }
     if (prof <100 && random(100) > prof)
     {
-        call_out("flip",random(20),0);    
-    } 
+        call_out("flip",random(20),0);
+    }
     else addSpellToCaster();
     call_out("dest_effect", clevel * ROUND_LENGTH);
 }
@@ -87,7 +88,7 @@ void dest_effect() {
     if (objectp(caster))
     {
         tell_object(caster,"%^BOLD%^%^BLACK%^Your vision is suddenly hazy as your "+
-        "eyes return to normal.%^RESET%^");        
+        "eyes return to normal.%^RESET%^");
         tell_room(environment(caster),"%^BOLD%^%^BLACK%^"+caster->QCN+
                   "'s eyes glaze over for a brief instant before "+
                   "returning to normal.%^RESET%^", caster);

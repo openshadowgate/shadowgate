@@ -11,6 +11,7 @@ void create() {
     set_spell_name("shadow stride");
     set_spell_level(([ "innate" : 1, "monk" : 7, "assassin" : 1]));
     set_spell_sphere("alteration");
+    set_monk_way("way of the shadow");
     set_syntax("cast CLASS shadow stride on <direction>");
     set_description("This spell allows the caster to step into the nearest shadow, "
 "using it to travel a short distance away. It can be used in combat and will ignore "

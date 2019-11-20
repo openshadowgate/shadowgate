@@ -11,8 +11,9 @@ void create(){
     ::create();
     set_author("nienne");
     set_spell_name("shadow travel");
-    set_spell_level(([ "innate" : 1, "assassin": 4, "monk": 11 ]));
+    set_spell_level(([ "innate" : 1, "assassin": 4, "monk": 15 ]));
     set_spell_sphere("alteration");
+    set_monk_way("way of the shadow");
     set_syntax("cast CLASS shadow travel to <location>");
     set_description("Through this spell the caster attunes themselves with a nearby shadow and steps into it, allowing "
 "near instantaneous travel to another destination of their choice. A great deal of concentration is required to enact "

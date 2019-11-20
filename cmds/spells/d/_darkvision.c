@@ -12,6 +12,7 @@ void create() {
     set_spell_name("darkvision");
     set_spell_level(([ "mage" : 2, "ranger" : 3, "monk" : 3, "assassin": 3]));
     set_spell_sphere("alteration");
+    set_monk_way("way of the shadow");
     set_syntax("cast CLASS darkvision");
     set_description("This spell will enhance the vision of the caster, allowing them better sight in areas of extreme "
 "light or darkness.");
