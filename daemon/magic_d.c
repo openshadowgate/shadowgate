@@ -72,66 +72,14 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     x = target->query_guild_level(spell_type);
     if (x < 1) return 0;
 
-    if(spell_type == "psywarrior") return 1;
-    if(spell_type == "assassin") return 1;
-    if(spell_type == "cleric" || spell_type == "mage" || spell_type == "psion" || spell_type == "druid") {
-      switch (spell_level) {
-        case 1: return 1; break;
-        case 2: if (x > 2)  return 1;break;
-        case 3: if (x > 4)  return 1;break;
-        case 4: if (x > 6)  return 1;break;
-        case 5: if (x > 8)  return 1;break;
-        case 6: if (x > 10) return 1;break; // was > 10
-        case 7: if (x > 12) return 1;break; // was > 13
-        case 8: if (x > 14) return 1;break; // was > 15
-        case 9: if (x > 16) return 1;break; // was > 29
-      }
-    }
-    if(spell_type == "sorcerer") {
-      switch (spell_level) {
-        case 1: return 1; break;
-        case 2: if (x > 3)  return 1;break;
-        case 3: if (x > 5)  return 1;break;
-        case 4: if (x > 7)  return 1;break;
-        case 5: if (x > 9)  return 1;break;
-        case 6: if (x > 11) return 1;break; // was > 10
-        case 7: if (x > 13) return 1;break; // was > 13
-        case 8: if (x > 15) return 1;break; // was > 15
-        case 9: if (x > 17) return 1;break; // was > 29
-      }
-    }
-    if(spell_type == "bard" || spell_type == "inquisitor") {
-      switch (spell_level) {
-        case 1: if (x > 1)  return 1;break;
-        case 2: if (x > 3)  return 1;break;
-        case 3: if (x > 5)  return 1;break;
-        case 4: if (x > 9)  return 1;break;
-        case 5: if (x > 12) return 1;break;
-        case 6: if (x > 15) return 1;break;
-      }
-    }
     if(spell_type == "monk")
     {
-        if(x >= spell_level) return 1;
+        if(x >= spell_level)
+            return 1;
+        else
+            return 0;
     }
-    if(spell_type == "paladin" || spell_type == "ranger") {
-      switch (spell_level) {
-        case 1: if (x > 5)  return 1;break;
-        case 2: if (x > 9)  return 1;break;
-        case 3: if (x > 11) return 1;break;
-        case 4: if (x > 14) return 1;break;
-      }
-    }
-
-    if(spell_type == "warlock") {
-      switch (spell_level) {
-        case 1: return 1; break;
-        case 2: if (x > 4)  return 1;break;
-        case 3: if (x > 9)  return 1;break;
-        case 4: if (x > 14) return 1;break;
-      }
-    }
-    return 0;
+    return 1;
 }
 
 string *query_opposite_sphere(string str) {
@@ -330,7 +278,7 @@ mapping index_spells_for_player(object player, string myclass)
                 continue;
         }
         if(myclass=="monk"&&
-           !player->is_class("grandmaster_of_the_way"))
+           !FEATS_D->usable_feat(player,"grandmaster of the way"))
         {
             domain = spellIndex[spellfile]["way"];
             if(domain &&

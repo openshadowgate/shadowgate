@@ -2755,7 +2755,7 @@ void help() {
         mydiscipline = "";
     if(mydiscipline != "")
         write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
-    if(monk_way != "")
+    if(monk_way != "" && stringp(monk_way))
         write("%^BOLD%^%^RED%^Monk way:%^RESET%^ "+monk_way);
     if(!save_type)
         save_type = "";
