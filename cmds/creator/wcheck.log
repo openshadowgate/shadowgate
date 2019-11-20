@@ -1,0 +1,7 @@
+_ac:           Warning: /cmds/creator/_ac#389607 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.
+Warning: query_id() did not return an array.
+Warning: query_short() did not return a string.
+Warning: query_long() did not return a string.
+Warning: query_type() did not return a string.
