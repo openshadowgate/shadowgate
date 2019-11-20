@@ -95,7 +95,7 @@ int check_access(string my_command, string which_board)
         case "comment":
             return 1;
             break;
-        case "announcement": case "rid":
+        case "announcement":
             switch (my_command)
             {
                 case "answer": case "post": case "edit": case "remove":
