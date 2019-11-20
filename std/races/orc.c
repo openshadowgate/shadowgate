@@ -14,7 +14,7 @@ int *restricted_alignments(string subrace) { return ({ 1, 4, 5, 7 }); }
 string *restricted_classes(string subrace) {
   if(!subrace || subrace == "") return ({ "bard",  "paladin", "mage", "psion", "psywarrior", "monk", "druid", "warlock" });
   switch(subrace) {
-     case "tanarukk": return ({ "bard",  "paladin", "mage", "psion", "psywarrior", "monk", "druid" }); break;
+  case "tanarukk": return ({ "bard",  "paladin", "mage", "psion", "psywarrior", "monk", "druid","inquisitor" }); break;
      default: return ({ "bard",  "paladin", "mage", "psion", "psywarrior", "monk", "druid", "warlock" }); break;
    }
 }

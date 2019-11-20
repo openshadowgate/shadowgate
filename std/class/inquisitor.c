@@ -10,7 +10,7 @@ string *search_paths() { return ({  }); }
 int caster_class() { return 1; }
 
 string *restricted_races() {
-    return ({ "beastkin", "dwarf", "firbolg", "gnome", "halfling", "centaur", "ogre-mage", "satyr", "voadkyn", "elf", "wemic", "bugbear", "gnoll", "hobgoblin", "kobold", "minotaur", "ogre", "orc" });
+    return ({  });
 }
 
 string *restricted_classes() { return ({ }); }
