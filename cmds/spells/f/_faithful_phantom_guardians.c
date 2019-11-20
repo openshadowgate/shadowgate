@@ -1,5 +1,5 @@
-//forced them to unprotect in dest effect to prevent further problems with 
-//weapons trainers thinking that they were still protecting you after they've 
+//forced them to unprotect in dest effect to prevent further problems with
+//weapons trainers thinking that they were still protecting you after they've
 //been dispelled/destroyed.  12/9/04 -Tsera
 // moved monster files to /d/magic/mon central location Ares/Styx 1/29/05
 #include <std.h>
@@ -42,8 +42,8 @@ void spell_effect(int prof) {
     tell_room(place,"%^GREEN%^"+caster->QCN+" chants loudly and throws the emeralds into the air.",caster);
     tell_object(caster,"%^GREEN%^ you chant loudly and throw the emeralds into the air.");
     tell_room(place,"%^B_GREEN%^The emeralds start to glow and shape themselves.%^RESET%^");
-    
-    if(!arg) { arg = "soldiers"; }
+
+    if(!arg||!stringp(arg)) { arg = "soldiers"; }
 
     switch (arg) {
     case "centaurs":
@@ -66,7 +66,7 @@ void spell_effect(int prof) {
             ob->add_id("summoned monster");
             ob->add_id(caster->query_name()+"phantommonster");
             mons += ({ob});
-        } 
+        }
         if ((prof/50) >1) {
             ob = new("/d/magic/mon/pcentaur");
             ob->move(place);
@@ -86,7 +86,7 @@ void spell_effect(int prof) {
             ob->add_id(caster->query_name()+"phantommonster");
             mons += ({ob});
         } else {
-            
+
             tell_room(place,"%^B_GREEN%^The emeralds shape into nothing.");
         }
         break;
@@ -99,7 +99,7 @@ void spell_effect(int prof) {
             ob->move(place);
             caster->add_protector(ob);
             //ob->force_me("protect "+caster->query_name());
-            //ob->force_me("protect "+caster->query_name());      
+            //ob->force_me("protect "+caster->query_name());
             ob->set_property("spelled", ({TO}) );
             ob->set_property("spell_creature", TO);
             ob->set_property("spell", TO);
@@ -123,7 +123,7 @@ void spell_effect(int prof) {
             ob->move(place);
             caster->add_protector(ob);
             //ob->force_me("protect "+caster->query_name());
-            //ob->force_me("protect "+caster->query_name());      
+            //ob->force_me("protect "+caster->query_name());
             ob->set_property("spelled", ({TO}) );
             ob->set_property("spell_creature", TO);
             ob->set_property("spell", TO);
@@ -147,7 +147,7 @@ void spell_effect(int prof) {
 void dest_effect() {
     int i;
     for (i=0;i<sizeof(mons);i++) {
-        if (objectp(mons[i])) 
+        if (objectp(mons[i]))
         {
             if(objectp(caster))
             {
@@ -158,7 +158,7 @@ void dest_effect() {
     }
     removeSpellFromCaster();
     ::dest_effect();
-    if(objectp(TO)) 
+    if(objectp(TO))
     {
 	   TO->move("/d/shadowgate/void");
          TO->remove();
