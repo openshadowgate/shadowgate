@@ -403,7 +403,7 @@ string display_new( string id ) {
     str+="%^GREEN%^(";
     if(newposts)
         str+="%^YELLOW%^";
-    str+=sprintf("%2d",newposts)+"%^GREEN%^ out of "+sprintf("%2d",maxi)+")%^RESET%^";
+    str+=sprintf("%2d",newposts)+"%^GREEN%^ out of "+sprintf("%2d",maxi)+"%^RESET%^%^GREEN%^)%^RESET%^";
 
 
 	if(restricted_read) {

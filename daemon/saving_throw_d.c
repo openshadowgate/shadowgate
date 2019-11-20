@@ -74,8 +74,10 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     // general sources of bonuses to all saving throws
     if((string)ob->query_race() == "halfling" && (string)ob->query("subrace") == "lightfoot halfling") mod += 1; // lightfoot halfling +1 luck bonus racial
     if((string)ob->query_race() == "gnome" && ((string)ob->query("subrace") == "deep gnome" || (string)ob->query("subrace") == "svirfneblin")) mod += 2; // svirfneblin +2 saves racial
-    if(FEATS_D->usable_feat(ob,"resistance")) mod += 2; // resistance feat is +2 to all saves
-    if(FEATS_D->usable_feat(ob,"force of personality")) mod += ((int)ob->query_stats("charisma") -10)/2; // charisma bonus from force of personality to all saves
+    if(FEATS_D->usable_feat(ob,"resistance"))
+        mod += 2;
+    if(FEATS_D->usable_feat(ob,"force of personality"))
+        mod += ((int)ob->query_stats("charisma") -10)/2;
     save_info["misc_modifiers"] = mod;
     {
         if(type=="will")
