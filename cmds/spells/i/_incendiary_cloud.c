@@ -68,7 +68,7 @@ void spell_effect(int prof){
       break;
     }
     caster->set_property("spelled", ({TO}));
-    storm_room = PLACE;
+    storm_room = place;
     duration = 0;
     addSpellToCaster();
     spell_successful();
@@ -87,7 +87,7 @@ void do_incendiary() {
       dest_effect();
       return;
    }
-   if(environment(caster) != storm_room){
+   if(environment(caster) != place){
       tell_object(caster,"%^BOLD%^%^BLACK%^As you leave the area, the cloud dissipates into harmless smoke.%^RESET%^");
       tell_room(storm_room,"%^BOLD%^%^BLACK%^The cloud dissipates into harmless smoke as "+caster->QCN+" leaves the area.%^RESET%^",caster);
       dest_effect();
