@@ -2637,7 +2637,10 @@ int spell_in_combat_cycle(object room)
 void prepend_to_combat_cycle(object room)
 {
     if(!spell_in_combat_cycle(room))
+    {
+        room->removeObjectFromCombatCycle(TO); //Race errors
         room->addObjectToCombatCycle(TO,1);
+    }
 }
 
 int race_immunity_check(object obj, string type)
