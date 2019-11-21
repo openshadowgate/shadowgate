@@ -22,6 +22,11 @@ int cmd_con(string str)
     int x, y, z;
     string sub, check, pre;
 
+    if(TP->query_blind())
+    {
+        return notify_fail("You are blind you can't inspect your opponents condition.\n");
+    }
+
     if(!str||regexp(str,"[0-9]+"))
     {
         string output = "";
@@ -46,10 +51,6 @@ int cmd_con(string str)
         return 1;
     }
 
-    if(TP->query_blind())
-    {
-        return notify_fail("You are blind you can't inspect your opponents condition.\n");
-    }
 
     if (lightblind=TP->light_blind(0)) { return notify_fail(TP->light_blind_fail_message(lightblind)+"\n"); }
 

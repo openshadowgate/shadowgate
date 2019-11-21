@@ -76,12 +76,13 @@ void spell_effect(int prof) {
         allinv += ({targ});
     }
 
-    for (i = 0;i < sizeof(allinv), i < clevel/12+1;i++) {
+    for (i = 0;i < sizeof(allinv);i++) {
         if (!objectp(allinv[i])) continue;
         if(!caster->ok_to_kill(allinv[i])) continue;
         if (allinv[i]->query_property("spelled"))
             dispel(allinv[i]);
     }
+
     dest_effect();
     return 1;
 }
