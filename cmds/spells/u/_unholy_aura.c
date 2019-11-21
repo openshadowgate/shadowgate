@@ -48,6 +48,20 @@ void spell_effect(int prof)
     caster->add_ac_bonus(4);
     execute_attack();
     call_out("dest_effect",duration);
+    call_out("room_check",ROUND_LENGTH);
+}
+
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    prepend_to_combat_cycle(ENV(caster));
+
+    call_out("room_check",ROUND_LENGTH*2);
     return;
 }
 
@@ -89,6 +103,7 @@ void execute_attack(){
 
 void dest_effect()
 {
+    remove_call_out("room_check");
     if(objectp(caster))
     {
         tell_object(caster,"%^RESET%^%^BOLD%^The halo around you fades.");
