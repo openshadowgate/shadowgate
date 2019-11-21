@@ -2611,6 +2611,34 @@ int stalwart_splash(object splashtarg) {
    return 1;
 }
 
+int spell_in_combat_cycle(object room)
+{
+    mixed * combat_presence;
+
+    if(!objectp(caster) || !objectp(room))
+    {
+        dest_effect();
+        return 0;
+    }
+
+    combat_presence=map_array(values(room->query_lookAhead()),
+                              (:member_array($2,
+                                             map_array($1,(:$1[0]:)))!=-1:),
+                              TO);
+    if(!arrayp(combat_presence))
+        return 0;
+
+    if(!sizeof(combat_presence))
+        return 0;
+
+    return max(combat_presence);
+}
+
+void prepend_to_combat_cycle(object room)
+{
+    if(!spell_in_combat_cycle(room))
+        room->addObjectToCombatCycle(TO,1);
+}
 
 int race_immunity_check(object obj, string type)
 {

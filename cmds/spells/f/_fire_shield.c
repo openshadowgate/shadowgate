@@ -57,6 +57,21 @@ void spell_effect(int prof){
     spell_successful();
     counter = 6*clevel;
     execute_attack();
+    call_out("room_check",ROUND_LENGTH);
+}
+
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    prepend_to_combat_cycle(ENV(caster));
+
+    call_out("room_check",ROUND_LENGTH*2);
+    return;
 }
 
 void execute_attack(){
@@ -99,6 +114,7 @@ void execute_attack(){
 }
 
 void dest_effect(){
+    remove_call_out("room_check");
     if(objectp(caster)){
         tell_object(caster,"%^BOLD%^%^RED%^The shield of roaring flames flickers and fades away, "
             "leaving you vulnerable once again.");

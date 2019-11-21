@@ -57,11 +57,7 @@ void room_check()
         return;
     }
 
-    if(!max(map_array(values(ENV(caster)->query_lookAhead()),
-                  (:member_array($2,
-                                 map_array($1,(:$1[0]:)))!=-1:),
-                     TO)))
-        ENV(caster)->addObjectToCombatCycle(TO,1);
+    prepend_to_combat_cycle(ENV(caster));
 
     call_out("room_check",ROUND_LENGTH*2);
     return;

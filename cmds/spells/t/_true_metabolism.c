@@ -22,7 +22,7 @@ void create()
     set_somatic_comp();
     set_helpful_spell(1);
     set_heart_beat(1);
-
+    traveling_spell();
 }
 
 int preSpell() {
@@ -48,10 +48,29 @@ void spell_effect(int prof)
         caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
+    execute_attack();
     counter = clevel*5+4;
 }
 
-void heart_beat()
+    call_out("room_check",ROUND_LENGTH);
+}
+
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    prepend_to_combat_cycle(ENV(caster));
+
+    call_out("room_check",ROUND_LENGTH*2);
+    return;
+}
+
+
+void execute_attack()
 {
     if(!objectp(caster) || !objectp(environment(caster)) || counter<0){
         dest_effect();
@@ -75,6 +94,7 @@ void heart_beat()
 
 
 void dest_effect(){
+    remove_call_out("room_check");
     if(objectp(caster)){
         caster->remove_property("true metabolism");
         tell_object(caster,"%^CYAN%^You feel the hyper awareness of your body's injuries fade away.%^RESET%^");
