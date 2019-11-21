@@ -45,6 +45,21 @@ void spell_effect(int prof){
     spell_successful();
     execute_attack();
     counter = 10 * clevel;
+    call_out("room_check",ROUND_LENGTH);
+}
+
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    prepend_to_combat_cycle(ENV(caster));
+
+    call_out("room_check",ROUND_LENGTH*2);
+    return;
 }
 
 void execute_attack(){
@@ -59,8 +74,21 @@ void execute_attack(){
         return;
     }
 
+    if(!objectp(caster))
+    {
+        dest_effect();
+        return;
+    }
+
+    if(!objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
     place = ENV(caster);
-    if(!objectp(caster) || !objectp(place) || counter<0)
+
+    if(!objectp(place) || counter<0)
     {
         dest_effect();
         return;
