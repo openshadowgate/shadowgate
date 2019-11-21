@@ -10,7 +10,7 @@ void create()
     feat_category("MeleeDamage");
     feat_name("powerattack");
     feat_prereq("Strength 13");
-    feat_syntax("powerattack offensive|defensive|check");
+    feat_syntax("powerattack offensive|defensive|max|min|check");
     feat_desc("The PowerAttack feat allows the character to shift their stance so that their attacks do more damage but it makes their attacks less likely to hit.
 
 This feat shift values between attack and damage bonuses.");
@@ -36,7 +36,10 @@ int cmd_powerattack(string str)
     object feat;
     if(!objectp(TP)) { return 0; }
     if(str) str = lower_case(str);
-    if(str != "offensive" && str != "defensive") { str = "check"; }
+    if(str != "offensive" &&
+       str != "defensive" &&
+       str != "max" &&
+       str != "min") { str = "check"; }
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
@@ -82,11 +85,8 @@ void execute_feat()
         caster->add_damage_bonus(1);
         caster->add_attack_bonus(-1);
         tell_object(caster,"%^BOLD%^%^RED%^You shift your stance to make your attacks more powerful!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^RED%^"+caster->QCN+" shifts "+caster->QP+" stance to make "
-            ""+caster->QP+" attacks more damaging!%^RESET%^",caster);
         dest_effect();
-        return;
-
+        break;
     case "defensive":
         if(bonus == 0)
         {
@@ -99,11 +99,24 @@ void execute_feat()
         caster->add_damage_bonus(-1);
         caster->add_attack_bonus(1);
         tell_object(caster,"%^BOLD%^%^GREEN%^You shift your stance to make your attacks less powerful!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" shifts "+caster->QP+" stance to make "
-            ""+caster->QP+" attacks less damaging!%^RESET%^",caster);
         dest_effect();
-        return;
-
+        break;
+    case "max":
+        caster->remove_property("power_attack");
+        caster->set_property("power_attack",5);
+        caster->add_damage_bonus(5-bonus);
+        caster->add_attack_bonus(bonus-5);
+        tell_object(caster,"%^BOLD%^%^RED%^You shift your stance to make your attacks more powerful!%^RESET%^");
+        dest_effect();
+        break;
+    case "min":
+        caster->remove_property("power_attack");
+        caster->set_property("power_attack",0);
+        caster->add_damage_bonus(0-bonus);
+        caster->add_attack_bonus(bonus-0);
+        tell_object(caster,"%^BOLD%^%^GREEN%^You shift your stance to make your attacks less powerful!%^RESET%^");
+        dest_effect();
+        break;
     case "check":
 
         tell_object(caster,"%^RESET%^%^GREEN%^You have shifted %^MAGENTA%^"+bonus+" %^RESET%^%^GREEN%^points into "

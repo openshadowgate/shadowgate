@@ -111,8 +111,14 @@ void dispel(object ob) {
     {
         if(!objectp(ob)) { continue; }
         if (!objectp(spells[i])) continue;
-        if (!checkDispel(spells[i])) {
-            tell_object(caster, "You failed to dispel the "+spells[i]->query_spell_name());
+        if(i>clevel/12+1)
+        {
+            tell_object(caster, "You fail to dispel the "+spells[i]->query_spell_name());
+            continue;
+        }
+        if (!checkDispel(spells[i]))
+        {
+            tell_object(caster, "You fail to dispel the "+spells[i]->query_spell_name());
             continue;
         }
         tell_object(caster, "You dispel the "+spells[i]->query_spell_name());
