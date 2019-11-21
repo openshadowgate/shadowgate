@@ -21,7 +21,6 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
-    set_heart_beat(1);
     traveling_spell();
 }
 
@@ -50,8 +49,6 @@ void spell_effect(int prof)
     addSpellToCaster();
     execute_attack();
     counter = clevel*5+4;
-}
-
     call_out("room_check",ROUND_LENGTH);
 }
 
@@ -65,13 +62,20 @@ void room_check()
 
     prepend_to_combat_cycle(ENV(caster));
 
-    call_out("room_check",ROUND_LENGTH*2);
+    call_out("room_check",ROUND_LENGTH);
     return;
 }
 
 
 void execute_attack()
 {
+    if(!flag)
+    {
+        flag = 1;
+        ::execute_attack();
+        return;
+    }
+
     if(!objectp(caster) || !objectp(environment(caster)) || counter<0){
         dest_effect();
         return;
@@ -90,6 +94,7 @@ void execute_attack()
     }
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         counter--;
+    place->addObjectToCombatCycle(TO,1);
 }
 
 

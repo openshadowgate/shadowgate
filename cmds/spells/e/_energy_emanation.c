@@ -72,7 +72,7 @@ void spell_effect(int prof){
                     mycolor = "an %^BOLD%^%^WHITE%^i%^CYAN%^r%^WHITE%^ide%^BLUE%^s"
                        "%^WHITE%^ce%^MAGENTA%^n%^WHITE%^t";
                     break;
-   }   
+   }
    tell_room(place,"%^BOLD%^%^WHITE%^The aura surrounding "+caster->QCN+" %^BOLD%^"
       "%^WHITE%^brightens and takes on "+mycolor+" hue %^BOLD%^%^WHITE%^as it emanates "
       ""+myenergy+" energy%^BOLD%^%^WHITE%^!%^RESET%^",caster);
@@ -82,7 +82,22 @@ void spell_effect(int prof){
    caster->set_property("spelled", ({TO}) );
    addSpellToCaster();
    spell_successful();
-   environment(caster)->addObjectToCombatCycle(TO,1);
+   execute_attack();
+   call_out("room_check",ROUND_LENGTH);
+}
+
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    prepend_to_combat_cycle(ENV(caster));
+
+    call_out("room_check",ROUND_LENGTH*2);
+    return;
 }
 
 void execute_attack(){
@@ -97,7 +112,7 @@ void execute_attack(){
       dest_effect();
       return;
    }
-   ppl = all_living(environment(caster));
+   ppl = caster->query_attackers();
    ppl = filter_array(ppl, "is_non_immortal",FILTERS_D);
    if(member_array(caster,ppl) != -1){
       ppl -= ({caster});
@@ -111,9 +126,15 @@ void execute_attack(){
    {
       done = 0;
       define_base_damage(0);
+
+      tell_object(caster,"%^BOLD%^%^WHITE%^The halo of "+myenergy+" energy "
+                  "%^BOLD%^%^WHITE%^surrounding you lashes out at your enemies!%^RESET%^");
+      tell_room(place,"%^BOLD%^%^WHITE%^The halo of "+myenergy+" energy "
+                "%^BOLD%^%^WHITE%^surrounding "+caster->QCN+" lashes out at "+caster->QP+" enemies!%^RESET%^",({caster,ppl[i]}));
+
       for(i=0;i<sizeof(ppl);i++)
       {
-          
+
          if(!objectp(ppl[i])) continue;
          tell_object(ppl[i],"%^BOLD%^%^WHITE%^The halo of "+myenergy+" energy "
             "%^BOLD%^%^WHITE%^surrounding "+caster->QCN+" lashes out at you!%^RESET%^");
@@ -122,30 +143,26 @@ void execute_attack(){
          {
             spell_kill(ppl[i],caster);
          }
-         done++;        
-         if(done){
-            tell_object(caster,"%^BOLD%^%^WHITE%^The halo of "+myenergy+" energy "
-               "%^BOLD%^%^WHITE%^surrounding you lashes out at your enemies!%^RESET%^");
-            tell_room(place,"%^BOLD%^%^WHITE%^The halo of "+myenergy+" energy "
-               "%^BOLD%^%^WHITE%^surrounding "+caster->QCN+" lashes out at "+caster->QP+" enemies!%^RESET%^",({caster,ppl[i]}));
-         }
+         done++;
       }
-   }   
+   }
    else
    {
        tell_object(caster,"%^BOLD%^%^WHITE%^The halo of "+myenergy+" energy "
        "%^BOLD%^%^WHITE%^surrounding you crackles as if seeking out a target!%^RESET%^");
    }
    counter++;
-   if (counter > (clevel/2)) 
-   { 
+   if (counter > (clevel/2))
+   {
         dest_effect();
         return;
-   }   
-   else environment(caster)->addObjectToCombatCycle(TO,1);
+   }
+   else
+       environment(caster)->addObjectToCombatCycle(TO,1);
 }
 
 void dest_effect(){
+    remove_call_out("room_check");
     if(objectp(caster)){
        tell_object(caster,"%^ORANGE%^You feel the energy drain from you.");
        tell_room(environment(caster),"%^ORANGE%^The field of energy "+
