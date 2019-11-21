@@ -26,7 +26,7 @@ int onoff = 0;
 void pause();
 void reset_scrambles();
 
-int toggle_debug() 
+int toggle_debug()
 {
     if(debug) { return debug = 0; }
     return debug = 1;
@@ -58,8 +58,8 @@ void create()
 {
     int i;
     round = allocate(20);
-  
-    for (i=0;i<20;i++) 
+
+    for (i=0;i<20;i++)
     {
         round[i] = ({});
     }
@@ -81,17 +81,17 @@ void heart_beat()
 {
     int i,j, x,roll, k,l,num_attacks,fighter_attacks,mod1,mod2,num;
     string file;
-    object *weapons,*classes,ob,*tmp = ({}), *busy=({}),shape,ammo;    
+    object *weapons,*classes,ob,*tmp = ({}), *busy=({}),shape,ammo;
     //if(!objectp(TO)) { if(debug) { tell_object(find_player("saide"), "Room is invalid?");} return; }
 
     //  test = ({});
 
     if (debug) tell_room(TO,"DEBUG: Beat, Count: "+onoff);
 
-    if (onoff) 
+    if (onoff)
     {
         onoff+=1;
-        if (onoff >SPEED) 
+        if (onoff >SPEED)
         {
             onoff = 0;
         }
@@ -101,45 +101,45 @@ void heart_beat()
     j = sizeof(combatants);
 
     if(debug) tell_room(TO,"DEBUG: combatants "+identify(combatants));
-    
+
     roundCount++;
-  
-    for (i=0;i<j;i++) 
+
+    for (i=0;i<j;i++)
     {
-        if(!objectp(combatants[i])) 
+        if(!objectp(combatants[i]))
         {
             if(debug) tell_room(TO, "BING REMOVED = "+identify(combatants[i]));
             tmp += ({combatants[i]});
-        } 
-        else if((!present(combatants[i])) && living(combatants[i])) 
+        }
+        else if((!present(combatants[i])) && living(combatants[i]))
         {
             if(debug) tell_room(TO, "BING REMOVED = "+identify(combatants[i]));
             tmp += ({combatants[i]});
-        } 
-        else if(!sizeof(combatants[i]->query_attackers()) && living(combatants[i])) 
+        }
+        else if(!sizeof(combatants[i]->query_attackers()) && living(combatants[i]))
         {
             if(debug) tell_room(TO, "BING REMOVED = "+identify(combatants[i]));
             tmp += ({combatants[i]});
-        } 
-        else 
+        }
+        else
         {
             if(debug) tell_room(TO, "NOT BING REMOVED = "+identify(combatants[i]));
             combatants[i]->setFuncing(0);
         }
-    }  
-    
+    }
+
     if(combatants) { combatants -= tmp; }
 
     if((!combatants || !sizeof(combatants)) &&  (!lookAhead || !sizeof(lookAhead)))
-    {    
-        if (debug) 
+    {
+        if (debug)
         {
             if(debug) tell_room(TO,"DEBUG: stopping combat");
         }
-    
+
         if(!TO->query_property("continue heartbeat"))
         {
-            //set_heart_beat(0); //ultra slow heartbeat... instead of off until can fix the driver code for heart beats 
+            //set_heart_beat(0); //ultra slow heartbeat... instead of off until can fix the driver code for heart beats
             //remove_call_out("end_heart");
             remove_call_out("end_heart");
             call_out("end_heart",5);
@@ -150,33 +150,33 @@ void heart_beat()
 
     j = sizeof(combatants);
     stage = 0;
-  
-    if (pointerp(nextRound)) 
+
+    if (pointerp(nextRound))
     {
-        round_check();        
+        round_check();
         round[0] = copy(nextRound);
         if(debug) tell_room(TO,"DEBUG: nextRound "+identify(nextRound));
-    } 
-    else 
+    }
+    else
     {
-        round_check();      
+        round_check();
         round[0] = ({});
         if(debug) tell_room(TO,"DEBUG: no nextRound");
     }
-  
-    if (lookAhead[roundCount]) 
+
+    if (lookAhead[roundCount])
     {
         if(debug) tell_room(TO,"DEBUG: lookAhead "+identify(lookAhead));
-        for (i=0;i<sizeof(lookAhead[roundCount]);i++) 
+        for (i=0;i<sizeof(lookAhead[roundCount]);i++)
         {
             round[lookAhead[roundCount][i][1]] += ({lookAhead[roundCount][i][0]});
         }
         map_delete(lookAhead,roundCount);
     }
-    
-    nextRound = ({});  
-  
-    for (i=0;i<j;i++) 
+
+    nextRound = ({});
+
+    for (i=0;i<j;i++)
     {
         if (!objectp(combatants[i])) continue;
         if (!living(combatants[i])) continue;
@@ -184,16 +184,16 @@ void heart_beat()
         if(combatants[i]->query_hidden()) { combatants[i]->set_hidden(0); }
         // remove hidden from combatants...
         roll = random(10);
-    
-        if (!userp(combatants[i])) 
+
+        if (!userp(combatants[i]))
         {
             roll -= ( random(14) - 7 ); // just giving them a random roll cause mobs default to high dex -Ares
-        } 
-        else 
+        }
+        else
         {
             roll -= combatants[i]->reactionAdj((int)combatants[i]->query_stats("dexterity"));
         }
-	
+
         //----------------
 
         combatants[i]->resetCombat();
@@ -203,10 +203,10 @@ void heart_beat()
 // process stomached kits here.
         if((combatants[i])->query_property("stomached_kits"))
            (combatants[i])->remove_property("stomached_kits");
-     
+
         weapons = combatants[i]->query_wielded();
         weapons = distinct_array(weapons);
-        
+
         if(sizeof(weapons)) { num_attacks = sizeof(weapons); }
         else { num_attacks = 2; }
 
@@ -224,7 +224,7 @@ void heart_beat()
             busy+=({combatants[i]});
             if(debug) { tell_room(TO,"DEBUG: Busy: "+identify(combatants[i])); }
 	    }
-        else if((interactive(combatants[i]) || combatants[i]->query_property("full attacks"))) 
+        else if((interactive(combatants[i]) || combatants[i]->query_property("full attacks")))
         {
             if(interactive(combatants[i]))
             {
@@ -254,7 +254,7 @@ void heart_beat()
 
             classes = (string *)combatants[i]->query_classes();
             num = 0;
-            
+
             if(sizeof(classes))
             {
                 for(x=0;x<sizeof(classes);x++)
@@ -264,7 +264,7 @@ void heart_beat()
                     if((int)file->number_of_attacks(combatants[i]) > num) { num = (int)file->number_of_attacks(combatants[i]); }
                 }
             }
-        
+
             fighter_attacks = num;
 
             if(interactive(combatants[i]))
@@ -281,14 +281,14 @@ void heart_beat()
 
                     combatants[i]->remove_property("number_of_attacks");
                     combatants[i]->set_property("number_of_attacks",fighter_attacks);
-                }        
+                }
                 else if(FEATS_D->has_feat(combatants[i],"shieldwall"))
-                { 
+                {
                     ob = new(DIR_FEATS+"/s/_shieldwall.c");
                     ob->end_feat(combatants[i]);
                     if(!FEATS_D->usable_feat(combatants[i],"shield master"))
                     {
-                        fighter_attacks = num; 
+                        fighter_attacks = num;
                     }
                 }
             }
@@ -309,83 +309,83 @@ void heart_beat()
             {
                 fighter_attacks += (int)combatants[i]->query_property("fighter_attacks_mod");
             }
- 
+
             if (fighter_attacks > 15) fighter_attacks = 15;
             num_attacks += fighter_attacks;
         }
-    
+
         if (debug) { tell_room(TO,"DEBUG: num attacks = "+num_attacks); }
-    
-        if (combatants[i]->is_weaponless() && !interactive(combatants[i])) 
+
+        if (combatants[i]->is_weaponless() && !interactive(combatants[i]))
         {
             num_attacks = combatants[i]->query_attacks_num();
         }
 
-        if (sizeof(weapons) >0) 
+        if (sizeof(weapons) >0)
         {
             if(objectp(weapons[0])) mod1 = weapons[0]->query_weapon_speed();
-            if (sizeof(weapons) > 1) 
+            if (sizeof(weapons) > 1)
             {
                 if(objectp(weapons[1])) mod2 = weapons[1]->query_weapon_speed();
             }
         }
-    
+
         //-------------------
-    
+
         roll +=  mod1;
-    
-        if (roll > 19) 
+
+        if (roll > 19)
         {
             nextRound += ({combatants[i]});
             continue;
         }
-    
+
         if (roll < 0) { roll = 0; }
-    
+
         if (debug) { tell_room(TO,"DEBUG: "+file_name(combatants[i]) +" roll " + roll); }
-        
+
         //    test = round[roll];
-    
-        if (combatants[i]->is_weaponless() && !interactive(combatants[i])) 
+
+        if (combatants[i]->is_weaponless() && !interactive(combatants[i]))
         {
-            for (l=0;(l<combatants[i]->query_num_natural_attacks()) && num_attacks;l++) 
+            for (l=0;(l<combatants[i]->query_num_natural_attacks()) && num_attacks;l++)
             {
                 round[roll] += ({combatants[i]});
                 num_attacks--;
             }
-    
-        } 
-        else 
+
+        }
+        else
         {
             round[roll] += ({combatants[i]});
             num_attacks--;
         }
-    
-        while(num_attacks > 0) 
+
+        while(num_attacks > 0)
         {
             roll += 5;
-            if (num_attacks%2) 
+            if (num_attacks%2)
             {
                 roll += mod2;
-            } 
-            else 
+            }
+            else
             {
                 roll += mod1;
             }
             if (roll > 19) roll = 19;
             round[roll] += ({combatants[i]});
-            num_attacks--;      
+            num_attacks--;
         }
-      
+
         if (debug && stagedebug) { tell_room(TO,"DEBUG:"+identify(round)); }
     }
-      
+
     if (debug) { tell_room(TO,"DEBUG: new round"); }
     if (debug) { tell_room(TO,"DEBUG:"); }
 
-    for (i=0;i<20;i++) 
+    for (i=0;i<20;i++)
     {
-        for (k = 0;k<sizeof(round[i]);k++) 
+        for (k = 0;k<sizeof(round[i]);k++)
         {
             mod1 = 0;
             mod2 = 0;
@@ -397,7 +397,7 @@ void heart_beat()
                 round[i][k]->remove_property("shotontherun");
             }
 
-            if(round[i][k]->query_blinking() && member_array(round[i][k],untouchable) == -1) 
+            if(round[i][k]->query_blinking() && member_array(round[i][k],untouchable) == -1)
             {
                 tell_room(TO,"%^YELLOW%^"+round[i][k]->QCN+" snaps "+round[i][k]->QP+" fingers and "
                     "blinks to the other side of the room.", round[i][k]);
@@ -406,11 +406,11 @@ void heart_beat()
                 untouchable += ({round[i][k]});
             }
 
-            for(l = 0;l<sizeof(untouchable);l++) 
+            for(l = 0;l<sizeof(untouchable);l++)
             {
                 if(!objectp(untouchable[l])) { continue; }
                 if(!pointerp(round[i][k]->query_attackers())) { continue; }
-                if (member_array(untouchable[l],round[i][k]->query_attackers()) != -1) 
+                if (member_array(untouchable[l],round[i][k]->query_attackers()) != -1)
                 {
                     round[i][k]->remove_attacker(untouchable[l]);
                     round[i][k]->add_hunted(untouchable[l]);
@@ -421,13 +421,13 @@ void heart_beat()
             if(round[i][k]->check_death() || round[i][k]->query_ghost()) { continue; }
             if(round[i][k]->queryFuncing() && !round[i][k]->query_property("function and attack")) { continue; }
 
-            if(round[i][k]->query_paralyzed() || round[i][k]->query_bound() || round[i][k]->query_tripped() || round[i][k]->query_unconscious()) 
-            {   
+            if(round[i][k]->query_paralyzed() || round[i][k]->query_bound() || round[i][k]->query_tripped() || round[i][k]->query_unconscious())
+            {
                 round[i][k]->send_paralyzed_message("my_combat",round[i][k]);
                 continue;
             }
-            
-            if(round[i][k]->query_property("memorizing")) 
+
+            if(round[i][k]->query_property("memorizing"))
             {
                 tell_object(round[i][k],"You are currently concentrating on a mental action and thus not swinging your weapon!");
                 if (debug)
@@ -435,7 +435,7 @@ void heart_beat()
  		        continue;
 	        }
 
-	        if(member_array(round[i][k], busy) != -1) 
+	        if(member_array(round[i][k], busy) != -1)
             {
                 // this message is a little bit too spamy
  		        //tell_object(round[i][k],"You are currently busy doing something other than focusing on swinging your weapon!");
@@ -444,7 +444,7 @@ void heart_beat()
 		        continue;
             }
 
-            if (debug && stagedebug) 
+            if (debug && stagedebug)
             {
                 tell_room(TO,"DEBUG: segment= "+i);
                 tell_room(TO,"DEBUG: Who am i attacking "+file_name(round[i][k]));
@@ -474,12 +474,12 @@ void pause() { return; }
 
 void add_combatant(object combatant)
 {
-    if (!objectp(combatant)) { return; } 
+    if (!objectp(combatant)) { return; }
 
     set_heart_beat(1);
-  
-    if(!combatants) { combatants = ({}); }    
-    if(member_array(combatant,combatants) == -1) 
+
+    if(!combatants) { combatants = ({}); }
+    if(member_array(combatant,combatants) == -1)
     {
         combatants += ({combatant});
     }
@@ -488,9 +488,9 @@ void add_combatant(object combatant)
 
 
 void remove_combatant(object combatant)
-{  
-    if(!combatants) { combatants = ({}); }  
-    if(member_array(combatant,combatants) != -1) 
+{
+    if(!combatants) { combatants = ({}); }
+    if(member_array(combatant,combatants) != -1)
     {
         combatants -= ({combatant});
     }
@@ -500,18 +500,18 @@ void remove_combatant(object combatant)
 void set_round(object what, int which)
 {
     if(!objectp(what)) { return; }
-    if (!combatants) { combatants = ({}); }  
-    combatants += ({what});    
+    if (!combatants) { combatants = ({}); }
+    combatants += ({what});
     // onoff = 0;
     if(which < 0)  { which = 0; }
     if(which > 19) { which = 19; }
-    if(stage > which) 
+    if(stage > which)
     {
-        if(stage == 19) 
+        if(stage == 19)
         {
             nextRound += ({what});
-        } 
-        else 
+        }
+        else
         {
             which = stage;
         }
@@ -529,10 +529,10 @@ void set_round(object what, int which)
         if(debug) tell_room(TO, "Heart beat was set.");
     }
     round_check();
-    
+
     if(debug) tell_room(TO,"DEBUG: which: "+which);
     if(debug) tell_room(TO,"DEBUG: what" +identify(what));
-    
+
     round[which] += ({what});
     if(debug) tell_room(TO,"DEBUG: round after which/what: "+identify(round));
     return;
@@ -551,17 +551,17 @@ int query_stage() { return stage; }
 mapping queryLookAhead() { return lookAhead; }
 
 
-mapping query_lookAhead() { return lookAhead;} 
+mapping query_lookAhead() { return lookAhead;}
 
 
 void addObjectToCombatCycle(object ob, int delay, int turn)
 {
     if(!objectp(ob)) { return; }
-  
-    if(!lookAhead[roundCount+delay]) 
+
+    if(!lookAhead[roundCount+delay])
     {
         lookAhead[roundCount+delay] = ({});
-    }  
+    }
     lookAhead[roundCount+delay] += ({({ob,turn})});
     remove_call_out("end_heart");
     set_heart_beat(1);
@@ -600,15 +600,14 @@ int removeObjectFromCombatCycle(object ob)
 
 int queryCurrentRound() { return roundCount; }
 
-
-void reset_scrambles() 
+void reset_scrambles()
 {
     int iteration;
     object ob;
-    
+
     iteration == sizeof(combatants);
-  
-    while (iteration--) 
+
+    while (iteration--)
     {
         if(!objectp(ob=combatants[iteration])) { continue; }
         if((int)ob->query_scrambling() > 1)    { ob->set_scrambling(1); }

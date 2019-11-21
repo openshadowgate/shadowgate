@@ -75,8 +75,9 @@ int spell_level,
     mypp,
     mycost,
     healing_spell,
-    aoe_spell,
-    traveling_aoe_spell,
+    aoe_spell,           //aoe that stays in the room
+    traveling_aoe_spell, //damage aoe spell that follows the caster
+    traveling_spell,     //spell that follows the caster
     splash_spell,
     permanent,
     evil_spell,
@@ -325,6 +326,8 @@ void aoe_spell(int num) { aoe_spell = num; }
 int query_aoe_spell() { return aoe_spell; }
 void traveling_aoe_spell(int num) { traveling_aoe_spell = num; }
 int query_traveling_aoe_spell() { return traveling_aoe_spell; }
+void traveling_spell(int num) { traveling_spell = num; }
+int query_traveling_spell() { return traveling_spell; }
 void set_healing_spell(int num) { healing_spell = num; }
 int query_healing_spell() { return healing_spell; }
 void evil_spell(int num) { evil_spell = 1; }
@@ -1852,6 +1855,7 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if(query_aoe_spell() ||
+       query_traveling_spell() ||
        query_traveling_aoe_spell())
     {
         sdamage = roll_dice(1,20)*(clevel/18+1);

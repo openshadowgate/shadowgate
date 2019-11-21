@@ -3,6 +3,7 @@
 inherit SPELL;
 
 int counter=4;
+flag;
 
 void create()
 {
@@ -10,6 +11,7 @@ void create()
     set_author("garrett");
     set_spell_name("aura of healing");
     set_spell_level(([ "cleric" : 7 ]));
+    set_affixed_spell_level(1);
     set_spell_sphere("healing");
     set_syntax("cast CLASS aura of healing");
     set_description("This spell heals wounds on party members.  The amount and length of the spell are dependent on the "
@@ -17,6 +19,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_property("magic",1);
+    traveling_spell(1);
     set_helpful_spell(1);
     set_heart_beat(1);
 }
@@ -57,14 +60,41 @@ void spell_effect(int prof)
     caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
+    execute_attack();
     counter = clevel*10 + 4;
+    call_out("room_check",ROUND_LENGTH);
 }
 
-void heart_beat()
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    if(!max(map_array(values(ENV(caster)->query_lookAhead()),
+                  (:member_array($2,
+                                 map_array($1,(:$1[0]:)))!=-1:),
+                     TO)))
+        ENV(caster)->addObjectToCombatCycle(TO,1);
+
+    call_out("room_check",ROUND_LENGTH*2);
+    return;
+}
+
+void execute_attack()
 {
     object *people;
     object dude;
     int i;
+
+    if(!flag)
+    {
+        flag = 1;
+        ::execute_attack();
+        return;
+    }
 
     if(!objectp(caster) || !objectp(environment(caster)) || counter<0){
         dest_effect();
@@ -89,7 +119,7 @@ void heart_beat()
     if(member_array(caster,people)==-1)
         people+=({caster});
 
-    define_base_damage(-6);//lazy reroll
+    define_base_damage(0);//lazy reroll
     if(sizeof(people))
         foreach(dude in people)
         {
@@ -105,6 +135,7 @@ void heart_beat()
 
 void dest_effect()
 {
+    remove_call_out("room_check");
     if(objectp(caster))
     {
         caster->remove_property("aura_of_healing");

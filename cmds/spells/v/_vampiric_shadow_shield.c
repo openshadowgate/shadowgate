@@ -12,7 +12,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS vampiric shadow shield");
     set_damage_desc("negative energy on living");
-    set_description("You raise shadows of the undead to guard you from those who mean you harm. Up to six livings that attack you will be harmed and its essence will be used to heal you.");
+    set_description("You raise shadows of the undead to guard you from those who mean you harm. Up to eight livings that attack you will be harmed and their essences will be used to heal you.");
     set_save("reflex");
     set_helpful_spell(1);
     traveling_aoe_spell(1);
@@ -46,6 +46,25 @@ void spell_effect(int prof)
     spell_successful();
     execute_attack();
     counter = 6*clevel;
+    call_out("room_check",ROUND_LENGTH);
+}
+
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    if(!max(map_array(values(ENV(caster)->query_lookAhead()),
+                  (:member_array($2,
+                                 map_array($1,(:$1[0]:)))!=-1:),
+                     TO)))
+        ENV(caster)->addObjectToCombatCycle(TO,1);
+
+    call_out("room_check",ROUND_LENGTH*2);
+    return;
 }
 
 void execute_attack()
@@ -84,21 +103,26 @@ void execute_attack()
 
             tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
             damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
-            if(i<8)
-                caster->add_hp(sdamage/16);
+
         }
+        if(caster->query_hp()<caster->query_max_hp())
+            damage_targ(caster,caster->return_target_limb(),-sdamage/8*(i>8?8:i),"untyped");
+
     }
     place->addObjectToCombatCycle(TO,1);
+
     counter--;
 }
 
-void dest_effect(){
+void dest_effect()
+{
+    remove_call_out("room_check");
     if(objectp(caster)){
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^The shadows retreat, leaving "+caster->QCN+" vulnerable once again.");
         caster->remove_property("vampiric shadow shield");
         caster->remove_property_value("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
     }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
-
+    if(objectp(TO))
+        TO->remove();
 }
