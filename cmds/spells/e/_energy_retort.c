@@ -3,6 +3,7 @@
 
 inherit SPELL;
 int counter;
+int flag=0;
 
 void create() {
     ::create();
@@ -42,10 +43,23 @@ void spell_effect(int prof) {
    caster->set_property("spelled", ({TO}) );
    addSpellToCaster();
    spell_successful();
-   environment(caster)->addObjectToCombatCycle(TO,1);
+   execute_attack();
+    call_out("room_check",ROUND_LENGTH);
 }
 
-int flag=0;
+void room_check()
+{
+    if(!objectp(caster) || !objectp(ENV(caster)))
+    {
+        dest_effect();
+        return;
+    }
+
+    prepend_to_combat_cycle(ENV(caster));
+
+    call_out("room_check",ROUND_LENGTH*2);
+    return;
+}
 
 void execute_attack(){
    object ppl;
@@ -81,6 +95,7 @@ void execute_attack(){
 }
 
 void dest_effect(){
+    remove_call_out("room_check");
     if(objectp(caster)){
        tell_object(caster,"%^ORANGE%^You feel the energy drain from you.");
        tell_room(environment(caster),"%^ORANGE%^The field of energy "+
