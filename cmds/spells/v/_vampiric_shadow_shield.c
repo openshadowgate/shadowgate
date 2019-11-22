@@ -96,7 +96,7 @@ void execute_attack()
     }
 
     attackers = caster->query_attackers();
-    If(sizeof(attackers))
+    if(sizeof(attackers))
         attackers = filter_array(attackers,(:!$1->is_undead():));
 
     if(sizeof(attackers))

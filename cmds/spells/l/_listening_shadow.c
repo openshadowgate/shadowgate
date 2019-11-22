@@ -5,6 +5,7 @@
 //_listening_shadow
 // duration on all scrying spells (and between-cast delays where relevant) rebalanced. Nienne, 5/15.
 #include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 object shadow,remote;

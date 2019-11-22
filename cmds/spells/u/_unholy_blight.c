@@ -12,8 +12,8 @@ void create() {
     set_spell_level(([ "inquisitor" : 4, "cleric" : 4 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS horrid wilting");
-    set_damage_desc("divine");
-    set_description("This spell smites everyone in sight with unholy power. Evil and neutral creatures will suffer only the half of damage, and so will those who manage to will the spell off. Good creatures that failed the will save will become sickened.
+    set_damage_desc("divine, sickened");
+    set_description("This spell smites everyone in sight with unholy power. Evil and neutral creatures will suffer only the half of damage, and so will those who manage to will the spell off. Good creatures that failed the will save will become sickened for clevel/12+1 rounds.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
@@ -51,7 +51,7 @@ void spell_effect(int prof){
         }
         else
         {
-            "/d/magic/curses/sickened"->apply_curse(attackers[i],clevel);
+            "/d/magic/curses/sickened"->apply_curse(attackers[i],clevel/12+1);
         }
         tell_object(attackers[i],"%^BLACK%^%^BOLD%^Your soul is shaken with the unholy smite!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"divine");

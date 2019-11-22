@@ -2,46 +2,46 @@
 #include <magic.h>
 #include <skills.h>
 
+#pragma strict_types
+
 inherit CURSE;
 
 void create()
 {
     ::create();
-    set_name("curse_sickened");
+    set_name("curse_shaken");
 
 }
 
-curse_effect()
+void curse_effect()
 {
     int i;
-    if(target->query_property("sickened_curse"))
+    if(target->query_property("shaken_curse"))
         return;
 
-    target->set_property("sickened_curse",1);
+    target->set_property("shaken_curse",1);
 
-    tell_object(target,"%^BLUE%^You feel sickened.%^RESET%^");
+    tell_object(target,"%^BLUE%^You feel shaken.%^RESET%^");
 
     for(i=0;i<sizeof(CORE_SKILLS);i++)
         target->add_skill_bonus(CORE_SKILLS[i],-2);
     target->add_attack_bonus(-2);
-    target->add_damage_bonus(-2);
     target->add_saving_bonus("all",-2);
 
     call_out("dest_effect",ROUND_LENGTH*clevel);
 }
 
-dest_effect()
+void dest_effect()
 {
     int i;
     if(objectp(target))
     {
-        tell_object(target,"%^BLUE%^You no longer feel sickened.%^RESET%^");
+        tell_object(target,"%^BLUE%^You no longer feel shaken.%^RESET%^");
         for(i=0;i<sizeof(CORE_SKILLS);i++)
             target->add_skill_bonus(CORE_SKILLS[i],2);
         target->add_attack_bonus(2);
-        target->add_damage_bonus(2);
         target->add_saving_bonus("all",2);
-        target->remove_property("sickened_curse");
+        target->remove_property("shaken_curse");
     }
 
     ::dest_effect();

@@ -1,11 +1,15 @@
 #include <std.h>
 
+#pragma strict_types
+
 inherit OBJECT;
 
 //Mini curses and conditions that should vape with user.c:break_all_spells();
 
 int clevel;
 object target;
+
+int iscurse = 1;
 
 void create()
 {
@@ -15,7 +19,7 @@ void create()
 
 int is_curse()
 {
-    return 1;
+    return iscurse;
 }
 
 void add_curse_to_victim(object victim)
@@ -43,14 +47,19 @@ int query_clevel()
     return clevel;
 }
 
-set_clevel(int x)
+int set_clevel(int x)
 {
     clevel = x;
 }
 
-set_target(object x)
+int set_target(object x)
 {
     target = x;
+}
+
+int set_iscurse(int x)
+{
+    iscurse = x;
 }
 
 varargs int apply_curse(object victim, int power)
@@ -64,12 +73,12 @@ varargs int apply_curse(object victim, int power)
     TO->remove();
 }
 
-curse_effect()
+void curse_effect()
 {
     return;
 }
 
-dest_effect()
+void dest_effect()
 {
     if(objectp(TO))
         TO->remove();
