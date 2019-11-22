@@ -96,10 +96,12 @@ void execute_attack()
     }
 
     attackers = caster->query_attackers();
-    attackers = filter_array(attackers,(:!$1->is_undead():));
+    If(sizeof(attackers))
+        attackers = filter_array(attackers,(:!$1->is_undead():));
 
     if(sizeof(attackers))
     {
+
         define_base_damage(0);
         tell_room(place,"%^BLUE%^Shadows around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
         tell_object(caster,"%^BLUE%^%^Shadows around you caress your enemies.");

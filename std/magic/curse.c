@@ -43,12 +43,25 @@ int query_clevel()
     return clevel;
 }
 
+set_clevel(int x)
+{
+    clevel = x;
+}
+
+set_target(object x)
+{
+    target = x;
+}
+
 varargs int apply_curse(object victim, int power)
 {
-    target = victim;
-    clevel = power;
-    add_curse_to_victim(victim);
-    curse_effect();
+    object tmp;
+    tmp = new(file_name(TO));
+    tmp->set_target(victim);
+    tmp->set_clevel(power);
+    tmp->add_curse_to_victim(victim);
+    tmp->curse_effect();
+    TO->remove();
 }
 
 curse_effect()
