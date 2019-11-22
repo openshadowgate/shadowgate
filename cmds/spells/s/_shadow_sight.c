@@ -71,7 +71,7 @@ void spell_effect(int prof)
         call_out("flip",random(20),0);
     }
     else addSpellToCaster();
-    call_out("dest_effect", clevel * ROUND_LENGTH);
+    call_out("dest_effect", clevel * ROUND_LENGTH * 4);
 }
 
 void flip(int onOff)

@@ -78,7 +78,6 @@ void spell_effect(int prof){
         shadow->set_scry_power(power);
         shadow->move(place);
         theName = place->query_short();
-        call_out("dest_effect",60+(clevel*10));
         caster->set_property("remote scrying",1);
         addSpellToCaster();
         return;
@@ -112,7 +111,6 @@ void spell_effect(int prof){
             shadow->set_scry_power(power);
             shadow->move(environment(ob));
             theName = ob->query_short();
-            call_out("dest_effect",60+(clevel*10));
             caster->set_property("remote scrying",1);
             addSpellToCaster();
             return;
