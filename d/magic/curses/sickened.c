@@ -22,7 +22,7 @@ curse_effect()
     target->add_damage_bonus(-2);
     target->add_saving_bonus("all",-2);
 
-    call_out("dest_effect",ROUND_LENGTH*clevel);
+    call_out("dest_effect",ROUND_LENGTH*(clevel/12+1));
 }
 
 dest_effect()
