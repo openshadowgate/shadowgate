@@ -64,6 +64,7 @@
 #define FPL(A) find_player(A)
 // because Garrett is silly and is a wabbit
 #define SPELL "/std/magic/spell"
+#define CURSE "/std/magic/curse"
 #define FEAT "/std/feat"
 #define SCRIBE "/std/scribe"
 #define WEAPONLESS "/std/weaponless_monsters"

@@ -27,6 +27,8 @@ void create()
     set("id", ({ "judgement_obj" }) );
     set("short", "");
     set("long", "");
+
+    set_property("no animate",1);
     set_weight(0);
 }
 

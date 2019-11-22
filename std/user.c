@@ -1149,6 +1149,24 @@ void break_all_spells()
             set_property("spelled", spells_on - ({spell_ob}) );
         }
     }
+
+    if (spells_on = query_property("curses") )
+    {
+        while ((cnum-- > 0) && (sizeof(spells_on = query_property("curses")) > 0))
+        {
+            if(sizeof(spells_on)) { spell_ob = spells_on[0]; }
+            if(objectp(spell_ob))
+            {
+                spell_ob->removeSpellFromCaster();
+                if(objectp(spell_ob))
+                {
+                    spell_ob->dest_effect();
+                }
+            }
+            remove_property("curses");
+            set_property("curses", spells_on - ({spell_ob}) );
+        }
+    }
 }
 
 
