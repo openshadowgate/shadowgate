@@ -94,7 +94,7 @@ void execute_attack()
     }
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         counter--;
-    place->addObjectToCombatCycle(TO,1);
+    prepend_to_combat_cycle(place);
 }
 
 

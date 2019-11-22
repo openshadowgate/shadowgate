@@ -126,6 +126,8 @@ void execute_attack()
                 damage_targ(dude,dude->return_target_limb(),-sdamage,"untyped");
             }
         }
+
+    prepend_to_combat_cycle(place);
     counter --;
 }
 

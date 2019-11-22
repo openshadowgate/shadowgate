@@ -114,7 +114,7 @@ void execute_attack(){
             damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");
         }
     }
-    place->addObjectToCombatCycle(TO,1);
+    prepend_to_combat_cycle(place);
     counter--;
 }
 

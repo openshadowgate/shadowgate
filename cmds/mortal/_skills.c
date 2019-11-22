@@ -14,7 +14,7 @@ int calculate_skill_cost(object ob,int points){
 
     level = ob->query_highest_level();
     if(level == 1) return 0;
-    if(!avatarp(ob)) { 
+    if(!avatarp(ob)) {
       exp = ((EXP_NEEDED[level + 1])*points)/100; // 1% exp for every point moved; cheap for single points but can be expensive in bulk.
       return exp;
     }
@@ -33,10 +33,10 @@ int confirm_remove(string str,object ob,string myskill,int points) {
     }
     newtotal = (int)ob->query_base_skill(myskill) - points;
     if(newtotal < 0) return notify_fail("You haven't applied that many points to the skill!\n");
-    
+
     price = calculate_skill_cost(ob,points);
-    
-    if(!avatarp(ob)) 
+
+    if(!avatarp(ob))
     {
         if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
         {
@@ -58,15 +58,15 @@ int confirm_remove(string str,object ob,string myskill,int points) {
             "improvement tax of "+price+".\n");
             tell_object(ob,"%^BOLD%^%^WHITE%^Adding a character improvement tax of "+price+". This tax will reduce "+
             "all future experience gained by %^RED%^50%%^WHITE%^ until it is repaid.%^RESET%^");
-        }     
+        }
     }
-    
+
     ob->set_skill(myskill,newtotal);
     tell_object(ob,"%^BOLD%^%^WHITE%^You have reduced your "+myskill+" skill by "+points+" points.%^RESET%^");
     return 1;
 }
 
-int cmd_skills(string str) 
+int cmd_skills(string str)
 {
     int points, newtotal, checkflag = 0;
     string myskill;
@@ -82,7 +82,7 @@ int cmd_skills(string str)
       return 1;
     }
     if(!TP->query("new_class_type")) return 1;
-    if(sscanf(str,"add %d to %s",points,myskill) == 2) 
+    if(sscanf(str,"add %d to %s",points,myskill) == 2)
     {
       if(member_array(myskill,VALIDSKILLS) == -1) return notify_fail(""+capitalize(myskill)+" is not a valid skill.\n");
       if(points < 1) return notify_fail("You can only add a positive number of points to a skill.\n");
@@ -119,7 +119,7 @@ int cmd_skills(string str)
       tell_object(TP,"%^BOLD%^%^WHITE%^You have increased your "+myskill+" skill by "+points+" points.%^RESET%^");
       return 1;
     }
-    if(sscanf(str,"remove %d from %s",points,myskill) == 2) 
+    if(sscanf(str,"remove %d from %s",points,myskill) == 2)
     {
       if(member_array(myskill,VALIDSKILLS) == -1) return notify_fail(""+capitalize(myskill)+" is not a valid skill.\n");
       if(points < 1) return notify_fail("You can only remove a positive number of points to a skill.\n");
@@ -130,7 +130,7 @@ int cmd_skills(string str)
         tell_object(TP, "You have a negative level and must have it removed before "+
         "you can remove any skills!");
         return 1;
-      }      
+      }
       if(intp("/daemon/user_d.c"->get_scaled_level(TP)))
       {
         tell_object(TP, "You have scaled your level down and must revert it back to "+
@@ -155,10 +155,10 @@ int cmd_skills(string str)
     return notify_fail("See <help skills> for syntax.\n");
 }
 
-//recoding the following to use the VALIDSKILLS array and to display 
+//recoding the following to use the VALIDSKILLS array and to display
 //class skills in BOLD WHITE - non class skills in the original BOLD GREEN
 //Saide, January 2017
-void display_skills(object asking, object ob) 
+void display_skills(object asking, object ob)
 {
     int x;
     string SKILL_COL, LCOLOR, BCOLOR, thisSkill, msg, *myclasses, *myclassskills, mydisc, file;
@@ -171,18 +171,18 @@ void display_skills(object asking, object ob)
     arrange_string("%^CYAN%^Rank%^BLUE%^(base)", 14)+
     arrange_string("%^GREEN%^Skill",21)+
     arrange_string("%^CYAN%^Rank%^BLUE%^(base)", 14)+"\n");
-    
+
     LCOLOR = "%^BOLD%^%^CYAN%^";
     BCOLOR = "%^BLUE%^";
-    
+
     myclasses = ob->query_classes();
     myclassskills = ({});
-    
-    for(x = 0;x<sizeof(myclasses);x++) 
+
+    for(x = 0;x<sizeof(myclasses);x++)
     {
         file = DIR_CLASSES+"/"+myclasses[x]+".c";
-        if(file_exists(file)) 
-        {           
+        if(file_exists(file))
+        {
             if(myclasses[x] == "psion")
             {
                 mydisc = ob->query_discipline();
@@ -199,10 +199,10 @@ void display_skills(object asking, object ob)
     }
     if(FEATS_D->usable_feat(ob,"skill focus"))
     {
-        myclassskills += ({((string)ob->query("skill_focus"))}); 
+        myclassskills += ({((string)ob->query("skill_focus"))});
     }
     myclassskills = distinct_array(myclassskills);
-    
+
     for(x = 0;x < sizeof(CORE_SKILLS);x++)
     {
         thisSkill = CORE_SKILLS[x];
@@ -254,37 +254,34 @@ void display_skills(object asking, object ob)
 }
 
 int help(){
-   if(avatarp(TP)) {
-   write("%^YELLOW%^Avatar/wizzes only: %^BOLD%^%^WHITE%^You can check a player's skills by using <skills [name]>.  "
-"No argument will show your skills.\n");
-   }
-   write("%^BOLD%^%^WHITE%^This command will list the skills available on the mud.  The number in "
-"brackets is your base, unmodified skill, which you allocate yourself with "
-"points. For core skills, you will receive 4 points per 2 levels to spend as you "
-"choose; thieves and bards will receive 6 points per 2 levels. For craft skills, "
-"you will receive 1 point per 2 levels regardless of class.\n\n"
-"%^YELLOW%^<skills add # to skillname> %^BOLD%^%^WHITE%^will allow you to increase a base skill. Be aware that "
-"you cannot add more base points to a skill than half your total level, and "
-"that you cannot use more points than you have gained.\n\n"
-"%^YELLOW%^<skills remove # from skillname> %^BOLD%^%^WHITE%^will allow you to free points up for use elsewhere. "
-"This will cost experience based on the number of points to be removed.\n\n"
-"%^BOLD%^%^WHITE%^Your rank in a skill, outside the brackets, is your total modified skill, "
-"which you use in your checks. It includes bonuses from:\n"
-"   %^BOLD%^%^WHITE%^-stats: %^BOLD%^%^WHITE%^1 point per 2 past 10, in the appropriate stat\n"
-"   %^BOLD%^%^WHITE%^-levels: %^BOLD%^%^WHITE%^1 point per 2 levels for class skills, 1 point per 5 for non-class\n"
-"   %^BOLD%^%^WHITE%^-items, spells and effects: as specified\n\n"
-"%^BOLD%^%^CYAN%^Core skill DCs: %^BOLD%^%^WHITE%^On the whole, having a core skill check "
-"identical to the intended level of the creature/task will give close to a flawless"
-"success rate. Given the d20 added to all rolls, 10 points below the difficulty of a "
-"check will cause 50% success rate; 20 or more below the difficulty will cause constant "
-"failure. For checks opposed with players, this will be dependant upon the "
-"relevant skill of the player (eg/ thievery vs perception) and another d20 element "
-"of random rolling.\n\n"
-"%^BOLD%^%^CYAN%^Craft skill DCs: %^BOLD%^%^WHITE%^Craft skills scale with gear intended for "
-"your level, to require a degree of specialisation. If you want to be effective with level-"
-"appropriate equipment, we recommend applying points to only one skill if you wish to craft "
-"magical items, or no more than two to be a reliable repairer. If you wish only to work on "
-"lower level items, it may be feasible to spread your points across more skills than this.\n\n"
-"%^YELLOW%^Related helpfiles: various skillnames");
+
+    write("
+%^CYAN%^NAME%^RESET%^
+
+skills - display and manage your skills
+
+%^CYAN%^SYNTAX%^RESET%^
+
+skills
+skills add %^ORANGE%^%^ULINE%^NUMBER%^RESET%^ to %^ORANGE%^%^ULINE%^SKILL%^RESET%^
+skills remove %^ORANGE%^%^ULINE%^NUMBER%^RESET%^ from %^ORANGE%^%^ULINE%^SKILL%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command will list the skills available on the mud.  The number in brackets is your base, unmodified skill, which you allocate yourself with points. For core skills, you will receive 4 points per 2 levels to spend as you choose; thieves and bards will receive 6 points per 2 levels. For craft skills, you will receive 1 point per 2 levels regardless of class.
+
+To add points to a skill use %^ORANGE%^<skills add %^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^ORANGE%^ to %^ORANGE%^%^ULINE%^SKILL%^RESET%^%^ORANGE%^>%^RESET%^. You can only spend limited amount of free points based on your level and class.
+
+To remove poins from a skill use %^ORANGE%^<skills remove %^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^ORANGE%^ from %^ORANGE%^%^ULINE%^SKILL%^RESET%^%^ORANGE%^>%^RESET%^. This will incur a character improvement tax based on your level.
+
+Your rank in a skill, outside the brackets, is your total modified skill, which you use in your checks. It includes bonuses from:
+ * stats:  1 point per 2 past 10, in the appropriate stat
+ * levels: 1 point per 2 levels for class skills, 1 point per 5 for non-class
+ * Other, such as items, spells and effects.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+individual skill help files, score, stats, feats, spells, recall, hide_in_shadows
+");
    return 1;
 }

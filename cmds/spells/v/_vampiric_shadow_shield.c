@@ -118,8 +118,7 @@ void execute_attack()
             damage_targ(caster,caster->return_target_limb(),-sdamage/8*(i>8?8:i),"untyped");
 
     }
-    place->addObjectToCombatCycle(TO,1);
-
+    prepend_to_combat_cycle(place);
     counter--;
 }
 
