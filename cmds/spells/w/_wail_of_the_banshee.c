@@ -31,9 +31,9 @@ void spell_effect(int prof)
     tell_object(caster,"%^BLUE%^You concentrate and release a HORRIBLE SCREAM in tongues of unlife.");
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM in fell tongues, you feel your soul is being ripped from your body.",caster);
 
-    foes = caster->query_attackers();
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    foes = target_filter(foes);
+    attackers = all_living(place);
+    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
+    attackers = target_filter(attackers);
 
     foreach(foe in foes)
     {

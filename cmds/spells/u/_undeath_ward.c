@@ -7,14 +7,14 @@ int flag;
 void create()
 {
     ::create();
-    set_spell_name("repulsion");
-    set_spell_level(([ "cleric" : 7, "inquisitor" : 6, "mage" : 6]));
+    set_spell_name("undeath ward");
+    set_spell_level(([ "cleric" : 5, "inquisitor" : 4, "mage" : 6]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS repulsion");
-    set_damage_desc("perpetually pushes everyone attacking you further away");
-    set_description("This spell is a modification of armor spell. With this you place a force field around yourself that will push everyone aiming to harm you away, perpetually removing them from combat. Strong willed will pass through the shield.");
+    set_damage_desc("removes undead from combat or damages them");
+    set_description("This spell pushes undead creatures away from you, removing them form combat. Undead that makes the save will take damage instead.");
     set_save("will");
-
+    traveling_aoe_spell(1);
 }
 
 int preSpell()
@@ -31,11 +31,11 @@ void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 2) * clevel;
-    tell_room(place,"%^CYAN%^As "+caster->QCN+" raises a field of magical force around "+caster->QP+".",caster);
-    tell_object(caster,"%^CYAN%^You feel you're surrounded by a force field.");
+    tell_room(place,"%^WHITE%^As "+caster->QCN+" raises a field of magical force around "+caster->QP+".",caster);
+    tell_object(caster,"%^WHITE%^You feel you're surrounded by a force field.");
     caster->set_property("repulsion",1);
     caster->set_property("spelled", ({TO}) );
-    caster->set_property("added short",({"%^RESET%^%^CYAN%^ (in a field of force)%^RESET%^"}));
+    caster->set_property("added short",({"%^RESET%^%^WHITE%^ (bathed in silver light)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
     call_out("dest_effect",duration);
@@ -56,6 +56,7 @@ void room_check()
     return;
 }
 
+
 void execute_attack()
 {
     object *attackers,room;
@@ -73,12 +74,18 @@ void execute_attack()
     attackers = target_filter(attackers);
     for(i=0;i<sizeof(attackers)&&i<6;i++)
     {
-        if(do_save(attackers[i],4))
-            continue;
-        tell_room(room,"%^CYAN%^"+attackers[i]->QCN+" is pushed away by a force field from "+caster->QCN+".%^RESET%^",({attackers[i]}));
-        tell_object(attackers[i],"%^CYAN%^You are pushed away by a force field around "+caster->QCN+".%^RESET%^");
-        attackers[i]->remove_attacker(caster);
-        caster->remove_attacker(attackers[i]);
+        if(!do_save(attackers[i],4))
+        {
+            tell_room(room,"%^WHITE%^"+attackers[i]->QCN+" is pushed away by a force field from "+caster->QCN+".%^RESET%^",({attackers[i]}));
+            tell_object(attackers[i],"%^WHITE%^You are pushed away by a force field around "+caster->QCN+".%^RESET%^");
+            attackers[i]->remove_attacker(caster);
+            caster->remove_attacker(attackers[i]);
+        }
+        else
+        {
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"silver");
+            tell_object(attackers[i],"%^WHITE%^%^BOLD%^You're rebuked by the silver light.%^RESET%^");
+        }
     }
     prepend_to_combat_cycle(place);
 }
@@ -86,9 +93,9 @@ void execute_attack()
 void dest_effect(){
     remove_call_out("room_check");
     if(objectp(caster)){
-        tell_room(environment(caster),"%^BOLD%^%^CYAN%^The force field around "+caster->QCN+" vanishes.%^RESET%^");
+        tell_room(environment(caster),"%^BOLD%^%^WHITE%^The force field around "+caster->QCN+" vanishes.%^RESET%^");
         caster->remove_property("repulsion");
-        caster->remove_property_value("added short",({"%^RESET%^%^CYAN%^ (in a field of force)%^RESET%^"}));
+        caster->remove_property_value("added short",({"%^RESET%^%^WHITE%^ (bathed in silver light)%^RESET%^"}));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

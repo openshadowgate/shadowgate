@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS horrid wilting");
     set_damage_desc("negative energy on living, nothing on undead");
-    set_description("This spell sends a wave of necrotic energy at caster's living enemies, evaporating water and life from them.");
+    set_description("This spell sends a wave of necrotic energy at everyone living in sight, evaporating water and life from them.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(1);
@@ -30,7 +30,8 @@ string query_cast_string() {
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = caster->query_attackers();
+    attackers = all_living(place);
+    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 
     tell_room(place,"%^BLUE%^"+caster->QCN+" raises hand and releases wave of cold energy!%^RESET%^");
