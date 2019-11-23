@@ -24,7 +24,7 @@ Such effects as fire resistance or silver resistance subtract their value from d
 A creature with the fast healing special quality regains hit points at an exceptional rate. This gives (grade)d(level/4) points of passive regeneration each round. For example, fast healing 2 gives 2d2 hp regeneration to a level 10 monster per round.
 
 %^CYAN%^%^ULINE%^Fear%^RESET%^
-Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight.
+Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight. Effects that are applied are usually panicked, shaken or covering.
 
 %^CYAN%^%^ULINE%^Hidden%^RESET%^
 Hidden creatures can not be seen by others, as they are hiding in shadows. The room must have less than 3 light levels for anyone to be able to hide in it. You can <search> the room for hidden creatures or use glitterdust to reveal them. <search> reveals the hidden creatures only for you. Hidden creatures are marked with %^ORANGE%^(hid)%^RESET%^ before their name when revealed.
@@ -48,7 +48,13 @@ Prone or staggered creatures can not use most weapons for the duration of the ef
 A creature gets 1d(lvl/4) health poins of regeneration per round as part of its innate ability to heal.
 
 %^CYAN%^%^ULINE%^Sickened%^RESET%^
-All core skills, attack, damage bonus, saves are reduced by 2.
+All core skills, attack, damage bonus, saves are reduced by 2. The effect is cumulative but usually won't last for long.
+
+%^CYAN%^%^ULINE%^Shaken^RESET%^
+All core skills, attack bonus, saves are reduced by 2.
+
+$CYAN%^%^ULINE%^Covering%^RESET%^
+You cover in fear, unable to do anything. You get a penalty of -2 on your armor class and are paralyzed.
 
 %^CYAN%^%^ULINE%^Sight bonus%^RESET%^
 This effects adds to the light value of the room, but only for the caster.

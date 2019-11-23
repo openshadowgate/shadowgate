@@ -20,7 +20,7 @@ void status_effect()
 
     target->set_property("shaken_curse",1);
 
-    tell_object(target,"%^BLUE%^You feel shaken.%^RESET%^");
+    tell_object(target,"%^ORANGE%^You feel shaken.%^RESET%^");
 
     for(i=0;i<sizeof(CORE_SKILLS);i++)
         target->add_skill_bonus(CORE_SKILLS[i],-2);
@@ -35,7 +35,7 @@ void dest_effect()
     int i;
     if(objectp(target))
     {
-        tell_object(target,"%^BLUE%^You no longer feel shaken.%^RESET%^");
+        tell_object(target,"%^ORANGE%^You no longer feel shaken.%^RESET%^");
         for(i=0;i<sizeof(CORE_SKILLS);i++)
             target->add_skill_bonus(CORE_SKILLS[i],2);
         target->add_attack_bonus(2);

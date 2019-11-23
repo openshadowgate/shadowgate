@@ -13,10 +13,6 @@ void create()
 int status_effect()
 {
     int i;
-    if(target->query_property("effect_sickened"))
-        return;
-
-    target->set_property("effect_sickened",1);
 
     tell_object(target,"%^BLUE%^You feel sickened.%^RESET%^");
 
@@ -41,7 +37,6 @@ int dest_effect()
         target->add_attack_bonus(2);
         target->add_damage_bonus(2);
         target->add_saving_bonus("all",2);
-        target->remove_property("effect_sickened");
     }
     ::dest_effect();
     return 1;
