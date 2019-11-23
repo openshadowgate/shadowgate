@@ -77,19 +77,11 @@ int *query_max_spell_array(int wizard_level, string caster_class, int stat) {
     spells_allowed = allocate(10);
 
     switch(caster_class) {
-    case "bard":
+    case "bard": case "inquisitor":
         if(wizard_level > 50) { spells_allowed = get_high_spell_level_array(wizard_level,caster_class); }
         else { spells_allowed = BARDLEVELS[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
         spells_allowed[6]=0; // bard spells do not go above L6, which is array [5]
-        spells_allowed[7]=0;
-        spells_allowed[8]=0;
-        break;
-    case "inquisitor":
-        if(wizard_level > 50) { spells_allowed = get_high_spell_level_array(wizard_level,caster_class); }
-        else { spells_allowed = MAGELEVELS[wizard_level]; }
-        spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
-        spells_allowed[6]=0;
         spells_allowed[7]=0;
         spells_allowed[8]=0;
         break;
