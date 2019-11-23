@@ -18,7 +18,7 @@ void status_effect()
     if(target->query_property("effect_shaken"))
         return;
 
-    target->set_property("shaken_curse",1);
+    target->set_property("effect_shaken",1);
 
     tell_object(target,"%^ORANGE%^You feel shaken.%^RESET%^");
 
