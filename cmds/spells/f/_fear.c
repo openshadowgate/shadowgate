@@ -1,9 +1,3 @@
-//Updated by ~Circe~ 5/11/08 with rebalancing of domains
-//They will no longer drop everything, have a chance to
-//unwield/drop weapons, and a chance to cower instead of run.
-//changed from Cyric to Bane by Circe 4/14/04
-//_fear.c
-
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -15,21 +9,14 @@ void create()
     ::create();
     set_spell_name("fear");
     set_spell_level(([ "cleric" : 5, "bard" : 3, "mage" : 4, "psion" : 6, "inquisitor":4 ]));
-    set_spell_sphere("enchantment_charm");
+    set_spell_sphere("necromancy");
     set_spell_domain("tyranny");
     set_syntax("cast CLASS fear");
-    set_description("Fear sends a wave of horrid thoughts and images out "+
-        "toward the foes around the caster, possibly "+
-        "terrifying them.  It can make the creature briefly flee in fright, "+
-        "or it may make him drop his weapons and cower before "+
-        "the caster.");
+    set_description("Fear sends a wave of horrid thoughts and images out toward the foes around the caster, possibly terrifying them. An invisible cone of terror causes each living creature in the area to become panicked unless it succeeds on a Will save. If cornered, a panicked creature begins cowering. If the Will save succeeds, the creature is shaken for 1 round.");
     mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
-    set_components(([
-        "mage" : ([ "white feather" : 1, ]),
-    ]));
 }
 
 string query_cast_string(){
@@ -44,7 +31,7 @@ void spell_effect(int prof)
     object *weapons;
 
     tell_object(caster,"%^BLUE%^You send a cone of dark images and "+
-        "deep-seeded fears forth from your hand.");
+                "deep-seeded fears forth from your hand.");
 
     if(!living(caster))
     {
@@ -108,14 +95,6 @@ void spell_effect(int prof)
         if(bonus < 0) bonus = 0;
         bonus = bonus*(-1);
 
-        if(do_save(inven[i],bonus))
-        {
-            tell_object(inven[i], "%^BLUE%^You fight back some "+
-                "horrid images magically placed in your mind.");
-            tell_room(place,"%^BLUE%^You see "+inven[i]->QCN+" wince and shudder, "
-                "before regaining composure.",inven[i]);
-            continue;
-        }
 
         if(race_immunity_check(inven[i], "fear"))
         {
@@ -123,57 +102,33 @@ void spell_effect(int prof)
             continue;
         }
 
+        //No need to check for undead after this
         if(mind_immunity_damage(inven[i], "default"))
         {
             continue;
         }
 
-
-        tell_object(inven[i],"%^BLUE%^Images of horror and terror "+
-            "flood your mind. You fight them all, but finally they "+
-            "grip your mind and you tremble.");
-
-        tell_room(place, "%^BLUE%^Sheer horror contorts "+
-            ""+inven[i]->QCN+"'s face. "+inven[i]->QS+" breaks in "+
-            "fear and trembles.",inven[i]);
-
-        if(clevel+random(10) > (int)inven[i]->query_highest_level()+random(10))
+        if(do_save(inven[i],bonus))
         {
-            tell_object(inven[i],"%^BOLD%^%^BLUE%^Unable to contain "+
-                "your terror, you cower before "+caster->QCN+"!%^RESET%^");
-            tell_room(environment(inven[i]),"%^BOLD%^%^BLUE%^"+
-                ""+inven[i]->QCN+" cowers in terror!%^RESET%^",inven[i]);
-            weapons = inven[i]->query_wielded();
-            if(sizeof(weapons) && inven[i]->query_property("no disarm"))
-            {
-                tell_object(inven[i],"%^CYAN%^You lose your grip "+
-                    "on your weapons!%^RESET%^");
-                tell_room(environment(inven[i]),"%^CYAN%^"+
-                    ""+inven[i]->QCN+" drops "+inven[i]->QP+" "+
-                    "weapons!%^RESET%^",inven[i]);
-            }
-            for (x=0;x<sizeof(weapons);x++)
-            {
-                if(!objectp(weapons[x])) continue;
-                ids = weapons[x]->query_id();
-                if((int)weapons[x]->query_property("enchantment") < 0) continue;
-                inven[i]->force_me("unwield "+ids[0]+"");
-                inven[i]->remove_property("disarm time");
-                inven[i]->set_property("disarm time", time() + (ROUND_LENGTH * roll_dice(1, 4)));
-            }
-            inven[i]->set_paralyzed((15+random(20)),"You cannot contain "+
-                "your fear to do that!");
-            continue;
+            tell_object(inven[i], "%^BLUE%^You fight back some "+
+                        "horrid images magically placed in your mind.");
+            tell_room(place,"%^BLUE%^You see "+inven[i]->QCN+" wince and shudder, "
+                      "before regaining composure.",inven[i]);
+
+            "/std/effect/status/sickened"->apply_effect(target,2);
+
         }
         else
         {
-            tell_object(inven[i],"%^BOLD%^You flee from "+caster->QCN+" "+
-                "before controlling yourself!%^RESET%^");
-            tell_room(place,"%^BOLD%^"+inven[i]->QCN+" flees in fright!%^RESET%^",inven[i]);
-                inven[i]->run_away();
-            continue;
+            tell_object(inven[i],"%^BLUE%^Images of horror and terror "+
+                        "flood your mind. You fight them all, but finally they "+
+                        "grip your mind and you tremble.");
+            tell_room(place, "%^BLUE%^Sheer horror contorts "+
+                      ""+inven[i]->QCN+"'s face. "+inven[i]->QS+" breaks in "+
+                      "fear and trembles.",inven[i]);
+            "/std/effect/status/panicked"->apply_effect(target,roll_dice(1,6));
         }
-    continue;
+
     }
     dest_effect();
 }

@@ -2792,14 +2792,12 @@ void help() {
         write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
     if(monk_way != "" && stringp(monk_way))
         write("%^BOLD%^%^RED%^Monk way:%^RESET%^ "+monk_way);
+    if(verbal_comp||somatic_comp)
+        write("%^BOLD%^%^RED%^Components:%^RESET%^ "+(verbal_comp?"Verbal ":"")+(somatic_comp?"Somatic ":""));
     if(!save_type)
         save_type = "";
     if(save_type != "")
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ "+save_type);
-    else
-        write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ n/a");
-    if(verbal_comp||somatic_comp)
-        write("%^BOLD%^%^RED%^Components:%^RESET%^ "+(verbal_comp?"Verbal ":"")+(somatic_comp?"Somatic ":""));
     if(stringp(damage_desc))
         write("%^BOLD%^%^RED%^Spell effect:%^RESET%^ "+damage_desc);
     if(!syntax)

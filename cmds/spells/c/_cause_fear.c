@@ -10,12 +10,12 @@ void create() {
     set_spell_level(([ "mage" : 1, "bard" : 2, "cleric":1,"paladin":1,"inquisitor" : 1 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS cause fear on TARGET");
-    set_description("This power allows the caster to project "
-                    "an aura of fear toward a target, potentially sending him fleeing "
-                    "or causing him to cower in terror.");
+    set_damage_desc("frightened, sickened on save");
+    set_description("This power allows the caster to project an aura of fear toward a target, potentially sending him fleeing.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
+    mental_spell(1);
     set_save("will");
 }
 
@@ -42,8 +42,7 @@ void spell_effect(int prof){
     spell_successful();
     bonus = (int)caster->query_stats("intelligence");
     bonus = (bonus - 10) / 2;
-    if(bonus < 0) bonus = 0;
-    bonus = bonus*(-1);
+    bonus = -bonus;
 
     spell_kill(target, caster);
     if(do_save(target,bonus))
