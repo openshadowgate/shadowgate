@@ -24,7 +24,7 @@ Such effects as fire resistance or silver resistance subtract their value from d
 A creature with the fast healing special quality regains hit points at an exceptional rate. This gives (grade)d(level/4) points of passive regeneration each round. For example, fast healing 2 gives 2d2 hp regeneration to a level 10 monster per round.
 
 %^CYAN%^%^ULINE%^Fear%^RESET%^
-Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight. Effects that are applied are usually panicked, shaken or covering.
+Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight. Effects that are applied are usually frightened, panicked, shaken or covering.
 
 %^CYAN%^%^ULINE%^Hidden%^RESET%^
 Hidden creatures can not be seen by others, as they are hiding in shadows. The room must have less than 3 light levels for anyone to be able to hide in it. You can <search> the room for hidden creatures or use glitterdust to reveal them. <search> reveals the hidden creatures only for you. Hidden creatures are marked with %^ORANGE%^(hid)%^RESET%^ before their name when revealed.
@@ -53,8 +53,12 @@ All core skills, attack, damage bonus, saves are reduced by 2. The effect is cum
 %^CYAN%^%^ULINE%^Shaken^RESET%^
 All core skills, attack bonus, saves are reduced by 2.
 
-$CYAN%^%^ULINE%^Covering%^RESET%^
+%^CYAN%^%^ULINE%^Covering%^RESET%^
 You cover in fear, unable to do anything. You get a penalty of -2 on your armor class and are paralyzed.
+
+%^CYAN%^%^ULINE%^Panicked^RESET%^
+A panicked creature must drop anything it holds and flee at top speed from the source of its fear, as well as any other dangers it encounters, along a random path. It can’t take any other actions. In addition, the creature takes a -2 penalty on all saving throws, skill checks, and ability checks. If cornered, a panicked creature cowers.
+Panicked is a more extreme state of fear than shaken or frightened.
 
 %^CYAN%^%^ULINE%^Sight bonus%^RESET%^
 This effects adds to the light value of the room, but only for the caster.
