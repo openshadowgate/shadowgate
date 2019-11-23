@@ -19,14 +19,15 @@ void create()
 
 void spell_effect(int prof)
 {
-    object *attackers;
+    object *peeps;
     string mygod = caster->query_diety();
 
-    attackers = all_living(place);
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = filter_array(attackers,(:$1->query_diety()==$2:),mygod);
+    peeps = all_living(place);
+    peeps = filter_array(peeps, "is_non_immortal",FILTERS_D);
+    peeps = filter_array(peeps,(:$1->query_diety()==$2:),mygod);
+    peeps -=({caster});
 
-    if(sizeof(attackers))
+    if(sizeof(peeps))
         tell_object(caster,"%^RED%^There are faithful present.%^RESET%^");
     else
         tell_object(caster,"%^RED%^No faithful are present present.%^RESET%^");
