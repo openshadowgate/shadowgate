@@ -14,12 +14,13 @@ void create() {
     set_spell_level(([ "mage" : 6, "bard" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS eyebite on TARGET");
-    set_damage_desc("clevel/12 to attack and damage bonuses, to caster level, to all skills");
-    set_description("With this spell caster imbues her eyes with dread power, glancing upon her enemies she curses them. This curse works its worst on weaker enemies, paralyzing them in fear.");
+    set_damage_desc("sickened, panicked and comatose");
+    set_description("With this spell caster imbues her eyes with dread power, glancing upon her enemies she curses them. This curse works its worst on weaker enemies, paralyzing them in fear. The target creature may become sickened, panicked or even comatose. Effects stack as the power difference increases. A successful will save will negate the effect.");
     set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
+    evil_spell(1);
 }
 
 string query_cast_string() {
@@ -48,27 +49,20 @@ void spell_effect(int prof) {
     tell_object(target,"%^BLUE%^A mirroring aura starts to grow around you, seeping into your skin to taint it a %^RESET%^"
 "sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.  An overwhelming feeling of weakness comes over you.%^RESET%^");
     tell_room(place,"%^BLUE%^A mirroring aura starts to grow around "+target->QCN+", seeping into "+target->QP+" skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.%^RESET%^",target);
-    target->add_damage_bonus(-bonus);
-    target->add_attack_bonus(-bonus);
-    target->set_property("empowered",-bonus);
-    for(i=0;i<sizeof(CORE_SKILLS);i++)
-        caster->add_skill_bonus(CORE_SKILLS[i],-bonus);
-    caster->add_saving_bonus("all",(-1)*bonus);
-    if(target->query_character_level()-5+roll_dice(1,10)<clevel-5)
+
+    "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/12+1);
+
+    if(target->query_character_level()+roll_dice(1,10)<clevel)
     {
-        tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you cower before "+caster->QCN+"!%^RESET%^");
-        tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" cowers in terror!%^RESET%^",target);
-        target->force_me("flee");
-        target->set_paralyzed(roll_dice(1,3)*8,"You cannot contain your fear to do that!");
+        "/std/effect/status/panicked"->apply_effect(attackers[i],clevel/12+1);
     }
-    if(target->query_character_level()-10+roll_dice(2,10)<clevel-10)
+    //Panicked and comatose at the same time, sure, DnD, you make sense
+    if(target->query_character_level()+roll_dice(2,10)<clevel)
     {
         tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you faint!%^RESET%^");
         tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" faints!%^RESET%^",target);
         target->set_unconscious(roll_dice(1,2)*8,"You're unconcious!");
     }
-    target->set_property("spelled", ({TO}) );
-    addSpellToCaster();
     call_out("dest_effect",duration);
     spell_successful();
 }
@@ -79,13 +73,6 @@ void dest_effect() {
 "skin.%^RESET%^");
         tell_room(environment(target),"%^CYAN%^The sickly color of "+target->QCN+"'s skin fades back into a more healthy "
 "shade.%^RESET%^",target);
-        target->add_damage_bonus(bonus);
-        target->add_attack_bonus(bonus);
-        target->set_property("empowered",bonus);
-        target->remove_property_value("spelled", ({TO}) );
-        for(i=0;i<sizeof(CORE_SKILLS);i++)
-            caster->add_skill_bonus(CORE_SKILLS[i],bonus);
-        caster->add_saving_bonus("all",bonus);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
