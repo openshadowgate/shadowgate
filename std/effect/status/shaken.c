@@ -4,19 +4,18 @@
 
 #pragma strict_types
 
-inherit CURSE;
+inherit STATUS;
 
 void create()
 {
     ::create();
-    set_name("curse_shaken");
-
+    set_name("effect_shaken");
 }
 
-void curse_effect()
+void status_effect()
 {
     int i;
-    if(target->query_property("shaken_curse"))
+    if(target->query_property("effect_shaken"))
         return;
 
     target->set_property("shaken_curse",1);
@@ -28,7 +27,7 @@ void curse_effect()
     target->add_attack_bonus(-2);
     target->add_saving_bonus("all",-2);
 
-    call_out("dest_effect",ROUND_LENGTH*clevel);
+    call_out("dest_effect",ROUND_LENGTH*duration);
 }
 
 void dest_effect()
@@ -41,7 +40,7 @@ void dest_effect()
             target->add_skill_bonus(CORE_SKILLS[i],2);
         target->add_attack_bonus(2);
         target->add_saving_bonus("all",2);
-        target->remove_property("shaken_curse");
+        target->remove_property("effect_shaken");
     }
 
     ::dest_effect();

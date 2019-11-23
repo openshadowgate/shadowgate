@@ -2,22 +2,21 @@
 #include <magic.h>
 #include <skills.h>
 
-inherit CURSE;
+inherit STATUS;
 
 void create()
 {
     ::create();
-    set_name("curse_sickened");
-
+    set_name("status_sickened");
 }
 
-curse_effect()
+int status_effect()
 {
     int i;
-    if(target->query_property("sickened_curse"))
+    if(target->query_property("effect_sickened"))
         return;
 
-    target->set_property("sickened_curse",1);
+    target->set_property("effect_sickened",1);
 
     tell_object(target,"%^BLUE%^You feel sickened.%^RESET%^");
 
@@ -28,9 +27,10 @@ curse_effect()
     target->add_saving_bonus("all",-2);
 
     call_out("dest_effect",ROUND_LENGTH*clevel);
+    return 1;
 }
 
-dest_effect()
+int dest_effect()
 {
     int i;
     if(objectp(target))
@@ -41,8 +41,8 @@ dest_effect()
         target->add_attack_bonus(2);
         target->add_damage_bonus(2);
         target->add_saving_bonus("all",2);
-        target->remove_property("sickened_curse");
+        target->remove_property("effect_sickened");
     }
-
     ::dest_effect();
+    return 1;
 }

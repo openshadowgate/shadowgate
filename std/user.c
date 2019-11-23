@@ -1150,9 +1150,9 @@ void break_all_spells()
         }
     }
 
-    if (spells_on = query_property("curses") )
+    if (spells_on = query_property("status_effects") )
     {
-        while ((cnum-- > 0) && (sizeof(spells_on = query_property("curses")) > 0))
+        while ((cnum-- > 0) && (sizeof(spells_on = query_property("status_effects")) > 0))
         {
             if(sizeof(spells_on)) { spell_ob = spells_on[0]; }
             if(objectp(spell_ob))
@@ -1163,8 +1163,8 @@ void break_all_spells()
                     spell_ob->dest_effect();
                 }
             }
-            remove_property("curses");
-            set_property("curses", spells_on - ({spell_ob}) );
+            remove_property("status_effects");
+            set_property("status_effects", spells_on - ({spell_ob}) );
         }
     }
 }
