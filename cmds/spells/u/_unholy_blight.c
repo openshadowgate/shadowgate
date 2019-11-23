@@ -28,6 +28,7 @@ void spell_effect(int prof){
     attackers = all_living(place);
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
+    attackers -= caster->query_followers();
 
     tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" raises hand and releases waves of unholy power!%^RESET%^");
     if(!sizeof(attackers)){
