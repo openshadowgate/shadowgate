@@ -9,7 +9,7 @@ inherit STATUS;
 void create()
 {
     ::create();
-    set_name("effect_panicked");
+    set_name("effect_frightened");
 }
 
 void status_effect()
@@ -18,12 +18,13 @@ void status_effect()
     object * weapons;
     string * ids;
 
-    if(target->query_property("effect_panicked"))
+    if(target->query_property("effect_frightened")||
+       target->query_property("effect_panicked"))
         return;
 
-    target->set_property("effect_panicked",1);
+    target->set_property("effect_frightened",1);
 
-    tell_object(target,"%^BLUE%^You feel panicked.%^RESET%^");
+    tell_object(target,"%^BLUE%^You feel frightened.%^RESET%^");
 
 
     weapons = target->query_wielded();
@@ -60,13 +61,13 @@ void dest_effect()
     int i;
     if(objectp(target))
     {
-        tell_object(target,"%^BLUE%^You no longer feel panicked.%^RESET%^");
+        tell_object(target,"%^BLUE%^You no longer feel frightened.%^RESET%^");
         for(i=0;i<sizeof(CORE_SKILLS);i++)
             target->add_skill_bonus(CORE_SKILLS[i],2);
         target->add_attack_bonus(2);
         target->add_damage_bonus(2);
         target->add_saving_bonus("all",2);
-        target->remove_property("effect_panicked");
+        target->remove_property("effect_frightened");
     }
 
     ::dest_effect();
