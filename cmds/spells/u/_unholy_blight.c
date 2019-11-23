@@ -51,7 +51,9 @@ void spell_effect(int prof){
         }
         else
         {
-            "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/12+1);
+            object eff = "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/8+1);
+            if(objectp(eff))
+                eff->set_spell();
         }
         tell_object(attackers[i],"%^BLACK%^%^BOLD%^Your soul is shaken with the unholy smite!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"divine");

@@ -51,14 +51,14 @@ void spell_effect(int prof) {
     tell_room(place,"%^BLUE%^A mirroring aura starts to grow around "+target->QCN+", seeping into "+target->QP+" skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.%^RESET%^",target);
 
     {
-        object eff = "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/12+1);
+        object eff = "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/8+1);
         if(objectp(eff))
             eff->set_spell();
     }
 
     if(target->query_character_level()+roll_dice(1,10)<clevel)
     {
-        object eff =  "/std/effect/status/panicked"->apply_effect(attackers[i],clevel/12+1);
+        object eff =  "/std/effect/status/panicked"->apply_effect(attackers[i],roll_dice(1,4));
         if(objectp(eff))
             eff->set_spell();
     }
