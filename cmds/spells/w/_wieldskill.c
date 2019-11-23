@@ -6,7 +6,7 @@ int trackera, trackerb;
 void create() {
     ::create();
     set_spell_name("wieldskill");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 5, "inquisitor" : 2, "mage" : 2, "paladin": 2, "psion" : 2 ]));
     set_spell_sphere("enchantment_charm");
     set_spell_domain("knowledge");
     set_syntax("cast CLASS wieldskill");
@@ -16,7 +16,7 @@ void create() {
     set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
 	tell_object(caster,"%^YELLOW%^They lyrics to an ancient prayer flood"+
 		" into your mind as you begin to hum");
@@ -56,9 +56,9 @@ void spell_effect(int prof) {
 
 }
 
-void dest_effect() 
+void dest_effect()
 {
-    	if (objectp(caster)) 
+    	if (objectp(caster))
 	{
 		caster->remove_property("wieldskill");
       	tell_object(caster,"%^YELLOW%^The knowledge of weapon skill leaves you.");
