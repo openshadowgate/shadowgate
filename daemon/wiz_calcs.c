@@ -57,14 +57,14 @@ int *get_wizard_spell_total(int wizard_level, int stat, int *spells){ //generic 
 int *get_high_spell_level_array(int caster_level,string caster_class) // should add a new formula for classes with different progressions at some point
 {
     int *spell_levels = allocate(9);
-    int i;    
+    int i;
 
     for(i=0;i<sizeof(spell_levels);i++)
     {
         spell_levels[i] = ( caster_level / 6 ) + (  (12 - (i-1)) / 3);
     }
 
-    return spell_levels;    
+    return spell_levels;
 }
 
 
@@ -73,18 +73,18 @@ int *query_max_spell_array(int wizard_level, string caster_class, int stat) {
     int *spells_allowed, i;
 
     if(wizard_level > 105) wizard_level = 105;
-    spells_allowed = allocate(10);    
-    
+    spells_allowed = allocate(10);
+
     switch(caster_class) {
-    case "bard":
+    case "bard": case "inquisitor":
         if(wizard_level > 50) { spells_allowed = get_high_spell_level_array(wizard_level,caster_class); }
-        else { spells_allowed = BARDLEVELS[wizard_level]; }        
+        else { spells_allowed = BARDLEVELS[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
         spells_allowed[6]=0; // bard spells do not go above L6, which is array [5]
         spells_allowed[7]=0;
         spells_allowed[8]=0;
         break;
-    case "ranger": case "paladin": case "antipaladin": 
+    case "ranger": case "paladin": case "antipaladin":
         if(wizard_level > 50) { spells_allowed = get_high_spell_level_array(wizard_level,caster_class); }
         else { spells_allowed = PALILEVELS[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
@@ -104,12 +104,12 @@ int *query_max_spell_array(int wizard_level, string caster_class, int stat) {
         else { spells_allowed = SORCLEVELS[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
         break;
-    case "psywarrior": 
+    case "psywarrior":
         if(wizard_level > 50) { spells_allowed = get_high_spell_level_array(wizard_level,caster_class); }
         else { spells_allowed = PWKNOWN[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
         break;
-    case "psion": 
+    case "psion":
         if(wizard_level > 50) { spells_allowed = get_high_spell_level_array(wizard_level,caster_class); }
         else { spells_allowed = PSIONKNOWN[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
