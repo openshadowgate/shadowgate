@@ -50,11 +50,17 @@ void spell_effect(int prof) {
 "sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.  An overwhelming feeling of weakness comes over you.%^RESET%^");
     tell_room(place,"%^BLUE%^A mirroring aura starts to grow around "+target->QCN+", seeping into "+target->QP+" skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.%^RESET%^",target);
 
-    "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/12+1);
+    {
+        object eff = "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/12+1);
+        if(objectp(eff))
+            eff->set_spell();
+    }
 
     if(target->query_character_level()+roll_dice(1,10)<clevel)
     {
-        "/std/effect/status/panicked"->apply_effect(attackers[i],clevel/12+1);
+        object eff =  "/std/effect/status/panicked"->apply_effect(attackers[i],clevel/12+1);
+        if(objectp(eff))
+            eff->set_spell();
     }
     //Panicked and comatose at the same time, sure, DnD, you make sense
     if(target->query_character_level()+roll_dice(2,10)<clevel)

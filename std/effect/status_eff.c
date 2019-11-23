@@ -14,6 +14,9 @@ inherit OBJECT;
 int clevel, duration;
 object target;
 
+int spelled;
+int poisoned;
+
 void create()
 {
     ::create();
@@ -56,7 +59,27 @@ int set_target(object x)
     target = x;
 }
 
-varargs int apply_effect(object victim, int power)
+int query_spell()
+{
+    return spelled;
+}
+
+void set_spell()
+{
+    spelled = 1;
+}
+
+int query_poison()
+{
+    return poisoned;
+}
+
+void set_poison()
+{
+    poisoned = 1;
+}
+
+varargs object apply_effect(object victim, int power)
 {
     object tmp;
     tmp = new(file_name(TO));
@@ -64,7 +87,7 @@ varargs int apply_effect(object victim, int power)
     tmp->set_clevel(power);
     tmp->add_effect(victim);
     tmp->status_effect();
-    TO->remove();
+    return tmp;
 }
 
 void status_effect()
