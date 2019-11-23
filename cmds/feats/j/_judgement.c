@@ -102,6 +102,7 @@ int cmd_judgement(string args)
         controller->setup_judgement(TP,clevel);
         controller->move(TP);
     }
+    jtoactivate=distinct_array(jtoactivate);
     controller->activate_judgements(jtoactivate);
 
     return 1;
