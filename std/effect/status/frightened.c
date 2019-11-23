@@ -16,7 +16,7 @@ void status_effect()
 {
     int i, x;
     object * weapons;
-    string * exits, * ids;
+    string * ids;
 
     if(target->query_property("effect_panicked"))
         return;
@@ -48,19 +48,9 @@ void status_effect()
     target->add_damage_bonus(-2);
     target->add_saving_bonus("all",-2);
 
-    exits = ENV(target)->query_exits();
-
-    //If there are no exits you're cowering
-    if(!sizeof(exits))
-    {
-        "/std/effect/status/cowering"->apply_effect(target,duration);
-    }
-    else
-    {
-        tell_object(target,"%^BOLD%^You flee before controlling yourself!%^RESET%^");
-        tell_room(ENV(target),"%^BOLD%^"+target->QCN+" flees in fright!%^RESET%^",target);
-        target->run_away();
-    }
+    tell_object(target,"%^BOLD%^You flee before controlling yourself!%^RESET%^");
+    tell_room(ENV(target),"%^BOLD%^"+target->QCN+" flees in fright!%^RESET%^",target);
+    target->run_away();
 
     call_out("dest_effect",ROUND_LENGTH*duration);
 }
