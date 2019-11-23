@@ -25,7 +25,6 @@ void create()
     set_base_attack_num(2);
     set_castable(1);
     set_can_talk(1);
-    set_shape_language("draconic");
     set_shape_race("dragon");
     set_shape_profile("mage_red_dragon_999");
     set_shape_bonus("perception",2);

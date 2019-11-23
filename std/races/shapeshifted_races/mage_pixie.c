@@ -25,7 +25,6 @@ void create()
     set_base_attack_num(2);
     set_castable(1);
     set_can_talk(1);
-    set_shape_language("sylvan");
     set_shape_race("pixie");
     set_shape_profile("mage_pixie_999");
     set_shape_bonus("perception",4);

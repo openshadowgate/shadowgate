@@ -32,7 +32,7 @@ A creature with the fast healing special quality regains hit points at an except
 %^CYAN%^%^ULINE%^Fear%^RESET%^
 Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight. Effects that are applied are usually %^CYAN%^frightened%^RESET%^, %^CYAN%^shaken%^RESET%^ or %^CYAN%^panicked%^RESET%^.
 
-%^CYAN%^%^ULINE%^Frightened^RESET%^
+%^CYAN%^%^ULINE%^Frightened%^RESET%^
 A frightened creature flees from the source of its fear as best it can. If unable to flee, it may fight. A frightened creature takes a -2 penalty on all attack rolls, saving throws, skill checks, and ability checks. A frightened creature can use special abilities, including spells, to flee; indeed, the creature must use such means if they are the only way to escape.
 Frightened is like %^CYAN%^shaken%^RESET%^, except that the creature must flee if possible. %^CYAN%^Panicked%^RESET%^ is a more extreme state of fear.
 

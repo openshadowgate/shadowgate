@@ -25,7 +25,6 @@ void create()
     set_base_attack_num(2);
     set_castable(1);
     set_can_talk(1);
-    set_shape_language("abyssal");
     set_shape_race("demon");
     set_shape_profile("mage_demon_999");
     set_shape_bonus("spellcraft",4);
