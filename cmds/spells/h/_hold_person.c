@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("hold person");
-    set_spell_level(([ "mage" : 3, "bard" : 2, "cleric" : 2, "monk" : 5, "inquisitor" : 2]));
+    set_spell_level(([ "mage" : 3, "bard" : 2, "cleric" : 2, "monk" : 5, "inquisitor" : 2, "paladin" : 2]));
     set_spell_sphere("enchantment_charm");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS hold person on TARGET");
