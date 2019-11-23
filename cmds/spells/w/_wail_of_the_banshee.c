@@ -37,22 +37,23 @@ void spell_effect(int prof)
     attackers = target_filter(attackers);
     attackers -= caster->query_followers();
 
-    foreach(foe in foes)
-    {
-        if(do_save(foe,6) ||
-           foe->query_property("no death") ||
-           (string)foe->query_race() == "undead" ||
-           foe->query_property("undead"))
+    if(sizeof(foes))
+        foreach(foe in foes)
         {
-            tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
-            tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
-            damage_targ(foe, foe->query_target_limb(),sdamage/2,"sonic");
-            continue;
+            if(do_save(foe,6) ||
+               foe->query_property("no death") ||
+               (string)foe->query_race() == "undead" ||
+               foe->query_property("undead"))
+            {
+                tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
+                tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
+                damage_targ(foe, foe->query_target_limb(),sdamage/2,"sonic");
+                continue;
+            }
+            tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
+            tell_room(place,"%^BOLD%^%^BLUE%^"+foe->QCN+" screams as "+foe->QP+" soul is carved out from the body!",foe);
+            damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"sonic");
         }
-        tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
-        tell_room(place,"%^BOLD%^%^BLUE%^"+foe->QCN+" screams as "+foe->QP+" soul is carved out from the body!",foe);
-        damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"sonic");
-    }
 
     spell_successful();
     dest_effect();
