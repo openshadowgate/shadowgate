@@ -90,6 +90,12 @@ void execute_feat()
         dest_effect();
         return;
     }
+    if(target==caster)
+    {
+        tell_object(caster,"There are better ways to kill yourself.");
+        dest_effect();
+        return;
+    }
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");

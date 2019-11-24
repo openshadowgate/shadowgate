@@ -8,7 +8,7 @@ object ob;
 void create() {
     ::create();
     set_spell_name("dancing lights");
-    set_spell_level(([ "bard" : 1, "mage" : 1 ]));
+    set_spell_level(([ "bard" : 1, "mage" : 1, "druid":1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS dancing lights");
     set_description("This will create a small gathering of swirling lights, which will illuminate your way.");
@@ -20,7 +20,7 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-    int level; 
+    int level;
 
     tell_object(caster, "%^BOLD%^%^WHITE%^Gleaming trails of l%^CYAN%^i%^WHITE%^gh%^YELLOW%^t %^WHITE%^spring into existance, following the motion of your fingertips!");
     tell_room(place, "%^BOLD%^%^WHITE%^Gleaming trails of l%^CYAN%^i%^WHITE%^gh%^YELLOW%^t %^WHITE%^spring into existance, following the motion of "+caster->QCN+"'s fingertips!",caster);

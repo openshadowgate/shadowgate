@@ -3,8 +3,6 @@
 #include <magic.h>
 inherit SPELL;
 
-#define DELAY 45
-
 void create()
 {
     ::create();
@@ -15,16 +13,6 @@ void create()
     set_description("With this art the necromancer taps onto the natural flow of negative energies and uses them to track and summon corpses, from various places in the world to the place he is in. The corpses summoned are that of common folk and thus are weak. This spell by itself does nothing to the souls of the deceased, yet the reason why necromancer calls to it is obvious, and thus only evil caster will ever call to it. Using this spell in civilized lands attracts unneeded attention.");
     set_helpful_spell(1);
     evil_spell(1);
-}
-
-int preSpell()
-{
-    if((int)caster->query_property("exhume_corpses")+DELAY > time())
-    {
-        tell_object(caster,"%^BOLD%^%^BLACK%^THE CURRENTS OF DEATH ARE STILL TENSE%^RESET%^");
-        return 0;
-    }
-    return 1;
 }
 
 string query_cast_string()
@@ -51,5 +39,4 @@ void spell_effect()
         corpse->set_level(1);
         corpse->move(place);
     }
-    caster->set_property("exhume_corpses",time());
 }

@@ -78,6 +78,12 @@ void execute_feat()
         dest_effect();
         return;
     }
+    if(target==caster)
+    {
+        tell_object(caster,"There are better ways to kill yourself.");
+        dest_effect();
+        return;
+    }
     if(caster->query_casting())
     {
         tell_object(caster,"%^BOLD%^You are already in the middle of casting a spell.%^RESET%^");
