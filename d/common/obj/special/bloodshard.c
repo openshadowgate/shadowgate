@@ -85,7 +85,9 @@ void do_teleport(object who)
     who->do_damage("torso",who->query_hp()-1);
     who->set_property("bloodshard",time());
 
-    log_file("bloodshards",idenitify(who)+" "+file_name(ENV(who))+"\n");
+    log_file("bloodshards",identify(who)+" "+file_name(ENV(who))+"\n");
+
+    tell_object(who,"%^BOLD%^%^RED%^Bloodshard is destroyed.%^RESET%^");
 
     TO->remove();
 }
