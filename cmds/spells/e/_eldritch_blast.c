@@ -165,7 +165,7 @@ void do_secondary(object victim) {
       case "lifedrinker":
         if(!washealed) { // need this to only trigger once per cast. Else it will be off the charts!!
           tell_object(caster,"%^BOLD%^%^GREEN%^The blast leeches the life of its target, restoring your health!%^RESET%^");
-          damage_targ(caster,"torso",lifesteal,"positive energy");
+          damage_targ(caster,"torso",lifesteal,"untyped");
           washealed = 1;
         }
       break;
