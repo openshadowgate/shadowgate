@@ -97,7 +97,10 @@ void execute_attack()
 
     attackers = caster->query_attackers();
     if(sizeof(attackers))
+    {
         attackers = filter_array(attackers,(:!$1->is_undead():));
+        attackers = filter_array(attackers,(:!do_save($1,0):));
+    }
 
     if(sizeof(attackers))
     {
@@ -108,8 +111,6 @@ void execute_attack()
         for(i=0;i<sizeof(attackers);i++)
         {
             if(!objectp(attackers[i]))
-                continue;
-            if(do_save(attackers[i],0))
                 continue;
 
             tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
