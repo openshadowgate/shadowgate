@@ -242,7 +242,7 @@ cast
 
 %^CYAN%^SYNTAX%^RESET%^
 
-cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [on|as|at|to self|here|rand|%^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
+cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [on self|here|rand|%^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
 cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
@@ -250,6 +250,8 @@ cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^
 Ivokes %^ORANGE%^%^ULINE%^SPELL%^RESET%^ using character's %^ORANGE%^%^ULINE%^CLASS%^RESET%^. If %^ORANGE%^%^ULINE%^CLASS%^RESET%^ is ommited uses currently posed class you can change with %^ORANGE%^<pose>%^RESET%^. If you're single class character, uses your only class.
 
 A %^ORANGE%^%^ULINE%^SPELL%^RESET%^ might or might not have arguments.
+
+By default, spell accepts %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^, a set of parameters that might be target of the spell or something else. Special argument 'self' will indicate you as the target, 'here' will indicate the room you're in, and 'rand' will indicate a random attacker.
 
 See individual spell help files for specific syntax.
 
