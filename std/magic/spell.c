@@ -658,6 +658,15 @@ void wizard_interface(object user, string type, string targ)
                 if ( (targ == "here") || (targ == "room") )
                     target = environment(caster);
 
+            if( targ == "random" || targ == "rand")
+            {
+                object * attackers = caster->query_attackers();
+                if(!sizeof(attackers))
+                    attackers = all_living(place);
+                if(sizeof(attackers))
+                    target = attackers[random(sizeof(attackers))];
+            }
+
             if (!target && (objectp(targ) || stringp(targ)) )
                 target = present(targ, environment(caster));
             if (!target)
