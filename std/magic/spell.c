@@ -692,7 +692,7 @@ void wizard_interface(object user, string type, string targ)
     {
         if (!targ)
         {
-            object attackers = caster->query_attackers();
+            object * attackers = caster->query_attackers();
             if(sizeof(attackers))
             {
                 targ = attackers[random(sizeof(attackers))];
