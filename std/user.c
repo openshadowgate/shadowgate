@@ -1761,7 +1761,7 @@ void heart_beat()
                 add_hp(roll_dice(1,TO->query_level())/4); //change help status effects when adjusting this
         if(query_property("fast healing"))
             if(query_hp() < query_max_hp())
-                add_hp(roll_dice(query_property("fast healing"),TO->query_level()/3)); //change help status effects when adjusting this
+                add_hp(roll_dice(query_property("fast healing"),TO->query_level()/4)); //change help status effects when adjusting this
         if(FEATS_D->usable_feat(TO,"mighty resilience") &&
            !TO->query_property("stab_resilience"))
         {

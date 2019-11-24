@@ -44,8 +44,7 @@ void spell_effect(int prof)
                foe->is_undead())
             {
                 tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
-                tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
-                damage_targ(foe, foe->query_target_limb(),sdamage/2,"sonic");
+                damage_targ(foe, foe->query_target_limb(),sdamage,"sonic");
                 continue;
             }
             tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");

@@ -31,8 +31,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BOLD%^%^BLUE%^As you finish drawing a circle of life, you channel energy out of it.");
     tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" channels blinding energy out of the circle of darkness.",caster);
 
-    foes = all_living(place);
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
+    foes = caster->query_attackers();
     foes = target_filter(foes);
 
     foreach(foe in foes)
@@ -42,7 +41,6 @@ void spell_effect(int prof)
            foe->is_undead())
         {
             tell_object(foe,"%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
-            tell_room(place,"%^BLUE%^%^BOLD%^"+foe->QCN+" seems to be unaffected by the fell powers!",foe);
             continue;
         }
         tell_object(foe,"%^BLUE%^%^BOLD%^Your life ends, as negative energy destroys your very soul!");
