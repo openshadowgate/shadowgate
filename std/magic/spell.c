@@ -661,8 +661,6 @@ void wizard_interface(object user, string type, string targ)
             if( targ == "random" || targ == "rand")
             {
                 object * attackers = caster->query_attackers();
-                if(!sizeof(attackers))
-                    attackers = all_living(place)-({caster})-caster->query_followers();
                 if(sizeof(attackers))
                     target = attackers[random(sizeof(attackers))];
             }

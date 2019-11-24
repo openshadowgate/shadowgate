@@ -242,7 +242,7 @@ cast
 
 %^CYAN%^SYNTAX%^RESET%^
 
-cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [on|as|at|to %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
+cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [on|as|at|to self|here|rand|%^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
 cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
