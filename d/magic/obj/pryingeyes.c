@@ -104,11 +104,9 @@ void self_destruct() {
     object casterobj,*spells = ({}), spell;
     casterobj = caster;
 
-    tell_object(FPL("ilmarinen"),":"+identify(casterobj));
     if(objectp(casterobj))
     {
         spells=casterobj->query_property("dispellable spells");
-        tell_object(FPL("ilmarinen"),":"+identify(spells));
         foreach(spell in spells)
         {
 
