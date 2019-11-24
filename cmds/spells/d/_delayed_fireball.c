@@ -75,8 +75,7 @@ void zapper()
     if (clevel < 15) size = "gush";
     if (clevel < 20) size = "flood";
 
-    tell_room(place,"%^BOLD%^%^RED%^A blazing maelstrom of %^RESET%^%^RED%^flame %^BOLD%^%^RED%^bursts forth from t
-he orb toward "+HIM+"!%^RESET%^",target);
+    tell_room(place,"%^BOLD%^%^RED%^A blazing maelstrom of %^RESET%^%^RED%^flame %^BOLD%^%^RED%^bursts forth from the orb toward "+HIM+"!%^RESET%^",target);
     tell_object(target,"%^BOLD%^%^RED%^A blazing maelstrom of %^RESET%^%^RED%^flame %^BOLD%^%^RED%^bursts forth fro
 m "+YOU+"'s orb toward you!%^RESET%^");
 
