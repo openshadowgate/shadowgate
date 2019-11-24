@@ -14,7 +14,7 @@ void create()
     set_affixed_spell_level(1);
     set_spell_sphere("healing");
     set_syntax("cast CLASS aura of healing");
-    set_description("This spell heals wounds on party members. The amount and length of the spell are dependent on the strength of the caster. The party members must remain with the caster to receive the effect. This effect uses positive or negative energy depending on your party members and will aid undead and ghoul-blooded.");
+    set_description("This spell heals wounds on party members. The amount and length of the spell are dependent on the strength of the caster. The party members must remain with the caster to receive the effect. This effect uses positive or negative energy depending on your party members and will aid undead and ghoul-blooded as well as it aids living.");
     set_verbal_comp();
     set_somatic_comp();
     set_property("magic",1);
