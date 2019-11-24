@@ -32,18 +32,16 @@ void spell_effect(int prof)
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM in fell tongues, you feel your soul is being ripped from your body.",caster);
     message("info","%^BLUE%^You hear a horrible high-pitched scream.",nearbyRoom(place,2));
 
-    attackers = all_living(place);
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
-    attackers -= caster->query_followers();
+    foes = all_living(place);
+    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
+    foes = target_filter(foes);
 
     if(sizeof(foes))
         foreach(foe in foes)
         {
             if(do_save(foe,6) ||
                foe->query_property("no death") ||
-               (string)foe->query_race() == "undead" ||
-               foe->query_property("undead"))
+               foe->is_undead())
             {
                 tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
                 tell_room(place,"%^BLUE%^"+foe->QCN+" sighs with relief as "+foe->QP+" soul withstands a horrid scream!",foe);
