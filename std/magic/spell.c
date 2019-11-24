@@ -692,14 +692,6 @@ void wizard_interface(object user, string type, string targ)
     {
         if (!targ)
         {
-            object * attackers = caster->query_attackers();
-            if(sizeof(attackers))
-            {
-                targ = attackers[random(sizeof(attackers))];
-            }
-        }
-        if (!targ)
-        {
             tell_object(caster,"You must CHOOSE a target for this "+whatsit+"!");
             TO->remove();
             return;
