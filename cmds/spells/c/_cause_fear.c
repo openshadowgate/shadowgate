@@ -44,7 +44,6 @@ void spell_effect(int prof){
     bonus = (bonus - 10) / 2;
     bonus = -bonus;
 
-    spell_kill(target, caster);
     if(do_save(target,bonus))
     {
         tell_object(target, "%^RESET%^%^BLUE%^You fight back some horrid images projected into your mind.%^RESET%^");
