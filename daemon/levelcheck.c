@@ -58,9 +58,8 @@ public int levelcheck(object first, object second)
 
     switch(low)
     {
-    case 1..40: range = 5; break;
-    case 41..50: range = 6; break;
-    default: range = 5;
+    case 1..50: range = 11; break;
+    default: range = 6;
     }
 
     if(diff > range)

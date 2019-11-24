@@ -92,7 +92,7 @@ int check_access(string my_command, string which_board)
             if (newbiep(TP) || high_mortalp(TP) || OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) || avatarp(TP)) return 1;
             else return 0;
             break;
-        case "comment":
+        case "comment": case "ideas":
             return 1;
             break;
         case "announcement":
@@ -118,7 +118,7 @@ int check_access(string my_command, string which_board)
             break;
         case "avatar": case "pkmail": case "avatarmail":
         case "bugs": case "typos": case "wiz": case "lib":
-        case "praise": case "ideas":
+        case "praise":
             if(avatarp(TP)) return 1;
             else return 0;
             break;
