@@ -6,6 +6,7 @@ inherit DAEMON;
 void create()
 {
     seteuid(getuid());
+    sneezy();
 }
 
 void sneezy()
@@ -23,5 +24,5 @@ void sneezy()
         players[i]->force_me("sneeze");
     }
 
-    call_out("sneezy",(20+random(60))*ROUND_LENGTH);
+    call_out("sneezy",(120+random(360))*ROUND_LENGTH);
 }
