@@ -50,10 +50,8 @@ void spell_effect(int prof) {
       caster->add_temporary_feat("exotic weapon proficiency");
       trackerb = 1;
     }
-    call_out("dest_effect",clevel*10);
     caster->set_property("spelled", ({TO}));
     addSpellToCaster();
-
 }
 
 void dest_effect()
