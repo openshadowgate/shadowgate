@@ -1211,7 +1211,9 @@ void build_myclasses()
         if(myclass == "mage" || myclass == "sorcerer" || myclass == "psywarrior" || myclass == "warlock" || myclass == "psion") { ETO->reset_mastered(); }
         if(myclass == "psion") { ETO->set_discipline(0); }
         if(myclass == "warlock") { ETO->delete("warlock heritage"); }
-        if(myclass == "cleric" || myclass == "paladin" || myclass == "inquisitor") { ETO->set_divine_domain(({})); }
+        if(myclass == "cleric" ||
+           myclass == "paladin" ||
+           myclass == "inquisitor") { ETO->set_divine_domain(({})); }
         if(myclass == "fighter") { TP->set_fighter_style(0); }
         continue;
     }
@@ -1692,7 +1694,7 @@ void pick_deity()
     badgods = ({});
     if(file_exists(myfile)) badgods += (string *)myfile->restricted_deities(mysubrace);
     names -= badgods;
-    if(temp == "paladin" || temp == "cleric" || temp == "inquisitor") // clergy/orders
+    if(temp == "paladin" || temp == "cleric" ) // clergy/orders
     {
         for(inc = 0; inc < sizeof(names);inc ++)
         {
