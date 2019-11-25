@@ -1775,7 +1775,8 @@ void heart_beat()
         if(is_vampire())
             if(TO->is_in_sunlight())
             {
-                int todamage = query_max_hp()/8 +1;
+                int todamage = query_max_hp()/6 +1;
+
                 if(todamage > query_property("fire resistance") &&
                    !query_property("sunlight_umbrella"))
                 {
@@ -1786,7 +1787,7 @@ void heart_beat()
                     }
                     else
                     {
-                        TO->cause_typed_damage(TO,"torso",(query_max_hp()/6)+1,"fire");
+                        TO->cause_typed_damage(TO,"torso",todamage,"fire");
                         tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
                     }
                 }
