@@ -31,7 +31,7 @@ static int test_grafitti_loaded; // This will be 1 if the grafitti has been load
 static object * dependencies = ({ });
 static string climate;
 mapping coords = ([]);
-string *roomfuncs, *roomverbs;
+
 
 void reset();
 void reinitiate();
@@ -49,8 +49,7 @@ void set_peer_message(string str);
 void set_mcharge_message(string str);
 string query_peer_message();
 string query_mcharge_message();
-int add_action(string thisfunc, string thisverb);
-string *query_actions();
+
 
 string getSaveFileName() 
 {
@@ -268,8 +267,6 @@ void init()
     exits::initiate();
     senses::initiate();
     ALT_WORLD_D->in_alt_world(TP, TO);   
-    roomfuncs = ({});
-    roomverbs = ({});
 }
 
 
@@ -658,15 +655,4 @@ void keep_rooms(mixed *rooms)
     return;
 }
 
-int add_action(string thisfunc, string thisaction)
-{
-   roomfuncs += ({thisfunc});
-   roomverbs += ({thisaction});
-   return efun::add_action(thisfunc,thisaction);
-}
-
-string *query_actions()
-{
-    return(roomverbs);
-}
 
