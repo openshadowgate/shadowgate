@@ -110,7 +110,7 @@ void judgement_purity(int direction, int power)
 {
     int bonus;
     bonus = power / 5 + 1;
-    caster->add_saving_bonus("all",bonus);
+    caster->add_saving_bonus("all",bonus*direction);
 }
 
 void judgement_resiliency(int direction, int power)
