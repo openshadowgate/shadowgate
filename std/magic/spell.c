@@ -1763,11 +1763,11 @@ varargs int do_spell_damage( object victim, string hit_limb, int wound,string da
     if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }
 
     if(FEATS_D->usable_feat(caster,"surprise spells"))
-        if(target->query_tripped() ||
-           target->query_paralyzed() ||
-           target->query_asleep() ||
-           target->query_bound() ||
-           target->query_unconscious())
+        if(victim->query_tripped() ||
+           victim->query_paralyzed() ||
+           victim->query_asleep() ||
+           victim->query_bound() ||
+           victim->query_unconscious())
             wound*=3/2;
 
     wound = (int)COMBAT_D->typed_damage_modification(caster, victim, hit_limb, wound, damage_type);
