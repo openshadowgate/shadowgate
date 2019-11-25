@@ -10,8 +10,6 @@ void create() {
     set_spell_level(([ "innate" : 1 ]));
     set_syntax("cast innate headbutt on TARGET");
     set_description("A satyress can charge someone with her horns any time she wishes. The power of her charge will depend on her strength.");
-    set_verbal_comp();
-    set_somatic_comp();
     set_target_required(1);
 }
 
@@ -43,7 +41,7 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-    damage = roll_dice(6,clevel); 
+    damage = roll_dice(6,clevel);
     damage += "/daemon/bonus_d"->damage_bonus(caster->query_stats("strength"));
     damage += (int)caster->query_damage_bonus();
 
