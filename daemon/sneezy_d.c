@@ -24,5 +24,5 @@ void sneezy()
         players[i]->force_me("sneeze");
     }
 
-    call_out("sneezy",(120+random(360))*ROUND_LENGTH);
+    call_out("sneezy",(120+random(240))*ROUND_LENGTH);
 }
