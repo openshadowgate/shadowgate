@@ -15,6 +15,7 @@ int status_effect()
     int i;
 
     tell_object(target,"%^BLUE%^You feel sickened.%^RESET%^");
+    tell_room(ENV(target),"%^BLUE%^"+target->QCN+" looks sickened.", target);
 
     for(i=0;i<sizeof(CORE_SKILLS);i++)
         target->add_skill_bonus(CORE_SKILLS[i],-2);
@@ -32,6 +33,7 @@ int dest_effect()
     if(objectp(target))
     {
         tell_object(target,"%^BLUE%^You no longer feel sickened.%^RESET%^");
+        tell_room(ENV(target),"%^BLUE%^"+target->QCN+" no longer looks sickened.", target);
         for(i=0;i<sizeof(CORE_SKILLS);i++)
             target->add_skill_bonus(CORE_SKILLS[i],2);
         target->add_attack_bonus(2);

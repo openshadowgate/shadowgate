@@ -21,6 +21,7 @@ void status_effect()
     target->set_property("effect_shaken",1);
 
     tell_object(target,"%^ORANGE%^You feel shaken.%^RESET%^");
+    tell_room(ENV(target),"%^ORANGE%^"+target->QCN+" looks shaken.", target);
 
     for(i=0;i<sizeof(CORE_SKILLS);i++)
         target->add_skill_bonus(CORE_SKILLS[i],-2);
@@ -36,6 +37,7 @@ void dest_effect()
     if(objectp(target))
     {
         tell_object(target,"%^ORANGE%^You no longer feel shaken.%^RESET%^");
+        tell_room(ENV(target),"%^ORANGE%^"+target->QCN+" no longer looks shaken.", target);
         for(i=0;i<sizeof(CORE_SKILLS);i++)
             target->add_skill_bonus(CORE_SKILLS[i],2);
         target->add_attack_bonus(2);

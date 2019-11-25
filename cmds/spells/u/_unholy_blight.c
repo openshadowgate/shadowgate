@@ -11,7 +11,7 @@ void create() {
     set_spell_name("unholy blight");
     set_spell_level(([ "inquisitor" : 4, "cleric" : 4 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS horrid wilting");
+    set_syntax("cast CLASS unholy blight");
     set_damage_desc("divine, sickened");
     set_description("This spell smites everyone in sight with unholy power. Evil and neutral creatures will suffer only the half of damage, and so will those who manage to will the spell off. Good creatures that failed the will save will become sickened for clevel/12+1 rounds.
 
