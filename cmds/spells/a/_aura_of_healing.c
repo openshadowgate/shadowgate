@@ -3,6 +3,8 @@
 inherit SPELL;
 
 int counter=4;
+string energy_type = "positive energy";
+int undead_caster = 0;
 flag;
 
 void create()
@@ -14,7 +16,7 @@ void create()
     set_affixed_spell_level(1);
     set_spell_sphere("healing");
     set_syntax("cast CLASS aura of healing");
-    set_description("This spell heals wounds on party members. The amount and length of the spell are dependent on the strength of the caster. The party members must remain with the caster to receive the effect. This effect uses positive or negative energy depending on your party members and will aid undead and ghoul-blooded as well as it aids living.");
+    set_description("This spell heals wounds on party members. The amount and length of the spell are dependent on the strength of the caster. The party members must remain with the caster to receive the effect. This effect uses positive or negative depending on who is the caster.");
     set_verbal_comp();
     set_somatic_comp();
     set_property("magic",1);
@@ -57,6 +59,13 @@ void spell_effect(int prof)
     tell_object(caster, "%^CYAN%^You feel a magical aura of energy from your "+
         "god surround you!%^RESET%^");
     caster->set_property("spelled", ({TO}) );
+
+    if(caster->is_undead())
+    {
+        energy_type = "negative energy";
+        undead_caster = 1;
+    }
+
     spell_successful();
     addSpellToCaster();
     execute_attack();
@@ -118,11 +127,12 @@ void execute_attack()
     if(sizeof(people))
         foreach(dude in people)
         {
-            if((int)dude->query_hp() < (int)dude->query_max_hp())
+            if((int)dude->query_hp() < (int)dude->query_max_hp() &&
+               !(dude->is_undead() ^ undead_caster))
             {
                 tell_object(dude,"%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
                 tell_room(place,"%^CYAN%^Some of "+dude->QCN+"'s wounds seem to heal!%^RESET%^",caster);
-                damage_targ(dude,dude->return_target_limb(),-sdamage,"untyped");
+                damage_targ(dude,dude->return_target_limb(),-sdamage,energy_type);
             }
         }
 
