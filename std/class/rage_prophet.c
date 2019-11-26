@@ -61,7 +61,7 @@ int prerequisites(object player)
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
 
-    if((player->query_class_level("barbarian") + adj) < 20) { return 0; }
+    if((player->query_class_level("barbarian") + adj) < 10) { return 0; }
     if(!FEATS_D->usable_feat(player,"spell focus")) { return 0; }
     return 1;
 }

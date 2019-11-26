@@ -9,8 +9,6 @@ void create() {
     ::create();
     set_spell_name("gale fist");
     set_spell_level(([ "monk" : 11 ]));
-    set_discipline("way of the elements");
-    set_spell_sphere("way of the elements");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS gale fist on TARGET");
     set_description("This spell creates an enormous fist of tangible air above the target. "+

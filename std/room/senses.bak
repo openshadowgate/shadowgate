@@ -17,7 +17,6 @@ void remove_search(string item);
 void remove_smell(string item);
 void remove_listen(string item);
 mixed query_search(string item);
-mixed query_searches(string item);
 mixed query_smell(string item);
 mixed query_listen(string item);
 string *query_effects();
@@ -157,12 +156,6 @@ void remove_listen(string item) { map_delete(__Listens, item); }
 
 mixed query_search(string item) { 
     return (__Searches ? __Searches[item] : 0);
-}
-
-mapping query_searches()
-{
-    if (!__Searches) { return __Searches; }
-    return ({});
 }
 
 mixed query_smell(string item) 
