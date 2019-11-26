@@ -19,6 +19,9 @@ void status_effect()
        target->query_property("effect_fatigued"))
         return;
 
+    if(target->is_undead())
+        return;
+
     target->set_property("effect_fatigued",1);
 
     tell_object(target,"%^RED%^You are exhausted.%^RESET%^");

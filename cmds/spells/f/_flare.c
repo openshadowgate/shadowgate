@@ -71,15 +71,4 @@ void spell_effect(int prof) {
     tell_room(place,"%^BOLD%^"+caster->QCN+" snaps "+caster->QCN+" fingers and a brilliant flash lights up before "
 +target->QCN+"'s eyes, leaving "+target->QO+" dazzled!",({caster, target}));
     "/std/effect/status/dazzled"->apply_effect(target,clevel/6+1);
-    call_out("dest_effect",60);
-}
-
-void dest_effect() {
-    if(objectp(target)) {
-      tell_object(target,"%^BOLD%^You blink away the last of the bright afterimage.");
-      tell_room(environment(target),"%^BOLD%^"+target->QCN+" blinks away the last of the bright afterimage!",target);
-    }
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
-
 }
