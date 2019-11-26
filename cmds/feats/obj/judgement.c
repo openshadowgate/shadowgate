@@ -65,7 +65,7 @@ void apply_judgements(string * judgements,int direction)
     {
         if(member_array(judgements[0],JUDGEMENT_TYPES)!=-1)
         {
-            call_other(TO,"judgement_"+j,caster,direction,power);
+            call_other(TO,"judgement_"+judgements[0],lendingto,direction,power);
         }
     }
 
