@@ -81,6 +81,10 @@ These effects subtract their value from damage or spell damage received.
 
 %^CYAN%^%^ULINE%^Temporary blinded%^RESET%^
 Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell.
+%^CYAN%^Exhausted%^RESET%^
+You take a penalty of 4 points on on strength and dexterity. If either of these stats falls below 0 you die. Exhausted characters can't become %^CYAN%^fatigued%^RESET%^.
 
+%^CYAN%^Fatigued%^RESET%^
+You take a penalty of 2 points on on strength and dexterity. Fatigued characters can become %^CYAN%^exhausted%^RESET%^.
 
 %^CYAN%^See also:%^RESET%^ attributes, bonuses, stats, skills, score, hp

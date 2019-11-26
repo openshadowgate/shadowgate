@@ -17,6 +17,7 @@ create()
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS touch of fatigue on TARGET");
+    set_damage_desc("fatigue");
     set_description("With this spell you touch the victim, channeling negative energy through your hand and fatiguing them.");
     set_verbal_comp();
     set_somatic_comp();
@@ -75,7 +76,9 @@ spell_effect(int prof)
     tell_room(place,"%^BLUE%^"+caster->QCN+" reaches out and touches "+target->QCN+"'s "+target_limb+"...",({ caster, target}) );
     spell_successful();
 
-    target->use_stamina(sdamage/2);
+    "/std/effect/status/fatigued"->apply_effect(target,clevel/6+1);
+
+    target->use_stamina(sdamage/6);
     dest_effect();
 
 }
