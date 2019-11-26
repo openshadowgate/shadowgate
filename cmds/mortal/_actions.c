@@ -16,13 +16,15 @@ int cmd_actions(){
     if (num > 0) {
        items = keys(itemmap);
        items -= WEATHER;
-       // this if statement parses the array into a list separated by
-       // commas and ending with a period. 
-       for(i=0;i<sizeof(items)-1;i++)  { msg += items[i]+", "; }
-       msg += items[i]+".\n";
+       num = sizeof (items);
+       if (num > 0) {
+          // this if statement parses the array into a list separated by
+          // commas and ending with a period. 
+          for(i=0;i < num-1;i++)  { msg += items[i]+", "; }
+          msg += items[i]+".\n";
+       }
     }
     tell_object(TP, msg+"\n"); 
-
 // This section reports out the searches you can find in a room.
     msg = "You can <search> the following items in this room: \n";
     searchmap = ETP->query_searches();

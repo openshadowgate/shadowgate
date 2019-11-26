@@ -161,8 +161,8 @@ mixed query_search(string item) {
 
 mapping query_searches()
 {
-    if (!__Searches) { return __Searches; }
-    return ({});
+    if (sizeof(__Searches) > 0) { return __Searches; }
+   return ([]);
 }
 
 mixed query_smell(string item) 

@@ -1,6 +1,15 @@
-Syntax: <search [(item)]>
+%^CYAN%^NAME%^RESET%^
 
-Sometimes items become hidden either because they were
-hidden there long ago, or a monster or player (usually a rogue)
-has hidden the object.  You may search specific items or simply
-search randomly.
+search - search this soom or container
+
+%^CYAN%^SYNTAX%^RESET%^
+
+search [CONTAINER]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Sometimes items become hidden either because they were hidden there long ago, or a monster or player (usually a rogue) has hidden the object. You may search specific items or simply search randomly.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+look, peception, hide_in_shadows
