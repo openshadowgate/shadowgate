@@ -12,13 +12,13 @@ int cmd_actions(){
 // This section reports out the items you can look at in a room.
     msg = "You can <look> at the following items in this room: \n";
     itemmap = ETP->query_items();
-    items = keys(itemmap);
-    items -= WEATHER;
-    num = sizeof(items);
-    if (num > 0 ) {
+    num = sizeof(itemmap);
+    if (num > 0) {
+       items = keys(itemmap);
+       items -= WEATHER;
        // this if statement parses the array into a list separated by
        // commas and ending with a period. 
-       for(i=0;i<num-1;i++)  { msg += items[i]+", "; }
+       for(i=0;i<sizeof(items)-1;i++)  { msg += items[i]+", "; }
        msg += items[i]+".\n";
     }
     tell_object(TP, msg+"\n"); 
@@ -26,9 +26,9 @@ int cmd_actions(){
 // This section reports out the searches you can find in a room.
     msg = "You can <search> the following items in this room: \n";
     searchmap = ETP->query_searches();
-    searches = keys(searchmap);
-    num = sizeof(searches);
-    if (num > 0 ) {
+    num = sizeof(searchmap);
+    if (num > 0) {
+       searches = keys(searchmap);
        // this if statement parses the array into a list separated by
        // commas and ending with a period. 
        for(i=0;i<num-1;i++)  { msg += searches[i]+", "; }
