@@ -11,8 +11,9 @@ inherit OBJECT;
 /**
  * clevel and durations are synomims where it is appliable. Duration is taken in rounds.
  */
-int clevel, duration;
+int duration;
 object target;
+mixed parameter;
 
 int spelled;
 int poisoned;
@@ -43,15 +44,14 @@ void add_effect(object victim)
    victim->set_property("status_effects",spells);
 }
 
-int query_clevel()
+int query_duration()
 {
-    return clevel;
+    return duration;
 }
 
-int set_clevel(int x)
+int set_duration(int x)
 {
     duration = x;
-    clevel = x;
 }
 
 int set_target(object x)
@@ -79,12 +79,23 @@ void set_poison()
     poisoned = 1;
 }
 
-varargs object apply_effect(object victim, int power)
+void set_param(mixed x)
+{
+    parameter = x;
+}
+
+mixed query_param()
+{
+    return parameter;
+}
+
+varargs object apply_effect(object victim, int dur, mixed param)
 {
     object tmp;
     tmp = new(file_name(TO));
     tmp->set_target(victim);
-    tmp->set_clevel(power);
+    tmp->set_duration(dur);
+    tmp->set_param(param);
     tmp->add_effect(victim);
     tmp->status_effect();
     return tmp;
