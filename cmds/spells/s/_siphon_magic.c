@@ -60,9 +60,15 @@ int preSpell()
         tell_object(caster,"The second object is neither a weapon nor an armor piece.");
         return 0;
     }
-    if(strsrch(base_name(fob),"/d/magic/") != -1)
+    if(strsrch(base_name(fob),"/d/magic/") != -1 ||
+       fob->query_property("monsterweapon"))
     {
         tell_object(TP,"You cannot siphon a conjured item!");
+        return 1;
+    }
+    if(fob->query_weight() > 200)
+    {
+        tell_object(TP,"This is too large to siphon!");
         return 1;
     }
     if(tob->query_property("no repair"))
