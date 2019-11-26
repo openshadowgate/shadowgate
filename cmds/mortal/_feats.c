@@ -663,21 +663,21 @@ int cmd_feats(string str){
             TP->clear_feats();
             return 1;
         }
+        else
+        {
+            if(!TP->query("free_feat_wipe") || avatarp(TP)) {
+                TP->set("free_feat_wipe",1);
+                TP->clear_feats();
+                num_feats = ((int)TP->query_level()/3)+1;
+                TP->set("free_feats",num_feats);
+                if(!avatarp(TP)) tell_object(TP,"%^BOLD%^%^RED%^You have been given a feat wipe. Please reallocate your feats before going back out.%^RESET%^");
+            }
+            return 1;
+        }
         return 0;
     case "fix":
         required = TP->query_classes();
         if(!sizeof(required)) return 1;
-
-        // one-off fix following the glitch on 18th September 2015 - this will do a feat wipe if needed. N, 19/9.
-        if(TP->query("class_feats_reset")) TP->delete("class_feats_reset");
-        if(TP->query("class_feats_reset2")) TP->delete("class_feats_reset2");
-        if(!TP->query("class_feats_refund_2015") || avatarp(TP)) {
-          TP->set("class_feats_refund_2015",1);
-          TP->clear_feats();
-          num_feats = ((int)TP->query_level()/3)+1;
-          TP->set("free_feats",num_feats);
-          if(!avatarp(TP)) tell_object(TP,"%^BOLD%^%^RED%^You have been given a feat wipe. Please reallocate your feats before going back out.%^RESET%^");
-        }
 
         // first pickup current "other" feats that were bought
         otherfeats = TP->query_other_feats();
@@ -1506,8 +1506,9 @@ feats - manipulate or view your feats
 %^CYAN%^SYNTAX%^RESET%^
 
 feats allowed
-feats check|add|remove|martial|spellcraft|hybrid %^ULINE%^%^ORANGE%^FEAT%^RESET%^
-feats list martial|spellcraft|hybrid|general|epic
+feats check|add|remove %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
+feats martial|spellcraft|hybrid %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
+feats list [martial|spellcraft|hybrid|general]
 feats fix
 
 %^CYAN%^DESCRIPTION%^RESET%^
@@ -1545,6 +1546,10 @@ The following commands apply:
 %^ORANGE%^<feats fix>%^RESET%^
 
     Will attempt to fix your feat tree. If your feats seem incorrect, use this command. If it fails to fix your problem, contact the staff via %^ORANGE%^<avatarmail>%^RESET%^.
+
+%^ORANGE%^<feats wipe>%^RESET%^
+
+    Will wipe all your feats once per character or if devs granted you free wipe.
 
 %^CYAN%^COLOR CODING%^RESET%^
 
