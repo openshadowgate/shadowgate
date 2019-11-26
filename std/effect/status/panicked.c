@@ -6,6 +6,8 @@
 
 inherit STATUS;
 
+int power;
+
 void create()
 {
     ::create();
@@ -42,11 +44,13 @@ void status_effect()
         target->set_property("disarm time", time() + (ROUND_LENGTH * roll_dice(1, 2)));
     }
 
+    power = target->query_level()/12+1;
+
     for(i=0;i<sizeof(CORE_SKILLS);i++)
-        target->add_skill_bonus(CORE_SKILLS[i],-2);
-    target->add_attack_bonus(-2);
-    target->add_damage_bonus(-2);
-    target->add_saving_bonus("all",-2);
+        target->add_skill_bonus(CORE_SKILLS[i],-power);
+    target->add_attack_bonus(-power);
+    target->add_damage_bonus(-power);
+    target->add_saving_bonus("all",-power);
 
     exits = ENV(target)->query_exits();
 
@@ -72,10 +76,10 @@ void dest_effect()
     {
         tell_object(target,"%^BLUE%^You no longer feel panicked.%^RESET%^");
         for(i=0;i<sizeof(CORE_SKILLS);i++)
-            target->add_skill_bonus(CORE_SKILLS[i],2);
-        target->add_attack_bonus(2);
-        target->add_damage_bonus(2);
-        target->add_saving_bonus("all",2);
+            target->add_skill_bonus(CORE_SKILLS[i],power);
+        target->add_attack_bonus(power);
+        target->add_damage_bonus(power);
+        target->add_saving_bonus("all",power);
         target->remove_property("effect_panicked");
     }
 

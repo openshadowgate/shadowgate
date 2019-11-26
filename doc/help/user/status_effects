@@ -11,8 +11,8 @@ Confused creatures experience various effects based on a d100 roll:
  %^ORANGE%^52...71%^RESET%^ It runs away
  %^ORANGE%^72..100%^RESET%^ It attacks random living things present in the same room
 
-%^CYAN%^%^ULINE%^Covering%^RESET%^
-You cover in fear, unable to do anything. You get a penalty of -2 on your armor class and are paralyzed.
+%^CYAN%^%^ULINE%^Cowering%^RESET%^
+You cower in fear, unable to do anything. You get a penalty of lvl/6+1 on your armor class and are paralyzed.
 
 %^CYAN%^%^ULINE%^Damage bonus%^RESET%^
 This effects adds directly to damage of your melee attacks.
@@ -49,7 +49,7 @@ Magic resistance increases your chance to disperse spell targeted at you while s
 This effect adds its power directly to maximum of your health points. Its value, however, can't exceed base value of your maximum health points.
 
 %^CYAN%^%^ULINE%^Panicked%^RESET%^
-A panicked creature must drop anything it holds and flee at top speed from the source of its fear, as well as any other dangers it encounters, along a random path. It can’t take any other actions. In addition, the creature takes a -2 penalty on all saving throws, skill checks, and ability checks. If cornered, a panicked creature %^CYAN%^cowers%^RESET%^.
+A panicked creature must drop anything it holds and flee at top speed from the source of its fear, as well as any other dangers it encounters, along a random path. It can’t take any other actions. In addition, the creature takes a lvl/12+1 penalty on all saving throws, skill checks, and ability checks. If cornered, a panicked creature %^CYAN%^cowers%^RESET%^.
 Panicked is a more extreme state of fear than %^CYAN%^shaken%^RESET%^ or %^CYAN%^frightened%^RESET%^.
 
 %^CYAN%^%^ULINE%^Paralysis%^RESET%^
@@ -62,10 +62,10 @@ Prone or staggered creatures can not use most weapons for the duration of the ef
 A creature gets 1d(lvl/4) health poins of regeneration per round as part of its innate ability to heal.
 
 %^CYAN%^%^ULINE%^Shaken%^RESET%^
-All core skills, attack bonus, saves are reduced by 2.
+All core skills, attack bonus, saves are reduced by lvl/12+1.
 
 %^CYAN%^%^ULINE%^Sickened%^RESET%^
-All core skills, attack, damage bonus, saves are reduced by 2. The effect is cumulative but usually won't last for long.
+All core skills, attack, damage bonus, saves are reduced by lvl/12+1. The effect is cumulative but usually won't last for long.
 
 %^CYAN%^%^ULINE%^Sight bonus%^RESET%^
 This effects adds to the light value of the room, but only for the caster.
