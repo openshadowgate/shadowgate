@@ -8,7 +8,7 @@ Confused creatures experience various effects based on a d100 roll:
  %^ORANGE%^ 1...11%^RESET%^ It attacks the confuser
  %^ORANGE%^12...21%^RESET%^ Nothing happens
  %^ORANGE%^22...51%^RESET%^ It stares aimlessly into nothingness
- %^ORANGE%^52...71%^RESET%^ It falls asleep
+ %^ORANGE%^52...71%^RESET%^ It runs away
  %^ORANGE%^72..100%^RESET%^ It attacks random living things present in the same room
 
 %^CYAN%^%^ULINE%^Covering%^RESET%^

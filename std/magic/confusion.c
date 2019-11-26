@@ -28,9 +28,9 @@ void confuse(object caster, object targ)
         break;
     case 51..70:
         if(!present(caster,environment(targ))) TO->dest_effect();
-        tell_object(targ,"%^BOLD%^%^CYAN%^A sudden, overwhelming sense of drowsiness comes over you, and you fall asleep!%^RESET%^");
-        tell_room(environment(targ),"%^BOLD%^%^CYAN%^"+targ->QCN+" suddenly falls asleep on "+targ->QP+" feet!%^RESET%^",targ);
-        targ->set_asleep(roll_dice(1,8), "You are asleep!");
+        tell_object(targ,"%^BOLD%^%^CYAN%^A sudden, overwhelming sense of fear comes over you!%^RESET%^");
+        tell_room(environment(targ),"%^BOLD%^%^CYAN%^"+targ->QCN+" runs away in confusion!%^RESET%^",targ);
+        targ->run_away();
         break;
     default:
     {

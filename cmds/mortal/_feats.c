@@ -665,7 +665,7 @@ int cmd_feats(string str){
         }
         else
         {
-            if(!TP->query("free_feat_wipe") || avatarp(TP)) {
+            if(!TP->query("free_feat_wipe")) {
                 TP->set("free_feat_wipe",1);
                 TP->clear_feats();
                 num_feats = ((int)TP->query_level()/3)+1;
