@@ -15,7 +15,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS harm on TARGET");
     set_damage_desc("negative energy");
-    set_description("%^RESET%^This spell will channel huge amount of negative energy into target and will allow the caster to cause massive amount damage.");
+    set_description("%^RESET%^This spell will channel huge amount of negative energy into target and will allow the caster to cause massive amount damage. This spell will cure status effects such as blinded, confused, dazzled, paralyzed, fatigued, exhausted, sickened and poisoned.");
     set_save("will");
     set_target_required(1);
     set_helpful_spell(1);
@@ -65,8 +65,11 @@ spell_effect(int prof)
 
     rnd = - sdamage * 7/6;
     damage_targ(target,target->return_target_limb(),rnd,"negative energy");
-    target->remove_paralyzed();
-    target->set_poisoning((-1)*(int)target->query_poisoning());
+
+    if(query_spell_name()=="harm")
+        if(member_array(target,caster->query_attackers())==-1)
+            "/std/magic/cleanse"->cleanse(target);
+
     dest_effect();
 }
 

@@ -14,7 +14,7 @@ void create()
     set_syntax("cast CLASS heal on TARGET");
     set_damage_desc("positive energy");
     set_affixed_spell_level(6);
-    set_description("%^RESET%^This spell will channel huge amount of positive energy into target and will allow the caster to cure massive amount damage from wounds and diseases.
+    set_description("%^RESET%^This spell will channel huge amount of positive energy into target and will allow the caster to cure massive amount damage from wounds and diseases. This spell will cure status effects such as blinded, confused, dazzled, paralyzed, fatigued, exhausted, sickened and poisoned.
 
 See also: heal *player commands");
     set_verbal_comp();
@@ -71,8 +71,11 @@ spell_effect(int prof)
 
     rnd = - sdamage * 7/6;
     damage_targ(target,target->return_target_limb(),rnd,"positive energy");
-    target->remove_paralyzed();
-    target->set_poisoning((-1)*(int)target->query_poisoning());
+
+    if(query_spell_name()=="heal")
+        if(member_array(target,caster->query_attackers())==-1)
+            "/std/magic/cleanse"->cleanse(target);
+
     dest_effect();
 }
 

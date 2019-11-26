@@ -9,7 +9,7 @@ int power;
 void create()
 {
     ::create();
-    set_name("status_sickened");
+    set_name("effect_sickened");
 }
 
 int status_effect()

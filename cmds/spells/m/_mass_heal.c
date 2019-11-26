@@ -124,6 +124,9 @@ void spell_effect(int prof)
                 set_helpful_spell(1);
                 damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"positive energy");
             }
+            if(query_spell_name()=="mass heal")
+                if(member_array(targets[i],caster->query_attackers())==-1)
+                    "/std/magic/cleanse"->cleanse(targets[i]);
         }
     }
 
