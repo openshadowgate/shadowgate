@@ -10,7 +10,9 @@ void create() {
     set_spell_level(([ "bard" : 1,"druid" : 1, "mage":1 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS flare on TARGET");
-    set_description("This minor spell creates an abrupt flash of light, which if cast immediately in front of a creature, can dazzle them and cause difficulties with their vision.");
+    set_description("This minor spell creates an abrupt flash of light, which if cast immediately in front of a creature, can dazzle them and cause difficulties with their vision.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -18,11 +20,11 @@ void create() {
 }
 
 int preSpell(){
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         tell_object(caster,"You need a target for this spell.");
         return 0;
     }
-    if((int)target->query_property("dazzled")) {
+    if((int)target->query_property("effect_dazzled")) {
         tell_object(caster,"%^YELLOW%^The target already looks dazzled!");
         return 0;
     }
@@ -68,9 +70,7 @@ void spell_effect(int prof) {
 "your eyes, leaving you dazzled!");
     tell_room(place,"%^BOLD%^"+caster->QCN+" snaps "+caster->QCN+" fingers and a brilliant flash lights up before "
 +target->QCN+"'s eyes, leaving "+target->QO+" dazzled!",({caster, target}));
-    target->set_property("dazzled",1);
-    target->add_attack_bonus(-2);
-    spell_kill(target, caster);
+    "/std/effect/status/dazzled"->apply_effect(target,clevel/6+1);
     call_out("dest_effect",60);
 }
 
@@ -78,8 +78,6 @@ void dest_effect() {
     if(objectp(target)) {
       tell_object(target,"%^BOLD%^You blink away the last of the bright afterimage.");
       tell_room(environment(target),"%^BOLD%^"+target->QCN+" blinks away the last of the bright afterimage!",target);
-      target->add_attack_bonus(2);
-      target->set_property("dazzled",-1);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
