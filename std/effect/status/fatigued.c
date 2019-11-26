@@ -38,8 +38,8 @@ void dest_effect()
     if(objectp(target))
     {
         tell_object(target,"%^RED%^You no longer are exhausted.%^RESET%^");
-        target->add_stat_bonus("strength", -2);
-        target->add_stat_bonus("dexterity", -2);
+        target->add_stat_bonus("strength", 2);
+        target->add_stat_bonus("dexterity", 2);
         target->remove_property("effect_fatigued");
     }
 

@@ -39,8 +39,8 @@ void status_effect()
 
     tell_object(target,"%^RED%^You are exhausted.%^RESET%^");
 
-    target->add_stat_bonus("strength", -4);
-    target->add_stat_bonus("dexterity", -4);
+    target->add_stat_bonus("strength", -6);
+    target->add_stat_bonus("dexterity", -6);
 
     call_out("dest_effect",ROUND_LENGTH*duration);
 }
@@ -51,8 +51,8 @@ void dest_effect()
     if(objectp(target))
     {
         tell_object(target,"%^RED%^You no longer are exhausted.%^RESET%^");
-        target->add_stat_bonus("strength", -4);
-        target->add_stat_bonus("dexterity", -4);
+        target->add_stat_bonus("strength", 6);
+        target->add_stat_bonus("dexterity", 6);
         target->remove_property("effect_exhausted");
     }
 

@@ -8,19 +8,15 @@ inherit SPELL;
 
 void create() {
     ::create();
-    set_spell_name("horrid wilting");
-    set_spell_level(([ "mage" : 8 ]));
+    set_spell_name("waves of exhaustion");
+    set_spell_level(([ "mage" : 7 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS horrid wilting");
-    set_damage_desc("negative energy on living, nothing on undead");
-    set_description("This spell sends a wave of necrotic energy at everyone living in sight, evaporating water and life from them.");
+    set_syntax("cast CLASS waves of exhaustion");
+    set_damage_desc("living creatures become exhausted");
+    set_description("This spell sends waves of necrotic energy at everyone living in sight, exhausting them.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(1);
-    set_save("fort");
-    set_components(([
-      "mage" : ([ "drop of blood" : 1 ]),
-    ]));
 }
 
 string query_cast_string() {
@@ -34,9 +30,9 @@ void spell_effect(int prof){
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 
-    tell_room(place,"%^BLUE%^"+caster->QCN+" raises hand and releases wave of cold energy!%^RESET%^");
+    tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" raises hand and releases waves of darkness!%^RESET%^");
     if(!sizeof(attackers)){
-        tell_object(caster,"%^BOLD%^%^BLUE%^The area is washed in death energy but nothing else happens.%^RESET%^");
+        tell_object(caster,"%^BOLD%^%^BLACK%^The area is washed in fell waves but nothing else happens.%^RESET%^");
         dest_effect();
         return;
     }
@@ -45,15 +41,7 @@ void spell_effect(int prof){
     {
         if(!objectp(attackers[i]))
             continue;
-        if(attackers[i]->is_undead())
-            continue;
-        admg=sdamage;
-        if(do_save(attackers[i]))
-        {
-            admg/=2;
-        }
-        tell_object(attackers[i],"%^BLUE%^Your flesh is withered with fell power!%^RESET%^");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"negative energy");
+        "/std/effect/status/exhausted"->apply_effect(target,clevel/8+1);
     }
     spell_successful();
     dest_effect();
