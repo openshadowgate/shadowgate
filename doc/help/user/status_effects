@@ -23,15 +23,17 @@ You see stars and unable to do anything. Daze usually is short duration.
 %^CYAN%^%^ULINE%^Dazzled%^RESET%^
 You see some stars and your vision is restricted. You take lvl/18+1 penalty on perception, thievery skills and attack bonus.
 
-%^CYAN%^%^ULINE%^Enchantment, +N%^RESET%^
-Value of the enchantment is added to either both attack and damage bonus, if the item is a weapon, or to armor class of the wielder if item is jewelry, cloth or armor.
-
 %^CYAN%^%^ULINE%^Energy type resistance%^RESET%^
 Such effects as fire resistance or silver resistance subtract their value from damage received. I.e. 50 points of fire resistance would make 150 points of fire damage as 100.
+
+%^CYAN%^%^ULINE%^Exhausted%^RESET%^
+You take a penalty of 4 points on on strength and dexterity. If either of these stats falls below 0 you die. Exhausted characters can't become %^CYAN%^fatigued%^RESET%^.
 
 %^CYAN%^%^ULINE%^Fast healing%^RESET%^
 A creature with the fast healing special quality regains hit points at an exceptional rate. This gives (grade)d(level/4) points of passive regeneration each round. For example, fast healing 2 gives 2d2 hp regeneration to a level 10 monster per round.
 
+%^CYAN%^%^ULINE%^Fatigued%^RESET%^
+You take a penalty of 2 points on on strength and dexterity. Fatigued characters can become %^CYAN%^exhausted%^RESET%^.
 %^CYAN%^%^ULINE%^Fear%^RESET%^
 Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight. Effects that are applied are usually %^CYAN%^frightened%^RESET%^, %^CYAN%^shaken%^RESET%^ or %^CYAN%^panicked%^RESET%^.
 
@@ -81,10 +83,6 @@ These effects subtract their value from damage or spell damage received.
 
 %^CYAN%^%^ULINE%^Temporary blinded%^RESET%^
 Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell.
-%^CYAN%^Exhausted%^RESET%^
-You take a penalty of 4 points on on strength and dexterity. If either of these stats falls below 0 you die. Exhausted characters can't become %^CYAN%^fatigued%^RESET%^.
 
-%^CYAN%^Fatigued%^RESET%^
-You take a penalty of 2 points on on strength and dexterity. Fatigued characters can become %^CYAN%^exhausted%^RESET%^.
 
 %^CYAN%^See also:%^RESET%^ attributes, bonuses, stats, skills, score, hp
