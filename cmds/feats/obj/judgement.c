@@ -19,6 +19,7 @@ string * JUDGEMENT_TYPES = ({
 string * active_judgements = ({});
 object caster;
 int clevel;
+object lendingto;
 
 void create()
 {
@@ -45,9 +46,20 @@ void activate_judgements(string * judgements)
         apply_judgements(active_judgements,-1);
     }
     active_judgements = judgements;
+
+    if(caster->query_property("lend_judgement"))
+    {
+        lendingto = caster->query_property("lend_judgement");
+    }
+
     apply_judgements(judgements,1);
     tell_object(caster,"%^BOLD%^%^WHITE%^You with a mere will you call out to the arcane for the strength.");
     call_out("check",ROUND_LENGTH);
+}
+
+string * query_active_judgements()
+{
+    retunr active_judgements;
 }
 
 string * query_judgement_types()
@@ -61,11 +73,16 @@ void apply_judgements(string * judgements,int direction)
     int power;
     object lendingto;
 
-    if(objectp(lendingto=caster->query_property("lend_judgement")))
+    if(objectp(lendingto))
     {
         if(member_array(judgements[0],JUDGEMENT_TYPES)!=-1)
         {
             call_other(TO,"judgement_"+judgements[0],lendingto,direction,power);
+            if(direction>0)
+            {
+                tell_object(caster,"%^BOLD%^%^WHITE%^"+lendingto->QCN+" is infused with your zeal.");
+                tell_object(lendingto,"%^BOLD%^%^WHITE%^You are infused with power of the zeal!");
+            }
         }
     }
 

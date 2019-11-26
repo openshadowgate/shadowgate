@@ -8,7 +8,8 @@
 #include <rooms.h>
 
 object __Search_Obj;
-private mapping __Smells, __Listens, __Searches;
+//making smells, listens, searches public, inherits not showing up
+mapping __Smells, __Listens, __Searches; 
 
 void set_search(string item, mixed desc);
 void set_smell(string item, mixed desc);
