@@ -6,6 +6,10 @@
 
 #define CONFUSION "/std/magic/confusion"
 
+/**
+ * Confusion is always spelled and requires a caster!
+ */
+
 inherit STATUS;
 
 int counter;

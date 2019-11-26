@@ -24,7 +24,7 @@ void confuse(object caster, object targ)
             TO->dest_effect();
         tell_object(targ,"%^YELLOW%^A strange thought enters your mind, but you cannot grasp it!");
         tell_room(environment(targ),"%^YELLOW%^"+targ->QCN+" stares at a point in space, babbling incoherently!",targ);
-        targ->set_paralyzed(roll_dice(1,6)*8,"You are trying to recall that thought!");
+        targ->set_paralyzed(7,"You are trying to recall that thought!");
         break;
     case 51..70:
         if(!present(caster,environment(targ))) TO->dest_effect();
