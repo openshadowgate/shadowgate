@@ -10,7 +10,9 @@ void create()
     feat_category("RagingProphet");
     feat_name("raging healer");
     feat_prereq("Raging Prophet L1");
-    feat_desc("With this feat a raging prophet has a significant chance to preserve any channeling spell in memory, but only while raging.");
+    feat_desc("With this feat a raging prophet has a significant chance to preserve any channeling spell in memory, but only while raging.
+
+Spells that are covered by this feat are all cure/cause wounds spell, heal, harm, and mass variants of all of the above.");
     permanent(1);
 }
 

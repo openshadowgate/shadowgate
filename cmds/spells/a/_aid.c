@@ -11,7 +11,7 @@ void create() {
     set_spell_level(([ "cleric" : 2, "inquisitor" : 2 ,]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS aid [on TARGET]");
-    set_damage_desc("clevel hitpoints bonus, +1 to all saves");
+    set_damage_desc("clevel + 10 max hitpoints bonus, +1 to all saves");
     set_description("With this spell, caster harnesses flow of negative energies to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
 	set_helpful_spell(1);
 }
@@ -66,7 +66,7 @@ void spell_effect()
         tell_room(environment(caster),"%^RED%^You see a wave of force surround and strengthen "+target->QCN+"'s body.",({target}));
     }
     bonus = query_fl_power()*clevel;
-    target->add_max_hp_bonus(bonus);
+    target->add_max_hp_bonus(bonus + 10);
     target->set_property("spelled",({TO}));
     target->set_property("spell_bonus_hp",1);
     target->add_saving_bonus("all",1);
@@ -78,7 +78,7 @@ void dest_effect()
 {
     if(objectp(target))
     {
-       target->add_max_hp_bonus(-bonus);
+       target->add_max_hp_bonus(-bonus-10);
        target->remove_property_value("spelled", ({TO}) );
        target->remove_property("spell_bonus_hp");
        target->add_saving_bonus("all",-1);
