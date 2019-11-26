@@ -11,7 +11,7 @@ int power;
 void create()
 {
     ::create();
-    set_name("effect_covering");
+    set_name("effect_cowering");
 }
 
 void status_effect()
@@ -20,12 +20,12 @@ void status_effect()
     object weapons;
     string exits;
 
-    if(target->query_property("effect_covering"))
+    if(target->query_property("effect_cowering"))
         return;
 
-    target->set_property("effect_covering",1);
+    target->set_property("effect_cowering",1);
 
-    tell_object(target,"%^BLUE%^You are covering in fear.%^RESET%^");
+    tell_object(target,"%^BLUE%^You are cowering in fear.%^RESET%^");
 
     power = target->query_level()/6+1;
 
@@ -42,9 +42,9 @@ void dest_effect()
     int i;
     if(objectp(target))
     {
-        tell_object(target,"%^BLUE%^You are no longer covering.%^RESET%^");
+        tell_object(target,"%^BLUE%^You are no longer cowering.%^RESET%^");
         target->add_ac_bonus(power);
-        target->remove_property("effect_covering");
+        target->remove_property("effect_cowering");
     }
 
     ::dest_effect();

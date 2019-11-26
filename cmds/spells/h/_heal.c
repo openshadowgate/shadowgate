@@ -16,7 +16,7 @@ void create()
     set_affixed_spell_level(6);
     set_description("%^RESET%^This spell will channel huge amount of positive energy into target and will allow the caster to cure massive amount damage from wounds and diseases. This spell will cure status effects such as blinded, confused, dazzled, paralyzed, fatigued, exhausted, sickened and poisoned.
 
-See also: heal *player commands");
+%^BOLD%^%^RED%^See also:%^RESET%^ heal *player commands, status effects");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

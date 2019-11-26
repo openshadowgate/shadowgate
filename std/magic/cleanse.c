@@ -8,7 +8,7 @@
 
 void cleanse(object target)
 {
-    object effects;
+    object * effects;
 
     if(target->query_paralyzed())
         target->remove_paralyzed();
@@ -18,8 +18,10 @@ void cleanse(object target)
     if(sizeof(effects))
     {
         object effect;
-        foreach(effect in effect)
+        foreach(effect in effects)
         {
+            if(!objectp(effect))
+                continue;
             if(effect->query_name() == "effect_fatigued" ||
                effect->query_name() == "effect_exhausted" ||
                effect->query_name() == "effect_dazzled" ||

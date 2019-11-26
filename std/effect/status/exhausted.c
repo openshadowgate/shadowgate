@@ -28,8 +28,12 @@ void status_effect()
     if(sizeof(effects))
     {
         object effect;
+
         foreach(effect in effect)
         {
+            if(!objectp(effect))
+                continue;
+
             if(effect->query_name() == "effect_fatigued")
                 effect->dest_effect();
         }
