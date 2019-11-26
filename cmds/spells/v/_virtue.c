@@ -9,6 +9,7 @@ void create() {
     set_spell_level(([ "paladin" : 1,"inquisitor":1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS virtue");
+    set_damage_desc("clevel + 10 max hp bonus");
     set_description("This spell bestows a small blessing upon the caster, increasing their resilience.");
     set_verbal_comp();
     set_somatic_comp();
