@@ -192,7 +192,7 @@ void execute_attack()
     tell_object(caster, "%^BOLD%^%^BLUE%^Your deadly missile pierces into "+target->QCN+", releasing %^BOLD%^%^BLACK%^fell powers%^BLUE%^!%^RESET%^");
     tell_room(place, "%^BOLD%^%^BLUE%^"+caster->QCN+"'s %^BLACK%^fell missile%^BLUE%^ pierces into "+target->QCN+"!%^RESET%^",caster);
 
-    bonusdc = clevel+16;
+    bonusdc = clevel+BONUS_D->query_stat_bonus(caster, "dexterity");
     if((string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
         tell_object(target,"%^BOLD%^The struggle for your soul is won, yet at a %^BOLD%^%^BLUE%^price%^WHITE%^.");

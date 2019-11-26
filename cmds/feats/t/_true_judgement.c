@@ -162,7 +162,7 @@ void execute_attack()
     tell_object(caster,"%^BLUE%^A ray of deadly raw power releases of your finger and hits "+target->QCN+"!");
     tell_room(place,"%^BLUE%^A ray of death releases of "+caster->QCN+"'s finger and hits "+target->QCN+"!",caster);
 
-    bonusdc = clevel+10;
+    bonusdc = clevel;
     bonusdc += BONUS_D->query_stat_bonus(caster, "wisdom");
     spell_kill(target,caster);
     if((string)target->query_property("no death") ||do_save(target,-bonusdc))

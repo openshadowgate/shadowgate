@@ -6,10 +6,10 @@ inherit SPELL;
 void create()
 {
     ::create();
-    set_spell_name("lend judgement");
+    set_spell_name("greater lend judgement");
     set_spell_level(([ "inquisitor" : 5,]));
     set_spell_sphere("divination");
-    set_syntax("cast CLASS lend judgement on TARGET");
+    set_syntax("cast CLASS greater lend judgement on TARGET");
     set_description("You create a conduit of divine knowledge and outrage between you and an ally. That ally gains the benefit of all of your active judgements (as do you) when you activate them.");
     set_verbal_comp();
     set_somatic_comp();
@@ -29,6 +29,11 @@ int preSpell()
         tell_object(caster,"You're already lending judgement!");
         return 0;
     }
+    if(caster->query_property("lended_judgement"))
+    {
+        tell_object(caster,"They are already benefiting from lend judgement!");
+        return 0;
+    }
     return 1;
 }
 
@@ -44,6 +49,7 @@ spell_effect()
     tell_object(caster,"%^RED%^%^BOLD%^You concentrate and engulf "+target->QCN+" in energy of your zeal!");
     tell_object(target,"%^RED%^%^BOLD%^You feel more powerful as "+caster->QCN+" shares zeal with you.");
 
+    target->set_property("lended_judgement",1);
     caster->set_property("greater_lend_judgement",1);
     caster->set_property("lend_judgement",target);
     caster->set_property("spelled", ({TO}) );
@@ -66,4 +72,7 @@ dest_effect()
         caster->remove_property("greater_lend_judgement");
         tell_object(caster,"%^RED%^%^BOLD%^You are no longer lending judgement!");
     }
+    if(objectp(target))
+        target->remove_property("lended_judgement");
+    ::dest_effect();
 }

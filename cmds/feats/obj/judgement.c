@@ -59,7 +59,7 @@ void activate_judgements(string * judgements)
 
 string * query_active_judgements()
 {
-    retunr active_judgements;
+    return active_judgements;
 }
 
 string * query_judgement_types()
@@ -72,16 +72,22 @@ void apply_judgements(string * judgements,int direction)
     string j;
     int power;
     object lendingto;
+    int maxtolend, i;
 
     if(objectp(lendingto))
     {
-        if(member_array(judgements[0],JUDGEMENT_TYPES)!=-1)
+        maxtolend = caster->query_property("greater_lend_judgement")?3:1;
+
+        for(i=0;i<maxtolend;i++)
         {
-            call_other(TO,"judgement_"+judgements[0],lendingto,direction,power);
-            if(direction>0)
+            if(member_array(judgements[i],JUDGEMENT_TYPES)!=-1)
             {
-                tell_object(caster,"%^BOLD%^%^WHITE%^"+lendingto->QCN+" is infused with your zeal.");
-                tell_object(lendingto,"%^BOLD%^%^WHITE%^You are infused with power of the zeal!");
+                call_other(TO,"judgement_"+judgements[i],lendingto,direction,power);
+                if(direction>0)
+                {
+                    tell_object(caster,"%^BOLD%^%^WHITE%^"+lendingto->QCN+" is infused with your zeal.");
+                    tell_object(lendingto,"%^BOLD%^%^WHITE%^You are infused with power of the zeal!");
+                }
             }
         }
     }

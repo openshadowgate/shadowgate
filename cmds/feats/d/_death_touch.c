@@ -178,7 +178,7 @@ void execute_attack()
     tell_object(caster,"%^BLUE%^A ray of deadly negative energy releases of your finger and hits "+target->QCN+"!");
     tell_room(place,"%^BLUE%^A ray of death releases of "+caster->QCN+"'s finger and hits "+target->QCN+"!",caster);
 
-    bonusdc = clevel+12;
+    bonusdc = clevel+BONUS_D->query_stat_bonus(caster, "intelligence");
     if((string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
         tell_object(target,"%^BOLD%^Your soul struggles, but manages to survive.");
