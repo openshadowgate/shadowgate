@@ -60,6 +60,16 @@ int preSpell()
         tell_object(caster,"The second object is neither a weapon nor an armor piece.");
         return 0;
     }
+    if(strsrch(base_name(fob),"/d/magic/") != -1)
+    {
+        tell_object(TP,"You cannot siphon a conjured item!");
+        return 1;
+    }
+    if(tob->query_property("no repair"))
+    {
+        tell_object(TP,"This object can't accept magic!");
+        return 1;
+    }
     if(((fob->is_weapon()&&!tob->is_weapon()) ||
         (!fob->is_weapon()&&tob->is_weapon())) &&
        ((fob->is_armor()&&!tob->is_armor()) ||

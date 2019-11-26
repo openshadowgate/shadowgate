@@ -19,12 +19,12 @@ int cmd_actions(){
        num = sizeof (items);
        if (num > 0) {
           // this if statement parses the array into a list separated by
-          // commas and ending with a period. 
+          // commas and ending with a period.
           for(i=0;i < num-1;i++)  { msg += items[i]+", "; }
           msg += items[i]+".\n";
        }
     }
-    tell_object(TP, msg+"\n"); 
+    tell_object(TP, msg+"\n");
 // This section reports out the searches you can find in a room.
     msg = "You can <search> the following items in this room: \n";
     searchmap = ETP->query_searches();
@@ -32,24 +32,24 @@ int cmd_actions(){
     if (num > 0) {
        searches = keys(searchmap);
        // this if statement parses the array into a list separated by
-       // commas and ending with a period. 
+       // commas and ending with a period.
        for(i=0;i<num-1;i++)  { msg += searches[i]+", "; }
        msg += searches[i]+".\n";
     }
-    tell_object(TP, msg+"\n"); 
+    tell_object(TP, msg+"\n");
 
 // This section reports out the actions you can take in a room.
     msg = "You feel that you can take the following actions in this room: \n";
     actions = ETP->query_actions();
     num = sizeof(actions);
-    if (num > 0 ) { 
+    if (num > 0 ) {
        // this if statement parses the array into a list separated by
-       // commas and ending with a period. 
+       // commas and ending with a period.
        for(i=0;i<num-1;i++)  { msg += (string) actions[i]+", "; }
-       msg += (string) actions[i]+"."; 
+       msg += (string) actions[i]+".";
     }
 
-    tell_object(TP, msg + 
+    tell_object(TP, msg +
      "\n\n%^BOLD%^%^CYAN%^Please note this will not tell you the object of a command. \n"
      +"%^BOLD%^%^CYAN%^Example: for %^GREEN%^<pull lever>%^CYAN%^ this command will "
      +"only show %^GREEN%^<pull>%^CYAN%^ and not %^GREEN%^<lever>%^CYAN%^.%^RESET%^\n"
@@ -58,11 +58,17 @@ int cmd_actions(){
 }
 
 void help(){
-    write("Syntax: <actions>\n\n"
-      +"This command tells players about items that can be looked at <look item>, \n"
-      +"items that can be searched <search item>, \n"
-      +"and actions that can be taken in this room. \n\n"
-      +"Please note this does not include items from astronomy such as: \n"
-      +"%^BOLD%^%^RED%^sun, moon, moons, sky, stars, sera, and tyrranos.%^RESET%^" 
-    );
+    write("
+%^CYAN%^NAME%^RESET%^
+
+actions - display possible actions
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command tells players about items that can be looked at <look item>, items that can be searched <search item>, and actions that can be taken in this room.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+look, search
+");
 }
