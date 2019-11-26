@@ -78,9 +78,3 @@ void spell_effect(int prof){
         "/std/effect/status/confused"->apply_effect(target,clevel/5+1,caster);
     }
 }
-
-void dest_effect()
-{
-
-    ::dest_effect();
-}

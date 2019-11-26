@@ -48,7 +48,8 @@ void check_confusion()
 {
     if(!objectp(target))
         dest_effect();
-    if(counter>(clevel/12+4))
+
+    if(counter>(clevel/4+4))
         dest_effect();
 
     counter++;
