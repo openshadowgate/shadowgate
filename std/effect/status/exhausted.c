@@ -15,11 +15,25 @@ void create()
 void status_effect()
 {
     int i;
+    object * effects;
+
     if(target->query_property("effect_exhausted"))
         return;
 
     if(target->is_undead())
         return;
+
+    effects = target->query_property("status_effects");
+
+    if(sizeof(effects))
+    {
+        object effect;
+        foreach(effect in effect)
+        {
+            if(effect->query_name() == "effect_fatigued")
+                effect->dest_effect();
+        }
+    }
 
     target->set_property("effect_exhausted",1);
 
