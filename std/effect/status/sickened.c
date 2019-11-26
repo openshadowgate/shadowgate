@@ -27,7 +27,7 @@ int status_effect()
     target->add_damage_bonus(-power);
     target->add_saving_bonus("all",-power);
 
-    call_out("dest_effect",ROUND_LENGTH*clevel);
+    call_out("dest_effect",ROUND_LENGTH*duration);
     return 1;
 }
 
