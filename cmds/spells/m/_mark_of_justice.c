@@ -16,7 +16,7 @@ void create(){
     ::create();
     set_author("ares");
     set_spell_name("mark of justice");
-    set_spell_level(([ "cleric" : 5, "paladin" : 4, "inquisitor" : 4 ]));
+    set_spell_level(([ "cleric" : 5, "paladin" : 4, "inquisitor" : 3 ]));
     set_spell_sphere("divination");
     set_spell_domain("vigilance");
     set_syntax("cast CLASS mark of justice on TARGET");
