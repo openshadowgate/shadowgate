@@ -531,7 +531,7 @@ void send_final_message(object obj)
 {
     if (obj->query_property("memorizing")) obj->remove_property("memorizing");
     tell_room(environment(obj), obj->QCN + " completes " + obj->QP + " preparations.", obj);
-    tell_object(obj, "You have finished preparing your spells.");
+    tell_object(obj, "%^BOLD%^%^GREEN%^You have finished preparing your spells.");
     return;
 }
 
