@@ -63,9 +63,8 @@ Allows you to recognize another player by an id, such as race, and assign them a
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-fixrecognize, who, mail
+fixrecognized, who, mail
 HELP
     );
     return 1;
 }
-
