@@ -41,6 +41,11 @@ void setup_judgement(object mycaster, int myclevel)
 
 void activate_judgements(string * judgements)
 {
+    if(!objectp(caster))
+    {
+        TO->remove();
+        return;
+    }
     if(sizeof(active_judgements))
     {
         apply_judgements(active_judgements,-1);
@@ -91,6 +96,8 @@ void apply_judgements(string * judgements,int direction)
             }
         }
     }
+
+
 
     foreach(j in judgements)
     {
