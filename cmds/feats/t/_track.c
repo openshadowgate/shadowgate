@@ -31,8 +31,8 @@ int cmd_track(string str)
 void execute_feat()
 {
     string *tracks;
-    int i, size, prof;
-    string str, who, didwhat, direction, terrain, name;
+    int i, size, prof, tdiff;
+    string str, who, didwhat, direction, terrain, theirname, time;
 
     ::execute_feat();
     prof = caster->query_skill("survival")+ roll_dice(1,20);
@@ -112,25 +112,30 @@ void execute_feat()
         str = tracks[i];
 
         if (str) {
-            sscanf(str,"%s&%s&%s", who, didwhat, direction, name);
+            sscanf(str,"%s&%s&%s&%s&%s", who, didwhat, direction, theirname, time);
 
-            if(caster->realName(name)!="")
-                who = capitalize(name);
+            who = capitalize(article(who))+" "+who;
+
+            tdiff=(time()-atoi(time))/20/60;
+
+            if(tdiff<1)
+                time = "within past hour";
             else
-                who = capitalize(article(who))+" "+who;
+                time = tdiff+" hours ago";
+
 
             if (random(15) > (prof-i)) {
                 who = "A creature that could not be identified";
             }
             switch (didwhat) {
             case "appeared":
-                tell_player(caster, who+" appeared here.\n");
+                tell_player(caster, who+" appeared here "+time+".\n");
                 break;
             case "entered":
-                tell_player(caster, who+" entered this room from "+direction+".\n");
+                tell_player(caster, who+" entered this room from "+direction+" "+time+".\n");
                 break;
             case "left":
-                tell_player(caster, who+" left this room headed "+direction+".\n");
+                tell_player(caster, who+" left this room headed "+direction+" "+time+".\n");
                 break;
             }
         }

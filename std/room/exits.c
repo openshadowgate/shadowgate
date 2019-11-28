@@ -160,6 +160,7 @@ void add_tracks(object ob, string action, string direction)
 // adding to exclude true invis. immortals by *Styx* 9/24/03, last change was 8/2/03
     if (ob->query_true_invis()) return;
     if ((int)ob->query_property("untrackable")) return;
+    if (ob->query_property("flying")) return;
     if (FEATS_D->usable_feat(ob,"tracklessstep") && !FEATS_D->is_active(ob,"tracklessstep")) return;
     if (!stringp(ob->query_race())) return;
     for (i = SIZE-1;i>0;i--) {
@@ -169,11 +170,11 @@ void add_tracks(object ob, string action, string direction)
 
     if(objectp(shape = ob->query_property("shapeshifted")))
     {
-        footprints[0]=(string)shape->query_shape_race()+"&"+action+"&"+direction+"&unknown";
+        footprints[0]=(string)shape->query_shape_race()+"&"+action+"&"+direction+"&unknown&"+time();
     }
     else
     {
-        footprints[0]=(string)ob->query_race()+"&"+action+"&"+direction+"&"+ob->query_name();
+        footprints[0]=(string)ob->query_race()+"&"+action+"&"+direction+"&"+ob->query_name()+"&"+time();
     }
 }
 

@@ -20,7 +20,8 @@ void spell_effect()
 {
     string * tracks;
     string track;
-    string who, what, whereto, name;
+    int tdiff;
+    string who, what, whereto, name, time;
     int counter = clevel/12+1;
     tracks = place->query_tracks();
 
@@ -32,20 +33,28 @@ void spell_effect()
     {
         if(!track)
             break;
-        sscanf(track,"%s&%s&%s&%s", who, what, whereto, name);
-        if(caster->realName(name)!="")
-            who = capitalize(name);
+        sscanf(track,"%s&%s&%s&%s&%s", who, what, whereto, name, time);
+
+        tell_object(caster,":"+name);
+
+        who = capitalize(article(who))+" "+who;
+
+        tdiff=(time()-atoi(time))/20/60;
+
+        if(tdiff<1)
+            time = "within past hour";
         else
-            who = capitalize(article(who))+" "+who;
+            time = tdiff+" hours ago";
+
         switch (what) {
         case "appeared":
-            tell_player(caster, who+" appeared here.\n");
+            tell_player(caster, who+" appeared here "+time+".\n");
             break;
         case "entered":
-            tell_player(caster, who+" entered this room from "+whereto+".\n");
+            tell_player(caster, who+" entered this room from "+whereto+" "+time+".\n");
             break;
         case "left":
-            tell_player(caster, who+" left this room headed "+whereto+".\n");
+            tell_player(caster, who+" left this room headed "+whereto+" "+time+".\n");
             break;
         }
 
