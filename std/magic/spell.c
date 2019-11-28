@@ -1399,8 +1399,6 @@ int query_spell_level(string classtype) {
   if(!mapp(spell_levels)) spell_levels = ([]);
 
 // safeguards til we can filter the old class types out of the system. Nienne, 05/10
-  if(affixed_level)
-      return affixed_level;
   if(classtype == "priest" && spell_levels["cleric"]) return spell_levels["cleric"];
   if(classtype == "priest" && spell_levels["ranger"]) return spell_levels["ranger"];
   if(classtype == "priest" && spell_levels["paladin"]) return spell_levels["paladin"];
@@ -1884,6 +1882,9 @@ void define_base_damage(int adjust)
     {
         int slevel;
         slevel = query_spell_level(spell_type);
+        if(affixed_level)
+            slevel = affixed_level;
+
         slevel+=adjust;
         slevel-=sdamage_adjustment;
         slevel = slevel<1?1:slevel;
