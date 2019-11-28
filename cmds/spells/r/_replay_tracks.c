@@ -20,8 +20,8 @@ void spell_effect()
 {
     string * tracks;
     string track;
-    string who, what, whereto;
-    int counter = clevel/8+1;
+    string who, what, whereto, name;
+    int counter = clevel/12+1;
     tracks = place->query_tracks();
 
     tell_object(caster,"%^RED%^You %^RED%^k%^GREEN%^n%^RED%^eel,%^RED%^ touching the ground with your hand.
@@ -32,16 +32,20 @@ void spell_effect()
     {
         if(!track)
             break;
-        sscanf(track,"%s&%s&%s", who, what, whereto);
+        sscanf(track,"%s&%s&%s&%s", who, what, whereto, name);
+        if(caster->realName(name)!="")
+            who = capitalize(name);
+        else
+            who = capitalize(article(who))+" "+who;
         switch (what) {
         case "appeared":
-            tell_object(caster, "%^GREEN%^"+capitalize(article(who))+" "+who+" appeared here.");
+            tell_player(caster, who+" appeared here.\n");
             break;
         case "entered":
-            tell_object(caster, "%^GREEN%^"+capitalize(article(who))+" "+who+" entered this room from "+whereto+".");
+            tell_player(caster, who+" entered this room from "+whereto+".\n");
             break;
         case "left":
-            tell_object(caster, "%^GREEN%^"+capitalize(article(who))+" "+who+" left this room headed "+whereto+".");
+            tell_player(caster, who+" left this room headed "+whereto+".\n");
             break;
         }
 

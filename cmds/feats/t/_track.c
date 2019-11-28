@@ -5,7 +5,7 @@ inherit FEAT;
 
 int help();
 
-void create() 
+void create()
 {
     ::create();
     feat_type("instant");
@@ -32,9 +32,9 @@ void execute_feat()
 {
     string *tracks;
     int i, size, prof;
-    string str, who, didwhat, direction, terrain;
+    string str, who, didwhat, direction, terrain, name;
 
-    ::execute_feat(); 
+    ::execute_feat();
     prof = caster->query_skill("survival")+ roll_dice(1,20);
     prof = prof/2;
     if(caster->query_blind() || caster->query_blindfolded()) {
@@ -93,21 +93,7 @@ void execute_feat()
           }
         }
         if (isCivilization(terrain)) {
-            switch (terrain) {
-            case CITY:
-                write("There's too many tracks here to discern where any truly lead.");
-                tell_room(environment(caster), caster->QCN+" fumbles around on the ground but only ends up looking confused.",caster);
-                dest_effect();
-                return;
-                break;
-            case VILLAGE:
-                write("There's too many tracks here to discern where any truly lead.");
-                tell_room(environment(caster), caster->QCN+" fumbles around on the ground but only ends up looking confused.",caster);
-                dest_effect();
-                return;
-                break;
-            default:               prof -= 3;
-            }
+                prof -= 3;
         }
         if (isTravel(terrain)) {
             switch (terrain) {
@@ -126,23 +112,26 @@ void execute_feat()
         str = tracks[i];
 
         if (str) {
-            sscanf(str,"%s&%s&%s", who, didwhat, direction);
+            sscanf(str,"%s&%s&%s", who, didwhat, direction, name);
+
+            if(caster->realName(name)!="")
+                who = capitalize(name);
+            else
+                who = capitalize(article(who))+" "+who;
 
             if (random(15) > (prof-i)) {
-                who = "creature that could not be identified";
+                who = "A creature that could not be identified";
             }
             switch (didwhat) {
             case "appeared":
-                tell_player(caster, capitalize(article(who))+" "+who+" appeared here.\n");
+                tell_player(caster, who+" appeared here.\n");
                 break;
             case "entered":
-                tell_player(caster, capitalize(article(who))+" "+who+" entered this room from "+direction+".\n");
+                tell_player(caster, who+" entered this room from "+direction+".\n");
                 break;
             case "left":
-                tell_player(caster, capitalize(article(who))+" "+who+" left this room headed "+direction+".\n");
+                tell_player(caster, who+" left this room headed "+direction+".\n");
                 break;
-            default:
-                tell_player(caster, "Somthing screwed up.  Contact a wiz.\n");
             }
         }
     }
@@ -158,4 +147,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
