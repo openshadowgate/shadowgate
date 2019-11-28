@@ -20,6 +20,11 @@ int prerequisites(object ob){
       dest_effect();
       return 0;
     }
+    if(ob->is_undead())
+    {
+        dest_effect();
+        return 0;
+    }
     return ::prerequisites(ob);
 }
 
@@ -45,4 +50,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-
