@@ -33,7 +33,6 @@ void create() {
     permanent(1);
     allow_tripped(1);
     set_required_for(({"spell power","improved spell power","greater spell power","hardenedminions","magic arsenal"}));
-    set_replaces_feat("expanded knowledge 1");
 }
 
 int cmd_spellmastery(string args)

@@ -9,7 +9,6 @@ void create()
     feat_type("permanent");
     feat_category("MagicDamage");
     feat_name("spell power");
-    feat_prereq("Warlock or Spellmastery or Expanded Knowledge 1");
     feat_desc("The Spell Power feat will allow the caster to cast spells as if they were more advanced in their spell casting class than they actually are. Warlocks do not need to take any of the pre-requisite feats to gain this feat.");
     permanent(1);
     set_required_for(({"improved spell power","greater spell power","hardenedminions","magic arsenal"}));
@@ -20,16 +19,6 @@ int allow_shifted() { return 1; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
-
-    if(!FEATS_D->has_feat(ob,"spellmastery") &&
-       !ob->is_class("warlock") &&
-       !ob->is_class("monk") &&
-       !ob->is_class("psion") &&
-       !ob->is_class("psywarrior"))
-    {
-        dest_effect();
-        return 0;
-    }
 
     return ::prerequisites(ob);
 }
