@@ -20,7 +20,8 @@ int prerequisites(object ob){
       dest_effect();
       return 0;
     }
-    if(ob->is_undead())
+    if(ob->is_undead()) //Undead players don't need this, preventing
+                        //them from making a mistake
     {
         dest_effect();
         return 0;
