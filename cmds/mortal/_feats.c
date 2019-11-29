@@ -1545,7 +1545,7 @@ The following commands apply:
 
 %^ORANGE%^<feats fix>%^RESET%^
 
-    Will attempt to fix your feat tree. If your feats seem incorrect, use this command. If it fails to fix your problem, contact the staff via %^ORANGE%^<avatarmail>%^RESET%^.
+    Will attempt to fix your feat tree. If your feats seem incorrect, use this command.
 
 %^ORANGE%^<feats wipe>%^RESET%^
 

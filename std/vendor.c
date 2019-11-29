@@ -118,7 +118,7 @@ int adjustment_cost(object ob)
         x = enchant;
         cost=-(565*x*x*x-12165*x*x+11600*x-4500)/9;
         x = bonus;
-        cost+=-(500*x*x*2-6500*x)/3;
+        cost+=-(500*x*x*2-6500*x)/6;
         ob->set_property("repair cost", cost);
     }
 
