@@ -455,7 +455,7 @@ int query_weapon_speed()
                 if(query_size() > (int)ETO->query_size())
                 {
                     if(Weapon_speed == -1) return query_size();
-                    return Weapon_speed / 6;
+                    return Weapon_speed / 5;
                 }
             }
         }

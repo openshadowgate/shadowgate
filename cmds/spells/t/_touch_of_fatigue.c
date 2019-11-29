@@ -76,7 +76,7 @@ spell_effect(int prof)
     tell_room(place,"%^BLUE%^"+caster->QCN+" reaches out and touches "+target->QCN+"'s "+target_limb+"...",({ caster, target}) );
     spell_successful();
 
-    "/std/effect/status/fatigued"->apply_effect(target,clevel/6+1);
+    "/std/effect/status/fatigued"->apply_effect(target,clevel/4+1);
 
     target->use_stamina(sdamage/6);
     dest_effect();
