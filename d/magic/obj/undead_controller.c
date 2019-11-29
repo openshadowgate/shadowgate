@@ -82,7 +82,7 @@ void remove()
     for(i=0;i<sizeof(mons);i++)
     {
         if(objectp(mons[i]))
-            mons[i]->remove();
+            mons[i]->die();
     }
     if(objectp(caster))
         caster->remove_property("raised");
