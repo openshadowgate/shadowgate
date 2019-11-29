@@ -35,7 +35,7 @@ void spell_effect()
             break;
         sscanf(track,"%s&%s&%s&%s&%s", who, what, whereto, name, time);
 
-        tell_object(caster,":"+name);
+        //tell_object(caster,":"+name);
 
         who = capitalize(article(who))+" "+who;
 
