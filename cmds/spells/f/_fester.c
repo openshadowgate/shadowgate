@@ -58,6 +58,7 @@ void dest_effect()
 {
     if(objectp(target))
     {
+        tell_object(target,"%^ORANGE%^The air grows warmer as your ability to heal returns.");
         target->remove_property("fester");
     }
     ::dest_effect();
