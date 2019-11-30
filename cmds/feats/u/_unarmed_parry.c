@@ -12,7 +12,7 @@ void create()
     feat_prereq("Improved rapid strikes");
     feat_desc("Unarmed parry is a passive feat that allows a chance to parry attacks based on your athletics skill. A character with this feat has learned to use her limbs in such a way at parry attacks against herself without being wounded.
 
-%^BOLD%^N.B.%^RESET%^ Parry, unassailable parry, unarmed parry and blade block feats do not stack. Just one will work at a time.");
+%^BOLD%^N.B.%^RESET%^ This feat is not subsituting parry family of feats, as it works only when you're unarmed.");
     permanent(1);
 }
 
