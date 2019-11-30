@@ -1,5 +1,5 @@
 //shadowlisten.c
-//Silverwatcher, shadowlistener, and innereye are 
+//Silverwatcher, shadowlistener, and innereye are
 //essentially the same file.  If you make a change to
 //one, please check to see if the others need it as well.
 
@@ -10,8 +10,8 @@ inherit MONSTER;
 object caster, follower;
 void self_destruct();
 void set_scry_power(int x);
-void query_scry_power();
-void query_mycaster();
+int query_scry_power();
+object query_mycaster();
 void query_caster();
 
 int power;
@@ -29,7 +29,6 @@ void create(){
 
 int move(mixed dest){
    ::move(dest);
-
 }
 
 set_caster(object cas){
@@ -54,17 +53,17 @@ void heart_beat()
    if(!objectp(TO)) { return; }
    if(ETO != environment(follower))
       move(environment(follower));
-   if(ETO->query_property("no scry")) 
+   if(ETO->query_property("no scry"))
    {
        self_destruct();
        return;
    }
-   if(follower->query_true_invis()) 
+   if(follower->query_true_invis())
    {
        self_destruct();
        return;
    }
-   if(present("blockerx111", follower)) 
+   if(present("blockerx111", follower))
    {
        self_destruct();
        return;
@@ -72,9 +71,6 @@ void heart_beat()
 }
 
 dest_me(){
-//   tell_room(ETO,"%^BLACK%^%^BOLD%^A shadow off to one side shimmers and disappears.",TO);
-//Removing this since the spells are now detectable through normal
-//scrying detections ~Circe~ 5/27/08
    remove();
 }
 
@@ -83,9 +79,7 @@ catch_tell(string str){
       dest_me();
       return;
    }
-
-   tell_object(caster,"%^MAGENTA%^Your shadow whispers to you:%^RESET%^   "+str);
-
+   tell_object(caster,"%^CYAN%^%^BOLD%^You observe through their senses:%^RESET%^   "+str);
 }
 
 int do_damage(string str, int i){
@@ -123,12 +117,12 @@ object casterobj,*spells = ({});
    casterobj = find_player(caster);
    if(objectp(casterobj)){
       spells += casterobj->query_property("dispellable spells");
-      for(i=0;i<sizeof(spells);i++){  
+      for(i=0;i<sizeof(spells);i++){
          if(objectp(spells[i])){
             if(!spells[i]->query_target_object()){
                if((string)spells[i]->query_spell_name() == "listening shadow"){
-                  if(!objectp(spells[i])) return notify_fail("Your listening shadow seems to have been lost.\n");
-                  tell_object(casterobj,"Something seems to be blocking your listening shadow!", TP);
+                  if(!objectp(spells[i])) return notify_fail("Your senses on them have been lost.\n");
+                  tell_object(casterobj,"Something seems to be blocking your scrying attempt!", TP);
                   spells[i]->dest_effect();
                   spells[i]->removeSpellFromCaster();
                }
