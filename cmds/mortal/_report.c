@@ -31,9 +31,6 @@ int cmd_report()
          "may need to notify a wiz.";
       tell_object(TP,"%^CYAN%^You make a small motion with your hand "+
          "to draw attention to your condition.%^RESET%^");
-      tell_room(ETP,"%^CYAN%^"+sub+" makes a small motion with "+
-         ""+TP->QP+" hand and draws attention to "+TP->QP+" "+
-         "condition.",TP);
       tell_room(ETP,""+check+"",TP);
       return 1;
 }

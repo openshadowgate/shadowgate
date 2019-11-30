@@ -377,8 +377,6 @@ void heart_beat()
                 }
             }
     }
-
-
 }
 
 void init_path()
