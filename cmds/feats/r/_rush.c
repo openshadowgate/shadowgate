@@ -52,6 +52,7 @@ void execute_feat() {
     if(!objectp(target))
     {
         object * attackers = caster->query_attackers();
+        attackers = filter_array(attackers,(:objectp($1):));
         attackers = filter_array(attackers,(:$1->query_property("rushed at")+FEATTIMER < time():));
         if(!sizeof(attackers))
         {

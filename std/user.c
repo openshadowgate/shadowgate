@@ -1753,24 +1753,25 @@ void heart_beat()
         else static_user["stance"] = 0;
     }
 
+    //There are 3 heart beats per round.
     if(objectp(TO))
     {
         if(FEATS_D->usable_feat(TO,"regeneration") ||
            query_race() == "shade")
             if(query_hp() < query_max_hp())
-                add_hp(roll_dice(1,TO->query_level())/4); //change help status effects when adjusting this
+                add_hp(roll_dice(1,TO->query_level())/12+1); //change help status effects when adjusting this
         if(query_property("fast healing"))
             if(query_hp() < query_max_hp())
-                add_hp(roll_dice(query_property("fast healing"),TO->query_level()/4)); //change help status effects when adjusting this
+                add_hp(query_property("fast healing")*roll_dice(1,TO->query_level()/12+1)); //change help status effects when adjusting this
         if(FEATS_D->usable_feat(TO,"mighty resilience") &&
            !TO->query_property("stab_resilience"))
         {
-            TO->set_property("stab_resilience",TO->query_level()/10);
+            TO->set_property("stab_resilience",(TO->query_level()+9)/10);
         }
         if(FEATS_D->usable_feat(TO,"undead graft") &&
            !TO->query_property("stab_resilience"))
         {
-            TO->set_property("stab_resilience",(TO->query_level()-1)/20);
+            TO->set_property("stab_resilience",(TO->query_level()+9)/20);
         }
         if(is_vampire())
             if(TO->is_in_sunlight())
