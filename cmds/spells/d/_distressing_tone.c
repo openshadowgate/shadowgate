@@ -39,7 +39,7 @@ void spell_effect(int prof){
         if(!objectp(attackers[i]))
             continue;
         if(!do_save(attackers[i],2))
-            "/std/effect/status/sickening"->apply_effect(attackers[i],clevel/10 + 1);
+            "/std/effect/status/sickened"->apply_effect(attackers[i],clevel/6 + 1);
     }
     spell_successful();
 }
