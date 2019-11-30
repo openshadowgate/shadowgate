@@ -57,6 +57,8 @@ void create(){
     set_monster_feats(({
                 "strength of arm",
                     "blade block",
+                    "mounted combat",
+                    "ride-by attack",
                     "light weapon",
                     }));
 

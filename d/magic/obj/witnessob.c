@@ -71,6 +71,8 @@ void heart_beat()
 }
 
 dest_me(){
+    if(objectp(caster))
+        tell_object(caster,"%^RED%^Your concentration fades.");
    remove();
 }
 
@@ -79,7 +81,7 @@ catch_tell(string str){
       dest_me();
       return;
    }
-   tell_object(caster,"%^CYAN%^%^BOLD%^You observe through their senses:%^RESET%^   "+str);
+   tell_object(caster,"%^BOLD%^%^RED%^You observe:%^RESET%^ "+str);
 }
 
 int do_damage(string str, int i){
