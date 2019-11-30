@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("garrett");
     set_spell_name("invisibility purge");
-    set_spell_level(([ "cleric" : 5, "paladin" : 4 ]));
+    set_spell_level(([ "cleric" : 5, "inquisitor" : 3 ]));
     set_spell_sphere("abjuration");
     set_spell_domain("protection");
     set_syntax("cast CLASS invisibility purge");
@@ -21,7 +21,7 @@ void create() {
     set_helpful_spell(1);
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration, amount, clevel;
     where = PLACE;
@@ -41,7 +41,7 @@ void spell_effect(int prof)
     addSpellToCaster();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if (objectp(PLACE)){
       PLACE->set_property("no invis", -1);

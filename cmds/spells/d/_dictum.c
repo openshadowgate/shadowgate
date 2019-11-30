@@ -45,7 +45,7 @@ void spell_effect()
         int duration;
         tell_room(place,"%^BOLD%^"+target->QCN+" stops for a moment with thoughtful expression.",target);
         tell_object(target,"%^BOLD%^%^You are stunned by the command.");
-        duration(2,4);
+        duration=roll_dice(2,4);
         if(do_save(target,4))
             duration = 8*roll_dice(1,4);
         target->set_paralyzed(duration,"You are stunned by command you just heard.");
