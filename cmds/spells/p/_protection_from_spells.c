@@ -67,7 +67,7 @@ void spell_effect(int prof) {
         "%^BOLD%^%^WHITE%^er%^BOLD%^%^CYAN%^s brightly, the "
         "sparks spreading across you in a brilliant wave!");
     }
-    if(target->query_property("raised resistance")){
+    if(target->query_property("raised spell damage resistance")){
         tell_object(caster,"%^BOLD%^The power is repelled forcibly.");
         tell_object(target,"%^BOLD%^The power is repelled forcibly.");
         dest_effect();
@@ -75,7 +75,7 @@ void spell_effect(int prof) {
     }
     lower = clevel/3;
     target->set_property("spell damage resistance",lower);
-    target->set_property("raised resistance",1);
+    target->set_property("raised spell damage resistance",1);
     addSpellToCaster();
     call_out("dest_effect",80 + clevel*8,lower);
 }
@@ -85,7 +85,7 @@ void dest_effect(){
     if(objectp(target))
     {
         target->set_property("spell damage resistance",(-1*lower));
-        target->remove_property("raised resistance");
+        target->remove_property("raised spell damage resistance");
         tell_room(environment(target),"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "
         "a wave of energy dissipates from the air around "+target->QCN+".%^RESET%^",target);
         tell_object(target,"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "

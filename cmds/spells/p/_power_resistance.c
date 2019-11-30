@@ -27,7 +27,7 @@ int preSpell(){
         tell_object(caster,"You have no target.");
         return 0;
     }
-    if(target->query_property("raised resistance")){
+    if(target->query_property("raised spell damage resistance")){
         tell_object(caster,"%^BOLD%^The power is repelled forcibly.");
         return 0;
     }
@@ -66,7 +66,7 @@ void spell_effect(int prof) {
 }
 
 void dest_effect(){
-    if(objectp(target)) 
+    if(objectp(target))
     {
         target->set_property("spell damage resistance",(-1*lower));
         tell_room(environment(target),"%^GREEN%^A wave of energy suddenly "+
