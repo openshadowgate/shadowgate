@@ -44,6 +44,17 @@ mixed * genoutput(object targ)
         output+=({({"Condition","%^BOLD%^%^MAGENTA%^"+targ->query_condition_string()})});
     }
 
+    {
+        object effects = targ->query_property("status_effects");
+        {
+            if(sizeof(effects))
+                effects = filter_array(effects,(:objectp($1):));
+            if(sizeof(effects))
+                output+=({({"Status",implode(map_array(effects->query_name(),
+                                        (:capitalize(replace_string($1,"effect_","")):)),", ")})});
+        }
+    }
+
     return output;
 }
 
