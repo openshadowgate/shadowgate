@@ -31,7 +31,7 @@ inherit DAEMON;
 
 #define AREA_VALUE ({36000, 48000, 60000, 72000, 88000})
 
-#define MAXSIZE 25
+#define MAXSIZE 30
 
 #define QOBJECT "/d/common/obj/misc/qobject.c"
 

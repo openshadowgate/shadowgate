@@ -31,7 +31,7 @@ inherit DAEMON;
 #define AREAS ({ LMID1, LMID2, MED, HMID1, HMID2})
 #define AREA_VALUE ({100000, 120000, 140000, 160000, 180000})
 
-#define MAXSIZE 20
+#define MAXSIZE 30
 #define QOBJECT "/d/common/obj/misc/qobject.c"
 #define OBSTORE "/d/save/quests/"+
 

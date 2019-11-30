@@ -19,8 +19,46 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
+string *query_base_classes(object obj)
+{
+    string base;
+    if(!objectp(obj)) { return ({}); }
+    base = obj->query("immortal_defender_base_class");
+    if(!base) { return ({}); }
+    return ({ base });
+}
 
-string *query_base_classes() { return ({ "fighter","paladin" }); }
+
+void remove_base_class(object obj)
+{
+    if(!objectp(obj)) { return; }
+    obj->delete("immortal_defender_base_class");
+    return;
+}
+
+
+int has_base_class_set(object obj)
+{
+    if(!objectp(obj)) { return 0; }
+    if(obj->query("immortal_defender_base_class")) { return 1; }
+    return 0;
+}
+
+int set_base_class(object obj, string choice)
+{
+    object *classes;
+    if(!objectp(obj)) { return 0; }
+    if(choice == 0)
+    {
+        obj->delete("immortal_defender_base_class");
+        return 1;
+    }
+    classes = obj->query_classes();
+    if(!sizeof(classes)) { return 0; }
+    if(member_array(choice,classes) == -1) { return 0; }
+    obj->set("immortal_defender_base_class",choice);
+    return 1;
+}
 
 int is_prestige_class() { return 1; }
 
@@ -40,18 +78,16 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    Counter Feat (WeaponAndShield Tree)\n"
-        "    20 Fighter or Paladin Levels (level adjustments considered part of required levels)\n"
-        "    20 Constitution stat, before equipment modifiers\n";
+        "    20 levels in Base Class"
+        "    Counter Feat (WeaponAndShield Tree)\n";
 
     return str;
 }
 
-
 int prerequisites(object player)
 {
     object race_ob;
-    string race;
+    string race, base;
     int adj;
     if(!objectp(player)) { return 0; }
 
@@ -60,27 +96,15 @@ int prerequisites(object player)
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
     adj = race_ob->level_adjustment(race);
-
+    base = player->query("immortal_defender_base_class");
+    if(!base) { return 0; }
+    if(!player->is_class(base)) { return 0; }
+    if((player->query_class_level(base) + adj) < 20) { return 0; }
     if(!FEATS_D->usable_feat(player,"counter")) { return 0; }
-    if(player->query_base_stats("constitution") < 20) { return 0; }
-    if(player->is_class("fighter"))
-    {
-        if( (player->query_class_level("fighter") + adj) < 20) { return 0; }
-
-        player->set("immortal_defender_base_class","fighter");
-    }
-    if(player->is_class("paladin"))
-    {
-        if( (player->query_class_level("paladin") + adj) < 20) { return 0; }
-        player->set("immortal_defender_base_class","paladin");
-    }
     return 1;
 }
 
-mapping stat_requirements(object ob)
-{
-    return ([ "constitution" : 20 ]);
-}
+mapping stat_requirements(object ob) { return base_class_ob(ob)->stat_requirements(); }
 
 int *saving_throws(object ob) { return base_class_ob(ob)->saving_throws(); }
 
@@ -91,27 +115,13 @@ string *class_feats(string myspec) { return base_class_ob(0)->class_feats(myspec
 int caster_level_calcs(object player, string the_class)
 {
     int level;
+    string base;
     if(!objectp(player)) { return 0; }
-    switch(the_class)
-    {
-        case "fighter":
-            level = player->query_class_level("fighter");
-            level += player->query_class_level("immortal_defender");
-            return level;
-        case "paladin":
-            level = player->query_class_level("paladin");
-            level += player->query_class_level("immortal_defender");
-            return level;
-        case "immortal_defender":
-            level = player->query_class_level("immortal_defender");
-            level += player->query_class_level("fighter");
-            level += player->query_class_level("paladin");
-            return level;
+    base = player->query("immortal_defender_base_class");
 
-        default:
-            return player->query_class_level(the_class);
-    }
-    return 0;
+    level = player->query_class_level(base);
+    level += player->query_class_level("immortal_defender");
+    return level;
 }
 
 mapping class_featmap(string myspec) {
