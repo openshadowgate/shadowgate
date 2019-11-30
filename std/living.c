@@ -335,6 +335,50 @@ void heart_beat()
             }
         }
     }
+
+    //There are 3 heart beats per round. Adjust values accordingly.
+    if(objectp(TO))
+    {
+        if(FEATS_D->usable_feat(TO,"regeneration") ||
+           query_race() == "shade")
+            if(query_hp() < query_max_hp())
+                add_hp(roll_dice(1,TO->query_level())/6+1); //change help status effects when adjusting this
+        if(query_property("fast healing"))
+            if(query_hp() < query_max_hp())
+                add_hp(query_property("fast healing")*roll_dice(1,TO->query_level()/6+1)); //change help status effects when adjusting this
+        if(FEATS_D->usable_feat(TO,"mighty resilience") &&
+           !TO->query_property("stab_resilience"))
+        {
+            TO->set_property("stab_resilience",(TO->query_level()+9)/10);
+        }
+        if(FEATS_D->usable_feat(TO,"undead graft") &&
+           !TO->query_property("stab_resilience"))
+        {
+            TO->set_property("stab_resilience",(TO->query_level()+9)/20);
+        }
+        if(is_vampire())
+            if(TO->is_in_sunlight())
+            {
+                int todamage = query_max_hp()/6 +1;
+
+                if(todamage > query_property("fire resistance") &&
+                   !query_property("sunlight_umbrella"))
+                {
+                    if(TO->query_hp()<-(TO->query_max_hp()*4/5))
+                    {
+                        TO->add_death("Sunlight");
+                        TO->die();
+                    }
+                    else
+                    {
+                        TO->cause_typed_damage(TO,"torso",todamage,"fire");
+                        tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
+                    }
+                }
+            }
+    }
+
+
 }
 
 void init_path()
