@@ -35,7 +35,7 @@ void spell_effect(int prof){
         if(attackers[i]->query_level()<clevel && !mind_immunity_damage(attackers[i]))
         {
             tell_room(place,"%^MAGENTA%^Spirals capitvate "+attackers[i]+"!");
-            "/std/effect/confused"->confuse(target,clevel/5 + 1,caster);
+            "/std/effect/status/confused"->apply_effect(target,clevel/5 + 1,caster);
         }
     }
     spell_successful();

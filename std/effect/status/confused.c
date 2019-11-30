@@ -38,7 +38,8 @@ void status_effect()
 
 void maintain_confusion()
 {
-    if(!objectp(caster)||!objectp(target))
+    if(!objectp(caster)||
+       !objectp(target))
         dest_effect();
 
     if(counter<0)
