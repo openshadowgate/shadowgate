@@ -76,7 +76,7 @@ void spell_effect()
 
     if(ldiff>9)
     {
-        if(!(do_dave(target,4)||
+        if(!(do_save(target,4)||
              target->query_property("no death")))
         {
             tell_room(place,"%^BOLD%^Upon hearing the words "+target->QCN+" simply explodes!",target);

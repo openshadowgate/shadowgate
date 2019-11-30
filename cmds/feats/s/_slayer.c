@@ -13,7 +13,10 @@ void create() {
     feat_name("slayer");
     feat_syntax("slayer JUDGEMENT");
     feat_prereq("Inquisitor L17");
-    feat_desc("This feat represents inquisitors specialization. He can choose a type of judgement to empower: juch judgement will be used as if inqusitor was five levels above.");
+    feat_desc("This feat represents inquisitors specialization. He can choose a type of judgement to empower: juch judgement will be used as if inqusitor was five levels above.
+
+To change slayer judgement use %^ORANGE%^<slayer %^ORANGE%^%^ULINE%^JUDGEMENT%^RESET%^%^ORANGE%^>%^RESET%^.
+To check what is currently set just type %^ORANGE%^<slayer>%^RESET%^.");
     permanent(1);
     allow_tripped(1);
 }
@@ -22,6 +25,12 @@ int cmd_slayer(string args)
 {
     int cancastflag;
     string * myclasses, myclass;
+
+    if(!args)
+    {
+        write("%^BOLD%^%^WHITE%^Your current slayer judgement is "+TP->query("slayer_judgement")+".");
+        return 1;
+    }
 
     if(TP->query("slayer_change") > time() - 60*60*24*7)
     {
