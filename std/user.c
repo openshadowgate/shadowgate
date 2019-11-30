@@ -1753,7 +1753,7 @@ void heart_beat()
         else static_user["stance"] = 0;
     }
 
-    //There are 3 heart beats per round.
+    //There are 3 heart beats per round. Adjust values accordingly.
     if(objectp(TO))
     {
         if(FEATS_D->usable_feat(TO,"regeneration") ||
