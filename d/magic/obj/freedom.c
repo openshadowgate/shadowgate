@@ -28,17 +28,17 @@ void init(){
 
 void freeme(){
    if(!objectp(ETO)){
-      return; 
+      return;
    }
    if(!(string)ETO->query_paralyzed() && !(string)ETO->query_tripped()){
 	tell_object(TP,"%^BOLD%^%^CYAN%^You are not tripped or paralyzed!%^RESET%^");
-      return; 
+      return;
    }
    tell_object(TP,"%^BOLD%^You release the focus hidden within your mind, "
       "refusing to bow to the force that tries to contain you!%^RESET%^");
    tell_room(EETO,"%^BOLD%^With a resolute expression, "+ETOQCN+" casts off "
       "the forces that try to contain "+ETO->QO+"!%^RESET%^",ETO);
-   ETO->set_paralyzed(0);
+   ETO->remove_paralyzed();
    ETO->set_tripped(0);
    call_out("end_it",1);
    return;
@@ -48,8 +48,8 @@ void freeme(){
 void heart_beat(){
    if(FLAG) return;
    if(!objectp(mycaster)) {
-      call_out("end_it",1); 
-      return; 
+      call_out("end_it",1);
+      return;
    }
 
    if(mycaster->query_paralyzed() && !(mycaster->query_property("memorizing"))){
@@ -57,8 +57,8 @@ void heart_beat(){
          "you out of your paralyzation!%^RESET%^");
       mycaster->set_paralyzed(0);
       FLAG = 1;
-      call_out("end_it",1); 
-      return; 
+      call_out("end_it",1);
+      return;
    }
 
    if(mycaster->query_tripped() && !(mycaster->query_property("memorizing"))){
@@ -66,8 +66,8 @@ void heart_beat(){
          "you out of your paralyzation!%^RESET%^");
       mycaster->set_tripped(0);
       FLAG = 1;
-      call_out("end_it",1); 
-      return; 
+      call_out("end_it",1);
+      return;
    }
    return;
 }*/
