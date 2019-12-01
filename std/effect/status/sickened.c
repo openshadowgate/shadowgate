@@ -16,6 +16,11 @@ int status_effect()
 {
     int i;
 
+    if(target->query_property("effect_sickened")>4)
+        return;
+
+    target->set_property("effect_sickened",1);
+
     tell_object(target,"%^BLUE%^You feel sickened.%^RESET%^");
     tell_room(ENV(target),"%^BLUE%^"+target->QCN+" looks sickened.", target);
 
@@ -43,6 +48,7 @@ int dest_effect()
         target->add_attack_bonus(power);
         target->add_damage_bonus(power);
         target->add_saving_bonus("all",power);
+        target->set_property("effect_sickened",-1);
     }
     ::dest_effect();
     return 1;

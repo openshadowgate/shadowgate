@@ -38,13 +38,14 @@ int disruptor_func(object obj)
 
     if(targ->query_level() < pspell->query_clevel() - 5)
         if(tp->is_undead() ^ targ->is_undead())
-            if(!(pspell->do_save(targ,6) && targ->query_property("no death")))
-            {
-                tell_object(tp,"%^CYAN%^The fire on your burns %^CYAN%^ burns "+targ->QCN+"%^CYAN%^ as you strike "+targ->QO+"%^CYAN%^.%^RESET%^");
-                tell_object(targ,"%^CYAN%^The fire on "+tp->QCN+"%^CYAN%^'s "+obj->query_name()+"%^CYAN%^ burns as it strikes you!%^RESET%^");
-                tell_room(etp,"%^CYAN%^The fire on "+tp->QCN+"%^CYAN%^'s "+obj->query_name()+"%^CYAN%^ burns "+targ->QCN+"%^CYAN%^ as it strikes "+targ->QO+"%^CYAN%^.%^RESET%^",({tp,targ}));
-                targ->cause_typed_damage(targ, targ->return_target_limb(), targ->query_max_hp()*2,"divine");
-            }
+            if(!random(4))
+                if(!(pspell->do_save(targ,6)))
+                {
+                    tell_object(tp,"%^CYAN%^The fire on your weapon %^CYAN%^ burns "+targ->QCN+"%^CYAN%^ as you strike "+targ->QO+"%^CYAN%^.%^RESET%^");
+                    tell_object(targ,"%^CYAN%^The fire on "+tp->QCN+"%^CYAN%^'s "+obj->query_name()+"%^CYAN%^ burns as it strikes you!%^RESET%^");
+                    tell_room(etp,"%^CYAN%^The fire on "+tp->QCN+"%^CYAN%^'s "+obj->query_name()+"%^CYAN%^ burns "+targ->QCN+"%^CYAN%^ as it strikes "+targ->QO+"%^CYAN%^.%^RESET%^",({tp,targ}));
+                    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1,8),"divine");
+                }
 
     return 1;
 

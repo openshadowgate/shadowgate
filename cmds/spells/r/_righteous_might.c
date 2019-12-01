@@ -1,80 +1,74 @@
-#include <std.h>
+#include <spell.h>
+#include <daemons.h>
 #include <magic.h>
-
 inherit SPELL;
 
-int bonus;
+int size;
 
-void create(){
+void create()
+{
     ::create();
-    set_author("circe");
     set_spell_name("righteous might");
-    set_spell_level(([ "cleric" : 2 ,]));
+    set_spell_level(([ "cleric" : 2, "inquisitor" : 5 ]));
     set_spell_sphere("alteration");
     set_spell_domain("strength");
     set_syntax("cast CLASS righteous might");
-    set_description("By calling upon his deity's aid, the caster imbues himself with divine might.  The caster will find "
-"it both easier to hit and to harm those he fights.  The spell does not stack with other bless-type spells.");
+    set_description("Your height immediately doubles, and your weight increases by a factor of eight. This increase changes your size category to the next larger one. You gain a +4 size bonus to Strength and Constitution and take a -2 penalty to your Dexterity. You gain natural armor bonus of 2. Any equipment you wear or wield will grow with you as long as you wear it.");
     set_verbal_comp();
     set_somatic_comp();
-	set_helpful_spell(1);
+    set_helpful_spell(1);
 }
 
-int preSpell(){
-    if(!target) { target = caster; }
-    if(target->query_property("blessed") || target->query_property("blighted")){
-        tell_object(caster,"%^BOLD%^%^BLUE%^Your target is already "+
-           "gifted with a similar spell.%^RESET%^");
-        return 0;
-//won't stack with bless or blight
+
+void spell_effect(int prof)
+{
+    if(!target)
+        target = caster;
+
+    if (target->query_property("enlarged"))
+    {
+        tell_object(caster,"The spell is repelled by its own magic.");
+        TO->remove();
     }
-    return 1;
-}
 
-void spell_effect(int prof){
-    int duration;
+    if(target->query_size_bonus())
+    {
+        tell_object(caster,"The spell is repelled by similar magic.");
+        TO->remove();
+    }
 
-    target = caster; // switching to self-cast only, balanced as per strength of stone.
-    duration = (ROUND_LENGTH * 20) * clevel;
-    bonus = (clevel/15)+1;
-    if(bonus > 4) bonus = 4;
-
-//    if(target == caster){
-        tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" calls out "+
-           "in a booming voice for "+caster->QP+" deity's aid, and "+
-           "raw %^RED%^power%^BLUE%^ radiates from "+caster->QO+"!%^RESET%^",target);
-        tell_object(target,"%^BOLD%^%^BLUE%^With a booming voice, "+
-           "you call for "+(string)caster->query_diety()+"'s aid and feel %^RED%^power "+
-           "%^BLUE%^flooding your sinews!%^RESET%^");
-/*    }else{
-        tell_object(caster,"%^BOLD%^%^BLUE%^With a booming voice, "+
-           "you call for "+(string)caster->query_diety()+"'s aid "+
-           "and send %^RED%^power %^BLUE%^flooding into "+target->QCN+"!%^RESET%^");
-    	  tell_object(target,"%^BOLD%^%^BLUE%^"+caster->QCN+" calls out "+
-           "in a booming voice for "+caster->QP+" deity's aid, "
-           "and you feel %^RED%^power %^BLUE%^flooding your sinews!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" calls out "+
-           "in a booming voice for "+caster->QP+" deity's aid, and "+
-           "raw %^RED%^power%^BLUE%^ floods into "+target->QCN+"!%^RESET%^",({target,caster}));
-    }*/
-    target->add_damage_bonus(bonus);
-    target->add_attack_bonus(bonus);
-    target->set_property("empowered",bonus);
-    addSpellToCaster();
-    target->set_property("spelled",({TO}));
-    target->set_property("blessed",1); //using this property so it won't stack with similar spells
-    call_out("dest_effect",duration);
     spell_successful();
+
+    tell_object(target,"%^RED%^You grow twice in size and feel more powerful!");
+    tell_room(place,"%^RED%^"+target->QCN+" grows twice in size!", target);
+
+    target->set_property("added short",({"%^RED%^ (giant)%^RESET%^"}));
+    target->set_size_bonus(1);
+    target->add_ac_bonus(2);
+    target->add_stat_bonus("strength",4);
+    target->add_stat_bonus("constitution",4);
+    target->add_stat_bonus("dexterity",-2);
+    target->set_property("spelled", ({TO}) );
+    target->set_property("enlarged",1);
+    call_out("dest_effect",ROUND_LENGTH*clevel);
+    addSpellToCaster();
 }
 
-void dest_effect(){
-    if(objectp(target)){
-        tell_object(target,"%^CYAN%^You feel weak as the power "+
-           "granted you fades away.%^RESET%^");
-        target->add_damage_bonus(-1*bonus);
-        target->add_attack_bonus(-1*bonus);
-        target->set_property("empowered",(-1*bonus));
-        target->set_property("blessed",-1);
+
+void dest_effect()
+{
+    if(objectp(target))
+    {
+        target->set_size_bonus(0);
+        target->add_ac_bonus(-2);
+        target->remove_property_value("spelled", ({TO}) );
+        target->add_stat_bonus("strength",-4);
+        target->add_stat_bonus("constitution",-4);
+        target->add_stat_bonus("dexterity",2);
+        tell_object(target, "%^RED%^You shrink back to normal!");
+        tell_room(environment(target),"%^RED%^"+target->QCN+" shrinks back to normal size.", target );
+        target->remove_property("added short",({"%^RED%^ (giant)%^RESET%^"}));
+        target->remove_property("enlarged");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

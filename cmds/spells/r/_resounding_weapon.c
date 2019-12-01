@@ -5,18 +5,19 @@ inherit SPELL;
 int lower;
 object weap;
 
-#define DISRUPTOR "/d/magic/obj/weap_effects/disruptor"
+#define DISRUPTOR "/d/magic/obj/weap_effects/resounder"
 
 void create()
 {
     ::create();
-    set_spell_name("disrupting weapon");
-    set_spell_level(([ "inquisitor" : 5, "cleric" : 5 ]));
-    set_spell_sphere("alteration");
-    set_syntax("cast CLASS disrupting weapon on WEAPON");
+    //AKA resounding blow, but will be useless in sg for just one blow
+    set_spell_name("resounding weapon");
+    set_spell_level(([ "inquisitor" : 5, "paladin" : 4 ]));
+    set_spell_sphere("invocation_evocation");
+    set_syntax("cast CLASS resounding weapon on WEAPON");
     set_damage_desc("divine");
-    set_description("This spell makes a melee weapon deadly to undead. Any undead creature of level equal to or less than your caster level must succeed on a will save or be harmed greatly if struck in combat with this weapon. If the caster is undead, the effect is reversed and will harm living. A successful save will negate the damage.");
-    set_save("will");
+    set_description("This spell makes a weapon vibrating impsossibly fast. Any creature struck with it will have a chance to recieve sonic damage. A successful save will negate the damage.");
+    set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed(1);
@@ -59,9 +60,9 @@ void spell_effect()
 
         weap = targ;
 
-        tell_object(caster, "A layer of a%^BOLD%^rca%^RESET%^%^CYAN%^n%^BOLD%^e %^RESET%^%^CYAN%^f%^BOLD%^l%^RESET%^%^CYAN%^a%^BOLD%^me%^RESET%^%^CYAN%^s appears on %^WHITE%^"+targ->query_short()+" %^CYAN%^as you move your hand along it.");
-        tell_room(place, "A layer of a%^BOLD%^rca%^RESET%^%^CYAN%^n%^BOLD%^e %^RESET%^%^CYAN%^f%^BOLD%^l%^RESET%^%^CYAN%^a%^BOLD%^me%^RESET%^%^CYAN%^s appears on %^WHITE%^"+targ->query_short()+" %^CYAN%^as %^GREEN%^"+caster->QCN+" %^CYAN%^moves %^GREEN%^"+caster->QP+" %^CYAN%^hand along it.",({caster}));
-        targ->set_property("added short",({ "%^RESET%^%^CYAN%^ %^BOLD%^{%^RESET%^%^CYAN%^ablaze%^BOLD%^}%^RESET%^" }));
+        tell_object(caster, "%^CAYN%^"+targ->query_short()+" begins vibrating %^CYAN%^as you move your hand along it.");
+        tell_room(place, "%^CYAN"+targ->query_short()+"%^CYAN%^ begins vibrating as %^GREEN%^"+caster->QCN+" %^CYAN%^moves %^GREEN%^"+caster->QP+" %^CYAN%^hand along it.",({caster}));
+        targ->set_property("added short",({ "%^RESET%^%^CYAN%^ %^BOLD%^{%^RESET%^%^CYAN%^vibrating%^BOLD%^}%^RESET%^" }));
         call_out("dest_effect",ROUND_LENGTH*6*clevel);
         caster->set_property("spelled", ({TO}) );
         addSpellToCaster();
