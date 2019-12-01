@@ -14,7 +14,6 @@ void create() {
     set_description("You compel the target to beg for forgiveness. On a failed save, the target cowers with fear. On a successful save, it is shaken for 1 round.  A creature who worships the same god as you takes a penalty on its saving shrow.");
     set_verbal_comp();
     set_somatic_comp();
-    set_target_required(1);
     mental_spell(1);
     set_save("will");
 }
@@ -32,13 +31,6 @@ void spell_effect(int prof){
 
     caster->force_me("yell %^RED%^%^BOLD%^BEG FORGIVENESS.");
 
-    if(mind_immunity_damage(target))
-    {
-        spell_successful();
-        dest_effect();
-        return;
-    }
-
     spell_successful();
     bonus = (int)caster->query_stats("intelligence");
     bonus = (bonus - 10) / 2;
@@ -51,6 +43,12 @@ void spell_effect(int prof){
 
     foreach(target in attackers)
     {
+        if(mind_immunity_damage(target))
+        {
+            spell_successful();
+            dest_effect();
+            continue;
+        }
         if(do_save(target,bonus))
         {
             tell_object(target, "%^RESET%^%^RED%^You fight compulsion to fall onto your knees.%^RESET%^");

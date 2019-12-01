@@ -123,7 +123,7 @@ void validate_book(object holder) {
         if(member_array(spell,allspells) == -1)
         {
             map_delete(spells,spell);
-            tell_object(holder,"Spellbook vaping outdated spell: "+spell+".");
+            tell_object(holder,"Spellbook vaping non-existant spell: "+spell+".");
         }
     }
 }

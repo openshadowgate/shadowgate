@@ -9,9 +9,9 @@ int duration;
 
 create() {
     ::create();
-    set_spell_name("monster summoning 1");
+    set_spell_name("monster summoning i");
     set_spell_level(([ "mage" : 1, "bard" : 1, "cleric" : 1, "paladin":1 ]));
-    set_syntax("cast CLASS monster summoning 1");
+    set_syntax("cast CLASS monster summoning i");
     set_spell_sphere("conjuration_summoning");
     set_description("This spell will summon astral defenders of equivalent power to protect the caster. They will react aggressively to anyone attempting to harm the caster. They will fight till slain, and when the casting time is up, the monsters will vanish.");
 
@@ -55,9 +55,9 @@ int spell_effect(int prof)
         monster->set_mlevel("fighter",clevel);
         monster->set_guild_level("fighter",clevel);
         monster->set_attacks_num(2);
-        monster->set_hd(clevel,1);
+        monster->set_hd(clevel,2);
         monster->set_p_desc(query_spell_level(spell_type)-1);
-        monster->set_hp((query_spell_level(spell_type)*2+clevel)*10+20);
+        monster->set_hp((query_spell_level(spell_type)*2+clevel)*12+20);
         monster->set_property("spelled",({TO}));
         monster->set_property("spell_creature",TO);
         monster->set_property("spell",TO);

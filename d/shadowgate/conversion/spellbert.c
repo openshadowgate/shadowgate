@@ -66,7 +66,7 @@ DESC
   set_mlevel("mage",16);
   set_overall_ac(-80);
   set_property("magic resistance",800);
-  set_spells(({"color spray","hideous laughter","acid arrow","sleep","monster summoning 2"}));
+  set_spells(({"color spray","hideous laughter","acid arrow","sleep","monster summoning ii"}));
   set_spell_chance(90);
   set_size(1); 
   set_wielding_limbs( ({ "right hand","left hand" }) );

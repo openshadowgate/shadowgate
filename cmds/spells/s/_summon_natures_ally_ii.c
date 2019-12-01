@@ -5,9 +5,9 @@ inherit "/cmds/spells/s/summon_natures_ally.c";
 
 void create() {
     ::create();
-    set_spell_name("summon natures ally 2");
+    set_spell_name("summon natures ally ii");
     set_spell_level(([ "ranger" : 2,"druid" : 2 ]));
-    set_syntax("cast CLASS summon natures ally 2");
+    set_syntax("cast CLASS summon natures ally ii");
 }
 
 object createMon(){

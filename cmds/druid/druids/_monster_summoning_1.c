@@ -14,7 +14,7 @@ object *mons;
 create()
 {
     ::create();
-    set_spell_name("monster summoning 1");
+    set_spell_name("monster summoning i");
     set_spell_level(3);
     set_spell_type("wizard");
     set_spell_sphere("conjuration_summoning");
@@ -230,7 +230,7 @@ int help()
 {
     write(
 @HELP
-      Syntax: cast monster summoning 1
+      Syntax: cast monster summoning i
 
 	This spell will summon 2d4 relatively weak monsters.  After
 appearing, the monsters will immediately attack all of the spell

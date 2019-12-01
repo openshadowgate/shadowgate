@@ -14,7 +14,7 @@ object *mons;
 create()
 {
     ::create();
-    set_spell_name("monster summoning 3");
+    set_spell_name("monster summoning iii");
     set_spell_level(5);
     set_spell_type("wizard");
     set_spell_sphere("conjuration_summoning");
@@ -232,7 +232,7 @@ int help()
 {
     write(
 @HELP
-      Syntax: cast monster summoning 3
+      Syntax: cast monster summoning iii
 
      This spell will summon up to four monsters total.  After
 appearing, the monsters will immediately attack all of the spell

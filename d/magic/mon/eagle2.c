@@ -1,7 +1,7 @@
 // Created by DemonForce, for ShadowGate
 //  Coded 16 nov., 1995
 // Eagle originally made by Demonforce modified for
-// monster summoning 2 spell on 1/23/96
+// monster summoning ii spell on 1/23/96
 
 #include "summoned_monster.h"
 inherit MONSTER;
