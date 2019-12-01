@@ -83,8 +83,7 @@ int caster_level_calcs(object player, string the_class)
 
     if(member_array(the_class,query_base_classes())!=-1)
     {
-        level = player->query_class_level(the_class);
-        level += player->query_class_level("rage_prophet");
+        level = player->query_character_level();
         if(player->query_property("raged"))
             level += 6;
     }
