@@ -120,8 +120,9 @@ int caster_level_calcs(object player, string the_class)
     if(!objectp(player)) { return 0; }
     base = player->query("arcane_trickster_base_class");
 
-    level = player->query_class_level(base)+player->query_class_level("thief");
-    level += player->query_class_level("arcane_trickster");
+    level = player->query_class_level(the_class);
+    if(member_array(the_class,query_base_classes())!=-1)
+        level += player->query_class_level("arcane_trickster");
     return level;
 }
 
