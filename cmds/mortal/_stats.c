@@ -110,7 +110,7 @@ int gain_stat(object ob,string stat)
 
     total_exp = (int)ob->query_exp();
     exp       = EXP_NEEDED[(int)ob->query_character_level()];
-    cost      = to_int(to_float(exp) * 0.25);
+    cost      = to_int(to_float(exp) * 0.10);
 
     if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
     {

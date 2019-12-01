@@ -83,8 +83,8 @@ void spell_effect()
             wpn->remove_property("temp_oiled");
         }
         wpn->set_property("temp_oiled","damage bonus acid 5");
-        tell_object(caster, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_short()+" %^RESET%^%^GREEN%^as you move your hand along it.%^RESET%^");
-        tell_room(place, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_short()+" %^RESET%^%^GREEN%^as "+caster->QCN+" moves "+caster->QP+" hand along it.%^RESET%^",({caster}));
+        tell_object(caster, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_name()+" %^RESET%^%^GREEN%^as you move your hand along it.%^RESET%^");
+        tell_room(place, "%^RESET%^%^GREEN%^A layer of %^BOLD%^%^GREEN%^p%^BLACK%^ois%^GREEN%^o%^GREEN%^n%^BLACK%^o%^GREEN%^u%^BLACK%^s %^BLACK%^ve%^GREEN%^n%^BLACK%^o%^GREEN%^m%^RESET%^%^GREEN%^ appears on%^RESET%^ "+wpn->query_name()+" %^RESET%^%^GREEN%^as "+caster->QCN+" moves "+caster->QP+" hand along it.%^RESET%^",({caster}));
         dest_effect();
         return;
     }

@@ -13,7 +13,7 @@ void create() {
     feat_name("slayer");
     feat_syntax("slayer JUDGEMENT");
     feat_prereq("Inquisitor L17");
-    feat_desc("This feat represents inquisitors specialization. He can choose a type of judgement to empower: juch judgement will be used as if inqusitor was five levels above.
+    feat_desc("This feat represents inquisitors specialization. He can choose a type of judgement to empower: such judgement will be used as if inqusitor was five levels above.
 
 To change slayer judgement use %^ORANGE%^<slayer %^ORANGE%^%^ULINE%^JUDGEMENT%^RESET%^%^ORANGE%^>%^RESET%^.
 To check what is currently set just type %^ORANGE%^<slayer>%^RESET%^.");

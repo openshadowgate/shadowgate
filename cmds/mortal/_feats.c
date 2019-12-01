@@ -35,7 +35,7 @@ int calculate_feat_cost(object ob) {
     if(level == 1) { return 0; }
     if(!avatarp(ob))
     {
-        exp = EXP_NEEDED[level + 1]/8;
+        exp = EXP_NEEDED[level + 1]/10;
 //        exp = EXP_NEEDED[level + 1] - EXP_NEEDED[level];
         return exp;
     }
