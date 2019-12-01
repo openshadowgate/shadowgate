@@ -12,7 +12,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("blindness");
-    set_spell_level(([ "mage" : 2, "bard" : 3 ]));
+    set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 3, "paladin" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS blindness on TARGET");
     set_description("By means of this spell, the caster attempts to steal the target's vision for a short while. It is "
@@ -20,10 +20,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    set_save("will");
-    set_components(([
-      "mage" : ([ "bitumen" : 1, ]),
-    ]));
+    set_save("fort");
 }
 
 string query_cast_string() {
