@@ -3,18 +3,11 @@
 
 inherit DAEMON;
 
-int clevel;
-
-int apply_to_weap(object weapon)
-{
-
-
-    return 1;
-}
-
 int disruptor_func(object obj)
 {
     object targ, tp, etp;
+    mapping winfo;
+    int clevel, expiry;
 
     if(!objectp(obj))
         return 0;
@@ -27,6 +20,19 @@ int disruptor_func(object obj)
 
     if(!objectp(etp))
         return 0;
+
+    winfo = obj->query_property("temp_hit_bonus");
+
+    clevel = winfo["clevel"];
+    expiry = winfo["expiry"];
+
+    if(expiry > time() || !expiry)
+    {
+        obj->remove_property_value("added short",({ "%^CYAN%^ (ablaze)%^RESET%^" }));
+        obj->remove_property("temp_hit_bonus");
+        return 0;
+    }
+
     return 1;
 
 }
