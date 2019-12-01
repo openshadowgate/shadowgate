@@ -20,7 +20,40 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "barbarian", "cleric", "inquisitor", "druid", "ranger", "paladin" }); }
+string *query_base_classes(object obj)
+{
+    string base;
+    if(!objectp(obj)) { return ({}); }
+    base = obj->query("rage_prophet_base_class");
+    if(!base) { return ({}); }
+    return ({ base });
+}
+
+int has_base_class_set(object obj)
+{
+    if(!objectp(obj)) { return 0; }
+    if(obj->query("rage_prophet_base_class")) { return 1; }
+    return 0;
+}
+
+int set_base_class(object obj, string choice)
+{
+    object *classes;
+    if(!objectp(obj)) { return 0; }
+    if(choice == 0)
+    {
+        obj->delete("rage_prophet_base_class");
+        return 1;
+    }
+    classes = obj->query_classes();
+    if(!sizeof(classes)) { return 0; }
+    if(member_array(choice,classes) == -1) { return 0; }
+    if(member_array(choice,({"cleric","druid","inquisitor","paladin","ranger"})) == -1) { return 0; }
+    obj->set("rage_prophet_base_class",choice);
+    return 1;
+}
+
+int requires_base_class_set() { return 1; } // for prestige classes that allow many different base classes
 
 int is_prestige_class() { return 1; }
 
@@ -62,6 +95,11 @@ int prerequisites(object player)
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
 
+    base = player->query("rage_prophet_base_class");
+    if(!base) { return 0; }
+    if(!player->is_class(base)) { return 0; }
+    if((player->query_class_level(base) + adj) < 10) { return 0; }
+
     if((player->query_class_level("barbarian") + adj) < 10) { return 0; }
     if(!FEATS_D->usable_feat(player,"spell focus")) { return 0; }
     return 1;
@@ -81,14 +119,8 @@ int caster_level_calcs(object player, string the_class)
     string base;
     if(!objectp(player)) { return 0; }
 
-    if(member_array(the_class,query_base_classes())!=-1)
-    {
-        level = player->query_character_level();
-        if(player->query_property("raged"))
-            level += 6;
-    }
-    else
-        level = player->query_class_level(the_class);
+    level = player->query_class_level(the_class);
+    level += player->query_class_level("rage_prophet");
 
     return level;
 }

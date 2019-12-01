@@ -24,7 +24,14 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","cleric","druid","thief", "bard","inquisitor" }); }
+string *query_base_classes(object obj)
+{
+    string base;
+    if(!objectp(obj)) { return ({}); }
+    base = obj->query("arcane_trickster_base_class");
+    if(!base) { return ({}); }
+    return ({ base, "thief" });
+}
 
 int has_base_class_set(object obj)
 {
@@ -120,9 +127,11 @@ int caster_level_calcs(object player, string the_class)
     if(!objectp(player)) { return 0; }
     base = player->query("arcane_trickster_base_class");
 
-    level = player->query_class_level(the_class);
-    if(member_array(the_class,query_base_classes())!=-1)
-        level += player->query_class_level("arcane_trickster");
+    if(the_class=="thief")
+        level = player->query_class_level("thief");
+    if(the_class==base)
+        level = player->query_class_level(base);
+    level += player->query_class_level("arcane_trickster");
     return level;
 }
 
