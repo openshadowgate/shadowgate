@@ -37,6 +37,9 @@ void spell_effect()
 
         //tell_object(caster,":"+name);
 
+        if(name == caster->query_name())
+            continue;
+
         who = capitalize(article(who))+" "+who;
 
         tdiff=(time()-atoi(time))/20/60;
