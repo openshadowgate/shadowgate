@@ -51,6 +51,9 @@ void spell_effect()
     lower = 4*clevel;
 
     target->set_property("fester",lower);
+
+    target->set_property("spelled", ({TO}) );
+    addSpellToCaster();
     call_out("dest_effect",clevel*ROUND_LENGTH,lower);
 }
 

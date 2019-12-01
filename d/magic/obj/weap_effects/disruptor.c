@@ -1,13 +1,13 @@
 #include <std.h>
-#include <daemon.h>
+#include <daemons.h>
 
 inherit DAEMON;
 
 int disruptor_func(object obj)
 {
     object targ, tp, etp;
+    object pspell;
     mapping winfo;
-    int clevel, expiry;
 
     if(!objectp(obj))
         return 0;
@@ -23,16 +23,39 @@ int disruptor_func(object obj)
 
     winfo = obj->query_property("temp_hit_bonus");
 
-    clevel = winfo["clevel"];
-    expiry = winfo["expiry"];
+    pspell = winfo["spell"];
 
-    if(expiry > time() || !expiry)
+    if(!objectp(pspell))
     {
-        obj->remove_property_value("added short",({ "%^CYAN%^ (ablaze)%^RESET%^" }));
-        obj->remove_property("temp_hit_bonus");
+        remove_prop(obj);
         return 0;
     }
 
+    targ = tp->query_current_attacker();
+
+    if(!objectp(targ))
+        return 0;
+
+    if(targ->query_level() < pspell->query_clevel() - 5)
+        if(tp->is_undead() ^ targ->is_undead())
+            if(!(pspell->do_save(targ,6) && targ->query_property("no death")))
+            {
+                tell_object(tp,"%^CYAN%^The fire on your burns %^CYAN%^ burns "+targ->QCN+"%^CYAN%^ as you strike "+targ->QO+"%^CYAN%^.%^RESET%^");
+                tell_object(targ,"%^CYAN%^The fire on "+tp->QCN+"%^CYAN%^'s "+obj->query_name()+"%^CYAN%^ burns as it strikes you!%^RESET%^");
+                tell_room(etp,"%^CYAN%^The fire on "+tp->QCN+"%^CYAN%^'s "+obj->query_name()+"%^CYAN%^ burns "+targ->QCN+"%^CYAN%^ as it strikes "+targ->QO+"%^CYAN%^.%^RESET%^",({tp,targ}));
+                targ->cause_typed_damage(targ, targ->return_target_limb(), targ->query_max_hp()*2,"divine");
+            }
+
     return 1;
 
+}
+
+void remove_prop(object obj)
+{
+    obj->remove_property_value("added short",({ "%^RESET%^%^CYAN%^ %^BOLD%^{%^RESET%^%^CYAN%^ablaze%^BOLD%^}%^RESET%^" }));
+    obj->remove_property("temp_hit_bonus");
+    if(userp(environment(obj)))
+    {
+        tell_object(environment(obj),"%^CYAN%^Arcane flames disappear from "+obj->query_name()+".");
+    }
 }

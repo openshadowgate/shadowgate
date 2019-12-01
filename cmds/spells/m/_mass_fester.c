@@ -45,8 +45,11 @@ void spell_effect()
         atttracker+=({target});
 
         target->set_property("fester",lower);
+        target->set_property("spelled", ({TO}) );
     }
     tell_room(place,"%^MAGENTA%^The place gets a little cold...");
+
+    addSpellToCaster();
     call_out("dest_effect",clevel*ROUND_LENGTH,lower);
 }
 
