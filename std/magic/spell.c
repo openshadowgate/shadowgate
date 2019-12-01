@@ -1834,12 +1834,6 @@ void define_clevel()
         if(spell_type == caster->query("eldritch_knight_base_class"))
             clevel = caster->query_character_level();
 
-    if (FEATS_D->usable_feat(caster, "ragecaster"))
-    {
-        clevel = caster->query_character_level();
-        if(caster->query_property("raged"))
-            clevel += 6;
-    }
     if((int)caster->query_property("empowered"))
         clevel += (int)caster->query_property("empowered");
     clevel = clevel<0?1:clevel;

@@ -43,8 +43,8 @@ void spell_effect(int prof){
     bonus = (int)caster->query_stats("intelligence");
     bonus = (bonus - 10) / 2;
     if(target->query_diety() == caster->query_diety())
-        bonus += 6;
-    bonus = -bonus;
+        bonus += 8;
+    bonus = -bonus;//negative bonus is bonus to you, positive to them
 
     if(do_save(target,bonus))
     {

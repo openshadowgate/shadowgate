@@ -20,7 +20,7 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "barbarian" }); }
+string *query_base_classes() { return ({ "barbarian", "cleric", "inquisitor", "druid", "ranger", "paladin" }); }
 
 int is_prestige_class() { return 1; }
 
@@ -40,7 +40,8 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Barbarian Levels\n"
+        "    10 Barbarian Levels\n"
+        "    10 Cleric, Druid, Inquisitor, Druid, Ranger or Paladin Levels\n"
         "    Spell focus\n";
 
     return str;
@@ -79,16 +80,16 @@ int caster_level_calcs(object player, string the_class)
     int level;
     string base;
     if(!objectp(player)) { return 0; }
-        switch(the_class)
+
+    if(member_array(the_class,query_base_classes())!=-1)
     {
-        case "barbarian":
-        case "rage_prophet":
-            level = player->query_class_level("barbarian");
-            level += player->query_class_level("rage_prophet");
-            return level;
-        default:
-            return player->query_class_level(the_class);
+        level = player->query_class_level(the_class);
+        level += player->query_class_level("rage_prophet");
+        if(player->query_property("raged"))
+            level += 6;
     }
+    else
+        level = player->query_class_level(the_class);
 
     return level;
 }
