@@ -59,8 +59,8 @@ void spell_effect()
 
         weap = targ;
 
-        tell_object(caster, "A layer of a%^BOLD%^rca%^RESET%^%^CYAN%^n%^BOLD%^e %^RESET%^%^CYAN%^f%^BOLD%^l%^RESET%^%^CYAN%^a%^BOLD%^me%^RESET%^%^CYAN%^s appears on %^WHITE%^"+targ->query_short()+" %^CYAN%^as you move your hand along it.");
-        tell_room(place, "A layer of a%^BOLD%^rca%^RESET%^%^CYAN%^n%^BOLD%^e %^RESET%^%^CYAN%^f%^BOLD%^l%^RESET%^%^CYAN%^a%^BOLD%^me%^RESET%^%^CYAN%^s appears on %^WHITE%^"+targ->query_short()+" %^CYAN%^as %^GREEN%^"+caster->QCN+" %^CYAN%^moves %^GREEN%^"+caster->QP+" %^CYAN%^hand along it.",({caster}));
+        tell_object(caster, "A layer of a%^BOLD%^rca%^RESET%^%^CYAN%^n%^BOLD%^e %^RESET%^%^CYAN%^f%^BOLD%^l%^RESET%^%^CYAN%^a%^BOLD%^me%^RESET%^%^CYAN%^s appears on %^WHITE%^"+targ->query_name()+" %^CYAN%^as you move your hand along it.");
+        tell_room(place, "A layer of a%^BOLD%^rca%^RESET%^%^CYAN%^n%^BOLD%^e %^RESET%^%^CYAN%^f%^BOLD%^l%^RESET%^%^CYAN%^a%^BOLD%^me%^RESET%^%^CYAN%^s appears on %^WHITE%^"+targ->query_name()+" %^CYAN%^as %^GREEN%^"+caster->QCN+" %^CYAN%^moves %^GREEN%^"+caster->QP+" %^CYAN%^hand along it.",({caster}));
         targ->set_property("added short",({ "%^RESET%^%^CYAN%^ %^BOLD%^{%^RESET%^%^CYAN%^ablaze%^BOLD%^}%^RESET%^" }));
         call_out("dest_effect",ROUND_LENGTH*6*clevel);
         caster->set_property("spelled", ({TO}) );
