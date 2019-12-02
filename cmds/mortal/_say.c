@@ -73,7 +73,10 @@ int cmd_say(string str)
 
     if(!wizardp(TP)) { str = replace_string(str,"BLACK","BLUE"); }
 
-    if(interactive(TP) && (string)TP->query("last say") == str) { return notify_fail("You just said that.\n"); }
+// The below code was put in to prevent spamming the same thing over and over to gain skill in languages, which is less of a concern now. 
+// Editing it out for now to save players some aggravation. -- Uriel 1 Dec 2019
+//    if(interactive(TP) && (string)TP->query("last say") == str) { return notify_fail("You just said that.\n")
+// }
 
     TP->set("last say",str);
 
