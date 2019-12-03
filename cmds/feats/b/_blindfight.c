@@ -8,7 +8,9 @@ void create() {
     feat_type("permanent");
     feat_category("GeneralCombat");
     feat_name("blindfight");
-    feat_desc("This feat reflects increased aptitude in handling oneself when robbed of sight, both in combat accuracy and in avoiding obstacles while walking.  It does not, however, allow the character to use spells or directly targetted abilities on an unseen foe.");
+    feat_desc("This feat reflects increased aptitude in handling oneself when robbed of sight, both in combat accuracy and in avoiding obstacles while walking. In addition, it will allow to retain dexterity bonus to armor class when blinded. It does not, however, allow the character to use spells or directly targetted abilities on an unseen foe.
+
+%^BOLD%^See also:%^RESET%^ status effects");
     permanent(1);
     allow_blind(1);
 }
@@ -37,4 +39,3 @@ void dest_effect() {
     remove_feat(TO);
     return;
 }
-

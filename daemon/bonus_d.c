@@ -265,21 +265,18 @@ varargs ac_bonus(object who, object attacker)
 
     dexb = query_dex_bonus(who);
     dexb = -dexb;
-    MyBonus += dexb;
 
+    if(who->query_temporary_blinded() || who->query_blind())
+        if(!FEATS_D->usable_feat(who,"blindfight"))
+            dexb = 0;
     if(who->query_unconscious() || who->query_prone() || who->query_paralyzed() || who->query_asleep() &&
        !FEATS_D->usable_feat(who,"dodge"))
-    {
-        MyBonus -= dexb;
-        return MyBonus;
-    }
+            dexb = 0;
     if(attacker->query_invis() && attacker!=who)
-        if(!(who->detecting_invis() || who->query_temporary_blinded()))
-        {
-            MyBonus -= dexb;
-            return MyBonus;
-        }
+        if(!who->detecting_invis())
+            dexb = 0;
 
+    MyBonus += dexb;
     return MyBonus;
 }
 

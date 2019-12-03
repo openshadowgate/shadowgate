@@ -82,7 +82,7 @@ An asleep creature functions like under paralysis, but any attack directed at wi
 These effects subtract their value from damage or spell damage received.
 
 %^CYAN%^%^ULINE%^Temporary blinded%^RESET%^
-Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell.
+Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell. They also loose their dexterity bonus to AC, and take additional penalty of lvl/12 on their armor class.
 
 
 %^CYAN%^See also:%^RESET%^ attributes, bonuses, stats, skills, score, hp
