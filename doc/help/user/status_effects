@@ -58,10 +58,10 @@ A panicked creature must drop anything it holds and flee at top speed from the s
 Panicked is a more extreme state of fear than %^CYAN%^shaken%^RESET%^ or %^CYAN%^frightened%^RESET%^.
 
 %^CYAN%^%^ULINE%^Paralysis%^RESET%^
-A paralyzed creature cannot act. Paralyzed players can not enter many commands.
+A paralyzed creature cannot act. Paralyzed players can not enter many commands. They loose their dexterity bonus to armor class.
 
 %^CYAN%^%^ULINE%^Prone or staggered%^RESET%^
-Prone or staggered creatures can not use most weapons for the duration of the effect.
+Prone or staggered creatures can not use most weapons for the duration of the effect. They loose their dexterity bonus to armor class.
 
 %^CYAN%^%^ULINE%^Regeneration%^RESET%^
 A creature gets 1d(lvl/4) health poins of regeneration per round as part of its innate ability to heal.
@@ -76,7 +76,7 @@ All core skills, attack, damage bonus, saves are reduced by lvl/12+1. The effect
 This effects adds to the light value of the room, but only for the caster.
 
 %^CYAN%^%^ULINE%^Sleeping%^RESET%^
-An asleep creature functions like under paralysis, but any attack directed at will %^ORANGE%^<wake>%^RESET%^ them and stop the effect.
+An asleep creature functions like under paralysis, but any attack directed at will %^ORANGE%^<wake>%^RESET%^ them and stop the effect. Aspeel creatures loose their dexterity bonus to armor class.
 
 %^CYAN%^%^ULINE%^Spell damage resistance/damage resistance%^RESET%^
 These effects subtract their value from damage or spell damage received.
