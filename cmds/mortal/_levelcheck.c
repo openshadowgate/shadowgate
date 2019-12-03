@@ -4,7 +4,7 @@
 int cmd_levelcheck(string str)
 {
     object targ;
-    if(!objectp(TP)) return 0; 
+    if(!objectp(TP)) return 0;
     if (!str)
         return notify_fail("Levelcheck whom?\n");
     if(!(targ = find_player(str)))
@@ -12,6 +12,11 @@ int cmd_levelcheck(string str)
             return notify_fail("That person is not available for levelcheck.\n");
     if(avatarp(targ))
         return notify_fail("That person is not available for levelcheck.\n");
+    if(targ==TP)
+    {
+        write("%^BOLD%^%^WHITE%^You can use <kill "+TP->query_name()+"> to suicide freely.%^RESET%^");
+        return 1;
+    }
     switch(LEVELCHECK->levelcheck(TP,targ))
     {
     case 1:
@@ -48,4 +53,3 @@ This will run a levelcheck on %^ULINE%^%^ORANGE%^TARGET%^RESET%^ and will output
 rules, pkilling, who, threaten, flag
 ");
 }
-
