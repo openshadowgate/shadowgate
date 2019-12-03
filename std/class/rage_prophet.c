@@ -29,6 +29,13 @@ string *query_base_classes(object obj)
     return ({ base });
 }
 
+void remove_base_class(object obj)
+{
+    if(!objectp(obj)) { return; }
+    obj->delete("rage_prophet_base_class");
+    return;
+}
+
 int has_base_class_set(object obj)
 {
     if(!objectp(obj)) { return 0; }

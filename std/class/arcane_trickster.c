@@ -30,7 +30,7 @@ string *query_base_classes(object obj)
     if(!objectp(obj)) { return ({}); }
     base = obj->query("arcane_trickster_base_class");
     if(!base) { return ({}); }
-    return ({ base, "thief" });
+    return ({ base });
 }
 
 int has_base_class_set(object obj)
@@ -39,6 +39,32 @@ int has_base_class_set(object obj)
     if(obj->query("arcane_trickster_base_class")) { return 1; }
     return 0;
 }
+
+void remove_base_class(object obj)
+{
+    if(!objectp(obj)) { return; }
+    obj->delete("arcane_trickster_base_class");
+    return;
+}
+
+int set_base_class(object obj, string choice)
+{
+    object *classes;
+    if(!objectp(obj)) { return 0; }
+    if(choice == 0)
+    {
+        obj->delete("arcane_trickster_base_class");
+        return 1;
+    }
+    classes = obj->query_classes();
+    if(!sizeof(classes)) { return 0; }
+    if(member_array(choice,classes) == -1) { return 0; }
+    if(member_array(choice,({"mage","sorcerer","cleric","druid","bard","inquisitor"})) == -1) { return 0; }
+    obj->set("arcane_trickster_base_class",choice);
+    return 1;
+}
+
+int requires_base_class_set() { return 1; } // for prestige classes that allow many different base classes
 
 int is_prestige_class() { return 1; }
 
@@ -58,7 +84,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    10 Mage, Sorcerer, Cleric, Druid, Bard levels (level adjustments considered part of required levels)\n"
+        "    10 Base class levels (level adjustments considered part of required levels)\n"
         "    10 Thief (level adjustments considered part of required levels)\n"
         "    10 Points Spent in Stealth Skill\n"
         "    10 Points Spent in Spellcraft Skill\n";
@@ -69,7 +95,7 @@ int prerequisites(object player)
 {
     mapping skills;
     object race_ob;
-    string race;
+    string race, base;
     int adj;
     if(!objectp(player)) { return 0; }
 
@@ -80,32 +106,10 @@ int prerequisites(object player)
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
 
-    if(player->is_class("sorcerer"))
-    {
-        if( (player->query_class_level("sorcerer") + adj) < 10) { return 0; }
-
-        player->set("arcane_trickster_base_class","sorcerer");
-    }
-    if(player->is_class("mage"))
-    {
-        if( (player->query_class_level("mage") + adj) < 10) { return 0; }
-        player->set("arcane_trickster_base_class","mage");
-    }
-    if(player->is_class("bard"))
-    {
-        if( (player->query_class_level("cleric") + adj) < 10) { return 0; }
-        player->set("arcane_trickster_base_class","bard");
-    }
-    if(player->is_class("druid"))
-    {
-        if( (player->query_class_level("druid") + adj) < 10) { return 0; }
-        player->set("arcane_trickster_base_class","druid");
-    }
-    if(player->is_class("cleric"))
-    {
-        if( (player->query_class_level("cleric") + adj) < 10) { return 0; }
-        player->set("arcane_trickster_base_class","cleric");
-    }
+    base = player->query("arcane_trickster_base_class");
+    if(!base) { return 0; }
+    if(!player->is_class(base)) { return 0; }
+    if((player->query_class_level(base) + adj) < 10) { return 0; }
     if( (player->query_class_level("thief") + adj) < 10) { return 0; }
     if(skills["stealth"] < 10) { return 0; }
     if(skills["spellcraft"] < 10) { return 0; }
@@ -127,10 +131,7 @@ int caster_level_calcs(object player, string the_class)
     if(!objectp(player)) { return 0; }
     base = player->query("arcane_trickster_base_class");
 
-    if(the_class=="thief")
-        level = player->query_class_level("thief");
-    if(the_class==base)
-        level = player->query_class_level(base);
+    level = player->query_class_level(base);
     level += player->query_class_level("arcane_trickster");
     return level;
 }

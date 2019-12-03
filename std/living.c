@@ -299,8 +299,8 @@ void heart_beat()
             TO->remove_property("stabs_available");
         if(FEATS_D->usable_feat(TO,"combat reflexes"))
         {
-            i = (max(({(int)TO->query_guild_level("thief"),
-                                (int)TO->query_class_level("thief")
+            i = (max(({TO->query_guild_level("thief"),
+                                TO->query_class_level("thief") + TO->query_class_level("arcane_trickster")
                                 }))+9)/10;
             TO->set_property("stabs_available",i);
         }
