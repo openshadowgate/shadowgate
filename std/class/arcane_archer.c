@@ -18,7 +18,21 @@ object base_class_ob(object ob)
     return class_ob;
 }
 
-string *query_base_classes() { return ({ "mage","sorcerer","bard","druid","cleric","warlock","inquisitor" }); }
+string *query_base_classes(object obj)
+{
+    string base;
+    if(!objectp(obj)) { return ({}); }
+    base = obj->query("arcane_archer_base_class");
+    if(!base) { return ({}); }
+    return ({ base });
+}
+
+void remove_base_class(object obj)
+{
+    if(!objectp(obj)) { return; }
+    obj->delete("arcane_archer_base_class");
+    return;
+}
 
 int has_base_class_set(object obj)
 {
@@ -26,6 +40,24 @@ int has_base_class_set(object obj)
     if(obj->query("arcane_archer_base_class")) { return 1; }
     return 0;
 }
+
+int set_base_class(object obj, string choice)
+{
+    object *classes;
+    if(!objectp(obj)) { return 0; }
+    if(choice == 0)
+    {
+        obj->delete("arcane_archer_base_class");
+        return 1;
+    }
+    classes = obj->query_classes();
+    if(!sizeof(classes)) { return 0; }
+    if(member_array(choice,classes) == -1) { return 0; }
+    obj->set("arcane_archer_base_class",choice);
+    return 1;
+}
+
+int requires_base_class_set() { return 1; } // for prestige classes that allow many different base classes
 
 int is_prestige_class() { return 1; }
 
@@ -57,7 +89,7 @@ int prerequisites(object player)
 {
     mapping skills;
     object race_ob;
-    string race;
+    string race, base;
     int adj;
     if(!objectp(player)) { return 0; }
 
@@ -69,32 +101,11 @@ int prerequisites(object player)
     skills = player->query_skills();
 
     if(!FEATS_D->usable_feat(player,"preciseshot")) { return 0; }
-    if(player->is_class("sorcerer"))
-    {
-        if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
+    base = player->query("arcane_archer_base_class");
+    if(!base) { return 0; }
+    if(!player->is_class(base)) { return 0; }
+    if((player->query_class_level(base) + adj) < 20) { return 0; }
 
-        player->set("arcane_archer_base_class","sorcerer");
-    }
-    if(player->is_class("mage"))
-    {
-        if( (player->query_class_level("mage") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","mage");
-    }
-    if(player->is_class("bard"))
-    {
-        if( (player->query_class_level("bard") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","bard");
-    }
-    if(player->is_class("druid"))
-    {
-        if( (player->query_class_level("druid") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","druid");
-    }
-    if(player->is_class("cleric"))
-    {
-        if( (player->query_class_level("cleric") + adj) < 20) { return 0; }
-        player->set("arcane_archer_base_class","cleric");
-    }
     return 1;
 }
 

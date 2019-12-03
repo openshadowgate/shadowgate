@@ -81,7 +81,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    10 Barbarian Levels\n"
-        "    10 Cleric, Druid, Inquisitor, Druid, Ranger or Paladin Levels\n"
+        "    10 Base Class Levels\n"
         "    Spell focus\n";
 
     return str;
