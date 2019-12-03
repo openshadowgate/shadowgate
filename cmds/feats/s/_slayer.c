@@ -32,9 +32,9 @@ int cmd_slayer(string args)
         return 1;
     }
 
-    if(TP->query("slayer_change") > time() - 60*60*24*7)
+    if(TP->query("slayer_change") > time() - 60*60*24*3)
     {
-        write("%^BOLD%^%^WHITE%^You can change your slayer judgement only once in a week.");
+        write("%^BOLD%^%^WHITE%^You can change your slayer judgement only once in three days.");
         return 1;
     }
     JUDGEMENT_TYPES = "/cmds/feats/obj/judgement"->query_judgement_types();

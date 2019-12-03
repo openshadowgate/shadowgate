@@ -24,9 +24,11 @@ void create() {
     feat_type("premanent");
     feat_category("MagicDamage");
     feat_name("spellmastery");
-    feat_syntax("spellmastery SPELLNAME");
+    feat_syntax("spellmastery [SPELLNAME]");
     feat_prereq("Not warlock, Not psion, Not psywarrior, Not monk");
     feat_desc("When selecting the SpellMastery feat, the character will be prompted to pick a spell that they are able to cast. From that point forward the character will be able to cast that spell at will at any time without needing components or memorization. Only spells of 1st and 2nd level may be picked for SpellMastery. If you have more than one class able to use the same spell, the power of the SpellMastery (as well as armor checks, etc) will be based upon the highest of these.
+
+<spellmastery> without an argument will display currently spellmastered spell.
 
 %^BOLD%^N.B.%^RESET%^ Spellmastery is not connected to <master> in any way. It just allows you to cast the spell without memorization or component cost. You still have to know the spell to cast it, have it in your spellbook, mastered or in your spell list.");
 
@@ -40,15 +42,21 @@ int cmd_spellmastery(string args)
     int cancastflag;
     string * myclasses, myclass;
 
+    if(!args)
+    {
+        write("%^BOLD%^Your current spellmastery spell is:%^RESET%^ "+TP->query("spellmastery_spell"));
+        return 1;
+    }
+
     if(TP->query("spellmastery_change") > time() - 60*60*24*3)
     {
-        write("%^BOLD%^%^WHITE%^You can change your mastered spell only once in three days or by retaking this feat.");
+        write("%^BOLD%^%^WHITE%^You can change your mastered spell only once in three days.");
         return 1;
     }
 
     if(FEATS_D->usable_feat(TP,"greater spell mastery"))
     {
-        write("Use <greater_spell_mastery SPELL NAME>");
+        write("Use <greater_spell_mastery SPELLNAME>");
         return 1;
     }
 
@@ -62,9 +70,11 @@ int cmd_spellmastery(string args)
 
     if(!cancastflag)
     {
-        write("None of your classes can cast this spell.");
+        write("%^BOLD%^%^RED%^None of your classes can cast this spell.");
         return 1;
     }
+
+    write("%^BOLD%^%^RED%^Setting spellname spell to:%^RESET%^ "+args);
 
     TP->set("spellmastery_change",time());
     TP->set("spellmastery_spell",args);
