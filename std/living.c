@@ -1272,6 +1272,8 @@ int query_attack_bonus() {
    bonus = abonus;
    ret = bonus + enc;
    ret += EQ_D->gear_bonus(TO, "attack bonus");
+   if(TO->query_invis())
+       ret += 2;
    if(FEATS_D->usable_feat(TO,"weapon focus"))
        ret += 2;
    if(FEATS_D->usable_feat(TO,"greater weapon focus"))
