@@ -258,18 +258,27 @@ varargs effective_ac(object who)
  */
 varargs ac_bonus(object who, object attacker)
 {
-    int MyBonus, tmp;
+    int MyBonus, dexb;
     if(!objectp(who)) return 0;
     if(!objectp(attacker)) return 0;
     MyBonus = 0;
-    if(!(who->query_unconscious() || who->query_prone() || who->query_paralyzed() || who->query_asleep()) ||
-       FEATS_D->usable_feat(who,"dodge") &&
-       !(attacker->query_invis() || attacker->query_hidden() && attacker!=who))
+
+    dexb = query_dex_bonus(who);
+    dexb = -dexb;
+    MyBonus += dexb;
+
+    if(who->query_unconscious() || who->query_prone() || who->query_paralyzed() || who->query_asleep() &&
+       !FEATS_D->usable_feat(who,"dodge"))
     {
-        tmp = query_dex_bonus(who);
-        tmp *= -1;
-        MyBonus += tmp;
+        MyBonus -= dexb;
+        return MyBonus;
     }
+    if(attacker->query_invis() && attacker!=who)
+        if(!(who->detecting_invis() || who->query_temporary_blinded()))
+        {
+            MyBonus -= dexb;
+            return MyBonus;
+        }
 
     return MyBonus;
 }

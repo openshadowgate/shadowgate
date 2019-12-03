@@ -45,7 +45,7 @@ Frightened is like %^CYAN%^shaken%^RESET%^, except that the creature must flee i
 Hidden creatures can not be seen by others, as they are hiding in shadows. The room must have less than 3 light levels for anyone to be able to hide in it. You can <search> the room for hidden creatures or use glitterdust to reveal them. <search> reveals the hidden creatures only for you. Hidden creatures are marked with %^ORANGE%^(hid)%^RESET%^ before their name when revealed.
 
 %^CYAN%^%^ULINE%^Invisible%^RESET%^
-Invisible creatures can not be seen by other creatures unless they have the true sight or other ways to detect invisibility. Glitterdust and similar effects will reveal invisible creatures too. Invisible creatures are marked with %^CYAN%^(inv)%^RESET%^ before their name, that is, if you are able to see them.
+Invisible creatures can not be seen by other creatures unless they have the true sight or other ways to detect invisibility. In addition they ignore their opponents dexterity bonus to armor class if they are not detecting invisible and gain +2 to attack rolls. Glitterdust and similar effects will reveal invisible creatures too. Invisible creatures are marked with %^CYAN%^(inv)%^RESET%^ before their name, that is, if you are able to see them.
 
 %^CYAN%^%^ULINE%^Magic resistance/spell penetration%^RESET%^
 Magic resistance increases your chance to disperse spell targeted at you while spell penetration increases chance of your spells not to be dispersed. All creatures gain innate magic resistance and penetration of their caster levels.
