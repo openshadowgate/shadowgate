@@ -253,18 +253,24 @@ varargs effective_ac(object who)
     return MyAc;
 }
 
-//Bonuses to avoid being hit - Saide
+/**
+ * This function accepts second target if you ever need
+ */
 varargs ac_bonus(object who, object attacker)
 {
     int MyBonus, tmp;
     if(!objectp(who)) return 0;
     if(!objectp(attacker)) return 0;
     MyBonus = 0;
-    tmp = query_dex_bonus(who);
-    tmp *= -1;
-    MyBonus += tmp;
-    //2AC dodge bonus to target if they are actively dodging the attacker
-    if(FEATS_D->usable_feat(who,"dodge") && (string)who->query_property("dodging") == (string)attacker->query_name()) { MyBonus += 2; }
+    if(!(who->query_unconscious() || who->query_prone() || who->query_paralyzed() || who->query_asleep()) ||
+       FEATS_D->usable_feat(who,"dodge") &&
+       !(attacker->query_invis() || attacker->query_hidden() && attacker!=who))
+    {
+        tmp = query_dex_bonus(who);
+        tmp *= -1;
+        MyBonus += tmp;
+    }
+
     return MyBonus;
 }
 
