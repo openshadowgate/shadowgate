@@ -7,8 +7,9 @@
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, dungeoneering, endurance, survival
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: light armor proficiency, medium armor proficiency, shield proficiency, simple weapon proficiency, martial weapon proficiency, rage, powerattack, unarmored defense
- %^RESET%^L4: dodge
+ %^RESET%^L2: dodge
  %^RESET%^L7: damage resistance
+ %^RESET%^L10: damage reduction
  %^RESET%^L11: greater rage, resistance
  %^RESET%^L14: mobility
  %^RESET%^L17: mighty rage

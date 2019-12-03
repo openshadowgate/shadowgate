@@ -12,10 +12,27 @@ void create() {
     set_spell_level(([ "cleric" : 6,"inquisitor":2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS word of power [to DESTINATION]");
-    set_description("Word of power will teleport you to a church of your choice.  For now, you can reach the following "
-"churches:\nShadow\nTharis\nAzha\nTabor\nMuul'daan\nAntioch\nTonovi\nTorm\nJuran\nKinaro\nVerbobone (Deku)\nGraez (Sangri"
-")\nAsgard (Laerad)\nSeneca (Attaya)\nEldebaro (East Oasis)\nYou can also go to the temple of your deity by using <Temple> or <temple> as the "
-"location.  Areas or items that block teleportation magic will block this spell as well.\n\nThis spell must be cast while at peace.");
+    set_description("Word of power will teleport you to a church of your choice.  For now, you can reach the following churches:
+
+Antioch
+Asgard (Laerad)
+Azha
+Dallyh
+Eldebaro (East Oasis)
+Graez (Sangri)
+Juran
+Kinaro
+Muul'daan
+Seneca (Attaya)
+Shadow
+Tabor
+Tharis
+Tonovi
+Torm
+Verbobone (Deku)
+
+You can also go to the temple of your deity by using 'temple' as the location.
+");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();

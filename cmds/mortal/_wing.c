@@ -12,6 +12,24 @@ string * flyprofiles = ({"druid_bird_999","druid_dragon_999","mage_dragon_999","
 
 string WINGO = "/cmds/mortal/obj/wingObj.c";
 
+mapping preset_destinations;
+preset_destinations =
+    ([ "asgard" :"/d/laerad/parnelli/asgard/as59",
+       "azha"   :"/d/tharis/road/wroad30",
+       "deku":"/d/deku/forest/dforest15-5",
+       "eldebaro":"/d/islands/common/eldebaro/newrooms/east_oasis15",
+       "graez":"/d/undead/rooms/town/street12",
+       "juran":"/d/shadow/room/forest/owagon26",
+       "kinaro":"/d/dagger/kinaro/path3",
+       "muuldaan":"/d/shadow/room/muuldaan/rooms/path6",
+       "seneca":"/d/attaya/newseneca/rooms/boardwalk3",
+       "tabor":"/d/darkwood/tabor/road/road1",
+       "tharis":"/d/tharis/road/road8",
+       "tonovi":"/d/dagger/tonovi/crossrd",
+       "torm":"/d/dagger/Torm/road/path12",
+       "antioch":"/d/antioch/antioch2/rooms/trail6",
+        ]);
+
 int cmd_wing(string args)
 {
     object myshape;
@@ -46,8 +64,15 @@ int cmd_wing(string args)
 
     if(!(dest = TP->query_rem_room(args)))
     {
-        tell_object(TP,"You can't remember "+args+".");
-        return 1;
+        if(member_array(args,keys(preset_destinations))!=-1)
+        {
+            dest = find_object_or_load(preset_destinations[args]);
+        }
+        else
+        {
+            tell_object(TP,"You can't remember "+args+".");
+            return 1;
+        }
     }
 
     if(dest->query_property("indoors"))
@@ -92,6 +117,24 @@ wing %^ORANGE%^%^ULINE%^DESTINATION%^RESET%^
 %^CYAN%^DESCRIPTION%^RESET%^
 
 Wing allows you to move between locations, albeit much slower than teleportation. To use this command you must have wings sufficiently large enough to overcome winds (bird, bat, dragon, angelic aspect, fell flight, fey'ri, deva and others). This command will allow you to escape combat, but you can be intercepted during the flight.
+
+You can travel to well known cities and destinations:
+  Antioch
+  Asgard
+  Azha
+  Deku
+  Eldebaro
+  Graez
+  Juran
+  Kinaro
+  Muuldaan
+  Seneca
+  Tabor
+  Tharis
+  Tonovi
+  Torm
+
+Your memory has a higher priority in the case you want to overwrite any of these.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
