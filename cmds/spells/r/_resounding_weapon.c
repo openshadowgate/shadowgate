@@ -60,7 +60,7 @@ void spell_effect()
 
         weap = targ;
 
-        tell_object(caster, "%^CAYN%^Your "+targ->query_name()+" begins vibrating %^CYAN%^as you move your hand along it.");
+        tell_object(caster, "%^CYAN%^Your "+targ->query_name()+" begins vibrating %^CYAN%^as you move your hand along it.");
         tell_room(place, "%^CYAN%^"+targ->query_name()+"%^CYAN%^ begins vibrating as %^GREEN%^"+caster->QCN+" %^CYAN%^moves %^GREEN%^"+caster->QP+" %^CYAN%^hand along it.",({caster}));
         targ->set_property("added short",({ "%^RESET%^%^CYAN%^ %^BOLD%^{%^RESET%^%^CYAN%^vibrating%^BOLD%^}%^RESET%^" }));
         call_out("dest_effect",ROUND_LENGTH*6*clevel);
