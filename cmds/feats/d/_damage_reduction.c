@@ -8,7 +8,7 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("DamageResistance");
-    feat_name("damage resistance");
+    feat_name("damage reduction");
     feat_prereq("Barbarian L10");
     feat_desc("Starting at L10 barbarian will subtract a point for every three barbarian levels above level ten from damage taken from a weapon or natural attack.");
     permanent(1);
