@@ -30,7 +30,7 @@ void create() {
 
 <spellmastery> without an argument will display currently spellmastered spell.
 
-%^BOLD%^N.B.%^RESET%^ Spellmastery is not connected to <master> in any way. It just allows you to cast the spell without memorization or component cost. You still have to know the spell to cast it, have it in your spellbook, mastered or in your spell list.");
+%^BOLD%^N.B.%^RESET%^ Spellmastery is not connected to <master> in any way. It just allows you to cast the spell without memorization. You still have to know the spell to cast it, have it in your spellbook, mastered or in your spell list.");
 
     permanent(1);
     allow_tripped(1);
