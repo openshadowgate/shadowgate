@@ -6,7 +6,8 @@ void create() {
    ::create();
    set_property("indoors",0);
    set_property("light",2);
-   set_terrain(GARDEN);
+//   set_terrain(GARDEN);
+   set_terrain(RUINS); //allows commune with nature spell and others that require true wilderness
    set_travel(FOOT_PATH);
    set_name("A quiet grove");
    set_short("%^RESET%^%^GREEN%^A quiet grove%^RESET%^");
