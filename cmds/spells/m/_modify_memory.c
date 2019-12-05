@@ -45,7 +45,7 @@ void spell_effect(int prof)
         target->remove_relationship(caster->query_true_name());
     }
     else
-        tell_object(caster,"%^BLUE%^You sense your memory altering attemp failed.%^RESET%^");
+        tell_object(caster,"%^BLUE%^You sense your memory altering attempt failed.%^RESET%^");
     dest_effect();
 }
 
