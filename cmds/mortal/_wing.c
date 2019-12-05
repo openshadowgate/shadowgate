@@ -22,6 +22,7 @@ preset_destinations =
        "juran":"/d/shadow/room/forest/owagon26",
        "kinaro":"/d/dagger/kinaro/path3",
        "muuldaan":"/d/shadow/room/muuldaan/rooms/path6",
+       "shadow":"/d/darkwood/room/road18",
        "seneca":"/d/attaya/newseneca/rooms/boardwalk3",
        "tabor":"/d/darkwood/tabor/road/road1",
        "tharis":"/d/tharis/road/road8",
