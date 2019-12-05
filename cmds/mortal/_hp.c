@@ -8,6 +8,9 @@
 mixed * genoutput(object targ)
 {
     mixed * output=({});
+    int max = targ->query_formula();
+    int cur, perc;
+
 
     output+=({({"Health Points","%^RESET%^%^"+targ->query_hp()+"%^BOLD%^%^GREEN%^/%^WHITE%^"+targ->query_max_hp()})});
     if(targ->is_class("psion") ||
@@ -18,22 +21,22 @@ mixed * genoutput(object targ)
     if(!(targ->is_undead() ||
          FEATS_D->usable_feat(targ,"timeless body")))
     {
-        int max = targ->query_formula();
-        int cur, perc;
         cur = targ->query_stuffed();
         perc = cur*100/max;
         output+=({({"Hunger",arrange_string(hunger2str(perc)+"            ",10) + "%^BOLD%^ ("+perc+"%)"})});
         cur = targ->query_quenched();
         perc = cur*100/max;
         output+=({({"Hunger",arrange_string(thirst2str(perc)+"          ",10) + "%^BOLD%^ ("+perc+"%)"})});
-        cur = targ->query_intox();
-        perc = cur*100/max;
-        output+=({({"Intox",arrange_string(intox2str(perc)+"          ",10) + "%^BOLD%^ ("+perc+"%)"})});
     }
     else if(targ->is_vampire())
     {
         output+=({({"%^BOLD%^%^RED%^Blood Hunger",thirst2str(targ->query_bloodlust()/200)+ "%^BOLD%^%^RED%^ ("+targ->query_bloodlust()/200+"%)"})});
     }
+
+    cur = targ->query_intox();
+    perc = cur*100/max;
+    output+=({({"Intox",arrange_string(intox2str(perc)+"          ",10) + "%^BOLD%^ ("+perc+"%)"})});
+
     if(POISON_D->is_poisoned(targ))
     {
         output+=({({"Poison","%^RED%^Poisoned"})});
