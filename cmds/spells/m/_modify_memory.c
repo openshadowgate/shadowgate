@@ -44,7 +44,8 @@ void spell_effect(int prof)
         target->set_paralyzed(roll_dice(1,3)*8,"%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted.%^RESET%^");
         target->remove_relationship(caster->query_true_name());
     }
-    tell_object(caster,"%^BLUE%^You sense your memory altering attemp failed.%^RESET%^");
+    else
+        tell_object(caster,"%^BLUE%^You sense your memory altering attemp failed.%^RESET%^");
     dest_effect();
 }
 
