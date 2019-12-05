@@ -23,12 +23,13 @@ void init(){
         {
             tell_object(TP,"\n%^BOLD%^CYAN%^You turn into dark mist and let the wind carry you into the darkness... After a while of wandering, you hear a faint song...\n");
             call_out("end_death0_vampire", 5, TP);
+            return;
         }
         else if(TP->is_undead())
         {
-
             tell_object(TP,"\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you struggle the stream of souls, and turn to elsewhere...\n");
             call_out("end_death0_undead", 5, TP);
+            return;
         }
         else if(TP->query("subrace")=="feytouched" ||
                 TP->query("race") == "satyr" ||
@@ -37,15 +38,15 @@ void init(){
         {
             tell_object(TP,"%^BOLD%^%^BLACK%^Your final breath is ripped from your lungs, and you feel yourself falling, falling, falling into the earth. The %^RESET%^%^ORANGE%^hard ground %^BOLD%^%^BLACK%^embraces you like an old lover, warm, familiar. %^RESET%^Home%^BOLD%^%^BLACK%^. %^RESET%^\n");
             call_out("end_death0_feytouched", 5, TP);
+            return;
         }
         else
         {
 
             tell_object(TP, "\n%^BOLD%^%^WHITE%^You find yourself standing in a large, open space with %^RESET%^mists %^BOLD%^%^WHITE%^that obscure any distance. Rising up before you is a simple oaken chair with a high back, upon which is seated a somber and serene woman. %^BLACK%^Dark hair %^WHITE%^frames her ageless face, while a robe of gray rests about her shoulders like a pall. Her fingers rest upon the chair's arm, and you note the three %^BLACK%^m%^RESET%^i%^BOLD%^%^WHITE%^s%^RESET%^m %^BOLD%^%^BLACK%^a%^RESET%^t%^BOLD%^%^WHITE%^c%^RESET%^h %^BOLD%^%^BLACK%^e%^RESET%^d %^BOLD%^%^WHITE%^rings she wears. As her %^RESET%^%^CYAN%^steady gaze %^BOLD%^%^WHITE%^falls upon you, you realise that this must be the Lady of Fate - Lysara. In agony, you try to recall all you have done that might warrant the deity's attention, and you squirm as you wait to hear what she will say. Finally, she speaks...\n");
-
             call_out("end_death", 8, TP);
             WHICH_CALL_OUT = "end_death";
-
+            return;
         }
         return;
     }

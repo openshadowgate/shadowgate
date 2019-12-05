@@ -16,7 +16,6 @@ void create()
 %^BOLD%^%^RED%^N.B.%^RESET%^ You can only have one altered form with this spell - repeat uses do not grant additional different shapeshifts, but instead return you to the same secondary form. Adjective, description, speech, messages etc will be remembered across castings, so they will only need to be set once in your alternative form. Players will be able to recognise your 'other self' as a unique entity, separate from your usual self.");
     set_verbal_comp();
     set_somatic_comp();
-    set_components(([ "mage" : ([ "bitumen" : 1, "sand": 1, "carbon": 3, "soft clay": 7 ]), ]));
     set_peace_needed(1);
     set_helpful_spell(1);
 }
