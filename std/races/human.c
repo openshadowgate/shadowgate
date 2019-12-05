@@ -58,7 +58,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
 mapping skill_mods(string subrace) {
     if(!subrace || subrace == "") return ([]);
     switch(subrace) {
-      case "tiefling": return ([ "stealth" : 2, "disguise" : 2 ]); break;
+      case "tiefling": return ([ "stealth" : 2, "influence" : 2 ]); break;
       case "aasimar": return ([ "perception" : 2, "influence" : 2 ]); break;
       case "feytouched": return ([ "perception" : 2, "influence" : 2 ]); break;
       case "dhampir": return ([ "perception" : 2, "influence" : 2 ]); break;
