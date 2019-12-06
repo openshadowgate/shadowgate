@@ -2664,12 +2664,12 @@ void receive_message(string msg_class, string msg)
             else the_lang = "common";
             // tell_object(TO, "who = "+identify(who));
             if(TO->query_property("understand_all_langs") || wizardp(TO)) { str = str; }
-            else if(objectp(ob) && FEATS_D->usable_feat(ob, "tongue of the sun and moon")) { str = str; }
+            else if(objectp(ob) && ob->query_property("verstandnis")) { str = str; }
             else
             {
                 if(member_array(the_lang,ANIMAL_LANGS) == -1)
                 {
-                    if(objectp(ob) && !FEATS_D->usable_feat(TO, "tongue of the sun and moon")) str = "/daemon/language_d"->translate(str, the_lang, ob);
+                    if(objectp(ob) && !ob->query_property("verstandnis")) str = "/daemon/language_d"->translate(str, the_lang, ob);
                     str = "/daemon/language_d"->translate(str, the_lang, TO);
                     if(stringp(pname) && msg_class == "tell") msg = intro+":"+pname+": "+str+"\n";
                     else msg = intro+":"+str+"\n";
@@ -2677,7 +2677,7 @@ void receive_message(string msg_class, string msg)
                 else
                 {
                     first_words = sizeof(explode(str," "));
-                    if(objectp(ob) && !FEATS_D->usable_feat(TO, "tongue of the sun and moon")) str = "daemon/language_d"->animal_translate(str,the_lang,ob);
+                    if(objectp(ob) && !TO->query_property("verstandnis")) str = "daemon/language_d"->animal_translate(str,the_lang,ob);
                     str = "/daemon/language_d"->animal_translate(str, the_lang, TO);
                     second_words = sizeof(explode(str," "));
 

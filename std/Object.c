@@ -523,6 +523,11 @@ mixed query_property(string prop)
         if(FEATS_D->usable_feat(TO,"fated")) { return 1; }
         if(FEATS_D->usable_feat(TO,"earthen blood")) { return 1; }
     }
+
+    if(prop == "verstandnis")
+    {
+        return FEATS_D->usable_feat(TO, "tongue of the sun and moon");
+    }
 // spellturning is now handled in spell.c to prevent stacking feats.
 /*    if(prop == "spellturning")
     {

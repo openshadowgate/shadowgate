@@ -23,7 +23,7 @@ string *query_lang_list() {return ALL_LANGS;}
 varargs string fakeWord(string lang, int l){
    string word = ({});
    int i,j,a;
-   
+
    switch(lang)
    {
    case "common":
@@ -200,7 +200,7 @@ varargs string fakeWord(string lang, int l){
          else
            word += SOFTVOWELS[random(sizeof(SOFTVOWELS))];
       }
-      break;      
+      break;
    default:
      j = l?l:random(6)+3;
       if(a = random(2))
@@ -421,7 +421,7 @@ string query_animal_emotes(string words,object tp)
 
         case "wolf":
 
-            emotes = ({ 
+            emotes = ({
                 "paces in a series of quick circles then stops, shaking "qp" head to and fro before scratching the ground and whining",
                 "sits on "qp" haunches and licks "qp" paw for a moment before quickly hopping to "qp" feet and letting out an excited yip",
                 "trots in a jagged line and then slinks low on "qp" stomach, almost crawling, then emits a low, throaty growl",
@@ -512,9 +512,9 @@ string animal_translate(string str,string lang, object player)
 
     prof = (int)player->query_lang(lang);
 
-    if(prof == 100) 
-    { 
-        return str; 
+    if(prof == 100)
+    {
+        return str;
     }
 
     words = explode(str," ");
@@ -524,8 +524,8 @@ string animal_translate(string str,string lang, object player)
         if(random(100) > prof)
         {
             wrong++;
-        } 
-        else 
+        }
+        else
         {
             ret += words[i]+" ";
             right++;
@@ -538,7 +538,7 @@ string animal_translate(string str,string lang, object player)
         ret = ret[0..(strlen(ret) - 2)];
     }
 
-    return ret;    
+    return ret;
 }
 
 
@@ -551,14 +551,14 @@ varargs string translate(string str, string lang, object player,int reading)
 
     prof      = (int)player->query_lang(lang);
     read_time = (int)player->query_property("last_time_read");
-   
+
     if(lang == "wizish") { return str; }
-    
+
     if(objectp(player))
     {
-        if(FEATS_D->usable_feat(player, "tongue of the sun and moon")) return str;
+        if(player->query_property("verstandnis")) return str;
     }
-    if(prof >= 100) 
+    if(prof >= 100)
     {
         if(player != TP || query_verb() == "read")
         {
@@ -579,8 +579,8 @@ varargs string translate(string str, string lang, object player,int reading)
         if(random(100) > prof)
         {
 	        words[i] = fakeWord(lang);
-        } 
-        else 
+        }
+        else
         {
 	        thing++;
         }
@@ -600,13 +600,13 @@ varargs string translate(string str, string lang, object player,int reading)
             player->set_property("last_time_read",time() + 300); // five minute delay
         }
     }
-   
-    if(prof > 50) 
+
+    if(prof > 50)
     {
         if(ret[0..0] == " ") return " ("+lang+")"+ret;
         else return " ("+lang+") "+ret;
-    } 
-    else 
+    }
+    else
     {
         return ret;
     }
