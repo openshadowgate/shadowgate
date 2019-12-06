@@ -40,7 +40,6 @@ int cmd_teach(string str){
         return notify_fail("teach language to whom?\n");
     }
 
-    if(TP->query("emote loss")) return notify_fail("You need to gesture while teaching, but seems that you cannot. BLAH!\n");
     if (TP->query_gagged()) {
         return notify_fail(TP->query_gagged_message()+"\n");
     }
