@@ -1,5 +1,4 @@
 #include <std.h>
-#include <langs.h>
 #include <daemons.h>
 inherit SPELL;
 
@@ -13,14 +12,22 @@ void create() {
     set_syntax("cast CLASS tongues on TARGET");
     set_description("This will give the target the ability to understand, both read and write any mortal language. This should not change the ability to teach the language.");
     set_verbal_comp();
-    set_components(([
-      "mage" : ([ "clay model ziggurat" : 1, ]),
-    ]));
 	set_helpful_spell(1);
     set_target_required(1);
 }
 
-string query_cast_string() {
+int preSpell()
+{
+    if(target->query_property("verstandnis"))
+    {
+        tell_object(caster,"The target is already under the influence of similar magic");
+        return 0;
+    }
+    return 1;
+}
+
+string query_cast_string()
+{
    return caster->QCN+" starts to mouth out syllables.\n";
 }
 
@@ -29,14 +36,10 @@ void spell_effect(int prof) {
     string what, arg;
     object ob;
 
-    theProf = prof;
-    tell_object(caster,"%^BOLD%^You start to cast tongues.");
     tell_object(target,"%^BOLD%^You start to feel knowledge enter your mind that you lacked before.");
-    spell_successful();
 
-    for (i =0;i<sizeof(ALL_LANGS);i++) {
-      if(member_array(ALL_LANGS[i],OLD_LANGS) == -1) target->add_lang_overload(ALL_LANGS[i],prof);
-    }
+    target->set_property("verstandnis",1);
+
     addSpellToCaster();
     spell_successful();
     caster->set_property("spelled",({TO}));
@@ -46,9 +49,7 @@ void spell_effect(int prof) {
 void dest_effect() {
     int i;
     if (objectp(target)) {
-      for (i =0;i<sizeof(ALL_LANGS);i++) {
-        if(member_array(ALL_LANGS[i],OLD_LANGS) == -1) target->subtract_lang_overload(ALL_LANGS[i],theProf);
-      }
+        target->set_property("verstandnis",-1);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

@@ -526,7 +526,8 @@ mixed query_property(string prop)
 
     if(prop == "verstandnis")
     {
-        return FEATS_D->usable_feat(TO, "tongue of the sun and moon");
+        if(FEATS_D->usable_feat(TO, "tongue of the sun and moon"))
+            return 1;
     }
 // spellturning is now handled in spell.c to prevent stacking feats.
 /*    if(prop == "spellturning")

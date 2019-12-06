@@ -3910,14 +3910,11 @@ void setPlayerAgeCat(int age, string str) {
 }
 
 int query_real_age(){
-   int real_age;
-//  if (!real_age) {
+    int real_age;
     real_age = query_start_age() + ((time() - (int)TO->query_birthday())/YEAR);
-// new flag to allow for age reduction/increase - Nienne, 11/09.
     real_age = real_age + (int)query("age_modifier");
     if((int)query("fixed_age")) { real_age = (int)query("fixed_age"); }
-//  }
-  return real_age;
+    return real_age;
 }
 
 void reset_start_age(){
