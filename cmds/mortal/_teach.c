@@ -6,28 +6,28 @@
 inherit DAEMON;
 
 int help(){
-    write(
-        @OLI
-        %^CYAN%^NAME%^RESET%^
+   write(
+@OLI
+%^CYAN%^NAME%^RESET%^
 
-        teach - teach someone a tongue
+teach - teach someone a tongue
 
-        %^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNTAX%^RESET%^
 
-        teach %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ to %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^
+teach %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ to %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^
 
-        %^CYAN%^DESCRIPTION%^RESET%^
+%^CYAN%^DESCRIPTION%^RESET%^
 
-        If you have a fair understanding of a %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you can teach %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^.
+If you have a fair understanding of a %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you can teach %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^.
 
-        This will either help them learn it or give them a basic understanding of the language so they can start to learn from basic conversations.
+This will either help them learn it or give them a basic understanding of the language so they can start to learn from basic conversations.
 
-        %^CYAN%^SEE ALSO%^RESET%^
+%^CYAN%^SEE ALSO%^RESET%^
 
-        languages, speak, say, races
-        OLI
-        );
-    return 1;
+languages, speak, say, races
+OLI
+   );
+   return 1;
 }
 
 
