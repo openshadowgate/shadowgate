@@ -70,7 +70,7 @@ To choose a language you're currently using use %^ORANGE%^<speak>%^RESET%^ comma
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-speak, speech, line use
+speak, teach, speech, line use
 "
 );
 }

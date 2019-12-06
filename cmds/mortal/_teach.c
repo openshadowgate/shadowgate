@@ -8,12 +8,23 @@ inherit DAEMON;
 int help(){
    write(
 @OLI
-   If you have a fair understanding of a language you can
-   <teach> it to another person.
-   teach language to person
-   This will either help them learn it or give them a basic
-   understanding of the language so they can start to learn
-   from basic conversations.
+%^CYAN%^NAME%^RESET%^
+
+teach - teach someone a tongue
+
+%^CYAN%^SYNTAX%^RESET%^
+
+teach %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ to %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+If you have a fair understanding of a %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you can teach %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^.
+
+This will either help them learn it or give them a basic understanding of the language so they can start to learn from basic conversations.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+languages, speak, say, races
 OLI
    );
    return 1;
@@ -41,7 +52,7 @@ int cmd_teach(string str){
    if(TP->query_property("teaching"))
       return notify_fail("You are already teaching someone.\n");
 
-   if(TP->query_property("taught")) 
+   if(TP->query_property("taught"))
       return notify_fail("You are being taught, wait till you've finished this lesson.\n");
 
    if(sscanf(str,"%s to %s",lang,who)!=2)
@@ -58,7 +69,7 @@ int cmd_teach(string str){
 
    if(targ == TP) return notify_fail("Umm I don't think so...\n");
 
-   if(targ->query_property("taught")) 
+   if(targ->query_property("taught"))
 	return notify_fail(targ->query_cap_name()+" is already being taught.\n");
 
    if((int)targ->query_base_lang(lang) > (int)TP->query_base_lang(lang)){
@@ -113,10 +124,13 @@ void step(int when,object who, object targ,string what) {
       who->force_me("say sword");
       who->force_me("say dagger");
       who->force_me("say helmet");
+      who->force_me("say cat");
       who->force_me("say armour");
       who->force_me("say boot");
+      who->force_me("say cheese");
       who->force_me("say sheath");
       who->force_me("say book");
+      who->force_me("say moon");
        who->force_me("emote frowns and tries to explain something else to you.");
       call_out("step",10,4,who,targ,what);
 
