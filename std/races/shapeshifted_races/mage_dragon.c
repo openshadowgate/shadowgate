@@ -4,6 +4,8 @@
 
 inherit SHAPESHIFT;
 
+#include "mage_shapes.h"
+
 int clevel;
 
 void set_clevel(int x)

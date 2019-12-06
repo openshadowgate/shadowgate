@@ -1,7 +1,8 @@
 #include <std.h>
 #include <daemons.h>
-
 inherit SHAPESHIFT;
+
+#include "mage_shapes.h"
 
 // all of the functions set in create below need to be there so it doesn't bug when trying to shapeshift -Ares
 // when making a new shape, be sure to include those functions or it'll fall back to the defaults

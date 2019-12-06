@@ -11,9 +11,9 @@ void create()
     set_syntax("cast CLASS alter self");
     set_description("%^RESET%^This spell allows the caster to make minor changes to their body. These are usually sufficient changes that they become unrecognizable even to those they are familiar with. It does not allow for such drastic changes as body size or overall shape; the caster would still be quite recognizable as a creature of their race.
 
-%^BOLD%^%^RED%^N.B.%^RESET%^ This spell does not alter details on your scoresheet (eyes, hair) but the caster may describe their new form and features differently to these if they so choose. They must still maintain their overall body shape (ie. race, general height and weight).
+This spell does not alter details on your scoresheet (eyes, hair) but the caster may describe their new form and features differently to these if they so choose. They must still maintain their overall body shape, height and weitght.
 
-%^BOLD%^%^RED%^N.B.%^RESET%^ You can only have one altered form with this spell - repeat uses do not grant additional different shapeshifts, but instead return you to the same secondary form. Adjective, description, speech, messages etc will be remembered across castings, so they will only need to be set once in your alternative form. Players will be able to recognise your 'other self' as a unique entity, separate from your usual self.");
+You can only have one altered form with this spell - repeat uses do not grant additional different shapeshifts, but instead return you to the same secondary form. Adjective, description, speech, messages etc will be remembered across castings, so they will only need to be set once in your alternative form. Players will be able to recognise your 'other self' as a unique entity, separate from your usual self.");
     set_verbal_comp();
     set_somatic_comp();
     set_peace_needed(1);
