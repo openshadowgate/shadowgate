@@ -160,6 +160,7 @@ void drain_process(object target)
 
     if(target->query_hp()<-(target->query_max_hp()/5))
     {
+        tell_object(TP,"%^BOLD%^%^RED%^Your victim barely has any blood left.%^RESET%^");
         stop_drain();
         return;
     }
