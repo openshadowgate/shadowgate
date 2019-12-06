@@ -1,30 +1,35 @@
 #include <std.h>
+#include <daemons.h>
+#include <clock.h>
 inherit DAEMON;
 
 int cmd_languages(string str){
    mapping skills;
-   string *skillslist,mylang;
-   int i,j,freelang,usedlang,points,newtotal,grammar;
+   string *skillslist,
+       skill,
+       mylang;
+   int freelang,
+       usedlang,
+       points,
+       newtotal,
+       grammar;
+   int intbonus = BONUS_D->query_stat_bonus(TP, "intelligence");
 
-   freelang = ((int)TP->query_age()) / 75000;
-   usedlang = (int)TP->query("used language points");
+   intbonus = intbonus<1?1:intbonus;
+   freelang = (TP->query_age() / 43200 + ((time() - TP->query_birthday())/YEAR)) * intbonus;
+   usedlang = TP->query("used language points");
    skills = TP->query_all_langs();
    skillslist = keys(skills);
-   j = sizeof(skillslist);
 
-   if(!str) { //commence display code
-     tell_object(TP,"%^MAGENTA%^Your languages are as follows.");
-     tell_object(TP, ""+arrange_string("Language",20)+arrange_string("prof. level", 15)+arrange_string("Language",20)+arrange_string("prof. level", 15)+"\n");
-     for(i=0;i<j;i+=2){
-       if(i+1 < j){
-	   tell_object(TP, ""+arrange_string(skillslist[i],20)+arrange_string(skills[skillslist[i]]+"("+TP->query_grammar(skillslist[i])+")", 15)+arrange_string(skillslist[i+1],20)+arrange_string(skills[skillslist[i+1]]+"("+TP->query_grammar(skillslist[i+1])+")", 15));
-       }
-       else {
-         tell_object(TP, ""+arrange_string(skillslist[i],20)+arrange_string(skills[skillslist[i]]+"("+TP->query_grammar(skillslist[i])+")", 15));
-       }
+   if(!str)
+   {
+     tell_object(TP, ""+arrange_string("Language",20)+arrange_string("prof. level", 15)+"\n");
+     foreach(skill in skillslist)
+     {
+         tell_object(TP, ""+arrange_string(skill,20)+arrange_string(skills[skill]+"("+TP->query_grammar(skill)+")", 15));
      }
-     tell_object(TP,"%^GREEN%^You are currently speaking in "+TP->query_spoken()+".\n");
-     tell_object(TP,"%^ORANGE%^You have used "+usedlang+" of your total "+freelang+" language points.%^RESET%^");
+     tell_object(TP,"%^GREEN%^You are currently speaking in %^BOLD%^"+TP->query_spoken()+".\n");
+     tell_object(TP,"%^ORANGE%^You have used %^BOLD%^"+usedlang+"%^RESET%^%^ORANGE%^ of your total %^BOLD%^"+freelang+"%^RESET%^%^ORANGE%^ language points.%^RESET%^");
      return 1;
    }
    str = lower_case(str);
@@ -51,13 +56,17 @@ languages - manage your languages
 
 %^CYAN%^SYNTAX%^RESET%^
 
-languages add NUM to LANGUAGE
+languages add %^ORANGE%^%^ULINE%^NUM%^RESET%^ to %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will display languages you know, you can choose what you say with %^ORANGE%^<speak %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^>%^RESET%^ command.
+This command will display languages you know.
 
-With argument, you can add NUM points you have accumulated to LANGUAGE you already know.
+With argument, you can add %^ORANGE%^%^ULINE%^NUM%^RESET%^ points you have accumulated to %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you already know.
+
+You receive intelligence bonus of points (but no less than one point) of language points per eighteen hours of playtime and character age in years since the age you had at the time you have started playing. You are free to distrubute these points with 'add' subcommand, but someone must still give you basic understanding of the language.
+
+To choose a language you're currently using use %^ORANGE%^<speak>%^RESET%^ command.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
@@ -65,4 +74,3 @@ speak, speech, line use
 "
 );
 }
-

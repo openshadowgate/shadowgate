@@ -14,7 +14,7 @@ void create()
     set_name("flying through the air");
 
     set_short("%^BLUE%^You are climbing into the air!%^RESET%^");
-    
+
     set_long("%^RESET%^You have just begun to climb off of the ground.  You can see the tops "
         "of trees nearby beginning to drop further and further below you as you rise.  Buildings "
         "can be seen far in the distance.");
@@ -30,7 +30,7 @@ void change_stage(string stage)
     case "initial climb":
 
         TO->set_short("%^BLUE%^You are climbing into the air!%^RESET%^");
-    
+
         TO->set_long("%^RESET%^You have just begun to climb off of the ground.  You can see the tops "
             "of trees nearby beginning to drop further and further below you as you rise.  Buildings "
             "can be seen far in the distance.");
@@ -96,16 +96,3 @@ void change_stage(string stage)
 }
 
 int is_flight_room() { return 1; }
-
-void init()
-{
-    ::init();
-    add_action("no_quit","quit");
-}
-
-int no_quit(string str)
-{
-   tell_object(TP,"You can't quit while in mid flight");
-   return 1;
-}
-
