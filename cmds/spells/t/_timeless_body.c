@@ -14,7 +14,9 @@ void create() {
     set_syntax("cast CLASS timeless body");
     set_description("This power will enable a psion to take on a ghostly state, making him difficult to hit in combat.  "
 "The power has an equal chance each round to make the psion untouchable or not.  The psion's body fades, becoming "
-"partially on this plane and partially on the Astral Plane.");
+"partially on this plane and partially on the Astral Plane.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ timeless body *feats");
     set_verbal_comp();
     set_somatic_comp();
 	set_helpful_spell(1);
@@ -37,7 +39,7 @@ int preSpell() {
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
    if(caster->is_class("psywarrior")){
       mylevel = caster->query_guild_level("psywarrior");
@@ -71,11 +73,11 @@ void spell_effect(int prof)
 
 void test()
 {
-    if (!objectp(TO) || !objectp(targ))  
+    if (!objectp(TO) || !objectp(targ))
         return;
     place = environment(targ);
     if(!FEATS_D->usable_feat(targ,"armored manifester")){
-    if (!targ->is_ok_armour("mage")) 
+    if (!targ->is_ok_armour("mage"))
     {
         if(!FEATS_D->usable_feat(targ,"armored caster"))
         {
@@ -86,7 +88,7 @@ void test()
         }
     }
     }
-    call_out("test", 5); 
+    call_out("test", 5);
 }
 
 int flag;
@@ -114,7 +116,7 @@ void execute_attack(){
             targ->set_missChance(targ->query_missChance()+ 50);
 //            tell_object(targ,"Total miss chance = "+(int)targ->query_missChance()+".");
         }
-    }    
+    }
     else
     {
         if(toggle)
@@ -124,8 +126,8 @@ void execute_attack(){
             tell_object(targ,"%^BOLD%^%^BLUE%^You feel yourself grow "+
                 "more substantial again!");
             toggle = 0;
-            chance = (int)targ->query_missChance()-50; 
-//giving them a base 25 miss chance when "off" since it no longer stacks with concealing 
+            chance = (int)targ->query_missChance()-50;
+//giving them a base 25 miss chance when "off" since it no longer stacks with concealing
 //amorpha. Without it, the average miss chance is only 37%, barely more than the level 2 spell.
 //          chance = (int)targ->query_missChance()-75;
             targ->set_missChance(chance);

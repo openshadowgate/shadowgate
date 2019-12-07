@@ -52,6 +52,12 @@ varargs void do_save(object ob, int dc, string type, raw_save)
       case "reflex": statbonus = (int)ob->query_stats("dexterity");    break;
       case "will":   statbonus = (int)ob->query_stats("wisdom");       break;
     }
+
+    if(ob->is_undead())
+        if(type == "fort" ||
+           type == "fortitude")
+            statbonus = ob->query_stats("charisma");
+
     statbonus = (statbonus - 10)/2;
     save_info["base_stat_bonus"] = statbonus;
     save += statbonus;

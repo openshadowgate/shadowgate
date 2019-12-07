@@ -1061,11 +1061,11 @@ void build_final()
     ETO->set("hp_array",0);
     ETO->make_new_hitpoint_rolls(ETO);
     ETO->delete("stat_points_gained");
-    for(j=0;j<i;j++)
-    {
-        "/d/shadowgate/class_news"->class_news(classes[j],ETOQCN+" has joined your ranks.");
+//    for(j=0;j<i;j++)
+//    {
+//        "/d/shadowgate/class_news"->class_news(classes[j],ETOQCN+" has joined your ranks.");
         //NWP_D->advance_player(ETO,classes[j],1);
-    }
+//    } // This global announce is removed at player request, 6 Dec 19, Uriel
     if(!ETO->query_money("gold")) ETO->add_money("gold", 200 + random(300));
     return 1;
 

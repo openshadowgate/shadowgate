@@ -5019,6 +5019,9 @@ int age_mod(string stat) {
    VENERABLE = ({ -3, -3, -3,  3,  3,  3 });
    agebracket = query_real_age_cat();
 
+   if(TO->is_undead())
+       return 0;
+
     switch(stat)
     {
         case "strength": i = 0; break;
@@ -5033,17 +5036,17 @@ int age_mod(string stat) {
     {
         case "child": return CHILD[i]; break;
         case "middle":
-            if((FEATS_D->usable_feat(TO, "timeless body") || TO->is_undead()) &&
+            if((FEATS_D->usable_feat(TO, "timeless body")) &&
                MIDDLE[i] < 1)
                 return 0;
             return MIDDLE[i]; break;
         case "old":
-            if((FEATS_D->usable_feat(TO, "timeless body") || TO->is_undead()) &&
+            if((FEATS_D->usable_feat(TO, "timeless body")) &&
                OLD[i] < 1)
                 return 0;
             return OLD[i]; break;
         case "venerable":
-            if((FEATS_D->usable_feat(TO, "timeless body") || TO->is_undead()) &&
+            if((FEATS_D->usable_feat(TO, "timeless body")) &&
                VENERABLE[i] < 1)
                 return 0;
             return VENERABLE[i]; break;
