@@ -37,6 +37,7 @@ string spell_name,
     psyclass,
     aoe_message,
     *supreme_healer_spells,
+    *raging_healer_spells,
     *natures_gift_spells;
 
 static int FULL_EFFECT = 100;
@@ -974,21 +975,33 @@ void wizard_interface(object user, string type, string targ)
     natures_gift_spells = ({ "faerie fire","entangle","animal messenger","spider climb","meld into nature",
         "wall of thorns","treestride","insect plague","wall of stone","regeneration" });
 
+    raging_healer_spells = ({
+            "cure light wounds", "cause light wounds",
+                "cure moderate wounds", "cause moderate wounds",
+                "cure serious wounds", "cause serious wounds",
+                "cure critical wounds", "cause critical wounds",
+                "mass cure light wounds", "mass cause light wounds",
+                "mass cure moderate wounds", "mass cause moderate wounds",
+                "mass cure serious wounds", "mass cause serious wounds",
+                "mass cure critical wounds", "mass cause critical wounds",
+                "heal", "harm",
+                "mass heal", "mass harm"});
+
 // improv code; if nothing supplied, improv defaults to the spell being cast
     if (!stringp(improv=query_property("improvised"))) improv=spell_name;
     spell_name = replace_string(spell_name,"_"," ");
     improv = replace_string(improv,"_"," ");
 
-    if((!FEATS_D->usable_feat(caster,"spellmastery") || (spell_name != (string)caster->query("spellmastery_spell"))) &&
-    (!FEATS_D->usable_feat(caster,"supreme healer") || (member_array(spell_name,supreme_healer_spells) == -1)) &&
-    (!FEATS_D->usable_feat(caster,"natures gift") || (member_array(spell_name,natures_gift_spells) == -1)) &&
-    (!FEATS_D->usable_feat(caster,"expanded knowledge 1") || (spell_name != (string)caster->query("expanded_knowledge_1"))) &&
-    (!FEATS_D->usable_feat(caster,"expanded knowledge 2") || (spell_name != (string)caster->query("expanded_knowledge_2"))) &&
-    (!FEATS_D->usable_feat(caster,"expanded knowledge 3") || (spell_name != (string)caster->query("expanded_knowledge_3"))) &&
-    ((!FEATS_D->usable_feat(caster,"body cognition") && !FEATS_D->usable_feat(caster,"mind over matter")) || (spell_name != "true metabolism")) &&
-    ((!FEATS_D->usable_feat(caster,"presence of mind") && !FEATS_D->usable_feat(caster, "mental fortress")) || (spell_name != "timeless body")))
+    if(!(FEATS_D->usable_feat(caster,"spellmastery") && (spell_name == (string)caster->query("spellmastery_spell"))) &&
+       !(FEATS_D->usable_feat(caster,"supreme healer") && (member_array(spell_name,supreme_healer_spells) != -1)) &&
+       !(FEATS_D->usable_feat(caster,"natures gift") && (member_array(spell_name,natures_gift_spells) != -1)) &&
+       !(FEATS_D->usable_feat(caster,"raging healer") && (member_array(spell_name,raging_healer_spells) != -1) && caster->query_property("raged")) &&
+       !(FEATS_D->usable_feat(caster,"expanded knowledge 1") && (spell_name == (string)caster->query("expanded_knowledge_1"))) &&
+       !(FEATS_D->usable_feat(caster,"expanded knowledge 2") && (spell_name == (string)caster->query("expanded_knowledge_2"))) &&
+       !(FEATS_D->usable_feat(caster,"expanded knowledge 3") && (spell_name == (string)caster->query("expanded_knowledge_3"))) &&
+       ((!FEATS_D->usable_feat(caster,"body cognition") && !FEATS_D->usable_feat(caster,"mind over matter")) || (spell_name != "true metabolism")) &&
+       ((!FEATS_D->usable_feat(caster,"presence of mind") && !FEATS_D->usable_feat(caster, "mental fortress")) || (spell_name != "timeless body")))
     {
-// only bother checking memorized if it's not spellmastered or part of expanded knowledge/epic feats
         if(!caster->check_memorized(spell_type,improv))
         {
             tell_object(caster, "You cannot "+whatdo+" this "+whatsit+" at this time.");

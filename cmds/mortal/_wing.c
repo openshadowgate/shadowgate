@@ -34,7 +34,7 @@ preset_destinations =
 int cmd_wing(string args)
 {
     object myshape;
-    object dest;
+    string dest;
 
     if (TP->query_bound() || TP->query_paralyzed())
     {
@@ -67,7 +67,7 @@ int cmd_wing(string args)
     {
         if(member_array(args,keys(preset_destinations))!=-1)
         {
-            dest = find_object_or_load(preset_destinations[args]);
+            dest = preset_destinations[args];
         }
         else
         {
@@ -75,6 +75,9 @@ int cmd_wing(string args)
             return 1;
         }
     }
+
+    if(!objectp(dest))
+        load_object(dest);
 
     if(dest->query_property("indoors"))
     {

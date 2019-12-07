@@ -3,11 +3,11 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("RagingProphet");
+    feat_category("RageProphet");
     feat_name("ragecaster");
     feat_prereq("Raging Prophet L4");
     feat_desc("With this feat raging prophet can use offensive spells in the combat while being under effects of rage, those spells will also have full potency of their class.");
@@ -56,4 +56,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

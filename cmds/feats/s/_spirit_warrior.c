@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("RagingProphet");
+    feat_category("RageProphet");
     feat_name("spirit warrior");
     feat_prereq("Raging Prophet L4");
     feat_desc("In his frenzy raging prophet gains ability to partially enter the spirit realm, negating some of received corporeal damage and calming rage's taxing effects on his body. This feat modifies rage.");

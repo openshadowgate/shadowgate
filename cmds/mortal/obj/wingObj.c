@@ -18,7 +18,7 @@ string * RAND_MSG = ({"A cool breeze gives your wings some extra lift as you soa
 string * RAND_CLRS = ({"%^BLUE%^%^BOLD%^","%^BOLD%^%^WHITE%^","%^WHITE%^","%^BLUE%^","%^ORANGE%^"});
 string FLIGHT_ROOM = "/std/flying_room.c";
 object flyee;
-object destination;
+string destination;
 object flroom;
 int step;
 
@@ -30,7 +30,7 @@ void create()
     set_name("wing object");
 }
 
-void setup(object thingy, object dest)
+void setup(object thingy, string dest)
 {
     flyee = thingy;
     destination = dest;
@@ -54,6 +54,8 @@ void flystep()
         TO->remove();
         return;
     }
+    if(!objectp(destination))
+        load_object(destination);
 
     if(step==0)
         flroom->change_stage("initial climb");
