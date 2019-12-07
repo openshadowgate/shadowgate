@@ -71,8 +71,7 @@ void spell_effect(int prof)
     }
     else
     {
-        tell_room(place, target->QCN+"%^BOLD%^%^WHITE%^ is suddenly surrounded by an impenetrable granite armor!", caster);
-        tell_object(caster, target->QCN+"%^BOLD%^%^WHITE%^ is suddenly surrounded by an impenetrable granite armor!", caster);
+        tell_room(place, target->QCN+"%^BOLD%^%^WHITE%^ is suddenly surrounded by an impenetrable granite armor!", target);
         tell_object(target, "%^BOLD%^%^WHITE%^You are suddenly surrounded by an impenetrable granite armor!%^RESET%^");
 
     }

@@ -61,7 +61,7 @@ void spell_effect(int prof)
     /*     mark->move(caster); */
     /* } */
     caster->set_property("eclipse_caused",time());
-    tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and your hands into the sky, you notice Tyrannos stards to move to stand in front of the sun!%^RESET%^");
+    tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and your hands into the sky, you notice Tyrannos starts to move to stand in front of the sun!%^RESET%^");
     tell_room(place,"%^BOLD%^%^WHITE%^As "+caster->QCN+"'s chanting grows louder, up in the sky you see Tyrannos moving!",caster);
     message("info","%^BOLD%^%^BLACK%^You see the moon Tyrannos moving in front of the sun up in the sky!%^BOLD%^%^BLACK%^\n",filter_array(users(),(:!(environment($1)->query_property("indoors")):)));
     call_out("step_two",ROUND_LENGTH);
