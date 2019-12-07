@@ -49,11 +49,6 @@ void flystep()
         TO->remove();
         return;
     }
-    if(!objectp(destination))
-    {
-        TO->remove();
-        return;
-    }
     if(!objectp(flroom))
     {
         TO->remove();
