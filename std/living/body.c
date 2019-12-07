@@ -513,9 +513,7 @@ int query_max_hp_base()
 
     if(TO->is_undead())
     {
-        num = 5; //always good
-        if(TO->is_vampire())
-            num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("charisma"));
+        num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("charisma"));
     }
     else
         num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("constitution"));
