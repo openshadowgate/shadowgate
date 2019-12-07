@@ -17,7 +17,7 @@ int init_shape(object obj,string mysubrace)
     shape->set_old_damage_type(obj->query_base_damage_type());
     shape->change_into_message(obj);
     shape->set_base_profile((string)obj->query("relationship_profile"));
-    shape->set_shape_race(mysubrace);  NEW
+    shape->set_shape_race(mysubrace);
     obj->set("relationship_profile",shape->query_shape_profile());
     obj->add_id(shape->query_shape_race());
     subraces = (string *)shape->query_subraces();
