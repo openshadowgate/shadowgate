@@ -13,8 +13,8 @@ void check_flying(mapping info);
 
 static string FLIGHT;    // string to keep track of what "stage" of flight its in, default is landed
 string too_soon;  // The message the mount gives if they try to fly it too often
-int flying_prof;  // different from riding prof, so it can be harder/easier to fly than to ride 
-int flight_delay; // can fly TWICE in this time period, so once there and once back 
+int flying_prof;  // different from riding prof, so it can be harder/easier to fly than to ride
+int flight_delay; // can fly TWICE in this time period, so once there and once back
 int flights;      // to track number of flights its made, this will clear after the time limit passes
 int initial_time; // first time the mount flew
 int rested_time;  // time it will be when it's no longer "tired"
@@ -36,17 +36,17 @@ void create()
 void set_flight_delay(int num) { flight_delay = num; }
 
 // returns the delay in SECONDS per round trip.. meaning fly to somewhere and back
-int query_flight_delay() 
+int query_flight_delay()
 {
     if(!flight_delay) { return 3600; } // defaults to 1 hour per *2* flights
-    return flight_delay; 
+    return flight_delay;
 }
 
 // sets the athletics skill you need to fly this mount
 void set_flying_prof(int num) { flying_prof = num; }
 
 // returns the prof to fly the mount, it's different than just riding, but defaults to normal riding if you don't set it
-int query_flying_prof() 
+int query_flying_prof()
 {
     if(flying_prof) { return flying_prof; }
     return query_riding_level();
@@ -128,7 +128,7 @@ int ride_check(object obj)
     skill = (int)obj->query_skill("athletics");
     check = query_flying_prof();
 
-    skill = roll_dice(1,20) + skill;
+    skill = roll_dice(4,6) + skill;
     if(obj->query_blind()) { skill = skill - 5; } // penalty if they can't see
     result = skill - check;
 
@@ -157,10 +157,10 @@ string room_check(object obj,string location)
     string room;
     mapping temp;
     int start_proof,end_proof,power;
-    
+
     if(!objectp(obj)) { return ""; }
     if(!stringp(location) || location == "" || location == " ") { return ""; }
-    
+
     temp = obj->query_rem_rooms();
 
     room = temp[location];
@@ -235,9 +235,9 @@ int status_check(object obj)
         return 0;
     }
 
-    if(obj->query_bound() || obj->query_tripped() || obj->query_paralyzed()) 
+    if(obj->query_bound() || obj->query_tripped() || obj->query_paralyzed())
     {
-        obj->send_paralyzed_message("info",obj); 
+        obj->send_paralyzed_message("info",obj);
         return 0;
     }
 
@@ -254,7 +254,7 @@ int valid_room_filter(string room)
     if(!stringp(room)) { return 0; }
     length = strlen(room);
     test = room[length-2..length];
-    if(test != ".c") { return 0; }    
+    if(test != ".c") { return 0; }
     if(!objectp(obj = find_object_or_load(room))) { return 0; }
     if(obj->query_property("no teleport")) { return 0; }
     if(obj->query_property("teleport proof")) { return 0; }
@@ -263,7 +263,7 @@ int valid_room_filter(string room)
     return 1;
 }
 
-// to get the room they'll land in if they fail a riding check 
+// to get the room they'll land in if they fail a riding check
 string get_bad_room(string begin,string finish,int which)
 {
     object start,end,final=0;
@@ -297,7 +297,7 @@ string get_bad_room(string begin,string finish,int which)
 
     if(!sizeof(rooms)) { return begin; }
 
-    bad = rooms[random(sizeof(rooms))];    
+    bad = rooms[random(sizeof(rooms))];
     return bad;
 }
 
@@ -416,7 +416,7 @@ void do_flight(mapping info)
 {
     int steps,mid_way,check,altitude,num=0;
     string stage;
-    object landing_room,start_room,rider,flying_room;    
+    object landing_room,start_room,rider,flying_room;
 
     stage = info["stage"];
     steps = info["steps"];
@@ -444,10 +444,10 @@ void do_flight(mapping info)
     check = ride_check(rider);
 
     // aborts if they are not in the flying room anymore, in case of teleportation, etc
-    if(!environment(rider)->is_flight_room()) 
-    { 
+    if(!environment(rider)->is_flight_room())
+    {
         FLIGHT = "landed";
-        return; 
+        return;
     }
 
     // if they're more than half way there, they get a wrong room in the end
@@ -459,8 +459,8 @@ void do_flight(mapping info)
         info["bad room"] = get_bad_room(info["start room"],info["end room"],num);
     }
 
-    if(!info["falling"]) 
-    { 
+    if(!info["falling"])
+    {
         if((object)rider->query_in_vehicle() != TO) { check = -1; }
 
         if(check == -1 && stage != "landed")
@@ -519,7 +519,7 @@ void do_flight(mapping info)
             tell_room(start_room,"%^BOLD%^Far in the sky, a spot grows smaller and "
                 "smaller as it climbs ever higher.",rider);
         }
-        break;        
+        break;
 
     case "landing":
 
@@ -579,9 +579,9 @@ void do_flight(mapping info)
             {
                 rider->set_paralyzed(roll_dice(8,6),"%^RED%^Oh GOD!  Everything HURTS!  You can't even move!");
             }
-            call_out("land_mount_without_rider",roll_dice(10,8),landing_room); 
+            call_out("land_mount_without_rider",roll_dice(10,8),landing_room);
             return;
-        }            
+        }
 
         tell_room(landing_room,"%^BOLD%^%^MAGENTA%^You can see "+rider->QCN+" screaming as "
             ""+rider->QP+" plummets towards the ground!",rider);
@@ -589,8 +589,8 @@ void do_flight(mapping info)
 
     }
 
-    if(!steps || steps == 0) 
-    { 
+    if(!steps || steps == 0)
+    {
         switch(stage)
         {
         case "initial climb":   steps = roll_dice(1,3) + 1;  break;
@@ -601,7 +601,7 @@ void do_flight(mapping info)
         default:                steps = 1; break;
         }
     }
-    
+
     if(!mid_way && stage == "soaring") { mid_way = steps / 2; }
     if(mid_way)
     {
@@ -670,14 +670,14 @@ int take_off(string str)
     {
         tell_object(TP,"fly to where?");
         return 1;
-    }    
+    }
     tmp = explode(str," ");
     if(!sizeof(tmp))
     {
         tell_object(TP,"fly to where?");
         return 1;
     }
-    
+
     if(tmp[0] == "to")
     {
         dest = replace_string(implode(tmp," "),"to ","",1);
@@ -694,7 +694,7 @@ int take_off(string str)
     if(!status_check(TP))        { return 1; }
     if(!location_check(TP,dest)) { return 1; }
     if(end == "")                { return 1; }
-    
+
     check = ride_check(TP);
     room = new(FLYING_ROOM);
 
@@ -818,4 +818,3 @@ void die(mixed ob)
 }
 
 int is_flying_mount() { return 1; }
-

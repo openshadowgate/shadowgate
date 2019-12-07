@@ -4,7 +4,7 @@
 #include <std.h>
 inherit "/std/flying_mount.c";
 
-void create(){    
+void create(){
    ::create();
    set_name("griffon");
    set_id(({"mount","griffon","grifon"}));
@@ -38,8 +38,8 @@ void create(){
    set_attack_limbs( ({"beak","right leg","left leg"}) );
    set_attacks_num(3);
    set_damage(2,6);
-   set_flight_delay(900);
-   set_flying_prof(30);
+   set_flight_delay(300);
+   set_flying_prof(25);
    set_ward_pass(25);
 }
 
@@ -55,6 +55,6 @@ void init(){
 	  else{
 	     tell_room(ETP,"%^YELLOW%^The griffon leers hungrily at the horse "+
 	        "as it enters the area.%^RESET%^");
-	  }		
+	  }
    }
 }

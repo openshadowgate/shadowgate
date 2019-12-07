@@ -4,75 +4,73 @@
 
 %^CYAN%^SYNTAX
 
-Varies, see below. 
+Varies, see below.
 
 %^CYAN%^DESCRIPTION
 
-Shadowgate MUD offers a variety of mounts, ranging from docile donkeys to magnificent eagles.  Visit the stable in your nearest city and buy yours today!  Your %^CYAN%^skill%^RESET%^ with mounts is dependent on your %^CYAN%^athletics score%^RESET%^.  More exotic animals require a higher score.  You may also want to see %^ORANGE%^<help horse guide>%^RESET%^ to get started. 
+Shadowgate MUD offers a variety of mounts, ranging from docile donkeys to magnificent eagles.  Visit the stable in your nearest city and buy yours today!  Your %^CYAN%^skill%^RESET%^ with mounts is dependent on your %^CYAN%^athletics score%^RESET%^.  More exotic animals require a higher score.  You may also want to see %^ORANGE%^<help horse guide>%^RESET%^ to get started.
 
-%^CYAN%^COMMANDS 
+%^CYAN%^COMMANDS
 
 The following commands may be used to manage your horses/mounts:
 
-%^ORANGE%^<horses>%^RESET%^ 
-	Will give you a list of mounts that you own. 
-	
-%^ORANGE%^<whistle for %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^ 
-	Will call your mount to you.
-	
-%^ORANGE%^<shoo %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^ 
-	Will let you send your mount away.
+%^ORANGE%^<horses>%^RESET%^
+  Will give you a list of mounts that you own.
 
-%^ORANGE%^<tether %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^ 
-	Will tie your mount to a nearby tethering post, which prevents it from wandering off. 
-	
+%^ORANGE%^<whistle for %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^
+  Will call your mount to you.
+
+%^ORANGE%^<shoo %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^
+  Will let you send your mount away.
+
+%^ORANGE%^<tether %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^
+  Will tie your mount to a nearby tethering post, which prevents it from wandering off.
+
 %^ORANGE%^<untether %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^
-	Will untie your mount from a tethering post. 
-	
+  Will untie your mount from a tethering post.
+
 %^ORANGE%^<mount %^ULINE%^MOUNT%^RESET%^%^ORANGE%^> %^RESET%^
-	To get on your mount. 
+  To get on your mount.
 
-%^ORANGE%^<dismount>%^RESET%^ 
-	To get off your mount.
+%^ORANGE%^<dismount>%^RESET%^
+  To get off your mount.
 
-%^ORANGE%^<lead %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^ 
-	To lead your mount instead of riding it.
+%^ORANGE%^<lead %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^
+  To lead your mount instead of riding it.
 
-%^ORANGE%^<unlead %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^ 
-	To stop leading your mount. 
+%^ORANGE%^<unlead %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^
+  To stop leading your mount.
 
-%^ORANGE%^<ride %^ULINE%^DIRECTION%^RESET%^%^ORANGE%^>%^RESET%^ 
-	To ride in that cardinal direction(south, east, etc). You may also use the normal navigation commands, such as <south>, <east> etc.  
+%^ORANGE%^<ride %^ULINE%^DIRECTION%^RESET%^%^ORANGE%^>%^RESET%^
+  To ride in that cardinal direction(south, east, etc). You may also use the normal navigation commands, such as <south>, <east> etc.
 
-%^ORANGE%^<ride %^ULINE%^DIRECTION%^RESET%^%^ORANGE%^ %^ULINE%^NUMBER%^RESET%^%^ORANGE%^>%^RESET%^ 
-	To ride several rooms in that direction. Example: "ride south 10" will send you ten rooms to the south. 
+%^ORANGE%^<ride %^ULINE%^DIRECTION%^RESET%^%^ORANGE%^ %^ULINE%^NUMBER%^RESET%^%^ORANGE%^>%^RESET%^
+  To ride several rooms in that direction. Example: "ride south 10" will send you ten rooms to the south.
 
-%^ORANGE%^<fly to %^ULINE%^LOCATION%^RESET%^%^ORANGE%^>%^RESET%^ 
-	To fly to a remembered outdoor location (see %^ORANGE%^<help remember>).
+%^ORANGE%^<fly to %^ULINE%^LOCATION%^RESET%^%^ORANGE%^>%^RESET%^
+  To fly to a remembered outdoor location (see %^ORANGE%^<help remember>).
 
-%^ORANGE%^<sic %^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^  
-	To make your mount attack a target (trained mounts only). 
-	
+%^ORANGE%^<sic %^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
+  To make your mount attack a target (trained mounts only).
+
 %^ORANGE%^<heal %^ULINE%^MOUNT%^RESET%^%^ORANGE%^> %^RESET%^
-	Will let you attempt to heal your mount.
+  Will let you attempt to heal your mount.
 
-%^ORANGE%^<give %^ULINE%^MOUNT%^RESET%^%^ORANGE%^ to %^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^ 
-	Will let you give your mount to someone else.
-	
-%^ORANGE%^<handle %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^ 
-	May be attempted to gain ownership over someone else's mount. 
+%^ORANGE%^<give %^ULINE%^MOUNT%^RESET%^%^ORANGE%^ to %^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
+  Will let you give your mount to someone else.
 
-%^ORANGE%^<name %^ULINE%^MOUNT%^RESET%^ %^ORANGE%^%^ULINE%^STRING%^RESET%^%^ORANGE%^>%^RESET%^ 
-	Will set your mount's adjective (short description). Example: "name horse A muscular black stallion". 
-	
-%^ORANGE%^<redescribe %^ULINE%^MOUNT%^RESET%^ %^ORANGE%^%^ULINE%^STRING%^RESET%^%^ORANGE%^>%^RESET%^ >%^RESET%^ 
-	Will set your mount's long description. 
-	
-%^CYAN%^Please note: 
-	<> The mount's short and long descriptions do not save. We suggest you set an alias for them. 
-	<> The mount's descriptions must be RP-appropriate and include the mount's race/type. Please refer to%^ORANGE%^ <help horse guide>%^RESET%^ for rules regarding mount descriptions. 
+%^ORANGE%^<handle %^ULINE%^MOUNT%^RESET%^%^ORANGE%^>%^RESET%^
+  May be attempted to gain ownership over someone else's mount.
+
+%^ORANGE%^<name %^ULINE%^MOUNT%^RESET%^ %^ORANGE%^%^ULINE%^STRING%^RESET%^%^ORANGE%^>%^RESET%^
+  Will set your mount's adjective (short description). Example: "name horse A muscular black stallion".
+
+%^ORANGE%^<redescribe %^ULINE%^MOUNT%^RESET%^ %^ORANGE%^%^ULINE%^STRING%^RESET%^%^ORANGE%^>%^RESET%^ >%^RESET%^
+  Will set your mount's long description.
+
+%^CYAN%^Please note:
+ * The mount's short and long descriptions do not save. We suggest you set an alias for them.
+ * The mount's descriptions must be RP-appropriate and include the mount's race/type. Please refer to%^ORANGE%^ <help horse guide>%^RESET%^ for rules regarding mount descriptions.
 
 %^CYAN%^SEE ALSO
-help horse guide, help heal, help whistle, help shoo, help athletics, help skills, help paladin, help feats, help remember. 
- 
-
+horse guide, heal, whistle, shoo, athletics, skills, paladin, feats, remember.

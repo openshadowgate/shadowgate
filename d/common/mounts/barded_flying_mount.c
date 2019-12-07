@@ -1,5 +1,5 @@
-//Added to allow for barded flying mounts off of the Knight swords 
-//from Demongate.  The appropriate flying mounts will be consistent 
+//Added to allow for barded flying mounts off of the Knight swords
+//from Demongate.  The appropriate flying mounts will be consistent
 //with the normal barded horses - Octothorpe 7/6/11
 
 #include <std.h>
@@ -14,7 +14,7 @@ void create(){
 	add_limb("right foreleg","torso",0,0,0);
     add_limb("left foreleg","torso",0,0,0);
 	add_limb("right rear leg","torso",0,0,0);
-    add_limb("left rear leg","torso",0,0,0);	
+    add_limb("left rear leg","torso",0,0,0);
     add_limb("torso","torso",0,0,0);
     add_limb("head","torso",0,0,0);
     set_attack_limbs( ({"right leg","left leg"}) );
@@ -29,9 +29,9 @@ void create(){
     set_overall_ac(6);
     set_exp(1);
     set_max_distance(200);
-    set_flight_delay(900);
-    set_flying_prof(30);
-    set_ward_pass(25); 
+    set_flight_delay(300);
+    set_flying_prof(25);
+    set_ward_pass(25);
     new("/d/common/obj/armour/barding")->move(TO);
     command("wear barding");
 }
@@ -54,7 +54,7 @@ int restrict_mount_ok(object who) {
         set_riding_level(who->query_skill("athletics"));
         set_mlevel("fighter",lev);
         set_hd(lev,10);
-        set_max_hp(20*lev); 
+        set_max_hp(20*lev);
         set_hp(query_max_hp() - hurt);
         set_damage(1,lev/2);
         set_stats("strength",20);
