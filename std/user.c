@@ -1795,10 +1795,8 @@ void heart_beat()
                 }
             }
     }
-   if (!TO->query_property("passive_perception")) { test_passive_perception(); }
-   TO->set_property("passive_perception",1);
-   count = (int) query_property("passive_perception");
-   if (count > 9) { TO->remove_property("passive_perception"); }
+    if(time()/10%2)
+        test_passive_perception();
 }
 
 void net_dead2() {
@@ -5137,36 +5135,33 @@ int is_in_sunlight()
         return 0;
     return 1;
 }
- 
+
 int test_passive_perception() {
-   object *living, targ;
-   int i, numnotvisible, ishidden, ismagic;
-   int perception, stealth, spellcraft;
-   if (!objectp(TO)) return;
-   if (!objectp(ETO)) return;
-   perception = (int) TO->query_skill("perception") + roll_dice(1,20);
-   living = filter_array(all_living(ETO)-({TO}), "is_non_immortal", FILTERS_D);
-   numnotvisible = 0;
-      for(i=0;i<sizeof(living);i++){
-      targ = living[i];
-      if(!objectp(targ)) continue;
-      ishidden = targ->query_hidden();
-      ismagic = targ->query_magic_hidden();
-      stealth = (int) targ->query_skill("stealth") + roll_dice(1,20);
-      spellcraft = (int) targ->query_skill("spellcraft") + roll_dice(1,20);
-      if (ishidden==1 && ismagic==0) {
-         if (perception > stealth) { numnotvisible++; }
-      }
-      if (ishidden==1 && ismagic==1) {
-         if (perception > stealth && perception > spellcraft) { numnotvisible++; }
-      }
-      if (ishidden==0 && ismagic==1) {
-         if (perception > spellcraft) { numnotvisible++; }
-      }
-   }
-   if (numnotvisible > 0) {
-      tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense "
-    +"the presence of %^RED%^hidden or invisible%^CYAN%^ creatures lurking near you!");
-   }
-   return 1;
+    object *living, targ;
+    int i, numnotvisible, ishidden, ismagic;
+    int perception, stealth, spellcraft;
+    if (!objectp(TO)) return;
+    if (!objectp(ETO)) return;
+    perception = (int) TO->query_skill("perception")/2;
+    living = filter_array(all_living(ETO)-({TO}), "is_non_immortal", FILTERS_D);
+    numnotvisible = 0;
+    for(i=0;i<sizeof(living);i++){
+        targ = living[i];
+        if(!objectp(targ)) continue;
+        ishidden = targ->query_hidden();
+        ismagic = targ->query_magic_hidden();
+        stealth = (int) targ->query_skill("stealth");
+        spellcraft = (int) targ->query_skill("spellcraft");
+        if (ishidden==1 && ismagic==0) {
+            if (perception > stealth) { numnotvisible++; }
+        }
+        if (ishidden==0 && ismagic==1) {
+            if (perception > spellcraft) { numnotvisible++; }
+        }
+    }
+    if (numnotvisible > 0) {
+        tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense "
+                    +"the presence of %^RED%^hidden or invisible%^CYAN%^ creatures lurking near you!");
+    }
+    return 1;
 }
