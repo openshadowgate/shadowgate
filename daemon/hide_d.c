@@ -16,7 +16,7 @@ int checkFound(object what, int prof){
                                       // previously just used query_hidden()
                                      // which returns a binary result
     return (random(prof)+1 >= hidden);
-    
+
 }
 
 object * searchContainer(object cont, object who){
@@ -27,7 +27,7 @@ object * searchContainer(object cont, object who){
     //prof = who->query_nwp("concealment");
     prof = (int)who->query_skill("thievery") / 2;
     max_search_level = prof + (int)who ->query_highest_level()/2;
-    search_level = max_search_level/2 + random(max_search_level/2) +1;
+    search_level = max_search_level/2 + max_search_level/4 +1;
     found = ({});
     inven = all_inventory(cont);
     for (i=0;i<sizeof(inven);i++) {
@@ -43,4 +43,3 @@ object * searchContainer(object cont, object who){
     return found;
 
 }
-

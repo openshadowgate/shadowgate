@@ -79,10 +79,10 @@ int catch_eavesdrop(object spkr, object who, string msg, string lang) {
     if(!objectp(target))  { dest_me();  return 1; }
 
 // no gaining or hearing double if you're already in the conversation
-    if(caster == spkr || caster == who)         return 1;  
-// no eavesdropping 
+    if(caster == spkr || caster == who)         return 1;
+// no eavesdropping
     if(!wizardp(caster)) {
-	if(wizardp(spkr) || wizardp(who) || spkr->query_true_invis() || 
+	if(wizardp(spkr) || wizardp(who) || spkr->query_true_invis() ||
            who->query_true_invis())   		return 1;
     }
     if(wizardp(caster) || (avatarp(caster) && caster->query_lowest_level() > 99)) {
@@ -90,16 +90,19 @@ int catch_eavesdrop(object spkr, object who, string msg, string lang) {
 	     " whisper to "+who->query_cap_name()+":  %^RESET%^"+msg);
 	 return 1;
     }
-    prof = TP->query_skill("perception")+roll_dice(1,20);
+    prof = TP->query_skill("perception");
     if(!target->query_detecting_invis() && caster->query_invis()) bonus=4;
-    if((target->query_skill("perception")+roll_dice(1,20)) > prof+bonus) {
+    if(FEATS_D->usable_feat(TP,"spot")) bonus = prof/5;
+    if(TP->query("race")=="elf") bonus += 4;
+    if(TP->query("race")=="half-elf") bonus += 2;
+    if((target->query_skill("perception")) > prof+bonus) {
 
   if ((TP->query_hidden()) && (!random(4))) {
     if (objectp(present("TSR80",TP))) {
     present("TSR80",TP)->force_cancel();
     }
   }
-      if(!random(3))  
+      if(!random(3))
 	tell_object(caster, "Your target moved, noticed you, or something/someone is in your way now.");
       if(!(random(prof) + caster->query_charisma())) {  // they won't always notice
 	 tell_object(spkr, caster->query_cap_name()+"'s apparent interest is making you uncomfortable.");
@@ -109,7 +112,7 @@ int catch_eavesdrop(object spkr, object who, string msg, string lang) {
       return 1;
     }
 // you may miss it entirely from distractions/interference
-    if(!random(10+prof)) return 1;  
+    if(!random(10+prof)) return 1;
     if( interactive(spkr) || interactive(who) )
     msg= "daemon/language_d"->translate(msg, lang, caster);
 
@@ -117,19 +120,19 @@ int catch_eavesdrop(object spkr, object who, string msg, string lang) {
 // skipping words & using random affected by nwp prof for nwps by *Styx*
     words = explode(msg," ");
     j = sizeof(words);
-    for(i=0;i<j;i++) {        
+    for(i=0;i<j;i++) {
       switch(random(30)+(prof*2)) {
 	case 0:  words[i] = " ";	break;
 	case 1:  words[i] = "_ _ _";	break;
 	case 2:  words[i] = "_ _";	break;
 	case 3:  words[i] = "_";	break;
-	case 4..10:  
+	case 4..10:
 	   words[i] = "/daemon/language_d"->fakeWord(lang);	break;
         default:  words[i];
       }
       ret+= words[i] + " ";
     }
-   
+
     tell_object(caster, "%^BOLD%^%^CYAN%^You discern parts of "+spkr->query_cap_name()+" whispering to "+who->query_cap_name()+":  %^RESET%^"+msg);
 
     return 1;

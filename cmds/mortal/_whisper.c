@@ -102,40 +102,6 @@ int cmd_whisper(string str)
    if(lis1 && objectp(lis1))      lis1->catch_eavesdrop(TP, ob, msg, lang);
    else if(lis2 && objectp(lis2)) lis2->catch_eavesdrop(TP, ob, msg, lang);
 
-/* need to pass both objects & the message so we can check for the eavesdropper detecting invis.  Hopefully this works when I figure out how to make it handle a list of eavesdroppers
-This is the start, but may need other stuff
-    list1 = TP->query_property("eavesdropper");
-    list2 = ob->query_property("eavesdropper");
-// Automatically allow imms to hear whispers, except from other imms
-// Added by Lujke 04 April 2007
-  if (objectp(ETP) && !avatarp(TP)&& !avatarp(ob)){
-    people = all_living(ETP);
-    for (i=0;i<sizeof(people);i++){
-      if (avatarp(people[i])){
-        tell_object(people[i], "%^CYAN%^"+TPQCN + "%^RESET%^%^CYAN%^"
-          +" whispers to " + ob->QCN + "%^RESET%^%^CYAN%^: %^RESET%^"
-          + msg);
-      }
-    }
-  }
-
-// use filter_array instead (see /daemon/messaging_d.c) ?? - Garrett's suggestion
-    if(list1) {
-	i = sizeof(list1);
-	while(i--) {
-	   if(!objectp(list1[i]))  continue;
-	   list1[i]->catch_eavesdrop(TP, ob, msg, lang);
-        }
-    }
-    if(list2) {
-	i = sizeof(list2);
-	while(i--) {
-	   if(!objectp(list2[i]))  continue;
-	   list2[i]->catch_eavesdrop(TP, ob, msg, lang);
-        }
-    }
-*/
-// end nwps - check for invis of each, etc. & eavesdropper detecting invis in the persnoop
    if(ob == TP)
    {
 	   tell_room(ETP,TPQCN+" whispers something to "+TP->query_objective()+"self.",TP);
@@ -146,7 +112,6 @@ This is the start, but may need other stuff
    if(ob->query_invis() && !TP->detecting_invis() && !pseudo)
    {
       notify_fail(capitalize(who)+" does not appear to be within whispering distance.\n");
-// so it doesn't confirm to someone that they are thief hidden *Styx*  12/5/02
       if(ob->query_hidden())
       {
           if(stringp(pseudoname)) message("whisper", "%^BOLD%^%^CYAN%^"+capitalize(pseudoname)+" whispers to you: %^RESET%^"+msg,ob);
@@ -220,29 +185,23 @@ This is the start, but may need other stuff
 }
 
 void help() {
-   write("Syntax: <whisper [player] [message]>\n\n"+
-        "This command is used to whisper a message to another "
-        "player who is in the same room as you without other "
-        "players being able to hear what you are saying.\n"
-        "See also: say, emote, yell\n");
+   write(
+"
+%^CYAN%^NAME%^RESET%^
+
+whisper - convey something discreetly
+
+%^CYAN%^SYNTAX%^RESET%^
+
+whisper %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command is used to whisper a message to another player who is in the same room as you without other players being able to hear what you are saying.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+say, tell, eavesdrop, perception, stealth, status effects, pkilling
+"
+       );
 }
-
-/* I think we want to go directly back to the persnoop mob with the info and skip this
-  may want to put a couple of the checks above though
-void eavesdrop(object targ, string prefix, string msg){
-    object lis, per;
-
-    lis = (object)targ->query_property("eavesdropper");
-    per = (object)lis->query_caster();
-    if(!objectp(lis) || !objectp(per)){
-// need to only remove the specific one, not all eavesdroppers
-      targ->remove_property("eavesdropper");
-      return;
-    }
-
-    if(environment(lis) != environment(targ)) return;
-
-    lis->catch_eavesdrop("%^BOLD%^%^CYAN%^You catch %^RESET%^"+msg);
-    return;
-}
-*/

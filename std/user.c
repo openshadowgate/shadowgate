@@ -1795,8 +1795,9 @@ void heart_beat()
                 }
             }
     }
-    if(time()/10%2)
-        test_passive_perception();
+    if(!avatarp(TO))
+        if(time()/10%3)
+            test_passive_perception();
 }
 
 void net_dead2() {
@@ -5142,7 +5143,10 @@ int test_passive_perception() {
     int perception, stealth, spellcraft;
     if (!objectp(TO)) return;
     if (!objectp(ETO)) return;
-    perception = (int) TO->query_skill("perception")/2;
+    if(FEATS_D->usable_feat(TO,"spot"))
+        perception = (int) TO->query_skill("perception");
+    else
+        perception = (int) TO->query_skill("perception")/2;
     living = filter_array(all_living(ETO)-({TO}), "is_non_immortal", FILTERS_D);
     numnotvisible = 0;
     for(i=0;i<sizeof(living);i++){
@@ -5155,13 +5159,16 @@ int test_passive_perception() {
         if (ishidden==1 && ismagic==0) {
             if (perception > stealth) { numnotvisible++; }
         }
+        if(FEATS_D->usable_feat(TO,"spot"))
+            if (ishidden==1 && ismagic==1) {
+                if (perception > stealth && perception*5/6 > spellcraft) { numnotvisible++; }
+            }
         if (ishidden==0 && ismagic==1) {
             if (perception > spellcraft) { numnotvisible++; }
         }
     }
     if (numnotvisible > 0) {
-        tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense "
-                    +"the presence of %^RED%^hidden or invisible%^CYAN%^ creatures lurking near you!");
+        tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense the presence of %^RED%^hidding%^CYAN%^ creatures near you!");
     }
     return 1;
 }

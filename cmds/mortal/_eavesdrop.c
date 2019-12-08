@@ -7,13 +7,13 @@
 	/d/npc/alinbar (5) - he's too drunk to teach well
 */
 /* probably combined with possibly someone else (targets) eavesdropping
-(Styx) <wiz> Oh, and duration without trying again too? 
+(Styx) <wiz> Oh, and duration without trying again too?
 Someone <wiz> also we should change the command to allow more then one person to eaves drop
 */
-/* 
+/*
 Someone <wiz> based on the message type it does some stuff and then calls catch tell
 
-(Styx) <wiz> OK, boiled down to the really basic stuff, I see that. 
+(Styx) <wiz> OK, boiled down to the really basic stuff, I see that.
 Someone <wiz> The hard(er) part is where do you intercept it to be the best fit with everything you want to do.
 Someone <wiz> because you want the person to his own tranlations I'd say that you intercept and resend immediately
 
@@ -21,20 +21,20 @@ Someone <wiz> you might want to parse out the whisper
 Someone <wiz> the Joe whispers to you: and change it to Joe whispers to bob:
 Someone <wiz> that would be a cool feature
 
-(Styx) <wiz> I had already decided the whisper thing needed to send the prefix separate from the message. 
+(Styx) <wiz> I had already decided the whisper thing needed to send the prefix separate from the message.
 
 Someone <wiz> make it so that cap names get translated to you if ...
 Someone <wiz> Look at how say is parsed.
 Someone <wiz> It finds the colon, then translates past the colon.
-(Styx) <wiz> OK, let's see if I have the right general idea of how this would work for the eavesdrop to use receive_message? 
+(Styx) <wiz> OK, let's see if I have the right general idea of how this would work for the eavesdrop to use receive_message?
 
-(Styx) <wiz> We would add something into the whisper part that would check for an eavesdropper property and include the eavesdropping person/object/whatever in the list of who receives that message? 
+(Styx) <wiz> We would add something into the whisper part that would check for an eavesdropper property and include the eavesdropping person/object/whatever in the list of who receives that message?
 Someone <wiz> Right
 
-(Styx) <wiz> OK, and then we'd need the code to send it what we wanted it to get versus what the normal recipient gets? 
+(Styx) <wiz> OK, and then we'd need the code to send it what we wanted it to get versus what the normal recipient gets?
 ~styx/bin  Someone <wiz> So you could call find_player("grendel")->subscribe_message("say",TP) and it would send his says to you to be processed, however that's going to work.
 
-(Styx) <wiz> And that's where he was saying it would be cool if the code could use one tell_object or whatever and substitute name for you? 
+(Styx) <wiz> And that's where he was saying it would be cool if the code could use one tell_object or whatever and substitute name for you?
 ~styx/bin  Someone <wiz> right
 Someone <wiz> You break the whisper at the colon, then take the 'you' and parse it to '$$&&$$name$$&&$$
 --------------
@@ -69,7 +69,7 @@ int help();
 int cmd_eavesdrop(string str){
     object targ;
     int prof, delay, bonus;
-    string posxxx; 
+    string posxxx;
     if(!objectp(TP)) { return 0; }
     posxxx = lower_case((string)TP->query_position());
     if(posxxx == "builder" || posxxx == "apprentice")
@@ -78,7 +78,7 @@ int cmd_eavesdrop(string str){
         return 1;
     }
     if(!str) return help();
-    if(TP->query_property("eavesdropping")) 
+    if(TP->query_property("eavesdropping"))
 	return notify_fail("You can only eavesdrop one conversation at a time.\n");
 
     if(avatarp(TP)) {
@@ -92,17 +92,17 @@ int cmd_eavesdrop(string str){
 
     if(!targ || !objectp(targ))
         return notify_fail("You don't see that target here now do you?\n");
-    
-    if(avatarp(TP)) 
+
+    if(avatarp(TP))
 	return listen_person(targ, 100);
 
-    if((object)TP->query_attackers() != ({})) 
+    if((object)TP->query_attackers() != ({}))
 	return notify_fail("Get real, not while you're fighting!\n");
 
     if(targ == TP)
 	return notify_fail("You can't eavesdrop yourself silly.\n");
 
-    if(targ->query_true_invis() || 
+    if(targ->query_true_invis() ||
       (targ->query_invis() && !TP->detecting_invis()) )
          return notify_fail("You don't see that target here now do you?\n");
 
@@ -110,21 +110,23 @@ int cmd_eavesdrop(string str){
     if( (avatarp(targ) && targ->query_lowest_level() > 99 && !wizardp(TP)) || (targ->query_property("no eavesdrop")))
        return notify_fail("You can't do that.\n");
 // take this out once the list thing is working
-    if(targ->query_property("eavesdropper")) 
+    if(targ->query_property("eavesdropper"))
 	return notify_fail("Someone is in your way.\n");
 
-    prof = TP->query_skill("perception")+roll_dice(1,20);
-    if( prof > 15)  { delay = 5; } 
+    prof = TP->query_skill("perception");;
+    if(FEATS_D->usable_feat(TP,"spot"))
+        prof += prof*6/5;
+    if( prof > 15)  { delay = 5; }
  	else { delay = 14 - (prof/2); }
-   
-    if(!TP->query_time_delay("eavesdropping",delay)) 
+
+    if(!TP->query_time_delay("eavesdropping",delay))
        return notify_fail("You need to wait so you can get back in position discretely.\n");
     TP->set_time_delay("eavesdropping");
 
-    if(!targ->query_detecting_invis() && TP->query_invis())  
+    if(!targ->query_detecting_invis() && TP->query_invis())
 	bonus=4;
 // this needs to be the first check for nwp effect
-    if( (targ->query_skill("perception")+roll_dice(1,20) ) > prof ) {  
+    if( (targ->query_skill("perception")) > prof ) {
       if (TP->query_hidden()) {
         if (objectp(present("TSR80",TP))) present("TSR80",TP)->force_cancel();
       }
@@ -200,4 +202,3 @@ Without an argument, you will stop listening to other conversation.
 spy, look, tell, communication, step, hide_in_shadows
 ");
 }
-
