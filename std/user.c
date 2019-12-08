@@ -5146,6 +5146,7 @@ int test_passive_perception() {
    if (!objectp(ETO)) return;
    perception = (int) TO->query_skill("perception") + roll_dice(1,20);
    living = filter_array(all_living(ETO), "is_non_immortal", FILTERS_D);
+   if (member_array(TO,living)) { living -= ({TO}); }
    numnotvisible = 0;
       for(i=0;i<sizeof(living);i++){
       targ = living[i];
@@ -5165,8 +5166,8 @@ int test_passive_perception() {
       }
    }
    if (numnotvisible > 0) {
-      tell_object(TO,"You sense the presence of "+numnotvisible+
-                     " invisible or hidden creatures near you.");
+      tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense "
+    +"the presence of %^RED%^hidden or invisible%^CYAN%^ creatures lurking near you!");
    }
    return 1;
 }
