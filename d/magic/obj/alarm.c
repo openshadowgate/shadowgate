@@ -47,7 +47,7 @@ void alarm_observe()
         livings -= ({TO});
         livings -= ({caster});
         livings -= caster->query_followers();
-        livings = filter_array(livings, "is_non_immortal",FILTERS_D);
+        livings = filter_array(livings,(:!avatarp($1):));
         if(objectp(caster))
             if(sizeof(livings))
                 if(alarm_type=="mental")
