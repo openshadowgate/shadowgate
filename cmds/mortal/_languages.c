@@ -16,7 +16,9 @@ int cmd_languages(string str){
    int intbonus = BONUS_D->query_stat_bonus(TP, "intelligence");
 
    intbonus = intbonus<1?1:intbonus;
-   freelang = (TP->query_age() / 43200 + ((time() - TP->query_birthday())/YEAR)) * intbonus;
+   freelang = to_int(
+       log((TP->query_age() / 43200 + ((time() - TP->query_birthday())/YEAR)) * intbonus * (1/100)*(exp(100.0))+1.0)
+       );
    usedlang = TP->query("used language points");
    skills = TP->query_all_langs();
    skillslist = keys(skills);
