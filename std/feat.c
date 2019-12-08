@@ -748,7 +748,7 @@ void help(){
     if (stringp(feat_desc))
         write("\n"+feat_desc+"\n");
     if (allow_shifted())
-        write("%^BOLD%^%^WHITE%^This feat won't deactivate in shapeshifted form.");
+        write("%^BOLD%^%^WHITE%^Shapeshift: %^RESET%^This feat won't deactivate in shapeshifted form.");
     if (psionic)
-        write("%^BOLD%^%^WHITE%^This is a psionic feat. It will improve your psionic body ability.");
+        write("%^BOLD%^%^WHITE%^Psionic: %^RESET%^This is a psionic feat. It will improve your psionic body ability.");
 }

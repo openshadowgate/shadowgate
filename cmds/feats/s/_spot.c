@@ -7,8 +7,12 @@ void create() {
     ::create();
     feat_type("permanent");
     feat_category("GeneralCombat");
-    feat_name("blindfight");
-    feat_desc("This feat reflects increased aptitude in handling oneself when robbed of sight, both in combat accuracy and in avoiding obstacles while walking. It will allow to retain dexterity bonus to armor class when blinded and will allow to use targeted feats. It does not, however, allow the character to use spells or directly targetted abilities on an unseen foe.
+    feat_name("spot");
+    feat_desc("The Spot skill is used primarily to detect characters or creatures who are hiding. Typically, your Spot check is opposed by the stealth check of the creature trying not to be seen. Spot increases your ability to passively percieve, removing panalty to perception when making passice rolls.
+
+A Spot check result higher than 20 generally lets you become aware of an invisible creature near you, though you can’t actually see it.
+
+Spot, like passive perception, is entirely deterministing in this game and offers no chances. It either work or doesn't.
 
 %^BOLD%^See also:%^RESET%^ status effects");
     permanent(1);
