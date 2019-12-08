@@ -11,6 +11,7 @@
 #include <objects.h>
 #include <save.h>
 #include <security.h>
+#include <daemons.h>
 
 string *monsters, *monsters2, *monsters3, *monsters4,*monsters5;
 
@@ -1517,3 +1518,49 @@ string *list_classes()
 
 
 int sizeof_monsters() { return sizeof(monsters4);}
+
+int immunity_check(object obj, string type)
+{
+    string myrace,mysubrace;
+    int num;
+    if(!objectp(obj)) { return 0; }
+    myrace = obj->query_race();
+    mysubrace = obj->query("subrace");
+
+    switch(type)
+    {
+    case "sleep":
+    {
+        switch(myrace)
+        {
+        case "elf":
+        case "drow":
+        case "half-elf":
+        case "half-drow":
+            return 1;
+        default:
+            return 0;
+        }
+        return 0;
+    }
+    case "fear":
+    {
+        if(FEATS_D->usable_feat(obj,"no fear of the flame"))
+            return 1;
+        switch(myrace)
+        {
+        case "halfling":
+            return 1;
+        case "human":
+            if(mysubrace == "attayan") num = 200; break;
+        default:
+            return 0;
+        }
+        return 0;
+    }
+    default:
+        return 0;
+    }
+
+    return 0;
+}

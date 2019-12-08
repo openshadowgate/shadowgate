@@ -2667,78 +2667,7 @@ void prepend_to_combat_cycle(object room)
 
 int race_immunity_check(object obj, string type)
 {
-    string myrace,mysubrace;
-    int num;
-    if(!objectp(obj)) { return 0; }
-    myrace = obj->query_race();
-    mysubrace = obj->query("subrace");
-
-    switch(type)
-    {
-    case "sleep":
-        switch(myrace)
-        {
-        case "elf":
-        case "drow":
-        case "half-elf":
-        case "half-drow":
-            tell_object(obj,"%^BOLD%^%^WHITE%^Your innate immunity to sleep enchantment shrugs off the spell!%^RESET%^");
-            tell_object(caster,"%^BOLD%^%^WHITE%^%^"+obj->QCN+" seems to shrug off the spell effortlessly!%^RESET%^");
-            return 1;
-        default:
-            return 0;
-        }
-        return 0;
-
-    case "fear":
-    case "fear silent":
-
-        switch(myrace)
-        {
-        case "half-elf":    num = 15;   break;
-        case "half-drow":   num = 15;   break;
-        case "beastman":    num = 30;   break;
-        case "firbolg":     num = 8;    break;
-        case "drow":        num = 30;   break;
-        case "elf":         num = 35;   break;
-        case "human":
-            if(mysubrace == "attayan") num = 200; break;
-        default:            num = -100;   break;
-        }
-        if(FEATS_D->usable_feat(obj,"no fear of the flame")) num = 200; // fear immunity for L1 hellfire warlock class.
-
-        if(random(100) < num)
-        {
-            if((myrace == "human" && mysubrace == "attayan") || FEATS_D->usable_feat(obj,"no fear of the flame"))
-            {
-                if(type != "fear silent")
-                {
-                    tell_object(obj, "%^RESET%^%^BOLD%^You feel the insidious effects of the "
-                        "spell, but you are fearless and it has no effect on you!%^RESET%^");
-                    tell_room(place, "%^RESET%^%^BOLD%^"+obj->QCN+" seems completely fearless and "
-                        "unaffected!",obj);
-                }
-                return 1;
-            }
-            else
-            {
-                if(type != "fear silent")
-                {
-                    tell_object(obj, "%^RESET%^%^BOLD%^You shudder but manage to resist the fear "
-                        "effect!");
-                    tell_room(place,"%^RESET%^%^BOLD%^"+obj->QCN+" sudders but manages to "
-                        "resist the fear effect!",obj);
-                }
-                return 1;
-            }
-        }
-        return 0;
-
-    default:
-        return 0;
-    }
-
-    return 0;
+    return PLAYER_D->immunity_check(obj,type);
 }
 
 varargs int mind_immunity_check(object obj, string type)

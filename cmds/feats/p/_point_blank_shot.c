@@ -7,7 +7,9 @@ void create() {
     feat_type("permanent");
     feat_category("RangedCombat");
     feat_name("point blank shot");
-    feat_desc("Point blank shot allows for projectile weaponsto be fired even in close-quarters combat. Taking this feat will allow archer to use bows in combat, using %^BOLD%^dexterity%^RESET%^ as their base stat for both damage and attack bonuses.");
+    feat_desc("Point blank shot allows for projectile weaponsto be fired even in close-quarters combat. Taking this feat will allow archer to use bows in combat, using %^BOLD%^dexterity%^RESET%^ as their base stat for both damage and attack bonuses.
+
+%^BOLD%^See also:%^RESET%^ ranged weapons");
     permanent(1);
     set_required_for(({"manyshot","deadeye","precise shot","shot on the run"}));
 }
