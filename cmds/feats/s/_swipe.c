@@ -21,7 +21,8 @@ If used without an argument this feat will pick up a random attacker.
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if(!FEATS_D->has_feat(ob,"opportunity strikes"))
+    if(!FEATS_D->has_feat(ob,"opportunity strikes") ||
+       ob->is_wearing_type("shield"))
     {
         dest_effect();
         return 0;
@@ -44,9 +45,10 @@ int check_can_use()
     int x;
     if(!objectp(caster)) return 0;
     weapons = caster->query_wielded();
-    if(sizeof(weapons)!=1)
+    if(sizeof(weapons)!=1 ||
+       caster->is_wearing_type("shield"))
     {
-        tell_object(caster, "%^BOLD%^%^GREEN%^You must be using one single-handed weapon!");
+        tell_object(caster, "%^BOLD%^%^GREEN%^You must be using one single-handed weapon without shield!");
         return 0;
     }
     return 1;

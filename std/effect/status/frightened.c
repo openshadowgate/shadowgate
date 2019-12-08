@@ -1,6 +1,7 @@
 #include <std.h>
 #include <magic.h>
 #include <skills.h>
+#include <daemons.h>
 
 #pragma strict_types
 
@@ -22,6 +23,8 @@ void status_effect()
 
     if(target->query_property("effect_frightened")||
        target->query_property("effect_panicked"))
+        return;
+    if(PLAYER_D->immunity_check(target,"fear"))
         return;
 
     target->set_property("effect_frightened",1);

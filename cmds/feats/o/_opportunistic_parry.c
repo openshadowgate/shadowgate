@@ -23,7 +23,8 @@ int prerequisites(object ob)
 {
     object *weapons;
     if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"positioning"))
+    if(!FEATS_D->has_feat(ob,"positioning")
+       || ob->is_wearing_type("shield"))
     {
         dest_effect();
         return 0;

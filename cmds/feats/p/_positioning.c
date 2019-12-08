@@ -26,7 +26,8 @@ int allow_shifted() { return 0; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"swipe"))
+    if(!FEATS_D->has_feat(ob,"swipe") ||
+       ob->is_wearing_type("shield"))
     {
         dest_effect();
         return 0;

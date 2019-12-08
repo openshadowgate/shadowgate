@@ -23,6 +23,11 @@ int prerequisites(object ob)
     object *weapons;
     if(!objectp(ob)) { return 0; }
     return ::prerequisites(ob);
+    if(ob->is_wearing_type("shield"))
+    {
+        dest_effect();
+        return 0;
+    }
 }
 
 void execute_feat()

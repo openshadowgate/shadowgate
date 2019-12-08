@@ -2667,6 +2667,8 @@ void prepend_to_combat_cycle(object room)
 
 int race_immunity_check(object obj, string type)
 {
+    if(type = "fear silent")
+        type = "fear";
     return PLAYER_D->immunity_check(obj,type);
 }
 
