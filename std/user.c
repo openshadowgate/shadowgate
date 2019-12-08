@@ -5145,8 +5145,7 @@ int test_passive_perception() {
    if (!objectp(TO)) return;
    if (!objectp(ETO)) return;
    perception = (int) TO->query_skill("perception") + roll_dice(1,20);
-   living = filter_array(all_living(ETO), "is_non_immortal", FILTERS_D);
-   if (member_array(TO,living)) { living -= ({TO}); }
+   living = filter_array(all_living(ETO)-({TO}), "is_non_immortal", FILTERS_D);
    numnotvisible = 0;
       for(i=0;i<sizeof(living);i++){
       targ = living[i];
