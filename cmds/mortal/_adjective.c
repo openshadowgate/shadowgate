@@ -45,8 +45,6 @@ You are required to use automatic racial substitutions %^CYAN%^$R%^RESET%^, for 
 
 In addition to that, there are several substitutions to expand your adjective:
 
-    %^CYAN%^$CSR%^RESET%^ - capitalized subrace
-
     %^CYAN%^$B%^RESET%^ - body type
 
     %^CYAN%^$G%^RESET%^ - gender
@@ -55,16 +53,16 @@ In addition to that, there are several substitutions to expand your adjective:
 
     %^CYAN%^$H%^RESET%^ - hair color
 
-    Your adjective should be something appropriate that someone could tell almost immediately about your character. It should also be fairly short and succinct as well as stable over reasonable periods of time. 
+    Your adjective should be something appropriate that someone could tell almost immediately about your character. It should also be fairly short and succinct as well as stable over reasonable periods of time.
 
 %^CYAN%^EXAMPLES%^RESET%^
 
 $R with long hair
-        
+
     A human with long hair, if you are a human.
 
 $SR with blue hair
-        
+
     A water genasi with blue hair, if your subrace is water genasi.
 
 $G $R with a $B build
@@ -76,4 +74,3 @@ $G $R with a $B build
 describe, who, colors
 ");
 }
-

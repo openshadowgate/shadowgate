@@ -935,7 +935,6 @@ int id(string str)
 
     if(objectp(shape = TO->query_property("altered")))
     {
-        if(stuff == query_race()) { return 0; }
         shape_race = (string)shape->query_shape_race();
         if(stuff == shape_race) { return hold; }
     }
@@ -943,7 +942,11 @@ int id(string str)
     if(str=="attacker") { return hold; }
     if (!objectp(TP) || avatarp(TP) || TP == TO || !userp(TP)) { return hold; }
     if(stringp(known)) { known = lower_case(known); }
-    if( stuff != known && stuff != "player" && stuff != query_race()) { return 0; }
+    if(!(stuff == known ||
+         stuff == "player" ||
+         stuff == query_race() ||
+         ( stuff == query("subrace") && strsrch(getDescriptivePhrase(),"$SR") != -1)))
+        return 0;
     return hold;
 }
 
@@ -4291,10 +4294,6 @@ string getWholeDescriptivePhrase(){
      {
         phrase = phrase;
      }
-     else if( (strsrch(phrase,"$CSR") != -1) && query("subrace") != 0)
-     {
-        phrase = phrase;
-     }
      else
      {
         phrase = phrase+" $R";
@@ -4319,7 +4318,6 @@ string getWholeDescriptivePhrase(){
       if(query("subrace") != 0)
       {
          str = replace_string(str,"$SR",subrace);
-         str = replace_string(str,"$CSR",capitalize(subrace));
       }
       str = replace_string(str,"$R",query_race());
   }
