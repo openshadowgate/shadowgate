@@ -2341,7 +2341,6 @@ string query_short() {
     if (query_blindfolded()) {
       descr = descr + "blindfolded ";
     }
-// added by Styx 5/22/03 - let's see if this works correctly often enough to be useful
     if (query_paralyzed()) {
       descr = descr + "immobile";
     }
@@ -4277,11 +4276,6 @@ string getWholeDescriptivePhrase(){
 
   if(!stringp(phrase))
   {
-    if(query_race() == "voadkyn")
-    {
-      phrase = "$B $G $R with $E eyes";
-    }
-    else
       phrase = "$B $G $R with $E eyes and $H hair";
   }
   if(strsrch(phrase,"$R") == -1)
@@ -4305,6 +4299,10 @@ string getWholeDescriptivePhrase(){
   str = replace_string(str,"$G",query_gender());
 
   if(objectp(shape = (object)query_property("shapeshifted")))
+  {
+      the_race = (string)shape->query_shape_race();
+  }
+  if(objectp(shape = (object)query_property("altered")))
   {
       the_race = (string)shape->query_shape_race();
   }

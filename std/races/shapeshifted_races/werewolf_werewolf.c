@@ -67,12 +67,14 @@ int can_cast()
 int shape_attack(object tp, object targ) { return 0; }
 
 int init_shape(object obj,string str){
-    if(!objectp(obj)) { return 0; } //
+    if(!objectp(obj)) { return 0; }
     if(obj->query_property("altered") || obj->query_property("shapeshifted")) { return 0; } // can't shapeshift twice
-    obj->set_property("altered",shape = new(base_name(TO)+".c")); // makes a new shape and sets the shapeshifted property to it, this is where all the work is done, very important
+    obj->set_property("altered",shape = new(base_name(TO)+".c"));
     shape->set_owner(obj);
     shape->change_into_message(obj);
     shape->set_base_profile((string)obj->query("relationship_profile"));
+    shape->set_shape_race("werewolf");
+    obj->add_id("werewolf");
     obj->set("relationship_profile",shape->query_shape_profile());
     obj->add_id(obj->query_race());
 
@@ -90,7 +92,7 @@ int reverse_shape(object obj){
     if(!objectp(obj)) { return 3; }
     if(!objectp(shape = obj->query_property("altered"))) { return 5; }
     obj->set("relationship_profile",shape->query_base_profile());
-
+    obj->remove_id("werewolf");
     if(objectp(to_object(DESC_D))) {
         desc = new(DESC_D);
         desc->restore_profile_settings(obj,shape->query_base_profile());
