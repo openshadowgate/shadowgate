@@ -5170,7 +5170,7 @@ int test_passive_perception() {
         }
     }
     if (numnotvisible > 0) {
-        tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense the presence of %^RED%^hidden%^CYAN%^ creatures near you!");
+        tell_object(TO,"BOLD%^%^CYAN%^You sense an unseen creature lurking nearby!");
     }
     return 1;
 }
