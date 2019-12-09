@@ -2198,7 +2198,7 @@ int calculate_bonus(int stat) {
 
 int is_caster(string myclass) {
    string *casterclasses;
-   casterclasses = (({ "mage", "sorcerer", "cleric", "druid", "bard", "psion", "psywarrior", "inquisitor" }));
+   casterclasses = (({ "mage", "sorcerer", "cleric", "druid", "bard", "psion", "psywarrior", "inquisitor", "oracle" }));
    if(member_array(myclass,casterclasses) != -1) return 1;
    return 0;
 }
@@ -2257,6 +2257,7 @@ varargs int do_save(object targ,int mod) {
         break;
     case "bard":
     case "sorcerer":
+    case "oracle":
     case "warlock":
 	if(save_debug) tell_object(caster,"Caster's casting stat:  Charisma");
         stat = "charisma";
@@ -2562,6 +2563,8 @@ void get_casting_stat()
         mycastingstat = "/std/class/sorcerer.c"->query_casting_stat(caster); break;
     case "inquisitor":
         mycastingstat = "/std/class/inquisitor.c"->query_casting_stat(caster); break;
+    case "oracle":
+        mycastingstat = "/std/class/oracle.c"->query_casting_stat(caster); break;
     case "warlock":
         mycastingstat = "/std/class/warlock.c"->query_casting_stat(caster); break;
     case "psywarrior":

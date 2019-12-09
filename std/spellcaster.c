@@ -128,6 +128,7 @@ int set_memorized(string myclass, string spell, int num) {
     if (!spell) return 0;
     if(myclass == "bard" ||
        myclass == "sorcerer" ||
+       myclass == "oracle" ||
        myclass == "inquisitor") { //get spontaneous settings
       if(sscanf(spell,"level %d",level) != 1) return 0;
       spell = "generic";
@@ -162,6 +163,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
     if(myclass == "warlock") return 1;
     if(myclass == "bard" ||
        myclass == "inquisitor" ||
+       myclass == "oracle" ||
        myclass == "sorcerer") { //get spontaneous settings
       if(sscanf(spell,"level %d",level) != 1)
           level = (int)MAGIC_D->query_spell_level(myclass,spell);
@@ -207,6 +209,7 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
 
     if(myclass == "bard" ||
        myclass == "inquisitor" ||
+       myclass == "oracle" ||
        myclass == "sorcerer") {
         spells_memorized[myclass][level][spell] = spells_memorized[myclass][level][spell] - 1;
 
@@ -255,6 +258,7 @@ int query_memorized(string myclass, string spell)
     }
     if(myclass == "bard" ||
        myclass == "inquisitor" ||
+       myclass == "oracle" ||
        myclass == "sorcerer")
     {
       if(sscanf(spell,"level %d",lvl) != 1)
@@ -300,6 +304,7 @@ int can_memorize(string myclass, string spell)
     if (!spells_memorized) resetMemorized();
     if(myclass == "bard" ||
        myclass == "inquisitor" ||
+       myclass == "oracle" ||
        myclass == "sorcerer")
     {
       if(sscanf(spell,"level %d",lvl) != 1) return 0;
@@ -316,7 +321,7 @@ int can_memorize(string myclass, string spell)
     switch(myclass) {
     case "cleric": case "paladin": case "ranger": case "druid": case "inquisitor":
         mystat = "wisdom"; break;
-    case "bard": case "sorcerer":
+    case "bard": case "sorcerer": case "oracle":
         mystat = "charisma"; break;
     default:
         mystat = "intelligence"; break;

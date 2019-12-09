@@ -100,7 +100,7 @@ int *query_max_spell_array(int wizard_level, string caster_class, int stat) {
         else { spells_allowed = ASSASSINLEVELS[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);
         break;
-    case "sorcerer":
+    case "sorcerer": case "oracle":
         if(wizard_level > 50) { spells_allowed = get_high_spell_level_array(wizard_level,caster_class); }
         else { spells_allowed = SORCLEVELS[wizard_level]; }
         spells_allowed = get_wizard_spell_total(wizard_level,stat,spells_allowed);

@@ -244,6 +244,8 @@ mapping index_spells_for_player(object player, string myclass)
 
     if (myclass == "sorcerer")
         myclass = "mage";
+    if (myclass == "oracle")
+        myclass = "cleric";
 
     all_spells = query_index(myclass);
     if(!sizeof(all_spells))
@@ -303,6 +305,8 @@ mapping index_unrestricted_spells(string myclass)
 
     if (myclass == "sorcerer")
         myclass = "mage";
+    if (myclass == "oracle")
+        myclass = "cleric";
 
     all_spells = query_index(myclass);
     if(!sizeof(all_spells))
@@ -368,15 +372,16 @@ mixed query_random_spell(string myclass, int lev)
 	if(member_array(myclass, keys(allSpells)) == -1 && myclass != "random") myclass = "random";
 	if(myclass == "random") { myclass = keys(allSpells)[random(sizeof(keys(allSpells)))]; }
     if(myclass == "sorcerer") myclass = "mage";
+    if(myclass == "oracle") myclass = "cleric";
     if(lev < 0) {   return keys(allSpells[myclass])[random(sizeof(keys(allSpells[myclass])))]; }
     switch (myclass)
     {
-        case "ranger": case "paladin":
-            if(lev > 4) lev = 4;
-        case "bard": case "psywarrior": case "inquisitor":
-            if(lev > 6) lev = 6;
-        case "psion": case "mage": case "cleric": case "sorcerer": case "druid":
-            if(lev > 9) lev = 9;
+    case "ranger": case "paladin":
+        if(lev > 4) lev = 4;
+    case "bard": case "psywarrior": case "inquisitor":
+        if(lev > 6) lev = 6;
+    case "psion": case "mage": case "cleric": case "sorcerer": case "druid": case "oracle":
+        if(lev > 9) lev = 9;
     }
     rspell = ({});
     for(x = 0;x < sizeof(keys(allSpells[myclass]));x++)
@@ -393,12 +398,16 @@ mixed *query_index(string myclass){
     string theclass = myclass;
     if (theclass == "sorcerer")
         theclass = "mage";
+    if (theclass == "oracle")
+        theclass = "cleric";
     return allSpells[theclass];
 }
 
 int query_spell_level(string myclass, string spell){
     if (myclass == "sorcerer")
         myclass = "mage";
+    if (myclass == "oracle")
+        myclass = "cleric";
     if(!allSpells[myclass]) return 0;
     if(!allSpells[myclass][spell]) return 0;
     return allSpells[myclass][spell];

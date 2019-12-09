@@ -55,7 +55,7 @@ varargs int thaco(int level, string myclass,object ob)
     {
         ret = 20 - (level -1);
     }
-    if (myclass == "cleric" || myclass == "druid" || myclass == "warlord" || myclass == "psywarrior" || myclass == "monk" || myclass == "inquisitor")
+    if (myclass == "cleric" || myclass == "oracle" || myclass == "druid" || myclass == "warlord" || myclass == "psywarrior" || myclass == "monk" || myclass == "inquisitor")
     {
         if(level < 21) { ret = (20 - (2*((level-1) / 3))); }
         else { ret = 8 - high_thaco(level); }
