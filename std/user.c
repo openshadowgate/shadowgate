@@ -936,6 +936,7 @@ int id(string str)
     if(objectp(shape = TO->query_property("altered")))
     {
         shape_race = (string)shape->query_shape_race();
+        if(shape_race != query_race() && stuff == query_race()) { return 0; }
         if(stuff == shape_race) { return hold; }
     }
 
