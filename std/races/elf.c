@@ -71,7 +71,7 @@ int level_adjustment(string subrace) {
     switch(subrace) {
     case "aquatic elf": return 1;break;
     case "szarkai": return 2; break;
-    case "fey'ri": return 3; break;
+    case "fey'ri": return 2; break;
     default: return 0; break;
     }
 }
