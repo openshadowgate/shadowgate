@@ -1796,7 +1796,7 @@ void heart_beat()
             }
     }
     if(!avatarp(TO))
-        if(time()/10%3)
+        if(time()%10>7)
             test_passive_perception();
 }
 
@@ -5160,15 +5160,17 @@ int test_passive_perception() {
             if (perception > stealth) { numnotvisible++; }
         }
         if(FEATS_D->usable_feat(TO,"spot"))
+        {
             if (ishidden==1 && ismagic==1) {
                 if (perception > stealth && perception*5/6 > spellcraft) { numnotvisible++; }
             }
-        if (ishidden==0 && ismagic==1) {
-            if (perception > spellcraft) { numnotvisible++; }
+            if (ishidden==0 && ismagic==1) {
+                if (perception > spellcraft) { numnotvisible++; }
+            }
         }
     }
     if (numnotvisible > 0) {
-        tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense the presence of %^RED%^hidding%^CYAN%^ creatures near you!");
+        tell_object(TO,"BOLD%^%^CYAN%^Your skin crawls as you sense the presence of %^RED%^hidden%^CYAN%^ creatures near you!");
     }
     return 1;
 }
