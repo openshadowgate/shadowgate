@@ -473,6 +473,12 @@ mixed query_property(string prop)
             num += (query_guild_level("barbarian") - 10)/3;
         if(FEATS_D->usable_feat(TO,"improved damage resistance"))
             num += 3;
+        if(TO->query_race() == "elf")
+        {
+            subrace = (string)TO->query("subrace");
+            if(subrace == "fey'ri")
+                num += 5;
+        }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "damage resistance"));
     }

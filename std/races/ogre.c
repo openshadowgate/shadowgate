@@ -20,11 +20,11 @@ string *restricted_deities(string subrace) {
 // stats in order: str, dex, con, int, wis, cha
 int *stat_mods(string subrace) { return ({ 4, -2, 2, -2, 0, -4 }); }
 
-mapping skill_mods(string subrace) { return ([ "endurance" : 2 ]); }
+mapping skill_mods(string subrace) { return ([ "endurance" : 2, "athletics" : 2 ]); }
 
 int level_adjustment(string subrace) { return 2; }
 
-int natural_AC(string subrace) { return 3; }
+int natural_AC(string subrace) { return 4; }
 
 int sight_bonus(string subrace) { return -1; }
 

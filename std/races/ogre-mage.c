@@ -24,7 +24,7 @@ mapping skill_mods(string subrace) { return ([ "endurance" : 2 ]); }
 
 int level_adjustment(string subrace) { return 3; }
 
-int natural_AC(string subrace) { return 3; }
+int natural_AC(string subrace) { return 4; }
 
 int sight_bonus(string subrace) { return -2; }
 
