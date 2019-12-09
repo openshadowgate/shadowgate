@@ -14,7 +14,7 @@ Sorcerers are masters of arcane magic, but in a completely different sense to ma
 
 Sorcerers are spontaneous casters that use %^ORANGE%^<master>%^RESET%^ command to learn new spells. They %^ORANGE%^<cast>%^RESET%^ any of spell they learned by expending spell slot prepared with %^ORANGE%^<prepare>%^RESET%^ command. They can see how many slots per level you have prepared with %^ORANGE%^<recall sorcerer spells>%^RESET%^. They can list all available spells for the class with %^ORANGE%^<spells sorcerer>%^RESET%^ command.
 
-Sorcerers can't cast in any armor and must not wield while doing so, they can learn to cast in light armor.
+Sorcerer can cast only without armor and must not wield while doing so, but they can learn to cast in light armor.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ bloodlines, feats, stats, skills, spells, cast, buff, prepare, master, prestige classes
 
