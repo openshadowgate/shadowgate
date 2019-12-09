@@ -271,7 +271,7 @@ mapping index_spells_for_player(object player, string myclass)
                domain != playerdisc)
                 continue;
         }
-        if(myclass=="cleric")
+        if(myclass=="cleric") //Covers oracles too.
         {
             domain = spellIndex[spellfile]["domain"];
             if(domain &&
