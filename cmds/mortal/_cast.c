@@ -99,6 +99,7 @@ int cmd_cast(string str)
 
     if(type == "sorcerer" ||
        type == "inquisitor" ||
+       type == "oracle" ||
        type == "psion" ||
        type == "psywarrior")
     {
@@ -216,6 +217,7 @@ int cmd_cast(string str)
     if (type == "bard" ||
         type == "sorcerer" ||
         type == "inquisitor" ||
+        type == "oracle" ||
         type == "psywarrior" ||
         type == "psion")
         targ->set_property("improvised",spell);

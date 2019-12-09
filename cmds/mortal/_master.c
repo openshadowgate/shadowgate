@@ -9,6 +9,7 @@
 
 mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "sorcerer":SORCKNOWN,
+                   "oracle":SORCKNOWN,
                    "psion":PSIONKNOWN,
                    "psywarrior":PWKNOWN,
                    "inquisitor":INQKNOWN,

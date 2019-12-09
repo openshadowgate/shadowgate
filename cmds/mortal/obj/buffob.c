@@ -593,7 +593,10 @@ string get_class(string spell)
     {
         myclass = classes[i];
         level = (int)file->query_spell_level(myclass);
-        if (myclass == "bard" || myclass == "sorcerer" || myclass == "inquisitor")
+        if (myclass == "bard" ||
+            myclass == "sorcerer" ||
+            myclass == "oracle" ||
+            myclass == "inquisitor")
         {
             if (owner->can_memorize(myclass, "level " + level)) { return myclass; }
         }
