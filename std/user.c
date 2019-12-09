@@ -933,6 +933,13 @@ int id(string str)
         if(stuff == shape_race) { return hold; }
     }
 
+    if(objectp(shape = TO->query_property("altered")))
+    {
+        if(stuff == query_race()) { return 0; }
+        shape_race = (string)shape->query_shape_race();
+        if(stuff == shape_race) { return hold; }
+    }
+
     if(str=="attacker") { return hold; }
     if (!objectp(TP) || avatarp(TP) || TP == TO || !userp(TP)) { return hold; }
     if(stringp(known)) { known = lower_case(known); }
