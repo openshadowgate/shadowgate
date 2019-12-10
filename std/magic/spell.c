@@ -2725,12 +2725,21 @@ void help() {
     classkeys = keys(spell_levels);
     if(!sizeof(classkeys)) printclass = "error";
     else {
-        if(classkeys[0] == "mage" && !mage_only) printclass = "mage/sorc L"+spell_levels[classkeys[0]];
-        else printclass = classkeys[0]+" L"+spell_levels[classkeys[0]];
+        if(classkeys[0] == "mage")
+            printclass = "mage/sorc L"+spell_levels[classkeys[0]];
+        else if(classkeys[0] == "cleric")
+            printclass = "cleric/oracle L"+spell_levels[classkeys[0]];
+        else
+            printclass = classkeys[0]+" L"+spell_levels[classkeys[0]];
         if(sizeof(classkeys) > 1)
             for(i = 1;i < sizeof(classkeys); i++) {
-                if(classkeys[i] == "mage") printclass += ", mage/sorc L"+spell_levels[classkeys[i]];
-                else printclass += ", "+classkeys[i]+" L"+spell_levels[classkeys[i]];
+                if(classkeys[i] == "mage")
+                    printclass += ", mage/sorc L"+spell_levels[classkeys[i]];
+                else if(classkeys[i] == "cleric")
+                    printclass += ", cleric/oracle L"+spell_levels[classkeys[i]];
+
+                else
+                    printclass += ", "+classkeys[i]+" L"+spell_levels[classkeys[i]];
             }
     }
     write("%^BOLD%^%^RED%^Class:%^RESET%^ "+(affixed_level?("(L"+affixed_level+" fixed) "):"")+printclass);
