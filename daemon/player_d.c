@@ -1531,6 +1531,8 @@ int immunity_check(object obj, string type)
     {
     case "sleep":
     {
+        if(obj->is_undead())
+            return 0;
         switch(myrace)
         {
         case "elf":
