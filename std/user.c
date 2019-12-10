@@ -1789,7 +1789,7 @@ void heart_beat()
     }
 
     //Once per round
-    if(!ticker%3)
+    if(!(ticker%3))
     {
         if(FEATS_D->usable_feat(TO,"regeneration") ||
            query_race() == "shade")
@@ -1821,7 +1821,7 @@ void heart_beat()
     }
 
     if(!avatarp(TO))
-        if(!ticker%9)
+        if(!(ticker%9))
             test_passive_perception();
     ticker++;
 }
