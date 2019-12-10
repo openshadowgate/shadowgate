@@ -104,6 +104,8 @@ mapping rem_rooms, rem_obs;
 string *rem_rooms_sort, *rem_obs_sort;
 
 int test_passive_perception();
+
+static int ticker = 0;
 int killable;
 //static object *protectors;
 //static int blinking;
@@ -641,6 +643,11 @@ string query_time_logged_in() {
   tmp = hour+" hours, "+min+" minutes, "+sec+" seconds.";
   output = tmp;
   return output;
+}
+
+int query_ticker()
+{
+    return ticker;
 }
 
 int query_start_time() { return start_time; }
@@ -1807,8 +1814,9 @@ void heart_beat()
             }
     }
     if(!avatarp(TO))
-        if(time()%10>7)
+        if(ticker%9)
             test_passive_perception();
+    ticker++;
 }
 
 void net_dead2() {
