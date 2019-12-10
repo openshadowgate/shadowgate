@@ -1775,13 +1775,7 @@ void heart_beat()
     //There are 3 heart beats per round. Adjust values accordingly.
     if(objectp(TO))
     {
-        if(FEATS_D->usable_feat(TO,"regeneration") ||
-           query_race() == "shade")
-            if(query_hp() < query_max_hp())
-                add_hp(roll_dice(1,TO->query_level())/6+1); //change help status effects when adjusting this
-        if(query_property("fast healing"))
-            if(query_hp() < query_max_hp())
-                add_hp(query_property("fast healing")*roll_dice(1,TO->query_level()/6+1)); //change help status effects when adjusting this
+
         if(FEATS_D->usable_feat(TO,"mighty resilience") &&
            !TO->query_property("stab_resilience"))
         {
@@ -1792,10 +1786,22 @@ void heart_beat()
         {
             TO->set_property("stab_resilience",(TO->query_level()+9)/20);
         }
+    }
+
+    //Once per round
+    if(!ticker%3)
+    {
+        if(FEATS_D->usable_feat(TO,"regeneration") ||
+           query_race() == "shade")
+            if(query_hp() < query_max_hp())
+                add_hp(roll_dice(1,TO->query_level())/2+1); //change help status effects when adjusting this
+        if(query_property("fast healing"))
+            if(query_hp() < query_max_hp())
+                add_hp(query_property("fast healing")*roll_dice(1,TO->query_level()/2+1)); //change help status effects when adjusting this
         if(is_vampire())
             if(TO->is_in_sunlight())
             {
-                int todamage = query_max_hp()/6 +1;
+                int todamage = query_max_hp()/2 +1;
 
                 if(todamage > query_property("fire resistance") &&
                    !query_property("sunlight_umbrella"))
@@ -1813,8 +1819,9 @@ void heart_beat()
                 }
             }
     }
+
     if(!avatarp(TO))
-        if(ticker%9)
+        if(!ticker%9)
             test_passive_perception();
     ticker++;
 }
