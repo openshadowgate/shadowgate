@@ -6,22 +6,22 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ healing, influence, perception, spellcraft
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: light armor proficiency, simple weapon proficiency, shield proficiency, divine domain, spell focus
+ %^RESET%^L1: light armor proficiency, simple weapon proficiency, shield proficiency, spell focus
  %^RESET%^L5: indomitable
  %^RESET%^L10: force of personality
- %^RESET%^L11: second divine domain
  %^RESET%^L15: leadership
- %^RESET%^L20: third divine domain
  %^RESET%^Also: one bonus spellcraft feat at L1, and every five class levels thereafter
 
-Although the gods work through many agents, perhaps none is more mysterious than the oracle. These divine vessels are granted power without their choice, selected by providence to wield powers that even they do not fully understand. Unlike a cleric, who draws her magic through devotion to a deity, oracles garner strength and power from many sources, namely those patron deities who support their ideals. Instead of worshiping a single source, oracles tend to venerate all of the gods that share their beliefs. While some see the powers of the oracle as a gift, others view them as a curse, changing the life of the chosen in unforeseen ways. Thus, unlike clerics, oracles are not limited in selection of their divine domains and can choose domains standing in direct opposition. Domains grant the oracle mystery spells she is able to cast without mastering.
+Although the gods work through many agents, perhaps none is more mysterious than the oracle. These divine vessels are granted power without their choice, selected by providence to wield powers that even they do not fully understand. Unlike a cleric, who draws her magic through devotion to a deity, oracles garner strength and power from many sources, namely those patron deities who support their ideals. Instead of worshiping a single source, oracles tend to venerate all of the gods that share their beliefs. While some see the powers of the oracle as a gift, others view them as a curse, changing the life of the chosen in unforeseen ways.
 
 Oracles do not usually associate with any one church or temple, instead preferring to strike out on their own, or with a small group of like-minded individuals. Oracles typically use their spells and revelations to further their understanding of their mystery, be it through fighting mighty battles or tending to the poor and sick.
+
+Each oracle draws upon a divine mystery to grant her spells and powers. This mystery also grants additional class spells. This mystery can represent a devotion to one ideal, prayers to deities that support the concept, or a natural calling to champion a cause. For example, an oracle with the waves mystery might have been born at sea and found a natural calling to worship the gods of the oceans, rivers, and lakes, be they benign or malevolent. Regardless of its source, the mystery manifests in a number of ways as the oracle gains levels. An oracle must pick one mystery upon taking her first level of oracle.
 
 Oracles are spontaneous casters that use %^ORANGE%^<master>%^RESET%^ command to learn new spells. They %^ORANGE%^<cast>%^RESET%^ any of spell they learned by expending spell slot prepared with %^ORANGE%^<prepare>%^RESET%^ command. They can see how many slots per level you have prepared with %^ORANGE%^<recall sorcerer spells>%^RESET%^. They can list all available spells for the class with %^ORANGE%^<spells oracle>%^RESET%^ command.
 
 Oracles can cast in any armor, but must learn profficiencies first. Can't cast while wielding a weapon.
 
-%^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, domains, deities, prestige classes
+%^RESET%^%^CYAN%^See also: %^RESET%^ mysteries, feats, stats, skills, spells, cast, buff, prepare, domains, deities, prestige classes
 
 %^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard cleric list>%^CYAN%^.%^RESET%^
