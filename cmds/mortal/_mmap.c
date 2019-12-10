@@ -14,8 +14,8 @@ static mapping exitsymbols;
 
 int cmd_mmap(string str)
 {
-    int x;    
-    if(TP->query_blind()) 
+    int x;
+    if(TP->query_blind())
     {
         tell_object(TP, "You are blind.");
         return 0;
@@ -96,18 +96,18 @@ void make_tile(object room, int x, int y, string from)
         map[x*TWIDTH+1][y*TWIDTH+1]="%^BOLD%^%^BLACK%^?%^RESET%^";
         return;
     }
-    
+
     foreach(exit in exits)
     {
         if(arrayp(topology[exit]))
         {
             e_symb=exitsymbols[exit];
-            e_color="%^GREEN%^";            
+            e_color="%^GREEN%^";
             if((door=(string)room->query_door(exit)) && !room->query_open(door))
             {
                 e_symb="#";
                 e_color = "%^BLUE%^";
-            } else 
+            } else
                 if(from=="."||from==exit)
                     make_tile(room->query_exit(exit),x+topology[exit][0],y+topology[exit][1],exit);
             map[x*TWIDTH+1+topology[exit][0]][y*TWIDTH+1+topology[exit][1]]="%^RESET%^"+e_color+e_symb+"%^RESET%^";
@@ -118,8 +118,8 @@ void make_tile(object room, int x, int y, string from)
     if(from==".")
         tr_color="%^ORANGE%^";
     if(sizeof(exits)>0)
-        map[x*TWIDTH+1][y*TWIDTH+1]="%^BOLD%^"+tr_color+sizeof(exits)+"%^RESET%^";
-    
+        map[x*TWIDTH+1][y*TWIDTH+1]="%^BOLD%^"+tr_color+(sizeof(exits)>9?"?":sizeof(exits))+"%^RESET%^";
+
 }
 void display_map()
 {
@@ -172,5 +172,4 @@ Numbers display how many exits a room has, red color indicates room has non-stan
 
 peer, map, look, glance
 ");
-}    
-
+}
