@@ -147,7 +147,7 @@ int cmd_discern(string str)
             else
                 write("%^WHITE%^It uses %^BOLD%^%^GREEN%^"+(string)obj->query_ammo()+"%^RESET%^%^ as ammunition.");
         }
-        write("It requires %^BOLD%^%^ORANGE%^weaponsmith%^RESET%^ craft skill to repair.");
+        write("It requires %^BOLD%^%^ORANGE%^woodworker%^RESET%^ craft skill to repair.");
         return 1;
     }
     if(obj->is_armor()){
