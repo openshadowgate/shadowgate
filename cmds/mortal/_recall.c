@@ -296,7 +296,7 @@ int recall_spells(string type, object who) {
     switch(spell_type) {
     case "cleric": case "paladin": case "antipaladin": case "ranger": case "druid": case "inquisitor":
         mystat = "wisdom"; break;
-    case "bard": case "sorcerer": case: "oracle":
+    case "bard": case "sorcerer": case "oracle":
         mystat = "charisma"; break;
     default: mystat = "intelligence"; break;
     }
