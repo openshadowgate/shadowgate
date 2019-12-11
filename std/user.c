@@ -3715,6 +3715,8 @@ object query_rem_room(string room)
 
 //    room = lower_case(room);
     remrooms = TO->query_rem_rooms();
+    if(!mapp(([])))
+        return 0;
     destfile = remrooms[room];
 
     if(destfile)
