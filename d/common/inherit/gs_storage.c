@@ -2,7 +2,7 @@
 //by Styx 7/28/01
 #include <std.h>
 #include "/d/common/common.h"
-inherit "std/room";
+inherit "/std/room";
 
 void create()
 {
@@ -18,6 +18,7 @@ void create()
 void reset()
 {
     int i;
+    object scroll;
     ::reset();
 
     if(base_name(TO) == "/d/common/inherit/gs_storage") return;
@@ -65,7 +66,11 @@ void reset()
     for (i = 0; i < 5; i++)
         if(!present("parchment "+i))                  new("/d/tharis/obj/parchment")->move(TO);
     for (i = 0; i < 9; i++)
-        if(!present("scroll "+i))              new("/d/magic/safe_scroll")->move(TO);
+    {
+        scroll = new("/d/magic/safe_scroll");
+        scroll->move(TO);
+        scroll->set_spell(random(9)+1);
+    }
     while(!present("paper 6"))                 new(CMISC"paper")->move(TO);
     if(!present("dark lantern"))               new(CMISC"darkbeacon")->move(TO);
     if(!present("shield strap"))               new(CSHEATH"shieldstrap")->move(TO);
