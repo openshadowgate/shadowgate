@@ -66,7 +66,12 @@ You can <use> it directly in order to properly study and learn more about the ef
 
 string query_short()
 {
-    string color = MAGIC_D->query_spell_level("mage",spell)?"%^ORANGE%^":"%^WHITE%^";
+    string color;
+
+    if(MAGIC_D->query_spell_level("mage",spell))
+        color = "%^ORANGE%^";
+    else
+        color = "%^WHITE%^";
 
     if(!objectp(TP))
         return("%^RESET%^"+color+"scr%^BOLD%^o%^RESET%^"+color+"ll%^RESET%^");
