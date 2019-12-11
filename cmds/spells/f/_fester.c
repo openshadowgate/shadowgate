@@ -48,7 +48,7 @@ void spell_effect()
 
     tell_room(place,"%^MAGENTA%^The place gets a little cold...");
 
-    lower = 4*clevel;
+    lower = sdamage;
 
     target->set_property("fester",lower);
 

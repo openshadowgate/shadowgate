@@ -34,7 +34,7 @@ void spell_effect()
     tell_room(place,"%^MAGENTA%^You watch as tendrils of darkness hit everyone attacking "+caster->QCN+".",({caster}));
     tell_object(caster,"%^MAGENTA%^Tendrils of darkness caress your enemies.");
 
-    lower = 4*clevel;
+    lower = sdamage;
 
     foreach(target in attackers)
     {
