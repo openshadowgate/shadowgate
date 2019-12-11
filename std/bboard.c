@@ -400,7 +400,7 @@ string display_new( string id ) {
 
     str=" ";
 
-    str+="%^GREEN%^(";
+    str+="%^RESET%^%^GREEN%^(";
     if(newposts)
         str+="%^YELLOW%^";
     str+=sprintf("%2d",newposts)+"%^GREEN%^ out of "+sprintf("%2d",maxi)+"%^RESET%^%^GREEN%^)%^RESET%^";
