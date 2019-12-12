@@ -2758,7 +2758,7 @@ void help() {
     if(monk_way != "" && stringp(monk_way))
         write("%^BOLD%^%^RED%^Monk way:%^RESET%^ "+monk_way);
     if(verbal_comp||somatic_comp)
-        write("%^BOLD%^%^RED%^Components:%^RESET%^ "+(verbal_comp?"Verbal ":"")+(somatic_comp?"Somatic ":""));
+        write("%^BOLD%^%^RED%^Components:%^RESET%^ "+(verbal_comp?"V ":"")+(somatic_comp?"S ":""));
     if(!save_type)
         save_type = "";
     if(save_type != "")

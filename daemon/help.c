@@ -89,11 +89,8 @@ static string *query_categories() {
    tmp = ({ "*player general", "*player commands","*feats","*skills","*spells" });
    // tmp += ({ "*abilities" });
 
-   tmp += ({ "*policies", "*rules", "*lore", "*guidelines", "*deities", "*races", "*alignment","*roleplaying","*classes" ,"*faq", "*domains"});
+   tmp += ({ "*policies", "*rules", "*lore", "*guidelines", "*deities", "*races", "*alignment","*roleplaying","*classes" ,"*faq", "*domains", "*mysteries"});
 
-   if((TP->query("is_assassin"))
-      || (avatarp(TP)))
-      tmp += ({ "*assassin commands"});
    if((TP->is_class("bard"))
       || (avatarp(TP)))
       tmp += ({ "*bard commands"});
@@ -125,7 +122,7 @@ static string *query_categories() {
    if(wizardp(this_player()))
       tmp += ({ "*creator general", "*creator commands","*tutorials"});
    if(archp(this_player())) tmp += ({ "*admin commands"});
-   
+
    return sort_array(tmp,"local_strcmp",TO);
 }
 
@@ -146,7 +143,7 @@ string* topics_dir(string directory) {
   while (iter--) {
     topicnames += ({ holder[iter][0] });
   }
-  
+
   return sort_array(topicnames,"local_strcmp",TO);
 }
 
@@ -168,6 +165,7 @@ string *query_topics(string category) {
    case "*classes": return topics_dir(DIR_CLASSES_HELP+"/");
    case "*faq": return topics_dir(DIR_FAQ_HELP+"/");
    case "*domains": return topics_dir(DIR_DOMAINS_HELP+"/");
+   case "*mysteries": return topics_dir(DIR_MYSTERIES_HELP+"/");
    case "*skills": return topics_dir(DIR_SKILLS_HELP+"/");
 
    case "*spells": case "*feats":
@@ -183,8 +181,8 @@ string *query_topics(string category) {
       }
       if(!sizeof(myok)) return 0;
       for(i = 0;i < sizeof(myok); i++) myreturn += (string *)CMD_D->query_commands(myok[i]);
-      return myreturn;     
-       
+      return myreturn;
+
    case "*creator general":
       if(!wizardp(this_player())) return 0;
       else return topics_dir(DIR_CREATOR_HELP+"/");
@@ -209,7 +207,7 @@ string *query_topics(string category) {
       if((!TP->is_class("thief"))
          && (!TP->is_class("bard"))
          && (!avatarp(this_player()))) return 0;
-      else return(string *)CMD_D->query_commands("/cmds/thief");   
+      else return(string *)CMD_D->query_commands("/cmds/thief");
    case "*assassin commands":
       if((!TP->query("is_assassin"))
          && (!avatarp(this_player()))) return 0;
@@ -334,6 +332,9 @@ static int find_help(string topic, string category, int menu) {
      break;
    case "*domains":
       if(!file_exists(tmp = DIR_DOMAINS_HELP+"/"+topic)) return 0;
+     break;
+   case "*mysteries":
+      if(!file_exists(tmp = DIR_MYSTERIES_HELP+"/"+topic)) return 0;
      break;
    case "*guidelines":
      if(!file_exists(tmp = DIR_GUIDELINES_HELP+"/"+topic)) return 0;

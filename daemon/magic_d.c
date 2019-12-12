@@ -209,6 +209,7 @@ void build_index()
               spelltable["levels"]=level;
               spelltable["sphere"]=str2->query_spell_sphere(); //aka school
               spelltable["way"]=str2->query_monk_way();
+              spelltable["mystery"]=str2->query_mystery();
               spelltable["discipline"]=str2->query_discipline();
               spelltable["domain"]=str2->get_spell_domain();
               spelltable["feats"]=str2->query_feats_required();
@@ -235,19 +236,21 @@ mapping query_index_row(string spell)
 mapping index_spells_for_player(object player, string myclass)
 {
     mapping all_spells,tmp;
-    string *all_spell_names, spellfile, featneeded,domain;
+    string *all_spell_names, spellfile, featneeded,domain, pclass;
     int lvl,i,j,k;
     object spell;
     string playerdisc = player->query_discipline();
     string playerway = player->query("monk way");
+    string playemystery = player->query("oracle_mystery");
     string * playerdom = player->query_divine_domain();
 
+    pclass = myclass;
     if (myclass == "sorcerer")
-        myclass = "mage";
+        pclass = "mage";
     if (myclass == "oracle")
-        myclass = "cleric";
+        pclass = "cleric";
 
-    all_spells = query_index(myclass);
+    all_spells = query_index(pclass);
     if(!sizeof(all_spells))
         return ([]);
     all_spell_names=keys(all_spells);
@@ -256,14 +259,13 @@ mapping index_spells_for_player(object player, string myclass)
     tmp=([]);
     foreach(spellfile in all_spell_names)
     {
-
-        if(!(lvl = spellIndex[spellfile]["levels"][myclass]))
+        if(!(lvl = spellIndex[spellfile]["levels"][pclass]))
             continue;
 
-        featneeded = spellIndex[spellfile]["feats"][myclass];
+        featneeded = spellIndex[spellfile]["feats"][pclass];
         if(featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player,featneeded))
             continue;
-        if(myclass=="psion")
+        if(pclass=="psion")
         {
             domain = spellIndex[spellfile]["discipline"];
             if(domain &&
@@ -271,7 +273,7 @@ mapping index_spells_for_player(object player, string myclass)
                domain != playerdisc)
                 continue;
         }
-        if(myclass=="cleric") //Covers oracles too.
+        if(myclass=="cleric") //Oracles can master domain spells freely
         {
             domain = spellIndex[spellfile]["domain"];
             if(domain &&
@@ -279,7 +281,7 @@ mapping index_spells_for_player(object player, string myclass)
                member_array(domain,playerdom) == -1)
                 continue;
         }
-        if(myclass=="monk"&&
+        if(pclass=="monk"&&
            !FEATS_D->usable_feat(player,"grandmaster of the way"))
         {
             domain = spellIndex[spellfile]["way"];
@@ -299,16 +301,17 @@ mapping index_spells_for_player(object player, string myclass)
 mapping index_unrestricted_spells(string myclass)
 {
     mapping all_spells,tmp;
-    string *all_spell_names, spellfile, featneeded,domain;
+    string *all_spell_names, spellfile, featneeded,domain, pclass;
     int lvl,i,j,k;
     object spell;
 
-    if (myclass == "sorcerer")
-        myclass = "mage";
-    if (myclass == "oracle")
-        myclass = "cleric";
+    pclass = myclass;
+    if (pclass == "sorcerer")
+        pclass = "mage";
+    if (pclass == "oracle")
+        pclass = "cleric";
 
-    all_spells = query_index(myclass);
+    all_spells = query_index(pclass);
     if(!sizeof(all_spells))
         return ([]);
     all_spell_names=keys(all_spells);
@@ -318,20 +321,20 @@ mapping index_unrestricted_spells(string myclass)
     foreach(spellfile in all_spell_names)
     {
 
-        if(!(lvl = spellIndex[spellfile]["levels"][myclass]))
+        if(!(lvl = spellIndex[spellfile]["levels"][pclass]))
             continue;
 
-        featneeded = spellIndex[spellfile]["feats"][myclass];
+        featneeded = spellIndex[spellfile]["feats"][pclass];
         if(featneeded != "me" && stringp(featneeded))
             continue;
-        if(myclass=="psion")
+        if(pclass=="psion")
         {
             domain = spellIndex[spellfile]["discipline"];
             if(domain &&
                domain != "me")
                 continue;
         }
-        if(myclass=="cleric")
+        if(myclass=="cleric") //Oracles cand master domain spells
         {
             domain = spellIndex[spellfile]["domain"];
             if(domain &&
