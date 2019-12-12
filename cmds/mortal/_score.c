@@ -72,6 +72,9 @@ mixed * genoutput(object targ)
     if(targ->is_class("sorcerer"))
         if(stringp(targ->query_bloodline()))
             output+=({({"Bloodline","%^BOLD%^%^RED%^"+capitalize(targ->query_bloodline())})});
+    if(targ->is_class("oracle"))
+        if(stringp(targ->query_mystery()))
+            output+=({({"Mystery","%^BOLD%^%^CYAN%^"+targ->query_mystery()})});
     if(targ->is_class("warlock"))
         if(stringp(targ->query("warlock heritage")))
             output+=({({"Heritage","%^BOLD%^%^MAGENTA%^"+capitalize(targ->query("warlock heritage"))})});

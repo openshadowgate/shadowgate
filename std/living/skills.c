@@ -280,7 +280,6 @@ int query_skill(string skill) {
         {
             myclassskills = (string *)file->class_skills(TO);
 
-
             if(myclasses[i] == "psion" || (TO->is_class("psion") && (int)file->is_prestige_class()))
             {
                 mydisc = this_object()->query_discipline();
@@ -290,6 +289,11 @@ int query_skill(string skill) {
             {
                 mydisc = TO->query("monk way");
                 myclassskills = (string *)(DIR_CLASSES+"/monk.c")->way_skills(mydisc);
+            }
+            if(myclasses[i] == "oracle" || (TO->is_class("oracle") && (int)file->is_prestige_class()))
+            {
+                mydisc = TO->query_mystery();
+                myclassskills = (string *)(DIR_CLASSES+"/oracle.c")->mystery_skills(mydisc);
             }
             if(member_array(skill,myclassskills) != -1 ||
                (FEATS_D->usable_feat(TO,"tricky spells") && (skill == "spellcraft" || skill == "stealth")) ||

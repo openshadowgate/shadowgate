@@ -1419,7 +1419,7 @@ int query_spell_level(string classtype) {
   if(classtype == "wizard" && spell_levels["bard"]) return spell_levels["bard"];
   if(classtype == "psionics" && spell_levels["psion"]) return spell_levels["psion"];
   if(classtype == "sorcerer") return spell_levels["mage"];
-
+  if(classtype == "oracle" && !spell_levels["oracle"]) return spell_levels["cleric"];
 
   if(!spell_levels[classtype])
       return 0;

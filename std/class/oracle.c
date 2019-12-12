@@ -1,4 +1,5 @@
 #include <std.h>
+#include <mysteries.h>
 inherit DAEMON;
 
 void create() { ::create(); }
@@ -40,7 +41,12 @@ mapping class_featmap(string myspec) {
 
 string *class_skills()
 {
-    return ({ "healing","influence","perception","spellcraft" });
+    return ({ "healing","spellcraft" });
+}
+
+string *mystery_skills(string mymystery)
+{
+    return class_skills()+MYSTERY_SKILLS[mymystery];
 }
 
 int skill_points() { return 4; }

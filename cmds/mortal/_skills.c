@@ -193,6 +193,11 @@ void display_skills(object asking, object ob)
                 mydisc = ob->query("monk way");
                 myclassskills += (string *)file->way_skills(mydisc);
             }
+            else if(myclasses[x] == "oracle")
+            {
+                mydisc = ob->query_mystery();
+                myclassskills += (string *)file->mystery_skills(mydisc);
+            }
             else  myclassskills += (string *)file->class_skills();
         }
         continue;

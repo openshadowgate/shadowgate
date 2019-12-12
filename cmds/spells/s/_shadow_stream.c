@@ -21,8 +21,8 @@ void create()
 
 string query_cast_string()
 {
-    tell_object(caster,"%^BOLD%^%^CYAN%^You can feel a chill growing in the air as you chant.");
-    tell_room(place,"%^BOLD%^%^CYAN%^A chilling aura surrounds "+caster->QCN+" as "+caster->QS+" begins to chant.",caster);
+    tell_object(caster,"%^BOLD%^%^MAGENTA%^You can feel a chill growing in the air as you chant.");
+    tell_room(place,"%^BOLD%^%^MAGENTA%^A chilling aura surrounds "+caster->QCN+" as "+caster->QS+" begins to chant.",caster);
     return "display";
 }
 
@@ -32,7 +32,8 @@ void spell_effect(int prof)
     object *attackers;
     int i, dam;
 
-    attackers = caster->query_attackers();
+    attackers = all_living(place);
+    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 
     if(!sizeof(attackers))

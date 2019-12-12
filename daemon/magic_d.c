@@ -209,7 +209,6 @@ void build_index()
               spelltable["levels"]=level;
               spelltable["sphere"]=str2->query_spell_sphere(); //aka school
               spelltable["way"]=str2->query_monk_way();
-              spelltable["mystery"]=str2->query_mystery();
               spelltable["discipline"]=str2->query_discipline();
               spelltable["domain"]=str2->get_spell_domain();
               spelltable["feats"]=str2->query_feats_required();
@@ -241,7 +240,6 @@ mapping index_spells_for_player(object player, string myclass)
     object spell;
     string playerdisc = player->query_discipline();
     string playerway = player->query("monk way");
-    string playemystery = player->query("oracle_mystery");
     string * playerdom = player->query_divine_domain();
 
     pclass = myclass;

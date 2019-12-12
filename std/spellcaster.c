@@ -5,6 +5,7 @@
 #include <schoolspells.h>
 #include <disciplinespells.h>
 #include <bloodlines.h>
+#include <mysteries.h>
 inherit "/std/innate";
 
 /**
@@ -561,16 +562,23 @@ mapping query_mastered_bonus()
         }
     }
 
+    if(TO->is_class("sorcerer"))
     {
-        if(TO->is_class("sorcerer"))
-        {
 
-            string mybl = (string)TO->query_bloodline();
+        string mybl = (string)TO->query_bloodline();
 
-            if(stringp(mybl))
-                tmp["sorcerer"] = BLOODLINE_SPELLS[mybl];
-        }
+        if(stringp(mybl))
+            tmp["sorcerer"] = BLOODLINE_SPELLS[mybl];
     }
+
+    if(TO->is_class("oracle"))
+    {
+        string mybl = (string)TO->query_mystery();
+
+        if(stringp(mybl))
+            tmp["oracle"] = MYSTERY_SPELLS[mybl];
+    }
+
 
     if(TO->is_class("mage") || TO->is_class("sorcerer"))
     {
