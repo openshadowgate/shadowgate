@@ -117,3 +117,12 @@ int caster_level_calcs(object player, string the_class)
     }
     return 0;
 }
+
+string newbie_choice() { return "Mystery"; }
+string *query_newbie_stuff() { return sort_array(keys(MYSTERY_SKILLS),1); }
+void process_newbie_choice(object who, string str)
+{
+    if(!objectp(who) || !stringp(str))
+        return;
+    who->set_mystery(str);
+}
