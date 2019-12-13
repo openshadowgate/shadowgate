@@ -17,7 +17,7 @@ void create()
       "additives could be held inside this one pouch.");
    set_id(({"pouch","leather pouch","herb pouch","leather herb pouch"}));
    set_max_internal_encumbrance(50);
-   set_limbs(({"torso"}));
+   set_limbs(({"waist"})); //was set to torso. 12 Dec 19, Uriel
    set_type("clothing");
    set_weight(4);  
    set_value(250);
