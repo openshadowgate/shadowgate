@@ -7,7 +7,7 @@ inherit ROOMS"inherit/road_out_south1";
 void create(){
    ::create();
    set_exits(([
-       "southwest":"/d/darkwood/tabor/room/cartroom",
+//       "southwest":"/d/darkwood/tabor/room/cartroom",
        "south":ROADOUT"mtnroad42",
    ]));
 }

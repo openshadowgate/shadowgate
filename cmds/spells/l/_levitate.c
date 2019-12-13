@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("levitate");
-    set_spell_level(([ "mage" : 2 ]));
+    set_spell_level(([ "mage" : 2, "oracle" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS levitate on TARGET");
     set_description("This spell will give the target the ability to levitate. The target will find traveling over long "
@@ -33,7 +33,7 @@ int preSpell() {
 		tell_object(caster,"You can't cast this on a mounted target.");
 		return 0;
 	}
-    if((int)target->query_property("flying")) 
+    if((int)target->query_property("flying"))
     {
         tell_object(caster,"Your target is already levitating!");
         return 0;
@@ -41,7 +41,7 @@ int preSpell() {
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
      tell_object(caster,"%^BOLD%^%^BLUE%^%^You hair begins to stir around"+
         " in a light breeze.");
@@ -51,7 +51,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 10) * clevel;

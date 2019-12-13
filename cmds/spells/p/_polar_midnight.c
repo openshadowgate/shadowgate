@@ -6,6 +6,7 @@
 inherit SPELL;
 
 int timer,flag,stage,toggle,counter;
+int prevlight;
 
 
 void create()
@@ -13,26 +14,29 @@ void create()
     ::create();
     set_spell_name("polar midging");
     set_spell_level(([ "druid":9,"cleric":9,]));
-    set_spell_sphere("illusion");
-    set_syntax("cast CLASS visions from within");
+    set_spell_sphere("alteration");
+    set_syntax("cast CLASS polar midnight");
     set_damage_desc("cold, exhaustion");
-    set_description("You plunge an area into the brutal chill of the arctic night. Illumination conditions are dropped by two steps (though only to darkness, not supernatural darkness), and all creatures in the area take cold damage. A failed save each round causes them to become exhausted.");
+    set_description("You plunge an area into the brutal chill of the arctic night. Illumination conditions are dropped by to negative level, and all creatures in the area take cold damage. A failed save each round causes them to become exhausted.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("fort");
     aoe_spell(1);
-    set_aoe_message("%^BOLD%^%^BLUE%^(%^BLACK%^populated with %^BLACK%^n%^BLUE%^i%^BLACK%^ght%^BLUE%^m%^BLACK%^ar%^BLUE%^i%^BLACK%^s%^BLUE%^h%^BLACK%^ horrors%^BLUE%^)%^RESET%^");
+    set_aoe_message("%^RESET^%^%^BLUE%^(%^BOLD%^%^BLACK%^in deepest darkness%^RESET%^%^BLUE%^)%^RESET%^");
 }
 
 string query_cast_string()
 {
-    tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" voices few syllables.");
+    tell_room(place,"%^RESET%^%^BLUE%^As "+caster->QCN+" voices a few syllables, the place becomes darker and colder.");
     return "display";
 }
 
 void spell_effect(int prof)
 {
-    tell_room(place,"%^RESET%^%^BOLD%^%^BLACK%^Fearsome %^BLACK%^n%^BLUE%^i%^BLUE%^g%^BLUE%^h%^BLACK%^tma%^BLUE%^r%^BLACK%^i%^BLUE%^s%^BLACK%^h %^BLUE%^c%^BLACK%^re%^BLUE%^a%^BLUE%^t%^BLACK%^ur%^BLUE%^e%^BLUE%^s%^BLACK%^ spring into being!%^RESET%^%^RESET%^");
+    tell_room(place,"%^BOLD%^%^BLACK%^Extreme cold and darkness falls onto the area!");
+    prevlight=place->query_light();
+    if(prevlight>-2)
+        place->set_light(-2);
     counter = clevel/2;
     addSpellToCaster();
     spell_successful();
@@ -65,18 +69,12 @@ void execute_attack()
     for(i=0;i<sizeof(foes);i++) {
         if(!objectp(targ = foes[i]))
             continue;
-        if(do_save(targ,4))
+        if(!do_save(foes[i],0))
         {
-            tell_object(targ,"%^RESET%^%^BOLD%^%^BLACK%^Nigh%^BLUE%^t%^BLACK%^mar%^BLUE%^e%^BLACK%^s%^BLACK%^ pierce into your mind, but you manage to shrug some of them.%^RESET%^%^RESET%^");
-            damage_targ(targ,targ->return_target_limb(),sdamage/2,"mental");
+            "/std/effect/status/exhausted"->apply_effect(foes[i],1);
         }
-        else
-        {
-            tell_object(targ,"%^RESET%^%^BOLD%^%^BLACK%^Nigh%^BLUE%^t%^BLACK%^mar%^BLUE%^e%^BLACK%^s%^BLACK%^ pierce into your mind!%^RESET%^%^RESET%^");
-            tell_room(place,"%^BOLD%^%^GREEN%^"+targ->QCN+"%^BOLD%^%^BLACK%^'s mind is %^BLACK%^ravag%^BLUE%^e%^BLUE%^d%^BLACK%^ by the %^BLUE%^n%^BLACK%^i%^BLUE%^g%^BLUE%^h%^BLACK%^tma%^BLUE%^r%^BLUE%^e%^BLUE%^s%^BLACK%^!%^RESET%^%^RESET%^",({targ}));
-            targ->set_paralyzed(1,"%^RESET%^%^BLUE%^No! No! NO! I must run away! This can't be real!%^RESET%^");
-            damage_targ(targ,targ->return_target_limb(),sdamage,"mental");
-        }
+        tell_object(targ,"%^BOLD%^%^BLACK%^The cold slips deep into your bones!");
+        damage_targ(targ,targ->return_target_limb(),sdamage,"cold");
     }
     counter--;
     place->addObjectToCombatCycle(TO,1);
@@ -84,7 +82,11 @@ void execute_attack()
 
 
 void dest_effect() {
-    if(objectp(place)) tell_object(place,"%^BOLD%^%^BLUE%^The nightmares recede.%^RESET%^");
+    if(objectp(place))
+    {
+        place->set_light(prevlight);
+        tell_object(place,"%^BOLD%^%^BLUE%^The darkness recedes, and the place becomes a bit warmer.%^RESET%^");
+    }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }

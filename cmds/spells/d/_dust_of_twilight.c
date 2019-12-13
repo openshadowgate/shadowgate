@@ -38,7 +38,7 @@ void spell_effect(int prof)
             continue;
 
         if(!do_save(attacker,0))
-            "/std/effect/status"->apply_effect(attacker,roll_dice(1,20));
+            "/std/effect/status/fatigued"->apply_effect(attacker,roll_dice(1,20));
 
     }
     place->set_light(0);

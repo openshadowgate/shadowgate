@@ -4,6 +4,7 @@
 #include <daemons.h>
 #include <schoolspells.h>
 #include <psions.h>
+#include <mysteries.h>
 
 #define NO_EFFECT -100
 inherit DAEMON;
@@ -1419,7 +1420,14 @@ int query_spell_level(string classtype) {
   if(classtype == "wizard" && spell_levels["bard"]) return spell_levels["bard"];
   if(classtype == "psionics" && spell_levels["psion"]) return spell_levels["psion"];
   if(classtype == "sorcerer") return spell_levels["mage"];
-  if(classtype == "oracle" && !spell_levels["oracle"]) return spell_levels["cleric"];
+  if(classtype == "oracle")
+  {
+      int lvl;
+      lvl = member_array(spell_name,MYSTERY_SPELLS[caster->query_mystery()])+1;
+      if(!lvl)
+          lvl = spell_levels["cleric"];
+      return lvl;
+  }
 
   if(!spell_levels[classtype])
       return 0;
@@ -2775,15 +2783,15 @@ void help() {
     if(peace)
         write("%^BOLD%^%^RED%^Only at peace:%^RESET%^ This spell can be cast only when you aren't in combat.");
     if(silent_casting)
-        write("%^BOLD%^%^RED%^Silent casting:%^RESET%^ This spell is silent to cast.");
+        write("%^BOLD%^%^RED%^Silent casting:%^RESET%^ Casting of this spell can't be detected by others.");
     if(evil_spell)
         write("%^BOLD%^%^RED%^Evil spell:%^RESET%^ For one reason or another, this is an evil, selfish spell. Good characters won't use it unless in dire need.");
     if(aoe_spell)
-        write("%^BOLD%^%^RED%^AOE spell:%^RESET%^ This is an area of effect spell. It will affect all targets in the room over time. It uses a special damage table. Two spells of the same effect can't be used by the same caster simultaneously. More than three area of effect spells can't be maintained by the same caster.");
+        write("%^BOLD%^%^RED%^AOE spell:%^RESET%^ This spell will affect all targets in the room over time.");
     if(traveling_aoe_spell)
-        write("%^BOLD%^%^RED%^TravAOE spell:%^RESET%^ This is a travelling area of effect spell. It affects everyone in the room that the caster is in. It uses a special damage table.");
+        write("%^BOLD%^%^RED%^TravAOE spell:%^RESET%^ This spell's effect will move with the caster.");
     if(splash_spell)
-        write("%^BOLD%^%^RED%^Splash spell:%^RESET%^ This is a splash damage spell. It has a chance of affecting multiple targets at the price of the spell level.");
+        write("%^BOLD%^%^RED%^Splash spell:%^RESET%^ This spell has a chance of affecting multiple targets at the price of the spell level.");
 
     if(mapp(feats_required)) {
       compskeys = ([]);
