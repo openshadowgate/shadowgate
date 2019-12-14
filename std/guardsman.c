@@ -647,15 +647,8 @@ void take_to_jail(string action)
             command("say I don't have a jail to go to, I'll hang on to you for now.");
             return;
         }
-        if(!DESTINATIONS_D->query_waystations(jail_location) || (mapping)DESTINATIONS_D->query_waystations(jail_location) == ([]) )
-        {
-            is_stuck = 1;
-            command("say I don't know how to get to the jail from here, I'll "
-                "hang on to you for now.");
-            return;
-        }
-        report("Starting to walk to: " + jail_location);
-        start_walking(jail_location);
+        TO->move(jail_location);
+        captive->move(ETO);
         return;
     case "expel":
         if(!expel_location)
@@ -664,14 +657,8 @@ void take_to_jail(string action)
             command("say I don't know where to expel you to, I'll hang on to you for now.");
             return;
         }
-        if(!DESTINATIONS_D->query_waystations(expel_location) || (mapping)DESTINATIONS_D->query_waystations(expel_location) == ([]) )
-        {
-            is_stuck = 1;
-            command("say I don't know how to get to the place I'm supposed to take you "
-                "from here, I'll hang on to you for now.");
-            return;
-        }
-        start_walking(expel_location);
+        TO->move(expel_location);
+        captive->move(ETO);
         return;
     case "capture":
         if(!capture_location) { capture_location = jail_location; }
@@ -681,14 +668,8 @@ void take_to_jail(string action)
             command("say I don't have a location to go to, I'll hang on to you for now.");
             return;
         }
-        if(!DESTINATIONS_D->query_waystations(capture_location) || (mapping)DESTINATIONS_D->query_waystations(capture_location) == ([]) )
-        {
-            is_stuck = 1;
-            command("say I don't know how to get to the location from here, I'll "
-                "hang on to you for now.");
-            return;
-        }
-        start_walking(capture_location);
+        TO->move(jail_location);
+        captive->move(ETO);
         return;
     }
     return;

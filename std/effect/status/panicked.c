@@ -1,6 +1,7 @@
 #include <std.h>
 #include <magic.h>
 #include <skills.h>
+#include <daemons.h>
 
 #pragma strict_types
 
