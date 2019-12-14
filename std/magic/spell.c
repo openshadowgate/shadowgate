@@ -1422,13 +1422,9 @@ int query_spell_level(string classtype) {
   if(classtype == "sorcerer") return spell_levels["mage"];
   if(classtype == "oracle")
   {
-      int lvl;
-      lvl = member_array(spell_name,MYSTERY_SPELLS[caster->query_mystery()])+1;
-      if(!lvl)
-          lvl = spell_levels["cleric"];
-      return lvl;
-  }
 
+      return spell_levels["cleric"];
+  }
   if(!spell_levels[classtype])
       return 0;
   return spell_levels[classtype];
@@ -2735,7 +2731,7 @@ void help() {
     else {
         if(classkeys[0] == "mage")
             printclass = "mage/sorc L"+spell_levels[classkeys[0]];
-        else if(classkeys[0] == "cleric")
+        else if(classkeys[0] == "cleric"&&!spell_domain)
             printclass = "cleric/oracle L"+spell_levels[classkeys[0]];
         else
             printclass = classkeys[0]+" L"+spell_levels[classkeys[0]];
