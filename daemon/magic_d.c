@@ -271,7 +271,8 @@ mapping index_spells_for_player(object player, string myclass)
                domain != playerdisc)
                 continue;
         }
-        if(myclass=="cleric") //Oracles can master domain spells freely
+        if(pclass=="cleric"&&
+           myclass!="oracle")
         {
             domain = spellIndex[spellfile]["domain"];
             if(domain &&
