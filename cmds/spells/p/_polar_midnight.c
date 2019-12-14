@@ -12,7 +12,7 @@ int prevlight;
 void create()
 {
     ::create();
-    set_spell_name("polar midging");
+    set_spell_name("polar midnight");
     set_spell_level(([ "druid":9,"cleric":9,]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS polar midnight");
