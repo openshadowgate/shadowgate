@@ -9,7 +9,8 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("waves of exhaustion");
-    set_spell_level(([ "mage" : 7 ]));
+    set_spell_level(([ "mage" : 7, "oracle":7 ]));
+    set_mystery("bones");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS waves of exhaustion");
     set_damage_desc("living creatures become exhausted");

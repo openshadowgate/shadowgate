@@ -61,7 +61,7 @@ void spell_effect(int prof) {
     target->add_attack_bonus((-1)*bonus);
     target->set_property("empowered",(-1)*bonus);
     for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],(-1)*bonus);
-    caster->add_saving_bonus("all",(-1)*bonus);
+    target->add_saving_bonus("all",(-1)*bonus);
     target->set_property("spelled", ({TO}) );
     target->set_property("cursed",1);
     call_out("dest_effect",duration);
@@ -79,7 +79,7 @@ void dest_effect() {
         target->set_property("empowered",bonus);
         target->remove_property_value("spelled", ({TO}) );
         for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],bonus);
-        caster->add_saving_bonus("all",bonus);
+        target->add_saving_bonus("all",bonus);
         target->remove_property("cursed");
     }
     ::dest_effect();

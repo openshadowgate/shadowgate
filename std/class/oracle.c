@@ -41,7 +41,7 @@ mapping class_featmap(string myspec) {
 
 string *class_skills()
 {
-    return ({ "healing","spellcraft" });
+    return ({"spellcraft" });
 }
 
 string *mystery_skills(string mymystery)

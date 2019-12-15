@@ -10,8 +10,9 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("slay living");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 5, "oracle" : 5 ]));
     set_spell_sphere("necromancy");
+    set_mystery(({"reaper","bones"}));
     set_syntax("cast CLASS slay living on TARGET");
     set_description("This spell is necromantic in nature and allows the caster to call forth beings from the land of the "
 "dead to take the caster's target back with them to their homeland. If the beings are successful, this transition will "
@@ -28,7 +29,7 @@ string query_cast_string() {
 
 void spell_effect(int prof) {
     int x, damage;
-    
+
     if (!objectp(target) || !objectp(caster)){
         if(objectp(TO)) TO->remove();
         return;
@@ -36,10 +37,10 @@ void spell_effect(int prof) {
 
     place = environment(caster);
 
-    spell_successful();    
+    spell_successful();
 
-    if(pointerp(target->query_property("no_slay"))) 
-        if(member_array(caster->query_name(),target->query_property("no_slay")) != -1) 
+    if(pointerp(target->query_property("no_slay")))
+        if(member_array(caster->query_name(),target->query_property("no_slay")) != -1)
             x = 1;
 
     if((string)target->query_property("no death") || x || do_save(target))
@@ -53,7 +54,7 @@ void spell_effect(int prof) {
         tell_room(place,"%^BOLD%^%^BLUE%^The soul is cleaved from its body and left to drift homelessly!");
         tell_room(place,"%^BOLD%^%^MAGENTA%^The lifeless, soulless, body of "+target->QCN+" drops to the ground!",target);
         tell_object(target,"%^BOLD%^%^RED%^You sense a few last things as your soul is ripped from you body!\n");
-        spell_kill(target, caster);    
+        spell_kill(target, caster);
         target->die();
     }
     dest_effect();

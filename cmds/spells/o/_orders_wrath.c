@@ -32,7 +32,7 @@ string query_cast_string()
 void spell_effect(int prof)
 {
     int dam = sdamage;
-    int align = targ->query_alignment();
+    int align = target->query_alignment();
 
     if(align<4)
     {
@@ -42,13 +42,13 @@ void spell_effect(int prof)
     }
     if(align<7)
         dam/=2;
-    if(do_save(targ,0))
+    if(do_save(target,0))
         dam/=2;
 
     tell_object(caster,"%^BOLD%^The power of your voice manifests into three-dimensional grid and it slams into "+target->QCN+"!");
     tell_object(target,"%^BOLD%^The power of "+caster->QCN+" voice manifests into three-dimensional grid and it slams into you!");
     tell_room(place,"%^BOLD%^The power of your voice manifests into three-dimensional grid and it slams into "+target->QCN+"!",({caster,target}));
-    damage_targ(target, target_limb, sdama,"sonic" );
+    damage_targ(target, target->query_target_limb(), sdamage,"sonic" );
     dest_effect();
     return;
 }

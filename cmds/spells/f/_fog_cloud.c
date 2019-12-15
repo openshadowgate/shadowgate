@@ -8,12 +8,13 @@ inherit SPELL;
 int duration;
 object cloud,*blind=({});
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("fog cloud");
-    set_spell_level(([ "druid" : 2, "mage" : 2, "assassin": 1 ]));
+    set_spell_level(([ "druid" : 2, "mage" : 2, "assassin": 1, "oracle" : 2 ]));
     set_spell_sphere("conjuration_summoning");
+    set_mystery("battle");
     set_syntax("cast CLASS fog cloud");
     set_description("When fog cloud is cast, a bank of dense fog moves into the area, making it impossible for anyone, "
         "including the caster, to see more than a few inches from his or her face.  The cloud will linger in the area "
@@ -22,9 +23,9 @@ void create()
     set_target_required(0);
 }
 
-int preSpell() 
+int preSpell()
 {
-    if(place->query_property("fog cloud")) 
+    if(place->query_property("fog cloud"))
     {
         tell_object(caster,"%^RESET%^%^YELLOW%^There's already a fog cloud here!");
         return 0;
@@ -37,14 +38,14 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_object(caster,"%^RESET%^%^BOLD%^You hold your hands in the air and close your eyes, calling on nature itself!");
     tell_room(place,"%^RESET%^%^BOLD%^"+caster->QCN+" holds "+caster->QP+" hands in the air and closes "+caster->QP+"eyes!",caster);
 
 //    duration = (60 + (ROUND_LENGTH * clevel)) + time();
     duration = (ROUND_LENGTH + (ROUND_LENGTH * ((clevel+9)/10))) + time();
-    
+
     cloud = new(OBJECT);
     cloud->set_name("A bank of dense fog.");
     cloud->set_short("%^RESET%^%^BOLD%^A bank of dense fog");
@@ -105,7 +106,7 @@ void cloud_blindness()
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     object tp;
     int i;

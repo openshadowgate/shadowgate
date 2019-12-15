@@ -9,8 +9,9 @@ void create()
 {
     ::create();
     set_spell_name("wail of the banshee");
-    set_spell_level(([ "mage" : 9 ]));
+    set_spell_level(([ "mage" : 9, "oracle" : 9 ]));
     set_spell_sphere("necromancy");
+    set_mystery(({"reaper","bones"}));
     set_syntax("cast CLASS wail of the banshee");
     set_damage_desc("sonic to living");
     set_description("A caster invokes a horrible arcane scream that kills everything living in sight. Those who withstand the scream still suffer a little.");

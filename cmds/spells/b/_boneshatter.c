@@ -8,8 +8,9 @@ void create()
 {
     ::create();
     set_spell_name("boneshatter");
-    set_spell_level(([ "mage" : 4, "cleric" : 4 ]));
+    set_spell_level(([ "mage" : 4, "cleric" : 4, "oracle" : 4 ]));
     set_spell_sphere("necromancy");
+    set_mystery("bones");
     set_syntax("cast CLASS boneshatter on TARGET");
     set_damage_desc("untyped, exhausted or fatigued on save");
     set_description("With mere will you splinter you enemy's skeleton or external shell. The enemy fights the change and if they fail, they become exhausted, taking damage to their strength and dexterity. If they Successfully overcome the pain, they instead become fatigued for a short while. This spell will work only on living beings, and will cause stat damage just once per target.");
