@@ -81,12 +81,16 @@ string list_users(string *races, object tp)
                 position == "elder" ||
                 position == "arch")
                 tmp += "%^BOLD%^%^BLACK%^Wizard %^BOLD%^%^BLACK%^----- ";
-            else {
+            else
+            {
+                rabbit=who[i]->query_race();
                 if(((int)who[i]->query_login_time() + 60) > time())
                     rabbit = "someone";
-                else if(objectp(shape = who[i]->query_property("shapeshifted")))
+                if(objectp(shape = who[i]->query_property("shapeshifted")))
                     rabbit = (string)shape->query_shape_race();
-                else rabbit=who[i]->query_race();
+                else if(objectp(shape = who[i]->query_property("altered")))
+                    if((string)shape->query_shape_race())
+                        rabbit = (string)shape->query_shape_race();
 
                 if (ctime(time())[4..9]=="Apr  1") rabbit="%^WHITE%^rabbit";
                 if (ctime(time())[4..9]=="Nov 28") rabbit="turkey";

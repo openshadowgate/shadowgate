@@ -8,8 +8,8 @@ void create()
     set_spell_name("alter self");
     set_spell_level(([ "bard" : 2, "psion" : 2, "psywarrior": 2, "assassin" : 1, "mage" : 2, "druid" : 1, "inquisitor":1 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS alter self");
-    set_description("%^RESET%^This spell allows the caster to make minor changes to their body. These are usually sufficient changes that they become unrecognizable even to those they are familiar with. It does not allow for such drastic changes as body size or overall shape; the caster would still be quite recognizable as a creature of their race.
+    set_syntax("cast CLASS alter self [RACE]");
+    set_description("%^RESET%^This spell allows the caster to make minor changes to their body. These are usually sufficient changes that they become unrecognizable even to those they are familiar with. It does not allow for such drastic changes as body size or overall shape.
 
 This spell does not alter details on your scoresheet (eyes, hair) but the caster may describe their new form and features differently to these if they so choose. They must still maintain their overall body shape, height and weitght.
 
@@ -18,6 +18,7 @@ You can only have one altered form with this spell - repeat uses do not grant ad
     set_somatic_comp();
     set_peace_needed(1);
     set_helpful_spell(1);
+    set_arg_needed(1);
 }
 
 int preSpell()
@@ -37,8 +38,11 @@ string query_cast_string() {
 
 void spell_effect(int prof)
 {
+    string raceto = arg;
+    if(member_array(raceto,RACE_D->query_races())==-1)
+        raceto = caster->query("race");
     if (!objectp(caster) || !userp(caster)) { TO->remove(); return; }
-    new("/std/races/shapeshifted_races/spell_alter_self.c")->init_shape(caster,"");
+    new("/std/races/shapeshifted_races/spell_alter_self.c")->init_shape(caster,raceto);
     spell_successful();
     addSpellToCaster();
 }
