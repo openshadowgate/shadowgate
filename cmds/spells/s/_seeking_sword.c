@@ -15,9 +15,10 @@ void make_sword();
 void create() {
     ::create();
     set_spell_name("seeking sword");
-    set_spell_level(([ "cleric" : 3, "paladin" : 4 ]));
+    set_spell_level(([ "cleric" : 3, "paladin" : 4, "oracle" : 5 ]));
     set_spell_sphere("combat");
     set_spell_domain("war");
+    set_mystery("godclaw");
     set_syntax("cast CLASS seeking sword");
     set_description("This spell will create a floating and controllable sword for you that you can use to attack your "
 "enemies.  The sword will automatically follow and protect you.  Should you lose it, though, simply go into the room "
@@ -27,7 +28,7 @@ void create() {
     set_helpful_spell(1);
 }
 
-int preSpell() 
+int preSpell()
 {
 	if(caster->query_property("seeking_sword"))
 	{
@@ -47,7 +48,7 @@ string query_cast_string(){
 
 void spell_effect(int prof){
 //    object *inven, *livings;
-//No need for these - they aren't used. ~Circe~ 
+//No need for these - they aren't used. ~Circe~
 	if(!objectp(environment(caster)))
 	{
 		dest_effect();
@@ -96,7 +97,7 @@ void make_sword()
     //ob->set_exp(100);
     ob->set_stats("strength",18+(clevel/6));
     ob->set_max_hp(ob->query_hp());
-    ob->set_caster(caster);  
+    ob->set_caster(caster);
     ob->set_property("spell",TO);
     ob->set_property("spell", ({TO}) );
     ob->set_property("spell_creature", TO);
@@ -108,7 +109,7 @@ void make_sword()
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     object sword;
 

@@ -7,8 +7,9 @@ create()
 {
     ::create();
     set_spell_name("dictum");
-    set_spell_level(([ "cleric" : 7, "inquisitor" : 6 ]));
+    set_spell_level(([ "cleric" : 7, "inquisitor" : 6, "oracle" : 6 ]));
     set_spell_sphere("invocation_evocation");
+    set_mystery("godclaw");
     set_syntax("cast CLASS dictum on TARGET");
     set_description("You proclaim a word of power, staggering,  paralyzing or killing your target.");
     set_verbal_comp();

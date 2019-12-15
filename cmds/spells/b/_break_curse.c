@@ -7,9 +7,10 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("break curse");
-    set_spell_level(([ "mage" : 4, "bard" : 4, "paladin" : 3, "cleric" : 8,"inquisitor":3 ]));
+    set_spell_level(([ "mage" : 4, "bard" : 4, "paladin" : 3, "cleric" : 8,"inquisitor":3, "oracle":3 ]));
     set_spell_sphere("abjuration");
     set_spell_domain("magic");
+    set_mystery("godclaw");
     set_syntax("cast CLASS break curse on <object> [at <player>]");
     set_description("This powerful spell will break a curse that has been placed upon a magical item, unravelling the "
 "corrupted weave around it.  Only the most skilled of abjurers can attempt to disentangle enchantments in such a "

@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("fear");
-    set_spell_level(([ "cleric" : 5, "bard" : 3, "mage" : 4, "psion" : 6, "inquisitor":4, "oracle":4 ]));
+    set_spell_level(([ "cleric" : 5, "bard" : 3, "mage" : 4, "psion" : 6, "inquisitor":4, "oracle":5 ]));
     set_spell_sphere("necromancy");
     set_spell_domain("tyranny");
     set_mystery("dragon");

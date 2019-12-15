@@ -8,9 +8,9 @@ void create()
 {
     ::create();
     set_spell_name("obsidian flow");
-    set_spell_level(([ "druid" : 4, "mage" : 4,]));
+    set_spell_level(([ "druid" : 4, "mage" : 4,"oracle":4]));
     set_spell_sphere("alteration");
-    set_spell_domain("sun");
+    set_mystery("dragon");
     set_syntax("cast CLASS obsidian flow");
     set_damage_desc("fire, trips targets");
     set_description("You convert a thin layer of the ground below your enemiesto molten glass that cools quickly. Creatures on the glass that won't jump off in time will be burned and will trip as surface solidifies.");
