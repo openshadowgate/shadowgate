@@ -4,8 +4,8 @@
 "godclaw":({"cause fear","hold person","break curse","orders wrath","seeking sword","gale fist","dictum","shield of law","imprisonment"}),\
 "reaper":({"chill touch","spectral hand","sands of time","purge spirit","slay living","undeath is death","destruction","horrid wilting","wail of the banshee"}),\
 "bones":({"cause fear","false life","animate dead","boneshatter","slay living","circle of death","waves of exhaustion","horrid wilting","wail of the banshee"}),\
-"battle":({"enlarge person","fog cloud","","","","","","",""}),\
-"bones":({"","","","","","","","",""}),\
+"battle":({"enlarge person", "fog cloud", "magic vestments", "wall of fire", "righteous might", "transformation", "foresight", "earthquake", "storm of vengeance"}),\
+"flame":({"burning hands", "resist energy", "fireball", "wall of fire", "conjure elemental", "fire seeds", "fire storm", "incendiary cloud", "fiery body"}),\
 ])
 
 #define MYSTERY_SKILLS  ([\
@@ -15,4 +15,5 @@
 "reaper":({"survival","stealth","perception"}),\
 "bones":({"stealth","influence","dungeoneering"}),\
 "battle":({"endurance","athletics","perception"}),\
+"flame":({"athletics","influence","rope use"}),\
 ])

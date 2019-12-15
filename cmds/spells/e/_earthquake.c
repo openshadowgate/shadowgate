@@ -20,8 +20,9 @@ void create()
 {
     ::create();
     set_spell_name("earthquake");
-    set_spell_level(([ "cleric" : 8, "druid" : 8 ]));
-    set_spell_sphere("combat");
+    set_spell_level(([ "cleric" : 8, "druid" : 8, "oracle" : 8 ]));
+    set_spell_sphere("invocation_evocation");
+    set_mystery("battle");
     set_spell_domain("cavern");
     set_syntax("cast CLASS earthquake");
     set_description("By unleashing this spell, the caster calls forth a mighty earthquake to trip and damage his foes.  "
@@ -37,7 +38,7 @@ void create()
 
 
 string query_cast_string()
-{ 
+{
     tell_object(caster,"%^ORANGE%^You growl a prayer, planting your "+
         "feet upon the ground.%^RESET%^");
     tell_room(place,"%^ORANGE%^"+caster->QCN+" growls a prayer, planting "+
@@ -56,8 +57,8 @@ void spell_effect(int prof)
     place->set_property("spelled", ({TO}));
     storm_room = place;
     addSpellToCaster();
-    spell_successful();    
-    //execute_attack();    
+    spell_successful();
+    //execute_attack();
     call_out("dest_effect",duration);
 }
 
@@ -68,13 +69,13 @@ void execute_attack()
     int i;
 
     ::execute_attack();
-    
+
     if(!objectp(caster) || !objectp(environment(caster)) || caster->query_unconscious())
     {
         dest_effect();
         return;
     }
-    
+
     if(environment(caster) != storm_room)
     {
         tell_object(caster,"%^ORANGE%^The rumbling earth settles "+
@@ -84,10 +85,10 @@ void execute_attack()
         dest_effect();
         return;
     }
-    
+
     attackers = caster->query_attackers();
     attackers = target_filter(attackers);
-   
+
     if(sizeof(attackers))
     {
         tell_room(storm_room,"%^BOLD%^%^BLACK%^The earth shakes and "+
@@ -104,7 +105,7 @@ void execute_attack()
     {
         dest_effect();
         return;
-    }   
+    }
 }
 
 
@@ -124,7 +125,7 @@ int storm_effects(object obj)
         tell_object(obj,"%^ORANGE%^The debris grazes you, but you "+
             "avoid the worst of it!%^RESET%^");
         tell_room(room,"%^ORANGE%^"+obj->QCN+" dodges the worst of "+
-            "the debris!%^RESET%^",obj);        
+            "the debris!%^RESET%^",obj);
         damage_targ(obj,obj->return_target_limb(),sdamage/2,"bludgeoning");
     }
     else

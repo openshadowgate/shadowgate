@@ -9,7 +9,8 @@ void create()
 {
     ::create();
     set_spell_name("righteous might");
-    set_spell_level(([ "cleric" : 2, "inquisitor" : 5 ]));
+    set_spell_level(([ "cleric" : 2, "inquisitor" : 5, "oracle" : 5 ]));
+    set_mystery("battle");
     set_spell_sphere("alteration");
     set_spell_domain("strength");
     set_syntax("cast CLASS righteous might");

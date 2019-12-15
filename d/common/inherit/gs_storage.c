@@ -69,7 +69,7 @@ void reset()
     {
         scroll = new("/d/magic/safe_scroll");
         scroll->move(TO);
-        scroll->set_spell(random(9)+1);
+        scroll->set_spell(random(7)+1);
     }
     while(!present("paper 6"))                 new(CMISC"paper")->move(TO);
     if(!present("dark lantern"))               new(CMISC"darkbeacon")->move(TO);

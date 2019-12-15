@@ -1,5 +1,5 @@
 //Ice Storm coded by Bane//
-//Adding to clerics because it is also a cleric spell in the 
+//Adding to clerics because it is also a cleric spell in the
 //PHB after discussions with other Imms ~Circe~ 5/18/13
 //After discussing with Circe, removing it from Clerics for the time being until they we are finished rebalancing
 #include <std.h>
@@ -14,7 +14,8 @@ int timer,mystage,flag;
 void create() {
     ::create();
     set_spell_name("storm of vengeance");
-    set_spell_level(([ "druid" : 9, "cleric" :9 ]));
+    set_spell_level(([ "druid" : 9, "cleric" :9, "oracle" : 9 ]));
+    set_mystery("battle");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS storm of vengeance");
     set_description("When this spell is cast, a dark storm cloud will cover the area.  Lightning will begin to strike enemies of the caster "
@@ -81,7 +82,7 @@ void execute_attack() {
             "rain %^RESET%^%^CYAN%^burns everything it touches!%^RESET%^");
         break;
     } // falls through when mystage is above 1
-    
+
 
     foes = all_living(place);
     foes = target_filter(foes);
@@ -156,10 +157,10 @@ void execute_attack() {
 }
 
 
-void dest_effect() {    
+void dest_effect() {
 
     if(objectp(place)) tell_room(place,"%^BOLD%^%^CYAN%^The ominous black stormclouds suddenly billow away, disappearing as quickly as they arrived!");
-    
+
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }

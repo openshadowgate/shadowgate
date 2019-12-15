@@ -10,7 +10,8 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("transformation");
-    set_spell_level(([ "mage" : 6 ]));
+    set_spell_level(([ "mage" : 6, "oracle" : 6 ]));
+    set_mystery("battle");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS transformation");
     set_description("An experienced mage can use this spell to reshape their own body into a powerful fighting "

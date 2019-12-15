@@ -10,8 +10,9 @@ object elem;
 void create() {
     ::create();
     set_spell_name("conjure elemental");
-    set_spell_level(([ "mage" : 5, "innate" : 1, "cleric" : 5 ]));
+    set_spell_level(([ "mage" : 5, "innate" : 1, "cleric" : 5, "oracle" : 5 ]));
     set_spell_sphere("conjuration_summoning");
+    set_mystery("flame");
     set_syntax("cast CLASS conjure elemental on water|fire|earth|air");
     set_description("This spell will summon an elemental for you to command.  Such creatures are native to different planes, and existence in this plane is extremely painful for them.  They resent being summoned here and hate the mage who summoned them.  There is a chance that the caster will loose control over the creature and the creature will attack him/her immediately and viciously.
 To command elemental, use %^ORANGE%^<command elemental to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^.

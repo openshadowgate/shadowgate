@@ -11,7 +11,8 @@ void create()
 {
     ::create();
     set_spell_name("fireball");
-    set_spell_level(([ "mage" : 3, "monk" : 7]));
+    set_spell_level(([ "mage" : 3, "monk" : 7, "oracle" : 3]));
+    set_mystery("flame");
     set_spell_sphere("invocation_evocation");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS fireball on TARGET");

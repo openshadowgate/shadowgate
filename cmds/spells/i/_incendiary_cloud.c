@@ -16,7 +16,7 @@ string element;
 void create(){
     ::create();
     set_spell_name("incendiary cloud");
-    set_spell_level(([ "mage" : 8 ]));
+    set_spell_level(([ "mage" : 8, "oracle" : 8 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS incendiary cloud");
     set_damage_desc("fire or versatile arcanist");

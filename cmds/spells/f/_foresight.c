@@ -10,8 +10,9 @@ int duration;
 void create() {
     ::create();
     set_spell_name("foresight");
-    set_spell_level(([ "mage" : 7, "bard" : 5 ]));
+    set_spell_level(([ "mage" : 7, "bard" : 5,"oracle":7 ]));
     set_spell_sphere("divination");
+    set_mystery("battle");
     set_syntax("cast CLASS foresight [on TARGET]");
     set_damage_desc("clvel/16 to armor bonus, clevel/12 to reflex save, death ward feat");
     set_description("The caster uses this spell to heighten their awareness for a time, allowing them to perceive fragments of their immediate future. This allows them to react pre-emptively to many threats, defending better against attacks that they can see coming before they actually land, and they may even be able avoid the death itself.");
