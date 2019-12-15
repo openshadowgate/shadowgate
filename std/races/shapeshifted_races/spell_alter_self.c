@@ -53,22 +53,20 @@ int shape_attack(object tp, object targ) { return 0; }
 int init_shape(object obj,string str){
     string alter_profile;
     if(!objectp(obj)) { return 0; } //
-    if(member_array(str,RACE_D->query_races()==-1))
+    if(member_array(str,RACE_D->query_races())==-1)
        return 0;
     if(obj->query_property("altered") || obj->query_property("shapeshifted")) { return 0; } // can't shapeshift twice
     obj->set_property("altered",shape = new(base_name(TO)+".c")); // makes a new shape and sets the shapeshifted property to it, this is where all the work is done, very important
     if((alter_profile=obj->query("alter_self_profile")))
     {
         shape->set_shape_profile(alter_profile);
-        tell_object(FPL("ilmarinen"),":"+shape->query_shape_profile()+":"+alter_profile);
     }
     shape->set_owner(obj);
     shape->change_into_message(obj);
     shape->set_base_profile((string)obj->query("relationship_profile"));
     shape->set_shape_race(str);
-    obj->add_id(obj->query_race());
     obj->set("relationship_profile",shape->query_shape_profile());
-    obj->add_id(obj->query_race());
+    obj->add_id(shape->query_shape_race());
 
     if(objectp(to_object(DESC_D)))     {
         desc = new(DESC_D); //

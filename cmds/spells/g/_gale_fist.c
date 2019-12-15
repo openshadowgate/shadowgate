@@ -8,19 +8,13 @@ int hit, max;
 void create() {
     ::create();
     set_spell_name("gale fist");
-    set_spell_level(([ "monk" : 11 ]));
+    set_spell_level(([ "monk" : 11, "oracle" : 6 ]));
+    set_spell_sphere("conjuration_summoning");
+    set_mystery("godclaw");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS gale fist on TARGET");
-    set_description("This spell creates an enormous fist of tangible air above the target. "+
-    "The fist will rapidly smash the target after a short delay, sometimes more than once, "+
-    "on the first attempt the target rolls a will saving throw, if successful the target "+
-    "will take only half damage. If the target fails the saving throw, however, they "+
-    "will be momentarily stunned. The higher the level of the caster the longer the period of time. "+
-    "Each additionl strike by the fist will allow for a save to half damage, but the stun "+
-    "effect will not apply beyond the first hit. "+
-    "\nNOTE: Each hit of the fist does 1d6 damage per caster level. The probability of "+
-    "the fist hitting more than one time is partly based on level and partly random.%^RESET%^");
-    //set_verbal_comp();
+    set_description("This spell creates an enormous fist of tangible air above the target. The fist will rapidly smash the target after a short delay, sometimes more than once, on the first attempt the target rolls a will saving throw, if successful the target will take only half damage. If the target fails the saving throw, however, they will be momentarily stunned. The higher the level of the caster the longer the period of time. Each additionl strike by the fist will allow for a save to half damage, but the stun effect will not apply beyond the first hit.");
+    set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
     set_save("will");

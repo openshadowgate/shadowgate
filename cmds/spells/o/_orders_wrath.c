@@ -8,82 +8,47 @@ void create()
 {
     ::create();
     set_author("ares");
-    set_spell_name("orders oath");
-    set_spell_level(([ "cleric" : 2, "paladin" : 2 ]));
-    set_spell_sphere("combat");
-    set_spell_domain("vigilance");
-    set_syntax("cast CLASS orders oath on TARGET");
-    set_damage_desc("paralyzed for 2d4 rounds");
-    set_description("This spell magically enhances the power of the caster's voice.  The spell takes the form of a single "
-        "spoken word, 'halt'.  The target need not understand the language of the spell for the magic to work.");
+    set_spell_name("orders wrath");
+    set_spell_level(([ "inquisitor" : 4, "oracle" : 4]));
+    set_affixed_spell_level(8);
+    set_spell_sphere("invocation_evocation");
+    set_mystery("godclaw");
+    set_syntax("cast CLASS orders wrath on TARGET");
+    set_damage_desc("divine");
+    set_description("You channel lawful power to smite enemies. The power takes the form of a three-dimensional grid of energy. Neutral and lawfulcreatures recieve half of the damage and Will save halves the damage. Lawful creatures are not affected.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
     set_save("will");
 }
 
-int preSpell()
-{
-    if(!objectp(target))
-    {
-        tell_object(caster,"This spell requires a target.");
-        return 0;
-    }
-    return 1;
-}
-
 string query_cast_string()
 {
-    tell_object(caster,"%^BOLD%^You can feel a commanding pressence "+
-        "building inside, as you chant the enthralling words of this prayer.");
-    tell_room(place,"%^BOLD%^"+caster->QCN+" strikes a commanding pose as "+
-        ""+caster->QS+" chants through an enthralling prayer.",caster);
+    tell_object(caster,"%^BOLD%^You can feel a commanding pressence building inside, as you chant the enthralling words of the order.");
+    tell_room(place,"%^BOLD%^"+caster->QCN+" strikes a commanding pose as "+caster->QS+" chants.",caster);
     return "display";
 }
 
 void spell_effect(int prof)
 {
-    int damage;
-    if (!present(target,place))
-    {
-        tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
-        dest_effect();
-        return 1;
-    }
-    caster->force_me("yell %^BOLD%^%^WHITE%^H%^YELLOW%^A%^WHITE%^L%^YELLOW%^T%^WHITE%^!");
-    //    if(!SAVING_D->saving_throw(target,"spell",0))
-    if(!do_save(target,0))
-    {
-        if(mind_immunity_damage(target, "default"))
-        {
-            spell_successful();
-            dest_effect();
-            return;
-        }
+    int dam = sdamage;
+    int align = targ->query_alignment();
 
-        tell_object(target,"%^YELLOW%^You lurch as the power of "+caster->QCN+"'s voice "
-            "magically compells you to freeze in your tracks!");
-        tell_room(place,"%^YELLOW%^"+target->QCN+" freezes in place, compelled by the "
-            "power of "+caster->QCN+"'s voice!",target);
-        target->set_paralyzed(roll_dice(2,4)*8,"%^YELLOW%^You are magically compelled to stop!");
-        target->set_disable(10,target);
-        spell_successful();
+    if(align<4)
+    {
+        tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" seem unaffected by the spell.");
         dest_effect();
         return;
     }
+    if(align<7)
+        dam/=2;
+    if(do_save(targ,0))
+        dam/=2;
 
-    tell_object(caster,"%^BLUE%^%^BOLD%^The power of your voice slams into "+target->QCN+" but "
-        ""+target->QS+" is able to resist!");
-    tell_object(target,"%^BOLD%^%^BLUE%^The power of "+caster->QCN+"'s voice slams into you, but "
-        "you are able to resist the command!");
-    tell_room(place,"%^BOLD%^%^BLUE%^The power of "+caster->QCN+"'s voice slams into "+target->QCN+" but "
-        ""+target->QS+" is able to resist the command!",({target,caster}));
+    tell_object(caster,"%^BOLD%^The power of your voice manifests into three-dimensional grid and it slams into "+target->QCN+"!");
+    tell_object(target,"%^BOLD%^The power of "+caster->QCN+" voice manifests into three-dimensional grid and it slams into you!");
+    tell_room(place,"%^BOLD%^The power of your voice manifests into three-dimensional grid and it slams into "+target->QCN+"!",({caster,target}));
+    damage_targ(target, target_limb, sdama,"sonic" );
     dest_effect();
     return;
-}
-
-void dest_effect()
-{
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }

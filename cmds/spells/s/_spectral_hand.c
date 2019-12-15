@@ -15,7 +15,8 @@ void create()
 {
     ::create();
     set_spell_name("spectral hand");
-    set_spell_level(([ "mage" : 2 ]));
+    set_spell_level(([ "mage" : 2, "oracle" : 2 ]));
+    set_mystery("reaper");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS spectral hand");
     set_description("An invisible, glowing hand shaped from your life force materializes and moves as you desire, allowing you to deliver touch range spells at a distance. The hand is incorporeal and thus can be only abjured. It can't be seen by anyone, including you.");
