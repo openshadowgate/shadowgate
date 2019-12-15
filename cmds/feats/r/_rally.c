@@ -157,7 +157,8 @@ void dest_effect(){
     int i;
     string *holding;
     ::dest_effect();
-    mod = mod*(-1);
+    mod = -mod;
+    if(objectp(caster)) caster->remove_property("using rally");
     if(!sizeof(cur_players))
     {
       remove_feat(TO);
@@ -187,7 +188,6 @@ void dest_effect(){
       cur_players[i]->remove_property("rally");
       if(sizeof(holding)) cur_players[i]->set_property("rally",holding);
     }
-    if(objectp(caster)) caster->remove_property("using rally");
     remove_feat(TO);
     return;
 }

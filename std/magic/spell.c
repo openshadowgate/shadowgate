@@ -30,6 +30,7 @@ string spell_name,
     *immune,
     spell_domain,
     monk_way,
+    * oracle_mystery,
     damage_desc,
     save_type,
     syntax,
@@ -319,6 +320,13 @@ void set_damage_desc(string desc)
 void set_spell_duration() {    duration = 1; }
 void set_spell_sphere(string sphere) { spell_sphere = sphere; }
 void set_monk_way(string myway) { monk_way = myway; }
+void set_mystery(mixed str)
+{
+    if(stringp(str))
+        oracle_mystery = ({str});
+    if(arrayp(str))
+        oracle_mystery = str;
+}
 void set_cast_string(string str) {  cast_string = str; }
 void set_silent_casting(int a) {    silent_casting = a; }
 void set_target_required(int a) {   target_required = a; }
@@ -1442,6 +1450,7 @@ mapping query_components(string classtype) {
 string query_spell_type() {  return spell_type; }
 string query_spell_sphere() { return spell_sphere; }
 string query_monk_way() { return monk_way; }
+string * query_mystery() { return oracle_mystery; }
 string query_cast_string() { }
 int query_silent_casting() {  return silent_casting; }
 
@@ -2747,24 +2756,26 @@ void help() {
             }
     }
     write("%^BOLD%^%^RED%^Class:%^RESET%^ "+(affixed_level?("(L"+affixed_level+" fixed) "):"")+printclass);
+
     if(!spell_sphere)
         spell_sphere = "";
-    if(spell_sphere != "")
-        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(evil_spell?" [evil]":"")+(mental_spell?" [mind-affecting]":""));
     if(!spell_domain)
         spell_domain = "";
-    if(spell_domain != "")
-        write("%^BOLD%^%^RED%^Domain:%^RESET%^ "+spell_domain);
     if(!mydiscipline)
         mydiscipline = "";
+    if(!save_type)
+        save_type = "";
+
+    if(spell_sphere != "")
+        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(spell_domain!=""?(" ["+spell_domain+"]"):"")+(evil_spell?" [evil]":"")+(mental_spell?" [mind-affecting]":""));
+    if(sizeof(oracle_mystery))
+        write("%^BOLD%^%^RED%^Mystery:%^RESET%^ "+implode(oracle_mystery,", "));
     if(mydiscipline != "")
         write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
     if(monk_way != "" && stringp(monk_way))
         write("%^BOLD%^%^RED%^Monk way:%^RESET%^ "+monk_way);
     if(verbal_comp||somatic_comp)
         write("%^BOLD%^%^RED%^Components:%^RESET%^ "+(verbal_comp?"V ":"")+(somatic_comp?"S ":""));
-    if(!save_type)
-        save_type = "";
     if(save_type != "")
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ "+save_type);
     if(stringp(damage_desc))

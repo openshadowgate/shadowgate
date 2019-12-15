@@ -11,7 +11,8 @@ string myelement;
 void create() {
     ::create();
     set_spell_name("resist energy");
-    set_spell_level(([ "paladin" : 2, "ranger" : 1, "druid" : 2, "mage" : 2, "paladin" : 3, "inquisitor" : 2, ]));
+    set_spell_level(([ "paladin" : 2, "ranger" : 1, "druid" : 2, "mage" : 2, "paladin" : 3, "inquisitor" : 2,"oracle":3 ]));
+    set_mystery("dragon");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS resist energy on <element>");
     set_description("This spell bestows the caster with a small amount of damage resistance against a selected element, increasing with the caster's level. Elements that can be chosen are acid, cold, electricity, fire, or sonic.

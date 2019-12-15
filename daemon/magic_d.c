@@ -333,7 +333,7 @@ mapping index_unrestricted_spells(string myclass)
                domain != "me")
                 continue;
         }
-        if(myclass=="cleric") //Oracles cand master domain spells
+        if(pclass=="cleric")
         {
             domain = spellIndex[spellfile]["domain"];
             if(domain &&

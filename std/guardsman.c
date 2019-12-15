@@ -462,7 +462,7 @@ void heart_beat()
 
     if(!objectp(TO))   { return; }
     if(!objectp(ETO))  { return; }
-    if (objectp(captive) && file_name(ETO)==jail_location && random(2)<1){
+    if (objectp(captive) && file_name(ETO)==jail_location){
       put_in_jail();
       return;
     }

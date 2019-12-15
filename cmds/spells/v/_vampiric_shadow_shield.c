@@ -9,6 +9,7 @@ void create()
     ::create();
     set_spell_name("vampiric shadow shield");
     set_spell_level(([ "mage" : 5, "assassin" : 3, "oracle" : 5]));
+    set_mystery("darkness");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS vampiric shadow shield");
     set_damage_desc("negative energy on living");

@@ -12,6 +12,7 @@ void create() {
     set_author("ares");
     set_spell_name("levitate");
     set_spell_level(([ "mage" : 2, "oracle" : 2 ]));
+    set_mystery("dragon");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS levitate on TARGET");
     set_description("This spell will give the target the ability to levitate. The target will find traveling over long "
