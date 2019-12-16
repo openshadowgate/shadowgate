@@ -33,7 +33,7 @@ void spell_effect(int prof)
         if(objectp(TO)) TO->remove();
         return 0;
     }
-    portal = new(SPELL_OBJ_DIR+"genesis_portal");
+    portal = new("/d/magic/obj/demiplane_portal");
 
     //messages here
 
@@ -42,7 +42,7 @@ void spell_effect(int prof)
     portal->set_property("spell", TO );
     portal->set_property("spelled", ({TO}) );
     portal->set_spellobj(TO);
-    portal->start_magic(place, prof, roomName);
+    portal->start_magic(place,roomName);
     portal->move(place);
 
     //Portal poofs in message
@@ -69,5 +69,6 @@ void dest_effect() {
     portal->remove();
 
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if(objectp(TO))
+        TO->remove();
 }

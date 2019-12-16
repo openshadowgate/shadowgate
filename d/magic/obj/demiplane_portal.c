@@ -1,6 +1,3 @@
-//Adapted from rope trick rope by 
-//~Circe~ for use with psions 7/20/05
-
 #include <std.h>
 #include <magic.h>
 #include <rooms.h>
@@ -12,32 +9,18 @@ object rt_room, caster;
 object spellobj, entry_place;
 string roomName;
 
-void end_magic();
-void start_magic(object entry, int prof, string room);
-int dismiss(string str);
-int do_magic(string str);
-object query_spellobj();
-void set_spellobj(object ob);
-
-void create() {
+void create()
+{
    ::create();
    set_name("portal");
-   set_id( ({ "portal","genesis_portal","entrance" }) );
-   set_short("a portal hovering in the air");
+   set_id( ({ "door","demiplane_portal","entrance","portal","old door","an old door" }) );
+   set_short("%^RESET%^%^ORANGE%^an %^ORANGE%^old %^BOLD%^%^ORANGE%^d%^RESET%^%^ORANGE%^oor");
    set_long(
-@GENESIS
-This is a small portal surrounded by a greenish glow.  It 
-seems to lead somewhere, though you cannot quite tell where.  
-Nothing is holding this portal in place, but you could likely 
-<access portal> to go inside and investigate.  If you are 
-the one who created the portal, you may also <dismiss portal>.
-GENESIS
+"%^ORANGE%^This is an eerie and old wooden door, standing alone in its frame on iron hinges without any wall supporting it."
    );
    set_property("no animate",1);
    set_value(0);
    set_weight(100000);
-   rt_room = new(SPELL_OBJ_DIR+"genesis_room");
-   rt_room->set_had_players();
    lowered = 1;
 }
 
@@ -50,41 +33,54 @@ object query_spellobj() { return spellobj; }
 
 void init() {
    ::init();
-   add_action("do_magic", "access");
+   add_action("do_magic", "enter");
    add_action("dismiss", "dismiss");
 }
 
 int do_magic(string str) {
    object ob;
 
-   if(str != "portal") return 0;
-   if(!lowered) return 0;
+   if(present(str,ETO)!=TO)
+       return 0;
+   if(!lowered)
+       return 0;
+
    if(TP->query_disable())
-      return notify_fail("You cannot enter the portal at this time.\n");
-   if(TP->query_bound() || TP->query_tripped() || TP->query_unconscious()) {
+       return notify_fail("You cannot enter the door at this time.\n");
+
+   if(TP->query_bound() || TP->query_tripped() || TP->query_unconscious())
+   {
       TP->send_paralyzed_message("info",TP);
    }
-   tell_object(TP, "You step through the portal into a small demiplane!");
-   tell_room(entry_place,TPQCN+" steps through the portal.",TP);
-   tell_room(rt_room, TPQCN+" enters the demiplane through the portal.",TP);
    TP->move(rt_room);
    TP->force_me("look");
+
+   tell_object(TP, "You step through the door and appear somewhere else.");
+   tell_room(entry_place,"%^BOLD%^%^GREEN%^"+TPQCN+" steps through the portal.",TP);
+   tell_room(rt_room, "%^BOLD%^%^GREEN%^"+TPQCN+" enters through the door.",TP);
    return 1;
 }
 
 int dismiss(string str) {
    object ob;
 
-   if(str != "portal") return 0;
-   if(TP != caster) return 0;
+   if(str != "portal")
+       return 0;
+   if(TP != caster)
+       return 0;
+
+   tell_room(ETO,"%^ORANGE%^Old door fades into non-existence.");
    spellobj->dest_effect();
    return 1;
 }
 
-void start_magic(object entry, int prof, string room) {
+void start_magic(object entry, string room) {
    roomName = room;
    entry_place = entry;
-   rt_room->add_exit(file_name(entry), "out");
+   rt_room = new("/d/magic/room/demiplane_plane");
+   rt_room->set_had_players();
+   rt_room->set_castname(caster->query_name());
+   rt_room->add_exit(file_name(entry), "door");
    rt_room->set_entry(entry, TO, room);
 }
 
@@ -94,22 +90,22 @@ void end_magic() {
 
 void raise() {
    if(lowered == 0) {
-      tell_room(rt_room,"The portal is already closed.");
+      tell_room(rt_room,"%^ORANGE%^The door is already closed.");
       return;
    }
    lowered = 0;
-   tell_room(entry_place, "The portal closes, leaving no trace of the space beyond.\n");
+   tell_room(entry_place, "%^ORANGE%^The %^ORANGE%^d%^BOLD%^%^ORANGE%^o%^RESET%^%^ORANGE%^or%^ORANGE%^ disappears.");
    TO->move(rt_room);
 }
 
 void lower() {
    if(lowered == 1) {
-      tell_room(rt_room, "The portal is already open.");
+      tell_room(rt_room, "%^ORANGE%^The door to material plane is already open.");
       return;
    }
    lowered = 1;
    if(!objectp(entry_place))
 	entry_place = find_object_or_load(roomName);
-   tell_room(entry_place, "You see a portal open through the air!");
+   tell_room(entry_place, "%^ORANGE%^You see a door materializes in the place!");
    TO->move(entry_place);
 }
