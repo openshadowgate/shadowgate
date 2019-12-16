@@ -152,10 +152,12 @@ void drain_process(object target)
         return;
     }
     if(target->query_asleep())
-        if(target->query_hp()<target->query_max_hp_base()/4)
+        if(target->query_hp()<target->query_max_hp()*3/4)
         {
             tell_object(target,"%^RED%^You feel something is terribly wrong and wake up!");
             target->set_asleep(0,0);
+            stop_drain();
+            return;
         }
 
     if(target->query_hp()<-(target->query_max_hp()/5))
@@ -186,7 +188,7 @@ void drain_process(object target)
 void drain_health(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(),8);
+    dam = roll_dice(TP->query_level(),6);
     target->cause_typed_damage(target,"torso",dam,"negative energy");
     TP->add_max_hp_bonus(dam*2);
     //target->cause_typed_damage(caster,"torso",dam,"negative energy");
@@ -195,7 +197,7 @@ void drain_health(object target)
 void drain_life(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(),8);
+    dam = roll_dice(TP->query_level(),6);
     target->cause_typed_damage(target,"torso",dam,"negative energy");
     target->cause_typed_damage(TP,"torso",dam*2,"negative energy");
 }
