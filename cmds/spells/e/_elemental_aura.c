@@ -6,10 +6,10 @@ int timer,flag,stage,toggle,counter;
 string element;
 mapping shortmap, colormap;
 shortmap = ([
-                "fire":"%^BOLD%^%^BLACK%^ (%^RESET%^%^RED%^bathed in flames%^BOLD%^%^BLACK%^)%^RESET%^",
-                "cold":"%^BOLD%^%^BLACK%^ (%^RESET%^%^CYAN%^in an icy haze%^BOLD%^%^BLACK%^)%^RESET%^",
-                "electricity":"%^BOLD%^%^BLACK%^ (%^RESET%^%^ORANGE%^engulfed in stormbolts%^BOLD%^%^BLACK%^)%^RESET%^",
-                "acid":"%^BOLD%^%^BLACK%^ (%^RESET%^%^GREEN%^in acid fog%^BOLD%^%^BLACK%^)%^RESET%^",
+                "fire":"%^BOLD%^%^BLACK%^(%^RESET%^%^RED%^bathed in flames%^BOLD%^%^BLACK%^)%^RESET%^",
+                "cold":"%^BOLD%^%^BLACK%^(%^RESET%^%^CYAN%^in an icy haze%^BOLD%^%^BLACK%^)%^RESET%^",
+                "electricity":"%^BOLD%^%^BLACK%^(%^RESET%^%^ORANGE%^engulfed in stormbolts%^BOLD%^%^BLACK%^)%^RESET%^",
+                "acid":"%^BOLD%^%^BLACK%^(%^RESET%^%^GREEN%^in acid fog%^BOLD%^%^BLACK%^)%^RESET%^",
                 ]);
 colormap = ([
                 "fire":"%^BOLD%^%^RED%^",
@@ -132,8 +132,8 @@ void dest_effect(){
     if(objectp(caster)){
         tell_room(ENV(caster),colormap[element]+"Elemental aura around "+caster->QCN+" fades away.",caster);
         tell_object(caster,colormap[element]+"Elemental aura around you fades away.",caster);
-        caster->remove_property("elemental aoura");
-        caster->remove_property_value("added short",shortmap[element]);
+        caster->remove_property("elemental aura");
+        caster->remove_property_value("added short",({shortmap[element]}));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
