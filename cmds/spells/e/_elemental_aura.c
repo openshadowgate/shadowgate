@@ -7,8 +7,8 @@ string element;
 mapping shortmap, colormap;
 shortmap = ([
                 "fire":"%^BOLD%^%^BLACK%^ (%^RESET%^%^RED%^bathed in flames%^BOLD%^%^BLACK%^)%^RESET%^",
-                "cold":"%^BOLD%^%^BLACK%^ (%^RESET%^%^CYAN%^in icy haze%^BOLD%^%^BLACK)%^RESET%^",
-                "electricity":"%^BOLD%^%^BLACK%^ (%^RESET%^%^ORANGE%^engulfed in strombolts%^BOLD%^%^BLACK%^)%^RESET%^",
+                "cold":"%^BOLD%^%^BLACK%^ (%^RESET%^%^CYAN%^in an icy haze%^BOLD%^%^BLACK%^)%^RESET%^",
+                "electricity":"%^BOLD%^%^BLACK%^ (%^RESET%^%^ORANGE%^engulfed in stormbolts%^BOLD%^%^BLACK%^)%^RESET%^",
                 "acid":"%^BOLD%^%^BLACK%^ (%^RESET%^%^GREEN%^in acid fog%^BOLD%^%^BLACK%^)%^RESET%^",
                 ]);
 colormap = ([
