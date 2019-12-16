@@ -7,6 +7,8 @@ object entry, rope;
 string roomName;
 string castname;
 
+mapping extraitems;
+
 void create() {
    ::create();
    set_light(1);
@@ -27,6 +29,19 @@ void init() {
    ::init();
    add_action("pull_up_rope", "close");
    add_action("lower_rope", "open");
+   add_action("command_space", "command");
+}
+
+int command_space(string str)
+{
+    string tmp, command;
+    if(!regexp("^space to ",str))
+        return 0;
+    if(TP!=caster)
+        return 0;
+    if(sscanf(str,"%s to %s",tmp, command)!=2)
+        return 0;
+    return 1;
 }
 
 void set_entry(object ob, object rp, string where)
@@ -74,6 +89,14 @@ void save_space()
 {
     mkdir("/d/save/summons/"+castname);
     save_object("/d/save/summons/"+castname+"/demiplane");
+}
+
+void restore_space()
+{
+    if(file_exists("/d/save/summons/"+castname+"/demiplane.o"))
+    {
+        restore_object("/d/save/summons/"+castname+"/demiplane.o");
+    }
 }
 
 void destroy_space() {

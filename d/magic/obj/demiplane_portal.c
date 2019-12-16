@@ -64,12 +64,12 @@ int do_magic(string str) {
 int dismiss(string str) {
    object ob;
 
-   if(str != "portal")
+   if(present(str,ETO)!=TO)
        return 0;
    if(TP != caster)
        return 0;
 
-   tell_room(ETO,"%^ORANGE%^Old door fades into non-existence.");
+   tell_room(ETO,"%^ORANGE%^The old door fades into non-existence.");
    spellobj->dest_effect();
    return 1;
 }
@@ -80,6 +80,7 @@ void start_magic(object entry, string room) {
    rt_room = new("/d/magic/room/demiplane_plane");
    rt_room->set_had_players();
    rt_room->set_castname(caster->query_name());
+   rt_room->restore_space();
    rt_room->add_exit(file_name(entry), "door");
    rt_room->set_entry(entry, TO, room);
 }

@@ -12,7 +12,7 @@ string roomName;
 void create() {
     ::create();
     set_spell_name("create demiplane");
-    set_spell_level(([ "mage" : 8 ]));
+    set_spell_level(([ "innate" : 8 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS genesis");
     set_description("");
