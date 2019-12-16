@@ -6,7 +6,7 @@ inherit SPELL;
 string element;
 mapping elementmap;
 elementmap = ([
-                  "fire":"%^RESET%^%^ORANGE%^e%^RESET%^a%^ORANGE%^r%^YELLOW%^t%^RESET%^%^ORANGE%^h%^RESET%^",
+                  "fire":"%^RESET%^%^RED%^f%^YELLOW%^i%^RED%^r%^RESET%^%^RED%^e",
                   "air":"%^RESET%^%^CYAN%^a%^BOLD%^%^WHITE%^i%^RESET%^%^CYAN%^r%^RESET%^",
                   "earth":"%^RESET%^%^ORANGE%^e%^RESET%^a%^ORANGE%^r%^YELLOW%^t%^RESET%^%^ORANGE%^h%^RESET%^",
                   "water":"%^BOLD%^%^BLUE%^w%^CYAN%^a%^WHITE%^t%^CYAN%^e%^BLUE%^r%^RESET%^"
@@ -76,6 +76,12 @@ This spell won't work together with other augmenting spells such as fox's cunnin
 int preSpell()
 {
     object shape;
+    if(objectp(shape = caster->query_property("shapeshifted")) ||
+       objectp(shape = caster->query_property("altered")))
+    {
+        tell_object(caster,"You are already in an alternative form!");
+        return 0;
+    }
     if(member_array(arg,valid_forms())==-1)
     {
         tell_object(caster,"Invalid form, valid forms are: "+implode(valid_forms(),", "));
@@ -91,12 +97,24 @@ int preSpell()
 
 void spell_effect(int prof)
 {
+    object shape;
+    if (!objectp(caster)){
+        TO->remove();
+        return;
+    }
     element = arg;
+
     tell_object(caster,"You bow your head, concentrating and infusing your body with the power of "+elementmap[element]+".");
-    tell_object(caster,"Your skin body briefly turns into "+elementmap[element]+", leaving an trace of infused power!");
-    tell_room(place,caster->QCN+"'s body briefly turns into "+elementmap[element]+"!",caster);
+    tell_room(place,caster->QCN+"'s body turns into "+elementmap[element]+"!",caster);
+
+    new("/std/races/shapeshifted_races/mage_elemental.c")->init_shape(caster,"elemental");
+
+    shape = caster->query_property("shapeshifted");
+    shape->set_clevel(clevel);
+    caster->set_property("dance-of-cuts",1); //Full BAB
+    caster->set_property("spelled", ({TO}) );
+
     effect(1);
-    call_out("dest_effect",ROUND_LENGTH*clevel);
     addSpellToCaster();
 }
 
@@ -105,8 +123,10 @@ void dest_effect()
     object shape;
 	if(objectp(caster))
     {
-        tell_object(caster,"You feel loss and weakness as your body looses infusion of "+elementmap[element]+".");
-        effect(-1);
+        caster->set_property("dance-of-cuts",-1);
+
+        if(objectp(shape = caster->query_property("shapeshifted"))) shape->reverse_shape(caster);
+        tell_object(caster,"You feel loss and weakness as your body looses infusion of "+elementmap[element]+".");        effect(-1);
 	}
     ::dest_effect();
     if(objectp(TO)) TO->remove();
