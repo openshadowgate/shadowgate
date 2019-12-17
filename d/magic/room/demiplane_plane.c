@@ -35,11 +35,11 @@ void init() {
 int command_space(string str)
 {
     string tmp, command;
-    if(!regexp("^space to ",str))
+    if(!regexp("^space ",str))
         return 0;
     if(TP!=caster)
         return 0;
-    if(sscanf(str,"%s to %s",tmp, command)!=2)
+    if(sscanf(str,"%s %s",tmp, command)!=2)
         return 0;
     return 1;
 }

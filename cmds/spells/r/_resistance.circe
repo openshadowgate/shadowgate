@@ -1,4 +1,3 @@
-//added a property to prevent stacking ~Circe~ 12/16/19
 //updated to add psions and psywarrior to streamline spells - replaces biofeedback ~Circe~ 10/26/19
 #include <priest.h>
 #include <daemons.h>
@@ -28,11 +27,6 @@ spell_effect(int prof) {
       dest_effect();
       return;
    }
-   if(caster->query_property("raised_resistance")){
-      tell_object(caster,"You are already protected by this spell!");
-      dest_effect();
-      return;
-   }
    if(interactive(caster)){
       tell_object(caster, "%^GREEN%^As the last note fades, you feel a light prickling of protection across your skin.");
       tell_room(place,"%^GREEN%^The last note fades as "+caster->QCN+" glances around.",caster);
@@ -42,15 +36,13 @@ spell_effect(int prof) {
    bonus = bonus>4?4:bonus;
 
    caster->add_saving_bonus("all",bonus);
-   caster->set_property("raised_resistance",1);
    spell_successful();
    addSpellToCaster();
 }
 
 void dest_effect(){
-   if(objectp(caster) && caster->query_property("raised_resistance")){
+   if(objectp(caster)){
       caster->add_saving_bonus("all",-bonus);
-      caster->remove_property("raised_resistance");
    }
    ::dest_effect();
    if(objectp(TO)) TO->remove();
