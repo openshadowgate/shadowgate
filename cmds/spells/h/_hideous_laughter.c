@@ -25,7 +25,8 @@ void create()
 {
     ::create();
     set_spell_name("hideous laughter");
-    set_spell_level(([ "mage" : 2 ]));
+    set_spell_level(([ "mage" : 2, "oracle" :2 ]));
+    set_mystery("whimsy");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS hideous laughter on TARGET");
     set_description("Hideous Laughter, when cast, will force the target to laugh at anything that comes to mind.  The "

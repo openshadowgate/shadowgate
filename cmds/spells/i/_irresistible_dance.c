@@ -10,7 +10,8 @@ int bonus;
 void create() {
     ::create();
     set_spell_name("irresistible dance");
-    set_spell_level(([ "bard" : 6, "mage" : 8 ]));
+    set_spell_level(([ "bard" : 6, "mage" : 8, "oracle":8 ]));
+    set_mystery("whimsy");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS irresistible dance on TARGET");
     set_description("The subject feels an undeniable urge to dance and begins doing so, complete with foot shuffling and tapping. The spell effect makes it hard for the subject to do anything other than caper and prance in place.");

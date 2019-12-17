@@ -13,7 +13,8 @@ void make_image();
 void create() {
     ::create();
     set_spell_name("project image");
-    set_spell_level(([ "mage" : 7, "bard" : 6 ]));
+    set_spell_level(([ "mage" : 7, "bard" : 6,"oracle":7 ]));
+    set_mystery("whimsy");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS project image on TARGET");
     set_description("This spell will conjure an illusionary image of the caster, which will seek out the specified target "
@@ -112,7 +113,7 @@ void check() {
 }
 
 void make_image(){
-    //added it so your projected image has 
+    //added it so your projected image has
     //the same languages as you do - Saide
     int x;
     object ob;
@@ -145,7 +146,7 @@ void make_image(){
         ob->set_lang(lnam[x], langs[lnam[x]]);
         continue;
     }
-    ob->force_me("speak "+(string)caster->query_language());	
+    ob->force_me("speak "+(string)caster->query_language());
     pt2 = USERCALL->user_call((string)caster->query_name(),"getWholeDescriptivePhrase");
     pt2 = replace_string(pt2,"A","a",1);
     shortdesc = "%^RESET%^%^CYAN%^A wavering image of %^RESET%^"+pt2;

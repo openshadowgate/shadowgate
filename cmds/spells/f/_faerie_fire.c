@@ -11,9 +11,10 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("faerie fire");
-    set_spell_level(([ "cleric" : 2, "druid" : 1 ]));
+    set_spell_level(([ "cleric" : 1, "druid" : 1,"oracle":1 ]));
     set_spell_sphere("combat");
     set_spell_domain("moon");
+    set_mystery("whimsy");
     set_syntax("cast CLASS faerie fire on TARGET");
     set_description("This spell will outline the target in harmless violet flames.  It makes the target easier to hit "
 "with melee combat, and also makes it impossible for the target to hide by magical or other means until the spell expires "

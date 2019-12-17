@@ -13,7 +13,8 @@ int rnds,total;
 void create(){
     ::create();
     set_spell_name("confusion");
-    set_spell_level(([ "cleric" : 7, "bard":3,"mage":4 ]));
+    set_spell_level(([ "cleric" : 4, "bard":3,"mage":4,"oracle":4 ]));
+    set_mystery("whimsy");
     set_spell_sphere("enchantment_charm");
     set_spell_domain("trickery");
     set_syntax("cast CLASS confusion on TARGET");

@@ -21,7 +21,8 @@ void make_save();
 void create() {
     ::create();
     set_spell_name("color spray");
-    set_spell_level(([ "mage" : 1 ]));
+    set_spell_level(([ "mage" : 1, "oracle":1 ]));
+    set_mystery("heavens");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS color spray");
     set_description("Color spray, when cast, will cause a blinding light of mixed colors to flash from the caster.  All "

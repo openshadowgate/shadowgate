@@ -38,7 +38,8 @@ int set_plane_feature(string str)
     string tmp, cargs;
     if(!regexp(str,"^[add|remove|list|clear]"))
         return 0;
-
+    if(TP->query_name()!=castname)
+        return 0;
     if(regexp(str,"^add"))
     {
         if(sscanf(str,"add %s as %s",cargs,tmp)!=2)
@@ -46,10 +47,13 @@ int set_plane_feature(string str)
             write("You must provide feature name and its description.");
             return 1;
         }
+        if(!sizeof(extraitems))
+            extraitems=([]);
+
         extraitems+=([cargs:tmp]);
         restore_items();
         save_space();
-        write("Feature "+cargs+" added as: "+tmp);
+        write("Feature '"+cargs+"' added as: "+tmp);
     }
 
     if(regexp(str,"^remove"))
@@ -68,11 +72,16 @@ int set_plane_feature(string str)
     if(regexp(str,"^list"))
     {
         string item;
-        write("%^BOLD%^%^RED%^There are next features present:");
-        foreach(item in keys(extraitems))
+        if(sizeof(extraitems))
         {
-            write(item);
+            write("%^BOLD%^%^RED%^There are next features present:");
+            foreach(item in keys(extraitems))
+            {
+                write(item);
+            }
         }
+        else
+            write("%^BOLD%^%^RED%^There no features present.");
     }
 
     if(regexp(str,"^clear"))
@@ -82,12 +91,16 @@ int set_plane_feature(string str)
         save_space();
         write("All features were removed");
     }
+
+    return 1;
 }
 
 int set_plane_property(string str)
 {
     string tmp, cargs;
-    if(!regexp(str,"^plane [long|short|smell]"))
+    if(!regexp(str,"^plane [long|short|smell|seal]"))
+        return 0;
+    if(TP->query_name()!=castname)
         return 0;
     if(regexp(str,"^plane long"))
     {
@@ -136,6 +149,26 @@ int set_plane_property(string str)
         TO->set_listen("default",cargs);
         save_space();
         TP->force_me("look");
+    }
+
+    if(regexp(str,"^plane seal"))
+    {
+        if(sscanf(str,"plane seal %s",cargs)!=1)
+        {
+            write("<set plane seal on|off>");
+            return 1;
+        }
+        if(cargs == "on")
+        {
+            TO->set_property("no teleport",1);
+            write("The plane had been locked from inter dimensional travel.");
+        }
+        if(cargs == "open")
+        {
+            TO->remove_property("no teleport");
+            write("The plane had been unlocked to inter dimensional travel.");
+        }
+        save_space();
     }
 
     return 1;

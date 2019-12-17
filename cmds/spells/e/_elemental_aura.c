@@ -28,7 +28,8 @@ string *valid_forms()
 void create(){
     ::create();
     set_spell_name("elemental aura");
-    set_spell_level(([ "mage" : 3, ]));
+    set_spell_level(([ "mage" : 3, "oracle":3]));
+    set_mystery("elemental");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS elemental aura on [acid|cold|electricity|fire]");
     set_damage_desc("based on argument");

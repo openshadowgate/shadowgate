@@ -16,7 +16,10 @@ void create()
    set_id( ({ "door","demiplane_portal","entrance","portal","old door","an old door" }) );
    set_short("%^RESET%^%^ORANGE%^an %^ORANGE%^old %^BOLD%^%^ORANGE%^d%^RESET%^%^ORANGE%^oor");
    set_long(
-"%^ORANGE%^This is an eerie and old wooden door, standing alone in its frame on iron hinges without any wall supporting it."
+"%^ORANGE%^This is an eerie and old wooden door, standing alone in its frame on iron hinges without any wall supporting it.
+
+You can <enter door> and appear somewhere else.
+You can <dismiss door> if you know what you're doing."
    );
    set_property("no animate",1);
    set_value(0);
@@ -106,7 +109,7 @@ void lower() {
    }
    lowered = 1;
    if(!objectp(entry_place))
-	entry_place = find_object_or_load(roomName);
+       entry_place = find_object_or_load(roomName);
    tell_room(entry_place, "%^ORANGE%^You see a door materializes in the place!");
    TO->move(entry_place);
 }

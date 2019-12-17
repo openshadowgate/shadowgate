@@ -15,8 +15,9 @@ void create()
 {
     ::create();
     set_spell_name("elemental swarm");
-    set_spell_level(([ "druid" : 9 ]));
-    set_spell_sphere("elemental");
+    set_spell_level(([ "druid" : 9, "oracle":9 ]));
+    set_mystery("elemental");
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS elemental swarm on TARGET");
     set_description("This spell will unleash the fury of the elemental planes on the caster's foes.  A portal will open to a random "
         "elemental plane and an elder elemental will come forth to aid the caster.  The elemental will fight until it is slain or until "
@@ -76,7 +77,7 @@ void spell_effect(int prof)
     spell_kill(target,caster);
 
     call_out("swarm",5,"begin");
-    
+
     return;
 }
 
@@ -88,7 +89,7 @@ void swarm(string stage)
     if(!objectp(place))                     { dest_effect(); return; }
     if(!sizeof(caster->query_attackers()))  { dest_effect(); return; }
     if(!present(caster,place))              { dest_effect(); return; }
-   
+
     switch(stage)
     {
     case "begin":
@@ -115,7 +116,7 @@ void swarm(string stage)
         create_elemental();
         call_out("swarm",5,"check");
         return;
-    
+
     case "new elemental":
 
         if(!sizeof(elements))
@@ -151,10 +152,10 @@ void create_elemental()
     {
         dest_effect();
         return;
-    }    
+    }
 
     elemental = new("/d/magic/mon/swarm_elemental.c");
-    
+
     elemental->setup_elemental(element,TO); // description stuff, according to element
     elemental->set_resistance_percent(element,200); // the elemental is healed by damage type from its own element
 
@@ -175,7 +176,7 @@ void create_elemental()
     elemental->set_property("spell",TO);
     elemental->add_id("summoned monster");
     elemental->add_id(caster->query_name()+"monster");
-    
+
     elemental->move(place);
 
     caster->add_protector(elemental);
@@ -196,7 +197,7 @@ void create_elemental()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     int i;
     if(objectp(TO))

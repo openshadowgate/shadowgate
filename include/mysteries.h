@@ -6,6 +6,10 @@
 "bones":({"cause fear","false life","animate dead","boneshatter","slay living","circle of death","waves of exhaustion","horrid wilting","wail of the banshee"}),\
 "battle":({"enlarge person", "fog cloud", "magic vestments", "wall of fire", "righteous might", "transformation", "foresight", "earthquake", "storm of vengeance"}),\
 "flame":({"burning hands", "resist energy", "fireball", "wall of fire", "conjure elemental", "fire seeds", "fire storm", "incendiary cloud", "fiery body"}),\
+"elemental":({"guidance", "resist energy", "elemental arua", "elemental body i", "elemental body ii", "elemental body iii", "elemental body iv", "create demiplane", "elemental swarm"}),\
+"whimsy":({"faerie fire", "hideous laughter", "phantom steed", "confusion", "false vision", "eyebite", "project image", "irresistible dance", "weird"}),\
+"heavens":({"color spray", "", "", "", "", "", "", "", ""}),\
+"bones":({"", "", "", "", "", "", "", "", ""}),\
 ])
 
 #define MYSTERY_SKILLS  ([\
@@ -16,4 +20,7 @@
 "bones":({"stealth","influence","dungeoneering"}),\
 "battle":({"endurance","athletics","perception"}),\
 "flame":({"athletics","influence","rope use"}),\
+"elemental":({"athletics","stealth","rope use"}),\
+"whimsy":({"influence","stealth","perception"}),\
+"heavens":({"academics","influence","perception"}),\
 ])

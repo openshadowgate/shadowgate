@@ -11,7 +11,7 @@ int clevel,bonus,i;
 void create() {
     ::create();
     set_spell_name("eyebite");
-    set_spell_level(([ "mage" : 6, "bard" : 6 ]));
+    set_spell_level(([ "mage" : 6, "bard" : 6, "oracle" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS eyebite on TARGET");
     set_damage_desc("sickened, panicked and comatose");
