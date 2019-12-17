@@ -15,7 +15,8 @@ void create() {
     set_spell_name("imprisonment");
     set_spell_level(([ "oracle" : 9, "mage" : 9 ]));
     set_syntax("cast CLASS imprisonment on TARGET");
-    set_description("");
+    set_spell_sphere("abjuration");
+    set_description("This spell puts your target into extraplanar prison, temporary removing them from existence.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
