@@ -85,9 +85,10 @@ int prerequisites(object player) {
     int adj;
     if(!objectp(player)) { return 0; }
 
-    if((string)player->query_race() != "dwarf" ||
-       (string)player->query("subrace") != "earth genasi")
+    if(!((string)player->query_race() == "dwarf" ||
+         (string)player->query("subrace") == "earth genasi"))
         return 0;
+
     race = player->query("subrace");
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
