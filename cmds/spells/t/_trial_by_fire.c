@@ -44,7 +44,7 @@ void spell_effect(int prof){
             continue;
         admg=sdamage;
         tell_object(attackers[i],"%^RED%^You're burned with divine fire!%^RESET%^");
-        tell_room(place,"%^RED%^"+attackers[i]+" is burned with divine fire!%^RESET%^",attackers[i]);
+        tell_room(place,"%^RED%^"+attackers[i]->QCN+" is burned with divine fire!%^RESET%^",attackers[i]);
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg/2,"fire");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg/2,"divine");
     }
