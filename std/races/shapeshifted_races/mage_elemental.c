@@ -20,7 +20,7 @@ void create()
     set_attack_limbs( ({ "right hand","left hand"}) );
     set_new_damage_type("bludgeoning");
     set_limbs( ({ "head","torso","right arm", "left arm" }) );
-    set_attack_functions(([ "right arm" : (:TO,"shape_attack":), "left arm" : (:TO,"shape_attack":) ]));
+    set_attack_functions(([ "right hand" : (:TO,"shape_attack":), "left hand" : (:TO,"shape_attack":) ]));
     set_base_attack_num(2);
     set_castable(1);
     set_can_talk(1);
@@ -63,9 +63,9 @@ int change_into_message(object obj)
 {
     if(!objectp(obj)) { return 0; }
     tell_object(obj,"%^RESET%^%^BOLD%^You can feel your body beginning to change!");
-    tell_object(obj,"%^RESET%^%^BLUE%^Your shift, embracing your new elemental body.");
+    tell_object(obj,"%^RESET%^%^WHITE%^Your shift, embracing your new elemental body.");
     tell_room(environment(obj),"%^RESET%^%^YELLOW%^"+obj->QCN+" begins to change in front of your very eyes!",obj);
-    tell_room(environment(obj),"%^RED%^Where "+obj->QCN+" once stood, now stands an elemental!",obj);
+    tell_room(environment(obj),"%^WHITE%^Where "+obj->QCN+" once stood, now stands an elemental!",obj);
     return 1;
 }
 
@@ -76,10 +76,10 @@ int change_outof_message(object obj)
     if(!objectp(obj)) { return 0; }
 
     tell_object(obj,"%^RESET%^%^BOLD%^You relax your focus, releasing the elements.");
-    tell_object(obj,"%^RESET%^%^GREEN%^You inhale a breath and stretch as you grow accustomed to the foreign sensation of your own body once again.");
+    tell_object(obj,"%^RESET%^%^WHITE%^You inhale a breath and stretch as you grow accustomed to the foreign sensation of your own body once again.");
 
-    tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, shrinking and quickly loosing elemental infusion!",obj);
-    tell_room(environment(obj),"%^RESET%^%^GREEN%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
+    tell_room(environment(obj),"%^RESET%^%^WHITE%^"+obj->QCN+"'s body begins to change shape, shrinking and quickly loosing elemental infusion!",obj);
+    tell_room(environment(obj),"%^RESET%^%^WHITE%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
     return 1;
 }
 
