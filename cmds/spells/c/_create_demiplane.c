@@ -22,19 +22,19 @@ Inside the plane you have access to the next commands:
 
 %^ORANGE%^<set plane long %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
 
-  Will change the plane's long description to %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^.
+  Will change the plane's long description, the thing you see looking at the room..
 
 %^ORANGE%^<set plane short %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
 
-  Will change the plane's short description to %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^.
+  Will change the plane's short description. This description appears on top of the room's long description and in clairvoyance spell.
 
 %^ORANGE%^<set plane smell %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
 
-  Will change the plane's smells to %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^.
+  Will change the plane's smells.
 
 %^ORANGE%^<set plane listen %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
 
-  Will change the plane's sounds to %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^.
+  Will change the plane's sounds.
 
 %^ORANGE%^<set plane seal on|off>%^RESET%^
 
@@ -42,11 +42,11 @@ Inside the plane you have access to the next commands:
 
 %^ORANGE%^<feature add %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^ as %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
 
-  Will add feature with the %^ORANGE%^%^ULINE%^NAME%^RESET%^ and %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^. You can then %^ORANGE%^<look %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^ to see it.
+  Will add feature with the %^ORANGE%^%^ULINE%^NAME%^RESET%^ and %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^. You can then look at it to see it.
 
 %^ORANGE%^<feature remove %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
 
-  Will remove feature with the %^ORANGE%^%^ULINE%^NAME%^RESET%^.
+  Will remove a feature.
 
 %^ORANGE%^<feature list>%^RESET%^
 
