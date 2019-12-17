@@ -28,8 +28,6 @@ void create()
     set_shape_race("elemental");
     set_shape_bonus("sight bonus",3);
     set_shape_profile("mage_elemental_999");
-
-    set_shape_height(144);
 }
 
 string * query_subraces() {
@@ -90,9 +88,12 @@ int can_cast()
 
 int shape_attack(object tp, object target)
 {
-    if(!objectp(target)) return;
-    tell_object(target,"%^YELLOW%^The %^RESET%^ elemental %^RESET%^%^YELLOW%^moves pummels you%^RESET%^%^YELLOW%^!");
-    tell_room(ENV(tp),"%^YELLOW%^The %^RESET%^ elemental %^RESET%^%^YELLOW%^moves pummels "+target->QCN+"%^RESET%^%^YELLOW%^!",target);
-    target->do_damage("torso",random(70)+clevel);
+    if(!random(10))
+    {
+        if(!objectp(target)) return;
+        tell_object(target,"%^YELLOW%^The %^RESET%^%^RED%^e%^BOLD%^l%^RESET%^%^GREEN%^e%^BOLD%^m%^RESET%^%^ORANGE%^e%^BOLD%^n%^RESET%^%^CYAN%^t%^BOLD%^a%^RESET%^%^MAGENTA%^l%^WHITE%^%^BOLD%^ %^RESET%^%^YELLOW%^moves pummel you%^RESET%^%^YELLOW%^!");
+        tell_room(ENV(tp),"%^YELLOW%^The %^RESET%^%^RED%^e%^BOLD%^l%^RESET%^%^GREEN%^e%^BOLD%^m%^RESET%^%^ORANGE%^e%^BOLD%^n%^RESET%^%^CYAN%^t%^BOLD%^a%^RESET%^%^MAGENTA%^l%^WHITE%^%^BOLD%^ %^RESET%^%^YELLOW%^moves pummel "+target->QCN+"%^RESET%^%^YELLOW%^!",target);
+        target->do_damage("torso",random(70)+clevel);
+    }
     return roll_dice(2,6);
 }

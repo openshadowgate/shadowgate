@@ -7,7 +7,7 @@ object entry, rope;
 string roomName;
 string castname;
 
-mapping extraitems;
+mapping extraitems=([]);
 
 void create() {
    ::create();
@@ -29,18 +29,115 @@ void init() {
    ::init();
    add_action("pull_up_rope", "close");
    add_action("lower_rope", "open");
-   add_action("command_space", "command");
+   add_action("set_plane_property", "set");
+   add_action("set_plane_feature", "feature");
 }
 
-int command_space(string str)
+int set_plane_feature(string str)
 {
-    string tmp, command;
-    if(!regexp("^space ",str))
+    string tmp, cargs;
+    if(!regexp(str,"^[add|remove|list|clear]"))
         return 0;
-    if(TP!=caster)
+
+    if(regexp(str,"^add"))
+    {
+        if(sscanf(str,"add %s as %s",cargs,tmp)!=2)
+        {
+            write("You must provide feature name and its description.");
+            return 1;
+        }
+        extraitems+=([cargs:tmp]);
+        restore_items();
+        save_space();
+        write("Feature "+cargs+" added as: "+tmp);
+    }
+
+    if(regexp(str,"^remove"))
+    {
+        if(sscanf(str,"add %s",cargs)!=1)
+        {
+            write("You must provide feature name.");
+            return 1;
+        }
+        map_delete(extraitems,cargs);
+        restore_items();
+        save_space();
+        write("Feature "+cargs+" removed.");
+    }
+
+    if(regexp(str,"^list"))
+    {
+        string item;
+        write("%^BOLD%^%^RED%^There are next features present:");
+        foreach(item in keys(extraitems))
+        {
+            write(item);
+        }
+    }
+
+    if(regexp(str,"^clear"))
+    {
+        extraitems=([]);
+        restore_items();
+        save_space();
+        write("All features were removed");
+    }
+}
+
+int set_plane_property(string str)
+{
+    string tmp, cargs;
+    if(!regexp(str,"^plane [long|short|smell]"))
         return 0;
-    if(sscanf(str,"%s %s",tmp, command)!=2)
-        return 0;
+    if(regexp(str,"^plane long"))
+    {
+        if(sscanf(str,"plane long %s",cargs)!=1)
+        {
+            write("You must provide description");
+            return 1;
+        }
+        TO->set_long(query_short()+"\n"+cargs+"\n");
+        save_space();
+        TP->force_me("look");
+    }
+
+    if(regexp(str,"^plane short"))
+    {
+        if(sscanf(str,"plane short %s",cargs)!=1)
+        {
+            write("You must provide description");
+            return 1;
+        }
+        TO->set_short(cargs);
+        TO->set_long(cargs+"\n"+TO->query_long());
+        save_space();
+        TP->force_me("look");
+    }
+
+    if(regexp(str,"^plane smell"))
+    {
+        if(sscanf(str,"plane smell %s",cargs)!=1)
+        {
+            write("You must provide description");
+            return 1;
+        }
+        TO->set_smell("default",cargs);
+        save_space();
+        TP->force_me("look");
+    }
+
+    if(regexp(str,"^plane listen"))
+    {
+        if(sscanf(str,"plane listen %s",cargs)!=1)
+        {
+            write("You must provide description");
+            return 1;
+        }
+        TO->set_listen("default",cargs);
+        save_space();
+        TP->force_me("look");
+    }
+
     return 1;
 }
 
@@ -65,8 +162,8 @@ int pull_up_rope(string str)
        return 0;
    inv = all_inventory(TO);
 
-   tell_room(TO, TPQCN+" locks the door, making this demiplane inaccessible.",TP);
-   tell_object(TP, "You lock the door, making this demiplane inaccessible from outside.");
+   tell_room(TO, "%^ORANGE%^"+TPQCN+" locks the door and it disappears.",TP);
+   tell_object(TP, "%^ORANGE%^You lock the door and it disappears.");
    rope->raise();
    TO->remove_exit("door");
    return 1;
@@ -97,6 +194,24 @@ void restore_space()
     {
         restore_object("/d/save/summons/"+castname+"/demiplane.o");
     }
+    restore_items();
+}
+
+void restore_items()
+{
+    string item;
+    TO->set_items(([]));
+    if(sizeof(extraitems))
+        foreach(item in keys(extraitems))
+        {
+            add_item(item,extraitems[item]);
+        }
+}
+
+void vape_items()
+{
+    extraitems = ([]);
+    restore_items();
 }
 
 void destroy_space() {
