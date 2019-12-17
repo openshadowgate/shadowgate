@@ -50,7 +50,7 @@ void spell_effect(int prof)
     tell_room(place, caster->QCN+"%^BOLD%^%^CYAN%^ snaps "+caster->QP+" eyes open as "+caster->QP+" body shimmers and "+
     "becomes translucent!%^RESET%^", caster);
 
-    tell_object(caster, "%^BOLD%^%^CYAN%^You focus your inner ki, heightening your senses and allowing "+
+    tell_object(caster, "%^BOLD%^%^CYAN%^You focus your inner self, heightening your senses and allowing "+
     "your body to become translucent!%^RESET%^");
 
     caster->set_property("spelled", ({TO}) );

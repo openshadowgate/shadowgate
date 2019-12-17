@@ -42,6 +42,11 @@ int set_plane_feature(string str)
         return 0;
     if(regexp(str,"^add"))
     {
+        if(sizeof(extraitems)>10)
+        {
+            write("You have too many features. Maximum ten are allowed.");
+            return 1;
+        }
         if(sscanf(str,"add %s as %s",cargs,tmp)!=2)
         {
             write("You must provide feature name and its description.");

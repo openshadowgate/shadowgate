@@ -10,7 +10,7 @@ void create() {
     set_spell_level(([ "innate" : 6 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS night swarm");
-    set_description("This spell creates eight bats that will guard the caster blindly. These guardians will not be effected by area effect spells.");
+    set_description("This spell creates eight bats that will guard the caster blindly.");
 	set_helpful_spell(1);
 }
 
