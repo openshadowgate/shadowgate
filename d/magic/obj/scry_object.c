@@ -31,7 +31,7 @@ int arithmetic_progression(int num);
 
 void create()
 {
-    ::create();    
+    ::create();
     set_name("scry_object");
     set_property("no detect",1);
     set_id(({"scryx222"}));
@@ -91,7 +91,7 @@ void heart_beat(){
         self_destruct();
         return;
     }
-    if(!no_move && objectp(environment(target))) 
+    if(!no_move && objectp(environment(target)))
         if(ETO != environment(target))
             move(environment(target));
 	if(ETO->query_property("no scry")) {
@@ -125,23 +125,23 @@ void scry_on() { ok_to_scry = 1; }
 // Turn off sending scry messages to the observer.
 void scry_off() { ok_to_scry = 0; }
 
-int look_room(object dest) 
+int look_room(object dest)
 {
     string file, desc;
     object *inv;
     object *watchers;
     int i, j;
-    
+
     watchers = all_living(ETC);
     watchers = filter_array(watchers,"is_player",FILTERS_D);
 
-    if(!watchers) 
+    if(!watchers)
     {
 	    message("living_item", "%^CYAN%^BOLD%^[X] %^RED%^", ETC);
 	    return 0;
     }
 
-    for(j=0;j<sizeof(watchers);j++) 
+    for(j=0;j<sizeof(watchers);j++)
     {
          if((watchers[j]->query_unconscious()) || (watchers[j]->query_blindfolded()) || (watchers[j]->query_blind())) watchers -= ({watchers[j]});
     }
@@ -149,7 +149,7 @@ int look_room(object dest)
     message("room_description","\n%^YELLOW%^[S] %^RESET%^"+(string)dest->query_short()+"\n",watchers);
 
     inv = all_inventory(dest);
-    for(i=0; i<sizeof(inv); i++) 
+    for(i=0; i<sizeof(inv); i++)
     {
       if(!living(inv[i])) continue;
       if(inv[i]->id("scryx222")) { continue; }
@@ -168,7 +168,7 @@ int long_look_room(object dest) {
     object *inv;
     object *watchers;
     int i,j;
-    
+
     if(!ok_to_scry) return 0;
     watchers = all_inventory(ETC);
     if(!watchers) {
@@ -179,7 +179,7 @@ int long_look_room(object dest) {
     for(j=0;j<sizeof(watchers);j++) {
          if((watchers[j]->query_unconscious()) || (watchers[j]->query_blindfolded()) || (watchers[j]->query_blind())) watchers -= ({watchers[j]});
     }
-    message("room_description", 
+    message("room_description",
     	"\n%^YELLOW%^[S] %^RESET%^"+(string)dest->query_long()+"\n", watchers);
     inv = all_inventory(dest);
     for(i=0;i<sizeof(inv);i++) {
@@ -195,8 +195,8 @@ int long_look_room(object dest) {
     return 1;
 }
 
-// This call initiates the self-destruct sequence for this scry 
-// attempt.  It will use the scry and locate daemon call to 
+// This call initiates the self-destruct sequence for this scry
+// attempt.  It will use the scry and locate daemon call to
 // properly clean up any objects or properties that are left
 // over and exit gracefully.
 void self_destruct() {
@@ -210,10 +210,10 @@ catch_tell(string str)
     object *scry_objects=({}),*people=({}),room;
     int i;
 
-    if(!objectp(control)) 
-    { 
+    if(!objectp(control))
+    {
         TO->remove();
-        return; 
+        return;
     }
     if(!objectp(ETC)) { return; }
 
@@ -228,7 +228,7 @@ catch_tell(string str)
 }
 
 
-string describe_item_contents(object *exclude) 
+string describe_item_contents(object *exclude)
 {
    object *inv;
    mapping list;
@@ -243,9 +243,9 @@ string describe_item_contents(object *exclude)
     i = sizeof(inv);
    if(!i) return "";
    list = ([]);
-   while(i--) 
+   while(i--)
    {
-      if((inv[i]->query_hidden() || inv[i]->query_magic_hidden()) || !inv[i]->is_detectable()) 
+      if((inv[i]->query_hidden() || inv[i]->query_magic_hidden()) || !inv[i]->is_detectable())
       {
           continue;
       }
@@ -255,7 +255,7 @@ string describe_item_contents(object *exclude)
       if(tmp == "") continue;
       if( (temp=explode(tmp," ")) == ({}) ) continue;
 
-      if (inv[i]->query_hidden() || inv[i]->query_magic_hidden()) 
+      if (inv[i]->query_hidden() || inv[i]->query_magic_hidden())
       {
          tmp = "("+tmp+")";
       }
@@ -290,7 +290,7 @@ int send_living_name(object target) {
 	object *watchers;
 	string known, str;
 	int i,j;
-	
+
 	watchers = all_inventory(ETC);
 
     watchers = filter_array(watchers,"is_player",FILTERS_D);
@@ -321,11 +321,11 @@ int send_living_name(object target) {
 	return 1;
 }
 
-void int_based_detection(object place) 
+void int_based_detection(object place)
 {
 	object *people;
 	int i, intel, base, bonus, chance, roll;
-	
+
 	if(!objectp(place)) return;
 	people = filter_array(all_inventory(place), "filter_living", this_object());
 
@@ -336,22 +336,13 @@ void int_based_detection(object place)
 		if(member_array(people[i], already) != -1) continue;
 		intel = people[i]->query_stats("intelligence");
 		if(intel < 12) continue;
-		if(people[i]->query_mlevel("cleric") || people[i]->query_mlevel("mage") || people[i]->query_mlevel("psion"))
-			base = 8;
-		else if(people[i]->query_mlevel("thief") || people[i]->query_mlevel("paladin"))
-			base = 6;
-		else if(people[i]->query_mlevel("ranger"))
-			base = 4;
-		else if(people[i]->query_mlevel("bard"))
-			base = 3;
-		else
-			base = 2;
+        base = 6;
 		bonus = intel - 12;
 		bonus = arithmetic_progression(bonus);
 		chance = base + bonus;
 		roll = random(100)+1;
 		if(avatarp(people[i]) || roll <= chance) {
-			tell_object(people[i], 
+			tell_object(people[i],
 				"%^BOLD%^RED%^You are being scryed by someone!");
 		}
 		already += ({ people[i] });
@@ -361,7 +352,7 @@ void int_based_detection(object place)
 
 int arithmetic_progression(int num) {
 	int retval, i;
-	
+
 	for(i=0;i<num;i++) {
 		retval += i;
 	}
