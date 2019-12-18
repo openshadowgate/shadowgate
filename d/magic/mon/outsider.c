@@ -367,6 +367,14 @@ void heart_beat(){
        defend();
    TO->remove_attacker(0);
 
+   if(query_hp_percent() < 70 && present("vial",TO))
+    {
+        for(i=0;i<4;i++)
+        {
+            command("quaff vial");
+        }
+	}
+
    if(query_hp() < query_max_hp())
        add_hp(query_max_hp() / 25);
 }

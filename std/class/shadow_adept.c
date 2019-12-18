@@ -34,10 +34,9 @@ string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_cla
 
 int *restricted_alignments() { return ({}); }
 
-
 string *restricted_gods()
 {
-    return ({ "kismet" });
+    return ({ });
 }
 
 string requirements() // string version, maybe we'll need this, maybe not, can remove later if not

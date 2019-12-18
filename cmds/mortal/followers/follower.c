@@ -55,9 +55,9 @@ void heart_beat()
     int i;
 
   	::heart_beat();
-  
+
   	if(!objectp(TO) || !objectp(ETO)) return;
-  	
+
     if(set && !objectp(followee))
     {
         tell_room(ETO,"%^BOLD%^%^GREEN%^The retainer goes about his business.");
@@ -65,17 +65,17 @@ void heart_beat()
         remove();
         return;
     }
-    
-  	if(query_hp_percent() < 50 && present("vial",TO))
+
+  	if(query_hp_percent() < 70 && present("vial",TO))
     {
-        for(i=0;i<5;i++)
+        for(i=0;i<4;i++)
         {
             command("quaff vial");
         }
 	}
 
     counter++;
-    if (counter > 120) 
+    if (counter > 120)
     {
         if(objectp(TO) && interactive(followee))
         {
@@ -88,7 +88,7 @@ void heart_beat()
 void die(object ob)
 {
     set_hp(10);
-    saveFollower();    
+    saveFollower();
     ::die(ob);
 }
 
@@ -111,10 +111,10 @@ string realName(string str)
 }
 
 
-void receive_message(string cl, string msg) 
+void receive_message(string cl, string msg)
 {
     ::receive_message(cl,msg);
-    if (cl == "reply") 
+    if (cl == "reply")
     {
         force_me("say "+msg);
     }
@@ -127,14 +127,14 @@ int remove() {
 
 int remove_without_save() { return ::remove(); }
 
-varargs receive_objects(object ob) {
-// so. this is to stop players using followers as storage. Any item given to the follower
-// picks up the monsterweapon flag, which then makes it inaccessible to players. N, 5/14.
-    if(::receive_objects(ob)) {
-      ob->set_property("monsterweapon",1);
-      return 1;
-    }
-    return 0;
-}
+/* varargs receive_objects(object ob) { */
+/* // so. this is to stop players using followers as storage. Any item given to the follower */
+/* // picks up the monsterweapon flag, which then makes it inaccessible to players. N, 5/14. */
+/*     if(::receive_objects(ob)) { */
+/*       ob->set_property("monsterweapon",1); */
+/*       return 1; */
+/*     } */
+/*     return 0; */
+/* } */
 
 int is_retinue() { return 1; }

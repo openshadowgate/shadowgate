@@ -111,6 +111,12 @@ void thank()
     tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an annoyed voice:%^RESET%^ "+thanklist[random(sizeof(thanklist))]);
 }
 
+void receive_given_item(object obj)
+{
+    tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an annoyed voice:%^RESET%^ Try <claim>ing this instead.");
+    force_me("drop "+obj->query_id());
+}
+
 void die(object ob)
 {
     WORLD_EVENTS_D->kill_event("A rare opportunity");
