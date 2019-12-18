@@ -44,14 +44,14 @@ void help() {
     write("
 %^CYAN%^NAME%^RESET%^
 
-followers - list your followers
+followers - list who is following you
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will list what is following you.
+This command will list what is following you. These entities will move between rooms as you move.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-follow, unfollow, ditch, party
+follower, follow, unfollow, ditch, party
 ");
 }

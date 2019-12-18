@@ -4,13 +4,15 @@ inherit FEAT;
 
 int help();
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("MagicResistance");
     feat_name("resistance");
-    feat_desc("Resistance is a passive feat that when taken will boost the character's saving throws by a small amount and add a small amount of spell damage resistance.");
+    feat_desc("Resistance is a passive feat that when taken will boost the character's saving throws by a small amount and add a small amount of spell damage resistance.
+
+%^BOLD%^See also:%^RESET%^ resistance *spells");
     permanent(1);
     set_required_for(({"increased resistance","improved resistance","death ward","spell reflection"}));
 }
@@ -43,4 +45,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

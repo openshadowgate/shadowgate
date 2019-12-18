@@ -13,7 +13,9 @@ void create(){
    set_spell_sphere("alteration");
    set_syntax("cast CLASS resistance");
    set_damage_desc("clevel/12 but no more than 4 to saving throws");
-   set_description("By this spell, the caster imbues themselves with a small amount of resistance to harm.  The spell grants small bonus to will, fortitude and reflex.");
+   set_description("By this spell, the caster imbues themselves with a small amount of resistance to harm.  The spell grants small bonus to will, fortitude and reflex.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ resistance *feats");
    set_verbal_comp();
    set_somatic_comp();
    set_helpful_spell(1);

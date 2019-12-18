@@ -114,7 +114,7 @@ void thank()
 void receive_given_item(object obj)
 {
     tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an annoyed voice:%^RESET%^ Try <claim>ing this instead.");
-    force_me("drop "+obj->query_id());
+    force_me("drop "+obj->query_id()[0]);
 }
 
 void die(object ob)

@@ -78,7 +78,8 @@ mixed * genoutput(object targ)
     if(targ->is_class("warlock"))
         if(stringp(targ->query("warlock heritage")))
             output+=({({"Heritage","%^BOLD%^%^MAGENTA%^"+capitalize(targ->query("warlock heritage"))})});
-    if(targ->is_class("mage"))
+    if(targ->is_class("mage")||
+       targ->is_class("archmage"))
         if(stringp(targ->query_school()))
             output+=({({"Speciality","%^BOLD%^%^CYAN%^"+targ->query_school()})});
     if(targ->is_class("psion"))

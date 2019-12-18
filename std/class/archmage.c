@@ -98,14 +98,14 @@ int caster_level_calcs(object player, string the_class)
     {
         case "mage":
             level = player->query_class_level("mage");
-            level += player->query_class_level("shadow_adept");
+            level += player->query_class_level("archmage");
             return level;
         case "sorcerer":
             level = player->query_class_level("sorcerer");
-            level += player->query_class_level("shadow_adept");
+            level += player->query_class_level("archmage");
             return level;
         case "archmage":
-            level = player->query_class_level("shadow_adept");
+            level = player->query_class_level("archmage");
             level += player->query_class_level("mage");
             level += player->query_class_level("sorcerer");
             return level;

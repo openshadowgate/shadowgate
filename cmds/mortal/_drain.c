@@ -172,7 +172,7 @@ void drain_process(object target)
         tell_object(TP,"%^BOLD%^%^RED%^You feel too infused as it is. You continue to drain for life.%^RESET%^");
         type = "life";
     }
-    log_file("vampdrain",TP->query_name()+" drains "+target->query_name()+" at "+file_name(ETP)+" "+hour(time())+":"+minutes(time())+"\n");
+    log_file("vampdrain",TP->query_name()+"("+TP->query("relationship_profile")+") drains "+target->query_name()+" at "+file_name(ETP)+" "+hour(time())+":"+minutes(time())+"\n");
     if(type=="health")
         drain_health(target);
     else
