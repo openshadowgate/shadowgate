@@ -363,7 +363,9 @@ int pick_mage_school(string str,object ob)
 
     if(!objectp(ob)) { return 0; }
 
-    if(!ob->is_class("mage")) { return 1; }
+    if(!(ob->is_class("mage")||
+         ob->is_class("archmage")))
+        return 1;
     if(ob->query_school()) { return 1; }
 
     switch(str)
@@ -630,11 +632,19 @@ int cmd_advance(string myclass){
 
    TP->remove_property("adding base class");
 
-   if(TP->query("no advance") && !OB_ACCOUNT->is_high_mortal(TP->query_true_name())){
-      if(TP->query("no advance") <= TP->query_highest_level()){
-         tell_object(TP,"%^BOLD%^%^CYAN%^Higher powers have deemed you unworthy to advance. Seek one out for guidance if you desire to know the reason.");
-         return 1;
-      }
+   //"no adance" setting had been used here to lock players from
+   //advancing in ancient times. It defines highest level player is
+   //allowed to be
+
+   if(myclass = "class special")
+   {
+       pick_mage_school("",TP);
+       pick_psion_discipline("",TP);
+       pick_fighter_style("",TP);
+       pick_warlock_heritage("",TP);
+       pick_sorc_bloodline("",TP);
+       pick_human_subrace("",TP);
+       return 1;
    }
 
    if(strlen(myclass)) { myclass = replace_string(myclass," ","_"); }
@@ -909,7 +919,7 @@ string pick_room()
   return room;
 }
 
-int help()
+void help()
 {
 
     write("
@@ -920,6 +930,7 @@ advance - increase your level
 %^CYAN%^SYNTAX%^RESET%^
 
 advance [%^ORANGE%^%^ULINE%^CLASS_NAME%^RESET%^]
+advance class special
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -927,16 +938,10 @@ This is the command used to advance your character. Advancement may only occur i
 
 When your character has enough experience to advance to levels 10, 20, 30 and 40 you may instead choose to advance in another class. You will retain all of the abilities of your current class and you will get any new abilities that your new class allows. Only certain class and race combinations are allowed. Please see the individual help files for your race and the class that you would like to become for more information.
 
+If you're multiclassing, abandoning, or are ancient character that has no specific mage school, sorcerer bloodline, warlock heritage, oracle mystery or another class specific flavor set you might use %^ORANGE%^<advance class special>%^RESET%^ to fix these issues.
+
 %^CYAN%^SEE ALSO%^RESET%^
 
 abandon, score, classes
 ");
-
-    pick_mage_school("",TP);
-    pick_psion_discipline("",TP);
-    pick_fighter_style("",TP);
-    pick_warlock_heritage("",TP);
-    pick_sorc_bloodline("",TP);
-    pick_human_subrace("",TP);
-    return 1;
 }

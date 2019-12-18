@@ -20,7 +20,10 @@ void create() {
 %^CYAN%^You stand in the middle of nothing, surrounded by a white haze.
 "
    );
-
+   //This exit should display only if someone somehow logs into base
+   //object (server crast, or if they log out before caster).
+   //TODO: Implement name-based loading of object to allow demiplane persistence.
+   set_exits((["out":"/d/shadow/room/forest/road30"]));
    set_property("no teleport",1);
 
 }

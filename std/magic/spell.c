@@ -1832,20 +1832,26 @@ void define_clevel()
         clevel = max(({caster->query_guild_level("psion"),caster->query_guild_level("psywarrior")}));
     if(spell_type == "monk" && FEATS_D->usable_feat(caster, "elemental attunement"))
         clevel += 5;
-    if(spell_type == "mage" && caster->query_school())
+    if((spell_type == "mage" || spell_type == "sorcerer"))
     {
-        if(spell_sphere == caster->query_school())
+        if(caster->query_school())
         {
-            clevel += caster->query_guild_level("mage")/12;
-            if(FEATS_D->usable_feat(caster, "school familiarity"))
-                clevel += 6;
+            if(spell_sphere == caster->query_school())
+            {
+                if(caster->is_class("mage"))
+                    clevel += caster->query_guild_level("mage")/12;
+                if(FEATS_D->usable_feat(caster, "school familiarity"))
+                    clevel += 6;
+            }
+            else if(spell_sphere == SCHOOL_OPPOSITION[caster->query_school()])
+            {
+                if(caster->is_class("mage"))
+                    clevel -= caster->query_guild_level("mage")/12;
+                if(FEATS_D->usable_feat(caster, "school familiarity"))
+                    clevel -= 6;
+            }
         }
-        else if (spell_sphere == SCHOOL_OPPOSITION[caster->query_school()])
-        {
-            clevel -= caster->query_guild_level("mage")/12;
-            if(FEATS_D->usable_feat(caster, "school familiarity"))
-                clevel -= 6;
-        }
+
         if(caster->is_class("shadow_adept"))
             if(FEATS_D->usable_feat(caster, "elusive spellcraft"))
                 if(spell_sphere == "necromancy" ||

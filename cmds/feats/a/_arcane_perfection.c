@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
@@ -20,7 +20,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("archmage") < 7 || !FEATS_D->usable_feat(ob,"greater spell mastery"))
+    if((int)ob->query_class_level("archmage") < 7)
     {
         dest_effect();
         return 0;
@@ -54,4 +54,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

@@ -184,7 +184,11 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
         }
         if(FEATS_D->usable_feat(TO,"arcane perfection"))
         {
-            stat = TO->query_stats("intelligence");
+            if(TO->is_class("sorcerer"))
+                stat = TO->query_stats("charisma");
+            else
+                stat = TO->query_stats("intelligence");
+
             stat += 30;
             if(roll_dice(1,100) < stat)
             {
