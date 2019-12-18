@@ -42,9 +42,9 @@ int set_plane_feature(string str)
         return 0;
     if(regexp(str,"^add"))
     {
-        if(sizeof(extraitems)>10)
+        if(sizeof(extraitems)>20)
         {
-            write("You have too many features. Maximum ten are allowed.");
+            write("You have too many features. Maximum twenty are allowed.");
             return 1;
         }
         if(sscanf(str,"add %s as %s",cargs,tmp)!=2)
@@ -168,7 +168,7 @@ int set_plane_property(string str)
             TO->set_property("no teleport",1);
             write("The plane had been locked from inter dimensional travel.");
         }
-        if(cargs == "open")
+        if(cargs == "off")
         {
             TO->remove_property("no teleport");
             write("The plane had been unlocked to inter dimensional travel.");

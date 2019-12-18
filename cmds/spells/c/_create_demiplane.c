@@ -12,11 +12,11 @@ string roomName;
 void create() {
     ::create();
     set_spell_name("create demiplane");
-    set_spell_level(([ "mage" : 8,"oracle":8 ]));
+    set_spell_level(([ "mage" : 8,"oracle":8, ]));
     set_mystery("elemental");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS genesis");
-    set_description("You create a small, finite demiplane within astral and able to shape and control and reshape it to your liking.
+    set_description("You create a small, finite demiplane within astral plane and able to shape, control and reshape it to your liking. This plane will eject everything in it upon dismissal, but its configuration and parameters will save.
 
 Inside the plane you have access to the next commands:
 
@@ -42,7 +42,7 @@ Inside the plane you have access to the next commands:
 
 %^ORANGE%^<feature add %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^ as %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
 
-  Will add feature with the %^ORANGE%^%^ULINE%^NAME%^RESET%^ and %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^. You can then look at it to see it.
+  Will add feature with the %^ORANGE%^%^ULINE%^NAME%^RESET%^ and %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^. You can then look at it to see it. You can't add more than twenty features.
 
 %^ORANGE%^<feature remove %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
 
