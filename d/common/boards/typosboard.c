@@ -19,7 +19,7 @@ void place_board()
     obj->set_max_posts(400);
 	obj->set_location("/d/common/boards/typosboard.c");
     obj->set_ooc_board(1);
-    obj->set_restricted_read();
+//    obj->set_restricted_read();
   }
 }
 
@@ -34,7 +34,7 @@ void create(){
     set_exits( ([ "out" : "/d/dagger/boards_portal", ]) );
 }
 
-void reset() 
+void reset()
 {
     ::reset();
     place_board();
