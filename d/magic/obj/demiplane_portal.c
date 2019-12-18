@@ -58,7 +58,7 @@ int do_magic(string str) {
    TP->move(rt_room);
    TP->force_me("look");
 
-   tell_object(TP, "You step through the door and appear somewhere else.");
+   tell_object(TP, "%^ORANGE%^You step through the door and appear somewhere else.");
    tell_room(entry_place,"%^BOLD%^%^GREEN%^"+TPQCN+" steps through the portal.",TP);
    tell_room(rt_room, "%^BOLD%^%^GREEN%^"+TPQCN+" enters through the door.",TP);
    return 1;

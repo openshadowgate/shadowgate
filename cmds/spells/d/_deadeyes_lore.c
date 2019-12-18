@@ -8,10 +8,10 @@ int bonus;
 void create()
 {
     ::create();
-    set_spell_name("deadye's lore");
+    set_spell_name("deadeyes lore");
     set_spell_level(([ "bard" : 1, "cleric" : 1, "druid" : 1, "inquisitor" : 1, "ranger" : 1 ]));
     set_spell_sphere("divination");
-    set_syntax("cast CLASS deadye's lore");
+    set_syntax("cast CLASS deadeyes lore");
     set_damage_desc("half of clevel survival skill");
     set_description("While subject to this spell, you take upon yourself the mantle of the hunter, channeling the insights of the spirits of the wild..");
     set_verbal_comp();

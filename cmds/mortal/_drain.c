@@ -60,11 +60,6 @@ int cmd_drain(string args)
         return 0;
     }
 
-    if(targobj->is_undead())
-    {
-        notify_fail("You should eat fresh food.\n");
-        return 0;
-    }
 
     if(!RACE_D->is_race(targobj->query_race()))
     {
@@ -79,15 +74,21 @@ int cmd_drain(string args)
         return 0;
     }
 
-    if(targobj->query_property("garlic_scent"))
-    {
-        notify_fail("Strong odor of garlic prevents you from draining them.\n");
-        return 0;
-    }
-
     if(!(verify_conditions(targobj)))
     {
         notify_fail("Your target is not incapacitated.\n");
+        return 0;
+    }
+
+    if(targobj->is_undead())
+    {
+        notify_fail("You should eat fresh food.\n");
+        return 0;
+    }
+
+    if(targobj->query_property("garlic_scent"))
+    {
+        notify_fail("Strong odor of garlic prevents you from draining them.\n");
         return 0;
     }
 

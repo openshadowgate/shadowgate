@@ -20,7 +20,7 @@
 "bones":({"stealth","influence","dungeoneering"}),\
 "battle":({"endurance","athletics","perception"}),\
 "flame":({"athletics","influence","rope use"}),\
-"elemental":({"athletics","stealth","rope use"}),\
+"elemental":({"athletics","stealth","perception"}),\
 "whimsy":({"influence","stealth","perception"}),\
 "heavens":({"academics","influence","perception"}),\
 ])

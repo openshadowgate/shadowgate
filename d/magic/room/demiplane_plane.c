@@ -79,7 +79,7 @@ int set_plane_feature(string str)
         string item;
         if(sizeof(extraitems))
         {
-            write("%^BOLD%^%^RED%^There are next features present:");
+            write("%^BOLD%^%^RED%^There are "+sizeof(extraitems)+" features present:");
             foreach(item in keys(extraitems))
             {
                 write(item);
@@ -127,7 +127,8 @@ int set_plane_property(string str)
             return 1;
         }
         TO->set_short(cargs);
-        TO->set_long(cargs+"\n"+TO->query_long());
+        if(sizeof(explode(TO->query_long(),"\n"))>0)
+            TO->set_long(cargs+"\n"+explode(TO->query_long(),"\n")[1]+"\n");
         save_space();
         TP->force_me("look");
     }
@@ -200,8 +201,8 @@ int pull_up_rope(string str)
        return 0;
    inv = all_inventory(TO);
 
-   tell_room(TO, "%^ORANGE%^"+TPQCN+" locks the door and it disappears.",TP);
-   tell_object(TP, "%^ORANGE%^You lock the door and it disappears.");
+   tell_room(TO, "%^ORANGE%^"+TPQCN+" locks the door to material plane.",TP);
+   tell_object(TP, "%^ORANGE%^You lock the door to material plane.");
    rope->raise();
    TO->remove_exit("door");
    return 1;
@@ -222,6 +223,7 @@ int lower_rope(string str)
 
 void save_space()
 {
+    set_exits(([]));
     mkdir("/d/save/summons/"+castname);
     save_object("/d/save/summons/"+castname+"/demiplane");
 }
