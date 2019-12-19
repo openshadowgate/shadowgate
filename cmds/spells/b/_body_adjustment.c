@@ -2,7 +2,7 @@
 inherit SPELL;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("body adjustment");
@@ -20,11 +20,11 @@ void create()
 }
 
 
-int preSpell() 
+int preSpell()
 {
     if(sizeof(caster->query_attackers()) > 0)
     {
-        if((int)caster->query_property("using bodyadjustment") > time()) 
+        if((int)caster->query_property("using bodyadjustment") > time())
         {
             tell_object(caster,"Your mind must recover before you can use such a power again!");
             dest_effect();
@@ -32,7 +32,7 @@ int preSpell()
         }
        return 1;
     }
-    if(((int)caster->query_property("using bodyadjustment") > time()) && (sizeof(caster->query_attackers()) == 0)) 
+    if(((int)caster->query_property("using bodyadjustment") > time()) && (sizeof(caster->query_attackers()) == 0))
     {
         caster->remove_property("using bodyadjustment");
         return 1;
@@ -40,28 +40,27 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int rnd;
-    
+
     tell_object(caster,"%^BOLD%^%^WHITE%^You focus your attention inward, "
         "making minute changes to your body that help heal your injuries.%^RESET%^");
     tell_room(place,"%^BOLD%^%^As you watch, "+caster->QCN+"%^BOLD%^%^WHITE%^'s "
         "injuries begin to knit together as "+caster->QS+" heals "+caster->QO+"self "
         "from within!%^RESET%^",caster);
-    
+
     rnd = sdamage*2;
-    
-    damage_targ(caster,caster->return_target_limb(),-rnd,"positive energy");
-    
+
+    damage_targ(caster,caster->return_target_limb(),-rnd,"untyped");
+
     spell_successful();
     dest_effect();
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
