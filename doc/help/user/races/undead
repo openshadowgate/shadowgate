@@ -4,13 +4,19 @@
 %^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^ORANGE%^ any
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
-%^ORANGE%^ - Undead body: no con stat, no hunger or thirst, no aging, no diseases, no fatigue
+%^ORANGE%^ - Undead body:
+%^ORANGE%^   - d10 as hit die
+%^ORANGE%^   - No constitution stat, charisma used for hp calculations
+%^ORANGE%^   - No hunger or thirst,
+%^ORANGE%^   - No aging, age cathegory is always normal
+%^ORANGE%^   - No diseases
+%^ORANGE%^   - No fatigue
+%^ORANGE%^ - Undead mind:
+%^ORANGE%^   - Immunity to death effects
+%^ORANGE%^   - Will save is always high
+%^ORANGE%^   - Mind-affecting powers don'tt affect the mind, but may damage it
 %^ORANGE%^ - Innate darkvision and animate dead spells
-%^ORANGE%^ - Immunity to death effects
-%^ORANGE%^ - Will save is always high
-%^ORANGE%^ - Hit die always equals to d10
 %^ORANGE%^ - Effects of negative and positive energy are reversed
-%^ORANGE%^ - Mind-affecting powers damage but don't affect the mind
 
 %^BOLD%^%^BLACK%^Description:
 %^ORANGE%^"Undead" is a template that can be applied to any living creature in order to transform it into a monster of undeath such as a zombie, animated skeleton, or a vampire, or to creatures that are innately unique such as mohrgs, wights.
