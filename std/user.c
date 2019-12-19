@@ -1807,8 +1807,7 @@ void heart_beat()
             {
                 int todamage = query_max_hp()/2 +1;
 
-                if(todamage > query_property("fire resistance") &&
-                   !query_property("sunlight_umbrella"))
+                if(!query_property("sunlight_umbrella"))
                 {
                     if(TO->query_hp()<-(TO->query_max_hp()*4/5))
                     {
@@ -1817,7 +1816,7 @@ void heart_beat()
                     }
                     else
                     {
-                        TO->cause_typed_damage(TO,"torso",todamage,"fire");
+                        TO->cause_typed_damage(TO,"torso",todamage,"divine");
                         tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
                     }
                 }
