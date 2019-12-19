@@ -32,8 +32,6 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         level = ob->query_class_level(classes[i]);
         if(level > 20) level = 20;
         saves = (string)file->saving_throws(ob);
-        if(ob->is_undead())
-            saves[2]=1;
         if(!sizeof(saves)) continue;
 
         // starting saving throw from class template; if 1 it is a strong throw (2+ level/2), if 0 it is weak (level/3)

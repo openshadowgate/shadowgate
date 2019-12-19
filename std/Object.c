@@ -525,7 +525,7 @@ mixed query_property(string prop)
     }
     if(prop == "no death")
     {
-        if(TO->is_undead()) return 1;
+        if(TO->is_undead()&&!userp(TO)) return 1;
         if(FEATS_D->usable_feat(TO,"death ward")) return 1;
         if(FEATS_D->usable_feat(TO,"fated")) { return 1; }
         if(FEATS_D->usable_feat(TO,"earthen blood")) { return 1; }

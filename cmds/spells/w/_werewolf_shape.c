@@ -71,6 +71,7 @@ void spell_effect(int prof)
     caster->add_skill_bonus("perception",4);
     caster->add_skill_bonus("survival",4);
     caster->set_property("dance-of-cuts",1); //Full BAB
+    caster->set_property("rage",1);
     caster->set_property("raged",1);
     spell_successful();
     addSpellToCaster();
@@ -91,6 +92,7 @@ void dest_effect()
         caster->add_skill_bonus("perception",-4);
         caster->add_skill_bonus("survival",-4);
         caster->set_property("dance-of-cuts",-1);
+        caster->remove_property("rage");
         caster->remove_property("raged");
         if(caster->query_property("shapeshifted"))
             shape = caster->query_property("shapeshifted");

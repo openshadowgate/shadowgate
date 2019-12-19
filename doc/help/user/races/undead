@@ -5,17 +5,14 @@
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
 %^ORANGE%^ - Undead body:
-%^ORANGE%^   - d10 as hit die
 %^ORANGE%^   - No constitution stat, charisma used for hp calculations
-%^ORANGE%^   - No hunger or thirst,
+%^ORANGE%^   - No hunger or thirst
 %^ORANGE%^   - No aging, age cathegory is always normal
 %^ORANGE%^   - No diseases
 %^ORANGE%^   - No fatigue
 %^ORANGE%^ - Undead mind:
-%^ORANGE%^   - Immunity to death effects
-%^ORANGE%^   - Will save is always high
-%^ORANGE%^   - Mind-affecting powers don'tt affect the mind, but may damage it
-%^ORANGE%^ - Innate darkvision and animate dead spells
+%^ORANGE%^   - Mind-affecting powers damage the mind
+%^ORANGE%^ - Innate darkvision spell
 %^ORANGE%^ - Effects of negative and positive energy are reversed
 
 %^BOLD%^%^BLACK%^Description:
@@ -28,6 +25,6 @@
 %^ORANGE%^That being said, to every rule there is an exception. If this exception is supported by divinity, then the variables that governed the world change, and bring new rules into the game. Greater undead, intelligent and sane, are those marked by Nilith's unholy graft. If they do not follow her, they are at least never enemies of the church.
 
 %^BOLD%^%^BLACK%^Player characters:
-%^ORANGE%^Playing an undead character gives no meaningful bonuses, and imposes severe punitive mechanical elements onto your gameplay. You will be harmed by most means of healing. Many spells will cause greater damage to you. Some spells will ignore your immunity to death effects and will instantly turn you to dust. You will be brought down almost everywhere if you are found to be undead, other players have additional excuse to start pk with you. With all of that, inexperienced players should not consider this path.
+%^ORANGE%^Playing an undead character gives no meaningful bonuses, and imposes severe punitive mechanical elements onto your gameplay. You will be harmed by most means of healing. Many spells will cause greater damage to you. You will be brought down almost everywhere if you are found to be undead, other players have additional excuse to start pk with you. With all of that, inexperienced players should not consider this path.
 
 %^BOLD%^%^BLACK%^See also:%^RESET%^%^ORANGE%^ races, nilith's graft, vampire

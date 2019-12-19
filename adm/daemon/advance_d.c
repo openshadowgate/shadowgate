@@ -445,8 +445,6 @@ int get_hp_bonus(string cl, int con, int lev,object tp)
 
     // hit dice and hit points above level 20 moved to the class files
     dice  = file->hit_dice(tp);
-    if(tp->is_undead())
-        dice  = 10;
     extra = file->default_hitpoints(tp);
 
     // We need to roll hitpoints all the way up to level 40, otherwise the order in

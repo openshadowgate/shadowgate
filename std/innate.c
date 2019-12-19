@@ -57,7 +57,6 @@ void InitInnate()
     {
         InnateAbilities += ([
                                 "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "animate dead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 ]);
     }
 
