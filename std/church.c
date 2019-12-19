@@ -201,6 +201,9 @@ int pray()
         if(exp > EXP_NEEDED[thelevel+1])
             exploss*=2;
 
+        if(TP->query("hardcore"))
+            TP->set_general_exp(myclass,EXP_NEEDED[6]);
+
         TP->set_general_exp(myclass,exp - exploss);
 
         TP->resetLevelForExp(0);
@@ -217,6 +220,11 @@ int pray()
                 continue;
             if(!stuff[i])
                 continue;
+            if(TP->query("hardcore"))
+            {
+                stuff[i]->remove();
+                continue;
+            }
             if (stuff[i]->is_armor() && stuff[i]->query_worn())
                 stuff[i]->set_not_equipped();
             if (stuff[i]->query_wielded())
@@ -229,6 +237,8 @@ int pray()
                     stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
             }
         }
+
+
     }
 
     return 1;

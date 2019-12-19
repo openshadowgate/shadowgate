@@ -26,12 +26,6 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if(ob->is_undead())
-    {
-        dest_effect();
-        return 0;
-    }
-
     return ::prerequisites(ob);
 }
 

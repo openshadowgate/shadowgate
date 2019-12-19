@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","taxperc","term","scrlines","scrwidth"});
+string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","taxperc","term","scrlines","scrwidth","hardcore"});
 
 int cmd_set(string args)
 {
@@ -259,6 +259,32 @@ string get_expgain()
         return "off";
     else
         return "on";
+}
+
+int set_hardcore(string val)
+{
+    string *valid_values = ({"on","off"});
+    if(member_array(val,valid_values)==-1)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+        return 0;
+    }
+    if(val=="on")
+        TP->set("hardcore",1);
+    if(val=="off")
+    {
+        write("%^BOLD%^%^RED%^Nope. You keep suffering.");
+        return 0;
+    }
+    return 1;
+}
+
+string get_hardcore()
+{
+    if(TP->query("hardcore"))
+        return "on";
+    else
+        return "off";
 }
 
 int set_taxperc(string val)
