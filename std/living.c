@@ -524,6 +524,10 @@ string query_school() {
    return school_of_magic;
 }
 
+void set_school(string str) {
+    school_of_magic = str;
+}
+
 string query_bloodline() {
    return sorc_bloodline;
 }
