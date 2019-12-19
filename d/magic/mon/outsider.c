@@ -356,6 +356,7 @@ int remove(){
 
 void heart_beat(){
    string party;
+   int i;
    ::heart_beat();
    if(!objectp(cast))
        remove();
