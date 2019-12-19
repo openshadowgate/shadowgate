@@ -294,17 +294,17 @@ int advance(object tp, string myclass)
     //adding this to hopefully avoid any issues on character creation - as it stands if you create a Level adjusted
     //class and fail to advance before you log out everything is broken on login - Saide - April, 2016
     if(tp->query("new_class_type")) { check = tp->query_base_character_level(); }
-    if(check == 0) 
-    { 
-        tp->set_mlevel(myclass, 1); 
+    if(check == 0)
+    {
+        tp->set_mlevel(myclass, 1);
         file->advanced_func(tp);
     }
-        
+
     if(tp->query("new_class_type")) { check = tp->query_character_level(); }
     if(tp->query("new_class_type")) { check = tp->query_character_level(); }
     else { check = lev; }
 
-    if (!interactive(tp)) 
+    if (!interactive(tp))
         return 0;
     if(!file_exists(file))
         return 0;
@@ -313,7 +313,7 @@ int advance(object tp, string myclass)
 
     if((gexp < exp) && !wizardp(tp))
     {
-        if ((tp->query_lowest_level() > 5 || lev + 1 > 5) && !tp->query_description()) 
+        if ((tp->query_lowest_level() > 5 || lev + 1 > 5) && !tp->query_description())
         {
             tell_object(tp,"Please take a moment to set a description first.");
             return 0;
@@ -325,7 +325,7 @@ int advance(object tp, string myclass)
         // new leveling stuff all in the class file, guild level, thief skills, max lance prof, etc
         file->advanced_func(tp);
 
-        hpbonus = get_hp_bonus(cl, con, (int)tp->query_base_character_level(),tp); // this is setting the number in the array        
+        hpbonus = get_hp_bonus(cl, con, (int)tp->query_base_character_level(),tp); // this is setting the number in the array
         hpbonus = 20; // don't need it anymore so using it as a variable, starting chars get +20 hp
         if((string)tp->query_race() == "human" && (string)tp->query("subrace") == "tonaz'tlacar") hpbonus += 10; // 10hp bonus 'dauntless' for 'tlacar human subrace
 
@@ -351,7 +351,7 @@ int advance(object tp, string myclass)
                 tell_object(tp,"%^B_RED%^%^CYAN%^You earned new feats this level, please type help feats.%^RESET%^");
             }
         }
-        else 
+        else
         {
             tell_object(tp,"You are now level "+(lev+1)+".");
         }
@@ -430,13 +430,13 @@ int get_hp_bonus(string cl, int con, int lev,object tp)
     int hpbonus,dice,extra,roll_1,roll_2,*rolls;
 
     if(!objectp(tp)) { return 1; }
-    
+
     if(lev > 100 || lev < 1) { return 1; }
     rolls = allocate(110);
-    if(!pointerp(tp->query("hp_array"))) { tp->set("hp_array",rolls); }    
+    if(!pointerp(tp->query("hp_array"))) { tp->set("hp_array",rolls); }
     else { rolls = tp->query("hp_array"); }
-    if(sizeof(tp->query("hp_array")) < 110) 
-    { 
+    if(sizeof(tp->query("hp_array")) < 110)
+    {
         rolls = tp->query("hp_array");
         rolls += allocate((100-sizeof(rolls)));
     }
@@ -444,19 +444,19 @@ int get_hp_bonus(string cl, int con, int lev,object tp)
     if(!file_exists(file)) { return notify_fail("No class file for "+cl+""); }
 
     // hit dice and hit points above level 20 moved to the class files
-    dice  = file->hit_dice(tp); 
+    dice  = file->hit_dice(tp);
     extra = file->default_hitpoints(tp);
 
     // We need to roll hitpoints all the way up to level 40, otherwise the order in
     // which you pick your classes will give a mechanical advantage.  Other thought was
     // doing it in 5 level blocks roll first 5, get the second 5 set, but seems like
     // the less complicated we make it, the better off we will be -Ares
-    
+
     if(rolls[lev]) { hpbonus = rolls[lev]; }
 
     else
-    {    
-        switch(lev) 
+    {
+        switch(lev)
         {
         case 1:
             hpbonus = dice;
@@ -470,14 +470,13 @@ int get_hp_bonus(string cl, int con, int lev,object tp)
             break;
         }
     }
-    
+
     if(lev < sizeof(rolls) - 1)
     {
         rolls[lev] = hpbonus;
         tp->set("hp_array",rolls);
     }
-    
+
     if(hpbonus < 1) { return 1; }
     return hpbonus;
 }
-

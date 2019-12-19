@@ -37,8 +37,7 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        if(do_save(foe,6) ||
-           !(((string)foe->query_race() == "undead") || foe->query_property("undead")))
+        if(do_save(foe,6) || !foe->is_undead())
         {
             tell_object(foe,"%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
             continue;

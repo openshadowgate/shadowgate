@@ -4,10 +4,13 @@
 %^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^ORANGE%^ any
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
-%^ORANGE%^ - undead body: no con stat, no hunger or thirst, no aging, no diseases, no fatigue
-%^ORANGE%^ - innate darkvision and animate dead spells
-%^ORANGE%^ - effects of negative and positive energy are reversed
-%^ORANGE%^ - mind-affecting powers damage but don't affect the mind
+%^ORANGE%^ - Undead body: no con stat, no hunger or thirst, no aging, no diseases, no fatigue
+%^ORANGE%^ - Innate darkvision and animate dead spells
+%^ORANGE%^ - Immunity to death effects
+%^ORANGE%^ - Will save is always high
+%^ORANGE%^ - Hit die always equals to d10
+%^ORANGE%^ - Effects of negative and positive energy are reversed
+%^ORANGE%^ - Mind-affecting powers damage but don't affect the mind
 
 %^BOLD%^%^BLACK%^Description:
 %^ORANGE%^"Undead" is a template that can be applied to any living creature in order to transform it into a monster of undeath such as a zombie, animated skeleton, or a vampire, or to creatures that are innately unique such as mohrgs, wights.
@@ -19,6 +22,6 @@
 %^ORANGE%^That being said, to every rule there is an exception. If this exception is supported by divinity, then the variables that governed the world change, and bring new rules into the game. Greater undead, intelligent and sane, are those marked by Nilith's unholy graft. If they do not follow her, they are at least never enemies of the church.
 
 %^BOLD%^%^BLACK%^Player characters:
-%^ORANGE%^Playing an undead character gives no meaningful bonuses, and imposes severe punitive mechanical elements onto your gameplay. You will be harmed by most means of healing. Many spells will cause greater damage to you. You will be brought down everywhere if you are found to be undead. Thus, inexperienced players should not consider this path.
+%^ORANGE%^Playing an undead character gives no meaningful bonuses, and imposes severe punitive mechanical elements onto your gameplay. You will be harmed by most means of healing. Many spells will cause greater damage to you. Some spells will ignore your immunity to death effects and will instantly turn you to dust. You will be brought down almost everywhere if you are found to be undead, other players have additional excuse to start pk with you. With all of that, inexperienced players should not consider this path.
 
-%^BOLD%^%^BLACK%^See also:%^RESET%^%^ORANGE%^ races, nilith's graft
+%^BOLD%^%^BLACK%^See also:%^RESET%^%^ORANGE%^ races, nilith's graft, vampire
