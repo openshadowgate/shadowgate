@@ -32,6 +32,8 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         level = ob->query_class_level(classes[i]);
         if(level > 20) level = 20;
         saves = (string)file->saving_throws(ob);
+        if(ob->is_undead())
+            saves[2]=1;
         if(!sizeof(saves)) continue;
 
         // starting saving throw from class template; if 1 it is a strong throw (2+ level/2), if 0 it is weak (level/3)
@@ -40,13 +42,13 @@ varargs void do_save(object ob, int dc, string type, raw_save)
 
         // step 2: get any extra points from levels past 20, if applicable
         level = ob->query_class_level(classes[i]);
-        if(level < 21) continue;
-        level -= 20;
-        save += level/2; // past L20, all saves increase at level/2 rate. Let's give the SC a bit of a nudge up!
+
+        // past L20, all saves increase at level/2 rate. Let's give the SC a bit of a nudge up!
+        /* if(level < 21) continue; */
+        /* level -= 20; */
+        /* save += level/2; */
     }
     save_info["base_class_save"] = save; // this is without any modifiers
-    //tell_object(find_player("saide"), "save = "+save);
-    // step 3: now that we've collated all class levels for saving throws, let's add stat bonuses!
     switch(type) {
       case "fort": case "fortitude":  statbonus = (int)ob->query_stats("constitution"); break;
       case "reflex": statbonus = (int)ob->query_stats("dexterity");    break;
