@@ -2791,7 +2791,7 @@ void help() {
     if(peace)
         write("%^BOLD%^%^RED%^Only at peace:%^RESET%^ This spell can be cast only when you aren't in combat.");
     if(silent_casting)
-        write("%^BOLD%^%^RED%^Silent casting:%^RESET%^ Casting of this spell can't be detected by others.");
+        write("%^BOLD%^%^RED%^Undetectable casting:%^RESET%^ Casting of this spell can't be detected by others.");
     if(evil_spell)
         write("%^BOLD%^%^RED%^Evil spell:%^RESET%^ For one reason or another, this is an evil, selfish spell. Good characters won't use it unless in dire need.");
     if(aoe_spell)
