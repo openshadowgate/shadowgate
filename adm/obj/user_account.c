@@ -168,12 +168,12 @@ void display_account_info(string account,object obj)
     {
         if(member_group(geteuid(obj),"law_c"))
         {
-            display = "%^RESET%^%^BOLD%^%^GREEN%^     Account Name: %^RESET%^%^YELLOW%^"+__AccountName+"\n\n";
+            display = "%^RESET%^%^BOLD%^%^GREEN%^Account Name: %^RESET%^%^YELLOW%^"+__AccountName+"\n";
         }
     }
     else
     {
-           display = "%^RESET%^%^BOLD%^%^GREEN%^     Account Name: %^RESET%^%^YELLOW%^"+__AccountName+"\n\n";
+           display = "%^RESET%^%^BOLD%^%^GREEN%^Account Name: %^RESET%^%^YELLOW%^"+__AccountName+"\n";
     }
 
 
@@ -183,14 +183,10 @@ void display_account_info(string account,object obj)
     display += "%^RESET%^%^MAGENTA%^";
     display += arrange_string("Name",18);
     display += arrange_string("Race",10);
-    display += arrange_string("     Class",22);
-    display += arrange_string("Level",7);
-    display += arrange_string("Position",10);
+    display += arrange_string("Class",30);
+    display += arrange_string("Level",8);
     display += arrange_string("Mail?",8);
-    display += "%^RESET%^\n";
-
-    display += "%^RESET%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-
+    display += "%^RESET%^";
 
     tell_object(obj,display);
 
@@ -260,18 +256,9 @@ void display_account_info(string account,object obj)
                 if(j<(sizeof(classes)-1)) { level_block += "%^RESET%^%^BOLD%^%^MAGENTA%^\\"; }
             }
 
-            display += arrange_string(class_block,22);
+            display += arrange_string(class_block,30);
 
-            display += arrange_string(level_block,7);
-
-            position = USERCALL->user_call(__Characters[i],"query_position");
-
-            position = capitalize(position);
-            if(position == "High mortal") position = "HM"; // shortening the string to fit the mail opt on. N, 2/14.
-
-            display += "%^BOLD%^%^CYAN%^";
-
-            display += arrange_string(position,10);
+            display += arrange_string(level_block,8);
 
             mail_stat = (mapping)LOCALPOST_D->mail_status(__Characters[i]);
             if (!mail_stat["unread"]) mail += "n/a";
@@ -304,20 +291,13 @@ void display_account_info(string account,object obj)
 
     obj->more(the_display);
 
-    display += "\n";
-
-    display += "%^RESET%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
-
     tell_object(obj,display);
 
     display = "";
 
     if(member_group(geteuid(obj),"law_c"))
     {
-        display += arrange_string("        %^RESET%^%^BOLD%^Email: "+__Email,40);
-        display += "%^RESET%^%^BOLD%^Real Name: "+__RealName;
-        display += "\n\n";
-        display += "%^RESET%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
+        display += arrange_string("  %^RESET%^%^BOLD%^Email: "+__Email,40);
         tell_object(obj,display);
     }
 
