@@ -72,7 +72,7 @@ void db(string str)
 void create()
 {
     seteuid(UID_ROOT);
-    __AccountName = "";    
+    __AccountName = "";
     __Characters = ({});
     __Perks = ({});
     LOADED = 0;
@@ -80,7 +80,7 @@ void create()
     positions = ({});
 }
 
-//Added by Saide in order to faciliate 
+//Added by Saide in order to faciliate
 //letting players with a non-newbie on their
 //account to skip the newbie area - November, 2016
 int check_perks(string player, string myPerk)
@@ -95,7 +95,7 @@ int check_perks(string player, string myPerk)
     }
     if(!stringp(myPerk)) return 0;
     account = USERCALL->user_call(player,"query","user_account");
-    
+
     if(!account) { return 0; }
 
     if(!account_exists(account)) { return 0; }
@@ -155,8 +155,8 @@ void display_account_info(string account,object obj)
 
     if(!sizeof(__Characters))
     {
-        tell_object(obj,"%^RED%^Error: no characters associated with account.%^RESET%^"); 
-		exit();       
+        tell_object(obj,"%^RED%^Error: no characters associated with account.%^RESET%^");
+		exit();
         return;
     }
 
@@ -212,7 +212,7 @@ void display_account_info(string account,object obj)
             continue;
         }
 
-        
+
         character_level = (int)USERCALL->user_call(__Characters[i],"query_level");
 
         if((character_level > 50 ) && (character_level > obj_level)) { continue; }
@@ -237,15 +237,15 @@ void display_account_info(string account,object obj)
             display += "%^RESET%^%^MAGENTA%^";
 
             display += arrange_string(race,10);
-            
+
             classes = USERCALL->user_call(__Characters[i],"query_classes");
 
-            if(!sizeof(classes)) 
-            { 
-                classes += ({ "none" }); 
+            if(!sizeof(classes))
+            {
+                classes += ({ "none" });
                 levels += ({ 0 });
             }
-            
+
             for(j=0;j<sizeof(classes);j++)
             {
                 class_block += "%^RESET%^%^RED%^";
@@ -253,17 +253,17 @@ void display_account_info(string account,object obj)
                 if(j<(sizeof(classes)-1)) { class_block += "%^RESET%^%^BOLD%^%^MAGENTA%^\\"; }
 
                 level = USERCALL->user_call(__Characters[i],"query_class_level",classes[j]);
-                
+
                 levels += ({ "%^RESET%^%^BOLD%^"+level });
-                
+
                 level_block += levels[j];
                 if(j<(sizeof(classes)-1)) { level_block += "%^RESET%^%^BOLD%^%^MAGENTA%^\\"; }
-            }  
+            }
 
             display += arrange_string(class_block,22);
 
             display += arrange_string(level_block,7);
-           
+
             position = USERCALL->user_call(__Characters[i],"query_position");
 
             position = capitalize(position);
@@ -322,7 +322,7 @@ void display_account_info(string account,object obj)
     }
 
     if(sizeof(perks))
-    {        
+    {
         for(i=0;i<sizeof(perks);i++)
         {
             __Perks += ({ perks[i] });
@@ -358,7 +358,7 @@ void show_menu(object obj)
         display += "    %^RESET%^%^MAGENTA%^1. %^RESET%^%^BOLD%^Associate character with existing account.%^RESET%^ \n";
         display += "    %^RESET%^%^MAGENTA%^2. %^RESET%^%^BOLD%^Create a new account, your character will be associated with this account.%^RESET%^ \n";
         display += "    %^RESET%^%^YELLOW%^Any other key to exit.%^RESET%^ \n";
-        
+
         tell_object(tp,display);
         input_to("selection","no_account");
         return;
@@ -414,9 +414,9 @@ int selection(string str,string menu)
             tell_object(tp,"%^RESET%^%^YELLOW%^Confirming real name %^RESET%^%^MAGENTA%^"+__RealName+"%^RESET%^%^YELLOW%^.%^RESET%^\n\n");
             tell_object(tp,"%^RESET%^%^BOLD%^Please enter a password for this account.  This does not have to be the same password that you "
                 "use for your characters.  You will need this password to associate additional characters with this account.%^RESET%^");
-            
+
             input_to("password_one",1);
-            
+
             return 0;
 
         default:
@@ -561,7 +561,7 @@ int selection(string str,string menu)
 
 
     case "no_account": // menu if the character doesn't have an account
-        
+
         switch(str)
         {
         case "1": // associte character with existing account
@@ -582,7 +582,7 @@ int selection(string str,string menu)
             return 0;
 
 
-        default: // exit account 
+        default: // exit account
 
             exit();
             return 0;
@@ -599,8 +599,8 @@ int selection(string str,string menu)
     //////////////////////////////////////
     // account action menus             //
     //////////////////////////////////////
-        
-    
+
+
     case "change_email":
 
         if(!enter_email_address(str))
@@ -632,7 +632,7 @@ int selection(string str,string menu)
 
 
     case "account_actions":
-        
+
         switch(str)
         {
         case "1": // display account information
@@ -677,7 +677,7 @@ int new_association_check()
 {
     if(!objectp(tp)) { return 0; }
 
-    if(__AccountName == "") 
+    if(__AccountName == "")
     {
         tell_object(tp,"No account name.");
         return 0;
@@ -700,10 +700,10 @@ int new_account_check(string str)
     str = lower_case(str);
 
     if(!character_filter(str)) { return 0; }
-    if(account_exists(str)) 
-    { 
+    if(account_exists(str))
+    {
         tell_object(tp,"%^RESET%^%^RED%^An account named "+str+" already exists.%^RESET%^");
-        return 0; 
+        return 0;
     }
 
     __AccountName = str;
@@ -722,10 +722,10 @@ int create_new_account(string str)
     str = lower_case(str);
 
     if(!character_filter(str)) { return 0; }
-    if(account_exists(str)) 
-    { 
+    if(account_exists(str))
+    {
         tell_object(tp,"%^RESET%^%^RED%^An account named "+str+" already exists.%^RESET%^");
-        return 0; 
+        return 0;
     }
 
     __AccountName = str;
@@ -795,7 +795,7 @@ int associate_user_with_account()
 {
     if(!objectp(tp)) { return 0; }
 
-    if(__AccountName == "") 
+    if(__AccountName == "")
     {
         tell_object(tp,"No account name.");
         return 0;
@@ -835,10 +835,10 @@ int unassociate_user()
 
 int load_user_account(string str)
 {
-    if(!account_exists(str)) 
-    { 
+    if(!account_exists(str))
+    {
         tell_object(tp,"No account named "+str+" exists.");
-        return 0; 
+        return 0;
     }
     if(LOADED)
     {
@@ -917,7 +917,7 @@ nomask static int password_two(string str)
     {
         tell_object(tp,"%^RESET%^%^YELLOW%^Passwords do not match, please enter a password.");
         input_to("password_one",1);
-        return 0; 
+        return 0;
     }
 }
 
@@ -990,7 +990,7 @@ nomask static int change_password(string str)
 int set_password(string str)
 {
     __Password = crypt(str,0);
-    save_this_object();    
+    save_this_object();
     return 1;
 
 }
@@ -1000,35 +1000,35 @@ int law_set_password(object obj, string player_name, string new_pass)
 {
     object player_account;
     string account_name;
-    
+
     if(!objectp(obj)) { return 0; }
-    
+
     if(!archp(obj))
     {
         tell_object(obj,"This command is restricted to admins only.");
         return 0;
     }
-    
+
     if(!user_exists(player_name))
     {
         tell_object(obj,"The user "+player_name+" doesn't seem to exist.");
         return 0;
     }
-    
+
     account_name = USERCALL->user_call(player_name, "query","user_account");
     if(!account_name || !account_exists(account_name))
     {
         tell_object(obj,"No account associated with "+player_name+"'s account");
         return 0;
     }
-    
+
     player_account = new(OB_ACCOUNT);
     player_account->load_user_account(account_name);
-    
+
     player_account->set_password(new_pass);
     player_account->save_this_object();
     destruct(player_account);
-    
+
     tell_object(obj,"Changing password for "+player_name+"'s account to "+new_pass);
     seteuid(UID_LOG);
     log_file("adm/account_passwords",""+obj->query_true_name()+" changed the password for "+player_name+"'s account.\n");
@@ -1045,12 +1045,12 @@ int internal_check_password(string password,string user_account)
     if(!account_exists(user_account)) { return 0; }
 
     account = new(OB_ACCOUNT);
-    account->restore_account(user_account);    
+    account->restore_account(user_account);
     pass1 = (string)account->query_password();
     pass2 = crypt(password,pass1);
     destruct(account);
 
-    return (pass1 == pass2);    
+    return (pass1 == pass2);
 }
 
 // end of password related functions
@@ -1058,7 +1058,7 @@ int internal_check_password(string password,string user_account)
 
 int delete_account(string str)
 {
-    __AccountName = "";    
+    __AccountName = "";
     __Characters = ({});
     __Perks = ({});
     LOADED = 0;
@@ -1066,7 +1066,7 @@ int delete_account(string str)
     tp->delete("user_account");
     return 1;
 }
-    
+
 
 int save_this_object()
 {
@@ -1090,6 +1090,7 @@ int restore_account(string str)
 {
     if(!account_exists(str)) { return 0; }
     restore_object(ACCOUNTS_DIR+str);
+    __Characters=sort_array(__Characters,1);
 }
 
 
