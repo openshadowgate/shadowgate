@@ -10,7 +10,7 @@ int caster_class() { return 1; }
 
 string *restricted_races() {
     return ({ "beastman","bugbear","dwarf","goblin","half-orc","hobgoblin",
-        "kobold","orc","drow","firbolg","gnoll","half-drow","half-ogre","ogre","ogre-mage","voadkyn" });
+        "kobold","orc","gnoll","half-ogre","ogre","ogre-mage","voadkyn" });
 }
 
 string *restricted_classes() { return ({ }); }
