@@ -75,7 +75,6 @@ static void logon()
     //message("logon", read_file(WELCOME+Z),this_object());
     message("logon", "\n", this_object());
     message("logon", "/daemon/welcome_d.c"->get_welcome(), this_object());
-    message("logon", "\n\n  Players Online: " +sizeof(real_users())+"\n  Last Reboot: " +last_reboot()+"\n", this_object());
     if ("/adm/daemon/shutdown_d.c"->shuttingDown()) {
         ttl = "/adm/daemon/shutdown_d.c"->query_time_left();
         if(ttl > 0)
