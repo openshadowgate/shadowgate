@@ -11,9 +11,10 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("mass heal");
-    set_spell_level(([ "cleric" : 9 ]));
+    set_spell_level(([ "cleric" : 9, "oracle":9 ]));
+    set_mystery("life");
     set_affixed_spell_level(9);
-    set_spell_sphere("healing");
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS mass heal on TARGET");
     set_damage_desc("positive energy");
     set_description("This is a stronger version of the priest spell, heal.  When cast without a target or on the caster "

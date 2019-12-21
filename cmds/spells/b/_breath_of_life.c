@@ -5,13 +5,14 @@ inherit SPELL;
 
 create() {
     ::create();
-    set_spell_name("inspiring recovery");
-    set_spell_level(([ "cleric" : 6, "ranger" : 4, "paladin" : 4, "inquisitor" : 6 ]));
-    set_affixed_spell_level(6);
-    set_spell_sphere("healing");
-    set_syntax("cast CLASS inspiring recovery on TARGET");
-    set_damage_desc("positive/negative energy");
-    set_description("You channel a beam of own energy at target, healing them. If the target is deceased, the beam instead will try to return them to life into their body. The type of energy depends on who is the caster. Undead will use negative energy, living will use positive energy.
+    set_spell_name("breath of life");
+    set_spell_level(([ "cleric" : 5,"oracle":5 ]));
+    set_mystery("life");
+    set_affixed_spell_level(5);
+    set_spell_sphere("conjuration_summoning");
+    set_syntax("cast CLASS breath of life on TARGET");
+    set_damage_desc("positive energy");
+    set_description("You channel a beam of own energy at target, healing them. If the target is deceased, the beam instead will try to return them to life into their body.
 
 This spell accepts recognized players name or their corpse as the TARGET if they are deceased.
 ");
@@ -100,20 +101,10 @@ spell_effect(int prof) {
     }
     else
     {
-        if(caster->is_undead())
-        {
-            tell_room(place,"%^BLUE%^"+caster->QCN+" points "+caster->QP+" hand at "+target->QCN+" and channels a beam of darkness energy into them!");
-            if(!target->is_undead())
-                set_helpful_spell(0);
-            damage_targ(target, "torso", sdamage,"negative energy");
-        }
-        else
-        {
-            tell_room(place,"%^ORANGE%^"+caster->QCN+" points "+caster->QP+" hand at "+target->QCN+" and channels a beam of light into them!");
-            if(target->is_undead())
-                set_helpful_spell(0);
-            damage_targ(target, "torso", sdamage,"positive energy");
-        }
+        tell_room(place,"%^ORANGE%^"+caster->QCN+" points "+caster->QP+" hand at "+target->QCN+" and channels a beam of light into them!");
+        if(target->is_undead())
+            set_helpful_spell(0);
+        damage_targ(target, "torso", sdamage,"positive energy");
     }
     dest_effect();
 }

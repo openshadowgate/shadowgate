@@ -8,7 +8,8 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("regeneration");
-    set_spell_level(([ "cleric" : 7, "bard" : 5, "druid" : 9 ]));
+    set_spell_level(([ "cleric" : 7, "bard" : 5, "druid" : 9, "oracle":7 ]));
+    set_mystery("life");
     set_spell_sphere("healing");
     set_syntax("cast CLASS regeneration on TARGET");
     set_description("This spell will cause the target to continuously regenerate a small amount of health over a long "

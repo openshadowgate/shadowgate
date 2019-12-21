@@ -9,7 +9,7 @@
 "elemental":({"guidance", "resist energy", "elemental arua", "elemental body i", "elemental body ii", "elemental body iii", "elemental body iv", "create demiplane", "elemental swarm"}),\
 "whimsy":({"faerie fire", "hideous laughter", "phantom steed", "confusion", "false vision", "eyebite", "project image", "irresistible dance", "weird"}),\
 "heavens":({"color spray", "hypnotic pattern", "daylight", "rainbow pattern", "angelic aspect", "chain lightning", "prismatic spray", "sunburst", "meteor swarm"}),\
-"life":({"mending", "", "", "neutralize poison", "", "heal", "", "mass heal", "resurrection"}),\
+"life":({"mending", "", "remove blindness", "neutralize poison", "breath of life", "heal", "regeneration", "mass heal", "resurrection"}),\
 "bones":({"", "", "", "", "", "", "", "", ""}),\
 ])
 
@@ -24,5 +24,5 @@
 "elemental":({"athletics","stealth","perception"}),\
 "whimsy":({"influence","stealth","perception"}),\
 "heavens":({"academics","influence","perception"}),\
-"heavens":({"healing","survival","endurance"}),\
+"life":({"healing","survival","endurance"}),\
 ])
