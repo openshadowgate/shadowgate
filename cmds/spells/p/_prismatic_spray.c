@@ -13,7 +13,8 @@ void create()
 {
     ::create();
     set_spell_name("prismatic spray");
-    set_spell_level(([ "mage" : 7 ]));
+    set_spell_level(([ "mage" : 7,"oracle":7 ]));
+    set_mystery("heavens");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS prismatic spray on TARGET");
     set_damage_desc("random chance to roll one of 8 rays");

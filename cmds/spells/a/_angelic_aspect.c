@@ -33,7 +33,8 @@ void effect(int direction)
 void create(){
     ::create();
     set_spell_name("angelic aspect");
-    set_spell_level(([ "cleric": 5, "paladin": 3, "mage": 5 ]));
+    set_spell_level(([ "cleric": 5, "paladin": 3, "mage": 5, "oracle":5 ]));
+    set_mystery("heavens");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS angelic aspect");
     set_damage_desc("levitating, AC2, darkvision, 10 DR to Acid and Cold");

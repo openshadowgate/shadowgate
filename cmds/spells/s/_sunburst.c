@@ -9,7 +9,8 @@ void create(){
     ::create();
     set_author("ares");
     set_spell_name("sunburst");
-    set_spell_level(([ "cleric" : 8, "druid" : 8, "mage" : 8 ]));
+    set_spell_level(([ "cleric" : 8, "druid" : 8, "mage" : 8,"oracle":8 ]));
+    set_mystery("heavens");
     set_spell_sphere("invocation_evocation");
     set_spell_domain("sun");
     set_syntax("cast CLASS sunburst");

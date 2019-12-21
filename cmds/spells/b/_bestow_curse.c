@@ -51,7 +51,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    bonus = clevel/8;
+    bonus = clevel/8+1;
     duration = (ROUND_LENGTH * 2) * clevel;
 
     tell_object(target,"%^BLUE%^A mirroring aura starts to grow around you, seeping into your skin to taint it a %^RESET%^"
@@ -60,7 +60,7 @@ void spell_effect(int prof) {
     target->add_damage_bonus((-1)*bonus);
     target->add_attack_bonus((-1)*bonus);
     target->set_property("empowered",(-1)*bonus);
-    for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],(-1)*bonus);
+    for(i=0;i<sizeof(CORE_SKILLS);i++) target->add_skill_bonus(CORE_SKILLS[i],(-1)*bonus);
     target->add_saving_bonus("all",(-1)*bonus);
     target->set_property("spelled", ({TO}) );
     target->set_property("cursed",1);
@@ -78,7 +78,7 @@ void dest_effect() {
         target->add_attack_bonus(bonus);
         target->set_property("empowered",bonus);
         target->remove_property_value("spelled", ({TO}) );
-        for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],bonus);
+        for(i=0;i<sizeof(CORE_SKILLS);i++) target->add_skill_bonus(CORE_SKILLS[i],bonus);
         target->add_saving_bonus("all",bonus);
         target->remove_property("cursed");
     }

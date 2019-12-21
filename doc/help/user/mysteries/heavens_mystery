@@ -2,10 +2,6 @@
 
 The celestial heavens have revealed a divine purpose for you.
 
-%^YELLOW%^Class Skills%^RESET%^:
+%^YELLOW%^Class Skills%^RESET%^: academics, influence, perception
 
-"heavens":({"color spray", "", "", "", "", "", "", "", ""}),\
-"bones":({"", "", "", "", "", "", "", "", ""}),\
-
-
-%^YELLOW%^Bonus Spells%^RESET%^:
+%^YELLOW%^Bonus Spells%^RESET%^: color spray, hypnotic pattern, daylight, rainbow pattern, angelic aspect, chain lightning, prismatic spray, sunburst, meteor swarm

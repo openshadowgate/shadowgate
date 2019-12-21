@@ -19,7 +19,7 @@ void create()
     set_mystery("reaper");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS spectral hand");
-    set_description("An invisible, glowing hand shaped from your life force materializes and moves as you desire, allowing you to deliver touch range spells at a distance. The hand is incorporeal and thus can be only abjured. It can't be seen by anyone, including you.");
+    set_description("This spell will allow the caster to succeed making spell-based touch attack such as chill touch.");
     set_verbal_comp();
     set_somatic_comp();
     set_components(([ "mage" : ([ "drop of blood" : 1, ]), ]));

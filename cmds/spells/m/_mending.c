@@ -6,7 +6,8 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("mending");
-    set_spell_level(([ "bard" : 1,"druid" : 1, "cleric" : 1, "mage" : 1 ]));
+    set_spell_level(([ "bard" : 1,"druid" : 1, "cleric" : 1, "mage" : 1, "oracle" : 1 ]));
+    set_mystery("life");
     set_spell_sphere("alteration");
     set_syntax(
 "cast CLASS mending on OBJECT
@@ -30,30 +31,30 @@ int preSpell() {
    return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     string what, who;
     object ob, ob2;
     int state, myskill, diff, variant;
 
-    	if (sscanf(arg,"%s at %s", what, who) != 2) 
+    	if (sscanf(arg,"%s at %s", what, who) != 2)
 	{
       	what = arg;
         	who = 0;
     	}
 	//tell_object(caster, "what variable = "+what);
 	//tell_object(caster, "who variable = "+identify(who));
-    	if(!who) 
+    	if(!who)
 	{
 		ob = present(what,caster);
 		//tell_object(caster, "Who is equal to 0");
 	}
-    	else 
+    	else
 	{
 		//tell_object(caster, "who variable = "+identify(who));
-      	if((string)caster->realName(who) != "") who = (string)caster->realName(who);   
+      	if((string)caster->realName(who) != "") who = (string)caster->realName(who);
 		//tell_object(caster, "who variable = "+identify(who));
-        	if(!ob2 = present(who, place)) 
+        	if(!ob2 = present(who, place))
 		{
             	tell_object(caster,"That person isn't here.");
             	dest_effect();
@@ -61,20 +62,20 @@ void spell_effect(int prof)
         	}
         	ob = present(what,ob2);
     	}
-    	if (!objectp(ob)) 
+    	if (!objectp(ob))
 	{
       	tell_object(caster,"That object is not present.");
         	dest_effect();
         	return;
     	}
-    	if (!ob->query_property("repairtype") && 
-	!ob->is_instrument() && !ob->is_armor() && !ob->is_weapon()) 
+    	if (!ob->query_property("repairtype") &&
+	!ob->is_instrument() && !ob->is_armor() && !ob->is_weapon())
 	{
       	tell_object(caster,"That item cannot be repaired.");
         	dest_effect();
         	return;
     	}
-    	if (ob->query_property("no repair")) 
+    	if (ob->query_property("no repair"))
 	{
       	tell_object(caster,"That item cannot be repaired.");
         	dest_effect();
@@ -82,14 +83,14 @@ void spell_effect(int prof)
     	}
 
     	state = ob->query_overallStatus();
-    	if (state >= 100) 
+    	if (state >= 100)
 	{
       	tell_object(caster,"That object is not damaged.");
         	dest_effect();
         	return;
     	}
     	spell_successful();
-    	myskill = clevel; // slightly diff DC to "repair cmd"; 
+    	myskill = clevel; // slightly diff DC to "repair cmd";
 				//negated the +10 on DC so using straight clevel against it.
 
     	diff = (int)ob->query_property("enchantment")*3;
@@ -101,8 +102,8 @@ void spell_effect(int prof)
     	//state += variant;
     	//if(state > 100) state = 100;
     	//if(state < 0) state = 0; // don't let them set an item beyond 100% or 0% status.
-	//if you do set_overallStatus() whenever they remove armor 
-	//it is going to remove more AC from them than the item is 
+	//if you do set_overallStatus() whenever they remove armor
+	//it is going to remove more AC from them than the item is
 	//currently giving - Saide
 	//Lets do ob->repairMe(variant)
 	//this just adds the int

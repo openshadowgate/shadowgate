@@ -4,8 +4,9 @@ inherit SPELL;
 create() {
     ::create();
     set_spell_name("neutralize poison");
-    set_spell_level(([ "cleric" : 4, "bard" : 4, "paladin" : 4, "ranger" : 3, "druid" : 3,"inquisitor":4 ]));
-    set_spell_sphere("healing");
+    set_spell_level(([ "cleric" : 4, "bard" : 4, "paladin" : 4, "ranger" : 3, "druid" : 3,"inquisitor":4, "oracle":4 ]));
+    set_mystery("life");
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS neutralize poison on TARGET");
     set_description("This spell will attempt to remove any poisons on the target. The power of "+
 	"the caster has an impact on how successful the attempt will be.");
