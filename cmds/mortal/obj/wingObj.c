@@ -55,7 +55,7 @@ void flystep()
         return;
     }
     if(!objectp(destination))
-        find_object_or_load(destination);
+        load_object(destination);
 
     if(step==0)
         flroom->change_stage("initial climb");
