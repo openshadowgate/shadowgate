@@ -10,7 +10,8 @@ void create() {
     set_spell_level(([ "mage" : 1, "inquisitor" : 1 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS true strike on TARGET");
-    set_description("Gaining insight on future events, caster can grant anyone knowledge of how to exploit it to make a strikes unlikely to miss for the next one round.
+    set_damage_desc("clevel to attack bonus for clevel/12+1 rounds");
+    set_description("Gaining insight on future events, caster can grant anyone knowledge of how to exploit it to make a strikes unlikely to miss for the next few rounds
 
 %^BOLD%^See also:%^RESET%^ true strikes *feats");
     set_verbal_comp();
@@ -33,7 +34,7 @@ void spell_effect(int prof) {
     }
     target->set_property("attack bonus",clevel);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*2,lower);
+    call_out("dest_effect",ROUND_LENGTH*(clevel/12+1),lower);
 }
 
 void dest_effect()

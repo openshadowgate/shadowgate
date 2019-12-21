@@ -4,6 +4,7 @@
 #include <skills.h>
 
 inherit SPELL;
+int bonus;
 
 void create()
 {
@@ -12,7 +13,7 @@ void create()
     set_spell_level(([ "paladin" : 1, "bard" : 1, "druid" : 1, "inquisitor" : 1, "mage" : 1 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS itching curse on TARGET");
-    set_damage_desc("reduced skills, attack bonus, saves by 1 point");
+    set_damage_desc("reduced skills, attack bonus, saves by clevel/18+1 points");
     set_description("You curse someone with itching curse. Annoying! This spell must be evil.");
     set_save("will");
     set_verbal_comp();
@@ -50,10 +51,12 @@ void spell_effect()
     call_out("dest_effect",(clevel+5)*ROUND_LENGTH);
     call_out("itch_itch",ROUND_LENGTH);
 
+    bonus = clevel/18+1;
+
     for(i=0;i<sizeof(CORE_SKILLS);i++)
-        target->add_skill_bonus(CORE_SKILLS[i],-1);
-    target->add_attack_bonus(-1);
-    target->add_saving_bonus("all",-1);
+        target->add_skill_bonus(CORE_SKILLS[i],-bonus);
+    target->add_attack_bonus(-bonus);
+    target->add_saving_bonus("all",-bonus);
 
     target->set_property("spelled", ({TO}) ); //Makes the curse dispellable
     addSpellToCaster();
@@ -83,9 +86,9 @@ void dest_effect()
         target->remove_property("itching_curse");
         target->remove_property_value("spelled", ({TO}) );
         for(i=0;i<sizeof(CORE_SKILLS);i++)
-            target->add_skill_bonus(CORE_SKILLS[i],1);
-        target->add_attack_bonus(1);
-        target->add_saving_bonus("all",1);
+            target->add_skill_bonus(CORE_SKILLS[i],bonus);
+        target->add_attack_bonus(bonus);
+        target->add_saving_bonus("all",bonus);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
