@@ -24,7 +24,7 @@ void create()
     set_limbs(({ "head","torso","right leg","left leg","right arm","left arm","right hand","left hand",}));
     set_attack_functions(([ "right hand" : (:TO,"claw_attack":), "left hand" : (:TO,"claw_attack":)]));
     set_ac_bonus(-6);
-    set_base_attack_num(2);
+    set_base_attack_num(3);
     set_castable(1);
     set_can_talk(1);
     set_shape_race("pixie");

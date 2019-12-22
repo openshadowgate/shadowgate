@@ -112,7 +112,6 @@ void spell_effect(int prof)
 
     shape = caster->query_property("shapeshifted");
     shape->set_clevel(clevel);
-    caster->set_property("dance-of-cuts",1); //Full BAB
     caster->set_property("spelled", ({TO}) );
 
     effect(1);
@@ -124,8 +123,6 @@ void dest_effect()
     object shape;
 	if(objectp(caster))
     {
-        caster->set_property("dance-of-cuts",-1);
-
         if(objectp(shape = caster->query_property("shapeshifted"))) shape->reverse_shape(caster);
         tell_object(caster,"You feel loss and weakness as your body looses infusion of "+elementmap[element]+".");        effect(-1);
 	}

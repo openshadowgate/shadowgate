@@ -54,7 +54,6 @@ void spell_effect(int prof)
     shape = caster->query_property("shapeshifted");
     shape->set_clevel(clevel);
     bonus = clevel/4+1;
-    caster->set_property("dance-of-cuts",1); //Full BAB
     spell_successful();
 
     caster->set_property("spelled", ({TO}) );
@@ -66,7 +65,6 @@ void dest_effect()
     object shape;
 	if(objectp(caster))
     {
-        caster->set_property("dance-of-cuts",-1);
         if(objectp(shape = caster->query_property("shapeshifted"))) shape->reverse_shape(caster);
 	}
     ::dest_effect();

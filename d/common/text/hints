@@ -25,7 +25,7 @@
 %^CYAN%^People die if you kill them.
 %^CYAN%^Please join us on Discord! %^ULINE%^%^GREEN%^https://bit.ly/discord-sg
 %^CYAN%^River ferries for the less walking-inclined connect Shadow and Tabor, and Tharis and Tabor. Docks can be found near their respective cities.
-%^CYAN%^Tabor and Shadow both offer maps of their surrounding areas. Quite helpful for the well-prepared adventurer.
+%^CYAN%^Tabor offers maps of its surrounding areas. Quite helpful for the well-prepared adventurer.
 %^CYAN%^Tabor, Shadow and Verbobone have hired local wizards who will study or identify your gear for a small fee! Find them for more information.
 %^CYAN%^Telepaths are employed by major cities across the realms, should you need to communicate with someone across a distance. Just tell them who you need to speak to, and they will happily oblige - for a fee!
 %^CYAN%^The %^GREEN%^<bonuses> %^RESET%^%^CYAN%^command will show you the things currently affecting your stats and rolls. Give it a try!
@@ -58,6 +58,5 @@
 %^CYAN%^If you don't know where to go or where to hunt, use %^GREEN%^<rumors>%^CYAN%^ command to list areas appropriate to your level.
 %^CYAN%^Use %^GREEN%^<set term ansi-no-black>%^CYAN%^ if you can't see black colors.
 %^CYAN%^You can manipulate your mood with %^GREEN%^<fortune>%^CYAN%^ command.
-%^CYAN%^Everything is hard until you learn.
 %^CYAN%^You will die. A lot. Learn about death in %^GREEN%^<help death>%^CYAN%^.
 %^CYAN%^Using the %^GREEN%^<actions>%^CYAN%^ command is an easy way to see what actions are able to be performed in a room.

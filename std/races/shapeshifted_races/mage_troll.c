@@ -24,7 +24,7 @@ void create()
     set_limbs( ({ "maw","head","maw","right arm", "left arm", "left leg", "right leg", "right claw","left claw" }) );
     set_attack_functions(([ "maw" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":) ]));
     set_ac_bonus(-4);
-    set_base_attack_num(2);
+    set_base_attack_num(3);
     set_castable(1);
     set_can_talk(1);
     set_shape_race("troll");

@@ -24,7 +24,7 @@ void create()
     set_limbs( ({ "head","torso","abdomen","left first leg", "left second leg", "left trid leg","left forth leg","right first leg","right second leg", "right third leg", "right forth leg",}) );
     set_attack_functions(([ "head" : (:TO,"bite_attack":)]));
     set_ac_bonus(-6);
-    set_base_attack_num(2);
+    set_base_attack_num(3);
     set_castable(1);
     set_can_talk(1);
     set_shape_race("spider");

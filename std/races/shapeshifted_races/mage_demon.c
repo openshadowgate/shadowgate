@@ -24,7 +24,7 @@ void create()
     set_limbs( ({ "maw","head","torso","right claw", "left claw", "right arm","right arm","left leg","right leg","tail","right wing","left wing" }) );
     set_attack_functions(([ "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":) ]));
     set_ac_bonus(-6);
-    set_base_attack_num(2);
+    set_base_attack_num(3);
     set_castable(1);
     set_can_talk(1);
     set_shape_race("demon");
