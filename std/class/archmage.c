@@ -6,15 +6,19 @@ inherit DAEMON;
 object base_class_ob(object ob)
 {
     object class_ob;
-    if(!objectp(ob) || !ob->query("base_class"))
+    if(!objectp(ob))
     {
-        if(ob->is_class("sorcerer"))
-           ob->set("base_class","sorcerer");
-        if(ob->is_class("mage"))
-           ob->set("base_class","mage");
         class_ob = find_object_or_load(DIR_CLASSES+"/mage.c");
     }
-    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("base_class")+".c"); }
+    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("base_class")+".c");
+        if(!ob->query("base_class"))
+        {
+            if(ob->is_class("sorcerer"))
+                ob->set("base_class","sorcerer");
+            if(ob->is_class("mage"))
+                ob->set("base_class","mage");
+        }
+    }
     if(!objectp(class_ob)) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
     return class_ob;
 }
