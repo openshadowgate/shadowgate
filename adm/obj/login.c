@@ -176,10 +176,13 @@ void get_password(string str) {
         }
         destruct(__Player);
         __Player = new(OB_USER);
+        str = 0;
         message("logon", "Password: ", this_object());
         input_to("get_password", I_NOECHO | I_NOESC);
         return;
     }
+    str = 0;
+    master()->load_player_from_file(__Name, __Player);
     seteuid(UID_LOG);
     log_file("watch/logon", sprintf("%s from %s at %s\n",__Name,query_ip_number(),ctime(time())));
     seteuid(getuid());
@@ -206,6 +209,7 @@ static private int check_password(string str) {
     master()->load_player_from_file(__Name, __Player);
     if ((pass = (string)__Player->query_password()) != crypt(str, pass)) return 0;
     return valid_site(query_ip_number());
+    __Player->remove();
 }
 
 static private int valid_site(string ip) {
