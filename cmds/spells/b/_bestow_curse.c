@@ -8,6 +8,11 @@ inherit SPELL;
 
 int clevel,bonus,i;
 
+int is_curse()
+{
+    return 1;
+}
+
 void create() {
     ::create();
     set_author("nienne");

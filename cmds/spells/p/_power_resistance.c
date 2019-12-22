@@ -60,6 +60,7 @@ void spell_effect(int prof) {
     }
     lower = clevel / 3;
     target->set_property("spell damage resistance",lower);
+    target->set_property("raised spell damage resistance",1);
     addSpellToCaster();
     spell_successful();
     call_out("dest_effect",80 + clevel*8,lower);
@@ -69,6 +70,7 @@ void dest_effect(){
     if(objectp(target))
     {
         target->set_property("spell damage resistance",(-1*lower));
+        target->remove_property("raised spell damage resistance");
         tell_room(environment(target),"%^GREEN%^A wave of energy suddenly "+
         "rushes out from "+target->QCN+".",target);
         tell_object(target,"%^GREEN%^A wave of power suddenly leaves you!");

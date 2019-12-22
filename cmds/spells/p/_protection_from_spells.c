@@ -31,7 +31,7 @@ string query_cast_string() {
 
 int preSpell()
 {
-    if(target->query_property("raised resitance"))
+    if(target->query_property("raised spell damage resitance"))
     {
         tall_object(caster,"The target is already under the influence of a similar effect.");
         return 0;

@@ -6,6 +6,11 @@
 inherit SPELL;
 int bonus;
 
+int is_curse()
+{
+    return 1;
+}
+
 void create()
 {
     ::create();
