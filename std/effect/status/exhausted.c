@@ -17,6 +17,9 @@ void status_effect()
     int i;
     object * effects;
 
+    if(!objectp(target))
+        return;
+
     if(target->query_property("effect_exhausted"))
         return;
 
