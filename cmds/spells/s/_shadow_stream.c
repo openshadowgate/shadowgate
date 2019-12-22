@@ -22,8 +22,8 @@ void create()
 
 string query_cast_string()
 {
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^You can feel a chill growing in the air as you chant.");
-    tell_room(place,"%^BOLD%^%^MAGENTA%^A chilling aura surrounds "+caster->QCN+" as "+caster->QS+" begins to chant.",caster);
+    tell_object(caster,"%^BOLD%^%^BLACK%^You can feel a chill growing in the air as you chant.");
+    tell_room(place,"%^BOLD%^%^BLACK%^A chilling aura surrounds "+caster->QCN+" as "+caster->QS+" begins to chant.",caster);
     return "display";
 }
 
@@ -39,17 +39,17 @@ void spell_effect(int prof)
 
     if(!sizeof(attackers))
     {
-        tell_object(caster,"%^MAGENTA%^The area is plunged momentarily into darkness, but nothing else happens.");
+        tell_object(caster,"%^BOLD%^%^BLACK%^The area is plunged momentarily into darkness, but nothing else happens.");
         dest_effect();
         return;
     }
 
-    tell_room(place,"%^MAGENTA%^The area is plunged momentarily into utter darkness!%^RESET%^");
+    tell_room(place,"%^BOLD%^%^BLACK%^The area is plunged momentarily into utter darkness!%^RESET%^");
 
     for(i=0;i<sizeof(attackers);i++)
     {
         if(!objectp(attackers[i])) continue;
-        tell_object(attackers[i],"%^BOLD%^%^CYAN%^The darkness burns with an unnatural chill as it passes over and through you!%^RESET%^");
+        tell_object(attackers[i],"%^BOLD%^%^BLACK%^%^The darkness burns with an unnatural chill as it passes over and through you!%^RESET%^");
 
         dam = sdamage;
 

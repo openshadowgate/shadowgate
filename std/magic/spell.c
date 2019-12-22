@@ -1430,8 +1430,8 @@ int query_spell_level(string classtype) {
   if(classtype == "sorcerer") return spell_levels["mage"];
   if(classtype == "oracle")
   {
-
-      return spell_levels["cleric"];
+      if(!spell_levels["oracle"])
+          return spell_levels["cleric"];
   }
   if(!spell_levels[classtype])
       return 0;
@@ -2460,6 +2460,7 @@ object *target_filter(object *targets)
     object *newtargs = ({});
     int i;
     targets -= ({ 0 });
+    targets -= ({caster});
 
     if(!objectp(caster)) { return ({}); }
 

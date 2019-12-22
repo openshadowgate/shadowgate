@@ -9,9 +9,11 @@
 "elemental":({"guidance", "resist energy", "elemental arua", "elemental body i", "elemental body ii", "elemental body iii", "elemental body iv", "create demiplane", "elemental swarm"}),\
 "whimsy":({"faerie fire", "hideous laughter", "phantom steed", "confusion", "false vision", "eyebite", "project image", "irresistible dance", "weird"}),\
 "heavens":({"color spray", "hypnotic pattern", "daylight", "rainbow pattern", "angelic aspect", "chain lightning", "prismatic spray", "sunburst", "meteor swarm"}),\
-"life":({"mending", "", "remove blindness", "neutralize poison", "breath of life", "heal", "regeneration", "mass heal", "resurrection"}),\
-"bones":({"", "", "", "", "", "", "", "", ""}),\
+"life":({"mending", "restiration", "remove blindness", "neutralize poison", "breath of life", "heal", "regeneration", "mass heal", "resurrection"}),\
+"shadow":({"blurred movement", "invisibility", "deeper darkness", "shadow stride", "vampiric shadow shield", "shadow travel", "umbral strike", "greater shadow evocation", "shades"}),\
 ])
+
+//"bones":({"", "", "", "", "", "", "", "", ""}),\
 
 #define MYSTERY_SKILLS  ([\
 "darkness":({"stealth","perception","influence"}),\
@@ -25,4 +27,5 @@
 "whimsy":({"influence","stealth","perception"}),\
 "heavens":({"academics","influence","perception"}),\
 "life":({"healing","survival","endurance"}),\
+"shadow":({"influence","stealth","academics"}),\
 ])

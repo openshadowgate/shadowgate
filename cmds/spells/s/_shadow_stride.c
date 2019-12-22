@@ -9,7 +9,8 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("shadow stride");
-    set_spell_level(([ "innate" : 1, "monk" : 7, "assassin" : 1]));
+    set_spell_level(([ "innate" : 1, "monk" : 7, "assassin" : 1, "oracle" : 4]));
+    set_mystery("shadow");
     set_spell_sphere("alteration");
     set_monk_way("way of the shadow");
     set_syntax("cast CLASS shadow stride on <direction>");

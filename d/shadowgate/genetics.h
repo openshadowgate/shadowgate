@@ -17,8 +17,8 @@
 
 #define MAXPOINTS 56 // 92 total points minus 36 starting points (6 per stat). -N, 10/10.
 
-#define TESTCLASS ({"oracle"})
-#define TESTERS ({"eekclone"})
+#define TESTCLASS ({})
+#define TESTERS ({})
 // stats in order: str, dex, con, int, wis, cha
 #define STATS ({"strength","dexterity","constitution", "intelligence", "wisdom" ,"charisma"})
 
@@ -47,6 +47,7 @@
 #define RECOMMENDED_STATS (["fighter" : (["strength" : 18, "constitution" : 18, "dexterity" : 18, "wisdom" : 13, "intelligence" : 13, "charisma" : 12]),\
                             "mage" : (["strength" : 14, "constitution" : 18, "dexterity" : 14, "wisdom" : 15, "intelligence" : 18, "charisma" : 13]),\
                             "cleric" : (["strength" : 18, "wisdom" : 18, "constitution" : 18, "dexterity" : 12, "intelligence" : 13, "charisma" : 13]),\
+                            "oracle" : (["charisma" : 18, "constitution" : 18, "intelligence" : 14, "dexterity" : 16, "strength" : 14, "wisdom" : 12]),\
                             "psywarrior" : (["intelligence" : 18, "strength" : 18, "constitution" : 18, "dexterity" : 14, "wisdom" : 12, "charisma" : 12]),\
                             "psion" : (["intelligence" : 18, "strength" : 14, "constitution" : 18, "dexterity" : 18, "wisdom" : 12, "charisma" : 12]),\
                             "druid" : (["strength" : 18, "wisdom" : 18, "constitution" : 18, "dexterity" : 12, "intelligence" : 13, "charisma" : 13]),\
