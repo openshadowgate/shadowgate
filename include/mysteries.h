@@ -11,21 +11,25 @@
 "heavens":({"color spray", "hypnotic pattern", "daylight", "rainbow pattern", "angelic aspect", "chain lightning", "prismatic spray", "sunburst", "meteor swarm"}),\
 "life":({"mending", "restiration", "remove blindness", "neutralize poison", "breath of life", "heal", "regeneration", "mass heal", "resurrection"}),\
 "shadow":({"blurred movement", "invisibility", "deeper darkness", "shadow stride", "vampiric shadow shield", "shadow travel", "umbral strike", "greater shadow evocation", "shades"}),\
+"solar":({"faerie fire", "flaming sphere", "daylight", "dimension door", "solar siege shot", "sirocco", "sunbeam", "sunbeam", "hellball"}),\
+"spellscar":({"armor", "resist energy", "dispel magic", "true form", "siphon magic", "globe of invulnerability", "spell turning", "spellscar", "dimensional lock"}),\
 ])
 
 //"bones":({"", "", "", "", "", "", "", "", ""}),\
 
 #define MYSTERY_SKILLS  ([\
+"battle":({"endurance","athletics","perception"}),\
+"bones":({"stealth","influence","dungeoneering"}),\
 "darkness":({"stealth","perception","influence"}),\
 "dragon":({"influence","perception","academics"}),\
-"godclaw":({"influence","perception","rope use"}),\
-"reaper":({"survival","stealth","perception"}),\
-"bones":({"stealth","influence","dungeoneering"}),\
-"battle":({"endurance","athletics","perception"}),\
-"flame":({"athletics","influence","rope use"}),\
 "elemental":({"athletics","stealth","perception"}),\
-"whimsy":({"influence","stealth","perception"}),\
+"flame":({"athletics","influence","rope use"}),\
+"godclaw":({"influence","perception","rope use"}),\
 "heavens":({"academics","influence","perception"}),\
 "life":({"healing","survival","endurance"}),\
+"reaper":({"survival","stealth","perception"}),\
 "shadow":({"influence","stealth","academics"}),\
+"solar":({"survival","academics","perception"}),\
+"whimsy":({"influence","stealth","perception"}),\
+"spellscar":({"academics","perception","survival"}),\
 ])

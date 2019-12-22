@@ -6,7 +6,8 @@ void create()
 {
     ::create();
     set_spell_name("spellscar");
-    set_spell_level(([ "cleric" : 8, "mage" : 8 ]));
+    set_spell_level(([ "cleric" : 8, "mage" : 8, "oracle" : 8 ]));
+    set_mystery("spellscar");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS spellscar");
     set_damage_desc("triggers wild magic in the area");

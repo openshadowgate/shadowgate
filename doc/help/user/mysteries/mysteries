@@ -4,8 +4,8 @@ Each oracle draws upon a divine mystery to grant her spells and powers. This mys
 
 %^CYAN%^%^ULINE%^Mysteries currently available:%^RESET%^
 
- * %^CYAN%^Ancestor
- * %^BOLD%^%^RED%^Apocalypse
+ - %^CYAN%^Ancestor
+ - %^BOLD%^%^RED%^Apocalypse
  * %^BOLD%^%^MAGENTA%^Battle
  * %^WHITE%^Bones
  * %^BOLD%^%^BLACK%^Darkness
@@ -15,18 +15,18 @@ Each oracle draws upon a divine mystery to grant her spells and powers. This mys
  * %^RED%^Godclaw
  * %^BOLD%^%^ORANGE%^Heavens
  * %^BOLD%^%^WHITE%^Life
- * %^BOLD%^%^CYAN%^Lore
- * %^WHITE%^Lunar
- * %^CYAN%^Metal
- * %^GREEN%^Nature
+ - %^BOLD%^%^CYAN%^Lore
+ - %^WHITE%^Lunar
+ - %^CYAN%^Metal
+ - %^GREEN%^Nature
  * %^BLUE%^Reaper
  * %^MAGENTA%^Shadow
  * %^BOLD%^%^ORANGE%^Solar
  * %^BOLD%^%^MAGENTA%^Spellscar
- * %^ORANGE%^Stone
- * %^BOLD%^%^BLUE%^Waves
+ - %^ORANGE%^Stone
+ - %^BOLD%^%^BLUE%^Waves
  * %^MAGENTA%^Whimsy
- * %^CYAN%^Wind
- * %^WHITE%^Winter
+ - %^CYAN%^Wind
+ - %^WHITE%^Winter
 
 %^CYAN%^See also:%^RESET%^ oracle, *mysteries, individual mystery files

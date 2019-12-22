@@ -811,7 +811,7 @@ int cmd_feats(string str){
         for(i=0;i<sizeof(subset);i++) {
           if(member_array(subset[i],MELEECLASSES) != -1) continue; // melee classes get no bonus caster feats!
           if(member_array(subset[i],HYBRID) != -1) continue; // neither do hybrids!
-          if(subset[i] == "psion" || subset[i] == "sorcerer") j = (((int)TP->query_class_level(subset[i]) +4) / 5); // psions/sorcs @ L1 & every 5 levels thereafter
+          if(subset[i] == "psion" || subset[i] == "sorcerer" || subset[i] == "oracle") j = (((int)TP->query_class_level(subset[i]) +4) / 5); // psions/sorcs @ L1 & every 5 levels thereafter
           else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // caster classes @ L21 & every 5 levels thereafter
           if(j < 0) j = 0;
           BONUS_ALLOWED += j;
@@ -1133,7 +1133,7 @@ int cmd_feats(string str){
         for(i=0;i<sizeof(subset);i++) {
           if(member_array(subset[i],MELEECLASSES) != -1) continue; // melee classes get no bonus caster feats!
           if(member_array(subset[i],HYBRID) != -1) continue; // neither do hybrids!
-          if(subset[i] == "psion" || subset[i] == "sorcerer") j = (((int)TP->query_class_level(subset[i]) +4) / 5); // psions/sorcs @ L1 & every 5 levels thereafter
+          if(subset[i] == "psion" || subset[i] == "sorcerer" || subset[i] == "oracle") j = (((int)TP->query_class_level(subset[i]) +4) / 5); // psions/sorcs @ L1 & every 5 levels thereafter
           else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // caster classes @ L21 & every 5 levels thereafter
           if(j < 0) j = 0;
           BONUS_ALLOWED += j;

@@ -15,8 +15,9 @@ void create() {
     set_spell_sphere("illusion");
     set_spell_domain("illusion");
     set_syntax("cast CLASS displacement");
+    set_damage_desc("20% miss chance");
     set_description("Using the power of illusion, the caster calls forth a distortion of her form, making her harder to "
-"target with melee attacks. Unlike blink, this spell will work in armor, but it has reduced potency.");
+"target with melee attacks. It will cause one fifth of attacks to miss. Unlike blink and blurred movement, this spell will work in armor, but it has reduced potency.");
     set_verbal_comp();
     set_somatic_comp();
 	set_helpful_spell(1);

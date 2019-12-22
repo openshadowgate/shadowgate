@@ -10,6 +10,7 @@ void create() {
     set_spell_level(([ "mage" : 3, "bard" : 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS blink");
+    set_damage_desc("35% miss chance");
     set_description("With a snap of the fingers, the mage can start to blink between the prime and ethereal planes. This will give a chance for melee attacks to simply pass right through their form, while it is incorporeal. The chance to miss is thirty five percent.
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ Will only work while wearing no armor.");

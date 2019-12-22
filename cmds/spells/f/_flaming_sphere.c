@@ -18,7 +18,8 @@ void dest_effect();
 void create() {
     ::create();
     set_spell_name("flaming sphere");
-    set_spell_level(([ "druid" : 2]));
+    set_spell_level(([ "druid" : 2, "oracle" : 2]));
+    set_mystery("solar");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS flaming sphere on TARGET");
     set_description("When casting this spell, the druid creates "
@@ -75,14 +76,14 @@ spell_effect(int prof){
     if(pointerp(target->query_attackers())) hits += target->query_attackers();
     hits -= ({caster});
     hits -= ({ target });
-    
+
     hits = target_filter(hits);
 
     size = random(clevel);
 	mod = clevel;
 	if(mod > 10) mod = 10;
 	if(mod < 1) mod = 1;
-    for (i = 0;i < sizeof(hits);i++) 
+    for (i = 0;i < sizeof(hits);i++)
     {
         if(!objectp(hits[i])) { continue; }
         if(random(2)) { continue; }
@@ -106,16 +107,16 @@ void dest_effect() {
 	object *SpellMasterySpells;
 	if(objectp(caster))
 	{
-		if(sizeof(SpellMasterySpells = caster->query_property("spellmastery_spells"))) 
+		if(sizeof(SpellMasterySpells = caster->query_property("spellmastery_spells")))
 		{
 			if(member_array(TO, SpellMasterySpells) != -1)
 			{
 				SpellMasterySpells -= ({TO});
 				caster->remove_property("spellmastery_spells");
-				if(sizeof(SpellMasterySpells)) 
+				if(sizeof(SpellMasterySpells))
 				{
 					caster->set_property("spellmastery_spells",
-					SpellMasterySpells);	
+					SpellMasterySpells);
 				}
 			}
 		}

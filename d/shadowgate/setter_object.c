@@ -1210,6 +1210,8 @@ void build_myclasses()
         if(myclass == "mage" || myclass == "bard") { ETO->set_school(0); }
         if(myclass == "mage" || myclass == "sorcerer" || myclass == "psywarrior" || myclass == "warlock" || myclass == "psion") { ETO->reset_mastered(); }
         if(myclass == "psion") { ETO->set_discipline(0); }
+        if(myclass == "oracle") { ETO->set_mystery(0); }
+        if(myclass == "sorcerer") { ETO->set_bloodline(0); }
         if(myclass == "warlock") { ETO->delete("warlock heritage"); }
         if(myclass == "cleric" ||
            myclass == "paladin" ||

@@ -1,14 +1,16 @@
 #include <std.h>
+#include <magic.h>
 #include <daemons.h>
 inherit SPELL;
 
 void create() {
     ::create();
-    set_spell_name("blink");
+    set_spell_name("blurred movement");
     set_spell_level(([ "mage" : 1, "bard" : 1, "oracle" : 1 ]));
     set_mystery("shadow");
     set_spell_sphere("illusion");
-    set_syntax("cast CLASS blur");
+    set_syntax("cast CLASS blurred movement");
+    set_damage_desc("20% miss chance");
     set_description("You blur your body, making shadow of every move you perform, gaining one fift of a concealment.
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ Will only work while wearing no armor.");

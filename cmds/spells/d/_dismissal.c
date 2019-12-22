@@ -4,7 +4,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("dismissal");
-    set_spell_level(([ "mage" : 5, "cleric" : 4, "inquisitor" : 4, ]));
+    set_spell_level(([ "mage" : 5, "cleric" : 4, "inquisitor" : 4 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS dismissal");
     set_damage_desc("destroys spelled creatures");

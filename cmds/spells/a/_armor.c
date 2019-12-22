@@ -15,7 +15,8 @@ void create()
 {
     ::create();
     set_spell_name("armor");
-    set_spell_level(([ "mage" : 1 ]));
+    set_spell_level(([ "mage" : 1, "oracle" : 1 ]));
+    set_mystery("spellscar");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS armor [on TARGET]");
     set_description("When armor is cast on someone, they will receive an AC bonus of 4. This bonus will only be "

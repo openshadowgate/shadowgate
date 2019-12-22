@@ -9,7 +9,8 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("sirocco");
-    set_spell_level(([ "mage" : 6, "druid" : 6 ]));
+    set_spell_level(([ "mage" : 6, "druid" : 6, "oracle" : 6 ]));
+    set_mystery("solar");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sirocco");
     set_damage_desc("bludgeoning");

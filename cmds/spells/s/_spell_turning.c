@@ -8,7 +8,8 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("spell turning");
-    set_spell_level(([ "mage" : 7 ]));
+    set_spell_level(([ "mage" : 7, "oracle" : 7 ]));
+    set_mystery("spellscar");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS spell turning");
     set_description("The most skilled of abjurationists can use such a spell to raise a protective ward around themselves"

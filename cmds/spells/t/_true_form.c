@@ -11,7 +11,8 @@ void create()
 {
     ::create();
     set_spell_name("true form");
-    set_spell_level(([ "druid" : 4, "mage" : 4 ]));
+    set_spell_level(([ "druid" : 4, "mage" : 4, "oracle" : 4 ]));
+    set_mystery("spellscar");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS true form on TARGET");
     set_damage_desc("reverts alternative shape");

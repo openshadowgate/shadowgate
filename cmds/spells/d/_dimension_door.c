@@ -11,7 +11,8 @@ void create(){
     ::create();
     set_author("nienne");
     set_spell_name("dimension door");
-    set_spell_level(([ "bard" : 4, "psywarrior" : 4, "psion" : 4, "mage" : 4 ]));
+    set_spell_level(([ "bard" : 4, "psywarrior" : 4, "psion" : 4, "mage" : 4, "oracle" : 4 ]));
+    set_mystery("solar");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS dimension door on LOCATION");
     set_description("Through this spell the caster opens a 'door' in the fabric of reality, attuned only to themselves.  "
