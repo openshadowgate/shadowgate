@@ -1,4 +1,4 @@
-#include <std.h>  
+#include <std.h>
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -8,11 +8,12 @@ inherit SPELL;
 int timer,flag,stage,toggle,counter;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("sleet storm");
-    set_spell_level(([ "druid" : 3, "mage" :3 ]));
+    set_spell_level(([ "druid" : 3, "mage" :3,"oracle":3 ]));
+    set_mystery("apocalypse");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sleet storm");
     set_description("The spell sleet storm only works outdoors.  When it is cast, the skies will open up and begin pouring freezing rain on the area.  Within a few moments, howling winds and freezing rain will turn the ground into ice. Movement through the area is difficult and sometimes visibility is obstructed to the point of virtual blindness.");
@@ -25,7 +26,7 @@ void create()
     set_aoe_message("%^BOLD%^%^WHITE%^(besieged by winds and sleet)%^RESET%^");
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     tell_object(caster,"%^BLUE%^You raise your hand to the air and clench your fist.  A peal of thunder sounds as you unclench your fist and the skies "
         "open with freezing rain!");
@@ -38,7 +39,7 @@ void spell_effect(int prof)
 }
 
 
-void execute_attack() 
+void execute_attack()
 {
     object *foes=({}),targ;
     int i;
@@ -49,7 +50,7 @@ void execute_attack()
         flag = 1;
         ::execute_attack();
         return;
-    }    
+    }
 
     if(!objectp(caster) || !objectp(place) || !present(caster,place)|| counter<0)
     {
@@ -75,7 +76,7 @@ void execute_attack()
         else {
           tell_object(targ,"%^BOLD%^%^CYAN%^Unable to hold your balance, you slip on the ice!%^RESET%^");
           tell_room(place,"%^CYAN%^%^BOLD%^Unable to hold balance, "+targ->QCN+" slips on the ice!",({targ}));
-          targ->set_temporary_blinded(1);          
+          targ->set_temporary_blinded(1);
           targ->set_tripped(1,"%^BOLD%^You are struggling to regain your footing!%^RESET%^",4);
           damage_targ(targ,limb,sdamage,"cold");
         }

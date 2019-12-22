@@ -16,7 +16,7 @@ void create()
     ::create();
     set_spell_name("fire storm");
     set_spell_level(([ "cleric" : 7, "druid" : 7, "monk" : 17, "oracle" : 7 ]));
-    set_mystery("flame");
+    set_mystery(({"flame","apocalypse"}));
     set_spell_sphere("invocation_evocation");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS fire storm");

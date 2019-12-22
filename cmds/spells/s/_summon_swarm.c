@@ -9,7 +9,8 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("summon swarm");
-    set_spell_level(([ "mage" : 1, "bard" : 1,"druid" : 2 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 1,"druid" : 2, "oracle" : 1 ]));
+    set_mystery("apocalypse");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS summon swarm");
     set_description("This spell will call a swarm of insects to the caster's defense. They can be difficult to control, and if many foes are attacking the caster they will simply leap for the closest target, biting and pinching without hesitation.");

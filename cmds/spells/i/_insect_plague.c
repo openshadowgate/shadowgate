@@ -18,7 +18,8 @@ int num;
 create() {
     ::create();
     set_spell_name("insect plague");
-    set_spell_level(([ "cleric" : 5,"druid" : 5 ]));
+    set_spell_level(([ "cleric" : 5,"druid" : 5, "oracle":5 ]));
+    set_mystery("apocalypse");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS insect plague");
     set_description("This spell of a conjuration/summoning nature calls forth all the stinging, flying, crawling, "

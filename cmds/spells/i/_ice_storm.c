@@ -13,7 +13,8 @@ string target_limb, element;
 void create() {
     ::create();
     set_spell_name("ice storm");
-    set_spell_level(([ "mage" : 4, "druid" : 4 ]));
+    set_spell_level(([ "mage" : 4, "druid" : 4, "oracle" : 4 ]));
+    set_mystery("apocalypse");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS ice storm");
     set_description("When the ice storm spell is cast, the mage summons storm clouds above that rain hail and ice down "

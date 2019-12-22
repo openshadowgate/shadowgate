@@ -5,7 +5,7 @@ Each oracle draws upon a divine mystery to grant her spells and powers. This mys
 %^CYAN%^%^ULINE%^Mysteries currently available:%^RESET%^
 
  - %^CYAN%^Ancestor
- - %^BOLD%^%^RED%^Apocalypse
+ * %^BOLD%^%^RED%^Apocalypse
  * %^BOLD%^%^MAGENTA%^Battle
  * %^WHITE%^Bones
  * %^BOLD%^%^BLACK%^Darkness

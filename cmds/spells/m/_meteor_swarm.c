@@ -13,7 +13,7 @@ void create()
     ::create();
     set_spell_name("meteor swarm");
     set_spell_level(([ "mage" : 9, "oracle":9 ]));
-    set_mystery("heavens");
+    set_mystery(({"heavens","apocalypse"}));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS meteor swarm on TARGET");
     set_damage_desc("half bludgeoning, half fire or versatile arcanist");

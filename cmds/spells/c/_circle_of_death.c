@@ -11,7 +11,7 @@ void create()
     set_spell_name("circle of death");
     set_spell_level(([ "mage" : 6, "cleric" : 6, "inquisitor":6, "oracle":6 ]));
     set_spell_sphere("necromancy");
-    set_mystery("bones");
+    set_mystery(({"bones","apocalypse"}));
     set_syntax("cast CLASS circle of death");
     set_damage_desc("negative energy to living");
     set_description("The caster draws a circle around herself and channels negative energy outwards, destroying living creatures that are not able to withstand it, but not affecting at all those of the strong will.");
