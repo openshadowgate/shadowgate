@@ -24,7 +24,7 @@ void create()
     set_limbs( ({ "head","torso","right hand", "left hand", "right arm","right arm","left leg","right leg",}) );
     set_attack_functions(([ "right hand" : (:TO,"hand_attack":), "left hand" : (:TO,"hand_attack":) ]));
     set_ac_bonus(-6);
-    set_base_attack_num(3);
+    set_base_attack_num(4);
     set_castable(1);
     set_can_talk(1);
     set_shape_race("golem");

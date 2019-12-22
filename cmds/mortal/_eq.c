@@ -34,8 +34,8 @@ int cmd_eq()
 
     if(stuff != "")
     {
-        stuff = "   %^BOLD%^%^GREEN%^"+stuff;
-        stuff = replace_string(stuff,",","\n  %^GREEN%^%^BOLD%^");
+        stuff = "   "+stuff;
+        stuff = replace_string(stuff,",","\n  ");
         stuff = replace_string(stuff," are here.","");
         stuff = replace_string(stuff," is here.","");
     }
