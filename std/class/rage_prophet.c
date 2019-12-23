@@ -55,7 +55,7 @@ int set_base_class(object obj, string choice)
     classes = obj->query_classes();
     if(!sizeof(classes)) { return 0; }
     if(member_array(choice,classes) == -1) { return 0; }
-    if(member_array(choice,({"cleric","druid","inquisitor","paladin","ranger"})) == -1) { return 0; }
+    if(member_array(choice,({"cleric","druid","inquisitor","paladin","ranger","oracle"})) == -1) { return 0; }
     obj->set("rage_prophet_base_class",choice);
     return 1;
 }

@@ -21,7 +21,7 @@ object base_class_ob(object ob)
 
 string *query_base_classes(object obj)
 {
-    return ({"druid","cleric"});
+    return ({"druid","cleric","oracle"});
 }
 
 int has_base_class_set(object obj)
