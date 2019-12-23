@@ -36,7 +36,12 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1: ({ "light armor proficiency", "mediumd armor proficiency", "simple weapon proficiency", "shield proficiency", "spell focus" }), 5 : ({ "indomitable" }), 10: ({ "force of personality" }), 11: ({ "second divine domain" }), 15: ({ "leadership" }), ]);
+    return ([
+        1: ({ "light armor proficiency", "medium armor proficiency", "simple weapon proficiency", "shield proficiency", "spell focus" }),
+        5 : ({ "indomitable" }),
+        10: ({ "force of personality" }),
+        15: ({ "leadership" }),
+    ]);
 }
 
 string *class_skills()
@@ -46,7 +51,13 @@ string *class_skills()
 
 string *mystery_skills(string mymystery)
 {
-    return class_skills()+MYSTERY_SKILLS[mymystery];
+    string *mySkills;
+    mySkills = class_skills();
+
+    if(mymystery && member_array((string) mymystery, keys(MYSTERY_SKILLS)))
+        mySkills += MYSTERY_SKILLS[mymystery];
+
+    return mySkills;
 }
 
 int skill_points() { return 4; }

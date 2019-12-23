@@ -14,6 +14,7 @@
 #include <objects.h>
 #include <psions.h>
 #include <bloodlines.h>
+#include <mysteries.h>
 #include "/d/shadowgate/genetics.h"
 
 #define MAX_TEST_LEVEL 60
@@ -549,6 +550,41 @@ int pick_sorc_bloodline(string str,object ob) {
     return 1;
 }
 
+int pick_oracle_mystery(string str,object ob) {
+    string *mysteries, mystery, mymessage;
+    int i;
+
+    if(!objectp(ob)) return 0;
+    if(!ob->is_class("oracle")) return 0;
+    if(ob->query_mystery()) return 0;
+
+    if(str=="abort")
+        return 1;
+
+    if(member_array(str,keys(MYSTERY_SKILLS))!=-1)
+    {
+        mystery = str;
+    }
+    else
+    {
+        tell_object(ob,"  %^YELLOW%^Mysteries");
+        mymessage = "";
+        foreach(mystery in keys(MYSTERY_SKILLS))
+        {
+            mymessage+="  "+mystery+"\n";
+        }
+
+        tell_object(ob,mymessage);
+        tell_object(ob,"%^BOLD%^Enter your mystery.");
+        tell_object(ob,"%^RED%^Type <abort> to exit if you need to look at help files before making your choice.");
+        input_to("pick_oracle_mystery",ob);
+        return 1;
+    }
+
+    ob->set_mystery(mystery);
+    tell_object(ob,"%^CYAN%^You have chosen for you mystery to be "+capitalize(mystery)+".");
+    return 1;
+}
 
 int initiate_psychic_powers(object ob){
    int psylvl, mymax, newmax;
@@ -643,6 +679,7 @@ int cmd_advance(string myclass){
        pick_fighter_style("",TP);
        pick_warlock_heritage("",TP);
        pick_sorc_bloodline("",TP);
+       pick_oracle_mystery("",TP);
        pick_human_subrace("",TP);
        return 1;
    }
