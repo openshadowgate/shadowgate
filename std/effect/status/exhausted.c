@@ -32,14 +32,15 @@ void status_effect()
     {
         object effect;
 
-        foreach(effect in effect)
-        {
-            if(!objectp(effect))
-                continue;
+        if(sizeof(effects))
+            foreach(effect in effects)
+            {
+                if(!objectp(effect))
+                    continue;
 
-            if(effect->query_name() == "effect_fatigued")
-                effect->dest_effect();
-        }
+                if(effect->query_name() == "effect_fatigued")
+                    effect->dest_effect();
+            }
     }
 
     target->set_property("effect_exhausted",1);
