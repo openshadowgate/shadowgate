@@ -19,6 +19,7 @@ void place_board()
     obj->set_max_posts(400);
 	obj->set_location("/d/common/boards/bugsboard.c");
     obj->set_ooc_board(1);
+    obj->set_anonymous_board(1);
     obj->set_restricted_write();
   }
 }

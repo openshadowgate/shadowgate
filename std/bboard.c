@@ -224,9 +224,10 @@ int read_message(string str) {
     }
     write("%^GREEN%^Message "+number+":%^RESET%^");
 
-    if(query_ooc_board()&&!query_anonymous_board())
+    if(query_ooc_board())
     {
-        write("%^GREEN%^From: "+msg["owner"]);
+        if(!query_anonymous_board())
+            write("%^GREEN%^From: "+msg["owner"]);
         write("%^GREEN%^Date: "+ctime(msg["date"]));
     }
 

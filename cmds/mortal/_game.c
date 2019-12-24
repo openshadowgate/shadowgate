@@ -168,8 +168,7 @@ report(string *lines)
     {
         message += lines[x]+"\n";
     }
-    message = message + "\nReported by:  "+identify(TP)+"\nfrom location "
-    +base_name(ETP)+"\non "+ctime(time())+" related to %^BOLD%^"
+    message = message + "\nReported from location "+base_name(ETP)+"\non "+ctime(time())+" related to %^BOLD%^"
     +file+"%^RESET%^.\n\n";
     //  title = file;
     if (strlen(title) > 30)

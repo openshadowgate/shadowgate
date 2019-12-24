@@ -218,7 +218,7 @@ string format_board_message(mapping post,int index,int readby)
     str = "";
     str +=((readby==-1?"%^WHITE%^{":"%^GREEN%^[")+"%^BOLD%^"+(index+1>9 ?(index+1): " "+(index+1))+"%^RESET%^"+(readby==-1?"%^WHITE%^}":"%^GREEN%^]"));
     itime = post["date"];
-    if(PO->query_ooc_board()||avatarp(TP))
+    if((PO->query_ooc_board()&&!PO->query_anonymous_board())||wizardp(TP))
         str += "%^BOLD%^%^GREEN%^"+arrange_string(capitalize(post["owner"]),10)+"%^RESET%^%^BLUE%^|%^ORANGE%^";
     str += arrange_string(post["title"],scrwidth-42) +"%^RESET%^%^BLUE%^|%^RESET%^%^GREEN%^";
     if(PO->query_ooc_board())
