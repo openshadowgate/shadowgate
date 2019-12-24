@@ -123,7 +123,7 @@ Previous block power
     blocker->set_block_power(power);
 //new block power by ~Circe~ to match scry power and add a
 //touch of randomness
-    duration = 9 * (int)CLEVEL;
+    duration = 6 * (int)CLEVEL * ROUND_LENGTH;
     addSpellToCaster();
     call_out("dest_effect", duration);
     return;

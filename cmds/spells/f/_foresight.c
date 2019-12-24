@@ -41,7 +41,7 @@ int preSpell()
 void spell_effect(int prof)
 {
 
-    duration = HOUR/2;
+    duration = HOUR;
     abonus = 1 + (clevel / 16);
     rbonus = 1 + (clevel / 12);
 

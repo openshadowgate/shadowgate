@@ -149,7 +149,7 @@ void spell_effect(int prof)
     int_bonus = int_bonus-8; //bonus of +2 because this is much higher level than other scry blocks, including the other one for psywarriors
     power = mylevel + int_bonus + random(6);
     blocker->set_block_power(power);
-    duration = 9 * mylevel;
+    duration = 5 * mylevel * ROUND_LENGTH;
     spell_successful();
     call_out("dest_effect", duration);
     return;
