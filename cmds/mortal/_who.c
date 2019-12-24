@@ -96,6 +96,11 @@ string list_users(string *races, object tp)
                 if (ctime(time())[4..9]=="Nov 28") rabbit="turkey";
                 if (ctime(time())[4..9]=="May  1") rabbit="%^RED%^commie";
                 if (ctime(time())[4..9]=="Oct 31") rabbit="%^ORANGE%^pumpkin";
+                if (ctime(time())[4..9]=="Dec 25") rabbit="%^BOLD%^%^GREEN%^elf";
+                if (ctime(time())[4..9]=="Jan  1") rabbit="%^ORANGE%^rat"; //2020 edition
+                if (ctime(time())[4..9]=="Jan  6") rabbit="%^BOLD%^%^GREEN%^elf";
+                if (ctime(time())[4..9]=="Jan  7") rabbit="%^BOLD%^%^GREEN%^elf";
+                if (ctime(time())[4..9]=="Jan 14") rabbit="%^BOLD%^wolf";
                 tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
             }
             length = atoi(TP->getenv("SCREEN"))-32;
