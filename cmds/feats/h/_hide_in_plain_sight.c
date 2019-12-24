@@ -1,5 +1,6 @@
 #include <std.h>
 #include <daemons.h>
+#include <magic.h>
 inherit FEAT;
 
 int help();
@@ -32,6 +33,12 @@ int cmd_hide_in_plain_sight(string str) {
     object * attackers, attacker;
     if(!objectp(TP))
         return;
+    if(TP->query_property("hide in plain sight")+ROUND_LENGTH >time())
+    {
+        tell_object(TP,"Hide in plain sight only once per round.");
+        dest_effect();
+        return;
+    }
     TP->set_hidden(1);
     attackers = TP->query_attackers();
     attackers->remove_attacker(TP);
@@ -43,6 +50,8 @@ int cmd_hide_in_plain_sight(string str) {
     obj = new("/cmds/mortal/hide.c");
     obj->set_player(TP);
     obj->move(TP);
+    TP->set_property("hide in plain sight",time())
+    dest_effect();
     return 1;
 }
 
