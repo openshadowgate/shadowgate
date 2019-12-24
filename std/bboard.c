@@ -29,6 +29,7 @@ int max_posts;
 string location, board_id;
 string *edit_ok;
 int ooc_board;
+int anonymous_board;
 mapping title;
 string *allowed;
 int restricted_read, restricted_post, queue;
@@ -222,7 +223,8 @@ int read_message(string str) {
         return 0;
     }
     write("%^GREEN%^Message "+number+":%^RESET%^");
-    if(query_ooc_board())
+
+    if(query_ooc_board()&&!query_anonymous_board())
     {
         write("%^GREEN%^From: "+msg["owner"]);
         write("%^GREEN%^Date: "+ctime(msg["date"]));
@@ -346,6 +348,18 @@ void set_ooc_board(int x){
 }
 
 int query_ooc_board(){ return ooc_board;}
+
+/**
+ * Anonymous boards don't display message author name even if they are ooc boards
+ */
+void set_anonymous_board(int x)
+{
+    anonymous_board = x;
+}
+int query_anonymous_board()
+{
+    return anonymous_board;
+}
 //changing this to int clean_up() as it is in move.c
 //see if it will stop the occassional bug where it doesnt
 //find function postit after you've typed your message - Saide - Oct 2008
