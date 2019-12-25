@@ -10,7 +10,7 @@ void create() {
     set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor": 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS tongues on TARGET");
-    set_description("This will give the target the ability to understand, both read and write any mortal language. This should not change the ability to teach the language.");
+    set_description("This will give the target the ability to understand, any mortal language. You will be able to speak the way you'll be understood by any being. This will not alter you knowledge and won't allow you to teach or write in languages you don't know.");
     set_verbal_comp();
 	set_helpful_spell(1);
     set_target_required(1);
