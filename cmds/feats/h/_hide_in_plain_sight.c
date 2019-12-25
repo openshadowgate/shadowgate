@@ -50,7 +50,7 @@ int cmd_hide_in_plain_sight(string str) {
     obj = new("/cmds/mortal/hide.c");
     obj->set_player(TP);
     obj->move(TP);
-    TP->set_property("hide in plain sight",time())
+    TP->set_property("hide in plain sight",time());
     dest_effect();
     return 1;
 }
