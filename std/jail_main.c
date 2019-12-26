@@ -8,7 +8,7 @@
 /* ****** notes to be zapped later when finished **************
 >> move the wanted list from the Shadow guard file and Tonovi to SAVE_D ? <<<<<
 >> let them collect fines too?
->> need to check the remove name function for jailers that are & aren't hms 
+>> need to check the remove name function for jailers that are & aren't hms
 
 recognize by number
 add aliases by number
@@ -26,11 +26,11 @@ list wanted gets a message of no bounties in that location, don't need ?
 #include <std.h>
 #include <daemons.h>
 
-#define MAXBOUNTY 500000
+#define MAXBOUNTY 50000000
 
 inherit VAULT;
 
-void set_jail_location(string loc);  	// generally city 
+void set_jail_location(string loc);  	// generally city
 void set_cell(string filename);		// for the cell file
 
 int __DoJail(string str);
@@ -54,7 +54,7 @@ void create(){
    set_property("no phase",1);  // to keep the psion phase from letting them bypass the door
    set_indoors(1);
    set_property("no sticks",1);
-   set_name("Inheritable jail"); 
+   set_name("Inheritable jail");
    set_short("The inheritable jail office");
    set_long("This is the inherit for the jail system - no one should be in here." );
    set_listen("default","You can hear rats scurrying around and prisoners shuffling about.");
@@ -85,7 +85,7 @@ int query_cell() {  return CellFile; }
 
 int __DoJail(string str) {
    int i, count;
-   string *jailers, who;  
+   string *jailers, who;
    object jailwho, jailer;
    object *here = ({});
    if(!str) return notify_fail("Jail whom?\n");
@@ -105,7 +105,7 @@ int __DoJail(string str) {
         for(i=0; i<count; i++) {
 	  if(!living(here[i]))
 	    continue;
-	  if(here[i]->query_true_invis())	
+	  if(here[i]->query_true_invis())
 	    continue;
 	  if(member_array(here[i]->query_name(), jailers) != -1) {
 	    jailer = here[i];
@@ -133,7 +133,7 @@ int __ToCell(object jailwho, object jailby, string alias) {
    jailwho->set("jailed_age",(int)jailwho->query_age());
    jailwho->set("jailed_time", time());
    if(jailby->is_player()) {
-	AREALISTS_D->add_prisoner(alias,JailLoc,jailby); 
+	AREALISTS_D->add_prisoner(alias,JailLoc,jailby);
    } else {
 	AREALISTS_D->add_prisoner(jailwho,JailLoc,jailby);
    }
@@ -188,7 +188,7 @@ int __PayFine(string str) {
    if(!fine = AREALISTS_D->query_fine_amount(TP, JailLoc, TO))
       return notify_fail("You apparently do not have a fine here.\n");
    if(fine < 0)
-      return notify_fail("The fine seems to be negative, please contact a wiz.\n");	
+      return notify_fail("The fine seems to be negative, please contact a wiz.\n");
    if((int)TP->query_gold_equiv() < fine) {
       write("You need "+fine+" gold to pay your fine.");
       tell_room(TO, TPQCN+" seems to be fishing through "+TPQP+" pockets for "
@@ -212,9 +212,9 @@ int __PayFine(string str) {
 int __Pardon(string str) {
    string *jailers, *wanted;
    jailers = AREALISTS_D->query_jailer_names(JailLoc);
-   if(!avatarp(TP) && member_array(TPQN,jailers) == -1)    
+   if(!avatarp(TP) && member_array(TPQN,jailers) == -1)
 	return notify_fail("Sorry but you apparently aren't authorized.\n");
-   if(!str)  
+   if(!str)
 	return notify_fail("Pardon who?\n");
    str = lower_case(str);
    AREALISTS_D->remove_wanted(str, JailLoc, TP);
@@ -229,9 +229,9 @@ int __RemoveName(string str) {
    jailers = AREALISTS_D->query_jailer_names(JailLoc);
    syntax_msg = "Please try <list remove [name] from [jailers|prisoners"
 	"|wanted|bounties|fines|banned] >";
-   if(!avatarp(TP) && member_array(TPQN,jailers) == -1)    
+   if(!avatarp(TP) && member_array(TPQN,jailers) == -1)
 	return notify_fail("Sorry but you apparently aren't authorized.\n");
-   if(!str) 
+   if(!str)
       return notify_fail("Please specify a name to remove.\n");
    str = lower_case(str);
    if(sscanf(str, "%s from %s", name, list) != 2) {
@@ -295,7 +295,7 @@ int __RemoveName(string str) {
       default:
 	write(syntax_msg);
    }
-   return 1;	
+   return 1;
 }
 
 int check_released(object who, string where, object here) {
@@ -318,12 +318,12 @@ int __AddName(string str) {
 	"    < add [fine|bounty] of [amount] for [name] >,\n"
 	"or  < add alias of [aliasname] for [prisoner|wanted|jailers|banned] [name] >\n";
    jailers = AREALISTS_D->query_jailer_names(JailLoc);
-   if(!str)  
+   if(!str)
       return notify_fail(syntax_msg);
 
-   if(sscanf(str, "%s to %s", name, which) != 2  && 
+   if(sscanf(str, "%s to %s", name, which) != 2  &&
      sscanf(str, "%s of %d for %s", which, amount, name) != 3 &&
-     sscanf(str, "alias of %s for %s %s", newalias, type, name) != 3 ) 
+     sscanf(str, "alias of %s for %s %s", newalias, type, name) != 3 )
         return notify_fail(syntax_msg);
 
    name = lower_case(name);
@@ -353,7 +353,7 @@ int __AddName(string str) {
 	    +capitalize(name)+" on "+ctime(time())+".\n");
 	break;
       case "jailers" :
-        if(AREALISTS_D->is_jailer(name, JailLoc, TP)) 
+        if(AREALISTS_D->is_jailer(name, JailLoc, TP))
           return notify_fail("You don't need to add them, they were "
 		"already authorized.\n");
         AREALISTS_D->add_jailer(name, JailLoc, TP);
@@ -386,9 +386,9 @@ int __AddName(string str) {
       case "bounty":
         currBounty = AREALISTS_D->query_bounty_amount(name,JailLoc,TO);
         if(amount < 0)
-      	   return notify_fail("The amount must be positive.\n");	
+      	   return notify_fail("The amount must be positive.\n");
  	if((amount + currBounty) > MAXBOUNTY)
-	   return notify_fail("Please limit bounties to "+MAXBOUNTY+".\n");	   
+	   return notify_fail("Please limit bounties to "+MAXBOUNTY+".\n");
 	if(!avatarp(TP)) {
           if((int)TP->query_gold_equiv() < amount)
 		return notify_fail("You need "+amount+" gold to put up for the bounty.\n");
@@ -414,13 +414,13 @@ int __AddName(string str) {
      default : write(syntax_msg);
    }
    return 1;
-}   
+}
 
 int __DoLists(string str) {
    int i,j, num, count, amount;
    string *jailers, *lnames, *akalist, displaylist, lookslike, remove;
    mapping fines;
-   if(!str) 
+   if(!str)
 	return __Help("jail");
    if(sscanf(str, "remove %s", remove) != 0) {
 	__RemoveName(remove);
@@ -450,7 +450,7 @@ int __DoLists(string str) {
 		    +capitalize(lnames[i])+"\n";
 	   lookslike = AREALISTS_D->query_prisoner_adjective(lnames[i], JailLoc, TO);
 	   displaylist += "     %^YELLOW%^Described as:  %^RESET%^"+lookslike+"\n\n";
-        if  (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise. 
+        if  (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise.
               write(displaylist);
               displaylist="";
           }
@@ -482,7 +482,7 @@ int __DoLists(string str) {
 		    +capitalize(lnames[i])+"\n";
 	   lookslike = AREALISTS_D->query_jailer_adjective(lnames[i], JailLoc, TO);
 	   displaylist += "     %^YELLOW%^Described as:  %^RESET%^"+lookslike+"\n\n";
-         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise. 
+         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise.
               write(displaylist);
               displaylist="";
           }
@@ -491,7 +491,7 @@ int __DoLists(string str) {
 	break;
      case "wanted":
         displaylist = "%^BOLD%^%^BLUE%^Names known as and brief description\n"
-		      "%^BOLD%^%^BLUE%^------------------------------------\n";	
+		      "%^BOLD%^%^BLUE%^------------------------------------\n";
 	if(!sizeof(lnames = AREALISTS_D->query_wanted_names(JailLoc)))
 	   return notify_fail("There is currently no wanted list for "+JailLoc+"\n");
 	write("%^BOLD%^The following wanted for crimes or questioning by "+JailLoc+
@@ -514,7 +514,7 @@ int __DoLists(string str) {
 	   if(amount = AREALISTS_D->query_bounty_amount(lnames[i],JailLoc,TO))
 		displaylist += sprintf("%%^BOLD%%^%%^MAGENTA%%^%-15s %%^YELLOW%%^%10d",
 	   	   "          Bounty:  ", amount )+" gold\n";
-         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise. 
+         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise.
               write(displaylist);
               displaylist="";
           }
@@ -529,7 +529,7 @@ int __DoLists(string str) {
 	displaylist = ("%^BOLD%^The following fines have been levied by "+JailLoc+
 		" officials.\n");
         displaylist += ("%^BOLD%^%^BLUE%^Names known as and fine amount\n"
-	                "%^BOLD%^%^BLUE%^------------------------------\n");	
+	                "%^BOLD%^%^BLUE%^------------------------------\n");
 	count = sizeof(lnames);
      	for(i=0; i<count; i++) {
 	   akalist = AREALISTS_D->query_fine_aliases(lnames[i], JailLoc, TO);
@@ -548,7 +548,7 @@ int __DoLists(string str) {
 	   if(amount = AREALISTS_D->query_fine_amount(lnames[i], JailLoc, TO))
 		displaylist += sprintf("%%^BOLD%%^%%^MAGENTA%%^%-15s %%^YELLOW%%^%10d",
 	   	   "          Fine:  ", amount )+" gold\n";
-         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise. 
+         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise.
               write(displaylist);
               displaylist="";
           }
@@ -577,7 +577,7 @@ int __DoLists(string str) {
 		    +capitalize(lnames[i])+"\n";
 	   lookslike = AREALISTS_D->query_banned_adjective(lnames[i], JailLoc, TO);
 	   displaylist += "     %^YELLOW%^Described as:  %^RESET%^"+lookslike+"\n\n";
-         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise. 
+         if (i % 5 == 0) { // Print out every 5 regardless... Buffer overflows otherwise.
               write(displaylist);
               displaylist="";
           }
@@ -611,10 +611,10 @@ int __Clean(string str) {
 	AREALISTS_D->clean_banned();		break;
      case "all" :
 	write("Note:  this may cause noticeable lag!");
-	AREALISTS_D->clean_criminals();		
+	AREALISTS_D->clean_criminals();
 	break;
    }
-   return 1;	
+   return 1;
 }
 
 int __AddLoc(string str) {
@@ -643,7 +643,7 @@ int __Help(string str) {
 	"checking in, taunting, or whatever is appropriate RP for your "
 	"character.\n  You also need to mud mail the listed officials with the "
 	"IC reason you would have given the guard or them when you turned the "
-	"person over to be jailed.\n" 
+	"person over to be jailed.\n"
      );
      if(avatarp(TP) || AREALISTS_D->is_jailer(TP, JailLoc, TO )) {
        write("%^BOLD%^Officials and immortals only:%^RESET%^%^CYAN%^\n"
