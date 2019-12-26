@@ -425,8 +425,8 @@ int can_gain_bonus_feat(object ob,string feat)
     for(i=0;i<sizeof(myclasses);i++) {
       if(member_array(myclasses[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
-      if(myclasses[i] == "fighter")
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2);
+      if(myclasses[i] == "fighter" )
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);  //          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2);
       else if(myclasses[i] == "paladin")
           currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
       else
@@ -525,14 +525,15 @@ int add_my_feat(object ob,string type,string feat)
           if(member_array(subset[i],MELEECLASSES) == -1) num += ob->query_class_level(subset[i]);
           else {
             if(subset[i] != "fighter" && subset[i] != "paladin") {
-              if(ob->query_class_level(subset[i]) > 20) num += 20;
-              else num += ob->query_class_level(subset[i]);
+              if(ob->query_class_level(subset[i]) > 20)
+                  num += 20;
+              else
+                  num += ob->query_class_level(subset[i]);
             }
           }
         }
-        num_feats = (((int)ob->query_bonus_feats_gained()+1)*5);
-        num += num_feats;
-        num -= 4; // to move feats back to 1/6/11/16/21/etc
+        num_feats = (((int)ob->query_bonus_feats_gained())*5);
+        num += num_feats +1;
 
         if(gain_feat(ob,type,feat,num))
         {
