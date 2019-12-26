@@ -2726,6 +2726,10 @@ varargs int mind_immunity_check(object obj, string type)
     return 0;
 }
 
+
+/**
+ * Causes standard damage if target succeded immunity check.
+ */
 int mind_immunity_damage(object obj)
 {
     if(mind_immunity_check(obj))

@@ -39,8 +39,7 @@ void spell_effect(int prof)
     {
         if(!foe->is_undead())
             continue;
-        if(do_save(foe,6) ||
-           foe->query_property("no death"))
+        if(do_save(foe,6))
         {
             tell_object(foe,"%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
             continue;

@@ -23,9 +23,8 @@ varargs void do_save(object ob, int dc, string type, raw_save)
 
     classes = (string)ob->query_classes();
     save = 0;
-    //tell_object(find_player("saide"), "ob = "+identify(ob) +", dc = "+dc+", type = "+type);
     for(i=0;i<sizeof(classes);i++) {
-        // for each class... step 1: get base saves up to L20 from the class file
+
         file = DIR_CLASSES+"/"+classes[i]+".c";
         if(!file_exists(file)) continue;
 
@@ -35,8 +34,10 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         if(!sizeof(saves)) continue;
 
         // starting saving throw from class template; if 1 it is a strong throw (2+ level/2), if 0 it is weak (level/3)
-        if(saves[num]) save += (2 + (level/2));
-        else save += (level/3);
+        if(saves[num])
+            save += (2 + (level/2));
+        else
+            save += (level/3);
 
         // step 2: get any extra points from levels past 20, if applicable
         level = ob->query_class_level(classes[i]);
@@ -46,6 +47,9 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         /* level -= 20; */
         /* save += level/2; */
     }
+    if(ob->is_undead() && num==2)
+        save = (2 + (ob->query_level()/2));
+
     save_info["base_class_save"] = save; // this is without any modifiers
     switch(type) {
       case "fort": case "fortitude":  statbonus = (int)ob->query_stats("constitution"); break;
@@ -66,15 +70,15 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     switch(type) {
       case "fort": case "fortitude":
         mod = (int)ob->query_saving_bonus("fortitude");
-        if((string)ob->query_race() == "human" && (string)ob->query("subrace") == "aesatri") mod += 1; // aesatri racial +1 to fort saves
+        if((string)ob->query_race() == "human" && (string)ob->query("subrace") == "aesatri") mod += 1;
       break;
       case "reflex":
         mod = (int)ob->query_saving_bonus("reflex");
-        if((string)ob->query_race() == "human" && (string)ob->query("subrace") == "senzokuan") mod += 1; // senzokuan racial +1 to reflex saves
+        if((string)ob->query_race() == "human" && (string)ob->query("subrace") == "senzokuan") mod += 1;
       break;
       case "will":
         mod = (int)ob->query_saving_bonus("will");
-        if((string)ob->query_race() == "human" && (string)ob->query("subrace") == "maalish") mod += 1; // maalish racial +1 to will saves
+        if((string)ob->query_race() == "human" && (string)ob->query("subrace") == "maalish") mod += 1;
       break;
     }
     // general sources of bonuses to all saving throws
