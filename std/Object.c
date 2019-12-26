@@ -446,7 +446,7 @@ mixed query_property(string prop)
         if(TO->is_vampire())
             if(!TO->is_in_sunlight())
             {
-                int blst = (20000-(int)TO->query_bloodlust())/4000-1;
+                int blst = (20000-(int)TO->query_bloodlust())/3000-1;
                 num = props[prop]+5;
                 num -= blst<0?0:blst;
                 return num<0?0:num;

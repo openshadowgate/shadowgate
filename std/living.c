@@ -1102,7 +1102,7 @@ int query_stats(string stat) {
         if(stat=="strength"||
            stat=="charisma")
         {
-            int blst = (20000-(int)TO->query_bloodlust())/4000-1;
+            int blst = (20000-(int)TO->query_bloodlust())/2000-1;
             res -= blst<0?0:blst;
         }
 
