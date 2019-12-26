@@ -535,6 +535,8 @@ int add_my_feat(object ob,string type,string feat)
         num_feats = (((int)ob->query_bonus_feats_gained())*5);
         num += num_feats +1;
 
+        tell_object(FPL("ilmarinen"),":"+num);
+
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
