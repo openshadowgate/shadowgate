@@ -14,7 +14,7 @@ void create()
     set_spell_sphere("alteration");
     set_spell_domain("strength");
     set_syntax("cast CLASS righteous might");
-    set_description("Your height immediately doubles, and your weight increases by a factor of eight. This increase changes your size category to the next larger one. You gain a +4 size bonus to Strength and Constitution and take a -2 penalty to your Dexterity. You gain natural armor bonus of 2. Any equipment you wear or wield will grow with you as long as you wear it.");
+    set_description("Your height immediately doubles, and your weight increases by a factor of eight. This increase changes your size category to the next larger one. You gain a +4 size bonus to Strength and Constitution and take a -2 penalty to your Dexterity. You gain natural armor bonus of 2. Any equipment you wear will grow with you as long as you wear it.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
