@@ -10,7 +10,7 @@ void create() {
     set_mystery("solar");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sunbeam on TARGET");
-    set_damage_desc("untyped, 4/3 times more to undead, 9/5 times more to vampires");
+    set_damage_desc("divine, 4/3 times more to undead, 9/5 times more to vampires");
     set_description("This spell will create a beam of pure light aimed at the target.  A target who fails to avoid the "
         "sunbeam will take damage from the pure sunlight and may be momentarily blinded.  Undead hit by the spell will "
         "suffer additional damage. Vampires hit but this spell will recieve ");
@@ -64,7 +64,7 @@ void spell_effect(int prof) {
         tell_room(place,"%^BLUE%^"+target->QCN+" dodges aside at the last instant, avoiding the worst of the damage from "+caster->QCN+"'s beam of light!",({target, caster}));
         sdamage/=2;
     }
-    damage_targ(target,target_limb,sdamage,"untyped");
+    damage_targ(target,target_limb,sdamage,"divine");
     dest_effect();
 }
 

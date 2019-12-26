@@ -96,7 +96,7 @@ int remove_item_bonus(object ob, string bonus) {
 }
 
 int cmd_fixitem(string str) {
-  string *args=({}), item, bonus;
+  string item, bonus;
   object ob;
 
   if(!stringp(str) || !strlen(str)) {
@@ -104,9 +104,11 @@ int cmd_fixitem(string str) {
     return 1;
   }
 
-  args = explode(str," ");
+  if(regexp(str,".* with .*"))
+      sscanf(str,"%s with %s",item,bonus);
+  else
+      item=str;
 
-  item = args[0];
   ob = present(item, ETP);
   if(!objectp(ob)) ob = present(item,TP);
   if(!objectp(ob)) {
@@ -120,10 +122,9 @@ int cmd_fixitem(string str) {
   }
 
   //one arguments - print out item bonuses
-  if(sizeof(args) == 1) return print_item_bonuses(ob);
+  if(!bonus) return print_item_bonuses(ob);
 
   //two or more arguments - remove bonus
-  bonus = implode(args[1..], " ");
   return remove_item_bonus(ob, bonus);
 }
 
@@ -135,9 +136,8 @@ fixitem - remove extra bonuses from crafted legacy items
 
 %^CYAN%^SYNTAX%^RESET%^
 
-Check item bonuses: fixitem %^ORANGE%^%^ULINE%^ITEM%^RESET%^
-Remove one extra item bonus: fixitem %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ %^ORANGE%^%^ULINE%^BONUS%^RESET%^
-Remove all item bonuses: fixitem %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ all
+fixitem %^ORANGE%^%^ULINE%^ITEM%^RESET%^
+fixitem %^ORANGE%^%^ULINE%^ITEM%^RESET%^ with %^ORANGE%^%^ULINE%^BONUS%^RESET%^|all
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
