@@ -5180,17 +5180,17 @@ int test_passive_perception() {
         ismagic = targ->query_magic_hidden();
         stealth = (int) targ->query_skill("stealth");
         spellcraft = (int) targ->query_skill("spellcraft");
-        if (ishidden==1 && ismagic==0) {
-            if (perception > stealth) { numnotvisible++; }
-        }
         if(FEATS_D->usable_feat(TO,"spot"))
         {
+            if (ishidden==1 && ismagic==0) {
+                if (perception > stealth) { numnotvisible++; }
+            }
             if (ishidden==1 && ismagic==1) {
                 if (perception > stealth && perception*5/6 > spellcraft) { numnotvisible++; }
             }
-            if (ishidden==0 && ismagic==1) {
-                if (perception > spellcraft) { numnotvisible++; }
-            }
+        }
+        if (ishidden==0 && ismagic==1) {
+            if (perception > spellcraft*5/6) { numnotvisible++; }
         }
     }
     if (numnotvisible > 0) {

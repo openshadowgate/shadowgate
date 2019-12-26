@@ -91,6 +91,12 @@ void execute_feat()
         dest_effect();
         return;
     }
+    if(!objectp(target))
+    {
+        tell_object(caster, "That is not here!");
+        dest_effect();
+        return;
+    }
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");
