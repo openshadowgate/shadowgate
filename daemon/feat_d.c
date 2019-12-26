@@ -426,7 +426,7 @@ int can_gain_bonus_feat(object ob,string feat)
       if(member_array(myclasses[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
       if(myclasses[i] == "fighter" )
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);  //          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2);
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2);
       else if(myclasses[i] == "paladin")
           currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
       else
@@ -518,24 +518,7 @@ int add_my_feat(object ob,string type,string feat)
         }
         else return 0;
     case "bonus":
-        subset = ob->query_classes(); // this is to get the current level to assign the feat to
-        if(!sizeof(subset)) return 0;
-        num = 0;
-        for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],MELEECLASSES) == -1) num += ob->query_class_level(subset[i]);
-          else {
-            if(subset[i] != "fighter" && subset[i] != "paladin") {
-              if(ob->query_class_level(subset[i]) > 20)
-                  num += 20;
-              else
-                  num += ob->query_class_level(subset[i]);
-            }
-          }
-        }
-        num_feats = (((int)ob->query_bonus_feats_gained())*5);
-        num += num_feats +1;
-
-        tell_object(FPL("ilmarinen"),":"+num);
+        num = 1;
 
         if(gain_feat(ob,type,feat,num))
         {
@@ -548,24 +531,7 @@ int add_my_feat(object ob,string type,string feat)
         }
         else return 0;
     case "magic":
-        subset = ob->query_classes(); // this is to get the current level to assign the feat to
-        if(!sizeof(subset)) return 0;
-        num = 0;
-        for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],CASTERCLASSES) == -1) num += ob->query_class_level(subset[i]);
-          else {
-            if(subset[i] != "sorcerer" &&
-               subset[i] != "oracle" &&
-               subset[i] != "psion") {
-              if(ob->query_class_level(subset[i]) > 20) num += 20;
-              else num += ob->query_class_level(subset[i]);
-            }
-          }
-        }
-        num_feats = (((int)ob->query_magic_feats_gained()+1)*5);
-        num += num_feats;
-        num -= 4; // to move feats back to 1/6/11/16/21/etc
-
+        num = 1;
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
@@ -576,26 +542,8 @@ int add_my_feat(object ob,string type,string feat)
             return 1;
         }
         else return 0;
-    case "hybrid": // please note - this needs a fix for the 1/7 progression for psywarriors. Currently running on 1/5. N, 9/15.
-        subset = ob->query_classes();
-        if(!sizeof(subset)) return 0;
-        num = 0;
-        for(i=0;i<sizeof(subset);i++)
-        {
-            if(member_array(subset[i],HYBRID) == -1) num += ob->query_class_level(subset[i]);
-            else
-            {
-                if(subset[i] != "psywarrior")
-                {
-                    if(ob->query_class_level(subset[i]) > 20) num += 20;
-                    else num += ob->query_class_level(subset[i]);
-                }
-            }
-        }
-
-        num_feats = (((int)ob->query_hybrid_feats_gained()+1)*5);
-        num += num_feats;
-        num -= 4; // to move feats back to 1/6/11/16/21/etc
+    case "hybrid":
+        num = 1;
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
@@ -1160,9 +1108,9 @@ varargs void add_feat(object ob, string type, string feat,int level)
     if(!pointerp(feats[num])) { feats[num] = ({ feat }); }
     else { feats[num] += ({ feat }); }
     if(is_permanent(ob,feat)) { execute_permanent_feat(ob,feat); }
+
     set_feats(ob,type,feats);
-    //the following is redundant because of the way query_player_feats() now works - Saide
-    //give_feat(ob,feat);
+
     return;
 }
 

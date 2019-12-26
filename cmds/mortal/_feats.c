@@ -489,7 +489,6 @@ int confirm_add_bonus(string str,object ob,string feat) {
     }
 
     FEATS_D->add_my_feat(ob,"bonus",feat);
-    ob->tidy_feats();
     log_file("added_feats",""+ob->QCN+" added combat bonus feat "+feat+" on "+ctime(time())+".\n");
     tell_object(ob,"%^YELLOW%^Congratulations, you have successfully added "
         "the bonus combat feat %^BLUE%^"+feat+"%^YELLOW%^!%^RESET%^");
@@ -510,7 +509,6 @@ int confirm_add_magic(string str,object ob,string feat,string extradata) {
     if(feat == "expanded knowledge 2"){ ob->set("expanded_knowledge_2",extradata); }
     if(feat == "expanded knowledge 3"){ ob->set("expanded_knowledge_3",extradata); }
     FEATS_D->add_my_feat(ob,"magic",feat);
-    ob->tidy_feats();
     log_file("added_feats",""+ob->QCN+" added magic bonus feat "+feat+" on "+ctime(time())+".\n");
     tell_object(ob,"%^YELLOW%^Congratulations, you have successfully added "
         "the bonus magic feat %^BLUE%^"+feat+"%^YELLOW%^!%^RESET%^");
@@ -534,7 +532,6 @@ int confirm_add_hybrid(string str,object ob,string feat,string extradata) {
     if(feat == "expanded knowledge 2"){ ob->set("expanded_knowledge_2",extradata); }
     if(feat == "expanded knowledge 3"){ ob->set("expanded_knowledge_3",extradata); }
     FEATS_D->add_my_feat(ob,"hybrid",feat);
-    ob->tidy_feats();
     log_file("added_feats",""+ob->QCN+" added hybrid bonus feat "+feat+" on "+ctime(time())+".\n");
     tell_object(ob,"%^YELLOW%^Congratulations, you have successfully added "
         "the bonus hybrid feat %^BLUE%^"+feat+"%^YELLOW%^!%^RESET%^");
@@ -593,7 +590,6 @@ int confirm_remove(string str,object ob,string feat,string extradata)
         ob->set("free_feats",((int)TP->query("free_feats") - 1));
     }
     FEATS_D->remove_my_feat(ob,feat);
-    ob->tidy_feats(); // this is to reallocate feats across any level-holes that are left by abandoned feats.
     tell_object(ob,"%^YELLOW%^You have successfully removed the feat "
         "%^MAGENTA%^"+feat+".%^RESET%^");
     return 1;
@@ -740,19 +736,15 @@ int cmd_feats(string str){
               		}
             	}
           		TP->set("free_feats",num_feats);
-          		TP->tidy_feats();
           	}
         }
         return 1;
     case "check":
-//        info -= ({ info[0] });
-//	  if(!sizeof(info))
         if(sscanf(str,"%s %s", category, tmp) != 2)
 	  {
 		tell_object(TP,"See <help feats> for syntax.");
 		return 1;
 	  }
-//        if(sizeof(info)) { tmp = implode(info," "); }
 
         my_tmp_feats = (string*)TP->query_temporary_feats();
         TP->clear_temporary_feats();
