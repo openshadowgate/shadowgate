@@ -1633,18 +1633,6 @@ void heart_beat()
     }
 
     max = query_formula();
-    if(!random(100) && !avatarp(TO)) {
-        if(query_stuffed() < (max / 6)) {
-            write("You notice some hunger pangs and your stomach growls.");
-        }
-        if(query_quenched() < (max / 6)) {
-            write("Your mouth is dry and you're feeling parched from thirst.");
-        }
-        if(TO->is_vampire())
-            if(query_bloodlust() < (20000 / 6)) {
-                write("%^RED%^Bloodlust drives you insane.");
-            }
-    }
     if (!static_user["stage"]) {
         if (!wizardp(TO) && query_level() && query_level() >1) {
             ob2 = new("/std/Object");
@@ -1803,6 +1791,7 @@ void heart_beat()
             if(query_hp() < query_max_hp())
                 add_hp(query_property("fast healing")*roll_dice(1,TO->query_level()/2+1)); //change help status effects when adjusting this
         if(is_vampire())
+        {
             if(TO->is_in_sunlight())
             {
                 int todamage = query_max_hp()/2 +1;
@@ -1821,6 +1810,15 @@ void heart_beat()
                     }
                 }
             }
+            if(!random(10))
+            {
+                if(TO->is_vampire())
+                    if(query_bloodlust() < (20000 / 6))
+                    {
+                        write("%^RED%^Bloodlust drives you insane.");
+                    }
+            }
+        }
     }
 
     if(!avatarp(TO))
