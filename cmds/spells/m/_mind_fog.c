@@ -46,7 +46,7 @@ void spell_effect(int prof)
     // extremely unnecessary; just the d20 in the saving throw calculations can make this incredibly easy to hit with
     if(!do_save(target,0))
     {
-        if(mind_immunity_damage(target, "default"))
+        if(mind_immunity_check(target, "default"))
         {
             spell_successful();
             dest_effect();

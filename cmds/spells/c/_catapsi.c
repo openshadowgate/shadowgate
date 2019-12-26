@@ -40,7 +40,7 @@ void spell_effect(int prof)
     if(!do_save(target,0))
     { // revoking the old bonus; the d20 in saving throw rolls should be more than enough -Nienne
 
-        if(mind_immunity_damage(target, "default"))
+        if(mind_immunity_check(target, "default"))
         {
             spell_successful();
             dest_effect();

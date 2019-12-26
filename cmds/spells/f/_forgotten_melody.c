@@ -99,7 +99,7 @@ void spell_effect(int prof)
             continue;
         }
 
-        if(mind_immunity_damage(inven[i], "default"))
+        if(mind_immunity_check(inven[i], "default"))
         {
             continue;
         }

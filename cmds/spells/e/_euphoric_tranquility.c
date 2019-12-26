@@ -6,11 +6,12 @@ void create() {
     set_spell_name("euphoric tranquility");
     set_spell_level(([ "mage" : 8, "cleric" : 8, "druid" : 8, "bard" : 6 ]));
     set_spell_sphere("enchantment_charm");
-    set_syntax("cast CLASS euphoric tranquility TARGET");
+    set_syntax("cast CLASS euphoric tranquility on TARGET");
     set_damage_desc("stop combat for target");
     set_description("A creature under the effect of this enchantment enters a state of euphoria. The target treats all creatures as dear friends and abhors violence, but may rise up to protect itself if violence is perpetrated against it.");
     set_save("will");
     set_target_required(1);
+    mental_spell(1);
 }
 
 string query_cast_string()
@@ -26,7 +27,8 @@ spell_effect(int prof)
     tell_object(caster,"%^MAGENTA%^You throw the pattern into direction of "+target->QCN+".%^RESET%^");
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" throws the pattern into direction of "+target->QCN+".%^RESET%^",({caster,target}));
     tell_object(target,"%^MAGENTA%^"+caster->QCN+" throws the pattern into your face.%^RESET%^");
-    if(!do_save(target,-2))
+
+    if(!(do_save(target,-2)||mind_immunity_check(target2, "default")))
     {
         object attackers = target->query_attackers();
         object attacker;

@@ -62,7 +62,7 @@ void spell_effect(int prof) {
       return;
     }
     spell_successful();
-    if(do_save(target,0)||mind_immunity_damage(target)) {
+    if(do_save(target,0)||mind_immunity_check(target)) {
       tell_object(caster,"%^BOLD%^"+target->QCN+" pays no heed to your attempt, and instead turns upon you!\n");
       tell_object(target,"%^BOLD%^You feel a spell attempt to influence you, and turn upon "+caster->QCN+" in a rage!\n");
       spell_kill(target,caster);

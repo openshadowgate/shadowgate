@@ -69,7 +69,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    if(mind_immunity_damage(target, "default"))
+    if(mind_immunity_check(target, "default"))
     {
         spell_successful();
         dest_effect();

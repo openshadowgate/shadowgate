@@ -32,7 +32,7 @@ void spell_effect(int prof){
 
     caster->force_me("yell %^RED%^%^BOLD%^BEG FORGIVENESS.");
 
-    if(mind_immunity_damage(target))
+    if(mind_immunity_check(target))
     {
         spell_successful();
         dest_effect();

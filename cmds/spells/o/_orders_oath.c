@@ -54,7 +54,7 @@ void spell_effect(int prof)
     //    if(!SAVING_D->saving_throw(target,"spell",0))
     if(!do_save(target,0))
     {
-        if(mind_immunity_damage(target, "default"))
+        if(mind_immunity_check(target, "default"))
         {
             spell_successful();
             dest_effect();

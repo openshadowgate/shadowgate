@@ -103,7 +103,7 @@ void spell_effect(int prof)
         }
 
         //No need to check for undead after this
-        if(mind_immunity_damage(inven[i], "default"))
+        if(mind_immunity_check(inven[i], "default"))
         {
             continue;
         }

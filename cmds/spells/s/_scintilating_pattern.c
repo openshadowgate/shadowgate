@@ -32,7 +32,7 @@ void spell_effect(int prof){
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i]))
             continue;
-        if(attackers[i]->query_level()<clevel && !mind_immunity_damage(attackers[i]))
+        if(attackers[i]->query_level()<clevel && !mind_immunity_check(attackers[i]))
         {
             tell_room(place,"%^MAGENTA%^Spirals capitvate "+attackers[i]+"!");
             "/std/effect/status/confused"->apply_effect(target,clevel/5 + 1,caster);

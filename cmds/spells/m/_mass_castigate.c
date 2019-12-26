@@ -43,7 +43,7 @@ void spell_effect(int prof){
 
     foreach(target in attackers)
     {
-        if(mind_immunity_damage(target))
+        if(mind_immunity_check(target))
         {
             spell_successful();
             dest_effect();
