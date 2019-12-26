@@ -425,7 +425,9 @@ int can_gain_bonus_feat(object ob,string feat)
     for(i=0;i<sizeof(myclasses);i++) {
       if(member_array(myclasses[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
-      if(myclasses[i] == "fighter" || myclasses[i] == "paladin")
+      if(myclasses[i] == "fighter")
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2);
+      else if(myclasses[i] == "paladin")
           currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
       else
           currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // melee classes @ L21 & every 5 levels thereafter
