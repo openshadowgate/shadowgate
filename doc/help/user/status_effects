@@ -34,6 +34,7 @@ A creature with the fast healing special quality regains hit points at an except
 
 %^CYAN%^%^ULINE%^Fatigued%^RESET%^
 You take a penalty of 2 points on on strength and dexterity. Fatigued characters can become %^CYAN%^exhausted%^RESET%^.
+
 %^CYAN%^%^ULINE%^Fear%^RESET%^
 Fear has various effects, depending on what caused it. Sometimes it causes a creature to freeze in fear, or to run away. Sometimes it causes a creature to lose the will to fight. Effects that are applied are usually %^CYAN%^frightened%^RESET%^, %^CYAN%^shaken%^RESET%^ or %^CYAN%^panicked%^RESET%^.
 
@@ -83,6 +84,5 @@ These effects subtract their value from damage or spell damage received.
 
 %^CYAN%^%^ULINE%^Temporary blinded%^RESET%^
 Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell. They also loose their dexterity bonus to AC, and take additional penalty of lvl/12 on their armor class.
-
 
 %^CYAN%^See also:%^RESET%^ attributes, bonuses, stats, skills, score, hp

@@ -9,7 +9,7 @@
 "elemental":({"guidance", "resist energy", "elemental aura", "elemental body i", "elemental body ii", "elemental body iii", "elemental body iv", "create demiplane", "elemental swarm"}),\
 "whimsy":({"faerie fire", "hideous laughter", "phantom steed", "confusion", "false vision", "eyebite", "project image", "irresistible dance", "weird"}),\
 "heavens":({"color spray", "hypnotic pattern", "daylight", "rainbow pattern", "angelic aspect", "chain lightning", "prismatic spray", "sunburst", "meteor swarm"}),\
-"life":({"mending", "restiration", "remove blindness", "neutralize poison", "breath of life", "heal", "regeneration", "mass heal", "resurrection"}),\
+"life":({"mending", "restoration", "remove blindness", "neutralize poison", "breath of life", "heal", "regeneration", "mass heal", "resurrection"}),\
 "shadow":({"blurred movement", "invisibility", "deeper darkness", "shadow stride", "vampiric shadow shield", "shadow travel", "umbral strike", "greater shadow evocation", "shades"}),\
 "solar":({"faerie fire", "flaming sphere", "daylight", "dimension door", "solar siege shot", "sirocco", "sunbeam", "sunbeam", "hellball"}),\
 "spellscar":({"armor", "resist energy", "dispel magic", "true form", "siphon magic", "globe of invulnerability", "spell turning", "spellscar", "dimensional lock"}),\
