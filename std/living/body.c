@@ -630,10 +630,6 @@ int query_resistance(string res) {
                 myres += TO->query_character_level();
     }
 
-    if(TO->is_werewolf())
-        if(res == "silver")
-            myres-=TO->query_character_level();
-
     if(TO->is_vampire())
     {
         if(res == "electricity")
