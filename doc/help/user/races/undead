@@ -4,19 +4,19 @@
 %^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^ORANGE%^ any
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
-%^ORANGE%^ - Undead body:
-%^ORANGE%^   - No constitution stat, charisma used for hp calculations
-%^ORANGE%^   - No hunger or thirst
-%^ORANGE%^   - No aging, age cathegory is always normal
-%^ORANGE%^   - No diseases
-%^ORANGE%^   - No fatigue
-%^ORANGE%^   - Negative fire resistance
-%^ORANGE%^ - Undead mind:
-%^ORANGE%^   - Immune to standard death effects
-%^ORANGE%^   - Will is always high
-%^ORANGE%^   - Mind-affecting powers always fail on you
-%^ORANGE%^ - Innate darkvision spell
-%^ORANGE%^ - Effects of negative and positive energy are reversed
+%^ORANGE%^ * Undead body:
+%^ORANGE%^   * No constitution stat, charisma used for hp calculations
+%^ORANGE%^   * No hunger or thirst
+%^ORANGE%^   * No aging, age cathegory is always normal
+%^ORANGE%^   * No diseases
+%^ORANGE%^   * No fatigue
+%^ORANGE%^   - 1 point per level fire resistance
+%^ORANGE%^ * Undead mind:
+%^ORANGE%^   * Immune to standard death effects
+%^ORANGE%^   * Will is always high
+%^ORANGE%^   * Mind-affecting powers always fail on you
+%^ORANGE%^ * Innate darkvision and animate dead spells
+%^ORANGE%^ * Effects of negative and positive energy are reversed
 
 %^BOLD%^%^BLACK%^Description:
 %^ORANGE%^"Undead" is a template that can be applied to any living creature in order to transform it into a monster of undeath such as a zombie, animated skeleton, or a vampire, or to creatures that are innately unique such as mohrgs, wights.

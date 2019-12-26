@@ -4,6 +4,7 @@
 %^BOLD%^%^BLACK%^Classes allowed:%^RESET%^%^RED%^ any
 
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
+%^RED%^ * all features of undead template apply
 %^RED%^ * can use %^BLUE%^<drain>%^RED%^ command
 %^RED%^ * cha score used for hp bonus
 %^RED%^ * innate spells
@@ -15,10 +16,10 @@
 %^RED%^   * spider climb
 %^RED%^   * twilight shape
 %^RED%^ * resistances
-%^RED%^   + 10 spell damage resistance
-%^RED%^   + 10 electricity resistance
-%^RED%^   + 10 cold resistance
-%^RED%^   + 10 silver resistance
+%^RED%^   + 1 point per level spell damage resistance
+%^RED%^   + 1 point per level electricity resistance
+%^RED%^   + 1 point per level cold resistance
+%^RED%^   - 1 point per level silver resistance
 %^RED%^ * fast healing 5
 %^RED%^ * sunlight damage
 %^RED%^ * blood hunger causes negative effects

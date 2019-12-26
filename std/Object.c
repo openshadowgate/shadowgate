@@ -550,10 +550,10 @@ mixed query_property(string prop)
             if(!TO->is_in_sunlight())
                 num+=10;
         if((string)TO->query_race() == "human") {
-          subrace = (string)TO->query("subrace");
-          if(subrace) {
-            if(subrace == "maalish") num += 5; // +5 SR for human Maalish ethnicity
-          }
+            subrace = (string)TO->query("subrace");
+            if(subrace) {
+                if(subrace == "maalish") num += 5; // +5 SR for human Maalish ethnicity
+            }
         }
         if(FEATS_D->usable_feat(TO,"resistance")) num+= 2;
         if(FEATS_D->usable_feat(TO, "increased resistance")) num += 4;
