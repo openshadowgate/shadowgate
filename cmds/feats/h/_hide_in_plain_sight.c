@@ -33,11 +33,11 @@ int cmd_hide_in_plain_sight(string str) {
     object * attackers, attacker;
     if(!objectp(TP))
         return;
-    if(TP->query_property("hide in plain sight")+ROUND_LENGTH >time())
+    if(TP->query_property("hide_in_plain_sight")>time())
     {
         tell_object(TP,"Hide in plain sight only once per round.");
         dest_effect();
-        return;
+        return 1;
     }
     TP->set_hidden(1);
     attackers = TP->query_attackers();
@@ -50,7 +50,9 @@ int cmd_hide_in_plain_sight(string str) {
     obj = new("/cmds/mortal/hide.c");
     obj->set_player(TP);
     obj->move(TP);
-    TP->set_property("hide in plain sight",time());
+    if(TP->query_property("hide_in_plain_sight"))
+        TP->remove_property("hide_in_plain_sight");
+    TP->set_property("hide_in_plain_sight",time()+ROUND_LENGTH);
     dest_effect();
     return 1;
 }
