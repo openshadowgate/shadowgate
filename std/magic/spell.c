@@ -1857,11 +1857,12 @@ void define_clevel()
                 if(spell_sphere == "necromancy" ||
                    spell_sphere == "illusion" ||
                    spell_sphere == "enchantment_charm")
-                    clevel+=2;
+                    clevel+=4;
     }
     if(spell_type == "cleric" ||
        spell_type == "druid")
-        if(FEATS_D->usable_feat(caster, "mastery of power")) clevel += 4;
+        if(FEATS_D->usable_feat(caster, "mastery of power"))
+            clevel += 4;
     if(FEATS_D->usable_feat(caster, "eldritch conditioning"))
         if(spell_type == caster->query("eldritch_knight_base_class"))
             clevel = caster->query_character_level();
