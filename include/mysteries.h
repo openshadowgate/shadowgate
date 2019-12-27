@@ -14,6 +14,7 @@
 "solar":({"faerie fire", "flaming sphere", "daylight", "dimension door", "solar siege shot", "sirocco", "sunbeam", "sunbeam", "hellball"}),\
 "spellscar":({"armor", "resist energy", "dispel magic", "true form", "siphon magic", "globe of invulnerability", "spell turning", "spellscar", "dimensional lock"}),\
 "apocalypse":({"summon swarm", "fog cloud", "sleet storm", "ice storm", "insect plague", "circle of death", "fire storm", "incendiary cloud", "meteor swarm"}),\
+"ancestor":({"unseen servant", "spiritual weapon", "heroism", "", "", "", "", "", ""}),\
 ])
 
 //"bones":({"", "", "", "", "", "", "", "", ""}),\

@@ -1,4 +1,3 @@
-//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <magic.h>
 #include <std.h>
 #include <spell.h>
@@ -8,85 +7,70 @@ object *animated, *monsters, control;
 string arg;
 int amount;
 
-void make_sword();
-
 void create() {
     ::create();
-    set_author("nienne");
-    set_spell_name("shadow double");
-    set_spell_level(([ "mage" : 7, "monk" : 13 ]));
-    set_spell_sphere("illusion");
-    set_monk_way("way of the shadow");
-    set_syntax("cast CLASS shadow double");
-    set_description("This spell will conjure a ghostly double of the caster, drawn from his or her own "
-"shadow. The shadow will automatically follow and protect you. Should you lose it, though, simply go into the room with "
-"it and <command shadow to follow>. This is a greater summons, and cannot be used simultaneously with other greater summons.");
+    set_spell_name("unseen servant");
+    set_spell_level(([ "mage" : 1,"bard":1,"oracle":1 ]));
+    set_spell_sphere("conjuration_summoning");
+    set_syntax("cast CLASS unseen servant");
+    set_mystery("ancestor");
+    set_description("What could be more annoying that doing things yourself?.. Call to your ancestor to summon one of them to open doors before you, carry your luggage or scratch your back.
+
+To remove servant use %^ORANGE%^<dismiss servant>%^RESET%^
+To command servant use %^ORANGE%^<command servant to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+To force lost servant to follow use %^ORANGE%^<command servant to follow>%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
-    set_components(([
-      "mage" : ([ "onyx dust" : 1, ]),
-    ]));
     set_helpful_spell(1);
-    //set_feats_required(([ "mage" : "shadow adept", "sorcerer" : "shadow_adept" ]));
-    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
 }
 
 int preSpell(){
-   if(caster->query_property("mages_sword") || caster->query_property("has_elemental")) {
-        tell_object(caster,"%^CYAN%^You are incapable of controling two such powerful summonings.%^RESET%^");
+   if(caster->query_property("unseen_servant")) {
+        tell_object(caster,"%^CYAN%^You are incapable of controling two such summonings.%^RESET%^");
         return 0;
    }
    return 1;
 }
 
 string query_cast_string(){
-   tell_object(caster,"%^MAGENTA%^You make a brief, subtle motion to the side with one hand.%^RESET%^");
-   tell_room(place,"%^MAGENTA%^"+caster->QCN+" makes a brief, elusory motion to the side with one hand.%^RESET%^",caster);
+   tell_object(caster,"%^CYAN%^You make a subtle motion to the side with one hand.%^RESET%^");
+   tell_room(place,"%^CYAN%^"+caster->QCN+" makes a subtle motion to the side with one hand.%^RESET%^",caster);
    return "display";
 }
 
 void spell_effect(int prof){
-	if(!objectp(environment(caster)))	{
+	if(!objectp(environment(caster)))
+    {
 		dest_effect();
 		return;
 	}
 	place = environment(caster);
-      make_sword();
+    summon_servant();
 }
 
-void make_sword() {
+void summon_servant() {
     object ob, thing;
 
-    tell_object(caster,"%^MAGENTA%^Your shadow moves, as if of its own accord, and rises to stand beside you.%^RESET%^");
-    tell_room(place,"%^MAGENTA%^You see "+caster->QCN+"'s shadow move, as if of its own accord, and rise to stand beside "+caster->QO+".%^RESET%^",caster);
-    control = new("/d/magic/obj/shadowremote");
+    tell_object(caster,"%^CYAN%^You barely notice some movement at the edge of you sight. You feel you can <command servant to> performa various actions. .%^RESET%^");
+    control = new("/d/magic/obj/unseen_servant_controller");
     control->set_caster(caster);
     control->move(caster);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
-    ob=new("/d/magic/obj/ashadow.c");
-    control->set_sword(ob);
+
+    ob=new("/d/magic/mon/unseen_servant.c");
+    ob->setup_servant(caster,clevel);
+
+    control->set_servant(ob);
     caster->add_follower(ob);
-    ob->set_gender(caster->query_gender());
-    ob->set_alignment(caster->query_alignment());
-    ob->set_heart(1);
-    ob->set_stats("intelligence",1);
-    ob->set_attack_limbs(({"left hand","right hand"}));
-    ob->set_nat_weapon_type("slashing");
-    ob->set_attacks_num(clevel/10);
-    ob->set_damage(4,(clevel/4)); //changed to tighten up the damage range for more consistency 8/28/19
-    ob->set_overall_ac(10-clevel);
-    ob->set_hd(clevel,8); //copied from phantasmal_killer Odin 8/28/19
-    ob->set_stats("strength",15);
-    ob->set_max_hp(ob->query_hp());
-    ob->set_caster(caster);
+
     ob->move(environment(caster));
     ob->set_property("spell",TO);
     ob->set_property("spell", ({TO}) );
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
-    ob->set_property("effective_enchantment", ((int)CLEVEL / 7));
-    caster->set_property("mages_sword",ob);
+
+    caster->set_property("unseen_servant",ob);
     return;
 }
 
@@ -94,8 +78,7 @@ void dest_effect() {
     object sword;
 
     if (objectp(caster)) {
-        tell_room(environment(caster),"%^CYAN%^The shadowy being beside "+caster->QCN+" fades away.%^RESET%^",caster);
-        tell_object(caster,"%^CYAN%^The shadow fades away.%^RESET%^");
+        tell_object(caster,"%^CYAN%^Unseen servant fades away.%^RESET%^");
     }
 
     if(objectp(control)) {
@@ -104,7 +87,7 @@ void dest_effect() {
 			destruct(control);
 		}
     }
-    if(objectp(caster)) { caster->remove_property("mages_sword"); }
+    if(objectp(caster)) { caster->remove_property("unseen_servant"); }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }

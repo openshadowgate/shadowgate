@@ -33,6 +33,7 @@ void spell_effect(int prof){
     string normalizedDeity = deity;
     if(deity == "lord shadow") normalizedDeity = "lord_shadow";
     if(deity == "the faceless one") normalizedDeity = "the_faceless_one";
+    if(deity == "goldess") normalizedDeity = "kismet";
     if (!objectp(caster))
     {
         dest_effect();
@@ -46,7 +47,7 @@ void spell_effect(int prof){
     tell_room(place,"%^BOLD%^%^BLUE%^A weapon appears in "+caster->QCN+"'s hand!",caster);
     if(file_exists("/d/magic/obj/weapons/"+normalizedDeity+".c") || file_exists("/d/magic/obj/weapons/"+normalizedDeity+"_knights.c"))
     {
-        if(caster->is_class("paladin") || caster->is_class("antipaladin"))
+        if(caster->is_class("paladin"))
         {
             dwpn = new("/d/magic/obj/weapons/"+normalizedDeity+"_knights");
                 }

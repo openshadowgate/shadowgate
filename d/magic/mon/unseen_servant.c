@@ -8,9 +8,9 @@ void create(){
   ::create();
 
     set_name("unseen servant");
-    set_id(({"servant","unseen servant",}));
-    set_short("%^CYAN%^a whispy humanoid");
-    set_long("%^CYAN%^You barely see an outline of humanoid figure.");
+    set_id(({"servant","unseen servant","humanoid","whispy humanoid"}));
+    set_short("%^CYAN%^a whispy humanoid%^RESET%^");
+    set_long("%^CYAN%^You barely see an outline of humanoid figure.%^RESET%^");
     set_hd(4,1);
     set_hp(query_hd()*8);
     set_stats("strength",20);
@@ -51,7 +51,7 @@ void setup_servant(object caster, int clevel)
 
 void die(object obj)
 {
-    cast->remove_property("has_elemental");
+    cast->remove_property("unseen_servant");
     ::die(obj);
     return;
 }
