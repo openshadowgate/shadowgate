@@ -9,27 +9,27 @@ int amount;
 
 void create() {
     ::create();
-    set_spell_name("spiritual weapon");
-    set_spell_level(([ "inquisitor":1,"oracle":1,"cleric":1 ]));
-    set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS spiritual weapon");
+    set_spell_name("spiritual ally");
+    set_spell_level(([ "oracle":1,"cleric":1 ]));
+    set_spell_sphere("invocation_evocation");
+    set_syntax("cast CLASS spiritual ally");
     set_mystery("ancestor");
-    set_description("A weapon made of force appears and attacks foes at a distance, as you direct it.
+    set_description("Call to one of your ancestors to aid you in combat. This spirit will have a chosen weapon of your deity and will obey all your commands.
 
-To remove weapon use %^ORANGE%^<dismiss weapon>%^RESET%^
-To command weapon use %^ORANGE%^<command weapon to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost weapon to follow use %^ORANGE%^<command weapon to follow>%^RESET%^");
+To remove ally use %^ORANGE%^<dismiss ally>%^RESET%^
+To command ally use %^ORANGE%^<command ally to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+To force lost ally to follow use %^ORANGE%^<command ally to follow>%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
 }
 
 int preSpell(){
-   if(caster->query_property("spiritual_weapon")) {
-        tell_object(caster,"%^CYAN%^You are incapable of controling two such summonings.%^RESET%^");
+    if(caster->query_property("mages_sword") || caster->query_property("has_elemental")) {
+        tell_object(caster,"You already have a powerful summoned creature under your control.");
         return 0;
-   }
-   return 1;
+    }
+    return 1;
 }
 
 void spell_effect(int prof){
@@ -44,31 +44,20 @@ void spell_effect(int prof){
 
 void summon_servant() {
     object ob, thing;
-    string deity = caster->query_diety();
-    string normalizedDeity = deity;
-    if(deity == "lord shadow")
-        normalizedDeity = "lord_shadow";
-    if(deity == "the faceless one")
-        normalizedDeity = "the_faceless_one";
-    if(deity == "goldess")
-        normalizedDeity = "kismet";
 
-    tell_object(caster,"%^CYAN%^%^BOLD%^As you complete the spell a weapon forms out of thin air in front of you.%^RESET%^");
-    tell_room(place,"%^CYAN%^%^BOLD%^As "+caster->QCN+" completes the spell a weapon forms out of thin air.%^RESET%^",caster);
-    control = new("/d/magic/obj/spiritual_weapon_controller");
+    tell_object(caster,"%^CYAN%^%^BOLD%^As you complete the spell a humanoid being descends to stand in your protection.%^RESET%^");
+    tell_room(place,"%^CYAN%^%^BOLD%^As "+caster->QCN+" completes the spell a spectral humanoid being appears.%^RESET%^",caster);
+    control = new("/d/magic/obj/spiritual_ally_controller");
     control->set_caster(caster);
     control->move(caster);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
 
-    ob=new("/d/magic/mon/spiritual_weapon.c");
+    ob=new("/d/magic/mon/spiritual_ally.c");
     ob->set_alignment(caster->query_alignment());
-    ob->set_short(("/d/magic/obj/weapons/"+normalizedDeity)->query_short());
-    ob->set_long(("/d/magic/obj/weapons/"+normalizedDeity)->query_short());
-    ob->set_id(ob->query_id()+("/d/magic/obj/weapons/"+normalizedDeity)->query_id());
     ob->setup_servant(caster,clevel);
 
-    control->set_sweapon(ob);
+    control->set_sally(ob);
     caster->add_follower(ob);
 
     ob->move(environment(caster));
@@ -78,7 +67,7 @@ void summon_servant() {
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
 
-    caster->set_property("spiritual_weapon",ob);
+    caster->set_property("has_elemental",ob);
     return;
 }
 
@@ -86,16 +75,16 @@ void dest_effect() {
     object sword;
 
     if (objectp(caster)) {
-        tell_object(caster,"%^CYAN%^Spiritual weapon fades away.%^RESET%^");
+        tell_object(caster,"%^CYAN%^Spiritual ally fades away.%^RESET%^");
     }
 
     if(objectp(control)) {
-		if (objectp(sword = control->query_sword())){
+		if (objectp(sword = control->query_sally())){
 			sword->remove();
 			destruct(control);
 		}
     }
-    if(objectp(caster)) { caster->remove_property("spiritual_weapon"); }
+    if(objectp(caster)) { caster->remove_property("has_elemental"); }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }

@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_spell_name("spiritual weapon");
     set_spell_level(([ "inquisitor":1,"oracle":1,"cleric":1 ]));
-    set_spell_sphere("conjuration_summoning");
+    set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS spiritual weapon");
     set_mystery("ancestor");
     set_description("A weapon made of force appears and attacks foes at a distance, as you direct it.
@@ -45,12 +45,9 @@ void spell_effect(int prof){
 void summon_servant() {
     object ob, thing;
     string deity = caster->query_diety();
-    string normalizedDeity = deity;
-    if(deity == "lord shadow")
-        normalizedDeity = "lord_shadow";
-    if(deity == "the faceless one")
-        normalizedDeity = "the_faceless_one";
-    if(deity == "goldess")
+    string normalizedDeity;
+    normalizedDeity = replace_string(deity," ","_");
+    if(deity == "godless")
         normalizedDeity = "kismet";
 
     tell_object(caster,"%^CYAN%^%^BOLD%^As you complete the spell a weapon forms out of thin air in front of you.%^RESET%^");
@@ -90,7 +87,7 @@ void dest_effect() {
     }
 
     if(objectp(control)) {
-		if (objectp(sword = control->query_sword())){
+		if (objectp(sword = control->query_sweapon())){
 			sword->remove();
 			destruct(control);
 		}

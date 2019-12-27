@@ -31,9 +31,9 @@ void spell_effect(int prof){
     int ench;
     string deity = caster->query_diety();
     string normalizedDeity = deity;
-    if(deity == "lord shadow") normalizedDeity = "lord_shadow";
-    if(deity == "the faceless one") normalizedDeity = "the_faceless_one";
-    if(deity == "goldess") normalizedDeity = "kismet";
+    normalizedDeity = replace_string(deity," ","_");
+    if(deity == "godless")
+        normalizedDeity = "kismet";
     if (!objectp(caster))
     {
         dest_effect();

@@ -8,38 +8,41 @@ object cast;
 void create(){
   ::create();
 
-    set_name("spiritual weapon");
-    set_id(({"weapon","spiritual weapon"}));
-    set_short("%^CYAN%^a spiritual weapon%^RESET%^");
-    set_long("%^CYAN%^Spiritual weapon.%^RESET%^");
+    set_name("spiritual ally");
+    set_id(({"ally","spiritual ally","figure","spectral figure"}));
+    set_short("%^RESET%^%^CYAN%^a %^BOLD%^spectral%^RESET%^%^CYAN%^ figure%^RESET%^");
+    set_long("%^CYAN%^A spectral humanoid outline, holding its weapon firm.%^RESET%^");
     set_hd(4,1);
     set_hp(query_hd()*8);
     set_stats("strength",20);
     set_stats("intelligence",8);
     set_stats("wisdom",20);
     set_stats("dexterity",20);
-    set_race("weapon");
-    add_limb("torso","torso",50,0,2);
-    set_attack_limbs(({"torso"}));
+    set_race("human");
     set_damage(2,10);
     set_attacks_num(2);
     set_nat_weapon_type("slashing");
     set_gender("other");
     set_overall_ac(4);
 
+    set_monster_feats(({
+                "opportunity strikes",
+                    "swipe",
+            }));
+
     set_alignment(5);
 
-    command("message floats in.");
-    command("message floats $D.");
+    command("message walks in");
+    command("message walks $D");
 }
 
 void setup_servant(object caster, int clevel)
 {
     int level;
+
     if(!objectp(caster)) { return; }
 
     cast = caster;
-
     level = clevel;
 
     set_guild_level("fighter",clevel);
@@ -49,6 +52,29 @@ void setup_servant(object caster, int clevel)
     set_hp(query_max_hp());
     set_overall_ac(4-clevel);
     set_attacks_num(clevel/10+1);
+
+    {
+        string deity = caster->query_diety();
+        string normalizedDeity;
+        object wpn;
+        int ench;
+
+        normalizedDeity = replace_string(deity," ","_");
+        if(deity == "godless")
+            normalizedDeity = "kismet";
+
+        wpn=new("/d/magic/obj/weapons/"+normalizedDeity+"");
+        ench = clevel/7;
+        if(ench < 0)
+            ench = 0;
+        if(ench > 9)
+            ench = 9;
+        wpn->set_property("enchantment",ench);
+        wpn->move(TO);
+        wpn->set_property("monster weapon",1);
+        TO->force_me("wield weapon in left hand");
+    }
+
     call_out("protect",ROUND_LENGTH);
 }
 
@@ -74,7 +100,7 @@ void protect()
 
 void die(object obj)
 {
-    cast->remove_property("spiritual_weapon");
+    cast->remove_property("has_elemental");
     TO->remove();
     ::die(obj);
     return;
