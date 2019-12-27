@@ -1878,6 +1878,9 @@ void define_clevel()
     clevel = clevel<0?1:clevel;
 }
 
+/**
+ * Defines base level of spells. Adjust help standard damage when adjusting these.
+ */
 void define_base_spell_level_bonus()
 {
     sdamage_adjustment = 0;
@@ -1890,6 +1893,9 @@ void define_base_spell_level_bonus()
     sdamage_adjustment=sdamage_adjustment<0?0:sdamage_adjustment;
 }
 
+/**
+ * Defines standard damage. Adjust help standard damage when adjusting these.
+ */
 void define_base_damage(int adjust)
 {
     if(query_aoe_spell() ||

@@ -1,0 +1,31 @@
+%^CYAN%^STANDARD DAMAGE%^RESET%^
+
+To scale damage sucessfuly to fifty levels ShadowGate engine employs dice rules for spells of different levels across classes. When using damaging spells you may expect the next dies to roll when damage is applied:
+
+%^CYAN%^%^ULINE%^All classes:
+
+%^CYAN%^L1:%^RESET%^  1d6
+%^CYAN%^L2:%^RESET%^  1d6  + 1/2
+%^CYAN%^L3:%^RESET%^  1d7
+%^CYAN%^L4:%^RESET%^  1d7  + 1/2
+%^CYAN%^L5:%^RESET%^  1d8
+%^CYAN%^L6:%^RESET%^  1d8  + 1/2
+%^CYAN%^L7:%^RESET%^  1d9
+%^CYAN%^L8:%^RESET%^  1d9  + 1/2
+%^CYAN%^L9:%^RESET%^  1d10
+
+%^CYAN%^L10..20:%^RESET%^  1d10
+%^CYAN%^Default:%^RESET%^  1d8
+
+%^CYAN%^AOE:%^RESET%^      1d20 per every 18 caster levels
+%^CYAN%^TravAOE:%^RESET%^  1d20 per every 18 caster levels
+
+%^CYAN%^Monks:%^RESET%^    1d10 for all spells
+%^CYAN%^Warlocks:%^RESET%^ 1d8  for all spells, 1d10 for utterdark spells
+
+%^CYAN%^%^ULINE%^Class adjustments:
+
+Bards recieve bonus of 1 Level to every spell they cast and thus use higher die.
+Psywarriors recieve a penalty of 2 Levels to every spell they cast and thus use lower die.
+
+%^CYAN%^See also:%^RESET%^ cast, prepare, master, classes
