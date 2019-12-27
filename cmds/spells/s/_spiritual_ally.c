@@ -16,6 +16,7 @@ void create() {
     set_mystery("ancestor");
     set_description("Call to one of your ancestors to aid you in combat. This spirit will have a chosen weapon of your deity and will obey all your commands.
 
+This is a greater summons, and cannot be used simultaneously with other greater summons.
 To remove ally use %^ORANGE%^<dismiss ally>%^RESET%^
 To command ally use %^ORANGE%^<command ally to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost ally to follow use %^ORANGE%^<command ally to follow>%^RESET%^");
