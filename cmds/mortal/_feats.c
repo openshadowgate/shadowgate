@@ -669,6 +669,7 @@ int cmd_feats(string str){
                 num_feats = ((int)TP->query_level()/3)+1;
                 TP->set("free_feats",num_feats);
                 if(!avatarp(TP)) tell_object(TP,"%^BOLD%^%^RED%^You have been given a feat wipe. Please reallocate your feats before going back out.%^RESET%^");
+                TP->force_me("feats fix");
             }
             return 1;
         }
