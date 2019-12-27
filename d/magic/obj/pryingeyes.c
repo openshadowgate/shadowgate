@@ -83,9 +83,9 @@ catch_tell(string str){
     tell_object(caster,"%^BOLD%^%^WHITE%^You see from afar:%^RESET%^   "+str);
 }
 
-int do_damage(string str, int i){
-    return 0;
-}
+/* int do_damage(string str, int i){ */
+/*     return 0; */
+/* } */
 
 int is_invincible(){ return 1;}
 
