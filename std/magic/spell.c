@@ -197,18 +197,18 @@ void check_me()
 {
     if(!objectp(caster))
     {
-	//adding this so that if a mob casts a spell
-	//such as chill touch on a player and the mob dies,
-	//spell should not get removed if the target is still valid - Saide
-		if(query_target_required() && !objectp(target))
-    	{
-			if(objectp(TO)) { TO->remove(); }
-			return;
-		}
+    //adding this so that if a mob casts a spell
+    //such as chill touch on a player and the mob dies,
+    //spell should not get removed if the target is still valid - Saide
+        if(query_target_required() && !objectp(target))
+        {
+            if(objectp(TO)) { TO->remove(); }
+            return;
+        }
     }
-	//believe this is really screwing spells, like
-	//phantasmal killer, that are cast on a target but
-	//later don't require the target to still be alive up - Saide
+    //believe this is really screwing spells, like
+    //phantasmal killer, that are cast on a target but
+    //later don't require the target to still be alive up - Saide
     /*if(query_target_required() && !objectp(target))
     {
         if(objectp(TO)) { TO->remove(); }
@@ -439,7 +439,7 @@ void remove_reflection_effects(object o_caster,object o_targ)
 int query_helpful() { return help_or_harm; }
 void set_helpful_spell(int x)
 {
-	help_or_harm = x;
+    help_or_harm = x;
 }
 
 
@@ -738,11 +738,11 @@ void wizard_interface(object user, string type, string targ)
     {
 /* if we decide to check for having hands to support morph spells denial or lost hands
 * I think this should do it but it needs tested *Styx* 8/21/05
-*	if( (member_array("right hand", caster->query_limbs()) == -1)
+*   if( (member_array("right hand", caster->query_limbs()) == -1)
 *  || (member_array("left hand", caster->query_limbs()) == -1) ) {
 *            tell_object(caster, "You have no hands with which to "+whatdo+" this "+whatsit+"!");
-*	    TO->remove();
-*	    return;
+*       TO->remove();
+*       return;
 *        }
 */
         weaps = caster->query_wielded();
@@ -1065,10 +1065,10 @@ void wizard_interface(object user, string type, string targ)
 //in order to make wild magic function like I intend - Saide
 void init_vars(object cast, object targ, object where, int lev)
 {
-	caster = cast;
-	target = targ;
-	place = where;
-	clevel = lev;
+    caster = cast;
+    target = targ;
+    place = where;
+    clevel = lev;
 }
 //End
 
@@ -1079,10 +1079,10 @@ void init_vars(object cast, object targ, object where, int lev)
 
 mixed special_spell_handling(string which)
 {
-	string *bad_spells = ({"whispering wind", "mindnet", "minor creation"});
-	if(!stringp(which)) return 0;
-	if(member_array(which, bad_spells) != -1) return 0;
-	return 1;
+    string *bad_spells = ({"whispering wind", "mindnet", "minor creation"});
+    if(!stringp(which)) return 0;
+    if(member_array(which, bad_spells) != -1) return 0;
+    return 1;
 }
 
 //End filter function
@@ -1958,9 +1958,9 @@ int preSpell() { return 1; }
 
 void spell_effect(int prof)
 {
-	spell_successful(); //adding this call to hopefully fix any problems with
-				  //a spell being reflected and the original caster
-				  //never being able to cast again - Saide
+    spell_successful(); //adding this call to hopefully fix any problems with
+                  //a spell being reflected and the original caster
+                  //never being able to cast again - Saide
 
 }
 
@@ -2060,7 +2060,7 @@ void removeSpellFromCaster(){
    }
    if (member_array(TO, spells) != -1) {
       spells-= ({TO});
-	  spells -= ({0});
+      spells -= ({0});
       caster->remove_property("dispellable spells");
       caster->set_property("dispellable spells",spells);
    }
@@ -2230,8 +2230,8 @@ int is_caster(string myclass) {
 }
 
 void debug_saves(int num) {
-	if(intp(num)) { save_debug = num; }
-	return;
+    if(intp(num)) { save_debug = num; }
+    return;
 }
 
 // can display a LOT of debug info.  Use <debug_saves(1)> in the spell's create() to enable
@@ -2241,33 +2241,33 @@ varargs int do_save(object targ,int mod) {
     mapping debug_map=([]);
 
     if(!objectp(caster)) { return 1; }
-	if(!objectp(targ)) { return notify_fail("invalid target object."); }
-	if(!intp(mod)) { mod = 0; }
+    if(!objectp(targ)) { return notify_fail("invalid target object."); }
+    if(!intp(mod)) { mod = 0; }
 
     caster_bonus += (int)caster->query_property("spell dcs");
 //    if(FEATS_D->usable_feat(caster,"spell focus"))          { caster_bonus += 2; }
 // spell focus feat & item "empowered" prop is now picked up together in the "spell dcs" property.
 
-	if(save_debug) {
-		tell_object(caster,"Presenting saving throw debug info:\n");
-		tell_object(caster,"Caster name: "+caster->query_true_name()+"");
-		tell_object(caster,"Target name: "+targ->query_true_name()+"");
+    if(save_debug) {
+        tell_object(caster,"Presenting saving throw debug info:\n");
+        tell_object(caster,"Caster name: "+caster->query_true_name()+"");
+        tell_object(caster,"Target name: "+targ->query_true_name()+"");
         tell_object(caster,"Pre calculation modifier (mod): "+mod+"");
         tell_object(caster,"Adding 10 to the DC initial DC check as per 3.xx rules.");
-	}
+    }
 
     casting_level = query_spell_level(spell_type);
 
     if(spell_type=="monk"||spell_type=="warlock")
         casting_level=6;
 
-	switch(spell_type) {
+    switch(spell_type) {
     case "wizard":
     case "mage":
     case "psion":
     case "psionics":
     case "psywarrior":
-	if(save_debug) tell_object(caster,"Caster's casting stat:  Intelligence");
+    if(save_debug) tell_object(caster,"Caster's casting stat:  Intelligence");
         stat = "intelligence";
         break;
     case "priest":
@@ -2278,41 +2278,41 @@ varargs int do_save(object targ,int mod) {
     case "antipaladin":
     case "druid":
     case "monk":
-	if(save_debug) tell_object(caster,"Caster's casting stat:  Wisdom");
+    if(save_debug) tell_object(caster,"Caster's casting stat:  Wisdom");
         stat = "wisdom";
         break;
     case "bard":
     case "sorcerer":
     case "oracle":
     case "warlock":
-	if(save_debug) tell_object(caster,"Caster's casting stat:  Charisma");
+    if(save_debug) tell_object(caster,"Caster's casting stat:  Charisma");
         stat = "charisma";
         break;
     default:
-	if(save_debug) tell_object(caster,"Caster's casting stat:  Intelligence");
+    if(save_debug) tell_object(caster,"Caster's casting stat:  Intelligence");
         stat = "intelligence";
         break;
     }
 
     type         = get_save();
-	if(save_debug)
-	{
-		tell_object(caster,"Save type: "+type+"");
-	}
+    if(save_debug)
+    {
+        tell_object(caster,"Save type: "+type+"");
+    }
 
     target_level = (int)targ->query_level();
-	if(save_debug)
-	{
-		tell_object(caster,"Target's level: "+target_level+"");
-	}
+    if(save_debug)
+    {
+        tell_object(caster,"Target's level: "+target_level+"");
+    }
 
     caster_bonus += 10; // initial DC of 10 for opposed spells, all the other caster mods gets added to this
     caster_bonus += calculate_bonus((int)caster->query_stats(stat));
 
-	if(save_debug)
-	{
-		tell_object(caster,"Bonus from caster's casting stat: "+caster_bonus+"");
-	}
+    if(save_debug)
+    {
+        tell_object(caster,"Bonus from caster's casting stat: "+caster_bonus+"");
+    }
 
     caster_bonus += casting_level;
 
@@ -2372,64 +2372,64 @@ varargs int do_save(object targ,int mod) {
       if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "necromancy") caster_bonus -= 2;
     }
 
-	if(save_debug)
-	{
-		tell_object(caster,"Level of spell: "+casting_level+"");
-	}
+    if(save_debug)
+    {
+        tell_object(caster,"Level of spell: "+casting_level+"");
+    }
 
     caster_bonus = caster_bonus * -1;
 
-	if(intp(mod)) { caster_bonus += mod; }
+    if(intp(mod)) { caster_bonus += mod; }
 
-	if(save_debug)
-	{
-		tell_object(caster,"%^RESET%^%^BOLD%^Total modifiers from caster's side "
-			"BEFORE d20 roll: "+caster_bonus+"%^RESET%^");
-	}
+    if(save_debug)
+    {
+        tell_object(caster,"%^RESET%^%^BOLD%^Total modifiers from caster's side "
+            "BEFORE d20 roll: "+caster_bonus+"%^RESET%^");
+    }
 
     // this is directly copied below for the shadowdancer reroll - if anything changed here, change there too plz!
     switch(lower_case(type))
     {
     case "fortitude": case "fort":
-		if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_fort_save(targ,caster_bonus);
-		else num = "/daemon/saving_throw_d"->fort_save(targ,caster_bonus);
+        if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_fort_save(targ,caster_bonus);
+        else num = "/daemon/saving_throw_d"->fort_save(targ,caster_bonus);
         break;
     case "reflex":
-		if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_reflex_save(targ,caster_bonus);
-		else num = "/daemon/saving_throw_d"->reflex_save(targ,caster_bonus);
+        if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_reflex_save(targ,caster_bonus);
+        else num = "/daemon/saving_throw_d"->reflex_save(targ,caster_bonus);
         break;
     case "willpower": case "will":
-		if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_will_save(targ,caster_bonus);
-		else num = "/daemon/saving_throw_d"->will_save(targ,caster_bonus);
+        if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_will_save(targ,caster_bonus);
+        else num = "/daemon/saving_throw_d"->will_save(targ,caster_bonus);
         break;
     default:
         num = 0;
         break;
     }
 
-	if(save_debug) {
-		tell_object(caster,"Type of save actually used in daemon: "+debug_map["save_type"]+"");
-		tell_object(caster,"Saving throw number before any rolls: "+debug_map["final_saving_throw"]+"");
-		tell_object(caster,"DC of saving throw: "+debug_map["dc"]+"");
-		tell_object(caster,"Save result (1 pass, 0 fail): "+debug_map["save_result"]+"");
-		tell_object(caster,"Throw passed or failed by: "+debug_map["pass_or_fail_by"]+"");
-	}
+    if(save_debug) {
+        tell_object(caster,"Type of save actually used in daemon: "+debug_map["save_type"]+"");
+        tell_object(caster,"Saving throw number before any rolls: "+debug_map["final_saving_throw"]+"");
+        tell_object(caster,"DC of saving throw: "+debug_map["dc"]+"");
+        tell_object(caster,"Save result (1 pass, 0 fail): "+debug_map["save_result"]+"");
+        tell_object(caster,"Throw passed or failed by: "+debug_map["pass_or_fail_by"]+"");
+    }
 
       // one reroll chance for shadowdancers if they fail an enchantment spell save
       if( (FEATS_D->usable_feat(caster,"shadowdancer") || caster->is_class("shadowdancer")) && !num && spell_sphere == "enchantment_charm") {
           // this is a direct copy of the above - if anything changed there, change here too plz!
           switch(lower_case(type)) {
             case "fortitude": case "fort":
-		    if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_fort_save(targ,caster_bonus);
+            if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_fort_save(targ,caster_bonus);
                 else num = "/daemon/saving_throw_d"->fort_save(targ,caster_bonus);
                 break;
             case "reflex":
-		    if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_reflex_save(targ,caster_bonus);
-		    else num = "/daemon/saving_throw_d"->reflex_save(targ,caster_bonus);
+            if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_reflex_save(targ,caster_bonus);
+            else num = "/daemon/saving_throw_d"->reflex_save(targ,caster_bonus);
                 break;
             case "willpower": case "will":
-		    if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_will_save(targ,caster_bonus);
-		    else num = "/daemon/saving_throw_d"->will_save(targ,caster_bonus);
+            if(save_debug) debug_map = "/daemon/saving_throw_d"->debug_will_save(targ,caster_bonus);
+            else num = "/daemon/saving_throw_d"->will_save(targ,caster_bonus);
                 break;
             default:
                 num = 0;
@@ -2437,17 +2437,17 @@ varargs int do_save(object targ,int mod) {
           }
       }
 
-	if(save_debug) {
-		tell_object(caster,"Shadowdancer reroll on failed enchantment-sphere save!");
-		tell_object(caster,"Type of save actually used in daemon: "+debug_map["save_type"]+"");
-		tell_object(caster,"Saving throw number before any rolls: "+debug_map["final_saving_throw"]+"");
-		tell_object(caster,"DC of saving throw: "+debug_map["dc"]+"");
-		tell_object(caster,"Save result (1 pass, 0 fail): "+debug_map["save_result"]+"");
-		tell_object(caster,"Throw passed or failed by: "+debug_map["pass_or_fail_by"]+"");
-	}
+    if(save_debug) {
+        tell_object(caster,"Shadowdancer reroll on failed enchantment-sphere save!");
+        tell_object(caster,"Type of save actually used in daemon: "+debug_map["save_type"]+"");
+        tell_object(caster,"Saving throw number before any rolls: "+debug_map["final_saving_throw"]+"");
+        tell_object(caster,"DC of saving throw: "+debug_map["dc"]+"");
+        tell_object(caster,"Save result (1 pass, 0 fail): "+debug_map["save_result"]+"");
+        tell_object(caster,"Throw passed or failed by: "+debug_map["pass_or_fail_by"]+"");
+    }
 
-	if(save_debug) return debug_map["save_result"];
-	else return num;
+    if(save_debug) return debug_map["save_result"];
+    else return num;
 }
 
 
