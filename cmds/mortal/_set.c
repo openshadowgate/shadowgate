@@ -336,7 +336,7 @@ You can manipulate numerous mud settings:
 
 %^CYAN%^expgain %^GREEN%^on|off%^RESET%^\n  This will turn on or off experience gain for your character. While it is off, you will get NO EXPERIENCE. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^taxperc %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  This will define how much of your experience gain goes towards paying off your experience tax. This value will grow with your levels, but you may force its increase via this setting. %^MAGENTA%^Default value is on.%^RESET%^\n
-%^CYAN%^hardcore %^GREEN%^%^ULINE%^on|off%^RESET%^\n  If you loved good old days and want more. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^hardcore %^GREEN%^%^ULINE%^on%^RESET%^\n  If you loved good old days and want more. Harcore mode can't be turned off. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^ULINE%^%^CYAN%^Terminal and display:%^RESET%^
 
 %^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n  This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
