@@ -112,6 +112,12 @@ int cmd_score(string args)
     object targ;
     int arrange = 14;
 
+    if(TP->query_race()=="unborn")
+    {
+        return notify_fail("You are in creation!
+Use <review> to review you choices or <press button> to start the process.\n");
+    }
+
     if (args && avatarp(TP))
     {
         if(!(targ = find_player(args)))

@@ -10,7 +10,7 @@ int amount;
 void create() {
     ::create();
     set_spell_name("spiritual weapon");
-    set_spell_level(([ "inquisitor":1,"oracle":1,"cleric":1 ]));
+    set_spell_level(([ "inquisitor":2,"oracle":2,"cleric":2 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS spiritual weapon");
     set_mystery("ancestor");
@@ -74,6 +74,8 @@ void summon_servant() {
     ob->set_property("spell", ({TO}) );
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
+
+    addSpellToCaster();
 
     caster->set_property("spiritual_weapon",ob);
     return;

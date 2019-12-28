@@ -10,7 +10,7 @@ int amount;
 void create() {
     ::create();
     set_spell_name("spiritual ally");
-    set_spell_level(([ "oracle":1,"cleric":1 ]));
+    set_spell_level(([ "oracle":4,"cleric":4 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS spiritual ally");
     set_mystery("ancestor");
@@ -67,6 +67,8 @@ void summon_servant() {
     ob->set_property("spell", ({TO}) );
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
+
+    addSpellToCaster();
 
     caster->set_property("has_elemental",ob);
     return;

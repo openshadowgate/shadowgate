@@ -70,6 +70,8 @@ void summon_servant() {
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
 
+    addSpellToCaster();
+
     caster->set_property("unseen_servant",ob);
     return;
 }
