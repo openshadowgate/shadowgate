@@ -65,17 +65,21 @@ void heart_beat()
 
     level = ETO->query_character_level();
 
-    creature->set_property("fighter_attacks_mod",level/5);
+    creature->set_property("fighter_attacks_mod",level/4);
     creature->set_property("magic resistance",level + 30);
+    creature->set_property("spell damage resistance",level);
     creature->add_damage_bonus(8+(level/8));
     creature->add_attack_bonus(8+(level/8));
     creature->set_hd(level + 5,20);
     creature->set_mlevel("fighter",level);
-    creature->set_hp(ETO->query_max_hp()*3);
+    creature->set_mlevel("thief",level);
+
+    creature->set_max_hp(level*12+300);
+    creature->set_hp(ETO->query_max_hp());
     creature->set_overall_ac(-1 * level -10);
 
     creature->move(EETO);
-    creature->force_me("speak undercommon");
+    creature->force_me("speak wizzish");
     creature->force_me("speech %^BOLD%^%^MAGENTA%^pu%^RESET%^%^MAGENTA%^r%^MAGENTA%^r%^BOLD%^%^BLACK%^ in a %^RESET%^%^MAGENTA%^s%^MAGENTA%^m%^BOLD%^%^MAGENTA%^ok%^RESET%^%^MAGENTA%^y%^BOLD%^%^BLACK%^ voice%^RESET%^");
     creature->force_me("say %^BOLD%^%^MAGENTA%^You have been chosen to %^RED%^die%^MAGENTA%^.%^RESET%^");
     creature->set_target(ETO->query_name());
