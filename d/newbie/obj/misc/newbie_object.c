@@ -5,19 +5,19 @@ is completed - based on class
 
 Basically though it is going to direct newbies to areas of the newbie area
 to complete quests/tasks and will reward them with gear
-as they complete them. 
+as they complete them.
 
 The idea being that newbies will have a set of decent gear when
-they leave the newbie area - the helmet itself 
+they leave the newbie area - the helmet itself
 will be the only enchanted item - at +1 and will
 stay with them leveling up to +3 at level 20 (it will be slightly lower enchantment than what
-they might be able to find out in the world). 
+they might be able to find out in the world).
 
 Will reward experience based on what is needed to level up when the task/quest
-is completed - so that by the time a player completes the tasks 
-they should be non-newbie - the very last task will 
+is completed - so that by the time a player completes the tasks
+they should be non-newbie - the very last task will
 reward the updated helmet and spawn a version of a trainer
-that is special for a newbie character. 
+that is special for a newbie character.
 
 Saide, November 2016
 
@@ -55,12 +55,12 @@ void create()
 {
     ::create();
     set_name("a strange brilliant mass");
-    
+
     set_long((:TO, "myLong":));
-    
+
     set_short("%^BOLD%^%^YELLOW%^A strange brilliant mass%^RESET%^");
     set_id(({"strange mass", "mass", "brilliant mass", "strange brilliant mass", "newbiemassobject"}));
-    
+
     set_property("no animate", 1);
     set_property("soulbound", 1);
     set_property("no drop", 1);
@@ -68,7 +68,7 @@ void create()
 
     set_weight(0);
     set_value(0);
-    
+
     myTask = 1;
     myPlace = 1;
     myAlign = 0;
@@ -89,11 +89,11 @@ void init()
         if(objectp(TO)) TO->remove();
         return;
     }
-    if(!stringp(belongsTo)) 
+    if(!stringp(belongsTo))
     {
-        if(userp(ETO)) 
-        { 
-            belongsTo = ETOQN; 
+        if(userp(ETO))
+        {
+            belongsTo = ETOQN;
             call_out("introduce_me",8,ETO);
         }
     }
@@ -113,13 +113,13 @@ void check_intro()
     if(!userp(ETO)) return;
     if(myTask == 1 && myPlace == 1)
     {
-        if(myTimer >= 10) 
+        if(myTimer >= 10)
         {
             myTimer = 0;
             call_out("introduce_me", 8, ETO);
             return;
         }
-        else 
+        else
         {
             myTimer++;
             call_out("check_intro", 10);
@@ -162,15 +162,15 @@ void introduce_task()
     switch(myTask)
     {
         case 1:
-            if(myPlace == 1) myPlace = 2;                
+            if(myPlace == 1) myPlace = 2;
             switch(myPlace)
             {
-                case 2:                
+                case 2:
                     tell_object(ETO, "\n"+WE+" The first task is an important one. "+
                     "But before we get into it, there are some things that you need to know about this world. The first thing "+
                     "shows some information about yourself. It is in the form of the %^YELLOW%^bio%^RESET%^ command. "+
                     "When you are ready simply %^YELLOW%^explain bio%^RESET%^ and we will go from there.%^RESET%^");
-                    break;                    
+                    break;
                 case 3:
                     tell_object(ETO, "\n"+WE+" There is a "+
                     "meadow north of Offestry. You must venture into that meadow. Within the meadow you can %^YELLOW%^dig"+
@@ -185,7 +185,7 @@ void introduce_task()
                     }
                     break;
             }
-            break;        
+            break;
         case 2:
             switch(myPlace)
             {
@@ -251,7 +251,7 @@ void introduce_task()
             break;
         case 4:
             //fence information for thieves/bards
-            if(!ETO->is_class("thief") && !ETO->is_class("bard")) 
+            if(!ETO->is_class("thief") && !ETO->is_class("bard"))
             {
                 advance_task();
                 return;
@@ -290,7 +290,7 @@ void introduce_task()
                     break;
                 case 3:
                     tmpquests = ETO->query_mini_quests();
-                    if(member_array("%^BOLD%^%^CYAN%^Newbie Quest: %^BOLD%^%^RED%^Killed the Gnome Leader!%^RESET%^", tmpquests) != -1 || 
+                    if(member_array("%^BOLD%^%^CYAN%^Newbie Quest: %^BOLD%^%^RED%^Killed the Gnome Leader!%^RESET%^", tmpquests) != -1 ||
                     member_array("%^BOLD%^%^CYAN%^Newbie Quest: %^BOLD%^%^RED%^Killed the Kobold Leader!%^RESET%^", tmpquests) != -1)
                     {
                         tell_object(ETO, "\n"+WE+" It would seem that you have already completed the task "+
@@ -311,7 +311,7 @@ void introduce_task()
             }
             break;
         default:
-            switch(myPlace) 
+            switch(myPlace)
             {
                 case 2:
                     tell_object(ETO, "\n"+WE+" You have completed all of the tasks that I have for you "+
@@ -326,14 +326,14 @@ void introduce_task()
                         "for your final step before being moved into the greater world of Shadowgate "+
                         "%^YELLOW%^explain enter the world%^RESET%^\n");
                     }
-                    else 
+                    else
                     {
                         tell_object(ETO, "\n"+WE+" You have completed all the tasks I have for you. I will remain "+
                         "with you in case you need for me to %^YELLOW%^explain%^RESET%^ something else until "+
                         "you reach level 10.%^RESET%^");
-                    }                    
+                    }
                     break;
-            }    
+            }
             break;
     }
 }
@@ -342,7 +342,7 @@ varargs string determine_explaination(string which)
 {
     if(!objectp(TO)) return "";
     if(!objectp(ETO)) return "";
-    if(stringp(which)) 
+    if(stringp(which))
     {
         if(myTask >= 1) which = "bio, ";
         if(myTask >= 2) which += "skills, stats, advance, ";
@@ -350,11 +350,11 @@ varargs string determine_explaination(string which)
         if(myTask >= 4 && (ETO->is_class("thief") || ETO->is_class("rogue"))) which += "fence, guilds, ";
         if(myTask >= 5) which += "rumors, quest areas, roleplay, ";
         if(myTask >= 6) which += "church, description, adjective, ";
-        if(myPlace == 3) 
+        if(myPlace == 3)
         {
             if(myTask >= 6 && strsrch(base_name(EETO), "/d/newbie") != -1) which += "enter the world, ";
             return which += "my task, ";
-        }        
+        }
         else return which;
     }
     switch(myTask)
@@ -362,7 +362,7 @@ varargs string determine_explaination(string which)
         case 1:
             if(member_array("bio", explained) == -1) return "bio";
             else return "my task";
-            break;           
+            break;
         case 2:
             if(member_array("skills", explained) == -1) return "skills";
             else if(member_array("stats", explained) == -1) return "stats";
@@ -404,9 +404,9 @@ int explain_act(string str)
     if(!objectp(TO)) return 0;
     if(!objectp(ETO)) return 0;
     if(!stringp(str)) flag = 1;
-    if(!str) flag = 1;    
+    if(!str) flag = 1;
     if(flag) str = determine_explaination();
-    
+
     if(strsrch(str, "bio") != -1)
     {
         tell_object(ETO, "\n"+WE+" The bio command "+
@@ -447,7 +447,7 @@ int explain_act(string str)
         WE+" You will also find that many things, including poisons, monster abilities, and even "+
         "your own equipment can temporarily %^BOLD%^%^CYAN%^increase%^RESET%^ or %^BOLD%^%^RED%^"+
         "decrease%^RESET%^ your stats in this world. You can read %^YELLOW%^help stats%^RESET%^ for a "+
-        "more in depth understanding of the command.%^RESET%^");   
+        "more in depth understanding of the command.%^RESET%^");
         if(member_array("stats", explained) == -1) explained += ({"stats"});
     }
     else if(strsrch(str, "advance") != -1 && myTask >= 2)
@@ -463,7 +463,7 @@ int explain_act(string str)
         "should you require one to advance beyond your current level.%^RESET%^");
         if(member_array("advance", explained) == -1) explained += ({"advance"});
     }
-    else if((strsrch(str, "hunger") != -1 && myTask >= 3) || 
+    else if((strsrch(str, "hunger") != -1 && myTask >= 3) ||
     (strsrch(str, "thirst") != -1 && myTask >= 3))
     {
         tell_object(ETO, "\n"+WE+" You will grow hungry and thirsty as you travel the realm. You must "+
@@ -491,12 +491,12 @@ int explain_act(string str)
         "be easier to replace the equipment than to repair it.\n\n"+WE+" When in the room with a merchant you can "+
         "simply have the merchant %^YELLOW%^repair item%^RESET%^ and it will be done, as long as you "+
         "have the required amount of gold.");
-        if(member_array("repair", explained) == -1) explained += ({"repair"});        
+        if(member_array("repair", explained) == -1) explained += ({"repair"});
     }
     else if(strsrch(str, "movement") != -1 && myTask >= 3)
     {
         tell_object(ETO, "\n"+WE+" You are already familiar with the standard ways of moving about the world. "+
-        "This typical is as simple as entering the exit name - such as 'east' and then hitting enter. \n\n"+WE+ 
+        "This typical is as simple as entering the exit name - such as 'east' and then hitting enter. \n\n"+WE+
         " However, as you explore the world you will find that there is much more to it than this. There are "+
         "boats to travel vast oceans, ferries to travel short trips via river that would otherwise "+
         "take longer on foot. \n\n"+WE+" There are even mounts that you can learn to ride, if your %^YELLOW%^"+
@@ -509,7 +509,7 @@ int explain_act(string str)
         "for you to recover.%^RESET%^");
         if(member_array("movement", explained) == -1) explained += ({"movement"});
     }
-    
+
     else if(strsrch(str, "fence") != -1 && myTask >= 4 && (ETO->is_class("thief") || ETO->is_class("bard")))
     {
         tell_object(ETO, "\n"+WE+" There are several fences through the world that are hidden in "+
@@ -600,7 +600,7 @@ int explain_act(string str)
         "this before leaving the newbie area - in just a few moments - if you have not already.");
         if(member_array("adjective", explained) == -1) explained += ({"adjective"});
     }
-    else if(strsrch(str, "enter the world") != -1 && myTask >= 6 && 
+    else if(strsrch(str, "enter the world") != -1 && myTask >= 6 &&
     strsrch(base_name(EETO), "/d/newbie") != -1 &&
     strsrch(base_name(EETO), "/d/newbie/ooc/trainer") == -1)
     {
@@ -612,7 +612,7 @@ int explain_act(string str)
         myRoom = new("/d/newbie/ooc/trainer");
         myRoom->set_for(ETO);
         ETO->move_player(myRoom);
-        return 1;       
+        return 1;
     }
     else if(strsrch(str, "my task") != -1)
     {
@@ -621,7 +621,7 @@ int explain_act(string str)
             switch(myTask)
             {
                 case 1:
-                if(member_array("bio", explained) != -1 && strsrch(str, "my task") != -1) 
+                if(member_array("bio", explained) != -1 && strsrch(str, "my task") != -1)
                 {
                     myPlace = 3;
                     introduce_task();
@@ -656,11 +656,11 @@ int explain_act(string str)
                 member_array("quest areas", explained) != -1 && strsrch(str, "my task") != -1)
                 {
                     myPlace = 3;
-                    introduce_task();               
+                    introduce_task();
                 }
                 break;
             default:
-                if(member_array("description", explained) != -1 && member_array("church", explained) != -1 && 
+                if(member_array("description", explained) != -1 && member_array("church", explained) != -1 &&
                 member_array("adjective", explained) != -1 && strsrch(str, "my task") != -1)
                 {
                     myPlace = 3;
@@ -680,7 +680,7 @@ int explain_act(string str)
                 "there is a black gem that has been buried there specifically for you and you "+
                 "alone to %^YELLOW%^dig%^RESET%^ up. Once you find it, return to the offestry town square, then "+
                 "%^YELLOW%^feed%^RESET%^ it to me. I will absorb "+
-                "its power and then we can continue on with more tasks.%^RESET%^");              
+                "its power and then we can continue on with more tasks.%^RESET%^");
                 break;
             case 2:
                 tell_object(ETO, "\n"+WE+" Your current "+
@@ -693,7 +693,7 @@ int explain_act(string str)
                 "foray into understanding that in this world making one decision will sometimes prevent "+
                 "you from making another.\n\n"+WE+" Some would tell you that feeding things to "+
                 "strange masses is an %^RED%^evil%^RESET%^ action, so keep this in mind.");
-                break;     
+                break;
             case 3:
                 tell_object(ETO, "\n"+WE+" Your current task is to go to the "+
                 "keep west of Offestry.\n\n"+WE+" Near there you will encounter a distraught woman, "+
@@ -720,7 +720,7 @@ int explain_act(string str)
                 "venture forth into the wide world, your destiny awaits!%^RESET%^");
                 break;
             default:
-                if(base_name(EETO) == "/d/newbie/rooms/trainer" && strsrch(base_name(EETO), "/d/newbie/") == -1) 
+                if(base_name(EETO) == "/d/newbie/rooms/trainer" && strsrch(base_name(EETO), "/d/newbie/") == -1)
                 {
                     tell_object(ETO, "\n"+WE+" I cannot explain that right now. You may %^YELLOW%^ask tasks"+
                     "%^RESET%^ in order to determine what I can explain.");
@@ -735,24 +735,24 @@ int explain_act(string str)
                 break;
         }
     }
-    else 
+    else
     {
         tell_object(ETO, "\n"+WE+" I cannot explain that right now. You may %^YELLOW%^ask tasks"+
         "%^RESET%^ in order to determine what I can explain.");
     }
- 
-    return 1;    
+
+    return 1;
 }
 
 int ask_act(string str)
 {
     if(!objectp(TO)) return 0;
     if(!objectp(ETO)) return 0;
-    if(!stringp(str)) 
+    if(!stringp(str))
     {
         no_mention();
         introduce_task();
-    }    
+    }
     else if(stringp(str))
     {
         if(strsrch(str, "task") != -1)
@@ -765,7 +765,7 @@ int ask_act(string str)
             introduce_task();
         }
     }
-    else 
+    else
     {
         no_mention();
         introduce_task();
@@ -789,11 +789,11 @@ void advance_task()
             break;
         case 3:
             NEWB_D->spawn_eq(ETO, myTask);
-            myTask++;            
+            myTask++;
             break;
         case 4:
             myTask++;
-            break;     
+            break;
         case 5:
             NEWB_D->spawn_eq(ETO, myTask);
             myTask++;
@@ -832,12 +832,16 @@ int feed_act(string str)
     if(!objectp(TO)) return 0;
     if(!objectp(ETO)) return 0;
     if(!objectp(EETO)) return 0;
-    if(base_name(EETO) != "/d/newbie/rooms/town/square") return 0;
+    if(base_name(EETO) != "/d/newbie/rooms/town/square")
+    {
+        tell_object(ETO,"%^YELLOW%^You must be by the board at Offestry Town square if you ment to feed the mass.");
+        return 0;
+    }
     switch(myTask)
     {
         case 1:
             if(objectp(myOb = present("newbiemeadowob", ETO)))
-            {                
+            {
                 tell_object(ETO,"\n%^YELLOW%^The strange mass absorbs the black gem "+
                 "and begins mutating... ");
                 tell_object(ETO,"\n%^RESET%^%^CYAN%^The strange whispering continues excitedly: "+
