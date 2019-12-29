@@ -834,7 +834,7 @@ int feed_act(string str)
     if(!objectp(EETO)) return 0;
     if(base_name(EETO) != "/d/newbie/rooms/town/square")
     {
-        tell_object(ETO,"%^YELLOW%^You must be by the board at Offestry Town square if you ment to feed the mass.");
+        tell_object(ETO,"%^YELLOW%^You must be by the board at Offestry Town square if you ment to feed me.");
         return 0;
     }
     switch(myTask)
