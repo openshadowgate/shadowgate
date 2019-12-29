@@ -9,7 +9,7 @@ void create(){
 
     set_name("unseen servant");
     set_id(({"servant","unseen servant","humanoid","whispy humanoid"}));
-    set_short("%^BOLD%^A t%^RESET%^r%^BOLD%^ansluce%^RESET%^n%^BOLD%^t a%^RESET%^p%^BOLD%^pariti%^RESET%^o%^BOLD%^n%^RESET%^");
+    set_short("%^RESET%^%^BOLD%^A t%^RESET%^r%^BOLD%^ansluce%^RESET%^n%^BOLD%^t a%^RESET%^p%^BOLD%^pariti%^RESET%^o%^BOLD%^n%^RESET%^");
     set_long("%^BOLD%^Fl%^RESET%^i%^BOLD%^%^BLACK%^c%^WHITE%^keri%^RESET%^n%^BOLD%^g in and out of existence, this %^CYAN%^hazy figure %^WHITE%^seems to take on a form only to %^RESET%^dissipate %^BOLD%^again into thin air, as if unable or unwilling to linger longer on this plane of existence. Its features are utterly indiscernible, seeming to take form only when you catch a glimpse out of the corner of your eye.%^RESET%^");
     set_hd(4,1);
     set_hp(query_hd()*8);
