@@ -419,16 +419,16 @@ int cmd_stats(string person)
     CHR = obj->query_base_stats("charisma");
     ccha = obj->query_stats("charisma");
 
-    str = "\n%^RESET%^%^GREEN%^Str: %^RESET%^"+stat_display(STR, cstr)+ " ("+mybonus(obj, "strength")+")";
-    str += "  %^GREEN%^Dex: %^RESET%^"+stat_display(DEX, cdex)+" ("+mybonus(obj, "dexterity")+")";
+    str = "\n%^RESET%^%^GREEN%^Str %^RESET%^"+stat_display(STR, cstr)+ " ("+mybonus(obj, "strength")+")";
+    str += "  %^GREEN%^Dex %^RESET%^"+stat_display(DEX, cdex)+" ("+mybonus(obj, "dexterity")+")";
     if(obj->is_undead())
-        str += "  %^GREEN%^Con: %^RESET%^--\n";
+        str += "  %^GREEN%^Con %^RESET%^--\n";
     else
-        str += "  %^GREEN%^Con: %^RESET%^"+stat_display(CON, ccon)+" ("+mybonus(obj, "constitution")+")\n";
+        str += "  %^GREEN%^Con %^RESET%^"+stat_display(CON, ccon)+" ("+mybonus(obj, "constitution")+")\n";
 
-    str += "%^GREEN%^Int: %^RESET%^"+stat_display(INT, cint)+" ("+mybonus(obj, "intelligence")+")";
-    str += "  %^GREEN%^Wis: %^RESET%^"+stat_display(WIS, cwis)+" ("+mybonus(obj, "wisdom")+")";
-    str += "  %^GREEN%^Cha: %^RESET%^"+stat_display(CHR, ccha)+" ("+mybonus(obj, "charisma")+")";
+    str += "%^BLUE%^Int %^RESET%^"+stat_display(INT, cint)+" ("+mybonus(obj, "intelligence")+")";
+    str += "  %^BLUE%^Wis %^RESET%^"+stat_display(WIS, cwis)+" ("+mybonus(obj, "wisdom")+")";
+    str += "  %^BLUE%^Cha %^RESET%^"+stat_display(CHR, ccha)+" ("+mybonus(obj, "charisma")+")";
     if(obj == TP) tell_object(obj,""+str);
     else tell_object(TP,""+str);
 
