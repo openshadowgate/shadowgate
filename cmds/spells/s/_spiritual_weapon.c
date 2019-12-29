@@ -52,11 +52,6 @@ void summon_servant() {
 
     tell_object(caster,"%^CYAN%^%^BOLD%^As you complete the spell a weapon forms out of thin air in front of you.%^RESET%^");
     tell_room(place,"%^CYAN%^%^BOLD%^As "+caster->QCN+" completes the spell a weapon forms out of thin air.%^RESET%^",caster);
-    control = new("/d/magic/obj/spiritual_weapon_controller");
-    control->set_caster(caster);
-    control->move(caster);
-    control->set_property("spell",TO);
-    control->set_property("spelled", ({TO}) );
 
     ob=new("/d/magic/mon/spiritual_weapon.c");
     ob->set_alignment(caster->query_alignment());
@@ -65,7 +60,13 @@ void summon_servant() {
     ob->set_id(ob->query_id()+("/d/magic/obj/weapons/"+normalizedDeity)->query_id());
     ob->setup_servant(caster,clevel);
 
-    control->set_sweapon(ob);
+    control = new("/d/magic/obj/simple_controller");
+    control->set_master(caster);
+    control->move(caster);
+    control->set_property("spell",TO);
+    control->set_property("spelled", ({TO}) );
+    control->set_slave(ob);
+
     caster->add_follower(ob);
 
     ob->move(environment(caster));

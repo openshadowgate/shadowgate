@@ -87,7 +87,7 @@ int cmd(string str){
        return notify_fail("Care to tell it what to do?\n");
    if(sscanf(str, "%s to %s", who, what) != 2)
       return notify_fail("Syntax: <command "+slavename+" to ACTION>\n");
-   if(who != "ally")
+   if(who != slavename)
       return 0;
    if(what[0..3] == "kill")
    {
@@ -135,7 +135,7 @@ int dismiss(string str)
 {
    if(!str || str != slavename)
       return 0;
-   tell_object(master,"%^BOLD%^You dismiss the ally!\n");
+   tell_object(master,"%^BOLD%^You dismiss the "+slavename+"!\n");
    if (objectp(slave))
        slave->remove();
    call_out("timed",1);

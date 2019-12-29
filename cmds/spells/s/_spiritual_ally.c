@@ -48,17 +48,19 @@ void summon_servant() {
 
     tell_object(caster,"%^CYAN%^%^BOLD%^As you complete the spell a humanoid being descends to stand in your protection.%^RESET%^");
     tell_room(place,"%^CYAN%^%^BOLD%^As "+caster->QCN+" completes the spell a spectral humanoid being appears.%^RESET%^",caster);
-    control = new("/d/magic/obj/simple_controller");
-    control->set_caster(caster);
-    control->move(caster);
-    control->set_property("spell",TO);
-    control->set_property("spelled", ({TO}) );
 
     ob=new("/d/magic/mon/spiritual_ally.c");
     ob->set_alignment(caster->query_alignment());
     ob->setup_servant(caster,clevel);
 
+    control = new("/d/magic/obj/simple_controller");
+    control->set_master(caster);
+    control->move(caster);
     control->set_slave(ob);
+    control->set_property("spell",TO);
+    control->set_property("spelled", ({TO}) );
+
+
     caster->add_follower(ob);
 
     ob->move(environment(caster));

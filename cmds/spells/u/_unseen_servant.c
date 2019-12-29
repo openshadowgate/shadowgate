@@ -52,16 +52,17 @@ void summon_servant() {
     object ob, thing;
 
     tell_object(caster,"%^CYAN%^You barely notice some movement at the edge of you sight. You feel you can <command servant to> performa various actions. .%^RESET%^");
-    control = new("/d/magic/obj/unseen_servant_controller");
-    control->set_caster(caster);
-    control->move(caster);
-    control->set_property("spell",TO);
-    control->set_property("spelled", ({TO}) );
 
     ob=new("/d/magic/mon/unseen_servant.c");
     ob->setup_servant(caster,clevel);
 
-    control->set_servant(ob);
+    control = new("/d/magic/obj/simple_controller");
+    control->move(caster);
+    control->set_property("spell",TO);
+    control->set_property("spelled", ({TO}) );
+    control->set_master(caster);
+    control->set_slave(ob);
+
     caster->add_follower(ob);
 
     ob->move(environment(caster));

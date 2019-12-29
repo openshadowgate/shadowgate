@@ -8,7 +8,7 @@ object cast;
 void create(){
   ::create();
 
-    set_name("spiritual weapon");
+    set_name("weapon");
     set_id(({"weapon","spiritual weapon"}));
     set_short("%^CYAN%^a spiritual weapon%^RESET%^");
     set_long("%^CYAN%^Spiritual weapon.%^RESET%^");
