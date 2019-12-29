@@ -37,8 +37,16 @@ GENESIS
    set_value(0);
    set_weight(100000);
    rt_room = new(SPELL_OBJ_DIR+"genesis_room");
-   rt_room->set_property("teleport proof",spellobj->query_clevel());
+
    rt_room->remove_property("teleport proof");
+   rt_room->remove_property("no teleport");
+   if(ETO->query_property("no teleport"))
+       rt_room->set_property("no teleport",1);
+   else if(ETO->query_property("teleport proof"))
+       rt_room->set_property("teleport proof",ETO->query_property("teleport proof"));
+   else
+       rt_room->set_property("teleport proof",spellobj->query_clevel());
+
    rt_room->set_had_players();
    lowered = 1;
 }
