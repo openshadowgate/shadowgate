@@ -33,14 +33,14 @@ set_master(object ob)
       remove();
 }
 
-object query_sally()
+object query_slave()
 {
-    return sally;
+    return slave;
 }
 
-object query_caster()
+object query_master()
 {
-    return caster;
+    return master;
 }
 
 void set_slave(object ob)
@@ -55,9 +55,9 @@ void heart_beat()
     int i,j;
 
     tmp = ({});
-    if(!objectp(caster))
+    if(!objectp(master))
         remove();
-    if(!objectp(sally))
+    if(!objectp(slave))
         remove();
 }
 
@@ -93,13 +93,13 @@ int cmd(string str){
    {
       if(sscanf(what, "kill %s",who) == 1)
       {
-         if(ob = present(who,environment(caster)))
+         if(ob = present(who,environment(master)))
          {
             if(objectp(ob))
             {
-               if(!caster->ok_to_kill(ob))
+               if(!master->ok_to_kill(ob))
                {
-                  tell_object(caster,"You are not allowed to kill that creature!");
+                  tell_object(master,"You are not allowed to kill that creature!");
                   return 1;
                }
             }
@@ -108,25 +108,25 @@ int cmd(string str){
    }
    if(what == "follow")
    {
-       if(present(sally,environment(caster)))
+       if(present(slave,environment(master)))
        {
-           tell_object(caster,"%^CYAN%^"+capitalize(slavename)+" is now following you.");
-           caster->add_follower(sally);
+           tell_object(master,"%^CYAN%^"+capitalize(slavename)+" is now following you.");
+           master->add_follower(slave);
            return 1;
        }
        else
        {
-           tell_object(caster,"%^CYAN%^The weapon must be present before it can follow you!");
+           tell_object(master,"%^CYAN%^The weapon must be present before it can follow you!");
            return 1;
        }
    }
-   if(!caster->query_property("safe arena") ||
+   if(!master->query_property("safe arena") ||
       !ob->query_property("safe arena"))
-       "/daemon/killing_d"->check_actions(caster,ob);
-   if(!sally->force_me(what))
+       "/daemon/killing_d"->check_actions(master,ob);
+   if(!slave->force_me(what))
       return notify_fail("You fail to command the "+slavename+" to "+what+"!\n");
-   tell_object(caster,"%^CYAN%^"+capitalize(slavename)+" obeys your command to "+what+".");
-   if(!objectp(sally))
+   tell_object(master,"%^CYAN%^"+capitalize(slavename)+" obeys your command to "+what+".");
+   if(!objectp(slave))
        return 1;
    return 1;
 }
@@ -135,9 +135,9 @@ int dismiss(string str)
 {
    if(!str || str != slavename)
       return 0;
-   tell_object(caster,"%^BOLD%^You dismiss the ally!\n");
-   if (objectp(sally))
-       sally->remove();
+   tell_object(master,"%^BOLD%^You dismiss the ally!\n");
+   if (objectp(slave))
+       slave->remove();
    call_out("timed",1);
    return 1;
 }
