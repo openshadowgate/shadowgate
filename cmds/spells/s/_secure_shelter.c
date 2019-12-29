@@ -9,7 +9,7 @@ object portal;
 string roomName;
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("secure shelter");
@@ -18,17 +18,30 @@ void create()
     set_syntax("cast CLASS secure shelter");
     set_description("When this spell is cast, it conjures a small pocket dimension under the guise of a little house, "
         "secure and impervious to outside forces.  It offers temporary safety from the outside world.  To cast, a narrative "
-        "reciting details of the cottage you are trying to summon, is required.");
+        "reciting details of the cottage you are trying to summon, is required.
+
+Inside the selter you can:
+
+%^ORANGE%^<lock cottage>%^RESET%^
+  This locks the door to the cottage, preventing anyone outside from entering.
+
+%^ORANGE%^<unlock cottage>%^RESET%^
+  This unlocks the cottage door, allowing people to enter or leave.
+
+%^ORANGE%^<out>%^RESET%^
+  This is the exit to the Prime Material plane, so long as the cottage door is unlocked.
+
+");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
-    
-    if(place->query_property("no pocket space")) 
+
+    if(place->query_property("no pocket space"))
     {
         tell_object(caster, "%^RESET%^%^CYAN%^Something is interfering with your spell, and it fizzles uselessly.");
         TO->remove();
@@ -51,11 +64,11 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     if (find_call_out("dest_effect")) remove_call_out("dest_effect");
     if(!objectp(place)) place = find_object_or_load(roomName);
-    if (objectp(portal)) 
+    if (objectp(portal))
     {
         portal->end_magic();
         tell_room(place,"%^ORANGE%^The little cottage wobbles as if through a %^BOLD%^%^BLACK%^smo%^RESET%^k"

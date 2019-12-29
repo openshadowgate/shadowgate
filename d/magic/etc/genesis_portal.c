@@ -1,4 +1,4 @@
-//Adapted from rope trick rope by 
+//Adapted from rope trick rope by
 //~Circe~ for use with psions 7/20/05
 
 #include <std.h>
@@ -26,10 +26,10 @@ void create() {
    set_short("a portal hovering in the air");
    set_long(
 @GENESIS
-This is a small portal surrounded by a greenish glow.  It 
-seems to lead somewhere, though you cannot quite tell where.  
-Nothing is holding this portal in place, but you could likely 
-<access portal> to go inside and investigate.  If you are 
+This is a small portal surrounded by a greenish glow.  It
+seems to lead somewhere, though you cannot quite tell where.
+Nothing is holding this portal in place, but you could likely
+<access portal> to go inside and investigate.  If you are
 the one who created the portal, you may also <dismiss portal>.
 GENESIS
    );
@@ -37,6 +37,8 @@ GENESIS
    set_value(0);
    set_weight(100000);
    rt_room = new(SPELL_OBJ_DIR+"genesis_room");
+   rt_room->set_property("teleport proof",spellobj->query_clevel());
+   rt_room->remove_property("teleport proof");
    rt_room->set_had_players();
    lowered = 1;
 }

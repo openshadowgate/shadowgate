@@ -1,4 +1,4 @@
-//Adapted from rope trick room by 
+//Adapted from rope trick room by
 //~Circe~ for use with psions 7/20/05
 //ganked for the sanctify cleric spell -Ares
 #include <std.h>
@@ -11,12 +11,13 @@ inherit ROOM;
 object entry, rope;
 string roomName,*desc=({});
 
-void create() 
+void create()
 {
    ::create();
    set_light(1);
    set_property("no teleport",1);
    set_property("no sticks", 1);
+   set_property("no pocket space",1)
    set_property("indoors", 1);
 }
 
@@ -112,7 +113,7 @@ void set_desc(string diety)
 		    " %^RESET%^%^RED%^d%^BOLD%^a%^RESET%^%^ORANGE%^w%^BOLD%^%^MAGENTA%^n%^GREEN%^, "+
 		    "bringing with it the promise of a %^YELLOW%^new day%^GREEN%^ and a"+
 		    " %^BOLD%^%^MAGENTA%^new beginning%^GREEN%^.  Everything "+
-		    "about this field speaks of life, beauty, and rebirth."}); 
+		    "about this field speaks of life, beauty, and rebirth."});
         break;
 
     case "kismet":
@@ -244,23 +245,7 @@ void set_desc(string diety)
         break;
     }
 
-    desc +=  
-        ({ "\n\n%^RESET%^close gate:     This closes the gate to the Prime \n"
-        "                Material plane, blocking anyone else from entering.\n\n"
-
-        "open gate:      This reconnects the demiplane with the Prime \n"
-        "                Material plane, allowing people to enter or leave.\n\n"
-
-        "out:            This is the exit to the Prime Material plane, \n"
-        "                so long as the gate is open.\n\n"
-
-        "WARNING to all inhabitants of this space!!  You may NOT use a rope "
-        "trick spell or genesis power or sanctify spell within this space.  "
-        "Also, at the end of the spell's duration, everything in this space "
-        "will be ejected into the Prime Material plane, including you.  Be warned!"});
-
     TO->set_short(desc[0]);
-    TO->set_long(desc[1]+desc[2]);
+    TO->set_long(desc[1]);
     return;
 }
-    

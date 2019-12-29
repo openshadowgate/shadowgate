@@ -16,30 +16,12 @@ void create() {
    ::create();
    set_light(1);
    set_short("An Extra-dimensional space");
-   set_property("no teleport",1);
    set_property("no sticks", 1);
    set_property("indoors", 1);
+   set_property("no pocket space",1)
    set_long(
 @TRICK
-You are in the middle of an extra_dimensional space created by
-the magic of a "rope trick" spell.  There are a few things you
-can do in here.  You can:
-
-pull rope:  Pulls up the access rope so that no one else can gain
-            entry to this space.
-
-lower rope: Lowers the access rope to the outside room allowing
-            access to this space.
-
-peer out:   Allows you to look into the outside room.
-
-out:        This is the exit to the outside world which is
-            available as long as the rope is down.
-
-WARNING to all inhabitants of this space!!  You may NOT use a rope
-trick spell within this space.  Also, at the end of the spell's
-duration, everything in this space will be ejected into the room
-outside, including you.  Be warned!	
+You are in the middle of an extra_dimensional space created by the magic of a "rope trick" spell.  There are a few things you can do in here.
 TRICK
    );
 }
@@ -87,7 +69,7 @@ int lower_rope(string str) {
    return 1;
 }
 
-void destroy_space() 
+void destroy_space()
 {
    object *inv;
    int x;
@@ -100,4 +82,3 @@ void destroy_space()
    "/daemon/virtual_room_d.c"->destroy_virtual_room(TO->query("my_virtual_name"), entry);
    TO->remove();
 }
-

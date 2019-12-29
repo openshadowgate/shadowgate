@@ -87,6 +87,8 @@ void start_magic(object entry, int prof, string room) {
    entry_place = entry;
    theProf = prof;
    rt_room->add_exit(file_name(entry), "out");
+   rt_room->remove_property("teleport proof");
+   rt_room->set_property("teleport proof",spellobj->query_clevel());
    rt_room->set_entry(entry, TO, room);
    set_heart_beat(5);
 }

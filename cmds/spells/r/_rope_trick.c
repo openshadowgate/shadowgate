@@ -25,12 +25,24 @@ create() {
     set_description("When rope trick is cast, a rope will leap up and stiffen, leading to a magic room in a pocket of "
 "another dimension.  Any may climb the rope and enter the room.  The rope may be pulled into the room making the room "
 "inaccessible.  And the room will exist for quite a long time, varying with the caster's spell-casting level.  To cast "
-"this spell, the caster must drop a rope before them which will not be consumed by the casting.");
+"this spell, the caster must drop a rope before them which will not be consumed by the casting.
+
+Inside rope trick room you can:
+
+%^ORANGE%^<pull rope>%^RESET%^
+  Pulls up the access rope so that no one else can gain entry to this space.
+
+%^ORANGE%^<lower rope>%^RESET%^
+  Lowers the access rope to the outside room allowing access to this space.
+
+%^ORANGE%^<peer out>%^RESET%^
+  Allows you to look into the outside room.
+
+%^ORANGE%^<out>%^RESET%^
+  This is the exit to the outside world which is available as long as the rope is down.
+");
     set_verbal_comp();
     set_somatic_comp();
-    set_components(([
-      "mage" : ([ "corn extract" : 1, "parchment" : 1, ]),
-    ]));
     set_helpful_spell(1);
 }
 
@@ -87,7 +99,7 @@ void dest_effect() {
     new("/d/common/obj/misc/rope")->move(place);
     ::dest_effect();
     if(objectp(TO)) TO->remove();
-}   
+}
 
 void reverse_spell(){
     tell_object(caster,"The rope snakes about a bit.");

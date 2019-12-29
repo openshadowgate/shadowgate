@@ -17,7 +17,18 @@ void create() {
     set_syntax("cast CLASS sanctify");
     set_description("Calling on the power of his or her god, the caster creates a protected place for him or herself to "
 "retreat to in times of need.  The sanctified ground is accessed through an iron gate that is created when the spell is "
-"cast.");
+"cast.
+
+Insade the space you can:
+
+%^ORANGE%^<close gate>%^RESET%^
+  This closes the gate to the Prime Material plane, blocking anyone else from entering.
+
+%^ORANGE%^<open gate>%^RESET%^
+  This reconnects the demiplane with the Prime Material plane, allowing people to enter or leave.
+
+%^ORANGE%^<out>%^RESET%^
+  This is the exit to the Prime Material plane, so long as the gate is open.");
     set_verbal_comp();
     set_somatic_comp();
 	set_helpful_spell(1);

@@ -1,4 +1,4 @@
-//Adapted from rope trick rope by 
+//Adapted from rope trick rope by
 //~Circe~ for use with psions 7/20/05
 // Ganked again by Ares for sanctify for clerics
 #include <std.h>
@@ -28,7 +28,7 @@ void create() {
 @TEXT
 This is a standing iron gate that looks much like one would
 expect to see in a large stone fence.  The posts of the gate
-are made from rough cut stone, and it appears to open to 
+are made from rough cut stone, and it appears to open to
 nowhere.  To enter the gate, type <enter gate>, the caster
 may also <dismiss gate> to release the spell.
 TEXT
@@ -92,6 +92,8 @@ void start_magic(object entry, int prof, string room) {
    roomName = room;
    entry_place = entry;
    rt_room->add_exit(file_name(entry), "out");
+   rt_room->set_property("teleport proof",spellobj->query_clevel());
+   rt_room->remove_property("teleport proof");
    rt_room->set_entry(entry, TO, room);
 }
 

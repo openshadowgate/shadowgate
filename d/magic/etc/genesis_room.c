@@ -1,4 +1,4 @@
-//Adapted from rope trick room by 
+//Adapted from rope trick room by
 //~Circe~ for use with psions 7/20/05
 
 #include <std.h>
@@ -13,8 +13,8 @@ void create() {
    ::create();
    set_light(1);
    set_short("%^BOLD%^%^BLUE%^a small demiplane%^RESET%^");
-   set_property("no teleport",1);
    set_property("no sticks", 1);
+   set_property("no pocket space",1);
    set_property("indoors", 1);
    set_long(
 @GENESIS
@@ -89,4 +89,3 @@ void destroy_space() {
    "/daemon/virtual_room_d.c"->destroy_virtual_room(TO->query("my_virtual_name"), entry);
    TO->remove();
 }
-

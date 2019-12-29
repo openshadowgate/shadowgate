@@ -10,7 +10,7 @@ void create() {
    ::create();
    set_light(1);
    set_short("%^RESET%^%^ORANGE%^Inside a cosy cottage%^RESET%^");
-   set_property("no teleport",1);
+   set_property("no pocket space",1);
    set_property("no sticks", 1);
    set_property("indoors", 1);
    set_long(
@@ -20,18 +20,7 @@ void create() {
 "Windows open to several directions, but nothing can be seen "
 "outside except a gray, misty haze.  Occasionally a wall shimmers "
 "and wavers, as though it were not completely real, but the "
-"building seems stable enough for a time.  Here, you may:\n\n"
-"lock cottage:   This locks the door to the cottage, preventing\n"
-"                anyone outside from entering.\n\n"
-"unlock cottage: This unlocks the cottage door, allowing people \n"
-"                to enter or leave.\n\n"
-"out:            This is the exit to the Prime Material plane, \n"
-"                so long as the cottage door is unlocked.\n\n"
-"WARNING to all inhabitants of this space!!  You may NOT use a rope"
-"trick spell, genesis power, or other pocket dimension within this "
-"space.  Also, at the end of the power's duration, everything in "
-"this space will be ejected into the Prime Material plane, including "
-"you.  Be warned!	\n");
+"building seems stable enough for a time.");
 }
 
 void init() {
