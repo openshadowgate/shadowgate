@@ -60,7 +60,7 @@ void summon_servant() {
     ob->set_id(ob->query_id()+("/d/magic/obj/weapons/"+normalizedDeity)->query_id());
     ob->setup_servant(caster,clevel);
 
-    control = new("/d/magic/obj/simple_controller");
+    control = new("/d/magic/obj/holder");
     control->set_caster(caster);
     control->move(caster);
     control->set_property("spell",TO);
@@ -90,7 +90,7 @@ void dest_effect() {
     }
 
     if(objectp(control)) {
-		if (objectp(sword = control->query_sweapon())){
+		if (objectp(sword = control->query_mon())){
 			sword->remove();
 			destruct(control);
 		}

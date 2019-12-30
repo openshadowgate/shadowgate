@@ -85,7 +85,7 @@ void dest_effect() {
     }
 
     if(objectp(control)) {
-		if (objectp(sword = control->query_servant())){
+		if (objectp(sword = control->query_mon())){
 			sword->remove();
 			destruct(control);
 		}
