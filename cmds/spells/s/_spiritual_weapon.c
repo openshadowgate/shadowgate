@@ -61,11 +61,11 @@ void summon_servant() {
     ob->setup_servant(caster,clevel);
 
     control = new("/d/magic/obj/simple_controller");
-    control->set_master(caster);
+    control->set_caster(caster);
     control->move(caster);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
-    control->set_slave(ob);
+    control->set_elemental(ob);
 
     caster->add_follower(ob);
 

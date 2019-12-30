@@ -56,12 +56,12 @@ void summon_servant() {
     ob=new("/d/magic/mon/unseen_servant.c");
     ob->setup_servant(caster,clevel);
 
-    control = new("/d/magic/obj/simple_controller");
+    control = new("/d/magic/obj/holder");
     control->move(caster);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
-    control->set_master(caster);
-    control->set_slave(ob);
+    control->set_caster(caster);
+    control->set_elemental(ob);
 
     caster->add_follower(ob);
 
