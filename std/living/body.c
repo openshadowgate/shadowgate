@@ -372,13 +372,13 @@ void set_overall_ac(int x) {
 
 void set_ac(int x)
 {
-	if(userp(TO))
-	{
-		log_file("armor_class_changes", "\n\nAC SET : " +
-		TO->query_name() + " : AC changed from "+
-		"(ac = "+ac+") to (new ac = "+x+") : set_ac() called by "+
-		identify(previous_object())+".");
-	}
+	/* if(userp(TO)) */
+	/* { */
+	/* 	log_file("armor_class_changes", "\n\nAC SET : " + */
+	/* 	TO->query_name() + " : AC changed from "+ */
+	/* 	"(ac = "+ac+") to (new ac = "+x+") : set_ac() called by "+ */
+	/* 	identify(previous_object())+"."); */
+	/* } */
 	ac = x;
 }
 
@@ -1184,14 +1184,14 @@ string equip_armour_to_limb(object arm, string *limb) {
       return "NO";
    body[limb[0]]["armour"] += ({type});
    body[limb[0]]["armour_ob"] += ({ arm});
-	if(userp(TO))
-	{
-		log_file("armor_class_changes", "\n\nAC Change : " + TO->query_name() +" "+
-		"gained AC from "+identify(arm) + " - Ac went from ("+
-		ac +") to ("+(ac-(int)arm->query_ac())+").  Function "+
-		"equip_armour_to_limb() called from "+
-		identify(previous_object()) +".");
-	}
+	/* if(userp(TO)) */
+	/* { */
+	/* 	log_file("armor_class_changes", "\n\nAC Change : " + TO->query_name() +" "+ */
+	/* 	"gained AC from "+identify(arm) + " - Ac went from ("+ */
+	/* 	ac +") to ("+(ac-(int)arm->query_ac())+").  Function "+ */
+	/* 	"equip_armour_to_limb() called from "+ */
+	/* 	identify(previous_object()) +"."); */
+	/* } */
    ac -= (int)arm->query_ac();
    return 0;
 }
@@ -1221,14 +1221,14 @@ int remove_armour_from_limb(object arm, string *limb) {
    }
 */
 
-	if(userp(TO))
-	{
-		log_file("armor_class_changes", "\n\nAC Change : " + TO->query_name() +" "+
-		"lost AC from "+identify(arm) + " - Ac went from ("+
-		ac +") to ("+(ac+(int)arm->query_ac())+").  Function "+
-		"remove_armour_to_limb() called from "+
-		identify(previous_object()) +".");
-	}
+	/* if(userp(TO)) */
+	/* { */
+	/* 	log_file("armor_class_changes", "\n\nAC Change : " + TO->query_name() +" "+ */
+	/* 	"lost AC from "+identify(arm) + " - Ac went from ("+ */
+	/* 	ac +") to ("+(ac+(int)arm->query_ac())+").  Function "+ */
+	/* 	"remove_armour_to_limb() called from "+ */
+	/* 	identify(previous_object()) +"."); */
+	/* } */
    ac += (int)arm->query_ac();
    if(ac > 10) ac = 10;
 	if(TO->is_player()) ApplyObjectBonuses(arm, TO, "remove", "wear");
