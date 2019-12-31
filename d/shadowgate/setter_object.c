@@ -692,11 +692,12 @@ int okdone()
     if(MyPlace != "stats" || bonus) return 0;
     ETO->set_stats("charisma", MyCharacterInfo["stats"]["charisma"]);
     if(MyCharacterInfo["race"]["subrace"] != "NIL") ETO->set("subrace", MyCharacterInfo["race"]["subrace"]);
-    if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
-        OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
-        MyPlace = "template";
-    else
-        MyPlace = "hair color";
+    /* if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) || */
+    /*     OB_ACCOUNT->is_high_mortal(ETO->query_true_name()))) */
+    /*     MyPlace = "template"; */
+    /* else */
+    /*     MyPlace = "hair color"; */
+    MyPlace = "hair color";
     ProcessStep();
     return 1;
 }

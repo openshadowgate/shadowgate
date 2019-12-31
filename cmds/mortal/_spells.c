@@ -20,7 +20,7 @@ object *ToClean;
 int cmd_spells(string str)
 {
     string myclass, args, tmp;
-    int x, temp1, level, y, columns;
+    int x, temp1, level, y, columns, z;
     string * output = ({}), obuff, oline;
     mapping hate;
 
@@ -90,27 +90,32 @@ int cmd_spells(string str)
         {
             continue;
         }
-        output+=({arrange_string(magic[x], 26)+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
+        output+=({"%^BOLD%^%^GREEN%^"+arrange_string(magic[x], 26)+"%^RESET%^%^GREEN%^"+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
     }
 
     columns = atoi(TP->getenv("SCREEN"))/max(map_array(output,(:sizeof(strip_colors($1)):)));
     columns = columns<1?1:columns;
     y = atoi(TP->getenv("COLUMNS"));
     y = y<1?1:y;
+    z = 0;
     columns = columns>y?y:columns;
 
-    obuff="%^GREEN%^";
+    obuff="";
+
     foreach(oline in output)
     {
         obuff+=oline;
         x++;
         if(!(x%columns))
-            obuff+="\n";
+        {
+            tell_object(TP,obuff);
+            obuff="";
+        }
         else
             obuff+=" | ";
     }
 
-    tell_object(TP,obuff);
+    write(obuff);
 
 
     tell_object(TP,"\n");

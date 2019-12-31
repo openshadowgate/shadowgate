@@ -87,8 +87,9 @@ void action(string command)
         return 0;
     if(sscanf(command,"%s %s",temp, temp2) != 2)
         temp=command;
-    if(userp(slave))
-        if(member_array(temp,SAFE_DOM_CMDS)<0) return 0;
+    //This is a spot to check against whitelist. Last dangerous
+    //command that used no confirmations should have been modded so
+    //this might be not necessary. Whitelist stored in domination.h
     disabled=1;
     if(slave)
         slave->set_property("dominated",1);
