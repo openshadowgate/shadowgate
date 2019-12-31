@@ -64,7 +64,7 @@ void spell_effect(int prof) {
         tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
         tell_object(caster,"%^RED%^"+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
         spell_kill(target, caster);
-        damage_targ(target, target->return_target_limb(), roll_dice(5,8),"untyped");
+        damage_targ(target, target->return_target_limb(), sdamage,"mental");
         spell_successful();
         dest_effect();
         return;
@@ -80,7 +80,7 @@ void spell_effect(int prof) {
         tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
         tell_object(caster,"%^RED%^"+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
         spell_kill(target, caster);
-        damage_targ(target, target->return_target_limb(), roll_dice(5,8),"untyped");
+        damage_targ(target, target->return_target_limb(), sdamage,"mental");
         if (wizardp(target) || present("clothesx999",target) || (string)target->query_property("no dominate",1) || !present(caster, environment(target)))
            if(objectp(TO)) TO->remove();
         if(objectp(TO)) TO->remove();

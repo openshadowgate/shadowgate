@@ -92,35 +92,30 @@ int cmd_spells(string str)
         {
             continue;
         }
-        output+=({"%^BOLD%^%^GREEN%^"+arrange_string(magic[x], 26)+"%^RESET%^%^GREEN%^"+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
+        output+=({arrange_string(magic[x], 26)+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
     }
 
     z=max(map_array(output,(:sizeof(strip_colors($1)):)));
     columns = atoi(TP->getenv("SCREEN"))/z;
-    z=max(map_array(output,(:sizeof($1):)));
     columns = columns<1?1:columns;
     y = atoi(TP->getenv("COLUMNS"));
     y = y<1?1:y;
 
     columns = columns>y?y:columns;
 
-    obuff="";
+    obuff="%^CYAN%^";
 
     foreach(oline in output)
     {
         obuff+=oline;
         x++;
         if(!(x%columns))
-        {
-            tell_object(TP,obuff);
-            obuff="";
-        }
+            obuff+="\n";
         else
             obuff+=" | ";
     }
 
-    write(obuff);
-
+    tell_object(TP,obuff);
 
     tell_object(TP,"\n");
     CleanUpSpellObjects();
