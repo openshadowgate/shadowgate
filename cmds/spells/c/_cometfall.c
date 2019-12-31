@@ -34,7 +34,7 @@ void spell_effect(int prof){
     attackers = caster->query_attackers();
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
-    
+
     if(!sizeof(attackers)){
         tell_object(caster,"%^ORANGE%^A brilliant light fills the "+
            "air, but there seems to be no other effect.%^RESET%^");
@@ -50,7 +50,6 @@ void spell_effect(int prof){
         tell_object(attackers[i],"%^BOLD%^%^RED%^The burning "+
            "%^RESET%^%^ORANGE%^rock %^BOLD%^%^RED%^of the comets "+
            "tears into your skin!%^RESET%^");
-        define_base_damage(0);
         damage = sdamage;
         if(do_save(attackers[i],0)) { damage = damage / 2; }
         //if(SAVING_D->saving_throw(attackers[i],"spell",0)) { damage = damage/2; }
@@ -68,7 +67,7 @@ void spell_effect(int prof){
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
