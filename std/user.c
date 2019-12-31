@@ -1034,8 +1034,12 @@ int quit()
     save_player( query_name() );
     if(objectp(ETO)) { message("emote",TO->QCN+" has left the game.",ETO); }
     log_file("enter", query_name()+" (quit): "+ctime(time())+"\n");
-    //  NOTIFY_D->logon_notify("%^YELLOW%^A player leaves the ShadowGate adventure.%^RESET%^",TO);
-    NOTIFY_D->mud_notify("left",TO);
+
+    if(!TO->query("true_quietness"))
+    {
+        NOTIFY_D->mud_notify("left",TO);
+    }
+
     PLAYER_D->add_player_info();
     LAWBOUNTY_D->add_hm_info(TO);
     TO->move("/d/shadowgate/freezer");

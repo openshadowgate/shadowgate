@@ -187,6 +187,7 @@ int look(string str) {
     int x;
     string tmp, gtype, temp1;
     string filter;
+    string * output = ({}), oline, obuff;
 
     tmp = ({});
 
@@ -244,11 +245,19 @@ int look(string str) {
         break;
     }
 
-
     write("%^BOLD%^%^CYAN%^"+arrange_string("Spell name", 26)+" "+arrange_string("School",4)+" "+arrange_string("Level",6));
-    for (x=0;x<sizeof(magic);x++) {
-        tell_object(TP,"%^CYAN%^"+arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),6));
+    for (x=0;x<sizeof(magic);x++)
+    {
+        output+=({"%^CYAN%^"+arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),6)});
     }
+
+    obuff="";
+    foreach(oline in output)
+    {
+        obuff+=oline+"\n";
+    }
+    write(obuff);
+
   if (avatarp(TP)) write(
 @GARRETT
   Avatar functions:
@@ -505,7 +514,7 @@ int help(string str) {
 %^ORANGE%^<look book>%^RESET%^            To see a listing of spells in a spellbook
 %^ORANGE%^<look book by level>%^RESET%^   To see a listing of your spells, in order of spell level
 %^ORANGE%^<look book by school>%^RESET%^  To see a listing of your spells, in order of spell school
-%^ORANGE%^<look book of LEVEL>%^RESET%^   To see a listing of your spells of a given LEVEL
+%^ORANGE%^<look book of level LEVEL>%^RESET%^   To see a listing of your spells of a given LEVEL
 %^ORANGE%^<look book of SCHOOL>%^RESET%^  To see a listing of your spells of a given SCHOOL
 %^ORANGE%^<rmspell %^ULINE%^SPELLNAME%^RESET%^%^ORANGE%^>%^RESET%^    To remove a spell from your book.
 %^ORANGE%^<setdesc>%^RESET%^              To set a new book description.
