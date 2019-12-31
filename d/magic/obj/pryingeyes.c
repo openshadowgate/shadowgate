@@ -109,6 +109,8 @@ void self_destruct() {
         spells=casterobj->query_property("dispellable spells");
         foreach(spell in spells)
         {
+            if(!objectp(spell))
+                continue;
 
             if(spell->query_spell_name() == "prying eyes")
             {
