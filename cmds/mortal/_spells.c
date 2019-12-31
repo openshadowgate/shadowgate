@@ -56,6 +56,10 @@ int cmd_spells(string str)
     {
         get_spells(TP,myclass);
     }
+
+    if(level)
+        filter_mapping(spells,(:$2==$3:),level);
+
     magic = keys(spells);
     hate = TP->query_all_memorized(myclass);
     if(!sizeof(magic))

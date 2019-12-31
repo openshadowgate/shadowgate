@@ -213,8 +213,9 @@ int look(string str) {
 
     if(stringp(filter))
     {
-        if(regexp(filter,"[0-9]+"))
+        if(regexp(filter,"level [0-9]+"))
         {
+            sscanf(filter,"level %s",filter);
             magic = filter_array(magic,(:MAGIC_D->query_index_row($1)["levels"]["mage"]==$2:),atoi(filter));
         }
         else

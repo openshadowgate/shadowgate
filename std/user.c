@@ -422,6 +422,7 @@ void make_new_hitpoint_rolls(object obj)
     {
         hp += rolls[i];
     }
+
     obj->set_max_hp(hp);
     obj->set_hp((int)obj->query_max_hp());
 
