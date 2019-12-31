@@ -3,6 +3,8 @@
 //previously they were stuck in memory until the game cleaned them up - Saide, March 30, 2016
 #include <std.h>
 #include <daemons.h>
+#include <runtime_config.h>
+
 inherit DAEMON;
 
 mapping spells;
@@ -93,11 +95,13 @@ int cmd_spells(string str)
         output+=({"%^BOLD%^%^GREEN%^"+arrange_string(magic[x], 26)+"%^RESET%^%^GREEN%^"+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
     }
 
-    columns = atoi(TP->getenv("SCREEN"))/max(map_array(output,(:sizeof(strip_colors($1)):)));
+    z=max(map_array(output,(:sizeof(strip_colors($1)):)));
+    columns = atoi(TP->getenv("SCREEN"))/z;
+    z=max(map_array(output,(:sizeof($1):)));
     columns = columns<1?1:columns;
     y = atoi(TP->getenv("COLUMNS"));
     y = y<1?1:y;
-    z = 0;
+
     columns = columns>y?y:columns;
 
     obuff="";

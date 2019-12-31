@@ -25,8 +25,8 @@ MELNMARN
       (["inn" : "The Deamon Inn, home of good Shadow cuisine.",
       "wall" : "The menu is posted there.",
       "menu" : "You may read it if you like."]) );
-    set_exits( 
-      (["out" : "/d/laerad/parnelli/rooms/issy5.c",
+    set_exits(
+      (["out" : "/d/shadow/room/forest/road1",
     ]) );
 }
 

@@ -5,6 +5,7 @@
 
 #include <security.h>
 #include <std.h>
+
 inherit DAEMON;
 
 #define SYNTAX "Syntax: \"eval <lpc commands>\".\n"
@@ -28,15 +29,16 @@ int cmd_eval( string a )
     file = ""+
     "#include <std.h>\n"+
     "#include <daemons.h>\n"+
+    "#include <runtime_config.h>\n"+
     "inherit OBJECT;\n"+
     "void create() { seteuid( getuid() ); }\n"+
     "mixed eval() { " + a + "; }\n"+
     "";
     filename = user_path( geteuid( this_player() ) );
-    if( file_size( filename ) != -2 ) 
-    { 
-        notify_fail( "You must have a valid home directory!\n" ); 
-        return 0; 
+    if( file_size( filename ) != -2 )
+    {
+        notify_fail( "You must have a valid home directory!\n" );
+        return 0;
     }
     // filename = TMP_DIR + geteuid( this_player() ) + "_eval.c";
     filename += "CMD_EVAL_TMP_FILE.c";
@@ -49,7 +51,7 @@ int cmd_eval( string a )
         write( "Error = " + err );
         (mixed)call_other( filename, "eval" );
     }
-    else 
+    else
         write( wrap( "Result = " + identify( ret ) ) );
         //rm( filename );
     if( ret = find_object( filename ) ) destruct( ret );

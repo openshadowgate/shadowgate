@@ -57,24 +57,36 @@ void spell_effect(int prof) {
         if(objectp(TO)) TO->remove();
         return;
     }
+ 
+    if(mind_immunity_check(target, "default"))
+    {
+        tell_room(environment(target),"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
+        tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
+        tell_object(caster,"%^RED%^"+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
+        spell_kill(target, caster);
+        damage_targ(target, target->return_target_limb(), roll_dice(5,8),"untyped");
+        spell_successful();
+        dest_effect();
+        return;
+    }
+
 
     if(do_save(target))
     {
-        tell_object(caster,"%^GREEN%^Your attempt to overcome the willpower of "+target->QCN+" has failed!");
-        tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" tries to control your mind!\n%^RESET%^%^GREEN%^You manage to fight "+caster->QO+" off!");
-        tell_room(place,"%^GREEN%^Both "+caster->QCN+" and "+target->QCN+" seem to both have nasty headaches.\n"+caster->QCN+" stumbles back a bit as "+target->QCN+" recovers.",({caster, target}) );
+//        tell_object(caster,"%^GREEN%^Your attempt to overcome the willpower of "+target->QCN+" has failed!");
+//        tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" tries to control your mind!\n%^RESET%^%^GREEN%^You manage to fight "+caster->QO+" off!");
+//        tell_room(place,"%^GREEN%^Both "+caster->QCN+" and "+target->QCN+" seem to both have nasty headaches.\n"+caster->QCN+" stumbles back a bit as "+target->QCN+" recovers.",({caster, target}) );
+        tell_room(environment(target),"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
+        tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
+        tell_object(caster,"%^RED%^"+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
+        spell_kill(target, caster);
+        damage_targ(target, target->return_target_limb(), roll_dice(5,8),"untyped");
         if (wizardp(target) || present("clothesx999",target) || (string)target->query_property("no dominate",1) || !present(caster, environment(target)))
            if(objectp(TO)) TO->remove();
         if(objectp(TO)) TO->remove();
         return;
     }
 
-    if(mind_immunity_check(target, "default"))
-    {
-        spell_successful();
-        dest_effect();
-        return;
-    }
 
     duration=60+clevel*60;
     duration=duration>300?300:duration;
