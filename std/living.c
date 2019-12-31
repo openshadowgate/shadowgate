@@ -797,7 +797,6 @@ void set_background(string str) {background = str;}
 void add_sight_bonus(int x) {sight_bonus += x;}
 
 void add_search_path(string dir) {
-   log_file("paths", query_name()+": "+dir+" ("+ctime(time())+")\n");
    if(member_array(dir, search_path) == -1) search_path += ({ dir});
 }
 

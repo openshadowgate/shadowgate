@@ -422,19 +422,11 @@ void make_new_hitpoint_rolls(object obj)
     {
         hp += rolls[i];
     }
-
-    //num = "/daemon/bonus_d.c"->query_con_bonus((int)TP->query_stats("constitution"));
-    //num = num * (int)TP->query_highest_level();
-    //num = query_max_hp() - num;
-
-
     obj->set_max_hp(hp);
     obj->set_hp((int)obj->query_max_hp());
 
     tell_object(obj,"%^RESET%^%^B_BLUE%^Rolling new hitpoints, old total: "+old+"\nNew "
         "total: "+(int)obj->query_max_hp()+"%^RESET%^");
-    log_file("old_hitpoints","Old hitpoints for " +(string)obj->query_true_name()+": "+old+", new "
-        "hitpoints "+(int)obj->query_max_hp()+"\n");
     obj->set("ranger_hp_rolled",1);
     obj->delete("new_hp_rolled");
     obj->delete("new_hp_rolled_one");
