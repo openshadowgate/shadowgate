@@ -184,7 +184,7 @@ int query_spellbook(string spell) {
 
 int look(string str) {
     object ob;
-    int x;
+    int x, columns;
     string tmp, gtype, temp1;
     string filter;
     string * output = ({}), oline, obuff;
@@ -231,6 +231,7 @@ int look(string str) {
   else
     write("\n%^BOLD%^%^CYAN%^You do not realize who this spell book belongs to.  Its pages include the following spells:\n");
 
+    sort();
     switch(gtype)
     {
     case "level":
@@ -240,21 +241,24 @@ int look(string str) {
         sort_by_lev();
         sort_by_school();
         break;
-    default:
-        sort();
-        break;
     }
 
     write("%^BOLD%^%^CYAN%^"+arrange_string("Spell name", 26)+" "+arrange_string("School",4)+" "+arrange_string("Level",6));
     for (x=0;x<sizeof(magic);x++)
     {
-        output+=({"%^CYAN%^"+arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),6)});
+        output+=({arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),2)});
     }
 
-    obuff="";
+    columns = atoi(TP->getenv("SCREEN"))/35;
+    columns = columns<1?1:columns;
+    obuff="%^CYAN%^";
+    x=0;
     foreach(oline in output)
     {
-        obuff+=oline+"\n";
+        obuff+=oline+" ";
+        x++;
+        if(!(x%columns))
+            obuff+="\n";
     }
     write(obuff);
 
