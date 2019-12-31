@@ -11,7 +11,7 @@ void create()
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS restoration on TARGET");
     set_damage_desc("removes fatigue, exhaustion, confusion");
-    set_description("This spell eliminates fatigue and exhaustion. It also clears target's confusion.
+    set_description("This spell eliminates fatigue and exhaustion. It also clears target's confusion and restores their stamina.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
@@ -30,4 +30,6 @@ spell_effect(int prof)
 
     if(member_array(target,caster->query_attackers())==-1)
         "/std/magic/cleanse"->restore(target);
+
+    target->use_stamina(-target->query_max_stamina()/2);
 }
