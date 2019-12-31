@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","taxperc","term","scrlines","scrwidth","hardcore"});
+string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","taxperc","term","scrlines","scrwidth","columns","hardcore"});
 
 int cmd_set(string args)
 {
@@ -144,6 +144,27 @@ int set_scrwidth(string val)
 string get_scrwidth()
 {
     return TP->getenv("SCREEN");
+}
+
+int set_columns(string val)
+{
+    if(!atoi(val))
+    {
+        write("%^BOLD%^%^RED%^Invalid value, must provide a number.%^RESET%^");
+        return 0;
+    }
+    if(atoi(val)<1)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, must be bigger than 1.%^RESET%^");
+        return 0;
+    }
+    TP->setenv("COLUMNS", val);
+    return 1;
+}
+
+string get_columns()
+{
+    return TP->getenv("COLUMNS");
 }
 
 int set_logon_notify(string val)
@@ -342,6 +363,7 @@ You can manipulate numerous mud settings:
 %^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n  This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
 %^CYAN%^scrlines %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set how many lines appear for paged information. %^MAGENTA%^Default value: 20%^RESET%^\n
 %^CYAN%^scrwidth %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set screen width for text wrapping. %^MAGENTA%^Default value: 75%^RESET%^\n
+%^CYAN%^columns %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set how many maximum columns you do want to see where multicolumn output is appliable and screen width allows. %^MAGENTA%^Default value: 0%^RESET%^\n
 To see current values use %^ORANGE%^<set>%^RESET%^ without arguments.
 
 %^CYAN%^SEE ALSO%^RESET%^

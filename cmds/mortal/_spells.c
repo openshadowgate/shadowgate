@@ -20,7 +20,8 @@ object *ToClean;
 int cmd_spells(string str)
 {
     string myclass, args, tmp;
-    int x, temp1, level;
+    int x, temp1, level, y, columns;
+    string * output = ({}), obuff, oline;
     mapping hate;
 
     if (!str) return notify_fail("Check <help spells> for syntax.\n");
@@ -82,11 +83,36 @@ int cmd_spells(string str)
         sort_by_school();
     }
 
+
     for (x = 0; x < sizeof(magic);x++)
     {
-        if(level && (spells[magic[x]] != level) ) { continue; }
-        tell_object(TP,"%^GREEN%^%^BOLD%^"+arrange_string(magic[x], 26)+"%^RESET%^%^CYAN%^"+arrange_string(spells[magic[x]], 4)+(myclass=="mage"||myclass=="sorcerer"?"  "+MAGIC_D->query_index_row(magic[x])["sphere"]:""));
+        if(level && (spells[magic[x]] != level) )
+        {
+            continue;
+        }
+        output+=({arrange_string(magic[x], 26)+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
     }
+
+    columns = atoi(TP->getenv("SCREEN"))/max(map_array(output,(:sizeof(strip_colors($1)):)));
+    columns = columns<1?1:columns;
+    y = atoi(TP->getenv("COLUMNS"));
+    y = y<1?1:y;
+    columns = columns>y?y:columns;
+
+    obuff="%^GREEN%^";
+    foreach(oline in output)
+    {
+        obuff+=oline;
+        x++;
+        if(!(x%columns))
+            obuff+="\n";
+        else
+            obuff+=" | ";
+    }
+
+    tell_object(TP,obuff);
+
+
     tell_object(TP,"\n");
     CleanUpSpellObjects();
     if(myclass == "monk")

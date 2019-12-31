@@ -184,7 +184,7 @@ int query_spellbook(string spell) {
 
 int look(string str) {
     object ob;
-    int x, columns;
+    int x, columns, y;
     string tmp, gtype, temp1;
     string filter;
     string * output = ({}), oline, obuff;
@@ -231,7 +231,7 @@ int look(string str) {
   else
     write("\n%^BOLD%^%^CYAN%^You do not realize who this spell book belongs to.  Its pages include the following spells:\n");
 
-    sort();
+  sort();
     switch(gtype)
     {
     case "level":
@@ -251,11 +251,14 @@ int look(string str) {
 
     columns = atoi(TP->getenv("SCREEN"))/35;
     columns = columns<1?1:columns;
+    y = atoi(TP->getenv("COLUMNS"));
+    y = y<1?1:y;
+    columns = columns>y?y:columns;
     obuff="%^CYAN%^";
     x=0;
     foreach(oline in output)
     {
-        obuff+=oline+" ";
+        obuff+=oline+"  ";
         x++;
         if(!(x%columns))
             obuff+="\n";
