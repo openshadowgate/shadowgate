@@ -1651,11 +1651,12 @@ void heart_beat()
                     do_damage("torso",roll_dice(2,6));
                     message("environment","You are getting weaker from Thirst!",TO);
                 }
-                if(TO->query_hp()<-(TO->query_max_hp()*4/5))
-                {
-                    TO->add_death("Emaciation");
-                    die();
-                }
+                if(!(TO->query_stuffed()&&TO->query_quenched()))
+                    if(TO->query_hp()<-(TO->query_max_hp()*4/5))
+                    {
+                        TO->add_death("Emaciation");
+                        die();
+                    }
             }
             if (TO->query_poisoning()) {
                 ob2->set_name("Poison");
