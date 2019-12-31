@@ -31,7 +31,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    20 Psion levels (level adjustments considered part of required levels)\n"
-        "    20 Intelligence stat, before equipment modifiers\n";
         "    20 Strength or Dexterity stat, before equipment modifiers.\n";
 
     return str;
@@ -51,13 +50,12 @@ int prerequisites(object player)
     adj = race_ob->level_adjustment(race);
 
     if(player->query_base_stats("strength") < 20 && player->query_base_stats("dexterity") < 20) { return 0; }
-    if(player->query_base_stats("intelligence") < 20) { return 0; }
     if( (player->query_class_level("psion") + adj) < 20) { return 0; }
-    if(player->query_level() < 40) { return 0; }
+
     return 1;
 }
 
-mapping stat_requirements() { return ([ "intelligence" : 20 ]); }
+mapping stat_requirements() { return BASE_CLASS->stat_requirements(); }
 
 int *saving_throws() { return BASE_CLASS->saving_throws(); }
 
