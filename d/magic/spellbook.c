@@ -243,10 +243,9 @@ int look(string str) {
         break;
     }
 
-    write("%^BOLD%^%^CYAN%^"+arrange_string("Spell name", 26)+" "+arrange_string("School",4)+" "+arrange_string("Level",6));
     for (x=0;x<sizeof(magic);x++)
     {
-        output+=({arrange_string(magic[x], 26)+" "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),2)});
+        output+=({"%^BOLD%^%^CYAN%^"+arrange_string(magic[x], 24)+"%^RESET%^%^CYAN%^ "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),2)});
     }
 
     columns = atoi(TP->getenv("SCREEN"))/35;
@@ -263,7 +262,7 @@ int look(string str) {
         if(!(x%columns))
             obuff+="\n";
     }
-    write(obuff);
+    tell_object(TP,obuff);
 
   if (avatarp(TP)) write(
 @GARRETT

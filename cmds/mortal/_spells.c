@@ -70,9 +70,7 @@ int cmd_spells(string str)
         tell_object(TP, "There are no spells available to the "+myclass+" class!");
         return 1;
     }
-    tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Generating spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
-    tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell:", 24) + arrange_string("Level", 6));
-
+    tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
     sort();
 
     if (regexp(args,"(by level)|(expanded knowledge)"))
@@ -92,10 +90,10 @@ int cmd_spells(string str)
         {
             continue;
         }
-        output+=({arrange_string(magic[x], 26)+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
+        output+=({"%^BOLD%^%^GREEN%^ "+arrange_string(magic[x], 24)+"%^RESET%^%^GREEN%^ "+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
     }
 
-    z=max(map_array(output,(:sizeof(strip_colors($1)):)));
+    z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
     columns = atoi(TP->getenv("SCREEN"))/z;
     columns = columns<1?1:columns;
     y = atoi(TP->getenv("COLUMNS"));
@@ -103,8 +101,10 @@ int cmd_spells(string str)
 
     columns = columns>y?y:columns;
 
-    obuff="%^CYAN%^";
 
+    obuff="";
+
+    x=0;
     foreach(oline in output)
     {
         obuff+=oline;
@@ -112,7 +112,7 @@ int cmd_spells(string str)
         if(!(x%columns))
             obuff+="\n";
         else
-            obuff+=" | ";
+            obuff+="";
     }
 
     tell_object(TP,obuff);
