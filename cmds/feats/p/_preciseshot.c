@@ -108,6 +108,12 @@ void execute_feat() {
       dest_effect();
       return;
     }
+    if(!objectp(target))
+    {
+        tell_object(caster,"Nobody to shoot at.");
+        dest_effect();
+        return;
+    }
 
     caster->use_stamina(roll_dice(1,6));
     tell_object(caster,"%^BOLD%^%^BLUE%^You drop to one knee and level your weapon, putting all your strength into a shot fired at "+target->QCN+"!");

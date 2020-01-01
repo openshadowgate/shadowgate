@@ -18,7 +18,6 @@ void create() {
     set_somatic_comp();
     set_silent_casting(1);
     set_arg_needed();
-    set_components((["mage": (["piece of mirror":1])]));
 	set_helpful_spell(1);
 }
 
@@ -98,7 +97,7 @@ void spell_effect(int prof) {
   }
   healed = ((roll_dice(6,4))+(mylevel*2)); // equiv to a cure serious
   healed *= -1;
-  damage_targ(caster,"torso",healed,"positive energy");
+  damage_targ(caster,"torso",healed,"untyped");
   caster->remove_property("slide time");
   caster->set_property("slide time",time());
 
