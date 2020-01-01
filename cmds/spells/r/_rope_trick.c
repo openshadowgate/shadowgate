@@ -79,8 +79,8 @@ void spell_effect(int prof) {
     rope->set_property("spell", TO );
     rope->set_property("spelled", ({TO}) );
     rope->set_spellobj(TO);
-    rope->start_magic(place, prof, roomName);
     rope->move(place);
+    rope->start_magic(place, prof, roomName);
     tell_room(place, "The rope leaps up and stands straight in mid-air!");
     addSpellToCaster();
     call_out("dest_effect", (ROUND_LENGTH * 20 * clevel * prof)/100);

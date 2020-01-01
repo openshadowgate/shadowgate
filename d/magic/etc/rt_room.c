@@ -18,7 +18,7 @@ void create() {
    set_short("An Extra-dimensional space");
    set_property("no sticks", 1);
    set_property("indoors", 1);
-   set_property("no pocket space",1)
+   set_property("no pocket space",1);
    set_long(
 @TRICK
 You are in the middle of an extra_dimensional space created by the magic of a "rope trick" spell.  There are a few things you can do in here.

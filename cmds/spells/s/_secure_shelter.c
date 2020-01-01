@@ -55,8 +55,8 @@ void spell_effect(int prof)
     portal->set_property("spell", TO );
     portal->set_property("spelled", ({TO}) );
     portal->set_spellobj(TO);
-    portal->start_magic(place, prof, roomName);
     portal->move(place);
+    portal->start_magic(place, prof, roomName);
     tell_room(place,"%^ORANGE%^The air ripples and wobbles as if through a %^BOLD%^%^BLACK%^smo%^RESET%^k"
         "%^BOLD%^%^BLACK%^y haze%^RESET%^%^ORANGE%^, and a small cottage phases into view.");
     addSpellToCaster();

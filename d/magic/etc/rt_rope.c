@@ -90,6 +90,7 @@ void start_magic(object entry, int prof, string room) {
 
    rt_room->remove_property("teleport proof");
    rt_room->remove_property("no teleport");
+
    if(ETO->query_property("no teleport"))
        rt_room->set_property("no teleport",1);
    else if(ETO->query_property("teleport proof"))

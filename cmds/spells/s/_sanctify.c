@@ -49,8 +49,8 @@ void spell_effect(int prof) {
     portal->set_property("spell", TO );
     portal->set_property("spelled", ({TO}) );
     portal->set_spellobj(TO);
-    portal->start_magic(place, prof, roomName);
     portal->move(place);
+    portal->start_magic(place, clevel, roomName);
     portal->set_diety((string)caster->query_diety());
     tell_room(place, "%^BOLD%^%^CYAN%^A concussion without sound sends ripples"+
 	    " outwards and in the center of their wake is left standing a simple iron gate.");
