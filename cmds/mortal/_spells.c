@@ -117,7 +117,6 @@ int cmd_spells(string str)
 
     tell_object(TP,obuff);
 
-    tell_object(TP,"\n");
     CleanUpSpellObjects();
     if(myclass == "monk")
     {
