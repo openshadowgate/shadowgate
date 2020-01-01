@@ -256,7 +256,7 @@ void spell_effect(int prof)
                 return;
             }
 
-            if(mind_immunity_check(target, "default"))
+            if(mind_immunity_damage(target, "default"))
             {
                 target->add_attacker(caster);
                 damage_targ(target, target->return_target_limb(), sdamage/2,"untyped");

@@ -73,7 +73,7 @@ void spell_effect(int prof) {
         return;
     }
  
-    if(mind_immunity_check(target, "default"))
+    if(mind_immunity_damage(target, "default"))
     {
         tell_room(environment(target),"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
         tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");

@@ -33,7 +33,7 @@ void spell_effect(int prof){
 
     tell_object(caster,"%^RESET%^%^BLUE%^You project horrifying images directly into "+target->QCN+"'s mind.%^RESET%^");
 
-    if(mind_immunity_check(target))
+    if(mind_immunity_damage(target))
     {
         spell_successful();
         dest_effect();

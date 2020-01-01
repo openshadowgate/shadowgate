@@ -36,7 +36,7 @@ void spell_effect(int prof) {
        return;
    }
 
-   if(mind_immunity_check(target))
+   if(mind_immunity_damage(target))
    {
         spell_successful();
         dest_effect();

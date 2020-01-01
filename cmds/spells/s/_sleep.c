@@ -66,7 +66,7 @@ spell_effect(int prof)
 
         if(race_immunity_check(target2, "sleep")) { continue; }
 
-        if(mind_immunity_check(target2, "default"))
+        if(mind_immunity_damage(target2, "default"))
         {
             continue;
         }

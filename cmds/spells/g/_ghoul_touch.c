@@ -35,7 +35,7 @@ spell_effect(int prof) {
 
     //No need to check for undead, this is mind affecting spell and will be rebuked
 
-    if(mind_immunity_check(target))
+    if(mind_immunity_damage(target))
     {
         spell_successful();
         dest_effect();

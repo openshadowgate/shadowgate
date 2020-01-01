@@ -38,7 +38,7 @@ void spell_effect(int prof)
         return;
     }
 
-    if(!(do_save(target,-4)&&mind_immunity_check(target))){
+    if(!(do_save(target,-4)&&mind_immunity_damage(target))){
         spell_successful();
         tell_object(caster,"%^BLUE%^You sense your memory attempt succeeded, and your victim is momentarily dazed.%^RESET%^");
         target->set_paralyzed(roll_dice(1,3)*8,"%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted.%^RESET%^");

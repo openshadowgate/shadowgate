@@ -28,7 +28,7 @@ spell_effect(int prof)
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" throws the pattern into direction of "+target->QCN+".%^RESET%^",({caster,target}));
     tell_object(target,"%^MAGENTA%^"+caster->QCN+" throws the pattern into your face.%^RESET%^");
 
-    if(!(do_save(target,-2)||mind_immunity_check(target, "default")))
+    if(!(do_save(target,-2)||mind_immunity_damage(target, "default")))
     {
         object attackers = target->query_attackers();
         object attacker;

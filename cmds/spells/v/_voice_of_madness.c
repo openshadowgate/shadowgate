@@ -50,7 +50,7 @@ spell_effect(int prof){
     }
     else{
 
-        if(mind_immunity_check(target, "default"))
+        if(mind_immunity_damage(target, "default"))
         {
             spell_successful();
             dest_effect();

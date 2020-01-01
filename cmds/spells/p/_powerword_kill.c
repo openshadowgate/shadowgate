@@ -43,7 +43,7 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-    if (target->query_property("no death") || mind_immunity_check(target)) {
+    if (target->query_property("no death") || mind_immunity_damage(target)) {
         tell_object(target,"%^BOLD%^You feel a tug at your life force, but shrug it off easily!");
         tell_room(place,"%^BOLD%^"+target->QCN+" seems to shrug the spell off effortlessly.",({target}));
         dest_effect();
