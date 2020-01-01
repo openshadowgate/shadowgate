@@ -12,6 +12,7 @@ void create()
     set_class("fighter");
     set_class("mage");
     set("aggressive",2);
+    if (TO->query_property("swarm")) TO->remove_property("swarm");
     set_hd(50,8);
     set_hp(25000);
     set_alignment(5);
