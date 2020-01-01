@@ -939,7 +939,6 @@ void add_stat_bonus(string stat, int amount) {
       TO->do_encumbrance();
 }
 
-// added to be able to pull description for corpses or anything needing it without all the added stuff below  *Styx*  2/15/03
 string base_desc() {
     return ::query_long();
 }
@@ -953,25 +952,15 @@ string query_long(string unused)
 
     if(this_object()->query_ghost()) { return "An ethereal presence.\n"; }
 
-// To fix alter self race visibility, adjustment below. N, 1/1/20
-/*   if(objectp(shape = TO->query_property("shapeshifted")))
-   {
-       the_race = (string)shape->query_shape_race();
-   }
-   else
-   {
-       the_race = query("race");
-   }*/
-
-   if(objectp(shape = TO->query_property("shapeshifted"))) {
-       the_race = (string)shape->query_shape_race();
-   }
-   if(objectp(shape = TO->query_property("altered"))) {
-       the_race = (string)shape->query_shape_race();
-   }
-   if(!the_race) {
-       the_race = query("race");
-   }
+    if(objectp(shape = TO->query_property("altered"))) {
+        the_race = (string)shape->query_shape_race();
+    }
+    if(objectp(shape = TO->query_property("shapeshifted"))) {
+        the_race = (string)shape->query_shape_race();
+    }
+    if(!the_race) {
+        the_race = query("race");
+    }
 
     reg = "";
     pre = "%^CYAN%^%^BOLD%^You look over the "+the_race+".%^RESET%^\n";
