@@ -25,6 +25,8 @@ void create() {
 
 If the will save succeded or the target is not undead they will be outraged at your attempt and will attack immediately.
 
+Intelligent undead creatures remember that you controlled them, and they may be slightly upset they were under your power.
+
 %^BOLD%^%^RED%^N.B.%^RESET%^ If used on players this spell provide you only with limited subset of allowed commands.");
     set_verbal_comp();
     set_somatic_comp();
@@ -79,8 +81,12 @@ void spell_effect(int prof) {
         return;
     }
 
-    duration=60+clevel*60;
-    duration=duration>360?360:duration;
+    if(userp(target))
+    {
+        duration=60+clevel*60;
+        duration=duration>360?360:duration;
+        call_out("dest_effect", duration);
+    }
 
     tell_object(caster,"%^BLUE%^%^BOLD%^You break into "+target->QCN+"'s mind and "
         "overcome "+target->QP+" willpower!");
@@ -102,7 +108,6 @@ void spell_effect(int prof) {
     remote->move_is_ok(1);
     remote->move(caster);
     remote->move_is_ok(0);
-    call_out("dest_effect", duration);
 }
 
 void dest_effect() {
