@@ -91,7 +91,10 @@ target->QCN+" as though it were the solid strings of a lute, leaving heavy silen
 
 void dest_effect() {
 
-    if(objectp(target)) target->remove_property_value("spelled", ({TO}) );
+    if(objectp(target))
+    {
+        tell_object(target,"%^MAGENTA%^%^BOLD%^You sense the vision protecting you from scrying fades.");
+    }
     if(objectp(blocker)) blocker->self_destruct();
     ::dest_effect();
     if(objectp(TO)) TO->remove();
