@@ -953,16 +953,6 @@ string query_long(string unused)
 
     if(this_object()->query_ghost()) { return "An ethereal presence.\n"; }
 
-// To fix alter self race visibility, adjustment below. N, 1/1/20
-/*   if(objectp(shape = TO->query_property("shapeshifted")))
-   {
-       the_race = (string)shape->query_shape_race();
-   }
-   else
-   {
-       the_race = query("race");
-   }*/
-
    if(objectp(shape = TO->query_property("shapeshifted"))) {
        the_race = (string)shape->query_shape_race();
    }
@@ -1047,16 +1037,6 @@ string query_desc(string unused) {
 
    if(this_object()->query_ghost()) return "An ethereal presence.\n";
    reg = "";
-
-// To fix alter self race visibility, adjustment below. N, 1/1/20
-/*   if(objectp(shape = TO->query_property("shapeshifted")))
-   {
-       the_race = (string)shape->query_shape_race();
-   }
-   else
-   {
-       the_race = query("race");
-   }*/
 
    if(objectp(shape = TO->query_property("shapeshifted"))) {
        the_race = (string)shape->query_shape_race();
