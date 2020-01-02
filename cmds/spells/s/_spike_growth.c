@@ -23,7 +23,6 @@ void create()
         "be used in areas where some vegetation may be found.");
     set_property("magic",1);
     set_casting_time(1);
-    aoe_spell(1);
 }
 
 
@@ -124,7 +123,7 @@ void execute_attack()
     if(!objectp(caster))        { dest_effect(); return; }
     if(!objectp(place))         { dest_effect(); return; }
     if(!present(caster,place))  { dest_effect(); return; }
-    
+
     if(!timer)
     {
         tell_object(caster,"%^GREEN%^You can feel nature answering your call!  The roots and sprigs of "
@@ -151,8 +150,8 @@ void execute_attack()
         caster->set_property("spelled",({TO}));
         addSpellToCaster();
         spell_successful();
-    }    
-    
+    }
+
     if(time() > timer ) { dest_effect(); return; }
 
 
