@@ -8,12 +8,12 @@ void create()
     set_spell_name("alter self");
     set_spell_level(([ "bard" : 2, "psion" : 2, "psywarrior": 2, "assassin" : 1, "mage" : 2, "druid" : 1, "inquisitor":1 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS alter self on [RACE]");
-    set_description("%^RESET%^This spell allows the caster to make minor changes to their body. These are usually sufficient changes that they become unrecognizable even to those they are familiar with. It does not allow for such drastic changes as body size or overall shape.
+    set_syntax("cast CLASS alter self [on [RACE] [1-9]] ");
+    set_description("%^RESET%^This spell allows the caster to make major changes to their body and pretend to be be someone else. These are usually sufficient changes that they become unrecognizable even to those they are familiar with. It does not allow for such drastic changes as body size or overall shape, so be aware of races you turn into.
 
-This spell does not alter details on your scoresheet (eyes, hair) but the caster may describe their new form and features differently to these if they so choose. They must still maintain their overall body shape, height and weitght.
+Adjective, description, speech, messages etc will be remembered across castings, so they will only need to be set once in your alternative form. Players will be able to recognise your 'other self' as a unique entity, separate from your usual self.
 
-You can only have one altered form with this spell - repeat uses do not grant additional different shapeshifts, but instead return you to the same secondary form. Adjective, description, speech, messages etc will be remembered across castings, so they will only need to be set once in your alternative form. Players will be able to recognise your 'other self' as a unique entity, separate from your usual self.");
+You can have up to caster level / 12 + 1 alternate profiles. To switch between them use numbers from 1 to 9 as the spell argument. Default profile number is 1. The spell will also remember last profile used.");
     set_verbal_comp();
     set_somatic_comp();
     set_peace_needed(1);
@@ -38,9 +38,38 @@ string query_cast_string() {
 
 void spell_effect(int prof)
 {
-    string raceto = arg;
-    if(member_array(raceto,RACE_D->query_races())==-1)
-        raceto = caster->query("race");
+    string * eargs,earg;
+    string profile;
+    string raceto;
+
+    if(arg)
+        eargs = explode(arg," ");
+
+    raceto = caster->query("race");
+
+    if(sizeof(eargs))
+    {
+        foreach(earg in eargs)
+        {
+            if(regexp(earg,implode(RACE_D->query_races(),"|")))
+                raceto = earg;
+            if(regexp(earg,"[1-9]"))
+            {
+                if(atoi(earg)<(clevel/12+1))
+                {
+                    profile="spell_alter_self_"+(1000-atoi(earg));
+                    caster->set("alter_self_profile",profile);
+                }
+                else
+                {
+                    tell_object(caster,"You can't have that many profiles!");
+                    dest_effect();
+                    return;
+                }
+            }
+        }
+    }
+
     if (!objectp(caster) || !userp(caster)) { TO->remove(); return; }
     new("/std/races/shapeshifted_races/spell_alter_self.c")->init_shape(caster,raceto);
     spell_successful();
