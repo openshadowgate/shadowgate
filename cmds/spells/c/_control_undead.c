@@ -12,15 +12,20 @@ object clothes, remote;
 
 void create() {
     ::create();
-    set_spell_name("domination");
-    set_spell_level(([ "mage" : 5, "psion" : 8 ]));
-    set_discipline("telepath");
-    set_spell_sphere("enchantment_charm");
-    set_syntax("cast CLASS domination on TARGET");
-    set_description("By casting domination successfully, you will gain control over a chosen target. You can order the victim to do whatever is within his/her capability. For example, if the caster uses <cast domination on targetname>, targetname is the victim of the spell. Next, the mage can use <make targetname do kill kobold> or <make targetname emote kisses your feet>. The spell can be ended with <free targetname>.
+    set_spell_name("control undead");
+    set_spell_level(([ "mage" : 7,]));
+    set_spell_sphere("necromancy");
+    set_syntax("cast CLASS control undead on TARGET");
+    set_description("By invoking this spell a necromancer confirms its domain over the undead and takes control of the unliving. Then they can use the next commands to force undead to serve:
+
+%^ORANGE%^<make %^ORANGE%^%^ULINE%^TARGET%^RESET%^ to %^ORANGE%^%^ULINE%^ACTION%^RESET%^>%^RESET%^
+  Will force the %^ORANGE%^%^ULINE%^TARGET%^RESET%^ to perform an %^ORANGE%^%^ULINE%^ACTION%^RESET%^.
+%^ORANGE%^<free %^ORANGE%^%^ULINE%^TARGET%^RESET%^>%^RESET%^
+  Will free the %^ORANGE%^%^ULINE%^TARGET%^RESET%^ from your control.
+
+If the will save succeded or the target is not undead they will be outraged at your attempt and will attack immediately.
 
 %^BOLD%^%^RED%^N.B.%^RESET%^ If used on players this spell provide you only with limited subset of allowed commands.");
-    mental_spell();
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -29,9 +34,7 @@ void create() {
 
 
 string query_cast_string() {
-    return caster->QCN+" glides "+
-    caster->QP+" hand from side to side while "+
-    "chanting hypnotically.";
+    return "%^BLUE%^"+caster->QCN+" glides "+caster->QP+" hand from side to side while "+ "chanting hypnotically.";
 }
 
 void spell_effect(int prof) {
@@ -58,39 +61,28 @@ void spell_effect(int prof) {
         return;
     }
 
-    if(do_save(target))
+    if(do_save(target,-2)||
+       !target->is_undead())
     {
-//        tell_object(caster,"Your attempt to overcome the willpower of"+target->QCN+" has failed!");
-//        tell_object(target,""+caster->QCN+" tries to control your mind!\nYou manage to fight "+caster->QO+" off!");
-//        tell_room(place,"Both "+caster->QCN+" and "+target->QCN+" seem to both have nasty headaches.\n"+caster->QCN+" stumbles back a bit as"+target->QCN+" recovers.",({caster, target}) );
         tell_room(environment(target),"Outraged at "+caster->QCN+" for"+caster->QP+" attempt at mind control, "+target->QCN+" attacks"+caster->QO+"!", ({target, caster}) );
         tell_object(target,"Outraged at "+caster->QCN+" for "+caster->QP+"attempt at mind control, you attack "+caster->QO+"!");
         tell_object(caster,""+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
         spell_kill(target, caster);
-        if (wizardp(target) || present("clothesx999",target) || (string)target->query_property("no dominate",1) || !present(caster, environment(target)))
-           if(objectp(TO)) TO->remove();
-        if(objectp(TO)) TO->remove();
+        if (wizardp(target) ||
+            present("clothesx999",target) ||
+            target->query_property("no dominate",1) ||
+            !present(caster, environment(target)))
+            if(objectp(TO))
+                TO->remove();
+        if(objectp(TO))
+            TO->remove();
         return;
     }
-
-    if(mind_immunity_damage(target, "default"))
-    {
-        tell_room(environment(target),"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
-        tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
-        tell_object(caster,"%^RED%^"+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
-        spell_kill(target, caster);
-        spell_successful();
-        dest_effect();
-        return;
-    }
-
-
-
 
     duration=60+clevel*60;
-    duration=duration>300?300:duration;
+    duration=duration>360?360:duration;
 
-    tell_object(caster,"%^GREEN%^You break into "+target->QCN+"'s mind and "
+    tell_object(caster,"%^BLUE%^%^BOLD%^You break into "+target->QCN+"'s mind and "
         "overcome "+target->QP+" willpower!");
     spell_successful();
     addSpellToCaster();
@@ -129,8 +121,8 @@ void dest_effect() {
         remote->remove();
     }
     if (target) {
-        tell_room(environment(target),"%^YELLOW%^"+target->QCN+" blinks a couple times, then looks around.", target );
-        tell_object(target,"%^YELLOW%^You blink a couple times, then look around.");
+        tell_room(environment(target),"%^BLUE%^"+target->QCN+" blinks a couple times, then looks around.", target );
+        tell_object(target,"%^BLUE%^You blink a couple times, then look around.");
         if (quitting)
             target->force_me("quit");
     }

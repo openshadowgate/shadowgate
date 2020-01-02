@@ -60,9 +60,6 @@ void spell_effect(int prof) {
 
     if(do_save(target))
     {
-//        tell_object(caster,"Your attempt to overcome the willpower of"+target->QCN+" has failed!");
-//        tell_object(target,""+caster->QCN+" tries to control your mind!\nYou manage to fight "+caster->QO+" off!");
-//        tell_room(place,"Both "+caster->QCN+" and "+target->QCN+" seem to both have nasty headaches.\n"+caster->QCN+" stumbles back a bit as"+target->QCN+" recovers.",({caster, target}) );
         tell_room(environment(target),"Outraged at "+caster->QCN+" for"+caster->QP+" attempt at mind control, "+target->QCN+" attacks"+caster->QO+"!", ({target, caster}) );
         tell_object(target,"Outraged at "+caster->QCN+" for "+caster->QP+"attempt at mind control, you attack "+caster->QO+"!");
         tell_object(caster,""+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
@@ -78,17 +75,13 @@ void spell_effect(int prof) {
         tell_room(environment(target),"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
         tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
         tell_object(caster,"%^RED%^"+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
-        spell_kill(target, caster);
         spell_successful();
         dest_effect();
         return;
     }
 
-
-
-
     duration=60+clevel*60;
-    duration=duration>300?300:duration;
+    duration=duration>360?360:duration;
 
     tell_object(caster,"%^GREEN%^You break into "+target->QCN+"'s mind and "
         "overcome "+target->QP+" willpower!");
