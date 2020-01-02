@@ -165,6 +165,13 @@ int cmd_prepare(string str)
                 HELP_D->help("prepare");
                 return 1;
             }
+            if(TP->query_property("last_prepare")+ROUND_LENGTH>time())
+            {
+                tell_object(TP,"You can't prepare more than once in a round.");
+                return 1;
+            }
+            TP->remove_property("last_prepare",time());
+            TP->set_property("last_prepare",time());
             prepare_listed_spells(TP, arguments[1], arguments[2]);
             return 1;
 
@@ -182,6 +189,14 @@ int cmd_prepare(string str)
 
     if(!can_prepare_as(myclass))
         return 1;
+
+    if(TP->query_property("last_prepare")+ROUND_LENGTH>time())
+    {
+        tell_object(TP,"You can't prepare more than once in a round.");
+        return 1;
+    }
+    TP->remove_property("last_prepare",time());
+    TP->set_property("last_prepare",time());
 
     if (!TP->is_class(myclass) && !avatarp(TP)) { return notify_fail("You cannot cast spells as a " + myclass + "!\n"); }
 
