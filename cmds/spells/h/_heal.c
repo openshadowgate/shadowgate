@@ -47,7 +47,7 @@ spell_effect(int prof)
     int rnd;
 
     set_helpful_spell(1);
-    if(!!target->is_undead())
+    if(!!target->query_property("negative energy affinity"))
         set_helpful_spell(0);
     if (interactive(caster))
     {

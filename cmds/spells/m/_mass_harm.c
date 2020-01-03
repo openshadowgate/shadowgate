@@ -64,12 +64,12 @@ void spell_effect(int prof)
        member_array(target,followers) != -1)
     {
         targets = filter_array(distinct_array(party_members+(followers-attackers))+({caster}),
-                               (:!!$1->is_undead():));
+                               (:!!$1->query_property("negative energy affinity"):));
     }
     else if(member_array(target,attackers) != -1)
     {
         set_helpful_spell(0);
-        targets = filter_array(attackers,(:!$1->is_undead():));
+        targets = filter_array(attackers,(:!$1->query_property("negative energy affinity"):));
     }
     else
     {
@@ -90,7 +90,7 @@ void spell_effect(int prof)
         {
             if(!objectp(targets[i])) { continue; }
             if(!present(targets[i],place)) { continue; }
-            if(!target->is_undead())
+            if(!target->query_property("negative energy affinity"))
             {
                 tell_room(place,"%^BOLD%^%^BLACK%^A fell wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+

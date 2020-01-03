@@ -7,11 +7,11 @@ void create()
     ::create();
     set_spell_name("repair undead");
     set_spell_level(([ "mage" : 1, ]));
-    set_affixed_spell_level(3);
+    set_affixed_spell_level(5);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS repair undead on TARGET");
     set_damage_desc("negative energy on undead");
-    set_description("This spell will channel huge amount of negative energy into target and will repair them if they are undead. This spell won't affect the living, even if they can be healed by negative energy.");
+    set_description("This spell will channel huge amount of negative energy into target and will repair them if they are undead. This spell won't affect the living, unless they can be healed by negative energy.");
     set_save("will");
     set_target_required(1);
     set_helpful_spell(1);
@@ -38,7 +38,7 @@ spell_effect(int prof)
     int rnd;
 
     set_helpful_spell(1);
-    if(!(target->is_undead()))
+    if(!(target->query_property("negative energy affinity")))
     {
         tell_room(place,"%^BOLD%^%^BLACK%^Nothing happens.");
     }

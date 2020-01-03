@@ -15,7 +15,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass repair undead on TARGET");
     set_damage_desc("negative energy");
-    set_description("This spell acts as repair undead spell but affects multiple targets.");
+    set_description("This spell acts as repair undead spell but affects multiple targets. It should properly ideintify party members that can be healed with this spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -63,7 +63,7 @@ void spell_effect(int prof)
        member_array(target,followers) != -1)
     {
         targets = filter_array(distinct_array(party_members+(followers-attackers))+({caster}),
-                               (:!!$1->is_undead():));
+                               (:!!$1->query_property("negative energy affinity"):));
     }
     else
     {
@@ -86,7 +86,7 @@ void spell_effect(int prof)
                 continue;
             if(!present(targets[i],place))
                 continue;
-            if(!target->is_undead())
+            if(!target->query_property("negative energy affinity"))
                 continue;
 
             if(targets[i] == caster)
