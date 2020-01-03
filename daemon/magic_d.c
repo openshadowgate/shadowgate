@@ -396,6 +396,7 @@ mixed query_random_spell(string myclass, int lev)
     return rspell[random(sizeof(rspell))];
 }
 
+
 mixed *query_index(string myclass){
     string theclass = myclass;
     if (theclass == "sorcerer")
@@ -403,6 +404,16 @@ mixed *query_index(string myclass){
     if (theclass == "oracle")
         theclass = "cleric";
     return allSpells[theclass];
+}
+
+mapping *query_global_index()
+{
+    return spellIndex;
+}
+
+mapping *filter_global_index(function filter)
+{
+    return filter_mapping(spellIndex,filter);
 }
 
 int query_spell_level(string myclass, string spell){

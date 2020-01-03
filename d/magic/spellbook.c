@@ -45,6 +45,8 @@ void cull_non_school_spells(object holder);
 static string *magic;
 mapping spells = ([]);
 
+static mapping speccache;
+
 string *mID, bookdesc;
 string owner;
 int restore, *spells_at_level, *in_mind;
@@ -184,10 +186,11 @@ int query_spellbook(string spell) {
 
 int look(string str) {
     object ob;
-    int x, columns, y;
+    int x, y, z, columns;
     string tmp, gtype, temp1;
     string filter;
     string * output = ({}), oline, obuff;
+
 
     tmp = ({});
 
@@ -212,26 +215,27 @@ int look(string str) {
 
     magic = keys(spells);
 
+    speccache = filter_mapping(MAGIC_D->query_global_index(),(:member_array($1,$3)!=-1:),magic);
+
     if(stringp(filter))
     {
         if(regexp(filter,"level [0-9]+"))
         {
             sscanf(filter,"level %s",filter);
-            magic = filter_array(magic,(:MAGIC_D->query_index_row($1)["levels"]["mage"]==$2:),atoi(filter));
+            magic = keys(filter_mapping(speccache,(:($2)["levels"]["mage"]==$3:),atoi(filter)));
         }
         else
         {
-            magic = filter_array(magic,(:MAGIC_D->query_index_row($1)["sphere"][0..3]==$2[0..3]:),filter);
+            magic = keys(filter_mapping(speccache,(:($2)["sphere"][0..3]==$3[0..3]:),filter));
             gtype = "level";
         }
     }
+    if (TP->isKnown(owner))
+        write("\n%^BOLD%^%^CYAN%^This is $&$"+owner+"$&$'s spell book.  Its pages include the following spells:\n");
+    else
+        write("\n%^BOLD%^%^CYAN%^You do not realize who this spell book belongs to.  Its pages include the following spells:\n");
 
-  if (TP->isKnown(owner))
-    write("\n%^BOLD%^%^CYAN%^This is $&$"+owner+"$&$'s spell book.  Its pages include the following spells:\n");
-  else
-    write("\n%^BOLD%^%^CYAN%^You do not realize who this spell book belongs to.  Its pages include the following spells:\n");
-
-  sort();
+    sort();
     switch(gtype)
     {
     case "level":
@@ -245,10 +249,11 @@ int look(string str) {
 
     for (x=0;x<sizeof(magic);x++)
     {
-        output+=({"%^BOLD%^%^CYAN%^"+arrange_string(magic[x], 24)+"%^RESET%^%^CYAN%^ "+arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),2)});
+        output+=({"%^BOLD%^%^CYAN%^"+arrange_string(magic[x], 24)+"%^RESET%^%^CYAN%^ "+arrange_string(speccache[magic[x]]["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),2)});
     }
 
-    columns = atoi(TP->getenv("SCREEN"))/35;
+    z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
+    columns = atoi(TP->getenv("SCREEN"))/z;
     columns = columns<1?1:columns;
     y = atoi(TP->getenv("COLUMNS"));
     y = y<1?1:y;
@@ -260,18 +265,28 @@ int look(string str) {
         obuff+=oline+"  ";
         x++;
         if(!(x%columns))
-            obuff+="\n";
+        {
+            if(sizeof(obuff)>2200)
+            {
+                tell_object(TP,obuff);
+                obuff="";
+            }
+            else
+                obuff+="\n";
+        }
+        else
+            obuff+="";
     }
     tell_object(TP,obuff);
 
-  if (avatarp(TP)) write(
+    if (avatarp(TP)) write(
 @GARRETT
-  Avatar functions:
-  	addspell [spellname] - to add a specific spell
-	rmspell [spellname] - to remove a specific spell
-	addall - to add all mage spells to your master book for reference
+Avatar functions:
+addspell [spellname] - to add a specific spell
+rmspell [spellname] - to remove a specific spell
+addall - to add all mage spells to your master book for reference
 GARRETT
-    );
+        );
     return 1;
 }
 
@@ -605,15 +620,16 @@ void sort() {
         }
 }
 
-void sort_by_school() {
+void sort_by_school()
+{
     int i,j;
 
     for (j=0;j<sizeof(magic);j++)
-        for (i=sizeof(magic)-1;i>j;i--) {
-            if (MAGIC_D->query_index_row(magic[i])["sphere"] < MAGIC_D->query_index_row(magic[i-1])["sphere"]) {
+        for (i=sizeof(magic)-1;i>j;i--)
+            if (speccache[magic[i]]["sphere"] < speccache[magic[i-1]]["sphere"])
+            {
                 swap(i-1,i);
             }
-        }
 }
 
 void sort_by_lev() {

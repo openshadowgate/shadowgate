@@ -8,6 +8,8 @@
 inherit DAEMON;
 
 mapping spells;
+mapping speccache;
+
 string *magic;
 int get_spells(object player, string myclass);
 int full_list(object player, string myclass);
@@ -78,11 +80,12 @@ int cmd_spells(string str)
         sort_two();
     }
 
+    speccache = filter_mapping(MAGIC_D->query_global_index(),(:member_array($1,$3)!=-1:),magic);
+
     if (regexp(args,"by school") && (myclass == "mage" || myclass == "sorcerer"))
     {
         sort_by_school();
     }
-
 
     for (x = 0; x < sizeof(magic);x++)
     {
@@ -90,7 +93,7 @@ int cmd_spells(string str)
         {
             continue;
         }
-        output+=({"%^BOLD%^%^GREEN%^ "+arrange_string(magic[x], 24)+"%^RESET%^%^GREEN%^ "+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(MAGIC_D->query_index_row(magic[x])["sphere"],4):"")});
+        output+=({"%^BOLD%^%^GREEN%^ "+arrange_string(magic[x], 24)+"%^RESET%^%^GREEN%^ "+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(speccache[magic[x]]["sphere"],4):"")});
     }
 
     z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
@@ -200,6 +203,9 @@ private void swap(int i, int j)
 }
 
 
+/**
+ * Sort by level
+ */
 void sort_two()
 {
     int i,j;
@@ -219,15 +225,16 @@ void sort_two()
 
 }
 
-void sort_by_school() {
+void sort_by_school()
+{
     int i,j;
 
     for (j=0;j<sizeof(magic);j++)
-        for (i=sizeof(magic)-1;i>j;i--) {
-            if (MAGIC_D->query_index_row(magic[i])["sphere"] < MAGIC_D->query_index_row(magic[i-1])["sphere"]) {
+        for (i=sizeof(magic)-1;i>j;i--)
+            if (speccache[magic[i]]["sphere"] < speccache[magic[i-1]]["sphere"])
+            {
                 swap(i-1,i);
             }
-        }
 }
 
 
