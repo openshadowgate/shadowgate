@@ -226,7 +226,7 @@ int read_message(string str) {
 
     if(query_ooc_board())
     {
-        if(!query_anonymous_board())
+        if(!query_anonymous_board()||wizardp(TP))
             write("%^GREEN%^From: "+msg["owner"]);
         write("%^GREEN%^Date: "+ctime(msg["date"]));
     }

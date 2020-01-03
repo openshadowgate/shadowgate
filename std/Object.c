@@ -530,6 +530,16 @@ mixed query_property(string prop)
         if(FEATS_D->usable_feat(TO,"fated")) { return 1; }
         if(FEATS_D->usable_feat(TO,"earthen blood")) { return 1; }
     }
+    if(prop == "negative energy affinity")
+    {
+        if(TO->is_undead())
+            return 1;
+        //Unlike other racial bonuses this one must be valid for all
+        //half-races as well.
+        if(TO->query("subrace")=="dhampir")
+            return 1;
+        return num;
+    }
 
     if(prop == "verstandnis")
     {

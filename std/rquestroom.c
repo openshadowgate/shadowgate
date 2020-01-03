@@ -145,7 +145,7 @@ int claim(string str){
     questkeys = keys(quests);
     ob = present(str,TP);
     if(!objectp(ob)) return notify_fail("You don't have that.\n");
-    //Added by Saide - May 2016
+
     if(QUEST_D == "/daemon/quests_high")
     {
         if(character_level < 25)
