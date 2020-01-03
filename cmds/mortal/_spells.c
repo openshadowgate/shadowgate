@@ -110,7 +110,15 @@ int cmd_spells(string str)
         obuff+=oline;
         x++;
         if(!(x%columns))
-            obuff+="\n";
+        {
+            if(sizeof(obuff)>2200)
+            {
+                tell_object(TP,obuff);
+                obuff="";
+            }
+            else
+                obuff+="\n";
+        }
         else
             obuff+="";
     }
