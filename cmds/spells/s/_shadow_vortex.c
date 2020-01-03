@@ -13,7 +13,7 @@ void create()
     ::create();
     set_spell_name("shadow vortex");
     set_spell_level(([ "mage":3,]));
-    set_spell_sphere("illusion");
+    set_spell_sphere("necromancy");
     set_syntax("cast CLASS shadow vortex");
     set_damage_desc("half cold, half electricity");
     set_description("This spell snatches part of the great maelstorm from the seas on shadow plane. Summoned vortices will harm everything in the area with cold and lightning.");

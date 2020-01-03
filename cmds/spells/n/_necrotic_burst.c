@@ -17,6 +17,7 @@ void create()
     set_description("This spells represents necromancer's ability to channel negative energies. You will open a Small rip in fabric of the reality near your target and it will release burst of pure negative energy, directed at your enemies near it.");
     set_verbal_comp();
     set_somatic_comp();
+    splash_spell(1);
     set_target_required(1);
     set_helpful_spell(1);
     set_save("reflex");
@@ -50,12 +51,12 @@ void spell_effect(int prof)
        member_array(target,followers) != -1)
     {
         targets = filter_array(distinct_array(party_members+(followers-attackers))+({caster}),
-                               (:!!$1->is_undead():));
+                               (:!!$1->query_property("negative energy affinity"):));
     }
     else if(member_array(target,attackers) != -1)
     {
         set_helpful_spell(0);
-        targets = filter_array(attackers,(:!$1->is_undead():));
+        targets = filter_array(attackers,(:!$1->query_property("negative energy affinity"):));
     }
     else
     {
@@ -75,7 +76,7 @@ void spell_effect(int prof)
             int healamnt = calculate_healing();
             if(!objectp(targets[i])) { continue; }
             if(!present(targets[i],place)) { continue; }
-            if(!target->is_undead())
+            if(!target->query_property("negative energy affinity"))
             {
                 tell_room(place,"%^BLUE%^A fell wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
@@ -117,6 +118,5 @@ void spell_effect(int prof)
 
 int calculate_healing(object targ)
 {
-    define_base_damage(-3);
     return sdamage;
 }
