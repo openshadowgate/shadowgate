@@ -5,11 +5,11 @@ inherit SPELL;
 void create()
 {
     ::create();
-    set_spell_name("command");
-    set_spell_level(([ "paladin" : 1, "cleric" : 1, "inquisitor" : 1 ]));
-    set_spell_sphere("enchantment_charm");
-    set_syntax("cast CLASS command on TAGET to COMMAND");
-    set_description("You intone a spelled command target has no choice but obey. If targets succeeds the save or is immune it will attack the caster.");
+    set_spell_name("command undead");
+    set_spell_level(([ "mage" : 2, ]));
+    set_spell_sphere("necromancy");
+    set_syntax("cast CLASS command undead on TAGET to COMMAND");
+    set_description("You intone a spelled command target has no choice but obey. If targets succeeds the save or isn't undead it will attack the caster.");
     set_save("will");
     mental_spell(1);
     set_verbal_comp();
@@ -35,12 +35,12 @@ void spell_effect()
         return;
     }
 
-    tell_object(caster,"%^BOLD%^%^MAGENTA%^You enspell your voice and command "+target->QCN+":%^RESET%^ "+command+"!");
-    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" enspells "+caster->QP+" voice and commands "+target->QCN+"%^RESET%^!",caster);
+    tell_object(caster,"%^BOLD%^%^BLUE%^You enspell your voice and command "+target->QCN+":%^RESET%^ "+command+"!");
+    tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" enspells "+caster->QP+" voice and commands "+target->QCN+"%^RESET%^!",caster);
 
-    if(do_save(target,0)||
-       target->query_property("no dominate",1)||
-       mind_immunity_damage(target, "default"))
+    if(do_save(target,-4)||
+       !targ->is_undead()||
+       target->query_property("no dominate",1))
     {
         tell_room(environment(target),"Outraged at "+caster->QCN+" for"+caster->QP+" attempt at mind control, "+target->QCN+" attacks"+caster->QO+"!", ({target, caster}) );
         tell_object(target,"Outraged at "+caster->QCN+" for "+caster->QP+"attempt at mind control, you attack "+caster->QO+"!");
