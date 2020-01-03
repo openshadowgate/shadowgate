@@ -359,16 +359,49 @@ int recall_spells(string type, object who) {
 				cur += to_int(num);
 			      if (!file_exists(dirl+name[0..0]+"/_"+replace_string(name, " ", "_")+".c")) continue;
 				tmp += ({ ccolor+
-				sprintf("  %-26s %-5d", name,num )+"\n"});
+				sprintf("  %-26s %-5d", name,num )+""});
                   }
 			if(flag) {
-				tmp[flag-1] += cur+"/"+max[x]+"\n";
+				tmp[flag-1] += cur+"/"+max[x]+"";
 
 			}
 		}
         //tell_object(who, identify(tmp));
 		//tell_object(who,s_msg);
-		TP->more(explode(implode(tmp, " "), "\n"));
+        {
+            string * output = tmp;
+
+            string obuff, oline;
+            int y, z;
+            int columns;
+
+            z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
+            columns = atoi(TP->getenv("SCREEN"))/z;
+            columns = columns<1?1:columns;
+            y = atoi(TP->getenv("COLUMNS"));
+            y = y<1?1:y;
+            columns = columns>y?y:columns;
+            x=0;
+            obuff="";
+            foreach(oline in output)
+            {
+                if(regexp(oline,"Level"))
+                {
+                    tell_object(TP,obuff);
+                    obuff="";
+                    tell_object(TP,oline);
+                    continue;
+                }
+                obuff+=oline;
+                x++;
+                if(!(x%columns))
+                    obuff+="\n";
+                else
+                    obuff+="";
+            }
+            tell_object(TP,obuff);
+        }
+//		TP->more(explode(implode(tmp, " "), "\n"));
 		return 1;
 	}
 	else{
