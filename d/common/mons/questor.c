@@ -12,7 +12,7 @@ void create()
     set_class("fighter");
     set_class("mage");
     set("aggressive",2);
-    if (TO->query_property("swarm")) TO->remove_property("swarm");
+    set_property("swarm",0);
     set_hd(50,8);
     set_hp(25000);
     set_alignment(5);
@@ -26,15 +26,14 @@ void create()
     set_stats("charisma",8);
     set_stats("dexterity",20);
     set_stats("constitution",28);
+    /* set_save("will",query_level()/2); */
+    /* set_save("fortitude",query_level()/2); */
+    /* set_save("reflex",query_level()/2); */
     set_property("magic",1);
     set_new_exp(100,"boss");
     set_property("cast and attack",1);
     set_spells(({"sunburst",
-                    "hellball",
-                    "hellball",
-                    "greater dispel magic",
-                    "horrid wilthing",
-                    "weird",}));
+                    "sunburst",}));
     set_spell_chance(100);
     set_funcs(({"mercy"}));
     set_func_chance(5);

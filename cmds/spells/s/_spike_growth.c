@@ -16,7 +16,7 @@ void create()
     ::create();
     set_spell_name("spike growth");
     set_spell_level(([ "druid" : 3 ]));
-    set_spell_sphere("combat");
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS spike growth");
     set_description("This spell causes roots or other vegetation in the area to become hard and razor sharp.  Anyone moving in the area, "
         "such as the movement in combat or passing through the room, will suffer piercing damage to his or her feet.  The spell may only "
@@ -25,7 +25,7 @@ void create()
     set_casting_time(1);
 }
 
-
+//Please leave this as an example, if we ever return to this
 /* int terrain_filter() */
 /* { */
 /*     string *valid_terrains; */

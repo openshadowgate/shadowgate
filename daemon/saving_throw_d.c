@@ -42,10 +42,13 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         // step 2: get any extra points from levels past 20, if applicable
         level = ob->query_class_level(classes[i]);
 
-        // past L20, all saves increase at level/2 rate. Let's give the SC a bit of a nudge up!
-        /* if(level < 21) continue; */
-        /* level -= 20; */
-        /* save += level/2; */
+        //
+        if(!userp(ob))
+        {
+            if(level < 21) continue;
+            level -= 20;
+            save += level/2;
+        }
     }
     if(ob->is_undead() && num==2)
         save = (2 + (ob->query_level()/2));
