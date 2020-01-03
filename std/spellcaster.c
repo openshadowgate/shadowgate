@@ -591,7 +591,7 @@ mapping query_mastered_bonus()
             string baseclass = TO->query("shadow_adept_base_class");
             if(!arrayp(tmp[baseclass]))
                 tmp[baseclass]=({});
-            tmp[baseclass]+=({"umbral sight","shield of shadows","darkbolt","shadow double","shadow nova"});
+            tmp[baseclass]+=({"umbral sight","shield of shadows","shadow vortex","darkbolt","shadow double","shadow nova"});
         }
     }
 

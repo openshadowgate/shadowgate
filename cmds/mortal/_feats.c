@@ -601,6 +601,8 @@ int cmd_feats(string str){
     int i,j,MAX_ALLOWED,BONUS_ALLOWED,num_feats,allowed,num_bonus,bonus,my_lev,*featkeys;
     mapping classfeats,otherfeats,bonus_feats;
 
+    str = lower_case(str);
+
     find_object_or_load(FEATS_D);
     FEATS_D->update_usable(TP);
 

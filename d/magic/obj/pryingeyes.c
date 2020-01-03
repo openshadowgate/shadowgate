@@ -23,6 +23,7 @@ void create(){
 
     set_hidden(1);
 
+    set_property("untrackable",1);
     set_hd(1,2);
     set_hp(10);
     set_max_hp(10);
