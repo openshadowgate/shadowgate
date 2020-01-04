@@ -165,7 +165,7 @@ int cmd_prepare(string str)
                 HELP_D->help("prepare");
                 return 1;
             }
-            if(TP->query_property("last_prepare")+ROUND_LENGTH>time())
+            if(TP->query_property("last_prepare")+ROUND_LENGTH-1>time())
             {
                 tell_object(TP,"You can't prepare more than once in a round.");
                 return 1;

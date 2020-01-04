@@ -538,6 +538,7 @@ mixed query_property(string prop)
         //half-races as well.
         if(TO->query("subrace")=="dhampir")
             return 1;
+        num += props[prop];
         return num;
     }
 

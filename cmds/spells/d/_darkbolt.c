@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_spell_domain("darkness");
     set_syntax("cast CLASS darkbolt on TARGET");
-    set_damage_desc("divine");
+    set_damage_desc("half cold, half electricity");
     set_description("This spell will hurl a bolt of pure evil at the target.  If the target is able to move in time, then "
 "they will only suffer some of the damage.  This spell may also hit some of those who are standing near the target.");
     set_verbal_comp();
@@ -72,12 +72,13 @@ void spell_effect(int prof){
                //if (!SAVING_D->saving_throw(target, "spell")){
                   tell_object(target,"%^BLUE%^The beam of darkness strikes you, ravaging your mind.");
                   tell_room(environment(target),"%^BLUE%^The beam of darkness strikes "+target->QCN+".", target);
-                  damage_targ(target, "torso", damage,"divine");
+                  damage_targ(target, "torso", damage/2,"cold");
+                  damage_targ(target, "torso", damage/2,"electricity");
                   spell_kill(target,caster);
               }else{
                   tell_object(target,"%^BLUE%^The beam grazes you.");
                   tell_room(environment(caster),"%^BLUE%^The beam almost misses "+target->QCN+".",target);
-                  damage_targ(target, "torso", damage/2,"divine");
+                  damage_targ(target, "torso", damage/2,"cold");
                   spell_kill(target,caster);
               }
            }else{
@@ -88,7 +89,8 @@ void spell_effect(int prof){
                  tell_room(environment(caster),"%^BLUE%^The beam of "+
                     "darkness tears through "+
                     ""+attackers[i]->QCN+"!%^RESET%^",attackers[i]);
-                 damage_targ(attackers[i],"torso",damage,"divine");
+                  damage_targ(target, "torso", damage/2,"cold");
+                  damage_targ(target, "torso", damage/2,"electricity");
                  spell_kill(target,caster);
               }else{
                  tell_object(attackers[i],"%^BLUE%^The beam of darkness "+
@@ -96,7 +98,7 @@ void spell_effect(int prof){
                  tell_room(environment(caster),"%^BLUE%^The beam of "+
                     "darkness grazes "+
                     ""+attackers[i]->QCN+"!%^RESET%^",attackers[i]);
-                 damage_targ(attackers[i],"torso",damage/2,"divine");
+                  damage_targ(target, "torso", damage/2,"cold");
                  spell_kill(target,caster);
               }
            }

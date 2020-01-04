@@ -34,7 +34,9 @@ void spell_effect()
 {
     tell_object(caster,"%^BLUE%^Currents of death and life change their directions within you.%^RESET%^");
     tell_room(place,"%^BLUE%^"+caster->QCN+"'s skin briefly turns white.",caster);
-    caster->set_property("negtive energy affinity",1);
+    caster->set_property("negative energy affinity",1);
+    addSpellToCaster();
+    spell_successful();
 }
 
 void dest_effect()

@@ -41,6 +41,8 @@ spell_effect(int prof)
     if(!(target->query_property("negative energy affinity")))
     {
         tell_room(place,"%^BOLD%^%^BLACK%^Nothing happens.");
+        dest_effect();
+        return;
     }
     if (interactive(caster))
     {
@@ -65,10 +67,4 @@ spell_effect(int prof)
     damage_targ(target,target->return_target_limb(),rnd,"negative energy");
 
     dest_effect();
-}
-
-void dest_effect()
-{
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }
