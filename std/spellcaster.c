@@ -182,34 +182,38 @@ varargs int forget_memorized(string myclass, string spell, int forced) {
             tell_object(TO,"%^BOLD%^%^WHITE%^Your concentration is so great that you keep memory of the spell even after its casting!%^RESET%^");
             return 1;
         }
-        if(FEATS_D->usable_feat(TO,"arcane perfection"))
-        {
-            if(TO->is_class("sorcerer"))
-                stat = TO->query_stats("charisma");
-            else
-                stat = TO->query_stats("intelligence");
-
-            stat += 30;
-            if(roll_dice(1,100) < stat)
+        if(TO->is_class("sorcerer") ||
+           TO->is_class("mage"))
+            if(FEATS_D->usable_feat(TO,"arcane perfection"))
             {
-                tell_object(TO,"%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^retain%^RESET%^%^MAGENTA%^ the spell in memory!%^RESET%^");
-                return 1;
-            }
-        }
-        if(FEATS_D->usable_feat(TO,"natural perfection") ||
-           FEATS_D->usable_feat(TO,"theurgic perfection"))
-        {
-            stat = TO->query_stats("wisdom");
-            stat += 30;
-            if(roll_dice(1,100) < stat)
-            {
-                if(TO->is_class("druid"))
-                    tell_object(TO,"%^BOLD%^%^GREEN%^You are so in tune with the natural world around you that you retain the spell in memory!");
+                if(TO->is_class("sorcerer"))
+                    stat = TO->query_stats("charisma");
                 else
-                    tell_object(TO,"%^BOLD%^%^CYAN%^You are so in tune with the world around you that you retain the spell in memory!");
-                return 1;
+                    stat = TO->query_stats("intelligence");
+
+                stat += 30;
+                if(roll_dice(1,100) < stat)
+                {
+                    tell_object(TO,"%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^retain%^RESET%^%^MAGENTA%^ the spell in memory!%^RESET%^");
+                    return 1;
+                }
             }
-        }
+        if(TO->is_class("hierophant") ||
+           TO->is_class("archdruid"))
+            if(FEATS_D->usable_feat(TO,"natural perfection") ||
+               FEATS_D->usable_feat(TO,"theurgic perfection"))
+            {
+                stat = TO->query_stats("wisdom");
+                stat += 30;
+                if(roll_dice(1,100) < stat)
+                {
+                    if(TO->is_class("druid"))
+                        tell_object(TO,"%^BOLD%^%^GREEN%^You are so in tune with the natural world around you that you retain the spell in memory!");
+                    else
+                        tell_object(TO,"%^BOLD%^%^CYAN%^You are so in tune with the world around you that you retain the spell in memory!");
+                    return 1;
+                }
+            }
     }
 
     if(myclass == "bard" ||

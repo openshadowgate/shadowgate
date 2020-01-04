@@ -37,10 +37,7 @@ string spell_name,
     description,
     casting_stat,
     psyclass,
-    aoe_message,
-    *supreme_healer_spells,
-    *raging_healer_spells,
-    *natures_gift_spells;
+    aoe_message;
 
 static int FULL_EFFECT = 100;
 
@@ -536,6 +533,9 @@ void wizard_interface(object user, string type, string targ)
     string *comp_names, msg, whatsit, whatdo, improv, old_spell_type, featneeded, altclass,way;
     object *weaps, compbag, wildspell, wpcaster, shapeob;
     int nodo, i, casting_level;
+    string *supreme_healer_spells,
+        *raging_healer_spells,
+        *natures_gift_spells;
 
     if(!type)
     {
@@ -1007,6 +1007,7 @@ void wizard_interface(object user, string type, string targ)
        !(FEATS_D->usable_feat(caster,"raging healer") && (member_array(spell_name,raging_healer_spells) != -1) && caster->query_property("raged")) &&
        !(FEATS_D->usable_feat(caster,"expanded knowledge 1") && (spell_name == (string)caster->query("expanded_knowledge_1"))) &&
        !(FEATS_D->usable_feat(caster,"expanded knowledge 2") && (spell_name == (string)caster->query("expanded_knowledge_2"))) &&
+       !(FEATS_D->usable_feat(caster,"negative energy conduit" && casting_level < 6)) &&
        !(FEATS_D->usable_feat(caster,"expanded knowledge 3") && (spell_name == (string)caster->query("expanded_knowledge_3"))) &&
        ((!FEATS_D->usable_feat(caster,"body cognition") && !FEATS_D->usable_feat(caster,"mind over matter")) || (spell_name != "true metabolism")) &&
        ((!FEATS_D->usable_feat(caster,"presence of mind") && !FEATS_D->usable_feat(caster, "mental fortress")) || (spell_name != "timeless body")))
@@ -1851,6 +1852,11 @@ void define_clevel()
                     clevel -= 6;
             }
         }
+
+        if(caster->is_class("gravecaller"))
+            if(FEATS_D->usable_feat(caster, "inspired necromancy"))
+                if(spell_sphere=="necromancy")
+                    clevel += 4;
 
         if(caster->is_class("shadow_adept"))
             if(FEATS_D->usable_feat(caster, "elusive spellcraft"))
