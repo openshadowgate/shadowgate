@@ -537,6 +537,8 @@ void wizard_interface(object user, string type, string targ)
         *raging_healer_spells,
         *natures_gift_spells;
 
+    string *player_feats = user->query_player_feats(); //Note that includes inactive feats
+
     if(!type)
     {
         tell_object(caster, "Something has gone wrong, the spell has no type specified!");
@@ -544,7 +546,6 @@ void wizard_interface(object user, string type, string targ)
         return;
     }
     spell_type = type;
-    if(spell_type == "antipaladin") spell_type = "paladin"; // casting til the antipaladin class is removed.
 
     switch(type)
     {
@@ -569,10 +570,10 @@ void wizard_interface(object user, string type, string targ)
     }
 
 
-    if(user->is_class("psion")){ psyclass = "psion"; altclass = "psywarrior"; }
-    if(user->is_class("psywarrior")){ psyclass = "psywarrior"; altclass = "psion"; }
+    if(spell_type == "psion"){ psyclass = "psion"; altclass = "psywarrior"; }
+    if(spell_type == "psywarrior"){ psyclass = "psywarrior"; altclass = "psion"; }
 
-    if(user->is_class("psion") || user->is_class("psywarrior"))
+    if(spell_type == "psion" || spell_type == "psywarrior")
     {
         if(FEATS_D->usable_feat(user,"expanded knowledge 3") && ((string)TO->query_spell_name() == (string)user->query("expanded_knowledge_3")))
         {
@@ -1001,16 +1002,10 @@ void wizard_interface(object user, string type, string targ)
     spell_name = replace_string(spell_name,"_"," ");
     improv = replace_string(improv,"_"," ");
 
-    if(!(FEATS_D->usable_feat(caster,"spellmastery") && (spell_name == (string)caster->query("spellmastery_spell"))) &&
-       !(FEATS_D->usable_feat(caster,"supreme healer") && (member_array(spell_name,supreme_healer_spells) != -1)) &&
+    if(!(FEATS_D->usable_feat(caster,"supreme healer") && (member_array(spell_name,supreme_healer_spells) != -1)) &&
        !(FEATS_D->usable_feat(caster,"natures gift") && (member_array(spell_name,natures_gift_spells) != -1)) &&
        !(FEATS_D->usable_feat(caster,"raging healer") && (member_array(spell_name,raging_healer_spells) != -1) && caster->query_property("raged")) &&
-       !(FEATS_D->usable_feat(caster,"expanded knowledge 1") && (spell_name == (string)caster->query("expanded_knowledge_1"))) &&
-       !(FEATS_D->usable_feat(caster,"expanded knowledge 2") && (spell_name == (string)caster->query("expanded_knowledge_2"))) &&
-       !(FEATS_D->usable_feat(caster,"negative energy conduit" && casting_level < 6)) &&
-       !(FEATS_D->usable_feat(caster,"expanded knowledge 3") && (spell_name == (string)caster->query("expanded_knowledge_3"))) &&
-       ((!FEATS_D->usable_feat(caster,"body cognition") && !FEATS_D->usable_feat(caster,"mind over matter")) || (spell_name != "true metabolism")) &&
-       ((!FEATS_D->usable_feat(caster,"presence of mind") && !FEATS_D->usable_feat(caster, "mental fortress")) || (spell_name != "timeless body")))
+       !(FEATS_D->usable_feat(caster,"negative energy conduit" && casting_level < 6 && spell_sphere == "necromancy")))
     {
         if(!caster->check_memorized(spell_type,improv))
         {

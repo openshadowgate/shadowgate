@@ -151,7 +151,7 @@ int caster_level_calcs(object player, string the_class)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "inspired necromancy" }), 4 : ({ "negative energy conduit" }), 7 : ({ "spell critical" }), ]);
+    return ([ 1 : ({ "inspired necromancy" }), 4 : ({ "negative energy conduit" }), 7 : ({ "deaths shroud" }), ]);
 }
 
 string *class_skills(object ob)
