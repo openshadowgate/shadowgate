@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","taxperc","term","scrlines","scrwidth","columns","hardcore"});
+string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","no_reward","taxperc","term","scrlines","scrwidth","columns","hardcore"});
 
 int cmd_set(string args)
 {
@@ -308,6 +308,32 @@ string get_hardcore()
         return "off";
 }
 
+int set_no_reward(string val)
+{
+    string *valid_values = ({"on","off"});
+    if(member_array(val,valid_values)==-1)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+        return 0;
+    }
+    if(val=="on")
+        TP->set("no_reward",1);
+    if(val=="off")
+    {
+        write("%^BOLD%^%^RED%^Nope. You keep suffering.");
+        return 0;
+    }
+    return 1;
+}
+
+string get_no_reward()
+{
+    if(TP->query("no_reward"))
+        return "on";
+    else
+        return "off";
+}
+
 int set_taxperc(string val)
 {
     int perc;
@@ -356,6 +382,7 @@ You can manipulate numerous mud settings:
 %^ULINE%^%^CYAN%^Experience points and tax:%^RESET%^
 
 %^CYAN%^expgain %^GREEN%^on|off%^RESET%^\n  This will turn on or off experience gain for your character. While it is off, you will get NO EXPERIENCE. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^no_reward %^GREEN%^on|off%^RESET%^\n  Opt out from receiving reward from other players granted with %^ORANGE%^<reward>%^RESET%^ command. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^taxperc %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  This will define how much of your experience gain goes towards paying off your experience tax. This value will grow with your levels, but you may force its increase via this setting. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^hardcore %^GREEN%^%^ULINE%^on%^RESET%^\n  If you loved good old days and want more. Harcore mode can't be turned off. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^ULINE%^%^CYAN%^Terminal and display:%^RESET%^
