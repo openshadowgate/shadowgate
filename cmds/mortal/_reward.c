@@ -19,6 +19,12 @@ int cmd_reward(string str)
         return 1;
     }
 
+    if(TP==target)
+    {
+        tell_object(TP,"You cannot reward yourself.");
+        return 1;
+    }
+
     if(target->query("no_reward"))
     {
         tell_object(TP,"That player wishes no rewards!");
@@ -33,21 +39,21 @@ int cmd_reward(string str)
     }
 
     {
-        int exp;
         int expdelta;
         int thelevel = target->query_character_level();
 
         expdelta = abs(EXP_NEEDED[thelevel+1]-EXP_NEEDED[thelevel])/10;
-        exp = target->query_exp();
 
-        target->set_general_exp(target->query_classes()[0],exp + expdelta);
+        target->set_property("ignore tax",1);
+        target->add_general_exp(target->query_classes()[0],expdelta);
+        target->remove_property("ignore tax");
 
         tell_object(TP,"%^CYAN%^%^BOLD%^You have rewarded "+target->QCN+" with some experience.");
         tell_object(target,"%^CYAN%^%^BOLD%^You feel enlightened as your powers grow.");
         TP->delete("last_reward");
         TP->set("last_reward",time());
 
-        log_file("rewards",TP->query_name()+" awarded "+target->query_name()+" with "+expdelta+" exp\n");
+        log_file("rewards",TP->query_name()+" awarded "+target->query_name()+" with "+english_number(expdelta)+" exp\n");
 
     }
 
@@ -69,13 +75,13 @@ reward %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will allow you to reward anyone with 10% of exp towards their next level. The reason for doing so is left to your discretion and could be left mysterious. The player won't know who rewarded them, but will see the message about the reward. They also must be present in the room with you. You can do it only once per five days.
+This command will allow you to reward anyone with 10% of exp towards their next level. The reason for doing so is left to your discretion. The player won't know who rewarded them, but will see the message about the reward. They also must be present in the room with you. You can do it only once per five days.
 
 Player may opt out from receiving rewards with noreward setting in %^ORANGE%^<set>%^RESET%^ command. If they did so, your attempt to reward them won't count.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-set, look, who
+set, score, who, chfn
 "
         );
 }
