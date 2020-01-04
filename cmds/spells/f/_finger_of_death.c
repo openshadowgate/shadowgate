@@ -37,7 +37,7 @@ void spell_effect(int prof) {
         if(member_array(caster->query_name(),target->query_property("no_slay")) != -1)
             x = 1;
 
-    if((string)target->query_property("no death") || x || do_save(target,4))
+    if((string)target->query_property("no death") || x || do_save(target,6))
     {
         tell_object(target,"%^BOLD%^The struggle is won, yet at a price.");
         tell_room(place,"%^BOLD%^The soul survives, yet at a price.",target);

@@ -48,48 +48,50 @@ spell_effect(int prof) {
     env = environment(caster);
 
     roll = BONUS_D->process_hit(caster, target, 1, 0, 0, 1);
-    if (!roll || roll == -1 || caster->query_property("spectral_hand"))
+    if (!roll || roll == -1 && ! caster->query_property("spectral_hand"))
     {
-        spell_kill(target, caster);
-            tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" reaches out and touches your "+target_limb+" imbuing you with fell power!");
-            tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" reaches out and touches "+target->QCN+" on the "+target_limb+" imbuing them with fell power!", ({target, caster}));
-            tell_object(caster,"%^BOLD%^%^CYAN%^You touch "+target->QCN+"'s "+target_limb+" imbuing them with the fell power!");
-        if(do_save(target))
-        {
-            object eff = "/std/effect/status/sickened"->apply_effect(target,roll_dice(1,6));
-            if(objectp(eff))
-                eff->set_poison();
-            tell_object(target,"%^BOLD%^%^CYAN%^You manage to will off some of the effects!");
-        }
-        else
-        {
-            object attacker, * attackers;
-
-            target->set_paralyzed(roll_dice(1,6)*8,"The force of the spell has left you stunned.");
-
-
-            tell_room(place,"%^BOLD%^%^CYAN%^"+target->QCN+" recks of rot.");
-            //This spell must be evil.
-            attackers = all_living(place);
-            attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-            attackers = target_filter(attackers);
-            foreach(attacker in attackers)
-            {
-                if(!(do_save(attacker,0)||
-                     POISON_D->can_be_poisoned(attacker)))
-                {
-                    object eff = "/std/effect/status/sickened"->apply_effect(attacker,roll_dice(1,6));
-                    if(objectp(eff))
-                        eff->set_poison();
-                }
-            }
-
-        }
-    } else {
         tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" fails to touch you!");
         tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" fails to touch "+target->QCN+"!", ({target, caster}));
         tell_object(caster,"%^BOLD%^%^CYAN%^You fail to touch "+target->QCN+"!");
         spell_kill(target, caster);
+        dest_effect();
+        return;
+    }
+
+    spell_kill(target, caster);
+    tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" reaches out and touches your "+target_limb+" imbuing you with fell power!");
+    tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" reaches out and touches "+target->QCN+" on the "+target_limb+" imbuing them with fell power!", ({target, caster}));
+    tell_object(caster,"%^BOLD%^%^CYAN%^You touch "+target->QCN+"'s "+target_limb+" imbuing them with the fell power!");
+    if(do_save(target))
+    {
+        object eff = "/std/effect/status/sickened"->apply_effect(target,roll_dice(1,6));
+        if(objectp(eff))
+            eff->set_poison();
+        tell_object(target,"%^BOLD%^%^CYAN%^You manage to will off some of the effects!");
+    }
+    else
+    {
+        object attacker, * attackers;
+
+        target->set_paralyzed(roll_dice(1,6)*8,"The force of the spell has left you stunned.");
+
+
+        tell_room(place,"%^BOLD%^%^CYAN%^"+target->QCN+" recks of rot.");
+        //This spell must be evil.
+        attackers = all_living(place);
+        attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
+        attackers = target_filter(attackers);
+        foreach(attacker in attackers)
+        {
+            if(!(do_save(attacker,0)||
+                 POISON_D->can_be_poisoned(attacker)))
+            {
+                object eff = "/std/effect/status/sickened"->apply_effect(attacker,roll_dice(1,6));
+                if(objectp(eff))
+                    eff->set_poison();
+            }
+        }
+
     }
     dest_effect();
 }

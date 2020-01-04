@@ -3,19 +3,16 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("ShadowAdept");
     feat_name("gift of the shadows");
     feat_prereq("Shadow adept L1");
-    feat_desc("A shadow adept gains the use of several new spells: 
+    feat_desc("A shadow adept gains the use of several new spells:
 
-  shield of shadows
-  umbral sight 
-  shadow double
-  shadow nova.");
+umbral sight, shield of shadows, shadow vortex, night armor, darkbolt, shadow blast, shadow double, nightmare maw, shadow nova");
     permanent(1);
     set_required_for(({"shadow defense",}));
 }
@@ -60,4 +57,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
