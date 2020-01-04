@@ -1,6 +1,5 @@
-// please note - all MR spells & items (plat band, power resistance, prot from spells, drow MR) are now all balanced to MR and do not stack.
-// this is to counteract innate caster SR so that feats/items/etc are what chooses a player's capacity to bypass. N, 5/15.
 #include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 int lower;
@@ -78,7 +77,7 @@ void spell_effect(int prof) {
     target->set_property("spell damage resistance",lower);
     target->set_property("raised spell damage resistance",1);
     addSpellToCaster();
-    call_out("dest_effect",80 + clevel*8,lower);
+    call_out("dest_effect",clevel*3*ROUND_LENGTH,lower);
 }
 
 void dest_effect(){

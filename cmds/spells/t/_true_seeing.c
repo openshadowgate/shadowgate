@@ -55,7 +55,7 @@ spell_effect(int prof)
     tell_object(caster,"%^BOLD%^Your eyes snap open and flash bright white for an instant.");
     caster->set_true_seeing(1);
     caster->set_property("spelled", ({TO}) );
-    call_out("dest_effect", clevel * ROUND_LENGTH);
+    call_out("dest_effect", clevel * (ROUND_LENGTH * 2 + 1));
     addSpellToCaster();
 }
 

@@ -55,7 +55,7 @@ void spell_effect(int prof) {
 //    call_out("dest_effect", clevel * 5 * ROUND_LENGTH);
     clevel = ((clevel*prof)/100);
     addSpellToCaster();
-    call_out("dest_effect", clevel * ROUND_LENGTH);
+    call_out("dest_effect", clevel * (ROUND_LENGTH * 2 +1));
 }
 
 void flip(int onOff){
