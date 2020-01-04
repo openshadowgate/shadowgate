@@ -1,4 +1,5 @@
 #include <std.h>
+#include <magic.h>
 #include <daemons.h>
 inherit SPELL;
 
@@ -43,7 +44,7 @@ void spell_effect(int prof) {
     addSpellToCaster();
     spell_successful();
     caster->set_property("spelled",({TO}));
-    call_out("dest_effect",clevel*16);
+    call_out("dest_effect",(clevel*5*ROUND_LENGTH));
 }
 
 void dest_effect() {
