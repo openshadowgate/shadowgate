@@ -6,6 +6,13 @@
 int cmd_reward(string str)
 {
     object target;
+
+    if(!str)
+    {
+        tell_object(TP,"<reward TARGET>");
+        return 1;
+    }
+
     if(!objectp(target = present(str,ENV(TP))))
     {
         tell_object(TP,"That is not here!");

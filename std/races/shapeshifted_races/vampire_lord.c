@@ -1,64 +1,43 @@
 #include <std.h>
 #include <daemons.h>
-#include <magic.h>
-inherit SHAPESHIFT;
 
-int trip_timer;
+inherit SHAPESHIFT;
 
 void create()
 {
     ::create();
 
-    set_attack_limbs( ({ "right hand","left hand" }) );
-    set_attack_functions(([ "right hand" : (:TO,"shape_attack":), "left hand" : (:TO,"shape_attack":) ]));
-    set_ac_bonus(2);
+    set_attack_limbs( ({ "right hand", "left hand" }) );
+    set_limbs( ({ "mouth","head","torso","waist ","left arm","left hand","right arm","right hand","left leg","left foor","right leg" ,"right food", "tail", "maw" }) );
     set_base_attack_num(4);
+    set_ac_bonus(2);
     set_castable(1);
     set_can_talk(1);
-    set_shape_race("vampire");
-    set_shape_profile("vampire_lord_999");
-    set_shape_bonus("perception",6);
-    set_shape_bonus("spellcraft",6);
-    set_shape_bonus("sight bonus",6);
-    set_shape_bonus("water breather",1);
-    set_shape_bonus("empowered",2);
-    set_shape_bonus("damage resistance",10);
-    set_shape_bonus("spell damage resistance",10);
+    set_shape_race("werewolf");
+    set_shape_profile("werewolf_hybrid_999");
 }
 
 int default_descriptions(object obj)
 {
     if(!objectp(obj)) { return 0; }
-
-    obj->set_description("rises before you, a creature of pure elemental force. Vaguely humanoid, it "
-        "has a head with depthless orbs for eyes, descending to the outline of a body with arms at "
-        "either side. The torso trails down to a formless mass that moves over the ground somehow. "
-        "The being is unsettling at best, its intimidating bulk being something not of this plane.");
-
-    obj->setDescriptivePhrase("imposing $R");
-
-    obj->set("speech string","voice");
-    obj->set("describe string","eerily");
-
-    obj->force_me("message in flies in");
-    obj->force_me("message out flies off $D");
+    obj->set_description("is a strange humanoid resembling its original race. It has wolf-like ears and is covered in dark bluesh fur.");
+    obj->setDescriptivePhrase("lean $R with dark blue fur and fluffy ears");
 
     return 1;
 }
 
+
+// custom shapeshift messages here, override this function
 int change_into_message(object obj)
 {
     if(!objectp(obj)) { return 0; }
-    tell_object(obj,"%^RESET%^%^GREEN%^You turn your mind out to the wilds as you focus on the core of your spirit.");
-    tell_object(obj,"%^RESET%^%^BOLD%^You can feel your body beginning to change!");
-    tell_object(obj,"%^RESET%^%^BLUE%^You reach out to the planes beyond the material, harnessing the very essence of the "
-        "elements. Your bond with the wild grows stronger, attuned as you are now with the magical energies of the "
-        "world around you.  You are ELEMENTAL!");
-    tell_object(obj,"%^RESET%^%^BOLD%^You realise that you can <surge> with energy!");
+    tell_object(obj,"%^RESET%^%^RED%^%^BOLD%^You turn your mind out to the darkness as you focus on the core of your spirit.");
+    tell_object(obj,"%^RESET%^%^RED%^You can feel your body beginning to change, you grow a tail and couple of wolf-like ears!");
+    tell_object(obj,"%^RESET%^%^RED%^%^BOLD%^Your senses heighten, you can feel the pulse of the night, smell countless scents, you can taste the very air. You are werewolf!");
 
-    tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+" grows very still and appears to concentrate deeply.",obj);
-    tell_room(environment(obj),"%^RESET%^%^YELLOW%^"+obj->QCN+" begins to change in front of your very eyes!",obj);
-    tell_room(environment(obj),"%^RED%^Where "+obj->QCN+" once stood, now stands an ELEMENTAL!",obj);
+    tell_room(environment(obj),"%^RESET%^%^RED%^"+obj->QCN+" grows very still and appears to concentrate deeply.",obj);
+    tell_room(environment(obj),"%^RESET%^%^RED%^"+obj->QCN+" begins to change in front of your very eyes and grows a tail and couple of wolf-like ears!",obj);
+    tell_room(environment(obj),"%^RED%^Where "+obj->QCN+" once stood, is now a werewolf!",obj);
 
     return 1;
 }
@@ -69,146 +48,60 @@ int change_outof_message(object obj)
 {
     if(!objectp(obj)) { return 0; }
 
-    tell_object(obj,"%^RESET%^%^BOLD%^You relax your focus on the natural world.");
-    tell_object(obj,"%^RESET%^%^BLUE%^You can feel a tinge of remose as you feel your elemental form slipping away.");
-    tell_object(obj,"%^RESET%^%^GREEN%^You inhale a breath and stretch as you grow accustomed to the foreign sensation of your own body once again.");
+    tell_object(obj,"%^RESET%^%^RED%^You relax your focus on the wilds.");
+    tell_object(obj,"%^RESET%^%^RED%^You can feel the sharpness of your senses beginning to fade and the strength returning.");
+    tell_object(obj,"%^RESET%^%^GREEN%^You inhale a breath and stretch as you grow accustomed to the foreign sensation of your another body once again.");
 
-    tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+"'s motions slow and "+obj->QS+" gets a far-away look in "+obj->QP+" eyes.",obj);
-    tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, shrinking and gaining definition!",obj);
+    tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+"'s muscles slacken and "+obj->QS+" gets a far-away look in "+obj->QP+" eyes.",obj);
+    tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, elongating and curving!",obj);
     tell_room(environment(obj),"%^RESET%^%^GREEN%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
 
     return 1;
 }
 
-// custom unarmed attack functions go here, functions can be added just like hit functions for weapons
-int shape_attack(object tp, object targ)
+int can_cast()
 {
-    return 0;
+    return 1;
 }
 
-int arm_attack(object tp, object targ)
-{
-    object etp,*attackers,att;
-    string *specials=({}),*active_specials=({}),myrace;
-    int i,j,chance,dice;
+int shape_attack(object tp, object targ) { return 0; }
 
-    etp = environment(tp);
+int init_shape(object obj,string str){
+    if(!objectp(obj)) { return 0; }
+    if(obj->query_property("altered") || obj->query_property("shapeshifted")) { return 0; } // can't shapeshift twice
+    obj->set_property("altered",shape = new(base_name(TO)+".c"));
+    shape->set_owner(obj);
+    shape->change_into_message(obj);
+    shape->set_base_profile((string)obj->query("relationship_profile"));
+    shape->set_shape_race("werewolf");
+    obj->add_id("werewolf");
+    obj->set("relationship_profile",shape->query_shape_profile());
+    obj->add_id(obj->query_race());
 
-    if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();
-    attackers = distinct_array(attackers);
-    if(!objectp(targ) && !sizeof(attackers)) { return 0; }
-
-    chance = (int)tp->query_guild_level("druid");
-
-    if(chance < 15) { chance = 15; }
-    if(chance > 60) { chance = 60; }
-
-    dice = ( chance / 3) + 2;
-
-    if(roll_dice(1,100) > chance) { return roll_dice(dice,3); }
-    myrace = (string)TO->query_shape_race();
-
-    // picks up one spell of L2, L3 and L4 for each type of elemental (and default). Varies by element.
-    // switch falls through intentionally
-    switch(chance)
-    {
-        case 35..60: specials += ({ "level 4" });
-        case 30..34: specials += ({ "level 3" });
-        case 25..29: specials += ({ "level 2" });
-        case 20..24: specials += ({ "level 4" });
-        case 15..19: specials += ({ "stun slam" });
-        case 10..14: specials += ({ "level 3" });
-        default:     specials += ({ "level 2"  });
-
-    }
-
-    //////////////
-    i=0;
-
-    do
-    {
-        active_specials += ({ specials[random(sizeof(specials))] });
-        i += 5;
-    }
-    while(roll_dice(1,100) < (chance - i));
-    //////////////
-
-
-    for(i=0;i<sizeof(active_specials);i++)
-    {
-        if(!objectp(tp) || !objectp(targ)) { return 0; }
-
-        if(tp->query_casting()) return 0; // it was allowing multicasting! Oops.
-
-        switch(active_specials[i]) {
-
-        case "stun slam":
-
-            if(time() > trip_timer)
-            {
-                trip_timer = time() + (ROUND_LENGTH * 25);
-
-                tell_object(tp,"%^BOLD%^%^WHITE%^You heave yourself up, before slamming back down into the ground!");
-                tell_room(etp,"%^BOLD%^%^WHITE%^"+tp->QCN+" heaves "+tp->QO+"self up, before slamming back down into the ground!",tp);
-
-                for(j=0;j<sizeof(attackers);j++)
-                {
-                    if(!objectp(att = attackers[j])) { continue; }
-
-                    if(!att->reflex_save(chance))
-                    {
-                        tell_object(att,"%^GREEN%^The earth shakes and knocks you off of your feet!");
-                        tell_room(etp,"%^GREEN%^The earth shakes and knocks "+att->QCN+" off of "+att->QP+" feet!",({att}));
-
-                        att->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!");
-                    }
-                    else
-                    {
-                        tell_object(att,"%^BOLD%^%^GREEN%^You manage to withstand the trembling of the earth and keep your footing!");
-                        tell_room(etp,"%^BOLD%^%^GREEN%^"+att->QCN+" manages to withstand the trembling of the earth and keep "+att->QP+" footing!",({att}));
-                    }
-                }
-                break;
-            } // falls through if timer isn't up
-
-
-        case "level 2":
-
-            tell_object(tp,"%^RED%^You call upon the elements and invoke a spell at "+targ->QCN+"!%^RESET%^");
-            tell_object(targ,"%^RED%^"+tp->QCN+" calls upon the elements and invokes a spell at you!%^RESET%^");
-            tell_room(etp,"%^RED%^"+tp->QCN+" calls upon the elements and invokes a spell at "+targ->QCN+"!%^RESET%^",({tp,targ}));
-
-            switch(myrace) {
-              case "fire elemental": case "earth elemental": new("/cmds/spells/h/_heat_metal")->use_spell(tp,targ,chance,100,"druid"); break;
-              case "air elemental": case "water elemental": default: new("/cmds/spells/c/_chill_metal")->use_spell(tp,targ,chance,100,"druid"); break;
-            }
-            break;
-
-        case "level 3":
-
-            tell_object(tp,"%^CYAN%^You raise an arm and call upon the elements for aid!%^RESET%^");
-            tell_room(etp,"%^CYAN%^"+tp->QCN+" raises an arm and calls upon the elements for aid!%^RESET%^",tp);
-
-            switch(myrace) {
-              case "water elemental": case "earth elemental": new("/cmds/spells/q/_quench")->use_spell(tp,targ,chance,100,"druid"); break;
-              case "fire elemental": case "air elemental": default: new("/cmds/spells/c/_call_lightning")->use_spell(tp,targ,chance,100,"druid"); break;
-            }
-            break;
-
-        case "level 4":
-
-            tell_object(tp,"%^RED%^You clench your fist and then fling your hand towards "+targ->QCN+", striking him with nature's wrath!%^RESET%^");
-            tell_object(targ,"%^RED%^"+tp->QCN+" clenches a fist and then flings "+tp->QP+" hand towards you, striking you with nature's wrath!%^RESET%^");
-            tell_room(etp,"%^RED%^"+tp->QCN+" clenches a fist and then flings "+tp->QP+" hand towards "+targ->QCN+", striking "+targ->QO+" with nature's wrath!%^RESET%^",({tp,targ}));
-
-            switch(myrace) {
-              case "fire elemental": case "air elemental": new("/cmds/spells/f/_flame_strike")->use_spell(tp,targ,chance,100,"druid"); break;
-              case "water elemental": case "earth elemental": default: new("/cmds/spells/r/_rusting_grasp")->use_spell(tp,targ,chance,100,"druid"); break;
-            }
-            break;
+    if(objectp(to_object(DESC_D)))     {
+        desc = new(DESC_D); //
+        if(!desc->restore_profile_settings(obj,shape->query_shape_profile())) {
+            shape->default_descriptions(obj);
+            desc->initialize_profile(obj);
         }
     }
+    return 1;
+}
 
-    return roll_dice(dice,3);
+int reverse_shape(object obj){
+    if(!objectp(obj)) { return 3; }
+    if(!objectp(shape = obj->query_property("altered"))) { return 5; }
+    obj->set("relationship_profile",shape->query_base_profile());
+    obj->remove_id("werewolf");
+    if(objectp(to_object(DESC_D))) {
+        desc = new(DESC_D);
+        desc->restore_profile_settings(obj,shape->query_base_profile());
+
+    }
+    shape->change_outof_message(obj);
+    shape->set_owner(0);
+    obj->remove_property("altered");
+    clean_me = 1;
+    destruct(TO);
+    return 1;
 }

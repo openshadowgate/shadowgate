@@ -197,7 +197,7 @@ void shadow_effects(object obj)
 
     case 8..14: //damage
 
-        damage = roll_dice(clevel, 6); // hits all targets
+        damage = roll_dice(clevel, 5); // hits all targets
         if(obj->fort_save(clevel)) { damage = damage / 2; }
 
         tell_object(obj, cm("A bolt of black lightning strikes out from the vortex surrounding "+caster->QCN+" striking you painfully!"));

@@ -24,7 +24,7 @@ void status_effect()
 
     target->set_property("effect_fatigued",1);
 
-    tell_object(target,"%^RED%^You are exhausted.%^RESET%^");
+    tell_object(target,"%^RED%^You feel tired and fatigued.%^RESET%^");
 
     target->add_stat_bonus("strength", -2);
     target->add_stat_bonus("dexterity", -2);
@@ -37,7 +37,7 @@ void dest_effect()
     int i;
     if(objectp(target))
     {
-        tell_object(target,"%^RED%^You no longer are exhausted.%^RESET%^");
+        tell_object(target,"%^RED%^You no longer are fatigued.%^RESET%^");
         target->add_stat_bonus("strength", 2);
         target->add_stat_bonus("dexterity", 2);
         target->remove_property("effect_fatigued");
