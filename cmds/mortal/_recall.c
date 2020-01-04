@@ -389,6 +389,7 @@ int recall_spells(string type, object who) {
                 {
                     tell_object(TP,obuff);
                     obuff="";
+                    x=0;
                     tell_object(TP,oline);
                     continue;
                 }
