@@ -1,6 +1,7 @@
 //
 //added the checks for mage armor from armor code -Tsera 11/5/04
 #include <std.h>
+#include <magic.h>
 #include <daemons.h>
 inherit SPELL;
 
@@ -58,7 +59,7 @@ void spell_effect(int prof) {
     spell_successful();
     addSpellToCaster();
     call_out("test", 2);
-    call_out("dest_effect",(clevel*20));
+    call_out("dest_effect",(clevel*3*ROUND_LENGTH));
 }
 
 void test() {
