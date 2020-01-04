@@ -21,14 +21,7 @@ void create()
 string query_cast_string()
 {
     string cast;
-    if (interactive(caster))
-    {
-        cast = "%^BOLD%^%^BLACK%^"+caster->QCN+" folds "+caster->QP+" hands as "+caster->QS+" prays for a divine spell!\n";
-    }
-    else
-    {
-        cast = "%^BOLD%^%^BLACK%^"+caster->QCN+" calls for a divine spell!\n";
-    }
+    cast = "%^BOLD%^%^BLACK%^"+caster->QCN+" folds "+caster->QP+" hands as "+caster->QS+" spells an incantation!\n";
     return "\n"+cast;
 }
 

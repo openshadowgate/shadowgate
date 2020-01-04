@@ -37,9 +37,9 @@ int preSpell()
 string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^BLACK%^Your voice rings out as you begin to "+
-        "chant a powerful prayer, gathering divine energy into your hands.");
+        "chant a powerful spell, gathering divine energy into your hands.");
     tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+"'s voice rings out as they"+
-        " begin to chant a powerful prayer.  Cupping "+caster->QP+" hands, "+
+        " begin to chant a powerful spell. Cupping "+caster->QP+" hands, "+
         ""+caster->QS+" starts to gather energy.",caster);
     return "display";
 }
