@@ -1857,7 +1857,7 @@ void define_clevel()
                 if(spell_sphere == "necromancy" ||
                    spell_sphere == "illusion" ||
                    spell_sphere == "enchantment_charm")
-                    clevel+=4;
+                    clevel+=3;
     }
     if(spell_type == "cleric" ||
        spell_type == "druid")
