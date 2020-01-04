@@ -59,7 +59,7 @@ void bite_again()
     tell_object(target,"%^BOLD%^%^BLACK%^The maw nibbles on you!%^RESET%^");
     damage_targ(target, target->query_target_limb(), sdamage/3,"slashing");
 
-    if(num<0)
+    if(num-- < 0)
     {
         dest_effect();
         return;
