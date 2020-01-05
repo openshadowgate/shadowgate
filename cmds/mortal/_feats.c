@@ -601,8 +601,6 @@ int cmd_feats(string str){
     int i,j,MAX_ALLOWED,BONUS_ALLOWED,num_feats,allowed,num_bonus,bonus,my_lev,*featkeys;
     mapping classfeats,otherfeats,bonus_feats;
 
-    str = lower_case(str);
-
     find_object_or_load(FEATS_D);
     FEATS_D->update_usable(TP);
 
@@ -611,6 +609,8 @@ int cmd_feats(string str){
         tell_object(TP,"See <help feats> for syntax.");
         return 1;
     }
+
+    str = lower_case(str);
 
     if(avatarp(TP) && objectp(ob=find_player(str)))
     {

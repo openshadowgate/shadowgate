@@ -184,12 +184,6 @@ int can_multiclass(object ob,string myclass) {
     if(!file_exists(file)) { return 0; }
     if(file->is_prestige_class())
     {
-        if(FEATS_D->has_feat(ob,"unyielding rage") || FEATS_D->has_feat(ob,"persistent rage"))
-        {
-            tell_object(ob,"You can't take a prestige class and an epic feat at the same time.");
-            return 0;
-        }
-
         {
             string clss;
             string tmp;
