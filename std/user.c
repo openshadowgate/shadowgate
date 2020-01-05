@@ -5022,7 +5022,7 @@ int test_passive_perception() {
         ismagic = targ->query_magic_hidden();
         stealth = (int) targ->query_skill("stealth");
         spellcraft = (int) targ->query_skill("spellcraft");
-        if(FEATS_D->usable_feat(TO,"spot"))
+        if(FEATS_D->usable_feat(TO,"spot") && !TO->true_seeing())
         {
             if (ishidden==1 && ismagic==0) {
                 if (perception > stealth) { numnotvisible++; }
@@ -5031,9 +5031,10 @@ int test_passive_perception() {
                 if (perception > stealth && perception*5/6 > spellcraft) { numnotvisible++; }
             }
         }
-        if (ishidden==0 && ismagic==1) {
-            if (perception > spellcraft*5/6) { numnotvisible++; }
-        }
+        if(!TO->detecting_invis())
+            if (ishidden==0 && ismagic==1) {
+                if (perception > spellcraft*5/6) { numnotvisible++; }
+            }
     }
     if (numnotvisible > 0) {
         tell_object(TO,"BOLD%^%^CYAN%^You sense an unseen creature lurking nearby!");
