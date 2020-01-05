@@ -314,7 +314,7 @@ string thirst2str(object player)
 {
     int max = player->query_formula();
     int cur, perc;
-    cur = player->query_stuffed();
+    cur = player->query_quenched();
     perc = cur*100/max;
 
     if(perc > 100*5/6)

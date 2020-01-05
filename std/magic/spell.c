@@ -737,15 +737,6 @@ void wizard_interface(object user, string type, string targ)
     //If you need to be able to move your hands to cast
     if (somatic_comp)
     {
-/* if we decide to check for having hands to support morph spells denial or lost hands
-* I think this should do it but it needs tested *Styx* 8/21/05
-*   if( (member_array("right hand", caster->query_limbs()) == -1)
-*  || (member_array("left hand", caster->query_limbs()) == -1) ) {
-*            tell_object(caster, "You have no hands with which to "+whatdo+" this "+whatsit+"!");
-*       TO->remove();
-*       return;
-*        }
-*/
         weaps = caster->query_wielded();
         if (weaps != ({}) &&
             (!caster->query_property("shapeshifted") ||
@@ -901,6 +892,7 @@ void wizard_interface(object user, string type, string targ)
          !"/daemon/magic_d"->can_cast(caster, casting_level, spell_type, improv, spell_duration) ) )
     {
         tell_object(caster, "You cannot "+whatdo+" that "+whatsit+".\n");
+
         TO->remove();
         return;
     }
@@ -980,23 +972,7 @@ void wizard_interface(object user, string type, string targ)
         return;
     }
 
-    supreme_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds", "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds", "mass cure critical wounds", "regeneration", "aura of healing", });
-
-    natures_gift_spells = ({ "faerie fire","entangle","animal messenger","spider climb","meld into nature",
-        "wall of thorns","treestride","insect plague","wall of stone","regeneration" });
-
-    raging_healer_spells = ({
-            "cure light wounds", "cause light wounds",
-                "cure moderate wounds", "cause moderate wounds",
-                "cure serious wounds", "cause serious wounds",
-                "cure critical wounds", "cause critical wounds",
-                "mass cure light wounds", "mass cause light wounds",
-                "mass cure moderate wounds", "mass cause moderate wounds",
-                "mass cure serious wounds", "mass cause serious wounds",
-                "mass cure critical wounds", "mass cause critical wounds",
-                "heal", "harm",
-                "mass heal", "mass harm"});
-
+#include <prc_improv_spells.h>
 // improv code; if nothing supplied, improv defaults to the spell being cast
     if (!stringp(improv=query_property("improvised"))) improv=spell_name;
     spell_name = replace_string(spell_name,"_"," ");
