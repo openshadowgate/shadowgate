@@ -15,7 +15,7 @@ void create(){
     set_spell_sphere("illusion");
     set_spell_domain("illusion");
     set_syntax("cast CLASS phantasmal killer on TARGET");
-    set_description("This spell is cast upon a target and creates a figment of that target's imagination by drawing upon his deepest fears. Onlookers will see simply a vaguely humanoid shape at first, while the creature will soon take on the form of whatever frightens the target most. The creature's strength depends partly upon drawing on the target's fears and partly upon the caster's strength. Once the killer is unleashed, it becomes a force unto itself, protecting the caster but otherwise attacking at will. This is a greater summons, and cannot be used simultaneously with other greater summons.");
+    set_description("This spell is cast upon a target and creates a figment of that target's imagination by drawing upon his deepest fears. Onlookers will see simply a vaguely humanoid shape at first, while the creature will soon take on the form of whatever frightens the target most. The creature's strength depends partly upon drawing on the target's fears and partly upon the caster's strength. Once the killer is unleashed, it becomes a force unto itself, protecting the caster but otherwise attacking at will.");
     mental_spell();
     set_verbal_comp();
     set_somatic_comp();
@@ -35,7 +35,7 @@ string query_cast_string(){
 }
 
 int preSpell(){
-   if(caster->query_property("mages_sword") || caster->query_property("has_elemental")) {
+   if(caster->query_property("phantasmal_killer")) {
         tell_object(caster,"%^CYAN%^You are incapable of controling two such powerful summonings.%^RESET%^");
         return 0;
    }
@@ -89,7 +89,6 @@ void spell_effect(int prof){
    ob->add_id("summoned monster");
    ob->add_id(caster->query_name()+"monster");
    caster->set_property("phantasmal_killer",ob);
-   caster->set_property("has_elemental",1);
    spell_kill(target,caster);
    call_out("dest_effect",clevel*ROUND_LENGTH);
 }
@@ -99,7 +98,7 @@ void dest_effect() {
       if(objectp(caster)) { caster->remove_protector(ob); }
       ob->die();
     }
-    if(objectp(caster)) { caster->remove_property("phantasmal_killer"); caster->remove_property("has_elemental"); }
+    if(objectp(caster)) { caster->remove_property("phantasmal_killer"); }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
