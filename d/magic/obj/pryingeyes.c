@@ -43,6 +43,22 @@ int move(mixed dest){
     ::move(dest);
 }
 
+void init()
+{
+    ::init();
+    add_action("kill_me","kill");
+}
+
+int kill_me(string str)
+{
+    if(present(str,ETO)!=TO)
+        return 0;
+
+    tell_room(ETO,"The eyes blink and disappear!");
+    self_destruct();
+    return 1;
+}
+
 set_caster(object cas){
     caster = cas;
 }

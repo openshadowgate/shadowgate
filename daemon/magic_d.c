@@ -49,12 +49,12 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     spell_name = replace_string(spell_name,"_"," ");
     if (!spell_name) return 0;
 
-    if(member_array(spell_name,keys(spellIndex))!=-1)
+    if(mapp(spellIndex[spell_name]))
     {
         if(FEATS_D->usable_feat(target, "supreme healer") && member_array(spell_name, supreme_healer_spells) != -1) { return 1; }
         if(FEATS_D->usable_feat(target, "natures gift") && member_array(spell_name, natures_gift_spells) != -1) { return 1; }
         if(FEATS_D->usable_feat(target, "raging healer") && member_array(spell_name, raging_healer_spells) != -1) { return 1; }
-        if(FEATS_D->usable_feat(target, "inspired necromancy") && spell_level < 6 && spellIndex[spell_name]["sphere"] == "necromancy") { return 1; }
+        if(FEATS_D->usable_feat(target, "inspired necromancy") && spell_level < 7 && spellIndex[spell_name]["sphere"] == "necromancy") { return 1; }
     }
 
     if(FEATS_D->usable_feat(target,"expanded knowledge 1")){
