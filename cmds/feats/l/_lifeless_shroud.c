@@ -101,6 +101,8 @@ void execute_attack()
     attackers = caster->query_attackers();
 
     if(sizeof(attackers))
+    {
+        tell_object(caster,cm("The cold within aids you in combat."));
         for(i=0;i<sizeof(attackers);i++)
         {
             if(!objectp(attackers[i]))
@@ -111,6 +113,7 @@ void execute_attack()
                 continue;
             negative_effects(attackers[i]);
         }
+    }
 
     allies = ob_party(caster)+(caster->query_followers()-attackers)+({caster});
     allies = filter_array(allies,(:$1->query_property("negative energy affinity"):));
