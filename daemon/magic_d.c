@@ -35,9 +35,11 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     string str,cl,cl1,cl2,myexp;
     object book;
     int i,x,y;
-    string supreme_healer_spells = ({ "cure light wounds", "cure moderate wounds", "cure serious wounds",
-        "cure critical wounds", "mass cure light wounds", "mass cure moderate wounds", "mass cure serious wounds",
-        "mass cure critical wounds", "regeneration", "aura of healing", "heal", "mass heal" });
+    string *supreme_healer_spells,
+        *raging_healer_spells,
+        *natures_gift_spells;
+
+#include <prc_improv_spells.h>
 
 // casting so errors don't show up from other places in lib.
     if(spell_type == "priest") spell_type = "cleric";
@@ -47,6 +49,9 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     spell_name = replace_string(spell_name,"_"," ");
     if (!spell_name) return 0;
     if(FEATS_D->usable_feat(target, "supreme healer") && member_array(spell_name, supreme_healer_spells) != -1) { return 1; }
+    if(FEATS_D->usable_feat(target, "natures gift") && member_array(spell_name, natures_gift_spells) != -1) { return 1; }
+    if(FEATS_D->usable_feat(target, "raging healer") && member_array(spell_name, raging_healer_spells) != -1) { return 1; }
+    if(FEATS_D->usable_feat(target, "inspired necromancy") && spell_level < 7 && spellIndex[spell_name]["sphere"] == "necromancy") { return 1; }
 
     if(FEATS_D->usable_feat(target,"expanded knowledge 1")){
        myexp = target->query("expanded_knowledge_1");
