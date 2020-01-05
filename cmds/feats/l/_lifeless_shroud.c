@@ -197,7 +197,7 @@ void negative_effects(object obj)
             damage = damage / 2;
         }
 
-        if(target->query_property("negative energy affinity"))
+        if(obj->query_property("negative energy affinity"))
         {
             tell_object(obj, cm("Energies emanating from "+caster->QCN+" wither your putrid flesh!"));
             obj->cause_typed_damage(obj, obj->return_target_limb(),damage, "positive energy");
@@ -207,7 +207,7 @@ void negative_effects(object obj)
             tell_object(obj, cm("The cold ebbing from "+caster->QCN+" chills your very existence!"));
             obj->cause_typed_damage(obj, obj->return_target_limb(),damage, "negative energy");
         }
-        tell_object(caster, cm("You sense lifeless currents you control harming "+target->QCN+"!"));
+        tell_object(caster, cm("You sense lifeless currents you control harming "+obj->QCN+"!"));
 
         break;
 
