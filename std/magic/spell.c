@@ -981,7 +981,7 @@ void wizard_interface(object user, string type, string targ)
     if(!(FEATS_D->usable_feat(caster,"supreme healer") && (member_array(spell_name,supreme_healer_spells) != -1)) &&
        !(FEATS_D->usable_feat(caster,"natures gift") && (member_array(spell_name,natures_gift_spells) != -1)) &&
        !(FEATS_D->usable_feat(caster,"raging healer") && (member_array(spell_name,raging_healer_spells) != -1) && caster->query_property("raged")) &&
-       !(FEATS_D->usable_feat(caster,"inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy"))
+       !(FEATS_D->usable_feat(caster,"inspired necromancy") && casting_level < 6 && spell_sphere == "necromancy"))
     {
         if(!caster->check_memorized(spell_type,improv))
         {
