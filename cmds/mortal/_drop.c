@@ -15,29 +15,29 @@ inherit DAEMON;
 
 int help();
 
-int cmd_drop(string str) 
+int cmd_drop(string str)
 {
     object ob;
     int res, i;
     string tmp, type;
     int ammount;
 
-    if(!str) 
+    if(!str)
     {
         return help();
     }
     seteuid(getuid(previous_object()));
 
-    if(TP->query_bound()) 
+    if(TP->query_bound())
     {
         TP->send_paralyzed_message("info",TP);
         return 1;
     }
 
     if(sscanf(str, "%d %s %s", ammount, type, tmp) != 3)
-        if(sscanf(str, "%d %s", ammount, type) != 2) 
+        if(sscanf(str, "%d %s", ammount, type) != 2)
         {
-            if(str == "all") 
+            if(str == "all")
             {
                 object *inv;
                 inv = all_inventory(TP);
@@ -46,19 +46,19 @@ int cmd_drop(string str)
                     tell_object(TP, "You are unable to drop your entire inventory while in combat!");
                     return 1;
                 }
-                if(sizeof(inv) == 0) 
+                if(sizeof(inv) == 0)
                 {
                     tell_object(TP, "Nothing to drop!");
                     return 1;
                 }
                 tell_object(TP, "You drop your whole inventory on the ground.");
-                for(i=0;i<sizeof(inv); i++ ) 
+                for(i=0;i<sizeof(inv); i++ )
                 {
                     ob = present(inv[i], TP);
                     tmp = (string)ob->query_short();
                     if(ob->drop()) continue;
                     res = (int)ob->move(environment(TP));
-                    if(res == MOVE_OK) 
+                    if(res == MOVE_OK)
                     {
                         tell_room(ETP,TPQCN+" drops "+tmp+".",TP);
                     }
@@ -66,13 +66,13 @@ int cmd_drop(string str)
                 return 1;
             }
             ob = present(str, TP);
-            if(!ob) 
+            if(!ob)
             {
                 notify_fail("What " + str + "?\n");
                 return 0;
             }
-            tmp = (string)ob->query_short();            
-            if(ob->drop()) 
+            tmp = (string)ob->query_short();
+            if(ob->drop())
             {
                 if((int)ob->query_property("soulbound")) write("A higher power prevents you from dropping that!");
                 if(ob->query_worn() == TP && sizeof(TP->query_attackers()) > 0)
@@ -81,21 +81,21 @@ int cmd_drop(string str)
                 }
                 return 1;
             }
-            
+
         // added to handle if dragging PC to overcome giving away real names  *Styx*  2/1/03
         // I'm sure there's a way to get fake name to show, but it's 3 am and I'm over it.
         // passing the query_name from here won't work because it won't go through known as
         // ob is draggee, not the player anyway
             if((string)ob->query_name() == "draggee") { tmp = "a body"; }
-         
-            res = (int)ob->move(ETP);         
-            if(res == MOVE_OK) 
+
+            res = (int)ob->move(ETP);
+            if(res == MOVE_OK)
             {
                 tell_room(ETP,TPQCN+" drops "+tmp+".\n", TP);
                 tell_object(TP, "You drop "+tmp+".");
                 if(sizeof(TP->query_attackers()) > 0)
                 {
-                    TP->set_paralyzed(4, "You are getting back into position after dropping "+tmp+".");
+                    TP->set_paralyzed(1, "You are getting back into position after dropping "+tmp+".");
                 }
                 return 1;
             }
@@ -107,17 +107,17 @@ int cmd_drop(string str)
                 return 0;
         }
     type = lower_case(type);
-    if(ammount < 1) 
+    if(ammount < 1)
     {
         notify_fail("You can only drop positive ammounts of money.\n");
         return 0;
     }
-    if((int)TP->query_money(type) < 0) 
+    if((int)TP->query_money(type) < 0)
     {
         notify_fail("That type of currency doesn't exist.\n");
         return 0;
     }
-    if(TP->query_money(type) < ammount) 
+    if(TP->query_money(type) < ammount)
     {
         notify_fail("There is not that much "+type+" in your purse.\n");
         return 0;
@@ -127,7 +127,7 @@ int cmd_drop(string str)
         log_file("money", TP->query_name()+" dropped "+ammount+" "+type+" ("+ctime(time())+")\n");
         seteuid(getuid(previous_object()));
         ob = present("pile of coins", ETP);
-        if(!ob) 
+        if(!ob)
         {
             ob = new(OB_COINS);
         }

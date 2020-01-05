@@ -44,11 +44,16 @@ void init()
         "daemon/quests"->changeShort(query_short(),TP->query_short());
         "daemon/quests"->gotten(query_short());
     }
-    
+
     if(TP->is_monster() && ETO == TP)
     {
         "daemon/quests"->resetItem(query_short());
     }
+}
+
+int drop()
+{
+    return 1;
 }
 
 

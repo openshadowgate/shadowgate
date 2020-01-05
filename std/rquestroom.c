@@ -131,6 +131,7 @@ int claim(string str){
     int character_level;
 
     if(!str) return notify_fail("Claim <item name>.\n");
+    if(TP->query_property("bloodshard")+1800>time()) return notify_fail("Energies of bloodshard prevent you from claiming a reward.");
     if(waiting) return notify_fail("Please wait a moment while I clean up this mess the last person left.\n");
 
     character_level = (int)TP->query_character_level();

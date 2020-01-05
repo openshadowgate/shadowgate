@@ -6,21 +6,21 @@ inherit DAEMON;
 
 int help();
 
-int cmd_get(string str) 
+int cmd_get(string str)
 {
     object ob, *inv;
     int res, i, flag, silly, ammount;
     string tmp, type;
 
     if(!objectp(TP) || !objectp(ETP)) { return 0; }
-    
-    if (TP->query_ghost()) 
+
+    if (TP->query_ghost())
     {
         notify_fail("You cannot do that in your immaterial state.\n");
         return 0;
     }
 
-    if (TP->query_bound()) 
+    if (TP->query_bound())
     {
         TP->send_paralyzed_message("info",TP);
         return 1;
@@ -37,11 +37,11 @@ int cmd_get(string str)
         return 0;
     }
     if (sscanf(str, "%d %s %s", ammount, type, tmp) != 3)
-        if (sscanf(str, "%d %s", ammount, type) != 2) 
+        if (sscanf(str, "%d %s", ammount, type) != 2)
         {
             if(str == "all coins")
             {
-                if (TP->is_in_combat()) 
+                if (TP->is_in_combat())
                 {
                   tell_object(TP, "You're too busy to get everything off the ground!\n");
                   return 1;
@@ -54,14 +54,14 @@ int cmd_get(string str)
                     if(base_name(inv[i]) != "/std/obj/coins") { continue; }
 
                     res = (int)inv[i]->move(TP);
-                    
-                    if (res == MOVE_OK) 
+
+                    if (res == MOVE_OK)
                     {
                         write("You take " + inv[i]->query_short() + ".");
                         tell_room(ETP,TPQCN+" takes "+inv[i]->query_short() + ".",TP);
                         flag++;
-                    } 
-                    else if (res == MOVE_NO_ROOM) 
+                    }
+                    else if (res == MOVE_NO_ROOM)
                     {
                         write(inv[i]->query_short() + ": You cannot carry that much.");
                         flag++;
@@ -74,18 +74,18 @@ int cmd_get(string str)
                 return 1;
             }
 
-            if (str == "all") 
+            if (str == "all")
             {
-                if (TP->is_in_combat()) 
+                if (TP->is_in_combat())
                 {
                   tell_object(TP, "You're too busy to get everything off the ground!\n");
                   return 1;
                 }
                 inv = all_inventory(ETP);
-                for (i=0;i<sizeof(inv); i++) 
+                for (i=0;i<sizeof(inv); i++)
                 {
                     if (!inv[i]->query_short()) continue;
-                    if (!inv[i]->get()) 
+                    if (!inv[i]->get())
                     {
                         if (inv[i]->query_hidden()) continue;
                         if (inv[i]->query_magic_hidden()) continue;
@@ -93,17 +93,17 @@ int cmd_get(string str)
                         if (inv[i]->query_property("monsterweapon"))
                             inv[i]->remove();
 
-                    } 
-                    else 
+                    }
+                    else
                     {
                         res = (int)inv[i]->move(TP);
-                        if (res == MOVE_OK) 
+                        if (res == MOVE_OK)
                         {
                             write("You take " + inv[i]->query_short() + ".");
                             tell_room(ETP,TPQCN+" takes "+inv[i]->query_short() + ".",TP);
-                        } 
+                        }
                         else
-                            if (res == MOVE_NO_ROOM) 
+                            if (res == MOVE_NO_ROOM)
                         {
                             write(inv[i]->query_short() + ": You cannot carry that much.");
                         }
@@ -143,7 +143,7 @@ int cmd_get(string str)
                 tell_room(ETP,TPQCN+" takes "+(string)ob->query_short()+".",TP);
                 if(TP->is_in_combat())
                 {
-                    TP->set_paralyzed(4, "You are getting back into position after taking "+ob->query_short()+".");
+                    TP->set_paralyzed(1, "You are getting back into position after taking "+ob->query_short()+".");
                 }
                 return 1;
             }
@@ -193,7 +193,7 @@ get all [coins]
 
 You will attempt to move %^ORANGE%^%^ULINE%^ITEM%^RESET%^ from room or another %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ into your inventory. If there are several %^ORANGE%^%^ULINE%^ITEMS%^RESET%^ or %^ORANGE%^%^ULINE%^OBJECTS%^RESET%^ of the same name, you can append optional %^ORANGE%^%^ULINE%^NUMBER%^RESET%^ suffix to command to get needed %^ORANGE%^%^ULINE%^ITEM%^RESET%^ from desired %^ORANGE%^%^ULINE%^OBJECT%^RESET%^. For example, %^ORANGE%^<get vial 3 from sack 2>%^RESET%^ will give you 3rd vial in sack 2 of your environment.
 
-You can get only one item for a turn in combat. 
+You can get only one item for a turn in combat.
 
 To get all items in the room use %^ORANGE%^<get all>%^RESET%^
 
@@ -202,4 +202,3 @@ To get all items in the room use %^ORANGE%^<get all>%^RESET%^
 put, offer, offerall, look
 ");
 }
-
