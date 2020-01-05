@@ -117,6 +117,7 @@ void execute_attack()
 
     allies = ob_party(caster)+(caster->query_followers()-attackers)+({caster});
     allies = filter_array(allies,(:$1->query_property("negative energy affinity"):));
+    allies = distinct_array(allies);
 
     for (i=0; i<sizeof(allies); i++)
     {
