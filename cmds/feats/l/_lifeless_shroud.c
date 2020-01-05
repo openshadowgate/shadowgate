@@ -3,6 +3,8 @@
 
 inherit FEAT;
 
+object *exclude = ({});
+
 void create()
 {
     ::create();
@@ -150,10 +152,15 @@ void positive_effects(object obj)
 
     damage = roll_dice(clevel, 2);
 
+    if(obj->query_hp()>(obj->query_max_hp()*3/4))
+        return;
+
     if(userp(obj))
         tell_object(obj, cm("Fell energies emanating from "+caster->QCN+" repair your wounds."));
 
     tell_room(place,cm(obj->QCN+"'s wounds seems to heal!"),obj);
+
+    obj->cause_typed_damage(obj, obj->return_target_limb(),damage, "negative energy");
 
     return;
 }
@@ -225,7 +232,7 @@ void dest_effect()
 {
     if(objectp(caster))
     {
-        tell_object(caster,"%^B_BLUE%^Your lifeless shroud fades.");
+        tell_object(caster,cm("Your lifeless shroud fades."));
         caster->remove_property_value("active_feats",({TO}));
     }
     ::dest_effect();
