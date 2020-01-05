@@ -5018,6 +5018,7 @@ int test_passive_perception() {
     for(i=0;i<sizeof(living);i++){
         targ = living[i];
         if(!objectp(targ)) continue;
+        if(targ->query_property("minion")==TO) continue;
         ishidden = targ->query_hidden();
         ismagic = targ->query_magic_hidden();
         stealth = (int) targ->query_skill("stealth");
