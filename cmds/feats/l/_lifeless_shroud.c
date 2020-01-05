@@ -66,7 +66,7 @@ void execute_feat()
 
     tell_object(caster,cm("You close your eyes and concentrate on channeling negative energy."));
     tell_object(caster,cm("Fell powers rise from below the ground through you in a cold stream of lifeless energy."));
-    tell_object(caster,cm("The cold becomes one with you."));
+    tell_object(caster,cm("The cold becomes the one with you."));
 
     tell_room(place,cm(""+caster->QCN+"'s eyes glass over and "+caster->QS+" stares blankly at nothing."), caster);
     tell_room(place,cm("The air around "+ caster->QCN +" grows chill."), caster);
@@ -110,7 +110,7 @@ void execute_attack()
             negative_effects(attackers[i]);
         }
 
-    allies = ob_party(caster)+(caster->query_followers()-attackers);
+    allies = ob_party(caster)+(caster->query_followers()-attackers)+({caster});
     allies = filter_array(allies,(:$1->query_property("negative energy affinity"):));
 
     for (i=0; i<sizeof(allies); i++)
@@ -121,7 +121,7 @@ void execute_attack()
             continue;
         if(allies[i]->query_unconscious())
             continue;
-        positive_effects(attackers[i]);
+        positive_effects(allies[i]);
     }
 
     if(!sizeof(attackers) && !random(500))
@@ -148,12 +148,12 @@ void positive_effects(object obj)
 {
     int damage;
 
-    damage = roll_dice(clevel, 4);
+    damage = roll_dice(clevel, 2);
 
     if(userp(obj))
         tell_object(obj, cm("Fell energies emanating from "+caster->QCN+" repair your wounds."));
 
-    tell_room(place,cm(obj+"'s wounds seems to heal!"),obj);
+    tell_room(place,cm(obj->QCN+"'s wounds seems to heal!"),obj);
 
     return;
 }
