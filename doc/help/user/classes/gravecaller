@@ -1,15 +1,15 @@
 %^RESET%^%^BOLD%^%^GREEN%^Prestige Class
-%^RESET%^%^CYAN%^Archmage:
+%^RESET%^%^CYAN%^Gravecaller:
 
 %^RESET%^%^CYAN%^Requirements:
-%^RESET%^ Level 20 Mage or Sorcerer
-%^RESET%^ 20 Base Intelligence or Charisma (before equipment modifiers)
+%^RESET%^ Level 20 Mage, Sorcerer or Cleric
+%^RESET%^ 20 Base Intelligence, Charisma or Wisdom stat (before equipment modifiers)
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: school familiarity
- %^RESET%^L4: greater spell mastery
- %^RESET%^L7: arcane perfection
+ %^RESET%^L1: inspired necromancy
+ %^RESET%^L4: negative energy conduit
+ %^RESET%^L7: lifeless shroud
 
-Archmages are mages that have dedicated their lives to the perfection of their craft. They have honed the art of spellcrafting until very near to perfection. A first level archmage gains extended knowledge of his school. At fourth level, an archmage is able to master one of his or her spells of level 5 or below so that it can be cast an unlimited amount of times per day without needing to prepare the spell. Finally, at level seven, an archmage is so adept at casting spells, that he has a chance, based on intelligence, to retain in memory any spells cast.
+Gravecallers may come from different backgrounds, but usually they are master necromancers that specialize in channeling negative energy, although it is not unknown that members of other schools and divine casters learning this craft. Gravecaller's stands as a counduit between shadow plane and material world, able to channel many simple necromantic spells at will, but their true stength comes from ability to support their undead allies and servants. Many learn these deepest arcane secrets in their quest for undeath, gaining undead-like traits before their final shift to a state beyond death, some seek ultimate enlightenment in understanding of death, and possess subtle and murderous skills to help them attain it. As studends of death and undeath, they are universally distrusted and feared by the living.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, skills, spells, cast, master, mage schools, book

@@ -23,7 +23,7 @@ void create()
 void spell_effect()
 {
     tell_object(caster,"%^RESET%^%^CYAN%^You touch the ground, inscribing an invisibility alarm rune onto it.");
-    tell_room(place,"%^RESET%^"+caster->QCN+" thouches the ground.",({caster}));
+    tell_room(place,"%^RESET%^"+caster->QCN+" touches the ground.",({caster}));
     alarm = new(ALARM);
     alarm->move(place);
     alarm->setup(caster,TO);
