@@ -165,7 +165,7 @@ int can_multiclass(object ob,string myclass) {
         tell_object(ob,"%^RED%^You may not multiclass again.");
         return 0;
     }
-    if(level != 10 && level != 20 && level != 30 && level != 40 && level != 50 && level != 60 && level != 70 && level != 80 && level != 90) {
+    if(!(level%10)) {
         tell_object(ob,"%^BOLD%^You can only advance in a different class at 10 level increments, such as level 10, level 20, level 30, etc.");
         return 0;
     }
@@ -730,7 +730,7 @@ int cmd_advance(string myclass){
          }
       }
 
-      if(char_level%10==0){
+      if(!(char_level%10)){
           if(member_array(myclass,TP->query_classes()) == -1)
           {
               if(!can_multiclass(TP,myclass))
@@ -750,7 +750,7 @@ int cmd_advance(string myclass){
       }
 
       if(member_array(myclass,TP->query_classes()) != -1){
-         if(char_level%10 == 0){
+          if(!(char_level%10)){
             if(!TP->query("confirmed_level_"+char_level)){
                tell_object(TP,"%^B_RED%^%^CYAN%^Are you sure that you do not want to take a new class at this level?  You will not get another chance until level "+(char_level+10)+".%^RESET%^");
                tell_object(TP,"Enter <yes> to confirm that you DO NOT want to add another class, anything else to abort.");
