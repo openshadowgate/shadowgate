@@ -48,7 +48,7 @@ public int levelcheck(object first, object second)
     if(!objectp(first)) return 0;
     if(!objectp(second)) return 0;
 
-    if(first == second) return 1;
+    if(first == second) return 3;
 
     lvl = (int)first->query_character_level();
     lvl2 = (int)second->query_character_level();

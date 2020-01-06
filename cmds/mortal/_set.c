@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","no_reward","taxperc","term","scrlines","scrwidth","columns","hardcore","levelcheck"});
+string *VALID_SETTINGS = ({"brief","brief_combat","hints","logon_notify","persist","simpleinv","expgain","hardcore","levelcheck","no_reward","taxperc","columns","scrlines","scrwidth","term",});
 
 int cmd_set(string args)
 {
@@ -12,7 +12,7 @@ int cmd_set(string args)
         write("%^BLUE%^--=%^BOLD%^<%^WHITE%^ Settings %^BLUE%^>%^RESET%^%^BLUE%^=--%^RESET%^");
         foreach(stng in VALID_SETTINGS)
         {
-            write("%^BOLD%^%^WHITE%^"+arrange_string(stng,14)+": %^RESET%^"+(string)call_other(TO,"get_"+stng));
+            write("%^BOLD%^%^WHITE%^ "+arrange_string(stng,14)+": %^RESET%^"+(string)call_other(TO,"get_"+stng));
         }
         return 1;
     }
@@ -441,25 +441,25 @@ You can manipulate numerous mud settings:
 
 %^ULINE%^%^CYAN%^Notifications and messages:%^RESET%^
 
-%^CYAN%^hints %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of periodic hints. %^MAGENTA%^Default value is on.%^RESET%^\n
-%^CYAN%^logon_notify %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of people joining the game. %^MAGENTA%^Default value is on.%^RESET%^\n
-%^CYAN%^simpleinv %^GREEN%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in %^ORANGE%^<inventory>%^RESET%^ command. When it is toggled off, you can see equipped inventory in %^ORANGE%^<eq>%^RESET%^. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^brief %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of room's long description. Useful for screenreaders. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^brief_combat %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of verbose combat. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^hints %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of periodic hints. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^logon_notify %^GREEN%^on|off%^RESET%^\n  This will turn on or off display of people joining the game. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^persist %^GREEN%^on|off%^RESET%^\n  Turning persistent login will allow you not to idle out upon reaching a timeout. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^simpleinv %^GREEN%^on|off%^RESET%^\n  This will turn on or off displaying equipped inventory items in %^ORANGE%^<inventory>%^RESET%^ command. When it is toggled off, you can see equipped inventory in %^ORANGE%^<eq>%^RESET%^. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^ULINE%^%^CYAN%^Experience points and tax:%^RESET%^
 
 %^CYAN%^expgain %^GREEN%^on|off%^RESET%^\n  This will turn on or off experience gain for your character. While it is off, you will get NO EXPERIENCE. %^MAGENTA%^Default value is on.%^RESET%^\n
-%^CYAN%^no_reward %^GREEN%^on|off%^RESET%^\n  Opt out from receiving reward from other players granted with %^ORANGE%^<reward>%^RESET%^ command. %^MAGENTA%^Default value is off.%^RESET%^\n
-%^CYAN%^taxperc %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  This will define how much of your experience gain goes towards paying off your experience tax. This value will grow with your levels, but you may force its increase via this setting. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^hardcore %^GREEN%^on%^RESET%^\n  If you loved good old days and want more. Harcore mode can't be turned off. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^levelcheck %^GREEN%^off%^RESET%^\n  Disabling this will make you a valid target across all levels. Levelcheck can't be turned on without petitioning. %^MAGENTA%^Default value is on.%^RESET%^\n
+%^CYAN%^no_reward %^GREEN%^on|off%^RESET%^\n  Opt out from receiving reward from other players granted with %^ORANGE%^<reward>%^RESET%^ command. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^taxperc %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  This will define how much of your experience gain goes towards paying off your experience tax. This value will grow with your levels, but you may force its increase via this setting. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^ULINE%^%^CYAN%^Terminal and display:%^RESET%^
 
-%^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n  This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
+%^CYAN%^columns %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set how many maximum columns you do want to see where multicolumn output is appliable and screen width allows. %^MAGENTA%^Default value: 0%^RESET%^\n
 %^CYAN%^scrlines %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set how many lines appear for paged information. %^MAGENTA%^Default value: 20%^RESET%^\n
 %^CYAN%^scrwidth %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set screen width for text wrapping. %^MAGENTA%^Default value: 75%^RESET%^\n
-%^CYAN%^columns %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set how many maximum columns you do want to see where multicolumn output is appliable and screen width allows. %^MAGENTA%^Default value: 0%^RESET%^\n
+%^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n  This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
 To see current values use %^ORANGE%^<set>%^RESET%^ without arguments.
 
 %^CYAN%^SEE ALSO%^RESET%^

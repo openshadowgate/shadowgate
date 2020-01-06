@@ -23,10 +23,10 @@ mixed * genoutput(object targ)
     {
         cur = targ->query_stuffed();
         perc = cur*100/max;
-        output+=({({"Hunger",arrange_string(hunger2str(perc)+"            ",10) + "%^BOLD%^ ("+perc+"%)"})});
+        output+=({({"Hunger","%^BOLD%^"+perc+"% ("+hunger2str(perc)+"%^WHITE%^%^BOLD%^)"})});
         cur = targ->query_quenched();
         perc = cur*100/max;
-        output+=({({"Hunger",arrange_string(thirst2str(perc)+"          ",10) + "%^BOLD%^ ("+perc+"%)"})});
+        output+=({({"Hunger","%^BOLD%^"+perc+"% ("+thirst2str(perc)+"%^WHITE%^%^BOLD%^)"})});
     }
     else if(targ->is_vampire())
     {
@@ -35,7 +35,7 @@ mixed * genoutput(object targ)
 
     cur = targ->query_intox();
     perc = cur*100/max;
-    output+=({({"Intox",arrange_string(intox2str(perc)+"          ",10) + "%^BOLD%^ ("+perc+"%)"})});
+    output+=({({"Intox","%^BOLD%^"+perc+"% ("+intox2str(perc)+"%^WHITE%^%^BOLD%^)"})});
 
     if(POISON_D->is_poisoned(targ))
     {
@@ -44,7 +44,7 @@ mixed * genoutput(object targ)
 
     if(!targ->is_undead())
     {
-        output+=({({"Condition","%^BOLD%^%^MAGENTA%^"+targ->query_condition_string()})});
+        output+=({({"Stamina","%^BOLD%^"+targ->query_condition_percent()+"% (%^MAGENTA%^"+targ->query_condition_string()+"%^WHITE%^)"})});
     }
 
     {

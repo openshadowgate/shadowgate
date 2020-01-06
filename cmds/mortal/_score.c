@@ -58,7 +58,8 @@ mixed * genoutput(object targ)
 
     if(targ->query_character_level()<100)
         output+=({({"Exp to Next","%^BOLD%^%^WHITE%^"+english_number(EXP_NEEDED[targ->query_character_level() + 1]-targ->query_exp())})});
-    output+=({({"Exp Tax","%^BOLD%^%^CYAN%^"+english_number(targ->query_XP_tax()["improvement"]["amount"])})});
+    if(mapp(targ->query_XP_tax()["improvement"]))
+        output+=({({"Exp Tax","%^BOLD%^%^CYAN%^"+english_number(targ->query_XP_tax()["improvement"]["amount"])})});
     output+=({({"Exp","%^BOLD%^%^CYAN%^"+english_number(targ->query_exp())})});
 
 
@@ -109,6 +110,7 @@ mixed * genoutput(object targ)
 int cmd_score(string args)
 {
     mixed *output=({}), oline;
+    int scolumn = 0;
     object targ;
     int arrange = 14;
 
@@ -118,36 +120,58 @@ int cmd_score(string args)
 Use <review> to review you choices or <press button> to start the process.\n");
     }
 
-    if (args && avatarp(TP))
-    {
-        if(!(targ = find_player(args)))
-        {
-            return notify_fail("That person is not available for scoring.\n");
-        }
+    targ = TP;
 
-        else if ((targ = find_player(args)))
+    if(args)
+    {
+        if(regexp(args,"[1-9]"))
         {
-            if((int)targ->query_level() > (int)TP->query_level())
+            scolumn = atoi(args);
+        }
+        else if (args && avatarp(TP))
+        {
+            if(!(targ = find_player(args)))
             {
                 return notify_fail("That person is not available for scoring.\n");
             }
         }
     }
-    else
-    {
-        targ = TP;
-    }
 
-    output = genoutput(targ);
+    output = genoutput(targ)+"/cmds/mortal/_hp"->genoutput(targ);
 
     write("%^RESET%^%^GREEN%^--=%^BOLD%^<%^WHITE%^ "+targ->query_title()+ " %^BOLD%^%^GREEN%^>%^RESET%^%^GREEN%^=--%^RESET%^");
 
     {
+        int columns, maxwidth, maxcolumns;
+        int i;
+
+        string obuff;
+
+        maxcolumns = scolumn?scolumn:atoi(TP->getenv("COLUMNS"));
+        maxcolumns = maxcolumns<1?1:maxcolumns;
+
+        maxwidth = maxcolumns>1?34:72;
+
+        columns = atoi(TP->getenv("SCREEN"))/(maxwidth+1);
+        columns = columns<1?1:columns;
+
+        columns = columns>maxcolumns?maxcolumns:columns;
+
+        obuff = "";
+
+        i=0;
         foreach(oline in output)
         {
+            obuff += arrange_string("%^BOLD%^%^GREEN%^ "+arrange_string(oline[0]+" %^BOLD%^%^BLACK%^--------------",arrange,)+"%^RESET%^%^GREEN%^ : %^RESET%^"+oline[1],maxwidth);
 
-            tell_object(TP,"%^BOLD%^%^GREEN%^ "+arrange_string(oline[0]+" %^BOLD%^%^BLACK%^--------------",arrange,)+"%^RESET%^%^GREEN%^ : %^RESET%^"+oline[1]);
+            i++;
+            if(!(i%columns))
+                obuff+="\n";
+            else
+                obuff+="  ";
         }
+
+        tell_object(TP,obuff);
     }
 
     return 1;
@@ -157,16 +181,20 @@ void help() {
     write("
 %^CYAN%^NAME%^RESET%^
 
-score - show your characters score sheet");
-    if(avatarp(TP)) write("
+score - show your characters score sheet
+
 %^CYAN%^SYNTAX%^RESET%^
 
-score [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]");
-    write(
-        "
+score [%^ORANGE%^%^ULINE%^NUM%^RESET%^]
+Avatars: score [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]
+
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command gives you overview of your character, listing many various facts about them.
+
+%^ORANGE%^%^ULINE%^NUM%^RESET%^ given as an argument will display score with %^ORANGE%^%^ULINE%^NUM%^RESET%^ columns mode even if you have other column mode enabled.
+
+Avatars and above can specify target other than themselves.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
