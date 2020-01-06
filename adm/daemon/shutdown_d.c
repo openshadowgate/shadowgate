@@ -42,7 +42,7 @@ int timeLeft, armShutdown, loginAllow;
 int shuttingDown, time_estimate;
 
 
-create() 
+create()
 {
   ::create();
    shuttingDown = 0;
@@ -63,11 +63,11 @@ int initShutdownDaemon()
 }
 
 int shuttingDown(){ return shuttingDown;}
-int checkMemory() 
+int checkMemory()
 {
   int memory;
 
-  // Get memory in MEGS not BLOCKS  - Firedragon 12/7/2004  
+  // Get memory in MEGS not BLOCKS  - Firedragon 12/7/2004
   memory = memory_info() / 512 / 1024;
   if(memory >= MAX_MEMORY)
     {
@@ -112,7 +112,7 @@ int startShutdown(int type, int time)
 {
   stopMemoryCheck();
 // hmm
-  remove_call_out("countDown");  
+  remove_call_out("countDown");
    if(geteuid(PO) != UID_SHUTDOWN) return 0;
    if(type != TEST)
 	shuttingDown = 1;
@@ -177,43 +177,59 @@ int startShutdown(int type, int time)
 
 int countDown()
 {
-  if(!timeLeft)
+    if(!timeLeft)
     {
-      executeShutdown();
-      return 2;
+        executeShutdown();
+        return 2;
     }
-  if(timeLeft < 11)
+    if(timeLeft < 11)
     {
-      notifyUsers("Attention: Shutdown in 10 seconds!  Final Warning!\n");
-      timeLeft = 0;
-      call_out("countDown", 10);
-      return 1;
+        notifyUsers("Attention: Shutdown in 10 seconds!  Final Warning!\n");
+        timeLeft = 0;
+        call_out("countDown", 10);
+        return 1;
     }
-  if(timeLeft < 121 && timeLeft > 61)
+    if(timeLeft < 121 && timeLeft > 61)
     {
-     notifyUsers("Attention: Shutdown in two minutes!\n");
-      timeLeft -= 60;
-      call_out("countDown", 60);
-      return 1;
+        notifyUsers("Attention: Shutdown in two minutes!\n");
+        timeLeft -= 60;
+        call_out("countDown", 60);
+        return 1;
     }
- if(timeLeft < 61)
+    if(timeLeft < 61)
     {
-     notifyUsers("Attention: Shutdown in one minute!\n");
-      timeLeft -= 50;
-      call_out("countDown", 50);
-      return 1;
+        notifyUsers("Attention: Shutdown in one minute!\n");
+        timeLeft -= 50;
+        call_out("countDown", 50);
+        return 1;
     }
-  notifyUsers("Attention: Shutdown in "+timeLeft/60+" minutes.\n");
-  timeLeft -= 60;
-  call_out("countDown", 60);
-  return 1;
+    if(timeLeft > 3600)
+    {
+        notifyUsers("Attention: Shutdown in "+parse_time(timeLeft)+"\n");
+        timeLeft -= 1200;
+        call_out("countDown", 1200);
+        return 1;
+    }
+    if(timeLeft > 600)
+    {
+        notifyUsers("Attention: Shutdown in "+parse_time(timeLeft)+"\n");
+        timeLeft -= 600;
+        call_out("countDown", 600);
+        return 1;
+    }
+
+    notifyUsers("Attention: Shutdown in "+timeLeft/60+" minutes.\n");
+
+    timeLeft -= 60;
+    call_out("countDown", 60);
+    return 1;
 }
-		
+
 int executeShutdown()
 {
   int all, x;
   object imm;
-  
+
   if(!armShutdown)
     return notifyUsers("Shutdown will not be executed.\n");
   queue = users();
@@ -223,7 +239,7 @@ int executeShutdown()
   {
       queue[x]->toggle_quit(0);
   }
-  notifyUsers("Shutting down within moments. Be back in 2-3 minutes!\n");  
+  notifyUsers("Shutting down within moments. Be back in 2-3 minutes!\n");
   notifyUsers("Quit has been disabled for all remaining players.\n");
 
   for(x=0;x<all;x++)
@@ -243,7 +259,7 @@ int executeShutdown()
 }
 
 int enableShutdown()
-{ 
+{
   if(armShutdown)
     return -1;
   armShutdown = 1;
@@ -251,7 +267,7 @@ int enableShutdown()
 }
 
 int disableShutdown()
-{ 
+{
   if(!armShutdown)
     return -1;
   armShutdown = 0;
@@ -274,7 +290,7 @@ int cancelShutdown()
   shuttingDown = 0;
   return 1;
 }
-	
+
 void do_armageddon(int tmp)
 {
   startShutdown(MANUAL, tmp);
@@ -295,4 +311,3 @@ int query_time_left() { return timeLeft; }
 
 int query_max_memory() { return MAX_MEMORY ; }
 int query_max_memory_blocks() { return MAX_MEMORY*512*1024 ; }
-
