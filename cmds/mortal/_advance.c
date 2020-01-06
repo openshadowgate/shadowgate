@@ -692,6 +692,23 @@ int cmd_advance(string myclass){
          myclass = TP->query_class();
       }
    }
+
+   {
+       string file;
+       file = DIR_CLASSES+"/"+myclass+".c";
+       if(!file_exists(file))
+       {
+           tell_object(TP,"%^BOLD%^%^RED%^The class %^RESET%^"+myclass+"%^BOLD%^%^RED%^ does not exist.");
+           return 1;
+       }
+       if(file->is_prestige_class())
+           if(TP->query_class_level(myclass)>9)
+           {
+               tell_object(TP,"%^BOLD%^%^RED%^You cannot have more than 10 levels in a prestige class.");
+               tell_object(TP,"Use %^ORANGE%^<advance %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^ to advance in another class.");
+               return 1;
+           }
+   }
 //Multiclassing code
    if(TP->query("new_class_type")){
       char_level = (int)TP->query_character_level();
@@ -713,21 +730,23 @@ int cmd_advance(string myclass){
          }
       }
 
-      if(char_level == 10 || char_level == 20 || char_level == 30 || char_level == 40
-         || char_level == 50 || char_level == 60 || char_level == 70 || char_level == 80
-         || char_level == 90 || char_level == 100){
-         if(member_array(myclass,TP->query_classes()) == -1){
-            if(!can_multiclass(TP,myclass)){
-               if(TP->query_property("adding base class")){
-                  tell_object(TP,"Please enter a class to be your base class for "+myclass+".");
+      if(char_level%10==0){
+          if(member_array(myclass,TP->query_classes()) == -1)
+          {
+              if(!can_multiclass(TP,myclass))
+              {
+                  if(TP->query_property("adding base class")){
+                      tell_object(TP,"Please enter a class to be your base class for "+myclass+".");
+                      return 1;
+                  }
+                  tell_object(TP,"You are not allowed to become a "+myclass+"");
                   return 1;
-               }
-               tell_object(TP,"You are not allowed to become a "+myclass+"");
-               return 1;
-            }else{
-               TP->set_property("multiclassing",1);
-            }
-         }
+              }
+              else
+              {
+                  TP->set_property("multiclassing",1);
+              }
+          }
       }
 
       if(member_array(myclass,TP->query_classes()) != -1){
@@ -906,7 +925,7 @@ int cmd_advance(string myclass){
 	      return 1;
          }
       }
-      write("%^BOLD%^You are not capable of skills befitting the next level of "+myclass+".  Please make sure you have enough experience points.\n");
+      write("%^BOLD%^You are not yet experienced enough to gain next level of "+myclass+".\n");
       if((int)TP->query_class_level(myclass) == 0) { TP->remove_class(myclass); }
       TP->remove_property("multiclassing");
       return 1;
