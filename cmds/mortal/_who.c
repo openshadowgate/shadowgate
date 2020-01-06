@@ -346,6 +346,8 @@ If argument is provided, filters players by races.
 
  %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^ means you're free to %^YELLOW%^adventure%^RESET%^ only and are forbidden to engage in player kill due to recent death or flag changes.
 
+ %^RESET%^%^BOLD%^%^BLUE%^P%^RESET%^ in the end of the line indicates you're free to engage in %^BOLD%^%^BLUE%^player kill%^RESET%^ with that player, but can't adventure with them.
+
  %^RESET%^%^BOLD%^%^RED%^F%^RESET%^ means you're %^BOLD%^%^RED%^forbidden%^RESET%^ to adventure and engage in unrestricted player kill with the player due to difference in levels.
 
 The difference in power is defined by the weakest character. To engage in adventures and PK the difference must be less than 5 levels for characters below level 30 and 10 levels for characters above.

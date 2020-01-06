@@ -20,10 +20,13 @@ int cmd_levelcheck(string str)
     switch(LEVELCHECK->levelcheck(TP,targ))
     {
     case 1:
-        write("%^BOLD%^%^GREEN%^You can engage in adventuring and player kill with them.%^RESET%^");
+        write("%^BOLD%^%^ORANGE%^You can engage in adventuring with them, but can't player kill them.%^RESET%^");
         break;
     case 2:
-        write("%^BOLD%^%^ORANGE%^You can engage in adventuring with them, but can't player kill them.%^RESET%^");
+        write("%^BOLD%^%^BLUE%^You can engage in player kill with them, but can't adventure with them.%^RESET%^");
+        break;
+    case 3:
+        write("%^BOLD%^%^GREEN%^You can engage in adventuring and player kill with them.%^RESET%^");
         break;
     default:
         write("%^BOLD%^%^RED%^You can't engage in adventuring and player kill with them.%^RESET%^");

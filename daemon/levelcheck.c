@@ -18,8 +18,9 @@ public string levelcheck_string(object first, object second)
     switch(levelcheck(first,second))
     {
     case 0: return " %^RESET%^%^BOLD%^%^RED%^F%^RESET%^";
-    case 1: return " %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^";
-    case 2: return " %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^";
+    case 1: return " %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^";
+    case 2: return " %^RESET%^%^BOLD%^%^BLUE%^P%^RESET%^";
+    case 3: return " %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^";
     default: return " %^RESET%^%^BOLD%^%^RED%^F%^RESET%^";
     }
 }
@@ -30,9 +31,10 @@ public string levelcheck_string(object first, object second)
  * @param first First player
  * @param second Second player
  *
- * @return 1 if players are within levelcheck, 2 if they are allowed
- *         only to adventure together, 0 if they are not within
- *         levelcheck
+ * @return 0 -- nothing is allowed
+ *         1 -- adventuring is allowed
+ *         2 -- pk is allowed
+ *         3 -- pk and adventuring are allowed
  *
  */
 public int levelcheck(object first, object second)
@@ -41,6 +43,7 @@ public int levelcheck(object first, object second)
     int diff;
     int range;
     int low;
+    int result=0;
 
     if(!objectp(first)) return 0;
     if(!objectp(second)) return 0;
@@ -62,17 +65,24 @@ public int levelcheck(object first, object second)
     default: range = 6;
     }
 
-    if(diff > range)
-        return 0;
+    //First bit -- kill, second -- adventure
+    if(diff < range)
+        result = result|3;
 
-    if(first->query("no pk")) return 2;
-    if(second->query("no pk")) return 2;
+    if(lvl<lvl2)
+        result = result|2;
 
-    if(first->query_death_flag()) return 2;
-    if(second->query_death_flag()) return 2;
+    if(second->query("no_levelcheck"))
+        result = result|2;
 
-    if(first->get_pk_death_flag()) return 2;
-    if(second->get_pk_death_flag()) return 2;
+    if(first->query_death_flag()) result=result&1;
+    if(second->query_death_flag()) result=result&1;
 
-    return 1;
+    if(first->get_pk_death_flag()) result=result&1;
+    if(second->get_pk_death_flag()) result=result&1;
+
+    if(first->query("no pk")) result=result&1;
+    if(second->query("no pk")) result=result&1;
+
+    return result;
 }

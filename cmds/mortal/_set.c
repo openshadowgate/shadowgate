@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","no_reward","taxperc","term","scrlines","scrwidth","columns","hardcore"});
+string *VALID_SETTINGS = ({"hints","logon_notify","simpleinv","brief","persist","brief_combat","expgain","no_reward","taxperc","term","scrlines","scrwidth","columns","hardcore","levelcheck"});
 
 int cmd_set(string args)
 {
@@ -26,16 +26,21 @@ int cmd_set(string args)
         write("Invalid setting.");
         return 1;
     }
-    if(!call_other(TO,"set_"+setting,value))
+
     {
-        write("%^WHITE%^%^BOLD%^Unable to set %^RED%^"+setting+"%^WHITE%^ to %^RED%^"+value+"%^WHITE%^.");
-        return 1;
+        int status = call_other(TO,"set_"+setting,value);
+        if(status==0)
+        {
+            write("%^WHITE%^%^BOLD%^Unable to set %^RED%^"+setting+"%^WHITE%^ to %^RED%^"+value+"%^WHITE%^.");
+            return 1;
+        }
+        if(status==1)
+        {
+            write("%^WHITE%^%^BOLD%^Setting %^GREEN%^"+setting+"%^WHITE%^ to %^CYAN%^"+value+"%^WHITE%^.");
+            return 1;
+        }
     }
-    else
-    {
-        write("%^WHITE%^%^BOLD%^Setting %^GREEN%^"+setting+"%^WHITE%^ to %^CYAN%^"+value+"%^WHITE%^.");
-        return 1;
-    }
+
     return 1;
 }
 
@@ -291,7 +296,12 @@ int set_hardcore(string val)
         return 0;
     }
     if(val=="on")
-        TP->set("hardcore",1);
+    {
+        tell_object(TP,"%^BOLD%^Are you sure?.. You will loose all your levels and equipment if you die.");
+        tell_object(TP,"%^BOLD%^Type %^ORANGE%^YES%^WHITE%^ to confirm.");
+        input_to("confirm_hardcore");
+        return 2;
+    }
     if(val=="off")
     {
         write("%^BOLD%^%^RED%^Nope. You keep suffering.");
@@ -306,6 +316,64 @@ string get_hardcore()
         return "on";
     else
         return "off";
+}
+
+void confirm_hardcore(string str)
+{
+    if(str=="YES")
+    {
+        tell_object(TP,"%^BOLD%^Turning hardcore mode on you %^RED%^on%^WHITE%^.");
+        TP->set("hardcore",1);
+    }
+    else
+    {
+        tell_object(TP,"%^BOLD%^A wise decision.");
+    }
+}
+
+int set_levelcheck(string val)
+{
+    string *valid_values = ({"on","off"});
+    if(member_array(val,valid_values)==-1)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+        return 0;
+    }
+    if(val=="off")
+    {
+        tell_object(TP,"%^BOLD%^Are you sure?.. You will become a valid target for pk for high-levels.");
+        tell_object(TP,"%^BOLD%^Type %^ORANGE%^YES%^WHITE%^ to confirm.");
+        input_to("confirm_levelcheck");
+        return 2;
+    }
+    if(val=="on")
+    {
+        write("%^BOLD%^%^RED%^Nope. You keep suffering.");
+        return 0;
+    }
+    return 1;
+}
+
+void confirm_levelcheck(string str)
+{
+    if(str=="YES")
+    {
+        tell_object(TP,"%^BOLD%^%^BLACK%^DEATH IS THE ROAD TO AWE.");
+        tell_object(TP,"%^BOLD%^Turning levelcheck on you %^RED%^off%^WHITE%^.");
+        TP->set("no_levelcheck",1);
+    }
+    else
+    {
+        tell_object(TP,"%^BOLD%^A wise decision.");
+    }
+}
+
+string get_levelcheck()
+{
+    if(TP->query("no_levelcheck"))
+        return "off";
+    else
+        return "on";
 }
 
 int set_no_reward(string val)
@@ -385,6 +453,7 @@ You can manipulate numerous mud settings:
 %^CYAN%^no_reward %^GREEN%^on|off%^RESET%^\n  Opt out from receiving reward from other players granted with %^ORANGE%^<reward>%^RESET%^ command. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^taxperc %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  This will define how much of your experience gain goes towards paying off your experience tax. This value will grow with your levels, but you may force its increase via this setting. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^hardcore %^GREEN%^%^ULINE%^on%^RESET%^\n  If you loved good old days and want more. Harcore mode can't be turned off. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^levelcheck %^GREEN%^%^ULINE%^off%^RESET%^\n  Disabling this will make you a valid target across all levels. Levelcheck can't be turned on without petitioning. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^ULINE%^%^CYAN%^Terminal and display:%^RESET%^
 
 %^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n  This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
