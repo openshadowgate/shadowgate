@@ -12,7 +12,7 @@ int cmd_set(string args)
         write("%^BLUE%^--=%^BOLD%^<%^WHITE%^ Settings %^BLUE%^>%^RESET%^%^BLUE%^=--%^RESET%^");
         foreach(stng in VALID_SETTINGS)
         {
-            write("%^BOLD%^%^WHITE%^ "+arrange_string(stng,14)+": %^RESET%^"+(string)call_other(TO,"get_"+stng));
+            write("%^WHITE%^ "+arrange_string(stng+" %^BOLD%^%^BLACK%^--------------",14)+"%^RESET%^%^GREEN%^ : %^RESET%^"+colorize_value((string)call_other(TO,"get_"+stng)));
         }
         return 1;
     }
@@ -420,6 +420,18 @@ int set_taxperc(string val)
 int get_taxperc()
 {
     return sprintf("%d",USER_D->get_character_improvement_tax_percent(TP));
+}
+
+string colorize_value(string str)
+{
+    if(str=="off")
+        return "%^RED%^off%^RESET%^";
+    if(str=="on")
+        return "%^GREEN%^on%^RESET%^";
+    if(regexp(str,"[0-9]+"))
+        return "%^CYAN%^"+str+"%^RESET%^";
+
+    return "%^ORANGE%^"+str+"%^RESET%^";
 }
 
 void help()

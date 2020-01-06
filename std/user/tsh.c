@@ -127,12 +127,10 @@ string write_prompt()
         if(shape_race)
         {
             prompt = replace_string(prompt, "$f", shape_race );
-            prompt = replace_string(prompt, "$F", capitalize(shape_race) );
         }
         else
         {
             prompt = replace_string(prompt, "$f", "" );
-            prompt = replace_string(prompt, "$F", "" );
         }
         rage = (int)TP->query_property("raged");
         if(rage)

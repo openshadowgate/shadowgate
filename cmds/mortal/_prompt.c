@@ -42,12 +42,11 @@ Available codes:
   %^MAGENTA%^$H%^WHITE%^ maximum hp
   %^MAGENTA%^$i%^WHITE%^ hunger level
   %^MAGENTA%^$o%^WHITE%^ thirst level
-  %^MAGENTA%^$B%^WHITE%^ blood hunger saturation percentile
+  %^MAGENTA%^$B%^WHITE%^ blood hunger percent
   %^MAGENTA%^$s%^WHITE%^ stamina percent
   %^MAGENTA%^$S%^WHITE%^ stamina string
   %^MAGENTA%^$x%^WHITE%^ encumbrance level
   %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
-  %^MAGENTA%^$F%^WHITE%^ capitalized shapeshifted form
   %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
   %^MAGENTA%^$p%^WHITE%^ power points
   %^MAGENTA%^$P%^WHITE%^ maximum power points
