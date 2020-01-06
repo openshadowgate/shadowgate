@@ -178,7 +178,7 @@ int set_logon_notify(string val)
     if(val == "off")
         this_player()->set_logon_notify(0);
     else
-        this_player()->set_logon_notify(0);
+        this_player()->set_logon_notify(1);
     return 1;
 }
 
