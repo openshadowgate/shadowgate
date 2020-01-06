@@ -176,7 +176,7 @@ int can_multiclass(object ob,string myclass) {
     bad_classes         = (string *)file->restricted_classes(subrace);
 
     if(member_array(myclass,bad_classes) != -1) {
-        tell_object(ob,"%^BOLD%^Your race is not allowed to be a "+myclass+".");
+        tell_object(ob,"%^BOLD%^Your race has a thematic restriction on being a "+myclass+".");
         return 0;
     }
 
