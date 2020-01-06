@@ -67,7 +67,7 @@ int set_base_class(object obj, string choice)
         tell_object(obj,"%^BOLD%^%^RED%^It looks like you don't have a class:%^RESET%^ "+choice);
         return 0;
     }
-    if(member_array(choice,({"cleric","mage","sorcerer"})) == -1)
+    if(member_array(choice,({"cleric","mage","sorcerer","oracle"})) == -1)
     {
         tell_object(obj,"%^BOLD%^%^RED%^You can only choose from cleric, mage or corcerer.%^RESET%^ ");
         return 0;
@@ -127,7 +127,8 @@ int prerequisites(object player)
     {
         if(player->query_base_stats("wisdom") < 20) { return 0; }
     }
-    if(player->query("base_class")=="sorcerer")
+    if(player->query("base_class")=="sorcerer" ||
+       player->query("base_class")=="oracle")
     {
         if(player->query_base_stats("charisma") < 20) { return 0; }
     }

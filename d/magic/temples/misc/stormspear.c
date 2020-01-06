@@ -63,16 +63,11 @@ int wieldme(){
      tell_object(ETO,"%^YELLOW%^There is so much evil in the items you carry that the spear repels your hand!%^RESET%^");
      return 0;
    }
-   if(ETO->query_property("master weapon")) { //preventing stack up with other "top" weapons
-     tell_object(ETO,"You find it impossible to lift two such mighty weapons!",ETO);
-     return 0;
-   }
    tell_object(ETO,"%^BOLD%^%^BLACK%^As you gr%^BLUE%^i%^BLACK%^p the weapon, sparks of e%^BOLD%^%^CYAN%^n%^BOLD%^%^BLUE%^e%^BOLD%^%^BLACK%^r%^BOLD%^%^CYAN%^g%^BOLD%^%^BLACK%^y dance across "
 "your fingertips.%^RESET%^");
    tell_room(EETO,"%^BOLD%^%^BLACK%^As "+ETO->QCN+" gr%^BLUE%^i%^BLACK%^ps the weapon, sparks of e%^BOLD%^%^CYAN%^n%^BOLD%^%^BLUE%^e%^BOLD%^%^BLACK%^r%^BOLD%^%^CYAN%^g%^BOLD%^%^BLACK%^y dance "
 "across "+ETO->QP+" fingertips.%^RESET%^",ETO);
    ETO->set_property("good item",1);
-   ETO->set_property("master weapon",1);
    return 1;
 }
 
@@ -82,7 +77,6 @@ int unwieldme(){
    tell_room(EETO,"%^BOLD%^%^BLACK%^A slight cr%^BOLD%^%^CYAN%^a%^BOLD%^%^WHITE%^c%^BOLD%^%^BLACK%^kli%^BOLD%^%^BLUE%^n%^BOLD%^%^BLACK%^g can be heard as "+ETO->QCN+" releases the "
 "magnificent weapon.",ETO);
    ETO->set_property("good item",-1);
-   ETO->set_property("master weapon",-1);
    return 1;
 }
 

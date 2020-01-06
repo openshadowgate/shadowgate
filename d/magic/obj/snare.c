@@ -85,16 +85,14 @@ object casterobj,*spells = ({});
 //            tell_object(find_player(mycaster),"Removing mini mes.");
 //The above was for debugging - leaving in case needed again.
             mini_mes[i]->remove();
-         }else{
-            tell_object(find_player(mycaster),"Uh oh, something's wrong - can't remove mini mes.");
          }
       }
 //   }
    casterobj = find_player(mycaster);
-   if(objectp(casterobj)){                  // Adjusted by Lujke 5th July 2010, to make this whole  
+   if(objectp(casterobj)){                  // Adjusted by Lujke 5th July 2010, to make this whole
      casterobj->remove_property("glyphed");  //section dependent on casterobj being a valid object
      spells += casterobj->query_property("dispellable spells");
-     for(i=0;i<sizeof(spells);i++){  
+     for(i=0;i<sizeof(spells);i++){
         if(objectp(spells[i])){
            if(!spells[i]->query_target_object()){
               if((string)spells[i]->query_spell_name() == "snare"){

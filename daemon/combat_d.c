@@ -738,8 +738,18 @@ int unarmed_enchantment(object who)
 {
     int mod = 0;
     if(!objectp(who)) return mod;
-    if(who->is_class("monk")) mod += (int)"/std/class/monk.c"->effective_enchantment(who);
-    else if(FEATS_D->usable_feat(who, "precise strikes")) { mod += ((int)who->query_base_character_level() / 8); }
+    if(who->is_class("monk"))
+    {
+        mod += (int)"/std/class/monk.c"->effective_enchantment(who);
+    }
+    else
+    {
+        if(FEATS_D->usable_feat(who, "precise strikes")||
+           who->query_property("shapeshifted"))
+        {
+            mod += ((int)who->query_base_character_level() / 8);
+        }
+    }
     return mod;
 }
 

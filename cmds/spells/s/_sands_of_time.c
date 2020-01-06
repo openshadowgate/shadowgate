@@ -8,6 +8,11 @@ inherit SPELL;
 
 int clevel,bonus,i;
 
+int is_curse()
+{
+    return 1;
+}
+
 void create() {
     ::create();
     set_spell_name("sands of time");
@@ -53,6 +58,7 @@ void spell_effect(int prof) {
     target->add_stat_bonus("constitution", -bonus);
     target->set_property("spelled", ({TO}) );
     target->set_property("sands of time",1);
+    addSpellToCaster();
     call_out("dest_effect",duration);
     spell_successful();
 }

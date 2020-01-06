@@ -69,6 +69,7 @@ void spell_effect(int prof) {
     target->add_saving_bonus("all",(-1)*bonus);
     target->set_property("spelled", ({TO}) );
     target->set_property("cursed",1);
+    addSpellToCaster();
     call_out("dest_effect",duration);
     spell_successful();
 }

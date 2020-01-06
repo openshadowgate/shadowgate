@@ -59,7 +59,7 @@ void create(){
      TO->remove_property("enchantment");
      TO->set_property("enchantment",5);
    }
-   set_item_bonus("bonus spell slots",1);
+   set_item_bonus("bonus_spell_slots",1);
    set_item_bonus("spell penetration",15);
    set_item_bonus("magic resistance",10);
    set_property("lore difficulty",24);
@@ -129,7 +129,7 @@ int valkyrja_fun(){
        "even reach you here!%^RESET%^");
        return 1;
    }
-   
+
    tell_room(EETO,"%^YELLOW%^A valkyrie mounted on a pegasus swoops in "+
        "out of nowhere and snatches "+ETOQCN+", placing "+ETO->QO+" "+
 	   "across the saddle, and then disappears suddenly!%^RESET%^",ETO);
@@ -156,7 +156,7 @@ int valkyrja_fun(){
 	  case 3:
          ETO->move("/d/guilds/kindred/rooms/campfire");
          break;
-	  case 4: 
+	  case 4:
 	     ETO->move("/d/dagger/exchange/rooms/trading");
 		 break;
 	  case 5:
@@ -176,6 +176,6 @@ int valkyrja_fun(){
 	     "around "+ETO->QO+".%^RESET%^",ETO);
 	  ETO->set_bound(0);
    }
-   ETO->force_me("look");   
+   ETO->force_me("look");
    return 1;
-}   
+}
