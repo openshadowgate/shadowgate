@@ -78,10 +78,11 @@ void execute_feat()
     tell_room(environment(caster),"%^BOLD%^"+caster->QCN+" sits and begins to scribe a spell onto some parchment.",caster);
     tell_object(caster, "%^BOLD%^You sit and start to scribe "+str+" onto the parchment.");
 
-    call_out("scribe",level*2, str, caster, ob);
-    caster->set_paralyzed(level*2*8,"You are scribing the spell.");
+    call_out("scribe",level, str, caster, ob);
     tell_object(caster, "Hit <return> to cancel. This will waste the parchment.");
     input_to("cancel",1,ob, str);
+    caster->set_paralyzed(level*8,"You are scribing the spell.");
+
     return;
 }
 

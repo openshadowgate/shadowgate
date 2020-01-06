@@ -133,7 +133,7 @@ void execute_attack()
     if(!sizeof(attackers) && !random(300))
     {
         tell_object(caster, cm("The cold intensifies as energies within you beam."));
-        tell_room(place, cm("The air gets chilly all of a sudden."), caster);
+        tell_room(place, cm("Your very soul gets cold as the chill casts off the air."), caster);
     }
 
     if(objectp(place))
