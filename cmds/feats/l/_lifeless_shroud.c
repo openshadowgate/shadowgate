@@ -130,7 +130,7 @@ void execute_attack()
         positive_effects(allies[i]);
     }
 
-    if(!sizeof(attackers) && !random(500))
+    if(!sizeof(attackers) && !random(300))
     {
         tell_object(caster, cm("The cold intensifies as energies within you beam."));
         tell_room(place, cm("The air gets chilly all of a sudden."), caster);
@@ -187,12 +187,12 @@ void negative_effects(object obj)
         {
             tell_object(obj, cm("You feel unnaturally cold as you vision becomes hazy and the world around you fades!"));
             tell_room(place, cm(obj->QCN+" blinks and stares around sightlessly."),obj);
-            obj->set_temporary_blinded(clevel/10);
+            obj->set_temporary_blinded(clevel/18+1);
         }
         break;
 
     case 6..15:
-        damage = roll_dice(clevel, 5);
+        damage = roll_dice(clevel, 4);
         if(obj->fort_save(clevel))
         {
             damage = damage / 2;
@@ -216,7 +216,7 @@ void negative_effects(object obj)
         if(!obj->reflex_save(clevel))
         {
             tell_object(obj, cm("You feel tired as the cold envelops you."));
-            "/std/effect/status/fatigued"->apply_effect(obj,clevel/8+1);
+            "/std/effect/status/fatigued"->apply_effect(obj,clevel/18+1);
         }
         break;
 
@@ -224,7 +224,7 @@ void negative_effects(object obj)
         if(!obj->reflex_save(clevel))
         {
             tell_object(obj, cm("You feel sickened as the cold reaches your internals."));
-            "/std/effect/status/sickened"->apply_effect(obj,clevel/8+1);
+            "/std/effect/status/sickened"->apply_effect(obj,clevel/18+1);
         }
         break;
 

@@ -424,6 +424,8 @@ int get_taxperc()
 
 string colorize_value(string str)
 {
+    if(!str)
+        return "";
     if(str=="off")
         return "%^RED%^off%^RESET%^";
     if(str=="on")
