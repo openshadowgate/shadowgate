@@ -40,7 +40,7 @@ void setup_beastie(object caster, int beastalign) {
     set_alignment(myalign);
 
     if(caster->query_property("talossian elementalist")) { // Pangretor's quest reward greeble!
-      set_id(({"elemental","lightning elemental","outsider","summoned monster"}));
+      set_id(({"elemental","lightning elemental","outsider"}));
       set_short("%^RESET%^%^MAGENTA%^Lightning Elemental%^RESET%^");
       set_short("%^YELLOW%^Lig%^WHITE%^ht%^YELLOW%^ni%^WHITE%^n%^YELLOW%^g Elem%^WHITE%^e%^YELLOW%^ntal%^RESET%^");
       set_long("%^RESET%^This creature looks like a %^BLUE%^d%^BOLD%^%^BLACK%^ar%^RESET%^%^BLUE%^k st%^BOLD%^%^BLACK%^or"
@@ -64,7 +64,7 @@ void setup_beastie(object caster, int beastalign) {
     }
     switch(myalign) {
       case 1: // LG: trumpet archon
-        set_id(({"archon","trumpet archon","Archon","Trumpet Archon","outsider","summoned monster"}));
+        set_id(({"archon","trumpet archon","Archon","Trumpet Archon","outsider"}));
         set_short("%^YELLOW%^Tr%^WHITE%^u%^YELLOW%^mp%^WHITE%^e%^YELLOW%^t Arc%^WHITE%^h%^YELLOW%^on%^RESET%^");
         set_long("%^RESET%^This magnificent creature looks somewhat like an %^MAGENTA%^elf%^RESET%^, and yet is far more "
 "than that.  Bearing the light, angular frame and tapered ears of a fey creature, it carries itself with an easy and "
@@ -80,7 +80,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("bludgeon");
       break;
       case 2: // LN: zelekhut, inevitable
-        set_id(({"zelekhut","Zelekhut","inevitable","Inevitable","outsider","summoned monster"}));
+        set_id(({"zelekhut","Zelekhut","inevitable","Inevitable","outsider"}));
         set_short("%^BOLD%^%^BLACK%^Z%^RESET%^e%^BOLD%^l%^RESET%^e%^BOLD%^%^BLACK%^kh%^RESET%^u%^BOLD%^%^BLACK%^t%^RESET%^");
         set_long("%^RESET%^Looking more like a centaur in frame than anything else, this being appears to be less of a "
 "living creature, and more of a mechanical construct.  Gaps in its %^BOLD%^%^WHITE%^alabaster %^RESET%^coat of skin "
@@ -97,7 +97,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("slashing");
       break;
       case 3: // bone devil, baatezu
-        set_id(({"devil","Devil","bone devil","Bone Devil","outsider","summoned monster"}));
+        set_id(({"devil","Devil","bone devil","Bone Devil","outsider"}));
         set_short("%^RESET%^Bo%^BOLD%^n%^RESET%^e De%^BOLD%^v%^RESET%^il");
         set_long("%^RESET%^A horrific creature to look upon, the Osyluth is more commonly known as a Bone Devil.  It "
 "appears as a tall and hideous parody of what might once have been human.  %^ORANGE%^Dried skin %^RESET%^is stretched "
@@ -113,7 +113,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("slashing");
       break;
       case 4: // NG: leonal, guardinal
-        set_id(({"leonal","Leonal","outsider","summoned monster"}));
+        set_id(({"leonal","Leonal","outsider"}));
         set_short("%^RESET%^%^ORANGE%^Leo%^RED%^na%^ORANGE%^l%^RESET%^");
         set_long("%^RESET%^This powerful creature stands about the height of a man, but is built with such an impressive "
 "frame as could surely not be possible for humankind.  %^RED%^Muscles %^RESET%^ripple beneath a coating of short, thick "
@@ -128,7 +128,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("slashing");
       break;
       case 5: // TN: aurumach, rilmani
-        set_id(({"aurumach","Aurumach","outsider","summoned monster"}));
+        set_id(({"aurumach","Aurumach","outsider"}));
         set_short("%^YELLOW%^Au%^RESET%^%^ORANGE%^ru%^YELLOW%^ma%^RESET%^%^ORANGE%^c%^YELLOW%^h%^RESET%^");
         set_long("%^RESET%^This outsider appears as a powerfully muscled, %^YELLOW%^go%^RESET%^%^ORANGE%^ld%^YELLOW%^en"
 "%^RESET%^-skinned humanoid that would easily match the size of an ogre.  Unlike such a beast, however, the creature is "
@@ -140,7 +140,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("bludgeon");
       break;
       case 6: // NE: nycaloth, yugoloth
-        set_id(({"nycaloth","Nycaloth","outsider","summoned monster"}));
+        set_id(({"nycaloth","Nycaloth","outsider"}));
         set_short("%^RESET%^%^GREEN%^Ny%^ORANGE%^c%^GREEN%^alo%^ORANGE%^t%^GREEN%^h%^RESET%^");
         set_long("%^RESET%^Though large and obviously powerful, this %^BLUE%^bat-winged %^RESET%^monstrosity still evokes "
 "a sense of speed and agility.  Its dog-like head turns quickly from side to side, much like an alert bird, with "
@@ -157,7 +157,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("slashing");
       break;
       case 7: // CG: bralani, eladrin
-        set_id(({"bralani","Bralani","outsider","summoned monster"}));
+        set_id(({"bralani","Bralani","outsider"}));
         set_short("%^BOLD%^%^WHITE%^B%^RESET%^r%^BOLD%^al%^CYAN%^a%^WHITE%^ni%^RESET%^");
         set_long("%^RESET%^Before you stands a stocky being, much like a %^ORANGE%^human %^RESET%^at first glance.  Its "
 "hair is bright %^BOLD%^%^WHITE%^si%^RESET%^lv%^BOLD%^ery-wh%^CYAN%^i%^WHITE%^te %^RESET%^like fresh-fallen snow, "
@@ -171,7 +171,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("bludgeon");
       break;
       case 8: // CN: gray slaad
-        set_id(({"slaad","Slaad","gray slaad","Gray Slaad","outsider","summoned monster"}));
+        set_id(({"slaad","Slaad","gray slaad","Gray Slaad","outsider"}));
         set_short("%^BOLD%^%^BLACK%^Gr%^RESET%^a%^BOLD%^%^BLACK%^y S%^RESET%^%^GREEN%^l%^BOLD%^%^BLACK%^aad%^RESET%^");
         set_long("%^RESET%^Bearing the appearance of a two-legged %^GREEN%^frog%^RESET%^, this creature is as tall as a "
 "man and bears a lean build, possessed of movements that are surprisingly quick.  Its smooth skin is a %^BOLD%^%^BLACK%^"
@@ -186,7 +186,7 @@ void setup_beastie(object caster, int beastalign) {
         set_nat_weapon_type("slashing");
       break;
       case 9: // CE: vrock, tanarri
-        set_id(({"vrock","Vrock","tanarri","Tanarri","outsider","summoned monster"}));
+        set_id(({"vrock","Vrock","tanarri","Tanarri","outsider"}));
         set_short("%^RESET%^%^MAGENTA%^Vr%^CYAN%^oc%^MAGENTA%^k%^RESET%^");
         set_long("%^RESET%^This monster appears as some kind of horrific humanoid vulture of an impressive size.  Its "
 "sinewy outline is mostly coated in a fine layer of %^BOLD%^%^BLACK%^gray feathers%^RESET%^, beneath which lies hardened "
