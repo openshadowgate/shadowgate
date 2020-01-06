@@ -98,9 +98,6 @@ string list_users(string *races, object tp)
                 if (ctime(time())[4..9]=="Oct 31") rabbit="%^ORANGE%^pumpkin";
                 if (ctime(time())[4..9]=="Dec 24") rabbit="%^BOLD%^"+({"%^GREEN%^","%^RED%^","%^YELLOW%^","%^CYAN%^"})[i%4]+"elf";
                 if (ctime(time())[4..9]=="Dec 25") rabbit="%^BOLD%^"+({"%^GREEN%^","%^RED%^","%^YELLOW%^","%^CYAN%^"})[i%4]+"elf";
-                if (ctime(time())[4..9]=="Dec 31") rabbit="%^ORANGE%^happy rat"; //2020 edition
-                if (ctime(time())[4..9]=="Jan  1") rabbit="%^ORANGE%^happy rat"; //2020 edition
-                if (ctime(time())[4..9]=="Jan  6") rabbit="%^BOLD%^%^BLUE%^drow";
                 if (ctime(time())[4..9]=="Jan 14") rabbit="%^BOLD%^wolf";
                 tmp += "%^MAGENTA%^"+ arrange_string(" "+ rabbit+"%^BOLD%^%^BLACK%^ ------------ ",12) +" ";
             }
