@@ -15,7 +15,7 @@ void create() {
     set_syntax("cast CLASS stone body");
     set_description("This spell will cover the caster's skin in a layer of granite, reducing the damage he takes with "
 "each hit.  The higher the level the caster, the more damage will be resisted.  The spell also renders the caster immune "
-"to poison."); //This covers premonition from srds for druids 
+"to poison."); //This covers premonition from srds for druids
     set_verbal_comp();
 	set_helpful_spell(1);
 }
@@ -28,7 +28,7 @@ string query_cast_string() {
 }
 
 int preSpell() {
-    if(caster->query_stoneSkinned() || caster->query_property("iron body")){ 
+    if(caster->query_stoneSkinned() || caster->query_property("iron body")){
         tell_object(caster,"You are already protected by a similar effect.");
         return 0;
     }
@@ -37,7 +37,7 @@ int preSpell() {
 
 void spell_effect(int prof) {
     int duration;
-    duration = (ROUND_LENGTH * 10) * clevel;
+    duration = (clevel+roll_dice(1,20)) * ROUND_LENGTH * 10;
     tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+"'s skin is transformed into granite "
         "as "+caster->QS+" completes "+caster->QP+" spell!",caster);
     tell_object(caster,"%^BOLD%^As your prayer finishes, you can feel your skin "

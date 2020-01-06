@@ -4,6 +4,7 @@
 //spell with mage stoneskin.
 // upgraded to the book vers, self-only DR15. Better than stoneskin (and does not stack). N, 5/15.
 #include <spell.h>
+#include <magic.h>
 
 inherit SPELL;
 
@@ -75,7 +76,7 @@ void spell_effect(int prof) {
     caster->set_property("poison immunity",1);
     addSpellToCaster();
     spell_successful();
-    call_out("dest_effect", 1800 + (clevel * 10));
+    call_out("dest_effect", (clevel+roll_dice(1,20)) * ROUND_LENGTH * 10);
 }
 
 void dest_effect() {
