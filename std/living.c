@@ -160,6 +160,19 @@ string query_race()
   return query("race");
 }
 
+string query_visual_race()
+{
+    object shape;
+
+    if(objectp(shape = TO->query_property("shapeshifted")))
+        return shape->query_shape_race();
+
+    if(objectp(shape = TO->query_property("altered")))
+        return shape->query_shape_race();
+
+    return query_race();
+}
+
 void set_race(string str) {
    this_object()->set("race",str);
    add_id(str);
