@@ -78,13 +78,14 @@ void spell_effect(int prof) {
       caster->add_temporary_feat("unyielding soul");
       feattracker = 1;
    }
-   duration = 9 * (int)CLEVEL;
+   duration = 6 * clevel  * ROUND_LENGTH;
    call_out("dest_effect", duration);
 }
 
 void dest_effect(){
-   if(objectp(caster)) 
+   if(objectp(caster))
    {
+       tell_object(caster,"%^CYAN%^The %^CYAN%^t%^WHITE%^end%^CYAN%^r%^WHITE%^ils%^CYAN%^ of %^CYAN%^f%^WHITE%^i%^CYAN%^l%^WHITE%^my %^WHITE%^e%^CYAN%^n%^CYAN%^e%^WHITE%^rgy%^CYAN%^ flow away from you, leaving you exposed once again.");
        caster->remove_property("hidden alignment");
        if(feattracker == 1) caster->remove_temporary_feat("unyielding soul");
        caster->remove_property_value("spelled", ({TO}) );
