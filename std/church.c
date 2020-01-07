@@ -232,9 +232,15 @@ int pray()
             if(objectp(stuff[i]))
             {
                 if(stuff[i]->id("questob"))
+                {
                     stuff[i]->remove();
+                    continue;
+                }
                 if(stuff[i]->query_property("enchantment")>0)
+                {
                     stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
+                    continue;
+                }
             }
         }
 

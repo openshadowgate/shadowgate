@@ -154,7 +154,10 @@ void positive_effects(object obj)
 {
     int damage;
 
-    damage = roll_dice(clevel, 2);
+    damage = roll_dice(clevel,6);
+
+    if(userp(obj))
+        damage = roll_dice(clevel, 2);
 
     if(obj->query_hp()>(obj->query_max_hp()*3/4))
         return;
