@@ -695,7 +695,7 @@ int calculate_healing() {
        if(TO->is_vampire())
            if(!TO->query_property("inactive"))
            {
-               healing["bloodlust"]--;
+               healing["bloodlust"]-=random(2)+1;
                if(healing["bloodlust"] < 0)
                    healing["bloodlust"] = 0;
            }

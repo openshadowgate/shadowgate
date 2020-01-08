@@ -10,7 +10,9 @@ void create() {
     feat_category("ArcaneSpellcraft");
     feat_name("enchant");
     feat_syntax("enchant ITEM");
-    feat_desc("This feat allows a caster to enchant items with charges of spells they already know. The enchanted item can be used as easily by the caster themselves, as those without training. Creating such an item drains the essence of the mage, however, and should not be taken lightly.");
+    feat_desc("This feat allows a caster to enchant items with charges of spells they already know. The enchanted item can be used as easily by the caster themselves, as those without training. Creating such an item drains the essence of the mage, however, and should not be taken lightly.
+
+Enchanting uses gems as material components. Any gem would do, but it will be destroyed on use.");
     feat_prereq("Mage, Sorcerer, Psion");
     set_target_required(0);
 }
@@ -59,6 +61,15 @@ void execute_feat() {
         write("This object already has magic instilled in it.");
         return 1;
     }
+    if(max(all_inventory(caster)->id("gem"))<1)
+    {
+        write("%^BOLD%^%^RED%^You need a gem in your inventory to focus your magic through.");
+        return;
+    }
+    else
+    {
+        write("%^BOLD%^%^RED%^You will be using "+(filter_array(all_inventory(caster),(:$1->id("gem"):))[0])->query_short()+"%^RESET%^%^BOLD%^%^RED%^ as a material component.");
+    }
     if((string *)TP->query_attackers() != ({}))
     {
         tell_object(TP, "You are far too busy fighting to do that right now!");
@@ -74,7 +85,6 @@ void execute_feat() {
 
 void select_spell(string str, object ob){
     string spell;
-    mapping components;
     string * names;
     object bag;
     int i;
@@ -170,13 +180,22 @@ void spell_level(string str,object ob, string spell, string file, int charges){
 
 void do_enchant(string str,object ob, string spell, string file, int charges, int level, int expdrain){
     int i;
-    mapping components;
     string * names, diamond;
     object bag;
 
     if(str != "yes") {
         write("The enchantment fizzles and is lost.");
         return;
+    }
+
+    if(max(all_inventory(caster)->id("gem"))<1)
+    {
+        write("%^BOLD%^%^RED%^You need a gem in your inventory to focus your magic through.");
+        return;
+    }
+    else
+    {
+        (filter_array(all_inventory(caster),(:$1->id("gem"):))[0])->remove();
     }
 
     if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
@@ -208,9 +227,9 @@ void do_enchant(string str,object ob, string spell, string file, int charges, in
     else
         ob->set("spell type","mage");
     ob->set("level",level);
-    write("%^BOLD%^You lift the "+diamond+" and focus your energy into it.");
-    tell_room(environment(caster),"%^BOLD%^%^RED%^"+caster->QCN+" lifts the "+diamond+" and starts to focus on it.",caster);
-    write("%^BOLD%^You start to cast "+spell+" and focus the energy through the "+diamond+".");
+    write("%^BOLD%^You lift the gem and focus your energy into it.");
+    tell_room(environment(caster),"%^BOLD%^%^RED%^"+caster->QCN+" lifts the gem and starts to focus on it.",caster);
+    write("%^BOLD%^You start to cast "+spell+" and focus the energy through the gem.");
     tell_room(environment(caster),"%^BOLD%^%^RED%^"+caster->QCN+" starts to cast a spell.",caster);
     tell_room(environment(caster),"%^BOLD%^%^YELLOW%^The "+ob->query_short()+" starts to glow.");
 }
