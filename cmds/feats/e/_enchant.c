@@ -172,7 +172,7 @@ void spell_level(string str,object ob, string spell, string file, int charges){
         input_to("spell_level",0,ob,spell,file,charges);
         return;
     }
-    expdrain = (9900*level-5000)/49*charges;
+    expdrain = (9900*level-5000)/89*charges;
     write("%^BOLD%^%^GREEN%^The enchantment is almost prepared, and will drain you of %^RED%^"+expdrain+"%^RED%^ exp.");
     write("Type 'yes' to complete the enchantment, or anything else to cancel.");
     input_to("do_enchant",0,ob,spell,file,charges,level,expdrain);
