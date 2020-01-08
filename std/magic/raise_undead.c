@@ -73,9 +73,13 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
         undead->set_property("minion",caster);
         undead->move(environment(caster));
         undead->serve(caster);
-        undead->set_max_hp(clevel*6+50); //d6
+        undead->set_guild_level("fighter",clevel);
+        undead->set_skill("athletics",clevel);
+        undead->set_skill("perception",clevel);
+        undead->set_level(clevel);
+        undead->set_max_hp(clevel*12+50); //d12
         undead->set_hp(undead->query_max_hp());
-        undead->set_overall_ac(10-clevel);
+        undead->set_overall_ac(5-clevel);
         undead->set_property("spell", TO);
         undead->set_property("spell_creature", TO);
         undead->set_property("keep exp",1);

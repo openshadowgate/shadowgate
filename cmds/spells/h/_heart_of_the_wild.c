@@ -64,10 +64,8 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-    wis_bonus = caster->query_stats("wisdom");
-    wis_bonus = (wis_bonus - 15) / 2;
-    wis_bonus *= 2;
-    blocker->set_block_power(CLEVEL + wis_bonus);
+    wis_bonus = BONUS_D->query_stat_bonus(caster,"wisdom");
+    blocker->set_block_power(CLEVEL + wis_bonus*2);
     blocker->set_ranger_block(1);
     duration = 9 * (int)CLEVEL;
     addSpellToCaster();
@@ -80,7 +78,7 @@ void dest_effect()
 
   if(objectp(caster))
   {
-    tell_object(caster,"%^GREEN%^%^BOLD%^Your loose your protection from the wild.");
+    tell_object(caster,"%^GREEN%^%^BOLD%^Your protection from scrying fades.");
     caster->remove_property_value("spelled", ({TO}) );
   }
   if(objectp(blocker)) blocker->self_destruct();
