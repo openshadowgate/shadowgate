@@ -219,7 +219,7 @@ void negative_effects(object obj)
         if(!obj->reflex_save(clevel))
         {
             tell_object(obj, cm("You feel tired as the cold envelops you."));
-            "/std/effect/status/fatigued"->apply_effect(obj,clevel/18+1);
+            "/std/effect/status/fatigued"->apply_effect(obj,clevel/22+1);
         }
         break;
 
@@ -227,7 +227,7 @@ void negative_effects(object obj)
         if(!obj->reflex_save(clevel))
         {
             tell_object(obj, cm("You feel sickened as the cold reaches your internals."));
-            "/std/effect/status/sickened"->apply_effect(obj,clevel/18+1);
+            "/std/effect/status/sickened"->apply_effect(obj,clevel/22+1);
         }
         break;
 

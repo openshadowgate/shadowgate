@@ -14,13 +14,14 @@ void create(){
     set_long("%^BOLD%^Once a %^BLACK%^fierce %^WHITE%^warrior, this ghostly, %^CYAN%^translucent figure %^WHITE%^still rises to the aid of those in need during troubling times. His white eyes shine with %^BLACK%^grim determination %^WHITE%^as he grips tightly to a sword. Even in death he is a strong and proud man, ready to cut down his enemies and to defend the life of his living allies.%^RESET%^");
     set_hd(4,1);
     set_hp(query_hd()*8);
+    set_class("fighter");
     set_stats("strength",20);
     set_stats("intelligence",8);
     set_stats("wisdom",20);
     set_stats("dexterity",20);
     set_race("human");
     set_damage(2,10);
-    set_attacks_num(2);
+    set_attacks_num(5);
     set_nat_weapon_type("slashing");
     set_gender("other");
     set_overall_ac(4);
@@ -45,13 +46,14 @@ void setup_servant(object caster, int clevel)
     cast = caster;
     level = clevel;
 
+    set_mlevel("fighter",clevel);
     set_guild_level("fighter",clevel);
     set_level(clevel);
     set_hd(clevel,8);
     set_max_hp(clevel*16+100);
     set_hp(query_max_hp());
     set_overall_ac(4-clevel);
-    set_attacks_num(clevel/10+1);
+    set_attacks_num(clevel/8+2);
 
     {
         string deity = caster->query_diety();

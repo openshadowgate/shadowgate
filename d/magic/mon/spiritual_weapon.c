@@ -14,6 +14,7 @@ void create(){
     set_long("%^CYAN%^Spiritual weapon.%^RESET%^");
     set_hd(4,1);
     set_hp(query_hd()*8);
+    set_class("fighter");
     set_stats("strength",20);
     set_stats("intelligence",8);
     set_stats("wisdom",20);
@@ -42,13 +43,14 @@ void setup_servant(object caster, int clevel)
 
     level = clevel;
 
+    set_mlevel("fighter",clevel);
     set_guild_level("fighter",clevel);
     set_level(clevel);
     set_hd(clevel,8);
     set_max_hp(clevel*16+100);
     set_hp(query_max_hp());
     set_overall_ac(4-clevel);
-    set_attacks_num(clevel/10+1);
+    set_attacks_num(clevel/8+2);
     call_out("protect",ROUND_LENGTH);
 }
 
