@@ -17,7 +17,7 @@ void create()
    set_light(1);
    set_property("no teleport",1);
    set_property("no sticks", 1);
-   set_property("no pocket space",1)
+   set_property("no pocket space",1);
    set_property("indoors", 1);
 }
 
