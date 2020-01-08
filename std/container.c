@@ -118,8 +118,7 @@ string describe_living_contents(object *exclude) {
   int death_time;
   mixed *deaths;
 
-  i = sizeof(inv = filter_array(all_inventory(this_object())-exclude,
-				"filter_living", this_object()));
+  i = sizeof(inv = filter_array(all_inventory(this_object())-exclude,"filter_living", this_object()));
   if(!i) return "";
   list = ([]);
   while(i--) {
