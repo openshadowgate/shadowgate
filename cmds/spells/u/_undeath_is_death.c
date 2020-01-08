@@ -14,7 +14,7 @@ void create()
     set_mystery("reaper");
     set_syntax("cast CLASS undeath is death");
     set_damage_desc("positive energy to undead");
-    set_description("A caster draws a circle around herself and channels positive energy ourwards, destroying undead creatures that are not able to withstand it, but not affecting at all those of the strong will.");
+    set_description("A caster draws a circle around herself and channels positive energy ourwards, destroying undead creatures that are not able to withstand it, but not affecting at all those of the strong will. The spell won't affect targets stronger than your caster level.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -39,7 +39,7 @@ void spell_effect(int prof)
     {
         if(!foe->is_undead())
             continue;
-        if(do_save(foe,6))
+        if(do_save(foe,2)||foe->query_level()>clevel)
         {
             tell_object(foe,"%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
             continue;

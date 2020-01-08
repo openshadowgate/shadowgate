@@ -640,16 +640,22 @@ int query_resistance(string res) {
             myres-=TO->query_character_level();
     }
 
-    if(TO->is_undead())
-        if(res == "fire")
-            myres-=TO->query_character_level();
-
     if(FEATS_D->usable_feat(TO,"no fear of the flame") && res == "fire") myres += 10;
     return (myres + EQ_D->gear_bonus(TO, res));
 }
 
 int query_resistance_percent(string res) {
     if(!valid_resistance(res)) return 0; // to avoid throwing errors on any invalid queries. N, 8/15.
+    if(TO->is_undead())
+    {
+        if(res == "fire")
+            return -50;
+        if(TO->is_vampire())
+        {
+            if(res == "divine")
+                return -50;
+        }
+    }
     return resistances["resistance percents"][res];
 }
 

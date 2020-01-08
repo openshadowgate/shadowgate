@@ -14,7 +14,7 @@ void create()
     set_mystery(({"bones","apocalypse"}));
     set_syntax("cast CLASS circle of death");
     set_damage_desc("negative energy to living");
-    set_description("The caster draws a circle around herself and channels negative energy outwards, destroying living creatures that are not able to withstand it, but not affecting at all those of the strong will.");
+    set_description("The caster draws a circle around herself and channels negative energy outwards, destroying living creatures that are not able to withstand it, but not affecting at all those of the strong will. The spell won't affect targets stronger than your caster level.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -39,7 +39,8 @@ void spell_effect(int prof)
     {
         if(do_save(foe,6) ||
            foe->query_property("no death") ||
-           foe->is_undead())
+           foe->is_undead() ||
+           foe->query_level() > clevel)
         {
             tell_object(foe,"%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
             continue;
