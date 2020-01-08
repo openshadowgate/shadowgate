@@ -15,7 +15,7 @@ void create()
     set_mystery("reaper");
     set_damage_desc("divine, paralyzed");
     set_syntax("cast CLASS purge spirit on TARGET");
-    set_description("This spell rips away at the target's spiritual substance, scattering it over a wide area and hampering the target’s ability to reform. A successful save will prevent pluralization.");
+    set_description("This spell rips away at the target's spiritual substance, scattering it over a wide area and hampering the target’s ability to reform. A successful save will prevent paralyzation.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
