@@ -1,20 +1,18 @@
 #include <std.h>
 
+#define CAP_PER_TIER 10
+
 inherit ROOM;
 
-int max_storage_capacity;
+static cell_tier;
 
 void create()
 {
     ::create();
+    cell_tier = 0;
 }
 
-int query_max_storage_capacity()
+set_cell_tier(int x)
 {
-    return max_storage_capacity;
-}
-
-int set_max_storage_capacity(int x)
-{
-    max_storage_capacity = x;
+    cell_tier = x;
 }

@@ -8,6 +8,8 @@
 #include <money.h>
 #include <bank.h>
 
+#define MAX_CELL_TIER 4
+
 mapping account;
 static string current;
 
@@ -48,6 +50,76 @@ int valid_access(string who)
     return 1;
 }
 
+int query_cell_tier(string who, string bank)
+{
+    int tier;
+    if(!who || !bank)
+        return 0;
+    if(current != who)
+    {
+        current = who;
+        if(!account_exists(current))
+        {
+            current = 0;
+            account = 0;
+            return 0;
+        }
+    }
+    else
+        restore_object(DIR_ACCOUNTS+"/"+current);
+
+    if(!account[bank])
+        return 0;
+
+    if(account[bank]["cell_tier"])
+        tier = account[bank]["cell_tier"];
+    else
+        tier = 0;
+
+    tier = tier>MAX_CELL_TIER?MAX_CELL_TIER:tier;
+
+    save_object(DIR_ACCOUNTS+"/"+current);
+    return tier;
+}
+
+int increment_cell_tier(string who, string bank)
+{
+    int tier;
+    if(!who || !bank)
+        return 0;
+    if(current != who)
+    {
+        current = who;
+        if(!account_exists(current))
+        {
+            current = 0;
+            account = 0;
+            return 0;
+        }
+    }
+    else
+        restore_object(DIR_ACCOUNTS+"/"+current);
+
+    if(!account[bank])
+        return 0;
+
+    if(account[bank]["cell_tier"])
+        tier = account[bank]["cell_tier"];
+    else
+        tier = 0;
+
+    tier++;
+
+    if(tier>MAX_CELL_TIER)
+        return 0;
+
+    account[bank]["cell_tier"] = tier;
+
+    save_object(DIR_ACCOUNTS+"/"+current);
+    return tier;
+}
+
+
 mapping query_balance(string who, string bank) {
     mapping ret;
      mapping temp;
@@ -77,7 +149,7 @@ mapping query_balance(string who, string bank) {
     ret = account[bank];
     account[bank]["transaction"] = 0;
     account[bank]["time"] = time();
-    
+
     save_object(DIR_ACCOUNTS+"/"+current);
     return ret;
 }
@@ -125,8 +197,6 @@ int withdraw(string who, string bank, int amount, string type) {
 	}
 	else restore_object(DIR_ACCOUNTS+"/"+current);
     }
-// moved the account checks up to before time check to stop errors if no account
-// *Styx*  11/13/03, last change was 1/18/01
     if(!account) return NO_ACCOUNT;
     if(!account[bank]) return NO_ACCOUNT;
     if(account[bank]["time"] < 873135492)
@@ -185,9 +255,8 @@ int account_exists(string who) {
     else return 0;
 }
 
-string *query_bank_accounts(string who) 
+string *query_bank_accounts(string who)
 {
-    //if(geteuid(previous_object()) != UID_ROOT) return 0;
     if(current != who) {
 	current = who;
 	if(!account_exists(current)) {
