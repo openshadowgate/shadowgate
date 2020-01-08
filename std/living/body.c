@@ -636,8 +636,6 @@ int query_resistance(string res) {
             myres+=TO->query_character_level();
         if(res == "cold")
             myres+=TO->query_character_level();
-        if(res == "silver")
-            myres-=TO->query_character_level();
     }
 
     if(FEATS_D->usable_feat(TO,"no fear of the flame") && res == "fire") myres += 10;
@@ -653,6 +651,8 @@ int query_resistance_percent(string res) {
         if(TO->is_vampire())
         {
             if(res == "divine")
+                return -75;
+            if(res == "silver")
                 return -50;
         }
     }

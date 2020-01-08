@@ -8,7 +8,7 @@ void create() {
     set_mystery("solar");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS solar siege shot on TARGET");
-    set_damage_desc("divine, 4/3 times more to undead, 9/5 times more to vampires");
+    set_damage_desc("divine, 4/3 times more to undead");
     set_description("With this spell conjures a ballista made out of solar energy, and then it takes a shot at your target. Undead take extra damage.");
     set_verbal_comp();
     set_somatic_comp();
@@ -23,9 +23,7 @@ string query_cast_string()
 spell_effect(int prof)
 {
     int dam = sdamage;
-    if(target->is_vampire())
-        dam*=9/5;
-    else if(target->is_undead())
+    if(target->is_undead())
         dam*=5/4;
     spell_successful();
     tell_room(place,"%^BOLD%^%^WHITE%^The ballista makes a shot at "+target->QCN+" and then disappears!");
