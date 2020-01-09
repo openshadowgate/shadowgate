@@ -9,7 +9,7 @@ void create()
     set_spell_name("replay tracks");
     set_spell_level(([ "druid" : 5, "inquisitor" : 4, "psion" : 5, "ranger" : 2 ]));
     set_spell_sphere("divination");
-    set_syntax("cast CLASS replay trakcs");
+    set_syntax("cast CLASS replay tracks");
     set_description("This spell allows you to reconstruct past events that occurred in your current location based on the tracks and other signs left behind. Ability to discern tracks will depend on your power.");
     set_verbal_comp();
     set_somatic_comp();
