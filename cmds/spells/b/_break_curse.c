@@ -11,17 +11,12 @@ void create() {
     set_spell_sphere("abjuration");
     set_spell_domain("magic");
     set_mystery("godclaw");
-    set_syntax("cast CLASS break curse on <object> [at <player>]");
+    set_syntax("cast CLASS break curse on OBJECT [at PLAYER]");
     set_description("This powerful spell will break a curse that has been placed upon a magical item, unravelling the "
-"corrupted weave around it.  Only the most skilled of abjurers can attempt to disentangle enchantments in such a "
-"manner.");
+"corrupted weave around it.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
-     // school specific mage spell
-    set_components(([
-      "mage" : ([ "powdered diamond" : 2, ]),
-    ]));
 	set_helpful_spell(1);
 }
 

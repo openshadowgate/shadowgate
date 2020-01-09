@@ -8,6 +8,11 @@
 inherit SPELL;
 int theProf;
 
+int is_curse()
+{
+    return 1;
+}
+
 void create() {
     ::create();
     set_spell_name("garble");
