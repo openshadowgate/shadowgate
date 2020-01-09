@@ -32,22 +32,22 @@
     "bonus_spell_slots_8", \
     "bonus_spell_slots_9", \
     "shieldMiss", \
-    "fire resistance", \
-    "cold resistance", \
-    "electricity resistance", \
-    "acid resistance", \
-    "sonic resistance", \
-    "bludgeoning resistance", \
-    "piercing resistance", \
-    "slashing resistance", \
-    "silver resistance", \
-    "cold iron resistance", \
-    "positive energy resistance", \
-    "negative energy resistance", \
-    "force resistance", \
-    "divine resistance", \
-    "untyped resistance", \
-    "mental resistance", \
+    "fire resistance",             "fire resistance percent", \
+    "cold resistance",             "cold resistance percent", \
+    "electricity resistance",      "electricity resistance percent", \
+    "acid resistance",             "acid resistance percent", \
+    "sonic resistance",            "sonic resistance percent", \
+    "bludgeoning resistance",      "bludgeoning resistance percent", \
+    "piercing resistance",         "piercing resistance percent", \
+    "slashing resistance",         "slashing resistance percent", \
+    "silver resistance",           "silver resistance percent", \
+    "cold iron resistance",        "cold iron resistance percent", \
+    "positive energy resistance",  "positive energy resistance percent", \
+    "negative energy resistance",  "negative energy resistance percent", \
+    "force resistance",            "force resistance percent", \
+    "divine resistance",           "divine resistance percent", \
+    "untyped resistance",          "untyped resistance percent", \
+    "mental resistance",           "mental resistance percent", \
     "strength", \
     "dexterity", \
     "constitution", \

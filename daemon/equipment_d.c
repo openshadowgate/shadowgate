@@ -38,84 +38,84 @@ Also adding support for some other object checks
 inherit DAEMON;
 
 mapping BONUS_CATS = ([
-                          "saving throw" : ({
-                                  "fortitude",
-                                      "will",
-                                      "reflex"
-                                      }),
-                          "resistances" : ({
-                                  "acid resistance",
-                                      "bludgeoning resistance",
-                                      "cold resistance",
-                                      "damage resistance",
-                                      "divine resistance",
-                                      "electricity resistance",
-                                      "fire resistance",
-                                      "force resistance",
-                                      "magic resistance",
-                                      "mental resistance",
-                                      "negative energy resistance",
-                                      "piercing resistance",
-                                      "positive energy resistance",
-                                      "silver resistance",
-                                      "slashing resistance",
-                                      "sonic resistance",
-                                      "spell damage resistance",
-                                      "untyped resistance",
-                                      "cold iron resistance",
-                                      }),
-                          "stats" : ({
-                                  "charisma",
-                                      "constitution",
-                                      "dexterity",
-                                      "intelligence",
-                                      "wisdom",
-                                      "strength",
-                                      }),
-                          "skills" : ({
-                                  "athletics",
-                                      "craft, armorsmith",
-                                      "craft, jeweller",
-                                      "craft, leatherwork",
-                                      "craft, tailor",
-                                      "craft, weaponsmith",
-                                      "craft, woodworker",
-                                      "dungeoneering",
-                                      "endurance",
-                                      "healing",
-                                      "influence",
-                                      "perception",
-                                      "rope use",
-                                      "spellcraft",
-                                      "stealth",
-                                      "survival",
-                                      "thievery",
-                                      "academics",
-                                      }),
-                          "miscellaneous" : ({
-                                  "attack bonus",
-                                      "bonus level eight spell slots",
-                                      "bonus level five spell slots",
-                                      "bonus level four spell slots",
-                                      "bonus level nine spell slots",
-                                      "bonus level one spell slots",
-                                      "bonus level seven spell slots",
-                                      "bonus level six spell slots",
-                                      "bonus level three spell slots",
-                                      "bonus level two spell slots",
-                                      "bonus level zero spell slots",
-                                      "bonus spell slots",
-                                      "caster level",
-                                      "damage bonus",
-                                      "shieldMiss",
-                                      "sight bonus",
-                                      "light",
-                                      "spell penetration",
-                                      "temporary feats",
-                                      "armor bonus",
-                                      "fast healing",
-                                      "max hp bonus",
-                                      }),]);
+ "saving throw" : ({
+         "fortitude",
+             "will",
+             "reflex"
+             }),
+ "resistances" : ({
+         "acid resistance",                 "acid resistance percent",
+             "bludgeoning resistance",          "bludgeoning resistance percent",
+             "cold resistance",                 "cold resistance percent",
+             "damage resistance",               "damage resistance percent",
+             "divine resistance",               "divine resistance percent",
+             "electricity resistance",          "electricity resistance percent",
+             "fire resistance",                 "fire resistance percent",
+             "force resistance",                "force resistance percent",
+             "magic resistance",                "magic resistance percent",
+             "mental resistance",               "mental resistance percent",
+             "negative energy resistance",      "negative energy resistance percent",
+             "piercing resistance",             "piercing resistance percent",
+             "positive energy resistance",      "positive energy resistance percent",
+             "silver resistance",               "silver resistance percent",
+             "slashing resistance",             "slashing resistance percent",
+             "sonic resistance",                "sonic resistance percent",
+             "spell damage resistance",         "spell damage resistance percent",
+             "untyped resistance",              "untyped resistance percent",
+             "cold iron resistance",            "cold iron resistance percent",
+             }),
+ "stats" : ({
+         "charisma",
+             "constitution",
+             "dexterity",
+             "intelligence",
+             "wisdom",
+             "strength",
+             }),
+ "skills" : ({
+         "athletics",
+             "craft, armorsmith",
+             "craft, jeweller",
+             "craft, leatherwork",
+             "craft, tailor",
+             "craft, weaponsmith",
+             "craft, woodworker",
+             "dungeoneering",
+             "endurance",
+             "healing",
+             "influence",
+             "perception",
+             "rope use",
+             "spellcraft",
+             "stealth",
+             "survival",
+             "thievery",
+             "academics",
+             }),
+ "miscellaneous" : ({
+         "attack bonus",
+             "bonus level eight spell slots",
+             "bonus level five spell slots",
+             "bonus level four spell slots",
+             "bonus level nine spell slots",
+             "bonus level one spell slots",
+             "bonus level seven spell slots",
+             "bonus level six spell slots",
+             "bonus level three spell slots",
+             "bonus level two spell slots",
+             "bonus level zero spell slots",
+             "bonus spell slots",
+             "caster level",
+             "damage bonus",
+             "shieldMiss",
+             "sight bonus",
+             "light",
+             "spell penetration",
+             "temporary feats",
+             "armor bonus",
+             "fast healing",
+             "max hp bonus",
+             }),]);
 
 
 //resistance
@@ -428,6 +428,15 @@ mixed all_active_bonuses(object who, int flag)
             case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
             case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
                 totalBon = who->query_resistance(replace_string(Bonus, " resistance", ""));
+                break;
+            case "fire resistance percent": case "cold resistance percent": case "water resistance percent": case "air resistance percent":
+            case "earth resistance percent": case "bludgeoning resistance percent": case "piercing resistance percent": case "slashing resistance percent":
+            case "silver resistance percent": case "cold iron resistance percent": case "electricity resistance percent": case "acid resistance percent": case "sonic resistance percent":
+            case "positive energy resistance percent": case "negative energy resistance percent": case "force resistance percent": case "divine resistance percent": case "untyped resistance percent":
+            case "mental resistance percent": case "light resistance percent": case "darkness resistance percent": case "nature resistance percent":
+            case "bludgeoning resistance percent": case "piercing resistance percent": case "slashing resistance percent":
+            case "positive energy resistance percent": case "negative energy resistance percent": case "force resistance percent": case "divine resistance percent": case "untyped resistance percent":
+                totalBon = who->query_resistance_percent(replace_string(Bonus, " resistance percent", ""));
                 break;
             case "temporary feats":
                 totalBon = sizeof(who->query_temporary_feats());

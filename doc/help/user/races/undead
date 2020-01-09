@@ -6,15 +6,17 @@
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
 %^ORANGE%^ * Undead body:
 %^ORANGE%^   * No constitution stat, charisma used for hp calculations
-%^ORANGE%^   * No hunger or thirst
 %^ORANGE%^   * No aging, age cathegory is always normal
+%^ORANGE%^   * No hunger or thirst
 %^ORANGE%^   * No diseases
-%^ORANGE%^   * No fatigue
+%^ORANGE%^   * No stamina
+%^ORANGE%^   * Not affected by fatigue and exhaustion
+%^ORANGE%^   + 33% cold resistance
 %^ORANGE%^   - 50% fire resistance
 %^ORANGE%^ * Undead mind:
 %^ORANGE%^   * Immune to standard death effects
 %^ORANGE%^   * Will is always high
-%^ORANGE%^   * Mind-affecting powers always fail on you
+%^ORANGE%^   * Mind-affecting powers damage but don't affect the mind
 %^ORANGE%^ * Innate darkvision and animate dead spells
 %^ORANGE%^ * Effects of negative and positive energy are reversed
 

@@ -180,6 +180,7 @@ void drain_process(object target)
     TP->set_paralyzed(ROUND_LENGTH*8, "%^BOLD%^%^BLACK%^You are held in place %^RED%^feeding%^BLACK%^ of "+target->QCN+"!%^RESET%^
 %^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
     tell_object(TP,"%^BOLD%^%^RED%^Fresh blood runs down your tongue.");
+    tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" leans over "+target->QCN +"'s neck, slurping sound heard from them.",TP);
     tell_object(target,"%^RED%^"+TARGMSGS[random(sizeof(TARGMSGS))]+"%^RESET%^");
     if(!random(7))
         tell_room(ETP,"%^BOLD%^%^RED%^"+TP->QCN+" is leaning over "+target->QCN+"'s neck%^RESET%^",TP);
