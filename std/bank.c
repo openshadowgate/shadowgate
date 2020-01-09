@@ -9,6 +9,8 @@
 
 #define BANK_ID getBankId()
 
+#define PRICE_PER_CELL_TIER 1000
+
 inherit VAULT;
 
 string getBankId();
@@ -37,6 +39,90 @@ void init() {
    add_action("exchange", "exchange");
    add_action("admdeposit", "admdeposit");
    add_action("admwithdraw", "admwithdraw");
+   add_action("cell_action","cell");
+}
+
+object load_cell(object player)
+{
+    object cell;
+
+    if(player->query_property("bank_cell"))
+    {
+        cell=player->query_property("bank_cell");
+    }
+
+    if(!objectp(cell))
+    {
+        cell = new("/std/bank_storage");
+        cell->setup_cell(player,getBankId());
+        cell->load_inventory();
+        cell->set_cell_tier(BANK_D->query_cell_tier(TP->query_name(),getBankId()));
+        player->remove_property("bank_cell");
+        player->set_property("bank_cell",cell);
+    }
+
+    return cell;
+}
+
+int list_cell()
+{
+    if(BANK_D->query_cell_tier(TP->query_name(),getBankId()))
+    {
+        object cell;
+
+        cell = load_cell(TP);
+
+        cell->show_list();
+
+        return 1;
+    }
+    else
+    {
+        tell_object(TP,"Your don't have a cell in this bank.");
+        return 1;
+    }
+
+    return 1;
+}
+
+int upgrade_cell()
+{
+    int tier = BANK_D->query_cell_tier(TP->query_name(),getBankId());
+    if(tier)
+    {
+        int price;
+
+        price=PRICE_PER_CELL_TIER*to_int(pow(10,tier));
+
+        /* if(BANK_D->increment_cell_tier(TP->query_name(),BANK_ID)) */
+        /* { */
+
+        /* } */
+
+    }
+    else
+    {
+        tell_object(TP,"Your don't have a cell in this bank.");
+        return 1;
+    }
+
+    return 1;
+
+}
+
+int cell_action(string str)
+{
+    if(str == "list")
+    {
+        return list_cell();
+    }
+
+    if(str == "upgrade")
+    {
+        return upgrade_cell();
+    }
+
+    return 1;
 }
 
 int exchange(string str) {
