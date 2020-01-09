@@ -14,11 +14,10 @@ void create() {
     set_mystery("whimsy");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS irresistible dance on TARGET");
-    set_damage_desc("-clevel/8 to reflex save")
+    set_damage_desc("-clevel/8 to reflex save");
     set_description("The subject feels an undeniable urge to dance and begins doing so, complete with foot shuffling and tapping. The spell effect makes it hard for the subject to do anything other than caper and prance in place.");
     set_verbal_comp();
     set_somatic_comp();
-    mental_spell(1);
     set_target_required(1);
 }
 
@@ -45,7 +44,7 @@ void spell_effect(int prof) {
     target->set_property("irresistible_dance",1);
     addSpellToCaster();
     call_out("dancing_echo",ROUND_LENGTH*2);
-    duration = (ROUND_LENGTH * 2) * clevel;
+    duration = (ROUND_LENGTH) * clevel;
     call_out("dest_effect",duration);
     spell_successful();
 }
