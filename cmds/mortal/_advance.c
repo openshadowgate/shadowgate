@@ -165,7 +165,7 @@ int can_multiclass(object ob,string myclass) {
         tell_object(ob,"%^RED%^You may not multiclass again.");
         return 0;
     }
-    if(!(level%10)) {
+    if(level%10) {
         tell_object(ob,"%^BOLD%^You can only advance in a different class at 10 level increments, such as level 10, level 20, level 30, etc.");
         return 0;
     }
