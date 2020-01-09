@@ -126,12 +126,11 @@ void spell_effect(int prof)
 
     caster->use_funds("gold",66260);
 
-
     enchantment = fob->query_property("enchantment");
 
     fob->remove_property("enchantment");
     tob->remove_property("enchantment");
-    tob->set_property("enchantment",enchantment);
+    tob->set_property("enchantment",abs(enchantment));
     tell_object(caster,"%^BOLD%^%^MAGENTA%^You place "+fob->query_short()+"%^BOLD%^%^MAGENTA%^ over "+tob->query_short()+"%^BOLD%^%^MAGENTA%^ and melt a golden pile beneath them, the vapor transfers the magic.%^RESET%^");
     tell_room(caster,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" places "+fob->query_short()+"%^BOLD%^%^MAGENTA%^ over "+tob->query_short()+"%^BOLD%^%^MAGENTA%^ and melts a pile of gold beneath them into a vapor that carries magic.%^RESET%^",({caster}));
     dest_effect();
