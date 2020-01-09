@@ -5,7 +5,7 @@ void create() {
     ::create();
     set_spell_name("mass cure light wounds");
     set_spell_level(([ "cleric" : 5,"druid" : 6, "bard" :5 ]));
-    set_affixed_spell_level(5);
+    set_affixed_spell_level(2);
     set_spell_sphere("healing");
     set_syntax("cast CLASS mass cure light wounds on TARGET");
     set_description("This is a stronger version of the priest spell, cure light wounds.  When cast without a target or on "

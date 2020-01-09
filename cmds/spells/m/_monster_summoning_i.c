@@ -14,7 +14,9 @@ create() {
     set_syntax("cast CLASS monster summoning i");
     set_spell_sphere("conjuration_summoning");
     set_description("This spell will summon astral defenders of equivalent power to protect the caster. They will react aggressively to anyone attempting to harm the caster. They will fight till slain, and when the casting time is up, the monsters will vanish.");
-
+    set_verbal_comp();
+    set_somatic_comp();
+    set_helpful_spell(1);
 }
 
 

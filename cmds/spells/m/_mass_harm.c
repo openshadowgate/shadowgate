@@ -12,7 +12,7 @@ void create()
     set_author("ares");
     set_spell_name("mass harm");
     set_spell_level(([ "cleric" : 9 ]));
-    set_affixed_spell_level(9);
+    set_affixed_spell_level(6);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass harm on TARGET");
     set_damage_desc("negative energy");
@@ -133,7 +133,6 @@ void spell_effect(int prof)
 
 int calculate_healing(object targ)
 {
-    define_base_damage(-3);
     return sdamage;
 }
 

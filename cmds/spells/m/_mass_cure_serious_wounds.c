@@ -7,7 +7,7 @@ void create() {
     set_author("ares");
     set_spell_name("mass cure serious wounds");
     set_spell_level(([ "cleric" : 7,"druid" : 8 ]));
-    set_affixed_spell_level(7);
+    set_affixed_spell_level(4);
     set_spell_sphere("healing");
     set_syntax("cast CLASS mass cure serious wounds on TARGET");
     set_description("This is a stronger version of the priest spell, cure serious wounds.  When cast without a target or "

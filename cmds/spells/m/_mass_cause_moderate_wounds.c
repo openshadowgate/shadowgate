@@ -6,7 +6,7 @@ void create() {
     set_author("ares");
     set_spell_name("mass cause moderate wounds");
     set_spell_level(([ "cleric" : 6 ]));
-    set_affixed_spell_level(6);
+    set_affixed_spell_level(3);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass cause moderate wounds [on TARGET]");
     set_description("This is a stronger version of the priest spell, cause moderate wounds.  When cast on a target, it "
