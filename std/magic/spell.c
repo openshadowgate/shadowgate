@@ -1809,6 +1809,11 @@ void define_clevel()
         clevel = max(({caster->query_guild_level("psion"),caster->query_guild_level("psywarrior")}));
     if(spell_type == "monk" && FEATS_D->usable_feat(caster, "elemental attunement"))
         clevel += 5;
+
+    if(FEATS_D->usable_feat(caster, "eldritch conditioning"))
+        if(spell_type == caster->query("eldritch_knight_base_class"))
+            clevel = caster->query_character_level();
+
     if((spell_type == "mage" || spell_type == "sorcerer"))
     {
         if(caster->query_school())
@@ -1841,13 +1846,11 @@ void define_clevel()
                    spell_sphere == "enchantment_charm")
                     clevel+=3;
     }
+
     if(spell_type == "cleric" ||
        spell_type == "druid")
         if(FEATS_D->usable_feat(caster, "mastery of power"))
             clevel += 4;
-    if(FEATS_D->usable_feat(caster, "eldritch conditioning"))
-        if(spell_type == caster->query("eldritch_knight_base_class"))
-            clevel = caster->query_character_level();
 
     if (FEATS_D->usable_feat(caster, "ragecaster"))
     {

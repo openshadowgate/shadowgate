@@ -28,7 +28,7 @@ int load_inventory(string who, string bank)
     int i;
     int rest_status;
 
-    dir = DIR_ACCOUNTS+"/"+bank+"/"+who;
+    dir = DIR_ACCOUNTS+"/cells/"+bank+"/"+who;
     files = get_dir(path+"/ob*");
 
     for (i; i < sizeof(files); i++)
@@ -71,12 +71,43 @@ int load_inventory(string who, string bank)
                 continue;
             }
 
-            ob->move(TO);
+            move_object(ob,TO);
+            //ob->move(TO);
         }
     }
 }
 
 void save_inventory(string who, string bank)
+{
+    string dir;
+    object *inv;
+    string *oldfiles;
+    string fname;
+
+    int i;
+
+    mkdir(DIR_ACCOUNTS+"/cells/"+"/"+bank);
+    mkdir(DIR_ACCOUNTS+"/cells/"+bank+"/"+who);
+
+    dir = DIR_ACCOUNTS+"/cells/"+bank+"/"+who;
+
+    inv = all_inventory(TO);
+    oldfiles = get_dir(path+"/");
+    seteuid(UID_ROOT);
+
+    for(i=0; i<sizeof(oldfiles); i++)
+        rm(dir+"/"+oldfiles[i]);
+
+    setuid(getuid());
+
+    for (i=0; i<sizeof(inv); i++)
+    {
+        fname = dir+"/ob"+i;
+        inv[i]->save_me(fname);
+    }
+}
+
+void show_list(object player)
 {
 
 }
