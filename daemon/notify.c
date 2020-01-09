@@ -33,10 +33,10 @@ varargs void mud_notify(string str, object target, string extra) {
 // disconnecting is currently bugged due to a lack of object to query. Continuing to try and resolve, modifying to prevent bug log spammage in the meantime. N, 3/14.
 // The string that's actually passed from user.c is "disconnected from", so I added that to see if it would stop the errors. ~Circe~ 8/20/15
   if(str == "disconnects from" || str == "disconnected from")
-      message("notify","%^YELLOW%^<< A player has "+str+" the ShadowGate"+extra+".%^YELLOW%^ >>\n%^RESET%^",imms);
+      message("notify","%^YELLOW%^<< A player has "+str+" the ShadowGate"+extra+"%^YELLOW%^ >>\n%^RESET%^",imms);
   else
-      message("notify","%^YELLOW%^<< "+target->query_vis_cap_name()+" has "+str+" the ShadowGate "+extra+".%^YELLOW%^ >>\n%^RESET%^",imms);
-  message("notify","%^YELLOW%^<< Someone has "+str+" the ShadowGate.%^YELLOW%^ >>\n%^RESET%^",players);
+      message("notify","%^YELLOW%^<< "+target->query_vis_cap_name()+" has "+str+" the ShadowGate "+extra+"%^YELLOW%^ >>\n%^RESET%^",imms);
+  message("notify","%^YELLOW%^<< Someone has "+str+" the ShadowGate%^YELLOW%^ >>\n%^RESET%^",players);
   return;
 }
 
