@@ -357,12 +357,12 @@ int read(string str) {
    write(
 @MELNMARN
 
-%^CYAN%^%^BOLD%^Open account%^BLACK%^ ----------------- %^RESET%^: %^CYAN%^Will open an account for you.
-%^CYAN%^BOLD%^Close account%^BLACK%^ ---------------- %^RESET%^: %^CYAN%^Closes your account.
-%^CYAN%^%^BOLD%^Balance%^BLACK%^ ---------------------- %^RESET%^: %^CYAN%^Gives your account balance info.
-%^CYAN%^%^BOLD%^Deposit NUM TYPE%^BLACK%^ ------------- %^RESET%^: %^CYAN%^Deposits NUM of currency of TYPE.
-%^CYAN%^%^BOLD%^Withdraw NUM TYPE%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
-%^CYAN%^BOLD%^Exchange NUM TYPE for TYPE2%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
+%^CYAN%^%^BOLD%^ open account%^BLACK%^ ----------------- %^RESET%^: %^CYAN%^Will open an account for you.
+%^CYAN%^%^BOLD%^ close account%^BLACK%^ ---------------- %^RESET%^: %^CYAN%^Closes your account.
+%^CYAN%^%^BOLD%^ balance%^BLACK%^ ---------------------- %^RESET%^: %^CYAN%^Gives your account balance info.
+%^CYAN%^%^BOLD%^ deposit NUM TYPE%^BLACK%^ ------------- %^RESET%^: %^CYAN%^Deposits NUM of currency of TYPE.
+%^CYAN%^%^BOLD%^ withdraw NUM TYPE%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
+%^CYAN%^%^BOLD%^ exchange NUM TYPE for TYPE2%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
 
 %^BOLD%^A 10% service fee will be charged to all transactions.%^RESET%^
 MELNMARN
