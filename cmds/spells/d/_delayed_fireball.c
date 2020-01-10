@@ -27,7 +27,8 @@ void create()
 
 string query_cast_string()
 {
-    return "%^RED%^"+caster->QCN+" mutters some words while raising a hand, orb of fire grows in it.";
+    tell_room(place, "%^RED%^"+caster->QCN+" mutters some syllables while raising a hand, an orb of fire grows in it.");
+    return "display";
 }
 
 
@@ -45,7 +46,7 @@ void spell_effect(int prof)
     element = "cold";
     tell_object(caster, "%^RED%^Slowly the orb grows bigger.%^RESET%^");
     tell_room(place, "%^RED%^Slowly the orb in "+YOU+"'s hands grows bigger.%^RESET%^", ({caster}) );
-    call_out("zapper",ROUND_LENGTH-1);
+    call_out("zapper",ROUND_LENGTH);
 }
 
 
