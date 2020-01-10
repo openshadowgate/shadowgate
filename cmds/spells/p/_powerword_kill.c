@@ -38,11 +38,6 @@ void spell_effect(int prof) {
     tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" takes in a deep breath and screams the words, 'GRIMMUS MORRTES!!!'",({caster}));
     spell_successful();
     spell_kill(target, caster);
-    if (checkMagicResistance(target,10 - prof/10)) {
-        sendDisbursedMessage(target);
-        dest_effect();
-        return;
-    }
     if (target->query_property("no death") || mind_immunity_damage(target)) {
         tell_object(target,"%^BOLD%^You feel a tug at your life force, but shrug it off easily!");
         tell_room(place,"%^BOLD%^"+target->QCN+" seems to shrug the spell off effortlessly.",({target}));

@@ -90,7 +90,7 @@ void execute_attack()
         tell_room(environment(caster),"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
         if(FEATS_D->usable_feat(caster,"metabolic perfection"))
             sdamage*=5/4;
-        damage_targ(caster,caster->return_target_limb(),-sdamage,"untyped");
+        damage_targ(caster,"torso",-sdamage,"untyped");
     }
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         counter--;

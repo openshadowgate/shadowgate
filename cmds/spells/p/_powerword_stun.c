@@ -45,11 +45,6 @@ void spell_effect(int prof) {
       dest_effect();
       return;
    }
-   if (checkMagicResistance(target,10 - prof/10)) {
-       sendDisbursedMessage(target);
-       dest_effect();
-       return;
-   }
 
    if(mind_immunity_damage(target))
    {

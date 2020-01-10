@@ -30,11 +30,6 @@ void spell_effect(int prof) {
     tell_object(caster,"%^BOLD%^%^GREEN%^You take in a deep breath and scream the words, 'SIGTHUS DISAPPEERUS!!!'");
     tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" takes in a deep breath and screams the words, 'SIGTHUS DISAPPEERUS!!!'",({caster}));
 
-       if (checkMagicResistance(target,10 - prof/10)) {
-       sendDisbursedMessage(target);
-       dest_effect();
-       return;
-   }
 
    if(mind_immunity_damage(target))
    {
