@@ -31,6 +31,7 @@ void create() {
       "mage" : ([ "phosphorus":1, ]),
     ]));
     set_helpful_spell(1);
+    traveling_spell(1);
 }
 
 string query_cast_string() {
@@ -82,7 +83,7 @@ void spell_effect(int prof) {
         wall->set_property("spell",TO);
         wall->set_property("spelled", ({TO}) );
         wall->move(place);
-        wall->surround(caster);
+        wall->surround(caster,TO);
         return;
     }
     switch(element) {

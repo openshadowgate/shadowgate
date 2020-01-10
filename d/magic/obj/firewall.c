@@ -5,6 +5,7 @@ inherit OBJECT;
 int blocking = 0;
 string exitname;
 object caster;
+object spellob;
 int level;
 
 void remove_wall();
@@ -12,7 +13,7 @@ void remove_wall();
 void create() {
    ::create();
    set_name("wall of fire");
-   set_short("A wall of fire");
+   set_short("%^BOLD%^%^RED%^A %^RED%^wall %^RESET%^%^RED%^o%^BOLD%^%^RED%^f %^RED%^fi%^RESET%^%^RED%^r%^BOLD%^%^RED%^e%^RESET%^");
    set_long("%^BOLD%^%^RED%^You see a massive opaque sheet of fire raging wildly upward in shades of %^MAGENTA%^violet %^RED%^and red.");
    set_id( ({"wall","wall of fire","firewall","fire"}) );
    set_weight(10000);
@@ -27,7 +28,7 @@ void init() {
       add_action("damager",exitname);
 }
 
-void surround(object ob) {
+void surround(object ob, object spell) {
    int k,j,dmg;
    object *foes;
    string whose,wallname;
@@ -36,7 +37,8 @@ void surround(object ob) {
    add_action("end_walls","remove");
    foes = caster->query_attackers();
    whose = caster->query_name();
-   level = caster->query_guild_level("mage");
+   level = spell->query_clevel();
+   spellob = spell;
    wallname = whose+"surroundingfirewall";
    if(present(wallname,environment(caster))) {
       tell_object(caster,"The new wall simply melts into the wall that is already surrounding you!\n");
@@ -47,21 +49,21 @@ void surround(object ob) {
    }
    add_id(wallname);
    j = sizeof(foes);
-   for(k=0;k<j;k++) {
-      if(!present(wallname,environment(caster))) continue;
-      if(foes[k]->query_property("strength") &&
-         strsrch(foes[k]->query_property("strength"),"fire") != -1)
-         continue;
-      tell_room(environment(foes[k]),"%^BOLD%^%^RED%^"+foes[k]->query_cap_name()+" is singed by the flames and leaps back as they rise up!",foes[k]);
-      tell_object(foes[k],"%^BOLD%^%^RED%^You get singed by the flames and jump away from "+caster->query_cap_name()+" as they spring up around "+caster->query_objective()+".");
-      if(foes[k]->query_property("undead")) dmg = 4+random(21);
-      else dmg = 2+random(11);
-      foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),dmg,"fire" );
 
-      if(objectp(foes[k]))
-         foes[k]->continue_attack();
-//          foes[k]->set_attackers((object *)foes[k]->query_attackers() -({caster}) );
-//          caster->set_attackers((object *)caster->query_attackers() -({foes[k]}) );
+   if(j)
+       tell_room(environment(foes[k]),"%^BOLD%^%^RED%^"+caster->QCN+"'s enemies are singed by the flames and leaps back as they rise up!",foes[k]);
+   for(k=0;k<j;k++)
+   {
+       if(!present(wallname,environment(caster))) continue;
+       if(foes[k]->query_property("strength") &&
+          strsrch(foes[k]->query_property("strength"),"fire") != -1)
+           continue;
+       dmg = spellob->query_sdamage();
+       tell_object(foes[k],"%^BOLD%^%^RED%^You get burned by the flames!");
+       foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),dmg,"fire" );
+
+       if(objectp(foes[k]))
+           foes[k]->continue_attack();
    }
    call_out("monitor",7);
 }
@@ -71,29 +73,32 @@ void monitor() {
    object *foes;
 
    if((!objectp(caster) || !present(caster->query_name(),ETO)) && !blocking) {
-      if(objectp(query_property("spell"))) {
-         query_property("spell")->dest_effect();
-         return;
-      }
-      remove_call_out("monitor");
-      TO->remove();
+       if(objectp(query_property("spell"))) {
+           query_property("spell")->dest_effect();
+           return;
+       }
+       remove_call_out("monitor");
+       TO->remove();
    }
    if(objectp(caster)) {
-   foes = caster->query_attackers();
-   j = sizeof(foes);
-   for(k=0;k<j;k++) {
-      if(!objectp(foes[k])) continue;
-      if(foes[k]->query_property("strength") &&
-         strsrch(foes[k]->query_property("strength"),"fire") != -1)
-         continue;
-      tell_room(environment(foes[k]),"%^BOLD%^%^RED%^"+foes[k]->query_cap_name()+" is burned by the flames!",foes[k]);
-      tell_object(foes[k],"%^BOLD%^%^RED%^You get burned by the flames!");
-      if(foes[k]->query_property("undead")) dmg = 4+random(21);
-      else dmg = 2+random(11);
-      foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),dmg,"fire" );
-      if(objectp(foes[k]))
-         foes[k]->continue_attack();
-   } }
+       foes = caster->query_attackers();
+       j = sizeof(foes);
+       if(j)
+       {
+           tell_room(environment(foes[k]),"%^BOLD%^%^RED%^"+caster->QCN+"'s enemies are singed by the flames!",foes[k]);
+           for(k=0;k<j;k++) {
+               if(!objectp(foes[k])) continue;
+               if(foes[k]->query_property("strength") &&
+                  strsrch(foes[k]->query_property("strength"),"fire") != -1)
+                   continue;
+               tell_object(foes[k],"%^BOLD%^%^RED%^You get burned by the flames!");
+               dmg = spellob->query_sdamage();
+               foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),dmg,"fire" );
+               if(objectp(foes[k]))
+                   foes[k]->continue_attack();
+           }
+       }
+   }
    call_out("monitor",7);
 }
 
@@ -142,38 +147,38 @@ void remove_wall() {
 }
 
 int damager(string str) {
-   int dmg;
-   if(TP->query_paralyzed() || TP->query_bound() || TP->query_tripped() || TP->query_unconscious()){
-      TP->send_paralyzed_message("info",TP);
-      return 1;
-   }
-   if(caster)
-      if((string)caster->query_name()==(string)TPQN )
-         return 0;
-   if(TP->query_property("strength") && strsrch(TP->query_property("strength"),"fire") != -1 ) {
-      tell_object(TP,"%^BOLD%^%^RED%^You step into the violet inferno, walking calmly through the flames, unharmed.");
-      tell_room(ETP,"%^BOLD%^%^RED%^"+TPQCN+" walks calmly into the violet inferno blocking the "+exitname+", unaffected by the flames.",TP);
-      return 0;
-   }
-   tell_object(TP,"%^BOLD%^%^RED%^You step into the violet inferno, rushing through before the flames engulf you.");
-   tell_room(ETP,"%^BOLD%^%^RED%^"+TPQCN+" rushes into the violet inferno blocking the "+exitname+", as the flames attack "+TP->query_objective()+"!",TP);
-   if(TP->query_property("undead")) dmg = (roll_dice(2,6)+level+level/2)*2;
-   else dmg = roll_dice(2,6)+level+level/2;
-   TP->cause_typed_damage(TP,TP->return_target_limb(),dmg,"fire" );
-   if(TP) TP->continue_attack();
-   return 0;
+    int dmg;
+    if(TP->query_paralyzed() || TP->query_bound() || TP->query_tripped() || TP->query_unconscious()){
+        TP->send_paralyzed_message("info",TP);
+        return 1;
+    }
+    if(caster)
+        if((string)caster->query_name()==(string)TPQN )
+            return 0;
+    if(TP->query_property("strength") && strsrch(TP->query_property("strength"),"fire") != -1 ) {
+        tell_object(TP,"%^BOLD%^%^RED%^You step into the violet inferno, walking calmly through the flames, unharmed.");
+        tell_room(ETP,"%^BOLD%^%^RED%^"+TPQCN+" walks calmly into the violet inferno blocking the "+exitname+", unaffected by the flames.",TP);
+        return 0;
+    }
+    tell_object(TP,"%^BOLD%^%^RED%^You step into the violet inferno, rushing through before the flames engulf you.");
+    tell_room(ETP,"%^BOLD%^%^RED%^"+TPQCN+" rushes into the violet inferno blocking the "+exitname+", as the flames attack "+TP->query_objective()+"!",TP);
+    if(TP->query_property("undead")) dmg = (roll_dice(2,6)+level+level/2)*2;
+    else dmg = roll_dice(2,6)+level+level/2;
+    TP->cause_typed_damage(TP,TP->return_target_limb(),dmg,"fire" );
+    if(TP) TP->continue_attack();
+    return 0;
 }
 
 int end_walls(string str) {
-   if(!caster || (TP != caster))
-      return 0;
-   if(str != "wall")
-      return 0;
-   if(objectp(query_property("spell")))
-      query_property("spell")->dest_effect();
-   return 1;
+    if(!caster || (TP != caster))
+        return 0;
+    if(str != "wall")
+        return 0;
+    if(objectp(query_property("spell")))
+        query_property("spell")->dest_effect();
+    return 1;
 }
 
 int query_blocking(){
-   return blocking;
+    return blocking;
 }
