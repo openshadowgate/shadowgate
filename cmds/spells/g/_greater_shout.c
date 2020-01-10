@@ -13,10 +13,11 @@ void create() {
     set_spell_level(([ "mage" : 8, "bard" : 6 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS greater shout on TARGET");
+    set_damage_desc("sonic");
     set_description("Like shout, greater shout allows for the mage to magically enchant and enhance his voice, to deliver "
 "a devastating sonic attack against one target, but with more power added to his voice through the use of the "
 "enchantments of this spell.  The amplified voice can knock some targets off balance for a moment, forcing them to spend "
-"some time for the ringing in their ears to pass.");
+"some time for the ringing in their ears to pass. Successful save will cause half damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -32,7 +33,7 @@ void spell_effect(int prof) {
     int num;
     string target_limb;
     spell_successful();
-    
+
     if (environment(caster) != environment(target)) {
         tell_object(caster,"Your target has left your range.\n");
         dest_effect();
@@ -49,7 +50,7 @@ void spell_effect(int prof) {
         tell_room(place,"%^CYAN%^%^BOLD%^"+caster->QCN+"'s voice"+
 			" is magically amplified as "+caster->QS+" shouts at"+
 			" "+target->QCN+"!",({ caster, target}) );
-				
+
     } else {
         tell_object(target,"%^CYAN%^%^BOLD%^"+caster->QCN+"'s voice"+
 		" is magically amplified as "+caster->QS+" shouts at you!"+
@@ -67,7 +68,8 @@ void spell_effect(int prof) {
 		"blasted with the sonic waves of "+caster->QCN+"'s "+
 		"shout.", ({ target}) );
         		damage_targ(target, target_limb, sdamage,"sonic");
-			target->set_paralyzed(random(7)+15,"%^BOLD%^%^MAGENTA%^Your ears are ringing!");
+                target->set_paralyzed(roll_dice(1,3)*8,"%^BOLD%^%^MAGENTA%^Your ears are ringing!");
+
 
     } else {
         tell_object(target,"%^BOLD%^%^MAGENTA%^You are blasted by the sonic"+
