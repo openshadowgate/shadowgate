@@ -10,7 +10,7 @@ void create()
     set_syntax("cast CLASS shades on SPELL_NAME [on SPELL_ARGS]");
     set_description("You tap energy from the Plane of Shadow to cast a quasi-real, illusory version of a conjuration mage spell of 8th level or lower.
 
-%^BOLD%^%^RED%^E.G.%^RESET%^ <cast mage scpectres on seamantle>");
+%^BOLD%^%^RED%^E.G.%^RESET%^ <cast mage shades on seamantle>");
     set_arg_needed(1);
 }
 
