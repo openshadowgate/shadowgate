@@ -1,8 +1,3 @@
-// Offer.c
-// Created by Grayhawk@ShadowGate
-// June 16, 1995
-// Modified by Thundercracker on Sept. 5, 1996
-
 #include <std.h>
 #include "/d/shadowgate/dieties.h"
 
@@ -58,15 +53,10 @@ int cmd_offer(string str) {
         if (TP->query_verbose_combat()) {
             if (god != "") {
                 write("You raise "+ob->query_short()+" %^RESET%^high in the air and a bolt of lightning crashes down upon it, sending it to "+god+".");
-/* changing so that someone else having verbose on doesn't spam the rest *Styx* 3/2/03
-                tell_room(ETP,this_player()->query_cap_name()+" raises "+ob->query_short()+" high into the air and a bolt of lightning crashes down upon it, sending it to "+god+".",TP);
-*/
+
                 tell_room(ETP,TPQCN+" offers "+ob->query_short()+" to "+god+".", TP);
             } else {
                 write("You raise "+ob->query_short()+" %^RESET%^high in the air and a bolt of lightning crashes down upon it, destroying it.");
-/* changing so that someone else having verbose on doesn't spam the rest *Styx* 3/2/03
-                tell_room(ETP,this_player()->query_cap_name()+" raises "+ob->query_short()+" high into the air and a bolt of lightning crashes down upon it, destroying it.",TP);
-*/
                 tell_room(ETP,TPQCN+" offers "+ob->query_short()+".",TP);
             }
         } else {
@@ -88,13 +78,24 @@ int cmd_offer(string str) {
 }
 
 int help() {
-    write("Syntax: %^BOLD%^%^GREEN%^offer %^RED%^<object>\n"+
-          "        %^BOLD%^%^GREEN%^offer %^RED%^<object>%^MAGENTA%^ to %^CYAN%^<god>\n"+
-          "%^RESET%^%^BOLD%^This command will offer an object, if it's within\n"+
-          "your inventory, to the gods in good faith.\n"+
-      "The second version offers it to a specific god of the realm.\n"+
-      "Note that putting items that are normally not offerable into other items"+
-      " is illegal.\n"+
-      "%^RESET%^See also: offerall\n");
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+offer - dispose of something
+
+%^CYAN%^SYNTAX%^RESET%^
+
+offer %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [to %^ORANGE%^%^ULINE%^GOD%^RESET%^]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This will destroy %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ in your inventory displaying a fancy message. Destroying objects heals 1d5 hp. You can specify a %^ORANGE%^%^ULINE%^GOD%^RESET%^ if you wish so, but it gives no mechanical benefits.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+offerall, drop, get, inventory
+"
+        );
     return 1;
 }
