@@ -215,15 +215,25 @@ void flag_stolen(object obj, int difficulty){
 }
 
 void help() {
-    message("help", "Syntax: <steal [item] from [being]>\n"
-            "The steal command allows you to steal objects from other "
-            "players and monsters.  A fight can automatically ensue if "
-            "a monster becomes aware of your attempt.  And you never "
-            "know what a player might do.  The command is sometimes "
-            "successfull, and sometimes the victim or others might notice, "
-            "or sometimes no one will notice at all.  It all depends "
-            "on your ability to steal, the lighting, and other factors.\n",
-            this_player());
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+steal - optimize someone's intentory
+
+%^CYAN%^SYNTAX%^RESET%^
+
+steal %^ORANGE%^%^ULINE%^ITEM%^RESET%^ from %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This will attempt to repossess %^ORANGE%^%^ULINE%^ITEM%^RESET%^ in %^ORANGE%^%^ULINE%^TARGET%^RESET%^'s inventory into your inventory. Success of this action depends on your thievery skill, lightning condition, targets perception and some other factors. Stolen item will be marked as such and can be then fenced out at thieves guild for guild credits, or sold for money.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+thievery, perception, skills, pp, glance, spy, thief, stab, stealth
+"
+        );
 }
 int check_caught(int roll, object target, object ob, int sLevel){
     int test;

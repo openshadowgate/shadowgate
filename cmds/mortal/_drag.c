@@ -72,15 +72,21 @@ int cmd_drag(string str){
 int help(){
    write(
 @OLI
-   
-   drag
-   
-   Usage: drag <unconscious or bound player>
-      This allows a player to drag an unconscious or bound player 
-   with him/her.  You can use either race or recognized name for
-   the target.
-   
-See also:  drop, gag, ungag, bind, unbind, submit
+%^CYAN%^NAME%^RESET%^
+
+drag - drag something
+
+%^CYAN%^SYNTAX%^RESET%^
+
+drag %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This allows you to pick and drag someone. They must be unconscious or bound. You can use either race or recognized name for the target.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+drop, bind, unbind, gag, ungag, pkilling, submit
 OLI
       );
    return 1;
