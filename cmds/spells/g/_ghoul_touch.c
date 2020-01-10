@@ -87,6 +87,7 @@ spell_effect(int prof) {
                  POISON_D->can_be_poisoned(attacker)))
             {
                 object eff = "/std/effect/status/sickened"->apply_effect(attacker,roll_dice(1,6));
+                tell_object(attacker,"%^BLUE%^You sense contents of your stomach desire to leave it.");
                 if(objectp(eff))
                     eff->set_poison();
             }

@@ -13,13 +13,13 @@ void remove_wall();
 void create() {
    ::create();
    set_name("wall of fire");
-   set_short("%^BOLD%^%^RED%^A %^RED%^wall %^RESET%^%^RED%^o%^BOLD%^%^RED%^f %^RED%^fi%^RESET%^%^RED%^r%^BOLD%^%^RED%^e%^RESET%^");
+   set_short("%^BOLD%^%^RED%^A %^RESET%^%^MAGENTA%^w%^BOLD%^%^RED%^all %^RESET%^%^MAGENTA%^o%^BOLD%^%^RED%^f %^RESET%^%^MAGENTA%^f%^BOLD%^%^RED%^ire%^RESET%^");
    set_long("%^BOLD%^%^RED%^You see a massive opaque sheet of fire raging wildly upward in shades of %^MAGENTA%^violet %^RED%^and red.");
    set_id( ({"wall","wall of fire","firewall","fire"}) );
    set_weight(10000);
    set_value(0);
    set_property("no animate",1);
-}
+ }
 
 void init() {
    ::init();
