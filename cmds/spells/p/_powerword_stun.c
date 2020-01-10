@@ -22,7 +22,6 @@ void create() {
     set_verbal_comp();
     set_silent_casting(1);
     set_target_required(1);
-    set_save("will");
 }
 
 void spell_effect(int prof) {
@@ -66,17 +65,17 @@ void spell_effect(int prof) {
       tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, slightly dazed by the power of your spell!");
       tell_object(target,"%^BOLD%^You reel backward, slightly dazed by the power of "+caster->QCN+"'s spell!");
       tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, slightly dazed by the power of "+caster->QCN+"'s spell!",({caster, target}));
-      target->set_paralyzed(roll_dice(4,2)*4,"The force of the spell has left you stunned.");
+      target->set_paralyzed(roll_dice(1,2)*8,"The force of the spell has left you stunned.");
    }else if(x>50){
       tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, stunned by the power of your spell!");
       tell_object(target,"%^BOLD%^You reel backward, stunned by the power of "+caster->QCN+"'s spell!");
       tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, stunned by the power of "+caster->QCN+"'s spell!",({caster, target}));
-      target->set_paralyzed(roll_dice(8,2)*4,"The force of the spell has left you stunned.");
+      target->set_paralyzed(roll_dice(1,4)*8,"The force of the spell has left you stunned.");
    }else{
       tell_object(caster,"%^BOLD%^"+target->QCN+" reels backward, completely stunned by the power of your spell!");
       tell_object(target,"%^BOLD%^You reel backward, completely stunned by the power of "+caster->QCN+"'s spell!");
       tell_room(place,"%^BOLD%^"+target->QCN+" reels backward, completely stunned by the power of "+caster->QCN+"'s spell!",({caster, target}));
-      target->set_paralyzed(roll_dice(8,2)*6,"The force of the spell has left you stunned.");
+      target->set_paralyzed(roll_dice(1,8)*8,"The force of the spell has left you stunned.");
    }
    spell_successful();
    dest_effect();
