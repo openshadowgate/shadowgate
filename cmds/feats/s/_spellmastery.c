@@ -25,12 +25,13 @@ void create() {
     feat_category("MagicDamage");
     feat_name("spellmastery");
     feat_syntax("spellmastery [SPELLNAME]");
-    feat_prereq("Not warlock, Not psion, Not psywarrior, Not monk");
     feat_desc("When selecting the SpellMastery feat, the character will be prompted to pick a spell that they are able to cast. From that point forward the character will be able to cast that spell at will at any time without needing components or memorization. Only spells of 1st and 2nd level may be picked for SpellMastery. If you have more than one class able to use the same spell, the power of the SpellMastery (as well as armor checks, etc) will be based upon the highest of these.
 
 <spellmastery> without an argument will display currently spellmastered spell.
 
-%^BOLD%^N.B.%^RESET%^ Spellmastery is not connected to <master> in any way. It just allows you to cast the spell without memorization. You still have to know the spell to cast it, have it in your spellbook, mastered or in your spell list.");
+%^BOLD%^N.B.%^RESET%^ Spellmastery is not connected to <master> in any way. It just allows you to cast the spell without memorization. You still have to know the spell to cast it, have it in your spellbook, mastered or in your spell list.
+
+%^BOLD%^N.B.%^RESET%^ Psions, Monks and Warlocks spells are not affected by this feat.");
 
     permanent(1);
     allow_tripped(1);
@@ -89,13 +90,6 @@ int prerequisites(object ob){
     int i;
     if(!objectp(ob)) { return 0; }
 
-    if(ob->is_class("warlock")||
-       ob->is_class("monk")||
-       ob->is_class("psion")||
-       ob->is_class("psywarrior"))
-    {
-        return 0;
-    }
     classes = (string *)ob->query_classes();
     for(i=0;i<sizeof(classes);i++)
     {
