@@ -99,7 +99,7 @@ void execute_attack(){
     {
         define_base_damage(0);//reroll each turn
         tell_room(place,"%^BOLD%^%^RED%^Flames around "+caster->QCN+" burn "+caster->QP+" enemies!",({caster,target}));
-        tell_object(caster,"%^BOLD%^%^RED%^Flames of your fire field burn your enemies!");
+        tell_object(caster,"%^BOLD%^%^RED%^Flames of your fire shield burn your enemies!");
 
         define_base_damage(0);
         for(i=0;i<sizeof(attackers);i++){
