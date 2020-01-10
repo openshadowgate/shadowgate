@@ -8,7 +8,7 @@ string whoname, whocname, cname, Ccname;
 void create() {
     ::create();
     set_spell_name("sending");
-    set_spell_level(([ "psion" : 2, "inquisitor" : 4 ]));
+    set_spell_level(([ "psion" : 2, "inquisitor" : 4, "mage" : 5, "cleric" : 4 ]));
     set_discipline("telepath");
     set_spell_sphere("divination");
     set_syntax("cast CLASS sending to TARGET");
