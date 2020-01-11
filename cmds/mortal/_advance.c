@@ -666,6 +666,8 @@ int cmd_advance(string myclass){
    //advancing in ancient times. It defines highest level player is
    //allowed to be
 
+
+
    if(regexp(myclass,"[a-z]+ special"))
    {
        pick_mage_school("",TP);
