@@ -34,11 +34,7 @@ int preSpell() {
 
 spell_effect(int prof) {
     int bonus,mylevel;
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    mylevel = clevel;
     mytarg = target;
     bonus = mylevel/6;
     bonus = -1*bonus;
@@ -152,7 +148,7 @@ void confuse_em(object mytarg){
 
 void dest_effect() {
     if(find_call_out("confuse_em")) remove_call_out("confuse_em");
-//added the below check for objectp after environment bugs when the 
+//added the below check for objectp after environment bugs when the
 //target had died.  Circe 9/19/05
     if(objectp(mytarg)){
        tell_object(mytarg,"%^MAGENTA%^Suddenly, your mind clears and "+

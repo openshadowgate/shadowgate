@@ -71,11 +71,9 @@ void spell_effect(int prof) {
      return 0;
   }
 */
-  if(caster->is_class("psywarrior")){ //shouldn't be possible, but better safe...
-     mylevel = caster->query_guild_level("psywarrior");
-  }else{
-     mylevel = caster->query_guild_level("psion");
-  }
+
+  mylevel = clevel;
+
   if(!caster->query_invis()){
      tell_room(place,"%^BOLD%^%^BLACK%^A muted %^RESET%^%^RED%^p"+
         "%^ORANGE%^r%^YELLOW%^i%^RESET%^%^GREEN%^s%^CYAN%^m"+

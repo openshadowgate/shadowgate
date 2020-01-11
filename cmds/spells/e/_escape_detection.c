@@ -44,7 +44,7 @@ void create() {
 }
 
 int preSpell() {
-    if(!query_arg()){ 
+    if(!query_arg()){
         target = caster;
         return 1;
     }else{
@@ -110,11 +110,9 @@ void spell_effect(int prof) {
     }
     int_bonus = caster->query_stats(casting_stat);
     int_bonus = int_bonus-10;
-    if(caster->is_class("psion")){
-       mylevel = caster->query_guild_level("psion");
-    }else{
-       mylevel = caster->query_guild_level("psywarrior");
-    }
+
+    mylevel = clevel;
+
     power = mylevel + int_bonus + random(6);
     blocker->set_block_power(power);
     duration = 9 * mylevel;
@@ -124,7 +122,7 @@ void spell_effect(int prof) {
 }
 
 void dest_effect() {
-  
+
     if(objectp(target)) target->remove_property_value("spelled", ({TO}) );
     if(objectp(blocker)) blocker->self_destruct();
     ::dest_effect();

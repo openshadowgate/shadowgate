@@ -27,7 +27,7 @@ void create() {
 }
 
 int preSpell()
-{    
+{
     if(objectp(target) && target->query_property(CASTER->query_name() + "_biting_cold"))
     {
         tell_object(caster,"You have already summoned biting cold to torment that target!");
@@ -47,26 +47,22 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
-   counter = mylevel/10;
-   if(counter < 1) counter = 1;
-   counter += 2;
-   if(interactive(caster)){
-      tell_object(caster,"%^CYAN%^You open your mind, forming a conduit to channel "
-         "sheer %^BOLD%^cold%^RESET%^%^CYAN%^ that concentrates in your palm.%^RESET%^");
-      tell_room(place, "%^CYAN%^"+caster->QCN+"'s palm glows a %^BLUE%^f%^BOLD%^r"
-         "%^RESET%^%^CYAN%^o%^BOLD%^s%^WHITE%^ty %^CYAN%^b%^RESET%^%^CYAN%^l%^BOLD%^"
-         "%^BLUE%^u%^RESET%^%^BLUE%^e %^CYAN%^that intensifies to a brilliant %^BOLD%^"
-         "%^WHITE%^wh%^CYAN%^i%^WHITE%^te%^RESET%^%^CYAN%^.%^RESET%^", ({caster}) );
-      call_out("zapper",4);
-   }else{
-      zapper();
-   }
-   spell_successful();
+     mylevel = clevel;
+     counter = mylevel/10;
+     if(counter < 1) counter = 1;
+     counter += 2;
+     if(interactive(caster)){
+          tell_object(caster,"%^CYAN%^You open your mind, forming a conduit to channel "
+                      "sheer %^BOLD%^cold%^RESET%^%^CYAN%^ that concentrates in your palm.%^RESET%^");
+          tell_room(place, "%^CYAN%^"+caster->QCN+"'s palm glows a %^BLUE%^f%^BOLD%^r"
+                    "%^RESET%^%^CYAN%^o%^BOLD%^s%^WHITE%^ty %^CYAN%^b%^RESET%^%^CYAN%^l%^BOLD%^"
+                    "%^BLUE%^u%^RESET%^%^BLUE%^e %^CYAN%^that intensifies to a brilliant %^BOLD%^"
+                    "%^WHITE%^wh%^CYAN%^i%^WHITE%^te%^RESET%^%^CYAN%^.%^RESET%^", ({caster}) );
+          call_out("zapper",4);
+     }else{
+          zapper();
+     }
+     spell_successful();
 }
 
 void zapper(){
@@ -80,7 +76,7 @@ void zapper(){
       return;
    }
    counter--;
-   damage = roll_dice(mylevel, 5); 
+   damage = roll_dice(mylevel, 5);
    tell_room(place,"%^BOLD%^%^CYAN%^A blast of %^RESET%^%^BLUE%^a%^BOLD%^r%^RESET%^"
       "%^CYAN%^c%^BOLD%^t%^RESET%^i%^BOLD%^c e%^RESET%^n%^BOLD%^%^CYAN%^e%^RESET%^"
       "%^CYAN%^r%^BOLD%^%^BLUE%^g%^RESET%^%^BLUE%^y %^BOLD%^%^CYAN%^explodes from "
@@ -96,7 +92,7 @@ void zapper(){
 
    if(do_save(target,0)) {
 /*
-      if(evade_splash(target)){ 
+      if(evade_splash(target)){
          tell_object(target,"%^RESET%^%^CYAN%^Your reflexes are so fast, you avoid the incoming arctic blast!%^RESET%^");
          tell_room(place,"%^RESET%^%^CYAN%^"+target->QCN+" dodges quickly, avoiding the incoming arctic blast!%^RESET%^",target);
          return;
@@ -104,7 +100,7 @@ void zapper(){
 */
       damage = damage/2;
    }
-    
+
    tell_object(target,"%^BOLD%^%^BLUE%^The %^RESET%^%^BLUE%^a%^BOLD%^r%^RESET%^"
       "%^CYAN%^c%^BOLD%^t%^RESET%^i%^BOLD%^c %^RESET%^b%^BOLD%^%^CYAN%^l%^RESET%^"
       "%^CYAN%^a%^BOLD%^%^BLUE%^s%^RESET%^%^BLUE%^t %^BOLD%^slams into you, "
@@ -117,7 +113,7 @@ void zapper(){
       "%^CYAN%^o%^RESET%^%^CYAN%^r%^BOLD%^%^BLUE%^!%^RESET%^",target);
    damage_targ(target,"torso",damage,"cold");
    if(!do_save(target,0)){ //if they fail a second save, they are chilled
-//      if(!evade_splash(target)){ 
+//      if(!evade_splash(target)){
          tell_object(target,"%^BOLD%^%^WHITE%^The %^CYAN%^chill%^WHITE%^ saps your strength, making it difficult to move!%^RESET%^");
          tell_object(caster,"%^BOLD%^%^WHITE%^The %^CYAN%^chill%^WHITE%^ seeps into "+target->QCN+"'s bones, slowing "+target->QO+"!%^RESET%^");
          target->set_disable((mylevel/4),target);
@@ -137,19 +133,19 @@ void zap_again()
        return;
    }
    if(!present(target,environment(caster)))
-   { 
+   {
       target->remove_property_value("added short",({ "%^CYAN%^( chilled )%^RESET%^"}));
       target->remove_property(CASTER->query_name() + "_biting_cold");
    }
-   if(counter < 1) 
+   if(counter < 1)
    {
        dest_effect();
        return;
    }
    counter--;
-   damage = roll_dice(mylevel,4); 
+   damage = roll_dice(mylevel,4);
    if(do_save(target,0)) {
-/*      if(evade_splash(target)){ 
+/*      if(evade_splash(target)){
          tell_object(target,"%^RESET%^%^CYAN%^Your reflexes are so fast, you avoid the incoming arctic blast!%^RESET%^");
          tell_room(place,"%^RESET%^%^CYAN%^"+target->QCN+" dodges quickly, avoiding the incoming arctic blast!%^RESET%^",target);
          return;
@@ -168,7 +164,7 @@ void zap_again()
 }
 
 void dest_effect(){
-   if(objectp(target)){ 
+   if(objectp(target)){
       tell_object(target,"%^RESET%^%^ORANGE%^Warmth returns to your body, allowing you to move more freely.%^RESET%^");
       target->remove_property_value("added short",({ "%^CYAN%^( chilled )%^RESET%^"}));
       target->remove_property(CASTER->query_name() + "_biting_cold");

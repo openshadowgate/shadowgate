@@ -29,11 +29,7 @@ void create() {
 }
 
 void spell_effect(int prof) {
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+     mylevel = clevel;
 
     tell_object(caster,"%^BOLD%^%^MAGENTA%^You summon an ectoplasmic swarm "+
        "that fills the area!%^RESET%^");
@@ -72,9 +68,9 @@ void execute_attack() {
        }
     }
     foes -= ({caster});
-    if(caster->query_followers()) 
+    if(caster->query_followers())
        foes -= caster->query_followers();
-   
+
     foes = target_filter(foes);
 
     j = sizeof(foes);
@@ -118,7 +114,7 @@ void execute_attack() {
         }
         time+=1;
         if (present(caster,place) && caster != target) {
-            environment(caster)->addObjectToCombatCycle(TO,1);        
+            environment(caster)->addObjectToCombatCycle(TO,1);
         } else {
           dest_effect();
         }

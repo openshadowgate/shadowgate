@@ -1,7 +1,7 @@
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
-#include <daemons.h> 
+#include <daemons.h>
 
 inherit SPELL;
 
@@ -9,7 +9,7 @@ void create() {
     ::create();
     set_spell_name("hostile empathic transfer");
     set_spell_level(([ "psywarrior" : 3 ]));
-    set_syntax("cast CLASS hostile empathic transfer"); 
+    set_syntax("cast CLASS hostile empathic transfer");
     set_description("By manifesting this power, the psionic character is able "
        "to transfer some of his own injuries to his foes. The amount of hit "
        "points healed cannot exceed the manifester's maximum hit points. The "
@@ -25,17 +25,13 @@ void spell_effect(int prof) {
     string target_limb;
     object *foes;
 
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+    mylevel = clevel;
 
     foes = all_living(environment(caster));
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    
+
     foes = target_filter(foes);
-    
+
     if (member_array(caster,foes) != -1) foes -= ({ caster });
 
     if(!sizeof(foes)){
@@ -44,7 +40,7 @@ void spell_effect(int prof) {
     }
 
     spell_successful();
-    
+
     if (interactive(caster)) {
         tell_object(caster,"%^RESET%^%^ORANGE%^You gaze at your foes intently, "
            "preparing to show them the meaning of pain!%^RESET%^");
@@ -78,9 +74,9 @@ void spell_effect(int prof) {
     }
     cap = mylevel*2; //capping healing at 3 HP per caster level; adjusted to 2 HP per level ~Circe~ 1/11/16
 //    tell_object(caster,"Running tally = "+mytally+". Cap = "+cap+"."); //for testing/debugging
-    if(mytally > cap){ 
+    if(mytally > cap){
        mytally = cap;
-//       tell_object(caster, "Healing "+mytally+" hit points."); 
+//       tell_object(caster, "Healing "+mytally+" hit points.");
     }
     mytally = mytally*-1;
     tell_object(caster,"%^YELLOW%^You feel a rush of healing as you "

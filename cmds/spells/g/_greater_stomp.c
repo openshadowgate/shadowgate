@@ -30,7 +30,7 @@ void create(){
     set_aoe_message("%^RESET%^%^MAGENTA%^(shaken by earth tremors)%^RESET%^");
 }
 
-string query_cast_string(){ 
+string query_cast_string(){
    tell_object(caster,"%^RESET%^%^RED%^You gather your psychic reserves, "
       "preparing for your attack.%^RESET%^");
    tell_room(place,"%^RESET%^%^RED%^"+caster->QCN+" raises "+caster->QP+" foot "
@@ -40,11 +40,9 @@ string query_cast_string(){
 
 void spell_effect(int prof){
    mycaster = caster;
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+
+   mylevel = clevel;
+
    tell_room(PLACE,"%^BOLD%^%^RED%^"+caster->QCN+" stomps "+caster->QP+" "+
       "foot, and the rumble of the %^BLACK%^ground%^RED%^ is matched by the "
       "psychic growl in your mind!%^RESET%^",caster);
@@ -53,7 +51,7 @@ void spell_effect(int prof){
     caster->set_property("spelled", ({TO}));
     storm_room = PLACE;
     addSpellToCaster();
-    spell_successful();    
+    spell_successful();
 }
 
 void execute_attack(){
@@ -84,7 +82,7 @@ void execute_attack(){
    if(sizeof(foes)){
       tell_room(storm_room,"%^YELLOW%^The earth ripples beneath you, throwing "
          "up debris and making footing treacherous!%^RESET%^");
-      for(i=0;i<sizeof(foes);i++){ 
+      for(i=0;i<sizeof(foes);i++){
          if(foes[i] == mycaster) { continue; }
          if(!storm_effects(foes[i])) { continue; }
       }
@@ -117,7 +115,7 @@ int storm_effects(object obj){
         tell_object(obj,"%^ORANGE%^The debris grazes you, but you "+
          "avoid the worst of it!%^RESET%^");
         tell_room(room,"%^ORANGE%^"+obj->QCN+" dodges the worst of "+
-         "the debris!%^RESET%^",obj);        
+         "the debris!%^RESET%^",obj);
         damage_targ(obj,obj->return_target_limb(),sdamage/2,"bludgeoning");
    }else{
       tell_object(obj,"%^BOLD%^%^RED%^The debris from the unsettled earth "+
@@ -148,7 +146,7 @@ int trip_em(object obj){
 }
 
 void dest_effect(){
-    if(objectp(mycaster)){ 
+    if(objectp(mycaster)){
         tell_room(environment(mycaster),"%^CYAN%^The psychic grumbling subsides as the earth grows still.%^RESET%^");
     }
     ::dest_effect();

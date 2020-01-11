@@ -96,11 +96,7 @@ void spell_effect(int prof)
       caster->remove_paralyzed();
       caster->force_me("wear armor");
       spell_successful();
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+      mylevel = clevel;
       call_out("dest_effect",mylevel*16);
 }
 

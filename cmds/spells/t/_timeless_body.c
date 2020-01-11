@@ -41,11 +41,9 @@ int preSpell() {
 
 void spell_effect(int prof)
 {
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+
+    mylevel = clevel;
+
     targ = CASTER;
     if(!FEATS_D->usable_feat(targ,"armored manifester")){
        if (!targ->is_ok_armour("mage")){

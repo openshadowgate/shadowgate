@@ -47,11 +47,7 @@ void spell_effect(int prof) {
          "flashes across "+caster->QCN+"%^RESET%^%^GREEN%^'s skin as "+caster->QS+" "
          "manifests a power.%^RESET%^",caster);
     }
-    if(caster->is_class("psion")){
-       mylevel = caster->query_guild_level("psion");
-    }else{
-       mylevel = caster->query_guild_level("psywarrior");
-    }
+    mylevel = clevel;
     mybonus = (mylevel/2) + 1;
 //    caster->add_skill_bonus("stealth",mybonus);
     caster->set_property("chameleoned",mybonus);

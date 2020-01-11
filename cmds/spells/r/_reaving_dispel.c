@@ -40,15 +40,11 @@ void spell_effect(int prof){
       dest_effect();
       return;
    }
-   if(!caster->ok_to_kill(target)) {   
+   if(!caster->ok_to_kill(target)) {
       dest_effect();
       return;
    }
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+   mylevel = clevel;
 
    tell_object(caster,"%^BOLD%^%^BLUE%^You focus your %^CYAN%^gaze %^BLUE%^on "+target->QCN+" and seek to unravel the m%^CYAN%^a%^BLUE%^gi%^RESET%^c%^BOLD%^%^BLUE%^al pr%^RESET%^o%^BOLD%^%^BLUE%^te%^CYAN%^c%^BLUE%^ti%^RESET%^%^CYAN%^o%^BOLD%^%^BLUE%^ns surrounding "+target->QO+".%^RESET%^");
    tell_object(target,"%^BOLD%^%^BLUE%^"+caster->QCN+"'s eyes flash %^RESET%^s%^BOLD%^i%^RESET%^%^CYAN%^lv%^BOLD%^e%^RESET%^%^CYAN%^r%^RESET%^y %^CYAN%^bl%^BOLD%^u%^RESET%^%^CYAN%^e %^BOLD%^%^BLUE%^as "+caster->QS+" focuses "+caster->QP+" %^CYAN%^gaze %^BLUE%^on you.%^RESET%^");

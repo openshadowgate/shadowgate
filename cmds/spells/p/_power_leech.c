@@ -25,11 +25,7 @@ void spell_effect(int prof) {
     object env;
     damage = 0;
     spell_successful();
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    mylevel = clevel;
     max = mylevel/2;
     if(max < 1) max = 1; //shouldn't be possible, but better safe than sorry
     if(max > 25) max = 25;
@@ -61,7 +57,7 @@ void spell_effect(int prof) {
     if(mybonus > 8) mybonus = 8;
 /*    if ((caster->is_class("psion")&&sizeof((string *)caster->query_classes())==1)?(int)caster->Thaco(0,target,0) <= roll_dice(1,20)+5:(int)caster->Thaco(0,target,0) <= roll_dice(1,20)) {*/
     if ((caster->is_class("psion")&&sizeof((string *)caster->query_classes())==1)?(int)caster->Thaco(0,target,0,"cleric") <= roll_dice(1,20)+10+mybonus:(int)caster->Thaco(0,target,0,"cleric") <= roll_dice(1,20)+5+mybonus) {
-//Changed the roll above because the power *never* hit.  This seems balanced 
+//Changed the roll above because the power *never* hit.  This seems balanced
 //after testing.  I will continue watching and adjust as needed.  Circe 11/27/07
        tell_object(target,"%^BOLD%^%^BLACK%^As "+caster->QCN+" touches "+
           "you, you feel your body wracked with pain!");
@@ -82,7 +78,7 @@ void spell_effect(int prof) {
         tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" fails to touch "+target->QCN+"!", ({target, caster}));
         tell_object(caster,"%^BOLD%^%^BLACK%^You fail to touch "+target->QCN+"!");
         spell_kill(target, caster);
-    } 
+    }
     dest_effect();
 }
 

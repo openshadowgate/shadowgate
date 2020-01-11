@@ -99,11 +99,9 @@ void spell_effect(int prof){
       caster->set_property("truevenom",1);
       caster->remove_paralyzed();
       spell_successful();
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+
+      mylevel = clevel;
+
       call_out("dest_effect",(((mylevel/10)+1)*ROUND_LENGTH));
 }
 

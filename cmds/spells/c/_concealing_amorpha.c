@@ -1,4 +1,4 @@
-//Took away the material component...blink does not have one and 
+//Took away the material component...blink does not have one and
 //is more powerful than this spell.  Circe 8/21/05
 #include <std.h>
 #include <spell.h>
@@ -77,11 +77,7 @@ void spell_effect(int prof) {
     spell_successful();
     addSpellToCaster();
     call_out("test",2);
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    mylevel = clevel;
     if(FEATS_D->usable_feat(TO,"slippery caster")) {
     call_out("dest_effect",(mylevel*20 * 1.33));
     return;
@@ -92,7 +88,7 @@ void spell_effect(int prof) {
 
 void test(){
     int armor;
-    if (!objectp(TO) || !objectp(caster))  
+    if (!objectp(TO) || !objectp(caster))
         return;
     if(FEATS_D->usable_feat(caster,"armored manifester")){
        armor = 0;
@@ -105,7 +101,7 @@ void test(){
        if(objectp(TO)) TO->remove();
        return;
     }
-    call_out("test", 5); 
+    call_out("test", 5);
 }
 
 void dest_effect() {

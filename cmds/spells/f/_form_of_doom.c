@@ -40,11 +40,7 @@ int preSpell() {
 }
 
 void spell_effect(int prof) {
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+   mylevel = clevel;
    tell_room(environment(caster),"%^BOLD%^%^BLACK%^The s%^RESET%^h%^RED%^a"
       "%^BOLD%^%^RED%^d%^RESET%^%^RED%^o%^RESET%^w%^BOLD%^%^BLACK%^s %^BOLD%^"
       "%^BLACK%^embrace "+caster->QCN+", caressing "+caster->QO+" before "

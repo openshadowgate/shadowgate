@@ -34,7 +34,7 @@ int preSpell() {
 		tell_object(caster,"You can't cast this while mounted.");
 		return 0;
 	}
-    if((int)caster->query_property("flying")) 
+    if((int)caster->query_property("flying"))
     {
         tell_object(caster,"You are already skating!");
         return 0;
@@ -43,15 +43,12 @@ int preSpell() {
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
-    if(caster->is_class("psion"))
-    {
-        mylevel = caster->query_guild_level("psion");
-    }else{
-        mylevel = caster->query_guild_level("psywarrior");
-    }
+
+    mylevel = clevel;
+
     duration = (ROUND_LENGTH * 10) * mylevel;
     tell_object(caster,"%^RESET%^%^CYAN%^You direct your mental energies "
                 "toward your legs, preparing to glide across the ground.%^RESET%^");

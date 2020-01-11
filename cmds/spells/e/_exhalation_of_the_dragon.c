@@ -18,7 +18,7 @@ void dest_effect();
 void more_fire();
 
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("exhalation of the dragon");
@@ -35,7 +35,7 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     if(FEATS_D->usable_feat(caster,"eschew materials"))
     {
@@ -48,26 +48,26 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int mynum, mylevel;
     string thetarg, realname, args, mytype, mycolor, savetype;
     damage = 0;
-    
-    if (!arg) 
+
+    if (!arg)
     {
         tell_object(caster,"You need to specify a target and a type for this power!");
         dest_effect();
         return;
     }
-    
-    if (sscanf(arg,"%s as %s",thetarg,args) != 2) 
+
+    if (sscanf(arg,"%s as %s",thetarg,args) != 2)
     {
         tell_object(CASTER,"You need to specify both your target and the type of dragon.");
         dest_effect();
         return;
     }
-    
+
     if(thetarg == "attacker")
     {
         target = caster->query_current_attacker();
@@ -98,20 +98,20 @@ void spell_effect(int prof)
         }
     }
 
-    if(environment(caster) != environment(target)) 
+    if(environment(caster) != environment(target))
     {
         tell_object(caster,"Your target has left your range.\n");
         dest_effect();
         return;
     }
-    
+
     if(member_array(args,MYTYPES) == -1)
     {
         tell_object(caster,"That is not a valid type!");
         dest_effect();
         return;
     }
-    
+
     spell_successful();
 
     if(args == "random")
@@ -119,41 +119,40 @@ void spell_effect(int prof)
         mynum = random(4);
         args = MYTYPES[mynum];
     }
-    
+
     switch(args)
     {
-    case "white": 
-    
+    case "white":
+
         mytype = "%^BOLD%^%^WHITE%^wh%^RESET%^i%^BOLD%^te dr%^RESET%^a%^BOLD%^gon";
         mycolor = "%^BOLD%^%^WHITE%^wh%^RESET%^i%^BOLD%^te";
         savetype = "cold";
         break;
-        
-    case "bronze": 
-    
+
+    case "bronze":
+
         mytype = "%^RESET%^%^ORANGE%^br%^YELLOW%^o%^RESET%^%^ORANGE%^nze d%^YELLOW%^r%^RESET%^%^ORANGE%^ag%^YELLOW%^o%^RESET%^%^ORANGE%^n";
         mycolor = "%^RESET%^%^ORANGE%^br%^YELLOW%^o%^RESET%^%^ORANGE%^nze";
         savetype = "electricity";
         break;
-        
-    case "red": 
-    
+
+    case "red":
+
         mytype = "%^RESET%^%^RED%^r%^BOLD%^e%^RESET%^%^RED%^d d%^BOLD%^r%^RESET%^%^RED%^ag%^YELLOW%^o%^RESET%^%^RED%^n";
         mycolor = "%^RESET%^%^RED%^cr%^BOLD%^i%^RESET%^%^RED%^ms%^YELLOW%^o%^RESET%^%^RED%^n";
         savetype = "fire";
         break;
-        
-    default: 
-    
+
+    default:
+
         mytype = "%^RESET%^si%^BOLD%^l%^RESET%^ve%^BOLD%^r %^RESET%^dr%^BOLD%^a%^RESET%^g%^BOLD%^o%^RESET%^n";
         mycolor = "%^RESET%^si%^BOLD%^l%^RESET%^ve%^BOLD%^r";
         savetype = "sonic";
         break;
     }
-    
-    if(caster->is_class("psion")) { mylevel = caster->query_guild_level("psion"); }
-    else { mylevel = caster->query_guild_level("psywarrior"); }
-    
+
+    mylevel = clevel;
+
     damage = sdamage;
 
     target_limb = target->return_target_limb();
@@ -165,7 +164,7 @@ void spell_effect(int prof)
     tell_room(place,"%^RESET%^%^CYAN%^"+caster->QCN+"'s visage transforms into that of a "+mytype+" %^RESET%^%^CYAN%^"
         "as "+caster->QS+" breathes forth a line of "+mycolor+" energy%^RESET%^%^CYAN%^ at "+target->QCN+"!%^RESET%^",({caster, target}));
 
-    if(do_save(target,0)) 
+    if(do_save(target,0))
     {
         damage = damage/2;
         tell_object(caster,"%^RESET%^%^CYAN%^The "+mycolor+" energy %^RESET%^%^CYAN%^"
@@ -190,11 +189,11 @@ void spell_effect(int prof)
             "strikes "+target->QCN+" with an audible crack, unleashing the full force of "
             ""+caster->QCN+"'s attack!%^RESET%^",({caster,target}));
         damage_targ(target, target_limb, damage, savetype);
-       
+
         switch(args)
         {
         case "white":
-        
+
             tell_object(target,"%^BOLD%^%^WHITE%^The wh%^RESET%^i%^BOLD%^te "
                 "energy freezes the ground beneath you, causing you to slip!%^RESET%^");
             tell_room(place,"%^BOLD%^%^WHITE%^The wh%^RESET%^i%^BOLD%^te energy "
@@ -202,9 +201,9 @@ void spell_effect(int prof)
                 "to slip!%^RESET%^",target);
             target->set_tripped(1,"You are struggling to regain your footing!");
             break;
-            
+
         case "bronze":
-        
+
             tell_object(target,"%^RESET%^%^ORANGE%^The %^RESET%^%^ORANGE%^br"
                 "%^YELLOW%^o%^RESET%^%^ORANGE%^nze energy erupts in a blinding "
                 "%^YELLOW%^flash%^RESET%^%^ORANGE%^, leaving you blinking in panic!%^RESET%^");
@@ -214,9 +213,9 @@ void spell_effect(int prof)
             if(target->query_blind() || target->query_temporary_blinded()) { break; }
             else { target->set_temporary_blinded(roll_dice(2,4)); }
             break;
-            
+
         case "red":
-        
+
             tell_object(target,"%^RESET%^%^RED%^The fi%^YELLOW%^e%^RESET%^%^RED%^ry "
             "ene%^BOLD%^r%^RESET%^%^RED%^gy scorches your flesh, leaving you "
             "writhing in pain!%^RESET%^");
@@ -225,13 +224,13 @@ void spell_effect(int prof)
             "leaving "+target->QO+" writhing in pain!%^RESET%^",target);
             call_out("more_fire",ROUND_LENGTH);
             break;
-                       
+
         //because the silver dragon's attack is technically a fear-based/mind-affecting spell, it requires extra checks
-        default:  
-          
+        default:
+
             if(race_immunity_check(target, "fear silent"))
             {
-                if((string)target->query_race() == "human" && (string)target->query("subrace") == "attayan") 
+                if((string)target->query_race() == "human" && (string)target->query("subrace") == "attayan")
                 {
                     tell_object(target,"%^BOLD%^%^WHITE%^You feel the energy of the "
                         "%^RESET%^%^si%^BOLD%^l%^RESET%^ve%^BOLD%^r "
@@ -243,7 +242,7 @@ void spell_effect(int prof)
                         "%^RESET%^dr%^BOLD%^a%^RESET%^gon %^BOLD%^breath!%^RESET%^",target);
                 }
                 else
-                {                
+                {
                     tell_object(target, "%^BOLD%^%^WHITE%^You fight off the secondary effects "
                         "of the %^RESET%^%^si%^BOLD%^l%^RESET%^ve%^BOLD%^r %^RESET%^dr%^BOLD%^a"
                         "%^RESET%^gon %^BOLD%^breath!%^RESET%^");
@@ -278,20 +277,20 @@ void spell_effect(int prof)
 }
 
 
-void more_fire() 
+void more_fire()
 {
     death_check(target);
-    if(!objectp(target)) 
-    {   
+    if(!objectp(target))
+    {
         dest_effect();
         return;
-    }    
+    }
     tell_object(target,"%^RESET%^%^RED%^The f%^BOLD%^i%^RESET%^%^RED%^re flares again, scorching your skin!%^RESET%^");
     tell_room(environment(target),"%^RESET%^%^RED%^F%^BOLD%^i%^RESET%^%^RED%^re flares on "
         ""+target->QCN+", scorching "+target->QP+" skin!%^RESET%^",target);
     define_base_damage(-2);
     damage_targ(target, target_limb, sdamage, savetype);
-    if(!target && objectp(TO)) 
+    if(!target && objectp(TO))
     {
         TO->remove();
         return;
@@ -300,7 +299,7 @@ void more_fire()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

@@ -76,11 +76,7 @@ void spell_effect(int prof) {
         TO->remove();
 		return;
     }
-    if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-    }else{
-      mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
 
     ids = target->query_id();
     if(member_array("crystal ball", ids)== -1) {

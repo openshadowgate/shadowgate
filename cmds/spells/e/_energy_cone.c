@@ -78,15 +78,11 @@ void spell_effect(int prof){
     }
     foes = ({});
     ownparty = ({});
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    mylevel = clevel;
     if (environment(caster) != environment(target)) {
         tell_object(caster,"Your target has left your range.\n");
         dest_effect();
-        return;    
+        return;
     }
     damage = roll_dice(mylevel,6);
 
@@ -120,7 +116,7 @@ void spell_effect(int prof){
     foes += all_inventory(place);
     foes = filter_array(foes, "is_non_immortal", FILTERS_D);
 
-    if(!sizeof(foes)) 
+    if(!sizeof(foes))
     {
         dest_effect();
         return;
@@ -139,7 +135,7 @@ void spell_effect(int prof){
     foes -= ({caster});
     foes = target_filter(foes);
 
-    if (caster->query_followers()) 
+    if (caster->query_followers())
         foes -= caster->query_followers();
     tell_object(caster,""+color+"You summon a latent energy inside your "+
        "mind and send forth a wave of "+energy+" into "+target->QCN+"!");
@@ -171,7 +167,7 @@ void spell_effect(int prof){
              damage_targ(foes[num], foes[num]->return_target_limb(), to_int(damage/2),dam_type);
           }
           if(!stop) break;
-       }    
+       }
     }
     dest_effect();
 }

@@ -48,11 +48,9 @@ void spell_effect(int prof){
 void make_sword(){
     object ob, thing;
     int dam;
-    if(caster->is_class("psion")){
-       mylevel = caster->query_guild_level("psion");
-    }else{
-       mylevel = caster->query_guild_level("psywarrior");
-    }
+
+    mylevel = clevel;
+
     tell_object(caster,"%^RESET%^%^CYAN%^You fix the image of a "
        "sword in your mind and wave your hand, pulling together "
        "strands of e%^MAGENTA%^c%^CYAN%^to%^BOLD%^p%^RESET%^%^CYAN%^"

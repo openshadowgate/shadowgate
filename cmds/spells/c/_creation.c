@@ -38,11 +38,7 @@ void spell_effect(int prof) {
     object ob;
     int i,num, mylevel;
     num = 0;
-    if(caster->is_class("psywarrior")){
-       mylevel = caster->query_guild_level("psywarrior");
-    }else{
-       mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
     switch(mylevel){
        case 0..9: num = 1;
                    break;

@@ -29,11 +29,9 @@ void spell_effect(int prof) {
       dest_effect();
       return;
     }
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+
+    mylevel = clevel;
+
     mytargs =  all_living(place);
     mytargs -= ({caster});
     mytargs = target_filter(mytargs);

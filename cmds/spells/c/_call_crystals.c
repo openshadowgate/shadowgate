@@ -23,15 +23,15 @@ void create() {
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     return "%^ORANGE%^"+caster->QCN+" closes "+caster->QP+" eyes and "+
        "tosses a striated gem upon the ground!";
 }
 
-int preSpell() 
+int preSpell()
 {
-    if (present(caster->query_name()+" summoned 2", place)) 
+    if (present(caster->query_name()+" summoned 2", place))
     {
         tell_object(caster,"You have crystals under your control already.");
         return 0;
@@ -39,16 +39,12 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object ob,*attackers=({});
     int i,j,num_crystals,mylevel;
 
-    if(caster->is_class("psywarrior")){
-       mylevel = caster->query_guild_level("psywarrior");
-    }else{
-       mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
     num_crystals = mylevel/4;
     if(num_crystals < 2) { num_crystals = 2; }
     if(num_crystals > 8) { num_crystals = 8; }
@@ -98,7 +94,7 @@ void spell_effect(int prof)
     addSpellToCaster();
 }
 
-void check() 
+void check()
 {
     object *attackers=({}),*tmp=({});
     int i,j;
@@ -147,7 +143,7 @@ void check()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     int i;
 

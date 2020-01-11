@@ -50,13 +50,7 @@ void spell_effect(int prof) {
 
     caster = query_caster();
     place = query_place();
-    if(caster->is_class("psywarrior")){
-//This shouldn't be accessible to psywarriors generally, but coding in case of avatars, etc.
-       mylevel = caster->query_guild_level("psywarrior");
-    }else{
-       mylevel = caster->query_guild_level("psion");
-    }
-    clevel = mylevel + 10;
+    mylevel = clevel + 10;
     arg = query_arg();
 
     spell_successful();

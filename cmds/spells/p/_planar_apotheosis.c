@@ -40,11 +40,7 @@ int preSpell() {
 
 void spell_effect(int prof) {
    mytype = arg;
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+   mylevel = clevel;
    duration = (ROUND_LENGTH * 10) * mylevel;
    myresist = (mylevel/2) + 5; //lower than other resistance spells because it is lower level and grants specific resistances as well. Adjust if needed.
    if(mytype == "fiendish"){

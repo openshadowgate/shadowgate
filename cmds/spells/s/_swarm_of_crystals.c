@@ -31,13 +31,9 @@ string query_cast_string() {
 
 void spell_effect(int prof) {
 
-	object *SpellMasterySpells = ({});
+    object *SpellMasterySpells = ({});
 
-    if(caster->is_class("psywarrior")){
-        mylevel = caster->query_guild_level("psywarrior");
-    }else{
-        mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
     hits = ({});
     ownparty = ({});
 
@@ -97,17 +93,17 @@ void spell_effect(int prof) {
     if(pointerp(target->query_attackers())) hits += target->query_attackers();
     hits -= ({caster});
     hits -= ({ target });
-    
+
     hits = target_filter(hits);
 
     size = random(mylevel);
-    for (i = 0;i < sizeof(hits);i++) 
+    for (i = 0;i < sizeof(hits);i++)
     {
-        if(!objectp(hits[i])) { continue; }        
+        if(!objectp(hits[i])) { continue; }
         if(random(2)) { continue; }
 
         effect = sdamage;
-		if(is_sm) effect = effect / 2;
+        if(is_sm) effect = effect / 2;
         if(do_save(hits[i],0)) {
             effect = to_int(effect/2);
         }
@@ -130,8 +126,8 @@ void spell_effect(int prof) {
 }
 
 void next_zap(int prof) {
-	int MyDam;
-	object *SpellMasterySpells;
+    int MyDam;
+    object *SpellMasterySpells;
     if (!caster || !objectp(caster) || !target || !objectp(target)) {
         dest_effect();
         return;
@@ -144,15 +140,15 @@ void next_zap(int prof) {
               ""+target->QCN+", leaving him in agony!",target );
     tell_object(target, "%^RESET%^%^MAGENTA%^The crystal shards dig deeper into "+
                 "your skin, leaving you in agony!");
-	MyDam = sdamage;
-	if(is_sm) MyDam = MyDam / 2;
-	damage_targ(target, "torso", MyDam,"slashing");
+    MyDam = sdamage;
+    if(is_sm) MyDam = MyDam / 2;
+    damage_targ(target, "torso", MyDam,"slashing");
     dest_effect();
     return;
 }
 
 void dest_effect() {
-	object *SpellMasterySpells;
+    object *SpellMasterySpells;
     if (find_call_out("next_zap") != -1)
         remove_call_out("next_zap");
     if (target && objectp(target)) {
@@ -162,21 +158,21 @@ void dest_effect() {
                     "simply vanish!");
     }
     if(objectp(caster))
-	{
-		if(sizeof(SpellMasterySpells = caster->query_property("spellmastery_spells"))) 
-		{
-			if(member_array(TO, SpellMasterySpells) != -1)
-			{
-				SpellMasterySpells -= ({TO});
-				caster->remove_property("spellmastery_spells");
-				if(sizeof(SpellMasterySpells)) 
-				{
-					caster->set_property("spellmastery_spells",
-                                         SpellMasterySpells);	
-				}
-			}
-		}
-	}
-	::dest_effect();
+    {
+        if(sizeof(SpellMasterySpells = caster->query_property("spellmastery_spells")))
+        {
+            if(member_array(TO, SpellMasterySpells) != -1)
+            {
+                SpellMasterySpells -= ({TO});
+                caster->remove_property("spellmastery_spells");
+                if(sizeof(SpellMasterySpells))
+                {
+                    caster->set_property("spellmastery_spells",
+                                         SpellMasterySpells);
+                }
+            }
+        }
+    }
+    ::dest_effect();
     if(objectp(TO)) TO->remove();
 }

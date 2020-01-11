@@ -27,9 +27,9 @@ void create() {
     set_helpful_spell(1);
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
-    if(!objectp(caster) || !objectp(place)) 
+    if(!objectp(caster) || !objectp(place))
     {
         dest_effect();
         return;
@@ -39,11 +39,9 @@ void spell_effect(int prof)
         if(objectp(TO)) TO->remove();
         return 0;
     }
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+
+    mylevel = clevel;
+
     //caster = CASTER;
     //place = PLACE;
     portal = new(SPELL_OBJ_DIR+"genesis_portal");
@@ -67,11 +65,11 @@ void spell_effect(int prof)
 void dest_effect() {
     if (find_call_out("dest_effect"))
         remove_call_out("dest_effect");
-	if(!objectp(portal)) 
-	{ 
-		::dest_effect(); 
+	if(!objectp(portal))
+	{
+		::dest_effect();
             if(objectp(TO)) TO->remove();
-		return; 
+		return;
 	}
     portal->end_magic();
     if(!objectp(place))

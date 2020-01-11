@@ -23,7 +23,7 @@ void create() {
 }
 
 int preSpell(){
-    if(caster->query_stoneSkinned() || caster->query_property("iron body")){ 
+    if(caster->query_stoneSkinned() || caster->query_property("iron body")){
         tell_object(caster,"You already have protection of this nature!");
         return 0;
     }
@@ -31,46 +31,42 @@ int preSpell(){
 }
 
 void spell_effect(int prof) {
-   int mylevel;
-   ::spell_effect();
-   tell_room(environment(caster),"%^RESET%^%^GREEN%^As "+caster->QCN+" closes "
-      ""+caster->QP+" eyes and breathes deeply, "+caster->QP+" visible skin "
-      "begins changing, sprouting rich, %^ORANGE%^brown %^GREEN%^v%^ORANGE%^e"
-      "%^GREEN%^i%^ORANGE%^n%^GREEN%^s and taking on the hue of a l%^RESET%^"
-      "%^ORANGE%^i%^GREEN%^v%^ORANGE%^i%^RESET%^%^GREEN%^ng o%^ORANGE%^a%^GREEN%^k!%^RESET%^",caster);
-   tell_object(caster,"%^RESET%^%^GREEN%^As you turn your focus within, your "
-     "skin begins to morph into l%^RESET%^%^ORANGE%^i%^GREEN%^v%^ORANGE%^i"
-     "%^RESET%^%^GREEN%^ng o%^ORANGE%^a%^GREEN%^k, granting you strength "
-     "and protection!%^RESET%^");
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
-    if(caster->query_stats("strength") > 29){
-       mybonus = 0;
-    }else if(caster->query_stats("strength") > 28){
-       mybonus = 1;
-    }else{
-       mybonus = 2;
-    }
-    if(mybonus){
-       caster->add_stat_bonus("strength",mybonus);
-       caster->add_stat_bonus("dexterity",-2); //if they get a strength bonus, they get the dexterity negative
-    }
+     int mylevel;
+     ::spell_effect();
+     tell_room(environment(caster),"%^RESET%^%^GREEN%^As "+caster->QCN+" closes "
+               ""+caster->QP+" eyes and breathes deeply, "+caster->QP+" visible skin "
+               "begins changing, sprouting rich, %^ORANGE%^brown %^GREEN%^v%^ORANGE%^e"
+               "%^GREEN%^i%^ORANGE%^n%^GREEN%^s and taking on the hue of a l%^RESET%^"
+               "%^ORANGE%^i%^GREEN%^v%^ORANGE%^i%^RESET%^%^GREEN%^ng o%^ORANGE%^a%^GREEN%^k!%^RESET%^",caster);
+     tell_object(caster,"%^RESET%^%^GREEN%^As you turn your focus within, your "
+                 "skin begins to morph into l%^RESET%^%^ORANGE%^i%^GREEN%^v%^ORANGE%^i"
+                 "%^RESET%^%^GREEN%^ng o%^ORANGE%^a%^GREEN%^k, granting you strength "
+                 "and protection!%^RESET%^");
+     mylevel = clevel;
+     if(caster->query_stats("strength") > 29){
+          mybonus = 0;
+     }else if(caster->query_stats("strength") > 28){
+          mybonus = 1;
+     }else{
+          mybonus = 2;
+     }
+     if(mybonus){
+          caster->add_stat_bonus("strength",mybonus);
+          caster->add_stat_bonus("dexterity",-2); //if they get a strength bonus, they get the dexterity negative
+     }
 
-    caster->set_property("spelled",({TO}));
-    caster->set_property("iron body",1);
-    caster->set_property("damage resistance",10); //iron body is 15
-    caster->set_property("poison immunity",1);
-    caster->set_resistance("fire",-5);
-    addSpellToCaster();
-    spell_successful();
-    call_out("dest_effect", 1800 + (mylevel * 10));
+     caster->set_property("spelled",({TO}));
+     caster->set_property("iron body",1);
+     caster->set_property("damage resistance",10); //iron body is 15
+     caster->set_property("poison immunity",1);
+     caster->set_resistance("fire",-5);
+     addSpellToCaster();
+     spell_successful();
+     call_out("dest_effect", 1800 + (mylevel * 10));
 }
 
 void dest_effect() {
-   if(objectp(caster) && objectp(environment(caster))) 
+   if(objectp(caster) && objectp(environment(caster)))
    {
       tell_room(environment(caster),"%^RESET%^%^ORANGE%^"+caster->QCN+"'s skin glows "
       "and flickers before the %^GREEN%^o%^ORANGE%^a%^GREEN%^k%^ORANGE%^e%^GREEN%^n "

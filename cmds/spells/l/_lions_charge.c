@@ -40,11 +40,7 @@ void spell_effect(int prof) {
         tell_object(caster,"%^RESET%^%^ORANGE%^With a mighty roar, "
            "you leap toward "+target->QCN+"!%^RESET%^");
     }
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+    mylevel = clevel;
     tell_object(target,"%^RESET%^%^ORANGE%^"+caster->QCN+" gives a "
        "mighty roar and leaps toward you!%^RESET%^");
     tell_room(place,"%^RESET%^%^ORANGE%^"+caster->QCN+" gives a mighty roar "
