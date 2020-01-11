@@ -31,7 +31,7 @@ int cmd_unremember(string str){
        TP->set_rem_rooms(remmap, remsort);
        tell_object(TP, "You concentrate and forget the location "+where+".");
     }
-
+    
     if(what == "object"){
         if(!remmap = TP->query_rem_obs())
            remmap = ([ ]);
@@ -54,25 +54,8 @@ int cmd_unremember(string str){
 }
 
 void help() {
-     write(
-"
-%^CYAN%^NAME%^RESET%^
-
-unremember - forget something
-
-%^CYAN%^SYNTAX%^RESET%^
-
-unremember location|object %^ORANGE%^%^ULINE%^NAME%^RESET%^
-
-%^CYAN%^DESCRIPTION%^RESET%^
-
-This allows you to forget locations and objects you have previvously remembered.
-
-If you're looking to how to forget preared spell check %^ORANGE%^<help forget>%^RESET%^.
-
-%^CYAN%^SEE ALSO%^RESET%^
-
-remember, recall, forget, nickname
-"
-          );
+    write(SYNTAX+"\n"+
+          "<location|object> is the type of what you're trying to " +
+          "forget, and <remembered label> is what you remembered it as."+
+          "\nSee Also:  remember, recall");
 }

@@ -53,7 +53,7 @@ int cmd_remember(string str) {
         // Why do we still have this...?
         // -g 12/10/2002?
         if (!stringp(obname)) return notify_fail("Remember what as that?\n");
-        // Change by Grazzt 8/22/98
+        // Change by Grazzt 8/22/98     
         if ( !ob = present(obname,TP) )
             if ( !ob = present(obname,environment(TP)) )
                 return notify_fail("You don't see that object "+
@@ -64,7 +64,7 @@ int cmd_remember(string str) {
             remembered = ([ ]);
         if (!sortrem = TP->query_rem_obs_sort() )
             sortrem = ({});
-/*
+/*            
         if(member_array(name,sortrem) > -1)
             return notify_fail("You already remembered something as "+
                 "that!\n");
@@ -93,28 +93,10 @@ void shorten( int newsize ) {
 }
 
 void help() {
-    write(
-"
-%^CYAN%^NAME%^RESET%^
-
-remember - memorize things
-
-%^CYAN%^SYNTAX%^RESET%^
-
-remember here as %^ORANGE%^%^ULINE%^NAME%^RESET%^
-remember %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ as %^ORANGE%^%^ULINE%^NAME%^RESET%^
-
-%^CYAN%^DESCRIPTION%^RESET%^
-
-This command allows you to remember locations and objects.
-
-You can remember only location you are currently in, with word 'here' used as a keyword.
-
-To list currently remembered locations use %^ORANGE%^<recall>%^RESET%^.
-
-%^CYAN%^SEE ALSO%^RESET%^
-
-recall, unremember, nickname, forget
-"
-        );
+    write("Syntax: remember here|<object name> as <name>\n\n" +
+          "\"here\" means the location you are in.  You can remember an "+
+          "object or a location (here) as a name, whatever name you "+
+          "want.  You can list which locations or objects you remember "+
+          "by typing <recall locations> or <recall>, respectively."+
+          "\nSee Also:  unremember, recall");
 }
