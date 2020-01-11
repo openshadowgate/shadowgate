@@ -67,7 +67,7 @@ void spell_effect()
     effect(1);
     caster->set_property("added short",({ashort}));
     caster->set_property("spelled", ({TO}) );
-    call_out("dest_effect",ROUND_LENGTH*clevel*4);
+    call_out("dest_effect",ROUND_LENGTH*clevel);
     addSpellToCaster();
     spell_successful();
 }
