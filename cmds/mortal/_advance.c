@@ -668,17 +668,19 @@ int cmd_advance(string myclass){
 
 
 
-   if(regexp(myclass,"[a-z]+ special"))
-   {
-       pick_mage_school("",TP);
-       pick_psion_discipline("",TP);
-       pick_fighter_style("",TP);
-       pick_warlock_heritage("",TP);
-       pick_sorc_bloodline("",TP);
-       pick_oracle_mystery("",TP);
-       pick_human_subrace("",TP);
-       return 1;
-   }
+   if(sizeof(myclass))
+           if(regexp(myclass,"[a-z]+ special"))
+           {
+                   write("%^BOLD%^Trying to set any missing class specials...");
+                   pick_mage_school("",TP);
+                   pick_psion_discipline("",TP);
+                   pick_fighter_style("",TP);
+                   pick_warlock_heritage("",TP);
+                   pick_sorc_bloodline("",TP);
+                   pick_oracle_mystery("",TP);
+                   pick_human_subrace("",TP);
+                   return 1;
+           }
 
    if(strlen(myclass)) { myclass = replace_string(myclass," ","_"); }
 
