@@ -20,7 +20,7 @@ void create() {
     set_spell_level(([ "mage" : 2 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS touch of idiocy on TARGET");
-    set_damage_desc("1d6 to mental stats");
+    set_damage_desc("1d8 to mental stats");
     set_description("With a touch, you reduce the target's mental faculties. Your successful melee touch attack applies a 1d6 penalty to the target’s Intelligence, Wisdom, and Charisma scores.");
     set_verbal_comp();
     set_somatic_comp();
@@ -70,12 +70,12 @@ void spell_effect(int prof)
         tell_object(target, "You suddenly feel very stupid.");
         tell_room(place, "%^BOLD%^%^BLUE%^"+target->QCN+" is hit by a ray emanating from "+caster->QCN+".\n", ({ caster, target}));
         tell_object(caster, "%^BOLD%^%^BLUE%^You channel curse through your hand into "+target->QCN+"!\n");
-        adjust=roll_dice(1,6);
+        adjust=roll_dice(1,8);
         target->add_stat_bonus("intelligence", -adjust);
         target->add_stat_bonus("wisdom", -adjust);
         target->add_stat_bonus("charisma", -adjust);
         target->set_property("spelled", ({TO}) );
-        call_out("dest_effect", (ROUND_LENGTH * clevel / 2));
+        call_out("dest_effect", (ROUND_LENGTH * (clevel / 10 + 1)));
         addSpellToCaster();
     }
     return 1;

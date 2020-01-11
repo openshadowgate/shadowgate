@@ -56,8 +56,8 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    bonus = clevel/8+1;
-    duration = (ROUND_LENGTH * 2) * clevel;
+    bonus = clevel/6+1;
+    duration = (ROUND_LENGTH * 4) * clevel;
 
     tell_object(target,"%^BLUE%^A mirroring aura starts to grow around you, seeping into your skin to taint it a %^RESET%^"
 "sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.  An overwhelming feeling of weakness comes over you.%^RESET%^");

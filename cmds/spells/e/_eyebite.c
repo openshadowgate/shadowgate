@@ -49,7 +49,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    bonus = clevel/12;
+    bonus = clevel/10;
     duration = ROUND_LENGTH * (clevel/6+1);
     tell_object(target,"%^BLUE%^A mirroring aura starts to grow around you, seeping into your skin to taint it a %^RESET%^"
 "sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.  An overwhelming feeling of weakness comes over you.%^RESET%^");
@@ -72,7 +72,7 @@ void spell_effect(int prof) {
     {
         tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you faint!%^RESET%^");
         tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" faints!%^RESET%^",target);
-        target->set_unconscious(roll_dice(1,2)*8,"You're unconcious!");
+        target->set_unconscious(roll_dice(1,6),"You're unconcious!");
     }
     addSpellToCaster();
     call_out("dest_effect",duration);

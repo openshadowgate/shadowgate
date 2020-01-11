@@ -49,8 +49,8 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    bonus = 2;
-    duration = (ROUND_LENGTH * 3) * clevel;
+    bonus = 2; // TODO: Consider age cathegory shift property instead.
+    duration = (ROUND_LENGTH * 4) * clevel;
     spell_kill(target,caster);
     tell_object(target,"%^ORANGE%^You feel horror as your body rapidly ages, making you much older.%^RESET%^");
     tell_room(place,"%^ORANGE%^"+target->QCN+"becomes much older.%^RESET%^",target);
