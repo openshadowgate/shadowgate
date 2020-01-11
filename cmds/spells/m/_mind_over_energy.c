@@ -1,5 +1,5 @@
 //by ~Circe~ for psywarriors
-//Because theirs is much higher level, they get more than one resistance. 
+//Because theirs is much higher level, they get more than one resistance.
 //The formula matches that for Resist Energy
 
 #include <spell.h>
@@ -43,11 +43,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+    mylevel = clevel;
     if(arg == "fiendish"){
        mytype = "fiendish";
     }else if(arg == "celestial"){

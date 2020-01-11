@@ -7,9 +7,9 @@ void create()
     set_spell_name("gentle repose");
     set_spell_level(([ "cleric" : 2, "mage" : 3 ]));
     set_syntax("cast CLASS gentle repose");
-    set_spell_sphere("necromancy");    
+    set_spell_sphere("necromancy");
     set_description("This spell preserves remains of the dead in the area, extending their decay time. Doing so effectively extends the time limit on raising that creature from the dead.");
-    set_helpful_spell(1);    
+    set_helpful_spell(1);
 }
 
 void spell_effect()
@@ -23,7 +23,7 @@ void spell_effect()
     {
         tell_object(caster,"%^BOLD%^%^BLUE%^There are no corpses.%^RESET%^");
         TO->remove();
-        return;            
+        return;
 
     }
     tell_object(caster,"%^BOLD%^%^CYAN%^You gently touch corpses in the room, freezing them.%^RESET%^");
@@ -34,5 +34,3 @@ void spell_effect()
     return;
 
 }
-
-

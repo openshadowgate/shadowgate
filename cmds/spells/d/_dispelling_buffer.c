@@ -28,16 +28,12 @@ int preSpell() {
 
 void spell_effect(int prof) {
    int duration, buffered, mylevel;
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+   mylevel = clevel;
    duration = (ROUND_LENGTH * 20) * mylevel;
    if(!objectp(caster)) dest_effect();
    buffered = mylevel/10;
    if(buffered < 1) buffered = 1;
-   if(buffered > 5) buffered = 5; //shouldn't be possible, but better safe 
+   if(buffered > 5) buffered = 5; //shouldn't be possible, but better safe
    tell_room(place,"%^RESET%^%^CYAN%^The %^BOLD%^air%^RESET%^%^CYAN%^ surrounding "
       ""+caster->QCN+" fills with %^MAGENTA%^st%^CYAN%^a%^MAGENTA%^tic %^CYAN%^"
       "before settling into a faint %^BOLD%^glow %^RESET%^%^CYAN%^on "+caster->QP+" skin.%^RESET%^",caster);

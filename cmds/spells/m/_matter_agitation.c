@@ -34,11 +34,7 @@ int preSpell(){
 
 void spell_effect(int prof) {
 
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+   mylevel = clevel;
    if(!present(target,environment(caster))) {
       tell_object(caster,"%^BOLD%^Your target is not in this area.");
       dest_effect();
@@ -61,7 +57,7 @@ void spell_effect(int prof) {
 
 void damage(object mytarg)
 {
-   if(!objectp(mytarg) || !objectp(environment(mytarg))) 
+   if(!objectp(mytarg) || !objectp(environment(mytarg)))
    {
        dest_effect();
        return;

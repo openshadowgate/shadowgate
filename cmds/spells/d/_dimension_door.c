@@ -89,7 +89,7 @@ void spell_effect(int prof){
        endplace->query_property("no teleport"))){
       startpower = place->query_property("teleport proof");
       endpower = endplace->query_property("teleport proof");
-      if(caster->is_class("psywarrior") || caster->is_class("psion")) { bonus = caster->query_stats("intelligence"); }
+
       mypower = CLEVEL + random(6);
       if((mypower < startpower) || (mypower < endpower)){
         tell_object(caster,"%^CYAN%^You hum the first note of the spell, but break off as you sense an interference.%^RESET%^");

@@ -95,8 +95,7 @@ void spell_effect(int prof)
         }
     }
 
-    if(caster->is_class("psion")) { mylevel = caster->query_guild_level("psion"); }
-    else { mylevel = caster->query_guild_level("psywarrior"); }
+    mylevel = clevel;
 
     tell_room(place,"%^RESET%^%^MAGENTA%^The %^RESET%^s%^BOLD%^w%^CYAN%^i%^RESET%^"
         "%^CYAN%^rl%^BOLD%^i%^WHITE%^n%^RESET%^g %^MAGENTA%^crystals blossom into a "

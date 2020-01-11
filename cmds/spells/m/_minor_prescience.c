@@ -34,11 +34,7 @@ int preSpell() {
 
 void spell_effect(int prof){
     int mylevel;
-    if(caster->is_class("psywarrior")){
-        mylevel = caster->query_guild_level("psywarrior");
-    }else{
-        mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
     target = caster;
     tell_room(place,"%^YELLOW%^Knowledge shimmers in "+caster->QCN+"'s "+
               "eyes as "+caster->QS+" grows more confident.",target);

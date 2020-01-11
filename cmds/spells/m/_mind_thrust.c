@@ -18,11 +18,7 @@ void create() {
 spell_effect(int prof) {
     int num, numdarts, damage, mylevel;
     string hardness;
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    mylevel = clevel;
 
     spell_successful();
     if (interactive(caster)) {
