@@ -35,11 +35,7 @@ void spell_effect(int prof){
       dest_effect();
       return;
    }
-   if(caster->is_class("psion")){
-      mylevel = caster->query_guild_level("psion");
-   }else{
-      mylevel = caster->query_guild_level("psywarrior");
-   }
+   mylevel = clevel;
    duration = (ROUND_LENGTH * 2) * mylevel;
    if(interactive(caster)){
       tell_object(caster, "%^RESET%^%^RED%^You send a pulse of mental energy through your muscles and sinew, heightening your alertness and readying your body to move at a moment's notice.%^RESET%^");

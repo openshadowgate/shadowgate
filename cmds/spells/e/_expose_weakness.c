@@ -34,7 +34,7 @@ string query_cast_string() {
 void spell_effect(int prof) {
     mapping tempmap;
     object ammo, *weapons;
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -107,11 +107,9 @@ void execute_attack() {
         "leaving a glowing hole!%^RESET%^");
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+"'s weapon slices through "+target->QCN+"'s defenses "
         "leaving a glowing hole!%^RESET%^",({target,caster}));
-    if(caster->is_class("psion")){
-       mylevel = caster->query_guild_level("psion");
-    }else{
-       mylevel = caster->query_guild_level("psywarrior");
-    }
+
+    mylevel = clevel;
+
     mod = mylevel/3;
     target->add_ac_bonus((-1)*mod);
     call_out("refix",(ROUND_LENGTH*roll_dice(3,2)));

@@ -53,11 +53,7 @@ void execute_attack() {
         ::execute_attack();
         return;
     }
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    mylevel = clevel;
     foes = all_living(place);
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     ownparty = ({});

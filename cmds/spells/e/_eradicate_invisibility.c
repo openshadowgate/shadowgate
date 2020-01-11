@@ -32,11 +32,7 @@ string query_cast_string() {
 void spell_effect(int prof) {
     int duration, amount, mylevel;
 
-    if(caster->is_class("psywarrior")){
-       mylevel = caster->query_guild_level("psywarrior");
-    }else{
-       mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
     where = PLACE;
 
     tell_object(CASTER,"%^BOLD%^%^BLUE%^A translucent wave of energy "+

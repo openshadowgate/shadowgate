@@ -85,11 +85,7 @@ void spell_effect(int prof) {
     }
     spell_successful();
     addSpellToCaster();
-    if(caster->is_class("psywarrior")){
-       mylevel = caster->query_guild_level("psywarrior"); //shouldn't be possible, but better safe...
-    }else{
-       mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
     call_out("dest_effect",(clevel*20));
 }
 

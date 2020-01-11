@@ -38,11 +38,7 @@ void spell_effect(int prof) {
         tell_object(caster,"You must specify an exit to block with this power!");
         return;
     }
-    if(caster->is_class("psywarrior")){
-       mylevel = caster->query_guild_level("psywarrior");
-    }else{
-       mylevel = caster->query_guild_level("psion");
-    }
+    mylevel = clevel;
     wall=new("/d/magic/obj/ecto_wall.c");
     wall->set_property("spell",TO);
     wall->set_property("spelled", ({TO}) );

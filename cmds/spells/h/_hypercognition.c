@@ -1,5 +1,5 @@
 //  Modified from the wizard armor spell
-//This one is 2nd level because its benefits stack with 
+//This one is 2nd level because its benefits stack with
 //mage armor or inertial armor
 //  ~Circe~ 7/26/05
 #include <spell.h>
@@ -27,14 +27,7 @@ void create() {
 
 void spell_effect(int prof) {
 
-    caster = CASTER;
-    place = PLACE;
-    target = TARGET;
-   if(caster->is_class("psywarrior")){
-      mylevel = caster->query_guild_level("psywarrior");
-   }else{
-      mylevel = caster->query_guild_level("psion");
-   }
+    mylevel = clevel;
 
     if (!target)
         target=caster;
@@ -44,7 +37,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    if (!target->is_ok_armour("mage")) 
+    if (!target->is_ok_armour("mage"))
     {
         if(!FEATS_D->usable_feat(target,"armored caster"))
         {
@@ -74,15 +67,15 @@ void spell_effect(int prof) {
 }
 
 void test() {
-    
+
     int max_damage, add_tally, thp;
-    
+
     if (!objectp(target)) {
         remove();
         return;
     }
 
-    if (!target->is_ok_armour("mage")) 
+    if (!target->is_ok_armour("mage"))
     {
         if(!FEATS_D->usable_feat(target,"armored caster"))
         {
@@ -100,7 +93,7 @@ void test() {
 void dest_effect() {
 
     if(!objectp(target)) return;
-    if(objectp(target)) 
+    if(objectp(target))
     {
 	    target->add_ac_bonus(-2);
 	    target->remove_property_value("spelled", ({TO}) );
