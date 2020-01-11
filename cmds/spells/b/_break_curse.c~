@@ -7,17 +7,17 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("break curse");
-    set_spell_level(([ "mage" : 4, "bard" : 3, "paladin" : 3, "cleric" : 3, "inquisitor":3, "oracle":3 ]));
+    set_spell_level(([ "mage" : 4, "bard" : 4, "paladin" : 3, "cleric" : 8,"inquisitor":3, "oracle":3 ]));
     set_spell_sphere("abjuration");
     set_spell_domain("magic");
     set_mystery("godclaw");
-    set_syntax("cast CLASS break curse on TARGET
-        cast CLASS break curse on OBJECT [at PLAYER]");
-    set_description("This spell will break curses that has been placed upon a living or magical item, unravelling the corrupted weave around it. Unlike dispel magic this spell always suceeds if its caster level is greater than of the curse. This spell will affect spells dispel magic can not.");
+    set_syntax("cast CLASS break curse on OBJECT [at PLAYER]");
+    set_description("This powerful spell will break a curse that has been placed upon a magical item, unravelling the "
+"corrupted weave around it.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
-    set_helpful_spell(1);
+	set_helpful_spell(1);
 }
 
 string query_casting_string() {
@@ -62,67 +62,21 @@ void spell_effect(int prof) {
         what = arg;
         who = 0;
     }
-    if(!who)
-        ob = present(what,caster);
-    else
-    {
+    if(!who) ob = present(what,caster);
+    else {
         if((string)caster->realName(who) != "") who = (string)caster->realName(who);
-        if(!ob2 = present(who, place))
-        {
+        if(!ob2 = present(who, place)) {
             tell_object(caster,"That person isn't here.");
             dest_effect();
             return;
         }
         ob = present(what,ob2);
     }
-
-    if(!objectp(ob))
-        ob = present(what, place);
-
-    if (!objectp(ob))
-    {
-        tell_object(caster,"Your target is not present.");
+    if (!objectp(ob)) {
+        tell_object(caster,"That object is not present");
         dest_effect();
         return;
     }
-
-    if(ob->is_living())
-    {
-        object * all_spells;
-        object i;
-
-        all_spells = ob->query_property("spelled");
-
-        if(sizeof(all_spells))
-        {
-            foreach(i in all_spells)
-            {
-                if(!objectp(i))
-                    continue;
-
-                if(i->is_curse())
-                {
-                    if(clevel >= i->query_clevel())
-                    {
-                        tell_object(caster,"%^BOLD%^You dispel " + i->query_spell_name());
-                        i->dest_effect();
-                    }
-                    else
-                    {
-                        tell_object(caster,"%^BOLD%^%^RED%^You failed to dispel " + i->query_spell_name());
-                    }
-                }
-            }
-        }
-        else
-        {
-            tell_object(caster,"%^BOLD%^Your spell fails to hit any curses.");
-        }
-
-        spell_successful();
-        dest_effect();
-    }
-
     ench = ob->query_property("enchantment");
     if (ench > -1) {
         tell_object(caster,"That object is not cursed.");
@@ -138,21 +92,26 @@ void spell_effect(int prof) {
     if(spell_type == "cleric") {
 	if((string)caster->query_diety() == "shar") {
 	    tell_room(place,"%^MAGENTA%^The tendrils of shadow converge upon"+
-                      " "+what+", concealing it in darkness.");
+		    " "+what+", concealing it in darkness.");
 	}
 	else {
-            if((string)caster->query_diety() == "cyric") tell_room(place,"%^BOLD%^%^BLACK%^The black flames jet out, "
-                                                                   "piercing "+what+".");
-            else tell_room(place,"%^BLUE%^Motes of %^BOLD%^b%^WHITE%^l%^BLUE%^u"+
-                           "%^WHITE%^e%^BLUE%^-%^WHITE%^w%^BLUE%^h%^WHITE%^i%^BLUE%^t"+
-                           "%^BLUE%^e%^RESET%^%^BLUE%^ energy surround "+what+", glowing"+
-                           " brilliantly.");
-        }
+          if((string)caster->query_diety() == "cyric") tell_room(place,"%^BOLD%^%^BLACK%^The black flames jet out, "
+"piercing "+what+".");
+          else tell_room(place,"%^BLUE%^Motes of %^BOLD%^b%^WHITE%^l%^BLUE%^u"+
+            "%^WHITE%^e%^BLUE%^-%^WHITE%^w%^BLUE%^h%^WHITE%^i%^BLUE%^t"+
+            "%^BLUE%^e%^RESET%^%^BLUE%^ energy surround "+what+", glowing"+
+            " brilliantly.");
+      }
     }
     else tell_room(place,"%^BLUE%^Motes of %^BOLD%^b%^WHITE%^l%^BLUE%^u"+
-                   "%^WHITE%^e%^BLUE%^-%^WHITE%^w%^BLUE%^h%^WHITE%^i%^BLUE%^t"+
-                   "%^BLUE%^e%^RESET%^%^BLUE%^ energy surround "+what+", glowing"+
-                   " brilliantly, before shattering in all directions.");
+            "%^WHITE%^e%^BLUE%^-%^WHITE%^w%^BLUE%^h%^WHITE%^i%^BLUE%^t"+
+            "%^BLUE%^e%^RESET%^%^BLUE%^ energy surround "+what+", glowing"+
+            " brilliantly, before shattering in all directions.");
     spell_successful();
     dest_effect();
+}
+
+void dest_effect() {
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
 }

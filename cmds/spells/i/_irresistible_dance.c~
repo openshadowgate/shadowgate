@@ -7,11 +7,6 @@ inherit SPELL;
 
 int bonus;
 
-int is_curse()
-{
-    return 1;
-}
-
 void create() {
     ::create();
     set_spell_name("irresistible dance");
@@ -24,16 +19,6 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-}
-
-int preSpell()
-{
-    if(!caster->ok_to_kill(target))
-    {
-        tell_object(caster,"You can't curse that!");
-        return 0;
-    }
-    return 1;
 }
 
 string query_cast_string() {
@@ -57,7 +42,6 @@ void spell_effect(int prof) {
     target->add_ac_bonus(-bonus);
     target->add_saving_bonus("reflex",-bonus);
     target->set_property("irresistible_dance",1);
-    target->set_property("spelled", ({TO}));
     addSpellToCaster();
     call_out("dancing_echo",ROUND_LENGTH*2);
     duration = (ROUND_LENGTH) * clevel;

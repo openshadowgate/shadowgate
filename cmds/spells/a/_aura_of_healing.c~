@@ -122,15 +122,11 @@ void execute_attack()
     }
     if(member_array(caster,people)==-1)
         people+=({caster});
-    people += caster->query_followers() - caster->query_attackers();
 
     define_base_damage(0);//lazy reroll
     if(sizeof(people))
         foreach(dude in people)
         {
-            if(!objectp(dude))
-                continue;
-
             if((int)dude->query_hp() < (int)dude->query_max_hp() &&
                !(dude->is_undead() ^ undead_caster))
             {

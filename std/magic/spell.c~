@@ -143,6 +143,7 @@ int query_target_required();
 int query_xp_bonus();
 int check_fizzle(object ob);
 int spell_kill(object victim, object caster);
+int ok_to_kill(object targ);
 int remove();
 int query_helpful();
 int check_point_cost(int plvl);
@@ -2785,19 +2786,17 @@ void help() {
     write(description+"\n");
 //fixed up some typos in the following messages ~Circe~ 7/29/19
     if(peace)
-        write("%^BOLD%^%^RED%^Can be cast only at peace.%^RESET%^");
+        write("%^BOLD%^%^RED%^Only at peace:%^RESET%^ This spell can be cast only when you aren't in combat.");
     if(silent_casting)
-        write("%^BOLD%^%^RED%^Undetectable casting.%^RESET%^");
+        write("%^BOLD%^%^RED%^Undetectable casting:%^RESET%^ Casting of this spell can't be detected by others.");
     if(evil_spell)
-        write("%^BOLD%^%^RED%^This spell is inherintly evil.%^RESET%^");
-    if(TO->is_curse())
-        write("%^BOLD%^%^RED%^This spell is a curse.");
+        write("%^BOLD%^%^RED%^Evil spell:%^RESET%^ For one reason or another, this is an evil, selfish spell. Good characters won't use it unless in dire need.");
     if(aoe_spell)
-        write("%^BOLD%^%^RED%^This spell is Area of Effect");
+        write("%^BOLD%^%^RED%^AOE spell:%^RESET%^ This spell will affect all targets in the room over time.");
     if(traveling_aoe_spell)
-        write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
+        write("%^BOLD%^%^RED%^TravAOE spell:%^RESET%^ This spell's effect will move with the caster.");
     if(splash_spell)
-        write("%^BOLD%^%^RED%^This spell will affect multiple targets.");
+        write("%^BOLD%^%^RED%^Splash spell:%^RESET%^ This spell has a chance of affecting multiple targets at the price of the spell level.");
 
     if(mapp(feats_required)) {
       compskeys = ([]);
