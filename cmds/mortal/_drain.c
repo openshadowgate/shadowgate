@@ -167,7 +167,7 @@ void drain_process(object target)
         stop_drain();
         return;
     }
-    if(TP->query_max_hp_bonus() >= (TP->query_max_hp_base()) && type == "health")
+    if(TP->query_max_hp_bonus() >= (TP->query_max_hp_base()) / 3 && type == "health")
     {
         tell_object(TP,"%^BOLD%^%^RED%^You feel too infused as it is. You continue to drain for life.%^RESET%^");
         type = "life";
