@@ -19,7 +19,7 @@
 // removed dex requirement for cavaliers. Nienne, 07/07
 #include <daemons.h>
 #include <std.h>
-#define PSIONS_OK ({ "vasheii", "testdude", "keil", "gaoha", "sneed", "keelia", "saruul", "faizah", "revan", "quigley", "marslyvn","gavin","kaleb", "tikan", "saul", "cienia","wolter","thenmihatash", "timothy", "markus", "ynlai", "morgraeal", "rohei"})
+#define PSIONS_OK ({ })
 #include <rooms.h>
 //#include "diety.h"
 #define RACE (string)this_player()->query_race()
@@ -253,16 +253,16 @@ int choose(string str) {
 //    if((strsrch(str,"fighter")!=-1) || (str == "paladin") || (str == "ranger")) {
    // removing exceptional strength so there's no need to roll it here -Ares
    /*
-   if((strsrch(str,"fighter")!=-1) || (str == "cavalier") || (str == "ranger")) 
+   if((strsrch(str,"fighter")!=-1) || (str == "cavalier") || (str == "ranger"))
    {
-      if((int)TP->query_stats("strength") == 18) 
+      if((int)TP->query_stats("strength") == 18)
       {
          x = random(99) +2;
          ex = TP->query_stats("exceptional_strength");
-         switch(x) 
+         switch(x)
          {
          case 1..50:
-            switch(ex) 
+            switch(ex)
             {
             case 1..50:
                TP->set_stats("exceptional_strength",51+random(25));
@@ -276,7 +276,7 @@ int choose(string str) {
             }
             break;
          case 51..75:
-            switch(ex) 
+            switch(ex)
             {
             case 1..50:
                TP->set_stats("exceptional_strength",76+random(15));
@@ -290,7 +290,7 @@ int choose(string str) {
             }
             break;
          case 76..90:
-            switch(ex) 
+            switch(ex)
             {
             case 1..50:
                TP->set_stats("exceptional_strength",91+random(9));
@@ -304,7 +304,7 @@ int choose(string str) {
             }
             break;
          case 91..99:
-            switch(ex) 
+            switch(ex)
             {
             case 1..50:
                TP->set_stats("exceptional_strength",00);
@@ -325,12 +325,12 @@ int choose(string str) {
          x = (int)TP->query_stats("exceptional_strength")%100;
          TP->set_stats("exceptional_strength",x);
          ex = TP->query_stats("exceptional_strength");
-         if(ex != -1) 
+         if(ex != -1)
          {
             write("You rolled an exceptional strength of "+ex+"!");
             write("Your strength is now 18/"+ex+".");
          }
-         else 
+         else
          {
             write("Your strength is now "+TP->query_stats("strength")+"!");
          }

@@ -1,3 +1,4 @@
+
 #include <std.h>
 inherit DAEMON;
 
@@ -64,7 +65,7 @@ void advanced_func(object player)
     return;
 }
 
-int hit_dice() { return 10; }  // hit dice rolled for hitpoints each level
+int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
 int default_hitpoints() { return 4; } // hitpoints per level above level 20
 

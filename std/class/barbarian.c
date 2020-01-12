@@ -63,7 +63,7 @@ player->set_guild_level("barbarian",(int)player->query_class_level("barbarian"))
     return;
 }
 
-int hit_dice() { return 14; }
+int hit_dice() { return 12; }
 
 int default_hitpoints() { return 5; }
 

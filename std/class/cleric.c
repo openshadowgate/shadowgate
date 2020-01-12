@@ -7,7 +7,7 @@ string *search_paths() { return ({ "/cmds/cleric" }); } // temporary
 
 int caster_class() { return 1; }
 
-string *restricted_races() { 
+string *restricted_races() {
     return ({ "beastman","ogre","ogre-mage","voadkyn","wemic" });
 }
 
@@ -28,19 +28,19 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) 
-{  
-    return ({ "light armor proficiency", 
+string *class_feats(string myspec)
+{
+    return ({ "light armor proficiency",
               "medium armor proficiency",
               "simple weapon proficiency" });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1: ({ "light armor proficiency", "medium armor proficiency", "simple weapon proficiency", "shield proficiency", "divine domain", "spell focus" }), 5 : ({ "indomitable" }), 10: ({ "force of personality" }), 11: ({ "second divine domain" }), 15: ({ "leadership" }), ]);
 }
 
 string *class_skills()
-{  
+{
     return ({ "healing","influence","perception","spellcraft" });
 }
 
@@ -50,13 +50,13 @@ string old_save_type() { return "cleric"; }
 
 string new_save_type() { return "cleric"; }
 
-void advanced_func(object player) 
-{ 
-    player->set_guild_level("cleric",(int)player->query_class_level("cleric"));    
-    return; 
+void advanced_func(object player)
+{
+    player->set_guild_level("cleric",(int)player->query_class_level("cleric"));
+    return;
 }
 
-int hit_dice() { return 10; }  // hit dice rolled for hitpoints each level
+int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
 int default_hitpoints() { return 3; } // hitpoints per level above level 20
 
@@ -71,7 +71,7 @@ int max_stance_defensive() { return 6; }
 int attack_bonus(object player)
 {
     int level,bonus;
-    level = (int)player->query_prestige_level("cleric");       
+    level = (int)player->query_prestige_level("cleric");
 //    if(level > 20) { bonus = (level - 20) + 12; }
 //    else(bonus = to_int(to_float(level) / 1.6));// 12 at level 20
     bonus = (level*3) / 4; // boosted to tabletop equiv
@@ -116,11 +116,11 @@ int caster_level_calcs(object player, string the_class)
         case "radiant servant":
         case "cleric":
             level = player->query_class_level("cleric");
-            level += player->query_class_level("radiant_servant");            
+            level += player->query_class_level("radiant_servant");
             return level;
-        
+
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

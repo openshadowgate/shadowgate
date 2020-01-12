@@ -26,16 +26,16 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec) {  
+string *class_feats(string myspec) {
     return ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency" });
 }
 
-mapping class_featmap(string myspec) {  
+mapping class_featmap(string myspec) {
     return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry" }), 5 : ({ "weapon focus" }), 9 : ({ "weapon specialization" }), 13 : ({ "greater weapon focus" }), 17 : ({ "greater weapon specialization" }) ]);
 }
 
 string *class_skills()
-{  
+{
     return ({ "athletics","endurance","healing","perception" });
 }
 
@@ -45,13 +45,13 @@ string old_save_type() { return "fighter"; }
 
 string new_save_type() { return "fighter"; }
 
-void advanced_func(object player) 
-{ 
-    player->set_guild_level("fighter",(int)player->query_class_level("fighter"));    
-    return; 
+void advanced_func(object player)
+{
+    player->set_guild_level("fighter",(int)player->query_class_level("fighter"));
+    return;
 }
 
-int hit_dice() { return 12; }  // hit dice rolled for hitpoints each level
+int hit_dice() { return 10; }  // hit dice rolled for hitpoints each level
 
 int default_hitpoints() { return 4; } // hitpoints per level above level 20
 
@@ -66,7 +66,7 @@ int max_stance_defensive() { return 5; }
 int attack_bonus(object player)
 {
     int level;
-    level = (int)player->query_prestige_level("fighter");       
+    level = (int)player->query_prestige_level("fighter");
     return level;
 }
 
@@ -98,5 +98,5 @@ int caster_level_calcs(object player, string the_class)
         default:
             return player->query_class_level(the_class);
     }
-    return 0;    
+    return 0;
 }

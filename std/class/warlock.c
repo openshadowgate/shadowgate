@@ -54,6 +54,7 @@ void advanced_func(object player) {
     return;
 }
 
+// Using occult classes to set standard hit die: kineticist
 int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
 int default_hitpoints() { return 3; } // hitpoints per level above level 20
