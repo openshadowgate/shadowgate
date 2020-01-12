@@ -52,15 +52,18 @@ void execute_feat() {
     if(!objectp(target))
     {
         object * attackers = caster->query_attackers();
-        attackers = filter_array(attackers,(:objectp($1):));
-        attackers = filter_array(attackers,(:$1->query_property("rushed at")+FEATTIMER < time():));
-        if(!sizeof(attackers))
+        if(sizeof(attackers))
         {
-            tell_object(caster,"%^BOLD%^Nobody to rush.%^RESET%^");
-            dest_effect();
-            return;
+            attackers = filter_array(attackers,(:objectp($1):));
+            attackers = filter_array(attackers,(:$1->query_property("rushed at")+FEATTIMER < time():));
+            if(!sizeof(attackers))
+            {
+                tell_object(caster,"%^BOLD%^Nobody to rush.%^RESET%^");
+                dest_effect();
+                return;
+            }
+            target = attackers[random(sizeof(attackers))];
         }
-        target = attackers[random(sizeof(attackers))];
     }
 
     rtime = (int)target->query_property("rushed at");

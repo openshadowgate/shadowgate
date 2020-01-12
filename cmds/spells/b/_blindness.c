@@ -16,7 +16,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS blindness on TARGET");
     set_description("By means of this spell, the caster attempts to steal the target's vision for a short while. It is "
-"not dispellable by normal magics, but will fade after only a short while.");
+"is neither curse nor it is dispellable by normal magics, but will fade after only a short while.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -52,9 +52,4 @@ void spell_effect(int prof) {
     target->set_temporary_blinded(roll_dice(2,4));
     spell_successful();
     dest_effect();
-}
-
-void dest_effect() {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }

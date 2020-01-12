@@ -522,8 +522,10 @@ int query_max_hp_base()
 
     if(FEATS_D->usable_feat(TO,"toughness"))
         num += ((int)TO->query_level())/2;
+
     if(FEATS_D->usable_feat(TO,"improved toughness"))
         num += TO->query_level();
+
     if(FEATS_D->usable_feat(TO,"psionic body"))
     {
        mypsi = 0;
@@ -547,6 +549,7 @@ int query_max_hp_base()
       if(lvladj)
            num += (lvladj*8);
     }
+
     if(TO->query("negative level") || intp("/daemon/user_d.c"->get_scaled_level(TO)))
     {
         num += sum_array(TO->query("hp_array"), (int)TO->query_character_level());
@@ -572,9 +575,6 @@ int query_hp() {
 string query_reference(string limb) {
    if(body[limb]) return body[limb]["limb_ref"];
 }
-
-
-
 
 /////////////////////////////
 // resistance stuff below  //

@@ -621,54 +621,55 @@ int calculate_healing() {
             tolerance_flag = 0;
         }
         if(healing["intox"] < 0) healing["intox"] = 0;
-        if(!healing["intox"]) {
-            write("Suddenly you get a bad headache.");
-            add_hp(-random(6));
-        } else if( (healing["intox"] > HEALING_FORMULA) && !query_tripped() && !query_unconscious()) {
-            if (!random(5)) {  // was random(10) > 1
-                write("You begin to be sick and vomit from your excessive drinking.");
-// was force_me("vomit violently") which returned a what because wasn't a valid soul.
-                tell_room(ETO, TPQCN+" begins to be sick and vomit from the drinking.", TO);
-                do_damage("torso",roll_dice(1,4));
-                set_tripped(1,"The alcohol is revolting against you.");
-                healing["intox"] -= roll_dice(4,5);
-            } else if (!random(4)) {
-                write("You feel a wave of nausea that suddenly brings a blanket of darkness.");
-                say(query_cap_name()+" suddenly gets a blank look on "+query_possessive()+" face.");
-                write("You pass out cold into your drink.");
-                say(capitalize(query_subjective())+" passes out cold, face first into "+query_possessive()+" drink.");
-                set_unconscious((healing["intox"]-HEALING_FORMULA)/70 +1,"You have passed out cold, you're sleeping off part of your drinking binge.");
-                if( query_unconscious() > 8){
-                    set_unconscious(8,"You have passed out cold, you're sleeping off part of your drinking binge.");
-                }
-                healing["intox"] = HEALING_FORMULA;
-            }
-            if (!tolerance_flag) {
-                tolerance += 1;
-                tolerance_flag = 1;
-            }
+        if(!healing["intox"])
+        {
+            write("You are not intoxicated..");
+        }
+        else if( (healing["intox"] > HEALING_FORMULA) && !query_tripped() && !query_unconscious())
+        {
+             if (!random(5)) {
+                  write("You begin to be sick and vomit from your excessive drinking.");
+                  tell_room(ETO, TPQCN+" begins to be sick and vomit from the drinking.", TO);
+                  do_damage("torso",roll_dice(1,4));
+                  set_tripped(1,"The alcohol is revolting against you.");
+                  healing["intox"] -= roll_dice(4,5);
+             } else if (!random(4)) {
+                  write("You feel a wave of nausea that suddenly brings a blanket of darkness.");
+                  say(query_cap_name()+" suddenly gets a blank look on "+query_possessive()+" face.");
+                  write("You pass out cold into your drink.");
+                  say(capitalize(query_subjective())+" passes out cold, face first into "+query_possessive()+" drink.");
+                  set_unconscious((healing["intox"]-HEALING_FORMULA)/70 +1,"You have passed out cold, you're sleeping off part of your drinking binge.");
+                  if( query_unconscious() > 8){
+                       set_unconscious(8,"You have passed out cold, you're sleeping off part of your drinking binge.");
+                  }
+                  healing["intox"] = HEALING_FORMULA;
+             }
+             if (!tolerance_flag) {
+                  tolerance += 1;
+                  tolerance_flag = 1;
+             }
         } else if(2 > random(101)) {
-            switch(random(7)) {
-            case 0: msg = "stumble"; break;
-            case 1: msg = "hiccup"; break;
-            case 2: msg = "look"; break;
-            case 3: msg = "burp"; break;
-            case 4: msg = "grin"; break;
-            case 5: msg = "blink"; break;
-            case 6: msg = "sway"; break;
-            default:  msg = "look"; break;
-            }
-            if (query_unconscious()) {
-                force_me("twitch in a drunken stupor.");
-            } else {
-                if(userp(TO)){
-                    tell_object(TO,"You "+msg+(msg=="look" ? " drunk." : "."));
-                    tell_room(ETO,""+TPQCN+" "+msg+"s"+(msg == "look" ? " drunk." : "."),TO);
-                }else{
-                    write("You "+msg+(msg=="look" ? " drunk." : "."));
-                    say(query_cap_name()+" "+msg+"s"+(msg == "look" ? " drunk." : "."));
-                }
-            }
+             switch(random(7)) {
+             case 0: msg = "stumble"; break;
+             case 1: msg = "hiccup"; break;
+             case 2: msg = "look"; break;
+             case 3: msg = "burp"; break;
+             case 4: msg = "grin"; break;
+             case 5: msg = "blink"; break;
+             case 6: msg = "sway"; break;
+             default:  msg = "look"; break;
+             }
+             if (query_unconscious()) {
+                  force_me("twitch in a drunken stupor.");
+             } else {
+                  if(userp(TO)){
+                       tell_object(TO,"You "+msg+(msg=="look" ? " drunk." : "."));
+                       tell_room(ETO,""+TPQCN+" "+msg+"s"+(msg == "look" ? " drunk." : "."),TO);
+                  }else{
+                       write("You "+msg+(msg=="look" ? " drunk." : "."));
+                       say(query_cap_name()+" "+msg+"s"+(msg == "look" ? " drunk." : "."));
+                  }
+             }
         }
     }
 
