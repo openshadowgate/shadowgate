@@ -1,7 +1,7 @@
 %^RESET%^%^CYAN%^Fighter:
 
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d12
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d10
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort strong, reflex/will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, healing, perception
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
