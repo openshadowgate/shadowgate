@@ -52,7 +52,7 @@ void spell_effect(int prof) {
       trackerb = 1;
     }
     caster->set_property("spelled", ({TO}));
-    call_out("dest_effect", ROUND_LENGTH * 6 * clevel);
+    call_out("dest_effect", ROUND_LENGTH * 3 * clevel);
     addSpellToCaster();
 }
 
