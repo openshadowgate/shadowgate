@@ -1366,134 +1366,138 @@ void setup() {
                }
    }
 
-  register_channels();
-  if (!sizeof(query_aliases())) {
-    message("environment", "Resetting alias data.", TO);
-    init_aliases();
-    force_me("alias -reset");
-  }
-  set_property("light", -query_property("light"));
-  if (!query("race")) {
-    set_logon_notify(1);  /* default login/out messages turned on */
-    move(ROOM_SETTER);
-    tell_room(ETO,query_cap_name() + " is a new adventurer",TO);
-    NOTIFY_D->logon_notify("%^YELLOW%^"+capitalize(query_name())+" is a new adventurer%^RESET%^",this_player());
-  } else {
-    if (member_array(query("race"),query("id")) == -1) {
-      add_id(query_race());
-    }
-  if(query("subrace")){
-    if (member_array(query("subrace"),query("id")) == -1) {
-      add_id(query("subrace"));
-    }
-  }
-    sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));
-    if (query_property("spell_points")) holder1 = query_property("spell_points");
-    if (query_property("where block")) holder2 = query_property("where block");
-    remove_all_properties();
-    set_property("where block",holder2);
-    set_property("spell_points",holder1);
-    set("reply",0);
-  if (!stringp(tmp = getenv("TERM")))
-      setenv("TERM", tmp = "dumb");
-  static_user["term_info"] = (mapping)TERMINAL_D->query_term_info(tmp);
-  write_messages();
-  set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
-   set_max_internal_encumbrance(1000); // Letting players hold ungodly amounts of shit until they get real.
-  add_extra_hp((int)TO->query_extra_hp() * -1); // reset this before we do autowear/curses.
-  YUCK_D->load_inventory(TO);
-   do_autowear();
-   cull_levels();
+   register_channels();
+   if (!sizeof(query_aliases())) {
+     message("environment", "Resetting alias data.", TO);
+     init_aliases();
+     force_me("alias -reset");
+   }
+   set_property("light", -query_property("light"));
+   if (!query("race")) {
+     set_logon_notify(1);  /* default login/out messages turned on */
+     move(ROOM_SETTER);
+     tell_room(ETO,query_cap_name() + " is a new adventurer",TO);
+     NOTIFY_D->logon_notify("%^YELLOW%^"+capitalize(query_name())+" is a new adventurer%^RESET%^",this_player());
+   } else {
+     if (member_array(query("race"),query("id")) == -1) {
+       add_id(query_race());
+     }
+     if(query("subrace")){
+       if (member_array(query("subrace"),query("id")) == -1) {
+         add_id(query("subrace"));
+       }
+     }
+     sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));
+     if (query_property("spell_points")) holder1 = query_property("spell_points");
+     if (query_property("where block")) holder2 = query_property("where block");
+     remove_all_properties();
+     set_property("where block",holder2);
+     set_property("spell_points",holder1);
+     set("reply",0);
 
-   if(TO->query("new_class_type"))
-     make_new_hitpoint_rolls(TO);
+     if (!stringp(tmp = getenv("TERM")))
+       setenv("TERM", tmp = "dumb");
+     static_user["term_info"] = (mapping)TERMINAL_D->query_term_info(tmp);
 
-   convert_to_new_class_type();
-   change_my_domains();
-   redo_my_languages();
-   convert_relationships();
+     write_messages();
+
+     set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
+     set_max_internal_encumbrance(1000); // Letting players hold ungodly amounts of shit until they get real.
+     add_extra_hp((int)TO->query_extra_hp() * -1); // reset this before we do autowear/curses.
+     YUCK_D->load_inventory(TO);
+     do_autowear();
+     cull_levels();
+
+    if(TO->query("new_class_type"))
+      make_new_hitpoint_rolls(TO);
+
+    convert_to_new_class_type();
+    change_my_domains();
+    redo_my_languages();
+    convert_relationships();
 
     if(TO->query("relationship_profile"))
     {
 
-        if(objectp(to_object("/daemon/description_d")))
+      if(objectp(to_object("/daemon/description_d")))
+      {
+        ob = new("/daemon/description_d");
+        TO->set("relationship_profile","default");
+        if(!ob->restore_profile_settings(TO,"default")) // restore description of default profile on login
         {
-            ob = new("/daemon/description_d");
-            TO->set("relationship_profile","default");
-            if(!ob->restore_profile_settings(TO,"default")) // restore description of default profile on login
-            {
-                ob->initialize_profile(TO);
-            }
+          ob->initialize_profile(TO);
         }
+      }
     }
 
-   if(objectp(find_object_or_load("/daemon/feat_d.c")))
-   {
-       if(TO->query("new_class_type"))
-       {
-          if(objectp(TO)) { find_object_or_load("/daemon/feat_d.c")->obsolete_feat(TO); }
-       }
-   }
+    if(objectp(find_object_or_load("/daemon/feat_d.c")))
+    {
+      if(TO->query("new_class_type"))
+      {
+        if(objectp(TO)) { find_object_or_load("/daemon/feat_d.c")->obsolete_feat(TO); }
+      }
+    }
 
-  init_feats();
-  load_autoload_obj();
+    init_feats();
+    load_autoload_obj();
 
     if(!TO->query("true_quietness"))
     {
-        tell_room(ETO,TOQCN+" joins",TO);
-        NOTIFY_D->mud_notify("joined",this_player());
+      tell_room(ETO,TOQCN+" joins",TO);
+      NOTIFY_D->mud_notify("joined",this_player());
     }
     do_encumbrance();
     if (environment()->query_inn())
       environment()->remove_tenant(query_name());
-  }
-  age = time() - (int)TO->query_birthday();
-  PLAYER_D->add_player_info();
-  if (!(PRISON_D->is_imprisoned(query_name()))) {
-    if(!query_body_type() && query_race() != "unborn")
-      move_player("/realms/vetri/bodyhold");
-    else if(!query_eye_color() && query_race() != "unborn")
-      move_player("/realms/crystal/colorhold");
-    else
-      load_pets();
-  }
-  convert_kills();
-  if (query_property("inactive"))
-      remove_property("inactive");
-  if (query_invis() && !wizardp(TO))
-      set_invis();
-  setup_messages();
-  init_mud_guilds();
-  init_spellcaster();
+   }
+   age = time() - (int)TO->query_birthday();
+   PLAYER_D->add_player_info();
+   if (!(PRISON_D->is_imprisoned(query_name()))) {
+     if(!query_body_type() && query_race() != "unborn")
+       move_player("/realms/vetri/bodyhold");
+     else if(!query_eye_color() && query_race() != "unborn")
+       move_player("/realms/crystal/colorhold");
+     else
+       load_pets();
+   }
+   convert_kills();
+   if (query_property("inactive"))
+     remove_property("inactive");
+   if (query_invis() && !wizardp(TO))
+     set_invis();
+   setup_messages();
+   init_mud_guilds();
+   init_spellcaster();
 
-  if(query_condition() < -100)
-  {
-    used_stamina = query_max_stamina() + 100;
-  }
+   if(query_condition() < -100)
+   {
+     used_stamina = query_max_stamina() + 100;
+   }
 
-  //Some parts of the game still refer to property "undead" in
-  //determining whether target is an undead.
-  if(query("undead"))
-      set_property("undead",1);
+   //Some parts of the game still refer to property "undead" in
+   //determining whether target is an undead.
+   if(query("undead"))
+     set_property("undead",1);
 
-  InitInnate();
-  TO->update_channels();
-  if(avatarp(TO) && (int)TO->query_level() > 100)
-  {
-      if(!TO->query_true_invis())
-      {
-         TO->set_true_invis();
-      }
-  }
-  static_user["verbose_moves"] = 1;
-  "/adm/daemon/average_age_d.c"->register_player(TO);
+   InitInnate();
+   TO->update_channels();
+   if(avatarp(TO) && (int)TO->query_level() > 100)
+   {
+     if(!TO->query_true_invis())
+     {
+       TO->set_true_invis();
+     }
+   }
+   static_user["verbose_moves"] = 1;
+   "/adm/daemon/average_age_d.c"->register_player(TO);
+
 // new gods wipe!! N, 1/18
-  if(member_array((string)TO->query_diety(),NEWPANTHEON) == -1 && (string)TO->query_diety() != "godless") {
-    TO->set_diety(0);
-    TO->set_sphere(0);
-    if(TO->is_class("cleric")) TO->set_divine_domain(({}));
-  }
-  force_me("look");
+   if(member_array((string)TO->query_diety(),NEWPANTHEON) == -1 && (string)TO->query_diety() != "godless") {
+     TO->set_diety(0);
+     TO->set_sphere(0);
+     if(TO->is_class("cleric")) TO->set_divine_domain(({}));
+   }
+   force_me("look");
 }
 
 //should automatically remove anyone from a guild if the guild is removed

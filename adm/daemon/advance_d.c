@@ -468,9 +468,8 @@ int get_hp_bonus(string cl, int con, int lev,object tp)
         return notify_fail("No class file for "+cl+"");
     }
 
-    // hit dice and hit points above level 20 moved to the class files
     extra = 2;
-    dice  = file->hit_dice(tp) + 2;
+    dice  = file->hit_dice(tp) + extra;
 
     // We need to roll hitpoints all the way up to level 40, otherwise
     // the order in which you pick your classes will give a mechanical
