@@ -25,7 +25,7 @@ inherit DAEMON;
 #define UMM ({"/d/attaya/tower/", "/d/islands/tonerra/lava/","/d/islands/common/eldebaro/newrooms/tomb*","/d/islands/common/aramanth/d"})
 
 #define AREAS ({MED_H1, MED_H1, MED_H2, MED_H2, HIGH, HIGH, UMM})
-#define AREA_VALUE ({400000, 550000, 600000, 750000, 800000, 950000, 1100000})
+#define AREA_VALUE ({200000, 400000, 600000, 800000, 1000000, 1200000})
 
 #define MAXSIZE 25
 #define QOBJECT "/d/common/obj/misc/qobject.c"

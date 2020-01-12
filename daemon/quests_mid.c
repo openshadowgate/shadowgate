@@ -29,7 +29,7 @@ inherit DAEMON;
 "/d/barriermnts/lothwaite/rooms/bt", "/d/dagger/derro/rooms/c", "/d/deku/mausoleum/rooms/"})
 
 #define AREAS ({ LMID1, LMID2, MED, HMID1, HMID2})
-#define AREA_VALUE ({100000, 120000, 140000, 160000, 180000})
+#define AREA_VALUE ({60000, 80000, 100000, 120000, 140000})
 
 #define MAXSIZE 30
 #define QOBJECT "/d/common/obj/misc/qobject.c"
