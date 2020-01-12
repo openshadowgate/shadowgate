@@ -90,6 +90,13 @@ void execute_feat()
         dest_effect();
         return;
     }
+    if(!objectp(target))
+    {
+        tell_object(caster, "That is not here!");
+        dest_effect();
+        return;
+    }
+
     if(!present(target, place))
     {
         tell_object(caster, "That is not here!");
@@ -153,8 +160,8 @@ void execute_attack()
         if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
         continue;
     }
-    timerz = time() + 240;
-    delay_subject_msg(target,240,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^true judged again%^WHITE%^ again.%^RESET%^");
+    timerz = time() + 300;
+    delay_subject_msg(target,300,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^true judged again%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
     caster->remove_property("using true judgement");
     caster->set_property("using true judgement",tempmap);
