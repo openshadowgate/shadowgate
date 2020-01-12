@@ -1873,8 +1873,6 @@ void define_base_spell_level_bonus()
         sdamage_adjustment-=1;
     if(spell_type=="psywarrior")
         sdamage_adjustment-=2;
-    if(spell_type=="bard")
-        sdamage_adjustment+=1;
     sdamage_adjustment=sdamage_adjustment<0?0:sdamage_adjustment;
 }
 
