@@ -400,8 +400,9 @@ void make_new_hitpoint_rolls(object obj)
 
     if(!objectp(obj)) { return; }
     if(avatarp(obj)) { return; }
-    if(!obj->query("ranger_hp_rolled") && pointerp(obj->query("hp_array")) && obj->is_class("ranger"))
-      obj->delete("hp_array"); //redo ranger hp after mod -N
+
+    obj->delete("hp_array");
+
     if(pointerp(obj->query("hp_array"))) { return; }
 
     classes = (string *)obj->query_classes();
@@ -426,12 +427,6 @@ void make_new_hitpoint_rolls(object obj)
     obj->set_max_hp(hp);
     obj->set_hp((int)obj->query_max_hp());
 
-    tell_object(obj,"%^RESET%^%^B_BLUE%^Rolling new hitpoints, old total: "+old+"\nNew "
-        "total: "+(int)obj->query_max_hp()+"%^RESET%^");
-    obj->set("ranger_hp_rolled",1);
-    obj->delete("new_hp_rolled");
-    obj->delete("new_hp_rolled_one");
-    obj->delete("new_hp_rolled_two");
     return;
 }
 
@@ -1409,7 +1404,10 @@ void setup() {
   YUCK_D->load_inventory(TO);
    do_autowear();
    cull_levels();
-   if(TO->query("new_class_type")) make_new_hitpoint_rolls(TO);
+
+   if(TO->query("new_class_type"))
+     make_new_hitpoint_rolls(TO);
+
    convert_to_new_class_type();
    change_my_domains();
    redo_my_languages();

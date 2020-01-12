@@ -517,6 +517,7 @@ int query_max_hp_base()
     }
     else
         num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("constitution"));
+
     num = num * (int)TO->query_highest_level();
 
     if(FEATS_D->usable_feat(TO,"toughness"))
@@ -535,10 +536,16 @@ int query_max_hp_base()
 
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
+
     file = DIR_RACES+"/"+myrace+".c";
-    if(file_exists(file)) {
+
+    if(file_exists(file))
+    {
       lvladj = (int)file->level_adjustment(subrace);
-      if(lvladj) num += (lvladj*8); // LA races should have a flat 8hp per LA as "beast" levels from monster manual
+
+      // LA races have a flat 8hp per LA as "beast" levels from monster manual
+      if(lvladj)
+           num += (lvladj*8);
     }
     if(TO->query("negative level") || intp("/daemon/user_d.c"->get_scaled_level(TO)))
     {

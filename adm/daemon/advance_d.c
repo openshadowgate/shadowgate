@@ -424,51 +424,71 @@ int m_exp(int a, int b){
     return answer;
 }
 
+/**
+ * Rolls hp points character gets at a level in given class
+ *
+ * @param cl  class
+ * @param con con bonus moved to std/living/body.c, kept here for call compatibility
+ * @param lev level we roll hp for
+ * @param tp  player object
+ * @result HP we will get
+ */
 int get_hp_bonus(string cl, int con, int lev,object tp)
 {
     string file;
     int hpbonus,dice,extra,roll_1,roll_2,*rolls;
 
-    if(!objectp(tp)) { return 1; }
+    if(!objectp(tp))
+        return 1;
 
-    if(lev > 100 || lev < 1) { return 1; }
+    if(lev > 100 || lev < 1)
+        return 1;
+
     rolls = allocate(110);
-    if(!pointerp(tp->query("hp_array"))) { tp->set("hp_array",rolls); }
-    else { rolls = tp->query("hp_array"); }
+
+    if(!pointerp(tp->query("hp_array")))
+    {
+        tp->set("hp_array",rolls);
+    }
+    else
+    {
+        rolls = tp->query("hp_array");
+    }
+
     if(sizeof(tp->query("hp_array")) < 110)
     {
         rolls = tp->query("hp_array");
         rolls += allocate((100-sizeof(rolls)));
     }
+
     file     = DIR_CLASSES+"/"+cl+".c";
-    if(!file_exists(file)) { return notify_fail("No class file for "+cl+""); }
+
+    if(!file_exists(file))
+    {
+        return notify_fail("No class file for "+cl+"");
+    }
 
     // hit dice and hit points above level 20 moved to the class files
-    dice  = file->hit_dice(tp);
-    extra = file->default_hitpoints(tp);
+    extra = 2;
+    dice  = file->hit_dice(tp) + 2;
 
-    // We need to roll hitpoints all the way up to level 40, otherwise the order in
-    // which you pick your classes will give a mechanical advantage.  Other thought was
-    // doing it in 5 level blocks roll first 5, get the second 5 set, but seems like
-    // the less complicated we make it, the better off we will be -Ares
+    // We need to roll hitpoints all the way up to level 40, otherwise
+    // the order in which you pick your classes will give a mechanical
+    // advantage.  Other thought was doing it in 5 level blocks roll
+    // first 5, get the second 5 set, but seems like the less
+    // complicated we make it, the better off we will be -Ares
+    // This comment refers to logic in query_max_hp_base() in std/living/body.c -Illy
 
-    if(rolls[lev]) { hpbonus = rolls[lev]; }
-
+    if(rolls[lev])
+    {
+        hpbonus = rolls[lev];
+    }
     else
     {
-        switch(lev)
-        {
-        case 1:
-            hpbonus = dice;
-            break;
-        default:
-            roll_1 = roll_dice(1,dice);
-            roll_2 = roll_dice(1,dice);
+        hpbonus = dice * 3 / 4;
 
-            if(roll_1 > roll_2) { hpbonus = roll_1; }
-            else                { hpbonus = roll_2; }
-            break;
-        }
+        if(lev == 1)
+            hpbonus = dice;
     }
 
     if(lev < sizeof(rolls) - 1)

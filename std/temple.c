@@ -1,7 +1,7 @@
 // /std/temple.c
 // added to make ckpts in player notes on join/dedicate (knights) and forsake
 // *Styx*  4/22/02
-// Donation boxes added by Styx 
+// Donation boxes added by Styx
 // Uses add_actions for donate/check_funds/withdraw/look_box 6/2002
 // Added random actions into reset - 10/25/03, last change 5/03, *Styx*
 // Made donating items populate the search treasure -Ares 5/3/06
@@ -46,7 +46,7 @@ void reset() {  // this section added 10/25/03 by *Styx*
    ::reset();
    switch(random(20)) {
 	case 0..10:  break;
-	case 11:  if(!diety)  break;  
+	case 11:  if(!diety)  break;
 	   tell_room(TO, "%^BLUE%^A small group of humans nod in greeting as they enter.\n  They proceed to the altar and make numerous offerings to "+capitalize(diety)+".");
 	   break;
 	case 12:
@@ -65,7 +65,7 @@ void reset() {  // this section added 10/25/03 by *Styx*
 	   tell_room(TO, "A lone stranger enters and converses quietly with an acolyte, watching you thoughtfully before quietly slipping back out.");
 	   break;
 	case 17:
-	   if(!diety)  break;  
+	   if(!diety)  break;
 	   tell_room(TO, "%^RED%^You hear murmurs from the back of the temple as some visitors pray for "+capitalize(diety)+"'s favour.");
 	   break;
 	case 18:
@@ -134,7 +134,7 @@ int select_diety(string str) {
 
     old = TP->query_diety();
     symbol = present("holy symbol",TP);
-    if(old && old != "pan" && old != "godless") { 
+    if(old && old != "pan" && old != "godless") {
         tell_object(TP,"You have already chosen to follow "+capitalize(old)+"!");
         return 1;
     }
@@ -178,41 +178,20 @@ int leave_diety(string str) {
     tell_object(TP,"Once you have reflected on this adequately, you may seek out a temple and choose another deity to follow.");
     TP->set_diety(0);
 //    TP->set_sphere(0);
-    TP->set_divine_domain(({})); 
+    TP->set_divine_domain(({}));
     TP->set("last forsake",time());
     TP->forget_all_spells();
-    /*if(TP->is_class("paladin") || TP->is_class("antipaladin")) {
-        log_file("class_change",TP->query_cap_name()+" was changed from a "+TP->query_class()+" to a cavalier at "+ctime(time())+".\n");
-        TP->set_class("cavalier");
-        TP->set_mlevel("cavalier",TP->query_level());
-        TP->remove_class(TP->query_class());
-        TP->set_posed("cavalier");
-    }*/
+
     if(objectp(symbol)) symbol->remove();
     TP->update_channels();
     if(avatarp(TP)) return 1;
 //    TP->add_exp(-((int)TP->query_exp()*1/7));
-    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0) 
+    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
     {
         TP->general_exp_adjust_perc(-15);
         TP->resetLevelForExp(0);
     }
     else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1) TP->set_XP_tax((((int)TP->query_exp()/100) * 15), 0, "improvement");
-    
-    
-    /*
-    classes = TP->query_classes();
-    for(i=0;i<sizeof(TP->query_classes());i++) {
-        curclass = classes[i];
-        while((int)ADVANCE_D->get_exp(TP->query_class_level(curclass),curclass, TP) > ((int)TP->query_exp()/sizeof(TP->query_classes()))) {
-            TP->set_mlevel(curclass,(int)TP->query_class_level(curclass)-1);
-            hp_loss = ADVANCE_D->get_hp_bonus(curclass,TP->query_stats("constitution"),TP->query_class_level(curclass),TP);
-            TP->set_max_hp((int)TP->query_max_hp() - hp_loss);
-            TP->set_hp(TP->query_max_hp());
-            TP->reduce_my_skills(curclass);
-            TP->reduce_guild_level(curclass);
-        }
-    }*/
 
     TP->setenv("TITLE", (string)ADVANCE_D->get_new_title(TP));
     return 1;
@@ -247,7 +226,7 @@ int new_symbol(string str) {
     string god;
     object ob, symbol;
 
-    if(!TP->query_diety()) 
+    if(!TP->query_diety())
         return notify_fail("You don't follow a god, you don't need a symbol.");
     if(!str) return notify_fail("New what?\n");
     if(str != "symbol" && str != "holy symbol")
@@ -289,12 +268,12 @@ int check_donations(object who, string str) {
       which = temples[i];
       if(!which)  continue;
 // improvement to formatting while I'm in here *Styx* 10/3/05
-      write(sprintf("%%^RED%%^%-12s %%^YELLOW%%^%10d", capitalize(which), donations[which]) + " gold"); 
+      write(sprintf("%%^RED%%^%-12s %%^YELLOW%%^%10d", capitalize(which), donations[which]) + " gold");
 //      tell_object(who, capitalize(which)+":  %^YELLOW%^\t"+donations[which]+" gold.");
    }
    return 1;
 }
-   
+
 int check_funds(string str) {
    int bal, donations;
    if(TP->query_bound() || TP->query_unconscious()){
@@ -315,19 +294,19 @@ int check_funds(string str) {
 	check_donations(TP, str);
 	return 1;
    }
-/* added here to return 0 if not checking the right things so it won't interfere 
+/* added here to return 0 if not checking the right things so it won't interfere
 * with lanterns, etc. *Styx*  11/26/03, last change 10/26/03
 *   if(str != "balance" && str != "withdrawals")
 *	return 0;
 * now that I know more about notify_fail, changing the below should work *Styx* 10/3/05
-*/ 
+*/
 //   if((high_mortalp(TP) && (string)TP->query_diety() == diety) || avatarp(TP)) {
 // adjusting to allow HM accounts to check balance ~Circe~ 4/9/13
-     //if((OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) && (string)TP->query_diety() == diety) ||avatarp(TP)) 
+     //if((OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) && (string)TP->query_diety() == diety) ||avatarp(TP))
      if(TP->query_diety() == diety || avatarp(TP))
      {
 // /* don't need this now (didn't, but changing it back now - *Styx* 10/3/05)
-      if(str != "balance" && str != "withdrawals") 
+      if(str != "balance" && str != "withdrawals")
       {
         return notify_fail("Did you want to <check balance> or <check withdrawals> or something else?\n");
 //        return 0;
@@ -380,7 +359,7 @@ int donate(string str) {
       notify_fail("Correct syntax: <donate [amount] [type]> or <donate [item]>\n");
       return 0;
    }
-    if(TP->query_property("dominated")) 
+    if(TP->query_property("dominated"))
 	return notify_fail("The god senses your true feelings and does not accept your donation.\n");
 // added to allow donation of items per Vivian's suggestions *Styx*  2/18/03
    if(what = present(str, TP)) {
@@ -424,12 +403,12 @@ int donate(string str) {
       notify_fail("No, you can't do that and yes, we're watching!\n");
       return 0;
    }
-   
+
    FUNDS->add_temple_gold(base_name(TO), amount, type, TP, diety);
    tell_object(TP,"You slip the "+amount+" "+type+" coins into the donation box.");
    switch(amount + random(50)) {
       case 0..30 :   tell_room(ETP,TPQCN+" drops a few "+type+" coins into "
-                       "the donation box.",TP);     
+                       "the donation box.",TP);
                      break;
       case 31..100 : tell_room(ETP,TPQCN+" donates a handful of "+type+" coins "
                         "to the donation box.",TP);
@@ -464,7 +443,7 @@ int look_box(string str) {
 	 "<check donations by [name]>.  High mortal "
          "followers will see that they can <check balance|withdrawals>.\n");
    }
-   if(wizardp(TP)) 
+   if(wizardp(TP))
        tell_object(TP,"FYI (wiz eyes only) - All is logged to /log/tithes.\n");
    if((high_mortalp(TP) && (string)TP->query_diety() == diety) ) {
       tell_object(TP,"Due to your status in the church, you are allowed the "
@@ -481,19 +460,19 @@ int is_temple() {
     return 1;
 }
 
-void trigger_ward() 
+void trigger_ward()
 {
     	object *combatants, destroom, MyWard;
     	int i, flag, MyFlag;
     	combatants = all_living(TO);
-   
-    	for(i = 0;i< sizeof(combatants); i++) 
+
+    	for(i = 0;i< sizeof(combatants); i++)
     	{
         	if(!objectp(combatants[i])) { continue; }
-		//adding this because I'm guessing it bugs whenever 
+		//adding this because I'm guessing it bugs whenever
 		//someone summons fodder to a battle in a temple, since
-		//they wont get a temple ward object - (it removes it 
-		//on heartbeat - in /d/magic/obj/templeward.c) - if 
+		//they wont get a temple ward object - (it removes it
+		//on heartbeat - in /d/magic/obj/templeward.c) - if
 		//it's not a user that it's adding it to - Saide
      	  	MyWard = present("templewardxxx", combatants[i]);
 		MyFlag = 0;
@@ -501,9 +480,9 @@ void trigger_ward()
 	  	{
 			MyFlag = (int)MyWard->is_combatant();
 		}
-        	if(sizeof(combatants[i]->query_attackers()) || MyFlag) 
+        	if(sizeof(combatants[i]->query_attackers()) || MyFlag)
         	{
-            	if(!flag) 
+            	if(!flag)
             	{
                 		destroom = new("/d/magic/room/templeward");
                 		flag = 1;
@@ -514,7 +493,7 @@ void trigger_ward()
                 	combatants[i]->move(destroom);
         	}
     	}
-   
+
     	if(flag)
     	{
       	tell_room(TO,"%^BOLD%^%^CYAN%^A s%^WHITE%^p%^CYAN%^ar%^BLUE%^k"
