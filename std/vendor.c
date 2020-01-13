@@ -843,17 +843,23 @@ void inventory() {
     string tmp;
     if(!objectp(TO)) return 0;
     if(disabled(TP, ({"disabled", "unconscious"})) )
-	    return 1;
+        return 1;
 
     if (!(i = sizeof(inv = all_inventory(TP)))) {
         write("You don't have anything!");
         return 1;
     }
     write("%^CYAN%^The shop clerk looks over your inventory.");
-    while (i--) {
+    while (i--)
+    {
         tmp = "";
-         if ((check_allowed(inv[i]) == 0)||(!(value = (int)inv[i]->query_value()))) {
-            if ((string)inv[i]->query_short() == "" || undefinedp(inv[i]->query_short())) continue;
+        if(!stringp(inv[i]->query_short()))
+            continue;
+        if (inv[i]->query_short() == "" || undefinedp(inv[i]->query_short()))
+            continue;
+
+        if ((check_allowed(inv[i]) == 0)||(!(value = (int)inv[i]->query_value())))
+        {
             tmp += arrange_string((string)inv[i]->query_short(),46);
             tmp += "0    -----";
             write(tmp);
