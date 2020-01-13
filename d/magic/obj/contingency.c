@@ -3,11 +3,8 @@
 inherit OBJECT;
 
 string spell, args;
-//object empowered;
 int prof;
-
-//void set_empowered(object obj) { empowered = obj;}
-//object query_empowered(object obj) { return empowered; }
+int level;
 
 void create() {
     ::create();
@@ -32,8 +29,8 @@ void init() {
     add_action("now","now");
 }
 
-set_prof(int i) {
-    prof = i;
+set_clevel(int i) {
+    level = i;
 }
 
 int get_prof() {
@@ -56,11 +53,10 @@ int flag =0;
 int now() {
     object spellobj;
     object *armor;
-    int level;
+
     if(!spell) return 0;
     if(flag) return 0;
     flag = 1;
-
 
     if(!deep_present("statue of "+capitalize(TP->query_name()),TP)){
 	write("The image of yourself is missing, the contingency fails.\n");
@@ -71,10 +67,10 @@ int now() {
     spellobj = new(spell);
 
     if(!stringp(args) || args == "") {
-        spellobj->use_spell(TP,"",level, prof,"mage");
+        spellobj->use_spell(TP,"",level, 100,"mage");
     }
     else {
-        spellobj->use_spell(TP,args,level, prof,"mage");
+        spellobj->use_spell(TP,args,level,100,"mage");
     }
 
     call_out("remove",1);

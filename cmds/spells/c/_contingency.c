@@ -13,7 +13,7 @@ void create() {
     set_syntax("cast CLASS contingency on SPELL_NAME [on SPELL_ARGS]");
     set_description("This spell allows you to put a spell in reserve, called upon at any time with the command <now>. The target of the reserved spell is always the caster, but arguments can be specified for spells that require them. You must carry a likeness of yourself, usually a small statue, when casting this spell.
 
-Example of usage:  cast contingency on teleport on REMEMBERED_LOCATION");
+Example of usage:  cast contingency on teleport on LOCATION");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -82,7 +82,7 @@ void spell_effect(int prof) {
   spellProf = spellObj->calculate_prof_state();
   cont= new("/d/magic/obj/contingency");
 
-  cont->set_prof((prof+spellProf)/2);
+  cont->set_clevel(clevel);
   cont->set_spell(spell);
   cont->set_args(args);
   cont->move(caster);
@@ -104,14 +104,14 @@ void dest_effect(){
     tell_room(environment(caster),"%^BOLD%^%^RED%^You hear a slight pop and crackle.");
     cont->remove(0);
   }
-   if (!objectp(caster)) {
-       remove();
-       return;
-    }
+  if (!objectp(caster)) {
+    remove();
+    return;
+  }
   caster->remove_property_value("spelled", ({TO}) );
   removeSpellFromCaster();
   ::dest_effect();
-   if(objectp(TO)) TO->remove();
+  if(objectp(TO)) TO->remove();
 }
 
 void heart_beat() {
