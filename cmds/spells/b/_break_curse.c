@@ -66,8 +66,8 @@ void spell_effect(int prof) {
         ob = present(what,caster);
     else
     {
-        if((string)caster->realName(who) != "") who = (string)caster->realName(who);
-        if(!ob2 = present(who, place))
+// if((string)caster->realName(who) != "") who = (string)caster->realName(who);
+        if(!ob2 = present(who, ENV(caster)))
         {
             tell_object(caster,"That person isn't here.");
             dest_effect();

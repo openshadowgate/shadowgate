@@ -1911,8 +1911,8 @@ void define_base_damage(int adjust)
         if(affixed_level)
             slevel = affixed_level;
 
-        slevel+=adjust;
-        slevel-=sdamage_adjustment;
+        slevel += adjust;
+        slevel += sdamage_adjustment;
         slevel = slevel<1?1:slevel;
 
         if(slevel < 1)
