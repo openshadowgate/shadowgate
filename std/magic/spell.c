@@ -1874,9 +1874,9 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 1;
     if(spell_type == "psywarrior")
         sdamage_adjustment -= 2;
-    if(spell_type == "mage" ||
-       spell_type == "psion")
-        sdamage_adjustment += 2;
+
+    if(FEATS_D->usable_feat(caster, "apoapsis of power"))
+        sdamage_adjustment += 4;
     sdamage_adjustment=sdamage_adjustment<0?0:sdamage_adjustment;
 }
 
@@ -1922,7 +1922,7 @@ void define_base_damage(int adjust)
             if(slevel % 2)
                 sdamage = roll_dice(clevel, 5 + slevel);
             else
-                sdamage = roll_dice(clevel, 5 + slevel) + roll_dice(1, clevel / 2);
+                sdamage = roll_dice(clevel, 5 + slevel - 1) + roll_dice(1, clevel / 2);
         }
         else
             sdamage = roll_dice(clevel, 8);
