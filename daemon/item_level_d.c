@@ -542,6 +542,8 @@ int validate(object ob) {
           "fixitem>.\n\n%^BOLD%^%^RED%^You will not be able to use this item "+
           "until it has been adjusted.%^RESET%^"
         );
+        ob->unwear();
+        ob->remove_property("wear_order");
         ob->move(TP);
       }
     }
