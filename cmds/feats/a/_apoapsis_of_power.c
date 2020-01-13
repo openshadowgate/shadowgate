@@ -9,7 +9,7 @@ void create()
     feat_type("permanent");
     feat_category("MagicDamage");
     feat_name("apoapsis of power");
-    feat_prereq("Greater spell penetration");
+    feat_prereq("Greater spell penetration, Greater spell power");
     feat_desc("Pure casters learn ability to shift their damage table four levels up.");
     permanent(1);
 }
