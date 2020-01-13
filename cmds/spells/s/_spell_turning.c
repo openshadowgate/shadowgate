@@ -1,5 +1,5 @@
-//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <priest.h>
+#include <magic.h>
 inherit SPELL;
 
 int feattracker;
@@ -50,7 +50,7 @@ void spell_effect(int prof) {
 "vanishes!%^RESET%^",caster);
     }
     caster->set_property("spellturning",clevel/2+5);
-    call_out("dest_effect", 1800 + (clevel * 10));
+    call_out("dest_effect", 1800 + (ROUND_LENGTH * (clevel * 3 + roll_dice(1, 20))));
     spell_successful();
     addSpellToCaster();
 }

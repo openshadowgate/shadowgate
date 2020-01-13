@@ -22,6 +22,7 @@ Eldebaro (East Oasis)
 Graez (Sangri)
 Juran
 Kinaro
+Lothwaite
 Muul'daan
 Seneca (Attaya)
 Shadow
@@ -68,6 +69,10 @@ void spell_effect(int prof) {
     case "kinaro":
         where = "/d/dagger/kinaro/church";
         placename = "Kinaro";
+        break;
+    case "lothwaite":
+        where = "/d/barriermnts/lothwaite/rooms/chapel5";
+        placename = "Lothwaite";
         break;
     case "seneca":
         where = "/d/attaya/newseneca/rooms/cath_nave";

@@ -31,9 +31,10 @@ void create() {
                 "antioch" : "/d/antioch/wild/forest/chapel_out",
                 "azha" : "/d/azha/town/church",
                 "deku" : "/d/deku/town/church",
-                //"tonovi" : "/d/dagger/tonovi/town/temple2",
+                "tonovi" : "/d/dagger/tonovi/town/temple1",
 //Tonovi exit taken out until the church is rebuilt in another location.  Circe 4/17/04
                 "juran" : "/d/shadow/juran/city/church",
+                "lothwaite" : "/d/barriermnts/lothwaite/rooms/chapel5",
                 "torm" :  "/d/dagger/Torm/city/c101b",
                 "tabor" : "/d/darkwood/tabor/room/church",
                 "muuldaan" : "/d/shadow/room/muuldaan/rooms/church",

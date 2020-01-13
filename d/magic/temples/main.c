@@ -21,7 +21,8 @@ for each deity of the realm.
 DESC
   );
   set_exits(([
-    "out":"/d/shadow/room/city/church",
+//    "out":"/d/shadow/room/city/church",
+    "out":"/d/shadow/city/room/church",
     //"akadi":TEMPLE+"akadi",
     //"anhur":TEMPLE+"anhur",
     //"auril":TEMPLE+"auril",
