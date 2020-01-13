@@ -474,7 +474,7 @@ This command allows player to craft items and manage their crafting.
 
 %^ORANGE%^<craft enchant>%^RESET%^
 
-    Will put player player into enchanting menu if they have required feat. Players can enchant only player-crafted items, and only if they are profficient with corresponding crafting skill. I.e. to enchant jewwelry, player must be profficient jeweller. To enchant items they must have 'craft magical equipment' feat as well, and item must be mastercrafted.
+    Will put player player into enchanting menu if they have required feat. Players can enchant only player-crafted items, and only if they are profficient with corresponding crafting skill. I.e. to enchant jewwelry, player must be profficient jeweller. To enchant items they must have the 'craft magical equipment' feat as well, and that item must be mastercrafted.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

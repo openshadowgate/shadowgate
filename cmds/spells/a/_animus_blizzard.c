@@ -38,7 +38,7 @@ void spell_effect()
     tell_object(caster,"%^BLUE%^Briefly, you hear wails of the dead comming from behind the veil as you complete chanting, the the storm comes.%^RESET%^");
     tell_room(place,"%^BLUE%^Briefly, you hear horrid chorus of the dead as "+caster->QCN+" chants the spell, then the storm comes.%^RESET%^",caster);
     caster->set_property("spelled", ({TO}));
-    counter = clevel;
+    counter = clevel * 3;
     addSpellToCaster();
     spell_successful();
     execute_attack();

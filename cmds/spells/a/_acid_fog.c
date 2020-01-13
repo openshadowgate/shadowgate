@@ -35,7 +35,7 @@ void spell_effect(int prof)
 {
     tell_object(caster,"%^RESET%^%^BOLD%^%^GREEN%^You take quick retreat from %^BLACK%^t%^GREEN%^he %^BLACK%^s%^GREEN%^i%^BLACK%^g%^GREEN%^il%^GREEN%^ as it opens a portal and fumes rush trhough it!%^RESET%^%^RESET%^");
     tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+"%^BOLD%^%^GREEN%^ takes cover as %^GREEN%^aci%^BLACK%^d%^BLACK%^i%^GREEN%^g %^GREEN%^si%^BLACK%^g%^GREEN%^il%^GREEN%^ explodes and fumes rush thrugh the portal opened!%^RESET%^%^RESET%^",caster);
-    counter = clevel;
+    counter = clevel * 3;
     addSpellToCaster();
     spell_successful();
     execute_attack();

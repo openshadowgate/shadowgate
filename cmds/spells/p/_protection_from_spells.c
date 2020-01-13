@@ -77,7 +77,7 @@ void spell_effect(int prof) {
     target->set_property("spell damage resistance",lower);
     target->set_property("raised spell damage resistance",1);
     addSpellToCaster();
-    call_out("dest_effect",clevel*3*ROUND_LENGTH,lower);
+    call_out("dest_effect",clevel*4*ROUND_LENGTH,lower);
 }
 
 void dest_effect(){

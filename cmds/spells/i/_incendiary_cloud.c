@@ -84,7 +84,7 @@ void do_incendiary() {
       dest_effect();
       return;
    }
-   if(duration > clevel){
+   if(duration > clevel * 3){
       dest_effect();
       return;
    }

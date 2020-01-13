@@ -32,7 +32,7 @@ void spell_effect(int prof)
         "open with freezing rain!");
     tell_room(place,"%^BLUE%^"+caster->QCN+" raises "+caster->QP+" hand into the air and clenches "+caster->QP+" fist.  A peal of thunder sounds as "
         ""+caster->QCN+" unclenches "+caster->QP+" fist and the skies open, pouring the area with freezing rain!",caster);
-    counter = clevel/12;
+    counter = clevel/10 + 1;
     addSpellToCaster();
     spell_successful();
     execute_attack();

@@ -73,7 +73,7 @@ void execute_attack() {
             "%^CYAN%^the area as fist-sized %^RESET%^%^BOLD%^hail stones%^RESET%^%^CYAN%^ smash violently all around!%^RESET%^");
         place->addObjectToCombatCycle(TO,1);
         mystage++;
-        timer = time() + 30 + (ROUND_LENGTH * clevel/2);
+        timer = time() + 30 + (ROUND_LENGTH * clevel * 2);
         return;
 
     default:

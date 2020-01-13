@@ -72,7 +72,7 @@ void execute_attack()
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     foes = target_filter(foes);
 
-    if (time > clevel || !present(caster,place))
+    if (time > clevel * 2 || !present(caster,place))
     {
         dest_effect();
         return;
@@ -86,7 +86,7 @@ void execute_attack()
 
     if(spell_type == "monk" && sizeof(foes)) { MAGIC_D->elemental_opportunist(caster, foes[0]); }
 
-    damage = roll_dice(clevel,4);
+    damage = sdamage;
 
     tell_room(place,"%^BOLD%^RED%^Sheets of flame rage across the area incinerating everything in sight!");
 

@@ -79,7 +79,7 @@ void execute_attack() {
     foes = target_filter(foes);
 
     j = sizeof(foes);
-    if (time>clevel*profs/100) {
+    if (time > clevel * 3) {
         dest_effect();
     }
     else {

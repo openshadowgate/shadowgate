@@ -1874,10 +1874,6 @@ void define_base_spell_level_bonus()
     if(spell_type == "psywarrior")
         sdamage_adjustment -= 2;
 
-    if(spell_type == "sorcerer" ||
-       spell_type == "mage" ||
-       spell_type == "psion")
-        sdamage_adjustment += 2;
     sdamage_adjustment=sdamage_adjustment<0?0:sdamage_adjustment;
 }
 
@@ -1890,16 +1886,16 @@ void define_base_damage(int adjust)
        query_traveling_spell() ||
        query_traveling_aoe_spell())
     {
-        sdamage = roll_dice(1,20)*(clevel/18+1);
+        sdamage = roll_dice(1,20)*(clevel/16+1);
     }
     else if(spell_type=="warlock")
     {
         string blasttype;
         blasttype = (string)caster->query("warlock_blast_type");
         if(blasttype=="utterdark")
-            sdamage = roll_dice(clevel,10);
+            sdamage = roll_dice(clevel, 10) +  roll_dice(1, clevel / 2);
         else
-            sdamage = roll_dice(clevel,9);
+            sdamage = roll_dice(clevel, 10);
     }
     else if(spell_type=="monk")
     {
@@ -1917,22 +1913,17 @@ void define_base_damage(int adjust)
         slevel = slevel<1?1:slevel;
         switch(slevel)
         {
-        case -9..0: sdamage = roll_dice(clevel,6); break;
-        case 1: sdamage = roll_dice(clevel,6); break;
-        case 2: sdamage = roll_dice(clevel,6) + roll_dice(1, clevel / 2); break;
-        case 3: sdamage = roll_dice(clevel,7); break;
-        case 4: sdamage = roll_dice(clevel,7) + roll_dice(1, clevel / 2); break;
-        case 5: sdamage = roll_dice(clevel,8); break;
-        case 6: sdamage = roll_dice(clevel,8) + roll_dice(1, clevel / 2); break;
-        case 7: sdamage = roll_dice(clevel,9); break;
-        case 8: sdamage = roll_dice(clevel,9) + roll_dice(1, clevel / 2); break;
-        case 9: sdamage = roll_dice(clevel,10); break;
-        case 10: sdamage = roll_dice(clevel,10) + roll_dice(1, clevel / 2); break;
-        case 11: sdamage = roll_dice(clevel,11); break;
-        case 12: sdamage = roll_dice(clevel,11) + roll_dice(1, clevel / 2); break;
-        case 13: sdamage = roll_dice(clevel,12); break;
-        case 14: sdamage = roll_dice(clevel,12) + roll_dice(1, clevel / 2); break;
-        case 15..20: sdamage = roll_dice(clevel,10); break;
+        case -9..0: sdamage = roll_dice(clevel, 6); break;
+        case 1: sdamage = roll_dice(clevel, 6); break;
+        case 2: sdamage = roll_dice(clevel, 6) + roll_dice(1, clevel / 2); break;
+        case 3: sdamage = roll_dice(clevel, 8); break;
+        case 4: sdamage = roll_dice(clevel, 8) + roll_dice(1, clevel / 2); break;
+        case 5: sdamage = roll_dice(clevel, 10); break;
+        case 6: sdamage = roll_dice(clevel, 10) + roll_dice(1, clevel / 2); break;
+        case 7: sdamage = roll_dice(clevel, 11); break;
+        case 8: sdamage = roll_dice(clevel, 11) + roll_dice(1, clevel / 2); break;
+        case 9: sdamage = roll_dice(clevel, 12); break;
+        case 10..20: sdamage = roll_dice(clevel,10); break;
         default: sdamage = roll_dice(clevel,8); break;
         }
     }
