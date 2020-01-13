@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS distressing tone");
     set_damage_desc("mass sickening");
-    set_description("You spell a low tone that makes everyone present priefly sickened.");
+    set_description("You spell a low tone that makes everyone present briefly sickened.");
     set_save("fort");
     splash_spell(1);
 }

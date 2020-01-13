@@ -1752,13 +1752,14 @@ varargs int do_spell_damage( object victim, string hit_limb, int wound,string da
             return 1;
         }
 
-    if(place->query_property("antimagic field")>clevel)
-    {
-        tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
-        tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
-        TO->remove();
-        return 1;
-    }
+    if(objectp(place))
+        if(place->query_property("antimagic field")>clevel)
+        {
+            tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
+            tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
+            TO->remove();
+            return 1;
+        }
 
     if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }
 
