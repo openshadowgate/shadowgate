@@ -1874,7 +1874,9 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 1;
     if(spell_type == "psywarrior")
         sdamage_adjustment -= 2;
-
+    if(spell_type == "mage" ||
+       spell_type == "psion")
+        sdamage_adjustment += 2;
     sdamage_adjustment=sdamage_adjustment<0?0:sdamage_adjustment;
 }
 
@@ -1894,9 +1896,9 @@ void define_base_damage(int adjust)
         string blasttype;
         blasttype = (string)caster->query("warlock_blast_type");
         if(blasttype=="utterdark")
-            sdamage = roll_dice(clevel, 12) +  roll_dice(1, clevel / 2);
+            sdamage = roll_dice(clevel, 10) +  roll_dice(1, clevel / 2);
         else
-            sdamage = roll_dice(clevel, 12);
+            sdamage = roll_dice(clevel, 10);
     }
     else if(spell_type=="monk")
     {
@@ -1912,21 +1914,18 @@ void define_base_damage(int adjust)
         slevel+=adjust;
         slevel-=sdamage_adjustment;
         slevel = slevel<1?1:slevel;
-        switch(slevel)
+
+        if(slevel < 1)
+            sdamage = roll_dice(clevel, 5);
+        else if(slevel > 0 && slevel < 20)
         {
-        case -9..0: sdamage = roll_dice(clevel, 5); break;
-        case 1: sdamage = roll_dice(clevel, 6); break;
-        case 2: sdamage = roll_dice(clevel, 7); break;
-        case 3: sdamage = roll_dice(clevel, 8); break;
-        case 4: sdamage = roll_dice(clevel, 9); break;
-        case 5: sdamage = roll_dice(clevel, 10); break;
-        case 6: sdamage = roll_dice(clevel, 11); break;
-        case 7: sdamage = roll_dice(clevel, 12); break;
-        case 8: sdamage = roll_dice(clevel, 13); break;
-        case 9: sdamage = roll_dice(clevel, 14); break;
-        case 10..20: sdamage = roll_dice(clevel,10); break;
-        default: sdamage = roll_dice(clevel,8); break;
+            if(slevel % 2)
+                sdamage = roll_dice(clevel, 5 + slevel);
+            else
+                sdamage = roll_dice(clevel, 5 + slevel) + roll_dice(1, clevel / 2);
         }
+        else
+            sdamage = roll_dice(clevel, 8);
     }
 
     if(FEATS_D->is_active(caster,"eldritch warfare"))
