@@ -278,14 +278,18 @@ int __Help(string nothing){
 
 %^ORANGE%^<list spells>%^RESET%^
     The list command will list all spells available in this shop.
+
 %^ORANGE%^<buy %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^%^ORANGE%^|book|backup of book>%^RESET%^
     This will let you buy a spell, spell book, or a backup of your spell book that the shopkeeper will hold for you. If you want to buy a spell, you may either enter the number of the spell you want to buy, or its name.
     e.g. %^ORANGE%^<buy 5>%^RESET%^ will buy spell #5 on the list
     e.g. %^ORANGE%^<buy magic missile>%^RESET%^ will buy the spell of magic missile
+
 %^ORANGE%^<pickup spell book>%^RESET%^ or %^ORANGE%^<pickup backup>%^RESET%^
     Get a spell book that you left here to be backed up, or get the backup copy of a book you had backed up in this store.
+
 %^ORANGE%^<check backup>%^RESET%^ or %^ORANGE%^<check back up>%^RESET%^
     This will check if you have a backup in the shop.
+
 %^ORANGE%^<help store>%^RESET%^
     Displays this text.
 "
