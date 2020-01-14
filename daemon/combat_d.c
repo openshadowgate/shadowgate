@@ -2384,7 +2384,7 @@ int check_avoidance(object who, object victim, object *weapons)
     if((sizeof(weapons) && !weapons[0]->is_lrweapon()) || !FEATS_D->usable_feat(who, "point blank shot"))
     {
         //ride-by attack
-        if(victim->query_in_vehicle() && FEATS_D->usable_feat(victim,"ride-by attack") && !random(5))
+        if(victim->query_in_vehicle() && FEATS_D->usable_feat(victim,"ride-by attack"))
         {
             if(roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho))
             {
@@ -2394,7 +2394,7 @@ int check_avoidance(object who, object victim, object *weapons)
         }
 
         //shot on the run
-        if(!FEATS_D->usable_feat(victim,"ride-by attack") && victim->query_property("shotontherun") && !random(5))
+        if(!FEATS_D->usable_feat(victim,"ride-by attack") && victim->query_property("shotontherun"))
         {
             if(roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho))
             {
@@ -2404,7 +2404,7 @@ int check_avoidance(object who, object victim, object *weapons)
         }
 
         //mounted combat
-        if(victim->is_animal() && !random(5))
+        if(victim->is_animal())
         {
             rider = (object)victim->query_current_rider();
             if(objectp(rider))
