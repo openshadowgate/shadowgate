@@ -74,7 +74,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    lower = clevel * 2 / 3;
+    lower = clevel / 3;
     target->set_property("spell damage resistance",lower);
     target->set_property("raised spell damage resistance",1);
     addSpellToCaster();
