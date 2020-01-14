@@ -59,6 +59,7 @@ void spell_effect(int prof)
             adjust = origstr - 5;       // don't let adjusted str go below 5
         target->add_stat_bonus("strength", -adjust);
         target->set_property("spelled", ({TO}) );
+        addSpellToCaster();
         spell_kill(target,caster);
         call_out("dest_effect", (ROUND_LENGTH * clevel / 2));
     }

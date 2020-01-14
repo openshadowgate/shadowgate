@@ -29,7 +29,7 @@ void spell_effect(int prof)
 {
     object *foes, foe;
 
-    tell_object(caster,"%^BOLD%^%^BLUE%^As you finish drawing a circle of life, you channel energy out of it.");
+    tell_object(caster,"%^BOLD%^%^BLUE%^As you finish drawing a circle of death, you channel energy out of it.");
     tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" channels blinding energy out of the circle of darkness.",caster);
 
     foes = caster->query_attackers();

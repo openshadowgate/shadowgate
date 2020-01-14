@@ -22,6 +22,8 @@ preset_destinations =
        "juran":"/d/shadow/room/forest/owagon26",
        "kinaro":"/d/dagger/kinaro/path3",
        "muuldaan":"/d/shadow/room/muuldaan/rooms/path6",
+       "lothwaite":"/d/barriermnts/lothwaite/rooms/pathway10",
+       "nurval":"/d/dagger/road/p7",
        "shadow":"/d/darkwood/room/road18",
        "seneca":"/d/attaya/newseneca/rooms/boardwalk3",
        "tabor":"/d/darkwood/tabor/road/road1",
@@ -138,6 +140,8 @@ You can travel to well known cities and destinations:
   Juran
   Kinaro
   Muuldaan
+  Lothwaite
+  Nurval
   Seneca
   Tabor
   Tharis
