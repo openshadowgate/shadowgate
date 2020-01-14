@@ -546,6 +546,7 @@ int set_character_improvement_tax_percent(object who, int perc)
         tell_object(who,"%^BOLD%^%^WHITE%^Your character improvement tax can't be less than %^CYAN%^"+base+"%^WHITE%^.");
         tell_object(who,"%^BOLD%^%^WHITE%^Forcing it to be set at %^CYAN%^"+base+"%^WHITE%^.");
         perc=base;
+        who->set("ctp", perc-base);
         return 0;
     }
     if(perc>100)
