@@ -1889,7 +1889,7 @@ void define_base_damage(int adjust)
        query_traveling_spell() ||
        query_traveling_aoe_spell())
     {
-        sdamage = roll_dice(1,20)*(clevel/16+1);
+        sdamage = roll_dice(1,20)*(clevel/18+1);
     }
     else if(spell_type=="warlock")
     {

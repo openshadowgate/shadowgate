@@ -11,7 +11,7 @@ void create()
     set_spell_level(([ "cleric" : 7, "inquisitor" : 6, "mage" : 6]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS repulsion");
-    set_damage_desc("perpetually pushes everyone attacking you further away");
+    set_damage_desc("perpetually removes attackers for clevel / 8 + 1 rounds");
     set_description("This spell is a modification of armor spell. With this you place a force field around yourself that will push everyone aiming to harm you away, perpetually removing them from combat. Strong willed will pass through the shield.");
     set_save("will");
 
@@ -30,7 +30,7 @@ int preSpell()
 void spell_effect(int prof)
 {
     int duration;
-    duration = (ROUND_LENGTH * 2) * clevel;
+    duration = (ROUND_LENGTH) * (clevel / 8 + 1);
     tell_room(place,"%^CYAN%^As "+caster->QCN+" raises a field of magical force around "+caster->QP+".",caster);
     tell_object(caster,"%^CYAN%^You feel you're surrounded by a force field.");
     caster->set_property("repulsion",1);
