@@ -51,7 +51,7 @@ void spell_effect(int prof){
 void summon_servant() {
     object ob, thing;
 
-    tell_object(caster,"%^CYAN%^You barely notice some movement at the edge of you sight. You feel you can <command servant to> performa various actions. .%^RESET%^");
+    tell_object(caster,"%^CYAN%^You barely notice some movement at the edge of you sight. You feel you can <command servant to> perform various actions.%^RESET%^");
 
     ob=new("/d/magic/mon/unseen_servant.c");
     ob->setup_servant(caster,clevel);

@@ -39,7 +39,7 @@ void setup_undead_scaling(object undead)
     undead->set_property("spell penetration", clevel)
     undead->set_level(clevel);
     undead->set_hd(clevel,8);
-    undead->set_max_hp(clevel*20+100);
+    undead->set_max_hp(clevel*14+100);
     undead->set_hp(undead->query_max_hp());
     undead->set_overall_ac(10-clevel);
 }
