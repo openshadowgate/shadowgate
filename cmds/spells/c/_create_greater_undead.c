@@ -35,7 +35,8 @@ void setup_undead_scaling(object undead)
     undead->set_guild_level("mage",clevel*3/4);
     undead->set_mlevel("mage",clevel*3/4);
     undead->set_skill("spellcraft",clevel);
-    undead->set_skill("perception",clevel);
+    undead->set_skill("perception",clevel - 10);
+    undead->set_property("spell penetration", clevel)
     undead->set_level(clevel);
     undead->set_hd(clevel,8);
     undead->set_max_hp(clevel*20+100);
