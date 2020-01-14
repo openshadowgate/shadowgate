@@ -797,39 +797,22 @@ void __Help(string str) {
 Shops of this type have next commands:
 
 %^ORANGE%^<buy %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
-
     Buy %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
-
 %^ORANGE%^<sell %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
-
     Sell %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
-
 %^ORANGE%^<list [%^ORANGE%^%^ULINE%^TYPE%^RESET%^%^ORANGE%^]>%^RESET%^
-
     List shop inventoryfiltering by %^ORANGE%^%^ULINE%^TYPE%^RESET%^.
-
 %^ORANGE%^<show %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
-
     Show you an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
-
 %^ORANGE%^<repair %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
-
     Repair an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
-
 %^ORANGE%^<repair cost %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^|all>%^RESET%^
-
     Evaluate cost of repairing an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
-
 %^ORANGE%^<repair all>%^RESET%^
-
     Repair everything in your inventory.
-
 %^ORANGE%^<resize %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
-
     Resize an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
-
 %^ORANGE%^<inventory>%^RESET%^
-
     Evaluate items in your inventory.
 
 %^CYAN%^N.B.%^RESET%^ You can refer to a second item on the list with %^ORANGE%^%^ULINE%^ITEM%^RESET%^ %^ORANGE%^%^ULINE%^NUMBER%^RESET%^, e.g. %^ORANGE%^<show flask 2>%^RESET%^ will force vendor to show you the second flask.

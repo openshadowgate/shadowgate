@@ -24,6 +24,7 @@ Juran
 Kinaro
 Lothwaite
 Muul'daan
+Nurval
 Seneca (Attaya)
 Shadow
 Tabor
@@ -103,6 +104,10 @@ void spell_effect(int prof) {
     case "tonovi":
         where = "/d/dagger/tonovi/town/temple1.c";
         placename = "Tonovi";
+        break;
+    case "nurval":
+        where = "/d/dagger/nurval/room/shrine";
+        placename = "Nurval";
         break;
     case "eldebaro":
         placename = "Eldebaro";

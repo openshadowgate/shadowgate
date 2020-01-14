@@ -1528,35 +1528,20 @@ Feats are divided into types (martial, spellcraft, hybrid, generic, epic) and or
 The following commands apply:
 
 %^ORANGE%^<feats allowed>%^RESET%^
-
     Tells you how many feats you are allowed at your current level.
-
 %^ORANGE%^<feats check %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
-
     Tells you if you meet all the requirements to take this feat.
-
 %^ORANGE%^<feats add %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
-
     Will add the feat if you have any remaining levelling feats.
-
 %^ORANGE%^<feats remove %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
-
     Will remove the feat if you no longer want to retain it.
-
 %^ORANGE%^<feats martial|spellcraft|hybrid %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
-
     Will add the feat of given category if you have any bonus feats in it.
-
 %^ORANGE%^<feats list martial|spellcraft|hybrid|general|epic>%^RESET%^
-
     Displays the specified feat trees.
-
 %^ORANGE%^<feats fix>%^RESET%^
-
     Will attempt to fix your feat tree. If your feats seem incorrect, use this command.
-
 %^ORANGE%^<feats wipe>%^RESET%^
-
     Will wipe all your feats once per character or if devs granted you free wipe.
 
 %^CYAN%^COLOR CODING%^RESET%^

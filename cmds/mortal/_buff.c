@@ -338,25 +338,20 @@ buff clear
 The command will allow player to store a list of buff spells they can start casting with a single command. The buffs will cycle one at a time for either the player or their party members, depending on the syntax. If the player doesn't have enough spells, spell levels, power points or components, buff process will be interrupted. Buff can be used only while at peace and will stop if the player gets into combat. Moving will also interrupt the process.
 
 %^ORANGE%^<buff list>%^RESET%^
-
     Will list all added buffs and their arguments.
 
 %^ORANGE%^<buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^%^ORANGE%^ | cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^%^ORANGE%^>%^RESET%^
-
     Will add a spell with special cast arguments. For example, <buff add resist energy | cast druid resist energy on fire> for druids will add spell resist energy to be cast with fire argument.
 
 %^ORANGE%^<buff remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^%^ORANGE%^>%^RESET%^
-
     Will remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ from the list.
 
 %^ORANGE%^<buff clear>%^RESET%^
-
     Will clear your buff list.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
 prepare, cast
-
 "
         );
 }

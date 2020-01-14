@@ -5,7 +5,7 @@
 //      created by Vashkar@ShadowGate by modifying /std/comp_vend.c
 //      which was created by Melnmarn@ShadowGate
 // 	   	Note from Tristan@shadowgate Made to work
-// 		Gratuitous shit code doesn't describe this crap 
+// 		Gratuitous shit code doesn't describe this crap
 //		The comp_vend was okay but this spell_vend is pure shit
 
 
@@ -59,7 +59,7 @@ int __Pickup(string str){
     object tmpbook;
     string *spells;
     mapping newlist = ([]);
-    
+
     if(member_array(str,({ "book","spell book","spellbook"})) != -1){
         if(member_array(TPQN,keys(backing)) == -1) return notify_fail("You didn't leave a spell book here!\n");
         if(time() - backing[TPQN] > 1){
@@ -112,7 +112,7 @@ int __Pickup(string str){
         	newlist[spells[i]]=k;
       }
       tmpbook->set_spells(newlist);
-      write("You notice that the book looks much thinner!");     
+      write("You notice that the book looks much thinner!");
       if((int)(tmpbook->move(TP))!=MOVE_OK){
          write("%^MAGENTA%^"+TO->query_name()+" says%^RESET%^: You can't carry your book, I will drop it on the floor.");
          tmpbook->move(ETP);
@@ -142,7 +142,7 @@ int __Buy(mixed str){
       magetype=MAGIC_D->query_title(TP);
       write("%^CYAN%^Here is a spellbook fit for a "+magetype+" like yourself.");
       newbook = new("/d/magic/spellbook"); //added move code Circe 12/14/03
-      if (newbook->move(TP) != MOVE_OK){ 
+      if (newbook->move(TP) != MOVE_OK){
          newbook->move(ETP);
          write("%^MAGENTA%^"+TO->query_name()+" says%^RESET%^: You can't carry your book, I will drop it on the floor.");
       }
@@ -190,7 +190,7 @@ int __Buy(mixed str){
       TP->use_funds("gold",10);
       write("%^CYAN%^Here is your components bag.");
       newbag = new("/d/magic/comp_bag"); //added move code Circe 12/14/03
-      if (newbag->move(TP) != MOVE_OK){ 
+      if (newbag->move(TP) != MOVE_OK){
          newbag->move(ETP);
          write("You can't carry your bag, I will drop it on the floor.");
       }
@@ -214,7 +214,7 @@ int __Buy(mixed str){
    }
    if((int)TP->set_XP_tax(cost, 0, "improvement") == -1)
    {
-       TP->add_exp(-1 * cost);       
+       TP->add_exp(-1 * cost);
    }
    TP->resetLevelForExp(0);
    tell_object(TP,"%^RED%^Subtracting "+cost+" experience points.%^RESET%^");
@@ -253,7 +253,7 @@ int __List(string str){
 }
 
 string sort_strings(string one,string two){
-   return strcmp(one,two); 
+   return strcmp(one,two);
 }
 
 int set_spells_sold(mapping map){
@@ -268,34 +268,28 @@ int set_spells_sold(mapping map){
 string *query_spells(){ return Available; }
 
 mixed sort_items(object one,object two){
-   return strcmp(one->query_short(),two->query_short()); 
+   return strcmp(one->query_short(),two->query_short());
 }
 
 int __Help(string nothing){
    if(nothing != "store" && nothing != "shop") return 0;
    write(
-"%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n"
-"                        %^BOLD%^%^GREEN%^Spell Store Help\n"
-"%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n"
-"    %^RESET%^%^CYAN%^There are 5 commands in the spell store. The shopkeeper\n"
-"    understands 'help', 'buy', 'pickup', 'list' and 'check'.\n"
-"    %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'list spells'\n"
-"        %^RESET%^%^CYAN%^The list command will list all spells available in this shop.\n"
-"    %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'buy <spell name>','buy book','buy bag','buy backup of book'\n"
-"        %^RESET%^%^CYAN%^This will let you buy a spell, spell book, a bag for spell\n"
-"        components, or a backup of your spell book that the shopkeeper will\n"
-"        hold for you.  If you want to buy a spell, you may either enter the\n"
-"        number of the spell you want to buy, or its name.\n"
-"        IE: buy 5 (will buy spell #5)\n"
-"        IE: buy magic missile (will buy the spell of magic missile)\n"
-"    %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'pickup spell book' or 'pickup backup'\n"
-"        %^RESET%^%^CYAN%^Get a spell book that you left here to be backed up, or get the\n"
-"        backup copy of a book you had backed up in this store.\n"
-"    %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'check backup' or 'check back up'\n"
-"        %^RESET%^%^CYAN%^This will check if you have a backup in the shop.\n"
-"    %^BOLD%^%^BLUE%^syntax: %^YELLOW%^'help store'\n"
-"        %^RESET%^%^CYAN%^Displays this text.\n"
-"%^BOLD%^%^BLUE%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-%^RESET%^\n"
+"%^CYAN%^%^ULINE%^Spell store%^RESET%^
+
+%^ORANGE%^<list spells>%^RESET%^
+    The list command will list all spells available in this shop.
+%^ORANGE%^<buy %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^%^ORANGE%^|book|backup of book>%^RESET%^
+    This will let you buy a spell, spell book, or a backup of your spell book that the shopkeeper will hold for you. If you want to buy a spell, you may either enter the number of the spell you want to buy, or its name.
+    e.g. %^ORANGE%^<buy 5>%^RESET%^ will buy spell #5 on the list
+    e.g. %^ORANGE%^<buy magic missile>%^RESET%^ will buy the spell of magic missile
+%^ORANGE%^<pickup spell book>%^RESET%^ or %^ORANGE%^<pickup backup>%^RESET%^
+    Get a spell book that you left here to be backed up, or get the backup copy of a book you had backed up in this store.
+%^ORANGE%^<check backup>%^RESET%^ or %^ORANGE%^<check back up>%^RESET%^
+    This will check if you have a backup in the shop.
+%^ORANGE%^<help store>%^RESET%^
+    Displays this text.
+"
+
 );
    return 1;
 }
@@ -303,13 +297,13 @@ int __Help(string nothing){
 int __Sell(string str){
    object ob;
    int level;
-   
+
    if(!str) return 0;
    if(!ob = present(str,TP)) return notify_fail("You don't have that item.\n");
    if(!ob->is_scroll()) return notify_fail("I only buy scrolls.\n");
 // was this, changing to use query_value to fix problems with safe scrolls *Styx* 8/24/03
 //   level = ob->query_spell_level();
-//   TP->add_money("gold",(level*level)*100);   
+//   TP->add_money("gold",(level*level)*100);
    TP->add_money("gold",ob->query_value());
    write(query_cap_name()+" takes the scroll and hands you "+ob->query_value()+" gold.");
    tell_room(ETO,query_cap_name()+" takes a scroll from "+TPQCN+" and hands "+TP->query_objective()+" some money.",TP);
@@ -347,13 +341,13 @@ int is_vendor() { return 1; }
 /**
  * Generates random spell list from list of all mage spells
  */
-mapping gen_spells_sold(int maxrand) 
+mapping gen_spells_sold(int maxrand)
 {
     mapping all_spells,tmp;
     string *all_spell_names, spellfile;
     int lvl,i,j,k;
     object spell;
-    
+
     all_spells = MAGIC_D->query_index("mage");
     all_spell_names=keys(all_spells);
 
@@ -382,5 +376,3 @@ mapping gen_spells_sold(int maxrand)
     return tmp;
 
 }
-
-

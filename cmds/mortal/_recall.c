@@ -417,22 +417,34 @@ void help()
 {
     write(
 @HELP
-Syntax: \trecall [locations]
-	  \trecall [classname] spells [#]
-	  \trecall [innate] spells
-The <recall> command lets you view the objects you <remember>ed.
-<recall locations> will list the locations you <remember>ed.
-<recall classname spells> will list the spells you have prepared for
-that class. Please note you can specify an optional [#] to specify
-the spells prepared just for that level.
-<recall innate spells> will list any innate spells that your race has.
+%^CYAN%^NAME%^RESET%^
 
-For example recall cleric spells 3 - this will attempt to list the
-level 3 cleric spells that you have memorized.  If you are unable
-to use level 3 cleric spells it will list all your cleric spells.
+recall - recall knowledge
 
-See also: remember, unremember
+%^CYAN%^SYNTAX%^RESET%^
 
+recall locations
+recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^]
+recall innate spells
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command allows you to recall locations or spells you know.
+
+%^ORANGE%^<recall locations>%^RESET%^
+    You'll be displayed a list of locations you remembered with %^ORANGE%^<remember>%^RESET%^. Note, whenever you do it, list of locations will be validated and any non-existent or temporary locations (such as rope trick rooms) will be removed.
+
+%^ORANGE%^<recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^%^ORANGE%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^%^ORANGE%^]>%^RESET%^
+    You'll view list of memorized spells for standard casters, power points fo psionic classes and spell levels for spontaneous classes. Additionally you can specify level to view that level only.
+
+%^ORANGE%^<recall innate spells>%^RESET%^
+    Use this command to review list of your innate spells granted by your race or class.
+
+This command is affected by collumns setting of the %^ORANGE%^<set>%^RESET%^ command.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+remember, unremember, recognize, set
 HELP
 );
     return;
