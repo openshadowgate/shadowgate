@@ -40,7 +40,7 @@ void spell_effect(int prof)
     if(sizeof(foes))
         foreach(foe in foes)
         {
-            if(do_save(foe,6) ||
+            if(do_save(foe,8) ||
                foe->query_property("no death") ||
                foe->is_undead())
             {
