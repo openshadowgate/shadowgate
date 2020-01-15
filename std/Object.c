@@ -388,44 +388,46 @@ mixed query_property(string prop)
     int num, mylevel, scaled, tmpval;
     string subrace, binding;
 
-        if(!props)
-        {
+    if (!props) {
         props = ([]);
         return 0;
-        }
+    }
 
-    if(prop == "untrippable")
-    {
-        if(FEATS_D->usable_feat(TO,"shield master"))
-        {
+    if (prop == "untrippable") {
+        if (FEATS_D->usable_feat(TO, "shield master")) {
             num += TO->query_character_level();
             num += 25;
         }
     }
 
-
-    if(prop == "empowered")
-    {
-        if(FEATS_D->usable_feat(TO,"mind wave")) { num += 1; }
+    if (prop == "empowered") {
+        if (FEATS_D->usable_feat(TO, "mind wave")) {
+            num += 1;
+        }
 // rearranging this so it only runs through the query chain once; cuts down on recursion. N, 5/15.
-        if(FEATS_D->usable_feat(TO,"greater spell power")) num += 6;
+        if (FEATS_D->usable_feat(TO, "greater spell power"))
+            num += 6;
         else {
-            if(FEATS_D->usable_feat(TO,"improved spell power")) num += 4;
+            if (FEATS_D->usable_feat(TO, "improved spell power"))
+                num += 4;
             else {
-                if(FEATS_D->usable_feat(TO,"spell power")) num += 2;
+                if (FEATS_D->usable_feat(TO, "spell power"))
+                    num += 2;
             }
         }
-        if((string)TO->query_race() == "human") {
-          subrace = (string)TO->query("subrace");
-          if(subrace) {
-              if(strsrch(subrace,"genasi") != -1) num += 1;
-          }
+        if ((string) TO->query_race() == "human") {
+            subrace = (string) TO->query("subrace");
+            if (subrace) {
+                if (strsrch(subrace, "genasi") != -1)
+                    num += 1;
+            }
         }
-        if((string)TO->query_race() == "elf") {
-          subrace = (string)TO->query("subrace");
-          if(subrace) {
-              if(subrace == "aquatic elf") num += 1;
-          }
+        if ((string) TO->query_race() == "elf") {
+            subrace = (string) TO->query("subrace");
+            if (subrace) {
+                if (subrace == "aquatic elf")
+                    num += 1;
+            }
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "caster level"));
@@ -445,12 +447,13 @@ mixed query_property(string prop)
     {
         if(TO->is_vampire())
             if(!TO->is_in_sunlight())
-            {
-                int blst = (20000-(int)TO->query_bloodlust())/2000-1;
-                num = props[prop]+5;
-                num -= blst<0?0:blst;
-                return num<0?0:num;
-            }
+                if(sizeof(TO->query_attackers()))
+                {
+                    int blst = (20000-(int)TO->query_bloodlust())/2000-1;
+                    num = props[prop]+5;
+                    num -= blst<0?0:blst;
+                    return num<0?0:num;
+                }
     }
 
     if(prop == "spell dcs") { // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
