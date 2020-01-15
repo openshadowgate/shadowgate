@@ -84,39 +84,36 @@ void spell_effect(int prof) {
     call_out("dest_effect",(clevel*5*ROUND_LENGTH));
 }
 
-void dest_effect() {
+void dest_effect()
+{
     int chance;
-    if(objectp(caster)){
-      if(reversed){
-        tell_object(caster,"%^MAGENTA%^You feel your body return to normal as the potion wears off.");
-        tell_room(environment(caster),"%^MAGENTA%^"+caster->QCN+" suddenly seems normal again.%^RESET%^",caster);
-        caster->add_ac_bonus(5); // restore their lost AC!
-      }
-      else {
-        if((string)TO->query_spell_type() == "potion") {
-          tell_object(caster,"%^MAGENTA%^You feel your body become more substantial as the potion wears off.");
+
+    if (objectp(caster)) {
+        if (reversed) {
+            tell_object(caster, "%^MAGENTA%^You feel your body return to normal as the potion wears off.");
+            tell_room(environment(caster), "%^MAGENTA%^" + caster->QCN + " suddenly seems normal again.%^RESET%^", caster);
+            caster->add_ac_bonus(5);    // restore their lost AC!
+        } else {
+            if ((string) TO->query_spell_type() == "potion") {
+                tell_object(caster, "%^MAGENTA%^You feel your body become more substantial as the potion wears off.");
+            } else {
+                if ((string) TO->query_spell_type() == "bard") {
+                    tell_object(caster, "%^MAGENTA%^You feel your body become more " + "substantial as your song's protection fades.");
+                } else {
+                    tell_object(caster, "%^MAGENTA%^You feel your body become more " + "substantial as your deity's protection fades.");
+                }
+            }
+            tell_room(environment(caster), "%^MAGENTA%^" + caster->QCN + " suddenly seems more " + "substantial as " + caster->QP + " skin loses its " + "distortion.%^RESET%^", caster);
+            chance = (int) caster->query_missChance() - 30;
+            caster->set_missChance(chance);
+            caster->remove_property_value("added short", ( {
+                        "%^BOLD%^%^MAGENTA%^ (slightly distorted)%^RESET%^"}));
         }
-        else {
-          if((string)TO->query_spell_type() == "bard") {
-            tell_object(caster,"%^MAGENTA%^You feel your body become more "+
-            "substantial as your song's protection fades.");
-          }
-          else {
-            tell_object(caster,"%^MAGENTA%^You feel your body become more "+
-            "substantial as your deity's protection fades.");
-          }
-        }
-        tell_room(environment(caster),"%^MAGENTA%^"+caster->QCN+" suddenly seems more "+
-          "substantial as "+caster->QP+" skin loses its "+
-          "distortion.%^RESET%^",caster);
-        chance = (int)caster->query_missChance()-30;
-        caster->set_missChance(chance);
-        caster->remove_property_value("added short",({"%^BOLD%^%^MAGENTA%^ (slightly distorted)%^RESET%^"}));
-      }
-      caster->remove_property("amorpha");
+        caster->remove_property("amorpha");
     }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO))
+        TO->remove();
 }
 
 void reverse_spell(){
