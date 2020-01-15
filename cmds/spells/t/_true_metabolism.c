@@ -40,8 +40,6 @@ void spell_effect(int prof)
         return;
     }
     caster->set_property("true metabolism",1);
-    if(caster->is_class("psywarrior"))
-        define_base_damage(-6);
     tell_object(caster, "%^RED%^You focus your energies so that your body will repair itself!%^RESET%^");
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
         caster->set_property("spelled", ({TO}) );
