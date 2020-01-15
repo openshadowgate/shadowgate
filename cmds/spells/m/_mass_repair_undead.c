@@ -11,7 +11,7 @@ void create()
     ::create();
     set_spell_name("mass repair undead");
     set_spell_level(([ "mage" : 5 ]));
-    set_affixed_spell_level(3);
+    set_affixed_spell_level(4);
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mass repair undead on TARGET");
     set_damage_desc("negative energy");

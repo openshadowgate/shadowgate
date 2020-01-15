@@ -7,7 +7,7 @@ void create()
     ::create();
     set_spell_name("repair undead");
     set_spell_level(([ "mage" : 1, ]));
-    set_affixed_spell_level(3);
+    set_affixed_spell_level(4); // alternative to cure/cause critical
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS repair undead on TARGET");
     set_damage_desc("negative energy on undead");
