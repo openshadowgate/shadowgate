@@ -252,29 +252,36 @@ int __List(string str){
    return 1;
 }
 
-string sort_strings(string one,string two){
-   return strcmp(one,two);
+string sort_strings(string one, string two)
+{
+    return strcmp(one, two);
 }
 
-int set_spells_sold(mapping map){
-   int inc,temp;
-   string *str;
+int set_spells_sold(mapping map)
+{
+    int inc, temp;
+    string *str;
 
-   spellnames = map;
-   Available = keys(map);
-   return 1;
+    spellnames = map;
+    Available = keys(map);
+    return 1;
 }
 
-string *query_spells(){ return Available; }
-
-mixed sort_items(object one,object two){
-   return strcmp(one->query_short(),two->query_short());
+string *query_spells()
+{
+    return Available;
 }
 
-int __Help(string nothing){
-   if(nothing != "store" && nothing != "shop") return 0;
-   write(
-"%^CYAN%^%^ULINE%^Spell store%^RESET%^
+mixed sort_items(object one, object two)
+{
+    return strcmp(one->query_short(), two->query_short());
+}
+
+int __Help(string nothing)
+{
+    if (nothing != "store" && nothing != "shop")
+	return 0;
+    write("%^CYAN%^%^ULINE%^Spell store%^RESET%^
 
 %^ORANGE%^<list spells>%^RESET%^
     The list command will list all spells available in this shop.
@@ -292,10 +299,8 @@ int __Help(string nothing){
 
 %^ORANGE%^<help store>%^RESET%^
     Displays this text.
-"
-
-);
-   return 1;
+");
+    return 1;
 }
 
 int __Sell(string str){
@@ -347,35 +352,35 @@ int is_vendor() { return 1; }
  */
 mapping gen_spells_sold(int maxrand)
 {
-    mapping all_spells,tmp;
+    mapping all_spells, tmp;
     string *all_spell_names, spellfile;
-    int lvl,i,j,k;
+    int lvl, i, j, k;
     object spell;
 
     all_spells = MAGIC_D->query_index("mage");
-    all_spell_names=keys(all_spells);
+    all_spell_names = keys(all_spells);
 
-    all_spell_names=map_array(all_spell_names,(:MAGIC_D->get_spell_file_name($1):));
+    all_spell_names = map_array(all_spell_names, (: MAGIC_D->get_spell_file_name($1):));
 
 //    all_spell_names=filter_array(all_spell_names,(:file_exists($1):));
-    all_spells= ([]);
-    foreach(spellfile in all_spell_names)
-    {
-        if(catch(spell = new(spellfile)))
+    all_spells = ([]);
+    foreach(spellfile in all_spell_names) {
+        if (catch(spell = new(spellfile)))
             continue;
-        if(lvl = spell->query_spell_level("mage"))
-            if(spell->query_feat_required("mage") == "me")
-                all_spells[spell->query_spell_name()]=(2132*lvl*lvl-3522*lvl+3870+roll_dice(lvl,100));
+        if (lvl = spell->query_spell_level("mage"))
+            if (spell->query_feat_required("mage") == "me")
+                all_spells[spell->query_spell_name()] =
+                    (2132 * lvl * lvl - 3522 * lvl + 3870 +
+                     roll_dice(lvl, 100));
         spell->remove();
     }
 
-    tmp=([]);
-    all_spell_names=keys(all_spells);
-    k=sizeof(all_spell_names);
-    for (i=1; i < maxrand; i++)
-    {
-        j=random(k);
-        tmp[all_spell_names[j]]=all_spells[all_spell_names[j]];
+    tmp = ([]);
+    all_spell_names = keys(all_spells);
+    k = sizeof(all_spell_names);
+    for (i = 1; i < maxrand; i++) {
+        j = random(k);
+        tmp[all_spell_names[j]] = all_spells[all_spell_names[j]];
     }
     return tmp;
 

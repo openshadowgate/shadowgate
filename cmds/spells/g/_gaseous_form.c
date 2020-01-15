@@ -12,6 +12,7 @@ void create()
     set_spell_sphere("alteration");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS gaseous form");
+    set_damage_desc("15% evasion chance");
     set_description("This spell allows the caster to take on a translucent, almost gaseous form. "+
     "While active it allows the caster to have a higher chance of avoiding physical attacks as "+
     "well as providing some protection from non physical attacks.");
