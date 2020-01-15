@@ -19,7 +19,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animate dead [on TARGET]");
     set_damage_desc("raises skeletal champions");
-    set_description("%^RESET%^With this spell, the caster uses remnants of negative energy released upon recent death to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and alike powers vor different reasons as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
+    set_description("%^RESET%^With this spell, the caster uses remnants of negative energy released upon recent death to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and alike powers for different reasons as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
