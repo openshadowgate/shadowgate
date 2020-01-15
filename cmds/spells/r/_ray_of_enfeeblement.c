@@ -12,10 +12,16 @@ static object orig_targ;
 void set_orig_targ(object ot) { orig_targ = ot; }
 object query_orig_targ() { return orig_targ; }
 
-void create() {
+int is_curse()
+{
+    return 1;
+}
+
+void create()
+{
     ::create();
     set_spell_name("ray of enfeeblement");
-    set_spell_level(([ "mage" : 2 ]));
+    set_spell_level((["mage":2]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS ray of enfeeblement on TARGET");
     set_description("A coruscating ray springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject takes a penalty to Strength equal to 1d6+1 per two caster levels (maximum 1d6+5).");
