@@ -1805,63 +1805,55 @@ void define_clevel()
 
     clevel = caster->query_guild_level(spell_type);
 
-    if(spell_type == "psion" || spell_type == "psywarrior")
-        clevel = max(({caster->query_guild_level("psion"),caster->query_guild_level("psywarrior")}));
-    if(spell_type == "monk" && FEATS_D->usable_feat(caster, "elemental attunement"))
+    if (spell_type == "psion" || spell_type == "psywarrior")
+        clevel = max(({caster->query_guild_level("psion"), caster->query_guild_level("psywarrior")}));
+    if (spell_type == "monk" && FEATS_D->usable_feat(caster, "elemental attunement"))
         clevel += 5;
 
-    if(FEATS_D->usable_feat(caster, "eldritch conditioning"))
-        if(spell_type == caster->query("eldritch_knight_base_class"))
+    if (FEATS_D->usable_feat(caster, "eldritch conditioning"))
+        if (spell_type == caster->query("eldritch_knight_base_class"))
             clevel = caster->query_character_level();
 
-    if((spell_type == "mage" || spell_type == "sorcerer"))
-    {
-        if(caster->query_school())
-        {
-            if(spell_sphere == caster->query_school())
-            {
-                if(caster->is_class("mage"))
-                    clevel += caster->query_guild_level("mage")/12;
-                if(FEATS_D->usable_feat(caster, "school familiarity"))
+    if ((spell_type == "mage" || spell_type == "sorcerer")) {
+        if (caster->query_school()) {
+            if (spell_sphere == caster->query_school()) {
+                if (caster->is_class("mage"))
+                    clevel += caster->query_guild_level("mage") / 12;
+                if (FEATS_D->usable_feat(caster, "school familiarity"))
                     clevel += 6;
-            }
-            else if(spell_sphere == SCHOOL_OPPOSITION[caster->query_school()])
-            {
-                if(caster->is_class("mage"))
-                    clevel -= caster->query_guild_level("mage")/12;
-                if(FEATS_D->usable_feat(caster, "school familiarity"))
+            } else if (spell_sphere == SCHOOL_OPPOSITION[caster->query_school()]) {
+                if (caster->is_class("mage"))
+                    clevel -= caster->query_guild_level("mage") / 12;
+                if (FEATS_D->usable_feat(caster, "school familiarity"))
                     clevel -= 6;
             }
         }
 
-        if(caster->is_class("gravecaller"))
-            if(FEATS_D->usable_feat(caster, "negative energy conduit"))
-                if(spell_sphere=="necromancy")
+        if (caster->is_class("gravecaller"))
+            if (FEATS_D->usable_feat(caster, "negative energy conduit"))
+                if (spell_sphere == "necromancy")
                     clevel += 4;
 
-        if(caster->is_class("shadow_adept"))
-            if(FEATS_D->usable_feat(caster, "elusive spellcraft"))
-                if(spell_sphere == "necromancy" ||
-                   spell_sphere == "illusion" ||
-                   spell_sphere == "enchantment_charm")
-                    clevel+=3;
+        if (caster->is_class("shadow_adept"))
+            if (FEATS_D->usable_feat(caster, "elusive spellcraft"))
+                if (spell_sphere == "necromancy" || spell_sphere == "illusion" || spell_sphere == "enchantment_charm")
+                    clevel += 3;
     }
 
-    if(spell_type == "cleric" ||
-       spell_type == "druid")
-        if(FEATS_D->usable_feat(caster, "mastery of power"))
+    if (spell_type == "cleric" || spell_type == "druid")
+        if (FEATS_D->usable_feat(caster, "mastery of power"))
             clevel += 4;
 
-    if (FEATS_D->usable_feat(caster, "ragecaster"))
-    {
+    if (FEATS_D->usable_feat(caster, "ragecaster")) {
         clevel = caster->query_character_level();
-        if(caster->query_property("raged"))
+        if (caster->query_property("raged"))
             clevel += 6;
     }
 
-    if((int)caster->query_property("empowered"))
-        clevel += (int)caster->query_property("empowered");
-    clevel = clevel<0?1:clevel;
+    if ((int) caster->query_property("empowered"))
+        clevel += (int) caster->query_property("empowered");
+    clevel = clevel < 0 ? 1 : clevel;
+
 }
 
 /**
@@ -1872,12 +1864,12 @@ void define_base_spell_level_bonus()
     sdamage_adjustment = 0;
     if (query_splash_spell())
         sdamage_adjustment -= 1;
-    if(spell_type == "psywarrior")
+    if (spell_type == "psywarrior")
         sdamage_adjustment -= 2;
 
-    if(FEATS_D->usable_feat(caster, "apoapsis of power"))
+    if (FEATS_D->usable_feat(caster, "apoapsis of power"))
         sdamage_adjustment += 2;
-    sdamage_adjustment=sdamage_adjustment<0?0:sdamage_adjustment;
+    sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
 
 /**
@@ -1885,52 +1877,41 @@ void define_base_spell_level_bonus()
  */
 void define_base_damage(int adjust)
 {
-    if(query_aoe_spell() ||
-       query_traveling_spell() ||
-       query_traveling_aoe_spell())
-    {
-        sdamage = roll_dice(1,20)*(clevel/18+1);
-    }
-    else if(spell_type=="warlock")
-    {
+    if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
+        sdamage = roll_dice(1, 20) * (clevel / 18 + 1);
+    } else if (spell_type == "warlock") {
         string blasttype;
-        blasttype = (string)caster->query("warlock_blast_type");
-        if(blasttype=="utterdark")
-            sdamage = roll_dice(clevel, 10) +  roll_dice(1, clevel / 2);
+
+        blasttype = (string) caster->query("warlock_blast_type");
+        if (blasttype == "utterdark")
+            sdamage = roll_dice(clevel, 10) + roll_dice(1, clevel / 2);
         else
             sdamage = roll_dice(clevel, 10);
-    }
-    else if(spell_type=="monk")
-    {
-        sdamage = roll_dice(clevel,10);
-    }
-    else
-    {
+    } else if (spell_type == "monk") {
+        sdamage = roll_dice(clevel, 10);
+    } else {
         int slevel;
+
         slevel = query_spell_level(spell_type);
-        if(affixed_level)
+        if (affixed_level)
             slevel = affixed_level;
 
         slevel += adjust;
         slevel += sdamage_adjustment;
-        slevel = slevel<1?1:slevel;
+        slevel = slevel < 1 ? 1 : slevel;
 
-        if(slevel < 1)
+        if (slevel < 1)
             sdamage = roll_dice(clevel, 5);
-        else if(slevel > 0 && slevel < 20)
-        {
-            if(slevel % 2)
+        else if (slevel > 0 && slevel < 20) {
+            if (slevel % 2)
                 sdamage = roll_dice(clevel, 5 + slevel);
             else
                 sdamage = roll_dice(clevel, 5 + slevel - 1) + roll_dice(1, clevel / 2);
-        }
-        else
+        } else
             sdamage = roll_dice(clevel, 8);
     }
-
-    if(FEATS_D->is_active(caster,"eldritch warfare"))
-        sdamage = roll_dice(4,sdamage/4);
-
+    if (FEATS_D->is_active(caster, "eldritch warfare"))
+        sdamage = roll_dice(4, sdamage / 4);
 }
 
 int query_base_damage()
