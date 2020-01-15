@@ -1,4 +1,6 @@
+//updated to be similar to Spell Turning, which is more in line with source material ~Circe~ 1/14/2020
 #include <priest.h>
+#include <magic.h>
 inherit SPELL;
 
 int feattracker;
@@ -9,19 +11,16 @@ void create() {
     set_spell_level(([ "psion" : 7 ]));
     set_spell_sphere("abjuration");
     set_discipline("kineticist");
+    set_damage_desc("clevel/2+5 spell reflection chance.");
     set_syntax("cast CLASS reddopsi");
-    set_description("Talented kineticists can manipulate the area around "
-       "them, turning aside spells. While they cannot stop area of effect "
-       "spells are those that produce splash damage, they can prevent spells "
-       "and powers that directly target them from landing. This spell does "
-       "not stack with the 'reflection' or 'spell reflection' feats.");
+    set_description("Talented kineticists can manipulate the area around them, causing spells and powers to rebound upon their originators. While this power holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of whether they are hostile or friendly. The ward will not reflect splash damage or AOE, but only direct-targetted spells. This spell will override spell reflection and reflection feats.");
     set_verbal_comp();
     set_somatic_comp();
-	set_helpful_spell(1);
+    set_helpful_spell(1);
 }
 
 int preSpell(){
-   if(member_array("spell reflection",(string*)caster->query_temporary_feats()) != -1) {
+    if(caster->query_property("spellturning")){
       tell_object(CASTER,"You are already under the influence of such an effect.");
       return 0;
    }
@@ -39,29 +38,20 @@ void spell_effect(int prof) {
       return;
     }
     if (interactive(caster)) {
-      tell_object(caster, "%^RESET%^%^MAGENTA%^You close your eyes, inhaling deeply "
-         "as you bring into being a %^CYAN%^rune of protection%^MAGENTA%^. A faint "
-         "hint of %^ORANGE%^saffron %^MAGENTA%^hangs in the air before being "
-         "subsumed by the fragrance of %^BOLD%^%^CYAN%^ozone%^RESET%^%^MAGENTA%^.%^RESET%^");
+      tell_object(caster, "%^RESET%^%^MAGENTA%^You close your eyes, inhaling deeply as you bring into being a %^CYAN%^rune of protection%^MAGENTA%^. A faint hint of %^ORANGE%^saffron %^MAGENTA%^hangs in the air before being subsumed by the fragrance of %^BOLD%^%^CYAN%^ozone%^RESET%^%^MAGENTA%^.%^RESET%^");
     }
-    tell_room(place,"%^RESET%^%^MAGENTA%^You smell %^ORANGE%^saffron %^MAGENTA%^followed "
-       "by a strong scent of %^BOLD%^%^CYAN%^ozone%^RESET%^%^MAGENTA%^ as a %^CYAN%^rune "
-       "%^MAGENTA%^appears by sweeps and loops in the air before "+caster->QCN+"!%^RESET%^",caster);
-    if(member_array("spell reflection",(string*)caster->query_temporary_feats()) == -1) {
-      caster->add_temporary_feat("spell reflection");
-      feattracker = 1;
-    }
-    call_out("dest_effect", 1800 + (clevel * 10));
+    tell_room(place,"%^RESET%^%^MAGENTA%^You smell %^ORANGE%^saffron %^MAGENTA%^followed by a strong scent of %^BOLD%^%^CYAN%^ozone%^RESET%^%^MAGENTA%^ as a %^CYAN%^rune %^MAGENTA%^appears by sweeps and loops in the air before "+caster->QCN+"!%^RESET%^",caster);
+    caster->set_property("spellturning",clevel/2+5);
+    call_out("dest_effect", 1800 + (ROUND_LENGTH * (clevel * 3 + roll_dice(1, 20))));
     spell_successful();
     addSpellToCaster();
 }
 
 void dest_effect(){
     int i;
-
-    if(objectp(CASTER)) {
+    if(objectp(CASTER)){
       tell_object(caster,"%^MAGENTA%^You feel the protective spell ward fade from you.%^RESET%^");
-      if(feattracker == 1) caster->remove_temporary_feat("spell reflection");
+      caster->set_property("spellturning",-(clevel/2+5));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
