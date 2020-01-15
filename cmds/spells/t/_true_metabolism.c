@@ -89,7 +89,7 @@ void execute_attack()
         tell_object(caster,"%^BOLD%^%^CYAN%^You make a mental adjustment, healing some of your wounds!%^RESET%^");
         tell_room(environment(caster),"%^BOLD%^%^CYAN%^Some of "+caster->QCN+"'s wounds seem to heal!%^RESET%^",caster);
         if(FEATS_D->usable_feat(caster,"metabolic perfection"))
-            sdamage*=5/4;
+            sdamage*=3/2;
         damage_targ(caster,"torso",-sdamage,"untyped");
     }
     if(!FEATS_D->usable_feat(caster,"metabolic perfection"))
