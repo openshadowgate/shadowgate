@@ -105,7 +105,7 @@ string *rem_rooms_sort, *rem_obs_sort;
 
 int test_passive_perception();
 
-static int ticker = 0;
+static int user_ticker = 0; // timer increased once per heartbeat
 int killable;
 //static object *protectors;
 //static int blinking;
@@ -635,7 +635,7 @@ string query_time_logged_in() {
 
 int query_ticker()
 {
-    return ticker;
+    return user_ticker;
 }
 
 int query_start_time() { return start_time; }
@@ -1781,15 +1781,8 @@ void heart_beat()
     }
 
     //Once per round
-    if(!(ticker%3))
+    if(!(user_ticker%3))
     {
-        if(FEATS_D->usable_feat(TO,"regeneration") ||
-           query_race() == "shade")
-            if(query_hp() < query_max_hp())
-                add_hp(roll_dice(1,TO->query_level())/2+1); //change help status effects when adjusting this
-        if(query_property("fast healing"))
-            if(query_hp() < query_max_hp())
-                add_hp(query_property("fast healing")*roll_dice(1,TO->query_level()/2+1)); //change help status effects when adjusting this
         if(is_vampire())
         {
             if(TO->is_in_sunlight())
@@ -1821,10 +1814,10 @@ void heart_beat()
         }
     }
 
-    if(!avatarp(TO))
-        if(!(ticker%9))
+    if (!avatarp(TO))
+        if (!(user_ticker % 9))
             test_passive_perception();
-    ticker++;
+    user_ticker++;
 }
 
 void net_dead2() {
