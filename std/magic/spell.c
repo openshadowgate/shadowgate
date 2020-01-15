@@ -2794,7 +2794,7 @@ void help() {
         write("%^BOLD%^%^RED%^This spell is a curse.");
     if(aoe_spell)
         write("%^BOLD%^%^RED%^This spell is Area of Effect");
-    if(traveling_aoe_spell)
+    if(traveling_aoe_spell || traveling_spell)
         write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
     if(splash_spell)
         write("%^BOLD%^%^RED%^This spell will affect multiple targets.");

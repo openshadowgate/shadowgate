@@ -13,7 +13,7 @@ void create()
     set_spell_sphere("necromancy");
     set_mystery(({"reaper","bones"}));
     set_syntax("cast CLASS wail of the banshee");
-    set_damage_desc("sonic to living");
+    set_damage_desc("sonic");
     set_description("A caster invokes a horrible arcane scream that kills everything living in sight. Those who withstand the scream still suffer a little.");
     set_verbal_comp();
     set_somatic_comp();
@@ -41,8 +41,7 @@ void spell_effect(int prof)
         foreach(foe in foes)
         {
             if(do_save(foe,8) ||
-               foe->query_property("no death") ||
-               foe->is_undead())
+               foe->query_property("no death"))
             {
                 tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
                 damage_targ(foe, foe->query_target_limb(),sdamage,"sonic");

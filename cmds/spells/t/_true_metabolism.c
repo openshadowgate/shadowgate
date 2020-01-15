@@ -21,7 +21,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
-    traveling_spell();
+    traveling_spell(1);
 }
 
 int preSpell() {
