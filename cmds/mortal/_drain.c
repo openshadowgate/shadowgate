@@ -88,7 +88,10 @@ int cmd_drain(string args)
 
     if(targobj->query_property("garlic_scent"))
     {
-        notify_fail("Strong odor of garlic prevents you from draining them.\n");
+        tell_object(TP,"%^BOLD%^%^RED%^Strong odor of garlic makes you sick!");
+        tell_object(TP,"%^BOLD%^%^RED%^You start uncontrollably puking blood.");
+        TP->add_bloodlust(-20000);
+        TP->set_paralyzed(roll_dice(1, 4) * 8, "%^BOLD%^%^RED%^You are sick from garlic scent.");
         return 0;
     }
 
