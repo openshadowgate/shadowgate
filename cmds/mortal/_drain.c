@@ -29,7 +29,7 @@ int cmd_drain(string args)
     if (!args)
     {
         notify_fail("Target required.\n");
-        return 0;
+        return 1;
     }
     if(args == "nullify")
     {
@@ -46,44 +46,44 @@ int cmd_drain(string args)
     if(member_array(type,({"life","health"}))==-1)
     {
         notify_fail("Invalid drain type. Drain for life or health.\n");
-        return 0;
+        return 1;
     }
     if(!objectp(targobj=present(targ,ETP)))
     {
         notify_fail("No such target present.\n");
-        return 0;
+        return 1;
     }
 
     if(!TP->ok_to_kill(targobj))
     {
         notify_fail("Feeding from this is beneath you.\n");
-        return 0;
+        return 1;
     }
 
 
     if(!RACE_D->is_race(targobj->query_race()))
     {
         notify_fail("Feeding from this is beneath you.\n");
-        return 0;
+        return 1;
     }
 
     if(targobj->query_property("spell_creature") ||
        targobj->query("not living"))
     {
         notify_fail("Don't feed on phantoms.\n");
-        return 0;
+        return 1;
     }
 
     if(!(verify_conditions(targobj)))
     {
         notify_fail("Your target is not incapacitated.\n");
-        return 0;
+        return 1;
     }
 
     if(targobj->is_undead())
     {
         notify_fail("You should eat fresh food.\n");
-        return 0;
+        return 1;
     }
 
     if(targobj->query_property("garlic_scent"))
@@ -92,7 +92,7 @@ int cmd_drain(string args)
         tell_object(TP,"%^BOLD%^%^RED%^You start uncontrollably puking blood.");
         TP->add_bloodlust(-20000);
         TP->set_paralyzed(roll_dice(1, 4) * 8, "%^BOLD%^%^RED%^You are sick from garlic scent.");
-        return 0;
+        return 1;
     }
 
     // 10 minutes?
