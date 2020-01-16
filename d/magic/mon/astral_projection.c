@@ -4,14 +4,13 @@
 inherit WEAPONLESS;
 
 object cast;
+object lastroom = 0;
 
 void create()
 {
     ::create();
     set_name("astral projection");
     set_id(({"atral projection","projection",}));
-    set_short("%^RESET%^%^BOLD%^A %^RESET%^m%^BOLD%^ig%^RESET%^h%^BOLD%^ty g%^RESET%^h%^BOLD%^ost%^RESET%^l%^BOLD%^y wa%^RESET%^r%^BOLD%^ri%^RESET%^o%^BOLD%^r%^RESET%^");
-    set_long("%^BOLD%^Once a %^BLACK%^fierce %^WHITE%^warrior, this ghostly, %^CYAN%^translucent figure %^WHITE%^still rises to the aid of those in need during troubling times. His white eyes shine with %^BLACK%^grim determination %^WHITE%^as he grips tightly to a sword. Even in death he is a strong and proud man, ready to cut down his enemies and to defend the life of his living allies.%^RESET%^");
     set_hd(4, 1);
     set_hp(query_hd() * 8);
     set_class("fighter");
@@ -26,14 +25,73 @@ void create()
     set_gender("other");
     set_overall_ac(4);
 
+    set_property("silent_equip",1);
+
     set_monster_feats(( {
                 "opportunity strikes", "swipe",
                     }));
 
     set_alignment(5);
+    add_action("look_around", "look");
+}
 
-    command("message walks in");
-    command("message walks $D");
+look_around()
+{
+    int i;
+    object * inv = all_inventory(ETO);
+    string * oexits;
+
+    tell_object(cast, "%^BOLD%^%^WHITE%^[A]%^RESET%^ " + ETO->query_long());
+    for (i = 0; i < sizeof(inv); ++i) {
+        if (!living(inv[i]))
+            continue;
+        if (inv[i]->id("scryx222")) {
+            continue;
+        }
+        if (inv[i]->query_invis())
+            continue;
+        if (inv[i]->query_hidden())
+            continue;
+        if (!inv[i]->is_detectable())
+            continue;
+
+        send_living_name(inv[i]);
+    }
+
+    oexits = ETO->query_obvious_exits();
+    if(sizeof(oexits))
+    {
+        tell_object(cast, "%^BOLD%^%^WHITE%^[A] %^CYAN%^Obvious exits: " + implode(sort_array(oexits, 1), ", "));
+    }
+    else
+    {
+        tell_objcet(cast, "%^BOLD%^%^WHITE%^[A] %^CYAN%^There are no obvious exits.");
+    }
+}
+
+// From /d/magic/obj/scry_object.c
+/**
+ * Returns living name based on their profile if appliable
+ */
+int send_living_name(object target)
+{
+    string known, str;
+    int i, j;
+
+    if (target->is_monster()) {
+        str = target->query_short();
+        message("living_item", "%^CYAN%^BOLD%^[A] %^RED%^" + str, cast);
+        return 1;
+    }
+    if (objectp(cast) && cast->knownAs(target->query_true_name())) {
+        known = cast->knownAs(target->query_true_name());
+    }
+    str = target->getWholeDescriptivePhrase();
+    if (known)
+        str = capitalize(known) + ", " + str;
+    message("living_item", "%^CYAN%^BOLD%^[A] %^RED%^" + str, cast);
+    known = 0;
+    return 1;
 }
 
 void setup_servant(object caster, int clevel)
@@ -90,7 +148,14 @@ catch_tell(string str)
         dest_me();
         return;
     }
-    tell_object(cast, "%^BOLD%^%^WHITE%^You observe:%^RESET%^ " + str);
+    tell_object(cast, "%^BOLD%^%^WHITE%^[A]%^RESET%^ " + str);
+}
+
+int move(mixed dest)
+{
+    ::move(dest);
+    look_around();
+    lastroom = ETO;
 }
 
 void protect()
@@ -99,6 +164,12 @@ void protect()
 
     if(!objectp(cast))
         return;
+
+    if(lastroom != ETO)
+    {
+        look_around();
+        lastroom = ETO;
+    }
 
     call_out("protect",ROUND_LENGTH);
     foes=cast->query_attackers();
@@ -113,9 +184,19 @@ void protect()
     }
 }
 
+void set_invis()
+{
+    if (TO->query_invis())
+        return;
+    else
+        ::set_invis();
+    return;
+}
+
 void die(object obj)
 {
     cast->remove_property("has_elemental");
+    cast->cause_typed_damage(cast, cast->return_target_limb(), cast->query_level() * 8, "mental");
     TO->remove();
     ::die(obj);
     return;

@@ -13,7 +13,7 @@ void create() {
     ::create();
     set_spell_name("astral projection");
     set_spell_level((["oracle":9, "mage":9 ]));
-    set_spell_sphere("invocation_evocation");
+    set_spell_sphere("necromancy");
     set_syntax("cast CLASS spiritual ally");
     set_mystery("ancestor");
     set_description("Call to one of your ancestors to aid you in combat. This spirit will have a chosen weapon of your deity and will obey all your commands.
@@ -62,6 +62,10 @@ void spell_effect(int prof)
     ob->set_property("spell", ({TO}) );
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
+    ob->set_race(caster->query_visual_race());
+    ob->set_gender((string)caster->query_gender());
+    ob->set_short(cm(strip_colors(caster->getWholeDescriptivePhrase())));
+    ob->set_long(cm(strip_colors(caster->getWholeDescriptivePhrase() + " " +(string)caster->query_description())));
 
     addSpellToCaster();
 
@@ -85,4 +89,9 @@ void dest_effect()
     ::dest_effect();
     if (objectp(TO))
         TO->remove();
+}
+
+string cm(string str)
+{
+    return CRAYON_D->color_string(str,"grey");
 }

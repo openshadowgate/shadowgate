@@ -89,7 +89,11 @@ void dest_effect() {
 			destruct(control);
 		}
     }
-    if(objectp(caster)) { caster->remove_property("has_elemental"); }
+    if (objectp(caster)) {
+        caster->remove_property("has_elemental");
+    }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO))
+        TO->remove();
+
 }

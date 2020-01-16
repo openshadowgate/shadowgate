@@ -156,8 +156,8 @@ int help(string str) {
   write("Instructions for use of this "+alias+".\n");
   write(
 @SCRYING
-To start scrying a person................ <scry person [name]>
-To start scrying a location.............. <scry location [name]>
+To start scrying a person................ <scry person NAME>
+To start scrying a location.............. <scry location NAME>
 To stop scrying.......................... <stop scrying>
 
 Note: You must use the remember command to designate locations for
@@ -168,8 +168,8 @@ SCRYING
   );
   write("To quickly peer at the scryed location... <peer through "+alias+">");
   write("To look at the scryed surroundings....... <look through "+alias+">");
-  write("To recognize a person scryed............. <recognize [id] as [name] through "+alias+">");
-  write("To remember the location scryed as [id].. <remember through "+alias+" as [id]>");
+  write("To recognize a person scryed............. <recognize ID as NAME through "+alias+">");
+  write("To remember the location scryed as [id].. <remember through "+alias+" as ID>");
   //	write("To cast a spell using this object........ <cast [class] [spell] on [target] through "+alias+">");
   //	write("    Spells allowed: detect magic, detect good, and detect evil.");
   if(!TO->is_temporary()) write(

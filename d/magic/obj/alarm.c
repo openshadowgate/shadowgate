@@ -43,21 +43,22 @@ void alarm_observe()
     else
     {
         object * livings;
+        int clevel = query_property("spell")->query_clevel();
+
         livings = all_living(ETO);
         livings -= ({TO});
         livings -= ({caster});
         livings -= caster->query_followers();
-        livings = filter_array(livings,(:!avatarp($1):));
-        if(objectp(caster))
-            if(sizeof(livings))
-                if(alarm_type=="mental")
-                {
-                    tell_room(caster,"%^CYAN%^An alarm set in "+ENV(TO)->query_short()+" had been set off.%^RESET%^");
+        livings = filter_array(livings, (: !avatarp($1):));
+        livings = filter_array(livings, (:$1->query_skill("spellcraft") < $2 * 5 / 4:), clevel);
+        livings = filter_array(livings, (:$1->query_skill("stealth") < $2 * 5 / 4:), clevel);
+        if (objectp(caster))
+            if (sizeof(livings))
+                if (alarm_type == "mental") {
+                    tell_room(caster, "%^CYAN%^An alarm set in " + ENV(TO)->query_short() + " had been set off.%^RESET%^");
                     remove_alarm();
-                }
-                else
-                {
-                    message("info","%^BOLD%^%^CYAN%^You hear a loud pop.%^RESET%^",nearbyRoom(ENV(TO),2));
+                } else {
+                    message("info", "%^BOLD%^%^CYAN%^You hear a loud pop.%^RESET%^", nearbyRoom(ENV(TO), 2));
                     remove_alarm();
                 }
     }

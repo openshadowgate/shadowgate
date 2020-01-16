@@ -17,14 +17,14 @@ void query_caster();
 int power;
 
 void create(){
-   ::create();
+    ::create();
 
     set_name("shadowlistener");
-   set_property("no detect",1);
-   set_id(({"ShadowListener"}));
-      set_short(0);
-   set_invis();
-   add_limb("body","",0,0,0);
+    set_property("no detect",1);
+    set_id(({"ShadowListener"}));
+    set_short(0);
+    set_invis();
+    add_limb("body","",0,0,0);
 }
 
 int move(mixed dest){
