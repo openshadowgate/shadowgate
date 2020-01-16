@@ -86,6 +86,7 @@ int raise_player(string verb)
             tell_object(DeadPerson,"%^BOLD%^You have choosen to return to life!%^RESET%^");
             tell_room(environment(DeadPerson),"%^BOLD%^"+TP->QCN+" has returned from the "+
             "dead!",DeadPerson);
+            PERMA_DEATH_D->remove_player(DeadPerson->query_name());
             if(objectp(MyDeadRoom)) MyDeadRoom->remove();
             // intentionally left a break out of here
         case "cancel":

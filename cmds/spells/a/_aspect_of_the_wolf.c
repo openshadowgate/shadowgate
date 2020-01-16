@@ -55,7 +55,7 @@ void dest_effect()
 {
     if (objectp(caster)) {
         caster->remove_property("aspect of the wolf");
-        caster->remove_property("augmented");
+        caster->remove_property("augmentation");
         caster->add_stat_bonus("strength", -4);
         caster->add_stat_bonus("dexterity", -4);
         tell_object(caster, "%^GREEN%^%^BOLD%^The feeling of the hunt leaves you.");
