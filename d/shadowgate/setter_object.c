@@ -694,7 +694,10 @@ int okdone()
     if(MyCharacterInfo["race"]["subrace"] != "NIL") ETO->set("subrace", MyCharacterInfo["race"]["subrace"]);
     if((OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
         OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
+    {
         MyPlace = "template";
+        tell_object(FPL("ilmarinen"),":test");
+    }
     else
         MyPlace = "hair color";
     MyPlace = "hair color";
