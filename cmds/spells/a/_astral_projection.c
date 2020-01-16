@@ -12,16 +12,17 @@ int amount;
 void create() {
     ::create();
     set_spell_name("astral projection");
-    set_spell_level((["oracle":9, "mage":9 ]));
+    set_spell_level((["oracle":9, "mage":9,]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS spiritual ally");
+    set_syntax("cast CLASS astral projection");
     set_mystery("ancestor");
-    set_description("Call to one of your ancestors to aid you in combat. This spirit will have a chosen weapon of your deity and will obey all your commands.
+    set_description("By freeing your spirit from your physical body, this spell allows you to project an astral body. The new body will look mostly like you, but will be invisible to others. Your new body will obey your commands and will convey everything that is happening around it into your mind. The death of your second body will send you into a brief shock and will slightly harm you.
 
 This is a greater summons, and cannot be used simultaneously with other greater summons.
-To remove ally use %^ORANGE%^<dismiss ally>%^RESET%^
-To command ally use %^ORANGE%^<command ally to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost ally to follow use %^ORANGE%^<command ally to follow>%^RESET%^");
+To remove projection use %^ORANGE%^<dismiss projection>%^RESET%^
+To command projection use %^ORANGE%^<command projection to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+To force lost projection to follow use %^ORANGE%^<command projection to follow>%^RESET%^
+To look around simply use %^ORANGE%^<command projection to look>%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
@@ -41,7 +42,7 @@ void spell_effect(int prof)
     object ob, thing;
     int bonus, power;
 
-    tell_object(caster, "%^CYAN%^%^BOLD%^As you complete the spell a humanoid being descends to stand in your protection.%^RESET%^");
+    tell_object(caster, "%^CYAN%^%^BOLD%^You feel dizzy as your senses bifurcate, you stand to the side and look upon yourself from another body.%^RESET%^");
 
     ob = new("/d/magic/mon/astral_projection.c");
     ob->set_alignment(caster->query_alignment());
@@ -64,9 +65,10 @@ void spell_effect(int prof)
     ob->set_property("minion", caster);
     ob->set_race(caster->query_visual_race());
     ob->set_gender((string)caster->query_gender());
-    ob->set_short(cm(strip_colors(caster->getWholeDescriptivePhrase())));
-    ob->set_long(cm(strip_colors(caster->getWholeDescriptivePhrase() + " " +(string)caster->query_description())));
-
+    ob->set_short(cm(caster->getWholeDescriptivePhrase()));
+    ob->set_long(cm(caster->getWholeDescriptivePhrase() + " " +(string)caster->query_description()));
+    ob->set("speech string",cm(caster->query("speech string")));
+    ob->set("describe string",cam(caster->query("describe string")));
     addSpellToCaster();
 
     return;
@@ -83,7 +85,7 @@ void dest_effect()
         }
     }
     if (objectp(caster)) {
-        tell_object(caster,"%^BOLD%^Your concentration on places afar fades.");
+        tell_object(caster,"%^BOLD%^Your concentration on another body fades.");
         caster->remove_property("has_elemental");
     }
     ::dest_effect();
@@ -93,5 +95,5 @@ void dest_effect()
 
 string cm(string str)
 {
-    return CRAYON_D->color_string(str,"grey");
+    return CRAYON_D->color_string(strip_colors(str),"grey");
 }

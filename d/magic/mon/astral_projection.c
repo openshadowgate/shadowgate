@@ -105,16 +105,17 @@ void setup_servant(object caster, int clevel)
     cast = caster;
     level = clevel;
 
+    set_level(clevel);
     set_mlevel("fighter", clevel);
     set_guild_level("fighter", clevel);
     set_level(clevel);
     set_hd(clevel, 8);
-    set_max_hp(clevel * 16 + 100);
+    set_max_hp(clevel * 18 + 100);
     set_hp(query_max_hp());
     set_overall_ac(4 - clevel);
     set_attacks_num(clevel / 8 + 2);
     set_invis(1);
-    set_skill("spellcraft", clevel + 10);
+    set_skill("spellcraft", clevel * 4 / 3);
     set_skill("perception", clevel);
 
     {
@@ -195,8 +196,12 @@ void set_invis()
 
 void die(object obj)
 {
-    cast->remove_property("has_elemental");
-    cast->cause_typed_damage(cast, cast->return_target_limb(), cast->query_level() * 8, "mental");
+    if (objectp(cast)) {
+        cast->remove_property("has_elemental");
+        tell_object(cast, "%^BOLD%^%^WHITE%^Death of your projection shocks you!");
+        cast->set_paralyzed(8, "%^BOLD%^%^WHITE%^You are in shock!");
+        cast->cause_typed_damage(cast, cast->return_target_limb(), cast->query_level() * 6, "mental");
+    }
     TO->remove();
     ::die(obj);
     return;

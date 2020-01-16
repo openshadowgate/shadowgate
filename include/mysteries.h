@@ -14,7 +14,8 @@
 "solar":({"faerie fire", "flaming sphere", "daylight", "dimension door", "solar siege shot", "sirocco", "sunbeam", "sunbeam", "hellball"}),\
 "spellscar":({"armor", "resist energy", "dispel magic", "true form", "siphon magic", "globe of invulnerability", "spell turning", "spellscar", "dimensional lock"}),\
 "apocalypse":({"summon swarm", "fog cloud", "sleet storm", "ice storm", "insect plague", "circle of death", "fire storm", "incendiary cloud", "meteor swarm"}),\
-"ancestor":({"unseen servant", "spiritual weapon", "heroism", "spiritual ally", "telekinetic push", "greater heroism",}),\
+"ancestor":({"unseen servant", "spiritual weapon", "heroism", "spiritual ally", "telekinetic push", "greater heroism","vision", "timeless body", "astral projection"}),\
+"lore":({"identify","clairvoyance","tongues","modify memory","telepathic bond","legend lore","vision","screen","timestop"}),\
 ])
 
 //"bones":({"", "", "", "", "", "", "", "", ""}),\
@@ -36,4 +37,5 @@
 "spellscar":({"academics","perception","survival"}),\
 "apocalypse":({"influence","survival","stealth"}),\
 "ancestor":({"perception","academics","athletics"}),\
+"lore":({"influence","academics","perception"}),\
 ])

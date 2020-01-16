@@ -9,8 +9,9 @@ int i;
 void create() {
     ::create();
     set_spell_name("identify");
-    set_spell_level(([ "mage" : 1 ]));
+    set_spell_level(([ "mage" : 1, "oracle":1]));
     set_spell_sphere("divination");
+    set_mystery("lore");
     set_syntax("cast CLASS identify on OBJECT");
     set_description("This is the spell for you to identify the enchantment of items (usually equipment, though it may "
 "show attributes of other objects also).  The item must be in your inventory or the room where you are.  NOTE: Anyone in "

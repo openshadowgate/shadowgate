@@ -7,8 +7,10 @@ inherit SPELL;
 
 object dest, mytarg, myplace;
 
-#define DELAY 60 //1min delay between uses to prevent spammage
-
+int clairvoyance_delay()
+{
+    return 60;
+}
 
 void create()
 {
@@ -16,6 +18,7 @@ void create()
     set_spell_name("clairvoyance");
     set_spell_level(([ "psion" : 1, "mage" : 2, "bard" : 3, "assassin" : 4, "inquisitor" : 3 ]));
     set_discipline("seer");
+    set_mystery("lore");
     set_spell_sphere("divination");
     set_syntax("cast CLASS clairvoyance on TARGET");
     set_description("A skilled seer can attempt to gain a brief image of a target. All they will see is a second's "
@@ -23,7 +26,6 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
-    set_silent_casting(1);
     set_components(([
         "mage" : ([ "powdered silver" : 2, ]),
     ]));
@@ -32,7 +34,7 @@ void create()
 
 int preSpell()
 {
-    if(spell_type != "psion" && ((int)caster->query_property("clairvoyance time") + DELAY) > time())
+    if(spell_type != "psion" && ((int)caster->query_property("clairvoyance time") + clairvoyance_delay()) > time())
     {
         tell_object(caster,"You need to take a moment's rest before you can try that again.");
         return 0;
@@ -107,7 +109,7 @@ void spell_effect(int prof)
 
     bonus = caster->query_stats(casting_stat);
     bonus = bonus-10;
-    scrypower = CLEVEL + random(6) + bonus;
+    scrypower = CLEVEL + bonus + query_spell_level(spell_type) * 2;
 
     if(blockobj = present("blockerx111", environment(mytarg)) || blockobj = present("blockerx111",mytarg))
     {

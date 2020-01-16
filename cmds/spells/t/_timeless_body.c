@@ -9,7 +9,8 @@ object targ;
 void create() {
     ::create();
     set_spell_name("timeless body");
-    set_spell_level(([ "psion" : 9 ]));
+    set_spell_level(([ "psion" : 9, "oracle":8]));
+    set_mystery("ancestor");
     set_spell_sphere("combat");
     set_syntax("cast CLASS timeless body");
     set_description("This power will enable a psion to take on a ghostly state, making him difficult to hit in combat.  "

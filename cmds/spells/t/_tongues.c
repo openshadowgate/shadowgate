@@ -8,8 +8,9 @@ int theProf;
 void create() {
     ::create();
     set_spell_name("tongues");
-    set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor": 2 ]));
+    set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor": 2, "oracle":3]));
     set_spell_sphere("alteration");
+    set_mystery("lore");
     set_syntax("cast CLASS tongues on TARGET");
     set_description("This will give the target the ability to understand, any mortal language. You will be able to speak the way you'll be understood by any being. This will not alter you knowledge and won't allow you to teach or write in languages you don't know.");
     set_verbal_comp();
