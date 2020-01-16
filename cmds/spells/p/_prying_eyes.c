@@ -86,7 +86,7 @@ void spell_effect(int prof){
             eyes->set_target(ob);
             bonus = caster->query_stats("intelligence");
             bonus = (bonus - 10)/2;
-            power = clevel + bonus + random(6);
+            power = clevel + bonus + 3;
             eyes->set_scry_power(power);
             eyes->move(environment(ob));
             theName = ob->query_short();

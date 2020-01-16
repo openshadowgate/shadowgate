@@ -1,6 +1,8 @@
 #include <magic.h>
 #include <std.h>
 #include <spell.h>
+#include <daemons.h>
+
 inherit SPELL;
 
 object *animated, *monsters, control;
@@ -10,9 +12,9 @@ int amount;
 void create() {
     ::create();
     set_spell_name("astral projection");
-    set_spell_level(([ "mage":9 ]));
+    set_spell_level((["oracle":9, "mage":9 ]));
     set_spell_sphere("invocation_evocation");
-    set_syntax("cast CLASS astral projection");
+    set_syntax("cast CLASS spiritual ally");
     set_mystery("ancestor");
     set_description("Call to one of your ancestors to aid you in combat. This spirit will have a chosen weapon of your deity and will obey all your commands.
 
@@ -25,40 +27,33 @@ To force lost ally to follow use %^ORANGE%^<command ally to follow>%^RESET%^");
     set_helpful_spell(1);
 }
 
-int preSpell(){
-    if(caster->query_property("astral_projection")) {
-        tell_object(caster,"You already partially out of your body.");
+int preSpell()
+{
+    if (caster->query_property("has_elemental")) {
+        tell_object(caster, "Your concentration is already upon a distant location!");
         return 0;
     }
     return 1;
 }
 
-void spell_effect(int prof){
-	if(!objectp(environment(caster)))
-    {
-		dest_effect();
-		return;
-	}
-	place = environment(caster);
-    summon_servant();
-}
-
-void summon_servant() {
+void spell_effect(int prof)
+{
     object ob, thing;
+    int bonus, power;
 
-    tell_object(caster,"%^CYAN%^%^BOLD%^As you complete the spell a humanoid being descends to stand in your protection.%^RESET%^");
-    tell_room(place,"%^CYAN%^%^BOLD%^As "+caster->QCN+" completes the spell a spectral humanoid being appears.%^RESET%^",caster);
-    control = new("/d/magic/obj/spiritual_ally_controller");
+    tell_object(caster, "%^CYAN%^%^BOLD%^As you complete the spell a humanoid being descends to stand in your protection.%^RESET%^");
+
+    ob = new("/d/magic/mon/astral_projection.c");
+    ob->set_alignment(caster->query_alignment());
+    ob->setup_servant(caster, clevel);
+
+    control = new("/d/magic/obj/holder");
     control->set_caster(caster);
     control->move(caster);
+    control->set_elemental(ob);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
 
-    ob=new("/d/magic/mon/spiritual_ally.c");
-    ob->set_alignment(caster->query_alignment());
-    ob->setup_servant(caster,clevel);
-
-    control->set_sally(ob);
     caster->add_follower(ob);
 
     ob->move(environment(caster));
@@ -70,24 +65,24 @@ void summon_servant() {
 
     addSpellToCaster();
 
-    caster->set_property("astral_projection",ob);
     return;
 }
 
-void dest_effect() {
+void dest_effect()
+{
     object sword;
 
+    if (objectp(control)) {
+        if (objectp(sword = control->query_mon())) {
+            sword->remove();
+            destruct(control);
+        }
+    }
     if (objectp(caster)) {
-        tell_object(caster,"%^CYAN%^Spiritual ally fades away.%^RESET%^");
+        tell_object(caster,"%^BOLD%^Your concentration on places afar fades.");
+        caster->remove_property("has_elemental");
     }
-
-    if(objectp(control)) {
-		if (objectp(sword = control->query_sally())){
-			sword->remove();
-			destruct(control);
-		}
-    }
-    if(objectp(caster)) { caster->remove_property("astral_projection"); }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO))
+        TO->remove();
 }

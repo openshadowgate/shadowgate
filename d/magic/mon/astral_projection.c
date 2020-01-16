@@ -5,22 +5,30 @@ inherit WEAPONLESS;
 
 object cast;
 
-string cm(string str)
+void create()
 {
-    return CRAYON_D->color_string(str,"very black");
-}
-
-void create(){
-  ::create();
-
+    ::create();
     set_name("astral projection");
-    set_id(({"projection","astral projection",}));
-
+    set_id(({"atral projection","projection",}));
+    set_short("%^RESET%^%^BOLD%^A %^RESET%^m%^BOLD%^ig%^RESET%^h%^BOLD%^ty g%^RESET%^h%^BOLD%^ost%^RESET%^l%^BOLD%^y wa%^RESET%^r%^BOLD%^ri%^RESET%^o%^BOLD%^r%^RESET%^");
+    set_long("%^BOLD%^Once a %^BLACK%^fierce %^WHITE%^warrior, this ghostly, %^CYAN%^translucent figure %^WHITE%^still rises to the aid of those in need during troubling times. His white eyes shine with %^BLACK%^grim determination %^WHITE%^as he grips tightly to a sword. Even in death he is a strong and proud man, ready to cut down his enemies and to defend the life of his living allies.%^RESET%^");
+    set_hd(4, 1);
+    set_hp(query_hd() * 8);
+    set_class("fighter");
+    set_stats("strength", 20);
+    set_stats("intelligence", 8);
+    set_stats("wisdom", 20);
+    set_stats("dexterity", 20);
+    set_race("human");
+    set_damage(2, 10);
+    set_attacks_num(5);
     set_nat_weapon_type("slashing");
     set_gender("other");
     set_overall_ac(4);
-    set_invis(1);
-    set_hidden(1);
+
+    set_monster_feats(( {
+                "opportunity strikes", "swipe",
+                    }));
 
     set_alignment(5);
 
@@ -28,40 +36,81 @@ void create(){
     command("message walks $D");
 }
 
-void setup_projection(object caster, int clevel)
+void setup_servant(object caster, int clevel)
 {
     int level;
 
-    if(!objectp(caster))
+    if (!objectp(caster)) {
         return;
+    }
 
     cast = caster;
     level = clevel;
 
-    set_id(TO->query_id()+caster->query_id());
-    set_race(caster->query_race());
-    set_gender(caster->query_gender());
-
-    set_stats("strength",caster->query_stats("strength"));
-    set_stats("dexterity",caster->query_stats("dexterity"));
-    set_stats("constitution",caster->query_stats("constitution"));
-    set_stats("intelligence",caster->query_stats("intelligence"));
-    set_stats("wisdom",caster->query_stats("wisdom"));
-    set_stats("charisma",caster->query_stats("charisma"));
-
-    set_max_hp(caster->query_max_hp());
-    set_hp(query_max_hp());
-
-    set_short(cm(strip_colors(caster->getWholeDescriptivePhrase())));
-    set_long("%^BOLD%^%^BLACK%^"+strip_colors(caster->getWholeDescriptivePhrase() + " " +(string)caster->query_description())+"%^RESET%^");
-
-    set_guild_level("fighter",clevel);
+    set_mlevel("fighter", clevel);
+    set_guild_level("fighter", clevel);
     set_level(clevel);
-    set_hd(clevel,8);
-    set_max_hp(clevel*16+100);
+    set_hd(clevel, 8);
+    set_max_hp(clevel * 16 + 100);
     set_hp(query_max_hp());
-    set_overall_ac(4-clevel);
-    set_attacks_num(clevel/10+1);
+    set_overall_ac(4 - clevel);
+    set_attacks_num(clevel / 8 + 2);
+    set_invis(1);
+    set_skill("spellcraft", clevel + 10);
+    set_skill("perception", clevel);
+
+    {
+        string deity = caster->query_diety();
+        string normalizedDeity;
+        object wpn;
+        int ench;
+
+        normalizedDeity = replace_string(deity, " ", "_");
+        if (deity == "godless")
+            normalizedDeity = "kismet";
+
+        wpn = new("/d/magic/obj/weapons/" + normalizedDeity + "");
+        ench = clevel / 7;
+        if (ench < 0)
+            ench = 0;
+        if (ench > 9)
+            ench = 9;
+        wpn->set_property("enchantment", ench);
+        wpn->move(TO);
+        wpn->set_property("monster weapon", 1);
+        TO->force_me("wield weapon in left hand");
+    }
+
+    call_out("protect", ROUND_LENGTH);
+}
+
+catch_tell(string str)
+{
+    if (!objectp(cast)) {
+        dest_me();
+        return;
+    }
+    tell_object(cast, "%^BOLD%^%^WHITE%^You observe:%^RESET%^ " + str);
+}
+
+void protect()
+{
+    object *foes, foe;
+
+    if(!objectp(cast))
+        return;
+
+    call_out("protect",ROUND_LENGTH);
+    foes=cast->query_attackers();
+
+    foreach(foe in foes)
+    {
+        if(!objectp(foe))
+            continue;
+        if(!present(foe,ENV(TO)))
+            continue;
+        TO->kill_ob(foe);
+    }
 }
 
 void die(object obj)
