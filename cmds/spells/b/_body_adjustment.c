@@ -6,6 +6,7 @@ void create()
 {
     ::create();
     set_spell_name("body adjustment");
+    set_affixed_spell_level(6); // alternative to heal
     set_spell_level(([ "psywarrior" : 2, "psion" : 3 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS body adjustment");
@@ -44,15 +45,12 @@ void spell_effect(int prof)
 {
     int rnd;
 
-    tell_object(caster,"%^BOLD%^%^WHITE%^You focus your attention inward, "
-        "making minute changes to your body that help heal your injuries.%^RESET%^");
-    tell_room(place,"%^BOLD%^%^As you watch, "+caster->QCN+"%^BOLD%^%^WHITE%^'s "
-        "injuries begin to knit together as "+caster->QS+" heals "+caster->QO+"self "
-        "from within!%^RESET%^",caster);
+    tell_object(caster, "%^BOLD%^%^WHITE%^You focus your attention inward, " "making minute changes to your body that help heal your injuries.%^RESET%^");
+    tell_room(place, "%^BOLD%^%^As you watch, " + caster->QCN + "%^BOLD%^%^WHITE%^'s " "injuries begin to knit together as " + caster->QS + " heals " + caster->QO + "self " "from within!%^RESET%^", caster);
 
-    rnd = sdamage*2;
+    rnd = sdamage * 7 / 6;
 
-    damage_targ(caster,caster->return_target_limb(),-rnd,"untyped");
+    damage_targ(caster, caster->return_target_limb(), -rnd, "untyped");
 
     spell_successful();
     dest_effect();

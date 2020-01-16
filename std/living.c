@@ -351,16 +351,17 @@ void heart_beat()
         }
     }
 
-    if (!(living_ticker % 3))
-    {
-	//change help status effects when adjusting this
-        if (FEATS_D->usable_feat(TO, "regeneration") || query_race() == "shade")
-            if (query_hp() < query_max_hp())
-                add_hp(roll_dice(1, TO->query_level()) / 2 + 1);
-        if (query_property("fast healing"))
-            if (query_hp() < query_max_hp())
-                add_hp(query_property("fast healing") * roll_dice(1, TO->query_level() / 2 + 1));
-    }
+if (!(living_ticker % 3)) {
+    // change help status effects when adjusting this
+    if (FEATS_D->usable_feat(TO, "regeneration")
+	|| query_race() == "shade")
+	if (query_hp() < query_max_hp())
+	    add_hp(roll_dice(1, TO->query_level()) / 2 + 1);
+    if (query_property("fast healing"))
+	if (query_hp() < query_max_hp())
+	    add_hp(query_property("fast healing") *
+		   roll_dice(1, TO->query_level() / 2 + 1));
+}
 
     living_ticker++;
 }
@@ -1451,50 +1452,57 @@ void use_stamina(int x)
     increment_stamina(x);
 }
 
-void continue_attack(){
+void continue_attack()
+{
     ::continue_attack();
     if (sizeof(query_attackers()) > 0) {
-        set("adreniline",11);
+        set("adreniline", 11);
     } else {
-        set("adreniline",query("adreniline")>0?query("adreniline")-1:0);
+        set("adreniline", query("adreniline") > 0 ? query("adreniline") - 1 : 0);
     }
 }
 
-int query_max_stamina(){
+int query_max_stamina()
+{
     int bonus;
+
     bonus = query_property("bonus stamina");
     if (query("adreniline")) {
-//        return (query_stats("constitution")*30+query_lowest_level()*5 )*2;
-        return (query_skill("endurance")*10 + 500 + bonus)*2;
+        return (query_skill("endurance") * 10 + 500 + bonus) * 2;
     } else {
-//        return query_stats("constitution")*30+query_lowest_level()*5;
-        return query_skill("endurance")*10 + 500 + bonus;
+        return query_skill("endurance") * 10 + 500 + bonus;
     }
 }
 
-int query_used_stamina(){
+int query_used_stamina()
+{
     return used_stamina;
 }
 
-void reset_condition(){
+void reset_condition()
+{
     used_stamina = 0;
 }
 
-void set_condition(int x){
+void set_condition(int x)
+{
     used_stamina = x;
+
 }
 
-int query_condition(){
+int query_condition()
+{
     return query_max_stamina() - query_used_stamina();
 }
 
 int query_condition_percent()
 {
-  if (query_max_stamina() > 0)
-   return ((query_max_stamina()-query_used_stamina()) * 100)/ query_max_stamina();
-    else return 0; // Something's fucked, Return something safe.
-                  // Okay, not so safe for the USER, safe for the MUD.
-                 // Garrett.
+    if (query_max_stamina() > 0)
+        return ((query_max_stamina() - query_used_stamina()) * 100) / query_max_stamina();
+    else
+        return 0;               // Something's fucked, Return something safe.
+    // Okay, not so safe for the USER, safe for the MUD.
+    // Garrett.
 }
 
 string query_condition_string(){
