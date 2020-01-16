@@ -321,49 +321,49 @@ void heart_beat()
         }
     }
 
-    if(TO->is_class("monk"))
-    {
+    if (TO->is_class("monk")) {
         "/daemon/user_d.c"->regenerate_ki(TO, (1 + random(2)), 1);
     }
-    if(used_stamina > 0)
-    {
-        if(!userp(TO))
-        {
+    if (used_stamina > 0) {
+        if (!userp(TO)) {
             used_stamina -= 10;
-            if(used_stamina < 0) used_stamina = 0;
+            if (used_stamina < 0)
+                used_stamina = 0;
             return;
         }
-        if(!query_property("inactive"))
-        {
+        if (!query_property("inactive")) {
             myskill = query_skill("endurance");
-            if(sizeof(query_attackers()) < 1)
-            {
+            if (sizeof(query_attackers()) < 1) {
 //              used_stamina-= query_stats("constitution")/4 + 1;
-                if(myskill < 0) myskill = 1;
-                used_stamina -= ((myskill/4) + 2);
-                if(used_stamina < 0) used_stamina = 0;
+                if (myskill < 0)
+                    myskill = 1;
+                used_stamina -= ((myskill / 4) + 2);
+                if (used_stamina < 0)
+                    used_stamina = 0;
+            } else {
+                used_stamina -= ((myskill / 4) + 2);
+                if (used_stamina < 0)
+                    used_stamina = 0;
             }
-            else
-            {
-                used_stamina -= ((myskill/4) + 2);
-                if(used_stamina < 0) used_stamina = 0;
-            }
+        }
+        if (query_condition() < -50) {
+            set_condition(query_max_stamina());
         }
     }
 
-if (!(living_ticker % 3)) {
-    // change help status effects when adjusting this
-    if (FEATS_D->usable_feat(TO, "regeneration")
-	|| query_race() == "shade")
-	if (query_hp() < query_max_hp())
-	    add_hp(roll_dice(1, TO->query_level()) / 2 + 1);
-    if (query_property("fast healing"))
-	if (query_hp() < query_max_hp())
-	    add_hp(query_property("fast healing") *
-		   roll_dice(1, TO->query_level() / 2 + 1));
-}
+    if (!(living_ticker % 3)) {
+        // change help status effects when adjusting this
+        if (FEATS_D->usable_feat(TO, "regeneration")
+            || query_race() == "shade")
+            if (query_hp() < query_max_hp())
+                add_hp(roll_dice(1, TO->query_level()) / 2 + 1);
+        if (query_property("fast healing"))
+            if (query_hp() < query_max_hp())
+                add_hp(query_property("fast healing") * roll_dice(1, TO->query_level() / 2 + 1));
+    }
 
     living_ticker++;
+
 }
 
 void init_path()
@@ -1487,7 +1487,6 @@ void reset_condition()
 void set_condition(int x)
 {
     used_stamina = x;
-
 }
 
 int query_condition()
