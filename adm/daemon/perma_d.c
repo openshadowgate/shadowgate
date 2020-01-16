@@ -34,11 +34,11 @@ mapping query_permadeath_list() { return permadeath_list; }
 
 int get_permadeath(string player) {
   mapping info;
-  
+
   info = permadeath_list[player];
   if (!info)
     return 0;
-  
+
   return info;
 }
 
@@ -61,7 +61,7 @@ int is_perma_deathed(string player) {
   if (permadeath_info == 0)
     return 0;
 
- 
+
   if (permadeath_info < time()) {
     if (permadeath_info > 0 ) {
       remove_player(player);

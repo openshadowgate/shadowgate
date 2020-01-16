@@ -1818,21 +1818,21 @@ void define_clevel()
         if (caster->query_school()) {
             if (spell_sphere == caster->query_school()) {
                 if (caster->is_class("mage"))
-                    clevel += caster->query_guild_level("mage") / 12;
+                    clevel += caster->query_guild_level("mage") / 16;
                 if (FEATS_D->usable_feat(caster, "school familiarity"))
-                    clevel += 6;
+                    clevel += 4;
             } else if (spell_sphere == SCHOOL_OPPOSITION[caster->query_school()]) {
                 if (caster->is_class("mage"))
-                    clevel -= caster->query_guild_level("mage") / 12;
+                    clevel -= caster->query_guild_level("mage") / 16;
                 if (FEATS_D->usable_feat(caster, "school familiarity"))
-                    clevel -= 6;
+                    clevel -= 4;
             }
         }
 
         if (caster->is_class("gravecaller"))
             if (FEATS_D->usable_feat(caster, "negative energy conduit"))
                 if (spell_sphere == "necromancy")
-                    clevel += 4;
+                    clevel += 3;
 
         if (caster->is_class("shadow_adept"))
             if (FEATS_D->usable_feat(caster, "elusive spellcraft"))
