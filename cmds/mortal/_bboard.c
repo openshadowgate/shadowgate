@@ -111,6 +111,11 @@ int check_access(string my_command, string which_board)
             if(TP->is_class(which_board)) return 1;
             else return 0;
             break;
+        case "cleric":
+            if (TP->is_class("oracle") || avatarp(TP)) return 1;
+            if(TP->is_class(which_board)) return 1;
+            else return 0;
+            break;
         case "psion":
             if(TP->is_class("psywarrior") || TP->is_class("psion") ||avatarp(TP)) return 1;
             if (TP->is_class(which_board)) return 1;

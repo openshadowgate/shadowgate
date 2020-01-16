@@ -696,7 +696,6 @@ int okdone()
         OB_ACCOUNT->is_high_mortal(ETO->query_true_name())))
     {
         MyPlace = "template";
-        tell_object(FPL("ilmarinen"),":test");
     }
     else
         MyPlace = "hair color";
