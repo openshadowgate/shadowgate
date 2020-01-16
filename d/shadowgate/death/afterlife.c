@@ -24,7 +24,7 @@ void attempt_raise()
     diety     = (string)DeadPerson->query("RaisingPriestGod");
     type      = (string)DeadPerson->query("RaisingType");
 
-    if(type == "deny the reaper") 
+    if(type == "deny the reaper")
     {
         tell_object(DeadPerson,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul.  You sense "
         "the tendrils of a necromancer's arcane energy trying to steal you away from "
@@ -33,10 +33,7 @@ void attempt_raise()
         return;
     }
 
-    tell_object(DeadPerson,"%^RESET%^%^B_CYAN%^You can feel a pull on your soul.  You sense "
-    "that a "+alignment+" faithful of "+capitalize(diety)+" is trying to return "
-    "you to life!\nType <accept> to return to life, or <cancel> to leave your "
-    "fate in Lysara's hands.%^RESET%^");
+    tell_object(DeadPerson,"%^RESET%^You can feel a pull on your soul.  You sense that someone is trying to return you to life!\nType <accept> to return to life, or <cancel> to leave your fate to a chance.%^RESET%^");
     return;
 }
 
@@ -54,15 +51,15 @@ int raise_player(string verb)
     loss      = (int)DeadPerson->query("RaisingExpLoss");
     type      = (string)DeadPerson->query("RaisingType");
     //alternative worlds code support - Saide
-    if(DeadPerson->query("previous alternative world")) 
+    if(DeadPerson->query("previous alternative world"))
     {
         DeadPerson->set("alternative world", DeadPerson->query("previous alternative world"));
         DeadPerson->delete("previous alternative world");
     }
-    if(!objectp(find_object_or_load(room))) 
+    if(!objectp(find_object_or_load(room)))
     {
         DeadPerson->delete("alternative world");
-        room = "/d/shadowgate/death/death_exit"; 
+        room = "/d/shadowgate/death/death_exit";
     }
 
     switch(verb)
@@ -75,9 +72,10 @@ int raise_player(string verb)
             DeadPerson->cease_all_attacks();
             DeadPerson->restrict_channel("deceased");
             MyDeadRoom = DeadPerson->query_property("death_room");
-            DeadPerson->remove_property("death_room");	
+            DeadPerson->remove_property("death_room");
             DeadPerson->move(room);
             DeadPerson->force_me("look");
+            DeadPerson->delete("in_the_afterlife");
             DeadPerson->remove_pk_death_flag();
             DeadPerson->set_death_age(0);
             DeadPerson->delete("RaisingRoom");
@@ -126,7 +124,7 @@ string what_alignment(int align)
 
 
 
-void create() 
+void create()
 {
   	::create();
   	set_light(2);
@@ -149,7 +147,7 @@ void create()
 	set_heart_beat(10);
 }
 
-void init() 
+void init()
 {
 	::init();
 	if(!objectp(TP)) return;
@@ -157,12 +155,12 @@ void init()
 	if(TP->query_paralyzed()) TP->remove_paralyzed();
 	if(TP->query_tripped()) TP->remove_tripped();
 
-	if(!objectp(DeadPerson) && 
-	(PERMA_DEATH_D->is_perma_deathed(TP->query_name()) || 
+	if(!objectp(DeadPerson) &&
+	(PERMA_DEATH_D->is_perma_deathed(TP->query_name()) ||
 	TP->query("in_the_afterlife")))
 	{
 		DeadPerson = TP;
-		if(!(int)DeadPerson->query("in_the_afterlife")) 
+		if(!(int)DeadPerson->query("in_the_afterlife"))
 		{
 			DeadPerson->set("in_the_afterlife", 1);
 		}
@@ -173,7 +171,7 @@ void init()
 	add_action("filter_act","",1);
 }
 
-int filter_act(string str) 
+int filter_act(string str)
 {
 	string tmp, response_str;
 	int x;
@@ -183,37 +181,37 @@ int filter_act(string str)
 		raise_player(query_verb());
 		return 1;
 	}
-	if(query_verb() == "ask")	
+	if(query_verb() == "ask")
 	{
 		tell_object(TP, "%^BOLD%^%^RED%^In a desperate plea you "+
 		"yell out into the haze around you - 'HOW MUCH LONGER MUST "+
 		"I WAIT HERE!'%^RESET%^");
 		if(!objectp(DeadPerson)) return 1;
-		if(objectp(DeadPerson)) 
+		if(objectp(DeadPerson))
 		{
 //			x = (int)DeadPerson->get_perma_death_flag(); //this was not working!
 			x = (int)PERMA_DEATH_D->get_permadeath(DeadPerson->query_name()) - time();
-			if(x / 10 >= 650) 
+			if(x / 10 >= 650)
 			{
 				response_str = "%^BOLD%^%^RED%^A horde of souls%^RESET%^";
-			}	
-			else if(x / 10 >= 450) 
+			}
+			else if(x / 10 >= 450)
 			{
 				response_str = "%^BOLD%^%^BLACK%^A vast number of souls%^RESET%^";
 			}
-			else if(x / 10 >= 300) 
+			else if(x / 10 >= 300)
 			{
 				response_str = "%^BOLD%^%^GREEN%^A lot of souls%^RESET%^";
 			}
-			else if(x / 10 >= 150) 
+			else if(x / 10 >= 150)
 			{
 				response_str = "%^BOLD%^%^YELLOW%^many souls%^RESET%^";
 			}
-			else if(x / 10 < 150 && x / 10 > 50) 
+			else if(x / 10 < 150 && x / 10 > 50)
 			{
 				response_str = "%^BOLD%^%^BLUE%^several dozen souls%^RESET%^";
 			}
-			else if(x / 10 <= 50 && x / 10 >= 13) 
+			else if(x / 10 <= 50 && x / 10 >= 13)
 			{
 				response_str = "%^BOLD%^%^MAGENTA%^several souls%^RESET%^";
 			}
@@ -224,18 +222,18 @@ int filter_act(string str)
 			else if(x / 10 < 12)
 			{
 				response_str = "%^BOLD%^%^CYAN%^only a few souls%^RESET%^";
-			}			
+			}
 		}
 		tell_object(TP, "%^BOLD%^%^WHITE%^A stern yet patient voice answers you "+
 		"from the haze :  %^BOLD%^%^WHITE%^Be patient %^BOLD%^%^CYAN%^"+
 		capitalize(DeadPerson->query_name())+
 		" %^BOLD%^%^WHITE%^Lysara must see "+response_str+
 		" %^BOLD%^%^WHITE%^before he will decide your fate.%^RESET%^");
-		return 1;			
+		return 1;
 	}
-  	if (member_array(query_verb(), VALID_ACTIONS ) == -1) 
+  	if (member_array(query_verb(), VALID_ACTIONS ) == -1)
 	{
-		if(avatarp(TP)) 
+		if(avatarp(TP))
 		{
 			tell_object(TP, "If you were a player you would see "+
 			"the following : \n");
@@ -248,24 +246,24 @@ int filter_act(string str)
 		tmp += "\n\n%^BOLD%^%^RED%^You should use this time wisely "+
 		"to reflect upon yourself.%^RESET%^\n";
 		tell_object(TP, tmp);
-		if(!avatarp(TP)) 
+		if(!avatarp(TP))
 		{
     			return 1;
-		}		
+		}
  	}
 }
 
-void release_em(object dead) 
+void release_em(object dead)
 {
 	object MyDeadRoom;
   	if (!objectp(dead)) return;
-  	if (!userp(dead)) return;  
-	MyDeadRoom = dead->query_property("death_room");	
+  	if (!userp(dead)) return;
+	MyDeadRoom = dead->query_property("death_room");
 	//dead->set_ghost(1);
 	tell_object(dead, "%^BOLD%^%^WHITE%^You are suddenly "+
 	"pulled from this place to face Lysara's Decision!"+
 	"%^RESET%^");
-	if(dead->query("in_the_afterlife")) 
+	if(dead->query("in_the_afterlife"))
 	{
 		dead->delete("in_the_afterlife");
 	}
@@ -278,7 +276,7 @@ void release_em(object dead)
   	return;
 }
 
-void heart_beat() 
+void heart_beat()
 {
 	if(!objectp(DeadPerson)) return;
 	if(!PERMA_DEATH_D->is_perma_deathed(DeadPerson->query_name()))
@@ -289,5 +287,3 @@ void heart_beat()
 	attempt_raise();
 	//::heart_beat();
 }
-
-	

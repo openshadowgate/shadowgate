@@ -59,7 +59,7 @@ void spell_effect(int prof)
     {
         if (interactive(caster) )
         {
-            tell_object(caster, "%^BLUE%^You send out tendrils of necromantic energy, attempting to ensnare "+capitalize(arg)+"'s soul.%^RESET%^");
+            tell_object(caster, "%^BLUE%^You send out tendrils of negative energy, attempting to ensnare "+capitalize(arg)+"'s soul.%^RESET%^");
             tell_room(environment(CASTER),"%^BLUE%^"+caster->QCN+" spreads "+caster->QP+" fingers and voices an unsettling chant over the body of "+capitalize(arg)+".%^RESET%^", ({CASTER,TARGET}));
         }
         else

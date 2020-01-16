@@ -39,7 +39,9 @@ void init() {
 void set_menu(string *item_names, string *types, int *strengths) {
     int i;
 
+
     menu_items = item_names;
+
     if(!menu) menu = ([]);
     for(i=0; i<sizeof(menu_items); i++) {
 	menu[menu_items[i]] = ([ "type": types[i], "strength": strengths[i] ]);

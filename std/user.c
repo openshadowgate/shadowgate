@@ -417,7 +417,7 @@ void make_new_hitpoint_rolls(object obj)
         }
     }
 
-    hp = 20;
+    hp = 50;
     rolls = (int*)obj->query("hp_array");
     for(i=0;i<(int)obj->query_character_level()+1;i++)
     {
@@ -1947,16 +1947,16 @@ void resetLevelForExp(int expLoss)
 
   if(myclass = get_dual_class()) { classes = ({ myclass }); }
   else { classes = query_classes(); }
-  for (i=0;i<sizeof(classes);i++) {
-    curclass = classes[i];
-    while ((int)ADVANCE_D->get_exp(query_class_level(curclass),curclass, TO) > (get_general_exp(curclass))) {
-      hp_loss = ADVANCE_D->get_hp_bonus(curclass,query_base_stats("constitution"),query_class_level(curclass),TO);
-      set_mlevel(curclass,query_class_level(curclass)-1);
-      set_max_hp(query_true_max_hp() - hp_loss);
-      reduce_my_skills(curclass);
-      reduce_guild_level(curclass);
-      NWP_D->reduce_player(TO,curclass,query_class_level(curclass));
-    }
+  for (i = 0; i < sizeof(classes); i++) {
+      curclass = classes[i];
+      while ((int) ADVANCE_D->get_exp(query_class_level(curclass), curclass, TO) > (get_general_exp(curclass))) {
+          hp_loss = ADVANCE_D->get_hp_bonus(curclass, query_base_stats("constitution"), query_class_level(curclass), TO);
+          set_mlevel(curclass, query_class_level(curclass) - 1);
+          set_max_hp(query_true_max_hp() - hp_loss);
+          reduce_my_skills(curclass);
+          reduce_guild_level(curclass);
+          NWP_D->reduce_player(TO, curclass, query_class_level(curclass));
+      }
   }
   setenv("TITLE", (string)ADVANCE_D->get_new_title(TO));
 }
