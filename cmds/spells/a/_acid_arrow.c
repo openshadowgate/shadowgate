@@ -161,7 +161,7 @@ void more_acid()
     default:            tell_object(target,"%^GREEN%^Pain floods through your "+target_limb+" as the acid continues to burn.");             break;
     }
     define_base_damage(0);//lazy re-roll
-    damage_targ(target, target_limb, sdamage/4,element);
+    damage_targ(target, target_limb, sdamage/6,element);
 
     if (!target && objectp(TO))
     {

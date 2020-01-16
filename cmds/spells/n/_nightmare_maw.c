@@ -57,7 +57,7 @@ void bite_again()
     define_base_damage(0);
     tell_room(ENV(target),"%^BOLD%^%^BLACK%^The maw continues to nibble on "+target->QCN+"!%^RESET%^",target);
     tell_object(target,"%^BOLD%^%^BLACK%^The maw nibbles on you!%^RESET%^");
-    damage_targ(target, target->query_target_limb(), sdamage/4,"slashing");
+    damage_targ(target, target->query_target_limb(), sdamage/6,"slashing");
 
     if(num-- < 0)
     {

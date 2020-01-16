@@ -1088,8 +1088,6 @@ int dead_quit()
     int x, cnum;
     object *inv, *spells_on;
 
-    //    if (!quitAllow) return notify_fail("Quit has been disabled.\n");
-
     break_all_spells();
     set_hidden(0);
     set_magic_hidden(0);

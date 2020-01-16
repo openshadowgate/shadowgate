@@ -1842,7 +1842,7 @@ void define_clevel()
 
     if (spell_type == "cleric" || spell_type == "druid")
         if (FEATS_D->usable_feat(caster, "mastery of power"))
-            clevel += 4;
+            clevel += 2;
 
     if (FEATS_D->usable_feat(caster, "ragecaster")) {
         clevel = caster->query_character_level();
@@ -1868,7 +1868,7 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 2;
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power"))
-        sdamage_adjustment += 2;
+        sdamage_adjustment += 3;
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
 
