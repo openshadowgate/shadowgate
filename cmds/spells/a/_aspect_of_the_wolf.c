@@ -10,7 +10,7 @@ void create() {
     set_spell_level(([ "druid":5, "ranger":4]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS aspect of the wolf");
-    set_damage_desc("+4 to str and dex, knockdown feat.");
+    set_damage_desc("+4 to str and dex, knockdown feat");
     set_description("Feel the aspect of the wolf boiling though your blood.");
     set_verbal_comp();
     set_somatic_comp();
@@ -47,7 +47,7 @@ void spell_effect(int prof)
         tracker = 1;
     }
     caster->set_property("spelled", ({TO}));
-    call_out("dest_effect", ROUND_LENGTH * 4 * clevel);
+    call_out("dest_effect", ROUND_LENGTH * 5 * clevel);
     addSpellToCaster();
 }
 

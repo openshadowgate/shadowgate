@@ -700,7 +700,6 @@ int okdone()
     }
     else
         MyPlace = "hair color";
-    MyPlace = "hair color";
     ProcessStep();
     return 1;
 }
