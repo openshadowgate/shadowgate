@@ -54,8 +54,9 @@ string *mystery_skills(string mymystery)
     string *mySkills;
     mySkills = class_skills();
 
-    if(mymystery && member_array((string) mymystery, keys(MYSTERY_SKILLS)))
+    if (member_array(mymystery, keys(MYSTERY_SKILLS)) != -1) {
         mySkills += MYSTERY_SKILLS[mymystery];
+    }
 
     return mySkills;
 }
