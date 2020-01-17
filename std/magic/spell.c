@@ -1878,7 +1878,7 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
-        sdamage = roll_dice(1, 20) * (clevel / 18 + 1);
+        sdamage = roll_dice(1, 6) * (clevel / 5 + 1);
     } else if (spell_type == "warlock") {
         string blasttype;
 
