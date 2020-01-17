@@ -20,17 +20,18 @@ int cmd_drain(string args)
 {
     string targ;
     object targobj;
-    if (!TP->is_vampire()&&
-        !avatarp(TP))
+    if (!TP->is_vampire())
     {
         return 0;
     }
+
 
     if (!args)
     {
         notify_fail("Target required.\n");
         return 1;
     }
+
     if(args == "nullify")
     {
         write("The health you gained expends.");
@@ -43,48 +44,53 @@ int cmd_drain(string args)
         targ=args;
         type="life";
     }
+
     if(member_array(type,({"life","health"}))==-1)
     {
-        notify_fail("Invalid drain type. Drain for life or health.\n");
+        write("Invalid drain type. Drain for life or health.\n");
         return 1;
     }
+
     if(!objectp(targobj=present(targ,ETP)))
     {
-        notify_fail("No such target present.\n");
+        write("No such target present.\n");
         return 1;
     }
 
     if(!TP->ok_to_kill(targobj))
     {
-        notify_fail("Feeding from this is beneath you.\n");
+        write("Feeding from this is beneath you.\n");
         return 1;
     }
 
 
     if(!RACE_D->is_race(targobj->query_race()))
     {
-        notify_fail("Feeding from this is beneath you.\n");
+        write("Feeding from this is beneath you.\n");
         return 1;
     }
 
     if(targobj->query_property("spell_creature") ||
        targobj->query("not living"))
     {
-        notify_fail("Don't feed on phantoms.\n");
+        write("Don't feed on phantoms.\n");
         return 1;
     }
 
     if(!(verify_conditions(targobj)))
     {
-        notify_fail("Your target is not incapacitated.\n");
+        write("Your target is not incapacitated.\n");
         return 1;
     }
 
     if(targobj->is_undead())
     {
-        notify_fail("You should eat fresh food.\n");
+        write("You should eat fresh food.\n");
         return 1;
+
+
     }
+
 
     if(targobj->query_property("garlic_scent"))
     {
