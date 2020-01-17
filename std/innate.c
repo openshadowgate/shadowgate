@@ -101,9 +101,12 @@ void InitInnate()
     if(FEATS_D->usable_feat(TO,"one with the shadows")) // shadow stride -1, darkvision -1, shadow double 1
     {
         feat_spells += ([
-            "shadow stride" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "darkvision"    : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "shadow double" : (["type" : "spell", "casting level" : 1, "daily uses" : 1,  "delay" : 1, "uses left" : 1,  "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "shadow stride" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "shadow double" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "greater shadow conjuration" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "shadow evocation" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "shadow necromancy" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
             ]);
     }
     if(FEATS_D->usable_feat(TO,"command the stone")) // meld into stone -1, stoneskin 1, earthquake 2, conjure elemental -1

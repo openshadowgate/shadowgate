@@ -3,6 +3,7 @@
 // Nienne, 04/10.
 #include <std.h>
 #include <daemons.h>
+#include <teleport.h>
 
 inherit FEAT;
 
@@ -83,13 +84,6 @@ void execute_feat()
 
     ::execute_feat();
 
-    if(sizeof(caster->query_attackers()))
-    {
-        tell_object(caster,"You can't shadow jump unless you are at peace.");
-        dest_effect();
-        return;
-    }
-
     locations = caster->query_rem_rooms();
     if(!mapp(locations) || !sizeof(keys(locations)))
     {
@@ -126,26 +120,11 @@ void execute_feat()
         return;
     }
 
-    if(destination_room->query_property("no teleport") || place->query_property("no teleport"))
+    if(!TELEPORT->object_can_be_teleported(caster,destination_room,clevel))
     {
-        tell_object(caster,"You notice some kind of magical interference preventing you from shadow jumping.");
+        tell_object(caster,"You notice some kind of interference preventing you from shadow jumping.");
         dest_effect();
         return;
-    }
-
-    if(destination_room->query_property("teleport proof") || place->query_property("teleport proof"))
-    {
-        power = destination_room->query_property("teleport proof");
-        if(place->query_property("teleport proof") > power) { power = place->query_property("teleport proof"); }
-        bonus = ( caster->query_stats("dexterity") - 10 ) / 2;
-        bonus = bonus + clevel + roll_dice(1,4); // not as good at bypassing teleport proof as teleport and similar spells
-
-        if(power > bonus)
-        {
-            tell_object(caster,"There is some sort of magical ward preventing you from shadow jumping.");
-            dest_effect();
-            return;
-        }
     }
 
     caster->clear_followers();

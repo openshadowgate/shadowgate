@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
@@ -12,9 +12,7 @@ void create()
     feat_prereq("Shadowdancer L1");
     feat_desc("A shadowdancer gains the use of several new spells as innate abilities:
 
-  shadow stride (at will), 
-  darkvision (at will), 
-  and shadow double (x1).");
+shadow stride, darkvision, shadow double, greater shadow conjuration, shadow evocation, shadow necromancy");
     permanent(1);
     set_required_for(({"shadow master",}));
 }
@@ -59,4 +57,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
