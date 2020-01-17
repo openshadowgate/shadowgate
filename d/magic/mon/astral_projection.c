@@ -114,7 +114,6 @@ void setup_servant(object caster, int clevel)
     set_hp(query_max_hp());
     set_overall_ac(4 - clevel);
     set_attacks_num(clevel / 8 + 2);
-    set_invis(1);
     set_skill("spellcraft", clevel * 4 / 3);
     set_skill("perception", clevel);
 
@@ -183,15 +182,6 @@ void protect()
             continue;
         TO->kill_ob(foe);
     }
-}
-
-void set_invis()
-{
-    if (TO->query_invis())
-        return;
-    else
-        ::set_invis();
-    return;
 }
 
 void die(object obj)
