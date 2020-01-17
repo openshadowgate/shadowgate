@@ -4,7 +4,7 @@
 #include <priest.h>
 inherit SPELL;
 
-#define ACTIVETEMPLES ({ "jarmila","kreysneothosies","lord shadow", "lysara" , "ryorik", "the faceless one","callimar","kismet","nilith","nimnavanon"})
+#define ACTIVETEMPLES ({ "jarmila","kreysneothosies", "lord shadow", "lysara", "ryorik", "the faceless one", "callamir","kismet","nilith","nimnavanon"})
 
 void create() {
     ::create();
