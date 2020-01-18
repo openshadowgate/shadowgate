@@ -281,6 +281,17 @@ varargs int get_bonus_value(string bonus_name, string num, object item, object t
     case "divine resistance":
     case "mental resistance":               value = num * 1.5;            break;
 
+    case "fire resistance percent":
+    case "cold resistance percent":
+    case "electricity resistance percent":
+    case "acid resistance percent":
+    case "sonic resistance percent":
+    case "positive energy resistance percent":
+    case "negative energy resistance percent":
+    case "force resistance percent":
+    case "divine resistance percent":
+    case "mental resistance percent":               value = num * 15;            break;
+
     case "spell damage resistance":         value = num * 2;        break;
 
 

@@ -100,7 +100,9 @@ void set_raw(int x){
 void set_type(string str)
 {
     set("type", str);
-    if(str == "water" || str == "alcoholic" || str == "caffeine" || str == "soft drink") is_drink = 1;
+    if (str == "water" || str == "alcoholic" || str == "caffeine" || str == "soft drink" || str == "blood")
+        is_drink = 1;
+
 }
 
 string query_type() { return query("type"); }
