@@ -58,12 +58,14 @@ void set_menu(string *item_names, string *types, int *strengths) {
  *                   * "food"      -- food items, reduces hunger
  *                   * "caffeine"  -- coffe and such, replenishes stamina
  * @param item_strength defines both item strenght and its price
+ * @param item_short item shortdesc
+ * @param item_long item longdesc
  * @param item_my_mess message player sees when consuming an item
  * @param item_your_mess message everyone in the room see when item is consumed
  * @param item_empty_container message everyone in the room see when item is consumed
  * @return 1 if item is added, 0 if item already exists on the menu
  */
-varargs int add_menu_item(string item_name, string item_type, int item_strength, string item_my_mess, string item_your_mess, string item_empty_container)
+varargs int add_menu_item(string item_name, string item_type, int item_strength, string item_short, string item_long, string item_my_mess, string item_your_mess, string item_empty_container)
 {
     if(!menu)
         menu = ([]);
@@ -76,7 +78,9 @@ varargs int add_menu_item(string item_name, string item_type, int item_strength,
     menu_items += ({item_name});
 
     menu[item_name] = ([ "type":item_type,
-                         "strength": item_strength,
+                         "strength":item_strength,
+                         "short":item_short,
+                         "long":item_long,
                          "my message":item_my_mess,
                          "your message":item_your_mess,
                          "empty container":item_empty_container]);
