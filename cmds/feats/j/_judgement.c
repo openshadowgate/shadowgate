@@ -60,6 +60,13 @@ int cmd_judgement(string args)
 
     if(!objectp(TP))
         return 0;
+
+    if(!prerequisites(TP))
+    {
+        tell_object(TP,"You can't use this feat.");
+        return 1;
+    }
+
     if(!sizeof(TP->query_attackers()))
     {
         tell_object(TP,"You can't use judgement outside of combat.");
