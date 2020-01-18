@@ -10,23 +10,26 @@ void create()
     feat_category("MagicDamage");
     feat_name("apoapsis of power");
     feat_prereq("Greater spell penetration, Greater spell power");
-    feat_desc("Pure casters learn ability to shift their damage table four levels up.");
+    feat_desc("Casters learn ability to shift their damage table four levels up.");
     permanent(1);
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
 
-    if(!(FEATS_D->has_feat(ob, "greater spell penetration") &&
-        FEATS_D->has_feat(ob, "greater spell power")))
-    {
+    if (!(FEATS_D->has_feat(ob, "greater spell penetration") && FEATS_D->has_feat(ob, "greater spell power"))) {
         dest_effect();
         return 0;
     }
-    return ::prerequisites(ob);
+    return::prerequisites(ob);
 }
 
 void execute_feat()
