@@ -160,6 +160,11 @@ int drink(string str)
     {
         TP->add_quenched(strength*50);
     }
+    else if(query("type") == "blood")
+    {
+        TP->add_bloodlust(20000);
+    }
+
     myType = query("type");
     TP->add_hp(healing);
     //changed from TP->heal(healing); to stop damage to SS Circe 1/17/05

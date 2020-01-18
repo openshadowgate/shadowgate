@@ -29,7 +29,7 @@ int prerequisites(object ob)
         dest_effect();
         return 0;
     }
-    return::prerequisites(ob);
+    return ::prerequisites(ob);
 }
 
 void execute_feat()
