@@ -29,11 +29,11 @@
 %^RESET%^%^CYAN%^Warmaster              %^RESET%^Any
 %^RESET%^%^CYAN%^Warmind                %^RESET%^Psywarrior
 
-Prestige classes are similar to standard classes, but their abilities are more specialized and often more powerful. Prestige classes on Shadowgate can only be taken starting at level 40 and have a maximum of 10 levels. Some prestige classes have steep requirements, such a minimum amount of levels in a base class, a certain feat, skill or similar.
+Prestige classes are similar to standard classes, but their abilities are more specialized and often more powerful. Some prestige classes have steep requirements, such a minimum amount of levels in a base class, a certain feat, skill or similar.
 
-To acquire a prestige class when you advance to level 41, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^.
+To acquire a prestige class when you advance, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^.
 
-If you were to type %^ORANGE%^<advance shadow_adept>%^RESET%^ for example, you would become a 40th level mage/1st level shadow adept. The class feats listed for prestige classes at level 1, level 4 and level 7 are automatically granted when you attain the correct level in the prestige class. They are free feats and you don't need to add them yourself. In almost all cases, when you advance in a prestige class, you also gain spells per day and spells known as if you had advanced in the base class required for the prestige class.
+If you were to type %^ORANGE%^<advance shadow_adept>%^RESET%^ for example, you would become a 20th level mage/1st level shadow adept. The class feats listed for prestige classes at level 1, level 4 and level 7 are automatically granted when you attain the correct level in the prestige class. They are free feats and you don't need to add them yourself. In almost all cases, when you advance in a prestige class, you also gain spells per day and spells known as if you had advanced in the base class required for the prestige class.
 
 %^RESET%^%^CYAN%^To get more information on a class, type %^ORANGE%^<help %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^%^CYAN%^.
 
