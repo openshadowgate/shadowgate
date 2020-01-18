@@ -26,7 +26,7 @@ mixed * genoutput(object targ)
         output+=({({"Hunger","%^BOLD%^"+perc+"% ("+hunger2str(perc)+"%^WHITE%^%^BOLD%^)"})});
         cur = targ->query_quenched();
         perc = cur*100/max;
-        output+=({({"Hunger","%^BOLD%^"+perc+"% ("+thirst2str(perc)+"%^WHITE%^%^BOLD%^)"})});
+        output+=({({"Thirst","%^BOLD%^"+perc+"% ("+thirst2str(perc)+"%^WHITE%^%^BOLD%^)"})});
     }
     else if(targ->is_vampire())
     {

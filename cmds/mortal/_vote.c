@@ -4,11 +4,12 @@ int cmd_vote(string str)
 {
     write("%^GREEN%^-=%^BOLD%^< %^ORANGE%^Vote for ShadowGate%^GREEN%^ >%^RESET%^%^GREEN%^=-%^RESET%^");
     write(
-"%^BOLD%^%^GREEN%^Please, consider following us to bring more people into the game:
- Grapevine     : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
+"%^BOLD%^%^GREEN%^Please, consider voting for us to bring more people into the game:
  Top Mud Sites : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tms%^RESET%^%^BOLD%^%^GREEN%^
- Mudiverse     : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-mv%^RESET%^%^BOLD%^%^GREEN%^"
 
+You van view and follow us on the grapevine:
+ Grapevine     : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
+"
         );
     if(str == "social")
     {
@@ -21,6 +22,7 @@ int cmd_vote(string str)
 %^GREEN%^-=%^BOLD%^< %^ORANGE%^Other Mudlistings%^GREEN%^ >%^RESET%^%^GREEN%^=-%^RESET%^
 %^BOLD%^%^GREEN%^ Mudlistings       : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-ml%^RESET%^%^BOLD%^%^GREEN%^
 %^BOLD%^%^GREEN%^ The Mud Connector : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tmc%^RESET%^%^BOLD%^%^GREEN%^
+ Mudiverse         : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-mv%^RESET%^%^BOLD%^%^GREEN%^
 "            );
     }
     else

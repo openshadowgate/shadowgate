@@ -34,11 +34,6 @@ object base_class_ob(object ob)
 }
 
 
-string *query_base_classes()
-{
-    return ({"thief", "ranger"});
-}
-
 string *query_base_classes(object obj)
 {
     string base;
