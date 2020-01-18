@@ -48,6 +48,41 @@ void set_menu(string *item_names, string *types, int *strengths) {
     }
 }
 
+/**
+ * This funciton appends item to barkeep menu
+ *
+ * @param item_name Name of menu item, player will be able to id item by that name
+ * @param item_type Type of the item:
+ *                   * "alcoholic" -- alcohol, adds intox
+ *                   * "water"     -- water and non-alcoholic drinks, restores thirst level
+ *                   * "food"      -- food items, reduces hunger
+ *                   * "caffeine"  -- coffe and such, replenishes stamina
+ * @param item_strength defines both item strenght and its price
+ * @param item_my_mess message player sees when consuming an item
+ * @param item_your_mess message everyone in the room see when item is consumed
+ * @param item_empty_container message everyone in the room see when item is consumed
+ * @return 1 if item is added, 0 if item already exists on the menu
+ */
+varargs int add_menu_item(string item_name, string item_type, int item_strength, string item_my_mess, string item_your_mess, string item_empty_container)
+{
+    if(!menu)
+        menu = ([]);
+    if(!menu_items)
+        menu_items = ({});
+
+    if (mapp(menu[item_name]))
+        return 0;
+
+    menu_items += ({item_name});
+
+    menu[item_name] = ([ "type":item_type,
+                         "strength": item_strength,
+                         "my message":item_my_mess,
+                         "your message":item_your_mess,
+                         "empty container":item_empty_container]);
+    return 1;
+}
+
 void set_my_mess(string *msg) {
     int i;
 
@@ -142,7 +177,7 @@ int buy(string str) {
     }
     str = lower_case(str);
     if(member_array(str, menu_items) == -1) {
-	notify_fail(query_cap_name()+" says: I don't serve that.\n");
+	notify_fail("%^MAGENTA%^" + query_cap_name()+" says:%^RESET%^ I don't serve that.\n");
 	return 0;
     }
     if(!(cost = price(this_player(), menu[str]["strength"]))) {
