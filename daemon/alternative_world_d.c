@@ -312,7 +312,8 @@ void alt_world_border_messages(object who, object dest)
 
 void clear_alt_vars(object who)
 {
-    if(!objectp(who)) return;
+    if (!objectp(who))
+        return;
     who->delete("entered alt world");
     who->delete("leaving alt world");
     who->delete("alt world borders");
