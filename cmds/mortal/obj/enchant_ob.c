@@ -2040,6 +2040,7 @@ int message_check(string message, string type)
 string sort_valid_bonuses()
 {
     string *bonuses = VALID_BONUSES - restricted_skills, display;
+    bonuses = filter_array(bonuses, (:!regexp($1, " percent"):));
     display = format_page(bonuses,3);
     display = "%^RESET%^%^BOLD%^%^GREEN%^"+display;
     return display;

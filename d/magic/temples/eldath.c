@@ -1,4 +1,3 @@
-//eldath.c - eldathyn grove redesigned by selve. Nienne, 12/06.
 #include <std.h>
 inherit ROOM;
 
@@ -6,7 +5,6 @@ void create() {
    ::create();
    set_property("indoors",0);
    set_property("light",2);
-//   set_terrain(GARDEN);
    set_terrain(RUINS); //allows commune with nature spell and others that require true wilderness
    set_travel(FOOT_PATH);
    set_name("A quiet grove");
@@ -24,11 +22,6 @@ void create() {
      "north" : "/d/antioch/vale/forest/aash_trail1",
      "out" : "/d/antioch/wild/forest/trail6"
    ]) );
-/*   set_items(([
-      "wall":"You see Eldath's charge to her followers on the wall.",
-      "charge":"Maybe you should read it.",
-   ]));
-*/
 }
 
 void reset() {
@@ -61,50 +54,3 @@ string ldesc() {
 "serenity and beauty of the grove.");
    }
 }
-
-void init(){
-   ::init();
-   //add_action("read_charge","read");
-//   add_action("buy_em","bw");
-}
-
-int buy_em(int x){
-   if(!x) return 0;
-   tell_object(TP,"There is no longer any holy water for Eldath here.");
-   return 1;
-}
-
-/*
-int read_charge(string str){
-   if(!str || str != "charge") return __Read_me(str);
-   write(
-@CHARGE
-Eldath charges her followers with this message:
-
-Peace cannot be taught or imposed, it must come from within and can only 
-be reached through thought and meditation. Seek stillness and thereby find 
-peace. Plant trees and green-leaved things and tend such things when they 
-need it. Nurture and aid, do not restrict or punish. Work violence only to 
-defend, and slay no thing of the forest save to prevent it from slaying 
-yourself or another under your protection. Aid fellow Eldathyn and clergy 
-of Silvanus and Mielikki whenever possible, and give assistance, support, 
-and shelter to displaced forest dwellers. Share with all beings the 
-beneficial things that grow in or come from running water that all may  
-know of and praise Eldath.
-CHARGE
-   );
-   if((string)TP->query_diety() == "eldath" || avatarp(TP))
-   write(
-@EXTRA
-===========================================================================
-
-As a follower of Eldath ...
-  allied deities are: Mielikki, Silvanus, Selune, Lathander
-  enemy deities are: Malar, Loviatar, Talos
-
-This is information only followers of Eldath should know.
-EXTRA
-   );
-   return 1;
-}
-*/

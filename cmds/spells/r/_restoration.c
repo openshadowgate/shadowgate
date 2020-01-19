@@ -5,7 +5,7 @@ inherit SPELL;
 void create()
 {
     ::create();
-    set_spell_name("restoration")
+    set_spell_name("restoration");
     set_spell_level(([ "oracle" : 2, "cleric" : 2,"inquisitor":2,"paladin":1, "druid":2 ]));
     set_mystery("life");
     set_spell_sphere("conjuration_summoning");
@@ -26,12 +26,11 @@ string query_cast_string()
     string cast;
     if (interactive(caster))
     {
-        cast = ""+caster->QCN+" folds "+caster->QP+
-            " hands as "+caster->QS+" prays for a divine spell!\n";
+        cast = ""+caster->QCN+"%^YELLOW%^ folds "+caster->QP+" hands as "+caster->QS+" prays for a divine spell!%^RESET%^\n";
     }
     else
     {
-        cast = ""+caster->QCN+" calls for a divine spell!\n";
+        cast = ""+caster->QCN+"%^YELLOW%^ calls for a divine spell!%^RESET%^\n";
     }
     return "\n"+cast;
 }
@@ -40,6 +39,28 @@ spell_effect(int prof)
 {
     int rnd;
 
+    if (interactive(caster))
+    {
+        // CAST UPON ONESELF
+        if ( caster == target )
+        {
+            tell_object(caster, "%^BOLD%^%^CYAN%^You chant a restorative blessing at yourself.%^RESET%^");
+            tell_room(place, ""+caster->QCN+"%^BOLD%^%^CYAN%^ chants a restorative blessing at "+caster->QO+"self.%^RESET%^", ({ caster, target}) );
+        }
+        else
+        {
+            tell_object(caster, "%^BOLD%^%^CYAN%^You chant a restorative blessing at "+target->QCN+".%^RESET%^");
+            tell_room(place, ""+caster->QCN+"%^BOLD%^%^CYAN%^ chants a restorative blessing at "+target->QCN+".%^RESET%^",({ caster}) );
+        }
+    }
+    else
+    {
+        // OBJECT CALLS RESTORATION
+        tell_room(environment(caster), ""+caster->QCN+"%^BOLD%^%^CYAN%^ chants a restorative blessing at "+target->QCN+".%^RESET%^",({ caster, target }) );
+        tell_object(target, ""+caster->QCN+"%^BOLD%^%^CYAN%^ chants a blessing at you.%^RESET%^");
+    }
+
+ 
     tell_object(target,"You feel invigorated and restored as the energy washes over you.");
     tell_room(ENV(target),target->QCN+" looks invigorated and restored.");
 
