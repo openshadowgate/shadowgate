@@ -5,7 +5,7 @@ inherit SPELL;
 void create()
 {
     ::create();
-    set_spell_name("heal");
+    set_spell_name("restoration")
     set_spell_level(([ "oracle" : 2, "cleric" : 2,"inquisitor":2,"paladin":1, "druid":2 ]));
     set_mystery("life");
     set_spell_sphere("conjuration_summoning");
@@ -21,6 +21,21 @@ void create()
     set_helpful_spell(1);
 }
 
+string query_cast_string()
+{
+    string cast;
+    if (interactive(caster))
+    {
+        cast = ""+caster->QCN+" folds "+caster->QP+
+            " hands as "+caster->QS+" prays for a divine spell!\n";
+    }
+    else
+    {
+        cast = ""+caster->QCN+" calls for a divine spell!\n";
+    }
+    return "\n"+cast;
+}
+ 
 spell_effect(int prof)
 {
     int rnd;
@@ -32,4 +47,12 @@ spell_effect(int prof)
         "/std/magic/cleanse"->restore(target);
 
     target->use_stamina(-target->query_max_stamina()/2);
+ 
+    dest_effect();
+}
+ 
+void dest_effect()
+{
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
 }

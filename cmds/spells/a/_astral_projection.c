@@ -69,6 +69,7 @@ void spell_effect(int prof)
     ob->set_long(cm(caster->getWholeDescriptivePhrase() + " " +(string)caster->query_description()));
     ob->set("speech string",cm(caster->query("speech string")));
     ob->set("describe string",cam(caster->query("describe string")));
+
     addSpellToCaster();
 
     return;
