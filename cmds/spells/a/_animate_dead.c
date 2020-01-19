@@ -19,7 +19,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animate dead [on TARGET]");
     set_damage_desc("raises skeletal champions");
-    set_description("%^RESET%^With this spell, the caster uses remnants of negative energy released upon recent death to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and alike powers for different reasons as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
+    set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -57,7 +57,7 @@ void spell_effect(int prof)
         targs = temp;
 
         if(!sizeof(targs)) {
-            tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUCK OUT FIRST%^RESET%^%^RESET%^");
+            tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUFFED OUT FIRST!%^RESET%^");
             TO->remove();
             return;
         }
@@ -75,7 +75,7 @@ void spell_effect(int prof)
     num_mon = (int)caster->query_property("raised");
     if(!intp(num_mon)) num_mon = 0;
     if(num_mon > clevel) {
-        tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE%^RESET%^%^RESET%^");
+        tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE!%^RESET%^%^RESET%^");
         tell_room(environment(caster),"%^CYAN%^"+caster->QCN+" seems to strain doing something.%^RESET%^", caster);
         TO->remove();
         return;
@@ -89,7 +89,7 @@ void spell_effect(int prof)
 
         if(((num_mon + lvl) > clevel)) {
             undead->remove();
-            tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ISERY%^RESET%^%^RESET%^");
+            tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster),"%^CYAN%^"+caster->QCN+" seems to strain doing something.%^RESET%^", caster);
             TO->remove();
             return;
@@ -133,7 +133,7 @@ void spell_effect(int prof)
 }
 
 void fail() {
-    tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^YOU FAIL, %^WHITE%^PA%^BLACK%^T%^WHITE%^HETIC %^WHITE%^WEAKLING%^RESET%^%^RESET%^");
+    tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^YOU FAIL, %^WHITE%^PA%^BLACK%^T%^WHITE%^HETIC %^WHITE%^WEAKLING!%^RESET%^%^RESET%^");
     tell_room(environment(caster),"%^CYAN%^"+caster->QCN+" seems disappointed.", caster);
     TO->remove();
     return;

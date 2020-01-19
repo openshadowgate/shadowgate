@@ -11,9 +11,9 @@ void create() {
     set_spell_sphere("illusion");
     set_syntax("cast CLASS blurred movement");
     set_damage_desc("20% miss chance");
-    set_description("You blur your body, making shadow of every move you perform, gaining one fift of a concealment.
+    set_description("You blur your body, making a shadow of every move you perform, gaining 20% concealment.
 
-%^BOLD%^%^RED%^N.B.%^RESET%^ Will only work while wearing no armor.");
+%^BOLD%^%^RED%^N.B.%^RESET%^ This spell will only work while not wearing armor.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
@@ -89,7 +89,7 @@ void dest_effect() {
         return;
     }
 
-    tell_object(caster, "%^BOLD%^%^MAGENTA%^You feel illusion blurring your movement fade.");
+    tell_object(caster, "%^BOLD%^%^MAGENTA%^You feel the illusion blurring your movements fade.");
     tell_room(environment(caster), "%^BOLD%^%^MAGENTA%^"+caster->QCN+" slows down from a blur.",caster);
     chance = (int)caster->query_missChance()-20;
     caster->set_missChance(chance);

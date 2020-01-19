@@ -12,9 +12,9 @@ create() {
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS breath of life on TARGET");
     set_damage_desc("positive energy");
-    set_description("You channel a beam of own energy at target, healing them. If the target is deceased, the beam instead will try to return them to life into their body.
+    set_description("You channel a beam of your own energy at the target, healing them. If the target is deceased, the beam will instead try to return them to life.
 
-This spell accepts recognized players name or their corpse as the TARGET if they are deceased.
+This spell accepts the recognized player's name or their corpse as the TARGET if they are deceased.
 ");
     set_verbal_comp();
     set_somatic_comp();

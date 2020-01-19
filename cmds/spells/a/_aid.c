@@ -12,7 +12,7 @@ void create() {
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS aid [on TARGET]");
     set_damage_desc("clevel + 10 max hitpoints bonus, +1 to all saves");
-    set_description("With this spell, caster harnesses flow of negative energies to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
+    set_description("With this spell, the caster harnesses the flow of negative energies to grant herself a limited ability to avoid death. While this spell is active, the caster is healthier.");
 	set_helpful_spell(1);
 }
 

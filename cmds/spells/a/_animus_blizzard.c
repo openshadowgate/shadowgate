@@ -15,7 +15,7 @@ void create(){
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animus blizzard");
     set_damage_desc("cold");
-    set_description("This dark casting invokes a blizzard infused with negative energy in the area. The storms themselves pierce through flesh of casters enemies with fell cold, causing them to suffer greatly. Due to nature of this blizzard it can raise recently deceased creatures to the service of the caster, binding them temporarely to defend. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
+    set_description("This dark casting invokes a blizzard infused with negative energy in the area. The storms themselves pierce through the flesh of the caster's enemies with fell cold, causing them to suffer greatly. Due to the nature of this blizzard, it can raise recently deceased creatures, temporarily binding them to defend the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of the spell are known to be inherently evil.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -30,13 +30,13 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_save("fort");
     aoe_spell(1);
     evil_spell(1);
-    set_aoe_message("%^BOLD%^%^BLACK%^(%^BLUE%^filled with horrid blizzard%^BLACK%^)%^RESET%^");
+    set_aoe_message("%^BOLD%^%^BLACK%^(%^BLUE%^filled with a horrid blizzard%^BLACK%^)%^RESET%^");
 }
 
 void spell_effect()
 {
-    tell_object(caster,"%^BLUE%^Briefly, you hear wails of the dead comming from behind the veil as you complete chanting, the the storm comes.%^RESET%^");
-    tell_room(place,"%^BLUE%^Briefly, you hear horrid chorus of the dead as "+caster->QCN+" chants the spell, then the storm comes.%^RESET%^",caster);
+    tell_object(caster,"%^BLUE%^You briefly hear the wails of the dead coming from behind the veil as you complete your chanting, then the storm comes.%^RESET%^");
+    tell_room(place,"%^BLUE%^You briefly hear the horrid chorus of the dead as "+caster->QCN+" chants a spell, then the storm comes.%^RESET%^",caster);
     caster->set_property("spelled", ({TO}));
     counter = clevel * 3;
     addSpellToCaster();

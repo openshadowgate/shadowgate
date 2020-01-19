@@ -15,8 +15,8 @@ void create() {
     set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 3, "paladin" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS blindness on TARGET");
-    set_description("By means of this spell, the caster attempts to steal the target's vision for a short while. It is "
-"is neither curse nor it is dispellable by normal magics, but will fade after only a short while.");
+    set_description("By means of this spell, the caster attempts to steal the target's vision. It is "
+"not a curse, nor it is dispellable by normal magics, but it will fade after a short while.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -43,7 +43,7 @@ void spell_effect(int prof) {
     }
     if(do_save(target)){
         tell_object(target,"%^BLUE%^Your vision becomes momentarily hazy, but you manage to re-focus.%^RESET%^");
-        tell_room(place,"%^BLUE%^"+target->QCN+" hesitates, but then shakes off your spell.%^RESET%^",target);
+        tell_room(place,"%^BLUE%^"+target->QCN+" hesitates, but then shakes off the spell.%^RESET%^",target);
         TO->remove();
         return;
     }

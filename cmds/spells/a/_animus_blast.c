@@ -14,7 +14,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animus blast");
     set_damage_desc("cold");
-    set_description("This power enables a master of necromancy to unleash a blast of pure negative energy. Such is the power of the blast that it can also sap the life energy of those nearby, as well as its main target. In addition, the  blast of negative energy can re-awaken corpses within the vicinity, raising them as the servants of the caster. This  spell has no effect upon existing undead creatures. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
+    set_description("This power enables a master of necromancy to unleash a blast of pure negative energy. The power of the blast is such that it can also sap the life energy of those nearby, as well as its main target. In addition, the  blast of negative energy can re-awaken corpses within the vicinity, raising them as the servants of the caster. This spell has no effect upon existing undead creatures. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of the spell are known to be inherently evil.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^

@@ -13,7 +13,7 @@ void create() {
     set_mystery("godclaw");
     set_syntax("cast CLASS break curse on TARGET
         cast CLASS break curse on OBJECT [at PLAYER]");
-    set_description("This spell will break curses that has been placed upon a living or magical item, unravelling the corrupted weave around it. Unlike dispel magic this spell always suceeds if its caster level is greater than of the curse. This spell will affect spells dispel magic can not.");
+    set_description("This spell will break curses that have been placed upon a living or magical item, unravelling the corrupted weave around it. Unlike dispel magic, this spell will always succeed if its caster level is greater than that of the curse. This spell will affect spells that dispel magic can not.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -24,7 +24,7 @@ string query_casting_string() {
     if(spell_type == "cleric") {
       if((string)caster->query_diety() == "mystra") {
         return "%^BLUE%^"+caster->QCN+" begins to glow with a blue "+
-            "radiance as "+caster->QS+" begins to chant words filled "+
+            "radiance as "+caster->QS+" chants words filled "+
             "with power.";
       }
       if((string)caster->query_diety() == "shar") {

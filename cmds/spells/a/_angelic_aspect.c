@@ -56,7 +56,7 @@ int preSpell()
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^WHITE%^"+caster->QCN+" raises above ground as "+caster->QS+" chants the spell.";
+    return "%^BOLD%^%^WHITE%^"+caster->QCN+" raises above the ground as "+caster->QS+" chants the spell.";
 }
 
 void spell_effect()
@@ -120,7 +120,7 @@ void test()
         return;
     if(ENV(caster)->is_flight_room())
         return;
-    tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality return as angelic aspect fades.");
+    tell_object(caster,"%^BOLD%^%^WHITE%^You feel your mortality return as your angelic aspect fades.");
     dest_effect();
 }
 
@@ -129,7 +129,7 @@ void dest_effect()
     if(objectp(caster))
     {
         caster->remove_property_value("added short",({ashort}));
-        tell_room(ENV(caster),"%^BOLD%^%^WHITE%^Ethereal wings that trailed "+caster->QCN+" fade.%^RESET%^");
+        tell_room(ENV(caster),"%^BOLD%^%^WHITE%^The ethereal wings that trailed "+caster->QCN+" fade.%^RESET%^");
         effect(-1);
     }
     ::dest_effect();

@@ -16,7 +16,7 @@ void create()
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS acid fog");
     set_damage_desc("acid");
-    set_description("With this spell the mage taps onto paraelemental plane of ooze and opens portal to raw matter of that plane to enter the world. For the duration of effect, the area will be filled with acid fumes. The mage can direct them then to attack her enemies.");
+    set_description("With this spell the mage opens a portal to the paraelemental plane of ooze, allowing raw matter of that plane to enter the world. For the duration of the spell's effect, the area will be filled with acid fumes. The mage can then direct them to attack her enemies.");
     set_verbal_comp();
     set_somatic_comp();
     set_immunities( ({"acid"}) );
@@ -33,8 +33,8 @@ string query_cast_string()
 
 void spell_effect(int prof)
 {
-    tell_object(caster,"%^RESET%^%^BOLD%^%^GREEN%^You take quick retreat from %^BLACK%^t%^GREEN%^he %^BLACK%^s%^GREEN%^i%^BLACK%^g%^GREEN%^il%^GREEN%^ as it opens a portal and fumes rush trhough it!%^RESET%^%^RESET%^");
-    tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+"%^BOLD%^%^GREEN%^ takes cover as %^GREEN%^aci%^BLACK%^d%^BLACK%^i%^GREEN%^g %^GREEN%^si%^BLACK%^g%^GREEN%^il%^GREEN%^ explodes and fumes rush thrugh the portal opened!%^RESET%^%^RESET%^",caster);
+    tell_object(caster,"%^RESET%^%^BOLD%^%^GREEN%^You take quick retreat from %^BLACK%^t%^GREEN%^he %^BLACK%^s%^GREEN%^i%^BLACK%^g%^GREEN%^il%^GREEN%^ as it opens a portal and fumes rush through it!%^RESET%^%^RESET%^");
+    tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+"%^BOLD%^%^GREEN%^ takes cover as %^GREEN%^aci%^BLACK%^d%^BLACK%^i%^GREEN%^g %^GREEN%^si%^BLACK%^g%^GREEN%^il%^GREEN%^ explodes and fumes rush through the open portal!%^RESET%^%^RESET%^",caster);
     counter = clevel * 3;
     addSpellToCaster();
     spell_successful();
