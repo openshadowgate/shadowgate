@@ -145,7 +145,7 @@ void setup_servant(object caster, int clevel)
 catch_tell(string str)
 {
     if (!objectp(cast)) {
-        dest_me();
+        die();
         return;
     }
     tell_object(cast, "%^BOLD%^%^WHITE%^[A]%^RESET%^ " + str);
@@ -186,13 +186,12 @@ void protect()
 
 void die(object obj)
 {
+    ::die();
     if (objectp(cast)) {
         cast->remove_property("has_elemental");
         tell_object(cast, "%^BOLD%^%^WHITE%^Death of your projection shocks you!");
         cast->set_paralyzed(8, "%^BOLD%^%^WHITE%^You are in shock!");
         cast->cause_typed_damage(cast, cast->return_target_limb(), cast->query_level() * 6, "mental");
     }
-    TO->remove();
-    ::die(obj);
     return;
 }
