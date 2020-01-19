@@ -181,8 +181,8 @@ int buy(string str) {
     }
     str = lower_case(str);
     if(member_array(str, menu_items) == -1) {
-	notify_fail("%^MAGENTA%^" + query_cap_name()+" says:%^RESET%^ I don't serve that.\n");
-	return 0;
+	tell_object(TP, "%^MAGENTA%^" + query_cap_name()+" says:%^RESET%^ I don't serve that.\n");
+	return 1;
     }
     if(!(cost = price(this_player(), menu[str]["strength"]))) {
 	write(query_cap_name()+" says: You do not have enough "+currency+" for that!\n");
