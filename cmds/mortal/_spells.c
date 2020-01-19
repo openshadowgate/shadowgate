@@ -106,26 +106,24 @@ int cmd_spells(string str)
 
     obuff="";
 
-    obuff = format_page(output, columns);
-
-    /* x=0; */
-    /* foreach(oline in output) */
-    /* { */
-    /*     obuff+=oline; */
-    /*     x++; */
-    /*     if(!(x%columns)) */
-    /*     { */
-    /*         if(sizeof(obuff)>2200) */
-    /*         { */
-    /*             tell_object(TP,obuff); */
-    /*             obuff=""; */
-    /*         } */
-    /*         else */
-    /*             obuff+="\n"; */
-    /*     } */
-    /*     else */
-    /*         obuff+=""; */
-    /* } */
+    x=0;
+    foreach(oline in output)
+    {
+        obuff+=oline;
+        x++;
+        if(!(x%columns))
+        {
+            if(sizeof(obuff)>2200)
+            {
+                tell_object(TP,obuff);
+                obuff="";
+            }
+            else
+                obuff+="\n";
+        }
+        else
+            obuff+="";
+    }
 
     tell_object(TP,obuff);
 
