@@ -62,6 +62,7 @@ void spell_effect(int prof){
     target->set_property("spelled",({TO}));
     target->set_property("fast healing",2);
     target->set_property("kiss_of_feywild",1);
+    target->set_property("rejuvenation",1);
     spell_successful();
     addSpellToCaster();
     call_out("dest_effect",duration);
