@@ -12,9 +12,15 @@ void create()
 object base_class_ob(object ob)
 {
     object class_ob;
-    if(!objectp(ob) || !ob->query("shadowdancer_base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/thief.c"); }
-    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("shadowdancer_base_class")+".c"); }
-    if(!objectp(class_ob)) { class_ob = find_object_or_load(DIR_CLASSES+"/thief.c"); }
+
+    if (!objectp(ob) || !ob->query("shadowdancer_base_class")) {
+        class_ob = find_object_or_load(DIR_CLASSES + "/thief.c");
+    } else {
+        class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("shadowdancer_base_class") + ".c");
+    }
+    if (!objectp(class_ob)) {
+        class_ob = find_object_or_load(DIR_CLASSES + "/thief.c");
+    }
     return class_ob;
 }
 
