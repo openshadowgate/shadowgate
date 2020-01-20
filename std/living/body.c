@@ -654,9 +654,9 @@ int query_resistance_percent(string res) {
             if(res == "electricity")
                 return 33;
             if(res == "divine")
-                return -75;
+                return -33;
             if(res == "silver")
-                return -50;
+                return -33;
         }
     }
     return resistances["resistance percents"][res];
