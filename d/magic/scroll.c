@@ -210,9 +210,12 @@ int use_scroll(string str){
             }
 	//Added by Saide so the user can just use 'me' as a target to use a scroll on
 	//themselves - 3/18/2007 - comment out if someone thinks it shouldnt be this way.
-    if(targ == "me") targ = TP->query_name();
-    if (!present(what,TP)) return 0;
-    if (present(what,TP) != TO) return 0;
+    if (targ == "me")
+        targ = TP->query_name();
+    if (!present(what, TP))
+        return 0;
+    if (present(what, TP) != TO)
+        return 0;
 
     if(TP->query_property("shapeshifted"))
     {
@@ -231,35 +234,36 @@ int use_scroll(string str){
         return 1;
     }
     lev = (TP->query_skill("spellcraft") + TP->query_skill("academics")) / 2;
-    if(lev < 1) lev = 1;
-    if(lev-10+roll_dice(1,20)<query_spell_level()*3)
-        if(!random(5))
-        {
-            tell_object(TP,"%^BOLD%^Unable to control the magic, the scroll explodes into your face!%^RESET%^");
-            tell_room(TP,"%^BOLD%^Unable to control the magic, the scroll explodes into "+TP->QCN+"'s face!%^RESET%^",TP);
-            TP->do_damage("torso",roll_dice(1,20));
+    if (lev < 1)
+        lev = 1;
+    if (lev - 10 + roll_dice(1, 20) < query_spell_level() * 3)
+        if (!random(5)) {
+            tell_object(TP, "%^BOLD%^Unable to control the magic, the scroll explodes into your face!%^RESET%^");
+            tell_room(TP, "%^BOLD%^Unable to control the magic, the scroll explodes into " + TP->QCN + "'s face!%^RESET%^", TP);
+            TP->do_damage("torso", roll_dice(1, 20));
             remove();
             return 1;
         }
-    if(TP->query_casting()) {
-        tell_object(TP,"You are already casting a spell");
+    if (TP->query_casting()) {
+        tell_object(TP, "You are already casting a spell");
         return 1;
     }
-    ob = new("/cmds/spells/"+spell[0..0]+"/_"+replace_string(spell," ","_"));
+    ob = new("/cmds/spells/" + spell[0. .0] + "/_" + replace_string(spell, " ", "_"));
     if (ob->query_target_required() && !targ)
         return notify_fail("You need to specify a target to use that spell!\n");
-    TP->set_property("spell_casting",ob);
+    TP->set_property("spell_casting", ob);
     ob->use_spell(TP, targ, lev);
     remove();
     return 1;
 }
 
-int query_spell_level(){
-    return max(map_array(SCRL_CLASSES,
-                         (:MAGIC_D->query_spell_level($1,spell):)));
+int query_spell_level()
+{
+    return max(map_array(SCRL_CLASSES, (: MAGIC_D->query_spell_level($1, spell):)));
 }
 
-int query_scroll_level(){
+int query_scroll_level()
+{
     return level;
 }
 
@@ -268,16 +272,24 @@ int do_back_fire(object myuser)
     return 0;
 }
 
-int query_value(){
+int query_value()
+{
     int level = query_spell_level();
-    return (level*level)*100;
+
+    return (level * level) * 100;
 }
 
-int query_usable() {return usable;}
+int query_usable()
+{
+    return usable;
+}
+
 //Added by Saide to test to make sure the query_readable_by() function is working
 //correctly - 3/18/2007
-void set_usable(int x) { usable = x; }
-
+void set_usable(int x)
+{
+    usable = x;
+}
 
 void set_passed(string charname) {
     if(!readpassed) readpassed = ({});
@@ -286,15 +298,27 @@ void set_passed(string charname) {
     if(readfailed[charname]) map_delete(readfailed,charname);
 }
 
-string * query_passed() { return readpassed; }
-mapping query_failed() { return readfailed; }
+string *query_passed()
+{
+    return readpassed;
+}
 
-string query_scroll_spell() { return spell;}
+mapping query_failed()
+{
+    return readfailed;
+}
 
-void set_is_newbie(int x){
+string query_scroll_spell()
+{
+    return spell;
+}
+
+void set_is_newbie(int x)
+{
     is_newbie = x;
 }
 
-int query_is_newbie(){
+int query_is_newbie()
+{
     return is_newbie;
 }
