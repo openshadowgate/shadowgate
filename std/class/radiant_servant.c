@@ -9,16 +9,19 @@ object base_class_ob(object ob)
 {
     object class_ob;
 
-    // conversion code to assign base_class to chars that previously didn't have it
-    if (!ob->query("base_class")) {
-        if (ob->is_class("cleric"))
-            ob->set("base_class", "cleric");
-        else if (ob->is_class("oracle"))
-            ob->set("base_class", "oracle");
+    if (objectp(ob)) {
+        if (!ob->query("base_class")) {
+            if (ob->is_class("cleric"))
+                ob->set("base_class", "cleric");
+            else if (ob->is_class("oracle"))
+                ob->set("base_class", "oracle");
+        }
     }
 
     if (!objectp(ob) || !ob->query("base_class")) {
         class_ob = find_object_or_load(DIR_CLASSES + "/cleric.c");
+
+        // conversion code to assign base_class to chars that previously didn't have it
     } else {
         class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("base_class") + ".c");
     }
@@ -193,7 +196,7 @@ int prerequisites(object player)
         return 0;
     }
 
-    if ((player->query("base_class") + adj) < 20) {
+    if ((player->query_class_level(base) + adj) < 20) {
         return 0;
     }
 
@@ -234,7 +237,7 @@ int caster_level_calcs(object player, string the_class)
     base = player->query("base_class");
 
     level = player->query_class_level(base);
-    level += player->query_class_level("gravecaller");
+    level += player->query_class_level("radiant_servant");
     return level;
 }
 

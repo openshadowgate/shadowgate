@@ -14,21 +14,25 @@ object base_class_ob(object ob)
     object class_ob;
 
     // conversion code. this class used to be locked up for thieves and rangers only
-    if(!ob->query("base_class"))
+    if(objcetp(ob))
     {
-        if(ob->query("shadowdancer_base_class"))
+        if(!ob->query("base_class"))
         {
-            ob->set("base_class", ob->query("shadowdancer_base_class"));
-            ob->delete("shadowdancer_base_class");
+            if(ob->query("shadowdancer_base_class"))
+            {
+                ob->set("base_class", ob->query("shadowdancer_base_class"));
+                ob->delete("shadowdancer_base_class");
+            }
+            else if(ob->is_class("cleric"))
+                ob->set("base_class", "cleric");
+            else if(ob->is_class("oracle"))
+                ob->set("base_class", "oracle");
         }
-        else if(ob->is_class("cleric"))
-            ob->set("base_class", "cleric");
-        else if(ob->is_class("oracle"))
-            ob->set("base_class", "oracle");
     }
 
     if (!objectp(ob) || !ob->query("base_class")) {
         class_ob = find_object_or_load(DIR_CLASSES + "/thief.c");
+
     } else {
         class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("base_class") + ".c");
     }
@@ -84,21 +88,45 @@ int has_base_class_set(object obj)
     return 0;
 }
 
-int is_prestige_class() { return 1; }
+int is_prestige_class()
+{
+    return 1;
+}
 
-int requires_base_class_set() { return 1; } // for prestige classes that allow many different base classes
+int requires_base_class_set()
+{
+    return 1;
+}                               // for prestige classes that allow many different base classes
 
-string *search_paths(object ob) { return base_class_ob(ob)->search_paths(); }
+string *search_paths(object ob)
+{
+    return base_class_ob(ob)->search_paths();
+}
 
-int caster_class() { return 0; }
+int caster_class()
+{
+    return 0;
+}
 
-string *restricted_races(object ob) { return base_class_ob(ob)->restricted_races(); }
+string *restricted_races(object ob)
+{
+    return base_class_ob(ob)->restricted_races();
+}
 
-string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes(); }
+string *restricted_classes(object ob)
+{
+    return base_class_ob(ob)->restricted_classes();
+}
 
-int *restricted_alignments(object ob) { return base_class_ob(ob)->restricted_alignments(); }
+int *restricted_alignments(object ob)
+{
+    return base_class_ob(ob)->restricted_alignments();
+}
 
-string *restricted_gods(object ob) { return base_class_ob(ob)->restricted_gods(); }
+string *restricted_gods(object ob)
+{
+    return base_class_ob(ob)->restricted_gods();
+}
 
 string requirements() // string version, maybe we'll need this, maybe not, can remove later if not
 {
@@ -117,21 +145,41 @@ int prerequisites(object player)
     object race_ob;
     string race, base;
     int adj;
-    if(!objectp(player)) { return 0; }
+
+    if (!objectp(player)) {
+        return 0;
+    }
 
     race = player->query("subrace");
-    if(!race) { race = player->query_race(); }
-    race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
-    if(!objectp(race_ob)) { return 0; }
+    if (!race) {
+        race = player->query_race();
+    }
+    race_ob = find_object_or_load(DIR_RACES + "/" + player->query_race() + ".c");
+    if (!objectp(race_ob)) {
+        return 0;
+    }
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
 
     base = player->query("base_class");
-    if(!base) { return 0; }
-    if(!player->is_class(base)) { return 0; }
-    if((player->query_class_level(base) + adj) < 20) { write("fail level"); return 0; }
-    if(!skills["stealth"] || skills["stealth"] < 10) { write("fail stealth"); return 0; }
-    if(!skills["athletics"] || skills["athletics"] < 10) { write("fail athletics"); return 0; }
+    if (!base) {
+        return 0;
+    }
+    if (!player->is_class(base)) {
+        return 0;
+    }
+    if ((player->query_class_level(base) + adj) < 20) {
+        write("fail level");
+        return 0;
+    }
+    if (!skills["stealth"] || skills["stealth"] < 10) {
+        write("fail stealth");
+        return 0;
+    }
+    if (!skills["athletics"] || skills["athletics"] < 10) {
+        write("fail athletics");
+        return 0;
+    }
     return 1;
 }
 
@@ -150,7 +198,10 @@ int caster_level_calcs(object player, string the_class)
 {
     int level;
     string base;
-    if(!objectp(player)) { return 0; }
+
+    if (!objectp(player)) {
+        return 0;
+    }
     base = player->query("base_class");
 
     level = player->query_class_level(base);
