@@ -233,7 +233,7 @@ int use_scroll(string str){
         tell_object(TP,"You can't properly use a scroll while gagged!");
         return 1;
     }
-    lev = (TP->query_skill("spellcraft") + TP->query_skill("academics")) / 2;
+    lev = (3 * TP->query_skill("spellcraft") + 2 * TP->query_skill("academics")) / 5 * 8 / 9;
     if (lev < 1)
         lev = 1;
     if (lev - 10 + roll_dice(1, 20) < query_spell_level() * 3)
@@ -248,7 +248,7 @@ int use_scroll(string str){
         tell_object(TP, "You are already casting a spell");
         return 1;
     }
-    ob = new("/cmds/spells/" + spell[0. .0] + "/_" + replace_string(spell, " ", "_"));
+    ob = new("/cmds/spells/" + spell[0..0] + "/_" + replace_string(spell, " ", "_"));
     if (ob->query_target_required() && !targ)
         return notify_fail("You need to specify a target to use that spell!\n");
     TP->set_property("spell_casting", ob);
