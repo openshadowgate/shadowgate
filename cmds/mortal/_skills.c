@@ -198,7 +198,7 @@ void display_skills(object asking, object ob)
                 mydisc = ob->query_mystery();
                 myclassskills += (string *)file->mystery_skills(mydisc);
             }
-            else  myclassskills += (string *)file->class_skills();
+            else  myclassskills += (string *)file->class_skills(ob);
         }
         continue;
     }
