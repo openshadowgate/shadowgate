@@ -2,9 +2,9 @@
 %^RESET%^%^CYAN%^Radiant Servant:
 
 %^RESET%^%^CYAN%^Requirements:
-%^RESET%^ Level 20 Cleric
+ Level 20 Base class (Cleric, Druid or Inquisitor)
  10 Points spent in the Heal Skill
-%^RESET%^ 20 Base Wisdom (before equipment modifiers)
+ 20 Base Wisdom
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: contingent healing

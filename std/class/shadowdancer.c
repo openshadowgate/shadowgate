@@ -13,10 +13,24 @@ object base_class_ob(object ob)
 {
     object class_ob;
 
-    if (!objectp(ob) || !ob->query("shadowdancer_base_class")) {
+    // conversion code. this class used to be locked up for thieves and rangers only
+    if(!ob->query("base_class"))
+    {
+        if(ob->query("shadowdancer_base_class"))
+        {
+            ob->set("base_class", ob->query("shadowdancer_base_class"));
+            ob->delete("shadowdancer_base_class");
+        }
+        else if(ob->is_class("cleric"))
+            ob->set("base_class", "cleric");
+        else if(ob->is_class("oracle"))
+            ob->set("base_class", "oracle");
+    }
+
+    if (!objectp(ob) || !ob->query("base_class")) {
         class_ob = find_object_or_load(DIR_CLASSES + "/thief.c");
     } else {
-        class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("shadowdancer_base_class") + ".c");
+        class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("base_class") + ".c");
     }
     if (!objectp(class_ob)) {
         class_ob = find_object_or_load(DIR_CLASSES + "/thief.c");
@@ -27,25 +41,30 @@ object base_class_ob(object ob)
 int set_base_class(object obj, string choice)
 {
     object *classes;
-    if(!objectp(obj)) { return 0; }
-    if(choice == 0)
-    {
-        obj->delete("shadowdancer_base_class");
+
+    if (!objectp(obj)) {
+        return 0;
+    }
+    if (choice == 0) {
+        obj->delete("base_class");
         return 1;
     }
     classes = obj->query_classes();
-    if(!sizeof(classes)) { return 0; }
-    if(member_array(choice,classes) == -1) { return 0; }
-    obj->set("shadowdancer_base_class",choice);
+    if (!sizeof(classes)) {
+        return 0;
+    }
+    if (member_array(choice, classes) == -1) {
+        return 0;
+    }
+    obj->set("base_class", choice);
     return 1;
 }
-
 
 string *query_base_classes(object obj)
 {
     string base;
     if(!objectp(obj)) { return ({}); }
-    base = obj->query("shadowdancer_base_class");
+    base = obj->query("base_class");
     if(!base) { return ({}); }
     return ({ base });
 }
@@ -53,7 +72,7 @@ string *query_base_classes(object obj)
 void remove_base_class(object obj)
 {
     if(!objectp(obj)) { return; }
-    obj->delete("shadowdancer_base_class");
+    obj->delete("base_class");
     return;
 }
 
@@ -61,7 +80,7 @@ void remove_base_class(object obj)
 int has_base_class_set(object obj)
 {
     if(!objectp(obj)) { return 0; }
-    if(obj->query("shadowdancer_base_class")) { return 1; }
+    if(obj->query("base_class")) { return 1; }
     return 0;
 }
 
@@ -107,7 +126,7 @@ int prerequisites(object player)
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
 
-    base = player->query("shadowdancer_base_class");
+    base = player->query("base_class");
     if(!base) { return 0; }
     if(!player->is_class(base)) { return 0; }
     if((player->query_class_level(base) + adj) < 20) { write("fail level"); return 0; }
@@ -132,7 +151,7 @@ int caster_level_calcs(object player, string the_class)
     int level;
     string base;
     if(!objectp(player)) { return 0; }
-    base = player->query("shadowdancer_base_class");
+    base = player->query("base_class");
 
     level = player->query_class_level(base);
     level += player->query_class_level("shadowdancer");
