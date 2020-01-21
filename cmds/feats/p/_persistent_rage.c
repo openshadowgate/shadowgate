@@ -6,9 +6,9 @@ void create()
 {
    ::create();
    feat_type("permanent");
-   feat_category("EpicFeats");
+   feat_category("Rampage");
    feat_name("persistent rage");
-   feat_prereq("Barbarian L31");
+   feat_prereq("Barbarian L17");
    feat_desc("This feat allows the barbarian to rage at will without cooldown or duration limits.");
    permanent(1);
    allow_blind(1);
@@ -19,7 +19,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("barbarian") < 31) {
+    if((int)ob->query_class_level("barbarian") < 17) {
         dest_effect();
         return 0;
     }

@@ -171,8 +171,8 @@ void greater_rage(int direction)
 
 void mighty_rage(int direction)
 {
-    caster->add_stat_bonus("strength", 6 * direction);
-    caster->add_stat_bonus("constitution", 6 * direction);
+    caster->add_stat_bonus("strength", 8 * direction);
+    caster->add_stat_bonus("constitution", 8 * direction);
     caster->add_saving_bonus("will", 4 * direction);
     caster->add_ac_bonus(-2 * direction);
 }
