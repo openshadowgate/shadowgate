@@ -3,31 +3,35 @@
 #include <magic.h>
 inherit FEAT;
 
-int duration, basemax, newmax, deltahp, feattracker, cooldown, myFlag, BonusFlag;
+// Flags to determine rage type
+static string rage_class;
+static int tireless_rage;
+static int spirit_warrior;
 
-void rage_me();
-void check();
+object *exclude = ({});
 
-void create() {
-   ::create();
-   feat_type("instant");
-   feat_category("Rampage");
-   feat_prereq("Barbarian");
-   feat_syntax("rage");
-   feat_desc("This feat allows the barbarian to enter a fit of furious rage, boosting their strength, constitution, and will. The ability will last longer, and grow stronger, as the barbarian gains levels. Rage can be turned off by typing rage again.
+void create()
+{
+    ::create();
+    feat_type("instant");
+    feat_category("Rapage");
+    feat_name("rage");
+    feat_syntax("rage");
+    feat_prereq("Barbarian L1");
+   feat_desc("This feat allows the barbarian to enter a fit of furious rage, boosting their strength, constitution, and will. The ability will last longer, and grow stronger, as the barbarian gains levels. Rage can be turned off by typing rage again. By the end of raging the barbarian will become fatigued. Rage will be interrupted if the barbarran becomes fatigued and exhausted.
 
 %^BOLD%^N.B.%^RESET%^ Being enraged means that you are maddened uncontrollably. This is *not* a state in which you can calmly participate in a normal conversation, undertake delicate tasks, cast offensive spells, solve problems, or pretty much do anything other than shout obscenities andkill things. This power won't work in conjunction with wimilar magical effects, such as rally, transformation, rage, berserker and fell flight.
 
 %^BOLD%^N.B.%^RESET%^ Rage status can be set using prompt. Please see help prompt for more information.
 
-%^BOLD%^See also:%^RESET%^ rage *spells");
-   feat_name("rage");
-   set_required_for(({"greater rage","mighty rage"}));
-   set_target_required(0);
-   allow_blind(1);
+%^BOLD%^See also:%^RESET%^ rage *spells, satus effects, prompt");
+    allow_blind(1);
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob) {
    if(!objectp(ob)) { return 0; }
@@ -38,295 +42,206 @@ int prerequisites(object ob) {
     return ::prerequisites(ob);
 }
 
-int cmd_rage(string str) {
-   object feat;
-   if(!objectp(TP)) { return 0; }
-   if(str) str = lower_case(str);
-   if(str != "on" && str != "off")
-   {
-      tell_object(TP,"Use rage on or rage off.");
-      return 1;
-   }
-
-   feat = new(base_name(TO));
-   feat->setup_feat(TP,str);
-   return 1;
-}
-
-void execute_feat() {
-   object *featobs;
-   int i;
-   if(!objectp(caster))
-   {
-      dest_effect();
-      return;
-   }
-   /*if(!FEATS_D->is_active(caster,"rage"))
-   {
-      if((int)caster->query_property("using rage") > time())
-      {
-         tell_object(caster,"%^BOLD%^You can't try to rage again so soon.%^RESET%^");
-      }
-   dest_effect();
-   return;
-   }*/
-   if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
-   {
-      caster->send_paralyzed_message("info",caster);
-      dest_effect();
-      return;
-    }
-   ::execute_feat();
-   switch(arg)
-   {
-      case "off":
-         if(!caster->query_property("raged"))
-         {
-            tell_object(caster,"%^RED%^You are not currently raged.%^RESET%^");
-            dest_effect();
-            break;
-         }
-         tell_object(caster,"%^RED%^You struggle to catch your breath as you try to yank yourself away from your murderous reverie.%^RESET%^");
-         dest_effect();
-         break;
-      case "on":
-         if(caster->query_property("raged"))
-         {
-            tell_object(caster,"%^RED%^You are already raging.%^RESET%^");
-            dest_effect();
-            break;
-         }
-         if((int)caster->query_property("using instant feat"))
-         {
-            tell_object(caster,"%^BOLD%^You are already in the middle of using a feat.%^RESET%^");
-            dest_effect();
-            break;
-         }
-         if(caster->query_casting())
-         {
-            tell_object(caster,"%^BOLD%^You can't rage while you're casting a spell.%^RESET%^");
-            dest_effect();
-            break;
-         }
-         /*if((int)caster->query_property("using rage") > time() && !FEATS_D->usable_feat(caster,"persistent rage"))
-         {*/
-         if((int)caster->query_property("using rage") > time()){
-            tell_object(caster,"%^BOLD%^You can't try to rage again so soon.%^RESET%^");
-            dest_effect();
-            break;
-         }
-         else{
-            tell_object(caster,"%^RED%^The world takes on a tinge of red as you are overcome by an insatiable desire to see your enemies rendered into a bloody pulp.%^RESET%^");
-            tell_room(place,"%^RED%^"+caster->QCN+" growls fiercely as "+caster->QS+" transforms into a homicidal maniac.%^RESET%^",caster);
-            caster->set_property("using instant feat",1);
-            call_out("rage_me",ROUND_LENGTH);
-            return;
-         }
-   }
-}
-
-void rage_me()
+int cmd_rage(string str)
 {
-   string *mytempfeats=({});
-   if(!objectp(caster))
-   {
+    object feat;
+    if (!objectp(TP)) {
+        return 0;
+    }
+    feat = new(base_name(TO));
+    feat->setup_feat(TP, str);
+
+    return 1;
+}
+
+string cm(string str)
+{
+    return CRAYON_D->color_string(str,"red and black");
+}
+
+void execute_feat()
+{
+    object obj;
+
+    if (!objectp(caster)) {
         dest_effect();
         return;
-   }
-   caster->remove_property("using instant feat");
-   ::execute_attack();
-   duration = 250 + ((int)caster->query_guild_level("barbarian")*20);
-   basemax = caster->query_max_hp();
-   myFlag = sizeof(caster->query_classes());
-   if(FEATS_D->usable_feat(caster,"mighty rage"))
-   {
-       caster->set_property("rage bonus", 1);
-       caster->add_stat_bonus("strength",8);
-       caster->add_stat_bonus("constitution",8);
-       caster->add_saving_bonus("will",4);
-       caster->add_ac_bonus(-2);
-       caster->use_stamina(roll_dice(1,6));
-       if(pointerp(caster->query_temporary_feats()))
-       {
-           if(member_array("regeneration",(string*)caster->query_temporary_feats()) == -1)
-           {
-               caster->add_temporary_feat("regeneration");
-               caster->set_property("rage feat tracker", 1);
-           }
-       }
-   }
-   else if(FEATS_D->usable_feat(caster,"greater rage"))
-   {
-       caster->set_property("rage bonus", 3);
-       caster->add_stat_bonus("strength",6);
-       caster->add_stat_bonus("constitution",6);
-       caster->add_saving_bonus("will",3);
-       caster->add_ac_bonus(-2);
-       caster->use_stamina(roll_dice(1,6));
-   }
-   else
-   {
-       caster->set_property("rage bonus", 5);
-       caster->add_stat_bonus("strength",4);
-       caster->add_stat_bonus("constitution",4);
-       caster->add_saving_bonus("will",2);
-       caster->add_ac_bonus(-2);
-       caster->use_stamina(roll_dice(1,6));
-   }
+    }
 
-   cooldown = duration/2;
-   if(FEATS_D->usable_feat(caster,"spirit warrior"))
-   {
-       cooldown/=3;
-       caster->set_missChance(caster->query_missChance()+ 75);
-   }
-   if(caster->query_property("using rage"))
-   {
-      caster->remove_property("using rage");
-   }
-   caster->set_property("using rage",(time() + cooldown));
-   caster->set_property("raged",1);
-   caster->set_property("added short",({" %^RED%^(enraged)%^RESET%^"}));
-   newmax = caster->query_max_hp();
-   deltahp = newmax - basemax;
-   if(deltahp < 0) deltahp = 0;
-   caster->add_extra_hp(deltahp);
-   call_out("check",ROUND_LENGTH);
-   call_out("dest_effect",duration);
-   caster->set_property("active_feats", ({TO}));
-   return;
+    if (FEATS_D->is_active(caster, "rage")) {
+        obj = query_active_feat("rage");
+        obj->dest_effect();
+        caster = 0;
+        dest_effect();
+        return;
+    }
+
+    if (caster->query_property("using instant feat")) {
+        tell_object(caster, "%^BOLD%^You are already in the middle of using a feat.%^RESET%^");
+        dest_effect();
+        return;
+    }
+    if (caster->query_casting()) {
+        tell_object(caster, "%^BOLD%^You can't rage while you're casting a spell.%^RESET%^");
+        dest_effect();
+        return;
+    }
+
+    tell_object(caster,cm("You gather strenght as you prepare to go into frenzy."));
+    caster->set_property("active_feats",({TO}));
+
+
+    if (FEATS_D->usable_feat(caster, "mighty rage")) {
+        rage_class = "mighty rage";
+    } else if (FEATS_D->usable_feat(caster, "greater rage")) {
+        rage_class = "greater rage";
+    } else {
+        rage_class = "simple rage";
+    }
+
+    if (FEATS_D->usable_feat(caster, "tireless rage"))
+        spirit_warrior = 1;
+
+    if (FEATS_D->usable_feat(caster, "spirit warrior"))
+        spirit_warrior = 1;
+
+    caster->set_property("raged",1);
+    caster->remove_property_value("added short",({"%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^"}));
+    caster->set_property("added short",({"%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^"}));
+    call_out("enable_rage", ROUND_LENGTH);
+
+    ::execute_feat();
+    return;
 }
 
-void check()
+void enable_rage()
 {
-   if(!objectp(caster))
-   {
-      dest_effect();
-      return;
-   }
-   /*"Inspired" by the rage cleric spell =P - Octothorpe 1/27/16*/
-   if(!random(10))
-   {
-       tell_object(caster,"%^RED%^Bloodlust fills your mind.%^RESET%^");
-   }
-   if(caster->is_in_combat() && (!random(4)))
-   {
-      switch(random(100))
-      {
-         case 0..95:
-            break;
-         case 96:
-            tell_object(caster,"%^RED%^Your insatiable bloodlust quickens your reflexes offering you the opportunity to make another attack!");
-            tell_room(place,"%^RED%^"+caster->QCN+"'s attacks become a frenzied blur.",caster);
-            caster->execute_attack();
-            if(!random(5))
-            {
-               if(!random(4) || myFlag == 1) caster->execute_attack();
-            }
-            if(FEATS_D->usable_feat(caster,"greater rage"))
-            {
-               caster->execute_attack();
-               if(!random(2) && myFlag == 1)
-               {
-                  caster->execute_attack();
-               }
-            }
-            break;
-         case 97:
-            break;
-         case 98:
-            break;
-         case 99:
-            break;
+    int duration;
 
-      }
-   }
-   call_out("check",ROUND_LENGTH);
+    activate_rage(1);
+    tell_object(caster, cm("The world takes on a tinge of red as you are overcome by an insatiable desire to see your enemies rendered into a bloody pulp."));
+    tell_room(place,  cm(caster->QCN + " growls fiercely as " + caster->QS + " transforms into a homicidal maniac."), caster);
+
+    duration = ROUND_LENGTH * (caster->query_guild_level("barbarian") * 4);
+
+    if (!FEATS_D->usable_feat(caster, "persistent rage"))
+        call_out("dest_effect", duration);
+}
+
+void activate_rage(int direction)
+{
+
+    switch (rage_class) {
+    case "simple rage":
+        simple_rage(direction);
+        break;
+    case "greater rage":
+        greater_rage(direction);
+        break;
+    case "mighty rage":
+        mighty_rage(direction);
+        break;
+    }
+
+    if (spirit_warrior)
+        spirit_warrior(direction);
+
+    if(!tireless_rage)
+        if(direction < 0)
+        {
+            "/std/effect/status/fatigued"->apply_effect(target, 36); // 36 rounds - three minutes
+        }
+}
+
+void simple_rage(int direction)
+{
+    caster->add_stat_bonus("strength", 4 * direction);
+    caster->add_stat_bonus("constitution", 4 * direction);
+    caster->add_saving_bonus("will", 2 * direction);
+    caster->add_ac_bonus(-2 * direction);
+}
+
+void greater_rage(int direction)
+{
+    caster->add_stat_bonus("strength", 6 * direction);
+    caster->add_stat_bonus("constitution", 6 * direction);
+    caster->add_saving_bonus("will", 3 * direction);
+    caster->add_ac_bonus(-2 * direction);
+}
+
+void mighty_rage(int direction)
+{
+    caster->add_stat_bonus("strength", 6 * direction);
+    caster->add_stat_bonus("constitution", 6 * direction);
+    caster->add_saving_bonus("will", 4 * direction);
+    caster->add_ac_bonus(-2 * direction);
+}
+
+void spirit_warrior(int direction)
+{
+    caster->set_missChance(caster->query_missChance() + 33 * direction);
+}
+
+void execute_attack()
+{
+    object *attackers = ({ });
+    object *allies = ({ });
+    int i;
+
+    if (!objectp(caster)) {
+        dest_effect();
+        return;
+    }
+
+    if (caster->query_ghost() || caster->query_unconscious()) {
+        dest_effect();
+        return;
+    }
+
+    if (!caster->query_property("raged"))
+    {
+        dest_effect();
+        return;
+    }
+
+    if (caster->query_property("effect_exhausted") || caster->query_property("effect_fatigued")) {
+        dest_effect();
+        return;
+    }
+
+    place = environment(caster);
+    attackers = caster->query_attackers();
+
+    if(spirit_warrior)
+    {
+        if(sizeof(attackers))
+        {
+            tell_object(caster, cm("Your insatiable bloodlust quickens your reflexes offering you the opportunity to make another attack!"));
+            tell_room(place, cm(caster->QCN + "'s attacks become a frenzied blur."), caster);
+            caster->execute_attack();
+        }
+        if(!random(5))
+        {
+            tell_room(place, "%^BOLD%^%^WHITE%^" + caster->QCN + "takes on a ghostly appearance.", caster);
+            tell_object(caster,"%^BOLD%^%^WHITE%^You feel insubstantial as your rage continues.");
+        }
+    }
+
+    if (objectp(place)) {
+        place->addObjectToCombatCycle(TO, 1);
+    } else {
+        dest_effect();
+    }
 }
 
 void dest_effect()
 {
-    remove_call_out("check");
-    if(!objectp(caster))
-    {
-        ::dest_effect();
-        remove_feat(TO);
-        return;
-    }
-    if(caster->query_property("raged"))
-    {
-        newmax = caster->query_max_hp();
-        BonusFlag = (int)caster->query_property("rage bonus");
-        feattracker = (int)caster->query_property("rage feat tracker");
-        caster->remove_property("rage bonus");
-        caster->remove_property("rage feat tracker");
-        switch(BonusFlag)
-        {
-            case 1:
-                caster->add_stat_bonus("strength",-8);
-                caster->add_stat_bonus("constitution",-8);
-                caster->add_saving_bonus("will",-4);
-                caster->add_ac_bonus(2);
-                break;
-            case 2:
-                caster->add_stat_bonus("strength",-5);
-                caster->add_stat_bonus("constitution",-5);
-                caster->add_saving_bonus("will",-3);
-                caster->add_ac_bonus(4);
-                break;
-            case 3:
-                caster->add_stat_bonus("strength",-6);
-                caster->add_stat_bonus("constitution",-6);
-                caster->add_saving_bonus("will",-3);
-                caster->add_ac_bonus(2);
-                caster->use_stamina(50);
-                break;
-            case 4:
-                caster->add_stat_bonus("strength",-3);
-                caster->add_stat_bonus("constitution",-3);
-                caster->add_saving_bonus("will",-2);
-                caster->add_ac_bonus(4);
-                caster->use_stamina(50);
-                break;
-            case 5:
-                caster->add_stat_bonus("strength",-4);
-                caster->add_stat_bonus("constitution",-4);
-                caster->add_saving_bonus("will",-2);
-                //caster->add_attack_bonus(-4);
-                //caster->add_damage_bonus(-4);
-                caster->add_ac_bonus(2);
-                caster->use_stamina(35);
-                break;
-            case 6:
-                caster->add_stat_bonus("strength",-2);
-                caster->add_stat_bonus("constitution",-2);
-                caster->add_saving_bonus("will",-1);
-                caster->add_ac_bonus(4);
-                caster->use_stamina(35);
-                break;
-        }
-
-        if(FEATS_D->usable_feat(caster,"spirit warrior"))
-        {
-            caster->set_missChance(caster->query_missChance()-75);
-        }
-
-        basemax = caster->query_max_hp();
-        deltahp = newmax - basemax;
-        caster->add_extra_hp(-1*deltahp);
-        if((int)caster->query_extra_hp() < 0)
-        {
-            caster->add_extra_hp(-1*(int)caster->query_extra_hp());
-        }
-        if(feattracker == 1)
-        {
-            caster->remove_temporary_feat("regeneration");
-            feattracker = 0;
-        }
+    if (objectp(caster)) {
+        tell_object(caster, cm("You struggle to catch your breath as you try to yank yourself away from your murderous reverie."));
+        caster->remove_property_value(" active_feats ",({TO}));
+        caster->remove_property_value(" added short ",({" % ^RESET % ^%^BOLD % ^%^RED % ^(%^RESET % ^%^RED % ^enraged % ^BOLD % ^) % ^RESET % ^"}));
         caster->remove_property("raged");
-        caster->remove_property_value("added short",({" %^RED%^(enraged)%^RESET%^"}));
-        tell_object(caster,"%^RED%^The overwhelming feeling of rage slips away and you are left feeling utterly exhausted.%^RESET%^");
-        tell_room(place,"%^RED%^"+caster->QCN+" shudders violently for a moment and then starts panting and sweating profusely.%^RESET%^",caster);
+        activate_rage(-1);
     }
     ::dest_effect();
     remove_feat(TO);
