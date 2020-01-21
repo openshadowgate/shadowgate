@@ -8,12 +8,13 @@ int blocking = 0;
 string exitname;
 object caster;
 int level;
+int sdamage;
 
 
 void remove_wall();
 
 
-void create() 
+void create()
 {
    ::create();
    set_name("wall of thorns");
@@ -28,7 +29,7 @@ void create()
 }
 
 
-void init() 
+void init()
 {
    ::init();
    add_action("end_walls","remove");
@@ -36,7 +37,7 @@ void init()
 }
 
 
-void surround(object ob) 
+void surround(object ob)
 {
    int k,j;
    object *foes;
@@ -55,6 +56,7 @@ void surround(object ob)
          query_property("spell")->dest_effect();
       return;
    }
+   sdamage = query_property("spell")->query_sdamage();
    add_id(wallname);
    j = sizeof(foes);
    for(k=0;k<j;k++) {
@@ -64,10 +66,7 @@ void surround(object ob)
          continue;
       tell_room(environment(foes[k]),"%^BOLD%^%^GREEN%^"+foes[k]->query_cap_name()+" is torn by the thorns from the tangled wall!",foes[k]);
       tell_object(foes[k],"%^BOLD%^%^GREEN%^You body is torn painfully by the thorns that spring up around "+caster->query_cap_name()+".");
-      if(foes[k]->query_property("undead"))
-         foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),2+random(11),"piercing" );
-      else
-         foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),4+random(21),"piercing" );
+      foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),sdamage,"piercing" );
       if(objectp(foes[k]))
          foes[k]->continue_attack();
 //          foes[k]->set_attackers((object *)foes[k]->query_attackers() -({caster}) );
@@ -76,14 +75,14 @@ void surround(object ob)
 }
 
 
-void monitor() 
+void monitor()
 {
    int k,j;
    object *foes;
 
-   if((!objectp(caster) || !present(caster->query_name(),ETO)) && !blocking) 
+   if((!objectp(caster) || !present(caster->query_name(),ETO)) && !blocking)
    {
-      if(objectp(query_property("spell"))) 
+      if(objectp(query_property("spell")))
       {
          query_property("spell")->dest_effect();
          return;
@@ -101,10 +100,7 @@ void monitor()
          continue;
       tell_room(environment(foes[k]),"%^BOLD%^%^GREEN%^"+foes[k]->query_cap_name()+" is torn by the thorns!",foes[k]);
       tell_object(foes[k],"%^BOLD%^%^GREEN%^You get torn by the thorns!");
-      if(foes[k]->query_property("undead"))
-         foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),2+random(11),"piercing" );
-      else
-         foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),4+random(21),"piercing" );
+      foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),sdamage,"piercing" );
       if(objectp(foes[k]))
          foes[k]->continue_attack();
    } }
@@ -112,7 +108,7 @@ void monitor()
 }
 
 
-void block(object ob, string exitn) 
+void block(object ob, string exitn)
 {
    string whose, wallname;
 
@@ -126,7 +122,7 @@ void block(object ob, string exitn)
        "red, almost as if some unluckly soul had already tried to walk through it!  It fully blocks the "+exitname+"!");
    whose = caster->query_name();
    wallname = whose+exitname+"thornwall";
-   if(present(wallname,environment(caster))) 
+   if(present(wallname,environment(caster)))
    {
       tell_object(caster,"The new wall of thorns grows into the existing wall!\n");
       tell_room(environment(caster),"The thorns surrounding "+caster->query_cap_name()+" seem to grow even more dense.\n");
@@ -138,7 +134,7 @@ void block(object ob, string exitn)
 }
 
 
-void remove_wall() 
+void remove_wall()
 {
    object *notsee = ({});
    string exitdesc = "";
@@ -162,7 +158,7 @@ void remove_wall()
 }
 
 
-int damager(string str) 
+int damager(string str)
 {
    if(TP->query_paralyzed() || TP->query_bound() || TP->query_tripped() || TP->query_unconscious()){
       TP->send_paralyzed_message("info",TP);
@@ -178,10 +174,7 @@ int damager(string str)
    }
    tell_object(TP,"%^BOLD%^%^RED%^You step into the wall of thorns and feel the pointed tips tearing at you!");
    tell_room(ETP,"%^BOLD%^%^RED%^"+TPQCN+" steps into the wall of thorns blocking the "+exitname+" and they tear into "+TP->QO+"!",TP);
-   if( TP->query_property("undead") )
-      TP->cause_typed_damage(TP,TP->return_target_limb(),(roll_dice(2,6)+level+level/2),"piercing" );
-   else
-      TP->cause_typed_damage(TP,TP->return_target_limb(),(roll_dice(2,6)+level+level/2)*2,"piercing" );
+   TP->cause_typed_damage(TP, TP->return_target_limb(), sdamage, "piercing");
    if(TP)
       TP->continue_attack();
    return 0;

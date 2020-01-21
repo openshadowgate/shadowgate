@@ -396,7 +396,7 @@ void convert_to_new_class_type()
 void make_new_hitpoint_rolls(object obj)
 {
     string *classes;
-    int hp=20,i,j,num,level,old,*rolls;
+    int hp=50,i,j,num,level,old,*rolls;
 
     if(!objectp(obj)) { return; }
     if(avatarp(obj)) { return; }
@@ -408,16 +408,13 @@ void make_new_hitpoint_rolls(object obj)
     classes = (string *)obj->query_classes();
     old = (int)obj->query_max_hp();
 
-    for (i= 0;i< sizeof(classes);i++)
-    {
-        for (j=1;j<=(int)obj->query_class_level(classes[i]);j++)
-        {
+    for (i = 0; i < sizeof(classes); i++) {
+        for (j = 1; j <= (int) obj->query_class_level(classes[i]); j++) {
             level++;
-            hp += "/adm/daemon/advance_d"->get_hp_bonus(classes[i],query_base_stats("constitution"),level,obj);
+            hp += "/adm/daemon/advance_d"->get_hp_bonus(classes[i], query_base_stats("constitution"), level, obj);
         }
     }
 
-    hp = 50;
     rolls = (int*)obj->query("hp_array");
     for(i=0;i<(int)obj->query_character_level()+1;i++)
     {

@@ -23,6 +23,7 @@ void create()
         "be used in areas where some vegetation may be found.");
     set_property("magic",1);
     set_casting_time(1);
+    traveling_spell(1); // To pull correct sdamage
 }
 
 //Please leave this as an example, if we ever return to this
@@ -49,14 +50,12 @@ string query_cast_string()
 
 int preSpell()
 {
-    if(place->query_property("spike growth"))
-    {
-        tell_object(caster,"%^YELLOW%^The vegetation here has already been turned into spikes!");
+    if (place->query_property("spike growth")) {
+        tell_object(caster, "%^YELLOW%^The vegetation here has already been turned into spikes!");
         return 0;
     }
     return 1;
 }
-
 
 void spell_effect(int prof)
 {
@@ -106,7 +105,6 @@ int GoThroughDoor()
         tell_object(TP,"%^RED%^You wince in pain as you step on one of the sharp spikes!");
         tell_room(ETP,"%^RED%^"+TP->QCN+" winces in pain as "+TP->QS+" steps on a sharp spike!",TP);
         TP->cause_typed_damage(TP,TP->return_target_limb(),sdamage,"piercing");
-        if(!interactive(TP)) { spell_kill(TP,caster); }
         return 1;
     }
     return 1;
@@ -145,7 +143,7 @@ void execute_attack()
         spikes->move(place);
         set_exit_stuff();
 
-        timer = time() + 30 + (ROUND_LENGTH * clevel);
+        timer = time() + (ROUND_LENGTH * clevel * 3);
 
         caster->set_property("spelled",({TO}));
         addSpellToCaster();
