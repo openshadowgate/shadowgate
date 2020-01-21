@@ -230,7 +230,7 @@ int use_scroll(string str){
         tell_object(TP,"You can't properly use a scroll while gagged!");
         return 1;
     }
-    lev = (int)TP->query_skill("spellcraft");
+    lev = (TP->query_skill("spellcraft") + TP->query_skill("academics")) / 2;
     if(lev < 1) lev = 1;
     if(lev-10+roll_dice(1,20)<query_spell_level()*3)
         if(!random(5))
