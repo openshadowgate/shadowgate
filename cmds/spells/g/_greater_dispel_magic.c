@@ -17,5 +17,5 @@ void create() {
 
 int dispel_power()
 {
-    return 2;
+    return clevel / 6 + 1;
 }

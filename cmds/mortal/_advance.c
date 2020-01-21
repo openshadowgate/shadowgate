@@ -201,7 +201,7 @@ int can_multiclass(object ob,string myclass) {
 
         if(file->requires_base_class_set() && !file->has_base_class_set(ob))
         {
-            tell_object(ob,"%^BOLD%^The class "+myclass+" requires that you choose a base class in order to "
+            tell_object(ob,"%^BOLD%^%^WHITE%^The class "+myclass+" requires that you choose a base class in order to "
                 "advance into it.  You must select one of your exising classes that meets the requirements "
                 "for a base class for the prestige class "+myclass+".  Please enter the name of the "
                 "class that you would like as your base class:\n");

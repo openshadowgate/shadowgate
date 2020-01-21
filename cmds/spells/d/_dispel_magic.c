@@ -108,10 +108,13 @@ void dispel(object ob) {
     if (spells == ({}))
         return;
 
-    for (i = 0;i<sizeof(spells);i++)
+    for (i = 0; i < sizeof(spells); i++)
     {
-        if(!objectp(ob)) { continue; }
-        if (!objectp(spells[i])) continue;
+        if (!objectp(ob)) {
+            continue;
+        }
+        if (!objectp(spells[i]))
+            continue;
         if(i>clevel/12+1)
         {
             tell_object(caster, "You fail to dispel the "+spells[i]->query_spell_name());
