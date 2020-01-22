@@ -15,13 +15,15 @@ void create() {
 
 int allow_shifted() { return 1; }
 
-int prerequisites(object ob){
-    if(!objectp(ob)) return 0;
-    if(!FEATS_D->has_feat(ob,"indomitable")&&!ob->is_class("inquisitor")) {
-      dest_effect();
-      return 0;
+int prerequisites(object ob)
+{
+    if (!objectp(ob))
+        return 0;
+    if (!FEATS_D->has_feat(ob, "indomitable") && !ob->is_class("inquisitor")) {
+        dest_effect();
+        return 0;
     }
-    return ::prerequisites(ob);
+    return::prerequisites(ob);
 }
 
 void execute_feat(){

@@ -4,9 +4,9 @@
 inherit FEAT;
 
 // Flags to determine rage type
-static string rage_class;
-static int tireless_rage;
-static int spirit_warrior;
+string rage_class;
+int tireless_rage = 0;
+int spirit_warrior = 0;
 
 object *exclude = ({});
 
