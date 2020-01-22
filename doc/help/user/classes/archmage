@@ -2,8 +2,9 @@
 %^RESET%^%^CYAN%^Archmage:
 
 %^RESET%^%^CYAN%^Requirements:
-%^RESET%^ Level 20 Mage or Sorcerer
-%^RESET%^ 20 Base Intelligence or Charisma (before equipment modifiers)
+ Level 20 Mage or Sorcerer
+ 10 Points spent in the Spellcraft Skill
+ 20 Stat used for casting for your class
 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: school familiarity

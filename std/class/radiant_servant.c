@@ -36,19 +36,13 @@ string *query_base_classes(object obj)
     string base;
 
     if (!objectp(obj)) {
-        return ( {
-            }
-            );
+        return ({});
     }
     base = obj->query("base_class");
     if (!base) {
-        return ( {
-                }
-        );
+        return ({});
     }
-    return ( {
-            base}
-    );
+    return ({base});
 }
 
 void remove_base_class(object obj)
@@ -147,7 +141,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     str = "Prerequisites:\n"
         "    10 Skill points spent in the healing skill\n"
         "    20 Base class levels\n"
-        "    20 Wisdom stat, before equipment modifiers\n";
+        "    20 Caster stat, before equipment modifiers\n";
 
     return str;
 }
@@ -200,7 +194,7 @@ int prerequisites(object player)
         return 0;
     }
 
-    if (player->query_base_stats("wisdom") < 20) {
+    if (player->query_base_stats(base_class_ob(player)->query_casting_stat(player)) < 20) {
         return 0;
     }
     return 1;

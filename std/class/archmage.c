@@ -48,8 +48,9 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    20 Mage or Sorcerer levels (level adjustments considered part of required levels)\n"
-        "    20 Intelligence or Charisma stat, before equipment modifiers\n";
+        "    10 Skill points spent in the spellcraft skill\n"
+        "    20 Base class levels\n"
+        "    20 Stat used for casting for your class\n";
 
     return str;
 }
