@@ -4,32 +4,22 @@
 
 inherit DAEMON;
 
-string parse_special(object obj,string str);
-string parse_target(string str);
-string parse_other(string spell, string str);
-string parse_spell(string str);
-int does_spell_exist(string str);
-int add_buff(object obj, string spell, mapping buff);
-int delete_buff(object obj, string spell);
-mapping get_buffs(object obj);
-void delete_buffs(object obj);
-void save_buffs(object obj, mapping buffs);
-
-
 int cmd_buff(string str)
 {
     object buffob,oldob;
     mapping buffs,buff;
-    string spell_name, extra, *arguments, *temp = ({}), temp_string, target, special, *normal_buffs = ({}), *targeted_buffs = ({}), *special_buffs = ({}), *display = ({});
+    string spell_name, extra, *arguments, *temp = ({}), temp_string, target, special, *normal_buffs = ({}), *targeted_buffs = ({}), *special_buffs = ({}), *display = ({}), *myspells = ({});
     int i;
 
-    if (!objectp(TP)) { return 0; }
+    if (!objectp(TP)) {
+        return 0;
+    }
 
-
-    if (!stringp(str) || str == "" || str == " ")
-    {
+    if (!stringp(str) || str == "" || str == " ") {
         oldob = present("buffobxyz", TP);
-        if (objectp(oldob)) { oldob->remove(); }
+        if (objectp(oldob)) {
+            oldob->remove();
+        }
         buffob = new("/cmds/mortal/obj/buffob.c");
         buffob->set_owner(TP);
         buffob->move(TP);
@@ -42,16 +32,6 @@ int cmd_buff(string str)
 
     switch (arguments[0])
     {
-    case "party":
-
-        oldob = present("buffobxyz", TP);
-        if (objectp(oldob)) { oldob->remove(); }
-        buffob = new("/cmds/mortal/buffob.c");
-        buffob->set_owner(TP);
-        buffob->do_party(1);
-        buffob->move(TP);
-        return 1;
-
     case "add":
 
         if (sizeof(arguments) < 2)
@@ -116,7 +96,16 @@ int cmd_buff(string str)
         delete_buff(TP, spell_name);
         return 1;
 
-    case "list": case "display":
+    case "diff":
+
+        buffs = get_buffs(TP);
+        myspells = TP->query_property("spelled");
+
+        tell_object(FPL("ilmarinen"),":"+identify(buffs));
+
+        return 1;
+
+    case "list":
 
         buffs = get_buffs(TP);
         temp = keys(buffs);
@@ -141,7 +130,7 @@ int cmd_buff(string str)
         {
             for (i = 0;i < sizeof(normal_buffs);i++)
             {
-                display += ({ "    %^RESET%^%^BOLD%^%^GREEN%^" + normal_buffs[i] + "" });
+                display += ({ "  %^RESET%^%^BOLD%^%^GREEN%^" + normal_buffs[i] + "" });
             }
         }
 
@@ -153,7 +142,7 @@ int cmd_buff(string str)
                 spell_name = targeted_buffs[i];
                 buff = buffs[spell_name];
                 target = buff["target"];
-                display += ({ "    %^RESET%^%^BOLD%^%^CYAN%^" + arrange_string(spell_name,27) + "Target: " + target + "" });
+                display += ({ "   %^RESET%^%^BOLD%^%^CYAN%^" + arrange_string(spell_name,27) + "Target: " + target + "" });
             }
         }
 
