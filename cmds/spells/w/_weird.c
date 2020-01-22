@@ -13,7 +13,7 @@ void create() {
     set_mystery("whimsy");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS weird");
-    set_damage_desc("mental");
+    set_damage_desc("mental, cowering");
     set_description("With this spell, caster extends fears and horrors of own mind into material plane, causing pain and suffering to everything in sight. Only a strong will can withstand this power, and only to avoid some of the suffering..");
     set_verbal_comp();
     set_somatic_comp();
@@ -50,7 +50,7 @@ void spell_effect(int prof){
         }
         else
         {
-            "/std/effect/status/panicked"->apply_effect(target,clevel/18 + 1);
+            "/std/effect/status/cowering"->apply_effect(target,clevel/18 + 1);
         }
         tell_object(attackers[i],"%^CYAN%^Your mind is filled with images of suffering!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"mental");

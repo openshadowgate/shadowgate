@@ -46,6 +46,7 @@ void spell_effect(int prof)
             max--;
             if (do_save(foe, 10) ||
                 max < 0 ||
+                !random(2) ||
                 foe->query_level() > (clevel * 4 / 5) ||
                 foe->query_property("no death")) {
                 tell_object(foe, "%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
