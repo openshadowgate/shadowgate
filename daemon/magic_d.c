@@ -96,16 +96,16 @@ string *query_opposite_sphere(string str) {
 }
 
 int query_spell_cost(int x, string player_sphere, string spell_sphere) {
-    mixed *ret;
+    mixed* ret;
     int i;
     if (player_sphere == "monster sphere") return x;
     if (x == 0) return -1;
     if (player_sphere == spell_sphere)
-        return x/2;
+        return x / 2;
     ret = query_opposite_sphere(player_sphere);
-    for (i=0;i<sizeof(ret);i++) {
+    for (i = 0; i < sizeof(ret); i++) {
         if (ret[i] == spell_sphere)
-            return x*2;
+            return x * 2;
     }
     return x;
 }
@@ -113,8 +113,8 @@ int query_spell_cost(int x, string player_sphere, string spell_sphere) {
 int cast_spell(string spell_name, object caster, string target, int ob_level) {
     string spell_file;
     object spell;
-    seteuid(getuid());
-    if (!file_exists(spell_file="/cmds/spells/"+spell_name[0..0]+"/_"+replace_string(spell_name," ","_")+".c")) return 0;
+    seteuid(getuid() );
+    if (!file_exists(spell_file = "/cmds/spells/" + spell_name[0..0] + "/_" + replace_string(spell_name, " ", "_") + ".c") ) return 0;
     new(spell_file)->use_spell(caster, target, ob_level);
     return 1;
 }
@@ -167,7 +167,6 @@ object get_spell_from_array(object *spellary, string spellname) {
  */
 void index_spells()
 {
-
     string key, tclass;
 
     build_index();
@@ -176,13 +175,13 @@ void index_spells()
 
     foreach(key in keys(spellIndex))
     {
-        if(!sizeof(spellIndex[key]["levels"]))
+        if (!sizeof(spellIndex[key]["levels"]))
             continue;
         foreach(tclass in keys(spellIndex[key]["levels"]))
         {
-            if(!mapp(allSpells[tclass]))
+            if (!mapp(allSpells[tclass]))
                 allSpells[tclass] = ([]);
-            allSpells[tclass]+=([key:spellIndex[key]["levels"][tclass]]);
+            allSpells[tclass] += ([key:spellIndex[key]["levels"][tclass]]);
         }
     }
 }
@@ -193,39 +192,38 @@ void index_spells()
  */
 void build_index()
 {
-    string *all_spells, str2, *dirset;
+    string* all_spells, str2, * dirset;
     int x, i, j;
     mapping level, spelltable, featmap;
 
     spellIndex = ([]);
-    dirset = get_dir(DIR_SPELLS+"/");
-    if(sizeof(dirset)) {
-      for(i = 0;i < sizeof(dirset); i++) {
-        if(file_size(DIR_SPELLS+"/"+dirset[i]) == -2) {
-          all_spells = get_dir(DIR_SPELLS+"/"+dirset[i]+"/_*.c");
-          for (x=0 ; x < sizeof(all_spells); x++) {
-            all_spells[x] = replace_string(all_spells[x],"_","",1);
-            all_spells[x] = replace_string(all_spells[x],".c","",1);
-            all_spells[x] = replace_string(all_spells[x],"_"," ");
-            str2 = DIR_SPELLS+"/"+dirset[i]+"/_"+replace_string(all_spells[x]," ","_")+".c";
-            if(file_exists(str2))
-            {
-              if(catch(level = str2->query_spell_level_map())) continue;
-              if(!mapp(level))
-                  continue;
-              spelltable = ([]);
+    dirset = get_dir(DIR_SPELLS + "/");
+    if (sizeof(dirset)) {
+        for (i = 0; i < sizeof(dirset); i++) {
+            if (file_size(DIR_SPELLS + "/" + dirset[i]) == -2) {
+                all_spells = get_dir(DIR_SPELLS + "/" + dirset[i] + "/_*.c");
+                for (x = 0; x < sizeof(all_spells); x++) {
+                    all_spells[x] = replace_string(all_spells[x], "_", "", 1);
+                    all_spells[x] = replace_string(all_spells[x], ".c", "", 1);
+                    all_spells[x] = replace_string(all_spells[x], "_", " ");
+                    str2 = DIR_SPELLS + "/" + dirset[i] + "/_" + replace_string(all_spells[x], " ", "_") + ".c";
+                    if (file_exists(str2)) {
+                        if (catch(level = str2->query_spell_level_map())) continue;
+                        if (!mapp(level))
+                            continue;
+                        spelltable = ([]);
 
-              spelltable["levels"]=level;
-              spelltable["sphere"]=str2->query_spell_sphere(); //aka school
-              spelltable["way"]=str2->query_monk_way();
-              spelltable["discipline"]=str2->query_discipline();
-              spelltable["domain"]=str2->get_spell_domain();
-              spelltable["feats"]=str2->query_feats_required();
-              spellIndex += ([ all_spells[x] : spelltable]);
+                        spelltable["levels"] = level;
+                        spelltable["sphere"] = str2->query_spell_sphere(); //aka school
+                        spelltable["way"] = str2->query_monk_way();
+                        spelltable["discipline"] = str2->query_discipline();
+                        spelltable["domain"] = str2->get_spell_domain();
+                        spelltable["feats"] = str2->query_feats_required();
+                        spellIndex += ([ all_spells[x] : spelltable]);
+                    }
+                }
             }
-          }
         }
-      }
     }
     return 1;
 }
@@ -266,39 +264,36 @@ mapping index_spells_for_player(object player, string myclass)
     tmp=([]);
     foreach(spellfile in all_spell_names)
     {
-        if(!(lvl = spellIndex[spellfile]["levels"][pclass]))
+        if (!(lvl = spellIndex[spellfile]["levels"][pclass]))
             continue;
 
         featneeded = spellIndex[spellfile]["feats"][pclass];
-        if(featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player,featneeded))
+        if (featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player, featneeded))
             continue;
-        if(pclass=="psion")
-        {
+        if (pclass == "psion") {
             domain = spellIndex[spellfile]["discipline"];
-            if(domain &&
-               domain != "me" &&
-               domain != playerdisc)
+            if (domain &&
+                domain != "me" &&
+                domain != playerdisc)
                 continue;
         }
-        if(pclass=="cleric"&&
-           myclass!="oracle")
-        {
+        if (pclass == "cleric" &&
+            myclass != "oracle") {
             domain = spellIndex[spellfile]["domain"];
-            if(domain &&
-               domain != "" &&
-               member_array(domain,playerdom) == -1)
+            if (domain &&
+                domain != "" &&
+                member_array(domain, playerdom) == -1)
                 continue;
         }
-        if(pclass=="monk"&&
-           !FEATS_D->usable_feat(player,"grandmaster of the way"))
-        {
+        if (pclass == "monk" &&
+            !FEATS_D->usable_feat(player, "grandmaster of the way")) {
             domain = spellIndex[spellfile]["way"];
-            if(domain &&
-               domain != "" &&
-               domain != playerway)
+            if (domain &&
+                domain != "" &&
+                domain != playerway)
                 continue;
         }
-        tmp[spellfile]=lvl;;
+        tmp[spellfile] = lvl;
     }
     return tmp;
 }
@@ -362,46 +357,68 @@ mapping index_unrestricted_spells(string myclass)
  */
 mapping index_ki_spells_by_level(object player)
 {
-    mapping tmp=([]);
-    mapping sindex = index_spells_for_player(player,"monk");
+    mapping tmp = ([]);
+    mapping sindex = index_spells_for_player(player, "monk");
     string key;
     foreach(key in keys(sindex))
     {
-        if(!pointerp(tmp[sindex[key]]))
-            tmp+=([sindex[key]:({})]);
-        tmp[sindex[key]]+=({key});
+        if (!pointerp(tmp[sindex[key]]))
+            tmp += ([sindex[key] : ({})]);
+        tmp[sindex[key]] += ({ key });
     }
     return tmp;
 }
 
 mixed query_random_spell(string myclass, int lev)
 {
-	string ctype, cspell, *rspell;
-	int x;
-	if(!myclass) myclass = "random";
-	if(!lev || lev < -1 || lev > 9) lev = -1;
-	if(member_array(myclass, keys(allSpells)) == -1 && myclass != "random") myclass = "random";
-	if(myclass == "random") { myclass = keys(allSpells)[random(sizeof(keys(allSpells)))]; }
-    if(myclass == "sorcerer") myclass = "mage";
-    if(myclass == "oracle") myclass = "cleric";
-    if(lev < 0) {   return keys(allSpells[myclass])[random(sizeof(keys(allSpells[myclass])))]; }
-    switch (myclass)
-    {
+    string ctype, cspell, * rspell;
+    int x;
+    if (!myclass) {
+        myclass = "random";
+    }
+    if (!lev || lev < -1 || lev > 9) {
+        lev = -1;
+    }
+    if (member_array(myclass, keys(allSpells)) == -1 && myclass != "random") {
+        myclass = "random";
+    }
+    if (myclass == "random") {
+        myclass = keys(allSpells)[random(sizeof(keys(allSpells)))];
+    }
+    if (myclass == "sorcerer") {
+        myclass = "mage";
+    }
+    if (myclass == "oracle") {
+        myclass = "cleric";
+    }
+    if (lev < 0) {
+        return keys(allSpells[myclass])[random(sizeof(keys(allSpells[myclass])))];
+    }
+    switch (myclass) {
     case "ranger": case "paladin":
-        if(lev > 4) lev = 4;
+        if (lev > 4) {
+            lev = 4;
+        }
     case "bard": case "psywarrior": case "inquisitor":
-        if(lev > 6) lev = 6;
+        if (lev > 6) {
+            lev = 6;
+        }
     case "psion": case "mage": case "cleric": case "sorcerer": case "druid": case "oracle":
-        if(lev > 9) lev = 9;
+        if (lev > 9) {
+            lev = 9;
+        }
     }
     rspell = ({});
-    for(x = 0;x < sizeof(keys(allSpells[myclass]));x++)
-    {
+    for (x = 0; x < sizeof(keys(allSpells[myclass])); x++) {
         cspell = keys(allSpells[myclass])[x];
-        if(allSpells[myclass][cspell] == lev) rspell += ({cspell});
+        if (allSpells[myclass][cspell] == lev) {
+            rspell += ({ cspell });
+        }
         continue;
     }
-    if(!pointerp(rspell) || !sizeof(rspell)) {  return keys(allSpells[myclass])[random(sizeof(keys(allSpells[myclass])))]; }
+    if (!pointerp(rspell) || !sizeof(rspell)) {
+        return keys(allSpells[myclass])[random(sizeof(keys(allSpells[myclass])))];
+    }
     return rspell[random(sizeof(rspell))];
 }
 

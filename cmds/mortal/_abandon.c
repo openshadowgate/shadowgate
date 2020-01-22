@@ -181,10 +181,8 @@ int confirm_drop(string str,string theclass,int drop,int cost)
     TP->InitInnate();
     tell_object(TP,"%^YELLOW%^Finished... You dropped %^BLUE%^"+drop+" %^YELLOW%^levels from "
         "your %^BLUE%^"+theclass+"%^YELLOW%^ class and were charged %^BLUE%^"+cost+" %^YELLOW%^experience "
-        "points.  Your hitpoints will be rerolled when you log back in.  "
-        "%^RED%^Note: %^RED%^you must also add your feats again, but will not be charged for adding up to "
-        "the same amount that you had previously.  You will also have to re-apply all of your "
-        "skill points.%^RESET%^");
+        "points.");
+    tell_object(TP,"\n%^BOLD%^%^WHITE%^N.B.%^RESET%^ You will have to reassign all of your feats. You will be allowed to assign up to the same amount of feats that you previously bought without any exp cost. You will also have to re-apply your skill points.%^RESET%^");
     return 1;
 }
 
@@ -260,26 +258,18 @@ int cmd_abandon(string str)
     drop = get_level_block((int)TP->query_class_level(str));// + lvladjust);
     tell_object(TP, "drop = "+drop);
     //cost = get_exp_cost(TP,drop);
-    cost = get_exp_cost(TP,(drop+lvladjust));
+    cost = get_exp_cost(TP, (drop + lvladjust));
 
-    if((int)TP->query_class_level(str) > (10 - lvladjust) )
-    {
-        tell_object(TP,"%^YELLOW%^Are you sure you want to drop %^BLUE%^"+drop+" %^YELLOW%^"
-            "levels in your %^BLUE%^"+str+"%^YELLOW%^ class?  This will cost you %^BLUE%^"+cost+" "
-            "%^YELLOW%^ experience points.  Enter %^MAGENTA%^yes%^YELLOW%^ to confirm, "
-            "anything else to abort.%^RESET%^");
+    if ((int)TP->query_class_level(str) > (10 - lvladjust)) {
+        tell_object(TP, "\nAre you sure you want to drop %^BOLD%^%^" + drop + " %^RESET%^"
+                    "levels in your %^BOLD%^" + str + "%^RESET%^ class? This will cost you %^BOLD%^" + cost + " "
+                    "%^RESET%^ experience points. Enter %^BOLD%^yes%^RESET%^ to confirm, "
+                    "anything else to abort.%^RESET%^");
+    }else  {
+        tell_object(TP, "%^RESET%^Are you sure you want to drop your %^BOLD%^" + str + "%^RESET%^ class? "
+                    "%^RESET%^This will cost you %^BOLD%^" + cost + "%^RESET%^ experience points. Enter "
+                    "%^BOLD%^yes %^RESET%^to confirm, anything else to abort.%^RESET%^");
     }
-    else
-    {
-        tell_object(TP,"%^YELLOW%^Are you sure you want to drop your %^BLUE%^"+str+"%^YELLOW%^ class?  "
-            "%^YELLOW%^This will cost you %^BLUE%^"+cost+"%^YELLOW%^ experience points.  Enter "
-            "%^MAGENTA%^yes %^YELLOW%^to confirm, anything else to abort.%^RESET%^");
-    }
-
-    tell_object(TP,"\n%^MAGENTA%^Note that this will trigger a reroll of hitpoints when you log in next if you "
-        "confirm and you will have to reassign all of your feats.  You will be allowed to assign "
-        "up to the same amount of feats that you previously bought without any exp cost.  You will "
-        "also have to re-apply your skill points.%^RESET%^");
 
     input_to("confirm_drop",str,drop,cost);
     return 1;

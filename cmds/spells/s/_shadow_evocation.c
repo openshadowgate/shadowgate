@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     set_spell_name("shadow evocation");
-    set_spell_level(([ "mage" : 5, "bard" : 5 ]));
+    set_spell_level(([ "mage" : 5, "bard" : 5, "innate":5]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shadow evocation on SPELL_NAME [on SPELL_ARGS]");
     set_description("You tap energy from the Plane of Shadow to cast a quasi-real, illusory version of an evocation mage spell of 4th level or lower.

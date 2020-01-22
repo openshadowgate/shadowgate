@@ -235,9 +235,9 @@ void dest_effect()
 {
     if (objectp(caster)) {
         tell_object(caster, cm("You struggle to catch your breath as you try to yank yourself away from your murderous reverie."));
-        caster->remove_property_value(" active_feats ",({TO}));
-        caster->remove_property_value(" added short ",({" % ^RESET % ^%^BOLD % ^%^RED % ^(%^RESET % ^%^RED % ^enraged % ^BOLD % ^) % ^RESET % ^"}));
+        caster->remove_property_value("active_feats", ({ TO }));
         caster->remove_property("raged");
+        caster->remove_property_value("added short",({"%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^"}));
         activate_rage(-1);
     }
     ::dest_effect();
