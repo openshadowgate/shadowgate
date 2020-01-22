@@ -98,10 +98,10 @@ int cmd_buff(string str)
 
     case "diff":
 
-        buffs = get_buffs(TP);
-        myspells = TP->query_property("spelled");
+        normal_buffs = keys(get_buffs(TP));
+        myspells = map_array(TP->query_property("spelled"), (:$1->query_spell_name():));
 
-        tell_object(FPL("ilmarinen"),":"+identify(buffs));
+        tell_object(FPL("ilmarinen"),":"+identify(buffs) + ":" + identify(myspells));
 
         return 1;
 
