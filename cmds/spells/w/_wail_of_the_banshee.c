@@ -28,6 +28,7 @@ string query_cast_string() {
 void spell_effect(int prof)
 {
     object *foes, foe;
+    int max;
 
     tell_object(caster,"%^BLUE%^You concentrate and release a HORRIBLE SCREAM in tongues of unlife.");
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM in fell tongues, you feel your soul is being ripped from your body.",caster);
@@ -37,10 +38,14 @@ void spell_effect(int prof)
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     foes = target_filter(foes);
 
+    max = clevel / 16 + 1;
+
     if(sizeof(foes))
         foreach(foe in foes)
         {
-            if(do_save(foe,8) ||
+            max--;
+            if(do_save(foe,10) ||
+               max<0 ||
                foe->query_property("no death"))
             {
                 tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
@@ -50,6 +55,7 @@ void spell_effect(int prof)
             tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
             tell_room(place,"%^BOLD%^%^BLUE%^"+foe->QCN+" screams as "+foe->QP+" soul is carved out from the body!",foe);
             damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"sonic");
+
         }
 
     spell_successful();

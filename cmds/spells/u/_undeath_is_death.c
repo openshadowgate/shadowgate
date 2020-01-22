@@ -13,7 +13,7 @@ void create()
     set_spell_sphere("necromancy");
     set_mystery("reaper");
     set_syntax("cast CLASS undeath is death");
-    set_damage_desc("positive energy to undead");
+    set_damage_desc("positive energy to clevel / 12 + 1 undead");
     set_description("A caster draws a circle around herself and channels positive energy ourwards, destroying undead creatures that are not able to withstand it, but not affecting at all those of the strong will.");
     set_verbal_comp();
     set_somatic_comp();
@@ -28,6 +28,7 @@ string query_cast_string() {
 void spell_effect(int prof)
 {
     object *foes, foe;
+    int max;
 
     tell_object(caster,"%^BOLD%^%^ORANGE%^As you finish drawing a circle of life, you channel energy out of it.");
     tell_room(place,"%^BOLD%^%^ORANGE%^"+caster->QCN+" channels blinding energy out of the light circle.",caster);
@@ -35,15 +36,21 @@ void spell_effect(int prof)
     foes = caster->query_attackers();
     foes = target_filter(foes);
 
+    max = clevel / 12 + 1;
+
     foreach(foe in foes)
     {
         if(!foe->is_undead())
             continue;
-        if(do_save(foe,2))
+        if(do_save(foe,2) ||
+            max<0)
         {
             tell_object(foe,"%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
             continue;
         }
+
+        max--;
+
         tell_object(foe,"%^ORANGE%^%^BOLD%^Your unlife ends, as positive energy destroys your essence!");
         tell_room(place,"%^ORANGE%^%^BOLD%^"+foe->QCN+" crumbles to dust!",foe);
         damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"positive energy");

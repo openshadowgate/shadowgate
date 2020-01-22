@@ -34,6 +34,14 @@ string query_cast_string() {
     "chanting hypnotically.";
 }
 
+int cant_be_dominated(targ)
+{
+    return do_save(targ, 0) ||
+        targ->query_property("no dominate") ||
+        present("clothesx999", targ) ||
+        mind_immunity_damage(targ, "default");
+}
+
 void spell_effect(int prof) {
 
     change = -2;
@@ -58,19 +66,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    if(do_save(target))
-    {
-        tell_room(environment(target),"Outraged at "+caster->QCN+" for"+caster->QP+" attempt at mind control, "+target->QCN+" attacks"+caster->QO+"!", ({target, caster}) );
-        tell_object(target,"Outraged at "+caster->QCN+" for "+caster->QP+"attempt at mind control, you attack "+caster->QO+"!");
-        tell_object(caster,""+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
-        spell_kill(target, caster);
-        if (wizardp(target) || present("clothesx999",target) || (string)target->query_property("no dominate",1) || !present(caster, environment(target)))
-           if(objectp(TO)) TO->remove();
-        if(objectp(TO)) TO->remove();
-        return;
-    }
-
-    if(mind_immunity_damage(target, "default"))
+    if(cant_be_dominated(target))
     {
         tell_room(environment(target),"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
         tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");

@@ -99,9 +99,16 @@ int cmd_buff(string str)
     case "diff":
 
         normal_buffs = keys(get_buffs(TP));
-        myspells = map_array(TP->query_property("spelled"), (:$1->query_spell_name():));
+        myspells = filter_array(TP->query_property("dispellable spells")->query_spell_name(), (:stringp($1):));
 
-        tell_object(FPL("ilmarinen"),":"+identify(buffs) + ":" + identify(myspells));
+        normal_buffs -= myspells;
+        normal_buffs = sort_array(normal_buffs, 1);
+
+        display += ({ "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Buffs missing %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^" });
+
+        display += map_array(normal_buffs, (:"%^GREEN%^%^BOLD%^  " + $1:));
+
+        TP->more(display);
 
         return 1;
 
@@ -115,7 +122,7 @@ int cmd_buff(string str)
             return 1;
         }
 
-        display += ({ "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Buffs to be Cast %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^\n" });
+        display += ({ "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Buffs to be Cast %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^" });
 
         for (i = 0;i < sizeof(temp);i++)
         {
@@ -154,7 +161,7 @@ int cmd_buff(string str)
                 spell_name = special_buffs[i];
                 buff = buffs[spell_name];
                 special = buff["special"];
-                display += ({ "    %^RESET%^%^BOLD%^%^MAGENTA%^" + arrange_string(spell_name,27) + "Special: " + special + "" });
+                display += ({ "  %^RESET%^%^BOLD%^%^MAGENTA%^" + arrange_string(spell_name,27) + "Special: " + special + "" });
             }
         }
         TP->more(display);
@@ -316,9 +323,8 @@ buff - cast stored list of spells
 %^CYAN%^SYNTAX%^RESET%^
 
 buff
-buff list
-buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^
-buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ | cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^
+buff list|diff
+buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ [| cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^]
 buff remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^
 buff clear
 
@@ -327,20 +333,23 @@ buff clear
 The command will allow player to store a list of buff spells they can start casting with a single command. The buffs will cycle one at a time for either the player or their party members, depending on the syntax. If the player doesn't have enough spells, spell levels, power points or components, buff process will be interrupted. Buff can be used only while at peace and will stop if the player gets into combat. Moving will also interrupt the process.
 
 %^ORANGE%^<buff list>%^RESET%^
-    Will list all added buffs and their arguments.
+  Will list all added buffs and their arguments.
 
-%^ORANGE%^<buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^%^ORANGE%^ | cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^%^ORANGE%^>%^RESET%^
-    Will add a spell with special cast arguments. For example, <buff add resist energy | cast druid resist energy on fire> for druids will add spell resist energy to be cast with fire argument.
+%^ORANGE%^<buff diff>%^RESET%^
+  Will list all spells that are currenly missing from youd dispell list.
+
+%^ORANGE%^<buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^%^ORANGE%^ [| cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^%^ORANGE%^]>%^RESET%^
+  Will add a spell with special cast arguments. E.g., <buff add resist energy | cast druid resist energy on fire> for druids will add spell resist energy to be cast with fire argument.
 
 %^ORANGE%^<buff remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^%^ORANGE%^>%^RESET%^
-    Will remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ from the list.
+  Will remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ from the list of buffs.
 
 %^ORANGE%^<buff clear>%^RESET%^
-    Will clear your buff list.
+  Will clear your buff list.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-prepare, cast
+dispell, prepare, cast
 "
         );
 }

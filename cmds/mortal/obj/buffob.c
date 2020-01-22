@@ -135,7 +135,8 @@ void cast_special_spells()
                 continue;
             }
             special = buffs[spell]["special"];
-            myclass = get_class(spell);
+            /* myclass = get_class(spell); */
+            myclass = explode(buffs[spell]["special"], " ")[1];
 
             if (special) {
                 if (strsrch(special, "cast") == -1) {
