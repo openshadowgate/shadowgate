@@ -100,7 +100,7 @@ void execute_feat()
     }
 
     if (FEATS_D->usable_feat(caster, "tireless rage"))
-        spirit_warrior = 1;
+        tireless_rage = 1;
 
     if (FEATS_D->usable_feat(caster, "spirit warrior"))
         spirit_warrior = 1;
@@ -212,18 +212,15 @@ void execute_attack()
     place = environment(caster);
     attackers = caster->query_attackers();
 
-    if(spirit_warrior)
-    {
-        if(sizeof(attackers))
-        {
+    if (spirit_warrior) {
+        if (sizeof(attackers)) {
             tell_object(caster, cm("Your insatiable bloodlust quickens your reflexes offering you the opportunity to make another attack!"));
             tell_room(place, cm(caster->QCN + "'s attacks become a frenzied blur."), caster);
             caster->execute_attack();
         }
-        if(!random(5))
-        {
-            tell_room(place, "%^BOLD%^%^WHITE%^" + caster->QCN + "takes on a ghostly appearance.", caster);
-            tell_object(caster,"%^BOLD%^%^WHITE%^You feel insubstantial as your rage continues.");
+        if (!random(5)) {
+            tell_room(place, "%^BOLD%^%^WHITE%^" + caster->QCN + " takes on a ghostly appearance.", caster);
+            tell_object(caster, "%^BOLD%^%^WHITE%^You feel insubstantial as your rage continues.");
         }
     }
 

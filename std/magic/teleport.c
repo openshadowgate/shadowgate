@@ -99,9 +99,11 @@ mixed teleport_object(object invoker, mixed teleportee, mixed destination, int c
 string *dir_listing(string tempfil) {
     string *tmpstor, retval;
     tmpstor=explode(tempfil,"/");
+
     retval = "/"+implode(tmpstor - ({ tmpstor[sizeof(tmpstor) - 1]}),
                          "/")+"/";
-    return map_array(
-        get_dir(retval+"*.c"),(:$2+$1:),
-        retval);
+
+    retval = map_array(get_dir(retval + "*.c"), (: $2 + $1 :), retval);
+
+    return retval;
 }
