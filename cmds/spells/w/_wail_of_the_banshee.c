@@ -40,23 +40,23 @@ void spell_effect(int prof)
 
     max = clevel / 16 + 1;
 
-    if(sizeof(foes))
+    if (sizeof(foes)) {
         foreach(foe in foes)
         {
             max--;
-            if(do_save(foe,10) ||
-               max<0 ||
-               foe->query_property("no death"))
-            {
-                tell_object(foe,"%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
-                damage_targ(foe, foe->query_target_limb(),sdamage,"sonic");
+            if (do_save(foe, 10) ||
+                max < 0 ||
+                foe->query_level() > (clevel * 4 / 5) ||
+                foe->query_property("no death")) {
+                tell_object(foe, "%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
+                damage_targ(foe, foe->query_target_limb(), sdamage, "sonic");
                 continue;
             }
-            tell_object(foe,"%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
-            tell_room(place,"%^BOLD%^%^BLUE%^"+foe->QCN+" screams as "+foe->QP+" soul is carved out from the body!",foe);
-            damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"sonic");
-
+            tell_object(foe, "%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
+            tell_room(place, "%^BOLD%^%^BLUE%^" + foe->QCN + " screams as " + foe->QP + " soul is carved out from the body!", foe);
+            damage_targ(foe, foe->query_target_limb(), foe->query_max_hp() * 2, "sonic");
         }
+    }
 
     spell_successful();
     dest_effect();

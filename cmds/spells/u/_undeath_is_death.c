@@ -27,11 +27,11 @@ string query_cast_string() {
 
 void spell_effect(int prof)
 {
-    object *foes, foe;
+    object* foes, foe;
     int max;
 
-    tell_object(caster,"%^BOLD%^%^ORANGE%^As you finish drawing a circle of life, you channel energy out of it.");
-    tell_room(place,"%^BOLD%^%^ORANGE%^"+caster->QCN+" channels blinding energy out of the light circle.",caster);
+    tell_object(caster, "%^BOLD%^%^ORANGE%^As you finish drawing a circle of life, you channel energy out of it.");
+    tell_room(place, "%^BOLD%^%^ORANGE%^" + caster->QCN + " channels blinding energy out of the light circle.", caster);
 
     foes = caster->query_attackers();
     foes = target_filter(foes);
@@ -40,28 +40,30 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        if(!foe->is_undead())
+        if (!foe->is_undead()) {
             continue;
-        if(do_save(foe,2) ||
-            max<0)
-        {
-            tell_object(foe,"%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
+        }
+
+        if (do_save(foe, 2) ||
+            max < 0) {
+            tell_object(foe, "%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
             continue;
         }
 
         max--;
 
-        tell_object(foe,"%^ORANGE%^%^BOLD%^Your unlife ends, as positive energy destroys your essence!");
-        tell_room(place,"%^ORANGE%^%^BOLD%^"+foe->QCN+" crumbles to dust!",foe);
-        damage_targ(foe, foe->query_target_limb(),foe->query_max_hp()*2,"positive energy");
+        tell_object(foe, "%^ORANGE%^%^BOLD%^Your unlife ends, as positive energy destroys your essence!");
+        tell_room(place, "%^ORANGE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
+        damage_targ(foe, foe->query_target_limb(), foe->query_max_hp() * 2, "positive energy");
     }
 
     spell_successful();
     dest_effect();
 }
-
 void dest_effect()
 {
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }

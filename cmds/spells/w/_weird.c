@@ -48,6 +48,10 @@ void spell_effect(int prof){
             if(evade_splash(attackers[i])) continue;
             admg=admg/2;
         }
+        else
+        {
+            "/std/effect/status/panicked"->apply_effect(target,clevel/18 + 1);
+        }
         tell_object(attackers[i],"%^CYAN%^Your mind is filled with images of suffering!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"mental");
     }
