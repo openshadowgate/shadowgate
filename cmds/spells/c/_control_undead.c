@@ -36,6 +36,16 @@ string query_cast_string()
     return "%^BLUE%^" + caster->QCN + " glides " + caster->QP + " hand from side to side while " + "chanting hypnotically.";
 }
 
+int query_domination_duration(object targ)
+{
+    int duration;
+    duration = 60 + clevel * 60;
+    duration = duration > 360 ? 360 : duration;
+    if(!userp(targ))
+        duration = ROUND_LENGTH * 5 * clevel;
+    return duration;
+}
+
 int cant_be_dominated(targ)
 {
     return do_save(target, -2) ||

@@ -27,7 +27,9 @@ thought %^ORANGE%^%^ULINE%^THOUGHT%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This allows the avatars (Your dungeon masters) to know what you are thinking. No response is guaranteed, nor is it always possible that any responses may be forthcoming.
+This allows the avatars (Your dungeon masters) to know what you are thinking or some details about the situation. No response is guaranteed, nor is it always possible that any responses may be forthcoming.
+
+%^BOLD%^%^WHITE%^N.B.%^RESET%^ This method of communication is for IC messages only! If you need to convey something secretly, use tells, or get attention of an imm on the inform line.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

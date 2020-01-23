@@ -28,13 +28,22 @@ void create() {
 }
 
 
-string query_cast_string() {
-    return caster->QCN+" glides "+
-    caster->QP+" hand from side to side while "+
-    "chanting hypnotically.";
+int query_domination_duration(object targ)
+{
+    int duration;
+    duration = 60 + clevel * 60;
+    duration = duration > 360 ? 360 : duration;
+    return duration;
 }
 
-int cant_be_dominated(targ)
+string query_cast_string()
+{
+    return caster->QCN + " glides " +
+        caster->QP + " hand from side to side while " +
+        "chanting hypnotically.";
+}
+
+int cant_be_dominated(object targ)
 {
     return do_save(targ, 0) ||
         targ->query_property("no dominate") ||
@@ -66,18 +75,16 @@ void spell_effect(int prof) {
         return;
     }
 
-    if(cant_be_dominated(target))
-    {
-        tell_room(environment(target),"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
-        tell_object(target,"%^RED%^Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
-        tell_object(caster,"%^RED%^"+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
+    if (cant_be_dominated(target)) {
+        tell_room(environment(target), "%^RED%^Outraged at " + caster->QCN + " for " + caster->QP + " attempt at mind control, " + target->QCN + " attacks " + caster->QO + "!", ({ target, caster }));
+        tell_object(target, "%^RED%^Outraged at " + caster->QCN + " for " + caster->QP + " attempt at mind control, you attack " + caster->QO + "!");
+        tell_object(caster, "%^RED%^" + target->QCN + " attacks you, outraged at you for your attempt at mind control!");
         spell_successful();
         dest_effect();
         return;
     }
 
-    duration=60+clevel*60;
-    duration=duration>360?360:duration;
+    duration = query_domination_duration(target);
 
     tell_object(caster,"%^GREEN%^You break into "+target->QCN+"'s mind and "
         "overcome "+target->QP+" willpower!");
