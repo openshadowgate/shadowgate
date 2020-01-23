@@ -108,6 +108,7 @@ mapping areas = ([]);
 areas = ([
              "/d/shadow/city" : "Shadow",
              "/d/shadow/juran/city" : "Juran",
+             "/d/dagger/nurval" : "Nurval",
              "/d/shadow/room/muuldaan/rooms/" : "Muul'daan",
              "/d/darkwood/tabor/room/" : "Tabor",
              "/d/azha/town/" : "Azha",
