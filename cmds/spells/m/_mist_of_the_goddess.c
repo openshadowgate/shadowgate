@@ -7,7 +7,7 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("mist of the goddess");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("elemental water");
     set_spell_domain("water");
     set_syntax("cast CLASS mist of the goddess on TARGET");
@@ -29,7 +29,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^CYAN%^%^Mist gathers around your hand, as you whirl"+
         " it through a complex gesture.");
@@ -39,7 +39,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int tmp;
     if(!present(target,place))
@@ -80,7 +80,7 @@ void spell_effect(int prof)
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

@@ -1,6 +1,6 @@
 // tidal surge
 //adjusted to be a damage spell since this is 8th level
-//brought in line with windstorm and stormrage by 
+//brought in line with windstorm and stormrage by
 //~Circe~ 5/6/08 with the rebalancing of domains
 
 #include <std.h>
@@ -12,9 +12,9 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("tidal surge");
-    set_spell_level(([ "cleric" : 8 ]));
-    set_spell_sphere("elemental water");
-    set_spell_domain("water");
+    set_spell_level(([ "classless" : 9, "druid":9, "mage":9]));
+    set_spell_sphere("conjuration_summoning");
+    set_domains("water");
     set_syntax("cast CLASS tidal surge on TARGET");
     set_description("This spell will draw all of the water in the atmosphere for miles and miles around to a place above "
 "and behind the caster.  The water is condensed into the form of a massive wave that is directed at the target.  The wave "

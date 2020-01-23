@@ -11,7 +11,7 @@ void create()
     set_spell_name("freedom of movement");
     set_spell_level(([ "cleric" : 4, "bard" : 4, "ranger" : 4, "mage" : 9,"druid" : 4, "assassin" : 4, "psion" : 4, "psywarrior" : 4, "paladin" : 4,"inquisitor":4 ]));
     set_spell_sphere("abjuration");
-    set_spell_domain("renewal");
+    set_domains("renewal");
     set_syntax("cast CLASS freedom of movement");
     set_description("This spell will protect the caster with an aura of freedom, granting her freedom from the next "
         "paralyzation effect upon her.  The power of this spell is such that it will cause a brief delay once activated "

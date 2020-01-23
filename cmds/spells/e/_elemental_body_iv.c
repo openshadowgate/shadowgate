@@ -41,7 +41,8 @@ void create()
 {
     ::create();
     set_spell_name("elemental body iv");
-    set_spell_level(([ "mage" : 7, "oracle": 7]));
+    set_spell_level(([ "mage" : 7, "oracle": 7, "cleric":7]));
+    set_domains("water");
     set_mystery("elemental");
     set_description("When you cast this spell, you infuse yourself with the power of the element. Infusions give the next effects as follows:
 

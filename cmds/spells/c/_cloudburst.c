@@ -1,6 +1,6 @@
 // Cloudburst - Water Domain 4/7
-//Altered by ~Circe~ 5/6/08 - made to not drop weapons as 
-//that's a little too powerful for a level 2 spell.  
+//Altered by ~Circe~ 5/6/08 - made to not drop weapons as
+//that's a little too powerful for a level 2 spell.
 //Rebalancing domains
 //Extremely useless compared to same-level (soundburst); boosted damage to give it a useful niche. N, 02/11.
 
@@ -13,7 +13,7 @@ void create(){
     ::create();
     set_author("cythera");
     set_spell_name("cloudburst");
-    set_spell_level(([ "cleric" : 2 ]));
+    set_spell_level(([ "classless" : 2 ]));
     set_spell_sphere("elemental water");
     set_spell_domain("water");
     set_syntax("cast CLASS cloudburst on TARGET");

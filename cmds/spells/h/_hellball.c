@@ -43,6 +43,7 @@ void spell_effect(int prof){
         return;
     }
 
+    define_base_damage(4);
     for(i=0;i<sizeof(attackers);i++){
         if(!objectp(attackers[i])) continue;
         admg=sdamage/4;
