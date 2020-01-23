@@ -75,25 +75,22 @@ int cmd_spells(string str)
     tell_object(TP, "\n%^RESET%^%^BLUE%^-=%^BOLD%^<%^WHITE%^Spell list for a %^ORANGE%^"+myclass+"%^BLUE%^>%^RESET%^%^BLUE%^=-");
     sort();
 
-    if (regexp(args,"(by level)|(expanded knowledge)"))
-    {
+    if (regexp(args, "(by level)|(expanded knowledge)")) {
         sort_two();
     }
 
-    speccache = filter_mapping(MAGIC_D->query_global_index(),(:member_array($1,$3)!=-1:),magic);
+    speccache = filter_mapping(MAGIC_D->query_global_index(), (: member_array($1, $3) != -1 :), magic);
 
-    if (regexp(args,"by school") && (myclass == "mage" || myclass == "sorcerer"))
-    {
+    if (regexp(args, "by school") && (myclass == "mage" || myclass == "sorcerer")) {
         sort_by_school();
     }
 
-    for (x = 0; x < sizeof(magic);x++)
-    {
-        if(level && (spells[magic[x]] != level) )
-        {
+    for (x = 0; x < sizeof(magic); x++) {
+        if (level && (spells[magic[x]] != level)) {
             continue;
         }
-        output+=({"%^BOLD%^%^GREEN%^ "+arrange_string(magic[x], 24)+"%^RESET%^%^GREEN%^ "+arrange_string(spells[magic[x]], 2)+(myclass=="mage"||myclass=="sorcerer"?arrange_string(speccache[magic[x]]["sphere"],4):"")});
+        output += ({ "%^BOLD%^%^GREEN%^ " + arrange_string(magic[x], 24) + "%^RESET%^%^GREEN%^ " + arrange_string(spells[magic[x]], 2) +
+                    (myclass == "mage" || myclass == "sorcerer" ? arrange_string(speccache[magic[x]]["sphere"], 4) : "")});
     }
 
     z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
@@ -241,6 +238,17 @@ void sort_by_school()
             }
 }
 
+void sort_by_domain()
+{
+    int i,j;
+
+    for (j=0;j<sizeof(magic);j++)
+        for (i=sizeof(magic)-1;i>j;i--)
+            if (speccache[magic[i]]["domain"] < speccache[magic[i-1]]["domain"])
+            {
+                swap(i-1,i);
+            }
+}
 
 
 int *magic_arsenal_feat(object ob, int *spells)

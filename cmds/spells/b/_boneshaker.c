@@ -8,6 +8,7 @@ void create()
     set_spell_name("boneshaker");
     set_spell_level(([ "mage" : 2, "cleric" : 2, "inquisitor":2 ]));
     set_spell_sphere("necromancy");
+    set_domains("evil");
     set_syntax("cast CLASS boneshaker on TARGET");
     set_damage_desc("untyped");
     set_description("Using a mental image of the target's skeleton, you shake it, causing the target to experience severe pain.");

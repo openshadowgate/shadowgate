@@ -218,6 +218,7 @@ void build_index()
                         spelltable["way"] = str2->query_monk_way();
                         spelltable["discipline"] = str2->query_discipline();
                         spelltable["domain"] = str2->get_spell_domain();
+                        spelltable["domains"] = str2->query_domains();
                         spelltable["feats"] = str2->query_feats_required();
                         spellIndex += ([ all_spells[x] : spelltable]);
                     }
@@ -241,13 +242,16 @@ mapping query_index_row(string spell)
  */
 mapping index_spells_for_player(object player, string myclass)
 {
-    mapping all_spells,tmp;
-    string *all_spell_names, spellfile, featneeded,domain, pclass;
-    int lvl,i,j,k;
+    mapping all_spells, tmp;
+    string* all_spell_names, spellfile, featneeded, domain, pclass;
+    string* domains;
+    int lvl, i, j, k;
+    int has_domain;
     object spell;
     string playerdisc = player->query_discipline();
     string playerway = player->query("monk way");
-    string * playerdom = player->query_divine_domain();
+    string* playerdom = player->query_divine_domain();
+    string tmpdom;
 
     pclass = myclass;
     if (myclass == "sorcerer")
@@ -277,6 +281,8 @@ mapping index_spells_for_player(object player, string myclass)
                 domain != playerdisc)
                 continue;
         }
+
+        // Legacy code for transitioning from old to new domains system
         if (myclass == "cleric" ) {
             domain = spellIndex[spellfile]["domain"];
             if (domain &&
@@ -284,6 +290,27 @@ mapping index_spells_for_player(object player, string myclass)
                 member_array(domain, playerdom) == -1)
                 continue;
         }
+
+
+        if (myclass == "cleric") {
+            domains = spellIndex[spellfile]["domains"];
+
+            if (arrayp(domains))
+                if (sizeof(domains))
+                {
+                    has_domain = 0;
+                    foreach(tmpdom in playerdom)
+                    {
+                        if (member_array(tmpdom, domains) != -1) {
+                            has_domain++;
+                        }
+                    }
+                    if (!has_domain) {
+                        continue;
+                    }
+                }
+        }
+
         if (pclass == "monk" &&
             !FEATS_D->usable_feat(player, "grandmaster of the way")) {
             domain = spellIndex[spellfile]["way"];
@@ -336,13 +363,21 @@ mapping index_unrestricted_spells(string myclass)
                domain != "me")
                 continue;
         }
-        if(pclass=="cleric")
+
+
+        if(pclass=="cleric" && myclass != "oracle")
         {
+            if(sizeof(spellIndex[spellfile]["domains"]))
+                continue;
+
+            // Legacy code for old style domains
             domain = spellIndex[spellfile]["domain"];
+
             if(domain &&
                domain != "")
                 continue;
         }
+
         tmp[spellfile]=lvl;;
     }
     return tmp;

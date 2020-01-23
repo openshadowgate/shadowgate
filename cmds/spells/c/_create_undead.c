@@ -14,6 +14,7 @@ void create()
     ::create();
     set_spell_name("create undead");
     set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
+    set_domains("evil");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create undead");
     set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something else, more potent and powerful, to serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel new shell is twisted and changed forever.

@@ -17,7 +17,7 @@ string query_cast_string(){
 void create(){
     ::create();
     set_spell_name("unholy orb");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("combat");
     set_spell_domain("evil");
     set_syntax("cast CLASS unholy orb");

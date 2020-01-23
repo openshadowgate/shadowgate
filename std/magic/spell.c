@@ -31,6 +31,7 @@ string spell_name,
     spell_domain,
     monk_way,
     * oracle_mystery,
+    * divine_domains,
     damage_desc,
     save_type,
     syntax,
@@ -323,6 +324,15 @@ void set_mystery(mixed str)
     if(arrayp(str))
         oracle_mystery = str;
 }
+
+void set_domains(mixed str)
+{
+    if(stringp(str))
+        divine_domains = ({str});
+    if(arrayp(str))
+        divine_domains = str;
+}
+
 void set_cast_string(string str) {  cast_string = str; }
 void set_silent_casting(int a) {    silent_casting = a; }
 void set_target_required(int a) {   target_required = a; }
@@ -1427,6 +1437,7 @@ string query_spell_type() {  return spell_type; }
 string query_spell_sphere() { return spell_sphere; }
 string query_monk_way() { return monk_way; }
 string * query_mystery() { return oracle_mystery; }
+string * query_domains() { return oracle_mystery; }
 string query_cast_string() { }
 int query_silent_casting() {  return silent_casting; }
 
@@ -2724,7 +2735,7 @@ void help() {
     else {
         if(classkeys[0] == "mage")
             printclass = "mage/sorc L"+spell_levels[classkeys[0]];
-        else if(classkeys[0] == "cleric" && !spell_domain)
+        else if(classkeys[0] == "cleric")
         {
             printclass = "cleric/oracle L"+spell_levels[classkeys[0]];
         }
@@ -2734,7 +2745,7 @@ void help() {
             for(i = 1;i < sizeof(classkeys); i++) {
                 if(classkeys[i] == "mage")
                     printclass += ", mage/sorc L"+spell_levels[classkeys[i]];
-                else if(classkeys[i] == "cleric" && !spell_domain)
+                else if(classkeys[i] == "cleric")
                     printclass += ", cleric/oracle L"+spell_levels[classkeys[i]];
 
                 else
@@ -2743,11 +2754,14 @@ void help() {
     }
     write("%^BOLD%^%^RED%^Class:%^RESET%^ "+(affixed_level?("(L"+affixed_level+" fixed) "):"")+printclass);
 
-
     if(spell_sphere)
         write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(spell_domain?(" ["+spell_domain+"]"):"")+(evil_spell?" [evil]":"")+(mental_spell?" [mind-affecting]":""));
+
+    if(sizeof(divine_domains))
+        write("%^BOLD%^%^RED%^Domains:%^RESET%^ "+implode(divine_domains,", "));
     if(sizeof(oracle_mystery))
         write("%^BOLD%^%^RED%^Mystery:%^RESET%^ "+implode(oracle_mystery,", "));
+
     if(mydiscipline)
         write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
     if(monk_way)

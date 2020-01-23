@@ -19,6 +19,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(1);
+    evil_spell(1);
     set_save("will");
 }
 

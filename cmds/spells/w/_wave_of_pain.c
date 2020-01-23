@@ -6,9 +6,8 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("wave of pain");
-    set_spell_level(([ "cleric" : 7 ]));
-    set_spell_sphere("necromancy");
-    set_spell_domain("suffering");
+    set_spell_level(([ "mage" : 3, "bard":3]));
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS wave of pain");
     set_description("Through this spell, the caster sends out a great wave of pain that can harm, kill, and/or paralyze "
 "all in its path.");
@@ -17,7 +16,7 @@ void create() {
     set_save("will");
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
  	tell_object(caster,"%^BOLD%^%^RED%^The air around you begins to"+
 		" ripple outwards as you chant in a low prayer.");
@@ -27,7 +26,7 @@ string query_cast_string()
 	return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object *inven;
     int i,j;
@@ -47,14 +46,14 @@ void spell_effect(int prof)
     for (i=0;i<j;i++) {
         if (!objectp(inven[i])) continue;
         tell_object(inven[i],"%^RED%^You are struck with a horrible pain.");
-        damage_targ(inven[i],"torso",roll_dice(1,4)+roll_dice(clevel,4),"divine");
+        damage_targ(inven[i],"torso",sdamage,"untyped");
 
         if(!do_save(inven[i],0)) {
             tell_object(inven[i],"%^RED%^The pain is too much, forcing you to your knees then "
                 "to the ground writhing.");
             tell_room(place,"%^RED%^The pain is too much for "+inven[i]->QCN+", "
                 "as "+inven[i]->QS+" falls to the ground writhing.",inven[i]);
-            inven[i]->set_paralyzed(random(15)+clevel/7,"%^BOLD%^%^BLACK%^You are writhing in torment");
+            inven[i]->set_paralyzed(8 * roll_dice(1, 2),"%^BOLD%^%^BLACK%^You are writhing in torment");
 
         }
     }
