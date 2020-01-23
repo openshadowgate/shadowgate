@@ -277,8 +277,7 @@ mapping index_spells_for_player(object player, string myclass)
                 domain != playerdisc)
                 continue;
         }
-        if (pclass == "cleric" &&
-            myclass != "oracle") {
+        if (myclass == "cleric" ) {
             domain = spellIndex[spellfile]["domain"];
             if (domain &&
                 domain != "" &&
