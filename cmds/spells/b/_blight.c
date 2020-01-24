@@ -13,7 +13,7 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("blight");
-    set_spell_level(([ "classless" : 1]));
+    set_spell_level(([ "inquisitor" : 1]));
     set_spell_sphere("alteration");
     set_spell_domain("evil");
     set_syntax("cast CLASS blight on TARGET");
