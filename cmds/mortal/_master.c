@@ -162,10 +162,15 @@ int cmd_master(string args)
                 }
         }
 
-        if(sizeof(myspells))
+        if (sizeof(myspells))
             foreach(sname in myspells)
             {
-                knownperlevel[spell_index[sname]-1]+=1;
+                if (!spell_index[sname]) {
+                    tell_object(TP,"Possibly wrong spell level: " + sname);
+                    continue;
+                }
+
+                knownperlevel[spell_index[sname] - 1] += 1;
             }
 
         mylvl = mylvl>50?50:mylvl;
@@ -204,28 +209,40 @@ void validate_mastered()
     mapping mymastered = TP->query_mastered_base();
     mapping mymasteredbonus = TP->query_mastered_bonus();
 
-    if(sizeof(mymastered))
+
+    if (sizeof(mymastered))
         foreach(myclass in keys(mymastered))
         {
-            string *spell_index;
+            string* spell_index;
             mapping index_map = MAGIC_D->query_index(myclass);
-            if(!sizeof(index_map))
+            mapping myunrestricted = MAGIC_D->index_unrestricted_spells(myclass);
+
+            if (!sizeof(index_map)) {
                 spell_index = ({});
-            else
+            } else{
                 spell_index = keys(index_map);
+            }
+
             foreach(myspell in mymastered[myclass])
             {
-                if(member_array(myspell,spell_index)==-1)
-                {
-                    tell_object(TP,"Wrong spell in "+myclass+" class, removing: "+myspell);
-                    TP->remove_mastered(myclass,myspell);
+                if (member_array(myspell, spell_index) == -1) {
+                    tell_object(TP, "Wrong spell in " + myclass + " class, removing: " + myspell);
+                    TP->remove_mastered(myclass, myspell);
                 }
-                if(arrayp(mymasteredbonus[myclass]))
-                    if(member_array(myspell,mymasteredbonus[myclass])!=-1)
-                    {
-                        tell_object(TP,"Spell gained as a bonus for "+myclass+", removing: "+myspell);
-                        TP->remove_mastered(myclass,myspell);
+                if (arrayp(mymasteredbonus[myclass])) {
+                    if (member_array(myspell, mymasteredbonus[myclass]) != -1) {
+                        tell_object(TP, "Spell gained as a bonus for " + myclass + ", removing: " + myspell);
+                        TP->remove_mastered(myclass, myspell);
                     }
+                }
+                if (mapp(myunrestricted))
+                {
+                    if(member_array(myspell, keys(myunrestricted)) == -1)
+                    {
+                        tell_object(TP, "Spell no longer unrestricted for " + myclass + " special, removing: " + myspell);
+                        TP->remove_mastered(myclass, myspell);
+                    }
+                }
             }
         }
 }

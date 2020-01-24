@@ -1,157 +1,97 @@
-#include <priest.h>
+#include <std.h>
+#include <spell.h>
+#include <magic.h>
+#include <skills.h>
+#include <daemons.h>
 
 inherit SPELL;
 
-int counter=4;
-string energy_type = "positive energy";
-int undead_caster = 0;
-flag;
+int timer, flag, stage, toggle, counter;
+
+object *allies_tracker = ({});
+object *enemies_tracker = ({});
 
 void create()
 {
     ::create();
-    set_author("garrett");
-    set_spell_name("aura of healing");
-    set_spell_level(([ "cleric" : 7 ]));
-    set_spell_sphere("healing");
-    set_syntax("cast CLASS aura of healing");
-    set_description("This spell heals wounds on party members. The amount and length of the spell are dependent on the strength of the caster. The party members must remain with the caster to receive the effect. This effect uses positive or negative depending on whether the caster is undead.");
+    set_spell_name("prayer");
+    set_spell_level(([ "mage" : 3, "cleric":3]));
+    set_spell_sphere("enchantment_charm");
+    set_syntax("cast CLASS prayer");
+    set_description("");
     set_verbal_comp();
     set_somatic_comp();
-    set_property("magic",1);
     traveling_spell(1);
-    set_helpful_spell(1);
-    set_heart_beat(1);
-}
-
-
-string query_cast_string()
-{
-   string cast;
-
-   if (interactive(CASTER))
-   {
-        cast = "%^CYAN%^"+YOU+" starts to concentrate and chant a worshipful incantation to "+MINE+" deity!";
-   }
-   else
-   {
-        cast = "%^CYAN%^"+YOU+" starts to concentrate and chant a long worshipful incantation !";
-   }
-}
-
-int preSpell() {
-    if (caster->query_property("aura_of_healing")) {
-      tell_object(caster,"You are already under the effects of this spell!");
-        return 0;
-    }
-    counter = clevel*10 + 4;
-    return 1;
+    set_save("fort");
 }
 
 void spell_effect(int prof)
 {
-    if(!objectp(caster)){
-        dest_effect();
-        return;
-    }
-    caster->set_property("aura_of_healing",1);
-    tell_object(caster, "%^CYAN%^You feel a magical aura of energy from your "+
-        "god surround you!%^RESET%^");
-    caster->set_property("spelled", ({TO}) );
-
-    if(caster->is_undead())
-    {
-        energy_type = "negative energy";
-        undead_caster = 1;
-    }
-
-    spell_successful();
+    tell_object(caster, "%^BOLD%^%^BLACK%^You draw your hands forward, causing %^RESET%^%^GREEN%^c%^BOLD%^%^BLACK%^lo%^RESET%^%^GREEN%^u%^GREEN%^d%^BOLD%^%^BLACK%^s %^BLACK%^o%^RESET%^%^GREEN%^f%^BOLD%^ %^BLACK%^s%^RESET%^%^GREEN%^t%^GREEN%^i%^BOLD%^%^BLACK%^nk%^RESET%^%^GREEN%^y%^BOLD%^ %^BLACK%^f%^RESET%^%^GREEN%^u%^BOLD%^%^BLACK%^m%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^s%^BLACK%^ to materialize in the area.%^RESET%^");
+    tell_room(place, "%^GREEN%^" + caster->QCN + "%^BOLD%^%^BLACK%^materializes few %^BLACK%^clo%^RESET%^%^GREEN%^u%^BOLD%^%^BLACK%^ds %^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^f %^BLACK%^sti%^RESET%^%^GREEN%^n%^BOLD%^%^BLACK%^ky %^RESET%^%^GREEN%^f%^BOLD%^%^BLACK%^umes%^BLACK%^ in the area!%^RESET%^", caster);
+    counter = clevel * 3;
     addSpellToCaster();
+    spell_successful();
     execute_attack();
-    counter = clevel*10 + 4;
-    call_out("room_check",ROUND_LENGTH);
-}
-
-void room_check()
-{
-    if(!objectp(caster) || !objectp(ENV(caster)))
-    {
-        dest_effect();
-        return;
-    }
-
-    prepend_to_combat_cycle(ENV(caster));
-
-    call_out("room_check",ROUND_LENGTH*2);
-    return;
 }
 
 void execute_attack()
 {
-    object *people;
-    object dude;
-    int i;
+    object * foes = ({}), *allies = ({});
+    object targ;
+    object place;
+    int i, dam;
 
-    if(!flag)
-    {
+    if (!flag) {
         flag = 1;
         ::execute_attack();
         return;
     }
 
-    if(!objectp(caster) || !objectp(environment(caster)) || counter<0){
+    if (!objectp(caster) || !objectp(place) || !present(caster, place) || counter < 0) {
         dest_effect();
         return;
     }
 
-    place = environment(caster); // In the case caster moves
+    place = environment(caster);
 
-    people = ({});
+    foes = caster->query_attackers();
+    foes = target_filter(foes);
+    foes -= ({ caster });
 
-    if(caster->query_party())
-    {
-        object *party;
+    if (caster->query_party()) {
+        object* party;
         party = PARTY_D->query_party_members(caster->query_party());
-        if(sizeof(party))
-            for(i=0;i<sizeof(party);i++)
-            {
-                if(environment(party[i]) == environment(caster))
-                    people += ({ party[i] });
-            }
+        allies = all_inall_inventory(place) - (all_inventory(place) - party);
     }
-    if(member_array(caster,people)==-1)
-        people+=({caster});
-    people += caster->query_followers() - caster->query_attackers();
+    allies += ({caster});
+    allies += caster->query_followers() - caster->query_attackers();
+    allies = distinct_array(allies);
 
-    define_base_damage(0);//lazy reroll
-    if(sizeof(people))
-        foreach(dude in people)
-        {
-            if(!objectp(dude))
-                continue;
-
-            if((int)dude->query_hp() < (int)dude->query_max_hp() &&
-               !(dude->is_undead() ^ undead_caster))
-            {
-                tell_object(dude,"%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
-                tell_room(place,"%^CYAN%^Some of "+dude->QCN+"'s wounds seem to heal!%^RESET%^",caster);
-                damage_targ(dude,dude->return_target_limb(),-sdamage,energy_type);
-            }
-        }
-
-    prepend_to_combat_cycle(place);
-    counter --;
+    counter--;
+    place->addObjectToCombatCycle(TO, 1);
 }
 
 void dest_effect()
 {
-    remove_call_out("room_check");
-    if(objectp(caster))
-    {
-        caster->remove_property("aura_of_healing");
-        tell_object(caster, "%^CYAN%^You feel the magical aura of energy from your "+
-            "god subside!%^RESET%^");
+    if (objectp(place)) {
+        tell_object(place, "%^GREEN%^S%^BOLD%^%^BLACK%^ti%^RESET%^%^GREEN%^n%^BOLD%^%^BLACK%^ky %^BLACK%^cl%^RESET%^%^GREEN%^o%^GREEN%^u%^GREEN%^d%^GREEN%^s%^BOLD%^%^BLACK%^ finally disappear!%^RESET%^");
     }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
+}
+
+void modify_effect(object targ, int direction)
+{
+    int i;
+
+    targ->add_damage_bonus(-direction);
+    targ->add_attack_bonus(-direction);
+    targ->set_property("empowered", -direction);
+    for (i = 0; i < sizeof(CORE_SKILLS); i++) {
+        targ->add_skill_bonus(CORE_SKILLS[i], -direction);
+    }
+    targ->add_saving_bonus("all", -direction);
 }
