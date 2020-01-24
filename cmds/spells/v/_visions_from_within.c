@@ -34,7 +34,7 @@ string query_cast_string()
 void spell_effect(int prof)
 {
     tell_room(place,"%^RESET%^%^BOLD%^%^BLACK%^Fearsome %^BLACK%^n%^BLUE%^i%^BLUE%^g%^BLUE%^h%^BLACK%^tma%^BLUE%^r%^BLACK%^i%^BLUE%^s%^BLACK%^h %^BLUE%^c%^BLACK%^re%^BLUE%^a%^BLUE%^t%^BLACK%^ur%^BLUE%^e%^BLUE%^s%^BLACK%^ spring into being!%^RESET%^%^RESET%^");
-    counter = clevel/2;
+    counter = clevel * 3;
     addSpellToCaster();
     spell_successful();
     execute_attack();
