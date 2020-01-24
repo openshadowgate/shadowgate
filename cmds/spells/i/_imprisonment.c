@@ -33,7 +33,7 @@ spell_effect(int prof) {
                 ""+caster->QCN+" faces you with "+caster->QP+" hands out, palms forward.%^RESET%^");
     tell_room(place,"%^RESET%^%^CYAN%^With a look of intense concentration, "+caster->QCN+" "
               "faces "+target->QCN+" with "+caster->QP+" hands out, palms forward.%^RESET%^", ({caster, target}) );
-    waittime=35;
+    waittime=clevel + 10;
     spell_successful();
     if ( do_save(target,-4) || target->query_property("no web")) {
         tell_object(caster,"%^BOLD%^%^CYAN%^"+target->QCN+"'s will is so strong "+target->QS+" shakes off your attempt to imprison "+target->QO+"!%^RESET%^");

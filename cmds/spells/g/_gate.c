@@ -16,6 +16,7 @@ void create()
     set_author("nienne");
     set_spell_name("gate");
     set_spell_level(([ "mage" : 9 ]));
+    set_domains("good");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS gate on summoning
         cast CLASS gate on travel | location");
