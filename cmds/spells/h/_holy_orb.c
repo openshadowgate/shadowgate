@@ -14,9 +14,9 @@ void create()
 {
    ::create();
     set_spell_name("holy orb");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 6 ]));
     set_spell_sphere("combat");
-    set_spell_domain("good");
+    set_domains("good");
     set_syntax("cast CLASS holy orb");
     set_description("The orb is a spell normally prepared by a priest who expects to encounter enemies whose alignment "
         "opposes her own.  When cast, the spell streaks from the caster's hand to the desired point of effect, where a sphere "
@@ -38,7 +38,7 @@ void spell_effect(int prof)
     object *foes;
     object *party;
 
-    foes = caster->query_attackers();   
+    foes = caster->query_attackers();
     foes = target_filter(foes);
     party = ob_party(caster);
 
@@ -48,12 +48,12 @@ void spell_effect(int prof)
         "from your hands.%^RESET%^");
     //tell_object(find_player("saide"), "j = "+j);
     j = sizeof(foes);
-    
+
     for(i=0;i<j;i++)
     {
         if(!objectp(foes[i])) continue;
         if(foes[i] == caster) continue;
-        if(interactive(foes[i]) && foes[i]->query_level() < 6) continue;        
+        if(interactive(foes[i]) && foes[i]->query_level() < 6) continue;
         limb = foes[i]->return_target_limb();
         define_base_damage(0);
         damage = sdamage;
@@ -66,7 +66,7 @@ void spell_effect(int prof)
         }
         else
         {
-            if(ALIGN->is_evil(foes[i])) 
+            if(ALIGN->is_evil(foes[i]))
             {
                 tell_object(foes[i],"%^BOLD%^%^CYAN%^The power from "+
                     ""+caster->QCN+"'s sphere glows brightly as it "+
@@ -77,7 +77,7 @@ void spell_effect(int prof)
                 tell_room(place,"%^BOLD%^%^CYAN%^The power from "+
                     ""+caster->QCN+"'s sphere glows brightly as it "+
                     "engulfs "+foes[i]->QCN+".%^RESET%^",({foes[i],caster}));
-                if(!do_save(foes[i],-2)) { damage_targ(foes[i],limb,damage,"divine"); } 
+                if(!do_save(foes[i],-2)) { damage_targ(foes[i],limb,damage,"divine"); }
                 else { damage_targ(foes[i],limb,damage/2,"divine"); }
             }
             else if (ALIGN->is_neutral(foes[i]))
@@ -89,7 +89,7 @@ void spell_effect(int prof)
                 tell_room(place,"%^BOLD%^The power from "+caster->QCN+"'s "+
                     "sphere glows as it engulfs "+foes[i]->QCN+"."+
                     "%^RESET%^",({foes[i],caster}));
-                if(!do_save(foes[i])) 
+                if(!do_save(foes[i]))
                 {
                     damage_targ(foes[i],limb,damage,"divine");
                 }
@@ -122,7 +122,7 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

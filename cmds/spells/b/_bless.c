@@ -14,7 +14,6 @@ void create() {
     set_spell_name("bless");
     set_spell_level(([ "cleric" : 1,"inquisitor" : 1 ]));
     set_spell_sphere("alteration");
-
     set_syntax("cast CLASS bless on TARGET");
     set_description("This spell will bless the target, giving them a slightly better chance to hit in combat as well as "
 "allowing them to do a small amount more damage.");

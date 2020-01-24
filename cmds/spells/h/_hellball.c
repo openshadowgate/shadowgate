@@ -11,6 +11,7 @@ void create() {
     set_spell_name("hellball");
     set_spell_level(([ "mage" : 9, "oracle" : 9 ]));
     set_mystery("solar");
+    set_domains("good");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS hellball");
     set_description("The ultimate skill of the most trained evokers, this spell unleashes a hellish blast of energy in all directions from a single point directed by the caster. A simultaneous blast of sonic, acid, fire and electricity unleashes massive damage upon everyone near the caster!");
