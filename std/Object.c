@@ -597,18 +597,6 @@ mixed query_property(string prop)
             return props[prop] + props["temporary enchantment"];
         }
     }
-    if(prop == "soulbound")
-    {
-        if(TO->is_sheath())
-        {
-            worn = ({});
-            worn = all_inventory(TO);
-            if(sizeof(worn))
-            {
-                if((int)worn[0]->query_property("soulbound")) return 1;
-            }
-        }
-    }
     if(stringp(prop) && strsrch(prop, "bonus_spell_slots") != -1)
     {
         num = props[prop];
@@ -1349,15 +1337,12 @@ int move(mixed dest)
     return i;
 }
 
-int drop() {
-    if(query_property("monsterweapon"))
+int drop()
+{
+    if (query_property("monsterweapon")) {
         return 1;
-    if(query_property("soulbound"))
-        return 1; // trying out new binding property, N 3/15
-    // If this item is dropped, clear the lease on it to allow
-    // the destination to possess it.
-    // Thorn@ShadowGate - 28 June 2000
-    if(unique_item == 1) {
+    }
+    if (unique_item == 1) {
         UNIQUE_D->clear_lease(TO->query_unique_id());
     }
     return 0;

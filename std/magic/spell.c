@@ -299,16 +299,24 @@ int query_components_value(string myclass) {
     return value;
 }
 
-void set_description(string descript) {
-    if(!descript) description = "";
+void set_description(string descript)
+{
+    if (!descript) {
+        description = "";
+    }
     description = descript;
 }
-
-void set_syntax(string synt) {
-    if(!synt) syntax = "";
+void set_syntax(string synt)
+{
+    if (!synt) {
+        syntax = "";
+    }
     syntax = synt;
 }
-
+string query_syntax()
+{
+    return syntax;
+}
 void set_damage_desc(string desc)
 {
     damage_desc = desc;
