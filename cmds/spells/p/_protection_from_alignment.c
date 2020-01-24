@@ -8,12 +8,13 @@ object weap;
 void create()
 {
     ::create();
-    set_spell_name("align weapon");
-    set_spell_level(([ "inquisitor" : 2, "cleric" : 2 ]));
-    set_spell_sphere("alteration");
+    set_spell_name("protenction from alignment");
+    set_spell_level(([ "inquisitor" : 1, "cleric" : 1, "mage":1, "paladin":1]));
+    set_spell_sphere("abjuration");
     set_domains(({"good", "evil"}));
-    set_syntax("cast CLASS align weapon on good|evil|chaos|law");
-    set_description("Align weapon makes you able to bypass physical damage reduction of creatures with opposing alignment. You must belong to opposing group to be able to use this spell.");
+    set_syntax("cast CLASS protection from alignment on good|evil|chaos|law");
+    set_damage_desc("+2 to savesn");
+    set_description("This spell allows you to ward yourself from spells originating at casters with specified alignment. You must belong to opposing alignment group to be able to use this spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed(1);
@@ -59,23 +60,22 @@ void spell_effect()
     }
 
     if (objectp(caster)) {
-
         switch (alignstr) {
         case "good":
-            caster->set_property("aligned_weapon", ({ 3, 6, 9 }));
+            caster->set_property("protection_from_alignment", ({ 3, 6, 9 }));
             break;
         case "evil":
-            caster->set_property("aligned_weapon", ({ 1, 4, 7 }));
+            caster->set_property("protection_from_alignment", ({ 1, 4, 7 }));
             break;
         case "law":
-            caster->set_property("aligned_weapon", ({ 7, 8, 9 }));
+            caster->set_property("protection_from_alignment", ({ 7, 8, 9 }));
             break;
         case "chaos":
-            caster->set_property("aligned_weapon", ({ 1, 2, 3 }));
+            caster->set_property("protection_from_alignment", ({ 1, 2, 3 }));
             break;
         }
 
-        tell_object(caster, "%^CYAN%^Chanting in low undertones you attune yourself to bypass opposing auras.");
+        tell_object(caster, "%^CYAN%^Chanting in low undertones you attune yourself to ward against opposing auras.");
 
         caster->set_property("spelled",({TO}));
         spell_successful();
@@ -94,7 +94,7 @@ void dest_effect()
 {
     if (objectp(caster)) {
         caster->remove_property("aligned_weapon");
-        tell_object(caster, "%^CYAN%^You sense your ability to bypass opposing auras fades.");
+        tell_object(caster, "%^CYAN%^You sense your ability to ward against opposing auras fades.");
     }
     ::dest_effect();
 }

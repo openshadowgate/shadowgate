@@ -317,41 +317,53 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     object myEB;
     int resist_perc,resist, reduction, mod, amt;
     float percentage;
-    if(!objectp(targ)) { return 0; }
-    if(!stringp(limb)) { limb = targ->return_target_limb(); }
-    if(!damage) { return 0; }
+
+    if (!objectp(targ)) {
+        return 0;
+    }
+    if (!stringp(limb)) {
+        limb = targ->return_target_limb();
+    }
+    if (!damage) {
+        return 0;
+    }
     targ->set_magic_attack(0);
     targ->spell_attack(0);
     limb = targ->adjust_targeted_limb(attacker, limb);
-    damage = targ->do_typed_damage_effects(attacker,limb,damage,type);
-    if(!targ->initialized_resistances()) { targ->init_limb_data(); }
+    damage = targ->do_typed_damage_effects(attacker, limb, damage, type);
+    if (!targ->initialized_resistances()) {
+        targ->init_limb_data();
+    }
 
-    if(!stringp(type) || !targ->valid_resistance(type))
-    {
-        if(objectp(attacker)) { log_file("invalid_damage_types",""+ctime(time())+" "+base_name(attacker)+" tried to use an invalid damage type:
-"+type+"\n"); }
+    if (!stringp(type) || !targ->valid_resistance(type)) {
+        if (objectp(attacker)) {
+            log_file("invalid_damage_types", "" + ctime(time()) + " " + base_name(attacker) + " tried to use an invalid damage type:
+"     + type + "\n");
+        }
         return damage;
     }
 
-    if(objectp(targ) && FEATS_D->usable_feat(targ,"kinetic conversion"))
-    {
-        switch(type)
+    if (objectp(targ) && FEATS_D->usable_feat(targ, "kinetic conversion")) {
+        switch (type) {
+        case "bludgeoning":
+        case "piercing":
+        case "slashing":
+        case "silver":
+        case "cold iron":
+        case "force":
         {
-            case "bludgeoning":
-            case "piercing":
-            case "slashing":
-            case "silver":
-            case "cold iron":
-            case "force":
-
-                amt = damage / 4; // might need to adjust this
-                if(amt > 3) { amt = 3; }
-                if(amt < 1) { amt = 1; }
-                targ->add_mp(amt);
-                break;
-
-            default:
-                break;
+            amt = damage / 4;
+            if (amt > 3) {
+                amt = 3;
+            }
+            if (amt < 1) {
+                amt = 1;
+            }
+            targ->add_mp(amt);
+            break;
+        }
+        default:
+            break;
         }
     }
 
@@ -443,59 +455,61 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     //Healing effects reduction on typed damage
-    if(targ->query_property("fester") && damage < 0)
-    {
+    if (targ->query_property("fester") && damage < 0) {
         damage += targ->query_property("fester");
-        if(damage>0)
-        {
+        if (damage > 0) {
             damage = 0;
             return damage;
         }
     }
 
-    if((int)targ->query_property("damage resistance") && member_array(type, PHYSICAL_DAMAGE_TYPES) != -1)
-    {
-        if(damage > 0)
-        {
-            reduction = (int)targ->query_property("damage resistance");
-            if(attacker->query_property("magic"))
-            {
-                mod = (int)attacker->query_property("magic") * 10;
-            }
-            else if( objectp(attacker->query_current_weapon()) && (attacker->query_current_weapon())->query_property("magic"))
-            {
-                mod = (int)attacker->query_current_weapon()->query_property("magic") * 10;
-            }
-            reduction -= mod;
-            if(reduction < 0) reduction = 0;
-            damage -= reduction;
-            if(damage < 0)
-            {
-                damage = 0;
-                return damage;
+    if ((int)targ->query_property("damage resistance"))
+        if (member_array(type, PHYSICAL_DAMAGE_TYPES) != -1) {
+            if (damage > 0) {
+
+                if (targ->query_alignment())
+                    if (arrayp(attacker->query_property("aligned_weapon")))
+                        if (member_array(targ->query_alignment(), attacker->query_property("aligned_weapon")) != -1)
+                        {
+                            return damage;
+                        }
+
+                reduction = (int)targ->query_property("damage resistance");
+
+                if (attacker->query_property("magic")) {
+                    mod = (int)attacker->query_property("magic") * 10;
+                }else if (objectp(attacker->query_current_weapon()) && (attacker->query_current_weapon())->query_property("magic")) {
+                    mod = (int)attacker->query_current_weapon()->query_property("magic") * 10;
+                }
+                reduction -= mod;
+                if (reduction < 0) {
+                    reduction = 0;
+                }
+                damage -= reduction;
+                if (damage < 0) {
+                    damage = 0;
+                    return damage;
+                }
             }
         }
-    }
 
-
-
-    if((int)targ->query_property("spell damage resistance") && member_array(type, (VALID_DAMAGE_TYPES - PHYSICAL_DAMAGE_TYPES)) != -1)
-    {
-        if(damage > 0)
-        {
-            reduction = (int)targ->query_property("spell damage resistance");
-            //if we want something to work through this property, it should be set here - Saide
-            mod = 0;
-            reduction -= mod;
-            if(reduction < 0) reduction = 0;
-            damage -= reduction;
-            if(damage < 0)
-            {
-                damage = 0;
-                return damage;
+    if ((int)targ->query_property("spell damage resistance"))
+        if (member_array(type, (VALID_DAMAGE_TYPES - PHYSICAL_DAMAGE_TYPES)) != -1) {
+            if (damage > 0) {
+                reduction = (int)targ->query_property("spell damage resistance");
+                //if we want something to work through this property, it should be set here - Saide
+                mod = 0;
+                reduction -= mod;
+                if (reduction < 0) {
+                    reduction = 0;
+                }
+                damage -= reduction;
+                if (damage < 0) {
+                    damage = 0;
+                    return damage;
+                }
             }
         }
-    }
     return damage;
 }
 

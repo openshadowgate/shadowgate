@@ -2278,16 +2278,14 @@ varargs int do_save(object targ,int mod) {
         break;
     }
 
-    type         = get_save();
-    if(save_debug)
-    {
-        tell_object(caster,"Save type: "+type+"");
+    type = get_save();
+    if (save_debug) {
+        tell_object(caster, "Save type: " + type + "");
     }
 
     target_level = (int)targ->query_level();
-    if(save_debug)
-    {
-        tell_object(caster,"Target's level: "+target_level+"");
+    if (save_debug) {
+        tell_object(caster, "Target's level: " + target_level + "");
     }
 
     caster_bonus += 10; // initial DC of 10 for opposed spells, all the other caster mods gets added to this
@@ -2302,58 +2300,82 @@ varargs int do_save(object targ,int mod) {
 
     myclasses = caster->query_classes();
     num = 0;
-    if(sizeof(myclasses)) {
-      for(i=0;i<sizeof(myclasses);i++) {
-        if(myclasses[i] == spell_type) { // only give bonuses for current caster class past L20
-          classlvl = caster->query_class_level(spell_type);
-          classlvl -= 20;
-          if(classlvl < 0) classlvl = 0;
-          if(is_caster(spell_type)) num += (classlvl+1)/2;
-          else num += classlvl/3;
+
+    if (sizeof(myclasses)) {
+        for (i = 0; i < sizeof(myclasses); i++) {
+            if (myclasses[i] == spell_type) { // only give bonuses for current caster class past L20
+                classlvl = caster->query_class_level(spell_type);
+                classlvl -= 20;
+                if (classlvl < 0) {
+                    classlvl = 0;
+                }
+                if (is_caster(spell_type)) {
+                    num += (classlvl + 1) / 2;
+                } else{
+                    num += classlvl / 3;
+                }
+            }else  {
+                if (caster->query("new_class_type")) { // don't run this for 2e style classing, eg/ mobs; they already have full in all classes.
+                    classlvl = caster->query_class_level(myclasses[i]);
+                    if (classlvl < 0) {
+                        classlvl = 0;
+                    }
+                    if (is_caster(spell_type)) {
+                        num += (classlvl + 1) / 2;
+                    } else{
+                        num += classlvl / 3;
+                    }
+                }
+            }
         }
-        else {
-          if(caster->query("new_class_type")) { // don't run this for 2e style classing, eg/ mobs; they already have full in all classes.
-            classlvl = caster->query_class_level(myclasses[i]);
-            if(classlvl < 0) classlvl = 0;
-            if(is_caster(spell_type)) num += (classlvl+1)/2;
-            else num += classlvl/3;
-          }
-        }
-      }
     }
 
     if(save_debug) tell_object(caster,"Bonus from non-class and L20+ class levels: "+num+"");
     caster_bonus += num;
     num = 0;
 
-    if(FEATS_D->usable_feat(caster,"shadow adept") || caster->is_class("shadow_adept")) { // shadow adept casters get a bonus when casting charm/illusion/necromancy spell types
-      if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "necromancy") caster_bonus += 2;
-    }
-
 // racial saves from spells here
-    if((string)targ->query_race() == "dwarf") { //shield & gold dwarf, +2 on saves vs spells
-      if((string)targ->query("subrace") == "shield dwarf" || (string)targ->query("subrace") == "gold dwarf")
-        caster_bonus -= 2;
+    if ((string)targ->query_race() == "dwarf") {    //shield & gold dwarf, +2 on saves vs spells
+        if ((string)targ->query("subrace") == "shield dwarf" || (string)targ->query("subrace") == "gold dwarf") {
+            caster_bonus -= 2;
+        }
     }
-    if((string)targ->query_race() == "orc" || (string)targ->query_race() == "half-orc")
-      caster_bonus -= 1; //orc and half-orc, +1 on saves vs spells
-    if((string)targ->query_race() == "human") { // human ethnicity 'heartlander'
-      if((string)targ->query("subrace") == "heartlander")
-        caster_bonus -= 1;
+    if ((string)targ->query_race() == "orc" || (string)targ->query_race() == "half-orc") {
+        caster_bonus -= 1;   //orc and half-orc, +1 on saves vs spells
+    }
+    if ((string)targ->query_race() == "human") {    // human ethnicity 'heartlander'
+        if ((string)targ->query("subrace") == "heartlander") {
+            caster_bonus -= 1;
+        }
     }
 
-    if((string)targ->query_race() == "gnome" && spell_sphere == "illusion") { // rock & forest gnome, +2 vs illusions
-      if((string)targ->query("subrace") == "rock gnome" || (string)targ->query("subrace") == "forest gnome")
-        caster_bonus -= 2;
+    if ((string)targ->query_race() == "gnome" && spell_sphere == "illusion") {    // rock & forest gnome, +2 vs illusions
+        if ((string)targ->query("subrace") == "rock gnome" || (string)targ->query("subrace") == "forest gnome") {
+            caster_bonus -= 2;
+        }
     }
-    if((string)targ->query_race() == "elf" || (string)targ->query_race() == "half-elf") {
-      if(spell_sphere == "enchantment_charm") caster_bonus -= 2; //elves & half-elves, +2 vs charm
+    if ((string)targ->query_race() == "elf" || (string)targ->query_race() == "half-elf") {
+        if (spell_sphere == "enchantment_charm") {
+            caster_bonus -= 2;                                       //elves & half-elves, +2 vs charm
+        }
     }
-    if((string)targ->query_race() == "drow" || (string)targ->query_race() == "half-drow") {
-      if(spell_sphere == "enchantment_charm") caster_bonus -= 2; //drow & half-drow, +2 vs charm
+    if ((string)targ->query_race() == "drow" || (string)targ->query_race() == "half-drow") {
+        if (spell_sphere == "enchantment_charm") {
+            caster_bonus -= 2;                                       //drow & half-drow, +2 vs charm
+        }
     }
-    if(FEATS_D->usable_feat(targ,"shadow adept") || targ->is_class("shadow_adept")) { // shadow adept targets get a bonus vs charm/illusion/necromancy spell types
-      if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "necromancy") caster_bonus -= 2;
+    if (FEATS_D->usable_feat(targ, "shadow adept") || targ->is_class("shadow_adept")) {   // shadow adept targets get a bonus vs charm/illusion/necromancy spell types
+        if (spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "necromancy") {
+            caster_bonus -= 2;
+        }
+    }
+
+    if(arrayp(targ->query_property("protection_from_alignment")))
+    {
+        if(member_array(caster->query_alignment(), targ->query_property("protection_from_alignment")) != -1)
+        {
+            caster_bonus -= 2;
+        }
     }
 
     if(save_debug)

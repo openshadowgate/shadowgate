@@ -107,5 +107,7 @@ void dest_effect() {
     caster->set_property("iron body",-1);
     caster->remove_property_value("spelled", ({TO}) );
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
