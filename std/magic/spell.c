@@ -1437,7 +1437,7 @@ string query_spell_type() {  return spell_type; }
 string query_spell_sphere() { return spell_sphere; }
 string query_monk_way() { return monk_way; }
 string * query_mystery() { return oracle_mystery; }
-string * query_domains() { return oracle_mystery; }
+string * query_domains() { return divine_domains; }
 string query_cast_string() { }
 int query_silent_casting() {  return silent_casting; }
 
