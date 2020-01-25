@@ -33,6 +33,9 @@ Inside the plane you have access to the next commands:
 %^ORANGE%^<set plane listen %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
   Will change the plane's sounds.
 
+%^ORANGE%^<set plane seal on|off>%^RESET%^
+  Will block interdimensional travel from and into demiplane with power depending on your caster level.
+
 %^ORANGE%^<feature add %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^ as %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^
   Will add feature with the %^ORANGE%^%^ULINE%^NAME%^RESET%^ and %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^. You can then look at it to see it. You can't add more than twenty features.
 
