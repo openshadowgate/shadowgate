@@ -66,6 +66,13 @@ void execute_feat() {
         }
     }
 
+    if(!objectp(target))
+    {
+        tell_object(caster,"%^RESET%^That is not here!");
+        dest_effect();
+        return;
+    }
+
     rtime = (int)target->query_property("rushed at");
     if(rtime + FEATTIMER > time())
     {
