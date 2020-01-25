@@ -137,13 +137,13 @@ int query_guild_level(string str)
                 if (classes[i] == str) {
                     continue;
                 }
-                num += (int)TO->query_class_level(classes[i]) / 2;         // if it's not a prestige class, add half of the levels as normal
+                num += (int)TO->query_class_level(classes[i]) / 2;
                 continue;
             }else {
                 base = class_ob->query_base_classes(TO);
                 if (member_array(str, base) == -1) {
                     num += (int)TO->query_class_level(classes[i]) / 2;
-                }else  {
+                }else {
                     num += (int)TO->query_class_level(classes[i]);
                 }
             }
