@@ -47,17 +47,25 @@ int has_base_class_set(object obj)
 
 int set_base_class(object obj, string choice)
 {
-    object *classes;
-    if(!objectp(obj)) { return 0; }
-    if(choice == 0)
-    {
+    object* classes;
+    if (!objectp(obj)) {
+        return 0;
+    }
+    if (choice == 0) {
         obj->delete("assassin_base_class");
         return 1;
     }
     classes = obj->query_classes();
-    if(!sizeof(classes)) { return 0; }
-    if(member_array(choice,classes) == -1) { return 0; }
-    obj->set("assassin_base_class",choice);
+    if (!sizeof(classes)) {
+        return 0;
+    }
+    if (member_array(choice, classes) == -1) {
+        return 0;
+    }
+    if (member_array(choice, ({"psion", "psywarrior"})) == -1) {
+        return 0;
+    }
+    obj->set("assassin_base_class", choice);
     return 1;
 }
 
@@ -71,7 +79,7 @@ int caster_class(object ob) { return 1; }
 
 string *restricted_races(object ob) { return base_class_ob(ob)->restricted_races(); }
 
-string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes() +({"psion","psywarrior"}); }
+string *restricted_classes(object ob) { return base_class_ob(ob)->restricted_classes(); }
 
 int *restricted_alignments(object ob) {
     return ({  });
