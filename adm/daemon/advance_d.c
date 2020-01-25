@@ -278,7 +278,6 @@ string get_new_title(object ob){
     return "";
 }
 
-// note - switched a bunch of queries on query_base_character_level() to query_character_level() as this was not picking up LAs. N, 6/15.
 int advance(object tp, string myclass)
 {
     int con, lev, exp, num,i, ret, gexp, hpbonus,check,*rolls,prof;
@@ -291,8 +290,6 @@ int advance(object tp, string myclass)
     cl   = myclass;
     file = DIR_CLASSES+"/"+myclass+".c";
 
-    //adding this to hopefully avoid any issues on character creation - as it stands if you create a Level adjusted
-    //class and fail to advance before you log out everything is broken on login - Saide - April, 2016
     if(tp->query("new_class_type")) { check = tp->query_base_character_level(); }
     if(check == 0)
     {
@@ -326,7 +323,7 @@ int advance(object tp, string myclass)
         file->advanced_func(tp);
 
         hpbonus = get_hp_bonus(cl, con, (int)tp->query_base_character_level(),tp); // this is setting the number in the array
-        hpbonus = 20; // don't need it anymore so using it as a variable, starting chars get +20 hp
+        hpbonus = 30; // don't need it anymore so using it as a variable, starting chars get +30 hp
         if((string)tp->query_race() == "human" && (string)tp->query("subrace") == "tonaz'tlacar") hpbonus += 10; // 10hp bonus 'dauntless' for 'tlacar human subrace
 
         rolls = (int*)tp->query("hp_array");
@@ -338,7 +335,6 @@ int advance(object tp, string myclass)
         }
         tp->set_max_hp(hpbonus);
 
-        //tp->set_max_hp(tp->query_true_max_hp()+hpbonus);
 
         tp->setenv("TITLE", get_new_title(tp));
         if(tp->query("new_class_type"))

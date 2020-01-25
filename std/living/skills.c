@@ -109,43 +109,49 @@ int query_true_guild_level(string str)
 int query_guild_level(string str)
 {
     object class_ob;
-    string *classes,*base;
-    int i,num = 0, res;
+    string* classes, * base;
+    int i, num = 0, res;
 
-    if(!str) { return 0; }
-    if(!guilds)
-    {
+    if (!str) {
+        return 0;
+    }
+    if (!guilds) {
         guilds = ([]);
         return 0;
     }
     res = WORLD_EVENTS_D->monster_modification_event(0, "level", TO);
-    if(TO->query("new_class_type") && sizeof((string *)TO->query_classes()))
-    {
-        classes = (string *)TO->query_classes();
+    if (TO->query("new_class_type") && sizeof((string*)TO->query_classes())) {
+        classes = (string*)TO->query_classes();
 
-        for(i=0;i<sizeof(classes);i++)
-        {
-            class_ob = find_object_or_load(DIR_CLASSES+"/"+classes[i]+".c");
-            if(!objectp(class_ob)) { continue; }
-            if(classes[i] == "ranger" || classes[i] == "paladin" || classes[i] == "antipaladin")
-            {
-                if(str == "cleric") { continue; }
-            }
-            if(!class_ob->is_prestige_class())
-            {
-                if(classes[i] == str) { continue; }
-                num += (int)TO->query_class_level(classes[i]) / 2; // if it's not a prestige class, add half of the levels as normal
+        for (i = 0; i < sizeof(classes); i++) {
+            class_ob = find_object_or_load(DIR_CLASSES + "/" + classes[i] + ".c");
+            if (!objectp(class_ob)) {
                 continue;
             }
-            else
-            {
+            if (classes[i] == "ranger" || classes[i] == "paladin" || classes[i] == "antipaladin") {
+                if (str == "cleric") {
+                    continue;
+                }
+            }
+            if (!class_ob->is_prestige_class()) {
+                if (classes[i] == str) {
+                    continue;
+                }
+                num += (int)TO->query_class_level(classes[i]) / 2;         // if it's not a prestige class, add half of the levels as normal
+                continue;
+            }else {
                 base = class_ob->query_base_classes(TO);
-                if(member_array(str,base) == -1) { continue; }
-                num += (int)TO->query_class_level(classes[i]);
+                if (member_array(str, base) == -1) {
+                    num += (int)TO->query_class_level(classes[i]) / 2;
+                }else  {
+                    num += (int)TO->query_class_level(classes[i]);
+                }
             }
         }
 
-        if(intp(TO->query("negative levels", str))) return guilds[str] + num + (int)TO->query("negative level", str) + res;
+        if (intp(TO->query("negative levels", str))) {
+            return guilds[str] + num + (int)TO->query("negative level", str) + res;
+        }
         return guilds[str] + num + res;
     }
     return guilds[str] + res;

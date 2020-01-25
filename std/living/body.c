@@ -105,7 +105,7 @@ void init_limb_data()
     int i;
 
    if(!player_data)
-      player_data = ([ "general":([ "hp":1, "extra_hp":0, "max_hp":50, "sp":1, "max_sp":1])]);
+      player_data = ([ "general":([ "hp":1, "extra_hp":0, "max_hp":30, "sp":1, "max_sp":1])]);
    body = ([]);
    limbs = ({});
    fake_limbs = ({});
@@ -568,7 +568,7 @@ int query_max_hp()
 int query_hp() {
 
   if (!player_data)
-      player_data = ([ "general":([ "hp":1, "extra_hp":0, "max_hp":50, "sp":1, "max_sp":1])]);
+      player_data = ([ "general":([ "hp":1, "extra_hp":0, "max_hp":30, "sp":1, "max_sp":1])]);
    return player_data["general"]["hp"] + player_data["general"]["extra_hp"];
 }
 

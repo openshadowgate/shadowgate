@@ -396,7 +396,7 @@ void convert_to_new_class_type()
 void make_new_hitpoint_rolls(object obj)
 {
     string *classes;
-    int hp=50,i,j,num,level,old,*rolls;
+    int hp=30,i,j,num,level,old,*rolls;
 
     if(!objectp(obj)) { return; }
     if(avatarp(obj)) { return; }
@@ -415,7 +415,7 @@ void make_new_hitpoint_rolls(object obj)
         }
     }
 
-    hp = 50;
+    hp = 30;
     rolls = (int*)obj->query("hp_array");
     for(i=0;i<(int)obj->query_character_level()+1;i++)
     {

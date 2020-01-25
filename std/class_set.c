@@ -241,8 +241,8 @@ int choose(string str) {
    this_player()->new_body();
    this_player()->set_max_mp(0);
    this_player()->set_mp(0);
-   this_player()->set_max_hp(50);
-   this_player()->set_hp(50);
+   this_player()->set_max_hp(30);
+   this_player()->set_hp(30);
    this_player()->add_money("gold",200+random(300));
    this_player()->init_spellcaster();
    TP->add_exp(1);
