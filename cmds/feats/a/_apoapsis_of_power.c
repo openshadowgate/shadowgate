@@ -30,10 +30,6 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if (!(ob->is_class("mage") || ob->is_class("sorcerer") || ob->is_class("psion"))) {
-        dest_effect();
-        return 0;
-    }
     return ::prerequisites(ob);
 }
 

@@ -72,7 +72,8 @@ void do_storm()
 
     if(spell_type == "monk" && sizeof(foes)) { MAGIC_D->elemental_opportunist(caster, foes[0]); }
 
-    damage = roll_dice(clevel,4);
+    define_base_damage(0); // lazy re-roll
+    damage = sdamage;
 
     tell_room(place,"%^BOLD%^CYAN%^A raging storm of water and winds roars through the area damaging everything in sight!");
     foes -= ({caster});
