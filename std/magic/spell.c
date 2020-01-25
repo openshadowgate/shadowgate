@@ -1851,7 +1851,7 @@ void define_clevel()
         if (caster->is_class("gravecaller"))
             if (FEATS_D->usable_feat(caster, "negative energy conduit"))
                 if (spell_sphere == "necromancy")
-                    clevel += 3;
+                    clevel += 4;
 
         if (caster->is_class("shadow_adept"))
             if (FEATS_D->usable_feat(caster, "elusive spellcraft"))
@@ -1866,7 +1866,7 @@ void define_clevel()
     if (FEATS_D->usable_feat(caster, "ragecaster")) {
         clevel = caster->query_character_level();
         if (caster->query_property("raged"))
-            clevel += 6;
+            clevel += 4;
     }
 
     if ((int) caster->query_property("empowered"))

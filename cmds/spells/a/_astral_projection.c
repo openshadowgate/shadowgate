@@ -31,7 +31,7 @@ To look around simply use %^ORANGE%^<command projection to look>%^RESET%^");
 int preSpell()
 {
     if (caster->query_property("has_elemental")) {
-        tell_object(caster, "Your concentration is already upon a distant location!");
+        tell_object(caster, "This is a greater summon, and you already have one!");
         return 0;
     }
     return 1;
