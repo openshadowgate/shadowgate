@@ -15,7 +15,7 @@ create() {
 
    set_wc(1,6);
    set_large_wc(1,8);
-   set_critical_hit_multiplier(2);
+   set_critical_hit_multiplier(4);
 
    set_value(1500);
    set_weapon_speed(1);

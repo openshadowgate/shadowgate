@@ -12,6 +12,7 @@ create() {
    set_value(1000);
 
    set_wc(1,6);
+   set_large_wc(1,8);
 
    set_critical_hit_multiplier(4);
    set_type("bludgeon");
