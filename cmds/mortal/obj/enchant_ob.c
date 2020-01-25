@@ -791,77 +791,100 @@ void do_add_special(object tp, object item, string bonus, int amt, int cost, map
 varargs int skill_check(object tp, object item, int DC, int cost, int flag)
 {
     object etp,*inv,class_ob;
-    string skill_name;
+    string skill_name, *skill_names = ({});
+    string repair_type, *repair_types;
     int skill,roll, max_cost, i, count, needed,*classes;
 
 
-    if(cost < 0) { return 0; }
-    if(!objectp(tp)) { return 0; }
-    if(avatarp(tp)) { return 1; }
-
-    etp = environment(tp);
-    if(!objectp(etp)) { return 0; }
-
-    if(!objectp(item))
-    {
-        db(tp, "\n\n%^RESET%^%^BOLD%^%^CYAN%^It seems that the item you were trying to enchant has gone missing.%^RESET%^");
-        tell_room(etp, "\n\n%^RESET%^%^BOLD%^%^CYAN%^"+tp->QCN+" looks around as if "+tp->QS+" is missing something.%^RESET%^",tp);
-        return;
-
+    if (cost < 0) {
+        return 0;
+    }
+    if (!objectp(tp)) {
+        return 0;
+    }
+    if (avatarp(tp)) {
+        return 1;
     }
 
-    if(item->is_weapon()) { skill_name = "craft, weaponsmith"; }
-    else if(item->is_armor())
-    {
-        switch(item->query_type())
-        {
-        case "ring":
-        case "bracer":
-        case "sheath":
-        case "jewelry":
+    etp = environment(tp);
+    if (!objectp(etp)) {
+        return 0;
+    }
 
-            skill_name = "craft, jeweller";
-            break;
+    if (!objectp(item)) {
+        db(tp, "\n\n%^RESET%^%^BOLD%^%^CYAN%^It seems that the item you were trying to enchant has gone missing.%^RESET%^");
+        tell_room(etp, "\n\n%^RESET%^%^BOLD%^%^CYAN%^" + tp->QCN + " looks around as if " + tp->QS + " is missing something.%^RESET%^", tp);
+        return;
+    }
 
+    repair_types = item->query_property("repairtype");
+
+    if (!sizeof(repair_types)) {
+        switch (item->query_type()) {
         case "clothing":
-
-            skill_name = "craft, tailor";
+            skill_names += ({ "craft, tailor" });
             break;
-
-        case "leather":
-        case "thiefshield":
-
-            skill_name = "craft, leatherworker";
+        case "bracer": case "ring":
+            skill_names += "craft, jeweller";
             break;
-
-        case "chain":
-        case "armor":
-        case "armour":
-        case "shield":
-        case "plate":
-
-            skill_name = "craft, armorsmith";
+        case "chain": case "armour": case "shield": case "armor": case "plate":
+            skill_names += ({ "craft, armorsmith" });
             break;
-
-        default:
-
-            db(tp,"\n\n%^RESET%^%^BOLD%^%^YELLOW%^Your "+item->query_short()+" %^RESET%^%^BOLD%^%^YELLOW%^appears "
-                "to have an invalid %^RESET%^%^BOLD%^%^MAGENTA%^type%^RESET%^%^BOLD%^%^YELLOW%^, please contact a wiz.");
-            return 0;
+        case "leather": case "thiefshield":
+            skill_names += ({ "craft, leatherworker" });
+            break;
+        case "wood":
+            skill_names += ({ "craft, woodworker" });
+            break;
+        }
+    } else{
+        foreach(repair_type in repair_types)
+        {
+            switch (repair_type) {
+            case "tailor":
+                skill_names += ({ "craft, tailor" });
+                break;
+            case "woodwork":
+                skill_names += ({ "craft, woodworker" });
+                break;
+            case "leatherwork":
+                skill_names += ({ "craft, leatherworker" });
+                break;
+            case "jewel":
+                skill_names += ({ "craft, jeweller" });
+                break;
+            case "armorsmith":
+                skill_names += ({ "craft, armorsmith" });
+                break;
+            }
         }
     }
 
-    skill = tp->query_skill(skill_name);
+    if (item->is_weapon()) {
+        skill_names += ({ "craft, weaponsmith" });
+    }
+
+    if (!sizeof(skill_names)) {
+        db(tp, "\n\n%^YELLOW%^Your " + item->query_short() + " %^YELLOW%^appears to have an invalid %^RESET%^%^BOLD%^%^MAGENTA%^type%^YELLOW%^, please contact a wiz.");
+        return 0;
+    }
+
+    skill = max(map_array(skill_names, (:$2->query_skill($1):), tp));
 
     classes = tp->query_classes();
 
-    for(i=0;sizeof(classes),i<sizeof(classes);i++)
-    {
-        class_ob = find_object_or_load(DIR_CLASSES+"/"+classes[i]+".c");
-        if(!objectp(class_ob)) { continue; }
-        if(class_ob->is_prestige_class()) { continue; }
-        if(member_array(classes[i],CRAFTING_CLASSES) == -1) { continue; }
-        skill += tp->query_prestige_level(classes[i]) / 15; // max bonus is +3 from mage or warlock levels at level 45
+    for (i = 0; sizeof(classes), i < sizeof(classes); i++) {
+        class_ob = find_object_or_load(DIR_CLASSES + "/" + classes[i] + ".c");
+        if (!objectp(class_ob)) {
+            continue;
+        }
+        if (class_ob->is_prestige_class()) {
+            continue;
+        }
+        if (member_array(classes[i], CRAFTING_CLASSES) == -1) {
+            continue;
+        }
+        skill += tp->query_prestige_level(classes[i]) / 15;     // max bonus is +3 from mage or warlock levels at level 45
     }
 
     roll = roll_dice(1,20);
