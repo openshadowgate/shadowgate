@@ -42,7 +42,7 @@ void spell_effect(int prof){
     {
         if(!objectp(attackers[i]))
             continue;
-        "/std/effect/status/exhausted"->apply_effect(target,clevel/8+1);
+        "/std/effect/status/exhausted"->apply_effect(target,clevel/14+1);
     }
     spell_successful();
     dest_effect();

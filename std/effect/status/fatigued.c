@@ -16,15 +16,20 @@ void status_effect()
 {
     int i;
 
-    if(!objectp(target))
+    if (!objectp(target)) {
         return;
+    }
 
-    if(target->query_property("effect_exhausted")||
-       target->query_property("effect_fatigued"))
+    if (target->query_property("effect_exhausted") ||
+        target->query_property("effect_fatigued")) {
+        TO->remove();
         return;
+    }
 
-    if(target->is_undead())
+    if (target->is_undead()) {
+        TO->remove();
         return;
+    }
 
     target->set_property("effect_fatigued",1);
 
