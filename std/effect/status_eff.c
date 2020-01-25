@@ -103,6 +103,7 @@ varargs object apply_effect(object victim, int dur, mixed param)
 
 void status_effect()
 {
+    dest_effect();
     return;
 }
 

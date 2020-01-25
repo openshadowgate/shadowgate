@@ -10,7 +10,7 @@ void create()
     feat_category("RageProphet");
     feat_name("spirit warrior");
     feat_prereq("Raging Prophet L4");
-    feat_desc("In his frenzy raging prophet gains ability to partially enter the spirit realm, negating some of received corporeal damage and calming rage's taxing effects on his body. This feat modifies rage.");
+    feat_desc("In his frenzy raging prophet gains ability to partially enter the spirit realm, avoiding some of the attacks. This feat modifies rage.");
     permanent(1);
 }
 

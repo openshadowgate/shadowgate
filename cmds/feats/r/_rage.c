@@ -87,6 +87,12 @@ void execute_feat()
         return;
     }
 
+    if (caster->query_property("effect_exhausted") || caster->query_property("effect_fatigued")) {
+        tell_object(caster, "%^BOLD%^You are fatigued or exhausted and cannot rage.%^RESET%^");
+        dest_effect();
+        return;
+    }
+
     tell_object(caster,cm("You gather strenght as you prepare to go into frenzy."));
     caster->set_property("active_feats",({TO}));
 
@@ -200,11 +206,6 @@ void execute_attack()
 
     if (!caster->query_property("raged"))
     {
-        dest_effect();
-        return;
-    }
-
-    if (caster->query_property("effect_exhausted") || caster->query_property("effect_fatigued")) {
         dest_effect();
         return;
     }

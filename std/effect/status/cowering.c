@@ -21,10 +21,14 @@ void status_effect()
     object weapons;
     string exits;
 
-    if(target->query_property("effect_cowering"))
+    if (target->query_property("effect_cowering")) {
+        TO->remove();
         return;
-    if(PLAYER_D->immunity_check(target,"fear"))
+    }
+    if (PLAYER_D->immunity_check(target, "fear")) {
+        TO->remove();
         return;
+    }
 
     target->set_property("effect_cowering",1);
 

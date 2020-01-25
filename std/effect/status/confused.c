@@ -25,12 +25,15 @@ void create()
 void status_effect()
 {
     int i;
-    if(target->query_property("effect_confused"))
+    if (target->query_property("effect_confused")) {
+        TO->remove();
         return;
+    }
 
-    target->set_property("effect_confused",1);
-    if(objectp(query_param()))
+    target->set_property("effect_confused", 1);
+    if (objectp(query_param())) {
         caster = query_param();
+    }
 
     counter = duration;
     maintain_confusion();
