@@ -6,9 +6,8 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("snakebite");
-    set_spell_level(([ "cleric" : 4, "ranger" : 3 ]));
+    set_spell_level(([ "ranger" : 3 ]));
     set_spell_sphere("combat");
-    set_spell_domain("animal");
     set_syntax("cast CLASS snakebite on TARGET");
     set_description("This spell allows the ranger to draw forth the remaining living energy in an otherwise dead stick, "
 "converting it into life.  It will become a serpent that strikes the target, with a chance to poison with its bite.");

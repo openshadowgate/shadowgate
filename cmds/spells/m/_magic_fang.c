@@ -10,7 +10,8 @@ void execute_me();
 void create() {
     ::create();
     set_spell_name("magic fang");
-    set_spell_level(([ "ranger" : 1 ]));
+    set_spell_level(([ "ranger" : 1, "cleric":1]));
+    set_domains("animal");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS magic fang");
     set_description("This spell lets the caster siphon some of his own will into his creatures, giving them minor bonuses "

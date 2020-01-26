@@ -29,6 +29,4 @@ raging_healer_spells = ({
             "mass cure light wounds", "mass cause light wounds",
             "mass cure moderate wounds", "mass cause moderate wounds",
             "mass cure serious wounds", "mass cause serious wounds",
-            "mass cure critical wounds", "mass cause critical wounds",
-            "heal", "harm",
-            "mass heal", "mass harm"});
+            "mass cure critical wounds", "mass cause critical wounds",});

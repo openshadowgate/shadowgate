@@ -13,9 +13,8 @@ int mybonus;
 void create() {
     ::create();
     set_spell_name("rage");
-    set_spell_level(([ "cleric" : 7, "bard" : 2, "mage": 3 ]));
+    set_spell_level(([ "bard" : 2, "mage": 3 ]));
     set_spell_sphere("enchantment_charm");
-    set_spell_domain("animal");
     set_syntax("cast CLASS rage");
     set_description("%^RESET%^This spell allows the caster to enter a fit of furious rage, making them deadly in combat for the duration. The ability will last longer, and grow stronger, as the caster gains levels.
 

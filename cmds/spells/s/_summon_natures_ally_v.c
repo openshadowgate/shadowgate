@@ -3,11 +3,12 @@
 #include <rooms.h>
 inherit "/cmds/spells/s/summon_natures_ally.c";
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("summon natures ally v");
-    set_spell_level(([ "druid" : 5 ]));
+    set_spell_level(([ "druid" : 5, "cleric":5]));
+    set_domains("animal");
     set_syntax("cast CLASS summon natures ally v");
 }
 
@@ -15,7 +16,7 @@ void create()
 object createMon()
 {
     int chooser=random(8); // open this up as more monsters are added
-    switch (chooser) 
+    switch (chooser)
     {
         case 0: return new("/d/magic/mon/naturesally/polarbear.c"); break;
         case 1: return new("/d/magic/mon/naturesally/arrowhawk.c"); break;
@@ -28,7 +29,7 @@ object createMon()
     }
 }
 
-void setup_beastie(object mymon) 
+void setup_beastie(object mymon)
 {
     if(!objectp(mymon)) return;
     mymon->set_size(2);

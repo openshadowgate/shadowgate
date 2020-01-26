@@ -7,10 +7,9 @@ int reversed, duration;
 void create() {
    ::create();
     set_spell_name("ghost step");
-    set_spell_level(([ "cleric" : 2, "ranger" : 1, "monk" : 3, "assassin" : 2]));
+    set_spell_level(([ "ranger" : 1, "monk" : 3, "assassin" : 2]));
     set_spell_sphere("alteration");
     set_monk_way("way of the shadow");
-    set_spell_domain("animal");
     set_syntax("cast CLASS ghost step");
     set_description("This spell allows you to become one with nature, as a ghost of the forest, leaving no traces of "
     "where you have walked.");

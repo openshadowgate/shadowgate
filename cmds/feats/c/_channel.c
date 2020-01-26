@@ -9,7 +9,7 @@ void create()
     feat_category("Presence");
     feat_name("channel");
     feat_prereq("Cleric or Paladin");
-    feat_desc("");
+    feat_desc("This power allows divine caster to channel primal energies (negatie or positive) at their allies and foes. The type of energy will depend on your affinity, e.g. undead will channel negative energy while living will channel positive energy. This feat will auto determine which type of energy is appliable to allies and enemies.");
     feat_syntax("channel");
     set_target_required(0);
 }
@@ -60,7 +60,7 @@ void execute_feat()
 
     if ((int)caster->query_property("using channel") > time() &&
         !FEATS_D->usable_feat(caster, "supreme healer")) {
-        tell_object(caster, "It's too soon to use sweeping blow again yet!");
+        tell_object(caster, "It's too soon to use channel again yet!");
         dest_effect();
         return;
     }
@@ -108,13 +108,13 @@ void execute_attack()
 
     if (caster->query_property("negative energy affinity")) {
         energy_type = "negative energy";
-        color = "%^BLUE%^";
+        color = "%^BLACK%^";
     } else {
         energy_type = "positive energy";
         color = "%^WHITE%^";
     }
 
-    tell_room(ENV(caster), "%^BOLD%^" + color + "the area is washed with divine energies!");
+    tell_room(ENV(caster), "%^BOLD%^" + color + "The area is washed with divine energies!");
 
     foreach(ally in allies)
     {
@@ -136,7 +136,7 @@ void execute_attack()
 
     foreach(attacker in attackers)
     {
-        if (!objectp(ally)) {
+        if (!objectp(attacker)) {
             continue;
         }
 
@@ -148,8 +148,8 @@ void execute_attack()
             continue;
         }
 
-        ally->cause_typed_damage(ally, ally->query_target_limb(), dam, energy_type);
-        tell_object(ally, "%^BOLD%^" + color + "Waves of divine energy was over you, wounding you!");
+        attacker->cause_typed_damage(attacker, attacker->query_target_limb(), dam, energy_type);
+        tell_object(attacker, "%^BOLD%^" + color + "Waves of divine energy was over you, wounding you!");
     }
 
     dest_effect();
