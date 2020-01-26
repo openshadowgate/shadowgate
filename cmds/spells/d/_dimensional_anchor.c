@@ -23,7 +23,7 @@ void spell_effect()
 {
     int duration;
     int roll;
-    duration = ROUND_LENGTH * clevel/6;
+    duration = ROUND_LENGTH * (clevel/6 + 1);
     target->set_property("teleport proof",clevel);
 
     roll = BONUS_D->process_hit(caster, target, 1, 0, 0, 1);
