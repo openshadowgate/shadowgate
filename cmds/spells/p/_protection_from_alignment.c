@@ -8,7 +8,7 @@ object weap;
 void create()
 {
     ::create();
-    set_spell_name("protenction from alignment");
+    set_spell_name("protection from alignment");
     set_spell_level(([ "inquisitor" : 1, "cleric" : 1, "mage":1, "paladin":1]));
     set_spell_sphere("abjuration");
     set_domains(({"good", "evil"}));

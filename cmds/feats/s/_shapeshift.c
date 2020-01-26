@@ -15,7 +15,7 @@ void create() {
     feat_desc("The shapeshift feat will allow the user to change into another form. Whileshapeshifted, users maintain their intelligence but also gain the mannerisms and instinctsof their shapeshifted form, but they are able to overcome their animal instincts and actof their own free will. Users in animal form can freely speak with other animals, butwill need a special feat to communicate with others who do not understand the animal'slanguage. All equipment worn and carried by the user is absorbed into the shapeshiftingprocess and, with the exception of healing vials, will be unusuable until the user returnsto his or her normal form. Equipment bonuses for worn and wielded armor and weapons willremain when the user is shapeshifted. In addition, bird shape can use <wing> command. Different forms are learned by the druid as theygrow in strength, as follows:
 
   L4 Wolf. Variants: coyote, fox, hyena, jackal, wolverine, worg
-  L4 Small Animal. Variants: ferret, lizard, mole, mongoose, monkey, rabbit, raccoon, rat, skunk, squirrel
+  L4 Small Animal. Variants: ferret, lizard, mole, mongoose, monkey, mouse, rabbit, raccoon, rat, skunk, squirrel
   L11 Bear. Variants: grizzly bear, kodiak bear, polar bear, black bear, brown bear, panda
   L11 Large animal. Variants: ape, bison, boar, buffalo, camel, deer, goat, horse, moose
   L14 Bird. Variants: crow, eagle, falcon, hawk, owl, raven, vulture, goose

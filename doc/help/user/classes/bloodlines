@@ -25,7 +25,7 @@ undead    : One of your ancestors was quite dead.
 %^CYAN%^aberrant:
 enlarge person%^MAGENTA%^,%^RESET%^ detect invisibility%^MAGENTA%^,%^RESET%^ tongues%^MAGENTA%^,%^RESET%^ black tentacles%^MAGENTA%^,%^RESET%^ prying eyes%^MAGENTA%^,%^RESET%^ impenetrable veil%^MAGENTA%^,%^RESET%^ phase door%^MAGENTA%^,%^RESET%^ shapechange
 %^CYAN%^abyssal:
-acid splash%^MAGENTA%^,%^RESET%^ darkness%^MAGENTA%^,%^RESET%^ acid orb%^MAGENTA%^,%^RESET%^ fear%^MAGENTA%^,%^RESET%^ domination%^MAGENTA%^,%^RESET%^ impenetrable veil%^MAGENTA%^,%^RESET%^ acid fog%^MAGENTA%^,%^RESET%^ unholy aura
+acid splash%^MAGENTA%^,%^RESET%^ darkness%^MAGENTA%^,%^RESET%^ acid orb%^MAGENTA%^,%^RESET%^ fear%^MAGENTA%^,%^RESET%^ domination%^MAGENTA%^,%^RESET%^ impenetrable veil%^MAGENTA%^,%^RESET%^ acid fog%^MAGENTA%^,%^RESET%^ orb of the void
 %^CYAN%^accursed:
 touch of fatigue%^MAGENTA%^,%^RESET%^ touch of idiocy%^MAGENTA%^,%^RESET%^ garble%^MAGENTA%^,%^RESET%^ bestow curse%^MAGENTA%^,%^RESET%^ ruin%^MAGENTA%^,%^RESET%^ eyebite%^MAGENTA%^,%^RESET%^ powerword blind%^MAGENTA%^,%^RESET%^ spellscar
 %^CYAN%^arcane:

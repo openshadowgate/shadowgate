@@ -42,7 +42,7 @@ string *class_feats(string myspec) {
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry" }), 2 : ({ "smite" }), 3 : ({"divine health" }), 6 : ({ "layonhands" }), 7 : ({ "indomitable" }),14 : ({ "force of personality" }), 17 : ({ "leadership" }), ]);
+    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry", "channel"}), 2 : ({ "smite" }), 3 : ({"divine health" }), 6 : ({ "layonhands" }), 7 : ({ "indomitable" }),14 : ({ "force of personality" }), 17 : ({ "leadership" }), ]);
 }
 
 string *class_skills()
@@ -114,12 +114,7 @@ string query_casting_stat(){
 
 mapping query_class_spells()
 {
-    return (([
-        1 : ({"bolster","create water","cure light wounds","detect chaos","detect poison","divine weapon","light","virtue" }),
-        2 : ({"bonded steed","bulls strength","create food","divine shield","eagles splendor","orders oath","owls wisdom","remove paralysis","resist energy" }),
-        3 : ({"break curse","cause blindness","cure moderate wounds","daylight","dispel magic","divine favor","heal mount","prevent stealing","remove blindness" }),
-        4 : ({"cure serious wounds","deathward","dispel chaos","invisibility purge","mark of justice","neutralize poison","sanctify","seeking sword"}),
-    ]));
+    return (([ ]));
 }
 
 int caster_level_calcs(object player, string the_class)

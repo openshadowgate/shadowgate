@@ -16,7 +16,7 @@ void create()
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS prayer");
     set_damage_desc("clevel/16+1 to attack, damage bonus, positive to allies, negative to enemies");
-    set_description("Allies in the place of the time of casting become blessed. This spell won't stack with bless type spells.");
+    set_description("Allies in the place of the time of casting become blessed, enemies become cursed. This spell is short duration.");
     set_verbal_comp();
     set_somatic_comp();
 }

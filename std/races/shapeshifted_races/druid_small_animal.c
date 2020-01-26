@@ -10,7 +10,7 @@ void create()
     ::create();
 
     set_attack_limbs( ({ "mouth" }) );
-    set_new_damage_type("piercing");    
+    set_new_damage_type("piercing");
     set_limbs( ({ "mouth","head","torso","right foreleg","left foreleg","right rear leg","left rear leg","tail" }) );
     set_attack_functions( ([ "mouth" : (:TO,"shape_attack":) ]) );
     set_ac_bonus(0); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
@@ -25,7 +25,7 @@ void create()
 }
 
 string * query_subraces() {
-    return ({ "animal","rabbit","rat","lizard","squirrel","ferret","raccoon","skunk","monkey","mole","mongoose" });
+    return ({ "animal","rabbit","rat","lizard","squirrel","ferret","raccoon","skunk","monkey","mole","mongoose", "mouse"});
 }
 
 // custom descriptions here, override this function
@@ -76,7 +76,7 @@ int change_outof_message(object obj)
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+"'s body grows still "+obj->QS+" gets a far-away look in "+obj->QP+" eyes.",obj);
     tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, elongating and curving!",obj);
     tell_room(environment(obj),"%^RESET%^%^GREEN%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
-    
+
     return 1;
 }
 
@@ -87,9 +87,9 @@ int shape_attack(object tp, object targ)
     return 0;
 }
 
-int can_cast() 
-{ 
+int can_cast()
+{
     if(!objectp(query_owner())) { return 0; }
     if(FEATS_D->usable_feat(query_owner(),"wild spellcraft")) { return 1; }
-    return can_cast_spells; 
+    return can_cast_spells;
 }

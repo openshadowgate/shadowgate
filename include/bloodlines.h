@@ -19,7 +19,7 @@
 
 #define BLOODLINE_SPELLS  ([\
 "aberrant":({"enlarge person","detect invisibility","tongues","black tentacles","prying eyes","impenetrable veil","phase door","shapechange"}),\
-"abyssal":({"acid splash","darkness","acid orb","fear","domination","impenetrable veil","acid fog","unholy aura"}),\
+"abyssal":({"acid splash","darkness","acid orb","fear","domination","impenetrable veil","acid fog","orb of the void"}),\
 "accursed":({"touch of fatigue","touch of idiocy","garble","bestow curse","ruin","eyebite","powerword blind","spellscar"}),\
 "arcane":({"identify","mirror image","dispel magic","break curse","siphon magic","repulsion","foresight","screen"}),\
 "astral":({"flare","invisibility","blink","suppress wild magic","dismissal","contingency","greater teleport","antimagic field"}),\
