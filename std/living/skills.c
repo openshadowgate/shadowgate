@@ -460,10 +460,13 @@ mapping query_levels(){return mlevels;}
 
 int query_class_level(string str)
 {
-    if(mlevels && mlevels != ([]) && mlevels[str] && objectp(TO))
-    {
-        if(intp("/daemon/user_d.c"->get_scaled_class_level(TO))) { return "/daemon/user_d.c"->get_scaled_class_level(TO, str); }
-        if(intp(TO->query("negative levels", str))) { return mlevels[str] + (int)TO->query("negative level", str); }
+    if (mlevels && mlevels != ([]) && mlevels[str] && objectp(TO)) {
+        if (intp("/daemon/user_d.c"->get_scaled_class_level(TO))) {
+            return "/daemon/user_d.c"->get_scaled_class_level(TO, str);
+        }
+        if (intp(TO->query("negative levels", str))) {
+            return mlevels[str] + (int)TO->query("negative level", str);
+        }
         return mlevels[str];
     }
     return 0;
@@ -1128,29 +1131,35 @@ int resolve_auto_tax(int exp)
 void add_exp(int exp)
 {
 // adding to stop mobs from getting out of control fighting each other *Styx* 12/25/05
-  if(!userp(TO))
-    return;
-  if(exp < 1)
-  {
-      return __internal_add_exp(exp);
-  }
-  if(exp > 0) exp = WORLD_EVENTS_D->check_exp_events(exp, TO);
-  if(userp(TO) && (exp >0) && TO->query_party()) {
-    PARTY_OB->calculate_exp(TO->query_party(), exp, previous_object());
-    return;
-  }
-  if("/daemon/user_d.c"->no_exp(TO) && exp > 0) return;
-  if (has_XP_levelcap() && (exp > 0))
-    return;
-  if (has_XP_tax() && exp > 0)
-    exp = use_XP_tax(exp);
-  if (has_XP_rest() && exp > 0)
-    exp = use_XP_rest(exp);
-  //exp = resolve_auto_tax(exp);
-  exp = exp_buffer(exp);
+    if (!userp(TO)) {
+        return;
+    }
+    if (exp < 1) {
+        return __internal_add_exp(exp);
+    }
+    if (exp > 0) {
+        exp = WORLD_EVENTS_D->check_exp_events(exp, TO);
+    }
+    if (userp(TO) && (exp > 0) && TO->query_party()) {
+        PARTY_OB->calculate_exp(TO->query_party(), exp, previous_object());
+        return;
+    }
+    if ("/daemon/user_d.c"->no_exp(TO) && exp > 0) {
+        return;
+    }
+    if (has_XP_levelcap() && (exp > 0)) {
+        return;
+    }
+    if (has_XP_tax() && exp > 0) {
+        exp = use_XP_tax(exp);
+    }
+    if (has_XP_rest() && exp > 0) {
+        exp = use_XP_rest(exp);
+    }
+    exp = exp_buffer(exp);
 
-  log_exp(exp,"add",0);
-  __internal_add_exp(exp);
+    log_exp(exp, "add", 0);
+    __internal_add_exp(exp);
 }
 
 void party_exp(int exp, object tmp){

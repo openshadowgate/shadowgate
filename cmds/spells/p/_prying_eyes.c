@@ -54,7 +54,7 @@ void spell_effect(int prof){
         }
         eyes = new("/d/magic/obj/pryingeyes");
         eyes->set_caster(caster);
-        eyes->set_skill("stealth",clevel);
+        eyes->set_skill("stealth",clevel + random(20));
         eyes->set_eye_color(caster->query_eye_color());
         eyes->set_property("spell",TO);
         eyes->set_property("spelled", ({TO}) );

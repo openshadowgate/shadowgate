@@ -62,7 +62,7 @@ int set_base_class(object obj, string choice)
     if (member_array(choice, classes) == -1) {
         return 0;
     }
-    if (member_array(choice, ({"psion", "psywarrior"})) == -1) {
+    if (member_array(choice, ({"psion", "psywarrior"})) != -1) {
         return 0;
     }
     obj->set("assassin_base_class", choice);
@@ -104,19 +104,36 @@ int prerequisites(object player)
     object race_ob;
     string race, base;
     int adj;
-    if(!objectp(player)) { return 0; }
+    if (!objectp(player)) {
+        return 0;
+    }
 
     race = player->query("subrace");
-    if(!race) { race = player->query_race(); }
-    race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
-    if(!objectp(race_ob)) { return 0; }
+    if (!race) {
+        race = player->query_race();
+    }
+    race_ob = find_object_or_load(DIR_RACES + "/" + player->query_race() + ".c");
+    if (!objectp(race_ob)) {
+        return 0;
+    }
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
-    if(skills["stealth"] < 10) { return 0; }
-    if(player->query_base_stats("intelligence") < 16) { return 0; }
+    if (skills["stealth"] < 10) {
+        write("failed skill");
+        return 0;
+    }
+    if (player->query_base_stats("intelligence") < 16) {
+        write("failed int");
+        return 0;
+    }
     base = player->query("assassin_base_class");
-    if(!base) { return 0; }
-    if(!player->is_class(base)) { return 0; }
+    if (!base) {
+        write("failed base class");
+        return 0;
+    }
+    if (!player->is_class(base)) {
+        return 0;
+    }
     return 1;
 }
 

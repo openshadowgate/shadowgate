@@ -52,36 +52,46 @@ spell_effect(int prof)
     party = ob_party(caster);
 
     targets = ({target});
-    for (x=0;x < sizeof(prospective);x++)
-    {
-        if(!objectp(prospective[x])) continue;
-        if ((member_array(prospective[x], party) != -1) || !living(prospective[x])) continue;
-        if(!caster->ok_to_kill(prospective[x])) continue;
-
-        target2 = prospective[x];
-
-        if(do_save(target2,-2)) { continue; }
-
-        myrace = (string)target2->query_race();
-
-        if(race_immunity_check(target2, "sleep")) { continue; }
-
-        if(mind_immunity_damage(target2, "default"))
-        {
+    for (x = 0; x < sizeof(prospective); x++) {
+        if (!objectp(prospective[x])) {
+            continue;
+        }
+        if ((member_array(prospective[x], party) != -1) || !living(prospective[x])) {
+            continue;
+        }
+        if (!caster->ok_to_kill(prospective[x])) {
             continue;
         }
 
-        if (!success)
-        {
+        target2 = prospective[x];
+
+        if (do_save(target2, -2)) {
+            continue;
+        }
+
+        if (target2->query_level() > clevel) {
+            continue;
+        }
+
+        myrace = (string)target2->query_race();
+
+        if (race_immunity_check(target2, "sleep")) {
+            continue;
+        }
+
+        if (mind_immunity_damage(target2, "default")) {
+            continue;
+        }
+
+        if (!success) {
             success = 1;
         }
 
-        tell_room(environment(target2),"%^CYAN%^%^BOLD%^"+target2->QCN+" wavers for a bit, then falls to the ground in a deep slumber.", target2);
+        tell_room(environment(target2), "%^CYAN%^%^BOLD%^" + target2->QCN + " wavers for a bit, then falls to the ground in a deep slumber.", target2);
         tell_object(target2, "%^CYAN%^%^BOLD%^You suddenly become drowsy and fall asleep.");
         target2->set_asleep(time, "You are asleep!");
-        target2->set_property("spelled", ({TO}) );
-        targets += ({target2});
-
+        target2->set_property("spelled", ({ TO }));
+        targets += ({ target2 });
     }
     spell_successful();
     if(!success)

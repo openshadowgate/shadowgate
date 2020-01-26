@@ -91,6 +91,7 @@ void make_sword() {
     ob->set_property("effective_enchantment", ((int)CLEVEL / 7));
     caster->set_property("mages_sword",ob);
     ob->move(environment(caster));
+    addSpellToCaster();
     return;
 }
 

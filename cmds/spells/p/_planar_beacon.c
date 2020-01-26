@@ -2,6 +2,7 @@
 #include <daemons.h>
 #include <party.h>
 #include <spell.h>
+#include <teleport.h>
 inherit SPELL;
 
 #define DELAY 300 //5min delay between uses
@@ -17,9 +18,6 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
-    set_components(([
-      "mage" : ([ "sand" : 1, "pinch of special dust" : 1, ]),
-    ]));
     set_save("will");
 }
 
@@ -96,6 +94,7 @@ void do_summon(object target) {
         return;
       }
    }
+   caster->remove_property("spell summon time");
    caster->set_property("spell summon time",time());
    success = 0;
 
@@ -116,7 +115,7 @@ void do_summon(object target) {
 "before "+caster->QCN+"!");
         tell_object(caster,"%^BOLD%^%^CYAN%^You forcefully yank forward the glowing magical beacon, drawing "
 +target->QCN+" through the weave to appear before you!");
-        target->move_player(environment(caster));
+        TELEPORT->teleport_object(caster, target, ENV(caster), clevel);
         dest_effect();
         return;
     }
@@ -126,7 +125,7 @@ void do_summon(object target) {
         tell_object(caster,"%^BOLD%^%^BLUE%^You try to forcefully drag "+target->QCN+" through the weave to you, but the "
 "spell backfires and you are thrown forward to appear before "+target->QO+"!");
         tell_object(caster,"%^BOLD%^You are transported to another place!");
-        caster->move_player(environment(target));
+        TELEPORT->teleport_object(caster, caster, ENV(target), clevel);
         dest_effect();
         return;
     }
