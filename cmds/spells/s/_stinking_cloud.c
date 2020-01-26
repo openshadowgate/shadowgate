@@ -15,7 +15,6 @@ void create()
     set_spell_level(([ "mage" : 3, "cleric":3]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS stinking cloud");
-    set_damage_desc("acid");
     set_domains("water");
     set_description("This spell creates a cloud of sickening fumes that perpetually causes everyone in the area to be sickened.");
     set_verbal_comp();
@@ -59,7 +58,7 @@ void execute_attack()
         if (!objectp(targ = foes[i])) {
             continue;
         }
-        if (do_save(targ, 0)) {
+        if (do_save(targ, 4)) {
             continue;
         }
         "/std/effect/status/sickened"->apply_effect(targ,2);
