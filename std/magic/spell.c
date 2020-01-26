@@ -2814,7 +2814,7 @@ void help() {
     if(silent_casting)
         write("%^BOLD%^%^RED%^Undetectable casting.%^RESET%^");
     if(evil_spell)
-        write("%^BOLD%^%^RED%^This spell is inherintly evil.%^RESET%^");
+        write("%^BOLD%^%^RED%^This spell is inherently evil.%^RESET%^");
     if(TO->is_curse())
         write("%^BOLD%^%^RED%^This spell is a curse.");
     if(aoe_spell)
