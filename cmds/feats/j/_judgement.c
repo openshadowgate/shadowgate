@@ -17,11 +17,11 @@ void create()
 
 The list of judgements to choose from:
 
-%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them damage bonus point per every three levels.
+%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them damage bonus point per every twelve levels.
 
 %^BOLD%^Healing:%^RESET%^ The inquisitor is surrounded by a healing light, gaining fast healing point per every eighteen levels.
 
-%^BOLD%^Justice:%^RESET%^ This judgment spurs the inquisitor to seek justice, gaining a sacred bonus point to attack per every three levels.
+%^BOLD%^Justice:%^RESET%^ This judgment spurs the inquisitor to seek justice, gaining a sacred bonus point to attack per every twenty levels.
 
 %^BOLD%^Piercing:%^RESET%^ This judgment gives the inquisitor great focus and makes his spells more potent. This grants a level and ten points worth of spell penetration and a caster level point for every twelve levels.
 
@@ -29,7 +29,7 @@ The list of judgements to choose from:
 
 %^BOLD%^Purity:%^RESET%^ The inquisitor is protected from the vile taint of her foes, gaining a sacred bonus to all saves, worth of a point per every five levels.
 
-%^BOLD%^Resiliency:%^RESET%^ This judgment makes the inquisitor resistant to harm, granting him one point of spell damage resistance per level.
+%^BOLD%^Resiliency:%^RESET%^ This judgment makes the inquisitor resistant to harm, granting him one point of spell damage resistance per two levels.
 
 %^BOLD%^See also:%^RESET%^ status effects
 ");
@@ -75,7 +75,6 @@ int cmd_judgement(string args)
     argss = explode(args," ");
     clevel = TP->query_guild_level("inquisitor");
     JUDGEMENT_TYPES = "/cmds/feats/obj/judgement"->query_judgement_types();
-
 
     if(FEATS_D->usable_feat(TP,"third judgement"))
         i = 3;

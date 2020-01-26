@@ -115,21 +115,21 @@ void apply_judgements(string * judgements,int direction)
 void judgement_destruction(object targ,int direction, int power)
 {
     int bonus;
-    bonus = power / 3 + 1;
+    bonus = power / 3 / 4 + 1;
     targ->add_damage_bonus(bonus*direction);
 }
 
 void judgement_healing(object targ,int direction, int power)
 {
     int bonus;
-    bonus = power/18+1;
+    bonus = power / 18 + 1;
     targ->set_property("fast healing",bonus*direction);
 }
 
 void judgement_justice(object targ,int direction, int power)
 {
     int bonus;
-    bonus = power / 5 + 1;
+    bonus = power / 5 / 4 + 1;
     targ->add_attack_bonus(bonus*direction);
 }
 
@@ -156,7 +156,7 @@ void judgement_purity(object targ,int direction, int power)
 void judgement_resiliency(object targ,int direction, int power)
 {
     int bonus;
-    bonus = power + 1;
+    bonus = power / 2 + 1;
     targ->set_property("spell damage resistance",bonus*direction);
 }
 

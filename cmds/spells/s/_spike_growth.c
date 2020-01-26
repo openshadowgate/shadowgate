@@ -15,7 +15,8 @@ void create()
 {
     ::create();
     set_spell_name("spike growth");
-    set_spell_level(([ "druid" : 3 ]));
+    set_spell_level(([ "druid" : 3, "cleric":3]));
+    set_domains("earth");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS spike growth");
     set_description("This spell causes roots or other vegetation in the area to become hard and razor sharp.  Anyone moving in the area, "

@@ -24,8 +24,8 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("cleric") < 1 &&
-        ob->query_class_level("paladin") < 1) {
+    if (!(ob->is_class("cleric") ||
+          ob->is_class("paladin"))) {
         dest_effect();
         return 0;
     }
