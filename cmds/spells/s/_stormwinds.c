@@ -13,7 +13,7 @@ void create() {
     set_spell_name("stormwinds");
     set_spell_level(([ "cleric" : 5 ]));
     set_spell_sphere("elemental air");
-    set_spell_domain("storms");
+    set_domains("storms");
     set_syntax("cast CLASS stormwinds on TARGET");
     set_description("This spell causes a great sphere of swirling winds to appear around the target. Lightning bolts "
 "come forth from the mass of air to strike them.");
@@ -23,8 +23,8 @@ void create() {
     set_save("reflex");
 }
 
-string query_cast_string() 
-{ 
+string query_cast_string()
+{
 	tell_object(caster,"%^BLUE%^Raising your hands up in front of you, "+
 		"you begin to call on the power of storms!");
 	tell_room(place,"%^BLUE%^"+caster->QCN+" raises "+caster->QP+" hands "+
@@ -32,19 +32,19 @@ string query_cast_string()
 	return "display";
 }
 
-int preSpell() 
+int preSpell()
 {
     if(!objectp(target))
     {
         tell_object(caster,"This spell requires a target.");
         return 0;
     }
-    if (place->query_property("underwater")) 
+    if (place->query_property("underwater"))
     {
         tell_object(caster,"%^BOLD%^That spell can only be cast in the air, not underwater.");
         return 0;
     }
-    if (caster->query_property("winds")) 
+    if (caster->query_property("winds"))
     {
         tell_object(caster,"%^BOLD%^You cannot control a second mass of whirling wind.");
         return 0;
@@ -52,7 +52,7 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int i;
     object *who;
@@ -119,7 +119,7 @@ void do_lightning() {
         damage_targ(target,"torso",dam/2,"electricity");
     }
     count++;
-     if(!objectp(target)) { 
+     if(!objectp(target)) {
           dest_effect();
           return;
      }
@@ -136,9 +136,9 @@ void do_lightning() {
     }
 }
 
-void dest_effect() 
+void dest_effect()
 {
-	if(objectp(caster)) 
+	if(objectp(caster))
 	{
 		caster->remove_property("winds");
 	}

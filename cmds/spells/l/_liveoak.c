@@ -14,7 +14,8 @@ object tree;
 void create() {
     ::create();
     set_spell_name("liveoak");
-    set_spell_level(([ "druid" : 7 ]));
+    set_spell_level(([ "druid" : 7, "cleric":7]));
+    set_domains("plant");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS liveoak");
     set_description("Upon casting this spell, the druid calls upon her connection with nature to bring forth the magic inherent in an acorn. The druid tosses the acorn to the ground, where it sprouts into a mighty treant to protect her.
@@ -96,7 +97,7 @@ void step3() {
     ob->set_property("spelled", ({TO}) );
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
-    ob->set_caster(caster); 
+    ob->set_caster(caster);
     device = new("/d/magic/obj/ctreantholder");
     tell_room(place,"%^BOLD%^%^GREEN%^The ground shakes as the acorn explodes "
               "and a treant bursts forth, towering over "+caster->QCN+"!%^RESET%^",caster);
@@ -133,4 +134,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

@@ -1,5 +1,5 @@
 //Updated to hit more often - should be a bit more balanced
-//and useful now.  ~Circe~ 5/12/08 with the rebalancing of 
+//and useful now.  ~Circe~ 5/12/08 with the rebalancing of
 //domains
 // lightning touch based on Searing
 //Light by saide - 8/05
@@ -14,9 +14,9 @@ void create() {
     ::create();
     set_author("cythera");
     set_spell_name("lightning touch");
-    set_spell_level(([ "cleric" : 2 ]));
-    set_spell_sphere("weather");
-    set_spell_domain("storms");
+    set_spell_level(([ "cleric" : 2, "cleric":2]));
+    set_spell_sphere("invocation_evocation");
+    set_domains("storms");
     set_syntax("cast CLASS lightning touch on TARGET");
     set_description("Wrapping their hand with crackling bolts of lightning, with this spell the caster tries to deliever "
 "a shocking attack onto a foe.  If the caster fails to touch the target, the lighting dispurses into a flashy, but "
@@ -40,13 +40,13 @@ int preSpell()
 string query_cast_string()
 {
     tell_room(place, "%^YELLOW%^Crackling bolts of lightning surrounds "+caster->QCN+"'s"+
-		" hand!",caster);    
+		" hand!",caster);
     tell_object(caster,"%^YELLOW%^Crackling bolts of lightning surround"+
 		" your hand!%^RESET%^");
     return "display";
 }
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     int effect,bonus;
 
@@ -91,11 +91,11 @@ spell_effect(int prof)
     damage_targ(target,target->return_target_limb(),sdamage,"electricity");
     spell_kill(target,caster);
     spell_successful();
-    dest_effect();   
+    dest_effect();
 
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

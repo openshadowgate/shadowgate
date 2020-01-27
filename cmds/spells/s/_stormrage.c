@@ -1,5 +1,5 @@
 //Last spell for the Storms domain
-//Moving to 8th level to match similar spells 
+//Moving to 8th level to match similar spells
 //in rebalancing domains.  ~Circe~ 4/26/08
 //Damage vastly re-scaled as this spell is horrifically powerful compared to other AOE types. -N, 8/10.
 
@@ -18,7 +18,7 @@ void create() {
     set_spell_name("stormrage");
     set_spell_level(([ "cleric" : 8 ]));
     set_spell_sphere("weather");
-    set_spell_domain("storms");
+    set_domains("storms");
     set_syntax("cast CLASS stormrage");
     set_description("In using this spell, the caster calls upon the might of the weather, creating a powerful storm in an "
 "area.  The storm takes several rounds to develop and a few more to recede.  With it comes stinging winds, hail, and "
@@ -30,13 +30,13 @@ void create() {
     set_aoe_message("%^BOLD%^%^BLACK%^(swept up in the throes of a %^RESET%^%^BLUE%^powerful %^BOLD%^%^BLACK%^storm)%^RESET%^");
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
        return "%^BOLD%^%^BLUE%^"+caster->QCN+" lifts both hands, "+
          "chanting a spell of ancient might!%^RESET%^";
 }
 
-int preSpell() 
+int preSpell()
 {
     if(place->query_property("underwater")){
         tell_object(caster,"%^BOLD%^That spell can only be cast in "+
@@ -84,7 +84,7 @@ void do_storm() {
     dmg = sdamage;
 
     switch(random(3)){
-       case 0: 
+       case 0:
           tell_object(caster,"%^BOLD%^%^BLUE%^The swirling winds "+
                 "bending to your will, scouring the area!");
           tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" directs the "+
@@ -109,7 +109,7 @@ void do_storm() {
           count++;
           call_out("do_storm",ROUND_LENGTH);
           break;
-       case 1: 
+       case 1:
           tell_object(caster,"%^BOLD%^%^BLACK%^The swirling winds form "+
                 "dark clouds, releasing "+
                 "%^CYAN%^hail%^BLACK%^ to batter your foes!%^RESET%^");

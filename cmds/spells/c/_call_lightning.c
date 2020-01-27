@@ -11,8 +11,8 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("call lightning");
-    set_spell_level(([ "cleric" : 3,"druid" : 3 ]));
-    set_spell_sphere("weather");
+    set_spell_level(([ "cleric" : 3,"druid" : 3]));
+    set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS call lightning on TARGET");
     set_description("This is a destructive spell that could hurt an opponent very badly!  The higher level the caster is "
         "the more devastating this spell will become.  The spell can now be used anywhere, regardless of weather or if the caster is indoors.");
@@ -45,7 +45,7 @@ int preSpell() {
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
 
     if(!objectp(caster) || !objectp(target))
@@ -56,7 +56,7 @@ void spell_effect(int prof)
 
     place = environment(caster);
 
-    if (environment(target)!=place) 
+    if (environment(target)!=place)
     {
         tell_object(caster,"%^BOLD%^Your target has left the area!");
         dest_effect();
@@ -76,7 +76,7 @@ void spell_effect(int prof)
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

@@ -8,33 +8,35 @@ object cast;
 void create(){
   ::create();
 
-    set_name("spiritual ally");
-    set_id(({"ally","spiritual ally","a mighty ghostly warrior","warrior","ghostly warriro"}));
-    set_short("%^RESET%^%^BOLD%^A %^RESET%^m%^BOLD%^ig%^RESET%^h%^BOLD%^ty g%^RESET%^h%^BOLD%^ost%^RESET%^l%^BOLD%^y wa%^RESET%^r%^BOLD%^ri%^RESET%^o%^BOLD%^r%^RESET%^");
-    set_long("%^BOLD%^Once a %^BLACK%^fierce %^WHITE%^warrior, this ghostly, %^CYAN%^translucent figure %^WHITE%^still rises to the aid of those in need during troubling times. His white eyes shine with %^BLACK%^grim determination %^WHITE%^as he grips tightly to a sword. Even in death he is a strong and proud man, ready to cut down his enemies and to defend the life of his living allies.%^RESET%^");
+    set_name("shamblind mound");
+    set_id(({"shambler","shamblind mound","mound",}));
+    set_short("%^BOLD%^%^GREEN%^sh%^RESET%^%^ORANGE%^a%^BOLD%^%^GREEN%^mbl%^RESET%^%^ORANGE%^i%^BOLD%^%^GREEN%^ng m%^RESET%^%^ORANGE%^ou%^BOLD%^%^GREEN%^nd%^RESET%^");
+    set_long("%^BOLD%^%^GREEN%^This creature appears to be h%^RESET%^%^ORANGE%^ea%^BOLD%^%^GREEN%^ps %^RESET%^%^ORANGE%^o%^BOLD%^%^GREEN%^f r%^RESET%^%^ORANGE%^o%^BOLD%^%^GREEN%^tt%^RESET%^%^ORANGE%^i%^BOLD%^%^GREEN%^ng v%^RESET%^%^ORANGE%^e%^BOLD%^%^GREEN%^g%^RESET%^%^ORANGE%^e%^BOLD%^%^GREEN%^t%^RESET%^%^ORANGE%^a%^BOLD%^%^GREEN%^t%^RESET%^%^ORANGE%^io%^BOLD%^%^GREEN%^n gathered to roughly resemble giant humanoid form. Numerous vines and roots cover its massive and strong body. It walks slowly on its feet, assisting itself with its massive arms. Several fl%^RESET%^%^MAGENTA%^o%^BOLD%^%^GREEN%^w%^RESET%^%^MAGENTA%^e%^BOLD%^%^GREEN%^rs and plants top its head, forming a miniature meadow.%^RESET%^");
     set_hd(4,1);
     set_hp(query_hd()*8);
     set_class("fighter");
-    set_stats("strength",20);
+    set_stats("strength",24);
+    set_stats("constitution",24);
     set_stats("intelligence",8);
     set_stats("wisdom",20);
-    set_stats("dexterity",20);
-    set_race("human");
+    set_stats("charisma",10);
+    set_stats("dexterity",12);
+    set_race("shambler");
     set_damage(2,10);
     set_attacks_num(5);
-    set_nat_weapon_type("slashing");
+    set_nat_weapon_type("bludgeoning");
     set_gender("other");
     set_overall_ac(4);
 
     set_monster_feats(({
-                "opportunity strikes",
-                    "swipe",
+                "thoughness",
+                "regeneration",
             }));
 
     set_alignment(5);
 
-    command("message walks in");
-    command("message walks $D");
+    command("message in %^ORANGE%^shambles in");
+    command("message out %^ORANGE%^shambles $D");
 }
 
 void setup_servant(object caster, int clevel)
@@ -49,33 +51,11 @@ void setup_servant(object caster, int clevel)
     set_mlevel("fighter",clevel);
     set_guild_level("fighter",clevel);
     set_level(clevel);
-    set_hd(clevel,8);
+    set_hd(clevel,14);
     set_max_hp(clevel*16+100);
     set_hp(query_max_hp());
-    set_overall_ac(4-clevel);
+    set_overall_ac(-clevel);
     set_attacks_num(clevel/8+2);
-
-    {
-        string deity = caster->query_diety();
-        string normalizedDeity;
-        object wpn;
-        int ench;
-
-        normalizedDeity = replace_string(deity," ","_");
-        if(deity == "godless")
-            normalizedDeity = "kismet";
-
-        wpn=new("/d/magic/obj/weapons/"+normalizedDeity+"");
-        ench = clevel/7;
-        if(ench < 0)
-            ench = 0;
-        if(ench > 9)
-            ench = 9;
-        wpn->set_property("enchantment",ench);
-        wpn->move(TO);
-        wpn->set_property("monster weapon",1);
-        TO->force_me("wield weapon in left hand");
-    }
 
     call_out("protect",ROUND_LENGTH);
 }

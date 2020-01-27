@@ -50,7 +50,7 @@ void setup_servant(object caster, int clevel)
     set_guild_level("fighter",clevel);
     set_level(clevel);
     set_hd(clevel,8);
-    set_max_hp(clevel*16+100);
+    set_max_hp(clevel*10+100);
     set_hp(query_max_hp());
     set_overall_ac(4-clevel);
     set_attacks_num(clevel/8+2);

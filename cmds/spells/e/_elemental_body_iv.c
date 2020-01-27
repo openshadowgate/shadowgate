@@ -51,6 +51,8 @@ void create()
   earth: +8 strength,     +4 constitution, -2 dexterity,   +6 armor class
   water: +8 constitution, +4 strength,     -2 dexterity,   +6 armor class
 
-This spell won't work together with other augmenting spells such as fox's cunning.");
+This spell won't work together with other augmenting spells such as fox's cunning.
+
+Clerics of elemental domain can change into a specific domain form only.");
     set_syntax("cast CLASS "+query_spell_name()+" on fire|air|earth|water");
 }
