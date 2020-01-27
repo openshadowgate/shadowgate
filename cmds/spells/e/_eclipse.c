@@ -15,7 +15,7 @@ void create()
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS eclipse");
     set_monk_way("way of the shadow");
-    set_description("With this powerful ritual a mage moves Tyrannos in front of the sun, temporarily turning day into the night. The heavenly body then will stay in the sky for a long while, but eventually will return back to its orbit.");
+    set_description("With this powerful ritual, a caster moves Tyrannos in front of the sun, temporarily turning day into night. The heavenly body will stay in the sky for a long while, but eventually it will return back to its orbit.");
     set_helpful_spell(1);
     evil_spell(1);
     set_components(([
@@ -42,7 +42,7 @@ int preSpell()
     }
     if((int)ASTRONOMY_D->query_eclipse())
     {
-        tell_object(caster, "%^BOLD%^%^BLACK%^There is already ongoing %^WHITE%^eclipse%^BLACK%^!%^RESET%^");
+        tell_object(caster, "%^BOLD%^%^BLACK%^There is already an ongoing %^WHITE%^eclipse%^BLACK%^!%^RESET%^");
         return 0;
     }
     if((string)EVENTS_D->query_time_of_day() == "night")
@@ -62,7 +62,7 @@ void spell_effect(int prof)
     /*     mark->move(caster); */
     /* } */
     caster->set_property("eclipse_caused",time());
-    tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and your hands into the sky, you notice Tyrannos starts to move to stand in front of the sun!%^RESET%^");
+    tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and you throw your hands toward the sky, you notice Tyrannos starts to move to stand in front of the sun!%^RESET%^");
     tell_room(place,"%^BOLD%^%^WHITE%^As "+caster->QCN+"'s chanting grows louder, up in the sky you see Tyrannos moving!",caster);
     message("info","%^BOLD%^%^BLACK%^You see the moon Tyrannos moving in front of the sun up in the sky!%^BOLD%^%^BLACK%^\n",filter_array(users(),(:!(environment($1)->query_property("indoors")):)));
     call_out("step_two",ROUND_LENGTH);

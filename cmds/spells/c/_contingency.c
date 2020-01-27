@@ -11,7 +11,7 @@ void create() {
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS contingency on SPELL_NAME [on SPELL_ARGS]");
-    set_description("This spell allows you to put a spell in reserve, called upon at any time with the command <now>. The target of the reserved spell is always the caster, but arguments can be specified for spells that require them. You must carry a likeness of yourself, usually a small statue, when casting this spell.
+    set_description("This spell allows you to put a spell in reserve, and call upon it at any time with the command <now>. The target of the reserved spell is always the caster, but arguments can be specified for spells that require them. You must carry a likeness of yourself, usually a small statue, when casting this spell.
 
 Example of usage:  cast contingency on teleport on LOCATION");
     set_verbal_comp();
@@ -29,7 +29,7 @@ string query_cast_string() {
 
 int preSpell() {
   if (!present("statue of "+capitalize(caster->query_name()),caster)) {
-    tell_object(caster,"You need to have a likeness of yourself to cast upon");
+    tell_object(caster,"You need to have a likeness of yourself to cast upon.");
     return 0;
   }
   return 1;
@@ -57,7 +57,7 @@ void spell_effect(int prof) {
   spell = replace_string(spell," ","_");
   spell = "/cmds/spells/"+spell[0..0]+"/_"+spell;
   if (!file_exists(spell+".c")) {
-    tell_object(caster,"That spell does not exist");
+    tell_object(caster,"That spell does not exist.");
     dest_effect();
     return;
   }
@@ -86,7 +86,7 @@ void spell_effect(int prof) {
   cont->set_spell(spell);
   cont->set_args(args);
   cont->move(caster);
-  tell_room(place,"%^BOLD%^%^RED%^You hear a sucking noise in the back ground as if some magic has been sucked into a bottle.");
+  tell_room(place,"%^BOLD%^%^RED%^You hear a sucking noise in the background as if some magic has been sucked into a bottle.");
   tell_object(caster,"Type, <now> to activate");
   // Changed by Garrett to actually be dismissable and dispellable.
   // The spell is WAY overpowered if it's not dispellable.

@@ -14,7 +14,7 @@ void create() {
     set_spell_sphere("conjuration_summoning");
     set_mystery("flame");
     set_syntax("cast CLASS conjure elemental on water|fire|earth|air");
-    set_description("This spell will summon an elemental for you to command.  Such creatures are native to different planes, and existence in this plane is extremely painful for them.  They resent being summoned here and hate the mage who summoned them.  There is a chance that the caster will loose control over the creature and the creature will attack him/her immediately and viciously.
+    set_description("This spell will summon an elemental for you to command. Such creatures are native to different planes, and existence in this plane is extremely painful for them. They resent being summoned here and hate the mage who summoned them. There is a chance that the caster will loose control over the creature and the creature will attack him/her immediately and viciously.
 To command elemental, use %^ORANGE%^<command elemental to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^.
 To command lost elemental to follow you once again, use %^ORANGE%^<command elemental to follow>%^RESET%^.
 To dismiss elemental use %^ORANGE%^<dismiss elemental>%^RESET%^.");
@@ -33,20 +33,20 @@ string query_cast_string() {
     switch (arg) {
       case "water":
       return "%^BOLD%^%^CYAN%^"+caster->QCN+" drops a bit of sand on the ground and "
-      +"pours a small abount of water on top. As "+caster->QS+" chants over the "
+      +"pours a small amount of water on top. As "+caster->QS+" chants over the "
       +"mixture it starts to sizzle.";
       break;
 
       case "fire":
       return "%^BOLD%^%^YELLOW%^"+caster->QCN+" crushes a bit of phosphorus and "
       +"sulfur together in a small bowl. "+capitalize(caster->QS)+" then, with a single "
-      +"gesture causes a small flame to appear near the mixture. Then with a loud scream the "
+      +"gesture, causes a small flame to appear near the mixture. With a loud scream the "
       +"mage throws both fire and bowl crashing to the ground with an enormous explosion.";
       break;
 
       case "earth":
       return "%^BOLD%^%^RED%^"+caster->QCN+" starts to model a bit of clay. "
-      +"A slightly humanoid form is taken by the clay. "+capitalize(caster->QS)+
+      +"A slightly humanoid form made of the clay begins to form. "+capitalize(caster->QS)+
       " raises the figure high in the air and screams out the arcane language of mages "
       +"then crushes the figure in "+caster->QP+" hand.";
       break;

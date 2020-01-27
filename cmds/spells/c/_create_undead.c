@@ -17,9 +17,9 @@ void create()
     set_domains("evil");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create undead");
-    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something else, more potent and powerful, to serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel new shell is twisted and changed forever.
+    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever.
 
-Unlike animate dead spell, this spell allows you to go over your undead poolsize unless you are already exhausted it.
+Unlike the animate dead spell, this spell allows you to go over your undead poolsize unless you already exhausted it.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -51,7 +51,7 @@ void spell_effect(int prof)
 
     if((int)caster->query_property("raised")>clevel)
     {
-        tell_object(caster,"%^BOLD%^%^BLACK%^PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE%^RESET%^");
+        tell_object(caster,"%^BOLD%^%^BLACK%^A PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE!%^RESET%^");
         TO->remove();
         return;
     }
@@ -60,7 +60,7 @@ void spell_effect(int prof)
     corpses=filter_array(corpses,(:(int)$1->is_corpse()==1:));
     if(!sizeof(corpses))
     {
-        tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUCK OUT FIRST%^RESET%^%^RESET%^");
+        tell_object(caster,"%^RESET%^%^BOLD%^%^BLACK%^LIFE'S PUTRID FIRE %^WHITE%^MUS%^BLACK%^T %^WHITE%^BE%^BLACK%^ SNUFFED OUT FIRST!%^RESET%^%^RESET%^");
         TO->remove();
         return;
     }

@@ -14,7 +14,7 @@ void create()
     set_spell_sphere("healing");
     set_syntax("cast CLASS cleanse disease on TARGET");
     set_description("This spell will attempt to cleanse any diseases present on the TARGET. Success is based on "+
-    "the level of the caster versus the difficult of the particular disease.");
+    "the level of the caster versus the difficulty of the particular disease.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -31,8 +31,8 @@ string query_cast_string()
          cast = "%^CYAN%^"+YOU+" starts to intone a long "+
 		" incantation!";
     } else {
-         cast = "%^CYAN%^"+YOU+" starts to vibrate and a long "+
-		" incantation sounds!";
+         cast = "%^CYAN%^"+YOU+" starts to vibrate and speaks "+
+		" a long incantation!";
     }
 }
 

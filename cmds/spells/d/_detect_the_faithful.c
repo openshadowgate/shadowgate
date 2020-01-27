@@ -12,7 +12,7 @@ void create()
     set_spell_sphere("divination");
     set_syntax("cast CLASS detect the faithful");
     set_damage_desc("reveals presence of members of your faith");
-    set_description("You can detect presence of other worshipers of your deity.");
+    set_description("You can detect the presence of other worshippers of your deity.");
     set_verbal_comp();
     set_somatic_comp();
 }
@@ -30,7 +30,7 @@ void spell_effect(int prof)
     if(sizeof(peeps))
         tell_object(caster,"%^RED%^There are faithful present.%^RESET%^");
     else
-        tell_object(caster,"%^RED%^No faithful are present present.%^RESET%^");
+        tell_object(caster,"%^RED%^No faithful are currently present.%^RESET%^");
 
     spell_successful();
     dest_effect();

@@ -10,7 +10,7 @@ create() {
     set_affixed_spell_level(4);
     set_spell_sphere("healing");
     set_syntax("cast CLASS cure critical wounds on TARGET");
-    set_description("This pray will heal large amounts of damage and wounds to the target.  As the caster's power grows, "
+    set_description("This spell will heal large amounts of damage and wounds on the target. As the caster's power grows, "
 "he will find he is able to heal more damage.");
     set_verbal_comp();
     set_somatic_comp();

@@ -16,7 +16,7 @@ void create()
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS delayed fireball on TARGET");
     set_damage_desc("delayed fire");
-    set_description("The spell functions much like fireball, but at a greater potency, and as such takes more time to build its blast.");
+    set_description("This spell functions much like fireball, but at a greater potency. As such, it takes more time to build its blast.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -27,7 +27,7 @@ void create()
 
 string query_cast_string()
 {
-    tell_room(place, "%^RED%^"+caster->QCN+" mutters some syllables while raising a hand, an orb of fire grows in it.");
+    tell_room(place, "%^RED%^"+caster->QCN+" mutters some syllables while raising a hand, and an orb of fire begins to grow in it.");
     return "display";
 }
 
@@ -64,8 +64,8 @@ void zapper()
 
     if(!objectp(target) || !objectp(place) || !present(target, place))
     {
-        tell_object(caster, "%^BLUE%^With the lack of target the orb dissipates.");
-        tell_room(place, "%^BLUE%^With the lack of target the orb in "+YOU+"'s hands dissipates.",({caster}));
+        tell_object(caster, "%^BLUE%^With the lack of a target the orb dissipates.");
+        tell_room(place, "%^BLUE%^With the lack of a target, the orb in "+YOU+"'s hands dissipates.",({caster}));
         dest_effect();
         return;
     }
@@ -77,7 +77,7 @@ void zapper()
     if (clevel < 20) size = "flood";
 
     tell_room(place,"%^BOLD%^%^RED%^A blazing maelstrom of %^RESET%^%^RED%^flame %^BOLD%^%^RED%^bursts forth from the orb toward "+HIM+"!%^RESET%^",target);
-    tell_object(target,"%^BOLD%^%^RED%^A blazing maelstrom of %^RESET%^%^RED%^flame %^BOLD%^%^RED%^bursts forth fro
+    tell_object(target,"%^BOLD%^%^RED%^A blazing maelstrom of %^RESET%^%^RED%^flame %^BOLD%^%^RED%^bursts forth from
 m "+YOU+"'s orb toward you!%^RESET%^");
 
     inven = all_living(environment(caster));

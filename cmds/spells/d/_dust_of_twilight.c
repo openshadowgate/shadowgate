@@ -12,7 +12,7 @@ void create() {
     set_spell_sphere("conjuration_summoning");
     set_mystery("darkness");
     set_syntax("cast CLASS dust of twilight");
-    set_description("A shower of iridescent black particles clings to and extinguishe all light sources in the room. Creatures in the area must make a save or become fatigued for 1d20 rounds.");
+    set_description("A shower of iridescent black particles clings to and extinguishes all light sources in the room. Creatures in the area must make a save or become fatigued for 1d20 rounds.");
     set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
@@ -32,7 +32,7 @@ void spell_effect(int prof)
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 
-    tell_room(place,"%^BOLD%^%^BLACK%^As the dust settles on everything in the place it becomes dark.%^RESET%^");
+    tell_room(place,"%^BOLD%^%^BLACK%^It becomes dark as the dust settles over everything.%^RESET%^");
     foreach(attackers in attackers)
     {
         if(!objectp(attacker))

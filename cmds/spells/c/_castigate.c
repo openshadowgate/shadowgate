@@ -11,7 +11,7 @@ void create() {
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS castigate on TARGET");
     set_damage_desc("cowering, shaken on save");
-    set_description("You compel the target to beg for forgiveness. On a failed save, the target cowers with fear. On a successful save, it is shaken for 1 round.  A creature who worships the same god as you takes a penalty on its saving shrow.");
+    set_description("You compel the target to beg for forgiveness. On a failed save, the target cowers with fear. On a successful save, the target is shaken for one round. A creature who worships the same god as you takes a penalty on its saving throw.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -30,7 +30,7 @@ void spell_effect(int prof){
     if(!objectp(target))
         dest_effect();
 
-    caster->force_me("yell %^RED%^%^BOLD%^BEG FORGIVENESS.");
+    caster->force_me("yell %^RED%^%^BOLD%^BEG FORGIVENESS!");
 
     if(mind_immunity_damage(target))
     {
@@ -48,15 +48,15 @@ void spell_effect(int prof){
 
     if(do_save(target,bonus))
     {
-        tell_object(target, "%^RESET%^%^RED%^You fight compulsion to fall onto your knees.%^RESET%^");
-        tell_room(place,"%^RESET%^%^RED%^"+target->QCN+" grimmaces and shakes "+target->QP+" head, fighting off the mental attack.%^RESET%^",target);
+        tell_object(target, "%^RESET%^%^RED%^You fight the compulsion to fall onto your knees.%^RESET%^");
+        tell_room(place,"%^RESET%^%^RED%^"+target->QCN+" grimaces and shakes "+target->QP+" head, fighting off the mental attack.%^RESET%^",target);
 
         "/std/effect/status/shaken"->apply_effect(target,roll_dice(1,6));
     }
     else
     {
-        tell_object(target,"%^BOLD%^%^RED%^You drop to your knees, cowering, and begging for forgiveness.%^RESET%^");
-        tell_room(place, "%^BOLD%^%^RED%^Sheer horror contorts "+target->QCN+"'s face as "+target->QS+" drop onto the knees and beg for forgiveness.%^RESET%^",target);
+        tell_object(target,"%^BOLD%^%^RED%^You drop to your knees, cowering, and beg for forgiveness.%^RESET%^");
+        tell_room(place, "%^BOLD%^%^RED%^Sheer horror contorts "+target->QCN+"'s face as "+target->QS+" drops to the floor and begs for forgiveness.%^RESET%^",target);
       "/std/effect/status/cowering"->apply_effect(target,roll_dice(1,6));
     }
 

@@ -33,7 +33,7 @@ void create(){
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS elemental aura on [acid|cold|electricity|fire]");
     set_damage_desc("based on argument");
-    set_description("This spell surrounds caster with elemental energy that will harm everything that attacks them. Quick enough enemies might dodge out of some of the damage.");
+    set_description("This spell surrounds the caster with elemental energy that will harm everything that attacks them. Quick enough enemies might evade some of the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
@@ -111,7 +111,7 @@ void execute_attack(){
     {
         define_base_damage(0);//reroll each turn
         tell_room(place,colormap[element]+capitalize(element)+" around "+caster->QCN+" scorches "+caster->QP+" enemies!",({caster,target}));
-        tell_object(caster,colormap[element]+"Elemental aura scorches your enemies!");
+        tell_object(caster,colormap[element]+"The elemental aura scorches your enemies!");
 
         define_base_damage(0);
 
@@ -119,7 +119,7 @@ void execute_attack(){
             dam = sdamage;
             if(do_save(attackers[i],0))
                 dam/=2;
-            tell_object(attackers[i],colormap[element]+"You are burned by the shield of flames as you strike "
+            tell_object(attackers[i],colormap[element]+"You are burned by a shield of flames as you strike "
                         ""+caster->QCN+"!");
             damage_targ(attackers[i],attackers[i]->return_target_limb(),dam,element);
         }
@@ -131,8 +131,8 @@ void execute_attack(){
 void dest_effect(){
     remove_call_out("room_check");
     if(objectp(caster)){
-        tell_room(ENV(caster),colormap[element]+"Elemental aura around "+caster->QCN+" fades away.",caster);
-        tell_object(caster,colormap[element]+"Elemental aura around you fades away.",caster);
+        tell_room(ENV(caster),colormap[element]+"The elemental aura around "+caster->QCN+" fades away.",caster);
+        tell_object(caster,colormap[element]+"The elemental aura around you fades away.",caster);
         caster->remove_property("elemental aura");
         caster->remove_property_value("added short",({shortmap[element]}));
     }

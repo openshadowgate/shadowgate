@@ -13,7 +13,7 @@ void create()
     set_spell_sphere("divination");
     set_syntax("cast CLASS deadeyes lore");
     set_damage_desc("half of clevel survival skill");
-    set_description("While subject to this spell, you take upon yourself the mantle of the hunter, channeling the insights of the spirits of the wild..");
+    set_description("While subject to this spell, you take upon yourself the mantle of the hunter, channeling the insights of the spirits of the wild.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -25,7 +25,7 @@ int preSpell()
     if (!target) target = caster;
     if(target->query_property("deadyes_lore"))
     {
-        tell_object(caster,"The target is already under the influence of similar effect");
+        tell_object(caster,"The target is already under a similar influence.");
         return 0;
     }
     return 1;
@@ -37,7 +37,7 @@ spell_effect()
 
     spell_successful();
 
-    tell_room(place,"%^GREEN%^"+caster->QCN+" touches own eyes, chanting in a low undertones.%^RESET%^");
+    tell_room(place,"%^GREEN%^"+caster->QCN+" touches own eyes, chanting in low undertones.%^RESET%^");
 
     bonus=clevel/2+1;
     target->add_skill_bonus("survival",bonus);
@@ -53,7 +53,7 @@ void dest_effect()
     {
         target->add_skill_bonus("survival",-bonus);
         target->remove_property_value("spelled", ({TO}) );
-        tell_object(target,"%^CYAN%^Insights of the hunt retreat.%^RESET%^");
+        tell_object(target,"%^CYAN%^Your insights of the hunter retreat.%^RESET%^");
         target->remove_property("deadeyes_lore");
     }
     ::dest_effect();

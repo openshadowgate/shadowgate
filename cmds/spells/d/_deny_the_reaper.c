@@ -11,7 +11,7 @@ void create()
     set_spell_level(([ "mage" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS deny the reaper on TARGET");
-    set_description("This spell will send out necromantic energies to snatch a dead person away from the afterlife. The deceased will be returned to the site of death and placed into its body. Some of the negative energy will be spend to slightly restore it, but the deceased will return significantly weakened. A successfully revived person will be barely alive and need significant healing. This spell requires a fresh body of the deceased to function.
+    set_description("This spell will send out necromantic energies to snatch a dead person away from the afterlife. The deceased will be returned to the site of death and placed into its body. Some of the negative energy will be spent to slightly restore it, but the deceased will return significantly weakened. A successfully revived person will be barely alive and need significant healing. This spell requires a fresh body of the deceased to function.
 
 The TARGET must be the recognized name of the dead player or their corpse. You don't need to know the name to use this spell on a corpse.");
     set_verbal_comp();
@@ -84,7 +84,7 @@ void spell_effect(int prof)
     }
 
     tell_object(caster,"%^CYAN%^You feel the power of your spellcraft contact the familiar energies of "
-        +targ->QCN+"'s soul, and know that "+targ->QP+" life is in "+targ->QP+" own hands now.%^RESET%^");
+        +targ->QCN+"'s soul, and you know that "+targ->QP+" life is in "+targ->QP+" own hands now.%^RESET%^");
 
     tell_room(environment(caster),"%^CYAN%^The power of "+caster->QCN+"'s spell flows through the area as "+caster->QS+" "
         "tries to bring "+targ->QCN+" back to life!%^RESET%^",caster);
@@ -95,7 +95,7 @@ void spell_effect(int prof)
     targ->set("RaisingExpLoss",0);
     targ->set("RaisingType","deny the reaper");
 
-    tell_object(targ,"%^RESET%^%^WHITE%^%^BOLD%^You can feel a strong pull on your soul.  You sense "
+    tell_object(targ,"%^RESET%^%^WHITE%^%^BOLD%^You can feel a strong pull on your soul. You sense "
         "tendrils of arcane energy trying to steal you away from the afterlife!\n"
         "Type %^ORANGE%^<accept>%^WHITE%^ to return to life, or %^ORANGE%^<cancel>%^WHITE%^.%^RESET%^");
 

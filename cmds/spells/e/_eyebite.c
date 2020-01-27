@@ -20,7 +20,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS eyebite on TARGET");
     set_damage_desc("sickened, panicked and comatose");
-    set_description("With this spell caster imbues her eyes with dread power, glancing upon her enemies she curses them. This curse works its worst on weaker enemies, paralyzing them in fear. The target creature may become sickened, panicked or even comatose. Effects stack as the power difference increases. A successful will save will negate the effect.");
+    set_description("With this spell, the caster imbues her eyes with dread power, glancing upon her enemies as she curses them. This curse works its worst on weaker enemies, paralyzing them in fear. The target creature may become sickened, panicked or even comatose. Effects stack as the power difference increases. A successful will save will negate the effect.");
     set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
@@ -72,7 +72,7 @@ void spell_effect(int prof) {
     {
         tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you faint!%^RESET%^");
         tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" faints!%^RESET%^",target);
-        target->set_unconscious(roll_dice(1,6),"You're unconcious!");
+        target->set_unconscious(roll_dice(1,6),"You're unconscious!");
     }
     addSpellToCaster();
     call_out("dest_effect",duration);

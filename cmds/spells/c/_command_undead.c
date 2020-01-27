@@ -9,7 +9,7 @@ void create()
     set_spell_level(([ "mage" : 2, ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS command undead on TAGET to COMMAND");
-    set_description("You intone a spelled command target has no choice but obey. If targets succeeds the save or isn't undead it will attack the caster.");
+    set_description("You intone a spelled command that the target has no choice but to obey. If the target succeeds the save or isn't undead, they will attack the caster.");
     set_save("will");
     mental_spell(1);
     set_verbal_comp();
@@ -42,8 +42,8 @@ void spell_effect()
        !targ->is_undead()||
        target->query_property("no dominate",1))
     {
-        tell_room(environment(target),"Outraged at "+caster->QCN+" for"+caster->QP+" attempt at mind control, "+target->QCN+" attacks"+caster->QO+"!", ({target, caster}) );
-        tell_object(target,"Outraged at "+caster->QCN+" for "+caster->QP+"attempt at mind control, you attack "+caster->QO+"!");
+        tell_room(environment(target),"Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, "+target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
+        tell_object(target,"Outraged at "+caster->QCN+" for "+caster->QP+" attempt at mind control, you attack "+caster->QO+"!");
         tell_object(caster,""+target->QCN+" attacks you, outraged at you for your attempt at mind control!" );
         spell_kill(target, caster);
         return;

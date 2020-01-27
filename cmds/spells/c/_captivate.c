@@ -14,7 +14,7 @@ void create()
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS captivate");
     set_damage_desc("stops combat");
-    set_description("With this spell, caster uses her enchanted speech to captivate and pacify everyone present. This spell has additional chance to succeed and may work even on a strong-willed.");
+    set_description("With this spell, the caster uses her enchanted speech to captivate and pacify everyone present. This spell may even work on the strong of will.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");

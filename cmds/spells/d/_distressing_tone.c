@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS distressing tone");
     set_damage_desc("mass sickening");
-    set_description("You spell a low tone that makes everyone present briefly sickened.");
+    set_description("You hum a low tone that makes everyone present briefly sickened.");
     set_save("fort");
     splash_spell(1);
 }
@@ -27,12 +27,12 @@ void spell_effect(int prof){
 
 
     if(!sizeof(attackers)){
-        tell_object(caster,"%^CYAN%^Tonal vibrations affect nobody.%^RESET%^");
+        tell_object(caster,"%^CYAN%^The tonal vibrations do not affect anyone.%^RESET%^");
         dest_effect();
         return;
     }
 
-    tell_room(place,"%^CYAN%^Sickening low tone hits everyone present.%^RESET%^");
+    tell_room(place,"%^CYAN%^A sickening low tone hits everyone present.%^RESET%^");
 
     for(i=0;i<sizeof(attackers);i++)
     {

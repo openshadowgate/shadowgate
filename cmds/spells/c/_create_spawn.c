@@ -11,7 +11,7 @@ void create()
     set_spell_level(([ "innate" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create spawn");
-    set_description("With this spell a vampire can use recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead do, but is unique to vampires.
+    set_description("With this spell a vampire can use the recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead does, but it is unique to vampires.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -24,7 +24,7 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^BLACK%^A vampire knight forms itself of the mist.%^RESET%^";
+    return "%^BOLD%^%^BLACK%^A vampire knight forms itself out of the mist.%^RESET%^";
 }
 
 string undead_to_raise()

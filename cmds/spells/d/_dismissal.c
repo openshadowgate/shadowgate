@@ -8,7 +8,7 @@ void create() {
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS dismissal");
     set_damage_desc("destroys spelled creatures");
-    set_description("This spell forces summoned creatures that attack you to be dismissed.");
+    set_description("This spell forces the summoned creatures that attacked you to be dismissed.");
 }
 
 void spell_effect(int prof){
@@ -19,7 +19,7 @@ void spell_effect(int prof){
 
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases waves of arcane energies.%^RESET%^");
     if(!sizeof(attackers)){
-        tell_object(caster,"%^BOLD%^%^CYAN%^Waves fail to touch anything.%^RESET%^");
+        tell_object(caster,"%^BOLD%^%^CYAN%^The waves fail to touch anything.%^RESET%^");
         dest_effect();
         return;
     }
