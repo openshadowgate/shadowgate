@@ -9,7 +9,7 @@ void create() {
     set("long", "This is a large cloth sack. You could put things in it.\n");
     set_value(2);
     set_cointype("silver");
-    set_max_internal_encumbrance(30);
+    set_max_internal_encumbrance(40);
 }
 
 int is_light_opaque() { return 1;}
