@@ -9,9 +9,9 @@ void create(){
     ::create();
     set_author("nienne");
     set_spell_name("fire shield");
-    set_spell_level(([ "mage" : 4, "cleric" : 3 ]));
+    set_spell_level(([ "mage" : 4, "cleric" : 5 ]));
     set_spell_sphere("invocation_evocation");
-    set_spell_domain("fire");
+    set_domains("fire");
     set_syntax("cast CLASS fire shield");
     set_description("This spell will surround the caster's body in a roaring shield of flames.  It grants the caster a "
 "slight bonus to their armor class, and any opponent striking the caster must make a saving throw or take damage from the "

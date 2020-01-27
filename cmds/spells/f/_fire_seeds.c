@@ -17,7 +17,8 @@ void damage();
 void create() {
     ::create();
     set_spell_name("fire seeds");
-    set_spell_level(([ "druid" : 6, "oracle" : 6 ]));
+    set_spell_level(([ "druid" : 6, "oracle" : 6, "cleric":6]));
+    set_domains("fire");
     set_mystery("flame");
     set_spell_sphere("fire");
     set_syntax("cast CLASS fire seeds on TARGET");

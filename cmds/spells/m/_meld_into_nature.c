@@ -10,13 +10,12 @@ inherit SPELL;
 object invisob;
 
 
-create() 
+create()
 {
     ::create();
     set_spell_name("meld into nature");
-    set_spell_level(([ "cleric" : 4, "ranger" : 4, "druid" : 3 ]));
+    set_spell_level((["ranger" : 4, "druid" : 3 ]));
     set_spell_sphere("illusion");
-    set_spell_domain("plant");
     set_syntax("cast CLASS meld into nature");
     set_description("This spell will allow you to hide yourself in the land around you magically. It will not function within urban areas.");
     set_verbal_comp();
@@ -25,16 +24,16 @@ create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     if(objectp(caster)) { return "%^GREEN%^"+caster->QCN+" begins to pull the nature of the world around "+caster->QO; }
     return "";
 }
 
 
-int preSpell() 
+int preSpell()
 {
-    if(lower_case((string)PLACE->query_terrain()) == "city" || lower_case((string)PLACE->query_terrain()) == "village") 
+    if(lower_case((string)PLACE->query_terrain()) == "city" || lower_case((string)PLACE->query_terrain()) == "village")
     {
         tell_object(CASTER,"You need to be within the wilds to wrap yourself in the nature you love so much.");
         return 0;
@@ -43,7 +42,7 @@ int preSpell()
 }
 
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     if(!objectp(caster))
     {
@@ -58,9 +57,9 @@ spell_effect(int prof)
 }
 
 
-void targ_vanish() 
+void targ_vanish()
 {
-    if(!objectp(target)) 
+    if(!objectp(target))
     {
         dest_effect();
         return;
@@ -71,7 +70,7 @@ void targ_vanish()
     invisob->set_property("spelled", ({TO}) );
     invisob->move_is_ok(1);
     invisob->move(target);
-    if(!objectp(invisob)) 
+    if(!objectp(invisob))
     {
         dest_effect();
         return;
@@ -81,7 +80,7 @@ void targ_vanish()
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
    // putting in safeguard to prevent further player bugs. Nienne, 03/09
     if(objectp(invisob)) invisob->show_up();

@@ -8,12 +8,13 @@ inherit SPELL;
 string message_out,message_in;
 
 
-void create() 
+void create()
 {
     ::create();
     set_author("ares");
     set_spell_name("air walk");
-    set_spell_level(([ "druid" : 4 ]));
+    set_spell_level(([ "druid" : 4, "cleric":4]));
+    set_domains("air");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS air walk on TARGET");
     set_description("This spell will allow the target to walk on the air as if it were perfectly level ground.  "
@@ -25,19 +26,19 @@ void create()
 }
 
 
-int preSpell() 
+int preSpell()
 {
-    if(!objectp(target))    
+    if(!objectp(target))
     {
         tell_object(caster,"This spell requires a target.");
         return 0;
     }
-	if(target->query_in_vehicle()) 
+	if(target->query_in_vehicle())
     {
 		tell_object(caster,"You can't cast this on a mounted target.");
 		return 0;
 	}
-    if((int)target->query_property("flying")) 
+    if((int)target->query_property("flying"))
     {
         tell_object(caster,"Your target is already walking on air!");
         return 0;
@@ -46,7 +47,7 @@ int preSpell()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^CYAN%^You feel the wind flow all around you as you call on the elements.");
     tell_room(place,"%^BOLD%^%^CYAN%^The wind begins to pick up all around "+caster->QCN+".",caster);
@@ -54,7 +55,7 @@ string query_cast_string()
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 10) * clevel;

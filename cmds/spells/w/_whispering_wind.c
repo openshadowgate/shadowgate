@@ -11,7 +11,7 @@ void create()
     set_spell_name("whispering wind");
     set_spell_level(([ "cleric" : 1, "bard" : 2, "mage" : 2, "inquisitor" : 2]));
     set_spell_sphere("divination");
-    set_spell_domain("air");
+    set_domains("air");
     set_syntax("cast CLASS whispering wind on TARGET with the message <message>");
     set_description("This spell will allow the caster to attempt to send a brief message on the winds from them to their target.  The caster has no way of knowing if the target has heard their message.");
     set_verbal_comp();

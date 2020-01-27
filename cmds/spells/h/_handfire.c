@@ -12,7 +12,7 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("handfire");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("elemental fire");
     set_spell_domain("fire");
     set_syntax("cast CLASS handfire on TARGET");
@@ -35,7 +35,7 @@ int preSpell(){
 
 string query_cast_string(){
     tell_room(place, "%^RED%^Crimson flames spiral around "+caster->QCN+"'s"+
-              " hand as "+caster->QS+" calls for aid!",caster);    
+              " hand as "+caster->QS+" calls for aid!",caster);
     tell_object(caster,"%^RED%^Crimson flames spiral around your hand as you"+
                 " call for aid.%^RESET%^");
     return "display";

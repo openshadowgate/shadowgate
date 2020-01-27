@@ -17,7 +17,7 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("flameburst");
-    set_spell_level(([ "cleric" : 7 ]));
+    set_spell_level(([ "classless" : 7 ]));
     set_spell_sphere("elemental fire");
     set_spell_domain("fire");
     set_syntax("cast CLASS flameburst on TARGET");
@@ -60,17 +60,17 @@ string query_cast_string()
 
 
 void spell_effect(int prof)
-{ 
+{
     string party;
-    if(!objectp(caster)) { dest_effect(); return; }    
+    if(!objectp(caster)) { dest_effect(); return; }
     party_members = ob_party(caster);
 
     spell_successful();
     tell_object(caster,"%^RED%^You send forth a tiny ball of fire straight at "+target->QCN+"!");
     tell_object(target,"%^RED%^"+caster->QCN+" sends a tiny ball of fire straight towards you!");
     tell_room(place,"%^RED%^"+caster->QCN+" sends a tiny ball of fire straight at "+target->QCN+"!",({caster,target}));
-    
-    if(!do_save(target,0)) 
+
+    if(!do_save(target,0))
     {
         tell_object(caster,"%^RED%^Your fireball strikes "+target->QCN+" right in the chest and "
             "burrows under the skin!");
@@ -121,7 +121,7 @@ void execute_attack()
     max_hp = (int)target->query_max_hp();
     damage = (max_hp) - roll_dice(3,10); // should almost kill them if they don't dispel it in such a long time
     if(damage > 700) damage = 700;
-    
+
     if(do_save(target,0))
     {
         tell_object(target,"%^YELLOW%^You gasp in relief as the firey burning in your chest subsides!");
@@ -195,7 +195,7 @@ void execute_attack()
                     damage_targ(living[i],"torso",damage,"fire");
                     continue;
                 }
-                if(!do_save(living[i],0)) 
+                if(!do_save(living[i],0))
                 {
                     tell_object(living[i],"%^BOLD%^%^RED%^You are hit full force by the firey blast when "
                         ""+target->QCN+"'s chest explodes!");

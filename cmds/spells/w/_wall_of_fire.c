@@ -13,8 +13,9 @@ string *dir_listing(string tempfil);
 void create() {
     ::create();
     set_spell_name("wall of fire");
-    set_spell_level(([ "mage" : 4, "monk" : 13, "oracle" : 4]));
+    set_spell_level(([ "mage" : 4, "monk" : 13, "oracle" : 4, "cleric":4]));
     set_mystery(({"battle","flame"}));
+    set_domains("fire");
     set_spell_sphere("invocation_evocation");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS wall of fire [on <exit>]");
@@ -31,7 +32,7 @@ void create() {
       "mage" : ([ "phosphorus":1, ]),
     ]));
     set_helpful_spell(1);
-    traveling_spell(1);
+    traveling_spell(1); // For damage calculations only
 }
 
 string query_cast_string() {

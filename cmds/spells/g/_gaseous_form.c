@@ -8,7 +8,8 @@ void create()
 {
     ::create();
     set_spell_name("gaseous form");
-    set_spell_level(([ "monk" : 9, "assassin" : 1 ]));
+    set_spell_level(([ "monk" : 9, "assassin" : 1, "cleric":3]));
+    set_domains("air");
     set_spell_sphere("alteration");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS gaseous form");

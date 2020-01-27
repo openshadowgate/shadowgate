@@ -9,7 +9,7 @@ void dest_effect();
 void create() {
     ::create();
     set_spell_name("thorn spray");
-    set_spell_level(([ "cleric" : 7 ]));
+    set_spell_level(([ "classless" : 7 ]));
     set_spell_sphere("plant");
     set_spell_domain("plant");
     set_syntax("cast CLASS thorn spray on TARGET");
@@ -19,7 +19,7 @@ void create() {
     set_target_required(1);
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int num, numdarts, i;
 
@@ -34,7 +34,7 @@ void spell_effect(int prof)
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

@@ -11,7 +11,8 @@ void create()
 {
     ::create();
     set_spell_name("fireball");
-    set_spell_level(([ "mage" : 3, "monk" : 7, "oracle" : 3]));
+    set_spell_level(([ "mage" : 3, "monk" : 7, "oracle" : 3, "cleric":3]));
+    set_domains("fire");
     set_mystery("flame");
     set_spell_sphere("invocation_evocation");
     set_monk_way("way of the elements");
