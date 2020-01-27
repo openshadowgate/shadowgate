@@ -836,6 +836,9 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
         case "wood":
             skill_names += ({ "craft, woodworker" });
             break;
+        case "weapon":
+            skill_names += ({ "craft, weaponsmith" });
+            break;
         }
     } else{
         foreach(repair_type in repair_types)
@@ -855,6 +858,9 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
                 break;
             case "armorsmith":
                 skill_names += ({ "craft, armorsmith" });
+                break;
+            case "weaponsmith":
+                skill_names += ({ "craft, weaponsmith" });
                 break;
             }
         }

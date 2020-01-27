@@ -25,4 +25,5 @@ void create(){
     set_value(3);
     set_rate_of_fire(2);
     set_weapon_speed(2);
+    set_property("repairtype",({"woodwork", "weaponsmith"}));
 }

@@ -20,5 +20,6 @@ create() {
    set_wc(1,10);
    set_large_wc(1,10);
    set_ammo_type("heavy quarrel");
+   set_property("repairtype",({"woodwork", "weaponsmith"}));
 }
 int is_arrows(){return 1;}

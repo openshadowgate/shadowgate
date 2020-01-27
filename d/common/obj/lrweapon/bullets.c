@@ -19,4 +19,5 @@ void create(){
    set_wc(1,4);
    set_large_wc(1,4);
    set_ammo_type("bullet");
+   set_property("repairtype",({"woodwork", "weaponsmith"}));
 }
