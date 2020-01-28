@@ -167,15 +167,41 @@ int post_message_ingame(string id, string title, string body) {
     return BBOARD_OK;
 }
 
-mapping get_message(string id, int number) {
-    if(!id || number <0) return 0;
-    if(current != id) {
-        if(file_size(DIR_BOARDS+"/"+id+".o") < 0) return 0;
-        current = id;
-        restore_object(DIR_BOARDS+"/"+current);
+mapping get_message(string id, int number)
+{
+    if (!id || number < 0) {
+        return 0;
     }
-    if(!sizeof(posts) || sizeof(posts)-1 < number) return 0;
+    if (current != id) {
+        if (file_size(DIR_BOARDS + "/" + id + ".o") < 0) {
+            return 0;
+        }
+        current = id;
+        restore_object(DIR_BOARDS + "/" + current);
+    }
+    if (!sizeof(posts) || sizeof(posts) - 1 < number) {
+        return 0;
+    }
     return posts[number];
+}
+
+void save_message(string id, int number, string fname)
+{
+    mapping message;
+    string tosave;
+
+    message = get_message(id, number);
+
+    if (!mapp(message)) {
+        return 0;
+    }
+    tosave = "";
+    tosave += "From: " + message["owner"] + "\n";
+    tosave += "Date: " + ctime(message["date"]) + "\n";
+    tosave += "Subject: " + message["title"] + "\n";
+    tosave += message["message"];
+
+    write_file(fname + "." + message["date"] + ".txt", tosave, 1);
 }
 
 mapping *query_posts(string id)

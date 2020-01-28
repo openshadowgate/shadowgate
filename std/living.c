@@ -1432,14 +1432,24 @@ int query_encumbrance_percent(){
 
 void increment_stamina(int x)
 {
-    if(TO->is_undead())
+    if (TO->is_undead()) {
         return;
-    used_stamina += x;
-    if(used_stamina < 0) used_stamina = 0;
-    if(query_condition() < 0)
-    {
-        send_paralyzed_message("info",TO);
     }
+    used_stamina += x;
+    if (used_stamina < 0) {
+        used_stamina = 0;
+    }
+    if (query_condition() < 0) {
+        send_paralyzed_message("info", TO);
+    }
+
+    // This is a hard cap so players hopefully don't remain unconscious for too long
+    if (query_condition() < -100)
+    {
+        used_stamina = query_max_stamina() - 100;
+    }
+
+
 }
 
 void use_stamina(int x)

@@ -34,8 +34,9 @@ void spell_effect(int prof)
     tell_object(caster,"%^CYAN%^You sing a song of peace, calming everyone present.");
     tell_room(place,"%^CYAN%^"+caster->QCN+"%^RESET%^%^CYAN%^ sings a song of peace, calming everyone.",caster);
 
-    foes = all_living(place);
+    foes = all_living(place) - ({caster});
 
+    caster->cease_all_attacks();
     foreach(foe in foes)
     {
         x=0;
