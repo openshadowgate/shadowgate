@@ -21,6 +21,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
+
     if (!ob->is_class("cleric")) {
         dest_effect();
         return 0;
