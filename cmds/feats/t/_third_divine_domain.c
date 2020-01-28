@@ -8,7 +8,7 @@ void create()
     feat_type("permanent");
     feat_category("DivineSpellcraft");
     feat_name("third divine domain");
-    feat_prereq("Cleric L1");
+    feat_prereq("Greater spell penetration, Greater spell power, Cleric");
     feat_desc("This feat conveys a high level of favor in which a cleric is held by their patron. It allows for those rare cases where a priest is permitted to wield any and all specialty spells their deity offers.");
     permanent(1);
 }
@@ -21,10 +21,16 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("cleric") < 1) {
+    if (!ob->is_class("cleric")) {
         dest_effect();
         return 0;
     }
+
+    if (!(FEATS_D->has_feat(ob, "greater spell penetration") && FEATS_D->has_feat(ob, "greater spell power"))) {
+        dest_effect();
+        return 0;
+    }
+
     return ::prerequisites(ob);
 }
 void execute_feat()

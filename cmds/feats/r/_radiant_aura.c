@@ -45,13 +45,19 @@ int cmd_radiant_aura(string str)
 
 void execute_feat()
 {
+    object obj;
+
     if(FEATS_D->is_active(caster,"radiant aura"))
     {
-        tell_object(caster,"Radiant Aura is already active.");
+        obj = query_active_feat("radiant aura");
+        obj->dest_effect();
+        caster = 0;
         dest_effect();
         return;
     }
     ::execute_feat();
+
+    clevel = caster->query_guild_level("cleric");
 
     tell_object(caster,"%^RESET%^%^BOLD%^%^BLUE%^You close your eyes and open your mind, channeling energy directly from "+capitalize(caster->query_diety()));
     caster->set_property("active_feats",({TO}));
@@ -77,25 +83,35 @@ void execute_attack()
 
     if(!sizeof(party)) { party = ({ caster }); }
 
-    for(i=0;i<sizeof(party);i++)
-    {
-        if(!objectp(caster) || caster->query_ghost())
-        {
+    for (i = 0; i < sizeof(party); i++) {
+        if (!objectp(caster) || caster->query_ghost()) {
             dest_effect();
             return;
         }
-        if(caster->query_unconscious()) { continue; }
-        if(!objectp(party[i])) { continue; }
-        if(environment(party[i]) != environment(caster)) { continue; }
-        if(party[i]->query_hp_percent() >= 100) { continue; }
-        damage = -1 * (clevel + random(clevel));
-        if(party[i]->is_undead()) { continue; }
+        if (caster->query_unconscious()) {
+            continue;
+        }
+        if (!objectp(party[i])) {
+            continue;
+        }
+        if (environment(party[i]) != environment(caster)) {
+            continue;
+        }
+        if (party[i]->query_hp_percent() >= 100) {
+            continue;
+        }
+
+        if (party[i]->query_property("negative energy affinity")) {
+            continue;
+        }
+
+        damage = roll_dice(clevel, 2);
+
         party[i]->cause_typed_damage(party[i], party[i]->return_target_limb(), damage, "positive energy");
-        if(party[i] != caster)
-        {
-            tell_object(party[i],"%^RESET%^%^BOLD%^%^BLUE%^A wave of %^RESET%^%^BOLD%^p%^CYAN%^o%^BLUE%^s%^RESET%^i%^BLUE%^t%^RESET%^%^BOLD%^i%^CYAN%^v%^YELLOW%^e "
-                "%^RESET%^%^BOLD%^%^BLUE%^energy %^CYAN%^radiates%^RESET%^%^BOLD%^%^BLUE%^ outwards from "+caster->QCN+" and bathes you "
-                "in %^YELLOW%^heal%^RESET%^i%^BOLD%^%^YELLOW%^ng %^RESET%^%^BOLD%^%^BLUE%^energy.%^RESET%^",caster);
+        if (party[i] != caster) {
+            tell_object(party[i], "%^RESET%^%^BOLD%^%^BLUE%^A wave of %^RESET%^%^BOLD%^p%^CYAN%^o%^BLUE%^s%^RESET%^i%^BLUE%^t%^RESET%^%^BOLD%^i%^CYAN%^v%^YELLOW%^e "
+                        "%^RESET%^%^BOLD%^%^BLUE%^energy %^CYAN%^radiates%^RESET%^%^BOLD%^%^BLUE%^ outwards from " + caster->QCN + " and bathes you "
+                        "in %^YELLOW%^heal%^RESET%^i%^BOLD%^%^YELLOW%^ng %^RESET%^%^BOLD%^%^BLUE%^energy.%^RESET%^", caster);
         }
         healed += ({ party[i] });
     }
