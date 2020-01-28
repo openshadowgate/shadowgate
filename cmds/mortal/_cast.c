@@ -208,9 +208,13 @@ int cmd_cast(string str)
         }
     }
 
-    if(!tar) tar = 0;
+    if (!tar) {
+        tar = 0;
+    }
     targ = new(tmp);
-    if (healharm) targ->set_property("improvised",spell);
+    if (healharm) {
+        targ->set_property("improvised", spell);
+    }
 
     spell = "level "+(int)tmp->query_spell_level(type); //spontaneous caster classes!
 
@@ -223,6 +227,12 @@ int cmd_cast(string str)
         targ->set_property("improvised",spell);
     TP->remove_property("spell_casting");
     TP->set_property("spell_casting",targ);
+
+    /* if(FEATS_D->usable_feat(TP, "surprise spells")); */
+    /* { */
+    /*     targ->set_silent_casting(1); */
+    /* } */
+
     if(type != "innate")
     {
         targ->wizard_interface(TP,type,tar);

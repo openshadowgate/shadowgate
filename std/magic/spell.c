@@ -1883,8 +1883,6 @@ void define_base_spell_level_bonus()
     sdamage_adjustment = 0;
     if (query_splash_spell())
         sdamage_adjustment -= 1;
-    if (spell_type == "psywarrior")
-        sdamage_adjustment -= 2;
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power"))
         sdamage_adjustment += 4;
@@ -1897,7 +1895,7 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
-        sdamage = roll_dice((clevel / 6 + 1), 6);
+        sdamage = roll_dice((clevel / 6 + 1), 4);
     } else if (spell_type == "warlock") {
         string blasttype;
 
