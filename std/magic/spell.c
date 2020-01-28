@@ -1921,9 +1921,9 @@ void define_base_damage(int adjust)
             sdamage = roll_dice(clevel, 5);
         else if (slevel > 0 && slevel < 20) {
             if (slevel % 2)
-                sdamage = roll_dice(clevel, 5 + slevel);
+                sdamage = roll_dice(clevel, 5 + (slevel + 1) / 2);
             else
-                sdamage = roll_dice(clevel, 5 + slevel - 1) + roll_dice(1, clevel / 2);
+                sdamage = roll_dice(clevel, 5 + slevel / 2 - 1) + roll_dice(1, clevel / 2);
         } else
             sdamage = roll_dice(clevel, 8);
     }
