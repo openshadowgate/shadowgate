@@ -13,9 +13,9 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("disintegrate");
-    set_spell_level(([ "mage" : 6, "cleric" : 8 ]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
     set_spell_sphere("invocation_evocation");
-    set_spell_domain("destruction");
+    set_domains(({"destruction", "renewal"}));
     set_syntax("cast CLASS disintegrate on TARGET");
     set_damage_desc("force");
     set_description("This spell sends a powerful line of destructive energy at the target.  If the target resists, then "

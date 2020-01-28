@@ -13,9 +13,9 @@ void create(){
     ::create();
     set_author("saide");
     set_spell_name("searing light");
-    set_spell_level(([ "cleric" : 5, "inquisitor" :3 ]));
-    set_spell_sphere("sun");
-    set_spell_domain("sun");
+    set_spell_level(([ "cleric" : 3, "inquisitor" :3 ]));
+    set_spell_sphere("invocation_evocation");
+    set_domains("sun");
     set_syntax("cast CLASS searing light on TARGET");
     set_description("By using this spell you will accumulate sunlight in an open palm and then release it at the target"
 ".  It will do slightly more damage to the undead.  In addition, nearby targets may be struck as well.");

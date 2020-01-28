@@ -8,14 +8,13 @@ inherit SPELL;
 
 void create() {
     ::create();
-    set_spell_name("waves of exhaustion");
-    set_spell_level(([ "mage" : 7, "oracle":7 ]));
-    set_mystery("bones");
-    set_domains(({"renewal"}));
+    set_spell_name("waves of fatigue");
+    set_spell_level(([ "mage" : 5,"cleric":5]));
+    set_domains("renewal");
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS waves of exhaustion");
-    set_damage_desc("living creatures become exhausted");
-    set_description("This spell sends waves of necrotic energy at everyone living in sight, exhausting them.");
+    set_syntax("cast CLASS waves of fatigue");
+    set_damage_desc("living creatures become fatigued");
+    set_description("This spell sends waves of necrotic energy at everyone living in sight, fatiguing them.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(1);
@@ -43,7 +42,7 @@ void spell_effect(int prof){
     {
         if(!objectp(attackers[i]))
             continue;
-        "/std/effect/status/exhausted"->apply_effect(attackers[i],clevel/14+1);
+        "/std/effect/status/fatigued"->apply_effect(attackers[i],clevel/14+1);
     }
     spell_successful();
     dest_effect();

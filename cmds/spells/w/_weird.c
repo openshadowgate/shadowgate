@@ -43,7 +43,7 @@ void spell_effect(int prof){
         if(!objectp(attackers[i])) continue;
         define_base_damage(0);
         admg=sdamage;
-        if(do_save(target))
+        if(do_save(target) || random(3))
         {
             if(evade_splash(attackers[i])) continue;
             admg=admg/2;

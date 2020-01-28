@@ -6,8 +6,9 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("sunbeam");
-    set_spell_level(([ "druid" : 7, "oracle" : 7 ]));
+    set_spell_level(([ "druid" : 7, "oracle" : 7, "cleric":7]));
     set_mystery("solar");
+    set_domains("sun");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sunbeam on TARGET");
     set_damage_desc("divine, 4/3 times more to undead");

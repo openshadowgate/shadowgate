@@ -12,7 +12,7 @@ void create(){
     set_spell_level(([ "cleric" : 8, "druid" : 8, "mage" : 8,"oracle":8 ]));
     set_mystery(({"heavens","solar"}));
     set_spell_sphere("invocation_evocation");
-    set_spell_domain("sun");
+    set_domains("sun");
     set_syntax("cast CLASS sunburst");
     set_damage_desc("divine, 4/3 times more to undead");
     set_description("This spell will send the light of the sun radiating out in a circle from the caster.  Any enemies caught in the area will suffer damage from the pure light of the sun.  Undead creatures suffer more damage than normal ones, and those creatures who fail their save are blinded by the light.");
