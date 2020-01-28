@@ -10,7 +10,7 @@ int reversed;
 void create(){
     ::create();
     set_spell_name("haste");
-    set_spell_level(([ "mage" : 3, "bard" : 3 ]));
+    set_spell_level(([ "mage" : 3, "bard" : 3, "assassin":3]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS haste");
     set_description("This spell considerably speeds up the caster, and those allies in his or "

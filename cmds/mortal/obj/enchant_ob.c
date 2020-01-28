@@ -141,7 +141,7 @@ varargs int calculate_cost(object tp, object item, string bonus, int amt, string
         total += values[i];
     }
 
-    return to_int(pow(total,2.1)); // will probably have to do some adjusting here
+    return to_int(pow(total,2.8));
 }
 
 
