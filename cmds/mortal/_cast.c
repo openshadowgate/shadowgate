@@ -228,17 +228,15 @@ int cmd_cast(string str)
     TP->remove_property("spell_casting");
     TP->set_property("spell_casting",targ);
 
-    /* if(FEATS_D->usable_feat(TP, "surprise spells")); */
-    /* { */
-    /*     targ->set_silent_casting(1); */
-    /* } */
-
-    if(type != "innate")
-    {
-        targ->wizard_interface(TP,type,tar);
+    if (FEATS_D->usable_feat(TP, "surprise spells")) {
+        tell_object(FPL("ilmarinen"), ":" + 1);
+        targ->set_silent_casting(1);
     }
-    if(type == "innate")
-    {
+
+    if (type != "innate") {
+        targ->wizard_interface(TP, type, tar);
+    }
+    if (type == "innate") {
         targ->use_spell(TP, tar, (int)TP->query_innate_ability_level(str2), 100, "innate");
     }
     return 1;

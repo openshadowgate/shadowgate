@@ -44,13 +44,13 @@ void spell_effect()
         tell_object(target,"%^MAGENTA%^You feel cold as tendrils of darkness released by "+caster->QCN+" reach you.");
         atttracker+=({target});
 
-        target->set_property("fester",lower);
+        target->set_property("fester",lower / 2);
         target->set_property("spelled", ({TO}) );
     }
     tell_room(place,"%^MAGENTA%^The place gets a little cold...");
 
     addSpellToCaster();
-    call_out("dest_effect",clevel*ROUND_LENGTH,lower);
+    call_out("dest_effect",(clevel / 12 + 1)*ROUND_LENGTH,lower);
 }
 
 void dest_effect()

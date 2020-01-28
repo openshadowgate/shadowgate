@@ -50,11 +50,11 @@ void spell_effect()
 
     lower = sdamage;
 
-    target->set_property("fester",lower);
+    target->set_property("fester",lower / 2);
 
     target->set_property("spelled", ({TO}) );
     addSpellToCaster();
-    call_out("dest_effect",clevel*ROUND_LENGTH,lower);
+    call_out("dest_effect",(clevel / 12 + 1)*ROUND_LENGTH,lower);
 }
 
 void dest_effect()

@@ -44,8 +44,8 @@ void spell_effect() {
         ob->set_property("spell_creature", TO);
         ob->set_property("spell", TO);
         ob->set_property("minion", caster);
-        ob->set_max_hp(clevel*18+30);
-        ob->set_hp(clevel*18+30);
+        ob->set_max_hp(clevel*10+30);
+        ob->set_hp(ob->query_max_hp());
         ob->add_id(caster->query_true_name()+"_illusion");
         ob->set_race((string)caster->query_race());
         ob->set_gender((string)caster->query_gender());
