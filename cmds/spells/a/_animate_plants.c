@@ -15,7 +15,7 @@ void create()
     ::create();
     set_spell_name("animate plants");
     set_spell_level(([ "druid" : 7, "cleric":7]));
-    set_domains("plants");
+    set_domains("plant");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS animate plants");
     set_description("This spell will animate any foilage, roots, or plants in an area for the purpose of protecting "

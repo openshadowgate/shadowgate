@@ -8,7 +8,7 @@ object cast;
 void create(){
   ::create();
 
-    set_name("shamblind mound");
+    set_name("shambling mound");
     set_id(({"shambler","shamblind mound","mound",}));
     set_short("%^BOLD%^%^GREEN%^sh%^RESET%^%^ORANGE%^a%^BOLD%^%^GREEN%^mbl%^RESET%^%^ORANGE%^i%^BOLD%^%^GREEN%^ng m%^RESET%^%^ORANGE%^ou%^BOLD%^%^GREEN%^nd%^RESET%^");
     set_long("%^BOLD%^%^GREEN%^This creature appears to be h%^RESET%^%^ORANGE%^ea%^BOLD%^%^GREEN%^ps %^RESET%^%^ORANGE%^o%^BOLD%^%^GREEN%^f r%^RESET%^%^ORANGE%^o%^BOLD%^%^GREEN%^tt%^RESET%^%^ORANGE%^i%^BOLD%^%^GREEN%^ng v%^RESET%^%^ORANGE%^e%^BOLD%^%^GREEN%^g%^RESET%^%^ORANGE%^e%^BOLD%^%^GREEN%^t%^RESET%^%^ORANGE%^a%^BOLD%^%^GREEN%^t%^RESET%^%^ORANGE%^io%^BOLD%^%^GREEN%^n gathered to roughly resemble giant humanoid form. Numerous vines and roots cover its massive and strong body. It walks slowly on its feet, assisting itself with its massive arms. Several fl%^RESET%^%^MAGENTA%^o%^BOLD%^%^GREEN%^w%^RESET%^%^MAGENTA%^e%^BOLD%^%^GREEN%^rs and plants top its head, forming a miniature meadow.%^RESET%^");
