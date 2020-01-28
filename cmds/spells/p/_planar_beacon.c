@@ -94,7 +94,8 @@ void do_summon(object target) {
         return;
       }
    }
-   caster->remove_property("spell summon time");
+
+   // This increments intentionally
    caster->set_property("spell summon time",time());
    success = 0;
 
