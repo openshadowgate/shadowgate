@@ -1444,7 +1444,7 @@ void increment_stamina(int x)
     }
 
     // This is a hard cap so players hopefully don't remain unconscious for too long
-    if (query_condition() < -100)
+    if (query_condition() < -50)
     {
         used_stamina = query_max_stamina() - 100;
     }

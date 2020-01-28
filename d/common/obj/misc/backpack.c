@@ -9,6 +9,5 @@ void create() {
     set("long", "This is a simple leather backpack that you could put things in.\n");
     set_value(2);
     set_property("treasure_type", "5A");
-    set_max_internal_encumbrance(40);
+    set_max_internal_encumbrance(35);
 }
-
