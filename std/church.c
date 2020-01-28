@@ -31,8 +31,8 @@ void init() {
    add_action("remove_curse","revoke");
    add_action("identify_curse","identify");
    add_action("__Read_me","read");
-   add_action("soul_check","soulcheck");
    add_action("select_domain","pick");
+   add_action("clear_domains","forget");
    add_action("select_diety","choose");
 }
 
@@ -279,13 +279,6 @@ int plea() {
    new("/d/magic/symbols/holy_symbol")->move(TP);
    write("An acolyte accepts your offering and brings you the new symbol.");
    tell_room(TO, "An acolyte accepts "+TPQCN+"'s offering and delivers a new symbol.", TP);
-/*******
-changing to charge a price and be returned in a more IC fashion per discussions *Styx* 12/25/05
-   write("%^BOLD%^%^BLUE%^In a blinding flash your symbol is returned to you by god!");
-   write("%^BOLD%^%^BLUE%^BUT THEY TAKE THEIR PRICE!");
-   tell_room(TO,"%^BOLD%^%^BLUE%^In a blinding light the gods have restored "+TPQCN+"'s holy symbol",TP);
-   TP->set_hp(((int)TP->query_hp()/2)+1);
-*******/
    return 1;
 }
 
@@ -307,21 +300,20 @@ int __Read_me(string str) {
 
 %^MAGENTA%^The church performs the following tasks, most for a fee of course:%^RESET%^
 
-  %^ORANGE%^<request>%^RESET%^                 Return your holy symbol.
-  %^ORANGE%^<new symbol>%^RESET%^              Receive a fancy holy symbol, if your temple has one.
-  %^ORANGE%^<recover>%^RESET%^                 Return your wedding ring.
-  %^ORANGE%^<soulcheck>%^RESET%^               Tell you about the balance of your soul.
-  %^ORANGE%^<identify curse on %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^  Will tell you if an item is cursed.
-  %^ORANGE%^<revoke curse from %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^  Will remove curses from an item, one level at a time.
+  %^ORANGE%^<request symbol>%^RESET%^          Get a new holy symbol
+  %^ORANGE%^<new symbol>%^RESET%^              Receive a fancy holy symbol, if your temple has one
+  %^ORANGE%^<recover>%^RESET%^                 Return your wedding ring
+  %^ORANGE%^<identify curse on %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^  Will tell you if an item is cursed
+  %^ORANGE%^<revoke curse from %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^  Will remove curses from an item, one level at a time
 
-%^GREEN%^In a temple, you can do the following:%^RESET%^
 
-  %^ORANGE%^<choose>%^RESET%^                  Follow the deity of this temple.
-  %^ORANGE%^<choose %^ORANGE%^%^ULINE%^DEITY%^RESET%^%^ORANGE%^>%^RESET%^            Select a new god if you are
-godless.
-  %^ORANGE%^<forsake>%^RESET%^                 Forsake the deity of this temple.
-  %^ORANGE%^<pick domain %^ORANGE%^%^ULINE%^DOMAIN%^RESET%^%^ORANGE%^>%^RESET%^      Choose a domain
-  %^ORANGE%^<pick way %^ORANGE%^%^ULINE%^WAY%^RESET%^%^ORANGE%^>%^RESET%^            Dedicate to that emphasis of Ki.
+  %^ORANGE%^<choose %^ORANGE%^%^ULINE%^DEITY%^RESET%^%^ORANGE%^>%^RESET%^         Select a new god
+  %^ORANGE%^<forsake>%^RESET%^              Forsake the deity of this temple
+
+  %^ORANGE%^<pick domain %^ORANGE%^%^ULINE%^DOMAIN%^RESET%^%^ORANGE%^>%^RESET%^   Choose a domain
+  %^ORANGE%^<forget domains>%^RESET%^       Forget all current domains
+
+  %^ORANGE%^<pick way %^ORANGE%^%^ULINE%^WAY%^RESET%^%^ORANGE%^>%^RESET%^         Dedicate to that emphasis of Ki
 
 Temples also have donation boxes. You will probably want to %^ORANGE%^<donate>%^RESET%^ coins or items to various deities. You can also %^ORANGE%^<look donation box>%^RESET%^ in temples even if there isn't one explicitly in the description.");
     return 1;
@@ -348,99 +340,28 @@ int return_item(string str) {
    return 1;
 }
 
-int soul_check() {
-   int align;
-   int xalign;
+int clear_domains(string str)
+{
+    if (!stringp(str)) {
+        return 0;
+    }
 
-   switch(random(2)) {
-      case 0:
-         align = TP->query_align_adjust() + roll_dice(2,6);
-         break;
-      case 1:
-         align = TP->query_align_adjust() + (-1*(roll_dice(2,6)));
-         break;
-   }
-   xalign = TP->query_law_align_adjust();
+    if (str != "domains")
+    {
+        return 0;
+    }
 
-   if(!TP->query_funds("gold",100))
-      return notify_fail("You need 100 gold as payment for us to look"+
-      " into the depths of your soul.\n");
-   TP->use_funds("gold",100);
-   tell_object(TP,"%^ORANGE%^The priest collects the 100 gold coin fee for the service.\n%^RESET%^");
-   log_file("soulcheck", TPQN+" checked their soul on "+ctime(time())+"\n");
-   if(align > 199) {
-   tell_object(TP,"%^BOLD%^Your soul is as bright as the heavens!%^RESET%^");
-   }
-   else if(align < -199) {
-      tell_object(TP,"%^BOLD%^%^BLACK%^Your soul is as black as midnight!%^RESET%^");
-   }
-   else if(ALIGN->is_good(TP)) {
-      if(align > 99 && align < 200) {
-         tell_object(TP,"%^YELLOW%^Your soul rests firmly on the side of good.%^RESET%^");
-      }
-      else if(align > -1 && align < 100) {
-         tell_object(TP,"%^YELLOW%^Your soul is good, but hovers near the edges of neutrality.%^RESET%^");
-       }
-      else if(align > -99 && align < 0) {
-         tell_object(TP,"%^YELLOW%^Your soul is still good but is quickly sliding towards the side of evil.%^RESET%^");
-      }
-      else if(align > -200 && align < -100) {
-         tell_object(TP,"%^BOLD%^%^CYAN%^Your soul has some definite marks of evil on it and is barely clinging to the side of good.%^RESET%^");
-      }
-      return 1;
-   }
-   else if(ALIGN->is_evil(TP)) {
-      if(align > 99 && align < 200) {
-         tell_object(TP,"%^BOLD%^%^BLUE%^Your soul is marginally evil, but quickly shifting towards the side of good.%^RESET%^");
-      }
-      else if(align > -1 && align < 100) {
-         tell_object(TP,"%^BOLD%^%^BLUE%^Your soul is still evil, but spots of good can be seen in places.%^RESET%^");
-      }
-      else if(align > -99 && align < 0) {
-         tell_object(TP,"%^BOLD%^%^BLUE%^Your soul is firmly positioned on the side of evil.%^RESET%^");
-      }
-      else if(align > -200 && align < -100) {
-         tell_object(TP,"%^BOLD%^%^BLUE%^Your soul is entrenched in its evil ways.%^RESET%^");
-      }
-      return 1;
-   }
-   else if(align > 99 && align < 200) {
-      tell_object(TP,"%^YELLOW%^Your soul leans towards the side of good.%^RESET%^");
-   }
-   else if(align > -1 && align < 100) {
-      tell_object(TP,"Your soul hovers around neutrality, but is"+
-      " slightly tilted towards good.");
-   }
-   else if(align > -99 && align < 0) {
-      tell_object(TP,"Your soul hovers around neutrality, but is"+
-      " slightly tilted towards evil.");
-   }
-   else if(align > -200 && align < -100) {
-      tell_object(TP,"%^RED%^Your soul is filled with evil!");
-   }
-/*
-   if(xalign > 199) {
-      tell_object(TP,"%^BOLD%^%^CYAN%^You are bound to the side of law and order.%^RESET%^");
-   }
-   else if(xalign < -199) {
-      tell_object(TP,"%^MAGENTA%^Your soul churns in constant chaos.%^RESET%^");
-   }
-   else if(xalign > 99 && xalign < 200) {
-      tell_object(TP,"%^BOLD%^You rely on law and order but are"+
-      " sometimes burdened by thinking of the balance.");
-   }
-   else if(xalign > -99 && xalign < 100) {
-      tell_object(TP,"%^CYAN%^The balance of powers is prominent in"+
-      " your mind.");
-   }
-   else if(xalign > -200 && xalign < -100) {
-      tell_object(TP,"%^BOLD%^%^MAGENTA%^You use chaos as a tool but"+
-      " are sometimes burdened by thinking of the balance.");
-   }
-*/
-   return 1;
+    if (TP->query("domains_cleared") + 60 * 60 * 24 * 7 * 3 > time()) {
+        tell_object(TP, "%^BOLD%^%^RED%^You can clear your domains only once per three weeks.");
+        return 1;
+    }
+
+    TP->set_divine_domain(({}));
+    TP->delete("domains_cleared");
+    TP->set("domains_cleared", time());
+    tell_object(TP,"%^BOLD%^%^WHITE%^You sense you have forgotten your domains and can select new ones.");
+    return 1;
 }
-
 
 int select_domain(string str)
 {
@@ -565,28 +486,11 @@ int select_domain(string str)
                 tell_object(TP,"Even the greatest of clerics cannot choose more than three domains!\n");
                 return 1;
             }
-
-            else
-            {
-                if(!sizeof(player_domains))
-                {
-                    TP->set_divine_domain(({ selection }));
-                    tell_object(TP,"You have choosen to select the "+selection+" domain.\n");
-                    TP->set("domains_changed",1);
-                    //so they won't have to reset once they've chosen ~Circe~ 6/17/08
-                    return 1;
-                }
-                else
-                {
-                    tell_object(TP,"Only priests who are solely devoted to their deity may "
-                    "select more than one domain.");
-                    return 1;
-                }
-            }
             break;
     }
     return 1;
 }
+
 
 void initialize_ob(string pcname,object myob) {
    if(!userp(find_player(pcname))) return;

@@ -104,7 +104,10 @@ void execute_attack()
     allies = distinct_array(allies);
     allies = filter_array(allies, (: environment($1) == $2:), environment(caster));
 
-    dam = roll_dice(clevel, 4);
+    clevel = max(({ caster->query_guild_level("paladin"),
+                    caster->query_guild_level("cleric"), }));
+
+    dam = roll_dice(clevel, 6);
 
     if (caster->query_property("negative energy affinity")) {
         energy_type = "negative energy";

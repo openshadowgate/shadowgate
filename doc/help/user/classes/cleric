@@ -6,10 +6,9 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/will strong, reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ healing, influence, perception, spellcraft
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: light armor proficiency, medium armor proficiency, simple weapon proficiency, shield proficiency, divine domain, spell focus
+ %^RESET%^L1: light armor proficiency, medium armor proficiency, simple weapon proficiency, shield proficiency, divine domain, second divine domain, spell focus
  %^RESET%^L5: indomitable
  %^RESET%^L10: force of personality
- %^RESET%^L11: second divine domain
  %^RESET%^L15: leadership
  %^RESET%^Also: one bonus spellcraft feat at L21, and every five class levels thereafter
 
