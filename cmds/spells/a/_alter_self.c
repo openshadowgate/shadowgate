@@ -6,7 +6,7 @@ void create()
 {
     ::create();
     set_spell_name("alter self");
-    set_spell_level(([ "bard" : 2, "psion" : 2, "psywarrior": 2, "assassin" : 1, "mage" : 2, "druid" : 1, "inquisitor":1 ]));
+    set_spell_level(([ "bard" : 2, "psion" : 2, "psywarrior": 2, "assassin" : 1, "mage" : 2, "druid" : 1, "inquisitor":1, "warlock":2]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS alter self [on [RACE] [1-9]] ");
     set_description("%^RESET%^This spell allows the caster to make major changes to their body and pretend to be be someone else. These are usually sufficient changes that they become unrecognizable even to those they are familiar with. It does not allow for such drastic changes as body size or overall shape, so be aware of races you turn into.
