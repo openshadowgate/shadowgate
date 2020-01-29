@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("unholy aura");
-    set_spell_level(([ "cleric" : 8 ]));
+    set_spell_level(([ "cleric" : 8, "mage":8]));
     set_domains("evil");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS unholy aura");

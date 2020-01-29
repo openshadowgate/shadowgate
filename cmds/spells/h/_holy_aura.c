@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("holy aura");
-    set_spell_level(([ "cleric" : 8 ]));
+    set_spell_level(([ "cleric" : 8, "mage":8]));
     set_spell_sphere("abjuration");
     set_domains("good");
     set_syntax("cast CLASS holy aura");
