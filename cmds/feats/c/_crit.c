@@ -21,9 +21,10 @@ int allow_shifted() { return 0; }
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) return 0;
-    if((int)ob->query_class_level("assassin") < 1)
-    {
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if ((int)ob->query_class_level("assassin") < 1) {
         dest_effect();
         return 0;
     }
@@ -33,9 +34,11 @@ int prerequisites(object ob)
 int cmd_crit(string str)
 {
     object feat;
-    if(!objectp(TP)) return 0;
+    if (!objectp(TP)) {
+        return 0;
+    }
     feat = new(base_name(TO));
-    feat->setup_feat(TP,str);
+    feat->setup_feat(TP, str);
     return 1;
 }
 
@@ -47,75 +50,62 @@ void execute_feat()
     object *keyz, qob;
     ::execute_feat();
     tempmap = caster->query_property("using crit");
-    if(!objectp(target))
-    {
-        object * attackers = caster->query_attackers();
-        if(mapp(tempmap))
-        {
-            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+    if (!objectp(target)) {
+        object* attackers = caster->query_attackers();
+        if (mapp(tempmap)) {
+            attackers = filter_array(attackers, (: $2[$1] < time() :), tempmap);
         }
-        if(!sizeof(attackers))
-        {
-            tell_object(caster,"%^BOLD%^Nobody to crit.%^RESET%^");
+        if (!sizeof(attackers)) {
+            tell_object(caster, "%^BOLD%^Nobody to crit.%^RESET%^");
             dest_effect();
             return;
         }
         target = attackers[random(sizeof(attackers))];
     }
-    if(!objectp(caster))
-    {
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
-    if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
-    {
-        caster->send_paralyzed_message("info",caster);
+    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed()) {
+        caster->send_paralyzed_message("info", caster);
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat"))
-    {
-        tell_object(caster,"You are already in the middle of using a feat!");
+    if ((int)caster->query_property("using instant feat")) {
+        tell_object(caster, "You are already in the middle of using a feat!");
         dest_effect();
         return;
     }
-    if(caster->query_casting())
-    {
-        tell_object(caster,"%^BOLD%^You are already in the middle of casting a spell.%^RESET%^");
+    if (caster->query_casting()) {
+        tell_object(caster, "%^BOLD%^You are already in the middle of casting a spell.%^RESET%^");
         dest_effect();
         return;
     }
-    if(target == caster)
-    {
-        tell_object(caster,"There are better ways to kill yourself!");
+    if (target == caster) {
+        tell_object(caster, "There are better ways to kill yourself!");
         dest_effect();
         return;
     }
-    if(!objectp(target))
-    {
+    if (!objectp(target)) {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
-    if(!present(target, place))
-    {
+    if (!present(target, place)) {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
 
-    if(FEATS_D->usable_feat(target,"undead graft"))
-    {
-        tell_object(TP,"%^BOLD%^%^WHITE%^"+target->QCN+" glares at you as you were about to phase behind "+target->QO+".");
+    if (FEATS_D->usable_feat(target, "undead graft")) {
+        tell_object(TP, "%^BOLD%^%^WHITE%^" + target->QCN + " glares at you as you were about to phase behind " + target->QO + ".");
         return;
     }
 
 
-    if(mapp(tempmap))
-    {
-        if(tempmap[target] > time())
-        {
-            tell_object(caster,"That target is still wary of such an attack!");
+    if (mapp(tempmap)) {
+        if (tempmap[target] > time()) {
+            tell_object(caster, "That target is still wary of such an attack!");
             dest_effect();
             return;
         }
@@ -125,8 +115,12 @@ void execute_feat()
     spell_kill(target,caster);
 
     tell_object(caster, "%^BOLD%^%^WHITE%^You study the place and your target, preparing yourself for a jump.%^RESET%^");
-    if(!mapp(tempmap)) tempmap = ([]);
-    if(tempmap[target]) map_delete(tempmap,target);
+    if (!mapp(tempmap)) {
+        tempmap = ([]);
+    }
+    if (tempmap[target]) {
+        map_delete(tempmap, target);
+    }
     keyz = keys(tempmap);
     for(i=0;i<sizeof(keyz);i++)
     {
@@ -143,26 +137,27 @@ void execute_feat()
 
     bonusdc = clevel+10;
     bonusdc += BONUS_D->query_stat_bonus(caster, "intelligence");
-    if(target->query_property("no death") ||
-       target->query_race()=="squole" ||
-       target->is_undead() ||
-       do_save(target,-bonusdc))
-    {
+    if (target->query_property("no death") ||
+        target->query_race() == "squole" ||
+        target->is_undead() ||
+        do_save(target, -bonusdc)) {
         int todamage;
-        tell_object(target,"%^BOLD%^%^WHITE%^The immense pain spreads from your back!!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^WHITE%^You almost didn't see a shadow behind "+target->QCN+"'s back!",({target,caster}));
-        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+", but "+target->QS+" withstands your assault.");
-        if(target->query_max_hp()<caster->query_max_hp())
-            todamage = roll_dice(clevel,10);
-        else
-            todamage = roll_dice(clevel+BONUS_D->query_stat_bonus(caster, "intelligence"),10);
-        target->cause_typed_damage(target, target->query_target_limb(),todamage,"untyped");
+        tell_object(target, "%^BOLD%^%^WHITE%^The immense pain spreads from your back!!%^RESET%^");
+        tell_room(place, "%^BOLD%^%^WHITE%^You almost didn't see a shadow behind " + target->QCN + "'s back!", ({ target, caster }));
+        tell_object(caster, "%^BOLD%^%^WHITE%^You phase quickly behind " + target->QCN + ", but " + target->QS + " withstands your assault.");
+        if (target->query_max_hp() < caster->query_max_hp()) {
+            todamage = roll_dice(clevel, 10);
+        } else{
+            todamage = roll_dice(clevel + BONUS_D->query_stat_bonus(caster, "intelligence"), 10);
+        }
+        target->cause_typed_damage(target, target->query_target_limb(), todamage, "untyped");
     } else {
-        tell_object(target,"%^BOLD%^%^WHITE%^Wait, what?! How did it happen?!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^WHITE%^You almost didn't see a shadow behind "+target->QCN+"'s back!",({target,caster}));
-        tell_object(caster,"%^BOLD%^%^WHITE%^You phase quickly behind "+target->QCN+" and put an end to them with a swift motion.");
-        target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"untyped");
+        tell_object(target, "%^BOLD%^%^WHITE%^Wait, what?! How did it happen?!%^RESET%^");
+        tell_room(place, "%^BOLD%^%^WHITE%^You almost didn't see a shadow behind " + target->QCN + "'s back!", ({ target, caster }));
+        tell_object(caster, "%^BOLD%^%^WHITE%^You phase quickly behind " + target->QCN + " and put an end to them with a swift motion.");
+        target->cause_typed_damage(target, target->query_target_limb(), target->query_max_hp() * 2, "untyped");
     }
+    caster->remove_property("using instant feat");
     return;
 }
 
