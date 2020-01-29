@@ -141,7 +141,7 @@ varargs int calculate_cost(object tp, object item, string bonus, int amt, string
         total += values[i];
     }
 
-    return to_int(pow(total,2.6));
+    return to_int(pow(total,2.2)); // will probably have to do some adjusting here
 }
 
 
@@ -825,7 +825,7 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
             skill_names += ({ "craft, tailor" });
             break;
         case "bracer": case "ring":
-            skill_names += "craft, jeweller";
+            skill_names += ({"craft, jeweller"});
             break;
         case "chain": case "armour": case "shield": case "armor": case "plate":
             skill_names += ({ "craft, armorsmith" });
@@ -835,9 +835,6 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
             break;
         case "wood":
             skill_names += ({ "craft, woodworker" });
-            break;
-        case "weapon":
-            skill_names += ({ "craft, weaponsmith" });
             break;
         }
     } else{
@@ -858,9 +855,6 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
                 break;
             case "armorsmith":
                 skill_names += ({ "craft, armorsmith" });
-                break;
-            case "weaponsmith":
-                skill_names += ({ "craft, weaponsmith" });
                 break;
             }
         }
