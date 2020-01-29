@@ -44,13 +44,13 @@ void alarm_observe()
         int clevel = query_property("spell")->query_clevel();
 
         livings = all_living(ETO);
-        livings -= ({TO});
-        livings -= ({caster});
+        livings -= ({ TO });
+        livings -= ({ caster });
         livings -= caster->query_followers();
-        livings = filter_array(livings, "is_non_immortal",FILTERS_D);
-        livings = filter_array(livings, (:$1->query_invis()||$1->query_hidden():));
-        livings = filter_array(livings, (:$1->query_skill("spellcraft") < $2 * 7 / 4:), clevel);
-        livings = filter_array(livings, (:$1->query_skill("stealth") < $2 * 7 / 4:), clevel);
+        livings = filter_array(livings, "is_non_immortal", FILTERS_D);
+        livings = filter_array(livings, (: $1->query_invis() || $1->query_hidden() :));
+        /* livings = filter_array(livings, (:$1->query_skill("spellcraft") < $2 * 16 / 4:), clevel); */
+        /* livings = filter_array(livings, (:$1->query_skill("stealth") < $2 * 16 / 4:), clevel); */
         if (objectp(caster))
             if (sizeof(livings)) {
                 tell_room(caster, "%^CYAN%^An invisibility alarm set in " + ENV(TO)->query_short() + " had been set off.%^RESET%^");
