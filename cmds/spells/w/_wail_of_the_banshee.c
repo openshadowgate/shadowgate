@@ -43,7 +43,7 @@ void spell_effect(int prof)
     if (sizeof(foes)) {
         foreach(foe in foes)
         {
-            if (do_save(foe, 10) ||
+            if (do_save(foe, 2) ||
                 max < 0 ||
                 !random(2) ||
                 foe->query_property("no death")) {

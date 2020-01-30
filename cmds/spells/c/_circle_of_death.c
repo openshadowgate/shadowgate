@@ -40,7 +40,7 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        if (do_save(foe, 6) ||
+        if (do_save(foe, 2) ||
             foe->query_property("no death") ||
             foe->is_undead() ||
             !random(2) ||

@@ -59,6 +59,7 @@ void execute_feat(){
     int i;
     if((int)caster->query_property("using rally")) {
         object obj;
+
         obj = query_active_feat("rally");
         obj->dest_effect();
         caster = 0;
@@ -106,7 +107,7 @@ void do_rally(){
     ::execute_attack();
     inv = ({});
     place = environment(caster);
-    mod = mod / 16 + 1;
+    mod = clevel / 16 + 1;
     duration = 150 + ((int)caster->query_guild_level("bard")*10);
     for(i=0;i<sizeof(cur_players);i++) {
         if(!objectp(cur_players[i])) continue;
