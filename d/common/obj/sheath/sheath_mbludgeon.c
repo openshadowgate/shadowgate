@@ -6,9 +6,9 @@ inherit SHEATH_INHERIT;
 mixed query_property(string str) { return ::query_property(str); }
 
 void create(){
-  ::create(); 
+  ::create();
   remove_property("can_hold");
-set_property("can_hold",({"axe","mace","flail","club","hammer","whip","rod"}));
+  set_property("can_hold",({"axe","mace","flail","club","hammer","whip","rod", "wand"}));
   remove_property("can_wear_limbs");
   set_property("can_wear_limbs",({ "waist" , "torso" }));
   remove_property("sheath_size");
