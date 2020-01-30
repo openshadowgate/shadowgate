@@ -7,9 +7,8 @@ int trackera, trackerb;
 void create() {
     ::create();
     set_spell_name("wieldskill");
-    set_spell_level(([ "cleric" : 5, "inquisitor" : 2, "mage" : 2, "paladin": 2, "psion" : 2 ]));
+    set_spell_level(([ "inquisitor" : 2, "mage" : 2, "paladin": 2, "psion" : 2 ]));
     set_spell_sphere("enchantment_charm");
-    set_spell_domain("knowledge");
     set_syntax("cast CLASS wieldskill");
     set_description("This gives the caster proficiency with any kind of weapon, provided they are able to wield it.");
     set_verbal_comp();
@@ -52,7 +51,6 @@ void spell_effect(int prof) {
       trackerb = 1;
     }
     caster->set_property("spelled", ({TO}));
-    call_out("dest_effect", ROUND_LENGTH * 6 * clevel);
     addSpellToCaster();
 }
 

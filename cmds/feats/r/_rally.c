@@ -104,7 +104,7 @@ void do_rally(){
     ::execute_attack();
     inv = ({});
     place = environment(caster);
-    mod = (clevel +9)/10;
+    mod = mod / 16 + 1;
     duration = 150 + ((int)caster->query_guild_level("bard")*10);
     for(i=0;i<sizeof(cur_players);i++) {
         if(!objectp(cur_players[i])) continue;
@@ -158,11 +158,13 @@ void dest_effect(){
     string *holding;
     ::dest_effect();
     mod = -mod;
-    if(objectp(caster)) caster->remove_property("using rally");
-    if(!sizeof(cur_players))
-    {
-      remove_feat(TO);
-      return;
+    if (objectp(caster)) {
+        caster->remove_property("using rally");
+    }
+
+    if (!sizeof(cur_players)) {
+        remove_feat(TO);
+        return;
     }
     for(i=0;i<sizeof(cur_players);i++){
       if(!objectp(cur_players[i])) continue;

@@ -13,7 +13,7 @@ void create()
     set_spell_sphere("necromancy");
     set_mystery(({"bones","apocalypse"}));
     set_syntax("cast CLASS circle of death");
-    set_damage_desc("negative energy to clevel / 12 + 1 living");
+    set_damage_desc("negative energy");
     set_description("The caster draws a circle around herself and channels negative energy outwards, destroying living creatures that are not able to withstand it, but not affecting at all those of the strong will. The spell won't affect targets stronger than your caster level.");
     set_verbal_comp();
     set_somatic_comp();
@@ -36,24 +36,24 @@ void spell_effect(int prof)
     foes = caster->query_attackers();
     foes = target_filter(foes);
 
-    max = clevel / 12 + 1;
+    max = clevel;
 
     foreach(foe in foes)
     {
         if (do_save(foe, 6) ||
             foe->query_property("no death") ||
             foe->is_undead() ||
+            !random(2) ||
             max < 0 ||
-            (foe->query_level() > clevel * 4 / 5)) {
+            (foe->query_level() > clevel)) {
             tell_object(foe, "%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
             continue;
         }
 
-        max--;
-
         tell_object(foe, "%^BLUE%^%^BOLD%^Your life ends, as negative energy destroys your very soul!");
         tell_room(place, "%^BLUE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
         damage_targ(foe, foe->query_target_limb(), foe->query_max_hp() * 2, "negative energy");
+        max -= foe->query_level();
     }
 
     spell_successful();

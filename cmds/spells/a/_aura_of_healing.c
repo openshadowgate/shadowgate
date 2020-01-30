@@ -59,7 +59,7 @@ void spell_effect(int prof)
         "god surround you!%^RESET%^");
     caster->set_property("spelled", ({TO}) );
 
-    if(caster->is_undead())
+    if(caster->query_property("negative energy affinity"))
     {
         energy_type = "negative energy";
         undead_caster = 1;
@@ -124,18 +124,18 @@ void execute_attack()
     people += caster->query_followers() - caster->query_attackers();
 
     define_base_damage(0);//lazy reroll
-    if(sizeof(people))
+    if (sizeof(people))
         foreach(dude in people)
         {
-            if(!objectp(dude))
+            if (!objectp(dude)) {
                 continue;
+            }
 
-            if((int)dude->query_hp() < (int)dude->query_max_hp() &&
-               !(dude->is_undead() ^ undead_caster))
-            {
-                tell_object(dude,"%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
-                tell_room(place,"%^CYAN%^Some of "+dude->QCN+"'s wounds seem to heal!%^RESET%^",caster);
-                damage_targ(dude,dude->return_target_limb(),-sdamage,energy_type);
+            if ((int)dude->query_hp() < (int)dude->query_max_hp() &&
+                !(dude->query_property("negative energy affinity") ^ undead_caster)) {
+                tell_object(dude, "%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
+                tell_room(place, "%^CYAN%^Some of " + dude->QCN + "'s wounds seem to heal!%^RESET%^", caster);
+                damage_targ(dude, dude->return_target_limb(), -sdamage, energy_type);
             }
         }
 

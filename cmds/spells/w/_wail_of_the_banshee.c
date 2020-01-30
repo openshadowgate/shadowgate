@@ -38,16 +38,14 @@ void spell_effect(int prof)
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     foes = target_filter(foes);
 
-    max = clevel / 16 + 1;
+    max = clevel;
 
     if (sizeof(foes)) {
         foreach(foe in foes)
         {
-            max--;
             if (do_save(foe, 10) ||
                 max < 0 ||
                 !random(2) ||
-                foe->query_level() > (clevel * 4 / 5) ||
                 foe->query_property("no death")) {
                 tell_object(foe, "%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
                 damage_targ(foe, foe->query_target_limb(), sdamage, "sonic");
@@ -56,6 +54,7 @@ void spell_effect(int prof)
             tell_object(foe, "%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
             tell_room(place, "%^BOLD%^%^BLUE%^" + foe->QCN + " screams as " + foe->QP + " soul is carved out from the body!", foe);
             damage_targ(foe, foe->query_target_limb(), foe->query_max_hp() * 2, "sonic");
+            max -= foe->query_level();
         }
     }
 

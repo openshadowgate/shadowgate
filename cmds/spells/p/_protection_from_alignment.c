@@ -13,7 +13,7 @@ void create()
     set_spell_sphere("abjuration");
     set_domains(({"good", "evil"}));
     set_syntax("cast CLASS protection from alignment on good|evil|chaos|law");
-    set_damage_desc("+2 to savesn");
+    set_damage_desc("+2 to saves");
     set_description("This spell allows you to ward yourself from spells originating at casters with specified alignment. You must belong to opposing alignment group to be able to use this spell.");
     set_verbal_comp();
     set_somatic_comp();
@@ -25,6 +25,13 @@ void spell_effect()
     string poisonf, weapstr, alignstr;
 
     alignstr = arg;
+
+    if (!alignstr)
+    {
+        tell_object(caster,"Syntax:" + query_syntax());
+        TO->remove();
+        return;
+    }
 
     if (!regexp(alignstr, "good|evil|chaos|law")) {
         tell_object(caster,"Syntax:" + query_syntax());

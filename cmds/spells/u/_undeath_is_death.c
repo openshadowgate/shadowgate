@@ -36,7 +36,7 @@ void spell_effect(int prof)
     foes = caster->query_attackers();
     foes = target_filter(foes);
 
-    max = clevel / 12 + 1;
+    max = clevel;
 
     foreach(foe in foes)
     {
@@ -51,7 +51,7 @@ void spell_effect(int prof)
             continue;
         }
 
-        max--;
+        max -= foe->query_level();
 
         tell_object(foe, "%^ORANGE%^%^BOLD%^Your unlife ends, as positive energy destroys your essence!");
         tell_room(place, "%^ORANGE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
