@@ -14,7 +14,7 @@ object base_class_ob(object ob)
     object class_ob;
 
     // conversion code. this class used to be locked up for thieves and rangers only
-    if(objcetp(ob))
+    if(objectp(ob))
     {
         if(!ob->query("base_class"))
         {
