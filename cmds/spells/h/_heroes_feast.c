@@ -16,8 +16,7 @@ create() {
     set_syntax("cast CLASS heroes feast");
     set_description("This spell will allow the caster to create a huge table, filled with delectable treats and succulent "
 "dishes.  The feast created by this prayer will alleviate hunger and thirst, and tastes far better than the what is "
-"provided with the create food prayer.  The feast will not last forever, so take heed.  Also, the gods frown on those who "
-"try to steal leftovers and save them for later.");
+"provided with the create food prayer. ");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);

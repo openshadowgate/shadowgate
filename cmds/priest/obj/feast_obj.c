@@ -7,7 +7,7 @@ void dest_effect();
 object caster,casting_spell;
 int duration,FLAG;
 
-void create() 
+void create()
 {
     ::create();
     set_id( ({ "table","banquet table","banquet","feast","heroes feast" }) );
@@ -79,25 +79,25 @@ void set_casting_spell(object obj)  { casting_spell = obj; }
 
 void heart_beat()
 {
-    if(!objectp(ETO)) 
-    { 
-        dest_effect(); 
-        return; 
+    if(!objectp(ETO))
+    {
+        dest_effect();
+        return;
     }
-    if(!objectp(caster)) 
-    { 
-        call_out("dest_effect",duration); 
+    if(!objectp(caster) || !userp(caster))
+    {
+        call_out("dest_effect",duration);
         set_heart_beat(0);
         return;
     }
-    if(!present(caster,ETO) && !FLAG) 
-    { 
+    if(!present(caster,ETO) && !FLAG)
+    {
         FLAG = 1;
         call_out("dest_effect",duration);
         return;
     }
-    if(present(caster,ETO) && FLAG) 
-    { 
+    if(present(caster,ETO) && FLAG)
+    {
         FLAG = 0;
         remove_call_out("dest_effect");
         return;
@@ -105,7 +105,7 @@ void heart_beat()
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     tell_object(ETO,"The banquet table vanishes before your eyes!");
     if(objectp(casting_spell)) { casting_spell->dest_effect(); }

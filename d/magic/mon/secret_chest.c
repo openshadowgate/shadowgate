@@ -34,10 +34,28 @@ void create(){
 
 void setup_chest(object invoker)
 {
+    object invitem;
+    object * myinven;
+    string * ids;
+
     caster = invoker;
     castname = caster->query_name();
     fname = "/d/save/summons/"+castname+"/"+query_name();
     "/daemon/yuck_d"->load_inventory(this_object(),fname);
+
+    myinven = all_inventory(TO);
+
+    foreach(invitem in myinven)
+    {
+        if (!invitem->is_container()) {
+            continue;
+        }
+
+        if (sizeof(all_inventory(invitem))) {
+            ids = invitem->query_id();
+            force_me("drop " + ids[0]);
+        }
+    }
 }
 
 void die(object obj)
@@ -63,4 +81,18 @@ void save_chest()
     mkdir("/d/save/summons/"+castname);
     mkdir(fname);
     "/daemon/yuck_d"->save_inventory(this_object(),fname);
+}
+
+void receive_given_item(object obj)
+{
+    string * ids;
+
+    if (!obj->is_container()) {
+        return;
+    }
+
+    if (sizeof(all_inventory(obj))) {
+        ids = obj->query_id();
+        force_me("drop " + ids[0]);
+    }
 }

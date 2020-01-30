@@ -70,9 +70,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    bonus = caster->query_stats("intelligence"); // mage specialty, int only.
-    bonus = bonus - 10;
-    strength = CLEVEL + bonus + random(6) + 5;  //adding 5 as base strength to all ward effects so they might work sometimes. N, 6/11.
+    strength = clevel + roll_dice(2, 4);
 
     oldstrength = (int)target->query_property("teleport proof");
     if(oldstrength > strength) {

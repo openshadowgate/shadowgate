@@ -17,9 +17,8 @@ void create()
 {
     ::create();
     set_spell_name("forgotten melody");
-    set_spell_level(([ "cleric" : 7 ]));
+    set_spell_level(([ "classless" : 7 ]));
     set_spell_sphere("enchantment_charm");
-    set_spell_domain("knowledge");
     set_syntax("cast CLASS forgotten melody on TARGET in <language>");
     set_description("This spell has the caster singing the beginning of a catchy tune.  The tune gets locked in the head "
         "of the target listeners.  This prevents them from doing anything involving concentration due to their infatuation with "

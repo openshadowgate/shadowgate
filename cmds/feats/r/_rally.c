@@ -19,16 +19,15 @@ void create() {
     feat_desc("This feat allows the bard to inspire their allies, improving their abilities in the area of choice - whether that be melee, casting or defensive prowess. The ability will last longer, and grow stronger, as the bard gains levels. Those affected by spells inducing a rage or berserker state will gain no benefit from rally.
 
 <rally melee>
-
-    Will increase chance to hit and damage
+  Will increase chance to hit and damage
 
 <rally spells>
-
-    Will increase spell penetration and power
+  Will increase spell penetration and power
 
 <rally defenses>
+  Will improve all saving throws and increase armour class
 
-    Will improve all saving throws and increase armour class
+Without an argument it will turn your currently active rally off.
 ");
     set_required_for(({"anger","calm","charm"}));
     set_target_required(0);
@@ -59,7 +58,10 @@ void execute_feat(){
     object *inven, *partied;
     int i;
     if((int)caster->query_property("using rally")) {
-        tell_object(caster,"You can't try to rally your allies again yet!");
+        object obj;
+        obj = query_active_feat("rally");
+        obj->dest_effect();
+        caster = 0;
         dest_effect();
         return;
     }

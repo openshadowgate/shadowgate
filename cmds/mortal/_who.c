@@ -120,14 +120,15 @@ string list_users(string *races, object tp)
                 length -=3;
             }
             tmp += race_color(who[i]);
-            if (!who[i]->query_alignment())
-                melnmarn = capitalize((string)who[i]->query_name())+" the new adventurer";
-            else if (((int)who[i]->query_login_time() + 60) > time() && (who[i]->query_level() < BUILDER)) {
-                melnmarn = "is awakening";
-            } else if ((string)who[i]->query_title())
+
+            if (!who[i]->query_alignment()) {
+                melnmarn = capitalize((string)who[i]->query_name()) + " the new adventurer";
+            } else if ((string)who[i]->query_title()) {
                 melnmarn = (string)who[i]->query_title();
-            else
-                melnmarn = "("+capitalize((string)who[i]->query_name())+")";
+            } else {
+                melnmarn = "(" + capitalize((string)who[i]->query_name()) + ")";
+            }
+
             if (in_edit(who[i]) || in_input(who[i]))
             {
                 if (who[i]->query_invis());
