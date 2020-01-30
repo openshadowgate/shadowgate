@@ -11,7 +11,7 @@ void create() {
     set_spell_level(([ "mage" : 7, "oracle" : 7 ]));
     set_mystery("spellscar");
     set_spell_sphere("abjuration");
-    set_damage_desc("clevel/2+5 spell reflection chance.");
+    set_damage_desc("clevel/6+5 spell reflection chance.");
     set_syntax("cast CLASS spell turning");
     set_description("The most skilled of abjurationists can use such a spell to raise a protective ward around themselves"
 ". While it holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of "
@@ -49,7 +49,7 @@ void spell_effect(int prof) {
       tell_room(place,"%^BOLD%^%^MAGENTA%^A glyph appears in a bright flare of light before "+caster->QCN+", and then "
 "vanishes!%^RESET%^",caster);
     }
-    caster->set_property("spellturning",clevel/2+5);
+    caster->set_property("spellturning",clevel/6+5);
     call_out("dest_effect", 1800 + (ROUND_LENGTH * (clevel * 3 + roll_dice(1, 20))));
     spell_successful();
     addSpellToCaster();

@@ -151,7 +151,7 @@ void shadow_effects(object obj)
         {
             tell_object(obj, cm("The shadowy tendril wraps around your ankle and pulls you from your feet!"));
             tell_room(place, cm("The shadowy tendtril wraps around "+obj->QCN+"'s ankle and pulls "+obj->QO+" from "+obj->QP+" feet!"),obj);
-            obj->set_tripped(clevel/10, cm("A shadowy tendril is wrapped around your ankle!"));
+            obj->set_tripped(roll_dice(1, 2), cm("A shadowy tendril is wrapped around your ankle!"));
         }
         else
         {
@@ -169,7 +169,7 @@ void shadow_effects(object obj)
         {
             tell_object(obj, cm("You try to dodge but to no avail, the streak of darkness hits you in the head, staggering you with intense pain!"));
             tell_room(place, cm(""+obj->QCN+" tries to dodge but to no avail, the streak of darkness hits "+obj->QO+" square in the head!"), obj);
-            obj->set_paralyzed(clevel/5, cm("You are trying to recover your senses!"));
+            obj->set_paralyzed(roll_dice(1, 4), cm("You are trying to recover your senses!"));
         }
         else
         {
@@ -186,7 +186,7 @@ void shadow_effects(object obj)
         {
             tell_object(obj, cm("The shadowy figure wraps about you like a dense blanket of smoke, making it impossible to see!"));
             tell_room(place, cm("The shadowy figure wraps around "+obj->QCN+", making it impossible for "+obj->QO+" to see!"),obj);
-            obj->set_temporary_blinded(clevel/10);
+            obj->set_temporary_blinded(clevel/20 + 1);
         }
         else
         {

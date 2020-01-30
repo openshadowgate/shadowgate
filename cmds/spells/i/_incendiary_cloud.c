@@ -152,7 +152,7 @@ int storm_effects(object obj){
         if(do_save(obj,0)) tell_object(obj,"%^BOLD%^%^WHITE%^You cough and wave away the worst of the smoke!%^RESET%^");
         else {
           tell_object(obj,"%^BOLD%^%^BLACK%^The smoke makes it difficult to see or breathe!%^RESET%^");
-          obj->set_paralyzed(roll_dice(2,6),"You are too dazed and choked by the cloud of smoke!");
+          obj->set_paralyzed(roll_dice(1,4),"You are too dazed and choked by the cloud of smoke!");
         }
       break;
       case 1:

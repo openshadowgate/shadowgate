@@ -479,10 +479,10 @@ int check_reflection()
     switch(flagz)
     {
     case 1:
-        turnperc = (int)target->query_skill("spellcraft")/3;
+        turnperc = (int)target->query_skill("spellcraft")/4;
         break;
     case 2:
-        turnperc = (int)target->query_skill("athletics")/3;
+        turnperc = (int)target->query_skill("athletics")/4;
         break;
     default:
         turnperc = 0;
