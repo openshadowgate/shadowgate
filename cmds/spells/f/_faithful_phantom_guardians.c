@@ -18,10 +18,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
-    set_components(([
-      "mage" : ([ "emerald" : 2, ]),
-    ]));
-	set_helpful_spell(1);
+    set_helpful_spell(1);
 }
 
 string query_casting_string() {
