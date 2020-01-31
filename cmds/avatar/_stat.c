@@ -9,18 +9,18 @@ void stats_display();
 
 mapping vars=([]);
 
-int query_stance_bonus(object target) 
+int query_stance_bonus(object target)
 {
 	if (interactive(target)) { return target->query_defensive_bonus(); }
 	return 0;
 }
 
-int cmd_stat(string str) 
+int cmd_stat(string str)
 {
     string name, title, *classes, race, married, guild, cl, diety, sphere, domain;
     int *levels, hp, max_hp, mp, max_mp, sp, max_sp, exp, i, lev, height, weight;
     int ac, dexac, stanceac, at_bon, dam_bon;
-    string posxxx; 
+    string posxxx;
     object ob;
     levels = allocate(4);
     classes = ({});
@@ -29,7 +29,7 @@ int cmd_stat(string str)
         return 0;
     }
     str = lower_case(str);
-// changed the order to check current environment first since usually we're 
+// changed the order to check current environment first since usually we're
 // wanting to check something we're testing or is in the same room *Styx* 1/17/03
    if (!(ob = present(str, ETP)))
         if (!(ob = to_object(str)))
@@ -55,7 +55,7 @@ int cmd_stat(string str)
         return notify_fail("Failed to find: "+str+".\n");
     if (wizardp(ob) && wizardp(TP))
         if (ob->query_level() > TP->query_level())
-            return notify_fail("Failed to find: "+str+".\n");        
+            return notify_fail("Failed to find: "+str+".\n");
     title = (string)ob->query_short();
     classes = (string *)ob->query_classes();
     race = (string)ob->query_race();
@@ -68,7 +68,7 @@ int cmd_stat(string str)
     dam_bon = (int)ob->query_damage_bonus();
     dexac = BONUS_D->ac_bonus(ob,ob);
     //dexac *= -1;
-    
+
 //  write("dexac bonus:"+identify(dexac));
     dexac = ac + dexac;
     //stanceac = query_stance_bonus(ob);
@@ -84,7 +84,7 @@ int cmd_stat(string str)
     diety = (string)ob->query_diety();
     sphere = (string)ob->query_sphere();
     domain = implode(ob->query_divine_domain(), ", ");
-   
+
     weight = (int)ob->query_player_weight();
     height = (int)ob->query_player_height();
     if (!married) married = "none";
@@ -115,7 +115,7 @@ int cmd_stat(string str)
            arrange_string("AC:+=Dex:+=Stance: "+ac+":"+dexac+":"+stanceac,35));
     printf("%s%s%s\n",
            arrange_string("Race: "+race,25),
-           arrange_string("Alignment: "+ob->query_alignment(),25),
+           arrange_string("Alignment: "+ob->query_alignment() + "(" + ob->query_true_align() + ")",25),
            arrange_string("Sex: "+(string)ob->query_gender(), 25) );
      printf("%s%s%s\n",
            arrange_string("Height: "+height,25),
@@ -141,13 +141,13 @@ int cmd_stat(string str)
 	     arrange_string("Damage Bonus: "+dam_bon, 25));
     printf("%s%s%s\n",
            arrange_string("Quest points: "+(int)ob->query_quest_points(), 25),
-           arrange_string("Spouse: "+capitalize(married), 25), 
+           arrange_string("Spouse: "+capitalize(married), 25),
 	     arrange_string("Attack Bonus: "+at_bon, 25));
 
     printf("%s\n", arrange_string("Guild: "+guild, 80) );
     if (ob->is_player()) {
 /****** Old ThAC0 code. ugly, my fault, Garrett.
-     printf("%s/%s/%s/%s/%s\n", arrange_string("THAC0: "+ob->Thaco(1,ob,ob),15), 
+     printf("%s/%s/%s/%s/%s\n", arrange_string("THAC0: "+ob->Thaco(1,ob,ob),15),
 arrange_string("THAC0: "+ob->Thaco(2,ob,ob),15) ,
 arrange_string("THAC0: "+ob->Thaco(3,ob,ob),15) ,
 arrange_string("THAC0: "+ob->Thaco(4,ob,ob),15) ,
@@ -160,7 +160,7 @@ arrange_string("THAC0: "+ob->Thaco(5,ob,ob),15) );
     return 1;
 }
 
-void show_quests(object ob) 
+void show_quests(object ob)
 {
     string *quests;
     int i;
@@ -193,7 +193,7 @@ void money_display(object ob) {
     return;
 }
 
-void stats_display(object ob) 
+void stats_display(object ob)
 {
     string str1, str2, str3;
     //tell_object(TP, "ob = "+identify(ob));
@@ -206,7 +206,7 @@ void stats_display(object ob)
 
     vars["total_stats"] = vars["st"]+vars["in"]+vars["wi"]+vars["de"]+vars["co"]+vars["ch"];
     vars["add_pts"]=(int)ob->query("stat_points_gained");
-    
+
     if(ob->query_base_stats("strength") != ob->query_stats("strength"))
         vars["st2"] = (int)ob->query_stats("strength");
     if(ob->query_base_stats("intelligence") != ob->query_stats("intelligence"))
@@ -224,16 +224,16 @@ void stats_display(object ob)
 
     printf("Stats: (%d) Base. (%d) Add. [%d] Total.\n",vars["total_stats"]-vars["add_pts"],vars["add_pts"],vars["total_stats"]);
     /*if (estr != -1) {
-        
+
         str1 = "Strength: "+st+"("+estr+")";
         if(st2) str1 += " ["+st2+"]";
-        
+
         str2 = "Intelligence: "+in;
         if(in2) str2 += " ["+in2+"]";
-        
+
         str3 = "Wisdom: "+wi;
         if(wi2) str3 += " ["+wi2+"]";
-        
+
         printf("%s%s%s\n",
                arrange_string(str1,25),
                arrange_string(str2,25),
@@ -242,10 +242,10 @@ void stats_display(object ob)
 
         str1 = "Strength: "+vars["st"];
         if(vars["st2"]) str1 += " ["+vars["st2"]+"]";
-        
+
         str2 = "Intelligence: "+vars["in"];
         if(vars["in2"]) str2 += " ["+vars["in2"]+"]";
-        
+
         str3 = "Wisdom: "+vars["wi"];
         if(vars["wi2"]) str3 += " ["+vars["wi2"]+"]";
 
@@ -257,10 +257,10 @@ void stats_display(object ob)
 
         str1 = "Dexterity: "+vars["de"];
         if(vars["de2"]) str1 += " ["+vars["de2"]+"]";
-        
+
         str2 = "Constitution: "+vars["co"];
         if(vars["co2"]) str2 += " ["+vars["co2"]+"]";
-        
+
         str3 = "Charisma: "+vars["ch"];
         if(vars["ch2"]) str3 += " ["+vars["ch2"]+"]";
 
