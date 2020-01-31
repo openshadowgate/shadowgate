@@ -50,8 +50,9 @@ int get_exp_cost(object obj,int num)
     if(level > CHARACTER_LEVEL_CAP) level = CHARACTER_LEVEL_CAP;
     extra = (int)obj->query_exp() - EXP_NEEDED[level];
     //changed this otherwise with an LA race they do not get dropped down to a level where they can add another class - Saide, December 2016
-    if(sizeof((string *)obj->query_classes()) == 1) cost = EXP_NEEDED[level] - EXP_NEEDED[level - (num)];
-    else cost = EXP_NEEDED[level] - EXP_NEEDED[level - (num - level_adjust)]; // needs to be here or LA races have too much exp subtracted -Ares
+/*    if(sizeof((string *)obj->query_classes()) == 1) cost = EXP_NEEDED[level] - EXP_NEEDED[level - (num)];
+    else cost = EXP_NEEDED[level] - EXP_NEEDED[level - (num - level_adjust)]; // needs to be here or LA races have too much exp subtracted -Ares */
+    cost = EXP_NEEDED[level] - EXP_NEEDED[level - (num)]; // with LA accounted for, simple query only required. N, 31/1/20.
     cost = cost + extra;
     return cost;
 }
@@ -258,8 +259,10 @@ int cmd_abandon(string str)
     feedlevel = (int)TP->query_class_level(str);
     if(lvladjust) { // need to revise the class level feed-in if level adjusted. N, 31/1/20.
       classlvls = 0;
-      for(i=0;i<sizeof(classes);i++) {
-        if(classes[i] != str) classlvls += TP->query_class_level(classes[i]);
+      if(sizeof(classes) > 1) {
+        for(i=0;i<sizeof(classes);i++) {
+          if(classes[i] != str) classlvls += TP->query_class_level(classes[i]);
+        }
       }
       if(!(classlvls % 10)) { // means they're abandoning a LA impacted, if all the rest divide cleanly by 10.
         feedlevel += lvladjust;
@@ -269,7 +272,7 @@ int cmd_abandon(string str)
     drop = get_level_block(feedlevel);// + lvladjust);
     tell_object(TP, "drop = "+drop);
     cost = get_exp_cost(TP,drop);
-    //cost = get_exp_cost(TP, (drop + lvladjust)); // swapped these back over as have added LA calc into the overall process. N, 31/1/20.
+//    cost = get_exp_cost(TP, (drop + lvladjust));
 
     if ((int)TP->query_class_level(str) > (10 - lvladjust)) {
         tell_object(TP, "\nAre you sure you want to drop %^BOLD%^%^" + drop + " %^RESET%^"
