@@ -228,7 +228,7 @@ int cmd_cast(string str)
     TP->remove_property("spell_casting");
     TP->set_property("spell_casting",targ);
 
-    if (FEATS_D->usable_feat(TP, "surprise spells")) {
+    if (FEATS_D->usable_feat(TP, "surprise spells") || FEATS_D->usable_feat(TP, "elusive spellcraft")) {
         targ->set_silent_casting(1);
     }
 
