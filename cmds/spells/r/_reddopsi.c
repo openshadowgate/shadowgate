@@ -11,7 +11,7 @@ void create() {
     set_spell_level(([ "psion" : 7 ]));
     set_spell_sphere("abjuration");
     set_discipline("kineticist");
-    set_damage_desc("clevel/2+5 spell reflection chance.");
+    set_damage_desc("clevel/6+5 spell reflection chance.");
     set_syntax("cast CLASS reddopsi");
     set_description("Talented kineticists can manipulate the area around them, causing spells and powers to rebound upon their originators. While this power holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of whether they are hostile or friendly. The ward will not reflect splash damage or AOE, but only direct-targetted spells. This spell will override spell reflection and reflection feats.");
     set_verbal_comp();
@@ -41,7 +41,7 @@ void spell_effect(int prof) {
       tell_object(caster, "%^RESET%^%^MAGENTA%^You close your eyes, inhaling deeply as you bring into being a %^CYAN%^rune of protection%^MAGENTA%^. A faint hint of %^ORANGE%^saffron %^MAGENTA%^hangs in the air before being subsumed by the fragrance of %^BOLD%^%^CYAN%^ozone%^RESET%^%^MAGENTA%^.%^RESET%^");
     }
     tell_room(place,"%^RESET%^%^MAGENTA%^You smell %^ORANGE%^saffron %^MAGENTA%^followed by a strong scent of %^BOLD%^%^CYAN%^ozone%^RESET%^%^MAGENTA%^ as a %^CYAN%^rune %^MAGENTA%^appears by sweeps and loops in the air before "+caster->QCN+"!%^RESET%^",caster);
-    caster->set_property("spellturning",clevel/2+5);
+    caster->set_property("spellturning",clevel/6+5);
     call_out("dest_effect", 1800 + (ROUND_LENGTH * (clevel * 3 + roll_dice(1, 20))));
     spell_successful();
     addSpellToCaster();
@@ -51,7 +51,7 @@ void dest_effect(){
     int i;
     if(objectp(CASTER)){
       tell_object(caster,"%^MAGENTA%^You feel the protective spell ward fade from you.%^RESET%^");
-      caster->set_property("spellturning",-(clevel/2+5));
+      caster->set_property("spellturning",-(clevel/6+5));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

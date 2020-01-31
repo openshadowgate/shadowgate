@@ -36,7 +36,7 @@ void spell_effect(int prof)
     foes = caster->query_attackers();
     foes = target_filter(foes);
 
-    max = clevel;
+    max = clevel * 2;
 
     foreach(foe in foes)
     {

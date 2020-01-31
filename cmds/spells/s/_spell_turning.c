@@ -60,7 +60,7 @@ void dest_effect(){
     if(objectp(CASTER))
     {
       tell_object(caster,"%^MAGENTA%^You feel the protective spell ward fade from you.%^RESET%^");
-      caster->set_property("spellturning",-(clevel/2+5));
+      caster->set_property("spellturning",-(clevel/6+5));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
