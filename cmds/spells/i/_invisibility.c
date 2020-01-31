@@ -35,23 +35,25 @@ spell_effect(int prof)
 {
     if (!target) target=caster;
 
-    if((string)TO->query_spell_type() == "potion")
-      tell_object(caster,"%^CYAN%^As the potion warms your stomach, you look down and realise your body is fading!%^RESET%^");
-    else {
-      if (interactive(caster)) {
-        if (target==caster) {
-            tell_object(caster,"%^CYAN%^You continue to chant as your body starts to fade from sight.");
-            tell_room(place,"%^CYAN%^"+caster->QCN+" continues to chant as "+caster->QS+" starts to fade and you are able to see through "+caster->QO+"!",caster);
+    if (!silent_casting) {
+        if ((string)TO->query_spell_type() == "potion") {
+            tell_object(caster, "%^CYAN%^As the potion warms your stomach, you look down and realise your body is fading!%^RESET%^");
+        } else{
+            if (interactive(caster)) {
+                if (target == caster) {
+                    tell_object(caster, "%^CYAN%^You continue to chant as your body starts to fade from sight.");
+                    tell_room(place, "%^CYAN%^" + caster->QCN + " continues to chant as " + caster->QS + " starts to fade and you are able to see through " + caster->QO + "!", caster);
+                }else {
+                    tell_object(caster, "%^CYAN%^You face " + target->QCN + ", the palms of your hands held towards " + target->QO + ", and continue to chant the spell.");
+                    tell_object(target, "%^CYAN%^" + caster->QCN + " faces you, the palms of " + caster->QP + " hands held towards you, as " + caster->QS + " continues to chant.");
+                    tell_room(place, "%^CYAN%^" + caster->QCN + " faces " + target->QCN + ", the palms of " + caster->QP + " hands held towards " + target->QO + ", as " + caster->QS + " continues to chant.", ({ caster, target }));
+                }
+            }else {
+                tell_room(place, "%^CYAN%^A whispering sound emits from " + caster->QCN + " as the area glows with a black aura.");
+            }
         }
-        else {
-            tell_object(caster,"%^CYAN%^You face "+target->QCN+", the palms of your hands held towards "+target->QO+", and continue to chant the spell.");
-            tell_object(target,"%^CYAN%^"+caster->QCN+" faces you, the palms of "+caster->QP+" hands held towards you, as "+caster->QS+" continues to chant.");
-            tell_room(place,"%^CYAN%^"+caster->QCN+" faces "+target->QCN+", the palms of "+caster->QP+" hands held towards "+target->QO+", as "+caster->QS+" continues to chant.",({caster, target}));
-        }
-      }
-      else tell_room(place,"%^CYAN%^A whispering sound emits from "+caster->QCN+" as the area glows with a black aura.");
     }
-    call_out("targ_vanish",2, prof);
+    call_out("targ_vanish", 2, prof);
 }
 
 void targ_vanish(int prof)
