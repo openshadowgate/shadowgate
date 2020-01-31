@@ -83,17 +83,30 @@ object query_master()
 void action(string command)
 {
     string temp, temp2;
-    if(!command)
+
+    if (!command) {
         return 0;
-    if(sscanf(command,"%s %s",temp, temp2) != 2)
-        temp=command;
+    }
+    if (sscanf(command, "%s %s", temp, temp2) != 2) {
+        temp = command;
+    }
+
     //This is a spot to check against whitelist. Last dangerous
     //command that used no confirmations should have been modded so
     //this might be not necessary. Whitelist stored in domination.h
-    disabled=1;
-    if(slave)
-        slave->set_property("dominated",1);
-    slave->force_me(command);
+
+    disabled = 1;
+    if (slave) {
+        slave->set_property("dominated", 1);
+    }
+
+    if (command == "follow") {
+        master->add_follower(slave);
+        tell_object(master, "The " + slave->query_short() + " is now following you.");
+    } else {
+        slave->force_me(command);
+    }
+
     slave->remove_property("dominated");
     disabled=0;
     return 1;

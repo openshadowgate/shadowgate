@@ -12,7 +12,8 @@ int amount;
 void create() {
     ::create();
     set_spell_name("astral projection");
-    set_spell_level((["oracle":9, "mage":9,]));
+    set_spell_level((["oracle":9, "mage":9,"cleric":9]));
+    set_domains("travel");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS astral projection");
     set_mystery("ancestor");

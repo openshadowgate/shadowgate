@@ -60,11 +60,11 @@ int command(string str)
       notify_fail("That person is dominated by someone else!\n");
       return 0;
     }
+
   tell_object(ob,"%^GREEN%^"+TPQCN+" telepathically commands you "+
 	      "to do something.");
   tell_object(TP,"%^GREEN%^You telepathically command "+
 	      ob->query_cap_name()+" to "+temp2+".");
-  tell_room(environment(TP),TPQCN+" concentrates.", ({TP, ob}) );
   if(!clothes->action(temp2))
     tell_object(TP,"You can't force "+targetcn+" to do that.");
   return 1;

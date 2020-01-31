@@ -19,7 +19,7 @@ void create(){
     set_spell_name("faithful mount");
     set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("conjuration_summoning");
-    set_spell_domain("travel");
+    set_domains("travel");
     set_syntax("cast CLASS faithful mount");
     set_description("By means of this spell, the caster calls upon their god to send forth a horse to serve as their "
 "faithful mount and to help defend them.\n\nThis spell will not work if you are already mounted.");

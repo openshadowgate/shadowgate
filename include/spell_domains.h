@@ -2,7 +2,7 @@
 
 #define SPELL_DOMAINS (([\
     "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire" }) ,\
-    "callamir"         : ({ "good", "charm", "air", "trickery" }),\
+    "callamir"         : ({ "good", "charm", "air", "trickery", "travel"}),     \
     "kreysneothosies"  : ({ "protection", "vigilance", "strength", "good", "war" }) , \
     "nilith"           : ({ "war", "strength", "destruction", "evil" }),\
     "lord shadow"      : ({ "evil", "cold", "tyranny", "suffering", "darkness" }) , \

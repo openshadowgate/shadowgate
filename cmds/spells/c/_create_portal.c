@@ -1,6 +1,6 @@
 //~Circe~ 7/30/05
-//This power will allow the psion to open a portal, allowing 
-//people to travel between two places. 
+//This power will allow the psion to open a portal, allowing
+//people to travel between two places.
 //Ganked for the cleric domain version -Ares
 #include <spell.h>
 
@@ -12,9 +12,9 @@ object endplace;
 void create(){
     ::create();
     set_spell_name("create portal");
-    set_spell_level(([ "cleric" : 8 ]));
+    set_spell_level(([ "cleric" : 8]));
     set_spell_sphere("alteration");
-    set_spell_domain("travel");
+    set_domains("travel");
     set_syntax("cast CLASS create portal to <location>");
     set_description("This power allows the priest to call on the power of his deity to open a portal from his current "
 "location to any place that he has remembered before.  The portal can not open unless both rooms may be teleported to "
@@ -43,7 +43,7 @@ void spell_effect(int prof){
     int mypower,startpower,endpower,bonus;
     mapping tmp;
 
-    if(!sscanf(arg, "%s", a)) 
+    if(!sscanf(arg, "%s", a))
     {
         tell_object(caster,"This spell requires a target destination.");
         tell_room(place,caster->QCN+" looks confused.",caster);
@@ -62,19 +62,19 @@ void spell_effect(int prof){
         return;
     }
 
-    if (file) 
+    if (file)
     {
         if (!(endplace = find_object_or_load(file))) { file = 0; }
     }
 
-    if(endplace && (endplace->query_property("no teleport") || place->query_property("no teleport") || !endplace->is_room())) 
+    if(endplace && (endplace->query_property("no teleport") || place->query_property("no teleport") || !endplace->is_room()))
     {
         file = 0;
     }
 //teleport proof stuff by ~Circe~ 6/20/08
-//new property to be used for areas protected from teleport 
+//new property to be used for areas protected from teleport
 //but not foolproof
-   if(endplace && 
+   if(endplace &&
       (endplace->query_property("teleport proof") ||
       place->query_property("teleport proof") ||
       !endplace->is_room())){
@@ -93,7 +93,7 @@ void spell_effect(int prof){
       }
    }
 
-    if (!file) 
+    if (!file)
     {
         tell_object(caster,"You sense some sort of interference "+
            "blocking your way.");
@@ -137,7 +137,7 @@ void do_portal(object endplace)
     caster->removeAdminBlock();
     if (caster->query_ghost()) { dest_effect(); return;}
 
-    if (!endplace) 
+    if (!endplace)
     {
         tell_object(caster,"%^BOLD%^^%MAGENTA%^You sense some sort of interference "+
            "blocking your way.");
@@ -158,7 +158,7 @@ void do_next(object endplace)
     caster->removeAdminBlock();
     if (caster->query_ghost()) { dest_effect(); return; }
 
-    if (!endplace) 
+    if (!endplace)
     {
         tell_object(caster,"You sense some sort of interference "+
            "blocking your way.");
@@ -171,7 +171,7 @@ void do_next(object endplace)
     tell_room(place,"%^CYAN%^With a sudden flash of light, the portal is completed, "
         "opening to "+newplace+"!");
     open_portal();
-	//changing this so if it's dispelled the portal will go away correctly 
+	//changing this so if it's dispelled the portal will go away correctly
 	//functions much like gate - Saide
 	call_out("dest_effect",clevel);
     	return;
@@ -183,7 +183,7 @@ int open_portal()
 	addSpellToCaster();
    	tell_room(endplace,"%^BOLD%^%^CYAN%^A shimmering portal opens in the air!");
 
-	if(member_array("portal", place->query_exits()) == -1) 
+	if(member_array("portal", place->query_exits()) == -1)
 	{
     		place->add_exit(base_name(endplace),"portal");
 	}
@@ -220,20 +220,20 @@ int open_portal()
 int close_portal()
 {
 	string CreatedExit;
-	if(objectp(endplace)) 
+	if(objectp(endplace))
 	{
-		if(CreatedExit = TO->query_property("MyCreatedExit")) 
+		if(CreatedExit = TO->query_property("MyCreatedExit"))
 		{
 			endplace->remove_exit(CreatedExit);
 		}
 		else endplace->remove_exit("portal");
-   		
+
 		tell_room(endplace,"%^MAGENTA%^The portal shimmers briefly, "+
 	      "then closes and fades away.");
 	}
-	if(objectp(place)) 
+	if(objectp(place))
 	{
-		if(CreatedExit = TO->query_property("MyCreatedEnter")) 
+		if(CreatedExit = TO->query_property("MyCreatedEnter"))
 		{
 			place->remove_exit(CreatedExit);
 		}
@@ -245,7 +245,7 @@ int close_portal()
    	return 1;
 }
 
-void dest_effect() 
+void dest_effect()
 {
 	close_portal();
     	::dest_effect();

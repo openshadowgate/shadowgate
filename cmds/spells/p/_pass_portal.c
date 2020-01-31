@@ -13,7 +13,7 @@ void create() {
     set_spell_name("pass portal");
     set_spell_level(([ "cleric" : 6 ]));
     set_spell_sphere("alteration");
-    set_spell_domain("travel");
+    set_domains("travel");
     set_syntax("cast CLASS pass portal on <direction>");
     set_description("A priest with the travel domain may use this spell to bypass many doors and barriers found blocking "
 "her path.  Some rooms may be enchanted to prevent such magic, but most are not.  If the priest is visible when casting "
@@ -59,7 +59,7 @@ void spell_effect(int prof) {
      TO->remove();
      return 0;
   }
-  if(!caster->query_invis()){   
+  if(!caster->query_invis()){
      tell_room(place,"%^ORANGE%^"+caster->QCN+" seems to %^YELLOW%^"+
         "shine %^RESET%^%^ORANGE%^brightly for a moment before "+
         "vanishing!%^RESET%^",caster);

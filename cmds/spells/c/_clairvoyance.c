@@ -16,8 +16,9 @@ void create()
 {
     ::create();
     set_spell_name("clairvoyance");
-    set_spell_level(([ "psion" : 1, "mage" : 2, "bard" : 3, "assassin" : 4, "inquisitor" : 3 ]));
+    set_spell_level(([ "psion" : 1, "mage" : 2, "bard" : 3, "assassin" : 4, "inquisitor" : 3, "oracle":2, "cleric":2]));
     set_discipline("seer");
+    set_domains("travel");
     set_mystery("lore");
     set_spell_sphere("divination");
     set_syntax("cast CLASS clairvoyance on TARGET");

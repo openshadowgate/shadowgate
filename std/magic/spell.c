@@ -341,89 +341,202 @@ void set_domains(mixed str)
         divine_domains = str;
 }
 
-void set_cast_string(string str) {  cast_string = str; }
-void set_silent_casting(int a) {    silent_casting = a; }
-void set_target_required(int a) {   target_required = a; }
-void set_verbal_comp() {    verbal_comp = 1; }
-void set_somatic_comp() {   somatic_comp = 1; }
-void aoe_spell(int num) { aoe_spell = num; }
-int query_aoe_spell() { return aoe_spell; }
-void traveling_aoe_spell(int num) { traveling_aoe_spell = num; }
-int query_traveling_aoe_spell() { return traveling_aoe_spell; }
-void traveling_spell(int num) { traveling_spell = num; }
-int query_traveling_spell() { return traveling_spell; }
-void set_healing_spell(int num) { healing_spell = num; }
-int query_healing_spell() { return healing_spell; }
-void evil_spell(int num) { evil_spell = 1; }
-int query_evil_spell() { return evil_spell; }
-void mental_spell() { mental_spell = 1; }
-int query_mental_spell() { return mental_spell; }
-void splash_spell(int num) { splash_spell = num; }
-int query_splash_spell() {return splash_spell;}
-void set_aoe_message(string str) { aoe_message = str; }
-string query_aoe_message() { return aoe_message; }
+void set_cast_string(string str)
+{
+    cast_string = str;
+}
 
-void set_feats_required(mapping temp) {
-    if (!feats_required) feats_required = ([]);
+void set_silent_casting(int a)
+{
+    silent_casting = a;
+}
+
+void set_target_required(int a)
+{
+    target_required = a;
+}
+
+void set_verbal_comp()
+{
+    verbal_comp = 1;
+}
+
+void set_somatic_comp()
+{
+    somatic_comp = 1;
+}
+
+void aoe_spell(int num)
+{
+    aoe_spell = num;
+}
+
+int query_aoe_spell()
+{
+    return aoe_spell;
+}
+
+void traveling_aoe_spell(int num)
+{
+    traveling_aoe_spell = num;
+}
+
+int query_traveling_aoe_spell()
+{
+    return traveling_aoe_spell;
+}
+
+void traveling_spell(int num)
+{
+    traveling_spell = num;
+}
+
+int query_traveling_spell()
+{
+    return traveling_spell;
+}
+
+void set_healing_spell(int num)
+{
+    healing_spell = num;
+}
+
+int query_healing_spell()
+{
+    return healing_spell;
+}
+
+void evil_spell(int num)
+{
+    evil_spell = 1;
+}
+
+int query_evil_spell()
+{
+    return evil_spell;
+}
+
+void mental_spell()
+{
+    mental_spell = 1;
+}
+
+int query_mental_spell()
+{
+    return mental_spell;
+}
+
+void splash_spell(int num)
+{
+    splash_spell = num;
+}
+
+int query_splash_spell()
+{
+    return splash_spell;
+}
+
+void set_aoe_message(string str)
+{
+    aoe_message = str;
+}
+
+string query_aoe_message()
+{
+    return aoe_message;
+}
+
+void set_feats_required(mapping temp)
+{
+    if (!feats_required) {
+        feats_required = ([]);
+    }
     feats_required = temp;
 }
 
-string query_feat_required(string myclass) {
-    if(!feats_required) feats_required = ([]);
-    if(feats_required[myclass]) return feats_required[myclass];
+string query_feat_required(string myclass)
+{
+    if (!feats_required) {
+        feats_required = ([]);
+    }
+    if (feats_required[myclass]) {
+        return feats_required[myclass];
+    }
     return "me";
 }
 
-mapping query_feats_required() {
-    if(!feats_required) feats_required = ([]);
+mapping query_feats_required()
+{
+    if (!feats_required) {
+        feats_required = ([]);
+    }
     return feats_required;
 }
 
 void startCasting()
 {
-    object *inven;
-    int i,j,roll,targroll,displayflag;
+    object* inven;
+    int i, j, roll, targroll, displayflag;
     string displaystring, printstring;
 
-    if (silent_casting)
+    if (silent_casting) {
         return;
+    }
 
     inven = all_living(ETP);
-    roll = TP->query_skill("spellcraft")+ roll_dice(1,20);
-    if(TP->usable_feat("elusive spellcraft"))
-        roll += roll_dice(1,20);
-    displaystring = (string)TO->query_cast_string()+"\n";
-    if(displaystring == "0\n") displaystring = "%^BOLD%^%^WHITE%^"+TPQCN+" starts casting a spell.%^RESET%^\n";
-    if(displaystring == "display\n") displayflag = 1;
-    if(!TP->query_invis() && userp(target)) printstring = "%^YELLOW%^You recognize this spell as "+spell_name+", aimed at "+target->QCN+"!%^RESET%^";
-    else printstring = "%^YELLOW%^You recognize this spell as "+spell_name+"!%^RESET%^";
+    roll = TP->query_skill("spellcraft") + roll_dice(1, 20);
+    if (TP->usable_feat("elusive spellcraft")) {
+        roll += roll_dice(1, 20);
+    }
+    displaystring = (string)TO->query_cast_string() + "\n";
+    if (displaystring == "0\n") {
+        displaystring = "%^BOLD%^%^WHITE%^" + TPQCN + " starts casting a spell.%^RESET%^\n";
+    }
+    if (displaystring == "display\n") {
+        displayflag = 1;
+    }
+    if (!TP->query_invis() && userp(target)) {
+        printstring = "%^YELLOW%^You recognize this spell as " + spell_name + ", aimed at " + target->QCN + "!%^RESET%^";
+    } else {
+        printstring = "%^YELLOW%^You recognize this spell as " + spell_name + "!%^RESET%^";
+    }
 
     j = sizeof(inven);
-    for (i=0;i<j;i++) {
-      if(inven[i] == TP) continue;
-      if(!objectp(inven[i])) continue;
-      targroll = inven[i]->query_skill("spellcraft") + roll_dice(1,20);
-      if(roll <= targroll) {
-        if(!displayflag) tell_object(inven[i],displaystring+printstring);
-        else tell_object(inven[i],printstring);
-      }
-      else {
-        if(roll <= (targroll - 10)) {
-          if(!displayflag) tell_object(inven[i],displaystring);
+    for (i = 0; i < j; i++) {
+        if (inven[i] == TP) {
+            continue;
         }
-      }
+        if (!objectp(inven[i])) {
+            continue;
+        }
+        targroll = inven[i]->query_skill("spellcraft") + roll_dice(1, 20);
+        if (roll <= targroll) {
+            if (!displayflag) {
+                tell_object(inven[i], displaystring + printstring);
+            } else {
+                tell_object(inven[i], printstring);
+            }
+        }else {
+            if (roll <= (targroll - 10)) {
+                if (!displayflag) {
+                    tell_object(inven[i], displaystring);
+                }
+            }
+        }
     }
     return;
 }
 
-object find_compbag(string component, int amnt, string myclass){
-   object compBag;
-   int i = 1;
-   while (compBag = present("compx "+i, caster))
-   {
-        if ((int)compBag->query_comp(component) >= amnt) return compBag;
+object find_compbag(string component, int amnt, string myclass)
+{
+    object compBag;
+    int i = 1;
+    while (compBag = present("compx " + i, caster)) {
+        if ((int)compBag->query_comp(component) >= amnt) {
+            return compBag;
+        }
         i++;
-   }
+    }
 }
 
 // used to remove the perfect caster feat from a player after they have reflected a spell
