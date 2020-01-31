@@ -4,10 +4,11 @@ inherit SPELL;
 
 int tracker;
 
-void create() {
+void create()
+{
     ::create();
     set_spell_name("aspect of the wolf");
-    set_spell_level(([ "druid":5, "ranger":4]));
+    set_spell_level(([ "druid" : 5, "ranger" : 4]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS aspect of the wolf");
     set_damage_desc("+4 to str and dex, knockdown feat");
@@ -40,13 +41,13 @@ void spell_effect(int prof)
 
     caster->set_property("aspect of the wolf", 1);
     caster->set_property("augmentation", 1);
-    caster->add_stat_bonus("strength",4);
-    caster->add_stat_bonus("dexterity",4);
-    if (member_array("knockdown", (string *) caster->query_temporary_feats()) == -1) {
+    caster->add_stat_bonus("strength", 4);
+    caster->add_stat_bonus("dexterity", 4);
+    if (member_array("knockdown", (string*)caster->query_temporary_feats()) == -1) {
         caster->add_temporary_feat("knockdown");
         tracker = 1;
     }
-    caster->set_property("spelled", ({TO}));
+    caster->set_property("spelled", ({ TO }));
     call_out("dest_effect", ROUND_LENGTH * 5 * clevel);
     addSpellToCaster();
 }
@@ -59,10 +60,12 @@ void dest_effect()
         caster->add_stat_bonus("strength", -4);
         caster->add_stat_bonus("dexterity", -4);
         tell_object(caster, "%^GREEN%^%^BOLD%^The feeling of the hunt leaves you.");
-        if (tracker == 1)
+        if (tracker == 1) {
             caster->remove_temporary_feat("knockdown");
+        }
     }
     ::dest_effect();
-    if (objectp(TO))
+    if (objectp(TO)) {
         TO->remove();
+    }
 }

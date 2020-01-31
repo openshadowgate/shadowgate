@@ -1814,21 +1814,26 @@ int remove()
 
 int is_spell() {    return 1; }
 
-void sendDisbursedMessage(object victim){
+void sendDisbursedMessage(object victim)
+{
     string whatsit;
     whatsit = "magic";
-    if(spell_type == "psion" || spell_type == "psywarrior") whatsit = "power";
-    if(!objectp(victim)) return;
-    if(objectp(caster)) {
-        tell_object(victim,"%^BOLD%^%^YELLOW%^"+caster->QCN+"'s "+whatsit+" disperses futilely around you.%^RESET%^");
-        if (present(caster,environment(victim))) {
-            tell_object(caster,"%^BOLD%^%^YELLOW%^Your "+whatsit+" disperses futilely around "+victim->QCN+".%^RESET%^");
+    if (spell_type == "psion" || spell_type == "psywarrior") {
+        whatsit = "power";
+    }
+    if (!objectp(victim)) {
+        return;
+    }
+    if (objectp(caster)) {
+        tell_object(victim, "%^BOLD%^%^YELLOW%^" + caster->QCN + "'s " + whatsit + " disperses futilely around you.%^RESET%^");
+        if (present(caster, environment(victim))) {
+            tell_object(caster, "%^BOLD%^%^YELLOW%^Your " + whatsit + " disperses futilely around " + victim->QCN + ".%^RESET%^");
         }
-        tell_room(environment(victim),"%^BOLD%^%^YELLOW%^"+caster->QCN+"'s "+whatsit+" disperses futilely around "+victim->QCN+".",({ victim, caster}) );
+        tell_room(environment(victim), "%^BOLD%^%^YELLOW%^" + caster->QCN + "'s " + whatsit + " disperses futilely around " + victim->QCN + ".", ({ victim, caster }));
         return 1;
     }
-    tell_object(victim,"%^BOLD%^%^YELLOW%^The "+whatsit+" disperses futilely around you.%^RESET%^");
-    tell_room(environment(victim),"%^BOLD%^%^YELLOW%^The "+whatsit+" cast from a dead or unknown source disperses futilely around "+victim->QCN+".",({victim}));
+    tell_object(victim, "%^BOLD%^%^YELLOW%^The " + whatsit + " disperses futilely around you.%^RESET%^");
+    tell_room(environment(victim), "%^BOLD%^%^YELLOW%^The " + whatsit + " cast from a dead or unknown source disperses futilely around " + victim->QCN + ".", ({ victim }));
     return 1;
 }
 
@@ -2232,22 +2237,37 @@ int thaco(object target, int bonus){
 // changing this to roll every time damage is done -Ares
 varargs int checkMagicResistance(object victim, int mod)
 {
-    int res=0;
+    int res = 0;
 
-    if (!intp(mod)) { mod = 1; }
-    if(!objectp(victim)) { return 0; }
-
-// vitriolic blast does not require a MR/SR save
-    if(spell_name == "eldritch blast" || spell_name == "eldritch chain" || spell_name == "eldritch burst") {
-      if((string)caster->query("warlock_blast_type") == "vitriolic") return 0;
+    if (!intp(mod)) {
+        mod = 1;
+    }
+    if (!objectp(victim)) {
+        return 0;
     }
 
-    if(help_or_harm)
+    if (victim == caster) {
         return 0;
+    }
 
-    if(victim->query_property("magic resistance")) { res = (int)victim->query_property("magic resistance"); }
+// vitriolic blast does not require a MR/SR save
+    if (spell_name == "eldritch blast" || spell_name == "eldritch chain" || spell_name == "eldritch burst") {
+        if ((string)caster->query("warlock_blast_type") == "vitriolic") {
+            return 0;
+        }
+    }
 
-    if( (roll_dice(1,100) + mod) > res ) { return 0; }
+    if (help_or_harm) {
+        return 0;
+    }
+
+    if (victim->query_property("magic resistance")) {
+        res = (int)victim->query_property("magic resistance");
+    }
+
+    if ((roll_dice(1, 100) + mod) > res) {
+        return 0;
+    }
     return 1;
 }
 

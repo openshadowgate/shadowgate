@@ -90,7 +90,6 @@ void dest_effect() {
         target->remove_property("idiocied");
         target->remove_property_value("spelled", ({TO}) );
         target->add_stat_bonus("intelligence", adjust);
-        target->add_stat_bonus("wisdom", adjust);
         target->add_stat_bonus("charisma", adjust);
         target->add_stat_bonus("wisdom", adjust);
     }
