@@ -229,7 +229,6 @@ int cmd_cast(string str)
     TP->set_property("spell_casting",targ);
 
     if (FEATS_D->usable_feat(TP, "surprise spells")) {
-        tell_object(FPL("ilmarinen"), ":" + 1);
         targ->set_silent_casting(1);
     }
 
