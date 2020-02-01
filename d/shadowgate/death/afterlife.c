@@ -3,7 +3,7 @@
 
 #define VAL_DIV 1 /* full market value */
 #define MAX_PRICE 100000 /* corresponding...also see /std/vendor.c */
-#define VALID_ACTIONS ({ "look", "say", "quit", "help", "mail", "lawmail", "emote", "bboard", "chfn", "emoteat", "describe", "who", "background", "thought", "ignore", "discuss","score","inventory","lore","avatarmail","pkmail", "deceased", "reply", "deceasedemote", "uptime", "finger", "quests", "last", "date", "hm", "hmemote", "tell", "adjective", "message", "speech", "alias", "nickname" })
+#define VALID_ACTIONS ({ "look", "say", "quit", "help", "mail", "lawmail", "emote", "bboard", "chfn", "emoteat", "describe", "who", "background", "thought", "ignore", "discuss","score","inventory","lore","avatarmail","pkmail", "deceased", "reply", "deceasedemote", "uptime", "finger", "quests", "last", "date", "hm", "hmemote", "tell", "adjective", "message", "speech", "alias", "nickname", "command"})
 
 inherit ROOM;
 
