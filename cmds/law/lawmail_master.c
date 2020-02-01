@@ -10,7 +10,7 @@ inherit DAEMON;
 object getBoard()
 {
     object ob;
-    ob = present("Law_Mail board",find_object_or_load(LOCATION));
+    ob = present("Law_Mail board", find_object_or_load(LOCATION));
     if (!objectp(ob)) {
         LOCATION->reset();
     }
@@ -21,26 +21,28 @@ int cmd_lawmail(string str)
 {
     object board;
     board = getBoard();
-    if(!str)
+    if (!str) {
         return notify_fail(
-	  "Please specify a brief title for your message, preferably something "
-	  "like 'name's attack on me' or 'abuse of this or that'.  The correct "
-          "syntax is <lawmail [title of message]>.  You will then get a "
-	  "screen to enter your message.\n"
-	);
+            "Please specify a brief title for your message, preferably something "
+            "like 'name's attack on me' or 'abuse of this or that'.  The correct "
+            "syntax is <lawmail [title of message]>.  You will then get a "
+            "screen to enter your message.\n"
+            );
+    }
 
-    if(strlen(str) > 72)
-       return notify_fail("Please be more brief on the title, less than 72 characters.\n  You can elaborate in the editor.\n");
+    if (strlen(str) > 72) {
+        return notify_fail("Please be more brief on the title, less than 72 characters.\n  You can elaborate in the editor.\n");
+    }
 
-    tell_object(TP,"You are now in edit to post a message to the "
-           "immortals who handle law complaints.  Please supply all "
-	   "relevant facts and names of witnesses or logs if brief, "
-	   "but do not spam with an excess of information.  We will "
-	   "mail or catch you on to ask for more information if needed.  "
-	   "Please do not whine.\n"
-           "The title is set to:  %^BOLD%^%^YELLOW%^"+str);
-     board->post_message(str);
-     return 1;
+    tell_object(TP, "You are now in edit to post a message to the "
+                "immortals who handle law complaints.  Please supply all "
+                "relevant facts and names of witnesses or logs if brief, "
+                "but do not spam with an excess of information.  We will "
+                "mail or catch you on to ask for more information if needed.  "
+                "Please do not whine.\n"
+                "The title is set to:  %^BOLD%^%^YELLOW%^" + str);
+    board->post_message(str);
+    return 1;
 }
 
 int help(){
