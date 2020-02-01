@@ -20,6 +20,7 @@ string * BBOARDS=({
             "druid",
             "inquisitor",
             "fighter",
+            "lawboard",
             "mage",
             "monk",
             "paladin",
@@ -121,13 +122,10 @@ int check_access(string my_command, string which_board)
             if (TP->is_class(which_board)) return 1;
             else return 0;
             break;
-        case "avatar": case "pkmail": case "avatarmail": case "wiz": case "lib":
+        case "avatar": case "pkmail": case "avatarmail": case "wiz": case "lib": case "lawboard":
             if(avatarp(TP)) return 1;
             else return 0;
             break;
-        case "lawboard":
-            if(member_group(TPQN, "law")) return 1;
-            else return 0;
         default:
             if (TP->is_class(which_board) || avatarp(TP)) return 1;
             else return 0;

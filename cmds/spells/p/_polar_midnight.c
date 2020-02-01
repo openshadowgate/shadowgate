@@ -13,7 +13,7 @@ void create()
 {
     ::create();
     set_spell_name("polar midnight");
-    set_spell_level(([ "druid":9,"oracle":9]));
+    set_spell_level(([ "druid":9,"oracle":9, "cleric":9]));
     set_spell_sphere("alteration");
     set_mystery("darkness");
     set_syntax("cast CLASS polar midnight");

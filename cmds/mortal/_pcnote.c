@@ -1,7 +1,7 @@
 /* As I recall - created by Grendel, ckpt added by Garrett based on Obsidian's
      special/personal noting method/function
   Garrett changed the save so it can handle more players and list more efficiently
-  Styx worked on (and got Garrett to help/do) setting several "events" such as 
+  Styx worked on (and got Garrett to help/do) setting several "events" such as
      trainers, quest completions, etc. to ckpt automatically
   Colors added to ckpt per Grendel's suggestion (and history above) - Styx 7/2002
   Latest command added by Circe thanks to help from Grendel and Tristan 1/25/04
@@ -27,7 +27,7 @@ int cmd_pcnote(string str){
   string *notes;
   string tmp, nme, nte, type;
   int num;
-  
+
   if(!str) {
     help();
     return notify_fail("Incorrect syntax.  Try reading <help pcnote>.\n");
@@ -49,7 +49,7 @@ int cmd_pcnote(string str){
       else
 	tmp += "%^RED%^"+ capitalize(notes[0])+"%^RESET%^";
       //message("system","%^RED%^"+ capitalize(notes[0])+"%^RESET%^",TP);
-      
+
       for(num=1;num<sizeof(notes);num++){
 	if (!(num % 7)) {
 	  tell_object(TP,tmp);
@@ -116,7 +116,7 @@ int cmd_pcnote(string str){
         tell_object(TP, "Checkpoint added.");
       return 1;
       break;
-      
+
     case "add":
       if(sscanf(tmp, "%s %s", nme, nte) != 2) {
 	help();
@@ -129,7 +129,7 @@ int cmd_pcnote(string str){
       tell_object(TP, "Note added.");
       return 1;
       break;
-      
+
     case "view":
       tmp = lower_case(tmp);
       if (!user_exists(tmp)) write ("%^BOLD%^%^RED%^Warning: %^RESET%^This player doesn't seem to exist...");
@@ -149,7 +149,7 @@ int cmd_pcnote(string str){
       TP->more(format_latest_notes(notes));
       return 1;
       break;
-      
+
     case "clear":
       if(!wizardp(TP)) return notify_fail("For wizzes only.\n");
       tmp = lower_case(tmp);
@@ -157,7 +157,7 @@ int cmd_pcnote(string str){
       tell_object(TP, "Notes removed for "+tmp+".");
       return 1;
       break;
-      
+
     case "rem":
       if(sscanf(tmp, "%s %d", nme, num) == 2) {
 	nme = lower_case(nme);
@@ -213,7 +213,7 @@ int cmd_pcnote(string str){
       tell_object(TP, "Note recorded");
       return 1;
       break;
- 
+
     case "rem":
       if(sscanf(tmp, "%d", num) == 1) {
 	nme = lower_case(TPQN);
@@ -240,61 +240,41 @@ int cmd_pcnote(string str){
 }
 
 void help(){
-  if (avatarp(TP)) {
     write(
-@HELP
-Syntaxes:
+"
+%^CYAN%^NAME%^RESET%^
 
-  pcnote add <name> <note>
-    adds a <note> for <name>.
+pcnote - manage notes about character
 
-  pcnote ckpt <name> <comment>
-    adds a checkpoint note to <name>. A <comment> doesn\'t have to be added,
-    but will be appended. Kudos to Obsidian for the idea and format.
-    This really isn\'t useful on PC viewable notes.
+%^CYAN%^SYNTAX%^RESET%^
 
-  pcnote view <name>
-    Lists all the notes for <name>
+Players:
 
-  pcnote latest <name>
-    Lists the last five notes for <name>
+pcnote add %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
+pcnote view
+pcnote latest
+pcnote rem %^ORANGE%^%^ULINE%^NUMBER%^RESET%^
 
-  pcnote clear <name>
-    deletes all the notes for <name>
-    Wizzes only.
+Avatars:
 
-  pcnote clean
-    deletes notes for all characters who fail to exist
-    Wizzes only.
+pcnote add %^ORANGE%^%^ULINE%^NAME%^RESET%^ %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
+pcnote view %^ORANGE%^%^ULINE%^NAME%^RESET%^
+pcnote latest %^ORANGE%^%^ULINE%^NAME%^RESET%^
+pcnote clear %^ORANGE%^%^ULINE%^NAME%^RESET%^
+pcnote rem %^ORANGE%^%^ULINE%^NAME%^RESET%^ %^ORANGE%^%^ULINE%^NUMBER%^RESET%^
+pcnote who
 
-  pcnote rem <name> <number>
-    deletes a single note for <name>
+%^CYAN%^DESCRIPTION%^RESET%^
 
-  pcnote who
-    Returns a list of everyone that has notes.
+Pcnotes (player character notes) is a tool you can use to save notes. Some of these notes might be used by avatars.
 
-HELP
+Here you can point your past, personal preferences or other useful information you think you youself or avatars might need in interractions with you. Or you can store information you yourself as a player find useful, such as naval locations or names of important npcs.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+help, score, stats, who, discern, note
+"
 );
-  } else /* !avatarp() */ {
-    write(
-@MORTALHELP
-Syntaxes:
-
-  pcnote add <note>
-    adds a <note> for you.
-
-  pcnote view 
-    Lists all the notes for you
-
-  pcnote latest 
-    Lists the last five notes for you
-
-  pcnote rem <number>
-    deletes a single note for your PC.
-
-MORTALHELP
-);
-  }
 
 }
 

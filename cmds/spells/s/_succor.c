@@ -3,8 +3,7 @@
 #include <daemons.h>
 #include <teleport.h>
 
-inherit SPELL;
-mixed endplace;
+inherit "/cmds/spells/t/_teleport";
 
 void create(){
     ::create();
@@ -30,52 +29,4 @@ string query_cast_string(){
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" begins to whisper a quiet prayer."+
                 " With each word from "+caster->QP+" prayer, "+caster->QP+" voice grows fainter.",caster);
     return "display";
-}
-
-void spell_effect(int prof) {
-
-    int power, prob;
-
-    power = clevel>50?50:clevel;
-    prob = to_int(25.0 + 65.0*(power/50.0));
-    if(roll_dice(1,100)>prob)
-    {
-        if(!endplace=TELEPORT->scatter_destination(
-               caster->query_rem_room(arg)))
-            endplace = caster->query_rem_room(arg);
-    }
-    else
-        endplace = caster->query_rem_room(arg);
-
-    tell_object(caster,"%^BLUE%^%^BOLD%^You recall your destination "+
-                "in your mind, focusing to bring yourself to it.");
-
-    spell_successful();
-
-    if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
-    {
-        tell_object(caster,"You sense something is wrong with your prayer and loose concentration.");
-        tell_room(place,caster->QCN+" "+
-                  "looks startled.",caster);
-        dest_effect();
-
-    }
-    tell_room(endplace,"%^BOLD%^%^WHITE%^A white light grows in your vicinity.",caster);
-    call_out("spell_effect_next",ROUND_LENGTH);
-}
-
-void spell_effect_next()
-{
-    if(!TELEPORT->teleport_object(caster,caster,endplace,clevel))
-    {
-        tell_object(caster,"You sense something is wrong with your prayer and loose concentration.");
-        tell_room(place,caster->QCN+" "+
-                  "looks startled.",caster);
-    }
-    dest_effect();
-}
-
-void dest_effect() {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }

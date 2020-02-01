@@ -39,7 +39,7 @@ void spell_effect(int prof)
     tell_object(caster, "%^YELLOW%^You call on the power of "+capitalize((string)caster->query_diety())+""+
 		" and an elegant table of enormous proportions begins to materialize "+
 		"out of thin air before you!");
-    tell_room(place, "YELLOW%^"+caster->QCN+" calls on the power of "+caster->QP+" patron and an elaborate banquet "
+    tell_room(place, "%^YELLOW%^"+caster->QCN+" calls on the power of "+caster->QP+" patron and an elaborate banquet "
         "table appears out of thin air!", caster );
     banquet = new("/cmds/priest/obj/feast_obj.c");
     banquet->move(place);

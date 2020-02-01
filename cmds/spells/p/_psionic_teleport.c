@@ -3,8 +3,7 @@
 #include <daemons.h>
 #include <teleport.h>
 
-inherit SPELL;
-mixed endplace;
+inherit "/cmds/spells/t/_teleport";
 
 void create() {
     ::create();
@@ -28,52 +27,3 @@ void create() {
 string query_cast_string() {
     return "%^GREEN%^%^BOLD%^"+caster->QCN+" focuses intently.";
 }
-
-void spell_effect(int prof) {
-
-    int power, prob;
-
-    power = clevel>50?50:clevel;
-    prob = to_int(25.0 + 65.0*(power/50.0));
-    if(roll_dice(1,100)>prob)
-    {
-        if(!endplace=TELEPORT->scatter_destination(
-               caster->query_rem_room(arg)))
-            endplace = caster->query_rem_room(arg);
-    }
-    else
-        endplace = caster->query_rem_room(arg);
-
-    tell_object(caster,"%^GREEN%^%^BOLD%^You recall your destination "+
-                "in your mind, focusing to bring yourself to it.");
-
-    spell_successful();
-    
-    if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
-    {
-        tell_object(caster,"You sense something is wring with your focus and lose concentration on your power.");
-        tell_room(place,caster->QCN+" "+
-                  "looks startled.",caster);
-        dest_effect();
-
-    }
-    tell_room(endplace,"%^BOLD%^%^GREEN%^An outline of a figure appears near you.",caster);
-    call_out("spell_effect_next",ROUND_LENGTH);
-}
-
-void spell_effect_next()
-{
-    if(!TELEPORT->teleport_object(caster,caster,endplace,clevel))
-    {
-        tell_object(caster,"You sense something is wring with your focus and lose concentration on your power.");
-        tell_room(place,caster->QCN+" "+
-                  "looks startled.",caster);
-    }
-    dest_effect();    
-}
-
-void dest_effect() {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
-}
-
