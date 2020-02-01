@@ -1,4 +1,5 @@
 #include <priest.h>
+#include <magic.h>
 inherit SPELL;
 
 object who;
@@ -105,7 +106,7 @@ void spell_effect(int prof) {
     CASTER->set_property("allowed tell",casterallowed);
     CASTER->set_property("spelled", ({TO}) );
     who->set_property("allowed tell",targallowed);
-   call_out("dest_effect",clevel*5);
+    call_out("dest_effect",(clevel * ROUND_LENGTH * 2));
 }
 
 void dest_effect() {
