@@ -5,7 +5,8 @@ void create(){
         ::create();
         set_name("Thief's tools");
         set_id(({"tools","thief toolx", "thief tools", "lock picks","picks"}));
-set_short("A leather case of tools"); //based on a suggestions by the players - cythera 6/05\\
+//set_short("A leather case of tools"); //based on a suggestions by the players - cythera 6/05\\
+set_short("Thief's tools"); //restoring Thief's tools to their former glory - Uriel 1/2020
         set_long(
 @CIRCE
 This is a small, soft leather case that can be rolled and tied 
@@ -17,11 +18,12 @@ tools would probably aid any locksmith.
 CIRCE
 );
         set_value(30);
-        set_weight(1);
+        set_weight(0);
 }
 void break_picks(){
 	TO->set_id(({"tools","broken tool","lock picks","picks"}));
-TO->set_short("A leather case of broken tools");
+//TO->set_short("A leather case of broken tools");
+TO->set_short("broken Thief's tools");
 	TO->set_long(
 @CIRCE
 This soft leather case has many pouches that were once filled 
