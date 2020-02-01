@@ -12,31 +12,38 @@ void query_mycaster();
 
 int power;
 
-void create(){
-   ::create();
+void create()
+{
+    ::create();
 
     set_name("EyeOrb");
-   set_property("no detect",1);
-   set_id(({"EyeOrb","scryx222"}));
-      set_short(0);
-   set_invis();
-   add_limb("body","",0,0,0);
+    set_property("no detect", 1);
+    set_id(({ "EyeOrb", "scryx222" }));
+    set_short(0);
+    set_invis();
+    add_limb("body", "", 0, 0, 0);
 }
 
 int query_true_invis() { return 1; }
 
 int move(mixed dest)
 {
-   ::move(dest);
-   if(!objectp(TO)) { return 1; }
-   if(!objectp(ETO)) { return 1; }
-   if(!objectp(caster)) { return 1; }
-   
-   if(environment(TO) == environment(follower))
-   {
-        tell_room(environment(caster),"%^BOLD%^[S]%^RESET%^" +ETO->query_long()+"");
-   }
+    ::move(dest);
+    if (!objectp(TO)) {
+        return 1;
+    }
+    if (!objectp(ETO)) {
+        return 1;
+    }
+    if (!objectp(caster)) {
+        return 1;
+    }
 
+    heart_beat();
+
+    if (environment(TO) == environment(follower)) {
+        tell_room(environment(caster), "%^BOLD%^[S]%^RESET%^" + ETO->query_long() + "");
+    }
 }
 
 set_caster(object cas){
@@ -54,14 +61,26 @@ set_target(object ob){
 void die(object ob){
 }
 
-void heart_beat(){
-   if(!objectp(caster)) return;
-   if(!objectp(follower)) return;
-   if(ETO != environment(follower))
-      move(environment(follower));
-   if(ETO->query_property("no scry")) self_destruct();
-   if(follower->query_true_invis()) self_destruct();
-   if(present("blockerx111", ETO)) self_destruct();
+void heart_beat()
+{
+    if (!objectp(caster)) {
+        return;
+    }
+    if (!objectp(follower)) {
+        return;
+    }
+    if (ETO != environment(follower)) {
+        move(environment(follower));
+    }
+    if (ETO->query_property("no scry")) {
+        self_destruct();
+    }
+    if (follower->query_true_invis()) {
+        self_destruct();
+    }
+    if (present("blockerx111", ETO)) {
+        self_destruct();
+    }
 }
 
 void dest_me(){
@@ -90,7 +109,7 @@ void receive_message(string cl, string str)
     }
 
     room = environment(caster);
-    
+
     if(!objectp(room)) { return; }
 
     people = all_living(room);
@@ -145,7 +164,7 @@ void query_scry_power(){
    return power;
 }
 
-void self_destruct() 
+void self_destruct()
 {
     int i;
     object casterobj;

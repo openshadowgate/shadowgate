@@ -56,7 +56,7 @@ void spell_effect(int prof) {
     }
     arg = lower_case(arg);
     if(caster->isKnown(arg)) { real = arg; }
-    else { real = (string)caster->realName(arg); }
+    else { real = (string)caster->realNameVsProfile(arg); }
 
     targ = find_player(real);
 
@@ -84,10 +84,10 @@ void do_summon(object target) {
         return;
     }
 //teleport proof stuff by ~Circe~ 6/20/08
-//new property to be used for areas protected from teleport 
+//new property to be used for areas protected from teleport
 //but not foolproof
    endplace = environment(target);
-   if(endplace && 
+   if(endplace &&
       (endplace->query_property("teleport proof") ||
       place->query_property("teleport proof") ||
       !endplace->is_room())){
@@ -104,14 +104,14 @@ void do_summon(object target) {
    }
    caster->set_property("spell summon time",time());
    success = 0;
-//changed the below after talks with Tsera about the way this 
+//changed the below after talks with Tsera about the way this
 //spell always finds the target. ~Circe~ 6/11/08
     targlevel = target->query_highest_level();
     mylevel = caster->query_highest_level();
-    if(targlevel < mylevel) 
+    if(targlevel < mylevel)
     {
         success = 1;
-    } 
+    }
     else if(targlevel > (mylevel+random(6))){ //changed this from < to > - this way if you're trying to summon someone higher level than you, there is at least a chance of you going to them
         if(!do_save(target,0)) {
             success = 1;
@@ -140,7 +140,7 @@ void do_summon(object target) {
         spell_kill(target, caster);
         dest_effect();
         return;
-    } 
+    }
     else {
         tell_object(target,"%^BOLD%^%^BLUE%^You have resisted "+caster->QCN+"'s attempt to summon you for revenge!");
         tell_object(caster,"%^BOLD%^%^BLUE%^"+target->QCN+" has resisted your summons!");

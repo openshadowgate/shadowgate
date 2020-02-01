@@ -33,7 +33,7 @@ void spell_effect(int prof) {
     string *ignored, *casterallowed, *targallowed;
 
     arg = lower_case(ARG);
-    if (!(who = find_player(caster->realName(arg)))) {
+    if (!(who = find_player(caster->realNameVsProfile(arg)))) {
         tell_object(CASTER,capitalize(arg)+" cannot be found to establish a link.\n");
         TO->remove();
         return;

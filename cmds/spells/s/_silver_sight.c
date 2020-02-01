@@ -1,6 +1,6 @@
-//Silver Sight - Moon domain scry spell based on Listening 
-//Shadow.  Silver Sight, Listening Shadow, and Inner Eye are 
-//all essentially the same spell - if you change one, please 
+//Silver Sight - Moon domain scry spell based on Listening
+//Shadow.  Silver Sight, Listening Shadow, and Inner Eye are
+//all essentially the same spell - if you change one, please
 //change all three.
 //Rebalancing domains ~Circe~ 5/10/08
 // duration on all scrying spells (and between-cast delays where relevant) rebalanced. Nienne, 5/15.
@@ -10,8 +10,8 @@ inherit SPELL;
 
 object motes,remote;
 string theName;
-#define DELAY 300 
-//This *should* equal a 5 minute delay, I think.  That's the 
+#define DELAY 300
+//This *should* equal a 5 minute delay, I think.  That's the
 //intention anyway.  ~Circe~ 5/10/08
 
 void create(){
@@ -67,7 +67,7 @@ void spell_effect(int prof){
          dest_effect();
          return;
       }
-//new power stuff by ~Circe~ 6/20/08 to be in line with 
+//new power stuff by ~Circe~ 6/20/08 to be in line with
 //other scry spells
       bonus = caster->query_stats("wisdom");
       bonus = bonus - 10;
@@ -92,7 +92,7 @@ void spell_effect(int prof){
       return;
    }
 
-   if(ob = find_player(caster->realName(arg)))
+   if(ob = find_player(caster->realNameVsProfile(arg)))
    {
       if(objectp(ob) && !wizardp(ob))
       {
@@ -104,7 +104,7 @@ void spell_effect(int prof){
             dest_effect();
             return;
          }
-//new power stuff by ~Circe~ 6/20/08 to be in line with 
+//new power stuff by ~Circe~ 6/20/08 to be in line with
 //other scry spells
          bonus = caster->query_stats("wisdom");
          bonus = bonus - 10;

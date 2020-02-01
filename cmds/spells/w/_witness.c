@@ -36,7 +36,7 @@ void spell_effect(int prof){
     object ob, blockobj;
     int power, duration;
 
-    if (ob = find_player(caster->realName(arg)))
+    if (ob = find_player(caster->realNameVsProfile(arg)))
     {
         if (objectp(ob) && !wizardp(ob)){
             tell_object(caster,"%^RED%^You concentrate to see through the eyes of "+arg+".%^RESET%^");

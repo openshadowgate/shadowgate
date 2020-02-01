@@ -85,7 +85,7 @@ void spell_effect(int prof){
         return;
     }
 
-    if (ob = find_player(caster->realName(arg))){
+    if (ob = find_player(caster->realNameVsProfile(arg))){
         if (objectp(ob) && !wizardp(ob)){
             tell_object(caster,"%^BOLD%^%^BLACK%^You carefully and silently"+
 		        " send your shadow off to stand watch on "+arg+".%^RESET%^");

@@ -204,9 +204,9 @@ int scry(string str) {
     // I have no idea how this was supposed to work, but all I know is it was
     // not working right anymore.
 
-    if( TP->isKnown(targ) || ((string)TP->realName(targ) != "") ) {
+    if( TP->isKnown(targ) || ((string)TP->realNameVsProfile(targ) != "") ) {
       if(TP->isKnown(targ)) { real = targ; }
-      else { real = (string)TP->realName(targ); }
+      else { real = (string)TP->realNameVsProfile(targ); }
 
       target = find_player(real);
 

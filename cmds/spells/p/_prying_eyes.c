@@ -70,7 +70,7 @@ void spell_effect(int prof){
         return;
     }
 
-    if (ob = find_player(caster->realName(arg))){
+    if (ob = find_player(caster->realNameVsProfile(arg))){
         if (objectp(ob) && !wizardp(ob)){
             tell_object(caster,"%^BOLD%^%^CYAN%^You cast out your concentration in search of "+arg+".%^RESET%^");
             if(environment(ob)->query_property("no scry")){

@@ -73,7 +73,7 @@ int lookin(string str)
 
     target = lower_case(str);
 
-    if(!stringp(real = (string)ETO->realName(target)))
+    if(!stringp(real = (string)ETO->realNameVsProfile(target)))
     {
         tell_object(ETO,"%^CYAN%^The mist inside of the orb shifts for a moment but then "
             "nothing happens.%^RESET%^");
@@ -107,13 +107,13 @@ int lookin(string str)
         "and in its place forms a crystal clear image!%^RESET%^");
 
     tell_room(EETO,"%^CYAN%^As "+TPQCN+"'s stares into the orb, "
-        "the mist begins to clear and is replaced by a crystal clear image!%^RESET%^");
+              "the mist begins to clear and is replaced by a crystal clear image!%^RESET%^", ETO);
 
     tell_object(ETO,"%^GREEN%^You feel a tug at your soul as the orb begins to do your bidding!%^RESET%^");
 
     scry_control = new("/d/magic/obj/eye_orb");
     scry_control->set_caster(ETO);
-    power = 16;
+    power = ETO->query_level() * 3 / 4;
     scry_control->set_scry_power(power);
     scry_control->set_target(target);
     scry_control->move(environment(target));
