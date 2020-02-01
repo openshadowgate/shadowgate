@@ -51,11 +51,6 @@ void init()
     }
 }
 
-int drop()
-{
-    return 1;
-}
-
 
 int remove()
 {
@@ -73,4 +68,9 @@ int remove()
 int clean_up()
 {
     return 0;
+}
+
+int save_me()
+{
+    return 1;
 }

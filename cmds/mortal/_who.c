@@ -84,8 +84,6 @@ string list_users(string *races, object tp)
             else
             {
                 rabbit=who[i]->query_race();
-                if(((int)who[i]->query_login_time() + 60) > time())
-                    rabbit = "someone";
                 if(objectp(shape = who[i]->query_property("shapeshifted")))
                     rabbit = (string)shape->query_shape_race();
                 else if(objectp(shape = who[i]->query_property("altered")))
@@ -230,13 +228,6 @@ int sort_by_name(object alpha, object beta) {
     string name1,name2;
     if (wizardp(alpha) || wizardp(beta))
         return sort_by_level(alpha,beta);
-    if ((((int)alpha->query_login_time() + 60) > time()) || (((int)beta->query_login_time() + 60) > time()))
-    {
-        if((int)alpha->query_login_time() != (int)beta->query_login_time())
-        {
-            return sort_by_login_time(alpha,beta); // to move all new logins to bottom of list by default
-        }
-    }
     if (((TP->isKnown(alpha->query_name()))
          && (TP->isKnown(beta->query_name()))) ||
         ((!TP->isKnown(alpha->query_name()))
@@ -282,45 +273,6 @@ int sort_by_login_time(object alpha, object beta) {
     if (a==b) return sort_by_name(alpha,beta);
     else if (a>b) return 1;
     else return -1;
-}
-
-string levelcheck_status(object tp, object other)
-{
-    int lvl,lvl2,low,diff,range, age;
-
-    if(!objectp(tp))    { return ""; }
-    if(!objectp(other)) { return ""; }
-
-    if(tp == other) { return ""; }
-
-    lvl = (int)tp->query_character_level();
-    lvl2 = (int)other->query_character_level();
-
-    if(lvl2 > lvl) { low = lvl; }
-    else { low = lvl2; }
-
-    diff = lvl - lvl2;
-    diff = absolute_value(diff);
-
-    switch(low)
-    {
-    case 1..29: range = 5; break;
-    case 30..50: range = 10; break;
-    default: return "";
-    }
-
-    if(diff > range) { return "   %^RESET%^%^BOLD%^%^RED%^F%^RESET%^"; }
-
-    if(tp->query("no pk")) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
-    if(other->query("no pk")) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
-
-    if(tp->query_death_flag()) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
-    if(other->query_death_flag()) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
-
-    if(tp->get_pk_death_flag()) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
-    if(other->get_pk_death_flag()) { return "   %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^"; }
-
-    return "   %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^";
 }
 
 void help()
