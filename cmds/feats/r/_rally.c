@@ -54,10 +54,11 @@ int cmd_rally(string str){
     return 1;
 }
 
-void execute_feat(){
-    object *inven, *partied;
+void execute_feat()
+{
+    object* inven, * partied;
     int i;
-    if((int)caster->query_property("using rally")) {
+    if ((int)caster->query_property("using rally")) {
         object obj;
 
         obj = query_active_feat("rally");
@@ -67,13 +68,13 @@ void execute_feat(){
         return;
     }
     ::execute_feat();
-    if((int)caster->query_property("using instant feat")) {
-        tell_object(caster,"You are already in the middle of using a feat!");
+    if ((int)caster->query_property("using instant feat")) {
+        tell_object(caster, "You are already in the middle of using a feat!");
         dest_effect();
         return;
     }
-    if(arg != "melee" && arg != "spells" && arg != "defenses") {
-        tell_object(caster,"You need to rally melee, spells or defenses!");
+    if (arg != "melee" && arg != "spells" && arg != "defenses") {
+        tell_object(caster, "You need to rally melee, spells or defenses!");
         dest_effect();
         return;
     }
@@ -90,6 +91,7 @@ void execute_feat(){
     tell_object(caster,"%^BOLD%^%^WHITE%^You start rallying your comrades to fight better.");
     tell_room(place,""+caster->QCN+" starts to raise the spirits of "+caster->QP+" companions.",caster);
     mytype = arg;
+    clevel = caster->query_guild_level("bard");
     caster->set_property("using instant feat",1);
     caster->remove_property("using rally");
     call_out("do_rally",ROUND_LENGTH);
@@ -107,38 +109,44 @@ void do_rally(){
     ::execute_attack();
     inv = ({});
     place = environment(caster);
-    mod = clevel / 16 + 1;
-    duration = 150 + ((int)caster->query_guild_level("bard")*10);
-    for(i=0;i<sizeof(cur_players);i++) {
-        if(!objectp(cur_players[i])) continue;
-        if(!present(cur_players[i],place)) continue;
-        if(cur_players[i]->query_property("raged")) {
-          tell_object(cur_players[i],"%^BOLD%^%^RED%^You are already in a frenzy and feel no different!");
-          continue;
+    mod = clevel / 12 + 1;
+    duration = 150 + (caster->query_guild_level("bard") * 10);
+    for (i = 0; i < sizeof(cur_players); i++) {
+        if (!objectp(cur_players[i])) {
+            continue;
         }
-   	  if(pointerp(cur_players[i]->query_property("rally")) && member_array(mytype,cur_players[i]->query_property("rally")) != -1) continue;
+        if (!present(cur_players[i], place)) {
+            continue;
+        }
+        if (cur_players[i]->query_property("raged")) {
+            tell_object(cur_players[i], "%^BOLD%^%^RED%^You are already in a frenzy and feel no different!");
+            continue;
+        }
+        if (pointerp(cur_players[i]->query_property("rally")) && member_array(mytype, cur_players[i]->query_property("rally")) != -1) {
+            continue;
+        }
         inv += ({ cur_players[i] });
     }
     cur_players = inv;
     myname = (string)caster->query_name();
 
-    for(i=0;i<sizeof(cur_players);i++){
-      switch(mytype) {
+    for (i = 0; i < sizeof(cur_players); i++) {
+        switch (mytype) {
         case "spells":
-          cur_players[i]->set_property("spell penetration",(mod*5));
-          cur_players[i]->set_property("empowered",mod);
-        break;
+            cur_players[i]->set_property("spell penetration", (mod * 5));
+            cur_players[i]->set_property("empowered", mod);
+            break;
         case "defenses":
-          cur_players[i]->add_ac_bonus(mod);
-          cur_players[i]->add_saving_bonus("all",mod);
-        break;
+            cur_players[i]->add_ac_bonus(mod);
+            cur_players[i]->add_saving_bonus("all", mod);
+            break;
         default:
-          cur_players[i]->add_attack_bonus(mod);
-          cur_players[i]->add_damage_bonus(mod);
-        break;
-      }
-      cur_players[i]->set_property("rally",({ mytype }));
-      tell_object(cur_players[i],"%^YELLOW%^You feel invigorated and ready for battle!%^RESET%^");
+            cur_players[i]->add_attack_bonus(mod);
+            cur_players[i]->add_damage_bonus(mod);
+            break;
+        }
+        cur_players[i]->set_property("rally", ({ mytype }));
+        tell_object(cur_players[i], "%^YELLOW%^You feel invigorated and ready for battle!%^RESET%^");
     }
     tell_object(caster,"%^BOLD%^%^WHITE%^You finish inspiring your comrades.%^RESET%^");
     caster->set_property("using rally", 1);
@@ -148,17 +156,19 @@ void do_rally(){
     return;
 }
 
-void check(){
-    if(!objectp(caster)){
+void check()
+{
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
-    call_out("check",ROUND_LENGTH);
+    call_out("check", ROUND_LENGTH);
 }
 
-void dest_effect(){
+void dest_effect()
+{
     int i;
-    string *holding;
+    string* holding;
     ::dest_effect();
     mod = -mod;
     if (objectp(caster)) {
@@ -169,29 +179,35 @@ void dest_effect(){
         remove_feat(TO);
         return;
     }
-    for(i=0;i<sizeof(cur_players);i++){
-      if(!objectp(cur_players[i])) continue;
-      tell_object(cur_players[i],"%^BOLD%^%^CYAN%^You feel the effects of the bard's song wear off.%^RESET%^");
-      switch(mytype) {
+    for (i = 0; i < sizeof(cur_players); i++) {
+        if (!objectp(cur_players[i])) {
+            continue;
+        }
+        tell_object(cur_players[i], "%^BOLD%^%^CYAN%^You feel the effects of the bard's song wear off.%^RESET%^");
+        switch (mytype) {
         case "spells":
-          cur_players[i]->set_property("spell penetration",(mod*5));
-          cur_players[i]->set_property("empowered",mod);
-        break;
+            cur_players[i]->set_property("spell penetration", (mod * 5));
+            cur_players[i]->set_property("empowered", mod);
+            break;
         case "defenses":
-          cur_players[i]->add_ac_bonus(mod);
-          cur_players[i]->add_saving_bonus("all",mod);
-        break;
-      default:
-          cur_players[i]->add_attack_bonus(mod);
-          cur_players[i]->add_damage_bonus(mod);
-        break;
-      }
-      holding = cur_players[i]->query_property("rally");
-      if(sizeof(holding)) {
-        if(member_array(mytype,holding) != -1) holding -= ({ mytype });
-      }
-      cur_players[i]->remove_property("rally");
-      if(sizeof(holding)) cur_players[i]->set_property("rally",holding);
+            cur_players[i]->add_ac_bonus(mod);
+            cur_players[i]->add_saving_bonus("all", mod);
+            break;
+        default:
+            cur_players[i]->add_attack_bonus(mod);
+            cur_players[i]->add_damage_bonus(mod);
+            break;
+        }
+        holding = cur_players[i]->query_property("rally");
+        if (sizeof(holding)) {
+            if (member_array(mytype, holding) != -1) {
+                holding -= ({ mytype });
+            }
+        }
+        cur_players[i]->remove_property("rally");
+        if (sizeof(holding)) {
+            cur_players[i]->set_property("rally", holding);
+        }
     }
     remove_feat(TO);
     return;
