@@ -20,8 +20,8 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("sorcerer") < 21 ||
-        ob->query_class_level("oracle") < 21) {
+    if (!(ob->query_class_level("sorcerer") > 20 ||
+        ob->query_class_level("oracle") > 20)) {
         dest_effect();
         return 0;
     }

@@ -90,6 +90,8 @@ void execute_feat(){
     caster->set_property("using instant feat",1);
     caster->remove_property("using charm");
     caster->set_property("using charm",time() + 5); //doubled timer to be on par with whirl etc. Nienne, 08/09.
+
+    clevel = caster->query_guild_level("bard");
     return;
 }
 

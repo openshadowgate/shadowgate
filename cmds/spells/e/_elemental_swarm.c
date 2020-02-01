@@ -160,17 +160,17 @@ void create_elemental()
     elemental->setup_elemental(element,TO); // description stuff, according to element
     elemental->set_resistance_percent(element,200); // the elemental is healed by damage type from its own element
 
-    elemental->set_guild_level("fighter",clevel);
-    elemental->set_mlevel("fighter",clevel);
-    elemental->set_hp(clevel*15);
-    elemental->set_stats("strength",15+(clevel/4));
-    elemental->set_stats("constitution",15+(clevel/4));
-    elemental->set_stats("dexterity",15+(clevel/4));
-    elemental->set_ac(10 + (-1*clevel));
-    elemental->set_attacks_num(clevel/7);
-    elemental->set_damage_bonus(clevel/5);
-    elemental->set_attack_bonus(clevel/4);
-    elemental->set_property("effective enchantment",clevel/7);
+    elemental->set_guild_level("fighter", clevel);
+    elemental->set_mlevel("fighter", clevel);
+    elemental->set_hp(clevel * 15);
+    elemental->set_stats("strength", 15 + (clevel / 4));
+    elemental->set_stats("constitution", 15 + (clevel / 4));
+    elemental->set_stats("dexterity", 15 + (clevel / 4));
+    elemental->set_ac(10 + (-clevel));
+    elemental->set_attacks_num(clevel / 7);
+    elemental->set_damage_bonus(clevel / 5);
+    elemental->set_attack_bonus(clevel / 2);
+    elemental->set_property("effective enchantment", clevel / 7);
 
     elemental->set_property("spelled",({TO}));
     elemental->set_property("spell_creature",TO);

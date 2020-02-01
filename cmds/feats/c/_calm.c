@@ -48,7 +48,7 @@ void execute_feat(){
         return;
     }
     ::execute_feat();
-    if(!objectp(target)) { 
+    if(!objectp(target)) {
         dest_effect();
         return;
     }
@@ -87,6 +87,8 @@ void execute_feat(){
     caster->remove_property("using calm");
     caster->set_property("using calm",time() + 30); //doubled timer to be on par with whirl etc. Nienne, 08/09.
     spell_kill(target,caster);
+
+    clevel = caster->query_guild_level("bard");
     return;
 }
 
@@ -144,7 +146,7 @@ void execute_attack(){
 void timer(object tp){
    if(!objectp(tp)) return;
    if(!tp->query_property("using calm")) dest_effect();
-   if(!sizeof(tp->query_attackers())) { 
+   if(!sizeof(tp->query_attackers())) {
         tp->remove_property("using calm");
         dest_effect();
         return;
@@ -157,4 +159,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-
