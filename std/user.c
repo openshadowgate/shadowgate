@@ -4251,11 +4251,7 @@ string realNameVsProfile(string who)
                 if (objectp(peep = find_player(name))) {
                     if (peep->query("relationship_profile") == profile) {
                         return name;
-                    }else {
-                        return "";
                     }
-                } else {
-                    return "";
                 }
             }
         }

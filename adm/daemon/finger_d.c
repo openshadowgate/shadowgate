@@ -138,7 +138,6 @@ string user_finger_display(string who) {
 	}
         birth = (int)ob->query_birthday();
         birth2 = birth - (int)ob->query_start_age() * YEAR;
-        finger += "Birthday: "+date(birth)+" "+capitalize(month(birth))+", "+year(birth2)+" SG\n";
         if (this_player() && archp(this_player()))
             if ((uh_oh = (string)ob->query_email()) != "")
                 finger += "Email: " + uh_oh + "\n";
@@ -226,7 +225,7 @@ string user_finger_display(string who) {
 	}
         birth = query_birthday();
         birth2 = birth - query_start_age()*YEAR;
-        finger += "Birthday: "+date(birth)+" "+capitalize(month(birth))+", "+year(birth2)+" SG\n";
+        /* finger += "Birthday: "+date(birth)+" "+capitalize(month(birth))+", "+year(birth2)+" SG\n"; */
         if (this_player() && archp(this_player()))
             if ((uh_oh = query_email()) != "")
                 finger += "Email: " + uh_oh + "\n";

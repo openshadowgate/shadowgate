@@ -42,10 +42,10 @@ void spell_effect(int prof)
     {
         if (do_save(foe, 2) ||
             foe->query_property("no death") ||
-            foe->is_undead() ||
-            !random(2) ||
-            max < 0 ||
-            (foe->query_level() > clevel)) {
+            foe->query_level() > caster->query_level()||
+            foe->query_level() > clevel ||
+            !random(4)
+            ) {
             tell_object(foe, "%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
             continue;
         }
