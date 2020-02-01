@@ -1,12 +1,12 @@
 // alias command
 #include <std.h>
- 
+
 inherit DAEMON;
- 
+
 void alias_reset();
-int sort(string one,string two); 
- 
-varargs int cmd_alias (string str, int first) 
+int sort(string one,string two);
+
+varargs int cmd_alias (string str, int first)
 {
     int i, sl;
     int index;
@@ -15,27 +15,27 @@ varargs int cmd_alias (string str, int first)
     mapping alias;
 
     if(!objectp(PO) || !interactive(PO)) { return 0; }
-  
+
     act_ob = PO;
 
 
-    if(str == "-clear")  
+    if(str == "-clear")
     {
         act_ob->clear_aliases();
         return 1;
     }
-  
-    if(str == "-reset") 
+
+    if(str == "-reset")
     {
         alias_reset();
         return 1;
     }
-  
+
     alias = (mapping)act_ob->query_aliases();
 
-    if(!str) 
+    if(!str)
     {
-        if (!mapp(alias))	
+        if (!mapp(alias))
         {
             if(pointerp(alias)) write("Your alias mapping is a pointer!");
             if(intp(alias)) write("Your alias mapping is an integer!");
@@ -46,16 +46,16 @@ varargs int cmd_alias (string str, int first)
 	    }
 
         elements = keys(alias);
-        if(!elements || !sizeof(elements)) 
+        if(!elements || !sizeof(elements))
         {
 	        write("No aliases defined.");
 	        return 1;
 	    }
-      
+
         elements = sort_array(elements,"sort");
-      
+
         melnmarn = "";
-        for(i = 0; i < sizeof(elements); i++) 
+        for(i = 0; i < sizeof(elements); i++)
         {
 	        melnmarn += sprintf("%%^YELLOW%%^%-10s %%^RESET%%^%%^CYAN%%^%-50s \n",elements[i],alias[elements[i]]);
 	    }
@@ -64,44 +64,44 @@ varargs int cmd_alias (string str, int first)
         return 1;
     }
 
-    if(sscanf(str,"%s %s",verb,cmd) == 2)  
+    if(sscanf(str,"%s %s",verb,cmd) == 2)
     {
         // added pray to prevent screwing up praying in churches *Styx* 11/20/03, last change 7/98
-        if(verb=="alias" || verb == "pray")  
+        if(verb=="alias" || verb == "pray")
         {
             notify_fail ("Sorry, we can't allow you to alias 'alias' or 'pray'.\n");
             return 0;
         }
         if(!first)
         {
-            if (!alias[verb]) 
-            { 
-                write("Alias: "+verb+" ("+cmd+") added."); 
+            if (!alias[verb])
+            {
+                write("Alias: "+verb+" ("+cmd+") added.");
             }
             else
             {
                 write("Alias: "+verb+" ("+cmd+") altered.");
             }
         }
-      
+
         act_ob->add_alias(verb,cmd);
         return 1;
     }
-    
-    if(!alias[str]) 
+
+    if(!alias[str])
     {
         write("The alias "+str+" wasn't found.");
         return 1;
     }
-    
+
     printf("%-15s%s\n",str,alias[str]);
     return 1;
 }
 
-int sort(string one,string two) { return strcmp(one,two); } 
- 
+int sort(string one,string two) { return strcmp(one,two); }
+
 varargs void alias_reset()
-{  
+{
     if (!interactive(previous_object())) { return; }
     cmd_alias("exa look $*",1);
     cmd_alias("i inventory",1);
@@ -121,8 +121,8 @@ varargs void alias_reset()
     cmd_alias("sw southwest");
     cmd_alias("se southeast");
 }
- 
- 
+
+
 int help()
 {
   write("
@@ -132,10 +132,11 @@ alias - define server-side command aliases
 
 %^CYAN%^SYNTAX%^RESET%^
 
-alias 
+alias
 alias %^ORANGE%^%^ULINE%^ALIAS%^RESET%^ [%^ORANGE%^%^ULINE%^COMMAND%^RESET%^]
 alias -reset
 alias -clear
+unalias %^ORANGE%^%^ULINE%^ALIAS%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -155,23 +156,25 @@ There are two options:
 
 Prefixing the alias verb with a $ allows you to set up a verb that does not require a space after it.
 
+To remove an %^ORANGE%^%^ULINE%^ALIAS%^RESET%^ use %^ORANGE%^<unalias %^ORANGE%^%^ULINE%^ALIAS%^RESET%^%^ORANGE%^>%^RESET%^.
+
 %^CYAN%^EXAMPLES%^RESET%^
 
 %^ORANGE%^<alias greet kill>%^RESET%^
 
-    Each time you type <greet TARGET> server will perform the same action as if you have typed <kill TARGET>
+    Each time you use <greet TARGET> server will perform the same action as if you have typed <kill TARGET>
 
 %^ORANGE%^<alias lsack look sack $1>%^RESET%^
 
     Command <lsack 2> will be substituted on the server to <look sack 2>
 
-alias $' say \" $* \"
-    
-    Now if you type %^ORANGE%^<'Hello!>%^RESET%^ server will substitute it with %^ORANGE%^<say \" Hello! \">%^RESET%^ 
+%^ORANGE%^<alias $' say \" $* \">%^RESET%^
+
+    Now if you type %^ORANGE%^<'Hello!>%^RESET%^ server will substitute it with %^ORANGE%^<say \" Hello! \">%^RESET%^
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-unalias, nickname, unnickname, history, last
+nickname, unnickname, history, last
 
 ");
 	return 1;
