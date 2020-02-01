@@ -4196,41 +4196,71 @@ string knownAs(string who)
 
 string realName(string who)
 {
-    mapping temp=([]);
-    string *stuff,*names=({}),*profiles=({});
-    int i,j;
+    mapping temp = ([]);
+    string* stuff, * names = ({}), * profiles = ({});
+    int i, j;
 
-    if(!TO->query("relationships_converted"))
-    {
-        stuff = keys(relationships);
-        if(!stringp(who)) { return ""; }
-        who = lower_case(who);
-
-        for(i=0;i<sizeof(stuff);i++)
-        {
-            if(lower_case(knownAs(stuff[i])) == who)
-            {
-                return lower_case(stuff[i]);
-            }
-        }
+    if (!sizeof(keys(relationships))) {
         return "";
     }
-    else
-    {
-        if(!sizeof(keys(relationships))) { return ""; }
-        names = keys(relationships);
-        for(i=0;i<sizeof(names);i++)
-        {
-            temp = relationships[names[i]];
-            if(!sizeof(keys(temp))) { continue; }
-            profiles = keys(temp);
-            for(j=0;j<sizeof(profiles);j++)
-            {
-                if(lower_case(who) == temp[profiles[j]]) { return names[i]; }
+
+    names = keys(relationships);
+
+    for (i = 0; i < sizeof(names); i++) {
+        temp = relationships[names[i]];
+        if (!sizeof(keys(temp))) {
+            continue;
+        }
+        profiles = keys(temp);
+        for (j = 0; j < sizeof(profiles); j++) {
+            if (lower_case(who) == temp[profiles[j]]) {
+                return names[i];
             }
         }
+    }
+
+    return "";
+}
+
+string realNameVsProfile(string who)
+{
+    string * names, name;
+    string * profiles, profile;
+    object peep;
+
+    mapping tmp = ([]);
+
+    if (!sizeof(keys(relationships))) {
         return "";
     }
+
+    names = keys(relationships);
+
+    foreach(name in names)
+    {
+        tmp = relationships[name];
+
+        if (!sizeof(tmp)) {
+            continue;
+        }
+
+        profiles = keys(tmp);
+        foreach(profile in profiles)
+        {
+            if (lower_case(who) == tmp[profile]) {
+                if (objectp(peep = find_player(name))) {
+                    if (peep->query("relationship_profile") == profile) {
+                        return name;
+                    }else {
+                        return "";
+                    }
+                } else {
+                    return "";
+                }
+            }
+        }
+    }
+    return "";
 }
 
 string getNameAsSeen(object ob)
