@@ -13,8 +13,8 @@ int cmd_finger(string str) {
     if (!str) {
     	if(!archp(TP)) {  // changed to only show this for arches *Styx*
               write("You need to specify the character or immortal's name, i.e. <finger [NAME]>");
-              return 0; 
-        } 
+              return 0;
+        }
         TP->more(explode((string)FINGER_D->general_finger_display(), "\n"));
         return 1;
     }
@@ -24,9 +24,12 @@ int cmd_finger(string str) {
         TP->more(explode((string)FINGER_D->user_finger_display(str), "\n"));
         return 1;
     }
-    if(!avatarp(TP) &&  file_size("/realms/"+str) != -2){
+    if (!avatarp(TP) && file_size("/realms/" + str) != -2) {
         str = TP->realName(str);
-    } 
+        if (objcetp(find_player(str))) {
+            str = TP->realNameVsProfile(str);
+        }
+    }
     if((pl = find_player(str))
        && avatarp(pl)
        && ((string)pl->query_vis_name() != (string)pl->query_name())
