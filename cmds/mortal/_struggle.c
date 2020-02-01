@@ -1,11 +1,11 @@
 #include <std.h>
 #include <daemons.h>
-/* trainers include - 
+/* trainers include -
   /d/laerad/mon/estal
   /d/islands/pirates/mon/shawologon.c (halfling weapon shop guy, up to 10th)
   /d/dagger/Daggerdale/shops/npcs/selena Vethor's guild recept. (up to 10th)
   d/tharis/monsters/lathis - Tharis tea shop (10th)
-  
+
 */
 
 inherit DAEMON;
@@ -27,9 +27,9 @@ int cmd_struggle(string what) {
     loosen = (10 + (prof *40));
 //   tell_object(find_player("styx"),"Bindings = "+bindings+", damagepct = "
 //       +dampct+", and loosen = "+loosen+".\n");
-/*   if(prof > 20) { 
-      delay = random(5); 
-    } else { 
+/*   if(prof > 20) {
+      delay = random(5);
+    } else {
       delay = 20 - random(prof);
    }*/
    delay = 20 - (prof/2);
@@ -40,7 +40,7 @@ int cmd_struggle(string what) {
       return 0;
    }
     formu = (random(8)*3) + ( ((loosen*4)+(dampct/5))/(prof+1) );
-    //added by saide to make sure stamina use does not give 
+    //added by saide to make sure stamina use does not give
     //stamina
     if(formu < 1) {
         formu = 1 + random(3);
@@ -59,17 +59,17 @@ int cmd_struggle(string what) {
         notify_fail("You aren't gagged, why bother?\n");
         return 0;
       }
-      if(random(4)) 
-            tell_room(ETP,TPQCN+" seems to be struggling against the gag."); 
+      if(random(4))
+            tell_room(ETP,TPQCN+" seems to be struggling against the gag.");
       switch(random(100)-prof) {
-    
-        case 0:  
+
+        case 0:
               TP->set_gagged(0);
               write("Somehow you manage to slip free of the gag!");
               if(random(4)) tell_room(ETP, "You notice "+TPQCN+" slip "
                           "free of "+TP->query_possessive()+" gag.");
               break;
-        case 1..10 : 
+        case 1..10 :
            write("You fight against the gag but only manage to hurt yourself!");
            TP->do_damage("head", random(3));
            break;
@@ -81,17 +81,17 @@ int cmd_struggle(string what) {
          notify_fail("You aren't blindfolded, why bother?\n");
          return 0;
       }
-      if(random(4)) 
-          tell_room(ETP,TPQCN+" seems to be struggling against the blindfold.", TP); 
+      if(random(4))
+          tell_room(ETP,TPQCN+" seems to be struggling against the blindfold.", TP);
       switch(random(100)-prof) {
-    
-        case 0:  
+
+        case 0:
               TP->set_blindfolded(0);
               write("Somehow you manage to slip the blindfold off!");
               if(random(4)) tell_room(ETP, "You notice "+TPQCN+" slip free "
                           "of "+TP->query_possessive()+" blindfold.", TP);
               break;
-        case 1..5 : 
+        case 1..5 :
 // adapted from Garrett's original blindfold object
 	     blindwas = TP->query_blindfolded();
              TP->set_blindfolded(0);
@@ -125,7 +125,7 @@ int cmd_struggle(string what) {
                   tell_room(ETP,"You notice "+TPQCN+"'s %^RED%^wrist bleeding"
                       "%^RESET%^ as "+TP->query_subjective()+" struggles.", TP);
                 TP->do_damage("right arm", random(5));
-		break;                
+		break;
        case 2:  write("The ropes cause %^BOLD%^blisters %^RESET%^as you struggle.");
                 if(random(2))
                   tell_room(ETP,TPQCN+" seems to be struggling against the "
@@ -147,15 +147,15 @@ int cmd_struggle(string what) {
 		break;
        case 10:  write("You pray your captors don't return or notice before "
                       "you manage to break free.");
-                if(random(3))  tell_room(ETP,see_struggle,TP);      
+                if(random(3))  tell_room(ETP,see_struggle,TP);
 		break;
        case 15:  write("This is so strenuous and painful you have to be "
                       "thinking about giving up.");
-                if(random(3))  tell_room(ETP,see_struggle,TP);      
+                if(random(3))  tell_room(ETP,see_struggle,TP);
 		break;
        case 20: write("You struggle against your bonds and may have loosened "
                       "them a little.");
-                if(random(3))  tell_room(ETP,see_struggle,TP);      
+                if(random(3))  tell_room(ETP,see_struggle,TP);
                 break;
        case 21..49 : if(random(10)-(prof/3))  tell_room(ETP,see_struggle,TP);
                      break;
@@ -163,9 +163,9 @@ int cmd_struggle(string what) {
                      "your efforts are futile.");
                 break;
    }
-   if(!random(20 - prof/2) ) 
+   if(!random(20 - prof/2) )
       write("You can definitely tell the bonds are loosening.");
-   
+
    if(TP->query_condition_percent() < 30)
       tell_object(TP,"You're becoming exhausted from the struggling.");
 
@@ -179,16 +179,26 @@ int cmd_struggle(string what) {
 
 int help(){
    write(
-@STYX
-   struggle:  
+"
+%^CYAN%^NAME%^RESET%^
 
-      Usage:  struggle or struggle [gag | blindfold]
+struggle - get out of binding
 
-      This gives you the chance to loosen bonds and (eventually) free yourself.  It takes time and uses stamina.  If you are already injured it may take more of what little strength/energy you have left.  Of course there is also a chance of your struggling being noticed by your captor(s) if they are around.
-The "rope use" skill will improve your chances/speed of escaping, lower the chances of being detected, etc.
+%^CYAN%^SYNTAX%^RESET%^
 
-Also see:  rope use, bind, gag, unbind, ungag, drag, strip, pkilling, blindfold, unblindfold 
-STYX
+struggle
+struggle gag | blindfold
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This gives you the chance to loosen bonds and free yourself. It takes time and uses stamina. If you are already injured it may take more of what little strength and energy you have left. Of course there is also a chance of your struggling being noticed by your captor if they are around.
+
+The 'rope use' skill will improve your chances and speed of escaping, lower the chances of being detected.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+rope use, skills, bind, unbind, gag, ungag, strip, pkilling, blindfold, unblindfold
+"
       );
    return 1;
 }

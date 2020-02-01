@@ -67,12 +67,12 @@ int cmd_throw(string str)
         tell_object(TP, "You can only throw something you are wielding!");
         return 1;
     }
-    
+
     if(objectp(what_ob) && what_ob->query_property("no drop"))
     {
         tell_object(TP, "You are unable to throw "+what_ob->query_name()+".");
         return 1;
-    }    
+    }
     //adjust the remainder of the string, depending whether two words or one were used as the identifier
     switch (flag){
     case 0:
@@ -87,7 +87,7 @@ int cmd_throw(string str)
         break;
     }
     //now check whether the item is to be thrown at a target
-    if (interact("at", str)){ 
+    if (interact("at", str)){
         if (sscanf(str, "at %s %s %d", target, dir, distance)!=3){
             if (sscanf(str, "at %s %s", target, dir) == 2){
                 distance = 1;
@@ -98,17 +98,17 @@ int cmd_throw(string str)
                     dir = "here";
                 }
             }
-        } 
+        }
     } else {
         if (sscanf(str, "%s %d", dir, distance)!=2){
             dir = remainder;
             distance = 1;
         }
         targetless = 1;
-    }    
+    }
     exits = ETP->query_exits();
     if (sizeof(exits)<1||member_array(dir, exits)==-1  && dir != "here"){
-        tell_object(TP, "You can't throw in that direction. There's no '" + dir + "' exit in this room!"); 
+        tell_object(TP, "You can't throw in that direction. There's no '" + dir + "' exit in this room!");
         return 1;
     }
     if(what_ob->is_cursed()) {
@@ -131,30 +131,30 @@ int cmd_throw(string str)
        tell_object(TP,"You want to throw the walls?");
        return 1;
     }
-   
+
     current = ETP;
-    roomList += ({ current }); 
-   
-    if(dir != "here" && distance > 0) 
-    {        
+    roomList += ({ current });
+
+    if(dir != "here" && distance > 0)
+    {
         for(i=0;i<distance;i++)
-        { 
+        {
             tmp = (string)current->query_exit(dir);
             if(!tmp)
             {
                 tell_object(TP,"Error, exit "+dir+" seems to lead nowhere.");
                 return 1;
             }
-            
+
             if(tmp == VOID)
             {
                 tell_object(TP,"You can't throw that far to the "+dir);
                 return 1;
             }
-            
+
             catch(call_other(tmp,"??"));
             current = find_object_or_load(tmp);
-    
+
             if(door = current->query_door(dir))
             {
                 if(!current->query_open(door))
@@ -162,7 +162,7 @@ int cmd_throw(string str)
                     tell_object(TP,"There seems to be a closed door in your way.");
                     return 1;
                 }
-            }           
+            }
 
             if(i < distance-1)
             {
@@ -181,17 +181,17 @@ int cmd_throw(string str)
                     if(i < distance -1)
                     {
                         tell_object(TP,"You can't throw through an indoor room.");
-                        return 1;                        
+                        return 1;
                     }
                 }
             }
-            roomList += ({ current });         
+            roomList += ({ current });
         }
- 
+
         /*
         roomList = allocate(distance);
         roomList[0] = current;
-        for(inc = 0;inc < distance;inc ++) 
+        for(inc = 0;inc < distance;inc ++)
         {
             tmp = (string)current->query_exit(dir);
             if(!tmp)
@@ -200,7 +200,7 @@ int cmd_throw(string str)
                 return 1;
             }
             catch(call_other(tmp,"??"));
-            
+
             current = find_object_or_load((string)current->query_exit(dir));
             if(inc < distance-1) {
                 roomList[inc+1] = current;
@@ -224,7 +224,7 @@ int cmd_throw(string str)
             return 1;
         }*/
     }
-    
+
     flag = 0;
     if (targetless == -1){  //added by Lujke
 
@@ -266,9 +266,9 @@ int cmd_throw(string str)
                 write("You missed...");
             }
         }
-    } 
-    
-    
+    }
+
+
     if(flag) {
         if(perfect) write("Perfect shot!");
         tell_room(current,foe->query_cap_name()+" is hit with a "+what_ob->query_name(),foe);
@@ -301,9 +301,9 @@ int cmd_throw(string str)
         if(objectp(foe) && !userp(foe) && living(foe)){
             //env = environment(foe);
             //file = base_name(environment(TP));
-            if(foe->query_paralyzed() || 
+            if(foe->query_paralyzed() ||
                 ((object *)foe->query_attackers()!= ({})
-                && (member_array(TP,foe->query_attackers()) == -1 
+                && (member_array(TP,foe->query_attackers()) == -1
                 && !present(TP,ETP)))) {
                 return 1;
             } else {
@@ -317,7 +317,7 @@ int cmd_throw(string str)
             }
         }
     } else {
-        tell_room(ETP, TPQCN + " throws " + what_ob->query_short() 
+        tell_room(ETP, TPQCN + " throws " + what_ob->query_short()
                      + " in the " + dir + " direction.", TP);
         tell_object(TP, "You throw "+  what_ob->query_short()
                              + " in the " + dir + " direction.");
@@ -376,28 +376,37 @@ void move_monster(object foe, object player) {
 
 int help(){
     write(
-@OLI
-    throw
-    throw <object> at <target> 
-    throw <object> at <target> <direction> <distance>
-    throw <object> <direction>
-    throw <object> <direction> <distance>
+"
+%^CYAN%^NAME%^RESET%^
 
-    Throw can be applied to any wielded (in hand) object. Throwing at a
-    target starts combat. Some objects will do nothing when they hit a 
-    target. Others will explode, capture pierce or otherwise wound the 
-    target. Oh some might just break. 
+throw - makes stuff fly
 
-    Throwing an object without naming a target moves it to the relevant
-    room.
+%^CYAN%^SYNTAX%^RESET%^
 
-    The command only looks at objects you are wielding. So, if you wish  
-    to throw 'dagger 2' in your inventory at a target in the same room 
-    as you, use the commands:
-    
-    wield dagger 2
-    throw dagger at <target>
-OLI
+throw %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ at %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+throw %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ at %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^ %^ORANGE%^%^ULINE%^DISTANCE%^RESET%^
+throw %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^
+throw %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^ %^ORANGE%^%^ULINE%^DISTANCE%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+Throw can be applied to any wielded object. Throwing at a target starts combat. Some objects will do nothing when they hit a target. Others will explode, capture pierce or otherwise wound the target. Oh some might just break.
+
+Throwing an object without naming a target moves it to the relevant room.
+
+When wielding a bow, you can use shoot command instead.
+
+%^CYAN%^EXAMPLES%^%^RESET%^
+
+The command only looks at objects you are wielding. So, if you wish to throw 'dagger 2' in your inventory at a target in the same room as you, use the commands:
+
+  wield dagger 2
+  throw dagger at %^ORANGE%^%^ULINE%^TARGET%^RESET%^
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+peer, look, mmap, map, help
+"
     );
     return 1;
 }
