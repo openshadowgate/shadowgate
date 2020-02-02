@@ -52,8 +52,7 @@ void create() {
    add_search_path("cmds/thief");
    set_max_hp(500);
    set_hp(500);
-//   set_exp(100000);
-   set_exp(666);
+   set_exp(100000);
    set_funcs(({"dart"}));
    set_func_chance(25);    
    set("aggressive","attack_fun");

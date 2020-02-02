@@ -2013,12 +2013,10 @@ void define_clevel()
                 if (caster->is_class("mage"))
                     clevel += caster->query_guild_level("mage") / 16;
                 if (FEATS_D->usable_feat(caster, "school familiarity"))
-                    clevel += 4;
+                    clevel += 5;
             } else if (spell_sphere == SCHOOL_OPPOSITION[caster->query_school()]) {
                 if (caster->is_class("mage"))
                     clevel -= caster->query_guild_level("mage") / 16;
-                if (FEATS_D->usable_feat(caster, "school familiarity"))
-                    clevel -= 4;
             }
         }
 

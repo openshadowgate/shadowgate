@@ -64,7 +64,8 @@ void execute_feat()
         "badly hurt.%^RESET%^");
 
     clevel = max(({caster->query_guild_level("cleric"),
-                    caster->query_guild_level("oracle")}))
+                    caster->query_guild_level("druid"),
+                    caster->query_guild_level("oracle")}));
 
     caster->set_property("active_feats",({TO}));
 

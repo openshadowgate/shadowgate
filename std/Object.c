@@ -1175,16 +1175,26 @@ int __Read(string str) {
     else return notify_fail("It looks all jumbled.\n");
 }
 
-int __Use(string str){
-
+int __Use(string str)
+{
     string command, obj;
     string effect;
     int uses;
-        if(!objectp(TO)) return 0;
-        if(!objectp(TP)) return 0;
-if(!str) { return 0; }
-    if(sscanf(str, "%s %s", obj, command)!= 2) {    obj = str;    }
-    if (!id(obj)) {        return 0;    }
+    if (!objectp(TO)) {
+        return 0;
+    }
+    if (!objectp(TP)) {
+        return 0;
+    }
+    if (!str) {
+        return 0;
+    }
+    if (sscanf(str, "%s %s", obj, command) != 2) {
+        obj = str;
+    }
+    if (!id(obj)) {
+        return 0;
+    }
 
     if (!TO->query_wielded() && !TO->query_worn()) {
         return notify_fail("You must wield or wear an item to use it.\n");
@@ -1192,11 +1202,11 @@ if(!str) { return 0; }
     if (TP->query_casting() && objectp(TP->query_property("spell_casting"))) {
         return notify_fail("You are already doing something!\n");
     }
-    if ((int)TO->query_use_delay()+query("used") > time()) {
+    if ((int)TO->query_use_delay() + query("used") > time()) {
         return notify_fail("That can't be used again yet.\n");
     }
-    if(TP->query_bound() || TP->query_unconcious() || TP->query_paralyzed() ) {
-        TP->send_paralyzed_message("info",TP);
+    if (TP->query_bound() || TP->query_unconcious() || TP->query_paralyzed()) {
+        TP->send_paralyzed_message("info", TP);
         return 0;
     }
     effect = query("effect");
@@ -1208,13 +1218,13 @@ if(!str) { return 0; }
         return 0;
     }
     uses--;
-    set("used",time());
-    set("uses",uses);
-     if(uses < 1){
-                delete("uses");
-                delete("effect");
-        }
-    return call_other(find_object_or_load(EFFECTS_D),effect,TP,TO,command);
+    set("used", time());
+    set("uses", uses);
+    if (uses < 1) {
+        delete("uses");
+        delete("effect");
+    }
+    return call_other(find_object_or_load(EFFECTS_D), effect, TP, TO, command);
 }
 
 void set_use_delay(int sec){
