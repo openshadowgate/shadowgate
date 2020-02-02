@@ -69,6 +69,8 @@ int preSpell()
         tell_object(TP,"This spell is too powerful for shadow evocation!");
         return 0;
     }
+    spell_to_cast->set_shadow_spell(max_level);
+
     spell_to_cast->use_spell(TP,sargs,clevel,100,"mage");
     return 1;
 

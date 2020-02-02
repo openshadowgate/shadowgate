@@ -65,6 +65,7 @@ int spell_level,
     any_attack,
     hasBeenCast,
     preloaded,
+    shadow_spell,
     reg_num,
     quest_spell,
     mage_only,
@@ -349,6 +350,11 @@ void set_cast_string(string str)
 void set_silent_casting(int a)
 {
     silent_casting = a;
+}
+
+void set_shadow_spell(int a)
+{
+    shadow_spell = a;
 }
 
 void set_target_required(int a)
@@ -1545,22 +1551,66 @@ int query_spell_level(string classtype) {
   return spell_levels[classtype];
 }
 
-int query_spell_level_map() { if(!mapp(spell_levels)) spell_levels = ([]); return spell_levels; }
-
-mapping query_components(string classtype) {
-  if(!mapp(components)) components = ([]);
-  if(classtype == "sorcerer") classtype = "mage";
-  if(!mapp(components[classtype])) return ([]);
-  return components[classtype];
+int query_spell_level_map()
+{
+    if (!mapp(spell_levels)) {
+        spell_levels = ([]);
+    }
+    return spell_levels;
 }
 
-string query_spell_type() {  return spell_type; }
-string query_spell_sphere() { return spell_sphere; }
-string query_monk_way() { return monk_way; }
-string * query_mystery() { return oracle_mystery; }
-string * query_domains() { return divine_domains; }
-string query_cast_string() { }
-int query_silent_casting() {  return silent_casting; }
+mapping query_components(string classtype)
+{
+    if (!mapp(components)) {
+        components = ([]);
+    }
+    if (classtype == "sorcerer") {
+        classtype = "mage";
+    }
+    if (!mapp(components[classtype])) {
+        return ([]);
+    }
+    return components[classtype];
+}
+
+string query_spell_type()
+{
+    return spell_type;
+}
+
+string query_spell_sphere()
+{
+    return spell_sphere;
+}
+
+string query_monk_way()
+{
+    return monk_way;
+}
+
+string* query_mystery()
+{
+    return oracle_mystery;
+}
+
+string* query_domains()
+{
+    return divine_domains;
+}
+
+string query_cast_string()
+{
+}
+
+int query_silent_casting()
+{
+    return silent_casting;
+}
+
+int query_shadow_spell()
+{
+    return shadow_spell;
+}
 
 void set_caster(object ob){
    caster = ob;
@@ -2520,14 +2570,20 @@ varargs int do_save(object targ,int mod) {
         tell_object(caster,"Level of spell: "+casting_level+"");
     }
 
-    caster_bonus = caster_bonus * -1;
+    caster_bonus = -caster_bonus;
 
-    if(intp(mod)) { caster_bonus += mod; }
+    if (intp(mod)) {
+        caster_bonus += mod;
+    }
 
-    if(save_debug)
+    if (save_debug) {
+        tell_object(caster, "%^RESET%^%^BOLD%^Total modifiers from caster's side "
+                    "BEFORE d20 roll: " + caster_bonus + "%^RESET%^");
+    }
+
+    if(shadow_spell)
     {
-        tell_object(caster,"%^RESET%^%^BOLD%^Total modifiers from caster's side "
-            "BEFORE d20 roll: "+caster_bonus+"%^RESET%^");
+        caster_bonus = shadow_spell * 10 * caster_bonus / 100;
     }
 
     // this is directly copied below for the shadowdancer reroll - if anything changed here, change there too plz!

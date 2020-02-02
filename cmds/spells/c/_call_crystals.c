@@ -64,6 +64,10 @@ void spell_effect(int prof)
         ob->set_property("spell_creature",TO);
         ob->set_property("minion", caster);
         ob->setup_crystal(caster);
+
+        ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*10+20);
+        ob->set_hp(ob->query_max_hp());
+
         ob->move(place);
         caster->add_protector(ob);
         caster->add_follower(ob);
