@@ -35,7 +35,7 @@ void create(){
 "%^YELLOW%^<force_forsake 'player' 'reason'>%^WHITE%^ this will force a player to leave their god without needing to be in their temple and without a timer before they can follow another one\n"
 "%^YELLOW%^<fixfeats playername>%^WHITE%^ This will refund all of a player's feats and allow them to reassign for free. Do NOT use this unless the player has suffered buggy feats. Coded in response to the great spellcaster update bug of Sept 2015.%^RESET%^\n"
 "%^YELLOW%^<addfeats <name> <number> %^WHITE%^This will add free feats to a player. Do NOT use this unless the player has suffered buggy feats. Coded in response to the great spellcaster update bug of Sept 2015.%^RESET%^\n");
-  
+
   set_weight(0);
     set_limbs( ({ "right arm" }) );
     set_type("ring");
@@ -171,26 +171,26 @@ int wave_wand(string str){
   return 1;
 }
 
-int langs_set(string str) 
+int langs_set(string str)
 {
 	int i, num;
     string what;
     object ob;
 	if(!str || str == ETO) str = TP->query_name();
-	if(stringp(str)) 
+	if(stringp(str))
 	{
-		if(!objectp(ob = find_player(str))) 
+		if(!objectp(ob = find_player(str)))
 		{
 			tell_object(ETO, "No such player online.");
 			return 1;
 		}
-		if(!avatarp(ob)) 
+		if(!avatarp(ob))
 		{
 			tell_object(ETO, "That player is not an avatar, not happening....");
 			return 1;
 		}
-		
-		for (i =0;i<sizeof(ALL_LANGS);i++) 
+
+		for (i =0;i<sizeof(ALL_LANGS);i++)
 		{
 			ob->set_lang(ALL_LANGS[i],100);
 		}
@@ -205,30 +205,30 @@ int langs_set(string str)
 
 }
 
-int setprop(string str) 
+int setprop(string str)
 {
     object myroom;
-    if(!avatarp(TP)) 
+    if(!avatarp(TP))
     {
         tell_object(TP,"Bad player. Bunnies dispatching now for stabbits.");
         TO->remove();
         return 1;
     }
-    if(!str) 
+    if(!str)
     {
         tell_object(TP,"Your arguments are <setprop tpward>, <setprop magicward>, or <setprop scryward>.");
         return 1;
     }
-    if(str != "tpward" && str != "magicward" && str != "scryward") 
+    if(str != "tpward" && str != "magicward" && str != "scryward")
     {
         tell_object(TP,"Your arguments are <setprop tpward>, <setprop magicward>, or <setprop scryward>.");
         return 1;
     }
     myroom = ETP;
     if(!objectp(myroom)) return 0;
-    if(str == "tpward") 
-    {     
-        if((int)myroom->query_property("no teleport")) 
+    if(str == "tpward")
+    {
+        if((int)myroom->query_property("no teleport"))
         {
             tell_object(TP,"This room is already teleport proofed.");
             return 1;
@@ -248,7 +248,7 @@ int setprop(string str)
         myroom->set_property("no scry", 1);
         return 1;
     }
-    if((int)myroom->query_property("no magic")) 
+    if((int)myroom->query_property("no magic"))
     {
         tell_object(TP,"This room is already magic proofed.");
         return 1;
@@ -258,30 +258,30 @@ int setprop(string str)
     return 1;
 }
 
-int remprop(string str) 
+int remprop(string str)
 {
     object myroom;
-    if(!avatarp(TP)) 
+    if(!avatarp(TP))
     {
         tell_object(TP,"Bad player. Bunnies dispatching now for stabbits.");
         TO->remove();
         return 1;
     }
-    if(!str) 
+    if(!str)
     {
         tell_object(TP,"Your arguments are <remprop tpward>, <remprop magicward>, or <remprop scryward>.");
         return 1;
     }
-    if(str != "tpward" && str != "magicward" && str != "scryward") 
+    if(str != "tpward" && str != "magicward" && str != "scryward")
     {
         tell_object(TP,"Your arguments are <remprop tpward>, <remprop magicward>, or <remprop scryward>.");
         return 1;
     }
     myroom = ETP;
     if(!objectp(myroom)) return 0;
-    if(str == "tpward") 
+    if(str == "tpward")
     {
-        if(!(int)myroom->query_property("no teleport")) 
+        if(!(int)myroom->query_property("no teleport"))
         {
             tell_object(TP,"This room is not teleport proofed.");
             return 1;
@@ -301,7 +301,7 @@ int remprop(string str)
         myroom->remove_property("no scry");
         return 1;
     }
-    if(!(int)myroom->query_property("no magic")) 
+    if(!(int)myroom->query_property("no magic"))
     {
         tell_object(TP,"This room is not magic proofed.");
         return 1;
@@ -336,7 +336,7 @@ int exp(string str){
   if (!str) return notify_fail("grant <name> <amount>\n");
   if(sscanf(str,"%s %d",name, amount) != 2) return notify_fail("grant name amount\n");
   name=lower_case(name);
-  
+
   if (objectp(targplay=find_player(name)) && interactive(targplay)) {
     targplay->set_property("ignore tax",1);
     targplay->fix_exp(amount,TP);
@@ -365,7 +365,7 @@ int fix_em(string str){
   if (!str) return notify_fail("fixfeats <name>\n");
   if(sscanf(str,"%s",name) != 1) return notify_fail("fixfeats <name>\n");
   name=lower_case(name);
-  
+
   if (objectp(targplay=find_player(name)) && interactive(targplay)) {
     feats = (int)targplay->query_other_feats_gained();
     feats += (int)TO->query("free_feats");
@@ -396,7 +396,7 @@ int add_em(string str,int x){
   if (!str) return notify_fail("addfeats <name> <number>\n");
   if(sscanf(str,"%s %d",name,feats) != 2) return notify_fail("addfeats <name> <number>\n");
   name=lower_case(name);
-  
+
   if (objectp(targplay=find_player(name)) && interactive(targplay)) {
     targplay->set("free_feats",feats);
     write("You have given "+capitalize(name)+" "+feats+" feat(s).");
@@ -411,7 +411,7 @@ int nwp_bonus(string str) {
   string targplay, nwp;
   int bonus, old_bonus;
   object ob;
-  
+
   if(!avatarp(ETO)) {
     tell_object(ETO,"The item mysteriously vanishes.");
     TO->remove();
@@ -466,12 +466,12 @@ int pk_flag(string str) {
      TO->remove();
      return 0;
   } // Added security!!! A must have. :)
-  if (!str) 
+  if (!str)
 	return notify_fail("syntax is <pkflag [name] on> or <pkflag [name] off>\n");
-  if (sscanf(str,"%s %s",name, which) != 2) 
+  if (sscanf(str,"%s %s",name, which) != 2)
 	return notify_fail("syntax is <pkflag [name] on> or <pkflag [name] off>\n");
   if(which != "on" && which != "off")
-  if (sscanf(str,"%s %s",name, which) != 2) 
+  if (sscanf(str,"%s %s",name, which) != 2)
 	return notify_fail("syntax is <pkflag [name] on> or <pkflag [name] off>\n");
   name=lower_case(name);
   if (objectp(targplay = find_player(name)) && interactive(targplay))  {
@@ -480,8 +480,8 @@ int pk_flag(string str) {
      tell_object(targplay,"Your PK status flag has been changed to "+which+".");
      write("You have changed "+name+"'s PK status flag to "+which+".");
      switch(which) {
-	case "on":  targplay->set_pk_death_flag();  break;
-	case "off":  targplay->remove_pk_death_flag();  break;
+     case "on":  targplay->set("no pk", 1);  break;
+     case "off":  targplay->delete("no pk");  break;
 	default:  write("Something didn't work right, please try again.");
      }
    } else {
@@ -498,25 +498,25 @@ int dt_flag(string str) {
      TO->remove();
      return 0;
   } // Added security!!! A must have. :)
-  if (!str) 
+  if (!str)
 	return notify_fail("syntax is <dtflag [name] on> , <dtflag [name] off> or <dtflag [name] ask>\n");
-  if (sscanf(str,"%s %s",name, which) != 2) 
+  if (sscanf(str,"%s %s",name, which) != 2)
 	return notify_fail("syntax is <dtflag [name] on> , <dtflag [name] off> or <dtflag [name] ask>\n");
   if(member_array(which, ({"on","off","ask","query","time"}) ) == -1 )
-   if (sscanf(str,"%s %s",name, which) != 2) 
+   if (sscanf(str,"%s %s",name, which) != 2)
 	return notify_fail("syntax is <dtflag [name] on> , <dtflag [name] off> or <dtflag [name] ask>\n");
   name=lower_case(name);
   if (objectp(targplay = find_player(name)) && interactive(targplay))  {
 //     tell_object(targplay,"Your PK status flag has been changed to "+which+".");
 //     write("You have changed "+name+"'s PK status flag to "+which+".");
      switch(which) {
-	case "on":  
+	case "on":
   //     tell_object(targplay,"Your PK status flag has been changed to "+which+".");
          write("You have changed "+name+"'s PK downtime flag to "+which+".");
          targplay->set_down_time(dt=time()+_TWO_WEEKS_IN_SECONDS_);
          write("Their downtime flag is set to clear at: "+ctime(dt)+".");
          break;
-	case "off":  
+	case "off":
   //     tell_object(targplay,"Your PK status flag has been changed to "+which+".");
          write("You have changed "+name+"'s PK downtime flag to "+which+".");
          targplay->remove_down_time();  break;
@@ -544,12 +544,12 @@ int d_flag(string str) {
      TO->remove();
      return 0;
   } // Added security!!! A must have. :)
-  if (!str) 
+  if (!str)
 	return notify_fail("syntax is <dflag [name] off>\n");
-  if (sscanf(str,"%s %s",name, which) != 2) 
+  if (sscanf(str,"%s %s",name, which) != 2)
 	return notify_fail("syntax is <dflag [name] off>\n");
   if(which != "on")
-  if (sscanf(str,"%s %s",name, which) != 2) 
+  if (sscanf(str,"%s %s",name, which) != 2)
 	return notify_fail("syntax is <dflag [name] off>\n");
   name=lower_case(name);
   if (objectp(targplay = find_player(name)) && interactive(targplay))  {
@@ -566,7 +566,7 @@ int lang_fun(string str){
   string myrace, *skillslist, currentlang;
   object myplayer;
   mapping skills;
-  
+
   if(!find_player(str)) {
     tell_object(TP,"No such player online.");
     return 1;
@@ -640,7 +640,7 @@ int clear_prof(string str){
 //  clears the named player's prof and skill settings in the named prof
 //  should also return any profs previously applied to the named prof to
 // their stock of unused profs
-// In this file, 'skill refers to the player's skill with a weapon type, 
+// In this file, 'skill refers to the player's skill with a weapon type,
 // while prof refers to the number of profs applied in it. So, a character
 // with 100(2) in medium blades would be said to have a skill of 100 and
 // a prof of 2 in medium blades.
@@ -670,7 +670,7 @@ int clear_prof(string str){
     return 1;
   }
 
-// set skillnames to an array of the names of the weapon types the player 
+// set skillnames to an array of the names of the weapon types the player
 // has some skills or profs in
   skillnames = keys(skilllist);
 
@@ -680,7 +680,7 @@ int clear_prof(string str){
   for (i=0;i<sizeof(skillnames);i++){
     skillname = skillnames[i];
     proflist[skillname]=pc->query_profs(skillname);
-    tell_object(ETO, "Current skill in " + skillname + " is " 
+    tell_object(ETO, "Current skill in " + skillname + " is "
     + proflist[skillname]);
   }
 // reset the player's profs
@@ -697,7 +697,7 @@ int clear_prof(string str){
       // couldn't find a way to apply more than one prof at a time
       prof = proflist[skillname];
       if (prof>0){
-        tell_object(ETO, "Reapplying " + prof + " proficiencies to " 
+        tell_object(ETO, "Reapplying " + prof + " proficiencies to "
                         + skillname + ".");
         for (j=0;j<prof;j++){
           pc->use_prof(skillname);
@@ -707,7 +707,7 @@ int clear_prof(string str){
   }
 //Finally, delete the skill for the proftype you are removing
   tell_object(ETO, "\nDeleting skill for " + profname + ".");
-  pc->delete_skill(profname);  
+  pc->delete_skill(profname);
   tell_object(ETO, "Process finished. Prof removed");
   return 1;
 }
@@ -720,9 +720,9 @@ int snag_stuff(string str) {
      TO->remove();
      return 0;
   }
-  if (!str) 
+  if (!str)
     return notify_fail("Syntax is <lift (item) from (location)>\n");
-  if (sscanf(str,"%s from %s",item, where) != 2) 
+  if (sscanf(str,"%s from %s",item, where) != 2)
     return notify_fail("Syntax is <lift (item) from (location)>\n");
   if(where == "here") { // pick up from ground
     if(present(item,ETP)) {
@@ -745,7 +745,7 @@ int snag_stuff(string str) {
   if(present(item,theplayer)) {
     if((int)present(item,theplayer)->move(TP) != 0)
       return notify_fail("Soz, cannot carry that item.\n");
-    else 
+    else
     {
         if(present(item,ETP))
         {
@@ -774,9 +774,9 @@ int set_the_value(string str) {
 int convert(string str)
 {
     object *per;
-    if(!stringp(str)) 
-    { 
-        tell_object(TP,"Syntax: convert <name>"); 
+    if(!stringp(str))
+    {
+        tell_object(TP,"Syntax: convert <name>");
         return 1;
     }
 
@@ -806,7 +806,7 @@ int is_immortal(object ob)
     if(!avatarp(ob)) { return 0; }
     return 1;
 }
-    
+
 int force_forsake(string str)
 {
     string *info,name,deity;
@@ -843,7 +843,7 @@ int force_forsake(string str)
         if(!objectp(imms[i])) { continue; }
         tell_object(imms[i],"%^RESET%^%^BOLD%^"+capitalize(player->query_true_name())+" was forced to forsake "
             ""+deity+" by "+capitalize(TP->query_true_name())+".");
-    }    
+    }
 
     name = (string)player->query_true_name();
     str = implode(info," ");
@@ -862,9 +862,9 @@ int force_forsake(string str)
 
     player->set_diety(0);
     player->set_sphere(0);
-    player->set_divine_domain(({})); 
+    player->set_divine_domain(({}));
     player->forget_all_cl_spells();
-    
+
     if(objectp(symbol = present("symbol",player))) symbol->remove();
     player->update_channels();
 
@@ -873,4 +873,3 @@ int force_forsake(string str)
     player->resetLevelForExp(0);
     return 1;
 }
-

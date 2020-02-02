@@ -2128,8 +2128,6 @@ nomask void die()
     "/daemon/death_effects_d"->death_notification(TO);
     if(objectp(klr) && klr->is_player() && TO->is_player())
     {
-        klr->remove_relationship(TO->query_name());
-        TO->remove_relationship(klr->query_name());
         TO->set("just_been_pkilled",1); // new to hopefully prevent missing PKflags.
     }
 

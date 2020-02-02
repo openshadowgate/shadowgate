@@ -75,6 +75,11 @@ spell_effect(int prof) {
         set_cast_string("%^CYAN%^"+caster->QCN+" prays to "+caster->QP+" "+
 		"deity to resurrect "+capitalize(arg)+".\n");
     }
+    if (targ->query("just_been_pkilled")) {
+        tell_object(caster,capitalize(arg)+" is dead forever and can't be revived.");
+        dest_effect();
+        return;
+    }
     if (!targ->query_ghost()) {
         tell_object(caster,capitalize(arg)+" does not need to be revived.");
         dest_effect();
