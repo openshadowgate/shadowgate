@@ -65,7 +65,7 @@ spell_effect(int prof)
 
         target2 = prospective[x];
 
-        if (do_save(target2, -2)) {
+        if (do_save(target2, 0)) {
             continue;
         }
 

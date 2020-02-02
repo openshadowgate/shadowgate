@@ -1993,7 +1993,7 @@ void define_clevel()
     clevel = caster->query_guild_level(spell_type);
 
     if (spell_type == "assassin") {
-        clevel = caster->query_guild_level("thief");
+        clevel = caster->query_guild_level(caster->query("assassin_base_class"));
     }
 
     if (spell_type == "psion" || spell_type == "psywarrior") {

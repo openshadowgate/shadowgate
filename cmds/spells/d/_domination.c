@@ -79,6 +79,7 @@ void spell_effect(int prof) {
         tell_room(environment(target), "%^RED%^Outraged at " + caster->QCN + " for " + caster->QP + " attempt at mind control, " + target->QCN + " attacks " + caster->QO + "!", ({ target, caster }));
         tell_object(target, "%^RED%^Outraged at " + caster->QCN + " for " + caster->QP + " attempt at mind control, you attack " + caster->QO + "!");
         tell_object(caster, "%^RED%^" + target->QCN + " attacks you, outraged at you for your attempt at mind control!");
+        spell_kill(target, caster);
         spell_successful();
         dest_effect();
         return;
