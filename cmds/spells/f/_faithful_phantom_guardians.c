@@ -53,7 +53,7 @@ void spell_effect(int prof) {
             //ob->force_me("protect "+caster->query_name());
             ob->set_damage_bonus(clevel/8);
             ob->set_attack_bonus(clevel/3);
-            ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*6+20);
+            ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*10+20);
             ob->set_hp(ob->query_max_hp());
             ob->set_attacks_num(3);
             ob->set_exp(0);
@@ -105,7 +105,7 @@ void spell_effect(int prof) {
             ob->set_property("minion", caster);
             ob->set_damage_bonus(clevel/5);
             ob->set_attack_bonus(clevel/5);
-            ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*6+20);
+            ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*8+20);
             ob->set_hp(ob->query_max_hp());
             ob->set_attacks_num(1);
             ob->set_exp(0);
@@ -131,7 +131,7 @@ void spell_effect(int prof) {
             ob->set_property("minion", caster);
             ob->set_damage_bonus(clevel/4);
             ob->set_attack_bonus(clevel/4);
-            ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*6+20);
+            ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*10+20);
             ob->set_hp(ob->query_max_hp());
             ob->set_attacks_num(2);
             ob->set_exp(0);

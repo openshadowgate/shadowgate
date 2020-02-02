@@ -59,7 +59,7 @@ int spell_effect(int prof)
         monster->set_attacks_num(2);
         monster->set_hd(clevel,2);
         monster->set_p_desc(query_spell_level(spell_type)-1);
-        monster->set_hp((query_spell_level(spell_type)*2+clevel)*6+20);
+        monster->set_hp((query_spell_level(spell_type)*2+clevel)*8+20);
         monster->set_property("spelled",({TO}));
         monster->set_property("spell_creature",TO);
         monster->set_property("spell",TO);
