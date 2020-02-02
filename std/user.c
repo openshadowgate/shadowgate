@@ -1314,22 +1314,23 @@ void setup() {
   set_id(({"player"}));
   fix_limbs();
   tsh::initialize();
-  if (!primary_start) primary_start = getenv("start");
-   if (PERMA_DEATH_D->is_perma_deathed(query_name()) ||
-	(int)TO->query("in_the_afterlife"))
-	{
-           tmp=new(DEATH_ROOM);
-              set_property("death_room",tmp);
-                 move(tmp);
+  if (!primary_start) {
+      primary_start = getenv("start");
+  }
 
-      tell_room(ETO,query_cap_name()+" joins in the AFTERLIFE.",TO);
-      NOTIFY_D->mud_notify("joined",this_player()," (IN THE AFTERLIFE)");
-	}    else if (PRISON_D->is_imprisoned(query_name())) {
+  if (PERMA_DEATH_D->is_perma_deathed(query_name()) ||
+      (int)TO->query("in_the_afterlife")) {
+      tmp = new(DEATH_ROOM);
+      set_property("death_room", tmp);
+      move(tmp);
+
+      tell_room(ETO, query_cap_name() + " joins in the afterlife", TO);
+      NOTIFY_D->mud_notify("joined", this_player(), " in the afterlife");
+  }    else if (PRISON_D->is_imprisoned(query_name())) {
       move(JAIL);
-      tell_room(ETO,query_cap_name()+" joins in JAIL.",TO);
-      NOTIFY_D->mud_notify("joined",this_player()," (IN OOC JAIL)");
-    }
-    else
+      tell_room(ETO, query_cap_name() + " joins in JAIL.", TO);
+      NOTIFY_D->mud_notify("joined", this_player(), " (IN OOC JAIL)");
+  }else
     {
         if((string)TO->query("my_virtual_room"))
         {

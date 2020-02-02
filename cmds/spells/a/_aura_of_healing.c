@@ -104,6 +104,11 @@ void execute_attack()
         return;
     }
 
+    if (caster->query_hp() < 0) {
+        dest_effect();
+        return;
+    }
+
     place = environment(caster); // In the case caster moves
 
     people = ({});
