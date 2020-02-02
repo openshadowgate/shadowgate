@@ -2003,7 +2003,7 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 1;
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power"))
-        sdamage_adjustment += 5;
+        sdamage_adjustment += 6;
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
 

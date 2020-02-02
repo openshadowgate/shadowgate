@@ -104,6 +104,7 @@ void spell_effect(int prof)
         target->set_property("spelled", ({TO}) );
         check(0,prof );
     }
+    addSpellToCaster();
 }
 
 
