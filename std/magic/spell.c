@@ -2003,7 +2003,7 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 1;
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power"))
-        sdamage_adjustment += 4;
+        sdamage_adjustment += 5;
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
 
@@ -2036,12 +2036,12 @@ void define_base_damage(int adjust)
         slevel = slevel < 1 ? 1 : slevel;
 
         if (slevel < 1)
-            sdamage = roll_dice(clevel, 5);
+            sdamage = roll_dice(clevel, 7);
         else if (slevel > 0 && slevel < 20) {
             if (slevel % 2)
-                sdamage = roll_dice(clevel, 5 + (slevel + 1) / 2);
+                sdamage = roll_dice(clevel, 7 + (slevel + 1) / 2);
             else
-                sdamage = roll_dice(clevel, 5 + slevel / 2 - 1) + roll_dice(1, clevel / 2);
+                sdamage = roll_dice(clevel, 7 + slevel / 2 - 1) + roll_dice(1, clevel / 2);
         } else
             sdamage = roll_dice(clevel, 8);
     }
