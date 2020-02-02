@@ -67,7 +67,7 @@ void spell_effect(int prof) {
             feattracker = 1;
         }
     }
-    call_out("dest_effect", 1800 + (clevel * 10));
+// call_out("dest_effect", 1800 + (clevel * 10));
     spell_successful();
     addSpellToCaster();
 }

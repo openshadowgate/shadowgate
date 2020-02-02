@@ -10,6 +10,7 @@ void create() {
     set_spell_name("psionic teleport");
     set_spell_level(([ "psion" : 5 ]));
     set_discipline("nomad");
+    set_domains(({}));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS psionic teleport to <location>");
     set_description("This power will move the nomad from his current location to one he has previously memorized.  The "

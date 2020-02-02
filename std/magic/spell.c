@@ -2025,7 +2025,7 @@ void define_clevel()
         if (caster->is_class("gravecaller"))
             if (FEATS_D->usable_feat(caster, "negative energy conduit"))
                 if (spell_sphere == "necromancy")
-                    clevel += 4;
+                    clevel += 5;
 
         if (caster->is_class("shadow_adept"))
             if (FEATS_D->usable_feat(caster, "elusive spellcraft"))
@@ -2035,7 +2035,7 @@ void define_clevel()
 
     if (spell_type == "cleric" || spell_type == "druid")
         if (FEATS_D->usable_feat(caster, "mastery of power"))
-            clevel += 2;
+            clevel += 3;
 
     if (FEATS_D->usable_feat(caster, "ragecaster")) {
         clevel = caster->query_character_level();

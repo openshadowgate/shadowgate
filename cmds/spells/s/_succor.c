@@ -10,6 +10,7 @@ void create(){
     set_spell_name("succor");
     set_spell_level(([ "cleric" : 9,"inquisitor":4 ]));
     set_spell_sphere("alteration");
+    set_domains(({}));
     set_syntax("cast CLASS succor to DESTINATION");
     set_description("The succor spell will transport the priest to a location that he or she has remembered from the "
 "'remembered location' list. To remember a new location, use 'remember here as <location>', to see a list of all "

@@ -36,6 +36,7 @@ void reset()
     if(!present("pouch"))                      new(CMISC"pouch")->move(TO);
     if(!present("spouch") && !random(4))       new(CMISC"spouch")->move(TO);
     if(!present("climb_tool"))                 new(CMISC"climb_tool")->move(TO);
+    if(!present("thief_tools"))                 new(CMISC"thief_tools")->move(TO);
     if(!present("climb_tool 2") && !random(3)) new(CMISC"climb_tool")->move(TO);
     if(!present("rope"))                       new(CMISC"rope")->move(TO);
     if(!present("rope 2"))                     new(CMISC"rope")->move(TO);
