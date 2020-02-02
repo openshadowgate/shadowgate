@@ -1942,10 +1942,16 @@ void define_clevel()
 
     clevel = caster->query_guild_level(spell_type);
 
-    if (spell_type == "psion" || spell_type == "psywarrior")
-        clevel = max(({caster->query_guild_level("psion"), caster->query_guild_level("psywarrior")}));
-    if (spell_type == "monk" && FEATS_D->usable_feat(caster, "elemental attunement"))
+    if (spell_type == "assassin") {
+        clevel = caster->query_guild_level("thief");
+    }
+
+    if (spell_type == "psion" || spell_type == "psywarrior") {
+        clevel = max(({ caster->query_guild_level("psion"), caster->query_guild_level("psywarrior") }));
+    }
+    if (spell_type == "monk" && FEATS_D->usable_feat(caster, "elemental attunement")) {
         clevel += 5;
+    }
 
     if (FEATS_D->usable_feat(caster, "eldritch conditioning"))
         if (spell_type == caster->query("eldritch_knight_base_class"))

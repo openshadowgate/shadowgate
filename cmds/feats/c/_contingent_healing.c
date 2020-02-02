@@ -63,6 +63,9 @@ void execute_feat()
     tell_object(caster,"%^RESET%^%^BOLD%^%^CYAN%^You take a deep breath and focus, preparing to heal any ally who is "
         "badly hurt.%^RESET%^");
 
+    clevel = max(({caster->query_guild_level("cleric"),
+                    caster->query_guild_level("oracle")}))
+
     caster->set_property("active_feats",({TO}));
 
     return;
@@ -116,7 +119,7 @@ void execute_attack()
     {
         casting = caster->query_casting();
         caster->set_casting(0);
-        new("/cmds/spells/h/_heal.c")->use_spell(caster, targ, caster->query_guild_level("cleric"), 100, "cleric");
+        new("/cmds/spells/h/_heal.c")->use_spell(caster, targ, clevel, 100, "cleric");
         caster->set_casting(casting);
     }
 
