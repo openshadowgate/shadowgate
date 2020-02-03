@@ -8,7 +8,7 @@ void create()
     set_name("essence");
     set_id(({ "essence", "garlic essence", }));
     set_short("%^RESET%^%^ORANGE%^garlic essence%^RESET%^");
-    set_long("Strange glowing liquid flows in helices in this vial.");
+    set_long("%^ORANGE%^A strange glowing liquid flows in helices in this vial. You think you can <wear> it.");
     set_value(200);
     set_weight(1);
 }
