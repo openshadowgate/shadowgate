@@ -1,6 +1,7 @@
 #include <std.h>
 #include <daemons.h>
-inherit OBJECT;
+
+inherit "/d/common/obj/weapon/wand";
 
 #define WTYPES ({"maple",\
                 "ivory",\

@@ -69,6 +69,7 @@ string user_finger_display(string who) {
     string tmp;
     string pos;
     object ob;
+    object desc;
     string uh_oh;
     string finger, position;
     string level, *tmp9;
@@ -83,6 +84,9 @@ string user_finger_display(string who) {
     if (file_size(who + ".o") < 0)
         return "No such member of the Shadow Gate World.\n";
     restore_object(who);
+    desc = new(DESC_D);
+    desc->restore_profile_settings(TO,"default");
+    desc->initialize_profile(TO);
     mail_stat = (mapping)LOCALPOST_D->mail_status(tmp);
     if (ob) {
         finger =""+query_title()+"\n";
@@ -130,7 +134,6 @@ string user_finger_display(string who) {
         //finger += alig_str((string)ob->query_rname(), 31);
 // making marriage info. avatar only *Styx* 11/25/06
         if(avatarp(TP)) {
-          finger += "Immortal eyes only - ";
           if (!ob->query_married())
             finger += "Single\n";
           else
@@ -145,14 +148,8 @@ string user_finger_display(string who) {
         quiet = (int)ob->query_quietness();
         castwiz = wizardp(this_player());
         obwiz= wizardp(ob);
-        if(invis && ob != TP || (quiet && obwiz && !castwiz ) )
-            finger += "Last on: ";
-        else {
-            uh_oh = query_hah(ob, 1);
-            if (uh_oh != "")
-                finger += uh_oh + "\n";
-            finger += "On since: ";
-        }
+
+        finger += "Last on: ";
         finger += query_last_on() + "\n";
 
         /* if (this_player() && archp(this_player())) */
@@ -202,14 +199,16 @@ string user_finger_display(string who) {
                 level = "Apprentice"; break;
             case "creator":
                 level = "Creator"; break;
-            case "developer":
-                level = "Developer";break;
+            case "elder":
+                level = "Elder";break;
             case "overseer":
                 level = "Overseer";break;
+            case "arch":
+                level = "Arch";break;
             case "Admin":
-                level = "Game Admin"; break;
+                level = "Silly"; break;
             default:
-                level = "Immortal"; break;
+                level = "Wizard"; break;
             }
             finger += "Level: "+level+"\n";   // 1 nov 93 for offline
         } else finger += "Level: Unknown\n";
@@ -217,7 +216,6 @@ string user_finger_display(string who) {
         //finger += alig_str(query_rname(), 31);
 // making marriage info. avatar only *Styx* 11/25/06
         if(avatarp(TP)) {
-          finger += "Immortal eyes only - ";
           if (query_married())
             finger += "Married to "+capitalize(query_married())+"\n";
           else
@@ -260,59 +258,11 @@ string user_finger_display(string who) {
     return finger;
 }
 
-string query_hah(object ob, int verbose) {
-    int time, tmp;
-    string line;
-
-    if (!ob) return 0;
-    if (!interactive(ob)) {
-        if (verbose) return "Disconnected.";
-        else return "disconnected";
-    }
-    line = "";
-    time = query_idle(ob);
-    if (time < 60) return line;
-    tmp = time / 86400;
-    if (tmp) {
-        if (!verbose) return tmp + " d";
-        else line += tmp + " day" + (tmp>1 ? "s " : " ");
-    }
-    tmp = (time%86400)/3600;
-    if (tmp) {
-        if (!verbose) {
-            if (tmp>9) return tmp+" h";
-            else line += tmp+":";
-        } else line += tmp + " hour"+(tmp>1 ? "s " : " ");
-    }
-    tmp = (time%3600)/60;
-    if (tmp) {
-        if (!verbose) {
-            if (strlen(line)>0 && tmp < 10) line += "0";
-            line += tmp;
-        } else line += tmp+ " minute"+(tmp>1 ? "s " : " ");
-    }
-    if (verbose) line += "idle time";
-    else line += "idle";
-    return line;
-}
 
 string query_last_on() {
     if (!query_invis()) return real_last_on;
     return last_on;
 }
-
-/*
-string query_title() {
-    string pre, post;
-    if (!getenv("TITLE")) return query_cap_name();
-    if (sscanf(getenv("TITLE"), "%s $N %s", pre, post) != 2) {
-        if (sscanf(getenv("TITLE"), "$N %s", post) != 1) return
-            capitalize(query_true_name());
-        else return capitalize(query_true_name())+" "+post;
-    }
-    return pre+" "+capitalize(query_true_name())+" "+post;
-}
-*/
 
 string alig_str(string what, int x) {
     int y;
