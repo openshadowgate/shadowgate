@@ -40,7 +40,6 @@ spell_effect(int prof)
     int success, rounds, resisted;
     string myrace;
  
-   tell_object(caster,"Debug, inside spell_effect function");
 
     success = 0;
 
@@ -59,7 +58,7 @@ spell_effect(int prof)
 
     //validate target specified by caster
     if(!objectp(target)) {
-        tell_object(caster,"Debug, Target is not an object");
+        tell_object(caster,"Your target is not an object");
         return;
     }
     if(!caster->ok_to_kill(target)) {
@@ -67,13 +66,10 @@ spell_effect(int prof)
         return;
      }
     //validate additional targets in the room
-    prospective = target_filter(all_living(prospective));
-        tell_object(caster,"Debug, size prospective array:"+sizeof(prospective));
+    prospective = target_filter(all_living(environment(caster)));
 
     counter = 0;
     targets = ({target});
-
-
 
     for (x=0;x < sizeof(prospective);x++)
     {
@@ -87,15 +83,15 @@ spell_effect(int prof)
 
         if(do_save(this_target,0) == 1) {
             resisted = 1;
-            tell_object(caster,"Debug, target made saving throw /n");
+//            tell_object(caster,"Debug, target made saving throw /n");
         }
         if("/daemon/player_d.c"->immunity_check(this_target,"sleep") == 1) {
             resisted = 1;
-            tell_object(caster,"Debug, target is immune /n");
+//            tell_object(caster,"Debug, target is immune /n");
         }
         if(mind_immunity_check(this_target,"default") == 1) {
             resisted = 1;
-            tell_object(caster,"Debug, target is mind immune /n");
+//            tell_object(caster,"Debug, target is mind immune /n");
         }
         if (resisted == 1) {
            tell_room(environment(this_target),
@@ -111,7 +107,6 @@ spell_effect(int prof)
         }
 
         counter += this_target->query_level();
-        tell_object(caster,"Debug, counter = "+counter+" max_hd = "+max_hd+" this_target "+this_target);
         tell_room(environment(this_target),
            "%^CYAN%^%^BOLD%^"+this_target->QCN+
            " wavers for a bit, then falls to the ground in a deep slumber.", this_target);

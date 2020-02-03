@@ -10,90 +10,117 @@ inherit SPELL;
 
 int x,time;
 int max_hd, counter;
-object target2,*party,*prospective,*targets;
+object this_target,*party,*prospective,*targets;
 void dest_effect();
 int check();
+
 
 
 create()
 {
     ::create();
     set_spell_name("sleep");
-    set_spell_level(([ "mage" : 1, "bard" : 1, "psion" : 1, "assassin" : 1 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 1, "psion" : 1 ]));
     set_spell_sphere("enchantment_charm");
-    set_syntax("cast CLASS sleep [on TARGET]");
-    set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead.");
-    set_save("will");
+    set_syntax("cast <classname> sleep on <target>");
+    set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead. This is an agressive spell and victims will respond violently.");
     set_verbal_comp();
     set_somatic_comp();
-    mental_spell();
+    set_target_required(1);
+    set_save("will");
+    set_components(([
+        "bard" : ([ "lullaby" : 1, ]),
+    ]));
 }
+
 
 
 spell_effect(int prof)
 {
-    int success;
+    int success, rounds, resisted;
     string myrace;
+ 
 
     success = 0;
 
-    time = clevel*2;
-    if(time > 60)
-        time = 60;
+    rounds =  (prof/100) * (roll_dice(1,6) + (clevel/10));
+    if (rounds < 1) rounds = 1;
+    if (rounds > 15) rounds = 15;
+    time = rounds * ROUND_LENGTH;
 
-    if(!objectp(target))
-    {
-        prospective = all_inventory(place);
-        prospective = target_filter(prospective);
+    //d20 SRD set Sleep as having max 4 HD. That's pretty small for SG so
+    //setting it to 8 to be useful at lower levels. However, this is a 
+    //L1 spell and it really shouldn't have impact on PK at upper levels. 
+    //Solution I am setting here is 1/2 Clevel -- Uriel Feb 2020 
+    max_hd = clevel/2;
+    if (max_hd < 8) max_hd = 8;
+
+
+    //validate target specified by caster
+    if(!objectp(target)) {
+        tell_object(caster,"Your target is not an object");
+        return;
     }
-    else
-        prospective = ({target});
+    if(!caster->ok_to_kill(target)) {
+        tell_object(caster,"Target is not PK eligible");
+        return;
+     }
+    //validate additional targets in the room
+    prospective = target_filter(all_living(environment(caster)));
 
-    party = ob_party(caster);
-
+    counter = 0;
     targets = ({target});
-    for (x = 0; x < sizeof(prospective); x++) {
-        if (!objectp(prospective[x])) {
-            continue;
+
+    for (x=0;x < sizeof(prospective);x++)
+    {
+        if (counter >= max_hd) break;
+        if(!caster->ok_to_kill(prospective[x])) {
+             tell_object(caster, prospective[x]->QCN+"is not a valid target.");
+             continue;
         }
-        if ((member_array(prospective[x], party) != -1) || !living(prospective[x])) {
-            continue;
+        this_target = prospective[x];
+        resisted = 0;
+
+        if(do_save(this_target,0) == 1) {
+            resisted = 1;
+//            tell_object(caster,"Debug, target made saving throw /n");
         }
-        if (!caster->ok_to_kill(prospective[x])) {
-            continue;
+        if("/daemon/player_d.c"->immunity_check(this_target,"sleep") == 1) {
+            resisted = 1;
+//            tell_object(caster,"Debug, target is immune /n");
+        }
+        if(mind_immunity_check(this_target,"default") == 1) {
+            resisted = 1;
+//            tell_object(caster,"Debug, target is mind immune /n");
+        }
+        if (resisted == 1) {
+           tell_room(environment(this_target),
+               "%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+" mind control, "+
+               target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
+           tell_object(this_target,
+               "%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+
+               " mind control, you attack "+caster->QO+"!");
+           tell_object(caster,"%^YELLOW%^"+target->QCN+" attacks you,"+
+               " outraged at you for your attempted mind control!" );
+           spell_kill(this_target,caster);
+           continue;
         }
 
-        target2 = prospective[x];
-
-        if (do_save(target2, 0)) {
-            continue;
-        }
-
-        if (target2->query_level() > clevel) {
-            continue;
-        }
-
-        myrace = (string)target2->query_race();
-
-        if (race_immunity_check(target2, "sleep")) {
-            continue;
-        }
-
-        if (mind_immunity_damage(target2, "default")) {
-            continue;
-        }
-
-        if (!success) {
-            success = 1;
-        }
-
-        tell_room(environment(target2), "%^CYAN%^%^BOLD%^" + target2->QCN + " wavers for a bit, then falls to the ground in a deep slumber.", target2);
-        tell_object(target2, "%^CYAN%^%^BOLD%^You suddenly become drowsy and fall asleep.");
-        target2->set_asleep(time, "You are asleep!");
-        target2->set_property("spelled", ({ TO }));
-        targets += ({ target2 });
+        counter += this_target->query_level();
+        tell_room(environment(this_target),
+           "%^CYAN%^%^BOLD%^"+this_target->QCN+
+           " wavers for a bit, then falls to the ground in a deep slumber.", this_target);
+        tell_object(this_target,"%^BOLD%^%^CYAN%^"+caster->QCN+" tries to control "+
+           "your mind!\nYou try to fight "+caster->QO+" off, but "+caster->QP+" "
+           "will is too strong for you!\nYou suddenly become drowsy and fall asleep.");
+        tell_object(caster,"%^GREEN%^You break into "+this_target->QCN+"'s mind and "
+           "overcome "+target->QP+" willpower!");
+        this_target->set_asleep(time, "You are asleep!");
+        this_target->set_property("spelled", ({TO}) );
+        targets += ({this_target});
+        spell_successful();
+        success = 1; // this indicates whether the spell works on anything
     }
-    spell_successful();
     if(!success)
     {
         tell_object(caster, "%^CYAN%^%^BOLD%^Your sleep attempt fails to affect anything.%^RESET%^");
@@ -105,6 +132,7 @@ spell_effect(int prof)
 }
 
 
+
 void dest_effect()
 {
     object *spells_on, *newtargs;
@@ -113,11 +141,23 @@ void dest_effect()
     {
         if (targets[x])
         {
-            target2 = targets[x];
-            if (spells_on=target2->query_property("spelled"))
+            this_target = targets[x];
+            if (spells_on=this_target->query_property("spelled"))
             {
-                target2->remove_property_value("spelled", ({TO}) );
+                this_target->remove_property_value("spelled", ({TO}) );
+                spell_kill(this_target,caster);
+                if (present(caster, environment(this_target))) {
+                   tell_room(environment(this_target),
+"%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+
+" mind control, "+this_target->QCN+" attacks "+caster->QO+"!",({this_target, caster}) );
+                   tell_object(this_target,
+"%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+" mind control, you attack"+caster->QO+"!");
+                   tell_object(caster,
+"%^YELLOW%^"+this_target->QCN+" attacks you, outraged at you for your mind control!" );
+                   spell_kill(this_target, caster);
+                }
             }
+
         }
     }
     ::dest_effect();
@@ -126,3 +166,4 @@ void dest_effect()
 
 
 string query_cast_string() { return caster->QCN+" throws some rose petals in the air!"; }
+
