@@ -27,12 +27,13 @@ string query_cast_string()
     return "%^CYAN%^" + caster->QCN + " hums a few soft notes.%^RESET%^";
 }
 
-int preSpell(){
-   if((int)target->query_property("morale-boost")){
-      tell_object(CASTER,"That target is already under the influence of such a spell.");
-      return 0;
-   }
-   return 1;
+int preSpell()
+{
+    if ((int)caster->query_property("morale-boost")) {
+        tell_object(CASTER, "That target is already under the influence of such a spell.");
+        return 0;
+    }
+    return 1;
 }
 
 spell_effect(int prof)
