@@ -57,37 +57,31 @@ int cmd_drain(string args)
         return 1;
     }
 
-    if(!TP->ok_to_kill(targobj))
-    {
+    if (!TP->ok_to_kill(targobj)) {
         write("Feeding from this is beneath you.\n");
         return 1;
     }
 
-
-    if(!RACE_D->is_race(targobj->query_race()))
-    {
+    if (!RACE_D->is_race(targobj->query_race())) {
         write("Feeding from this is beneath you.\n");
         return 1;
     }
 
-    if(targobj->query_property("spell_creature") ||
-       targobj->query("not living"))
-    {
+    if (targobj->query_property("spell_creature") ||
+        targobj->query("not living")) {
         write("Don't feed on phantoms.\n");
         return 1;
     }
 
-    if(!(verify_conditions(targobj)))
-    {
+    if (!(verify_conditions(targobj))) {
         write("Your target is not incapacitated.\n");
         return 1;
     }
 
-    if(targobj->is_undead() ||
-       targobj->query_race() == "shade" ||
-       targobj->query_race() == "deva" ||
-       targobj->query("subrace") == "dhampir")
-    {
+    if (targobj->query_property("negative energy affinity") ||
+        targobj->query_race() == "shade" ||
+        targobj->query_race() == "deva" ||
+        targobj->query("subrace") == "dhampir") {
         write("You should eat fresh food.\n");
         return 1;
     }
