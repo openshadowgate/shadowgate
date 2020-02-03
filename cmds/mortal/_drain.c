@@ -83,7 +83,10 @@ int cmd_drain(string args)
         return 1;
     }
 
-    if(targobj->is_undead() || targobj->query("subrace") == "dhampir")
+    if(targobj->is_undead() ||
+       targobj->query_race() == "shade" ||
+       targobj->query_race() == "deva" ||
+       targobj->query("subrace") == "dhampir")
     {
         write("You should eat fresh food.\n");
         return 1;

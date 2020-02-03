@@ -39,6 +39,8 @@ spell_effect(int prof)
 {
     int success, rounds, resisted;
     string myrace;
+ 
+   tell_object(caster,"Debug, inside spell_effect function");
 
     success = 0;
 
@@ -56,16 +58,17 @@ spell_effect(int prof)
 
 
     //validate target specified by caster
-    if(!objectp(target) ||
-       !caster->ok_to_kill(target) ||
-       !living(target) )
-    {
-       tell_object(caster, target->QCN+"%^BOLD%^%^RED%^ is not a valid target.%^RESET%^");
-        dest_effect();
+    if(!objectp(target)) {
+        tell_object(caster,"Debug, Target is not an object");
         return;
     }
+    if(!caster->ok_to_kill(target)) {
+        tell_object(caster,"Target is not PK eligible");
+        return;
+     }
     //validate additional targets in the room
     prospective = target_filter(all_living(prospective));
+        tell_object(caster,"Debug, size prospective array:"+sizeof(prospective));
 
     counter = 0;
     targets = ({target});
@@ -84,17 +87,16 @@ spell_effect(int prof)
 
         if(do_save(this_target,0) == 1) {
             resisted = 1;
-            tell_room(environment(target),"Debug, target made saving throw /n");
+            tell_object(caster,"Debug, target made saving throw /n");
         }
-        if("/daemon/player_d.c"->immunity_check(target,"sleep") == 1) {
+        if("/daemon/player_d.c"->immunity_check(this_target,"sleep") == 1) {
             resisted = 1;
-            tell_room(environment(target),"Debug, target is immune /n");
+            tell_object(caster,"Debug, target is immune /n");
         }
-        if(mind_immunity_check(target,"default") == 1) {
+        if(mind_immunity_check(this_target,"default") == 1) {
             resisted = 1;
-            tell_room(environment(target),"Debug, target is mind immune /n");
+            tell_object(caster,"Debug, target is mind immune /n");
         }
-        if (resisted == 0)
         if (resisted == 1) {
            tell_room(environment(this_target),
                "%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+" mind control, "+
@@ -109,6 +111,7 @@ spell_effect(int prof)
         }
 
         counter += this_target->query_level();
+        tell_object(caster,"Debug, counter = "+counter+" max_hd = "+max_hd+" this_target "+this_target);
         tell_room(environment(this_target),
            "%^CYAN%^%^BOLD%^"+this_target->QCN+
            " wavers for a bit, then falls to the ground in a deep slumber.", this_target);
@@ -148,19 +151,16 @@ void dest_effect()
             {
                 this_target->remove_property_value("spelled", ({TO}) );
                 spell_kill(this_target,caster);
-            }
-            if (present(caster, environment(this_target))) {
-               tell_room(environment(this_target),
-                   "%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+
-                   " mind control, "+this_target->QCN+" attacks "+caster->QO+"!",
-                   ({this_target, caster}) );
-               tell_object(this_target,"%^YELLOW%^Outraged at "+caster->QCN+
-                   " for "+caster->QP+" mind control, you attack "+caster->QO+"!");
-               tell_object(caster,"%^YELLOW%^"+
-                   this_target->QCN+" attacks you, outraged at you for your"+
-                   " mind control!" );
-               spell_kill(this_target, caster);
-
+                if (present(caster, environment(this_target))) {
+                   tell_room(environment(this_target),
+"%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+
+" mind control, "+this_target->QCN+" attacks "+caster->QO+"!",({this_target, caster}) );
+                   tell_object(this_target,
+"%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+" mind control, you attack"+caster->QO+"!");
+                   tell_object(caster,
+"%^YELLOW%^"+this_target->QCN+" attacks you, outraged at you for your mind control!" );
+                   spell_kill(this_target, caster);
+                }
             }
 
         }

@@ -77,6 +77,7 @@ int raise_player(string verb)
             DeadPerson->force_me("look");
             DeadPerson->delete("in_the_afterlife");
             DeadPerson->remove_pk_death_flag();
+            DeadPerson->delete("no pk");
             DeadPerson->set_death_age(0);
             DeadPerson->delete("RaisingRoom");
             DeadPerson->delete("RaisingPriestAlignment");
@@ -87,7 +88,10 @@ int raise_player(string verb)
             tell_room(environment(DeadPerson),"%^BOLD%^"+TP->QCN+" has returned from the "+
             "dead!",DeadPerson);
             PERMA_DEATH_D->remove_player(DeadPerson->query_name());
-            if(objectp(MyDeadRoom)) MyDeadRoom->remove();
+            DeadPerson->delete("just_been_pkilled");
+            if (objectp(MyDeadRoom)) {
+                MyDeadRoom->remove();
+            }
             // intentionally left a break out of here
         case "cancel":
             if(verb == "cancel")
