@@ -37,7 +37,7 @@ create()
 
 spell_effect(int prof)
 {
-    int success, rounds;
+    int success, rounds, resisted;
     string myrace;
 
     success = 0;
@@ -80,12 +80,22 @@ spell_effect(int prof)
              continue;
         }
         this_target = prospective[x];
-        counter += this_target->query_level();
+        resisted = 0;
 
-        if(do_save(this_target,0)   ||
-           race_immunity_check(this_target, "sleep") ||
-           mind_immunity_check(this_target, "default"))
-        {
+        if(do_save(this_target,0) == 1) {
+            resisted = 1;
+            tell_room(environment(target),"Debug, target made saving throw /n");
+        }
+        if("/daemon/player_d.c"->immunity_check(target,"sleep") == 1) {
+            resisted = 1;
+            tell_room(environment(target),"Debug, target is immune /n");
+        }
+        if(mind_immunity_check(target,"default") == 1) {
+            resisted = 1;
+            tell_room(environment(target),"Debug, target is mind immune /n");
+        }
+        if (resisted == 0)
+        if (resisted == 1) {
            tell_room(environment(this_target),
                "%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+" mind control, "+
                target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );
@@ -98,6 +108,7 @@ spell_effect(int prof)
            continue;
         }
 
+        counter += this_target->query_level();
         tell_room(environment(this_target),
            "%^CYAN%^%^BOLD%^"+this_target->QCN+
            " wavers for a bit, then falls to the ground in a deep slumber.", this_target);
