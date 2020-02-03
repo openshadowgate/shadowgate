@@ -2,7 +2,7 @@
 //updated by Circe to NWP code to hopefully get it in game sooner.  12/21/03
 // ported to new skills system, academics for lore and spellcraft for identification. Nienne, 08/09.
 //_study.c ///
-//Adding the ability to study a room / object in a room - 
+//Adding the ability to study a room / object in a room -
 //basically to support some new stuff in my new area - Saide
 
 #include <std.h>
@@ -22,32 +22,32 @@ int cmd_study(string str)
       	TP->send_paralyzed_message("info",TP);
       	return 1;
    	}
-   	if(TP->query_blind()) 
+   	if(TP->query_blind())
 	{
       	notify_fail("You can't study something if you can't see it.");
       	return 0;
    	}
-   	if((object)TP->query_attackers() != ({})) 
+   	if((object)TP->query_attackers() != ({}))
 	{
 		notify_fail("You're too busy to be studying that right now!\n");
         return 0;
    	}
-  	if(!str) 
+  	if(!str)
 	{
         notify_fail("study what?\n");
         return 0;
   	}
-	if(sscanf(str, "room %s", what) == 1 || str == "room" && !present(str, TP)) 
+	if(sscanf(str, "room %s", what) == 1 || str == "room" && !present(str, TP))
 	{
-	 	if(!TP->query_time_delay("studying",5) && !avatarp(TP)) 
+	 	if(!TP->query_time_delay("studying",5) && !avatarp(TP))
 		{
             write("You need more time to reflect on your knowledge and "+
-                  "research before trying that again.");	
+                  "research before trying that again.");
             return 1;
-	  	}	
-		if(what) 
+	  	}
+		if(what)
 		{
-			if(member_array(what, keys(ETP->query_items())) == -1) 
+			if(member_array(what, keys(ETP->query_items())) == -1)
 			{
 				tell_object(TP, "There is no "+what+" in your general area.");
 				return 1;
@@ -66,12 +66,12 @@ int cmd_study(string str)
 		return 1;
 	}
 
-  	if(!obj = present(str, TP)) 
+  	if(!obj = present(str, TP))
 	{
         notify_fail("You don't have that.\n");
         return 0;
   	}
-  	if(!TP->query_time_delay("studying",5) && !avatarp(TP)) 
+  	if(!TP->query_time_delay("studying",5) && !avatarp(TP))
 	{
         write("You need more time to reflect on your knowledge and "+
               "research before trying that again.");
@@ -91,7 +91,7 @@ int cmd_study(string str)
   	return 1;
 }
 
-int do_room_study(object myplayer, string which) 
+int do_room_study(object myplayer, string which)
 {
 	int enchant, diff, level, x, baselevel;
   	string message0, message1;
@@ -101,13 +101,13 @@ int do_room_study(object myplayer, string which)
 
 	object where;
 
-	if(!objectp(myplayer)) return 0; 
+	if(!objectp(myplayer)) return 0;
 	where = environment(myplayer);
 	if(!objectp(where)) return 0;
 	rlore = where->query_property("room lore");
 
-	if(!rlore || !mapp(rlore)) 
-	{		
+	if(!rlore || !mapp(rlore))
+	{
 		tell_object(myplayer, "%^BOLD%^%^YELLOW%^You "+
                     "study the "+which+" carefully, but can neither recall "+
                     "nor ascertain anything of remark.%^RESET%^");
@@ -117,19 +117,19 @@ int do_room_study(object myplayer, string which)
 	diff = 20;
   	baselevel = (int)myplayer->query_skill("academics");
   	level = baselevel + roll_dice(1,20);
-	ri_info = where->query_property("room lore");	
+	ri_info = where->query_property("room lore");
 	room_items = keys(ri_info);
 
 	for(x = 0;x < sizeof(room_items);x++)
 	{
-		if(sizeof(room_items[x])) 
+		if(sizeof(room_items[x]))
 		{
 			if(member_array(which, room_items[x]) != -1)
 			{
 				info = ri_info[room_items[x]];
 				this_item = room_items[x];
 				break;
-			}		
+			}
 		}
 		if(room_items[x] == which)
 		{
@@ -140,7 +140,7 @@ int do_room_study(object myplayer, string which)
 		continue;
 	}
 
-	if(!info) 
+	if(!info)
 	{
 		tell_object(myplayer, "%^BOLD%^%^YELLOW%^You "+
                     "study the "+which+" carefully, but can neither recall "+
@@ -153,7 +153,7 @@ int do_room_study(object myplayer, string which)
 		msg = info[0];
 	}
 
-	if(!sizeof(info)) 
+	if(!sizeof(info))
 	{
 		msg = info;
 	}
@@ -166,7 +166,7 @@ int do_room_study(object myplayer, string which)
         "anything of relevance about the "+which+"%^RESET%^.  Perhaps "+
         "you need to research more.";
 	rs_info = where->query_property("successful study");
-	if(mapp(rs_info)) 
+	if(mapp(rs_info))
 	{
 		if(rs_info[this_item])
 		{
@@ -175,7 +175,7 @@ int do_room_study(object myplayer, string which)
 	}
 
 	rs_info = where->query_property("failed study");
-	if(mapp(rs_info)) 
+	if(mapp(rs_info))
 	{
 		if(rs_info[this_item])
 		{
@@ -193,9 +193,9 @@ int do_room_study(object myplayer, string which)
                     "to determine anything of relevance about the "+which+"%^RESET%^.");
 		return 1;
 	}
-	
 
-	if(diff > level) 
+
+	if(diff > level)
 	{
 		tell_object(myplayer, fail_msg);
 		f_study += ({myplayer->query_name()});
@@ -386,8 +386,8 @@ int do_id(object myplayer,object obj,string str) {
         if((string)obj->query("effect") == "spell_effect") {
             myaura = (string)obj->query("spell");
             charges = (string)obj->query("uses");
-            write("%^BOLD%^%^YELLOW%^Within the object, you can detect an enchantment of "+myaura+" with "+charges+
-                  " charges.%^RESET%^");
+            write("%^BOLD%^%^YELLOW%^You can detect an enchantment of "+myaura+" with "+charges+
+                  " charges of " +obj->query("level")+" caster level.%^RESET%^");
         }
         return 1;
     }
@@ -395,8 +395,8 @@ int do_id(object myplayer,object obj,string str) {
         if((int)obj->query("level") < (int)myplayer->query_skill("spellcraft")) {
             myaura = (string)obj->query("spell");
             charges = (string)obj->query("uses");
-            write("%^BOLD%^%^YELLOW%^Within the object, you can detect an enchantment of "+myaura+" with "+charges+
-                  " charges.%^RESET%^");
+            write("%^BOLD%^%^YELLOW%^You can detect an enchantment of "+myaura+" with "+charges+
+                  " charges of "+obj->query("level")+" caster level.%^RESET%^");
         }
     }
     if(member_array(who,obj->query_identified()) != -1){
@@ -468,7 +468,7 @@ int do_id(object myplayer,object obj,string str) {
     return 1;
 }
 
-void help() 
+void help()
 {
     write(
         "
@@ -482,7 +482,7 @@ study [%^ORANGE%^%^ULINE%^ITEM%^RESET%^|room]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Study will try to discern lore and magical properties about an %^ORANGE%^%^ULINE%^ITEM%^RESET%^. Lore check depends on your academics skill, while magical enchanments depend on your knowledge of spellcraft. 
+Study will try to discern lore and magical properties about an %^ORANGE%^%^ULINE%^ITEM%^RESET%^. Lore check depends on your academics skill, while magical enchanments depend on your knowledge of spellcraft.
 
 If you fail to study an item you may try againonce you have gained higher rank in appropriate skills. There are also spells that replace this command with gaining knowledge through devination or other means.
 
@@ -494,4 +494,3 @@ skills, academics, spellcraft, repair, look
 "
         );
 }
-

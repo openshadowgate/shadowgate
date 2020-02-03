@@ -743,7 +743,7 @@ string *determine_lines(object who)
 
     if(avatarp(who) &&
        !wizardp(who))
-        mychannels += ({ "telepathy", "petition"});
+        mychannels += ({ "telepathy", "petition", "plot"});
 
     if (member_group(who->query_true_name(),"law_c"))
         mychannels += ({ "law" });
