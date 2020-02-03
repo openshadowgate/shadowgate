@@ -24,10 +24,13 @@ void create()
 void make_me()
 {
     int i, y;
-    string type, spell;
+    string type, spell, sclass;
+    string *classes = ({});
     i = random(sizeof(WTYPES));
     type = WTYPES[i];
     spell = MAGIC_D->query_random_spell("random");
+    classes = keys(MAGIC_D->query_index_row(spell)["levels"]);
+    sclass = classes[random(sizeof(classes))];
     ::create();
 
     switch (type) {
@@ -105,7 +108,7 @@ void make_me()
     set("effect", "spell_effect");
     set("uses", 10 + roll_dice(1, 8));
     set("spell", spell);
-    set("spell type", "mage");
+    set("spell type", sclass );
     set("level", 10 + random(41));
     set("language", "common");
     set_value(query("level") * query("uses"));

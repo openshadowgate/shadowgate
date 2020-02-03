@@ -80,8 +80,7 @@ int cmd_drain(string args)
 
     if (targobj->query_property("negative energy affinity") ||
         targobj->query_race() == "shade" ||
-        targobj->query_race() == "deva" ||
-        targobj->query("subrace") == "dhampir") {
+        targobj->query_race() == "deva") {
         write("You should eat fresh food.\n");
         return 1;
     }
