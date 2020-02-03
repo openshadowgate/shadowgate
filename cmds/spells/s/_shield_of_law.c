@@ -15,7 +15,7 @@ void create()
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS shield of law");
     set_damage_desc("divine, 4 AC, 4 to all saves");
-    set_description("You are surrounded by a dim blue glow, an aura that protects you and damages any unlawful creature that dares to attack you.");
+    set_description("You are surrounded by a dim blue glow, an aura that protects you and damages any unlawful creature that dares to attack you. This is a nimbus family of spells so it won't work together with similar spells.");
     set_property("magic",1);
     traveling_aoe_spell(1);
 }

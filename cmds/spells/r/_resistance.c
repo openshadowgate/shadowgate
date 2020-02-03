@@ -6,54 +6,68 @@ inherit SPELL;
 
 int bonus;
 
-void create(){
-   ::create();
-   set_spell_name("resistance");
-   set_spell_level(([ "bard" : 1,"druid" : 1, "paladin" : 1, "mage" : 1, "cleric" : 1, "psywarrior" : 1, "psion" : 2 ]));
-   set_spell_sphere("alteration");
-   set_syntax("cast CLASS resistance");
-   set_damage_desc("clevel/12 but no more than 4 to saving throws");
-   set_description("By this spell, the caster imbues themselves with a small amount of resistance to harm.  The spell grants small bonus to will, fortitude and reflex.
+void create()
+{
+    ::create();
+    set_spell_name("resistance");
+    set_spell_level(([ "bard" : 1, "druid" : 1, "paladin" : 1, "mage" : 1, "cleric" : 1, "psywarrior" : 1, "psion" : 2 ]));
+    set_spell_sphere("alteration");
+    set_syntax("cast CLASS resistance");
+    set_damage_desc("clevel/12 but no more than 4 to saving throws");
+    set_description("By this spell, the caster imbues themselves with a small amount of resistance to harm.  The spell grants small bonus to will, fortitude and reflex.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ resistance *feats");
-   set_verbal_comp();
-   set_somatic_comp();
-   set_helpful_spell(1);
+    set_verbal_comp();
+    set_somatic_comp();
+    set_helpful_spell(1);
 }
 
-string query_cast_string(){
-   return "%^CYAN%^"+caster->QCN+" hums a few soft notes.%^RESET%^";
+string query_cast_string()
+{
+    return "%^CYAN%^" + caster->QCN + " hums a few soft notes.%^RESET%^";
 }
 
-spell_effect(int prof) {
-   if(!objectp(caster)){
-      dest_effect();
-      return;
+int preSpell(){
+   if((int)target->query_property("morale-boost")){
+      tell_object(CASTER,"That target is already under the influence of such a spell.");
+      return 0;
    }
-   if(caster->query_property("raised_resistance")){
-      tell_object(caster,"You are already protected by this spell!");
-      dest_effect();
-      return;
-   }
-   if(interactive(caster)){
-      tell_object(caster, "%^GREEN%^As the last note fades, you feel a light prickling of protection across your skin.");
-      tell_room(place,"%^GREEN%^The last note fades as "+caster->QCN+" glances around.",caster);
-   }
-   bonus = clevel/12;
-   bonus = bonus<1?1:bonus;
-   bonus = bonus>4?4:bonus;
-
-   caster->add_saving_bonus("all",bonus);
-   caster->set_property("raised_resistance",1);
-   spell_successful();
-   addSpellToCaster();
+   return 1;
 }
 
-void dest_effect(){
-   if(objectp(caster) && caster->query_property("raised_resistance")){
-      caster->add_saving_bonus("all",-bonus);
-      caster->remove_property("raised_resistance");
-   }
-   ::dest_effect();
-   if(objectp(TO)) TO->remove();
+spell_effect(int prof)
+{
+    if (!objectp(caster)) {
+        dest_effect();
+        return;
+    }
+    if (caster->query_property("morale-boost")) {
+        tell_object(caster, "You are already protected by this spell!");
+        dest_effect();
+        return;
+    }
+    if (interactive(caster)) {
+        tell_object(caster, "%^GREEN%^As the last note fades, you feel a light prickling of protection across your skin.");
+        tell_room(place, "%^GREEN%^The last note fades as " + caster->QCN + " glances around.", caster);
+    }
+    bonus = clevel / 12;
+    bonus = bonus < 1 ? 1 : bonus;
+    bonus = bonus > 4 ? 4 : bonus;
+
+    caster->add_saving_bonus("all", bonus);
+    caster->set_property("morale-boost", 1);
+    spell_successful();
+    addSpellToCaster();
+}
+
+void dest_effect()
+{
+    if (objectp(caster) && caster->query_property("morale-boost")) {
+        caster->add_saving_bonus("all", -bonus);
+        caster->remove_property("morale-boost");
+    }
+    ::dest_effect();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
