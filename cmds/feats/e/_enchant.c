@@ -118,7 +118,7 @@ void select_spell(string str, object ob){
     /*     return; */
     /* } */
 
-    write("%^YELLOW%^Number of charges (10 max):");
+    write("%^YELLOW%^Number of charges (15 max):");
     write("~q to cancel");
     input_to("spell_charges",0,ob,str,spell);
     return;
