@@ -35,15 +35,15 @@ void create() {
 	   "the %^BLUE%^s%^WHITE%^w%^BLUE%^i%^WHITE%^r%^BLUE%^l%^WHITE%^"
 	   "i%^BLUE%^n%^WHITE%^g%^GREEN%^ fog.%^RESET%^\n"
         );
-        set_items(([ 
+        set_items(([
            "mist" : "%^BLUE%^An eerie mist clings to your feet and "+
-              "flows through the grass.%^RESET%^", 
+              "flows through the grass.%^RESET%^",
            "ivy" : "%^GREEN%^The creeping ivy has snaked its way around "+
-              "the old stone ruins.%^RESET%^", 
+              "the old stone ruins.%^RESET%^",
            "vines" : "%^YELLOW%^Strange vines hang precariously from "+
               "overhanging branches, covered in e%^RESET%^%^RED%^x"+
               "%^RESET%^%^BLUE%^o%^RESET%^%^GREEN%^t%^RESET%^%^MAGENTA%^i"+
-              "%^RESET%^%^YELLOW%^c flowers.%^RESET%^", 
+              "%^RESET%^%^YELLOW%^c flowers.%^RESET%^",
            ({"pillars","ruined pillars","ruins"}) : "BOLD%^%^WHITE%^These "+
               "once prominent pillars now lay crumbled, covered in"+
               "%^RESET%^ %^GREEN%^ivy and moss.%^RESET%^",
@@ -67,6 +67,6 @@ void create() {
            "surprisingly quiet.%^RESET%^");
         set_exits(([
            "south" : "/d/magic/temples/mielikki_center",
- 	     "out" : "/d/tharis/road/eroad24"
+ 	     "north" : "/d/tharis/road/eroad24"
         ]));
 }
