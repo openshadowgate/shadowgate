@@ -73,7 +73,7 @@ void make_me()
                  + " tipped bla%^BOLD%^%^WHITE%^ck%^RESET%^ wand, about six"
                  + " inches in lenth");
         set_short("%^RESET%^A %^BOLD%^%^WHITE%^wh%^BOLD%^%^BLACK%^ite"
-                  + " tipped bla%^BOLD%^%^WHITE%^ck%^RESET%^ wand " + spell);
+                  + " tipped bla%^BOLD%^%^WHITE%^ck%^RESET%^ wand of " + spell);
         set_obvious_short("%^BOLD%^%^WHITE%^wh%^BOLD%^%^BLACK%^ite"
                           + " tipped bla%^BOLD%^%^WHITE%^ck%^RESET%^ wand");
         break;
@@ -110,8 +110,8 @@ void make_me()
     set("uses", 10 + roll_dice(1, 8));
     set("spell", spell);
     set("spell type", sclass );
-    set("level", 10 + random(41));
-    set("language", "common");
+    set("level", 10 + random(31));
+    set("language", "wizzish");
     set_value(query("level") * query("uses"));
-    set("read", "The runes indicate that you should %^YELLOW%^'use wand on target', as if you were casting a spell.");
+    set("read", "The runes indicate that you should %^YELLOW%^<use wand on target>%^RESET%^ while wielding it.");
 }
