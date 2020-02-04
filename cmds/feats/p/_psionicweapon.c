@@ -1,5 +1,3 @@
-//based on Smite, for psywarriors ~Circe~ 9/22/15
-
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -14,7 +12,7 @@ void create()
     feat_category("Psionics");
     feat_name("psionicweapon");
     feat_prereq("Psywarriors L5 or Psion L11");
-    feat_desc("As the psionic character is attacked, psychic energy builds to a low growl within his mind. Through this feat, the psionic individual releases pure mental energy, sending forth a tempest that ransacks the minds of those who dare attack him and leaves the least intelligent struggling to recover.");
+    feat_desc("With this feat psionic character can build a charge of raw psychic energy and deliver an untyped damage to every attaker. This feat doesn't consume power points to use.");
     feat_syntax("psionicweapon");
     set_required_for(({ "greaterpsionicweapon" }));
     psionic(1);
@@ -53,6 +51,7 @@ void execute_feat()
     mapping tempmap;
     int delay;
     ::execute_feat();
+
     if ((int)caster->query_property("using smite") > time()) { //keeping the same variable to avoid stacking
         tell_object(caster, "You are not prepared to exert such mental force again so soon!");
         dest_effect();
@@ -68,6 +67,7 @@ void execute_feat()
         dest_effect();
         return;
     }
+
     delay = time() + FEATTIMER;
     delay_messid_msg(FEATTIMER, "%^BOLD%^%^WHITE%^You can %^CYAN%^psionicweapon%^WHITE%^ again.%^RESET%^");
     caster->set_property("using instant feat", 1);
@@ -78,13 +78,14 @@ void execute_feat()
 
 void execute_attack()
 {
-    int chamod, i, dmg, myint, yourint, extra;
+    int die, i, dmg, myint, yourint, extra;
     object* targets;
 
     if (!objectp(caster)) {
         dest_effect();
         return;
     }
+
     caster->remove_property("using instant feat");
     ::execute_attack();
 
@@ -92,44 +93,44 @@ void execute_attack()
         dest_effect();
         return;
     }
+
+    die = 6;
+
     if (FEATS_D->usable_feat(caster, "mind wave")) {
-        extra = 4;
-    }                                                           // might need tweaking, will have to watch
-    chamod = ((int)caster->query_stats("intelligence") - 10) / 2;
-    chamod = chamod - 1 + extra; //2 less than smite
-    if (chamod < 1) {
-        chamod = 1;
+        die = 10;
     }
 
     targets = caster->query_attackers();
+
     if (!sizeof(targets)) {
         tell_object(caster, "You are not under attack, and your mental force dissipates harmlessly!");
         dest_effect();
         return;
     }
+
     caster->set_property("magic", 1);
     targets += ({ caster });
-    tell_object(caster, "%^RESET%^%^MAGENTA%^The power within you grows to a "
-                "fever pitch, and you release a psionic tempest that slices through your enemies!");
-    tell_room(place, "%^RESET%^%^MAGENTA%^A low hum resonates throughout the area before "
-              "" + caster->QCN + " unleashes a psionic tempest that slices through " + caster->QP + " enemies!", targets);
+    tell_object(caster, "%^RESET%^%^MAGENTA%^The power within you grows to a fever pitch, and you release a psionic tempest that slices through your enemies!");
+    tell_room(place, "%^RESET%^%^MAGENTA%^A low hum resonates throughout the area before " + caster->QCN + " unleashes a psionic tempest that slices through " + caster->QP + " enemies!", targets);
     targets -= ({ caster });
+
     for (i = 0; i < sizeof(targets); i++) {
+
         if (targets[i] == caster) {
             continue;
         }
+
         if (!objectp(targets[i])) {
             continue;
         }
-        tell_object(targets[i], "%^BOLD%^%^MAGENTA%^" + caster->QCN + " releashes a psionic "
-                    "tempest that slices through your mind like countless blades!%^RESET%^");
-        dmg = roll_dice(clevel, chamod);
+        tell_object(targets[i], "%^BOLD%^%^MAGENTA%^" + caster->QCN + " releashes a psionic tempest that slices through your mind like countless blades!%^RESET%^");
+        dmg = roll_dice(clevel, die);
+
         caster->cause_damage_to(targets[i], "head", dmg);
         caster->add_attacker(targets[i]);
         targets[i]->add_attacker(caster);
-        myint = caster->query_stats("intelligence");
-        yourint = targets[i]->query_stats("intelligence");
     }
+
     caster->set_property("magic", -1);
     dest_effect();
     return;
