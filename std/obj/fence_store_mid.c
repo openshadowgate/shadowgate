@@ -55,11 +55,9 @@ void reset() {
         }
     }
     for(i=0;i<9;i++) { // scroll time!
-      if(!present("safe scroll 9")) {
         ob = new("/d/magic/safe_scroll");
         ob->move(TO);
         ob->set_spell(random(7)+1);
-      }
     }
 
     if(!present("vial 6")) { // first five should be kits!

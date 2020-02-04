@@ -56,11 +56,11 @@ void reset() {
         }
     }
     for(i=0;i<9;i++) { // scroll time!
-      if(!present("safe scroll 9")) {
+//      if(!present("safe scroll 9")) { //We actually want a crap load of scrolls - Uriel
         ob = new("/d/magic/safe_scroll");
         ob->move(TO);
         ob->set_spell(random(9)+1);
-      }
+//      }
     }
 
     if(!present("vial 6")) { // first five should be kits!
