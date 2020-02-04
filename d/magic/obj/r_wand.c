@@ -18,6 +18,17 @@ void create()
 {
     ::create();
     TO->set_name("wand");
+
+    /*
+     * If you want to set spell during the creation, just change
+     * "spell","spell type" settings of the item.
+     *
+     * wand = new(WAND)
+     * wand->set("spell","magic missile");
+     * wand->set("spell type","mage");
+     *
+     */
+
     make_me();
     set_weight(2);
 }
@@ -40,7 +51,6 @@ void make_me()
                  + " five inches in length. A few faint runes are carved"
                  + " into the side of the wand.");
         set_short("%^ORANGE%^maple wand of " + spell);
-        set_obvious_short("%^ORANGE%^maple wand");
         break;
     case "ivory":
         set_long("%^RESET%^A short %^BOLD%^%^WHITE%^i%^RESET%^v%^BOLD%^"
@@ -48,8 +58,6 @@ void make_me()
                  + " etched into the side of the wand.");
         set_short("%^BOLD%^%^WHITE%^i%^RESET%^v%^BOLD%^%^WHITE%^ory"
                   + " wand of " + spell);
-        set_obvious_short("%^BOLD%^%^WHITE%^i%^RESET%^v%^BOLD%^"
-                          + "%^WHITE%^ory wand");
         break;
     case "steel":
         set_long("%^RESET%^A solid %^CYAN%^s%^RESET%^t%^CYAN%^ee%^RESET%^"
@@ -57,7 +65,6 @@ void make_me()
                  + " the wand.");
         set_short("%^CYAN%^s%^RESET%^t%^CYAN%^ee%^RESET%^l wand of "
                   + spell);
-        set_obvious_short("%^CYAN%^s%^RESET%^t%^CYAN%^ee%^RESET%^l wand");
         break;
     case "slender willow":
         set_long("%^RESET%^A slender %^ORANGE%^w%^RESET%^i%^ORANGE%^ll"
@@ -65,8 +72,6 @@ void make_me()
                  + " are carved into the side of the wand.");
         set_short("%^ORANGE%^w%^RESET%^i%^ORANGE%^ll%^RESET%^o%^ORANGE%^w"
                   + " %^RESET%^ wand of " + spell);
-        set_obvious_short("%^ORANGE%^w%^RESET%^i%^ORANGE%^ll%^RESET%^o"
-                          + "%^ORANGE%^w%^RESET%^ wand");
         break;
     case "white tipped black":
         set_long("%^RESET%^A %^BOLD%^%^WHITE%^wh%^BOLD%^%^BLACK%^ite"
@@ -74,8 +79,6 @@ void make_me()
                  + " inches in lenth");
         set_short("%^RESET%^A %^BOLD%^%^WHITE%^wh%^BOLD%^%^BLACK%^ite"
                   + " tipped bla%^BOLD%^%^WHITE%^ck%^RESET%^ wand of " + spell);
-        set_obvious_short("%^BOLD%^%^WHITE%^wh%^BOLD%^%^BLACK%^ite"
-                          + " tipped bla%^BOLD%^%^WHITE%^ck%^RESET%^ wand");
         break;
     case "cherry wood":
         set_long("%^RESET%^A %^ORANGE%^c%^RED%^h%^ORANGE%^er%^RED%^r"
@@ -83,8 +86,6 @@ void make_me()
                  + " runes are carved into the side of the wand.");
         set_short("%^RESET%^A %^ORANGE%^c%^RED%^h%^ORANGE%^r%^RED%^r"
                   + "%^ORANGE%^y w%^RED%^oo%^ORANGE%^d wand of " + spell);
-        set_obvious_short("%^ORANGE%^c%^RED%^h%^ORANGE%^r%^RED%^r"
-                          + "%^ORANGE%^y w%^RED%^oo%^ORANGE%^d wand");
         break;
     case "iron":
         set_long("%^RESET%^An %^BOLD%^%^BLACK%^ir%^RESET%^o%^BOLD%^"
@@ -92,8 +93,6 @@ void make_me()
                  + " faint runes are embossed into the side of the wand.");
         set_short("%^RESET%^An %^BOLD%^%^BLACK%^ir%^RESET%^o%^BOLD%^"
                   + "%^BLACK%^n wand of " + spell);
-        set_obvious_short("%^BOLD%^%^BLACK%^ir%^RESET%^o%^BOLD%^"
-                          + "%^BLACK%^n wand");
         break;
     case "ebony":
         set_long("%^RESET%^An %^BOLD%^%^BLACK%^ebony wand%^RESET%^,"
@@ -101,7 +100,6 @@ void make_me()
                  + " into the side of the wand.");
         set_short("%^RESET%^An %^BOLD%^%^BLACK%^ebony wand%^RESET%^ of "
                   + spell);
-        set_obvious_short("%^BOLD%^%^BLACK%^ebony wand%^RESET%^");
         break;
     }
     set_id(({type + " wand", "wand", spell, "wand of " + spell}));
@@ -112,6 +110,6 @@ void make_me()
     set("spell type", sclass );
     set("level", 10 + random(31));
     set("language", "wizzish");
-    set_value(query("level") * query("uses"));
+    set_value(query("level") * query("uses") * 4);
     set("read", "The runes indicate that you should %^YELLOW%^<use wand on target>%^RESET%^ while wielding it.");
 }
