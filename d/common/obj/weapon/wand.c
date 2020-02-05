@@ -10,7 +10,7 @@ create() {
       "of wood. It has a slender handle and gradually thins along "+
       "its length."
    );
-   set_weight(3);
+   set_weight(1);
    set_size(1);
    set_prof_type("wand");
    set_weapon_prof("simple");
