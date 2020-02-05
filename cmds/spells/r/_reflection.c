@@ -5,7 +5,7 @@ inherit SPELL;
 object reflection,remote,room,control;
 string theName;
 
-#define DELAY 180
+#define DELAY 10
 #define SCRY_D "/daemon/ic_scry_locate_d"
 
 void create()
@@ -65,7 +65,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    tell_room(place,"%^BLUE%^You watch quietly as an image begins to appear in the mirror smoth surface of the water.");         
+    tell_room(place,"%^BLUE%^You watch quietly as an image begins to appear in the mirror smoth surface of the water.");
     tell_object(caster,"Please type help reflection for instructions on how to use the reflection.");
 
     room = environment(caster);
@@ -102,8 +102,8 @@ void dest_effect()
       caster->remove_property("remote scrying time");
       caster->set_property("remote scrying time",time());
     }
-    if(objectp(control)) 
-	{ 
+    if(objectp(control))
+	{
 		if(!query_property("scry_ob_destroying"))
 		{
 		//hopefully to get rid of the too deep recursion error of this calling
@@ -111,7 +111,7 @@ void dest_effect()
 			control->set_property("parent_destroying", 1);
 			control->self_destruct();
 		}
-	}    
+	}
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 
