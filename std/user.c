@@ -1411,6 +1411,8 @@ void setup() {
 
      write_messages();
 
+
+
      set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
      set_max_internal_encumbrance(1000); // Letting players hold ungodly amounts of shit until they get real.
      add_extra_hp((int)TO->query_extra_hp() * -1); // reset this before we do autowear/curses.
@@ -2206,53 +2208,59 @@ void set_path(string path) {
   cpath = path;
 }
 
-void write_messages() {
-  mapping mail_stat;
-  int i;
+void write_messages()
+{
+    mapping mail_stat;
+    int i;
 
-  force_me("bboard info");
-  message("login","\n%^ORANGE%^-=%^BOLD%^<%^BOLD%^%^WHITE%^Voting for ShadowGate%^ORANGE%^>%^RESET%^%^ORANGE%^=-%^RESET%^", TO);
-  message("login","%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
-  message("login","%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);
-  message("login","", TO);
+    force_me("bboard info");
+    message("login", "\n%^ORANGE%^-=%^BOLD%^<%^BOLD%^%^WHITE%^Voting for ShadowGate%^ORANGE%^>%^RESET%^%^ORANGE%^=-%^RESET%^", TO);
+    message("login", "%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
+    message("login", "%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);
+    message("login", "", TO);
 
-  if(avatarp(TO))
-      force_me("plock");
+    if (wizardp(TO)) {
+        force_me("plock");
+    }
 
-  mail_stat = (mapping)LOCALPOST_D->mail_status(query_name());
-  if (mail_stat["unread"]) {
-    message("login", sprintf("\n        >>> %d of your %d %s are unread! <<<", mail_stat["unread"], mail_stat["total"], (mail_stat["total"]>1 ? "letters" : "letter")), TO);
-  }
-  if (query_invis()) message("login", "        You are currently invisible.", TO);
-  if (wizardp(TO)) {
-    if (file_exists("/log/errors/"+query_name()))
-      message("login", "\n        >>> You have errors in /log/errors/"+query_name()+" <<<", TO);
-    if (file_exists("/log/reports/"+query_name()))
-      message("login", "\n        >>> You have reports in /log/reports/"+query_name()+" <<<", TO);
-  }
-  if (down_time) {
-     message("login",
-@GARRETT
+    mail_stat = (mapping)LOCALPOST_D->mail_status(query_name());
+    if (mail_stat["unread"]) {
+        message("login", sprintf("\n        >>> %d of your %d %s are unread! <<<", mail_stat["unread"], mail_stat["total"], (mail_stat["total"] > 1 ? "letters" : "letter")), TO);
+    }
+    if (query_invis()) {
+        message("login", "        You are currently invisible.", TO);
+    }
+    if (wizardp(TO)) {
+        if (file_exists("/log/errors/" + query_name())) {
+            message("login", "\n        >>> You have errors in /log/errors/" + query_name() + " <<<", TO);
+        }
+        if (file_exists("/log/reports/" + query_name())) {
+            message("login", "\n        >>> You have reports in /log/reports/" + query_name() + " <<<", TO);
+        }
+    }
+    if (down_time) {
+        message("login",
+                "
 %^YELLOW%^You've been away for more than two weeks! We've given you a temporary PK
 protection to help you get back in the game, it will expire
 in one calendar days and two hours of play time, unless you are away for another two weeks...
-GARRETT
-     , TO );
-     if ( static_user["down_time"] != down_time)
-        message("login", "%^ORANGE%^... PK downtime adjusted again.", TO);
-     message("login", "%^GREEN%^PK Downtime ends at: "+ctime(down_time), TO);
-  }
-  query_down_time(); // Force a check to make sure it clears...
-//  if ((string)TP->query_name()=="testrabbit") write(identify(message));
-  if ( !message ) return;
-  for ( i=0; i<sizeof(message); i++ )
-    tell_object(TO, message[i]);
-  message = ({});
-  //
-  //     if(high_mortalp(TO) || avatarp(TO)) {
-  //        force_me("hmboard info");
-  //        tell_object(TO,"\n\n");
-  //    }
+"
+                , TO);
+        if (static_user["down_time"] != down_time) {
+            message("login", "%^ORANGE%^... PK downtime adjusted again.", TO);
+        }
+        message("login", "%^GREEN%^PK Downtime ends at: " + ctime(down_time), TO);
+    }
+
+    query_down_time();
+
+    if (!message) {
+        return;
+    }
+    for (i = 0; i < sizeof(message); i++) {
+        tell_object(TO, message[i]);
+    }
+    message = ({});
 }
 
 string query_title() {
@@ -2264,7 +2272,7 @@ string query_title() {
   if ((avatarp(TO) || wizardp(TO)) && query_disguised()) return ::query_short();
   if (query_ghost()) return "A ghost";
 
-  if(query_death_flag()) { mod = "%^BOLD%^%^RED%^D %^GREEN%^"; }
+  if(query_death_flag()) { mod = "%^BOLD%^%^RED%^Gr %^GREEN%^"; }
   if(get_pk_death_flag() || TO->query("no pk")) mod = "%^BOLD%^%^MAGENTA%^NoPK %^GREEN%^";
   if (newbiep(TO)) mod = "%^BOLD%^%^CYAN%^N %^GREEN%^";
   if(objectp(TP) && TP->knownAs(query_true_name()))
@@ -4431,17 +4439,22 @@ int get_pk_death_flag() { return ( pk_death_flag || down_time); }
 
 int query_death_flag()
 {
-   if(!avatarp(TO) && query("death level"))
-   {
-       if(query_character_level() >= (int)query("death level"))
-       {
-            set_death_age(0);
-		delete("death level");
-       }
-   }
 
-   if(query_death_age() > 0 && (query_age() - DEATH_FLAG_TIME) < query_death_age()) return 1;
-   return 0;
+    if (query_login_time() + 600 > time()) {
+        return 1;
+    }
+
+    if (query("death level")) {
+        if (query_character_level() >= (int)query("death level")) {
+            set_death_age(0);
+            delete("death level");
+        }
+    }
+
+    if (query_death_age() > 0 && (query_age() - DEATH_FLAG_TIME) < query_death_age()) {
+        return 1;
+    }
+    return 0;
 }
 
 // /********

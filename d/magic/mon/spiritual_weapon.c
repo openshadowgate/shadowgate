@@ -51,6 +51,7 @@ void setup_servant(object caster, int clevel)
     set_hp(query_max_hp());
     set_overall_ac(4-clevel);
     set_attacks_num(clevel/8+2);
+    set_property("effective_enchantment",clevel/7);
     call_out("protect",ROUND_LENGTH);
 }
 

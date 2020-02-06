@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("vision");
-    set_spell_level(([ "mage":7, "oracle":7]));
+    set_spell_level(([ "mage":7, "oracle":7, "cleric":7]));
     set_discipline("divination");
     set_mystery(({"ancestor", "lore"}));
     set_syntax("cast CLASS vision on TARGET");

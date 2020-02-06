@@ -170,7 +170,8 @@ void create_elemental()
     elemental->set_attacks_num(clevel / 7);
     elemental->set_damage_bonus(clevel / 5);
     elemental->set_attack_bonus(clevel / 2);
-    elemental->set_property("effective enchantment", clevel / 7);
+    elemental->hd(clevel, 8);
+    elemental->set_property("effective enchantment", clevel / 6);
 
     elemental->set_property("spelled",({TO}));
     elemental->set_property("spell_creature",TO);

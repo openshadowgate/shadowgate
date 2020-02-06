@@ -113,6 +113,7 @@ void spell_effect(int prof)
     shape = caster->query_property("shapeshifted");
     shape->set_clevel(clevel);
     caster->set_property("spelled", ({TO}) );
+    caster->set_property("augmentation", 1);
 
     effect(1);
     addSpellToCaster();
