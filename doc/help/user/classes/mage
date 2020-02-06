@@ -7,7 +7,7 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, dungeoneering, healing, spellcraft
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: simple weapon proficiency, spell focus
+ %^RESET%^L1: simple weapon proficiency, spell focus, magic school
  %^RESET%^L6: scribe
  %^RESET%^L9: brew potion
  %^RESET%^L11: enchant
@@ -26,7 +26,7 @@ Mages are able to %^ORANGE%^<master>%^RESET%^ one spell every two levels. Such s
 
 Mages must not wear any armor or wield any weapons while casting, but they can learn to cast in light armor.
 
-%^RESET%^%^CYAN%^See also: %^RESET%^prepare, feats, stats, skills, spells, cast, buff, mage schools, master, prestige classes
+%^RESET%^%^CYAN%^See also: %^RESET%^prepare, feats, stats, skills, spells, cast, buff, magic school, master, prestige classes
 
 %^CYAN%^If you have a spellbook, you may also see %^RESET%^<help book>%^CYAN%^.%^RESET%^
 

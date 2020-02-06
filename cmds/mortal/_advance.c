@@ -351,47 +351,6 @@ int add_class_feats(object ob,string myclass)
     return 1;
 }
 
-int pick_mage_school(string str,object ob)
-{
-    string *schools = ({ "abjuration", "conjuration_summoning", "divination", "enchantment_charm","illusion", "invocation_evocation", "necromancy", "alteration" });
-    string school;
-
-    if(!objectp(ob)) { return 0; }
-
-    if(!(ob->is_class("mage")||
-         ob->is_class("archmage")))
-        return 1;
-    if(ob->query_school()) { return 1; }
-
-    switch(str)
-    {
-    case "abjuration":              school = "abjuration";              break;
-    case "conjuration_summoning":   school = "conjuration_summoning";   break;
-    case "divination":              school = "divination";      break;
-    case "enchantment_charm":       school = "enchantment_charm";       break;
-    case "illusion":                school = "illusion";                break;
-    case "invocation_evocation":    school = "invocation_evocation";    break;
-    case "necromancy":              school = "necromancy";              break;
-    case "alteration":              school = "alteration";              break;
-    case "abort":   return 1;
-    default:
-
-        tell_object(ob,"  %^YELLOW%^School Name");
-        tell_object(ob,"  %^BLUE%^-------------");
-        tell_object(ob,"\n   abjuration\n   conjuration_summoning\n   greater divination\n   enchantment_charm\n   "
-            "illusion\n   invocation_evocation\n   necromancy\n   alteration\n");
-        tell_object(ob,"%^BOLD%^Please enter your School of Magic");
-        tell_object(ob,"%^RED%^Type <abort> to exit if you need to "
-            "look at help files before making your choice.");
-        input_to("pick_mage_school",ob);
-        return 1;
-    }
-
-    ob->set_school(school);
-    tell_object(ob, "%^CYAN%^Ok, Thou hast chosen to study "+capitalize(school)+".");
-    return 1;
-}
-
 int pick_psion_discipline(string str,object ob)
 {
     string *schools = ({ "egoist","kineticist","nomad","seer","shaper","telepath" });
@@ -672,7 +631,6 @@ int cmd_advance(string myclass){
            if(regexp(myclass,"[a-z]+ special"))
            {
                    write("%^BOLD%^Trying to set any missing class specials...");
-                   pick_mage_school("",TP);
                    pick_psion_discipline("",TP);
                    pick_fighter_style("",TP);
                    pick_warlock_heritage("",TP);

@@ -36,7 +36,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "simple weapon proficiency", "spell focus", }), 6 : ({ "scribe", }), 9 : ({ "brew potion" }), 11 : ({ "enchant" }), 17 : ({ "craft magical equipment" }), ]);
+    return ([ 1 : ({ "simple weapon proficiency", "spell focus", "magic school"}), 6 : ({ "scribe", }), 9 : ({ "brew potion" }), 11 : ({ "enchant" }), 17 : ({ "craft magical equipment" }), ]);
 }
 
 string *class_skills()
@@ -95,21 +95,9 @@ string query_casting_stat(){
 
 mapping query_class_spells()
 {
-    return(([
-        1 : ({"armor","burning hands","chill touch","color spray","darkness","daze","detect magic","identify","light","magic missile","shield","shocking grasp","sleep","summon companion","summon swarm" }),
-        2 : ({"acid arrow","augmentation","blindness","clairvoyance","darkvision","detect invisibility","hideous laughter","invisibility","misdirection","ray of enfeeblement","rope trick","scorcher","spider climb","web" }),
-        3 : ({"acid orb","blink","dispel magic","fireball","fly","frost orb","garble","heroism","hold person","lightning bolt","lightning orb","monster summoning 1","protection from scrying","sonic orb","tongues","vampiric touch","water breathing" }),
-        4 : ({"animate dead","bestow curse","black tentacles","detect scrying","fire shield","greater invisibility","gust of wind","ice storm","monster summoning 2","shout","sonic shield","static field","wall of fire" }),
-        5 : ({"acid breath","ball lightning","break curse","cone of cold","conjure elemental","domination","lower resistance","monster summoning 3","passwall","telepathic bond","teleport" }),
-        6 : ({"chain lightning","contingency","dragon scales","faithful phantom guardians","foresight","mind fog","monster summoning 4","planar beacon","transformation","warriors constitution" }),
-        7 : ({"finger of death","greater dispel magic","heart of stone","mages sword","magic mirror","monster summoning 5","powerword stun","prismatic spray","project image","spell turning","teleport without error" }),
-        8 : ({"disintegrate","drawmij's instant summons","greater shout","incendiary cloud","monster summoning 6","stoneskin" }),
-        9 : ({"animus blast","dimensional lock","freedom of movement","gate","hellball","meteor swarm","monster summoning 7","phantasmal killer","powerword kill","prying eyes","timestop" }),
-    ]));
+    return(([ ]));
 }
 
-string newbie_choice() { return "School Name"; }
-string *query_newbie_stuff() { return ({ "abjuration", "conjuration_summoning", "divination", "enchantment_charm","illusion", "invocation_evocation", "necromancy", "alteration" }); }
 void process_newbie_choice(object who, string str)
 {
     if(!objectp(who) || !stringp(str)) return;

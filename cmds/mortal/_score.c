@@ -79,10 +79,14 @@ mixed * genoutput(object targ)
     if(targ->is_class("warlock"))
         if(stringp(targ->query("warlock heritage")))
             output+=({({"Heritage","%^BOLD%^%^MAGENTA%^"+capitalize(targ->query("warlock heritage"))})});
-    if(targ->is_class("mage")||
-       targ->is_class("archmage"))
-        if(stringp(targ->query_school()))
-            output+=({({"Speciality","%^BOLD%^%^CYAN%^"+targ->query_school()})});
+    if (targ->is_class("mage") ||
+        targ->is_class("archmage")) {
+        if (targ->query_school() && targ->query_opposing_school()) {
+            output += ({ ({ "Schools", "%^BOLD%^%^CYAN%^" + sprintf("%.4s", targ->query_school()) + "%^WHITE%^ vs%^CYAN%^ " + sprintf("%.4s", targ->query_opposing_school())}) });
+        }else {
+            output += ({ ({ "Schools", "%^BOLD%^%^CYAN%^universalist"}) });
+        }
+    }
     if(targ->is_class("psion"))
         if(stringp(targ->query_discipline()))
             output+=({({"Discipline","%^BOLD%^%^CYAN%^"+targ->query_discipline()})});

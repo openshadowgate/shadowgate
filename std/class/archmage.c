@@ -122,7 +122,7 @@ int caster_level_calcs(object player, string the_class)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "school familiarity" }), 4 : ({ "greater spell mastery" }), 7 : ({ "arcane perfection" }), ]);
+    return ([ 1 : ({ "school familiarity", "magic school"}), 4 : ({ "greater spell mastery" }), 7 : ({ "arcane perfection" }), ]);
 }
 
 string *class_skills(object ob)
