@@ -1726,10 +1726,9 @@ void check_fizzle(object ob) {
         return;
     }
 
-    if (clevel < place->query_property("antimagic field"))
-    {
-        tell_object(caster,"%^CYAN%^Your "+whatsit+" fizzles harmlessly.");
-        tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" fizzles harmlessly.");
+    if (clevel - 10 + random(20) < place->query_property("antimagic field")) {
+        tell_object(caster, "%^CYAN%^Your " + whatsit + " fizzles harmlessly.");
+        tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " fizzles harmlessly.");
         caster->removeAdminBlock();
         TO->remove();
         return;
@@ -1900,63 +1899,73 @@ varargs int damage_targ(object victim, string hit_limb, int wound, string damage
 varargs int do_spell_damage( object victim, string hit_limb, int wound,string damage_type)
 {
     int nokill, reduction, spmod;
-    string *limbs=({});
+    string* limbs = ({});
     nokill = 1;
 
-    if(!objectp(victim)) { return; }
-    if(!living(victim)) { return; }
+    if (!objectp(victim)) {
+        return;
+    }
+    if (!living(victim)) {
+        return;
+    }
 
     limbs = victim->query_limbs();
 
-    if(!sizeof(limbs)) { return notify_fail(""+identify(victim)+" has no valid limbs."); }
-
-    if(member_array(hit_limb,limbs) == -1) { hit_limb = limbs[random(sizeof(limbs))]; }
-
-    if(objectp(caster))
-    {
-        if(caster->ok_to_kill(victim))
-            nokill=0;
+    if (!sizeof(limbs)) {
+        return notify_fail("" + identify(victim) + " has no valid limbs.");
     }
 
-    spmod = clevel; // spmod = base spell penetration
-    if(!spmod)
-        spmod = 1;
-    spmod += (int)caster->query_property("spell penetration"); // add spell pen to base caster level
+    if (member_array(hit_limb, limbs) == -1) {
+        hit_limb = limbs[random(sizeof(limbs))];
+    }
 
-    if(checkMagicResistance(victim,spmod) || nokill)
-    {
+    if (objectp(caster)) {
+        if (caster->ok_to_kill(victim)) {
+            nokill = 0;
+        }
+    }
+
+    spmod = clevel;     // spmod = base spell penetration
+    if (!spmod) {
+        spmod = 1;
+    }
+    spmod += (int)caster->query_property("spell penetration");     // add spell pen to base caster level
+
+    if (checkMagicResistance(victim, spmod) || nokill) {
         sendDisbursedMessage(victim);
         return 1;
     }
 
-    if(!(spell_type=="warlock"||
-         spell_type=="monk"))
-        if(victim->query_property("spell invulnerability")>query_spell_level(spell_type))
-        {
-            tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
-            tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
+    if (!(spell_type == "warlock" ||
+          spell_type == "monk"))
+        if (victim->query_property("spell invulnerability") > query_spell_level(spell_type)) {
+            tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
+            tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
             TO->remove();
             return 1;
         }
 
-    if(objectp(place))
-        if(place->query_property("antimagic field")>clevel)
-        {
-            tell_object(caster,"%^CYAN%^Your spell dissipates around "+victim->QCN+".");
-            tell_room(place,"%^CYAN%^"+caster->QCN+"'s spell dissipates around "+victim->QCN+".",caster);
+    if (objectp(place)) {
+        if (place->query_property("antimagic field") - 10 + random(20) > clevel) {
+            tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
+            tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
             TO->remove();
             return 1;
         }
+    }
 
-    if(!stringp(damage_type) || damage_type == "" || damage_type == " ") { damage_type = "untyped"; }
+    if (!stringp(damage_type) || damage_type == "" || damage_type == " ") {
+        damage_type = "untyped";
+    }
 
-    if(FEATS_D->usable_feat(caster,"surprise spells"))
-        if(victim->query_tripped() ||
-           victim->query_paralyzed() ||
-           victim->query_asleep() ||
-           victim->query_bound() ||
-           victim->query_unconscious())
-            wound*=3/2;
+    if (FEATS_D->usable_feat(caster, "surprise spells"))
+        if (victim->query_tripped() ||
+            victim->query_paralyzed() ||
+            victim->query_asleep() ||
+            victim->query_bound() ||
+            victim->query_unconscious()) {
+            wound *= 3 / 2;
+        }
 
     wound = (int)COMBAT_D->typed_damage_modification(caster, victim, hit_limb, wound, damage_type);
 

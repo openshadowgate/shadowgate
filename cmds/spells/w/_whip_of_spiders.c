@@ -1,86 +1,62 @@
-//~Circe~ 7/29/05
 #include <std.h>
 #include <priest.h>
-
-#define TYPES ({"sword","staff","battleaxe"})
 
 inherit SPELL;
 
 object mywpn;
 
-
-void create() 
+void create()
 {
     ::create();
-    set_spell_name("weapon of energy");
-    set_spell_level(([ "psion" : 1, "psywarrior" : 1 ]));
-    set_spell_sphere("combat");
-    set_syntax("cast CLASS weapon of energy on <sword|staff|battleaxe>");
-    set_description("This power allows the psion to create a weapon made purely of energy and his psychic power.  The "
-        "weapon may take one of three forms - sword, staff, or axe - chosen by the psion at the time of manifesting.  The weapon "
-        "must be wielded as a normal weapon. If no choice is made, the weapon will automatically take the form of a sword.");
+    set_spell_name("whip of spiders");
+    set_spell_level(([ "bard" : 2, "druid" : 2, "mage" : 2]));
+    set_spell_sphere("conjuration_summoning");
+    set_syntax("cast CLASS whip of spiders");
+    set_description("You summon hundreds of tiny spiders that form into a whip that extends from your hand.");
     set_verbal_comp();
     set_somatic_comp();
-    set_arg_needed();
     set_helpful_spell(1);
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
-    return "%^BOLD%^%^RED%^"+caster->QCN+" closes "+caster->QP+" "+
-        "eyes, clasping "+caster->QP+" hands before "+caster->QO+".";
+    return "%^BOLD%^%^WHITE%^" + caster->QCN + " extens  " + caster->QP + " arm, an army of tiny spiders starts crawl out of " +caster->QP+" sleeves.";
 }
 
 
 void spell_effect(int prof)
 {
-    if (!objectp(caster))
-    {
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
-    
-    if(!arg) arg = "sword";
-    
-    if(member_array(arg,TYPES) == -1)
-    {
-        tell_object(caster,"That is not a valid type!  You must "+
-        "choose sword, staff, or battleaxe.");
-        TO->remove();
-        return;
+
+    if (interactive(caster)) {
+        tell_object(caster, "%^BOLD%^%^WHITE%^Spiders attach to each other, forming a whip that extends from your hand.");
     }
-    
-    if (interactive(caster))
-    {
-        tell_object(caster, "%^BOLD%^%^CYAN%^A "+arg+" made of pure "+
-            "energy materializes in your hands as you concentrate!");
-    }
-    
-    tell_room(place,"%^BOLD%^%^CYAN%^A dazzling light begins to "+
-        "glow within "+caster->QCN+"'s hands, taking the shape of "+
-        "a "+arg+"!",caster);
-        
-    mywpn = new("/d/magic/obj/psion_weapon");
-    mywpn->make_me(""+arg+"");
+
+    tell_room(place, "%^BOLD%^%^WHITE%^Spiders on " + caster->QCN + "'s hands attach to each other, forming a whip!", caster);
+
+    mywpn = new("/d/magic/obj/whip_of_spiders");
+    mywpn->make_me(TO);
     mywpn->move(caster);
-    
+
     caster->remove_paralyzed();
     caster->force_me("wield weapon");
+    addSpellToCaster();
     spell_successful();
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
-    if (objectp(mywpn) && objectp(caster)) 
-    {
-        tell_object(caster,"%^BOLD%^%^RED%^The energy forming the "+
-            "weapon disperses, causing the weapon to vanish.");
-        tell_room(environment(caster),"%^BOLD%^%^RED%^The weapon "+
-            "in "+caster->QCN+"'s hand fades away.",caster);
+    if (objectp(mywpn) && objectp(caster)) {
         mywpn->remove();
+        tell_room(ENV(caster), "%^BOLD%^%^WHITE%^Spiders fall to the ground and quickly disperse around...");
     }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }

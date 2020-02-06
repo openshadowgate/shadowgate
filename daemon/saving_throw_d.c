@@ -110,6 +110,9 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         int sbonus = BONUS_D->query_stat_bonus(ob, "charisma");
         mod += sbonus > 5 ? 5 : sbonus;
     }
+    if (FEATS_D->usable_feat(ob, "disruptive")) {
+        mod += 4;
+    }
     save_info["misc_modifiers"] = mod;
     {
         if (type == "will") {
