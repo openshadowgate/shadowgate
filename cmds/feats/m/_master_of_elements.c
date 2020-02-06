@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("VersatileArcanist");
     feat_name("master of elements");
     feat_prereq("Versatile Arcanist L4");
-    feat_desc("A versatile arcanist can cast certain spells of a particular element as a different element of their choosing.
+    feat_desc("A versatile arcanist can cast certain spells of a particular element as a different element of their choosing. Affected spells include: burning hands, scorcher, fireball, ice storm, cone of cold, chain lightning, incendiary cloud, meteor swarm, ride the lightning.
 
 %^BOLD%^See also:%^RESET%^help elementalist.");
     permanent(1);

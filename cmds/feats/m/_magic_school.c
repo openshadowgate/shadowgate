@@ -19,7 +19,7 @@ void create()
     feat_syntax("magic_school");
     feat_desc("This feat allows a mage to select a magic school and school that opposes it. A school gives mages degree of specialization. Spells of that school become more potent, while spells of opposing school become weaker, with power difference growing as mage learns.
 
-%^CYAN%^You can select from the following schools:%^RESET%^
+%^BOLD%^You can select from the following schools%^RESET%^
   Abjuration
   Alteration
   Conjuration_Summoning
@@ -29,7 +29,7 @@ void create()
   Invocation_Evocation
   Necromancy
 
-A mage that haven't made his choice will belong to %^CYAN%^Universalist%^WHITE%^ school.
+A mage that haven't made his choice will belong to %^WHITE%^%^BOLD%^Universalist%^RESET%^ school.
 
 To start selection process type %^ORANGE%^<magic_school>%^RESET%^.
 
@@ -45,7 +45,7 @@ int cmd_magic_school(string args)
         tell_object(TP,"%^BOLD%^%^WHITE%^You already have your schools set.");
         return 1;
     }
-    vschools = keys(SCHOOL_OPPOSITION);
+    vschools = sort_array(SCHOOL_LIST, 1);
     tell_object(TP,"%^BOLD%^%^WHITE%^Select your school of magic:\n");
     tell_object(TP,"%^BOLD%^%^MAGENTA%^" + implode(map_array(vschools, (:"  " + $1:)), "\n"));
     tell_object(TP,"%^BOLD%^%^WHITE%^\nEnter anything else to abort.");

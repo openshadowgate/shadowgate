@@ -55,12 +55,6 @@ int cmd_spellmastery(string args)
         return 1;
     }
 
-    if(FEATS_D->usable_feat(TP,"greater spell mastery"))
-    {
-        write("Use <greater_spell_mastery SPELLNAME>");
-        return 1;
-    }
-
     cancastflag = 0;
     myclasses = TP->query_classes();
     foreach(myclass in myclasses)

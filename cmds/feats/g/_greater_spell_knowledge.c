@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("VersatileArcanist");
     feat_name("greater spell knowledge");
     feat_prereq("Versatile Arcanist L1");
-    feat_desc("A versatile arcanist can learn up to three spells in any of their normal spell slots, above the limit.");
+    feat_desc("A versatile arcanist can learn up to five spells in any of their normal spell slots, above the limit.");
     permanent(1);
     set_required_for(({"master of elements"}));
 }
@@ -55,4 +55,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

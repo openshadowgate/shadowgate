@@ -1,1 +1,2 @@
 #define SCHOOL_OPPOSITION ([ "abjuration":"conjuration_summoning","alteration":"conjuration_summoning","conjuration_summoning":"alteration","divination":"illusion","invocation_evocation":"conjuration_summoning","necromancy":"divination","enchantment_charm":"illusion"])
+#define SCHOOL_LIST ({"abjuration", "alteration", "conjuration_summoning", "divination", "enchantment_charm","invocation_evocation", "necromancy", "illusion"})

@@ -51,7 +51,7 @@ int cmd_master(string args)
         if(FEATS_D->usable_feat(TP,"spell knowledge"))
             bonuslimit+=2;
         if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
-            bonuslimit+=3;
+            bonuslimit+=5;
         if(bonuslimit)
             write("%^CYAN%^You can learn "+bonuslimit+" spells above limit due to your spell knowledge feat.");
 
@@ -184,7 +184,7 @@ int cmd_master(string args)
             if(FEATS_D->usable_feat(TP,"spell knowledge"))
                 bonuslimit+=2;
             if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
-                bonuslimit+=3;
+                bonuslimit+=5;
         }
 
         if(knownperlevel[spell_index[args]-1]<CLASSMAP[myclass][mylvl][spell_index[args]-1] ||

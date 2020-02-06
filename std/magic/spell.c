@@ -1141,6 +1141,7 @@ void wizard_interface(object user, string type, string targ)
        !(FEATS_D->usable_feat(caster,"supreme healer") && (member_array(spell_name,supreme_healer_spells) != -1)) &&
        !(FEATS_D->usable_feat(caster,"natures gift") && (member_array(spell_name,natures_gift_spells) != -1)) &&
        !(FEATS_D->usable_feat(caster,"raging healer") && (member_array(spell_name,raging_healer_spells) != -1) && caster->query_property("raged")) &&
+       !(FEATS_D->usable_feat(caster,"greater spell mastery") && casting_level < 6 && spell_sphere == caster->query_school()) &&
        !(FEATS_D->usable_feat(caster,"inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy"))
     {
         if(!caster->check_memorized(spell_type,improv))
@@ -2043,13 +2044,13 @@ void define_clevel()
     }
 
     if ((spell_type == "mage" || spell_type == "sorcerer")) {
-        if (caster->query_school()) {
+        if (caster->query_school() && caster->query_opposing_school()) {
             if (spell_sphere == caster->query_school()) {
                 if (caster->is_class("mage"))
                     clevel += caster->query_guild_level("mage") / 16;
                 if (FEATS_D->usable_feat(caster, "school familiarity"))
                     clevel += 5;
-            } else if (spell_sphere == SCHOOL_OPPOSITION[caster->query_school()]) {
+            } else if (spell_sphere == caster->query_opposing_school()) {
                 if (caster->is_class("mage"))
                     clevel -= caster->query_guild_level("mage") / 16;
             }
@@ -2058,7 +2059,7 @@ void define_clevel()
         if (caster->is_class("gravecaller"))
             if (FEATS_D->usable_feat(caster, "negative energy conduit"))
                 if (spell_sphere == "necromancy")
-                    clevel += 5;
+                    clevel += 4;
 
         if (caster->is_class("shadow_adept"))
             if (FEATS_D->usable_feat(caster, "elusive spellcraft"))
