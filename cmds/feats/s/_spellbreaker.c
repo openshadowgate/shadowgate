@@ -7,10 +7,10 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("GeneralCombat");
+    feat_category("MeleeAccuracy");
     feat_name("spellbreaker");
     feat_prereq("Disruptive, Fighter L10");
-    feat_desc("You extend your wards, allowing yourself to make an attack of opportunity whenever enemy casts a spell at you.");
+    feat_desc("You extend your wards, allowing yourself to make an attack of opportunity whenever enemy casts a spell.");
     permanent(1);
     allow_blind(1);
 }

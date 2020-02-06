@@ -581,72 +581,87 @@ int check_reflection()
     int turnperc, flagz;
     object temp;
 
-    if(!objectp(caster)) { return 0; }
-    if(!objectp(target)) { return 0; }
-    if(target == caster)   { return 0; }
-    if(target->query_unconscious() || target->query_ghost() || target->query_bound()) { return 0; }
+    if (!objectp(caster)) {
+        return 0;
+    }
+    if (!objectp(target)) {
+        return 0;
+    }
+    if (target == caster) {
+        return 0;
+    }
+    if (target->query_unconscious() || target->query_ghost() || target->query_bound()) {
+        return 0;
+    }
 
-    //should prevent any spells labeled as helpful from being reflected - Saide
-    if((int)TO->query_helpful()) return 0;
-
-    //adding new property for spellturning spells and items
-    // changing this to prevent stacking feats, and allow them to stack one-off with armor - aligned with current balance meta. N, 7/15.
+    if ((int)TO->query_helpful()) {
+        return 0;
+    }
 
     flagz = 0;
-    if(FEATS_D->usable_feat(target,"spell reflection")) flagz = 1;
-    if(FEATS_D->usable_feat(target,"reflection") && target->is_wearing_type("shield")) flagz = 2;
-    switch(flagz)
-    {
+    if (FEATS_D->usable_feat(target, "spell reflection")) {
+        flagz = 1;
+    }
+    if (FEATS_D->usable_feat(target, "reflection") && target->is_wearing_type("shield")) {
+        flagz = 2;
+    }
+
+    switch (flagz) {
     case 1:
-        turnperc = (int)target->query_skill("spellcraft")/4;
+        turnperc = (int)target->query_skill("spellcraft") / 4;
         break;
     case 2:
-        turnperc = (int)target->query_skill("athletics")/4;
+        turnperc = (int)target->query_skill("athletics") / 4;
         break;
     default:
         turnperc = 0;
         break;
     }
-    if(!turnperc)
-        if(flagz==1||flagz==2)
+    if (!turnperc) {
+        if (flagz == 1 || flagz == 2) {
             turnperc = 15;
+        }
+    }
 
-    if((int)target->query_property("spellturning"))
+    if ((int)target->query_property("spellturning")) {
         turnperc = (int)target->query_property("spellturning");
-    if(turnperc < 0) turnperc = 0;
-    if(turnperc > 85) turnperc = 85;
-    if(!turnperc) return 0;
+    }
+    if (turnperc < 0) {
+        turnperc = 0;
+    }
+    if (turnperc > 85) {
+        turnperc = 85;
+    }
+    if (!turnperc) {
+        return 0;
+    }
 
-    if(turnperc > roll_dice(1,100))
-    {
-        if(!FEATS_D->usable_feat(target,"perfect caster"))
-        {
+    if (turnperc > roll_dice(1, 100)) {
+        if (!FEATS_D->usable_feat(target, "perfect caster")) {
             target->add_temporary_feat("perfect caster");
-            target->set_property("temp_perfect_caster",1);
+            target->set_property("temp_perfect_caster", 1);
         }
 
-        if(flagz == 2)
-        {
-            tell_object(target,"%^BOLD%^%^RED%^"+caster->QCN+"'s spell is reflected off of your "
-                "shield back at "+caster->QO+"!%^RESET%^");
-            tell_object(caster,"%^BOLD%^%^RED%^Your spell is reflected back at you off of "
-                ""+target->QCN+"'s shield!%^RESET%^");
-            tell_room(environment(target),"%^BOLD%^%^RED%^"+caster->QCN+"'s spell is reflected "
-                "off of "+target->QCN+"'s shield!%^RESET%^",({caster,target}));
-            if(FEATS_D->usable_feat(target,"counter"))
-            {
-                if(random(2)) { target->counter_attack(target); }
+        if (flagz == 2) {
+            tell_object(target, "%^BOLD%^%^RED%^" + caster->QCN + "'s spell is reflected off of your "
+                        "shield back at " + caster->QO + "!%^RESET%^");
+            tell_object(caster, "%^BOLD%^%^RED%^Your spell is reflected back at you off of "
+                        "" + target->QCN + "'s shield!%^RESET%^");
+            tell_room(environment(target), "%^BOLD%^%^RED%^" + caster->QCN + "'s spell is reflected "
+                      "off of " + target->QCN + "'s shield!%^RESET%^", ({ caster, target }));
+            if (FEATS_D->usable_feat(target, "counter")) {
+                if (random(2)) {
+                    target->counter_attack(target);
+                }
             }
-        }
-        else
-        {
-            tell_object(target,"%^BOLD%^%^RED%^"+caster->QCN+"'s spell bounces harmlessly off your "
-                "ward and reflects back at "+caster->QO+"!%^RESET%^");
-            tell_object(caster,"%^BOLD%^%^RED%^Your spell is reflected back at you off of "
-                +target->QCN+"'s ward!%^RESET%^");
-            tell_room(environment(target),"%^BOLD%^%^RED%^"+caster->QCN+"'s spell bounces "
-                "harmlessly off "+target->QCN+"'s ward and reflects back "
-                "at "+caster->QCN+"!%^RESET%^",({caster,target}));
+        }else {
+            tell_object(target, "%^BOLD%^%^RED%^" + caster->QCN + "'s spell bounces harmlessly off your "
+                        "ward and reflects back at " + caster->QO + "!%^RESET%^");
+            tell_object(caster, "%^BOLD%^%^RED%^Your spell is reflected back at you off of "
+                        + target->QCN + "'s ward!%^RESET%^");
+            tell_room(environment(target), "%^BOLD%^%^RED%^" + caster->QCN + "'s spell bounces "
+                      "harmlessly off " + target->QCN + "'s ward and reflects back "
+                      "at " + caster->QCN + "!%^RESET%^", ({ caster, target }));
         }
         original_caster = caster;
         original_target = target;
@@ -675,8 +690,7 @@ void wizard_interface(object user, string type, string targ)
 
     string *player_feats = user->query_player_feats(); //Note that includes inactive feats
 
-    if(!type)
-    {
+    if (!type) {
         tell_object(caster, "Something has gone wrong, the spell has no type specified!");
         TO->remove();
         return;
@@ -1139,11 +1153,17 @@ void wizard_interface(object user, string type, string targ)
         else TP->setAdminBlock(100);
     }
 
-    if(!silent_casting)
-        tell_object(caster,"You begin to "+whatdo+" "+spell_name+"!");
+    if (!silent_casting) {
+        tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
+    }
 
-    if(objectp(target)) { check_reflection(); } // this is needed for PCs, uses different function than mobs
-    if(wasreflected) { caster->set_casting(0); }
+    // this is needed for PCs, uses different function than mobs
+    if (objectp(target)) {
+        check_reflection();
+    }
+    if (wasreflected) {
+        caster->set_casting(0);
+    }
 
     startCasting();
 
@@ -1317,127 +1337,123 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     string msg, whatsit, whatdo, *myclasses;
     mixed innate_spells;
 
-    if(!objectp(TO)) { return; }
-    if(!objectp(ob)) { return; }
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!objectp(ob)) {
+        return;
+    }
 
     set_caster(ob);
     clevel = ob_level;
     seteuid(getuid());
 
-    if(classtype == "innate")
-    {
-        if(!(innate_spells = caster->query_innate_spells()))
-        {
-            tell_object(caster, "You have no innate spell of "+
-            spell_name+".");
+    if (classtype == "innate") {
+        if (!(innate_spells = caster->query_innate_spells())) {
+            tell_object(caster, "You have no innate spell of " +
+                        spell_name + ".");
             TO->remove();
             return;
         }
-        if(member_array(spell_name, innate_spells) == -1)
-        {
-            tell_object(caster, "You have no innate spell of "+
-            spell_name+".");
+        if (member_array(spell_name, innate_spells) == -1) {
+            tell_object(caster, "You have no innate spell of " +
+                        spell_name + ".");
             TO->remove();
             return;
         }
-        if(!caster->can_use_innate_ability(spell_name))
-        {
-            tell_object(caster, "You cannot use the innate spell "+
-            spell_name+" at this time.");
+        if (!caster->can_use_innate_ability(spell_name)) {
+            tell_object(caster, "You cannot use the innate spell " +
+                        spell_name + " at this time.");
             TO->remove();
             return;
         }
-        if(clevel < 1) clevel = 1;
+        if (clevel < 1) {
+            clevel = 1;
+        }
     }
 
     myclasses = keys(spell_levels);
-    if (!sizeof(myclasses))
-    {
+    if (!sizeof(myclasses)) {
         tell_object(caster, "No classes specified for this spell, contact a wiz.");
         TO->remove();
         return;
     }
 
-    if(stringp(classtype))
+    if (stringp(classtype)) {
         spell_type = classtype;
-    else
+    } else {
         spell_type = myclasses[0];
+    }
 
-    if (member_array(spell_type,myclasses) == -1 && spell_type != "innate" && spell_type != "potion")
-    {
-        tell_object(caster, "Invalid caster class specified to "+
-        "invoke this spell, contact a wiz.");
+    if (member_array(spell_type, myclasses) == -1 && spell_type != "innate" && spell_type != "potion") {
+        tell_object(caster, "Invalid caster class specified to " +
+                    "invoke this spell, contact a wiz.");
         TO->remove();
         return;
     }
 
-    if(spell_type == "psion" || spell_type == "psywarrior")
-    {
+    if (spell_type == "psion" || spell_type == "psywarrior") {
         whatdo = "manifest";
         whatsit = "power";
-    }
-    else if(spell_type == "innate")
-    {
+    }else if (spell_type == "innate") {
         whatdo = "use";
         whatsit = "innate spell";
-    }
-    else
-    {
+    }else {
         whatdo = "cast";
         whatsit = "spell";
     }
 
     cname = caster->query_name();
 
-    if (!targ && target_required)
-    {
+    if (!targ && target_required) {
         tell_object(caster, "Target needed.");
         TO->remove();
         return;
     }
-    if(!prof) prof == FULL_EFFECT;
 
-    if(targ)
-    {
-        if (arg_needed)
-        {
+    if (!prof) {
+        prof == FULL_EFFECT;
+    }
+
+    if (targ) {
+        if (arg_needed) {
             arg = targ;
             place = environment(caster);
-        }
-        else
-        {
-            if(caster->is_room()) target = present(targ,caster);
-            else if(objectp(environment(caster))) target = present(targ,environment(caster));
+        }else {
+            if (caster->is_room()) {
+                target = present(targ, caster);
+            } else if (objectp(environment(caster))) {
+                target = present(targ, environment(caster));
+            }
         }
 
-        if(!target)
-        {
-            if(objectp(environment(caster)) && objectp(environment(environment(caster))))
-            {
-                if (environment(environment(caster))) target = present(targ,environment(environment(caster)));
-                if (!target)
-                {
+        if (!target) {
+            if (objectp(environment(caster)) && objectp(environment(environment(caster)))) {
+                if (environment(environment(caster))) {
+                    target = present(targ, environment(environment(caster)));
+                }
+                if (!target) {
                     tell_object(caster, "That is not here!\n");
                     TO->remove();
                     return;
                 }
             }
         }
-        place=environment(caster);
-    }
-
-    else
-    {
-        if(objectp(environment(caster))) place=environment(caster);
-        else
-        {
-            if(objectp(environment(environment(caster)))) place=environment(environment(caster));
+        place = environment(caster);
+    }else {
+        if (objectp(environment(caster))) {
+            place = environment(caster);
+        } else {
+            if (objectp(environment(environment(caster)))) {
+                place = environment(environment(caster));
+            }
         }
-        if(interactive(place) && objectp(environment(environment(caster)))) place=environment(environment(caster));
+        if (interactive(place) && objectp(environment(environment(caster)))) {
+            place = environment(environment(caster));
+        }
     }
 
-    if(!objectp(place))
-    {
+    if (!objectp(place)) {
         TO->remove();
         return;
     }
@@ -1445,13 +1461,13 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     // giving them the ability to cast from items while they're interrupted -Ares
     // changing this so that it's only skipped for users (eg/ using contingency, items, scrolls etc),
     // as it is preventing any silence effects from working on NPCs/mobs. N, 8/12.
-    if(!userp(caster))
-    {
+    if (!userp(caster)) {
         msg = caster->query_property("spell interrupt");
-        if (!msg) msg = caster->get_static("spell interrupt");
-        if(stringp(msg))
-        {
-            tell_object(caster,msg);
+        if (!msg) {
+            msg = caster->get_static("spell interrupt");
+        }
+        if (stringp(msg)) {
+            tell_object(caster, msg);
             remove();
             return;
         }
@@ -1459,69 +1475,68 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     define_base_spell_level_bonus();
     define_base_damage(0);
 
-    if(!preSpell())
-    {
+    if (!preSpell()) {
         TO->remove();
         return;
     }
 
-    if(query_aoe_spell())
-    {
-        if(caster->has_aoe(query_spell_name()))
-        {
-            tell_object(caster,"You can't concentrate on more than one area effect of the type!");
+    if (query_aoe_spell()) {
+        if (sizeof(caster->query_property("aoe list")) > 2) {
+            tell_object(caster, "You can't concentrate on that many effects!");
+            ::remove();
+            return;
+        }
+
+        if (caster->has_aoe(query_spell_name())) {
+            tell_object(caster, "You can't concentrate on more than one area effect of the type!");
             ::remove();
             return;
         }
     }
 
-    if(query_traveling_aoe_spell())
-    {
-        if(caster->query_property("travaoe"))
-        {
-            tell_object(caster,"You can't concentrate on that many travaoe effects!");
+    if (query_traveling_aoe_spell()) {
+        if (caster->query_property("travaoe")) {
+            tell_object(caster, "You can't concentrate on that many travaoe effects!");
             ::remove();
             return;
         }
     }
 
     // moving this up here cuz otherwise the prof dies (for backfires) and it gets cast locked. N, 6/15.
-    if(spell_type == "potion")
-    {
+    if (spell_type == "potion") {
         TO->spell_effect(prof);
         return 1;
     }
 
-    if (living(caster) && base_name(PO) != "/d/magic/obj/contingency")
-    {
-        if(!silent_casting)
-            tell_object(caster,"You begin to "+whatdo+" "+spell_name+"!");
-        if(spell_type!="innate")
-            tell_room(environment(caster),caster->QCN+
-                      " begins to "+whatdo+" a "+whatsit+"!", caster);
-
-        if(objectp(target) && target != caster) { check_reflection(); }
-
-        if (cast_time)
-        {
-            place->set_round(TO,(int)place->query_stage()+cast_time);
+    if (living(caster) && base_name(PO) != "/d/magic/obj/contingency") {
+        if (!silent_casting) {
+            tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
         }
-        else
-        {
-            place->set_round(TO,(int)place->query_stage()+spell_level);
+        if (spell_type != "innate") {
+            tell_room(environment(caster), caster->QCN +
+                      " begins to " + whatdo + " a " + whatsit + "!", caster);
+        }
+
+        if (objectp(target) && target != caster) {
+            check_reflection();
+        }
+
+        if (cast_time) {
+            place->set_round(TO, (int)place->query_stage() + cast_time);
+        }else {
+            place->set_round(TO, (int)place->query_stage() + spell_level);
         }
 
         caster->set_casting(1);
-        if(query_aoe_spell()) {
+        if (query_aoe_spell()) {
             caster->add_aoe(query_spell_name());
-            if(stringp(aoe_message))
-                place->set_property("aoe_messages",({ aoe_message }));
-            else
-                place->set_property("aoe_messages",({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
+            if (stringp(aoe_message)) {
+                place->set_property("aoe_messages", ({ aoe_message }));
+            } else {
+                place->set_property("aoe_messages", ({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
+            }
         }
-    }
-    else
-    {
+    }else {
         TO->spell_effect(prof);
     }
     return 1;

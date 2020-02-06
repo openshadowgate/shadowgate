@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("GeneralCombat");
+    feat_category("MeleeAccuracy");
     feat_name("disruptive");
     feat_prereq("Fighter L6");
     feat_desc("By warding yourself, this feat increases your chance to avoid negative spell effects, granting you +4 to all your saving throws.");
