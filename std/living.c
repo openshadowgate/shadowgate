@@ -37,6 +37,7 @@ string description;
 string background;
 string sphere_of_influence;
 string school_of_magic;
+string school_of_opposition;
 string sorc_bloodline;
 string oracle_mystery;
 string psion_discipline;
@@ -548,32 +549,49 @@ string *query_divine_domain()
     return divine_domain;
 }
 
-string query_school() {
-   return school_of_magic;
+string query_school()
+{
+    return school_of_magic;
 }
 
-void set_school(string str) {
+void set_school(string str)
+{
     school_of_magic = str;
 }
 
-string query_bloodline() {
-   return sorc_bloodline;
+string query_opposing_school()
+{
+    return school_of_opposition;
 }
 
-void set_bloodline(string str) {
+void set_opposing_school(string str)
+{
+    school_of_opposition = str;
+}
+
+string query_bloodline()
+{
+    return sorc_bloodline;
+}
+
+void set_bloodline(string str)
+{
     sorc_bloodline = str;
 }
 
-string query_mystery() {
-   return oracle_mystery;
+string query_mystery()
+{
+    return oracle_mystery;
 }
 
-void set_mystery(string str) {
+void set_mystery(string str)
+{
     oracle_mystery = str;
 }
 
-string query_discipline() {
-   return psion_discipline;
+string query_discipline()
+{
+    return psion_discipline;
 }
 
 void set_discipline(string str) {

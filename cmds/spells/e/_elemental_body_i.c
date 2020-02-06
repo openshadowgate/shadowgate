@@ -77,20 +77,17 @@ This spell won't work together with other augmenting spells such as fox's cunnin
 int preSpell()
 {
     object shape;
-    if(objectp(shape = caster->query_property("shapeshifted")) ||
-       objectp(shape = caster->query_property("altered")))
-    {
-        tell_object(caster,"You are already in an alternative form!");
+    if (objectp(shape = caster->query_property("shapeshifted")) ||
+        objectp(shape = caster->query_property("altered"))) {
+        tell_object(caster, "You are already in an alternative form!");
         return 0;
     }
-    if(member_array(arg,valid_forms())==-1)
-    {
-        tell_object(caster,"Invalid form, valid forms are: "+implode(valid_forms(),", "));
+    if (member_array(arg, valid_forms()) == -1) {
+        tell_object(caster, "Invalid form, valid forms are: " + implode(valid_forms(), ", "));
         return 0;
     }
-    if(caster->query_property("augmentation"))
-    {
-        tell_object(caster,"%^YELLOW%^You are already under the influence of a similar spell.");
+    if (caster->query_property("augmentation")) {
+        tell_object(caster, "%^YELLOW%^You are already under the influence of a similar spell.");
         return 0;
     }
     return 1;
@@ -99,20 +96,20 @@ int preSpell()
 void spell_effect(int prof)
 {
     object shape;
-    if (!objectp(caster)){
+    if (!objectp(caster)) {
         TO->remove();
         return;
     }
     element = arg;
 
-    tell_object(caster,"You bow your head, concentrating and infusing your body with the power of "+elementmap[element]+".");
-    tell_room(place,caster->QCN+"'s body turns into "+elementmap[element]+"!",caster);
+    tell_object(caster, "You bow your head, concentrating and infusing your body with the power of " + elementmap[element] + ".");
+    tell_room(place, caster->QCN + "'s body turns into " + elementmap[element] + "!", caster);
 
-    new("/std/races/shapeshifted_races/mage_elemental.c")->init_shape(caster,"elemental");
+    new("/std/races/shapeshifted_races/mage_elemental.c")->init_shape(caster, "elemental");
 
     shape = caster->query_property("shapeshifted");
     shape->set_clevel(clevel);
-    caster->set_property("spelled", ({TO}) );
+    caster->set_property("spelled", ({ TO }));
     caster->set_property("augmentation", 1);
 
     effect(1);
@@ -122,11 +119,16 @@ void spell_effect(int prof)
 void dest_effect()
 {
     object shape;
-	if(objectp(caster))
-    {
-        if(objectp(shape = caster->query_property("shapeshifted"))) shape->reverse_shape(caster);
-        tell_object(caster,"You feel loss and weakness as your body looses infusion of "+elementmap[element]+".");        effect(-1);
-	}
+    if (objectp(caster)) {
+        if (objectp(shape = caster->query_property("shapeshifted"))) {
+            shape->reverse_shape(caster);
+        }
+        tell_object(caster, "You feel loss and weakness as your body looses infusion of " + elementmap[element] + ".");
+        effect(-1);
+        caster->remove_property("augmentation");
+    }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }

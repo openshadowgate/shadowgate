@@ -23,45 +23,52 @@ void set_is_newbie(int x);  //newbie stuff added by Circe 6/6/07
 int query_is_newbie();
 int is_newbie;
 
-int is_scroll(){ return 1;}
+int is_scroll()
+{
+    return 1;
+}
 
-void create(){
+void create()
+{
     ::create();
     set_name("scroll");
-    set_id(({"scrollx", "scroll"}));
-    set_long((:TO,"long_desc":));
+    set_id(({ "scrollx", "scroll" }));
+    set_long((: TO, "long_desc" :));
     set_short("a scroll");
     set_spell(1);
     set_weight(1);
     set_value(10);
 }
 
-void init() {
+void init()
+{
     ::init();
-    set_long((:TO, "long_desc":));
+    set_long((: TO, "long_desc" :));
     if (ETO == TP && interactive(TP)) {
-        if(wizardp(TP))
+        if (wizardp(TP)) {
             add_action("set_scroll", "set");
-        if(TP->is_class("mage") || avatarp(TP)) {
+        }
+        if (TP->is_class("mage") || avatarp(TP)) {
             add_action("transcribe", "transcribe");
         }
         add_action("use_scroll", "use");
     }
 }
 
-string long_desc() {
+string long_desc()
+{
     string long;
-    if(!objectp(TP))
-        return("This is a scroll with some undecipherable writing on it.");
-    if(base_name(TO) == "/d/magic/safe_scroll" ||
-       base_name(TO) == "/d/magic/newbie_scroll" &&
-       (member_array(spell,keys(MAGIC_D->query_index("mage")))!=-1))
-    {
-        long = "%^ORANGE%^This is a magic scroll of "+spell+".
+    if (!objectp(TP)) {
+        return ("This is a scroll with some undecipherable writing on it.");
+    }
+    if (base_name(TO) == "/d/magic/safe_scroll" ||
+        base_name(TO) == "/d/magic/newbie_scroll" &&
+        (member_array(spell, keys(MAGIC_D->query_index("mage"))) != -1)) {
+        long = "%^ORANGE%^This is a magic scroll of " + spell + ".
 You can <use> it directly in order to properly study and learn more about the effects of the spell. It cannot be transcribed.%^RESET%^";
         return long;
     }
-    return("%^ORANGE%^This is a magic scroll of "+spell+". You can <transcribe> it into your spell book or <use> it directly.%^RESET%^");
+    return ("%^ORANGE%^This is a magic scroll of " + spell + ". You can <transcribe> it into your spell book or <use> it directly.%^RESET%^");
 }
 
 string query_short()
@@ -197,6 +204,7 @@ int transcribe(string str)
 
 int use_scroll(string str){
     int lev, back,num;
+    int stat;
     string caster, targ, what,what2;
     object ob;
 
@@ -232,9 +240,12 @@ int use_scroll(string str){
         return 1;
     }
 
-    lev = (TP->query_skill("spellcraft"));
+    lev = (TP->query_skill("spellcraft")) * 5 / 6;
 
-    lev *= 5 / 6;
+    if (FEATS_D->usable_feat(TP, "enhance scroll")) {
+        lev = TP->query_guild_level(TP->query("base_class"));
+        lev += TP->query_property("empowered");
+    }
 
     if (lev < 1) {
         lev = 1;
@@ -250,6 +261,17 @@ int use_scroll(string str){
         return notify_fail("You need to specify a target to use that spell!\n");
     TP->set_property("spell_casting", ob);
     ob->use_spell(TP, targ, lev);
+
+    stat = TO->query_stats("intelligence");
+    if(FEATS_D->usable_feat(TP, "insightful scroll"))
+    {
+        if(random(100) < stat * 3)
+        {
+            tell_object(TO,"%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^preserve%^RESET%^%^MAGENTA%^ the scroll!%^RESET%^");
+            return 1;
+        }
+    }
+
     remove();
     return 1;
 }

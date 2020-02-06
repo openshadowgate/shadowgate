@@ -26,7 +26,7 @@ void init()
             call_out("end_death0_vampire", 5, TP);
             return;
         }else if (TP->is_undead() ||
-                  TP->is_class("pale_lord")
+                  TP->is_class("pale_lord") ||
                   TP->is_class("gravecaller")
             ) {
             tell_object(TP, "\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you struggle the stream of souls, and turn to elsewhere...\n");

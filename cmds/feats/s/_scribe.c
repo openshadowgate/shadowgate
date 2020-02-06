@@ -21,32 +21,42 @@ SPELL_NAME
     set_target_required(0);
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted()
+{
+    return 0;
+}
 
-int prerequisites(object ob) {
-    if(!objectp(ob)) { return 0; }
-    if(!ob->is_class("mage") &&
-       !ob->is_class("sorcerer") &&
-       !ob->is_class("cleric") &&
-       !ob->is_class("bard") &&
-       !ob->is_class("inquisitor") &&
-       !ob->is_class("oracle") &&
-       !ob->is_class("ranger") &&
-       !ob->is_class("paladin") &&
-       !ob->is_class("druid"))
-    {
+int prerequisites(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!ob->is_class("mage") &&
+        !ob->is_class("sorcerer") &&
+        !ob->is_class("cleric") &&
+        !ob->is_class("bard") &&
+        !ob->is_class("inquisitor") &&
+        !ob->is_class("oracle") &&
+        !ob->is_class("ranger") &&
+        !ob->is_class("paladin") &&
+        !ob->is_class("druid")) {
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
 }
 
-int cmd_scribe(string str) {
+int cmd_scribe(string str)
+{
     object feat;
-    if(!objectp(TP)) { return 0; }
-    if(!stringp(str)) { str = ""; }
+    if (!objectp(TP)) {
+        return 0;
+    }
+    if (!stringp(str)) {
+        str = "";
+    }
     feat = new(base_name(TO));
-    feat->setup_feat(TP,str);
+    feat->setup_feat(TP, str);
     return 1;
 }
 
@@ -56,34 +66,36 @@ void execute_feat()
     int level, number;
     string tmp, str, levelstring;
 
-    if(!arg) return help();
-    if (sscanf (arg, "%s", str) !=1) return help();
+    if (!arg) {
+        return help();
+    }
+    if (sscanf(arg, "%s", str) != 1) {
+        return help();
+    }
 
     tmp = MAGIC_D->get_spell_file_name(str);
-    if(!objectp(find_object_or_load(tmp))) { tell_object(caster,"You don't know a spell named "+str+"."); return 1; }
+    if (!objectp(find_object_or_load(tmp))) {
+        tell_object(caster, "You don't know a spell named " + str + "."); return 1;
+    }
     level = tmp->query_spell_level(TP->query_class());
 
-    if(!caster->query_memorized(TP->query_class(),str))
-    {
-        tell_object(caster, "That spell isn't memorized.\n");
+
+    if (!(caster->query_memorized(TP->query_class(), str) ||
+          (FEATS_D->usable_feat(caster, "clone scroll") && present(str, caster)->is_scroll()))) {
+        tell_object(caster, "That spell isn't in your memory.\n");
         return 1;
     }
 
     ob = present("parchment11", caster);
-    if (!objectp(ob = present("parchment11", caster)) )
-    {
+    if (!objectp(ob = present("parchment11", caster))) {
         tell_object(caster, "You don't have any parchment!");
         return 1;
     }
 
-    tell_room(environment(caster),"%^BOLD%^"+caster->QCN+" sits and begins to scribe a spell onto some parchment.",caster);
-    tell_object(caster, "%^BOLD%^You sit and start to scribe "+str+" onto the parchment.");
+    tell_room(environment(caster), "%^BOLD%^" + caster->QCN + " sits and begins to scribe a spell onto some parchment.", caster);
+    tell_object(caster, "%^BOLD%^You sit and start to scribe " + str + " onto the parchment.");
 
-    call_out("scribe",ROUND_LENGTH, str, caster, ob);
-
-// tell_object(caster, "Hit <return> to cancel. This will waste the parchment.");
-// input_to("cancel",1,ob, str);
-// caster->set_paralyzed(8,"You are scribing the spell.");
+    call_out("scribe", ROUND_LENGTH, str, caster, ob);
 
     return;
 }
@@ -113,8 +125,6 @@ void scribe(string spell, object tp, object paper){
     scroll->set_spell_name(spell);
     scroll->set_passed((string)tp->query_name());
     scroll->move(environment(tp));
-    tp->forget_memorized(tp->query_class(),spell);
-    tp->remove_paralyzed();
     paper->remove();
 }
 
