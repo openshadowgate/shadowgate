@@ -9,7 +9,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("word of power");
-    set_spell_level(([ "cleric" : 6,"inquisitor":2 ]));
+    set_spell_level(([ "cleric" : 6,"inquisitor":2, "druid":6, "paladin":2]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS word of power [to DESTINATION]");
     set_description("Word of power will teleport you to a church of your choice.  For now, you can reach the following churches:
