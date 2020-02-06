@@ -29,7 +29,7 @@ string query_cast_string() {
 void spell_effect(int prof) {
     object *mytargs, myparty;
     int duration, i;
-    duration = (ROUND_LENGTH * roll_dice(1,4)); // d4 rounds, no +1
+    duration = (ROUND_LENGTH * roll_dice(1,4) * 8); // d4 rounds, no +1
     mytargs = all_living(place);
     mytargs -= ({ caster });
     mytargs = target_filter(mytargs);

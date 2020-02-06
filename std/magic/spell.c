@@ -2046,25 +2046,28 @@ void define_clevel()
     if ((spell_type == "mage" || spell_type == "sorcerer")) {
         if (caster->query_school() && caster->query_opposing_school()) {
             if (spell_sphere == caster->query_school()) {
-                if (caster->is_class("mage"))
+                if (caster->is_class("mage")) {
                     clevel += caster->query_guild_level("mage") / 16;
-                if (FEATS_D->usable_feat(caster, "school familiarity"))
-                    clevel += 5;
+                }
+                if (FEATS_D->usable_feat(caster, "school familiarity")) {
+                    clevel += 4;
+                }
             } else if (spell_sphere == caster->query_opposing_school()) {
-                if (caster->is_class("mage"))
+                if (caster->is_class("mage")) {
                     clevel -= caster->query_guild_level("mage") / 16;
+                }
             }
         }
 
         if (caster->is_class("gravecaller"))
             if (FEATS_D->usable_feat(caster, "negative energy conduit"))
                 if (spell_sphere == "necromancy")
-                    clevel += 4;
+                    clevel += 3;
 
         if (caster->is_class("shadow_adept"))
             if (FEATS_D->usable_feat(caster, "elusive spellcraft"))
                 if (spell_sphere == "necromancy" || spell_sphere == "illusion" || spell_sphere == "enchantment_charm")
-                    clevel += 3;
+                    clevel += 2;
     }
 
     if (spell_type == "cleric" || spell_type == "druid")
@@ -2625,7 +2628,7 @@ varargs int do_save(object targ,int mod) {
                     "BEFORE d20 roll: " + caster_bonus + "%^RESET%^");
     }
 
-    if(shadow_spell)
+    if(shadow_spell && type == "will")
     {
         caster_bonus = shadow_spell * 10 * caster_bonus / 100;
     }
