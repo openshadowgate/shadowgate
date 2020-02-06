@@ -17,7 +17,7 @@ void create()
     feat_category("ArcaneSpellcraft");
     feat_name("magic school");
     feat_syntax("magic_school");
-    feat_desc("This feat allows a mage to select a magic school and school that opposes it. A school gives mages degree of specialization. Spells of that school become more potent, while spells of opposing school become weaker, with power difference growing as mage learns.
+    feat_desc("This feat allows a mage to select magic school dedication and school that opposes it. A school gives mages degree of specialization. Spells of that school become more potent, while spells of opposing school become weaker, with power difference growing as mage learns.
 
 %^BOLD%^You can select from the following schools%^RESET%^
   Abjuration

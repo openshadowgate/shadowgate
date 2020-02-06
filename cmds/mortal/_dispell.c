@@ -25,26 +25,25 @@ int cmd_dispell(string str)
         }
     }
     spells = e_spells;
-   
-    if (!pointerp(spells)) 
+
+    if (!pointerp(spells))
     {
         message("info","%^BOLD%^%^WHITE%^You have nothing listed as effecting you.",TP);
         return 1;
     }
-  
 
-    if (!str) 
+
+    if (!str)
     {
         j = sizeof(spells);
-        message("info","%^CYAN%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",TP);
-        for (i=0;i<j;i++) 
+        message("info","%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Spells you maintain %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^",TP);
+        for (i=0;i<j;i++)
         {
-            if (objectp (spells[i])) 
+            if (objectp (spells[i]))
             {
                 message("info","%^BOLD%^%^BLUE%^"+sprintf("%2d",i)+".%^BOLD%^GREEN%^ "+spells[i]->querySpellDisplay(),TP);
             }
         }
-        message("info","%^CYAN%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-",TP);
     return 1;
     }
     if(sizeof(spells))
@@ -75,13 +74,13 @@ int cmd_dispell(string str)
         return 1;
     }
     if(spell_name && spell_target)
-    {               
+    {
         for (i=0;i<sizeof(spells);i++)
-        {  
-            if (objectp (spells[i])) 
+        {
+            if (objectp (spells[i]))
             {
                 if(spells[i]->query_target_object())
-                {                    
+                {
                     if((string)spells[i]->query_spell_name() == spell_name && (string)spells[i]->query_target_object()->query_name() == spell_target)
                     {
                         if(!objectp(spells[i])) return notify_fail("That spell or power appears to have been lost.\n");
@@ -115,13 +114,13 @@ int cmd_dispell(string str)
     }
 
     if(spell_name)
-    {               
+    {
         for (i=0;i<sizeof(spells);i++)
-        {  
-            if (objectp (spells[i])) 
+        {
+            if (objectp (spells[i]))
             {
                 if(!spells[i]->query_target_object())
-                {    
+                {
                     if((string)spells[i]->query_spell_name() == spell_name)
                     {
                         if(!objectp(spells[i])) return notify_fail("That spell or power appears to have been lost.\n");
@@ -144,7 +143,7 @@ int cmd_dispell(string str)
                     }
                 }
             }
-        
+
         }
         return 1;
     }
