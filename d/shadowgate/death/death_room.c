@@ -9,40 +9,37 @@ inherit "/d/shadowgate/death/death_inherit.c";
 
 mapping visitors;
 
-void init(){
+void init()
+{
     ::init();
-    if(!wizardp(this_player()))
-	add_action("filter_act", "", 1);
-    if((int)TP->query_hp() < 1) { TP->set_hp(1); }
+    if (!wizardp(this_player())) {
+        add_action("filter_act", "", 1);
+    }
+    if ((int)TP->query_hp() < 1) {
+        TP->set_hp(1);
+    }
     //going to shorten the death sequence if
     //it is not a pkill - Saide, November 2016
-    if(!TP->query("just_been_pkilled"))
-    {
-
-        if(TP->is_vampire())
-        {
-            tell_object(TP,"\n%^BOLD%^CYAN%^You turn into dark mist and let the wind carry you into the darkness... After a while of wandering, you hear a faint song...\n");
+    if (!TP->query("just_been_pkilled")) {
+        if (TP->is_vampire()) {
+            tell_object(TP, "\n%^BOLD%^CYAN%^You turn into dark mist and let the wind carry you into the darkness... After a while of wandering, you hear a faint song...\n");
             call_out("end_death0_vampire", 5, TP);
             return;
-        }
-        else if(TP->is_undead())
-        {
-            tell_object(TP,"\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you struggle the stream of souls, and turn to elsewhere...\n");
+        }else if (TP->is_undead() ||
+                  TP->is_class("pale_lord")
+                  TP->is_class("gravecaller")
+            ) {
+            tell_object(TP, "\n%^BOLD%^WHITE%^Your existence has ended. The time has come to pay for breaking the covenant. You briefly see a large, open space... Then it fades as you struggle the stream of souls, and turn to elsewhere...\n");
             call_out("end_death0_undead", 5, TP);
             return;
-        }
-        else if(TP->query("subrace")=="feytouched" ||
-                TP->query("race") == "satyr" ||
-                TP->query("race") == "nymph" ||
-                TP->query("race") == "dryad")
-        {
-            tell_object(TP,"%^BOLD%^%^BLACK%^Your final breath is ripped from your lungs, and you feel yourself falling, falling, falling into the earth. The %^RESET%^%^ORANGE%^hard ground %^BOLD%^%^BLACK%^embraces you like an old lover, warm, familiar. %^RESET%^Home%^BOLD%^%^BLACK%^. %^RESET%^\n");
+        }else if (TP->query("subrace") == "feytouched" ||
+                  TP->query("race") == "satyr" ||
+                  TP->query("race") == "nymph" ||
+                  TP->query("race") == "dryad") {
+            tell_object(TP, "%^BOLD%^%^BLACK%^Your final breath is ripped from your lungs, and you feel yourself falling, falling, falling into the earth. The %^RESET%^%^ORANGE%^hard ground %^BOLD%^%^BLACK%^embraces you like an old lover, warm, familiar. %^RESET%^Home%^BOLD%^%^BLACK%^. %^RESET%^\n");
             call_out("end_death0_feytouched", 5, TP);
             return;
-        }
-        else
-        {
-
+        }else {
             tell_object(TP, "\n%^BOLD%^%^WHITE%^You find yourself standing in a large, open space with %^RESET%^mists %^BOLD%^%^WHITE%^that obscure any distance. Rising up before you is a simple oaken chair with a high back, upon which is seated a somber and serene woman. %^BLACK%^Dark hair %^WHITE%^frames her ageless face, while a robe of gray rests about her shoulders like a pall. Her fingers rest upon the chair's arm, and you note the three %^BLACK%^m%^RESET%^i%^BOLD%^%^WHITE%^s%^RESET%^m %^BOLD%^%^BLACK%^a%^RESET%^t%^BOLD%^%^WHITE%^c%^RESET%^h %^BOLD%^%^BLACK%^e%^RESET%^d %^BOLD%^%^WHITE%^rings she wears. As her %^RESET%^%^CYAN%^steady gaze %^BOLD%^%^WHITE%^falls upon you, you realise that this must be the Lady of Fate - Lysara. In agony, you try to recall all you have done that might warrant the deity's attention, and you squirm as you wait to hear what she will say. Finally, she speaks...\n");
             call_out("end_death", 8, TP);
             WHICH_CALL_OUT = "end_death";
@@ -50,16 +47,15 @@ void init(){
         }
         return;
     }
-    if(TP->query_property("trial"))
-    {
+    if (TP->query_property("trial")) {
         call_out("begin_trial", 4, TP);
         WHICH_CALL_OUT = "begin_trial";
-        TP->set("long",0);
+        TP->set("long", 0);
         return;
     }
     call_out("begin_death", 4, TP);
     WHICH_CALL_OUT = "begin_death";
-    TP->set("long",0);
+    TP->set("long", 0);
 }
 
 void create(){
@@ -293,40 +289,49 @@ void newbie1(object tp){
     return;
 }
 
-void do_death6(object tp){
-    mixed *deaths;
+void do_death6(object tp)
+{
+    mixed* deaths;
     int times;
 
-    if(!objectp(tp)) return;
-    if(!present(tp, TO)) return;
+    if (!objectp(tp)) {
+        return;
+    }
+    if (!present(tp, TO)) {
+        return;
+    }
 
     deaths = tp->query_deaths();
     times = sizeof(deaths);
 
-    tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice "+
-       "echoes around you%^RESET%^:  "+capitalize(tp->query_true_name())+", "+
-       "you have passed through these halls "+times+" times.%^RESET%^\n");
-    if(times <= 25)
-      tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice "+
-         "echoes around you%^RESET%^:  I do hope you are learning from "+
-         "the things you do.  Your life has whatever value you "+
-         "give it.  If you do not treasure it, there is "+
-         "nothing left for you.%^RESET%^\n");
-    if((times > 25) && (times < 50))
-	tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice "+
-         "echoes around you%^RESET%^:  If you continue throwing your "+
-         "life away rashly, it will become harder to "+
-         "return to that life in the future.%^RESET%^\n");
-    if((times >= 50) && (times < 100))
-	tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice "+
-         "echoes around you%^RESET%^:  Do you "+
-         "have place any value on your life at all?  This is "+
-         "becoming a trend.%^RESET%^\n");
-    if(times > 100)
-	tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice "+
-         "echoes around you%^RESET%^:  Why should I let you "+
-         "go back...again?  Will you do anything other than "+
-         "throw your life away?%^RESET%^\n");
+    tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice " +
+                "echoes around you%^RESET%^:  " + capitalize(tp->query_true_name()) + ", " +
+                "you have passed through these halls " + times + " times.%^RESET%^\n");
+    if (times <= 25) {
+        tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice " +
+                    "echoes around you%^RESET%^:  I do hope you are learning from " +
+                    "the things you do.  Your life has whatever value you " +
+                    "give it.  If you do not treasure it, there is " +
+                    "nothing left for you.%^RESET%^\n");
+    }
+    if ((times > 25) && (times < 50)) {
+        tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice " +
+                    "echoes around you%^RESET%^:  If you continue throwing your " +
+                    "life away rashly, it will become harder to " +
+                    "return to that life in the future.%^RESET%^\n");
+    }
+    if ((times >= 50) && (times < 100)) {
+        tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice " +
+                    "echoes around you%^RESET%^:  Do you " +
+                    "have place any value on your life at all?  This is " +
+                    "becoming a trend.%^RESET%^\n");
+    }
+    if (times > 100) {
+        tell_object(tp, "%^RESET%^%^MAGENTA%^Her lips do not move, but her ageless voice " +
+                    "echoes around you%^RESET%^:  Why should I let you " +
+                    "go back...again?  Will you do anything other than " +
+                    "throw your life away?%^RESET%^\n");
+    }
     call_out("end_death", 6, tp);
     WHICH_CALL_OUT = "end_death";
     attempt_raise();
@@ -723,28 +728,32 @@ void end_death(object tp)
 void end_death2(object tp)
 {
     string deity;
-    if(!objectp(tp)) return;
-    if(!present(tp, TO)) return;
+    if (!objectp(tp)) {
+        return;
+    }
+    if (!present(tp, TO)) {
+        return;
+    }
     deity = tp->query_diety();
-    switch(deity){
-      case "lysara":
-       tell_object(tp, "%^RESET%^%^MAGENTA%^Her unwavering gaze weighs upon your soul as "+
-       "she speaks%^RESET%^:  The mark of my own divine power is upon you, which will "+
-       "protect you from the worst effects of restoration.  Remain true to my "+
-       "calling, for the final fate of the faithless is only the wall...\n\n");
-      break;
-      case "pan": case "godless":
-       tell_object(tp, "%^RESET%^%^MAGENTA%^Her unwavering gaze weighs upon your soul as "+
-       "she speaks%^RESET%^:  Brace yourself, for with no patron to protect your soul, you "+
-       "will find yourself terribly weakened in being restored to life.  I suggest you consider "+
-       "your choices carefully, for the final fate of the faithless is only the wall...\n\n");
-      break;
-      default:
-       tell_object(tp, "%^RESET%^%^MAGENTA%^Her unwavering gaze weighs upon your soul as "+
-       "she speaks%^RESET%^:  I sense the mark of "+capitalize(deity)+" upon you, which will "+
-       "protect you from the worst effects of restoration.  Remain true to your patron and your "+
-       "calling, for the final fate of the faithless is only the wall...\n\n");
-      break;
+    switch (deity) {
+    case "lysara":
+        tell_object(tp, "%^RESET%^%^MAGENTA%^Her unwavering gaze weighs upon your soul as " +
+                    "she speaks%^RESET%^:  The mark of my own divine power is upon you, which will " +
+                    "protect you from the worst effects of restoration.  Remain true to my " +
+                    "calling, for the final fate of the faithless is only the wall...\n\n");
+        break;
+    case "pan": case "godless":
+        tell_object(tp, "%^RESET%^%^MAGENTA%^Her unwavering gaze weighs upon your soul as " +
+                    "she speaks%^RESET%^:  Brace yourself, for with no patron to protect your soul, you " +
+                    "will find yourself terribly weakened in being restored to life.  I suggest you consider " +
+                    "your choices carefully, for the final fate of the faithless is only the wall...\n\n");
+        break;
+    default:
+        tell_object(tp, "%^RESET%^%^MAGENTA%^Her unwavering gaze weighs upon your soul as " +
+                    "she speaks%^RESET%^:  I sense the mark of " + capitalize(deity) + " upon you, which will " +
+                    "protect you from the worst effects of restoration.  Remain true to your patron and your " +
+                    "calling, for the final fate of the faithless is only the wall...\n\n");
+        break;
     }
     call_out("end_death3", 8, tp);
     WHICH_CALL_OUT = "end_death3";
@@ -752,15 +761,23 @@ void end_death2(object tp)
     return;
 }
 
-void end_death3(object tp){
-    if(!objectp(tp)) return;
-    if(!present(tp, TO)) return;
+void end_death3(object tp)
+{
+    if (!objectp(tp)) {
+        return;
+    }
+    if (!present(tp, TO)) {
+        return;
+    }
 
-    tell_object(tp, "A mist forms "+
-    "over your eyes.  When you open them again, you are in a "+
-    "strange room filled with portals.\n\n");
-    if(tp->query_highest_level() < 7) { tp->move_player("/d/shadowgate/death/death_exit_offestry"); }
-    else { tp->move_player("/d/shadowgate/death/death_exit"); }
+    tell_object(tp, "A mist forms " +
+                "over your eyes.  When you open them again, you are in a " +
+                "strange room filled with portals.\n\n");
+    if (tp->query_highest_level() < 7) {
+        tp->move_player("/d/shadowgate/death/death_exit_offestry");
+    }else {
+        tp->move_player("/d/shadowgate/death/death_exit");
+    }
     return;
 }
 

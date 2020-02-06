@@ -75,9 +75,13 @@ int raise_player(string verb)
             DeadPerson->remove_property("death_room");
             DeadPerson->move(room);
             DeadPerson->force_me("look");
+
             DeadPerson->delete("in_the_afterlife");
-            DeadPerson->remove_pk_death_flag();
+            DeadPerson->delete("just_been_pkilled");
             DeadPerson->delete("no pk");
+            DeadPerson->remove_pk_death_flag();
+            DeadPerson->remove_property("death_room");
+
             DeadPerson->set_death_age(0);
             DeadPerson->delete("RaisingRoom");
             DeadPerson->delete("RaisingPriestAlignment");
@@ -88,7 +92,7 @@ int raise_player(string verb)
             tell_room(environment(DeadPerson),"%^BOLD%^"+TP->QCN+" has returned from the "+
             "dead!",DeadPerson);
             PERMA_DEATH_D->remove_player(DeadPerson->query_name());
-            DeadPerson->delete("just_been_pkilled");
+
             if (objectp(MyDeadRoom)) {
                 MyDeadRoom->remove();
             }
@@ -260,35 +264,43 @@ int filter_act(string str)
 
 void release_em(object dead)
 {
-	object MyDeadRoom;
-  	if (!objectp(dead)) return;
-  	if (!userp(dead)) return;
-	MyDeadRoom = dead->query_property("death_room");
-	//dead->set_ghost(1);
-	tell_object(dead, "%^BOLD%^%^WHITE%^You are suddenly "+
-	"pulled from this place to face Lysara's Decision!"+
-	"%^RESET%^");
-	if(dead->query("in_the_afterlife"))
-	{
-		dead->delete("in_the_afterlife");
-	}
-	dead->restrict_channel("deceased");
-      dead->set_property("trial", 1);
-	dead->move("/d/shadowgate/death/death_room.c");
-	dead->remove_property("death_room");
-	if(objectp(MyDeadRoom)) MyDeadRoom->remove();
-    if(objectp(TO) && clonep(TO)) TO->remove();
-  	return;
+    object MyDeadRoom;
+    if (!objectp(dead)) {
+        return;
+    }
+    if (!userp(dead)) {
+        return;
+    }
+    MyDeadRoom = dead->query_property("death_room");
+    //dead->set_ghost(1);
+    tell_object(dead, "%^BOLD%^%^WHITE%^You are suddenly " +
+                "pulled from this place to face Lysara's Decision!" +
+                "%^RESET%^");
+    if (dead->query("in_the_afterlife")) {
+        dead->delete("in_the_afterlife");
+    }
+    dead->restrict_channel("deceased");
+    dead->set_property("trial", 1);
+    dead->move("/d/shadowgate/death/death_room.c");
+    dead->remove_property("death_room");
+    if (objectp(MyDeadRoom)) {
+        MyDeadRoom->remove();
+    }
+    if (objectp(TO) && clonep(TO)) {
+        TO->remove();
+    }
+    return;
 }
 
 void heart_beat()
 {
-	if(!objectp(DeadPerson)) return;
-	if(!PERMA_DEATH_D->is_perma_deathed(DeadPerson->query_name()))
-	{
-		release_em(DeadPerson);
-		return;
-	}
-	attempt_raise();
-	//::heart_beat();
+    if (!objectp(DeadPerson)) {
+        return;
+    }
+    if (!PERMA_DEATH_D->is_perma_deathed(DeadPerson->query_name())) {
+        release_em(DeadPerson);
+        return;
+    }
+    attempt_raise();
+    //::heart_beat();
 }

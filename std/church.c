@@ -133,39 +133,46 @@ int identify_curse(string str) {
 
 int pray()
 {
-    string *classes;
+    string* classes;
 
-    if(!this_player()->query_ghost()) {
+    if (!this_player()->query_ghost()) {
         notify_fail("The living do not need to pray for revival.\n");
         return 0;
     }
     TP->revive(-10);
 
     //Setting flags
-    if (query_verb() == "pray" || TP->query("just_been_pkilled")) TP->advance_death_time();
+    if (query_verb() == "pray" || TP->query("just_been_pkilled")) {
+        TP->advance_death_time();
+    }
+
     TP->delete("just_been_pkilled");
     TP->remove_property("last_death");
-    TP->set_property("last_death",time());
+    TP->set_property("last_death", time());
 
     //Resetting status
     TP->set_hp(10);
     TP->set_blind(0);
-    if(TP->query_quenched() < (int)TP->query_formula()/6)
-        TP->add_quenched((int)TP->query_formula()/6);
-    if(TP->query_stuffed() < (int)TP->query_formula()/6)
-        TP->add_stuffed((int)TP->query_formula()/6);
+
+    if (TP->query_quenched() < (int)TP->query_formula() / 6) {
+        TP->add_quenched((int)TP->query_formula() / 6);
+    }
+    if (TP->query_stuffed() < (int)TP->query_formula() / 6) {
+        TP->add_stuffed((int)TP->query_formula() / 6);
+    }
+
     TP->set_heart_beat(1);
     TP->set_heal_rate(2);
     TP->add_stuffed(25);
     TP->add_quenched(25);
 
-    if(TP->is_class("cleric") ||
-       TP->is_class("ranger") ||
-       TP->is_class("paladin"))
-    {
+    if (TP->is_class("cleric") ||
+        TP->is_class("ranger") ||
+        TP->is_class("paladin")) {
         write("As a service to your faith, we will provide this new holy symbol.");
         new("/d/magic/symbols/holy_symbol")->move(TP);
     }
+
     TP->delete("RaisingRoom");
     TP->delete("RaisingPriestAlignment");
     TP->delete("RaisingPriestGod");
@@ -173,10 +180,9 @@ int pray()
     TP->delete("RaisingType");
 
     /* Punishment for non-newbies. */
-    if(!newbiep(TP) &&
-       ((int)TP->query_character_level()>6))
-    {
-        object *stuff;
+    if (!newbiep(TP) &&
+        ((int)TP->query_character_level() > 6)) {
+        object* stuff;
         int exploss, expdelta, exp, thelevel;
         int i;
         string myclass;
@@ -185,26 +191,30 @@ int pray()
         "/daemon/user_d.c"->scale_level_to(TP, TP->query_base_character_level());
         /* Subtracting exp to next level  */
         thelevel = TP->query_character_level();
-        if(TP->query("active_class"))
+
+        if (TP->query("active_class")) {
             myclass = TP->query("active_class");
-        else
+        } else {
             myclass = TP->query_class();
+        }
 
         classes = TP->query_classes();
 
         exp = (int)TP->query_exp();
 
-        expdelta = abs(EXP_NEEDED[thelevel+1]-EXP_NEEDED[thelevel]);
-        exploss = expdelta * thelevel/89;
-        log_file("deathlexp", TPQN+" lost "+exploss+" in resurrection at a church.\n");
+        expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]);
+        exploss = expdelta * thelevel / 89;
+        log_file("deathlexp", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
-        if(exp > EXP_NEEDED[thelevel+1])
-            exploss*=2;
+        if (exp > EXP_NEEDED[thelevel + 1]) {
+            exploss *= 2;
+        }
 
-        if(TP->query("hardcore"))
-            TP->set_general_exp(myclass,EXP_NEEDED[6]);
+        if (TP->query("hardcore")) {
+            TP->set_general_exp(myclass, EXP_NEEDED[6]);
+        }
 
-        TP->set_general_exp(myclass,exp - exploss);
+        TP->set_general_exp(myclass, exp - exploss);
 
         TP->resetLevelForExp(0);
 
@@ -213,32 +223,31 @@ int pray()
         //TP->set_XP_tax(0, 0, "death");
 
         /* Damaging enchanted inventory. */
-        stuff=all_inventory(TP);
-        for (i=0;i<sizeof(stuff);i++)
-        {
-            if(!objectp(stuff[i]))
+        stuff = all_inventory(TP);
+        for (i = 0; i < sizeof(stuff); i++) {
+            if (!objectp(stuff[i])) {
                 continue;
-            if(!stuff[i])
+            }
+            if (!stuff[i]) {
                 continue;
-            if(TP->query("hardcore"))
-            {
+            }
+            if (TP->query("hardcore")) {
                 stuff[i]->remove();
                 continue;
             }
-            if (stuff[i]->is_armor() && stuff[i]->query_worn())
+            if (stuff[i]->is_armor() && stuff[i]->query_worn()) {
                 stuff[i]->set_not_equipped();
-            if (stuff[i]->query_wielded())
+            }
+            if (stuff[i]->query_wielded()) {
                 stuff[i]->set_not_inhand();
-            if(objectp(stuff[i]))
-            {
-                if(stuff[i]->id("questob"))
-                {
+            }
+            if (objectp(stuff[i])) {
+                if (stuff[i]->id("questob")) {
                     stuff[i]->remove();
                     continue;
                 }
-                if(stuff[i]->query_property("enchantment")>0)
-                {
-                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus()/2);
+                if (stuff[i]->query_property("enchantment") > 0) {
+                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus() / 2);
                     continue;
                 }
             }
@@ -261,25 +270,31 @@ int return_me()
     {
           return notify_fail("You can only return if your most recent death was a normal death!");
     }
+
     TP->set_death_age(0);
     pray();
     return 1;
 }
 
-int plea() {
-   if(present("true holy symbol", TP))
+int plea()
+{
+    if (present("true holy symbol", TP)) {
         return notify_fail("You need not another symbol!! Return thee to thine life!\n");
-   if(!TP->query_diety() || (string)TP->query_diety() == "pan")
+    }
+    if (!TP->query_diety() || (string)TP->query_diety() == "pan") {
         return notify_fail("You need to follow a deity before you need a holy symbol!\n");
-   if(!can_request())
+    }
+    if (!can_request()) {
         return notify_fail("You cannot retrieve a holy symbol here.\n");
-   if(!TP->query_funds("gold", 500))
-         return notify_fail("You need 500 gold to pay for a new symbol.\n");
-   TP->use_funds("gold",500);
-   new("/d/magic/symbols/holy_symbol")->move(TP);
-   write("An acolyte accepts your offering and brings you the new symbol.");
-   tell_room(TO, "An acolyte accepts "+TPQCN+"'s offering and delivers a new symbol.", TP);
-   return 1;
+    }
+    if (!TP->query_funds("gold", 500)) {
+        return notify_fail("You need 500 gold to pay for a new symbol.\n");
+    }
+    TP->use_funds("gold", 500);
+    new("/d/magic/symbols/holy_symbol")->move(TP);
+    write("An acolyte accepts your offering and brings you the new symbol.");
+    tell_room(TO, "An acolyte accepts " + TPQCN + "'s offering and delivers a new symbol.", TP);
+    return 1;
 }
 
 string query_long(string str) {
