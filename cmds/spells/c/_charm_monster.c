@@ -20,7 +20,7 @@ void create() {
     set_spell_level(([ "cleric" : 3, "bard" : 3, "mage" : 1, "ranger" : 2 ]));
     set_spell_sphere("enchantment_charm");
     set_spell_domain("charm");
-
+    set_mystery("nature");
     set_domains("animal");
     set_syntax("cast CLASS charm monster on TARGET");
     set_description("Casting this divine prayer will allow a priest to attempt to charm a mob.  If the mob falls prey to "

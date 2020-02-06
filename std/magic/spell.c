@@ -2604,6 +2604,10 @@ varargs int do_save(object targ,int mod) {
         caster_bonus -= 4;
     }
 
+    if (FEATS_D->usable_feat(targ, "closed mind")) {
+        caster_bonus -= 2;
+    }
+
     if(save_debug)
     {
         tell_object(caster,"Level of spell: "+casting_level+"");

@@ -12,7 +12,7 @@ void create() {
     ::create();
     set_spell_name("guidance");
     set_spell_level(([ "druid" : 1,"oracle":1 ]));
-    set_mystery("elemental");
+    set_mystery(({"elemental", "nature"}));
     set_spell_sphere("alteration");
     set_syntax ("cast CLASS guidance on TARGET");
     set_description("This spell will offer guidance to the target, "

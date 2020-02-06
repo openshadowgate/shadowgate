@@ -7,12 +7,13 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("MeleeAccuracy");
-    feat_name("disruptive");
-    feat_prereq("Fighter L6");
-    feat_desc("By warding yourself, this feat increases your chance to avoid negative spell effects, granting you +4 to all your saving throws against spells.");
+    feat_category("Psionics");
+    feat_name("Closed mind");
+    feat_prereq("Psywarrior L1 or Psion L1");
+    feat_desc("Your mind is better able to resist psionics than normal. You gain +2 to all saving thwors against powers and spells.");
     permanent(1);
     allow_blind(1);
+    psionic(1);
 }
 
 int allow_shifted()
@@ -31,7 +32,8 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("fighter") < 6) {
+    if (!(ob->is_class("psywarrior") ||
+          ob->is_class("psion"))) {
         dest_effect();
         return 0;
     }

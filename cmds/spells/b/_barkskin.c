@@ -8,8 +8,9 @@ void create()
 {
     ::create();
     set_spell_name("barkskin");
-    set_spell_level(([ "ranger" : 2,"druid" : 2, "cleric":2]));
+    set_spell_level(([ "ranger" : 2,"druid" : 2, "cleric":2, "oracle":2]));
     set_domains("plant");
+    set_mystery("nature");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS barkskin");
     set_description("A ranger can attempt to take on part of a tree's nature, their skin hardening a little.  This spell "

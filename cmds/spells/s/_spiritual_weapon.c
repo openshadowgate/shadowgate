@@ -12,6 +12,7 @@ void create() {
     set_spell_name("spiritual weapon");
     set_spell_level(([ "inquisitor":2,"oracle":2,"cleric":2 ]));
     set_spell_sphere("invocation_evocation");
+    set_domains("war");
     set_syntax("cast CLASS spiritual weapon");
     set_mystery("ancestor");
     set_description("A weapon made of force appears and attacks foes at a distance, as you direct it.

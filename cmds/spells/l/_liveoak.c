@@ -14,8 +14,9 @@ object tree;
 void create() {
     ::create();
     set_spell_name("liveoak");
-    set_spell_level(([ "druid" : 7, "cleric":7]));
+    set_spell_level(([ "druid" : 7, "cleric":7, "oracle":7]));
     set_domains("plant");
+    set_mystery("nature");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS liveoak");
     set_description("Upon casting this spell, the druid calls upon her connection with nature to bring forth the magic inherent in an acorn. The druid tosses the acorn to the ground, where it sprouts into a mighty treant to protect her.

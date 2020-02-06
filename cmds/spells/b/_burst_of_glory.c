@@ -11,7 +11,7 @@ void create()
     ::create();
     set_spell_name("burst of glory");
     set_spell_level(([ "paladin" : 4, "cleric" : 5, "inquisitor":5]));
-    set_domains("good");
+    set_domains(({"good"}));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS burst of glory");
     set_damage_desc("clevel/22+1 to attack, damage bonus, clevel to hp bonus on allies");

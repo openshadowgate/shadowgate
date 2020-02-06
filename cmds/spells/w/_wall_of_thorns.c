@@ -18,6 +18,7 @@ void create()
     set_spell_name("wall of thorns");
     set_spell_level(([ "druid" : 5, "cleric":5]));
     set_domains("plant");
+    set_mystery("nature");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS wall of thorns [on <exit>] | cast <classname> wall of thorns");
 

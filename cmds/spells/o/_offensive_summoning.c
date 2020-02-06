@@ -11,9 +11,8 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("offensive summoning");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("conjuration_summoning");
-    set_spell_domain("war");
     set_syntax("cast CLASS offensive summoning on TARGET");
     set_description("This spell gives the caster a chance of summoning to him- or herself someone who has recently done "
 "an unredressed wrong to the caster. There is also a chance of the caster being summoned to the target, if the spell is "

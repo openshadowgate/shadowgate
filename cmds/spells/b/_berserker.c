@@ -13,7 +13,7 @@ int mybonus;
 void create() {
     ::create();
     set_spell_name("berserker");
-    set_spell_level(([ "cleric" : 7 ]));
+    set_spell_level(([ "classless" : 7 ]));
     set_spell_sphere("combat");
     set_spell_domain("war");
     set_syntax("cast CLASS berserker");
@@ -34,7 +34,7 @@ void create() {
     set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
    return "%^BOLD%^%^RED%^"+caster->QCN+" beats "+caster->QP+" chest repeatedly, shouts and jumps about madly.";
 }
@@ -53,7 +53,7 @@ int preSpell() {
 }
 
 void spell_effect(int prof) {
-    
+
     tell_room(place,"%^BOLD%^%^CYAN%^The madness of war and the need for victory "
         "overwhelm "+caster->QCN+".%^RESET%^",caster);
     tell_object(caster, "%^BOLD%^%^CYAN%^The madness of war and the need for victory overwhelm you.%^RESET%^");
@@ -79,7 +79,7 @@ void berserk(){
         }
         caster->execute_attack();
 /*        if(sizeof(target->query_classes()) == 1){
-           caster->execute_attack(); 
+           caster->execute_attack();
         } */
 // no longer needed, SC is not really a thing anymore
     }
@@ -93,7 +93,7 @@ void berserk(){
 
 void dest_effect() {
    if(objectp(caster)) {
-      if(caster->query_property("berserked")){	
+      if(caster->query_property("berserked")){
          tell_object(caster,"%^CYAN%^The rage leaves you.%^RESET%^");
          tell_room(environment(caster),"%^CYAN%^The rage of "+
             "war lifts from "+caster->QCN+".",caster);

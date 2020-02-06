@@ -67,7 +67,7 @@ void spell_effect(int prof)
     ob->remove_property("enchantment");
     ob->set_property("enchantment",enchantment-1);
     tell_object(caster,"%^BOLD%^%^MAGENTA%^As the metal vapor rises it carries away the magic of "+ob->query_short()+"%^BOLD%^%^MAGENTA%^, and it becomes weaker.%^RESET%^");
-    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" voices a few syllables and evaporates a pile of gold under "+ob->query_short()+".%^RESET%^");
+    tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" voices a few syllables and evaporates a pile of gold under "+ob->query_short()+".%^RESET%^", caster);
 
     dest_effect();
 }

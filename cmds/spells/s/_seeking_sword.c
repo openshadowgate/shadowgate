@@ -15,9 +15,8 @@ void make_sword();
 void create() {
     ::create();
     set_spell_name("seeking sword");
-    set_spell_level(([ "cleric" : 3, "paladin" : 4, "oracle" : 5 ]));
+    set_spell_level(([ "paladin" : 4, "oracle" : 5 ]));
     set_spell_sphere("combat");
-    set_spell_domain("war");
     set_mystery("godclaw");
     set_syntax("cast CLASS seeking sword");
     set_description("This spell will create a floating and controllable sword for you that you can use to attack your "
