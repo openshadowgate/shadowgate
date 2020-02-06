@@ -17,7 +17,7 @@ void create() {
     feat_type("instant");
     feat_category("MeleeDamage");
     feat_syntax("rush [TARGET]");
-    feat_prereq("powerattack");
+    feat_prereq("Strenght 13");
     feat_desc("The character can attempt to rush at a foe with their weapon, throwing as much force as they can behind it in the hope of dealing damage and knocking them over. Missing, however, will send the character sprawling.
 
 If used without an argument this feat will pick up a random attacker.
@@ -27,11 +27,14 @@ If used without an argument this feat will pick up a random attacker.
     set_save("fort");
 }
 
-int prerequisites(object ob){
-    if(!objectp(ob)) return 0;
-    if(!FEATS_D->has_feat(ob,"powerattack")){
-      dest_effect();
-      return 0;
+int prerequisites(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if ((int)ob->query_base_stats("strength") < 13) {
+        dest_effect();
+        return 0;
     }
     return ::prerequisites(ob);
 }

@@ -131,6 +131,7 @@ void execute_attack()
         targets[i]->add_attacker(caster);
     }
 
+    caster->add_mp(-roll_dice(1, 6));
     caster->set_property("magic", -1);
     dest_effect();
     return;

@@ -18,13 +18,17 @@ This feat shift values between attack and damage bonuses.");
     set_required_for(({"shatter","sunder","rush"}));
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) { return 0; }
-    if((int)ob->query_base_stats("strength") < 13)
-    {
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if ((int)ob->query_base_stats("strength") < 13) {
         dest_effect();
         return 0;
     }

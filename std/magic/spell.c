@@ -602,8 +602,17 @@ int check_reflection()
     if (FEATS_D->usable_feat(target, "spell reflection")) {
         flagz = 1;
     }
+
     if (FEATS_D->usable_feat(target, "reflection") && target->is_wearing_type("shield")) {
         flagz = 2;
+    }
+
+    if (FEATS_D->usable_feat(target, "spellbreaker")) {
+        spell_kill(target, caster);
+        target->execute_attack();
+        if (!random(3)) {
+            target->execute_attack();
+        }
     }
 
     switch (flagz) {
@@ -1502,7 +1511,6 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         }
     }
 
-    // moving this up here cuz otherwise the prof dies (for backfires) and it gets cast locked. N, 6/15.
     if (spell_type == "potion") {
         TO->spell_effect(prof);
         return 1;
@@ -2590,6 +2598,10 @@ varargs int do_save(object targ,int mod) {
         {
             caster_bonus -= 2;
         }
+    }
+
+    if (FEATS_D->usable_feat(targ, "disruptive")) {
+        caster_bonus -= 4;
     }
 
     if(save_debug)
