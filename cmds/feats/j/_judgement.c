@@ -17,11 +17,11 @@ void create()
 
 The list of judgements to choose from:
 
-%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them damage bonus point per every twelve levels.
+%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them damage bonus point per every nine levels.
 
 %^BOLD%^Healing:%^RESET%^ The inquisitor is surrounded by a healing light, gaining fast healing point per every eighteen levels.
 
-%^BOLD%^Justice:%^RESET%^ This judgment spurs the inquisitor to seek justice, gaining a sacred bonus point to attack per every twenty levels.
+%^BOLD%^Justice:%^RESET%^ This judgment spurs the inquisitor to seek justice, gaining a sacred bonus point to attack per every five levels.
 
 %^BOLD%^Piercing:%^RESET%^ This judgment gives the inquisitor great focus and makes his spells more potent. This grants a level and ten points worth of spell penetration and a caster level point for every twelve levels.
 
