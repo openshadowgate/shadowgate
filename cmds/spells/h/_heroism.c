@@ -6,25 +6,21 @@ inherit SPELL;
 
 int skillbonus, thacobonus;
 
-void create() {
+void create()
+{
     ::create();
     set_author("nienne");
     set_spell_name("heroism");
-    set_spell_level(([ "mage" : 3, "bard" : 4,"inquisitor":3, "oracle":3 ]));
+    set_spell_level(([ "mage" : 3, "bard" : 4, "inquisitor" : 3, "oracle" : 3 ]));
     set_mystery("ancestor");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS heroism [on TARGET]");
     set_damage_desc("+2 to attack bonus, saving throws, skills");
-    set_description("This spell allows the caster to draw upon their personal presence and charm, granting them or an ally"
-" a bonus to morale on attacks, saves and core skills. It does not stack with other morale-boosting spells, such as good "
-"hope.");
+    set_description("This spell allows the caster to draw upon their personal presence and charm, granting them or an ally a bonus to morale on attacks, saves and core skills. It does not stack with other morale-boosting spells, such as good hope. This spell won't work together with resistance spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    set_components(([
-      "mage" : ([ "vermilion" : 2, ]),
-    ]));
-	set_helpful_spell(1);
+    set_helpful_spell(1);
 }
 
 int query_heroism_bonus()
@@ -32,16 +28,18 @@ int query_heroism_bonus()
     return 2;
 }
 
-int preSpell(){
-   if((int)target->query_property("morale-boost")){
-      tell_object(CASTER,"That target is already under the influence of such a spell.");
-      return 0;
-   }
-   return 1;
+int preSpell()
+{
+    if ((int)target->query_property("morale-boost")) {
+        tell_object(CASTER, "That target is already under the influence of such a spell.");
+        return 0;
+    }
+    return 1;
 }
 
-string query_cast_string() {
-    return "%^BOLD%^%^WHITE%^"+caster->QCN+" takes a c%^CYAN%^o%^WHITE%^nfident step forward "+caster->QP+" and raises a closed fist!%^RESET%^";
+string query_cast_string()
+{
+    return "%^BOLD%^%^WHITE%^" + caster->QCN + " takes a c%^CYAN%^o%^WHITE%^nfident step forward " + caster->QP + " and raises a closed fist!%^RESET%^";
 }
 
 void spell_effect(int prof) {

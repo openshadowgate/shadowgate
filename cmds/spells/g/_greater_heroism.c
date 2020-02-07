@@ -7,7 +7,7 @@ void create() {
     set_mystery("ancestor");
     set_syntax("cast CLASS greater heroism [on TARGET]");
     set_damage_desc("+4 to attack bonus, saving throws, skills");
-    set_description("This spell allows the caster to draw upon their personal presence and charm, granting them or an ally a bonus to morale on attacks, saves and core skills. It does not stack with other morale-boosting spells, such as good hope.");
+    set_description("This spell allows the caster to draw upon their personal presence and charm, granting them or an ally a bonus to morale on attacks, saves and core skills. It does not stack with other morale-boosting spells, such as good hope. This spell won't work together with resistance spell.");
     set_target_required(1);
 }
 

@@ -14,7 +14,7 @@ void create() {
     set_spell_sphere("conjuration_summoning");
     set_mystery("flame");
     set_syntax("cast CLASS conjure elemental on water|fire|earth|air");
-    set_description("This spell will summon an elemental for you to command. Such creatures are native to different planes, and existence in this plane is extremely painful for them. They resent being summoned here and hate the mage who summoned them. There is a chance that the caster will loose control over the creature and the creature will attack him/her immediately and viciously.
+    set_description("This spell will summon an elemental for you to command. Such creatures are native to different planes, and existence in this plane is extremely painful for them. They resent being summoned here and hate the mage who summoned them. There is a chance that the caster will lose control over the creature and the creature will attack him/her immediately and viciously.
 To command elemental, use %^ORANGE%^<command elemental to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^.
 To command lost elemental to follow you once again, use %^ORANGE%^<command elemental to follow>%^RESET%^.
 To dismiss elemental use %^ORANGE%^<dismiss elemental>%^RESET%^.");
