@@ -17,6 +17,7 @@ int cmd_stuck(string str)
     }
 
     TP->set_casting(0);
+    TP->remove_property("using instant feat");
     TP->remove_property("used_stuck");
     TP->set_property("used_stuck",time() + ROUND_LENGTH);
     tell_object(TP,"%^B_RED%^%^BOLD%^%^CYAN%^Unsticking you. Time is: "+ctime(time())+"  This command is for "
