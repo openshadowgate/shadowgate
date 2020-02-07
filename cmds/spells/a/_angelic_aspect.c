@@ -71,7 +71,7 @@ void spell_effect()
     else if(!(align%3))
         ashort = "%^RESET%^%^BOLD%^%^MAGENTA%^ (%^BOLD%^%^BLACK%^t%^RESET%^%^MAGENTA%^ra%^BOLD%^%^BLACK%^i%^RESET%^%^MAGENTA%^le%^BOLD%^%^BLACK%^d by %^RESET%^%^MAGENTA%^bl%^BOLD%^%^BLACK%^ack %^RESET%^%^MAGENTA%^w%^BOLD%^%^BLACK%^in%^RESET%^%^MAGENTA%^g%^BOLD%^%^BLACK%^s%^RESET%^%^BOLD%^%^MAGENTA%^)%^RESET%^";
 
-    tell_room(ENV(caster),"%^BOLD%^%^WHITE%^As "+caster->QCN+" finishes the chant, feathery "+(!(caster->query_alignment()%3)?"%^BLACK%^black%^WHITE%^":"white")+" wings sprout from "+caster->QP+" shoulders!%^RESET%^");
+    tell_room(ENV(caster),"%^BOLD%^%^WHITE%^As "+caster->QCN+" finishes the chant, feathery "+(!(caster->query_true_align()%3)?"%^BLACK%^black%^WHITE%^":"white")+" wings sprout from "+caster->QP+" shoulders!%^RESET%^");
 
     effect(1);
     caster->set_property("added short",({ashort}));
