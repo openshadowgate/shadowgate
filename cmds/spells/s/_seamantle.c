@@ -14,17 +14,27 @@ void create() {
     set_spell_level(([ "mage" : 8, "druid" : 8 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS seamantle");
-    set_damage_desc("8 to AC, 4 to reflex save for clevel/4+4 rounds");
+    set_damage_desc("8 to AC, 4 to reflex save");
     set_description("You surround yourself with column of water, or control currents of water you're already in, to shield yourself from harm. Such mantle is powerful shield, yet maintaining it for long periods of time is nearly impossible even for an experienced caster.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
 }
 
+int preSpell()
+{
+    if (target->query_property("seamantled"))
+    {
+        tell_object(caster,"%^CYAN%^The spell is repelled by its own magic.%^RESET%^\n");
+        return 0;
+    }
+    return 1;
+}
+
 void spell_effect(int prof)
 {
 
-    duration = (clevel/4+4)*ROUND_LENGTH;
+    duration = (clevel/2+4)*ROUND_LENGTH;
     abonus = 8;
     rbonus = 4;
 

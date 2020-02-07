@@ -5,17 +5,31 @@ inherit FEAT;
 
 int FLAG;
 
-int light_armor_filter(object ob) {
-    if(!objectp(ob)) { return 0; }
-    if(ob->query_armor_prof("light")) { return 0; }
+int light_armor_filter(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (ob->query_armor_prof("light")) {
+        return 0;
+    }
     return 1;
 }
 
-int armor_filter(object ob) {
-    if(!objectp(ob)) { return 0; }
-    if(ob->query_armor_prof("light")) { return 1; }
-    if(ob->query_armor_prof("medium")) { return 1; }
-    if(ob->query_armor_prof("heavy")) { return 1; }
+int armor_filter(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (ob->query_armor_prof("light")) {
+        return 1;
+    }
+    if (ob->query_armor_prof("medium")) {
+        return 1;
+    }
+    if (ob->query_armor_prof("heavy")) {
+        return 1;
+    }
     return 0;
 }
 
@@ -35,7 +49,6 @@ void create() {
 
     permanent(1);
     allow_tripped(1);
-    set_required_for(({"spell power","improved spell power","greater spell power","hardenedminions","magic arsenal"}));
 }
 
 int cmd_spellmastery(string args)

@@ -31,7 +31,7 @@ int query_heroism_bonus()
 int preSpell()
 {
     if ((int)target->query_property("morale-boost")) {
-        tell_object(CASTER, "That target is already under the influence of such a spell.");
+        tell_object(CASTER, "That target is already under the influence of resistance or heroism.");
         return 0;
     }
     return 1;

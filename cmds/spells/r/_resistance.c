@@ -30,7 +30,7 @@ string query_cast_string()
 int preSpell()
 {
     if ((int)caster->query_property("morale-boost")) {
-        tell_object(CASTER, "That target is already under the influence of such a spell.");
+        tell_object(CASTER, "That target is already under the influence of heroism or resistance spell.");
         return 0;
     }
     return 1;

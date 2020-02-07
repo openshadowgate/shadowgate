@@ -4,7 +4,7 @@
 inherit SPELL;
 
 int bonus;
-int SFDELAY = 600;
+int SFDELAY = 60;
 
 void create()
 {

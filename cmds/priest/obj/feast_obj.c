@@ -107,7 +107,10 @@ void heart_beat()
 
 void dest_effect()
 {
-    tell_object(ETO,"The banquet table vanishes before your eyes!");
-    if(objectp(casting_spell)) { casting_spell->dest_effect(); }
+    tell_object(ETO, "The banquet table vanishes before your eyes!");
+    if (objectp(casting_spell)) {
+        casting_spell->dest_effect();
+    }
+    TO->remove();
     return;
 }
