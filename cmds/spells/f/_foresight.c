@@ -1,5 +1,6 @@
 #include <spell.h>
 #include <clock.h>
+#include <magic.h>
 inherit SPELL;
 
 int abonus;
@@ -41,7 +42,7 @@ int preSpell()
 void spell_effect(int prof)
 {
 
-    duration = HOUR;
+    duration = clevel * ROUND_LENGTH * 6;
     abonus = 1 + (clevel / 16);
     rbonus = 1 + (clevel / 12);
 
