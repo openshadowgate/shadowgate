@@ -87,7 +87,6 @@ void spell_effect()
         caster->set_property("spelled",({TO}));
         spell_successful();
         addSpellToCaster();
-        call_out("dest_effect", (clevel+roll_dice(1,20)) * ROUND_LENGTH * 10);
     }
 }
 
