@@ -15,15 +15,15 @@
  %^RESET%^L17: leadership
  %^RESET%^Also: one bonus melee feat at L1, and every five class levels thereafter
 
-Paladins are the protectors of their chosen patron in the realm of ShadowGate. They are holy (or unholy) warriors selected by their faith to battle their enemies and uphold their charge. A paladin's purpose varies according totheiry patron's charge, but protection and law are always part of their oaths.
+Paladins are the protectors of their chosen patron in the realm of ShadowGate. They are holy (or unholy) warriors selected by their faith to battle their enemies and uphold their charge. A paladin's purpose varies according to their patron's charge, but protection and order are almost always part of their oaths.
 
-A paladin serves someone or some cause. They serve a lord or nobility, or the order of knighthood, or a higher power directly, like deity. Only faiths with lawful clergy have required degree of order to induct a paladin.
+A paladin serves someone or some cause. They serve a lord or nobility, or the order of knighthood, or a higher power directly, like a deity. Only faiths with a lawful clergy require a degree of order to induct a paladin.
 
-Paladins are granted a subset of divine utility spells based on their wisdom score, including spell to summon a powerful mount. You can see their spell list with %^ORANGE%^<spells paladin>%^RESET%^. Paladins %^ORANGE%^<prepare>%^RESET%^ spells from this list and commit it to memory, you can see list of spells in memory with %^ORANGE%^<recall paladin spells>%^RESET%^. When they %^ORANGE%^<cast>%^RESET%^ spell they expend a spell from the memory. They can remove undesired prepared spell with the %^ORANGE%^<forget>%^RESET%^ command.
+Paladins are granted a subset of divine utility spells based on their wisdom score, including a spell to summon a powerful mount. You can see their spell list with %^ORANGE%^<spells paladin>%^RESET%^. Paladins %^ORANGE%^<prepare>%^RESET%^ spells from this list and commit it to memory. You can see a list of spells in your memory with %^ORANGE%^<recall paladin spells>%^RESET%^. When they %^ORANGE%^<cast>%^RESET%^ a spell, they expend that spell from their memory. They can remove undesired prepared spell with the %^ORANGE%^<forget>%^RESET%^ command.
 
-Paladins can cast their spells in any armor, but must not wield while doing so as they rely bot on spelling and gestures in casting.
+Paladins can cast their spells in any armor, but they must not wield while doing so as they rely both on speaking and gesturing while casting.
 
-Paladins rely on melee combat and don't make good casters. Their combat powers come from martial feat tree.
+Paladins rely on melee combat and don't make good casters. Their combat powers come from the martial feat tree.
 
 %^RESET%^%^CYAN%^See also:%^RESET%^ feats, stats, skills, spells, cast, prepare, buff, deities, prestige classes
 

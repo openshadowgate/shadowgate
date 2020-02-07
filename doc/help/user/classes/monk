@@ -36,7 +36,7 @@ Unarmed monks use the following damage table:
 
 By default a monk uses strength for unarmed attacks (for both hit and damage), however, a monk may choose the weapon finesse feat in order to use dexterity instead.
 
-Unarmed monks also receive a critical damage multiplier of their monk level divided by 10 + 1, a level 10 monk, for example would have a critical damage multiplier of 2. This means that a level 10 monk would do an additinal 2d6 damage on a critical hit.
+Unarmed monks also receive a critical damage multiplier of their monk level divided by 10 + 1. A level 10 monk, for example, would have a critical damage multiplier of 2. This means that a level 10 monk would do an additional 2d6 damage on a critical hit.
 
 An unarmed monk also receives +1 to damage and hit, per six levels in their monk class. This is considered magical for purposes of bypassing monster weapon resistance and or special abilities.
 

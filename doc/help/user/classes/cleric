@@ -12,17 +12,17 @@
  %^RESET%^L15: leadership
  %^RESET%^Also: one bonus spellcraft feat at L21, and every five class levels thereafter
 
-Clerics are as diverse a class as the pantheon of the realm, united only in their service to their deity. They draw their powers from their god/dessand must serve that patron's cause, or they may lose those powers as they lose favor with the diety. They spend much of their time in prayer and meditation to gain their spells, and to attempt to discern what their god/dess expects of them. Their insight and use of their wisdom grows as they spend their lives learning to understand people and their god/dess' teachings, and apply them to day to day life and furthering their cause,which includes attempting to convert others to their faith.
+Clerics are as diverse a class as the pantheon of the realm, united only in their service to their deity. They draw their powers from their god/dess and must serve that patron's cause, or they may lose those powers as they lose favor with the diety. They spend much of their time in prayer and meditation to gain their spells, and to attempt to discern what their god/dess expects of them. Their insight and use of their wisdom grows as they spend their lives learning to understand people and their god/dess' teachings, and apply them to day to day life and furthering their cause, which includes attempting to convert others to their faith.
 
 Wisdom is of the utmost importance to clerics and only those with the highest wisdom are going to be worthy to cast the highest level spells. It is also recommended that they have a decent constitution. Most are moderately capable in melee combat, but not so much as a trained warrior.
 
-Clerics prepare their spells with the %^ORANGE%^<prepare>%^RESET%^ command. They can cast any spell from their spell list you can see with the %^ORANGE%^<spells cleric>%^RESET%^ command. To cast they use the %^ORANGE%^<cast>%^RESET%^ command. They expend prepared spells from memory when they cast. They can see currently prepared spells with %^ORANGE%^<recall cleric spells>%^RESET%^.
+Clerics prepare their spells with the %^ORANGE%^<prepare>%^RESET%^ command. The %^ORANGE%^<spells cleric>%^RESET%^ command will show you every spell available to clerics. To cast they use the %^ORANGE%^<cast>%^RESET%^ command. Casting a spell will expend it from their memory. They can see currently prepared spells with %^ORANGE%^<recall cleric spells>%^RESET%^.
 
-Clerics of good and neutral alignments may also spontaneously cast any prepared spell as a healing spell of the same level. Neutral and evil clerics may do likewise, but cast such spells spontaneously as damaging equivalents instead. To learn how to do it refer to %^ORANGE%^<help cast>%^RESET%^.
+Clerics of good and neutral alignments may also spontaneously cast any prepared spell as a healing spell of the same level. Neutral and evil clerics may do likewise, but they will cast such spells spontaneously as damaging equivalents instead. To learn how to do it refer to %^ORANGE%^<help cast>%^RESET%^.
 
-Clerics can pick a spell domain from list of their deity at any church to learn additional spells.
+Clerics can pick any spell domain available to their deity to learn additional spells. This must be done at a church.
 
-Clerics are versatile, they can choose both melee and spellcasting paths. Clerics can cast in any armor, but they must not wield while doing so as their casting relies on gestures and spelling.
+Clerics are versatile, they can choose both melee and spellcasting paths. Clerics can cast in any armor, but they must not wield while doing so as their casting relies on gestures and speaking.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, domains, deities, prestige classes
 

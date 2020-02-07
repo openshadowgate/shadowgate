@@ -16,11 +16,11 @@
 
 Mages are people who have devoted their lives to learning magic for the same reasons that motivate most people on a day-to-day basis: material gain, power, or merely the pure "fun" of the use of magic. Mages are highly protective of the "art" and guard their knowledge jealously. They spend years studying and will expect apprentices to do the same. They will also be very careful to insure that magic doesn't fall into the "wrong" hands.
 
-Mages are pure caster class, they are quite complicated and are hard to master.
+Mages are a pure caster class. They are quite complicated and are hard to master.
 
-The spellbook is main instrument mage uses. A mage can %^ORANGE%^<transcribe>%^RESET%^ some of the found scrolls into spellbook. Then mage can %^ORANGE%^<prepare>%^RESET%^ that spell to commit it into memory. A mage can view already prepared spells with %^ORANGE%^<recall mage spells>%^RESET%^ command. When mage uses %^ORANGE%^<cast>%^RESET%^, she expends prepared spell. A mage can %^ORANGE%^<forget>%^RESET%^ already prepared spell to free a spell slot for another spell. Varius abilities you learn, like scribe and enchant, expand spell number availabe to you to cast. They base their casting and slot bonuses on the intelligence score.
+The spellbook is the main instrument a mage uses. A mage can %^ORANGE%^<transcribe>%^RESET%^ scrolls into their spellbook, and then %^ORANGE%^<prepare>%^RESET%^ that spell to commit it into their memory. A mage can view already prepared spells with the %^ORANGE%^<recall mage spells>%^RESET%^ command. When a mage uses %^ORANGE%^<cast>%^RESET%^, she expends the prepared spell. A mage can %^ORANGE%^<forget>%^RESET%^ an already prepared spell to free a spell slot for another spell. Various abilities you learn, like scribe and enchant, can expand the amount of spells availabe for you to cast. They base their casting and slot bonuses on their intelligence stat.
 
-Spellbook offers additional inerface to your spells. Refer to %^ORANGE%^<help spelbook>%^RESET%^ when you hold one.
+A spellbook offers an additional interface to your spells. Refer to %^ORANGE%^<help spellbook>%^RESET%^ when you hold one.
 
 Mages are able to %^ORANGE%^<master>%^RESET%^ one spell every two levels. Such spells are automatically added to their spellbook.
 
