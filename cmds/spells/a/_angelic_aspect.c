@@ -62,7 +62,7 @@ string query_cast_string()
 void spell_effect()
 {
 
-    int align = caster->query_alignment();
+    int align = caster->query_true_align();
 
     ashort = "%^RESET%^%^ORANGE%^ (%^WHITE%^%^BOLD%^tr%^ORANGE%^a%^WHITE%^iled by fe%^RESET%^%^ORANGE%^a%^BOLD%^th%^RESET%^e%^ORANGE%^r%^BOLD%^%^WHITE%^ed w%^RESET%^i%^ORANGE%^n%^BOLD%^%^WHITE%^g%^ORANGE%^s%^RESET%^%^ORANGE%^)";
 
