@@ -73,7 +73,8 @@ void obsolete_feat(object ob) {
         "blade block","unassailable parry","greater two weapon fighting","two weapon defense","calm","rapid shot",
         "wild shape dragon","hardenedminions","slippery caster","thick skinned caster","wild shape wolf",
         "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer",
-        "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials","fated" });
+        "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials","fated",
+        "savage instincts iii" });
         //"persistent rage","unyielding rage"
 
     for(i=0;i<sizeof(obsolete);i++) {
@@ -338,6 +339,13 @@ void obsolete_feat(object ob) {
             ob->set("free_feats",1);
             tell_object(ob,"%^BOLD%^%^MAGENTA%^Your feat %^CYAN%^eschew materials%^MAGENTA%^ has been refunded.%^RESET%^");
             break;
+
+        case "savage instincts iii":
+            remove_my_feat(ob,"savage instincts iii",1);
+            ob->set("free_feats",1);
+            tell_object(ob,"%^BOLD%^%^MAGENTA%^Your feat %^CYAN%^savage instincts iii%^MAGENTA%^ has been refunded.%^RESET%^");
+            break;
+
         case "archmage":
         case "body cognition":
         case "chronicler":
