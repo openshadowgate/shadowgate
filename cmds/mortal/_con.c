@@ -8,6 +8,7 @@
 //  *Styx*  11/26/02
 
 #include <std.h>
+#include <daemons.h>
 
 inherit DAEMON;
 
@@ -18,8 +19,8 @@ int help();
 
 int cmd_con(string str)
 {
-    object ob;
-    int x, y, z;
+    object ob, *theparty, *presentparty;
+    int i, x, y, z;
     string sub, check, pre;
 
     if(TP->query_blind())
@@ -27,11 +28,32 @@ int cmd_con(string str)
         return notify_fail("You are blind you can't inspect your opponents condition.\n");
     }
 
+    if(str == "party") {
+        string output = "";
+        string partyname = "";
+        partyname += (string)TP->query_party();
+        if(partyname == "") return notify_fail("You are not in a party!\n");
+
+        theparty = (object *)PARTY_D->query_party_members(partyname);
+        if(!sizeof(theparty)) return notify_fail("Your party has no members!\n");        
+
+        presentparty = ({});
+        for(i = 0;i<sizeof(theparty);i++) {
+            if(objectp(present(theparty[i],environment(TP))) & theparty[i] != TP) presentparty += ({ theparty[i] });
+        }
+        if(!sizeof(presentparty)) return notify_fail("No-one here but you!\n"); 
+
+        for (i = 0; i < sizeof(presentparty);i++) {
+            output+="%^BOLD%^%^RED%^"+sprintf("%2d",i+1)+":%^RESET%^ "+obj_cond(presentparty[i])+"\n";
+        }
+        write(output);
+        return 1;
+    }
+
     if(!str||regexp(str,"[0-9]+"))
     {
         string output = "";
         object * attackers = TP->query_attackers();
-        int i;
         int param;
         param = atoi(str);
 
@@ -141,10 +163,13 @@ con - check out condition of a being
 %^CYAN%^SYNTAX%^RESET%^
 
 con %^ORANGE%^[%^ULINE%^BEING%^RESET%^%^ORANGE%^]
+con party
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command will give you a general indication of a monster or PC's health, or lack thereof in human readable form.
+
+Use <con party> to check your allies.
 
 Without an argument it will give you condition of all attackers.
 
