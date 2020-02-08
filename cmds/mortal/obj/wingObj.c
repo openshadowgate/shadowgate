@@ -19,6 +19,7 @@ string * RAND_CLRS = ({"%^BLUE%^%^BOLD%^","%^BOLD%^%^WHITE%^","%^WHITE%^","%^BLU
 string FLIGHT_ROOM = "/std/flying_room.c";
 object flyee;
 string destination;
+object destobj;
 object flroom;
 int step;
 
@@ -34,9 +35,15 @@ void setup(object thingy, string dest)
 {
     flyee = thingy;
     destination = dest;
+    destobj = find_object_or_load(dest);
+
+    if (!objectp(destobj)) {
+        tell_object(thingy,"%^BOLD%^You stumple in confusion. Something wend wrong and you didn't take off.");
+        TO->remove();
+    }
+
     step = 0;
     flroom = new(FLIGHT_ROOM);
-
     thingy->move(flroom);
     TO->move(thingy);
     flystep();
@@ -44,43 +51,44 @@ void setup(object thingy, string dest)
 
 void flystep()
 {
-    if(!objectp(flyee))
-    {
+    if (!objectp(flyee)) {
         TO->remove();
         return;
     }
-    if(!objectp(flroom))
-    {
-        TO->remove();
-        return;
-    }
-    if(!objectp(destination))
-        find_object_or_load(destination);
 
-    if(step==0)
+    if (!objectp(flroom)) {
+        TO->remove();
+        return;
+    }
+
+    if (!objectp(destobj)) {
+        destobj = find_object_or_load(destination);
+    }
+
+    if (step == 0) {
         flroom->change_stage("initial climb");
-    else if(step == 4)
+    } else if (step == 4) {
         flroom->change_stage("climbing");
-    else if(step == 8)
+    } else if (step == 8) {
         flroom->change_stage("soaring");
-    else if(step == 24)
+    } else if (step == 18) {
         flroom->change_stage("landing");
-    else if(step == 28)
+    } else if (step == 24) {
         flroom->change_stage("final landing");
-    else if(step > 32)
-    {
-        tell_room(destination,"%^BOLD%^%^WHITE%^"+flyee->QCN+" descends into the area from the sky.%^RESET%^");
-        flyee->move(destination);
+    } else if (step > 30) {
+        tell_room(destobj, "%^BOLD%^%^WHITE%^" + flyee->QCN + " descends into the area from the sky.%^RESET%^");
+        flyee->move(destobj);
         flyee->force_me("look");
-        tell_object(flyee,"%^BOLD%^%^WHITE%^You have arrived at your destination.%^RESET%^");
+        tell_object(flyee, "%^BOLD%^%^WHITE%^You have arrived at your destination.%^RESET%^");
         TO->remove();
         return;
     }
 
-    tell_object(flyee,RAND_CLRS[random(sizeof(RAND_CLRS))]+RAND_MSG[random(sizeof(RAND_MSG))]+"%^RESET%^");
-    if(step>24)
-        tell_room(destination,"%^BOLD%^%^BLACK%^You see a shadow of something descending to the ground.%^RESET%^");
+    tell_object(flyee, RAND_CLRS[random(sizeof(RAND_CLRS))] + RAND_MSG[random(sizeof(RAND_MSG))] + "%^RESET%^");
+    if (step > 18) {
+        tell_room(destination, "%^BOLD%^%^BLACK%^You see a shadow of something descending to the ground.%^RESET%^");
+    }
 
     step++;
-    call_out("flystep",2);
+    call_out("flystep", 2);
 }

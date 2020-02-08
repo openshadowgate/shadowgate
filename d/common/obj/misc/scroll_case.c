@@ -8,18 +8,11 @@ void create()
     set_id( ({"scroll case", "case"}) );
     set_name("scroll case");
     set_short("A worn scroll case");
-    set_weight(5);
-    set_long("This aged leather tube has been hardened by boiling then oiled to "
-        "protect against the elements. There is a soft leather cap on one end "
-        "that can be closed to prevent moisture from getting inside. This scroll "
-        "case could hold scrolls, paper, parchment, or any other paper like "
-        "items that could be rolled up to fit inside.");
+    set_weight(4);
+    set_long("This is a wooden scroll case you can put scrolls into.");
     set_value(100);
     set_cointype("gold");
-    set_max_internal_encumbrance(75);
-    set_open_long( ""+TO->query_long()+"%^CYAN%^The cap is open.\n%^RESET%^");
-    set_closed_long( ""+TO->query_long()+"%^CYAN%^The cap is closed.\n%^RESET%^");
-    set_possible_to_close(1);
+    set_max_internal_encumbrance(65);
 }
 
 int item_allowed(object item)
