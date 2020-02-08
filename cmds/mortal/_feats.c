@@ -826,13 +826,22 @@ int cmd_feats(string str){
 
 // hybrid feat allocation here
         BONUS_ALLOWED = 0;
-        for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],MELEECLASSES) != -1) continue;
-          if(member_array(subset[i],CASTERCLASSES) != -1) continue;
-          if(subset[i] == "psywarrior") j = ((int)TP->query_class_level(subset[i]) / 5); // psywarriors get 1 free hybrid feat per 7 levels
-          else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
-          if(j < 0) j = 0;
-          BONUS_ALLOWED += j;
+        for (i = 0; i < sizeof(subset); i++) {
+            if (member_array(subset[i], MELEECLASSES) != -1) {
+                continue;
+            }
+            if (member_array(subset[i], CASTERCLASSES) != -1) {
+                continue;
+            }
+            if (subset[i] == "psywarrior") {
+                j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
+            } else {
+                j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
+            }
+            if (j < 0) {
+                j = 0;
+            }
+            BONUS_ALLOWED += j;
         }
         num_bonus   = (int)TP->query_hybrid_feats_gained();
         bonus       = BONUS_ALLOWED - num_bonus;
@@ -1277,14 +1286,24 @@ int cmd_feats(string str){
         }
 
         BONUS_ALLOWED = 0;
-        for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],MELEECLASSES) != -1) continue;
-          if(member_array(subset[i],CASTERCLASSES) != -1) continue;
-          if(subset[i] == "psywarrior") j = ((int)TP->query_class_level(subset[i]) / 5); // psywarriors get 1 free hybrid feat per 7 levels
-          else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
-          if(j < 0) j = 0;
-          BONUS_ALLOWED += j;
+        for (i = 0; i < sizeof(subset); i++) {
+            if (member_array(subset[i], MELEECLASSES) != -1) {
+                continue;
+            }
+            if (member_array(subset[i], CASTERCLASSES) != -1) {
+                continue;
+            }
+            if (subset[i] == "psywarrior") {
+                j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
+            } else {
+                j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
+            }
+            if (j < 0) {
+                j = 0;
+            }
+            BONUS_ALLOWED += j;
         }
+
         num_bonus     = (int)TP->query_hybrid_feats_gained();
         if(num_bonus >= BONUS_ALLOWED)
         {

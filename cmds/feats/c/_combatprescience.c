@@ -13,7 +13,7 @@ void create()
     feat_type("instant");
     feat_category("Psionics");
     feat_name("combatprescience");
-    feat_prereq("Psywarrior L11");
+    feat_prereq("Psywarrior L1");
     feat_syntax("combatprescience");
     feat_desc("This feat allows the psywarrior to use her mental prowess to gain insight into battle, granting her bonuses to attack and damage rolls and giving her a chance to slip in extra attacks. The feat grows in both strength and opportunities for extra attacks as the psywarrior gains levels and intelligence.");
     set_target_required(0);
@@ -29,7 +29,7 @@ int allow_shifted() { return 0; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if(ob->query_class_level("psywarrior") < 11)
+    if(ob->query_class_level("psywarrior") < 1)
     {
         dest_effect();
         return 0;

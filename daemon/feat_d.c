@@ -473,28 +473,46 @@ int can_gain_magic_feat(object ob,string feat)
     return 1;
 }
 
-int can_gain_hybrid_feat(object ob,string feat){
+int can_gain_hybrid_feat(object ob, string feat)
+{
     int MAX_ALLOWED, i, total;
-    string type, *myclasses, currentlvl;
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(feat)) { return 0; }
-    if(has_feat(ob,feat)) { return 0; }
-    if(!meets_requirements(ob,feat)) { return 0; }
+    string type, * myclasses, currentlvl;
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!stringp(feat)) {
+        return 0;
+    }
+    if (has_feat(ob, feat)) {
+        return 0;
+    }
+    if (!meets_requirements(ob, feat)) {
+        return 0;
+    }
     myclasses = ob->query_classes();
-    if(!sizeof(myclasses)) return 0;
+    if (!sizeof(myclasses)) {
+        return 0;
+    }
     MAX_ALLOWED = 0;
-    for(i=0;i<sizeof(myclasses);i++) {
-      if(member_array(myclasses[i],HYBRID) == -1) continue;
-      if (myclasses[i] == "psywarrior") {
-          currentlvl = ((int)ob->query_class_level(myclasses[i]) / 3);
-      }
-      else currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
-      if(currentlvl < 0) currentlvl = 0;
-      MAX_ALLOWED += currentlvl;
+    for (i = 0; i < sizeof(myclasses); i++) {
+        if (member_array(myclasses[i], HYBRID) == -1) {
+            continue;
+        }
+        if (myclasses[i] == "psywarrior") {
+            currentlvl = ((int)ob->query_class_level(myclasses[i]) / 3) + 1;
+        }else {
+            currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
+        }
+        if (currentlvl < 0) {
+            currentlvl = 0;
+        }
+        MAX_ALLOWED += currentlvl;
     }
     total = 0;
     total += (int)ob->query_hybrid_feats_gained();
-    if(total >= MAX_ALLOWED) { return 0; }
+    if (total >= MAX_ALLOWED) {
+        return 0;
+    }
     return 1;
 }
 
