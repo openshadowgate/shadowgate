@@ -17,9 +17,9 @@ string query_cast_string(){
 void create(){
     ::create();
     set_spell_name("unholy orb");
-    set_spell_level(([ "classless" : 5 ]));
+    set_spell_level(([ "cleric" : 6 ]));
     set_spell_sphere("combat");
-    set_spell_domain("evil");
+    set_domains("evil");
     set_syntax("cast CLASS unholy orb");
     set_description("The orb is a spell normally prepared by a priest who expects to encounter enemies whose alignment "
 "opposes her own.  When cast, the spell streaks from the caster's hand to the desired point of effect, where a sphere "

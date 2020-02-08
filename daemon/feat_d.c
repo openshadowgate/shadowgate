@@ -73,7 +73,7 @@ void obsolete_feat(object ob) {
         "blade block","unassailable parry","greater two weapon fighting","two weapon defense","calm","rapid shot",
         "wild shape dragon","hardenedminions","slippery caster","thick skinned caster","wild shape wolf",
         "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer",
-                "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials" });
+        "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials","fated" });
         //"persistent rage","unyielding rage"
 
     for(i=0;i<sizeof(obsolete);i++) {

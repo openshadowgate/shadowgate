@@ -83,7 +83,7 @@ int caster_level_calcs(object player, string the_class)
 
 mapping class_featmap(string myspec)
 {
-    return ([ 1 : ({ "fated" }), 4 : ({ "timeweaver" }), 7 : ({ "temporal displacement" }), ]);
+    return ([ 1 : ({ "remember the future" }), 4 : ({ "timeweaver" }), 7 : ({ "temporal displacement" }), ]);
 }
 
 string *class_skills()

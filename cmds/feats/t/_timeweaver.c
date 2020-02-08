@@ -17,7 +17,7 @@ doom, sands of time, spiritual ally, foresight, timeless body, timestop");
     set_required_for(({"temporal displacement"}));
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {

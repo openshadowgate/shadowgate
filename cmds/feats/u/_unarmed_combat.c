@@ -8,7 +8,9 @@ void create() {
     feat_category("UnarmedCombat");
     feat_name("unarmed combat");
     feat_prereq("Dexterity 15 or Strength 15, Not Monk");
-    feat_desc("This feat represents a better than average ability to fight without a weapon. A character that takes this feat will do 1d6 base damage through level 20 when fighting unarmed, this increases to 1d8 from level 21 to 30, and to 1d10 after level 30. A monk, by default uses a higher damage table and cannot take this feat.");
+    feat_desc("This feat represents a better than average ability to fight without a weapon. A character that takes this feat will do 1d6 base damage through level 20 when fighting unarmed, this increases to 1d8 from level 21 to 30, and to 1d10 after level 30. A monk, by default uses a higher damage table and cannot take this feat.
+
+NOTE: this feat does not apply to shapeshift forms, which have their own base damage table for natural weapons where appropriate.");
     permanent(1);
     set_required_for(({"spinning kick", "rapid strikes","improved rapid strikes","unarmed parry"}));
 }

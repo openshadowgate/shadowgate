@@ -8,15 +8,14 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("Chronicler");
-    feat_name("fated");
+    feat_name("remember the future");
     feat_prereq("Chronicler L1");
-    feat_desc("A chronicler learns fragments of his or her own story to  come, granting immunity to death spells and effects.");
+    feat_desc("A chronicler starts out by learning to see the past and future, before later learning to manipulate it. They gain the ability to see, and thereby avoid, stabs from rogues of the same level or less.");
     permanent(1);
     set_required_for(({"timeweaver"}));
-    set_obsolete(1);
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {
