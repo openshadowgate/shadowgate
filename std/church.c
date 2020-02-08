@@ -206,15 +206,22 @@ int pray()
         exploss = expdelta * thelevel / 89;
         log_file("deathlexp", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
-        if (exp > EXP_NEEDED[thelevel + 1]) {
-            exploss *= 2;
-        }
-
         if (TP->query("hardcore")) {
             TP->set_general_exp(myclass, EXP_NEEDED[6]);
+        } else if (TP->query("pk_trial")) {
+            if (thelevel > 11) {
+                TP->set_general_exp(myclass, EXP_NEEDED[((thelevel - 1) / 10) * 10]);
+            }
+            TP->delete("pk_tial");
+        } else {
+            if (exp > EXP_NEEDED[thelevel + 1]) {
+                exploss *= 2;
+            }
+            if (exp - exploss <= EXP_NEEDED[6]) {
+                exploss = exp - EXP_NEEDED[6];
+            }
+            TP->set_general_exp(myclass, exp - exploss);
         }
-
-        TP->set_general_exp(myclass, exp - exploss);
 
         TP->resetLevelForExp(0);
 
