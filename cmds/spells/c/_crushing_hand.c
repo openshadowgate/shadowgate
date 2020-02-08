@@ -14,13 +14,11 @@ void create(){
     ::create();
     set_author("circe");
     set_spell_name("crushing hand");
-    set_spell_level(([ "cleric" : 8 ]));
-    set_spell_sphere("combat");
-    set_spell_domain("strength");
+    set_spell_level(([ "cleric" : 9 ]));
+    set_spell_sphere("invocation_evocation");
+    set_domains("strength");
     set_syntax("cast CLASS crushing hand");
-    set_description("This spell will call forth a crushing hand to help defend the caster as well as lend its strength to "
-"the battles the caster may face.  While the hand is under the caster's control, he may <command hand to [action]> or "
-"<dismiss> the crushing hand if it is no longer needed.");
+    set_description("This spell will call forth a crushing hand to help defend the caster as well as lend its strength to the battles the caster may face.  While the hand is under the caster's control, he may <command hand to [action]> or <dismiss> the crushing hand if it is no longer needed.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
@@ -95,7 +93,7 @@ int hd,hp,strength;
    strength = strength + 8;
    device->set_elemental(elem);
    device->set_caster(caster);
-   caster->add_follower(elem);   
+   caster->add_follower(elem);
    device->move(caster);
    device->set_property("spell",TO);
    device->set_property("spelled",({TO}));

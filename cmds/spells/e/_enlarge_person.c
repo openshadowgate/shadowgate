@@ -9,8 +9,9 @@ void create()
 {
     ::create();
     set_spell_name("enlarge person");
-    set_spell_level(([ "mage" : 1, "oracle" : 1 ]));
+    set_spell_level(([ "mage" : 1, "oracle" : 1, "cleric":1]));
     set_spell_sphere("alteration");
+    set_domains("strength");
     set_mystery("battle");
     set_syntax("cast CLASS enlarge person [on TARGET]");
     set_description("When this spell is cast, the humanoid caster will grow twice in size. This spell will turn halflings into humans, humans into firbolgs, and firbolgs into mountains.

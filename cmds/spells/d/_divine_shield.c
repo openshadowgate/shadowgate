@@ -9,9 +9,8 @@ void create() {
     ::create();
     set_author("cythera");
     set_spell_name("divine shield");
-    set_spell_level((["cleric" : 2, "paladin" : 2 ]));
+    set_spell_level(([ "paladin" : 2 ]));
     set_spell_sphere("conjuration_summoning");
-    set_spell_domain("protection");
     set_syntax("cast CLASS divine shield");
     set_description("Calling out for protection against the forces that the caster must battle, this prayer creates a "
 "divine shield that will offer protection to the priest, helping him to defend himself.\n\n*NOTE*\nEach shield will have "

@@ -10,7 +10,7 @@ int bonus;
 void create(){
     ::create();
     set_spell_name("resilience");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("combat");
     set_spell_domain("strength");
     set_syntax("cast CLASS resilience");
