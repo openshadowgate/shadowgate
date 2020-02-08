@@ -10,7 +10,7 @@ void cmd_prompt(string str){
         write("Prompt reset.");
         return 1;
     }
-    if (sizeof(str) > 500) {
+    if (sizeof(str) > 1024) {
         tell_object(TP,"Your prompt is too long!");
         return 1;
     }
