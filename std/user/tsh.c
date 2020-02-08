@@ -105,13 +105,16 @@ string write_prompt()
         path = (string)this_player()->get_path();
         tmp = user_path((string)this_player()->query_name());
         tmp = tmp[0 .. strlen(tmp)-2];
-        if(stringp(path) && sscanf(path, "/realms/%s", tmp) == 1)
+        if (stringp(path) && sscanf(path, "/realms/%s", tmp) == 1) {
             path = "~" + tmp;
-        if(!stringp(path)) path = ">";
+        }
+        if (!stringp(path)) {
+            path = ">";
+        }
         if (avatarp(this_player())) {
-            am_invis=(!this_player()->query_true_invis())?".":"T";
-            am_invis+=(!this_player()->query_magic_hidden())?".":"M";
-            am_invis+=(!this_player()->query_hidden())?".":"S";
+            am_invis = (!this_player()->query_true_invis()) ? "." : "T";
+            am_invis += (!this_player()->query_magic_hidden()) ? "." : "M";
+            am_invis += (!this_player()->query_hidden()) ? "." : "S";
         }
         shape = TP->query_property("shapeshifted");
         {
@@ -123,47 +126,40 @@ string write_prompt()
                 expperc = (query_exp()-expcurlvl)*100/(expnextlvl-expcurlvl);
             }
         }
-        if(objectp(shape)) { shape_race = (string)shape->query_shape_race(); }
-        if(shape_race)
-        {
-            prompt = replace_string(prompt, "$f", shape_race );
+        if (objectp(shape)) {
+            shape_race = (string)shape->query_shape_race();
         }
-        else
-        {
-            prompt = replace_string(prompt, "$f", "" );
+        if (shape_race) {
+            prompt = replace_string(prompt, "$f", shape_race);
+        }else {
+            prompt = replace_string(prompt, "$f", "");
         }
         rage = (int)TP->query_property("raged");
-        if(rage)
-        {
-            prompt = replace_string(prompt, "$r", "Enraged" );
+        if (rage) {
+            prompt = replace_string(prompt, "$r", "Enraged");
+        }else {
+            prompt = replace_string(prompt, "$r", "");
         }
-        else
-        {
-            prompt = replace_string(prompt, "$r", "" );
-        }
-        if((int)TP->query("maximum ki"))
-        {
-            prompt = replace_string(prompt, "$k", ""+(int)TP->query("available ki"));
-            prompt = replace_string(prompt, "$K", ""+(int)TP->query("maximum ki"));
-        }
-        else
-        {
+        if ((int)TP->query("maximum ki")) {
+            prompt = replace_string(prompt, "$k", "" + (int)TP->query("available ki"));
+            prompt = replace_string(prompt, "$K", "" + (int)TP->query("maximum ki"));
+        }else {
             prompt = replace_string(prompt, "$k", "");
             prompt = replace_string(prompt, "$K", "");
         }
-        if((int)TP->query_mp()){
+        if ((int)TP->query_mp()) {
             prompt = replace_string(prompt, "$p",
-                                     "" + (int)this_player()-> query_mp() );
-        }else{
+                                    "" + (int)this_player()->query_mp());
+        }else {
             prompt = replace_string(prompt, "$p",
-                                     "0");
+                                    "0");
         }
-        if((int)TP->query_max_mp()){
+        if ((int)TP->query_max_mp()) {
             prompt = replace_string(prompt, "$P",
-                                     "" + (int)this_player()-> query_max_mp() );
-        }else{
+                                    "" + (int)this_player()->query_max_mp());
+        }else {
             prompt = replace_string(prompt, "$P",
-                                     "0");
+                                    "0");
         }
         prompt = replace_string(prompt, "$D", path );
         prompt = replace_string(prompt, "$h",
@@ -185,10 +181,14 @@ string write_prompt()
         prompt = replace_string(prompt, "$t", ""+sprintf("%2d",hour(time()))+":"+sprintf("%.2d",minutes(time())));
         prompt = replace_string(prompt, "$B", ""+bloodlust2string(this_player()));
         prompt = replace_string(prompt, "$e", ""+expperc);
-        if(stringp(this_object()->query("warlock_blast_type"))) prompt = replace_string(prompt, "$E", ""+this_object()->query("warlock_blast_type")+"");
-        else prompt = replace_string(prompt, "$E", "No Essence");
-        if (avatarp(this_player()))
+        if (stringp(this_object()->query("warlock_blast_type"))) {
+            prompt = replace_string(prompt, "$E", "" + this_object()->query("warlock_blast_type") + "");
+        } else {
+            prompt = replace_string(prompt, "$E", "No Essence");
+        }
+        if (avatarp(this_player())) {
             prompt = replace_string(prompt, "$I", am_invis);
+        }
         prompt += " ";
     } else {
         prompt = DEFAULT_PROMPT;

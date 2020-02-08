@@ -10,12 +10,12 @@ void create()
     feat_category("UnarmedCombat");
     feat_name("improved rapid strikes");
     feat_prereq("Rapid strikes");
-    feat_desc("Improved Rapid Strikes is a passive feat that gives extra unarmed or natural attacks.");
+    feat_desc("Improved Rapid Strikes is a passive feat that gives extra unarmed.");
     permanent(1);
     set_required_for(({"unarmed parry","precise strikes"}));
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted() { return 0; }
 
 int prerequisites(object ob)
 {

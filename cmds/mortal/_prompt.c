@@ -10,6 +10,11 @@ void cmd_prompt(string str){
         write("Prompt reset.");
         return 1;
     }
+    if (sizeof(str) > 500) {
+        tell_object(TP,"Your prompt is too long!");
+        return 1;
+    }
+
     TP->setenv("prompt", str);
     TP->initialize();
     write("Prompt changed.");
