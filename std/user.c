@@ -1780,7 +1780,7 @@ void heart_beat()
     if(objectp(TO))
     {
 
-        if(FEATS_D->usable_feat(TO,"mighty resilience") &&
+        if((FEATS_D->usable_feat(TO,"mighty resilience") || FEATS_D->usable_feat(TO,"remember the future")) &&
            !TO->query_property("stab_resilience"))
         {
             TO->set_property("stab_resilience",(TO->query_level()+9)/10);

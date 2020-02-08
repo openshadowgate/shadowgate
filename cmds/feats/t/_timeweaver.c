@@ -10,7 +10,9 @@ void create()
     feat_category("Chronicler");
     feat_name("timeweaver");
     feat_prereq("Chronicler L4");
-    feat_desc("A chronicler can manipulate time in a limited capacity. The spells timestop and foresight are added to his or her spell list.");
+    feat_desc("A chronicler extends their aptitude in manipulating the past and the future. They gain the use of several new spells:
+
+doom, sands of time, spiritual ally, foresight, timeless body, timestop");
     permanent(1);
     set_required_for(({"temporal displacement"}));
 }

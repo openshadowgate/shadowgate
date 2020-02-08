@@ -10,7 +10,7 @@ int amount;
 void create() {
     ::create();
     set_spell_name("spiritual ally");
-    set_spell_level(([ "oracle":4,"cleric":4 ]));
+    set_spell_level(([ "oracle":4,"cleric":4,"bard":3 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS spiritual ally");
     set_mystery("ancestor");
@@ -23,6 +23,7 @@ To force lost ally to follow use %^ORANGE%^<command ally to follow>%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
+    set_feats_required(([ "bard" : "timeweaver" ]));
 }
 
 int preSpell(){
