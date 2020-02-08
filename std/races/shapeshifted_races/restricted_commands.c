@@ -158,7 +158,7 @@ int allow_shifted_command(object player,string verb,string command)
         case "whisper":
         case "speak":
 
-            if(!FEATS_D->usable_feat(player,"wild speech")) { return 0; }
+            if(!shape->can_talk() && !FEATS_D->usable_feat(player,"wild speech")) { return 0; }
             break;
 
         case "get": // also a check in /std/bag_logic.c

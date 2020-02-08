@@ -402,31 +402,34 @@ mixed query_property(string prop)
 
     if (prop == "empowered") {
         if (FEATS_D->usable_feat(TO, "mind wave")) {
-            num += 1;
+            num += 2;
         }
 // rearranging this so it only runs through the query chain once; cuts down on recursion. N, 5/15.
-        if (FEATS_D->usable_feat(TO, "greater spell power"))
-            num += 6;
-        else {
-            if (FEATS_D->usable_feat(TO, "improved spell power"))
-                num += 4;
-            else {
-                if (FEATS_D->usable_feat(TO, "spell power"))
-                    num += 2;
+        if (FEATS_D->usable_feat(TO, "greater spell power")) {
+            num += 5;
+        } else {
+            if (FEATS_D->usable_feat(TO, "improved spell power")) {
+                num += 3;
+            } else {
+                if (FEATS_D->usable_feat(TO, "spell power")) {
+                    num += 1;
+                }
             }
         }
-        if ((string) TO->query_race() == "human") {
-            subrace = (string) TO->query("subrace");
+        if ((string)TO->query_race() == "human") {
+            subrace = (string)TO->query("subrace");
             if (subrace) {
-                if (strsrch(subrace, "genasi") != -1)
+                if (strsrch(subrace, "genasi") != -1) {
                     num += 1;
+                }
             }
         }
-        if ((string) TO->query_race() == "elf") {
-            subrace = (string) TO->query("subrace");
+        if ((string)TO->query_race() == "elf") {
+            subrace = (string)TO->query("subrace");
             if (subrace) {
-                if (subrace == "aquatic elf")
+                if (subrace == "aquatic elf") {
                     num += 1;
+                }
             }
         }
         num += props[prop];
@@ -435,111 +438,145 @@ mixed query_property(string prop)
 // tweaking a few bonuses here with feats overhaul. Nienne, 03/10
 // basic DR from 3 to 2; spell pen changed from 10/20 to 15/15 to match MR
 
-    if(prop == "spell penetration")
-    {
-        if(FEATS_D->usable_feat(TO,"spell penetration"))         { num += 15; }
-        if(FEATS_D->usable_feat(TO,"greater spell penetration")) { num += 15; }
+    if (prop == "spell penetration") {
+        if (FEATS_D->usable_feat(TO, "spell penetration")) {
+            num += 15;
+        }
+        if (FEATS_D->usable_feat(TO, "greater spell penetration")) {
+            num += 15;
+        }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "spell penetration"));
     }
 
-    if(prop == "fast healing")
-    {
-        if(TO->is_vampire())
-            if(!TO->is_in_sunlight())
-            {
-                int blst = (20000-(int)TO->query_bloodlust())/2000-1;
-                num = props[prop]+5;
-                num -= blst<0?0:blst;
-                return num<0?0:num;
+    if (prop == "fast healing") {
+        if (TO->is_vampire()) {
+            if (!TO->is_in_sunlight()) {
+                int blst = (20000 - (int)TO->query_bloodlust()) / 2000 - 1;
+                num = props[prop] + 5;
+                num -= blst < 0 ? 0 : blst;
+                return num < 0 ? 0 : num;
             }
+        }
     }
 
-    if(prop == "spell dcs") { // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
-        if(FEATS_D->usable_feat(TO,"spell focus"))         { num += 2; }
+// we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
+    if (prop == "spell dcs") {
+        if (FEATS_D->usable_feat(TO, "spell focus")) {
+            num += 2;
+        }
         num += props["empowered"];
         return (num + EQ_D->gear_bonus(TO, "caster level"));
     }
 
-    if(prop == "damage resistance")
-    {
-
-        if(FEATS_D->usable_feat(TO,"undead graft"))
+    if (prop == "damage resistance") {
+        if (FEATS_D->usable_feat(TO, "undead graft")) {
             num += 8;
-        if(FEATS_D->usable_feat(TO,"shadow master"))
-            if(ETO->query_light()<1)
+        }
+        if (FEATS_D->usable_feat(TO, "shadow master")) {
+            if (ETO->query_light() < 1) {
                 num += 12;
-        if(FEATS_D->usable_feat(TO,"damage resistance"))
+            }
+        }
+        if (FEATS_D->usable_feat(TO, "damage resistance")) {
             num += 2;
-        if(FEATS_D->usable_feat(TO,"damage reduction"))
-            num += (query_guild_level("barbarian") - 10)/3;
-        if(FEATS_D->usable_feat(TO,"improved damage resistance"))
+        }
+        if (FEATS_D->usable_feat(TO, "damage reduction")) {
+            num += (query_guild_level("barbarian") - 10) / 3;
+        }
+        if (FEATS_D->usable_feat(TO, "improved damage resistance")) {
             num += 3;
-        if(TO->query_race() == "elf")
-        {
+        }
+        if (TO->query_race() == "elf") {
             subrace = (string)TO->query("subrace");
-            if(subrace == "fey'ri")
+            if (subrace == "fey'ri") {
                 num += 5;
+            }
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "damage resistance"));
     }
 
-    if(prop == "magic resistance")
-    {
-        if(FEATS_D->usable_feat(TO,"improved resistance"))  { num += 15; }
-        if(FEATS_D->usable_feat(TO,"increased resistance")) { num += 15; }
-        if((string)TO->query_race() == "human") {
-          subrace = (string)TO->query("subrace");
-          if(subrace) {
-            if(strsrch(subrace,"genasi") != -1) num += 10; // +10 MR all genasi
-          }
+    if (prop == "magic resistance") {
+        if (FEATS_D->usable_feat(TO, "improved resistance")) {
+            num += 15;
         }
-        if((string)TO->query_race() == "gnome") {
-          subrace = (string)TO->query("subrace");
-          if(subrace) {
-            if(subrace == "deep gnome" || subrace == "svirfneblin") num += 10;
-          }
+        if (FEATS_D->usable_feat(TO, "increased resistance")) {
+            num += 15;
         }
-        if((string)TO->query_race() == "orc") {
-          subrace = (string)TO->query("subrace");
-          if(subrace) {
-            if(subrace == "orog" || subrace == "tanarukk") num += 10;
-          }
+        if ((string)TO->query_race() == "human") {
+            subrace = (string)TO->query("subrace");
+            if (subrace) {
+                if (strsrch(subrace, "genasi") != -1) {
+                    num += 10;                                 // +10 MR all genasi
+                }
+            }
         }
-        if((string)TO->query_race() == "elf") {
-          subrace = (string)TO->query("subrace");
-          if(subrace) {
-            if(subrace == "fey'ri") num += 10;
-          }
+        if ((string)TO->query_race() == "gnome") {
+            subrace = (string)TO->query("subrace");
+            if (subrace) {
+                if (subrace == "deep gnome" || subrace == "svirfneblin") {
+                    num += 10;
+                }
+            }
         }
-        if((string)TO->query_race() == "shade") num += 10;
-        if((string)TO->query_race() == "deva") num += 10;
-        if((string)TO->query_race() == "yuan-ti") num += 10;
-        if((string)TO->query_race() == "drow" ||
-           (string)TO->query("subrace") == "szarkai" &&
-           !TO->query_property("raised resistance")) {
-          mylevel = (int)TO->query_level()+10;
-          num += mylevel; // drow/shade racial, MR of overall character level +10.
+        if ((string)TO->query_race() == "orc") {
+            subrace = (string)TO->query("subrace");
+            if (subrace) {
+                if (subrace == "orog" || subrace == "tanarukk") {
+                    num += 10;
+                }
+            }
+        }
+        if ((string)TO->query_race() == "elf") {
+            subrace = (string)TO->query("subrace");
+            if (subrace) {
+                if (subrace == "fey'ri") {
+                    num += 10;
+                }
+            }
+        }
+        if ((string)TO->query_race() == "shade") {
+            num += 10;
+        }
+        if ((string)TO->query_race() == "deva") {
+            num += 10;
+        }
+        if ((string)TO->query_race() == "yuan-ti") {
+            num += 10;
+        }
+        if ((string)TO->query_race() == "drow" ||
+            (string)TO->query("subrace") == "szarkai" &&
+            !TO->query_property("raised resistance")) {
+            mylevel = (int)TO->query_level() + 10;
+            num += mylevel;   // drow/shade racial, MR of overall character level +10.
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "magic resistance"));
     }
-    if(prop == "no death")
-    {
-        if(TO->is_undead()) return 1;
-        if(FEATS_D->usable_feat(TO,"death ward")) return 1;
-        if(FEATS_D->usable_feat(TO,"fated")) { return 1; }
-        if(FEATS_D->usable_feat(TO,"earthen blood")) { return 1; }
-    }
-    if(prop == "negative energy affinity")
-    {
-        if(TO->is_undead())
+    if (prop == "no death") {
+        if (TO->is_undead()) {
             return 1;
+        }
+        if (FEATS_D->usable_feat(TO, "death ward")) {
+            return 1;
+        }
+        if (FEATS_D->usable_feat(TO, "fated")) {
+            return 1;
+        }
+        if (FEATS_D->usable_feat(TO, "earthen blood")) {
+            return 1;
+        }
+    }
+    if (prop == "negative energy affinity") {
+        if (TO->is_undead()) {
+            return 1;
+        }
         //Unlike other racial bonuses this one must be valid for all
         //half-races as well.
-        if(TO->query("subrace")=="dhampir")
+        if (TO->query("subrace") == "dhampir") {
             return 1;
+        }
         num += props[prop];
         return num;
     }
@@ -549,56 +586,54 @@ mixed query_property(string prop)
         if(FEATS_D->usable_feat(TO, "tongue of the sun and moon"))
             return 1;
     }
-// spellturning is now handled in spell.c to prevent stacking feats.
-/*    if(prop == "spellturning")
-    {
-        if(FEATS_D->usable_feat(TO,"spell reflection")) { num += 15; }
-        num += props[prop];
-        return num;
-    }*/
 
-    if(prop == "spell damage resistance")
-    {
-        if(TO->is_vampire())
-            if(!TO->is_in_sunlight())
-                num+=10;
-        if((string)TO->query_race() == "human") {
-            subrace = (string)TO->query("subrace");
-            if(subrace) {
-                if(subrace == "maalish") num += 5; // +5 SR for human Maalish ethnicity
+    if (prop == "spell damage resistance") {
+        if (TO->is_vampire()) {
+            if (!TO->is_in_sunlight()) {
+                num += 10;
             }
         }
-        if(FEATS_D->usable_feat(TO,"resistance")) num+= 2;
-        if(FEATS_D->usable_feat(TO, "increased resistance")) num += 4;
-        if(FEATS_D->usable_feat(TO, "improved resistance")) num += 6;
+        if ((string)TO->query_race() == "human") {
+            subrace = (string)TO->query("subrace");
+            if (subrace) {
+                if (subrace == "maalish") {
+                    num += 5;                          // +5 SR for human Maalish ethnicity
+                }
+            }
+        }
+        if (FEATS_D->usable_feat(TO, "resistance")) {
+            num += 4;
+        }
+        if (FEATS_D->usable_feat(TO, "increased resistance")) {
+            num += 6;
+        }
+        if (FEATS_D->usable_feat(TO, "improved resistance")) {
+            num += 8;
+        }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "spell damage resistance"));
     }
 
     //Added this to allow for a temporary enchantment property - Saide
-    if(prop == "enchantment")
-    {
-        if(objectp(ETO) && props[prop] > 0)
-        {
-            if(intp(scaled = TO->query("scaledlevel")) && scaled > 0 && living(ETO))
-            {
+    if (prop == "enchantment") {
+        if (objectp(ETO) && props[prop] > 0) {
+            if (intp(scaled = TO->query("scaledlevel")) && scaled > 0 && living(ETO)) {
                 tmpval = props[prop];
-                tmpval = to_int(to_float(scaled)/to_float(ETO->query_base_character_level()) * tmpval);
-                if(tmpval < 1) tmpval = 0;
-                if(props["temporary enchantment"])
-                {
+                tmpval = to_int(to_float(scaled) / to_float(ETO->query_base_character_level()) * tmpval);
+                if (tmpval < 1) {
+                    tmpval = 0;
+                }
+                if (props["temporary enchantment"]) {
                     return tmpval + props["temporary enchantment"];
                 }
                 return tmpval;
             }
         }
-        if(props["temporary enchantment"])
-        {
+        if (props["temporary enchantment"]) {
             return props[prop] + props["temporary enchantment"];
         }
     }
-    if(stringp(prop) && strsrch(prop, "bonus_spell_slots") != -1)
-    {
+    if (stringp(prop) && strsrch(prop, "bonus_spell_slots") != -1) {
         num = props[prop];
         return (num + EQ_D->gear_bonus(TO, prop));
     }
@@ -609,25 +644,23 @@ mixed query_property(string prop)
 //in setting up curses on items that don't get enchantments
 //until they are wielded
 //Circe 9/26/04
-int is_cursed() {
-    if(TO->query_property("curseditem")){
-       return 1;
+int is_cursed()
+{
+    if (TO->query_property("curseditem")) {
+        return 1;
     }
     return query_property("enchantment") && query_property("enchantment") < 0;
 }
 
 void remove_all_properties()
 {
-        if(!living(TO))
-        {
-                if(objectp(ETO))
-                {
-                        if(sizeof(keys(props)) != sizeof(keys(props) - VALID_BONUSES))
-                        {
-                                UpdateBonuses(ETO, "remove");
-                        }
-                }
+    if (!living(TO)) {
+        if (objectp(ETO)) {
+            if (sizeof(keys(props)) != sizeof(keys(props) - VALID_BONUSES)) {
+                UpdateBonuses(ETO, "remove");
+            }
         }
+    }
 
     remove_property("shapeshifted");
     props = ([]);
@@ -635,8 +668,8 @@ void remove_all_properties()
 
 int remove_property (string prop)
 {
-        //added this as a fix for bonuses not
-        //being removed on removing armor
+    //added this as a fix for bonuses not
+    //being removed on removing armor
       //problem was the remove_property("wear_order")
         //in /cmds/mortal/_remove.c - which was throwing
         //off the sizeof() comparison -

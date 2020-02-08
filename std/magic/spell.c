@@ -2039,8 +2039,16 @@ void define_clevel()
         }
     }
 
-    if (spell_type == "monk" && FEATS_D->usable_feat(caster, "elemental attunement")) {
-        clevel += 5;
+    if (spell_type == "monk") {
+        if (FEATS_D->usable_feat(caster, "elemental attunement")) {
+            clevel += 5;
+        }
+    }
+
+    if (spell_type == "psywarrior" || spell_type == "psion") {
+        if (FEATS_D->usable_feat(caster, "mind wave")) {
+            clevel += 3;
+        }
     }
 
     if ((spell_type == "mage" || spell_type == "sorcerer")) {
@@ -2059,29 +2067,41 @@ void define_clevel()
             }
         }
 
-        if (caster->is_class("gravecaller"))
-            if (FEATS_D->usable_feat(caster, "negative energy conduit"))
-                if (spell_sphere == "necromancy")
-                    clevel += 3;
-
-        if (caster->is_class("shadow_adept"))
-            if (FEATS_D->usable_feat(caster, "elusive spellcraft"))
-                if (spell_sphere == "necromancy" || spell_sphere == "illusion" || spell_sphere == "enchantment_charm")
+        if (caster->is_class("shadow_adept")) {
+            if (FEATS_D->usable_feat(caster, "elusive spellcraft")) {
+                if (spell_sphere == "necromancy" ||
+                    spell_sphere == "illusion" ||
+                    spell_sphere == "enchantment_charm") {
                     clevel += 2;
+                }
+            }
+        }
     }
 
-    if (spell_type == "cleric" || spell_type == "druid")
-        if (FEATS_D->usable_feat(caster, "mastery of power"))
+    if (caster->is_class("gravecaller")) {
+        if (FEATS_D->usable_feat(caster, "negative energy conduit")) {
+            if (spell_sphere == "necromancy") {
+                clevel += 3;
+            }
+        }
+    }
+
+    if (spell_type == "cleric" ||
+        spell_type == "druid")
+        if (FEATS_D->usable_feat(caster, "mastery of power")) {
             clevel += 3;
+        }
 
     if (FEATS_D->usable_feat(caster, "ragecaster")) {
         clevel = caster->query_character_level();
-        if (caster->query_property("raged"))
+        if (caster->query_property("raged")) {
             clevel += 4;
+        }
     }
 
-    if ((int) caster->query_property("empowered"))
-        clevel += (int) caster->query_property("empowered");
+    if ((int)caster->query_property("empowered")) {
+        clevel += (int)caster->query_property("empowered");
+    }
     clevel = clevel < 0 ? 1 : clevel;
 
 }
