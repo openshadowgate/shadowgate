@@ -35,13 +35,13 @@ int cmd_con(string str)
         if(partyname == "") return notify_fail("You are not in a party!\n");
 
         theparty = (object *)PARTY_D->query_party_members(partyname);
-        if(!sizeof(theparty)) return notify_fail("Your party has no members!\n");        
+        if(!sizeof(theparty)) return notify_fail("Your party has no members!\n");
 
         presentparty = ({});
         for(i = 0;i<sizeof(theparty);i++) {
             if(objectp(present(theparty[i],environment(TP))) & theparty[i] != TP) presentparty += ({ theparty[i] });
         }
-        if(!sizeof(presentparty)) return notify_fail("No-one here but you!\n"); 
+        if(!sizeof(presentparty)) return notify_fail("No-one here but you!\n");
 
         for (i = 0; i < sizeof(presentparty);i++) {
             output+="%^BOLD%^%^RED%^"+sprintf("%2d",i+1)+":%^RESET%^ "+obj_cond(presentparty[i])+"\n";
@@ -162,14 +162,13 @@ con - check out condition of a being
 
 %^CYAN%^SYNTAX%^RESET%^
 
-con %^ORANGE%^[%^ULINE%^BEING%^RESET%^%^ORANGE%^]
-con party
+con [%^ORANGE%^%^ULINE%^BEING%^RESET%^|party]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command will give you a general indication of a monster or PC's health, or lack thereof in human readable form.
 
-Use <con party> to check your allies.
+Use %^ORANGE%^<con party>%^RESET%^ to check your allies.
 
 Without an argument it will give you condition of all attackers.
 
