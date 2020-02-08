@@ -10,69 +10,77 @@
 #include <std.h>
 #include <daemons.h>
 
+#pragma strict_types
+
 inherit DAEMON;
 
 int lightblind;
 
-int help();
-
-
 int cmd_con(string str)
 {
-    object ob, *theparty, *presentparty;
-    int i, x, y, z;
+    object ob;
+    int i, x, y, z = 0;
     string sub, check, pre;
+    string output = "";
 
     if(TP->query_blind())
     {
         return notify_fail("You are blind you can't inspect your opponents condition.\n");
     }
 
-    if(str == "party") {
-        string output = "";
+    if (str == "party" || str == "all") {
         string partyname = "";
+        object * theparty = ({}), * presentparty = ({});
+
         partyname += (string)TP->query_party();
-        if(partyname == "") return notify_fail("You are not in a party!\n");
 
-        theparty = (object *)PARTY_D->query_party_members(partyname);
-        if(!sizeof(theparty)) return notify_fail("Your party has no members!\n");
-
-        presentparty = ({});
-        for(i = 0;i<sizeof(theparty);i++) {
-            if(objectp(present(theparty[i],environment(TP))) & theparty[i] != TP) presentparty += ({ theparty[i] });
+        if (partyname != "") {
+            theparty = PARTY_D->query_party_members(partyname);
         }
-        if(!sizeof(presentparty)) return notify_fail("No-one here but you!\n");
 
-        for (i = 0; i < sizeof(presentparty);i++) {
-            output+="%^BOLD%^%^RED%^"+sprintf("%2d",i+1)+":%^RESET%^ "+obj_cond(presentparty[i])+"\n";
+        if (sizeof(theparty)) {
+            presentparty = filter_array(theparty, (: environment($1) == environment($2) :), TP);
+            presentparty -= ({TP});
         }
-        write(output);
-        return 1;
+
+        if (sizeof(presentparty)) {
+            output += "%^BOLD%^Present party:\n";
+            for (i = 0; i < sizeof(presentparty); i++) {
+                output += "%^BOLD%^%^RED%^" + sprintf("%2d", i + 1) + ":%^RESET%^ " + obj_cond(presentparty[i]) + "\n";
+            }
+        }
+        z = 1;
     }
 
-    if(!str||regexp(str,"[0-9]+"))
-    {
-        string output = "";
-        object * attackers = TP->query_attackers();
+    if (!str || regexp(str, "[0-9]+") || str == "all") {
+        object* attackers = TP->query_attackers();
         int param;
+
         param = atoi(str);
 
-        if(!param||param>sizeof(attackers))
+        if (!param || param > sizeof(attackers)) {
             param = sizeof(attackers);
+        }
 
-        if(sizeof(attackers))
-        {
-            output += "%^BOLD%^Attackers ("+param+" of "+sizeof(attackers)+"):\n";
-            for (i = 0; i < sizeof(attackers)&&i<param; ++i)
-            {
-                if(objectp(attackers[i]))
-                    output+="%^BOLD%^%^RED%^"+sprintf("%2d",i+1)+":%^RESET%^ "+obj_cond(attackers[i])+"\n";
+        if (sizeof(attackers)) {
+            output += "%^BOLD%^%^WHITE%^Attackers (" + param + " of " + sizeof(attackers) + "):\n";
+            for (i = 0; i < sizeof(attackers) && i < param; ++i) {
+                if (objectp(attackers[i])) {
+                    output += "%^BOLD%^%^RED%^" + sprintf("%2d", i + 1) + ":%^RESET%^ " + obj_cond(attackers[i]) + "\n";
+                }
             }
+        }
+        z = 1;
+    }
+
+    if (z) {
+        if (output != "") {
             write(output);
+        } else {
+            write("%^BOLD%^%^WHITE%^Nothing to report.");
         }
         return 1;
     }
-
 
     if (lightblind=TP->light_blind(0)) { return notify_fail(TP->light_blind_fail_message(lightblind)+"\n"); }
 
@@ -162,7 +170,7 @@ con - check out condition of a being
 
 %^CYAN%^SYNTAX%^RESET%^
 
-con [%^ORANGE%^%^ULINE%^BEING%^RESET%^|party]
+con [%^ORANGE%^%^ULINE%^BEING%^RESET%^|party|all]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -170,7 +178,9 @@ This command will give you a general indication of a monster or PC's health, or 
 
 Use %^ORANGE%^<con party>%^RESET%^ to check your allies.
 
-Without an argument it will give you condition of all attackers.
+Without an argument it will give you condition of all attackers and party members.
+
+To see both allies and attackers use %^ORANGE%^<con all>%^RESET%^.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

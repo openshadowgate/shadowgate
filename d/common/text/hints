@@ -51,6 +51,7 @@
 %^CYAN%^Want a different kind of adventure? Visit a gnome wagon and %^GREEN%^<retrieve device> %^CYAN%^to get started.
 %^CYAN%^Maps of the areas surrounding Shadow and Tabor can be found in the cities where the item collectors loiter.
 %^CYAN%^If you need to review the last round of a line conversations, or emotes, says, or tells, use %^GREEN%^<last>%^CYAN%^.
+%^CYAN%^Command %^ORANGE%^<con>%^CYAN%^ can display condition of all your attackers if entered without arguments, %^ORANGE%^<con party>%^CYAN%^ will display condition of your party members, and %^ORANGE%^<con all>%^CYAN%^ will display everything.
 %^CYAN%^A map of the entire mainland is available at: %^ULINE%^%^GREEN%^https://shadowgate.org/files/mainland.jpg%^RESET%^
 %^CYAN%^Bonuses of the same type usually don't stack.
 %^CYAN%^Stuck in a dungeon and see no way out? Break a bloodshard, which can be bought at any general store. And if you don't have one? Well, there is always a final option... You can kill yourself with %^ORANGE%^<kill %^ORANGE%^%^ULINE%^YOURNAME%^RESET%^%^ORANGE%^>%^CYAN%^.%^RESET%^
