@@ -12,7 +12,7 @@ void create() {
 
 NOTE: this feat does not apply to shapeshift forms, which have their own base damage table for natural weapons where appropriate.");
     permanent(1);
-    set_required_for(({"spinning kick", "rapid strikes","improved rapid strikes","unarmed parry"}));
+    set_required_for(({"spinning kick"}));
 }
 
 int prerequisites(object ob) 

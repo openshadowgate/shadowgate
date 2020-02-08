@@ -26,6 +26,7 @@ void create()
         "to mobs is consistent no matter the mob's alignment.");
     set_verbal_comp();
     set_somatic_comp();
+    splash_spell(1);
     set_save("reflex");
 }
 

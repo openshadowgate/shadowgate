@@ -16,7 +16,6 @@ void create() {
     feat_syntax("spinning_kick");
     feat_desc("Spinning Kick is an instant combat feat. It allows someone skilled in unarmed combat to launch of series of devasting attacks on all enemies within melee range. It requires at least one enemy to work and will use a small amount of stamina.");
     set_target_required(0);
-    set_required_for(({"rapid strikes","improved rapid strikes","unarmed parry"}));
 }
 
 int allow_shifted() { return 0; }

@@ -9,10 +9,10 @@ void create()
     feat_type("permanent");
     feat_category("UnarmedCombat");
     feat_name("rapid strikes");
-    feat_prereq("Spinning kick");
-    feat_desc("Rapid strikes is a passive feat that gives an extra attackwhen fighting unarmed.");
+    feat_prereq("Dexterity 15 or Strength 15");
+    feat_desc("Rapid strikes is a passive feat that gives an extra attack when fighting unarmed or with natural weapons.");
     permanent(1);
-    set_required_for(({"improved rapid strikes","unarmed parry"}));
+    set_required_for(({"improved rapid strikes","unarmed parry","precise strikes"}));
 }
 
 int allow_shifted() { return 1; }
@@ -21,7 +21,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) {return 0; }
 
-    if(!FEATS_D->has_feat(ob,"spinning kick"))
+    if((int)ob->query_base_stats("dexterity") < 15 && (int)ob->query_base_stats("strength") < 15)
     {
       dest_effect();
       return 0;
