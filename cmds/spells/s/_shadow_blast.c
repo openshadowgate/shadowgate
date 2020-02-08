@@ -11,7 +11,7 @@ void create()
     ::create();
     set_spell_name("shadow blast");
     set_spell_level(([ "mage" : 6,]));
-    set_spell_sphere("necromancy");
+    set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shadow blast");
     set_damage_desc("half cold, half electricity");
     set_description("This spell sends a waves of dark bolts snatched from the plane of shadow. A quick opponent might dodge bolts, but will still be damaged by the cold. This spell will aim at every living present.");

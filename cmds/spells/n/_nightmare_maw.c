@@ -9,7 +9,7 @@ void create()
     ::create();
     set_spell_name("nightmare maw");
     set_spell_level(([ "mage" : 8 ]));
-    set_spell_sphere("illusion");
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS nightmare maw on TARGET");
     set_damage_desc("slashing");
     set_description("This spell summons a Nightmare Maw, one of mindless demons from the seas of Shadow Plane. It will bite into target, continuously tearing their being apart.");
