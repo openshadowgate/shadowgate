@@ -165,6 +165,7 @@ WOODWORK = ([
                 "carving":(["file":COMMONFILE"misc/carving","units":1,"type":"carving"]),
                 "pipe":(["file":COMMONFILE"misc/pipe","units":1,"type":"carving"]),
                 "wand":(["file":COMMONFILE"weapon/wand","units":1,"type":"weapon"]),
+                "scroll case":(["file":COMMONFILE"misc/scroll_case","units":3,"type":"carving"]),
                 ]);
 
 #define CRAFT_TO_CHECK ([ "woodworker" : WOODWORK, "weaponsmith" : WEAPONSMITH, "jeweller" : JEWEL, \

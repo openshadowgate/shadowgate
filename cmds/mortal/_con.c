@@ -23,8 +23,7 @@ int cmd_con(string str)
     string sub, check, pre;
     string output = "";
 
-    if(TP->query_blind())
-    {
+    if (TP->query_blind()) {
         return notify_fail("You are blind you can't inspect your opponents condition.\n");
     }
 
@@ -39,7 +38,7 @@ int cmd_con(string str)
         }
 
         if (sizeof(theparty)) {
-            presentparty = filter_array(theparty, (: environment($1) == environment($2) :), TP);
+            presentparty = filter_array(theparty, (: environment($1) == $2 :), ETP);
             presentparty -= ({TP});
         }
 
