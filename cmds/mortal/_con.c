@@ -81,39 +81,34 @@ int cmd_con(string str)
         return 1;
     }
 
-    if (lightblind=TP->light_blind(0)) { return notify_fail(TP->light_blind_fail_message(lightblind)+"\n"); }
+    if (lightblind = TP->light_blind(0)) {
+        return notify_fail(TP->light_blind_fail_message(lightblind) + "\n");
+    }
 
     //added by Circe 1/8/05 in response to bug reports that you could con while you couldn't see
 
-    if((ob=present(lower_case(str),ETP)) || (ob=present(capitalize(str),ETP)))
-    {
-        if(environment(ob) != ETP)
-        {
-            write("Couldn't find \""+ str +"\" here.");
+    if ((ob = present(lower_case(str), ETP)) || (ob = present(capitalize(str), ETP))) {
+        if (environment(ob) != ETP) {
+            write("Couldn't find \"" + str + "\" here.");
             return 1;
         }
 
-        if(wizardp(ob) && !wizardp(TP) && (int)ob->query_invis() == 1)
-        {
-            write("Couldn't find \""+ str +"\" here.");
+        if (wizardp(ob) && !wizardp(TP) && (int)ob->query_invis() == 1) {
+            write("Couldn't find \"" + str + "\" here.");
             return 1;
         }
 
-        if(ob->query_invis() || ob == TP)
-        {
-            if(!TP->detecting_invis() || ob == TP)
-            {
-                write("Couldn't find \""+ str +"\" here.");
+        if (ob->query_invis() || ob == TP) {
+            if (!TP->detecting_invis() || ob == TP) {
+                write("Couldn't find \"" + str + "\" here.");
                 return 1;
             }
         }
 
-        if( ob -> is_monster() || ob -> is_player() )
-        {
+        if (ob->is_monster() || ob->is_player()) {
             write(obj_cond(ob));
             return 1;
         }
-
     }
 
     write("Couldn't find \""+ str +"\" here.");
