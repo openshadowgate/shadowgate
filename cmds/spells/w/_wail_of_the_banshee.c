@@ -47,7 +47,7 @@ void spell_effect(int prof)
                 foe->query_property("no death") ||
                 foe->query_level() > caster->query_level()||
                 foe->query_level() > clevel ||
-                random(5)
+                random(2)
                 ) {
                 tell_object(foe, "%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
                 damage_targ(foe, foe->query_target_limb(), sdamage, "sonic");
