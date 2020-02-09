@@ -939,7 +939,7 @@ int *calc_weight(object play, int wpct) {
     }
     num = 4;
     break;
-  case "goblin":
+  case "goblin":case "ratkin":
     if(gender == "male") {
       base  = 72;
       switch(height) {
@@ -1468,7 +1468,7 @@ int *calc_weight(object play, int wpct) {
 // For new lighting system / race night blindness...
 // 12/31/2003 - garrett
 string * night_races() {
-  return ({ "drow", "half-drow", "bugbear", "kobold", "hobgoblin", "gnoll", "orc", "lich", "ogre", "ogre-mage", "goblin", "minotaur" });
+    return ({ "drow", "half-drow", "bugbear", "kobold", "hobgoblin", "gnoll", "orc", "lich", "ogre", "ogre-mage", "goblin", "minotaur", "ratkin"});
 }
 
 string *list_base_classes()

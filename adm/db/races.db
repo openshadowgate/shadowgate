@@ -24,6 +24,7 @@ firbolg:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:7
 gnoll:-2:8000:5:right hand;left hand:1:0:-1:0:0:0:human:3:0
 gnome:2:8000:4:right hand;left hand:-1:-1:5:5:1:-7:human:1:0
 goblin:-2:6000:5:right hand;left hand:-1:0:0:0:0:-1:human:1:0
+ratkin:-2:6000:5:right hand;left hand:-1:0:0:0:0:-1:human:1:0
 half-drow:-1:7500:5:right hand;left hand:0:0:0:0:1:-2:human:2:0
 half-elf:1:7500:5:right hand;left hand:0:-2:-2:-5:4:2:human:2:0
 half-ogre:-1:10000:5:right hand;left hand:1:1:-1:0:0:-1:human:3:2
