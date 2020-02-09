@@ -44,9 +44,8 @@ mapping class_featmap(string myspec) {
         3 : ({ "tracklessstep" }),
         4: ({ "shapeshift" }),
         9: ({ "venom immunity" }),
-        11: ({ "wild speech" }),
-        16: ({ "wild knowledge" }),
-        17: ({ "timeless body" }),
+        11: ({ "wild speech", "wild knowledge"}),
+        15: ({ "timeless body" }),
     ]);
 }
 

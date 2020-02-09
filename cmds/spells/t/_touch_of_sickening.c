@@ -14,7 +14,7 @@ create()
 {
     ::create();
     set_spell_name("touch of sickening");
-    set_spell_level(([ "mage" : 1, "cleric":1]));
+    set_spell_level(([ "mage" : 1, "cleric":1, "druid":1]));
     set_spell_sphere("necromancy");
     set_domains(({"water"}));
     set_syntax("cast CLASS touch of sickening on TARGET");

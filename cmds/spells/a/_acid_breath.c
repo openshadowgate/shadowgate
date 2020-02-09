@@ -12,8 +12,8 @@ void create()
 {
     ::create();
     set_author("cythera");
-    set_spell_name("acid breath");
-    set_spell_level(([ "mage" : 5 ]));
+    set_spell_name("acid breath"); // acid spit
+    set_spell_level(([ "mage" : 3, "druid":3]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS acid breath on TARGET");
     set_damage_desc("delayed acid");
@@ -25,9 +25,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    set_components(([ "mage" : ([ "snakes tongue" : 1, ]), ]));
     set_save("reflex");
-    set_immunities( ({"acid"}) );
 }
 
 

@@ -39,6 +39,7 @@ void spell_effect(int prof) {
     string what, arg;
     object ob;
 
+    tell_object(caster,"%^BOLD%^You imbue" +target->QCN+" with knowledge to understand all tongues.");
     tell_object(target,"%^BOLD%^You start to feel knowledge enter your mind that you lacked before.");
 
     target->set_property("verstandnis",1);

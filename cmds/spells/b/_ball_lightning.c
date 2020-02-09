@@ -11,7 +11,7 @@ void create()
     ::create();
     set_author("cythera");
     set_spell_name("ball lightning");
-    set_spell_level(([ "mage" : 5 ]));
+    set_spell_level(([ "mage" : 5, "druid":4]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS ball lightning on TARGET");
     set_description("This spell allows for a mage to conjure forth at least three balls of lightning, which they can then "

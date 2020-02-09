@@ -14,7 +14,7 @@ object invisob;
 void create() {
     ::create();
     set_spell_name("meld into stone");
-    set_spell_level(([ "cleric" : 2 ]));
+    set_spell_level(([ "cleric" : 2, "druid":3]));
     set_spell_sphere("alteration");
     set_spell_domain("cavern");
     set_syntax("cast CLASS meld into stone");

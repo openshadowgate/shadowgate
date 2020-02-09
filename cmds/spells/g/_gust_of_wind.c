@@ -13,7 +13,7 @@ void create()
     ::create();
     set_author("cythera");
     set_spell_name("gust of wind");
-    set_spell_level(([ "mage" : 4, "monk" : 13]));
+    set_spell_level(([ "mage" : 4, "monk" : 13, "druid":2]));
     set_spell_sphere("alteration");
     set_monk_way("way of the shadow");
     set_syntax("cast CLASS gust of wind on TARGET");
