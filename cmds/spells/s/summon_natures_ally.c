@@ -97,7 +97,7 @@ spell_effect(int prof)
     }
     if (target != caster) {
         // adding additional 5 minute minimum
-        call_out("check", 1, ({ 0, ((2 + clevel + query_spell_level()) * ROUND_LENGTH) + 300, caster, foes }));
+        call_out("check", 1, ({ 0, ((9 + clevel + query_spell_level()) * ROUND_LENGTH) + 600, caster, foes }));
     }
     addSpellToCaster();
 }

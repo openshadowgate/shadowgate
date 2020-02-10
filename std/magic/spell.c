@@ -2113,7 +2113,7 @@ void define_base_spell_level_bonus()
 {
     sdamage_adjustment = 0;
     if (query_splash_spell()) {
-        sdamage_adjustment -= 1;
+        sdamage_adjustment -= 2;
     }
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power")) {
