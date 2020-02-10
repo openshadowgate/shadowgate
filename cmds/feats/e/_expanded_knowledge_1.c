@@ -31,8 +31,6 @@ void create() {
     feat_desc("This feat allows a psionic character to master an additional power of any level up to one less than he can cast. The selected power may be from any psionic power list, even those normally reserved for a specific discipline.");
     permanent(1);
     psionic(1);
-    set_required_for(({"expanded knowledge 2","expanded knowledge 3","spell power","improved spell power","greater spell power","hardenedminions","magic arsenal"}));
-    set_replaces_feat("spellmastery");
 }
 
 int allow_shifted() { return 1; }
