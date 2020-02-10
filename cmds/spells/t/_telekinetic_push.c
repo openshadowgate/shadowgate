@@ -25,15 +25,15 @@ spell_effect(int prof)
     spell_successful();
     if (interactive(caster)) {
         tell_object(caster,"%^BOLD%^%^WHITE%^You extend you hand in direction of "+target->QCN+", pushing them with force!");
-        tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" exhants"+caster->QP+" hand in direction of "+target->QCN+" and pushes them with waves of force!", ({caster}) );
+        tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" extends "+caster->QP+" hand in direction of "+target->QCN+" and pushes them with waves of force!", ({caster}) );
     }
 
-    if(do_save(target,0))
-    {
-        tell_room(place,"%^BOLD%^%^WHITE%^"+target->QCN+" falls to the ground!",target);
-        tell_object(target,"%^BOLD%^%^WHITE%^You fall to the ground!");
-        target->set_prone(roll_dice(1,4),"You're trying to get back on your feet!");
-        dam/=2;
+    if (!do_save(target, 0)) {
+        tell_room(place, "%^BOLD%^%^WHITE%^" + target->QCN + " falls to the ground!", target);
+        tell_object(target, "%^BOLD%^%^WHITE%^You fall to the ground!");
+        target->set_prone(roll_dice(1, 4), "You're trying to get back on your feet!");
+    }else {
+        dam /= 2;
     }
     tell_object(target,"%^BOLD%^%^WHITE%^Force of the push curshes you!");
     damage_targ(target, target->query_target_limb(), dam,"force");

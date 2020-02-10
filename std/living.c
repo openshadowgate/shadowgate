@@ -706,33 +706,37 @@ int calculate_healing() {
         }
     }
 
-    if(query_stuffed())
-    {
-        if(!(TO->query_property("sustenance") ||
-             FEATS_D->usable_feat(TO, "timeless body") ||
-             TO->query_property("inactive") ||
-             (TO->is_undead())))
+    if (query_stuffed()) {
+        if (!(TO->query_property("sustenance") ||
+              FEATS_D->usable_feat(TO, "timeless body") ||
+              TO->query_property("inactive") ||
+              (TO->is_undead()))) {
             healing["stuffed"]--;
-        if(healing["stuffed"] < 0) healing["stuffed"] = 0;
+        }
+        if (healing["stuffed"] < 0) {
+            healing["stuffed"] = 0;
+        }
     }
 
-   if(query_quenched())
-   {
-        if(!TO->query_property("sustenance") &&
-           !FEATS_D->usable_feat(TO, "timeless body") &&
-           !TO->query_property("inactive") &&
-           !TO->is_undead())
+    if (query_quenched()) {
+        if (!TO->query_property("sustenance") &&
+            !FEATS_D->usable_feat(TO, "timeless body") &&
+            !TO->query_property("inactive") &&
+            !TO->is_undead()) {
             healing["quenched"]--;
-        if(healing["quenched"] < 0) healing["quenched"] = 0;
-   }
+        }
+        if (healing["quenched"] < 0) {
+            healing["quenched"] = 0;
+        }
+    }
 
-   if(query_bloodlust())
-       if(TO->is_vampire())
-           if(!TO->query_property("inactive"))
-           {
-               healing["bloodlust"]-=random(2)+1;
-               if(healing["bloodlust"] < 0)
+   if (query_bloodlust())
+       if (TO->is_vampire())
+           if (!TO->query_property("inactive")) {
+               healing["bloodlust"] -= random(2) + 1;
+               if (healing["bloodlust"] < 0) {
                    healing["bloodlust"] = 0;
+               }
            }
 
    if(query_poisoning()) add_poisoning(-1);
@@ -952,6 +956,11 @@ int add_stuffed(int x) {
       healing["stuffed"] = HEALING_FORMULA;
    else healing["stuffed"] += x;
    if(healing["stuffed"] < 0) healing["stuffed"] = 0;
+   return 1;
+}
+
+int set_stuffed(int x) {
+    healing["stuffed"] = x;
    return 1;
 }
 
