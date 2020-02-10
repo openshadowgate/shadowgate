@@ -41,44 +41,43 @@ int preSpell()
 
 void spell_effect()
 {
-    if(!target)
+    if (!target) {
         target = caster;
+    }
 
-    if(!objectp(target))
-    {
+    if (!objectp(target)) {
         TO->remove();
         return;
     }
-    if(!objectp(caster))
-    {
+    if (!objectp(caster)) {
         TO->remove();
         return;
     }
 
-    tell_room(place,"%^BOLD%^%^RED%^"+target->QCN+"%^BOLD%^%^RED%^'s veins burn %^BLACK%^infernal %^BLACK%^re%^RED%^d%^RED%^ through the skin.%^RESET%^",caster);
+    tell_room(place, "%^BOLD%^%^RED%^" + target->QCN + "%^BOLD%^%^RED%^'s veins burn %^BLACK%^infernal %^BLACK%^re%^RED%^d%^RED%^ through the skin.%^RESET%^", caster);
     {
         int duration = clevel * ROUND_LENGTH * 10;
-        tell_object(target,"%^BOLD%^%^RED%^You feel your blood %^BLACK%^bur%^RED%^n%^BLACK%^i%^RED%^n%^BLACK%^g %^RED%^a%^BLACK%^w%^RED%^a%^RED%^y%^RED%^ your wounds.%^RESET%^
+        tell_object(target, "%^BOLD%^%^RED%^You feel your blood %^BLACK%^bur%^RED%^n%^BLACK%^i%^RED%^n%^BLACK%^g %^RED%^a%^BLACK%^w%^RED%^a%^RED%^y%^RED%^ your wounds.%^RESET%^
 ");
-        target->set_property("spelled",({TO}));
-        target->set_property("fast healing",1);
-        target->set_property("infernal healing",1);
+        target->set_property("spelled", ({ TO }));
+        target->set_property("fast healing", 1);
+        target->set_property("infernal healing", 1);
         spell_successful();
         addSpellToCaster();
-        call_out("dest_effect",duration);
+        call_out("dest_effect", duration);
     }
 }
 
 void dest_effect()
 {
-    if(objectp(target))
-    {
-        tell_object(target,"%^BOLD%^%^RED%^Your blood cools down.%^RESET%^");
-        target->remove_property_value("spelled", ({TO}) );
-        target->set_property("fast healing",-1);
+    if (objectp(target)) {
+        tell_object(target, "%^BOLD%^%^RED%^Your blood cools down.%^RESET%^");
+        target->remove_property_value("spelled", ({ TO }));
+        target->set_property("fast healing", -1);
         target->remove_property("infernal healing");
     }
     ::dest_effect();
-    if(objectp(TO))
+    if (objectp(TO)) {
         TO->remove();
+    }
 }
