@@ -46,68 +46,58 @@ void execute_feat()
     int x;
     ::execute_feat();
     tempmap = caster->query_property("using death touch");
-    if(!objectp(target))
-    {
-        object * attackers = caster->query_attackers();
-        if(mapp(tempmap))
-        {
-            attackers = filter_array(attackers,(:$2[$1] < time():),tempmap);
+
+    if (!objectp(target)) {
+        object* attackers = caster->query_attackers();
+        if (mapp(tempmap)) {
+            attackers = filter_array(attackers, (: $2[$1] < time() :), tempmap);
         }
-        if(!sizeof(attackers))
-        {
-            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
+        if (!sizeof(attackers)) {
+            tell_object(caster, "%^BOLD%^Nobody to affect.%^RESET%^");
             dest_effect();
             return;
         }
         target = attackers[random(sizeof(attackers))];
     }
-    if(!objectp(caster))
-    {
+
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
-    if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
-    {
-        caster->send_paralyzed_message("info",caster);
+    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed()) {
+        caster->send_paralyzed_message("info", caster);
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat"))
-    {
-        tell_object(caster,"You are already in the middle of using a feat!");
+    if ((int)caster->query_property("using instant feat")) {
+        tell_object(caster, "You are already in the middle of using a feat!");
         dest_effect();
         return;
     }
-    if(caster->query_casting())
-    {
-        tell_object(caster,"%^BOLD%^You are already in the middle of casting a spell.%^RESET%^");
+    if (caster->query_casting()) {
+        tell_object(caster, "%^BOLD%^You are already in the middle of casting a spell.%^RESET%^");
         dest_effect();
         return;
     }
-    if(!objectp(place))
-    {
+    if (!objectp(place)) {
         tell_object(caster, "You're not there!");
         dest_effect();
         return;
     }
-    if(target==caster)
-    {
-        tell_object(caster,"There are better ways to kill yourself.");
+    if (target == caster) {
+        tell_object(caster, "There are better ways to kill yourself.");
         dest_effect();
         return;
     }
-    if(!present(target, place))
-    {
+    if (!present(target, place)) {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
     }
 
-    if(mapp(tempmap))
-    {
-        if(tempmap[target] > time())
-        {
-            tell_object(caster,"That target is still wary of such an attack!");
+    if (mapp(tempmap)) {
+        if (tempmap[target] > time()) {
+            tell_object(caster, "That target is still wary of such an attack!");
             dest_effect();
             return;
         }
@@ -126,46 +116,49 @@ void execute_attack()
     object *keyz, shape, *weapons, myweapon, qob;
     mapping tempmap;
 
-    if(!objectp(caster))
-    {
-        dest_effect();
-        return;
-    }
-    caster->remove_property("using instant feat");
-    ::execute_attack();
-    if(!objectp(target))
-    {
-        dest_effect();
-        return;
-    }
-    if(caster->query_unconscious())
-    {
-        dest_effect();
-        return;
-    }
-    if(!objectp(target) || !present(target,place))
-    {
-        tell_object(caster,"Your target has eluded you!");
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
 
-    if(target->is_undead())
-    {
-        tell_room(place,"%^BLUE%^"+target->QCN+" is healed completely!%^RESET%^",caster);
+    caster->remove_property("using instant feat");
+    ::execute_attack();
+
+    if (!objectp(target)) {
+        dest_effect();
+        return;
+    }
+    if (caster->query_unconscious()) {
+        dest_effect();
+        return;
+    }
+    if (!objectp(target) || !present(target, place)) {
+        tell_object(caster, "Your target has eluded you!");
+        dest_effect();
+        return;
+    }
+    if (target->query_property("negative energy affinity")) {
+        tell_room(place, "%^BLUE%^" + target->QCN + " is healed completely!%^RESET%^", caster);
         target->add_hp(target->query_max_hp());
         return;
     }
 
     tempmap = caster->query_property("using death touch");
-    if(!mapp(tempmap)) tempmap = ([]);
-    if(tempmap[target]) map_delete(tempmap,target);
+
+    if (!mapp(tempmap)) {
+        tempmap = ([]);
+    }
+    if (tempmap[target]) {
+        map_delete(tempmap, target);
+    }
     keyz = keys(tempmap);
-    for(i=0;i<sizeof(keyz);i++)
-    {
-        if(!objectp(keyz[i])) map_delete(tempmap, keyz[i]);
+    for (i = 0; i < sizeof(keyz); i++) {
+        if (!objectp(keyz[i])) {
+            map_delete(tempmap, keyz[i]);
+        }
         continue;
     }
+
     timerz = time() + 180;
     delay_subject_msg(target,180,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^death touched%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target : timerz ]);
@@ -173,7 +166,10 @@ void execute_attack()
     caster->set_property("using death touch",tempmap);
 
     weapons = caster->query_wielded();
-    if(sizeof(weapons)) myweapon = weapons[0];
+
+    if (sizeof(weapons)) {
+        myweapon = weapons[0];
+    }
 
     tell_object(caster,"%^BLUE%^A ray of deadly negative energy releases of your finger and hits "+target->QCN+"!");
     tell_room(place,"%^BLUE%^A ray of death releases of "+caster->QCN+"'s finger and hits "+target->QCN+"!",caster);
@@ -183,7 +179,7 @@ void execute_attack()
     {
         tell_object(target,"%^BOLD%^Your soul struggles, but manages to survive.");
         tell_room(place,"%^BOLD%^%^BLUE%^"+target->QCN+" is harmed but manages to survive the death!",target);
-        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,8),"negative energy");
+        target->cause_typed_damage(target, target->query_target_limb(),roll_dice(clevel,12),"negative energy");
     } else {
         tell_room(place,"%^BOLD%^%^WHITE%^The soul is pushed beyond %^MAGENTA%^the veil%^WHITE%^ from its coil!");
         tell_room(place,"%^BOLD%^%^WHITE%^The lifeless husk of "+target->QCN+" drops to the ground!",target);

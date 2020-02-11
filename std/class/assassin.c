@@ -9,38 +9,55 @@ void create()
     ::create();
 }
 
+
+/*
+ * assassin_base_class is used in _crit.c and for clevel calculations
+ */
 object base_class_ob(object ob)
 {
     object class_ob;
-    if(!objectp(ob) || !ob->query("assassin_base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/fighter.c"); }
-    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("assassin_base_class")+".c"); }
-    if(!objectp(class_ob)) { class_ob = find_object_or_load(DIR_CLASSES+"/thief.c"); }
+    if (!objectp(ob) || !ob->query("assassin_base_class")) {
+        class_ob = find_object_or_load(DIR_CLASSES + "/fighter.c");
+    }else {
+        class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("assassin_base_class") + ".c");
+    }
+    if (!objectp(class_ob)) {
+        class_ob = find_object_or_load(DIR_CLASSES + "/thief.c");
+    }
     return class_ob;
 }
 
 
-string *query_base_classes(object obj)
+string* query_base_classes(object obj)
 {
     string base;
-    if(!objectp(obj)) { return ({}); }
+    if (!objectp(obj)) {
+        return ({});
+    }
     base = obj->query("assassin_base_class");
-    if(!base) { return ({}); }
+    if (!base) {
+        return ({});
+    }
     return ({ base });
 }
 
-
 void remove_base_class(object obj)
 {
-    if(!objectp(obj)) { return; }
+    if (!objectp(obj)) {
+        return;
+    }
     obj->delete("assassin_base_class");
     return;
 }
 
-
 int has_base_class_set(object obj)
 {
-    if(!objectp(obj)) { return 0; }
-    if(obj->query("assassin_base_class")) { return 1; }
+    if (!objectp(obj)) {
+        return 0;
+    }
+    if (obj->query("assassin_base_class")) {
+        return 1;
+    }
     return 0;
 }
 
