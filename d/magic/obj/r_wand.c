@@ -26,7 +26,7 @@ void create()
      * wand = new(WAND)
      * wand->set("spell","magic missile");
      * wand->set("spell type","mage");
-     *
+     * wand->make_me();
      */
 
     make_me();
@@ -40,7 +40,11 @@ void make_me()
     string *classes = ({});
     i = random(sizeof(WTYPES));
     type = WTYPES[i];
-    spell = MAGIC_D->query_random_spell("random");
+    if (TO->query("spell")) {
+        spell = TO->query("spell");
+    } else {
+        spell = MAGIC_D->query_random_spell("random");
+    }
     classes = keys(MAGIC_D->query_index_row(spell)["levels"]);
     sclass = classes[random(sizeof(classes))];
     ::create();

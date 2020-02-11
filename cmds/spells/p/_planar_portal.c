@@ -1,7 +1,8 @@
 //~Circe~ 7/30/05
-//This power will allow the psion to open a portal, allowing 
-//people to travel between two places. 
+//This power will allow the psion to open a portal, allowing
+//people to travel between two places.
 #include <spell.h>
+#include <teleport.h>
 inherit SPELL;
 
 void open_portal();
@@ -38,7 +39,7 @@ string query_cast_string(){
 }
 
 void spell_effect(int prof){
-    string a, file, tempstr, *tempdir;
+    string a = arg, file, tempstr, *tempdir;
     int mypower,startpower,endpower,bonus;
     mapping tmp;
     tempstr = ARG;
@@ -88,9 +89,9 @@ void spell_effect(int prof){
         file = 0;
     }
 //teleport proof stuff by ~Circe~ 6/20/08
-//new property to be used for areas protected from teleport 
+//new property to be used for areas protected from teleport
 //but not foolproof
-   if(endplace && 
+   if(endplace &&
       (endplace->query_property("teleport proof") ||
       place->query_property("teleport proof") ||
       !endplace->is_room())){
@@ -186,7 +187,7 @@ void do_next(object endplace){
        "%^YELLOW%^flashes%^RESET%^ %^BOLD%^%^MAGENTA%^and a portal opens, leading "+
        "to "+newplace+"!");
     open_portal();
-    call_out("close_portal",15);
+    call_out("close_portal",clevel * ROUND_LENGTH);
     return;
 }
 

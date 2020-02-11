@@ -13,12 +13,13 @@
     9:({"tornado blast","planar portal"}),\
 ]);
 
+// The only improtant array as of 2020
 #define DISCIPLINESPELLSBYDISCIPLINE ([\
     "egoist":({"animal affinity","chameleon","thicken skin","lesser transformation"}),             \
     "seer":({"clairvoyance","hypercognition","aura sight","sending","speak with dead","prying eyes"}), \
     "shaper":({"call crystals","hail of crystals","astral construct","planar portal","psionic teleport"}), \
     "kineticist":({"control object","energy cone","energy current","reddopsi","tornado blast"}),\
-    "nomad":({"call crystals","hail of crystals","astral construct","planar portal","psionic teleport"}),\
+    "nomad":({"call crystals","hail of crystals","astral construct", "planar sending","planar portal","psionic teleport"}), \
     "telepath":({"domination","modify memory","sending","speak with dead","mindnet"}),\
 ]);
 
