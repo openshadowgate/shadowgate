@@ -21,7 +21,7 @@ void create()
 
 string query_cast_string()
 {
-    return "%^BLUE%^As "+caster->QCN+" chants in low undertones shadows raise and surround "+caster->QO+".%^RESET%^";
+    return "%^BOLD%^%^BLACK%^As "+caster->QCN+" chants in low undertones shadows raise and surround "+caster->QO+".%^RESET%^";
 }
 
 int preSpell()
@@ -38,11 +38,11 @@ void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 6) * clevel;
-    tell_room(place,"%^BLUE%^"+caster->QCN+" completes "+caster->QP+" the chant and is surrounded by restless shadows.",caster);
-    tell_object(caster,"%^BLUE%^You complete your chant and are surrounded by restless shadows!");
+    tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" completes "+caster->QP+" the chant and is surrounded by restless shadows.",caster);
+    tell_object(caster,"%^BOLD%^%^BLACK%^You complete your chant and are surrounded by restless shadows!");
     caster->set_property("vampiric shadow shield",1);
     caster->set_property("spelled", ({TO}) );
-    caster->set_property("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
+    caster->set_property("added short",({"%^ORANGE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^ORANGE%^)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
     execute_attack();
@@ -102,8 +102,8 @@ void execute_attack()
     {
 
         define_base_damage(0);
-        tell_room(place,"%^BLUE%^Shadows around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
-        tell_object(caster,"%^BLUE%^%^Shadows around you caress your enemies.");
+        tell_room(place,"%^BOLD%^%^BLACK%^Shadows around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
+        tell_object(caster,"%^BOLD%^%^BLACK%^Shadows around you caress your enemies.");
         for(i=0;i<sizeof(attackers);i++)
         {
             if(!objectp(attackers[i]))
@@ -113,7 +113,7 @@ void execute_attack()
             if(attackers[i]->is_undead())
                 continue;
 
-            tell_object(attackers[i],"%^BLUE%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
+            tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
             damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
 
         }
@@ -129,9 +129,9 @@ void dest_effect()
 {
     remove_call_out("room_check");
     if(objectp(caster)){
-        tell_room(environment(caster),"%^BOLD%^%^BLUE%^The shadows retreat, leaving "+caster->QCN+" vulnerable once again.");
+        tell_room(environment(caster),"%^BOLD%^%^ORANGE%^The shadows retreat, leaving "+caster->QCN+" vulnerable once again.");
         caster->remove_property("vampiric shadow shield");
-        caster->remove_property_value("added short",({"%^BLUE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^BLUE%^)%^RESET%^"}));
+        caster->remove_property_value("added short",({"%^ORANGE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^ORANGE%^)%^RESET%^"}));
     }
     ::dest_effect();
     if(objectp(TO))
