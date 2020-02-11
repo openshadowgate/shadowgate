@@ -21,7 +21,7 @@ void create()
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^BLUE%^A vortex of %^WHITE%^water%^BLUE%^ and %^WHITE%^wind%^BLUE%^ forms around " + caster->QCN + "as " + caster->QS " chant!";
+    return "%^BOLD%^%^BLUE%^A vortex of %^WHITE%^water%^BLUE%^ and %^WHITE%^wind%^BLUE%^ forms around " + caster->QCN + "as " + caster->QS + " chant!";
 }
 
 void spell_effect(int prof)
@@ -48,7 +48,7 @@ void spell_effect(int prof)
         } else {
             attackers[i]->set_paralyzed(8, "%^BOLD%^%^WHITE%^You're suspended in the currents of the vortex.%^RESET%^");
         }
-        tell_object(attackers[i], "%^WHITE%^%^BOLD%^The water of the wortex hits youn.%^RESET%^");
+        tell_object(attackers[i], "%^WHITE%^%^BOLD%^The water of the wortex hits you.%^RESET%^");
         damage_targ(attackers[i], attackers[i]->return_target_limb(), admg, "bludgeoning");
     }
     spell_successful();
