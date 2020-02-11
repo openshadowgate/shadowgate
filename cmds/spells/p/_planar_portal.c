@@ -3,6 +3,7 @@
 //people to travel between two places.
 #include <spell.h>
 #include <teleport.h>
+#include <magic.h>
 inherit SPELL;
 
 void open_portal();
