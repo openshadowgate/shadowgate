@@ -23,7 +23,7 @@ void create() {
 
 int preSpell()
 {
-    if (target->query_property("seamantled"))
+    if (caster->query_property("seamantled"))
     {
         tell_object(caster,"%^CYAN%^The spell is repelled by its own magic.%^RESET%^\n");
         return 0;
@@ -49,7 +49,7 @@ void spell_effect(int prof)
     spell_successful();
 
     tell_object(caster,"%^CYAN%^%^BOLD%^Currents of water rise around you in a stormy helix.");
-    tell_room(place,"%^BOLD%^%^CYAN%^Currents of water rise around"+caster->QCN+" in a stormy helix.", caster );
+    tell_room(place,"%^BOLD%^%^CYAN%^Currents of water rise around "+caster->QCN+" in a stormy helix.", caster );
 
     target->add_ac_bonus(abonus);
     target->add_saving_bonus("reflex",rbonus);

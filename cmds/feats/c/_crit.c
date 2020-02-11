@@ -152,9 +152,9 @@ void execute_feat()
         tell_room(place, "%^BOLD%^%^WHITE%^You almost didn't see a shadow behind " + target->QCN + "'s back!", ({ target, caster }));
         tell_object(caster, "%^BOLD%^%^WHITE%^You phase quickly behind " + target->QCN + ", but " + target->QS + " withstands your assault.");
         if (target->query_max_hp() < caster->query_max_hp()) {
-            todamage = roll_dice(clevel, 12);
+            todamage = roll_dice(clevel, 10);
         } else{
-            todamage = roll_dice(clevel + BONUS_D->query_stat_bonus(caster, "intelligence"), 12);
+            todamage = roll_dice(clevel + BONUS_D->query_stat_bonus(caster, "intelligence"), 10);
         }
         target->cause_typed_damage(target, target->query_target_limb(), todamage, "untyped");
     } else {

@@ -93,10 +93,10 @@ void execute_attack()
         return;
     }
 
-    die = 8;
+    die = 6;
 
     if (FEATS_D->usable_feat(caster, "mind wave")) {
-        die = 10;
+        die = 8;
     }
 
     targets = caster->query_attackers();

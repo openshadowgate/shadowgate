@@ -14,10 +14,10 @@ void create()
     set_spell_name("reflection");
     set_spell_level(([ "druid" : 7 ]));
     set_spell_sphere("divination");
-    set_spell_domain("nature");
     set_syntax("cast CLASS reflection");
-    set_description("This spell will allow the druid to look through any sufficiently still body of water and view "
-        "people at a distance.");
+    set_description("This spell will allow the druid to look through any sufficiently still body of water and view people at a distance. The spell need a smoment of rest before used again.
+
+When scrying, use %^ORANGE%^<help reflection>%^RESET%^ to read instructions.");
     set_verbal_comp();
     set_somatic_comp();
     //set_arg_needed();

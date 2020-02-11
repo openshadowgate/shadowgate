@@ -186,7 +186,7 @@ void execute_attack()
     if ((string)target->query_property("no death") || do_save(target, -bonusdc)) {
         tell_object(target, "%^BOLD%^The struggle for your soul is won, yet at a %^BOLD%^%^BLUE%^price%^WHITE%^.");
         tell_room(place, "%^BOLD%^The soul survives, yet the coil %^BLACK%^suffers%^WHITE%^!", target);
-        target->do_damage(target->query_target_limb(), roll_dice(clevel, 10));
+        target->do_damage(target->query_target_limb(), roll_dice(clevel, 8));
     } else {
         tell_room(place, "%^BOLD%^%^WHITE%^The soul is pushed beyond %^MAGENTA%^the veil%^WHITE%^ from its coil!");
         tell_room(place, "%^BOLD%^%^WHITE%^The lifeless husk of " + target->QCN + " drops to the ground!", target);
