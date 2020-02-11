@@ -1,63 +1,100 @@
 #include <spell.h>
 #include <magic.h>
+#include <daemons.h>
 inherit SPELL;
 
 int num;
+int undeadt;
 
 void create()
 {
     ::create();
-    set_spell_name("nightmare maw");
-    set_spell_level(([ "mage" : 8 ]));
-    set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS nightmare maw on TARGET");
-    set_damage_desc("slashing");
-    set_description("This spell summons a Nightmare Maw, one of mindless demons from the seas of Shadow Plane. It will bite into target, continuously tearing their being apart.");
+    set_spell_name("necrophage");
+    set_spell_level(([ "mage" : 2 ]));
+    set_spell_sphere("necromancy");
+    set_syntax("cast CLASS necrophage on TARGET");
+    set_damage_desc("acid");
+    set_description("You create a pale yellow slime on the target. The slime begins to devour the target rapidly, causing them to suffer. An undead creature may attempt to save from the damage to reduce it, but if it dies while the spell is in affect, it may explode with acid. ");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
     set_save("fort");
     splash_spell(1);
-    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
 }
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^BLACK%^As "+caster->QCN+" chants, a giant black maw forms behind"+caster->QS+".%^RESET%^";
+    return "%^BOLD%^%^GREEN%^As "+caster->QCN+" utters a curse, making strange passes.%^RESET%^";
 }
 
 spell_effect(int prof)
 {
     spell_successful();
 
-    tell_room(place,"%^BOLD%^%^BLACK%^As "+caster->QCN+" completes the chant, giant maw floats towards "+target->QCN+" and plunges its teeth into them.",target);
-    tell_object(target,"%^BOLD%^%^BLACK%^As "+caster->QCN+" completes the chant, giant maw floats towards you and plunges its teeth into them.",target);
-    damage_targ(target, target->query_target_limb(), sdamage,"slashing");
+    tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" completes the spell and releases acidic slime at "+target->QCN+".",target);
+    tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" and releases the acidic slime at.",target);
+    damage_targ(target, target->query_target_limb(), sdamage,"acid");
+    if (target->is_undead()) {
+        undeadt = 1;
+    }
     num = clevel / 8 + 1;
-    if(do_save(target,0))
-        num/=2;
-    call_out("bite_again",ROUND_LENGTH);
+    call_out("rot_again",ROUND_LENGTH - 1);
 }
 
-void bite_again()
+void explode()
+{
+    object* attackers;
+    int i;
+
+    attackers = all_living(place);
+    attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
+    attackers = target_filter(attackers);
+    tell_room(place, "%^BOLD%^%^GREEN%^As acidic slime finally destroys the undead it explodes, spreading acid around.");
+
+    for (i = 0; i < sizeof(attackers); i++) {
+        if (!objectp(attackers[i])) {
+            continue;
+        }
+        tell_object(attackers[i], "%^GREEN%^%^BOLD%^Youre scorched by the acid!%^RESET%^");
+        damage_targ(attackers[i], attackers[i]->return_target_limb(), sdamage * 3 / 4, "acid");
+    }
+}
+
+void rot_again()
 {
 
-    if(!objectp(target))
-    {
+    int dam;
+
+    if (!objectp(target)) {
+        if (undeadt) {
+            explode();
+        }
         dest_effect();
         return;
     }
 
-    if(target->query_hp()<0)
-    {
+    if (target->query_hp() < 0) {
+        if (undeadt) {
+            explode();
+        }
         dest_effect();
         return;
     }
+
+    dam = sdamage / 6;
+
+    if (target->is_undead()) {
+        if (do_save(target, -4)) {
+            dam /= 2;
+        }
+    }
+
+    place = ENV(target);
 
     define_base_damage(0);
-    tell_room(ENV(target),"%^BOLD%^%^BLACK%^The maw continues to nibble on "+target->QCN+"!%^RESET%^",target);
-    tell_object(target,"%^BOLD%^%^BLACK%^The maw nibbles on you!%^RESET%^");
-    damage_targ(target, target->query_target_limb(), sdamage/6,"slashing");
+    tell_room(ENV(target),"%^BOLD%^%^GREEN%^The acidic slime continues to rot away "+target->QCN+"'s essence!%^RESET%^",target);
+    tell_object(target,"%^BOLD%^%^GREEN%^The acidic slime burns through you!%^RESET%^");
+    damage_targ(target, target->query_target_limb(), dam,"acid");
 
     if(num-- < 0)
     {
@@ -66,20 +103,14 @@ void bite_again()
     }
     else
     {
-        call_out("bite_again",ROUND_LENGTH);
+        call_out("rot_again",ROUND_LENGTH);
     }
 }
 
 dest_effect()
 {
-    if(find_call_out("bite_again") != -1)
-        remove_call_out("bite_again");
-
-    if(objectp(target))
-    {
-        tell_room(ENV(target),"%^BOLD%^%^BLACK%^The maw was nibbling on "+target->QCN+" vanishes.%^RESET%^",target);
-        tell_object(target,"%^BOLD%^%^BLACK%^The maw vanishes!%^RESET%^");
-    }
+    if(find_call_out("rot_again") != -1)
+        remove_call_out("rot_again");
 
     ::dest_effect();
     if(objectp(TO))
