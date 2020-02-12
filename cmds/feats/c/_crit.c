@@ -50,7 +50,7 @@ void execute_feat()
     object *keyz, qob;
     ::execute_feat();
 
-    clevel = caster->query_guild_level(caster->query("assassin_base_class"));
+    /* clevel = caster->query_guild_level(caster->query("assassin_base_class")); */
 
     tempmap = caster->query_property("using crit");
     if (!objectp(target)) {
