@@ -7,7 +7,7 @@ inherit SPELL;
 create() {
     ::create();
     set_spell_name("raise dead");
-    set_spell_level(([ "cleric" : 5, "druid" : 4, "paladin" : 4, "bard" : 4, "inquisitor" : 4 ]));
+    set_spell_level(([ "cleric" : 5, "druid" : 4, "paladin" : 4, "inquisitor" : 4 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS raise dead on TARGET");
     set_description("This spell will revive a dead player when cast upon their corpse. The deceasedwill be returned to the site of death and revived. Note it is similar to beingrevived in a church as the person will be barely alive and need significanthealing. The target will suffer somewhat less from the death due to the intervention of the priest.
