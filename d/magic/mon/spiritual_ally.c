@@ -26,6 +26,7 @@ void create(){
     set_gender("other");
     set_overall_ac(4);
 
+    set_property("full attacks",1);
     set_monster_feats(({
                 "simple weapon proficiency",
                 "opportunity strikes",
@@ -54,7 +55,7 @@ void setup_servant(object caster, int clevel)
     set_max_hp(clevel*10+100);
     set_hp(query_max_hp());
     set_overall_ac(4-clevel);
-    set_attacks_num(clevel/8+2);
+    set_attacks_num(clevel/14+2);
 
     {
         string deity = caster->query_diety();
