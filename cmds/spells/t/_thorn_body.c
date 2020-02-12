@@ -33,7 +33,7 @@ void spell_effect(int prof)
     tell_object(caster, "%^GREEN%^Your skin grows numerous thorn, and you look like a green hedgehog!");
     caster->set_property("thorn body", 1);
     caster->set_property("spelled", ({ TO }));
-    caster->set_property("added short", ({ "%^RESET%^%^GREEN%^(%^BOLD%^%^BLACK%^c%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^v%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^d %^RESET%^%^GREEN%^i%^BOLD%^%^BLACK%^n th%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^rns%^RESET%^%^GREEN%^)%^RESET%^" }));
+    caster->set_property("added short", ({ "%^RESET%^%^GREEN%^ (%^BOLD%^%^BLACK%^c%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^v%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^d %^RESET%^%^GREEN%^i%^BOLD%^%^BLACK%^n th%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^rns%^RESET%^%^GREEN%^)%^RESET%^" }));
     addSpellToCaster();
     spell_successful();
     execute_attack();
@@ -104,7 +104,7 @@ void dest_effect()
     if (objectp(caster)) {
         tell_room(environment(caster), "%^BOLD%^%^GREEN%^Thorns that were covering " + caster->QCN + " retreat.");
         caster->remove_property("thorn body");
-        caster->remove_property_value("added short", ({ "%^RESET%^%^GREEN%^(%^BOLD%^%^BLACK%^c%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^v%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^d %^RESET%^%^GREEN%^i%^BOLD%^%^BLACK%^n th%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^rns%^RESET%^%^GREEN%^)%^RESET%^" }));
+        caster->remove_property_value("added short", ({ "%^RESET%^%^GREEN%^ (%^BOLD%^%^BLACK%^c%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^v%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^d %^RESET%^%^GREEN%^i%^BOLD%^%^BLACK%^n th%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^rns%^RESET%^%^GREEN%^)%^RESET%^" }));
     }
     ::dest_effect();
     if (objectp(TO)) {

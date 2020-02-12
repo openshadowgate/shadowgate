@@ -188,41 +188,6 @@ int cmd_throw(string str)
             roomList += ({ current });
         }
 
-        /*
-        roomList = allocate(distance);
-        roomList[0] = current;
-        for(inc = 0;inc < distance;inc ++)
-        {
-            tmp = (string)current->query_exit(dir);
-            if(!tmp)
-            {
-                tell_object(TP,"Error, exit "+dir+" seems to lead nowhere.");
-                return 1;
-            }
-            catch(call_other(tmp,"??"));
-
-            current = find_object_or_load((string)current->query_exit(dir));
-            if(inc < distance-1) {
-                roomList[inc+1] = current;
-            }
-            //tell_room(current,"Something wizzes by your head!");
-            if((string)current->query_exit(dir) == VOID)
-              return notify_fail("You can't throw anything there!\n");
-        }
-        if(current->query_property("indoors")) {
-            if((environment(TP)->query_property("indoors")) &&
-               (distance > 1)) {
-                return notify_fail("You can only throw one room away when throwing from indoors to indoors!\n");
-            } else if(environment(TP)->query_property("indoors")) {
-                if(inc < distance-1) {
-                    return notify_fail("You can not throw through the indoors!\n");
-                }
-            }
-        }
-        if (current->query_door(dir) && inc < distance -1) {
-            write("There seems to be a closed door between you and your target.");
-            return 1;
-        }*/
     }
 
     flag = 0;

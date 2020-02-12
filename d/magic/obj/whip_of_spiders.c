@@ -19,6 +19,7 @@ void create()
     set_value(0);
     set("no curse",1);
     set_prof_type("magic weapons");
+    set_property("able to cast",1);
     set_wc(1,8);
     set_large_wc(1,8);
     set_wield((:TO, "extra_wield":));
