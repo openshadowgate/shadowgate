@@ -27,6 +27,7 @@ void create(){
     set_overall_ac(4);
 
     set_monster_feats(({
+                "simple weapon proficiency",
                 "opportunity strikes",
                     "swipe",
             }));
