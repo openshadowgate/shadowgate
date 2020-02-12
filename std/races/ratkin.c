@@ -19,7 +19,7 @@ int* restricted_alignments(string subrace)
 
 string* restricted_classes(string subrace)
 {
-    return ({ "psywarrior", "paladin",});
+    return ({ "paladin",});
 }
 
 // this only affects rolling in creation; does not prevent dedication to a deity in-game, to allow for character evolution. N, 3/16.
