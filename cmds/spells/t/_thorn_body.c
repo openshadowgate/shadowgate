@@ -33,7 +33,7 @@ void spell_effect(int prof)
     tell_object(caster, "%^GREEN%^Your skin grows numerous thorn, and you look like a green hedgehog!");
     caster->set_property("thorn body", 1);
     caster->set_property("spelled", ({ TO }));
-    caster->set_property("added short", ({ "%^GREEN%^ (%^BOLD%^%^BLACK%^covered in thorns%^RESET%^%^GREEN%^)%^RESET%^" }));
+    caster->set_property("added short", ({ "%^RESET%^%^GREEN%^(%^BOLD%^%^BLACK%^c%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^v%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^d %^RESET%^%^GREEN%^i%^BOLD%^%^BLACK%^n th%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^rns%^RESET%^%^GREEN%^)%^RESET%^" }));
     addSpellToCaster();
     spell_successful();
     execute_attack();
@@ -85,7 +85,7 @@ void execute_attack()
     if (sizeof(attackers)) {
         define_base_damage(0);
         tell_room(place, "%^GREEN%^Thorns that grow through " + caster->QCN + "'s skin scratch " + caster->QP + " enemies!", ({ caster, target }));
-        tell_object(caster, "%^GREEN%^%^Thorns that grow through your skin scratch your enemies.");
+        tell_object(caster, "%^GREEN%^%^BOLD%^Thorns on your skin scratch your enemies.");
         for (i = 0; i < sizeof(attackers); i++) {
             if (!objectp(attackers[i])) {
                 continue;
@@ -104,7 +104,7 @@ void dest_effect()
     if (objectp(caster)) {
         tell_room(environment(caster), "%^BOLD%^%^GREEN%^Thorns that were covering " + caster->QCN + " retreat.");
         caster->remove_property("thorn body");
-        caster->remove_property_value("added short", ({ "%^GREEN%^ (%^BOLD%^%^BLACK%^covered in thorns%^RESET%^%^GREEN%^)%^RESET%^" }));
+        caster->remove_property_value("added short", ({ "%^RESET%^%^GREEN%^(%^BOLD%^%^BLACK%^c%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^v%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^d %^RESET%^%^GREEN%^i%^BOLD%^%^BLACK%^n th%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^rns%^RESET%^%^GREEN%^)%^RESET%^" }));
     }
     ::dest_effect();
     if (objectp(TO)) {

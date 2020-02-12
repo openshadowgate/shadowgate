@@ -42,7 +42,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BOLD%^%^BLACK%^You complete your chant and are surrounded by restless shadows!");
     caster->set_property("vampiric shadow shield",1);
     caster->set_property("spelled", ({TO}) );
-    caster->set_property("added short",({"%^ORANGE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^ORANGE%^)%^RESET%^"}));
+    caster->set_property("added short",({"%^RESET%^%^ORANGE%^(%^BOLD%^%^BLACK%^eng%^RESET%^%^ORANGE%^u%^BOLD%^%^BLACK%^lf%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^d i%^RESET%^%^ORANGE%^n %^BOLD%^%^BLACK%^sh%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^dows%^RESET%^%^ORANGE%^)%^WHITE%^"}));
     addSpellToCaster();
     spell_successful();
     execute_attack();
@@ -102,8 +102,8 @@ void execute_attack()
     {
 
         define_base_damage(0);
-        tell_room(place,"%^BOLD%^%^BLACK%^Shadows around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
-        tell_object(caster,"%^BOLD%^%^BLACK%^Shadows around you caress your enemies.");
+        tell_room(place,"%^BOLD%^%^BLACK%^Sh%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^d%^RESET%^%^ORANGE%^o%^BOLD%^%^BLACK%^ws around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
+        tell_object(caster,"%^BOLD%^%^BLACK%^Sh%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^d%^RESET%^%^ORANGE%^o%^BOLD%^%^BLACK%^ws around you caress your enemies.");
         for(i=0;i<sizeof(attackers);i++)
         {
             if(!objectp(attackers[i]))
@@ -129,9 +129,10 @@ void dest_effect()
 {
     remove_call_out("room_check");
     if(objectp(caster)){
-        tell_room(environment(caster),"%^BOLD%^%^ORANGE%^The shadows retreat, leaving "+caster->QCN+" vulnerable once again.");
+        tell_room(environment(caster),"%^BOLD%^%^ORANGE%^The shadows around "+caster->QCN+" retreat.", caster);
+        tell_object(caster,"%^BOLD%^%^ORANGE%^The shadows around you retreat.");
         caster->remove_property("vampiric shadow shield");
-        caster->remove_property_value("added short",({"%^ORANGE%^ (%^BOLD%^%^BLACK%^engulfed in shadows%^RESET%^%^ORANGE%^)%^RESET%^"}));
+    caster->remove_property_value("added short",({"%^RESET%^%^ORANGE%^(%^BOLD%^%^BLACK%^eng%^RESET%^%^ORANGE%^u%^BOLD%^%^BLACK%^lf%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^d i%^RESET%^%^ORANGE%^n %^BOLD%^%^BLACK%^sh%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^dows%^RESET%^%^ORANGE%^)%^WHITE%^"}));
     }
     ::dest_effect();
     if(objectp(TO))
