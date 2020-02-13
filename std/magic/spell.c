@@ -1163,9 +1163,7 @@ void wizard_interface(object user, string type, string targ)
         else TP->setAdminBlock(100);
     }
 
-    if (!silent_casting) {
-        tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
-    }
+    tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
 
     // this is needed for PCs, uses different function than mobs
     if (objectp(target)) {
@@ -1518,10 +1516,8 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     }
 
     if (living(caster) && base_name(PO) != "/d/magic/obj/contingency") {
-        if (!silent_casting) {
-            tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
-        }
-        if (spell_type != "innate") {
+        tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
+        if (spell_type != "innate" && !silent_casting) {
             tell_room(environment(caster), caster->QCN +
                       " begins to " + whatdo + " a " + whatsit + "!", caster);
         }
@@ -1943,9 +1939,13 @@ varargs int do_spell_damage( object victim, string hit_limb, int wound,string da
         hit_limb = limbs[random(sizeof(limbs))];
     }
 
-    if (objectp(caster)) {
-        if (caster->ok_to_kill(victim)) {
-            nokill = 0;
+    if (help_or_harm) {
+        nokill = 0;
+    } else {
+        if (objectp(caster)) {
+            if (caster->ok_to_kill(victim)) {
+                nokill = 0;
+            }
         }
     }
 
@@ -3014,98 +3014,127 @@ int mind_immunity_damage(object obj)
         return 0;
 }
 
-void help() {
+void help()
+{
     mapping mycomps, compmap;
-    string *classkeys, printclass, *compskeys, *mapkeys, printcomps;
+    string* classkeys, printclass, * compskeys, * mapkeys, printcomps;
     int i, j;
-    write("%^BOLD%^%^RED%^Spell:%^RESET%^ "+spell_name);
+    write("%^BOLD%^%^RED%^Spell:%^RESET%^ " + spell_name);
     classkeys = keys(spell_levels);
 
-    if(!sizeof(classkeys)) printclass = "error";
-    else {
-        if(classkeys[0] == "mage")
-            printclass = "mage/sorc L"+spell_levels[classkeys[0]];
-        else if(classkeys[0] == "cleric")
-        {
-            printclass = "cleric/oracle L"+spell_levels[classkeys[0]];
+    if (!sizeof(classkeys)) {
+        printclass = "error";
+    } else {
+        if (classkeys[0] == "mage") {
+            printclass = "mage/sorc L" + spell_levels[classkeys[0]];
+        } else if (classkeys[0] == "cleric") {
+            printclass = "cleric/oracle L" + spell_levels[classkeys[0]];
+        }else {
+            printclass = classkeys[0] + " L" + spell_levels[classkeys[0]];
         }
-        else
-            printclass = classkeys[0]+" L"+spell_levels[classkeys[0]];
-        if(sizeof(classkeys) > 1)
-            for(i = 1;i < sizeof(classkeys); i++) {
-                if(classkeys[i] == "mage")
-                    printclass += ", mage/sorc L"+spell_levels[classkeys[i]];
-                else if(classkeys[i] == "cleric")
-                    printclass += ", cleric/oracle L"+spell_levels[classkeys[i]];
-
-                else
-                    printclass += ", "+classkeys[i]+" L"+spell_levels[classkeys[i]];
+        if (sizeof(classkeys) > 1) {
+            for (i = 1; i < sizeof(classkeys); i++) {
+                if (classkeys[i] == "mage") {
+                    printclass += ", mage/sorc L" + spell_levels[classkeys[i]];
+                } else if (classkeys[i] == "cleric") {
+                    printclass += ", cleric/oracle L" + spell_levels[classkeys[i]];
+                } else {
+                    printclass += ", " + classkeys[i] + " L" + spell_levels[classkeys[i]];
+                }
             }
-    }
-    write("%^BOLD%^%^RED%^Class:%^RESET%^ "+(affixed_level?("(L"+affixed_level+" fixed) "):"")+printclass);
-
-    if(spell_sphere)
-        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ "+spell_sphere+(spell_domain?(" ["+spell_domain+"]"):"")+(evil_spell?" [evil]":"")+(mental_spell?" [mind-affecting]":""));
-
-    if(sizeof(divine_domains))
-        write("%^BOLD%^%^RED%^Domains:%^RESET%^ "+implode(divine_domains,", "));
-    if(sizeof(oracle_mystery))
-        write("%^BOLD%^%^RED%^Mystery:%^RESET%^ "+implode(oracle_mystery,", "));
-
-    if(mydiscipline)
-        write("%^BOLD%^%^RED%^Discipline:%^RESET%^ "+mydiscipline);
-    if(monk_way)
-        write("%^BOLD%^%^RED%^Monk way:%^RESET%^ "+monk_way);
-    if(verbal_comp||somatic_comp)
-        write("%^BOLD%^%^RED%^Components:%^RESET%^ "+(verbal_comp?"V ":"")+(somatic_comp?"S ":""));
-    if(save_type)
-        write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ "+save_type);
-    if(stringp(damage_desc))
-        write("%^BOLD%^%^RED%^Spell effect:%^RESET%^ "+damage_desc);
-    if(!syntax)
-        syntax = "contact a wiz - not initialized";
-    if(!description)
-        description = "contact a wiz - not initialized";
-    write("%^BOLD%^%^RED%^Syntax:%^RESET%^ "+syntax+"\n");
-    write(description+"\n");
-//fixed up some typos in the following messages ~Circe~ 7/29/19
-    if(peace)
-        write("%^BOLD%^%^RED%^Can be cast only at peace.%^RESET%^");
-    if(silent_casting)
-        write("%^BOLD%^%^RED%^Undetectable casting.%^RESET%^");
-    if(evil_spell)
-        write("%^BOLD%^%^RED%^This spell is inherently evil.%^RESET%^");
-    if(TO->is_curse())
-        write("%^BOLD%^%^RED%^This spell is a curse.");
-    if(aoe_spell)
-        write("%^BOLD%^%^RED%^This spell is Area of Effect");
-    if(traveling_aoe_spell || traveling_spell)
-        write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
-    if(splash_spell)
-        write("%^BOLD%^%^RED%^This spell will affect multiple targets.");
-
-    if(mapp(feats_required)) {
-      compskeys = ([]);
-      compskeys = keys(feats_required);
-      if(sizeof(compskeys)) {
-        printcomps = "\n%^BOLD%^%^RED%^Feat requirements:%^RESET%^ ";
-        if(compskeys[0] == "mage") printcomps += "mage/sorc ("+feats_required[compskeys[0]]+")";
-        else printcomps += compskeys[0]+" ("+feats_required[compskeys[0]]+")";
-        if(sizeof(compskeys) > 1) {
-          for(i = 1;i < sizeof(compskeys); i++) {
-            if(compskeys[i] == "mage") printcomps += ", mage/sorc ("+feats_required[compskeys[i]]+")";
-            else printcomps += ", "+compskeys[i]+" ("+feats_required[compskeys[i]]+")";
-          }
         }
-        write(printcomps);
-      }
+    }
+    write("%^BOLD%^%^RED%^Class:%^RESET%^ " + (affixed_level ? ("(L" + affixed_level + " fixed) ") : "") + printclass);
+
+    if (spell_sphere) {
+        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ " + spell_sphere + (spell_domain ? (" [" + spell_domain + "]") : "") + (evil_spell ? " [evil]" : "") + (mental_spell ? " [mind-affecting]" : ""));
     }
 
+    if (sizeof(divine_domains)) {
+        write("%^BOLD%^%^RED%^Domains:%^RESET%^ " + implode(divine_domains, ", "));
+    }
+    if (sizeof(oracle_mystery)) {
+        write("%^BOLD%^%^RED%^Mystery:%^RESET%^ " + implode(oracle_mystery, ", "));
+    }
+
+    if (mydiscipline) {
+        write("%^BOLD%^%^RED%^Discipline:%^RESET%^ " + mydiscipline);
+    }
+    if (monk_way) {
+        write("%^BOLD%^%^RED%^Monk way:%^RESET%^ " + monk_way);
+    }
+    if (verbal_comp || somatic_comp) {
+        write("%^BOLD%^%^RED%^Components:%^RESET%^ " + (verbal_comp ? "V " : "") + (somatic_comp ? "S " : ""));
+    }
+    if (save_type) {
+        write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ " + save_type);
+    }
+    if (stringp(damage_desc)) {
+        write("%^BOLD%^%^RED%^Spell effect:%^RESET%^ " + damage_desc);
+    }
+    if (!syntax) {
+        syntax = "file a bug report - not initialized";
+    }
+    if (!description) {
+        description = "file a bug report - not initialized";
+    }
+    write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax + "\n");
+    write(description + "\n");
+
+    if (peace) {
+        write("%^BOLD%^%^RED%^Can be cast only at peace.%^RESET%^");
+    }
+    if (silent_casting) {
+        write("%^BOLD%^%^RED%^Undetectable casting.%^RESET%^");
+    }
+    if (evil_spell) {
+        write("%^BOLD%^%^RED%^This spell is inherently evil.%^RESET%^");
+    }
+    if (TO->is_curse()) {
+        write("%^BOLD%^%^RED%^This spell is a curse.");
+    }
+    if (aoe_spell) {
+        write("%^BOLD%^%^RED%^This spell is Area of Effect");
+    }
+    if (traveling_aoe_spell || traveling_spell) {
+        write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
+    }
+    if (splash_spell) {
+        write("%^BOLD%^%^RED%^This spell will affect multiple targets.");
+    }
+
+    if (mapp(feats_required)) {
+        compskeys = ([]);
+        compskeys = keys(feats_required);
+        if (sizeof(compskeys)) {
+            printcomps = "\n%^BOLD%^%^RED%^Feat requirements:%^RESET%^ ";
+            if (compskeys[0] == "mage") {
+                printcomps += "mage/sorc (" + feats_required[compskeys[0]] + ")";
+            } else {
+                printcomps += compskeys[0] + " (" + feats_required[compskeys[0]] + ")";
+            }
+            if (sizeof(compskeys) > 1) {
+                for (i = 1; i < sizeof(compskeys); i++) {
+                    if (compskeys[i] == "mage") {
+                        printcomps += ", mage/sorc (" + feats_required[compskeys[i]] + ")";
+                    } else {
+                        printcomps += ", " + compskeys[i] + " (" + feats_required[compskeys[i]] + ")";
+                    }
+                }
+            }
+            write(printcomps);
+        }
+    }
 }
 
-int query_has_been_cast() { return hasBeenCast; }
+int query_has_been_cast()
+{
+    return hasBeenCast;
+}
 
 int save_me(string file)
 {
-    if(!permanent) { return 0; }
+    if (!permanent) {
+        return 0;
+    }
 }

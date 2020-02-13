@@ -6,7 +6,7 @@ inherit "/std/quest_room.c";
 string myPlayer;
 object myTrainer;
 int isSetup;
-string *bad_races = ({"drow", "half-drow", "goblin", "hobgoblin", "kobold", "ogre", "half-ogre", "orc", "gnoll", "bugbear", "ogre-mage", "minotaur", "yuan-ti"});
+string *bad_races = ({"drow", "half-drow", "goblin", "hobgoblin", "kobold", "ogre", "half-ogre", "orc", "gnoll", "bugbear", "minotaur", "yuan-ti", "ratkin"});
 string BAD;
 
 
@@ -30,20 +30,20 @@ void set_for(object who)
         BAD = 1;
         isSetup = 1;
     }
-    else 
-    {        
+    else
+    {
         TO->add_exit("/d/darkwood/tabor/room/math4", "portal");
         //TO->set_light(2);
         isSetup = 1;
-    }    
-    set_pre_exit_functions(({"portal"}),({"GoThroughDoor"}));  
+    }
+    set_pre_exit_functions(({"portal"}),({"GoThroughDoor"}));
     return;
 }
 
 void create()
 {
     ::create();
-	
+
     set_short("The First Training Camp");
     set_long("%^BOLD%^%^WHITE%^This place exists outside of the normal "+
     "reality of ShadowGate. It is much like the training camps that "+
@@ -67,16 +67,16 @@ void create()
     set_property("no sticks",1);
     set_property("no starve",1);
     set_property("no magic",1);
-    set_property("no steal",1); 
-    //set_pre_exit_functions(({"out"}),({"GoThroughDoor"}));  
+    set_property("no steal",1);
+    //set_pre_exit_functions(({"out"}),({"GoThroughDoor"}));
 	//set_light(2);
-    isSetup = 0;     
+    isSetup = 0;
 }
 
 void init()
 {
     ::init();
-    add_action("example_act", "examples");  
+    add_action("example_act", "examples");
     if(!objectp(TO)) return;
     if(!objectp(TP)) return;
     if(userp(TP))
@@ -125,7 +125,7 @@ int GoThroughDoor()
         return 0;
     }
     if((string)TPQN == myPlayer)
-    {      
+    {
         if(objectp(tmp = present("newbiemassobject", TP)))
         {
             if((int)tmp->query_myTask() >= 6) NEWB_D->spawn_eq(TP, 6, (int)tmp->query_myAlign());
@@ -152,21 +152,21 @@ int GoThroughDoor()
         "experience. A good many players who give the game time learn that they love it, "+
         "particularly the depth from the roleplay, but also the exploration and the "+
         "different mechanics.\n\nIt is our hope that you will become one of those players!\n\n"+
-        "%^B_CYAN%^%^YELLOW%^Welcome to ShadowGate!%^RESET%^\n\n");        
+        "%^B_CYAN%^%^YELLOW%^Welcome to ShadowGate!%^RESET%^\n\n");
         //make map appear in inventory
         if(TP->query("advance place")) TP->set("advance place", 0);
         TP->move_player(TO->query_exit("portal"));
         if(objectp(TO)) TO->remove();
         return 0;
     }
-    return 0;    
+    return 0;
 }
 
 int example_act(string str)
 {
     if(!objectp(TO)) return 0;
     if(!objectp(TP)) return 0;
-    if(!stringp(str)) 
+    if(!stringp(str))
     {
         tell_object(TP, "\nYou may see examples for "+
         "describes or adjectives. Please specify which one "+
@@ -270,7 +270,7 @@ int example_act(string str)
                 tell_object(TP, "\n\n%^BOLD%^%^WHITE%^Adjective Example 3:\n\n"+
                 "%^BOLD%^%^BLACK%^$CSR%^RESET%^%^GREEN%^ $R %^ORANGE%^with %^RESET%^$E eyes "+
                 "%^ORANGE%^and %^BOLD%^%^BLACK%^$H hair%^RESET%^");
-                break;                
+                break;
         }
         tell_object(TP, "\n\n%^BOLD%^%^WHITE%^It is important to note that each person is different. "+
         "The important thing is to have an adjective that does not convey actions or feelings.\n\nAlso, "+

@@ -1010,16 +1010,14 @@ string query_long(string unused)
 
     if(this_object()->query_ghost()) { return "An ethereal presence.\n"; }
 
-   if(objectp(shape = TO->query_property("shapeshifted"))) {
-       the_race = (string)shape->query_shape_race();
-   }
-   if(objectp(shape = TO->query_property("altered"))) {
-       the_race = (string)shape->query_shape_race();
-   }
-   if(!the_race) {
-       the_race = query("race");
-   }
-
+    if (objectp(shape = TO->query_property("shapeshifted"))) {
+        the_race = (string)shape->query_shape_race();
+    } else if (objectp(shape = TO->query_property("altered"))) {
+        the_race = (string)shape->query_shape_race();
+    }
+    if (!the_race) {
+        the_race = query("race");
+    }
     reg = "";
     pre = "%^CYAN%^%^BOLD%^You look over the "+the_race+".%^RESET%^\n";
 
@@ -1048,41 +1046,54 @@ string query_long(string unused)
     else if(stringp(dis = "/daemon/disease_d"->their_obvious_disease_effects(TO))) pre += dis;
     /* sub = capitalize(query_subjective()); */
     sub = "They";
-    if(userp(TO))
-    {
+    if (userp(TO)) {
         height = TO->query_player_height();
-        if(objectp(shape)) { height = (int)shape->query_shape_height(); }
+        if (objectp(shape)) {
+            height = (int)shape->query_shape_height();
+        }
         height = height / 6;
         height = (height + random(2)) * 6;
         weight = TO->query_player_weight();
-        if(objectp(shape)) { weight = (int)shape->query_shape_weight(); }
+        if (objectp(shape)) {
+            weight = (int)shape->query_shape_weight();
+        }
         weight = weight / 25;
         weight = (weight + random(2)) * 25;
-        reg += "%^BOLD%^"+sub+" are approximately "+height+" inches tall and "+weight+" pounds.%^RESET%^\n";
+        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
     }
 
     x = ((player_data["general"]["hp"]*100)/player_data["general"]["max_hp"]);
-    if(x>90) reg += "%^YELLOW%^"+sub+" are in top shape.%^RESET%^\n";
-    else if(x>75) reg += "%^WHITE%^%^BOLD%^"+sub+" are in decent shape.%^RESET%^\n";
-    else if(x>60) reg += "%^WHITE%^"+sub+" are slightly injured.%^RESET%^\n";
-    else if(x>45) reg += "%^MAGENTA%^"+sub+" are hurting.%^RESET%^\n";
-    else if(x>30) reg += "%^ORANGE%^"+sub+" are badly injured.%^RESET%^\n";
-    else if(x>15) reg += "%^RED%^%^BOLD%^"+sub+" are terribly injured.%^RESET%^\n";
-    else reg += "%^RED%^"+sub+" are near death.%^RESET%^\n";
+    if (x > 90) {
+        reg += "%^YELLOW%^" + sub + " are in top shape.%^RESET%^\n";
+    } else if (x > 75) {
+        reg += "%^WHITE%^%^BOLD%^" + sub + " are in decent shape.%^RESET%^\n";
+    } else if (x > 60) {
+        reg += "%^WHITE%^" + sub + " are slightly injured.%^RESET%^\n";
+    } else if (x > 45) {
+        reg += "%^MAGENTA%^" + sub + " are hurting.%^RESET%^\n";
+    } else if (x > 30) {
+        reg += "%^ORANGE%^" + sub + " are badly injured.%^RESET%^\n";
+    } else if (x > 15) {
+        reg += "%^RED%^%^BOLD%^" + sub + " are terribly injured.%^RESET%^\n";
+    } else {
+        reg += "%^RED%^" + sub + " are near death.%^RESET%^\n";
+    }
     stuff = "";
     extra = "";
     stuff = describe_item_contents(({}));
-    if(stuff == "") reg += sub+" are empty handed.\n";
-    else
-    {
-        stuff = " "+stuff;
-        stuff = replace_string(stuff,",","\n");
-        stuff = replace_string(stuff," are here.","");
-        reg += "%^GREEN%^%^BOLD%^"+sub+" are carrying:%^RESET%^\n"+
-            "%^GREEN%^"+stuff+"%^RESET%^";
+    if (stuff == "") {
+        reg += sub + " are empty handed.\n";
+    } else {
+        stuff = " " + stuff;
+        stuff = replace_string(stuff, ",", "\n");
+        stuff = replace_string(stuff, " are here.", "");
+        reg += "%^GREEN%^%^BOLD%^" + sub + " are carrying:%^RESET%^\n" +
+            "%^GREEN%^" + stuff + "%^RESET%^";
     }
 
-    if(extra != "") { pre = pre + extra; }
+    if (extra != "") {
+        pre = pre + extra;
+    }
     reg = pre + reg;
     return reg;
 }
