@@ -21,7 +21,7 @@ inherit DAEMON;
 
 #define LMID1 ({"/d/shadow/room/goblin/rooms/tower", "/d/shadow/room/mountain/", "/d/shadow/room/mountain/tunnel", "/d/shadow/room/cave/", "/d/darkwood/camps/rooms/town/", "/d/shadow/room/kildare/rooms/roads/", "/d/shadow/room/meadows/"  })
 
-#define LMID2 ({"/d/koenig/town/t", "/d/koenig/town/crypt",  "/d/tharis/conforest/rooms/", "/d/shadow/room/cave/cavern", "/d/koenig/caves/", "/d/shadow/room/kildare/rooms/ptrail", "/d/koenig/streams/cr", "/d/darkwood/yntala/rooms/meadow" })
+#define LMID2 ({"/d/koenig/town/t", "/d/koenig/town/crypt",  "/d/tharis/conforest/rooms/", "/d/shadow/room/cave/cavern", "/d/koenig/caves/", "/d/shadow/room/kildare/rooms/ptrail", "/d/koenig/streams/cr", "/d/darkwood/yntala/rooms/meadow", "/d/shadow/city/room/sewer"})
 
 #define HMID1 ({ "/d/shadow/room/kildare/rooms/nest",  "/d/darkwood/camps/rooms/orcamp/", "/d/darkwood/yntala/rooms/forest1", "/d/darkwood/yntala/rooms/forest2", "/d/darkwood/yntala/rooms/uw", "/d/shadow/room/feyren/rooms/" })
 
