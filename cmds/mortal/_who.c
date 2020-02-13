@@ -293,7 +293,13 @@ Lists all players online.
 
 If argument is provided, filters players by races.
 
-%^CYAN%^PLAYER KILL FLAGS%^RESET%^
+%^CYAN%^PLAYER KILL FLAGS%^
+
+ %^BOLD%^%^MAGENTA%^NoPK%^RESET%^ flag in front of the line means the character can't engage in player kill interractions.
+
+ %^BOLD%^%^RED%^Gr%^RESET%^ - grace - flag in front of the line means the character can't engage in player kill interractions due to recent login. They must wait ten minutes before engaging in any player kill.
+
+%^CYAN%^LEVEL CHECK FLAGS%^RESET%^
 
  %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^ in the end of the line indicates you're free to engage in player %^BOLD%^%^GREEN%^kill%^RESET%^ or adventures with that player.
 

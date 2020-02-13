@@ -2051,18 +2051,18 @@ void define_clevel()
         }
     }
 
-    if ((spell_type == "mage" || spell_type == "sorcerer")) {
+    if ((spell_type == "mage" || spell_type == "sorcerer") && !shadow_spell) {
         if (caster->query_school() && caster->query_opposing_school()) {
             if (spell_sphere == caster->query_school()) {
                 if (caster->is_class("mage")) {
-                    clevel += caster->query_guild_level("mage") / 16;
+                    clevel += caster->query_guild_level("mage") / 14;
                 }
                 if (FEATS_D->usable_feat(caster, "school familiarity")) {
                     clevel += 4;
                 }
             } else if (spell_sphere == caster->query_opposing_school()) {
                 if (caster->is_class("mage")) {
-                    clevel -= caster->query_guild_level("mage") / 16;
+                    clevel -= caster->query_guild_level("mage") / 14;
                 }
             }
         }
