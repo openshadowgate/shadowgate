@@ -43,7 +43,7 @@ spell_effect(int prof)
         tell_room(place, "%^BLUE%^" + YOU + " channels energy at " + target->QCN + ".", ({ caster }));
     }
 
-    rnd = sdamage;
+    rnd = clevel;
 
     if (target->query_hp() >= target->query_max_hp() + rnd) {
         target->set_hp(rnd + target->query_max_hp());
