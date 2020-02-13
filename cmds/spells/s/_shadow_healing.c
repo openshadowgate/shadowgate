@@ -45,7 +45,9 @@ spell_effect(int prof)
 
     rnd = sdamage;
 
-    if (target->query_hp() <= target->query_max_hp()) {
+    if (target->query_hp() >= target->query_max_hp() + rnd) {
+        target->set_hp(rnd + target->query_max_hp());
+    } else {
         target->add_extra_hp(rnd);
     }
 
