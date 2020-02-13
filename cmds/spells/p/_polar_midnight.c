@@ -23,7 +23,7 @@ void create()
     set_somatic_comp();
     set_save("fort");
     aoe_spell(1);
-    set_aoe_message("%^RESET^%^%^BLUE%^(%^BOLD%^%^BLACK%^in deepest darkness%^RESET%^%^BLUE%^)%^RESET%^");
+    set_aoe_message("%^RESET%^%^%^BLUE%^(%^BOLD%^%^BLACK%^in deepest darkness%^RESET%^%^BLUE%^)%^RESET%^");
 }
 
 string query_cast_string()
@@ -38,7 +38,7 @@ void spell_effect(int prof)
     prevlight=place->query_light();
     if(prevlight>-2)
         place->set_light(-2);
-    counter = clevel/2;
+    counter = clevel * 2;
     addSpellToCaster();
     spell_successful();
     execute_attack();
