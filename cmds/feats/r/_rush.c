@@ -176,7 +176,9 @@ void execute_attack() {
     if(!(res = thaco(target,enchant)))
     {
         miss_mess(caster,target);
-        caster->set_tripped(4,"You're recovering from your missed rush!",4);
+        if (!FEATS_D->usable_feat(caster, "improved rush")) {
+            caster->set_tripped(4, "You're recovering from your missed rush!", 4);
+        }
         dest_effect();
         return;
     }

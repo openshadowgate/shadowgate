@@ -1,4 +1,4 @@
-//Rarely hit, so making a bolt spell like the others and 
+//Rarely hit, so making a bolt spell like the others and
 //raising to 5th level with the rebalancing of domains
 //~Circe~ 4/26/08 - will do d4 and keep the stamina drain
 
@@ -11,9 +11,9 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("spectral touch");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 1 ]));
     set_spell_sphere("combat");
-    set_spell_domain("repose");
+    set_domains("repose");
     set_syntax("cast CLASS spectral touch on TARGET");
     set_description("This spell causes the caster's hand to glow with a blue light, infusing it with the energy of the "
 "grave.  The energy in the casters hand blasts forth to strike the target, draining him of life and energy.  The beam may "
@@ -38,7 +38,7 @@ spell_effect(int prof){
         return;
     }
     tell_room(place,"%^BOLD%^%^CYAN%^An eerie blue glow surrounds "+
-       ""+caster->QCN+"'s hand as "+caster->QS+" begins to chant.%^RESET%^",caster);    
+       ""+caster->QCN+"'s hand as "+caster->QS+" begins to chant.%^RESET%^",caster);
     tell_object(caster,"%^BOLD%^%^CYAN%^An eerie blue glow surrounds "+
        "your hand as you begin to chant.%^RESET%^");
 
@@ -48,7 +48,7 @@ spell_effect(int prof){
     attackers = distinct_array(attackers);
 
     if(sizeof(attackers)){
-        for(i=0;i<sizeof(attackers);i++){            
+        for(i=0;i<sizeof(attackers);i++){
             if(!objectp(attackers[i])) { continue; }
             define_base_damage(0);
             damage = sdamage;
@@ -91,7 +91,7 @@ spell_effect(int prof){
         }
     }
     spell_successful();
-    dest_effect();   
+    dest_effect();
 }
 
 void dest_effect(){

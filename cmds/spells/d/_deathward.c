@@ -12,6 +12,7 @@ void create()
     set_domains("knowledge");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS deathward");
+    set_domains("repose");
     set_description("Those most blessed of the gods can call upon their favor to ward away the very hand of death itself."
         "  This spell protects against death spells, as well as many spell-like effects.");
     set_verbal_comp();

@@ -190,7 +190,9 @@ void execute_attack()
             "to hit you with "+caster->QP+" shield, leaving "+caster->QO+" off balance!%^RESET%^");
         tell_room(place,"%^BOLD%^"+target->QCN+" sidesteps at the last instant, avoiding "
             ""+caster->QCN+"'s shieldbash and leaving "+caster->QCN+" off balance!",({target,caster}));
-        caster->set_paralyzed(roll_dice(4,6),"%^MAGENTA%^You're struggling to stay on your feet!%^RESET%^");
+        if (!FEATS_D->usable_feat(caster, "improved shieldbash")) {
+            caster->set_paralyzed(roll_dice(4, 6), "%^MAGENTA%^You're struggling to stay on your feet!%^RESET%^");
+        }
         // It's very important that dest_effect() is called when the feat ends.  If not, it
         // will break combat in the room where the feat was used
         dest_effect();
