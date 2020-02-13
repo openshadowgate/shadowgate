@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("speak with dead");
-    set_spell_level(([ "psion" : 7, "cleric" : 9, "inquisitor" : 3 ]));
+    set_spell_level(([ "psion" : 7, "cleric" : 3, "inquisitor" : 3 ]));
     set_discipline("telepath");
     set_spell_sphere("divination");
     set_syntax("cast CLASS speak with dead to TARGET");

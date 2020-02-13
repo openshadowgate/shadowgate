@@ -950,6 +950,8 @@ This is the command used to advance your character. Advancement may only occur i
 
 When your character has enough experience to advance to levels 10, 20, 30 and 40 you may instead choose to advance in another class. You will retain all of the abilities of your current class and you will get any new abilities that your new class allows. Only certain class and race combinations are allowed. Please see the individual help files for your race and the class that you would like to become for more information.
 
+%^CYAN%^MULTICLASSING%^RESET%^
+
 If you're multiclassing, abandoning, or are ancient character that has no specific mage school, sorcerer bloodline, warlock heritage, oracle mystery or another class specific flavor set you might use %^ORANGE%^<advance class special>%^RESET%^ to fix missing class special settings.
 
 %^CYAN%^SEE ALSO%^RESET%^
