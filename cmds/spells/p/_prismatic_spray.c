@@ -131,7 +131,7 @@ void ray1(object targ)
 
     tell_object(targ,"%^BOLD%^%^RED%^A blinding red light burns into you!");
     tell_room(place,"%^BOLD%^%^RED%^A blinding red light burns into "+targ->QCN+"!",targ);
-    damage_targ(targ, targ->return_target_limb(), sdamage,"fire");
+    damage_targ(targ, targ->return_target_limb(), sdamage / 6,"fire");
 }
 
 
@@ -145,13 +145,13 @@ void ray2(object targ)
         if(evade_splash(targ)) return;
         tell_object(targ,"%^BOLD%^A blinding orange light grazes you!");
         tell_room(place,"%^BOLD%^A blinding orange light grazes "+targ->QCN+"!",targ);
-        damage_targ(targ, targ->return_target_limb(), sdamage/2,"acid");
+        damage_targ(targ, targ->return_target_limb(), sdamage/12,"acid");
         return;
     }
 
     tell_object(targ,"%^BOLD%^A blinding orange light burns into you!");
     tell_room(place,"%^BOLD%^A blinding orange light burns into "+targ->QCN+"!",targ);
-    damage_targ(targ, targ->return_target_limb(), sdamage,"acid");
+    damage_targ(targ, targ->return_target_limb(), sdamage / 6,"acid");
 }
 
 
@@ -166,13 +166,13 @@ void ray3(object targ)
         if(evade_splash(targ)) return;
         tell_object(targ,"%^BOLD%^%^YELLOW%^A blinding yellow light grazes you!");
         tell_room(place,"%^BOLD%^%^YELLOW%^A blinding yellow light grazes "+targ->QCN+"!",targ);
-        damage_targ(targ, targ->return_target_limb(), sdamage/2,"electricity");
+        damage_targ(targ, targ->return_target_limb(), sdamage/12,"electricity");
         return;
     }
 
     tell_object(targ,"%^BOLD%^%^YELLOW%^A blinding yellow light burns into you!");
     tell_room(place,"%^BOLD%^%^YELLOW%^A blinding yellow light burns into "+targ->QCN+"!",targ);
-    damage_targ(targ, targ->return_target_limb(), sdamage,"electricity");
+    damage_targ(targ, targ->return_target_limb(), sdamage / 6,"electricity");
 }
 
 

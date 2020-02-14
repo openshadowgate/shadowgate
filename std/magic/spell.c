@@ -1163,9 +1163,7 @@ void wizard_interface(object user, string type, string targ)
         else TP->setAdminBlock(100);
     }
 
-    if (!shadow_spell) {
-        tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
-    }
+    tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
 
     // this is needed for PCs, uses different function than mobs
     if (objectp(target)) {
@@ -1518,9 +1516,7 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     }
 
     if (living(caster) && base_name(PO) != "/d/magic/obj/contingency") {
-        if (!shadow_spell) {
-            tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
-        }
+        tell_object(caster, "You begin to " + whatdo + " " + spell_name + "!");
         if (spell_type != "innate" && !silent_casting) {
             tell_room(environment(caster), caster->QCN +
                       " begins to " + whatdo + " a " + whatsit + "!", caster);
