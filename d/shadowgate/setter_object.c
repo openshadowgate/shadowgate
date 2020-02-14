@@ -1543,7 +1543,7 @@ void pick_genetics()
         {
             string * possible_templates;
 
-            possible_templates = map(filter_array(map(get_dir("/std/acquired_template/*.c"),(:"/std/acquired_template/" + $1:)), (:member_array($2, arrayp($1->races_allowed()) ? $1->races_allowed() : ({$2})) != -1:), MyCharacterInfo["race"]["race name"]), ( : replace_string(replace_string($1, "/std/acquired_template/", ""), ".c", ""):));
+            possible_templates = map(filter_array(map(get_dir("/std/acquired_template/*.c"),(:"/std/acquired_template/" + $1:)), (:member_array($2, arrayp($1->races_allowed()) ? $1->races_allowed() : ({$2})) != -1:), MyCharacterInfo["race"]["race name"]), (: replace_string(replace_string($1, "/std/acquired_template/", ""), ".c", "") :));
 
             /* possible_templates = explode(implode(get_dir("/std/acquired_template/\*.c"), ""), ".c"); */
 
