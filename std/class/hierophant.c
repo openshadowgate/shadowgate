@@ -71,7 +71,7 @@ string requirements()
     string str;
     str = "Prerequisites:\n"
         "    10 Points Spent in Spellcraft Skill\n"
-        "    20 Wisdom\n";
+        "    20 Caster Stat\n";
 
     return str;
 }
@@ -83,21 +83,39 @@ int prerequisites(object player)
     object race_ob;
     string race, base;
     int adj;
-    if(!objectp(player)) { return 0; }
+    if (!objectp(player)) {
+        return 0;
+    }
 
     race = player->query("subrace");
-    if(!race) { race = player->query_race(); }
-    race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
-    if(!objectp(race_ob)) { return 0; }
+    if (!race) {
+        race = player->query_race();
+    }
+    race_ob = find_object_or_load(DIR_RACES + "/" + player->query_race() + ".c");
+    if (!objectp(race_ob)) {
+        return 0;
+    }
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
-    if(skills["spellcraft"] < 10) { return 0; }
-    if(player->query_base_stats("wisdom") < 20) { return 0; }
+    if (skills["spellcraft"] < 10) {
+        return 0;
+    }
+    if (player->query_base_stats(base_class_ob(player)->query_casting_stat(player)) < 20) {
+        return 0;
+    }
     base = player->query("hierophant_base_class");
-    if(!base) { return 0; }
-    if(!player->is_class(base)) { return 0; }
-    if((player->query_class_level(base) + adj) < 20) { return 0; }
-    if(player->query_level() < 40) { return 0; }
+    if (!base) {
+        return 0;
+    }
+    if (!player->is_class(base)) {
+        return 0;
+    }
+    if ((player->query_class_level(base) + adj) < 20) {
+        return 0;
+    }
+    if (player->query_level() < 40) {
+        return 0;
+    }
     return 1;
 }
 

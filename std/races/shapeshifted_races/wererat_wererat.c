@@ -3,7 +3,7 @@
 
 inherit SHAPESHIFT;
 
-// Placeholder for wererat form
+int feattracker;
 
 void create()
 {
@@ -101,6 +101,10 @@ int init_shape(object obj, string str)
     shape->set_base_profile((string)obj->query("relationship_profile"));
     shape->set_shape_race("wererat");
     shape->apply_bonuses(shape->query_owner());
+    if (member_array("evasion", obj->query_temporary_feats()) == -1) {
+        obj->add_temporary_feat("evasion");
+        feattracker = 1;
+    }
 
     obj->add_id("wererat");
     obj->set("relationship_profile", shape->query_shape_profile());
@@ -131,6 +135,9 @@ int reverse_shape(object obj)
         desc->restore_profile_settings(obj, shape->query_base_profile());
     }
     shape->reverse_bonuses(shape->query_owner());
+    if (feattracker) {
+        obj->remove_temporary_feat(mastery_feat);
+    }
     shape->change_outof_message(obj);
     shape->set_owner(0);
     obj->remove_property("altered");
