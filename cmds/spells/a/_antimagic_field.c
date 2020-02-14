@@ -61,7 +61,7 @@ void dest_effect()
         place->remove_property("antimagic field");
     }
 
-    if (obectp(caster)) {
+    if (objectp(caster)) {
         caster->remove_property("antimagic field");
     }
 
