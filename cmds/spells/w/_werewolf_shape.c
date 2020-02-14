@@ -49,30 +49,20 @@ int preSpell()
 void spell_effect(int prof)
 {
     object shape;
-    if (!objectp(caster)){
+    if (!objectp(caster)) {
         TO->remove();
         return;
     }
-    new("/std/races/shapeshifted_races/werewolf_"+arg+".c")->init_shape(caster,arg);
+    new("/std/races/shapeshifted_races/werewolf_" + arg + ".c")->init_shape(caster, arg);
 
-    if(caster->query_property("shapeshifted"))
+    if (caster->query_property("shapeshifted")) {
         shape = caster->query_property("shapeshifted");
-    else
+    } else {
         shape = caster->query_property("altered");
+    }
 
-    bonus = clevel/4+1;
-    caster->add_sight_bonus(3);
-    caster->add_stat_bonus("strength",2);
-    caster->add_stat_bonus("dexterity",2);
-    caster->add_stat_bonus("constitution",2);
-    caster->add_stat_bonus("wisdom",2);
-    caster->set_resistance("silver",-50);
-    caster->set_resistance("cold",10);
-    caster->add_skill_bonus("perception",4);
-    caster->add_skill_bonus("survival",4);
-    caster->set_property("dance-of-cuts",1); //Full BAB
-    caster->set_property("rage",1);
-    caster->set_property("raged",1);
+    bonus = clevel / 4 + 1;
+    caster->set_property("dance-of-cuts", 1); //Full BAB
     spell_successful();
     addSpellToCaster();
 }
@@ -80,27 +70,19 @@ void spell_effect(int prof)
 void dest_effect()
 {
     object shape;
-	if(objectp(caster))
-    {
-        caster->add_sight_bonus(-3);
-        caster->add_stat_bonus("strength",-2);
-        caster->add_stat_bonus("dexterity",-2);
-        caster->add_stat_bonus("constitution",-2);
-        caster->add_stat_bonus("wisdom",-2);
-        caster->set_resistance("cold",-10);
-        caster->set_resistance("silver",50);
-        caster->add_skill_bonus("perception",-4);
-        caster->add_skill_bonus("survival",-4);
-        caster->set_property("dance-of-cuts",-1);
-        caster->remove_property("rage");
-        caster->remove_property("raged");
-        if(caster->query_property("shapeshifted"))
+    if (objectp(caster)) {
+        caster->set_property("dance-of-cuts", -1);
+        if (caster->query_property("shapeshifted")) {
             shape = caster->query_property("shapeshifted");
-        else
+        } else {
             shape = caster->query_property("altered");
-        if(objectp(shape))
+        }
+        if (objectp(shape)) {
             shape->reverse_shape(caster);
-	}
+        }
+    }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }

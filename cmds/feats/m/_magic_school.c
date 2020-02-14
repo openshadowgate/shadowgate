@@ -17,7 +17,7 @@ void create()
     feat_category("ArcaneSpellcraft");
     feat_name("magic school");
     feat_syntax("magic_school");
-    feat_desc("This feat allows a mage to select magic school dedication and school that opposes it.
+    feat_desc("This feat allows a mage or an archmage to select magic school dedication and school that opposes it.
 
 School of magic gives mages a degree of specialization. Spells of that school become more potent, while spells of opposing school become weaker, with power difference growing as mage learns.
 
@@ -31,7 +31,7 @@ School of magic gives mages a degree of specialization. Spells of that school be
   Invocation_Evocation
   Necromancy
 
-A mage that haven't made his choice will belong to %^WHITE%^%^BOLD%^Universalist%^RESET%^ school, having no penalties and bonuses.
+A mage that haven't made his choice will belong to %^WHITE%^%^BOLD%^Universalist%^RESET%^ school, having no penalties or bonuses.
 
 To start selection process type %^ORANGE%^<magic_school>%^RESET%^.
 

@@ -13,6 +13,15 @@ void create()
     set_ac_bonus(2);
     set_castable(1);
     set_can_talk(1);
+    set_shape_bonus("survival",4);
+    set_shape_bonus("perception",2);
+    set_shape_bonus("sight bonus",3);
+    set_shape_bonus("strentgh",2);
+    set_shape_bonus("dexterity",2);
+    set_shape_bonus("constitution",2);
+    set_shape_bonus("wisdom",2);
+    set_shape_bonus("cold resistance",10);
+    set_shape_bonus("silver resistance", -50);
     set_shape_race("werewolf");
     set_shape_profile("werewolf_hybrid_999");
 }
@@ -74,6 +83,8 @@ int init_shape(object obj,string str){
     shape->change_into_message(obj);
     shape->set_base_profile((string)obj->query("relationship_profile"));
     shape->set_shape_race("werewolf");
+    shape->apply_bonuses(shape->query_owner());
+
     obj->add_id("werewolf");
     obj->set("relationship_profile",shape->query_shape_profile());
     obj->add_id(obj->query_race());
@@ -98,6 +109,7 @@ int reverse_shape(object obj){
         desc->restore_profile_settings(obj,shape->query_base_profile());
 
     }
+    shape->reverse_bonuses(shape->query_owner());
     shape->change_outof_message(obj);
     shape->set_owner(0);
     obj->remove_property("altered");

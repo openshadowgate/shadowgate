@@ -65,19 +65,7 @@ void spell_effect(int prof)
         shape = caster->query_property("altered");
 
     bonus = clevel/4+1;
-    caster->add_sight_bonus(3);
-    caster->add_stat_bonus("dexterity",4);
-    caster->add_stat_bonus("constitution",4);
-    caster->set_resistance("silver",-50);
-    caster->add_skill_bonus("perception",4);
-    caster->add_skill_bonus("survival",4);
     caster->set_property("dance-of-cuts",1); //Full BAB
-    caster->set_property("rage",1);
-    caster->set_property("raged",1);
-    if (member_array("evasion", (string*)caster->query_temporary_feats()) == -1) {
-        caster->add_temporary_feat("evasion");
-        feattracker = 1;
-    }
     spell_successful();
     addSpellToCaster();
 }
@@ -86,18 +74,8 @@ void dest_effect()
 {
     object shape;
     if (objectp(caster)) {
-        caster->add_sight_bonus(-3);
-        caster->add_stat_bonus("dexterity", -4);
-        caster->add_stat_bonus("constitution", -4);
-        caster->set_resistance("silver", 50);
-        caster->add_skill_bonus("perception", -4);
-        caster->add_skill_bonus("survival", -4);
         caster->set_property("dance-of-cuts", -1);
-        caster->remove_property("rage");
-        caster->remove_property("raged");
-        if (feattracker == 1) {
-            caster->remove_temporary_feat("evasion");
-        }
+
         if (caster->query_property("shapeshifted")) {
             shape = caster->query_property("shapeshifted");
         } else {

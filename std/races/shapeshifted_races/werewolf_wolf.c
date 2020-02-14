@@ -24,13 +24,13 @@ void create()
     set_shape_bonus("sight bonus",3);
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
-    set_shape_height(50+random(12));
-    set_shape_weight(200+random(50));
-    set_shape_mastery_feat("knockdown");
     set_shape_bonus("strength",2);
     set_shape_bonus("dexterity",2);
     set_shape_bonus("constitution",2);
     set_shape_bonus("wisdom",2);
+    set_shape_height(50+random(12));
+    set_shape_weight(200+random(50));
+    set_shape_mastery_feat("knockdown");
 }
 
 int default_descriptions(object obj)
