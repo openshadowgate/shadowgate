@@ -11,9 +11,9 @@ object endplace;
 
 void create(){
     ::create();
-    set_spell_name("create portal");
-    set_spell_level(([ "cleric" : 8]));
-    set_spell_sphere("alteration");
+    set_spell_name("create portal"); // just portal in srds
+    set_spell_level(([ "cleric" : 7, "mage":7]));
+    set_spell_sphere("conjuration_summoning");
     set_domains("travel");
     set_syntax("cast CLASS create portal to <location>");
     set_description("This power allows the priest to call on the power of his deity to open a portal from his current "
@@ -122,7 +122,7 @@ void spell_effect(int prof){
     }
     spell_successful();
 
-    tell_object(caster,"%^BOLD%^%^CYAN%^You feel the power of your deity as the shimmering "
+    tell_object(caster,"%^BOLD%^%^CYAN%^You feel the power of the weave as the shimmering "
         "outline of a portal begins to appear!");
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+"'s chanting grows louder and the shimmering "
         "outline of a portal begins to appear in the air!",caster);
