@@ -116,6 +116,7 @@ int confirm_drop(string str,string theclass,int drop,int cost)
     tell_object(TP,"%^BOLD%^Adding up feats...%^RESET%^");
     TP->clear_feats();
     TP->set("free_feats",feats);
+    TP->delete("free_feat_wipe");
     tell_object(TP,"%^BOLD%^Clearing old feats...%^RESET%^");
     tell_object(TP,"%^BOLD%^Adding free feats...%^RESET%^");
 
