@@ -174,7 +174,9 @@ void dest_effect()
     }
     if (objectp(mon)) {
         tell_room(environment(mon), "%^BOLD%^%^YELLOW%^The creature departs back to its home!");
-        caster->remove_follower(mon);
+        if (objectp(caster)) {
+            caster->remove_follower(mon);
+        }
         mon->move("/d/shadowgate/void.c");
         mon->remove();
     }
