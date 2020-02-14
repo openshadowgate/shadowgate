@@ -10,7 +10,7 @@ void create()
     ::create();
 
     set_attack_limbs(({ "right hand", "left hand" }));
-    set_limbs(({ "mouth", "head", "torso", "waist ", "left arm", "left hand", "right arm", "right hand", "left leg", "left foor", "right leg", "right food", "tail", "maw" }));
+    set_limbs(({ "mouth", "head", "torso", "waist ", "left arm", "left hand", "right arm", "right hand", "left leg", "left foor", "right leg", "right food", "tail", }));
     set_base_attack_num(4);
     set_ac_bonus(2);
     set_castable(1);
@@ -32,8 +32,8 @@ int default_descriptions(object obj)
     if (!objectp(obj)) {
         return 0;
     }
-    obj->set_description("is a strange humanoid resembling its original race. It has wolf-like ears and is covered in dark bluesh fur.");
-    obj->setDescriptivePhrase("lean $R with dark blue fur and fluffy ears");
+    obj->set_description("is a strange creature resembling the rat, but more massive and fierce, with rat-like head, rad tail and rat hands, but standing as a humanoid.");
+    obj->setDescriptivePhrase("massive $R with a long tail");
 
     return 1;
 }
@@ -45,7 +45,7 @@ int change_into_message(object obj)
         return 0;
     }
     tell_object(obj, "%^RESET%^%^RED%^%^BOLD%^You turn your mind out to the plague withing as you focus on the core of your spirit.");
-    if (object->query_race("ratkin")) {
+    if (obj->query_race("ratkin")) {
         tell_object(obj, "%^RESET%^%^RED%^You can feel your body beginning to change, you grow bigger!");
     } else {
         tell_object(obj, "%^RESET%^%^RED%^You can feel your body beginning to change, you grow a tail, your face changes, your hands turn into rat like pats!");
@@ -94,7 +94,7 @@ int init_shape(object obj, string str)
     }
     if (obj->query_property("altered") || obj->query_property("shapeshifted")) {
         return 0;
-    }                                                                                       // can't shapeshift twice
+    }
     obj->set_property("altered", shape = new(base_name(TO) + ".c"));
     shape->set_owner(obj);
     shape->change_into_message(obj);

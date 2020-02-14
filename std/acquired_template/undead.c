@@ -9,7 +9,10 @@
   bonus damage in individual spells
 */
 
-inherit DAEMON;
+string *races_allowed()
+{
+    return ({"human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian", "goblin", "gnoll", "bugbear", "orc", "firbolg", "halfling", "dwarf", "beastkin",});
+}
 
 int apply_template(object ob)
 {

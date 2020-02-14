@@ -53,36 +53,42 @@ void InitInnate()
     }
 
     //Template based spells go here as well
-    if(is_undead())
-    {
+    if (is_undead()) {
         InnateAbilities += ([
-                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "animate dead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "animate dead" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                                 ]);
     }
 
-    if(is_vampire())
-    {
+    if (is_vampire()) {
         InnateAbilities += ([
-                                "create spawn" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "twilight shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "domination" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "gaseous form" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "night swarm" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "spider climb" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "sleep" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "create spawn" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "twilight shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "domination" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "gaseous form" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "night swarm" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "spider climb" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "sleep" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                                 ]);
     }
 
-    if(is_werewolf())
-    {
+    if (is_werewolf()) {
         InnateAbilities += ([
-                                "commune with nature" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "heart of the wild" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "werewolf shape" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "commune with nature" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "heart of the wild" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "werewolf shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                                 ]);
     }
+
+    if (is_wererat()) {
+        InnateAbilities += ([
+                                "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "stinking cloud" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "wererat shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                ]);
+    }
+
 
     // adding in feat-based innate spells here! N, 11/16
 

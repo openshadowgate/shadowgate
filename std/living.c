@@ -1735,7 +1735,7 @@ int is_undead()
 {
     return (query_race() == "undead" ||
             query_property("undead") ||
-            member_array("undead",query_id()) != -1 ||
+            member_array("undead", query_id()) != -1 ||
             query("undead")) || 0;
 }
 
@@ -1747,6 +1747,11 @@ int is_vampire()
 int is_werewolf()
 {
     return (query("werewolf")) || 0;
+}
+
+int is_wererat()
+{
+    return (query("wererat")) || 0;
 }
 
 void reset_all_status_effects()

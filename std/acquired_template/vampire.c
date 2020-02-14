@@ -1,7 +1,5 @@
 #include <std.h>
 
-inherit DAEMON;
-
 /*
 
   undead is superimposed
@@ -13,6 +11,11 @@ inherit DAEMON;
   resistances in /std/Object
   spells in their spell files
 */
+
+string *races_allowed()
+{
+    return ({"human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian"});
+}
 
 int apply_template(object ob)
 {

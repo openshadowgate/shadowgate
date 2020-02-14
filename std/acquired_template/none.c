@@ -1,6 +1,6 @@
 #include <std.h>
 
-string * restricted_races()
+string *races_allowed()
 {
     return ({});
 }
