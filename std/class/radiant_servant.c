@@ -175,6 +175,7 @@ int prerequisites(object player)
     base = player->query("base_class");
 
     if (!base) {
+        write("No base class.");
         return 0;
     }
 
@@ -183,18 +184,18 @@ int prerequisites(object player)
     }
 
     if ((player->query_class_level(base) + adj) < 20) {
+        write("Fail level.");
         return 0;
     }
 
     if (skills["healing"] < 10) {
-        return 0;
-    }
-
-    if ((player->query_class_level(base) + adj) < 20) {
+        tell_object(FPL("ilmarinen"),":"+skills["healing"]);
+        write("Fail skill.");
         return 0;
     }
 
     if (player->query_base_stats(base_class_ob(player)->query_casting_stat(player)) < 20) {
+        write("Fail stat.");
         return 0;
     }
     return 1;
