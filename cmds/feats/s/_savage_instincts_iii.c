@@ -10,7 +10,6 @@ void create() {
     feat_prereq("Savage instincts II, Druid L25");
     feat_desc("A druid can master the greatest of the instincts ofeach of its combat-based shapeshifts, allowing an extra ability whilefighting.");
     permanent(1);
-    set_required_for(({"mastery of fang and claw"}));
 }
 
 int allow_shifted() { return 1; }
