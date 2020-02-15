@@ -1,5 +1,5 @@
 #include <std.h>
-inherit "/std/riding_animal.c";  
+inherit "/std/riding_animal.c";
 
 private static int healingStuff;
 
@@ -35,37 +35,24 @@ void create(){
     set_stats("strength",18);
 }
 
-int restrict_mount_ok(object who) {
+int restrict_mount_ok(object who)
+{
     int lev, temp, hurt, newhp;
     lev = who->query_level();
 
-    if (who->is_class("paladin") || who->is_class("cavalier") || who->is_class("antipaladin")) {
-        temp = query_hp();
-	  hurt = query_max_hp() - temp;
-        set_level(lev);  // this wasn't working for some reason so using mlevel
-        set_riding_level(who->query_skill("athletics"));
-        set_mlevel("fighter",lev);
-        set_hd(lev,10);
-        set_max_hp(20*lev); 
-        set_hp(query_max_hp() - hurt);
-        set_damage(1,lev/2);
-        set_stats("strength",20);
-        if (healingStuff || query_max_hp() < query_hp()) {
-            set_hp(query_max_hp());
-            healingStuff = 0;
-        }
-        return 1;
-    }
-    set_level(20);
-    set_riding_level(20);
-    set_mlevel("fighter",20);
-    set_hd(20,10);
-    set_stats("strength",18);
-    set_max_hp(200);
+    set_level(lev);          // this wasn't working for some reason so using mlevel
+    set_riding_level(who->query_skill("athletics") - 10);
+    set_mlevel("fighter", lev);
+    set_hd(lev, 10);
+    set_max_hp(20 * lev);
+    set_hp(query_max_hp() - hurt);
+    set_damage(1, lev / 2);
+
     if (healingStuff || query_max_hp() < query_hp()) {
-       set_hp(query_max_hp());
-       healingStuff = 0;
+        set_hp(query_max_hp());
+        healingStuff = 0;
     }
-    set_damage(1,10);
+
+    set_damage(1, 10);
     return 1;
 }

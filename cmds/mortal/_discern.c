@@ -175,7 +175,7 @@ int cmd_discern(string str)
 
                 write("It requires no proficiency to wear.");
                 if (sizeof(obj->query_limbs())) {
-                    write("It can be worn on %^BOLD%^%^GREEN%^" + implode(obj->query_limbs(), "%^RESET%^, %^BOLD%^%^GREEN%^") + "%^RESET%^");
+                    write("It will be worn on %^BOLD%^%^GREEN%^" + implode(obj->query_limbs(), "%^RESET%^, %^BOLD%^%^GREEN%^") + "%^RESET%^");
                 }
             }
             else

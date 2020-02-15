@@ -14,6 +14,7 @@
 #define CONTROL "/d/magic/obj/mmirror"
 #define SCRY_D "/daemon/ic_scry_locate_d"
 #define DELAY 1500 + random(1500)
+#define SCRY_DELAY 60
 //minimum 25 minute delay with a random 25 minutes added to it.  Should work out to an average of 38 minutes or so. - Tsera
 inherit SPELL;
 object scry_control;
@@ -26,7 +27,7 @@ object puppeteer;
 void create() {
     ::create();
     set_spell_name("magic mirror");
-    set_spell_level(([ "mage" : 7, "bard" : 6, ]));
+    set_spell_level(([ "mage" : 7, "bard" : 6, "cleric":7]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS magic mirror on <object> (a scrying mirror)");
     set_description("By means of this spell, the wizard changes a normal mirror into a scrying device similar to a "
@@ -51,27 +52,33 @@ void create() {
 }
 
 int preSpell(){
-   string *theids;
-   if(userp(caster)) return 1;
-   theids = caster->query_id();
-   if(member_array("retainer",theids) != -1) {
-     puppeteer = caster->get_followee();
-     if(!objectp(puppeteer)) {
-       tell_object(caster,"Your master is AWOL!");
-       caster->force_me("shake");
-       caster->force_me("say I have noone to direct me.");
-       return 0;
-     }
-     if((int)puppeteer->query_property("mirror time")+DELAY > time()){
-       tell_object(caster,"You are already too drained to try that again so soon.");
-       caster->force_me("shake");
-       caster->force_me("say I cannot do that for you right now.");
-       return 0;
-     }
-   }
-   if(caster->query_property("remote scrying"))
-   {
-       tell_object(caster,"You are already looking upon someone from afar.");
+    string* theids;
+    if (userp(caster)) {
+        return 1;
+    }
+    theids = caster->query_id();
+    if (member_array("retainer", theids) != -1) {
+        puppeteer = caster->get_followee();
+        if (!objectp(puppeteer)) {
+            tell_object(caster, "Your master is AWOL!");
+            caster->force_me("shake");
+            caster->force_me("say I have noone to direct me.");
+            return 0;
+        }
+        if ((int)puppeteer->query_property("mirror time") + DELAY > time()) {
+            tell_object(caster, "You are already too drained to try that again so soon.");
+            caster->force_me("shake");
+            caster->force_me("say I cannot do that for you right now.");
+            return 0;
+        }
+    }
+    if (caster->query_property("mirror time") + SCRY_DELAY > time()) {
+        tell_object(caster,"You're exhausted from your previvous attempt.");
+        return 0;
+    }
+
+    if (caster->query_property("remote scrying")) {
+        tell_object(caster, "You are already looking upon someone from afar.");
        return 0;
    }
    return 1;
@@ -135,8 +142,14 @@ void spell_effect(int prof) {
 //End bonus stuff
     scry_control->move(environment(target));
 //    duration = 8 * (int)CLEVEL;
-    duration = 60+ (10 * (int)CLEVEL);
-    if(avatarp(caster)) duration = 400;
+    duration = 60 + (5 * CLEVEL);
+    if (avatarp(caster)) {
+        duration = 400;
+    }
+    // Bards don't get greater scrying
+    if (spell_type == "bard") {
+        duration = 60 + (CLEVEL);
+    }
     caster->set_property("remote scrying",1);
     call_out("dest_effect", duration);
     addSpellToCaster();
@@ -151,16 +164,27 @@ void spell_effect(int prof) {
        puppeteer->remove_property("mirror counter");
      }
    }
+
    return;
 }
 
-void dest_effect() {
-    if(objectp(caster)) caster->remove_property("remote scrying");
-    if(objectp(scry_control)) SCRY_D->stop_scry(scry_control, 0);
-    if(objectp(target)) target->set_short(former_short);
+void dest_effect()
+{
+    if (objectp(caster)) {
+        caster->remove_property("remote scrying");
+        set_property("mirror time", time());
+    }
+    if (objectp(scry_control)) {
+        SCRY_D->stop_scry(scry_control, 0);
+    }
+    if (objectp(target)) {
+        target->set_short(former_short);
+    }
     // For some reason there was an error, so I'll try to protect against it?
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
 
 // Handle premature end of the scry gracefully, probably

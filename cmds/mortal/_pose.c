@@ -20,7 +20,11 @@ int cmd_pose(string str) {
 Taken out to allow posing while bound for RP ~Circe~ 10/3/03
 */
    if (!str) {
-      return notify_fail("You need to specify how you want to pose.\n");
+       if (TP->query_property("posed")) {
+           write("Your pose is: " + TP->query_property("posed"));
+           return 1;
+       }
+       return notify_fail("You need to specify how you want to pose.\n");
    }
    if (sizeof(TP->query_attackers())) {
       return notify_fail("You're too busy right now.\n");
@@ -74,22 +78,28 @@ Taken out to allow posing while bound for RP ~Circe~ 10/3/03
 
 int help() {
   write(
-@HELP
-   %^BOLD%^%^GREEN%^pose [classname]%^RESET%^
-        Multiclassed characters sometimes need to pose as one of their classes, for instance to access a myclass-related help file.  If you specify a myclass, your status will be changed to posing as that myclass but it will not affect your description.
+"
+%^CYAN%^NAME%^RESET%^
 
-HELP
-   );
-   write(
-@HELP
-   %^BOLD%^%^GREEN%^pose [brief description of stance]%^RESET%^
-        Please keep the description reasonable and reasonably brief.  This is meant to enable you to convey your relative position in a room or your current activity (i.e. sitting on the couch, at the bar, standing with sword drawn, at the desk writing, etc.) to those who enter a room or from a glance around by having it added to the end of your adjective.
-        Yes, it is intentionally shown differently [sitting at the bar] than the actual states of (unconscious, bound) etc.
+pose - change a pose, active class
 
-   %^BOLD%^%^GREEN%^pose clear%^RESET%^ will remove your current pose
-Note:  Moving to another room will also remove a pose.
+%^CYAN%^SYNTAX%^RESET%^
 
-   %^BOLD%^%^GREEN%^pose show%^RESET%^ will show you your current pose
-HELP
-  );
+pose %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
+pose clear|show
+pose %^ORANGE%^%^ULINE%^CLASS%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command governs two features:
+
+First, ability to convey your relative position in the room you are in, your stance or current activity. E.g. you can set pose to 'sitting at a table', 'brewing potions', or 'loitering'. To set such pose use %^ORANGE%^<pose %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^%^ORANGE%^>%^RESET%^ command, to clean it use %^ORANGE%^<pose clear>%^RESET%^, and to show your current pose just type %^ORANGE%^<pose>%^RESET%^ or %^ORANGE%^<pose show>%^RESET%^.
+
+Second feature governs multiclassing, as multiclassing characters sometimes need to specify their current class, e.g. for %^ORANGE%^<master>%^RESET%^ command. To do so you can use %^ORANGE%^<pose %^ORANGE%^%^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^>%^RESET%^.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+emote, emoteat, say, souls, classes, master
+");
+
 }

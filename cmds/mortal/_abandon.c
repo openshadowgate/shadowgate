@@ -117,6 +117,7 @@ int confirm_drop(string str,string theclass,int drop,int cost)
     TP->clear_feats();
     TP->set("free_feats",feats);
     TP->delete("free_feat_wipe");
+    TP->delete("is_auto_detecting_traps");
     tell_object(TP,"%^BOLD%^Clearing old feats...%^RESET%^");
     tell_object(TP,"%^BOLD%^Adding free feats...%^RESET%^");
 
