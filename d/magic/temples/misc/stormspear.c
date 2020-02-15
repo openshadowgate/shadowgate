@@ -1,7 +1,10 @@
 //balanced for +6 - Yves 9/3/19
 // trade item for mephistar spear as there is no non-evil 2h equivalent (spear well outstrips the hammer).
+// added master weapon locks; good version did not match evil & can now no longer be wielded with other master weps! N, 2/20
 #include <std.h>
-inherit "/d/common/obj/weapon/spear_lg.c";
+//inherit "/d/common/obj/weapon/spear_lg.c";
+inherit "/d/common/obj/weapon/glaive.c";
+// using glaive as the closest martial match for the weapon (so shortsword same prof when switched). N, 2/20
 
 void badStuff();
 
@@ -11,7 +14,6 @@ void create(){
    set_id(({"spear","large spear","Spire of the Vengeful Storm","spear of the vengeful storm","spire of the vengeful storm","spire","spire of the vengeful storm","large spire","polearm"}));
    set_short("%^BOLD%^%^BLACK%^Sp%^CYAN%^i%^BLACK%^r%^BLUE%^e %^BLACK%^o%^BLUE%^f %^BLACK%^t%^CYAN%^h%^BLACK%^e Ve%^BLUE%^n%^BLACK%^ge%^CYAN%^f%^BLACK%^ul S%^BLUE%^t%^CYAN%^o%^BLACK%^rm%^RESET%^");
    set_obvious_short("%^BOLD%^%^BLACK%^A sp%^BLUE%^e%^CYAN%^a%^BLACK%^r ch%^CYAN%^a%^BLACK%^r%^BOLD%^%^BLUE%^g%^BOLD%^%^BLACK%^ed wi%^CYAN%^t%^BLACK%^h %^BLUE%^e%^BLACK%^ne%^CYAN%^r%^BLUE%^g%^BLACK%^y%^RESET%^");
-
    set_long("%^BOLD%^%^BLACK%^From its haft to its r%^BOLD%^%^YELLOW%^a%^BOLD%^%^BLACK%^zo%^BOLD%^%^RED%^r%^BOLD%^%^BLACK%^-sh%^BOLD%^%^WHITE%^a%^BOLD%^%^YELLOW%^r%^BOLD%^%^BLACK%^p tip, this "
 "incredible weapon positively thrums with %^BOLD%^%^YELLOW%^p%^BOLD%^%^BLACK%^o%^BOLD%^%^BLUE%^w%^BOLD%^%^CYAN%^e%^BOLD%^%^BLACK%^r.  A br%^RED%^i%^BLACK%^ll%^RED%^i%^YELLOW%^a%^BLACK%^nt "
 "%^RED%^r%^RESET%^%^RED%^u%^BOLD%^b%^RESET%^%^RED%^y %^BOLD%^%^BLACK%^spike forms the cap, lit by fl%^BOLD%^%^WHITE%^a%^BOLD%^%^BLACK%^sh%^BOLD%^%^CYAN%^e%^BOLD%^%^BLACK%^s of barely contained "
@@ -38,12 +40,13 @@ void create(){
    set_item_bonus("attack bonus",5);
    set_item_bonus("damage bonus",5);
    set_item_bonus("sight bonus",5);
-   set_weight(8);
+   set_weight(8); // leaving this intact so it matches shortsword, avoids glitches on change. N, 2/20
    set_value(50000);
    set_hit((:TO,"hitme":));
    set_wield((:TO,"wieldme":));
    set_unwield((:TO,"unwieldme":));
-   set_weapon_prof("exotic");
+//   set_weapon_prof("exotic"); // removing for inherit fixes, N 2/20
+   set_property("master weapon",1);
 }
 
 int wieldme(){
@@ -52,6 +55,10 @@ int wieldme(){
          tell_object(ETO,"%^BOLD%^%^CYAN%^You are unable to wield the mighty spear!%^RESET%^");
          return 0;
       }
+   }
+   if(ETO->query_property("master weapon")) { //preventing stack up with other "top" weapons
+     tell_object(ETO,"You find it impossible to lift two such mighty weapons!",ETO);
+     return 0;
    }
    if(!((int)ETO->query_true_align()%3)) {
      tell_object(ETO,"%^BOLD%^%^CYAN%^The engraved hawk lets out an ear-splitting scream of rage, and you drop the spear!%^RESET%^");
@@ -68,6 +75,7 @@ int wieldme(){
    tell_room(EETO,"%^BOLD%^%^BLACK%^As "+ETO->QCN+" gr%^BLUE%^i%^BLACK%^ps the weapon, sparks of e%^BOLD%^%^CYAN%^n%^BOLD%^%^BLUE%^e%^BOLD%^%^BLACK%^r%^BOLD%^%^CYAN%^g%^BOLD%^%^BLACK%^y dance "
 "across "+ETO->QP+" fingertips.%^RESET%^",ETO);
    ETO->set_property("good item",1);
+   ETO->set_property("master weapon",1);
    return 1;
 }
 
@@ -77,6 +85,7 @@ int unwieldme(){
    tell_room(EETO,"%^BOLD%^%^BLACK%^A slight cr%^BOLD%^%^CYAN%^a%^BOLD%^%^WHITE%^c%^BOLD%^%^BLACK%^kli%^BOLD%^%^BLUE%^n%^BOLD%^%^BLACK%^g can be heard as "+ETO->QCN+" releases the "
 "magnificent weapon.",ETO);
    ETO->set_property("good item",-1);
+   ETO->set_property("master weapon",-1);
    return 1;
 }
 

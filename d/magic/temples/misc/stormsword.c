@@ -1,5 +1,6 @@
 //balanced for +6 - Yves 9/3/19
 // trade item for mephistar spear as there is no non-evil 2h equivalent (spear well outstrips the hammer).
+// added master weapon locks; good version did not match evil & can now no longer be wielded with other master weps! N, 2/20
 #include <std.h>
 inherit "/d/common/obj/weapon/shortsword.c";
 
@@ -37,12 +38,12 @@ void create(){
    set_item_bonus("attack bonus",5);
    set_item_bonus("damage bonus",5);
    set_item_bonus("sight bonus",5);
-   set_weight(8); //to match weight of spear since same weapon
+   set_weight(8); //to match weight of spear to avoid glitches on transform
    set_value(50000);
    set_hit((:TO,"hitme":));
    set_wield((:TO,"wieldme":));
    set_unwield((:TO,"unwieldme":));
-   set_weapon_prof("exotic");
+//   set_weapon_prof("exotic"); // weapon streamlining from inherits, N 2/20
 }
 
 int wieldme(){
@@ -51,6 +52,10 @@ int wieldme(){
          tell_object(ETO,"%^BOLD%^%^CYAN%^You are unable to wield the frosty sword!%^RESET%^");
          return 0;
       }
+   }
+   if(ETO->query_property("master weapon")) { //preventing stack up with other "top" weapons
+     tell_object(ETO,"You find it impossible to lift two such mighty weapons!",ETO);
+     return 0;
    }
    if(!((int)ETO->query_true_align()%3)) {
      tell_object(ETO,"%^BOLD%^%^CYAN%^The engraved hawk lets out an ear-splitting scream of rage, and you drop the spear!%^RESET%^");
@@ -66,6 +71,8 @@ int wieldme(){
 "your fingertips.%^RESET%^");
    tell_room(EETO,"%^BOLD%^%^BLACK%^As "+ETO->QCN+" gr%^BLUE%^i%^BLACK%^ps the weapon, sparks of e%^BOLD%^%^CYAN%^n%^BOLD%^%^BLUE%^e%^BOLD%^%^BLACK%^r%^BOLD%^%^CYAN%^g%^BOLD%^%^BLACK%^y dance "
 "across "+ETO->QP+" fingertips.%^RESET%^",ETO);
+   ETO->set_property("good item",1);
+   ETO->set_property("master weapon",1);
    return 1;
 }
 
@@ -74,13 +81,15 @@ int unwieldme(){
 "magnificent weapon.");
    tell_room(EETO,"%^BOLD%^%^BLACK%^A slight cr%^BOLD%^%^CYAN%^a%^BOLD%^%^WHITE%^c%^BOLD%^%^BLACK%^kli%^BOLD%^%^BLUE%^n%^BOLD%^%^BLACK%^g can be heard as "+ETO->QCN+" releases the "
 "magnificent weapon.",ETO);
+   ETO->set_property("good item",-1);
+   ETO->set_property("master weapon",-1);
    return 1;
 }
 
 int hitme(object targ){
    if(!objectp(targ)) return roll_dice(1,4);
    if(random(100) > 40) return roll_dice(1,4);
-   switch(random(9)){
+   switch(random(10)){
       case 0..1:
          tell_room(EETO,"%^BLUE%^"+ETO->QCN+" suddenly turns and slams the pommel of "+ETO->QP+" sword into "+targ->QCN+"'s face!%^RESET%^",({targ,ETO}));
          tell_object(targ,"%^BLUE%^"+ETO->QCN+" suddenly turns and slams the pommel of "+ETO->QP+" sword into your face!%^RESET%^!");
@@ -97,7 +106,20 @@ int hitme(object targ){
          tell_room(EETO,"%^RED%^"+ETO->QCN+"'s blade slashes into "+targ->QCN+", discharging a sh%^YELLOW%^o%^RED%^c%^RESET%^%^RED%^ki%^ORANGE%^n%^RED%^g burst of %^BOLD%^%^CYAN%^a%^BLUE%^z%^CYAN%^u%^WHITE%^r%^CYAN%^e %^BLUE%^l%^WHITE%^i%^YELLOW%^g%^CYAN%^h%^BLUE%^t%^CYAN%^n%^WHITE%^i%^BLUE%^n%^CYAN%^g%^RESET%^%^RED%^!%^RESET%^",({targ,ETO}));
          tell_object(ETO,"%^RED%^Your blade slashes into "+targ->QCN+", discharging a sh%^YELLOW%^o%^RED%^c%^RESET%^%^RED%^ki%^ORANGE%^n%^RED%^g burst of %^BOLD%^%^CYAN%^a%^BLUE%^z%^CYAN%^u%^WHITE%^r%^CYAN%^e %^BLUE%^l%^WHITE%^i%^YELLOW%^g%^CYAN%^h%^BLUE%^t%^CYAN%^n%^WHITE%^i%^BLUE%^n%^CYAN%^g%^RESET%^%^RED%^!%^RESET%^");
          return roll_dice(4,8);
+   case 9:
+      if(targ->query_stoneSkinned()){
+         tell_room(EETO,"%^BOLD%^%^BLUE%^As "+ETO->QCN+"'s blade sinks into "+targ->QCN+", el%^YELLOW%^e%^BLUE%^ctr%^CYAN%^i%^BLUE%^c%^WHITE%^i%^BLUE%^ty crackles in an impossibly fast wave across "+targ->QP+" body, shat%^CYAN%^t%^BLUE%^ering "+targ->QP+" defenses!%^RESET%^",({targ,ETO}));
+         tell_object(targ,"%^BOLD%^%^BLUE%^As "+ETO->QCN+"'s blade sinks into you, el%^YELLOW%^e%^BLUE%^ctr%^CYAN%^i%^BLUE%^c%^WHITE%^i%^BLUE%^ty crackles in an impossibly fast wave across your body, shat%^CYAN%^t%^BLUE%^ering your magical protections!%^RESET%^");
+         tell_object(ETO,"%^BOLD%^%^BLUE%^As your blade sinks into "+targ->QCN+", el%^YELLOW%^e%^BLUE%^ctr%^CYAN%^i%^BLUE%^c%^WHITE%^i%^BLUE%^ty crackles in an impossibly fast wave across "+targ->QP+" body, shat%^CYAN%^t%^BLUE%^ering "+targ->QP+" defenses!%^RESET%^");
+         targ->set_stoneSkinned(0);
       }
+      else{
+         tell_room(EETO,"%^BOLD%^%^BLUE%^As "+ETO->QCN+"'s blade sinks into "+targ->QCN+", el%^YELLOW%^e%^BLUE%^ctr%^CYAN%^i%^BLUE%^c%^WHITE%^i%^BLUE%^ty crackles in an impossibly fast wave across "+targ->QP+" body!%^RESET%^",({targ,ETO}));
+         tell_object(targ,"%^BOLD%^%^BLUE%^As "+ETO->QCN+"'s blade sinks into you, el%^YELLOW%^e%^BLUE%^ctr%^CYAN%^i%^BLUE%^c%^WHITE%^i%^BLUE%^ty crackles in an impossibly fast wave across your body, numbing your limbs!%^RESET%^");
+         tell_object(ETO,"%^BOLD%^%^BLUE%^As your blade sinks into "+targ->QCN+", el%^YELLOW%^e%^BLUE%^ctr%^CYAN%^i%^BLUE%^c%^WHITE%^i%^BLUE%^ty crackles in an impossibly fast wave across "+targ->QP+" body!%^RESET%^");
+         targ->set_paralyzed(roll_dice(1,8),"%^BOLD%^%^WHITE%^You're still trying to regain control of your limbs!%^RESET%^");
+      }
+   }
    return 1;
 }
 

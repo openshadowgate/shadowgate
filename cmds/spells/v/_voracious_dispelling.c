@@ -23,7 +23,7 @@ void create() {
 
 string query_cast_string() {
     tell_object(caster,"%^BOLD%^%^WHITE%^Your hands tremble with %^BOLD%^%^BLACK%^di%^RESET%^sr%^BOLD%^%^BLACK%^u%^RESET%^pt%^BOLD%^%^BLACK%^iv%^RESET%^e %^BOLD%^%^WHITE%^potential.%^RESET%^");
-    tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+"'s hands tremble with %^BOLD%^%^BLACK%^di%^RESET%^sr%^BOLD%^%^BLACK%^u%^RESET%^pt%^BOLD%^%^BLACK%^iv%^RESET%^e %^BOLD%^%^WHITE%^potential.%^RESET%^",caster);
+    tell_room(environment(caster),"%^BOLD%^%^WHITE%^"+caster->QCN+"'s hands tremble with %^BOLD%^%^BLACK%^di%^RESET%^sr%^BOLD%^%^BLACK%^u%^RESET%^pt%^BOLD%^%^BLACK%^iv%^RESET%^e %^BOLD%^%^WHITE%^potential.%^RESET%^",caster);
     return "display";
 }
 
