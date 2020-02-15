@@ -7,7 +7,7 @@ void create() {
     set_spell_level(([ "druid" : 2,  ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS feast of ashes on TARGET");
-    set_description("You curse the target with a hunger no food can assuage. They become immediately hungry");
+    set_description("You curse the target with a hunger no food can assuage. They become immediately hungry.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("fort");
