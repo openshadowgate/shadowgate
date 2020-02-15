@@ -240,7 +240,7 @@ int use_scroll(string str){
         return 1;
     }
 
-    lev = (TP->query_skill("spellcraft")) * 5 / 6;
+    lev = (TP->query_skill("spellcraft")) * 5 / 6 + 1;
 
     if (FEATS_D->usable_feat(TP, "enhance scroll")) {
         lev = TP->query_guild_level(TP->query("base_class"));
