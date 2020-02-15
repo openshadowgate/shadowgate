@@ -71,7 +71,7 @@ int cmd_discern(string str)
         notify_fail("Discern what?\n");
         return 0;
     }
-    if(!obj = present(str, TP)) 
+    if(!obj = present(str, TP))
     {
         notify_fail("You don't have that!\n");
         return 0;
@@ -105,7 +105,7 @@ int cmd_discern(string str)
         if(dice < 1) dice = 1;
 
         lnum = obj->query_large_wc_num();
-        ldice = obj->query_large_wc_dice();        
+        ldice = obj->query_large_wc_dice();
         ldice = to_int(0.5 +(ldice * wear/100.0));
         if(ldice < 1) ldice = 1;
 
@@ -116,7 +116,7 @@ int cmd_discern(string str)
         write("%^WHITE%^It deals %^BOLD%^%^GREEN%^"+num+"-"+num*dice+" ("+num+"d"+dice+")%^RESET%^ damage to normal creatures.");
         write("%^WHITE%^It deals %^BOLD%^%^GREEN%^"+lnum+"-"+lnum*ldice+" ("+lnum+"d"+ldice+")%^RESET%^ damage to large creatures.");
         write("%^WHITE%^It scores critical hit on a roll of %^BOLD%^%^ORANGE%^"+range+"-20%^RESET%^.");
-        write("%^WHITE%^It has critical damage multiplier of %^BOLD%^%^ORANGE%^"+multiplier+"%^RESET%^.");        
+        write("%^WHITE%^It has critical damage multiplier of %^BOLD%^%^ORANGE%^"+multiplier+"%^RESET%^.");
         if((int)"/daemon/config_d.c"->check_config("critical damage") == 0){
             write("%^WHITE%^It deals %^GREEN%^"+multiplier+"%^GREEN%^ times normal damage on a crit.");
         }
@@ -127,20 +127,20 @@ int cmd_discern(string str)
         }
         write("");
         if(!obj->query_weapon_prof()) {
-            write("%^WHITE%^It has %^BOLD%^%^GREEN%^no proficiency set.%^RESET%^");        
+            write("%^WHITE%^It has %^BOLD%^%^GREEN%^no proficiency set.%^RESET%^");
             return 1;
         }
         write("%^WHITE%^It %^BOLD%^%^RED%^requires %^GREEN%^"+obj->query_weapon_prof()+"%^RESET%^%^ proficiency to be used successfully.");
         write("It is a %^BOLD%^%^RED%^"+size2str((int)obj->query_size())+"%^RESET%^%^ sized weapon.");
-        write("It "+checkhands((int)obj->query_size(),(int)TP->query_size())+".");        
-        if(obj->is_lrweapon()) 
+        write("It "+checkhands((int)obj->query_size(),(int)TP->query_size())+".");
+        if(obj->is_lrweapon())
         {
             string ammotype,*bowids;
 
             ammotype = obj->query_ammo();
             bowids = obj->query_id();
-            if(sizeof(bowids)) 
-                if(member_array(ammotype,bowids) != -1) 
+            if(sizeof(bowids))
+                if(member_array(ammotype,bowids) != -1)
                 {
                     write("%^WHITE%^It uses %^BOLD%^%^GREEN%^no ammunition%^RESET%^.");
                 }
@@ -172,13 +172,16 @@ int cmd_discern(string str)
                    (string)obj->query_type() == "bracer" ||
                    (string)obj->query_type() == "sheath")
                     write("It requires %^BOLD%^%^ORANGE%^"+checkrepair((string)obj->query_type(),(string *)obj->query_property("repairtype"))+" %^RESET%^craft skill to repair.");
-                
+
                 write("It requires no proficiency to wear.");
+                if (sizeof(obj->query_limbs())) {
+                    write("It can be worn on %^BOLD%^%^GREEN%^" + implode(obj->query_limbs(), "%^RESET%^, %^BOLD%^%^GREEN%^") + "%^RESET%^");
+                }
             }
             else
             {
                 write("It %^RED%^requires %^BOLD%^%^GREEN%^"+obj->query_armor_prof()+"%^RESET%^ armor proficiency to wear.");
-                write("It requires %^BOLD%^%^ORANGE%^"+checkrepair((string)obj->query_type(),(string *)obj->query_property("repairtype"))+" %^RESET%^craft skill to repair this item.");                
+                write("It requires %^BOLD%^%^ORANGE%^"+checkrepair((string)obj->query_type(),(string *)obj->query_property("repairtype"))+" %^RESET%^craft skill to repair this item.");
             }
         }
         return 1;
@@ -199,7 +202,7 @@ discern %^ORANGE%^%^ULINE%^ITE%^RESET%^M
 
 %^CYAN%^%^DESCRIPTION%^RESET%^
 
-This command will list non-magical properties of weapons and armor. 
+This command will list non-magical properties of weapons and armor.
 
 For weapons, it will give base weapon damage, not-adjusted critical damage, proficiency, size, limbs required to use it, ammunition for ranged weapons and skill required to repair it.
 
@@ -210,4 +213,3 @@ For armor, it will give armor bonus (armor class), proficiency and skill require
 study, look
 ");
 }
-

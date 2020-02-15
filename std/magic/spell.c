@@ -3063,9 +3063,9 @@ void help()
     if (monk_way) {
         write("%^BOLD%^%^RED%^Monk way:%^RESET%^ " + monk_way);
     }
-    if (verbal_comp || somatic_comp) {
-        write("%^BOLD%^%^RED%^Components:%^RESET%^ " + (verbal_comp ? "V " : "") + (somatic_comp ? "S " : ""));
-    }
+    /* if (verbal_comp || somatic_comp) { */
+    /*     write("%^BOLD%^%^RED%^Components:%^RESET%^ " + (verbal_comp ? "V " : "") + (somatic_comp ? "S " : "")); */
+    /* } */
     if (save_type) {
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ " + save_type);
     }
@@ -3094,7 +3094,7 @@ void help()
         write("%^BOLD%^%^RED%^This spell is a curse.");
     }
     if (aoe_spell) {
-        write("%^BOLD%^%^RED%^This spell is Area of Effect");
+        write("%^BOLD%^%^RED%^This spell is Area of Effect.");
     }
     if (traveling_aoe_spell || traveling_spell) {
         write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
