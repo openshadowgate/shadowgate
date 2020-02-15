@@ -1152,35 +1152,52 @@ string query_desc(string unused) {
    return pre + reg;
 }
 
-int query_stats(string stat) {
+int query_stats(string stat)
+{
     int x, y, z, num, res;
 
-   if(stat_bonus) x= stat_bonus[stat];
-   else x = 0;
+    if (stat_bonus) {
+        x = stat_bonus[stat];
+    } else {
+        x = 0;
+    }
 
-//   y = stats[stat];
     z = (int)POISON_D->query_poison_effect(TO, stat);
-    if(!intp(z)) z = 0;
+    if (!intp(z)) {
+        z = 0;
+    }
     y = query_base_stats(stat);
-    if(!intp(y)) y = 0;
-    if(!intp(x)) x = 0;
-   //return stats[stat] + x;
-    res = x+y+z;
+    if (!intp(y)) {
+        y = 0;
+    }
+    if (!intp(x)) {
+        x = 0;
+    }
+    //return stats[stat] + x;
+    res = x + y + z;
     res = WORLD_EVENTS_D->monster_modification_event(res, stat, TO);
-    if(TO->is_vampire())
-        if(stat=="strength"||
-           stat=="charisma")
-        {
-            int blst = (20000-(int)TO->query_bloodlust())/2000-1;
-            res -= blst<0?0:blst;
+    if (TO->is_vampire()) {
+        if (stat == "strength" ||
+            stat == "charisma") {
+            int blst = (20000 - (int)TO->query_bloodlust()) / 2000 - 1;
+            res -= blst < 0 ? 0 : blst;
         }
+    }
 
     res += EQ_D->gear_bonus(TO, stat);
-    //if(res > 59) { return 60; }
-    if(res > 29) { return 30; }
-    if(res < 1) { return 1; }
-    else return res;  //return the base stat + the bonus + any poison damage
-								   //done to the stat - Saide
+
+    // This should not (could not) affect users.
+    if (res > 34) {
+        return 35;
+    }
+    /* if (res > 29) { */
+    /*     return 30; */
+    /* } */
+    if (res < 1) {
+        return 1;
+    }else {
+        return res;
+    }
 }
 
 int query_base_stats(string stat) {

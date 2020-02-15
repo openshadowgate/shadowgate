@@ -490,38 +490,19 @@ void die(object ob)
     if(!objectp(TO)) { return; }
     if(!objectp(ETO)) { return; }
 
-    if(!query_property("new_exp_set")) { set_new_exp(TO->query_highest_level(),"normal"); }
+    if (!query_property("new_exp_set")) {
+        set_new_exp(TO->query_highest_level(), "normal");
+    }
 
-    if(max_level)
-    {
-        live = all_living(ETO);
-        live = filter_array(live,"is_non_immortal_player",FILTERS_D);
-        for(i=0;sizeof(live),i<sizeof(live);i++)
-        {
-            if(!objectp(live[i])) { continue; }
-            if(live[i]->query_character_level() > max_level)
-            {
-                if(!random(30))
-                {
-                    tell_object(live[i],TO->query_short()+" just isn't much of a challenge, need to find something stronger to test yourself.");
-                }
-            }
+    if (functionp(__Die)) {
+        if (!((int)((*__Die)(ob)))) {
+            return;
         }
-    }
-
-    if(functionp(__Die))
-    {
-        if(!((int)((*__Die)(ob)))) return;
-    }
-    else if(stringp(__Die))
-    {
-        tell_room(ETO,__Die,TO);
-    }
-    else
-    {
-        tell_room(ETO, "%^RED%^"+TO->QCN+" drops dead before you.%^RESET%^",TO);
-        if(ETO->query_property("arena"))
-        {
+    }else if (stringp(__Die)) {
+        tell_room(ETO, __Die, TO);
+    }else {
+        tell_room(ETO, "%^RED%^" + TO->QCN + " drops dead before you.%^RESET%^", TO);
+        if (ETO->query_property("arena")) {
             destall(TO);
             return;
         }
@@ -750,82 +731,101 @@ int roll_dice(int num, int sides) {
    return cnt;
 }
 
-void set_hd(int dice, int bonus) {      // sets the hit dice of a monster
-   hit_dice = dice;                 // 2, 0 would be 2d8 + 0
-   hit_dice_bonus = bonus;
-   set_max_hp(roll_dice(dice,8));
-   set_hp(query_max_hp());
-   //do_exp(dice,bonus);
-   if(!query_classes() || query_classes() == ({})) set_class("fighter");
-   set_level(dice);
-}
-
-void do_exp(int dice,int bonus)
+void set_hd(int dice, int bonus)
 {
-   if(bonus > 0) dice++;
-   if(bonus < 0) dice--;
-   if(dice < 1) dice = 1;
-   if(dice > 13) {
-      dice -= 13;
-      set_exp((2000+(dice*200)));
-      return;
-   }
-   switch(dice) {
-   case 1:  set_exp(15);  return;
-   case 2:  set_exp(35);  return;
-   case 3:  set_exp(65);  return;
-   case 4:  set_exp(120); return;
-   case 5:  set_exp(120); return;
-   case 6:  set_exp(175); return;
-   case 7:  set_exp(270); return;
-   case 8:  set_exp(390); return;
-   case 9:  set_exp(500); return;
-   case 10: set_exp(850);return;
-   case 11: set_exp(960);return;
-   case 12: set_exp(1150);return;
-   case 13: set_exp(1250);return;
-   default: set_exp(15);   return;
-   }
+    hit_dice = dice;
+    hit_dice_bonus = bonus;
+    set_max_hp(roll_dice(dice, 12));
+    set_hp(query_max_hp());
+    if (!query_classes() || query_classes() == ({})) {
+        set_class("fighter");
+    }
+    set_level(dice);
 }
 
-int query_hd_bonus() {return hit_dice_bonus;}
-
-int query_hd() {return hit_dice;}
-
-void set_level(int x) {
-   level = x;
-   set_hp(query_max_hp());
-   set_stats("constitution", x*3/2);
-   set_stats("strength", x*3/2);
-   set_stats("intelligence", x*3/2);
-   set_stats("wisdom", x*3/2);
-   set_stats("dexterity", x*3/2);
-   set_stats("charisma", x*3/2);
-   set_max_mp((query_stats("intelligence")/2)*x);
-   set_mp(query_max_mp());
-//    set_exp( (int)ADVANCE_D->get_exp(x,"fighter"));
-   set_mlevel(TO->query_class(),TO->query_level());
-   if (!query_static_bab()) { static_bab = (int)TO->query_level(); }
-   // Added to give the mobs a bonus to push them back up to the THACO they had before the change
-   // -Ares 8/22/06
-   // And we don't need it since the thaco has been changed back
-   //if(!BONUS_ADDED) { BONUS_ADDED = 1; if(x > 20) { TO->add_attack_bonus((x - 20)/2); } }
+void do_exp(int dice, int bonus)
+{
+    if (bonus > 0) {
+        dice++;
+    }
+    if (bonus < 0) {
+        dice--;
+    }
+    if (dice < 1) {
+        dice = 1;
+    }
+    if (dice > 13) {
+        dice -= 13;
+        set_exp((2000 + (dice * 200)));
+        return;
+    }
+    switch (dice) {
+    case 1:  set_exp(15);  return;
+    case 2:  set_exp(35);  return;
+    case 3:  set_exp(65);  return;
+    case 4:  set_exp(120); return;
+    case 5:  set_exp(120); return;
+    case 6:  set_exp(175); return;
+    case 7:  set_exp(270); return;
+    case 8:  set_exp(390); return;
+    case 9:  set_exp(500); return;
+    case 10: set_exp(850); return;
+    case 11: set_exp(960); return;
+    case 12: set_exp(1150); return;
+    case 13: set_exp(1250); return;
+    default: set_exp(15);   return;
+    }
 }
 
-int query_level() {
+int query_hd_bonus()
+{
+    return hit_dice_bonus;
+}
+
+int query_hd()
+{
+    return hit_dice;
+}
+
+void set_level(int x)
+{
+    level = x;
+    set_hp(query_max_hp());
+    set_stats("constitution", x * 3 / 2);
+    set_stats("strength", x * 3 / 2);
+    set_stats("intelligence", x * 3 / 2);
+    set_stats("wisdom", x * 3 / 2);
+    set_stats("dexterity", x * 3 / 2);
+    set_stats("charisma", x * 3 / 2);
+    set_max_mp((query_stats("intelligence") / 2) * x);
+    set_mp(query_max_mp());
+    set_mlevel(TO->query_class(), TO->query_level());
+    if (!query_static_bab()) {
+        static_bab = (int)TO->query_level();
+    }
+    // Added to give the mobs a bonus to push them back up to the THACO they had before the change
+    // -Ares 8/22/06
+    // And we don't need it since the thaco has been changed back
+    //if(!BONUS_ADDED) { BONUS_ADDED = 1; if(x > 20) { TO->add_attack_bonus((x - 20)/2); } }
+}
+
+int query_level()
+{
     level = query_highest_level();
-   if(level == 0) {
-      return TO->query_hd();
-   }
-   return level;
+    if (level == 0) {
+        return TO->query_hd();
+    }
+    return level;
 }
 
 // Added by Valodin, June 28, 1993
 // Sets the body type to a certain race using the race daemon
-void set_race(string  str)
+void set_race(string str)
 {
-	::set_race(str);
-	if(!body_type) set_body_type(str);
+    ::set_race(str);
+    if (!body_type) {
+        set_body_type(str);
+    }
 }
 
 
