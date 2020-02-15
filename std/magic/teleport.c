@@ -98,6 +98,9 @@ mixed teleport_object(object invoker, mixed teleportee, mixed destination, int c
         return 0;
     }
 
+    destroom->set_property("recent teleport", ENV(tped));
+    ENV(tped)->set_property("recent teleport", destroom);
+
     tped->move_player(destroom);
 
     return destroom;

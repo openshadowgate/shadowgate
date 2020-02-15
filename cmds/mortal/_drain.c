@@ -78,18 +78,16 @@ int cmd_drain(string args)
         return 1;
     }
 
-    if (targobj->query_property("negative energy affinity") ||
-        targobj->query_race() == "shade" ||
-        targobj->query_race() == "deva") {
+    if (targobj->query_property("negative energy affinity")) {
         write("You should eat fresh food.\n");
         return 1;
     }
 
-
-    if(targobj->query_property("garlic_scent"))
-    {
-        tell_object(TP,"%^BOLD%^%^RED%^Strong odor of garlic makes you sick!");
-        tell_object(TP,"%^BOLD%^%^RED%^You start uncontrollably puking blood.");
+    if (targobj->query_property("garlic_scent") ||
+        targobj->query_race() == "shade" ||
+        targobj->query_race() == "deva") {
+        tell_object(TP, "%^BOLD%^%^RED%^Something is wrong with your target's blood, it makes you sic!");
+        tell_object(TP, "%^BOLD%^%^RED%^You start uncontrollably puking blood.");
         TP->add_bloodlust(-20000);
         TP->set_paralyzed(roll_dice(1, 4) * 8, "%^BOLD%^%^RED%^You are sick from garlic scent.");
         return 1;
@@ -195,7 +193,7 @@ void drain_health(object target)
     int dam;
     dam = roll_dice(TP->query_level(),6);
     target->cause_typed_damage(target,"torso",dam,"negative energy");
-    TP->add_max_hp_bonus(dam*2);
+    TP->add_max_hp_bonus(dam / 8);
     //target->cause_typed_damage(caster,"torso",dam,"negative energy");
 }
 

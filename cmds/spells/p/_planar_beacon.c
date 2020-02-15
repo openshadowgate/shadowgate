@@ -116,6 +116,7 @@ void do_summon(object target) {
 "before "+caster->QCN+"!");
         tell_object(caster,"%^BOLD%^%^CYAN%^You forcefully yank forward the glowing magical beacon, drawing "
 +target->QCN+" through the weave to appear before you!");
+        tell_room(ENV(target), "%^BOLD%^%^CYAN%^" + target->QCN + " disappears in a flash!.");
         TELEPORT->teleport_object(caster, target, ENV(caster), clevel);
         dest_effect();
         return;
@@ -126,6 +127,7 @@ void do_summon(object target) {
         tell_object(caster,"%^BOLD%^%^BLUE%^You try to forcefully drag "+target->QCN+" through the weave to you, but the "
 "spell backfires and you are thrown forward to appear before "+target->QO+"!");
         tell_object(caster,"%^BOLD%^You are transported to another place!");
+        tell_room(ENV(caster), "%^BOLD%^%^CYAN%^" + target->QCN + " disappears in a flash!.");
         TELEPORT->teleport_object(caster, caster, ENV(target), clevel);
         dest_effect();
         return;
