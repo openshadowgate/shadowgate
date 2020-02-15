@@ -60,7 +60,7 @@ void execute_attack()
 
     define_base_damage(2);
 
-    tell_room(place, "%^BOLD%^%^BLACK%^The shadows claim the lives of everyone in the area.");
+    tell_room(place, "%^BOLD%^%^BLACK%^The deadly shadows swoop across the area.");
     for (i = 0; i < sizeof(foes); i++) {
         if (!objectp(targ = foes[i])) {
             continue;

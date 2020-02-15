@@ -11,10 +11,10 @@ int timer,flag,stage,toggle,counter;
 void create()
 {
     ::create();
-    set_spell_name("typhon");
+    set_spell_name("typhoon");
     set_spell_level(([ "druid" : 9, "mage" :9,]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS typhon");
+    set_syntax("cast CLASS typhoon");
     set_damage_desc("bludgeoning, tripped");
     set_description("This spell creates a powerfull typhoon in the area. Flying and big creatures might find it easier to move around in it, but all may be send flying in the winds.");
     set_verbal_comp();
