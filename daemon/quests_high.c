@@ -24,8 +24,8 @@ inherit DAEMON;
 
 #define UMM ({"/d/attaya/tower/", "/d/islands/tonerra/lava/","/d/islands/common/eldebaro/newrooms/tomb*","/d/islands/common/aramanth/d"})
 
-#define AREAS ({MED_H1, MED_H1, MED_H2, MED_H2, HIGH, HIGH, UMM})
-#define AREA_VALUE ({200000, 400000, 600000, 800000, 1000000, 1200000})
+#define AREAS      ({MED_H1, MED_H1, MED_H2, MED_H2, HIGH, HIGH, UMM})
+#define AREA_VALUE ({200000, 350000, 500000, 600000, 700000, 900000, 1000000})
 
 #define MAXSIZE 25
 #define QOBJECT "/d/common/obj/misc/qobject.c"
@@ -45,22 +45,22 @@ inherit DAEMON;
 #define DEKU "/d/deku/hhouse/mon/"+
 
 #define MONSTERS ([\
-                        ANTIOCH "ruins/mons/demon.c" : 656000 ,\
-                        ATTAYA "mon/bishimon.c" : 1240000 ,\
-                        ATTAYA "mon/ashtar.c" : 1240000 ,\
-                        ATTAYA "mon/callista.c" : 1600000 ,\
-                        ATTAYA "mon/intruder.c" : 6000000 ,\
-                        ATTAYA "mon/phaeton.c" : 1600000 ,\
-                        ATTAYA "mon/judatac.c" : 1440000 ,\
-                        ATTAYA "mon/volkerps.c" : 1200000 ,\
-                        ATTAYA "mon/magus.c" : 1520000 ,\
-                        ATTAYA "mon/io.c" : 1520000 ,\
-                        ATTAYA "mon/hunter.c" : 1800000 ,\
-                        ATTAYA "mon/roper.c" : 1800000 ,\
+                        ANTIOCH "ruins/mons/demon.c" : 556000 ,\
+                        ATTAYA "mon/bishimon.c" : 900000 ,\
+                        ATTAYA "mon/ashtar.c" : 900000 ,\
+                        ATTAYA "mon/callista.c":1200000 ,\
+                        ATTAYA "mon/intruder.c" : 3000000 ,\
+                        ATTAYA "mon/phaeton.c" : 900000 ,\
+                        ATTAYA "mon/judatac.c" : 900000 ,\
+                        ATTAYA "mon/volkerps.c" : 900000 ,\
+                        ATTAYA "mon/magus.c" : 900000 ,\
+                        ATTAYA "mon/io.c" : 900000 ,\
+                        ATTAYA "mon/hunter.c" : 1000000 ,\
+                        ATTAYA "mon/roper.c" : 1000000 ,\
                         DERRO "mon/elemental.c" : 300000 ,\
                         ISLANDS "argentrock/mon/watcher.c" : 480000 ,\
                         ISLANDS "argentrock/mon/batlin.c" : 4760000 ,\
-                        ISLANDS "argentrock/mon/jarkunish.c" : 1560000 ,\
+                        ISLANDS "argentrock/mon/jarkunish.c" : 1500000 ,\
                         ISLANDS "argentrock/mon/kronibus.c" : 1560000 ,\
                         ISLANDS "argentrock/mon/fernibus.c" : 1560000 ,\
                         ISLANDS "common/mon/cruisertetron.c" : 5000000 ,\
@@ -69,7 +69,7 @@ inherit DAEMON;
                         ISLANDS "tonerra/mon/mmonk.c" : 456000 ,\
                         ISLANDS "tonerra/mon/tombt.c" : 1200000 ,\
                         ISLANDS "tonerra/mon/ibrandul.c" : 4800000 ,\
-                        ISLANDS "tonerra/mon/nativek.c" : 1128000 ,\
+                        ISLANDS "tonerra/mon/nativek.c" : 1100000 ,\
                         ISLANDS "tonerra/mon/nativewd.c" : 292000 ,\
                         LAERAD "mon/dragon.c" : 1120000 ,\
                         D_MARSH "tower/mon/dragon.c" : 2176000 ,\
@@ -82,7 +82,7 @@ inherit DAEMON;
                         OGRE "mobs/ahstuz.c" : 680000 ,\
                         SENUND "mon/elseroad.c" : 632000 ,\
                         SENUND "mon/gambrill.c" : 336000 ,\
-                        SENUND "mon/geilfuss.c" : 368000 ,\
+                        SENUND "mon/geilfuss.c" : 500000 ,\
                         SENUND "mon/priest.c" : 360000 ,\
                         DEKU "zhour_husk.c" : 640000 ,\
                         DEKU "arag_dyne.c" : 640000 ,\
