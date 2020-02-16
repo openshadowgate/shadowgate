@@ -65,17 +65,24 @@ void spell_effect(int prof) {
     }
     spell_successful();
     thacobonus = query_heroism_bonus();
-    if(prof == -100) thacobonus = thacobonus*(-1);
+    if (prof == -100) {
+        thacobonus = thacobonus * (-1);
+    }
     target->add_attack_bonus(thacobonus);
-    target->add_saving_bonus("all",thacobonus);
+    target->add_saving_bonus("all", thacobonus);
     skillbonus = query_heroism_bonus();
-    if(prof == -100) skillbonus = skillbonus*(-1);
-    for(i=0;i<sizeof(CORE_SKILLS);i++)
-      target->add_skill_bonus(CORE_SKILLS[i],skillbonus);
-    target->set_property("morale-boost",1);
-    call_out("dest_effect", (clevel * 4 + roll_dice(1, 20)) * ROUND_LENGTH);
+    if (prof == -100) {
+        skillbonus = skillbonus * (-1);
+    }
+    for (i = 0; i < sizeof(CORE_SKILLS); i++) {
+        target->add_skill_bonus(CORE_SKILLS[i], skillbonus);
+    }
+    target->set_property("morale-boost", 1);
+    call_out("dest_effect", (clevel * 5 + roll_dice(1, 20)) * ROUND_LENGTH);
     spell_successful();
-    if(prof != -100) addSpellToCaster();
+    if (prof != -100) {
+        addSpellToCaster();
+    }
 }
 
 void dest_effect()

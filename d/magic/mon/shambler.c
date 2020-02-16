@@ -10,7 +10,7 @@ void create(){
 
     set_name("shambling mound");
     set_id(({"shambler","shamblind mound","mound",}));
-    set_short("%^BOLD%^%^GREEN%^sh%^RESET%^%^ORANGE%^a%^BOLD%^%^GREEN%^mbl%^RESET%^%^ORANGE%^i%^BOLD%^%^GREEN%^ng m%^RESET%^%^ORANGE%^ou%^BOLD%^%^GREEN%^nd%^RESET%^");
+    set_short("%^GREEN%^sh%^RESET%^%^ORANGE%^a%^GREEN%^mbl%^RESET%^%^ORANGE%^i%^GREEN%^ng m%^RESET%^%^ORANGE%^ou%^GREEN%^nd%^RESET%^");
     set_long("%^BOLD%^%^GREEN%^This creature appears to be h%^RESET%^%^ORANGE%^ea%^BOLD%^%^GREEN%^ps %^RESET%^%^ORANGE%^o%^BOLD%^%^GREEN%^f r%^RESET%^%^ORANGE%^o%^BOLD%^%^GREEN%^tt%^RESET%^%^ORANGE%^i%^BOLD%^%^GREEN%^ng v%^RESET%^%^ORANGE%^e%^BOLD%^%^GREEN%^g%^RESET%^%^ORANGE%^e%^BOLD%^%^GREEN%^t%^RESET%^%^ORANGE%^a%^BOLD%^%^GREEN%^t%^RESET%^%^ORANGE%^io%^BOLD%^%^GREEN%^n gathered to roughly resemble giant humanoid form. Numerous vines and roots cover its massive and strong body. It walks slowly on its feet, assisting itself with its massive arms. Several fl%^RESET%^%^MAGENTA%^o%^BOLD%^%^GREEN%^w%^RESET%^%^MAGENTA%^e%^BOLD%^%^GREEN%^rs and plants top its head, forming a miniature meadow.%^RESET%^");
     set_hd(4,1);
     set_hp(query_hd()*8);
@@ -52,7 +52,7 @@ void setup_servant(object caster, int clevel)
     set_guild_level("fighter",clevel);
     set_level(clevel);
     set_hd(clevel,14);
-    set_max_hp(clevel*16+100);
+    set_max_hp(clevel*10+200);
     set_hp(query_max_hp());
     set_overall_ac(-clevel);
     set_attacks_num(clevel/8+2);
