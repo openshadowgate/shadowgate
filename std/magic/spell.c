@@ -2470,9 +2470,15 @@ varargs int do_save(object targ,int mod) {
     int caster_bonus,target_level,num,casting_level, classbonus, i, classlvl;
     mapping debug_map=([]);
 
-    if(!objectp(caster)) { return 1; }
-    if(!objectp(targ)) { return notify_fail("invalid target object."); }
-    if(!intp(mod)) { mod = 0; }
+    if (!objectp(caster)) {
+        return 1;
+    }
+    if (!objectp(targ)) {
+        return notify_fail("invalid target object.");
+    }
+    if (!intp(mod)) {
+        mod = 0;
+    }
 
     caster_bonus += (int)caster->query_property("spell dcs");
 //    if(FEATS_D->usable_feat(caster,"spell focus"))          { caster_bonus += 2; }
@@ -2488,8 +2494,9 @@ varargs int do_save(object targ,int mod) {
 
     casting_level = query_spell_level(spell_type);
 
-    if(spell_type=="monk"||spell_type=="warlock")
-        casting_level=6;
+    if (spell_type == "monk" || spell_type == "warlock") {
+        casting_level = 6;
+    }
 
     switch(spell_type) {
     case "wizard":
@@ -2610,11 +2617,6 @@ varargs int do_save(object targ,int mod) {
             caster_bonus -= 2;                                       //drow & half-drow, +2 vs charm
         }
     }
-    if (FEATS_D->usable_feat(targ, "shadow adept") || targ->is_class("shadow_adept")) {   // shadow adept targets get a bonus vs charm/illusion/necromancy spell types
-        if (spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "necromancy") {
-            caster_bonus -= 2;
-        }
-    }
 
     if(arrayp(targ->query_property("protection_from_alignment")))
     {
@@ -2648,9 +2650,9 @@ varargs int do_save(object targ,int mod) {
                     "BEFORE d20 roll: " + caster_bonus + "%^RESET%^");
     }
 
-    if(shadow_spell && type == "will")
-    {
-        caster_bonus = shadow_spell * 10 * caster_bonus / 100;
+    if (shadow_spell) {
+        type = "will";
+        caster_bonus = shadow_spell * caster_bonus / 10;
     }
 
     // this is directly copied below for the shadowdancer reroll - if anything changed here, change there too plz!

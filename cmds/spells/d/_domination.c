@@ -19,9 +19,7 @@ void create() {
     set_discipline("telepath");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS domination on TARGET");
-    set_description("By casting domination successfully, you will gain control over a chosen target. You can order the victim to do whatever is within his/her capability. For example, if the caster uses <cast domination on targetname>, targetname is the victim of the spell. Next, the mage can use <make targetname do kill kobold> or <make targetname emote kisses your feet>. The spell can be ended with <free targetname>.
-
-%^BOLD%^%^RED%^N.B.%^RESET%^ If used on players this spell provide you only with limited subset of allowed commands.");
+    set_description("By casting domination successfully, you will gain control over a chosen target. You can order the victim to do whatever is within his/her capability. For example, if the caster uses <cast domination on targetname>, targetname is the victim of the spell. Next, the mage can use <make targetname do kill kobold> or <make targetname emote kisses your feet>. The spell can be ended with <free targetname>.");
     mental_spell();
     set_verbal_comp();
     set_somatic_comp();
@@ -38,7 +36,9 @@ int query_domination_duration(object targ)
 {
     int duration;
     duration = 60 + clevel * 60;
-    duration = duration > 360 ? 360 : duration;
+    if (userp(targ)) {
+        duration = duration > 360 ? 360 : duration;
+    }
     return duration;
 }
 
