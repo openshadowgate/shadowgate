@@ -506,7 +506,7 @@ mixed query_property(string prop)
         if (FEATS_D->usable_feat(TO, "damage reduction")) {
             worn = filter_array(distinct_array(TO->all_armour()), "light_armor_filter", TO);
             if (!sizeof(worn)) {
-                num += (query_guild_level("barbarian") - 10) / 3;
+                num += (query_guild_level("barbarian") - 10) / 6;
             }
         }
         if (FEATS_D->usable_feat(TO, "improved damage resistance")) {
