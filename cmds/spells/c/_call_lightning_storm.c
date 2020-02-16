@@ -87,7 +87,7 @@ void execute_attack()
     if(!objectp(caster))                        { dest_effect(); return; }
     if(strikes > clevel)                        { dest_effect(); return; } // one lightning strike per level
 
-    if(!random(15))
+    if(!random(50))
     {
         tell_room(place,"%^YELLOW%^Electricity pops and crackles, dancing in the air around "+caster->QCN+"!",caster);
         tell_object(caster,"%^YELLOW%^Electricity pops and crackles, dancing in the air around you!");
