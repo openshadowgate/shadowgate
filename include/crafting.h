@@ -98,7 +98,7 @@ WEAPONSMITH = ([
                    "dagger":(["file":COMMONFILE"weapon/dagger","units":1]),
                    "estoc":(["file":COMMONFILE"weapon/estoc","units":3]),
                    "fan":(["file":COMMONFILE"weapon/fan","units":1]),
-                   "falcata":(["file":COMMONFILE"weapon/longsword","units":3]),
+                   "falcata":(["file":COMMONFILE"weapon/falcata","units":3]),
                    "flail":(["file":COMMONFILE"weapon/flail","units":3]),
                    "giant axe":(["file":COMMONFILE"weapon/giant_battle_axe","units":5]),
                    "giant hammer":(["file":COMMONFILE"weapon/giant_hammer","units":5]),
