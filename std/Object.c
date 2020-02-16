@@ -374,10 +374,32 @@ void set_property(string prop, mixed value)
 
 int armor_filter(object ob)
 {
-    if(!objectp(ob)) return 0;
-    if((string)ob->query_armor_prof() == "light") return 1;
-    if((string)ob->query_armor_prof() == "medium") return 1;
-    if((string)ob->query_armor_prof() == "heavy") return 1;
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if ((string)ob->query_armor_prof() == "light") {
+        return 1;
+    }
+    if ((string)ob->query_armor_prof() == "medium") {
+        return 1;
+    }
+    if ((string)ob->query_armor_prof() == "heavy") {
+        return 1;
+    }
+    return 0;
+}
+
+int light_armor_filter(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if ((string)ob->query_armor_prof() == "heavy") {
+        return 1;
+    }
+    if ((string)ob->query_armor_prof() == "medium") {
+        return 1;
+    }
     return 0;
 }
 
@@ -471,21 +493,24 @@ mixed query_property(string prop)
 
     if (prop == "damage resistance") {
         if (FEATS_D->usable_feat(TO, "undead graft")) {
-            num += 8;
+            num += 6;
         }
         if (FEATS_D->usable_feat(TO, "shadow master")) {
             if (ETO->query_light() < 1) {
-                num += 12;
+                num += 8;
             }
         }
         if (FEATS_D->usable_feat(TO, "damage resistance")) {
             num += 2;
         }
         if (FEATS_D->usable_feat(TO, "damage reduction")) {
-            num += (query_guild_level("barbarian") - 10) / 3;
+            worn = filter_array(distinct_array(TO->all_armour()), "light_armor_filter", TO);
+            if (!sizeof(worn)) {
+                num += (query_guild_level("barbarian") - 10) / 3;
+            }
         }
         if (FEATS_D->usable_feat(TO, "improved damage resistance")) {
-            num += 3;
+            num += 2;
         }
         if (TO->query_race() == "elf") {
             subrace = (string)TO->query("subrace");

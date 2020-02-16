@@ -109,24 +109,11 @@ int drink(string str)
     }
     if(query("type") == "soft drink")
     {
-        if(!TP->add_quenched(query("strength")*20))
-        {
-            tell_object(TP, "You are too bloated to drink that!\n");
-            return 1;
-        }
+        TP->add_quenched(query("strength")*20));
     }
     else if(query("type") == "caffeine")
     {
-        if((int)TP->query_intox() < query("strength"))
-        {
-            tell_object(TP,"You do not feel the need for that right now.\n");
-            return 1;
-        }
-        if(!TP->add_quenched(query("strength")*10))
-        {
-            tell_object(TP,"You are too bloated to drink that!\n");
-            return 1;
-        }
+        TP->add_quenched(query("strength")*10);
         TP->add_intox(-(query("strength")/2)*10);
     }
     else if(query("type") == "alcoholic")
@@ -139,11 +126,7 @@ int drink(string str)
     }
     else if(query("type") == "water")
     {
-        if(!TP->add_quenched(query("strength")*50))
-        {
-            tell_object(TP,"Your stomach is sloshing already!\n");
-            return 1;
-        }
+        TP->add_quenched(query("strength")*50);
     }
     myType = query("type");
     TP->add_hp(healing);

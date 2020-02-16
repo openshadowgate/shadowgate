@@ -7,6 +7,8 @@
 
 inherit SPELL;
 
+
+
 int duration, change, quitting;
 object clothes, remote;
 
@@ -27,6 +29,10 @@ void create() {
     set_save("will");
 }
 
+string query_scloth()
+{
+    return "/d/magic/obj/sclothes";
+}
 
 int query_domination_duration(object targ)
 {
@@ -92,7 +98,7 @@ void spell_effect(int prof) {
     spell_successful();
     addSpellToCaster();
     change=0;
-    clothes=new("/d/magic/obj/sclothes.c");
+    clothes=new(query_scloth());
     clothes->set_property("spelled", ({TO}) );
     clothes->set_master(caster);
     clothes->set_spell(TO);

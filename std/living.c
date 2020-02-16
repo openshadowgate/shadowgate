@@ -1192,84 +1192,120 @@ int query_stats(string stat)
 
     res += EQ_D->gear_bonus(TO, stat);
 
-    // This should not (could not) affect users.
-    if (res > 34) {
-        return 35;
+    if (res > 29 && userp(TO)) {
+        return 30;
     }
-    /* if (res > 29) { */
-    /*     return 30; */
-    /* } */
+    if (res > 39) {
+        return 40;
+    }
     if (res < 1) {
         return 1;
-    }else {
+    } else {
         return res;
     }
 }
 
-int query_base_stats(string stat) {
-   if(!stats || !stats[stat]) return 0;
-   else return stats[stat];
+int query_base_stats(string stat)
+{
+    if (!stats || !stats[stat]) {
+        return 0;
+    } else {
+        return stats[stat];
+    }
 }
 
-int query_formula() {
-   return HEALING_FORMULA;
-}
-nomask int query_forced() {return forced;}
-
-string *query_search_path() {
-   if(previous_object() != this_object() && geteuid(previous_object()) != UID_ROOT) return search_path + ({});
-   else return search_path;
+int query_formula()
+{
+    return HEALING_FORMULA;
 }
 
-int query_invis() {return(invis || query_magic_hidden() || query_hidden());}
-
-int query_free_exp(){
-   int used;
-   int i;
-   for (i=0;i<sizeof(query_classes());i++){
-      used += ADVANCE_D->get_real_exp(query_class_level(query_classes()[i]),query_classes()[i],TO);
-   }
-   return query_exp()-used;
+nomask int query_forced()
+{
+    return forced;
 }
 
-int query_alignment() {
-    if(query_property("align mask"))
+string* query_search_path()
+{
+    if (previous_object() != this_object() && geteuid(previous_object()) != UID_ROOT) {
+        return search_path + ({});
+    } else {
+        return search_path;
+    }
+}
+
+int query_invis()
+{
+    return (invis || query_magic_hidden() || query_hidden());
+}
+
+int query_free_exp()
+{
+    int used;
+    int i;
+    for (i = 0; i < sizeof(query_classes()); i++) {
+        used += ADVANCE_D->get_real_exp(query_class_level(query_classes()[i]), query_classes()[i], TO);
+    }
+    return query_exp() - used;
+}
+
+int query_alignment()
+{
+    if (query_property("align mask")) {
         return query_property("align mask");
-   else if(query_property("hidden alignment"))
-      return query_property("hidden alignment");
-    else
+    } else if (query_property("hidden alignment")) {
+        return query_property("hidden alignment");
+    } else {
         return player_data["general"]["alignment"];
+    }
 }
 
-int query_true_align() {
+int query_true_align()
+{
     return player_data["general"]["alignment"];
 }
 
-int query_intox() {
-   if(healing && healing != ([])) return healing["intox"];
-   else return 0;
-}
-
-mapping query_healing() {
-   return healing;
-}
-int query_stuffed() {
-   if(healing) return healing["stuffed"];
-   else return 0;
-}
-
-int query_quenched() {
-   if(healing) return healing["quenched"];
-   else return 0;
-}
-
-int query_bloodlust() {
-    if(!TO->is_vampire())
+int query_intox()
+{
+    if (healing && healing != ([])) {
+        return healing["intox"];
+    } else {
         return 0;
-    if(healing)
+    }
+}
+
+mapping query_healing()
+{
+    return healing;
+}
+
+int query_stuffed()
+{
+    if (healing) {
+        return healing["stuffed"];
+    } else {
+        return 0;
+    }
+}
+
+int query_quenched()
+{
+    if (healing) {
+        return healing["quenched"];
+    } else {
+        return 0;
+    }
+}
+
+int query_bloodlust()
+{
+    if (!TO->is_vampire()) {
+        return 0;
+    }
+    if (healing) {
         return healing["bloodlust"];
-    else
+    } else {
         return 0;
+    }
 }
 
 int query_poisoning()
