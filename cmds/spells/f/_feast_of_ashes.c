@@ -23,7 +23,7 @@ spell_effect(int prof)
         tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" extends "+caster->QP+" hand in direction of "+target->QCN+" and proclaims the curse!", ({caster}) );
     }
 
-    if(do_save(target, -8))
+    if(do_save(target, -10))
     {
         tell_object(caster,"%^BOLD%^%^BLACK%^You feel your curse is forcefully endured.");
         tell_object(target,"%^BOLD%^%^BLACK%^You endure the curse and shrug it off.");
@@ -31,6 +31,7 @@ spell_effect(int prof)
         tell_object(caster,"%^BOLD%^%^BLACK%^You feel your curse sinking into " +target->QCN + ".");
         tell_room(place, "%^BOLD%^%^WHITE%^" + target->QCN + "'s tummy growls loudly.");
         target->set_stuffed(0);
+        target->set_quenched(0);
     }
 
     dest_effect();

@@ -961,8 +961,14 @@ int add_stuffed(int x) {
 
 int set_stuffed(int x) {
     healing["stuffed"] = x;
-   return 1;
+    return 1;
 }
+
+int set_quenched(int x) {
+    healing["quenched"] = x;
+    return 1;
+}
+
 
 int add_quenched(int x) {
    if(x>0) x = x*250;
