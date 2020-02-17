@@ -2,7 +2,7 @@
 
 inherit SPELL;
 
-#define DELAY 900
+#define DELAY 3600
 
 void create()
 {
@@ -52,6 +52,8 @@ void spell_effect()
         dest_effect();
         return;
     }
+
+    sdamage = 1;
 
     tell_object(caster,"%^BOLD%^%^WHITE%^You enspell your thoughts and demand "+target->QCN+":%^BOLD%^%^RED%^ "+command+"!");
     tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" momentarely closes eyes, concentrating!",caster);
