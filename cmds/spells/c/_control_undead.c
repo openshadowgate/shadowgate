@@ -15,10 +15,11 @@ void create() {
     set_syntax("cast CLASS control undead on TARGET");
     set_description("By invoking this spell, a necromancer confirms its domain over the undead and takes control of the unliving. They can use the next commands to force the undead to serve:
 
-%^ORANGE%^<make %^ORANGE%^%^ULINE%^TARGET%^RESET%^ to %^ORANGE%^%^ULINE%^ACTION%^RESET%^>%^RESET%^
-  Will force the %^ORANGE%^%^ULINE%^TARGET%^RESET%^ to perform an %^ORANGE%^%^ULINE%^ACTION%^RESET%^.
-%^ORANGE%^<free %^ORANGE%^%^ULINE%^TARGET%^RESET%^>%^RESET%^
-  Will free the %^ORANGE%^%^ULINE%^TARGET%^RESET%^ from your control.
+%^ORANGE%^<command dominated to %^ORANGE%^%^ULINE%^ACTION%^RESET%^>%^RESET%^
+  Will force the dominated to perform an %^ORANGE%^%^ULINE%^ACTION%^RESET%^.
+
+%^ORANGE%^<freedominated>%^RESET%^
+  Will free the dominated undead.
 
 If the will save suceeds or the target is not undead they will be outraged at your attempt and will attack immediately.
 
@@ -49,7 +50,11 @@ int query_domination_duration(object targ)
 int cant_be_dominated(targ)
 {
     return do_save(target, -2) ||
-        target->query_property("no dominate") ||
-        present("clothesx999", target) ||
         !target->is_undead();
+}
+
+int is_proper_target(object targ)
+{
+    return !targ->query_property("no dominate") ||
+        !present("clothesx999", targ);
 }

@@ -15,11 +15,23 @@ object clothes, remote;
 void create() {
     ::create();
     set_spell_name("domination");
-    set_spell_level(([ "mage" : 5, "psion" : 8 ]));
+    set_spell_level(([ "mage" : 5, "psion" : 8, "bard":4]));
     set_discipline("telepath");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS domination on TARGET");
-    set_description("By casting domination successfully, you will gain control over a chosen target. You can order the victim to do whatever is within his/her capability. For example, if the caster uses <cast domination on targetname>, targetname is the victim of the spell. Next, the mage can use <make targetname do kill kobold> or <make targetname emote kisses your feet>. The spell can be ended with <free targetname>.");
+    set_description("By casting domination successfully, you will gain control over a chosen sapient race target. Appropriate targets include only races from <help races> list. You then can use the next commands to force the dominated to serve:
+
+%^ORANGE%^<command dominated to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+  Will force the dominated to perform an %^ORANGE%^%^ULINE%^ACTION%^RESET%^.
+
+%^ORANGE%^<freedominated>%^RESET%^
+  Will free the dominated undead.
+
+If the will save suceeds or the target is has a form of mind immunity they will be outraged at your attempt and will attack immediately.
+
+%^BOLD%^%^RED%^N.B.%^RESET%^ If used on players this spell provide you with a limited subset of allowed commands.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ help races");
     mental_spell();
     set_verbal_comp();
     set_somatic_comp();
@@ -49,11 +61,16 @@ string query_cast_string()
         "chanting hypnotically.";
 }
 
+int is_proper_target(object targ)
+{
+    return !targ->query_property("no dominate") ||
+        RACE_D->is_race(targ->query_race()) ||
+        !present("clothesx999", targ);
+}
+
 int cant_be_dominated(object targ)
 {
     return do_save(targ, 0) ||
-        targ->query_property("no dominate") ||
-        present("clothesx999", targ) ||
         mind_immunity_damage(targ, "default");
 }
 
@@ -76,6 +93,12 @@ void spell_effect(int prof) {
         if(objectp(TO)) TO->remove();
         return;
     }
+
+    if (!is_proper_target(target)) {
+        tell_object(caster,"%^BOLD%^The spell fizzles as it can't grab upon the target's mind.");
+        return;
+    }
+
     if (!caster->ok_to_kill(target)) {
         if(objectp(TO)) TO->remove();
         return;
