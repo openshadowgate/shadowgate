@@ -90,6 +90,7 @@ string list_users(string *races, object tp)
                     if((string)shape->query_shape_race())
                         rabbit = (string)shape->query_shape_race();
 
+                if (ctime(time())[4..9]=="Feb 21") rabbit="kitty";
                 if (ctime(time())[4..9]=="Apr  1") rabbit="%^WHITE%^rabbit";
                 if (ctime(time())[4..9]=="Nov 28") rabbit="turkey";
                 if (ctime(time())[4..9]=="May  1") rabbit="%^RED%^commie";
