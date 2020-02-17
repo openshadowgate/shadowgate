@@ -22,6 +22,7 @@ create() {
    set_critical_threat_range(2);
    set_critical_hit_multiplier(2);
    set_damage_type("slashing");
+   set_property("repairtype",({"weaponsmith"}));
 }
 
 string ldesc(string str) {

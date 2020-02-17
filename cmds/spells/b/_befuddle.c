@@ -1,5 +1,5 @@
 // Invisibility - Coded by Vashkar@shadowgate
-//Adapted by ~Circe~ for Befuddle, a new trickery 
+//Adapted by ~Circe~ for Befuddle, a new trickery
 //domain spell with the rebalancing of domains 4/26/08
 
 #include <spell.h>
@@ -13,7 +13,7 @@ object invisob;
 void create() {
     ::create();
     set_spell_name("befuddle");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("alteration");
     set_spell_domain("trickery");
     set_syntax("cast CLASS befuddle");

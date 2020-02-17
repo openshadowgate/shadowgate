@@ -1,6 +1,6 @@
 // swiped from aura alteration for the priest spell, conceal alignment -Ares
-//Moved to 2nd level by ~Circe~ in the rebalancing of domains 
-//since so many of the alignment detecting abilities have been 
+//Moved to 2nd level by ~Circe~ in the rebalancing of domains
+//since so many of the alignment detecting abilities have been
 //removed from game 4/26/08
 #include <priest.h>
 
@@ -11,9 +11,9 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("conceal alignment");
-    set_spell_level(([ "cleric" : 2 ]));
+    set_spell_level(([ "cleric" : 1 ]));
     set_spell_sphere("alteration");
-    set_spell_domain("trickery");
+    set_domains("trickery");
     set_syntax("cast CLASS conceal alignment on <align>");
     set_description("When this spell is cast, the caster must pick the alignment that he wishes for others to see him as"
 ".  This spell has a chance to fool any magical or other means of detecting the caster's true alignment.\n\nThe choices "

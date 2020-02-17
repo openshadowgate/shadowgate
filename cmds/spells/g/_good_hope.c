@@ -14,9 +14,8 @@ int counter,mybonus,flag;
 void create(){
     ::create();
     set_spell_name("good hope");
-    set_spell_level(([ "classless" : 3 ]));
+    set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("enchantment_charm");
-    set_domains("charm");
     set_syntax("cast CLASS good hope on TARGET");
     set_description("Invoking the blessings of good hope, this spell will grant the target a heightened sense in battle "
 "and a blessing on resisting some attacks (saving throws). It does not stack with similar morale-boosting spells, such "

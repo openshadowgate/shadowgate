@@ -27,4 +27,5 @@ set_prof_type("polearm");
    set_critical_threat_range(1);
    set_critical_hit_multiplier(4);
    set_damage_type("slashing");
+   set_property("repairtype",({"weaponsmith"}));
 }

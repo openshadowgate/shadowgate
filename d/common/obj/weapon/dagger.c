@@ -20,4 +20,5 @@ create() {
    set_critical_threat_range(2);
    set_critical_hit_multiplier(2);
    set_damage_type("piercing");
+   set_property("repairtype",({"weaponsmith"}));
 }

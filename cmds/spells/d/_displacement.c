@@ -14,6 +14,7 @@ void create() {
     set_spell_level(([ "cleric" : 3, "bard" : 3, "mage" : 3 ]));
     set_spell_sphere("illusion");
     set_spell_domain("illusion");
+    set_domains("trickery");
     set_syntax("cast CLASS displacement");
     set_damage_desc("20% miss chance");
     set_description("Using the power of illusion, the caster calls forth a distortion of her form, making her harder to "

@@ -33,9 +33,8 @@ void spell_effect()
 {
     string targ, command;
 
-    if(sscanf(arg,"%s to %s",targ,command)!=2)
-    {
-        tell_object(caster,"<"+syntax+">");
+    if (sscanf(arg, "%s to %s", targ, command) != 2) {
+        tell_object(caster, "<" + syntax + ">");
         dest_effect();
         return;
     }
@@ -62,11 +61,10 @@ void spell_effect()
 
     tell_object(target,"%^B_BLUE%^You sense that "+caster->QCN+" tried to telepathically command you from " +ENV(caster)->query_short()+ "%^RESET%^%^B_BLUE%^!");
 
-    if(do_save(target,0)||
-       target->query_property("no dominate",1)||
-       mind_immunity_damage(target, "default"))
-    {
-        tell_object(caster,"%^BOLD%^"+target->QCN+" resisted your attempt!" );
+    if (do_save(target, 0) ||
+        target->query_property("no dominate", 1) ||
+        mind_immunity_damage(target, "default")) {
+        tell_object(caster, "%^BOLD%^" + target->QCN + " resisted your attempt!");
         spell_kill(target, caster);
         return;
     }

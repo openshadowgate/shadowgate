@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("planar beacon");
-    set_spell_level(([ "mage" : 9 ]));
+    set_spell_level(([ "mage" : 9, "cleric":9]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS planar beacon on TARGET");
     set_description("This spell pinpoints a foe, regardless of what plane they are on, making them glow like a beacon within the weave. They can then attempt to draw this beacon to their current location. However, a foe with the strength of mind to resist may cause the spell to backfire, instead sending the caster to his or her target. Once this spell is used, the caster must rest for a short while before attempting its use again.spell.");
@@ -95,7 +95,9 @@ void do_summon(object target) {
       }
    }
 
-   // This increments intentionally
+   // This increments intentionally. Player has about two chances to
+   // be mean within reasonable time
+
    caster->set_property("spell summon time",time());
    success = 0;
 

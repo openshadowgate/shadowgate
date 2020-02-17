@@ -27,4 +27,5 @@ create() {
    set_decay_rate(100);
    set_weapon_speed(1);
    set_damage_type("piercing");
+   set_property("repairtype",({"weaponsmith"}));
 }

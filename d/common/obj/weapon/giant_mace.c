@@ -27,4 +27,5 @@ GARRETT
    set_critical_threat_range(1);
    set_critical_hit_multiplier(2);
    set_damage_type("bludgeoning");
+   set_property("repairtype",({"weaponsmith"}));
 }

@@ -10,6 +10,7 @@
 #include <std.h>
 #include <objects.h>
 #include <daemons.h>
+#include <security.h>
 
 inherit DAEMON;
 
@@ -40,6 +41,10 @@ int cmd_drop(string str)
             if(str == "all")
             {
                 object *inv;
+                if (TP && TP->query_forced()) {
+                    seteuid(UID_ROOT);
+                    return notify_fail("Someone tried to force you to drop all!\n");
+                }
                 inv = all_inventory(TP);
                 if(sizeof(TP->query_attackers()))
                 {

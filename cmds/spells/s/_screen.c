@@ -15,9 +15,9 @@ object detector, blocker;
 void create() {
     ::create();
     set_spell_name("screen");
-    set_spell_level(([ "cleric" : 6, "mage": 8, "oracle":8]));
+    set_spell_level(([ "cleric" : 8, "mage": 8]));
     set_spell_sphere("illusion");
-    set_spell_domain("illusion");
+    set_domains("illusion");
     set_mystery("lore");
     set_syntax("cast CLASS screen");
     set_description("Upon casting this spell, the user creates a screen of illusion centered upon himself that makes "

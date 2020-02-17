@@ -19,4 +19,5 @@ create() {
 
    set_value(1500);
    set_weapon_speed(1);
+   set_property("repairtype",({"weaponsmith"}));
 }
