@@ -15,7 +15,8 @@ object clothes, remote;
 void create() {
     ::create();
     set_spell_name("domination");
-    set_spell_level(([ "mage" : 5, "psion" : 8, "bard":4]));
+    set_spell_level(([ "mage" : 5, "psion" : 4, "bard":4, "cleric":5]));
+    set_domains("charm");
     set_discipline("telepath");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS domination on TARGET");
@@ -74,6 +75,11 @@ int cant_be_dominated(object targ)
         mind_immunity_damage(targ, "default");
 }
 
+void monster_fix(object targ)
+{
+    return;
+}
+
 void spell_effect(int prof) {
 
     change = -2;
@@ -128,6 +134,7 @@ void spell_effect(int prof) {
     clothes->move_is_ok(1);
     clothes->move(target);
     clothes->move_is_ok(0);
+    monster_fix(target);
     remote=new("/d/magic/obj/remote.c");
     remote->set_property("spelled", ({TO}) );
     remote->set_caster(caster);
@@ -136,7 +143,9 @@ void spell_effect(int prof) {
     remote->move_is_ok(1);
     remote->move(caster);
     remote->move_is_ok(0);
-    call_out("dest_effect", duration);
+    if (duration) {
+        call_out("dest_effect", duration);
+    }
 }
 
 void dest_effect() {

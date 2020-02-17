@@ -14,9 +14,9 @@ int counter,mybonus,flag;
 void create(){
     ::create();
     set_spell_name("good hope");
-    set_spell_level(([ "cleric" : 3 ]));
+    set_spell_level(([ "classless" : 3 ]));
     set_spell_sphere("enchantment_charm");
-    set_spell_domain("charm");
+    set_domains("charm");
     set_syntax("cast CLASS good hope on TARGET");
     set_description("Invoking the blessings of good hope, this spell will grant the target a heightened sense in battle "
 "and a blessing on resisting some attacks (saving throws). It does not stack with similar morale-boosting spells, such "
@@ -26,14 +26,14 @@ void create(){
 	set_helpful_spell(1);
 }
 
-int preSpell() 
+int preSpell()
 {
     if(!objectp(target))
     {
         tell_object(caster,"This spell requires a target.");
         return 0;
     }
-    if (target->query_property("morale-boost")) 
+    if (target->query_property("morale-boost"))
     {
         tell_object(caster,"%^BOLD%^%^MAGENTA%^Hope flows already through "+target->QCN+".");
         return 0;
@@ -41,7 +41,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^MAGENTA%^You begin to chant"+
         " in a lively voice as you can feel the hope building"+
@@ -51,7 +51,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     mybonus = (clevel+9)/10;
 
@@ -87,7 +87,7 @@ void spell_effect(int prof)
 void execute_attack()
 {
     ::execute_attack();
-    if (!objectp(target)) 
+    if (!objectp(target))
     {
         dest_effect();
         return;
@@ -98,7 +98,7 @@ void execute_attack()
         tell_object(target,"%^BOLD%^%^MAGENTA%^Hope shines brightly inside of you.");
     }
     counter++;
-    if (counter > clevel) 
+    if (counter > clevel)
     {
         dest_effect();
         return;
@@ -108,7 +108,7 @@ void execute_attack()
 
 void dest_effect()
 {
-    if (objectp(target)) 
+    if (objectp(target))
     {
         target->add_attack_bonus(-1 * mybonus);
         target->add_saving_bonus("all",(-1 * mybonus));

@@ -20,7 +20,8 @@ create()
 {
     ::create();
     set_spell_name("sleep");
-    set_spell_level(([ "mage" : 1, "bard" : 1, "psion" : 1 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 1, "psion" : 1, "cleric" : 1]));
+    set_dimains("charm");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast <classname> sleep on <target>");
     set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead. This is an agressive spell and victims will respond violently.");
@@ -39,7 +40,7 @@ spell_effect(int prof)
 {
     int success, rounds, resisted;
     string myrace;
- 
+
 
     success = 0;
 
@@ -49,11 +50,12 @@ spell_effect(int prof)
     time = rounds * ROUND_LENGTH;
 
     //d20 SRD set Sleep as having max 4 HD. That's pretty small for SG so
-    //setting it to 8 to be useful at lower levels. However, this is a 
-    //L1 spell and it really shouldn't have impact on PK at upper levels. 
-    //Solution I am setting here is 1/2 Clevel -- Uriel Feb 2020 
+    //setting it to 8 to be useful at lower levels. However, this is a
+    //L1 spell and it really shouldn't have impact on PK at upper levels.
+    //Solution I am setting here is 1/2 Clevel -- Uriel Feb 2020
+    //Raising to 20 to affect most of the townsfolk -- Illy
     max_hd = clevel/2;
-    if (max_hd < 8) max_hd = 8;
+    if (max_hd < 20) max_hd = 20;
 
 
     //validate target specified by caster
@@ -117,6 +119,8 @@ spell_effect(int prof)
            "overcome "+target->QP+" willpower!");
         this_target->set_asleep(time, "You are asleep!");
         this_target->set_property("spelled", ({TO}) );
+        this_target->remove_attacker(caster);
+        caster->remove_attacker(this_target);
         targets += ({this_target});
         spell_successful();
         success = 1; // this indicates whether the spell works on anything
@@ -166,4 +170,3 @@ void dest_effect()
 
 
 string query_cast_string() { return caster->QCN+" throws some rose petals in the air!"; }
-

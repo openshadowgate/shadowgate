@@ -11,6 +11,7 @@ void create()
     //This is enthrall from srds, but simpler. Warlocks stole the name for enthrall, so naming it captivate.
     set_spell_name("captivate");
     set_spell_level(([ "bard" : 2, "cleric": 2 ]));
+    set_domains("charm");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS captivate");
     set_damage_desc("stops combat");

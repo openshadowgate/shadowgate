@@ -45,6 +45,7 @@ private string checkrepair(string mytype, string * repairtype){
     case "tailor": feedback = "tailor"; break;
     case "woodwork": feedback = "woodworker"; break;
     case "leatherwork": feedback = "leatherworker"; break;
+    case "weaponsmith": feedback = "weaponsmith"; break;
     default: feedback = "invalid"; break;
     }
     if(sizeof(repairtype) > 1) {
@@ -56,6 +57,7 @@ private string checkrepair(string mytype, string * repairtype){
             case "tailor": feedback += "tailor"; break;
             case "woodwork": feedback += "woodworker"; break;
             case "leatherwork": feedback += "leatherworker"; break;
+            case "weaponsmith": feedback = "weaponsmith"; break;
             default: feedback += "invalid"; break;
             }
         }
@@ -147,7 +149,7 @@ int cmd_discern(string str)
             else
                 write("%^WHITE%^It uses %^BOLD%^%^GREEN%^"+(string)obj->query_ammo()+"%^RESET%^%^ as ammunition.");
         }
-        write("It requires %^BOLD%^%^ORANGE%^woodworker%^RESET%^ craft skill to repair.");
+        write("It requires %^BOLD%^%^ORANGE%^"+checkrepair((string)obj->query_type(),(string *)obj->query_property("repairtype"))+" %^RESET%^craft skill to repair.");
         return 1;
     }
     if(obj->is_armor()){

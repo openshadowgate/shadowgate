@@ -10,9 +10,9 @@ void create() {
     ::create();
     set_author("cythera");
     set_spell_name("bliss");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 6 ]));
     set_spell_sphere("enchantment_charm");
-    set_spell_domain("charm");
+    set_domains("charm");
     set_syntax("cast CLASS bliss on TARGET");
     set_description("This spell allows the caster to place a target's mind in a state of bliss.  While in the enraptured "
 "blissful state the target only seems to focus on the intense pleasure and happiness that she feels, unable to attack or "
