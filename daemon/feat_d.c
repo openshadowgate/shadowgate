@@ -456,6 +456,7 @@ int can_gain_magic_feat(object ob,string feat)
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
       if(myclasses[i] == "psion" ||
          myclasses[i] == "oracle" ||
+         myclasses[i] == "mage" ||
          myclasses[i] == "sorcerer")
           currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
       else

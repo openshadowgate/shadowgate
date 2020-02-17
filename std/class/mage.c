@@ -36,7 +36,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "simple weapon proficiency", "spell focus", "magic school"}), 6 : ({ "scribe", }), 9 : ({ "brew potion" }), 11 : ({ "enchant" }), 17 : ({ "craft magical equipment" }), ]);
+    return ([ 1 : ({ "simple weapon proficiency", "spell focus", "magic school"}), ]);
 }
 
 string *class_skills()

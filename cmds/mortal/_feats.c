@@ -808,12 +808,26 @@ int cmd_feats(string str){
 
 // magic feat allocation here
         BONUS_ALLOWED = 0;
-        for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],MELEECLASSES) != -1) continue; // melee classes get no bonus caster feats!
-          if(member_array(subset[i],HYBRID) != -1) continue; // neither do hybrids!
-          if(subset[i] == "psion" || subset[i] == "sorcerer" || subset[i] == "oracle") j = (((int)TP->query_class_level(subset[i]) +4) / 5); // psions/sorcs @ L1 & every 5 levels thereafter
-          else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // caster classes @ L21 & every 5 levels thereafter
-          if(j < 0) j = 0;
+        for (i = 0; i < sizeof(subset); i++) {
+            if (member_array(subset[i], MELEECLASSES) != -1) {
+// melee classes get no bonus caster feats!
+                continue;
+            }
+            if (member_array(subset[i], HYBRID) != -1) {
+// neither do hybrids!
+                continue;
+            }
+            if (subset[i] == "psion" ||
+                subset[i] == "sorcerer" ||
+                subset[i] == "mage" ||
+                subset[i] == "oracle") {
+                j = (((int)TP->query_class_level(subset[i]) + 4) / 5);                                                                                   // psions/sorcs @ L1 & every 5 levels thereafter
+          }else {
+              j = (((int)TP->query_class_level(subset[i]) - 16) / 5);            // caster classes @ L21 & every 5 levels thereafter
+          }
+          if (j < 0) {
+              j = 0;
+          }
           BONUS_ALLOWED += j;
         }
         num_bonus   = (int)TP->query_magic_feats_gained();
@@ -1146,11 +1160,23 @@ int cmd_feats(string str){
 
         BONUS_ALLOWED = 0;
         for(i=0;i<sizeof(subset);i++) {
-          if(member_array(subset[i],MELEECLASSES) != -1) continue; // melee classes get no bonus caster feats!
-          if(member_array(subset[i],HYBRID) != -1) continue; // neither do hybrids!
-          if(subset[i] == "psion" || subset[i] == "sorcerer" || subset[i] == "oracle") j = (((int)TP->query_class_level(subset[i]) +4) / 5); // psions/sorcs @ L1 & every 5 levels thereafter
-          else j = (((int)TP->query_class_level(subset[i]) - 16) / 5); // caster classes @ L21 & every 5 levels thereafter
-          if(j < 0) j = 0;
+            if (member_array(subset[i], MELEECLASSES) != -1) {
+                continue;                                                      // melee classes get no bonus caster feats!
+            }
+            if (member_array(subset[i], HYBRID) != -1) {
+                continue;                                                // neither do hybrids!
+            }
+            if (subset[i] == "psion" ||
+                subset[i] == "sorcerer" ||
+                subset[i] == "mage" ||
+                subset[i] == "oracle") {
+                j = (((int)TP->query_class_level(subset[i]) + 4) / 5);                                                                                   // psions/sorcs @ L1 & every 5 levels thereafter
+          }else {
+              j = (((int)TP->query_class_level(subset[i]) - 16) / 5);            // caster classes @ L21 & every 5 levels thereafter
+          }
+          if (j < 0) {
+              j = 0;
+          }
           BONUS_ALLOWED += j;
         }
         //changing this to use "magic" feats instead of bonus - Saide
