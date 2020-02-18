@@ -39,7 +39,7 @@ void heart_beat()
     
     if(!interactive(owner))
     {
-        destruct(this_object());
+        this_object()->remove();
         return;
     }
     
@@ -53,13 +53,8 @@ void heart_beat()
     
     if(sizeof(attackers))
     {
-        //Companion always helps with the fight
-        if(!this_object()->query_attackers())
-        {
-            tell_room(room, sprintf("%s joins the fight.", this_object()->query_name()));
-            foreach(object ob in attackers)
-                this_object()->kill_ob(ob);
-        }
+        foreach(object ob in attackers)
+            this_object()->kill_ob(ob);
     }
     else
         add_hp(query_max_hp() / 25);

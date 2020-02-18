@@ -103,7 +103,7 @@ void execute_feat()
     {
         tell_object(caster, "You dismiss your animal companion.");
         caster->remove_property("animal_companion");
-        companion && destruct_object(companion);
+        companion && companion->remove();
         return;
     }
     
@@ -126,21 +126,20 @@ void execute_feat()
     ob->set_id( ({ arg, "companion", "animal companion", "animal" }) );
     ob->set_short(sprintf("%s's faithful %s companion.",capitalize(caster->query_name()),arg));
     ob->set_hd(comp_hd);
+    ob->set_mlevel("fighter", comp_hd);
     ob->set_max_hp(8 * comp_hd);
     ob->set_hp(8 * comp_hd);
     ob->set_alignment(caster->query_alignment());
-    ob->set_level("fighter", comp_hd);
     ob->set_owner(caster);
     caster->set_property("animal_companion", ob);
     caster->add_pet(ob);
     caster->add_follower(ob);
     ob->set_property("minion", caster);
     ob->move(environment(caster));
-    caster->set_property("using instant feat",1);
     
     //Setting companion stats based on type per SRD
-    ob->set_stats("strength", valid_types[arg][0] + min(class_level / 3, 6));
-    ob->set_stats("dexterity", valid_types[arg][1] + min(class_level / 3, 6));
+    ob->set_stats("strength", valid_types[arg][0] + min( ({ class_level / 3, 6 }) ) );
+    ob->set_stats("dexterity", valid_types[arg][1] + min( ({ class_level / 3, 6 }) ) );
     ob->set_stats("constitution", valid_types[arg][2]);
     ob->set_stats("intelligence", valid_types[arg][3]);
     ob->set_stats("wisdom", valid_types[arg][4]);
