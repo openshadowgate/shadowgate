@@ -1,10 +1,36 @@
+/*
+  _animal_companion.c
+  
+  Feat that allows a ranger to summon an animal
+  companion.
+  
+  -- Tlaloc -- 2.18.20
+*/
+
+
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
 
 inherit FEAT;
 
-string *valid_types = ({ "badger", "rat", "dog", "hawk", "snake", "wolf", "ape" });
+//Format - type : STR; DEX; CON; INT; WIS; CHA; SIZE; AC BONUS
+mapping valid_types = ([ 
+                         "ape" :       13; 17; 10; 2; 12; 7; 3; 1,
+                         "badger" :    10; 17; 15; 2; 12; 10; 2; 2,
+                         "bear" :      15; 15; 13; 2; 12; 6; 3; 2,
+                         "bird" :      15; 15; 13; 2; 14; 6; 1; 1,
+                         "boar" :      13; 12; 15; 2; 13; 4; 2; 6,
+                         "camel" :     18; 16; 14; 2; 11; 4; 3; 1,
+                         "cheetah" :   12; 21; 13; 2; 12; 6; 2; 1,
+                         "crocodile" : 15; 14; 15; 1; 12; 2; 2; 4,
+                         "dinosaur" :  11; 17; 17; 2; 12; 14; 2; 1,
+                         "dog" :       13; 17; 15; 2; 12; 6; 2; 2,
+                         "horse" :     16; 13; 15; 2; 12; 6; 3; 4,
+                         "lion" :      13; 17; 13; 2; 15; 10; 3; 1,
+                         "snake" :     15; 17; 13; 1; 12; 2; 3; 2, 
+                         "wolf" :      13; 15; 15; 2; 12; 6; 2; 2,
+                      ]);
 
 void create()
 {
@@ -49,7 +75,12 @@ int cmd_animal_companion(string str)
 
 void execute_feat()
 {
-    object companion;
+    object companion,
+           ob;
+    
+    int class_level,
+        comp_hd,
+        comp_ac;
     
     ::execute_feat();
     
@@ -74,25 +105,11 @@ void execute_feat()
         companion && destruct_object(companion);
         return;
     }
-       
     
-    tell_object(caster, "What type of companion do you want to summon? Valid options are: (" + implode(m_indices(valid_types), ",") + ")] ");
-    input_to("finish_feat");
-    
-    return;
-}
-
-void finish_feat(string str)
-{
-    int class_level,
-        comp_hd,
-        comp_ac;
-        
-    object ob;
-        
-    if(member(valid_types, str) < 0)
+    if(!member(valid_types, arg) || !arg)
     {
         tell_object(caster, "That is not a valid choice for your animal companion.");
+        tell_object(caster, "Valid options are: (" + implode(m_indices(valid_types), ",") + ")] ");
         return;
     }
     
@@ -101,15 +118,14 @@ void finish_feat(string str)
     comp_ac = class_level + 1;
     
     ob = new("/d/magic/obj/acompanion");
-    ob->set_race(str);
-    ob->set_name(str);
-    ob->set_short(sprintf("%s's faithful %^BROWN%^%s%^RESET%^ companion.",caster->query_name(),str));
+    ob->set_race(arg);
+    ob->set_name(arg);
+    ob->set_short(sprintf("%s's faithful %^BROWN%^%s%^RESET%^ companion.",caster->query_name(),arg));
     ob->set_hd(comp_hd);
     ob->set_max_hp(8 * comp_hd);
     ob->set_hp(8 * comp_hd);
     ob->set_alignment(caster->query_alignment());
     ob->set_level("fighter", comp_hd);
-    ob->set_overall_ac(-comp_ac);
     ob->set_owner(caster);
     caster->set_property("animal_companion", ob);
     caster->add_pet(ob);
@@ -118,10 +134,16 @@ void finish_feat(string str)
     ob->move(caster);
     caster->set_property("using instant feat",1);
     
-    //Based on SRD stat adjustments for animal companion
-    ob->set_stats("strength", 16 + min(class_level / 3, 6));
-    ob->set_stats("dexterity", 16 + min(class_level / 3, 6));
-    
+    //Setting companion stats based on type per SRD
+    ob->set_stats("strength", valid_types[arg, 0] + min(class_level / 3, 6));
+    ob->set_stats("dexterity", valid_types[arg, 1] + min(class_level / 3, 6));
+    ob->set_stats("constitution", valid_types[arg, 2]);
+    ob->set_stats("intelligence", valid_types[arg, 3]);
+    ob->set_stats("wisdom", valid_types[arg, 4]);
+    ob->set_stats("charisma", valid_types[arg, 5]);
+    ob->set_size(valid_types[arg, 6]);
+    ob->set_overall_ac(-comp_ac - valid_types[arg, 7]);
+  
     //Based on SRD - companion gets "specials" at certain caster levels
     if(class_level >= 3)
         ob->set_monster_feats( ({ "evasion" }) );

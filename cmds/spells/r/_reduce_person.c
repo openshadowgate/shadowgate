@@ -47,10 +47,12 @@ void spell_effect(int prof)
     target->set_property("added short",({"%^YELLOW%^ (absurdly tiny)%^RESET%^"}));
     //For small characters the spell is cosmetic only
     keepsize = 0;
-    if(size>1)
+    size = caster->query_size();
+    if (size > 0) {
         target->set_size_bonus(-1);
-    else
+    } else {
         keepsize = 1;
+    }
     target->set_property("spelled", ({TO}) );
     target->set_property("enlarged",1);
     target->add_ac_bonus(2);

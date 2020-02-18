@@ -1063,6 +1063,11 @@ string query_long(string unused)
         if (objectp(shape)) {
             weight = (int)shape->query_shape_weight();
         }
+        if (TO->query_size_bonus())
+        {
+            height = to_int(height * pow(2, TO->query_size_bonus()));
+            weight = to_int(weight * pow(pow(2, TO->query_size_bonus()), 3));
+        }
         weight = weight / 25;
         weight = (weight + random(2)) * 25;
         reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";

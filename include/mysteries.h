@@ -16,7 +16,7 @@
 "apocalypse":({"summon swarm", "fog cloud", "sleet storm", "ice storm", "insect plague", "circle of death", "fire storm", "incendiary cloud", "meteor swarm"}),\
 "ancestor":({"unseen servant", "spiritual weapon", "heroism", "spiritual ally", "telekinetic push", "greater heroism","vision", "timeless body", "astral projection"}),\
 "lore":({"identify","clairvoyance","tongues","modify memory","telepathic bond","legend lore","vision","screen","timestop"}),\
-"nature":({"guidance", "barkskin", "charm monster", "polymorph self", "wall of thorns", "summon natures ally vi", "liveoak", "shapechange", "summon natures ally ix"}),\
+"nature":({"guidance", "barkskin", "charm monster", "polymorph self", "wall of thorns", "summon natures ally vi", "liveoak", "shapechange", "shambler"}),\
 ])
 
 //"bones":({"", "", "", "", "", "", "", "", ""}),\
