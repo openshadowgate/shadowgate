@@ -1,4 +1,5 @@
 //      Chill Touch
+//fixed switch so versatile arcanist actually manipulates element.
 #include <std.h>
 #include <spell.h>
 #include <magic.h>
@@ -33,7 +34,7 @@ string query_cast_string() { return caster->QCN+" utters a deathly chant."; }
 
 spell_effect(int prof)
 {
-    string mycolor, myhue, myhue2, myfeeling;
+    string mycolor, myhue, myhue2, myfeeling, damtype;
     int bonus, roll;
 
     if(!objectp(caster) || !objectp(target))
@@ -63,25 +64,29 @@ spell_effect(int prof)
         mycolor = "%^GREEN%^";
         myhue = "sickly green";
         myhue2 = "sickly green glow";
-        myfeeling = "searing pain";
+        myfeeling = "burning pain";
+        damtype = "acid";
         break;
     case "electricity":
         mycolor = "%^ORANGE%^";
         myhue = "static-charged";
         myhue2 = "charge of static";
         myfeeling = "sudden jolt";
+        damtype = "electricity";
         break;
     case "fire":
         mycolor = "%^RED%^";
         myhue = "radiantly glowing";
         myhue2 = "radiant glow";
         myfeeling = "blazing pain";
+        damtype = "fire";
         break;
     case "sonic":
         mycolor = "%^MAGENTA%^";
         myhue = "pulsing";
         myhue2 = "pulsing aura";
         myfeeling = "horrible throbbing";
+        damtype = "sonic";
         break;
     default:
         element = "cold";
@@ -89,6 +94,7 @@ spell_effect(int prof)
         myhue = "bluish glowing";
         myhue2 = "bluish glow";
         myfeeling = "ghastly chill";
+        damtype = "cold";
         break;
     }
 
@@ -178,7 +184,7 @@ spell_effect(int prof)
     tell_room(place,"%^BOLD%^"+mycolor+caster->QCN+" reaches out and touches "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand!\n%^WHITE%^All life and color seems drawn out of the limb!",({ caster, target}) );
     spell_successful();
 
-    damage_targ(target, target_limb, sdamage ,"cold" );
+    damage_targ(target, target_limb, sdamage , damtype );
     if (objectp(target) && !checkMagicResistance(target) )
     {
         stat_change(target,"strength",-1);

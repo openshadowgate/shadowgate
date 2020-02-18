@@ -47,7 +47,7 @@ void heart_beat()
     
     //Faithful companion finds his master
     if(living(owner) && room != environment(owner))
-        this_object()->move(owner);
+        this_object()->move(environment(owner));
     
     attackers = owner->query_attackers();
     
@@ -73,7 +73,7 @@ void die(object ob)
 
 int remove()
 {
-    reset_all_status_effects();
     all_inventory(TO)->remove();
     ::remove();
+    return 1;
 }

@@ -1,4 +1,5 @@
 //      Chill Touch
+// updated to include versatile arcanist stuff and make it cosmetically a ray
 #include <std.h>
 #include <spell.h>
 #include <magic.h>
@@ -18,7 +19,7 @@ create()
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS polar ray on TARGET");
     set_damage_desc("cold");
-    set_description("A blue-white ray of freezing air and ice springs from casters hand as she touches her target, freezing them.");
+    set_description("A blue-white ray of freezing air and ice springs from the casters hand aimed at her target, freezing them.  A versatile arcanist can manipulate the base element of this spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -29,7 +30,7 @@ string query_cast_string() { return caster->QCN+" utters a deathly chant."; }
 
 spell_effect(int prof)
 {
-    string mycolor, myhue, myhue2, myfeeling;
+    string mycolor, myhue, myhue2, myfeeling, damtype;
     int bonus, roll;
 
     if(!objectp(caster) || !objectp(target))
@@ -51,10 +52,47 @@ spell_effect(int prof)
         return;
     }
 
-    mycolor = "%^CYAN%^";
-    myhue = "white glowing";
-    myhue2 = "white glow";
-    myfeeling = "ghastly chill";
+    element = (string)caster->query("elementalist");
+
+    switch(element)
+    {
+    case "acid":
+        mycolor = "%^GREEN%^";
+        myhue = "sickly green";
+        myhue2 = "sickly green glow";
+        myfeeling = "burning pain";
+        damtype = "acid";
+        break;
+    case "electricity":
+        mycolor = "%^ORANGE%^";
+        myhue = "static-charged";
+        myhue2 = "charge of static";
+        myfeeling = "sudden jolt";
+        damtype = "electricity";
+        break;
+    case "fire":
+        mycolor = "%^RED%^";
+        myhue = "radiantly glowing";
+        myhue2 = "radiant glow";
+        myfeeling = "blazing pain";
+        damtype = "fire";
+        break;
+    case "sonic":
+        mycolor = "%^MAGENTA%^";
+        myhue = "pulsing";
+        myhue2 = "pulsing aura";
+        myfeeling = "horrible throbbing";
+        damtype = "sonic";
+        break;
+    default:
+        element = "cold";
+        mycolor = "%^CYAN%^";
+        myhue = "bluish glowing";
+        myhue2 = "bluish glow";
+        myfeeling = "ghastly chill";
+        damtype = "cold";
+        break;
+    }
 
     tell_object(caster,"%^BOLD%^"+mycolor+"Your hand starts to develop a "+myhue2+".");
     tell_room(place,"%^BOLD%^"+mycolor+caster->QCN+"'s hand starts to develop a "+myhue2+".",caster );
@@ -63,9 +101,9 @@ spell_effect(int prof)
 
     if(!roll || roll == -1 && ! caster->query_property("spectral_hand"))
     {
-        tell_object(caster,""+mycolor+"You try and touch "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand, but miss!");
-        tell_object(target,""+mycolor+caster->QCN+"'s "+myhue+" hand gropes for your "+target_limb+" unsuccessfully.");
-        tell_room(place,""+mycolor+caster->QCN+" reaches out for "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand and misses!", ({ caster, target}) );
+        tell_object(caster,""+mycolor+"You aim a ray at "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand, but miss!");
+        tell_object(target,""+mycolor+caster->QCN+"'s "+myhue+" ray shoots toward your "+target_limb+" unsuccessfully.");
+        tell_room(place,""+mycolor+caster->QCN+" aims a ray at "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand and misses!", ({ caster, target}) );
         target = 0;
         dest_effect();
         return;
@@ -78,24 +116,16 @@ spell_effect(int prof)
         return;
     }
 
-    tell_object(caster,"%^BOLD%^"+mycolor+"You reach out and touch "+target->QCN+"'s "+target_limb+" with your "+myhue+" hand.");
-    tell_object(target,"%^BOLD%^"+mycolor+caster->QCN+" touches your "+target_limb+" with a "+myhue+" hand.\n%^WHITE%^A "+myfeeling+" runs through you, sapping your strength!");
-    tell_room(place,"%^BOLD%^"+mycolor+caster->QCN+" reaches out and touches "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand!\n%^WHITE%^All life and color seems drawn out of the limb!",({ caster, target}) );
+    tell_object(caster,"%^BOLD%^"+mycolor+"You connect with a ray aimed at "+target->QCN+"'s "+target_limb+" with your "+myhue+" hand.");
+    tell_object(target,"%^BOLD%^"+mycolor+caster->QCN+" aims a ray that strikes your "+target_limb+" with a "+myhue+" hand.\n%^WHITE%^A "+myfeeling+" runs through you, sapping your strength!");
+    tell_room(place,"%^BOLD%^"+mycolor+caster->QCN+" aims a ray that hits "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand!\n%^WHITE%^All life and color seems drawn out of the limb!",({ caster, target}) );
     spell_successful();
 
-    damage_targ(target, target_limb, sdamage ,"cold" );
+    damage_targ(target, target_limb, sdamage , damtype );
 }
 
 void dest_effect()
 {
-    if(find_call_out("dest_effect") != -1) { remove_call_out("dest_effect"); }
-    if(objectp(target))
-    {
-        stat_change(target,"strength",1);
-        target->remove_property_value("spelled", ({TO}) );
-        tell_room(environment(target),"%^ORANGE%^"+target->QCN+" loses "+target->QP+" pale complexion.", target);
-        tell_object(target,"%^ORANGE%^The skeletal white color in your "+target_limb+" fades away.");
-    }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
