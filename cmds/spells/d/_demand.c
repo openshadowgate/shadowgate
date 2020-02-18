@@ -55,7 +55,7 @@ void spell_effect()
 
     sdamage = 1;
 
-    tell_object(caster,"%^BOLD%^%^WHITE%^You enspell your thoughts and demand "+target->QCN+":%^BOLD%^%^RED%^ "+command+"!");
+    tell_object(caster,"%^BOLD%^%^WHITE%^You enspell your thoughts and demand "+target->QCN+":%^BOLD%^%^RED%^ "+command+"%^WHITE%^!");
     tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" momentarely closes eyes, concentrating!",caster);
 
     caster->remove_property("demand_attempt");

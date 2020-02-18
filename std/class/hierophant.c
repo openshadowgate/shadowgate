@@ -98,22 +98,23 @@ int prerequisites(object player)
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
     if (skills["spellcraft"] < 10) {
+        write("Fail spellcraft.");
         return 0;
     }
     if (player->query_base_stats(base_class_ob(player)->query_casting_stat(player)) < 20) {
+        write("Fail stat.");
         return 0;
     }
     base = player->query("hierophant_base_class");
     if (!base) {
+        write("Fail base class.");
         return 0;
     }
     if (!player->is_class(base)) {
         return 0;
     }
     if ((player->query_class_level(base) + adj) < 20) {
-        return 0;
-    }
-    if (player->query_level() < 40) {
+        write("Fail base class level.");
         return 0;
     }
     return 1;
