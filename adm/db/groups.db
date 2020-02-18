@@ -1,0 +1,48 @@
+# /adm/etc/groups.db
+# from the Nightmare Mudlib
+# defines groups of euid's with similar access needs
+# system created by Descartes of Borg 01 august 1993
+# based on security ideas by Cygnus@Synergy
+#
+# file format:
+# (group name): list of members by euid
+# note... a creator's name is the euid for that creator
+# -------------------------------------------------------------
+
+(superuser): nienne eris ilmarinen nuwisha
+(assist): Restore eris garrett ilmarinen lujke circe uriel odin
+
+(mudlib): lujke ilmarinen
+(daemon): ilmarinen lujke circe
+
+#       misc groups
+(law_c): eris ilmarinen nienne nuwisha garrett circe
+(law): eris ilmarinen nienne nuwisha garrett circe
+(standard): Standard
+(classcoding): lujke ilmarinen
+(tutor): garrett
+
+#       Closed directories (Wiz's private areas)
+# (thornclosed): thorn idris
+# (patorclosed): pator svaha rotor
+# (grendelclosed): grendel
+
+
+#       Teams
+(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania uriel tlaloc
+(daemonassist): lujke nienne octothorpe uriel
+(help): chernobog kismet titania
+
+#
+#	Class coding teams
+#       (with write access to certain /cmds and /std dirs)
+(usercmd): garrett nienne lujke octothorpe tlaloc odin titania
+
+#       Areas of the game (/d)
+(attaya): lujke
+(barrier): nienne
+(daggermarsh): aurgloroasa
+(magic): aurgloroasa titania
+(newbie): garrett titania
+(shadow): titania chernobog
+(underdark): aurgloroasa

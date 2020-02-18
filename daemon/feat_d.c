@@ -1,4 +1,3 @@
-//added several catch() checks so that a typo in a feat does not break heartbeat anymore - Saide - April 2016
 #include <std.h>
 #include <daemons.h>
 #include <dirs.h>
@@ -1256,33 +1255,37 @@ void create()
 
 void build_feat_list()
 {
-    string *folders=({}),category,name,file, *files = ({});
-    mapping feats=([]);
+    string* folders = ({}), category, name, file, * files = ({});
+    mapping feats = ([]);
     int i, y;
 
     folders = get_dir(FEAT_FILE);
-    if(!sizeof(folders))
-    {
-        call_out("create",5); // An attempt to make the feat daemon kickstart itself if none of the feats load -Ares
+    if (!sizeof(folders)) {
+        // An attempt to make the feat daemon kickstart itself if none of the feats load -Ares
+        call_out("create", 5);
         return;
     }
-    for(i=0;i<sizeof(folders);i++)
-    {
+    for (i = 0; i < sizeof(folders); i++) {
         files = get_dir(FEAT_FILE + folders[i] + "/");
-        for(y = 0; y < sizeof(files); y++)
-        {
-        // hopefully prevent backups an anything not ending in .c from bugging the daemon
-            if(strsrch(files[y],".c") != (strlen(files[y]) - 2)) { continue; }
-            //tell_object(find_player("saide"), "files[y] = "+files[y]);
-            //continue;
+        for (y = 0; y < sizeof(files); y++) {
+            // hopefully prevent backups an anything not ending in .c from bugging the daemon
+            if (strsrch(files[y], ".c") != (strlen(files[y]) - 2)) {
+                continue;
+            }
+            file = FEAT_FILE + "" + folders[i] + "/" + files[y] + "";
+            file = replace_string(file, " ", "_");
 
-            file     = FEAT_FILE + "" + folders[i] + "/" + files[y]+"";
-            file     = replace_string(file," ","_");
-            category = file->query_feat_category();
-            name     = file->query_feat_name();
+            // This line tests for feats with errors
+            if (catch(category = file->query_feat_category())) {
+                continue;
+            }
+            name = file->query_feat_name();
             file->dest_effect();
-            if(!pointerp(feats[category])) { feats[category] = ({ name }); }
-            else feats[category] += ({ name });
+            if (!pointerp(feats[category])) {
+                feats[category] = ({ name });
+            }else {
+                feats[category] += ({ name });
+            }
         }
     }
     __ALL_FEATS = feats;
