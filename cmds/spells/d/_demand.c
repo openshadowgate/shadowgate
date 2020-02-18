@@ -61,7 +61,7 @@ void spell_effect()
     caster->remove_property("demand_attempt");
     caster->set_property("demand_attempt", time());
 
-    tell_object(target,"%^B_BLUE%^You sense that "+caster->QCN+" tried to telepathically command you from " +ENV(caster)->query_short()+ "%^RESET%^%^B_BLUE%^!");
+    tell_object(target,"%^B_BLUE%^%^BOLD%^You sense that "+caster->QCN+" tried to telepathically command you from " +ENV(caster)->query_short()+ " to " +command+"%^RESET%^%^B_BLUE%^!");
 
     if (do_save(target, 0) ||
         target->query_property("no dominate", 1) ||
