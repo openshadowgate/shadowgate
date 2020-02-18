@@ -22,18 +22,11 @@
 (classcoding): lujke ilmarinen
 (tutor): garrett
 
-#       Closed directories (Wiz's private areas)
-# (thornclosed): thorn idris
-# (patorclosed): pator svaha rotor
-# (grendelclosed): grendel
-
-
 #       Teams
 (area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania uriel tlaloc
 (daemonassist): lujke nienne octothorpe uriel
 (help): chernobog kismet titania
 
-#
 #	Class coding teams
 #       (with write access to certain /cmds and /std dirs)
 (usercmd): garrett nienne lujke octothorpe tlaloc odin titania
@@ -42,7 +35,7 @@
 (attaya): lujke
 (barrier): nienne
 (daggermarsh): aurgloroasa
-(magic): aurgloroasa titania
+(magic): aurgloroasa titania tlaloc
 (newbie): garrett titania
 (shadow): titania chernobog
 (underdark): aurgloroasa
