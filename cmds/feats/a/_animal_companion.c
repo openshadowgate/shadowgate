@@ -44,7 +44,7 @@ int cmd_animal_companion(string str)
     feat = new(base_name(this_object()));
     feat->setup_feat(this_player(), str);
     
-    return;
+    return 1;
 }
 
 void execute_feat()
@@ -98,7 +98,7 @@ void finish_feat(string str)
     
     class_level = caster->query_class_level("ranger") / 2;
     comp_hd = class_level + 2;
-    comp_ac = class_level + 1;   
+    comp_ac = class_level + 1;
     
     ob = new("/d/magic/obj/acompanion");
     ob->set_race(str);
