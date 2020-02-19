@@ -41,8 +41,8 @@ void set_target(object obj){
 }
 
 void set_clevel(int x){
-   if(!intp(x)){ 
-      clevel = 5; 
+   if(!intp(x)){
+      clevel = 5;
    }else{
       clevel = x;
    }
@@ -112,12 +112,12 @@ void dispel_em(object ob){
    return;
 }
 
-//Trying the standard dispel modifier from the books to see how it works. 
+//Trying the standard dispel modifier from the books to see how it works.
 //If this is balanced, I will likely update dispel magic to use the same formula.
 //(Note: To make stats more meaningful, we might want to add the casting stat modifier)
 //~Circe~ 11/19/15
-//Per table top: You make a dispel check (1d20 + your caster level, maximum +10) 
-//against the spell or against each ongoing spell currently in effect on the object 
+//Per table top: You make a dispel check (1d20 + your caster level, maximum +10)
+//against the spell or against each ongoing spell currently in effect on the object
 //or creature. The DC for this dispel check is 11 + the spell’s caster level.
 //Because we currently add 10 for greater dispel, I am not capping the level.
 //We could revisit this as well.
@@ -129,12 +129,6 @@ void checkDispel(object ob){
    if(!objectp(ob)) return;
    if(!objectp(TO)) return;
 
-   if(caster == (object)ob->query_caster()){
-      tell_object(caster,"%^BOLD%^You dispel your "+ob->query_spell_name()+"!%^RESET%^");
-      target->remove_property_value("spelled", ({ob}));
-      ob->dest_effect();
-      return 1;
-   }
 
    mycast = ob->query_caster();
    mylvl = ob->query_clevel();
@@ -142,30 +136,16 @@ void checkDispel(object ob){
 
    DC = 11 + mylvl;
 
-// +2 bonus vs dispels for shadow adepts, if the dispeller is not also a shadow weave user.
-    if(FEATS_D->usable_feat(ob->query_caster(),"shadow adept") && !FEATS_D->usable_feat(caster,"shadow adept")) DC += 2;
-
-    if(mycast->query_property("dispelling_buffer") > 0){
-       buffered = mycast->query_property("dispelling_buffer");
-//       tell_object(mycast,"DC before buffer: "+DC+"");
-       DC += buffered;
-//       tell_object(mycast,"DC after buffer: "+DC+"");
-   }
-
-   roll = roll_dice(1,20);
-//    tell_object(mycast,"Roll: "+roll+" vs. DC: "+DC+"");
-
-   roll = roll + clevel;
    dam = roll_dice(clevel,2);
    dam += clevel;
-   if(roll >= DC){ 
+   if("/std/magic/dispel"->checkDispel(ob, clevel)){
       tell_object(caster,"%^BOLD%^You dispel "+target->QCN+"'s "+ob->query_spell_name()+"!%^RESET%^");
       target->remove_property_value("spelled", ({ob}));
       tell_object(target,"%^BOLD%^You feel a searing pain as your "+ob->query_spell_name()+" "
          "is ripped away from you!%^RESET%^");
       target->do_damage(target->return_target_limb(),dam);
       ob->dest_effect();
-      return; 
+      return;
    }else{
       tell_object(caster, "%^BOLD%^You are unable to dispel a spell this round.%^RESET%^");
       return;

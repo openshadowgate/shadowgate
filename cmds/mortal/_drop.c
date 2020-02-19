@@ -88,11 +88,9 @@ int cmd_drop(string str)
                 return 0;
             }
             tmp = (string)ob->query_short();
-            if(ob->drop())
-            {
-                if((int)ob->query_property("soulbound")) write("A higher power prevents you from dropping that!");
-                if(ob->query_worn() == TP && sizeof(TP->query_attackers()) > 0)
-                {
+
+            if (ob->drop()) {
+                if (ob->query_worn() == TP && sizeof(TP->query_attackers()) > 0) {
                     tell_object(TP, "You cannot drop a worn item in combat!");
                 }
                 return 1;
@@ -153,13 +151,28 @@ int cmd_drop(string str)
     return 1;
 }
 
-int help()
+void help()
 {
-    write("Command: drop\nSyntax: drop <item | all>\n"+
-         "This makes your character try to drop the specified\n"+
-         "item.  If all is used then your character drops all\n"+
-         "items carried.\n\n"
-	"see also:  drag, get, give\n");
-    return 1;
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+drop - put things on the ground
+
+%^CYAN%^SYNTAX%^RESET%^
+
+drop %^ORANGE%^%^ULINE%^ITEM%^RESET%^
+drop all
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This makes you try to drop the specified item. If all is used then your character drops all items carried.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+drag, get, give, look, offer, inventory, eq, set
+"
+        );
+
 }
 /* EOF */

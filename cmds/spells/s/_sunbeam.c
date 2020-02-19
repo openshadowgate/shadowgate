@@ -14,7 +14,7 @@ void create() {
     set_damage_desc("divine, 4/3 times more to undead");
     set_description("This spell will create a beam of pure light aimed at the target.  A target who fails to avoid the "
         "sunbeam will take damage from the pure sunlight and may be momentarily blinded.  Undead hit by the spell will "
-        "suffer additional damage. Vampires hit but this spell will recieve ");
+        "suffer additional damage. Vampires hit but this spell will recieve more love than usual undead.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

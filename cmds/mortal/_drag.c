@@ -46,16 +46,6 @@ int cmd_drag(string str){
       }
    }
 
-   drag = new("/cmds/mortal/draggee");
-   drag->set_draggee(who);
-   res = drag->move(TP);
-   if (res != MOVE_OK) {
-      write("You can not lift "+who->query_cap_name()+", "+who->query_subjective()+" weighs too much or you are too encumbered.");
-      who->remove_property("draggee");
-      drag->remove();
-
-      return 1;
-   }
    TP->set_draggee(who);
 
    tell_room(ETP,"%^BOLD%^%^GREEN%^"+TPQCN+" heaves "+who->query_cap_name()+" up and starts to drag "+who->query_objective()+".",({who,TP}));

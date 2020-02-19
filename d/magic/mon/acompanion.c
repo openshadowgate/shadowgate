@@ -113,10 +113,20 @@ void heart_beat()
     if(living(owner) && room != environment(owner))
         this_object()->move(environment(owner));
     
+    if(owner->query_hidden() && !this_object()->query_invis())
+    {
+        this_object()->set_invis(1);
+        tell_object(owner, "Your animal companion fades into the shadows.");
+    }
+    
+    if(!owner->query_hidden() && this_object()->query_invis())
+        this_object()->set_invis(0);
+    
     attackers = owner->query_attackers();
     
     if(sizeof(attackers))
     {
+        this_object()->set_invis(0);
         foreach(object ob in attackers)
             this_object()->kill_ob(ob);
     }
