@@ -65,6 +65,12 @@ void flystep()
         destobj = find_object_or_load(destination);
     }
 
+    if (flroom != ENV(flyee)) {
+        TO->remove();
+        return;
+    }
+
+
     if (step == 0) {
         flroom->change_stage("initial climb");
     } else if (step == 4) {

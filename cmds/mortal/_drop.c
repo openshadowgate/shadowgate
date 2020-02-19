@@ -71,7 +71,18 @@ int cmd_drop(string str)
                 return 1;
             }
             ob = present(str, TP);
-            if(!ob)
+            if (!objectp(ob)) {
+                ob = present(str, ETP);
+                if(objectp(ob))
+                {
+                    if(ob == TP->query_draggee())
+                    {
+                        TP->set_draggee(0);
+                        ob->remove_property("draggee");
+                    }
+                }
+            }
+            else if(!ob)
             {
                 notify_fail("What " + str + "?\n");
                 return 0;
@@ -87,11 +98,9 @@ int cmd_drop(string str)
                 return 1;
             }
 
-        // added to handle if dragging PC to overcome giving away real names  *Styx*  2/1/03
-        // I'm sure there's a way to get fake name to show, but it's 3 am and I'm over it.
-        // passing the query_name from here won't work because it won't go through known as
-        // ob is draggee, not the player anyway
-            if((string)ob->query_name() == "draggee") { tmp = "a body"; }
+            if ((string)ob->query_name() == "draggee") {
+                tmp = "a body";
+            }
 
             res = (int)ob->move(ETP);
             if(res == MOVE_OK)

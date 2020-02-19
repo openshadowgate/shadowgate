@@ -23,9 +23,6 @@ void set_draggee(object ob){
 
    draggee = ob;
    if (draggee->query_disguised()) {
-      set_name(draggee->query_disguise());
-      add_id(draggee->query_disguise());
-   } else {
       set_name(draggee->setParsableName());
       add_id(draggee->query_name());
    }
@@ -107,4 +104,3 @@ void heart_beat(){
 int save_me(string file){
    return 1;
 }
-

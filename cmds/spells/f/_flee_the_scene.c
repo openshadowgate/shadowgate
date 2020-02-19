@@ -12,6 +12,7 @@ void create()
     set_spell_name("flee the scene"); // Mislead
     set_spell_level(([ "warlock" : 2, "bard":5, "mage":6, "cleric":6]));
     set_domains("trickery");
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS flee the scene on DIRECTION");
     set_description("This spell allows the caster to craft an illusion about themselves, "
                     "before slipping out of it a short distance away. The illusion remains behind for a round, "

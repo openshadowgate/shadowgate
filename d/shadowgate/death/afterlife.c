@@ -174,8 +174,7 @@ void init()
 			DeadPerson->set("in_the_afterlife", 1);
 		}
 		TP->unrestrict_channel("deceased");
-		tell_object(TP, "You can now use the line "+
-		"%^BOLD%^%^WHITE%^deceased%^RESET%^.");
+		tell_object(TP, "You can now use the line %^BOLD%^%^WHITE%^deceased%^RESET%^ to talk with other dead.");
 	}
 	add_action("filter_act","",1);
 }

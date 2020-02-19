@@ -10,7 +10,7 @@ inherit DAEMON;
 
 void profile_stuff(object tp,string profile,string type,string str);
 
-int cmd_message(string str) 
+int cmd_message(string str)
 {
     string what, msg,profile;
     object desc;
@@ -20,31 +20,31 @@ int cmd_message(string str)
 
     profile = TP->query("relationship_profile");
 
-    if(!str) 
+    if(!str)
     {
 	    notify_fail("Which message? What is the message?\n");
 	    return 0;
     }
-    
-    if(sscanf(str, "%s %s", what, msg) != 2) 
+
+    if(sscanf(str, "%s %s", what, msg) != 2)
     {
-	    notify_fail("Correct syntax: <message [in | out] [msg]>\n");
+	    notify_fail("Correct syntax: <message in|out MESSAGE>\n");
 	    return 0;
     }
-    
-    if(what != "in" && what != "out") 
+
+    if(what != "in" && what != "out")
     {
 	    notify_fail("You may only set your messages in and out.\n");
 	    return 0;
     }
-    
-    if(what == "in") 
+
+    if(what == "in")
     {
         this_player()->setenv("MIN", "$N "+msg);
         desc->set_profile_stuff(msg,"message in",TP);
         if(profile) { profile_stuff(TP,profile,"in",str); }
-    }   
-    else if(strsrch(msg,"$D") != -1) 
+    }
+    else if(strsrch(msg,"$D") != -1)
     {
         TP->setenv("MOUT","$N "+msg+"");
         desc->set_profile_stuff(msg,"message out",TP);
@@ -57,7 +57,7 @@ int cmd_message(string str)
         desc->set_profile_stuff(msg,"message out",TP);
         if(profile) { profile_stuff(TP,profile,"out",str); }
     }
-   
+
     return 1;
 }
 
