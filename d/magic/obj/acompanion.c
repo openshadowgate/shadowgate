@@ -9,6 +9,8 @@
 
 inherit WEAPONLESS;
 
+#define SAVEDIR "/d/save/summons/" + owner->query_name() + "/animal/"
+
 object owner;
 
 int set_owner(object ob) { owner = ob; return 1; }
@@ -25,6 +27,55 @@ void create(){
     set_size(2);
     set_gender("neuter");
 }
+
+void init()
+{
+    ::init();
+    
+    if(!catch(restore_object(SAVEDIR + "save")))
+    {
+        tell_player(this_player(), "Creating new save file for Animal Companion.");
+        mkdir("/d/save/summons/" + this_player()->query_name());
+        mkdir(SAVEDIR);
+    }
+    
+    add_action("set_animal_desc", "animal");
+}
+
+int set_animal_desc(string str)
+{
+    string *input;
+    
+    input = explode(str, " ");
+    
+    if(sizeof(input) < 2)
+    {
+        tell_object(this_player(), "Syntax : animal [long/short] [description].");
+        return 1;
+    }
+    
+    switch(input[0])
+    {
+        case "short":
+        this_object()->set_short(implode(input[1..], " "));
+        tell_object(this_player(), "Your Animal Companion will now be seen as: \n" + query_short()); 
+        break;
+        case "long":
+        this_object()->set_long(implode(input[1..], " "));
+        tell_object(this_player(), "Your Animal Companion will now be described as: " + query_long()); 
+        break;
+        default:
+        tell_object(this_player(), "Please select 'long' or 'short' as options.");
+        return 1;
+        break;
+    }
+    
+    if(catch(save_object(SAVEDIR + "save")))
+        tell_object(this_player(), "Animal Companion Saved.");
+    
+    return 1;
+}
+    
 
 void heart_beat()
 {
