@@ -11,6 +11,7 @@ void create()
     set_spell_level(([ "druid" : 2, "cleric" : 2, ]));
     set_spell_sphere("alteration");
     set_domains("earth");
+    set_mystery("stone");
     set_syntax("cast CLASS soften earth");
     set_damage_desc("trips targets");
     set_description("When this spell is cast, all natural, undressed earth or stone in the spell's area is softened. Wet earth becomes thick mud, dry earth becomes loose sand or dirt, and stone becomes soft clay that is easily molded or chopped. Creatures in mud that succed reflex save are not affected, others become prone.");

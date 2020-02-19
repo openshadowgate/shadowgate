@@ -14,6 +14,7 @@ void create() {
     ::create();
     set_spell_name("imprisonment");
     set_spell_level(([ "oracle" : 9, "mage" : 9 ]));
+    set_mystery("godclaw");
     set_syntax("cast CLASS imprisonment on TARGET");
     set_spell_sphere("abjuration");
     set_description("This spell puts your target into extraplanar prison, temporary removing them from existence.");

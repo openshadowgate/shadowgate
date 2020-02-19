@@ -14,8 +14,9 @@ void create() {
     ::create();
     set_spell_name("earth reaver");
     set_spell_level(([ "cleric" : 5 ]));
-    set_spell_sphere("elemental earth");
-    set_spell_domain("earth");
+    set_spell_sphere("alteration");
+    set_domains("earth");
+    set_mystery("stone");
     set_syntax("cast CLASS earth reaver on TARGET");
     set_description("This spell will cause the ground around the target to erupt and throw dirt and rocks at the target.");
     set_verbal_comp();
@@ -24,24 +25,24 @@ void create() {
     set_save("reflex");
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^ORANGE%^Looking to the ground, you begin to chant in a "+
         "deep voice, lowering your hands with each syllable.");
     tell_room(place,"%^ORANGE%^Looking to the ground, "+caster->QCN+" begins"+
         " to chant in a deep voice, "+caster->QP+" lowering with each"+
         " syllable.",caster);
-    return "display";        
+    return "display";
 }
 
-int preSpell() 
+int preSpell()
 {
     if(!objectp(target))
     {
         tell_object(caster,"This spell requires a target.");
         return 0;
     }
-    if (caster->query_property("earth reaver")) 
+    if (caster->query_property("earth reaver"))
     {
         tell_object(caster,"You are already concentrating on a earth reaver spell.");
         return 0;
@@ -61,7 +62,7 @@ void spell_effect(int prof){
         dest_effect();
         return;
     }
-    if (environment(caster) != place) 
+    if (environment(caster) != place)
     {
         dest_effect();
         return;
@@ -80,7 +81,7 @@ void spell_effect(int prof){
 
     if(!do_save(target))
     {
-        if (skinned = (int)(target->query_stoneSkinned())) 
+        if (skinned = (int)(target->query_stoneSkinned()))
         {
             if (skinned > num)
                 target->set_stoneSkinned(skinned - num);
