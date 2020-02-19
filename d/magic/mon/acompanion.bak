@@ -109,14 +109,10 @@ void heart_beat()
     
     room = environment(this_object());
     
-    if(owner->query_property("animal_companion") != this_object())
-        this_object()->remove();
-    
     //Faithful companion finds his master
     if(living(owner) && room != environment(owner))
         this_object()->move(environment(owner));
     
-    //Companion hides if master is hiding
     if(!this_object()->query_invis())
     {
         if(owner->query_hidden() || owner->query_invis())
@@ -152,7 +148,6 @@ void die(object ob)
 int remove()
 {
     all_inventory(TO)->remove();
-    owner->remove_property("animal_companion");
     ::remove();
     return 1;
 }
