@@ -13,9 +13,6 @@ inherit WEAPONLESS;
 
 object owner;
 
-string saved_short,
-       saved_long;
-
 int set_owner(object ob) { owner = ob; return 1; }
 object query_owner()     { return owner; }
 
@@ -34,20 +31,12 @@ void create(){
 void init()
 {
     ::init();
-      
-    saved_short = read_file(SAVEDIR + "short");
-    saved_long = read_file(SAVEDIR + "long");
     
-    //Use read_file here - don't want to save whole object for 2 variables
-    if(!strlen(saved_short) && !strlen(saved_long))
+    if(!catch(restore_object(SAVEDIR + "save")))
     {
+        tell_player(this_player(), "Creating new save file for Animal Companion.");
         mkdir("/d/save/summons/" + this_player()->query_name());
         mkdir(SAVEDIR);
-    }
-    else
-    {
-        set_short(saved_short);
-        set_long(saved_long);
     }
     
     add_action("set_animal_desc", "animal");
@@ -69,21 +58,20 @@ int set_animal_desc(string str)
     {
         case "short":
         this_object()->set_short(implode(input[1..], " "));
-        tell_object(this_player(), "Your Animal Companion will now be seen as: \n" + query_short());
-        rm(SAVEDIR + "short");
-        write_file(SAVEDIR + "short", query_short());
+        tell_object(this_player(), "Your Animal Companion will now be seen as: \n" + query_short()); 
         break;
         case "long":
         this_object()->set_long(implode(input[1..], " "));
-        tell_object(this_player(), "Your Animal Companion will now be described as: " + query_long());
-        rm(SAVEDIR + "long");
-        write_file(SAVEDIR + "long", query_long());
+        tell_object(this_player(), "Your Animal Companion will now be described as: " + query_long()); 
         break;
         default:
         tell_object(this_player(), "Please select 'long' or 'short' as options.");
         return 1;
         break;
     }
+    
+    if(catch(save_object(SAVEDIR + "save")))
+        tell_object(this_player(), "Animal Companion Saved.");
     
     return 1;
 }

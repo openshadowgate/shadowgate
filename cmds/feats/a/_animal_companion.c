@@ -50,7 +50,7 @@ int prerequisites(object ob)
     if(!objectp(ob))
         return 0;
     
-    if(ob->query_class_level("ranger") < 4 || ob->query_name() != "xanoc")
+    if(ob->query_class_level("ranger") < 4 || ob->query_name() != "elendril")
     {
         dest_effect();
         return 0;
