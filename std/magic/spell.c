@@ -2650,8 +2650,9 @@ varargs int do_save(object targ,int mod) {
                     "BEFORE d20 roll: " + caster_bonus + "%^RESET%^");
     }
 
-    if (shadow_spell && type == "will") {
-        caster_bonus = shadow_spell * caster_bonus / 10;
+    if (shadow_spell) {
+        type = "will";
+        /* caster_bonus = shadow_spell * caster_bonus / 10; */
     }
 
     // this is directly copied below for the shadowdancer reroll - if anything changed here, change there too plz!
