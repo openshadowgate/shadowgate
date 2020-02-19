@@ -125,7 +125,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    Scribe Feat\n"
         "    20 Levels Base class\n";
         "    10 Ranks spent in Spellcraft Skill\n";
 
@@ -167,10 +166,6 @@ int prerequisites(object player)
     }
     if (!skills["spellcraft"] || skills["spellcraft"] < 10) {
         write("fail spellcraft");
-        return 0;
-    }
-    if (!FEATS_D->usable_feat(player, "scribe")) {
-        write("fail scribe");
         return 0;
     }
     return 1;

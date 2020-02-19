@@ -622,25 +622,29 @@ void sort() {
 
 void sort_by_school()
 {
-    int i,j;
+    int i, j;
 
-    for (j=0;j<sizeof(magic);j++)
-        for (i=sizeof(magic)-1;i>j;i--)
-            if (speccache[magic[i]]["sphere"] < speccache[magic[i-1]]["sphere"])
-            {
-                swap(i-1,i);
-            }
-}
-
-void sort_by_lev() {
-    int i,j;
-
-    for (j=0;j<sizeof(magic);j++)
-        for (i=sizeof(magic)-1;i>j;i--) {
-            if (spells[magic[i]] < spells[magic[i-1]]) {
-                swap(i-1,i);
+    for (j = 0; j < sizeof(magic); j++) {
+        for (i = sizeof(magic) - 1; i > j; i--) {
+            tell_object(FPL("ilmarinen"), ":" + magic[i] + ":" + magic[i - 1]);
+            if (speccache[magic[i]]["sphere"] < speccache[magic[i - 1]]["sphere"]) {
+                swap(i - 1, i);
             }
         }
+    }
+}
+
+void sort_by_lev()
+{
+    int i, j;
+
+    for (j = 0; j < sizeof(magic); j++) {
+        for (i = sizeof(magic) - 1; i > j; i--) {
+            if (spells[magic[i]] < spells[magic[i - 1]]) {
+                swap(i - 1, i);
+            }
+        }
+    }
 }
 
 private void swap(int i, int j) {

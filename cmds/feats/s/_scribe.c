@@ -38,6 +38,7 @@ int prerequisites(object ob)
         !ob->is_class("inquisitor") &&
         !ob->is_class("oracle") &&
         !ob->is_class("ranger") &&
+        !ob->is_class("cypher") &&
         !ob->is_class("paladin") &&
         !ob->is_class("druid")) {
         dest_effect();

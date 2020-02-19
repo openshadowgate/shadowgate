@@ -20,7 +20,7 @@ void create()
     TO->set_name("wand");
 
     /*
-     * If you want to set spell during the creation, just change
+     * If you want to set a spell during the creation, just change
      * "spell","spell type" settings of the item.
      *
      * wand = new(WAND)
@@ -40,13 +40,14 @@ void make_me()
     string *classes = ({});
     i = random(sizeof(WTYPES));
     type = WTYPES[i];
+    classes = ({"mage", "cleric", "druid", "psion", "psywarrior", "ranger", "paladin", "inquisitor"});
+    sclass = classes[random(sizeof(classes))];
     if (TO->query("spell")) {
         spell = TO->query("spell");
     } else {
-        spell = MAGIC_D->query_random_spell("random");
+        spell = MAGIC_D->query_random_spell(sclass);
     }
-    classes = keys(MAGIC_D->query_index_row(spell)["levels"]);
-    sclass = classes[random(sizeof(classes))];
+
     ::create();
 
     if (sclass == "psion" ||
