@@ -202,7 +202,7 @@ void cast_special_spells()
                     return;
                 }
 
-                myclass = cast_check(spell);
+                /* myclass = cast_check(spell); */
                 tell_object(owner, "Attempting to: " + special);
                 owner->force_me(special);
                 normal_special_spells_cast += ({ spell });
