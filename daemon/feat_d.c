@@ -1485,12 +1485,24 @@ void display_feats(object ob,object targ, string mytype)
       default: currentlist += SPELLFEATS; currentlist += MELEEFEATS; currentlist += GENERALFEATS; currentlist += EPICFEATS; currentlist += PRESTIGE_FEATS; break;
     }
 
-    if(!targ->is_class("bard") && !avatarp(targ)) { currentlist -= ({ "Performance" }); }
-    if(!targ->is_class("inquisitor") && !avatarp(targ)) { currentlist -= ({ "Inquisition" }); }
-    if(!targ->is_class("druid") && !avatarp(targ)) { currentlist -= ({ "WildernessLore" }); currentlist -= ({ "SavageCombat" }); }
-    if(!targ->is_class("psion") && !targ->is_class("psywarrior") && !avatarp(targ)) { currentlist -= ({ "Psionics" }); }
-    if(!targ->is_class("fighter") && !targ->is_class("cavalier") && !targ->is_class("paladin") && !targ->is_class("antipaladin") && !avatarp(targ)) { currentlist -= ({ "WeaponMastery" }); }
-    if(!high_mortalp(targ) && !avatarp(targ) && CONFIG_D->check_config("HM") == 0) { currentlist -= ({ "EpicFeats" }); }
+    if (!targ->is_class("bard") && !avatarp(targ)) {
+        currentlist -= ({ "Performance" });
+    }
+    if (!targ->is_class("inquisitor") && !avatarp(targ)) {
+        currentlist -= ({ "Inquisition" });
+    }
+    if (!targ->is_class("druid") && !targ->is_class("ranger") && !avatarp(targ)) {
+        currentlist -= ({ "WildernessLore" }); currentlist -= ({ "SavageCombat" });
+    }
+    if (!targ->is_class("psion") && !targ->is_class("psywarrior") && !avatarp(targ)) {
+        currentlist -= ({ "Psionics" });
+    }
+    if (!targ->is_class("fighter") && !targ->is_class("cavalier") && !targ->is_class("paladin") && !targ->is_class("antipaladin") && !avatarp(targ)) {
+        currentlist -= ({ "WeaponMastery" });
+    }
+    if (!high_mortalp(targ) && !avatarp(targ) && CONFIG_D->check_config("HM") == 0) {
+        currentlist -= ({ "EpicFeats" });
+    }
 
     classes = targ->query_classes();
     for(i=0;i<sizeof(PRESTIGE_FEATS);i++)

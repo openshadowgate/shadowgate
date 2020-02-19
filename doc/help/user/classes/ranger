@@ -9,6 +9,7 @@
 %^RESET%^%^CYAN%^Class Feats (dual wield combat style):%^RESET%^
  %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon
  %^RESET%^proficiency, ambidexterity, track
+%^RESET%^ L4: animal companion
  %^RESET%^L5: whirl
  %^RESET%^L9: two weapon fighting, evasion
  %^RESET%^L13: improved two weapon fighting
@@ -17,6 +18,7 @@
 %^RESET%^%^CYAN%^Class Feats (archery combat style):%^RESET%^
  %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon
  %^RESET%^proficiency, point blank shot, track
+%^RESET%^ L4: animal companion
  %^RESET%^L5: manyshot
  %^RESET%^L9: deadeye, evasion
  %^RESET%^L13: preciseshot

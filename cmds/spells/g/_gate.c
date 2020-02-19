@@ -19,7 +19,7 @@ void create()
     set_domains("good");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS gate on summoning
-        cast CLASS gate on travel | location");
+        cast CLASS gate on travel | LOCATION");
     set_description("The spell of gate is only available to the most skilled of conjurers, and holds twofold uses to its casting.
 
 The first is the use of the conjured portal as a means of transit, both for the caster and his allies, to a specified location previously memorized.

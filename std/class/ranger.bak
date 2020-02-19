@@ -8,7 +8,8 @@ string *search_paths() { return ({ "/cmds/ranger" }); } // temporary
 int caster_class() { return 1; }
 
 string *restricted_races() {
-    return ({ "bugbear","dwarf","gnome","goblin","half-orc","halfling","hobgoblin","kobold","orc", "firbolg","gnoll","half-ogre","ogre","ogre-mage" });
+    return ({ "bugbear","dwarf","gnome","goblin","half-orc","halfling","hobgoblin","kobold","orc",
+                "firbolg","gnoll","half-ogre","ogre","ogre-mage" });
 }
 
 string *restricted_classes() { return ({}); }
@@ -16,9 +17,7 @@ string *restricted_classes() { return ({}); }
 int *restricted_alignments() { return ({}); }
 
 // removing deity restrictions from ranger & druid. N, 3/17.
-/*string *restricted_gods() { return ({
-"auppenser","bane","beshaba","cyric","helm","mask","mystra","oghma","sune","torm
-","tymora" });
+/*string *restricted_gods() { return ({ "auppenser","bane","beshaba","cyric","helm","mask","mystra","oghma","sune","torm","tymora" });
 }*/
 string *restricted_gods() { return ({}); }
 
@@ -45,14 +44,14 @@ string *class_feats(string myspec) {
 
 mapping class_featmap(string myspec) { // "dual wield" is default setting
     if(!myspec || myspec == "")
-        return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
+        return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
 
     switch(myspec) {
       case "archery":
-          return ([ 1 : ({ "point blank shot", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye", "evasion" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }),  ]);
+          return ([ 1 : ({ "point blank shot", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye", "evasion" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }),  ]);
       break;
       default:
-          return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
+          return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
       break;
     }
 }
