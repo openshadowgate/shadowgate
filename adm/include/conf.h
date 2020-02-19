@@ -4,8 +4,8 @@
 
 #define MUD_IS_LOCKED 0
 
-#define GMT_OFFSET               -32000
-#define MAX_LOG_SIZE             150000
+#define GMT_OFFSET               0
+#define MAX_LOG_SIZE             350000
 #define MAX_NET_DEAD_TIME        1800
 
 #define LOGON_TIMEOUT            180
