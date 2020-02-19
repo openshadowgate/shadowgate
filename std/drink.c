@@ -73,68 +73,69 @@ void set_healing(){
     healing = x;
 }
 
-void set_x_healing() {
-  int x;
-  x = roll_dice(3,8) + 3;
-  healing = x;
+void set_x_healing()
+{
+    int x;
+    x = roll_dice(3, 8) + 3;
+    healing = x;
 }
 
-void set_my_mess(string str) {
-   my_mess = str;
+void set_my_mess(string str)
+{
+    my_mess = str;
 }
 
-void set_your_mess(string str) {
-   your_mess = str;
+void set_your_mess(string str)
+{
+    your_mess = str;
 }
 
-int query_strength() {
-   return query("strength");
+int query_strength()
+{
+    return query("strength");
 }
 
-void set_type(string str) { set("type", str); }
+void set_type(string str)
+{
+    set("type", str);
+}
 
-string query_type() { return query("type"); }
+string query_type()
+{
+    return query("type");
+}
 
 int drink(string str)
 {
     object myDisease;
     string myType;
-    if(!id(str)) return 0;
+    if (!id(str)) {
+        return 0;
+    }
 
-   /* Plura 930202 */
-    if(ETO != TP)
-    {
-        tell_object(TP,"You must get it first.\n");
+    /* Plura 930202 */
+    if (ETO != TP) {
+        tell_object(TP, "You must get it first.\n");
         return 1;
     }
-    if(query("type") == "soft drink")
-    {
-        TP->add_quenched(query("strength")*20));
-    }
-    else if(query("type") == "caffeine")
-    {
-        TP->add_quenched(query("strength")*10);
-        TP->add_intox(-(query("strength")/2)*10);
-    }
-    else if(query("type") == "alcoholic")
-    {
-        if(!TP->add_intox(query("strength")*10))
-        {
-            tell_object(TP,"You are just about to pass out as it is.\n");
+    if (query("type") == "soft drink") {
+        ETO->add_quenched(query("strength") * 20);
+    }else if (query("type") == "caffeine") {
+        ETO->add_quenched(query("strength") * 10);
+        ETO->add_intox(-(query("strength") / 2) * 10);
+    }else if (query("type") == "alcoholic") {
+        if (!ETO->add_intox(query("strength") * 10)) {
+            tell_object(TP, "You are just about to pass out as it is.\n");
             return 1;
         }
-    }
-    else if(query("type") == "water")
-    {
-        TP->add_quenched(query("strength")*50);
+    }else if (query("type") == "water") {
+        ETO->add_quenched(query("strength") * 50);
     }
     myType = query("type");
     TP->add_hp(healing);
-    //changed from TP->heal(healing); to stop damage to SS Circe 1/17/05
     write(my_mess);
-    say(TPQCN+" "+your_mess, TP);
+    say(TPQCN + " " + your_mess, TP);
     POISON_D->is_object_poisoned(TO, TP, "drink", 1);
-    //clone_empty(TP); We don't really need these annoying bottles
     remove();
     return 1;
 }
