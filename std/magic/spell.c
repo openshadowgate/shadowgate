@@ -2650,8 +2650,7 @@ varargs int do_save(object targ,int mod) {
                     "BEFORE d20 roll: " + caster_bonus + "%^RESET%^");
     }
 
-    if (shadow_spell) {
-        type = "will";
+    if (shadow_spell && type == "will") {
         caster_bonus = shadow_spell * caster_bonus / 10;
     }
 

@@ -50,7 +50,7 @@ spell_effect()
     target->set_property("shadowform",clevel);
     target->remove_property("shadowform_spell_delay");
     target->set_property("shadowform_spell_delay",time()+SFDELAY);
-    target->set_property("added short",({"%^RESET%^%^BLUE%^ (shadow)%^RESET%^"}));
+    target->set_property("added short",({"%^RESET%^%^BLUE%^ (a shadow)%^RESET%^"}));
     addSpellToCaster();
     call_out("dest_effect",ROUND_LENGTH*(clevel/6+1));
 }
@@ -61,7 +61,7 @@ void dest_effect()
     {
         target->remove_property_value("spelled", ({TO}) );
         tell_object(target,"%^BLUE%^You feel yourself again as shadowform disappears.%^RESET%^");
-        target->remove_property_value("added short",({"%^RESET%^%^BLUE%^ (shadow)%^RESET%^"}));
+        target->remove_property_value("added short",({"%^RESET%^%^BLUE%^ (a shadow)%^RESET%^"}));
         target->remove_property("shadowform");
     }
     ::dest_effect();

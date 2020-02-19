@@ -32,6 +32,7 @@ void create()
     set_spell_level(([ "cleric" : 6, "bard" : 6, "psion" : 1 ]));
     set_spell_sphere("alteration");
     set_discipline("kineticist");
+    set_domains("chaos");
     set_syntax("cast CLASS animate object on <object> || <room>");
     set_description("This spell allows you to animate objects and command then.  <command objects to command> will "
         "command the object to act as instructed.  Forcing an object to do something will affect your alignment when appropriate"

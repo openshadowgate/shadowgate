@@ -8,7 +8,7 @@ inherit DAEMON;
 
 string * flyraces = ({"deva"});
 string * flysubraces = ({"fey'ri","rock gnome"});
-string * flyprofiles = ({"druid_bird_999","druid_dragon_999","mage_red_dragon_999","mage_demon_999","vampire_bat_999","vampire_lord_999"});
+string * flyprofiles = ({"druid_bird_999","druid_dragon_999","mage_red_dragon_999","mage_demon_999","vampire_bat_999","vampire_lord_999", "mage_pixie_999"});
 
 string WINGO = "/cmds/mortal/obj/wingObj.c";
 
