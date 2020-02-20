@@ -151,6 +151,7 @@ void execute_feat()
     caster->add_follower(ob);
     ob->set_property("minion", caster);
     ob->move(environment(caster));
+    ob->set_heart_beat(1);
     
     //Setting companion stats based on type per SRD
     ob->set_stats("strength", valid_types[arg][0] + min( ({ class_level / 5, 6 }) ) );

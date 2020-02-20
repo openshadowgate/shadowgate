@@ -17,6 +17,8 @@ object owner,
 string saved_short,
        saved_long;
 
+int setup;
+
 int set_owner(object ob) { owner = ob; return 1; }
 object query_owner()     { return owner; }
 
@@ -30,12 +32,16 @@ void create(){
     set_exp(1);
     set_size(2);
     set_gender("neuter");
+    setup = 0;
 }
 
 void init()
 {
     ::init();
-      
+    
+    if(this_player() != owner)
+        return;
+    
     saved_short = read_file(SAVEDIR + "short");
     saved_long = read_file(SAVEDIR + "long");
     
@@ -57,6 +63,9 @@ void init()
 int set_animal_desc(string str)
 {
     string *input;
+    
+    if(this_player() != owner)
+        return 0;
     
     input = explode(str, " ");
     
@@ -84,6 +93,7 @@ int set_animal_desc(string str)
         tell_object(this_player(), "Please select 'long' or 'short' as options.");
         return 1;
         break;
+
     }
     
     return 1;
@@ -98,22 +108,16 @@ void heart_beat()
            
     ::heart_beat();
     
-    if(!owner)
-        return;
+    room = environment(this_object());
     
-    if(!interactive(owner))
+    if(!objectp(owner) || owner->query_property("animal_companion") != this_object())
     {
         this_object()->remove();
         return;
     }
     
-    room = environment(this_object());
-    
-    if(owner->query_property("animal_companion") != this_object())
-        this_object()->remove();
-    
     //Faithful companion finds his master
-    if(living(owner) && room != environment(owner))
+    if(objectp(owner) && room != environment(owner))
         this_object()->move(environment(owner));
     
     //Companion hides if master is hiding
@@ -127,7 +131,7 @@ void heart_beat()
     }
     else
     {
-        if(!owner->query_hidden() || !owner->query_invis())
+        if(!owner->query_hidden() && !owner->query_invis())
             this_object()->set_invis(0);
     }
     
@@ -151,8 +155,8 @@ void die(object ob)
 
 int remove()
 {
-    all_inventory(TO)->remove();
-    owner->remove_property("animal_companion");
+    all_inventory(this_object())->remove();
+    owner && owner->remove_property("animal_companion");
     ::remove();
     return 1;
 }
