@@ -56,7 +56,6 @@ void make_sword() {
     tell_room(place,"%^CYAN%^You see a sword appear in the air before "+caster->QCN+".%^RESET%^",caster);
     thing = new("/d/shadow/obj/weapon/broad.c");
     thing->move("/d/magic/obj/place");
-    thing->set_property("effective_enchantment", ((int)CLEVEL / 12));
     control = new("/d/magic/obj/swordremote");
     control->set_caster(caster);
     control->move(caster);
@@ -80,7 +79,8 @@ void make_sword() {
     ob->set_attacks_num(clevel/12 + 1);
     ob->set_damage(4,(clevel/4)); //changed to tighten up the damage range for more consistency 8/28/19
     ob->set_overall_ac(-clevel);
-    ob->set_hd(clevel,12);
+    ob->set_hd(clevel);
+    ob->set_hp(clevel*10);
     ob->set_stats("strength",15);
     ob->set_max_hp(ob->query_hp());
     ob->set_caster(caster);

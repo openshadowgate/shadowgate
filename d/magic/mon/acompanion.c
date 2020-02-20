@@ -30,6 +30,7 @@ void create(){
     set_hd(4,1);
     set_hp(40);
     set_exp(1);
+    set_damage(2, 10);
     set_size(2);
     set_gender("neuter");
     setup = 0;
@@ -93,7 +94,6 @@ int set_animal_desc(string str)
         tell_object(this_player(), "Please select 'long' or 'short' as options.");
         return 1;
         break;
-
     }
     
     return 1;
@@ -139,7 +139,6 @@ void heart_beat()
     
     if(sizeof(attackers))
     {
-        this_object()->set_invis(0);
         foreach(object ob in attackers)
             this_object()->kill_ob(ob);
     }

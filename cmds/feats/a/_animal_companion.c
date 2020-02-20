@@ -103,12 +103,13 @@ void execute_feat()
         return;
     }
 
-    
+    /*
     if(sizeof(caster->query_attackers()))
     {
         tell_object(caster, "You can't summon your animal companion during combat!");
         return;
     }
+    */
     
     companion = caster->query_property("animal_companion");
     
@@ -149,6 +150,7 @@ void execute_feat()
     caster->set_property("animal_companion", ob);
     caster->add_pet(ob);
     caster->add_follower(ob);
+    caster->add_protector(ob);
     ob->set_property("minion", caster);
     ob->move(environment(caster));
     ob->set_heart_beat(1);
