@@ -1,3 +1,6 @@
+#include <std.h>
+#include <daemons.h>
+
 int checkDispel(object ob, int clevel)
 {
     int roll, level_diff;
