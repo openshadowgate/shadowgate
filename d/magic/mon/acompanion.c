@@ -9,6 +9,8 @@
 
 inherit WEAPONLESS;
 
+#include <daemons.h>
+
 #define SAVEDIR "/d/save/summons/" + owner->query_name() + "/animal/"
 
 object owner,
@@ -30,10 +32,12 @@ void create(){
     set_hd(4,1);
     set_hp(40);
     set_exp(1);
-    set_damage(2, 10);
+    set_damage(2, 6);
     set_size(2);
     set_gender("neuter");
     setup = 0;
+    set_funcs( ({ "special_attack" }) );
+    set_func_chance(35);
 }
 
 void init()
@@ -146,6 +150,110 @@ void heart_beat()
         add_hp(query_max_hp() / 25);
 }
 
+void special_attack(object target)
+{
+    string tname, aname, move;
+    object room;
+    
+    if(!target || !objectp(target))
+        return;
+    
+    tname = target->query_name();
+    aname = this_object()->query_name();
+    room = environment(this_object());
+    
+    if(environment(target) != room)
+        return;
+    
+    switch(query_name())
+    {
+        case "ape":
+        case "badger":
+        case "bear":
+        tell_room(room, sprintf("%^YELLOW%^%s bites %s.%^RESET%^", aname, tname));
+        tell_room(room, sprintf("%^YELLOW%^%s claws %s twice.%^RESET%^", aname, tname));
+        target->do_damage("torso", roll_dice(1, 6));
+        target->do_damage("torso", roll_dice(2, 4));
+        return;
+        break;
+        case "bird":
+        tell_room(room, sprintf("%s swoops in and bites %s."), aname, tname);
+        tell_room(room, sprintf("%s claws %s with its talons twice."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 4));
+        target->do_damage("torso", roll_dice(2, 4));
+        return;
+        break;
+        case "boar":
+        tell_room(room, sprintf("%s gores %s."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 8));
+        return;
+        break;
+        case "camel":
+        tell_room(room, sprintf("%s spits on %s."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 4));
+        target && "/std/effect/status/sickened"->apply_effect(target,2);
+        return;
+        break;
+        case "lion":
+        tell_room(room, sprintf("%s bites %s."), aname, tname);
+        tell_room(room, sprintf("%s claws %s twice."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 8));
+        target->do_damage("torso", roll_dice(2, 6));
+        return;
+        break;
+        case "cheetah":
+        tell_room(room, sprintf("%s bites and trips %s."), aname, tname);
+        tell_room(room, sprintf("%s claws %s twice."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 6));
+        target->do_damage("torso", roll_dice(2, 3));
+        target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing!%^RESET%^");
+        return;
+        break;
+        case "crocodile":
+        tell_room(room, sprintf("%^YELLOW%^%s bites %s.%^RESET%^", aname, tname));
+        tell_room(room, sprintf("%^YELLOW%^%s slaps %s with its tail.%^RESET%^", aname, tname));
+        target->do_damage("torso", roll_dice(1, 8));
+        target->do_damage("torso", roll_dice(1, 12));
+        return;
+        break;
+        case "dinosaur":
+        tell_room(room, sprintf("%s bites %s."), aname, tname);
+        tell_room(room, sprintf("%s claws %s twice."), aname, tname);
+        tell_room(room, sprintf("%^YELLOW%^ %s rakes %s with its talons twice. %^RESET%^"), aname, tname);
+        target->do_damage("torso", roll_dice(1, 6));
+        target->do_damage("torso", roll_dice(2, 4));
+        target->do_damage("torso", roll_dice(2, 8));
+        return;
+        break;
+        case "dog":
+        tell_room(room, sprintf("%s bites %s."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 6));
+        return;
+        break;
+        case "horse":
+        tell_room(room, sprintf("%s bites %s."), aname, tname);
+        tell_room(room, sprintf("%s kicks %s with its hooves twice."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 4));
+        target->do_damage("torso", roll_dice(2, 6));
+        return;
+        break;
+        case "snake":
+        tell_room(room, sprintf("%s bites %s."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 4));
+        POISON_D->ApplyPoison(target, "black_adder_venom", this_object(), "injury");
+        return;
+        break;
+        case "wolf":
+        tell_room(room, sprintf("%s bites and trips %s."), aname, tname);
+        target->do_damage("torso", roll_dice(1, 6));
+        target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing! %^RESET%^");
+        return;
+        break;
+    }
+    
+    return;
+}
+    
 void die(object ob)
 {
     owner && owner->remove_property("animal_companion");
