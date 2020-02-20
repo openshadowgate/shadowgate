@@ -6,24 +6,30 @@
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/reflex strong, will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, stealth, survival
-%^RESET%^%^CYAN%^Class Feats (dual wield combat style):%^RESET%^
- %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon
- %^RESET%^proficiency, ambidexterity, track
-%^RESET%^ L4: animal companion
- %^RESET%^L5: whirl
- %^RESET%^L9: two weapon fighting, evasion
- %^RESET%^L13: improved two weapon fighting
- %^RESET%^L17: unassailable parry
+%^RESET%^%^CYAN%^Class Feats:%^RESET%^
+ %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon proficiency, shield proficiency, track
+ %^RESET%^L4: animal companion
+ %^RESET%^L9: evasion
  %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
-%^RESET%^%^CYAN%^Class Feats (archery combat style):%^RESET%^
- %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon
- %^RESET%^proficiency, point blank shot, track
-%^RESET%^ L4: animal companion
- %^RESET%^L5: manyshot
- %^RESET%^L9: deadeye, evasion
- %^RESET%^L13: preciseshot
- %^RESET%^L17: shot on the run
- %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
+In addition to that, rangers use different pre-set combat styles they can choose with %^ORANGE%^<combatstyle>%^RESET%^ command.
+%^CYAN%^Dual wield combat style:
+ L1: ambidexterity
+ L5: whirl
+ L9: two weapon fighting
+ L13: improved two weapon fighting
+ L17: unassailable parry
+%^CYAN%^Archery combat style:
+ L1: point blank shot
+ L5: manyshot
+ L9: deadeye
+ L13: preciseshot
+ L17: shot on the run
+%^CYAN%^Twohanded combat style:
+ L1: sweepingblow
+ L5: blade block
+ L9: impale
+ L13: light weapon
+ L17: strenght of arm
 
 The ranger is a hunter and woodsman who lives by not only his sword or bow, but also his wits. Rangers, like nature itself, can be of any alignment. Their role and outlook changes depending upon their alignment, but they all have a few things in common. They are more comfortable in the wilderness than the city, and they have a strong affinity for nature that defines
 them.

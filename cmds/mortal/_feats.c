@@ -672,6 +672,8 @@ int cmd_feats(string str){
                 TP->set("free_feats",num_feats);
                 if(!avatarp(TP)) tell_object(TP,"%^BOLD%^%^RED%^You have been given a feat wipe. Please reallocate your feats before going back out.%^RESET%^");
                 TP->force_me("feats fix");
+            } else {
+                tell_object(TP,"You already used your free feats wipe. Contact staff to get another one.");
             }
             return 1;
         }

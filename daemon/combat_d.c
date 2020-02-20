@@ -2377,54 +2377,49 @@ int check_avoidance(object who, object victim, object *weapons)
     athleticsVictim += (int)victim->query_skill("athletics");
 
     //scramble
-    if (victim->query_scrambling() && (victim->is_ok_armour("thief") || victim->query_property("shapeshifted")) )
-    {
-        //can't flip around if you are laying on the ground
-        if(!victim->query_tripped()){
-            if(victim->query_parrying()) mod = -roll_dice(1,10);
-            //else mod = roll_dice(1,8);
-            if((roll_dice(1, athleticsVictim)+mod) > roll_dice(1, athleticsWho))
-            {
-                avoidance = 1;
-                avoidanceType = "TYPE_SCRAMBLE";
-                if(FEATS_D->usable_feat(victim,"spring attack") && !random(5))
-                {
-                  springAttack = 1;
+    if (victim->query_scrambling()) {
+        if (victim->is_ok_armour("thief") || victim->query_property("shapeshifted")) {
+            //can't flip around if you are laying on the ground
+            if (!victim->query_tripped()) {
+                if (victim->query_parrying()) {
+                    mod = -roll_dice(1, 10);
+                }
+                //else mod = roll_dice(1,8);
+                if ((roll_dice(1, athleticsVictim) + mod) > roll_dice(1, athleticsWho)) {
+                    avoidance = 1;
+                    avoidanceType = "TYPE_SCRAMBLE";
+                    if (FEATS_D->usable_feat(victim, "spring attack") && !random(5)) {
+                        springAttack = 1;
+                    }
                 }
             }
         }
     }
 
-    if((sizeof(weapons) && !weapons[0]->is_lrweapon()) || !FEATS_D->usable_feat(who, "point blank shot"))
-    {
+    if ((sizeof(weapons) && !weapons[0]->is_lrweapon()) || !FEATS_D->usable_feat(who, "point blank shot")) {
         //ride-by attack
-        if(victim->query_in_vehicle() && FEATS_D->usable_feat(victim,"ride-by attack"))
-        {
-            if(roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho))
-            {
-                avoidance = 1;
-                avoidanceType = "TYPE_RIDDEN";
+        if (victim->query_in_vehicle()) {
+            if (FEATS_D->usable_feat(victim, "ride-by attack")) {
+                if (roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho)) {
+                    avoidance = 1;
+                    avoidanceType = "TYPE_RIDDEN";
+                }
             }
         }
 
         //shot on the run
-        if(!FEATS_D->usable_feat(victim,"ride-by attack") && victim->query_property("shotontherun"))
-        {
-            if(roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho))
-            {
+        if (!FEATS_D->usable_feat(victim, "ride-by attack") && victim->query_property("shotontherun")) {
+            if (roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho)) {
                 avoidance = 1;
                 avoidanceType = "TYPE_SHOT";
             }
         }
 
         //mounted combat
-        if(victim->is_animal())
-        {
+        if (victim->is_animal()) {
             rider = (object)victim->query_current_rider();
-            if(objectp(rider))
-            {
-                if(FEATS_D->usable_feat(rider,"mounted combat") && (roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho)))
-                {
+            if (objectp(rider)) {
+                if (FEATS_D->usable_feat(rider, "mounted combat") && (roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho))) {
                     avoidance = 1;
                     avoidanceType = "TYPE_MOUNT";
                 }

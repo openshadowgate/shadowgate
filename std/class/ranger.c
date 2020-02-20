@@ -31,7 +31,7 @@ mapping stat_requirements()
 }
 
 string *combat_styles() {
-    return ({ "dual wield", "archery" });
+    return ({ "dual wield", "archery", "twohanded"});
 }
 
 string *class_feats(string myspec) {
@@ -43,17 +43,25 @@ string *class_feats(string myspec) {
               "evasion"});
 }
 
-mapping class_featmap(string myspec) { // "dual wield" is default setting
-    if(!myspec || myspec == "")
-        return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
+mapping class_featmap(string myspec)   // "dual wield" is default setting
+{
+    if (!myspec || myspec == "") {
+        return ([ 1 : ({ "ambidexterity", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }), ]);
+    }
 
-    switch(myspec) {
-      case "archery":
-          return ([ 1 : ({ "point blank shot", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye", "evasion" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }),  ]);
-      break;
-      default:
-          return ([ 1 : ({ "ambidexterity", "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }),  ]);
-      break;
+    switch (myspec) {
+    case "archery":
+        return ([ 1 : ({ "point blank shot", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye", "evasion" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }), ]);
+        break;
+    case "twohanded":
+        return ([ 1 : ({ "sweepingblow", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "blade block" }), 9 : ({ "impale", "evasion" }), 13 : ({ "light weapon" }), 17 : ({ "strength of arm" }), ]);
+        break;
+    case "mounted":
+        return ([ 1 : ({ "mounted combat", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "ride-by attack" }), 9 : ({ "charge", "evasion" }), 13 : ({ "trample" }), 17 : ({  }), ]);
+        break;
+    default:
+        return ([ 1 : ({ "ambidexterity", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }), ]);
+        break;
     }
 }
 
@@ -107,12 +115,7 @@ string query_casting_stat(){
 
 mapping query_class_spells()
 {
-    return(([
-        1 : ({"animal messenger","calm animal","detect poison","detect snares and pits","entangle","ghost step","magic fang","resist energy","summon natures ally 1" }),
-        2 : ({"barkskin","bears endurance","cats grace","cure light wounds","hold animal","owls wisdom","snare","summon natures ally 2" }),
-        3 : ({"cure moderate wounds","darkvision","greater magic fang","neutralize poison","snakebite","summon natures ally 3","treeshape" }),
-        4 : ({"commune with nature","cure serious wounds","freedom of movement","heart of the wild","meld into nature","summon natures ally 4","treestride" }),
-    ]));
+    return(([ ]));
 }
 
 int caster_level_calcs(object player, string the_class)
