@@ -2,7 +2,7 @@
 
 string *races_allowed()
 {
-    return ({});
+    return 0;
 }
 
 int apply_template(object ob)
