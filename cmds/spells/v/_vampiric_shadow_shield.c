@@ -114,7 +114,7 @@ void execute_attack()
                 continue;
 
             tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
-            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage/2,"negative energy");
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"negative energy");
 
         }
         if(caster->query_hp()<caster->query_max_hp())
