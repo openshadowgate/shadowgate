@@ -101,9 +101,9 @@ spell_effect(int prof)
 
     if(!roll || roll == -1 && ! caster->query_property("spectral_hand"))
     {
-        tell_object(caster,""+mycolor+"You aim a ray at "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand, but miss!");
+        tell_object(caster,""+mycolor+"You aim a ray at "+target->QCN+"'s "+target_limb+" from a "+myhue+" hand, but miss!");
         tell_object(target,""+mycolor+caster->QCN+"'s "+myhue+" ray shoots toward your "+target_limb+" unsuccessfully.");
-        tell_room(place,""+mycolor+caster->QCN+" aims a ray at "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand and misses!", ({ caster, target}) );
+        tell_room(place,""+mycolor+caster->QCN+" aims a ray at "+target->QCN+"'s "+target_limb+" from a "+myhue+" hand and misses!", ({ caster, target}) );
         target = 0;
         dest_effect();
         return;
@@ -116,9 +116,9 @@ spell_effect(int prof)
         return;
     }
 
-    tell_object(caster,"%^BOLD%^"+mycolor+"You connect with a ray aimed at "+target->QCN+"'s "+target_limb+" with your "+myhue+" hand.");
-    tell_object(target,"%^BOLD%^"+mycolor+caster->QCN+" aims a ray that strikes your "+target_limb+" with a "+myhue+" hand.\n%^WHITE%^A "+myfeeling+" runs through you, sapping your strength!");
-    tell_room(place,"%^BOLD%^"+mycolor+caster->QCN+" aims a ray that hits "+target->QCN+"'s "+target_limb+" with a "+myhue+" hand!\n%^WHITE%^All life and color seems drawn out of the limb!",({ caster, target}) );
+    tell_object(caster,"%^BOLD%^"+mycolor+"You connect with a ray aimed at "+target->QCN+"'s "+target_limb+" from your "+myhue+" hand.");
+    tell_object(target,"%^BOLD%^"+mycolor+caster->QCN+" aims a ray that strikes your "+target_limb+" from a "+myhue+" hand.\n%^WHITE%^A "+myfeeling+" runs through you, sapping your strength!");
+    tell_room(place,"%^BOLD%^"+mycolor+caster->QCN+" aims a ray that hits "+target->QCN+"'s "+target_limb+" from a "+myhue+" hand!",({ caster, target}) );
     spell_successful();
 
     damage_targ(target, target_limb, sdamage , damtype );
