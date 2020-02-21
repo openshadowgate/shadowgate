@@ -3009,7 +3009,7 @@ int mind_immunity_damage(object obj)
 {
     if(mind_immunity_check(obj))
     {
-        damage_targ(obj, obj->return_target_limb(), sdamage,"mental");
+        damage_targ(obj, obj->return_target_limb(), sdamage * 4 / 5,"mental");
         return 1;
     }
     else

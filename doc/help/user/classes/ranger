@@ -34,7 +34,7 @@ In addition to that, rangers use different pre-set combat styles they can choose
 The ranger is a hunter and woodsman who lives by not only his sword or bow, but also his wits. Rangers, like nature itself, can be of any alignment. Their role and outlook changes depending upon their alignment, but they all have a few things in common. They are more comfortable in the wilderness than the city, and they have a strong affinity for nature that defines
 them.
 
-Although rangers have the basic combat skills of a warrior, they have several other abilities to aid their survival. Aside from a choice of skill at archery or the ability to dual wield weapons without penalty, they also gain lesser divine spellcraft based on their wisdom score. They %^ORANGE%^<prepare>%^RESET%^ spells from list of ranger spells you can see with %^ORANGE%^<spells ranger>%^RESET%^ command. They %^ORANGE%^<cast>%^RESET%^ spell by expending spell from memory. You can see spells commited to memory with %^ORANGE%^<recall ranger spells>%^RESET%^ command and remove undesired spell with the %^ORANGE%^<forget>%^RESET%^ command.
+Although rangers have the basic combat skills of a warrior, they have several other abilities to aid their survival. They gain lesser divine spellcraft based on their wisdom score. They %^ORANGE%^<prepare>%^RESET%^ spells from list of ranger spells you can see with %^ORANGE%^<spells ranger>%^RESET%^ command. They %^ORANGE%^<cast>%^RESET%^ spell by expending spell from memory. You can see spells commited to memory with %^ORANGE%^<recall ranger spells>%^RESET%^ command and remove undesired spell with the %^ORANGE%^<forget>%^RESET%^ command.
 
 Rangers can cast in any armor they can wear, but must not wield while doing so.
 
