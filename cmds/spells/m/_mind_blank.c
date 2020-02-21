@@ -148,6 +148,7 @@ void spell_effect(int prof)
     blocker->set_block_power(power);
     duration = 5 * mylevel * ROUND_LENGTH;
     spell_successful();
+    addSpellToCaster();
     call_out("dest_effect", duration);
     return;
 }

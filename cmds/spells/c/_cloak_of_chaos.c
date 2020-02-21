@@ -102,7 +102,7 @@ void dest_effect()
 {
     remove_call_out("room_check");
     if (objectp(caster)) {
-        tell_object(caster, "%^RESET%^%^MAGENT%^The chaos around you fades.");
+        tell_object(caster, "%^RESET%^%^MAGENTA%^The chaos around you fades.");
         caster->remove_property("nimbus");
         caster->add_ac_bonus(-4);
         caster->add_saving_bonus("all", -4);
