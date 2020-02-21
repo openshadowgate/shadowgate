@@ -103,13 +103,13 @@ void execute_feat()
         return;
     }
 
-    /*
+    
     if(sizeof(caster->query_attackers()))
     {
         tell_object(caster, "You can't summon your animal companion during combat!");
         return;
     }
-    */
+    
     
     companion = caster->query_property("animal_companion");
     
@@ -132,7 +132,7 @@ void execute_feat()
     
     class_level = caster->query_class_level("ranger");
     comp_hd = class_level;
-    comp_ac = class_level + 1;
+    comp_ac = class_level + 5;
     
     ob = new("/d/magic/mon/acompanion");
     ob->set_race(arg);
@@ -143,7 +143,7 @@ void execute_feat()
     ob->set_hd(comp_hd, 14);
     ob->set_attacks_num(2 + class_level / 8);
     ob->set_mlevel("fighter", comp_hd);
-    ob->set_max_hp(8 * comp_hd);
+    ob->set_max_hp(10 + (8 * comp_hd));
     ob->set_hp(8 * comp_hd);
     ob->set_alignment(caster->query_alignment());
     ob->set_owner(caster);
