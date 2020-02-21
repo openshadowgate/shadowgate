@@ -173,7 +173,7 @@ report(string *lines)
     //  title = file;
     if (strlen(title) > 30)
     {
-        while(strlen(title) > 29)
+        while(strlen(title) > 29 && get_eval_cost() >= 100000)
             sscanf(title, "%s/%s", trash, title);
         title = "~" + title;
     }
