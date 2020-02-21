@@ -193,12 +193,16 @@ void execute_attack(){
         if(in_shapeshift) {
 	    tell_object(caster,"%^BOLD%^You fail to land a strike on anything, and nearly trip over your own paws in your frenzy!");
 	    tell_room(environment(caster),"%^BOLD%^"+caster->QCN+" almost trips over "+caster->QP+" own paws in "+caster->QP+" frenzy!",caster);
-	    caster->set_paralyzed(roll_dice(1,6),"%^BOLD%^You are getting your paws back under you!");
+            if (!FEATS_D->usable_feat(caster, "improved whirl")) {
+                caster->set_paralyzed(roll_dice(1, 6), "%^BOLD%^You are getting your paws back under you!");
+            }
         }
         else {
 	    tell_object(caster,"%^BOLD%^You fail to land a strike on anything, and nearly drop your weapon in the process!");
 	    tell_room(environment(caster),"%^BOLD%^"+caster->QCN+" almost drops "+caster->QP+" weapon and has to scramble to hold on to it!",caster);
-	    caster->set_paralyzed(roll_dice(1,6),"%^BOLD%^You are trying to grip your weapon!");
+            if (!FEATS_D->usable_feat(caster, "improved whirl")) {
+                caster->set_paralyzed(roll_dice(1, 6), "%^BOLD%^You are trying to grip your weapon!");
+            }
         }
     }
     else if(hit > 0) {

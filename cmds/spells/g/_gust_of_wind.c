@@ -15,7 +15,7 @@ void create()
     set_spell_name("gust of wind");
     set_spell_level(([ "mage" : 2, "monk" : 13, "druid":2]));
     set_spell_sphere("alteration");
-    set_monk_way("way of the shadow");
+    set_monk_way("way of the elements");
     set_syntax("cast CLASS gust of wind on TARGET");
     set_description("Waving a pair of specially prepared feathers in the air, the caster is able to generate a brief but "
         "intense gust of wind.  Using his left hand, the caster directs the damaging winds into their target.  The power of the "
