@@ -58,8 +58,9 @@ void spell_effect(int prof)
     caster->set_property("flying",1);
     caster->set_property("spelled", ({TO}) );
     caster->set_property("endurance",(mylevel/10));
-    caster->set_property("MIN","$N glides in.");
-    caster->set_property("MOUT","$N glides off to the $D.");
+    //commenting out to fix enter/exit message bug Odin 2/21/2020
+    //caster->set_property("MIN","$N glides in.");
+    //caster->set_property("MOUT","$N glides off to the $D.");
     caster->set_property("added short",({"%^BOLD%^%^BLUE%^ (hovering)%^RESET%^"}));
     addSpellToCaster();
     spell_successful();
@@ -73,8 +74,9 @@ void dest_effect(){
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^"+caster->QCN+"'s feet return to the ground.%^RESET%^", caster);
         caster->remove_property("flying");
         caster->set_property("endurance",(-1*(mylevel/10)));
-        caster->remove_property("MIN");
-        caster->remove_property("MOUT");
+        //see above
+        //caster->remove_property("MIN");
+        //caster->remove_property("MOUT");
         caster->remove_property_value("added short",({"%^BOLD%^%^BLUE%^ (hovering)%^RESET%^"}));
     }
     ::dest_effect();

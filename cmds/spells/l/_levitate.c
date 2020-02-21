@@ -79,8 +79,9 @@ void spell_effect(int prof)
     target->set_property("endurance", (clevel / 8));
     message_in = target->query_message_in();
     message_out = target->query_message_out();
-    target->set_property("MIN", "$N floats in.");
-    target->set_property("MOUT", "$N drifts to the $D.");
+    //commenting out to fix enter/exit message bug Odin 2/21/2020
+    //target->set_property("MIN", "$N floats in.");
+    //target->set_property("MOUT", "$N drifts to the $D.");
     target->set_property("added short", ({ "%^BOLD%^%^BLUE%^ (levitating)%^RESET%^" }));
     addSpellToCaster();
     spell_successful();
@@ -96,8 +97,9 @@ void dest_effect()
                   " " + target->QCN + ", " + target->QS + " rapidly descends back to the ground!", target);
         target->remove_property("flying");
         target->set_property("endurance", (-(clevel / 8)));
-        target->remove_property("MIN");
-        target->remove_property("MOUT");
+        //see above
+        //target->remove_property("MIN");
+        //target->remove_property("MOUT");
         target->remove_property_value("added short", ({ "%^BOLD%^%^BLUE%^ (levitating)%^RESET%^" }));
     }
     ::dest_effect();
