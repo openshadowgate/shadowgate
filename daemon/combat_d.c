@@ -2363,13 +2363,23 @@ int check_avoidance(object who, object victim, object *weapons)
     int athleticsWho, athleticsVictim, avoidance = 0, mod = 0, springAttack = 0, counterAttack = 0;
     string avoidanceType = "";
 
-    if(!objectp(who) || !objectp(victim)) return 0;
-    if(!objectp(EWHO = environment(who))) return 0;
-    if(!objectp(victim)) return 0;
+    if (!objectp(who) || !objectp(victim)) {
+        return 0;
+    }
+    if (!objectp(EWHO = environment(who))) {
+        return 0;
+    }
+    if (!objectp(victim)) {
+        return 0;
+    }
     //shouldn't be parrying/scrambling, etc, if you are paralyzed
-    if(victim->query_paralyzed()) return 0;
+    if (victim->query_paralyzed()) {
+        return 0;
+    }
     //if they have the noMissChance property set, then don't miss via parry/scramble/ride by attack
-    if(who->query_property("noMissChance")) return 0;
+    if (who->query_property("noMissChance")) {
+        return 0;
+    }
 
     athleticsWho = (int)who->query_character_level();
     athleticsWho += (int)who->query_skill("athletics");

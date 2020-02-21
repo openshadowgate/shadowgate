@@ -13,7 +13,8 @@ void create()
     ::create();
     set_author("cythera");
     set_spell_name("acid breath"); // acid spit
-    set_spell_level(([ "mage" : 3, "druid":3]));
+    set_spell_level(([ "mage" : 3, "druid":3, "monk":15]));
+    set_monk_way("way of the elements");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS acid breath on TARGET");
     set_damage_desc("delayed acid");
