@@ -42,7 +42,7 @@ void spell_effect(int prof)
     spell_successful();
 
     tell_object(caster,"%^YELLOW%^You shring twice in size!");
-    tell_room(place,"%^YELLOW%^"+caster->QCN+" shrinks twice in size!", caster );
+    tell_room(place,"%^YELLOW%^"+target->QCN+" shrinks twice in size!", caster );
 
     target->set_property("added short",({"%^YELLOW%^ (absurdly tiny)%^RESET%^"}));
     //For small characters the spell is cosmetic only
