@@ -83,7 +83,6 @@ void make_sword() {
     ob->set_max_hp(clevel*10);
     ob->set_hp(clevel*10);
     ob->set_stats("strength",15);
-    ob->set_max_hp(ob->query_hp());
     ob->set_caster(caster);
     ob->set_property("spell",TO);
     ob->set_property("spell", ({TO}) );
