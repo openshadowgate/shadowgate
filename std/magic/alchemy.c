@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief This file references common alchemy subroutines, such as component cost and others.
+ * Include it or reference it as an object.
+ */
+
+
 /*
    ardorite
    solumite
