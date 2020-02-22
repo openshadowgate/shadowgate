@@ -113,6 +113,9 @@ int bite_attack(object tp, object targ)
 
 int claw_attack(object tp, object targ)
 {
+    if(!tp || !targ)
+        return 0;
+
     if(!random(3))
     {
         tell_object(tp,"%^RED%^You reach out and %^BOLD%^violently%^RESET%^%^RED%^ claw "+targ->QCN+"!");
