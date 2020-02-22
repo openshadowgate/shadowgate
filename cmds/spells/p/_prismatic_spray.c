@@ -310,7 +310,7 @@ void move_me(object targ)
     switch (random(6))
     {
     case(0):
-        targ->move("/d/shadow/room/city/forkroad");
+        targ->move("/d/shadow/city/room/southcross");
         targ->describe_current_room(1);
         break;
     case(1):
@@ -322,7 +322,7 @@ void move_me(object targ)
         targ->describe_current_room(1);
         break;
     case(3):
-        targ->move("/d/tharis/Tharis/estreet4");
+        targ->move("/d/tharis/newtharis/rooms/north5");
         targ->describe_current_room(1);
         break;
     case(4):
