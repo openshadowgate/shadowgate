@@ -41,13 +41,14 @@ int cmd_swipe(string str)
 
 int check_can_use()
 {
-    object *weapons;
+    object* weapons;
     int x;
-    if(!objectp(caster)) return 0;
+    if (!objectp(caster)) {
+        return 0;
+    }
     weapons = caster->query_wielded();
-    if(sizeof(weapons)!=1 ||
-       caster->is_wearing_type("shield"))
-    {
+    if (sizeof(weapons) != 1 ||
+        caster->is_wearing_type("shield")) {
         tell_object(caster, "%^BOLD%^%^GREEN%^You must be using one single-handed weapon without shield!");
         return 0;
     }
