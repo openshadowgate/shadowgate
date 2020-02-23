@@ -133,7 +133,7 @@ void execute_attack() {
           }
           target_limb = foes[i]->return_target_limb();
           if(do_save(foes[i],0)) {
-             damage_targ(foes[i], target_limb, sdamage,element);
+             damage_targ(foes[i], target_limb, sdamage/2,element);
           }else{
              damage_targ(foes[i], target_limb, sdamage,element);
           }
