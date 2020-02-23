@@ -59,6 +59,43 @@ int filter_feats(object ob, string feat);
 static mapping __ALL_FEATS;
 static mapping __USABLE_FEATS;
 
+/**
+ * Checks for any class feat changes
+ */
+void validate_class_feats(object ob)
+{
+    string* myclassfeats;
+    string* classfeats;
+    string* toremove = ({});
+    string fname;
+
+    if (!objectp(ob)) {
+        return;
+    }
+    if (!userp(ob)) {
+        return;
+    }
+
+    myclassfeats = collapse_array(values(ob->query_class_feats()));
+    classfeats = get_all_class_feats(ob);
+
+    foreach(fname in myclassfeats)
+    {
+        if (member_array(fname, classfeats) == -1) {
+            toremove += ({ fname });
+        }
+    }
+    if (sizeof(toremove)) {
+        tell_object(ob, "%^BOLD%^%^RED%^You have bought class feats that are no longer belong to any of your classes:%^RESET%^" + implode(toremove, ", "));
+        tell_object(ob, "%^BOLD%^%^RED%^These feats will be removed.\nYou are granted free feat wipe you can use if you're unhappy with your current feat assignation.%^RESET%^");
+        foreach(fname in toremove)
+        {
+            tell_object(ob,"%^BOLD%^%^RED%^Removing:%^RESET%^ " + fname);
+            remove_feat(ob, "class", 1);
+        }
+    }
+}
+
 void obsolete_feat(object ob) {
     string *obsolete, *bad_feats=({}), *removing_feats, mytype,*myspells,*schoolspells;
     int i,j,num,freebs;
@@ -74,7 +111,6 @@ void obsolete_feat(object ob) {
         "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer",
         "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials","fated",
          });
-        //"persistent rage","unyielding rage"
 
     for(i=0;i<sizeof(obsolete);i++) {
         if(has_feat(ob,obsolete[i])) bad_feats += ({ obsolete[i] });
@@ -686,21 +722,40 @@ int can_remove_feat(object ob,string feat)
     return 1;
 }
 
-string *get_all_removable_feats(object ob)
+string* get_all_removable_feats(object ob)
 {
-    string *feats,*cls_feats=({}),*classes,file,myspec;
+    string* feats, * cls_feats = ({}), * classes, file, myspec;
     int i;
 
-    if(!objectp(ob)) { return ({}); }
-    classes = ob->query_classes();
-    for(i=0;i<sizeof(classes);i++)
-    {
-        myspec = ob->query_combat_spec(classes[i]);
-        file = DIR_CLASSES+"/"+classes[i]+".c";
-        cls_feats += class_feat_array(classes[i],myspec);
+    if (!objectp(ob)) {
+        return ({});
     }
-    feats = (string *)ob->query_player_feats();
+    classes = ob->query_classes();
+    for (i = 0; i < sizeof(classes); i++) {
+        myspec = ob->query_combat_spec(classes[i]);
+        file = DIR_CLASSES + "/" + classes[i] + ".c";
+        cls_feats += class_feat_array(classes[i], myspec);
+    }
+    feats = (string*)ob->query_player_feats();
     feats -= cls_feats;
+    return feats;
+}
+
+string* get_all_class_feats(object ob)
+{
+    string* feats, * cls_feats = ({}), * classes, file, myspec;
+    int i;
+
+    if (!objectp(ob)) {
+        return ({});
+    }
+    classes = ob->query_classes();
+    for (i = 0; i < sizeof(classes); i++) {
+        myspec = ob->query_combat_spec(classes[i]);
+        file = DIR_CLASSES + "/" + classes[i] + ".c";
+        cls_feats += class_feat_array(classes[i], myspec);
+    }
+    feats = cls_feats;
     return feats;
 }
 
@@ -1583,22 +1638,31 @@ void display_feats(object ob,object targ, string mytype)
 //  End Display related stuff  /////////////////
 ////////////////////////////////////////////////
 
-string *class_feat_array(string myclass,string spec) {
-    string file, *feat_array;
+string* class_feat_array(string myclass, string spec)
+{
+    string file, * feat_array;
     mapping cls_feats;
-    int *featkeys, i;
+    int* featkeys, i;
 
-    if(!myclass) return 0;
-    file = DIR_CLASSES+"/"+myclass+".c";
-    if(!file_exists(file)) return 0;
+    if (!myclass) {
+        return 0;
+    }
+    file = DIR_CLASSES + "/" + myclass + ".c";
+    if (!file_exists(file)) {
+        return 0;
+    }
     cls_feats = file->class_featmap(spec);
-    if(!mapp(cls_feats)) return 0;
+    if (!mapp(cls_feats)) {
+        return 0;
+    }
     featkeys = keys(cls_feats);
-    if(!sizeof(featkeys)) return 0;
+    if (!sizeof(featkeys)) {
+        return 0;
+    }
 
     feat_array = ({});
-    for(i=0;i<sizeof(featkeys);i++) {
-      feat_array += cls_feats[featkeys[i]];
+    for (i = 0; i < sizeof(featkeys); i++) {
+        feat_array += cls_feats[featkeys[i]];
     }
     return feat_array;
 }

@@ -52,6 +52,24 @@ int sum_array(int *arr, int ele)
 }
 
 /**
+ * Collapses (summs) an arbitrary array. Relatively memory-greedy.
+ *
+ * @param *arr Array to collapse
+ * @return sum
+ */
+
+mixed collapse_array(mixed *array)
+{
+    mixed sum = array[0];
+    int i;
+    for (i = 1; i < sizeof(array); ++i)
+    {
+        sum += array[i];
+    }
+    return sum;
+}
+
+/**
  * Excludes a range from an array.
  *
  * @param *array Array to process
