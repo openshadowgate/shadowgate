@@ -43,7 +43,7 @@ void spell_effect(int prof)
     YOU = caster->QCN;
     HIM = target->QCN;
 
-    element = "cold";
+    element = "fire";
     tell_object(caster, "%^RED%^Slowly the orb grows bigger.%^RESET%^");
     tell_room(place, "%^RED%^Slowly the orb in "+YOU+"'s hands grows bigger.%^RESET%^", ({caster}) );
     call_out("zapper",ROUND_LENGTH);

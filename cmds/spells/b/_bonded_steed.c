@@ -74,7 +74,6 @@ void mount()
                 "emerges from it, followed by the rest of a proud %^RED%^equine %^ORANGE%^creature. "
                 "You blink, and the tear in the air has already disappeared behind it.%^RESET%^");
     ob = new(HORSE + "bonded_steed");
-    tell_object(FPL("ilmarinen"),":"+clevel *12);
     ob->set_property("spell", TO);
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
