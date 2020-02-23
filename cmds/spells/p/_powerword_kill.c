@@ -16,7 +16,7 @@ void create() {
     set_domains(({"knowledge", "war"}));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS powerword kill on TARGET");
-    set_damage_desc("negative energy");
+    set_damage_desc("untyped");
     set_description("When the powerword kill spell is uttered, any creature of the mage's choice will drop dead if it has "
 "fewer current hit points then the mage's power. The target may still be weakened even if this is not the case, but "
 "creatures immune to death magic will be completely unaffected.");
@@ -45,20 +45,22 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
+    mydmg = sdamage;
     current = target->query_hp();
-    difflevel = clevel - (int)target->query_level();
-    if(difflevel < 0) difflevel = 0;
+    //commented out because it doesn't actually do anything at present Odin 2/23/2020
+    //difflevel = clevel - (int)target->query_level();
+    //if(difflevel < 0) difflevel = 0;
     target_limb = target->return_target_limb();
     if (current > mydmg) {
         tell_object(target,"%^BOLD%^You feel a tug at your life force, but with some difficulty you fight it off!");
         tell_room(place,"%^BOLD%^"+target->QCN+" staggers in pain momentarily, but soon recovers.",({target}));
-        damage_targ(target, target_limb, sdamage,"negative energy");
+        damage_targ(target, target_limb, sdamage,"untyped");
     }
     else {
         tell_object(target,"%^BOLD%^You reel backward in utter agony, and the world around you goes black!");
         tell_room(place,"%^BOLD%^"+target->QCN+" screams in agony and then falls to the ground!",({target}));
         target_limb = target->return_target_limb();
-        damage_targ(target, target_limb, ((int)target->query_max_hp() + sdamage),"negative energy");
+        damage_targ(target, target_limb, ((int)target->query_max_hp() + sdamage),"untyped");
     }
     dest_effect();
 }
