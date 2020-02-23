@@ -4,6 +4,8 @@
 inherit SPELL;
 
 int timer,flag,stage,toggle,counter;
+string scolor = "%^RED%^";
+string element = "fire";
 
 void create(){
     ::create();
@@ -12,24 +14,21 @@ void create(){
     set_spell_level(([ "mage" : 4, "cleric" : 5 ]));
     set_spell_sphere("invocation_evocation");
     set_domains("fire");
-    set_syntax("cast CLASS fire shield");
-    set_description("This spell will surround the caster's body in a roaring shield of flames.  It grants the caster a "
-"slight bonus to their armor class, and any opponent striking the caster will take damage from the "
-"blistering heat.");
+    set_syntax("cast CLASS fire shield [on chill|warm]");
+    set_damage_desc("fire or cold");
+    set_description("This spell will surround the caster's body in a roaring shield of flames. Any opponent striking the caster will take damage from the blistering heat. You can manipulate base element of the spell, casting it either on chill or warm.");
     set_verbal_comp();
     set_somatic_comp();
-    set_components(([
-      "mage" : ([ "phosphorus" : 1, ]),
-    ]));
-    //set_save("fort");
+    set_save("reflex");
     set_helpful_spell(1);
     traveling_aoe_spell(1);
+    set_arg_needed(1);
 }
 
 string query_cast_string(){
-   	tell_object(caster,"%^BOLD%^%^RED%^%^Circling your hands before "+
+   	tell_object(caster,"%^BOLD%^"+scolor+"%^Circling your hands before "+
 		"you, you begin to evoke the element of fire.");
-    	tell_room(place,"%^BOLD%^%^RED%^Circling "+caster->QP+" hands "+
+    	tell_room(place,"%^BOLD%^"+scolor+"Circling "+caster->QP+" hands "+
 		"before "+caster->QO+", "+caster->QCN+" begins to evoke "+
 		"the element of fire.",caster);
 }
@@ -38,6 +37,11 @@ int preSpell(){
     if(caster->query_property("fire shield")){
         tell_object(caster,"You are already protected by a shield of fire.");
         return 0;
+    }
+    if(arg == "chill")
+    {
+        scolor = "%^CYAN%^";
+        element = "cold";
     }
     return 1;
 }
@@ -51,8 +55,7 @@ void spell_effect(int prof){
         "roaring flames!");
     caster->set_property("fire shield",1);
     caster->set_property("spelled", ({TO}) );
-    caster->add_ac_bonus(2);
-    caster->set_property("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
+    caster->set_property("added short",({"%^BOLD%^ %^BLACK%^("+scolor+"bathed in flames%^BLACK%^)"}));
     addSpellToCaster();
     spell_successful();
     counter = 6*clevel;
@@ -98,15 +101,19 @@ void execute_attack(){
     if(sizeof(foes))
     {
         define_base_damage(0);//reroll each turn
-        tell_room(place,"%^BOLD%^%^RED%^Flames around "+caster->QCN+" burn "+caster->QP+" enemies!",({caster,target}));
-        tell_object(caster,"%^BOLD%^%^RED%^Flames of your fire shield burn your enemies!");
+        tell_room(place,"%^BOLD%^"+scolor+"Flames around "+caster->QCN+" burn "+caster->QP+" enemies!",({caster,target}));
+        tell_object(caster,"%^BOLD%^"+scolor+"Flames of your fire shield burn your enemies!");
 
         define_base_damage(0);
         for(i=0;i<sizeof(attackers);i++){
-            if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
-            tell_object(attackers[i],"%^BOLD%^%^RED%^You are burned by the shield of flames as you strike "
+            tell_object(attackers[i],"%^BOLD%^"+scolor+"You are burned by the shield of flames as you strike "
                         ""+caster->QCN+"!");
-            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");
+            if(do_save(attackers[i], 0))
+            {
+                damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage / 2,element);
+            } else {
+                damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,element);
+            }
         }
     }
     prepend_to_combat_cycle(place);
@@ -116,13 +123,12 @@ void execute_attack(){
 void dest_effect(){
     remove_call_out("room_check");
     if(objectp(caster)){
-        tell_object(caster,"%^BOLD%^%^RED%^The shield of roaring flames flickers and fades away, "
+        tell_object(caster,"%^BOLD%^"+scolor+"The shield of roaring flames flickers and fades away, "
             "leaving you vulnerable once again.");
-        tell_room(environment(caster),"%^BOLD%^%^RED%^The shield of roaring flames flickers and "
+        tell_room(environment(caster),"%^BOLD%^"+scolor+"The shield of roaring flames flickers and "
             "fades away, leaving "+caster->QCN+" vulnerable once again.",caster);
         caster->remove_property("fire shield");
-        caster->add_ac_bonus(-2);
-	  caster->remove_property_value("added short",({"%^BOLD%^%^RED%^ (bathed in flames)"}));
+        caster->remove_property_value("added short",({"%^BOLD%^ %^BLACK%^("+scolor+"bathed in flames%^BLACK%^)"}));
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
