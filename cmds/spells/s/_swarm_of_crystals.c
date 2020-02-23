@@ -22,6 +22,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
+    splash_spell(1);
     set_save("reflex");
 }
 
@@ -112,7 +113,7 @@ void spell_effect(int prof) {
         tell_room(place, "%^RESET%^%^MAGENTA%^The crystals shear into "+
                   ""+hits[i]->QCN+"!",({hits[i]}) );
         tell_object(hits[i], "%^RESET%^%^MAGENTA%^The crystals shear into your flesh!");
-        damage_targ(hits[i], hits[i]->query_target_limb(), effect,"slashing");
+        damage_targ(hits[i], hits[i]->query_target_limb(), sdamage,"slashing");
         if (!size) {
             break;
         }
@@ -121,7 +122,7 @@ void spell_effect(int prof) {
                 "your skin, leaving you in agony!");
     tell_room(place,"%^RESET%^%^MAGENTA%^The crystal shards rip into "+
               ""+target->QCN+", leaving "+target->QO+" in agony!", target);
-    damage_targ(target, target->query_target_limb(), damage,"slashing");
+    damage_targ(target, target->query_target_limb(), sdamage,"slashing");
     dest_effect();
 }
 

@@ -1,4 +1,4 @@
-#include <std.h>  
+#include <std.h>
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -9,7 +9,7 @@ object env, *foes;
 string target_limb, element, colorings;
 
 #define MYTYPES ({ "fire", "electricity", "cold", "acid", "sonic", "random" })
-#define MYCOLOR ([ "fire" : "%^RESET%^%^RED%^", "electricity" : "%^RESET%^%^ORANGE%^", "cold" : "%^RESET%^%^CYAN%^", "acid" : "%^RESET%^%^GREEN%^", "sonic" : "%^RESET%^%^MAGENTA%^" ]) 
+#define MYCOLOR ([ "fire" : "%^RESET%^%^RED%^", "electricity" : "%^RESET%^%^ORANGE%^", "cold" : "%^RESET%^%^CYAN%^", "acid" : "%^RESET%^%^GREEN%^", "sonic" : "%^RESET%^%^MAGENTA%^" ])
 
 void create() {
     ::create();
@@ -62,7 +62,7 @@ void spell_effect(int prof) {
        elemflag = 1;
     }
     colorings = MYCOLOR[element];
-    
+
     tell_object(caster,""+colorings+"You open your mind, detecting the miniscule "
        "currents of %^BOLD%^"+element+""+colorings+" in the air around you!%^RESET%^");
     tell_room(place,""+colorings+""+caster->QCN+"'s eyes %^BOLD%^flash"+colorings+" "
@@ -104,7 +104,8 @@ void execute_attack() {
     } else {
        tell_room(place,""+colorings+"Crackling bolts of %^BOLD%^"+element+" energy"+colorings+" lash out wildly, striking all those in range!%^RESET%^");
 
-       damage = roll_dice(clevel,3); //discipline-only power and 5th level, so the base damage is slightly higher than ice storm
+       damage = sdamage;
+       //damage = roll_dice(clevel,3); //discipline-only power and 5th level, so the base damage is slightly higher than ice storm
        for (i=0;i<j;i++) {
           if (!objectp(foes[i])) continue;
           if (!objectp(caster)) {
@@ -132,14 +133,14 @@ void execute_attack() {
           }
           target_limb = foes[i]->return_target_limb();
           if(do_save(foes[i],0)) {
-             damage_targ(foes[i], target_limb, damage/2,element);
-          }else{ 
-             damage_targ(foes[i], target_limb, damage,element);
+             damage_targ(foes[i], target_limb, sdamage,element);
+          }else{
+             damage_targ(foes[i], target_limb, sdamage,element);
           }
       }
       time+=1;
       if (present(caster,place) && !caster->query_unconscious()) {
-            environment(CASTER)->addObjectToCombatCycle(TO,1);        
+            environment(CASTER)->addObjectToCombatCycle(TO,1);
       }
       else {
           dest_effect();

@@ -17,7 +17,8 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-	set_save("reflex");
+    set_save("reflex");
+    splash_spell(1);
 }
 
 string query_cast_string() {
@@ -37,7 +38,7 @@ void spell_effect(int prof) {
     }
     foes = ({});
     ownparty = ({});
-    dam = roll_dice(clevel,8);
+    dam = sdamage;
     tell_object(caster,"%^BOLD%^%^BLACK%^You summon a whirling vortex, "+
        "its %^CYAN%^winds %^BLACK%^screaming above "+target->QCN+"!");
 
@@ -45,7 +46,7 @@ void spell_effect(int prof) {
        "your head, threatening to suck the life from you!");
     tell_room(place,"%^BOLD%^%^BLACK%^A whirling vortex appears above "+
        ""+target->QCN+"'s head, directed by "+caster->QCN+"'s whim!",({caster,target}));
-    damage_targ(target,"torso",dam,"slashing");
+    damage_targ(target,"torso",dam,"bludgeoning");
     if(!random(2)){
        mycheck = roll_dice(1,20)+(int)caster->query_stats("intelligence");
        yourcheck = roll_dice(1,20)+(int)caster->query_stats("dexterity");
@@ -59,7 +60,7 @@ void spell_effect(int prof) {
           if(sizeof(weapons) && !target->query_property("no disarm")){
              tell_object(target,"%^BOLD%^%^WHITE%^Your weapons fly "+
                 "from your grasp!");
-             for (i=0,sizeof(weapons)>0;i<sizeof(weapons);i++) 
+             for (i=0,sizeof(weapons)>0;i<sizeof(weapons);i++)
              {
                  if(!objectp(weapons[i])) { continue; }
                 ids = weapons[i]->query_id();
@@ -88,7 +89,7 @@ void spell_effect(int prof) {
           "the gale-force winds!");
        tell_room(place,"%^RESET%^%^CYAN%^"+foes[i]->QCN+" is whipped "+
           "about by the winds!",foes[i]);
-       damage_targ(foes[i],foes[i]->return_target_limb(),dam,"slashing");
+       damage_targ(foes[i],foes[i]->return_target_limb(),dam,"bludgeoning");
        if(!sizeof(foes)) break;
     }
     spell_successful();

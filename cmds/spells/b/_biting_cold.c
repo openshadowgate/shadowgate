@@ -76,7 +76,7 @@ void zapper(){
       return;
    }
    counter--;
-   damage = roll_dice(mylevel, 5);
+   damage = sdamage;
    tell_room(place,"%^BOLD%^%^CYAN%^A blast of %^RESET%^%^BLUE%^a%^BOLD%^r%^RESET%^"
       "%^CYAN%^c%^BOLD%^t%^RESET%^i%^BOLD%^c e%^RESET%^n%^BOLD%^%^CYAN%^e%^RESET%^"
       "%^CYAN%^r%^BOLD%^%^BLUE%^g%^RESET%^%^BLUE%^y %^BOLD%^%^CYAN%^explodes from "

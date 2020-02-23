@@ -23,6 +23,7 @@ void create() {
     set_somatic_comp();
     set_arg_needed();
     set_save("reflex");
+    splash_spell(1);
 }
 
 string query_cast_string() {
@@ -84,7 +85,7 @@ void spell_effect(int prof){
         dest_effect();
         return;
     }
-    damage = roll_dice(mylevel,6);
+    //damage = roll_dice(mylevel,6);
 
     if(args == "random"){
        mynum = random(5);
@@ -148,9 +149,9 @@ void spell_effect(int prof){
        "palms, enveloping "+target->QO+"!",({caster,target}));
     if(!do_save(target,0)) {
     //if (!do_saving_throw(target, "spell", 0)) {
-        damage_targ(target, target->return_target_limb(), damage,dam_type);
+        damage_targ(target, target->return_target_limb(), sdamage,dam_type);
     } else {
-        damage_targ(target, target->return_target_limb(), to_int(damage/2),dam_type);
+        damage_targ(target, target->return_target_limb(), to_int(sdamage/2),dam_type);
     }
     stop = random(mylevel);
     if(sizeof(foes)){
@@ -162,9 +163,9 @@ void spell_effect(int prof){
              "wave of "+energy+"!",foes[num]);
           if(!do_save(foes[num],0)) {
           //if (!do_saving_throw(foes[num], "spell", 0)) {
-             damage_targ(foes[num], foes[num]->return_target_limb(), damage,dam_type);
+             damage_targ(foes[num], foes[num]->return_target_limb(), sdamage,dam_type);
           } else {
-             damage_targ(foes[num], foes[num]->return_target_limb(), to_int(damage/2),dam_type);
+             damage_targ(foes[num], foes[num]->return_target_limb(), to_int(sdamage/2),dam_type);
           }
           if(!stop) break;
        }
