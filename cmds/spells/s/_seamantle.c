@@ -91,7 +91,7 @@ void dest_effect()
         target->remove_property_value("spelled", ({TO}) );
         target->remove_property_value("added short",({"%^BOLD%^%^CYAN%^ (surrounded by helix of water)%^RESET%^"}));
         tell_object(target, "%^BOLD%^%^CYAN%^The seamantle fades out.");
-        tell_room(ENV(target),"%^BOLD%^%^CYAN%^Currents of water around"+caster->QCN+" fade out.", target );
+        tell_room(ENV(target),"%^BOLD%^%^CYAN%^Currents of water around "+caster->QCN+" fade out.", target );
         target->remove_property("seamantled");
     }
 

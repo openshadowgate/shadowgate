@@ -61,7 +61,11 @@ int query_size() {
     if(!twoHanded) {
         return s;
     } else {
-        o = ETO->query_size();
+        if (objectp(ETO)) {
+            o = ETO->query_size();
+        } else {
+            o = 2;
+        }
         if(s > o) {
             return s;
         } else {
