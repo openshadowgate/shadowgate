@@ -14,14 +14,14 @@ void create(){
     set_domains("fire");
     set_syntax("cast CLASS fire shield");
     set_description("This spell will surround the caster's body in a roaring shield of flames.  It grants the caster a "
-"slight bonus to their armor class, and any opponent striking the caster must make a saving throw or take damage from the "
+"slight bonus to their armor class, and any opponent striking the caster will take damage from the "
 "blistering heat.");
     set_verbal_comp();
     set_somatic_comp();
     set_components(([
       "mage" : ([ "phosphorus" : 1, ]),
     ]));
-    set_save("fort");
+    //set_save("fort");
     set_helpful_spell(1);
     traveling_aoe_spell(1);
 }

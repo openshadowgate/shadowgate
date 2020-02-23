@@ -27,11 +27,11 @@ string *combat_styles() {
 }
 
 string *class_feats(string myspec) {
-    return ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency" });
+    return ({  });
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry" }), 5 : ({ "weapon focus" }), 9 : ({ "weapon specialization" }), 13 : ({ "greater weapon focus" }), 17 : ({ "greater weapon specialization" }) ]);
+    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", }), ]);
 }
 
 string *class_skills()

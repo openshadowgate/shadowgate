@@ -53,16 +53,16 @@ int preSpell()
         tell_object(TP, "This is too large to empower!");
         return 1;
     }
-    if (tob->query_property("no repair")) {
+    if (fob->query_property("no repair")) {
         tell_object(TP, "This object can't accept magic!");
         return 1;
     }
-    if (fob->query_property("enchantment") > 5) {
+    if (fob->query_property("enchantment") > 0) {
         tell_object(caster, "The object must not be enchanted.");
         return 0;
     }
-    if (tob->query_property("enchantment") < 0) {
-        tell_object(caster, "The second object must not be cursed.");
+    if (fob->query_property("enchantment") < 0) {
+        tell_object(caster, "The object must not be cursed.");
         return 0;
     }
     return 1;

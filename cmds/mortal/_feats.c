@@ -791,7 +791,7 @@ int cmd_feats(string str){
           if(member_array(subset[i],HYBRID) != -1) continue; // neither do hybrids!
 
           if(subset[i] == "fighter")
-              j = (((int)TP->query_class_level(subset[i]) + 1) / 2);
+              j = (((int)TP->query_class_level(subset[i]) + 1) / 2) + 1;
           else if(subset[i] == "paladin")
               j = (((int)TP->query_class_level(subset[i]) + 4) / 5);
           else
@@ -1076,7 +1076,7 @@ int cmd_feats(string str){
           if(member_array(subset[i],HYBRID) != -1) continue; // neither do hybrids!
 
           if(subset[i] == "fighter")
-              j = (((int)TP->query_class_level(subset[i]) + 1) / 2);
+              j = (((int)TP->query_class_level(subset[i]) + 1) / 2) + 1;
           else if(subset[i] == "paladin")
               j = (((int)TP->query_class_level(subset[i]) + 4) / 5);
           else

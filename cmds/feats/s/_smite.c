@@ -12,7 +12,7 @@ void create() {
     feat_category("Presence");
     feat_syntax("smite");
     feat_prereq("Paladin L2");
-    feat_desc("Drawing on the divine energy that infuses every holy knight, the paladin can smite the evil or good that lies in the hearts of men, beasts, and monsters alike. A successful attempt will strike any creature audacious enough to attack the paladin, causing vicious damage and leaving targets of chaotic inclination too shocked to even retalliate for a while.");
+    feat_desc("Drawing on the divine energy that infuses every holy knight, the paladin can smite the evil or good that lies in the hearts of men, beasts, and monsters alike. A successful attempt will strike any creature audacious enough to attack the paladin, causing vicious damage.");
     feat_name("smite");
 }
 
@@ -20,7 +20,7 @@ int allow_shifted() { return 0; }
 
 int prerequisites(object ob){
     if(!objectp(ob)) return 0;
-    if(ob->query_class_level("paladin") < 2 || (int)ob->query_alignment() > 6) {
+    if(ob->query_class_level("paladin") < 2) {
         dest_effect();
         return 0;
     }
@@ -104,14 +104,10 @@ void execute_attack() {
         if(targets[i] == caster) continue;
         if(!objectp(targets[i])) continue;
    	  tell_object(targets[i],"%^BOLD%^%^WHITE%^The energy washes over you, burning like fire!%^RESET%^");
-        dmg = roll_dice(clevel,chamod);
-        dmg += clevel; //dmg wasn't that impressive on rolldice randomness; adding some static reliable dmg base. -N, 9/10
+        dmg = roll_dice(clevel + chamod,8);
         caster->cause_damage_to(targets[i],"head",dmg);
         caster->add_attacker(targets[i]);
         targets[i]->add_attacker(caster);
-        if((int)targets[i]->query_alignment() > 6) //chaotic target, stun also
-          targets[i]->set_paralyzed((random(chamod)+(clevel/5)+5),"%^BOLD%^%^BLACK%^The divine power leaves you gasping "
-"for air!");
     }
     caster->set_property("magic",-1);
     dest_effect();

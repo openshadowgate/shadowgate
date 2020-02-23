@@ -95,6 +95,7 @@ void validate_class_feats(object ob)
         }
         tell_object(ob,"%^BOLD%^%^RED%^Grating free feats wipe. Use <feats wipe> if you want to apply it.");
         ob->delete("free_feat_wipe");
+        tell_object(ob,"%^BOLD%^%^RED%^Use <feats fix> if there are any %^ULINE%^missing%^RESET%^%^BOLD%^%^RED%^ feats on your featmap.");
     }
 }
 
@@ -465,7 +466,7 @@ int can_gain_bonus_feat(object ob,string feat)
       if(member_array(myclasses[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
       if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
       if(myclasses[i] == "fighter" )
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2);
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2) + 1;
       else if(myclasses[i] == "paladin")
           currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
       else
