@@ -16,9 +16,8 @@ void create() {
      set_spell_name("energy bolt");
      set_spell_level(([ "psion" : 3 ]));
      set_spell_sphere("invocation_evocation");
-     set_syntax("cast CLASS energy bolt on TARGET");
-     set_description("By manifesting this power, the psion calls on a reserve of energy that can materialize in a number "
-                     "of different ways to assault the target.");
+     set_syntax("cast CLASS energy bolt on TARGET as TYPE");
+     set_description("By manifesting this power, the psion calls on a reserve of energy that can materialize in a number of different ways to assault the target.  Valid energy types are fire, electricity, cold, acid, sonic, or random.");
      set_verbal_comp();
      set_somatic_comp();
      set_arg_needed();
@@ -89,9 +88,8 @@ void spell_effect(int prof){
           args = MYTYPES[mynum];
      }
 
-     mylevel = clevel;
-
-     damage = roll_dice(mylevel,6);
+     //mylevel = clevel;
+     //damage = sdamage;
      target_limb = target->return_target_limb();
      switch(args)
      {
@@ -161,9 +159,9 @@ void spell_effect(int prof){
      }
      if(!do_save(target,0)) {
           //if (!do_saving_throw(target, "spell", (4-prof/25))) {
-          damage_targ(target, target_limb, damage,dam_type);
+          damage_targ(target, target_limb, sdamage, dam_type);
      } else {
-          damage_targ(target, target_limb, to_int(damage / 2),dam_type );
+          damage_targ(target, target_limb, to_int(sdamage / 2),dam_type );
      }
      spell_successful();
      dest_effect();
