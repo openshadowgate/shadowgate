@@ -1442,12 +1442,13 @@ void setup() {
       }
     }
 
-    if(objectp(find_object_or_load("/daemon/feat_d.c")))
-    {
-      if(TO->query("new_class_type"))
-      {
-        if(objectp(TO)) { find_object_or_load("/daemon/feat_d.c")->obsolete_feat(TO); }
-      }
+    if (objectp(find_object_or_load("/daemon/feat_d.c"))) {
+        if (TO->query("new_class_type")) {
+            if (objectp(TO)) {
+                FEATS_D->validate_class_feats(TO);
+                FEATS_D->obsolete_feat(TO);
+            }
+        }
     }
 
     init_feats();
@@ -2241,10 +2242,7 @@ void write_messages()
     if (down_time) {
         message("login",
                 "
-%^YELLOW%^You've been away for more than two weeks! We've given you a temporary PK
-protection to help you get back in the game, it will expire
-in one calendar days and two hours of play time, unless you are away for another two weeks...
-"
+%^YELLOW%^You've been away for more than two weeks! We've given you a temporary PK protection to help you get back in the game, it will expire in one calendar day or two hours of play time, unless you are away for another two weeks..."
                 , TO);
         if (static_user["down_time"] != down_time) {
             message("login", "%^ORANGE%^... PK downtime adjusted again.", TO);

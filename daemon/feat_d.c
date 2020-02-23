@@ -86,13 +86,15 @@ void validate_class_feats(object ob)
         }
     }
     if (sizeof(toremove)) {
-        tell_object(ob, "%^BOLD%^%^RED%^You have bought class feats that are no longer belong to any of your classes:%^RESET%^" + implode(toremove, ", "));
-        tell_object(ob, "%^BOLD%^%^RED%^These feats will be removed.\nYou are granted free feat wipe you can use if you're unhappy with your current feat assignation.%^RESET%^");
+        tell_object(ob, "%^BOLD%^%^RED%^\nYou have class feats that don't belong to any of your classes:%^RESET%^" + implode(toremove, ", "));
+        tell_object(ob, "%^BOLD%^%^RED%^These feats will be removed.\nYou have been granted free feat wipe you can use if you're unhappy with your current feat assignation.%^RESET%^\n");
         foreach(fname in toremove)
         {
             tell_object(ob,"%^BOLD%^%^RED%^Removing:%^RESET%^ " + fname);
-            remove_feat(ob, "class", 1);
+            remove_feat(ob, "class", fname);
         }
+        tell_object(ob,"%^BOLD%^%^RED%^Grating free feats wipe. Use <feats wipe> if you want to apply it.");
+        ob->delete("free_feat_wipe");
     }
 }
 
