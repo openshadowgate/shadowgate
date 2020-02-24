@@ -68,7 +68,7 @@ void execute_attack()
 
         // Death effect here is just for flavour.
         if (!(targ->query("no death") ||
-              random(100))) {
+              random(50))) {
             tell_object(targ, "%^BOLD%^%^BLACK%^YOU ARE MINE.%^RESET%^");
             tell_room(place, "%^BOLD%^%^BLACK%^The grim reaper claims " + targ->QCN + "!", targ);
             damage_targ(targ, targ->return_target_limb(), targ->query_max_hp() * 2, "untyped");

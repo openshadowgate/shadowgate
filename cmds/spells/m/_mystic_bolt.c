@@ -1,5 +1,5 @@
 // Mystic Bolt
-//Updated by ~Circe~ 4/26/08 to bring in line with 
+//Updated by ~Circe~ 4/26/08 to bring in line with
 //other bolt spells - rebalancing domains
 #include <std.h>
 #include <daemons.h>
@@ -10,8 +10,8 @@ void create(){
     ::create();
     set_spell_name("mystic bolt");
     set_spell_level(([ "cleric" : 5 ]));
-    set_spell_sphere("combat");
-    set_spell_domain("magic");
+    set_spell_sphere("abjuration");
+    set_domains("magic");
     set_syntax("cast CLASS mystic bolt on TARGET");
     set_description("This spell sends a mystical bolt of energy to ravage the target.  Those standing nearby may be hit "
 "as well.");
