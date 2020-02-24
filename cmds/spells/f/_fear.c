@@ -98,7 +98,7 @@ void spell_effect(int prof)
 
         if(race_immunity_check(inven[i], "fear"))
         {
-            inven[i]->add_attacker(caster);
+            spell_kill(target, caster);
             continue;
         }
 
