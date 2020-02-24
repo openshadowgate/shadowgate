@@ -3,13 +3,13 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("WeaponMastery");
-    feat_name("weapon specialization");
-    feat_prereq("Fighter L9");
+    feat_name("weapon specialization"); // weapon training
+    feat_prereq("Fighter L5");
     feat_desc("This feat, available only as a class skill to trained fighters, slightly increases the damage of all attacks with weapons.");
     permanent(1);
 }
@@ -18,7 +18,7 @@ int allow_shifted() { return 1; }
 
 int prerequisites(object ob) {
     if(!objectp(ob)) { return 0; }
-    if(ob->query_class_level("fighter") < 9) {
+    if(ob->query_class_level("fighter") < 5) {
         dest_effect();
         return 0;
     }
@@ -47,4 +47,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

@@ -593,6 +593,12 @@ mixed query_property(string prop)
             return 1;
         }
     }
+    if (prop == "no disarm")
+    {
+        if (FEATS_D->usable_feat(TO, "weapon mastery")) {
+            return 1;
+        }
+    }
     if (prop == "negative energy affinity") {
         if (TO->is_undead()) {
             return 1;

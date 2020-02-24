@@ -695,23 +695,27 @@ instantly to the "
     else if((int)"/daemon/config_d.c"->check_config("critical damage") == 1)
     {
         mult -= 1;
-        if(FEATS_D->usable_feat(attacker, "lethal strikes") && !attacker->query_property("shapeshifted"))
-        {
-            wielded = (object *)attacker->query_wielded();
-            if(sizeof(wielded) >= 2)
-            {
-                if(wielded[0] != wielded[1]) mult += 1;
-                if((int)wielded[0]->query_size() == 1 && (int)wielded[1]->query_size() == 1) mult += 1;
-            }
-            else if(sizeof(wielded) == 1)
-            {
+        if (!attacker->query_property("shapeshifted")) {
+            if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
+                mult += 2;
+            }else if (FEATS_D->usable_feat(attacker, "lethal strikes")) {
+                wielded = (object*)attacker->query_wielded();
+                if (sizeof(wielded) >= 2) {
+                    if (wielded[0] != wielded[1]) {
+                        mult += 1;
+                    }
+                    if ((int)wielded[0]->query_size() == 1 && (int)wielded[1]->query_size() == 1) {
+                        mult += 1;
+                    }
+                }else if (sizeof(wielded) == 1) {
+                    mult += 1;
+                    if ((int)wielded[0]->query_size() == 1) {
+                        mult += 1;
+                    }
+                }
+            } else if (FEATS_D->usable_feat(attacker, "weapon mastery")) {
                 mult += 1;
-                if((int)wielded[0]->query_size() == 1) mult += 1;
             }
-        }
-        else if(FEATS_D->usable_feat(attacker, "exploit weakness") && !attacker->query_property("shapeshifted"))
-        {
-            mult += 2;
         }
         crit_dam = 0;
         while(mult > 0)

@@ -3,13 +3,13 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("WeaponMastery");
     feat_name("weapon focus");
-    feat_prereq("Fighter L5");
+    feat_prereq("Fighter L5"); // weapon training
     feat_desc("This feat, available only as a class skill to trained fighters, slightly increases the accuracy of all attacks with weapons.");
     permanent(1);
 }
@@ -47,4 +47,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

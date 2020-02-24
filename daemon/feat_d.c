@@ -94,7 +94,7 @@ void validate_class_feats(object ob)
         }
     }
     if (sizeof(toremove)) {
-        tell_object(ob, "%^BOLD%^%^RED%^\nYou have class feats that don't belong to any of your classes:%^RESET%^" + implode(toremove, ", "));
+        tell_object(ob, "%^BOLD%^%^RED%^\nYou have class feats that don't belong to any of your classes: %^RESET%^" + implode(toremove, ", "));
         tell_object(ob, "%^BOLD%^%^RED%^These feats will be removed.\nYou have been granted free feat wipe you can use if you're unhappy with your current feat assignation.%^RESET%^\n");
         foreach(fname in toremove)
         {
