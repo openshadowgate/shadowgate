@@ -60,8 +60,14 @@ int sum_array(int *arr, int ele)
 
 mixed collapse_array(mixed *array)
 {
-    mixed sum = array[0];
+    mixed sum;
     int i;
+
+    if (!sizeof(array)) {
+        return 0;
+    }
+
+    sum = array[0];
     for (i = 1; i < sizeof(array); ++i)
     {
         sum += array[i];

@@ -18,6 +18,8 @@ If used without an argument this feat will pick up a random attacker.
     set_save("reflex");
 }
 
+int allow_shifted() { return 0; }
+
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;

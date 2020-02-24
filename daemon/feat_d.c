@@ -79,6 +79,14 @@ void validate_class_feats(object ob)
     myclassfeats = collapse_array(values(ob->query_class_feats()));
     classfeats = get_all_class_feats(ob);
 
+    if (!sizeof(myclassfeats)) {
+        return;
+    }
+
+    if (!sizeof(classfeats)) {
+        return;
+    }
+
     foreach(fname in myclassfeats)
     {
         if (member_array(fname, classfeats) == -1) {
