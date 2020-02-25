@@ -1831,7 +1831,7 @@ int is_wererat()
 
 int is_weretiger()
 {
-    return (query("wererat")) || 0;
+    return (query("weretiger")) || 0;
 }
 
 void reset_all_status_effects()
