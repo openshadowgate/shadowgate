@@ -1474,32 +1474,32 @@ void setup() {
        load_pets();
    }
    convert_kills();
-   if (query_property("inactive"))
-     remove_property("inactive");
-   if (query_invis() && !wizardp(TO))
-     set_invis();
+   if (query_property("inactive")) {
+       remove_property("inactive");
+   }
+   if (query_invis() && !wizardp(TO)) {
+       set_invis();
+   }
    setup_messages();
    init_mud_guilds();
    init_spellcaster();
 
-   if(query_condition() < -100)
-   {
-     used_stamina = query_max_stamina() + 100;
+   if (query_condition() < -100) {
+       used_stamina = query_max_stamina() + 100;
    }
 
    //Some parts of the game still refer to property "undead" in
    //determining whether target is an undead.
-   if(query("undead"))
-     set_property("undead",1);
+   if (query("undead")) {
+       set_property("undead", 1);
+   }
 
    InitInnate();
    TO->update_channels();
-   if(avatarp(TO) && (int)TO->query_level() > 100)
-   {
-     if(!TO->query_true_invis())
-     {
-       TO->set_true_invis();
-     }
+   if (avatarp(TO) && (int)TO->query_level() > 100) {
+       if (!TO->query_true_invis()) {
+           TO->set_true_invis();
+       }
    }
    static_user["verbose_moves"] = 1;
    "/adm/daemon/average_age_d.c"->register_player(TO);

@@ -35,6 +35,7 @@ int num_attacks;
 static int forced, sight_bonus;
 string description;
 string background;
+string acquired_template;
 string sphere_of_influence;
 string school_of_magic;
 string school_of_opposition;
@@ -547,6 +548,16 @@ string *query_divine_domain()
 {
     if(!divine_domain || divine_domain == ({})) return ({});
     return divine_domain;
+}
+
+void set_acquired_template(string str)
+{
+    acquired_template = str;
+}
+
+string query_acquired_template(string str)
+{
+    return acquired_template;
 }
 
 string query_school()
@@ -1814,6 +1825,11 @@ int is_werewolf()
 }
 
 int is_wererat()
+{
+    return (query("wererat")) || 0;
+}
+
+int is_weretiger()
 {
     return (query("wererat")) || 0;
 }

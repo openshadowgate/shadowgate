@@ -81,6 +81,15 @@ void InitInnate()
                                 ]);
     }
 
+    if (is_weretiger()) {
+        InnateAbilities += ([
+                                "replay tracks" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "heart of the wild" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                "weretiger shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                                ]);
+    }
+
     if (is_wererat()) {
         InnateAbilities += ([
                                 "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),

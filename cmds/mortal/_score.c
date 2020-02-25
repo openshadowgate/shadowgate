@@ -32,6 +32,9 @@ mixed* genoutput(object targ)
         if (targ->is_wererat()) {
             race_var = "Wererat " + race_var;
         }
+        if (targ->is_weretiger()) {
+            race_var = "Wererat " + race_var;
+        }
         if (objectp(shape = TP->query_property("shapeshifted"))) {
             race_var = (string)shape->query_shape_race();
             race_var = capitalize(race_var);
