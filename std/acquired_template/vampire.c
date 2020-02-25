@@ -17,6 +17,19 @@ string *races_allowed()
     return ({"human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian"});
 }
 
+mapping innate_spells()
+{
+    return "/std/acquired_template/undead"->innate_spells() + ([
+                "create spawn" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "twilight shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "domination" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "gaseous form" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "night swarm" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "spider climb" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "sleep" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                ]);
+}
+
 int apply_template(object ob)
 {
     ob->set("undead",1);

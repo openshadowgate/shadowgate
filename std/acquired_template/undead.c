@@ -14,6 +14,14 @@ string *races_allowed()
     return ({"human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian", "goblin", "gnoll", "bugbear", "orc", "firbolg", "halfling", "dwarf", "beastkin",});
 }
 
+mapping innate_spells()
+{
+    return ([
+                "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "animate dead" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                ]);
+}
+
 int apply_template(object ob)
 {
     ob->set_property("undead",1);

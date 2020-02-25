@@ -1488,10 +1488,27 @@ void setup() {
        used_stamina = query_max_stamina() + 100;
    }
 
-   //Some parts of the game still refer to property "undead" in
-   //determining whether target is an undead.
-   if (query("undead")) {
-       set_property("undead", 1);
+   // Migration code to standardize acquired templates
+   {
+       //Some parts of the game still refer to property "undead" in
+       //determining whether target is an undead.
+       if (query("undead")) {
+           set_property("undead", 1);
+           set_acquired_template("undead");
+           delete("undead");
+       }
+       if (query("vampire")) {
+           set_acquired_template("vampire");
+           delete("vampire");
+       }
+       if (query("wererat")) {
+           set_acquired_template("wererat");
+           delete("wererat");
+       }
+       if (query("werewolf")) {
+           set_acquired_template("werewolf");
+           delete("werewolf");
+       }
    }
 
    InitInnate();

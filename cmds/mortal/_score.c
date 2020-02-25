@@ -19,22 +19,11 @@ mixed* genoutput(object targ)
                 race_var = capitalize(targ->query("subrace"));
             }
         }
-        if (targ->is_undead()) {
-            if (targ->is_vampire()) {
-                race_var = "Vampire " + race_var;
-            } else {
-                race_var = "Undead " + race_var;
-            }
+
+        if (targ->query_acquired_template()) {
+            rave_var = capitalize(targ->query_acquired_template() + " " + race_var);
         }
-        if (targ->is_werewolf()) {
-            race_var = "Werewolf " + race_var;
-        }
-        if (targ->is_wererat()) {
-            race_var = "Wererat " + race_var;
-        }
-        if (targ->is_weretiger()) {
-            race_var = "Weretiger " + race_var;
-        }
+
         if (objectp(shape = TP->query_property("shapeshifted"))) {
             race_var = (string)shape->query_shape_race();
             race_var = capitalize(race_var);
