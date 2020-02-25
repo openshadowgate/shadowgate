@@ -162,84 +162,118 @@ string describe_living_contents(object *exclude) {
 
 string describe_item_contents(object *exclude)
 {
-    object *inv,shape,ob,eto,*temp=({});
+    object* inv, shape, ob, eto, * temp = ({});
     mapping list;
-    string ret, tmp,*shorts;
+    string ret, tmp, * shorts;
     int i, x;
 
-    if(objectp(shape = TO->query_property("shapeshifted")))
-    {
+    if (objectp(shape = TO->query_property("shapeshifted"))) {
         inv = all_inventory(TO);
-        if(!pointerp(exclude)) { exclude = ({}); }
+        if (!pointerp(exclude)) {
+            exclude = ({});
+        }
         temp = inv;
-        for(i=0;i<sizeof(inv);i++)
-        {
-            if(!objectp(ob = inv[i]))
-            {
+        for (i = 0; i < sizeof(inv); i++) {
+            if (!objectp(ob = inv[i])) {
                 temp -= ({ 0 });
                 continue;
             }
 
             eto = environment(ob);
 
-            if(base_name(ob) == "/d/azha/obj/gmr_ring") { temp -= ({ ob }); }
-            if(base_name(ob) == "/d/azha/obj/mr_ring") { temp -= ({ ob }); }
-            if(ob->id("kitxyz")) { temp -= ({ ob }); }
+            if (base_name(ob) == "/d/azha/obj/gmr_ring") {
+                temp -= ({ ob });
+            }
+            if (base_name(ob) == "/d/azha/obj/mr_ring") {
+                temp -= ({ ob });
+            }
+            if (ob->id("kitxyz")) {
+                temp -= ({ ob });
+            }
 
-            if(FEATS_D->usable_feat(TO,"wild knowledge") && (eto == TO))
-            {
-                if(!ob->query_worn() && !ob->query_wielded()) { temp -= ({ ob }); }
+            if (FEATS_D->usable_feat(TO, "wild knowledge") && (eto == TO)) {
+                if (!ob->query_worn() && !ob->query_wielded()) {
+                    temp -= ({ ob });
+                }
             }
         }
 
         //temp = inv - temp;
     }
 
-    if(pointerp(exclude)) { exclude += temp; }
-    else { exclude = temp; }
+    if (pointerp(exclude)) {
+        exclude += temp;
+    }else {
+        exclude = temp;
+    }
 
-    i = sizeof(inv = filter_array((all_inventory(this_object())-exclude),"filter_non_living", TO));
-    if(!i) { return ""; }
+    i = sizeof(inv = filter_array((all_inventory(this_object()) - exclude), "filter_non_living", TO));
+    if (!i) {
+        return "";
+    }
     list = ([]);
 
-    while(i--)
-    {
-        if(!objectp(TO)) { continue; }
-        if(inv[i]->query_magic_hidden() && (!TO->detecting_invis() || !inv[i]->is_detectable())) { continue; }
-        if(inv[i]->query_hidden() && !(avatarp(TO)||TO->true_seeing())) { continue; }
-        if(inv[i]->query_hidden() && !living(inv[i])) { continue; }
-        if(inv[i]->is_disease()) continue;
-        TO->set_property("information",1);
-        if(!(tmp = (string)inv[i]->query_short())) continue;
-        TO->remove_property("information");
-        if(tmp == "") continue;
-        if( (temp=explode(tmp," ")) == ({}) ) continue;
-        if (inv[i]->query_hidden() || inv[i]->query_magic_hidden())
-        {
-            tmp = "%^ORANGE%^(hid)%^RESET%^ "+tmp;
+    while (i--) {
+        if (!objectp(TO)) {
+            continue;
         }
-        if(!list[tmp]) list[tmp] = ({ inv[i]});
-        else list[tmp] += ({inv[i]});
+        if (inv[i]->query_magic_hidden() && (!TO->detecting_invis() || !inv[i]->is_detectable())) {
+            continue;
+        }
+        if (inv[i]->query_hidden() && !(avatarp(TO) || TO->true_seeing())) {
+            continue;
+        }
+        if (inv[i]->query_hidden() && !living(inv[i])) {
+            continue;
+        }
+        if (inv[i]->is_disease()) {
+            continue;
+        }
+        TO->set_property("information", 1);
+        if (!(tmp = (string)inv[i]->query_short())) {
+            continue;
+        }
+        TO->remove_property("information");
+        if (tmp == "") {
+            continue;
+        }
+        if ((temp = explode(tmp, " ")) == ({})) {
+            continue;
+        }
+        if (inv[i]->query_hidden() || inv[i]->query_magic_hidden()) {
+            tmp = "%^ORANGE%^(hid)%^RESET%^ " + tmp;
+        }
+        if (!list[tmp]) {
+            list[tmp] = ({ inv[i] });
+        } else {
+            list[tmp] += ({ inv[i] });
+        }
     }
     i = sizeof(shorts = keys(list));
-    if(!i) return "";
-    if((x=sizeof(list[shorts[--i]])) == 1)
-    ret = capitalize(shorts[i]);
-    else ret = capitalize(consolidate(x, shorts[i]));
-    if(!i) return(x <2 ? ret+" is here.\n" : ret +" are here.\n");
-    else if(i==1)
-    return ret+", and "+consolidate(sizeof(list[shorts[0]]), shorts[0])+
-        " are here.\n";
-    else
-    {
-        while(i--)
-        {
-            if(!i) ret += ", and ";
-            else ret += ", ";
+    if (!i) {
+        return "";
+    }
+    if ((x = sizeof(list[shorts[--i]])) == 1) {
+        ret = capitalize(shorts[i]);
+    } else {
+        ret = capitalize(consolidate(x, shorts[i]));
+    }
+    if (!i) {
+        return (x < 2 ? ret + " is here.\n" : ret + " are here.\n");
+    } else if (i == 1) {
+        return ret + ", and " + consolidate(sizeof(list[shorts[0]]), shorts[0]) +
+               " are here.\n";
+    } else {
+        while (i--) {
+            if (!i) {
+                ret += ", and ";
+            } else {
+                ret += ", ";
+            }
             ret += consolidate(sizeof(list[shorts[i]]), shorts[i]);
         }
     }
-    return ret+" are here.\n";
+    return ret + ".\n";
 }
 
 int filter_living(object ob) {return(living(ob) || ob->query("not living"));}
