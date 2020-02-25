@@ -168,7 +168,7 @@ void get_password(string str) {
     if (!check_password(str))
     {
         message("logon", "\nInvalid password.\n", this_object());
-        log_file("watch/bad_password",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()));
+        log_file("watch/bad_password",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()), 1);
         if (++__CrackCount > MAX_PASSWORD_TRIES) {
             message("logon", "No more attempts allowed.\n", this_object());
             internal_remove();
@@ -184,7 +184,7 @@ void get_password(string str) {
     str = 0;
     master()->load_player_from_file(__Name, __Player);
     seteuid(UID_LOG);
-    log_file("watch/logon", sprintf("%s from %s at %s\n",__Name,query_ip_number(),ctime(time())));
+    log_file("watch/logon", sprintf("%s from %s at %s\n",__Name,query_ip_number(),ctime(time())), 1);
     seteuid(getuid());
     if (!is_copy()) exec_user();
 }
