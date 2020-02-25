@@ -1337,13 +1337,29 @@ string *query_all_new_skills()
 }
 
 // new functions for class combat specs. N, 1/14.
-void set_combat_spec(string myclass,string myspec){
-    if(!mapp(combat_specs)) combat_specs = ([]);
+void set_combat_spec(string myclass, string myspec)
+{
+    if (!mapp(combat_specs)) {
+        combat_specs = ([]);
+    }
     combat_specs[myclass] = myspec;
 }
 
-string query_combat_spec(string myclass){
-    if(!mapp(combat_specs)) combat_specs = ([]);
+string query_combat_spec(string myclass)
+{
+    if (!mapp(combat_specs)) {
+        combat_specs = ([]);
+    }
+    if (myclass == "monk") {
+        string tmp;
+        if (FEATS_D->usable_feat(TO, "grandmaster of the way")) {
+            tmp = "all";
+        } else {
+            tmp = (string)TO->query("monk way");
+        }
+        return tmp;
+    }
+
     return combat_specs[myclass];
 }
 

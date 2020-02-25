@@ -42,6 +42,8 @@ int cmd_inventory()
     }
     else stuff = TP->describe_item_contents(({}));
 
+// stuff = sort_array(stuff, 1);
+
     if(stuff != "")
     {
         stuff = "   "+stuff;

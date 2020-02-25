@@ -54,7 +54,7 @@ string *class_feats(string myspec)
 mapping class_featmap(string myspec)
 {
     mapping myMap;
-    myMap = ([ 1 : ({ "simple weapon proficiency", "unarmored defense",}),
+    myMap = ([ 1 : ({ "simple weapon proficiency", "unarmored defense","spell focus"}),
                2 : ({"dodge", "flurry of blows"}),
                5 : ({"stunning strike"}),
                7 : ({"evasion", "stillness of mind"}),
@@ -66,14 +66,10 @@ mapping class_featmap(string myspec)
                20: ({"perfect self"}),
                21: ({"defensive roll"}),]);
 
-    switch(myspec)
-    {
-        case "way of the fist": case "all":
-            myMap += ([17 : ({"quivering palm"})]);
-            break;
-        case "way of the elements": case "all":
-            myMap += ([1 : ({"spell focus"})]);
-            break;
+    switch (myspec) {
+    case "way of the fist": case "all":
+        myMap += ([17 : ({ "quivering palm" })]);
+        break;
     }
     return myMap;
 }

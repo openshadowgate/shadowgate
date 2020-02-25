@@ -680,68 +680,70 @@ int cmd_feats(string str){
         return 0;
     case "fix":
         required = TP->query_classes();
-        if(!sizeof(required)) return 1;
+        if (!sizeof(required)) {
+            return 1;
+        }
 
         // first pickup current "other" feats that were bought
         otherfeats = TP->query_other_feats();
         featkeys = keys(otherfeats);
         num_feats = TP->query("free_feats");
         feats = ({});
-        for(i=0;i<sizeof(featkeys);i++) feats += otherfeats[featkeys[i]];
+        for (i = 0; i < sizeof(featkeys); i++) {
+            feats += otherfeats[featkeys[i]];
+        }
 
         //for fighter bonus feats - Saide
         otherfeats = TP->query_bonus_feats();
         featkeys = keys(otherfeats);
-        for(i = 0;i < sizeof(featkeys);i++) feats += otherfeats[featkeys[i]];
+        for (i = 0; i < sizeof(featkeys); i++) {
+            feats += otherfeats[featkeys[i]];
+        }
 
         // now run addition of any missing class feats; remove from bought
         // feats first if they already did
 
-        for(bonus = 0;bonus<sizeof(required);bonus++)
-	    {
-      	    category = "/std/class/"+required[bonus]+".c";
-          	if(!file_exists(category)) continue;
-            tmp = (string)TP->query_combat_spec(required[bonus]); // new combat spec code, N 1/14.
-            if(required[bonus] == "monk")
-            {
-                if(FEATS_D->usable_feat(TP, "grandmaster of the way")) tmp = "all";
-                else tmp = (string)TP->query("monk way");
+        for (bonus = 0; bonus < sizeof(required); bonus++) {
+            category = "/std/class/" + required[bonus] + ".c";
+            if (!file_exists(category)) {
+                continue;
             }
-          	classfeats = category->class_featmap(tmp);
-          	if(!mapp(classfeats)) continue;
-          	featkeys = keys(classfeats);
-          	if(sizeof(featkeys))
-		    {
-            	for(i=0;i<sizeof(featkeys);i++)
-			    {
-              		if((int)TP->query_class_level(required[bonus]) < featkeys[i]) continue;
-             		subset = classfeats[featkeys[i]];
-              		for(j=0;j<sizeof(subset);j++)
-				    {
-                		my_lev = ((int)TP->query_level()) - (int)TP->query_class_level(required[bonus])+featkeys[i];
-                		if(!my_lev) my_lev = 1;
+            tmp = (string)TP->query_combat_spec(required[bonus]);         // new combat spec code, N 1/14.
+            classfeats = category->class_featmap(tmp);
+            if (!mapp(classfeats)) {
+                continue;
+            }
+            featkeys = keys(classfeats);
+            if (sizeof(featkeys)) {
+                for (i = 0; i < sizeof(featkeys); i++) {
+                    if ((int)TP->query_class_level(required[bonus]) < featkeys[i]) {
+                        continue;
+                    }
+                    subset = classfeats[featkeys[i]];
+                    for (j = 0; j < sizeof(subset); j++) {
+                        my_lev = ((int)TP->query_level()) - (int)TP->query_class_level(required[bonus]) + featkeys[i];
+                        if (!my_lev) {
+                            my_lev = 1;
+                        }
 
-                		if(member_array(subset[j],feats) != -1)
-					    { // if they have this as a bought feat, revoke
-						    if((string)FEATS_D->get_feat_type(TP, subset[j]) != "bonus")
-						    {
-			                    num_feats++;
-						    }
-                  			FEATS_D->remove_my_feat(TP,subset[j],1);
-			                tell_object(TP,"%^YELLOW%^Moving feat %^BLUE%^"+
-						    subset[j]+"%^YELLOW%^ to class feats.");
-                		}
+                        if (member_array(subset[j], feats) != -1) { // if they have this as a bought feat, revoke
+                            if ((string)FEATS_D->get_feat_type(TP, subset[j]) != "bonus") {
+                                num_feats++;
+                            }
+                            FEATS_D->remove_my_feat(TP, subset[j], 1);
+                            tell_object(TP, "%^YELLOW%^Moving feat %^BLUE%^" +
+                                        subset[j] + "%^YELLOW%^ to class feats.");
+                        }
 
-                		if(!FEATS_D->has_feat(TP,subset[j]))
-					    {
-                  			tell_object(TP,"Adding "+required[bonus]+" class levelling feat: "+
-						    subset[j]+" at "+my_lev+".");
-                 			FEATS_D->add_feat(TP,"class",subset[j],my_lev);
-                		}
-              		}
-            	}
-          		TP->set("free_feats",num_feats);
-          	}
+                        if (!FEATS_D->has_feat(TP, subset[j])) {
+                            tell_object(TP, "Adding " + required[bonus] + " class levelling feat: " +
+                                        subset[j] + " at " + my_lev + ".");
+                            FEATS_D->add_feat(TP, "class", subset[j], my_lev);
+                        }
+                    }
+                }
+                TP->set("free_feats", num_feats);
+            }
         }
         return 1;
     case "check":

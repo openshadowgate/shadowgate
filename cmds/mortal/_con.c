@@ -39,7 +39,6 @@ int cmd_con(string str)
 
         if (sizeof(theparty)) {
             presentparty = filter_array(theparty, (: environment($1) == $2 :), ETP);
-            presentparty -= ({TP});
         }
 
         if (sizeof(presentparty)) {
@@ -93,13 +92,13 @@ int cmd_con(string str)
             return 1;
         }
 
-        if (wizardp(ob) && !wizardp(TP) && (int)ob->query_invis() == 1) {
+        if (!avatarp(TP) && (int)ob->query_invis() == 1 && ob != TP) {
             write("Couldn't find \"" + str + "\" here.");
             return 1;
         }
 
         if (ob->query_invis() || ob == TP) {
-            if (!TP->detecting_invis() || ob == TP) {
+            if (!TP->detecting_invis() && ob != TP) {
                 write("Couldn't find \"" + str + "\" here.");
                 return 1;
             }
