@@ -1077,7 +1077,7 @@ string query_long(string unused)
         if (TO->query_size_bonus())
         {
             height = to_int(height * pow(2, TO->query_size_bonus()));
-            weight = to_int(weight * pow(pow(2, TO->query_size_bonus()), 3));
+            weight = to_int(weight * pow(pow(2, TO->query_size_bonus()), 2));
         }
         weight = weight / 25;
         weight = (weight + random(2)) * 25;
