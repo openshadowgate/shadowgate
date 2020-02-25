@@ -21,7 +21,7 @@ mixed* genoutput(object targ)
         }
 
         if (targ->query_acquired_template()) {
-            rave_var = capitalize(targ->query_acquired_template() + " " + race_var);
+            race_var = capitalize(targ->query_acquired_template() + " " + race_var);
         }
 
         if (objectp(shape = TP->query_property("shapeshifted"))) {

@@ -9,7 +9,7 @@ void create()
     ::create();
     set_spell_name("deathward");
     set_spell_level(([ "paladin" : 4,"druid" : 5,"inquisitor":4, "cleric":4]));
-    set_domains("knowledge");
+    set_domains(({"knowledge", "law"}));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS deathward");
     set_domains("repose");

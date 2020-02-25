@@ -56,21 +56,12 @@ void InitInnate()
 
     if (TO->query_acquired_template()) {
         string template = TO->query_acquired_template();
-        if (file_exists("/std/acquired_template/" + template)) {
+        if (file_exists("/std/acquired_template/" + template + ".c")) {
             mapping innates = ("/std/acquired_template/" + template)->innate_spells();
-            if (mapp(innates)) {
+            if (mapp(innates) && sizeof(innates)) {
                 InnateAbilities += innates;
             }
         }
-    }
-
-    if (is_weretiger()) {
-        InnateAbilities += ([
-                                "replay tracks" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-                                "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-                                "heart of the wild" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-                                "weretiger shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-                                ]);
     }
 
     // adding in feat-based innate spells here! N, 11/16

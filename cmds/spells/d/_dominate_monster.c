@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_spell_name("dominate monster");
     set_spell_level(([ "mage" : 9, "cleric" : 9]));
-    set_domains("charm");
+    set_domains(({"charm", "law"}));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS dominate monster on TARGET");
     set_description("This spell works exactly as domination, except it works on all creatures.");

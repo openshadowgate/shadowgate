@@ -21,12 +21,12 @@ mapping innate_spells()
 
 int apply_template(object ob)
 {
-    ob->set("wererat",1);
+    ob->set_acquired_template("wererat");
     return 1;
 }
 
 int remove_template(object ob)
 {
-    ob->delete("wererat");
+    ob->set_acquired_template(0);
     return 1;
 }

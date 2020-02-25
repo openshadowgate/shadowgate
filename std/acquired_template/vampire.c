@@ -32,17 +32,15 @@ mapping innate_spells()
 
 int apply_template(object ob)
 {
-    ob->set("undead",1);
+    ob->set_acquired_template("vampire");
     ob->set_property("undead",1);
-    ob->set("vampire",1);
     ob->add_bloodlust(20000);
     return 1;
 }
 
 int remove_template(object ob)
 {
-    ob->delete("undead");
     ob->remove_property("undead");
-    ob->delete("vampire");
+    ob->set_acquired_template(0);
     return 1;
 }

@@ -1,32 +1,28 @@
 #include <std.h>
 
-string *races_allowed()
+string* races_allowed()
 {
-    return ({"human", "ratkin"});
+    return ({"human", "half-elf", "half-drow", "half-orc", "elf", "drow"});
 }
-
-/*
-  Bostly homebrew, some things are based on rules in Lords of the wild
-  Wererat plague lycanthropy powers are in wererat shapes
-*/
 
 mapping innate_spells()
 {
     return ([
+                "replay tracks" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                 "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-                "stinking cloud" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-                "wererat shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "heart of the wild" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "weretiger shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                 ]);
 }
 
 int apply_template(object ob)
 {
-    ob->set("wererat",1);
+    ob->set_acquired_template("weretiger");
     return 1;
 }
 
 int remove_template(object ob)
 {
-    ob->delete("wererat");
+    ob->set_acquired_template(0);
     return 1;
 }

@@ -10,7 +10,7 @@ void create()
     set_spell_name("repulsion");
     set_spell_level(([ "cleric" : 6, "inquisitor" : 6, "mage" : 6]));
     set_spell_sphere("abjuration");
-    set_domains("protection");
+    set_domains(({"protection", "law"}));
     set_syntax("cast CLASS repulsion");
     set_damage_desc("perpetually removes attackers for clevel / 8 + 1 rounds");
     set_description("This spell is a modification of armor spell. With this you place a force field around yourself that will push everyone aiming to harm you away, perpetually removing them from combat. Strong willed will pass through the shield.");

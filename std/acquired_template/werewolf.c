@@ -20,15 +20,14 @@ mapping innate_spells()
         ]);
 }
 
-
 int apply_template(object ob)
 {
-    ob->set("werewolf",1);
+    ob->set_acquired_template("werewolf");
     return 1;
 }
 
 int remove_template(object ob)
 {
-    ob->delete("werewolf");
+    ob->set_acquired_template(0);
     return 1;
 }

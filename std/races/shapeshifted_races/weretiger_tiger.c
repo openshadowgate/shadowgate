@@ -97,7 +97,7 @@ int shape_attack(object tp, object targ)
     object etp, * attackers;
     string* specials = ({});
     int i, chance, dice;
-    string RND_COLORS = ({ "%^ORANGE%^", "%^BOLD%^%^BLACK", "%^RED%^" });
+    string RND_COLORS = ({ "%^ORANGE%^", "%^BOLD%^%^BLACK%^", "%^RED%^" });
     string clr = RND_COLORS[random(sizeof(RND_COLORS))];
 
     etp = environment(tp);

@@ -25,13 +25,13 @@ mapping innate_spells()
 int apply_template(object ob)
 {
     ob->set_property("undead",1);
-    ob->set("undead",1);
+    ob->set_acquired_template("undead");
     return 1;
 }
 
 int remove_template(object ob)
 {
-    ob->delete("undead");
     ob->remove_property("undead");
+    ob->set_acquired_template(0);
     return 1;
 }
