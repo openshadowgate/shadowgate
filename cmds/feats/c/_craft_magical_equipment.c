@@ -6,7 +6,7 @@ inherit FEAT;
 void create() {
     ::create();
     feat_type("permanent");
-    feat_category("NonCombat");
+    feat_category("ArcaneSpellcraft");
     feat_name("craft magical equipment");
     feat_syntax("craft enchant");
     feat_desc("This feat allows a character to go beyond the normal range of crafting skill, with the ability to make magically imbued arms and armor with any craft skill they are adept in. Craft magical equipment's effectiveness is based on the user's various crafting skills. Swords require craft, weaponsmith clothing requires craft, tailor, etc.

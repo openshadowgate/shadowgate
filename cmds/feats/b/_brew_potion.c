@@ -6,7 +6,7 @@ inherit FEAT;
 void create() {
     ::create();
     feat_type("permanent");
-    feat_category("NonCombat");
+    feat_category("ArcaneSpellcraft");
     feat_name("brew potion");
     feat_desc("This feat allows a character of competent healing ability to use their knowledge
 in the crafting of various oils, potions, poisons and other alchemical brews.
