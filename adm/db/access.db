@@ -108,8 +108,7 @@
 (/doc/help): (all)[r] (mentor)[rw] (assist)[rw] (superuser)[rw] (area)[rw] (help)[rw]
 
 (/log): (all)[r] (Log)[rw] (assist)[rw] (superuser)[rw] (daemon)[rw]
-(/log/avlog): (Log)[rw] (superuser)[r] (all)[r]
-(/log/plog): (Log)[rw] (superuser)[r] (all)[r]
+(/log/tshlog): (Log)[rw] (superuser)[r] (all)[r]
 (/log/adm): (superuser)[rw] (law_c)[r]
 (/log/adm/law): (superuser)[rw] (law_c)[rw]
 (/log/watch): (superuser)[rw] (law_c)[rw]
