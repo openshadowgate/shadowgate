@@ -4,8 +4,9 @@
  */
 
 
-string possessive(mixed val) {
-    switch(objectp(val) ? (string)val->query_gender() : (string)val) {
+string possessive(mixed val)
+{
+    switch (objectp(val) ? (string)val->query_gender() : (string)val) {
     case "male": return "his";
     case "female": return "her";
     case "other": return "their";
@@ -13,8 +14,9 @@ string possessive(mixed val) {
     }
 }
 
-string nominative(mixed val) {
-    switch(objectp(val) ? (string)val->query_gender() : (string)val) {
+string nominative(mixed val)
+{
+    switch (objectp(val) ? (string)val->query_gender() : (string)val) {
     case "male": return "he";
     case "female": return "she";
     case "other": return "they";
@@ -22,11 +24,12 @@ string nominative(mixed val) {
     }
 }
 
-string objective(mixed val) {
-    switch(objectp(val) ? (string)val->query_gender() : (string)val) {
+string objective(mixed val)
+{
+    switch (objectp(val) ? (string)val->query_gender() : (string)val) {
     case "male": return "him";
     case "female": return "her";
-    case "other": return "their";
+    case "other": return "them";
     default: return "it";
     }
 }

@@ -102,7 +102,7 @@ void execute_attack()
     {
 
         define_base_damage(0);
-        tell_room(place,"%^BOLD%^%^BLACK%^Sh%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^d%^RESET%^%^ORANGE%^o%^BOLD%^%^BLACK%^ws around "+caster->QCN+" caress "+caster->QP+" enemies as!",({caster,target}));
+        tell_room(place,"%^BOLD%^%^BLACK%^Sh%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^d%^RESET%^%^ORANGE%^o%^BOLD%^%^BLACK%^ws around "+caster->QCN+" caress "+caster->QP+" enemies!",({caster,target}));
         tell_object(caster,"%^BOLD%^%^BLACK%^Sh%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^d%^RESET%^%^ORANGE%^o%^BOLD%^%^BLACK%^ws around you caress your enemies.");
         for(i=0;i<sizeof(attackers);i++)
         {

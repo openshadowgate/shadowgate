@@ -47,6 +47,7 @@ int cmd_drag(string str){
    }
 
    TP->set_draggee(who);
+   who->set_property("draggee", TP);
 
    tell_room(ETP,"%^BOLD%^%^GREEN%^"+TPQCN+" heaves "+who->query_cap_name()+" up and starts to drag "+who->query_objective()+".",({who,TP}));
    tell_object(TP,"%^BOLD%^%^GREEN%^You heave "+who->query_cap_name()+" up and start to drag "+who->query_objective()+".");

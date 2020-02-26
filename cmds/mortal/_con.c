@@ -35,10 +35,11 @@ int cmd_con(string str)
 
         if (partyname != "") {
             theparty = PARTY_D->query_party_members(partyname);
-        }
-
-        if (sizeof(theparty)) {
-            presentparty = filter_array(theparty, (: environment($1) == $2 :), ETP);
+            if (sizeof(theparty)) {
+                presentparty = filter_array(theparty, (: environment($1) == $2:), ETP);
+            }
+        } else {
+            presentparty = ({ TP });
         }
 
         if (sizeof(presentparty)) {

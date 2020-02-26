@@ -23,9 +23,13 @@ void create()
 
 int preSpell()
 {
-    if(caster->query_property("nimbus"))
-    {
-        tell_object(caster,"You are still affected by shield of law or another nimbus spell.");
+    int align = caster->query_true_align();
+    if (caster->query_property("nimbus")) {
+        tell_object(caster, "You are still affected by shield of law or another nimbus spell.");
+        return 0;
+    }
+    if (align > 3) {
+        tell_object(caster, "You are of improper alignment to use this spell!");
         return 0;
     }
     return 1;
