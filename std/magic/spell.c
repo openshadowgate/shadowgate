@@ -2117,7 +2117,7 @@ void define_base_spell_level_bonus()
     }
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power")) {
-        sdamage_adjustment += 4;
+        sdamage_adjustment += 2;
     }
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
@@ -3007,13 +3007,12 @@ varargs int mind_immunity_check(object obj, string type)
  */
 int mind_immunity_damage(object obj)
 {
-    if(mind_immunity_check(obj))
-    {
-        damage_targ(obj, obj->return_target_limb(), sdamage * 4 / 5,"mental");
+    if (mind_immunity_check(obj)) {
+        damage_targ(obj, obj->return_target_limb(), sdamage * 4 / 5, "mental");
         return 1;
-    }
-    else
+    }else {
         return 0;
+    }
 }
 
 void help()
