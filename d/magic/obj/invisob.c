@@ -8,7 +8,7 @@ int move_ok, prof;
 /**
  * Default invisibility messages
  */
-mapping messages = (["tpim":"%^BOLD%^%^BLUE%^A dark mist swirls about, wrapping itself around you, concealing your form from view.\n%^CYAN%^Type<appear> to become visible again.",
+mapping messages = (["tpim":"%^BOLD%^%^BLUE%^A dark mist swirls about, wrapping itself around you, concealing your form from view.\n%^CYAN%^Type <appear> to become visible again.",
                      "tpeim":"%^BOLD%^%^BLUE%^A dark mist swirls about, wrapping itself around, concealing from view.",
                      "tpdm":"%^YELLOW%^A dark mist hisses and fizzles as it sprays off your skin, unveiling you to view.",
                      "tpedm":"%^BOLD%^%^BLUE%^From an indiscernible point in the air before you, a dark mist hisses and fizzles as it sprays from it, and below it."]);
@@ -156,4 +156,3 @@ int save_me(string file) {
 }
 int is_detectable() { return 0; }
 int query_invis() { return 1; }
-

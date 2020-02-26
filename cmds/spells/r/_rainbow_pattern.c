@@ -48,14 +48,14 @@ void spell_effect(int prof)
             continue;
         if(foe->query_property("fascinated"))
             continue;
-        if(do_save(target,0))
+        if(do_save(foe,0) || mind_immunity_damage(foe))
         {
-            tell_object(target,"%^BOLD%^%^WHITE%^%^You manage to avert your gaze of the hypnotic pattern.");
+            tell_object(foe,"%^BOLD%^%^WHITE%^%^You manage to avert your gaze of the hypnotic pattern.");
         }
         else
         {
             tell_object(foe,"%^BOLD%^%^WHITE%^You can not shrug of distracting patterns.");
-            tell_room(place,"%^BOLD%^%^WHITE%^"+foe->QCN+" seems to be fascinated by the pattern.",target);
+            tell_room(place,"%^BOLD%^%^WHITE%^"+foe->QCN+" seems to be fascinated by the pattern.",foe);
             foe->set_property("fascinated",1);
             victims+=({foe});
 

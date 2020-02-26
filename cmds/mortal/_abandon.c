@@ -196,41 +196,42 @@ int cmd_abandon(string str)
     int class_level,cost,drop,lvladjust = 0,i,feedlevel,classlvls;
     object class_ob;
 
-    if(!objectp(TP)) { return 0; }
-    if(!stringp(str) || str == "" || str == " ")
-    {
-        tell_object(TP,"%^BOLD%^You must enter a class that you want to abandon.%^RESET%^");
+    if (!objectp(TP)) {
+        return 0;
+    }
+    if (!stringp(str) || str == "" || str == " ") {
+        tell_object(TP, "%^BOLD%^You must enter a class that you want to abandon.%^RESET%^");
         return 1;
     }
 
-    classes = (string *)TP->query_classes();
-    if(!sizeof(classes))
-    {
-        tell_object(TP,"%^BOLD%^You don't have a class yet, try this later.%^RESET%^");
+    classes = (string*)TP->query_classes();
+    if (!sizeof(classes)) {
+        tell_object(TP, "%^BOLD%^You don't have a class yet, try this later.%^RESET%^");
         return 1;
     }
 
-    for(i=0;i<sizeof(classes);i++)
-    {
-        class_ob = find_object_or_load(DIR_CLASSES+"/"+classes[i]+".c");
-        if(!objectp(class_ob))
-        {
+    myrace = TP->query_race();
+    mysubrace = TP->query("subrace");
+    file = "/std/races/" + myrace + ".c";
+    if (file_exists(file)) {
+        lvladjust = (int)file->level_adjustment(mysubrace);
+    }
+
+    for (i = 0; i < sizeof(classes); i++) {
+        class_ob = find_object_or_load(DIR_CLASSES + "/" + classes[i] + ".c");
+        if (!objectp(class_ob)) {
             tell_object(TP, "There's something wrong with one of your classes, please contact a wiz and try again later.");
             return 1;
         }
-        if(class_ob->is_prestige_class() &&
-           str != classes[i] &&
-           member_array(str,class_ob->query_base_classes()) !=-1)
-        {
-            tell_object(TP, "You must abandon any prestige classes before abandoning base class levels.");
+        if (class_ob->is_prestige_class() &&
+            str != classes[i] &&
+            member_array(str, class_ob->query_base_classes()) != -1 &&
+            TP->query_class_level(str) > 20 - lvladjust) {
+            tell_object(TP, "You must abandon any prestige classes before abandoning more than twenty base class levels.");
             return 1;
         }
     }
 
-    myrace = (string)TP->query_race();
-    mysubrace = (string)TP->query("subrace");
-    file = "/std/races/"+myrace+".c";
-    if(file_exists(file)) { lvladjust = (int)file->level_adjustment(mysubrace); }
 
     if((int)TP->query_character_level() < (11 - lvladjust))
     {
