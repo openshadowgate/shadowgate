@@ -431,10 +431,8 @@ void make_new_hitpoint_rolls(object obj)
 void change_my_domains(){
    string *domains;
    if(!objectp(TP)) { return; }
-//   if(avatarp(TP)) { return; }
    if(!(TP->is_class("cleric")) && sizeof(query_divine_domain())) {
      set_divine_domain(({})); // reset domains now that divine can multi! Ranger/pali etc.
-     tell_object(TP,"%^BOLD%^%^RED%^Vaping divine domains as a non-cleric to prevent multiclass bugging.");
    }
    if(query("domains_changed")){ return; }
    if(!TP->is_class("cleric")){ return; }
@@ -442,7 +440,7 @@ void change_my_domains(){
    if(!pointerp(domains)){ domains = ({}); }
    tell_object(TP,"%^BOLD%^%^RED%^There has been a shifting of domains, "+
       "and you must visit your temple to reselect your domains.  "+
-      "Please see <help deities> or the individual help file for your "+
+      "See <help deities> or the individual help file for your "+
       "deity for the list of domains your deity can access.%^RESET%^");
    tell_object(TP,"%^YELLOW%^NOTE: %^WHITE%^Not all deities had their "+
       "domains changed, but many of the spells within domains did "+
@@ -487,10 +485,9 @@ void redo_my_languages() {
     mylang = TP->query_lang("ogre-magi");
     TP->remove_lang("ogre-magi");
   }
-  if(mylang) {
-    TP->set_lang("giant",mylang);
-    tell_object(TP,"%^BOLD%^%^RED%^Reinitializing your languages, "
-"please contact a wiz if anything seems wrong.%^RESET%^");
+  if (mylang) {
+      TP->set_lang("giant", mylang);
+      tell_object(TP, "%^BOLD%^%^RED%^Reinitializing your languages, contact a staff member if anything seems wrong.%^RESET%^");
   }
   mylang = 0;
 
@@ -584,17 +581,8 @@ void cull_levels()
 
     switch(player_position)
     {
-    case "high mortal":
-        tell_object(TP,"%^RESET%^%^B_BLUE%^Max levels for players have been changed.  The maximum level for "
-            "a single class character is now "+CHARACTER_LEVEL_CAP+"  Your levels and hitpoints have been adjusted accordingly.  "
-            "Your lost experience has been noted.%^RESET%^");
-        break;
     case "player":
-        tell_object(TP,"%^RESET%^%^B_BLUE%^You are not flagged for advanced player status, so your maximum "
-            "level has been reduced in accordance with the current levelcap standards.  The new level cap "
-            "for single class players who are not AP rank has been changed to "+CHARACTER_LEVEL_CAP+".  Your experience points "
-            "and hitpoints have been reduced and your loss "
-            "has been noted.  Please notify an immortal if you think this is in error.%^RESET%^");
+        tell_object(TP,"%^RESET%^%^B_BLUE%^You are not flagged for advanced player status, so your maximum level has been reduced in accordance with the current levelcap standards. The new level cap for single class players who are not AP rank has been changed to "+CHARACTER_LEVEL_CAP+". Your experience points and hitpoints have been reduced and your loss has been noted. Notify an immortal if you think this is in error.%^RESET%^");
         break;
     default:
         tell_object(TP,"%^RESET%^%^B_BLUE%^Something terrible has happened to your character, contact "
@@ -672,7 +660,7 @@ void get_email(string e) {
   write("\n");
   if ( sscanf(e, "%s@%s", who, where) != 2 ) {
     write("Sorry, email must be in the form of user@host");
-    message("prompt", "Please reenter your email address: ", this_player());
+    message("prompt", "Reenter your email address: ", this_player());
     input_to("get_email");
     return;
   }
@@ -1030,9 +1018,9 @@ int quit()
     //crash_money = 0;
     if (query_followers()) clear_followers();
     TO->set_property("silent_equip",1);
-    message("environment", "We hope you enjoyed playing ShadowGate and will be back soon.", TO);
-    message("environment", "Please consider voting for us on mudlistings.", TO);
-    message("environment", "----", TO);
+    message("environment", "We hope you enjoyed playing and will be back soon.", TO);
+    message("environment", "Have a nice cake!", TO);
+    message("environment", "--Bye--", TO);
     if(objectp(ETO)) { set_primary_start(file_name(ETO)); }
     else { set_primary_start("/d/shadow/room/pass/pass3"); }
     if (TO->query_invis() && !wizardp(TO)) { TO->set_invis(); }
@@ -1930,8 +1918,7 @@ void resetLevelForExp(int expLoss)
         {
             if(member_array(active_class,(string *)TO->query_classes()) == -1)
             {
-                return notify_fail("Your active_class is set to a class that you do not currently have, "
-                    "please notify an immortal immediately.");
+                return notify_fail("Your active_class is set to a class that you do not currently have.");
             }
 
             my_levels = TO->query_levels();
@@ -2233,8 +2220,8 @@ void write_messages()
 
     force_me("bboard info");
     message("login", "\n%^WHITE%^-=%^BOLD%^<%^BOLD%^%^GREEN%^Voting for ShadowGate%^WHITE%^>%^RESET%^%^WHITE%^=-%^RESET%^\n", TO);
-    message("login", "%^BOLD%^%^GREEN%^  Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
-    message("login", "%^BOLD%^%^GREEN%^  Use %^WHITE%^<vote>%^GREEN%^%^BOLD%^ command to do it.%^RESET%^", TO);
+    message("login", "%^BOLD%^%^GREEN%^ Consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
+    message("login", "%^BOLD%^%^GREEN%^ Use %^WHITE%^<vote>%^GREEN%^%^BOLD%^ command to do it.%^RESET%^", TO);
     message("login", "", TO);
 
     if (wizardp(TO)) {
