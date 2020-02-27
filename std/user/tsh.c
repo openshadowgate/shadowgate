@@ -117,6 +117,10 @@ string write_prompt()
             am_invis += (!this_player()->query_hidden()) ? "." : "S";
         }
         shape = TP->query_property("shapeshifted");
+        if (!objectp(shape)) {
+            shape = TP->query_property("altered");
+        }
+
         {
             int lvl = query_character_level();
             if(lvl>1&&lvl<100)
