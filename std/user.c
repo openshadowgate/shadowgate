@@ -2232,9 +2232,9 @@ void write_messages()
     int i;
 
     force_me("bboard info");
-    message("login", "\n%^ORANGE%^-=%^BOLD%^<%^BOLD%^%^WHITE%^Voting for ShadowGate%^ORANGE%^>%^RESET%^%^ORANGE%^=-%^RESET%^", TO);
-    message("login", "%^BOLD%^Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
-    message("login", "%^BOLD%^Use %^ORANGE%^<vote>%^WHITE%^%^BOLD%^ command to do it.%^RESET%^", TO);
+    message("login", "\n%^WHITE%^-=%^BOLD%^<%^BOLD%^%^GREEN%^Voting for ShadowGate%^WHITE%^>%^RESET%^%^WHITE%^=-%^RESET%^\n", TO);
+    message("login", "%^BOLD%^%^GREEN%^  Please, consider voting for ShadowGate to bring in more players!%^RESET%^", TO);
+    message("login", "%^BOLD%^%^GREEN%^  Use %^WHITE%^<vote>%^GREEN%^%^BOLD%^ command to do it.%^RESET%^", TO);
     message("login", "", TO);
 
     if (wizardp(TO)) {
