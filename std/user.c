@@ -1010,6 +1010,13 @@ int quit()
 {
     int x, cnum;
     object *inv, *spells_on;
+    string * byemess = ({
+            "Have a nice cake!",
+                "Eat well!",
+                "Don't feed pixies after the midnight!",
+                "Sweet dreams!",
+                "You be well now!",
+        });
 
     break_all_spells();
     set_hidden(0);
@@ -1019,7 +1026,7 @@ int quit()
     if (query_followers()) clear_followers();
     TO->set_property("silent_equip",1);
     message("environment", "We hope you enjoyed playing and will be back soon.", TO);
-    message("environment", "Have a nice cake!", TO);
+    message("environment", byemess[random(sizeof(byemess))], TO);
     message("environment", "--Bye--", TO);
     if(objectp(ETO)) { set_primary_start(file_name(ETO)); }
     else { set_primary_start("/d/shadow/room/pass/pass3"); }
