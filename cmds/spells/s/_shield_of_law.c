@@ -15,7 +15,7 @@ void create()
     set_domains("law");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS shield of law");
-    set_damage_desc("divine, 4 AC, 4 to all saves");
+    set_damage_desc("divine damage, 4 AC, 4 to all saves");
     set_description("You are surrounded by a dim blue glow, an aura that protects you and damages any unlawful creature that dares to attack you. This is a nimbus family of spells so it won't work together with similar spells.");
     set_property("magic",1);
     traveling_aoe_spell(1);
@@ -28,7 +28,7 @@ int preSpell()
         tell_object(caster, "You are still affected by shield of law or another nimbus spell.");
         return 0;
     }
-    if (align > 3) {
+    if (!(align == 1 || align == 2 || align == 3)) {
         tell_object(caster, "You are of improper alignment to use this spell!");
         return 0;
     }

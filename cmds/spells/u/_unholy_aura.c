@@ -14,7 +14,7 @@ void create()
     set_domains("evil");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS unholy aura");
-    set_damage_desc("untyped, 4 AC, 4 to all saves");
+    set_damage_desc("divine damage, 4 AC, 4 to all saves");
     set_description("You are surrounded by an aura of evil that will harm all your opponents and will slightly protect you. This is nimbus-family spell that won't work with other nimbuses.");
     set_property("magic",1);
     traveling_aoe_spell(1);
@@ -28,7 +28,7 @@ int preSpell()
         tell_object(caster, "You are still affected by shield of law or another nimbus spell.");
         return 0;
     }
-    if (!( align % 3)) {
+    if (!(align == 3 || align == 6 || align == 9)) {
         tell_object(caster, "You are of improper alignment to use this spell!");
         return 0;
     }
@@ -99,7 +99,7 @@ void execute_attack(){
             if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
             tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the darkness as you strike "
                         ""+caster->QCN+"!");
-            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"untyped");
+            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"divine");
         }
     }
     prepend_to_combat_cycle(place);
