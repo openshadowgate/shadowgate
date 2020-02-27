@@ -1045,18 +1045,31 @@ void log_exp(int x, string type, object tmp)
 
 int exp_buffer(int exp)
 {
-    int level,max,total_exp,allowed;
-    if(!objectp(TO)) { return exp; }
-    if(!userp(TO)) { return exp; }
-    if(avatarp(TO)) { return exp; }
-    if(exp < 1) { return exp; }
-    if(!intp(level = query_highest_level())) { return exp; }
+    int level, max, total_exp, allowed;
+    if (!objectp(TO)) {
+        return exp;
+    }
+    if (!userp(TO)) {
+        return exp;
+    }
+    if (exp < 1) {
+        return exp;
+    }
+    if (!intp(level = query_highest_level())) {
+        return exp;
+    }
     total_exp = (int)TO->query_exp();
-    max = EXP_NEEDED[CHARACTER_LEVEL_CAP +1 ];
-    if(query("test_character")) { max = EXP_NEEDED[TEST_CHARACTER_LEVEL_CAP + 1]; }
+    max = EXP_NEEDED[CHARACTER_LEVEL_CAP + 1 ];
+    if (query("test_character")) {
+        max = EXP_NEEDED[TEST_CHARACTER_LEVEL_CAP + 1];
+    }
     allowed = max - total_exp;
-    if(allowed < 0) { allowed = 0; }
-    if(exp > allowed) { return allowed; }
+    if (allowed < 0) {
+        allowed = 0;
+    }
+    if (exp > allowed) {
+        return allowed;
+    }
     return exp;
 }
 
@@ -1152,9 +1165,6 @@ void add_exp(int exp)
     }
     if (has_XP_tax() && exp > 0) {
         exp = use_XP_tax(exp);
-    }
-    if (has_XP_rest() && exp > 0) {
-        exp = use_XP_rest(exp);
     }
     exp = exp_buffer(exp);
 
