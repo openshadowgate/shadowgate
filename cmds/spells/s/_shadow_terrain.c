@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("shadow terrain");
-    set_spell_level(([ "mage":7, "bard":6]));
+    set_spell_level(([ "classless":6]));
     set_spell_sphere("illusion");
     set_domains("cold");
     set_syntax("cast CLASS shadow terrain as DESCRIPTION");

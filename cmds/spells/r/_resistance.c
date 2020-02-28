@@ -64,6 +64,7 @@ spell_effect(int prof)
 void dest_effect()
 {
     if (objectp(caster) && caster->query_property("morale-boost")) {
+        tell_object(caster,"%^CYAN%^An increase of morale you felt washes away as your resistance fades.");
         caster->add_saving_bonus("all", -bonus);
         caster->remove_property("morale-boost");
     }
