@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("ruin");
-    set_spell_level(([ "mage" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS ruin on TARGET");
     set_damage_desc("untyped");

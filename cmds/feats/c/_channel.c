@@ -9,7 +9,7 @@ void create()
     feat_category("Presence");
     feat_name("channel");
     feat_prereq("Cleric or Paladin");
-    feat_desc("This power allows divine caster to channel primal energies (negatie or positive) at their allies and foes. The type of energy will depend on your affinity, e.g. undead will channel negative energy while living will channel positive energy. This feat will auto determine which type of energy is appliable to allies and enemies.");
+    feat_desc("This power allows divine caster to channel primal energies (negative or positive) at their allies and foes. The type of energy will depend on your affinity, e.g. undead will channel negative energy while living will channel positive energy. This feat will auto determine which type of energy is appliable to allies and enemies.");
     feat_syntax("channel");
     set_target_required(0);
 }

@@ -1,5 +1,5 @@
 //Switching with Ice Shield, so this will be level 5.
-//This is way too good to be a 2nd level :)  Rebalancing 
+//This is way too good to be a 2nd level :)  Rebalancing
 //the domains ~Circe~ 5/5/08
 #include <spell.h>
 #include <magic.h>
@@ -11,9 +11,9 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("frost breath");
-    set_spell_level(([ "cleric" : 5 ]));
-    set_spell_sphere("weather");
-    set_spell_domain("cold");
+    set_spell_level(([ "cleric" : 6, "druid":6]));
+    set_spell_sphere("invocation_evocation");
+    set_domains("cold");
     set_syntax("cast CLASS frost breath on TARGET");
     set_description("This spell sends a wave of cold shards out in a cone shapped pattern from the caster's cupped hands"
 ".  It will hit any enemies who are not able to get out of the way.  The extreme cold can sometimes damage enemies who "
@@ -21,7 +21,7 @@ void create(){
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    splash_spell(1);    
+    splash_spell(1);
     set_immunities(({"cold"}));
     set_save("reflex");
 }
@@ -75,10 +75,10 @@ void spell_effect(int prof){
                     ""+target->QCN+".",({ caster, target}) );
           spell_kill(attackers[i],caster);
           if(!do_save(attackers[i],0))
-            //if(!SAVING_D->saving_throw(attackers[i],"spell",0))                
-            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage,"cold");                
-          else                 
-            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage/2,"cold");                
+            //if(!SAVING_D->saving_throw(attackers[i],"spell",0))
+            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage,"cold");
+          else
+            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage/2,"cold");
         }
         else
         {

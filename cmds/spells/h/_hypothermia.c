@@ -1,7 +1,7 @@
-//Updated by ~Circe~ 5/13/08 to be more in line with the 
-//other 7th level spells.  Did only clevel,6 damage and 
-//drained a slight bit of stamina.  Made to last a few 
-//rounds with a minor damage over time and paralyzation 
+//Updated by ~Circe~ 5/13/08 to be more in line with the
+//other 7th level spells.  Did only clevel,6 damage and
+//drained a slight bit of stamina.  Made to last a few
+//rounds with a minor damage over time and paralyzation
 //at the end.  Rebalancing cleric domains
 
 #include <spell.h>
@@ -10,8 +10,8 @@
 
 inherit SPELL;
 //added this here as a global variable - so that it
-//can be kept track of - previously it was 
-//being reset to 0 each time hypo was being 
+//can be kept track of - previously it was
+//being reset to 0 each time hypo was being
 //called and as a result the spell was neverending - Saide
 int hypo_count = 0;
 
@@ -20,8 +20,8 @@ void create(){
     set_author("ares");
     set_spell_name("hypothermia");
     set_spell_level(([ "cleric" : 7 ]));
-    set_spell_sphere("combat");
-    set_spell_domain("cold");
+    set_spell_sphere("invocation_evocation");
+    set_domains("cold");
     set_syntax("cast CLASS hypothermia on TARGET");
     set_description("This spell creates a freezing ray of bitter cold.  The ray will seek to drain the heat from the "
 "target as the cold moves through his body.  Because it is a ray, there is a chance the target can dodge some of the "
@@ -57,7 +57,7 @@ void spell_effect(int prof){
         tell_room(place,"%^BOLD%^%^WHITE%^A thin blue ray swirled with white"+
 		" streaks from "+caster->QCN+"'s outstretched hand."+
 		"\n%^BOLD%^%^CYAN%^"+target->QCN+" manages to slightly dodge it!");
-        damage = sdamage;
+        damage = sdamage / 2;
         damage_targ(target,target->return_target_limb(),damage,"cold");
         spell_successful();
         dest_effect();
@@ -78,7 +78,7 @@ void spell_effect(int prof){
         damage_targ(target,target->return_target_limb(),damage,"cold");
         target->use_stamina(clevel/2);
         call_out("hypo",ROUND_LENGTH,target);
-        spell_successful();    
+        spell_successful();
     }
 }
 
