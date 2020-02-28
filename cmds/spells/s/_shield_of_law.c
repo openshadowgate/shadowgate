@@ -95,11 +95,11 @@ void execute_attack(){
     if(sizeof(attackers))
     {
         define_base_damage(0);
-        tell_room(place,"%^BLUE%^The haze around "+caster->QCN+" forcefully repels "+caster->QP+" enemies!",({caster,target}));
-        tell_object(caster,"%^BLUE%^The haze around you forcefully repels your enemies!");
+        tell_room(place,"%^BLUE%^The lawful energies around "+caster->QCN+" forcefully repels "+caster->QP+" enemies!",({caster,target}));
+        tell_object(caster,"%^BLUE%^The lawful energies around you forcefully repels your enemies!");
         for(i=0;i<sizeof(attackers);i++){
             if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
-            tell_object(attackers[i],"%^BOLD%^%^BLUE%^You are painfully repelled as you strike "+caster->QCN+"!");
+            tell_object(attackers[i],"%^BOLD%^%^BLUE%^You are painfully repelled by the lawful energies as you strike "+caster->QCN+"!");
             damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"divine");
         }
     }

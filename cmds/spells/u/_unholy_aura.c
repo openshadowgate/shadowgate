@@ -93,11 +93,11 @@ void execute_attack(){
     if(sizeof(attackers))
     {
         define_base_damage(0);
-        tell_room(place,"%^BOLD%^%^BLACK%^The darkness around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
-        tell_object(caster,"%^BOLD%^%^BLACK%^The darkness around you falls upon your enemies!");
+        tell_room(place,"%^BOLD%^%^BLACK%^The unholy darkness around "+caster->QCN+" falls upon "+caster->QP+" enemies!",({caster,target}));
+        tell_object(caster,"%^BOLD%^%^BLACK%^The unholy darkness around you falls upon your enemies!");
         for(i=0;i<sizeof(attackers);i++){
             if(SAVING_D->saving_throw(attackers[i],"spell",0)) { continue; }
-            tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the darkness as you strike "
+            tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are scorched by the unholy darkness as you strike "
                         ""+caster->QCN+"!");
             damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"divine");
         }
