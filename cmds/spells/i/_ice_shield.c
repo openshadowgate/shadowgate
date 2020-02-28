@@ -1,5 +1,5 @@
 // ice shield
-//Moved down to the low level Cold domain spell in place of 
+//Moved down to the low level Cold domain spell in place of
 //Frost Breath, which was way too good.  ~Circe~ 5/5/08
 //Rebalancing domains
 #include <std.h>
@@ -13,9 +13,10 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("ice shield");
-    set_spell_level(([ "cleric" : 3 ]));
-    set_spell_sphere("combat");
-    set_spell_domain("cold");
+    set_spell_level(([ "cleric" : 4 ]));
+    set_spell_sphere("invocation_evocation");
+    set_domains("cold");
+    set_damage_desc("cold, 2 AC");
     set_syntax("cast CLASS ice shield");
     set_description("This spell will protect the caster in a field of bitter cold actic air.  It gives a slight bonus to "
 "the caster's armor, additionally, any enemies attacking the caster must make a saving throw or suffer damage from the "

@@ -55,8 +55,10 @@ void spell_effect(int prof)
 
         dam = sdamage;
 
-        if(!do_save(attackers[i],0))
-            dam/=2;
+        if (do_save(attackers[i], 0)) {
+            dam /= 2;
+        }
+
         damage_targ(attackers[i],attackers[i]->return_target_limb(),dam,"cold");
     }
 
