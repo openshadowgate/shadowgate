@@ -7,7 +7,7 @@ int cmd_fortune()
     string * fortunes;
 
     fortunes = explode(read_file(FORTUNEFILE),"\n");
-    write("%^BLUE%^"+fortunes[random(sizeof(fortunes))]);
+    write("%^BLUE%^The winds whisper: "+fortunes[random(sizeof(fortunes))]);
 
     return 1;
 }
