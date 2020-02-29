@@ -102,7 +102,7 @@ void dest_effect()
     remove_call_out("room_check");
     if (objectp(caster)) {
         tell_object(caster,"%^RESET%^%^BOLD%^With a final loud pop, the electrical energy coursing through your body dissipates in an instant.");
-        tell_room(environment(caster),"%^RESET%^%^BOLD%^With a final loud pop, the electrical energy coursing through" +caster->QCN+"'s body dissipates in an instant.",caster);
+        tell_room(environment(caster),"%^RESET%^%^BOLD%^With a final loud pop, the electrical energy coursing through " +caster->QCN+"'s body dissipates in an instant.",caster);
 	    caster->remove_property_value("added short",({"%^YELLOW%^ (crackling with electrical energy)%^RESET%^"}));
     }
     ::dest_effect();

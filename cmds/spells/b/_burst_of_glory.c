@@ -40,8 +40,8 @@ int spell_effect()
     allies = distinct_array(allies);
     allies = filter_array(allies, (: environment($1) == $2 :), place);
 
-    tell_room(place, "%^BOLD%^%^WHITE%^Burs%^RESET%^%^ORANGE%^t%^WHITE%^ of %^ORANGE%^w%^ORANGE%^a%^BOLD%^%^WHITE%^r%^RESET%^%^ORANGE%^m %^ORANGE%^l%^BOLD%^%^WHITE%^i%^RESET%^%^ORANGE%^g%^BOLD%^%^WHITE%^ht%^RESET%^%^WHITE%^ emanates into all directions outside of" + caster->QCN, caster);
-    tell_object(caster,"%^BOLD%^%^WHITE%^Bu%^RESET%^%^ORANGE%^r%^ORANGE%^s%^ORANGE%^t%^WHITE%^ of %^ORANGE%^l%^BOLD%^%^WHITE%^ight%^RESET%^%^WHITE%^ spreads into all directions from you, washing over your allies.");
+    tell_room(place, "%^RESET%^A %^BOLD%^%^WHITE%^burs%^RESET%^%^ORANGE%^t%^WHITE%^ of %^ORANGE%^w%^ORANGE%^a%^BOLD%^%^WHITE%^r%^RESET%^%^ORANGE%^m %^ORANGE%^l%^BOLD%^%^WHITE%^i%^RESET%^%^ORANGE%^g%^BOLD%^%^WHITE%^ht%^RESET%^%^WHITE%^ emanates into all directions from "+caster->QCN+".", caster);
+ tell_object(caster,"%^RESET%^A %^BOLD%^%^WHITE%^bu%^RESET%^%^ORANGE%^r%^ORANGE%^s%^ORANGE%^t%^WHITE%^ of %^ORANGE%^l%^BOLD%^%^WHITE%^ight%^RESET%^%^WHITE%^ spreads in all directions from you, washing over your allies.");
 
     foreach(ally in allies)
     {

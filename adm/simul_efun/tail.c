@@ -1,3 +1,9 @@
+/**
+ * Outputs (to the screen) last tail_bytes of the file.
+ *
+ * @param file File to read.
+ * @param tail_bytes How many bytes to you want to see
+ */
 varargs int tail(string file, int tail_bytes)
 {
     string str;
