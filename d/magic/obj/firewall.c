@@ -85,7 +85,7 @@ void monitor() {
        j = sizeof(foes);
        if(j)
        {
-           tell_room(environment(foes[k]),"%^BOLD%^%^RED%^"+caster->QCN+"'s enemies are singed by the flames!",foes[k]);
+           tell_room(environment(TO),"%^BOLD%^%^RED%^"+caster->QCN+"'s enemies are singed by the flames!",foes[k]);
            for(k=0;k<j;k++) {
                if(!objectp(foes[k])) continue;
                if(foes[k]->query_property("strength") &&

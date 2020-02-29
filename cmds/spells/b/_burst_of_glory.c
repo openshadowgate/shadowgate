@@ -50,7 +50,7 @@ int spell_effect()
 
         if(ally->query_property("blessed"))
         {
-            tell_room(place,"%^RESET%^%^WHITE%^The %^BOLD%^%^WHITE%^l%^RESET%^%^ORANGE%^i%^BOLD%^%^WHITE%^ght%^RESET%^%^WHITE%^ washes over" + ally->QCN + "%^WHITE%^, but nothing happens.%^RESET%^");
+            tell_room(place,"%^RESET%^%^WHITE%^The %^BOLD%^%^WHITE%^l%^RESET%^%^ORANGE%^i%^BOLD%^%^WHITE%^ght%^RESET%^%^WHITE%^ washes over " + ally->QCN + "%^WHITE%^, but nothing happens.%^RESET%^");
             continue;
         }
 
