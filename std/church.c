@@ -212,7 +212,7 @@ int pray()
             if (thelevel > 11) {
                 TP->set_general_exp(myclass, EXP_NEEDED[((thelevel - 1) / 10) * 10]);
             }
-            TP->delete("pk_tial");
+            TP->delete("pk_trial");
         } else {
             if (exp > EXP_NEEDED[thelevel + 1]) {
                 exploss *= 2;
