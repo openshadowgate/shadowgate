@@ -25,7 +25,7 @@ inherit DAEMON;
 #define UMM ({"/d/attaya/tower/", "/d/islands/tonerra/lava/","/d/islands/common/eldebaro/newrooms/tomb*","/d/islands/common/aramanth/d"})
 
 #define AREAS      ({MED_H1, MED_H1, MED_H2, MED_H2, HIGH, HIGH, UMM})
-#define AREA_VALUE ({200000, 350000, 500000, 600000, 700000, 900000, 1000000})
+#define AREA_VALUE ({200000, 350000, 500000, 600000, 700000, 800000, 900000})
 
 #define MAXSIZE 25
 #define QOBJECT "/d/common/obj/misc/qobject.c"
@@ -48,13 +48,13 @@ inherit DAEMON;
                         ANTIOCH "ruins/mons/demon.c" : 556000 ,\
                         ATTAYA "mon/bishimon.c" : 900000 ,\
                         ATTAYA "mon/ashtar.c" : 900000 ,\
-                        ATTAYA "mon/callista.c":1200000 ,\
+                        ATTAYA "mon/callista.c":1000000 ,\
                         ATTAYA "mon/intruder.c" : 3000000 ,\
-                        ATTAYA "mon/phaeton.c" : 900000 ,\
-                        ATTAYA "mon/judatac.c" : 900000 ,\
-                        ATTAYA "mon/volkerps.c" : 900000 ,\
-                        ATTAYA "mon/magus.c" : 900000 ,\
-                        ATTAYA "mon/io.c" : 900000 ,\
+                        ATTAYA "mon/phaeton.c" : 700000 ,\
+                        ATTAYA "mon/judatac.c" : 700000 ,\
+                        ATTAYA "mon/volkerps.c" : 700000 ,\
+                        ATTAYA "mon/magus.c" : 700000 ,\
+                        ATTAYA "mon/io.c" : 700000 ,\
                         ATTAYA "mon/hunter.c" : 1000000 ,\
                         ATTAYA "mon/roper.c" : 1000000 ,\
                         DERRO "mon/elemental.c" : 300000 ,\
