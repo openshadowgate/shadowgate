@@ -434,7 +434,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             if (targ->query_property("shielded_by")) {
                 object shielder = targ->query_property("shielded_by");
                 if (objectp(targ->query_property("shielded_by")) && objectp(ENV(targ))) {
-                    if (present(shielder, ENV(targ))) {
+                    if (present(shielder, ENV(targ)) && !shielder->query_property("shielded_by")) {
                         damage /= 2;
                         shielder->cause_typed_damage(shielder, shielder->return_target_limb(), damage, type);
                     }
