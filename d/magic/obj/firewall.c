@@ -72,30 +72,38 @@ void monitor() {
    int k,j,dmg;
    object *foes;
 
-   if((!objectp(caster) || !present(caster->query_name(),ETO)) && !blocking) {
-       if(objectp(query_property("spell"))) {
+   if ((!objectp(caster) || !present(caster->query_name(), ETO)) && !blocking) {
+       if (objectp(query_property("spell"))) {
            query_property("spell")->dest_effect();
            return;
        }
        remove_call_out("monitor");
        TO->remove();
+       return;
    }
-   if(objectp(caster)) {
+   if (!objectp(environment(TO))) {
+       TO->remove();
+       return;
+   }
+   if (objectp(caster)) {
        foes = caster->query_attackers();
        j = sizeof(foes);
-       if(j)
-       {
-           tell_room(environment(TO),"%^BOLD%^%^RED%^"+caster->QCN+"'s enemies are singed by the flames!",foes[k]);
-           for(k=0;k<j;k++) {
-               if(!objectp(foes[k])) continue;
-               if(foes[k]->query_property("strength") &&
-                  strsrch(foes[k]->query_property("strength"),"fire") != -1)
+       if (j) {
+           tell_room(environment(TO), "%^BOLD%^%^RED%^" + caster->QCN + "'s enemies are singed by the flames!", foes[k]);
+           for (k = 0; k < j; k++) {
+               if (!objectp(foes[k])) {
                    continue;
-               tell_object(foes[k],"%^BOLD%^%^RED%^You get burned by the flames!");
+               }
+               if (foes[k]->query_property("strength") &&
+                   strsrch(foes[k]->query_property("strength"), "fire") != -1) {
+                   continue;
+               }
+               tell_object(foes[k], "%^BOLD%^%^RED%^You get burned by the flames!");
                dmg = spellob->query_sdamage();
-               foes[k]->cause_typed_damage(foes[k],foes[k]->return_target_limb(),dmg,"fire" );
-               if(objectp(foes[k]))
+               foes[k]->cause_typed_damage(foes[k], foes[k]->return_target_limb(), dmg, "fire");
+               if (objectp(foes[k])) {
                    foes[k]->continue_attack();
+               }
            }
        }
    }

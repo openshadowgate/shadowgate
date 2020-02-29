@@ -1,15 +1,28 @@
-int tail(string file) {
+varargs int tail(string file, int tail_bytes)
+{
     string str;
     int diff;
 
-    diff = file_size(file);
-    if (diff < 0) return 0;
+    if (!tail_bytes) {
+        tail_bytes = 2048;
+    }
 
-    diff -= 2048;
-    if (diff < 0) diff = 0;
-    str = read_bytes(file, diff, 2048);
-    if (!str) return 0;
-    if (diff) str = str[strsrch(str, "\n")+1..];
+    diff = file_size(file);
+    if (diff < 0) {
+        return 0;
+    }
+
+    diff -= tail_bytes;
+    if (diff < 0) {
+        diff = 0;
+    }
+    str = read_bytes(file, diff, tail_bytes);
+    if (!str) {
+        return 0;
+    }
+    if (diff) {
+        str = str[strsrch(str, "\n") + 1..];
+    }
 
     write(str);
 
