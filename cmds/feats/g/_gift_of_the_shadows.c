@@ -17,7 +17,7 @@ umbral sight, shield of shadows, shadow vortex, night armor, darkbolt, shadow bl
     set_required_for(({"shadow defense",}));
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() {return 1;}
 
 int prerequisites(object ob)
 {

@@ -16,7 +16,7 @@ void create()
     feat_desc("Lifeless shroud is a powerful swift ritual that surrounds caster in streams of negative energy they can direct at their will. This shroud of lifeless energy will aid unliving allies, healing them, and will harm all enemies, causing them to be blinded, sickened, shaken or harmed.");
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {

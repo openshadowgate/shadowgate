@@ -9,7 +9,7 @@ void create()
     feat_type("permanent");
     feat_category("RageProphet");
     feat_name("ragecaster");
-    feat_prereq("Raging Prophet L4");
+    feat_prereq("Rage Prophet L4");
     feat_desc("With this feat raging prophet can use offensive spells in the combat while being under effects of rage, those spells will also have full potency of their class.");
     permanent(1);
 }

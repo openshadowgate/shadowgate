@@ -17,7 +17,7 @@ If used without an argument this feat will pick up a random attacker.");
     set_save("fortitude");
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {

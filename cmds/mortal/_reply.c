@@ -104,11 +104,12 @@ int cmd_reply(string str)
        if(!targ_correspond) targ_correspond = ({});
        if(member_array(ob->query_name(),caster_correspond) != -1 && member_array(TP->query_name(),targ_correspond) != -1){} //intentionally empty
     }else{
-        if((TP->query_property("shapeshifted")) && (!FEATS_D->usable_feat(TP,"wild speech")))
+// removing this, makes no sense that you can't telepathy in were-shifts, mageforms, etc
+/*         if((TP->query_property("shapeshifted")) && (!FEATS_D->usable_feat(TP,"wild speech")))
         {
             tell_object(TP,"You can't reply while shapeshifted");
             return 1;
-        }
+        } */
        // str= "daemon/language_d"->translate(str, TP->query_spoken(), TP);
     }
 

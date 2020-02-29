@@ -79,7 +79,8 @@ int cmd_tell(string str) {
     return 0;
   }
 
-  if(ob->query_true_invis() || TP->query_true_invis() || avatarp(TP) || avatarp(ob)) {} // empty intentionally
+// removing this, makes no sense that you can't telepathy in were-shifts, mageforms, etc
+/*   if(ob->query_true_invis() || TP->query_true_invis() || avatarp(TP) || avatarp(ob)) {} // empty intentionally
   else
   {
       if((TP->query_property("shapeshifted")) && (!FEATS_D->usable_feat(TP,"wild speech")))
@@ -87,7 +88,7 @@ int cmd_tell(string str) {
           tell_object(TP,"You can't send tells while shapeshifted.");
           return 1;
       }
-  }
+  } */
 
   ignored = ob->query_ignored();
   if (!ignored) {

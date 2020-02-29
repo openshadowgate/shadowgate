@@ -17,7 +17,7 @@ Sorcerers advancing to archmage must choose a school with <advance class special
     set_required_for(({"greater spell mastery","arcane perfection"}));
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {
