@@ -41,9 +41,11 @@ wizlog %^ORANGE%^%^ULINE%^NAME%^RESET%^ [%^ORANGE%^%^ULINE%^BYTES%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-To increase transparency, this command will display recent command history typed in by a wizard with the %^ORANGE%^%^ULINE%^NAME%^RESET%^. This command won't display activity of avatars. It only affects conduct of wizards, your coder and administration stuff. Please consider applying to become one and help the mud!
+To enforce transparency, this command will display recent command history typed in by a wizard with the %^ORANGE%^%^ULINE%^NAME%^RESET%^.
 
-Optional byes argument will display last %^ORANGE%^%^ULINE%^BYTES%^RESET%^ of the file. Default is 2048. If you want to see more and historical data, refer to logs published on the website:
+This command won't display activity of avatars. It only affects conduct of wizards, your coder and administration staff. Please consider applying to become one and help the mud!
+
+Optional %^ORANGE%^%^ULINE%^BYTES%^RESET%^ argument will display last %^ORANGE%^%^ULINE%^BYTES%^RESET%^ of the file. Default is 2048. If you want to see more and historical data, refer to logs published on the website:
 
   %^ULINE%^%^BLUE%^https://shadowgate.org/files/wizlog/%^RESET%^
 

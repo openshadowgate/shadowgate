@@ -25,7 +25,7 @@ void create() {
 }
 
 string query_cast_string() {
-    return "%^GREEN%^"+caster->QCN+"'s eyes glaze over and become unfocussed.%^RESET%^";
+    return "%^GREEN%^"+caster->QCN+"'s eyes glaze over and become unfocused.%^RESET%^";
 }
 
 void spell_effect(int prof) {

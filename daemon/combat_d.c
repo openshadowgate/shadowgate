@@ -423,21 +423,34 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         return 0;
     }
 
-    if(damage > 0)
-        if(attacker->is_living())
-            if(targ->query_property("shadowform"))
-            {
+    if (damage > 0) {
+        if (attacker->is_living()) {
+            if (targ->query_property("shadowform")) {
                 int sf_pwr = targ->query_property("shadowform");
-                if(!"/daemon/saving_throw_d"->will_save(attacker,-sf_pwr))
-                {
-                    damage/=5;
+                if (!"/daemon/saving_throw_d"->will_save(attacker, -sf_pwr)) {
+                    damage /= 5;
                 }
             }
+            if (targ->query_property("shielded_by")) {
+                object shielder = targ->query_property("shielded_by");
+                if (objectp(targ->query_property("shielded_by")) && objectp(ENV(targ))) {
+                    if (present(shielder, ENV(targ))) {
+                        damage /= 2;
+                        shielder->cause_typed_damage(shielder, shielder->return_target_limb(), damage, type);
+                    }
+                } else {
+                    targ->remove_property("shielded_by");
+                }
+            }
+        }
+    }
 
-    if(targ->query_verbose_combat())
-    {
-        if(damage > 0) { tell_object(targ,"You take "+type+" damage."); }
-        if(damage < 0) { tell_object(targ,"You are healed by "+type+" damage."); }
+    if (targ->query_verbose_combat()) {
+        if (damage > 0) {
+            tell_object(targ, "You are harmed by " + type + ".");
+        } else {
+            tell_object(targ, "You are healed by " + type + ".");
+        }
     }
 
     if(objectp(attacker))
