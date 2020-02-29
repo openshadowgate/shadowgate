@@ -418,8 +418,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
 
-    if(damage > 0 && type != "force" && objectp(myEB = targ->query_property("empty body")))
-    {
+    if (damage > 0 && type != "force" && objectp(myEB = targ->query_property("empty body"))) {
         return 0;
     }
 
