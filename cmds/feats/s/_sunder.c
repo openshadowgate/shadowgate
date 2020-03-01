@@ -14,7 +14,7 @@ void create() {
     feat_category("MeleeDamage");
     feat_name("sunder");
     feat_prereq("Powerattack");
-    feat_desc("The character can attempt to disrupt or damage the armor of their opponent, making them more vulnerable to melee attacks.
+    feat_desc("The character can attempt to disrupt or damage the armor of their opponent, making them more vulnerable to melee attacks. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat.
 
 A druid with the 'mastery of fang and claw' feat may also use this feat while in bear form, even if it has not been purchased directly.");
     set_target_required(1);

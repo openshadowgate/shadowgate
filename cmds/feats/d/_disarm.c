@@ -14,7 +14,7 @@ void create() {
     feat_name("disarm");
     feat_prereq("Expertise");
     feat_syntax("disarm TARGET");
-    feat_desc("The character can attempt to disarm a foe of their weapons momentarily.");
+    feat_desc("The character can attempt to disarm a foe of their weapons momentarily. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat.");
     set_target_required(1);
     set_required_for(({"daze"}));
 }
@@ -60,7 +60,7 @@ void execute_feat() {
           return;
         }
     }
-    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted")) {
+    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted") && !FEATS_D->usable_feat(caster,"unarmed combat")) {
         tell_object(caster,"How can you disarm anyone without a weapon?");
         dest_effect();
         return;
@@ -112,7 +112,7 @@ void execute_attack() {
         dest_effect();
         return;
     }
-    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted")) {
+    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted") && !FEATS_D->usable_feat(caster,"unarmed combat")) {
         tell_object(caster,"How can you disarm anyone without a weapon?");
         dest_effect();
         return;

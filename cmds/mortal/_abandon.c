@@ -37,6 +37,7 @@ int get_exp_cost(object obj,int num)
     string race,subrace,file;
 
     if(!objectp(obj)) { return 0; }
+    if(obj->query_property("free_abandon")) { return 0; }
 
     race = (string)obj->query_race();
     subrace = (string)obj->query("subrace");
@@ -72,6 +73,8 @@ int confirm_drop(string str,string theclass,int drop,int cost)
     }
 
     log_file("abandoned_classes",""+TP->query_true_name()+" abandoned "+TP->QP+" "+theclass+" class, loosing "+drop+" levels and "+(int)cost+" exp "+ctime(time())+"\n");
+    if(TP->query_property("free_abandon")) { log_file("abandoned_classes",">>>"+TP->query_true_name()+" was granted a free abandon by: "+TP->query_propery("free_abandon")+".\n"); }
+    TP->remove_property("free_abandon");
 
     class_ob = find_object_or_load(DIR_CLASSES+"/"+theclass+".c");
     if(objectp(class_ob)&&TP->query_class_level("theclass")<11) { class_ob->remove_base_class(TP); }

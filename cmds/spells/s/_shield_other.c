@@ -45,9 +45,9 @@ spell_effect()
         }
     }
 
-    tell_object(caster, "%^CYAN%^You extend your reach, surrounding " + target->QCN + " in a %^BOLD%^%^WHITE%^g%^BLUE%^l%^WHITE%^owin%^BLUE%^g %^WHITE%^fiel%^BLUE%^d %^BLUE%^o%^BLUE%^f %^WHITE%^magic,%^RESET%^%^CYAN%^ making a connection between you and them.");
-    tell_object(target, "%^CYAN%^You feel a bond forming between you and " + caster->QCN + " as %^BOLD%^%^WHITE%^glowi%^BLUE%^n%^BLUE%^g %^WHITE%^fi%^BLUE%^e%^BLUE%^l%^WHITE%^d%^RESET%^%^CYAN%^ forms around you.");
-    tell_room(place, "%^BOLD%^%^WHITE%^Glowin%^BLUE%^g %^BLUE%^f%^BLUE%^i%^BLUE%^e%^WHITE%^ld %^BLUE%^o%^BLUE%^f %^WHITE%^ma%^BLUE%^g%^BLUE%^i%^WHITE%^c%^RESET%^%^CYAN%^ raises around " + target->QCN, ({caster, target}));
+    tell_object(caster, "%^CYAN%^You extend your reach, surrounding " + target->QCN + " in a %^BOLD%^%^BLACK%^g%^BLUE%^l%^BLACK%^owin%^BLUE%^g %^BLACK%^fiel%^BLUE%^d %^BLUE%^o%^BLUE%^f %^BLACK%^magic,%^RESET%^%^CYAN%^ making a connection between you and them.");
+    tell_object(target, "%^CYAN%^You feel a bond forming between you and " + caster->QCN + " as %^BOLD%^%^BLACK%^glowi%^BLUE%^n%^BLUE%^g %^BLACK%^fi%^BLUE%^e%^BLUE%^l%^BLACK%^d%^RESET%^%^CYAN%^ forms around you.");
+    tell_room(place, "%^BOLD%^%^BLACK%^Glowin%^BLUE%^g %^BLUE%^f%^BLUE%^i%^BLUE%^e%^BLACK%^ld %^BLUE%^o%^BLUE%^f %^BLACK%^ma%^BLUE%^g%^BLUE%^i%^BLACK%^c%^RESET%^%^CYAN%^ raises around " + target->QCN, ({caster, target}));
 
     target->set_property("shielded_by", caster);
 
@@ -59,7 +59,7 @@ dest_effect()
 {
     if (objectp(target)) {
         target->remove_property("shielded_by");
-        tell_object(target, "%^BOLD%^%^WHITE%^Gl%^BLUE%^o%^WHITE%^wing %^WHITE%^f%^BLUE%^i%^WHITE%^e%^BLUE%^l%^WHITE%^d%^RESET%^%^CYAN%^ around you retreats as your protective link fades.");
+        tell_object(target, "%^BOLD%^%^BLACK%^Gl%^BLUE%^o%^BLACK%^wing %^BLACK%^f%^BLUE%^i%^BLACK%^e%^BLUE%^l%^BLACK%^d%^RESET%^%^CYAN%^ around you retreats as your protective link fades.");
         if (objectp(caster)) {
             tell_object(caster, "%^BOLD%^You sense your protective link with " + target->QCN + " is broken.");
         }

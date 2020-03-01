@@ -21,5 +21,5 @@ create() {
    set_critical_threat_range(1);
    set_critical_hit_multiplier(3);
    set_damage_type("slashing");
-   set_property("repairtype",({"weaponsmith}));
+   set_property("repairtype",({"weaponsmith"}));
 }
