@@ -10,7 +10,7 @@ void create()
     feat_category("WeaponMastery");
     feat_name("weapon focus");
     feat_prereq("Fighter L5"); // weapon training
-    feat_desc("This feat, available only as a class skill to trained fighters, slightly increases the accuracy of all attacks with weapons.");
+    feat_desc("This feat, available only as a class skill to trained fighters, increases the accuracy of all attacks with weapons. It provides +1 to attack starting at L1, and an extra +1 for every five levels thereafter in the fighter class.");
     permanent(1);
 }
 

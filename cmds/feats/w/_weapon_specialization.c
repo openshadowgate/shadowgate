@@ -9,8 +9,8 @@ void create()
     feat_type("permanent");
     feat_category("WeaponMastery");
     feat_name("weapon specialization"); // weapon training
-    feat_prereq("Fighter L5");
-    feat_desc("This feat, available only as a class skill to trained fighters, slightly increases the damage of all attacks with weapons.");
+    feat_prereq("Fighter L7");
+    feat_desc("This feat, available only as a class skill to trained fighters, increases the damage of all attacks with weapons. It provides +1 to damage starting at L1, and an extra +1 for every five levels thereafter in the fighter class.");
     permanent(1);
 }
 
