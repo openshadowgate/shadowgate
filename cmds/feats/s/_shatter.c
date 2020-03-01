@@ -1,6 +1,9 @@
 // feat revision 1/3/20: changing to simply strip stoneskin/iron body/variant spells directly.
 // given casters can recast just as quickly (single action) and this has a delay, whereas the 
 // spells do not, I don't feel this is out of line for the few that choose to take it. -Nienne
+// second revision 1/3/20: testing revealed this to be far too much of a win button, so a 
+// will save vs attacker character level has been added to mitigate it being too good. Will 
+// continue testing to see if the DC needs adjusted up or down to be reasonable. -Nienne
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -17,10 +20,11 @@ void create() {
     feat_name("shatter");
     feat_syntax("shatter TARGET");
     feat_prereq("powerattack");
-    feat_desc("The character can attempt to shatter an opponent's magical defenses, including stoneskin, iron body & similar variants. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat.
+    feat_desc("The character can attempt to shatter an opponent's magical defenses, including stoneskin, iron body & similar variants. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat. Success is reliant on not only connecting with the target, but being able to overcome their willpower to successfully disrupt their protective spell/s.
 
 %^BOLD%^See also:%^RESET%^ shatter *spells");
     set_target_required(1);
+    set_save("will");
 }
 
 int allow_shifted() { return 1; }
@@ -174,6 +178,18 @@ void execute_attack() {
         tell_room(place,"%^BOLD%^"+target->QCN+" twists away quickly, leaving "
             ""+caster->QCN+" off balance!%^RESET%^",({target,caster}));
         caster->set_paralyzed(roll_dice(2,6),"%^MAGENTA%^You're getting back into position.%^RESET%^");
+        dest_effect();
+        return;
+    }
+
+    if(do_save(target, clevel)) { // new will save. N, 1/3/20
+        tell_object(caster,"%^BOLD%^%^CYAN%^You rain down a hail of light blows upon "
+            +target->QCN+", but "+target->QS+" holds up under the onslaught!");
+        tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" rains down a hail of light "
+            "blows upon you, but you steel your will and resist the onslaught!");
+        tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" rains down a hail of light blows "
+            "upon "+target->QCN+", but "+target->QS+" holds up under the "
+            "onslaught!",({target,caster}));
         dest_effect();
         return;
     }

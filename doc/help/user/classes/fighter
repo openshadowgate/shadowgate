@@ -6,8 +6,8 @@
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, healing, perception
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  L1: light armor proficiency, medium armor proficiency, heavy armor proficiency, shield proficiency, simple weapon proficiency, martial weapon proficiency
- L5: weapon focus, weapon specialization
- L9: greater weapon focus, greater weapon specialization
+ L5: weapon focus
+ L9: weapon specialization
  L20: weapon mastery
  Also: two bonus melee feats at L1, and one feat every two class levels thereafter
 
