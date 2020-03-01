@@ -49,7 +49,7 @@ void dest_effect()
     {
         tell_object(target,"%^BOLD%^%^CYAN%^An insight into future events fades%^RESET%^");
 //        target->set_property("attack bonus",-clevel);
-        target->add_attack_bonus(-clevel);
+        target->add_attack_bonus(-clevel / 3);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
