@@ -113,7 +113,7 @@ int startShutdown(int type, int time)
   stopMemoryCheck();
 // hmm
   remove_call_out("countDown");
-   if(geteuid(PO) != UID_SHUTDOWN) return 0;
+   if(geteuid(TO) != UID_SHUTDOWN) return 0;
    if(type != TEST)
 	shuttingDown = 1;
   switch(type)

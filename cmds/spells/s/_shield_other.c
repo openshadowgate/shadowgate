@@ -47,7 +47,7 @@ spell_effect()
 
     tell_object(caster, "%^CYAN%^You extend your reach, surrounding " + target->QCN + " in a %^BOLD%^%^WHITE%^g%^BLUE%^l%^WHITE%^owin%^BLUE%^g %^WHITE%^fiel%^BLUE%^d %^BLUE%^o%^BLUE%^f %^WHITE%^magic,%^RESET%^%^CYAN%^ making a connection between you and them.");
     tell_object(target, "%^CYAN%^You feel a bond forming between you and " + caster->QCN + " as %^BOLD%^%^WHITE%^glowi%^BLUE%^n%^BLUE%^g %^WHITE%^fi%^BLUE%^e%^BLUE%^l%^WHITE%^d%^RESET%^%^CYAN%^ forms around you.");
-    tell_room(place, "%^BOLD%^%^WHITE%^Glowin%^BLUE%^g %^BLUE%^f%^BLUE%^i%^BLUE%^e%^WHITE%^ld %^BLUE%^o%^BLUE%^f %^WHITE%^ma%^BLUE%^g%^BLUE%^i%^WHITE%^c%^RESET%^%^CYAN%^ raises around $T");
+    tell_room(place, "%^BOLD%^%^WHITE%^Glowin%^BLUE%^g %^BLUE%^f%^BLUE%^i%^BLUE%^e%^WHITE%^ld %^BLUE%^o%^BLUE%^f %^WHITE%^ma%^BLUE%^g%^BLUE%^i%^WHITE%^c%^RESET%^%^CYAN%^ raises around " + target->QCN, ({caster, target}));
 
     target->set_property("shielded_by", caster);
 
