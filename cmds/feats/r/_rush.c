@@ -18,7 +18,7 @@ void create() {
     feat_category("MeleeDamage");
     feat_syntax("rush [TARGET]");
     feat_prereq("Strength 13");
-    feat_desc("The character can attempt to rush at a foe with their weapon, throwing as much force as they can behind it in the hope of dealing damage and knocking them over. Missing, however, will send the character sprawling.
+    feat_desc("The character can attempt to rush at a foe with their weapon, throwing as much force as they can behind it in the hope of dealing damage and knocking them over. Missing, however, will send the character sprawling. This will only work while shapeshifted, or using a standard melee weapon, unless the character has an aptitude in unarmed combat.
 
 If used without an argument this feat will pick up a random attacker.
 
@@ -141,7 +141,7 @@ void execute_attack() {
         dest_effect();
         return;
     }
-    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted")) {
+    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted") && !FEATS_D->usable_feat(caster,"unarmed combat")) {
         tell_object(caster,"How can you rush at anyone without a weapon?");
         dest_effect();
         return;
@@ -170,7 +170,9 @@ void execute_attack() {
     }
     else
     {
-        enchant = 0;
+//        enchant = 0;
+// combat daemon now has a calc which picks up monk, unarmed & shifted enchantment. Plz to use! N, 1/3/20.
+        enchant = COMBAT_D->unarmed_enchantment(caster);
     }
 
     if(!(res = thaco(target,enchant)))
@@ -305,15 +307,15 @@ void rush_mess(object play,object targ){
 							break;
 
 	case "soldier":			tell_object(play,"%^BOLD%^%^WHITE%^You expertly "+
-								"break from combat, rushing weapon first "+
-								"toward "+targ->QCN+"!");
+								"break from combat, rushing straight "+
+								"at "+targ->QCN+"!");
 							tell_room(etp,"%^BOLD%^%^WHITE%^Suddenly "+
 								""+play->QCN+" breaks expertly from combat, "+
-								"rushing weapon first toward "+
+								"rushing straight at "+
 								""+targ->QCN+"!",({play,targ}));
 							tell_object(targ,"%^BOLD%^%^WHITE%^Suddenly "+
 								""+play->QCN+" breaks expertly from combat, "+
-								"rushing weapon first toward "+
+								"rushing straight at "+
 								"you!");
 							break;
 
@@ -329,7 +331,7 @@ void rush_mess(object play,object targ){
 							break;
 
 	default:				tell_object(play,"%^BOLD%^You break from combat "+
-								"and then rush weapon first into "+targ->QCN+"!");
+								"and then rush straight at "+targ->QCN+"!");
 							tell_room(etp,"%^BOLD%^Suddenly "+play->QCN+" breaks "+
 								"from combat and rushes madly into "+
 								""+targ->QCN+"!",({play,targ}));
@@ -470,8 +472,8 @@ void hit_mess(object play,object targ){
 
 	case "swashbuckler":	tell_object(play,"%^BOLD%^%^BLUE%^You "+
 								"end your tumbling right at "+
-								""+targ->QCN+"'s feet, thrusting your "+
-								"weapon forward with all your might!");
+								""+targ->QCN+"'s feet, striking "+
+								"forward with all your might!");
                             tell_room(etp,"%^BOLD%^%^BLUE%^"+play->QCN+" "+
 								"lands right at "+targ->QCN+"'s feet, "+
 								"striking a solid blow against "+
@@ -483,27 +485,27 @@ void hit_mess(object play,object targ){
                             break;
 
 	case "thug":			tell_object(play,"%^BOLD%^%^RED%^You drive your "+
-								"weapon into a vulnerable spot, using "+
+								"blow into a vulnerable spot, using "+
 								"all your weight to stun "+targ->QCN+"!");
 							tell_room(etp,"%^BOLD%^%^RED%^"+play->QCN+" "+
 								"drives "+play->QP+" weight into "+
 								""+targ->QCN+", landing a solid blow to "+
 								"a vulnerable spot!",({play,targ}));
 							tell_object(targ,"%^BOLD%^%^RED%^"+play->QCN+" "+
-								"slams "+play->QP+" weapon into you with "+
+								"slams into you with "+
 								"all "+play->QP+" weight behind the blow, "+
 								"leaving you dazed!");
 							break;
 
 	case "soldier":			tell_object(play,"%^BOLD%^%^WHITE%^You brace "+
-								"your weapon as you drive full-force into "+
+								"yourself as you drive full-force into "+
 								""+targ->QCN+", knocking "+targ->QO+" backward!");
 							tell_room(etp,"%^BOLD%^%^WHITE%^"+play->QCN+" braces "+
-								""+play->QP+" weapon as "+play->QS+" drives full"+
+								""+play->QO+"self as "+play->QS+" drives full"+
 								"-force into "+targ->QCN+", knocking "+targ->QO+" "+
 								"backward!",({play,targ}));
 							tell_object(targ,"%^BOLD%^%^WHITE%^"+play->QCN+" braces "+
-								""+play->QP+" weapon as "+play->QS+" drives full"+
+								""+play->QO+"self as "+play->QS+" drives full"+
 								"-force into you, knocking you "+
 								"backward!");
 							break;

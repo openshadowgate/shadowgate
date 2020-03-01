@@ -1,9 +1,12 @@
+// feat revision 1/3/20: changing to simply strip stoneskin/iron body/variant spells directly.
+// given casters can recast just as quickly (single action) and this has a delay, whereas the 
+// spells do not, I don't feel this is out of line for the few that choose to take it. -Nienne
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
 inherit FEAT;
 
-int fired;
+int fired, unarmed;
 
 #define FEATTIMER 35
 
@@ -14,7 +17,7 @@ void create() {
     feat_name("shatter");
     feat_syntax("shatter TARGET");
     feat_prereq("powerattack");
-    feat_desc("The character can attempt to shatter layers of  an opponent's magical defenses, including stoneskin and iron body.
+    feat_desc("The character can attempt to shatter an opponent's magical defenses, including stoneskin, iron body & similar variants. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat.
 
 %^BOLD%^See also:%^RESET%^ shatter *spells");
     set_target_required(1);
@@ -62,9 +65,12 @@ void execute_feat() {
         return;
     }
     if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted")) {
-        tell_object(caster,"How can you shatter anyone's defenses without a weapon?");
-        dest_effect();
-        return;
+        if(FEATS_D->usable_feat(caster,"unarmed combat")) unarmed = 1;
+        else {
+          tell_object(caster,"How can you shatter anyone's defenses without a weapon?");
+          dest_effect();
+          return;
+        }
     }
     weapons = caster->query_wielded();
     if(sizeof(weapons) && weapons[0]->is_lrweapon() && !caster->query_property("shapeshifted")) {
@@ -80,12 +86,22 @@ void execute_feat() {
                 +target->QCN+"!%^RESET%^",({target,caster}));
         }
         else {
-            tell_object(caster,"%^BOLD%^%^CYAN%^You lunge forward at "+target->QCN+" with your "
+            if(unarmed) {
+                tell_object(caster,"%^BOLD%^%^CYAN%^You lunge forward at "+target->QCN+" and aim "
+                "a precise strike!%^RESET%^");
+                tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" lunges forward at you with "
+                "a precise strike!");
+                tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" lunges forward at "+target->QCN+
+                " with a precise strike!%^RESET%^",({target,caster}));
+            }
+            else {
+                tell_object(caster,"%^BOLD%^%^CYAN%^You lunge forward at "+target->QCN+" with your "
                 "weapon at the ready!%^RESET%^");
-            tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" lunges forward at you with "
+                tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" lunges forward at you with "
                 +caster->QP+" weapon at the ready!");
-            tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" lunges forward at "+target->QCN+
+                tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" lunges forward at "+target->QCN+
                 " with "+caster->QP+" weapon at the ready!%^RESET%^",({target,caster}));
+            }
         }
     }
     else
@@ -104,6 +120,7 @@ void execute_feat() {
 }
 
 void execute_attack() {
+    string *currentspells;
     int skinned, mod, i, timerz;
     object *keyz, myspl;
     mapping tempmap, newmap;
@@ -119,12 +136,13 @@ void execute_attack() {
         dest_effect();
         return;
     }
-    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted")) {
+    if(!sizeof(caster->query_wielded()) && !caster->query_property("shapeshifted") && !FEATS_D->usable_feat(caster,"unarmed combat")) {
         tell_object(caster,"How can you shatter anyone's defenses without a weapon?");
         dest_effect();
         return;
     }
-    if(!skinned = target->query_stoneSkinned()) {
+//    if(!skinned = target->query_stoneSkinned()) {
+    if(!target->query_property("iron body")) { // this property is now used by all stoneskin & related spells!
         tell_object(caster,"%^RED%^You rain down a hail of light blows upon "
             +target->QCN+", but they seem to have no effect!%^RESET%^");
         tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" rains down a hail "
@@ -167,7 +185,7 @@ void execute_attack() {
         "upon "+target->QCN+", and layers of "+target->QP+" defenses shatter under the "
         "onslaught!",({target,caster}));
 
-    mod = clevel+roll_dice(1,4);
+/*    mod = clevel+roll_dice(1,4);
     	if (skinned > mod) target->set_stoneSkinned(skinned - mod);
     	else
 	{
@@ -181,6 +199,17 @@ void execute_attack() {
             	{
             		target->remove_property_value("spelled", ({myspl}));
             		myspl->dest_effect();
+			}
+		}
+	}*/
+// new setup to simply remove related spells directly. Should've been doing this already but was not configured correctly!
+// please add any new iron-body type spells to the array below & should automatically work. N, 1/3/20
+      currentspells = (({ "stoneskin", "iron body", "dark discorporation", "resilience", "oak body", "stone body", "form of doom", "night armor" }));
+	if(target->query_property("spelled")) {
+		for(i=0;i<sizeof(currentspells);i++) {
+			if(objectp(myspl = MAGIC_D->get_spell_from_array(target->query_property("spelled"), currentspells[i]))) {
+           			target->remove_property_value("spelled", ({myspl}));
+           			myspl->dest_effect();
 			}
 		}
 	}

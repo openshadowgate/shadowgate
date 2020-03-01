@@ -5089,7 +5089,7 @@ int test_passive_perception() {
             }
     }
     if (numnotvisible > 0) {
-        tell_object(TO,"BOLD%^%^CYAN%^You sense an unseen creature lurking nearby!");
+        tell_object(TO,"%^BOLD%^%^CYAN%^You sense an unseen creature lurking nearby!%^RESET%^");
     }
     return 1;
 }
