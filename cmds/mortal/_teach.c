@@ -172,7 +172,7 @@ void step(int when,object who, object targ,string what) {
         case 96..200:	adj = -6;	break;
         default:			break;
         }
-        targ->add_grammar(what,(int)targ->query_stats("intelligence")*(10+adj));
+        targ->add_grammar(what,(int)targ->query_stats("intelligence")*(100+adj));
         who->remove_property("teaching");
         targ->remove_property("taught");
     }
