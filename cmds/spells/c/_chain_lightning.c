@@ -169,11 +169,11 @@ void spell_effect(int prof)
 
         if(do_save(inven[i],0))
         {
-            damage_targ(inven[i],"torso",damage/2,element);
+            damage_targ(inven[i],inven[i]->return_target_limb(),sdamage/2,element);
         }
         else
         {
-            damage_targ(inven[i],"torso",damage,element);
+            damage_targ(inven[i],inven[i]->return_target_limb(),sdamage,element);
         }
 
         switch(element)
