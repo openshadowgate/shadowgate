@@ -118,43 +118,41 @@ int query_dex_bonus(object target)
 
     // gets the max dex bonus based on armor type
     torso = (object *)target->query_armour("torso");
-    if(!sizeof(torso)) { max = 10; }
-    else
-    {
-        for(i=0;i<sizeof(torso);i++)
-        {
-            if(!objectp(torso[i])) { continue; }
-            if(!torso[i]->is_armour()) { continue; }
+
+
+    if (!sizeof(torso) || FEATS_D->usable_feat(TO, "armor training")) {
+        max = 10;
+    } else {
+        for (i = 0; i < sizeof(torso); i++) {
+            if (!objectp(torso[i])) {
+                continue;
+            }
+            if (!torso[i]->is_armour()) {
+                continue;
+            }
             bonus = (int)torso[i]->query_max_dex_bonus();
-            if(!bonus)
-            {
-                if(strsrch(base_name(torso[i]),"/d/common/obj/sheath/") != -1) { continue; }
-                log_file("armor_no_max",""+base_name(torso[i])+" no set_max_dex_bonus() or is 0.\n");
-                if(objectp(environment(torso[i])))
-                {
-                    tell_object(environment(torso[i]),""+torso[i]->query_name()+" has "
-                        "a problem, please contact a wiz.");
+            if (!bonus) {
+                if (strsrch(base_name(torso[i]), "/d/common/obj/sheath/") != -1) {
+                    continue;
+                }
+                log_file("armor_no_max", "" + base_name(torso[i]) + " no set_max_dex_bonus() or is 0.\n");
+                if (objectp(environment(torso[i]))) {
+                    tell_object(environment(torso[i]), "" + torso[i]->query_name() + " has "
+                                "a problem, please contact a wiz.");
                 }
                 continue;
             }
-            if(bonus < max) { max = bonus; }
+            if (bonus < max) {
+                max = bonus;
+            }
         }
     }
 
     // prevents the bonus from being higher than the max allowed by the armor
-    max = max * -1;
-    if(ret < max) { ret = max; }
-
-    // taking this out since we're letting everybody wear bracers now -Ares
-    /*
-    // gives a bonus of 1 point per 7 levels for fighter or cleric not wearing heavy armor
-    if ((!target->is_class("ranger") && !target->is_class("thief") &&
-        !target->is_class("mage") && !target->is_class("psion")) &&
-        !target->is_wearing_type("armour") && !target->is_wearing_type("armor"))
-    {
-        ret = ret + ( ((int)target->query_lowest_level()/7) * -1);
+    max = -max;
+    if (ret < max) {
+        ret = max;
     }
-    */
 
     return ret;
 }
@@ -246,10 +244,12 @@ varargs effective_ac(object who)
     //an additional 10 is added if it's below 0 - Saide
     MyAc = 10;
     tmp = (int)who->query_ac();
-    if(tmp >= 0) MyAc += (10-tmp);
-    else MyAc += 10 + (tmp * -1);
-    //mob AC penalty to see if this alleviates some of the "I can't hit, might as well be a caster" problems :P - Saide, June 2016
-    if(!interactive(who)) MyAc -= 5;
+    if (tmp >= 0) {
+        MyAc += (10 - tmp);
+    } else {
+        MyAc += 10 + (tmp * -1);
+    }
+
     return MyAc;
 }
 
@@ -259,22 +259,31 @@ varargs effective_ac(object who)
 varargs ac_bonus(object who, object attacker)
 {
     int MyBonus, dexb;
-    if(!objectp(who)) return 0;
-    if(!objectp(attacker)) return 0;
+    if (!objectp(who)) {
+        return 0;
+    }
+    if (!objectp(attacker)) {
+        return 0;
+    }
     MyBonus = 0;
 
     dexb = query_dex_bonus(who);
     dexb = -dexb;
 
-    if(who->query_temporary_blinded() || who->query_blind())
-        if(!FEATS_D->usable_feat(who,"blindfight"))
+    if (who->query_temporary_blinded() || who->query_blind()) {
+        if (!FEATS_D->usable_feat(who, "blindfight")) {
             dexb = 0;
-    if(who->query_unconscious() || who->query_prone() || who->query_paralyzed() || who->query_asleep() &&
-       !FEATS_D->usable_feat(who,"dodge"))
+        }
+    }
+    if (who->query_unconscious() || who->query_prone() || who->query_paralyzed() || who->query_asleep() &&
+        !FEATS_D->usable_feat(who, "dodge")) {
+        dexb = 0;
+    }
+    if (attacker->query_invis() && attacker != who) {
+        if (!who->detecting_invis()) {
             dexb = 0;
-    if(attacker->query_invis() && attacker!=who)
-        if(!who->detecting_invis())
-            dexb = 0;
+        }
+    }
 
     MyBonus += dexb;
     return MyBonus;

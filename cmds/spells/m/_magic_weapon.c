@@ -11,9 +11,7 @@ void create() {
     set_domains("war");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS magic weapon on OBJECT");
-    set_description("With this spell you can make any non-cursed, non-enchanted weapon +1.
-
-This spell uses 1 414 gp as a material component.");
+    set_description("With this spell you can make any non-cursed, non-enchanted weapon +1.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -34,11 +32,6 @@ int preSpell()
         return 0;
     }
     fob = present(sfob,caster);
-    if(!caster->query_funds("gold", 1414))
-    {
-        tell_object(caster, "You don't have enough money.");
-        return 0;
-    }
     if (!objectp(fob))
     {
         tell_object(caster,"The object is not present.");
@@ -88,16 +81,9 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    if(!caster->query_funds("gold", 1414))
-    {
-        tell_object(caster, "You don't have enough money.");
-        return;
-    }
 
-    caster->use_funds("gold",1414);
-
-    fob->remove_property("enchantment");
-    fob->set_property("enchantment",1);
+    fob->remove_property("temporary enchantment");
+    fob->set_property("temporary enchantment",1);
     tell_object(caster,"%^BOLD%^%^MAGENTA%^As the metal vapor rises it carries away the magic into "+fob->query_short()+"%^BOLD%^%^MAGENTA%^.%^RESET%^");
     tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" voices a few syllables and evaporates a pile of gold under "+fob->query_short()+".%^RESET%^");
     dest_effect();

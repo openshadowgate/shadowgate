@@ -9,10 +9,10 @@ void create()
     feat_type("permanent");
     feat_category("WeaponMastery");
     feat_name("weapon mastery");
-    feat_prereq("Fighter L17");
+    feat_prereq("Fighter L20");
     feat_desc("You learn to use your weapon better. Critical multiplier of any weapon you wield will be increased by 1. In addition, you can't be disarmed with Disarm feat.
 
-This feat is superseded by Lethal strikes feat and Exploit weakness feat.");
+This feat is superseded by Lethal strikes feat and Exploit weakness feat, but your resistance to being disarmed will remain.");
     permanent(1);
 }
 

@@ -103,7 +103,7 @@ void validate_class_feats(object ob)
         }
         tell_object(ob,"%^BOLD%^%^RED%^Grating free feats wipe. Use <feats wipe> if you want to apply it.");
         ob->delete("free_feat_wipe");
-        tell_object(ob,"%^BOLD%^%^RED%^Use <feats fix> if there are any %^ULINE%^missing%^RESET%^%^BOLD%^%^RED%^ feats on your featmap.");
+        ob->force_me("feats fix");
     }
 }
 

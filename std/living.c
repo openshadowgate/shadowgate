@@ -1431,35 +1431,32 @@ int query_attack_bonus() {
    bonus = abonus;
    ret = bonus + enc;
    ret += EQ_D->gear_bonus(TO, "attack bonus");
-   if(TO->query_invis())
+   if (TO->query_invis()) {
        ret += 2;
-// this now gives scaling bonus to dmg 1 per 5 fighter levels. greater now redundant. N, 1/3/20.
-   if(FEATS_D->usable_feat(TO,"weapon focus"))
-       ret += (TO->query_prestige_level("fighter")+4)/5;
-//       ret += 2;
-//   if(FEATS_D->usable_feat(TO,"greater weapon focus"))
-//       ret += 6;
-   if(FEATS_D->usable_feat(TO,"true strikes")&&
-      sizeof(TO->query_wielded())==1)
+   }
+   if (FEATS_D->usable_feat(TO, "weapon training")) {
+       ret += TO->query_prestige_level("fighter") / 5 + 1;
+   }
+   if (FEATS_D->usable_feat(TO, "true strikes") &&
+       sizeof(TO->query_wielded()) == 1) {
        ret += 3;
+   }
    return ret;
 }
 
-int query_damage_bonus() {
-   int enc, bonus;
-   int ret, x;
-   object *weap;
+int query_damage_bonus()
+{
+    int enc, bonus;
+    int ret, x;
+    object* weap;
 
-   bonus = dbonus;
-   ret = bonus;// + enc;
-   ret += EQ_D->gear_bonus(TO, "damage bonus");
-// this now gives scaling bonus to dmg 1 per 5 fighter levels. greater now redundant. N, 1/3/20.
-   if(FEATS_D->usable_feat(TO,"weapon specialization"))
-       ret += (TO->query_prestige_level("fighter")+4)/5;
-//       ret += 2;
-//   if(FEATS_D->usable_feat(TO,"greater weapon specialization"))
-//       ret += 6; */
-   return ret;
+    bonus = dbonus;
+    ret = bonus;// + enc;
+    ret += EQ_D->gear_bonus(TO, "damage bonus");
+    if (FEATS_D->usable_feat(TO, "weapon training")) {
+        ret += TO->query_prestige_level("fighter") / 5 + 1;
+    }
+    return ret;
 }
 
 void init_saving_bonus() {
