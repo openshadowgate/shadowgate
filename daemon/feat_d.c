@@ -67,6 +67,7 @@ void validate_class_feats(object ob)
     string* myclassfeats;
     string* classfeats;
     string* toremove = ({});
+    string* toadd = ({});
     string fname;
 
     if (!objectp(ob)) {
@@ -93,18 +94,29 @@ void validate_class_feats(object ob)
             toremove += ({ fname });
         }
     }
+    foreach(fname in classfeats)
+    {
+        if (member_array(fname, myclassfeats) == -1) {
+            toadd += ({ fname });
+        }
+    }
     if (sizeof(toremove)) {
         tell_object(ob, "%^BOLD%^%^RED%^\nYou have class feats that don't belong to any of your classes: %^RESET%^" + implode(toremove, ", "));
-        tell_object(ob, "%^BOLD%^%^RED%^These feats will be removed.\nYou have been granted free feat wipe you can use if you're unhappy with your current feat assignation.%^RESET%^\n");
+        tell_object(ob, "%^BOLD%^%^RED%^These feats will be removed.\n");
         foreach(fname in toremove)
         {
             tell_object(ob,"%^BOLD%^%^RED%^Removing:%^RESET%^ " + fname);
             remove_feat(ob, "class", fname);
         }
-        tell_object(ob,"%^BOLD%^%^RED%^Grating free feats wipe. Use <feats wipe> if you want to apply it.");
-        ob->delete("free_feat_wipe");
-        ob->force_me("feats fix");
     }
+    if (sizeof(toadd)) {
+        "/cmds/mortal/_feats"->cmd_feats("fix");
+    }
+    if (sizeof(toadd) || sizeof(toremove)) {
+        tell_object(ob,"%^BOLD%^%^RED%^Resetting free feats wipe flag.");
+        ob->delete("free_feat_wipe");
+    }
+
 }
 
 void obsolete_feat(object ob) {
@@ -1145,34 +1157,44 @@ string get_feat_type(object ob,string feat)
     return 0;
 }
 
-void remove_feat(object ob,string type, string feat)
+void remove_feat(object ob, string type, string feat)
 {
     mapping feats;
-    int *levels,i,level;
-    string *tmp;
+    int* levels, i, level;
+    string* tmp;
 
-    if(!objectp(ob))        { return; }
-    if(!stringp(type))      { return; }
-    if(!stringp(feat))      { return; }
-    if(!is_feat(feat))      { return; }
-    if(!has_feat(ob,feat))  { return; }
+    if (!objectp(ob)) {
+        return;
+    }
+    if (!stringp(type)) {
+        return;
+    }
 
-    feats = get_feats(ob,type);
+    if (!stringp(feat)) {
+        return;
+    }
+
+    feats = get_feats(ob, type);
     levels = keys(feats);
     level = -1;
-    if(!sizeof(levels))     { return; }
-    for(i=0;i<sizeof(levels) && level == -1;i++)
-    {
+    if (!sizeof(levels)) {
+        return;
+    }
+    for (i = 0; i < sizeof(levels) && level == -1; i++) {
         tmp = feats[levels[i]];
-        if(member_array(feat,tmp) != -1)
-        {
+        if (member_array(feat, tmp) != -1) {
             level = levels[i];
         }
     }
     tmp -= ({ feat });
     feats[level] = tmp;
-    if(is_permanent(ob,feat)) { reverse_permanent_feat(ob,feat); }
-    set_feats(ob,type,feats);
+    if (is_feat(feat)) {
+        if (is_permanent(ob, feat)) {
+            reverse_permanent_feat(ob, feat);
+        }
+    }
+
+    set_feats(ob, type, feats);
     //redundant since query_player_feat works entirely differently now - Saide
     //take_feat(ob,feat);
     return;

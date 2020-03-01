@@ -2123,7 +2123,7 @@ void define_base_spell_level_bonus()
 }
 
 /**
- * Defines standard damage. Adjust help standard damage when adjusting these.
+ * Defines standard damage aka sdamage. Adjust help standard damage when adjusting these.
  */
 void define_base_damage(int adjust)
 {
