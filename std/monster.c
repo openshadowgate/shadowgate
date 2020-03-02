@@ -93,6 +93,7 @@ void avoid_traps(int num); // Will make wandering mobs avoid walking into exits 
 void do_kit_stuff();
 void die(object ob);
 
+int query_exp_needed(int level);
 void set_new_exp(int level,string perc); // new lib level exp function, see function definition for more details -Ares
 
 int is_monster() {return 1;}
@@ -1408,6 +1409,11 @@ int set_heart_beat(int flag) {
     //// if monsters start fucking up the world over, take the first line out.
 }
 
+int query_exp_needed(int level) {
+int exp;
+exp = EXP_NEEDED[level];
+return exp;
+}
 /**
  * Automatically Sets monster exp based on exp needed towards next level
  *
