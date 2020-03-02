@@ -1,6 +1,6 @@
 #include <magic.h>
 #include <std.h>
-#include <spell.h>2
+#include <spell.h>
 inherit SPELL;
 
 object *animated, *monsters, control;

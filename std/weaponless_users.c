@@ -33,7 +33,7 @@ void create()
     static_weaponless["num_dice"] = 1;
     static_weaponless["type"] = 4;
     static_weaponless["num_hand"] = 0;
-    static_weaponless["weapon_type"] = "bludgeon";
+    static_weaponless["weapon_type"] = "bludgeoning";
     static_weaponless["attack_limbs"] = ({ "right hand", "left hand" });
 
     ::create();
