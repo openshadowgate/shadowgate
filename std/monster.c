@@ -1425,13 +1425,11 @@ void set_new_exp(int level, string perc)
 {
     int exp,div;
 
-    if(!intp(level) || level < 1)
-    {
+    if (!intp(level) || level < 1) {
         level = (int)TO->query_level();
     }
 
-    if(!stringp(perc) || perc == "" || perc == " ")
-    {
+    if (!stringp(perc) || perc == "" || perc == " ") {
         perc = "normal";
     }
 
@@ -1462,22 +1460,21 @@ void set_new_exp(int level, string perc)
         break;
     }
 
-    if(level == 0) { level = 1; }
-    if(level > 100) { level = 100; exp = 3510000000; }    // table goes to 100 now
-    else
-    {
-        exp = EXP_NEEDED[level + 1] - EXP_NEEDED[level]; // 1 level worth of exp
+    if (level == 0) {
+        level = 1;
+    }
+    if (level > 100) {
+        level = 100; exp = 3510000000;
+    }                                                         // table goes to 100 now
+    else {
+        exp = EXP_NEEDED[level + 1] - EXP_NEEDED[level];     // 1 level worth of exp
     }
 
-//    exp = (exp / (level * 11)); //this is bad! it is nonlinear
-// this can cause higher levels mobs to give less xp than lower level mobs
-// the fix is to use a constant - here I recommend 165, essentially 15th level
-// the constant means a L15 player would have to kill 165 L15 monsters to get to L16.
-// because it is constant, this means a L49 would have to kill 165 L49 monsters to get L50.
-    exp = exp / 165; // Uriel 1 March 2020
+    //this is GOOD, DON'T CHANGE IT. NON LINEAR FUNCTIONS ARE
+    //FUNCTIONS TOO AND THEY HAVE CHILDREN TO FEED
+    exp = (exp / (level * 13));
 
-    if(perc != "normal")
-    {
+    if (perc != "normal") {
         exp = (exp * div) / 100;
     }
 
