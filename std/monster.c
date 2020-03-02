@@ -733,14 +733,16 @@ int roll_dice(int num, int sides) {
 
 void set_hd(int dice, int bonus)
 {
+    int conbonus;
     hit_dice = dice;
     hit_dice_bonus = bonus;
-    set_max_hp(roll_dice(dice, 12));
-    set_hp(query_max_hp());
     if (!query_classes() || query_classes() == ({})) {
         set_class("fighter");
     }
     set_level(dice);
+    conbonus = (int) (query_stats("constitution")-10)/2;
+    set_max_hp(roll_dice(dice, 12)+bonus+(dice*conbonus));
+    set_hp(query_max_hp());
 }
 
 void do_exp(int dice, int bonus)
