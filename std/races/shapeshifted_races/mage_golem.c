@@ -97,6 +97,10 @@ int hand_attack(object tp, object targ)
 {
     int rand;
     rand = random(10);
+    if (!objectp(targ)) {
+        return;
+    }
+
     switch(rand)
     {
     case 0..2:
