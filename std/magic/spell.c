@@ -2603,7 +2603,7 @@ varargs int do_save(object targ,int mod) {
     }
 
     if ((string)targ->query_race() == "gnome" && spell_sphere == "illusion") {    // rock & forest gnome, +2 vs illusions
-        if ((string)targ->query("subrace") == "rock gnome" || (string)targ->query("subrace") == "forest gnome") {
+        if (targ->query("subrace") == "rock gnome" || targ->query("subrace") == "forest gnome" || targ->query("subrace") == "trixie") {
             caster_bonus -= 2;
         }
     }

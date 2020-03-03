@@ -21,15 +21,17 @@ int *age_brackets() {
 
 int *restricted_alignments(string subrace) { return ({ 3, 6, 9 }); }
 
-string *restricted_classes(string subrace)
+string* restricted_classes(string subrace)
 {
-    if(!subrace || subrace == "") { return ({  "paladin", "ranger", "psion", "psywarrior", "druid", "inquisitor" }); }
-    switch(subrace)
-    {
-    case "svirfneblin": case "deep gnome": return ({  "paladin", "psion", "psywarrior", "bard", "druid", "warlock", "inquisitor" }); break;
-      case "forest gnome": return ({  "paladin", "psion", "psywarrior", "inquisitor" }); break;
-    case "rock gnome" : return ({ "paladin","psion","psywarrior", "inquisitor" }); break;
-    default: return ({  "paladin", "ranger", "psion", "psywarrior", "druid", "inquisitor" }); break;
+    if (!subrace || subrace == "") {
+        return ({ "paladin", "ranger", "psion", "psywarrior", "druid", "inquisitor" });
+    }
+    switch (subrace) {
+    case "svirfneblin": case "deep gnome": return ({ "paladin", "psion", "psywarrior", "bard", "druid", "warlock", "inquisitor" }); break;
+    case "forest gnome": return ({ "paladin", "psion", "psywarrior", "inquisitor" }); break;
+    case "rock gnome": return ({ "paladin", "psion", "psywarrior", "inquisitor" }); break;
+    case "trixie": return ({ "paladin", "psion", "psywarrior", "inquisitor" }); break;
+    default: return ({ "paladin", "ranger", "psion", "psywarrior", "druid", "inquisitor" }); break;
     }
 }
 
@@ -42,27 +44,35 @@ string *restricted_deities(string subrace) {
     }
 }
 
-int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    if(!subrace || subrace == "") return ({ -2, 0, 2, 0, 0, 0 });
-    switch(subrace) {
-      case "svirfneblin": case "deep gnome": return ({ -2, 2, 0, 0, 2, -2 }); break;
-      default: return ({ -2, 0, 2, 0, 0, 0 }); break;
+int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
+{
+    if (!subrace || subrace == "") {
+        return ({ -2, 0, 2, 0, 0, 0 });
+    }
+    switch (subrace) {
+    case "svirfneblin": case "deep gnome": return ({ -2, 2, 0, 0, 2, -2 }); break;
+    case "trixie": case "deep gnome": return ({ -2, 2, 0, 0, 2, 0 }); break;
+    default: return ({ -2, 0, 2, 0, 0, 0 }); break;
     }
 }
 
 mapping skill_mods(string subrace) {
     if(!subrace || subrace == "") return ([ "academics" : 2 ]);
     switch(subrace) {
-      case "forest gnome": case "svirfneblin": case "deep gnome": return ([ "stealth" : 2 ]); break;
+    case "forest gnome" : case "svirfneblin": case "deep gnome": case "trixie": return ([ "stealth" : 2 ]); break;
       default: return ([ "academics" : 2 ]); break; //rock gnome default
     }
 }
 
-int level_adjustment(string subrace) {
-    if(!subrace || subrace == "") return 0;
-    switch(subrace) {
-      case "svirfneblin": case "deep gnome": return 3; break;
-      default: return 0; break;
+int level_adjustment(string subrace)
+{
+    if (!subrace || subrace == "") {
+        return 0;
+    }
+    switch (subrace) {
+    case "svirfneblin": case "deep gnome": return 3; break;
+    case "trixie":return 1; break;
+    default: return 0; break;
     }
 }
 
@@ -76,45 +86,49 @@ int natural_AC(string subrace) {
 
 mixed query_racial_innate(string subrace)
 {
-	if(!subrace || subrace == "") return 0;
-	switch(subrace)
-	{
-		case "svirfneblin" : case "deep gnome":
-			return (["blindness" : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0]),
-		   	"displacement" : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0]),
-		   	"misdirection"      : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0]),
-		   	"dancing lights" : (["type" : "spell", "casting level" : 0.5,
-				    "daily uses" : 1, "delay" : 1, "uses left" : 1,
-			 	    "refresh time" : -1, "level required" : 0,
-				    "class specific" : 0]),
-		   	"alter self" : (["type" : "spell", "casting level" : 0.5,
-				    "daily uses" : 1, "delay" : 1, "uses left" : 1,
-			 	    "refresh time" : -1, "level required" : 0,
-				    "class specific" : 0]), ]);
-		 	break;
-		case "forest gnome":
-			return (["ghost step" : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0])]);
-			break;
-		default:
-			return 0;
-			break;
-	}
-	return 0;
+    if (!subrace || subrace == "") {
+        return 0;
+    }
+    switch (subrace) {
+    case "svirfneblin": case "deep gnome":
+        return (["blindness" : (["type" : "spell", "casting level" : 0.5,
+                                 "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                 "refresh time" : -1, "level required" : 0,
+                                 "class specific" : 0]),
+                 "displacement" : (["type" : "spell", "casting level" : 0.5,
+                                    "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                    "refresh time" : -1, "level required" : 0,
+                                    "class specific" : 0]),
+                 "misdirection"      : (["type" : "spell", "casting level" : 0.5,
+                                         "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                         "refresh time" : -1, "level required" : 0,
+                                         "class specific" : 0]),
+                 "dancing lights" : (["type" : "spell", "casting level" : 0.5,
+                                      "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                      "refresh time" : -1, "level required" : 0,
+                                      "class specific" : 0]),
+                 "alter self" : (["type" : "spell", "casting level" : 0.5,
+                                  "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                  "refresh time" : -1, "level required" : 0,
+                                  "class specific" : 0]), ]);
+        break;
+    case "forest gnome": case "trixie":
+        return (["ghost step" : (["type" : "spell", "casting level" : 0.5,
+                                  "daily uses" : 1, "delay" : 1, "uses left" : 1,
+                                  "refresh time" : -1, "level required" : 0,
+                                  "class specific" : 0])]);
+        break;
+    default:
+        return 0;
+        break;
+    }
+    return 0;
 }
 
-int sight_bonus(string subrace) { return 3; } // what to set for svirfneblin?
+int sight_bonus(string subrace)
+{
+    return 3;
+}                                             // what to set for svirfneblin?
 
 mapping daily_uses(string subrace) {
     if(!subrace || subrace == "") return ([]);
@@ -226,6 +240,9 @@ string *query_hair_colors(string subrace) {
         choices += ({"silver", "golden"});
         choices += ({"brown", "blonde", "gray", "white", "bald"});
     }
+    if(subrace == "trixie") {
+        choices += ({"green", "blue", "pink", "cyan"});
+    }
     if(subrace == "forest gnome") {
         choices += ({"ebony"});
         choices += ({"sable"});
@@ -257,7 +274,7 @@ string *query_subraces(object who) {
     string *subraces;
     subraces = ({"rock gnome", "forest gnome"});
     if(OB_ACCOUNT->is_experienced(who->query_true_name()) || avatarp(who) || who->query("is_valid_npc")) {
-        subraces += ({"deep gnome"});
+        subraces += ({"deep gnome", "trixie"});
     }
     return subraces;
 }
