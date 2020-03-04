@@ -254,19 +254,22 @@ string *query_hair_colors(string subrace) {
     return choices;
 }
 
-string *query_eye_colors(string subrace) {
-    string *choices = ({});
-    if(!stringp(subrace) || subrace == "rock gnome") {
-        choices += ({"violet", "amethyst"});
-        choices += ({"sapphire", "azure"});
-        choices += ({"blue", "gray"});
+string* query_eye_colors(string subrace)
+{
+    string* choices = ({});
+    if (!stringp(subrace) || subrace == "rock gnome") {
+        choices += ({ "violet", "amethyst" });
+        choices += ({ "sapphire", "azure" });
+        choices += ({ "blue", "gray" });
     }
-    else if(subrace == "forest gnome") {
-        choices += ({"sable", "chocolate", "coffee", "emerald", "sapphire"});
-        choices += ({"brown", "hazel", "azure"});
-        choices += ({"green", "blue"});
+    if (subrace == "forest gnome" || subrace == "trixie") {
+        choices += ({ "sable", "chocolate", "coffee", "emerald", "sapphire" });
+        choices += ({ "brown", "hazel", "azure" });
+        choices += ({ "green", "blue" });
     }
-    if(subrace == "deep gnome") { return ({"black", "gray"}); }
+    if (subrace == "deep gnome") {
+        return ({ "black", "gray" });
+    }
     return choices;
 }
 
