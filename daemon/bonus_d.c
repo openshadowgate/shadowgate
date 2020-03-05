@@ -86,7 +86,9 @@ int monster_thaco(int hd) { return thaco((int)PO->query_level(),(string)PO->quer
 
 int query_con_bonus(int num)
 {
-    if(!intp(num)) { return 0; }
+    if (!intp(num)) {
+        return 0;
+    }
     return (num - 10) / 2;
 }
 
@@ -95,23 +97,23 @@ int query_dex_bonus(object target)
     object *torso=({});
     int i,dex,ret,enc,bonus,max=10;
 
-    if(!objectp(target)) { return 0; }
+    if (!objectp(target)) {
+        return 0;
+    }
     dex = (int)target->query_stats("dexterity");
 
     ret = (dex - 10) / 2 * -1;
 
-    if(!interactive(target))
-    {
+    if (!userp(target)) {
         //limiting this to a max of 3 from dex for mobs, simply because mobs end up with stupidly high dex stats
         //unless they are manually set and hopefully this might
         //help balance things out since I removed the double dex bonus to attack that everyone got - Saide
-        if(target->query_property("full ac"))
-        {
-            if(ret > 3) ret = 3;
+        if (target->query_property("full ac")) {
+            if (ret > 5) {
+                ret = 5;
+            }
             return ret;
-        }
-        else
-        {
+        }else {
             return 0;
         }
     }
@@ -119,8 +121,7 @@ int query_dex_bonus(object target)
     // gets the max dex bonus based on armor type
     torso = (object *)target->query_armour("torso");
 
-
-    if (!sizeof(torso) || FEATS_D->usable_feat(TO, "armor training")) {
+    if (!sizeof(torso) || FEATS_D->usable_feat(target, "armor training")) {
         max = 10;
     } else {
         for (i = 0; i < sizeof(torso); i++) {
@@ -132,14 +133,7 @@ int query_dex_bonus(object target)
             }
             bonus = (int)torso[i]->query_max_dex_bonus();
             if (!bonus) {
-                if (strsrch(base_name(torso[i]), "/d/common/obj/sheath/") != -1) {
-                    continue;
-                }
                 log_file("armor_no_max", "" + base_name(torso[i]) + " no set_max_dex_bonus() or is 0.\n");
-                if (objectp(environment(torso[i]))) {
-                    tell_object(environment(torso[i]), "" + torso[i]->query_name() + " has "
-                                "a problem, please contact a wiz.");
-                }
                 continue;
             }
             if (bonus < max) {

@@ -15,23 +15,22 @@ void create() {
 
 int prerequisites(object ob)
 {
-   if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
 
-   if((int)ob->query_class_level("monk") < 10 || (int)ob->query_alignment() > 3)
-   {
-      dest_effect();
-      return 0;
-   }
-   if(((string)ob->query("monk way") != "way of the shadow") && !FEATS_D->usable_feat(ob,"grandmaster of the way"))
-   {
-       dest_effect();
-       return 0;
-   }
-   if(!ob->is_ok_armour("barb"))
-   {
-       dest_effect();
-       return 0;
-   }
+    if ((int)ob->query_class_level("monk") < 10) {
+        dest_effect();
+        return 0;
+    }
+    if (((string)ob->query("monk way") != "way of the shadow") && !FEATS_D->usable_feat(ob, "grandmaster of the way")) {
+        dest_effect();
+        return 0;
+    }
+    if (!ob->is_ok_armour("barb")) {
+        dest_effect();
+        return 0;
+    }
     return ::prerequisites(ob);
 }
 
