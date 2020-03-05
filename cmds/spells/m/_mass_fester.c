@@ -6,15 +6,21 @@ int lower;
 
 object * atttracker = ({});
 
+int is_curse()
+{
+    return 1;
+}
+
 void create()
 {
     ::create();
     set_spell_name("mass fester");
     set_spell_level(([ "inquisitor" : 6 ]));
     set_spell_sphere("necromancy");
+    set_affixed_spell_level(3);
     set_syntax("cast CLASS mass fester");
     set_damage_desc("resistance to healing spells");
-    set_description("Necrotic energy permeates every attacker, blocking some of energy flow, impeding their healing abilities.");
+    set_description("This spell functions exactly like fester, but affects all attackers.");
     set_verbal_comp();
     set_somatic_comp();
 }
