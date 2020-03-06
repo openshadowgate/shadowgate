@@ -64,11 +64,6 @@ void spell_effect(int prof) {
 		TO->remove();
 		return;
 	}
-    if (who->query_invis() && (int)who->query_level() > (int)CASTER->query_level()) {
-        tell_object(CASTER,capitalize(arg)+" cannot be found to establish a link.\n");
-        TO->remove();
-        return;
-    }
     if (who->is_player() && !interactive(who)) {
         tell_object(CASTER, who->QCN+" is link-dead and cannot hear you.\n");
         TO->remove();
