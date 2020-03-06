@@ -160,9 +160,9 @@ int add_max_hp_bonus(int hp)
 {
     max_hp_bonus += hp;
 
-    if(max_hp_bonus>=(query_max_hp_base()) / 4)
+    if(max_hp_bonus>=(query_max_hp_base()) / 3)
     {
-        max_hp_bonus=query_max_hp_base() / 4;
+        max_hp_bonus=query_max_hp_base() / 3;
         return 0;
     }
     return 1;

@@ -1811,11 +1811,12 @@ int is_living()
  */
 int is_undead()
 {
-    return (query_race() == "undead" ||
+    return (query("undead") ||
             query_property("undead") ||
-            query_acquired_template() == "undead" ||
+            query_race() == "undead" ||
             member_array("undead", query_id()) != -1 ||
-            query("undead")) || 0;
+            query_acquired_template() == "undead" ||
+            query_acquired_template() == "vampire") || 0;
 }
 
 /**
