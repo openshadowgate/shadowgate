@@ -2,7 +2,7 @@
 #include <priest.h>
 inherit SPELL;
 
-#define CREATURES ({"rat","chipmunk","squirrel","bunny","mouse","raven","pigeon","cat","dog","weasel"})
+#define CREATURES ({"rat","chipmunk","squirrel","bunny","mouse","raven","pigeon","cat","weasel"})
 string creature;
 
 void create() {
@@ -11,10 +11,8 @@ void create() {
     set_spell_name("animal messenger");
     set_spell_level(([ "ranger" : 1,"druid" : 2 ]));
     set_spell_sphere("divination");
-    set_syntax("cast CLASS animal messenger on TARGET with the message <message>");
-    set_description("This spell will allow a ranger to attempt to send a brief message by way of a small creature, if any "
-"are around.  The caster has no way of knowing if the target has heard their message, or if the creature has gotten lost "
-"along the way.");
+    set_syntax("cast CLASS animal messenger on TARGET with the message TEXT");
+    set_description("This spell will allow a ranger to attempt to send a brief message by way of a small creature, if any are around..");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -62,7 +60,7 @@ void spell_effect(int prof) {
 		dest_effect();
         return;
     }
-    // there has to be a more elegant way to do this... 
+    // there has to be a more elegant way to do this...
     if(""+info[1]+" "+info[2]+" "+info[3]+"" != "with the message")   {
         tell_object(caster,"You must use the syntax: \n"
             "chant animal messenger to TARGET with the message <message>");
@@ -140,7 +138,7 @@ void spell_effect(int prof) {
     return;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

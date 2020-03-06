@@ -28,10 +28,10 @@ int armor_filter(object ob){
 
 int cmd_cast(string str)
 {
-    object targ, *armor,*wielded;
-    int i,j, align, healharm, schoolspell,mylvl,*mapkeys;
-    string str2,tmp, type, spell, tar, *known, myschool, myexp, myexp1, myexp2, myexp3;
-    mapping mymapp = ([]),mymapp2 = ([]);
+    object targ, * armor, * wielded;
+    int i, j, align, healharm, schoolspell, mylvl, * mapkeys, domain;
+    string str2, tmp, type, spell, tar, * known, myschool, myexp, myexp1, myexp2, myexp3;
+    mapping mymapp = ([]), mymapp2 = ([]);
 
     seteuid(getuid());
     if(!str) {
@@ -40,47 +40,48 @@ int cmd_cast(string str)
     }
     type = "none";
 
-    if(TP->query_casting() && objectp(TP->query_property("spell_casting")))
+    if (TP->query_casting() && objectp(TP->query_property("spell_casting"))) {
         return notify_fail("You are already doing something!\n");
-
-    if(TP->query_property("using instant feat")) // a clever player noticed this only goes one way! Fixing that...
-        return notify_fail("You are already doing something!\n");
-
-// clerical checks for spontaneous healing/harming casts
-    if (strsrch(str, "as healing") != -1)
-    {
-        healharm=1;
-        str=replace_string(str,"as healing","",1);
-    }
-    else
-    {
-        if (strsrch(str, "as harming") != -1 )
-        {
-            healharm=-1;
-            str=replace_string(str,"as harming","",1);
-        }
-        else healharm = 0;
     }
 
-    if(regexp(str,implode("/daemon/player_d"->list_classes(),"|")+"|innate"))
-    {
-        if(!sscanf(str,"%s %s",type,str2))
+    if (TP->query_property("using instant feat")) {
+        return notify_fail("You are already doing something!\n");
+    }
+
+    // clerical checks for spontaneous healing/harming casts
+    if (strsrch(str, "as healing") != -1) {
+        healharm = 1;
+        str = replace_string(str, "as healing", "", 1);
+    } else if (strsrch(str, "as harming") != -1) {
+        healharm = -1;
+        str = replace_string(str, "as harming", "", 1);
+    } else {
+        healharm = 0;
+    }
+
+    /* if (regexp(str, "as [a-z]+ domain")) { */
+    /*     domain = 1; */
+    /* } */
+
+    if (regexp(str, implode("/daemon/player_d"->list_classes(), "|") + "|innate")) {
+        if (!sscanf(str, "%s %s", type, str2)) {
             return notify_fail("Syntax: <cast CLASS CAST_STRING>\n");
-    }
-    else
-    {
+        }
+    }else {
         type = TP->query_class();
         str2 = str;
     }
 
-    if(!sscanf(str2,"%s on %s",str2,tar))
-        if(!sscanf(str2,"%s at %s",str2,tar))
-            if(!sscanf(str2,"%s to %s",str2,tar))
-                if(!sscanf(str2,"%s as %s",str2, tar))
+    if (!sscanf(str2, "%s on %s", str2, tar))
+        if (!sscanf(str2, "%s at %s", str2, tar))
+            if (!sscanf(str2, "%s to %s", str2, tar))
+                if (!sscanf(str2, "%s as %s", str2, tar)) {
                     tar = 0;
+                }
 
-    if(!TP->is_class(type) && !avatarp(TP) && type != "innate")
-        return notify_fail("You can't cast spells as a "+type+"!\n");
+    if (!TP->is_class(type) && !avatarp(TP) && type != "innate") {
+        return notify_fail("You can't cast spells as a " + type + "!\n");
+    }
 
     align = TP->query_true_align();
     if (healharm) {
@@ -157,33 +158,30 @@ int cmd_cast(string str)
            type == "warlock")
             armor = filter_array(armor,"light_armor_filter",TO);
     }
-    if(type == "psywarrior" || type == "psion")
-    {
-        if(FEATS_D->usable_feat(TP,"armored manifester") || FEATS_D->usable_feat(TP,"mind before matter"))
-        {
+    if (type == "psywarrior" || type == "psion") {
+        if (FEATS_D->usable_feat(TP, "armored manifester") || FEATS_D->usable_feat(TP, "mind before matter")) {
             armor = ({});
-        }
-        else
-        {
+        }else {
             armor = TP->all_armour();
             armor = distinct_array(armor);
-            armor = filter_array(armor,"armor_filter",TO);
-            if(FEATS_D->usable_feat(TP,"armored caster")) armor = filter_array(armor,"light_armor_filter",TO);
+            armor = filter_array(armor, "armor_filter", TO);
+            if (FEATS_D->usable_feat(TP, "armored caster")) {
+                armor = filter_array(armor, "light_armor_filter", TO);
+            }
         }
     }
-    if (FEATS_D->usable_feat(TP,"eldritch conditioning"))
+    if (FEATS_D->usable_feat(TP, "eldritch conditioning")) {
         armor = ({});
-    if(sizeof(armor) && !avatarp(TP))
-    {
-        tell_object(TP,"You cannot cast while wearing all that armor!");
+    }
+    if (sizeof(armor) && !avatarp(TP)) {
+        tell_object(TP, "You cannot cast while wearing all that armor!");
         return 1;
     }
 
-    if(TP->query("relationship_profile"))
-        if(strsrch((string)TP->query("relationship_profile"),"druid_")>=0)
-            if(TP->query_property("shapeshifted") && type != "innate" && type != "druid")
-            {
-                tell_object(TP,"You can only cast druid spells or innate abilities while in druidic form.");
+    if (TP->query("relationship_profile"))
+        if (strsrch((string)TP->query("relationship_profile"), "druid_") >= 0)
+            if (TP->query_property("shapeshifted") && type != "innate" && type != "druid") {
+                tell_object(TP, "You can only cast druid spells or innate abilities while in druidic form.");
                 return 1;
             }
 
@@ -196,14 +194,14 @@ int cmd_cast(string str)
         return 1;
     }
 
-    if(healharm)
-    {
+    if (healharm) {
         targ = find_object_or_load(tmp);
-        if (healharm > 0) tmp = HEALS[(int)targ->query_spell_level(type)-1];
-        else tmp = HARMS[(int)targ->query_spell_level(type)-1];
-        if(!file_exists(tmp))
-        {
-            write("Garrett fucked up the spell conversions...");
+        if (healharm > 0) {
+            tmp = HEALS[(int)targ->query_spell_level(type) - 1];
+        } else {
+            tmp = HARMS[(int)targ->query_spell_level(type) - 1];
+        }
+        if (!file_exists(tmp)) {
             return 1;
         }
     }
@@ -223,10 +221,11 @@ int cmd_cast(string str)
         type == "inquisitor" ||
         type == "oracle" ||
         type == "psywarrior" ||
-        type == "psion")
-        targ->set_property("improvised",spell);
+        type == "psion") {
+        targ->set_property("improvised", spell);
+    }
     TP->remove_property("spell_casting");
-    TP->set_property("spell_casting",targ);
+    TP->set_property("spell_casting", targ);
 
     if (FEATS_D->usable_feat(TP, "surprise spells") || FEATS_D->usable_feat(TP, "elusive spellcraft")) {
         targ->set_silent_casting(1);

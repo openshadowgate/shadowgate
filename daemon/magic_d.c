@@ -457,12 +457,15 @@ mixed query_random_spell(string myclass, int lev)
 }
 
 
-mixed *query_index(string myclass){
+mixed* query_index(string myclass)
+{
     string theclass = myclass;
-    if (theclass == "sorcerer")
+    if (theclass == "sorcerer") {
         theclass = "mage";
-    if (theclass == "oracle")
+    }
+    if (theclass == "oracle") {
         theclass = "cleric";
+    }
     return allSpells[theclass];
 }
 
@@ -476,13 +479,20 @@ mapping *filter_global_index(function filter)
     return filter_mapping(spellIndex,filter);
 }
 
-int query_spell_level(string myclass, string spell){
-    if (myclass == "sorcerer")
+int query_spell_level(string myclass, string spell)
+{
+    if (myclass == "sorcerer") {
         myclass = "mage";
-    if (myclass == "oracle")
+    }
+    if (myclass == "oracle") {
         myclass = "cleric";
-    if(!allSpells[myclass]) return 0;
-    if(!allSpells[myclass][spell]) return 0;
+    }
+    if (!allSpells[myclass]) {
+        return 0;
+    }
+    if (!allSpells[myclass][spell]) {
+        return 0;
+    }
     return allSpells[myclass][spell];
 }
 
