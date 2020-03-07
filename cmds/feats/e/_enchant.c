@@ -1,8 +1,16 @@
+// Feat was opened to cleric/druid/oracle spells, but never had settings for their spell type.
+// Have put in a half-fix for now to select the first default class that can cast it.
+// Temporary overrides for sorc -> mage and oracle -> cleric cuz all sorc spells are "mage", 
+// and most oracle spells are cleric, so will conflict if querying by base class.
+// Will at least stop people enchanting spells from classes they don't have for now!
+// Longterm it needs a proper set of queries for can_cast etc. N, 7/3/20.
 #include <std.h>
 #include <daemons.h>
 inherit FEAT;
 
 int help();
+
+string castclass;
 
 void create() {
     ::create();
@@ -87,8 +95,8 @@ void execute_feat() {
 }
 
 void select_spell(string str, object ob){
-    string spell;
-    string * names;
+    string spell, filename;
+    string * names, *myclasses;
     object bag;
     int i;
 
@@ -99,8 +107,27 @@ void select_spell(string str, object ob){
 
     spell = replace_string(str," ","_");
     spell = "/cmds/spells/"+spell[0..0]+"/_"+spell;
-    if (!file_exists(spell+".c")) {
+    filename = spell+".c";
+    if (!file_exists(filename)) {
         tell_object(caster,"%^BOLD%^%^RED%^That spell does not exist");
+        write("%^BOLD%^%^RED%^You start the process of enchanting the "+ob->query_short()+".");
+        write("%^YELLOW%^Enter spell name:");
+        write("~q to cancel");
+        input_to("select_spell",0,ob);
+        return;
+    }
+    myclasses = caster->query_classes();
+    if(!sizeof(myclasses)) {
+        tell_object(caster,"You don't have any classes! Please contact an imm to unbork yourself!");
+        return;
+    }
+    if(caster->is_class("sorcerer")) myclasses += ({ "mage" }); // patch to pick up mage spell list for sorcs
+    if(caster->is_class("oracle")) myclasses += ({ "cleric" }); // patch to pick up cleric spell list for oracles
+    for(i=0;i<sizeof(myclasses);i++) {
+        if(filename->query_spell_level(myclasses[i])) castclass = myclasses[i];
+    }
+    if(castclass == "") {
+        tell_object(caster,"Your class can't cast that spell, please try again.");
         write("%^BOLD%^%^RED%^You start the process of enchanting the "+ob->query_short()+".");
         write("%^YELLOW%^Enter spell name:");
         write("~q to cancel");
@@ -228,10 +255,11 @@ void do_enchant(string str,object ob, string spell, string file, int charges, in
     ob->set("effect","spell_effect");
     ob->set("uses",charges);
     ob->set("spell",spell);
-    if (caster->is_class("psion"))
+/*    if (caster->is_class("psion"))
         ob->set("spell type","psion");
     else
-        ob->set("spell type","mage");
+        ob->set("spell type","mage"); */
+    ob->set("spell type",castclass);
     ob->set("level",level);
     write("%^BOLD%^You lift the gem and focus your energy into it.");
     tell_room(environment(caster),"%^BOLD%^%^RED%^"+caster->QCN+" lifts the gem and starts to focus on it.",caster);
