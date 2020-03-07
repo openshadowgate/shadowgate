@@ -108,15 +108,12 @@ void validate_class_feats(object ob)
             tell_object(ob,"%^BOLD%^%^RED%^Removing:%^RESET%^ " + fname);
             remove_feat(ob, "class", fname);
         }
+        tell_object(ob,"%^BOLD%^%^RED%^Resetting free feats wipe flag.");
+        ob->delete("free_feat_wipe");
     }
     if (sizeof(toadd)) {
         "/cmds/mortal/_feats"->cmd_feats("fix");
     }
-    if (sizeof(toadd) || sizeof(toremove)) {
-        tell_object(ob,"%^BOLD%^%^RED%^Resetting free feats wipe flag.");
-        ob->delete("free_feat_wipe");
-    }
-
 }
 
 void obsolete_feat(object ob) {
