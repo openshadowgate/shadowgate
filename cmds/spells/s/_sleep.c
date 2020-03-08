@@ -53,43 +53,25 @@ spell_effect(int prof)
     }
     time = rounds * ROUND_LENGTH;
 
-    //d20 SRD set Sleep as having max 4 HD. That's pretty small for SG so
-    //setting it to 8 to be useful at lower levels. However, this is a
-    //L1 spell and it really shouldn't have impact on PK at upper levels.
-    //Solution I am setting here is 1/2 Clevel -- Uriel Feb 2020
+    max_hd = clevel / 2;
 
-    //Raising to 20 to affect most of the townsfolk -- Illy
-
-    //Removing cap and setting it to /2 because we apparently have L30 farmers... -- Illy
-
-    //Reducing it to / 3 because of playtesting... Also, why I'm
-    //suddently writing comments about obvious changes?.. Is anyone
-    //even reading any comments?.. Is anyone even there?.. What's is
-    //the meaning of life?.. I want cheese, please let me go. --- Illy
-    max_hd = clevel / 3;
-
-    //validate target specified by caster
-    if (!objectp(target)) {
-        tell_object(caster, "Your target is not an object");
-        return;
-    }
-    if (!caster->ok_to_kill(target)) {
-        tell_object(caster, "Target is not PK eligible");
-        return;
-    }
     //validate additional targets in the room
     prospective = target_filter(all_living(environment(caster)));
+    prospective = target_filter(prospective);
 
     counter = 0;
     targets = ({ target });
 
     for (x=0;x < sizeof(prospective);x++)
     {
+        if (!objectp(prospective[x])) {
+            continue;
+        }
+
         if (counter >= max_hd) {
             break;
         }
         if (!caster->ok_to_kill(prospective[x])) {
-            tell_object(caster, prospective[x]->QCN + "is not a valid target.");
             continue;
         }
         this_target = prospective[x];
@@ -97,15 +79,12 @@ spell_effect(int prof)
 
         if (do_save(this_target, 0) == 1) {
             resisted = 1;
-//            tell_object(caster,"Debug, target made saving throw /n");
         }
         if ("/daemon/player_d.c"->immunity_check(this_target, "sleep") == 1) {
             resisted = 1;
-//            tell_object(caster,"Debug, target is immune /n");
         }
         if (mind_immunity_check(this_target, "default") == 1) {
             resisted = 1;
-//            tell_object(caster,"Debug, target is mind immune /n");
         }
         if (resisted == 1) {
            tell_room(environment(this_target),
@@ -129,7 +108,7 @@ spell_effect(int prof)
            "will is too strong for you!\nYou suddenly become drowsy and fall asleep.");
         tell_object(caster,"%^GREEN%^You break into "+this_target->QCN+"'s mind and "
            "overcome "+target->QP+" willpower!");
-        this_target->set_asleep(time, "You are asleep!");
+        this_target->set_asleep(time, "You are having a nap.");
         this_target->set_property("spelled", ({TO}) );
         this_target->remove_attacker(caster);
         caster->remove_attacker(this_target);
@@ -142,37 +121,7 @@ spell_effect(int prof)
         dest_effect();
         return;
     }
-    call_out("dest_effect",time);
     return;
-}
-
-void dest_effect()
-{
-    object* spells_on, * newtargs;
-    newtargs = ({});
-    for (x = 0; x < sizeof(targets); x++) {
-        if (targets[x]) {
-            this_target = targets[x];
-            if (spells_on = this_target->query_property("spelled")) {
-                this_target->remove_property_value("spelled", ({ TO }));
-                spell_kill(this_target, caster);
-                if (present(caster, environment(this_target))) {
-                    tell_room(environment(this_target),
-                              "%^YELLOW%^Outraged at " + caster->QCN + " for " + caster->QP +
-                              " mind control, " + this_target->QCN + " attacks " + caster->QO + "!", ({ this_target, caster }));
-                    tell_object(this_target,
-                                "%^YELLOW%^Outraged at " + caster->QCN + " for " + caster->QP + " mind control, you attack" + caster->QO + "!");
-                    tell_object(caster,
-                                "%^YELLOW%^" + this_target->QCN + " attacks you, outraged at you for your mind control!");
-                    spell_kill(this_target, caster);
-                }
-            }
-        }
-    }
-    ::dest_effect();
-    if (objectp(TO)) {
-        TO->remove();
-    }
 }
 
 string query_cast_string()
