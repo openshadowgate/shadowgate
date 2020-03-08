@@ -57,9 +57,16 @@ spell_effect(int prof)
     //setting it to 8 to be useful at lower levels. However, this is a
     //L1 spell and it really shouldn't have impact on PK at upper levels.
     //Solution I am setting here is 1/2 Clevel -- Uriel Feb 2020
+
     //Raising to 20 to affect most of the townsfolk -- Illy
-    //Removing cap because we apparently have L30 farmers... -- Illy
-    max_hd = clevel / 2;
+
+    //Removing cap and setting it to /2 because we apparently have L30 farmers... -- Illy
+
+    //Reducing it to / 3 because of playtesting... Also, why I'm
+    //suddently writing comments about obvious changes?.. Is anyone
+    //even reading any comments?.. Is anyone even there?.. What's is
+    //the meaning of life?.. I want cheese, please let me go. --- Illy
+    max_hd = clevel / 3;
 
     //validate target specified by caster
     if (!objectp(target)) {
