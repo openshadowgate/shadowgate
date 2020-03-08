@@ -1510,6 +1510,15 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         }
     }
 
+    if (query_aoe_spell()) {
+        caster->add_aoe(query_spell_name());
+        if (stringp(aoe_message)) {
+            place->set_property("aoe_messages", ({ aoe_message }));
+        } else {
+            place->set_property("aoe_messages", ({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
+        }
+    }
+
     if (spell_type == "potion") {
         TO->spell_effect(prof);
         return 1;
@@ -1531,16 +1540,7 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         }else {
             place->set_round(TO, (int)place->query_stage() + spell_level);
         }
-
         caster->set_casting(1);
-        if (query_aoe_spell()) {
-            caster->add_aoe(query_spell_name());
-            if (stringp(aoe_message)) {
-                place->set_property("aoe_messages", ({ aoe_message }));
-            } else {
-                place->set_property("aoe_messages", ({ "%^BOLD%^%^WHITE%^(magical energies surge through the area)%^RESET%^" }));
-            }
-        }
     }else {
         TO->spell_effect(prof);
     }
