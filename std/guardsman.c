@@ -136,7 +136,6 @@ string query_race_message(object targ);
 string query_guarding();
 int is_guard(string area);
 void add_to_wanted(object live);
-int is_sparring(object live);
 int is_jailer(object live);
 int is_local_guard(object guard);
 int wanted(object live);
@@ -229,9 +228,17 @@ string query_capture_location()
     return capture_location;
 }
 
-int is_guardsman() { return 1; }
+int is_guardsman()
+{
+    return 1;
+}
 
-string query_race_action() { if(race_action) return race_action; }
+string query_race_action()
+{
+    if (race_action) {
+        return race_action;
+    }
+}
 
 int query_bad_race(object live)
 {
@@ -258,103 +265,135 @@ string query_guarding() { return area_guarded; }
 
 int is_guard(string area)
 {
-    if(query_guarding() == area) { return 1; }
-    else return 0;
+    if (query_guarding() == area) {
+        return 1;
+    }else {
+        return 0;
+    }
 }
 
 void add_to_wanted(object live)
 {
-    if(!objectp(live))     { return; }
-    if(!live->is_player()) { return; }
+    if (!objectp(live)) {
+        return;
+    }
+    if (!live->is_player()) {
+        return;
+    }
 
-    if(!AREALISTS_D->is_wanted(live,query_guarding(),TO))
-    {
-        AREALISTS_D->add_wanted(live,query_guarding(),TO);
+    if (!AREALISTS_D->is_wanted(live, query_guarding(), TO)) {
+        AREALISTS_D->add_wanted(live, query_guarding(), TO);
     }
     return;
 }
 
-int is_sparring(object live) // oww my head
-{
-    object *attackers,*live_submitted,*attacker_submitted;
-    int i;
-    if(!objectp(live)) { return 0; }
-    attackers = live->query_attackers();
-    live_submitted = live->query_property("submitted_to");
-
-    for(i=0;i<sizeof(attackers);i++)
-    {
-        if(!objectp(attackers[i])) { continue; }
-        if(!attackers[i]->is_player() && !is_jailer(live)) { return 1; }
-        attacker_submitted = attackers[i]->query_property("submitted_to");
-        if(!pointerp(live_submitted)) { return 0; }
-        if(!pointerp(attacker_submitted)) { return 0; }
-        if(member_array(attackers[i],live_submitted) == -1) { return 0; }
-        if(member_array(live,attacker_submitted) == -1) { return 0; }
-        // will need an additional check here when we get a property for the summoned monsters
-    }
-    return 1;
-}
-
 int is_jailer(object live)
 {
-    if(!objectp(live)) { return 0; }
-    if(live->query_true_invis()) { return 0; }
-    if(live->query_invis() && !detecting_invis()) { return 0; }
-    if(temple_guarded && (string)live->query_diety() == temple_guarded) {return 1; }
-    if((string)live->query_property("official") == query_guarding()) {return 1; }
-    if(AREALISTS_D->is_jailer(live,query_guarding(),TO)) { return 1; }
-    else return 0;
+    if (!objectp(live)) {
+        return 0;
+    }
+    if (live->query_true_invis()) {
+        return 0;
+    }
+    if (live->query_invis() && !detecting_invis()) {
+        return 0;
+    }
+    if (temple_guarded && (string)live->query_diety() == temple_guarded) {
+        return 1;
+    }
+    if ((string)live->query_property("official") == query_guarding()) {
+        return 1;
+    }
+    if (AREALISTS_D->is_jailer(live, query_guarding(), TO)) {
+        return 1;
+    }else {
+        return 0;
+    }
 }
 
 int is_local_guard(object guard)
 {
-    if(!objectp(guard)) { return 0; }
-    if(guard->query_true_invis()) { return 0; }
-    if(guard->is_guard(query_guarding())) { return 1; }
-    else return 0;
+    if (!objectp(guard)) {
+        return 0;
+    }
+    if (guard->query_true_invis()) {
+        return 0;
+    }
+    if (guard->is_guard(query_guarding())) {
+        return 1;
+    }else {
+        return 0;
+    }
 }
 
 int wanted(object live)
 {
-    if(!objectp(live)) { return 0; }
-    if(live->query_true_invis()) { return 0; }
-    if(live->query_invis() && !detecting_invis()) { return 0; }
-    if(live->query_unconscious()) { return 0; }
-    if(!live->is_player()) { return 0; }
-    if(AREALISTS_D->is_wanted(live,query_guarding(),TO)) { return 1; }
+    if (!objectp(live)) {
+        return 0;
+    }
+    if (live->query_true_invis()) {
+        return 0;
+    }
+    if (live->query_invis() && !detecting_invis()) {
+        return 0;
+    }
+    if (live->query_unconscious()) {
+        return 0;
+    }
+    if (!live->is_player()) {
+        return 0;
+    }
+    if (AREALISTS_D->is_wanted(live, query_guarding(), TO)) {
+        return 1;
+    }
 // added banned lists so need banned to be counted with wanted people here *Styx* 10/05
-    if(AREALISTS_D->is_banned(live,query_guarding(),TO)) { return 1; }
+    if (AREALISTS_D->is_banned(live, query_guarding(), TO)) {
+        return 1;
+    }
     return 0;
 }
 
 int is_bad_race(object live)
 {
-    if(!objectp(live)) { return 0; }
-    if(live->query_true_invis()) { return 0; }
-    if(live->query_invis() && !detecting_invis()) { return 0; }
-    if(live->query_unconscious()) { return 0; }
-    if(live->id("wild_world_monster")) { return 1; }
-    if(query_bad_race(live)) { return 1; }
-    else return 0;
+    if (!objectp(live)) {
+        return 0;
+    }
+    if (live->query_true_invis()) {
+        return 0;
+    }
+    if (live->query_invis() && !detecting_invis()) {
+        return 0;
+    }
+    if (live->query_unconscious()) {
+        return 0;
+    }
+    if (live->id("wild_world_monster")) {
+        return 1;
+    }
+    if (query_bad_race(live)) {
+        return 1;
+    }else {
+        return 0;
+    }
 }
 
 void remove_fines_and_bounties(object live)
 {
-    if(!objectp(live)) { return 0; }
-    if(!live->is_player()) { return 0; }
+    if (!objectp(live)) {
+        return 0;
+    }
+    if (!live->is_player()) {
+        return 0;
+    }
 
-    if(AREALISTS_D->is_wanted(live,query_guarding(),TO))
-    {
-        AREALISTS_D->remove_wanted(live,query_guarding(),TO);
+    if (AREALISTS_D->is_wanted(live, query_guarding(), TO)) {
+        AREALISTS_D->remove_wanted(live, query_guarding(), TO);
     }
-    if(AREALISTS_D->query_bounty_amount(live,query_guarding(),TO))
-    {
-        AREALISTS_D->remove_bounty(live,query_guarding(),TO);
+    if (AREALISTS_D->query_bounty_amount(live, query_guarding(), TO)) {
+        AREALISTS_D->remove_bounty(live, query_guarding(), TO);
     }
-    if(AREALISTS_D->query_fine_amount(live,query_guarding(),TO))
-    {
-        AREALISTS_D->remove_fine(live,query_guarding(),TO);
+    if (AREALISTS_D->query_fine_amount(live, query_guarding(), TO)) {
+        AREALISTS_D->remove_fine(live, query_guarding(), TO);
     }
     return;
 }
@@ -372,64 +411,76 @@ void remove_fines_and_bounties(object live)
 
 void do_battle(object live)
 {
-    object *living=({}),*guards=({}),*targets=({}),*races=({}),*attackers=({}),*jailers=({}),*sparring=({});
-    int i,j,n;
-    if(!objectp(live)) { return 0; }
-    if(!objectp(TO))   { return 0; }
-    if(present("trainer",ETO)) { return 0; } // to prevent "training accidents"
+    object* living = ({}), * guards = ({}), * targets = ({}), * races = ({}), * attackers = ({}), * jailers = ({}), * sparring = ({});
+    int i, j, n;
+    if (!objectp(live)) {
+        return 0;
+    }
+    if (!objectp(TO)) {
+        return 0;
+    }
+    if (present("trainer", ETO)) {
+        return 0;
+    }                                        // to prevent "training accidents"
     living = all_living(ETO);
 
-    guards    = filter_array(living,"is_local_guard",TO);
-    targets   = filter_array(living,"wanted",TO);
-    races     = filter_array(living,"is_bad_race",TO);
-    jailers   = filter_array(living,"is_jailer",TO);
-    sparring  = filter_array(living,"is_sparring",TO);
+    guards = filter_array(living, "is_local_guard", TO);
+    targets = filter_array(living, "wanted", TO);
+    races = filter_array(living, "is_bad_race", TO);
+    jailers = filter_array(living, "is_jailer", TO);
     attackers = query_attackers();
 
-    if(member_array(live,attackers) == -1)
-    {
-        if(!is_jailer(live) && !is_sparring(live))  { targets += ({ live}); }
+    if (member_array(live, attackers) == -1) {
+        if (!is_jailer(live)) {
+            targets += ({ live });
+        }
     }
-    if(sizeof(races))                               { targets += races; }
-    if(sizeof(attackers))                           { targets += attackers;
-}
-    guards  = distinct_array(guards);
+    if (sizeof(races)) {
+        targets += races;
+    }
+    if (sizeof(attackers)) {
+        targets += attackers;
+    }
+    guards = distinct_array(guards);
     targets = distinct_array(targets);
 
-    for(i=0;i<sizeof(guards);i++)
-    {
-        for(n=0;n<sizeof(jailers);n++) // protect jailers if they get attacked
-        {
-            if(member_array(jailers[n],sparring) != -1) { continue; }
-
-            if(member_array(guards[i],jailers[n]->query_protectors()) == -1)
-            {
-                if(member_array(guards[i],jailers[n]->query_attackers()) !=-1) { continue; }
-                tell_object(guards[i],"You boldly stand in protection "
-                    "of "+jailers[n]->QCN+".");
-                tell_object(jailers[n],""+guards[i]->QCN+" stands boldly "
-                    "in protection of you.");
-                tell_room(environment(guards[i]),""+guards[i]->QCN+" stands"
-                    "boldly in protection of "+jailers[n]->QCN+"!",({guards[i],jailers[n] }) );
+    for (i = 0; i < sizeof(guards); i++) {
+        for (n = 0; n < sizeof(jailers); n++) { // protect jailers if they get attacked
+            if (member_array(guards[i], jailers[n]->query_protectors()) == -1) {
+                if (member_array(guards[i], jailers[n]->query_attackers()) != -1) {
+                    continue;
+                }
+                tell_object(guards[i], "You boldly stand in protection "
+                            "of " + jailers[n]->QCN + ".");
+                tell_object(jailers[n], "" + guards[i]->QCN + " stands boldly "
+                            "in protection of you.");
+                tell_room(environment(guards[i]), "" + guards[i]->QCN + " stands"
+                          "boldly in protection of " + jailers[n]->QCN + "!", ({ guards[i], jailers[n] }));
                 jailers[n]->add_protector(guards[i]);
             }
         }
 
-        for(j=0;j<sizeof(targets);j++)
-        {
-            if(guards[i] == targets[j]) { continue; }
-            if(is_local_guard(targets[j])) { continue; }
-            if(is_jailer(targets[j])) { continue; }
+        for (j = 0; j < sizeof(targets); j++) {
+            if (guards[i] == targets[j]) {
+                continue;
+            }
+            if (is_local_guard(targets[j])) {
+                continue;
+            }
+            if (is_jailer(targets[j])) {
+                continue;
+            }
             add_to_wanted(targets[j]);
-            if(targets[j]->query_unconscious() || targets[j]->query_bound()) { continue; } // hopefully to prevent overkill
-            if(member_array(targets[j],guards[i]->query_attackers()) == -1 && !guards[i]->query_unconscious())
-            {
-                tell_object(guards[i],"You attack "+targets[j]->QCN+"!");
-                tell_object(targets[j],""+guards[i]->QCN+" attacks you!");
-                tell_room(environment(guards[i]),""+guards[i]->QCN+" attacks "
-                    ""+targets[j]->QCN+"!",({ guards[i],targets[j] }) );
-                guards[i]->set_bad_people(guards[i],targets[j]);
-                guards[i]->kill_ob(targets[j],0);
+            if (targets[j]->query_unconscious() || targets[j]->query_bound()) {
+                continue;
+            }                                                                              // hopefully to prevent overkill
+            if (member_array(targets[j], guards[i]->query_attackers()) == -1 && !guards[i]->query_unconscious()) {
+                tell_object(guards[i], "You attack " + targets[j]->QCN + "!");
+                tell_object(targets[j], "" + guards[i]->QCN + " attacks you!");
+                tell_room(environment(guards[i]), "" + guards[i]->QCN + " attacks "
+                          "" + targets[j]->QCN + "!", ({ guards[i], targets[j] }));
+                guards[i]->set_bad_people(guards[i], targets[j]);
+                guards[i]->kill_ob(targets[j], 0);
                 do_special_combat_actions();
             }
         }
@@ -438,59 +489,104 @@ void do_battle(object live)
     return;
 }
 
-int set_bad_people(object guard,object live)
+int set_bad_people(object guard, object live)
 {
-    if(!objectp(guard))                     { return 0; }
-    if(!objectp(live))                      { return 0; }
-    if(member_array(live,bad_people) != -1) { return 0; }
-    live->set_property(query_guarding(),1);
+    if (!objectp(guard)) {
+        return 0;
+    }
+    if (!objectp(live)) {
+        return 0;
+    }
+    if (member_array(live, bad_people) != -1) {
+        return 0;
+    }
+    live->set_property(query_guarding(), 1);
     bad_people += ({ live });
     return 1;
 }
 
-object *get_bad_people() { return bad_people; }
+object* get_bad_people()
+{
+    return bad_people;
+}
 
-void do_special_combat_actions() {}
+void do_special_combat_actions()
+{
+}
 
 //int clean_up() { return 1; }  // not sure if we want this here or not?
 
 void heart_beat()
 {
     int i;
-    object *living;
+    object* living;
     ::heart_beat();
 
-    if(!objectp(TO))   { return; }
-    if(!objectp(ETO))  { return; }
-    if (objectp(captive) && file_name(ETO)==jail_location){
-      put_in_jail();
-      return;
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!objectp(ETO)) {
+        return;
+    }
+    if (objectp(captive) && file_name(ETO) == jail_location) {
+        put_in_jail();
+        return;
     }
 // found it needs a check so they don't try to attack unconscious *Styx* 12/26/05
-    if(TO->query_unconscious())  return;
-    if(!sizeof(query_attackers())) { if(random(2)) return; }
+    if (TO->query_unconscious()) {
+        return;
+    }
+    if (!sizeof(query_attackers())) {
+        if (random(2)) {
+            return;
+        }
+    }
 
     living = all_living(ETO);
     living -= ({ TO });
-    if(!sizeof(living)) { return; }
-    for (i =0;i<sizeof(living);i++)
-    {
-        if(!objectp(living[i])) { continue; }
+    if (!sizeof(living)) {
+        return;
+    }
+    for (i = 0; i < sizeof(living); i++) {
+        if (!objectp(living[i])) {
+            continue;
+        }
         interactions(living[i]);
     }
     return;
 }
+
 void interactions(object live)
 {
-    if (!objectp(live)) { return; }
-    if(is_walking || is_stuck) { return; } // important, this checks from monster.c to see if the guard is walking to it's destination
-    if(live->query_true_invis()) { return; }
-    if(live->query_invis() && !detecting_invis()) { return; }
-    if(is_guard((string)live->query_guarding())) { return; }
-    if(sizeof(live->query_attackers())) { do_battle(live); return; }
-    if(query_bad_race(live)) { race_action(live); return; }
-    if(AREALISTS_D->is_wanted(live,query_guarding(),TO)) { do_laws(live); return; } // and adding for banned here too *Styx* 10/09/05
-    if(AREALISTS_D->is_banned(live,query_guarding(),TO)) { do_laws(live); return; }
+    if (!objectp(live)) {
+        return;
+    }
+    // important, this checks from monster.c to see if the guard is walking to it's destination
+    if (is_walking || is_stuck) {
+        return;
+    }
+    if (live->query_true_invis()) {
+        return;
+    }
+    if (live->query_invis() && !detecting_invis()) {
+        return;
+    }
+    if (is_guard((string)live->query_guarding())) {
+        return;
+    }
+    if (sizeof(live->query_attackers())) {
+        do_battle(live); return;
+    }
+    if (query_bad_race(live)) {
+        race_action(live); return;
+    }
+// and adding for banned here too *Styx* 10/09/05
+    if (AREALISTS_D->is_wanted(live, query_guarding(), TO)) {
+        do_laws(live); return;
+    }
+    if (AREALISTS_D->is_banned(live, query_guarding(), TO)) {
+        do_laws(live); return;
+    }
 }
 
 void race_action(object live)
@@ -520,7 +616,7 @@ void race_action(object live)
         }
     }
 
-    if(live->query_bound() && !live->query_property("draggee"))
+    if(live->query_bound())
     {
         switch(query_race_action())
         {
@@ -530,19 +626,6 @@ void race_action(object live)
             return;
         case "expel":
             command("say "+EXPEL_MSG);
-            capture_target(live,"expel");
-            return;
-        }
-    }
-
-    if(live->query_property("draggee"))
-    {
-        switch(query_race_action())
-        {
-        case "capture":
-            capture_target(live,"capture");
-            return;
-        case "expel":
             capture_target(live,"expel");
             return;
         }
@@ -561,72 +644,57 @@ void race_action(object live)
 
 void do_laws(object live)
 {
-    if(!objectp(live)) { return; }
-    if(sizeof(query_attackers()))
-    {
-        if(!live->query_unconscious()) { do_battle(live); }
+    if (!objectp(live)) {
         return;
     }
-    if(live->query_unconscious())
-    {
-        capture_target(live,"jail");
-        command("say "+CAPTURE_MSG);
+    if (sizeof(query_attackers())) {
+        if (!live->query_unconscious()) {
+            do_battle(live);
+        }
         return;
     }
-    if(live->query_bound() && !live->query_property("draggee"))
-    {
-        command("say "+JAIL_MSG);
-        capture_target(live,"jail");
+    if (live->query_unconscious()) {
+        capture_target(live, "jail");
+        command("say " + CAPTURE_MSG);
         return;
     }
-
-    if(live->query_property("draggee"))
-    {
-        capture_target(live,"jail");
+    if (live->query_bound()) {
+        command("say " + JAIL_MSG);
+        capture_target(live, "jail");
         return;
     }
-
-    if (member_array(live, query_attackers()) == -1 && !live->query_bound())
-    {
-        command("yell "+ARREST_MSG);
+    if (member_array(live, query_attackers()) == -1 && !live->query_bound()) {
+        command("yell " + ARREST_MSG);
         do_battle(live);
     }
     return;
 }
 
-void capture_target(object live,string action)
+void capture_target(object live, string action)
 {
     int need;
-    if(!objectp(live)) { return; }
-    if(!live->query_unconscious() && !live->query_bound())
-    {
+    if (!objectp(live)) {
+        return;
+    }
+    if (!live->query_unconscious() && !live->query_bound()) {
         do_battle(live); return;
     }
-    if(!live->query_bound())
-    {
-        tell_room(ETO,""+TPQCN+" takes some rope and binds "
-            +live->query_cap_name()+"'s hands and feet.",({TP,live}));
-        command("gag "+live->query_name());
+    if (!live->query_bound()) {
+        tell_room(ETO, "" + TPQCN + " takes some rope and binds "
+                  + live->query_cap_name() + "'s hands and feet.", ({ TP, live }));
         live->set_bound(500);
         return;
     }
 
-    if(live->query_unconscious())
-    {
-        tell_room(ETO,TO->QCN+" binds "+live->QCN+"'s wounds.");
+    if (live->query_unconscious()) {
+        tell_room(ETO, TO->QCN + " binds " + live->QCN + "'s wounds.");
         need = live->query_hp();
-        live->add_hp(-need + random(20)+10);
-            tell_object(live,"You wake up and find "+TO->QCN+" quickly "
-            "binding your wounds.");
+        live->add_hp(-need + random(20) + 10);
+        tell_object(live, "You wake up and find " + TO->QCN + " quickly "
+                    "binding your wounds.");
         return;
     }
-    if(live->query_bound() && !live->query_property("draggee"))
-    {
-        command("drag "+live->query_name());
-        return;
-    }
-    if(live->query_property("draggee") && present("draggee"))
-    {
+    if (live->query_bound()) {
         captive = live;
         take_to_jail(action);
         return;
@@ -636,13 +704,13 @@ void capture_target(object live,string action)
 
 void take_to_jail(string action)
 {
-    if(query_paralyzed()) { return; }
-    switch(action)
-    {
+    if (query_paralyzed()) {
+        return;
+    }
+    switch (action) {
     case "jail":
 
-        if(!jail_location)
-        {
+        if (!jail_location) {
             is_stuck = 1;
             command("say I don't have a jail to go to, I'll hang on to you for now.");
             return;
@@ -651,8 +719,7 @@ void take_to_jail(string action)
         captive->move(ETO);
         return;
     case "expel":
-        if(!expel_location)
-        {
+        if (!expel_location) {
             is_stuck = 1;
             command("say I don't know where to expel you to, I'll hang on to you for now.");
             return;
@@ -661,9 +728,10 @@ void take_to_jail(string action)
         captive->move(ETO);
         return;
     case "capture":
-        if(!capture_location) { capture_location = jail_location; }
-        if(!capture_location)
-        {
+        if (!capture_location) {
+            capture_location = jail_location;
+        }
+        if (!capture_location) {
             is_stuck = 1;
             command("say I don't have a location to go to, I'll hang on to you for now.");
             return;
@@ -677,21 +745,21 @@ void take_to_jail(string action)
 
 int put_in_jail()
 {
-    if(!objectp(captive)) { return 0; }
-    force_me("drop " + captive->query_name());
-    ETO->__ToCell(captive,TO,"unknown");
+    if (!objectp(captive)) {
+        return 0;
+    }
+    TO->set_draggee(0);
+    ETO->__ToCell(captive, TO, "unknown");
     captive = 0;
     return 1;
 }
 
-void capture() { put_in_jail(); }
-
-void expel() { put_in_jail(); }
-
-void reach_destination()
+void capture()
 {
-    if(base_name(ETO) == jail_location) { call_out("put_in_jail",3,TO); }
-    else if(base_name(ETO) == capture_location) { call_out("capture",3,TO);}
-    else if(base_name(ETO) == expel_location) { call_out("expel",3,TO); }
-    return;
+    put_in_jail();
+}
+
+void expel()
+{
+    put_in_jail();
 }
