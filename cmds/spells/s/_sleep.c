@@ -14,8 +14,6 @@ object this_target,*party,*prospective,*targets;
 void dest_effect();
 int check();
 
-
-
 create()
 {
     ::create();
@@ -58,6 +56,8 @@ spell_effect(int prof)
     //validate additional targets in the room
     prospective = target_filter(all_living(environment(caster)));
     prospective = target_filter(prospective);
+    prospective += ({target});
+    prospective = distinct_array(prospective);
 
     counter = 0;
     targets = ({ target });
@@ -77,7 +77,7 @@ spell_effect(int prof)
         this_target = prospective[x];
         resisted = 0;
 
-        if (do_save(this_target, 0) == 1) {
+        if (do_save(this_target, 0) == 1 && this_target != caster) {
             resisted = 1;
         }
         if ("/daemon/player_d.c"->immunity_check(this_target, "sleep") == 1) {
@@ -112,7 +112,6 @@ spell_effect(int prof)
         this_target->set_property("spelled", ({TO}) );
         this_target->remove_attacker(caster);
         caster->remove_attacker(this_target);
-        targets += ({this_target});
         spell_successful();
         success = 1; // this indicates whether the spell works on anything
     }
