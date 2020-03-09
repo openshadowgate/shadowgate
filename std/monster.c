@@ -1421,7 +1421,7 @@ return exp;
  * @param perc "very low" "low" "normal" "high" "very high" "boss",
  *        defaults to "normal", percentile based exp level
  */
-void set_new_exp(int level, string perc)
+int set_new_exp(int level, string perc)
 {
     int exp,div;
 
@@ -1483,7 +1483,7 @@ void set_new_exp(int level, string perc)
     TO->set_property("new_exp_level",level);
     TO->set_property("new_exp_perc",perc);
     TO->set_exp(exp);
-    return;
+    return exp;
 }
 
 
