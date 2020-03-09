@@ -174,7 +174,7 @@ To remove an %^ORANGE%^%^ULINE%^ALIAS%^RESET%^ use %^ORANGE%^<unalias %^ORANGE%^
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-nickname, unnickname, history, last
+unalias, nickname, unnickname, history, last
 
 ");
 	return 1;

@@ -502,56 +502,60 @@ int query_max_hp_base()
     int num, lvladj, mypsi;
     string file, myrace, subrace;
 
-    if(!objectp(TO))
+    if (!objectp(TO)) {
         return 0;
-    if(!interactive(TO))
-    {
+    }
+    if (!userp(TO)) {
         num = player_data["general"]["max_hp"];
         num = WORLD_EVENTS_D->monster_modification_event(num, "health", TO);
+        num = num < 1 ? 1 : num;
         return num;
     }
 
-    if(TO->is_undead())
-    {
+    if (TO->is_undead()) {
         num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("charisma"));
-    }
-    else
+    }else {
         num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("constitution"));
+    }
 
     num = num * (int)TO->query_highest_level();
 
-    if(FEATS_D->usable_feat(TO,"toughness"))
-        num += ((int)TO->query_level())/2;
+    if (FEATS_D->usable_feat(TO, "toughness")) {
+        num += ((int)TO->query_level()) / 2;
+    }
 
-    if(FEATS_D->usable_feat(TO,"improved toughness"))
+    if (FEATS_D->usable_feat(TO, "improved toughness")) {
         num += TO->query_level();
+    }
 
-    if(FEATS_D->usable_feat(TO,"psionic body"))
-    {
-       mypsi = 0;
-       mypsi += FEATS_D->calculate_psionic_feats(TO);
-       if(mypsi < 1) mypsi = 1;
-       mypsi = mypsi*5;
-       if(FEATS_D->usable_feat(TO,"battle psyche")) { mypsi = mypsi * 3; }
-       num += mypsi;
+    if (FEATS_D->usable_feat(TO, "psionic body")) {
+        mypsi = 0;
+        mypsi += FEATS_D->calculate_psionic_feats(TO);
+        if (mypsi < 1) {
+            mypsi = 1;
+        }
+        mypsi = mypsi * 5;
+        if (FEATS_D->usable_feat(TO, "battle psyche")) {
+            mypsi = mypsi * 3;
+        }
+        num += mypsi;
     }
 
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
 
-    file = DIR_RACES+"/"+myrace+".c";
+    file = DIR_RACES + "/" + myrace + ".c";
 
-    if(file_exists(file))
-    {
-      lvladj = (int)file->level_adjustment(subrace);
+    if (file_exists(file)) {
+        lvladj = (int)file->level_adjustment(subrace);
 
-      // LA races have a flat 8hp per LA as "beast" levels from monster manual
-      if(lvladj)
-           num += (lvladj*8);
+        // LA races have a flat 8hp per LA as "beast" levels from monster manual
+        if (lvladj) {
+            num += (lvladj * 8);
+        }
     }
 
-    if(TO->query("negative level") || intp("/daemon/user_d.c"->get_scaled_level(TO)))
-    {
+    if (TO->query("negative level") || intp("/daemon/user_d.c"->get_scaled_level(TO))) {
         num += sum_array(TO->query("hp_array"), (int)TO->query_character_level());
         num = WORLD_EVENTS_D->monster_modification_event(num, "health", TO);
         return num;

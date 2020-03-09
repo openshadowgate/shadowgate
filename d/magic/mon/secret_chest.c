@@ -34,14 +34,39 @@ void create(){
 
 void setup_chest(object invoker)
 {
-    object invitem;
-    object * myinven;
-    string * ids;
-
     caster = invoker;
     castname = caster->query_name();
     fname = "/d/save/summons/"+castname+"/"+query_name();
     "/daemon/yuck_d"->load_inventory(this_object(),fname);
+
+    drop_containers();
+}
+
+void die(object obj)
+{
+    if (objectp(caster)) {
+        caster->remove_property("has_elemental");
+    }
+    remove();
+}
+
+int remove()
+{
+    drop_containers();
+    save_chest();
+    all_inventory(TO)->remove();
+    ::remove();
+}
+
+void drop_containers()
+{
+    object invitem;
+    object* myinven;
+    string* ids;
+
+    if (!objectp(ETO)) {
+        return;
+    }
 
     myinven = all_inventory(TO);
 
@@ -58,19 +83,6 @@ void setup_chest(object invoker)
     }
 }
 
-void die(object obj)
-{
-    if(objectp(caster))
-        caster->remove_property("has_elemental");
-    remove();
-}
-
-int remove(){
-    save_chest();
-    all_inventory(TO)->remove();
-    ::remove();
-}
-
 void save_chest()
 {
     /* seteuid(getuid()); */
@@ -78,6 +90,7 @@ void save_chest()
         return;
     if(!objectp(ETO))
         return;
+
     mkdir("/d/save/summons/"+castname);
     mkdir(fname);
     "/daemon/yuck_d"->save_inventory(this_object(),fname);

@@ -2,7 +2,7 @@
 #include <magic.h>
 inherit SPELL;
 
-int lower;
+int thebonus;
 
 void create() {
     ::create();
@@ -38,9 +38,10 @@ void spell_effect(int prof) {
         tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" touches "+caster->QP+" forehead, and seems lethargic for a moment.%^RESET%^");
     }
 //    target->set_property("attack bonus",clevel);
-    target->add_attack_bonus(clevel / 3);
+    thebonus = clevel / 3;
+    target->add_attack_bonus(thebonus);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*(clevel/12+1),lower);
+    call_out("dest_effect",ROUND_LENGTH*(clevel/12+1));
 }
 
 void dest_effect()
@@ -49,7 +50,7 @@ void dest_effect()
     {
         tell_object(target,"%^BOLD%^%^CYAN%^An insight into future events fades%^RESET%^");
 //        target->set_property("attack bonus",-clevel);
-        target->add_attack_bonus(-clevel / 3);
+        target->add_attack_bonus(-1*thebonus);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

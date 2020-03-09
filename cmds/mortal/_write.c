@@ -1,5 +1,5 @@
 //
-#include <std.h> 
+#include <std.h>
 #include <daemons.h>
 #include <langs.h>
 
@@ -10,17 +10,29 @@ string do_proficiency(object tp, string str);
 string jumble(string word);
 string morph_word(string word,string *next, int i);
 int end_game(object tp, string str, object ob, string lang);
-void long_desc(string str, object tp, string long, object ob, string lang); 
+void long_desc(string str, object tp, string long, object ob, string lang);
 
 int help(){
     write(
-@OLI
-    write in <language> on <paper>
-    This will put you into an editor. There write the text. The text will 
-be translated into the language specified and the quality of the writing 
-will be determined by the proficiency. You must have something on which
-to write and the implement
-OLI
+"
+%^CYAN%^NAME%^RESET%^
+
+write - write on something
+
+%^CYAN%^SYNTAX%^RESET%^
+
+write in %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This will allow you to write on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ in %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you specified. Anyone then will be able to %^ORANGE%^<read %^ORANGE%^%^ULINE%^OBJECT%^RESET%^>%^RESET%^ to read your message. You and the reader both must know the %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^.
+
+Typical %^ORANGE%^%^ULINE%^OBJECT%^RESET%^s to write on are, but not limited to, paper, parchment.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+languages, teach, say, tell, communication
+"
     );
     return 1;
 }
@@ -63,7 +75,7 @@ void long_desc(string str, object tp, string long, object ob, string lang){
         if (!long) long = str+"\n";
         else long = long+str+"\n";
         input_to("long_desc", tp, long, ob, lang);
-    }           
+    }
 }
 int end_game(object tp, string str, object ob, string lang){
     string old;
@@ -96,7 +108,7 @@ string do_proficiency(object tp, string str){
     lines = explode(str,"\n");
     for (i=0;i<sizeof(lines);i++) {
         lines[i] = replace_string(lines[i], " "," ~!");
-        words = explode(lines[i],"~!"); 
+        words = explode(lines[i],"~!");
        if(sizeof(words))
 {
         words[sizeof(words)-1] = words[sizeof(words)-1]+"\n";
@@ -125,7 +137,7 @@ string morph_word(string word,string * all, int w){
     case 0..5:
         s = (((i+1)<sizeof(all))?all[i+1]:"");
         if((i+1)<sizeof(all))
-            all[i+1]=word;        
+            all[i+1]=word;
 
 
         return s;
@@ -137,7 +149,7 @@ string morph_word(string word,string * all, int w){
         return word;
     case 19:
         return "";
-    
+
     }
 }
 
@@ -158,6 +170,3 @@ string jumble(string word){
     }
     return tmp;
 }
-
-
-

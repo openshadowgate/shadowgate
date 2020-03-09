@@ -25,13 +25,13 @@ If you see a 'someone' in place of the character name on a line message, that me
 The lines that are available to players include:
 
 %^ORANGE%^newbie%^RESET%^
-    The best line to ask basic questions about the game.
-
-%^ORANGE%^question%^RESET%^
-    All other generic questions about the game, mechanics and roleplay should go here.
+    The best line to ask generic questions about the game, mechanics and roleplay should go here.
 
 %^ORANGE%^ooc%^RESET%^
     General ooc chatter. You might want to disable this line if you prefer more immersive environment.
+
+%^ORANGE%^rp%^RESET%^
+    This line is for planning and arranging roleplay events.
 
 %^ORANGE%^inform%^RESET%^
     General communication line, usually available to everyone who is logged in at the time. As a courtesy to the other players, this line is best used sparingly, to avoid interrupting everyone's game. See if you can find the information you need in a help file or faq before asking here. You are allowed to use this line to make party requests. Type %^ORANGE%^<help line use>%^RESET%^ for more information on how to do this.
@@ -43,5 +43,4 @@ Type %^ORANGE%^<lines>%^RESET%^ to see all lines available to you.
 
 To disable/enable a line just type its name without an argument.
 
-%^CYAN%^Also see:%^RESET%^ line use, thought
-
+%^CYAN%^Also see:%^RESET%^ line use, thought, say
