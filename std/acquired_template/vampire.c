@@ -17,6 +17,11 @@ string *races_allowed()
     return ({"human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian"});
 }
 
+mapping* stat_requirements()
+{
+    return (["constitution" : 16]);
+}
+
 mapping innate_spells()
 {
     return "/std/acquired_template/undead"->innate_spells() + ([

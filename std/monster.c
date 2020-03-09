@@ -1438,19 +1438,19 @@ int set_new_exp(int level, string perc)
     switch(perc)
     {
     case "very low":
-        div = 40;
+        div = 60;
         break;
     case "low":
-        div = 50;
+        div = 80;
         break;
    case "normal":
-       div = 60;
+       div = 100;
        break;
     case "high":
-        div = 70;
+        div = 120;
         break;
     case "very high":
-        div = 80;
+        div = 140;
         break;
     case "boss":
         div = 300;
@@ -1464,15 +1464,11 @@ int set_new_exp(int level, string perc)
         level = 1;
     }
     if (level > 100) {
-        level = 100; exp = 3510000000;
+        level = 100; exp = 300000000;
     }                                                         // table goes to 100 now
     else {
-        exp = EXP_NEEDED[level + 1] - EXP_NEEDED[level];     // 1 level worth of exp
+        exp = (475 * level * level * level - 7600 * level * level + 74975 * level - 23750) / 882;
     }
-
-    //this is GOOD, DON'T CHANGE IT. NON LINEAR FUNCTIONS ARE
-    //FUNCTIONS TOO AND THEY HAVE CHILDREN TO FEED
-    exp = (exp / (level * 13));
 
     if (perc != "normal") {
         exp = (exp * div) / 100;
