@@ -77,7 +77,7 @@ spell_effect(int prof)
         this_target = prospective[x];
         resisted = 0;
 
-        if (do_save(this_target, 0) == 1 && this_target != caster) {
+        if (do_save(this_target, 0) == 1 ) {
             resisted = 1;
         }
         if ("/daemon/player_d.c"->immunity_check(this_target, "sleep") == 1) {
@@ -86,6 +86,10 @@ spell_effect(int prof)
         if (mind_immunity_check(this_target, "default") == 1) {
             resisted = 1;
         }
+        if (this_target == caster) {
+            resusted = 0;
+        }
+
         if (resisted == 1) {
            tell_room(environment(this_target),
                "%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+" mind control, "+
