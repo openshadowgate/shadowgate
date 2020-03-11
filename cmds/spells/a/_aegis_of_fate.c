@@ -63,7 +63,7 @@ void spell_effect(int prof){
     target->add_ac_bonus(prevAc);
     magRes = random(clevel/3)+1;
     target->set_property("magic resistance",(magRes));
-    target->set_property("raised resistance");
+    target->set_property("raised resistance",1);
     addSpellToCaster();
     target->set_property("spelled",({TO}));
     target->set_property("shield of fortune", 1);

@@ -92,8 +92,8 @@ void spell_effect(int prof)
     }
 
     target->add_ac_bonus(bonus);
-    target->set_property("magic resistance",clevel+10); //to match caster's lament
-    target->set_property("raised resistance");
+    target->set_property("magic resistance",clevel/2); //to match caster's lament
+    target->set_property("raised resistance",1);
     target->set_property("spelled", ({TO}) );
     target->set_property("armoured",1);
     addSpellToCaster();
@@ -137,8 +137,8 @@ void dest_effect()
     {
         target->add_ac_bonus(-1 * bonus);
         target->remove_property_value("spelled", ({TO}) );
-        target->set_property("magic resistance",-clevel+10);
-        target->remove_property("raised resistance");
+        target->set_property("magic resistance",-clevel/2);
+        target->remove_property("raised resistance",-1);
         tell_object(target, "%^CYAN%^The magic shielding around you glows briefly, then fades away.");
         tell_room(environment(target),"%^CYAN%^"+target->QCN+" glows briefly.", target );
         target->remove_property("armoured");

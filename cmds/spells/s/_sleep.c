@@ -87,7 +87,7 @@ spell_effect(int prof)
             resisted = 1;
         }
         if (this_target == caster) {
-            resusted = 0;
+            resisted = 0;
         }
 
         if (resisted == 1) {
