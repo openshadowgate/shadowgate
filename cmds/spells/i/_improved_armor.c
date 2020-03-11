@@ -18,7 +18,7 @@ void create()
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS improved armor [on TARGET]");
-    set_description("With this spell, the caster surrounds themselves with strong force field that absorbs weak attacks and spells. This spell won't work together with lesser variant, as it is essentially the same spell pumped with power.");
+    set_description("With this spell, the caster surrounds themselves with strong force field that absorbs weak attacks and spells. Furthermore, this spell grants magic resistance equal to caster level.  This spell won't work together with lesser variant, as it is essentially the same spell pumped with power.");
     set_verbal_comp();
     set_somatic_comp();
     set_components(([ "mage" : ([ "dragon scale" : 1, ]), ]));
@@ -31,6 +31,11 @@ int preSpell()
     if(target->query_property("armoured"))
     {
         tell_object(caster,"%^BOLD%^%^BLACK%^You feel your spell repelled...");
+        return 0;
+    }
+    if(target->query_property("raised resistance"))
+    {
+        tell_object(caster,"Your target already has raised resistance from a spell or temporary item.");
         return 0;
     }
     return 1;
@@ -70,24 +75,25 @@ void spell_effect(int prof)
     if (target == caster)
     {
         tell_object(caster,"%^BOLD%^%^CYAN%^A magical shield shimmers around you as "
-            "the leather vanishes from your hand!");
+            "the dragon scale vanishes from your hand!");
         tell_room(place,"%^BOLD%^%^CYAN%^A magical shield shimmers around "
-            ""+caster->QCN+" as the leather vanishes from "+caster->QP+" "
+            ""+caster->QCN+" as the dragon scale vanishes from "+caster->QP+" "
             "hand!.", caster );
     }
 
     else
     {
         tell_object(caster,"%^BOLD%^%^CYAN%^A magical shield shimmers around "
-            ""+target->QCN+" as the leather vanishes from your hand!");
+            ""+target->QCN+" as the dragon scale vanishes from your hand!");
         tell_object(target,"%^BOLD%^%^CYAN%^A magical shield shimmers around you as "
-            "the leather vanishes from "+caster->QP+" hand!.");
+            "the dragon scale vanishes from "+caster->QP+" hand!.");
         tell_room(place,"%^BOLD%^%^CYAN%^A magical shield shimmers around "+target->QCN+" "
-            "as the leather vanishes from "+caster->QCN+"'s hand!.",({caster, target}) );
+            "as the dragon scale vanishes from "+caster->QCN+"'s hand!.",({caster, target}) );
     }
 
     target->add_ac_bonus(bonus);
-    target->set_property("magic resistance",clevel/2);
+    target->set_property("magic resistance",clevel+10); //to match caster's lament
+    target->set_property("raised resistance");
     target->set_property("spelled", ({TO}) );
     target->set_property("armoured",1);
     addSpellToCaster();
@@ -131,7 +137,8 @@ void dest_effect()
     {
         target->add_ac_bonus(-1 * bonus);
         target->remove_property_value("spelled", ({TO}) );
-        target->set_property("magic resistance",-clevel/2);
+        target->set_property("magic resistance",-clevel+10);
+        target->remove_property("raised resistance");
         tell_object(target, "%^CYAN%^The magic shielding around you glows briefly, then fades away.");
         tell_room(environment(target),"%^CYAN%^"+target->QCN+" glows briefly.", target );
         target->remove_property("armoured");

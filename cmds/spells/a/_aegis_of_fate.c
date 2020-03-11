@@ -31,6 +31,11 @@ int preSpell(){
         tell_object(caster,"Your target has already had that spell cast upon them.");
         return 0;
     }
+    if(target->query_property("raised resistance"))
+    {
+        tell_object(caster,"Your target already has raised resistance from a spell or temporary item.");
+        return 0;
+    }
     return 1;
 }
 
@@ -58,6 +63,7 @@ void spell_effect(int prof){
     target->add_ac_bonus(prevAc);
     magRes = random(clevel/3)+1;
     target->set_property("magic resistance",(magRes));
+    target->set_property("raised resistance");
     addSpellToCaster();
     target->set_property("spelled",({TO}));
     target->set_property("shield of fortune", 1);
@@ -92,6 +98,7 @@ void dest_effect(){
     if (objectp(target)){
         target->add_ac_bonus(-1 * prevAc);
         target->set_property("magic resistance",(-1 * magRes));
+        target->remove_property("raised resistance");
         target->remove_property("shield of fortune");
         tell_object(target,"%^BOLD%^%^MAGENTA%^You shimmer brightly, but then feel the energy flee.");
         tell_room(place,"%^BOLD%^%^MAGENTA%^"+target->QCN+" shimmers brightly.", target);
