@@ -566,7 +566,7 @@ int query_max_hp_base()
 
 int query_max_hp()
 {
-    return query_max_hp_base() + query_max_hp_bonus();
+    return query_max_hp_base() + query_max_hp_bonus() + 1;
 }
 
 int query_hp() {
