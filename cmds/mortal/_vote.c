@@ -7,7 +7,7 @@ int cmd_vote(string str)
 "%^BOLD%^%^GREEN%^Please, consider voting for us to bring more people into the game:
  Top Mud Sites : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tms%^RESET%^%^BOLD%^%^GREEN%^
 
-You van view and follow us on the grapevine:
+You can view and follow us on the grapevine:
  Grapevine     : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
 "
         );
