@@ -82,7 +82,7 @@ int notify_players()
     }
     inv = all_inventory(find_object_or_load(ETO->query_drop_storage()));
 
-    users = filter_array(users, (:!$1->query_property("notified_about_mess"):));
+    users = filter_array(users, (:$1->query_property("notified_about_mess") < time():));
 
     foreach(user in users)
     {
@@ -99,8 +99,8 @@ int notify_players()
 
         if (sizeof(what)) {
             tell_object(user, "\n%^BOLD%^%^RED%^A message from " + TOQCN + " suddenly enters your mind:");
-            tell_object(user, "It seems we have a message left for you. Pay " +ETO->query_short()+"%^RESET%^ a visit to pickup the letter.\n");
-            user->set_property("notified_about_mess", 1);
+            tell_object(user, "It seems we have a message left for you.\nPay " +ETO->query_short()+"%^RESET%^ a visit to pickup the letter.\n");
+            user->set_property("notified_about_mess", time() + 60 * 40);
         }
     }
     return 1;

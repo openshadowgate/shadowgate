@@ -316,21 +316,7 @@ int query_skill(string skill) {
       myraceskills = (string *)file->skill_mods();
       if(myraceskills[skill]) x += myraceskills[skill];
     }
-
-    if(member_array(skill,CORE_SKILLS) != -1) { // we now only get stat bonuses to non-crafting! N, 4/17
-      mystat = SKILL_STATS[skill];
-      // override various stats for epic feats
-      if(skill == "influence" && FEATS_D->usable_feat(TO,"archmage")) mystat = "intelligence";
-      if(skill == "influence" && TO->is_class("archmage")) { mystat = "intelligence"; }
-      if(skill == "academics" && FEATS_D->usable_feat(TO,"chronicler")) mystat = "charisma";
-      if(skill == "academics" && TO->is_class("chronicler")) mystat = "charisma";
-      if(skill == "spellcraft" && FEATS_D->usable_feat(TO,"versatile arcanist")) mystat = "charisma";
-      if(skill == "spellcraft" && TO->is_class("versatile_arcanist")) mystat = "charisma";
-      mymod = ((int)this_object()->query_stats(mystat) - 10)/2;
-      x += mymod;
-      x += query_skill_bonus(skill);
-    }
-
+    
     if((skill == "perception" || skill == "stealth") && FEATS_D->usable_feat(TO, "shadow perception")) x += 5;
     return x;
 }
