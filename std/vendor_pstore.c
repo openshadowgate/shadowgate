@@ -67,7 +67,36 @@ void set_shop(string str) {
 
 int query_shop() {
    return shop;
-} 
+}
+
+int notify_players()
+{
+    object * users = users();
+    object user;
+    object * inv, i;
+    object * what;
+
+    inv = all_inventory(find_object_or_load(ETO->query_drop_storage()));
+
+    foreach(user in users)
+    {
+        if (!interactive(user)) {
+            continue;
+        }
+        what = ({});
+        foreach(i in inv)
+        {
+            if (i->id("paper") && i->query_property("pstore_cust") == user->query_name()) {
+                what += ({ i });
+            }
+        }
+        if (sizeof(what)) {
+            tell_object(user, "%^BOLD%^%^RED%^A message from " + TOQCN + " suddenly enters your mind:");
+            tell_object(user, "It seems we have a message left for you. Pay " +ETO->query_short()+"%^RESET%^ a visit to pickup the letter.");
+        }
+    }
+    return 1;
+}
 
 int at_shop() {
    if(base_name(ETO) != query_shop()) {
@@ -114,11 +143,11 @@ int __Buy(string str) {
     int cost, x;
     string cointype;
     string *not_allowed;
-    if(!at_shop())  
+    if(!at_shop())
 	return 1;
 
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
 
     if(member_array("letters", ETO->query_allowed()) != -1)
@@ -185,11 +214,11 @@ int __Pickup(string str) {
     int cost, x;
     string cointype;
     string *not_allowed;
-    if(!at_shop())  
+    if(!at_shop())
 	return 1;
 
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
 
     if (!str) {
@@ -257,10 +286,10 @@ int __Show(string str) {
     object ob;
     string *not_allowed;
     string storage, what, whom;
-    if(!at_shop())  
+    if(!at_shop())
 	return 1;
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
 
     if (!str) {
@@ -271,7 +300,7 @@ int __Show(string str) {
 	return notify_fail("It's going to look like a letter silly.\n");
     if(sscanf(str, "%s to %s",what, whom) == 2)
 	return 0;   // to allow normal show command to work
-    if( (string)ETO->query_storage() == "none set") 
+    if( (string)ETO->query_storage() == "none set")
 	   return notify_fail("There is no storage room with items to show you.\n");
     storage = find_object_or_load(ETO->query_storage());
     if (!(ob = present(str, storage)) && !(ob = parse_objects(storage))) {
@@ -305,16 +334,16 @@ int __List(string str) {
     string *tmp, *not_allowed, short, who, what, type;
     int i, x, cost;
 
-    if(!at_shop())  
+    if(!at_shop())
 	return 1;
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
 
     if(member_array("letters", ETO->query_allowed()) != -1)
 	return 0;
 
-    if(!str || sscanf(str, "for %s",what) != 1) 
+    if(!str || sscanf(str, "for %s",what) != 1)
 	return notify_fail("Try 'list for sale' or 'list for pickup'.\n");
     if(what != "sale" && what != "pickup")
 	return notify_fail("Try 'list for sale' or 'list for pickup'.\n");
@@ -350,7 +379,7 @@ int __List(string str) {
 //	if(TP->isKnown(lower_case(who)))    don't think I need this for here...
 //	   who = (string)TP->knownAs(who);
         tmp +=({ sprintf("%%^BOLD%%^%%^GREEN%%^%-45s %%^YELLOW%%^%5d %%^WHITE%%^%-5s %-20s",
-	   short,cost,"gold", type ) 
+	   short,cost,"gold", type )
 	});
     }
     if(tmp == ({}))
@@ -367,11 +396,11 @@ int __Leave(string str) {
     int cost, count, x, letter;
     string cointype, whom, name;
     string *not_allowed;
-    if(!at_shop())  
+    if(!at_shop())
 	return 1;
 
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
     if (!str) {
         TP->command("help shop");
@@ -401,7 +430,7 @@ int __Leave(string str) {
        }
 /*  let them leave a letter for someone they have only heard of since it's all IC and they
 might have IC reasons to try to contact someone they have only heard of
-       if(name == "")  
+       if(name == "")
 	   return notify_fail("You must give a name you know someone as.\n");
 */
         name = TP->realName(whom);
@@ -412,7 +441,7 @@ might have IC reasons to try to contact someone they have only heard of
 	ob->set_property("pstore_cust", name);
         letter = 1;
     }
-    
+
     if(!letter) {
        if (!(ob = present(str, TP))) {
           tell_room(ETO, response+"You don't seem to have any "+str+" to leave.");
@@ -501,7 +530,7 @@ void pickup_letter(object cust) {
    pickup_actions(cust, what, 0);
    return 1;
 }
-   
+
 void pickup_actions(object cust, object *what, int step) {
     int num = sizeof(what);
     if(num == 1) {
@@ -510,7 +539,7 @@ void pickup_actions(object cust, object *what, int step) {
     } else {
       tell_room(ETO, TOQCN+" hands "+cust->query_cap_name()+" %^BOLD%^"+num+"%^RESET%^ pieces of paper.", cust);
       tell_object(cust, TOQCN+" hands you %^BOLD%^"+num+"%^RESET%^ pieces of paper.");
-    }   
+    }
     del_letter(cust, what);
 }
 
@@ -537,16 +566,16 @@ int __Help(string str) {
 @STYX
 Commands available are:
 
- <leave letter for [name]>   leave paper (the letter) for [name] to pick up 
+ <leave letter for [name]>   leave paper (the letter) for [name] to pick up
  <pickup letter>	     pick up a letter left for you
 
 Note:  Due to coding limitations related to recognizing people, you will
 only be able to pick up letters left for your real name OR by people
-who have you recognized and leave it for you as the name they recognized 
+who have you recognized and leave it for you as the name they recognized
 you by.
 
-Also - This is a stricly IC (in character) mail service.  As with any 
-communication, contents may very well be reviewed by immortals and any 
+Also - This is a stricly IC (in character) mail service.  As with any
+communication, contents may very well be reviewed by immortals and any
 abuses found, esp. passing OOC info. or use for cheating, will be dealt
 with very harshly.
 
