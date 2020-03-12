@@ -70,6 +70,13 @@ int query_shop() {
    return shop;
 }
 
+void notify_messages(object ob)
+{
+    tell_object(ob, "\n%^BOLD%^%^RED%^A message from " + TOQCN + " suddenly enters your mind:");
+    tell_object(ob, "It seems we have a message left for you.\nPay " +ETO->query_short()+"%^RESET%^ a visit to pickup the letter.\n");
+    return;
+}
+
 int notify_players()
 {
     object * users = users();
@@ -98,8 +105,7 @@ int notify_players()
         }
 
         if (sizeof(what)) {
-            tell_object(user, "\n%^BOLD%^%^RED%^A message from " + TOQCN + " suddenly enters your mind:");
-            tell_object(user, "It seems we have a message left for you.\nPay " +ETO->query_short()+"%^RESET%^ a visit to pickup the letter.\n");
+            notify_messages(user);
             user->set_property("notified_about_mess", time() + 60 * 40);
         }
     }
