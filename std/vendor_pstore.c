@@ -53,7 +53,8 @@ void init() {
     }
 }
 
-void heart_beat() {
+void heart_beat()
+{
     ::heart_beat();
 }
 
@@ -76,7 +77,12 @@ int notify_players()
     object * inv, i;
     object * what;
 
+    if (!objectp(ETO)) {
+        return;
+    }
     inv = all_inventory(find_object_or_load(ETO->query_drop_storage()));
+
+    users = filter_array(users, (:!$1->query_property("notified_about_mess"):));
 
     foreach(user in users)
     {
@@ -90,9 +96,11 @@ int notify_players()
                 what += ({ i });
             }
         }
+
         if (sizeof(what)) {
-            tell_object(user, "%^BOLD%^%^RED%^A message from " + TOQCN + " suddenly enters your mind:");
-            tell_object(user, "It seems we have a message left for you. Pay " +ETO->query_short()+"%^RESET%^ a visit to pickup the letter.");
+            tell_object(user, "\n%^BOLD%^%^RED%^A message from " + TOQCN + " suddenly enters your mind:");
+            tell_object(user, "It seems we have a message left for you. Pay " +ETO->query_short()+"%^RESET%^ a visit to pickup the letter.\n");
+            user->set_property("notified_about_mess", 1);
         }
     }
     return 1;
@@ -563,23 +571,14 @@ int __Help(string str) {
    if (strcmp("shop",str) != 0) return 0;
    if(member_array("letters", ETO->query_allowed()) != -1) {
       write(
-@STYX
+"
 Commands available are:
 
- <leave letter for [name]>   leave paper (the letter) for [name] to pick up
- <pickup letter>	     pick up a letter left for you
+ %^ORANGE%^<leave letter for %^ORANGE%^%^ULINE%^NAME%^RESET%^>%^RESET%^     leave paper (the letter) for %^ORANGE%^%^ULINE%^NAME%^RESET%^ to pick up
+ %^ORANGE%^<pickup letter>%^RESET%^	     pick up a letter left for you
 
-Note:  Due to coding limitations related to recognizing people, you will
-only be able to pick up letters left for your real name OR by people
-who have you recognized and leave it for you as the name they recognized
-you by.
-
-Also - This is a stricly IC (in character) mail service.  As with any
-communication, contents may very well be reviewed by immortals and any
-abuses found, esp. passing OOC info. or use for cheating, will be dealt
-with very harshly.
-
-STYX
+Note: You will only be able to pick up letters left for your real name OR by people who have you recognized and leave it for you as the name they recognized you by.
+"
       );
 
    } else {
@@ -597,4 +596,9 @@ STYX
      );
    }
     return 1;
+}
+
+reset ()
+{
+    ::reset();
 }
