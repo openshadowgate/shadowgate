@@ -31,7 +31,7 @@ int preSpell()
 {
     if(!target)
         target = caster;
-    if(target->query_property("infernal healing"))
+    if(target->query_property("fast_healing_spell"))
     {
         tell_object(caster,"%^BOLD%^%^BLACK%^You feel your spell repelled...");
         return 0;
@@ -61,7 +61,7 @@ void spell_effect()
 ");
         target->set_property("spelled", ({ TO }));
         target->set_property("fast healing", 1);
-        target->set_property("infernal healing", 1);
+        target->set_property("fast_healing_spell", 1);
         spell_successful();
         addSpellToCaster();
         call_out("dest_effect", duration);
@@ -74,7 +74,7 @@ void dest_effect()
         tell_object(target, "%^BOLD%^%^RED%^Your blood cools down.%^RESET%^");
         target->remove_property_value("spelled", ({ TO }));
         target->set_property("fast healing", -1);
-        target->remove_property("infernal healing");
+        target->remove_property("fast_healing_spell");
     }
     ::dest_effect();
     if (objectp(TO)) {
