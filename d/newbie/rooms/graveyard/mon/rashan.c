@@ -28,14 +28,14 @@ void create() {
    set_stats("charisma",3);
    set_stats("dexterity",12);
    set_stats("constitution",10);
-   set_hp(random(15)+50);
+   set_hp(40);
    set_max_hp(query_hp());
    set("aggressive",20);
    add_money("gold",random(75)+25);
    set_overall_ac(6);
    set_exp(120);
-   set_achats(1, 
-     ({ "%^GREEN%^The zombie takes a swing at you with one rotting hand.%^RESET%^", 
+   set_achats(1,
+     ({ "%^GREEN%^The zombie takes a swing at you with one rotting hand.%^RESET%^",
         "%^BLUE%^The zombie moans and staggers toward you.%^RESET%^"
      }) );
    set_funcs(({"smell_fun","smack_fun"}));

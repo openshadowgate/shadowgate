@@ -28,16 +28,16 @@ void create() {
    set_stats("charisma",3);
    set_stats("dexterity",9);
    set_stats("constitution",10);
-   set_hp(random(15)+35);
-   set_max_hp(query_hp());
+   set_max_hp(30);
+   set_hp(30);
    set("aggressive",20);
    add_money("gold",random(25)+25);
    new(CWEAP"mace")->move(TO);
    command("wield mace");
    set_overall_ac(8);
    set_exp(60);
-   set_achats(1, 
-     ({ "%^RED%^The zombie's eyes seem to glow red.%^RESET%^", 
+   set_achats(1,
+     ({ "%^RED%^The zombie's eyes seem to glow red.%^RESET%^",
         "%^ORANGE%^The zombie lunges toward your throat!%^RESET%^"
      }) );
    set_new_exp(1, "very low");

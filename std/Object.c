@@ -580,7 +580,7 @@ mixed query_property(string prop)
             (string)TO->query("subrace") == "szarkai" &&
             !TO->query_property("raised resistance")) {
             mylevel = (int)TO->query_level() + 10;
-            num += mylevel;   // drow/shade racial, MR of overall character level +10.
+            num += 10;   // drow/shade racial, MR of overall character level +10.
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "magic resistance"));

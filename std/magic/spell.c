@@ -1746,54 +1746,40 @@ void check_fizzle(object ob) {
         return;
     }
 
-    if (clevel - 10 + random(20) < place->query_property("antimagic field")) {
-        tell_object(caster, "%^CYAN%^Your " + whatsit + " fizzles harmlessly.");
-        tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " fizzles harmlessly.");
-        caster->removeAdminBlock();
-        TO->remove();
-        return;
-    }
+    if (place->query_property("antimagic field"))
+        if (clevel - 10 + random(20) < place->query_property("antimagic field")) {
+            tell_object(caster, "%^CYAN%^Your " + whatsit + " fizzles harmlessly.");
+            tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " fizzles harmlessly.");
+            caster->removeAdminBlock();
+            TO->remove();
+            return;
+        }
 
     prof = TO->calculate_prof_state();
 
-/*
-    if((string)caster->query_name() == "tristan") {
-        tell_object(caster,"prof = "+prof);
-    }
-*/
-        caster->removeAdminBlock();
-    if(prof >= FULL_EFFECT)
-    {
+    caster->removeAdminBlock();
+    if (prof >= FULL_EFFECT) {
         TO->spell_effect(prof);
-    } else if(prof < random(100)) {
+    } else if (prof < random(100)) {
         TO->do_spell_blowup(prof);
     } else {
         TO->spell_effect(prof);
     }
 
     if (objectp(caster)) {
-        caster->increment_stamina(spell_level*2);
-    }
+        caster->increment_stamina(spell_level * 2);
+        }
     return 1;
 }
 
-int calculate_prof_state(){
-    if(query_spell_type() != "mage" && query_spell_type() != "bard") {
-        return FULL_EFFECT;
-    }
-    if(!caster->query_property("spell test")) {
-        return FULL_EFFECT;
-    }
-/*
-    if((string)caster->query_name() == "tristan") {
-        tell_object(caster,"real prof = "+caster->query_spell_prof_level(query_spell_name()));
-    }
-*/
-    return (caster->query_spell_prof_level(query_spell_name())+(random(60)-30));
+int calculate_prof_state()
+{
+    return FULL_EFFECT;
 }
 
-void do_spell_blowup(int prof){
-    MAGIC_D->spell_failure(TO,prof);
+void do_spell_blowup(int prof)
+{
+    MAGIC_D->spell_failure(TO, prof);
 }
 
 void spell_successful() //revoked exp bonuses from casting. This function seems redundant now? Nienne, 06/10.
@@ -2380,7 +2366,7 @@ varargs int checkMagicResistance(object victim, int mod)
         res = (int)victim->query_property("magic resistance");
     }
 
-    if ((roll_dice(1, 100) + mod) > res) {
+    if ((roll_dice(1, 20) + mod) > res) {
         return 0;
     }
     return 1;
