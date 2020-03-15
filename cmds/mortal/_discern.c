@@ -143,7 +143,7 @@ int cmd_discern(string str)
                 string poison;
                 poison = "/d/common/obj/poisons/base/" + replace_string(obj->query("PoisonType"), " ", "_");
                 if (file_exists(poison + ".c")) {
-                    if (TP->query_skill("survival") > poison->query_poison_dc()) {
+                    if (TP->query_skill("survival") > poison->query_poison_dc() * 2) {
                         write("You sense it is a %^BOLD%^%^GREEN%^" + obj->query("PoisonType") + "%^RESET%^ poison.");
                     } else {
                         write("You don't know what kind of poison it is.");
