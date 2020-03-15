@@ -11,6 +11,11 @@
 #include <daemons.h>
 #include <new_exp_table.h>
 #include <rooms.h>
+#define MRLOW TO->query_highest_level() * .5
+#define MRMIDLOW TO->query_highest_level() * .75
+#define MRNORM TO->query_highest_level()
+#define MRMIDHIGH TO->query_highest_level() * 1.25
+#define MRHIGH TO->query_highest_level() * 1.25
 
 inherit "/std/weaponless_users.c"; // consolidating all weaponless combat into one spot -Ares
 
