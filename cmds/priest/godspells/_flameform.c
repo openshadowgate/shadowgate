@@ -74,7 +74,7 @@ void spell_effect(int prof) {
     caster->set_attacks_num(2);
     caster->set_attack_limbs(({"right %^RED%^flame%^RESET%^","left %^RED%^flame%^RESET%^"}));
     caster->set_damage(1,8);
-    caster->set_nat_weapon_type("bludgeon");
+    caster->set_base_damage_type("bludgeon");
     caster->set_hit_funcs((["right %^RED%^flame%^RESET%^":({"/daemon/specials_d", "flameform"}),"left %^RED%^flame%^RESET%^":({"/daemon/specials_d", "flameform"})]));
     caster->set_property("spelled",({TO}));
     time = 0;

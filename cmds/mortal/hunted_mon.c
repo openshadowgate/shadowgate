@@ -12,7 +12,7 @@ void create(){
     set_name("game animal");
     set_id(({"animal", "game", "game animal" }));
     set_gender(random(2)?"male":"female");
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_body_type("quadruped");
     set_attacks_num(1);
     set_moving(1);
@@ -179,7 +179,7 @@ void do_body(string what, int level, int tough) {
          set_speed(30);
          add_limb("fangs", "mouth", 0, 0, 0);
          set_attack_limbs(({"fangs"}));
-         set_nat_weapon_type("piercing");
+         set_base_damage_type("piercing");
          set_damage(1,2+dam);
          break;
       case "mammoth":
@@ -192,7 +192,7 @@ void do_body(string what, int level, int tough) {
          set_speed(60);
          add_limb("tusks", "head", 0, 0, 0);
          set_attack_limbs(({"tusks", "head", "right fore hoof", "left fore hoof" }));
-         set_nat_weapon_type("bludgeon");
+         set_base_damage_type("bludgeon");
          set_damage(3,4+dam);
          set_attacks_num(2);
          break;
@@ -212,7 +212,7 @@ void do_body(string what, int level, int tough) {
          set_body_type("equine");
          add_limb("antlers", "head", 0, 0, 0);
          set_attack_limbs(({"antlers", "head", "right fore hoof", "left fore hoof" }));
-         set_nat_weapon_type("bludgeon");
+         set_base_damage_type("bludgeon");
          set_damage(2,3+dam);
          set_attacks_num(2);
          break;
@@ -223,7 +223,7 @@ void do_body(string what, int level, int tough) {
          set_body_type("quadruped");
          add_limb("teeth", "mouth", 0, 0, 0);
          set_attack_limbs(({"teeth" }));
-         set_nat_weapon_type("piercing");
+         set_base_damage_type("piercing");
          set_damage(1,2+dam);
       case "giant bat":
          add_id("bat");
@@ -239,7 +239,7 @@ void do_body(string what, int level, int tough) {
          set_speed(60);
          add_limb("tusks", "head", 0, 0, 0);
          set_attack_limbs(({"tusks", "head" }));
-         set_nat_weapon_type("bludgeon");
+         set_base_damage_type("bludgeon");
          set_damage(2,4+dam);
          set_attacks_num(1);
          break;
@@ -274,7 +274,7 @@ void do_body(string what, int level, int tough) {
          set_body_type("quadruped");
          add_limb("teeth", "mouth", 0, 0, 0);
          set_attack_limbs(({"teeth", "head", "right forepaw", "left forepaw" }));
-         set_nat_weapon_type("bludgeon");
+         set_base_damage_type("bludgeon");
          set_damage(1,2+dam);
          break;
      
@@ -285,7 +285,7 @@ void do_body(string what, int level, int tough) {
          set_body_type("quadruped");
          add_limb("teeth", "mouth", 0, 0, 0);
          set_attack_limbs(({"teeth", "head", "right forepaw", "left forepaw" }));
-         set_nat_weapon_type("bludgeon");
+         set_base_damage_type("bludgeon");
          set_damage(2,3+dam);
          break;
     }

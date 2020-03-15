@@ -75,7 +75,7 @@ void make_sword() {
     ob->set_stats("dexterity",20);
     ob->set_stats("strength",20);
     ob->set_attack_limbs(({"left hand","right hand"}));
-    ob->set_nat_weapon_type("slashing");
+    ob->set_base_damage_type("slashing");
     ob->set_attacks_num(clevel/12+1);
     ob->set_damage(clevel/4,6);
     ob->set_overall_ac(-clevel);

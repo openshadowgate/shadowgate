@@ -73,7 +73,7 @@ void spell_effect(int prof) {
     if(droll > 4) droll = 4;
     caster->set_attacks_num(droll);
     caster->set_damage(2,droll);
-    caster->set_nat_weapon_type("slashing");
+    caster->set_base_damage_type("slashing");
     caster->set_hit_funcs((["right claw":({"/daemon/specials_d", "beastclaws"}),"left claw":({"/daemon/specials_d", "beastclaws"})]));
     caster->set_property("spelled",({TO}));
 // adjusting down a little for lower levels, needed a global variable to track it

@@ -62,7 +62,7 @@ void spell_effect() {
     caster->add_limb("right claw","",0,0,0);
     caster->add_limb("left claw","",0,0,0);
     caster->set_damage(2,4);
-    caster->set_nat_weapon_type("slashing");
+    caster->set_base_damage_type("slashing");
     caster->set_hit_funcs((["right claw":({"/daemon/specials_d", "beastclaws"}),"left claw":({"/daemon/specials_d", "beastclaws"})]));
     caster->set_property("spelled",({TO}));
     caster->add_attack_bonus(2);

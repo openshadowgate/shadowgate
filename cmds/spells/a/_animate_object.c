@@ -288,7 +288,7 @@ void make_animate(object thing)
         ob->set_heart(2);
         ob->set_attack_limbs(limbs);
         ob->set_attacks_num(1);
-        ob->set_nat_weapon_type("bludgeon");
+        ob->set_base_damage_type("bludgeon");
         ob->set_damage(1,(int)thing->query_ac());
         ob->set_overall_ac(7-(int)thing->query_ac());
         ob->set_hd( ( ((int)thing->query_ac()*2) +1),8); //added +1 for cases=0
@@ -316,7 +316,7 @@ void make_animate(object thing)
             ob->add_limb("blade","blade",0,0,0);
             ob->add_limb("hilt","hilt",0,0,0);
             ob->set_attack_limbs(({"blade"}));
-            ob->set_nat_weapon_type("slashing");
+            ob->set_base_damage_type("slashing");
             break;
         case "piercing":
         case "thiefpiercing":
@@ -324,14 +324,14 @@ void make_animate(object thing)
             ob->add_limb("tip","tip",0,0,0);
             ob->add_limb("handle","handle",0,0,0);
             ob->set_attack_limbs(({"tip"}));
-            ob->set_nat_weapon_type("piercing");
+            ob->set_base_damage_type("piercing");
             break;
         case "bludgeon":
         case "magebludgeon":
             ob->add_limb("head","head",0,0,0);
             ob->add_limb("handle","handle",0,0,0);
             ob->set_attack_limbs(({"head"}));
-            ob->set_nat_weapon_type("bludgeon");
+            ob->set_base_damage_type("bludgeon");
             break;
         default:
             break;
@@ -339,7 +339,7 @@ void make_animate(object thing)
         }
         ob->add_limb("body","body",0,0,0);   // added for these cases *Styx*
         ob->set_attack_limbs(({"body"}));    // added for these cases *Styx*
-        ob->set_nat_weapon_type("bludgeon"); // added for these cases *Styx*
+        ob->set_base_damage_type("bludgeon"); // added for these cases *Styx*
         ob->set_attacks_num(1);
         ob->set_damage(1,(int)thing->query_wc());
         ob->set_overall_ac(5);
@@ -368,7 +368,7 @@ void make_animate(object thing)
     }
     ob->add_limb("body","body",0,0,0);
     ob->set_attack_limbs(({"body"}));
-    ob->set_nat_weapon_type("bludgeon");
+    ob->set_base_damage_type("bludgeon");
     ob->set_attacks_num(1);
     ob->set_overall_ac(10);
     j=thing->query_weight();

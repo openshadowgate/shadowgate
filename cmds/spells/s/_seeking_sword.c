@@ -86,7 +86,7 @@ void make_sword()
     ob->add_limb("blade","blade",0,0,0);
     ob->add_limb("hilt","hilt",0,0,0);
     ob->set_attack_limbs(({"blade"}));
-    ob->set_nat_weapon_type("slashing");
+    ob->set_base_damage_type("slashing");
     ob->set_attacks_num((clevel/7)+1); //was clevel/7, but that didn't
 //work since clerics get this earlier than level 7 ~Circe~ 4/22/08
     ob->set_damage(1,(clevel/2));

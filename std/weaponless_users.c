@@ -78,19 +78,6 @@ int query_attacks_num()
    return static_weaponless["num_hand"];
 }
 
-
-void set_nat_weapon_type(string type)
-{
-    static_weaponless["weapon_type"] = type;
-}
-
-
-string query_nat_weapon_type()
-{
-    return static_weaponless["weapon_type"];
-}
-
-
 void set_attack_limbs(string *limbs)
 {
     static_weaponless["attack_limbs"] = limbs;

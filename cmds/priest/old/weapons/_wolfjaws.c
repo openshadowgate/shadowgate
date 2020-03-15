@@ -69,7 +69,7 @@ void spell_effect(int prof) {
     if(droll > 4) droll = 4;
     caster->set_attacks_num(droll);
     caster->set_damage(2,droll);
-    caster->set_nat_weapon_type("piercing");
+    caster->set_base_damage_type("piercing");
     caster->set_hit_funcs((["right wolf head":({"/daemon/specials_d", "wolfjaws"}),"left wolf head":({"/daemon/specials_d", "wolfjaws"})]));
     caster->set_property("spelled",({TO}));
     caster->add_attack_bonus(2);

@@ -69,7 +69,7 @@ void spell_effect(int prof) {
    if(droll > 5) droll = 5;
     caster->set_attacks_num(droll);
     caster->set_damage(2,droll);
-   caster->set_nat_weapon_type("bludgeon");
+   caster->set_base_damage_type("bludgeon");
    caster->set_hit_funcs((["%^GREEN%^left wheel of bones":({"/daemon/specials_d", "wheelBones"}),"%^GREEN%^right wheel of bones":({"/daemon/specials_d", "wheelBones"})]));
    caster->set_property("spelled",({TO}));
    caster->add_attack_bonus(2);

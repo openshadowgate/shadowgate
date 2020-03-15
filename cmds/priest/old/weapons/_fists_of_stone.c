@@ -75,7 +75,7 @@ void spell_effect(int prof) {
    if(droll > 6) droll = 6;
    caster->set_attacks_num(droll);
    caster->set_damage(2,droll);
-   caster->set_nat_weapon_type("bludgeon");
+   caster->set_base_damage_type("bludgeon");
    caster->set_hit_funcs((["right stone fist":({"/daemon/specials_d", "stonefists"}),"left stone fist":({"/daemon/specials_d","stonefists"})]));
    caster->set_property("spelled",({TO}));
    //caster->add_attack_bonus(2);

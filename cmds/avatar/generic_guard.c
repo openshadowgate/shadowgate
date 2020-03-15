@@ -68,7 +68,7 @@ void create()
     set_stats("charisma",15);
     set_property("full attacks",1);
     set_damage(1,6);
-    set_nat_weapon_type("thiefslashing");
+    set_base_damage_type("thiefslashing");
     set_property("knock unconscious",1);
     set_thief_skill("move silently",95);
     set_thief_skill("hide in shadows",95);

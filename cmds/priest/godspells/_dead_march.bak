@@ -80,7 +80,7 @@ void make_animate(object thing) {
     ob->set_attack_limbs(thing->query_wielding());
     ob->set_wielding_limbs(thing->query_wielding());
     ob->set_damage(1,4);
-    ob->set_nat_weapon_type("bludgeon");
+    ob->set_base_damage_type("bludgeon");
     ob->set_attacks_num(1);
     ob->set_overall_ac(10-(clevel/3));
     ob->set_hd(clevel/3 + 1);
