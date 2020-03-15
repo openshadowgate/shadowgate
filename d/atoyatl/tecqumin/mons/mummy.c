@@ -39,7 +39,7 @@ void create()
         + gender_Subj + " moves with a deceptive, lurching speed, and "
         + gender_subj +" long dead limbs possess a horrible strength. The entire"
         +" body is swathed in %^BOLD%^%^WHITE%^wrappings%^RESET%^, with a%^BOLD%^"
-        +" %^CYAN%^mask%^RESET%^ over the face, presumably representing how " 
+        +" %^CYAN%^mask%^RESET%^ over the face, presumably representing how "
         + gender_subj + " looked in life." );
   	set_size(2);
   	set("aggressive",25);
@@ -53,7 +53,7 @@ void create()
       set_alignment(7);
   	set_overall_ac(-70);
       set_size(2);
-      add_attack_bonus(70); 
+      add_attack_bonus(70);
       set_property("magic",1);
       set_monster_feats(({
         "power attack",
@@ -63,7 +63,7 @@ void create()
         "sunder",
         "daze",
         "unarmed fighting"
-    })); 
+    }));
       set_stats("strength",26);
       set_stats("intelligence",10);
       set_stats("dexterity",16);
@@ -82,7 +82,7 @@ void create()
       set_attack_limbs(({"left arm","right arm"}));
       set_damage(7,6);
       set_property("full attacks",1);
-      set_property("swarm", 1); 
+      set_property("swarm", 1);
       set_property("shapeshifted", 1); //So that it can rush without a weapon
       will_open_doors(1);
       set_property("no random treasure", 1);
@@ -95,10 +95,9 @@ void init(){
   ::init();
 }
 
-void heart_beat(){
-  ::heart_beat();
-  if (objectp(ETO) && present("player", ETO)){
-  }
+void heart_beat()
+{
+    ::heart_beat();
 }
 
 void check_my_heart()
@@ -175,7 +174,7 @@ void rush(){
   critters = query_attackers();
   if (sizeof(critters)<1) return;
   who = critters[random(sizeof(critters))]->query_name();
-  force_me("rush " + who); 
+  force_me("rush " + who);
 }
 
 void summon_help(){
@@ -204,7 +203,7 @@ void summon_help(){
       ob = new(MOB + "mummy");
       ob->move(room);
       DESTINATIONS_D->generate_waystations(base_name(ETO),2, 2);
-      ob->start_walking(base_name(ETO));  
+      ob->start_walking(base_name(ETO));
       num ++;
       if (num>=target){
         break;
