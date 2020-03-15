@@ -84,7 +84,6 @@ void set_attack_limbs(string *limbs)
     //static_weaponless["polymorphed"] = 1;
 }
 
-
 string *query_attack_limbs()
 {
     return static_weaponless["attack_limbs"];

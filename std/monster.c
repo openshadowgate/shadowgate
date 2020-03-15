@@ -1520,19 +1520,6 @@ int query_attacks_num()
     return ::query_attacks_num();
 }
 
-
-void set_nat_weapon_type(string type)
-{
-    ::set_nat_weapon_type(type);
-}
-
-
-string query_nat_weapon_type()
-{
-    return ::query_nat_weapon_type();
-}
-
-
 void set_attack_limbs(string *limbs)
 {
     ::set_attack_limbs(limbs);
