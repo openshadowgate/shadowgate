@@ -11,7 +11,7 @@ void create(){
         set_obvious_short("%^BOLD%^%^BLACK%^A hood made of %^BLUE%^s%^RESET%^%^BLUE%^h%^BOLD%^ado%^RESET%^%^BLUE%^w%^BOLD%^s%^RESET%^");
 	set_long(
 @AVATAR
-%^BOLD%^%^BLACK%^This hood covers the wearers head comfortably, masking it from view in an array of shadows. It is made of a thin black fabric that is extremely soft and smooth, but somehow seems as if it will still provide some form of protection. 
+%^BOLD%^%^BLACK%^This hood covers the wearers head comfortably, masking it from view in an array of shadows. It is made of a thin black fabric that is extremely soft and smooth, but somehow seems as if it will still provide some form of protection.
 
 AVATAR
 	);
@@ -22,6 +22,8 @@ AVATAR
 	set_size(2);
     set_property("enchantment",6);
     set_item_bonus("stealth",4);
+    set_item_bonus("thievery",4);
+    set_item_bonus("perception",4);
 	set_wear((:TO,"wear_func":));
 	set_remove((:TO,"remove_func":));
 }
