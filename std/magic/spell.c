@@ -1714,8 +1714,9 @@ void check_fizzle(object ob) {
         return;
     }
     caster->set_casting(0);
-     if ((object)caster->query_property("spell_casting") == TO)
-     caster->remove_property("spell_casting");
+    if ((object)caster->query_property("spell_casting") == TO) {
+        caster->remove_property("spell_casting");
+    }
     if (objectp(place)) {
         place->remove_combatant(TO);
     }
@@ -1726,20 +1727,19 @@ void check_fizzle(object ob) {
         return;
     }
 
-    if(objectp(target))
-        if(!(spell_type=="warlock" ||
-             spell_type=="monk"))
-            if((int)target->query_property("spell invulnerability")>query_spell_level(spell_type))
-            {
-                tell_object(caster,"%^CYAN%^Your "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly.");
-                tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly .",caster);
+    if (objectp(target))
+        if (!(spell_type == "warlock" ||
+              spell_type == "monk"))
+            if ((int)target->query_property("spell invulnerability") > query_spell_level(spell_type)) {
+                tell_object(caster, "%^CYAN%^Your " + whatsit + " f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly.");
+                tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " f%^BOLD%^i%^RESET%^%^CYAN%^zzles harmlessly .", caster);
                 caster->removeAdminBlock();
                 TO->remove();
                 return;
             }
 
     if (fizzle || place->query_property("no magic")) {
-        tell_object(caster,"%^CYAN%^Your "+whatsit+" fizzles harmlessly.");
+        tell_object(caster,"%^CYAN%^Your "+whatsit+" disperses being cast in no magic field.");
         tell_room(place,"%^CYAN%^"+caster->QCN+"'s "+whatsit+" fizzles harmlessly.");
         caster->removeAdminBlock();
         TO->remove();
@@ -1748,7 +1748,7 @@ void check_fizzle(object ob) {
 
     if (place->query_property("antimagic field"))
         if (clevel - 10 + random(20) < place->query_property("antimagic field")) {
-            tell_object(caster, "%^CYAN%^Your " + whatsit + " fizzles harmlessly.");
+            tell_object(caster, "%^CYAN%^Your " + whatsit + " fails to gather power in the anitmagic field.");
             tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " fizzles harmlessly.");
             caster->removeAdminBlock();
             TO->remove();
@@ -2366,7 +2366,7 @@ varargs int checkMagicResistance(object victim, int mod)
         res = (int)victim->query_property("magic resistance");
     }
 
-    if ((roll_dice(1, 20) + mod) > res) {
+    if ((roll_dice(1, 100) + mod) > res) {
         return 0;
     }
     return 1;

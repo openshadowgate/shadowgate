@@ -23,7 +23,6 @@ void create() {
   set_stats("charisma",3);
   set_stats("dexterity",9);
   set_stats("constitution",10);
-  set_property("magic resistance",10);
   set_hp(random(15)+50);
   set_max_hp(query_hp());
   set("aggressive",17);
@@ -32,8 +31,8 @@ void create() {
   command("wield mace");
   set_overall_ac(8);
   set_exp(80);
-  set_achats(1, 
-	({ "%^RED%^The zombie's eyes seem to glow red.", 
+  set_achats(1,
+	({ "%^RED%^The zombie's eyes seem to glow red.",
 	   "The zombie lunges toward your throat!"
 	}) );
 }

@@ -28,7 +28,6 @@ void create() {
   set_stats("charisma",3);
   set_stats("dexterity",9);
   set_stats("constitution",10);
-  set_property("magic resistance",25);
   set_max_hp(query_hp());
   set("aggressive",17);
   add_money("gold", random(100)+50);
@@ -39,9 +38,9 @@ void create() {
   set_exp(150);
   set_spells(({"vampiric touch", "magic missile", "blink", "chill touch", "scorcher"}));
   set_spell_chance(40);
-  set_achats(3, 
-    ({  "The zombie growls menacingly and its %^RED%^eyes glow red%^RESET%^.", 
-	"%^ORANGE%^The zombie mutters something and shuffles closer to you.", 
+  set_achats(3,
+    ({  "The zombie growls menacingly and its %^RED%^eyes glow red%^RESET%^.",
+	"%^ORANGE%^The zombie mutters something and shuffles closer to you.",
 	"The zombie cackles evilly as it reaches for you."
     }) );
 }
