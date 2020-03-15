@@ -16,7 +16,9 @@ void create()
     set_spell_level(([ "cleric" : 4, "druid" : 3, "paladin" : 4, "assassin" : 1, "inquisitor" : 3, "ranger":3]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS poison on TARGET|WEAPON");
-    set_description("With this spell you create a natural poison and either envenom your target with it, or apply it to a weapon in your possession.");
+    set_description("With this spell you create a natural poison and either envenom your target with it, or apply it to a weapon in your possession.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ poison *player commands");
     set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
