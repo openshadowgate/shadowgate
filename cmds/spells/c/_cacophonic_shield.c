@@ -13,6 +13,7 @@ void create() {
     set_description("This spell amplifies the caster's voice into an independently resonating wall of sound.  Any foes attempting to get close enough to harm the caster will find themselves buffeted by the sonic vibrations.");
     set_verbal_comp();
     set_helpful_spell(1);
+    traveling_aoe_spell(1);
 }
 
 string query_cast_string() {
@@ -52,9 +53,10 @@ void execute_attack(){
         return;
     }
    ppl = caster->query_current_attacker();
+   define_base_damage(0);
    if (ppl && objectp(ppl)){
       baddie = ppl->QCN;
-      extra = ((clevel*2)/3);
+      extra = sdamage;
       if(!objectp(ppl)) return;
       tell_room(environment(caster),"%^YELLOW%^"+baddie+" gets a little too close and is knocked aside by the rippling barrier of sound surrounding "+caster->QCN+"!",({caster,ppl}));
       tell_object(caster,"%^YELLOW%^"+baddie+" gets a little too close to you, and is knocked aside by your defensive barrier of sonic!");
