@@ -29,7 +29,7 @@ set_max_level(25);
    set_attack_limbs(({"right hand","left hand"}));
    set_attacks_num(2);
    set_damage(6,6);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_size(3);
    set_gender("male");
    set_race("cyclops");

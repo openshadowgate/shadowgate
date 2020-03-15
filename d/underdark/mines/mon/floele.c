@@ -33,7 +33,7 @@ void create(){
    set_property("swarm",1);
    set("aggressve",15);
    set_attacks_num(2);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_damage(2,10);
    set_stats("strength",18);
    set_stats("dexterity",8);

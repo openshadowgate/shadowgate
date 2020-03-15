@@ -53,7 +53,7 @@ void create(){
    set("aggressive",25);
    set_attack_limbs(({"right hook","left hook","beak"}));
    set_attacks_num(3);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(2,20);
    set_stats("strength",25);
    set_stats("intelligence",19);

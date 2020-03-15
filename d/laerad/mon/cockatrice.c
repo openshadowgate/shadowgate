@@ -31,7 +31,7 @@ void create(){
     set("aggressive",7);
     set_attack_limbs(({"head"}));
     set_attacks_num(1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(2,4);
     set_hit_funcs( (["head":(:TO,"stone":)]) );
     set_stats("strength",16);

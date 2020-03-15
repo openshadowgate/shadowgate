@@ -26,7 +26,7 @@ void create() {
     add_limb("tomb buffer","tomb buffer",96,1,4);
     set_attacks_num(4);
     set_attack_limbs(({"tomb buffer","stone slab","jagged slab","rotating blade","stone spike","iron clasp","tomb buffer"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,8);
     set_body_type("fowl");
     set_property("swarm",1);

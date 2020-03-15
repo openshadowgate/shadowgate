@@ -67,7 +67,7 @@ void create() {
    set_overall_ac(6);
    set_attack_limbs( ({"left hand","right hand"}) );
    set_attacks_num(1);
-   set_nat_weapon_type("bludgeoning");
+   set_base_damage_type("bludgeoning");
    set_damage(1,6);
    set("aggressive","agg_fun");
    add_money("platinum",random(100));

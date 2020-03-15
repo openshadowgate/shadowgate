@@ -39,7 +39,7 @@ void create(){
     set_property("magic resistance",20);
     add_limb("tail","abdomen", 0, 0, 0);
     set_attack_limbs(({"tail","right pincer","left pincer"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attacks_num(3);
     set_damage(2,8);
 	set_hit_funcs((["tail":(:TO,"poison":)]));

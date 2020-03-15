@@ -60,7 +60,7 @@ void create(){
    set_damage(1,20);
    set_property("full attacks",1);
    set_hit_funcs((["mouth":(:TO,"mouth_attack":),"right mouth":(:TO,"mouth_attack":),"left mouth":(:TO,"mouth_attack":),"tail":(:TO,"tail_attack":),"right forepaw":(:TO,"paw_attack":),"left forepaw":(:TO,"paw_attack":)]));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set("aggressive",20);
    set_funcs(({"fire"}));
    set_func_chance(20);

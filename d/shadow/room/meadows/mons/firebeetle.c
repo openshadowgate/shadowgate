@@ -30,7 +30,7 @@ void create()
    set_new_exp(6,"normal");
   set_damage(1,6);
   set_attacks_num(2);
-  set_nat_weapon_type("piercing");
+  set_base_damage_type("piercing");
   add_limb("mandibles","head",0,0,0);
   set_attack_limbs(({"mandibles"}));
   set_ac(5);

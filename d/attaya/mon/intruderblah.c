@@ -56,7 +56,7 @@ void create(){
     add_limb("mystic spear","mystic spear",96,1,4);
    set_attacks_num(7);
     set_attack_limbs(({"mystic dagger", "mystic spear", "bonestripper", "demon gaze", "mystic sword", "forearm mounted blades"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(2,10);
     set("aggressive","aggfunc");
    set_property("magic resistance", 100);

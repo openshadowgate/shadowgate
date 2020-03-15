@@ -20,7 +20,7 @@ void create() {
     set_attacks_num(2);
 	add_limb("mouth");
     set_attack_limbs(({"mouth", "tail"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_gender("neuter");
     set_race("worm");
     set_new_exp(10, "high");

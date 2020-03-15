@@ -35,7 +35,7 @@ void create(){
 	set_hp(query_max_hp());
 	set_attack_limbs(({"beak","right claw","left claw"}));
 	set_attacks_num(3);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(1,6);
 	set_level(20);
 	set_class("fighter");

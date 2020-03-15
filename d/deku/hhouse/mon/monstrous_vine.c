@@ -31,7 +31,7 @@ void create()
     set_damage(4,6);
     set_attacks_num(3);
     set_attack_limbs(({"vine"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     set_gender("male");
     set_race("vine");
     set_new_exp(32, "normal");

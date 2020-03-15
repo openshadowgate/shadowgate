@@ -48,7 +48,7 @@ void create()
 
     set_num_attacks(6);
     set_damage(4,20);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 
     set_stats("strength", 30);
     set_stats("dexterity", 6);

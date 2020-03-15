@@ -20,7 +20,7 @@ void create() {
     set_weight(300);
     set_attacks_num(4); 
     set_damage(4,8);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     add_limb("rotating blade","left arm",0,0,0);
     add_limb("scissor blade","right arm",0,0,0);
     set_attack_limbs(({"rotating blade"}));

@@ -33,7 +33,7 @@ void create(){
    set_race("elemental");
    set_body_type("human");
    set_attack_limbs(({"right hand", "left hand"}));
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_hit_funcs((["right hand":(:TO,"gore":), "left hand":(:TO,"gore":)]));
    set_funcs(({"gore"}));
    set_func_chance(20);

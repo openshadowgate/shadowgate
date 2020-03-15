@@ -17,7 +17,7 @@ void create()
     set_body_type("quadruped");
     set_fake_limbs(({"maw","right front claw","right rear claw","left front claw","left rear claw","right front leg","left front leg","right real leg","left rear leg","torso","tail" }));
     set_attack_limbs(({"maw","right front claw","right rear claw","left front claw","left rear claw"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 }
 
 

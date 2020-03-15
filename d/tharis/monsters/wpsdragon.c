@@ -32,7 +32,7 @@ OLI
 	set_attack_limbs(({"mouth", "right foreclaw", "left foreclaw"}));   
 	set_damage(2,9);                     //changed to be 2,9 from 1,9
 	set_attacks_num(2);                  //changed to 2 attacks
-	set_nat_weapon_type("piercing");
+	set_base_damage_type("piercing");
 	set_exp(5000);
 	set_race("pseudodragon");
 	set_gender("male");

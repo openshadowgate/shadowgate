@@ -22,7 +22,7 @@ create()
     set_body_type("human");
     set_attacks_num(my_hd/7+1);
     set_damage(2,my_hd/2);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_attack_limbs(({"right hand","left hand"}));
     set_alignment(6);
     set_overall_ac(7-my_hd);

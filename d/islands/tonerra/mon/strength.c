@@ -31,7 +31,7 @@ OLI
    set_attack_limbs(({"right hand","left hand"}));
    set_attacks_num(2);
    set_damage(2,15);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_funcs(({"slam"}));
    set_func_chance(35);
    set_stats("dexterity",1);

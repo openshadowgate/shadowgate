@@ -22,7 +22,7 @@ void create(){
    set_exit_room("leaves riding a great wolf.");
    add_limb("jaws","head",0,0,0);
    set_attack_limbs(({"jaws","right forepaw","left forepaw"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_funcs(({"special"}));
    set_func_chance(15);
    TO->force_me("message in stalks in with a measured gait.");

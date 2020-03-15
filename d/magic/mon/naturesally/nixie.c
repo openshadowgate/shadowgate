@@ -22,7 +22,7 @@ void create(){
     set_gender("female");
     set_body_type("human");
     set_attack_limbs(({"right hand","left hand"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 }
 
 void my_special(object target) {

@@ -91,9 +91,9 @@ create() {
    if (flag == 1) { set_attacks_num(2); }
    if (flag == 3) { set_attacks_num(1); }
    if (flag == 4 || flag == 5) { set_attacks_num(4); }
-   if (flag == 0 || flag == 4) { set_nat_weapon_type("slashing"); }
-   if (flag == 2 || flag == 3) { set_nat_weapon_type("bludgeon"); }
-   if (flag == 1 || flag == 5) { set_nat_weapon_type("piercing"); }
+   if (flag == 0 || flag == 4) { set_base_damage_type("slashing"); }
+   if (flag == 2 || flag == 3) { set_base_damage_type("bludgeon"); }
+   if (flag == 1 || flag == 5) { set_base_damage_type("piercing"); }
    set_damage(2,6);
    set_property("magic resistance",random(30));
    set_property("undead",1);

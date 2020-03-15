@@ -37,7 +37,7 @@ void create(){
 	add_limb("lower jaws","mouth",0,0,0);
 	set_attack_limbs(({"left jaws","right jaws","center jaws","lower jaws"}));
 	set_attacks_num(4);
-	set_nat_weapon_type("pierce");
+	set_base_damage_type("pierce");
    set_property("no charge",1);
    set_property("no bows",1);
 	set_damage(2,6);

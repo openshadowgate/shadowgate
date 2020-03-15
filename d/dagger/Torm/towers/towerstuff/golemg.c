@@ -38,7 +38,7 @@ set_money("silver",random(100));
   set_attack_limbs(({"stained glass sword"}));
   set_attacks_num(1);
   set_damage(10,10);
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
 }
 void die(mixed ob){
   tell_room(ETO,"%^BOLD%^%^WHITE%^The golem smashes into tiny fragments with the final blow and it's pieces are scattered across the floor.");

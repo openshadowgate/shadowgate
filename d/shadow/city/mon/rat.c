@@ -28,7 +28,7 @@ void create()
     set_hp(90 + random(15));
     set_max_hp(query_hp());
     set_new_exp(10, "normal");
-    set_nat_weapon_type("piercing","biting");
+    set_base_damage_type("piercing","biting");
     set_base_damage_type("piercing","biting");
 	set_attack_limbs(({"mouth"}));
 	set_hit_funcs((["mouth":(:TO,"bite":)]));

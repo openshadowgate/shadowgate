@@ -36,7 +36,7 @@ void create()
     set_overall_ac(-29);
     set_attacks_num(5);
     set_damage(3,10);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_property("full attacks",1);
 
     remove_limb("right wing");

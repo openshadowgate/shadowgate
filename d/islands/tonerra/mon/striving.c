@@ -29,7 +29,7 @@ OLI
    set_property("magic resistance",55);
    set_property("weapon resistance",2);
 
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
 
    set_overall_ac(-14);
    set_attack_limbs(({"grasping right hand","grasping left hand"}));

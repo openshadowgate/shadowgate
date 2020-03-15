@@ -23,7 +23,7 @@ set_property("magic",1);
     set_weight(80);
     set_attacks_num(4);
     set_damage(3,5);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"right hand","left hand"}));
     set_overall_ac(-10);
     set_body_type("human");

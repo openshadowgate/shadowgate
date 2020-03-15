@@ -22,7 +22,7 @@ void create()
     set_weight(175);
     set_attacks_num(my_hd/7+2);
     set_damage(3,my_hd/2);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_attack_limbs(({"right hand","left hand"}));
     set_overall_ac(5-my_hd);
     set_stats("strength",my_hd+4);

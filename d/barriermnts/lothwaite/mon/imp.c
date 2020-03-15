@@ -55,7 +55,7 @@ void make_me() {
    set_damage(1,6);
    set("aggressive",4);
    set_hit_funcs((["tail":(:TO,"poison_me":)]));
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_attack_limbs(({"tail"}));
    set_overall_ac(-13);
 }
@@ -119,7 +119,7 @@ void new_form() {
       set("aggressive",4);
       set_size(1);
       set_attacks_num(2);
-      set_nat_weapon_type("slashing");
+      set_base_damage_type("slashing");
       set_attack_limbs(({"right forepaw", "left forepaw"}));
       break;
     case 1:
@@ -179,7 +179,7 @@ void make_imp() {
    set_damage(1,6);
    set("aggressive",4);
    set_hit_funcs((["tail":(:TO,"poison_me":)]));
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_attack_limbs(({"tail"}));
    set_overall_ac(-13);
    force_me("speech speaks with an insidious hiss");

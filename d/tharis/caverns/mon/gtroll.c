@@ -40,7 +40,7 @@ void create(){
     add_limb("teeth","head",0,0,0);
     set_damage(1,10);
     set_attacks_num(3);
-    set_nat_weapon_type("thiefslashing");
+    set_base_damage_type("thiefslashing");
     set_attack_limbs(({"right claws","left claws","teeth"}));
 }
 void heart_beat(){

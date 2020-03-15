@@ -29,6 +29,6 @@ set_long("%^RESET%^%^GREEN%^This little guy is incredibly cute,"+
     set_body_type("quadreped");
     set_damage(2,3);
     set_attacks_num(2);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_gender("male");
 }

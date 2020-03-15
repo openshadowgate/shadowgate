@@ -27,6 +27,6 @@ void create(){
     set("aggressive",19); // was 15
     set_attack_limbs(({"head", "right fore hoof", "left fore hoof"}));
     set_attacks_num(2);	  // was 1, laerad one had been 3
-    set_nat_weapon_type("magebludgeon");
+    set_base_damage_type("magebludgeon");
     set_damage(3,6);
 }

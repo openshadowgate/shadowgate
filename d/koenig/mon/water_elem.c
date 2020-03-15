@@ -26,7 +26,7 @@ void create(){
    set_hp(random(30)+55);
    set_damage(1,8);
    set_attacks_num(2);
-   set_nat_weapon_type("magebludgeon");
+   set_base_damage_type("magebludgeon");
    add_limb("right wave","right arm",0,0,0);
    add_limb("left wave","left arm",0,0,0);
    set_attack_limbs(({"left wave","right wave"}));

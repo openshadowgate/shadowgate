@@ -30,7 +30,7 @@ OLI
 	add_limb("right claw","left leg",0,0,0);
 	add_limb("left wing","torso",0,0,0);
 	add_limb("right wing","torso",0,0,0);
-	set_nat_weapon_type("slashing");
+	set_base_damage_type("slashing");
 	set_damage(2,6);
 	set_attack_limbs(({"right claw","left claw"}));
 	set_attacks_num(2);

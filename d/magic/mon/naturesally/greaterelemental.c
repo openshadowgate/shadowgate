@@ -36,7 +36,7 @@ void create()
     set_race("elemental");
     set_body_type("human");
     set_attack_limbs(({"right arm","left arm","head"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 }
 
 

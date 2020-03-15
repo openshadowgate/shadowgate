@@ -27,7 +27,7 @@ void create()
     set_attack_limbs(({"right fist","left fist"}));
     set_attacks_num(2);
     set_damage(3,10);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_property("swarm",1);
     set_stats("strength",22);
     set_stats("dexterity",5);

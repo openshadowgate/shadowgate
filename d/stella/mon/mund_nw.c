@@ -61,7 +61,7 @@ void create() {
     set_mlevel("fighter", hd);
     set_level(hd);
     set_attack_limbs(({"right hand", "left hand"}) );
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_damage(2,6);
     set_overall_ac(5-(hd/3));
     set_property("no bump",1);

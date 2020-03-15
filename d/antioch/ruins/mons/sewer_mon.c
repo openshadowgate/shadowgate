@@ -36,7 +36,7 @@ void create()
 	set_attack_limbs(({"right claw","left claw","mouth","tail"}));
 	set_attacks_num(4);
 	set_damage(3,5);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_property("swarm",1);
 	set_property("magic resistance",50);
 	set_property("no dominate",1);

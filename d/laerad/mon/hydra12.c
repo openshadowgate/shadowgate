@@ -43,7 +43,7 @@ void create(){
     set("aggressive",18);
     set_attack_limbs(({"head1","head2","head3","head4","head5","head6","head7","head8","head9","head10","head11","head12"}));
     set_attacks_num(4);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,10);
     set_attack_bonus(2);
     set_max_level(35); //added by Ares 3-31-05, they should be moving on long before now, but just in case

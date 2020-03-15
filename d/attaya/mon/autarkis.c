@@ -37,7 +37,7 @@ void create(){
    add_limb("spiked tail","spiked tail",0,0,0);
    add_limb("talons","talons",0,0,0);
    set_attack_limbs(({"talons","left wing","right wing","spiked tail","forearm-mounted blades"}));
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_damage(3,20);
    set_gender("male");
    set_alignment(9);

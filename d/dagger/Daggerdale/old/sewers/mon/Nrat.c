@@ -35,7 +35,7 @@ set_funcs(({"bite"}));
 set_func_chance(25);
 set_attacks_num(3);
 set_attack_limbs( ({"right paw","left paw","incisors"}) );
-set_nat_weapon_type("slashing");
+set_base_damage_type("slashing");
 set_damage(2,15);
 move_func();
 }

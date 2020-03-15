@@ -36,7 +36,7 @@ void create()
 	set_property("spell resistance",30);
     set_property("no dominate",1);
     set_alignment(5);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_emotes(9,({"The tentacle grasps for you!",
         "The tentacle tears at you!",}),1);
     set("aggressive","aggfunc");

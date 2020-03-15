@@ -38,7 +38,7 @@ void create() {
     set_weight(100);
     set_attacks_num(2);
     set_damage(8,8);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"right hand","left hand"}));
     set_overall_ac(-15);
     set_property("no bump",1);

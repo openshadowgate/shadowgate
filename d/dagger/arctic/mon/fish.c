@@ -30,7 +30,7 @@ void create()
     set_property("magic resistance",10);
     set_property("water breather", 1);
     set_speed(random(40) + 5);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     nogo("NOGO2");
     add_money("silver",random(25));
     command("message in swims in");

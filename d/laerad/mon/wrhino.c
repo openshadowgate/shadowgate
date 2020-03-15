@@ -33,7 +33,7 @@ void create(){
     set("aggressive",22);
     set_attack_limbs(({"head", "right fore hoof", "left fore hoof"}));
     set_attacks_num(2);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_damage(3,6);
     set_funcs(({"charge"}));
     set_func_chance(20);

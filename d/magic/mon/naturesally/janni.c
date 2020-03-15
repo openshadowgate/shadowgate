@@ -22,7 +22,7 @@ void create(){
     set_gender("male");
     set_body_type("humanoid");
     set_attack_limbs(({"right hand","left hand"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 }
 
 void my_special(object target) {

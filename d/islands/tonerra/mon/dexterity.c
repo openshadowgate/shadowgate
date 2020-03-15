@@ -32,7 +32,7 @@ OLI
    set_attack_limbs(({"right hand","left hand"}));
    set_attacks_num(2);
    set_damage(2,8);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_thief_skill("hide in shadows",100);
    set_thief_skill("move silently",100);
    add_search_path("/cmds/thief/");

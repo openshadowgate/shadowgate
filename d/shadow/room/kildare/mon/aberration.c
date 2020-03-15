@@ -28,7 +28,7 @@ void create() {
    set_max_hp(query_hp());
    set_damage(1,6);
    set_attacks_num(2);
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_property("swarm",1);
    set("aggressive",18);
    set_stats("strength",17);

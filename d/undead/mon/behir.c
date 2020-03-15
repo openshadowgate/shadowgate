@@ -34,7 +34,7 @@ void create()
 	set_body_type("snake");
     set_damage(1,8);
     set_attacks_num(6);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_property("full attacks",1);
 	add_limb("jaws","mouth",0,0,0);
 	add_limb("leg 1","leg 1",0,0,0);

@@ -21,7 +21,7 @@ void create()
     set_stats("dexterity",25);
     set_damage(2,10);
     set_attacks_num(2);
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     if(random(2)) set_gender("female");
     else set_gender("male");
     set_overall_ac(4);

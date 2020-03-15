@@ -17,7 +17,7 @@ void create(){
     set_hd(12+random(20), 9);
     set_hp(query_hd()*(7+random(7)));
     set_exp(650*query_hd());
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(2,4);
     set_attack_limbs( ({"mouth", "tail"}) );
     set_attacks_num(2);

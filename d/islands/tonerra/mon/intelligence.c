@@ -35,7 +35,7 @@ OLI
    set_attacks_num(2);
    set_property("magic resistance",95);
    set_damage(2,5);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_stats("dexterity",100);
    set_funcs(({"spells","psionics"}));
    set_func_chance(15);

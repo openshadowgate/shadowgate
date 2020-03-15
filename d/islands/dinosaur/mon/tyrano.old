@@ -29,7 +29,7 @@ void create(){
     add_limb("tail", "tail", 0, 0, 0);
     set_attack_limbs( ({"mouth", "right forepaw", "left forepaw"}) );
     set_hit_funcs( (["mouth":(:TO, "bite":)]) );
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_funcs( ({"tail"}) );
     set_func_chance(30);
     set_attacks_num(4);

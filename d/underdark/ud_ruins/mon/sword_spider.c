@@ -48,7 +48,7 @@ void create() {
     set_hp(query_max_hp());
     set_attack_limbs( ({"left foreleg","right foreleg"}) );
     set_attacks_num(2);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_funcs(({"slash","slash","jumpattack"}));
     set_func_chance(30);
     set_damage(2,8);

@@ -26,7 +26,7 @@ void create()
    set_max_level(8);
    set_damage(1,6);
   set_attacks_num(2);
-  set_nat_weapon_type("piercing");
+  set_base_damage_type("piercing");
   set_attack_limbs(({"right pincer","left pincer","mouth"}));
   set_hit_funcs((["mouth":(:TO,"bite":)]));
   set_ac(-2);

@@ -38,7 +38,7 @@ void create() {
                         "right rear leg","left rear leg",
                     }) );
     set_attacks_num(8);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_damage(2,6);
     set_property("magic resistance",random(30));
     set("aggressive",18);

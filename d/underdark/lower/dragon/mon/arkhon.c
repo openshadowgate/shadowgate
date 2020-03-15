@@ -35,7 +35,7 @@ void create() {
    add_limb("teeth","head",0,0,0);
    set_attack_limbs( ({"teeth","left foreclaw","right foreclaw"}) );
    set_attacks_num(4);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(3,10);
    set_hd(50,12);
    set_class("fighter");

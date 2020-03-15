@@ -25,7 +25,7 @@ OLI
 	set_attack_limbs(({"mouth"}));
 	set_damage(1,9);
 	set_attacks_num(1);
-	set_nat_weapon_type("piercing");
+	set_base_damage_type("piercing");
 	set_exp(5000);
 	set_body_type("dragon");
 	set_race("pseudodragon");

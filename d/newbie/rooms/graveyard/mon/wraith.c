@@ -27,7 +27,7 @@ void create() {
    set_stats("charisma",3);
    set_stats("dexterity",9);
    set_stats("constitution",10);
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    add_limb("right claw","right hand",0,0,0);
    add_limb("left claw","left hand",0,0,0);
    set_attack_limbs(({"mouth","left claw","right claw"}));

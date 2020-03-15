@@ -20,7 +20,7 @@ heinous female, and the lower body of a large bird. The creature smells
 of offal and revolts you to look at. 
 OLI
 	);
-	set_nat_weapon_type("slashing");
+	set_base_damage_type("slashing");
 	set_damage(1,6);
 	set_attack_limbs(({"right claw","left claw","mouth"}));
 	set_attacks_num(3);

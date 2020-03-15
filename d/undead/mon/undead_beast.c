@@ -37,7 +37,7 @@ void create()
     set_property("magic resistance",30);
     set_damage(1,12);
     set_attacks_num(5);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_property("full attacks",1);
     add_limb("tooth filled maw", "head", 0, 0, 0);
     add_limb("right front claw", "right foreleg", 0, 0, 0);

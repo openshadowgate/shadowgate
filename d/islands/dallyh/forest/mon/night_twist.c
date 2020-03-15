@@ -41,7 +41,7 @@ void create()
 
     set_num_attacks(4);
     set_damage(4,4);
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 
     set_stats("strength", 20);
     set_stats("dexterity", 6);

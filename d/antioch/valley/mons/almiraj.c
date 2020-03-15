@@ -25,7 +25,7 @@ void create(){
 	set_max_level(20);
 	set_attack_limbs(({"horn"}));
 	set_attacks_num(1);
-	set_nat_weapon_type("pierce");
+	set_base_damage_type("pierce");
 	set_damage(2,4);
 	set_alignment(5);
 	set_overall_ac(6);

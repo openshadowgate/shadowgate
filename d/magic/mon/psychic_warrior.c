@@ -25,7 +25,7 @@ void create(){
    set_overall_ac(0);
    set_damage(1,10);
    set_attacks_num(2);
-   set_nat_weapon_type("magebludgeon");
+   set_base_damage_type("magebludgeon");
    set("magic",1);
 }
 

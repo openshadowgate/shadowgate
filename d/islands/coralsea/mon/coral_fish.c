@@ -28,7 +28,7 @@ void create(){
         set_property("water breather",1);
 
         set_attacks_num(2);
-        set_nat_weapon_type("pierce");
+        set_base_damage_type("pierce");
         set_damage(1,8);
         set_funcs(({"bite"}));
         set_class("fighter");

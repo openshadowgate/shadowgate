@@ -81,7 +81,7 @@ void create()
     set_new_exp(30, "boss");
     set_damage(4,5);
     set_attacks_num(8);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_funcs(({"devour", "acidic_mist"}));
     set_func_chance(75);
 }

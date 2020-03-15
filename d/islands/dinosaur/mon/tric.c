@@ -26,7 +26,7 @@ void create(){
     set_body_type("quadruped");
     add_limb("spiked tail", "spiked tail", 0, 0, 0);
     set_attack_limbs( ({"spiked tail", "right claw", "left claw"}) );
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attacks_num(3);
     set_damage(2,8);
     set_funcs( ({"rush_spec"}) );

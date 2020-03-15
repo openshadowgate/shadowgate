@@ -34,7 +34,7 @@ void create(){
     set_overall_ac(-5);   // was 3
     set("aggressive",15);
     set_attack_limbs(({"right foreclaw","left foreclaw","tail"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_attacks_num(3);
     set_damage(2,12);
     set_funcs(({"spikes"}));

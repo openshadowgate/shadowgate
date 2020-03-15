@@ -22,7 +22,7 @@ OLI
    );
    set_race("human");
    set_body_type("human");
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_property("garlic_scent", 1);
    set_base_damage_type("bludgeoning");
    set_hd(35 + random(20), 8);

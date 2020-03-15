@@ -34,7 +34,7 @@ OLI
  set_hd(10+random(10),10);
  set_exp(query_hd()*200);
 set_max_level(36);
- set_nat_weapon_type("slashing");
+ set_base_damage_type("slashing");
  set_func_chance(25);
  set_attack_limbs(({"right claw","left claw","beak"}));
  set_hit_funcs((["beak":(:TO,"mouth":),]));

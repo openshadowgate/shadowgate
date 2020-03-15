@@ -71,7 +71,7 @@ void create()
     set_max_hp(query_hp());
     set_new_exp(32, "normal");
     set_damage(4,6);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_base_damage_type("slashing");
     set_attacks_num(4);
     set_property("natural poisoner", 1);

@@ -45,7 +45,7 @@ void create(){
 	set_gender("male");
 	set_race("gargantua");
 	add_money("silver",random(5000));
-	set_nat_weapon_type("slashing");
+	set_base_damage_type("slashing");
 	set_funcs(({"trample"}));
 	set_func_chance(5);
       set_property("no death",1);

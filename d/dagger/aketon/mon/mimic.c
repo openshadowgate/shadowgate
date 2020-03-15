@@ -52,7 +52,7 @@ void create(){
 	}));
 	set_attacks_num(5);
 	set_damage(3,4);
-	set_nat_weapon_type("bludgeon");
+	set_base_damage_type("bludgeon");
 	set_funcs(({"chomp"}));
     	set_func_chance(25);
     	flag = 0;

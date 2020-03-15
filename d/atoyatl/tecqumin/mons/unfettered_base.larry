@@ -103,7 +103,7 @@ void create(){
     set_property("magic resistance",75);
     set_property("weapon resistance", 10);
     set_size(4);
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     set_fake_limbs(({"torso", "first tentacle", "second tentacle",
       "third tentacle", "fourth tentacle", "fifth tentacle", 
       "sixth tentacle", "seventh tentacle", "maw", "bloodshot eye"}));

@@ -28,7 +28,7 @@ void create(){
     set("aggressive",18);
     set_property("swarm",1);
     set_attack_limbs(({"right forepaw","left forepaw","head"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attacks_num(3);
     set_damage(1,10);
     set_funcs(({"dive"}));

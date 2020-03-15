@@ -24,7 +24,7 @@ void create(){
     set("aggressive",19);
     set_attack_limbs(({"head"}));
     set_attacks_num(1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(3,4);
     set_funcs(({"rattle"}));
     set_func_chance(102);

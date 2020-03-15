@@ -28,7 +28,7 @@ void create() {
    add_limb("right claw", "right arm", 0, 0, 0);
    add_limb("left claw", "left arm", 0, 0, 0);
    set_attack_limbs(({"right claw","left claw"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_attacks_num(5);
    set_damage(1,8);
    set_stats("strength",16);

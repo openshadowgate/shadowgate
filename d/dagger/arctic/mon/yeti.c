@@ -38,7 +38,7 @@ void create()
     set_stats("charisma",5);
     set_attacks_num(4);
     set_damage(3,3);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     add_limb("left claw", "left hand", 0, 0, 0);
     add_limb("right claw", "right hand", 0, 0, 0);
     add_limb("fangs", "head", 0, 0, 0);

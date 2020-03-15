@@ -42,7 +42,7 @@ void create(){
     add_limb("tentacle4", "torso", 0, 0, 0);
     set_attack_limbs(({"mouth1","mouth2","mouth3"}));
     set_attacks_num(4);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(2,6);
     set_attack_bonus(4);
     set_hit_funcs((["mouth1":(:TO,"fear":),"mouth2":(:TO,"fear":),"mouth3":(:TO,"fear":)]));

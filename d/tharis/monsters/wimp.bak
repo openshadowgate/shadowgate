@@ -43,7 +43,7 @@ OLI
 	set_damage(1,6);
 	set_hit_funcs((["tail":(:TO,"poison_me":)]));
 	set_race("imp");
-	set_nat_weapon_type("piercing");
+	set_base_damage_type("piercing");
 	set_overall_ac(0);
 }
 

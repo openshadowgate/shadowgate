@@ -61,7 +61,7 @@ void create() {
     else ob->set_property("enchantment",4);
     ob->move(TO);
     set_attacks_num(4);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_damage(2,4);
     set_property("no steal",1);
     set_property("strength","electrcity");

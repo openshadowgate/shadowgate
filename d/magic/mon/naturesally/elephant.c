@@ -22,7 +22,7 @@ void create()
     set_body_type("quadruped");
     set_fake_limbs(({"head","torso","right front leg","right rear leg","left front leg","left rear leg","right tusk","left tusk" }));
     set_attack_limbs(({"head","right tusk","left tusk"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 }
 
 

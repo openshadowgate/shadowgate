@@ -26,7 +26,7 @@ void create()
     set_body_type("human");
     set_fake_limbs(({"head","torso","mouth","right arm","left arm","tail"}));
     set_attack_limbs(({"mouth","right arm","left arm"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 }
 
 

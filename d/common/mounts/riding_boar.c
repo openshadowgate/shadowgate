@@ -38,7 +38,7 @@ void create(){
    set_vehicle_short("%^RESET%^%^ORANGE%^bristly giant boar%^RESET%^");
    set_attacks_num(2);
    set_damage(2,4);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_emotes(1,({"%^RESET%^%^ORANGE%^The boar grunts and roots around "+
       "on the ground.%^RESET%^","%^RESET%^%^ORANGE%^The boar emits a "+
       "loud squeal.%^RESET%^"}), 0);

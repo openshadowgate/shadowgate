@@ -40,7 +40,7 @@ void create() {
     set("aggressive","agg_fun");
     set_attack_limbs(({"left foreclaw","right foreclaw"}));
     set_attacks_num(3);
-    set_nat_weapon_type("slash");
+    set_base_damage_type("slash");
     set_damage(2,6);
     set_funcs(({"pounce_me"}));
     set_func_chance(20);

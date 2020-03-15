@@ -47,7 +47,7 @@ void create()
 
     set_attacks_num(6);
     set_property("full attacks", 1);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_damage(4,20);
     set_stats("strength",30);
     set_stats("dexterity",5);

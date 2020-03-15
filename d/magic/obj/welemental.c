@@ -48,7 +48,7 @@ PEG
    set_gender("sexless");
    set_attack_limbs(({"right crest","left crest"}));
    set_damage(5,6);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_attacks_num(1);
    set_overall_ac(0);
 }

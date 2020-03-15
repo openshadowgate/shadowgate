@@ -40,7 +40,7 @@ set_hp(75);
 set_attacks_num(5);
 set_attack_limbs(({"quills"}));
 set_hit_funcs((["quills":(:TO,"poison":)]));
-set_nat_weapon_type("piercing");
+set_base_damage_type("piercing");
 
 }
 

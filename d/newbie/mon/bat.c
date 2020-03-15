@@ -22,7 +22,7 @@ void create() {
   set_damage(1,3);
   set_attacks_num(1);
   remove_limb("beak");
-  set_nat_weapon_type("piercing");
+  set_base_damage_type("piercing");
   set_attack_limbs(({"right claw","left claw","right wing","left wing"}));
   set_ac(10);
   set_alignment(9);

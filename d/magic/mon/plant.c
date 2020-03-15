@@ -21,7 +21,7 @@ void create()
     set_body_type("snake");
     set_damage(1,3);
     set_attacks_num(1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_gender("neuter");
     set_race("plant");
     

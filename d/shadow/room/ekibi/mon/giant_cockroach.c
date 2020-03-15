@@ -32,7 +32,7 @@ void create(){
    set_stats("strength",12);
    set_damage(1,4);
    set_attacks_num(2);
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_attack_limbs(({"right fore leg","left fore leg"}));
    set_exp(150);
    set_emotes(2,({

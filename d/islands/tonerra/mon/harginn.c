@@ -34,7 +34,7 @@ OLI
    set_hit_funcs((["right hand":(:TO,"hitem":),"left hand":(:TO,"hitem":)]));
    set_attacks_num(4);
    set_alignment(9);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_overall_ac(-5);
    set_funcs(({"burst"}));
    set_func_chance(102);

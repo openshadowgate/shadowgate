@@ -24,7 +24,7 @@ void create(){
     set_stats("strength",19);
     set_attack_limbs(({"right limb","left limb"}));
     set_attacks_num(2);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_alignment(9);
 }
 void make_me(){

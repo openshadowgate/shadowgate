@@ -39,7 +39,7 @@ void create(){
 	add_limb("right claws","right hand",0,0,0);
 	set_attack_limbs(({"left claws","right claws"}));
 	set_attacks_num(2);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(2,4);
 	set_level(20);
 	set_class("fighter");

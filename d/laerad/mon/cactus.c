@@ -48,7 +48,7 @@ void create(){
     add_limb("leaf12", "torso", 0, 0, 0);
     set_attack_limbs(({"leaf1","leaf2","leaf3","leaf4","leaf5","leaf6","leaf7","leaf8","leaf9","leaf10","leaf11","leaf12"}));
     set_attacks_num(12);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,4);    // was 1,2
     set_stats("strength",16);
     set_stats("dexterity",2);

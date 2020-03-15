@@ -33,6 +33,6 @@ void create(){
     set("intelligence",15);
     set_attack_limbs(({"head", "right front hoof", "left front hoof"}));
     set_attacks_num(1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(3,5);
 }

@@ -21,7 +21,7 @@ void create() {
   set_exp(25);
   set_damage(1,3);
   set_attacks_num(1);
-  set_nat_weapon_type("bludgeon");
+  set_base_damage_type("bludgeon");
   set_attack_limbs(({"mouth","tail","torso"}));
   set_ac(10);
   set_alignment(5);

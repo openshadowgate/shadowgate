@@ -23,7 +23,7 @@ void create(){
    set_exit_room("leaves riding a regal griffon.");
    add_limb("beak","head",0,0,0);
    set_attack_limbs(({"beak","right forepaw","left forepaw"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_funcs(({"special"}));
    set_func_chance(15);
    TO->force_me("message in treads in, its talons clicking on the ground.");

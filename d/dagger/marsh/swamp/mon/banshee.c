@@ -30,7 +30,7 @@ void create()
     set_max_level(36);
     set_property("magic",1);
     set_size(2);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     add_limb("right chain","torso",0,0,0);
     add_limb("left chain","torso",0,0,0);
     set_attack_limbs(({"right chain","left chain"}));

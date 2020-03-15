@@ -23,7 +23,7 @@ OLI
 	set_attacks_num(1);
 	set_attack_limbs(({"fangs"}));
 	set_hit_funcs((["fangs":(:TO,"poison":)]));
-	set_nat_weapon_type("piercing");
+	set_base_damage_type("piercing");
 	set_gender("male");
 	set_race("snake");
 	set_exp(800);

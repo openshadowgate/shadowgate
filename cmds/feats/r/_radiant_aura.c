@@ -80,6 +80,8 @@ void execute_attack()
 
     place = environment(caster);
     party = ob_party(caster,"all");
+    party += caster->query_followers() - caster->query_attackers();
+    party = distinct_array(party);
 
     if(!sizeof(party)) { party = ({ caster }); }
 

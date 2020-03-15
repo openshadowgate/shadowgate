@@ -26,7 +26,7 @@ OLI
    set_hp(150);
    set_exp(1);
    set_overall_ac(-1);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_attack_limbs(({"right claw","left claw"}));
    set_damage(2,12);
    set_attacks_num(2);

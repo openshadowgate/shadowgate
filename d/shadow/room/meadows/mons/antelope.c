@@ -34,7 +34,7 @@ void create()
    add_limb("left hoof","left forepaw",0,0,0);
    set_damage(1,4);
    set_attacks_num(2);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_attack_limbs(({"right hoof","left hoof"}));
    set_emotes(2,({
    "The antelope prances about in agitation.",

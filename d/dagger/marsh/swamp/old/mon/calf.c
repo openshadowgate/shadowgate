@@ -21,7 +21,7 @@ void create() {
     set_weight(70);
     set_attacks_num(3); 
     set_damage(1,6);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     add_limb("severed neck","torso",0,0,0);
     add_limb("right hoof","right foreleg",0,0,0);
     add_limb("left hoof","lef foreleg",0,0,0);

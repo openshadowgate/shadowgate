@@ -21,7 +21,7 @@ void create()
 	set_size(1);
 	set_attack_limbs(({"right forepaw","left forepaw"}));
 	set_damage(1,3);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_exp(5);
 	set_overall_ac(4);
 	set_level(10);

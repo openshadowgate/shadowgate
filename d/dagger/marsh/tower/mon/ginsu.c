@@ -19,7 +19,7 @@ void create() {
     set_weight(100);
     set_attacks_num(4); 
     set_damage(1,6);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"blades","knives","dicers","slicers"})); 
     set_overall_ac(4);
     set_body_type("mammal");

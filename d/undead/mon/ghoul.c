@@ -26,7 +26,7 @@ void create()
     set_attack_limbs(({"fangs","right claw","left claw"}));
     set_attacks_num(3); 
     set_damage(1,6);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_overall_ac(0);
     set("aggressive",25);
     set_class("fighter");

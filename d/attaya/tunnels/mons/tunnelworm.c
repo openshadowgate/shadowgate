@@ -39,7 +39,7 @@ void create()
       add_limb("mandibles","mouth",0,0,0);
       set_attack_limbs(({"mandibles"}));
       set_attacks_num(2);
-      set_nat_weapon_type("pierce");
+      set_base_damage_type("pierce");
       set_damage(2,8);
 
 

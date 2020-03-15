@@ -34,7 +34,7 @@ void create()
   set_damage(1,5);
   set_stats("strength",17);
   set_attacks_num(2);
-  set_nat_weapon_type("piercing");
+  set_base_damage_type("piercing");
   add_limb("tusks","head",0,0,0);
   add_limb("left hoof","left leg",0,0,0);
   add_limb("right hoof","right leg",0,0,0);

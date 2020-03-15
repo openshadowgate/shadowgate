@@ -37,7 +37,7 @@ void create(){
 	set_hp(query_max_hp());
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(2);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(1,20);
 	set("aggressive",25);
 	set_property("swarm",1);

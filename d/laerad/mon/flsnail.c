@@ -26,7 +26,7 @@ void create(){
     add_limb("shell","torso",0,0,0);
     set_attack_limbs(({"tentacle1","tentacle2","tentacle3","tentacle4"}));
     set_attacks_num(4);
-    set_nat_weapon_type("magebludgeon");
+    set_base_damage_type("magebludgeon");
     set_damage(1,12);
     set_max_level(35); //added by Ares 3-31-05, they should be moving on long before now, but just in case
 

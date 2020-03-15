@@ -28,7 +28,7 @@ void create(){
 	set_hp(query_max_hp());
 	set_attack_limbs(({"right forepaw","left forepaw"}));
 	set_attacks_num(2);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(1,8);
 	set_hit_funcs((["right forepaw":(:TO,"hug":)]));
 //	set_exp(13500);

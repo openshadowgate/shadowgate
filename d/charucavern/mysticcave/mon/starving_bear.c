@@ -38,7 +38,7 @@ void create ()
     set("aggressive","aggfunc");
     add_limb("claws","left forepaw",0,0,0);
     set_attack_limbs(({"claws"}));
-    set_nat_weapon_type("thiefslashing");
+    set_base_damage_type("thiefslashing");
     set_achats(2, ({"%^BOLD%^%^RED%^The bear roars hungrily at you!%^RESET%^","%^BOLD%^%^RED%^The bear swipes at you again!%^RESET%^."}) );
     if(!random(4)) 
     {

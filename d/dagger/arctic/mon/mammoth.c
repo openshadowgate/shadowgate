@@ -40,7 +40,7 @@ void create() {
     add_limb("left tusk", "head", 0, 0, 0);
     add_limb("right tusk", "head", 0, 0, 0);
     add_limb("trunk", "head", 0, 0, 0);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_attack_limbs(({"left tusk","right tusk","trunk"}));
     set("aggressive", 15);
     set_funcs( ({"trample"}) );

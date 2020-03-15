@@ -26,7 +26,7 @@ set_max_hp(55);
 set_hp(55);
 set_exp(550);
 add_limb("stinger","abdomen",0,0,0);
-set_nat_weapon_type("piercing");
+set_base_damage_type("piercing");
 set_damage(1,4);
 set_attack_limbs(({"stinger"}));
 set_attacks_num(1);

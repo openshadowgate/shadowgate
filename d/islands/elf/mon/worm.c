@@ -21,7 +21,7 @@ create() {
    add_limb("mouth","head",0,0,0);
    set_attack_limbs( ({"mouth","tail"}) );
    set_attacks_num(4);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(3,8);
    set_hit_funcs( (["mouth": (: TO,"mouth_func" :)]) );
    set_hd(35,10);

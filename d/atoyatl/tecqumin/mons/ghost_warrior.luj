@@ -106,7 +106,7 @@ void create()
       set_property("slashing resistance", 10);
       set_property("piercing resistance", 10);
       set_attacks_num(8);
-      set_nat_weapon_type("bludgeoning");
+      set_base_damage_type("bludgeoning");
       set_attack_limbs(({"left arm","right arm"}));
       set_damage(7,6);
       set_property("full attacks",1);

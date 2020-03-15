@@ -25,7 +25,7 @@ void create()
     set_level(level);
     set_max_level(36);
     set_size(2);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_attack_limbs(({"right hand","left hand"}));
     set_overall_ac(10 - level);
     set_body_type("humanoid");

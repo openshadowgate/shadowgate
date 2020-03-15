@@ -15,7 +15,7 @@ void create(){
   set_hd(35,8);
   set_attacks_num(2);
   set_attack_limbs(({"gaping maw","viscious poisoned stinger"}));
-  set_nat_weapon_type("slash");
+  set_base_damage_type("slash");
   set_damage(2,6);
   set_hp(500);
   set_max_hp(query_hp());

@@ -31,7 +31,7 @@ void create()
     set_damage(2,6);
     set_attacks_num(2);
     set_attack_limbs(({"mouth"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_base_damage_type("piercing");
     set_gender("male");
     set_race("snake");

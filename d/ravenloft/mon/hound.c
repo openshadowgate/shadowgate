@@ -30,7 +30,7 @@ void create(){
     set("aggressive",random(8)+11);
     set_stats("strength",16);
     set_attack_limbs(({"head"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_attacks_num(1);
     set_damage(1,10);
     set_attack_bonus(5);

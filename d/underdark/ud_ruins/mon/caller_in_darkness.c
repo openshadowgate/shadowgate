@@ -62,7 +62,7 @@ void create() {
     set_hp(1500);
     set_attack_limbs( ({"mouth"}) );
     set_attacks_num(6);
-    set_nat_weapon_type("mental");
+    set_base_damage_type("mental");
     set_damage(2,8);
     set_property("magic resistance",random(30));
     set("aggressive",35);

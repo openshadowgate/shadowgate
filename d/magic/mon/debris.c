@@ -22,7 +22,7 @@ void create(){
     remove_limb("tail");
     add_limb("debris shard","torso",0,0,0);
     set_attack_limbs(({"debris shard"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     set_exp(1);
     set_stats("intelligence",12);
     set_stats("wisdom",12);

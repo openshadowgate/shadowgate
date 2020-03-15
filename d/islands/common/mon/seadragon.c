@@ -30,7 +30,7 @@ void create() {
        add_limb("third head","torso",96,1,4);
     set_attacks_num(8);
 set_attack_limbs(({"second head", "tail", "third head", "head"}));
-   set_nat_weapon_type("blunt");
+   set_base_damage_type("blunt");
     set_funcs(({"blast"}));
     set_func_chance(35);
     set_damage(2,8);

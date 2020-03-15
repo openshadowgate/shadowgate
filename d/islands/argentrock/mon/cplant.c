@@ -41,7 +41,7 @@ create() {
    set_attack_limbs( ({"teeth","left branch","right branch","root"}) );
    set_attacks_num(4);
    set_hit_funcs( ([ "teeth": (: TO,"teeth_func" :) ]) );
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_base_damage_type("slashing");
    switch( query_hd() - 30 ) {
       case 0..2:

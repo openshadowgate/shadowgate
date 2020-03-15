@@ -35,7 +35,7 @@ void create(){
     add_limb("left claw","left fore leg",0,0,0);
     set_damage(2,6);
     set_attacks_num(3);
-    set_nat_weapon_type("thiefslashing");
+    set_base_damage_type("thiefslashing");
     set_attack_limbs(({"right claw","left claw","tail"}));
     set_funcs(({"sting"}));
     set_func_chance(35);

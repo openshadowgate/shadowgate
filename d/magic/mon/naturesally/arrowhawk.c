@@ -19,7 +19,7 @@ void create(){
     set_race("arrowhawk");
     set_body_type("fowl");
     set_attack_limbs(({"right claw","left claw","beak"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 }
 
 void my_special(object target) {

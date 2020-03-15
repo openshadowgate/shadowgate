@@ -43,7 +43,7 @@ create(){
 		add_limb("tail","torso",0,0,0);
 		set_attack_limbs(({"mouth"}));
 		set_attacks_num(4);
-		set_nat_weapon_type("piercing");
+		set_base_damage_type("piercing");
 		set_damage(2,8);
 		set_hd(40,10);
 		set_class("fighter");

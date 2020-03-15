@@ -19,7 +19,7 @@ void create(){
     set_hd(25, 2);
     set_class("fighter");
     set_mlevel("fighter", 25);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attack_limbs( ({"tail", "mouth"}) );
     set_attacks_num(2);
     set_damage(2,6);

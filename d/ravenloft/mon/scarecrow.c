@@ -28,7 +28,7 @@ void create(){
     set_property("swarm",1);
     set_attack_limbs(({"right hand"}));
     set_attacks_num(1);
-    set_nat_weapon_type("magebludgeon");
+    set_base_damage_type("magebludgeon");
     set_damage(1,6);
     set_funcs(({"gaze"}));
     set_func_chance(35);

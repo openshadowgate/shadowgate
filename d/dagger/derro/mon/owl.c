@@ -22,6 +22,6 @@ void create(){
   set_damage(3,3);
 //  set_attack_limbs(({"razored claws","slashing beak"}));
   set_attack_limbs(({"right claw","left claw","beak"}));
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
   set_property("knock unconscious",1);
 }

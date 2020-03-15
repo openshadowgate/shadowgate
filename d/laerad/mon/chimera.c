@@ -39,7 +39,7 @@ void create(){
     set("aggressive",19);
    set_attack_limbs(({"right foreclaw","left foreclaw","horn", "teeth"}));
    set_attacks_num(3);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(1,6);
     set_funcs(({"breath"}));
     set_func_chance(40);

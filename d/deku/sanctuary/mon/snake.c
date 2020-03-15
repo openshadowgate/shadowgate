@@ -31,7 +31,7 @@ void create() {
    set_exp(28000);
    set_attacks_num(3);
    set_attack_limbs(({"fangs","tail"}));
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_damage(1,12);
    set_stats("strength",17);
    set_stats("dexterity",25);

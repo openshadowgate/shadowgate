@@ -22,7 +22,7 @@ void create()
     set_race("dinosaur");
     set_body_type("reptile");
     set_attack_limbs(({"head"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 }
 
 

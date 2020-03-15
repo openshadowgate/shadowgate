@@ -25,7 +25,7 @@ void create() {
     add_limb("fangs","fangs",96,1,4);
     set_attacks_num(5);
     set_attack_limbs(({"left bone blade", "right bone blade", "fangs"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(3,8);
     set_body_type("humanoid");
     set_property("swarm",1);

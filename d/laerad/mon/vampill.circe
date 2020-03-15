@@ -53,7 +53,7 @@ void create(){
     set_attack_limbs(({"tentacle1","tentacle2","tentacle3","tentacle4"}));
     num = 4;
     set_attacks_num(num);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,6);
     set_hit_funcs( (["tentacle1":(:TO,"brain_me1":),
 	"tentacle2":(:TO,"brain_me1":),

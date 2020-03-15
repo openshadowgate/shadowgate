@@ -31,7 +31,7 @@ void create(){
    set_attacks_num(2);
    add_limb("fangs","fangs",96,1,4);
    set_attack_limbs(({"fangs", "tail"}));
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_damage(2,6);
    set_body_type("snake");
    set_property("swarm",1);

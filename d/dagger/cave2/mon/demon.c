@@ -44,7 +44,7 @@ void create() {
     add_limb("left talon", "left talon",50,1,3);
     set_attacks_num(2);
     set_attack_limbs( ({"barbed tail", "right talon", "left talon", "fangs", "right wing", "left wing"}) );
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_damage(3,3);
     set_property("swarm",1);
     set_stats("strength", 25);

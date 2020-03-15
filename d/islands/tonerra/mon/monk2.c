@@ -21,7 +21,7 @@ OLI
    );
    set_race("human");
    set_body_type("human");
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_hd(10+random(30),8);
    set_hp(query_hd()*11);
    set_exp(700*query_hd());

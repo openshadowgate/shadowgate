@@ -47,7 +47,7 @@ void create(){
     set_stats("dexterity",20);
     set_stats("constitution",19);
     set_stats("charisma",18);
-    set_nat_weapon_type("magebludgeon");
+    set_base_damage_type("magebludgeon");
     set_attack_limbs(({"right hand","left hand","right foot","left foot"}));
     set_attacks_num(4);
     set_damage(1,6);

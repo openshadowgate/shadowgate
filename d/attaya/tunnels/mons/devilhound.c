@@ -36,7 +36,7 @@ void create()
   	set_attack_limbs(({"mouth","right forepaw","left forepaw",
                             "mouth"}));
   	set_attacks_num(3);
-  	set_nat_weapon_type("pierce");
+  	set_base_damage_type("pierce");
   	set_damage(3,6);
   	set_hp(random(50)+200);
 	set_speed(30);

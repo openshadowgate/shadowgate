@@ -28,7 +28,7 @@ DESC
    set_exp(1);
    set_overall_ac(-1);
    set_alignment(8);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_attack_limbs(({"right hand","left hand"}));
    set_damage(3,8);
    set_attacks_num(1);

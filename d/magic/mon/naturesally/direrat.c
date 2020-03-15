@@ -14,7 +14,7 @@ void create(){
     set_body_type("quadruped");
     add_limb("teeth","head",0,0,0);
     set_attack_limbs(({"right forepaw","left forepaw","teeth"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 }
 
 void my_special(object target) {

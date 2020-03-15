@@ -34,7 +34,7 @@ set_exp(15);
   set_attack_limbs(({"brass mandibles"}));
   set_attacks_num(10);
   set_damage(1,3);
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
 }
 void die(mixed ob){
   tell_room(ETO,"%^RED%^The clockwork insect starts smoking and crashes into a wall, dropping to the floor in a heap of rubble!");

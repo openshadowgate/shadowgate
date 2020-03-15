@@ -22,7 +22,7 @@ OLI
    set_body_type("human");
    set_property("no random money",1);
     set_speed(30);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_hd(17+random(20),8);
    set_hp(query_hd()*11);
    set_exp(700*query_hd());

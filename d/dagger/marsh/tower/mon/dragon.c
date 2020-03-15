@@ -44,7 +44,7 @@ void create()
     set_attacks_num(12);
     set_damage(8,4);
     set_property("full attacks",1);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     add_limb("jaws","head",0,0,0);
     set_attack_limbs(({"right foreclaw","left foreclaw","jaws"}));
     set_overall_ac(-38);

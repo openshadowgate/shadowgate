@@ -64,7 +64,7 @@ void create()
     set_stats("charisma",5);
     set_attacks_num(7);
     set_damage(3,9);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_fake_limbs(({"torso", "thorax", "head",
       "front leg", "back leg", 
       "left forearm", "right forearm"}));

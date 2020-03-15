@@ -47,7 +47,7 @@ inherit WEAPONLESS;
       add_limb("left arm","torso",0,0,0);
 	set_attack_limbs(({"right arm","left arm","mouth"}));
 	set_attacks_num(3);
-      set_nat_weapon_type("thiefslashing");
+      set_base_damage_type("thiefslashing");
      	set_damage(2,4);
 	set_funcs(({"lickit","stick"}));
 	set_func_chance(50);

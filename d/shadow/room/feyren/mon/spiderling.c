@@ -33,7 +33,7 @@ void create()
     set_max_hp(query_hp());
     set_new_exp(10, "normal");
     set_attacks_num(2);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(2,5);
 	//set_moving(1);
 	//set_speed(45);

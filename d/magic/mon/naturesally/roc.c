@@ -17,7 +17,7 @@ void create()
     set_body_type("fowl");
     set_fake_limbs(({"beak","head","right wing","left wing","right talon","left talon","head","torso" }));
     set_attack_limbs(({"beak","right talon","left talon"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 }
 
 

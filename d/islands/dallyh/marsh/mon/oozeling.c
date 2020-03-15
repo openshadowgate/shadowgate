@@ -30,7 +30,7 @@ void create()
     set_damage(2,20);
     set_attacks_num(4);
     set_attack_limbs(({"glob"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     set_gender("neuter");
     set_race("ooze");
     set_new_exp(48, "high");

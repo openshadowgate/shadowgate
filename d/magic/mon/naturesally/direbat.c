@@ -17,7 +17,7 @@ void create(){
     add_limb("right claws","right forepaw",0,0,0);
     add_limb("left claws","left forepaw",0,0,0);
     set_attack_limbs(({"teeth","right claws","left claws"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 }
 
 void my_special(object target) {

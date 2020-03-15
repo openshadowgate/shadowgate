@@ -26,7 +26,7 @@ void create(){
     add_limb("antlers","head",0,0,0);
     set_property("magic resistance",75);
     set_property("no bump",1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attack_limbs(({"antlers"}));
     set_attacks_num(1);
     set_damage(5,6);

@@ -31,7 +31,7 @@ void create(){
     set_funcs( ({"trample"}) );
     set_func_chance(20);
     set_attacks_num(2);
-    set_nat_weapon_type("blunt");
+    set_base_damage_type("blunt");
     set_property("no stab", 1);
      set_damage(3,6);
     set_moving(1);

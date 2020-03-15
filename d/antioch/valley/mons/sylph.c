@@ -31,7 +31,7 @@ void create(){
 	set_property("swarm",1);
 	set_attack_limbs(({"right hand"}));
 	set_attacks_num(1);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(1,6);
 	set_property("magic resistance",50);
 	set_level(15);

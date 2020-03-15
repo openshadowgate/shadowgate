@@ -27,7 +27,7 @@ void create(){
   set_invis();
   set_property("no detect",1);
   set_attack_limbs(({"torso"}));
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
   set_property("knock unconscious",1);
 }
 

@@ -52,7 +52,7 @@ void create(){
     set_attack_limbs(({"right hand","left hand","jaw"}));
     set_wielding_limbs( ({"left hand","right hand"}) );
 
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(3,6);
 
     add_search_path("/cmds/feats");

@@ -18,7 +18,7 @@ void create() {
    set_overall_ac(-52);
    set_property("weapon resistance", 4);
    set_attack_limbs(({"bladed edge"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_attacks_num(4);
    set_damage(3,8);
    set_gender("neuter");

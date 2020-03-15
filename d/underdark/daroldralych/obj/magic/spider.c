@@ -22,7 +22,7 @@ void create(){
    set_exp(1);
    set_attacks_num(1);
    set_damage(1,4);
-   set_nat_weapon_type("pierce");
+   set_base_damage_type("pierce");
    set_property("knock unconscious",1);
 }
 

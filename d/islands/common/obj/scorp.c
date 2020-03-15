@@ -23,7 +23,7 @@ void create(){
   set_attacks_num(1);
   set_damage(1,3);
   set_attack_limbs(({"right pincer","left pincer","mouth"}));
-  set_nat_weapon_type("thiefslashing");
+  set_base_damage_type("thiefslashing");
   set_property("knock unconscious",1);
   set_func_chance(5);
   set_funcs(({"bite"}));

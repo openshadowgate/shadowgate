@@ -48,7 +48,7 @@ OLI
 	set_attack_limbs(({"right foreclaw","mouth","left foreclaw"}));
 	set_attacks_num(3);
 	set_damage(2,8);
-	set_nat_weapon_type("slashing");
+	set_base_damage_type("slashing");
 	set_stats("strength",18);
 	set_stats("intelligence",10);
 	set_stats("dexterity",10);

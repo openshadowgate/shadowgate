@@ -36,7 +36,7 @@ void create()
    add_limb("mouth","head",0,0,0);
    set_damage(1,6);
    set_attacks_num(2);
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_attack_limbs(({"right claw","left claw","mouth"}));
    set_hit_funcs((["mouth" : (:TO,"bite":)]));
    set_emotes(2,({

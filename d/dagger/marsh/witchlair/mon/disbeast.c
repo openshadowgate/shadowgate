@@ -34,6 +34,6 @@ void create(){
    set_exp(10);
    set_attacks_num(3);
    set_attack_limbs(({"left forepaw","right forepaw"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(2,10);
 }

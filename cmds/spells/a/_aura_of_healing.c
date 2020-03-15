@@ -113,20 +113,20 @@ void execute_attack()
 
     people = ({});
 
-    if(caster->query_party())
-    {
-        object *party;
+    if (caster->query_party()) {
+        object* party;
         party = PARTY_D->query_party_members(caster->query_party());
-        if(sizeof(party))
-            for(i=0;i<sizeof(party);i++)
-            {
-                if(environment(party[i]) == environment(caster))
+        if (sizeof(party)) {
+            for (i = 0; i < sizeof(party); i++) {
+                if (environment(party[i]) == environment(caster)) {
                     people += ({ party[i] });
+                }
             }
+        }
     }
-    if(member_array(caster,people)==-1)
-        people+=({caster});
+    people += ({caster});
     people += caster->query_followers() - caster->query_attackers();
+    people = distinct_array(people);
 
     define_base_damage(0);//lazy reroll
     if (sizeof(people))

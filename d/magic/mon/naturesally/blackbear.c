@@ -13,7 +13,7 @@ void create(){
     set_race("bear");
     set_body_type("quadruped");
     set_attack_limbs(({"right forepaw","left forepaw"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 }
 
 void my_special(object target) {

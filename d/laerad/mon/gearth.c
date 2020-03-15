@@ -38,7 +38,7 @@ void create(){
    set("aggressive",20);
 
    set_attacks_num(2);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_damage(2,10);
    set_stats("strength",23);
    set_stats("dexterity",8);

@@ -48,7 +48,7 @@ void create()
     
     set_num_attacks(4);
     set_damage(2,4);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     
     set_stats("strength", 19);
     set_stats("dexterity", 19);

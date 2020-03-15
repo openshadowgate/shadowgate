@@ -25,7 +25,7 @@ void create() {
     add_limb("horned helmet","horned helmet",96,1,4);
     set_attacks_num(6);
     set_attack_limbs(({"left metal appendage","right metal appendage","horned helmet","left hand","right hand","left foot","right foot"}));
-    set_nat_weapon_type("blunt");
+    set_base_damage_type("blunt");
     set_damage(2,10);
     set_property("swarm",1);
     set_property("no bump",1);

@@ -20,7 +20,7 @@ void create(){
   set_stats("strength",17);
   set_moving(1);
   set_speed(20);
-  set_nat_weapon_type("blunt");
+  set_base_damage_type("blunt");
   set_funcs(({"poison"}));
   set_func_chance(10);
 }

@@ -35,7 +35,7 @@ CYTHERA
     set_race("creature");
     set_damage(2,10);
     set_attacks_num(1);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_gender("sexless");
     set_overall_ac(0);
 }

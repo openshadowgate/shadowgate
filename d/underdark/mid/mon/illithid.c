@@ -47,7 +47,7 @@ void create() {
     set_spell_chance(70);
     set_attack_limbs(({"first tentacle","second tentacle","third tentacle","fourth tentacle"}));
     set_attacks_num(4);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_damage(2,4);
     set_funcs(({"cone"}));
     set_func_chance(40);

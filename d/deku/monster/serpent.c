@@ -26,7 +26,7 @@ void create() {
    set_body_type("snake");
    set_attack_limbs(({"mouth"}));
    set_attacks_num(2);
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_damage(2,3);
    set_stats("strength",18);
    set_funcs(({"squeeze"}));

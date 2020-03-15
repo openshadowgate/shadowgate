@@ -26,7 +26,7 @@ void create(){
   set_funcs(({"special"}));
   set_func_chance(10);
   set_attack_limbs(({"right forefoot","left forefoot"}));
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
   set_attacks_num(2);
   set_damage(3,4);
   set_stats("strength",16);

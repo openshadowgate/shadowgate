@@ -33,7 +33,7 @@ void create (){
    set("aggressive","aggfunc");
    add_limb("claws","left forepaw",0,0,0);
    set_attack_limbs(({"claws"}));
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_achats(2, ({"%^BOLD%^%^BLACK%^The bear roars ferociously.%^RESET%^","%^BOLD%^%^BLACK%^The bear readies to attack you again!%^RESET%^."}) );
     if(!random(4)) {
       ob = new("/d/common/obj/brewing/herb_special_inherit");

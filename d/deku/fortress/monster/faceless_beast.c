@@ -57,7 +57,7 @@ void create()
     set_new_exp(20, "high");
     set_damage(2,6);
     set_attacks_num(6);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_funcs(({"rage"}));
     set_func_chance(45);
     set_max_level(25);

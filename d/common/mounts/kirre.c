@@ -34,7 +34,7 @@ void create(){
    add_limb("torso","torso",0,0,0);
    add_limb("head","torso",0,0,0);
    set_attack_limbs(({"horns","claws"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_funcs(({"special"}));
    set_func_chance(15);
    TO->force_me("message in treads in with swishing its tail.");

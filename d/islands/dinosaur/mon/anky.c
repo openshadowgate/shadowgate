@@ -28,7 +28,7 @@ void create(){
     set("aggressive", 15);
     set_attack_limbs( ({"right forepaw", "left forepaw", "tail"}) );
     set_attacks_num(2);
-    set_nat_weapon_type("blunt");
+    set_base_damage_type("blunt");
     set_damage(3,5);
     set_hit_funcs( (["tail":(:TO, "tail_hit":)]) );
     set_property("no stab", 1);

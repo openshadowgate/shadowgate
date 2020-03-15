@@ -35,7 +35,7 @@ void create() {
 	add_attack_bonus(15); //was 10, but couldn't hit alzar
     set_property("no dominate",1);
     set_alignment(9);
-	set_nat_weapon_type("slashing");
+	set_base_damage_type("slashing");
     set_emotes(9,({"The claw grasps for you!",
         "The claw tears at you!",}),1);
     set("aggressive",25);

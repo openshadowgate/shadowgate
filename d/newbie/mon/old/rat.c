@@ -21,7 +21,7 @@ void create() {
   set_exp(20);
   set_damage(1,3);
   set_attacks_num(1);
-  set_nat_weapon_type("piercing");
+  set_base_damage_type("piercing");
   add_limb("teeth", "head", 0, 0, 0);
   set_attack_limbs(({"right forepaw","left forepaw","teeth"}));
   set_ac(10);

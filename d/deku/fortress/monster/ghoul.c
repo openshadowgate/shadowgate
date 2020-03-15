@@ -44,7 +44,7 @@ void create()
     set_new_exp(20, "normal");
     set_damage(3,8);
     set_attacks_num(2);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_funcs(({"attacks"}));
     set_func_chance(100);
     set_speed(10 + random(11));

@@ -31,7 +31,7 @@ void create() {
    add_limb("right fist", "right arm", 0, 0, 0);
    add_limb("left fist", "left arm", 0, 0, 0);
    set_attack_limbs(({"right fist","left fist"}));
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_damage(1,12);
    set_stats("strength",14);
    set_stats("dexterity",15);

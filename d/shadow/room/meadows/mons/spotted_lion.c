@@ -30,7 +30,7 @@ void create()
   set_stats("strength",16);
   set_damage(1,6);
   set_attacks_num(2);
-  set_nat_weapon_type("thiefslashing");
+  set_base_damage_type("thiefslashing");
   add_limb("left paw","left hand",0,0,0);
   add_limb("right paw","right hand",0,0,0);
   add_limb("mouth","head",0,0,0);

@@ -64,7 +64,7 @@ void create()
     set_stats("charisma",14);
     set_attacks_num(2);
     set_damage(8, 18);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_fake_limbs(({"bite"}));
     set_attack_limbs(({"teeth"}));
     set("aggressive", 30);

@@ -37,7 +37,7 @@ void create()
     set_body_type("human");
     set_fake_limbs(({"head","torso","right arm","left arm","right leg","left leg" }));
     set_attack_limbs(({"right arm","left arm","head"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 }
 
 

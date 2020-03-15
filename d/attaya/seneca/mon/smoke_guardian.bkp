@@ -19,7 +19,7 @@ void create() {
     set_weight(300);
     set_attacks_num(6); 
     set_damage(4,8);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     add_limb("bladed hand","left arm",0,0,0);
     add_limb("mace hand","right arm",0,0,0);
     set_attack_limbs(({"bladed hand","mace hand","left leg","right leg"}));

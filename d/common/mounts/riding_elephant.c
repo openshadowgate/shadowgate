@@ -46,7 +46,7 @@ void create(){
       "gray riding elephant%^RESET%^");
    set_attacks_num(2);
    set_damage(2,4);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_emotes(1,({"%^BOLD%^%^BLACK%^The elephant flicks its ears, "+
       "stirring a light %^CYAN%^breeze%^BLACK%^.%^RESET%^","%^BOLD%^"+
       "%^BLACK%^The elephant raises its trunk and trumpets a warning.%^RESET%^"}), 0);

@@ -38,7 +38,7 @@ void create(){
    set_hit_funcs((["hand":(:TO,"do_crush":)]));
    set_damage(1,1);
    set_attacks_num(1);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_gender("sexless");
    set_overall_ac(0);
    busy = 0;

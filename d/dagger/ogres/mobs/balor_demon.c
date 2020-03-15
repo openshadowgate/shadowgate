@@ -61,7 +61,7 @@ void create() {
     set_attacks_num(4);
     set_attack_limbs( ({"barbed tail", "right talon", "left talon", "fangs",
 "right wing", "left wing"}) );
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_damage(5,7);
     set_property("swarm",1);
     set_stats("strength", 18);

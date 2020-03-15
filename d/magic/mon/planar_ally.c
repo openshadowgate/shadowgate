@@ -63,7 +63,7 @@ void do_customize(string setdeity) {
       add_limb("torso","torso",50,0,2);
       add_limb("whirling winds","torso",50,0,2);
       set_attack_limbs(({"whirling winds"}));
-      set_nat_weapon_type("slashing");
+      set_base_damage_type("slashing");
       break;
 
       case "bane":
@@ -82,7 +82,7 @@ void do_customize(string setdeity) {
       set_alignment(3);
       set_body_type("dragon");
       set_attack_limbs(({"right claw","left claw","mouth"}));
-      set_nat_weapon_type("slashing");
+      set_base_damage_type("slashing");
       break;
 
       default: break;

@@ -19,7 +19,7 @@ create() {
    set_alignment(5);
    set_size(1);
    set_exp(0);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(1,4);
    set_hd(5,10);
    set_class("fighter");

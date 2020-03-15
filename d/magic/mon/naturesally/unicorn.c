@@ -23,7 +23,7 @@ void create(){
     set_body_type("equine");
     add_limb("horn","head",0,0,0);
     set_attack_limbs(({"horn","right front hoof","left front hoof"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 }
 
 

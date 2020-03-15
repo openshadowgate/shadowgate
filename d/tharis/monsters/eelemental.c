@@ -33,7 +33,7 @@ PEG
     set_attack_limbs(({"left appendage", "right appendage"}));
     set_damage(4,8);
     set_attacks_num(1);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_gender("sexless");
     set_overall_ac(4);
   }

@@ -13,7 +13,7 @@ void create(){
     set_race("eagle");
     set_body_type("fowl");
     set_attack_limbs(({"beak","right claw","left claw"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 }
 
 void my_special(object target) {

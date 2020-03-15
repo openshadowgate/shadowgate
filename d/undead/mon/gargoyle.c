@@ -34,7 +34,7 @@ void create()
                     }));
     set_attacks_num(3);
     set_damage(1,8);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_property("swarm",1);
     set_stats("strength",20);
     set_stats("dexterity",22);

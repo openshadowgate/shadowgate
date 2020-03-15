@@ -41,7 +41,7 @@ create() {
    set("aggressive",0);
    set_attack_limbs( ({"left hand"}) );
    set_attacks_num(0);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(1,2);
    set_property("magic resistance",100);
    set_emotes(1, ({"%^BLUE%^The spirit floats slowly through the air.",

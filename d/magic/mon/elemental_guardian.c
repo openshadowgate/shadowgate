@@ -16,7 +16,7 @@ void create()
     set_race("elemental");
     set_body_type("humanoid");
     set_size(1);
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     set_exp(1);      
 }
 

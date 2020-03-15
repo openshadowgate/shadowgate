@@ -19,7 +19,7 @@ void create(){
     set_attack_num(2);
     set_damage(2,6);
     set_overall_ac(-2);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     add_limb("tail", "torso", 0, 0, 0);
     add_limb("mouth", "torso", 0, 0, 0);
     add_limb("right claw", "torso", 0, 0, 0);

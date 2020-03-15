@@ -40,7 +40,7 @@ void create(){
    set_gender("female");
    set_race("aurumvorax");
    add_money("silver",random(5000));
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_stats("strength",20);
    set_speed(50);
    set_new_exp(35,"very high");

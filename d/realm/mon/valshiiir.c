@@ -78,7 +78,7 @@ void create()
     	set_attacks_num(4);
 	command("speak wizish");
 	command("speech gurgles while somehow pronouncing every syllable");
-    	set_nat_weapon_type("bludgeon");
+    	set_base_damage_type("bludgeon");
     	set_funcs(({"eye_stalk"}));
     	set_func_chance(125);
     

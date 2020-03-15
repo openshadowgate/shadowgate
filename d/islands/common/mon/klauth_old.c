@@ -44,7 +44,7 @@ void create() {
    set_attack_limbs(({"right claw","left claw","mouth"}));
    set_attacks_num(5);
    set_damage(3,10);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_class("fighter");
    set_gender("male");
    set_race("dragon");

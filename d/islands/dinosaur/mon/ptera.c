@@ -28,7 +28,7 @@ void create(){
     set("aggressive", 15);
     set_body_type("fowl");
     set_attack_limbs( ({"beak", "right claw", "left claw"}) );
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attacks_num(2);
     set_damage(2,4);
     set_funcs( ({"fly"}) );

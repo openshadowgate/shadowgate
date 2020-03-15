@@ -33,7 +33,7 @@ void create() {
     set("aggressive",0);
     set_attack_limbs(({"left hand","right hand"}));
     set_attacks_num(1);
-    set_nat_weapon_type("slash");
+    set_base_damage_type("slash");
     set_damage(1,4);
     set_property("undead",1);
     command("message in floats in.");

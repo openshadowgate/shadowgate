@@ -34,7 +34,7 @@ void create(){
 	set_funcs(({"split"}));
 	set_func_chance(15);
 	set_damage(1,6);
-	set_nat_weapon_type("magebludgeon");
+	set_base_damage_type("magebludgeon");
 	set_exp(2500);
       set_hp(random(75)+150);
       set_max_hp(query_hp());

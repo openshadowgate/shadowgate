@@ -30,7 +30,7 @@ create() {
    add_limb("mouth","head",0,0,0);
    set_attack_limbs( ({"teeth","tail","left foreclaw","right foreclaw"}) );
    set_attacks_num(4);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_base_damage_type("slashing"); 
    set_damage(3,8);
    set_hit_funcs( (["tail": (: TO,"tail_func" :)]) );

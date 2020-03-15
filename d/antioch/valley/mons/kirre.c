@@ -53,7 +53,7 @@ void create(){
 	add_limb("tail","torso",0,0,0);
 	set_attack_limbs(({"right forepaw","left forepaw","teeth","left paw","right paw","tail","horns"}));
 	set_attacks_num(7);
-	set_nat_weapon_type("slash");
+	set_base_damage_type("slash");
 	set_damage(1,4);
 //	set_exp(19000);
 	set_new_exp(20,"normal");

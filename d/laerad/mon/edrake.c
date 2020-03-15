@@ -25,7 +25,7 @@ void create(){
     set_property("magic resistance",30);
     set_attack_limbs(({"right foreclaw","left foreclaw","head","tail"}));
     set_attacks_num(4);
-    set_nat_weapon_type("thiefslashing");
+    set_base_damage_type("thiefslashing");
     set_damage(2,20);
     set_stats("strength",23);
     set_stats("dexterity",13);

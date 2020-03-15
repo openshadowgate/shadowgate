@@ -45,7 +45,7 @@ void create() {
  set_overall_ac(2);
  set_attack_limbs( ({"left hand","right hand","head"}) );
  set_attacks_num(3);
- set_nat_weapon_type("bludgeoning");
+ set_base_damage_type("bludgeoning");
  set_damage(2,6);
  set("aggressive","agg_fun");
  set_achats(2, ({"%^BOLD%^%^BLACK%^A rabid growl flies from the goblin's "

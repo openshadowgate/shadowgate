@@ -38,7 +38,7 @@ set_exp(15);
   set_attack_limbs(({"doughy right fist","doughy left fist"}));
   set_attacks_num(2);
   set_damage(2,10);
-  set_nat_weapon_type("magebludgeoning");
+  set_base_damage_type("magebludgeoning");
 }
 void die(mixed ob){
   tell_room(ETO,"%^BOLD%^%^WHITE%^The dough runs away from the last wound and suddenly the whole creature seems to melt and collapses.");

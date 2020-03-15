@@ -24,7 +24,7 @@ void create(){
     set("aggressive",19);
     set_attack_limbs(({"head"}));
     set_attacks_num(1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(2,6);
     set_hit_funcs((["head":(:TO,"poison":)]));
     set_funcs(({"web"}));

@@ -36,7 +36,7 @@ void create() {
     set("aggressive", 20);
     set_attacks_num(2);
     set_damage(3,10);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     add_limb("hand-like torrent of water", "head", 0, 0, 0);
     set_attack_limbs(({"hand-like torrent of water"}));    
     set_spells(({"chill touch",

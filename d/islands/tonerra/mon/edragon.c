@@ -54,7 +54,7 @@ void create()
     set_attacks_num(3);
     set_damage(1,25);
     set_hit_funcs((["mouth":(:TO,"mouth_attack":),"right claw":(:TO,"claw_attack":),"left claw":(:TO,"claw_attack":)]));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_class("fighter");
     set_gender("female");
     set_race("dragon");

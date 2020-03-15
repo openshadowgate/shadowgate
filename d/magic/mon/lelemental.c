@@ -44,7 +44,7 @@ PEG
     set_hit_funcs((["right bolt":(:TO,"do_bolt":), "left bolt":(:TO,"do_bolt":)]));
     set_damage(1,1);
     set_attacks_num(1);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_gender("sexless");
     set_overall_ac(0);
 }

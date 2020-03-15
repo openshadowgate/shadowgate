@@ -17,7 +17,7 @@ void create() {
    set_body_type("arachnid");
    set_attack_limbs( ({"right pincer","left pincer"}) );
    set_attacks_num(2);
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_damage(1,12);
    set_hit_funcs( (["right pincer": (: TO,"pincer_func" :),
       "left pincer": (: TO,"pincer_func" :)]) );

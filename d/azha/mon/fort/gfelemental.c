@@ -33,7 +33,7 @@ PEG
    set_attack_limbs(({"left flame", "right flame"}));
    set_damage(3,8);
    set_attacks_num(1);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_gender("sexless");
    set_overall_ac(0);
    set_property("weapon resistance", 2);

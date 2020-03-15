@@ -33,6 +33,6 @@ void create(){
     add_limb("teeth","head",0,0,0);
     set_damage(1,8);
     set_attacks_num(1);
-    set_nat_weapon_type("thiefslashing");
+    set_base_damage_type("thiefslashing");
     set_attack_limbs(({"teeth"}));
 }

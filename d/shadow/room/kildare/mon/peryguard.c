@@ -34,7 +34,7 @@ void create(){
   set_max_level(15);  // added by *Styx* 9/24/06
   set_attacks_num(2);
   set_damage(1,6);
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
   set_stats("strength",16);
   set_hit_funcs((["right claw":(:TO,"rend":), "left claw":(:TO,"rend":)]));
 }

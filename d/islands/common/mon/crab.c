@@ -22,7 +22,7 @@ void create() {
        add_limb("left claw","left claw",96,1,4);
     set_attacks_num(2);
 set_attack_limbs(({"left claw", "right claw"}));
-   set_nat_weapon_type("blunt");
+   set_base_damage_type("blunt");
     set_damage(2,6);
     set_body_type("arachnid");
     set_property("swarm",1);

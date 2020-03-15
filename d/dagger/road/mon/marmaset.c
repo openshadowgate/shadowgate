@@ -24,7 +24,7 @@ set_stats("charisma", 1);
 set_stats("wisdom", 1);
 set_class("fighter");
 set("aggressive", 5);
-set_nat_weapon_type("slash");
+set_base_damage_type("slash");
 set_damage(1,8);
 set_attack_limbs(({"right claw","left claw","mouth","right middle
 claw","left middle claw"}));

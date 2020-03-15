@@ -44,7 +44,7 @@ void create(){
 	set_new_exp(10,"normal");
 	set_attack_limbs(({"mouth","right hand","left hand"}));
 	set_attacks_num(3);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(2,3);
 	add_money("copper",random(500));
 	add_money("gold",random(50));

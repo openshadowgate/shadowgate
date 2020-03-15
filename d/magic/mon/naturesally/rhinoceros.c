@@ -17,7 +17,7 @@ void create(){
     set_body_type("equine");
     add_limb("horn","head",0,0,0);
     set_attack_limbs(({"right fore hoof","left fore hoof","horn"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 }
 
 void my_special(object target) {

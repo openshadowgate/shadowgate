@@ -22,7 +22,7 @@ void create() {
    set_race("axe");
    set_property("weapon resistance", 4);
    set_attack_limbs(({"bladed edge"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_attacks_num(6);
    set_damage(5,8);
    set_property("swarm", 1);

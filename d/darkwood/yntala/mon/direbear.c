@@ -41,7 +41,7 @@ void create (){
    add_limb("left claws","left forepaw",0,0,0);
    add_limb(" right claws","right forepaw",0,0,0);
    set_attack_limbs(({"right claws", "left claws"}));
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_achats(2, ({"%^BOLD%^%^BLACK%^The bear stands up to its full height and lunges for you again!%^RESET%^",
 "%^BOLD%^%^BLACK%^The bear growls ferociously before attacking you!%^RESET%^"}) );
     if(!random(5)) {

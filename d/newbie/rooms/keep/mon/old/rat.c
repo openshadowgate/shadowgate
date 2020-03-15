@@ -24,7 +24,7 @@ void create() {
    set_max_level(2);
    set_damage(1,4);
    set_attacks_num(1);
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_attack_limbs(({"right forepaw","left forepaw","mouth"}));
    set_ac(8);
    set_alignment(5);

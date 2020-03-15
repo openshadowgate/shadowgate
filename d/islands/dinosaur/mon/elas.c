@@ -26,7 +26,7 @@ void create(){
     set_body_type("snake");
     set_stats("strength", 19);
     set_attack_limbs( ({"mouth"}) );
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attacks_num(3);
     set_damage(3,4);
 }

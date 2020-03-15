@@ -40,7 +40,7 @@ void create(){
 	add_limb("mouth","head",0,0,0);
 	set_attack_limbs(({"mouth","right fore leg","left fore leg"}));
 	set_attacks_num(3);
-	set_nat_weapon_type("pierce");
+	set_base_damage_type("pierce");
 	set_damage(1,6);
 	set_hit_funcs((["mouth":(:TO,"poison":)]));
 	set_stats("strength",18);

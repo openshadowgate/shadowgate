@@ -12,7 +12,7 @@ void create(){
     set_race("viper");
     set_body_type("snake");
     set_attack_limbs(({"mouth"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 }
 
 void my_special(object target) {

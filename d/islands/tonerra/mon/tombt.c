@@ -48,7 +48,7 @@ void create(){
    set_stats("strength",24);
    set_property("magic",1);
    set_attacks_num(3);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_overall_ac(-30);
    set_max_level(36);
    set_size(3);

@@ -76,7 +76,7 @@ void make_me(){
 	set_exp(13600);
     switch(theclass){
     case "fighter": 
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_attack_limbs(({"right hand","left hand","head"}));
 	set_attacks_num(4);
 	set_damage(3,6);
@@ -85,7 +85,7 @@ void make_me(){
 	set_func_chance(25);
 	break;
     case "thief":
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(2);
 	set_damage(2,8);
@@ -94,7 +94,7 @@ void make_me(){
 	set_func_chance(30);
 	break;
     case "mage":
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(1);
 	set_damage(1,20);
@@ -115,7 +115,7 @@ void make_me(){
 	set_func_chance(25);
 	break;
     case "cleric":
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(2);
 	set_damage(3,6);
@@ -135,7 +135,7 @@ void make_me(){
 	set_func_chance(25);
 	break;
     case "antipaladin":
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_attack_limbs(({"right hand","left hand","head"}));
 	set_attacks_num(4);
 	set_damage(3,8);

@@ -36,7 +36,7 @@ void create(){
     set_stats("charisma",5);
     set_attacks_num(1);
     set_damage(5,10);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     add_limb("razor sharp teeth", "head", 0, 0, 0);
     set_attack_limbs(({"razor sharp teeth"}));
     set("aggressive", 25);

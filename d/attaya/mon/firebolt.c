@@ -27,7 +27,7 @@ void create() {
     add_limb("intense heat","intense heat",96,1,4);
     set_attacks_num(2);
     set_attack_limbs(({"fire tornado","flame wisp","flaming skull like appendage","intense heat"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,12);
     set_body_type("arachnid");
     set_property("swarm",1);

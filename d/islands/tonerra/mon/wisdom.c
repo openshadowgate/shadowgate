@@ -32,7 +32,7 @@ OLI
    set_attacks_num(2);
    set_property("magic resistance",65);
    set_damage(2,8);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_stats("dexterity",100);
    set_funcs(({"breakem"}));
    set_func_chance(15);

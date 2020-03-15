@@ -36,7 +36,7 @@ void create(){
    add_limb("blade","blade",50,0,2);
    add_limb("hilt","hilt",0,0,0);
    set_attack_limbs(({"blade"}));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_gender("sexless");
 }
 

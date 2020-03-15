@@ -51,7 +51,7 @@ void create (){
    set_thief_skill("hide in shadows",95);
    add_limb("claws","left arm",0,0,0);
    set_attack_limbs(({"claws"}));
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_achats(2, ({"%^YELLOW%^The ugly little hag cackles demonically%^RESET%^","%^GREEN%^The hag cackles wildly as she slashes at you with her %^RESET%^claws."}) );
    RANDGEAR->armor_me(TO,"armorlt",70,1,0);
     set_monster_feats(({

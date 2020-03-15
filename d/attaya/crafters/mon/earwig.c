@@ -24,7 +24,7 @@ void create() {
       add_limb("stinger","stinger",96,1,4);
     set_attacks_num(2);
 set_attack_limbs(({"left pincer", "tail", "right pincer"}));
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
     set_funcs(({"sting"}));
     set_func_chance(25);
     set_damage(2,8);

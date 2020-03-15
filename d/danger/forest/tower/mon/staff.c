@@ -18,7 +18,7 @@ void create() {
    set_overall_ac(-4);
    set_property("weapon resistance", 4);
    set_attack_limbs(({"blunt end"}));
-   set_nat_weapon_type("blunt");
+   set_base_damage_type("blunt");
    set_attacks_num(1);
    set_damage(1,6);
    set_gender("neuter");

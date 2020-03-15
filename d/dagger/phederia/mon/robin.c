@@ -17,5 +17,5 @@ void create(){
   set_damage(1,1);
   set_attack_limbs(({"beak"}));
   set_stats("strength",17);
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
 }

@@ -30,7 +30,7 @@ void create() {
    set_attack_limbs(({"tentacle","beak"}));
    set_attacks_num(8);
    set_damage(3,10);
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_class("fighter");
    set_gender("male");
    set_race("squid");

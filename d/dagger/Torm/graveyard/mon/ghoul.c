@@ -36,7 +36,7 @@ void create()
 	set_gender("male");
 	set_attack_limbs(({"right hand","left hand","mouth"}));
 	set_attacks_num(3);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(1,6);
 	add_money("copper",random(4000));
 	set_property("swarm",1);

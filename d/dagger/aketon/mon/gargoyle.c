@@ -51,7 +51,7 @@ void create(){
 	set_attack_limbs(({"right claw","left claw","teeth","horn"}));
 	set_attacks_num(4);
 	set_damage(3,8);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_funcs(({"whip"}));
     	set_func_chance(25);
     	flag = 0;

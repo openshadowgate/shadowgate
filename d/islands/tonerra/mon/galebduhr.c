@@ -39,7 +39,7 @@ OLI
 	make_me();
 	set_attack_limbs(({"right hand","left hand","right foot","left foot"}));
 	set_attacks_num(2);
-	set_nat_weapon_type("bludgeon");
+	set_base_damage_type("bludgeon");
 	set_alignment(5);
 	summoned = ({});
 	set_property("swarm",1);

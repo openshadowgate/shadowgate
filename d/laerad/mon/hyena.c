@@ -41,7 +41,7 @@ void create(){
     add_limb("teeth","head", 0, 0, 0);
     set_attack_limbs(({ "teeth" }));
     set_attacks_num(1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(3,6);
     set_moving(1);
 	set_speed(75);

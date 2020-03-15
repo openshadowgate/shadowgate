@@ -39,7 +39,7 @@ void create (){
    add_limb("left hoof","left foreleg",0,0,0);
    add_limb("right hoof","right foreleg",0,0,0);
    set_attack_limbs(({"right hoof","left hoof"}));
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_hp(random(50)+100);
    set_max_hp(query_hp());  
    set_thief_skill("hide in shadows",95);

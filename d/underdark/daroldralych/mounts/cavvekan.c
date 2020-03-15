@@ -26,7 +26,7 @@ void create(){
   set_funcs(({"special"}));
   set_func_chance(10);
   set_attack_limbs(({"right forefoot","left forefoot","teeth"}));
-  set_nat_weapon_type("piercing");
+  set_base_damage_type("piercing");
   set_attacks_num(1);
   set_damage(3,4);
   set_stats("strength",12);

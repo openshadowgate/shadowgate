@@ -21,7 +21,7 @@ set_new_exp(12, "boss");
 set("aggressive", 15);
 set_property("swarm", 1);
 set_gender("male");
-    set_nat_weapon_type("magebludgeon");
+    set_base_damage_type("magebludgeon");
     set_attack_limbs(({"right hand","left hand","right foot","left foot"}));
     set_attacks_num(3);
     set_damage(1,6);

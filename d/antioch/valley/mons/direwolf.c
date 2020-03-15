@@ -47,7 +47,7 @@ void create()
    set_property("no bows",1);
 	set_attack_limbs(({"right forepaw","left forepaw"}));
 	set_attacks_num(2);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
 	set_damage(2,4);
     if(!random(15)) {
       ob = new("/d/common/obj/brewing/herb_special_inherit");

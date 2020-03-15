@@ -19,7 +19,7 @@ void create() {
   set_exp(0);
   set_damage(1,2);
   set_attacks_num(0);
-  set_nat_weapon_type("pierce");
+  set_base_damage_type("pierce");
   set_attack_limbs(({"right claw","left claw"}));
   set_stats("intelligence",14);
   set_stats("wisdom",11);

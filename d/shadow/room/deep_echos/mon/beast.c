@@ -38,7 +38,7 @@ void create()
   set_stats("constitution",16);
   set_stats("wisdom",3);
   set_stats("charisma",3);
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
   set_attacks_num(5);
   add_limb("left claw","left hand",0,0,0);
   add_limb("right claw","right hand",0,0,0);

@@ -26,7 +26,7 @@ void create(){
     set("aggressive", 13);
     add_limb("tail", "tail", 0, 0, 0);
     set_attack_limbs( ({"tail"}) );
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attacks_num(2);
     set_damage(2,7);
     set_property("no stab", 1);

@@ -19,7 +19,7 @@ void create(){
     set_race("human");
     set_gender("male");
     set_id( ({"mykadok", "Mykadok", "trainer", "master"}) );
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_overall_ac(5);
     set_exp(1);
 }

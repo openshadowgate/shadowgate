@@ -42,7 +42,7 @@ void create(){
     remove_limb("left wing");
     set_damage(5,6);
     set_attacks_num(2);
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     set_attack_limbs(({"right foreleg","left foreleg","mouth"}));
     set_funcs(({"breath"}));
    set_func_chance(30);

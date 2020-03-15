@@ -31,7 +31,7 @@ void create(){
 	set_attacks_num(2);
       set_hit_funcs((["right puddle":(:TO,"acid":), "left puddle":(:TO,"acid":)]));
 	set_damage(1,6);
-	set_nat_weapon_type("magebludgeon");
+	set_base_damage_type("magebludgeon");
 	set_exp(100);
       set_hp(random(26)+50);
       set_max_hp(query_hp());

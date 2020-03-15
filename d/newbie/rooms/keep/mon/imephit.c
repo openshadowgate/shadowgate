@@ -30,7 +30,7 @@ void create() {
    add_limb("left claw","left hand",0,0,0);
    set_damage(1,6);
    set_attacks_num(2);
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_attack_limbs(({"mouth","left claw","right claw"}));
    set_hit_funcs((["mouth" : (:TO,"breath":) ]));
    set_property("swarm",1);

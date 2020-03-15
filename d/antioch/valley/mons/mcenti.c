@@ -39,7 +39,7 @@ void create()
 	add_limb("pincers","head",0,0,0);
 	set_attack_limbs(({"pincers"}));
 	set_attacks_num(4);
-	set_nat_weapon_type("pierce");
+	set_base_damage_type("pierce");
 	set_damage(2,4);
 //	set_exp(16000);
 	set_new_exp(18,"normal");

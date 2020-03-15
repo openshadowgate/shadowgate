@@ -62,7 +62,7 @@ void create() {
     set_nogo( ({ PATH+"platform01" }) );
     set_attack_limbs( ({"right hand","left hand"}) );
     set_attacks_num(4);
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
     set_damage(4,2);
 }
 

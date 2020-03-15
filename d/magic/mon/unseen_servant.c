@@ -21,7 +21,7 @@ void create(){
     set_attack_limbs(({"torso"}));
     set_damage(2,10);
     set_attacks_num(0);
-    set_nat_weapon_type("bludgeon");
+    set_base_damage_type("bludgeon");
     set_gender("other");
     set_invis();
     set_overall_ac(4);

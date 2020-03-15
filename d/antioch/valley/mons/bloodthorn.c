@@ -47,7 +47,7 @@ void create(){
 	add_limb("vine 8","trunk",0,0,0);
 	set_attack_limbs(({"vine 1","vine 2","vine 3","vine 4","vine 5","vine 6","vine 7","vine 8"}));
 	set_attacks_num(8);
-	set_nat_weapon_type("thiefslashing");
+	set_base_damage_type("thiefslashing");
     set_property("no charge",1);
     set_property("no bows",1);
 	set_damage(1,4);

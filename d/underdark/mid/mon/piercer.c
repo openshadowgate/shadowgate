@@ -28,7 +28,7 @@ void create(){
     set("aggressive","agg_func");
     set_attack_limbs(({"body"}));
     set_attacks_num(1);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_funcs(({"acidspit"}));
     set_func_chance(100);
     set_invis();

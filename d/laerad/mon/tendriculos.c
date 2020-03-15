@@ -31,7 +31,7 @@ void create(){
    set_class("fighter");
    set_property("full attacks",1);
    set_attacks_num(2);
-   set_nat_weapon_type("bludgeon");
+   set_base_damage_type("bludgeon");
    set_fake_limbs(({"body mass","right vine","left vine"}));
    set_attack_limbs(({"right vine","left vine"}));
    set_damage(3,10);

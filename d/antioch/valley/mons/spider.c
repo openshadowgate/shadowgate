@@ -39,7 +39,7 @@ void create(){
 	add_limb("mouth","head",0,0,0);
 	set_attack_limbs(({"right pincer","left pincer","mouth"}));
 	set_attacks_num(1);
-	set_nat_weapon_type("pierce");
+	set_base_damage_type("pierce");
 	set_damage(1,8);
 	set("aggressive",25);
 	set_property("swarm",1);

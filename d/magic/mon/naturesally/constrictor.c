@@ -13,7 +13,7 @@ void create(){
     set_race("constrictor");
     set_body_type("snake");
     set_attack_limbs(({"torso"}));
-    set_nat_weapon_type("bludgeoning");
+    set_base_damage_type("bludgeoning");
 }
 
 void my_special(object target) {

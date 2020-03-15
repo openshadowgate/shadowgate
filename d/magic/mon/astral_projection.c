@@ -21,7 +21,7 @@ void create()
     set_race("human");
     set_damage(2, 10);
     set_attacks_num(5);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_gender("other");
     set_overall_ac(4);
 

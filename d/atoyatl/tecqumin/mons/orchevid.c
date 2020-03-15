@@ -39,7 +39,7 @@ void create()
 
     set_attacks_num(7);
     set_damage(4,9);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_fake_limbs(({"stalk", "root", "head",
       "aerial root", "aerial root", 
       "lower stalk", "root"}));

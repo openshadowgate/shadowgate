@@ -49,7 +49,7 @@ void create() {
     set("aggressive",25);
     set_attack_limbs(({"first head","second head","third head","fourth head","fifth head","sixth head","left foreclaw","right foreclaw"}));
     set_attacks_num(8);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_damage(2,4);
     set_hit_funcs( (["first head":(:TO,"breath_fun":),
                      "second head":(:TO,"breath_fun":)]) );

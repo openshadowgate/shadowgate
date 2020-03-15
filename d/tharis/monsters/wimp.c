@@ -49,7 +49,7 @@ OLI
    add_limb("right wing","torso",0,0,0);
    set_damage(1,6);
    set_hit_funcs((["tail":(:TO,"poison_me":)]));
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_attack_limbs(({"tail"}));
    set_overall_ac(0);
 }
@@ -105,7 +105,7 @@ void new_form() {
       set("aggressive",20);
       set_size(1);
       set_attacks_num(2);
-      set_nat_weapon_type("slashing");
+      set_base_damage_type("slashing");
       set_attack_limbs(({"right forepaw", "left forepaw"}));
       break;
     case 1:
@@ -158,7 +158,7 @@ OLI
    set_damage(1,6);
    set_hit_funcs((["tail":(:TO,"poison_me":)]));
    set_race("imp");
-   set_nat_weapon_type("piercing");
+   set_base_damage_type("piercing");
    set_overall_ac(0);
    tell_room(ETO,"%^BOLD%^%^YELLOW%^You witness a wondrous transformation as this creature reveals its true form!");
 }

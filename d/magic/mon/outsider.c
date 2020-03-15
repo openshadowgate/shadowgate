@@ -58,7 +58,7 @@ void setup_beastie(object caster, int beastalign) {
       remove_limb("right leg");
       add_limb("vortex","torso",0,0,0);
       set_attack_limbs(({"right arm","left arm"}));
-      set_nat_weapon_type("bludgeon");
+      set_base_damage_type("bludgeon");
       iselemental = 1;
       return;
     }
@@ -77,7 +77,7 @@ void setup_beastie(object caster, int beastalign) {
 "viridian hands.");
         set_body_type("humanoid");
         set_attack_limbs(({"left hand","right hand"}));
-        set_nat_weapon_type("bludgeon");
+        set_base_damage_type("bludgeon");
       break;
       case 2: // LN: zelekhut, inevitable
         set_id(({"zelekhut","Zelekhut","inevitable","Inevitable","outsider"}));
@@ -94,7 +94,7 @@ void setup_beastie(object caster, int beastalign) {
         add_limb("right spiked chain","torso",0,0,0);
         add_limb("wings","torso",0,0,0);
         set_attack_limbs(({"left spiked chain","right spiked chain"}));
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
       case 3: // bone devil, baatezu
         set_id(({"devil","Devil","bone devil","Bone Devil","outsider"}));
@@ -110,7 +110,7 @@ void setup_beastie(object caster, int beastalign) {
         add_limb("left claws","left hand",0,0,0);
         add_limb("right claws","right hand",0,0,0);
         set_attack_limbs(({"left claws","right claws","spiked tail"}));
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
       case 4: // NG: leonal, guardinal
         set_id(({"leonal","Leonal","outsider"}));
@@ -125,7 +125,7 @@ void setup_beastie(object caster, int beastalign) {
         add_limb("left claws","left forepaw",0,0,0);
         add_limb("right claws","right forepaw",0,0,0);
         set_attack_limbs(({"right claws","left claws"}));
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
       case 5: // TN: aurumach, rilmani
         set_id(({"aurumach","Aurumach","outsider"}));
@@ -137,7 +137,7 @@ void setup_beastie(object caster, int beastalign) {
 "but you're quite sure a creature of this size would be a considerable foe in combat.  However, there is an almost "
 "tangible aura of %^GREEN%^calm %^RESET%^to this surprisingly beautiful creature, that pervades the air around it.");
         set_body_type("humanoid");
-        set_nat_weapon_type("bludgeon");
+        set_base_damage_type("bludgeon");
       break;
       case 6: // NE: nycaloth, yugoloth
         set_id(({"nycaloth","Nycaloth","outsider"}));
@@ -154,7 +154,7 @@ void setup_beastie(object caster, int beastalign) {
         add_limb("tail","torso",0,0,0);
         add_limb("wings","torso",0,0,0);
         set_attack_limbs(({"left claws","right claws"}));
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
       case 7: // CG: bralani, eladrin
         set_id(({"bralani","Bralani","outsider"}));
@@ -168,7 +168,7 @@ void setup_beastie(object caster, int beastalign) {
 "hint at a warm climate of origin, or a very strong tolerance to cold.");
         set_body_type("humanoid");
         set_attack_limbs(({"left hand","right hand"}));
-        set_nat_weapon_type("bludgeon");
+        set_base_damage_type("bludgeon");
       break;
       case 8: // CN: gray slaad
         set_id(({"slaad","Slaad","gray slaad","Gray Slaad","outsider"}));
@@ -183,7 +183,7 @@ void setup_beastie(object caster, int beastalign) {
         add_limb("left claws","left hand",0,0,0);
         add_limb("right claws","right hand",0,0,0);
         set_attack_limbs(({"left claws","right claws"}));
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
       case 9: // CE: vrock, tanarri
         set_id(({"vrock","Vrock","tanarri","Tanarri","outsider"}));
@@ -200,7 +200,7 @@ void setup_beastie(object caster, int beastalign) {
         add_limb("right claws","right forepaw",0,0,0);
         add_limb("wings","torso",0,0,0);
         set_attack_limbs(({"right claws","left claws"}));
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
     }
 }

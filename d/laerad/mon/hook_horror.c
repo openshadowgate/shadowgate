@@ -30,7 +30,7 @@ void create(){
     add_limb("left hook","left arm",0,0,0);
     set_attack_limbs(({"right hook","left hook","beak"}));
     set_attacks_num(3);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,8);
     set_max_level(35); //added by Ares 3-31-05, they should be moving on long before now, but just in case
 

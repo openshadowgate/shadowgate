@@ -30,7 +30,7 @@ void create(){
     set("aggressive", 18);
     set_attack_limbs( ({"right forepaw", "left forepaw", "right rear paw", "left rear paw", "mouth"}) );
     set_attacks_num(2);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,6);
     set_funcs( ({"charge"}) );
     set_func_chance(15);

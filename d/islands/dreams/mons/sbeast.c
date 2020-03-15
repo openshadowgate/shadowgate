@@ -31,7 +31,7 @@ void create(){
   	add_limb("tail","torso",0,0,0);
   	set_attack_limbs(({"mouth","tail","left hand","right hand"}));
   	set_attacks_num(4);
-  	set_nat_weapon_type("pierce");
+  	set_base_damage_type("pierce");
   	set_damage(3,4);
   	set_max_hp(random(200)+900);
   	set_hp(query_max_hp());

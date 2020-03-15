@@ -34,7 +34,7 @@ set_exp(15);
   set_attack_limbs(({"brass longsword"}));
   set_attacks_num(2);
   set_damage(2,6);
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
 }
 void die(mixed ob){
   tell_room(ETO,"%^RED%^Smoke pours from a horrible gash in the warriors side and you hear a sharp metal snapping noise from somewhere inside it!");

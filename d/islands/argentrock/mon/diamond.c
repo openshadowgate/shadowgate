@@ -30,6 +30,6 @@ void create(){
   set_attacks_num(1);
   set_damage(3,3);
   set_attack_limbs(({"torso"}));
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
   set_property("knock unconscious",1);
 }

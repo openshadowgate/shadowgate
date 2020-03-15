@@ -30,7 +30,7 @@ create (){
     remove_limb("left wing");
     remove_limb("torso");
     remove_limb("left wing");
-    set_nat_weapon_type("blunt");
+    set_base_damage_type("blunt");
     set_damage(1,8);
     set_stats("strength", 19);
     set_stats("intelligence", 6);

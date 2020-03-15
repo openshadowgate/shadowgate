@@ -25,7 +25,7 @@ void create() {
     add_limb("fangs","fangs",96,1,4);
     set_attacks_num(2);
     set_attack_limbs(({"fangs","left grappler","right grappler","3 pronged barb","2 pronged barb"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_damage(1,8);
     set_body_type("arachnid");
     set_property("swarm",1);

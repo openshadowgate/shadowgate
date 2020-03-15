@@ -25,7 +25,7 @@ void create(){
     add_limb("right right talon","right forepaw",0,0,0);
     add_limb("beak","head",0,0,0);
     set_attack_limbs(({"right talon","left talon","beak"}));
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 }
 
 void my_special(object target) {

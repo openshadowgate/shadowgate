@@ -95,7 +95,7 @@ void create()
 
     set_attacks_num(2); // done via specials
     set_damage(10,20);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
 
     set_property("spell penetration",45);
     set_property("weapon resistance", 0);

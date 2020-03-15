@@ -42,7 +42,7 @@ inherit WEAPONLESS;
 	add_search_path("/cmds/fighter");
 	set_damage(1,5);
   	set_attacks_num(2);
-  	set_nat_weapon_type("piercing");
+  	set_base_damage_type("piercing");
   	add_limb("teeth", "head", 0, 0, 0);
   	set_attack_limbs(({"right forepaw","left forepaw","teeth"}));
      	set_funcs(({"biteit"}));

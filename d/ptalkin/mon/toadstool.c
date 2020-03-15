@@ -45,6 +45,6 @@ add_limb("gill11", "torso", 0, 0, 0);
 add_limb("gill12", "torso", 0, 0, 0);
 set_attack_limbs(({"gill1", "gill2", "gill3", "gill4", "gill5", "gill6", "gill7", "gill8", "gill9", "gill10", "gill11", "gill12"}));
 set_attacks_num(12);
-set_nat_weapon_type("piercing");
+set_base_damage_type("piercing");
 set_damage(1,2);
 }

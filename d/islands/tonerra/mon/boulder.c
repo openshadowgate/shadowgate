@@ -30,7 +30,7 @@ OLI
   set_attack_limbs(({"body"}));
   set_attacks_num(1);
   set_damage(4,6);
-  set_nat_weapon_type("bludgeon");
+  set_base_damage_type("bludgeon");
   set_alignment(5);
   set_property("swarm",1);  
   set_new_exp(25,"normal");

@@ -59,7 +59,7 @@ void create(){
    set_damage(1,20);
    set_property("full attacks",1);
    set_hit_funcs((["mouth":(:TO,"mouth_attack":)]));
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set("aggressive",20);
    set_funcs(({"squeeze","sonic"}));
    set_func_chance(40);

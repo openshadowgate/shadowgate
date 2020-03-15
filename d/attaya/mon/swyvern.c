@@ -22,7 +22,7 @@ create (){
     set_attacks_num(2);
     set_attack_limbs(({"left wing", "right wing", "tail", "left rear claw", "right rear claw", "left front claw", "right front claw", "head"}));
     set_property("no rush",1);
-    set_nat_weapon_type("blunt");
+    set_base_damage_type("blunt");
     set_damage(1,8);
     set_moving( 1 );
     set_speed ( 30 );

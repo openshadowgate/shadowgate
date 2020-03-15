@@ -48,7 +48,7 @@ void create()
     set_max_hp(query_hp());
     set_new_exp(28, "normal");
     set_attacks_num(3);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_base_damage_type("piercing");
     set_damage(3, 6);
     set_property("natural poisoner", 1);

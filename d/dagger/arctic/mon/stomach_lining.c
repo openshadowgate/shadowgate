@@ -28,7 +28,7 @@ void create() {
     set_overall_ac(0);
     set_attacks_num(1);
     set_property("magic resistance",30);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     add_limb("bulbous protrusion", "head", 0, 0, 0);
     set_attack_limbs(({"bulbous protrusion"}));
     remove_limb("head");

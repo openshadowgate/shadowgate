@@ -27,7 +27,7 @@ void create(){
    	set_damage(1,1);
    	set_race("orc");
    	set_gender("male");
-   	set_nat_weapon_type("bludgeon");
+   	set_base_damage_type("bludgeon");
    	set_overall_ac(0);
      	set_spoken("wizish");
    	remove_std_db();

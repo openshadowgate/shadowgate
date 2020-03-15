@@ -21,7 +21,7 @@ void create() {
     set_weight(80);
     set_attacks_num(3);
     set_damage(3,5);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_overall_ac(-6);
 set_property("magic",1);
     set_body_type("human");

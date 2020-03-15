@@ -27,7 +27,7 @@ OLI
         set_hd(7,1);
         set_hp(50);
         set_exp(1000);
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
         set_damage(1,8);
         set_overall_ac(4);
         set_stats("intelligence",6);

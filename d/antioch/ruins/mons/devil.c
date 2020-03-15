@@ -37,7 +37,7 @@ void create()
    set_overall_ac(-17);
    add_limb("right claw","right hand",0,0,0);
    add_limb("left claw","left hand",0,0,0);
-   set_nat_weapon_type("thiefslashing");
+   set_base_damage_type("thiefslashing");
    set_attack_limbs(({"right claw","left claw","tail"}));
    set_damage(4,8);
    add_money("gold",random(750)+250);

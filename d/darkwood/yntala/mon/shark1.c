@@ -34,7 +34,7 @@ void create() {
   set_max_hp(query_hp()); 
   add_limb("teeth","mouth",0,0,0);
   set_attack_limbs("teeth");
-  set_nat_weapon_type("thiefslashing");
+  set_base_damage_type("thiefslashing");
   set_damage(1,8);
   set_emotes(1, ({
   "%^RESET%^%^CYAN%^The shark glides around as if it were the king of the water down here.",

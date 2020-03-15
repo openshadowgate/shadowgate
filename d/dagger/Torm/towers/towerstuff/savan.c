@@ -35,7 +35,7 @@ set_size(2);
   set_exp(10000);
   set_attack_limbs(({"phantom sword"}));
   set_attacks_num(4);
-  set_nat_weapon_type("slashing");
+  set_base_damage_type("slashing");
   set_hit_funcs((["phantom sword":(:TO,"hit":)]));
   set_damage(1,12);
 }

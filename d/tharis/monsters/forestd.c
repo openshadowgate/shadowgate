@@ -63,7 +63,7 @@ OLI
 	set_gender("male");
 	set_attacks_num(3);
 	set_damage(2,8);
-	set_nat_weapon_type("slashing");
+	set_base_damage_type("slashing");
 	add_limb("mouth", "head", 0, 0, 0);
 	set_attack_limbs(({"mouth"}));
 	set_funcs(({"attack"}));

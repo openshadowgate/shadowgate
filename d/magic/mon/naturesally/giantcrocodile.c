@@ -14,7 +14,7 @@ void create(){
     set_body_type("reptile");
     add_limb("teeth","head",0,0,0);
     set_attack_limbs(({"teeth"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 }
 
 void my_special(object target) {

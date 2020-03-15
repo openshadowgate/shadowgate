@@ -35,7 +35,7 @@ void create ()
     set_attack_limbs(({"left wing", "right wing", "tail",
     "left rear claw","right rear claw", "left front claw",
     "right front claw", "head"}));
-    set_nat_weapon_type("blunt");
+    set_base_damage_type("blunt");
     set_damage(4,20);
     set_moving( 1 );
     set_speed ( 20 );

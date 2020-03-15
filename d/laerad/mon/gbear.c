@@ -27,7 +27,7 @@ void create(){
     set_overall_ac(0);
     set("aggressive",1);
     set_attack_limbs(({"right forepaw","left forepaw","head"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     set_attacks_num(3);
     set_damage(2,6);
     set_achats(2, ({"The Ghost Bear moans loudly.",

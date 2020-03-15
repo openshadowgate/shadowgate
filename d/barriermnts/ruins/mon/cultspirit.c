@@ -35,7 +35,7 @@ create() {
    set_hp(query_max_hp());
    set_attacks_num(3);
    set_attack_limbs( ({"left hand","right hand"}) );
-   set_nat_weapon_type("slashing");
+   set_base_damage_type("slashing");
    set_damage(2,5);
    set_property("magic resistance",random(20));
    set("aggressive","agg_fun");

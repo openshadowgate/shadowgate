@@ -38,7 +38,7 @@ void create() {
     set_attacks_num(5);
     set_damage(1,12);
     set_property("magic resistance",30);
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
     add_limb("one of its heads", "head", 0, 0, 0);
     set_attack_limbs(({"one of its heads"}));    
     set("aggressive", 20);

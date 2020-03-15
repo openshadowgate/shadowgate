@@ -19,7 +19,7 @@ create()
     set_body_type("human");
     set_attacks_num(my_hd/5+1);
     set_damage(3,my_hd);
-    set_nat_weapon_type("slashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"right hand","left hand"}));
     set_alignment(5);
     set_overall_ac(-my_hd);

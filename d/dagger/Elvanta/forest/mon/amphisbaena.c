@@ -25,7 +25,7 @@ set_hd(24,9);
 	set_attacks_num(2);
 	set_attack_limbs(({"mouth","tail's mouth"}));
 	set_hit_funcs((["mouth":(:TO,"poison":),"tail's mouth":(:TO,"poison":)]));
-	set_nat_weapon_type("piercing");
+	set_base_damage_type("piercing");
 	set_gender("male");
 	set_race("snake");
 	set_exp(1600);

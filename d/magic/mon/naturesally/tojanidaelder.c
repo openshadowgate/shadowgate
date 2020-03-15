@@ -25,7 +25,7 @@ void create()
     set_body_type("reptile");
     set_fake_limbs(({"head","shell","mouth","right claw","left claw","right foreleg","right rear leg","left foreleg","left rear leg"}));
     set_attack_limbs(({"mouth","right claw","left claw"}));
-    set_nat_weapon_type("piercing");
+    set_base_damage_type("piercing");
 }
 
 

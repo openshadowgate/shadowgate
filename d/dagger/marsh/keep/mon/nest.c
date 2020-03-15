@@ -29,7 +29,7 @@ set_short("A hornets nest");
 	add_limb("stinger", "stinger",96,1,4);
     set_attacks_num(6);
 	set_attack_limbs(({"stinger","stinger","stinger","stinger","stinger","stinger","stinger","stinger"}));
-   set_nat_weapon_type("blunt");
+   set_base_damage_type("blunt");
     set_damage(1,8);
     set_body_type("human");
     set_property("swarm",1);

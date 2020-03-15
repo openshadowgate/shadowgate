@@ -54,7 +54,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_body_type("humanoid");
         set_attack_limbs(({"left hand","right hand"}));
         add_limb("wings","torso",0,0,0);
-        set_nat_weapon_type("bludgeon");
+        set_base_damage_type("bludgeon");
       break;
       case "fey":
         set_id(({"myconid","multicolored myconid","fey","outsider","summoned monster","greater summon"}));
@@ -72,7 +72,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_race("myconid");
         set_body_type("humanoid");
         set_attack_limbs(({"left hand","right hand"}));
-        set_nat_weapon_type("bludgeon");
+        set_base_damage_type("bludgeon");
       break;
       case "abyssal":
         set_id(({"hezrou","abominable hezrou","demon","outsider","summoned monster","greater summon"}));
@@ -91,7 +91,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_race("demon");
         set_body_type("humanoid");
         set_attack_limbs(({"left hand","right hand"}));
-        set_nat_weapon_type("bludgeon");
+        set_base_damage_type("bludgeon");
       break;
       case "gloom":
         set_id(({"bodak","nightmarish bodak","outsider","summoned monster","greater summon"}));
@@ -108,7 +108,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_race("bodak");
         set_body_type("humanoid");
         set_attack_limbs(({"left hand","right hand"}));
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
       case "infernal":
         set_id(({"devil","barbed devil","menacing barbed devil","outsider","summoned monster","greater summon"}));
@@ -126,7 +126,7 @@ void setup_beastie(object caster, int beastheritage) {
         set_body_type("humanoid");
         set_attack_limbs(({"left hand","right hand"}));
         add_limb("spiked tail","torso",0,0,0);
-        set_nat_weapon_type("slashing");
+        set_base_damage_type("slashing");
       break;
     }
 }
