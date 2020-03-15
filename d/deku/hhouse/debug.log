@@ -1,0 +1,225 @@
+Illegal array size.
+program: daemon/letter.c, object: daemon/letter line 27
+'     postal_cmd' in '      std/obj/post.c' ('   std/obj/post#9352')line 124
+'      read_mail' in '      std/obj/post.c' ('   std/obj/post#9352')line 749
+'         create' in '     daemon/letter.c' ('       daemon/letter')line 27
+Bad argument 1 to present()
+program: cmds/spells/b/_biting_cold.c, object: cmds/spells/b/_biting_cold#12362 line 135
+'      zap_again' in 'cmds/spells/b/_biting_cold.c' ('cmds/spells/b/_biting_cold#12362')line 135
+Error in call out.
+Too deep recursion.
+program: adm/obj/master.c, object: adm/obj/master line 203
+'       use_exit' in '    std/room/exits.c' ('d/islands/common/aramanth/room6')line 294
+'    move_player' in '          std/user.c' ('       std/user#4704')line 838
+'           move' in '        std/living.c' ('       std/user#4704')line 326
+'         ::move' in '        std/Object.c' ('       std/user#4704')line 1211
+'     move::move' in '          std/move.c' ('       std/user#4704')line 93
+'           init' in 'd/islands/common/aramanth/room9.c' ('d/islands/common/aramanth/room9')line 45
+'do_random_encounters' in '          std/room.c' ('d/islands/common/aramanth/room9')line 266
+'           move' in '        std/living.c' ('d/attaya/mon/solstice#18753')line 326
+'         ::move' in '        std/Object.c' ('d/attaya/mon/solstice#18753')line 1211
+'     move::move' in '          std/move.c' ('d/attaya/mon/solstice#18753')line 93
+'           init' in 'd/attaya/mon/solstice.c' ('d/attaya/mon/solstice#18753')line 116
+'       cmd_hook' in '        std/living.c' ('d/attaya/mon/solstice#18753')line 424
+'       cmd_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 527
+'        do_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 34
+'      do_strike' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 382
+'get_stab_damage' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 286
+'          Thaco' in ' std/living/combat.c' ('d/attaya/mon/solstice#18753')line 965
+'       query_ac' in '   std/living/body.c' ('       std/user#4704')line 798
+'query_paralyzed' in ' std/living/combat.c' ('       std/user#4704')line 2296
+'query_unconscious' in '        std/living.c' ('       std/user#4704')line 1336
+'query_condition' in '        std/living.c' ('       std/user#4704')line 1297
+'query_max_stamina' in '        std/living.c' ('       std/user#4704')line 1277
+'    query_skill' in ' std/living/skills.c' ('       std/user#4704')line 270
+'    query_stats' in '        std/living.c' ('       std/user#4704')line 987
+'query_base_stats' in '          std/user.c' ('       std/user#4704')line 4905
+'        age_mod' in '          std/user.c' ('       std/user#4704')line 4930
+'query_real_age_cat' in '          std/user.c' ('       std/user#4704')line 4892
+'    file_exists' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 47
+'     valid_read' in '    adm/obj/master.c' ('      adm/obj/master')line 193
+'   check_access' in '    adm/obj/master.c' ('      adm/obj/master')line 203
+Too deep recursion.
+program: adm/obj/master.c, object: adm/obj/master line 203
+'       use_exit' in '    std/room/exits.c' ('d/islands/common/aramanth/room12')line 294
+'    move_player' in '          std/user.c' ('       std/user#4704')line 838
+'           move' in '        std/living.c' ('       std/user#4704')line 326
+'         ::move' in '        std/Object.c' ('       std/user#4704')line 1211
+'     move::move' in '          std/move.c' ('       std/user#4704')line 93
+'           init' in 'd/islands/common/aramanth/room9.c' ('d/islands/common/aramanth/room9')line 45
+'do_random_encounters' in '          std/room.c' ('d/islands/common/aramanth/room9')line 266
+'           move' in '        std/living.c' ('d/attaya/mon/solstice#147247')line 326
+'         ::move' in '        std/Object.c' ('d/attaya/mon/solstice#147247')line 1211
+'     move::move' in '          std/move.c' ('d/attaya/mon/solstice#147247')line 93
+'           init' in 'd/attaya/mon/solstice.c' ('d/attaya/mon/solstice#147247')line 116
+'       cmd_hook' in '        std/living.c' ('d/attaya/mon/solstice#147247')line 424
+'       cmd_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 527
+'        do_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 34
+'      do_strike' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 382
+'get_stab_damage' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 286
+'          Thaco' in ' std/living/combat.c' ('d/attaya/mon/solstice#147247')line 965
+'       query_ac' in '   std/living/body.c' ('       std/user#4704')line 798
+'query_paralyzed' in ' std/living/combat.c' ('       std/user#4704')line 2296
+'query_unconscious' in '        std/living.c' ('       std/user#4704')line 1336
+'query_condition' in '        std/living.c' ('       std/user#4704')line 1297
+'query_max_stamina' in '        std/living.c' ('       std/user#4704')line 1277
+'    query_skill' in ' std/living/skills.c' ('       std/user#4704')line 270
+'    query_stats' in '        std/living.c' ('       std/user#4704')line 987
+'query_base_stats' in '          std/user.c' ('       std/user#4704')line 4905
+'        age_mod' in '          std/user.c' ('       std/user#4704')line 4930
+'query_real_age_cat' in '          std/user.c' ('       std/user#4704')line 4892
+'    file_exists' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 47
+'     valid_read' in '    adm/obj/master.c' ('      adm/obj/master')line 193
+'   check_access' in '    adm/obj/master.c' ('      adm/obj/master')line 203
+Bad argument 2 to member_array()
+program: cmds/mortal/_study.c, object: cmds/mortal/_study line 410
+'       cmd_hook' in '        std/living.c' ('      std/user#43268')line 424
+'      cmd_study' in 'cmds/mortal/_study.c' ('  cmds/mortal/_study')line 96
+'          do_id' in 'cmds/mortal/_study.c' ('  cmds/mortal/_study')line 410
+Bad argument 1 to environment()
+program: d/magic/obj/pryingeyes.c, object: d/magic/obj/pryingeyes#645816 line 52
+'     heart_beat' in 'd/magic/obj/pryingeyes.c' ('d/magic/obj/pryingeyes#645816')line 52
+Heart beat in d/magic/obj/pryingeyes#645816 turned off.
+Too deep recursion.
+program: adm/obj/simul_efun.c, object: adm/obj/simul_efun line 32
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br70')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br70')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br20')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br20')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br19')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br19')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br69')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br69')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br82')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br82')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br39')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br39')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br52')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br52')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br53')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br53')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br79')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br79')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br6')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br6')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br5')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br5')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br4')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br4')line 63
+'    remove_exit' in '    std/room/exits.c' ('d/deku/hhouse/rooms/br4')line 471
+'     reinitiate' in '          std/room.c' ('d/deku/hhouse/rooms/br4')line 437
+'           move' in '        std/Object.c' ('d/common/obj/armour/leather#837064')line 1211
+'     move::move' in '          std/move.c' ('d/common/obj/armour/leather#837064')line 94
+'      gain_item' in '          std/room.c' ('   d/shadowgate/void')line 127
+'         living' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 32
+Error in call out.
+Too deep recursion.
+program: adm/obj/simul_efun.c, object: adm/obj/simul_efun line 32
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br67')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br67')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br17')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br17')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br16')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br16')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br15')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br15')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br14')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br14')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br13')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br13')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br12')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br12')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br11')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br11')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br61')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br61')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br62')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br62')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br63')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/br63')line 114
+'check_adjustment' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/brr1')line 163
+'    adjust_room' in 'd/deku/hhouse/inherits/basement.c' ('d/deku/hhouse/rooms/brr1')line 63
+'    remove_exit' in '    std/room/exits.c' ('d/deku/hhouse/rooms/brr1')line 471
+'     reinitiate' in '          std/room.c' ('d/deku/hhouse/rooms/brr1')line 437
+'           move' in '        std/living.c' ('d/deku/hhouse/mon/tomb_spirit#831041')line 326
+'         ::move' in '        std/Object.c' ('d/deku/hhouse/mon/tomb_spirit#831041')line 1211
+'     move::move' in '          std/move.c' ('d/deku/hhouse/mon/tomb_spirit#831041')line 82
+'         living' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 32
+Error in call out.
+Bad argument 1 to call_other()
+program: cmds/spells/g/_gate.c, object: cmds/spells/g/_gate#953730 line 363
+'    dest_effect' in 'cmds/spells/g/_gate.c' ('cmds/spells/g/_gate#953730')line 363
+Error in call out.
+Bad argument 1 to call_other()
+program: cmds/spells/g/_gate.c, object: cmds/spells/g/_gate#953730 line 363
+'       cmd_hook' in '        std/living.c' ('     std/user#751692')line 424
+'    cmd_dispell' in 'cmds/mortal/_dispell.c' ('cmds/mortal/_dispell')line 59
+'    dest_effect' in 'cmds/spells/g/_gate.c' ('cmds/spells/g/_gate#953730')line 363
+Bad argument 1 to call_other()
+program: cmds/spells/g/_gate.c, object: cmds/spells/g/_gate#953730 line 363
+'       cmd_hook' in '        std/living.c' ('     std/user#751692')line 424
+'    cmd_dispell' in 'cmds/mortal/_dispell.c' ('cmds/mortal/_dispell')line 59
+'    dest_effect' in 'cmds/spells/g/_gate.c' ('cmds/spells/g/_gate#953730')line 363
+Too deep recursion.
+program: adm/obj/simul_efun.c, object: adm/obj/simul_efun line 74
+'       use_exit' in '    std/room/exits.c' ('d/attaya/jungle/jun51')line 294
+'    move_player' in '          std/user.c' ('     std/user#751692')line 838
+'           move' in '        std/living.c' ('     std/user#751692')line 326
+'         ::move' in '        std/Object.c' ('     std/user#751692')line 1211
+'     move::move' in '          std/move.c' ('     std/user#751692')line 93
+'           init' in 'd/attaya/mon/solstice.c' ('d/attaya/mon/solstice#998088')line 116
+'       cmd_hook' in '        std/living.c' ('d/attaya/mon/solstice#998088')line 424
+'       cmd_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 527
+'        do_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 38
+'continue_attack' in '        std/living.c' ('     std/user#751692')line 1266
+'::continue_attack' in ' std/living/combat.c' ('     std/user#751692')line 644
+'            die' in '          std/user.c' ('     std/user#751692')line 2104
+'break_all_spells' in '          std/user.c' ('     std/user#751692')line 1116
+'    dest_effect' in 'd/avatars/nienne/spells/_alter_self_feyri.c' ('d/avatars/nienne/spells/_alter_self_feyri#752601')line 44
+'  reverse_shape' in 'std/races/shapeshifted_races/spell_alter_self.c' ('std/races/shapeshifted_races/spell_alter_self_feyriplot#752914')line 80
+'restore_profile_settings' in 'daemon/description_d.c' ('daemon/description_d#998424')line 223
+' set_message_in' in 'daemon/description_d.c' ('daemon/description_d#998424')line 145
+'       force_me' in '        std/living.c' ('     std/user#751692')line 503
+'       cmd_hook' in '        std/living.c' ('     std/user#751692')line 370
+'query_paralyzed' in ' std/living/combat.c' ('     std/user#751692')line 2296
+'query_unconscious' in '        std/living.c' ('     std/user#751692')line 1336
+'query_condition' in '        std/living.c' ('     std/user#751692')line 1297
+'query_max_stamina' in '        std/living.c' ('     std/user#751692')line 1277
+'    query_skill' in ' std/living/skills.c' ('     std/user#751692')line 270
+'    query_stats' in '        std/living.c' ('     std/user#751692')line 987
+'query_base_stats' in '          std/user.c' ('     std/user#751692')line 4905
+'        age_mod' in '          std/user.c' ('     std/user#751692')line 4930
+'query_real_age_cat' in '          std/user.c' ('     std/user#751692')line 4889
+'     query_race' in '        std/living.c' ('     std/user#751692')line 110
+'        avatarp' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 74
+Bad argument 1 to call_other()
+program: cmds/spells/g/_gate.c, object: cmds/spells/g/_gate#953730 line 358
+'        no_quit' in 'd/laerad/parnelli/asgard/as43.c' ('d/laerad/parnelli/asgard/as43')line 38
+'       force_me' in '        std/living.c' ('     std/user#751692')line 503
+'     quit_start' in '          std/user.c' ('     std/user#751692')line 774
+'           quit' in '          std/user.c' ('     std/user#751692')line 1004
+'break_all_spells' in '          std/user.c' ('     std/user#751692')line 1116
+'    dest_effect' in 'cmds/spells/g/_gate.c' ('cmds/spells/g/_gate#953730')line 358
+Bad argument 1 to present()
+program: d/islands/argentrock/obj/vortex.c, object: d/islands/argentrock/obj/vortex#1058825 line 76
+'     heart_beat' in 'd/islands/argentrock/obj/vortex.c' ('d/islands/argentrock/obj/vortex#1058825')line 76
+Heart beat in d/islands/argentrock/obj/vortex#1058825 turned off.
+Bad argument 1 to present()
+program: d/islands/argentrock/obj/vortex.c, object: d/islands/argentrock/obj/vortex#1058825 line 32
+'     heart_beat' in 'd/islands/argentrock/mon/batlin.c' ('d/islands/argentrock/mon/batlin#1053208')line 100
+'   ::heart_beat' in '       std/monster.c' ('d/islands/argentrock/mon/batlin#1053208')line 365
+'continue_attack' in '        std/living.c' ('d/islands/argentrock/mon/batlin#1053208')line 1266
+'::continue_attack' in ' std/living/combat.c' ('d/islands/argentrock/mon/batlin#1053208')line 644
+'            die' in 'd/islands/argentrock/mon/batlin.c' ('d/islands/argentrock/mon/batlin#1053208')line 372
+'          reset' in 'd/islands/argentrock/rooms/arghouse11.c' ('d/islands/argentrock/rooms/arghouse11')line 138
+'       add_exit' in '    std/room/exits.c' ('d/islands/argentrock/rooms/arghouse11')line 464
+'     reinitiate' in '          std/room.c' ('d/islands/argentrock/rooms/arghouse11')line 438
+'           move' in '        std/living.c' ('d/islands/argentrock/mon/batlin#1053208')line 326
+'         ::move' in '        std/Object.c' ('d/islands/argentrock/mon/batlin#1053208')line 1211
+'     move::move' in '          std/move.c' ('d/islands/argentrock/mon/batlin#1053208')line 93
+'           init' in 'd/islands/argentrock/obj/vortex.c' ('d/islands/argentrock/obj/vortex#1058825')line 32
+Heart beat in d/islands/argentrock/mon/batlin#1053208 turned off.
+ERROR: (s)printf(): %s in arg %u
+program: adm/obj/simul_efun.c, object: adm/obj/simul_efun line 15
+d/shadow/room/city/wroad6, what is /d/npc/cutter
+monster_d error in check_for_place ob->move(room):  "*Bad argument 1 to call_other()\n" room was: /d/darkwood/tabor/room/math2, what is /d/darkwood/tabor/mon/alizaire

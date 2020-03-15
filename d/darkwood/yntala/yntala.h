@@ -1,0 +1,6 @@
+#include "/d/common/common.h"
+#define OBJD "/d/darkwood/yntala/obj/"
+#define TMONDIR "/d/darkwood/yntala/mon/"
+#define LGSW "/d/common/obj/weapon/"
+#define INRMS "/d/darkwood/yntala/rooms/"
+#define IHRMS "/d/darkwood/yntala/"

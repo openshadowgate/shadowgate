@@ -1,0 +1,1 @@
+inherit "/d/common/inherit/wood_storage.c";

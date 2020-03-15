@@ -1,0 +1,163 @@
+/* Coded by Lujke December 2006
+This inheritable is intended to make it easier & quicker for coders (mostly me)to create mobs that respond to players' speech.
+
+To use it, just have your monster inherit this file instead of MONSTER, and include specifications for any responses that you want to have it use in the create() function for your file.
+*****************
+**  SAMPLE create function: void create(){
+**  ::create();
+**  set_response("goodbye", ({"Farewell")}); // This will simply have the
+**                                          // mob say "Farewell" whenever
+**                                         // someone says "goodbye"
+**
+**  set_response("hello", ({"and hello to you too", 
+**                       "How are you doing today?" }), "greet_func",
+**                      ({ "Ruldizar's Request", "Friend of the Stone" }));
+**
+**  //This second set_response will have the mob say "and hello to you too",
+**  //followed by "How are you doing today?", after a short pause. It will 
+**  //also set off a call_out for the function greet_func(), which would
+**  // need to be defined.
+**  //However, because this trigger also has a series of dependencies
+**  // specified, the mob would only respond to the "hello" trigger if the 
+**  // speaker has completed mini quests or quests going by the names 
+**  // "Ruldizar's Request" and "Friend of the Stone"
+** }
+
+NB You can only set a dependency using the set_response function if you are also setting a function for that trigger at the same time. If you want to set a dependency, but not a function, leave both out of the set_response, then do a separate call to 
+  set_dependency("trigger", ({"dependency1", "dependency2", etc }) )
+
+*/
+
+#include <std.h>
+inherit MONSTER;
+
+mapping responses;
+mapping dependencies;
+mapping functions;
+
+int check_dependency(string trigger, object speaker);
+
+void create(){
+  ::create();
+  responses = ([ ]);
+  dependencies = ([]);
+  functions = ([]);
+
+}
+
+varargs int set_response(string trig, string * resp, string func,
+                                                       string * depend){
+  if (sizeof(resp)<1){
+    return -1;
+  }
+  responses[trig] = resp;
+  if (stringp(func)){
+    functions[trig] = func;
+  } else return 1;
+  if (sizeof(depend)>0){
+    dependencies[trig] = depend;
+  }
+  return 1;
+}
+
+int set_function(string trig, string func){
+  functions[trig] = func;
+}
+
+int set_dependency(string trigger, string dependency){
+  dependencies[trigger] = dependency;
+}
+
+string * query_response(string trigger){
+  return responses[trigger];
+}
+
+mapping query_responses(){
+  return responses;
+}
+
+mapping query_dependencies(){
+  return dependencies;
+}
+
+mapping query_functions(){
+  return functions;
+}
+
+string * query_dependency(string trigger){
+  return dependencies[trigger];
+}
+
+string query_function(string trigger){
+  return functions[trigger];
+}
+
+void catch_say(string msg){
+   call_out("reply_func",1,msg,TP);
+}
+
+respond(string trigger, int count){
+  string * response;
+  response = responses[trigger];
+  force_me("say " + response[count]);
+  count ++;
+  if (count<sizeof(response)){
+    call_out("respond", 2, trigger, count);
+  }
+}
+
+void reply_func(string msg, object speaker){
+
+  string * triggers, trigger, func, * response, resp;
+  object room;
+  int i;
+  if (!interactive(speaker)){
+    return;
+  }
+  room = ETO;
+  if (!objectp(ETO)){
+    force_me("emote looks disturbed by " + TO->QP + " surroundings, which"
+            +" may well be broken");
+  }
+  if (!objectp(speaker)||!present(speaker, room)){
+    return;
+  }
+  triggers = keys(responses);
+  if (sizeof(triggers)<1){ return; }
+  for (i=0;i<sizeof(triggers);i++){
+    trigger = triggers[i];
+    response = ({});
+    if (responses[trigger]){
+      response += responses[trigger];
+    }
+    resp = response[0];
+    if (interact(trigger, msg)){
+      if (check_dependency(trigger, speaker)==-1){
+        return;
+      }
+      func = functions[trigger];
+      if (stringp(func)){
+        call_out(func, 1, speaker);
+      }
+      respond(trigger,0);
+      return;
+    }
+  }
+}
+
+int check_dependency(string trigger, object speaker){
+  int i;
+  string * dep = dependencies[trigger], dependency, * quests;
+  if (sizeof(dep)<1){
+    return 1;
+  }
+  quests = speaker->query_mini_quests();
+  for (i=0;i<sizeof(dep);i++){
+    dependency = dep[i];
+    if (member_array(dependency, quests, 1)<0){
+      force_me("say I have nothing to say to you about that for now");
+      return -1;
+    }
+  }
+  return 1;
+}

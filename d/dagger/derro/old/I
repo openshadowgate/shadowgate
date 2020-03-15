@@ -1,0 +1,130 @@
+#include <std.h>
+#include "../derrodefs.h"
+
+  object ob;
+  int dam;
+inherit ROOM;
+
+void create(){
+  ::create();
+  set_property("no teleport",1);
+  set_property("light",2);
+  set_property("indoors",1);
+  set_name("trapped room");
+  set_short(
+  "%^RED%^Great hallway%^RESET%^"
+  );
+  set_long(
+  "%^RED%^Great hallway%^RESET%^\n"
+  "  This end of the hallway doesnt seem as well traveled as the other corridors that you've been going through."
+  "  The walls here are the same as those just to the east."
+  "  The same globes adorn the ceiling however bathing the room in the same red glow as everywhere else."
+  "  The floor here seems clean of dust"
+  );
+  set_search("default","You search around and find a pressure plate in the floor.");
+  set_search("floor","You search around and find a pressure plate in the floor.");
+  set_search("walls","A long near invisible metal cord run between the walls.");
+  set_smell("default",
+  "You smell fresh blood."
+  );
+  set_listen("default",
+  "You can hear nothing but the occasional chirp of a rat somewhere in the distance"
+  );
+  set_items(([
+  "floor":"The floor is stained with fresh blood on the ground to the east but to the west seems clear of all dust.",
+  (({"pressure plate","plate"})):"A large section of stone about 25 feet across and stretching to both walls.   Maybe you could trigger it by throwing something heavy at it?",
+  "slit":"As you go to look closer you notice a thin metal cord stretched across the passage way that leads into the slit in the wall.",
+  (({"cord","thin metal cord","metal cord"})):"A metal cord that stretches across the passageway leading to a slit in the wall.  Looks like you could probably crawl under it.",
+  "walls":"The walls here look like they've been refinished instead of being just carved from the bedrock.  There is a slit in the wall were the joints of the blocks dont look properly sealed.",
+
+  "globes":"These magic globes are set in the ceiling far from the ground and seem enchanted to emit a dim red glow.",
+  "ceiling":"Damn near 25 feet at the peak from the floor almost making it seem as if you're not actually far underground.  There is a red globe mounted in the center of the ceiling."
+  ]));
+  set_exits(([
+  "east":ROOMS"c3.c",
+  "west":ROOMS"c35.c",
+  ]));
+  set_trap_functions(({"east"}),({"scythe_him"}),({"east"}));
+  set_trap_functions(({"west"}),({"fall_him"}),({"west"}));
+}
+int scythe_him(){
+  write("As you walk west you bump a thin wire mounted at waist level.");
+  say(""+TPQCN+" stumbles into something as "+TP->query_subjective()+" walks west!");
+  toggle_trap("east");
+  call_out("scythe",1,TP);
+  return 1;
+}
+void reset(){
+  ::reset();
+  if(!trapped("east")) toggle_trap("east");
+  if(!trapped("west")) toggle_trap("east");
+}
+void scythe(object targ){
+  object ob;
+  if(objectp(targ)){
+    if(present(targ->query_name())){
+  write("%^BOLD%^You hear a click in the wall.");
+  write("%^BOLD%^Before you can react a spring loaded blade scythes from the wall at you!");
+   write("%^BOLD%^It appears that on a giant 18 feet tall it would be aimed at his legs but for you its aimed at your neck!");
+  write("%^BOLD%^The massive blade slashes into you!");
+  say("You hear a click.");
+  say("Before "+TPQCN+" can react a massive blade springs out of the wall and slashes into "+TP->query_possessive()+" neck!");
+  dam=random(100)+10;
+  set_name("scythe trap");
+  TP->do_damage("torso",dam);
+  TP->add_attacker(TO);
+  TP->continue_attack();
+  return 1;
+  }
+}
+}
+void init(){
+  ::init();
+  add_action("crawl","crawl");
+  add_action("throw","throw");
+}
+int crawl(string str){
+  write("You get down on your hands and knees and crawl across the passageway to the east.");
+  say(""+TPQCN+"  gets down on thier knees and crawls off to the east.");
+  TP->move_player(ROOMS"c3.c");
+  return 1;
+}
+int throw(string str){
+  if(!str)return notify_fail("\nThrow what?\n");
+  if((str=="stone at pressure plate")||(str=="stone at plate")||(str=="large stone at plate")||(str =="large stone at pressure plate")){
+  if(!present("stone",TP))return notify_fail("\nYou dont have that!\n");
+  ob=(present("stone",TP));
+  ob->remove();
+  toggle_trap("west");
+  add_exit(ROOMS"c38.c","down");
+  say(""+TPQCN+" throws a large stone at the pressure plate and the whole floor suddenly shudders and falls open into a pit blocking the west!");
+  write("The stone lands on the pressure plate and suddenly the floor gives way to the west and opens into a deep pit!");
+  set_long("%^RED%^Great hallway%^RESET%^\n"
+  "  This end of the hallway doesnt seem traveled as the other corridors that you've been going through."
+  "  The walls here are the same as those just to the east.   The floor to the west had given way leading down into a deep pit, with a thin ledge around its edge giving access to the west exit."
+  );
+  return 1;
+}
+  if(str=="stone")return notify_fail("\nThrow stone at what?\n");
+  if((str !="powder")||(str !="javalin")||(str !="dart"))return notify_fail("\nDont think that would work.\n");
+  return 1;
+}
+int fall_him(object targ){
+  toggle_trap("west");
+  set_long("%^RED%^Great hallway%^RESET%^\n"
+  "  This end of the hallway doesnt seem traveled as the other corridors that you've been going through."
+  "  The walls here are the same as those just to the east.   The floor to the west had given way leading down into a deep pit, with a thin ledge around its edge giving access to the west exit."
+  );
+  write("As you try to walk west you step on a plate that grates under your feet.");
+  write("The floor suddenly shifts under your weight!");
+  say("As "+TPQCN+" walks west the floor suddenly shifts under them!");
+  say(""+TPQCN+" disapears from sight as a pit opens up!");
+  write("A pit opens beneath you and you fall into the darkness!");
+  TP->move_player(ROOMS"c38.c");
+  set_name("Pit trap");
+  TP->do_damage("torso",random(100)+10);
+  add_exit(ROOMS"c38.c","down");
+  TP->add_attacker(TO);
+TP->continue_attack();
+  return 1;
+}

@@ -1,0 +1,82 @@
+//updated by Circe with new desc, lore, etc 6/13/04
+#include <std.h>
+inherit "/d/common/obj/weapon/hhlance";
+//inherit "std/weapon";
+
+void create() {
+    ::create();
+    set_name("lance of darkness");
+    set_id(({"lance","darkness","lance of darkness"}));
+    set_obvious_short("%^BOLD%^%^BLACK%^heavy darksteel lance%^RESET%^");
+    set_short("%^BLUE%^Lance of Darkness%^RESET%^");
+    set_long(
+       "%^BOLD%^%^BLACK%^Fashioned of light-weight %^RESET%^"+
+       "darksteel%^BOLD%^%^BLACK%^, this exquisite lance has "+
+       "been carved with images of dark %^RESET%^%^BLUE%^"+
+       "storm clouds %^BOLD%^%^BLACK%^that seem to roll across "+
+       "the surface of the lance as if enchanted.  Near the "+
+       "tip of the lance, %^YELLOW%^lightning %^BLACK%^appears "+
+       "under the surface, flashing and striking against "+
+       "the jagged %^WHITE%^mithril tip%^BLACK%^.  The lance is "+
+       "couched in a black wooden handle ringed with cabochon-cut "+
+       "jet that glit%^WHITE%^t%^BLACK%^ers and seems to suck "+
+       "in the light around it.%^RESET%^"
+    );
+    set_lore("The original Lance of Darkness was made from a "+
+       "Lightning Lance corrupted at the hands of a cabal "+
+       "of evil clerics.  Since then, they have perfected their "+
+       "own version, this being a prime specimen.  The Lance "+
+       "of Darkness requires a triumvirate of evil clerics to "+
+       "create.  The method is shared between all of them, though "+
+       "each faith has only bits and pieces, as none of them "+
+       "fully trusts another.  It is said that when complete, "+
+       "this lance can channel the malice of a deity.");
+//    set_weight(15);
+    set_value(1500);
+//    set_wc(1,12);
+//    set_large_wc(1,21);
+//    set_size(1);
+    set_property("enchantment",3);
+//    set_type("piercing");
+//    set_prof_type("lance");
+//    set_property("lance",1);
+    set_wield((:TP,"wield":));
+    set_unwield((:TO,"removeme":));
+    set_hit((:TO,"check":));
+}
+
+int wield(){
+   if((int)TP->query_alignment()%3 != 1){
+      tell_room(ETP,"%^RED%^A Thunderous cackle fills the room.");
+      ETO->set_property("evil item",1);
+      return 1;
+   }
+   write("You are thoroughly rejected by this item.");
+   return 0;
+
+}
+
+int removeme()
+{
+   ETO->set_property("evil item",-1);
+   return 1;
+}
+
+int check(object targ){
+   ::check(targ);
+   if(!objectp(ETO)) return 0;
+   if(!objectp(targ)) return 0;
+   if(!random(15)){
+
+      tell_room(environment(targ),"%^BLUE%^"+capitalize(ETO->query_diety())+" calls forth a dark bolt of power.");
+      return random(7);
+   }
+   return 0;
+}
+
+
+int query_size(){
+  if(objectp(ETO)&&living(ETO))
+    return (int)ETO->query_size()  ;
+  return ::query_size();
+}

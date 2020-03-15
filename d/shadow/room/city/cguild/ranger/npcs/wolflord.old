@@ -1,0 +1,80 @@
+#include "/d/shadow/room/city/cguild/ranger/ranger.h"
+inherit "/std/vendor";
+
+void create() {
+   ::create();
+   set_name("Wolf Lord");
+   set_id(({ "clerk","ranger","wolf","wolf lord","shop keeper","grackil"}) );
+   set_short("Grackil the Wolf Lord, Keeper of the Ranger's Equipment Shop");
+   set("aggressive", 0);
+   set_class("ranger");
+   set_guild_level("ranger",25);
+   set_long(
+@TERRATO
+     This being looks like a man size wolf that stands erect.  His face is
+  noble and he seem to have seen a great deal.  Now though, he merely tends
+this shop as a favor to all of the Rangers who will come after him.
+
+<help shop> will give you a list of shop commands.
+TERRATO
+  );
+   set_languages( ({ "common" }) );
+   set_gender("male");
+   set_alignment(1);
+   set_race("wolf-man");
+   add_money("gold",1);
+   set_body_type("human");
+   set_storage_room(RROOM+"storage.c");
+   set_hd(19,10);
+   set_items_allowed("all");
+   set_max_hp(query_hp());
+   set_max_sp(query_hp());
+   set_sp(query_max_sp());
+   // Kelemvor thought the wolflord didn't need the below db's.
+   // miscvendors, armors, weapons, vendor, std, and armorsrandom
+/*
+   remove_std_db();
+   remove_dbs("/d/db/miscvendors");
+   remove_dbs("/d/db/armors");
+   remove_dbs("/d/db/weapons");
+   remove_dbs("/d/db/vendor");
+   remove_random_act_dbs("/d/db/armorsrandom");
+   remove_dbs( ({"/d/db/miscvendors", "/d/db/armors", "/d/db/weapons", "/d/db/vendor"}) );
+   remove_random_act_dbs( ({"/d/db/armorsrandom"}) );
+*/
+}
+int __List(string str){
+    if(TP->is_class("ranger") || avatarp(TP)) return ::__List(str);
+    else {
+      tell_object(TP, "Rangers only!");
+      return 1;
+    }
+}
+__Buy(str){
+    if(TP->is_class("ranger") || avatarp(TP)) return ::__Buy(str);
+    else {
+      tell_object(TP, "Rangers only!");
+      return 1;
+    }
+}
+__Sell(str){
+    if(TP->is_class("ranger") || avatarp(TP)) return ::__Sell(str);
+    else {
+      tell_object(TP, "Rangers only!");
+      return 1;
+    }
+}
+__Show(str){
+    if(TP->is_class("ranger") || avatarp(TP)) return ::__Show(str);
+    else {
+      tell_object(TP, "Rangers only!");
+      return 1;
+    }
+}
+__Value(str){
+    if(TP->is_class("ranger") || avatarp(TP)) return ::__Value(str);
+    else {
+      tell_object(TP, "Rangers only!");
+      return 1;
+    }
+}

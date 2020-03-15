@@ -1,0 +1,38 @@
+%^BOLD%^%^RED%^                                |
+%^BOLD%^%^RED%^                                | %^YELLOW%^E
+%^BOLD%^%^RED%^-----------------------------------------------------------------
+%^BOLD%^%^RED%^|%^YELLOW%^ 1      2                    3 %^RED%^|%^YELLOW%^ 10     11     TH    12     13 %^RED%^|
+%^BOLD%^%^RED%^|                               |                               |
+%^BOLD%^%^RED%^| %^YELLOW%^4                           5 %^RED%^| %^YELLOW%^14                            %^RED%^|
+%^BOLD%^%^RED%^|                               |                               |
+%^BOLD%^%^RED%^|%^YELLOW%^ 6      7      8      9      M %^RED%^| %^YELLOW%^M      15     16    17     18 %^RED%^|
+%^BOLD%^%^RED%^|-------------------------------%^YELLOW%^@%^RED%^-------------------------------|
+%^BOLD%^%^RED%^|%^YELLOW%^ 19     20     21     22     M %^RED%^|%^YELLOW%^ M             27    28     29 %^RED%^|
+%^BOLD%^%^RED%^|                               |                               |
+%^BOLD%^%^RED%^|%^YELLOW%^ 23                           %^RED%^ |%^YELLOW%^ 30                            %^RED%^|
+%^BOLD%^%^RED%^|                               |                               |
+%^BOLD%^%^RED%^|%^YELLOW%^ 24                   25%^RED%^----%^YELLOW%^26%^RED%^ | %^YELLOW%^31                         32 %^RED%^|
+%^BOLD%^%^RED%^|------------                   |                               |
+%^BOLD%^%^RED%^            |                   | %^YELLOW%^33     34     35           36 %^RED%^|
+%^BOLD%^%^RED%^            --------------------|-------------------------------|
+%^BOLD%^%^RED%^                                |
+%^YELLOW%^                           Beach Access
+
+%^BOLD%^%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-%^YELLOW%^*%^RED%^-
+
+                   %^BOLD%^%^RED%^-%^YELLOW%^*%^RED%^- %^YELLOW%^Map of Seneca %^RED%^- %^YELLOW%^Legend %^RED%^-%^YELLOW%^*%^RED%^-%^RESET%^
+
+%^BOLD%^%^RED%^TH %^YELLOW%^: %^RED%^ Town Hall
+ %^BOLD%^%^RED%^E %^YELLOW%^:  %^RED%^Entrance          11 %^YELLOW%^: %^RED%^ Seneca MS     24 %^YELLOW%^: %^RED%^ Psion Enclave
+ %^BOLD%^%^RED%^@ %^YELLOW%^: %^RED%^ Town Square       12 %^YELLOW%^: %^RED%^ Jail          25 %^YELLOW%^: %^RED%^ Gazebo
+%^BOLD%^%^RED%^ M %^YELLOW%^: %^RED%^ Monuments         13 %^YELLOW%^: %^RED%^ Barracks      26 %^YELLOW%^: %^RED%^ Cathedral Yard
+%^BOLD%^%^RED%^ 1 %^YELLOW%^: %^RED%^ Tailor            14 %^YELLOW%^: %^RED%^ Souvenirs     27 %^YELLOW%^: %^RED%^ Coliseum
+%^BOLD%^%^RED%^ 2 %^YELLOW%^: %^RED%^ Bank              15 %^YELLOW%^: %^RED%^ Tailor        28 %^YELLOW%^: %^RED%^ Tattoos/Barber Shop
+%^BOLD%^%^RED%^ 3 %^YELLOW%^: %^RED%^ Tropical Breeze   16 %^YELLOW%^: %^RED%^ Weaponsmith   29 %^YELLOW%^: %^RED%^ Bar
+%^BOLD%^%^RED%^ 4 %^YELLOW%^: %^RED%^ Amphitheatre      17 %^YELLOW%^: %^RED%^ Forge         30 %^YELLOW%^: %^RED%^ Trading Post
+%^BOLD%^%^RED%^ 5 %^YELLOW%^: %^RED%^ Stable            18 %^YELLOW%^: %^RED%^ Armory        31 %^YELLOW%^: %^RED%^ Healer
+%^BOLD%^%^RED%^ 6 %^YELLOW%^: %^RED%^ Bard Academy      19 %^YELLOW%^: %^RED%^ Restaurant    32 %^YELLOW%^: %^RED%^ Hall of Legends
+%^BOLD%^%^RED%^ 7 %^YELLOW%^: %^RED%^ Costumes          20 %^YELLOW%^: %^RED%^ Open Log      33 %^YELLOW%^: %^RED%^ Herb shop
+%^BOLD%^%^RED%^ 8 %^YELLOW%^: %^RED%^ Library           21 %^YELLOW%^: %^RED%^ Park          34 %^YELLOW%^: %^RED%^ Orphanage
+%^BOLD%^%^RED%^ 9 %^YELLOW%^: %^RED%^ Mage Tower        22 %^YELLOW%^: %^RED%^ Toy store     35 %^YELLOW%^: %^RED%^ Jousting Grounds
+%^BOLD%^%^RED%^10 %^YELLOW%^: %^RED%^ Scribe            23 %^YELLOW%^: %^RED%^ Portal        36 %^YELLOW%^:  %^RED%^Exotic Animals%^RESET%^

@@ -1,0 +1,27 @@
+int xsteal(string str)
+{
+  object ob;
+
+  if(flag) return 0;
+  if(!str) return 0;
+  if(member_array(str, query_id()) != -1) {
+    write(
+@RAD
+Ellgarsh exclaims:  Is there no honor among thieves?  I guess
+not!  Oh well.  I assume you want my dagger, everyone else does.  
+So here, take it...
+
+%^BOLD%^...IN THE BACK!!!%^RESET%^
+
+RAD
+  );
+    ob=new("/realms/grazzt/assassins/dagger");
+    ob->move(TO);
+    TO->force_me("wield dagger");
+    flag = 1;
+    force_me("stab "+TPQN);
+    return 1;
+  }
+return 0;
+}
+

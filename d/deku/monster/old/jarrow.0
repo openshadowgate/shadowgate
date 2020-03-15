@@ -1,0 +1,157 @@
+inherit "/std/monster";
+int builder;
+object player;
+
+void create() {
+    ::create();
+        set_name("wizard");
+	set_id( ({ "wizard","drow","jarrow" }) );
+	set("race", "elf");
+	set_gender("male");
+        set_level(19);
+        set_short("Jarrow, the drow wizard");
+         set_long("He looks like an old and wise wizard.  Maybe you should \n"+
+                  "listen to him.  Or myabe you can talk to him.\n");
+	set_body_type("elf");
+	set_class("mage");
+  	set("aggressive", 0);
+  	set_alignment(9);
+  	set_size(2);
+   	set_stats("intelligence",18);
+   	set_stats("wisdom",18);
+   	set_stats("strength",18);
+   	set_stats("charisma",18);
+   	set_stats("dexterity",18);
+   	set_stats("constitution",18);
+   	set_max_mp(500);
+        set_exp(3000);
+   	set_mp(query_max_mp());
+        set_hd(19,5);
+	set_max_hp(query_hp());
+	set_max_sp(query_hp());
+	set_sp(query_max_sp());
+	add_money("electrum",random(10));
+	add_money("silver",random(10));
+	add_money("gold",random(5));
+	add_money("copper",random(20));
+}
+void init(){
+    ::init();
+	add_action("startit","talk");
+        add_action("listenit","listen");
+
+}
+
+void reply_back(string str) {
+  tell_room(environment(this_object()),"%^MAGENTA%^The drow wizard says:%^RESET%^ "+str,this_object());
+}
+
+void reply_back1(string str) {
+  tell_room(environment(this_object()),"%^MAGENTA%^The drow wizard sighs, but continues: %^RESET%^"+str,this_object());
+}
+
+void reply_back2(string str) {
+  tell_room(environment(this_object()),"%^MAGENTA%^The old wizard takes a puff on his pipe and continues: %^RESET%^"+str,this_object());
+}
+
+void reply_back3(string str) {
+  tell_room(environment(this_object()),""+str,this_object());
+}
+
+
+int listenit(string str) {
+  string tem;
+  player = this_player();
+  if(!str) return notify_fail("Listen to whom?\n");
+  if(!sscanf(str, "to %s", tem)) return notify_fail("You can't listen to that!\n");
+  if(tem != "jarrow") return notify_fail("The "+tem+" in not present!\n");
+  call_out("reply_back",2,"\n"+
+    "Well it started along time ago, the realm as you know it, "+this_player()->query_cap_name()+"\n"+
+    "was much smaller, and we drow once adventure upon the surface world.\n"+    "You know that we are a chaotic race.  Well there was once a old wizard\n"+
+    "who wanted to kill his matron mother, so he created this great magical\n"+
+    "weapon,  the stones of Deku'-arkenazzen.  These stones are very\n"+
+    "powerful, and a fine weapon indeed.\n");
+  call_out("reply_back1",12,"\n");
+  call_out("reply_back3",13,""+
+    "  Well many years ago, this stones were taken from our home, and thus\n"+
+    "the purpose why I'm here.  I need to recover these stones, to study \n"+
+    "them.  What I do know is thus:  You my good "+this_player()->query_race()+", must find and\n"+
+    "retrieve three stones and return back to me.  These stones are very \n"+
+    "important in keeping the balance between good and evil in our world \n"+
+    "known as Shadowgate.\n");
+  call_out("reply_back2",16,"\n");
+  call_out("reply_back3",17,""+
+    "  What i can tell you about the stones is this.  The first stone, a \n"+
+    "black stone, represents death.  The second stone, a purple stone, \n"+
+    "represents pain.  The final and most important, a red stone, represents\n"+
+    "hate.  Come back after you have gathered these three stones and talk\n"+
+    "to me.  The world of ShadowGate rests upon your shoulders.\n\n");
+  return 1;
+}
+
+int startit(string str){
+     string temp;
+        player = this_player();
+	if(!str) return notify_fail("Talk to who?\n");
+	if(!sscanf(str,"to %s",temp))
+		return notify_fail("You can't talk to that!\n");
+	if(temp != "jarrow") return notify_fail("The "+temp+" is not here!\n");
+	builder = 1;
+	return 1;
+
+}
+
+void start_heart() {
+	set_heart_beat(1);
+}
+
+void heart_beat() {
+    object obj, obj2, obj3;
+      if (builder) {
+	builder++; 
+	if (builder == 2) 
+          say("%^MAGENTA%^Jarrow says:%^RESET%^ Well, good day "+player->query_race()+".");
+	if (builder == 3) 
+		say("%^MAGENTA%^Jarrow says:%^RESET%^ It's good to see there are still those who can find me!.\n");
+	if (builder == 4) {
+		say("%^MAGENTA%^Jarrow says:%^RESET%^ Do you have the stones for me?\n");
+                if(!(obj = present("red stone",player))) {
+			builder = 0;
+			say("%^MAGENTA%^Jarrow says:%^RESET%^ You don't have the red stone!!!");
+			return 1;
+		}
+                if(!(obj2 = present("black stone",player))) {
+                        builder = 0;
+                        say("%^MAGENTA%^Jarrow says:%^RESET%^ You don't have the black stone!!!");
+                        return 1;
+                }
+                if(!(obj3 = present("purple stone",player))) {
+                        builder = 0;
+                        say("%^MAGENTA%^Jarrow says:%^RESET%^ You don't have the purple stone!!!");
+                        return 1;
+                }
+		obj->remove();
+                obj2->remove();
+                obj3->remove();
+		say("%^MAGENTA%^Jarrow says:%^RESET%^ Aah, yes you do have the stones!\n");
+		write("Jarrow takes the stones from you.\n");
+	}
+	if (builder == 5) 
+		say("%^MAGENTA%^Jarrow says:%^RESET%^ Many thanks for bringing this to me.\n");
+	if (builder == 6) 
+		say("%^MAGENTA%^Jarrow says:%^RESET%^ As a reward, I shall give you something.\n");
+	if(builder == 7)
+                say("%^MAGENTA%^Jarrow says:%^RESET%^ Here, take these stones, as a reward!\n");
+	if(builder == 8){
+                obj = new("/d/deku/weapons/Deku");
+		obj->move(player);
+		player->set_quest("stone quest");
+	}
+	if(builder == 9)
+                say("%^MAGENTA%^Jarrow says:%^RESET%^ You can wield the stone, they are a fine weapon.\n");
+	if(builder == 10)
+    		builder = 0;
+
+    }
+    return 1;
+}

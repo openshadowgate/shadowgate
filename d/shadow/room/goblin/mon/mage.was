@@ -1,0 +1,109 @@
+#include <std.h>
+#include "/d/shadow/room/goblin/short.h"
+inherit "/std/monster";
+int xx;
+create() {
+    object ob;
+    ::create();
+    set_name("sorceror");
+    set("id", ({ "goblin","sorceror","goblin sorceror" }));
+    set("short", "Goblin sorceror");
+    set("aggressive", 5);
+    set_hd(8,4);
+    set("long", "The Goblin before you is the sorceror of the "
+	"Goblin Army of Shadow. He practises the black arts and is "
+	"feared by all the Goblins of the Goblin army of Shadow including "
+	"the King himself. It is often speculated that it is he who rules "
+	"the army through the King with his devios magical arts."
+    );
+    set_level(8);
+    set_class("mage");
+    set_guild_level("mage",8);
+    set_body_type("humanoid");
+    set_alignment(9);
+    set("race", "goblin");
+    set_gender("male");
+    set_exp(1000);
+    set_ac(2);
+    set_stats("strength",16);
+    set_stats("dexterity",17);
+    set_stats("wisdom",18);
+    set_stats("intelligence",18);
+    set_max_hp(70);
+    set_hp(70);
+    set_emotes(3,({
+	"Sorceror mutters an incantation.",
+	"%^CYAN%^Sorceror says: %^RESET%^Do not trifle with me!",
+	"Sorceror traces arcane runes in the air.",
+	"Sorceror cackles evilly.",
+	"Sorceror raises an eyebrow.",
+	"%^CYAN%^Sorceror says: %^RESET%^Grazzt taught me everything "
+	"I know."
+    }),0);
+    this_object()->add_money("gold",random(200)+50);
+    this_object()->add_money("silver",random(1200)+150);
+    this_object()->add_money("copper",random(11500)+500);
+    new( OPATH "robe.c" )->move(this_object());
+    command("wear robe");
+    set_spell_chance(50);
+    set_func_chance(35);
+    set_spells( ({"magic missile"}));
+    set_funcs(({"special_spell"}));
+    ob=new("/d/magic/scroll");
+    ob->set_spell(2);
+    ob->move(TO);
+    ob=new("/d/azha/obj/mr_ring");
+    ob->move(TO);
+    force_me("wear ring");
+}
+int special_spell() {
+object me = this_object();
+object vic = me->query_current_attacker();
+    xx=random(5)+1;
+    switch(xx) {
+    case 1:
+	if(me->query_hp() < 10) {
+	    me->add_hp(random(5)+3);
+	    tell_room(ETO,"%^MAGENTA%^Sorceror's robe glows with an inner light.");
+	    return 1;
+  	}
+        me->force_me("cackle");
+        me->force_me("cast magic missile");
+        return 1;
+    case 2:
+	if(me->query_hp() < 10) {
+	    me->add_hp(random(5)+3);
+	    tell_room(ETO,"%^MAGENTA%^Sorceror's robe glows with an inner light.");
+	    return 1;
+  	}
+        me->force_me("grin");
+        me->force_me("cast lightning bolt");
+        return 1;
+    case 3:
+	if(me->query_hp() < 10) {
+	    me->add_hp(random(5)+3);
+	    tell_room(ETO,"%^MAGENTA%^Sorceror's robe glows with an inner light.");
+	    return 1;
+  	}
+        me->force_me("howl");
+        tell_object(vic,"%^BOLD%^%^RED%^Sorceror hurls a bolt of pure evil at you!");
+        tell_room(ETO,"%^BOLD%^%^RED%^Sorceror hurls a bolt of pure evil at "+vic->query_cap_name()+"!",vic);
+        vic->do_damage("torso",random(20)+3);
+        return 1;
+    case 4:
+	if(me->query_hp() < 10) {
+	    me->add_hp(random(5)+3);
+	    tell_room(ETO,"%^MAGENTA%^Sorceror's robe glows with an inner light.");
+	    return 1;
+  	}
+        me->force_me("scream");
+	tell_object(vic,"%^BOLD%^%^YELLOW%^Sorceror hurls a %^RED%^ball of fire%^YELLOW%^ at you!");
+	tell_room(ETO,"%^BOLD%^%^YELLOW%^Sorceror hurls a %^RED%^ball of fire%^YELLOW%^ at "+vic->query_cap_name()+"!",vic);
+	vic->do_damage("torso",random(10)+15);
+        return 1;
+    case 5:
+       tell_room(ETO,"%^MAGENTA%^Sorceror's robe glows with an inner light.");
+       me->add_hp(5);
+       return 1;
+    }
+}

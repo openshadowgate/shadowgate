@@ -1,0 +1,129 @@
+#include <std.h>
+
+inherit "/std/trainer";
+
+int count;
+
+
+void create(){
+   ::create();
+
+   set_name("Rhoc Tord");
+
+   set_id(({"rhoc","rhoc tord","tord","ranger"}));
+   set_short("Rhoc Tord, retired ranger, Bowyer-fletcher of the rangers");
+
+   set_long(
+@OLI
+This gangly old ranger sits in the ranger's archery observing and 
+occasionally taking part in a challenge. He sits and makes arrows 
+with most of his spare time. He truly loves the history of the realms 
+and will act as a trainer to the younger rangers. He will show you 
+how to apply proficiencies but is much to old to train against. His 
+leathered face and deep wrinkles show his age. His mere presence shows
+his love for the arts of rangering. He will gladly sell to you the 
+arrows he makes. He only asks money for the materials and a drink.
+OLI
+    );
+   set_hd(50,10);
+   set_hp(2000);
+   set_race("human");
+   set_gender("male");
+   set_alignment(4);
+   set_class("ranger");
+
+   new ("/d/common/obj/lrweapon/longbow")->move(TO);
+   new ("/d/common/obj/lrweapon/larrows")->move(TO);
+
+   //command("wield long bow");
+   set("speech string","crack");
+   set("describe string","in a high tone");
+   remove_std_db();
+}
+
+void do_training(){
+}
+
+void init(){
+   ::init();
+
+   add_action("buy","buy");
+
+   add_action("challenge","challenge");
+}
+
+int buy(string str){
+   if (!str || str != "arrows") {
+      command("say I only have these arrows, which I sell at cost to rangers for training.");
+      return 1;
+   }
+
+   if (!TP->is_class("ranger")) {
+      command("say You not be a ranger, run along before they realize you're here.");
+      return 1;
+   }
+
+   if (!TP->query_funds("gold",10)) {
+      command("say Sorry young one, but you just don't have the money.");
+      command("emote shakes his head sadly");
+      return 1;
+   }
+
+   if (!present("arrows",TO)) {
+      command("say My appologies, but I seem to have grown lax in my fletching work.");
+      return 1;
+   }
+
+   TP->use_funds("gold",10);
+   command("give arrows to "+TP->query_name());
+   if (present("arrows", TO)) {
+      command("shrug");
+      command("drop arrows");
+   }
+   command("say There ya are, now practice on. We always need good archers.");
+   command("emote sits down and starts working on a new arrow head.");
+
+   new ("/d/common/obj/lrweapon/larrows")->move(TO);
+   return 1;
+
+}
+
+int challenge(string str){
+   if (count) {
+      command("say Can't ya see I'm in the middle of something?");
+      return 1;
+   }
+   command("emote raises an interested eyebrow");
+   command("wield bow");
+   call_out("do_shot",1,0);
+   return 1;
+}
+
+void do_shot(int counter){
+   
+   command("shoot ranger's north 20");
+   
+   if (counter == 20) {
+      command("grin");
+      command("say There's your mark. "+count+" hits "+counter+" shots, see if ya can beat that.");
+      command("unwield bow");
+      count = 0;
+      new ("/d/common/obj/lrweapon/larrows")->move(TO);
+      return 1;
+
+   }
+   counter++;
+   call_out("do_shot",4,counter);
+}
+
+
+void receive_message(string cl, string msg){
+   ::receive_message(cl, msg);
+
+   if (strlen(msg) > 14 ) {
+      if (msg[0..9] == "You hit Ma") {
+         count++;
+      }
+   }
+}
+

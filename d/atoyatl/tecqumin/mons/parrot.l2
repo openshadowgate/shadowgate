@@ -1,0 +1,311 @@
+#include <std.h>
+#include <daemons.h>
+#include "../tecqumin.h"
+#define COLOURS ({"%^BOLD%^%^YELLOW%^", "%^BOLD%^%^BLUE%^", "%^BOLD%^%^RED%^", "%^BOLD%^%^YELLOW%^", "%^BOLD%^%^CYAN%^", "%^BOLD%^%^GREEN%^", "%^BOLD%^%^GREEN%^"})
+
+inherit MONSTER;
+
+mapping sayings;
+string owner;
+int cloned;
+string short_desc();
+string long_desc();
+void settle_down();
+
+void create(){
+  ::create();
+   set_long((:TO, "long_desc":));
+   set_name("parrot");
+      set_property("not random monster", 1);
+   set_short("%^BOLD%^%^BLUE%^br%^RED%^igh%^CYAN%^tl%^BLUE%^y"
+     +" p%^YELLOW%^l%^BLUE%^u%^CYAN%^m%^YELLOW%^e%^BLUE%^d"
+     +" %^BLUE%^pa%^RED%^rr%^BLUE%^ot%^RESET%^");
+   set_id(({"parrot","bright parrot", "brightly plumed parrot", "jungle parrot"}));
+  if (random(2)){
+    set_gender("male");
+  } else {
+    set_gender("female");
+  }
+  set_race("bird");
+  cloned = 0;
+  set_heart_beat(1);
+  set_no_clean(1);
+  set_property("no animate",1);
+  set_property("no random treasure", 1);
+}
+
+void set_sayings(mapping s){
+  sayings = s;
+}
+
+mapping query_sayings(){
+  return sayings;
+}
+
+void output(string what, string language){
+  set_lang(language, 100);
+  set_spoken(language);
+  set("speech string", "%^BOLD%^%^YELLOW%^squawk");
+  force_me("say " + what);
+}
+
+void squawk(){
+  int count, total, i, x, y, roll;
+  string * ks, * usables, speech, describe, language, colour;
+  ks = keys(sayings);
+  count = sizeof(ks);
+  if (count<1){
+    return;
+  }
+  total = 0;
+  usables = ({});
+  for (i=0;i<count;i++){
+    x = sayings[ks[i]][0];
+    if (x<3 && random(500)) continue; //Just occasionally, it might squawk out something it only heard once or twice.
+    usables += ({ks[i]});
+    total += x;
+  }
+  count = sizeof(usables);
+  if (count<1){
+    return;
+  }
+  y = 0;
+  roll = random(total);
+  for (i = 0; i<count; i++){
+    x = sayings[usables[i]][0];
+    y += x;
+    if (roll <y){
+      language = sayings[usables[i]][1];
+      speech =  sayings[usables[i]][2];
+      describe =  sayings[usables[i]][3];
+      set("describe string", "%^RESET%^"+ describe );
+      colour = COLOURS[random(sizeof(COLOURS))];
+      output("%^BOLD%^%^ORANGE%^'"+ colour + usables[i] + "%^BOLD%^%^ORANGE%^'", language);
+      break;
+    }
+  }
+  if (random(4)){
+    call_out("squawk", 1 + random(4));
+  }
+}
+
+
+void catch_say(string str){
+  mixed * details;
+  int num, sentences, i;
+  string language, speech, describe, sentence1, sentence2, sentence3, sentence4, sentence5, sentence6;
+  string * ks;
+  if (TP->id("parrot")){
+    return;
+  } 
+  ks = keys (sayings);
+  language = TP->query_language();
+  sentences = sscanf(str, "%s.%s.%s.%s.%s.%s", sentence1, sentence2, sentence3, sentence4, sentence5, sentence6);
+  switch (sentences){
+  case 0:
+    sentence1 = str;
+    sentences = 1;
+    break;
+  case 1:
+    sentences = sscanf(str, "%s.%s", sentence1, sentence2);
+    break;
+  case 2:
+    sentences = sscanf(str, "%s.%s.%s", sentence1, sentence2, sentence3);
+    break;
+  case 3:
+    sentences = sscanf(str, "%s.%s.%s.%s", sentence1, sentence2, sentence3, sentence4);
+    break;
+  case 4:
+    sentences = sscanf(str, "%s.%s.%s.%s.%s", sentence1, sentence2, sentence3, sentence4, sentence5);
+    break;
+  case 5:
+    sentences = sscanf(str, "%s.%s.%s.%s.%s.%s", sentence1, sentence2, sentence3, sentence4, sentence5, sentence6);
+ }
+  speech = TP->query("speech string");
+  speech += "s";
+  describe = TP->query("describe string");
+  for (i=0;i<sentences;i++){
+    switch(i){
+    case 0:
+      str = sentence1;
+      break;
+    case 1:
+      str = sentence2;
+      break;
+    case 2:
+      str = sentence3;
+      break;
+    case 3:
+      str = sentence4;
+      break;
+    case 4:
+      str = sentence5;
+      break;
+    case 5:
+      str = sentence6;
+      break;
+    }
+    if (strlen(str)>1 && str[0..0] == " "){
+      str = str[1..strlen(str)-1]; //remove any starting space from sentence
+    } 
+    str = FILTERS_D->filter_colors(str);
+    if (member_array(str, ks)!= -1){
+      num = sayings[str][0];
+      num++;    
+    } else {
+      num = 1;
+    }
+    details = ({num, language, speech, describe});
+    sayings[str] = details;
+  }
+  return 0;
+}
+
+void heart_beat(){
+  object *players, *obs, own, env;
+  int i, count;
+  if (!stringp(owner)) {return;}
+  if (!objectp(ETO)){ return;}
+  if (!present(owner, ETO)){
+    players = children("/std/user.c");
+    count = sizeof(players);
+    if (count <1) {return;}
+    for (i=0;i<count;i++){
+      if ((string)players[i]->query_name() == owner){
+        own = players[i];
+        break;
+      }
+    }
+    if (objectp(own)){
+      env = environment(own);
+      if (objectp(env)){
+        tell_room(ETO, "The parrot flies off");
+        tell_room(env, "A parrot flies in and lands close by " + own->QCN, own);
+        tell_object(own, "A parrot flies in and lands next to you.");
+        move(env);
+        own->add_follower(TO);
+      } else {
+        tell_room(ETO, "The parrot looks distressed, as its owner's environment is broken");
+      }
+    } else {
+      tell_room(ETO, "The parrot looks distressed, as it can't find its owner");
+    }
+  }
+}
+
+void init(){
+  if (cloned ==1){// This check prevents abuse by dropping and insta-getting
+    remove();
+    return;
+  }
+  ::init();
+  add_action("stroke", "stroke");
+  add_action("get_me", "get");
+}
+
+int get_me(string str){
+  if (id(str)){
+    return notify_fail("The "+query_short()+"%^RESET%^ is feeling too flighty to let"
+     +" you pick it up at the moment. Perhaps you could <stroke> it first, to help it"
+     +" settle down?");
+  }
+}
+
+string long_desc(){
+
+  string desc;
+  if (cloned == 1){remove(); return "";}
+  desc = "A %^BOLD%^%^BLUE%^br%^RED%^igh%^CYAN%^tl%^BLUE%^y f%^YELLOW%^ea"
+     +"%^BLUE%^th%^CYAN%^er%^YELLOW%^e%^BLUE%^d%^RESET%^, perky"
+     +" %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng%^RESET%^%^GREEN%^l"
+     +"%^BOLD%^e %^BLUE%^pa%^RED%^rr%^BLUE%^ot%^RESET%^. It has a cheerful"
+     +" looking %^BOLD%^%^YELLOW%^bright yellow beak%^RESET%^, and beady"
+     +" %^GREEN%^br%^BOLD%^i%^RESET%^%^GREEN%^g%^BOLD%^ht"
+     +" gr%^RESET%^%^GREEN%^ee%^BOLD%^n eyes%^RESET%^.\nIt looks in too"
+     +" flighty a mood to be handled at the moment, but perhaps if you"
+     +" were to <stroke> it a bit, it might let you pick it up.\n";
+
+  if (!objectp(ETO)){desc += "%^BOLD%^%^RED%^ERROR - the parrot is in a"
+    + " broken environment. Please make a bug report on the parrot.\n\n";}
+  if (stringp(owner) && present(find_player (owner), ETO)){
+    if (find_player(owner) == TP){
+      desc += "The parrot flaps around happily near you.";
+    } else {
+      desc += "It seems to be mostly flapping around near " +find_player (owner)->QCN;
+    }
+  } else {
+    desc+= "It seems to be flapping around on its own at the"
+      +" moment";
+  }
+  return desc;
+}
+
+int is_living(){
+  return 1;
+}
+
+int stroke(string str){
+  if (!id(str)){ return notify_fail("Stroke what?");}
+  if (cloned == 1){
+    remove();
+  }
+  if (!objectp(ETO)){
+    return notify_fail("ERROR - the parrot's environment is broken."
+     +" Please make a bug report on the room you are in");
+  }
+  tell_object(TP, "You scratch the parrot on the top of its head and tickle it under the chin. It cocks its head, assenting to be picked up");
+  tell_room(ETO, TPQCN + " scratches the parrot on the top of its head and tickles it under the chin. It cocks its head, assenting to be picked up", TP);
+  settle_down(); //separated some code out, so it can be used with 
+  return 1;     //different messages - Lujke
+  }
+
+void settle_down(){
+  object ob, * conts;
+  int i, count;
+  if (!objectp(ETO)){return;}
+  ob = new(OBJ + "parrot.c");
+  if (!objectp(ob)){
+    tell_room(ETO, "ERROR - parrot isn't working. Please tell Lujke");
+  }
+  ob->set_sayings(([]));
+  if (mapp(sayings)){
+    ob->set_sayings(sayings);
+  }
+  ob->set_cloned(-1);
+  ob->move(ETO);
+  if (stringp(owner)){
+    ob->set_owner(owner);
+  }
+  cloned = 1;
+  set_name("broken");
+  set_race("cloned object");
+  set_id(({"clonedparrot"}));
+  call_out ("remove", 1);
+  return 1;
+}
+
+int is_parrot(){
+  return 1;
+}
+
+int set_owner(string own){
+  object leader;
+  if (cloned == 1){remove();}
+  if (!stringp(own)){ return -1;}
+  owner = own;
+  leader = find_player(owner);
+  if (!objectp(leader)){
+    leader = present(owner, ETO);
+  }
+  if (!objectp(leader)){
+    return -1;
+  }
+  leader->add_follower(TO);
+  tell_player(leader, "The parrot is now following you!\n");
+  return 1;
+}
+
+string query_owner(){
+  return owner;
+}
+

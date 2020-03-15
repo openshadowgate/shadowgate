@@ -1,0 +1,38 @@
+#include <std.h>
+
+inherit DOCK;
+
+int is_virtual()
+{
+  return 1;
+}
+
+int is_water()
+{
+  return 1;
+}
+
+int is_dock()
+{
+  return 1;
+}
+
+void create()
+{
+    ::create();
+    set_indoors(1);
+    set_light(2);
+    set_short("Hedge Field Docks");
+    set_long("You stand before a island of hedge, moving in the wind. A glaze "
+	     "of myst covers the tops and makes the already huge looking "
+	     "mass, seam miles apon miles more. There is only one opening "
+	     "into it, and it awaits you.");
+    set_exits( ([
+		"south" : "/d/hm_quest/enterence"
+	     ]) );
+    set_smell("default","You smell the wonderful sent of freshly air of a "
+	      "garden, right after a light rain.");
+    set_listen("default","You hear the sounds of waves crashing against the "
+	       "sandy beaches."); 
+//    find_object_or_load("d/shadow/virtual/sea/obj/ferryboat1")->move(TO);
+}

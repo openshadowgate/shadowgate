@@ -1,0 +1,6 @@
+#define ROOMS "/d/antioch/ruins/rooms/"
+#define AROOMS "/d/antioch/antioch2/rooms/"
+#define MONS "/d/antioch/ruins/mons/"
+#define OBJ "/d/antioch/ruins/obj/"
+#define PORTAL "/d/antioch/ruins/portal/"
+#define PLANE "/d/antioch/ruins/portal/plane.c"

@@ -1,0 +1,33 @@
+                               Antioch
+
+                                  P12 T--P11
+                                   |  |  |
+                                   P9-P8-P10
+                                   |  |  |
+          B2      U1              P13 P7 P14
+          |       |                   |
+          H8  H5  H4  H1        M  G1 P6 G2 K
+          |   |   |   |         |  |  |  |  |
+          Y8  Y5  Y4  Y1        P5-P4-P1-P2-P3
+          |   |   |   |               |
+U3-H9-Y9-S32-S31-S30-S29-S28-S27-S26-S25
+          |   |   |   |               |
+          Y7  Y6  Y3  Y2         Bar-S24-Inn
+          |   |   |   |               |
+          H7  H6  H3  H2  Jewlery-S9-S10-S11-Tailor
+              |       |          /    |    \
+              U2      B1       S8    S23    S12
+                              /       |       \
+                            S7    G  S22  W    S13
+                            |     |   |   |     |
+                   Stables-S6-S18-S19-F-S20-S21-S14-Church
+                            |     |   |   |     |
+                            S5    M   B   A    S15
+                             \                /
+                              S4           S16
+                               \           /
+                        Leather-S3       S17-Rations
+                                 \      /
+                             Healer-S2-Tower
+                                    |
+                           Barracks-S1-Gates

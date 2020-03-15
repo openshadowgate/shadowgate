@@ -1,0 +1,61 @@
+#include <std.h>
+
+inherit ROOM;
+
+void create(){
+   ::create();
+
+    set_short("%^BOLD%^Great hall");
+   set_long(
+@OLI
+  %^BOLD%^The Great banquet hall%^RESET%^
+
+  %^CYAN%^You enter into a hall of magnificent size and beauty. The walls are covered with ancient %^RESET%^%^RED%^tapestries%^RESET%^%^CYAN%^ from days long ago, telling tales of heros long since passed away. The ceiling is covered with one great painting, detailing the legacy of the Order as it fights for the causes of good. This room holds great meaning to all Order members, for it is where they go upon initiation, to be assigned a position within the Order. There is a plaque listing all of the services
+OLI
+   );
+   set_property("light",2);
+  set_property("no teleport",1);
+    set_property("indoors",1);
+   set_smell("default","Paints and solvants tickle your nostrils.");
+
+   set_exits(([
+  "east":"/d/guilds/order/hall/main2"
+   ]));
+}
+
+void init(){
+   ::init();
+  add_action("knight","knight");
+  add_action("seer","seer");
+  add_action("thane","thane");
+  add_action("lord","lord");
+  add_action("jester","jester");
+}
+
+
+int knight(){
+
+  write("%^BOLD%^The High Priest of the Order comes fourth and blesses you, giving you the title of Knight within the order.%^RESET%^");
+  new("/d/guilds/order/obj/knights")->move(TP);
+   return 1;
+}
+int seer(){
+  write("%^MAGENTA%^The High Priest of the Order comes forth and ties a glowing tasel around your waste, giving you the godly mission of advisor to the Lords.%^RESET%^");
+  new("/d/guilds/order/obj/seer")->move(TP);
+  return 1;
+}
+int jester(){
+  write("%^BOLD%^%^CYAN%^The High Priest of the Order comes forth and places a comical opera mask upon your face, chuckling ever so slightly as he does so.%^RESET%^");
+  new("/d/guilds/order/obj/jester")->move(TP);
+  return 1;
+}
+int thane(){
+  write("%^BOLD%^The High Priest of the Order comes forth and with a serious look upon his face he etches a crest upon your breastplate, you my son have been charged with the very dangerous task of warrior and defender, may God himself guide your path.%^RESET%^");
+  new("/d/guilds/order/obj/thane")->move(TP);
+  return 1;
+}
+int lord(){
+  write("%^BOLD%^The High Priest of the Order comes forth and with a stern look upon his face he places the Pendent of the Order upon your chest, making you one of the blessed Lords.%^RESET%^");
+  new("/d/guilds/order/obj/lord")->move(TP);
+  return 1;
+}

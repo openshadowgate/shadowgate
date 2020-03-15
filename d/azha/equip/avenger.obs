@@ -1,0 +1,110 @@
+//  A Holy Avenger of the Imperial Guard of Tsarven
+//  Thorn@ShadowGate
+//  970316
+//  Azha Area
+//  avenger.c
+
+#include <std.h>
+
+int holy;
+
+inherit WEAPON;
+
+void create() {
+  ::create();
+    set_name("holy avenger");
+    set_id(({"sword","two handed sword","holy avenger","avenger",
+        "avenger sword"}));
+    set_short("Tsarvani Holy Avenger");
+    set_long(
+@TSARVEN
+  This is the feared weapon of the paladins of the Tsarvani
+Imperial Guard.  There is no mistaking the artistry in the
+blade and the serene goodness that it eminates.  Blessed by
+great deities of goodness, this blade serves as an extreme
+retribution upon the forces of evil in this realm.
+TSARVEN
+    );
+    set_weight(15);
+    set("value",1000);
+    set_wc(1,10);
+    set_large_wc(3,6);
+    set_size(2);
+    set_type("slashing");
+    set_property("enchantment",2);
+    set_prof_type("avengers");
+    set_hit((:this_object(), "extra_hit":));
+    set_wield((:this_object(), "extra_wield":));
+    set_unwield((:this_object(), "extra_unwield":));
+    holy = 0;
+}
+
+int extra_hit(object ob) {
+  int dam;
+  
+if(!objectp(ob)) return random(5);
+  if((int)ob->query_alignment() == 9) {
+    dam = 10;
+    message("my_action",
+            "%^CYAN%^A bluish light eminates from the blade as it cuts "
+            "into the corrupt flesh of your evil opponent!%^RESET%^"
+            ,ETO);
+    message("other_action",
+            "%^CYAN%^The sword wielded by "+ETO->query_cap_name()+" glows as it cuts into "+
+            ob->query_cap_name()+"'s flesh!"
+            ,environment(ob)
+            ,(({ETO, ob})));
+
+    message("my_action",
+            "%^CYAN%^The sword wielded by "+ETO->query_cap_name()+" glows as it cuts into "
+            "your flesh!%^RESET%^"
+            ,ob);
+    return dam;
+  }
+  return random(5)+1;
+}
+
+int extra_wield() {
+  if(!TP) return 0;
+  if((int)TP->query_level() < 15) {
+    notify_fail("You may not wield such a fine weapon!");
+    return 0;
+  }
+if(TP->is_class("paladin")) {
+    set_property("enchantment",3);
+    holy = 1;
+    write("%^CYAN%^The Avenger blazes with holy power in your hands!%^RESET%^");
+    say("%^CYAN%^You hear a chorus of angels as "+TPQCN+" wields the Holy "
+        "Avenger!");
+    TP->set_property("magic resistance", 50);
+    return 1;
+  }
+  if(!((int)TP->query_alignment() % 3)) {
+    TP->do_damage(10);
+    write("%^CYAN%^The Avenger blazes with holy power in your evil hands and "
+    "burns your corrupt flesh!%^RESET%^");
+    say("%^CYAN%^You hear "+TPQCN+" scream in pain as the Holy Avenger "
+        "falls to the ground and disappears!");
+    TO->remove();
+    return 0;
+  }
+  write("%^CYAN%^The Avenger glows with power in your hands.%^RESET%^");
+  say("%^CYAN%^"+TPQCN+" wields the Avenger.%^RESET%^");
+  return 1;
+}
+
+int extra_unwield()
+{
+  remove_property("enchantment");
+  set_property("enchantment",2);
+  if(holy) TP->set_property("magic resistance", -50);
+  holy = 0;
+  return 1;
+}
+
+int save_me(string file) 
+{
+  remove_property("enchantment");
+  set_property("enchantment",2);
+  return ::save_me(file);
+}

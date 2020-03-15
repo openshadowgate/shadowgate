@@ -1,0 +1,11 @@
+#include <std.h>
+#include <move.h>
+#include "../../tecqumin.h"
+
+inherit CANYON_RIVERBANK;
+
+void create() {
+  ::create();
+  side = "west";
+  set_exits((["up"   : JUNG_ROOM + "canyon_path7"    ]));
+}

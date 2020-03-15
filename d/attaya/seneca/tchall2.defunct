@@ -1,0 +1,33 @@
+
+#include <std.h>
+
+inherit VAULT;
+
+void create(){
+    object ob;
+    ::create();
+    set_short("Thundercracker's Hall.");
+    set_terrain(CITY);
+    set_travel(PAVED_ROAD);
+    set_property("indoors",1);
+    set_property("light",3);
+    set_long(
+      "   A long corridor leads to two enormous golden gates that stand open, beckoning you inside.  The marble floors glisten beneath a lush red carpet.  Light pours into the room from several etched and beveled glass panels along the walls of the hallway.\n"
+      +"   Past the golden doors you can see a large room.\n   A raised rectangle houses a posting board."
+    );
+    set_exits(([
+	"out" : "/d/attaya/seneca/tcyard",
+      ]));
+    set_door("door", "/d/attaya/seneca/tcyard", "out", 0);
+    set_open("door", 1);
+    ob = new("std/bboard");
+    ob->set_name("board");
+    ob->set_id( ({ "board", "bulletin board", "thundercracker board" }) );
+    ob->set_board_id("thundercracker_board");
+    ob->set("short", "Thundercracker's command board");
+    ob->set("long","This is a large metal posting board with a wooden posting surface.  It is designed so that you can write posts to Thundercracker\n");
+    ob->set_max_posts(50);
+    ob->set_location("/d/attaya/seneca/tchall2");
+    set_items(([
+      ]));
+}

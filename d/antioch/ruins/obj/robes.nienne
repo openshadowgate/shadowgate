@@ -1,0 +1,155 @@
+// removed the AC point to streamline them with other magerobes. Nienne, 02/07
+#include <std.h>
+#include "../ruins.h"
+inherit PARMOUR;
+
+string FLAG;
+
+void create()
+{
+	::create();
+	set_name("Robes of the Magi");
+	set_short("%^BOLD%^%^RED%^Robes of the Magi%^RESET%^");
+	set_id(({"robes","robes of the magi","Robes of the Magi","mage robes","magi robes"}));
+	set_long(
+	"%^BOLD%^%^RED%^These robes are a dark red in color, representing a mage"+
+	" who upholds the balance of power between good and evil. They are very"+
+	" elegant, flowing to the ground. There are probably numerous pockets to"+
+	" conceal spell components and the like in them.%^RESET%^ "
+	);
+	set_weight(5);
+	set_type("clothing");
+//        set_ac(1);
+        set_property("enchantment",4);
+	set_item_bonus("spell penetration",10);
+	set_item_bonus("caster level",1);
+	set_limbs(({"torso"}));
+	set_max_internal_encumbrance(21);
+	set_value(5000);
+	set_wear((:TO,"wearme":));
+	set_remove((:TO,"removeme":));
+	FLAG = "neutral";
+}
+
+int wearme()
+{
+        string MASTER;
+        if((string)ETO->query_name() == "batlin the mad mage") return 1;
+
+	if(ETO->is_class("thief") || ETO->is_class("bard") || ETO->is_class("cleric") || ETO->is_class("fighter") || ETO->is_class("cavalier") || ETO->is_class("ranger") || ETO->is_class("paladin") || ETO->is_class("antipaladin")) {
+		tell_object(ETO,"You do not have the dedication of a true magi, and as"+
+		" such are not permitted to wear this robe.");
+		return 0;
+	}
+              if(ETO->query_level() < 30) {
+		tell_object(ETO,"You are not a strong enough mage to wear these robes.");
+		return 0;
+	}
+              if(ETO->query_level() > 29) {
+		if((string)ETO->query_gender() == "female") MASTER = "mistress";
+		if((string)ETO->query_gender() == "male") MASTER = "master";
+		if(ALIGN->is_evil(ETO)) {
+			if(FLAG != "evil") {
+				tell_object(ETO,"%^BOLD%^%^BLACK%^The robes turn the darkest"+
+				" black as you slip them on.");
+				tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The Robes of the Magi"+
+				" turn pitch black as "+ETO->query_cap_name()+" puts them on,"+
+				" reflecting their new "+MASTER+".",ETO);
+				set_short("%^BOLD%^%^BLACK%^Robes of the Magi%^RESET%^");
+				set_long("%^BOLD%^%^BLACK%^These robes are pitch black in color,"+
+				" representing a mage who will stop at nothing to gain ultimate"+
+				" power, even if it means using darker forces. They are very"+
+				" elegant, flowing to the ground. There are probably numerous"+
+				" pockets to conceal spell components and the like in"+
+				" them.%^RESET%^ ");
+				FLAG = "evil";
+			}
+			else {
+				tell_object(ETO,"%^BOLD%^%^BLACK%^The robes feel like a part of"+
+				" you as you slip the trusted garment on.");
+				tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETO->query_cap_name()+""+
+				" seems more powerful after slipping on "+ETO->query_possessive()+" robes.",ETO);
+			}
+		}
+		if(ALIGN->is_good(ETO)) {
+			if(FLAG != "good") {
+				tell_object(ETO,"%^BOLD%^The robes turn a sparkling white as"+
+				" you slip them on.");
+				tell_room(environment(ETO),"%^BOLD%^The Robes of the Magi turn"+
+				" a bright shade of white as "+ETO->query_cap_name()+" puts them"+
+				" on, reflecting their new "+MASTER+".",ETO);
+				set_short("%^BOLD%^%^WHITE%^Robes of the Magi%^RESET%^");
+				set_long("%^BOLD%^%^WHITE%^These robes are bright white in color,"+
+				" representing a mage whose intentions are pure and who strives"+
+				" for good to maintain control of a power as strong and dangerous"+
+				" as that of magic. They are very elegant, flowing to the ground."+
+				" There are probably numerous pockets to conceal spell components"+
+				" and the like in them.%^RESET%^ ");
+				FLAG = "good";
+			}
+			else {
+				tell_object(ETO,"%^BOLD%^The robes feel like a part of you"+
+				" as you slip the trusted garment on.");
+				tell_room(environment(ETO),"%^BOLD%^"+ETO->query_cap_name()+""+
+				" seems more powerful after slipping on "+ETO->query_possessive()+" robes.",ETO);
+			}
+		}
+		if(ALIGN->is_neutral(ETO)) {
+			if(FLAG != "neutral") {
+				tell_object(ETO,"%^BOLD%^%^RED%^The robes turn a splendid dark"+
+				" red as you slip them on.");
+				tell_room(environment(ETO),"%^BOLD%^%^RED%^The Robes of the Magi"+
+				" change to a dark red as "+ETO->query_cap_name()+" slips them"+
+				" on, reflecting their new "+MASTER+".",ETO);
+				set_short("%^BOLD%^%^RED%^Robes of the Magi%^RESET%^");
+				set_long("%^BOLD%^%^RED%^These robes are a dark red in color,"+
+				" representing a mage who upholds the balance of power between"+
+				" good and evil. They are very elegant, flowing to the ground."+
+				" There are probably numerous pockets to conceal spell components"+
+				" and the like in them.%^RESET%^ ");
+				FLAG = "neutral";
+			}
+			else {
+				tell_object(ETO,"%^BOLD%^%^RED%^The robes feel like a part of you"+
+				" as you slip the trusted garment on.");
+				tell_room(environment(ETO),"%^BOLD%^%^RED%^"+ETO->query_cap_name()+""+
+				" seems more powerful after slipping on "+ETO->query_possessive()+" robes.",ETO);
+			}
+		}
+		return 1;
+	}
+	return 0;
+}
+
+int removeme()
+{
+	if(FLAG == "neutral") {
+		tell_object(ETO,"%^BOLD%^%^RED%^You feel power slip from you as you"+
+		" remove your wonderful robes.");
+	}
+	if(FLAG == "good") {
+		tell_object(ETO,"%^BOLD%^You feel power slip from you as you"+
+		" remove your wonderful robes.");
+	}
+	if(FLAG == "evil") {
+		tell_object(ETO,"%^BOLD%^%^BLACK%^You feel power slip from you as you"+
+		" remove your wonderful robes.");
+	}
+	return 1;
+}
+
+void init()
+{
+	::init();
+	add_action("check_put","put");
+}
+
+int check_put(string str)
+{
+	if(!query_worn()) {
+		notify_fail("You must be wearing the robes to place something in their"+
+		" pockets.\n");
+		return 0;
+	}
+	if(query_worn()) return ::put_into();
+}

@@ -1,0 +1,32 @@
+#include <std.h>
+inherit "/std/armour";
+
+void create() {
+    ::create();
+    set_name("azure armor");
+    set("id", ({ "azure armor", "armour", "armor","azure plate armor",
+	"plate","azure","azure plate","plate armor",
+	"azure armour" }) );
+    set("short", "%^CYAN%^Azure plate armor%^RESET%^");
+    set_long(
+   "%^CYAN%^This mystical armor was created from a liquid that is rumored to exist beneath the Crystalline Tower of the Black Dawn on Attaya Island.  The armor has extremely lustrous qualities, and is very durable.  The armor consists of a breast plate, back plate, and several metal bands that wrap around the wearer's stomach.  On the back of the armor are two spikes that rise on either side of the head of the wearer, giving them a more intimidating appearance."
+    );
+    set_weight(50);
+    set_property("enchantment",1);
+    set("value", 5000);
+    set_type("armour");
+    set_limbs( ({ "torso" }) );
+    set_ac(8);
+    set_wear("%^CYAN%^You slide into the mystical armor and feel it's protection extend beyond it's size!");
+    set_remove("%^CYAN%^The armor easily slides off as you unlatch it.");
+   set_struck((:TO,"struck":));
+}
+
+int struck(int damage, object what, object who){
+   if(!random(5)){
+      tell_room(environment(query_worn()),"%^RESET%^%^CYAN%^The armor worn by "+ETO->query_cap_name()+", ripples against the blow as if asorbing the force!%^RESET%^",({who,ETO}));
+   tell_object(who,"%^RESET%^%^CYAN%^As you hit "+ETO->query_cap_name()+", the armor ripples under your blow, asorbing the damage!");
+   tell_object(ETO,"%^RESET%^%^CYAN%^The armor ripples under the weight of the blow, asorbing the damage!%^RESET%^");
+   }
+   return (-1)*(damage);
+}

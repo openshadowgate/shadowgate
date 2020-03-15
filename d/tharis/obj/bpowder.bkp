@@ -1,0 +1,118 @@
+/* Originally by Tristan, edited by Grendel to lower length of paralysis, but add a factor to incapacitate. */
+#include <std.h>
+#include <daemons.h>
+
+inherit OBJECT;
+
+int uses;
+
+void create(){
+    ::create();
+    set_name("small bag");
+    set("id",({"powder","bag","blinding powder"}));
+    set("short","A small bag of powder");
+    set("long",
+      "   This bag contains a collection of powders mixed into quite a fetid mixture.  Wiffs of amonia and other irritants reach your nose as you inspect the bag.  You feel that you <throw powder? this at some target's eyes and hit it would hurt them badly."
+    );
+    set_value(200);
+    set_weight(5);
+    uses = random(6) + 3;
+}
+
+void init(){
+    ::init();
+    add_action("throw","throw");
+}
+
+int throw(string str){
+    string who;
+    object ob;
+    int th = 0;
+    int num;
+    int att, dam;
+
+    if(!str) return notify_fail("Syntax: throw powder at <target>\n");
+
+    if(sscanf(str,"powder at %s",who) != 1) return notify_fail("Syntax: throw powder at <target>\n");
+
+    if(TP->query_paralyzed())
+	return notify_fail(TP->query_paralyze_message());
+
+    if(!(ob = present(who,environment(TP))))
+	return notify_fail("No such target present!\n");
+
+    if(ob->query_property("powdered")) return notify_fail("Jeez, isn't once enough for a little while?\n");
+
+    if(uses < 1){
+	tell_object(TP,"The bag is empty!\n");
+	return 1;
+    }
+
+    th -= TP->reaction_adj();
+
+    th += BONUS_D->thaco(TP->query_level(),TP->query_class());
+    th -= BONUS_D->tohit_bonus(ob->query_stats("dexterity"), 10, ob);
+    uses -= 1;
+
+    if(!TP->kill_ob(ob,0)) return 1;
+    TP->set_paralyzed(4,"%^CYAN%^%^BOLD%^You are busy throwing the dust!%^RESET%^");
+    tell_room(ETP, "%^BOLD%^%^CYAN%^You see "+TPQCN+" reach into a small bag, from which "+TP->query_subjective()+" pulls a handful of powder and throws it at "+ob->query_cap_name()+"'s eyes!",({TP,ob}));
+    tell_object(TP,"%^BOLD%^%^CYAN%^You reach into the bag and grab a handful of powder and toss it at "+ob->query_cap_name()+"'s eyes!\n");
+    tell_object(ob,"%^BOLD%^%^CYAN%^You see "+TPQCN+" reach into a small bag, from which "+TP->query_subjective()+" pulls a handful of powder and throws it at your eyes!\n");
+    if(th - 2 > random(20) +1){
+	tell_room(ETP,"%^BOLD%^%^CYAN%^The cloud of dust formed by the powder billows toward "+ob->query_cap_name()+" but "+ob->query_subjective()+" turn's "+ob->query_possessive()+" head to avoid the cloud.",ob);
+	tell_object(ob,	"%^BOLD%^%^CYAN%^The cloud of dust formed by the powder billows toward you, but you turn your head and avoid the cloud of irritants!\n");
+    } else {
+	tell_room(ETP,"%^BOLD%^%^CYAN%^The cloud of dust formed by the powder billows toward "+ob->query_cap_name()+", and "+ob->query_subjective()+" tries to avoid the cloud, but is unsuccessful.",ob);
+	tell_room(ETP,"%^BOLD%^%^CYAN%^The irritants in the dust quickly effect "+ob->query_cap_name()+"'s eyes causing "+ob->query_objective()+" to become paralyzed with stinging pain.",ob);
+	tell_object(ob,"%^BOLD%^%^CYAN%^The dust cloud billows toward you. You try to avoid the cloud but it hit's you full in the face!\n");
+	tell_object(ob,"%^BOLD%^%^CYAN%^The irritants in the dust quickly effect your eyes causing you to become paralyzed with stinging pain!\n");
+
+	num = random(4) + 1;
+	if(TP->is_class("thief") || TP->is_class("assassin") ) {
+	    num = num * 10;
+	} else {
+	    num = (num * 6) + 8;
+	}
+	ob->set_paralyzed(num, "%^BOLD%^%^YELLOW%^Your eyes are burning and searing with pain!%^RESET%^");
+
+	att = random(7) + 1;
+	dam = random(7) + 1;
+	ob->add_attack_bonus(-att);
+	ob->add_damage_bonus(-dam);
+	ob->set_property("powdered", 1);
+
+	call_out("do_incap",num+1,ob,att,dam);
+
+    }
+    if(uses < 1){
+	set_short("An empty bag");
+	set_long("This empty bag used to hold powder with irritants, now it's size and strength render it useless.");
+    }
+    return 1;
+}
+
+
+int do_incap(object ob, int att, int dam){
+    int num;
+
+    num = random(4) + 1;
+    if(TP->is_class("thief") || TP->is_class("assassin") ){
+	num = num * 10;
+    } else {
+	num = (num * 6) + 8;
+    }
+    tell_object(ob, "%^BOLD%^%^GREEN%^You wipe most of the powder from your eyes, but you are still having trouble making out your oppoonent!\n");
+    tell_room(environment(ob), "%^BOLD%^%^CYAN%^"+ob->query_cap_name()+" clears most of the powder from "+ob->query_objective()+" eyes and starts to attack!!\n", ob);
+    call_out("undo_incap",num+1,ob,att,dam);
+    return 1;
+}
+
+int undo_incap(object ob, int att, int dam){
+    tell_object(ob, "%^BOLD%^%^GREEN%^Your tears clear the last of that heinous substance from your eyes, and you resume attack with a vengance!\n");
+    tell_room(environment(ob), "%^BOLD%^%^CYAN%^"+ob->query_cap_name()+"'s tears finally clear away all the powder, and "+ob->query_subjective()+" attacks with a vengance!!\n", ob);
+    ob->add_attack_bonus(att);
+    ob->add_damage_bonus(dam);
+    ob->remove_property("powdered");
+    return 1;
+}

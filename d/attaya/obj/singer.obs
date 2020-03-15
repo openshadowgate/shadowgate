@@ -1,0 +1,86 @@
+#include <std.h>
+inherit "std/weapon";
+string OWNER;
+void init() {
+    ::init();
+    if(interactive(TP) && TP==environment(TO) && !OWNER) OWNER = TPQN;
+}
+
+void create() {
+    ::create();
+    set_name("singing dagger");
+    set_id( ({"dagger","angelic singing dagger","singing dagger","angelic dagger","singer"}) );
+    set_short("%^CYAN%^Angelic singing dagger%^RESET%^");
+    set_long(
+      "An angelic dagger with an engraved blade.  The detail is magnificent "
+      +"and the scene depicted upon it's holy blade is a peaceful one.  "
+      +"An angel is sitting upon a piece of white cloud, playing a lute "
+      +"and looking at you playfully.  You are almost certain the angel is "
+      +"singing while a dagger is swirling in front of her."
+    );
+    set_weight(10);
+    set("value",250);
+    set_wc(2,3);
+    set_large_wc(2,4);
+    set_size(1);
+    set_prof_type("singer");
+    set_type("thiefslashing");
+    set_property("enchantment",3);
+
+    set_wield((:this_object(), "extra_wield":));
+    set_hit((:this_object(), "extra_hit":));
+}
+int extra_hit(object ob) {
+    int dam;
+    dam = random(2) + 1;
+   if(!objectp(ob)) return random(10);
+    if(random(10)){
+	if((ETO->is_class("thief") || ETO->is_class("assassin")) && sizeof(ETO->query_classes()) ==1) 
+	    return random(10);
+	else return random(5);
+    }
+
+    message("my_action",
+      "%^CYAN%^An angelic singing echos out from the dagger itself!"
+      ,ETO);
+    message("other_action",
+      "%^CYAN%^The dagger wielded by "+ETO->query_cap_name()+" sings like an angel as it slashes "
+      +ob->query_cap_name()+"'s body, spattering blood everywhere!%^RESET%^"
+      ,environment(ob),(({ETO, ob})));
+    message("my_action",
+      "%^BOLD%^%^CYAN%^The holy dagger wielded by "+ETO->query_cap_name()+" sings like an angel as it tears into you!"
+      ,ob);
+    set_property("magic",1);
+    ob->do_damage("torso",random(46));
+    remove_property("magic");
+    return(random(15));
+}
+int extra_wield() {
+    object tp;
+    tp = this_player();
+    if (!tp) return 0;
+    tp->set_property("magic",1);
+    if(!interactive(tp)) return 1;
+    if((int)TP->query_level() < 25) {
+        notify_fail("%^BOLD%^%^CYAN%^A angelic presence tells you: %^RESET%^You are still too young, child, you cannot handle such power!");
+	return 0;
+    }
+    if( (!TP->is_class("thief")) && (!TP->is_class("assassin")) ) {
+        write("%^BLUE%^The holy dagger flies from your hand and vanishes into the clouds above!");
+	TO->remove();
+	return 0;
+    }
+    if((string)TP->query_name() != OWNER) {
+	write("%^MAGENTA%^You are not chosen by the gods to wield such power.");
+	TO->remove();
+	return 0;
+    }
+    write(
+      "%^GREEN%^The holy dagger suddenly makes an heavenly sound as if the angels were singing."
+    );
+    say(
+      "%^CYAN%^"+TPQCN+" looks peaceful as a dagger in their possession begins singing.%^RESET%^"
+    );
+    return 1;
+}
+

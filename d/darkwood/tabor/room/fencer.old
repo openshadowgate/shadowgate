@@ -1,0 +1,40 @@
+#include <std.h>
+#include "../include/tabor.h"
+
+inherit ROOM;
+void create(){
+    ::create();
+    set_name("A small back room");
+    set_short("A small back room");
+    set_property("indoors",1);
+    set_property("no sticks",1);
+    set_property("no teleport",1);
+    set_property("light", 1);
+    set_terrain(STONE_BUILDING);
+    set_travel(PAVED_ROAD);
+    set_long(
+@CIRCE
+This small room is strangely free of dust, despite the fact 
+that it looks like a storage room.  Crates and barrels of ale 
+are stacked around the walls, along with what looks to be 
+padded crates of extra mugs and glasses.  Strangely, a large 
+storage cabinet is in the back, locked with a thick iron lock.  
+Just before the cabinet is a desk, with a comfortable padded 
+chair behind it.
+CIRCE
+    );
+    set_property("indoors",1);
+    set_property("light",2);
+    set_property("no teleport",1);
+    set_property("no attack",1);
+    set_listen("default","The laughter of the patrons in the bar reaches your ears.");
+    set_smell("default","The scent of food from the kitchen is in the air.");
+    set_exits(([ "bar" : ROOMDIR+"pig_and_whistle" ]));
+}
+
+void reset(){
+    ::reset();
+  if(!present("raetsel"))
+//  new(MONDIR+"raetsel")->move(TO);
+  TO->query("fnord");
+}

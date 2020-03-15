@@ -1,0 +1,43 @@
+//Pearls pet black dragon
+//Origionally Created: 12-26-95
+ 
+#include <std.h>
+ 
+inherit MONSTER;
+ 
+void create() {
+  ::create();
+  set_name("black dragon");
+  set("id",({"black dragon","dragon"}));
+  set("short","a huge black dragon");
+  set("long",
+"This is a huge black dragon that guards the tomb of the Vampire Queen, "+
+"Pearl. It is huge, and very powerful. Rumor has it that these dragons "+
+"consider a giant a tasty snack.");
+  set_gender("male");
+  set_body_type("dragon");
+  set_hd(20,100);
+  set_race("dragon");
+  set_overall_ac(1);
+  set_size(3);
+  set_wielding_limbs(({"right foreclaw","left foreclaw"}));
+  new("/realms/pearl/claws.c")->move(this_object());
+  new("/realms/pearl/claws.c")->move(this_object());
+  new("/realms/pearl/scale.c")->move(this_object());
+  command("wear scale");
+  command("wield claws in left foreclaw");
+  command("wield claws 2 in right foreclaw");
+  set_exp(0);
+  set_level(1000);
+  set_stats("strength",29);
+  set_stats("dexterity",29);
+  set_stats("constitution",29);
+  set_stats("intellance",29);
+  set_stats("wisdom",29);
+  set_stats("charisma",1);
+  set_class("mage");
+  set("agressive",1);
+  set_spell_chance(33);
+  set_spells(({"burning hands","magic missile","lightning bolt"}));
+}
+ 

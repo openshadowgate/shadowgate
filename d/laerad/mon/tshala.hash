@@ -1,0 +1,71 @@
+//Coded by the one and only master of monsters...BANE//
+#include <std.h>
+
+inherit "/d/laerad/mon/wander/wander.c";
+
+void create(){
+    ::create();
+    set_id(({"tshala","Tshala"}));
+    set_name("Tshala");
+    set_short("A flaming Tshala");
+    set_long(
+	"The Tshala appears as a frolicsome fey creature of living flame, "+
+	"that loops and darts dazzlingly in the air, bewitching those "+
+	"who gaze upon it.  A fairly small creature, the Tshala flips "+
+	"playfully in front of you emmiting a terrible heat from its body."
+    );
+    set_body_type("snake");
+    set_race("tshala");
+    set_gender("female");
+    set_size(1);
+    set_alignment(5);
+    set_overall_ac(-15);   // was 0
+    set("aggressive",16);
+    set_property("strength","fire");
+    set_property("magic resistance",90);
+    set_attack_limbs(({"head","tail"}));
+    set_attacks_num(4);
+    set_nat_weapon_type("magebludgeon");
+    set_damage(1,12);
+    set_class("mage");
+    set_hd(15,38);    // was 9
+    set_guild_level("mage",14);
+    set_max_level(20);
+    set_hp(110);
+    set_attack_bonus(1);
+    set_exp(4000);
+    set_spells(({
+	"fireball",
+	"scorcher",
+	"burning hands",
+    }));
+    set_spell_chance(40);	// was only 15
+    set_attack_bonus(4);
+    set_funcs(({"blaze"}));
+    set_func_chance(30);
+    set_stats("strength",15);
+    set_stats("dexterity",20);
+    set_stats("intelligence",18);
+    set_stats("wisdom",16);
+    set_stats("constitution",15);
+    set_stats("charisma",14);
+}
+
+void blaze(){
+    object *vars;
+    int i;
+    vars = all_living(ETO);
+    vars = vars - ({TO});
+    for(i=0;i<sizeof(vars);i++){
+	tell_object(vars[i],"%^BOLD%^RED%^The Tshala burns with tremendous fury, setting the room ablaze!");
+
+	if(!"/daemon/saving_d"->saving_throw(vars[i],"spells")){
+	    tell_object(vars[i],"%^BOLD%^RED%^You are burnt horribly!");
+	    vars[i]->do_damage("torso",roll_dice(2,12));
+	} else {
+	tell_object(vars[i],"%^BOLD%^RED%^You are burnt lightly!");
+	vars[i]->do_damage("torso",roll_dice(1,12));
+	}
+    }
+}
+

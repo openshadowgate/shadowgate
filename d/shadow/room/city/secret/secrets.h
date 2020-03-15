@@ -1,0 +1,6 @@
+#define CWEAP  "/d/common/obj/weapon/"
+#define CARM   "/d/common/obj/armour/"
+#define SARADIN "/d/shadow/room/city/secret/saradin/"
+#define STEFANO "/d/shadow/room/city/secret/stefano/"
+#define SECR "d/shadow/room/city/secret/"
+#define SCITY "/d/shadow/room/city/"

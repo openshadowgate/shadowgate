@@ -1,0 +1,75 @@
+#include <std.h>
+
+inherit MONSTER;
+
+void create(){
+	object ob;
+	::create();
+	
+	set_name("Elven gate Guard");
+	set_id(({"elven gate guard","guard","gate guard"}));
+	set("short","Elite guard");
+	set_property("magic resistance",50);
+	set("long",
+@OLI
+	These guards are picked by the duke himself to keep elves
+out of the city. They are picked both for their skill and for 
+there hatred of the elves. This hatred might be bred in fear,
+jealousy, or maybe just because they were told to.
+OLI
+	);
+	set_race("human");
+	set_size(2);
+	set_alignment(3);
+	set_gender("male");
+	set_stats("strength",19);
+	set_stats("dexterity",19);
+	set_body_type("humanoid");
+	set_wielding_limbs(({"right hand","left hand"}));
+	ob = new("/d/shadow/obj/weapon/longsword");
+	ob->set_property("enchantment",1);
+	ob->set_property("monsterweapon",1);
+	ob->move(TO);
+	command("wield sword in right hand");
+	ob = new("/d/shadow/obj/weapon/longsword");
+	ob->set_property("enchantment",1);
+	ob->set_property("monsterweapon",1);
+	ob->move(TO);
+	command("wield sword in left hand");
+ 	ob=new("/d/shadow/obj/armor/plate");
+	ob->set_property("enchantment",1);
+	ob->set_property("monsterweapon",1);
+	ob->move(TO);
+	command("wear armor");
+	set_property("aggressive",7);
+	set_hd(14,3);
+	set_hp(100);
+	set_exp(3500);
+	set_funcs(({"berserk"}));
+	set_func_chance(101);
+	add_money("gold",random(100));
+	add_money("platnium",random(20));
+}
+
+void berserk(object targ){
+	
+	set_func_chance(0);
+	if((string)targ->query_race() == "elf"){
+		tell_room(environment(TO),"%^BOLD%^%^RED%^The guard's hatred overwelms him!!");
+		tell_object(targ,"The guard looks at you with a hatred unmatched!\n");
+		tell_object(targ,"%^BOLD%^%^YELLOW%^SNARLS LOUDLY!!\n");
+		tell_object(targ,"%^BOLD%^%^YELLOW%^And ATTACKS furriously!!\n");
+		TO->execute_attack();
+		TO->execute_attack();
+	}else
+		TO->execute_attack();
+	set_func_chance(101);
+}
+	
+void heart_beat(){
+	if((int)TO->query_hp() < 1){
+		tell_room(environment(TO),"%^BOLD%^In his last breath the Guard utters"
+			+" an oath and offers his armors and weapons to the gods!");
+	}
+	::heart_beat();
+	}

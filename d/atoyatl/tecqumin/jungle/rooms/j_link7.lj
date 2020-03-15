@@ -1,0 +1,26 @@
+#include <std.h>
+#include <terrain.h>
+#include "../../tecqumin.h"
+inherit J_MAZE;
+
+void create() {
+  ::create();
+  base_exits = ([ "west": JUNG_ROOM + "j_link7a" ]);
+  set_basic_exits();
+  r_path = JUNG_ROOM7 + "j_maze";
+}
+
+void on_enter(){
+  object mazeroom1, mazeroom2;
+  string *exits;
+  mazeroom1 = find_object_or_load(JUNG_ROOM7 + "j_maze0.c");
+  set_basic_exits();
+  if (sizeof(query_exits())<2){
+    BUILDER->restore_exits(TO);
+  }
+  if (sizeof(query_exits())<2){
+    mazeroom1->remove_maze();
+    mazeroom1->make_maze();
+  }   
+
+}

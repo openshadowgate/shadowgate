@@ -1,0 +1,107 @@
+//Coded by Bane//
+#include <std.h>
+inherit MONSTER;
+void create(){
+    ::create();
+    set_id(({"lord","Lord","nihilus","Nihilus","lord nihilus","Lord Nihilus"}));
+    set_name("Lord Nihilus");
+    set_short("Lord Nihilus, King of the Fallen Angels");
+    set_long(
+	"Lord Nihilus is the first Fallen Angel.  Founder of the guild, "+
+	"Lord Nihilus erected these walls around him.  A champion of "+
+	"war, he fought countless battles, turning himself into "+
+	"a machine of death and destruction.  Fellow Angels this man "+
+	"is your Warlord, show him your respect and bow before him."
+    );
+    set_body_type("human");
+    set_race("human");
+    set_gender("male");
+    set_size(2);
+    set_hd(100,400);
+    set_hp(1200);
+    set_exp(50000);
+    set_overall_ac(0);
+    set_damage_bonus(15);
+    set_stats("strength",24);
+    set_stats("dexterity",19);
+    set_stats("constitution",23);
+    set("aggressive","member");
+    set_property("magic resistance",50);
+    set_property("strength","paralyzed");
+    set_property("no bump",1);
+    set_class("fighter");
+    set_guild_level("fighter",100);
+    set_wielding_limbs(({"right hand","left hand"}));
+    new("/d/tharis/obj/psword")->move(this_object());
+    command("wield sword in right hand");
+    new("/d/tharis/obj/psword")->move(this_object());
+    command("wield sword in left hand");
+    new("/d/shadow/guilds/angels/tmp/mon/farmor")->move(this_object());
+    command("wear armor");
+    new("/d/shadow/obj/armor/helm")->move(this_object());
+    command("wear helm");
+    set_funcs(({"berserk","dash","psionic"}));
+    set_func_chance(35);
+}
+void berserk(object targ){
+    if(!"daemon/saving_d"->saving_throw(targ,"breath_weapon",-4)){
+	tell_object(targ,"%^BOLD%^BLUE%^Lord Nihilus smashes into you!");
+	tell_room(ETO,"%^BOLD%^BLUE%^Lord Nihilus smashes into "+targ->query_cap_name()+"!",targ);
+	targ->do_damage("torso",roll_dice(10,10));
+	return 1;
+    }
+    tell_object(targ,"%^BOLD%^BLUE%^Lord Nihilus whirls past you!");
+    tell_room(ETO,"%^BOLD%^BLUE%^Lord Nihilus whirls past "+targ->query_cap_name()+"!",targ);
+    return 1;
+}
+void dash(object targ){
+    tell_object(targ,"Lord Nihilus dashes at you!");
+    tell_room(ETO,"Lord Nihilus dashes at "+targ->query_cap_name()+"!",targ);
+    if(!"daemon/saving_d"->saving_throw(targ,"rod_staff_wand",-4)){
+	tell_object(targ,"%^BOLD%^RED%^You are knocked from your feet!");
+	tell_room(ETO,"%^BOLD%^RED%^"+targ->query_cap_name()+" is knocked from "+targ->query_possessive()+" feet!");
+	targ->do_damage("torso",roll_dice(5,10));
+	targ->set_paralyzed(40,"You are stunned from that last attack.");
+	return 1;
+    }
+    tell_object(targ,"%^BOLD%^RED%^You manage to avoid the assault!");
+    tell_room(ETO,"%^BOLD%^RED%^"+targ->query_cap_name()+" manages to avoid the assault!",targ);
+    return 1;
+}
+void psionic(object targ){
+    tell_object(targ,"Lord Nihilus concentrates on you.");
+    tell_room(ETO,"Lord Nihilus concentrates on "+targ->query_cap_name()+".",targ);
+    if(!"daemon/saving_d"->saving_throw(targ,"spells",-4)){
+	tell_object(targ,"%^BOLD%^GREEN%^Your equipment falls to the ground.");
+	tell_room(ETO,"%^BOLD%^GREEN%^"+targ->query_cap_name()+"'s equipment falls to the ground.",targ);
+	targ->force_me("drop all");
+	return 1;
+    }
+    tell_object(targ,"%^BOLD%^GREEN%^You feel light headed.");
+    tell_room(ETO,"%^BOLD%^GREEN%^"+targ->query_cap_name()+" looks dazed.",targ);
+    return 1;
+}
+void member(){
+    if((string)TP->query_guild() != "Fallen Angel"){
+	tell_object(TP,"%^BOLD%^RED%^Lord Nihilus growls at you and attacks!");
+	tell_room(ETO,"%^BOLD%^RED%^Lord Nihilus growls at "+TP->query_cap_name()+" and attacks "+TP->query_objective()+"!",TP);
+	force_me("kill "+TPQCN);
+  	return 1;
+    }
+    write("Lord Nihilus nods.");
+    return 1;
+}
+void init(){
+    ::init();
+    if((int)TP->query_name() != "Josul" && (int)TP->query_name() != "Tera-Sin" && (int)TP->query_name() != "Lord Nihilus"){
+    if((int)TP->query_guild() != "Fallen Angel"){
+	force_me("kill "+TPQCN);
+    }
+    }
+}
+void heart_beat(){
+    ::heart_beat();
+    if(TP->query_hp() < 1198){
+	TP->add_hp(3);
+    }
+}

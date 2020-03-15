@@ -1,0 +1,154 @@
+#include <std.h>
+#include <daemons.h>
+#include "/d/dagger/drow/short.h"
+inherit MONSTER;
+void init() {
+    ::init();
+    add_action("aid_func","aid");
+    add_action("slay_func","slay");
+}
+void create() {
+    :: create();
+    set_name("man");
+    set_id(({
+	"man","old man"
+    }));
+    set_short("Old and injured man");
+    set_long(
+	"%^CYAN%^The man before you is very old and injured as though "
+	"he was attacked by bandits or a foul wilderness beast. He is "
+	"dressed in rags and blood streams from an open wound in his "
+	"head. "
+	"His tear streaked face cries to you his pain and suffering."
+    );
+    set_gender("male");
+    set_hd(1,1);
+    set_size(2);
+    set_wielding_limbs(({"right hand","left hand"}));
+    set_overall_ac(9);
+    set_hp(5);
+    set_max_hp(30);
+    set_exp(0);
+    set_body_type("human");
+    set_race("human");
+    set_class("mage");
+    set_guild_level("mage",1);
+    set_stats("strength",10);
+    set_stats("constitution",9);
+    set_stats("dexterity",10);
+    set_stats("wisdom",12);
+    set_stats("intelligence",15);
+    set_stats("charisma",10);
+    set_alignment(1);
+    set("aggressive","aggfunc");
+    set_emotes(1, ({
+	"The old man moans in pain.",
+	"The old man looks around in desperation.",
+	"The old man tries and fails to stand.",
+    }),0);
+}
+void aggfunc() {
+    if(TP->is_class("paladin")){
+	TO->force_me("say Oh good knight! I am injured badly and fear I shall die!");
+	TO->force_me("say "+(string)TP->query_cap_name()+" I do hope you have come to aid me and not slay me.");
+	TO->force_me("say Are you truly a creature of good or a demonic incarnation in disguise?");
+	return 1;
+    }
+    if(TP->is_class("antipaladin")){
+	TO->force_me("say I hate you!");
+	return 1;
+    }
+    return 1;
+}
+int aid_func(string str) {
+    if(!str) {
+	notify_fail("What?\n");
+	return 0;
+    }
+    if(str != "man") {
+	notify_fail("What?\n");
+	return 0;
+    }
+    if(!TP->is_class("paladin")){
+	notify_fail("What?\n");
+	return 0;
+    }
+    write("%^CYAN%^"
+	"You sense the old man's wounds and lay your hands upon them.\n"
+	"The wounds quickly heal and the old man stands to his feet!\n"
+	"%^RESET%^"
+    );
+    say("%^CYAN%^"
+	+TPQCN+" lays hands upon the old man's wounds.\n"
+	"The wounds quickly heal and the old man stands to his feet!\n"	
+        "%^RESET%^"
+    ,TP);
+    TO->force_me("say Thanks ever so much "+(string)TP->query_cap_name()+"!");
+    TO->force_me("say You are truly a kind person to have come to my aid!");
+    TO->force_me("say Please take this strange stick I found...it is all I have to offer you in gratitude.");
+    TO->force_me("bow "+TP->query_name());
+    new("/d/dagger/drow/temple/obj/hlstick.c")->move(TO);
+    TO->force_me("give stick to "+TP->query_name());
+    TO->force_me("east");
+    TO->remove();
+    return 1;
+}
+int slay_func(string str) {
+    if(!str) {
+	notify_fail("What?\n");
+	return 0;
+    }
+    if(str != "man") {
+	notify_fail("What?\n");
+	return 0;
+    }
+    if(!TP->is_class("paladin")){
+	notify_fail("What?\n");
+	return 0;
+    }
+    write("%^RED%^"
+	"You sense the old man's wounds and suddenly are filled with an immense evil.\n"
+	"You reach out your hands and wrap them around his throat.\n"
+	"%^BLUE%^You squeeze the poor old man's neck until his eyes begin to bulge out of his head!\n"
+	"%^RESET%^Old man dies.\n"
+	"%^MAGENTA%^You cackle and marvel at the incredibly evil deed you have just committed."
+	"%^RESET%^"
+    );
+    say("%^RED%^"
+	+TPQCN+" eyes are suddenly filled with an immense evil.\n"
+	+TPQCN+" reaches out "
+	+TP->query_possessive()+
+	" hands and wraps them around the old man's throat.\n"
+	"%^BLUE%^"+TPQCN+" squeezes the poor old man's neck until his eyes begin to bulge out of his head!\n"
+	"%^RESET%^Old man dies.\n"
+	"%^MAGENTA%^"+TPQCN+" lets out an evil cackle!"
+	"%^RESET%^"
+    ,TP);
+    message("antipaladin", 
+	"%^BOLD%^%^RED%^"
+	"The bowels of the Abyss open up and consume "
+	+TPQCN+"'s body and soul completely!\n%^RESET%^"
+	"%^BLUE%^Moments later, "+TPQCN+
+	" returns, but with "+TP->query_possessive()+
+	" body blackened and scarred by the demons and "
+	+TP->query_possessive()+
+	" soul filled with the tainting of the black heart.\n"
+	"%^RED%^"+TPQCN+" walks guided by the hand of evil forever!\n"
+	"%^RESET%^"
+    ,users());
+    write("You are now and forever an AntiPaladin.");
+    TP->set_class("antipaladin");
+    TP->set_mlevel("antipaladin",TP->query_class_level("paladin"));
+    TP->remove_class("paladin");
+    TP->set_alignment(9);
+    TP->add_search_path("/cmds/antipaladin");
+    TP->set_posed("antipaladin");
+    TP->update_channels();
+    TP->setenv("TITLE",ADVANCE_D->get_new_title(TP));
+    TP->force_me("remove platemail");
+    TP->force_me("remove coif");
+    TP->force_me("save");
+    TO->remove();
+    return 1;
+}
+	

@@ -1,0 +1,31 @@
+#include "chaos.h"
+
+inherit VAULT;
+
+void create() {
+    ::create();
+    set_property("light", 2);
+    set_property("indoors", 1);
+    set_short("A room with a pool.");
+    set_long( 
+@MELNMARN
+%^BOLD%^A room with a pool.%^RESET%^
+This room has no real floor. There is a
+walkway around the edge of the room. In the center
+of the room, you see a large pool of water. The 
+water is cool and clear. There is nothing else in
+the room.
+MELNMARN
+);
+    set_exits( ([
+	"east" : CHAOSDIR+"floor3"
+        ]) );
+    set_door("west door",CHAOSDIR+"floor3","east",0);
+    set_smell("default","There is a musky odor about the place.");
+    set_listen("default","The sounds of scurrying rats fills your ears.");
+
+}
+void init(){
+    ::init();
+	do_random_encounters(({MONDIR+"giantrat",MONDIR+"rat"}),50,9);
+}

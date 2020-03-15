@@ -1,0 +1,37 @@
+#include <std.h>
+#include <daemons.h>
+
+inherit OBJECT;
+
+void create()
+{
+   ::create();
+   set_name("sign");
+   set_property("no animate",1);
+   set_weight(20000000);
+   set_short("A sign");
+   set_long("This sign has pictures and descriptions of those who are"+
+   " no longer welcome in Antioch for their crimes against the citizens. You may read it for more information.");
+}
+
+void init()
+{
+   ::init();
+   add_action("read","read");
+}
+
+int read(string str)
+{
+   if(str != "sign") {
+   tell_object(TP,"There's not much to read here besides the sign.");
+      return 1;
+   }
+   tell_room(ETP,""+TP->query_cap_name()+" reads over the sign.",TP);
+   tell_object(TP,"%^BOLD%^%^WHITE%^The following people are no longer welcome in this fair town:\n\n%^YELLOW%^"+
+   "\tVethor, An average male voadkyn with brown eyes\n"+
+   "\tSpungold, A well-built female wemic with green eyes and golden hair\n"+
+   "\tZasaks, A hardy male hobgoblin with yellow eyes and gray hair\n"+
+   "\tVezior, A stocky male drow with red eyes and white hair\n"+
+   "\tDestiny, A svelte female half-elf with emerald eyes and blonde hair\n");
+   return 1;
+}

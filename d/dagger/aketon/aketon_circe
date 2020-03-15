@@ -1,0 +1,14 @@
+I have started cleaning up the Aketon files, adding inherits that include terrain and travel, and generally get it into working shape.  Grendel is retaining creative control as far as the area it goes into, but I hope to have Aketon in as a working area at some point.
+
+What follows are notes to myself as well as some that might be helpful to others should something happen to me :P
+
+TREEOUT - main inherit for any outside tree rooms
+TREEIN - main inherit for any inside tree rooms
+
+So far, it seems the rooms are laid out but many are missing parts and none had travel/terrain.  I'll write more when I see what other problems there are.
+
+Circe 10/19/04
+
+Check mobs - light cavalry and city guard have no HP and so spawn unconscious.
+
+11/1/04 - All rooms in tree5 have been changed to use inherits.  Terrain, travel, and name have been added.

@@ -1,0 +1,300 @@
+Too deep recursion.
+program: adm/obj/master.c, object: adm/obj/master line 204
+'       cmd_hook' in '        std/living.c' ('      std/user#46933')line 431
+'      cmd_sneak' in 'cmds/mortal/_sneak.c' ('  cmds/mortal/_sneak')line 92
+'        move_me' in 'cmds/mortal/_sneak.c' ('  cmds/mortal/_sneak')line 140
+'       force_me' in '        std/living.c' ('      std/user#46933')line 510
+'       use_exit' in '    std/room/exits.c' ('d/deku/forest/dforest25-10')line 296
+'    move_player' in '          std/user.c' ('      std/user#46933')line 841
+'           move' in '        std/living.c' ('      std/user#46933')line 334
+'         ::move' in '        std/Object.c' ('      std/user#46933')line 1272
+'     move::move' in '          std/move.c' ('      std/user#46933')line 93
+'           init' in 'd/deku/monster/bandit.c' ('d/deku/monster/bandit#50503')line 155
+'       cmd_hook' in '        std/living.c' ('d/deku/monster/bandit#50503')line 431
+'       cmd_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 527
+'        do_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 38
+'continue_attack' in '        std/living.c' ('      std/user#46933')line 1276
+'::continue_attack' in ' std/living/combat.c' ('      std/user#46933')line 649
+'            die' in '          std/user.c' ('      std/user#46933')line 2131
+'      copy_body' in '    std/obj/corpse.c' ('std/obj/corpse#50521')line 104
+'       query_ac' in '   std/living/body.c' ('      std/user#46933')line 806
+'query_paralyzed' in ' std/living/combat.c' ('      std/user#46933')line 1733
+'query_unconscious' in '        std/living.c' ('      std/user#46933')line 1347
+'query_condition' in '        std/living.c' ('      std/user#46933')line 1307
+'query_max_stamina' in '        std/living.c' ('      std/user#46933')line 1287
+'    query_skill' in ' std/living/skills.c' ('      std/user#46933')line 272
+'    query_stats' in '        std/living.c' ('      std/user#46933')line 996
+'query_base_stats' in '          std/user.c' ('      std/user#46933')line 5018
+'        age_mod' in '          std/user.c' ('      std/user#46933')line 5043
+'query_real_age_cat' in '          std/user.c' ('      std/user#46933')line 5005
+'    file_exists' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 47
+'     valid_read' in '    adm/obj/master.c' ('      adm/obj/master')line 193
+'   check_access' in '    adm/obj/master.c' ('      adm/obj/master')line 204
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1139
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1139
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1139
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1139
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1139
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1139
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1139
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1139
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1139
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1139
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1139
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1139
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1139
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1139
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1129
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1129
+Indexing on illegal type.
+program: daemon/bridge_monitor_d.c, object: daemon/bridge_monitor_d line 1129
+'   check_bridge' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 1116
+'    show_bridge' in 'daemon/bridge_monitor_d.c' ('daemon/bridge_monitor_d')line 1129
+Error in loading object
+program: cmds/system/_eval.c, object: cmds/system/_eval line 48
+'       cmd_hook' in '        std/living.c' ('      std/user#36005')line 431
+'       cmd_eval' in ' cmds/system/_eval.c' ('   cmds/system/_eval')line 48
+Failed to load file: up
+program: realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c, object: realms/lujke/tecqumin/jungle/rooms/ropebridge1 line 516
+'       climb_up' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 516
+Bad argument 1 to present()
+program: realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c, object: realms/lujke/tecqumin/jungle/rooms/ropebridge1 line 512
+'       climb_up' in 'realms/lujke/tecqumin/jungle/rooms/ropebridge_base.c' ('realms/lujke/tecqumin/jungle/rooms/ropebridge1')line 512
+Error in loading object
+program: cmds/system/_eval.c, object: cmds/system/_eval line 48
+'       cmd_hook' in '        std/living.c' ('      std/user#36005')line 431
+'       cmd_eval' in ' cmds/system/_eval.c' ('   cmds/system/_eval')line 48
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Bad argument 2 to member_array()
+program: cmds/feats/_rage.c, object: cmds/feats/_rage#142199 line 152
+'        rage_me' in '  cmds/feats/_rage.c' ('cmds/feats/_rage#142199')line 152
+Error in call out.
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Bad argument 1 to call_other()
+program: cmds/spells/g/_greater_dispel_magic.c, object: cmds/spells/g/_greater_dispel_magic#214798 line 175
+'     heart_beat' in '        std/battle.c' ('d/dagger/road/road26')line 440
+' execute_attack' in '   std/magic/spell.c' ('cmds/spells/g/_greater_dispel_magic#214798')line 1415
+'   check_fizzle' in '   std/magic/spell.c' ('cmds/spells/g/_greater_dispel_magic#214798')line 1467
+'   spell_effect' in 'cmds/spells/g/_greater_dispel_magic.c' ('cmds/spells/g/_greater_dispel_magic#214798')line 96
+'         dispel' in 'cmds/spells/g/_greater_dispel_magic.c' ('cmds/spells/g/_greater_dispel_magic#214798')line 117
+'    checkDispel' in 'cmds/spells/g/_greater_dispel_magic.c' ('cmds/spells/g/_greater_dispel_magic#214798')line 175
+Heart beat in d/dagger/road/road26 turned off.
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Bad argument 1 to call_other()
+program: d/attaya/senund/obj/riftund.c, object: d/attaya/senund/obj/riftund#270496 line 140
+'     heart_beat' in 'd/attaya/senund/obj/riftund.c' ('d/attaya/senund/obj/riftund#270496')line 149
+'     close_rift' in 'd/attaya/senund/obj/riftund.c' ('d/attaya/senund/obj/riftund#270496')line 140
+Heart beat in d/attaya/senund/obj/riftund#270496 turned off.
+Too deep recursion.
+program: adm/obj/simul_efun.c, object: adm/obj/simul_efun line 74
+'       use_exit' in '    std/room/exits.c' ('d/attaya/senund/rooms/rm9')line 296
+'    move_player' in '          std/user.c' ('     std/user#220994')line 841
+'           move' in '        std/living.c' ('     std/user#220994')line 334
+'         ::move' in '        std/Object.c' ('     std/user#220994')line 1272
+'     move::move' in '          std/move.c' ('     std/user#220994')line 93
+'           init' in '       std/monster.c' ('d/attaya/senund/mon/assassin#265146')line 238
+'        aggfunc' in 'd/attaya/senund/mon/assassin.c' ('d/attaya/senund/mon/assassin#265146')line 91
+'       cmd_hook' in '        std/living.c' ('d/attaya/senund/mon/assassin#265146')line 431
+'       cmd_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 527
+'        do_stab' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 34
+'      do_strike' in ' cmds/mortal/_stab.c' ('   cmds/mortal/_stab')line 397
+'      do_struck' in '        std/armour.c' ('d/underdark/lower/dragon/obj/shadowdancer#221113')line 488
+'     struck_fun' in 'd/underdark/lower/dragon/obj/shadowdancer.c' ('d/underdark/lower/dragon/obj/shadowdancer#221113')line 102
+' execute_attack' in ' std/living/combat.c' ('     std/user#220994')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('     std/user#220994')line 1519
+'calculate_damage' in '   daemon/combat_d.c' ('     daemon/combat_d')line 694
+'     new_struck' in '   daemon/combat_d.c' ('     daemon/combat_d')line 1148
+'  send_messages' in '   daemon/combat_d.c' ('     daemon/combat_d')line 1087
+'    tell_object' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 62
+'receive_message' in '          std/user.c' ('     std/user#220994')line 2798
+'query_unconscious' in '        std/living.c' ('     std/user#220994')line 1347
+'query_condition' in '        std/living.c' ('     std/user#220994')line 1307
+'query_max_stamina' in '        std/living.c' ('     std/user#220994')line 1290
+'    query_skill' in ' std/living/skills.c' ('     std/user#220994')line 272
+'    query_stats' in '        std/living.c' ('     std/user#220994')line 996
+'query_base_stats' in '          std/user.c' ('     std/user#220994')line 5018
+'        age_mod' in '          std/user.c' ('     std/user#220994')line 5043
+'query_real_age_cat' in '          std/user.c' ('     std/user#220994')line 5002
+'     query_race' in '        std/living.c' ('     std/user#220994')line 110
+'        avatarp' in 'adm/obj/simul_efun.c' ('  adm/obj/simul_efun')line 74
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#306350 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306350')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306350')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306350')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306350')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306355')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#306354 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306354')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306354')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306354')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306354')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#306352 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306352')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306352')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306352')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306352')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#306353 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306353')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306353')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306353')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#306353')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_7 turned off.
+Bad argument 1 to call_other()
+program: std/living/skills.c, object: std/user#46933 line 412
+'     heart_beat' in '          std/user.c' ('      std/user#46933')line 1795
+'query_class_level' in ' std/living/skills.c' ('      std/user#46933')line 412
+error when executing program in destroyed object std/user#46933
+Heart beat in std/user#46933 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#309608 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309608')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309608')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309608')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309608')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12 turned off.
+Index out of bounds
+program: std/monster.c, object: realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605 line 784
+'     heart_beat' in '        std/battle.c' ('realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12')line 440
+' execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 1170
+'internal_execute_attack' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 1264
+'   do_functions' in ' std/living/combat.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 870
+'get_random_func' in '       std/monster.c' ('realms/quetzalcoatl/ud_ruins/mon/hook_horror#309605')line 784
+Heart beat in realms/quetzalcoatl/ud_ruins/rooms/ruins/ruins_12 turned off.
+Bad argument 2 to member_array()
+program: cmds/spells/p/_planar_portal.c, object: cmds/spells/p/_planar_portal#320661 line 56
+'     heart_beat' in '        std/battle.c' ('d/laerad/parnelli/asgard/as67')line 440
+' execute_attack' in '   std/magic/spell.c' ('cmds/spells/p/_planar_portal#320661')line 1415
+'   check_fizzle' in '   std/magic/spell.c' ('cmds/spells/p/_planar_portal#320661')line 1467
+'   spell_effect' in 'cmds/spells/p/_planar_portal.c' ('cmds/spells/p/_planar_portal#320661')line 56
+Heart beat in d/laerad/parnelli/asgard/as67 turned off.
+Bad argument 1 to call_other()
+program: d/magic/mon/astral_construct.c, object: d/magic/mon/astral_construct#320950 line 110
+'     heart_beat' in 'd/magic/mon/astral_construct.c' ('d/magic/mon/astral_construct#320950')line 110
+Heart beat in d/magic/mon/astral_construct#320950 turned off.
+Bad argument 1 to call_other()
+program: cmds/spells/e/_energy_retort.c, object: cmds/spells/e/_energy_retort#320462 line 56
+'     heart_beat' in '        std/battle.c' ('d/laerad/parnelli/asgard/as67')line 440
+' execute_attack' in 'cmds/spells/e/_energy_retort.c' ('cmds/spells/e/_energy_retort#320462')line 56
+Heart beat in d/laerad/parnelli/asgard/as67 turned off.
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Error in loading object
+program: realms/quetzalcoatl/ud_ruins/rooms/lair/drider_house.c, object: realms/quetzalcoatl/ud_ruins/rooms/lair/drider_house line 49
+'       cmd_hook' in '        std/living.c' ('     std/user#306155')line 431
+'       cmd_peer' in ' cmds/mortal/_peer.c' ('   cmds/mortal/_peer')line 55
+'          do_lp' in ' cmds/mortal/_peer.c' ('   cmds/mortal/_peer')line 153
+'         create' in 'realms/quetzalcoatl/ud_ruins/rooms/lair/drider_house.c' ('realms/quetzalcoatl/ud_ruins/rooms/lair/drider_house')line 49
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472
+Indexing on illegal type.
+program: adm/daemon/ftpd.c, object: adm/daemon/ftpd line 472
+'in_listen_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 657
+'in_write_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 643
+'resolve_callback' in '   adm/daemon/ftpd.c' ('     adm/daemon/ftpd')line 472

@@ -1,0 +1,49 @@
+%^B_MAGENTA%^If you're seeeing this, there is a coding error.  
+Please bug report it.
+%^ORANGE%^North branch of the Sarcosta River%^RESET%^
+%^BOLD%^%^GREEN%^A quiet, lightly forested area borders the river on both banks.%^RESET%^
+%^ORANGE%^North branch of the Sarcosta River%^RESET%^
+%^BOLD%^%^GREEN%^You see a large plains area to the west and untamed wilderness to the east.  A city rises above the horizon to the southeast.%^RESET%^
+%^ORANGE%^North branch of the Sarcosta River%^RESET%^
+%^CYAN%^You have a clear view of a bridge over the quiet road leading from the plains to the northwest into the city of Tabor to the southeast.  You also get a glimpse of a large fortress to the northeast and the top of a tower beyond it and more directly eastward.
+%^ORANGE%^On the Sarcosta River%^RESET%^
+%^BOLD%^%^GREEN%^Pristine forest borders the western bank of the river with the city of Tabor nestled in the forest to the east.%^RESET%^
+%^ORANGE%^South of Tabor on the Sarcosta River%^RESET%^
+%^CYAN%^The bustling dock that serves the city of Tabor connects to the Northern Highway on this section of the river.  You can see numerous travelers on the nearby road and many seem to be merchants or caravans carrying trade goods.
+%^ORANGE%^On the Sarcosta River%^RESET%^
+%^BOLD%^%^GREEN%^Pristine forest surrounds you as the river meanders through it.%^RESET%^
+%^ORANGE%^On the Sarcosta River%^RESET%^
+%^BLUE%^You see the walls of Tharis to the south.  The dock you are nearing connects to a road you can see cutting through the forest headed northward to Shadow and south into the heart of Tharis.
+%^ORANGE%^Lower Sarcosta River%^RESET%^
+%^BOLD%^%^GREEN%^Pristine forest surrounds you as the river meanders through it.
+%^ORANGE%^Lower Sarcosta River%^RESET%^
+%^ORANGE%^The forest is thinning near the river as it widens into a flood plain and feeds into the ocean to the east.
+%^BLUE%^Sarcosta River Mouth%^RESET%^
+%^BLUE%^The river has merged into the ocean here.  Waves from the ocean rolling in create some turbulence as they meet the calmer water of the river.
+
+/*  0-9 above
+11 descriptions
+
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+You see an island to the west.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+You see an island to the north.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+You see an island to the south.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+You see an island in the water here.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+The coast of Great Continent is to the west.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+The coast of the Continent of Danger is to the east.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+Off to the west, the Dagger coast rises from the horizon.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+Off to the west, a densely forested coast rises.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+Off to the west, the Dagger Straits open.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+Off to the north, the Dagger Straits open.
+%^BOLD%^You are on the Saakrune Sea.%^RESET%^
+Off to the south, the Dagger Straits open.
+*/

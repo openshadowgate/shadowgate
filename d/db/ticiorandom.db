@@ -1,0 +1,2 @@
+|speech say in a slurred speech+?gender == male+hey bub, don't you look at me like that.+Don't make me come over there.+?+?gender == female+Hey babe, I've got something for you.+@pinch $N in the ass+?+Go on get out of here, you don't want none of this.
+?gender == male+Oi! I was just lookin' at 'er mate!+?+?gender == female+Oi! I'm just lookin babe...+#Unless you're lookin to ditch that fella?+@wink+?+Don't report me to that Magistrate again!  He don't wanna hear about a little harmless fun anyhow.+&smirk

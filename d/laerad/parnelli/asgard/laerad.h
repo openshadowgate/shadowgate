@@ -1,0 +1,1 @@
+#define ASGARD "/d/laerad/asgard.c"

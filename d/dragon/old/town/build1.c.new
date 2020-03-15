@@ -1,0 +1,19 @@
+The current description is as follows: %^BLUE%^This is one of the many abandoned buildings in the city of %^CYAN%^Sanctuary.%^BLUE%^ The room contains a blood-soaked bed, an overturned trunk and a bearskin rug.  The straw stuffing inside the mattress has been strewn across the floor along with the contents of the trunk.%^RESET%^
+
+Okay, now for the new description...
+
+%^RED%^This is one of the many abandoned buildings in the city of %^CYAN%^Sanctuary%^RESET%^%^RED%^. Though upon entering it, it is made quite obvious that it is has been, or is to be used for some purpose, as the center of it has been cleared of any debris. The remains of a broken trunk and a blood stained bed have been thrown forcefully up against the wall and the thick dust found throughout most of this town does not linger here. In the center of the room now are engraved two summoning circles each of them roughly five feet from the walls, and five feet apart. Around each of the circles rest burning candles.
+%^RESET%^
+
+You can just change it to this, or add the following as well. 
+
+look circle(1,2), look summoning circle(1,2) = %^RED%^These circles are perfectly rounded and are engraved into the floor of the building. The edges are lined with magical %^BLUE%^runes%^RED%^ that seem to be giving off a weird, eerie glow.%^RESET%^
+
+look candle(s) = %^CYAN%^These candles are made from a darkened bees wax, and as you examine them you notice that the flame doesn't seem to be getting any dimmer, nor does the wax seem to be melting...%^RESET%^
+
+               If this isn't too much trouble, I would be very appreciative, 
+
+       And if you haven't noticed, it's in the city of sanctuary, 
+
+                          -Silvanus
+

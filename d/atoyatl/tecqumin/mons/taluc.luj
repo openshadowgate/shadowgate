@@ -1,0 +1,257 @@
+//jontar.c - The Old Priest                                 
+// Coded by Lujke 29/12/06
+#include <std.h>
+#include "../tecqumin.h"
+inherit MOB + "QNPC.c";
+
+void set_responses();
+
+void create(){
+   ::create();
+   set_name("Taluc the betrayer");
+   set_id( ({"taluc","betrayer","Taluc", "ghost", "tecqumin"}) );
+   set_short("Taluc the betrayer");
+   set_long("A slightly more substantial ghost than most");
+   set_gender("male");
+   set_race("ghost");
+   set_body_type("human");
+   set_hd(90,5);
+   set_alignment(5);
+   set_max_hp(2500);
+   set_hp(query_max_hp());
+   set_overall_ac(-30);
+   set_class("fighter");
+   set_mlevel("fighter",35);
+   set_level(35);
+   set_stats("wisdom",19);
+   set_stats("strength",18);
+   set_stats("constitution",18);
+   set_stats("intelligence",18);
+   set_stats("charisma",16);
+   set_stats("dexterity",18);
+   set_exp(60);
+   set("aggressive",0);
+   set_responses();
+
+}
+
+set_responses(){
+  set_response(({"hello", "greetings", "good day", "gooday"}), 
+          ({"What? Who's that?", "Ah! How interesting. The living"
+    +" come to visit the dead city of the %^CYAN%^Tecqumin%^RESET%^."
+    +" And you are from far away, I think."}) );
+  set_response(({"tecqumin"}), ({"A faded race, my people,"
+    +" though they didn't know it. They were grand enough on their"
+    +" little island here, even venturing across the seas to wage"
+    +" their wars. But I did not see how small they were until I"
+    +" %^CYAN%^left and returned%^RESET%^" }) );
+  set_response(({"left and returned"}), ({"Yes, I was the first"
+    +" %^CYAN%^Tecqumin%^RESET%^ in an age to travel in the wider"
+    +" world. I journeyed far and saw much. I was gone so long that"
+    +" few remembered me when I returned.",
+     "But by then, I knew the truth about their %^ORANGE%^gods"
+    +"%^RESET%^" }) );
+  set_response(({"foreign gods"}), ({"When I travelled in the world,"
+    +" I encountered priests and worshippers of Gods who were"
+    +" strange to me. I learned of Lathander, the Morninglord, god"
+    +" of the Sun, who also has charge of rebirth and renewal. I"
+    +" could not understand how this could be so, when I believed"
+    +" that An-Tehp was Lord of the Sun.", "I heard tales of"
+    +" Silvanus, whose desmene seemed to overlap with that of Quali."
+    +" I learned of Malar and Anhur, Shaundakul, Akadi and Grumbar"
+    +" and many others. What's more, I witnessed miracles performed"
+    +" by the priests of these Gods that were far greater in power"
+    +" than anything our priests could achieve.", "In time, I was"
+    +" convinced that these foreign Gods were real, and that our"
+    +" Gods were no Gods at all, but simply powerful spirits who had"
+    +" taken interest in our people."  }));
+  set_response(({"gods"}), ({"Gods? Hah! The gods of the%^CYAN%^"
+    +" Tecqumin%^RESET%^ may have been great and powerful spirits,"
+    +" but they were no true gods.", 
+     "Yes, I see in your eyes you know the truth of it.%^RED%^"
+    +" An-Tehp%^RESET%^ does not carry the sun across the sky,"
+    +" nor ensure the sunrise each day. That job goes to Lathander,"
+    +" as the humans call him.", 
+     "The real Gods may have ignored the %^CYAN%^Tecqumin%^RESET%^"
+    +" for a while, but they are jealous of their status. As I"
+    +" learned more of them I realised they would not let my people"
+    +" persist in their old ways. I realised we needed%^CYAN%^"
+    +" protection%^RESET%^" }) );
+  set_response(({"terrible revenge", "revenge"}),({"The ferocity of"
+    +" the revenge of the %^ORANGE%^true Gods%^RESET%^ against the"
+    +" %^CYAN%^Tecqumin%^RESET%^ surprised even me - and I had been"
+    +" waiting for it.", 
+     "The city was smote into ruins in a single devastating wave of"
+    +" destruction, one that could only, I think, have been created"
+    +" by Talos.", 
+     "Following that there was a curse of sickness on all the"
+    +" survivors. They died in agony, making me suspect the hand of"
+    +" Beshaba in their demise.", 
+     "And then all were gone, nothing remaining of the%^CYAN%^"
+    +" Tecqumin%^RESET%^ but ghosts living in ruins. As far as I"
+    +" know, even our %^ORANGE%^Gods%^RESET%^ were destroyed.",
+     "You haven't seen any of our %^ORANGE%^Gods%^RESET%^, I"
+    +" suppose?"}) ); 
+  set_response(({"protection"}), ({"I was the only%^CYAN%^"
+    +" Tecqumin %^RESET%^who realised it, but I knew the true"
+    +" %^ORANGE%^Gods%^RESET%^ would not allow them to continue"
+    +" worshipping their home-spun %^ORANGE%^gods%^RESET%^ forever.",
+     "I knew that if the %^CYAN%^Tecqumin%^RESET%^ were to survive,"
+    +" they would need the protection of a%^ORANGE%^ real god"
+    +" %^RESET%^of their own. And it just happened that I knew where"
+    +" to find one. All I had to do was to persuade them to worship"
+    +" Him."}) );
+  set_response(({"sacrifice"}), ({"The %^CYAN%^Tecqumin%^RESET%^"
+    +" made sacrifices to the %^ORANGE%^Gods%^RESET%^ in ritual"
+    +" ceremonies at the very summit of the%^CYAN%^ Ziggurat"
+    +"%^RESET%^."}) );
+  set_response(({"unfettered"}), ({"He contacted me in my dreams. He"
+    +" let me see the fate of my people, the %^BOLD%^%^RED%^terrible"
+    +" revenge%^RESET%^ the %^ORANGE%^Gods%^RESET%^ would wreak upon"
+    +" them for their false worship.", 
+     "He was right about the fate that was in store for the%^CYAN%^"
+    +" Tecqumin%^RESET%^, but He also showed me how it could be"
+    +" averted, how He could protect them if only they would worship"
+    +" him with the offer of souls and %^RED%^blood gift%^RESET%^"
+    +" they gave so freely to their false%^ORANGE%^ gods%^RESET%^" })
+     ,"sigh", ({"Heard of the Unfettered"}) );
+  set_response( ({"real god"}), ({"In my travels in the wider world,"
+    +" I had learned of the being known as the %^MAGENTA%^Unfettered"
+    +"%^RESET%^. Not one of the %^ORANGE%^Gods%^RESET%^ of this"
+    +" Realm, He was nevertheless a being of unfathomable power and"
+    +" I was sure he could protect the %^CYAN%^Tecqumin%^RESET%^"
+    +" from the %^ORANGE%^Gods%^RESET%^."}),"reality"); 
+  set_response( ({"blood gift"}), ({"The blood gift was the"
+    +" sacrifice of life the %^CYAN%^Tecqumin%^RESET%^ made to their"
+    +" %^ORANGE%^gods. The power of %^CYAN%^life force%^RESET%^"
+    +" passed to them from those given the %^CYAN%^flowery death"
+    +"%^RESET%^. I planned, with %^ORANGE%^Epithon's%^RESET%^ aid,"
+    +" to use the power of the blood gift to free the%^MAGENTA%^"
+    +" Unfettered%^RESET%^ from his %^BLUE%^entrapment%^RESET%^, to"
+    +" enable him to save the %^CYAN%^Tecqumin %^RESET%^people."}), 
+       "sigh", "Heard of the Unfettered");
+  set_response(({"life force"}), ({"In each being there is a force"
+    +" of life. Even plants and animals contain life force, but it"
+    +" is strongest in sentient beings. This is the power that the"
+    +" %^CYAN%^Tecqumin%^RESET%^ priests passed to their gods, and"
+    +" which I tried to use to aid the %^MAGENTA%^Unfettered"
+    +"%^RESET%^, to gain His protection for my people."}) );
+  set_response(({"flowery death"}), ({"Flowery death? That's what"
+    +" the priests used to call the way they butchered their"
+    +" sacrifices at the top of the ziggurat. They were always a bit"
+    +" soft about how they talked about things.", "They basically"
+    +" used= to stretch the 'sacrifice' backwards over a stone slab"
+    +" and cut his or her heart out of their chest with an obsidian"
+    +" knife. I'm not too sure what was supposed to be flowery about"
+    +" it."}) );  
+  set_response(({"quali"}), ({"Quali lives?", "Now that is"
+    +" interesting news. And he is maddened, you say? No doubt the"
+    +" after effect of the drubbing he received during the%^CYAN%^"
+    +" downfall of our people%^RESET%^. But still, if we could"
+    +" sacrifice HIS soul, it would surely be a great boost to our"
+    +" efforts to free the%^MAGENTA%^ Unfettered%^RESET%^ and"
+    +" reverse the %^CYAN%^curse of the Tecqumin%^RESET%^. Perhaps,"
+    +" in his maddened state he might even be killable.", 
+     "But the Tecqumin cannot leave this city. This task would have"
+    +" to fall to you. Would you take on the challenge to%^BLUE%^"
+    +" slay a God%^RESET%^ and reverse the %^CYAN%^curse of the"
+    +" Tecqumin%^RESET%^?"}), "surprise", 
+      "Discovered the Madness of Quali" );
+  set_response(({"slay a god"}), ({"If you wish to help us collect"
+    +" the life force of the maddened Spirit of the Jungle,"
+    +" %^GREEN%^Q%^BOLD%^%^GREEN%^u%^RESET%^%^GREEN%^al%^BOLD%^"
+    +"%^GREEN%^i%^RESET%^, you will need to first obtain the"
+    +" %^BOLD%^%^BLACK%^Jetstone%^RESET%^. It is the vessel in"
+    +" which we have been storing the %^CYAN%^life force %^RESET%^of"
+    +" %^ORANGE%^sacrifices%^RESET%^ to the %^MAGENTA%^Unfettered"
+    +"%^RESET%^. When we have enough, we will be able to use those"
+    +" forces to free him from his %^BLUE%^entrapment%^RESET%^."}),
+     "jetstone");
+  set_response(({"jetstone"}), ({"The %^BOLD%^%^BLACK%^Jetstone"
+    +" %^RESET%^is an artefact of our ancestors. I gave it to our"
+    +" prince, %^CYAN%^Epithon%^RESET%^, to place near the"
+    +" sacrificial altar on the ziggurat. That way, it would be able"
+    +" to absorb the %^CYAN%^life forces%^RESET%^ from the%^CYAN%^"
+    +" sacrifices."}), "grin", "Heard of the Jetstone" );
+  set_response(({"epithon"}),({"Epithon is the prince of the"
+    +" Tecqumin, and their rightful ruler, even though he did have"
+    +" to depose his own half sister in order to take up the throne."
+    , "His claim was always stronger than hers, but she refused to"
+    +" listen to me about the imminent threat from the%^ORANGE%^"
+    +" foreign gods%^RESET%^, and that was the final reason I"
+    +" implored him to take the throne from her, so that something"
+    +" could be done about it."}));
+  set_response(({"entrapment"}), ({"The Unfettered was defeated by"
+    +" the foreign gods when they came to punish the Tecqumin for"
+    +" their worship of false gods. They came too soon for our plan"
+    +" to bear fruit. The Unfettered had not sufficient power to"
+    +" defend us from them. And so, beaten, He was trapped and"
+    +" imprisoned, behind a carved stone gateway in the jungle.", 
+     "Perhaps as a joke, perhaps as a warning, they decorated the"
+    +" gateway with symbols of two of the %^CYAN%^Tecqumin%^RESET%^"
+    +" gods: %^BOLD%^%^BLACK%^Nobach Eri%^RESET%^ and %^BOLD%^"
+    +"%^RED%^Teoctauoc, the Jaguar god and the feathered serpent."})
+  );
+}
+
+void surprise(){
+  force_me("emote 's face registers his surprise");
+}
+
+void grin(){
+  force_me("emote grins wickedly");
+}
+
+void sigh(){
+  force_me("emote sighs");
+}
+
+void jetstone(){
+  string * quests;
+  object * people, room;
+  int i;
+  room = ETO;
+  if (!objectp(room)){return;}
+  people = all_living(room);
+  if (sizeof(people)<1){return;}
+  for (i=0;i<sizeof(people);i++){
+    if (!interactive(people[i])){
+      continue;
+    }
+    quests = people[i]->query_mini_quests();
+    if (member_array("Heard of the Jetstone",quests)!=-1){
+      continue;
+    }
+    people[i]->set_mini_quest("Heard of the Jetstone");
+  }
+}
+
+void reality(){
+  string * quests;
+  object * people, room;
+  int i;
+  room = ETO;
+  if (!objectp(room)){return;}
+  people = all_living(room);
+  if (sizeof(people)<1){return;}
+  for (i=0;i<sizeof(people);i++){
+    if (interactive(people[i])==0){
+      continue;
+    }
+    quests = people[i]->query_mini_quests();
+    if (member_array("Heard of the Unfettered",quests)!=-1){
+      continue;
+    }
+    people[i]->set_mini_quest("Heard of the Unfettered");
+  }
+  for (i=0;i<sizeof(people);i++){
+    if (!interactive(people[i])){
+      continue;
+    }
+    quests = people[i]->query_mini_quests();
+    if (member_array("Nature of the Unfettered",quests)!=-1){
+      continue;
+    }
+    people[i]->set_mini_quest("Nature of the Unfettered");
+  }
+}

@@ -1,0 +1,105 @@
+#include "/d/shadow/room/city/cguild/ranger/ranger.h"
+//special thanks to Kassad for this!
+
+inherit OBJECT;
+
+void create(){
+	::create();
+	
+   set_name("snare trap");
+   set_id(({"trip wire","wire","trap","tripwire"}));
+   set_short("%^BOLD%^Trip Wire%^RESET%^");
+	set_long(
+@TERRATO
+   This is a razor sharp tripwire normally used for hunting. Simply <rig>
+the wire across the exit you want to trap and the next time somebody tries
+to go in that direction the wire will entwine itself around the victim's
+feet, hopefully immobilizing them.
+TERRATO
+	);
+   set_weight(2);
+	set_value(100);
+}
+/*
+void init(){
+	::init();
+	
+	if(TP == ETO) {
+       if(query_trap_status("trip wire"))
+      toggle_trap("trip wire");
+      set_short("%^BOLD%^Trip Wire%^RESET%^");
+		clear_all_traps(({}));
+        add_action("rig","rig");
+	}
+	
+	
+}
+
+
+string exit;
+int rig(string str) {
+	if(!str) {
+      write("rig trip wire <exit>");
+		return 1;
+	}
+       if(sscanf(str,"trip wire %s",exit) != 1) {
+       write("rig trip wire <exit>");
+		return 1;
+	}
+	if(member_array(exit,  ETP->query_exits()) == -1){
+		write("That exit does not exist.");
+		return 1;
+	}
+       set_trap_functions(({"trip wire"}),({"tripUm"}),({exit}));
+       set_trap_functions(({"trip wire"}),({"tripUm"}),({"ride"}));
+	TO->move(ETP);
+        set_hidden(1);
+      add_hidden_seen(TP);
+        set_property("no offer",1);
+      write("%^BLUE%^You lay the trip wire across an exit hoping to catch prey going "+exit+".");
+	if(!TP->query_invis())
+            tell_room(ETP,"You see "+TPQCN+" rig something out toward the "+exit+" direction.",TP);
+	return 1;
+}
+
+int tripUm(string str){
+   object obj;
+   if(query_verb() == "ride" && strsrch(str,exit) == -1) return 0;
+   if(query_verb() == "ride" && !obj = TP->query_in_vehicle()) return 0;
+   if(TP->query_tripped()) return 0;
+   if(!objectp(TP)) return 1;
+   if(obj = TP->query_in_vehicle()){
+      write("%^BOLD%^As you ride "+exit+" your mount suddenly trips!");
+      write("%^BOLD%^%^You fall off balance and you find youself land flat on your face!");
+      write("%^ORANGE%^The shock of the landing has left you %^RESET%^%^BOLD%^stiff%^RESET%^%^ORANGE%^ as you try to scramble to your feet!");
+      TP->set_tripped(roll_dice(1,2),"%^BLUE%^You are struggling to get back onto your feet!");
+      tell_room(ETP,"%^BLUE%^%^BOLD%^As "+TPQCN+" rides "+exit+" "+TP->query_possessive()+" mount suddenly trips.",TP);
+      tell_room(ETP,"%^BLUE%^%^BOLD%^"+TPQCN+" falls off and lands flat on the ground!",TP);
+      obj->do_damage("torso",roll_dice(1,10));
+      TP->force_me("dismount "+((string *)obj->query_id())[0]);
+      obj->set_tripped(1,"Ouch!!!");
+   }
+   else {
+   write("%^BOLD%^%^Your feet %^YELLOW%^fly%^RESET%^%^BOLD%^ out from under you and you find youself flat on your face!");
+   write("%^RED%^You feel the %^BOLD%^pain%^RESET%^%^RED%^ of a wire wrapped around your legs!");
+   write("%^ORANGE%^The shock of the landing has left you %^RESET%^%^BOLD%^stiff%^RESET%^%^ORANGE%^ as you try to scramble to your feet!");
+   TP->set_tripped(roll_dice(1,2),"%^BLUE%^You are struggling to get free and back onto your feet!");
+   tell_room(ETP,"%^BLUE%^%^BOLD%^As "+TPQCN+" walks "+query_verb()+" "+TP->query_subjective()+" suddenly slips.",TP);
+   tell_room(ETP,"%^BLUE%^%^BOLD%^"+TPQCN+" goes flying into the air and "+TPQCN+" begins struggling on the ground!",TP);
+   }
+	if(!trapped(query_verb()))
+		toggle_trap(query_verb());
+	
+   set_hidden(0);
+	return 1;
+}
+
+int move(mixed dest){
+   int hold;
+   hold = ::move(dest);
+   if(!hold){
+      set_hidden(0);
+      remove_property("no offer");
+   }
+   return hold;
+}*/

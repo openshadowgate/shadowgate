@@ -1,0 +1,45 @@
+#include <std.h>
+inherit "/std/armour";
+
+string owner;
+void create() {
+    ::create();
+    set_name("phantasmic plate");
+    set("id", ({ "phantasmic plate", "armour", "phantasmic plate armour","plate",
+	"armor","phantasmic",
+	"phantasmicplate" }) );
+    set("short", "Phantasmic Plate armor");
+    set_long(
+      "It is like a black mirror.  It has a highly reflective black surface and is comprised of a large breastplate, shoulder plates, and thousands of tiny black squares that make up meshwork.  It gleams in the sunlight, but seems oddly out of place in it."
+    );
+    set_weight(50);
+    set("value", 20000);
+    set_type("armour");
+    set_limbs( ({ "torso" }) );
+    set_ac(9);
+    set_property("enchantment",5);
+    set_wear((:this_object(), "extra_wear":));
+    set_remove("%^BOLD%^%^BLUE%^The phantasmic armor shatters into several thousand shards of darkness, then forms again.");
+}
+int extra_wear() {
+    if(interactive(TP) && owner != (string)TPQN) return 0;
+    if((int)TP->query_level() < 30) {
+	notify_fail("You lack the lifeforce energy needed to sustain this armor.");
+	return 0;
+    }
+    write("%^BOLD%^%^BLUE%^The phantasmic armor flies apart into a million spinning shards of darkness!  They recombine upon your body, fitting you perfectly!");
+    return 1;
+}
+
+int query_size(){ 
+    if(living(ETO)) 
+	return ETO->query_size();
+    else return 3;
+}
+void init(){
+    ::init();
+    if(stringp(owner)) return;
+    if(interactive(TP) && TP == ETO){
+	owner = TPQN;
+    }
+}

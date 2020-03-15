@@ -1,0 +1,6 @@
+#include "/d/common/common.h"
+#define OBJD "/d/barriermnts/bpeak/obj/"
+#define TMONDIR "/d/barriermnts/bpeak/mon/"
+#define LGSW "/d/common/obj/weapon/"
+#define INRMS "/d/barriermnts/bpeak/rooms/"
+#define IHRMS "/d/barriermnts/bpeak/"

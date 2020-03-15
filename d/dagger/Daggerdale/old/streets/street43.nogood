@@ -1,0 +1,36 @@
+#include <std.h>
+inherit ROOM;
+
+void create(){
+  ::create();
+set_property("light", 2);
+  set_short("The Cobblestone Road through Daggerdale.");
+  set("day long",
+@GIL
+%^ORANGE%^This is a Cobblestone Road through Daggerdale.
+GIL
+);
+  set("night long",
+@GIL
+%^YELLOW%^Bright streetlamps are every 20 feet.
+GIL
+);
+set_smell("default", "%^BOLD%^%^BLUE%^The air smells crisp and clean.");
+set_listen("default", "You can hear the sounds of villagers.");
+  set_items(([
+"streetlamps" : "They are 10 feet tall, made of finely sculptured metal and beautiful crystal lamps. They appear to burn some kind of gas entering the streetlamp from underground pipes. Gnome craftsmanship probably, tho the metalwork itself is Dwarven.",
+"light" : "It's looks like a lantern",
+]));
+
+  set_exits(([
+"west" : "/d/dagger/Daggerdale/streets/street42",
+"south" : "/d/dagger/Daggerdale/streets/street34",
+     ]));
+}
+void reset(){
+::reset();
+if(!present("street lamp")){
+//new("/d/dagger/Torm/road/items/objs/street_lamp.c")->move(TO);
+//new("/d/dagger/Torm/road/items/objs/street_lamp.c")->move(TO);
+}
+}

@@ -1,0 +1,5 @@
+#cmds/druid/_meditate.c
+m_beat 10
+spells_per_level ({3,3,3,2,0,0,0,})
+save_file "/d/priest/mistletoe/MS_makoto"
+mistletoe 

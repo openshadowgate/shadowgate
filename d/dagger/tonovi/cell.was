@@ -1,0 +1,278 @@
+/* Borrowed from the Shadow jail cell and adapted from Tonovi*/
+
+#define JAILMAIN "/d/dagger/tonovi/town/jail1"
+//#define SGUARD "/d/shadow/mon/guards/guard_d"
+
+#define MAXTIME 21600
+#define MAXWANTED 86400
+
+// set max jail time in player age (online time) for auto-release
+// is in seconds so 10800 = 3 hrs. (could easily take 6-10 if they mostly
+// idle and their time isn't all counting)
+// 12/20/02 - doubled it and also made it 24 hrs. for people on the wanted list 
+//   after someone got early release that shouldn't have - hopefully those won't 
+//   get out sooner than 3 RL days now, if then and those involved with the RP
+//   will follow up and check on them regularly
+
+#include <std.h>
+#include <daemons.h>
+
+inherit VAULT;
+string *prisoners;
+
+void check();
+void check_release();
+int company;
+
+void create(){
+   ::create();
+   set_terrain(STONE_BUILDING);
+   set_travel(PAVED_ROAD);
+   set_property("no teleport",1);
+   set_indoors(1);
+   set_light(1);
+   set_name("jail");
+   set_short("A Tonovi jail cell");
+   set_long(
+      "%^BOLD%^%^BLACK%^The holding cell is fairly good sized "+
+      "for a cell.  It looks like it could hold about four "+
+      "elves comfortably.  There are four cots strewn about to "+
+      "rest on.  A small, stone %^RESET%^table "+
+      "%^BOLD%^%^BLACK%^is in one corner with bits and pieces "+
+      "of food and drink scattered atop it.  A very small "+
+      "%^RESET%^hole %^BOLD%^%^BLACK%^has been carved in "+
+      "another corner and has been covered with a piece of "+
+      "mesh.  The facing wall has fours sets of %^RESET%^"+
+      "%^ORANGE%^manacles %^BOLD%^%^BLACK%^hanging loosely.  A "+
+      "small metal grate set within the door looks out into "+
+      "the main jail.%^RESET%^\n"
+   );
+   set_listen("default","Sobbing and moans echo off the stone walls.");
+   set_smell("default","%^BOLD%^%^YELLOW%^A strong smell of urine "+
+      "and rotting food fills this area.%^RESET%^");
+   set_items(([
+      "grate" : "Perhaps you can peer through the grate to see who is in "
+         "the main jail.",
+      ({"hole","mesh"}) : "%^ORANGE%^This is a very small hole "+
+         "in a corner of the cell.  It has been covered with "+
+         "wire mesh grate.  Judging from the stains surrounding "+
+         "it and the smells emanating from it, this would be "+
+         "the toilet.%^RESET%^",
+      ({"table","stone table","food"}) : "Scraps of food are "+
+         "scattered atop the stone table in the corner.  It "+
+         "looks to be very base fare, though it would keep a "+
+         "prisoner alive.  It doesn't look as though they are "+
+         "given much choice about whether or not to eat.",
+      ({"cot","cots"}) : "Low cots made of thick green fabric "+
+         "have been placed around the room.  They look to be a "+
+         "little narrow for humans, but would likely fit thinner "+
+         "races - elves, say - well."
+   ]));
+   set_exits(([
+      "south": JAILMAIN,
+      "grate" : JAILMAIN
+   ]));
+   set_invis_exits(({"grate"}));
+   set_pre_exit_functions(({"grate"}),({"GoThroughDoor"}));
+   set_door("cell door",JAILMAIN,"south","Tonovi jail key");
+      set_open("cell door",0);
+      set_locked("cell door",1);
+      lock_difficulty("cell door",-90);
+   set_door_description("cell door", "This is a door made of three inch "
+      "thick oaken boards.  It has a section cut out and replaced with a "
+      "grate of inch diameter iron bars so that some air can still get to "
+      "the prisoners.");
+   set_string("cell door","open","The cell door creaks slightly as it "
+      "swings open.");
+   set_string("cell door","close","An ominous thud echoes off the walls "
+      "as the heavy cell door shuts solidly.");
+   JAILMAIN->set_open("cell door",0);
+   set_trap_functions(({"cell door"}),({"bind_me"}),({"pick"}));
+}
+
+void init() {
+   ::init();
+   add_action("peer_out", "peer");
+}
+
+void reset() {
+   ::reset();
+   check_release();
+   if(!trapped("cell door"))  
+      toggle_trap("cell door");
+   if( query_open("cell door") && sizeof(all_living(TO)) < 1 ) {
+      set_open("cell door", 0);
+      set_locked("cell door", 1);
+      JAILMAIN->set_open("cell door", 0);
+      JAILMAIN->set_locked("cell door", 1);
+   }
+
+   if(!company) {   // only want to add once/reboot
+      new("/d/shadow/mon/jail_mon")->move(TO);
+      company = 1;
+      return;
+   }
+   switch(random(16)) {
+     case 0..7 : check();                                            break;
+     case 8 : tell_room(TO,"%^ORANGE%^A large rat scurries across the bed "
+                "and disappears through a crack in the wall.\n");    break;
+     case 9 : tell_room(TO,"%^BOLD%^You hear footsteps outside, but it's "
+                "probably just the guard.\n");                       break;
+     case 10: tell_room(TO,"%^MAGENTA%^You hear yelling somewhere outside."
+                "  Might someone hear you if you yelled back?\n");   break;
+     case 11: tell_room(TO,"%^YELLOW%^You hear the guard snoring loudly.  "
+                 "Geez that is annoying!!\n");                       break;
+     case 12: tell_room(TO,"%^GREEN%^That green slime on the walls draws "
+                 "your attention.  Is it moving or are you beginning to "
+                 "lose your sanity?\n");                             break;
+     case 13: tell_room(TO,"%^BOLD%^%^CYAN%^A bit of a breeze blows in "
+                 "through the window and relieves the stench a little.\n");  
+                                                                     break;
+     case 14: tell_room(TO,"%^RED%^You notice some of the dark spots on "
+                 "the walls look like blood.  Now you realize some people "
+                 "have probably been killed by fellow prisoners in here.\n");
+                                                                     break;
+     case 15: tell_room(TO,"%^BOLD%^A guard peers in through the window "
+                 "grate and seems to be checking his list.\n");      break;
+   }
+}
+
+int GoThroughDoor() {
+   if(query_verb() == "grate") {  
+     write("%^ORANGE%^You wish... but you won't fit through there!");
+     tell_room(ETP, TPQCN+" seems to be trying to get out through the
+grate!",TP);
+     return 0;
+   }
+//need to allow normal GoThroughDoor for the regular door exits
+   return ::GoThroughDoor();
+}
+
+int bind_me(string str){
+   object ob;
+   if(interactive(TP)){
+      toggle_trap("cell door");
+      tell_object(TP,"As you attempt to pick the lock you hear an "
+         "ominous click and suffer a paralyzing shock!");
+      tell_room(ETP,TPQCN+" bends down to work at the lock but shudders "
+         "and freezes when a click sounds from it!",TP);
+      TP->set_paralyzed(50,"Your muscles are frozen from the shock!");
+      tell_object(TP,"A guard rushes in and binds you, then "+
+         "takes your tools!");
+      tell_room(ETP,"A guard rushes in and binds "+TPQCN+", then takes "
+         +TP->QP+" tools.",TP);
+      TP->set_bound(500);
+      ob = present("thief tools", TP);
+      if(objectp(ob))  ob->remove();
+      return 1;
+   }
+}
+
+int peer_out(string str) {
+   if(!str) {
+      tell_object(TP,"Peer where?");
+      return 1;
+   }
+   if(str == "grate" || str == "through grate") {
+      	tell_object(TP,"You step up to the door and peer "+
+               "out into the jail.\n");
+      	tell_room(ETP,TPQCN+" steps up to the cell door and "+
+               "peers out.\n",TP);
+      	tell_room("/d/dagger/tonovi/town/jail1","You hear a scratching "
+      	   "at the door and a glimpse of movement through the grate.\n",TP);
+      	TP->force_me("peer grate 1");
+    		return 1;
+   }
+   return 0;
+}
+
+void check_release() {
+   int i, j, jailed, jailtime;
+   string name, *wantedlist;
+   object *inven;
+   inven = all_living(TO);
+   j = sizeof(inven);
+   for(i=0;i<j;i++) {
+      if(!userp(inven[i]))     continue;
+      jailed = inven[i]->query("jailed_age");
+      if(!jailed)              continue;
+      jailtime = (int)inven[i]->query_age() - jailed;
+      name = inven[i]->query_name();
+//      wantedlist = keys(SGUARD->query_wanted());
+//      if( member_array(name, wantedlist) != -1 && jailtime < MAXWANTED)	  
+//	continue;
+      if(jailtime < MAXTIME)  	continue;
+      tell_object(inven[i],"%^BOLD%^Some rough looking guards enter and "
+         "drag you out of the cell to freedom.\n");
+      tell_room(TO,"%^BOLD%^Some rough looking guards enter and drag "
+          +inven[i]->QCN+" out of the cell.\n",inven[i]);
+      inven[i]->move("/d/dagger/tonovi/town/jail1");
+      if(inven[i]->query_bound()) {
+         inven[i]->set_bound(0);
+         tell_object(inven[i],"%^BOLD%^The guard removes your bonds and points "
+            "to the door.");
+      }
+      inven[i]->force_me("look");
+      continue;
+   }
+}
+
+void check() {
+   int i, j, temp1, temp2, max;
+   object *inven;
+   inven = all_living(TO);
+   j = sizeof(inven);
+   for(i=0;i<j;i++) {
+      if(!userp(inven[i])) continue;
+        max = inven[i]->query_formula();
+        temp1 = inven[i]->query_stuffed();
+        temp2 = max/6;
+      if(!random(5) && !inven[i]->query_true_invis()) {
+         tell_object(inven[i], "%^GREEN%^You notice the green slime on the "
+           "walls giving off a sickening smell.\nSuddenly you have sharp, "
+           "stabbing pains in your stomach and begin to vomit uncontrollably.");
+         tell_room(TO, inven[i]->query_cap_name()+" doubles over in pain and "
+            "begins to %^BOLD%^%^MAGENTA%^vomit %^RESET%^uncontrollably.  "
+            "The sight and stench are sickening.",inven[i]);
+         inven[i]->do_damage("torso",roll_dice(4,4));
+         inven[i]->use_stamina(20);
+      }
+      if(!(temp1 < (temp2*3))) continue;
+      if(!inven[i]->query_bound()) {
+        if(!present("jail food")) {
+          tell_room(TO,"A guard slides some food through a slot in the "
+             "door.");
+          new("/d/shadow/obj/special/jail_food")->move(TO);
+        }
+        continue;
+      }
+      inven[i]->add_stuffed(500);
+      tell_object(inven[i],"Some rough looking guards enter and feed you "
+         "some dark grainy food that might be old bread.");
+      tell_room(TO,"Some rough looking guards enter and feed "
+         +inven[i]->QCN+" some dark grainy food that "
+         "resembles old bread.",inven[i]);
+      continue;
+   }
+   for(i=0;i<j;i++) {
+      if(!userp(inven[i])) continue;
+      max = inven[i]->query_formula();
+      temp1 = inven[i]->query_quenched();
+      temp2 = max/6;
+      if(!(temp1 < (temp2*3))) continue;
+      if(!inven[i]->query_bound()) {
+        if(!present("water")) {
+          tell_room(TO,"A guard slides some water through a slot in the "
+            "door.");
+          new("/d/shadow/obj/special/jail_drink")->move(TO);
+        }
+        continue;
+      }
+      inven[i]->add_quenched(500);
+      tell_object(inven[i],"Some rough looking guards enter and have "
+        "you drink some stale water from a beat-up waterskin.");
+      tell_room(TO,"Some rough looking guards enter and have "
+        +inven[i]->query_cap_name()+" drink from a beat-up waterskin.",inven[i]);
+      continue;
+   }
+}

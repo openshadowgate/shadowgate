@@ -1,0 +1,32 @@
+// retired this in the moving of the hall to Tonovi.  *Styx*  12/5/02
+// guild halls are no longer restricted  *Styx*  10/27/02
+
+#include <std.h>
+
+inherit ROOM;
+
+void create(){
+    ::create();
+   set_terrain(WOOD_BUILDING);
+   set_travel(DIRT_ROAD);
+    set_short("%^RED%^Pit of hell%^RESET%^");
+    set_long(
+      "You are in what looks like a burning pit of hell.  All around you flames flow along the walls, licking for your flesh.  A portal to the south leads out, to the north one leads into the hall."
+    );
+    set_property("light", 2);
+    set_property("indoors", 1);
+//    set_property("no teleport", 1);
+    set_exits( ([
+      "south" : "/d/shadow/room/city/cguild/antipaladin/anti2",
+      "north" : "/d/shadow/room/city/cguild/antipaladin/anti3",
+    ]) );
+//    set_pre_exit_functions( ({"north"}), ({"GoThroughDoor"}) );
+}
+
+int GoThroughDoor(){
+    if(TP->is_class("antipaladin") || wizardp(TP)) return 1;
+    else {
+      tell_object(TP, "Antipaladins only...  for now.");
+      return 0;
+    }
+}

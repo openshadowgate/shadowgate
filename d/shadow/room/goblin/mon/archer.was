@@ -1,0 +1,45 @@
+#include <std.h>
+#include "/d/shadow/room/goblin/short.h"
+inherit "/std/monster";
+ 
+create() {
+    ::create();
+    set_name("goblin");
+    set("id", ({ "goblin","archer","goblin archer" }));
+    set("short", "Goblin archer");
+    set("aggressive", 7);
+    set_hd(6,2);
+    set("long", "This foul and ugly little creature is "
+	"one of the archers of the Goblin stronghold. They are "
+	"Goblins of reknown ability to fire arrows at invaders of their "
+	"keep. They especially like taking pot-shots at elves and squirrels "
+	"and other furry animals."
+);
+    set_level(3);
+    set_class("fighter");
+    set_body_type("humanoid");
+    set_alignment(9);
+    set("race", "goblin");
+    set_gender("male");
+    set_exp(150);
+    set_ac(5);
+    set_max_hp(40);
+    set_hp(40);
+    set_emotes(3,({
+	"Goblin archer checks his bow.",
+	"%^CYAN%^Goblin says: %^RESET%^Look theres a squirrel! 10 copper says "
+	"I can take it's left eye out!",
+	"Goblin archer giggles stupidly.",
+    }),0);
+    this_object()->add_money("gold",random(50)+5);
+    this_object()->add_money("silver",random(100)+15);
+    this_object()->add_money("copper",random(1000)+50);
+    new( OPATH "bow.c" )->move(this_object());
+      command("wield bow in right hand and left hand");
+    new( OPATH "lglove.c" )->move(this_object());
+    command("wear glove");
+    new( OPATH "rglove.c" )->move(this_object());
+    command("wear glove");
+    new("/d/shadow/obj/armor/leather")->move(TO);
+     command("wear leather");
+}

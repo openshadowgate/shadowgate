@@ -1,0 +1,40 @@
+#include <std.h>
+#include "/d/shadow/room/goblin/short.h"
+inherit "/std/monster";
+ 
+create() {
+    ::create();
+    set_name("goblin");
+    set("id", ({ "goblin","ranger","goblin ranger" }));
+    set("short", "Goblin ranger");
+    set("aggressive", 7);
+    set_hd(7,2);
+    set("long", "This foul and ugly little creature is "
+	"one of the rangers of the Goblin stronghold. They are "
+	"Goblins of reknown ability to scout the lands for enemies "
+	"approaching the keep. They move with great stealth and can hear "
+	"a pin drop from a hundred yards. They also have impressive combat abilities."
+    );
+    set_level(4);
+    set_class("fighter");
+    set_body_type("humanoid");
+    set_alignment(9);
+    set("race", "goblin");
+    set_ac(4);
+    set_max_hp(50);
+    set_hp(50);
+    set_exp(250);
+    set_emotes(3,({
+	"Goblin ranger peers across the lands.",
+        "Goblin ranger examines the forest closely.",
+	"%^CYAN%^Goblin says: %^RESET%^None shall approach the stronghold and live!",
+	"Goblin ranger nibbles on some elven bread.",
+	"Goblin ranger sniffs the air for clean smells.",
+    }),0);
+    this_object()->add_money("gold",random(70)+7);
+    this_object()->add_money("silver",random(150)+35);
+    this_object()->add_money("copper",random(1500)+150);
+    new( OPATH "bow" )->move(this_object());
+    command("wield bow in right hand");
+    new( "/d/dagger/drow/obj/bread" )->move(this_object());
+}

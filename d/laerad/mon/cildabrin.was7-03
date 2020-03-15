@@ -1,0 +1,51 @@
+//Coded by the one and only master of monsters...BANE//
+#include <std.h>
+inherit MONSTER;
+void create(){
+    ::create();
+    set_id(({"cildabrin","Cildabrin"}));
+    set_name("Cildabrin");
+    set_short("A horrible Cildabrin");
+    set_long(
+	"This 13 foot cross between a spider and scorpion is truly "+
+	"a terrible sight! Its body is black and furry. The monsters "+
+	"eight eyes are a turquoise blue. The front two legs of the "+
+	"creature end in scorpion-like pincers, and there is a supple, "+
+	"fur covered tail with an eight inch stinger on its tip at its "+
+	"rear."
+    );
+    set_body_type("arachnid");
+    set_race("cildabrin");
+    set_gender("male");
+    set_size(3);
+    set_alignment(9);
+    set_overall_ac(3);
+    set("aggressive",19);
+    set_class("mage");
+    set_guild_level("mage",11);
+    set_hd(11,32);
+    set_max_level(15);
+    set_hp(120);
+    set_attack_bonus(6);
+    set_exp(4500);
+    set_spells(({
+	"web"
+    }));
+    set_spell_chance(15);
+    set_attack_bonus(8);
+    set_property("magic resistance",20);
+    set_stats("dexterity",12);
+    set_stats("strength",15);
+    remove_limb("right foreleg");
+    remove_limb("left foreleg");
+    add_limb("right claw","torso", 0, 0, 0);
+    add_limb("left claw","torso", 0, 0, 0);
+    add_limb("tail","torso", 0, 0, 0);
+    set_wielding_limbs(({"tail","right claw","left claw"}));
+    new("/d/laerad/mon/obj/cilpincer")->move(this_object());
+    command("wield pincer in right claw");
+    new("/d/laerad/mon/obj/cilpincer")->move(this_object());
+    command("wield pincer in left claw");
+    new("/d/laerad/mon/obj/cilstinger")->move(this_object());
+    command("wield stinger in tail");
+}

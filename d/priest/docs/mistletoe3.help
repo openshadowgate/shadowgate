@@ -1,0 +1,6 @@
+%^BOLD%^*** Abilities for allowed_wizards
+
+'@learn_all'          Adds all available spells to your know once
+'@is_allowed'          Tells you is a player is an Allowed Druid
+'@meditate'           Gives you 700 spell_points for @learn_all
+'dieties'              Gives a list of all the present dieties

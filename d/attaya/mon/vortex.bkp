@@ -1,0 +1,152 @@
+#include <std.h>
+inherit WEAPONLESS; 
+int FLAG,SLEEP;
+object vic;
+void create() {
+    :: create();
+    set_name("bloodpool");
+    set_id(({
+        "Vortex", "blood","blood guardian", "pool","vortex","guardian","blood","bloodpool"
+    }));
+    set_short("%^RESET%^%^RED%^A pool of blood");
+    set_long("
+    %^BOLD%^%^RED%^This evil casts a reflection back at you that is not your own.  It is a hideous rotting skeletal form!
+    %^RESET%^The pool of blood is several feet wide and about an inch deep.  It glistens oddly in the light.
+");
+    set_gender("male");
+    set_level(40);
+    set_hd(40,9);
+    set_size(2);
+    set_weight(300);
+    set_attacks_num(4); 
+    set_damage(4,8);
+    set_nat_weapon_type("slashing");
+    add_limb("rotating blade","left arm",0,0,0);
+    add_limb("scissor blade","right arm",0,0,0);
+    set_attack_limbs(({"rotating blade"}));
+    set_overall_ac(-20);
+    set_body_type("humanoid");
+    set_race("entity");
+    set_class("fighter");
+    set_guild_level("fighter",40);
+    set_stats("strength",30);
+    set_stats("constitution",25);
+    set_stats("dexterity",30);
+    set_stats("wisdom",25);
+    set_stats("intelligence",25);
+    set_stats("charisma",25);
+    set_alignment(9);
+    set_property ("magic resistance",40);
+    set_exp(210000);
+    set_max_hp(query_hp());
+    set_hp(750+random(750));
+    add_money("gold",random(5000)+2000);
+    set_emotes(10,({
+        "%^RED%^The bloodpool seems to shift slightly.%^RESET%^",
+    }),0);	
+    set_funcs(({"shatter","knee"}));
+    set_func_chance(35);
+}
+void knee(object targ){
+   string dam;  
+   tell_object(targ,  
+    "%^BOLD%^%^RED%^Vortex grabs you!"
+);
+    tell_room(environment(targ), 
+    "%^RED%^Vortex grabs "+targ->query_cap_name()+"!",targ);
+    tell_room(environment(targ), "%^MAGENTA%^Vortex shrieks: %^RESET%^Torrent of pain!\n");
+    tell_object(targ,"%^RED%^Vortex lifts you by the throat and slams you against the ground!\n");
+    tell_room(environment(targ), "Vortex lifts "+targ->query_cap_name()+" by the throat and slams them against the ground!",targ);
+        targ->do_damage("torso",roll_dice(4,6));
+    tell_object(targ,"%^RED%^Vortex drops his elbow on your throat!");
+    tell_room(environment(targ), "Vortex drops his elbow on "+targ->query_cap_name()+"'s throat!",targ);
+      targ->do_damage("torso",roll_dice(4,6));
+    tell_object(targ,"%^RED%^Vortex punches you in the head!"); 
+    tell_room(environment(targ), "Vortex punches "+targ->query_cap_name()+"!",targ);
+        targ->do_damage("torso",roll_dice(4,6));  
+        tell_object(targ,"%^RED%^Vortex drops his weight against the rotating blade and presses it to your chest!");
+    tell_room(environment(targ), "Vortex drops his weight against the rotating blade shredding "+targ->query_cap_name()+"'s chest!",targ);
+        tell_object(targ,"%^BOLD%^%^RED%^The rotating blade slices you horribly!");
+        targ->do_damage("torso",roll_dice(3,6)); 
+       tell_object(targ,"%^BOLD%^%^RED%^The rotating blade slices you horribly!");  
+     targ->do_damage("torso",roll_dice(3,6)); 
+     tell_object(targ,"%^BOLD%^%^RED%^The rotating blade slices you horribly!");
+      targ->do_damage("torso",roll_dice(3,6));  
+    tell_object(targ,"%^BOLD%^%^RED%^The rotating blade slices you horribly!");  
+    targ->do_damage("torso",roll_dice(3,6));    
+      tell_object(targ,"%^BOLD%^%^RED%^The rotating blade slices you horribly!"); 
+      targ->do_damage("torso",roll_dice(3,6));   
+     tell_object(targ,"%^BOLD%^%^RED%^The rotating blade slices you horribly!"); 
+    targ->do_damage("torso",roll_dice(3,6));       
+      tell_object(targ,"%^RED%^Vortex lifts you into the air again!");
+   tell_room(environment(targ), "Vortex lifts "+targ->query_cap_name()+" into the air again!",targ); 
+    tell_object(targ,"%^RED%^Vortex slams you hard against his knee!");
+   tell_room(environment(targ), "Vortex slams "+targ->query_cap_name()+" down on his knee!",targ);
+       targ->do_damage("torso",roll_dice(4,6)); 
+    tell_object(targ,"%^RED%^Vortex punches you in the head!");
+    tell_room(environment(targ), "Vortex punches "+targ->query_cap_name()+"!",targ);   
+        targ->do_damage("torso",roll_dice(4,6));
+   tell_object(targ,"Vortex drops you.\n");
+    tell_room(environment(targ), "Vortex drops "+targ->query_cap_name()+"!",targ);
+}
+void shatter(object targ){
+    int dam;
+    if(FLAG > 3) return;
+    if(!targ) return;
+    tell_room(ETO,
+        "%^RED%^"
+        "Vortex crosses his arms and his eyes begin to glow!"
+	"%^RESET%^"
+    );
+    call_out("blade",10);
+}
+void blade() {
+    object ob,here,sucker,*players;
+    int x,num_p;
+        here=environment(TO);
+        players=all_inventory(here);
+        num_p=sizeof(players);
+        for(x=0;x<num_p;x++) {
+            sucker=players[x];
+            if(living(sucker) && sucker !=(TO)) {
+                tell_object(sucker,
+    "%^BOLD%^%^RED%^Vortex releases the rotating blade and sends it chasing after you!\n"
+     "%^BOLD%^%^WHITE%^It flies around the room like a sawblade commanded by the force of Vortex's will!\n"
+     "%^BOLD%^%^RED%^You are struck by the rotating blade!\n"
+		);
+                tell_room(environment(sucker),
+       "%^RED%^"+sucker->query_cap_name()+ 
+        " is struck by the rotating blade as it whizzes past!%^RESET%^"
+                ,sucker);
+                if("daemon/saving_d"->saving_throw(sucker,"blade_weapon")) {	        
+                    sucker->do_damage(sucker->return_target_limb(),roll_dice(5,10));
+ 	        } else {
+		    sucker->do_damage(sucker->return_target_limb(),roll_dice(10,10));
+		}
+            }
+        }
+        FLAG = FLAG + 1;
+        return 1;
+}
+void set_paralyzed(int time,string message){return 1;}
+void heart_beat() {
+    ::heart_beat();
+    if((int)TO->query_property("awake") != 1 && vic = TO->query_current_attacker()) {
+	tell_object(vic,
+        "%^BOLD%^%^RED%^The pool congeals and rises to form Vortex of the Twilight Rebellion!
+\n""%^MAGENTA%^Vortex says: %^RESET%^Now you will face me and all the powers of hell I command!\n"
+        );
+	TO->set_property("awake",1);
+        TO->set_short("Vortex the Implementor of the Twilight Rebellion");
+      TO->set_name("vortex");
+        TO->set_long("
+    Vortex is devestating opponent.  His primary weapon is a razor sharp, propellor-like blade that is mounted to his right arm.  It spins at over 1000 rpm.
+    He is one of a handful that survived the Twilight Rebellion attempt by Kinnesaruda elite to overthrow Intruder.  Vortex is rumored to have been slain by a force more powerful than all the Kinnesaruda put together.  Killed so quickly, in fact, that his spirit remains within an eternal bloodpool.
+    Vortex knows only to protect his land and seek the death of his former lord, Intruder.
+  ");
+	TO->set("aggressive",100);
+	return;
+    } else {
+	return;
+    }
+}

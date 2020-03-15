@@ -1,0 +1,162 @@
+3_hdragon:     Warning: /d/deku/monster/3_hdragon#31348 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'dragon' 
+Air:           Warning: /d/deku/monster/air#31350 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'elemental' 
+Alch:          Warning: /d/deku/monster/alch#31351 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'cora' 
+Annis:         Warning: /d/deku/monster/annis#31355 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'annis' 
+Antipaladin:   Warning: /d/deku/monster/antipaladin#31356 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'antipaladin' 
+Antipaladin2:  Warning: /d/deku/monster/antipaladin2#31359 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'antipaladin' 
+B_teller:      Warning: /d/deku/monster/b_teller#31362 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'teller' 
+Babu:          Warning: /d/deku/monster/babu#31363 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'babu' 
+Bandit:        Warning: /d/deku/monster/bandit#31365 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'bandit' 
+Bandit_l:      Warning: /d/deku/monster/bandit_l#31368 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'bandit' 
+Bankguard:     Warning: /d/deku/monster/bankguard#31375 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'guard' 
+Bat:           Warning: /d/deku/monster/bat#31377 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'bat' 
+Bear:          Warning: /d/deku/monster/bear#31378 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'bear' 
+Bee:           Warning: /d/deku/monster/bee#31379 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'bee' 
+Bugbear:       Warning: /d/deku/monster/bugbear#31380 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'bugbear' 
+Burford:       Warning: /d/deku/monster/burford#31382 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'burford' 
+Captain:       Warning: /d/deku/monster/captain#31383 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'captain' 
+Centaur:       Warning: /d/deku/monster/centaur#31387 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'centaur' 
+Cguard:        Warning: /d/deku/monster/cguard#31389 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'guard' 
+Cleric:        Warning: /d/deku/monster/cleric#31392 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'cleric' 
+Cloud:         Warning: /d/deku/monster/cloud#31396 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'giant' 
+Cobra:         Warning: /d/deku/monster/cobra#31398 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'cobra' 
+Deep:          Warning: /d/deku/monster/deep#31400 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'deep ogre' 
+Dknight:       Warning: /d/deku/monster/dknight#31402 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'death knight' 
+Dragon:        Warning: /d/deku/monster/dragon#31406 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'dragon' 
+Drider:        Warning: /d/deku/monster/drider#31407 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'Drider' 
+Drunk:         Warning: /d/deku/monster/drunk#31412 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'drunk' 
+Dwarf:         Warning: /d/deku/monster/dwarf#31414 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'dwarf' 
+Elf:           Warning: /d/deku/monster/elf#31416 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'darkelf' 
+Elite:         Warning: /d/deku/monster/elite#31420 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'Darkelf' 
+Fire-elemgd:   Warning: /d/deku/monster/fire-elemgd#31425 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'giant fire elemental' 
+Galem:         Warning: /d/deku/monster/galem#31426 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'Galem' 
+Gerack:        Warning: /d/deku/monster/gerack#31427 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'gnome' 
+Gghost:        Warning: /d/deku/monster/gghost#31429 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'ghost' 
+Gguard:        Warning: /d/deku/monster/gguard#31430 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'guard' 
+Giant:         Warning: /d/deku/monster/giant#31433 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'mountain giant' 
+Gnoll:         Warning: /d/deku/monster/gnoll#31437 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'gnoll' 
+Gnome:         Warning: /d/deku/monster/gnome#31439 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'gnome' 
+Gnome1:        Warning: /d/deku/monster/gnome1#31441 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'gnome' 
+Gnome2:        Warning: /d/deku/monster/gnome2#31443 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'gnome' 
+Goblin:        Warning: /d/deku/monster/goblin#31446 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'goblin' 
+Goblin1:       Warning: /d/deku/monster/goblin1#31448 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'goblin' 
+Goblin_cap:    Warning: /d/deku/monster/goblin_cap#31450 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'goblin' 
+Guard:         Warning: /d/deku/monster/guard#31452 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'guard' 
+Guard1:        Warning: /d/deku/monster/guard1#31455 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'guard' 
+Hermit:        Warning: /d/deku/monster/hermit#31458 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'Old Hermit' 
+Hill:          Warning: /d/deku/monster/hill#31462 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'Hill giant' 
+Hobgob:        Warning: /d/deku/monster/hobgob#31464 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'hobgoblin' 
+Hobgob_k:      Warning: /d/deku/monster/hobgob_k#31466 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'hobgoblin' 
+Human:         Warning: /d/deku/monster/human#31470 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'Ambassador' 
+Human1:        Warning: /d/deku/monster/human1#31473 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'human' 
+Jarrow:        Warning: /d/deku/monster/jarrow#31477 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'wizard' 
+Juju:          Warning: /d/deku/monster/juju#31479 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'Zombie' 
+Kobold:        Warning: /d/deku/monster/kobold#31481 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'kobold' 

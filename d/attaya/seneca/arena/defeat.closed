@@ -1,0 +1,54 @@
+// removing PC arenas (discussed with Garrett) - Styx 5/10/03
+
+#include <std.h>
+#include <arena.h>
+
+inherit ARENAENTER;
+
+void create() {
+   ::create();
+   set_light(3);
+   set_property("no attack", 1);
+   set_property("training",1);
+   set_indoors(1);
+   set_short("Rite of Passage");
+   set_long(
+@DESC
+This is the gate to the arena. Combatants here pay to fight to 
+the death against anyone they deem a worthy advisary. Large 
+granite blocks around the gate are scarred from angry warriors 
+throughout time. An ancient monk offers his services as a healer 
+here for a substantial price. To enter the arena will cost you 
+20 gold. The passage before you is short and beyond is an enormous 
+arena with bloodied sand for a floor.
+   %^CYAN%^You may now 'enter safe' or 'enter live'."
+DESC
+   );
+   set_smell("default", "There is a hint of blood and rot in the air here.");
+   set_listen("default", "Bravery folk songs echo from the stands of the arena before you!");
+   set_exits( ([
+      "west" : "/d/attaya/seneca/arenain.c",
+   ] ));
+   set_enter_room("/d/attaya/seneca/arena/arena1");
+}
+
+void reset() {
+   ::reset();
+   if(!present("monk"))
+      new("/d/attaya/seneca/mon/monk.c")->move(TO);
+   if(!present("warrior"))
+      new("/d/attaya/seneca/mon/altherian.c")->move(TO);
+}
+
+int enter(string str) {
+   int hold;
+
+   if(!TP->query_funds("gold", 20)) {
+      tell_object(TP, "Altherian warrior tells you: You foolish child...  It costs MONEY to die here!");
+      return 1;
+   }
+   hold = ::enter(str);
+   if(hold == 0 || hold == 2) return 1;
+   tell_object(TP,"You pay the warrior and bravely enter the combat arena.\nSomeone says: May god stand between you and harm...  In all those empty places you must walk.");
+   return hold;
+}

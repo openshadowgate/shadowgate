@@ -1,0 +1,9 @@
+#define MON "/d/islands/dreams/mons/"
+#define ROOMS "/d/islands/dreams/rooms/"
+#define OBJ "/d/islands/dreams/obj/"+
+#define VOID "/d/islands/dreams/inherits/void"
+#define MAZE "/d/islands/dreams/inherits/maze"
+#define ROOMDIR "/d/islands/dreams/rooms/"+
+#define TQCN targ->query_cap_name()
+#define ISLAND "/d/islands/dreams/inherits/island_inherit"
+#define GEM "/d/islands/dreams/inherits/gem_inherit"

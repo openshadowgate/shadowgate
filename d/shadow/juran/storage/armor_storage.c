@@ -1,0 +1,38 @@
+#include <std.h>
+#include "../juran.h"
+
+inherit ROOM;
+object ob;
+
+void create(){
+   	::create();
+   	set_properties((["light":1,"indoors":1,"no teleport":1]));
+   	set_short("Juran Armory Storage");
+   	set_long("Juran Armory Storage. Supplies are all around but you "+
+   		"shouldn't be here.  Report to a wiz if you are please.");
+    	set_exits( (["up" : JROOMS+"as"]) );
+}
+
+void reset(){
+   ::reset();
+   	if(!present("padded")) new(CARM+"padded")->move(TO);
+   	if(!present("leather")) new(CARM+"leather")->move(TO);
+   	if(!present("studded")) new(CARM+"studded")->move(TO);
+   	if(!present("chain")) new(CARM+"chain")->move(TO);
+   	if(!present("banded")) new(CARM+"banded")->move(TO);
+   	if(!present("scale")) new(CARM+"scale")->move(TO);
+   	if(!present("bronze")) new(CARM+"bronze")->move(TO);
+   	if(!present("plate")) new(CARM+"plate")->move(TO);
+   	if(!present("ring")) new(CARM+"ring")->move(TO);
+   	if(!present("helm")) new(CARM+"helm")->move(TO);
+   	if(!present("shield")) new(CARM+"shield")->move(TO);
+   	if(!present("buckler")) new(CARM+"buckler")->move(TO);
+   	if(!present("sshield")) new(CARM+"sshield")->move(TO);
+   	if(!present("mshield")) new(CARM+"mshield")->move(TO);
+   	if(!present("fullplate")) new(CARM+"fullplate")->move(TO);
+   	if(!present("fullplate 2")) new(CARM+"sfullplate")->move(TO);
+        if(!present("fullplate 3")) new(CARM+"lfullplate")->move(TO);
+   	if(!present("robe")) new(CARM+"robe")->move(TO);
+   	if(!present("srobe")) new(CARM+"srobe")->move(TO);
+   	if(!present("lrobe")) new(CARM+"lrobe")->move(TO);
+}

@@ -1,0 +1,161 @@
+#include <std.h>
+inherit "/std/armour";
+int FLAG;
+
+create() {
+    ::create();
+    FLAG = 0;
+    set_name("drow mask");
+    set_id(({"mask","drow mask"}));
+    set_short("%^BLUE%^Mask of the Drow%^RESET%^");
+    set_long(
+        "%^BLUE%^The mask of the drow is reknowned for the evil it "
+      "possesses its wearer with. Only the high priests of the "
+        "Drow Regime utilize it.%^RESET%^"
+    );
+    set_weight(20);
+    set_value(10);
+    set_type("clothing");
+    set_limbs(({"head"}));
+    set_ac(0);
+    set_wear((: TO, "wearit" :));
+    set_remove((: TO, "removeit" :));
+}
+void init() {
+    ::init();
+    add_action("say_func","say");
+    add_action("look_func","look");
+    add_action("cackle_func","cackle");
+    add_action("scry_func","scry");
+    if(ETO == TP) {
+        TP->force_me("wear mask");
+    }
+}
+int scry_func(string str) {
+object ob,locale;
+string target;
+int i;
+object *inv;
+string desc;
+    if(!str) {
+        notify_fail("What?\n");
+        return 0;
+    }
+    target = str;
+    ob = find_player(target);
+    if(!ob) {
+        notify_fail("Your senses do not extend to the realm known as Real Life!\n");
+        return 0;
+    }
+    if(ob == TP) {
+        notify_fail("You need only look around you to find yourself!\n");
+        return 0;
+    }
+    if(ob->query_invis()) {
+        notify_fail("Your senses do not extend to the realm known as Real Life!\n");
+        return 0;
+    }
+    if(ob->query_property("no scry")){
+      notify_fail("%^RED%^Your eyes burn with an unholy pain as you try to peer through the eyes of the mask!%^RESET%^\n");
+      return 0;
+    }
+    if(wizardp(ob)) {
+        notify_fail("Do not use these powers on wizards!\n");
+        return 0;
+    }
+    locale = environment(ob);
+    desc = (string)locale->query_long()+"\n";
+    inv = all_inventory(locale);
+    for(i=0; i<sizeof(inv); i++) {
+        if(inv[i]->query_invis()) continue;
+        desc += (string)inv[i]->query_short()+"\n";
+    }
+    tell_object(TP,"%^RED%^You concentrate while peering through the eyes.\n%^BLUE%^"+desc+"%^RESET%^");
+    tell_room(ETP,"%^RED%^"+TPQCN+"'s eyes glow with an evil red light.%^RESET%^",TP);
+    if((string)TP->query_name() != "grazzt" && random(10) > 2) {
+	tell_object(TP,"%^BOLD%^%^RED%^Lloth tells you: %^RESET%^You are not a Drow! How dare you use the powers I have granted to them! I will look forward to erasing your existence.\n%^BLUE%^The mask vanishes!");
+	TP->force_me("remove mask");
+	TO->remove();
+    }
+    return 1;
+}
+int say_func(string str) {
+    string msg;
+    msg = str;
+    if(TP->query_gagged() || TP->query_paralyzed()) return 0;
+    if(FLAG == 0) {
+        return 0;
+    }
+    else {
+       if (!str) {
+          tell_object(TP,"%^BLUE%^Lloth attempts to force you to speak, but you manage to suppress her words.%^RESET%^");
+          tell_room(ETP,"%^BLUE%^""An evil look fills "+TP->query_cap_name()+"'s eyes and a low moan is heard in the room.",TP);
+          return 1;
+       }
+       else {
+    if((string)TP->query_name() != "grazzt") {
+   msg = "daemon/language_d"->translate(msg,TP->query_spoken(),TP);
+    }
+          message("say","%^BLUE%^You speak to the room in a low and hollow tone: %^RED%^"+msg,TP);
+      message("say","%^BLUE%^"+TPQCN+" speaks in a low and hollow tone: %^RED%^"+msg,ETP,TP);
+          return 1;
+       }
+    }
+}
+
+int wearit() {
+    FLAG = 1;
+    tell_object(TP, "%^BLUE%^You begin to see the world in a more %^RED%^evil%^BLUE%^ light.");
+    TP->add_sight_bonus(5);
+   ETO->set_property("evil item",1);
+    return 1;
+}
+
+int removeit() {
+    FLAG = 0;
+    tell_object(TP, "%^BOLD%^%^RED%^Lloth tells you: %^RESET%^I will have your soul for rejecting my gift!");
+    ETO->add_sight_bonus(-5);
+   ETO->set_property("evil item",-1);
+    return 1;
+}
+
+int look_func(string str) {
+    if(TP->query_paralyzed()) return 0;
+    if(FLAG == 0) {
+        return 0;
+    } else {
+       tell_object(TP,"%^BLUE%^You feel %^RED%^Lloth%^BLUE%^ look through your eyes.");
+       if (!str || str == "$*") {
+          tell_room(ETP,"%^BLUE%^"+TPQCN+" sweeps %^MAGENTA%^spider like eyes%^BLUE%^ slowly over "+TP->query_possessive()+" surroundings.",TP);
+       }
+       return 0;
+    }
+}
+
+int cackle_func(string str) {
+    string msg;
+    msg = str;
+    if(FLAG == 0) {
+        return 0;
+    }
+    else {
+       if (!str) {
+          tell_object(TP,"%^RESET%^%^RED%^You cackle in an insane and %^BLUE%^evil%^RED%^ manner.");
+          tell_room(ETP,"%^RED%^"+TPQCN+" ponders briefly and %^BLUE%^cackles%^RED%^ evilly.",TP);
+          return 1;
+        }
+        else {
+        if((string)TP->query_name() != "grazzt") {
+          msg = "daemon/language_d"->translate(msg,TP->query_spoken(),TP);
+        }
+            message("say","%^BLUE%^You cackle to those around you: %^RED%^"+msg,TP);
+            message("say","%^BLUE%^"+TPQCN+" cackles insanely to those who listen: %^RED%^"+msg,ETP,TP);
+           return 1;
+	}
+    }
+}
+
+int query_size(){
+    if(!objectp(ETO) || !living(ETO)) return 2;
+    return ETO->query_size();
+}

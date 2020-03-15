@@ -1,0 +1,46 @@
+  **Grove**
+
+           cliff5              cliff6
+         /    |                 |   \
+    cliff4- grove7   Citadel  grove8-- cliff7
+   /          |   \     |    /    |       |
+cliff3 -  grove5     grove4   grove6 - cliff8         ice25
+  |    /       \       |     /       \    |            /
+ cliff2       grove2--grove1--grove3    cliff1       ice24
+                   \     |                            /
+                guard1  gate1                     ice23
+                           |                       / 
+                          gate                    ice22
+                           |                      /
+                         ice1                   ice21
+                           |                    /
+     ice7                ice2  -  ice3  - ice5-ice20
+         \                     /
+          ice6  -        ice4
+           \
+            ice8 -  ice9 -  ice10  - ice11
+                                             /
+                                       ice12 - ice13 - ice14 - ice15 - ice16 - ice17 - ice18          shore8
+                                                                                        \              |
+                                                                                    ice19            shore7
+                                                                                 /      |             /
+                                                            shore2   -shore3  -shore4 -shore5  -   shore6                
+                                                        /
+                                                    shore1         
+      waterfall                     
+           |                       
+grove - water garden(stairs)-grove  
+           |                        
+          
+          
+***keep***                   
+         
+     inn(store) - hall7 - library
+     /                     \
+  hall1   garden          hall6
+  /            |             \
+hall2   ----hgarden----     hall5
+ |            |                | 
+hall3 -corridor(w/stairs)---hall4
+  \                           /  
+    store1 - hall8 - grand hall													

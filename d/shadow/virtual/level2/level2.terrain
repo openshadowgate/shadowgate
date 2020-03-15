@@ -1,0 +1,46 @@
+
+# forest.terrain -- this file defines the terrain for the virtual forest
+# essentially this room is the map to the forest :)
+#
+# blank lines and text afer a # will be ignored.
+#
+# craz@shadowgate -- 9609 -- creation
+
+
+# the first two numbers are the x and y widths of the area.
+15 15
+
+# now, is the room map. seperate the rooms on the same line with a space
+# the number specified is the description number for the room.  enter a ..
+# if the room does not exist.
+
+# this next line is just a x-coordinate axis
+#1 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+
+# y==1
+01 00 00 00 02 02 02 02 02 02 02 02 02 02 02
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+01 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+00 00 00 01 00 00 00 00 00 00 00 00 00 00 02
+
+# y==6
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+01 00 00 00 00 00 02 01 00 00 00 00 00 00 02
+00 00 00 00 00 00 02 00 00 00 00 00 00 00 02
+00 00 00 00 00 00 02 00 00 00 00 00 00 00 02
+00 00 00 00 00 00 02 00 00 00 00 00 00 00 02
+
+# y==00
+00 00 00 00 00 00 02 00 00 00 00 00 00 00 02
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 02
+00 00 00 00 00 00 00 00 00 00 00 00 00 01 02
+01 00 00 00 00 00 00 00 00 00 00 00 00 01 02
+00 02 02 02 02 02 02 02 02 02 02 02 02 02 00
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+2014-04-28 (Ergo)
+Updated the Yuan-ti purebloods and halfbloods 
+to bring their difficulty into line for a ~12ish area. They should
+now be less deadly, and actually grant a useful amount of 
+experience. Lowered spawn rate in the pyramid, it was too high 
+in specific locales.
+

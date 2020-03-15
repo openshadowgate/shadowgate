@@ -1,0 +1,70 @@
+Captives and Slavery: An Overview by Zarkacha Xenakh
+
+%^RESET%^%^ORANGE%^A plain leatherbound book%^RESET%^
+
+%^RESET%^%^RED%^This book is of a %^CYAN%^simple %^RED%^appearance, with no excesses or embossing to set it apart from others. It is fairly thick, its pages a little %^WHITE%^wrinkled %^RED%^from age, but still in very good quality. Its bindings are made of %^ORANGE%^tanned leather%^RED%^, with no sign of aging or wear.%^RESET%^
+
+Introduction
+Racial traits
+
+%^RED%^Introduction%^RESET%^
+%^RED%^T%^BOLD%^%^WHITE%^he art of capturing and training slaves is a fine skill, only perfected with decades of training. Several of the lesser races are preferrable for this process over others, whether it be through ease of capture, resilience, or lack of rebellious nature. Slaves should be selected according to their intended purpose, and trained by methods that will successfully subdue them, and where possible, break the spirit without destroying the creature's usefulness. Within are outlined some of the preferred races for various tasks and recreational purposes.
+
+
+
+%^RED%^Althach%^RESET%^
+%^RED%^T%^BOLD%^%^WHITE%^hese creatures are powerful, but lacking in wit and tolerance of pain. They are easily subdued with threat and torture. While they are of little use in any task requiring intelligence or forethought, they make good slaves for manual labor tasks, or for gladatorial entertainment.%^RESET%^
+
+%^RED%^Bugbears%^RESET%^
+%^RED%^P%^BOLD%^%^WHITE%^owerful and hardy creatures, bugbears are more easily manipulated when given a position of "power". They make good supervisors for lesser slaves, giving them a feeling of superiority - they can be more difficult to control if put to other kinds of labor.%^RESET%^
+
+
+
+%^RED%^Chokers%^RESET%^
+%^RED%^T%^BOLD%^%^WHITE%^hese small predators are fairly unintelligent, but useful for their honed senses of hearing and smell. They are easily trained because of their knowledge of spoken language, and useful in subduing unruly slaves and uprisings.%^RESET%^
+
+%^RED%^Dwarves%^RESET%^
+%^RED%^D%^BOLD%^%^WHITE%^ifferent sub-species of dwarf can be useful, but often troublesome, captives and slaves, prized for their abilities at smithing and masonry. Duergar in particular are difficult to control, particularly in groups, and should be kept separated if possible. Other dwarven sub-species, such as gold or shield dwarves, are much more easily broken and put to work, although there are often losses by some specimens foolish enough to die fighting, rather than submit.%^RESET%^
+
+%^RED%^Elves%^RESET%^
+%^RED%^E%^BOLD%^%^WHITE%^lves are usually poor slaves, and not worth the trouble of capture and training. They are delicate and unsuited to manual labor of most kinds, and while they are easily broken, many who become so simply will themselves to die. They are much preferrable as sacrifices, or simply slain rather than captured.%^RESET%^
+
+
+
+%^RED%^Gnomes%^RESET%^
+%^RED%^T%^BOLD%^%^WHITE%^hese creatures differ in their suitability by sub-race. The foul species known as Svirfneblin are preferrably killed on sight, but their surface cousins can be very useful for their ability to work gemstones and jewelry. They are much more easily controlled also, by denying them their sight, as they lack darkvision.%^RESET%^
+
+%^RED%^Goblins%^RESET%^
+%^RED%^G%^BOLD%^%^WHITE%^oblins are generally weak and often stupid, often making them undesirable in preference of other species. However, they are easily subdued by a display of superior power, and can be assigned to more menial tasks.%^RESET%^
+
+
+
+%^RED%^Grimlocks%^RESET%^
+%^RED%^A%^BOLD%^%^WHITE%^s slaving species themselves, Grimlocks are quite easily controlled if kept in sufficient living standards. They are excellent guards and shock troops in war, particularly for their ability to see through magical darkness.%^RESET%^
+
+%^RED%^Halflings%^RESET%^
+%^RED%^L%^BOLD%^%^WHITE%^ike surface gnome species, these are easily controlled by withholding sources of light, effectively rendering them blinded. They can be useful in tasks requiring dexterity and precision, such as weaving and working leather.%^RESET%^
+
+
+
+%^RED%^Hobgoblins%^RESET%^
+%^RED%^T%^BOLD%^%^WHITE%^hese creatures are far more martial and organized than most other species, which can be an advantage and a disadvantage. They make superior guards, gladiators and war forces, however because of their inclination to work cooperatively, must be kept separate from others of their species to avoid escapes or acts of revenge. They can become impressively loyal servants if forced to swear fealty to their masters, as they are generally disinclined to break such vows, once made.%^RESET%^
+
+%^RED%^Humans%^RESET%^
+%^RED%^W%^BOLD%^%^WHITE%^hile potentially dangerous, these creatures are easily cowed and broken with the right means, and can thus be one of the easiest surface species to control. They are often far more intelligent than most other slave races, regardless of language barriers, and can be trained to more complicated or intricate tasks.%^RESET%^
+
+
+
+%^RED%^Kobolds%^RESET%^
+%^RED%^T%^BOLD%^%^WHITE%^hese beasts are nearly worthless, as they are weak, yet cunning and fierce - a set of attributes that make for poor slaves. They are only really useful for amusements or torture.%^RESET%^
+
+%^RED%^Ogres%^RESET%^
+%^RED%^O%^BOLD%^%^WHITE%^gres can be particularly good slaves for simple tasks that do not surpass the limits of their slow wit. They can be used for manual labor tasks, or forms of combat such as gladiatorial or war fodder, as these appeal to their bloodthirsty natures.%^RESET%^
+
+
+
+%^RED%^Orcs%^RESET%^
+%^RED%^S%^BOLD%^%^WHITE%^hort of ogres, these can be useful slaves, but only if well trained. They are slow learners, prone to laziness unless regularly threatened, and prone to acts of rebellion, however futile. If properly trained though, they are strong and hardy, and can make quite servicable slaves.%^RESET%^
+
+%^RED%^Minotaurs%^RESET%^
+%^RED%^W%^BOLD%^%^WHITE%^hile not as strong as ogres, they can be just as problematic to train, and even more so to control effectively. They are generally not worth the trouble to train, unless being kept only a short time, as fodder for purposes such as gladiatorial combat.%^RESET%^

@@ -1,0 +1,18 @@
+       -=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-   
+
+                         DRUID  HELP  
+
+             This is the druidic holy symbol. 
+             It will give the druid all his spells and
+	     abilities and even more !
+ 
+             A few abilities are :
+
+'spells'                Will give you a list of your known spells.
+'allowed'               Spells you are allowed per level.
+'compare <living>'      Will tell you how wise it is to kill <living>
+'meditate'              Helps you regain spellpoints
+'smokescreen'           Makes you disappear in one room and appear 
+	                    in another, nearby room.
+'druids'                The 'who' command but only druids are listed
+'dhelp <command name>'  Gets help on each command.

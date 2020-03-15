@@ -1,0 +1,50 @@
+#include "/d/dagger/tonovi/town/short.h"
+#include "/d/common/common.h"
+
+inherit MONSTER;
+
+void create(){
+    ::create();
+    set_name("Tonovi Guard");
+    set_id( ({"guard", "tonovi guard", "town guard", "Gtonovimon"}) );
+    set_short("Tonovi Guard");
+    set_long(
+@G
+This is one of the trained guards of Tonovi, a soldier
+that showed promise and was given the prestigious task
+of protecting his homeland.
+G
+    );
+    set_gender("male");
+    set_race("human");
+    set_body_type("human");
+    set_hd(12,1);
+    set_property("full attacks", 1);
+    set_overall_ac(4);
+    set_alignment(2);
+    set_max_hp(130);
+    set_hp(130);
+    set_property("swarm", 1);
+    set_moving(1);
+    set_speed(50);
+    add_money("gold", random(100));
+    add_money("silver", random(200));
+    if(!random(3)) add_money("platinum", random(10));
+    if(!random(5))
+      new(ROADOBJ "Mlong+1.c")->move(TO);
+    else
+      new(SHADOWWEAP "longsword")->move(TO);
+    switch(random(15)) {
+       case 0..5 : new(CARMOR"scale")->move(TO);        break;
+       case 6..9 : new(CARMOR"scale")->move(TO);        break;
+       case 10..13 : new(CARMOR"chain")->move(TO);      break;
+       case 14 :  {
+          new(ROADOBJ "Mcoif")->move(TO);
+          new(ROADOBJ "Mchain+1")->move(TO);
+          command("wear coif");
+          break;
+       }
+    }
+    command("wield longsword");
+    command("wear armor");
+}

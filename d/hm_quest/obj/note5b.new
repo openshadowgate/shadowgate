@@ -1,0 +1,16 @@
+#include <std.h>
+inherit OBJECT;
+void init(){
+        ::init();
+}
+
+void create() {
+    ::create();
+    set_id( ({"paper","note"}) );
+    set_name("note");
+    set("short", "a piece of paper");
+    set_weight(0);
+    set("long", "The crater, where the Knight of Death once reigned.\n"+
+                 "That is must look to find the next chest.");
+    set_value(0);
+}

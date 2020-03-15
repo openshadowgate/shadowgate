@@ -1,0 +1,42 @@
+1.) Sarcophagus puzzles - 4 types
+    1 per tomb
+    Colored sphere puzzle - random color order of the spheres
+    random word puzzle - eight letters, each letter in the room around the sarcophagus - anagram
+    random number puzzle - 9 squares, a number in each room around the sarcophagus - numbers have to be in correct sequence in the square
+    insert statue puzzle - 8 statues - random (small) - some description on the sarcophagus to explain which one goes in the hole - 4 different ones
+    experience for solving each puzzle?
+    
+2.) 1 lever from each sarcophagus - each lever opens another door in a series of doors
+    leads to husk of aurus devar - actual "skin/body" of him - key to open a door to his tomb
+    key opens another hidden tomb with lore book
+       
+3. Tomb rooms - connected to sarcophagus item/puzzle daemon? way to keep track of puzzle solutions
+
+4. mausoleum hall ways - stone, cracking, decaying, etc. 
+5. unfinished hall ways - partially constructed? - cracks that lead into tombs
+6. squeeze through cracks into unfinished hallways
+8. husk fight - fairly tough for level 20-25 PC - soloable - has some type of weapon oils? powders
+   
+ITEMS
+
+In sarcophaguses (randomly)
+1. Weapon oils? ** DONE **
+3. levers ** DONE **
+
+On Husk
+1. Dust of enchanting? ** DONE **
+2. orb to open hidden tomb ** DONE **
+3. gauntlets ** DONE ** 
+4  greaves? ** DONE **
+6. amulet of amazing insight ** DONE **
+
+In Tomb
+7. lore book about Aorus Devar ** DONE **
+
+MONSTERS
+
+graveyard monsters inside tomb halls/unfinished halls
+tombs are empty? 
+spawn a doppleganger maybe? 
+Hust of Aurus Devar - fleshly version, weaker, introduces more about him 
+   

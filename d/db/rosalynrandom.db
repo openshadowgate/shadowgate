@@ -1,0 +1,5 @@
+$ gives a merry laugh as one of the patrons whispers something to her.+$ shakes her head with a grin and refills the patron's mug.
+$ raises an eyebrow at a rowdy patron.
+$ smacks the hand of a soldier who reaches out to grab her bottom.+I told you last time, keep your hands to yourself, you dirty bastard!+$ grabs the soldier by the ear and throws him out the door to the amusement of his companions, who burst into laughter.+$ returns to the bar, muttering to herself, then chuckles and sends a round over to the soldier's table.
+$ joins the soldiers in a rousing chorus of a local song, dancing and clapping her hands.+| %^MAGENTA%^$N sings%^RESET%^: With a jingle bang jingle bang jingle bang jingle+| %^MAGENTA%^$N sings%^RESET%^: With a jingle bang jingle bang jingle high ho!+$ laughs and dances away from the table, leaving the soldiers singing.
+?gender == male+@wink+Would you like something to drink there?+$ gives a slow smile.

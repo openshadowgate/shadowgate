@@ -1,0 +1,393 @@
+#include <std.h>
+#include <move.h>
+#include <daemons.h>
+#define MAZE_D "/daemon/maze_d.c"
+#include "../tecqumin.h"
+inherit J_ROOM;
+
+
+void remove_maze();
+mapping query_base_exits();
+string r_path, n_room, s_room, e_room, w_room, * spec_rooms;  
+mapping base_exits;
+int map_size;
+
+
+void set_basic_exits();
+
+void create() {
+  mapping map;
+  ::create();
+  map_size = 25;
+  set_short( (: TO, "short_desc" :) );
+  set_long( (:TO, "long_desc":) );
+  base_exits = ([]);
+  spec_rooms = ({});
+  set_pre_exit_functions(({"north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"}), ({"GoNorth", "GoNortheast", "GoEast", "GoSoutheast", "GoEast", "GoSouth", "GoSouthwest", "GoWest", "GoNorthwest"}));
+  set_exits( ([]) );
+  n_room = "none";
+  s_room = "none";
+  e_room = "none";
+  w_room = "none";
+}
+
+void set_basic_exits(){
+  int i, num;
+  string * directions, * destinations;
+  num = sizeof(base_exits);
+  if (num<1){return;}
+  directions = keys(base_exits);
+  destinations = values (base_exits);
+  for (i=0;i<num;i++){
+    add_exit(destinations[i], directions[i]);
+  }
+}
+
+mapping query_base_exits(){
+  return base_exits;
+}
+
+void update_exits(){
+  int i, num;
+  string * exits;
+  mapping m;
+  m = "/daemon/maze_d.c"->query_exits(file_name(TO));
+  if (mapp(m) && sizeof (m)>0){
+    exits = keys (m);
+    num = sizeof(m);
+    if (num>0){
+      for (i=0;i<num;i++){
+        add_exit(m[exits[i]], exits[i]); 
+      }
+    }    
+  }
+}
+
+string * query_exits(){ //overriding this so that maze exits are picked up
+  set_basic_exits();
+  update_exits();
+  return ::query_exits();
+}
+
+void eject(){
+  object * critters, room;
+  int i, num;
+  critters = all_living(TO);
+  num = sizeof(critters);
+  room = find_object_or_load(WEMIC + "path14");
+  if (num<1){return;}
+  for (i=0;i<1;i++){
+    if ((int)critters[i]->is_player()!=1) {
+      TP->move(find_object_or_load("/d/shadowgate/void"));
+      continue;
+    }
+    tell_object(critters[i], "The jungle shifts around you"
+     +" as the ancient spirits of the %^CYAN%^Tecqumin"
+     +" %^RESET%^eject you from the jungle that holds"
+     +" their lost city");
+    critters[i]->move(room);
+    critters[i]->force_me("look");
+  }
+}
+
+string * query_spec_rooms(){
+  return spec_rooms;
+}
+
+void GoNorth(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("north");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void GoNortheast(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("northeast");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void GoEast(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("east");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void GoSoutheast(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("southeast");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void GoSouth(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("south");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void GoSouthwest(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("southwest");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void GoWest(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("west");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void GoNorthwest(){
+  object targroom;
+  string targ_roomname;
+  targ_roomname = query_exit("northwest");
+  if (targ_roomname == "/d/shadowgate/void"){
+    return;
+  }
+  targroom = find_object_or_load(targ_roomname);
+  targroom->on_enter();
+}
+
+void on_enter(){
+  check_maze();
+  return;
+}
+
+void make_maze(){
+  object mazeroom, luj;
+  string rname;
+  int i, j, flag;
+  flag = 1;
+  luj = find_player("lujke");
+  tell_object(luj, "Attempting to make maze");
+  if (!stringp(r_path)){ return; }
+  for (i=0;i<2;i++){
+    tell_object(luj, "Attempt no: " + (i+1));
+    "/daemon/maze_d.c"->set_roompath(r_path);
+    if (stringp (s_room)){//  && s_room != "none"){
+      tell_object(luj, "Attempting to set southroom as " + s_room);
+      "/daemon/maze_d.c"->set_southroom(s_room);
+      rname = "/daemon/maze_d.c"->query_southroom();
+      tell_object(luj, "Southroom is now: "+rname);
+    }
+    if (stringp (n_room)){  // && n_room != "none"){
+      tell_object(luj, "Attempting to set northroom as " + n_room);
+      "/daemon/maze_d.c"->set_northroom(n_room);
+      rname = "/daemon/maze_d.c"->query_northroom();
+      tell_object(luj, "Northroom is now: " + rname);
+    }
+    if (stringp (e_room)){ //&& e_room != "none"){
+      tell_object(luj, "Attempting to set eastroom as " + e_room);
+      "/daemon/maze_d.c"->set_eastroom(e_room);
+      rname = "/daemon/maze_d.c"->query_eastroom();
+      tell_object(luj, "Eastroom is now: " +rname);
+    }
+    if (stringp (w_room)) { //&& w_room != "none"){
+      tell_object(luj, "Attempting to set westroom as " + w_room);
+      "/daemon/maze_d.c"->set_westroom(w_room);
+      rname = "/daemon/maze_d.c"->query_westroom();
+      tell_object(luj, "Westroom is now: "+rname);
+    }
+    "/daemon/maze_d.c"->set_special_rooms( ({}) );
+    if (sizeof(spec_rooms)>0){
+      tell_object(luj, "Adding special rooms:");
+      for (j=0;j<sizeof(spec_rooms);j++){
+        tell_object(luj, "Adding special room " + i);
+        "/daemon/maze_d.c"->add_special_room( spec_rooms[j] );
+      }
+    } else {
+//      tell_object(luj, "No special rooms to add");
+    }
+    "/daemon/maze_d.c"->init_maze(10, 10, r_path, map_size);
+    if (flag ==0){
+      tell_object (luj, "Yay! we have success!");
+      break;
+    }
+    flag = 0;    
+  }
+//  if (sizeof(base_exits)>=sizeof(query_exits())){
+//     remove_maze();
+//     make_maze();
+//  }
+}
+
+void remove_maze(){
+  int i, j, num, num2;
+  object mazeroom;
+  string * roomnames, exits, base_exit_names;
+  if ((int)"daemon/maze_d.c"->query_removing()==1){
+    return;
+  }
+  "daemon/maze_d.c"->set_removing(1);
+  if (sizeof(spec_rooms)>0){
+    roomnames = spec_rooms;
+  } else {
+    roomnames = ({});
+  }
+  if (stringp (s_room) && s_room != "none"){
+    roomnames += ({s_room});
+  }
+  if (stringp (n_room)&& n_room != "none"){
+    roomnames += ({n_room});
+  }
+  if (stringp (e_room)&& e_room != "none"){
+    roomnames += ({e_room});
+  }
+  if (stringp (w_room)&& w_room != "none"){
+    roomnames += ({w_room});
+  }  
+  for (i=0;i<150;i++){
+    roomnames += ({r_path + i});
+  }
+  num = sizeof(roomnames);
+  for (i=0;i<num;i++){
+    if (!file_exists(roomnames[i])){ continue; }
+    mazeroom = find_object_or_load(roomnames[i]);
+    if (!objectp(mazeroom)){ continue;}
+    exits = mazeroom->query_exits();
+    base_exit_names = keys(base_exits);
+    num2 = sizeof(exits);
+    if (num2>0){
+      for (j=0;j<num2;j++){ 
+        if (member_array(exits[j], base_exit_names)!=-1){
+          continue;
+        }
+        "/daemon/maze_d.c"->remove_exit(mazeroom,exits[j]);
+        if ((string)mazeroom->query_exit(exits[j]) != "/d/shadowgate/void"){
+          mazeroom->remove_exit(exits[j]);
+        }
+      }
+    }
+    "/daemon/maze_d.c"->clear_maze(file_name(mazeroom), map_size*8);
+    mazeroom->set_basic_exits(); 
+  }
+  "daemon/maze_d.c"->set_removing(0);
+}
+
+varargs int check_maze(string p){
+  string f_name, path_name, temp, junk, result;
+  object mazeroom;
+  int last_maze;
+  f_name = file_name(TO);
+  if (stringp(p)){
+    result = p;
+  } else {
+    if (stringp(r_path)){
+      result = r_path;
+    } else {
+      result = "";
+      while (interact("/", f_name)){
+        sscanf(f_name, "%s/%s", junk, f_name);
+        if (!interact("/", junk)){
+          result += "/";
+        }
+        result += junk;
+      }
+      result = result[1..strlen(result)-1];
+      result += "/j_maze";
+    }
+  }
+//  tell_room(TO, "directory: " + result);
+  last_maze = MAZE_D->query_timing(result);
+  if (time()-uptime()>last_maze){
+//    tell_room(TO, "maze needs to be remade");
+//    tell_room(TO, "Time : " + time() + " Uptime: " + uptime() + " Last maze: " + last_maze);
+    mazeroom = find_object_or_load(result + "0");
+    if(objectp(mazeroom)){
+      tell_room(TO, "Maze room is valid. Removing maze");
+      mazeroom->remove_maze();
+      tell_room(TO, "Making maze");
+      mazeroom->make_maze();
+    } else {
+//      tell_room(TO, "Maze room is not valid. ");
+    }
+  } else {
+//    tell_room(TO, "Time now - uptime <= time maze was last made. Therefore maze does not need remaking");
+  }
+  return 1;
+}
+
+string short_desc(){
+  int i, num, count;
+  string * exits;
+  check_maze();
+  exits = query_exits();
+  num = sizeof(exits);
+  if (num>0){
+    for (i=0;i<num;i++){
+      remove_exit(exits[i]);
+    }
+  } 
+  set_basic_exits();
+  exits = query_exits();
+  num = sizeof(exits);
+  update_exits();
+  count = sizeof(query_exits())-num;
+  if (count<1){
+    on_enter();
+  }
+  if (sizeof(query_exits()) <1){
+    call_out ("eject", 3);
+  }
+  return ::short_desc();
+}
+
+string long_desc(){
+  int i, num, count;
+  string * exits;
+  check_maze();
+  exits = query_exits();
+  num = sizeof(exits);
+  if (num>0){
+    for (i=0;i<num;i++){
+      remove_exit(exits[i]);
+    }
+  } 
+  set_basic_exits();
+  exits = query_exits();
+  num = sizeof(exits);
+  update_exits();
+  count = sizeof(query_exits())-num;
+  if (count<1){
+    on_enter();
+  }
+  if (sizeof(query_exits()) <1){
+    call_out ("eject", 3);
+  }
+  return ::long_desc();
+}
+

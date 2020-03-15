@@ -1,0 +1,9 @@
+#define TUNNELS "/d/attaya/tunnels/rooms/"
+#define BTUNNEL "/d/attaya/tunnels/rooms/tun.c"
+#define MTUNNEL "/d/attaya/tunnels/rooms/tunmon.c"
+#define HTUNNEL "/d/attaya/tunnels/rooms/tunhound.c"
+#define MOB "/d/attaya/tunnels/mons/"
+#define LRESIST_MOB "/d/attaya/tunnels/mons/lower_resist_mob.c"
+#define INSTRUMENT "/d/common/obj/instruments/"
+#define OBJ "/d/attaya/tunnels/obj/"
+#define SHOUSE "/d/player_houses/stefano/"+

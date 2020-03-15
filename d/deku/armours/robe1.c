@@ -1,0 +1,1 @@
+inherit "/d/deku/armours/priest_robe";

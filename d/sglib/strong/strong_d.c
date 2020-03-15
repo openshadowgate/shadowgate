@@ -1,0 +1,137 @@
+//  Player Stronghold Daemon
+//  Thorn@ShadowGate
+//  970127
+//  strong_d.c
+
+#include <strongholds.h>
+
+//  Globals
+mapping   markers;  // ([ "strong id" : "marker room path" ])
+
+//      Function Prototypes
+int       restoreDaemon();
+int       seedMarkers();
+int       doErrorCorrection();
+int       seedMarkers();
+int       saveDaemon();
+int       restoreDaemon();
+int       resetMarkers();
+mapping   addNewMarker(string id, string room);
+mapping   deleteMarker(string id);
+mapping   removeAllMarkers();
+
+
+
+inherit DAEMON;
+
+void create()
+{
+        ::create();
+
+        if(!markers) markers = ([]);
+//      Load from disk
+        restoreDaemon();
+
+//      Place markers and trigger stronghold read
+        seedMarkers();
+
+//      Do error checking and compensate
+        doErrorCorrection();
+}
+
+int     restoreDaemon()
+{
+        seteuid("Stronghold");
+        if(!(restore_object(RDAEMONDIR+"strongholds"))) return 0;
+        seteuid(getuid());
+        return 1;
+}
+
+int     saveDaemon()
+{
+        seteuid("Stronghold");
+        if(!(save_object(RDAEMONDIR+"strongholds", 0))) return 0;
+        seteuid(getuid());
+        return 1;
+}
+
+int     seedMarkers()
+{
+        string path, id;
+        string *ids;
+        object room, marker;
+        int i;
+        mapping map;
+
+        map = markers;
+        ids = keys(map);
+        for(i=0;i<sizeof(ids);i++) {
+                path = map[ids[i]];
+                id = ids[i];
+
+//      Make Sure that there is no marker in the room already
+                room = find_object_or_load(path);
+                if(present(MARKERID, room)) continue;
+
+//      Install it into the room.
+                marker = new(MARKER);
+                marker->restoreMarker(id);
+                marker->move(room);
+        }
+        return 1;
+}
+
+int     doErrorCorrection()
+{
+        return 1;
+}
+
+mapping addNewMarker(string id, object room)
+{
+        string roompath;
+
+        roompath = base_name(room);
+        markers[id] = roompath;
+        saveDaemon();
+        return markers;
+}
+
+mapping deleteMarker(string id)
+{
+        map_delete(markers, id);
+        saveDaemon();
+        return markers;
+}
+
+//      New functions 970202 -- Natael
+mapping removeAllMarkers() 
+{
+        string path, id;
+        string *ids;
+        object room, marker;
+        int i;
+        mapping map;
+
+        map = markers;
+        ids = keys(map);
+        for(i=0;i<sizeof(ids);i++) {
+                path = map[ids[i]];
+                id = ids[i];
+
+//      Make Sure that there is no marker in the room already
+                room = find_object_or_load(path);
+                if(!(marker=present(MARKERID, room))) continue;
+
+//      Destroy all markers and replace them.
+                marker->removeRoom();
+		            if(!marker->remove()) destruct(marker);
+        }
+        return 1;
+}
+
+int     resetMarkers()
+{
+        removeAllMarkers();
+        seedMarkers();
+        return 1;
+}

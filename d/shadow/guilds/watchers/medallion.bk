@@ -1,0 +1,110 @@
+//  The Watcher Medallion (guild object)
+//  Thorn@ShadowGate
+//  970216
+//  Watcher's Guild
+//  medallion.c
+
+#include <std.h>
+
+#define RULES_HELP "tba"
+#define COMMMAND_HELP "tba"
+#define GUILD_INFO "tba"
+
+inherit "/std/guild";
+
+void create(){
+    ::create();
+    set_id(({"medallion","watcher medallion","silver medallion", "watcherx" }));
+    set_name("silver medallion");
+    set_short("A silver medallion");
+    set_long(
+@WATCHERS
+%^BOLD%^MAGENTA%^Medallion of the Watchers%^RESET%^
+  This medallion marks membership in the secret Society of Watchers,
+an ancient group dedicated to observing and recording events, but
+not participating directly in the wars and conflicts of the world.
+The wearer of this medallion is pledged to observe, record, but
+not judge the deeds of the great heroes and villians of this world.  
+%^BOLD%^  For a list of guild abilities and information type <whelp>.%^RESET%^
+WATCHERS
+    );
+    set_type("clothing");
+    set_ac(1);
+    set_weight(1);
+    set_value(0);
+    set_limbs(({ "neck" }));
+    set_leader("dakkon");
+    set_guild_items(({"/d/shadow/guilds/watchers/medallion"}));
+    set_guild_hc(({ "dakkon" }));
+    set_guild_home("/d/shadow/guilds/watchers/");
+    set_welcome("The search for knowledge is never ending. Welcome.");
+    set_guild_name("Watcher");
+    set_type("clothing");
+    set_limbs(({"neck"}));
+}
+
+init() 
+{
+        guild::init();
+        add_action("whelp", "whelp");
+        add_action("locate", "locate");
+        add_action("track", "track");
+        add_action("observe", "observe");
+        if(ETO==TP) TP->force_me("wear medallion");
+}
+
+int whelp(string str) {
+        switch(str) {
+                case "rules":
+                case "rule":
+                        TP->more(RULES_HELP);
+                        break;
+                case "commands":
+                case "cmds":
+                case "command":
+                        TP->more(COMMMAND_HELP);
+                        break;
+                case "info":
+                case "information":
+                case "inf":
+                        TP->more(GUILD_INFO);
+                        break;
+                case "topics":
+                default:
+                        write(
+@WHELP
+%^MAGENTA%^
+                              *  *  *
+                          * OOOOOOOOOOO *
+                          OOO         OOO
+                       * OO   WATCHER   OO *
+                        OO     GUILD     OO
+                      * OO @@@@     @@@@ OO *
+                        OO@@@@@@@ @@@@@@@OO
+                      * OO     @@@@@     OO *
+                        OO H E  @@@  L P OO
+                       * OO     @@@     OO *
+                          OOO   @@@   OOO
+                          * OOOOOOOOOOO *
+                              *  *  *
+
+%^RESET%^
+%^BOLD%^whelp %^RED%^rules%^RESET%^.........guild rules
+      %^GREEN%^commands%^RESET%^......commands for guild members
+      %^BLUE%^info%^RESET%^..........information on the guild
+
+        Use whelp <topic> to get more info on a particular facet
+of your guild powers, duties and other stuff.
+
+WHELP
+                        );
+                        break;
+        }
+        return 1;
+}
+
+
+
+int track() { return 1; }
+int observe() { return 1; }
+int locate() { return 1; }

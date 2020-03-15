@@ -1,0 +1,14 @@
+To receive the powers of the Druidic Spells you have to do the following :
+
+- Go to the Druidic Circle.
+- When you have entered it, go to the temple, down from the center of
+  of the Druidic Circle.
+- Here you <worship> to your diety
+- After a number of worships your Diety will grant you the possibility
+  to acquire a new spell. This is done by typing <spellroom> inside
+  the temple. You go to the spellroom.
+- Inside the spellroom you can view all the spells by typing <show>.
+- After you made a desicion, you type <acquire [spellname]> and you
+  are granted a new spell.
+- When you want to enter the realms of SG again type <done>
+

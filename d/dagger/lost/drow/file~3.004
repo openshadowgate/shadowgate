@@ -1,0 +1,49 @@
+#include <std.h>
+inherit ROOM;
+void create() {
+    ::create();
+    set_property("light",1);
+    set_property("indoors",1);
+    set_short("%^BLUE%^City street%^RESET%^");
+    set_long(
+	"%^BLUE%^The city street is made of cobblestones winding "
+	"through the existing structures around you. The wind blows "
+	"back your hair as you wander through the city pathways. "
+	"The road comes to an abrupt halt and you stand at the foot "
+	"of an enormous %^BOLD%^%^BLACK%^black obsidian "
+	"tower%^RESET%^%^BLUE%^. Above the tower hangs a "
+	"large %^CYAN%^blackened cloud%^BLUE%^ that hovers as if "
+	"it is awaiting the arrival of something unknown. "
+	"The %^RED%^red banners%^BLUE%^ of Lloth hang from the roof "
+	"of the tower blowing in the wind down the tower's walls. "
+	"\n%^BOLD%^%^YELLOW%^You feel as though you are about "
+	"to die..."+TPQCN+"."
+    );
+    set_listen("default",
+	"The wind howls a strangled cry which causes you to feel "
+	"nervous about being here."
+    );
+    set_smell("default",
+	"The smell of bloodly thrown down into the room!%^RESET%^"
+	,environment(TP));
+    }
+}
+void init() {
+    ::init();
+    add_action("block_func","search");
+}
+int block_func(string str) {
+    if(!TP) return 0;
+    if(str=="desk" && present("drow")) {
+	write(
+	  "%^RED%^The drow emisary will not let you search the desk!%^RESET%^"
+	);
+	return 1;
+    } else {
+    write(
+	"%^RED%^After searching the desk you find a wand!%^RESET%^"
+    );
+    new("/d/dagger/drow/obj/wowand.c")->move(TP);
+    return 1;
+}
+}

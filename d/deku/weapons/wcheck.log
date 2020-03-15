@@ -1,0 +1,25 @@
+Deku:          Warning query_name() did not return a valid name.  'stones' 
+Axe:           Warning query_name() did not return a valid name.  'battle axe' 
+Battle_axe:    Warning query_name() did not return a valid name.  'battle axe' 
+Cloud:         Warning: query_type() returned unknown weapon type: thiefslashing.
+Club:          Warning: query_type() returned unknown weapon type: bludgeon.
+Warning: query_weight() is not balanced.
+Warning: query_size() is not balanced.
+Warning: query_wc() is not balanced.
+Warning: query_large_wc() is not balanced.
+Dagger:        Warning: query_type() returned unknown weapon type: magepierce.
+Dagger2:       Warning: query_type() returned unknown weapon type: magebludgeon.
+Elf_slayer:    Warning: query_type() returned unknown weapon type: thiefslashing.
+Larrows:       Warning: /d/deku/weapons/larrows#1769 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'arrows' 
+Longsword:     PASSED
+Longsword1:    PASSED
+Pick:          PASSED
+Short:         Warning query_name() did not return a valid name.  'shortsword' 
+Short1:        Warning query_name() did not return a valid name.  'shortsword' 
+Short2:        Warning query_name() did not return a valid name.  'shortsword' 
+T_sword:       PASSED
+Teeth:         Warning query_name() did not return a valid name.  'teeth' 
+Whip:          Warning: query_type() returned unknown weapon type: magebludgeon.
+Warning: query_large_wc() is not balanced.

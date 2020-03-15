@@ -1,0 +1,41 @@
+#include <std.h>
+
+#define OPATH         "/d/dagger/aketon/obj/"
+#define MPATH         "/d/dagger/aketon/mon/"
+#define RPATH         "/d/dagger/aketon/path/"
+#define RPATH1        "/d/dagger/aketon/rooms/tree1/"
+#define RPATH2        "/d/dagger/aketon/rooms/tree2/"
+#define RPATH3        "/d/dagger/aketon/rooms/tree3/"
+#define RPATH4        "/d/dagger/aketon/rooms/tree4/"
+#define RPATH5        "/d/dagger/aketon/rooms/tree5/"
+#define SPATH         "/d/dagger/aketon/store/"
+#define DPATH         "/d/dagger/aketon/daemon/"
+#define AOPATH        "/d/dagger/aketon/obj/artifact/"
+
+#define ARMORPATH     "/d/shadow/obj/armor/"
+#define WEAPONPATH    "/d/shadow/obj/weapon/"
+#define MISCPATH      "/d/shadow/obj/misc/"
+#define LRPATH        "/d/shadow/obj/lrweapon/"
+
+#define DAEMONROOM    "/d/dagger/aketon/rooms/daemonroom"
+#define COUNCILROOM   "/d/dagger/aketon/rooms/councilroom"
+#define GENERATOR     "/d/dagger/aketon/rooms/generator"
+#define GENERATOR2    "/d/dagger/aketon/rooms/generator2"
+#define GENERATOR3    "/d/dagger/aketon/rooms/generator3"
+#define GENERATOR4    "/d/dagger/aketon/rooms/generator4"
+#define GENERATOR5    "/d/dagger/aketon/rooms/generator5"
+#define ARTIROOM      "/d/dagger/aketon/rooms/artiroom"
+#define ARTIWEAPON    "/d/dagger/aketon/obj/artifact/artiweapon"
+#define ARTIARMOR     "/d/dagger/aketon/obj/artifact/artiarmor"
+#define TREEOUT       "/d/dagger/aketon/store/treeout"
+
+
+#define WANDER        "/d/dagger/aketon/mon/wander/wander"
+#define WANDER1       "/d/dagger/aketon/mon/wander/wander1"
+#define WANDER2       "/d/dagger/aketon/mon/wander/wander2"
+#define WANDER3       "/d/dagger/aketon/mon/wander/wander3"
+#define WANDER4       "/d/dagger/aketon/mon/wander/wander4"
+
+#define ARTIFACT_D    "/d/dagger/aketon/daemon/artifact_d"
+#define ASSASSIN_D    "/d/dagger/aketon/daemon/assassin_d"
+#define COUNCILOR_D   "/d/dagger/aketon/daemon/councilor_d"

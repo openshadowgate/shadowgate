@@ -1,0 +1,33 @@
+%^BOLD%^%^WHITE%^The Laws of Shadow are as follows:
+
+%^RESET%^%^MAGENTA%^          ***********************************
+
+%^BOLD%^%^CYAN%^Races %^WHITE%^- Races who are known to consistantly cause disorder will be imprisoned or executed on sight at the discretion of the Merchant Council. These races include, but are not limited to: orcs, gnolls, bugbears, ogres, drow, half-drow, underworld, goblinoid and vermin species.
+
+%^RESET%^%^MAGENTA%^          ***********************************
+
+%^BOLD%^%^RED%^Murder %^WHITE%^- Will not be tolerated, offenders will be executed.
+
+%^RESET%^%^ORANGE%^Assault %^BOLD%^%^WHITE%^- Offenses will be accompanied by a fine and imprisonment. Repeat offenders will be banned or executed.
+
+%^BOLD%^%^GREEN%^Sedition %^WHITE%^- Active rallying of forces against the City of Shadow will result in a fine and imprisonment
+
+%^BOLD%^%^BLUE%^Theft %^WHITE%^- Will not be tolerated. Fines and imprisonment will result, or loss of hands and banishment for repeat offenders.
+
+%^BOLD%^%^MAGENTA%^Illegal Items %^WHITE%^- Any items on the list of banned substances will be confiscated. Random searches may be conducted by city officials.
+
+%^BOLD%^%^CYAN%^Wielding %^WHITE%^- Weapons may not be wielded in Shadow except by official enforcers of city law. If wielded, they will be confiscated.
+
+%^BOLD%^%^RED%^Husbandry %^WHITE%^- Any person that brings an animal into the city is responsible for its conduct and any crimes it may commit.
+
+%^RESET%^%^ORANGE%^Asylum %^BOLD%^%^WHITE%^- Any person who is actively hunted by another person must remain outside city limits.
+
+%^RESET%^%^MAGENTA%^          ***********************************
+
+%^BOLD%^%^WHITE%^All visitors to Shadow can be required to submit to random searches of their possessions at the request of the appointed officials of the city, which presently includes the magistrate and all appointed deputies.  If you refuse to submit to a search, you will be required to leave the city and not return. If you refuse to leave, or leave and then return without first submitting to a search, your life will be forfeit.
+
+%^BOLD%^%^WHITE%^The laws are to be enforced by the watch, guards and appointed officials. All residents, visitors, and occupants of Shadow agree to abide by the laws by entering the sovereign City of Shadow.
+
+%^RESET%^%^MAGENTA%^          ***********************************
+
+%^RESET%^%^MAGENTA%^The sign is marked at the bottom with an official seal of the City of Shadow, showing three interlocked rings, one each of gold, silver and copper.

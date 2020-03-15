@@ -1,0 +1,57 @@
+#include <std.h>
+inherit "/std/weapon";
+create() {
+    ::create();
+    set_name("bow");
+    set_id(({"bow","goblin bow"}));
+    set_short("%^ORANGE%^Goblin bow%^RESET%^");
+    set_long("%^ORANGE%^"
+	"This is a fine longbow made from excellent wood from the "
+	"Sylvaen forest."
+	"%^RESET%^"
+    );
+    set_weight(5);
+    set_value(25);
+    set_wc(1,6);
+    set_large_wc(1,8);
+    set_size(2);
+    set_type("thiefpiercing");
+    set_prof_type("small bow");
+    set_wield((: TO,"extra_wield" :));
+    set_hit((: TO,"extra_hit" :));
+}
+int extra_wield() {
+    write("%^ORANGE%^"
+	"You slide an arrow into the fine longbow."
+	"%^RESET%^"
+    );
+    say("%^ORANGE%^"
+	+TPQCN+
+	" slips an arrow into the fine longbow."
+	"%^RESET%^"
+    ,TP);
+    return 1;
+}
+int extra_hit(object ob) {
+    object vic;
+    int dam;
+    vic = ETO->query_current_attacker();
+    if(random(9) > 3) return 1;
+    message("my_action","%^ORANGE%^"
+	"You land a lucky shot!"
+	"%^RESET%^"
+    ,ETO);
+    message("other_action","%^ORANGE%^"
+      +ETO->query_cap_name()+
+        " seems surprised as an arrow finds it's mark!"
+	"%^RESET%^"
+    ,environment(vic),(({ETO, vic})));
+    message("my_action","%^ORANGE%^"
+    +ETO->query_cap_name()+
+
+        " lands a lucky shot...you hope!"
+        "%^RESET%^"
+    ,vic);
+    dam = random(2)+2;
+    return dam;
+}

@@ -1,0 +1,79 @@
+You need a tailor?+At your service!+@bow+|speech say in a business-like tone+My rates are quite affordable.+Here is my rate sheet....+|show rate sheet to $N+|speech say
+Here it is!+&smile+|show rate sheet to $N
+I definitely do emblems.+I can show you my rate sheet if you ask.+@smile
+Alterations are my specialty.+Big or small, I alter them all!+I can show you my rate sheet if you ask.+@bow
+Thorn?+Heh, now that is a guy with some real fashion sense.+&nod
+Kill?+Please!  No violence here!+&quiver in fear
+|emote prays for the soul of the deceased that $N mentions.
+You need help?+Read the help files and the faq!+# And definitely read help line use.+#The immortals are pissers about that!
+|speech say in a disgusted tone+Listen to the mouth on you, swearing like that!+&snort+No manners+|speech say
+|speech say in a disgusted tone+Listen to the mouth on you, didn't your mother teach you manners?+&sigh+|speech say
+|speech say in a disgusted tone+Listen to the mouth on you, swearing like that!+&snort+No manners+|speech say
+|speech say in a disgusted tone+Listen to the mouth on you, didn't your mother teach you manners?+&sigh+|speech say
+|letsdoit $N
+A robe it is!+What color would you like it dyed?+You can have it dyed red, yellow, blue, white or green.+|gogeta robe
+A silk robe...a fine choice.+&nod+What color would you like it dyed?+You can have it dyed red, yellow, blue, white or green.+|gogeta silk robe
+A tabard it is!+What color would you like it dyed?+You can have it dyed red, yellow, blue, white or green.+|gogeta tabard
+A cloak for you, then!+What color would you like it dyed?+You can have it dyed red, yellow, blue, white or green.+|gogeta cloak
+A silk cloak.+@smile+The sign of a true noble!+What color would you like it dyed?+You can have it dyed red, yellow, blue, white or green.+|gogeta silk cloak
+A banner, why certainly!+Looking to go into battle, eh?+What color would you like it dyed?+You can have it dyed red, yellow, blue, white or green.+|gogeta silk cloak
+Indeed!+#You must have talked to Divai.+#I don't sell these things to just anyone, you know.+|gogeta golden robe+|nodye
+On my!+#You must have talked to Bokara, that demon...+#I don't sell these things to just anyone, you know.+|nodye+|gogeta silver robe
+|waitfor 15+|dyeitbaby red
+|waitfor 15+|dyeitbaby yellow
+|waitfor 15+|dyeitbaby green
+|waitfor 15+|dyeitbaby white
+|waitfor 15+|dyeitbaby blue
+|waitfor 15+|sewwhat angel+An angelic choice!+&giggle++What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat anvil+A heavy looking anvil for you!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat axe+An axe it is...+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat bird+I am fond of bird myself, you know?+@nod+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat book+A scholarly symbol.+#Or are you a wizard?+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat candle+A candle to light your way!+&chuckle+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat castle+A mighty fortress!+@nod+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat chimera+A fearsome chimera!  Legendary beast!+&giggle+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat club+A club, eh?  Interesting...+&shrug+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat cross+Symbol of the Crusader!+@salute+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat crossed bones+The thigh bone connected to the....+Heh...sorry.+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat crossed daggers+Only the sharpest of daggers for you!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat crossed swords+Hmm, symbol of a warrior+|emote thrusts with an imaginary sword.+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat crow+Bane of cornfields everywhere, a dark bird.+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat dagger+Looks like we have a sharp one here!+Get it?  Sharp?+&chuckle+&shrug+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat demon+From the Nine Hells themselves to you!+@grin+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat diamond+They say that these are a girls best friend.+I'm pretty fond of them myself, actually.+@nod+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat eagle+A noble denizen of the skys!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat fish+One fish, coming up!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat flame+One flame, burning bright!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat gauntlet+No velvet glove, just iron hand+&chuckle+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat hammer+One hammer for you!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat helm+Only the most ornate of helms for you!+@salute+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat helmet+I will sew you a fine helmet!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat hill+A rolling hill, reminds me of home....+&sigh+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat horned skull+A fierce symbol indeed!+#Looking to strike fear into the populace, eh?+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat horse+A throughbred for you!+&smile+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat horse head+The profile of a noble steed!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat keep+One keep, coming up!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat leaf+A delicate leaf, a fine symbol+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat lion+The fierce lion rampant!  Symbol of Royalty.+Can you live up to it?+@?+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat lioness+Queen of the Beasts!+#I hear she does all the work around the Kingdom.+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat lute+An instrument befitting a great Bard!+@smile+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat mountain+A high, inaccessible mountain, reaching to the heights!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat raven+Blackbird, an omen perhaps?+@?+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat scale+Justice herself will not carry finer!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat snake+Scale and fang!  A beast known for its guile....+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat staff+Not just any staff, but an iron shod staff for you!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat sun+Ruler of the heavens!  King of the Sky!+One sun for you!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat sword+A sharp sword for you!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat talon+Like the mightiest bird of prey, you shall have the sharpest of talons!+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat teardrop+A touch of woe, perhaps?+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat unicorn+Mystical beast of goodness!+#Don't worry, I won't tell anyone about the virgin thing...+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat wheel+No beginning, no end.  A sturdy wheel for you.+What color thread would you like me to use?+@?
+|waitfor 15+|sewwhat wolf+Golden eyes, sharp tooth.  Hunter of the night!+@grin+What color thread would you like me to use?+@?
+|waitfor 15+|threadof red
+|waitfor 15+|threadof yellow
+|waitfor 15+|threadof green
+|waitfor 15+|threadof blue
+|waitfor 15+|threadof silver
+|waitfor 15+|threadof golden
+|waitfor 15+|nextemblem
+|rocknroll

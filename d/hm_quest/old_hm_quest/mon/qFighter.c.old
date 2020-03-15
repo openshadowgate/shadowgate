@@ -1,0 +1,81 @@
+inherit "/std/monster";
+#include <std.h>
+
+int count;
+
+void create() {
+  ::create();
+  set_name("fighter");
+  set_id(({"fighter","Fighter","quest fighter","hm_quest_mon"}));
+  set_short("An intimidating fighter");
+  set_long("He is apparently a powerful fighter, very experienced and a worthy opponent.");
+  set("aggressive",10);
+  set_alignment(5);
+  set_body_type("human");
+  set_gender("male");
+  set_hd(19,1);
+  set_size(2);
+  set_sp(query_max_sp());
+  set("race","ogre");
+  set_class("fighter");
+  set_exp(5);
+  set_money("gold",random(100));
+  set_money("electrum",random(50));
+  set_money("platinum",random(20));
+  set_money("silver",random(500));
+  new("/d/shadow/obj/weapon/longsword")->move(this_object());
+  command ("wield sword");
+  new("/d/shadow/obj/armor/fullplate")->move(this_object());
+  command ("wear armor");
+  add_search_path("/cmds/fighter");
+}
+
+void init(){
+  ::init();
+  if(interactive(TP) && !wizardp(TP)){
+    count=0;
+    TO->force_me("say Well, my friend, I see you have made it this far in your quest.");
+    TO->force_me("chuckle");
+    TO->force_me("say I am sure that you have made your way here by preying upon the weak -- it is always the case with those such as yourself.");
+    TO->force_me("shrug");
+    TO->force_me("say Well, now we shall see how you fare against an opponent of similar ability to your own!");
+    call_out("do_kill",25,TP);
+  }
+}
+
+void do_kill(object ob){
+  string who, str;
+  
+  if(objectp(ob) && present(ob,environment(TO))){
+  	count++;
+  	who = ob->query_name();
+  	switch (count) {
+  		case 1:	TO->force_me("rush "+who);
+  				ob->kill_ob(TO);
+  				call_out("do_kill",10,ob);
+  				break;
+  		case 2:	TO->force_me("parry");
+  				break;
+  		default:break;
+  	}
+  }
+}
+
+void die(object ob){
+  int i;
+  object *inv;
+  tell_object(ob,"%^BOLD%^\nYou see a startling transformation take place just as you expect your opponent to fall to the ground, dead!");
+  tell_object(ob,"%^BOLD%^You can't seem to recall the face at first.... then you realize that it is the Master Fighter who began your adventures here.");
+   tell_object(ob,"%^RESET%^%^MAGENTA%^Fighter says: %^RESET%^Well done, my friend.  You have indeed proven yourself worthy to join the ranks of the High Mortal fighters.");
+  tell_object(ob,"%^RESET%^%^MAGENTA%^Fighter says: %^RESET%^We shall welcome you with pride.");
+  set_id(({"fighter","Fighter","quest fighter"}));
+  remove_call_out("do_kill");
+  inv = all_inventory(ETO);
+  for(i=0; i<sizeof(inv); i++) {
+    if(!living(inv[i])) continue;
+    inv[i]->cease_all_attacks();
+  }
+  set_property("no kill",1);
+  set_hp(10000);
+  return;
+}

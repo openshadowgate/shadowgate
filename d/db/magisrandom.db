@@ -1,0 +1,9 @@
+|speech say sternly+I hope you aren't here with something frivolous like a bar fight over a woman.+If you think you're tough enough to start something, you should be tough enough to finish it without dragging the whole realm into it.+Oh, or are you just here to vote or check on a case?+|speech
+|speech say solemnly+Some of the regular jurors get pretty tired of being called in here to vote so I hope this case is worth bothering them with.+$reads over another case and pulls some names from a box.
+|speech say solemnly+If you were called here to vote, thank you for doing your duty.  I hope the system serves you well if you ever need it.
+|speech say solemnly+If you need help filling out your ballot or looking up the cases, it's all explained on the sign there.+$motions you to read the sign on the wall and turns back to processing cases.
+|speech look up from processing cases and says+You should hear the grumbling from some of the jurors I have to keep dragging in here.+&smirk+Sometimes they find the lame defenses almost humorous but mostly they get annoyed by petty or lame cases.
+|speech mutter to himself+Justice, why do they always think they'll get justice from law?  Don't EVEN get me started on that.+&smirk+|speech
+|speech look bemused and says+Don't you wonder sometimes what ever happened to the law of the sword and guilty until dead, or MAYBE found innocent?+Of course there is that law of nature too - survival of the fittest?++I suppose you wouldn't need me if everyone still preferred those though.+|speech
+|speech say solemnly+The list of those already convicted is out there in the lobby.+You might want to avoid most of those people unless you're inclined to make some gold by sending them to visit the gods to pay for their crimes.
+|speech say solemnly+I hear law bounty hunting pays pretty good.  If you're inclined to carry out the sentence the law set on them, you'll be rewarded in gold.  Currently the sentence is served only by death.

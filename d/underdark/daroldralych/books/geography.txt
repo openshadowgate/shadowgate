@@ -1,0 +1,44 @@
+Underdark regional geography by Spirerin Phaeraan
+
+%^RESET%^%^ORANGE%^An old hidebound book%^RESET%^
+
+%^RESET%^%^ORANGE%^Unmarked tanned hide binds the pages of this book together, though the edges are slightly %^BOLD%^%^BLACK%^worn %^RESET%^%^ORANGE%^from the passing of many hands.  The book is thin, its pages formed of expensive parchment that has %^RESET%^yellowed %^ORANGE%^and crinkled a little from age.  The writing is still %^CYAN%^crisp %^ORANGE%^and %^RESET%^clear %^ORANGE%^though, not faded over time.%^RESET%^
+
+Geography of the Underdark
+
+
+%^YELLOW%^Geography of the underdark%^RESET%^
+%^BOLD%^%^WHITE%^I%^RESET%^t is considered wise by any traveller of even short wanderings, to have an understanding of the region's geography and dangers before stepping out into the wilds.  Certainly to surfacers, the underdark is considered to be far more dangerous than the surface, but even to those accustomed to living below it is highly perilous.  It is a place of daily struggle for survival by the vicious and warped creatures that reside within its deepest tunnels and caverns, to say nothing of the poisonous flora, airless caverns, and volatile gas seams.  Likewise, it cannot be considered in terms of the simplistic compass directions of the surface; the additional third dimension of depth presents far greater difficulty to navigation attempts.  Cartography is also given to nigh impossibility compared to than that of the surface, as a map mere decades old can show nothing of present passageways, and the slightest of earth trembles can completely alter underdark geography in a matter of seconds.
+
+%^BOLD%^%^WHITE%^W%^RESET%^ithin these pages are given notes upon the known areas of local underdark, including any features of particular geographic or historic interest.
+
+
+%^YELLOW%^The Wailing Chasm%^RESET%^
+%^BOLD%^%^WHITE%^O%^RESET%^ne of the most prominent features of the local area is the Wailing Chasm, a great rift that splits the caverns and tunnels of underdark for miles in a roughly north-south line.  Its name is given for the sudden screaming gusts that can race without warning along its length, and may cast careless travellers easily into the depths..  The widest portion is known to lie beneath the ridges known to surfacers as the Charu Mountains.  It is believed that originally it did not actually meet the surface at any point, only forming a split in the earth below.  However, an earthquake of only recent years to the east has caused it to slip further, opening a break to the surface amidst the northern reaches of the Charu Mountains, near a suspected habitation of the native surface creatures known as beastmen.  Countless offshoots of this chasm serve to allow access to upper-, middle- and lower-dark
+
+%^BOLD%^%^WHITE%^O%^RESET%^f note to historians, is that most records believe this rift to be the original location of Qi'sztovir, the first shining settlement of drowkind.  Initially taken by force from its pitiful dwarven inhabitants more than eight millennia before the Sundering, their city was turned to far greater purpose and allowed our people to finally flourish and become true lords of the underdark.  Its eventual detonation by arcanistry, more than two thousand years later, is believed to have created the existing rift.
+
+%^BOLD%^%^WHITE%^O%^RESET%^ne of the rare artifacts known as Waygates has been located at its upper- and northern-most end, believed to have once granted access to distant Deku, offering trade with the settlement beneath the cursed isle.  It does not seem to be currently active, however.
+
+
+%^YELLOW%^The Mushroom Caverns%^RESET%^
+%^BOLD%^%^WHITE%^A%^RESET%^ vast series of arching live caverns, split by countless columns, stalagmites and stalactites, and dripstone curtains.  It is here that some of the most varied samples of fungi can be collected, including staple day-to-day food sources such as bluecap and ripplebark.  Given such readily obtained sustenance, the cavern also attracts various creatures which can prove hazardous or fatal to the unwary traveller.  Considerable preparation should be made before broaching this stretch of underdark.
+
+%^BOLD%^%^WHITE%^I%^RESET%^t is believed that one of the rare artifacts known as Waygates still exists somewhere in the eastern reaches of this series of caverns.  Originally connected to a point beneath the eastern reaches of the main Shadow continent, it is suspected after the Sundering that it may now lie somewhere beneath the isle of Laerad.  It is unknown at this point if the return portal still exists, and if so, if it remains functional.
+
+%^YELLOW%^Kinaro Mines%^RESET%^
+%^BOLD%^%^WHITE%^S%^RESET%^trict caution should be taken in approaching the north-eastern reaches of the Mushroom Caverns, as recent delving by the hated dwarvenkind has broached wild-dark at this point.  Patrols are oft to be found here, and should not be underestimated, for they are sufficiently trained and armed as to mount considerable defense of their diggings.  Other passages are recommended should a path to the surface be required.
+
+
+%^YELLOW%^Upper Reaches%^RESET%^
+%^BOLD%^%^WHITE%^A%^RESET%^n extensive series of tunnels run beneath the Yniam plains and the Charu highlands, serving as convenient passage between most areas of the Dagger region, as well as certain points higher in the mountains to the west.  Of distinct interest should be recent constructions here by the human city of Tonovi, a rare surface settlement accepting of greater races.  Access from eastern upper-dark allows entry to their city and their sea-port, though strict control of below-ground passages is restricted to their trade arrangements with settlements of our kin in the Dagger range.  Tunnels provide relatively safe passage (as much as any stretch of underdark may be considered 'safe') to certain western access points, via the Passage of Webs and a series of abandoned human catacombs, believed to be the source of the unliving that scour the trails west of the accursed human settlement of Antioch.
+
+%^YELLOW%^Passage of Webs%^RESET%^
+%^BOLD%^%^WHITE%^A%^RESET%^n area to be regarded with particular respect and caution, for its arachnid denizens as much as its means to render travellers completely directionless.  Still, if navigated with care, this passageway serves as the most prominent link between the Wailing Chasm and the various stretches of upper-dark and the surface.
+
+
+%^YELLOW%^Southern Reaches%^RESET%^
+%^BOLD%^%^WHITE%^O%^RESET%^nce easily accessable via the Waygate of closest proximity to Darol'Dralych, these tunnels provided extensive access to the stretches of upper-dark closest to the human settlement of Tharis, as well as the network within the eastern ridges of Talzashaar's Teeth.  Recent access has been lost due to prolonged illithid incursions in the tunnels south of the city, and contact with the 'Gate has been lost.  Other means to access the passages beneath the southern lands are advised.
+
+%^YELLOW%^Lower Deeps%^RESET%^
+%^BOLD%^%^WHITE%^S%^RESET%^everal access points are assumed to exist for this deepest stretch of underdark, but few remain documented and even fewer are known to have returned from forays into such areas, where only the most dangerous and resourceful of creatures might survive.  It is believed that any remnants of the lost city of Qi'sztovir might still lie here, but there are no recorded confirmations of its rediscovery.  The most likely means to reach the lower tunnels are assumed to be various points along the walls of the Wailing Chasm.  Travel to this region is not advised.

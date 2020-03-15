@@ -1,0 +1,38 @@
+// removing PC arenas (discussed with Garrett) - Styx 5/10/03
+
+#include <std.h>
+
+inherit VAULT;
+
+void create() {
+   ::create();
+    set_terrain(CITY);
+    set_travel(PAVED_ROAD);
+   set_short("Beneath the gateway of the Seneca Coliseum");
+   set_property("indoors",0);
+   set_property("light",2);
+   set_long(
+@DESC
+You are just beneath a series of massive stone arches that make 
+up the outer perimeter of the %^CYAN%^Seneca Coliseum%^RESET%^.  Stone slabs 
+weighing hundreds of tons have been hoisted upright to create 
+huge gateways here. The gateways form a short passage called 
+the 'Journey of the Warrior'. Hundreds of names are carved in 
+the granite surfaces around you. The ground beneath your feet is 
+stained with blood.  The coliseum has been closed and the gates are
+now impenetrable.
+DESC
+   );
+   set_exits(([
+      "west" : "/d/attaya/seneca/street6",
+//      "enter" : "/d/attaya/seneca/arenain",
+      "north" : "/d/attaya/seneca/street13"
+   ]));
+//   set_door("door", "/d/attaya/seneca/arenain", "enter", 0);
+//   set_open("door", 0);
+   set_items(([
+      "path" : "The path is a trail of sand that shows the footfalls of many warriors entering this place of battle, and a few leaving..",
+//      "names" : "Many are worn away but higher up, deep carvings look recent.  You can read only a couple and you recognize none.",
+      "slabs" : "The immense slabs of granite form high walls that mark the entryway to the coliseum.",
+   ]));
+}

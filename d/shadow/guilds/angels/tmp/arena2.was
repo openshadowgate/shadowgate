@@ -1,0 +1,25 @@
+//Coded by Bane//
+#include <std.h>
+inherit ROOM;
+void create(){
+    ::create();
+    set_name("Arena of the Ancients");
+    set_short("Arena of the Ancients");
+    set_long(
+	"You have walked into a huge coliseum.  Blood and guts litter the floor "+
+	"from previous battles to the death.  Many warriors have become legends "+
+	"in this arena defeating even the most powerful of entities, perhaps "+
+	"you can meet your challenge and walk away a champion."
+    );
+    set_property("indoors",1);
+    set_property("light",2);
+    set_property("no teleport",1);
+    set_property("arena",1);
+    set_property("deathmove","/d/shadow/guilds/angels/tmp/heal");
+    set_listen("default","The cheering of the crowd is deafening.");
+    set_smell("default","The smell of blood is very strong.");
+    set_exits( ([
+	"south":"/d/shadow/guilds/angels/tmp/arena1",
+	"east":"/d/shadow/guilds/angels/tmp/arena4"
+    ]) );
+}

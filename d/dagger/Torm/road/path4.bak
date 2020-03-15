@@ -1,0 +1,39 @@
+#include <std.h>
+inherit ROOM;
+
+void create() {
+  ::create();
+   set_terrain(HEAVY_FOREST);
+   set_travel(DIRT_ROAD);
+  set_property("light", 1);
+  set_short("The Torm Graveyard Road");
+  set("day long",
+@GIL
+%^CYAN%^This is the road leading East to the Old Torm Graveyard.
+The forest grows darker, the trees close in around you cutting
+out the sunlight totally.
+You can hardly see where to walk without a light.
+Is that your hands shaking?
+GIL
+);
+  set("night long",
+@GIL
+%^CYAN%^This is the road leading East to the Old Torm Graveyard.
+The forest grows darker, the trees close in around you cutting
+off all light.
+You can't see into the trees or hardly at all down the road either.
+A hideous shriek pierces the darkness making you jump.
+GIL
+);
+set_smell("default", "%^GREEN%^You can smell the thick scent of the evergreens.");
+set_listen("default", "%^BOLD%^%^BLUE%^You can only hear the wind in the trees.");
+  set_items(([
+"road" : "It looks lonely and rarely traveled, no human footprints can be seen.",
+"trees" : "Many pines and evergreen trees grow thickly all around you.",
+]));
+
+  set_exits(([
+  "southwest":"/d/dagger/Torm/road/path5",
+  "north":"/d/dagger/Torm/road/path3",
+]));
+}

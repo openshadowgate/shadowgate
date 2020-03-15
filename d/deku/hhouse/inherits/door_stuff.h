@@ -1,0 +1,3 @@
+#define HALLGD "%^RESET%^%^GREEN%^This oak door is thick and sturdy. It is quite marvelous and has been etched with several different symbols, all in intricate detail. It looks as if it will last forever.%^RESET%^"
+
+#define HALLBD "%^RESET%^%^GREEN%^This oak door is warped and rotted. It was probably quite marvelous at one point. There are several different symbols etched into its surface though the details for each have long since faded and you are unable to determine what any of them might have originally looked like. It is amazing that it still stands.%^RESET%^"

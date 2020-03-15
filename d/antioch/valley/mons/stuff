@@ -1,0 +1,184 @@
+/realms/crystal/valley/mons/zombie.c:
+	set_exp(65);
+
+/realms/crystal/valley/mons/wstag.c:
+	set_exp(2015);
+
+/realms/crystal/valley/mons/wskeleton.c:
+	set_exp(3700);
+
+/realms/crystal/valley/mons/wserpent.c:
+	set_exp(1400);
+
+/realms/crystal/valley/mons/wraith.c:
+	set_exp(5000);
+	texp = targ->query_exp();
+			targ->add_exp(-(texp/10));
+			"daemon/killing_d"->spec_exp_who(targ);
+
+/realms/crystal/valley/mons/wolfwere.c:
+	set_exp(1400);
+
+/realms/crystal/valley/mons/willow_dryad.c:
+	set_exp(2800);
+
+/realms/crystal/valley/mons/wight.c:
+	set_exp(1400);
+
+/realms/crystal/valley/mons/whipweed.c:
+	set_exp(950);
+
+/realms/crystal/valley/mons/wdog.c:
+	set_exp(130);
+
+/realms/crystal/valley/mons/walnut_dryad.c:
+	set_exp(2800);
+
+/realms/crystal/valley/mons/tworm.c:
+	set_exp(5000);
+
+/realms/crystal/valley/mons/sylph.c:
+	set_exp(850);
+
+/realms/crystal/valley/mons/swanmay.c:
+	set_exp(2500);
+
+/realms/crystal/valley/mons/sprite.c:
+	set_exp(570);
+
+/realms/crystal/valley/mons/spider.c:
+	set_exp(1300);
+
+/realms/crystal/valley/mons/snake.c:
+	set_exp(3500);
+
+/realms/crystal/valley/mons/skeleton.c:
+	set_exp(165);
+
+/realms/crystal/valley/mons/sirine.c:
+	set_exp(6000);
+
+/realms/crystal/valley/mons/sbeetle.c:
+	set_exp(3006);
+
+/realms/crystal/valley/mons/satyr.c:
+	set_exp(975);
+
+/realms/crystal/valley/mons/sandling.c:
+	set_exp(1105);
+
+/realms/crystal/valley/mons/pixie.c:
+	set_exp(650);
+
+/realms/crystal/valley/mons/owlbear.c:
+	set_exp(2300);
+
+/realms/crystal/valley/mons/orc.c:
+	set_exp(850);
+
+/realms/crystal/valley/mons/ogre.c:
+   set_exp(900);
+
+/realms/crystal/valley/mons/oak_dryad.c:
+	set_exp(2800);
+
+/realms/crystal/valley/mons/nixie.c:
+	set_exp(690);
+
+/realms/crystal/valley/mons/neogi.c:
+	set_exp(2605);
+
+/realms/crystal/valley/mons/mzombie.c:
+	set_exp(450);
+
+/realms/crystal/valley/mons/mcenti.c:
+	set_exp(6000);
+
+/realms/crystal/valley/mons/lich.c:
+	set_exp(8000);
+
+/realms/crystal/valley/mons/kirre.c:
+	set_exp(13000);
+
+/realms/crystal/valley/mons/jackalw.c:
+	set_exp(1856);
+
+/realms/crystal/valley/mons/hshade.c:
+	set_exp(1000);
+
+/realms/crystal/valley/mons/heucuva.c:
+	set_exp(270);
+
+/realms/crystal/valley/mons/haunt.c:
+	set_exp(1500);
+
+/realms/crystal/valley/mons/gorgon.c:
+	set_exp(5800);
+
+/realms/crystal/valley/mons/ghoul.c:
+	set_exp(475);
+
+/realms/crystal/valley/mons/ghost.c:
+	set_exp(7000);
+			targ->add_exp(-(random(500)+500));
+			"daemon/killing_d"->spec_exp_who(targ);
+
+/realms/crystal/valley/mons/ghast.c:
+	set_exp(1250);
+
+/realms/crystal/valley/mons/gfeyr.c:
+	set_exp(13000);
+
+/realms/crystal/valley/mons/gbear.c:
+	set_exp(3200);
+
+/realms/crystal/valley/mons/dryad1.c:
+	set_exp(975);
+
+/realms/crystal/valley/mons/dryad.c:
+	set_exp(975);
+
+/realms/crystal/valley/mons/druid.c:
+	set_exp(65000);
+
+/realms/crystal/valley/mons/dragonet.c:
+			set_exp(1000);
+			set_exp(1500);
+			set_exp(2000);
+			set_exp(2500);
+			set_exp(3000);
+			set_exp(3500);
+			set_exp(4000);
+			set_exp(4500);
+			set_exp(5000);
+			set_exp(5500);
+			set_exp(6000);
+			set_exp(6500);
+
+/realms/crystal/valley/mons/direwolf.c:
+	set_exp(900);
+
+/realms/crystal/valley/mons/creeper.c:
+	set_exp(9000);
+
+/realms/crystal/valley/mons/chestnut_dryad.c:
+	set_exp(2800);
+
+/realms/crystal/valley/mons/cherry_dryad.c:
+	set_exp(2800);
+
+/realms/crystal/valley/mons/bloodthorn.c:
+	set_exp(15000);
+
+/realms/crystal/valley/mons/bear.c:
+	set_exp(2300);
+
+/realms/crystal/valley/mons/atomie.c:
+	set_exp(815);
+
+/realms/crystal/valley/mons/ash_dryad.c:
+	set_exp(2800);
+
+/realms/crystal/valley/mons/almiraj.c:
+	set_exp(90);
+

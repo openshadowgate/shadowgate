@@ -1,0 +1,809 @@
+#include <std.h>
+#include <move.h>
+#include "../../tecqumin.h"
+
+
+inherit ROOM;
+
+mapping __PosDir;
+mapping __Colours;
+mapping __RPictures;
+mapping __LPictures;
+
+int demon_pos, demon_dir;
+
+void enter_east(object ob);
+void enter_west(object ob);
+int check_bridge(string str);
+void set_PosDir(object ob, int * PosDir);
+void set_pos(object ob, int pos);
+int query_pos(object ob);
+void set_face(object ob, int face);
+int query_face(object ob);
+int query_dir(object ob);
+void set_dir(object ob, int dir);
+void set_demon_pos(int pos);
+int query_demon_pos();
+int set_demon_dir(int dir);
+int query_demon_dir();
+string long_desc();
+string base_desc();
+
+void create() {
+  ::create();
+  set_exits(([
+      "east" : JUNGLE + ""
+   ]));
+  set_long( (: TO, "long_desc" :) );
+}
+
+string base_desc(){
+  return "";
+}
+
+string long_desc(){
+  int ropes;
+  string desc;
+  ropes = "/daemon/bridge_monitor_d.c"->query_ropes();
+  desc = base_desc();
+  switch(ropes){
+  case 0:
+    desc += "The ropes of the %^ORANGE%^bridge%^GREEN%^"
+      +" have been %^BOLD%^%^RED%^cut%^RESET%^%^GREEN%^,"
+      +" and it swings uselessly down the sides of the"
+      +" canyon.";
+    break;
+  case 1:
+    desc += "All but one of the ropes of the%^ORANGE%^"
+      +" bridge%^GREEN%^ have been %^BOLD%^%^RED%^cut"
+      +"%^RESET%^%^GREEN%^, and it hangs precariously"
+      +" by that one remaining thread.";
+    break;
+  case 2:
+    desc += "Two of the ropes of the%^ORANGE%^"
+      +" bridge%^GREEN%^ have been %^BOLD%^%^RED%^cut"
+      +"%^RESET%^%^GREEN%^, and the remaining two are"
+      +" swaying alarmingly";
+    break;
+  case 3:
+    desc += "One of the hand ropes of the%^ORANGE%^"
+      +" bridge%^GREEN%^ has been %^BOLD%^%^RED%^cut"
+      +"%^RESET%^%^GREEN%^, but the three remaining"
+      +" ropes seem reasonably secure.";
+    break;
+  case 4:
+    break;
+  }
+  desc +=" You can %^RESET%^<check bridge>"
+  +" %^GREEN%^to see if anyone is travelling across it, or"
+  +" %^RESET%^<check positions>%^GREEN%^ if you prefer a"
+  +" written description.";
+  return desc;
+}
+
+void init(){
+  ::init();
+  add_action("head_east", "east");
+  add_action("head_west", "west");
+  add_action("climb_up", "climb");
+  add_action("climb_down", "descend");
+  add_action("check_bridge", "check");
+}
+
+int climb_up(string str){
+  return 1;
+}
+
+int climb_down(string str){
+  return 1;
+}
+
+int head_west(string str){
+  int pos, dir, face, len;
+  string room;
+  pos = "/daemon/bridge_monitor_d.c"->query_pos(TP);
+  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
+  face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+  tell_room(TO, "pos: " + pos);
+  tell_room(TO, "dir: " + dir);
+  tell_room(TO, "face: " + face); 
+  switch (face){
+  tell_room(TO, "switching on face ");
+  case 0:
+    tell_room(TO, "Face - case 0:");
+    switch (dir){
+    tell_room(TO, "Switching on dir");
+    case 0:
+      tell_object(TP, "You are %^RED%^already%^RESET%^ heading"
+        +" %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge.");
+      return 1;
+      break;
+    case 1:
+      tell_object(TP, "You head %^BOLD%^%^WHITE%^west%^RESET%^ along the"
+        +" bridge");
+      tell_room(TO, TPQCN + "heads"
+         +" %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge", TP);
+      dir = 0;
+      face = 0;
+      set_PosDir(TP, ({pos, dir,face}));
+      tell_object(TP, "dir should now be: " + dir);
+      dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
+      tell_object(TP, "dir is now: " + dir);
+      tell_object(TP, "face should now be: " + face);
+      face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+      tell_object(TP, "face is now: " + face);
+      call_out("go_west", 1, TP);
+      return 1;
+      break;
+    }
+  case 1:
+    tell_room(TO, "Face - case 1:");
+  default:
+    tell_room(TO, "Face - default:");
+    switch (dir){
+    tell_room(TO,"switching on dir");
+    case 0:
+      tell_object(TP, "You are already walking %^BLUE%^backwards%^RESET%^,"
+        +" heading %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge.");
+      tell_object(TP, "You can <turn> if you want to face the other way.");
+      return 1;
+      break;
+    case 1:
+      tell_object(TP, "You %^BLUE%^turn%^RESET%^ and head"
+         +" %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge");
+      tell_room(TO, TPQCN + " %^BLUE%^turns%^RESET%^ and heads"
+         +" %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge", TP);
+      dir = 1;
+      dir = 0;
+      face = 0;
+      break;
+    default:
+      tell_object(TP, "You %^BOLD%^%^CYAN%^set off%^RESET%^ "
+         +" %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge");
+      tell_room(TO, TPQCN + " %^BOLD%^%^CYAN%^sets off%^RESET%^"
+         +" %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge", TP);
+      dir = 0;
+      face = 0;
+      if (pos ==-1){
+        room = file_name(TO);
+        len = strlen(room) - 1;
+        room = room [len..len];
+        switch (room){
+        case "0":
+          pos = 3;
+          break;
+        case "1":
+          pos = 16;
+          break;
+        case "2":
+          pos  = 33;
+          break;
+        case "3":
+          pos = 51;
+          break;
+        case "4": 
+          pos  = 63;
+          break;
+        default:
+          pos  = 63;
+          break;
+        }
+      }
+      break;
+    }
+  }
+  set_PosDir(TP, ({pos, dir,face}));
+  call_out("go_west", 2, TP);
+  return 1; 
+}
+
+
+int head_east(string str){
+  int pos, dir, face, len;
+  string room;
+  pos = "/daemon/bridge_monitor_d.c"->query_pos(TP);
+  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
+  face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+  tell_room(TO, "pos: " + pos);
+  tell_room(TO, "dir: " + dir);
+  tell_room(TO, "face: " + face); 
+  switch (face){
+  case 1:
+    switch (dir){
+    case 1:
+      tell_object(TP, "You are %^RED%^already%^RESET%^ heading"
+        +" %^BOLD%^%^WHITE%^east%^RESET%^ along the bridge.");
+      return 1;
+      break;
+    case 0:
+      tell_object(TP, "You head %^BOLD%^%^WHITE%^west%^RESET%^ along the"
+        +" bridge");
+      tell_room(TO, TPQCN + "heads"
+         +" %^BOLD%^%^WHITE%^west%^RESET%^ along the bridge", TP);
+      dir = 0;
+      face = 0;
+      set_PosDir(TP, ({pos, dir,face}));
+      tell_object(TP, "dir should now be: " + dir);
+      dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
+      tell_object(TP, "dir is now: " + dir);
+      tell_object(TP, "face should now be: " + face);
+      face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+      tell_object(TP, "face is now: " + face);
+      call_out("go_west", 1, TP);
+      return 1;
+      break;
+    }
+  case 0:
+  default:
+    switch (dir){
+    tell_room(TO,"switching on dir");
+    case 1:
+      tell_object(TP, "You are already walking %^BLUE%^backwards%^RESET%^,"
+        +" heading %^BOLD%^%^WHITE%^east%^RESET%^ along the bridge.");
+      tell_object(TP, "You can <turn> if you want to face the other way.");
+      return 1;
+      break;
+    case 0:
+      tell_object(TP, "You %^BLUE%^turn%^RESET%^ and head"
+         +" %^BOLD%^%^WHITE%^east%^RESET%^ along the bridge");
+      tell_room(TO, TPQCN + " %^BLUE%^turns%^RESET%^ and heads"
+         +" %^BOLD%^%^WHITE%^east%^RESET%^ along the bridge", TP);
+      dir = 1;
+      face = 1;
+    default:
+      tell_object(TP, "You %^BOLD%^%^CYAN%^set off%^RESET%^ "
+         +" %^BOLD%^%^WHITE%^east%^RESET%^ along the bridge");
+      tell_room(TO, TPQCN + " %^BOLD%^%^CYAN%^sets off%^RESET%^"
+         +" %^BOLD%^%^WHITE%^east%^RESET%^ along the bridge", TP);
+      dir = 1;
+      face = 1;
+      if (pos == -1){
+        room = file_name(TO);
+        len = strlen(room) - 1;
+        room = room [len..len];
+        switch (room){
+        case "0":
+          pos = 1;
+        case "1":
+          pos = 14;
+        case "2":
+          pos  = 27;
+        case "3":
+          pos = 40;
+        case "4": 
+          pos  = 53;
+        default:
+          pos  = 65;
+        }
+      }
+      break;
+    }
+  }
+  set_PosDir(TP, ({pos, dir,face}));
+  call_out("go_east", 2, TP);
+  return 1;  
+}
+
+int has_moved_east(int pos, int dist){
+  switch (dist){
+  case 1:
+    switch (pos){
+    case 17:
+    case 33:
+    case 49:
+      return 1;
+    }
+    break;
+  case 2:
+    switch (pos){
+    case 17..18:
+    case 33..34:
+    case 49..50:
+      return 1;
+    }
+    break;
+  }
+  return 0;
+}
+int has_moved_west(int pos, int dist){
+  switch (dist){
+  case 1:
+    switch (pos){
+    case 16:
+    case 32:
+    case 48:
+      return 1;
+    }
+    break;
+  case 2:
+    switch (pos){
+    case 17..18:
+    case 33..34:
+    case 49..50:
+      return 1;
+    }
+    break;
+  }
+  return 0;
+}
+
+string get_correct_room(int pos){
+  switch(pos){
+  case -2..0:
+    return JUNG_ROOM + "ropebridge0";
+    break;
+  case 1..16: 
+    return JUNG_ROOM +"ropebridge1";
+    break;
+  case 17..32:
+    return JUNG_ROOM +"ropebridge2";
+    break;
+  case 33..48:
+    return JUNG_ROOM +"ropebridge3";
+    break;
+  case 49..64:
+    return JUNG_ROOM +"ropebridge4";
+    break;
+  case 65..68:
+    return JUNG_ROOM + "ropebridge5";
+    break;
+  }
+}
+
+void go_west(object ob){
+  int i, pos, dist, face;
+  object room, moveroom;
+  string movement, movementb, correct_room;
+  face = 2;
+  pos = "/daemon/bridge_monitor_d.c"->query_pos(ob);
+  face = "/daemon/bridge_monitor_d.c"->query_face(ob);
+// First make sure they are in the right room, according to their
+// position on the bridge
+  correct_room = get_correct_room(pos);
+  if(file_name(TO)!=correct_room){
+    room = find_object_or_load( correct_room);
+    if (objectp(room)){
+      if(present(ob, room)){
+        room->go_west(ob);  
+        return;
+      }
+      tell_room(TO, ob->QCN + " moves to another part of the bridge.", ob);
+      tell_room(room, ob->QCN + " arrives from another part of the bridge.", ob);
+      tell_object(ob, "You move to another part of the bridge");
+      ob->move(room);
+      room->go_west(ob);
+      return;
+    }
+  }
+//Set up the right movement text and distance, according to whether they are
+// going backwards or forwards
+  switch (face){
+  case 1:
+    dist = 1;
+    movement = "edge slowly backwards along";
+    movementb = "edges slowly backwards along";
+    break;
+  case 0:
+  default:
+    movement = "make progress across";
+    movementb = "makes progress across";
+    dist = 2;
+    break;
+  }
+  pos = pos - dist;
+  moveroom = TO;
+//send the messages about movement to the mover, and to each room on the 
+//bridge
+  switch(pos){
+  case -2..0:
+     pos = 0;
+     tell_object(ob, "You step off the bridge at the western end");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + " steps off the bridge at the western"
+           +" end.", ob);
+       }
+     }
+     moveroom = find_object_or_load(JUNG_ROOM + "ropebridge0");
+     if (objectp(moveroom)){
+       ob->move(moveroom);
+       ob->force_me("look");
+        tell_room(moveroom, ob->QCN +" steps in from the bridge.", ob);
+     }
+//     "/daemon/bridge_monitor_d.c"->remove_crosser(ob);
+     return; // makes sure they don't keep trying to cross
+     break;
+   case 1..14:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+      +" %^BOLD%^%^WHITE%^west%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading%^BOLD%^%^WHITE%^west%^RESET%^.", ob);
+       }
+     }
+     break;
+   case 15..16:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^west%^RESET%^.");
+     if (has_moved_west(pos, dist)){     
+       tell_object(ob, "You are about three quarters of the way across.");
+     }
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^west%^RESET%^.", ob);
+         if (has_moved_west(pos, dist)){ 
+           tell_room(room, ob->QCN + "  is about three quarters of the way"
+             +" across.", ob);
+         }
+       }
+     }
+     if (has_moved_west(pos, dist)){ 
+       moveroom = find_object_or_load(JUNG_ROOM + "ropebridge1");
+       if (objectp(moveroom)){
+         ob->move(moveroom);
+         ob->force_me("look");
+          tell_room(moveroom, ob->QCN +" arrives in this section of the"
+            +" bridge.",ob);
+       }
+     }
+     break;
+   case 17..30:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^west%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^west%^RESET%^.", ob);
+       }
+     }
+     break;
+   case 31..32:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^west%^RESET%^.");
+     if (has_moved_west(pos, dist)){ 
+       tell_object(ob, "You are about halfway across.");
+     }
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+          +" heading %^BOLD%^%^WHITE%^west%^RESET%^.", ob);
+         if (has_moved_west(pos, dist)){ 
+           tell_room(room, ob->QCN + "  is about halfway across.", ob);
+         }
+       }
+     }
+     if (has_moved_west(pos, dist)){
+       moveroom = find_object_or_load(JUNG_ROOM + "ropebridge2");
+       if (objectp(moveroom)){
+         ob->move(moveroom);
+         ob->force_me("look");
+          tell_room(TO, ob->QCN + " moves to the next section of the bridge"
+            +" to the %^BOLD%^%^WHITE%^west%^RESET%^");
+          tell_room(moveroom, ob->QCN +" arrives in this section of the"
+            +" bridge.",ob);
+       }
+     }
+     break;
+   case 33..46:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+      +" %^BOLD%^%^WHITE%^west%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+          +" heading %^BOLD%^%^WHITE%^west%^RESET%^.", ob);
+       }
+     }
+     break;
+   case 47..48:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^west%^RESET%^.");
+     if (has_moved_west(pos, dist)){ 
+       tell_object(ob, "You are about a quarter of the way across.");
+     }
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^west%^RESET%^.", ob);
+         if (has_moved_west(pos, dist)){ 
+           tell_room(room, ob->QCN + "  is about a quarter of the way"
+            +" across.",ob);
+         }
+       }
+     }
+     if (has_moved_west(pos, dist)){ 
+       moveroom = find_object_or_load(JUNG_ROOM + "ropebridge1");
+       if (objectp(moveroom)){
+         ob->move(moveroom);
+         ob->force_me("look");
+         tell_room(TO, ob->QCN + " moves to the next section of the bridge"
+           +" to the %^BOLD%^%^WHITE%^west%^RESET%^");
+         tell_room(moveroom, ob->QCN +" arrives in this section of the"
+           +"bridge.",ob);
+       }
+     }
+     break;
+   case 49..65:
+   default: 
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^west%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^west%^RESET%^.", ob);
+       }
+     }
+     break;
+   }
+//adjust their position
+  set_PosDir(ob, ({pos, 0, face}));
+  call_out("go_west", 2, ob);
+}
+
+void go_east(object ob){
+  int i, pos, dist, face;
+  object room, moveroom;
+  string movement, movementb, correct_room;
+  face = 2;
+  pos = "/daemon/bridge_monitor_d.c"->query_pos(ob);
+  face = "/daemon/bridge_monitor_d.c"->query_face(ob);
+// First make sure they are in the right room, according to their
+// position on the bridge
+  correct_room = get_correct_room(pos);
+  if(file_name(TO)!=correct_room){
+    room = find_object_or_load( correct_room);
+    if (objectp(room)){
+      if(present(ob, room)){
+        room->go_east(ob);  
+        return;
+      }
+      tell_room(TO, ob->QCN + " moves to another part of the bridge.", ob);
+      tell_room(room, ob->QCN + " arrives from another part of the bridge.", ob);
+      tell_object(ob, "You move to another part of the bridge");
+      ob->move(room);
+      room->go_east(ob);
+      return;
+    }
+  }
+//Set up the right movement text and distance, according to whether they are
+// going backwards or forwards
+  switch (face){
+  case 0:
+    dist = 1;
+    movement = "edge slowly backwards along";
+    movementb = "edges slowly backwards along";
+    break;
+  case 1:
+  default:
+    movement = "make progress across";
+    movementb = "makes progress across";
+    dist = 2;
+    break;
+  }
+  pos = pos + dist;
+  moveroom = TO;
+//send the messages about movement to the mover, and to each room on the 
+//bridge
+  switch(pos){
+  case 65..68:
+     pos = 65;
+     tell_object(ob, "You step off the bridge at the eastern end");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + " steps off the bridge at the eastern"
+           +" end.", ob);
+       }
+     }
+     moveroom = find_object_or_load(JUNG_ROOM + "ropebridge0");
+     if (objectp(moveroom)){
+       ob->move(moveroom);
+       ob->force_me("look");
+        tell_room(moveroom, ob->QCN +" steps in from the bridge.", ob);
+     }
+//     "/daemon/bridge_monitor_d.c"->remove_crosser(ob);
+     return; // makes sure they don't keep trying to cross
+     break;
+   case 51..64:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+      +" %^BOLD%^%^WHITE%^east%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading%^BOLD%^%^WHITE%^east%^RESET%^.", ob);
+       }
+     }
+     break;
+   case 49..50:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^east%^RESET%^.");
+     if (has_moved_east(pos, dist)){
+       tell_object(ob, "You are about three quarters of the way across.");
+     }
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^east%^RESET%^.", ob);
+         if (has_moved_east(pos, dist)){
+           tell_room(room, ob->QCN + "  is about three quarters of the way"
+             +" across.", ob);
+         }
+       }
+     }
+     if (has_moved_east(pos, dist)){
+       moveroom = find_object_or_load(JUNG_ROOM + "ropebridge1");
+       if (objectp(moveroom)){
+         ob->move(moveroom);
+         ob->force_me("look");
+          tell_room(moveroom, ob->QCN +" arrives in this section of the"
+            +" bridge.",ob);
+       }
+     }
+     break;
+   case 35..48:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^east%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^east%^RESET%^.", ob);
+       }
+     }
+     break;
+   case 33..34:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^east%^RESET%^.");
+     if (has_moved_east(pos, dist)){
+       tell_object(ob, "You are about halfway across.");
+     }
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+          +" heading %^BOLD%^%^WHITE%^east%^RESET%^.", ob);
+         if (has_moved_east(pos, dist)){
+           tell_room(room, ob->QCN + "  is about halfway across.", ob);
+         }
+       }
+     }
+     if (has_moved_east(pos, dist)){
+       moveroom = find_object_or_load(JUNG_ROOM + "ropebridge2");
+       if (objectp(moveroom)){
+         ob->move(moveroom);
+         ob->force_me("look");
+          tell_room(TO, ob->QCN + " moves to the next section of the bridge"
+            +" to the %^BOLD%^%^WHITE%^east%^RESET%^");
+          tell_room(moveroom, ob->QCN +" arrives in this section of the"
+            +" bridge.",ob);
+       }
+     }
+     break;
+   case 17..32:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+      +" %^BOLD%^%^WHITE%^east%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+          +" heading %^BOLD%^%^WHITE%^east%^RESET%^.", ob);
+       }
+     }
+     break;
+   case 15..16:
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^east%^RESET%^.");
+     if (has_moved_east(pos, dist)){ 
+       tell_object(ob, "You are about a quarter of the way across.");
+     }
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^east%^RESET%^.", ob);
+         if (has_moved_east(pos, dist)){ 
+           tell_room(room, ob->QCN + "  is about a quarter of the way"
+            +" across.",ob);
+         }
+       }
+     }
+     if (has_moved_east(pos, dist)){
+       moveroom = find_object_or_load(JUNG_ROOM + "ropebridge1");
+       if (objectp(moveroom)){
+         ob->move(moveroom);
+         ob->force_me("look");
+          tell_room(TO, ob->QCN + " moves to the next section of the bridge"
+            +" to the %^BOLD%^%^WHITE%^east%^RESET%^");
+          tell_room(moveroom, ob->QCN +" arrives in this section of the"
+            +"bridge.",ob);
+       }
+     }
+     break;
+   case 0..14:
+   default: 
+     tell_object(ob, "You " + movement + " the bridge, heading"
+       +" %^BOLD%^%^WHITE%^east%^RESET%^.");
+     for (i=1;i<6;i++){
+       room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
+       if (objectp (room)){
+         tell_room(room, ob->QCN + "  " + movementb  + " the bridge,"
+           +" heading %^BOLD%^%^WHITE%^east%^RESET%^.", ob);
+       }
+     }
+     break;
+   }
+//adjust their position
+  set_PosDir(ob, ({pos, 0, face}));
+  call_out("go_east", 2, ob);
+}
+
+int check_bridge(string str){
+  if (str != "bridge" && str !="rope bridge" && str != "ropebridge"){
+    if (str != "positions" && str != "progress" 
+                               && str != "progress across bridge"){
+      return notify_fail("Try <check progress>");
+    }
+    "/daemon/bridge_monitor_d.c"->check_positions(TP);
+    return 1;
+  }
+  "/daemon/bridge_monitor_d.c"->show_bridge(TP);
+  return 1;
+}
+
+void set_PosDir(object ob, int * PosDir){
+  "/daemon/bridge_monitor_d.c"->set_PosDir(ob, PosDir);
+}
+
+void set_pos(object ob, int pos){
+  "/daemon/bridge_monitor_d.c"->set_pos(ob, pos);
+}
+
+int query_pos(object ob){
+  return "/daemon/bridge_monitor_d.c"->query_pos(ob);
+}
+
+void set_face(object ob, int face){
+  "/daemon/bridge_monitor_d.c"->set_face(ob, face);
+}
+
+int query_face(object ob){
+  return "/daemon/bridge_monitor_d.c"->query_face(ob);
+}
+
+int query_dir(object ob){
+  return "/daemon/bridge_monitor_d.c"->query_dir(ob);
+}
+
+void set_dir(object ob, int dir){
+  "/daemon/bridge_monitor_d.c"->set_dir(ob, dir);
+}
+
+void set_demon_pos(int pos){
+  "/daemon/bridge_monitor_d.c"->set_demon_pos(pos);
+
+}
+
+int query_demon_pos(){
+  return "/daemon/bridge_monitor_d.c"->query_demon_pos();
+}
+
+int set_demon_dir(int dir){
+  demon_dir = dir;
+}
+
+int query_demon_dir(){
+  return demon_dir;
+}
+
+

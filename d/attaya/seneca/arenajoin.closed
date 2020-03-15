@@ -1,0 +1,30 @@
+// removing PC arenas (discussed with Garrett) - Styx 5/10/03
+
+#include <std.h>
+#include <money.h>
+#include <move.h>
+
+inherit ROOM;
+
+
+void create() {
+    ::create();
+    set_terrain(STONE_BUILDING);
+    set_travel(PAVED_ROAD);
+    set_light(3);
+    set_property("no attack", 1);
+    set_property("training",1);
+    set_indoors(1);
+    set_short("Right of Passage");
+    set_long(
+      "   This is the gate to the arena.  Combatants here pay to fight to the death against anyone they deem a worthy adversary.  Large granite blocks around the gate are scarred from angry warriors throughout time.\n"
+      +"   An ancient monk offers his services as a healer here for a substantial price.  To enter the arena will cost you 50 gold.\n"
+      +"   The passage before you is short and beyond is an enormous arena with bloodied sand for a floor.\n"
+      +"    %^CYAN%^You may now 'enter safe' or 'enter live'."
+    );
+    set_smell("default", "There is a hint of blood and rot in the air here.");
+    set_listen("default", "Folk songs of bravery echo from the stands of the arena before you!");
+    set_exits( ([
+	"south" : "/d/attaya/seneca/arenain",
+      ] ));
+}

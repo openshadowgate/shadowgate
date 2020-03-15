@@ -1,0 +1,179 @@
+Arsheeva Wyndar - Nomadic Warrior-Priest of Kelemvor (random boss in the desert - insane - does NOT auto attack though unless it's non-interactive which he destroys with a throwing spear)
+(Phased Boss Battle - Destroy 4 Stones Before he is vulnerable - is possessed by something very very evil - cutscenes between phases???) ** DONE **
+
+
+Dyveryll Wyndar - Nomadic Psionicist of Kelemvor (NPC in eastern Oasis)
+
+Myrkahl Wyndar (Hidden somewhere in the larger tomb?)
+
+
+1 - six stones needed to destroy before being able to damage Arsheeva - echoes while in the room with them 
+A shadow of something evil
+                                            You will never be able to save him
+                                            He is mine now.... and forever more
+                                            This land will never submit to the control of another
+                                            It is I who controls thing here and it has been all along
+                                            They should never have came here!
+                                            You will never leave this island... you will soon be mine as well
+                                            
+     
+
+
+==============
+MONSTERS
+==============
+
+//Should be approximately equal to the lava tubes in strength/damage - maybe a bit tougher
+2. Desert Ogres 
+2A. Shaman Ogre (Dont summon shadows) ** DONE ** (only on hill tops)
+2B. Fighter Ogre (Summons Shadows) ** DONE ** 
+
+3. Storm Elemental - ** DONE **
+4. Crazed Nomads - ** DONE **
+5. Crazed Knights? - ** DONE ** 
+6. Goblin Grave Robbers (steal shit?) (don't summon shadows) - **DONE**
+7. Storm Giants - ** DONE ** (only in tombs)
+8. Ettin ** DONE **
+9. All mobs or ALMOST all - should inherit ELDEBARO_MONSTER so that they can have the shadow summoning function
+10. Shadow of something evil ** DONE **
+11. Sand Worms? (burrows possibly?) ** DONE ** 
+12. Sand Wyvern? ** DONE **
+13. Sand Hydras? ** DONE **
+
+=============
+FEATURES
+=============
+
+1. Small Tombs that you can enter? - ** DONE ** - make portal inside each tomb that requires an orb to open (one in Asantra's room requires all 4 and leads deeper into castle?)
+1A. Create Asantra - ** DONE **puzzle to complete to be able to get into her tomb? **DONE**
+1B. Create Blocks of Ice *DONE*
+1C. Twisted Figures (Break blocks of Ice) ** DONE ** 
+1D. Create Symbol Observations ** DONE **
+1E. Create Way in (carry dreadhorn/speak words at certain stones) (stones stay the same, the tomb they lead to changes) ** DONE ** 
+1F. Create Asantra Ice ** DONE ** 
+1G. Create Orbs (eventually required to get into larger tomb) ** DONE **
+1H. Place Orbs somewhere ** DONE **
+1I. Place hints about words - like I > word, ** DONE ** II > word, ** DONE ** III > word ** DONE **(in other tombs somewhere)
+1J. Asantra Tomb (with pedestals - for later use to get down into larger tomb) ** DONE **
+
+
+2. Small hiltops that you can climb and find ogres shamans trying to destroy giant rune stones - they DON't want the giants awakened either ** DONE **
+2A. Create DreadHorn appearance ritual ** DONE **
+3. Western Oasis is a mirror of eastern oasis but it is totally fucked/destroyed ** DONE **
+3A. Add corpse searches??? 
+4. Journal pages to assemble the journal of Arsheeva for Dyveryll - 
+
+
+5. Orbs that are needed to be destroyed to kill Arsheeva - lightning strikes tell the general area - so destroy one - lightning strike ** DONE ** 
+5A. (shadow of something evil) stands by them, casts spells, invulnerable ** DONE **
+5B. (taunts) - these come out randomly in Arsheeva battle ** DONE **
+                                                                                                                                                                                                                                                    
+6. Storm Giants encased in ice blocks ** DONE ** 
+7. Random echoes around the stones - taunts/etc. 
+8. Eastern Oasis - small town - finish inherit - items/etc. ** DONE **
+    stables - sells camel mount (6) ** DONE ** stable NPC ** DONE **
+    healer (5) ** DONE ** - healer NPC ** DONE **
+    weapon (9) ** DONE ** - weapon smith NPC ** DONE **
+    armor (7) ** DONE ** - armor smith NPC ** DONE **
+    general merchant (4) ** DONE ** - general merchant NPC ** DONE **
+    components shop (15) ** DONE ** - component shop NPC ** DONE **
+    crystal shop (12) ** DONE ** - psion crystal npc ** DONE **
+    herb shop (11) ** DONE ** - herb NPC ** DONE **
+    portal (14) ** DONE ** - portal npc ** DONE **
+    church (10) ** DONE **
+    bar (13) ** DONE ** barkeep NPC ** DONE **
+    guards (3) ** DONE ** - guard NPC - ** DONE **
+    large tent in the center with Dyveryll Wyndar (8) ** DONE **
+    
+    ***IMPORTANT***
+    CREATE A DAEMON THAT creates class/level/short description/gear for NPC vendors/guards for the oasis
+    basically create a merchant file - do what it needs to do - pass the object to the daemon
+    assign a race, ids, class, short description, name, level, etc. to it ** DONE **
+    
+    
+9. Dock Room (Do this last)
+10. eldebarocreature (All mobs should have this ID) ** DONE **
+
+
+==========
+ITEMS
+==========
+
+1. +5 large club (ogre warrior) ** DONE **
+
+3. +5 lance (knight) ** DONE **
+
+4. +5 shield (giants? ebony colored) ** DONE **
+
+6. +5 daggers (rogue) ** DONE **
+7. +5 short swords (rogue) (will save?? protection from mental effects??) ** DONE **
+8. +5 leather coif (rogue) ** DONE **
+
+2. +5 robes (two types) (ogre shamans/nomads) ** DONE **
+
+10. Some type of consumables - food or something that offers temporary buffs to stats/attack bonuses/something ** DONE ** - Manna :-)
+    
+12. +5 short sword (dreadhorn/ named dreadhorn - poisons?) (find something to wrap it with before it's usable / found in tombs? - on shit inside the tombs?) 
+    twisted figure with emerald stone randomly ** DONE **
+    ogre shamans with cloth randomly ** DONE **
+
+13. +5 leather/woven armor (on giants in tombs) (size 4 - can resize now) (armor of the stormbringer?) **DONE**
+
+15. Heart of the storm (random drop from elementals - can turn them in for exp/gold in eastern oasis) 
+
+16. +5 2handed sword (giants) ** DONE ** 
+
+17. Notes on grave robbers - ** DONE ** names/words that need to be spoken to open portals to tombs - need to have a dreadhorn and speak the phrase "asantra show me the way"
+
+
+
+============
+BOSSES
+============
+1. Arsheeva - 10 pieces of gear (3 per person - 5 phase fight) 
+    
+    1. (+5 ROP) ** DONE **
+    2. Armor that changes size/type?? +5 ** DONE **
+    3. +5 helmet - changes size/type
+    4. +5 belt (belt of summoning) ** DONE ** 
+    
+    5. +5 cloaks (nomad/knights) ** DONE ** (cloak of invisibility)
+    6. +5 sickles (from nomads) ** DONE ** (the reaping)
+    7. wild magic zone orb - follows user? or just use and sets up wild magic area? ** DONE **
+    8. +5 bow - ** DONE ** 
+    9. mages robes - robes of power ** DONE ** 
+    10. augmented tear amulet - grants bears endurance, owls wisdom, and eagles splendor as innate spells ** DONE **
+
+2. DreadHorn - ** DONE ** Minotaur? Summoned on the hills when players destroy runes ** DONE ** 
+    Large Axe? ** DONE **
+
+3. Asantra Freeholm - Storm Giant Boss - in the tombs (if players awaken her) - ** DONE ** 
+    +5 Spear ** DONE ** 
+    // wait on this - possible to do this later when underground part of the island goes in - 
+    // greater heart of the storm - 1 use item that lets you summon a storm giant to fight for you for x rounds - can fill it from corpses of the storm giants?? 
+
+4. Kayan Freeholm (boss inside the underground tomb)
+
+
+
+
+%^BOLD%^%^WHITE%^Adventurers! %^BOLD%^%^CYAN%^Travelers! %^BOLD%^%^GREEN%^Those with a strong WanderLust!
+
+%^BOLD%^%^RED%^Heed my Call! 
+
+%^BOLD%^%^WHITE%^I am Arsheeva Wynder, a Nomadic Warrior-Priest of Kelemvor, perhaps you have never heard of me? 
+
+%^BOLD%^%^RED%^It is no matter. We are set this Lightday, during the 11th Renewal, in year 729 to cleanse the Island%^BOLD%^%^RED%^ of Eldebaro of the Undead Filth that plagues it. 
+
+%^BOLD%^%^RED%^We have an Enclave from which we have been observing the Island for some number of years, %^BOLD%^%^RED%^and we believe that there is hidden on the island a most foul source of curses, diseases, and %^BOLD%^%^RED%^dark magic. 
+
+%^BOLD%^%^GREEN%^We seek to eradicate the very SOURCE! We are now seeking any who would aid us in this cause!
+
+%^BOLD%^%^GREEN%^If you are brave enough or smitten with enough wanderlust to make the journey, you shall find the %^BOLD%^%^GREEN%^island at the coordinates : 7, 51. Go forth and slay as many undead as you can find!!
+
+%^BOLD%^%^RED%^Our enclave shall be watching and once enough of the filth have been removed from the island %^BOLD%^%^RED%^you will be Rewarded and our exploration for the source can begin in earnest!
+
+%^BOLD%^%^WHITE%^Penned, this Lightday, during the 11th Renewal, in the year 729 by Arsheeva Wyndar
+
+%^B_CYAN%^%^YELLOW%^OOC: Anyone who wants to do so can participate simply by traveling to Eldebaro and killing%^B_CYAN%^%^YELLOW%^ undead monsters on the island. This plot is going to be used to introduce changes to the island.%^B_CYAN%^%^YELLOW%^ If you don't know I sometimes create items that have a 'little extra' (such as some rare/weird curse) %^B_CYAN%^%^YELLOW%^and I believe because of the changes that are coming to Eldebaro the reward for helping out here will%^B_CYAN%^%^YELLOW%^ likely reflect my penchant for that. I do not forsee this lasting for more than a few weeks depending%^B_CYAN%^%^YELLOW%^ on RL circumstances. There is no need to mail me or anything - the game will be tracking the undead that%^B_CYAN%^%^YELLOW%^ you kill on Eldebaro. If you do have questions though, feel free to mail! Enjoy!
+%^B_CYAN%^%^YELLOW%^Saide

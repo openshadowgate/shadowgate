@@ -1,0 +1,127 @@
+/d/shadow/obj/weapon/shortsword.c:
+   set_weight(5);
+
+/d/shadow/obj/weapon/handaxe.c:
+   set_weight(5);
+
+/d/shadow/obj/weapon/mace.c:
+   set_weight(10);
+
+/d/shadow/obj/weapon/flail.c:
+   set_weight(15);
+
+/d/shadow/obj/weapon/voulge.c:
+    set_weight(10);
+
+/d/shadow/obj/weapon/sickle.c:
+   set_weight(3);
+
+/d/shadow/obj/weapon/longsword.c:
+   set_weight(7);
+
+/d/shadow/obj/weapon/awlpike.c:
+   set_weight(12);
+
+/d/shadow/obj/weapon/bardiche.c:
+    set_weight(
+
+/d/shadow/obj/weapon/quarter_staff.c:
+    set_weight(4);
+
+/d/shadow/obj/weapon/military_fork.c:
+   set_weight(7);
+
+/d/shadow/obj/weapon/bec_de_corbin.c:
+  "  On the reverse side of the beak a clawed hammer gives extra weight to the weapon for the crushing blows it would need to drive it through plate armor."
+    set_weight(10);
+
+/d/shadow/obj/weapon/club.c:
+   set_weight(3);
+
+/d/shadow/obj/weapon/club_lg.c:
+   set_weight(5);
+
+/d/shadow/obj/weapon/mspear.c:
+   set_weight(4);
+
+/d/shadow/obj/weapon/halberd.c:
+    set_weight(10);
+
+/d/shadow/obj/weapon/scythe.c:
+    set_weight(7);
+
+/d/shadow/obj/weapon/hammer_sm.c:
+   set_weight(4);
+
+/d/shadow/obj/weapon/two_hand_sword.c:
+   set_weight(15);
+
+/d/shadow/obj/weapon/khopesh.c:
+   set_weight(7);
+
+/d/shadow/obj/weapon/whip.c:
+   set_weight(2);
+
+/d/shadow/obj/weapon/warhammer.c:
+   set_weight(10);
+
+/d/shadow/obj/weapon/guisarme.c:
+    set_weight(10);
+
+/d/shadow/obj/weapon/glaive.c:
+    set_weight(10);
+
+/d/shadow/obj/weapon/scourge.c:
+   set_weight(2);
+
+/d/shadow/obj/weapon/bastard_two.c:
+   set_weight(10);
+
+/d/shadow/obj/weapon/bastard.c:
+   set_weight(10);
+
+/d/shadow/obj/weapon/dagger.c:
+   set_weight(2);
+
+/d/shadow/obj/weapon/broad.c:
+   set_weight(4);
+
+/d/shadow/obj/weapon/spetum.c:
+    set_weight(10);
+
+/d/shadow/obj/weapon/battle_axe.c:
+   set_weight(7);
+
+/d/shadow/obj/weapon/knife.c:
+   set_weight(2);
+
+/d/shadow/obj/weapon/trident.c:
+   set_weight(6);
+
+/d/shadow/obj/weapon/scimitar.c:
+   set_weight(4);
+
+/d/shadow/obj/weapon/bill-guisarme.c:
+   set_weight(15);
+
+/d/shadow/obj/weapon/fauchard.c:
+   set_weight(7);
+
+/d/shadow/obj/weapon/morningstar.c:
+   set_weight(12);
+
+/d/shadow/obj/weapon/mclub.c:
+   set_weight(4);
+
+/d/shadow/obj/weapon/partisan.c:
+    set_weight(10);
+
+/d/shadow/obj/weapon/rake.c:
+set_weight(2);
+
+/d/shadow/obj/weapon/pick.c:
+   set_weight(6);
+
+/d/shadow/obj/weapon/lucern_hammer.c:
+    set_weight(10);
+

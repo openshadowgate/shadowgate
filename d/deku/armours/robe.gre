@@ -1,0 +1,27 @@
+inherit "/std/armour";
+#include <std.h>
+
+void create() {
+    ::create();
+    set_name("robe");
+    set("id", ({ "robe","cloak", "priest robe" }) );
+    set("short", "Priest's robe");
+    set("long", 
+    "A very fine quilted priest's robe.  It has a reddish/blackish"
+        "color."
+       );
+    set_weight(10);
+    set("value", 13);
+    set_type("clothing");
+    set_limbs( ({ "torso" }) );
+    set_ac(1);
+    set_property("enchantment",1);
+    set_wear((:TO,"wearit":));
+}
+int wearit() {
+    if((string)TP->query_class() != "cleric") {
+        write("You are not a priest!");
+        return 0;
+    }
+    return 1;
+}

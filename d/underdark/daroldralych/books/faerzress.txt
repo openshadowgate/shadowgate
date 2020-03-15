@@ -1,0 +1,29 @@
+A Study on Faerzress by Spirerin Phaeraan
+
+%^RESET%^%^RED%^A plainly-bound tome%^RESET%^
+
+%^RESET%^%^ORANGE%^This book is small and narrow, with no letters scribed on its blank cover. A line of %^RED%^text %^ORANGE%^spells out a title along its spine, and within are %^RESET%^smooth sheets %^ORANGE%^written in a simple, precise hand.%^RESET%^
+
+Faerzress: An overview
+Case study: Adamantite
+
+
+%^BOLD%^%^CYAN%^F%^RESET%^%^CYAN%^aerzress is one of the most unique oddities of the underdark. It is unknown how or why these nodes form, but it is known that they emit a magical radiation that has a strong effect on many creatures and materials of the underdark. Such nodes are highly dangerous, as much for the warping of many forms of magic as for the creatures that are attracted to the radiating energy.
+
+
+%^BOLD%^%^CYAN%^L%^RESET%^%^CYAN%^ittle is known of any creature with the ability to harness such chaotic magic; while means are known to enhance items by imbuing them with this radiation (such as the metal Adamantite), no means are known to actually channel or direct its powers by spellcraft; only to harness it for a time within items. Such enhancements are much easier to create with Faerzress than standard enchantments, but can be much more volatile and/or fragile in effect - mere sunlight will destroy it.
+
+
+%^BOLD%^%^CYAN%^I%^RESET%^%^CYAN%^t is this radiation, which permeates the underdark itself, that is known to give the drow race their innate abilities, such as the ability to call forth faerie fire, and levitate, as well as their powerful immunity to conventional magic effects. With exposure to sunlight these abilities are instantly destroyed, and are only restored by a lengthy re-exposure to faerzress. This energy is known to also effect the many underdark creatures that are drawn to such nodes, and much research has been centred around modern-day predators of the underdark, who are believed to have been surface creatures exposed to this radiation.
+
+
+%^BOLD%^%^CYAN%^T%^RESET%^%^CYAN%^he centre of such zones of Faerzress are known to be so powerfully soaked in radiation that they form effective dead-magic zones, making all spells and magical items in the area temporarily cease functioning. This can also cause any magic for miles around this region to go awry, giving strange and usually unwanted effects. The most dangerous spells to utilize are teleportation magics; a wise wizard travelling within underdark would never attempt such a spell, lest he be directed into the middle of a rock wall ten miles hence by a stray thread of Faerzress energy. Most drow cities are created in proximity to such nodes for their beneficial magic effects (primarily with thwarting divination and teleportation magics), and so most drow, short of surface rogues, never concern themselves with learning the art of teleportation, save as a magical curiosity.
+
+
+%^BOLD%^%^CYAN%^A%^RESET%^%^CYAN%^damantite (referred to in some regions as adamantium) is the hardest metal known to exist upon this plane. This property lends itself to its affinity with the underdark energy Faerzress, which grants it much of its unusual strength. However, this also carries the effect of its destruction when touched by sunlight, making these weapons of limited worth in trade, and none whatsoever in surface trades.
+
+
+%^BOLD%^%^CYAN%^H%^RESET%^%^CYAN%^owever, techniques have been recently perfected, through which adamantite can be worked with a secondary mineral, known as Ss'olath'eoul. The mineral itself is only found in the dead-magic zones that were once Faerzress nodes, and are formed by the destruction or reversal of the natural radiation known to be emitted from Faerzress crystals. These "dead" crystals form the substance we know as Ss'olath'eoul, of which studies are still being held to discern exactly what causes this transformation.
+
+
+%^BOLD%^%^CYAN%^W%^RESET%^%^CYAN%^orking this mineral with adamantite itself produces a melded alloy-like substance, which has the ability to survive under even direct and prolonged exposure to sunlight. This is due to the mineral's natural absorption of radiant energies, preventing their usual destruction under light. However, being that this mineral absorbs much of the adamantite's energies into itself, the alloy formed tends to have inferior properties to pure adamantite - it is less resilient than mithril, though still more so than most common surface-used metals. This makes it particularly valuable for surface trading, both as the alloy itself, and as weaponry and armor crafted from it.

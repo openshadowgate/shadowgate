@@ -1,0 +1,147 @@
+Okay this file is the up to date of the progress of the Aketon city.
+
+Please refer to it if you need the most up to date information.
+
+The basic plan of the city is done now. I am working on all the room
+connections now, so all the rooms will be here but just empty rooms.
+I will start doing the detailed stuff once I finished all the room
+connections and upload to the mud.
+There will be 5 trees: tree1, tree2 ... tree5, tree1 is the main one.
+You can reach from the path to tree1, 2 and 3, but not the 4 and 5.
+They can be accessed via 1.
+--Mud time, 28/2/98.
+
+All the basic city rooms are uploaded to the mud. They are just simple
+rooms with proper connections. I will modify them to function rooms now.
+--Mud time, 1/3/98.
+
+The bank (1one47), church (1one20) and treasury (1one32) is in.
+Working on the Aketon Revenue now.
+--Mud time, 2/3/98.
+
+The Revenue Bureau (1one35) and those rooms connecting to them are done
+and uploaded to the mud. The saved list will be of future use in the city.
+--Mud time, 3/3/98.
+
+The Longsword of assassins is tested and should be okay to use. It will
+be possessed by an elf assassin who wanders in the city to kill any player
+of human race. The name of that assassin is Portus the assassin. Check out
+~aketon/obj/asssword.c for the sword. Portus will be in ~aketon/mon/portus.c
+--Mud time, 5/3/98.
+
+Armoury (1one51), Weapon Shop (1one16), General Store (1one62) and Healer
+(1one5) are in. Healer is one of the places that benefits citizens of this
+city and disgrace humans (make use of the Aketon citizen list).
+--Mud time, 6/3/98.
+
+Archery (1one56) is in. There are some new bows, just some simple ones.
+--Mud time, 10/3/98.
+
+The inheritable file ~aketon/path/inherit.c which will load random livings in
+the city is uploaded to the mud. There are 6 types of citizens and a few types
+of guards or patrols of the city.
+--Mud time, 12/3/98.
+
+Modified inherit.c and relocated it to ~aketon/rooms/. Tested some rooms
+with inherit.c. The monster frequencey is relative high, should be proper for
+a large city (a prosperous city). Some rooms connecting to the done rooms are
+also done and uploaded (1one13,17,28,33,34,39,48,50,54).
+--Mud time, 13/3/98.
+
+Aketon Exotic Mounts (1one11) is in. It sell hippogriffs usable only by elves.
+--Mud time, 15/3/98.
+
+Sparrow Inn (1one31), Crossroad Bar (1one36) and Stable (1one42) are in.
+The stable sells horse, war horse as well as heavy warhorse.
+--Mud time, 16/3/98.
+
+Archers who will be asigned to guard the city are done. ~mon/archer.c
+--Mud time, 18/3/98.
+
+Whitedoll Hotel (1one55) done.
+--Mud time, 19/3/98.
+
+Alchemy, a component shop (1one12) and Spell Shop (1one25) is done. The Spell
+Shop owner Wizolyx (~mon/wizolyx.c) is a good monster to fight on.
+--Mud time, 20/3/98.
+
+Jewellery (1one4) and Tobacco Shop (1one24) finished. Ornaments sold in the
+jewellery have a low chance of getting some specialities (ac, stats ...).
+--Mud time, 21/3/98.
+
+The Garment Outlet (1one43) done. It sells clothings which have a very low
+chance of getting some ac (1 to 3), but the first one who pick it up (buy)
+must be elf and the chances are low. 1/100, 1/200, 1/300.
+--Mud time, 22/3/98.
+
+The local Tailor (1one63) is done. The shopkeeper will make you some good
+quality suits if you ever need them. All the clothing gives no ac bonus.
+--Mud time, 28/3/98.
+
+Fixed problems with buying things at the tailor. It is working fine now.
+--Mud time, 29/3/98.
+
+citizenA to F, guardA to C done. They just added some variety to this big
+city, some flying colour. The frequency of monster appearing is quite high
+but it should be okay. If I found it's too high, i will adjust it in the
+inherit.c. Will do next all the outdoor rooms in tree1 level 1 as well as
+those rooms assigned to city guards at level 1 (1oneXX rooms).
+--Mud time, 30/3/98.
+
+The main roads in level 1 are done. guardD (standing guard who will be assigned
+to positions which stops all non-citizens) and E (gate guard who guards all the
+gates of Aketon) done. D is f/c/m. Next will add the guard posts of level 1 of
+tree1.
+--Mud time, 31/3/98.
+
+The guard posts (1one3,6,15,59,64,61,52,9) together with guardF the post guard
+are done and uploaded. I've put a board in ~aketon/path/path11 which is the
+entrance to the whole city. Anyone are encouraged to post stuffs there, ideas
+or so so ... Well the level 1 of tree1 is finally all done. *grin* This is slow
+:) very slow :P
+--Mud time, 1/4/98.
+
+The second level of tree1 is all done, 4 unique monsters are added there. And
+quite a number of different kinds of soldiers are added into the area. The
+files are all under ..aketon/mon/
+The unique ones are, rotatia.c goginet.c lugabet.c aerotia.c, the others are
+archer.c cavalry.c infantry.c scout.c together with guardA to F which was
+added earlier and the citizen files.
+--Mud time, 6/4/98.
+
+Have lots of players and my test character tested the first two levels of the
+tree1. Looks like it's working properly so far. I'm going to have exam. very
+soon. I will not be availbe here to code up the reset stuffs. I will try to
+be back on track as soonn as possible. That's the plan so far.
+--Mud time, 14/4/98.
+
+Okay I've working on it again. Naxterr the mayor done with club of disruption
+and the cloak of elven kind. (obj/club_disrup.c obj/cloak_elven.c mon/naxterr.c)
+And now I have to leave for 20 days. I'll be back and code the rest up as soon
+as possible.
+--Mud time, 23/5/98.
+
+Umm... this took too long. The Mayor quarter (1fiveX) all done and added some
+artifacts into the area. Also the elders coded up (chelspan and shawdor). Will
+be working on the Elder quarter (1threeX) and the council area (1fourX) real soon.
+--Mud time, 23/7/98.
+
+Almost a month!? Damn it, I'm not so productive these days. Okay, made some very
+evil bracers of defenselessness, silver necklace of strangulation, some other
+weapons for chelspan and shawdor. Fixed the apparent problems with the artifacts
+and will add avatar ideas to the city. Working on the elder quarter (1threeX)
+which was lost due to a crash a while back.
+--Mud time, 13/8/98.
+
+Well, got the mood back to do something about this place again. I think this time
+I have finally finished everything about tree1. Including all the rooms, citizens,
+guards, military chiefs, city elders, councilors, naxterr the mayor and the to-be
+used assassin_d.c the assassin controlling daemon. Also Teleris is done. I think
+I will change the way artifact is controlled now. I don't like the complexity of
+that system at all. I will change the system to a daemon controlling artifact
+system later when I have a clear straight mind ready. Ohh the sliding cable
+system of aketon is basically set up already. All existing monsters are mobilized
+with set_speed() and are not allowed to leave particular rooms with exit functions
+set up in designated rooms accordingly.
+--Mud time, 29/6/99.
+

@@ -1,0 +1,14 @@
+%^BOLD%^%^GREEN%^
+       -=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-   
+
+                         DRUID  HELP             
+ 
+            Syntax: <compare [monster]> 
+         
+            This will give you an indication on how wise 
+	    it is to attack the given monster. 
+	    It looks basically to physical abilities,
+            but it also will peek into the magic abilities 
+	    of the monster.
+
+       -=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-=0=-  %^RESET%^

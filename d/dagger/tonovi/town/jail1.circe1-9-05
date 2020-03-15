@@ -1,0 +1,33 @@
+#include <std.h>
+#include "/d/dagger/tonovi/town/short.h"
+
+inherit MAIN;
+
+void create(){
+    ::create();
+   set_terrain(STONE_BUILDING);
+   set_travel(PAVED_ROAD);
+    set_room_type("jail");
+    set_property("indoors", 1);
+    set_property("light", 2);
+    set_short("Tonovi city jail");
+    set_long(
+      "You are in the main room of the jail of Tonovi.  From here you can see many cells, most empty but some contain the thieves and killers of the city, awaiting judgement or punishment."
+    );
+    set_smell("default", "You don't want to know what that smell is.");
+    set_listen("default", "You can hear prisoners in other cells.");
+    set_items( ([
+      "cells" : "There are a lot of dirty and unkempt cells in this jail.",
+   ]) );
+    set_exits( ([
+      "south" : RPATH "bazaar1",
+    ]) );
+}
+
+void reset() {
+   ::reset();
+   if(!random(3)) {
+     if(sizeof(children("/d/dagger/tonovi/mon/guardcapt")) < 3)
+        new("/d/dagger/tonovi/mon/guardcapt")->move(TO);
+   }
+}

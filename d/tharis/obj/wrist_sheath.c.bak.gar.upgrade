@@ -1,0 +1,208 @@
+//wrist_sheaths.c
+
+#include <std.h>
+#include <move.h>
+inherit PARMOUR;
+int uses;
+
+void create(){
+  ::create();
+
+  set_name("Wrist Sheaths");
+  set_id(({"wrist sheaths","sheaths","sheath","Wrist Sheaths","wrist"}));
+  set("short","Wrist sheaths");
+  set_long(
+@OLI
+This special sheath is made especially for thieves. They store daggers in 
+small sheaths on the wrist. When thieves stab, they skillfully stab and leave 
+the dagger in the back. They then flip the new dagger from the sheath and stab 
+quickly again. Made basically of small bits of leather thong so that they 
+might avoid notice under a sleeve or such, they are very weak.
+You realize that after a couple uses several of the thongs will be cut.
+OLI
+  );
+  uses = random(8) + 15;
+  set_type("clothing");
+  set_limbs(({"right hand"}));
+  set_weight(2);
+  set_value(500);
+  set_wear((:TO, "my_wear":));
+    set_remove((:TO,"my_remove":));
+  set_max_internal_encumbrance(20);
+}
+
+int my_wear(){
+  if(!TP->is_class("thief") && !TP->is_class("assassin") || (int)TP->query_highest_level() < 7){
+    write("As you fiddle with the thongs you realize you have no idea how to do this!\n");
+    return 0;
+  } 
+  else {
+    write("You knowingly place thongs over you thumb and around your arm as you wear the sheath!");
+     "daemon/hide_d"->hideItem(TO,TP,1);
+    return 1;
+  }
+}
+
+int my_remove(){
+     set_hidden(0);
+     return 1;
+  }
+
+void init(){
+  ::init();
+  add_action("stab_stuff","stab");
+}
+
+int stab_stuff(string str){
+  object victim,*inven,*wield;
+  int hold,hold2;
+  string wielded;
+
+  if(!TO->query_worn()) return 0;
+   if(!str) return 0;
+  if(!(victim = present(str,environment(TP)))) return 0;
+    TP->clean_up_attackers();
+     if((object *)TP->query_attackers() != ({})) return 0;
+  if(!TP->ok_to_kill(victim)) return 0;
+  if((!interactive(victim)) && (member_array(victim->query_body_type(),VALID_BACKS) == -1)) return 0;
+  if(interactive(victim)){
+     if((random(100)+(int)TP->query_highest_level()) < (victim->query_watched()) ){
+	  write("%^BOLD%^"+capitalize(victim->query_name())+" was obviously watching "+victim->query_possessive()+" back and catches you.");
+	  tell_object(victim,"%^BOLD%^You catch "+TPQCN+" trying to stab you.\n");
+	  tell_room(ETP,"%^BOLD%^"+victim->query_cap_name()+" catches "+TPQCN+" trying to stab "+victim->query_objective()+"!",({TP,victim}));
+	  TP->kill_ob(victim,1);
+	  return 1;
+	}
+    }
+  set_property("no stab func",1);
+  "cmds/mortal/_stab"->cmd_stab(str);
+  remove_property("no stab func");
+     if(objectp(victim) && victim->query_deaths_door()) return 1+TP->cease_all_attacks();;
+  inven = all_inventory(TO);
+    if(!objectp(victim)) return 1;
+  victim->set_watched(0);
+  if(!sizeof(inven)){
+  	write("You don't have a dagger in your sheath.");
+  	return 1;
+  }
+  if(!inven[0]->is_weapon()) return 1;
+  hold = inven[0]->query_weight();
+  inven[0]->set_weight(0);
+  wield = TP->query_wielded();
+  if(sizeof(wield)){
+  	hold2 = wield[0]->query_weight();
+  	wield[0]->set_weight(0);
+  	wield[0]->move(TO);
+  }
+  inven[0]->move(TP);
+  TP->force_me("wield "+((string *)inven[0]->query_id())[0]);
+  write("%^BOLD%^%^RED%^As you stab at "+victim->query_cap_name()+", you quickly release your first weapon!");
+  tell_object(victim,"%^BOLD%^%^RED%^As "+TPQCN+" stabs you, "+TP->query_subjective()+" quickly releases the weapon!");
+  tell_room(environment(TP),"%^BOLD%^%^RED%^As "+TPQCN+" stabs "+victim->query_cap_name()+", "+TP->query_subjective()+" quickly releases the weapon!",({TP,victim}));
+  write("%^BOLD%^%^RED%^You flick your wrist and another weapon appears in your hand!");
+  write("%^BOLD%^%^RED%^With this new weapon you stab quickly again at "+victim->query_cap_name()+"!");
+  tell_room(environment(TP),"%^BOLD%^%^RED%^"+TPQCN+" then flicks "+TP->query_possessive()+" wrists and a new weapon appears"+" in "+TP->query_possessive()+" hand!",TP);
+  tell_room(environment(TP),"%^BOLD%^%^RED%^"+TP->query_subjective()+" quickly stabs again at "+victim->query_cap_name()+"!",({TP,victim}));
+  tell_object(victim,"%^BOLD%^%^RED%^"+TP->query_subjective()+" quickly stabs again at you!");
+  TP->cease_all_attacks();
+  uses -= 1;
+  if(!uses){
+    write("%^BOLD%^%^GREEN%^As you extract your weapon you slice a thong through, destroying the sheath!");
+    call_out("dest",1,TP);
+  }
+  "cmds/mortal/_stab"->cmd_stab(str);
+  inven[0]->move(TO);
+  inven[0]->set_weight(hold);
+  if(sizeof(wield)){
+  	wield[0]->move(TP);
+  	wield[0]->set_weight(hold2);
+  	TP->force_me("wield "+((string *)wield[0]->query_id())[0]);
+  if(!wield[0]->query_wielded())
+	 TP->force_me("wield "+((string *)wield[0]->query_id())[0]+" in right hand and left hand");
+  }
+  return 1;
+}
+
+void dest(object tp) {
+  object *inven;
+	
+  inven = all_inventory(TO);
+  if(sizeof(inven))
+    if((string)inven[0]->move(tp) != MOVE_OK){
+      write("You drop the dagger in the sheath as the sheath breaks.");
+      inven[0]->move(environment(tp));
+    }
+  TO->remove();
+}
+
+int put_into(string str){
+  int res, i, silly;
+  object ths,tht,*inv;
+  string this, that;
+
+/*
+  if(total_light(this_player())+(int)this_player()->query_sight_bonus()<-1){
+    notify_fail("It is too dark.\n");
+    return 0;
+  }
+*/
+  if (stringp(str) && sscanf(str,"%s in %s",this,that) == 2) {
+    if (present(this,this_player())) {
+      if (present(that,this_player()) || present(that,environment(this_player()))) {
+        ths = present(this,this_player());
+        tht = present(that, this_player());
+        if(ths == tht) /* Plura 930208 */{
+          notify_fail("Get real!\n");
+          return 0;
+        }
+        if(!tht) tht = present(that, environment(this_player()));
+        if(ths->drop()) {
+          notify_fail("You cannot drop that!\n");
+          return 0;
+        }
+        if(tht != TO) return 0;
+          if(!ths->is_weapon()){
+            notify_fail("This is meant for daggers only.\n");
+          	return 0;
+          }
+        if(sizeof(all_inventory(TO)) > 0) {
+          notify_fail("This sheath already has its dagger.\n");
+          return 0;
+        }
+        if(ths->query_size() > 1 || !ths->id("dagger")) {
+          notify_fail("That is a little large, this is meant for daggers only.\n");
+          return 0;
+        }
+        if (tht->receive_objects()) {
+          res = (int)ths->move(tht);
+          if (res == MOVE_OK) {
+            write("You put "+ths->query_short()+" in "+tht->query_short()+".\n");
+            say(this_player()->query_cap_name()+" puts "+ths->query_short()+ " in "+tht->query_short()+".\n");
+            return 1;
+          }
+          if (res == MOVE_NO_ROOM)
+            notify_fail("For some reason it does not fit...\n");
+          if (res == MOVE_NOT_ALLOWED)
+            notify_fail("You are not allowed to do that...\n");
+          return 0;
+        }
+        notify_fail("It is closed.\n");
+        return 0;
+      }
+      notify_fail(capitalize(that)+" is not here.\n");
+      return 0;
+    }
+    notify_fail("You are not carrying "+this+".\n");
+    return 0;
+  }	
+ return 0;
+}
+
+int query_size(){
+    if(!objectp(ETO) || !living(ETO)) return 2;
+    return ETO->query_size();
+}
+
+int is_detectable(){
+   return !query_worn();
+}

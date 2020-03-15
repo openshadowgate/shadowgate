@@ -1,0 +1,93 @@
+#include <std.h>
+#include "../inherits/area_stuff.h"
+inherit HID;
+string ret;
+int opened;
+void create() 
+{
+    ::create();   
+    set_exits(([
+       "south" : MROOMS"hidden26",       
+    ] ));    
+    ret = (string)TO->query_long();
+    set_long((:TO, "get_my_long":));   
+    add_items(({"indentation", "circular indentation"}), "%^RESET%^%^ORANGE%^"+
+    "This small indentation catches your eye. It is directly in the center "+
+    "of the northern wall. It is completely smooth and not all that deep but "+
+    "it radiates with a faint magic. "+
+    "You realize that if you had an object that would fit you could likely "+
+    "insert it into the indentation.%^RESET%^");
+    opened = 0;
+}
+
+string get_my_long()
+{
+    string str;
+    str = ret;
+    if(opened)
+    {
+        ret += "%^BOLD%^%^BLACK%^ The tunnel continues "+
+                "to the north and south.%^RESET%^";
+    }
+    else ret += "%^BOLD%^%^BLACK%^The tunnel continues to the south. "+
+    "There is a %^RESET%^%^CYAN%^circular indentation%^BOLD%^%^BLACK%^ "+
+    "in the dead center of the northern wall.%^RESET%^";
+    return ret;
+}
+
+void init()
+{
+    ::init();
+    add_action("insert_act", "insert");
+}
+
+void do_opening()
+{
+    if(!opened) return;
+    tell_room(TO, "%^BOLD%^%^BLACK%^A section of the northern wall "+
+    "shimmers and disappears!%^RESET%^");
+    add_exit(MROOMS"hidden28", "north");
+    return;
+}
+
+int insert_act(string str)
+{
+    object Ob;
+    string what;
+    if(!objectp(TO)) return 0;
+    if(!objectp(TP)) return 0;
+    if(opened) return 0;
+    if(!stringp(str))
+    {
+        tell_object(TP, "Try <insert ob into indentation>.");
+        return 1;
+    }
+    if(sscanf(str, "%s into indentation", what) != 1)
+    {
+        tell_object(TP, "Try <insert ob into indentation>.");
+        return 1;
+    }
+    if(!objectp(Ob = present(what, TP)))
+    {
+        tell_object(TP, "You have no "+what+"!");
+        return 1;        
+    }
+    if(!Ob->id("mausoleum_of_the_damned_sphere_keyxxx71"))
+    {
+        tell_object(TP, "No matter how hard you try you "+
+        "cannot get the "+what+" to fit into the indentation.");
+        return 1;
+    }
+    tell_object(TP, "%^BOLD%^%^WHITE%^You insert the "+what+" into "+
+    "the indentation... ");
+    tell_room(TO, TPQCN+"%^BOLD%^%^WHITE%^ inserts "+what+
+    " into the indentation!", TP);
+    Ob->remove();
+    opened = 1;
+    call_out("do_opening", 10);
+    add_items(({"indentation", "circular indentation"}), "%^RESET%^%^ORANGE%^"+
+    "This small indentation catches your eye. It is directly in the center "+
+    "of the northern wall. It radiates with a faint magic. "+
+    "There is a small hollow sphere inset into it.%^RESET%^");
+    return 1;
+}

@@ -1,0 +1,51 @@
+//Coded by the one and only master of monsters...BANE//
+// updated to use WEAPONLESS by Dinji & Styx 7/2003
+
+#include <std.h>
+inherit "/d/laerad/mon/wander/wander.c";
+
+void create(){
+    ::create();
+    set_id(({"cildabrin","Cildabrin"}));
+    set_name("Cildabrin");
+    set_short("A horrible Cildabrin");
+    set_long(
+	"This 13 foot cross between a spider and scorpion is truly "+
+	"a terrible sight!  Its body is black and furry. The monster's "+
+	"eight eyes are a turquoise blue.  The front two legs of the "+
+	"creature end in scorpion-like pincers and there is a supple, "+
+	"fur covered tail with an eight inch stinger on its tip at the "+
+	"rear."
+    );
+    set_body_type("arachnid");
+    set_race("cildabrin");
+    set_gender("male");
+    set_size(3);
+    set_alignment(9);
+    set_overall_ac(3);
+    set("aggressive",19);
+    set_class("mage");
+    set_guild_level("mage",11);
+    set_hd(15,32);    // was 11
+    set_max_level(15);
+    set_hp(120);
+    set_attack_bonus(6);
+    set_exp(4500);
+    set_spells(({
+	"web"
+    }));
+    set_spell_chance(15);
+    set_attack_bonus(8);
+    set_property("magic resistance",20);
+    add_limb("tail","abdomen", 0, 0, 0);
+    set_attack_limbs(({"tail","right pincer","left pincer"}));
+    set_nat_weapon_type("piercing");
+    set_attacks_num(3);
+    set_damage(1,8);
+    set_stats("strength",18);
+    set_stats("dexterity",16);
+    set_stats("intelligence",9);
+    set_stats("wisdom",10);
+    set_stats("constitution",15);
+    set_stats("charisma",6);
+}

@@ -1,0 +1,82 @@
+#include <std.h>
+inherit "/std/monster";
+
+int count;
+
+void create() {
+  ::create();
+  set_name("antipaladin");
+  set_id(({"antipaladin","Antipaladin","quest antipaladin","hm_quest_mon"}));
+  set_short("An evil antipaladin");
+  set_long("He is apparently a mighty antipaladin, very experienced and a worthy opponent.");
+  set("aggressive",10);
+  set_alignment(5);
+  set_body_type("human");
+  set_gender("male");
+  set_hd(19,1);
+  set_size(2);
+  set_sp(query_max_sp());
+  set("race","human");
+  set_class("antipaladin");
+  set_guild_level("cleric",11);
+  set_exp(5);
+  set_money("gold",random(100));
+  set_money("electrum",random(50));
+  set_money("platinum",random(20));
+  set_money("silver",random(500));
+  new("/d/shadow/obj/armor/fullplate")->move(this_object());
+  command("wear fullplate");
+  new("/d/deku/armours/ring_p")->move(this_object());
+  command("wear ring");
+  new("/d/shadow/obj/weapon/longsword")->move(this_object());
+}
+
+void init(){
+  ::init();
+  if(interactive(TP)){
+    count=0;
+    TO->force_me("say Well, my friend, I see you have made it this far in your quest.");
+    TO->force_me("chuckle");
+    TO->force_me("say I am sure that you have made your way here by preying upon the weak -- it is always the case with those such as yourself.");
+    TO->force_me("shrug");
+    TO->force_me("say Well, now we shall see how you fare against an opponent of similar ability to your own!");
+    TO->force_me("cackle");
+    call_out("do_kill",20,TP);
+  }
+}
+
+void do_kill(object ob){
+  string who;
+
+  if(objectp(ob) && present(ob,environment(TO))){
+    count++;
+    who = ob->query_name();
+    switch (count) {
+      case 1: ("/cmds/priest/_animate_dead.c")->use_spell(TO,who,11);
+              ob->kill_ob(TO);
+              call_out("do_kill",10,ob);
+              break;
+      case 2: TO->force_me("wield longsword");
+              break;
+      default:break;
+    }
+  }
+}
+
+void die(object ob){
+  int i;
+  object * inv;
+  tell_object(ob,"%^BOLD%^You see a startling transformation take place just as you expect your opponent to fall to the ground, dead!");
+  tell_object(ob,"%^BOLD%^You can't seem to recall the face at first.... then you realize that it is the Master Paladin who began your adventures here.");
+  tell_object(ob,"%^RESET%^%^MAGENTA%^Paladin says: %^RESET%^Ahh, I see you have chosen to turn to the side of evil rather than using your powers for good.");
+  tell_object(ob,"%^RESET%^%^MAGENTA%^Paladin says: %^RESET%^Well done, my friend.  You have indeed proven yourself worthy to join the ranks of the High Mortal antipaladins.");
+  tell_object(ob,"%^RESET%^%^MAGENTA%^Paladin says: %^RESET%^I am sure they will welcome you with pride.");
+  set_id(({"antipaladin","Antipaladin","quest antipaladin"}));
+  inv = all_inventory(ETO);
+  for(i=0; i<sizeof(inv); i++) {
+    if(!living(inv[i])) continue;
+    inv[i]->cease_all_attacks();
+  }
+  remove_call_out("do_kill");
+  return;
+}

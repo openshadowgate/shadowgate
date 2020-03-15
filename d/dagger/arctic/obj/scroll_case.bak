@@ -1,0 +1,58 @@
+#include <std.h>
+#include <move.h>
+inherit "/std/bag_logic";
+
+void create() 
+{
+    set_id( ({"scroll case", "case"}) );
+    set_name("scroll case");
+    set_short("A worn scroll case");
+    set_weight(5);
+    set_long("This aged leather tube has been hardened by boiling then oiled to "
+        "protect against the elements.  There is a soft leather cap on one end "
+        "that can be closed to prevent moisture from getting inside.  This scroll "
+        "case could hold scrolls, paper, parchment, or any other paper like "
+        "items that could be rolled up to fit inside.  ");
+    set_value(100);
+    set_cointype("gold");
+    set_max_internal_encumbrance(50);
+    set_open_long( ""+TO->query_long()+"%^CYAN%^The cap is open.\n%^RESET%^");
+    set_closed_long( ""+TO->query_long()+"%^CYAN%^The cap is closed.\n%^RESET%^");
+    set_possible_to_close(1);
+}
+
+void init() 
+{
+   add_action("get_from","get");
+   add_action("check_item","put");
+   add_action("open_container","open");
+   add_action("close_container","close");
+   add_action("unlock_container", "unlock");
+   add_action("lock_container", "lock");
+   add_action("PickLock","pick");
+   //left in all actions from /std/bag_logic.c for future use
+}
+
+void check_item(string str)
+{
+
+    string *stuff,tmp1,tmp2;
+   // if(sscanf(str, "%s into ",tmp1)) return;
+    sscanf(str,"%s in %s",tmp1,tmp2);
+    if(member_array(tmp2,TO->query_id()) == -1) return;
+    /*  add more stuff({}) to allow different items to be placed inside
+    scroll cases. */
+    stuff = ({ "scroll","paper","parchment" });
+
+
+
+    if(member_array(tmp1, stuff) + 1)
+    {
+        put_into(str);
+        return 1;
+    }
+             
+    notify_fail("You can only put scrolls into this.\n");
+    return;
+
+}

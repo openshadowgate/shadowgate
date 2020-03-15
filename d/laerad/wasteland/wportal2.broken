@@ -1,0 +1,155 @@
+// disabling due to a recursion bug I can't find a fix for
+// guessing that something changed in move that makes having the exits the same
+// causes it to bomb
+// *Styx*  9/4/02
+
+/* Here's the debug.log if anyone else wants to try it
+
+Too deep recursion.
+program: std/user.c, object: std/user#22632 line 2573
+'       use_exit' in '    std/room/exits.c'
+('d/laerad/wasteland/wportal2')line 207
+'    move_player' in '          std/user.c' ('      std/user#22632')line
+415
+'           move' in '        std/living.c' ('      std/user#22632')line
+191
+'         ::move' in '        std/Object.c' ('      std/user#22632')line
+649
+'         ::move' in '          std/move.c' ('      std/user#22632')line 89
+'           init' in 'd/laerad/wasteland/wportal2.c'
+('d/laerad/wasteland/wportal2')line 35
+'      set_exits' in '    std/room/exits.c'
+('d/laerad/wasteland/wportal2')line 299
+'     reinitiate' in '          std/room.c'
+('d/laerad/wasteland/wportal2')line 253
+'           move' in '        std/living.c' ('      std/user#22632')line
+191
+'         ::move' in '        std/Object.c' ('      std/user#22632')line
+649
+'         ::move' in '          std/move.c' ('      std/user#22632')line 89
+'           init' in 'd/laerad/wasteland/wportal2.c'
+('d/laerad/wasteland/wportal2')line 35
+--More-- (57%) 
+'      set_exits' in '    std/room/exits.c'
+('d/laerad/wasteland/wportal2')line 299
+'     reinitiate' in '          std/room.c'
+('d/laerad/wasteland/wportal2')line 253
+'           move' in '        std/living.c' ('      std/user#22632')line
+191
+'         ::move' in '        std/Object.c' ('      std/user#22632')line
+649
+'         ::move' in '          std/move.c' ('      std/user#22632')line 89
+'           init' in 'd/laerad/wasteland/wportal2.c'
+('d/laerad/wasteland/wportal2')line 35
+'      set_exits' in '    std/room/exits.c'
+('d/laerad/wasteland/wportal2')line 299
+'     reinitiate' in '          std/room.c'
+('d/laerad/wasteland/wportal2')line 253
+'           move' in '        std/living.c' ('      std/user#22632')line
+191
+'         ::move' in '        std/Object.c' ('      std/user#22632')line
+649
+'         ::move' in '          std/move.c' ('      std/user#22632')line 89
+'           init' in 'd/laerad/wasteland/wportal2.c'
+('d/laerad/wasteland/wportal2')line 29
+'         ::init' in '          std/room.c'
+('d/laerad/wasteland/wportal2')line 107
+'exits::initiate' in '    std/room/exits.c'
+('d/laerad/wasteland/wportal2')line 268
+'     add_tracks' in '    std/room/exits.c'
+('d/laerad/wasteland/wportal2')line 114
+'             id' in '          std/user.c' ('      std/user#22632')line
+460
+'           ::id' in '        std/Object.c' ('      std/user#22632')line
+333
+'        knownAs' in '          std/user.c' ('      std/user#22632')line
+2573
+*/
+
+#include <std.h>
+inherit ROOM;
+
+void create(){
+    ::create();
+    set_terrain(DESERT);
+    set_travel(FOOT_PATH);
+    set_name("Wasteland");
+    set_short("Wasteland");
+    set_long(
+	"You are standing on a barren plain. The earth is cracked and dead. "+
+	"No vegetation can be seen for miles. A wicked wind bites at your "+
+	"face blowing sand into your eyes. The lifeless wasteland continues "+
+	"endlessly in all directions."
+    );
+    set_smell("default","A salty breeze stings your face.");
+    set_listen("default","Only the howling of the wind can be heard.");
+    set_property("indoors",0);
+    set_property("light",2);
+// removing this doesn't fix the recursion problem - Styx 9/4/02
+    set_exits( ([
+	"west":"/d/laerad/wasteland/wportal2",
+	"east":"/d/laerad/wasteland/wportal2",
+	"north":"/d/laerad/wasteland/wportal2",
+	"south":"/d/laerad/wasteland/wportal2"
+    ]) );
+// removing the hb stuff doesn't fix it either
+    set_property("continue heartbeat",1);
+    set_heart_beat(8);
+}
+
+void init(){
+    ::init();
+/* 
+    set_exits( ([
+	"north":"/d/laerad/wasteland/wportal2",
+	"south":"/d/laerad/wasteland/wportal2",
+	"east":"/d/laerad/wasteland/wportal2",
+	"west":"/d/laerad/wasteland/wportal2"
+    ]) );
+*/
+// tried this but didn't solve the problem either
+    remove_exit("south");
+    add_exit("/d/laerad/wasteland/wportal2", "south");
+    
+    add_action("south","south");
+    add_action("peer","peer");
+}
+int peer(string str){
+    write("You see endless desert.");
+    return 1;
+}
+
+int south(string str){
+    int roll;
+   set_exits( ([
+        "north":"/d/laerad/wasteland/wportal2",
+        "south":"/d/laerad/wasteland/wportal2",
+        "east":"/d/laerad/wasteland/wportal2",
+        "west":"/d/laerad/wasteland/wportal2"
+    ]) );
+    roll=random(20);
+    if(roll < 1){
+	set_exits( ([
+	    "south":"/d/laerad/wasteland/wportal1",
+	    "north":"/d/laerad/wasteland/wportal2",
+	    "east":"/d/laerad/wasteland/wportal2",
+	    "west":"/d/laerad/wasteland/wportal2"
+	]) );
+	return 0;
+    }
+    return 0;   //making these return 1 didn't fix the recursion problem either
+}
+
+void heart_beat(){
+    object *starved;
+    int i, j;
+    ::heart_beat();
+    starved = all_living(TO);
+    j = sizeof(starved);
+    for(i=0;i<j;i++){
+	tell_object(starved[i],"You are dying of thirst out here.");
+	starved[i]->do_damage(starved[i]->return_target_limb(),1);
+	starved[i]->add_attacker(TO);
+	starved[i]->continue_attack();
+    }
+}

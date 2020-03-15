@@ -1,0 +1,42 @@
+                    %^RESET%^%^YELLOW%^CT%^RESET%^
+                    |                         %^CYAN%^^
+                    |                         %^CYAN%^N
+                     \                 %^YELLOW%^M%^RESET%^
+                      \                |
+                       |               |
+                       |               |
+       %^BOLD%^%^GREEN%^#   %^RESET%^%^YELLOW%^T   P       %^RESET%^|               |
+        \  |   |    %^YELLOW%^j  %^RESET%^|  %^YELLOW%^Cl%^RESET%^           |
+         \ |   |    |  |  |           /
+          ---------------------------
+               |       |  |     |     \
+               |    %^YELLOW%^H%^RESET%^--|--%^YELLOW%^B%^RESET%^     |       --%^BOLD%^%^GREEN%^#%^RESET%^
+               |       |        |
+               |       |        |\
+            %^YELLOW%^J%^RESET%^-- \   %^YELLOW%^G%^RESET%^--|--%^YELLOW%^S%^RESET%^    /--%^YELLOW%^C%^RESET%^
+                 \     |      /     
+                  -----%^BOLD%^%^CYAN%^@%^RESET%^-----
+                       |
+                    %^YELLOW%^O%^RESET%^--|--%^YELLOW%^L%^RESET%^
+                        \
+                       %^YELLOW%^A%^RESET%^-\         %^YELLOW%^b%^RESET%^
+                       %^YELLOW%^F%^RESET%^  \        |
+                       %^YELLOW%^W%^RESET%^---\----%^YELLOW%^Y%^RESET%^--%^YELLOW%^Q%^RESET%^--%^YELLOW%^t%^RESET%^
+                           |    |  |
+                           |    %^YELLOW%^s  c%^RESET%^
+                           |    |
+                           |    %^YELLOW%^h
+                           %^YELLOW%^#%^RESET%^
+
+%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=%^CYAN%^-%^YELLOW%^=
+                 %^YELLOW%^Map of Tabor %^CYAN%^- %^YELLOW%^Legend%^RESET%^
+
+%^BOLD%^%^CYAN%^@%^RESET%^:  Town Square  %^YELLOW%^CT%^RESET%^: Caer Tabor      %^YELLOW%^M%^RESET%^: Mage Tower
+%^BOLD%^%^GREEN%^#%^RESET%^:  Road Out     %^YELLOW%^F%^RESET%^:  Forge           %^YELLOW%^O%^RESET%^: Temple of Oghma
+%^YELLOW%^A%^RESET%^:  Armorer      %^YELLOW%^G%^RESET%^:  General Store   %^YELLOW%^Q%^RESET%^: Crown and Castle 
+%^YELLOW%^B%^RESET%^:  Bank         %^YELLOW%^H%^RESET%^:  Healer             Inn & Quest Room
+%^YELLOW%^b%^RESET%^:  CNC Bar      %^YELLOW%^h%^RESET%^:  Hitching Post   %^YELLOW%^S%^RESET%^: Scribe
+%^YELLOW%^C%^RESET%^:  Cathedral    %^YELLOW%^J%^RESET%^:  Jail            %^YELLOW%^s%^RESET%^: Stable
+%^YELLOW%^c%^RESET%^:  CNC Cafe     %^YELLOW%^j%^RESET%^:  Jeweler         %^YELLOW%^T%^RESET%^: Trainer
+%^YELLOW%^Cl%^RESET%^: Tailor       %^YELLOW%^L%^RESET%^:  Library         %^YELLOW%^t%^RESET%^: Theater
+%^YELLOW%^W%^RESET%^: Weaponsmith   %^YELLOW%^Y%^RESET%^: CNC Courtyard    %^YELLOW%^P%^RESET%^: Pig and Whistle

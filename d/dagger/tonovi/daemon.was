@@ -1,0 +1,27 @@
+#include "/d/dagger/tonovi/town/short.h";
+
+    object ob;
+
+object get_room_monster(string type){
+    seteuid(getuid(TO));
+
+    ob = 0;
+
+    switch(type){
+      case "street":
+      case "bazaar":
+        if(random(2)) ob = new(MPATH "guard1_city");
+        else ob = new(MPATH "citizen");
+      break;
+
+      case "tbarracks":
+      case "jail":
+        ob = new(MPATH "guard1_city");
+      break;
+
+      case "wall":
+        ob = new(MPATH "guard2_city");
+      break;
+    }
+    return ob;
+}

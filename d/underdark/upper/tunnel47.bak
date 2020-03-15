@@ -1,0 +1,42 @@
+#include <std.h>
+#include "../defs.h" 
+inherit ROOM;
+
+void create() {
+        ::create();
+        set_property("indoors",1);  
+        set_property("light",0);
+        set_terrain(NAT_CAVE); 
+        set_travel(PAVED_ROAD);
+
+        set_name("An obsidian chamber"); 
+	set_short("%^RESET%^%^BLUE%^An obsidian chamber%^RESET%^"); 
+
+	set_long("%^BOLD%^%^BLACK%^An obsidian chamber%^RESET%^\n"
+"%^RESET%^%^BLUE%^Darkness shrouds this ancient chamber, absorbing even the "
+"faintest issuing of light into its endless void.  A sense of %^CYAN%^detachment " 
+"%^BLUE%^lingers here, dampening the senses and leaving a feeling of perpetually "
+"being off balance and cast adrift in the %^BOLD%^starless %^RESET%^%^BLUE%^sea.  "
+"Walls of %^BOLD%^%^BLACK%^obsidian %^RESET%^%^BLUE%^encircle the chamber.  Their "
+"cylindrical form smooth and without seam, leading up to a glassy dome of the same "
+"black stone, while the floor is a flush, plane of %^BOLD%^%^BLUE%^liquid "
+"silk%^RESET%^%^BLUE%^. No feature lends itself to this chamber, even the doorway "
+"seems to have vanished, leaving you completely cut off and alone.%^RESET%^\n");
+
+	set_smell("default","Your sense of smell is muted, just as your sight."); 
+	set_listen("default","It seems strangely quiet here in the darkness."); 
+
+        set_items(([
+	({"darkness","dark"}):"%^BOLD%^%^BLACK%^It surrounds and encompasses "
+"you in its shroud.%^RESET%^", 
+
+	({"wall","walls","floor","ceiling","dome"}):"%^BOLD%^%^BLACK%^Though "
+"you can sense them all around you, their smooth, glassy forms seem insubstantial "
+"and distant.%^RESET%^",
+        ]));
+
+        set_exits(([
+           "west":UPPER"tunnel46",
+        ]));
+        add_invis_exit("west");
+}

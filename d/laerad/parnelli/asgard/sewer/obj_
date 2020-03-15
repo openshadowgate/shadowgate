@@ -1,0 +1,33 @@
+#include <std.h>
+inherit "/std/armour";
+create() {
+    ::create();
+    set_name("boots");
+    set_id(({"boots","boot","lizardskin boots"}));
+    set_short("%^BOLD%^%^GREEN%^Lizardskin boots%^RESET%^");
+    set_obvious_short("%^BOLD%^%^GREEN%^Bright green leather boots%^RESET%^");
+    set_long("%^BOLD%^%^GREEN%^Fashioned from bright green leather, these "+
+       "supple boots come up to the knees of the wearer, helping to repel "+
+       "water and grime.  The boots are shaped with a dramatic flare, the tips"+
+       " of the toes curling upwards to a slight point.  Thick, tough, leather"+
+       " soles protect the bottom of the boots, if not making them a bit "+
+       "inflexible.  The scales of the lizard leather create a faint "+
+       "horizontal stripe pattern.%^RESET%^ ");
+    set_weight(2);
+    set_value(150);
+    set_property("enchantment",1);
+    set_type("clothing");
+    set_size(random(3)+1);
+    set_limbs(({"left foot","right foot"}));
+    set_ac(0);
+    set_wear((:TO,"wearit":));
+    set_remove((:TO,"removeit":));
+}
+int wearit() {
+    tell_object(TP,"%^BOLD%^%^GREEN%^You slide into the boots and they seem to form themselves around your feet!%^RESET%^");
+        return 1;
+}
+int removeit() {
+    tell_object(ETO,"%^BOLD%^%^GREEN%^You remove the boots with great effort.%^RESET%^");
+        return 1;
+}

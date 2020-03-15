@@ -1,0 +1,35 @@
+#: Clearing
+*: Fountain                              |
+%^RED%^MAH%^RESET%^: Main Adventurer's Hall              |
+%^GREEN%^NGT%^RESET%^: North Gate                   nt----%^GREEN%^NGT%^RESET%^----nt
+%^GREEN%^SGT%^RESET%^: South Gate                 /     ---+---     \
+%^GREEN%^EGT%^RESET%^: East Gate                cw     /   |-tb\     cw
+%^GREEN%^WGT%^RESET%^: West Gate              /    ar-/ tb-|    \-we    \
+ah: Adventurer's Hall     wt       /     |-ht  \       et
+al: Alchemist             |\   sb  |  li-|     |       /|
+ar: Armoury               | tb  |  |     |-fa  |     tb |
+bk: Bank               --%^GREEN%^WGT%^RESET%^-------|    %^RED%^MAH%^RESET%^    |-------%^GREEN%^EGT%^RESET%^--
+bo: Bounty Office         |\       |  gs-+-bk  |  |    /|
+br: Bar                   | \      |     |     |  bo  / |
+ch: Church               wt  in    |  ah-+-al  |    br  et
+cw: City Wall             |     ho-|     |  ho-|        |
+et: East Tower           wt  ho    |  #*-+-hr  |    ho  et
+fa: Fighters Antechamber   \ |     |-ch  |  mu-|     | /
+gs: General Store           cw     |  sc-+-th  |     cw
+ho: House                    |     |     |     |     |
+hr: Healer                  cw     |  tb-+-tb  |     cw
+in: Inn                      |  wr-|     |     |-pa  |
+li: Library                 cw      \    |    /      cw
+mu: Magic User               |       \tr-+-wm/       |
+nt: North Tower              st       \  |  /       st
+pa: Park                       \       \ | /       /
+sb: Stable                      cw      \|/      cw
+sc: Scribe                        \      |      /
+st: South Tower                    st---%^GREEN%^SGT%^RESET%^---st
+tb: Troop Barracks                       |
+th: Town Hall                            |
+tr: Trainer                              |
+we: Weapon Shop
+wm: War Museum
+wr: Warehouse
+wt: West Tower

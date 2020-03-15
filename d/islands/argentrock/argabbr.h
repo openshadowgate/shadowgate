@@ -1,0 +1,5 @@
+#define PATH    "/d/islands/argentrock/rooms/"
+#define MON        "/d/islands/argentrock/mon/"
+#define OBJ        "/d/islands/argentrock/obj/"
+#define SHO        "/d/islands/argentrock/shore/"
+#define INH        "/d/islands/argentrock/inherit/"

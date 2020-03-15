@@ -1,0 +1,49 @@
+#include <std.h>
+inherit POTION;
+int ok,size;
+
+void create() {
+    ::create() ;
+    set_short("A vial containing a yellow potion") ;
+    set_long("The yellow potion swirls in the crystal vial.\n") ;
+    set ("color", "yellow") ;
+    set ("effect_time", (7+random(4))*10) ;
+}
+
+int do_effect() {
+    int i;
+    object *weaps,*arms;
+    if(drinker->query_size() > 1){
+    	tell_object(drinker,"Suddenly, you begin to feel smaller.\n") ;
+    	drinker->set_size((int)drinker->query_size() - 1);
+        arms = drinker->all_armour();
+        weaps = drinker->query_wielded();
+        for(i=0;i<sizeof(arms);i++){
+      if(!arms[i]->is_cursed())
+            arms[i]->unequip();
+        }
+        for(i=0;i<sizeof(weaps);i++){
+     if (!weaps[i]->is_cursed())
+            weaps[i]->unequip();
+        }
+	ok = 1;
+    } else {
+    	tell_object(drinker,"You feel no different then before.\n") ;
+	ok = 0;
+    }
+    return 1 ;
+}
+
+int do_wear_off() {
+        int i;
+        object *armors;
+	if(ok){
+    		drinker->set_size(size);
+                armors = drinker->all_armour();
+                for(i=0;i<sizeof(armors);i++){
+                    armors[i]->unequip();
+                }
+    		tell_object(drinker,"Suddenly, you begin to feel normal sized.\n") ;
+	}
+    return 1 ;
+}

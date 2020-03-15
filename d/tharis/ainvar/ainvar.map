@@ -1,0 +1,31 @@
+f---f---f---f---f---f---f---f
+|           |   |   |   |   |    This is the overview map of Ainvar
+3   c---5   f---f---f---2---f    and surrounding area.  There are 2
+    |   |   |   |   |   |   |    major quests for players to complete
+f---c---c   f---f---f---f---f    in the area.  Thie first, the player must
+|           |   |   |   |   |    find the hermit (1).  After talking to the
+f---f---f---f---f---f---f---f    hermit, the player must find the lost    
+    |   |   |                    ring (2).  Returning the ring, the hermit
+f---f---f---f---f   v---v---4    give the player a key to a hidden stash
+|   |   |   |   |   |   |   |    of the bandits at (3).  This is the first 
+p---p---p---p---p---v---v---v    quest.  The second is the player arrives
+|   |   |   |   |   |   |   |    at the village of Ainvar and speaks w/
+f---f---f---f---f   v---v---v    the chieftain (4).  The player learns
+|   |   |   |   |                of the stolen brooch which the bandits
+f---f---f---f---f---f---f---f    have taken.  The player must find his
+|   |   |   |   |   |   |   |    way into bandit camp and find brooch
+f---f---f---f---f---f---f---f    at (5).
+                            |
+                            1
+
+f = forest  v = village  p = path  c = bandit camp
+
+Each room of forest has a do_random_encounter in the reset() to supply the
+monsters for the area.  Lvls are intended to be 5-7 lvl players w/ 
+appropriate monsters.  Bandit stash will be a magic weapon of no greater 
+than +2.  The ring of the hermit is a ring of protection +1 and the 
+brooch is a necklace of charisma +1.
+
+
+
+

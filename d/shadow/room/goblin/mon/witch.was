@@ -1,0 +1,85 @@
+#include <std.h>
+#include "/d/shadow/room/goblin/short.h"
+inherit "/std/monster";
+int xx;
+
+create() {
+    object ob;
+    ::create();
+    set_name("witch");
+    set("id", ({ "goblin","witch","goblin witch" }));
+    set("short", "Goblin witch");
+    set("aggressive", 5);
+    set_hd(8,3);
+    set_level(8);
+    set("long", "The female Goblin before you is the witch of the "
+	"Goblin Army of Shadow. She practises the ancient art and of "
+	"the witchen and as a strong bind to the witchen coven. "
+	"Her eyes blaze with an inner power."
+    );
+    set_class("mage");
+    set_guild_level("mage",8);
+    set_property("no steal",1);
+    set_body_type("humanoid");
+    set_alignment(9);
+    set("race", "goblin");
+    set_exp(1000);
+    set_gender("female");
+    set_ac(3);
+    set_stats("dexterity",17);
+    set_stats("wisdom",18);
+    set_stats("intelligence",18);
+    set_max_hp(75);
+    set_hp(75);
+    set_emotes(3,({
+	"Witch cackles gleefully.",
+	"%^CYAN%^Witch says: %^RESET%^Mandrake root...needs more mandrake!",
+	"Witch mutters a short phrase.",
+	"%^BLUE%^A black cat strolls into the room, looks the witch "
+	"over, and then leaves.%^RESET%^",
+    }),0);
+    this_object()->add_money("gold",random(200)+50);
+    this_object()->add_money("silver",random(1200)+150);
+    this_object()->add_money("copper",random(11500)+500);
+    new( OPATH "necklace.c" )->move(this_object());
+    command("wear necklace");
+    new( OPATH "insanity.c" )->move(TO);
+    command( "wear charm" );
+    set_spell_chance(50);
+    set_spells(({"burning hands","magic missile"}));
+    set_funcs(({"special_spell"}));
+    set_func_chance(35);
+    set_spell_chance(45);
+   ob=new("/d/magic/scroll");
+   ob->set_spell(1);
+   ob->move(TO);
+}
+int special_spell(object targ){
+   object me = this_object();
+   object vic = me->query_current_attacker();
+   if(!objectp(TO)) return 1;
+   if(!objectp(ETO)) return 1;
+   xx=random(4)+1;
+   switch(xx) {
+   case 1:
+      tell_object(vic,"%^BOLD%^%^RED%^Witch hurls a bolt of pure evil at you!");
+      tell_room(ETO,"%^BOLD%^%^RED%^Witch hurls a bolt of pure evil at "+vic->query_cap_name()+"!",vic);
+      vic->do_damage("torso",random(20)+3);
+      return 1;
+   case 2:
+      tell_object(vic,"%^BOLD%^%^CYAN%^Witch casts an incantation of sleep upon you!");
+      tell_room(ETO,"%^BOLD%^%^CYAN%^Witch mutters a phrase and "+vic->query_cap_name()+" falls fast asleep!",vic);
+      vic->set_paralyzed(16,"%^BOLD%^%^CYAN%^Mmmm...Sleep...good...%^RESET%^");
+      return 1;
+   case 3:
+      tell_object(vic,"%^GREEN%^Witch cackles and a swarm of spiders cover you!");
+      tell_room(ETO,"%^GREEN%^Witch cackles and a swarm of spiders cover "+vic->query_cap_name()+"!\n%^BLUE%^You mutter a small word of thanks that it was not you.",vic);
+      vic->do_damage("torso",random(10)+10);
+      return 1;
+   case 4:
+      tell_object(vic,"%^BOLD%^%^BLUE%^Witch invokes fear within you!");
+      tell_room(ETO,"%^BOLD%^%^BLUE%^"+vic->query_cap_name()+" runs screaming from the room!",vic);
+      vic->force_me("west");
+      return 1;
+   }
+}

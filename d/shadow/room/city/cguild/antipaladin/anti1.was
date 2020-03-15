@@ -1,0 +1,35 @@
+// retired when moved to Tonovi *Styx*  12/5/02
+#include <std.h>
+inherit ROOM;
+
+
+void create(){
+// object ob;
+:: create();
+set_terrain(WOOD_BUILDING);
+set_travel(DECAYED_FLOOR);
+set_light(2);
+set_indoors(1);
+set_short(" The foyer of a house");
+set_long(
+@ZERINA
+This is the foyer of a house...or what used to be a house. It is rather ran down now. The walls are in ruin and the floor doesn't look very stable. You wonder if it is safe to be here. There is a room to the west or you might want to leave here in case the walls fall on you.
+
+ZERINA
+);
+
+set_items(([
+"walls" : "The walls seems to be barely standing. They now lack paint and look quite insubstantial.",
+"floor" : "The floor creaks and groans underfoot.",
+
+]));
+
+set_exits(([
+"east" : "/d/shadow/room/city/wroad9",
+"west" : "/d/shadow/room/city/cguild/antipaladin/anti2",
+
+]));
+
+set_smell("default", "It smells of disrepair here.");
+set_listen("default", "You can hear the bustle of the city through the walls.");
+}

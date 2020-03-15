@@ -1,0 +1,52 @@
+// retired when moved to Tonovi *Styx*  12/5/02
+
+#include <std.h>
+
+inherit ROOM;
+
+void create() {
+    ::create();
+set_terrain(WOOD_BUILDING);
+set_travel(DECAYED_FLOOR);
+set_property("indoors",1);
+set_property("light",1);
+set_short("A room");
+set_long(
+@ZERINA
+As you enter this hallway it seems to be dark and forboding but as your eyes grow accustom to the light you realize it is just an abandoned room. As you look around you you see the room cluttered with debris and the walls look as if they will envelope you if you stay longer here. On the floor are ashes where someone has tried to make a fire to keep the chill off their bones.
+
+ZERINA
+);
+    set_smell("default","You smell a faint trace of wood smoke here. ");
+    set_listen("default","The bustle of the city can vaguely be heard.");
+    set_items( ([
+"ashes" : "There are lots of ashes laying in a pile. They are very cold now as if the 'firestarter' was here quite awhile ago.",
+({"walls", "wall"}) : "The walls in this room look very strange, as if someone tore them down and put them back up without joining them quite properly or securely.",
+"debris" : "There are bits of food and paper scattered about. It looks as if someone tried to live here... in a miserable sort of way.",
+    ]) );
+    set_search("default", "The walls look a little odd, especially the north one.");
+    set_search("north wall", "It looks like it might be possible to move it somehow.");
+    set_exits( ([
+"east" : "/d/shadow/room/city/cguild/antipaladin/anti1",
+    ]) );
+}
+void init(){
+  ::init();
+    add_action("allow", "push");
+}
+
+int allow(string str){
+    if(!str) return notify_fail("Push what?\n");
+    if(str != "wall" && str != "north wall") return notify_fail("Push what?\n");
+    if(TP->is_class("antipaladin")) {
+      tell_object(TP, "%^BOLD%^As you push on the wall there is a subtle rumbling and the wall swivels around.\nAfter a moment of disorientation you find yourself on the other side of the wall.");
+      tell_room(TO,TP->query_cap_name()+" pushes on the wall and suddenly disappears.",TP);
+      TP->move("/d/shadow/room/city/cguild/antipaladin/anti3");
+      return 1;
+    } else {
+      tell_object(TP, "A sense of dread fills you as you push on the wall.");
+      tell_room(ETP, TPQCN+" gets a look of fear on "+TP->query_possessive()+" face as "+TP->query_subjective()+" pushes on the wall.", TP);
+      TP->move_player("/d/shadow/room/city/cguild/antipaladin/enter1");
+      return 1;
+    }
+}

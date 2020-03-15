@@ -1,0 +1,13 @@
+                                                        town_sq2w
+                                                            |
+                                                        mainstairs2
+                                                            |
+                                                        mainstairs
+                                                            |
+jailhall4  -  jailhall3  -  jailhall2  -  jailhall1  -  jailerrm1
+    |             |             |             |             |
+  cell2          cell4        cell6        cell8        jaillerrm2
+                                                            |
+jailhall8  -  jailhall7  -  jailhall6  -  jailhall5  -  jailerrm3
+    |             |             |             |
+  cell1         cell3         cell5         cell7

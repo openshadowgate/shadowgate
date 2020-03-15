@@ -1,0 +1,3 @@
+inven = all_invenory(player);
+i = sizeof(inven);
+if(present("thingy",TP))

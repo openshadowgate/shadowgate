@@ -1,0 +1,109 @@
+#include <std.h>
+
+inherit "/d/common/obj/weapon/fan.c";
+
+void create(){
+  	::create();
+  	set_name("fan of the dancing flames");
+   	set_id(({"fan","fan of the dancing flames","red silk fan"}));
+   	set_obvious_short("%^RESET%^%^RED%^A red silk fan%^RESET%^");
+   	set_short("%^RESET%^%^RED%^Fan of the Dancing %^BOLD%^%^RED%^F"+
+		"%^RESET%^%^RED%^l%^BOLD%^%^RED%^a%^RESET%^%^RED%^m"+
+		"%^BOLD%^%^RED%^e%^RESET%^%^RED%^s%^RESET%^");
+   	set_long("%^RESET%^This elegant fan is made from a combination"+
+		" of silk and adamantite.  The outer frame of the fan"+
+		" is made from thick %^BOLD%^%^BLACK%^adamantite%^RESET%^ giving "+
+		"the fan strength and stability.  Opening the fan up"+
+		" reveals %^RED%^dark red%^RESET%^ silk stretched on "+
+		"%^BOLD%^%^BLACK%^adamantite%^RESET%^ points.  The "+
+		"points of the fan rises up to create a stiletto like "+
+		"edge, perfect for piercing armor, or slashing open "+
+		"exposed flesh.  An enchanted image of swirling and "+
+		"dancing %^BOLD%^%^RED%^f%^RESET%^%^RED%^l%^BOLD%^%^RED%^"+
+		"a%^RESET%^%^RED%^m%^BOLD%^%^RED%^e%^RESET%^%^RED%^s%^RESET%^ moves"+
+		" acorss the surface of the dark red silk.\n");
+   	set_lore("A relic from the elven kingdom that once use to rule "+
+		"the island of Argentrock, this fan was crafted for the "+
+		"Flame Dancers, an elite group of warrior/dancers who "+
+		"helped to patrol the forests.  The Flame Dancers dressed "+
+		"lightly, many of them forsaking the use of armor in favor "+
+		"of speed.  These battle-dancers were said to be graceful in"+
+		" melee, each movement from them looking like a poetic "+
+		"expression of dancing.  Though not as famous as the "+
+		"bladesingers, the Flame Dancers were still given the "+
+		"up most respect.  When the fey'ri took over the island, "+
+		"these wonderful fans fell into their hands.");
+   	set_property("lore difficulty",12);
+	set_property("enchantment",4);
+   	set_value(2000);
+   	set_wield((:TO,"wield_func":));
+   	set_unwield((:TO,"unwield_func":));
+   	set_hit((:TO,"hit_func":));
+}
+int wield_func(string str) {
+	tell_object(ETO,"%^RED%^Flames dance across the silk of the "+
+		"fan as you slowly open it.%^RESET%^");
+   	tell_room(environment(ETO),"%^RED%Flames dance across the silk"+
+		" of "+ETO->QCN+"'s fan.",ETO);
+	return 1;
+}
+int unwield_func(string str) {
+   	tell_object(ETO,"%^RED%^The flames vanish as you slowly "+
+		"close the fan.");
+   	tell_room(environment(ETO),"%^RED%^Flames vanish off the "+
+		"surface of "+ETO->QCN+"'s fan .",ETO);
+	return 1;
+}
+int hit_func(object targ){
+  	targ = ETO->query_current_attacker();
+  	if(!objectp(ETO)) return 1;
+  	if(!objectp(targ)) return 1;
+  	if(random(1000) < 200){
+      	switch(random(50)){
+{
+case 0..35:
+      tell_object(ETO,"%^BOLD%^%^RED%^The adamantite tips of the fan"+
+		" glow fiery red as you rip through "+targ->QCN+".");
+      tell_object(targ,"%^hhBOLD%^%^RED%^The adamntite tips of "+
+		""+ETO->QCN+"'s fan glow fiery red as "+ETO->QS+" "+
+		"rips through you, searing your flesh!");
+      tell_room(environment(ETO),"%^BOLD%^%^RED%^The adamantite tips "+
+		"of "+ETO->QCN+"'s fan glow fiery red as "+ETO->QS+" rips "+
+		"through "+targ->QCN+".", ({ETO,targ}));
+     			targ->do_damage("torso",random(6)+4);
+	break;
+case 36..46:
+   	tell_object(ETO,"%^RED%^Flames leap up off the silk and surround the fan,"+
+		" blazing through "+targ->QCN+".");
+      tell_object(targ,"%^RED%^Flames wrap leap up off the silk of "+ETO->QCN+"'s"+
+		" fan and cloak it, blazing"+
+		" through you!");
+      tell_room(environment(ETO),"%^RED%^Flames leap up off the silk of"+
+		" "+ETO->QCN+"'s fan and cloak it, blazing through"+
+		" "+targ->QCN+".", ({ETO,targ}));
+			set_property("magic",1);
+      		targ->do_damage("torso",random(10)+5);
+			set_property("magic",-1);
+	break;
+case 47..49:
+   	tell_object(ETO,"%^RED%^A sheet of flames bursts out of the fan, "+
+		"heading for "+targ->QCN+".");
+      tell_object(targ,"%^RED%^A sheet of flames burts out of "+
+		""+ETO->QCN+"'s fan, heading straight for you!");
+      tell_room(environment(ETO),"%^RED%^A sheet of flames bursts "+
+		"out of "+ETO->QCN+"'s"+
+		" fan, heading for "+targ->QCN+".", ({ETO,targ}));
+			set_property("magic",1);
+      		targ->do_damage("torso",random(10)+10);
+			set_property("magic",-1);
+	break;
+
+}
+ 	break;
+default:  tell_object(ETO,"Uhoh, you broke it, you bought it.  Please "+
+		"bug what you were doing when you got this message.");
+	break;
+		}
+    		return 1;
+    }
+}

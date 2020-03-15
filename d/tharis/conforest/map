@@ -1,0 +1,14 @@
+Unique rooms:
+	f1 f2 f6
+	path1, 2, 10, 13, 16, 24, 26, 33, 35, 40, 43, 48
+	c1-7
+
+In the includes directory:
+	f77 & f78 inherit tharisedge.c
+	forest.c is inherited from all other f#.c
+	the pathsenw.c, pathsn.c, pathwe.c, and pathswne.c are inherited by 
+		various paths, depending on direction.
+	flowers.c and shop.c are storage rooms for shops.
+
+The forest connects path1.c to south of shadow (/d/darkwood/room/road5.c), path48 to the southwest corner of the desert(/d/shadow/virtual/desert/48,0.desert), and path35 to the forest east of tharis woods (/d/tharis/road/eroad26.c) together.
+f77 connects to /d/tharis/forest/forest180, and f78 connects to /d/tharis/forest/forest181.

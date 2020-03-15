@@ -1,0 +1,37 @@
+#include <std.h>
+
+inherit "/std/weapon";
+
+void create() {
+  ::create();
+  set_name("longsword");
+  set_id(({"sword","longsword","elfslayer"}));
+  set("short","Longsword");
+  set("long","This is the famous Elfslayer.  It is a very fine blade.  It is\n"+
+              "covered with ancient runes.  Engraved on it is a picture of\n"+
+             "the blade slicing an elf.\n");
+  set_weight(4);
+  set_size(2);
+  set_wc(1,8);
+  set_large_wc(1,12);
+  set_type("thiefslashing");
+  set_value(125);
+   set_wield("You feel the magic that this weapon possesses.");
+  set("read","You cannot read this sword for all of the blood and gore\n"+
+             "covering the naked blade.\n");
+  set_hit( (: this_object(), "weapon_hit" :) );
+  set_destroy();
+}
+
+int weapon_hit(object ob) {
+  int bonus;
+   if(!objectp(ob)) return 1;
+   if((string)ob->query_race() == "elf" || (string)ob->query_race() == "drow"){
+    tell_object(ETO,"%^GREEN%^The sword strikes "+ob->query_cap_name()+" with unimaginable might!\n");
+    tell_room(environment(ETO),"%^RED%^"+ETO->query_cap_name()+" strikes "+ob->query_cap_name()+" with unimaginable might!\n",ob);
+    tell_object(ob,"%^RED%^"+ETO->query_cap_name()+" strikes you with unimaginable might!\n");
+      ob->do_damage("torso", roll_dice(1,4)+1);
+      return 1;
+  }
+  return 1;
+}

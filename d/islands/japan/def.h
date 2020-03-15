@@ -1,0 +1,5 @@
+#define EXIT "/d/islands/japan/rooms/"
+#define D_ARMOUR  "/d/islands/japan/armour/"
+#define D_WEAPON  "/d/islands/japan/weapons/"
+#define D_MONSTER "/d/islands/japan/monsters/"
+#define D_MISC "/d/islands/japan/misc/"

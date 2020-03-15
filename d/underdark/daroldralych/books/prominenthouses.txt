@@ -1,0 +1,107 @@
+Prominent houses of DarolDralych by Dirzstral Phaeraan
+
+%^BOLD%^%^BLACK%^A slender black book embossed with %^WHITE%^silver%^RESET%^
+
+%^BOLD%^%^BLACK%^This slender book consists of few pages, but it is flawlessly written and maintained. It has a %^RESET%^jet-black leather cover%^BOLD%^%^BLACK%^ which has been embossed with silver in an ornate, twisting pattern of delicate lines. The pages themselves are of good quality and were probably quite expensive. Each page has been inked in text that %^RESET%^%^CYAN%^glows%^BOLD%^%^BLACK%^ gently in darkness, making it able to be read in any light.%^RESET%^
+
+The upper houses
+The middle houses
+The lesser houses
+
+
+%^MAGENTA%^The First House
+
+%^CYAN%^Dau'viir is commonly referred to by most in the city as "Midnight's 
+Hand". They are commanded by their matron Shyntstra, and are currently 
+considered to be the leaders of both the city and the Sharran priesthood 
+within it. The current High Nightcloak of Shar within the city temple, 
+N'sykah, was adopted into this house many decades ago.
+
+%^MAGENTA%^The Second House
+
+%^CYAN%^Ghorred'Malac are widely renowned, both within the city and others, 
+for their aptitude with magecraft. They are thus the keepers of the wizard's 
+tower. Vierdia is the house matron, and her current consort Sszerin holds 
+the prestigious position of city Archmage. Her eldest son, Tathrysn, also 
+holds a high position within the city's ranks of wizards.
+
+%^MAGENTA%^The Third House
+
+%^CYAN%^Zanyl'thirr are the protectors of the city, and the guardians of the 
+priesthood. They are entrusted with city's main military power, as well as 
+the upkeep of the priesthood of Bane. Their matron is Jysafae, whose eldest 
+daughter Ilivaere is the current Deep Mystery of Bane within the city 
+temple, and whose son Nalaonar is the captain of the city guard.
+
+%^MAGENTA%^The Fourth House
+
+%^CYAN%^Ainenthraith are the greater merchants of the city, overseeing much 
+of the trade in and out, and negotiations for this with other cities. 
+Lyrianelle is their matron. She has twin daughters, of which Talabwae is one 
+of the foremost members of the house in trade matters, and Shrityrr is an 
+accomplished healer.
+
+%^MAGENTA%^The Fifth House
+
+%^CYAN%^Xenahk deal primarily with hired soldiers and the slave races within 
+the city, including the capture of many of these slaves. Their matron is 
+Qualnithra. Zarkacha, the matron's younger sister, is famed for her skill as 
+a weaponmaster.
+
+
+
+%^MAGENTA%^The Sixth House
+
+%^CYAN%^Moraataan are well versed in hunting, and often undertake scouting 
+missions on behalf of the city. Xullfrin, the eldest daughter of the matron 
+T'rissayne, acts as the leader of the more important patrols. They also 
+supply much of the city's food sources through these hunting expeditions.
+
+%^MAGENTA%^The Seventh House
+
+%^CYAN%^Desphrayl are famous within the city for their agriculture and foods 
+provided from this, from both beast and fungus. Of particular interest are 
+their wines, as they are responsible for the city's supply of Luurden. 
+Eclav'aer is their matron.
+
+%^MAGENTA%^The Eighth House
+
+%^CYAN%^Phaeraan is predominantly a house of lesser magi and learned 
+scribes. They oversee many important matters, such as the city's library, 
+messenger service and bank. Larxyra is the house matron, although her 
+daughters are far better known; the eldest, LiNeerae, for her skill as a 
+bardess, and her younger sister Zilvanna for her broad knowledge of lore and 
+matters of history.
+
+%^MAGENTA%^The Ninth House
+
+%^CYAN%^Kirrefyrm are known for their finely-wrought jewelry, the likes of which
+are rarely matched by any other crafters. Burvyll is their matron.
+
+%^MAGENTA%^The Tenth House
+
+%^CYAN%^Aurach'nar are masters of the art of smithing, both of weapons and armor,
+and pride themselves upon their masterworked pieces. Sabiira is their
+matron.
+
+%^MAGENTA%^The Eleventh House
+
+%^CYAN%^Archuul are the city's providers of mounts and other beasts of burden. They
+train these beasts as much for use by travellers as by the military.
+Halylene is their matron.
+
+%^MAGENTA%^The Twelfth House
+
+%^CYAN%^Zaughym are primarily concerned with the cleanliness of the city, seeing to
+this as much by slave labor as by their own work. Ardul'breena is their
+matron.
+
+%^MAGENTA%^The Thirteenth House
+
+%^CYAN%^Desynge are also known for their skill at stoneworking, as well as the fine
+jewelry they craft, rivalled in this only by the city's ninth house,
+Kirrefyrm. Rilbryn is their matron.
+
+
+%^MAGENTA%^Most of these mid-ranked and lesser houses are of little interest to the 
+traveller or the higher houses, and due to this status are not listed here.

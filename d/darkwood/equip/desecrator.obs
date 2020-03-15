@@ -1,0 +1,103 @@
+//  A Sword of Desecration
+//  Thorn@ShadowGate
+//  971005
+//  Darkwood Area
+//  desecrator.c
+
+#include <std.h>
+
+int unholy;
+
+inherit WEAPON;
+
+void create() {
+  ::create();
+    set_name("Sword of Desecration");
+    set_id(({"sword","desecration","sword of desecration","desecrator",
+        "desecrator sword"}));
+    set_short("Sword of Desecration");
+    set_long(
+@DARKWOOD
+  This is a Sword of Desecration, a weapon of evil and destruction.  The 
+hilt of this weapon is blackened iron, wrapped in black velvet.  The blade
+shines like dull obsidian, flecked here and there with rust brown stains
+that can only be blood.  
+
+
+DARKWOOD
+    );
+    set_weight(15);
+    set("value",1000);
+    set_wc(1,8);
+    set_large_wc(1,12);
+    set_size(2);
+    set_type("slashing");
+    set_prof_type("avengers");
+    set_property("enchantment",2);
+    set_hit((:this_object(), "extra_hit":));
+    set_wield((:this_object(), "extra_wield":));
+    set_unwield((:this_object(), "extra_unwield":));
+    unholy = 0;
+}
+
+int extra_hit(object ob) {
+  int dam;
+
+    if(!objectp(ob)) return 1;
+  if((int)ob->query_alignment() == 1) {
+    dam = 10;
+    message("my_action",
+            "%^RED%^A bright red flame eminates from the blade as it cuts "
+            "into the flesh of your enemy!%^RESET%^"
+            ,ETO);
+    message("other_action",
+            ob->query_cap_name()+"'s flesh!"
+            ,environment(ob)
+            ,(({ETO, ob})));
+
+    message("my_action",
+            "%^RED%^The sword wielded by "+ETO->query_cap_name()+" flames as it cuts into "
+            "your flesh!%^RESET%^"
+            ,ob);
+    return dam;
+  }
+  return random(5)+1;
+}
+
+int extra_wield() {
+  if(!TP) return 0;
+  if((int)TP->query_level() < 15) {
+    notify_fail("You may not wield such a powerful weapon!");
+    return 0;
+  }
+if(TP->is_class("antipaladin")) {
+    set_property("enchantment",3);
+    unholy = 1;
+    write("%^RED%^The evil sword blazes with the flames of the Pit itself in your hands!%^RESET%^");
+    say("%^CYAN%^You hear the screams of tortured souls as "+TPQCN+" wields the Sword "
+        "of Desecration!");
+    TP->set_property("magic resistance", 50);
+    return 1;
+  }
+  if(((int)TP->query_alignment() % 3) == 1) {
+    TP->do_damage(1,10);
+    write("%^RED%^The evil sword blazes in your hands and "
+    "sears your flesh leaving an evil burn!%^RESET%^");
+    say("%^CYAN%^You hear "+TPQCN+" scream in pain as the Sword of Desecration "
+        "falls to the ground and disappears!");
+    TO->remove();
+    return 0;
+  }
+  write("%^RED%^The sword blazes with POWER in your hands!%^RESET%^");
+  say("%^CYAN%^"+TPQCN+" wields the Sword of Desecration.%^RESET%^");
+  return 1;
+}
+
+int extra_unwield()
+{
+  remove_property("enchantment");
+  set_property("enchantment",2);
+  if(unholy) TP->set_property("magic resistance", -50);
+  unholy = 0;
+  return 1;
+}

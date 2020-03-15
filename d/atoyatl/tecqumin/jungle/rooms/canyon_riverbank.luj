@@ -1,0 +1,75 @@
+#include <std.h>
+#include <move.h>
+#include "../../tecqumin.h"
+
+inherit ROOM;
+
+string long_desc();
+string sound_desc();
+
+void create() {
+  ::create();
+  set_indoors(0);
+  set_property("light", 0);
+  set_terrain(SHORE);
+  set_travel(SLICK_FLOOR);
+  set_name("Riverbank in a canyon");
+  set_short("%^BOLD%^%^BLUE%^R%^CYAN%^i%^BLUE%^v%^RESET%^%^CYAN%^e%^BOLD%^"
+    +"%^BLUE%^rb%^RESET%^%^BLUE%^a%^BOLD%^%^BLUE%^nk%^RESET%^%^ORANGE%^ at the"
+    +" foot of a %^GREEN%^jungle %^ORANGE%^canyon");
+  set_long( (:TO,"long_desc":) );
+  set_smell( "default", "The rush of %^BOLD%^%^CYAN%^w%^BLUE%^a%^CYAN%^ter"
+    +"%^RESET%^%^ORANGE%^ and %^BOLD%^%^WHITE%^spray %^RESET%^%^ORANGE%^fills"
+    +" your nostrils" );
+  set_listen("default",(:TO, "sound_desc":));
+}
+
+string long_desc(){
+  string desc, candir, waterdir, myside;
+  myside = (string)TP->query_property("bank");
+  switch(myside){
+  case "west":
+    waterdir = "east";
+    candir = "west";
+    break;
+  default:
+    waterdir = "west";
+    candir = "east";
+    break;
+  }
+  desc = "%^ORANGE%^You are on a %^RESET%^muddy %^BLUE%^riverbank %^ORANGE%^at"
+    +" the bottom of a long canyon. The narrow bank meets the"
+    +" %^BOLD%^%^YELLOW%^canyon wall%^RESET%^%^ORANGE%^ to the " + candir 
+    + ", and the fast flowing %^BOLD%^%^BLUE%^river%^RESET%^%^ORANGE%^ to the " 
+    + waterdir + ".";
+  if (present("unfettered", TO)){
+    desc += "\n%^BLUE%^In the middle of the %^BOLD%^%^BLUE%^river"
+      +"%^RESET%^%^BLUE%^, an unspeakable %^BOLD%^%^BLACK%^ab%^RESET%^"
+      +"%^MAGENTA%^o%^BOLD%^%^BLACK%^m%^RESET%^%^BLUE%^i%^BOLD%^%^BLACK%^nat"
+      +"%^RESET%^%^ORANGE%^i%^BOLD%^%^BLACK%^on %^RESET%^%^BLUE%^against"
+      +" %^BOLD%^%^GREEN%^n%^RESET%^%^GREEN%^a%^BOLD%^%^GREEN%^tu%^RESET%^"
+      +"%^GREEN%^r%^BOLD%^%^GREEN%^e %^RESET%^%^BLUE%^has brought itself to a"
+      +" halt by attaching long %^MAGENTA%^tentacles %^BLUE%^to the%^BOLD%^"
+      +" %^YELLOW%^canyon wall%^RESET%^%^BLUE%^. The %^MAGENTA%^wr%^BOLD%^"
+      +"%^MAGENTA%^i%^RESET%^%^MAGENTA%^th%^BOLD%^%^YELLOW%^i%^RESET%^"
+      +"%^MAGENTA%^ng m%^BLUE%^a%^MAGENTA%^ss %^BLUE%^of its body is buffetted"
+      +" by the %^BOLD%^%^BLUE%^water%^RESET%^%^BLUE%^, which appears to be"
+      +" causing it some distress, to judge by the earsplittingly %^BOLD%^"
+      +"%^CYAN%^high pitched %^YELLOW%^keening %^CYAN%^noise%^RESET%^%^BLUE%^"
+      +" it is making. A %^BOLD%^%^BLACK%^dark aura %^RESET%^%^BLUE%^keeps"
+      +" gathering around it, only to be dragged away by the rushing%^BOLD%^"
+      +" %^BLUE%^water%^RESET%^%^BLUE%^.";
+  }
+  return desc;
+}
+
+string sound_desc(){
+  string desc;
+  if (present("unfettered", TO)){
+    desc = "A %^BOLD%^%^CYAN%^high pitched %^YELLOW%^keening"
+      +" %^CYAN%^noise%^RESET%^%^GREEN%^ assaults your ears";
+  } else {
+    desc = "Your ears are full of %^BOLD%^%^CYAN%^w%^BLUE%^a%^CYAN%^ter";
+  }
+  return desc;
+}

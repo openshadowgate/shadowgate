@@ -1,0 +1,56 @@
+//Coded by the one and only master of monsters...BANE//
+#include <std.h>
+inherit "/d/laerad/mon/wander/wander.c";
+
+void create(){
+    ::create();
+    set_id(({"flailer","Flailer"}));
+    set_name("Flailer");
+    set_short("A Flailer");
+    set_long(
+	"This fairly small, tortoise-like creature is about 4 feet long.  "+
+	"Unlike normal tortoises though, this beast has 6 legs mostly "+
+	"concealed inside its hardened torso.  Its shell is similar looking "+
+	"to a rocky terrain making it appear as a bunch of stones or rocks."
+    );
+    set_body_type("quadruped");
+    set_race("flailer");
+    set_gender("male");
+    set_size(1);
+    set_hd(9,28);
+   set_max_level(15);
+    set_hp(100);
+    set_attack_bonus(6);
+    set_alignment(5);
+    set_exp(2500);
+    set_overall_ac(0);
+    set("aggressive",13);
+    add_limb("right middle leg","torso", 0, 0, 0);
+    add_limb("left middle leg","torso", 0, 0, 0);
+    add_limb("shell","torso", 0, 0, 0);
+    add_limb("right middle paw","torso", 0, 0, 0);
+    add_limb("left middle paw","torso", 0, 0, 0);
+    set_attack_limbs(({"right forepaw","left forepaw","head","right middle paw","left middle paw"}));
+    set_attacks_num(5);
+    set_nat_weapon_type("thiefslashing");
+    set_damage(1,6);
+    set_stats("dexterity",12);
+    set_funcs(({"psionic"}));
+    set_func_chance(20);
+    set_speed(50);
+}
+void psionic(object targ){
+     if(!objectp(targ)) return 0;
+    if(!"/daemon/saving_d"->saving_throw(targ,"paralyzation_poison_death")){
+	tell_object(targ,"%^BOLD%^MAGENTA%^The Flailer psionically penetrates your mind ravaging your thoughts!");
+	tell_room(ETO,"%^BOLD%^MAGENTA%^"+targ->query_cap_name()+" grabs "+targ->query_possessive()+" head and shrieks in pain!",targ);
+        set_property("magic",1);
+targ->do_damage("torso",roll_dice(2,10));
+    remove_property("magic");
+	return 1;
+	}
+    if(!objectp(targ)) return 0;
+    tell_object(targ,"%^BOLD%^MAGENTA%^The Flailer attempts to penetrate your mind psionically but you resist!");
+    tell_room(ETO,"%^BOLD%^MAGENTA%^"+targ->query_cap_name()+" shakes "+targ->query_possessive()+" head momentarily.",targ);
+    return 1;
+}

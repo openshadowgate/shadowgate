@@ -1,0 +1,43 @@
+#include <std.h>
+#include "/d/shadow/room/goblin/short.h"
+inherit "/std/monster";
+ 
+create() {
+    ::create();
+    set_name("goblin");
+    set("id", ({ "goblin","gatekeeper","goblin gatekeeper" }));
+    set("short", "Goblin gatekeeper");
+    set("aggressive", 7);
+    set_hd(5,2);
+    set("long", "This foul and ugly little creature is "
+	"one of the gatekeepers of the Goblin stronghold. They are "
+	"Goblins of reknown ability to stay awake for lengthy "
+	"amounts of time...or at least to appear too. Their one main "
+	"flaw is they have no clue as to who they should keep out of "
+	"the stronghold and who they can let in."
+);
+    set_level(2);
+    set_class("fighter");
+    set_body_type("humanoid");
+    set_alignment(9);
+    set_exp(125);
+    set("race", "goblin");
+   set_gender("male");
+    set_ac(5);
+    set_max_hp(32);
+    set_hp(32);
+    set_emotes(3,({
+	"Goblin gatekeeper snores loudly.",
+	"%^CYAN%^Goblin says: %^RESET%^Umm...are you allowed in or not? Hmmm...",
+	"Goblin soldier falls asleep on his feet.",
+    }),0);
+    this_object()->add_money("gold",random(50)+5);
+    this_object()->add_money("silver",random(100)+15);
+    this_object()->add_money("copper",random(1000)+50);
+    new( OPATH "lsword.c" )->move(this_object());
+    command("wield longsword in right hand and left hand");
+    new( OPATH "lboot.c" )->move(this_object());
+    command("wear boot");
+    new( OPATH "rboot.c" )->move(this_object());
+    command("wear boot");
+}

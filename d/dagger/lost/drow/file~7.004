@@ -1,0 +1,57 @@
+#include <std.h>
+inherit ROOM;
+void create() {
+    ::create();
+    set_property("light",1);
+    set_property("indoors",1);
+    set_short("%^BLUE%^City street%^RESET%^");
+    set_long(
+	"%^BLUE%^The city street is made of cobblestones winding through "
+	"the existing structures around you. The wind blows back your "
+	"hair as you wander through the city pathways."
+	"To the west is a slave compound made up of a large chain link "
+	"fence to ensure the slaves cannot escape. "
+	"You can see two shacks made of wheat within the compound and "
+	"several %^CYAN%^elven slaves%^BLUE%^ huddled about."
+    );
+    set_listen("default",
+	"The wind howls a strangled cry which causes you to feel nervous "
+	"about being here."
+    );
+    set_smell("default",
+	"The smell of blood hangs thick in the air."
+    );
+    set_items(([
+	"cobblestone":"There are numerous cobblestones lining the city "
+	"pathways.",
+	"compound":"The compound is a fence like structure used to "
+	"prevent the %^CYAN%^elven slaves%^RESET%^ from escaping.",ou smash the sphere against the temple door and the "
+	"doors slowly swing open!%^RESET%^"
+    ,TP);
+    message ( "other_action",
+	"%^BOLD%^%^CYAN%^"+TPQCN+" smashes a sphere against the temple door "
+	"and the doors slowly swing open!%^RESET%^"
+    ,environment (TP), TP);
+    remove_action("smash_sphere","smash");
+    add_exit("/d/dagger/drow/rooms/tempquest.c","temple");
+    obs[x]->remove();
+    FLAG = 0;
+    return 1;
+    }
+    } 
+    if( SPHERE !=1) {
+    notify_fail ("Smash what?\n");
+    return 0;
+    }
+}
+void reset() {
+    ::reset();
+    remove_action("inset_tablet","inset");
+    TABLET = 0;
+    remove_action("place_rune","place");
+    RUNE = 0;
+    remove_action("smash_sphere","smash");
+    SPHERE = 0;
+    remove_exit("temple");
+    return;
+}

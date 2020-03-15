@@ -1,0 +1,47 @@
+#include "/d/dagger/drow/short.h"
+#include <std.h>
+inherit "/std/room";
+void create() {
+    ::create();
+   set_terrain(NAT_TUNNEL);
+   set_travel(FOOT_PATH);
+    set_property("light",1);
+    set_property("indoors",1);
+    set_property("no teleport",1);
+    set_short("%^BLUE%^Dark cavern tunnel%^RESET%^");
+    set_long(
+        "%^BLUE%^The tunnel digs deeper into the mountainside and you follow "
+        "it for another 100 feet farther along. The same "
+        "%^MAGENTA%^lichen%^BLUE%^ as before covers the walls. You pause "
+        "at this point as you have come across a large pile of humanoid "
+        "bones. This part of the cavern has widened out to a thirty foot "
+        "width and the ceiling hangs above you by another thirty feet. "
+        "The pile of bones is in most respects a giant deadfall in the middle "
+        "of the tunnel. However there is a path through the middle of the "
+        "bones and you can see the tunnel continues on.%^RESET%^"
+    );
+    set_listen("default", (:TO, "listen_me":) );
+    set_items(([
+        "lichen":"%^MAGENTA%^The lichen is of a very unusual type and seems "
+        "to provide the light source within the cavern tunnel.%^RESET%^",
+        "bones":"The bones are whitened with age. Most of them belong to "
+        "elves.",
+        "pile":"The pile is huge. It presses up against the tunnel walls at "
+        "a height of 10 feet.",
+        "pile of bones":"There is a path cleared through the pile of bones "
+        "allowing your travel to continue.",
+        "walls":"The walls are bare stone and obviously have been carved "
+        "through the mountain. Glowing %^MAGENTA%^lichen%^RESET%^ grows on "
+        "the walls here."
+    ]));
+    set_exits(([
+        "southeast": RPATH "tun3",
+        "north": RPATH "tun10"
+    ]));
+}
+
+string listen_me(){
+  if (!objectp(TP)) return "There is no-one here to listen";
+  return "The bones seem to call out to you...`"+TPQCN+", you ssshall "
+       +"join usss...'";
+}

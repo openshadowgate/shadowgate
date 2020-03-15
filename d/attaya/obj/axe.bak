@@ -1,0 +1,69 @@
+#include <std.h>
+inherit "/d/common/obj/weapon/large_battle_axe";
+
+string OWNER;
+
+void create() {
+    ::create();
+    set_name("battleaxe");
+    set_id( ({"Battleaxe of the Dominion","battleaxe","axe","dominion axe","axe of the dominion", "dominion battleaxe"}) );
+    set_short("%^BLUE%^Battleaxe of the Dominion%^RESET%^");
+    set_long(
+@AXE
+%^CYAN%^Little is known about this devestating weapon.
+It is said to have once belonged to a great warrior god who lead a 
+distant empire.  The Battleaxe of the Dominion has changed hands many
+times.
+It has been present at some of the bloodiest battles in history and
+carries dark spirits. It is a huge doublebladed axe with a spearpoint at
+the tip.
+AXE
+    );
+    set_weight(25);
+    set("value",1525);
+    set_property("enchantment",3);
+    set_wield((:TO, "extra_wield":));
+    set_hit((:TO, "extra_hit":));
+    set_weapon_prof("exotic");
+}
+
+void init() {
+    ::init();
+    if((string)TO->query_weapon_prof() != "exotic") TO->set_weapon_prof("exotic"); // changing to exotic kthx - Nienne.
+    if(interactive(TP) && TP==environment(TO) && !OWNER) OWNER = TPQN;
+}
+
+int extra_hit(object ob) {
+    object ob2;
+    if(random(1000) == 666){
+	tell_object(ETO,"%^BOLD%^%^MAGENTA%^The massive battleaxe beheads "+ob->QCN+".");
+	tell_object(ob,"%^BOLD%^%^MAGENTA%^"+ETO->QCN+" beheads you with the massive battleaxe!");
+	tell_room(EETO,"%^BOLD%^%^MAGENTA%^"+ETO->QCN+" beheads "+ob->QCN+" with the massive battleaxe!",({ETO,ob}));
+	ob->do_damage("head", (99999)+15);
+	ob2 = new("/std/obj/body_part");
+	ob2->set_limb(ob->QCN,"head");
+	ob2->move(environment(ob));
+    }
+    if(random(15) > 13){
+	tell_object(ETO,"%^BOLD%^%^MAGENTA%^The massive battleaxe slices "+ob->QCN+" horribly.",ETO);
+	tell_object(ob,"%^BOLD%^%^MAGENTA%^"+ETO->QCN+" slices you horribly with the massive battleaxe.");
+	tell_room(EETO,"%^MAGENTA%^"+ETO->QCN+" slices "+ob->QCN+" deeply with the massive battleaxe.",({ETO,ob}));
+	ob->do_damage("torso",random(20));
+    }
+    return 1;
+}
+
+int extra_wield() {
+    if((int)ETO->query_level() < 25) {
+	write("%^BOLD%^%^RED%^A shadowy presence tells you: %^RESET%^You pathetic little fool, you cannot handle such power!");
+	return 0;
+    }
+    if((string)ETO->query_name() != OWNER) {
+	write("%^MAGENTA%^You are not chosen by the gods to wield such power.");
+	TO->remove();
+	return 0;
+    }
+    write("%^BLUE%^Ancient forces are at work here...  Be wary. ");
+    say("%^RED%^"+ETO->QCN+" tightly grasps the Battleaxe of the Dominion.  You may want to step back.%^RESET%^");
+    return 1;
+}

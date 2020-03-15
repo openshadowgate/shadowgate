@@ -1,0 +1,58 @@
+//ggirdle
+
+#include <std.h>
+
+inherit ARMOUR;
+
+static int bonus;
+
+void create(){
+   ::create();
+
+   set_name("goblin girdle");
+   set_short("%^GREEN%^Goblin girdle");
+   set_long("This is the small armour that the goblin royalty wear when attempting to woo goblin women.");
+   set_ac(0);
+   set_wear((:TO,"wear_me":));
+   set_remove((:TO,"remove_me":));
+   set_weight(3);
+   set_value(350);
+   set_id(({"girdle","goblin girdle","Girdle"}));
+   set_type("clothing");
+   set_limbs(({"waist"}));
+   bonus = 0;
+}
+
+int wear_me(){
+   if((string)TP->query_race() != "goblin") return 1;
+   bonus = 18 - (int)TP->query_stats("strength");
+   if (bonus >0) {
+      TP->add_stat_bonus("strength",bonus);
+      write("%^GREEN%^You feel more powerful .. like a king.");
+      return 1;
+   }
+   else {
+      return 1;
+   }
+}
+
+int remove_me(){
+   if(!ETO) return 1;
+   if((string)ETO->query_race() != "goblin") return 1;
+   if(bonus > 0) {
+      ETO->add_stat_bonus("strength", -1*bonus);
+      bonus = 0;
+      return 1;
+   }
+   else {
+      return 1;
+   }
+}
+
+void init(){
+   ::init();
+   if(TP == ETO){
+      if((string)TP->query_race()=="goblin") set_ac(2);
+     else set_ac(0);
+   }
+}

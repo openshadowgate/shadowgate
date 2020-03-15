@@ -1,0 +1,847 @@
+#include <std.h>
+#include "../tecqumin.h"
+#define STRAIGHT 0
+#define SLIGHT_LEFT -1
+#define LEFT -2
+#define HARD_LEFT -3
+#define SLIGHT_RIGHT 1
+#define RIGHT 2
+#define HARD_RIGHT 3
+#define OBS_INTERVAL 10
+
+inherit ROOM;
+
+// This room is designed to give players a white water ride in a kayak. 
+// It's all controlled by a separate paddle object (../obj/paddle.c)
+// That the players can use to control the vessel
+
+int direction;   // the direction the boat is pointing in
+                 // from 0 - 15
+                 // 0 = north 1 = nne 2 = ne... 15 = nnw
+int river_flow;  // the direction the river is flowing in
+                 // numbers as above
+int river_speed; // the speed the river is flowing at
+int boat_speed; // the speed the boat is travelling at, relative
+                 // to the river
+int river_length; // the length of the river
+int progress;     // the boat's progress down the river
+int position;     // the boats position between the banks
+                  // 0 = left bank 7 = right bank
+int hull_points;  // current condition of the boat
+int max_hull_points;  // maximum condition of the boat
+int * path; //An array of the path of the river
+int * speed; // An array of the speed of the river
+string * obstructions;
+int * obstruction_placements;
+
+object * query_path();
+object * query_speed();
+int change_dir(int dir);
+int change_speed (int spd);
+int apply_lateral_travel();
+int query_relative_direction();
+void travel();
+void launch(object ob);
+void capsize();
+void show_direction(int relative_direction);
+
+void create(){
+  int i, j, bend;
+  ::create();
+  set_property("indoors", 0);
+  set_property("light", 2);
+  set_short("A small kayak");
+  set_long( (:TO, "long_desc":) );
+  set_terrain(WOOD_BUILDING);
+  set_travel(DECAYED_FLOOR);
+  set_smell("default","The whiff of the white water wafts by");
+  set_listen("default","The roaring of the river rolls in your ears");
+  set_exits( ([ "out" : ROOMS + "kayak_entry" ]) );
+
+  set_items( ([ 
+   
+  ]) );
+  
+  path = ({});
+  speed = ({});
+  direction = 0;
+  river_speed = random (5)+1;
+  progress = 0;
+  for (i=0;i<12 + random (6);i++){
+    river_speed += random (3)-1;
+    if (river_speed>5){
+      river_speed = 5;
+    }
+    speed += ({river_speed});
+    speed += ({river_speed});
+    speed += ({river_speed});
+
+//    path += ({direction});  //////////
+//    path += ({direction});  //////////
+//    path += ({direction});  //////////
+
+
+    bend = random(9)-4;
+    switch (bend){
+    case STRAIGHT:
+      path += ({direction});
+      path += ({direction});
+      path += ({direction});
+      break;
+    case SLIGHT_RIGHT:
+      path += ({direction});
+      direction ++;
+      if (direction>15){
+        direction = 0;
+      }
+      path += ({direction});
+      path += ({direction});
+      break;
+    case RIGHT:
+      path += ({direction});
+      direction ++;
+      if (direction>15){
+        direction = 0;
+      }
+      path += ({direction});
+      direction ++;
+      if (direction>15){
+        direction = 0;
+      }
+      path += ({direction});
+      break;
+    case HARD_RIGHT:
+      direction ++;
+      if (direction>15){
+        direction = 0;
+      }
+      path += ({direction});
+      direction ++;
+      if (direction>15){
+        direction = 0;
+      }
+      path += ({direction});
+      direction ++;
+      if (direction>15){
+        direction = 0;
+      }
+      path += ({direction});
+      break;
+    case SLIGHT_LEFT:
+      path += ({direction});
+      direction --;
+      if (direction<0){
+        direction = 15;
+      }
+      path += ({direction});
+      path += ({direction});
+      break;
+    case LEFT:
+      path += ({direction});
+      direction --;
+      if (direction<0){
+        direction = 15;
+      }
+      path += ({direction});
+      direction --;
+      if (direction<0){
+        direction = 15;
+      }
+      path += ({direction});
+      break;
+    case HARD_LEFT:
+      direction --;
+      if (direction<0){
+        direction = 15;
+      }
+      path += ({direction});
+      direction --;
+      if (direction<0){
+        direction = 15;
+      }
+      path += ({direction});
+      direction --;
+      if (direction<0){
+        direction = 15;
+      }
+      path += ({direction});
+      break;
+    }
+  }
+  obstructions = ({});
+  obstruction_placements = ({});
+  for (i=0;i<sizeof(path);i++){
+    if (!random(OBS_INTERVAL)){
+      switch (random(4)){
+      case 0:
+        obstructions+= ({"rock"});
+        break;
+      case 1:
+        obstructions+= ({"weir"});
+        break;
+     case 2:
+        obstructions+= ({"log"});
+        break;
+      case 4:
+        obstructions+= ({"rock"});
+        break;
+      case 5:
+        obstructions+= ({"sandbar"});
+        break;
+      }
+      obstruction_placements += ({random(7)+1});
+    }else{
+      obstructions += ({"none"});
+      obstruction_placements +=({0});
+    }
+  }
+  progress = 0;
+}
+
+string * query_obstructions(){
+  return obstructions;
+}
+
+int query_progress(){
+  return progress;
+}
+
+object * query_path(){
+  return path;
+}
+
+object * query_speed(){
+  return speed;
+}
+
+string get_dist_string(int distance){
+  switch (distance){
+  case 1:
+    return "ten yards";
+  case 2:
+    return "twenty yards";
+  case 3: 
+    return "thirty yards";
+  case 4: 
+    return "forty yards";
+  case 5: 
+    return "fifty yards";
+  case 6: 
+    return "sixty yards";
+  case 7: 
+    return "seventy yards";
+  case 8:
+    return "eighty yards";
+  case 9:
+    return "ninety yards";
+  default:
+    return "a long way";
+  }
+}
+
+
+string query_obs_string(){
+
+}
+
+string query_bends_string(){
+  int i, j, prev_dir, temp_prog, bend_counter;
+  string result;
+  result = "";
+  prev_dir = 0;
+  temp_prog = 0;
+
+  if (progress<sizeof(path)){
+    prev_dir = path[progress];
+  }else {
+    return "There was an error in the listing for the bends";
+  }
+  for (i=progress;i<progress+10;i++){
+    bend_counter = 0;
+    result += "\n";
+    if (i>=sizeof(path)){
+      result += "The river empties into a small lake ";
+      result += get_dist_string(i-progress);
+      result += " ahead.";
+      return result;
+    }    
+    if (prev_dir ==path[i]){
+      result += "The river carries straight on " 
+              + get_dist_string(i-progress) +" ahead.";
+    }
+
+
+    // Add in the text for a right turn
+    if (prev_dir < path[i]||(prev_dir==15 && path[i]==0)){
+      bend_counter ++;
+      prev_dir = path[i];
+      for (j=i+1;j<progress+10;j++){
+        if (j>=sizeof(path)){
+          result += "The river bends to the right then empties into a"
+                   +" small lake ";
+          result += get_dist_string(i-progress);
+          result += " ahead.";
+          return result;
+        }
+        if (prev_dir < path[j]||(prev_dir==15 && path[j]==0)){
+          bend_counter++;
+        }
+        if (prev_dir > path[j]||(prev_dir==0 && path[j]==15)){
+          result += "The river bends right and then left ";
+          result += get_dist_string(i-progress);
+          result += " ahead.";
+          return result;
+        }
+        prev_dir = path[j];
+      }
+      switch (bend_counter){
+      case 1:
+        result += "The river bends slightly to the right "
+                + get_dist_string(i) + " ahead.";
+        break;
+      case 2:
+        result += "The river bends to the right "
+                + get_dist_string(i) + " ahead.";
+        break;
+      case 3:
+        result += "The river bends sharply to the right "
+                + get_dist_string(i) + " ahead.";
+        break;
+      default:
+        result += "We thought you were turning to the right, but there"
+                 +" was an error with your bend counter.";
+      }
+      i=j;
+    } 
+    // Add in the text for a left turn
+    if (prev_dir>path[i]||(prev_dir==15 && path[i]==0)){
+      bend_counter --;
+      prev_dir = path[i];
+      for (j=i+1;j<progress+10;j++){
+        if (j>=sizeof(path)){
+          result += "The river bends to the left then empties into a"
+                   +" small lake ";
+          result += get_dist_string(i-progress);
+          result += " ahead.";
+          return result;
+        }
+        if (prev_dir > path[j]||(prev_dir==15 && path[j]==0)){
+          bend_counter--;
+        }
+        if (prev_dir < path[j]||(prev_dir==0 && path[j]==15)){
+          result += "The river bends left and then right ";
+          result += get_dist_string(i-progress);
+          result += " ahead.";
+        }
+        prev_dir = path[j];
+      }
+      switch (bend_counter){
+      case -1:
+        result += "The river bends slightly to the left "
+                + get_dist_string(i) + " ahead.";
+        break;
+      case -2:
+        result += "The river bends to the left "
+                + get_dist_string(i) + " ahead.";
+        break;
+      case -3:
+        result += "The river bends sharply to the left "
+                + get_dist_string(i) + " ahead.";
+        break;
+      default:
+        result+="We thought you were turning left, but there was an error"
+               +" with your bend counter";
+      }
+      i=j;
+    }
+    
+  }
+  return result;
+
+/*
+  offset = 0;
+  rtemp = 0;
+  ltemp = 0;
+  for (i=1;i<10;i++){
+    rel_dir = direction - path[progress + i];
+    if (rel_dir<0){
+      rel_dir = 15;
+    }
+    if (rel_dir>15){
+      rel_dir = 0;
+    }
+    switch(rel_dir){
+    case 1: // deliberately allowing this to fall through to the next line
+    case 7:
+      if (rtemp==0){
+        rtemp = 1;
+      }else{
+        rtemp = 0;
+        offset ++;
+      }
+      break;
+    case 2..6:
+      offset ++;
+      break;
+    case 9:// deliberately allowing this to fall through to the next line
+    case 15:
+      if (ltemp==0){
+        ltemp = 1;
+      }else{
+        ltemp = 0;
+        offset --;
+      }
+      break;
+    case 10..14:
+      offset ++;
+      break; 
+    }
+    
+  }
+
+*/
+  return result;
+}
+
+string long_desc(){
+  string result, bends, obstructions;
+  result = "You are in a small, pointed water craft. It comes complete"
+          +" with a paddle and is just about wide enough to kneel down"
+          +" in.";
+  bends = query_bends_string();
+  result += bends;
+  return result;
+}
+
+/*
+int change_dir(int dir){
+  if (dir<-2){
+    dir = -2;
+  }
+  if (dir > 2){
+    dir = 2;
+  }
+  direction += dir;
+  if (direction > 11){
+    direction -=12;
+  }
+  if (direction<0){
+    direction += 12;
+  }
+  return direction;
+}
+*/
+
+int change_speed (int spd){
+  if (spd>1 || spd <-1){
+    return -10;
+  }
+  boat_speed += spd;
+  if (boat_speed>2){
+    boat_speed = 2;
+  }
+  if (boat_speed < -2){
+    boat_speed = -2;
+  }
+  return boat_speed;
+}
+
+void capsize(){
+  tell_room(TO, "%^BOLD%^%^CYAN%^The swift flowing water roars over the"
+               +" kayak as it turns side on to the stream. You capsize!");
+}
+
+int query_lat_dist(int relative_direction, int speed){
+  switch (relative_direction){
+  case 0: // deliberately allowing this to fall through to the next line
+  case 8:
+    return 0;
+    break;
+  case 1:
+    switch (speed){
+    case 0..2:
+      return 1;
+    case -1..-2:
+      return -1;
+    }
+    break;
+  case 2..6:
+    switch (speed){
+    case 0..2:
+      return 1;
+    case -1..-2:
+      return -1;
+    }
+    break;
+  case 7:
+    switch (speed){
+    case 0..2:
+      return 1;
+    case -1..-2:
+      return -1;
+    }
+    break;
+  case 9:
+    switch (speed){
+    case 0..2:
+      return -1;
+    case -1..-2:
+      return 1;
+    }
+    break;
+  case 10..11:
+    return boat_speed*-1;
+    break;
+  case 12:
+    switch (speed){
+    case 0..2:
+       return -1;
+    case -1..-2:
+      return 1;
+    }
+    break;
+  case 13..14:
+    return boat_speed*-1;
+  case 15:
+    switch (speed){
+    case 0..2:
+       return -1;
+    case -1..-2:
+      return 1;
+    }
+    break;
+  }
+}
+
+int apply_lateral_travel(){
+  int relative_direction, lat_dist;
+  relative_direction = query_relative_direction();
+//  tell_room(TO, "relative direction is: " + relative_direction);
+
+  lat_dist = query_lat_dist(relative_direction, boat_speed);
+  position += lat_dist;
+  
+  switch (lat_dist){
+  case 0:
+    tell_room(TO, "The kayak continues straight down the river");
+    break;
+  case 1:
+    tell_room(TO, "The kayak moves toward the right hand bank");
+    break;
+  case 2:
+    tell_room(TO, "The kayak slews wildly toward the right hand bank!");
+  case -1:
+    tell_room(TO, "The kayak moves toward the left hand bank");
+    break;
+  case -2:
+    tell_room(TO, "The kayak slews wildly toward the left hand bank!");
+    break;
+  }
+//tell_room(TO, "%^BOLD%^%^CYAN%^Current position is: " + position);
+  return position;
+}
+
+int query_relative_direction(){
+  int relative_direction;
+  relative_direction = direction - river_flow;
+  if (relative_direction<0){
+    relative_direction += 16;
+  }
+  return relative_direction;
+}
+
+void travel(){
+  int j, x;
+  int travel_speed;
+  int relative_direction;
+  object* kritters;
+
+
+  kritters = all_living(TO);
+// work out how far the boat will travel down the river this round
+
+  relative_direction = query_relative_direction();
+  travel_speed = river_speed;
+
+  if (relative_direction ==12 ||relative_direction ==4){
+    if (river_speed>=3){
+      capsize();
+      return;
+    }
+  }
+
+  switch (relative_direction){
+  case 0..2:
+    travel_speed += boat_speed;
+    break;
+  case 3..5:
+    switch (boat_speed){
+    case -1..-2:
+      travel_speed -=1;
+      break;
+    case 1..2:
+      travel_speed +=1;
+      break;
+    }
+    break;
+  case 11..13:
+    switch (boat_speed){
+    case -1..-2:
+      travel_speed -=1;
+      break;
+    case 1..2:
+      travel_speed +=1;
+      break;
+    }
+    break;
+  case 14..15:
+    travel_speed += boat_speed;
+    break;
+  default:
+    travel_speed -= boat_speed;
+    break;
+  }  
+
+  // apply the boat's progress during the round
+  
+  if (boat_speed + river_speed>0){
+    progress ++;
+  } 
+  if (boat_speed + river_speed<0){
+    progress --;
+  } 
+
+//  tell_room(TO, "Current progress is: " + progress);
+  if (river_flow>path[progress]||(river_flow == 0 && path[progress]==15)){
+    tell_room(TO, "%^BOLD%^%^BLUE%^The river bends to the %^WHITE%^left");
+  }
+  if (river_flow<path[progress]||(river_flow == 15 &&path[progress]==0)){
+    tell_room(TO, "%^BOLD%^%^RED%^The river bends to the %^WHITE%^right");
+  }
+  river_flow = path[progress];
+  river_speed = speed[progress];
+  relative_direction = query_relative_direction();
+
+//  tell_room(TO, "about to apply lateral travel");
+
+  apply_lateral_travel();
+
+//  tell_room(TO, "Finished applying lateral travel. You really should have heard something then.");
+
+  if (position>7){
+    tell_room(TO, "The kayak crashes on the right bank of the river!");
+    if (sizeof(kritters)>0){
+      for (j=0;j<sizeof(kritters);j++){
+        if (objectp(kritters[j])){
+          tell_object(kritters[j], "You tumble out of the kayak and"
+                                  +" onto the riverbank!");
+          x=random(5)+1;
+          kritters[j]->move_player(ROOMS + "rightbank"+x);
+        }
+      }
+    }
+    return;
+  }
+  if (position<0){
+    tell_room(TO, "The kayak crashes on the left bank of the river!");
+    if (sizeof(kritters)>0){
+      x=random(5)+1;
+      for (j=0;j<sizeof(kritters);j++){
+        if (objectp(kritters[j])){
+          tell_object(kritters[j], "You tumble out of the kayak and"
+                                  +" onto the riverbank!");
+          kritters[j]->move_player(ROOMS + "rightbank"+x);
+        }
+      }
+    }
+    return;
+  } 
+  if (travel_speed == 0){
+    travel_speed = 1;
+  }
+
+// Send a message is the boat is near either bank
+
+  switch(position){
+  case 0:
+    tell_room(TO,"%^BOLD%^%^RED%^Careful! The boat is right alongside the"
+                +" %^WHITE%^left%^RED%^ bank of the river!");
+    break;
+  case 1..2:
+    tell_room(TO,"%^RED%^Watch it! You're getting close to the"
+                +" %^RESET%^left%^RED%^ bank of the river!");
+    break;
+  case 6..7:
+    tell_room(TO,"%^RED%^Watch it! You're getting close to the"
+                +" %^RESET%^right%^RED%^ bank of the river!");
+    break;
+  case 8:
+    tell_room(TO,"%^BOLD%^%^RED%^Careful! The boat is right alongside the"
+                +" %^WHITE%^right%^RED%^ bank of the river!");
+    break;
+  }
+
+// Send a message about the direction the boat is facing on the river
+
+  show_direction(relative_direction);
+
+  if (boat_speed > 0){
+    boat_speed --;
+  }
+  if (boat_speed<0){
+    boat_speed ++;
+  }
+  call_out("travel", 10/travel_speed);
+}
+
+void show_direction(int relative_direction){
+  switch(relative_direction){
+  case 0:
+    tell_room(TO,"%^MAGENTA%^The kayak is pointing straight forward down the river");
+    break;
+  case 1:
+    tell_room(TO,"%^RED%^The kayak is pointing forward, angling slightly toward"
+                +" the right hand bank of the river");
+    break;
+  case 2:
+    tell_room(TO,"%^RED%^The kayak is pointing forward, diagonally toward the"
+                +" right hand bank of the river");
+    break;
+  case 3:
+    tell_room(TO,"%^BOLD%^%^RED%^The kayak is pointing forward, but angling sharply toward the right hand bank of the river");
+    break;
+  case 4:
+    tell_room(TO,"%^BOLD%^%^RED%^The kayak is side on to the current, heading toward the right hand bank of the river");
+    break;
+  case 5:
+    tell_room(TO,"%^BOLD%^%^RED%^The kayak is pointing toward the right hand bank of the river, angling slightly upstream");
+    break;
+  case 6:
+    tell_room(TO,"%^RED%^The kayak is pointing diagonally upstream toward the right hand bank of the river");
+    break;
+  case 7:
+    tell_room(TO,"%^RED%^The kayak is pointing upstream, angling slightly toward the right hand bank of the river");
+    break;
+  case 8:
+    tell_room(TO,"%^MAGENTA%^The kayak is pointing directly upstream");
+    break;
+  case 9:
+    tell_room(TO,"%^BLUE%^The kayak is pointing upstream, angling slightly toward the left hand bank of the river");
+    break;
+  case 10:
+    tell_room(TO,"%^BLUE%^The kayak is pointing diagonally upstream toward the left hand bank of the river");
+    break;
+  case 11:
+    tell_room(TO,"%^BOLD%^%^BLUE%^The kayak is pointing toward the left hand bank of the river, angling slightly upstream");
+    break;
+  case 12:
+    tell_room(TO,"%^BOLD%^%^BLUE%^The kayak is side on to the current, heading toward the left hand bank of the river");
+    break;
+  case 13:
+    tell_room(TO,"%^BOLD%^%^BLUE%^The kayak is pointing forward, angling sharply toward the left hand bank of the river");
+    break;
+  case 14:
+    tell_room(TO,"%^BLUE%^The kayak is pointing diagonally forward toward the left hand bank of the river");
+    break;
+  case 15:
+    tell_room(TO,"%^BLUE%^The kayak is pointing forward, angling slightly toward the left hand bank of the river");
+    break;
+
+  }
+}
+
+
+void paddle_left(){
+  boat_speed+=1;
+  direction +=1;
+  if (boat_speed >2){
+    boat_speed = 2;
+  }
+  if (direction>15){
+    direction = 0;
+  }
+  tell_room(TO, "The nose of the kayak turns to the right");
+  show_direction(query_relative_direction());
+
+//  tell_room(TO, "%^BLUE%^new direction is:%^BOLD%^%^BLACK%^ " 
+//                          + direction);
+//  tell_room(TO, "%^RED%^new relative direction is:%^BOLD%^%^BLACK%^ " 
+//                          + query_relative_direction());
+
+}
+
+void paddle_right(){
+  boat_speed+=1;
+  direction -=1;
+
+  if (boat_speed >2){
+    boat_speed = 2;
+  }
+  if (direction<0){
+    direction = 15;
+  }
+  tell_room(TO, "The nose of the kayak turns to the left");
+  show_direction(query_relative_direction());
+
+//  tell_room(TO, "%^BLUE%^new direction is:%^BOLD%^%^BLACK%^ " 
+//                          + direction);
+//  tell_room(TO, "%^RED%^new relative direction is:%^BOLD%^%^BLACK%^ " 
+//                          + query_relative_direction());
+}
+
+
+void back_paddle_left(){
+  boat_speed-=1;
+  direction -=1;
+  if (boat_speed <-2){
+    boat_speed = -2;
+  }
+  if (direction<0){
+    direction = 15;
+  }
+  tell_room(TO, "The nose of the kayak turns to the left");
+  show_direction(query_relative_direction());
+
+//  tell_room(TO, "%^BLUE%^new direction is:%^BOLD%^%^BLACK%^ " 
+//                          + direction);
+//  tell_room(TO, "%^RED%^new relative direction is:%^BOLD%^%^BLACK%^ " 
+//                          + query_relative_direction());
+}
+
+void back_paddle_right(){
+  boat_speed-=1;
+  direction +=1;
+
+  if (boat_speed <-2){
+    boat_speed = -2;
+  }
+  if (direction>15){
+    direction = 0;
+  }
+  tell_room(TO, "The nose of the kayak turns to the right");
+  show_direction(query_relative_direction());
+//  tell_room(TO, "%^BLUE%^new direction is:%^BOLD%^%^BLACK%^ " 
+//                          + direction);
+//  tell_room(TO, "%^RED%^new relative direction is:%^BOLD%^%^BLACK%^ " 
+//                          + query_relative_direction());
+}
+
+
+void launch(object ob){
+  if (!objectp(ob)){
+    return;
+  }
+  tell_object(ob, "%^BLUE%^Using your paddle, you push off from the"
+                 +" bank");
+  tell_room(TO, "%^BLUE%^Using " + (string)ob->QP + " paddle, " 
+              + (string) ob->QCN + " pushes off from the bank", ob);
+  tell_room(TO,"%^BLUE%^The kayak moves off to the centre of the river");
+  position = 4;
+  remove_exit("out");
+  progress = 0;
+  direction = 0;
+//  tell_room(TO,"About to call 'travel'");
+  call_out("travel",2);
+//  tell_room(TO,"Finished calling 'travel'");
+}
+

@@ -1,0 +1,1 @@
+#define newbieareaoff 1

@@ -1,0 +1,97 @@
+#include <std.h>
+#include <move.h>
+#include "../derrodefs.h"
+object ob;
+int flag;
+inherit MONSTER;
+create(){
+  ::create();
+  set_name("pech");
+  set_id(({"pech","little pech"}));
+  set_race("pech");
+  set_gender("male");
+  set_short("%^RESET%^%^GREEN%^Little pech%^RESET%^");
+  set_long(
+  "  This small humanoid watches you come in with interest showing in his wide pupilless eyes."
+  "   He moves easily about the stone and earth here and seems completly at home."
+  "  A strange aura surrounds him, making you think of the power of earth and the strength of mountains."
+  "  He looks you over as if intersted in something you might have, perhaps you could trade something to him."
+  );
+  set_ac(-13);
+  set_property("swarm",1);
+  set_size(1);
+  set_property("magic resistance",30);
+  set_body_type("human");
+  set_class("fighter");
+  set_mlevel(30);
+  add_search_path("/cmds/fighter");
+  set_alignment(5);
+  set_hd(30,20);
+  set_property("full attacks",1);
+  set_stats("strength",20);
+  set_stats("dexterity",18);
+set_stats("constitution",19);
+  set_stats("intelligence",15);
+  set_stats("wisdom",15);
+  set_stats("charisma",13);
+  set_guild_level("fighter",15);
+  set_hp(1000);
+  set_exp(10000);
+  ob=new("/d/shadow/obj/weapon/pick.c");
+  ob->set_property("enchantment",3);
+  ob->set_short("adamantium pick");
+  ob->set_long("This small dark pick is made of the hardest metal know and heavily enchanted.   It appears quite capable of going through armor and flesh as easily as through rock and stone.");
+  ob->set_id(({"pick","adamantium pick"}));
+  ob->set_wc(2,5);
+  ob->set_large_wc(2,6);
+  ob->move(TO);
+  command("wield pick");
+}
+void heart_beat(){
+  int i,j;
+  object *att;
+  ::heart_beat();
+  if((att=(object *)TO->query_attackers()) !=({})){
+  j=sizeof(att);
+  for(i=0;i<j;i++){
+  if(att[i]->query_highest_level()<30)return 1;
+  call_out("force_me",2,"rush "+att[i]->query_name());
+  }
+  }
+}
+init(){
+  ::init();
+  add_action("trade","trade");
+}
+int trade(string str){
+  if (TP->query_bound() || TP->query_unconciscious()){
+  return 0;
+  }
+  message("environment","%^MAGENTA%^A image forms in your mind of a large emerald with something trapped inside it.\n %^RESET%^Apparently thats all the pech would be interested in.",environment(TO));   
+  ob=(present("emerald",TP));
+  if(ob){
+  write("The pechs eyes light up as he spots the emerald in your possesion.   He reaches out towards it but waits for you to give it to him.");
+  say("The pechs eyes light up as he sees the emerald in "+TPQCN+" possesion and waits for him to give it to him.");
+  return 1;
+  }
+}
+void receive_given_item(object ob){
+    if(!ob->id("emeraldx")) {return;}
+  ob->remove();
+  ob=new(OBJ"emeraldpl.c");
+  flag=TP->query_size();
+  ob->set_size(flag);
+    if(ob->move(TP) != MOVE_OK) ob->move(ETP);
+   if(flag == 3) {ob->set_ac(5);
+  ob->set_long("This plate sparkles in the light sending green prisms dancing over everything in the area.   It looks carved from a single flawless crystal its facets are cut clean and true.  To bad the emerald wasnt a little bigger as it doesnt seem big enough to cover its owner as well as it could.");
+   }
+  say("The pech takes the emerald and begins to franticly work on it.");
+  write("The pech takes the emerald and begins to franticly work on it.");
+  say("As he works you notice he's carving the emerald into exact shapes, and seeming to get more out of it than there was to begin with.");
+  write("The pech keeps eyeing you as he works on the emerald and he seems to be carving great plates out of the emerald.  More than what was there to begin with.");
+  say("%^BOLD%^Suddenly a ghostly figure raises from the emerald and disapears into the rock!");
+  write("%^BOLD%^Suddenly a ghostly figure raises from the emerald and disapears into the rock!");
+  say("The pech drops the pieces of emerald and you realize that they are actually been made to be worn!");
+  write("The pech drops the pieces of emerald and you realize that they are actually been made to be worn!");
+  return 1;
+}

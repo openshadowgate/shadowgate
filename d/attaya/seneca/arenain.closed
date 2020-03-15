@@ -1,0 +1,31 @@
+// removing PC arenas (discussed with Garrett) - Styx 5/10/03
+
+#include <std.h>
+
+inherit VAULT;
+
+void create() {
+   ::create();
+   set_terrain(STONE_BUILDING);
+   set_travel(PAVED_ROAD);
+   set_short("Coliseum hall.");
+   set_property("indoors",1);
+   set_property("light",3);
+   set_long(
+@DESC
+You stand within a massive chamber with a high vaulted ceiling. A 
+brick wall divides the room to the east. The chamber is round and 
+the walls are composed of granite bricks. Gargoyles peer down into 
+the room from perches high above. Thick red tapestries hang from 
+the walls where they slope down at a 90 degree angle to the floor.
+DESC
+   );
+   set_smell("default", "You smell blood in the air here. It hangs like a veil over everything, setting the mood.");
+   set_listen("default", "Every sound in here echoes off the walls.");
+   set_exits(([
+      "east" : "/d/attaya/seneca/arena/defeat",
+      "out" : "/d/attaya/seneca/arenayard",
+   ]));
+   set_door("door", "/d/attaya/seneca/arenayard", "out", 0);
+   set_open("door", 0);
+}

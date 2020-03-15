@@ -1,0 +1,36 @@
+//Coded by the one and only master of monsters...BANE//
+#include <std.h>
+inherit MONSTER;
+void create(){
+    ::create();
+    set_id(({"Thri-Kreen","thri","kreen","thri-kreen"}));
+    set_name("Thri-Kreen");
+    set_short("A noble Thri-Kreen");
+    set_long(
+	"This strange insectoid creature resembles a human sized praying "+
+	"mantis. Its exoskeleton is a sandy yellow, and its multi-faceted "+
+	"eyes are shiny black. The creature has four arms and two legs."
+    );
+    set_body_type("insectoid");
+    set_race("thri-kreen");
+    set_gender("male");
+    set_size(2);
+    set_hd(7,19);
+    set_max_level(15);
+    set_hp(75);
+    set_alignment(7);
+    set_exp(1850);
+    set_overall_ac(4);
+    set("aggressive",16);
+    set_wielding_limbs(({"right fore leg","left fore leg","right mid leg","left mid leg","head"}));
+    new("/d/laerad/mon/obj/thriclaw")->move(this_object());
+    command("wield claw in right fore leg");
+    new("/d/laerad/mon/obj/thriclaw")->move(this_object());
+    command("wield claw in left fore leg");
+    new("/d/laerad/mon/obj/thriclaw")->move(this_object());
+    command("wield claw in right mid leg");
+    new("/d/laerad/mon/obj/thriclaw")->move(this_object());
+    command("wield claw in left mid leg");
+    new("/d/laerad/mon/obj/thriteeth")->move(this_object());
+    command("wield teeth in head");
+}

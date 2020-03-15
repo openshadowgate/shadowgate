@@ -1,0 +1,30 @@
+
+#include <std.h>
+
+inherit VAULT;
+
+void create(){
+    ::create();
+   set_terrain(CITY);
+   set_travel(PAVED_ROAD);
+    set_short("front yard.");
+    set_property("indoors",0);
+    set_property("light",3);
+    set_long(
+      "You are climbing a large staircase leading to the enterance to Thundercracker's Hall.  The trees surrounding this staircase are sculpted to resemble lions leaping towards you.  The walls of the building are smooth red marble with large stained glass windows everywhere.\n"
+      +"   The windows reflect the clouds above as does the shiny marble in places and the vivid colors starkly contrast the lush green yard around you."
+    );
+    set_exits(([
+	"enter" : "/d/attaya/seneca/tchall2",
+	"west" : "/d/attaya/seneca/street4",
+	"north" : "/d/attaya/seneca/street5",
+      ]));
+    set_door("door", "/d/attaya/seneca/tchall2", "enter", 0);
+    set_open("door", 1);
+    set_items(([
+	"path" : "It is a small cobblestone path.",
+	"grass" : "The health green grass has been recently cut.",
+      ]));
+
+
+}

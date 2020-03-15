@@ -1,0 +1,106 @@
+#include <std.h>
+inherit "/std/weapon";
+#include "../derrodefs.h"
+
+  int align;
+  int old;
+  int flag;
+  object ob2;
+create (){
+  ::create();
+  set_id(({"scimitar","scimitar of the silver moon","sword",
+    }));
+  set_name("silver scimitar");
+  set_short("%^BOLD%^WHITE%^Scimitar %^CYAN%^of %^WHITE%^the %^CYAN%^silver %^WHITE%^moon%^RESET%^");
+  set_long(
+  "  %^CYAN%^This beautiful blade glows with light that seems to coming from itself.    The hilt is of black laquered steel and the smoothly curved blade resembles a wanning cresent moon."  
+  "  Power emenates from the blade but it sooths those with good in thier hearts as it burns those with evil in mind."
+  );
+  set_weight(10);
+  set_size(2);
+  set("value",4000);
+  set_wc(4,2);
+  set_large_wc(5,2);
+  set_property("enchantment",4);
+  set_type("slashing");
+  set_prof_type("medium blades");
+  set_hit((: TO,"extra_hit" :));
+  set_wield((:TO,"extra_wield" :));
+  set_unwield((:TO,"extra_unwield" :));
+  set_ac(1);
+}
+int extra_hit(object ob){
+  int dam;
+  if(!random(5)){
+  switch(random(28)){
+    case  0..1:
+  message("my action","%^BOLD%^%^CYAN%^As you slice into "+ob->query_cap_name()+" you see an opening and drive your knee into an exposed area!",TP);
+  message("other_action","%^BOLD%^%^WHITE%^"+TPQCN+" cuts into "+ob->query_cap_name()+" and then quickly drives a knee into an exposed area before "+ob->query_cap_name()+" recovers!",environment(ob),(({TP,ob})));
+  message("my_action","%^BOLD%^%^WHITE%^"+TPQCN+" slices into you and before you can react drives a knee into your ribs!",ob);
+  ob->do_damage("torso",random(5)+1);
+  ob->set_paralyzed(random(5)+2,"You take a couple deep breaths to get your balance again!");
+    return dam;
+    break;
+  case 2:
+  message("my action","%^BOLD%^%^WHITE%^The silver blade %^FLASH%^flashes%^RESET%^%^BOLD%^ with sunlight reflected from inside itself!",TP);
+  message("other_action","%^BOLD%^%^WHITE%^"+TPQCN+"'s sword %^FLASH%^flashes%^RESET%^%^BOLD%^ briliantly as is cuts into "+ob->query_cap_name()+"  who staggers back rubbing thier eyes!",environment(ob),(({TP,ob})));
+  message("my_action","%^BOLD%^%^WHITE%^"+TPQCN+"'s blade %^FLASH%^flashes%^RESET%^%^BOLD%^ briliantly as it swings towards you and you can see nothing but spots before your eyes!",ob);
+  ob->set_blind(1);
+  break;
+  case 3..6:
+  write("A huge %^BOLD%^%^WHITE%^white owl%^RESET%^ swoops down at "+ob->query_cap_name()+"!");
+  say("A huge %^BOLD%^%^WHITE%^white owl%^RESET%^ swoops down at "+ob->query_cap_name()+"!");
+  ob2=new(MON"owl.c");
+  ob2->move(environment(ETO));
+  ob2->command("kill "+ob->query_name());
+  break;
+  case 7..8:
+  message("my action","%^BOLD%^%^CYAN%^As you sweep the blade across "+ob->query_cap_name()+" you spin around with the same movement and slam the pommel back into them!",TP);
+  message("other_action","%^BOLD%^%^CYAN%^"+TPQCN+" sweeps the blade across "+ob->query_cap_name()+" and continues to spin around with the movement bringing the pommel smashing back into "+ob->query_cap_name()+"!",environment(ob),(({TP,ob})));
+  message("my_action","%^BOLD%^%^WHITE%^"+TPQCN+" sweeps his scimitar across your body and coninues to spin with the movement to bring the pommel smashing back into you!",ob);
+  ob->do_damage("torso",4);
+  ob->set_paralyzed(5,"%^BOLD%^%^CYAN%^You stagger dazed from the blow!");
+  break;
+  case 9..26:
+  message("my action","%^BOLD%^%^WHITE%^The blade flashes like moonlight through clouds, and "+ob->query_cap_name()+"s body tries to tear itself apart under the light!",TP);
+  message("other_action","%^BOLD%^%^CYAN%^"+TPQCN+"'s scimitar flashes as it hits "+ob->query_cap_name()+"!",environment(ob),(({TP,ob})));
+  message("my_action","%^BOLD%^%^WHITE%^"+TPQCN+"s sword flashes as it bites into your flesh!",ob);
+  ob->do_damage("torso",random(6)+3);
+  break;
+  case 27:
+  message("my action","%^BOLD%^%^WHITE%^The blade flashes like moonlight through clouds, and "+ob->query_cap_name()+"s body tries to tear itself apart under the light!",TP);
+  message("other_action","%^BOLD%^%^CYAN%^"+TPQCN+"'s scimitar flashes as it hits "+ob->query_cap_name()+"!",environment(ob),(({TP,ob})));
+  message("my_action","%^BOLD%^%^WHITE%^"+TPQCN+"s sword flashes as it bites into your flesh!",ob);
+  ob->do_damage("torso",random(20)+5);
+  break;
+  case 28:
+  message("my action","%^CYAN%^The sword suddenly blurs as it speeds your attacks!",TP);
+  message("other_action","%^CYAN%^" +TPQCN+"'s blade suddenly blurs with speed as he attacks!",environment(ob),(({TP,ob})));
+  message("my_action","%^CYAN%^"+TPQCN+" suddenly blurs with speed as his scimitar slashes at you!",ob);
+  ETO->execute_attack();
+  break;
+  }
+}
+}
+int extra_wield(){
+  align=TP->query_alignment();
+  if(align == (1 || 7|| 4)){
+   write("The scimitar glows brightly as you wield it");
+  say("The scimitar glows brightly as "+TPQCN+" wields it");
+  TP->add_sight_bonus(5);
+  return 1;
+  }
+  else {
+  write("%^BOLD%^%^RED%^The scimitar burns your hands as you try to wield it!");
+  say("%^BOLD%^%^RED%^The scimitar flashes as "+TPQCN+" tries to wield it, burning them!");
+  TP->force_me("drop scimitar");
+  TP->heal(-(random(50)+25));
+  return 0;
+  }
+}
+int extra_unwield(){
+  TP->add_sight_bonus(-5);
+  say(""+TPQCN+"s sword dims as it is released.");
+  write("The sword dims as you let it go.");
+ return 1;
+}

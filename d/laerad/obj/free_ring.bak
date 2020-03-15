@@ -1,0 +1,57 @@
+//Coded by Bane//
+#include <std.h>
+inherit ARMOUR;
+int uses;
+void create(){
+    ::create();
+    set_id(({"ring","free ring","free","ring of free action"}));
+    set_name("ring of free action");
+    set_short("A pearl ring");
+    set_long(
+	"This is a beautiful pearl ring.  Its base is made of pure "+
+	"gold and glimmers like a star.  There is an inscription "+
+	"written on it."
+    );
+    set_weight(3);
+    set_value(2000);
+    set_type("ring");
+    set_limbs(({"right hand","left hand"}));
+    set_ac(0);
+    set_wear((:TO,"wield_me":));
+    set_remove((:TO,"unwield_me":));
+    set_heart_beat(1);
+    uses = 0;
+}
+void init(){
+    ::init();
+    add_action("read","read");
+}
+void wield_me(){
+    write("You feel free and unhindered.");
+    return 1;
+}
+void unwield_me(){
+    write("The feeling of freedom drains from your body.");
+    return 1;
+}
+void read(string str){
+    if(!str) return notify_fail("Read what?\n");
+    if(str != "ring") return 0;
+    write("This is a ring of free action.  It will keep you from being held "+
+	"still for a limited number of times.");
+    return 1;
+}
+void heart_beat(){
+    if(!living(ETO)) return 1;
+    if(!TO->query_worn()) return 1;
+    if(uses > 10){
+	write("The ring's magic fades and disappears.");
+	TO->remove();
+	return 1;
+    }
+    if((string)ETO->query_paralyzed()){
+	tell_object(ETO,"The ring frees you of your paralysis.");
+	ETO->set_paralyzed(0);
+	uses += 1;
+    }
+}

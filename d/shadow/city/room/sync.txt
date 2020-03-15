@@ -1,0 +1,22 @@
+dsync /d/shadow/city /realms/titania/shadowcity
+dsync /realms/titania/shadowcity /d/shadow/city
+
+
+
+dsync /d/shadow/mon/drisman.c /realms/titania/shadowcity
+
+dsync /d/koenig/riddle/rewards/ /realms/titania/rewards
+
+dsync /realms/titania/shadowcity/guild1.c /d/shadow/room/city/cguild/cavalier/guild1.c
+
+
+/d/shadow/room/city/stable
+
+/d/shadow/city/room/stable <-- use
+
+
+
+
+/d/shadow/city/room/stable
+
+/d/shadow/room/city/stable

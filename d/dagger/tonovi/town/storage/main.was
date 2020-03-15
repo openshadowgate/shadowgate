@@ -1,0 +1,50 @@
+#include "/d/dagger/tonovi/town/short.h"
+
+inherit ROOM;
+
+string GRtype;
+int Gmonmade;
+
+void set_room_type(string str);
+string query_room_type();
+
+void create(){
+    ::create();
+   set_terrain(WOOD_BUILDING);
+   set_travel(DIRT_ROAD);
+    GRtype = "none";
+    Gmonmade = 0;
+
+}
+
+void set_room_type(string str){
+    if(str) {
+   GRtype = str;
+    } else {
+   GRtype = "none";
+    }
+}
+
+string query_room_type() { return GRtype; }
+
+void init(){
+    string rmtype;
+    object ob;
+    ::init();
+
+    if(Gmonmade) return;
+    Gmonmade++;
+    if(random(3)) return;
+    if(present("Gtonovimon")) return;
+    rmtype = TO->query_room_type();
+    if(ob = OVER->get_room_monster(rmtype))
+      if(objectp(ob)) ob->move(TO);
+    Gmonmade++;
+    return;
+}
+
+
+void reset(){
+    ::reset();
+    Gmonmade = 0;
+}

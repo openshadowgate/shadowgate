@@ -1,0 +1,19 @@
+                         1   2
+                          *7*
+                          5*6
+                          *8*
+                         3   4
+
+             10
+             *
+          11*U*89
+             *
+             7
+
+             12
+           13 D 14
+             15
+* - filler rooms
+D - down
+U - up
+#'s - special rooms

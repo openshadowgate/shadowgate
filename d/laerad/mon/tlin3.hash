@@ -1,0 +1,106 @@
+//Coded by the one and only master of monsters...BANE//
+// adding id of laeradmon, lowered scroll frequency, etc. *Styx* 12/20/03, last change 10/31/98
+
+#include <std.h>
+
+inherit "/d/laerad/mon/tlininherit.c";
+
+void create() {
+    int num;
+    ::create();
+    set_id(({"tlincalli","sorcerer","Sorcerer Tlincalli", "laeradmon"}));
+    set_name("Sorcerer Tlincalli");
+    set_short("A Sorcerer Tlincalli");
+    set_long(
+            "This horror appears to be part human and part scorpion. It has a "+
+            "dark skinned human torso. Bony plates cover its chest and stomach. "+
+            "The torso is supported by a bony-plated insectoid body. This four "+
+            "foot long body is supported by six legs. Bony plates completely "+
+            "cover the legs making them appear skeletal. The protruding spine "+
+            "continues along the abdomen and extends behind it to form a tail "+
+            "ten feet long tipped in a nasty stinger."
+    );
+    set_body_type("human");
+    set_race("tlincalli");
+    set_gender("male");
+    set_alignment(3);
+    set_size(2);
+    set_max_level(20);
+    set_overall_ac(0);
+    set("aggressive",21);
+    set_property("swarm",1);
+    set_property("magic resistance",20);
+    set_class("mage");
+    set_guild_level("mage",19);
+    set_hd(17,35);
+    set_hp(115);
+    set_attack_bonus(7);
+    set_exp(8500);
+    set_spells(({
+                "magic missile",
+                "fireball",
+                "lightning bolt",
+                "cone of cold",
+                "vampiric touch"}));
+    set_spell_chance(60);
+    remove_limb("right leg");
+    remove_limb("left leg");
+    remove_limb("right foot");
+    remove_limb("left foot");
+    add_limb("abdomen","torso", 0, 0, 0);
+    add_limb("right foreleg","abdomen", 0, 0, 0);
+    add_limb("left foreleg","abdomen", 0, 0, 0);
+    add_limb("right middle leg","abdomen", 0, 0, 0);
+    add_limb("left middle leg","abdomen", 0, 0, 0);
+    add_limb("right rear leg","abdomen", 0, 0, 0);
+    add_limb("left rear leg","abdomen", 0, 0, 0);
+    add_limb("tail","abdomen", 0, 0, 0);
+    add_limb("stinger","tail", 0, 0, 0);
+    set_attack_limbs(({"right hand","left hand","stinger"}));
+    set_attacks_num(3);
+    set_nat_weapon_type("thiefslashing");
+    set_damage(2,4);
+    set_attack_bonus(7);
+    set_hit_funcs( (["stinger":(:TO,"poison":)]) );
+    if(random(10) < 1) {
+        num = random(6);
+        if(num) {
+            new("/d/laerad/obj/bracers"+num)->move(TO);
+        } else {
+            new("/d/laerad/obj/bracers")->move(TO);
+
+        }
+        command("wear bracers");
+    }
+    set_stats("strength",16);
+    set_stats("dexterity",16);
+    set_stats("intelligence",19);
+    set_stats("wisdom",12);
+    set_stats("constitution",12);
+    set_stats("charisma",12);
+}
+
+void poison(object targ) {
+    if(!"/daemon/saving_d"->saving_throw(targ,"paralyzation_poison_death")) {
+        tell_object(targ,"%^BOLD%^RED%^The Tlincalli's poison burns in your veins like fire!");
+        tell_room(ETO,"%^BOLD%^RED%^The Tlincalli's sting causes "+targ->query_cap_name()+" to scream out in pain!",targ);
+        targ->do_damage("torso",roll_dice(10,5));
+        return 1;
+    }
+    return 1;
+}
+void set_paralyzed(int time,string message) {
+    return 1;
+}
+
+/* taking them off these guys entirely for now per Cyric's suggestion until we rebalance
+void reset() {
+    object ob;
+    ::reset();
+    if(!present("scroll") && !random(4)) {  // made random
+        ob=new("/d/magic/scroll");
+        ob->set_spell(6);   // was 8
+        ob->move(TO);
+    }
+}
+*/

@@ -1,0 +1,54 @@
+//cleric_oghma.c - Cleric reward for Riddle Quest.  Circe 4/13/04
+#include <std.h>
+#include "../../nereid.h"
+
+inherit CLERICSHIELD;
+
+void create(){
+   ::create();
+   add_id("buckler");
+   set_obvious_short("A wooden and metal buckler");
+   set_short("%^RESET%^%^ORANGE%^Artificer's Wondrous Buckler%^RESET%^");
+   set_long("%^RESET%^%^ORANGE%^Warm golden oak that has been "+
+      "polished smooth to a high rich shine makes up the body of "+
+      "this buckler.  Attached over the buckler are trio of spiraling "+
+      "triangular shapes, in bronze.  These shapes are attached to "+
+      "the buckler you can tell, but you just cant seem to figure out "+
+      "how, the craftsmanship is like nothing you have ever seen "+
+      "before.  A series of circular holes are recessed into the "+
+      "bronze shapes, "+
+      "most likely for decoration you feel.  Two soft leather straps "+
+      "on the opposite side of this buckler allow it to be attached to "+
+      "the arm.  The buckler is often prized for its ability to give "+
+      "one some protections, but allows them to keep both hands free.  "+
+      "The workmanship on this one still astounds you, for it seems "+
+      "almost as if the metal and wood are one.%^RESET%^");
+   set_lore("This shield is a relic of the faith of Oghma.  It is "+
+      "granted only to those most deserving, and it said to "+
+      "disappear should the wearer ever prove unfaithful.");
+   set_property("lore difficulty",12);
+   set_struck((:TO,"strike_func":));
+   set_remove("%^YELLOW%^You hear the strange turning of gears as "+
+      "you set aside the shield.");
+}
+
+int strike_func(int damage, object what, object who){
+        if(random(1000) < 250){
+        tell_room(environment(query_worn()),"%^YELLOW%^"+ETOQCN+" "+
+           "holds "+ETO->QP+" shield steady as the bronze shapes "+
+           "on it shift to the right.  A volley of small darts "+
+           "shoots out of the shield and into "+who->QCN+", leaving "+
+           "you stunned with wonder for a brief moment.",({ETO,who}));
+        tell_object(ETO,"%^YELLOW%^You can hear some gears within "+
+           "the shield turning as the bronze plates shift to the "+
+           "right.  A volley of small darts shoots out of the "+
+           "buckler and into "+who->QCN+"!  What a WONDROUS "+
+           "buckler indeed!");
+        tell_object(who,"%^YELLOW%^"+ETOQCN+" holds "+ETO->QP+" "+
+           "shield steady as you notice the bronze shapes on "+
+           ""+ETO->QP+" buckler shifting to the right.  Suddenly "+
+           "a volley of darts shoots out of the buckler and into "+
+           "your flesh!");
+        who->do_damage("torso",random(8)+1);
+        return damage;  }
+}

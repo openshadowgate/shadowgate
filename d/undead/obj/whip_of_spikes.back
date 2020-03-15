@@ -1,0 +1,219 @@
+#include <std.h>
+#include <daemons.h>
+#include "../undead.h"
+
+inherit CWEAP"scourge.c";
+
+int CYCLE;
+object owned,LOCUST;
+
+void init() 
+{
+    ::init();
+   if(interactive(TP) && TP == ETO && !owned) owned = TPQTN;
+}
+
+create() 
+{
+    ::create();
+    set_name("whip");
+    set_id(({"whip","demon whip","demon whip of spikes","whip of spikes"}));
+    set_obvious_short("a long spiked whip");    
+    set_short("%^BOLD%^%^RED%^D%^BLACK%^emon sp%^RESET%^i%^BOLD%^%^BLACK%^ke whip%^RESET%^");
+    
+    set_long("%^RED%^This is a long spiked whip, coiled from the flesh "
+        "of angels with long, sharpened pieces of their bones running "
+        "through it to form dangerous looking spikes. This is an unholy "
+        "weapon straight from the pits of hell, be careful how you use it. "
+        "Hell never gives anything for free.%^RESET%^");
+
+    set_value(1200);
+    set_property("enchantment",3);
+    set_wield((: TO,"extra_wield" :));
+    set_unwield((: TO,"extra_unwield" :));
+    set_hit((: TO,"extra_hit" :));
+}
+
+int extra_wield() 
+{
+    if(!ETO->is_player()) return 1;
+    
+    if((int)ETO->query_level() < 20) 
+    {
+        tell_object(ETO,"You have no idea the power your trying to control!\n");
+	    return 0;
+    }
+
+    if((string)ETO->QN != owned ) 
+    {
+        write("Hell knows you did not earn this weapon!");
+        TO->remove();
+        return 0;
+    }  
+    
+    tell_object(ETO,"%^RED%^You soul is filled with the anguish of souls "
+        "long dead!%^RESET%^");
+    tell_room(EETO,"%^BOLD%^%^BLUE%^"+ETO->QCN+" begins to cry for the souls "
+        "of warriors long dead.%^RESET%^",ETO);
+    return 1;
+}
+
+int extra_unwield() 
+{
+    tell_object(ETO,"%^BOLD%^%^BLUE%^You feel a little bit better as you unwield "
+        "this foul weapon.");
+    tell_room(EETO,"%^GREEN%^"+ETO->QCN+" appears happier now.%^RESET%^",ETO);
+    return 1;
+}
+
+int extra_hit(object targ) 
+{
+    int loc,i;
+
+    if(!objectp(ETO))       { return 0; }
+    if(!objectp(targ))      { return 0; }
+    if(random(1000) < 750)  { return 1; }
+    
+    switch(roll_dice(1,4)) 
+    {
+    case 1:
+
+        tell_object(ETO,"%^BOLD%^%^GREEN%^You deliver the sorrows of humanity upon "
+            "your foe!\n%^BLUE%^Tears flow down "+targ->QCN+"'s face as "+targ->QS+" "
+            "begins to sob uncontrollably!%^RESET%^");
+        tell_object(targ,"%^BOLD%^%^GREEN%^"+ETO->QCN+" delivers the sorrows of humanity "
+            "upon you!\n%^BLUE%^Tears flow down your face as you begin to sob "
+            "uncontrollably!%^RESET%^");
+        tell_room(EETO,"%^BOLD%^%^GREEN%^"+ETO->QCN+" delivers the sorrows of humanity "
+            "upon "+targ->QCN+"!\n%^BLUE%^Tears flow down "+targ->QCN+"'s face as "
+	        +targ->QS+" begins to sob uncontrollably!%^RESET%^",({ETO, targ}));
+        
+        if(!ROLLSAVE(targ,PPD)) 
+        { 
+            targ->set_paralzyed(random((int)targ->query_level()),"%^BLUE%^You are sobbing like a fool!%^RESET%^");
+            return random((int)targ->query_level());        
+        }
+
+        return random((int)targ->query_level())/2;
+
+    case 2:
+
+        if(present("locust",EETO)) { return 1; }
+        loc = random((int)targ->query_level() + 1);
+        if(loc > 5) { loc = 5; }
+	    tell_object(ETO,"%^RED%^You utter an ancient phrase of sorrow!%^RESET%^");
+	    ETO->force_me("say %^BOLD%^%^B_GREEN%^Lokisav tenuba r'rrklkt Locutis banork!%^RESET%^");
+	    tell_room(EETO,"%^BOLD%^%^GREEN%^A flying horde of giant %^YELLOW%^locusts%^GREEN%^ "
+	        "enter the area!%^RESET%^");
+  
+        for(i=0;i<loc;i++) 
+        {
+	        new(MON"locust.c")->move(EETO);
+	        if(LOCUST = present("locust",EETO)) 
+            {
+	            LOCUST->force_me("kill "+targ->QN);
+	        }
+	    }
+
+	    return 1;
+
+    case 3:
+
+        tell_object(ETO,"%^BOLD%^%^RED%^You begin to sing the song of sorrow and "
+            "are hasted in your attacks!%^RESET%^");
+        tell_object(targ,"%^BOLD%^%^RED%^"+ETO->QCN+" begins to sing the song of sorrow "
+            "and is hasted in attacking you!%^RESET%^");
+        tell_room(EETO,"%^BOLD%^%^RED%^"+ETO->QCN+" begins to sing the song of sorrow "
+            "and is hasted in attacking!%^RESET%^",({ETO, targ}));    
+
+	    if(CYCLE > 5) CYCLE = 0;
+
+        switch(CYCLE)
+        {
+        case 0:
+            ETO->force_me("say `My life suffocates'");
+            ETO->force_me("say `Planting seeds of hate'");
+            ETO->force_me("say `I've loved, turned to hate'");
+            ETO->force_me("say `Trapped far beyond my fate'");
+            tell_object(ETO,"%^RED%^You land a quick blow!%^RESET%^");       
+            targ->do_damage(roll_dice(1,8));
+	        CYCLE += 1;
+            return 1;
+
+        case 1:
+            ETO->force_me("say `I give, You take'");
+            ETO->force_me("say `This life that I forsake'");
+            ETO->force_me("say `Been cheated of my youth'");
+            ETO->force_me("say `You turned this lie to truth'");
+            tell_object(ETO,"%^RED%^You land a quick blow!%^RESET%^");       
+            targ->do_damage(roll_dice(1,8));
+	        CYCLE += 1;
+            return 1;
+
+        case 2:
+            ETO->force_me("say `Anger, Misery'");
+            ETO->force_me("say `You'll suffer unto me'");
+            ETO->force_me("say `Harvester of sorrow'");
+            ETO->force_me("say `Language of the mad'");
+            tell_object(ETO,"%^RED%^You land a quick blow!%^RESET%^");       
+            targ->do_damage(roll_dice(1,8));
+	        CYCLE += 1;
+            return 1;
+
+        case 3:
+            ETO->force_me("say `Pure black looking clear'");
+            ETO->force_me("say `My work is done soon here'");
+            ETO->force_me("say `Try getting back to me'");
+            ETO->force_me("say `Get back which used to be'");
+            tell_object(ETO,"%^RED%^You land a quick blow!%^RESET%^");       
+            targ->do_damage(roll_dice(1,8));
+	        CYCLE += 1;
+            return 1;
+
+        case 4:
+            ETO->force_me("say `Drink up, Shoot in'");
+            ETO->force_me("say `Let the beatings begin'");
+            ETO->force_me("say `Distributor of pain'");
+            ETO->force_me("say `Your loss becomes my gain'");
+            tell_object(ETO,"%^RED%^You land a quick blow!%^RESET%^");       
+            targ->do_damage(roll_dice(1,8));
+	        CYCLE += 1;
+            return 1;
+
+        case 5:
+            ETO->force_me("say `All have said their prayers'");
+            ETO->force_me("say `Invade their nightmares'");
+            ETO->force_me("say `To see into my eyes'");
+            ETO->force_me("say `You'll find where murder lies'");
+            tell_object(ETO,"%^RED%^You land a quick blow!%^RESET%^");       
+            targ->do_damage(roll_dice(1,8));
+	        CYCLE += 1;
+            return 1;
+        }
+
+        return 1;
+
+    case 4:
+    
+        if(!EETO->query_property("indoors"))
+        {
+            if((string)WEATHER_D->Check_Weather(ETO) != "%^BOLD%^%^CYAN%^It is clear.")
+            {
+                new("/cmds/priest/_call_lightning.c")->use_spell(ETO,targ,(int)ETO->query_level()-10,100);
+                return 1;
+            }
+        }
+
+        tell_object(ETO,"%^BOLD%^%^CYAN%^As you deliver the smiting blow, the whip "
+            "hums and you feel refreshed!%^RESET%^");
+        tell_object(targ,"%^BOLD%^%^CYAN%^"+ETO->QCN+" delivers a blow upon you and "
+            "looks refreshed!%^RESET%^");
+        tell_room(EETO,"%^BOLD%^%^CYAN%^"+ETO->QCN+" delivers a blow upon "+targ->QCN+" "
+            "and looks refreshed!%^RESET%^",({ETO, targ}));
+        i = random((int)ETO->query_max_hp()/20);
+        ETO->add_hp(i);
+	    return i;                 
+
+    }
+    return 1;
+}

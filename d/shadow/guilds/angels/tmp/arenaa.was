@@ -1,0 +1,41 @@
+//Coded by Bane//
+#include <std.h>
+inherit ROOM;
+void create(){
+    ::create();
+    set_name("Arena Entrance");
+    set_short("Arena Entrance");
+    set_long(
+	"This is the entrance for the Arena.  Warriors may sit here and prepare "+
+	"for their upcoming battles.  Benches line the walls, weapons and armors "+
+	"litter the floor, most broken from previous fights.  A large man with "+
+	"a black cloak on watches over the room in the corner, making sure no one "+
+	"gets out of hand."
+    );
+    set_property("indoors",1);
+    set_property("light",2);
+    set_property("no teleport",1);
+    set_property("arena",1);
+    set_property("deathmove","/d/shadow/guilds/angels/tmp/heal");
+    set_listen("default","You can hear the distant cheering of the crowd.");
+    set_smell("default","The air reeks of blood and sweat.");
+    set_exits( ([
+	"up":"/d/shadow/guilds/angels/tmp/hall1",
+	"down":"/d/shadow/guilds/angels/tmp/arena1"
+    ]) );
+}
+void init(){
+    ::init();
+    add_action("go_down","down");
+}
+void go_down(string str){
+    object *user;
+    int i, j;
+    user = users();
+    i = sizeof(user);
+    for(j=0;j<i;j++){
+	if((string)user[j]->query_guild() == "Fallen Angel"){
+	    tell_object(user[j],"%^MAGENTA%^<angels> %^RESET%^"+TPQCN+" has entered the arena.");
+	}
+    }
+}

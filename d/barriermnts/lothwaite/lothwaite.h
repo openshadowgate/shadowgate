@@ -1,0 +1,10 @@
+#define LOTHPATH "/d/barriermnts/lothwaite/inherit/pathway.c"
+#define PATHEXIT "/d/barriermnts/lothwaite/rooms/"+
+#define PATHEND "/d/barriermnts/lothwaite/inherit/pathwayend.c"
+#define MON "/d/barriermnts/lothwaite/mon/"+
+#define OBJ "/d/barriermnts/lothwaite/obj/"+
+#define BARROWS "/d/barriermnts/lothwaite/inherit/barrows.c"
+#define BTOMB "/d/barriermnts/lothwaite/inherit/barrow_tomb.c"
+#define TOWNPATH "/d/barriermnts/lothwaite/inherit/vilpathway.c"
+#define STORAGE "/d/barriermnts/lothwaite/inherit/"+
+#define LOTHSHORE "/d/barriermnts/lothwaite/inherit/shore.c"

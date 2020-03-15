@@ -1,0 +1,84 @@
+#include <std.h>
+inherit ARMOUR;
+
+int FLAG;
+
+void create()
+{
+	::create();
+      set_obvious_short("An ornate gold belt");
+	set_name("belt of giant strength");
+	set_short("%^YELLOW%^Belt of Giant Strength%^RESET%^");
+      set_lore("This ornate belt was created by the grand shaman "+
+         "Helgatha Rothmar in the firbolg village of Lothwaite.  "+
+         "He is the only one to have ever successfully crafted "+
+         "such a belt, though similar magics are thought to exist "+
+         "elsewhere.  It is said that a belt such as this will "+
+         "increase the strength of the wearer, though only to a "+
+         "certain point.");
+      set_property("lore difficulty",15);
+	set_id(({"belt","gold belt","ornate belt","belt of giant strength"}));
+	set_long(
+         "%^YELLOW%^This belt is made of golden filigree worked "+
+         "into a flexible web making it stronger than any metal "+
+         "known to man, dwarf, or firbolg.  Between the strands, "+
+         "tiny mu%^WHITE%^l%^YELLOW%^ti%^BLUE%^f%^YELLOW%^ac%^GREEN%^"+
+         "e%^YELLOW%^te%^RED%^d %^YELLOW%^gems have been set, "+
+         "sparkling in a %^RED%^r%^RESET%^%^ORANGE%^a%^YELLOW%^i"+
+         "%^GREEN%^n%^CYAN%^b%^BLUE%^o%^MAGENTA%^w %^YELLOW%^of "+
+         "%^WHITE%^hues%^YELLOW%^.  The belt has a solid gold "+
+         "clasp set with bevelled %^BLUE%^sap%^CYAN%^p%^BLUE%^"+
+         "hi%^CYAN%^r%^BLUE%^es%^YELLOW%^."
+	);
+	set_weight(5);
+	set_value(2000);
+	set_ac(0);
+      set_size(random(3)+1);
+	set_property("enchantment",1);
+	set_type("clothing");
+	set_limbs(({"waist"}));
+	set_wear((:TO,"wearme":));
+	set_remove((:TO,"removeme":));
+   if(!random(3)) FLAG = 1;
+   else FLAG = 0;
+}
+
+int wearme()
+{
+int mystat,curstat;
+   if((string)ETO->query_name() == "firbolg ghost") return 1;
+mystat = ETO->query_base_stats("strength");
+curstat = ETO->query_stats("strength");
+   if(ETO->query_lowest_level() < 20) {
+	tell_object(ETO,"You are not experienced enough to use this equipment.");
+		return 0;
+   }
+   if(mystat < curstat){
+      tell_object(ETO,"The belt refuses to be worn with something "+
+         "already granting you strength!");
+      return 0;
+   }
+   if(ALIGN->is_good(ETO)) {
+      tell_object(ETO,"%^CYAN%^You feel a strong feeling of guilt "+
+         "as you wear the belt.");
+   }
+   if(FLAG = 1){
+      tell_object(ETO,"%^YELLOW%^As you fasten the belt around your "+
+         "waist, you feel power flowing through your sinews.");
+      ETO->add_stat_bonus("strength",1);
+   }else{
+      tell_object(ETO,"%^YELLOW%^You bucklet the exquisite belt around "+
+         "your waist.");
+   }
+   return 1;
+}
+
+int removeme()
+{
+   if(FLAG){
+      tell_object(ETO,"%^RESET%^%^ORANGE%^You feel the strength of "+
+         "the mighty firbolgs leave you as you unbuckle the belt.");
+      ETO->add_stat_bonus("strength",-1);
+   }
+   return 1;
+}

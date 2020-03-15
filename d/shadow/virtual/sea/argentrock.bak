@@ -1,0 +1,28 @@
+#include <std.h>
+#include </d/islands/argentrock/argabbr.h>
+
+inherit DOCK;
+
+int is_virtual() { return 1; }
+int is_water() { return 1; }
+int is_dock() { return 1; }
+
+void create() {
+    ::create();
+   set_terrain(BARREN);
+   set_travel(DECAYED_FLOOR);
+    set("indoors",0);
+   set_property("no teleport",1);
+    set("light",3);
+    set("short","Argentrock Dock");
+    set("long","%^CYAN%^Argentrock Dock%^BOLD%^
+You are standing on an old dock. The wood the dock is made from is already "+
+   "starting to rot. You want step off the dockyard as soon as possible "+
+    "so that you will not fall through the rotten boards. The ocean is "+
+    "borderless. A few seabirds occasionally fly over your head. To the "+
+    "south you see a dense forest.");
+    set_exits( (["south":PATH+"argpath4"]) );
+    set_smell("default","You smell the ocean and the fresh breezes from "+
+        "the forest.");
+    set_listen("default","You heard waves splashing the wooden dock.");
+}

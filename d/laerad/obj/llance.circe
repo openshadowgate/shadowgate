@@ -1,0 +1,77 @@
+//updated by Circe 6/12/04 with new desc, lore, etc.
+#include <std.h>
+inherit "/d/common/obj/weapon/hhlance";
+//inherit "std/weapon";
+
+void create() {
+    ::create();
+    set_name("Lightning Lance");
+    set_id(({"lance","lightning","lightning lance","heavy lance"}));
+    set_obvious_short("%^YELLOW%^heavy gold-plated lance%^RESET%^");
+    set_short("%^BOLD%^%^YELLOW%^Lightning Lance%^RESET%^");
+    set_long(
+       "%^BOLD%^This beautifully crafted lance has been plated with "+
+       "%^YELLOW%^gold%^WHITE%^.  Deep carvings in the shape of "+
+       "%^YELLOW%^lightning bolts %^WHITE%^run full-length along the "+
+       "lance and reveal the heavy steel beneath.  Unlike most lances, "+
+       "this one does not end in a simple steel tip.  Rather, it has "+
+       "been fitted with a %^YELLOW%^jagged tip %^WHITE%^made to look "+
+       "like a stylized lightning bolt that would leave quite a tear "+
+       "in an opponent.  The handle of the lance is made of %^YELLOW%^"+
+       "oak %^WHITE%^painted the %^BLUE%^deep blue of the sky %^WHITE%^"+
+       "and fitted with a ring of cabochon-cut %^RESET%^white "+
+       "citrine%^BOLD%^ gems.%^RESET%^");
+    set_lore("This lightning lance is a conduit of a good god's power. "+
+       "Made specifically for the knights of the good orders, it can +"
+       "potentially call upon the power of the gods themselves.  The "+
+       "lance is enchanted during a collaborative ceremony of priests of "+
+       "at least three good faiths, who each request the blessings "+
+       "of their god for this unique lance.  The white citrine is said "+
+       "to clear the mind and aid the prayers of mortals to their "+
+       "deities.");
+//    set_weight(15);
+    set_value(1500);
+//    set_wc(1,12);
+//    set_large_wc(1,21);
+    set_property("enchantment",3);
+//    set_size(1);
+//    set_type("piercing");
+//    set_prof_type("lance");
+//    set_property("lance",1);
+    set_wield((:TO,"wield":));
+    set_unwield((:TO,"removeme":));
+    set_hit((:TO,"check":));
+}
+
+int wield() {
+   if((int)TP->query_alignment()%3){
+        ETO->set_property("good item",1);
+        tell_room(ETP,"%^CYAN%^A low humming over comes the room.");
+        return 1;
+    }
+    write("You are thoroughly rejected by this item.");
+    return 0;
+}
+int removeme() {
+    ETO->set_property("good item",-1);
+    return 1;
+}
+
+int check(object targ) {
+   ::check(targ);
+    if(!objectp(ETO)) return 0;
+    if(!objectp(targ)) return 0;
+    if(!random(15)) {
+        if(ETO->query_diety())
+            tell_room(environment(targ),"%^YELLOW%^"+capitalize(ETO->query_diety())+" calls forth a great bolt of power.");
+        return random(7);
+    }
+    return 0;
+}
+
+
+int query_size() {
+    if(objectp(ETO)&&living(ETO))
+        return(int)ETO->query_size()  ;
+    return ::query_size();
+}

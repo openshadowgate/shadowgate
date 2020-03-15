@@ -1,0 +1,143 @@
+#include <std.h>
+#include "../../valley.h"
+inherit ROOM;
+
+#define MON ({"ghoul","wight","wraith","zombie","ghast"})
+#define MON2 ({"skeleton","haunt","heucuva","mzombie"})
+
+int i, j, g;
+string str, type;
+
+void create()
+{
+	::create();
+   set_terrain(HEAVY_FOREST);
+   set_travel(DIRT_ROAD);
+	set_property("outside",0);
+	set_property("light", 1);
+	set_short("%^BLUE%^Dark Trail%^RESET%^");
+	set_long(
+	"%^BLUE%^You are travelling along a dark wooded trail."+
+	" The path is small but well worn, though it looks"+
+	" as if it hasn't been used in some time. The trees"+
+	" press in closely around and block out most of the"+
+	" sky, giving the place a %^BOLD%^%^BLACK%^gloomy%^RESET%^%^BLUE%^ atmosphere.\n"
+	);
+	set("night long",
+	"%^BLUE%^The trail in front of you is %^BOLD%^%^BLACK%^dark%^RESET%^%^BLUE%^"+
+        " and %^RESET%^gloomy%^BLUE%^, the"+
+	" trees block out even the %^BOLD%^%^WHITE%^starlight%^RESET%^%^BLUE%^ and seem to loom"+
+	" over you. %^BOLD%^%^BLACK%^Evil%^RESET%^%^BLUE%^ seems to emanate from around you.\n"
+	);
+	set_smell("default",
+	"You smell the strong scent of pine mingled with"+
+	" a dank fungus aroma."
+	);
+	set_listen("default",
+	"The wind whispers eerily through the trees."
+	);
+	set_items( ([
+	"trees" : "%^BLUE%^The trees are tall and sinister, blocking"+
+	" out most light, you can see why this is called the"+
+	" Dark Forest.",
+	({"path","trail"}) : "%^ORANGE%^This is an old trail that used to be"+
+	" well used, but now leaves and moss litter the"+
+	" ground and it looks as if no one has passed this"+
+	" way in some time."
+	]) );
+}
+
+void reset()
+{
+	j = random(5);
+	g = random(4);
+	str = MON[j];
+	type = MON2[g];
+
+	::reset();
+	if(!present("monster")) {
+		if(query_night() == 1) {
+			switch(random(7)) {
+				case 0:
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					break;
+				case 1:
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					break;
+				case 2:
+					new(MONS+"hshade")->move(TO);
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					break;
+				case 3:
+					new(MONS+"ghost")->move(TO);
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					break;
+				case 4:
+					new(MONS+"zombie")->move(TO);
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					new(MONS+str)->move(TO);
+					break;
+				case 5:
+					new(MONS+"wskeleton")->move(TO);
+					new(MONS+"wraith")->move(TO);
+					new(MONS+"wraith")->move(TO);
+					new(MONS+"wight")->move(TO);
+					break;
+				case 6:
+					new(MONS+"ghoul")->move(TO);
+					new(MONS+"ghast")->move(TO);
+					new(MONS+"ghoul")->move(TO);
+					new(MONS+"ghoul")->move(TO);
+					new(MONS+"ghoul")->move(TO);
+					break;
+			}
+		}
+
+		else {
+			switch(random(6)) {
+				case 0:
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					break;
+				case 1:
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					break;
+				case 2:
+					new(MONS+"wskeleton")->move(TO);
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					break;
+				case 3:
+					new(MONS+"hshade")->move(TO);
+					new(MONS+type)->move(TO);
+					new(MONS+type)->move(TO);
+					break;
+				case 4:
+					new(MONS+"mzombie")->move(TO);
+					new(MONS+"skeleton")->move(TO);
+					new(MONS+"skeleton")->move(TO);
+					new(MONS+"wskeleton")->move(TO);
+					break;
+				case 5:
+					new(MONS+"wskeleton")->move(TO);
+					new(MONS+"haunt")->move(TO);
+					new(MONS+"heucuva")->move(TO);
+					new(MONS+"skeleton")->move(TO);
+					break;
+			}
+		}
+	}
+}

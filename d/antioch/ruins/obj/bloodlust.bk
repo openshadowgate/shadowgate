@@ -1,0 +1,101 @@
+#include <std.h>
+#include "../ruins.h"
+inherit WEAPON;
+
+void create()
+{
+	::create();
+	set_name("%^BOLD%^%^RED%^Axe of Bloodlust%^RESET%^");
+	set_short("%^BOLD%^%^RED%^Axe of Bloodlust%^RESET%^");
+	set_id(({"axe","battle axe","axe of bloodlust","Axe"}));
+	set_long(
+	"This is a large battle axe. It has a wooden handle that is wrapped around"+
+	" by strips of leather hide. The blade of the axe is sharpest steel, and"+
+	" has a %^RED%^red%^RESET%^ tinge to it."
+	);
+	set_weight(14);
+	set_size(3);
+	set_wc(2,6);
+	set_large_wc(2,6);
+	set_type("slash");
+	set_prof_type("large axe");
+	set_weapon_speed(10);
+	set_value(30);
+	set_wield((:TO,"wieldme":));
+	set_property("enchantment",1);
+	set_unwield((:TO,"removeme":));
+	set_hit((:TO,"hitme":));
+}
+
+int wieldme()
+{
+	if(ETO->query_level() < 10) {
+		tell_object("You are too inexperienced to wield such a weapon.");
+		return 0;
+	}
+   if(ETO->query_property("good item")) {
+      tell_object(ETO,"The axe refuses to be wielded by someone using such goodly items!");
+      return 0;
+   }
+	tell_object(ETO,"%^BOLD%^%^RED%^Bloodlust surges through your veins as"+
+	" you grip the hilt of the axe.");
+	tell_room(environment(ETO),"%^BOLD%^%^RED%^A look of bloodlust washes over"+
+	" "+ETO->query_cap_name()+"'s face as "+ETO->query_subjective()+" grips"+
+	" the axe.",ETO);
+   ETO->set_property("evil item",1);
+	return 1;
+}
+
+int removeme()
+{
+	tell_object(ETO,"%^RED%^You feel the andrenaline drain from your body as"+
+	" you release your grip on the axe.");
+	tell_room(environment(ETO),"%^RED%^"+ETO->query_cap_name()+" gets a tired"+
+	" look on "+ETO->query_possessive()+" face as "+ETO->query_subjective()+""+
+	" releases "+ETO->query_possessive()+" grip on the axe.",ETO);
+   ETO->remove_property("evil item");
+	return 1;
+}
+
+int hitme(object targ)
+{
+	if(!random(8)) {
+		tell_object(ETO,"%^RED%^You swing the axe in a fearsome chop, hitting"+
+		" "+targ->query_cap_name()+" hard.");
+		tell_object(targ,"%^RED%^"+ETO->query_cap_name()+" swings "+ETO->query_possessive()+""+
+		" axe in a fearsome chop, hitting you very hard.");
+		tell_room(environment(ETO),"%^RED%^"+ETO->query_cap_name()+" swings "+ETO->query_possessive()+""+
+		" axe in a fearsome chop, hitting "+targ->query_cap_name()+" hard.",({ETO,targ}));
+		targ->do_damage("torso",random(5)+3);
+		return 1;
+	}
+	if(!random(13)) {
+		if(!"daemon/saving_d"->saving_throw(targ,"paralyzation_poison_death")) {
+			tell_object(ETO,"%^BOLD%^%^RED%^You draw back and execute a full swing"+
+			" at "+targ->query_cap_name()+", impacting so hard that "+targ->query_subjective()+""+
+			" seems momentarily stunned.");
+			tell_object(targ,"%^BOLD%^%^RED%^"+ETO->query_cap_name()+" draws"+
+			" back and executes a full swing, impacting directly with your"+
+			" torso. You feel the jolt throughout your entire body.");
+			tell_room(environment(ETO),"%^BOLD%^%^RED%^"+ETO->query_cap_name()+" draws"+
+			" back and executes a full swing, impacting directly with "+targ->query_cap_name()+"'s"+
+			" torso.",({ETO,targ}));
+			targ->set_paralyzed(random(5)+2,"You are too stunned to move.");
+			targ->do_damage("torso",random(8)+6);
+			return 1;
+		}
+		else {
+			tell_object(ETO,"%^ORANGE%^You draw back and execute a full swing"+
+			" at "+targ->query_cap_name()+", impacting so hard that "+targ->query_subjective()+""+
+			" you feel the jolt through the hilt of your axe.");
+			tell_object(targ,"%^ORANGE%^"+ETO->query_cap_name()+" draws back and"+
+			" executes a full swing, connecting hard with your torso. You"+
+			" barely manage to hold your ground.");
+			tell_room(environment(ETO),"%^ORANGE%^"+ETO->query_cap_name()+" draws back and"+
+			" executes a full swing, connecting hard with "+targ->query_cap_name()+"'s"+
+			" torso.",({ETO,targ}));
+			targ->do_damage("torso",random(8)+6);
+			return 1;
+		}
+	}
+}

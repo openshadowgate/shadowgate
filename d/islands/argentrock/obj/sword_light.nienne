@@ -1,0 +1,274 @@
+#include <std.h>
+
+inherit WEAPON;
+
+string owner;
+int COUNT,FLAG,enchantment;
+
+void init() {
+   ::init();
+   if(interactive(TP) && TP == environment(TO) && !owner) {
+      owner = TPQN;
+      return;
+   }
+   set_heart_beat(1);
+}
+
+void create(){
+   ::create();
+   set_name("great sword of light");
+   set_id(({"sword","great sword","great sword of light"}));
+   set_obvious_short("magnificent great sword");
+   set_short("%^YELLOW%^Great sword of Light%^RESET%^");
+    set_long("%^YELLOW%^Very few adventurers of "+
+       "this realm had ever seen this awesome sword. With a long, shiny and "+
+      "gradually pointing tip, this sword is immensely long and heavy. "+
+      "Yet, the blade is immersed in %^CYAN%^LIGHT %^YELLOW%^and a warm "+
+      "feeling engulfs you as you hold the sword. An eyecatching symbol "+
+       "of the Sun glowing with a moderate red light is carved in the "+
+      "blade close to the hilt.");
+   set_property("enchantment",5);
+   set_wc(1,8);
+   set_large_wc(1,12);
+   set_wield( (: TO,"more_wield" :) );
+   set_unwield( (: TO,"more_unwield" :) );
+   set_hit( (: TO,"more_hit" :) );
+   set_weight(15);
+   set_value(800);
+   set_size(2);
+   set_type("slashing");
+   FLAG = 0;
+   enchantment = 5;
+}
+
+int more_wield() {
+   if( !interactive(ETO) || avatarp(ETO) )
+      return 1;
+   if( (int)ETO->query_level() < 30 ) {
+      write("You don't have the power to lift this huge sword!");
+      return 0;
+   }
+   else {
+      if( (string)ETOQN != owner ) {
+         write("%^BOLD%^%^BLUE%^The %^RESET%^ORANGE%^Great sword of "+
+            "Light %^BOLD%^%^BLUE%^fails bonding with you and vanishes.");
+         TO->remove();
+         return 0;
+      }
+      else {
+         if( ETO->is_class("ranger") ) {
+            say("%^CYAN%^The symbol of the Sun on the blade of the "+
+               "%^ORANGE%^Great sword of Light %^CYAN%^shines brightly "+
+               "as "+ETOQCN+" wields it.");
+            write("%^CYAN%^The symbol of the Sun on the blade of the "+
+               "%^ORANGE%^Great sword of Light %^CYAN%^shines brightly "+
+               "as you wield it.");
+         ETO->set_property("good item",1);
+            return 1;
+         }
+         else if( ETO->is_class("paladin") ) {
+            say("%^CYAN%^The symbol of the Sun on the blade of the "+
+               "%^ORANGE%^Great sword of Light %^CYAN%^shines as "+
+               ETOQCN+" wields it.");
+            write("%^CYAN%^The symbol of the Sun on the blade of the "+
+               "%^ORANGE%^Great sword of Light %^CYAN%^shines as you "+
+               "wield it.");
+            if( (int)TO->query_property("enchantment") == 5 ) {
+               remove_property("enchantment");
+               set_property("enchantment",3);
+         ETO->set_property("good item",1);
+            }
+            return 1;
+         }
+         else {
+            write("%^BLUE%^The symbol of the Sun on the blade of the "+
+               "%^ORANGE%^Great sword of Light %^BLUE%^suddenly emits a "+
+               "very bright light and shocks you!");
+            say("%^BLUE%^The symbol of the Sun on the blade of the "+
+               "%^ORANGE%^Great sword of Light %^BLUE%^suddenly emits a "+
+               "very bright light and shocks "+ETOQCN+"!");
+            ETO->do_damage("left hand",20 + random(10));
+            ETO->add_attacker(TO);
+            ETO->continue_attack();
+            ETO->remove_attacker(TO);
+            return 0;
+         }
+      }
+   }
+}
+
+void more_unwield() {
+// fixing to get rid of the TP to fix bugs *Styx* 11/23/03, last change 7/01
+   tell_room(EETO, "%^CYAN%^The symbol of the Sun on the blade of the %^ORANGE%^"+
+      "Great sword of Light %^CYAN%^stops its shining as "+ETOQCN+
+      " unwields it.", ETO);
+   write("%^CYAN%^The symbol of the Sun on the blade of the %^ORANGE%^"+
+      "Great sword of Light %^CYAN%^stops shining as you unwield "+
+      "it.");
+   ETO->set_property("good item",-1);
+   return 1;
+}
+
+int more_hit(object vic) {
+   object *weapons,*armours,tp,etp;
+   int choose,pick,diff,old_ac,new_ac;
+   string weapon_name,armour_name,tpqcn;
+   if( !interactive(ETO) || !interactive(vic) )
+      return random(10);
+   tp = query_wielded();
+   etp = environment(tp);
+   tpqcn = tp->query_cap_name();
+   if( tp->is_class("ranger") && ( vic->is_class("ranger")
+      || vic->is_class("paladin") ) ) {
+      if(enchantment == 0)
+         return 0;
+      if( etp->query_property("arena") )
+         return roll_dice(5,8);
+      if(COUNT == 1)
+         return 0;
+      enchantment--;
+      tell_room(etp,"%^MAGENTA%^The great sword of light shouts: "+
+         "%^RESET%^WHY!? WHY!?!? WHY!?!?!?");
+      tell_object(tp,"%^ORANGE%^The Great sword of Light seems "+
+          "disappointed as you attack a fellow warrior of Light.");
+      tell_object(vic,"%^ORANGE%^The Great sword of Light wielded "+
+         "by "+tpqcn+" seems disappointed and flashes a bit.");
+      remove_property("enchantment");
+      set_property("enchantment",enchantment);
+      COUNT = 1;
+      call_out("reset_count",20);
+      return 0;
+   }
+   if( tp->is_class("paladin") && ( vic->is_class("ranger")
+      || vic->is_class("paladin") ) ) {
+      if( (int)TO->query_property("enchantment") == 0 )
+         return 0;
+      if( ETP->query_property("arena") )
+         return roll_dice(4,8);
+      tell_room(etp,"%^MAGENTA%^The great sword of light shouts: "+
+         "%^RESET%^WHY!? WHY!?!? WHY!?!?!?");
+      tell_object(tp,"%^ORANGE%^The Great sword of Light seems "+
+          "disappointed as you attack a fellow warrior of Light.");
+      tell_object(vic,"%^ORANGE%^The Great sword of Light wielded "+
+         "by "+tpqcn+" flashes and then stops shining.");
+      remove_property("enchantment");
+      return 0;
+   }
+   switch( (int)vic->query_alignment() ) {
+      case 3:
+      case 6:
+      case 9:
+         if(random(100) == 13) {
+            if(FLAG != 0)
+               return 0;
+            weapons = (object *)vic->query_wielded();
+            weapons = distinct_array(weapons);
+            if( sizeof(weapons) == 0 )
+               return 0;
+            choose = random( sizeof(weapons) );
+            weapon_name = weapons[choose]->query_name();
+            if( (int)weapons[choose]->query_property("enchantment")
+            && (int)weapons[choose]->query_property("enchantment") <= 0)
+               return 0;
+            if( !weapons[choose]->query_property("enchantment") )
+               return 0;
+            weapons[choose]->remove_property("enchantment");
+             tell_object(tp,"%^RED%^The symbol on your sword emits a "+
+               "holy bright light at "+vic->query_cap_name()+"'s "+
+               weapon_name+"!\nAll of a sudden, the "+weapon_name+
+               " wielded by "+vic->query_cap_name()+" ceases giving "+
+               "out a magical arua and looks perfectly normal!");
+            tell_room(etp,"%^RED%^The symbol on "+tpqcn+"'s sword "+
+               "emits a holy bright light at "+vic->query_cap_name()+
+               "'s "+weapon_name+"!\nAll of a sudden, the "+weapon_name+
+               " wielded by "+vic->query_cap_name()+" ceases giving "+
+                "out a magical arua and looks perfectly normal!",({vic,tp}));
+            tell_object(vic,"%^RED%^The symbol on "+tpqcn+"'s sword "+
+               "emits a holy bright light at your "+weapon_name+"!\nAll "+
+               "of a sudden, the "+weapon_name+" wielded by you ceases "+
+                "giving out a magical arua and looks perfectly normal!");
+            FLAG = 600;
+            set_heart_beat(1);
+            return random(10);
+         }
+         if(random(50) > 42) {
+            tell_object(tp,"%^RED%^The %^ORANGE%^Great sword of Light "+
+               "%^RED%^lands a heavy blow on the evil being, "+
+               vic->query_cap_name()+"!!");
+            tell_room(etp,"%^RED%^The %^ORANGE%^Great sword of Light "+
+               "%^RED%^wielded by "+tpqcn+" lands a heavy blow on the "+
+               "evil being, "+vic->query_cap_name()+"!!",({vic,tp}));
+            tell_object(vic,"%^RED%^The %^ORANGE%^Great sword of Light "+
+               "%^RED%^wielded by "+tpqcn+" lands a heavy blow on your "+
+               "evil body!!");
+            return random((int)tp->query_level()/3 + 10);
+         }
+         break;
+      default:
+         if(random(150) == 7) {
+            if(FLAG != 0)
+               return 0;
+            armours = (object *)vic->all_armour();
+            if( sizeof(armours) == 0 )
+               return 0;
+            pick = random( sizeof(armours) );
+            armour_name = armours[pick]->query_name();
+            if( (int)armours[pick]->query_property("enchantment")
+            && (int)armours[pick]->query_property("enchantment") <= 1)
+               return 0;
+            if( !armours[pick]->query_property("enchantment") )
+               return 0;
+            diff = (int)armours[pick]->query_property("enchantment") - 1;
+            armours[pick]->remove_property("enchantment");
+            armours[pick]->set_property("enchantment",1);
+            old_ac = (int)vic->query_ac();
+            new_ac = old_ac + diff;
+            vic->set_overall_ac(new_ac);
+            tell_object(vic,"%^BLUE%^The symbol on "+tpqcn+"'s sword "+
+                "emits a holy bright light at your "+armour_name+"!\nAll "+
+               "of a sudden, the magical arua given out by your "+
+                armour_name+" is reduced!");
+            tell_object(tp,"%^BLUE%^The symbol on your sword emits a "+
+               "holy bright light at "+vic->query_cap_name()+"'s "+
+               armour_name+"!\nAll of a sudden, the magical arua given "+
+              "out by "+armour_name+" worn by "+vic->query_cap_name()+
+               " is reduced!");
+            tell_room(etp,"%^BLUE%^The symbol on "+tpqcn+"'s sword "+
+               "emits a holy bright light at "+vic->query_cap_name()+
+               "'s "+armour_name+"!\nAll of a sudden, the magical arua "+
+               "given out by "+armour_name+" worn by "+
+               vic->query_cap_name()+" is reduced!",({vic,tp}));
+            FLAG = 750;
+            set_heart_beat(1);
+            return random(10);
+         }
+         if(random(50) > 45) {
+            tell_object(tp,"%^BLUE%^The %^ORANGE%^Great sword of Light "+
+               "%^BLUE%^lands a heavy blow on "+vic->query_cap_name()+
+               "!");
+            tell_room(etp,"%^BLUE%^The %^ORANGE%^Great sword of Light "+
+               "%^BLUE%^wielded by "+tpqcn+" lands a heavy blow on "+
+               vic->query_cap_name()+"!",({vic,tp}));
+            tell_object(vic,"%^BLUE%^The %^ORANGE%^Great sword of Light "+
+               "%^BLUE%^wielded by "+tpqcn+" lands a heavy blow on you!");
+            return random((int)tp->query_level()/3 + 5);
+         }
+         return random((int)tp->query_level()/10 + 5);
+         break;
+   }
+}
+
+void reset_count() {
+   COUNT = 0;
+   return;
+}
+
+void heart_beat() {
+   if(FLAG > 0) {
+      FLAG--;
+      return;
+   }
+   if(FLAG <= 0)
+      FLAG = 0;
+   set_heart_beat(0);
+}

@@ -1,0 +1,12 @@
+Boot -----: Warning: query_limbs() did not return an array.
+Chain ----: PASSED
+Cloak ----: PASSED
+Cloak1 ---: PASSED
+Hide -----: Warning: query_type() returned unknown armour type: armour.
+Leather --: PASSED
+Leather1 -: PASSED
+Plate ----: PASSED
+Ring -----: PASSED
+Ring_p ---: PASSED
+Robe -----: Warning: query_ac() is not balanced.
+Robe1 ----: Warning: query_ac() is not balanced.

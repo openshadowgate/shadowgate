@@ -1,0 +1,156 @@
+#include <std.h>
+inherit MONSTER;
+int DEATH = 0;
+object blurgle;
+void create() {
+    ::create();
+    set_name("solar");
+set_id(({"solar"}));
+    set_short("%^BOLD%^%^WHITE%^SOLAR%^RESET%^");
+    set_long(
+	"%^BOLD%^%^WHITE%^This incredible spirit stands boldly before you. " 
+	"It's skin is the color of molten copper, it's hair is bronze "
+	"colored and it's eyes appear to be two topaz gems inset into "
+	"the eye sockets. Massive muscles ripple across it's body. "
+	"It has a pair of angelic wings which are a coppery-gold color. "
+	"The entire creature is bathed in a white glow indicating a holy "
+ 	"prescense about it. From legend, you have heard of this creature "
+	"and know of it's tremendous strength and god-like magical powers. "
+	"Also from legend you know that attacking one is probably the "
+	"stupidest thing you could ever do. %^RED%^;)%^RESET%^"
+    );
+    set_overall_ac (-15);
+    set_gender("male");
+    set_race("spirit");
+    set_class("paladin");
+    set_guild_level("paladin",30);
+    set_hp(700);
+    set_max_hp(700);
+    set_property("magic resistance",95);
+    set_hd(30,7);
+    set_exp(50000);
+    set_size(3);
+    set_body_type("human");
+    set_wielding_limbs(({"right hand","left hand"}));
+    set_stats("strength",30);
+    set_stats("dexterity",30);
+    set_stats("charisma",30);
+    set_stats("constitution",30);
+    set_stats("wisdom",30);
+    set_stats("intelligence",30);
+    set_emotes(5, ({
+	"The %^BOLD%^%^WHITE%^SOLAR%^RESET%^ gazes into your soul.",
+	"%^BOLD%^%^WHITE%^SOLAR says: Are you noble enough to challenge "
+      "the impending threat?%^RESET%^",
+	"The light surrounding the %^WHITE%^%^BOLD%^SOLAR%^RESET%^ "
+	"brightens and then dims.",
+	"The %^WHITE%^%^BOLD%^SOLAR%^RESET%^ sizes you up."
+      }),0);
+    set_funcs(({"power"}));
+    set_func_chance(25);
+    new("/d/dagger/drow/obj/avenger.c")->move(TO);
+    command("wield avenger in left hand");
+}
+void heart_beat() {
+    ::heart_beat();
+    
+    if(blurgle = present("snake",environment(this_object()))) {
+            command("say I hate snakes!");
+            message("environment",
+                "%^WHITE%^SOLAR squashes the snake!"
+                "%^RESET%^"
+            ,environment(this_object()));
+            blurgle->remove();
+	    return;
+    } else {
+            return;
+    }
+}
+int power() {
+    object ob = this_object();
+    object vic = ob -> query_current_attacker();
+    int move = random (2) + 1;
+    switch (move) {
+    case 1:
+	message("environment",
+	    "%^BOLD%^%^WHITE%^SOLAR says, `Think not mere mortal that i "
+	    "will be defeated! You are weak and foolish!'%^RESET%^"
+	,environment(ob));
+	vic->set_paralyzed(random(100),
+            "%^BOLD%^%^WHITE%^You are held by a holy force!%^RESET%^"
+	);
+	tell_room(environment(vic),
+	    "%^WHITE%^%^BOLD%^The SOLAR touches "+vic->query_cap_name()+"'s "
+	    "forehead and "+vic->query_cap_name()+
+	    " is stunned by a holy force and unable to move!%^RESET%^"
+	,({TP,ob}));
+	tell_object(vic,
+	    "%^WHITE%^%^BOLD%^The SOLAR touches your forehead and you "
+	    "are stunned by a holy force!%^RESET%^"
+	);
+	message("environment",
+	    "%^BOLD%^%^YELLOW%^The %^WHITE%^SOLAR%^YELLOW%^ checks his "
+	    "status and retreats to his home plane."
+	    "\nAs he fades from view he mutters, "
+	    "`%^WHITE%^Do not think i am done with you! "
+	    "You will pay for your ignorance foolish mortal!"
+	    "%^YELLOW%^'%^RESET%^"
+	,environment(ob));
+	TO->move_player("/realms/grazzt/workroom", "with a blinding flash");
+	message("environment",
+	    "%^BOLD%^%^WHITE%^SOLAR chuckles."
+	    "\nSOLAR says, `Just stopped in to heal up before trashing "
+	    "some mortal who dared to attack me.'%^RESET%^"
+	,environment(ob));
+	call_out("trans",30);
+	return 1;
+    case 2:
+      if( DEATH < 2 ) {
+	message("environment",
+	    "%^WHITE%^%^BOLD%^The SOLAR traces the symbols of death in "
+	    "the air!%^RESET%^"
+	,environment(ob));
+	tell_object(vic,
+	    "%^WHITE%^%^BOLD%^The SOLAR points the %^RED%^finger of "
+	    "death%^WHITE%^ towards you!%^RESET%^"
+	);
+	tell_room(environment(vic),
+	    "%^WHITE%^%^BOLD%^The SOLAR points the %^RED%^finger of death "
+	    "%^WHITE%^ at "+vic->query_cap_name()+"!%^RESET%^"
+	,vic);
+	if("/daemon/saving_d"->saving_throw(vic,"spell")) {
+	message("environment",
+	    "%^RED%^%^BOLD%^You feel the aura of death leave the "
+	    "area.%^RESET%^"
+	,environment(ob));
+	} else {
+	message("environment",
+	    "%^RED%^%^BOLD%^The aura of death seizes it's foe and enforces "
+	    "the death symbol!%^RESET%^"
+	,environment(ob));
+	vic->do_damage("torso",1000);
+        DEATH = DEATH + 1;
+    }
+	return 1;
+  } else {
+      command("say GROWL! How dare you attack me!");
+      return 1;
+  }
+ }
+}
+int trans() {
+    object ob = this_object();
+    TO->set_hp((int)TO->query_max_hp());
+    message("environment",
+	"%^BOLD%^%^WHITE%^The SOLAR says, `I am ready to fight again...the "
+        "mortal will perish.'%^RESET%^"
+	"\n%^YELLOW%^%^BOLD%^The %^WHITE%^SOLAR%^YELLOW%^ "
+	"vanishes back to where it came from.%^RESET%^"
+    ,environment(ob));
+    TO->move_player("/d/dagger/drow/rooms/tun4", "with a blinding flash");
+    message("environment",
+	"%^BOLD%^%^WHITE%^The SOLAR says, "
+	"`I have returned to end your life foolish mortal!'%^RESET%^"
+    ,environment(ob));
+}
+void set_paralyzed(int time,string message){return 1;}

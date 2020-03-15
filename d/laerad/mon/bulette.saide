@@ -1,0 +1,31 @@
+#include <std.h>
+inherit MONSTER;
+void create(){
+    ::create();
+    set_id( ({"bulette"}) );
+    set_name("Bulette");
+    set_short("A bulette");
+    set_long(
+	"This monster is a terrifying predator. It is nearly 10 feet long "+
+	"and looks like an armadillo. Its armored shell provides it very good protection, he looks like a tough opponent."
+    );
+    set_body_type("dog");
+    set_race("bulette");
+    set_gender("male");
+    set_size(2);
+    set_hd(9,1);
+    set_hp(90);
+    set_overall_ac(0);
+    set_exp(4000);
+    set("aggressive",24);
+    set_class("fighter");
+    set_guild_level("fighter",9);
+    add_money("gold",random(500));
+    set_wielding_limbs(({"right hand","left hand","head"}));
+    new("/realms/bane/obj/buletteclaw")->move(this_object());
+    command("wield claw in right hand");
+    new("/realms/bane/obj/buletteclaw")->move(this_object());
+    command("wield claw in left hand");
+    new("/realms/bane/obj/buletteteeth")->move(this_object());
+    command("wield teeth in head");
+}

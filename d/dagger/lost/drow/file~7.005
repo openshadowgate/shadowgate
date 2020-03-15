@@ -1,0 +1,35 @@
+#include <std.h>
+inherit ROOM;
+void create() {
+::create();
+set_property("light",1);
+set_property("indoors",1);
+set_short("%^BLUE%^Drow soldier barrack%^RESET%^");
+set_long(
+"%^BLUE%^This is one of the soldier's barracks which house a few of the many Drow soldiers found within the city. It is fairly disorderly and the light here is quite dim. Four plain cots line the walls and are covered with various animal furs.%^RESET%^"
+);
+set_listen("default",
+"You hear the sounds of the city groan outside."
+);
+set_smell("default",
+"There is the awful smell of raw, rotten meat in the air."
+);
+set_items(([
+"lichen":"%^MAGENTA%^The lichen is of a very unusual type and seems to provide the light source within the cavern tunnel.%^RESET%^",
+"cots":"The cots have various animal furs covering them.",
+"furs":"The furs are smelly and old...and quite worthless.",
+"cot":"This cot looks quite uncomfortable."
+]));
+set_exits(([
+"west":"/d/dagger/drow/rooms/city11.c"
+]));
+}
+void reset() {
+::reset();
+if (!present("drow")) {
+new("/d/dagger/drow/mon/drows.c")->move(TO);
+new("/d/dagger/drow/mon/drows.c")->move(TO);
+new("/d/dagger/drow/mon/drows.c")->move(TO);
+new("/d/dagger/drow/mon/drowcap.c")->move(TO);
+}
+}

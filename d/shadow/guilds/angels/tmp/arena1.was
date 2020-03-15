@@ -1,0 +1,41 @@
+//Coded by Bane//
+#include <std.h>
+inherit ROOM;
+void create(){
+    ::create();
+    set_name("Arena of the Ancients");
+    set_short("Arena of the Ancients");
+    set_long(
+	"You have walked into a huge coliseum.  Blood and guts litter the floor "+
+	"from previous battles to the death.  Many warriors have become legends "+
+	"in this arena defeating even the most powerful of entities, perhaps "+
+	"you can meet your challenge and walk away a champion."
+    );
+    set_property("indoors",1);
+    set_property("light",2);
+    set_property("no teleport",1);
+    set_property("arena",1);
+    set_property("deathmove","/d/shadow/guilds/angels/tmp/heal");
+    set_listen("default","The cheering of the crowd is deafening.");
+    set_smell("default","The smell of blood is very strong.");
+    set_exits( ([
+	"up":"/d/shadow/guilds/angels/tmp/arenaa",
+	"north":"/d/shadow/guilds/angels/tmp/arena2",
+	"east":"/d/shadow/guilds/angels/tmp/arena3"
+    ]) );
+}
+void init(){
+    ::init();
+    add_action("go_up","up");
+}
+void go_up(string str){
+    object *user;
+    int i, j;
+    user = users();
+    i = sizeof(user);
+    for(j=0;j<i;j++){
+	if((string)user[j]->query_guild() == "Fallen Angel"){
+	    tell_object(user[j],"%^MAGENTA%^<angels> %^RESET%^"+TPQCN+" has left the arena.");
+	}
+    }
+}

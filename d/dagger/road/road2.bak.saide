@@ -1,0 +1,68 @@
+#include <std.h>
+#include "/d/dagger/road/short.h"
+inherit ROOM;
+
+void create()
+{
+    ::create();
+   set_terrain(VILLAGE);
+   set_travel(DIRT_ROAD);
+    set_property("light", 2);
+    set_short("Outside the Tollbooth.");
+    set_long(
+      "%^CYAN%^You are standing at the tollbooth to the Dagger Reaches.  It is of obvious gnomish design, but has fallen into disrepair.  The guards here look slovenly and lax in their duties.  There is a sign here that you should read."
+    );
+    set_smell("default", "%^BOLD%^%^GREEN%^You can smell the scent of dirty socks.");
+    set_listen("default", "%^YELLOW%^You can hear a guy snoring loudly inside the tollbooth.");
+
+    set_items(([
+	"road" : "Looks rather dusty and rarely used. Kinda makes you wonder what the heck your doing here.",
+	"sea" : "You can see the surf over 50 feet below you over the cliffs to the east.",
+	"cliffs" : "They are formed from granite and worn deep by the action of the surf.",
+	"pole" : "This is a mechanical tollbooth pole, it's red striped so you can't miss it.",
+	"sign" : "Try reading it!",
+	"tollbooth" : "It looks like a standard tollbooth, used by money hungry goverments everywhere."
+      ]));
+
+    set_exits(([
+	"east" : RPATH "tollbooth",
+	"southwest" : RPATH "road1",
+      ]));
+}
+void reset(){
+    ::reset();
+    if(!present("human guard")) {
+	new(MPATH "private")->move(this_object());
+    }
+    if(query_exit("northeast")) {remove_exit("northeast");}
+}
+void init()
+{
+    ::init();
+
+    add_action("readsign","read");
+    add_action("pay","pay");
+}
+
+int readsign(string str)
+{
+    if ((str=="sign"))
+    {
+	write(
+	  "%^BOLD%^   You are passing into the Dagger Reaches, now under the governage of the Duke of Tonovi.  To pay for our glorious leaders works, you will be expected to pay a toll of 20 gold to pass."
+	);
+	return 1;
+    }
+    return 0;
+}
+int pay(string str){
+    if ((str=="20 gold") || (str=="guard 20 gold") || (str=="human 20 gold") || (str=="tollbooth guard 20 gold")) 
+    {
+        if(!TP->query_funds("gold",20)) return notify_fail("You haven't the money!\n");
+        TP->use_funds("gold",20);
+	tell_object(this_player(),"You pay the toll and the guard lifts the pole.");
+	say (""+this_player()->query_cap_name()+" pays the toll and the guard lifts the pole.");
+	add_exit(RPATH "road3", "northeast");
+    }
+    return 1;
+}

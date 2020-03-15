@@ -1,0 +1,40 @@
+inherit "/std/monster";
+
+create(){
+	object ob;
+	::create();
+	set_name("orc");
+	set_id(({"Orc"}));
+	set("short","An old Orc");
+	set_long(
+	"  This ugly creature looks as though age has gotten the better of him."
+	"  Its low jutting forehead and green skin do nothing to compliment its advancing years."
+	"  Even its canine teeth are broken and jagged."
+	);
+	set("race","orc");
+	set_gender("male");
+	set_body_type("human");
+	set_hd(1,0);
+	set_overall_ac(6);
+	set_size(2);
+	set_stats("strength",10);
+	set_stats("intelligence",8);
+	set_stats("dexterity",5);
+	set_stats("charisma",2);
+	set_stats("constitution",10);
+	set_stats("wisdom",5);
+	set_money("gold",60 + random(10));
+	set_class("fighter");
+	set_max_hp(5);
+	set_hp(5);
+	set_max_sp(10);
+	set_sp(10);
+	set_exp(15);
+	set("aggressive",1);
+	set_wielding_limbs(({"right hand","left hand"}));
+	ob = new("/d/deku/weapons/short1.c");
+	ob->set_property("monsterweapon",1);
+	ob->move(this_object());
+	command("wield sword in left hand");
+}
+

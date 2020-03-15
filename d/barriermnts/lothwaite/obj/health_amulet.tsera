@@ -1,0 +1,81 @@
+#include <std.h>
+inherit ARMOUR;
+
+int lowlvl;
+
+void create()
+{
+   ::create();
+   set_name("amulet of health");
+   set_short("%^GREEN%^Amulet of Health%^RESET%^");
+   set_obvious_short("%^BOLD%^a platinum amulet%^RESET%^");
+   set_id(({"amulet","bloodstone amulet","platinum amulet","neckthing"}));
+   set_long("%^BOLD%^This amulet is made of a platinum torque "+
+      "that fits snuggly around the wearer's neck.  A pendant "+
+      "made of a square %^RESET%^%^GREEN%^bloo%^RED%^d%^GREEN%^stone "+
+      "%^BOLD%^%^WHITE%^the color of %^RESET%^%^GREEN%^jade "+
+      "%^BOLD%^%^WHITE%^with streaks of %^RESET%^%^RED%^red "+
+      "%^BOLD%^%^WHITE%^dangles from the torque, providing "+
+      "a little ornamentation to an otherwise plain - if "+
+      "costly - piece of jewelry.");
+   set_lore("The Amulet of Health was created ages ago by the firbolgs "+
+      "of Lothwaite to help them combat the long winters in the "+
+      "high altitudes of the Barrier Mountains.  The extra "+
+      "heartiness has helped many firbolgs survive when the "+
+      "fury of Auril's wrath would have taken them out.  "+
+      "The manner of their construction is a well-guarded "+
+      "secret even today.");
+   set_property("lore difficulty",10);
+   set_weight(2);
+   set_type("clothing");
+   set_limbs(({"neck"}));
+set_ac(0);
+set_value(1750);
+   set_property("enchantment",1+random(2));
+   set_wear((:TO,"wearme":));
+   set_remove((:TO,"unwearme":));
+}
+
+int wearme(){
+   if(!ETO->is_singleClass()){
+   lowlvl = ETO->query_lowest_level();
+   }
+   else{
+   lowlvl=ETO->query_level();
+   }
+   if((string)ETO->query_name() == "firbolg ghost") return 1;
+   if((int)ETO->query_level() < 15){
+      tell_object(ETO,"%^BOLD%^%^RED%^The magic of the bloodstone "+
+         "is far too powerful for you!");
+      TO->remove();
+      return 0;
+   }
+   if((int)ETO->query_hp() < (int)ETO->query_max_hp()){
+      tell_object(ETO,"The amulet can only grant you extra "+
+         "health if you are already healthy!  Please, heal "+
+         "yourself and try again.");
+      return 0;
+   }
+   tell_object(ETO,"%^GREEN%^You feel much more hearty as you "+
+      "fasten the %^CYAN%^cool %^GREEN%^amulet around your neck.");
+   tell_room(EETO,"%^GREEN%^"+ETOQCN+" fastens a platinum amulet "+
+      "around "+ETO->QP+" neck.",ETO);
+   ETO->add_extra_hp(lowlvl);
+   ETO->set_property("amulet_hp",lowlvl);
+   return 1;
+}
+
+int unwearme(){
+   tell_object(ETO,"%^GREEN%^You feel strangely insubstantial "+
+      "as you slip off the torque.");
+   tell_room(EETO,"%^GREEN%^"+ETOQCN+" removes a platinum amulet "+
+      "from around "+ETO->QP+" neck.",ETO);
+   if(ETO->query_property("amulet_hp")){
+      ETO->add_extra_hp(-1*(int)ETO->query_property("amulet_hp"));
+      if ((int)ETO->query_extra_hp() < 0) {
+         ETO->add_extra_hp(-1 * (int)ETO->query_extra_hp());
+      }
+      ETO->remove_property("amulet_hp");
+   }
+   return 1;
+}

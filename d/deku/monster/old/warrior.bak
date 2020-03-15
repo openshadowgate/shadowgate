@@ -1,0 +1,60 @@
+#include <std.h>
+
+inherit "/std/monster";
+
+create() {
+  ::create();
+  set_name("Warrior");
+  set_id(({"warrior", "darkelf", "drow", "elf"}));
+  set("race", "undead");
+  set_gender("male");
+  set("short", "Darkelf Warrior");
+    set("long", "This warrior died long ago, but his skin has not rotted.\n"+
+                "He was a fine warrior many years ago.\n");
+  set_level(19);
+  set_body_type("elf");
+  set_class("fighter");
+  set("aggressive", 20);
+  set_alignment(9);
+  set_hd(19,5);
+  set_size(2);
+  set_stats("strength",26);
+  set_stats("wisdom",15);
+  set_stats("intelligence",15);
+  set_stats("dexterity",20);
+  set_stats("constitution",20);
+  set_stats("charisma",10);
+  set_hp(205);
+  set_wielding_limbs(({"right hand","left hand"}));
+  add_money("gold",random(1000));
+  set_languages(({"common","farsi"}));
+  set_gender("male");
+  set_emotes(20,({"The warrior slaps you with his open hand.\n",
+                  "You are hit by the warrior's mighty fist.\n",
+                  "The Warrior laughs at this enemy's attempt.\n"}),1);
+  new("/d/deku/weapons/elf_slayer")->move(this_object());
+  command("wield sword in right hand");
+  set_exp(2500);
+  set_funcs(({"hack"}));
+  set_func_chance(50);
+}
+
+void hack(object targ) {
+  int need, roll, tlevel;
+  tlevel = this_object()->query_level();
+  roll = random(20) + 3;
+  need = (("/daemon/bonus_d.c"->thaco(tlevel,"fighter")) - (targ->query_ac()));
+  if(!((roll >= need) || (roll == 20))) {
+    tell_room(environment(targ), "The Drow warrior receives a burst of power, but nothing happens!");
+    return 1;
+  }
+  tell_room(environment(targ), "%^RED%^The Drow Warrior receives a burst of power, and hacks upon "+targ->query_cap_name()+"!");
+  tell_object((targ), "%^BLUE%^Drow slashs you in the left foot with his longsword.\n"+
+                      "%^BLUE%^Drow tickles you in the head with his longsword.\n"+
+                      "%^BLUE%^Drow bashs you in the left hand with his longsword.\n"+
+                      "%^BLUE%^Drow bashs you in the right foot with his longsword.\n"+
+                      "%^BLUE%^Drow tickles you in the left foot with his longsword.");
+  tell_room(environment(targ), "%^RED%^The Drow's power fades away!\n");
+  targ->do_damage("torso", roll_dice(5,6)+7);
+  return 1;
+}

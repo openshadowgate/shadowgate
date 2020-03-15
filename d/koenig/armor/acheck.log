@@ -1,0 +1,15 @@
+Buckler --: PASSED
+Chain ----: PASSED
+Coif -----: PASSED
+Helm -----: PASSED
+Hide -----: PASSED
+Leather --: PASSED
+Mshield --: PASSED
+Plate ----: PASSED
+Protring -: Warning: query_ac() is not balanced.
+Ring -----: PASSED
+Robe -----: PASSED
+Scale ----: PASSED
+Shield ---: PASSED
+Sshield --: PASSED
+Studded --: PASSED

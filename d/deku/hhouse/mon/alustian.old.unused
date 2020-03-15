@@ -1,0 +1,163 @@
+#include <std.h>
+#include <daemons.h>
+#include "/d/deku/inherits/graveyard.h"
+inherit MONSTER;
+
+create() {
+    object weap;
+    int lev;
+    ::create();
+    set_name("alustian");
+    set_id(({"alustian","creature","mutated creatore",
+    "twisted creature","creature"}));
+    
+    set_gender("male");
+
+    set_race("twisted and mutated creature");
+    set_short("A twisted and mutated creature");
+    
+    set_long("%^YELLOW%^The flesh of this strange creature "+
+    "is hardened and decaying, having split open in many "+
+    "spots, with the remnants of spilled puss evident in "+
+    "those spots.  The facial structure of this creature has "+
+    "been twisted and mutated somehow, leaving the skull that "+
+    "remains in a strange oval shape.  The eyes that are set "+
+    "into the skull are a deep and hideous green, glowing with an "+
+    "intense anger.  The ears set on either side of the head of "+
+    "this creature are pointed and sharpened at the tip, almost "+
+    "resembling the ears of an elf, but more like that of an "+
+    "orc.  The rest of his "+
+    "body is muscular and solid, but the bones just beneath the "+
+    "flesh are in a state of being very similiar to the skull, "+
+    "all of them are twisted and jut out of the body at strange, "+
+    "grotesque angles.%^RESET%^");    
+        
+    set_body_type("human");
+    set_alignment(9);
+    set_class("ranger");
+    lev = 20 + random(4);
+    set_mlevel("ranger",lev);
+    set_guild_level("ranger",lev);
+    set_guild_level("cleric",lev - 8);
+    
+    set_stats("strength",18);
+    set_stats("constitution",17);
+    set_stats("wisdom",17);
+    set_stats("intelligence",14);
+    set_stats("dexterity",19);
+    set_stats("charisma",10);
+
+    set("aggressive",25);
+    set_overall_ac(-8);
+
+    set_hp(lev * 15 + random(21));
+    
+    weap = new("/d/common/obj/weapon/whip");
+    weap->set_property("enchantment",1 + random(2));
+    weap->move(TO);
+    command("wield whip");
+    
+    weap = new("/d/common/obj/weapon/longsword");
+    weap->set_property("enchantment",1 + random(2));
+    weap->move(TO);
+    command("wield sword");
+    add_search_path("/cmds/ranger");        
+    set_exp(query_max_hp() * 27);
+    set_spells(({"earthenair"}));
+    set_spell_chance(25);
+    set_funcs(({"specials"}));
+    set_func_chance(50); 
+    set_property("full attacks",1);
+
+}
+  
+void specials(object targ) {
+    object *liv, *fod, ntarg;
+    int x, dam, targs;
+
+    if(!objectp(TO)) return;
+
+    fod = ({});
+    liv = all_living(ETO);
+    liv -= ({TO});
+    
+    targs = 2 + random(4);
+
+    for(x = 0;x < sizeof(liv);x++) {
+        if(!interactive(liv[x])) {
+            fod += ({liv[x]});
+            continue;
+        }
+    }
+
+    if(!sizeof(fod)) {
+        switch(random(2)) {
+            case 0:
+                set_property("magic",1);
+                if(TO->query_property("whirled")) {
+                    TO->remove_property("whirled");
+                }
+                command("whirl");
+                set_property("magic",-1);
+                return;
+                break;
+            case 1:
+                command("say life from you and into me, this is "+
+                "how it simply must be!");
+                command("cackle");
+                if(!SAVING_D->saving_throw(targ,"spell")) {
+                    tell_object(targ,"%^RED%^An immense pain wracks "+
+                    "your body as you feel some unseen force "+
+                    "reach %^BOLD%^%^BLACK%^deep%^RESET%^%^RED%^ "+
+                    "into you and pull something out!%^RESET%^");
+                    if(!SAVING_D->saving_throw(targ,"paralyzation_poison_death")) {
+                        targ->set_paralyzed(10,"%^RED%^The pain "+
+                        "has constricted your muscles!%^RESET%^");
+                    }                    
+                    dam = roll_dice(4,10);
+                }
+                else {
+                    tell_object(targ,"%^RED%^An immense pain "+
+                    "wracks your body as you feel some unseen force "+
+                    "reach beneath your flesh and pull something "+
+                    "out!%^RESET%^");
+                    if(!SAVING_D->saving_throw(targ,"paralyzation_poison_death")) {
+                        targ->set_paralyzed(10,"%^RED%^The pain "+
+                        "has constricted your muscles!%^RESET%^");
+                    } 
+                    dam = roll_dice(2,10);
+                }
+                targ->do_damage(targ->return_target_limb(),dam);
+                TO->add_hp(dam * 2);
+                return;
+                break;
+        }
+    }
+
+    for(x = 0;x < targs;x++) {
+
+        while(!objectp(ntarg)) { 
+            ntarg = fod[random(sizeof(fod))];
+        }
+
+        tell_room(ETO,"%^BOLD%^%^GREEN%^The creature "+
+        "looks at "+ntarg->QCN+" and cackles insanely "+
+        "before chanting a quiet phrase!%^RESET%^",targ);
+            
+        tell_object(ntarg,"%^BOLD%^%^GREEN%^The creature "+
+        "looks at you and cackles insanely before chanting "+
+        "a quiet phrase!%^RESET%^");
+            
+        ntarg->do_damage(ntarg->return_target_limb(),roll_dice(4,10));
+        if(!objectp(ntarg)) fod -= ({ntarg});
+        if(!sizeof(fod)) break;
+
+        ntarg = 0;
+        continue;
+    }
+    return;
+}
+    
+
+   
+     

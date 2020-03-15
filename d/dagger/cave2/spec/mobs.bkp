@@ -1,0 +1,235 @@
+#include "/d/dagger/cave2/short.h"
+#define BASE "/d/dagger/cave2/cave"
+#define ROOMS ({"13", "15", "20", "23", "27", "31", "39", "46", "60", "69", "76", "89", "95", "99", "103", "119", "131", "140"})
+
+inherit ROOM;
+
+int mademonsters;
+int floor;
+
+int do_ogres();
+int get_demon(int x);
+void first_floor();
+
+void create(){
+    ::create();
+    if(random(35)) set_property("no teleport", 1);
+    set_property("light", random(3));
+    set_property("used sticks", 1);
+}
+
+void set_floor(int x){
+    floor = x;
+}
+
+int query_floor(){
+    return floor;
+}
+
+int make_monsters(int lvl) {
+    int num;
+    if(mademonsters) {
+	return 0;
+    }
+
+    mademonsters = 1;
+    if(random(2))
+	return 0;
+
+    tell_room(ETP, "%^BOLD%^You have stumbled upon a group of demons!!!");
+    mademonsters = 1;
+    switch (lvl) {
+
+    case 1:
+	if(random(5))
+       first_floor();
+	else {
+	    new(MPATH "demon.c")->move(TO);
+	    if(!random(10)) new(MPATH "demon2b.c")->move(TO);
+	    else if(!random(10)) new(MPATH "demon.c")->move(TO);
+	}
+	break;
+
+    case 2:
+	if(!random(3)){
+	    do_ogres();
+	} else {
+	    num = random(9);
+	    switch(num){
+	    case 0:
+		new(MPATH "G_demon")->move(TO);
+		if(!random(20)) get_demon(1);
+		break;
+	    case 1:
+		new(MPATH "summoner2")->move(TO);
+		if(!random(10)) get_demon(1);
+		break;
+	    case 2:
+		new(MPATH "berserker2")->move(TO);
+		if(!random(15)) get_demon(1);
+		break;
+	    case 3:
+	    case 4:
+	    case 5:
+		new(MPATH "demon")->move(TO);
+		if(!random(10)) get_demon(1);
+		if(!random(10)) get_demon(1);
+		break;
+	    case 6:
+	    case 7:
+	    case 8:
+		new(MPATH "demon2b")->move(TO);
+		if(!random(10)) get_demon(1);
+		if(!random(10)) get_demon(1);
+		break;
+	    default:
+		do_ogres();
+	    }
+	}
+	break;
+
+
+
+
+    case 3:
+	if(!random(4)){
+	    do_ogres();
+	} else {
+	    num = random(11);
+	    switch(num){
+	    case 0:
+		new(MPATH "crone")->move(TO);
+		if(!random(20)) new(MPATH "summoner")->move(TO);
+		break;
+	    case 1:
+	    case 2:
+		new(MPATH "summoner")->move(TO);
+		if(!random(10)) get_demon(1);
+		break;
+	    case 3:
+	    case 4:
+		new(MPATH "berserker")->move(TO);
+		if(!random(15)) new(MPATH "berserker")->move(TO);
+		else
+		if(!random(10)) get_demon(1);
+		break;
+	    case 5:
+	    case 6:
+		new(MPATH "G_demon")->move(TO);
+		if(!random(10)) get_demon(1);
+		if(!random(15)) get_demon(1);
+		break;
+	    case 7:
+	    case 8:
+	    case 9:
+	    case 10:
+		get_demon(1);
+		get_demon(1);
+		if(!random(15)) get_demon(1);
+		if(!random(20)) new(MPATH "G_demon")->move(TO);
+		break;
+	    default:
+		do_ogres();
+	    }
+	}
+	break;
+    }
+    return 1;
+}
+
+
+int do_ogres() {
+    int num;
+    int j;
+    object mon;
+
+    if(!random(10)) new(MPATH "ogre6")->move(TO);
+    if(!random(8)) {
+	for(j=0;j<1+random(3);j++)
+	    new(MPATH "ogre5.c")->move(TO);
+    }
+    if(!random(6)) {
+	for(j=0;j<1+random(4);j++)
+	    new(MPATH "ogre4.c")->move(TO);
+    }
+    if(!random(4)) {
+	for(j=0;j<1+random(6);j++)
+	    new(MPATH "ogre3.c")->move(TO);
+    }
+    if(!random(3)) {
+	for(j=0;j<1+random(7);j++)
+	    new(MPATH "ogre2.c")->move(TO);
+    }
+    for(j=0;j<1+random(8);j++)
+	new(MPATH "ogre1.c")->move(TO);
+    if(!random(25)) do_ogres();
+    return 1;
+
+}
+
+int get_demon(int x){
+    int i,j,z;
+
+    z = random(10);
+    switch(z) {
+    case 9:
+    case 8:
+	new(MPATH "G_demon")->move(TO);
+    case 7..4:
+	for(i=0;i<=random(2);i++)
+	    new(MPATH "demon")->move(TO);
+	break;
+    case 3..0:
+	for(i=0;i<=random(2);i++)
+	    new(MPATH "demon2b")->move(TO);
+	break;
+    }
+}
+
+
+void reset() {
+    ::reset();
+    mademonsters = 0;
+}
+
+int trapfcn1(){
+    write("  As you move through the passage, your toe catches on a small wire.");
+    write("  %^BOLD%^%^RED%^The walls are collapsing!!%^RESET%^");
+    write("  You just barely dive through the rubble crashing down into the room!");
+    say(TPQCN+" seems to stumble over somthing as "+TP->query_subjective()+" moves into the next room, and suddenly the walls and ceiling is falling down upon you!");
+    TP->do_damage(TP->return_target_limb(),roll_dice(2,8));
+    return 0;
+}
+
+
+int crack_fcn(object tp){
+    string place;
+    int j;
+
+    tell_object(tp, "%^BOLD%^%^BLUE%^You walk slowly into the glowing crack.\n");
+    tell_object(tp, "%^BOLD%^%^BLUE%^As you walk deeper into the crack you can feel the light bathing you in its glow as it gets brighter and brighter.\n");
+    tell_object(tp, "%^BOLD%^%^BLUE%^You are unable to stop, you keep moving forward as the intensity of the light grows.  You are soon blind, but you continue moving on.\n");
+    tell_object(tp, "%^BOLD%^%^BLUE%^Suddenly there is a great flash and the light disapears, leaving you in a different place.\n");
+    tell_room(environment(tp), "%^BOLD%^%^BLUE%^"+tp->query_cap_name()+" walks into the strange crack, the blue light bathing "+tp->query_objective()+" in its strange light.");
+
+    j = random(sizeof(ROOMS));
+    place = BASE+ROOMS[j];
+    if(!random(3)){
+	tp->move("/d/dagger/cave2/cave2.c");
+    } else {
+	tp->move(place);
+    }
+    tp->describe_current_room(1);
+    return 1;
+}
+
+void first_floor() {
+    int i;
+
+    for(i=0;i<1+random(3);i++)
+      new(MPATH "ogre1.c")->move(TO);
+    if(!random(4)) {
+      for(i=0;i<1+random(2);i++)
+        new(MPATH "ogre2.c")->move(TO);
+    }
+}

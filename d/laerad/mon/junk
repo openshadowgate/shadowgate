@@ -1,0 +1,10 @@
+int kill_ob(object victim, int which){
+  int hold;
+  hold = ::kill_ob(victim, which);
+  if(hold){
+    if(interactive(victim))
+    new("/cmds/priest/_animate_object.c")->use_spell(TO,victim->query_name(),30)
+;
+  }
+  return hold;
+}

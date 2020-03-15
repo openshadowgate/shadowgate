@@ -1,0 +1,82 @@
+Area Notes 
+
+=================
+Worm Lair
+=================
+
++2 long sword **DONE**
++2 helm    **DONE**
++2 armor   **DONE**
+random colored light stone from worms - **DONE**
+
+sourcestone **DONE**
+
+
+Make Howne - Worm Keeper - Crazed Ranger of Silvanus - has weapon/helm/armor **DONE**
+
+CHECK WORM MONSTER FILES - Make sure they all update and have unique ID for wormlair.c **DONE**
+
+make grate that connects this to mizat encampment ** DONE **
+
+=============
+Mirror Maze 
+=============
+
+1. Flask - add ability to fill with water where waterskins can be filled ***DONE***
+Add a figurine of wondrous power? 
+
+====================
+Charu Caverns
+====================
+Add rune shards
+
+1. remove quest for runes **DONE**
+2. modified abomination quest to reflect "mystic cave" ***DONE***
+3. sourcestone/lightstone can be mined from mid level ***DONE***
+4. turn in rune shards in the encampment ** DONE **
+5. create rune shards from destroyed runes ***DONE***
+6. make the entrance room have the ability to pull people out who request it - help or exit or whatever (not in combat) ** DONE **
+
+====================
+Mizat Encampment??
+====================
+
+Introduce diseases here - objects that can be passed around ** DONE **
+
+Minotaur Leader - **DONE** for now - maybe add more later?
+
+Crystal Merchant (to unlock areas) (Turn in shards here - some exp and gold for turning them in?) ** DONE **
+
+Make dark yellow crystal (takes you to mystic cave) && bright pink crystal (takes you to the surface) ** DONE **
+
+Put crystals for sale in /inherits/crystal_storage (these should be the only things he sells) **DONE**
+   
+Merchant that buys literally anything and is a healer? ** DONE **
+
+Bar - dwarf bartender - food/drinks (clone verbobone bar??) ** DONE **
+
+Tent that lets you logout/relog in **DONE**
+
+Create "encampment" inherit that has some guards in it ** DONE ** 
+
+Leader Room ** DONE ** 
+
+make grate that connects this to worm tunnels - ** DONE **
+
+Make way-gate that requires activation (use portal1.c and modify) ** DONE **
+    ==Ancient - they unearthed the device 
+    
+Strange Mirror that leads to Mirror Maze? (DO THIS LAST)
+    ==Mirror is ancient - melted into the stone? was not put there by them but unearthed
+
+
+=====================
+Diseases
+=====================
+
+Negative levels
+
+In spells
+In saving throws
+In feats?
+In bonus_d

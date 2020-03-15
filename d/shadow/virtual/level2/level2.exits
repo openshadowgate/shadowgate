@@ -1,0 +1,54 @@
+
+# forest.exits -- this file defines the exits for the rooms in the virtual
+# forest.
+#
+# please note, that any blank line and text after a # will be ignored.
+#
+# craz@shadowgate -- 9609 -- creation
+
+
+# the first two numbers are the x and y widths of the area.
+15 15
+
+# now, is the exits map. seperate the rooms on the same line with a space.
+# the number specified is what exits that the room has.  enter a ..
+# if the room does not exist.  all exits will lead to the adjacent rooms.
+#
+# the number to use is a simple bit map as follow:
+#
+#        bit:    7  6  5  4  3  2  1  0
+#  direction:   sw se nw ne  w  e  s  n
+#
+# the number entered into the map below should be the hex number with
+# the bits of the wanted exits set.  for example:
+#
+# exits   number
+# n       00
+# s       01
+# e       04
+# w s e   0E
+# all     FF
+# this next line is just a x-coordinate axis
+#1 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+
+# y==1
+04 0A .. 06 0C 0E 0C 0E 0C 0A .. 02 .. 02 ..
+.. 07 0C 0B .. 03 .. 03 .. 03 .. 03 .. 03 ..
+06 09 02 03 04 0D 0C 0D 0E 0D 0E 09 .. 03 ..
+03 .. 07 0D 0C 0A .. .. 03 .. 03 .. .. 03 ..
+07 0C 0B .. .. 05 0A .. 81 06 09 .. .. 03 ..
+# y==6
+03 .. 05 0A .. .. 03 12 .. 03 .. .. .. 03 ..
+03 .. 02 05 0C 0C 09 01 04 0B .. .. .. 03 ..
+07 0C 09 .. 84 0C 0A 04 0C 0B .. .. 06 09 ..
+03 .. .. 90 .. .. 81 .. .. 03 .. .. 03 .. ..
+03 .. 12 .. .. 12 .. .. .. 05 0C 0C 0B .. 02
+# y==11
+41 .. 03 .. .. 03 .. .. .. .. .. .. 03 .. 03
+.. 60 03 .. 06 09 .. .. 06 0C 0C 0C 09 04 0B
+.. .. 23 .. 03 .. .. .. 03 .. .. .. .. 02 03
+.. .. 07 0C 0D 0C 0C 0E 0B .. .. .. .. 07 0B
+04 0C 0D 0C 0C 0C 0C 0D 0C 0C 0C 0C 0C 0D 09
+
+
+

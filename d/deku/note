@@ -1,0 +1,4 @@
+I changed the paths around for all the monsters I could find in the different directories here. We should be able to remoev the /d/deku/weapons files of club, dagger, pick, longsword, t_sword, short1, and larrows. Also, the /d/deku/misc files of sack and pouch. None of the monsters should use them, we simply have to wait for them to cycle out of player inventory now.
+
+Crysta, 10/16/00
+

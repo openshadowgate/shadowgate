@@ -1,0 +1,21 @@
+#include <std.h>
+#include <move.h>
+#include "../../tecqumin.h"
+
+
+inherit JUNG_ROOM + "ropebridge_base.c";
+
+
+void create() {
+  ::create();
+  set_exits(([
+      "east" : JUNG_ROOM + "",
+      "west" : JUNG_ROOM + "ropebrige1"
+   ]));
+}
+
+
+void init(){
+  ::init();
+}
+

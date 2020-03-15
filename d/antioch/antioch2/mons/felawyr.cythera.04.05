@@ -1,0 +1,223 @@
+#include <std.h>
+#include "../antioch.h"
+inherit INTERACTIVE;
+
+void say_stuff();
+int current_price;
+int current_haggler;
+string before;
+int amount;
+int flag = 0;
+int talking;
+
+void create()
+{
+	::create();
+	remove_std_db();
+	remove_dbs(({"weapons"}));
+	set_name("Felawyr");
+	set_short("Felawyr, the weapons smith");
+	set_id(({"black smith","weaponsmith","weapon smith","Felawyr","felawyr"}));
+	set_long(
+	"Felawyr is a renowned blacksmith in the Charu Mountains. He has been"+
+	" practicing for years, even before Antioch was taken over by evil. He"+
+	" was kept prisoner during those troubled times, and freed finally when"+
+	" Helm intervened. Now he is once again back to the anvil and forge,"+
+	" creating weapons for the town's protection. He personally handcrafted"+
+	" all the weapons for the town guards. The quality of his weapons is"+
+	" always high. His clothing and hands are stained black from his work"+
+	" at the forge, and sweat trickles down his forehead. Brown curly hair"+
+	" has been cropped short to keep it out of his face, and his brown eyes"+
+	" seem a bit tired, but warm. He keeps his beard carefully trimmed, and"+
+	" you notice that specks of gray have begun creeping into it."
+	);
+   set_items_allowed("weapon");
+	set_gender("male");
+	set_race("human");
+	set_body_type("human");
+	set_hd(30,8);
+	set_alignment(1);
+	set_max_hp(300+random(50));
+	set_hp(query_max_hp());
+	set_level(30);
+	set_overall_ac(-15);
+	set_class("fighter");
+	set_mlevel("fighter",30);
+	set_stats("strength",20);
+	set_stats("consitution",18);
+	set_stats("dexterity",14);
+	set_stats("charisma",12);
+	set_stats("wisdom",8);
+	set_exp(100);
+	set("aggressive",0);
+	set_storage_room(ROOMDIR+"weapon");
+	add_money("gold",random(50));
+	command("speech speak in a gravely voice");
+	current_price = 30000+random(5000);
+}
+
+void catch_say(string message)
+{
+	if(strsrch(message,"gold") != -1) {
+		call_out("sell_tooth",1,TP,message);
+		return;
+	}
+	if(strsrch(message,"tooth") != -1 || strsrch(message,"dagger") != -1 || strsrch(message,"sword") != -1) {
+		call_out("do_talk",1,TP,message);
+		return;
+	}
+}
+
+void do_talk(object ob, string message)
+{
+	set_spoken(ob->query_spoken());
+	if(!present("serpent_tooth",ob)) {
+		force_me("say I'm always interested in crafting new weapons from odd"+
+		" materials. If ye find something of particular interest, let me know.");
+		return;
+	}
+	if(objectp(current_haggler) && present(current_haggler,ETO)) {
+		if(current_haggler == ob) {
+			force_me("emote looks over the serpent's tooth.");
+			force_me("say Aye, I could make this tooth into a fine dagger for"+
+			" ye. Make me an offer in gold.");
+			current_haggler = ob;
+			current_price = 30000+random(5000);
+			return;
+		}
+		force_me("emote turns towards "+TP->query_cap_name()+".");
+		force_me("say Can't ye see I'm busy with "+current_haggler->query_cap_name()+""+
+		" right now? Talk to me when we're through.");
+		return;
+	}
+	current_haggler = ob;
+	current_price = 30000+random(5000);
+}
+
+void sell_tooth(object ob, string message)
+{	
+	if(objectp(current_haggler) && present(current_haggler,ETO)) {
+		if(current_haggler != ob) {
+			force_me("emote turns towards "+TP->query_cap_name()+".");
+			force_me("say Can't ye see I'm busy with "+current_haggler->query_cap_name()+""+
+			" right now? Talk to me when we're through.");
+			return;
+		}
+		if(sscanf(message,"%s%d gold",before,amount) != 2) {
+			force_me("say I'm sorry, I didn't understand what ye offered"+
+			" me in gold.");
+			return;
+		}
+		if(amount >= current_price) {
+			force_me("emote rubs his beard thoughtfully and nods.");
+			force_me("say That seems like a fair price to me. Do ye have the"+
+			" money with ye?");
+			if(ob->query_funds("gold",amount)) {
+				force_me("say Ah, ye do!");
+				if(!present("serpent_tooth",ob)) {
+					force_me("say Now where'd ye go hidin' that tooth? I just saw"+
+					" it a bit ago. Go find it, cause I assuredly can't make a"+
+					" weapon out of nothin.");
+					current_haggler = 0;
+					return;
+				}
+				ob->use_funds("gold",amount);
+				present("serpent_tooth",ob)->remove();
+				force_me("say Now ye needs to give me a bit of time so I can"+
+				" work this here tooth for ye.");
+				call_out("create_dagger",1,TP);
+				return;
+			}
+			else {
+				force_me("say Runnin a bit short on gold, eh? No matter, there's"+
+				" a bank just a stone's throw from here, come back when ye have"+
+				" the gold.");
+				current_haggler = 0;
+				return;
+			}
+		}
+		else {
+			force_me("emote shakes his head stubbornly.");
+			force_me("say I dare say me work is worth quite a bit more than that!");
+			return;
+		}
+	}
+}
+
+void create_dagger(object ob, string message)
+{
+	object obj2;
+
+	obj2 = new("/d/antioch/ruins/obj/serpent_tooth.c");
+	obj2->set_owner(TPQN);
+	force_me("emote works furiously on sharpening the tooth to an even finer point and"+
+	" adding a handle to the blade.");
+	force_me("emote looks over his work critically for any flaws, then nods in approval.");
+	if((int)obj2->move(TP) != 0) {
+		force_me("say The dagger is done, but ye can't seem to carry it just yet.");
+		force_me("emote sets the serpents tooth down on the counter.");
+		force_me("say Pick it up when ye have the chance.");
+		obj2->move(ETO);
+		return;
+	}
+	else {
+		force_me("say 'Tis a right fine piece o' work if I do say so meself. Hope ye enjoy it.");
+		tell_object(TP,"Felawyr hands you the serpents tooth.");
+		tell_room(ETP,"Felawyr hands "+TPQCN+" the serpents tooth.",TP);
+		obj2->move(TP);
+		return;	
+	}
+	return;
+}
+
+void heart_beat()
+{
+	::heart_beat();
+	if(!objectp(TO)) return;
+   if(sizeof(query_attackers())) return;
+   
+   if(talking) return;
+	if(query_night() != 1) {
+		if(!random(200)) {
+			say_stuff();
+			return;
+		}
+	}
+}
+
+void say_stuff()
+{
+	talking = 1;
+	switch(random(5)) {
+		case 0:
+			force_me("say A sharp blade can save yer life. Tis always best to keep"+
+			" yer weapons in good shape, ne'er can tell when ye'll have to use it.");
+			break;
+		case 1:
+			force_me("say I sell the sharpest weapons north o' Shadow!");
+			force_me("emote smiles broadly.");
+			break;
+		case 2:
+			force_me("say Tis not wise to walk around these parts without a good"+
+			" weapon in hand.");
+			force_me("emote glances around.");
+			force_me("say Especially at night. I've heard strange sounds coming from"+
+			" them ruins. Ye won't catch me goin anywhere near there again!");
+			break;
+		case 3:
+			force_me("say Ye know, don't always have to be metal things that make"+
+			" good weapons.");
+			force_me("say Why, I once used a mace that was studded with shark's teeth."+
+			" Best darn mace I ever had, too bad some good fer nothin thief stole it"+
+			" one night.");
+			force_me("emote grumbles about thieves.");
+			break;
+		case 4:
+			force_me("say If ye ever find somethin that ye want made into a weapon,"+
+			" just bring it to me and I'll fix it up nice for ye.");
+			force_me("emote grins at you.");
+			break;
+	}
+	talking = 0;
+	return;
+}

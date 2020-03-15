@@ -1,0 +1,29 @@
+// disabling this one too since wportal2 is broken and I can't fix it  *Styx* 9/4/02
+
+#include <std.h>
+inherit ROOM;
+void create(){
+    ::create();
+    set_terrain(DESERT);
+    set_travel(FOOT_PATH);
+    set_name("Wasteland");
+    set_short("Wasteland");
+    set_long(
+	"You are standing on a barren plain. The earth is cracked and dead. "+
+	"No vegetation can be seen for miles. A wicked wind bites at your "+
+	"face blowing sand into your eyes. The lifeless wasteland continues "+
+	"endlessly in all directions. A large black portal hovers a foot "+
+	"above the ground, rising about 15 feet into the air."
+    );
+    set_smell("default","A salty breeze stings your face.");
+    set_listen("default","Only the howling of the wind can be heard.");
+    set_property("indoors",0);
+    set_property("light",2);
+    set_exits( ([
+	"west":"/d/laerad/wasteland/wportal2",
+	"east":"/d/laerad/wasteland/wportal2",
+	"north":"/d/laerad/wasteland/wportal2",
+	"south":"/d/laerad/wasteland/wportal2",
+	"portal":"/d/laerad/wasteland/waste67"
+    ]) );
+}

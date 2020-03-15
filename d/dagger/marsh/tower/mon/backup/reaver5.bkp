@@ -1,0 +1,207 @@
+#include <std.h>
+#include "/d/dagger/marsh/tower/short.h"
+inherit MONSTER;
+int xx;
+object ob;
+void create() {
+    :: create();
+    set_name("reaver");
+    set_id(({
+	"reaver","demon reaver"
+      }));
+    set_short("%^RESET%^%^RED%^Reaver%^RESET%^");
+    set_long(
+      "%^RESET%^%^RED%^"
+      "The humanoid which stands before you is one of an extremly "
+      "vile nature. Pure worshippers of evil and the (un)dead, the "
+      "have adopted a cult like magical craft of immense power. This "
+      "power has long often been sought after by users of magic across "
+      "the land but only those willing to cross over to the vile side "
+      "ever can tame it. Even then it is the power which controls the reaver, "
+      "not the reaver who controls the craft. Loyal servants to demons, however "
+      "they have been known to serve greater apparitions which dwell in "
+      "the darkness of our lands. Their skin is rotted and matted in an array "
+      "of scalding from unknown burns and festered with disease. The one "
+      "before you wears a long robe stained with ancient blood of power."
+      "%^RESET%^"
+    );
+    set_gender("male");
+    set_hd(25,5);
+    set_size(2);
+    set_wielding_limbs(({"right hand","left hand"}));
+    set_overall_ac(-8);
+    set_max_hp(300);
+    set_hp(300);
+    set_property("magic",1);
+    set_property("no bump",1);
+    set_property("magic resistance",25);
+    set_exp(28000);
+    set_body_type("humanoid");
+    set_race("human");
+    set_class("fighter");
+    set_alignment(9);
+    set_stats("strength",24);
+    set_stats("constitution",24);
+    set_stats("dexterity",24);
+    set_stats("wisdom",24);
+    set_stats("intelligence",24);
+    set_stats("charisma",-10);
+    set("aggressive",50);
+    remove_property("swarm");
+    new( OPATH "scythe.c" )->move(TO);
+    command("wield scythe in left hand");
+    new( OPATH "scythe.c" )->move(TO);
+    command("wield scythe in right hand");
+    new( OPATH "robe.c" )->move(TO);
+    command("wear robe");
+    add_money("gold",random(3000)+400);
+    new( OPATH "gem5.c" )->move(TO);
+    ob = new("/d/shadow/obj/potion/extra_heal.c");
+    ob->set_uses(3);
+    ob->move(TO);
+    set_funcs(({"moves"}));
+    set_func_chance(50);
+    set_emotes(2, ({
+	"%^RED%^Visions of bloodlust fill your mind!%^RESET%^",
+	"%^RED%^The reaver attempts to possess you!%^RESET%^",
+	"%^RED%^The reaver utters a guttural chant of abomination!%^RESET%^",
+	"The reaver fails to gate."
+	"%^BOLD%^%^BLUE%^The reaver hurls a %^MAGENTA%^bolt%^BLUE%^ "
+	"of pure evil "
+	"at you!%^RESET%^\nYour torso is severed!\nHp: -2560\n\n"
+	"You die.\n%^BOLD%^%^GREEN%^Death has taken Grazzt from our midsts! ;)%^RESET%^",
+      }),1);
+}
+int moves() {
+    object ob = this_object();
+    object targ = ob->query_current_attacker();
+    object rab;
+    int i;
+    xx=random(4)+1;
+    switch(xx) {
+    case 1:
+	say(
+	  "%^BOLD%^%^BLUE%^The reaver invokes a spell of hatred to his masters!"
+	  "\n"
+	  "%^RESET%^%^BLUE%^An Demonstorm brews in the area!%^RESET%^"
+	);
+	call_out("flash_fun",3);
+	call_out("fire_fun",5);
+	call_out("fire_fun",15);
+	call_out("fire_fun",30);
+	call_out("endflame_fun",31);
+	return 1;
+    case 2:
+	tell_room(environment(targ),
+	  "%^BOLD%^%^RED%^"
+	  "The earth opens and a host of demonic beings flow from the "
+	  "depths below. "
+	  ,targ); 
+	tell_object(targ,
+	  "%^BOLD%^%^RED%^"
+	  "Cackling demons appear all around you! " 
+	  "Before you can run, they dive into your body burning " 
+	  "you to your soul!%^RESET%^"
+	);
+	tell_room(environment(targ), 
+	  "%^CYAN%^%^BOLD%^"+
+	  (string)targ->query_cap_name()+" screams "
+	  "in agony as flaming spirits leap into "+
+	  targ->query_possessive()+" body. "
+	  ,targ);
+	tell_object(targ,
+	  "%^RESET%^%^RED%^" 
+	  "You scream in terror as shadowy forms rip bits of "
+	  "your essence from your soul!%^RESET%^"
+	);
+	for(i=0;i<10;i++) {
+	    tell_room(environment(targ), 
+	      "%^GREEN%^%^BOLD%^"+
+	      (string)targ->query_cap_name()+" screams "
+	      "in agony as "+targ->query_possessive()+
+	      " soul is torn!"
+	      ,targ);
+	    tell_object(targ,
+	      "%^RESET%^%^GREEN%^" 
+	      "Your soul is %^RED%^burned%^GREEN%^ and "
+	      "%^RED%^torn%^GREEN%^!%^RESET%^"
+	    );
+	    targ->do_damage("torso",random(5)+5);
+	}
+	return 1;
+    case 3:
+	for(i=0;i<10;i++) {
+	    say(
+	      "%^CYAN%^The reaver mutters a demonic plea for health!"
+	      "%^RESET%^"
+	    );
+	    TO->add_hp(roll_dice(3,4));
+	}
+	tell_object(targ,
+	  "%^BOLD%^%^BLUE%^The reaver hurls a %^MAGENTA%^bolt%^BLUE%^ "
+	  "of pure evil "
+	  "at you!%^RESET%^"
+	);
+	tell_room(environment(targ),
+	  "%^BOLD%^%^BLUE%^The reaver hurls a %^MAGENTA%^bolt%^BLUE%^ "
+	  "of pure evil "
+	  "at "+targ->query_cap_name()+"!%^RESET%^"
+	  ,targ);
+	targ->do_damage("head",roll_dice(8,8));
+	return 1;
+    case 4:
+	tell_object(targ,
+	  "%^GREEN%^The reaver chants the ancient and demonic oath of the gate!%^RESET%^"
+	);
+	tell_room(environment(targ),
+	  "%^GREEN%^ The reaver chants the ancient and demonic oath of the gate!%^RESET%^"
+	  ,targ);
+	say("%^BOLD%^%^RED%^A krykoth fades into view!%^RESET%^");
+	new( MPATH "krykoth.c")->move(environment(TO));
+	if(rab = present("krykoth",environment(TO))) {
+	    rab->force_me("kill "+targ->query_name());
+	}
+	return 1;
+    }
+}
+int flash_fun() {
+    say(
+      "%^BOLD%^%^RED%^The area is suddenly engulfed with the Demonstorming!%^RESET%^"
+    );
+    return 1;
+}
+int fire_fun() {
+    object ob,here,sucker,*players;
+    int x,num_p;
+    here=environment(TO);
+    players=all_inventory(here);
+    num_p=sizeof(players);
+    for(x=0;x<num_p;x++)
+    {
+	sucker=players[x];
+	if((living(sucker)) && sucker !=(TO) &&
+	  (string)sucker->query_name() != "krykoth")
+	{
+	    tell_object(sucker,
+	      "%^BOLD%^CYAN%^The chaotic confusion of the minor minions swirling "
+	      "within the storm enter and exit your soul repeatedly!%^RESET%^"
+	    );
+	    tell_room(environment(sucker),
+	      "%^BOLD%^%^CYAN%^"+sucker->query_cap_name()+
+	      " screams out as minions of the Demonstorm enter and exit "
+	      +sucker->query_possessive()+
+	      " soul repeatedly!%^RESET%^"
+	      ,sucker);
+	    sucker->do_damage("torso",roll_dice(6,6));
+	}
+    }
+    return 1;
+}
+int endflame_fun() {
+    say(
+      "%^BOLD%^%^CYAN%^The %^RED%^Demonstorm%^CYAN%^ vanishes in a swirling "
+      "cloud back to the Abyss!"
+      "%^RESET%^"
+    );
+    return 1;
+}

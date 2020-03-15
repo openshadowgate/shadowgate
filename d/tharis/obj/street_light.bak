@@ -1,0 +1,35 @@
+#include <std.h>
+#include <daemons.h>
+inherit OBJECT;
+
+int original_light;
+
+void create() {
+    ::create();
+    set_id( ({"street light","street_light","light"}) );
+    set_name("street light");
+    set_short("A dark street light");
+    set_weight(1000000);
+    set_long("The street light is made of wrought iron and stands about"
+	" ten feet high. It appears to be an oil fueled lamp. It lights "
+        "up the streets at night."
+"testing 1...2...3..."
+    );
+    set_value(0);
+    original_light =  -9999;
+}
+void init(){
+    string tod;
+	
+	if(original_light == -9999)
+		original_light = environment(TO)->query_light();
+	tod = EVENTS_D->query_time_of_day();
+	if((tod == "night") && ((int)environment(TO)->query_light() == original_light)){
+                environment(TO)->set_light(3);
+    		set_short("A lit street light");
+	}
+	if((tod != "night") &&  ((int)environment(TO)->query_light() != original_light)){
+environment(TO)->set_light(0);
+    		set_short("A dark street light");
+	}
+}

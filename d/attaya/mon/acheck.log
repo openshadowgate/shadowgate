@@ -1,0 +1,3 @@
+Pick -----: Warning: /d/shadow/obj/weapon/pick is not a subclass of /std/armour.
+Warning: is_armour() did not return true.
+Warning: query_name() did not return a valid name.

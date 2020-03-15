@@ -1,0 +1,45 @@
+#include <std.h>
+#include <objects.h>
+
+inherit ROOM;
+
+void create() {
+    room::create();
+    set_property("light",2);
+    set_property("indoors",1);
+    set_short("Jarrow's Tower");
+    set_long(
+@KAYLA
+Two padded couches face each other in the middle of this 20' X 40'
+rectangular room, and beween them sits an octagonal wooden table.  A
+delicate glass globe suspended above the table glows brightly, 
+illuminating the entire chamber.  A well-worn armchair with matching
+footstool rests in one corner, nestled between a shapely wooden cloak
+rack and brass pipe holder.
+KAYLA
+    );
+    set_exits(([
+       "south" : "/d/deku/open/entrance"
+    ] ));
+    set_pre_exit_functions(({"stair"}),({"go_stair"}));
+    set_items(([
+       "table" : "Atop the wooden table is a finely crafted wooden chess set.",
+       "pipe holder" : "The pipe holder is an ash-filled urn secured to a brass tripod.",
+       "chess set" : "Jarrow's chess set is carved from wood and is not particularly valuable."
+    ] ));
+}
+
+void reset() {
+   object ob, scroll, scroll2;
+  ::reset();
+  if(!present("jarrow")) {
+   ob= new("/d/deku/monster/jarrow");
+   scroll = new("/d/magic/scroll");
+        scroll->set_spell(5);
+	scroll->move(ob);
+   scroll2 = new("/d/magic/scroll");
+   scroll2->set_spell(3);
+   scroll2->move(ob);
+	ob->move(TO);
+  }
+}

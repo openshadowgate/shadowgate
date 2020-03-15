@@ -1,0 +1,92 @@
+#include <std.h>
+inherit "std/weapon";
+string OWNER;
+void init() {
+    ::init();
+    if(interactive(TP) && TP==environment(TO) && !OWNER) OWNER = TPQN;
+}
+
+void create() {
+    ::create();
+    set_name("screaming dagger");
+    set_id( ({"dagger","horrible screaming dagger","screaming dagger","dagger","horrible dagger","screamer"}) );
+    set_short("%^MAGENTA%^Horrible screaming dagger%^RESET%^");
+    set_long(
+      "A horrible dagger with an engraved blade.  The detail is magnificent "
+      +"yet the scene depicted upon it's wicked blade is a gruesome one. "
+      +"A young girl is lying beneath a dead tree, bleeding from numerous "
+      +"wounds in her chest.  The blood has pooled around a glowing dagger with "
+      +"it's blade planted in the earth."
+    );
+    set_weight(10);
+    set("value",250);
+    set_wc(2,3);
+    set_large_wc(2,4);
+    set_size(1);
+    set_prof_type("screamer");
+    set_type("thiefslashing");
+    set_property("enchantment",3);
+
+    set_wield((:this_object(), "extra_wield":));
+   set_unwield((:TO,"removeme":));
+    set_hit((:this_object(), "extra_hit":));
+}
+int extra_hit(object ob) {
+    int dam;
+    dam = random(2) + 1;
+   if(!objectp(ob)) return random(10);
+    if(random(10)){
+	if((ETO->is_class("thief") || ETO->is_class("assassin")) && sizeof(ETO->query_classes()) ==1) 
+	    return random(10);
+	else return random(5);
+    }
+
+    message("my_action",
+      "%^RED%^A horrible scream echos out from the dagger itself!"
+      ,ETO);
+    message("other_action",
+      "%^RED%^The dagger wielded by "+ETO->query_cap_name()+" screams horribly as it slashes "
+      +ob->query_cap_name()+"'s body, spattering blood everywhere!%^RESET%^"
+      ,environment(ob),(({ETO, ob})));
+    message("my_action",
+      "%^BOLD%^%^RED%^The horrible dagger wielded by "+ETO->query_cap_name()+" lets out a horrible scream as it tears into you!"
+      ,ob);
+    set_property("magic",1);
+    ob->do_damage("torso",random(46));
+    return(random(15));
+}
+int extra_wield() {
+    object tp;
+    tp = this_player();
+    if (!tp) return 0;
+    if((int)TP->query_level() < 25) {
+	notify_fail("%^BOLD%^%^RED%^A shadowy presence tells you: %^RESET%^You pathetic little fool, you cannot handle such power!");
+	return 0;
+    }
+    if( (!TP->is_class("thief")) && (!TP->query("is_assassin")) ) {
+	write("%^BLUE%^The evil dagger flies from your hand and vanishes into the clouds above!");
+	TO->remove();
+	return 0;
+    }
+     if(interactive(TP) && (string)TP->query_name() != OWNER){
+	write("%^MAGENTA%^You are not chosen by the gods to wield such power.");
+	TO->remove();
+	return 0;
+    }
+     tp->set_property("magic",1);
+    write(
+      "%^BLUE%^The hideous dagger suddenly makes a horrible noise as if it were screaming "
+    );
+    say(
+      "%^RED%^"+TPQCN+" looks quite shocked as a dagger in their possession begins screaming.%^RESET%^"
+    );
+   ETO->set_property("evil item",1);
+    return 1;
+}
+
+int removeme()
+{
+     ETO->set_property("magic",-1);
+   ETO->set_property("evil item",-1);
+   return 1;
+}

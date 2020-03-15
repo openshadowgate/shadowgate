@@ -1,0 +1,39 @@
+#include <std.h>
+#include "/d/shadow/room/goblin/short.h"
+inherit "/std/monster";
+ 
+create() {
+    ::create();
+    set_name("goblin");
+    set("id", ({ "goblin","soldier","goblin soldier" }));
+    set("short", "Goblin soldier");
+    set("aggressive", 7);
+    set_hd(3,3);
+    set_level(3);
+    set("long", "This foul and ugly little creature is "
+	"one of the soldiers of the Goblin army. Generally they are "
+	"left either to guard the home stronghold or to die on the "
+	"battlefield. Needless to say, they have a short "
+	"lifespan.");
+    set_class("fighter");
+    set_body_type("humanoid");
+    set_alignment(9);
+    set("race", "goblin");
+   set_gender("male");
+    set_ac(6);
+    set_exp(100);
+    set_max_hp(35);
+    set_hp(35);
+    set_emotes(3,({
+	"Goblin soldier growls.",
+	"%^CYAN%^Goblin says: %^RESET%^What are you doing in here?!?",
+	"Goblin soldier looks you over.",
+    }),0);
+    this_object()->add_money("gold",random(30)+5);
+    this_object()->add_money("silver",random(80)+15);
+    this_object()->add_money("copper",random(800)+50);
+    new( OPATH "whip.c" )->move(this_object());
+    command("wield whip");
+    new( OPATH "helm.c" )->move(this_object());
+    command("wear helm");
+}

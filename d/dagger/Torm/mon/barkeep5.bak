@@ -1,0 +1,63 @@
+#include <std.h>
+inherit BARKEEP;
+
+create() {
+    ::create();
+  set_name("barkeep");
+  set_id(({
+  "barkeep","orc","black orc","taath",
+  "waitstaff",
+  }));
+  set_short(
+  "Taath, black orc"
+  );
+    set("aggressive", 0);
+  set_alignment(9);
+    set_level(10);
+  set_long(
+  "Taath leers across the bar with his little pig eyes as he sees you come in."
+  "  Yellow broken tusks jut from his lower lip and he really, really stinks."
+  "  One of his hands is just out of sight as if holding something in his hand he doesnt want anyone to see, even as he pours drinks with the other."
+  );
+  set_gender("male");
+  set_race("orc");
+    set_hd(10,0);
+   set_exp(10);
+    set_max_hp(query_hp());
+    add_money("copper", random(200));
+    set_body_type("human");
+    set_currency("gold");
+
+  set_menu(({
+  "black orc ale",
+  "dark rum",
+  "bong water",
+  }),({
+  "alcoholic",
+  "alcoholic",
+  "alcoholic",
+  }),
+  ({
+  20,14,75,
+  }));
+  set_my_mess(({
+  "God, that smelled like it was sweated out of an orc!",
+  "Urggh, not quite ready for that yet!",
+  "%^BOLD%^%^GREEN%^Oooh, lookit that, pretty colors..%^RESET%^",
+  }));
+  set_your_mess(({
+  "grimices as "+TP->query_subjective()+" downs a foul smelling ale.",
+  "coughs and bangs "+TP->query_possessive()+" chest as "+TP->query_subjective()+" chugs a short glass of dark rum.",
+  "takes a deep drink out of a strange looking glass and then vacantly gazes about.",
+  }));
+  set_menu_short(({
+  "Black Orc Ale",
+  "Dark Rum",
+  "Bong Water",
+  }));
+  set_menu_long(({
+  "A foul smelling, dark ale that looks like its sat in the sun long enough to loose all its fizz.",
+  "A short glass of dark navy rum.",
+  "Odd, slimy looking water in a strange looking glass.  A rim of scum has settled around the waters edge.",
+  }));
+}

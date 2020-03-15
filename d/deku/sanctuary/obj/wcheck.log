@@ -1,0 +1,108 @@
+Armguard:      Warning: /d/deku/sanctuary/obj/armguard#87150 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'armguard' 
+Axe:           Warning query_name() did not return a valid name.  'giant axe' 
+Banded:        Warning: /d/deku/sanctuary/obj/banded#87152 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'banded armor' 
+Blue_robes:    Warning: /d/deku/sanctuary/obj/blue_robes#87153 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'blue robes' 
+BluedragonbucklWarning: /d/deku/sanctuary/obj/bluedragonbuckler#87154 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'buckler' 
+Bluewizardhat: Warning: /d/deku/sanctuary/obj/bluewizardhat#87155 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'wizard's hat' 
+Boots:         Warning: /d/deku/sanctuary/obj/boots#87156 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'boots' 
+C_key:         Warning: /d/deku/sanctuary/obj/c_key#87157 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'cellar key' 
+Chain_shirt:   Warning: /d/deku/sanctuary/obj/chain_shirt#87158 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'chain shirt' 
+Coralsword:    Warning query_name() did not return a valid name.  'coral sword' 
+CrystallinespeaWarning query_name() did not return a valid name.  'crystalline spear' 
+Dagger:        Warning: query_type() returned unknown weapon type: thiefpiercing.
+Warning: query_weight() is not balanced.
+Warning: query_wc() is not balanced.
+Warning: query_large_wc() is not balanced.
+Dsewer_key:    Warning: /d/deku/sanctuary/obj/dsewer_key#87162 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'dsewer_key' 
+Flamerod:      Warning query_name() did not return a valid name.  'flame rod' 
+Frostrod:      Warning query_name() did not return a valid name.  'rod of frost' 
+Ghoulblade:    Warning query_name() did not return a valid name.  'Ghoul Blade' 
+Greenstone:    Warning: /d/deku/sanctuary/obj/greenstone#87166 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'green stone' 
+Lightningbolt: Warning query_name() did not return a valid name.  'lightning bolt rapier' 
+Lightningrod:  Warning query_name() did not return a valid name.  'lightning rod' 
+MithrilskullcapWarning: /d/deku/sanctuary/obj/mithrilskullcap#87169 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'skullcap' 
+Neiredshawl:   Warning: /d/deku/sanctuary/obj/neiredshawl#87170 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'nereid shawl' 
+Nightsveil:    Warning query_name() did not return a valid name.  'katar' 
+Orchidgown:    Warning: /d/deku/sanctuary/obj/orchidgown#87172 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'violet silk gown' 
+Paper01:       Warning: /d/deku/sanctuary/obj/paper01#87173 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'journal' 
+Paper02:       Warning: /d/deku/sanctuary/obj/paper02#87174 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'paper' 
+Paper03:       Warning: /d/deku/sanctuary/obj/paper03#87175 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'paper' 
+Paper04:       Warning: /d/deku/sanctuary/obj/paper04#87176 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'paper' 
+Plate:         Warning: /d/deku/sanctuary/obj/plate#87177 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'fullplate' 
+Red_robes:     Warning: /d/deku/sanctuary/obj/red_robes#87178 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'red robes' 
+Redsilkcloak:  Warning: /d/deku/sanctuary/obj/redsilkcloak#87179 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'silk cloak' 
+Redstone:      Warning: /d/deku/sanctuary/obj/redstone#87180 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'red stone' 
+Redwizardhat:  Warning: /d/deku/sanctuary/obj/redwizardhat#87181 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'wizard's hat' 
+Rod:           Warning: /d/deku/sanctuary/obj/rod#87182 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'rod of wizardry' 
+Snakebracers:  Warning: /d/deku/sanctuary/obj/snakebracers#87183 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'bracers' 
+Stonerod:      Warning query_name() did not return a valid name.  'stone rod' 
+Stonestaff:    Warning query_name() did not return a valid name.  'petrified staff' 
+T_key:         Warning: /d/deku/sanctuary/obj/t_key#87186 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'tower key' 
+Warlordamulet: Warning: /d/deku/sanctuary/obj/warlordamulet#87187 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'amulet' 
+Warmring:      Warning: /d/deku/sanctuary/obj/warmring#87188 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'ring' 
+Weatherring:   Warning: /d/deku/sanctuary/obj/weatherring#87189 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'ring' 
+Whitewizardhat:Warning: /d/deku/sanctuary/obj/whitewizardhat#87190 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'wizard's hat' 
+Wizardhat:     Warning: /d/deku/sanctuary/obj/wizardhat#87191 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'wizard's hat' 
+Zring:         Warning: /d/deku/sanctuary/obj/zring#87192 is not a subclass of /std/weapon.
+Warning: is_weapon() did not return true.
+Warning query_name() did not return a valid name.  'brotherhood ring' 

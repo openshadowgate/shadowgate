@@ -1,0 +1,49 @@
+//updated by Circe 6/2/04 with color, etc.
+// Mathowvy Road, just outside Tabor
+// Thorn@ShadowGate
+// 000922
+// Tabor
+// math2.c
+
+#include <std.h>
+#include "../include/tabor.h"
+
+inherit ROOM;
+
+void create() {
+  ::create();
+  set_terrain(CITY);
+  set_travel(DIRT_ROAD);
+  set_light(2);
+  set_name("Mathowvy Road, Tabor");
+  set_short("Mathowvy Road, Tabor");
+  set_long(
+@DAI
+%^BOLD%^Mathowvy Road, Tabor%^RESET%^
+You appear to have entered the town of Tabor, capital of the small
+Kingdom of Tabor.  You at the very edge of the town and are standing in
+front of a %^ORANGE%^large inn %^RESET%^which appears to be well frequented by travelers to 
+the east.  
+
+%^RESET%^%^MAGENTA%^Mathowvy Road %^RESET%^continues to the northwest and south.
+DAI
+    );
+  set_exits(([
+    "east" : ROOMDIR+"cncinn",
+    "south" : ROOMDIR+"math1",
+    "northwest" : ROOMDIR+"math3"
+  ]));
+  set_listen("default","You hear the sound of talking and laughing from the inn.");
+  set_smell("default","You smell a cozy wood fire and fine food nearby.");
+  set_items(([
+    "inn" : "This is the Crown and Castle Inn, famed throughout Tabor.",
+    "road" : "%^MAGENTA%^Mathowvy Road%^RESET%^: North to Tabor, south to Azha in Tsarven"
+  ]));
+ }
+
+void reset(){
+  ::reset();
+  if(!present("street_light",TO))
+    new("/d/common/obj/misc/street_light")->move(TO);
+}
+

@@ -8,17 +8,12 @@
 /inv
 /dest.log
 
-#Spoilers
-/d/*
-
-#Parts of the lib are in the world
-!/d/newbie
-!/d/token_hunt
-!/d/common
-!/d/magic
-!/d/shadowgate
-!/d/example
-!/d/obj
+#Player data
+/d/players
+/d/save
+/d/avatars
+/d/retired
+/d/player_houses
 
 #fixme
 *.o

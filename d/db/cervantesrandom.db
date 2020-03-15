@@ -1,0 +1,6 @@
+$looks over his blades and sighs softly+|unwield blades+|unwield blades 2+&hmm+I like these blades, even though it's a bit odd wielding them all the time+|wield blades+|wield blades 2+$shrugs and looks down at his blades again, before going back to work
+$looks around his store and nods+I just sell standard equipment here, but most of it you can find pratical and frequent use for+$holds up a sack and shows it to you+this for instance, just about everyone will need one of these+$puts the sack down and goes back to work
+&hmm+been awhile since I have fought, maybe I will head over to the arena in a few days+$looks down at his blades and shrugs
+|open door+$looks out of his shop and hmms+Maybe I will go see Akanar sometime today...+&shrug+|close door
+|speech say thoughtfully+I believe I shall go see Akanar for a bit+|open door+|out+|west+|west+|unwield blades+|unwield blades 2+|west+|say Greetings Master Weaver Akanar+?gender == male+$nods to you+$hmms and looks over akanar's products+|buy tunic+|say farewell for now Akanar++|wave akanar++|east+|wield blades+|wield blades 2+|east+|east+|open door+|enter+|close door+|wear tunic+$yawns and goes back to work+|speech
+&nod+$looks through the items he has for sale and ponders.

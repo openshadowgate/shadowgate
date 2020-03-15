@@ -1,0 +1,43 @@
+// /d/guilds/alliance/hall/dungeon.c
+
+#include <std.h>
+
+inherit VAULT;
+//inherit "/std/gaol";
+
+void create(){
+   object ob;
+   
+   ::create();
+   set_property("no teleport",1);
+   set_indoors(1);
+   set_light(1);
+   set_short("The castle dungeon");
+   set_long(
+@DESC
+%^BOLD%^%^BLUE%^The castle dungeon%^RESET%^
+%^RED%^You are in the castle dungeon and the moist and cold air chills 
+your body. The dungeon is lit by a few torches but vision is still 
+a little blurry. There isn't much space down here and this is certainly
+no place for a giant nor any surface creature to be comfortable.
+DESC
+   );
+   set_listen("default","You can hear the sound of water dripping and the "
+     "screams from a few rats hiding here.");
+   set_smell("default","You smell a strong mixture of dirt and lantern oil.");
+   set_exits(([
+      "up":"/d/guilds/alliance/hall/stair2.c",
+   ]));
+    set_door("cell door","/d/guilds/alliance/hall/stair2","up","alliance ring");
+    set_open("cell door",0);    
+    set_locked("cell door",1);
+    set_door_description("cell door", "This is a door made of three inch thick "
+      "oaken boards.  It has a section cut out and replaced with a grid of one "
+      "inch diameter iron bars so that some air can still get to the prisoners.");
+    set_string("cell door","open","The cell door creaks slightly as it swings "
+      "open.");
+    set_string("cell door","close","An ominous thud echoes off the walls as the "
+      "heavy cell door shuts solidly.");
+    "/d/guilds/alliance/hall/stair2"->set_open("cell door",0);
+    "/d/guilds/alliance/hall/stair2"->set_locked("cell door",1);
+}

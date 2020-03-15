@@ -1,0 +1,56 @@
+//Coded by the one and only master of monsters...BANE//
+#include <std.h>
+inherit MONSTER;
+void create(){
+    ::create();
+    set_id(({"manticore","Manticore"}));
+    set_name("Manticore");
+    set_short("A huge Manticore");
+    set_long(
+	"The Manticore is a true monster, with a leonine torso and legs, "+
+	"batlike wings, a man's head, and a tail tipped with iron spikes. "+
+	"The Manticore stands 6 feet tall and its massive wing span is "+
+	"over 25 feet. The creatures tawny hide is black-brown in color "+
+	"and its wings are dark brown."
+    );
+    set_body_type("dragon");
+    set_race("manticore");
+    set_gender("male");
+    set_size(2);
+    set_alignment(5);
+    set_hd(7,19);
+    set_max_level(18);
+    set_hp(75);
+    set_attack_bonus(1);
+    set_exp(1850);
+    set_overall_ac(3);
+    set("aggressive",15);
+    set_wielding_limbs(({"right foreclaw","left foreclaw","head"}));
+    new("/d/laerad/mon/obj/mantclaw")->move(this_object());
+    command("wield claw in right foreclaw");
+    new("/d/laerad/mon/obj/mantclaw")->move(this_object());
+    command("wield claw in left foreclaw");
+    new("/d/laerad/mon/obj/mantteeth")->move(this_object());
+    command("wield teeth in head");
+    set_funcs(({"spikes"}));
+    set_func_chance(102);
+}
+void spikes(object targ){
+    int roll, ac;
+    roll=random(20);
+    ac=targ->query_ac();
+    if(roll > 13-ac){
+	tell_object(targ,"%^BOLD%^RED%^The Manticore fires a volley of tail spikes that impale you in the chest!");
+	tell_room(ETO,"%^BOLD%^RED%^The Manticore fires a volley of tail spikes at "+targ->query_cap_name()+" impaling "+targ->query_objective()+" in the chest!",targ);
+	targ->do_damage("torso",roll_dice(6,6));
+	set_func_chance(0);
+	call_out("reset_spikes",20);
+	return 1;
+    }
+    tell_object(targ,"%^BOLD%^RED%^The manticore fires a volley of tail spikes right past you!");
+    tell_room(ETO,"%^BOLD%^RED%^The Manticore fires a volley of tail spikes right past "+targ->query_cap_name()+"!",targ);
+    set_func_chance(0);
+    call_out("reset_spikes",20);
+    return 1;
+}
+void reset_spikes(){set_func_chance(102);}

@@ -1,0 +1,5 @@
+
+reset() {
+        ::reset();
+        AOVER->setup_monsters(TO, "street");
+}

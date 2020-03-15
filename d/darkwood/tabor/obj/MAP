@@ -1,0 +1,41 @@
+       Tsarven Empire
+             ^
+   ^         |
+   |        +-+                     
+ SOUTH      |M|                         S
+  is        +-+          Town           |
+  UP        +-+              of      E--+--W
+          1>|M|               TABOR     |
+            +-+                         N
+               +-+                     
+               |M|<6
+               +-+   
+                  +-+                     
+                  |M| 
+                  +-+
+               +-++-++-+
+               |V||2||G|
+               +-++-++-+            +---------------------------------+
+            +-+   +-+   +-+         | Tabor Map Legend                |
+          4>|V|13>|M|<11|G|<7       +---------------------------------+
+            +-+   +-+   +-+         | 1 - Inn                         |
+      +-+   +-+   +-+   +-+         | 2 - Caerveron Square            |
+Shadow|E|   |V| 9>|M|<10|G|         | 3 - Tower of Wizardry           |
+ <--  +-+   +-+   +-+   +-+         | 4 - Cathedral of St. Vala       |
+         +-++-++-++-++-++-++-+      | 5 - Fields of Tempus (trainer)  |
+         |Y||Y||Y||M||Y||Y||Y|<5    | 6 - Armory                      |
+         +-++-++-++-++-++-++-+      | 7 - Tabor Gaol                  |
+      +-+         +-+       ^ +-+   | 8 - Weapons Store               |
+      |W|         |M|       8 |N|   | 9 - Royal Bank of Tabor         |
+      +-+         +-+         +-+   |10 - Healer's Shop               |
+   +-+            +-+          |    |11 - General Store               |
+   |W|            |M|          v    |12 - Caer Tabor Castle           |
+   +-+            +-+       Echoes  |     (Law + Boards)              |
+  /                  +-+     Mtns.  |13 - Scribe                      |
+ 3                   |M|            +---------------------------------+
+           S         +-+            | M - Mathowvy Road               |
+           |            +-+         | V - Vala Street                 |
+        E--+--W         |M|         | G - Greene Street               |
+           |            +-+         | Y - Gwydion Street              |
+           N             ^          | W - Wizard's Way                |
+                         12         +---------------------------------+

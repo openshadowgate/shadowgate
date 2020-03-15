@@ -1,0 +1,115 @@
+// This is throwing some strange errors in the debug.log.  Going to remove the file in an effort to figure out what's using this spell and why -Ares
+// Bolt of Madness
+// Adapted from Mystic Bolt by Circe
+// for use with Aislinn's Legacy 10/27/07
+// Updated by ~Circe~ 6/15/08 to be in line with 
+// the other spells cast by the rapier
+#include <std.h>
+#include <daemons.h>
+inherit SPELL;
+
+void create(){
+    ::create();
+    set_spell_name("bolt of madness");
+    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_sphere("combat");
+    set_spell_domain("trickery");
+    set_syntax("cast <classname> bolt of madness on <target>");
+    set_description("This spell conjures pure madness to be cast towards the target, tearing at their mind.");
+    set_target_required(1);
+    set_somatic_comp();
+    set_verbal_comp();
+}
+
+int preSpell(){
+    if(!objectp(target)){
+        tell_object(caster,"This spell requires a target.");
+        return 0;
+    }
+    return 1;
+}
+
+string query_cast_string(){
+    tell_object(caster,"%^BOLD%^%^BLACK%^You cackle with %^MAGENTA%^"+
+       "madness %^BLACK%^as you call forth the power of your god!%^RESET%^");
+    tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" cackles "+
+       "%^MAGENTA%^madly%^BLACK%^, eyes widening as "+caster->QS+" raises "+
+       ""+caster->QP+" hands!%^RESET%^",caster);
+	return "display";
+}
+
+void spell_effect(int prof){
+    int damage,i;
+    object *attackers;
+
+    if (!objectp(caster)){
+        dest_effect();
+        return;
+    }
+    if(!present(target,place)){
+        tell_object(caster,"Your target has left the area.");
+        dest_effect();
+        return;
+    }
+
+    attackers = caster->query_attackers();
+    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
+    attackers += ({ target });
+    attackers = distinct_array(attackers);
+
+    damage = roll_dice(clevel,6);
+
+    tell_object(caster,"%^RESET%^%^MAGENTA%^From your open palms, a bolt of "+
+       "pure %^BOLD%^%^BLACK%^madness %^RESET%^%^MAGENTA%^streaks towards "+
+       ""+target->QCN+"!%^RESET%^");
+    tell_object(target,"%^RESET%^%^MAGENTA%^A bolt of %^BOLD%^%^BLACK%^madness"+
+       "%^RESET%^%^MAGENTA%^ streaks from "+caster->QCN+"'s hand towards you!%^RESET%^");
+    tell_room(place,"%^RESET%^%^MAGENTA%^From "+ caster->QCN+"'s open palms, a "+
+       "bolt of pure %^BOLD%^%^BLACK%^madness %^RESET%^%^MAGENTA%^streaks "+
+       "towards "+target->QCN+"!%^RESET%^",({ caster, target}) );
+
+    if(sizeof(attackers)){
+        for(i=0;i<sizeof(attackers);i++){
+            damage = roll_dice(clevel,6);
+            if(!objectp(attackers[i])) { continue; }
+            if(!present(attackers[i],place)) { continue; }
+            if(attackers[i] == target){
+               if (!SAVING_D->saving_throw(target, "spell",0)){
+                  tell_object(target,"%^BOLD%^%^BLACK%^The bolt of madness ravages "+
+                     "your mind, leaving you disoriented.%^RESET%^");
+                  tell_room(place,"%^BOLD%^%^BLACK%^The bolt of madness "+
+                     "strikes "+target->QCN+".%^RESET%^", ({ target}) );
+                  damage_targ(target, "torso", damage);
+                  spell_kill(target,caster);
+               }else{
+                  tell_object(target,"%^BOLD%^The bolt of madness only grazes you.");
+                  tell_room(place,"%^BOLD%^The mystic bolt barely grazes "+target->QCN+".", target);
+                  damage_targ(target, "torso", damage/2);
+                  spell_kill(target,caster);
+               }
+            }else{
+               if (!SAVING_D->saving_throw(attackers[i], "spell",0)){
+                  tell_object(attackers[i],"%^BOLD%^You are struck by the bolt of madness!");
+                  tell_room(place,"%^BOLD%^The bolt of madness strikes "+attackers[i]->QCN+".",({attackers[i]}));
+                  damage_targ(attackers[i], "torso", damage);
+                  spell_kill(attackers[i],caster);
+               }else{
+                  tell_object(attackers[i],"%^BOLD%^The bolt of madness only grazes you.");
+                  tell_room(place,"%^BOLD%^The mystic bolt barely grazes "+attackers[i]->QCN+".", attackers[i]);
+                  damage_targ(attackers[i], "torso", damage/2);
+                  spell_kill(attackers[i],caster);
+               }
+            }
+        }
+    }
+    spell_successful();
+    dest_effect();
+}
+
+void dest_effect(){
+   if(!objectp(TO)) { return; }
+   ::dest_effect();
+   TO->remove();
+}
+
+//No help file because this is not truly a spell

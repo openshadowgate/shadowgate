@@ -1,0 +1,78 @@
+#include "../../undead.h"
+
+inherit ROOM;
+
+void init() 
+{
+    ::init();
+    add_action("read", "read");
+}
+
+void create() 
+{
+    ::create();
+
+    set_name("The Graez Pub");
+    set_terrain(STONE_BUILDING);
+    set_travel(PAVED_ROAD);
+    set_property("light", 2);
+    set_property("indoors", 1);
+
+    set_short("Graez Bar");
+
+    set_long("%^BOLD%^You enter the once famous Graez Bar%^RESET%^\n"
+        "Graez Bar used to bring in travelers from leagues "
+        "away, even from other continents. Now, with war raging "
+        "it has become little more then a pale shadow of its "
+        "former self. You'll be lucky if the drinks they serve "
+        "you aren't just gutter water.");
+    
+    set_items(([
+        "bar"    : "The Graez Bar.",
+        "food"   : "bar",
+	    "menu"   : "It looks like a menu of drinks. Read it to see "
+	               "what's available."]));
+    
+    set_exits(([
+        "north"     :TOWN"street19"
+             ]));
+
+    set_smell("default","The strong smell of alcohol permeates the air.");
+    set_listen("default","You can hear the rowdy laughter of drinking men.");
+}
+
+void reset() 
+{
+    ::reset();
+//    if(!present("barkeep")) { new(MON"bartender")->move(TO); }
+    return;
+}
+
+int read(string str) 
+{
+    object ob;
+    int i;
+    
+    ob = present("barkeep");
+    if(!ob) { write("%^RED%^You cannot read the menu, as it is splattered with blood."); return 1; }
+
+    message("Ninfo", "%^BOLD%^The following are just some of the drinks served at the Graez Bar%^RESET%^\n", TP);
+    message("Ninfo", "%^BLUE%^-----------------------------------------------------------------%^RESET%^\n", TP);
+    message("Ninfo", "\tA Deathblow\t\t\t%^BOLD%^"+ (int)ob->get_price("deathblow")+" silver\n%^RESET%^", TP);
+    message("Ninfo", "\tA special of the house\t\t%^BOLD%^"+(int)ob->get_price("special")+" silver\n%^RESET%^", TP);
+    message("Ninfo", "\tA pale ale\t\t\t%^BOLD%^"+(int)ob->get_price("ale")+" silver\n%^RESET%^", TP);
+    message("Ninfo", "\tA glass of water\t\t%^BOLD%^"+(int)ob->get_price("water")+" silver\n%^RESET%^", TP);
+    message("Ninfo", "\tPretzels\t\t\t%^BOLD%^"+(int)ob->get_price("pretzels")+" silver\n%^RESET%^", TP);
+    message("Ninfo", "%^BLUE%^-----------------------------------------------------------------%^RESET%^\n", TP);
+    message("Ninfo", "<buy drink_name> %^BOLD%^gets you a drink.%^RESET%^\n", TP);
+    return 1;
+}
+
+
+
+
+
+
+
+
+

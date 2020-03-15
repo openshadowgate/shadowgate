@@ -1,0 +1,53 @@
+
+#include <std.h>
+#include <daemons.h>
+#include "/d/stella/short.h"
+
+inherit OBJECT;
+
+void init(){
+	::init();
+	add_action("inhale_lilac","inhale");
+	}
+	
+void create(){
+	::create();
+	
+	set_name("a lovely lilac blossom");
+	set_id(({"blossom","lilac"}));
+        set_short("%^CYAN%^A Lilac Blossom.%^CYAN%^");
+        set_long("%^CYAN%^This Lilac Blossom is a lovely shade of blue.  It "
+           "smells so sweet that you want to inhale it's aroma forever.");
+	set_property("magic",1);
+	set_weight(1);
+	set_value(500);
+	}
+
+int inhale_lilac(string str){
+
+        int healing;
+
+        if ((!str)||(str != "lilac")) {
+          notify_fail("Inhale what?\n");
+          return 0; }
+
+	if(TP->query_hp() < TP->query_max_hp()){
+	  healing = ( (int)TP->query_max_hp() - (int)TP->query_hp() );
+	  tell_object(TP,"The lilacs sweet fragrance restores you.\n");
+	  say(TPQCN+ " inhales the fragrance of a lilac blossom",TP);
+	  TP->add_hp(healing);
+	  TP->set_paralyzed(10+random(10),
+            "%^CYAN%^%^BOLD%^You're still lost in the sweet fragrance of the lilac!"
+            "%^RESET%^");    
+	  new("/realms/pegasus/shops/items/dust.c")->move(this_player());
+	  remove();
+	}else{
+	  tell_object(TP,"The alluring fragrance of the lilac holds you captivated.");
+	  say(TPQCN+ " inhales the fragrance of a lilac blossom",TP);
+	  TP->set_paralyzed(10+random(10),
+            "%^CYAN%^%^BOLD%^You're still lost in the sweet fragrance of the lilac!"
+            "%^RESET%^");
+	}
+	return 1;
+      }
+

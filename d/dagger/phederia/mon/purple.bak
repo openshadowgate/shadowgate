@@ -1,0 +1,132 @@
+#include <std.h>
+#include "../phedefs.h"
+inherit WEAPONLESS;
+int STuffed,STop;
+void create(){
+  ::create();
+  set_name("purple worm");
+  set_id(({"worm","purple worm"}));
+  set_short("%^RESET%^%^MAGENTA%^Purple worm%^RESET%^");
+  set_long(
+  "  This massive creature shakes the dirt from its body and lunges to swallow you whole with its massive fang rimmed mouth!"
+  "  The end of its 40 foot long body ends in a viscious stinger that drips venom that corrodes the rock as it lashed about."
+  );
+  set_hd(35,8);
+  set_attacks_num(2);
+  set_attack_limbs(({"gaping maw","viscious poisoned stinger"}));
+  set_nat_weapon_type("slash");
+  set_damage(2,6);
+  set_hp(500);
+  set_max_hp(query_hp());
+  set_race("worm");
+  add_limb("gaping maw","first segment",0,0,0);
+  add_limb("first segment","second segment",0,0,0);
+  add_limb("middle segment","second segment",0,0,0);
+  add_limb("last segment","second segment",0,0,0);
+  add_limb("narrowed tail end","second segment",0,0,0);
+  add_limb("viscious stinger","second segment",0,0,0);
+  set_ac(2);
+  set_exp(15000);
+  set_property("swarm",1);
+  set_property("magic resistance",15);
+  set_func_chance(20);
+  set_funcs(({"maw","stinger"}));
+}
+void maw(object targ){
+  if(STuffed){
+  tell_object(targ,"%^BOLD%^The purple worm attempts to swallow you but already has something in its throat!");
+  tell_room(environment(targ),"%^BOLD%^The purple worm lunges at "+targ->query_cap_name()+" but cant seem to swallow "+targ->query_subjective()+"!",targ);
+  return 15;
+  }
+  if(!random(2)){
+  tell_object(targ,"%^BOLD%^The purple worm lunges for you and you try to get out of the way but it swallows you whole!");
+  tell_room(environment(TO),"%^BOLD%^The purple worm lunges forward at "+targ->query_cap_name()+" who tries to jump out of the way but is swallowed whole!",({TO,targ}));
+  tell_object(TO,"You grin and swallow "+targ->query_cap_name()+"!");
+  targ->move(MON"stomach.c");
+  if(present("pearl ring",targ)){(present("pearl ring",targ))->remove();}
+  targ->set_paralyzed(600,"%^BOLD%^%^GREEN%^You struggle in the acids of this worms stomach!");
+  STuffed=1;
+  call_out("swallow",1,targ,0);
+  return;
+  } else {
+  tell_object(targ,"%^BOLD%^The purple worm lunges for you but you manage to scramble out of the way of its gaping maw!");
+  tell_room(environment(targ),"%^BOLD%^"+targ->query_cap_name()+" scrambles out of the way as the massive worm tries to swallow him!",targ);
+  }
+}
+int stinger(object targ){
+  tell_object(targ,"%^BOLD%^%^BLUE%^The flickering stinger nicks you and the poison works into your body!");
+  tell_room(environment(targ),"%^BOLD%^%^BLUE%^The purple worms flickering stinger scores a hit on "+targ->query_cap_name()+" those starts clawing at "+targ->query_possessive()+" neck!",({TO,targ}));
+  tell_object(TO,"You sting "+targ->query_cap_name()+" and watch him squirm.");
+  if(!random(7)){
+  tell_object(targ,"%^BOLD%^The poison races through your body and you feel your heart start to race faster and FASTER till it explodes!");
+  tell_room(targ,"%^BOLD%^%^RED%^"+targ->query_cap_name()+" screams and clutchs at his chest then collapes, dead!",targ);
+  set_property("magic",1);
+  targ->do_damage("torso",(targ->query_hp())+20);
+  remove_property("magic");
+  } else {
+  tell_object(targ,"%^BOLD%^The poison races through your blood and your body tries to fight it off!");
+  tell_room(environment(targ),"%^BOLD%^"+targ->query_cap_name()+" screams in agony and clutches at his chest, writhing around in agony!!",targ);
+  targ->set_paralyzed(50,"%^BOLD%^You writhe in agony as the poison races through your body!");
+  }
+}
+void swallow(object targ,int num){
+  switch(num){
+  case(0):
+  if(!present(targ,MON"stomach.c")) return;
+  tell_object(targ,"%^RESET%^%^GREEN%^The acid starts to eat into you and you try to fight your way out of here!");
+  tell_room(environment(TO),"%^RESET%^%^GREEN%^You can see something struggling in the inside of the worm!");
+  targ->add_hp(-(((int)targ->query_max_hp())/6));
+  if((int)targ->query_hp()<0){targ->set_paralyzed(); return;}
+  break;
+  case(1):
+  if(!present(targ,MON"stomach.c")) return;
+  tell_object(targ,"%^RESET%^%^GREEN%^The acid starts to eat into you and you try to fight your way out of here!");
+  tell_room(environment(TO),"%^RESET%^%^GREEN%^You can see something struggling in the inside of the worm!");
+  targ->add_hp(-(((int)targ->query_max_hp())/5));
+  if((int)targ->query_hp()<0){targ->set_paralyzed(); return;}
+  break;
+  case(2):
+  if(!present(targ,MON"stomach.c")) return;
+  tell_object(targ,"%^RESET%^%^GREEN%^The acid is burning you terribly and you struggle to escape!");
+  tell_room(environment(TO),"%^RESET%^%^GREEN%^The struggling in the inside of the worm is getting more frantic!");
+  targ->add_hp(-(((int)targ->query_max_hp())/4));
+  if((int)targ->query_hp()<0){targ->set_paralyzed(); return;}
+  break;
+  case(3):
+  if(!present(targ,MON"stomach.c")) return;
+  tell_object(targ,"%^RESET%^%^GREEN%^The acid is burning you terribly and you struggle to escape!");
+  tell_room(environment(TO),"%^RESET%^%^GREEN%^The struggling in the inside of the worm is getting more frantic!");
+  targ->add_hp(-(((int)targ->query_max_hp())/3));
+  if((int)targ->query_hp()<0){targ->set_paralyzed(); return;}
+  break;
+  case(4):
+  if(!present(targ,MON"stomach.c")) return;
+  tell_object(targ,"%^RESET%^%^GREEN%^The sears into you! Why wont anyone help!");
+  tell_room(environment(TO),"%^RESET%^%^GREEN%^The struggling in the inside of the worm is weakening!");
+  targ->add_hp(-(((int)targ->query_max_hp())/2));
+  if((int)targ->query_hp()<0){targ->set_paralyzed(); return;}
+  break;
+  case(5):
+  if(!present(targ,MON"stomach.c")) return;
+  tell_object(targ,"%^RESET%^%^GREEN%^Your last though at the acid finnaly eats through your eyes and into your brain is why didnt my friends help?");
+  tell_room(environment(TO),"%^RESET%^%^GREEN%^The struggling in the worm subsides and it looks for another target!",targ);
+  targ->add_hp(-((int)targ->query_max_hp()));
+  targ->set_paralyzed(); 
+  }
+  num++;
+  call_out("swallow",5,targ,num);
+  return;
+}
+void die(mixed ob){
+  object *stuff;
+  int i,j;
+  if(objectp(MON"stomach.c"))  new(MON"stomach.c");
+  stuff=all_inventory(MON"stomach.c");
+  j=sizeof(stuff);
+  for(i=0;i<j;i++){
+  stuff[i]->move(ETO);
+  if(stuff[i]->query_paralyzed()) stuff[i]->set_paralyzed();
+  }
+  tell_room(environment(TO),"%^MAGENTA%^The massive puple worm collapes and spilts open from the damage its taken!");
+  ::die(ob);
+}
