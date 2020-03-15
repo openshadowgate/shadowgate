@@ -100,6 +100,7 @@ void die(object ob);
 
 int query_exp_needed(int level);
 void set_new_exp(int level,string perc); // new lib level exp function, see function definition for more details -Ares
+void set_monster_magic_resistance(string perc);
 
 int is_monster() {return 1;}
 
@@ -1487,7 +1488,61 @@ int set_new_exp(int level, string perc)
     return exp;
 }
 
+void set_monster_magic_resistance(string perc)
+{
+  int base_level, modifier;
+  base_level=TO->query_highest_level();
+  if (!stringp(perc) || perc == "" || perc == " ")
+  {
+      perc = "normal";
+  }
 
+  perc = lower_case(perc);
+
+  switch (perc)
+  {
+    case "none":
+      modifier = base_level * 0;
+      break;
+
+    case "extremely low":
+      modifier = base_level * 25/100;
+      break;
+
+    case "very low":
+      modifier = base_level * 50/100;
+      break;
+
+    case "low":
+      modifier = base_level * 75/100;
+      break;
+
+    case "average":
+      modifier = base_level;
+      break;
+
+    case "high":
+      modifier = base_level * 125/100;
+      break;
+
+    case "very high":
+      modifier = base_level * 150/100;
+      break;
+
+    case "extremely high":
+      modifier = base_level * 175/100;
+      break;
+
+    case "insanely high":
+      modifier = base_level * 2;
+      break;
+
+    default:
+      modifier = base_level;
+      break;
+  }
+  TO->set_property("magic resistance",modifier);
+}
 
 void set_use_monster_flag(int f)
 {
