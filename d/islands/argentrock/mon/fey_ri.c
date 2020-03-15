@@ -50,7 +50,7 @@ void create(){
         avoid_traps(1);
         add_attack_bonus(random(10)+5);
 	set_alignment(9);
-	set_property("magic resistance",30+(random(20)));
+	set_mob_magic_resistance("average");
 		switch(random(6)){
 case 0:
 	set_class("fighter");

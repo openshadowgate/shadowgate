@@ -34,7 +34,7 @@ void create()
     set_stats("dexterity",16);
     set_stats("constitution",22);
     set_new_exp(60,"boss");
-    set_monster_magic_resistance("high"); //comes out to 81MR
+    set_mob_magic_resistance("high"); //comes out to 81MR
     set_property("spell damage resistance",10);
     set_property("no death",1);
     set_property("magic",1);

@@ -26,7 +26,7 @@ void create() {
     set_race("elf");
     add_money("gold", random(25));
     set_body_type("human");
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_overall_ac(-20);
     set_stats("strength",12);
     set_stats("intelligence",14);
@@ -39,12 +39,12 @@ void create() {
     set_exp(100);
     set_spell_chance(80);
     set_spells(({
-        "cause blindness", 
-        "dispel magic", 
+        "cause blindness",
+        "dispel magic",
         "hold person",
-        "dispel magic", 
-        "dispel magic", 
-        "dispel magic", 
+        "dispel magic",
+        "dispel magic",
+        "dispel magic",
         "thorn spray",
         "animate object"
         "sticks into snakes"
@@ -56,7 +56,7 @@ void create() {
 }
 
 string long_desc(){
-    return 
+    return
         "Hasas carries himself like that of a person who is %^RED%^stubborn%^CYAN%^ and "
         "%^BLUE%^unchanging%^CYAN%^. His movements are %^GREEN%^slow%^CYAN%^ and %^ORANGE%^purposeful%^CYAN%^, without "
         "a hint of any hesitation. He has long %^YELLOW%^pale yellow hair%^RESET%^%^CYAN%^ which is "
@@ -66,4 +66,3 @@ string long_desc(){
         "in a simple %^RESET%^gray robe%^CYAN%^. He will sell his services to %^RED%^outsiders%^CYAN%^, "
         "though it won't be cheap.%^RESET%^";
 }
-    

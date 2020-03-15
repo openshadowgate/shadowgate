@@ -45,7 +45,7 @@ void create() {
     set_race("elf");
     add_money("gold", random(25));
     set_body_type("human");
-    set_property("magic resistance",15);
+    set_mob_magic_resistance("very low");
     set_overall_ac(-16);
     set_stats("strength",15);
     set_stats("intelligence",13);
@@ -79,4 +79,3 @@ string long_desc(){
         "that blends in well with the forest, mostly "
         "%^GREEN%^greens%^CYAN%^, %^YELLOW%^tans%^RESET%^%^CYAN%^ and %^ORANGE%^browns%^CYAN%^, as well as a soft %^BOLD%^%^BLACK%^gray cloak%^RESET%^%^CYAN%^.%^RESET%^";
 }
-

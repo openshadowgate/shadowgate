@@ -39,7 +39,7 @@ create() {
    set_property("no death",1);
    set_property("no animate",1);
    set_property("magic",1);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    set_hp(420);
    set_max_hp( query_hp() );
    set_exp(30000);

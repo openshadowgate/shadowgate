@@ -25,7 +25,7 @@ void create() {
     set_race("elf");
     add_money("gold", random(25));
     set_body_type("elf");
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("low");
     set_overall_ac(-20);
     set_stats("strength",19);
     set_stats("intelligence",12);
@@ -141,4 +141,3 @@ void trade_em(object obj, object obj2) {
     force_me("emoteat "+TPQN+" hands the "+obj2->query_name()+" to $N.");
   }
 }
-

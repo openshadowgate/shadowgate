@@ -1,4 +1,4 @@
-//General store vendor for elven refuge -- Yves 
+//General store vendor for elven refuge -- Yves
 #include <std.h>
 #include "../argabbr.h"
 inherit VENDOR;
@@ -27,7 +27,7 @@ void create() {
     set_race("elf");
     add_money("gold", random(25));
     set_body_type("human");
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("low");
     set_overall_ac(-20);
     set_stats("strength",19);
     set_stats("intelligence",12);
@@ -40,12 +40,12 @@ void create() {
     set_exp(100);
     set_spell_chance(35);
     set_spells(({
-        "cause blindness", 
-        "dispel magic", 
+        "cause blindness",
+        "dispel magic",
         "hold person",
-        "dispel magic", 
-        "dispel magic", 
-        "dispel magic", 
+        "dispel magic",
+        "dispel magic",
+        "dispel magic",
         "thorn spray",
     }));
     set_property("swarm",0);
@@ -54,7 +54,7 @@ void create() {
 }
 
 string long_desc(){
-    return 
+    return
         "%^RESET%^Denule has %^ORANGE%^c%^BOLD%^o%^RESET%^%^ORANGE%^p%^BOLD%^%^RED%^p%^ORANGE%^e%^BOLD%^%^RED%^r%^RESET%^%^ORANGE%^y%^RESET%^ %^BOLD%^%^RED%^red hair%^RESET%^ pulled back into a ponytail and his "
         "%^GREEN%^deep green eyes%^RESET%^ seem %^BOLD%^%^BLACK%^saddened%^RESET%^ by the plight of his people. "
         "Although his sharp features are %^BOLD%^fair%^RESET%^ and he is in excellent "
@@ -64,4 +64,3 @@ string long_desc(){
         "supplies here and while he will not give away his wares for "
         "free, he is open to %^RED%^selling%^RESET%^ or %^CYAN%^buying%^RESET%^ most merchandise.";
 }
-    

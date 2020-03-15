@@ -22,15 +22,15 @@ void create(){
   remove_limb("head");
   set_ac(0);
   set_exp(1);
-  set_property("magic resistance",99);
+  set_mob_magic_resistance("extremely high");
   set_attacks_num(1);
   set_damage(3,3);
   set_attack_limbs(({"torso"}));
   set_base_damage_type("slashing");
   set_property("knock unconscious",1);
-  set_base_damage_type("fire"); 
+  set_base_damage_type("fire");
 }
- void die(object ob) {  
+ void die(object ob) {
    //burns when deaded
 
     if(!objectp(ob) && objectp(TO->query_current_attacker()) )
@@ -41,6 +41,6 @@ void create(){
    tell_room(ETO,"%^RED%^The %^RESET%^diamond shard%^RED%^ ex%^BOLD%^pl%^RESET%^%^RED%^odes"+
    " in a fiery burst as "+ob->QCN+" strikes it.",ob);
    ob->cause_typed_damage(ob,0,roll_dice(2,10)+10,"fire");
-	
+
    ::die(TO);
 }

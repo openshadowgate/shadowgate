@@ -8,7 +8,7 @@ object *summoned;
 
 void create(){
         ::create();
-        
+
         set_name("corrupted treant");
         set_id(({"tree","treant","corrupted treant"}));
         set("short","%^BOLD%^%^BLACK%^A possessed tree%^RESET%^");
@@ -30,9 +30,10 @@ void create(){
         set_attack_limbs(({"right limb","left limb"}));
         set_attacks_num(2);
         set_alignment(6);
+        set_mob_magic_resistance("none");
         summoned = ({});
         }
-        
+
 void make_me(){
         int i;
         i = random(7);
@@ -43,7 +44,7 @@ void make_me(){
                 case 10:
                 case 11:
                         set_damage(2,8);
-                        
+
                         break;
                 case 12:
                 case 13:
@@ -63,7 +64,7 @@ void summon(object obj){
         int i,j;
         object ob;
         if (member_array(ETO->query_terrain(),({"heavy forest","light forest","jungle"})) == -1)
-		 return; 
+		 return;
         j = random(3);
         for(i=0;i<j;i++) {
                 ob = new("/d/tharis/monsters/tree");

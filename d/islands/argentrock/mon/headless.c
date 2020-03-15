@@ -46,7 +46,7 @@ create() {
    set_max_level(36);
    add_search_path("/cmds/fighter");
    set_property("weapon resistance",2);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("low");
    set_property("full attacks",1);
    set_property("swarm",1);
    set_overall_ac(-1);
@@ -78,7 +78,7 @@ void heart_beat() {
          flag = 0;
          return;
       }
-	  
+
       tell_room(ETO,"The headless searches for its prey.");
       flag++;
    }

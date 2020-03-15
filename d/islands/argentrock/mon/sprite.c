@@ -24,7 +24,7 @@ void create(){
     set_size(1);
     set_exp(1);
     set_property("magic",1);
-    set_property("magic resistance",99);
+    set_mob_magic_resistance("very high");
     set_attacks_num(1);
     set_damage(3,3);
     set_attack_limbs(({"torso"}));
@@ -39,4 +39,3 @@ string long_desc(){
         "irridescent wings %^WHITE%^sparkle%^GREEN%^ and let off pixie dust as she "
         "flutters and moves about.%^RESET%^";
 }
-

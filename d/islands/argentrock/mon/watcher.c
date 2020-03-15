@@ -39,7 +39,7 @@ void create()
   set_stats("constitution",19);
   add_money("gold",random(2000));
   set_property("full attacks",1);
-  set_property("magic resistance",40);
+  set_mob_magic_resistance("low");
   set_resistance("fire",50);
   set_monster_feats(({"power attack","rush","combat reflexes",
   "blade block","impale","light weapon","strength of arm",

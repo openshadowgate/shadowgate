@@ -44,7 +44,7 @@ void create(){
     add_attack_bonus(random(10)+5);
     set_alignment(4);
     set_hidden(1);
-    set_property("magic resistance",30+(random(20)));
+    set_mob_magic_resistance("low");
     switch(random(6)){
         case 0:
             set_class("fighter");
@@ -434,4 +434,3 @@ void heart_beat(){
     //     force_me("quaff vial");
     // }
 }
-

@@ -33,7 +33,7 @@ void create() {
    set_funcs(({"silk_func","critical"}));
    set_func_chance(30);
    set_property("weapon resistance",2);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("low");
    set_property("no death",1);
    set_overall_ac(-5);
    add_money("gold",1500+random(1000));
@@ -89,7 +89,7 @@ void critical(object vic) {
    }
 }
 
-int kill_ob(object vic,int num) 
+int kill_ob(object vic,int num)
 {
    TO->silk_func(vic);
    if(random(10) <= 1)
@@ -111,7 +111,7 @@ void heart_beat() {
       }*/
 }
 
-/*void add_attacker(object newob) 
+/*void add_attacker(object newob)
 {
    return kill_ob(newob,1);
    //::add_attacker(newob);

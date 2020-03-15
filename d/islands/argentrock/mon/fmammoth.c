@@ -29,7 +29,7 @@ create() {
    set_attack_limbs( ({"trunk","left forepaw","right forepaw"}) );
    set_attacks_num(3);
    set_base_damage_type("bludgeon");
-   set_base_damage_type("bludgeoning"); 
+   set_base_damage_type("bludgeoning");
    set_damage(3,8);
    set_hit_funcs( (["trunk": (: TO,"trunk_func" :)]) );
    set_hd(35,8);
@@ -46,7 +46,7 @@ create() {
    set_new_exp(30,"normal");
    set_max_level(36);
    set_property("weapon resistance",2);
-   set_property("magic resistance",40);
+   set_mob_magic_resistance("low");
    set_property("no death",1);
    set_property("no steal",1);
    set_overall_ac(-14);
@@ -80,14 +80,14 @@ void rush_him(object vic) {
    call_out("hit_him",10,vic);
 }
 
-void hit_him(object vic) 
+void hit_him(object vic)
 {
     if(!objectp(vic)) { return; }
    if( !present(vic) ) {
       again += ({vic});
       again = distinct_array(again);
       return;
-   } 
+   }
    if("/daemon/saving_throw_d.c"->reflex_save(vic,-25)){
       tell_object(vic,"%^BOLD%^You luckily avoided a direct hit by the "+
          "forest mammoth, but you are still hit by it!");

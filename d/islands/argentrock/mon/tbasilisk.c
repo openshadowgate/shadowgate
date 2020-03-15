@@ -27,7 +27,7 @@ create() {
    set_attack_limbs( ({"mouth","left foreclaw","right foreclaw"}) );
    set_attacks_num(3);
    set_base_damage_type("slashing");
-   set_base_damage_type("slashing"); 
+   set_base_damage_type("slashing");
    set_damage(3,6);
    set_hit_funcs( (["mouth": (: TO,"mouth_func" :)]) );
    set_funcs( ({"death_attack","disappear"}) );
@@ -44,7 +44,7 @@ create() {
    set_new_exp(31,"normal");
    set_max_level(36);
    set_property("weapon resistance",1);
-   set_property("magic resistance",35);
+   set_mob_magic_resistance("low");
    set_property("no death",1);
    set_property("no steal",1);
    set_overall_ac(-14);
@@ -52,8 +52,8 @@ create() {
    set_speed(60);
    add_money("silver",1500+random(1000));
    flag = 0;
-   set_property("natural poisoner", 1); 
-   set_property("natural poison", "purple worm poison"); 
+   set_property("natural poisoner", 1);
+   set_property("natural poison", "purple worm poison");
    set_property("poison chance", 10) ;
 }
 

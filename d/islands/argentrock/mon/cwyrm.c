@@ -31,7 +31,7 @@ create() {
    set_attack_limbs( ({"teeth","tail","left foreclaw","right foreclaw"}) );
    set_attacks_num(4);
    set_base_damage_type("slashing");
-   set_base_damage_type("slashing"); 
+   set_base_damage_type("slashing");
    set_damage(3,8);
    set_hit_funcs( (["tail": (: TO,"tail_func" :)]) );
    set_hd(45,10);
@@ -48,7 +48,7 @@ create() {
    set_func_chance(10);
    set_property("weapon resistance",2);
    set_property("damage resistance",2);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("very low");
    set_property("no death",1);
    set_property("no steal",1);
    set_property("magic",1);
@@ -116,7 +116,7 @@ void breath(object *vic,int all) {
          if(!"/daemon/saving_throw_d.c"->reflex_save(vic[i],-30)) {
             tell_object(vic[i],"%^BOLD%^%^RED%^You take the fire blast full on.");
 			vic[i]->cause_typed_damage(vic[i],0,roll_dice(15,10),"fire");
-            
+
          }
          else {
             tell_object(vic[i],"%^BOLD%^%^RED%^Your reflexes save you from the worst of the fire.");
@@ -141,7 +141,7 @@ void init() {
    flag = 1;
 }
 
-void die(object ob) 
+void die(object ob)
 {
   object comp;
    if(flag){

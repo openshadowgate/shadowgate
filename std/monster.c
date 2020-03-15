@@ -11,11 +11,6 @@
 #include <daemons.h>
 #include <new_exp_table.h>
 #include <rooms.h>
-#define MRLOW TO->query_highest_level() * .5
-#define MRMIDLOW TO->query_highest_level() * .75
-#define MRNORM TO->query_highest_level()
-#define MRMIDHIGH TO->query_highest_level() * 1.25
-#define MRHIGH TO->query_highest_level() * 1.25
 
 inherit "/std/weaponless_users.c"; // consolidating all weaponless combat into one spot -Ares
 
@@ -100,7 +95,7 @@ void die(object ob);
 
 int query_exp_needed(int level);
 void set_new_exp(int level,string perc); // new lib level exp function, see function definition for more details -Ares
-void set_monster_magic_resistance(string perc);
+void set_mob_magic_resistance(string perc);
 
 int is_monster() {return 1;}
 
@@ -1488,13 +1483,13 @@ int set_new_exp(int level, string perc)
     return exp;
 }
 
-void set_monster_magic_resistance(string perc)
+void set_mob_magic_resistance(string perc)
 {
   int base_level, modifier;
   base_level=TO->query_highest_level();
   if (!stringp(perc) || perc == "" || perc == " ")
   {
-      perc = "normal";
+      perc = "average";
   }
 
   perc = lower_case(perc);

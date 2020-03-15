@@ -68,6 +68,7 @@ create() {
    set_property("natural poisoner", 1);
    set_property("natural poison", "bloodroot");
    set_property("poison chance", 15) ;
+   set_mob_magic_resistance("none");
 }
 
 int teeth_func(object vic) {

@@ -45,7 +45,7 @@ create() {
    set_property("magic",1);
    set_property("no web",1);
    set_property("no bow",1);
-   set_property("magic resistance",70);
+   set_mob_magic_resistance("average");
    set_property("weapon resistance",3);
    set_hp(1200);
    set_max_hp( query_hp() );
@@ -129,10 +129,6 @@ void heart_beat() {
       return;
    if( !objectp(ETO) )
       return;
-   if( query_property("magic resistance") < 70 ) {
-      set_property( "magic resistance",roll_dice(2,5) );
-      remove_property( "lowered resistance" );
-   }
    living = all_living(ETO);
    all = sizeof(living);
    for(i = 0;i < all;i++) {

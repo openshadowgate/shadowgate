@@ -40,7 +40,7 @@ void create()
   set_exp(30000);
   add_money("gold",random(2000));
   set_property("full attacks",1);
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("very low");
   set_monster_feats(({"dodge","evasion",
   "mobility","scramble","power attack","rush","combat reflexes",
   "two weapon fighting","ambidexterity","greater two weapon fighting",
@@ -50,7 +50,7 @@ void create()
   set_thief_skill("move silently",95);
   set_thief_skill("hide in shadows",95);
   add_damage_bonus(8);
-  set_property("damage resistance",4); 
+  set_property("damage resistance",4);
   set_funcs(({"strik"}));
   set_func_chance(30);
   set_scrambling(1);
@@ -61,13 +61,13 @@ void create()
   command("wield dagger");
   command("wield dagger 2");
   command("wearall");
-  
+
 }
 void strik(object targ)
 {  int x;
    if(!objectp(TO)) return 1;
    if(!objectp(ETO)) return 1;
-		
+
 	else{
    tell_object(targ,"%^ORANGE%^The goblin tumbles next to you"+
    " and strikes repeatedly. Chunks of %^BOLD%^your flesh%^RESET%^%^ORANGE%^"+
@@ -76,7 +76,7 @@ void strik(object targ)
    " "+targ->query_cap_name()+" and strikes them repeatedly, "+
    "with a spray of %^BOLD%^blood%^RESET%^%^ORANGE%^ "+
    "and %^RED%^chunks of flesh%^ORANGE%^ flying off them!",targ);
-    for(x=0;x<random(5)+3;x++)  
+    for(x=0;x<random(5)+3;x++)
         targ->do_damage(targ->return_target_limb(),random(70)+10);
 
    if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30))
@@ -101,8 +101,8 @@ void heart_beat(){
   int x;
   ::heart_beat();
   if(!objectp(TO))return;
- 
-  if(!objectp(query_current_attacker())) { return ; } 
+
+  if(!objectp(query_current_attacker())) { return ; }
    if(query_attackers()==({ })) return;
   attackers = query_attackers();
   x = sizeof (attackers);
