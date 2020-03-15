@@ -5,7 +5,7 @@
 #include <skills.h>
 inherit SPELL;
 
-int clevel,bonus,i;
+int clevel, bonus, i;
 
 void create()
 {
@@ -25,12 +25,12 @@ void spell_effect()
 {
     object shape;
 
-    if(do_save(target,0))
-    {
-        tell_object(caster,"%^BOLD%^You will the true form of "+target->QCN+", but nothing happens.%^RESET%^");
+    if (do_save(target, 0)) {
+        tell_object(caster, "%^BOLD%^You will the true form of " + target->QCN + ", but nothing happens.%^RESET%^");
     }
-    if(objectp(shape = caster->query_property("shapeshifted")))
-        shape->reverse_shape(caster);
+    if (objectp(shape = target->query_property("shapeshifted"))) {
+        shape->reverse_shape(target);
+    }
 
     spell_successful();
 }

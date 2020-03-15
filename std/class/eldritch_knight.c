@@ -98,20 +98,39 @@ int prerequisites(object player)
     object race_ob;
     string race, base;
     int adj;
-    if(!objectp(player)) { return 0; }
+    if (!objectp(player)) {
+        return 0;
+    }
 
     race = player->query("subrace");
-    if(!race) { race = player->query_race(); }
-    race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
-    if(!objectp(race_ob)) { return 0; }
+    if (!race) {
+        race = player->query_race();
+    }
+    race_ob = find_object_or_load(DIR_RACES + "/" + player->query_race() + ".c");
+    if (!objectp(race_ob)) {
+        return 0;
+    }
     adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
     base = player->query("eldritch_knight_base_class");
-    if(!base) { return 0; }
-    if(!player->is_class(base)) { return 0; }
-    if((player->query_class_level(base) + adj) < 20) { return 0; }
-    if(!FEATS_D->usable_feat(player,"spell focus")) { return 0; }
-    if(!FEATS_D->usable_feat(player,"martial weapon proficiency")) { return 0; }
+    if (!base) {
+        return 0;
+    }
+    if (!player->is_class(base)) {
+        return 0;
+    }
+    if ((player->query_class_level(base) + adj) < 20) {
+        write("Failed level. Reported: " + player->query_class_level(base) + adj);
+        return 0;
+    }
+    if (!FEATS_D->usable_feat(player, "spell focus")) {
+        write("Failed spell focus.");
+        return 0;
+    }
+    if (!FEATS_D->usable_feat(player, "martial weapon proficiency")) {
+        write("Failed weapon proficiency.");
+        return 0;
+    }
     return 1;
 }
 
