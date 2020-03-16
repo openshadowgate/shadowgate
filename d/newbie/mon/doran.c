@@ -36,7 +36,7 @@ STYX
    set_stats("charisma", 9);
    set_stats("dexterity", 16);
    set_stats("constitution", 12);
-   set_property("magic resistance",10);
+   set_mob_magic_resistance("average");
    set_property("full attacks",1);
    set_property("alignment adjustment",-1);
    add_money("electrum",random(500));

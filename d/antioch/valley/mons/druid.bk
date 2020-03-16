@@ -22,7 +22,7 @@ void create()
 	set_id(({"druid","dragon","bear","wolf","drake","wolverine","great bear","grizzly bear"}));
 	set_gender("female");
 	set_alignment(5);
-	set_property("magic resistance",40);
+	set_mob_magic_resistance("average");
 	set_hd(20,6);
 	set_max_level(25);
 	set_level(25);

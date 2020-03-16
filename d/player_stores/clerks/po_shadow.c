@@ -23,7 +23,7 @@ void create() {
    set_alignment(5);
    add_money("gold", random(500));
    set_body_type("human");
-   set_property("magic resistance",15);
+   set_mob_magic_resistance("average");
    set_overall_ac(5);
    set_stats("strength",18);
    set_max_hp(150+random(50));

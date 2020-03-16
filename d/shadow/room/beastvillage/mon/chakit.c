@@ -26,7 +26,7 @@ void create() {
     set_gender("male");
     set_property("no dominate", 1);
     set_property("no kill", 1);
-    set_property("magic resistance", 35);
+    set_mob_magic_resistance("average");
     set_property("full attacks",1);
     set_alignment(5);
     set_race("beastkin");

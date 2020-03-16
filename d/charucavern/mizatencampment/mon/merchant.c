@@ -25,7 +25,7 @@ void create()
     set_stats("intelligence", 26 + random(3));
     set_stats("charisma", 17 + random(3));
     set_overall_ac(-10);
-    set_property("magic resistance", 95);
+    set_mob_magic_resistance("average");
     set_property("damage resistance", 10);
     set_gender("male");
     set_name("fizzlebit");

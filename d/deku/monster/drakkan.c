@@ -74,7 +74,7 @@ void create() {
     set_mlevel("ranger",query_guild_level("ranger"));
     set_guild_level("cleric",34);
     set_mlevel("cleric",34);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_spell_chance(30);
     set_func_chance(30);
     set_funcs(({"special_attack"}));

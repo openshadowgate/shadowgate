@@ -63,7 +63,7 @@ void create() {
     set_class("mage");
     set_guild_level("mage",15);
     set_mlevel("mage",15);
-    set_property("magic resistance",100);
+    set_mob_magic_resistance("average");
     set_spell_chance(100);
     set_spells(({"magic missile","scorcher","fireball"}));
     set_alignment(5);

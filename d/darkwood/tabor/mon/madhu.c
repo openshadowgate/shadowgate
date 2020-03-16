@@ -31,7 +31,7 @@ void create()
 	set_stats("strength",13);
 	set_stats("constitution",10);
 	set_stats("charisma",15);
-	set_property("magic resistance",50);
+	set_mob_magic_resistance("average");
    set_exp(500);
    set_moving(1);
    set_speed(60);

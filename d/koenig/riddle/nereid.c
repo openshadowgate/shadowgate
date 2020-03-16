@@ -64,7 +64,7 @@ void create(){
 	set_stats("constitution",12);
 	set_stats("charisma",22);
 	set_stats("dexterity",20);
-	set_property("magic resistance",75);
+	set_mob_magic_resistance("average");
 	set_exp(5000);
 	set_max_level(20);
 	set("aggressive",0);

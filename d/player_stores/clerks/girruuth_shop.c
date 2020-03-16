@@ -28,7 +28,7 @@ create() {
         "hammer.  Guess I'll send off and have another made again.",
    }));
 */
-   set_property("magic resistance",35);
+   set_mob_magic_resistance("average");
    set_overall_ac(-9);
    set_stats("strength",18);
    set_max_hp(250+random(50));

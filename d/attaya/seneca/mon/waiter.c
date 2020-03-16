@@ -41,7 +41,7 @@ void create() {
 	set_stats("wisdom",14);
 	set_stats("dexterity",17);
 	set_stats("constitution",16);
-	set_property("magic resistance",50);
+	set_mob_magic_resistance("average");
 	set_exp(500);
 	set_max_level(30);
 	set_spells(({ "magic missile", "power word stun", "magic missile" }));

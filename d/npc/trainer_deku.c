@@ -26,7 +26,7 @@ void create(){
    set_stats("charisma", 15);
    set_stats("dexterity", 16);
    set_stats("constitution", 15);
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
    set_speed(60);
    set_spell_chance(95);
    set_spells(({"lightning bolt","lightning bolt","magic

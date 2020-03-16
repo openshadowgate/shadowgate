@@ -43,7 +43,7 @@ ALLIANCE
     set_mlevel("fighter", 45);
     set_property("no dominate",1);
     set_property("no animate",1);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("knock unconscious",1);
     set_property("swarm",1);
     add_search_path("/cmds/fighter");

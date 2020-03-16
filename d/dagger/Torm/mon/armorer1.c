@@ -32,7 +32,7 @@ create() {
    set_body_type("human");
   set_storage_room(TSP+"armorer1.c");
    set_property("no attack", 1);
-   set_property("magic resistance",35);
+   set_mob_magic_resistance("average");
     set_property("full attacks",1);
     set_overall_ac(-9);
    set_stats("strength",18);

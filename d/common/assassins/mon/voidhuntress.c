@@ -30,7 +30,7 @@ void create()
     set_stats("constitution",18);
     add_money("platinum",random(2000));
     set_property("full attacks",1);
-    set_property("magic resistance",70);
+    set_mob_magic_resistance("average");
     set_property("spell damage resistance",70);
     set_monster_feats(({"dodge","evasion","knockdown","expertise", "mobility","powerattack","rush","combat reflexes", "dodge","evasion","scramble","spring attack"}));
     set_skill("stealth",50);

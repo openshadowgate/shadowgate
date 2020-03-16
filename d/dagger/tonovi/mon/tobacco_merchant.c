@@ -26,7 +26,7 @@ void create() {
    set_race("human");
    add_money("gold", random(50));
    set_body_type("human");
-   set_property("magic resistance",35);
+   set_mob_magic_resistance("average");
    set_overall_ac(-9);
    set_stats("strength",16);
    set_max_hp(250+random(50));

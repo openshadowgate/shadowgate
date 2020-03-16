@@ -35,7 +35,7 @@ void create() {
   set_stats("wisdom",11);
   set_stats("charisma",10);
   set_property("undead", 1);
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
   step = 0;
 }
 

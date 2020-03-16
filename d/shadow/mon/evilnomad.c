@@ -50,5 +50,5 @@ void create() {
    set_spell_chance(90);
    set_exp(2);
    set_overall_ac(-10);
-   set_property("magic resistance",random(20)+30);
+   set_mob_magic_resistance("average");
 }

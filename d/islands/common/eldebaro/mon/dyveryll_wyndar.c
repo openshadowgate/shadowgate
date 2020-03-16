@@ -88,7 +88,7 @@ void create()
     set("aggressive",0);
     set_overall_ac(-30);
 
-    set_property("magic resistance",85);
+    set_mob_magic_resistance("average");
     set_property("weapon resistance", 4);
 
     set_hp(15000);

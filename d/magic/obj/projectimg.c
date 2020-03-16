@@ -14,7 +14,7 @@ void create(){
    set_hd(50,12);
    set("aggressive",0);
    set_spoken("wizish");
-   set_property("magic resistance",100);
+   set_mob_magic_resistance("average");
    command("speech speak as if from a great distance");
 }
 

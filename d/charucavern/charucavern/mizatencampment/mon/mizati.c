@@ -24,7 +24,7 @@ void create()
     set_stats("intelligence", 12 + random(3));
     set_stats("charisma", 11 + random(3));
     set_overall_ac(-20);
-    set_property("magic resistance", 70);
+    set_mob_magic_resistance("average");
     set_gender("male");
     set_name("mizati");
     set_short("%^BOLD%^%^BLACK%^Mizati, A massively muscular %^BOLD%^%^WHITE%^"+

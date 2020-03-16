@@ -29,7 +29,7 @@ void create() {
     set_sp(query_max_sp());
     set_mp(random(500));
     set_max_mp(query_mp());
-    set_property("magic resistance",80);
+    set_mob_magic_resistance("average");
   
     ob = new("/d/attaya/seneca/obj/claw.c");
     if(random(25) != 10) { ob->set_property("monsterweapon", 1); }

@@ -28,7 +28,7 @@ AZHA
    level = 24;
     set_hd(level,1);
    set_level(level);
-   set_property("magic resistance", 85);
+   set_mob_magic_resistance("average");
    set_alignment(1);
    set_race("human");
    add_money("silver", random(3)+5);

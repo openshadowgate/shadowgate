@@ -36,7 +36,7 @@ void create() {
     set_long(
       "This is a leader of the elven scout rangers that can be found on the roads in this area.  Although good at hiding in the brush around the roads, this one more often makes himself seen to speak with travellers and especially aid those who fight against notorious evil."
     );
-  if(!random(3)){ set_property("magic resistance",65); } else {set_property("magic resistance",35);}
+  if(!random(3)){ set_mob_magic_resistance("average");}
   set_overall_ac(0);
   set_class("ranger");
   set_class("cleric");

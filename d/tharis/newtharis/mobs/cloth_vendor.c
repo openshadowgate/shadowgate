@@ -21,7 +21,7 @@ void create() {
     set_stats("dexterity",16);
     set_stats("constitution",20);
     set_new_exp(60,"boss");
-    set_property("magic resistance",70);
+    set_mob_magic_resistance("average");
     set_spells(({"greater shout",
                     "greater shout",                    
                     "greater dispel magic",

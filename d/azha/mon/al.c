@@ -37,7 +37,7 @@ void create()
   set("short", "Ellgarsh al-Radin");
   set_property("assassin", 1);
   set_property("no steal", 1);
-  set_property("magic resistance", 75);
+  set_mob_magic_resistance("average");
   set_long(
 @AZHA
   Anyone who has ever been to Azha knows this elf, formerly a frequent

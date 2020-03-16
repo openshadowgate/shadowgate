@@ -19,7 +19,7 @@ void create() {
    set_race("firbolg");
    set_size(3);
    add_money("gold", random(100));
-   set_property("magic resistance",35);
+   set_mob_magic_resistance("average");
    set_overall_ac(-9);
    set_stats("strength",19);
    set_max_hp(250+random(50));
