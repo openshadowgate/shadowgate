@@ -39,7 +39,7 @@ void create() {
     set_mlevel("psion",droll);
     set_hp(108+(random(88)));
     set_attack_bonus(5);
-    set_property("magic resistance",75);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_property("magic",1);
     set_stats("strength",19);

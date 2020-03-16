@@ -23,7 +23,7 @@ void create() {
 		"%^YELLOW%^yellow%^RESET%^ eyes and forked tongue.\n"
         	);
  	 set_overall_ac(-4);
- 	 set_property("magic resistance",10);
+ 	 set_mob_magic_resistance("average");
   	set_level(25);
    set_class("mage");
    set_guild_level("mage",20);

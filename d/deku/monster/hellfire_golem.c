@@ -46,7 +46,7 @@ void create()
     set_stats("wisdom",18);
     set_stats("charisma",8);
     set_property("full attacks",1);
-    set_property("magic resistance",40);
+    set_mob_magic_resistance("average");
     set_spells(({"handfire", "flame strike", "fire storm"}));    
     set_spell_chance(50);
     set_hp(245 + random(31));

@@ -43,7 +43,7 @@ void create() {
    set_max_level(15);  // added by *Styx* 9/24/06
    set_exp(3500);   
    add_money("gold",random(150)+25);
-   set_property("magic resistance",15);
+   set_mob_magic_resistance("average");
    set_funcs(({"gore","rend","rend","rend"}));
    set_func_chance(20);
    set_achats(7, ({

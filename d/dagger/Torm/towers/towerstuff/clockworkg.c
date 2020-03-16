@@ -37,7 +37,7 @@ set_exp(15);
   set_property("no death",1);
 set_wielding_limbs( ({"left hand", "right hand"}) );
   set_property("weapon resistance",50);
-  set_property("magic resistance",666);
+  set_mob_magic_resistance("average");
 }
 void heart_beat(){
   ::heart_beat();

@@ -38,7 +38,7 @@ void create(){
   set_mlevel("fighter",query_hd());
   set_hp(150+(random(59)));
   set_guild_level("fighter",query_level());
-  set_property("magic resistance",75);
+  set_mob_magic_resistance("average");
   set_property("swarm",1);
   set_property("magic",1);
   set_property("no dominate",1);

@@ -57,7 +57,7 @@ void create()
     set_stats("intelligence",25);
     set_stats("charisma",25);
     set_alignment(9);
-    set_property ("magic resistance",40);
+    set_mob_magic_resistance("average");
 //    set_property("no bows",1);  don't need it twice *Styx*
     set_exp(90000);
     set_max_hp(7500);

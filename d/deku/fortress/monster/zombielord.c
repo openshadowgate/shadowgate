@@ -42,7 +42,7 @@ void create()
     set_stats("constitution",12);
     set_property("no death",1);
     set_property("full attacks",1);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_property("weapon resistance",1);
     set_attack_limbs(({"left hand", "right hand"}));	
     set_attacks_num(4);

@@ -35,7 +35,7 @@ void create() {
    set_gender("male");
    set_race("squid");
    set_alignment(5);
-   set_property("magic resistance", 66);
+   set_mob_magic_resistance("average");
    set_property("damage resistance", 4);
    set_property("no death", 1);
    set_property("no knockdown", 1);

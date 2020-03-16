@@ -47,7 +47,7 @@ void create() {
    set_attacks_num(3);
    set_base_damage_type("slashing");
    set_damage(1,2);
-   set_property("magic resistance",25);
+   set_mob_magic_resistance("average");
    set_emotes(1, ({".",
 "%^RESET%^%^CYAN%^Shannon Looks up at the floating fortress with a sneer%^RESET%^",
 "%^RESET%^%^MAGENTA%^Shannon mutters something about duty...%^RESET%^",}), 0);

@@ -49,7 +49,7 @@ void create(){
 	set_funcs(({"trample"}));
 	set_func_chance(5);
       set_property("no death",1);
-      set_property("magic resistance",30);
+      set_mob_magic_resistance("average");
       set_property("no knockdown", 1); //that just looks stupid
       set_speed(50);
     set_new_exp(35,"boss");

@@ -41,7 +41,7 @@ set_property("magic",1);
     set_stats("charisma",15);
     set_alignment(6);
     set("aggressive",random(8)+7);
-    set_property ("magic resistance",15);
+    set_mob_magic_resistance("average");
     set_exp(12500);
     set_max_hp(220);
     set_hp(220);

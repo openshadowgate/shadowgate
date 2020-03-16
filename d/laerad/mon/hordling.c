@@ -24,7 +24,7 @@ void create(){
     set_race("hordling");
     set_size(random(3)+1);
 	set_alignment(6);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_attack_bonus(2);
 	set_moving(1);

@@ -56,7 +56,7 @@ hands."
 foot"}));
     set_attacks_num(5);
     set_damage(2,5);
-    set_property("magic resistance",40);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_property("no bows", 1);  // added 2/8/03 
     set_property("no dominate", 1);  // added 2/8/03 

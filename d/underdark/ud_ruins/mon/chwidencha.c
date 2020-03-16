@@ -40,7 +40,7 @@ void create() {
     set_attacks_num(8);
     set_base_damage_type("slashing");
     set_damage(2,6);
-    set_property("magic resistance",random(30));
+    set_mob_magic_resistance("average");
     set("aggressive",18);
     is_dead = 0;
 }

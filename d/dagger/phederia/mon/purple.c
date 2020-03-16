@@ -29,7 +29,7 @@ void create(){
   set_ac(-15);
   set_exp(15000);
   set_property("swarm",1);
-  set_property("magic resistance",15);
+  set_mob_magic_resistance("average");
   set_func_chance(20);
   set_funcs(({"maw","stinger"}));
   room= new(MON"stomach.c");

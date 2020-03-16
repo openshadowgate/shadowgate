@@ -42,7 +42,7 @@ void create() {
    set_attacks_num(0);
    set_base_damage_type("slashing");
    set_damage(1,2);
-   set_property("magic resistance",200);
+   set_mob_magic_resistance("average");
    set_property("no bows",1);
    set_property("no death",1);
    set_spoken("wizish");

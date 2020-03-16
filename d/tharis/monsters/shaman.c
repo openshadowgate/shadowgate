@@ -26,7 +26,7 @@ void create(){
     set_overall_ac(0);
     set("aggressive",21);
     set_property("swarm",1);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_class("cleric");
     set_guild_level("cleric",36);
     set_spells(({

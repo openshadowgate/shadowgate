@@ -75,7 +75,7 @@ OLI
    set_property("swarm",1);
    set_moving(1);
    set_speed(40);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_gender("male");
    set_race("undead");
    set_hd(random(6)+6,8);

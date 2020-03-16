@@ -32,7 +32,7 @@ set_overall_ac(-22);
     set_stats("wisdom",25);
     set_stats("intelligence",25);
     set_stats("charisma",15);
-    set_property ("magic resistance",27);
+    set_mob_magic_resistance("average");
     set_exp(45000);
    set_max_hp(350);
     set_max_level(36);

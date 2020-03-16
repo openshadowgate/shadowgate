@@ -53,7 +53,7 @@ AZHA
      "fireball",
      "magic missile",
    }));
-   set_property ("magic resistance",25);
+   set_mob_magic_resistance("average");
    
 }
 

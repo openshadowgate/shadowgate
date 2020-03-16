@@ -84,7 +84,7 @@ void become_this(object ob, object vic)
 
 	if(y) set_property("weapon resistance", (y/2));
 
-   	set_property("magic resistance", to_int((mod * 10.5)));
+   	set_mob_magic_resistance("average"));
 
 	set_stats("strength", 17 + y);
   	set_stats("dexterity", 14 + y);

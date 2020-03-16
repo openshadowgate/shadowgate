@@ -40,7 +40,7 @@ void create(){
    set_stats("dexterity",16);
    set_stats("constitution",17);
    set("aggressive",25);
-   set_property ("magic resistance",60);
+   set_mob_magic_resistance("average");
    set_funcs(({"bedazzle"}));
    set_func_chance(15);
    set_exp(10000);

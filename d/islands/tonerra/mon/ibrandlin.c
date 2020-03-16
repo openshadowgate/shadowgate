@@ -29,7 +29,7 @@ OLI
    set_hd(35+random(15),9);
    set_hp(query_hd()*25);
    set_hit_funcs((["mouth":(:TO,"mouth":)]));
-   set_property("magic resistance",40);
+   set_mob_magic_resistance("average");
    set_property("spell damage resistance",15);   
    set_overall_ac(-35);
    set_race("ibrandlin");

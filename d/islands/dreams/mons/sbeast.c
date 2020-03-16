@@ -39,7 +39,7 @@ void create(){
   	set_overall_ac(-12);
   	set_funcs(({"spells"}));
   	set_func_chance(70);
-  	set_property("magic resistance",35);
+  	set_mob_magic_resistance("average");
   	set_property("no paralyze",1);
   	set_property("no dominate",1);
 	set_property("no death",1);

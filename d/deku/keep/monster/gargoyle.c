@@ -33,7 +33,7 @@ void create()
     set_stats("charisma", 10);
     set_stats("wisdom", 14);
     set_alignment(9);
-    set_property("magic resistance", 50);
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     set_property("swarm",1);
     command("speak common");

@@ -36,7 +36,7 @@ void create() {
    set_stats("dexterity",16);
    set_stats("wisdom",11);
    set_stats("intelligence",9);
-   set_property("magic resistance", 15);
+   set_mob_magic_resistance("average");
    set_funcs(({"berserk"}));
    set_func_chance(25);
    new(OBJ+"chain_shirt")->move(TO);

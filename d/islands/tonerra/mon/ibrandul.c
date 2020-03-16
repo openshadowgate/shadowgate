@@ -52,7 +52,7 @@ OLI
    set_attacks_num(5);
    set_property("no death",1);
    set_property("no bows",1);
-   set_property("magic resistance",75);
+   set_mob_magic_resistance("average");
    set_overall_ac(-75);
    set_max_hp(50000);
    set_hp(query_max_hp());

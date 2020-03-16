@@ -74,7 +74,7 @@ void create()
       set_new_exp(level, "normal");
       set_funcs(({"shatter", "sunder", "rush", "summon_help", "kill_fodder"}));
       set_func_chance(60);
-      set_property("magic resistance",40);
+      set_mob_magic_resistance("average");
       set_property("bludgeoning resistance", 30);
       set_property("slashing resistance", 20);
       set_property("piercing resistance", 10);

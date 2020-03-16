@@ -63,7 +63,7 @@ claw":(:TO,"claw_attack":)]));
     add_money("gold",random(20000));
     add_money("platinum",random(1000));
    set_alignment(6);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
     set_property("no knockdown",1);
     set_property("no death",1);
     set_property("no hold", 1);

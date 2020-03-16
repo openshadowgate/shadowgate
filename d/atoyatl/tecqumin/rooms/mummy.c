@@ -65,7 +65,7 @@ void create()
   	set_alignment(4);
       set_funcs(({"shatter", "sunder", "rush", "summon_help"}));
       set_func_chance(25);
-      set_property("magic resistance",40);
+      set_mob_magic_resistance("average");
       set_property("bludgeoning resistance", 30);
       set_property("slashing resistance", 20);
       set_property("piercing resistance", 10);

@@ -47,7 +47,7 @@ void create() {
     set_scrambling(1);
     set_hidden(1);
     set_property("magic",1);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     force_me("message in slinks in.");
     force_me("message out slinks $D.");
     new(OBJ"catpelt")->move(TO);

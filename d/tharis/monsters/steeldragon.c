@@ -37,7 +37,7 @@ OLI
 	set_guild_level("mage",20);
 	set_guild_level("fighter",28);
 	set_hp(300);
-	set_property("magic resistance",55);
+	set_mob_magic_resistance("average");
 	set_exp(30000);
 	set_overall_ac(-7);
 	set_size(4);

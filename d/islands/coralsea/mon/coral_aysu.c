@@ -65,7 +65,7 @@ void create(){
    set_func_chance(40);
    set_gender("female");
    set_alignment(9);
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
    set_property("no death",1);
    set_property("no hold", 1);
    set_property("no paralyze", 1);

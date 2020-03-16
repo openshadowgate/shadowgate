@@ -33,7 +33,7 @@ void create(){
    set_overall_ac(-10);
    set("aggressive",21);
    set_property("swarm",1);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    remove_limb("right leg");
    remove_limb("left leg");
    remove_limb("right foot");

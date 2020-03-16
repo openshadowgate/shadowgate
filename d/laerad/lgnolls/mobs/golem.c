@@ -48,7 +48,7 @@ void create() {
     set_property("swarm",1);
     set_stats("strength", 18);
     set("aggressive", 20);
-    set_property("magic resistance", 35);
+    set_mob_magic_resistance("average");
 	set_property("damage resistance", 10);
     set_alignment(7);
     add_money("gold", random(4500));

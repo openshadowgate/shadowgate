@@ -69,7 +69,7 @@ void create() {
        command("wear doublet");
     }
     set("aggressive", 20);
-    set_property("magic resistance", 60);
+    set_mob_magic_resistance("average");
     set_funcs( ({"rip", "heal_up"}) );
     set_func_chance(40);
     set_alignment(9);

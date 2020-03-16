@@ -35,7 +35,7 @@ void create() {
    set_max_level(15);  
    set_exp(300*dlvl);   
    add_money("gold",random(150)+25);
-   set_property("magic resistance",15);
+   set_mob_magic_resistance("average");
 }
 
 void make_me(){

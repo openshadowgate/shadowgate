@@ -29,7 +29,7 @@ create()
     set_hp(my_hd*16+200);
     set_property("spell damage resistance",25);
     set_property("fire resistance",-25);
-    set_property("magic resistance",33);
+    set_mob_magic_resistance("average");
     //set_exp(3000);
     set_new_exp(my_hd,"high");
     set_stats("strength",my_hd);

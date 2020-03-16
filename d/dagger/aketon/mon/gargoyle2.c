@@ -39,7 +39,7 @@ void create(){
 	set_stats("charisma",random(5));
 	set_property("swarm",1);
 	set("aggressive",25);
-	set_property("magic resistance",40);
+	set_mob_magic_resistance("average");
 	set_property("weapon resistance",2);
 	remove_limb("right hand");
 	remove_limb("left hand");

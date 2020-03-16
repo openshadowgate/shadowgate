@@ -22,7 +22,7 @@ void create()
     "it is always alert.%^RESET%^");
     set_body_type("humanoid");
     set_alignment(9);
-    set_property("magic resistance",10);
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     set_property("swarm",1);
     add_limb("left foreleg", "left hand", 0, 0, 0);

@@ -64,7 +64,7 @@ void create() {
     set_attacks_num(6);
     set_base_damage_type("mental");
     set_damage(2,8);
-    set_property("magic resistance",random(30));
+    set_mob_magic_resistance("average");
     set("aggressive",35);
     set_funcs(({"do_round"}));
     set_func_chance(100);

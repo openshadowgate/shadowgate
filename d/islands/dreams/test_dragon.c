@@ -70,7 +70,7 @@ void create(){
     set_guild_level("mage",dlvl);
     set_guild_level("thief",dlvl);
     set_attack_bonus(10);
-    set_property("magic resistance",70);
+    set_mob_magic_resistance("average");
     set_property("no dominate",1);
     set_property("no death",1);
     set_property("no rush",1);

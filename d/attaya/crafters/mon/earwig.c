@@ -35,7 +35,7 @@ set_attack_limbs(({"left pincer", "tail", "right pincer"}));
     set_stats("dexterity",18);
     set_stats("constitution",17);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_exp(20000);
     set_alignment(5);
 }

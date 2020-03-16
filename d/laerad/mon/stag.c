@@ -24,7 +24,7 @@ void create(){
     set_overall_ac(-8);
     set("aggressive",0);
     add_limb("antlers","head",0,0,0);
-    set_property("magic resistance",75);
+    set_mob_magic_resistance("average");
     set_property("no bump",1);
     set_base_damage_type("piercing");
     set_attack_limbs(({"antlers"}));

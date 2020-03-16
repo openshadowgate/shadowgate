@@ -99,7 +99,7 @@ void create(){
           +"%^GREEN%^im%^RESET%^%^GREEN%^e%^MAGENTA%^."
     }),0);
     set_damage(8,4);
-    set_property("magic resistance",75);
+    set_mob_magic_resistance("average");
     set_property("weapon resistance", 10);
     set_size(4);
     set_base_damage_type("bludgeoning");

@@ -34,7 +34,7 @@ void create(){
       set_exp(5000);
     }
     add_money("gold", roll_dice(3,10));
-    set_property("magic resistance", 35);
+    set_mob_magic_resistance("average");
 }
 
 int tail_hit(object targ){

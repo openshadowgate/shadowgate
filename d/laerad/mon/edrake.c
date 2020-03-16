@@ -22,7 +22,7 @@ void create(){
     set_exp(20000);
     set_overall_ac(-8);
     set("aggressive",24);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_attack_limbs(({"right foreclaw","left foreclaw","head","tail"}));
     set_attacks_num(4);
     set_base_damage_type("thiefslashing");

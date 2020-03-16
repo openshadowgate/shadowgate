@@ -36,7 +36,7 @@ void create(){
     set_stats("wisdom",3);
     set_stats("intelligence",5);
     set_property("swarm",1);
-    set_property("magic resistance",10);
+    set_mob_magic_resistance("average");
     add_money("gold",random(10));
     add_money("silver",random(5));
     add_money("copper",random(50));

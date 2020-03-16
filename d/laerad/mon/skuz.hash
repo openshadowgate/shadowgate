@@ -23,7 +23,7 @@ void create(){
     set_hp(160);
     set_exp(15000);
     set_overall_ac(-1);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("alignment adjustment",5);
     set_property("swarm",1);
     add_money("gold",random(2500)+1500);

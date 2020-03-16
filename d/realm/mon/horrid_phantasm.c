@@ -60,7 +60,7 @@ void create()
    	set_stats("wisdom",7);
    	set_stats("intelligence",7);
    	set_stats("charisma",3);
-   	set_property("magic resistance", 35);
+   	set_mob_magic_resistance("average");
 	set_property("weapon resistance", 3);
    	set_new_exp(35, "normal");
 	set_attack_bonus(10);

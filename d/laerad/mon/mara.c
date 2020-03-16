@@ -36,7 +36,7 @@ void create(){
 	set_moving(1);
 	set_speed(80);
 	set_nogo(({"/d/laerad/wasteland/waste1"}));
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("strength","paralyzed");
     set("aggressive",19);
     set_attack_limbs(({"right hand","left hand","head"}));

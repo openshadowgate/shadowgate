@@ -52,7 +52,7 @@ void init() {
 	    set_stats("wisdom", 12);
 	    set_stats("charisma", 10);
 	    set("aggressive", 20);
-	    set_property("magic resistance", 60);
+	    set_mob_magic_resistance("average");
 	    set_funcs(({"rip"}));
 	    set_func_chance(40);
 	    set_alignment(9);

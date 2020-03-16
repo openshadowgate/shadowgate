@@ -30,7 +30,7 @@ void create(){
   set_ac(-16);
   set_property("magic",1);
   set_property("no bows",1);
-  set_property("magic resistance",66);
+  set_mob_magic_resistance("average");
   set_property("no dominate",1);
   set_property("no death",1);
   set_property("no steal",1);
@@ -107,7 +107,7 @@ void heart_beat(){
   if(!objectp(TO) || !objectp(ETO)) return;
   if(TO->query_property("magic resistance")<50) {
     TO->remove_property("magic resistance");
-    TO->set_property("magic resistance",50);
+    TO->set_mob_magic_resistance("average");
   }
   if(query_hp()<1000){
      write("You draw on the fire and molten lava to heal yourself");

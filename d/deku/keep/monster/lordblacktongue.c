@@ -43,7 +43,7 @@ void create()
     set_stats("wisdom", 12);
     set_alignment(9);
     set_max_level(28);
-    set_property("magic resistance", 30);
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     set_property("swarm",1);
     add_limb("left claw","left hand",0,0,0);

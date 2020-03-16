@@ -14,7 +14,7 @@ void create() {
     add_search_path("/cmds/fighter");
     set_gender("neuter");
     set_overall_ac(-11);
-    set_property("magic resistance", 50);
+    set_mob_magic_resistance("average");
     set_size(1+random(2));
     set_class("fighter");
     set_mlevel("fighter", 45);

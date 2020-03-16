@@ -22,7 +22,7 @@ void create(){
     set_class("mage");
     set_hd(32,19);
     set_hp(275);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_overall_ac(-8);
     set_exp(0);

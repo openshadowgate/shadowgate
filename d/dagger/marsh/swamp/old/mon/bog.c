@@ -35,7 +35,7 @@ void create() {
     set_stats("charisma",15);
     set_alignment(6);
     set("aggressive",random(10)+7);
-    set_property ("magic resistance",17);
+    set_mob_magic_resistance("average");
     set_exp(13000);
     set_max_hp(250);
     set_hp(250);

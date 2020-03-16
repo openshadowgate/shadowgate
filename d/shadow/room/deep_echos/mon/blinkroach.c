@@ -27,7 +27,7 @@ void create()
    set_hd(6,5);
    set("aggressive",10);
    set_property("swarm",1);
-   set_property("magic resistance",10);
+   set_mob_magic_resistance("average");
    set_level(10);
    set_class("fighter");
    set_mlevel("fighter",10);

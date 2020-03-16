@@ -36,7 +36,7 @@ void create() {
     set_stats("intelligence",25);
     set_stats("charisma",25);
     set_alignment(9);
-    set_property ("magic resistance",40);
+    set_mob_magic_resistance("average");
     set_exp(210000);
     set_max_hp(query_hp());
     set_hp(750+random(750));

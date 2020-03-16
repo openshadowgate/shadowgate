@@ -22,7 +22,7 @@ void create(){
    set_max_hp(400);
    set_hp(400);
    set_overall_ac(-6);
-   set_property("magic resistance",200);
+   set_mob_magic_resistance("average");
    set_property("no dominate", 1);
    set_property("no hold", 1);
    set_property("no bows", 1);

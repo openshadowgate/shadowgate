@@ -10,7 +10,7 @@ void create()
     set_gender("male");
     set_race("werewolf");
     set_alignment(9);
-    set_property("magic resistance",15);
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     set_property("swarm",1);
     add_limb("left claw","left hand",0,0,0);

@@ -32,7 +32,7 @@ create() {
    set_funcs( ({"touch"}) );
    set_func_chance(20);
    set_property("weapon resistance",2);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_property("no death",1);
    set_property("magic",1);
    set_overall_ac(-18);

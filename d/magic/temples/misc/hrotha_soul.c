@@ -36,7 +36,7 @@ void create()
 
     set_overall_ac( ((int)TO->query_max_hp()/10)*-1 );
 
-    set_property("magic resistance",(int)TO->query_max_hp()/10);
+    set_mob_magic_resistance("average");
 
     set_damage(1,4);
     set_attacks_num(1);

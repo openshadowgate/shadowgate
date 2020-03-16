@@ -26,7 +26,7 @@ OLI
    set_attacks_num(4);
    set_damage(2,5);
    set_stats("strength",18);
-   set_property("magic resistance",55);
+   set_mob_magic_resistance("average");
    set_property("weapon resistance",2);
 
    set_base_damage_type("bludgeon");

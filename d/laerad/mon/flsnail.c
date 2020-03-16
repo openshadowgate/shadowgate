@@ -17,7 +17,7 @@ void create(){
     set("aggressive",13);
     set_overall_ac(-2);
     set_exp(1200);
-    set_property("magic resistance",60);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     add_limb("tentacle1","head",0,0,0);
     add_limb("tentacle2","head",0,0,0);

@@ -22,7 +22,7 @@ void create() {
    set_max_hp(216);
    set_hp(216);
    set_overall_ac(-5);
-   set_property("magic resistance", 33);
+   set_mob_magic_resistance("average");
    set_size(3);
    set("aggressive",30);
    set_exp(17000);

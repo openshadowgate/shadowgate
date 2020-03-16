@@ -21,7 +21,7 @@ void create(){
   set_exp(1);
   set_size(1);
   set_property("magic",1);
-  set_property("magic resistance",99);
+  set_mob_magic_resistance("average");
   set_missChance(99);  //might change this due to Hardened minions twinky
   set_func_chance(100);
   set_attacks_num(1);

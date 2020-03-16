@@ -39,7 +39,7 @@ set_property("magic",1);
     set_stats("intelligence",25);
     set_stats("charisma",15);
     set_alignment(9);
-    set_property ("magic resistance",27);
+    set_mob_magic_resistance("average");
     set_exp(30000);
     set_max_level(36);
     set_max_hp(330);

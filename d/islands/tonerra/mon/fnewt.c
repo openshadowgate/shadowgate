@@ -138,7 +138,7 @@ OLI
    set_property("add kits",roll_dice(1, 4) * 5);
    set_hp(20*query_hd());
    set_property("swarm",1);
-   set_property("magic resistance",65);
+   set_mob_magic_resistance("average");
    set_property("spell damage resistance",20);
    set_resistance_percent("fire", 133);
    set_resistance_percent("cold", -33);

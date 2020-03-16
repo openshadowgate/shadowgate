@@ -67,7 +67,7 @@ void create() {
     set_property("no paralyze",1);
     set_property("full attacks",1);
     set_property("weapon resistance",1);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_overall_ac(-4);
     set_max_level(20);
     set_lang("outlander",100);

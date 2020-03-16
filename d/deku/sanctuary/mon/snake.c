@@ -23,7 +23,7 @@ void create() {
    set_max_hp(789);
    set_hp(789);
    set_overall_ac(-10);
-   set_property("magic resistance", 33);
+   set_mob_magic_resistance("average");
    set_property("no bows", 1);
    set_property("no poison", 1);
    set_size(3);

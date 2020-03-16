@@ -61,7 +61,7 @@ void possess_this(object ob)
 	set_max_hp(375 + (10 * query_hd()));
 	set_hp(query_max_hp());
 	set_size(ob->query_size());
-	set_property("magic resistance", ((mod/3)+1) * 12);
+	set_mob_magic_resistance("average");
 	set_stats("strength", 15 + mod);
   	set_stats("dexterity", 22);
   	set_stats("constitution", 18);

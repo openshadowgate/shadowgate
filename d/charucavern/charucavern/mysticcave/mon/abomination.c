@@ -65,7 +65,7 @@ void create()
     set_property("no death", 1);
     set_property("no hold", 1);
     set_property("no bows", 1);
-    set_property("magic resistance", 30);
+    set_mob_magic_resistance("average");
 
 
     set_func_chance(55);

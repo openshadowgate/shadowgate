@@ -27,7 +27,7 @@ void create(){
     set_attack_bonus(4);
     set_exp(4200);
     set_overall_ac(4);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("strength","paralyzed");
     set("aggressive",19);
     set_attack_limbs(({"right hand","left hand","head"}));

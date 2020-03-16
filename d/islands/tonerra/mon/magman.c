@@ -37,7 +37,7 @@ OLI
    	set_damage(3,8);
    	set_property("magic",1);
    	set_property("fire resistant",1);
-   	set_property("magic resistance",50);
+   	set_mob_magic_resistance("average");
    	set_hit_funcs((["right claw":(:TO,"burnem":),"left claw":(:TO, "burnem":) ]));
     set_overall_ac(-6 - random(13));
     set_stats("strength",20);

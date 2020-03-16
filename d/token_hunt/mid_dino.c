@@ -32,7 +32,7 @@ void create()
     set_hd(30,12);
     set_mlevel("fighter",30);
     set_hp(750+random(750));
-    set_property("magic resistance",15);
+    set_mob_magic_resistance("average");
     set_overall_ac(-19);
     set_attacks_num(4);
     set_damage(2,10);

@@ -42,7 +42,7 @@ void create(){
    set_property("no animate",1);
    set_property("no death",1);
    set_property("full attacks",1);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    set_property("no tripped",1);
    set_property("no paralyze",1);
    set_stats("strength",24);

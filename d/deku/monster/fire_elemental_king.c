@@ -31,7 +31,7 @@ void create()
 
     set_body_type("humanoid");
     set_alignment(7);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     set_max_level(30);
     set_hd(26,1);

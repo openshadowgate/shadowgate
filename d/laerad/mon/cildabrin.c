@@ -36,7 +36,7 @@ void create(){
     set_spells(({"web","darkness"}));
     set_spell_chance(15);
     set_attack_bonus(8);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     add_limb("tail","abdomen", 0, 0, 0);
     set_attack_limbs(({"tail","right pincer","left pincer"}));
     set_base_damage_type("piercing");

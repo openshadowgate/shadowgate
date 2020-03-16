@@ -55,7 +55,7 @@ void create() {
    set_size(2);
    set_property("swarm",1);
    set_property("weapon resistance",1);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_property("damage resistance",10);
    set_property("spell penetration",20);
    set_property("not random monster", 1); //added by saide in order to prevent these from spawning in alternative worlds

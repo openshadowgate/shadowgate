@@ -25,7 +25,7 @@ void create(){
     set_overall_ac(-4);   // was 0
     set("aggressive",16);
     set_property("strength","fire");
-    set_property("magic resistance",90);
+    set_mob_magic_resistance("average");
 	set_property("weapon resistance",2);
     set_attack_limbs(({"head","tail"}));
     set_attacks_num(4);

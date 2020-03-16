@@ -35,7 +35,7 @@ void create(){
     if(stoned) ac -= 2;
     set_overall_ac(ac);
     set_exp(query_hd() * 100);
-    set_property("magic resistance",15);
+    set_mob_magic_resistance("average");
     set("aggressive",10);
     set_stats("strength",19);
     set_base_damage_type("thiefslashing");
@@ -92,7 +92,7 @@ void growth(){
 	set_exp(query_hd() * 150);
 	set("aggressive",16);
 	remove_property("magic resistance");
-	set_property("magic resistance",25);
+	set_mob_magic_resistance("average");
 	atts = 4;
 	if(extras) atts += 2;
 	set_attacks_num(atts);
@@ -132,7 +132,7 @@ void growth(){
 	set_overall_ac(ac);
 	set_exp(query_hd() * 250);
 	remove_property("magic resistance");
-	set_property("magic resistance",35);
+	set_mob_magic_resistance("average");
 	set("aggressive",18);
 	atts = 5;
 	if(extras) atts += 2;
@@ -166,7 +166,7 @@ void growth(){
 	set_exp(query_hd() *  500);
 	set("aggressive",20);
 	remove_property("magic resistance");
-	set_property("magic resistance",50);
+	set_mob_magic_resistance("average");
 	atts = 6;
 	if(extras) atts += 2;
 	set_attacks_num(atts);
@@ -198,7 +198,7 @@ void growth(){
 	set_overall_ac(ac);
         set_exp(query_hd() * 150);
 	remove_property("magic resistance");
-	set_property("magic resistance",75);
+	set_mob_magic_resistance("average");
 	atts = 4;
 	if(extras) atts += 2;
 	set_attacks_num(atts);

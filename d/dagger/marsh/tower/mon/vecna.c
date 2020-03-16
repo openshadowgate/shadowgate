@@ -62,7 +62,7 @@ void create() {
     set_property("no death", 1);
     set_property("no hold", 1);
     set_property("no bows", 1);
-    set_property("magic resistance", 60);
+    set_mob_magic_resistance("average");
     set_property("spell damage resistance", 30);
     set_property("fire resistance", 10);
     set_emotes(10, ({

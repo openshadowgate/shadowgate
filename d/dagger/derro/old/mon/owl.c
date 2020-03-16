@@ -17,7 +17,7 @@ void create(){
   set_ac(0);
   set_exp(1);
   set_property("magic",1);
-  set_property("magic resistance",99);
+  set_mob_magic_resistance("average");
   set_attacks_num(1);
   set_damage(3,3);
 //  set_attack_limbs(({"razored claws","slashing beak"}));

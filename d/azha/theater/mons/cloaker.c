@@ -46,7 +46,7 @@ inherit WEAPONLESS;
 	set_stats("constitution",18);
 	set_stats("wisdom",18);
 	set_alignment(8);
-	set_property("magic resistance",30);
+	set_mob_magic_resistance("average");
 	set_property("full attacks",1);
 	add_search_path("/cmds/fighter");
 	add_search_path("/cmds/cleric");

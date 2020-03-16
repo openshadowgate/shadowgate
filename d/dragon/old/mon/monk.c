@@ -34,7 +34,7 @@ like the wind blowing through the trees.");
   set_overall_ac(-3);
   set_hp(150);
   set_property("no bump",1);
-  set_property("magic resistance",75);
+  set_mob_magic_resistance("average");
   set_max_hp(180);
   set_exp(5000);
   set_body_type("human");

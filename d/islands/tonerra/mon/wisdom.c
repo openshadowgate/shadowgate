@@ -30,7 +30,7 @@ OLI
    set_max_level(36);
    set_attack_limbs(({"right hand","left hand"}));
    set_attacks_num(2);
-   set_property("magic resistance",65);
+   set_mob_magic_resistance("average");
    set_damage(2,8);
    set_base_damage_type("bludgeon");
    set_stats("dexterity",100);

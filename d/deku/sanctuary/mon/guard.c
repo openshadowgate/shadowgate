@@ -21,7 +21,7 @@ void create(){
    set_max_hp(400);
    set_hp(400);
    set_overall_ac(-6);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_property("no poison", 1);
    set_size(3);
    set("aggressive",30);

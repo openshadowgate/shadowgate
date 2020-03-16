@@ -41,7 +41,7 @@ create() {
    command("speak common");
    command("speech speak resonantly");
    set_property("no bows",1);
-   set_property("magic resistance",random(20)+30);
+   set_mob_magic_resistance("average");
    set("aggressive","agg_fun");
    set_emotes(1, ({"The mage closes his hands around the amulet at his neck, murmuring softly to it.",
 "The mage brushes a lock of blonde hair away from his face.",

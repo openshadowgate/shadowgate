@@ -59,7 +59,7 @@ void create(){
     set_base_damage_type("piercing");
     set_damage(2,10);
     set("aggressive","aggfunc");
-   set_property("magic resistance", 100);
+   set_mob_magic_resistance("average");
     set_property("no death",1);
     set_property("magic",1);
    set_alignment(3);

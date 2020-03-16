@@ -35,7 +35,7 @@ set_attack_limbs(({"left claw", "tail", "right claw"}));
     set_stats("dexterity",16);
     set_stats("constitution",17);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_exp(10000);
     set_alignment(5);
 }

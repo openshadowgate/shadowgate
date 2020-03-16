@@ -64,7 +64,7 @@ void create()
     add_money("platinum",random(1000));
     set_alignment(2);
     //set_property("no rush",1);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_property("no knockdown",1);
     set_property("no death",1);
     set_property("no hold", 1);

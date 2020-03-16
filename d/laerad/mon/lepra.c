@@ -24,7 +24,7 @@ void create(){
     set_exp(10000);
     set("aggressive",0);
     set_property("no bump",1);
-    set_property("magic resistance",65);
+    set_mob_magic_resistance("average");
     set_max_level(15);
     set_stats("strength",20);
     set_stats("dexterity",22);

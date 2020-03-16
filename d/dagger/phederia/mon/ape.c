@@ -36,7 +36,7 @@ void create(){
   set_ac(-5);
   set_exp(query_hp()*10);
   set_property("swarm",1);
-  set_property("magic resistance",15);
+  set_mob_magic_resistance("average");
   if(!random(2)){set_gender("male");} else {set_gender("female");}
   set_funcs(({"pin"}));
   set_func_chance(10);

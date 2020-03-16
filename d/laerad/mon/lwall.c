@@ -31,7 +31,7 @@ void create(){
     set_attack_bonus(1);
     set_property("no dominate",1);
     set_property("no death",1);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     remove_limb("head");
     add_limb("face1","torso",0,0,0);
     add_limb("face2","torso",0,0,0);

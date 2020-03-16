@@ -38,7 +38,7 @@ void create()
   	set_overall_ac(-14);
   	set_alignment(4);
   	set_property("no hold",1);
-  	set_property("magic resistance",45);
+  	set_mob_magic_resistance("average");
   	set_property("no paralyze",1);
   	set_property("no dominate",1);
 	set_property("no death",1);

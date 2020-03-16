@@ -41,7 +41,7 @@ set_attack_limbs(({"second head", "tail", "third head", "head"}));
     set_stats("dexterity",16);
     set_stats("constitution",17);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",55);
+    set_mob_magic_resistance("average");
     set_exp(30000);
     set_alignment(5);
 }

@@ -29,7 +29,7 @@ set("aggressive", 25);
 set_base_damage_type("slashing");
 set_damage(5,8);
 set_attack_limbs(({"right claw","left claw","fangs"}));
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
 set_attacks_num(3);
 add_limb("fangs","head",0,0,0);
 set_max_hp(400);

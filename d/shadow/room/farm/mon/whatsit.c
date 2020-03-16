@@ -37,7 +37,7 @@ inherit WEAPONLESS;
 	set_stats("constitution",18);
 	set_stats("wisdom",1);
 	set_alignment(5);
-	set_property("magic resistance",random(15)+10);
+	set_mob_magic_resistance("average");
 	set_property("full attacks",1);
 	add_search_path("/cmds/fighter");
 	remove_limb("tail");
