@@ -20,25 +20,25 @@ create(){
 	  "obscured by the hood are enveloped in complete darkness, "+
 	  "making it completely impossible to determine if anything is "+
 	  "actually there or not.%^RESET%^");
-   set_race("undead");	
+   set_race("undead");
    set_gender("male");
-   set_body_type("human");	
+   set_body_type("human");
    set_hd(30,3);
    set_class("mage");
    set_level(30);
-   set_mlevel("mage",30);	
+   set_mlevel("mage",30);
    set_property("swarm",1);
    set_spell_chance(90);
    set_guild_level("mage",30);
-   set_property("magic resistance",40);
+   set_mob_magic_resistance("average");
    set_property("spell penetration",15);
    set_stats("strength",12);
    set_stats("dexterity",16);
    set_stats("constitution",17);
    set_stats("intelligence",19);
    set_stats("wisdom",15);
-   set_stats("charisma",3); 
-   set_overall_ac(-4); 
+   set_stats("charisma",3);
+   set_overall_ac(-4);
    set_spells(({
 	  "cone of cold",
 	  "lightning bolt",
@@ -66,9 +66,9 @@ create(){
    set_exp(16000);
    set_max_level(36);
    command("message in enters silently.");
-   command("message out silently leaves to the $D."); 	
+   command("message out silently leaves to the $D.");
 }
- 
+
 void die(object ob){
    tell_room(ETO,"%^BOLD%^The apparition groans and the empty robe "+
       "falls to the ground, disintegrating instantly.");

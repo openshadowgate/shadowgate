@@ -24,7 +24,7 @@ void create(){
     set_hd(29,2);
     set_mlevel("fighter", 29);
     set_property("full attacks", 1);
-    set_property("magic resistance", 20);
+    set_mob_magic_resistance("low");;
     set_alignment(5);
     set("aggressive", 30);
     set_size(2);
@@ -35,7 +35,7 @@ void create(){
       ob->move(TO);
     ob = new("/d/attaya/obj/uarmor.c");
       if(random(3))  ob->set_property("monsterweapon",1);
-      ob->move(TO);    
+      ob->move(TO);
     command("wield sword");
     command("wearall");
     set_speed(35);
@@ -68,7 +68,7 @@ void init(){
 }
 
 void dest_mobs(object targ) {
-    if(!objectp(TO) || !objectp(targ))   
+    if(!objectp(TO) || !objectp(targ))
 	return;
     kill_ob(targ,0);
     targ->die();

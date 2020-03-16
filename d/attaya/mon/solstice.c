@@ -58,7 +58,7 @@ void create() {
    add_search_path("/cmds/assassin");
    add_damage_bonus(2+random(9));
    add_attack_bonus(2+random(9));
-   set_property ("magic resistance",random(66));
+   set_mob_magic_resistance("average");
    set_new_exp(35,"very high");
    ob1 = new(OBJ"screamer");
    ob1->set_property("monsterweapon",1);

@@ -23,7 +23,7 @@ void create() {
     set_property("no_bump",1);
     set_stats("constitution",22);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",25);
+    set_mob_magic_resistance("very low");
    set_property("no death", 1);
     set_property("magic", 1);
     set_alignment(2);

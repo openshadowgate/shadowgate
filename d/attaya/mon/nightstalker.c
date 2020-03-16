@@ -59,7 +59,7 @@ void create() {
    add_damage_bonus(2+random(9));
    add_attack_bonus(2+random(9));
    //set("aggressive",25);
-   set_property ("magic resistance",random(66));
+   set_mob_magic_resistance("average");
    set_exp(24000);
    set_max_level(36);
    ob1 = new(OBJ"screamer");
@@ -139,7 +139,7 @@ void fire(object targ){
    if(!objectp(targ)) return;
    if(!"/daemon/saving_throw_d.c"->fort_save(targ,-26)){
       dam="hurt";
-   } 
+   }
    else{
 	  dam="singe";
    }
@@ -159,7 +159,7 @@ void fire(object targ){
 	     "light and intense heat!%^RESET%^");
 	  targ->set_paralyzed(random(10)+15,"%^MAGENTA%^You cannot see "+
 	     "your opponent and stumble around blindly!%^RESET%^");
-   } 
+   }
    else{
 	  targ->do_damage("torso",random(120));
    }
@@ -177,9 +177,9 @@ void heart_beat() {
    int i,max;
    object ob;
    object here,*inv;
-   
+
     ::heart_beat();
-   
+
    if(!objectp(TO)) return;
    if(!objectp(ETO)) return;
 

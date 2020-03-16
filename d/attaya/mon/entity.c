@@ -38,17 +38,17 @@ void create() {
    set_stats("strength",22);
    set_stats("intelligence",3);
    set_stats("wisdom",3);
-   set_stats("charisma",3);    
-   set_property ("magic resistance",30);
+   set_stats("charisma",3);
+   set_mob_magic_resistance("average");
    set_property("weapon resistance",2+random(2));
    set_alignment(2);
    set_new_exp(35,"high");;
    set_funcs(({"desoul"}));
    set_func_chance(15);
    command("message in flies in slowly.");
-   command("message out flies slowly to the $D.");  
+   command("message out flies slowly to the $D.");
       set_resistance("negative energy",20);
-      set_resistance("positive energy",-20); 
+      set_resistance("positive energy",-20);
 }
 
 void init(){
@@ -95,7 +95,7 @@ void desoul(object targ){
 	     "body and you collapse!%^RESET%^");
 	  targ->set_paralyzed(random(30)+10,"%^BOLD%^%^RED%^You feel your "+
 	     "blood boiling in your veins!%^RESET%^");
-   } 
+   }
    else{
       targ->do_damage("torso",roll_dice(3,12));
    }

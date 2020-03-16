@@ -42,9 +42,9 @@ void create(){
    set_stats("constitution",17);
    set_stats("intelligence",3);
    set_stats("wisdom",3);
-   set_stats("charisma",3);   
+   set_stats("charisma",3);
    set("aggressive",25);
-   set_property ("magic resistance",random(20)+15);
+   set_mob_magic_resistance("low");
    set_new_exp(35,"very high");
    set_alignment(9);
    set_damage_bonus(1+random(8));

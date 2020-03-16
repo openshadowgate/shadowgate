@@ -34,7 +34,7 @@ create() {
 	"acid arrow"
       }));
     set("aggressive","aggfunc");
-    set_property ("magic resistance",60);
+    set_mob_magic_resistance("very low");
     set_alignment(9);
     set_size( 3 );
     set_hp(300);

@@ -45,11 +45,11 @@ BRUENOR
     set_nogo(({"/d/islands/tonerra/mountain/mount2","/d/shadow/room/pass/pass1","/d/laerad/wasteland/waste1","/d/azha/town/wroad","/d/attaya/seneca3"}));
     set_thief_skill("hide in shadows",95);
     set_thief_skill("move silently",95);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("low");
     set_funcs(({"special"}));
     set_func_chance(25);
     set_alignment(9);
-        
+
         ob = new("/d/common/obj/weapon/dagger.c");
         ob->set_property("monsterweapon",1);
         ob->set_property("enchantment", 5);
@@ -94,7 +94,7 @@ void aggfunc()
 }
 
 
-void special(object targ) 
+void special(object targ)
 {
     string name;
     int count;
@@ -122,6 +122,3 @@ void die(object ob)
 ground.");
     ::die(ob);
 }
-
-
-

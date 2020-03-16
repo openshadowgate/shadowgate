@@ -59,7 +59,7 @@ void create(){
    set_stats("charisma",17);
    set_exp(1000000);
    set_property("spell invulnerability",6);
-   set_property("magic resistance",100);
+   set_mob_magic_resistance("average");
    set_property("spell penetration",50);
    set_property("spell damage resistance",33);
    set_property("weapon resistance",4);

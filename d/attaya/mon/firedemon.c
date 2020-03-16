@@ -13,7 +13,7 @@ create (){
     set_gender("male");
     set("race", "demonic entity");
     set_property("magic",1);
-    set_property("magic resistance",40);
+    set_mob_magic_resistance("high");
     set_body_type("human");
     set_property("swarm",1);
     set_class("paladin");

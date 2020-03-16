@@ -12,7 +12,7 @@ void create() {
 @BRUENOR
     %^RED%^You cannot tell any distinctive features from this particuliar human.
     %^RED%^He seems to be completly average.  The only thing out of place would
-    %^RED%^probably be the two long sword he carries in each hand while 
+    %^RED%^probably be the two long sword he carries in each hand while
     %^RED%^he gives you a rather smug grin. Also you notice he wears a single
     %^RED%^ring on his right index finger along with a key around his neck.
 BRUENOR
@@ -44,9 +44,9 @@ BRUENOR
     set_stats("wisdom",12);
     set_stats("charisma",10);
     set_nogo(({"/d/islands/tonerra/mountain/mount2","/d/shadow/room/pass/pass1","/d/laerad/wasteland/waste1","/d/azha/town/wroad","/d/attaya/seneca3"}));
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("low");
     set_alignment(9);
-        
+
         ob = new("/d/common/obj/weapon/longsword.c");
         ob->set_property("monsterweapon",1);
         ob->set_property("enchantment", 5);
@@ -85,7 +85,7 @@ void aggfunc()
         if((string)TPQCN != "bruenor")
         {
         command("say %^RED%^Idiot, should know not to walk down dark tunnels!");
-        command("say %^RED%^Almost caught me by surprise! But then again.. no 
+        command("say %^RED%^Almost caught me by surprise! But then again.. no
         you didnt!");
         command("kill "+TP->query_name());
 
@@ -98,4 +98,3 @@ void die(object ob)
 ground.");
     ::die(ob);
 }
-

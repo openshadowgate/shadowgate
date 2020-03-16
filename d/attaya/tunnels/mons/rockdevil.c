@@ -34,17 +34,17 @@ void create()
 	set_guild_level("mage",40);
    	set_hp(random(50)+300);
 	set_speed(30);
- 	set_nogo(({ "/d/attaya/rooms/tun15", 
+ 	set_nogo(({ "/d/attaya/rooms/tun15",
                  "/d/attaya/rooms/lair",
-                "/d/attaya/rooms/tun17", 
-               "/d/attaya/rooms/tun20", 
+                "/d/attaya/rooms/tun17",
+               "/d/attaya/rooms/tun20",
               "/d/attaya/rooms/tun14"}));
    	set_exp(10000);
 	set_max_level(45);
 	set_property("swarm",1);
   	set_overall_ac(-15);
   	set_alignment(4);
-      set_property("magic resistance",25);
+      set_mob_magic_resistance("very low");
       set_property("weapon resistance",10);
       set_property("full attacks",1);
       set_spell_chance(20);
@@ -53,10 +53,10 @@ void create()
            +"%^BOLD%^%^BLACK%^vil cracks its %^BOLD%^%^RED%^f%^YELLOW%^l"
            +"%^RESET%^%^RED%^a%^BOLD%^%^RED%^ming w%^YELLOW%^h%^RESET%^"
            +"%^RED%^i%^BOLD%^%^RED%^p",
-            
+
             "The %^BOLD%^%^BLACK%^dev%^BOLD%^%^RED%^i%^BOLD%^%^BLACK%^l"
            +" stamps his feet, making the ground shake beneath you.",
-   
+
             "%^BOLD%^%^BLACK%^The dev%^BOLD%^%^RED%^i%^BOLD%^%^BLACK%^l's"
            +" %^BOLD%^%^RED%^e%^BOLD%^%^BLACK%^y%^BOLD%^%^RED%^es%^BOLD%^"
            +"%^BLACK%^ light up with an inner %^BOLD%^%^RED%^f%^YELLOW%^i"
@@ -67,13 +67,13 @@ void create()
            +"%^BLACK%^l %^RESET%^seems completely unaffected by"
            +" %^YELLOW%^any%^RESET%^ of the weapons striking its stoney"
            +" skin.",
-   
+
             "The blows seem to bounce off of the %^BOLD%^%^BLACK%^r"
            +"%^RESET%^o%^BOLD%^%^BLACK%^ck d%^RESET%^%^RED%^e%^BOLD%^"
            +"%^BLACK%^v%^RED%^i%^BOLD%^%^BLACK%^l %^RESET%^, which seems"
            +" to be made from solid stone!",
     	}),1);
-      set_spells( ({"prismatic spray","dispel magic", "magic missile", 
+      set_spells( ({"prismatic spray","dispel magic", "magic missile",
                  "hideous laughter", "scorcher" }) );
       new(OBJ+"firewhip")->move(TO);
 }
@@ -88,12 +88,11 @@ void die(mixed ob)
   if (!objectp(TO)||!objectp(ETO)){return;}
   whip = present("devil whip", TO);
   if (objectp(whip) &&random(8)>0)
-  { 
-    tell_room(ETO,"%^RED%^As the " + query_short() 
-                + "%^RED%^ falls, its " + whip->query_short() 
+  {
+    tell_room(ETO,"%^RED%^As the " + query_short()
+                + "%^RED%^ falls, its " + whip->query_short()
                 + "%^RED%^ is consumed in flame!", TO);
     whip->remove(TO);
   }
   ::die(ob);
 }
-

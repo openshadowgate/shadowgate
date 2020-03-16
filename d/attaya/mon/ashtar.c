@@ -35,7 +35,7 @@ void create() {
     set_stats("dexterity",16);
     set_stats("constitution",17);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",40);
+    set_mob_magic_resistance("low");
     set_exp(50000);
     set_alignment(9);
     new("/d/attaya/obj/shroud.c")->move(this_object());

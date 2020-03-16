@@ -25,13 +25,13 @@ void create() {
    set_ac(0);
    set_exp(1);
    set_property("magic",1);
-   set_property("magic resistance",99);
+   set_mob_magic_resistance("average");
    set_attacks_num(1);
    set_damage(3,3);
    command("message in flies in slowly.");
-   command("message out flies slowly to the $D.");  
+   command("message out flies slowly to the $D.");
       set_resistance("negative energy",20);
-      set_resistance("positive energy",-20); 
+      set_resistance("positive energy",-20);
 }
 
 void die(object ob){

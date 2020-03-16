@@ -12,7 +12,7 @@ object choose_victim();
 int spell_effect();
 void fear();
 void stoneskin();
-int aggfunc(); 
+int aggfunc();
 void summon_devils();
 int query_opponent_levels();
 
@@ -47,7 +47,7 @@ void create(){
   	set_race("devil");
   	set_body_type("humanoid");
   	set_gender("male");
-  	set_hd(75,12);
+  	set_hd(60,120);
   	set_size(3);
   	set("aggressive","aggfunc");
 	set_class("mage");
@@ -65,7 +65,7 @@ void create(){
       set_funcs(({"fear"}));
       set_func_chance(50);
   	set_alignment(4);
-      set_property("magic resistance",40);
+      set_mob_magic_resistance("low");
       set_property("weapon resistance",3);
       set_property("full attacks",1);
       set_spell_chance(50);
@@ -75,12 +75,12 @@ void create(){
            +"%^GREEN%^i%^BOLD%^%^RED%^end %^RESET%^%^RED%^spreads its"
            +" %^BOLD%^%^BLACK%^black wings%^RESET%^%^RED%^ wide and"
            +" throws its head back, howling in %^BOLD%^%^RED%^rage!",
-            
+
             "",
-   
+
             "",
     	}),1);
-      set_spells( ({"fireball","hold person", "hideous laughter", 
+      set_spells( ({"fireball","hold person", "hideous laughter",
                                                       "scorcher" }) );      }
 
 void stoneskin()
@@ -107,7 +107,7 @@ void fear(object targ)
     if (objectp(ob))
     {
       if (!ob->query_true_invis() && (string)ob->query_race()!="devil"
-          && (string)ob->query_race()!="devilkin" 
+          && (string)ob->query_race()!="devilkin"
           && ob->query_property("scared")<1)
       {
         if(!"daemon/saving_d"->saving_throw(ob,"rod_staff_wand", -15))
@@ -118,7 +118,7 @@ void fear(object targ)
             tell_object(ob, "%^BOLD%^%^GREEN%^Panic overwhelms you - you"
                            +" must get away!");
             ob->force_me("flee");
-            tell_room(ETO, ob->query_cap_name() + " is overwhelmed with" 
+            tell_room(ETO, ob->query_cap_name() + " is overwhelmed with"
                         +" panic!",ob);
             break;
           case 1:
@@ -142,7 +142,7 @@ void fear(object targ)
                           +" washes over "+ ob->query_cap_name() + " and "
                           + ob->query_subjective() + " turns on "
                          + victim->query_cap_name() + "%^BOLD%^%^GREEN%^!"
-                          ,ob);        
+                          ,ob);
             ob->add_attacker(victim);
           }
           ob->set_property("scared", 4);
@@ -154,7 +154,7 @@ void fear(object targ)
                         +" %^RESET%^%^MAGENTA%^a%^BLUE%^u%^MAGENTA%^ra of"
                         +" %^BOLD%^%^CYAN%^fe%^RESET%^%^CYAN%^a%^BOLD%^"
                         +"%^CYAN%^r%^BOLD%^%^RED%^!");
-          tell_room(ETO,"%^BOLD%^%^RED%^" + ob->query_cap_name() 
+          tell_room(ETO,"%^BOLD%^%^RED%^" + ob->query_cap_name()
                        +"%^BOLD%^%^RED%^stands %^BLUE%^bravely %^RED%^"
                        +" in the face of the devil's"
                        +" %^RESET%^%^MAGENTA%^a%^BLUE%^u%^MAGENTA%^ra of"
@@ -169,8 +169,8 @@ void fear(object targ)
         if (!ob->query_true_invis() &&(string)ob->query_race()!="devilkin"
                                     &&(string)ob->query_race() != "devil")
         {
-          tell_room(ETO, "The wave of %^BOLD%^%^CYAN%^fear%^RESET%^" 
-                       +" passes " + ob->query_cap_name() + " by.", ob);  
+          tell_room(ETO, "The wave of %^BOLD%^%^CYAN%^fear%^RESET%^"
+                       +" passes " + ob->query_cap_name() + " by.", ob);
 
         }
         if ((int)ob->query_property("scared")>0)
@@ -186,7 +186,7 @@ void fear(object targ)
 }
 
 object choose_victim()
-{ 
+{
   object *victims;
   object victim;
   if (!objectp(TO)||!objectp(ETO)){return victim;}
@@ -235,7 +235,7 @@ void catch_tell(string str)
   }
 }
 
-int aggfunc() 
+int aggfunc()
 {
   if (!objectp(TO)||!objectp(ETO)){return 0;}
   if(TP->query_true_invis())
@@ -261,7 +261,7 @@ int query_opponent_levels(){
     classes = foes[i]->query_classes();
     if (sizeof(classes)>0){
       for (j=0; j<sizeof(classes);j++){
-        if (j<1){ 
+        if (j<1){
           levels += ((int)foes[i]->query_class_level(classes[j]));
         } else{
           levels += ((int)foes[i]->query_class_level(classes[j])/(j+2));
@@ -269,13 +269,13 @@ int query_opponent_levels(){
       }
     }
   }
-  return levels;  
+  return levels;
 }
 
 void summon_devils(){
   if (!objectp(TO)||!objectp(ETO)||present("hellgate",ETO)){return;}
   tell_room(ETO, "%^BOLD%^%^RED%^Flames%^RESET%^%^MAGENTA%^ and %^BOLD%^"
-                +"%^RED%^heat %^RESET%^%^MAGENTA%^burst from the " 
+                +"%^RED%^heat %^RESET%^%^MAGENTA%^burst from the "
                 + query_short() + "'s%^RESET%^%^MAGENTA%^ body as it"
                 +" opens up a gate to %^BOLD%^%^RED%^Hell%^RESET%^"
                 +"%^MAGENTA%^. More %^BOLD%^%^RED%^Devils %^RESET%^"

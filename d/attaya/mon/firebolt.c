@@ -32,7 +32,7 @@ void create() {
     set_body_type("arachnid");
     set_property("swarm",1);
     set_property("no bump",1);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("high");
     set_property("full attacks",1);
     set_stats("strength",16);
     set_stats("dexterity",16);

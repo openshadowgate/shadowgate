@@ -34,14 +34,14 @@ void create()
   switch(type)
   {
   case "book":
-    set_long("%^RESET%^A large, hard backed book, bound in " 
+    set_long("%^RESET%^A large, hard backed book, bound in "
             + colour + " " + material + "%^RESET%^. It seems to be"
             +" animated by some %^RED%^m%^BOLD%^%^RED%^a%^RESET%^"
             +"%^RED%^levol%^BOLD%^%^BLACK%^a%^RESET%^%^RED%^nt"
             +"%^RESET%^ force and its covers flap menacingly as"
             +" it weaves its way through the air, pages fluttering"
             +" in the breeze.\n");
-    set_short("%^RESET%^"+colour+" " + material + " hard backed" 
+    set_short("%^RESET%^"+colour+" " + material + " hard backed"
              +" book%^RESET%^");
     set_id(({"book","hardback book", "hard backed book"}));
     break;
@@ -49,41 +49,41 @@ void create()
     set_long("%^RESET%^A weighty tome, clearly filled with"
             +" %^GREEN%^a%^BOLD%^%^GREEN%^r%^RESET%^%^GREEN%^ca"
             +"%^BOLD%^%^GREEN%^ne%^RESET%^ knowledge,"
-            +" pressed between its " + colour + " " + material 
+            +" pressed between its " + colour + " " + material
             +" %^RESET%^covers. It has been animated by a force of"
             +" %^MAGENTA%^magic%^RESET%^, or perhaps by the"
             +" %^CYAN%^enchantment%^RESET%^ contained within, and"
-            +" is now rising up to attack!\n");  
+            +" is now rising up to attack!\n");
     set_short("%^RESET%^"+colour+" "+ material+ " covered tome%^RESET%^");
-    set_id(({"tome","book","weighty tome"}));   
+    set_id(({"tome","book","weighty tome"}));
     break;
   case "volume":
     set_long("%^RESET%^A "+colour+" volume%^RESET%^, with pages sewn"
             +" carefully between its " + material + " covers. It"
             +" seems to have been animated and is flying through"
             +" the air ready to attack!\n");
-    set_short("%^RESET%^"+colour+" volume backed in " + material 
+    set_short("%^RESET%^"+colour+" volume backed in " + material
             + "%^RESET%^");
-    set_id(({"book","volume",material + " covered volume",colour 
+    set_id(({"book","volume",material + " covered volume",colour
                                                     + " volume"}));
     break;
 case "monograph":
-    set_long("%^RESET%^A slim volume set between " + colour + " " 
+    set_long("%^RESET%^A slim volume set between " + colour + " "
             + material + "%^RESET%^ covers, with a text on a single"
            + " subject. With the %^MAGENTA%^magic%^RESET%^ now"
            + " embuing it, it seems to be just as single-minded"
            + " about killing anyone it can!\n");
-    set_short("%^RESET%^"+colour+" " + material 
+    set_short("%^RESET%^"+colour+" " + material
              +" %^RESET%^covered monograph");
     set_id(({"monograph","book",colour + " monograph",
                                                    colour + "book"}));
     break;
   default:
-    set_long("%^RESET%^A " + type + " covered with a binding of " 
+    set_long("%^RESET%^A " + type + " covered with a binding of "
             + colour + " " + material + "%^RESET%^. The subject"
             +" matter is undoubtedly %^GREEN%^a%^BOLD%^%^GREEN%^r"
             +"%^RESET%^%^GREEN%^ca%^BOLD%^%^GREEN%^n%^RESET%^"
-            +"%^GREEN%^e%^RESET%^ in nature, and the " + type 
+            +"%^GREEN%^e%^RESET%^ in nature, and the " + type
             +" appears to have been seized with magic itself, as it"
             +" is flying around in the air attacking whatever it can"
             +" reach!\n");
@@ -117,11 +117,11 @@ case "monograph":
    set_max_level(50);
    set_property("swarm",1);
    set_overall_ac(-1);
-   set_property("magic resistance",40);
+   set_mob_magic_resistance("extremely high");
    set_property("full attacks",1);
    set_emotes(10,({
 		query_short() + " flaps its covers menacingly as it flies"
-            +" round the room",            
+            +" round the room",
             query_short()+ " emits a %^BOLD%^%^CYAN%^shrill"
             +" %^RESET%^screech and rejoins the attack!",
             query_short() + " flaps into your face!",
@@ -144,13 +144,13 @@ void die(mixed ob) {
     num_pages = 0;
    switch(random(20)) {// yes it's intentional to not have breaks.. *Styx*
 	case 0..12:  break;
- 	case 13..14:  
+ 	case 13..14:
         page= new(OBJ + "page");
         if (!objectp(page)) { tell_room(ETO, "page failed to load");break;}
         page->move(TO);
         num_pages++;
-    case 15..16: 
-    case 17..18:  
+    case 15..16:
+    case 17..18:
         page= new(OBJ + "page");
         if (!objectp(page)) {tell_room(ETO, "page failed to load");break; }
         page->move(TO);
@@ -160,9 +160,9 @@ void die(mixed ob) {
         if (!objectp(page)) {tell_room(ETO, "page failed to load");break; }
         page->move(TO);
         num_pages++;
-        break; 
+        break;
    }
-   if(num_pages) 
+   if(num_pages)
    {
      tell_room(ETO, "As the " + query_name()+ " %^RESET%^falls apart, a"
                    +" page or two of writing flutters forlornly down"
@@ -170,5 +170,3 @@ void die(mixed ob) {
    }
    ::die(ob);
 }
-  
-

@@ -9,8 +9,8 @@ void create() {
     set_short("%^CYAN%^Gambrill%^RESET%^");
     set_long(
 @BRUENOR
-    %^CYAN%^Gambrill stands before you.  He is a man of about six feet in height  
-    %^CYAN%^with shaggy brown hair. He has not shaven in a few days and looks 
+    %^CYAN%^Gambrill stands before you.  He is a man of about six feet in height
+    %^CYAN%^with shaggy brown hair. He has not shaven in a few days and looks
     %^CYAN%^a bit worn as does the emerald dagger he holds in his left hand.
     %^CYAN%^Both him and his dagger are covered in dirt, grime, and blood.
     %^CYAN%^He does not look very impressed by your presence.
@@ -41,7 +41,7 @@ BRUENOR
     set_stats("intelligence",16);
     set_stats("wisdom",12);
     set_stats("charisma",10);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_alignment(9);
     set_funcs(({"stun"}));
     set_func_chance(30);

@@ -63,7 +63,7 @@ BRUENOR
     set_property("magic", 1);
     set_property("no hold", 1);
     set_property("spell penetration",59+roll_dice(2,20));
-    set_property("magic resistance", 30);
+    set_mob_magic_resistance("low");
     set_emotes(5, ({
       "The Mage Lord Elseroad chuckles and begins to chant: "+
       "%^BOLD%^%^GREEN%^AVER DER COETINY BOR",
@@ -124,7 +124,7 @@ int kill_ob(object victim, int which)
       //new("/cmds/spells/l/_lower_resistance")->use_spell(TO,victim->query_name(),50,100,"mage"); // upped his spell penetration instead
       new("/cmds/spells/f/_fireball")->use_spell(TO,victim->query_name(),50,100,"mage");
       new("/cmds/spells/m/_magic_missile")->use_spell(TO,victim->query_name(),40,100,"mage");
-      new("/cmds/spells/s/_stoneskin")->use_spell(TO,TO,50,100,"mage");               
+      new("/cmds/spells/s/_stoneskin")->use_spell(TO,TO,50,100,"mage");
       new("/cmds/spells/m/_monster_summoning_v")->use_spell(TO,0,34,100,"mage");
       FLAG2 = 1;
   }
@@ -140,7 +140,7 @@ void special1(object targ)
     num = random(4);
 new("/cmds/spells/d/_dispel_magic")->use_spell(TO,targ->query_name(),50,100,"mage");
 //new("/cmds/spells/l/_lower_resistance")->use_spell(TO,targ->query_name(),50,100,"mage");
-    
+
     if (num == 0)
     {
         TO->force_me("say Let me brighten the mood real quick!");
@@ -203,15 +203,14 @@ void heart_beat(){
       FLAG = 1;
     TO->force_me("say %^BOLD%^%^RED%^YOU WON'T WIN THIS EASILY!");
     new("/cmds/spells/m/_monster_summoning_v")->use_spell(TO,0,34,100,"mage");
-    new("/cmds/spells/m/_monster_summoning_vi")->use_spell(TO,0,34,100,"mage"); 
+    new("/cmds/spells/m/_monster_summoning_vi")->use_spell(TO,0,34,100,"mage");
     new("/cmds/spells/m/_monster_summoning_i")->use_spell(TO,0,34,100,"mage");
-    new("/cmds/spells/m/_monster_summoning_ii")->use_spell(TO,0,34,100,"mage");  
-    new("/cmds/spells/m/_monster_summoning_iii")->use_spell(TO,0,34,100,"mage");    
+    new("/cmds/spells/m/_monster_summoning_ii")->use_spell(TO,0,34,100,"mage");
+    new("/cmds/spells/m/_monster_summoning_iii")->use_spell(TO,0,34,100,"mage");
     new("/cmds/spells/m/_monster_summoning_iv")->use_spell(TO,0,34,100,"mage");
-    new("/cmds/spells/s/_stoneskin")->use_spell(TO,TO,50,100,"mage"); 
-    new("/cmds/spells/b/_blink")->use_spell(TO,TO,50,100,"mage"); 
+    new("/cmds/spells/s/_stoneskin")->use_spell(TO,TO,50,100,"mage");
+    new("/cmds/spells/b/_blink")->use_spell(TO,TO,50,100,"mage");
        TO->add_hp(random(300)+175);
       }
     return;
 }
-

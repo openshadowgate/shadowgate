@@ -27,7 +27,7 @@ void create() {
     set_stats("dexterity",22);
     set_stats("constitution",22);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_alignment(2);
     set_exp(21000);
     set_emotes(3,({
@@ -37,7 +37,7 @@ void create() {
 // making the gear monsterweapons so it's more rare and less left lying around
     ob = new("/d/attaya/obj/uarmor.c");
       if(random(3))  ob->set_property("monsterweapon",1);
-      ob->move(TO);    
+      ob->move(TO);
       command("wear armour");
     ob = new("/d/attaya/obj/cursed.c");
       if(random(3))  ob->set_property("monsterweapon",1);

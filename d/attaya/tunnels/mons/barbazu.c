@@ -48,7 +48,7 @@ void create()
       set_funcs(({"beard_bite", "flame"}));
       set_func_chance(25);
   	set_alignment(4);
-      set_property("magic resistance",25);
+      set_mob_magic_resistance("average");
       set_property("weapon resistance",3);
       set_property("full attacks",1);
       set_spell_chance(5);
@@ -69,7 +69,7 @@ void create()
            "The barbazu %^GREEN%^d%^RED%^e%^GREEN%^v%^BOLD%^%^RED%^i"
           +"%^RESET%^%^GREEN%^l's%^RESET%^ tail lashes out, narrowly"
           +" missing you",
- 
+
            "The barbazu %^GREEN%^d%^RED%^e%^GREEN%^v%^BOLD%^%^RED%^i"
           +"%^RESET%^%^GREEN%^l%^RESET%^ ducks low to the ground,"
           +" aiming a blow at his opponent's feet!",
@@ -107,7 +107,7 @@ void flame(object targ)
   tell_room(ETO, "%^RED%^The barbazu %^GREEN%^d%^RED%^e%^GREEN%^v"
                 +"%^BOLD%^%^RED%^i%^RESET%^%^GREEN%^l%^RESET%^"
                 +" blankets the area in %^BOLD%^%^RED%^f%^YELLOW%^l"
-                +"%^RESET%^%^RED%^a%^BOLD%^%^RED%^me!");    
+                +"%^RESET%^%^RED%^a%^BOLD%^%^RED%^me!");
   for(i=0;i<sizeof(foes);i++)
   {
     victim = foes[i];
@@ -155,22 +155,22 @@ void beard_bite(object targ)
                   +"%^ORANGE%^i%^MAGENTA%^ve%^RESET%^ around the back of"
                   +targ->query_cap_name() + "'s neck, the  barbazu"
                   +" %^GREEN%^d%^RED%^e%^GREEN%^v%^BOLD%^%^RED%^i"
-                  +"%^RESET%^%^GREEN%^l%^RESET%^ pulls " +targ->QO 
+                  +"%^RESET%^%^GREEN%^l%^RESET%^ pulls " +targ->QO
                   +" forward into the flailing strands of its %^GREEN%^b"
                   +"%^BOLD%^%^GREEN%^e%^RESET%^%^GREEN%^ard%^RESET%^,"
-                  +" which whip and tear at "+ targ->QP 
+                  +" which whip and tear at "+ targ->QP
                   +" flesh, leaving " +targ->QO+" with a foul mark on "
                   + targ->QP +" face!",targ);
-    disease = present("disease", targ); 
+    disease = present("disease", targ);
     if (objectp(disease))
     {
       if ((string)disease->query_name()=="mark")
       {
         return;
       }
-    
+
     }
- 
+
     new(OBJ+"devil_mark")->move(targ);
     targ->force_me("wear mark");
     return;
@@ -200,14 +200,14 @@ void die(mixed ob)
   banded = present("banded", TO);
   glaive = present("glaive", TO);
   if (objectp(glaive) &&random(8)>0)
-  { 
-    tell_room(ETO,"%^GREEN%^As the " + query_short() 
-                + "%^GREEN%^ falls, its " + glaive->query_short() 
+  {
+    tell_room(ETO,"%^GREEN%^As the " + query_short()
+                + "%^GREEN%^ falls, its " + glaive->query_short()
                 + "%^GREEN%^ is broken asunder!", TO);
     glaive->remove(TO);
   }
   if (objectp(banded) &&random(12)>0)
-  { 
+  {
     banded->remove(TO);
   }
 

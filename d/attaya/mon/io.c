@@ -35,7 +35,7 @@ create (){
    command("wield sword in left hand");
    new("/d/attaya/obj/shimmeringcape")->move(TO);
    command("wear cape");
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("low");
     set_property("magic", 1);
     set_property("full attacks", 1);
     set("aggressive", 19);

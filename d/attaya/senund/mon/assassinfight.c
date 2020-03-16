@@ -12,7 +12,7 @@ void create() {
 @BRUENOR
     %^RED%^You cannot tell any distinctive features from this particuliar human.
     %^RED%^He seems to be completly average.  The only thing out of place would
-    %^RED%^probably be the rather large sword he carries in both hands while 
+    %^RED%^probably be the rather large sword he carries in both hands while
     %^RED%^swinging around rather brazenly. Also you notice he wears a single
     %^RED%^ring on his right index finger along with a key around his neck.
 BRUENOR
@@ -45,11 +45,11 @@ BRUENOR
     set_stats("wisdom",12);
     set_stats("charisma",10);
     set_nogo(({"/d/islands/tonerra/mountain/mount2","/d/shadow/room/pass/pass1","/d/laerad/wasteland/waste1","/d/azha/town/wroad","/d/attaya/seneca3"}));
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("low");
     set_funcs(({"cleave"}));
     set_func_chance(20);
     set_alignment(9);
-        
+
         ob = new("/d/common/obj/weapon/two_hand_sword.c");
         ob->set_property("monsterweapon",1);
         ob->set_property("enchantment", 5);
@@ -113,4 +113,3 @@ void die(object ob)
     "%^RED%^ to death on the ground.");
     ::die(ob);
 }
-

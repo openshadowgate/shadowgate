@@ -42,7 +42,7 @@ void create(){
    set_stats("wisdom",3);
    set_stats("charisma",3);
    set("aggressive",25);
-   set_property ("magic resistance",30);
+   set_mob_magic_resistance("low");
    set_exp(17500);
    set_max_level(36);
    set_alignment(9);
@@ -63,7 +63,7 @@ void create(){
 	  "powerattack",
 	  "shatter",
 	  "sunder",
-	  "rush"	  
+	  "rush"
    }));
    add_search_path("/cmds/fighter");
    set_fighter_style("soldier");

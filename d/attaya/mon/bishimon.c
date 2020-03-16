@@ -39,7 +39,7 @@ void create(){
    command("wield sword in right hand");
    ob=new(OBJ"cursed")->move(TO);
    command("wield sword in left hand");
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    set_property("weapon resistance",3);
    set_property("full attacks",1);
    set_property("no paralyze", 1);
@@ -111,7 +111,7 @@ void die(object ob){
       "towards the mirror, but falls short and drops to the ground "+
 	  "mere inches from it.\n"+
 	  "%^RESET%^%^RED%^You...are...powerful...avenge the fallen.  "+
-	  "Lathander...perdóneme...%^RESET%^",TP);
+	  "Lathander...perdï¿½neme...%^RESET%^",TP);
    for(i=0;i<sizeof(attackers);i++){
       if(!objectp(attackers[i])) { continue; }
 	  if(member_array("Gained entry to the Crystal Tower, Defeated Bishimon",attackers[i]->query_mini_quests()) == -1){

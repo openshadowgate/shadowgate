@@ -11,7 +11,7 @@ void do_bow();
 
 int count;
 
-create() {    
+create() {
     ::create();
     set_name("hunter");
     set_id( ({ "phantom hunter", "hunter", "phantom" }) );
@@ -25,42 +25,42 @@ create() {
 	"The Hunter was given amazing strength, speed, and cunning.");
     set_level(50);
     set_hd(50,6);
-    set_exp(50000);    
-    set_body_type("human");    
+    set_exp(50000);
+    set_body_type("human");
     set_invis();
     set_moving( 1 );
     set_speed ( 30 );
     set_guild_level("fighter",50);
     set("aggressive",22);
-    set_alignment(9);    
-    set_size(3);    
-    set_stats("intelligence",22);    
-    set_stats("wisdom",22);    
-    set_stats("strength",23);    
-    set_stats("charisma",20);    
-    set_stats("dexterity",24);    
-    set_stats("constitution",24);    
+    set_alignment(9);
+    set_size(3);
+    set_stats("intelligence",22);
+    set_stats("wisdom",22);
+    set_stats("strength",23);
+    set_stats("charisma",20);
+    set_stats("dexterity",24);
+    set_stats("constitution",24);
     //set_max_mp(2050);    
-    //set_mp(query_max_mp());    
+    //set_mp(query_max_mp());
     set_max_hp(3050);
     set_hp(3050);
     set_property("full attacks",1);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("very low");
     set_parrying(1);
-    set_wielding_limbs( ({"right hand","left hand"}) );    
-   // new("/d/attaya/obj/lightning")->move(this_object());    
+    set_wielding_limbs( ({"right hand","left hand"}) );
+   // new("/d/attaya/obj/lightning")->move(this_object());
   //  new("/d/attaya/obj/stormsabre")->move(this_object()); taking this out till I get around to repairing it, discern between ranged and melee on the same weapon is buggy - Ares
     new("/d/attaya/obj/gcutlass")->move(this_object());
-    command("wield cutlass"); 
+    command("wield cutlass");
     new("/d/attaya/obj/black_swan")->move(TO);
-    command("wield rapier");   
-    //new("/d/attaya/obj/rustb")->move(this_object());    
+    command("wield rapier");
     //new("/d/attaya/obj/rustb")->move(this_object());
-    new("/d/attaya/obj/uarmor")->move(TO);    
-    command("wear armor");    
-    add_money("electrum",random(5000)+1000);    
-    add_money("silver",random(5000)+1000);    
-    add_money("gold",random(500)+100);    
+    //new("/d/attaya/obj/rustb")->move(this_object());
+    new("/d/attaya/obj/uarmor")->move(TO);
+    command("wear armor");
+    add_money("electrum",random(5000)+1000);
+    add_money("silver",random(5000)+1000);
+    add_money("gold",random(500)+100);
     enable_commands();
       set_resistance("negative energy",20);
       set_resistance("positive energy",-20);
@@ -75,7 +75,7 @@ void init(){
     }
     return;
 }
-void start_heart(){	
+void start_heart(){
     set_heart_beat(1);
 }
 
@@ -112,7 +112,7 @@ void do_bow(){
 			    if(z = sizeof(living_bad)){
 				y = random(z);
 				exit = ETO->query_direction(paths[i]);
-				  if(!interactive(living_bad[y])){	
+				  if(!interactive(living_bad[y])){
 					ids = living_bad[y]->query_id();
 					command("shoot "+ids[0]+" 1 "+exit);
 				    }
@@ -139,7 +139,7 @@ void do_check(){
 		command("unwield sword");
 		command("wield scimitar");
 	    }
-	} else 
+	} else
 	if((string)weapons[0]->query_name() == "stormsabre"){
 	    if((object *)TO->query_attackers() != ({})){
 		command("unwield scimitar");
@@ -151,4 +151,3 @@ void do_check(){
     if(!present("object"))
 	new("/d/attaya/obj/lightning")->move(TO);
 }
-

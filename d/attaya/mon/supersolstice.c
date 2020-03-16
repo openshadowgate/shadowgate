@@ -34,7 +34,7 @@ void create() {
     set_thief_skill("hide in shadows",95);
     add_search_path( "cmds/thief" );
     set("aggressive","aggfunc");
-    set_property ("magic resistance",75);
+    set_mob_magic_resistance("average");
 	set_property("strong stab",1);
     set_exp(40000);
     set_alignment(5);
@@ -69,7 +69,7 @@ void die(object ob) {
 
 int aggfunc() {
     string mrace=TP->query_race();
-    if(wizardp(TP) || TP->query_true_invis()) 
+    if(wizardp(TP) || TP->query_true_invis())
 	return 1;
     if (mrace == "undead" || TP->query_invis()) {
 	command("grin");

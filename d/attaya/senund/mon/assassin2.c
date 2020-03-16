@@ -42,9 +42,9 @@ BRUENOR
     set_stats("wisdom",12);
     set_stats("charisma",10);
     set_nogo(({"/d/islands/tonerra/mountain/mount2","/d/shadow/room/pass/pass1","/d/laerad/wasteland/waste1","/d/azha/town/wroad","/d/attaya/seneca3"}));
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("low");
     set_alignment(9);
-        
+
     new(OBJ+"riftund.c")->move(TO);
         ob = new("/d/common/obj/weapon/dagger.c");
         ob->set_property("monsterweapon",1);
@@ -98,4 +98,3 @@ void die(object ob)
 ground.");
     ::die(ob);
 }
-

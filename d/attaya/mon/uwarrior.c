@@ -41,7 +41,7 @@ void create() {
    set_stats("wisdom",3);
    set_stats("charisma",3);
    set("aggressive",25);
-   set_property ("magic resistance",60);
+   set_mob_magic_resistance("average");
    set_new_exp(35,"high");
    set_alignment(9);
    ob = new(OBJ"rusts");
@@ -60,7 +60,7 @@ void create() {
 	  "powerattack",
 	  "shatter",
 	  "sunder",
-	  "rush"	  
+	  "rush"
    }));
       set_resistance("negative energy",20);
       set_resistance("positive energy",-20);

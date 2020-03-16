@@ -46,11 +46,11 @@ BRUENOR
     set_stats("charisma",10);
     set_thief_skill("hide in shadows",95);
     set_thief_skill("move silently",95);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_funcs(({"special","special2"}));
     set_func_chance(40);
     set_alignment(9);
-        
+
         ob = new("/d/attaya/obj/screamer.c");
         ob->set_property("monsterweapon",1);
         ob->move(TO);
@@ -97,7 +97,7 @@ void aggfunc()
 }
 
 
-void special(object targ) 
+void special(object targ)
 {
     string name;
     int count;
@@ -119,7 +119,7 @@ void special(object targ)
 }
 
 
-void special2(object targ) 
+void special2(object targ)
 {
     string name;
     int count;

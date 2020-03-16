@@ -30,7 +30,7 @@ object ob;
     set_stats("dexterity",18);
     set_stats("constitution",17);
     set_stats("strength",22);
-    set_property ("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_alignment(2);
     set_exp(35000);
     set_emotes(5,({

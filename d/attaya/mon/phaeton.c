@@ -28,7 +28,7 @@ void create() {
    set_property("no paralyze", 1);
     set_stats("constitution",22);
     set("aggressive","aggfunc");
-   set_property("magic resistance", 100);
+   set_mob_magic_resistance("average");
     set_alignment(2);
     set_exp(51216);
     new("/d/attaya/obj/azure.c")->move(TO);

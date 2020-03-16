@@ -9,7 +9,7 @@ void create() {
     set_long(
 @BRUENOR
 
-    %^BOLD%^%^BLUE%^This priest is cloaked in shadows. All you can make out is 
+    %^BOLD%^%^BLUE%^This priest is cloaked in shadows. All you can make out is
     %^BOLD%^%^BLUE%^his huge shield held in front of him and his flowing black robe
     %^BOLD%^%^BLUE%^that covers all of his body.
 BRUENOR
@@ -39,6 +39,7 @@ BRUENOR
     set_stats("wisdom",18);
     set_stats("charisma",16);
     set_alignment(6);
+    set_mob_magic_resistance("average");
    set("aggressive","aggfunc");
     set_emotes(3,({
 
@@ -47,7 +48,7 @@ BRUENOR
      "%^MAGENTA%^The priest mumbles: %^RESET%^Life is just a shadow of reality.",
      "The priest %^RED%^%^BOLD%^cackles%^RESET%^"
     }),0);
-    
+
     set_spell_chance(80);
     set_spells( ({ "darkbolt" }) );
     set_funcs(({"drain"}));
@@ -113,4 +114,3 @@ void die(object ob)
     tell_room(ETO,"%^BOLD%^%^CYAN%^The priest whispers to you: %^BLACK%^Death is only the beginning...");
     ::die(ob);
 }
-

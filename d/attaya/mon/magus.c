@@ -19,8 +19,8 @@ object ob;
         "attention there.  Her dark auburn hair is pulled back in a simple tail "+
         "at the base of her neck.  Standing barefoot and wearing only a pair of "+
         "bracers, a tangible aura of arcane power radiates around her.");
-      //"The Magus Prime is the teacher of magic here.  She is a learned warmage.  
-      //She hides beneath a dark robe and, beneath the shadows, only her mouth and chin 
+      //"The Magus Prime is the teacher of magic here.  She is a learned warmage.
+      //She hides beneath a dark robe and, beneath the shadows, only her mouth and chin
       //are visible.\n There is a chill in the air about her.
     set_class("mage");
     set_mlevel("mage", 60);
@@ -28,7 +28,7 @@ object ob;
     set_body_type("human");
     set_property("swarm",1);
     set_property("no death",1);
-    set_property("magic resistance",70);
+    set_mob_magic_resistance("average");
     set_spell_chance(100);
     set_guild_level("mage",60);
     set_stats("strength", 15);

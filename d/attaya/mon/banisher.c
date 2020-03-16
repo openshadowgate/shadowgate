@@ -25,7 +25,7 @@ void create() {
     set_stats("dexterity",22);
     set_stats("constitution",22);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_alignment(2);
     set_exp(30000);
     set_emotes(5,({

@@ -45,7 +45,7 @@ void create() {
    set_hp(query_max_hp());
    set_wielding_limbs(({"right hand","left hand"}));
    set_body_type("human");
-   set_property("magic resistance",100);
+   set_mob_magic_resistance("average");
    set_property("weapon resistance",3);
    set_property("full attacks",1);
    set_property("no paralyze", 1);

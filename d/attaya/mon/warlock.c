@@ -37,7 +37,7 @@ void create(){
    set_spell_chance(90);
    //set_guild_level("mage",24);
    set_guild_level("warlock",40);
-   set_property("magic resistance",random(25));
+   set_mob_magic_resistance("average");
    set_property("spell penetration",random(10));
    set("warlock_blast_type","vitriolic");
    set_stats("strength",12);
