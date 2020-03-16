@@ -16,11 +16,11 @@ void create()
              " with slight traces of brown. His fiery scarlet hair is long, straight and clean." +
              " Although typically pulled away from his face in a ponytail, it falls between his" +
              " shoulder blades when loose. Tanned skin hints at hours spent outdoors under the" +
-             " sun , but his flesh is clean and smooth. The weight he carries upon himself" +
+             " sun, but his flesh is clean and smooth. The weight he carries upon himself" +
              " seems to hinder him little, and even when hidden beneath layers of protection" +
              " the strength of his well-tonned muscles is obvious. The man seems to put as much" +
              " care into the maintenance of his belongings as he puts into his own" +
-             " appearance./n He is approximately 66 inches tall and 250 pounds.");
+             " appearance. He is approximately 66 inches tall and 250 pounds.");
     set_class("fighter", "paladin");
     set_guild_level("fighter", 20);
     set_guild_level("paladin", 20);
@@ -48,7 +48,7 @@ void create()
         ob->set_property("monsterweapon", 1);
     }
     ob->move(TO);
-    command("wield claymore");
+    command("wield hammer");
     set_property("full attacks", 4);
     set_stats("strength", 22);
     set_stats("constitution", 21);
