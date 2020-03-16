@@ -63,7 +63,7 @@ void create()
 
     {
         object obj;
-        int ench = 8;
+        int ench = 7;
 
         obj = new("/d/magic/obj/shields/jarmila");
         obj->set_property("enchantment", ench);
