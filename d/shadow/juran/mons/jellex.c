@@ -39,7 +39,7 @@ void create(){
 	set_mlevel("thief",27);
 	set_level(27);
 	set_property("full attacks",1);
-	set_property("magic resistance",60);
+	set_mob_magic_resistance("average");
    	set_property("no bows",1);
     	set_exp(1000);
     	set_emotes(0,({

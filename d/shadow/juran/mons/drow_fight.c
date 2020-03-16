@@ -70,7 +70,7 @@ void create(){
   	add_money("silver",(dlevel*15));
   	add_money("gold",(dlevel*5));
   	add_money("electrum",(dlevel*10));
-    	set_property("magic resistance",10);
+    	set_mob_magic_resistance("average");
       set_exp(query_hd()*25);
       set_property("full attacks",1);
       set_max_level(15);

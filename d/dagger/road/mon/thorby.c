@@ -20,7 +20,7 @@ void create(){
     );
     set_id( ({"thorby", "Thorby", "thief", "master", "master thief"}) );
     set_heart_beat(1);
-    set_property("magic resistance", 30);
+    set_mob_magic_resistance("average");
     set_exp(15000);
     set_race("human");
     set_body_type("human");

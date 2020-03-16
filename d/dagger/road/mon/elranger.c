@@ -12,7 +12,7 @@ void create() {
     set_long(
       "This is one of the elven scout rangers that can be found on the roads in this area.  Good at hiding in the brush around the roads, they are not commonly seen until they wish you to see them."
     );
-  if(!random(5)){ set_property("magic resistance",65); } else {set_property("magic resistance",35);}
+  if(!random(5)){ set_mob_magic_resistance("average");}
     set_overall_ac(-7);
     set_class("ranger");
   set_class("cleric");

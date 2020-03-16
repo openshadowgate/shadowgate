@@ -35,7 +35,7 @@ void init() {
 	    set_exp(4000);
 	    set_overall_ac(0);
 	    set("aggressive", 20);
-	    set_property("magic resistance", 10);
+	    set_mob_magic_resistance("average");
 	    set_alignment(6);
 	    add_money("gold", random(500));
 	    add_money("silver", random(1500));

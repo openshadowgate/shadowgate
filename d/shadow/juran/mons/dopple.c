@@ -55,7 +55,7 @@ create() {
     	set_property("full attacks",1);
     	command("speak wizish");
     	set_speed(30);
-    	set_property("magic resistance",25);
+    	set_mob_magic_resistance("average");
 	FLAG = 0;
 	FACE = 0;
 	STUFF = 0;
