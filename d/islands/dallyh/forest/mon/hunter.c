@@ -2,7 +2,7 @@
 #include "/d/islands/dallyh/fways.h"
 inherit MONSTER;
 
-void create() 
+void create()
 {
     ::create();
     set_name("amazon hunter");
@@ -37,8 +37,8 @@ void create()
     switch(random(3))
     {
         case 0..1:
-        
-            switch(random(6)) 
+
+            switch(random(6))
             {
                 case 0..3: new( FOPATH "spear.c")->move(TO);
                     command("wield spear");
@@ -49,13 +49,13 @@ void create()
                     break;
             }
             set_monster_feats(({
-                "toughness", 
-                "improved toughness", 
+                "toughness",
+                "improved toughness",
                 "damage resistance",
                 "improved damage resistance"
-            }));  
+            }));
             break;
-            
+
         case 2:
             set_monster_feats(({
                 "point blank shot",
@@ -63,15 +63,15 @@ void create()
                 "deadeye",
                 "preciseshot",
                 "shot on the run"
-            }));  
+            }));
             new("/d/common/obj/lrweapon/longbow")->move(TO);
             command("wield bow");
             new("/d/common/obj/lrweapon/larrows")->move(TO);
             break;
-    }        
+    }
     new(FOPATH "panther.c")->move(TO);
     command("wear skin");
-    set_property("magic resistance", 50);
+    set_mob_magic_resistance("low");
     set_stats("strength", 22);
     set_stats("dexterity", 19);
     set_stats("intelligence", 10);
@@ -79,7 +79,7 @@ void create()
     set_stats("charisma", 10);
     set_stats("constitution", 25);
     set_new_exp(26, "high");
-    set_nogo(({DDOCK, FRPATH"road1"}));  
+    set_nogo(({DDOCK, FRPATH"road1"}));
 }
 
 int aggfunc()
@@ -125,11 +125,11 @@ void die(object ob)
 {
     if(objectp(TO))
     {
-        if(objectp(ETO)) 
+        if(objectp(ETO))
         {
-            all_inventory(TO)->move(ETO);    
+            all_inventory(TO)->move(ETO);
             tell_room(ETO, TO->query_short()+"%^BOLD%^%^WHITE%^ collapses into a puff of sm%^RESET%^%^WHITE%^o"+
-            "%^BOLD%^k%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^!%^RESET%^");                    
+            "%^BOLD%^k%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^!%^RESET%^");
         }
         TO->move("/d/shadowgate/void");
         if(objectp(TO)) TO->remove();

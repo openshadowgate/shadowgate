@@ -36,7 +36,7 @@ void create()
     set_hp(query_max_hp());
     set_alignment(9);
     set_overall_ac(-25);
-    set_property("magic resistance",77);
+    set_mob_magic_resistance("average");
     add_money("platinum",random(1000) + 2000);
     set_stats("strength", 25);
     set_stats("dexterity", 30);

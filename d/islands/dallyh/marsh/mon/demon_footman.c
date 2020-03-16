@@ -27,8 +27,8 @@ void create ()
     set_race("demon");
     set_body_type("arachnid");
     set_property("swarm",1);
-
     set_overall_ac(-44);
+    set_hd(40);
     set_size(4);
     set_wielding_limbs(({"left front claw","right rear claw"}));
     set_attacks_num(6);
@@ -39,7 +39,9 @@ void create ()
     set_damage(4,20);
     set_moving( 1 );
     set_speed ( 20 );
-    set_hp(2000+random(1000));
+    set_max_hp(2000+random(1000));
+    set_hp(query_max_hp());
+    set_mob_magic_resistance("average");
 
     switch(random(4))
     {

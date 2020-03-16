@@ -49,6 +49,7 @@ void create()
     set_stats("wisdom", 14);
     set_stats("charisma", 21);
     set_stats("constitution", 25);
+    set_mob_magic_resistance("none");
 
     set_resistance("slashing", 15);
     set_resistance_percent("fire", -100);

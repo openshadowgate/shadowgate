@@ -34,14 +34,14 @@ void create()
     set_overall_ac(-50);
     set_property("full attacks",1);
     set("aggressive",21);
-    set_property("magic resistance",65);
+    set_mob_magic_resistance("average");
     set_class("mage");
     set_guild_level("mage",50 + random(7));
     set_moving( 1 );
     set_speed( 50 );
     set_class("fighter");
     add_search_path("/cmds/fighter");
-    set_mlevel("fighter",42 + random(7));
+    set_level("fighter",42 + random(7));
     set_hd(55,180);
     set_hp(1000+random(1000));
     set_new_exp(48, "high");

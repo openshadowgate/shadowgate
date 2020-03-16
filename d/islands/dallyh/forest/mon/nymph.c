@@ -6,7 +6,7 @@ inherit MONSTER;
 
 string type, color;
 object obj;
-void create() 
+void create()
 {
   ::create();
     set_name("Nymph");
@@ -17,9 +17,9 @@ void create()
     set_class("cleric");
     set_mlevel("cleric",25);
     set_class("mage");
-    set_mlevel("mage",25);	
+    set_mlevel("mage",25);
     set_spell_chance(45);
-        set_spells( ({ 
+        set_spells( ({
         "bliss",
         "thorn spray",
         "bliss",
@@ -175,14 +175,14 @@ void create()
        command("wield whip in right hand");
     }
     add_money("gold",500 + random(1200));
-    set_property("magic resistance", 50);
+    set_mob_magic_resistance("high");
     set_stats("strength",17);
     set_stats("intelligence",25);
     set_stats("wisdom",16);
     set_stats("charisma",28);
     set_stats("constitution",16);
-    set_stats("dexterity",17);    
-    set_nogo(({DDOCK, FRPATH"road1"}));   
+    set_stats("dexterity",17);
+    set_nogo(({DDOCK, FRPATH"road1"}));
 }
 //wtf is this?? - Saide
 /*

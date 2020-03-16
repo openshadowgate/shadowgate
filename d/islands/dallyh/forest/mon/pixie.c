@@ -2,7 +2,7 @@
 #include "../../fways.h"
 inherit "/std/monster";
 
-void create() 
+void create()
 {
     object myob;
     ::create();
@@ -43,7 +43,7 @@ void create()
     set_wielding_limbs(({"right hand", "left hand"}));
     new("/d/common/obj/weapon/dagger")->move(this_object());
     command("wield dagger");
-    switch(random(4)) 
+    switch(random(4))
     {
         case 0 : "/d/common/daemon/randgear_d"->arm_me(TO,"edgeds",40,random(2)+2);
             break;
@@ -53,7 +53,7 @@ void create()
     }
     add_money("gold",random(100));
     set_new_exp(25, "normal");
-    set_property("magic resistance", 30);
+    set_mob_magic_resistance("high");
     if(!random(4))
     {
         myob = new("/d/islands/dallyh/forest/obj/rosebodice");
@@ -65,7 +65,7 @@ void create()
 	if(!random(4))
     {
         myob->set_property("monster weapon",1);
-	}	
+	}
 	myob->move(TO);
 	command("wear dress");
     set_stats("strength", 17);
@@ -76,4 +76,3 @@ void create()
     set_stats("constitution", 18);
     set_nogo(({DDOCK, FRPATH"road1"}));
 }
-

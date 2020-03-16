@@ -66,7 +66,7 @@ void create()
     set_func_chance(40);
 
     set_property("full attacks",1);
-    set_property("magic resistance", 55);
+    set_mob_magic_resistance("average");
     set_property("weapon resistance", 4);
     set_moving(1);
     set_speed(30);

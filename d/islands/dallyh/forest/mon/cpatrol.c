@@ -3,7 +3,7 @@ inherit MONSTER;
 void create()
 {
     ::create();
-        
+
     set_name("amazon archer");
     set_id(({"archer","amazon","amazon archer","amazon patrol","patrol"}));
     set_short("Amazon Patrol");
@@ -17,7 +17,7 @@ void create()
     set_body_type("human");
     set_hd(26,8);
     set_guild_level("ranger", 26);
-    set_mlevel("ranger", 26);    
+    set_mlevel("ranger", 26);
     set_new_exp(27, "normal");
     set_property("full attacks", 1);
     set_hp(675 + random(185));
@@ -29,7 +29,7 @@ void create()
        "deadeye",
        "preciseshot",
        "shot on the run"
-    }));        
+    }));
     add_money("gold",250 + random(1500));
     new("/d/common/obj/lrweapon/longbow")->move(TO);
     command("wield bow");
@@ -40,6 +40,7 @@ void create()
     set_stats("wisdom", 14);
     set_stats("charisma", 12);
     set_stats("constitution", 18);
+    set_mob_magic_resistance("none");
     set_emotes(2, ({
         "The archer fires a few arrows down at monsters in the marsh.",
     }),0);
