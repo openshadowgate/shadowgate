@@ -59,7 +59,6 @@ void create(){
    set_stats("wisdom",14);
    set_stats("charisma",9);
    set("aggressive",25);
-   set_property("magic resistance",60);
    set_property("no death",1);
    set_property("cast and attack",1);
    set_exp(50000);
