@@ -1,5 +1,5 @@
 //trader in Seneca - slightly unhinged, will expand more later by ~Circe~ in support of Odin 8/3/19
-//tells different stories of where she gets her items, keeps getting jailed for running a business 
+//tells different stories of where she gets her items, keeps getting jailed for running a business
 //without a license, someone higher up in Seneca keeps bailing her out, but she doesn't know it
 //has a 'pet' hedgehog that interacts with her
 #include <std.h>
@@ -24,7 +24,7 @@ void create(){
    set_race("human");
    add_money("gold", random(25));
    set_body_type("human");
-   set_property("magic resistance",35);
+   set_mob_magic_resistance("average");
    set_overall_ac(-30);
    set_stats("strength",20);
    set_stats("intelligence",18);
@@ -64,7 +64,7 @@ void reset(){
 
 void catch_say(string msg){
    if(!objectp(TO)) return;
-   ::catch_say(msg);    
+   ::catch_say(msg);
    if(!objectp(TP)) return;
    if(interactive(TP)){
       call_out("reply_func",1,msg,TP);
@@ -155,4 +155,3 @@ void trade_em(object obj, object obj2) {
       force_me("emoteat "+TPQN+" hands the "+ids[0]+" to $N.");
    }
 }
-

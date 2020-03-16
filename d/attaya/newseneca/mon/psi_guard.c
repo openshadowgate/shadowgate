@@ -35,9 +35,9 @@ void create() {
     set_hp(roll_dice(query_hd(),15));
     set_class("psion");
     set_property("full attacks",1);
-	add_search_path("/cmds/fighter");
-    set_property("magic resistance",random(30)+10); 
-    set_property("add kits",25); 
+	  add_search_path("/cmds/fighter");
+    set_mob_magic_resistance("average");
+    set_property("add kits",25);
     rank = set_ranks(([
         18 : "rookie",
         20 : "sergeant",
@@ -48,7 +48,7 @@ void create() {
 	droll =(20+random(13));
 	set_guild_level("psion",droll);
     set_mlevel("psion",droll);
-	
+
     add_id(rank);
     add_id(capitalize(rank));
     set_short("A "+query("hair")+" haired, "+query("eye")+" eyed"
@@ -72,13 +72,13 @@ void create() {
         } else {
         RANDGEAR->armor_me(TO, "armorcl", 20, 3, 75);
     }
-	new("/d/laerad/obj/bracers")->move(TO);     
+	new("/d/laerad/obj/bracers")->move(TO);
     new("/d/common/obj/rand/r_shoes")->move(TO);
     command("wearall");
-	
+
 
     RANDGEAR->arm_me(TO, "edgeds", 80, 3, 75);
-   
+
     set_guard_stuff();
   set_monster_feats(({"damage resistance","improved damage resistance","improved toughness",
   "regeneration","toughness",
@@ -171,9 +171,9 @@ void heart_beat() {
 	 new("/cmds/spells/t/_timeless_body")->use_spell(TO,TO,TO->query_level(),100,"psion");
 	 round = 1;
 	}
-   if(!query_property("amorpha") && !random(2)) 
+   if(!query_property("amorpha") && !random(2))
         new("/cmds/spells/c/_concealing_amorpha.c")->use_spell(TO,TO,TO->query_level(),100,"psion");
-   if(random(3)==0)TO->force_me("flash");	
+   if(random(3)==0)TO->force_me("flash");
 }
 
 int isWatch() {

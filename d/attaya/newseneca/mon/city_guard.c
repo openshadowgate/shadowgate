@@ -41,43 +41,43 @@ void create() {
         set_property("add kits",50);
         set_monster_feats(({
             "parry",
-                "powerattack",
-                "shatter",
-                "sunder",
-                "rush",
-                "damage resistance",
-                "improved damage resistance",
-                "improved toughness",
-                "regeneration",
-                "toughness",
-                "expertise",
-                "knockdown",
-				"disarm",
-                "scramble",
-                "dodge",
-                "evasion",
-                "defensive roll",
-                "mobility",
-                "death ward",
-                "unyielding soul",
-                "resistance",
-                "improved resistance",
-                "increased resistance",
-                "spring attack"
+            "powerattack",
+            "shatter",
+            "sunder",
+            "rush",
+            "damage resistance",
+            "improved damage resistance",
+            "improved toughness",
+            "regeneration",
+            "toughness",
+            "expertise",
+            "knockdown",
+				    "disarm",
+            "scramble",
+            "dodge",
+            "evasion",
+            "defensive roll",
+            "mobility",
+            "death ward",
+            "unyielding soul",
+            "resistance",
+            "improved resistance",
+            "increased resistance",
+            "spring attack"
                   }));
         set_funcs(({
             "rushit",
-                "flashit",
-                "shatterit",
-                "sunderit",
-                "rushit",
-                "kdit",
-                "kdit",
-				"disarmit"
+            "flashit",
+            "shatterit",
+            "sunderit",
+            "rushit",
+            "kdit",
+            "kdit",
+            "disarmit"
         }));
         set_func_chance(35);
     set_property("full attacks",1);
-    set_property("magic resistance",random(60)+10);  
+    set_mob_magic_resistance("average");
     rank = set_ranks(([
         18 : "rookie",
         20 : "sergeant",

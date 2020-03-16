@@ -40,11 +40,11 @@ void create(){
   set_stats("charisma",18);
   set_stats("dexterity", 12);
   set_stats("constitution",18);
-  set_property("alignment adjustment",-10); 
+  set_property("alignment adjustment",-10);
   set_property("magic",1);
   add_money("silver",random(2000));
   set_property("full attacks",1);
-  set_property("magic resistance",40);
+  set_mob_magic_resistance("average");
   set_property("no knockdown",1);
   set_property("no disarm",1);
   set_monster_feats(({"power attack","rush","combat reflexes",
@@ -52,7 +52,7 @@ void create(){
   "knockdown","sunder","smite","charge","mounted combat","ride-by attack"}));
   set_parrying(1);
   add_damage_bonus(9);
-  set_property("damage resistance",4); 
+  set_property("damage resistance",4);
   set_funcs(({"strik"}));
   set_func_chance(40);
   set_diety("tyr");
@@ -68,7 +68,7 @@ void create(){
   command("speech state proudly");
   call_out("horsey",0);
 
-  
+
 }
 void horsey(){
  object ob;
@@ -86,7 +86,7 @@ void horsey(){
 void strik(object targ)
 {  int x, damage;
    if(!objectp(TO)) return 1;
-   if(!objectp(ETO)) return 1;	
+   if(!objectp(ETO)) return 1;
 	damage = random(100)+100;
    tell_object(targ,"%^YELLOW%^Knight shouts at you and"+
    " a %^WHITE%^holy%^YELLOW%^ force slams into you.");
@@ -96,19 +96,19 @@ void strik(object targ)
         targ->do_damage(targ->return_target_limb(),damage);
 
    if(!"/daemon/saving_throw_d.c"->will_save(targ,-35)){
-  
+
     tell_object(targ,"%^CYAN%^You stand frozen in shock after hearing the holy voice");
 	targ->set_paralyzed(10,"%^CYAN%^The knight's voice freezes you.");
       }
-  
+
    return 1;
 }
 void set_paralyzed(int time,string message){
  int x;
  force_me("emote %^CYAN%^shakes off the stun and continues attacking.");
- for(x=0;x<random(5)+1;x++)  
+ for(x=0;x<random(5)+1;x++)
  execute_attack();
- 
+
  return 1;}
 
 void heart_beat(){
@@ -122,7 +122,7 @@ void heart_beat(){
   }
   if( query_hp() < query_max_hp() )
       TO->do_damage( "torso",-(random(6) + 1) );
-  if(!objectp(query_current_attacker())) { return ; } 
+  if(!objectp(query_current_attacker())) { return ; }
   if(query_attackers()==({ })) return;
   force_me("flash");
   switch (random(11)){
@@ -137,17 +137,17 @@ void heart_beat(){
        case 4: force_me("say Your body will be eaten by vultures, fitting for one like yourself.");
         break;
        case 5: force_me("say You have been weighed in the balance and come up lacking.");
-        break;		
+        break;
 	   case 6: force_me("say This world will suffer your existance no longer.");
-        break;	
+        break;
 	   case 7: force_me("say How can you live with the sins you've commited?");
-        break;	
+        break;
 	   case 8: force_me("say Your existance has been tolerated long enough.");
-        break;	
+        break;
 	   case 9: force_me("say By Tyr, I will avenge those you have slain.");
-        break;	
+        break;
         }
-		
+
   attackers = query_attackers();
   x = sizeof (attackers);
   switch(random(8)){

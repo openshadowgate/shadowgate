@@ -60,7 +60,7 @@ void create(){
    set_func_chance(40);
    set_gender("female");
    set_alignment(9);
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
    set_property("no death",1);
    set_property("no hold", 1);
    set_property("no paralyze", 1);
@@ -89,7 +89,7 @@ int mouth_attack(object targ){
    return roll_dice(2,20);
 }
 
-int squeeze(){ 
+int squeeze(){
    object *targets,targ;
    int i;
    if(!objectp(TO)) return 1;
@@ -112,7 +112,7 @@ int squeeze(){
    return 1;
 }
 
-int sonic(){ 
+int sonic(){
    object *targets,targ;
    int i;
    if(!objectp(TO)) return 1;

@@ -38,7 +38,7 @@ void create() {
     set_class("psion");
     set_property("full attacks",1);
 	add_search_path("/cmds/fighter");
-    set_property("magic resistance",random(30));  
+    set_mob_magic_resistance("average");  
     rank = set_ranks(([
         18 : "rookie",
         20 : "lieutenant",
@@ -49,7 +49,7 @@ void create() {
 	droll =(20+random(13));
 	set_guild_level("psion",droll);
     set_mlevel("psion",droll);
-	
+
     add_id(rank);
     add_id(capitalize(rank));
     set_short("A "+query("hair")+" haired, "+query("eye")+" eyed"
@@ -73,13 +73,13 @@ void create() {
         } else {
         RANDGEAR->armor_me(TO, "armorcl", 20, 3, 75);
     }
-	new("/d/laerad/obj/bracers")->move(TO);     
+	new("/d/laerad/obj/bracers")->move(TO);
     new("/d/common/obj/rand/r_shoes")->move(TO);
     command("wearall");
-	
+
 
     RANDGEAR->arm_me(TO, "edgeds", 80, 3, 75);
-   
+
     set_guard_stuff();
   set_monster_feats(({"damage resistance","improved damage resistance","improved toughness",
   "regeneration","toughness",
@@ -159,12 +159,12 @@ alerting the city guards!");
 }
 
 void heart_beat() {
-    
+
 	::heart_beat();
     if(!sizeof(query_attackers())) { //patrol north part
-    	horn=0; round = 0; 
+    	horn=0; round = 0;
 		if(random(4)>1) {
- 		  
+
 		  if(i<12){
 		   force_me("east");
 		   i++;
@@ -176,16 +176,16 @@ void heart_beat() {
 		if(i>24) i=0;
 		}
 		return;}
-	    
+
 	if( round != 1) {
 	 new("/cmds/spells/i/_iron_body")->use_spell(TO,TO,TO->query_level(),100,"psion");
 	 new("/cmds/spells/e/_energy_retort")->use_spell(TO,TO,TO->query_level(),100,"psion");
 	 new("/cmds/spells/t/_timeless_body")->use_spell(TO,TO,TO->query_level(),100,"psion");
 	 round = 1;
 	}
-   if(!query_property("amorpha") && !random(2)) 
+   if(!query_property("amorpha") && !random(2))
         new("/cmds/spells/c/_concealing_amorpha.c")->use_spell(TO,TO,TO->query_level(),100,"psion");
-   if(random(3)==0)TO->force_me("flash");	
+   if(random(3)==0)TO->force_me("flash");
 }
 
 int isWatch() {
