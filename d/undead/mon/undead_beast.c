@@ -34,7 +34,7 @@ void create()
     nogo("one");
     set_overall_ac(-3);
     set("aggressive",22);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_damage(1,12);
     set_attacks_num(5);
     set_base_damage_type("piercing");

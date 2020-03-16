@@ -43,7 +43,7 @@ void create()
     set_property("full attacks",1);
     set("aggressive",0);
     set_alignment(3);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_funcs( ({"attack"}) );
     set_func_chance(100);
 	set_monster_feats(({

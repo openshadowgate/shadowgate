@@ -45,7 +45,7 @@ void create(){
         set_stats("constitution",12);
         set_stats("strength",13);
         set("aggressive",0);
-        set_property("magic resistance",75);
+        set_mob_magic_resistance("average");
         set_exp(100);
         set_spells(({"scorcher","ball lightning","disintegrate","lower resistance","gust of wind"}));
         set_spell_chance(100);

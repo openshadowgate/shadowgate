@@ -33,7 +33,7 @@ void create()
     new(OBJS"eyeball.c")->move(TO);
     command("wear eye");
 	set_alignment(9);
-	set_property("magic resistance",60);
+	set_mob_magic_resistance("average");
 	
 }
 

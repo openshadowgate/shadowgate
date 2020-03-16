@@ -24,7 +24,7 @@ void create() {
    set_guild_level("mage",22);
    set_alignment(9);
    add_money("gold", random(500));
-   set_property("magic resistance",25);
+   set_mob_magic_resistance("average");
    set_overall_ac(-10);
    set_stats("strength",18);
    set_stats("intelligence",18);

@@ -42,7 +42,7 @@ void create()
     set_stats("dexterity",16);
     set_stats("constitution",19);
     set("aggressive","aggfunc");
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_exp(50000);
     set_new_exp(25,"boss");
     set_alignment(9);

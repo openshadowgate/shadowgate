@@ -29,7 +29,7 @@ void create()
     set_speed(35);
     nogo("one");
     set("aggressive","aggfunc");
-    set_property ("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_exp(22000);
     set_new_exp(25,"very high");
     set_alignment(9);

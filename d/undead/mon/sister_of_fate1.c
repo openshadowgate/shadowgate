@@ -33,7 +33,7 @@ void create()
     ob->set_spell(5);
 	ob->move(TO);
 	set_alignment(9);
-	set_property("magic resistance",60);	
+	set_mob_magic_resistance("average");	
 }
 
 

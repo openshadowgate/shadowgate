@@ -35,7 +35,7 @@ void create()
 	set_max_hp(700);
     set_size(2);
     set_overall_ac(3);
-    set_property("magic resistance",75);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_exp(50000);
     set_new_exp(25,"boss");

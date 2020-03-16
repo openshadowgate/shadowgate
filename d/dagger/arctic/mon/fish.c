@@ -27,7 +27,7 @@ void create()
     set_stats("charisma", 13);
     set_stats("dexterity", 21);
     set_stats("constitution", 9);
-    set_property("magic resistance",10);
+    set_mob_magic_resistance("average");
     set_property("water breather", 1);
     set_speed(random(40) + 5);
     set_base_damage_type("piercing");

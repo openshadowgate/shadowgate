@@ -21,7 +21,7 @@ void create()
 	set_gender("male");
 	set_overall_ac(0);
 	set_alignment(9);
-    set_property("magic resistance",100);
+    set_mob_magic_resistance("average");
     set_true_invis();	
 }
 

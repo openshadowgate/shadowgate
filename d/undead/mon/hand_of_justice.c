@@ -32,7 +32,7 @@ void create()
     set("aggressive",22);
     set_speed(25);
     nogo("one");
-    set_property("magic resistance",65);
+    set_mob_magic_resistance("average");
     set_attack_limbs(({"right hand"}));
     set_attacks_num(3);
     set_base_damage_type("magebludgeon");

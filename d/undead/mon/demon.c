@@ -35,7 +35,7 @@ void create()
     set_stats("constitution",22);
     set("aggressive",25);
     set_property("full attacks",1);
-    set_property("magic resistance",60);
+    set_mob_magic_resistance("average");
     set_property("no death", 1);
     set_property("no dominate", 1);
     set_property("no hold", 1);
