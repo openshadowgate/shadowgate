@@ -18,7 +18,7 @@ void create()
         "clan and doesnt look to happy to see anyone else here let alone you!  Perhaps you could "
         "try to calm him?");
     set_ac(-5);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_mlevel(39);
     add_search_path("/cmds/fighter");
     set("aggressive","agggunc");

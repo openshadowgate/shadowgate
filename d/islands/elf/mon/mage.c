@@ -41,7 +41,7 @@ void create()
 	   "lightning bolt",
 	   "dispel magic"
    }));
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_spell_chance(100);
    add_money("silver",random(2000));
    set_new_exp(31,"very low");

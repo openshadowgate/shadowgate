@@ -15,7 +15,7 @@ void create(){
    set_id(({"derro","dwarf","warrior","derro warrior"}));
    set_property("no bows",1);
    set_race("dwarf");
-   set_property("magic resistance",random(20)+10);
+   set_mob_magic_resistance("average");
    set_gender("male");
    set_short("%^RESET%^%^BLUE%^Derro warrior%^BOLD%^%^RED%^%^");
    set_long("%^CYAN%^With skin the color of an iced-over lake and pupilless, staring eyes, this degenerate creature looks out of place in these giant halls.  The ever-present %^RED%^red glow %^CYAN%^makes the creature's %^RESET%^white%^CYAN%^/%^BOLD%^blue %^RESET%^%^CYAN%^complexion look the color of maggots under a dusk sun.  They have features of both human and dwarf, reminding each race of the other when they see these evil creatures.%^RESET%^");

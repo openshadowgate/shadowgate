@@ -35,7 +35,7 @@ OLI
    new(OBJ+"mace_of_ibrandul")->move(TO);
    command("wield mace");
    set_property("full attacks",1);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set("aggressive",25);
 }
 

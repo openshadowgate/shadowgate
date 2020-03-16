@@ -23,7 +23,7 @@ OLI
 	set_hd(27,3);
 	set_hp(120);
         set_exp(2000);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
 	set_property("swarm",1);
 	set_stats("strength",19);
 	set_stats("constitution",17);

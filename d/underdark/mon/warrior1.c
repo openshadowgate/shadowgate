@@ -25,7 +25,7 @@ void create() {
    set_size(2);
    set_exp(9000);
    set_property("full attacks",1);
-   set_property("magic resistance", 17);
+   set_mob_magic_resistance("average");
    set_stats("strength",16);
    set_stats("dexterity", 18);
    set_stats("wisdom",11);

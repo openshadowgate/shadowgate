@@ -25,7 +25,7 @@ object ob;
    set_max_hp(560);
    set_hp(560);
    set_overall_ac(-2);
-   set_property("magic resistance", 100);
+   set_mob_magic_resistance("average");
    set_property("no bows", 1);
    set_size(2);
    set("aggressive",30);

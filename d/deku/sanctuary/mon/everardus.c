@@ -25,7 +25,7 @@ object ob;
    set_max_hp(470);
    set_hp(470);
    set_overall_ac(-2);
-   set_property("magic resistance", 100);
+   set_mob_magic_resistance("average");
    set_property("no steal", 1);
    set_property("no animate", 1);
    set_property("no bows", 1);

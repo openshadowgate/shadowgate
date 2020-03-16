@@ -54,7 +54,7 @@ void create(){
     set_thief_skill("move silently",120);
     set_thief_skill("hide in shadows",120);
     set_thief_skill("pick pockets",120);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_scrambling(1);
     set_parrying(1);
     set_overall_ac(-1);

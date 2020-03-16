@@ -57,7 +57,7 @@ void create() {
 	}));
     set_func_chance(50);      
     set("aggressive","attack_fun");
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     new( OPATH "woodlandarmor.c" )->move(TO);//added the armor because it fits in with the lore of the armor, and he is one of the few powerful enough to plant the armor on
     new( OPATH "storm.c" )->move(TO);
       command("wield sword");

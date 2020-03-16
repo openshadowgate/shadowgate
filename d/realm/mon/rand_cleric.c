@@ -89,7 +89,7 @@ void create()
    	set_stats("intelligence",25);
    	set_stats("charisma",3);
   	set("aggressive",25);
-   	set_property ("magic resistance", 35);
+   	set_mob_magic_resistance("average");
    	set_new_exp(35, "normal");
 	wpn1 = new(RA_OB+"staff_of_destruction");
 	if(random(25)) wpn1->set_property("monsterweapon", 1);

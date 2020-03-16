@@ -18,7 +18,7 @@ void create()
     }
     if(!TO->query_property("magic resistance"))
     {
-        TO->set_property("magic resistance",random(40));
+        TO->set_mob_magic_resistance("average");
     }
 }
 

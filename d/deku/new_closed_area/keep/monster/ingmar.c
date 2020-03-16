@@ -37,7 +37,7 @@ create() {
   add_money("gold", random(200));
   set_hp(115);
   set_overall_ac(2);
-  set_property("magic resistance", 65);
+  set_mob_magic_resistance("average");
   set_funcs(({"thrust","heal_self"}));
   set_func_chance(50);
   num = 1;

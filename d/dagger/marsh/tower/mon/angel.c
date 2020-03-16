@@ -43,7 +43,7 @@ void create() {
     set_diety("shar");
 //added deity to stop bug with querying the god on the unholy avenger
 //Circe 1/25/05
-    set_property ("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_property("full attacks",1);
     set_exp(60000);
     set_max_hp(500);

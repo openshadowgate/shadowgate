@@ -27,7 +27,7 @@ void create() {
     set_stats("dexterity",22);
     set_stats("constitution",22);
      set("aggressive", 0);
-    set_property ("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_alignment(1);
     set_exp(35000);
     new("/d/attaya/seneca/obj/bronzemesh.c")->move(TO);

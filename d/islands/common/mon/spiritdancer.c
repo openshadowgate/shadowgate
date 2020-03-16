@@ -33,7 +33,7 @@ void create() {
        new("/d/islands/common/obj/chemise")->move(TO);
        command("wear chemise");
     }
-    set_property ("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_alignment(2);
     set_exp(3000);
     set_emotes(5,({

@@ -41,7 +41,7 @@ void create() {
    set_stats("dexterity",14);
    set_stats("constitution",18);
    set_exp(60000);
-   set_property("magic resistance",70);
+   set_mob_magic_resistance("average");
    set_property("no death",1);
    set_property("magic",1);
    set_property("no animate",1);

@@ -40,7 +40,7 @@ void create(){
 	set_max_hp(random(300)+1300);
 	set_hp(query_max_hp());
 	set_overall_ac(-5);
-	set_property("magic resistance",25);
+	set_mob_magic_resistance("average");
 	set_property("swarm",1);
 	set_class("ranger");
 	set_mlevel("ranger",22);

@@ -61,7 +61,7 @@ void create() {
   set_max_hp(350);
   set_hp(350);
   set_exp(60000);
-  set_property("magic resistance",45);
+  set_mob_magic_resistance("average");
     set_emotes(19, ({
     "Malgoroth says: I will sacrifice your soul!",
     "Malgoroth cackles wildly.",

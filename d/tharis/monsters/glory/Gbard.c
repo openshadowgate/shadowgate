@@ -108,7 +108,7 @@ void create(){
   	command("wear ring");
 
   	set_money("gold",random(3000));
-  	set_property("magic resistance",-15);
+  	set_mob_magic_resistance("average");
   	parties = ({});
 }
 

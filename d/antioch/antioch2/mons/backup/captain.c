@@ -43,7 +43,7 @@ void create()
 	set("aggressive",0);
 	set_property("swarm",1);
 	set_exp(2500);
-	set_property("magic resistance",40);
+	set_mob_magic_resistance("average");
 	set_property("weapon resistance",1);
 	set_property("full attacks",1);
    set_property("no dominate",1);

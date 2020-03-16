@@ -28,7 +28,7 @@ void create() {
    set_mlevel("mage",17);
    set_guild_level("mage",17);
    add_search_path("/cmds/mage");
-   set_property("magic resistance", 20);
+   set_mob_magic_resistance("average");
    set_hd(17,4);
    set_hp(230 + random(61));
    set_exp(9000);

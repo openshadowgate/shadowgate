@@ -9,7 +9,7 @@ void create()
 	set_hp(320 + random(20));
 	set_exp(5400);
 	set_property("weapon resistance", 2);
-	set_property("magic resistance", 30);
+	set_mob_magic_resistance("average");
 	add_money("gold", random(1000));
 	if(!random(5))
 	{

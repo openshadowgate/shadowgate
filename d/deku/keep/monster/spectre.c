@@ -27,7 +27,7 @@ void create()
     //set_property("no rush",1);
     set_property("no death",1);
     set_property("weapon resistance",1);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     //set_property("no stab",1);
     set_overall_ac(-14);
     set_hp(1700 + random(60));

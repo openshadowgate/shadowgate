@@ -28,7 +28,7 @@ He has a remarkable tattoo of a pirate flag upon his forearm.");
   set_stats("intelligence", 14);
   set_stats("wisdom", 10);
   set("aggressive","aggfunc");
-  set_property ("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_exp(1500);
   set_alignment(5);
   set_emotes(15, ({

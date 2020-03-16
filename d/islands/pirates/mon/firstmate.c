@@ -55,7 +55,7 @@ void create(){
      command("wear coif");
    add_money("silver", random(400)+100);
    add_money("copper", random(50)+20);
-   set_property("magic resistance",15);
+   set_mob_magic_resistance("average");
 }
 
 void rushem(object targ){

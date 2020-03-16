@@ -51,7 +51,7 @@ void create() {
    set_stats("wisdom",14);
    set_stats("charisma",20);
    set_stats("dexterity",13);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_alignment(1);
    set_property("no death",1);
    set_func_chance(100);

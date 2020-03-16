@@ -21,7 +21,7 @@ create() {
    set_exp(query_hd() * 70);
    set_body_type("human");
    set_property("weapon resistance",1);
-   set_property("magic resistance",10);
+   set_mob_magic_resistance("average");
    set_property("full attacks",1);
    set_alignment(2);
    set_size(2);

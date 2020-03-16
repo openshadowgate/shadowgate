@@ -32,7 +32,7 @@ void create() {
     set_class("fighter");
     set_mlevel("fighter", 17);
     set_hd(22,1);
-    set_property("magic resistance", 10);
+    set_mob_magic_resistance("average");
     set_attack_bonus(3);
     set_max_hp(150+random(200));
     set_hp(query_max_hp());
@@ -41,7 +41,7 @@ void create() {
     set_property("full attacks", 1);
     set_stats("strength", 17);
    set("aggressive", 25);
-    set_property("magic resistance", 15);
+    set_mob_magic_resistance("average");
     set_alignment(9);
     add_money("gold", random(500));
     add_money("silver", random(2500));

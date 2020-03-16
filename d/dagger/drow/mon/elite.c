@@ -23,7 +23,7 @@ void create() {
     set_wielding_limbs(({"right hand","left hand"}));
     set_overall_ac(-5);
    set_hp(350);
-    set_property("magic resistance",75);
+    set_mob_magic_resistance("average");
     set_property("no bows",1);
    set_max_hp(350);
     set_exp(12000);

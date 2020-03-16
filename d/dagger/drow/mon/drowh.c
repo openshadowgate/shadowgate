@@ -35,7 +35,7 @@ void create() {
     set("aggressive","aggfunc");
     set_property("swarm",1);
     set_property("full attacks", 1);   // added this too
-    set_property ("magic resistance",15);  // was 7
+    set_mob_magic_resistance("average");  // was 7
     set_exp(1500);  // was 800
     set_max_level(20);
     set_alignment(9);

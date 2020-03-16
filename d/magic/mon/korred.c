@@ -34,7 +34,7 @@ OLI
 	remove_limb("right foot");
 	add_limb("left hoof","left leg",0,0,0);
 	add_limb("right hoof","right leg",0,0,0);
-	set_property("magic resistance",25);
+	set_mob_magic_resistance("average");
 	set_property("swarm",1);
 	set_exp(1700);
 	ob = new(WEAPON);

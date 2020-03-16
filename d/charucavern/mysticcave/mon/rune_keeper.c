@@ -78,7 +78,7 @@ void create()
     IDs = (string *)ob->query_id();
     command("wield "+IDs[0]);
     set_func_chance(35);
-    set_property("magic resistance", 45);
+    set_mob_magic_resistance("average");
     timer = 1;
 } 
 

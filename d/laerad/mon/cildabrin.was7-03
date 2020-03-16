@@ -33,7 +33,7 @@ void create(){
     }));
     set_spell_chance(15);
     set_attack_bonus(8);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_stats("dexterity",12);
     set_stats("strength",15);
     remove_limb("right foreleg");

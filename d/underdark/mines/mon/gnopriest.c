@@ -41,7 +41,7 @@ void create(){
    set_new_exp(17,"high");
    set_max_level(20);
    set_overall_ac(-8);
-   set_property("magic resistance",random(20)+20);
+   set_mob_magic_resistance("average");
    set_spells(({
       "maw of stone",
       "earth reaver",

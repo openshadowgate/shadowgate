@@ -46,7 +46,7 @@ void create (){
    set_guild_level("mage",11);
    set_spell_chance(85);
    set_spells(({"lightning bolt","fireball","dispel magic","lower resistance","fireball"}));
-   set_property("magic resistance",25);
+   set_mob_magic_resistance("average");
    if(random(10) < 1){
       ob = new("/d/magic/scroll");
       ob->set_av_spell(5-random(3));

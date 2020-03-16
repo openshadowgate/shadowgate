@@ -28,7 +28,7 @@ capriciousness.");
     set_stats("dexterity",14);
     set_stats("constitution",16);
     set_stats("intelligence", 19);
-    set_property ("magic resistance",60);
+    set_mob_magic_resistance("average");
     set_exp(1200);
     set_alignment(9);
     set("aggressive","aggfunc");

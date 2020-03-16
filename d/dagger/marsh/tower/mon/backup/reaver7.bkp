@@ -38,7 +38,7 @@ void create() {
     set_body_type("humanoid");
     set_race("human");
     set_class("fighter");
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_alignment(9);
     set_stats("strength",24);
     set_stats("constitution",24);

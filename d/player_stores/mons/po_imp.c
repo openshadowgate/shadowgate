@@ -22,7 +22,7 @@ void create() {
     set_stats("strength",10);
     set_stats("dexterity",25);
     set_stats("constitution",17);
-    set_property ("magic resistance",40);
+    set_mob_magic_resistance("average");
     set_exp(500);
     set_alignment(9);
 }

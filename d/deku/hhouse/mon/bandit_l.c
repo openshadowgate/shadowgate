@@ -120,7 +120,7 @@ void create()
     set_property("no paralyze",1);
     set_property("no death",1);
     set_property("full attacks",1);
-    set_property("magic resistance",100);
+    set_mob_magic_resistance("average");
     set_funcs(({"attack"}));
     set_func_chance(50);
     ob = new("/d/common/obj/potion/healing");

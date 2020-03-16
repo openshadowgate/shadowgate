@@ -29,7 +29,7 @@ void create(){
    set_stats("dexterity",19);
    set_stats("constitution",18);
    set_stats("charisma",10);
-   set_property("magic resistance",40);
+   set_mob_magic_resistance("average");
    set("aggressive","agg_func");
    set_class("thief");
    set_mlevel("thief",22);

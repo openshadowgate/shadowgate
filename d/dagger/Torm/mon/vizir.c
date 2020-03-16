@@ -27,7 +27,7 @@ create(){
     set_property("no animate",1);
     set_property("no bows",1);
     set_property("no dominate",1);
-    set_property("magic resistance",77);
+    set_mob_magic_resistance("average");
     set_property("full attacks",1);
     set_property("no steal",1);
     set_property("no death",1);
@@ -56,7 +56,7 @@ void heart_beat(){
   TO->add_hp(10);
   }
   if(TO->query_property("magic resistance") < 50) {
-  TO->set_property("magic resistance",50);
+  TO->set_mob_magic_resistance("average");
   }
     if(query_paralyzed()) {
         tell_room(ETO,"%^RED%^The vizier chants a quick phrase "+

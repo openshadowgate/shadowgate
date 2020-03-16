@@ -48,7 +48,7 @@ create() {
 	add_attack_bonus(5);
 	set_speed(30);
 	set_nogo(({ROOMDIR"pedestal"}));
-	set_property("magic resistance",35);
+	set_mob_magic_resistance("average");
 	set_property("full attacks",1);
 	add_search_path("/cmds/fighter");
 		switch(random(10)){

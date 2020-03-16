@@ -51,7 +51,7 @@ OLI
         command("put scroll in robes");
         command("put scroll in robes");
         set_alignment(1);
-        set_property("magic resistance",60);
+        set_mob_magic_resistance("average");
       	ob = new("/d/common/obj/potion/healing");
        	ob->set_uses(25);
        	ob->move(TO);

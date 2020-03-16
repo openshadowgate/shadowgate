@@ -7,7 +7,7 @@ void create()
 {
   ::create();
     set_property("undead",1);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_name("knight");
     set_id( ({"DarkKnight","darkknight","knight"}) );
     set_short("%^BOLD%^%^BLACK%^A Dark Knight%^RESET%^");

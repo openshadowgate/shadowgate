@@ -19,7 +19,7 @@ void create(){
    set_ac(4);
    set_property("swarm",1);
    set_size(2);
-   set_property("magic resistance",random(20)+10);
+   set_mob_magic_resistance("average");
    set_body_type("human");
    set_class("fighter");
    set("aggressive",15);

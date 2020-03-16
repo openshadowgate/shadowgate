@@ -57,7 +57,7 @@ void create() {
     set_stats("charisma",20);
     set_alignment(5);
    set_property("add kits",25);
-    set_property ("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_exp(80000);
     set_max_level(36);
    set_max_hp(4000);

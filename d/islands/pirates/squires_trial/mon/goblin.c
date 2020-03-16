@@ -45,7 +45,7 @@ void create(){
   set("aggressive","killtime");
   set_spells(({"vampiric touch","fireball","fireball","magic missile","magic missile"}));
   set_spell_chance(80);
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   item = new(SQUIREITEMS + "bone_harness");
   add_money("gold", random(100)+50);
   add_money("electrum", random(250));

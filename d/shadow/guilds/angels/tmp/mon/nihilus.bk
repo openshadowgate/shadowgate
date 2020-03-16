@@ -26,7 +26,7 @@ void create(){
     set_stats("dexterity",19);
     set_stats("constitution",23);
     set("aggressive","member");
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_property("strength","paralyzed");
     set_property("no bump",1);
     set_class("fighter");

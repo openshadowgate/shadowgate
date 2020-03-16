@@ -7,7 +7,7 @@ void create(){
   set_name("phederian dark shaman");
   set_id(({"phederian","shaman","dark shaman","phederian dark shaman"}));
   set_race("human");
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   if(!random(2)){set_gender("male");} else {set_gender("female");}
    set_short("%^BLUE%^Phederian dark shaman%^BOLD%^RED%^");
   set_long(

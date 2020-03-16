@@ -9,7 +9,7 @@ void create(){
 	set_name("Guard for Elven gate");
 	set_id(({"elven gate guard","guard","gate guard"}));
 	set("short","Elite guard of the Elven gate");
-	set_property("magic resistance",50);
+	set_mob_magic_resistance("average");
 	set("long",
 @OLI
 	These guards are picked by the duke himself to keep elves

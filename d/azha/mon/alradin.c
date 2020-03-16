@@ -71,7 +71,7 @@ set_guild_level("assassin",30);
   set_thief_skill("pick pockets", 95);
   set_thief_skill("hide in shadows", 95);
   set_thief_skill("move silently", 95);
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   toggle_steal();
   set_scrambling(1);
   ob=new("/d/darkwood/tabor/obj/c_pantaloons.c");

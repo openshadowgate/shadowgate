@@ -26,7 +26,7 @@ void create() {
    set_overall_ac(-25);
    set_hp(2500);
     set_property("no bump",1);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_property("no paralyze",1);
     set_property("no steal",1);
    set_max_hp(2500);

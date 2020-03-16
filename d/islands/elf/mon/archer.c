@@ -67,7 +67,7 @@ void create()
     set_property("swarm",1);
     set_overall_ac(-10);
     set_alignment(4);
-    set_property("magic resistance",10);
+    set_mob_magic_resistance("average");
     set_property("full attacks",1);
     is_shooting = 0;
 

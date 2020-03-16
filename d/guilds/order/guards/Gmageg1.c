@@ -68,7 +68,7 @@ VOID
   	ob->move(TO);
   	ob->set_uses(50);
 
-  	set_property("magic resistance",65);
+  	set_mob_magic_resistance("average");
   	parties = ({});
 }
 

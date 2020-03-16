@@ -30,7 +30,7 @@ void create() {
   set_new_exp(12, "very high");
   set_overall_ac(2);
   set_property("weakness", "raise_dead");
-  set_property("magic resistance", 50);
+  set_mob_magic_resistance("average");
   set_funcs( ({"energy_drain"}) );
   set_func_chance(20);
   set("aggressive",20);

@@ -45,7 +45,7 @@ void create() {
     add_search_path("/cmds/thief");
     set_scrambling(1);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",66);
+    set_mob_magic_resistance("average");
     set_exp(30000);
     set_alignment(9);
     set_emotes(15, ({

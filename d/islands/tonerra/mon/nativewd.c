@@ -22,7 +22,7 @@ shines from where his miriad of burns have scared over. This
 one loves to play with fire.
 OLI
    );
-   set_property("magic resistance",55);
+   set_mob_magic_resistance("average");
    set_monster_feats(({
       "toughness",
       "improved toughness",

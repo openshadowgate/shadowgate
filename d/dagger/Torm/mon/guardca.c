@@ -15,7 +15,7 @@ create (){
   set_property("swarm",1);
   set_property("no dominate",1);
   set_property("no bows",1);
-  set_property("magic resistance",75);
+  set_mob_magic_resistance("average");
   set_property("magic",1);
    set_short("Kurik, Captain of the Torm city guard");
   set_property("bounty hunter",1);

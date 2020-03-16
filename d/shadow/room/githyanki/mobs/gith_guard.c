@@ -35,7 +35,7 @@ void create() {
     set_hp(query_max_hp());
     set_overall_ac(2);
      // set_speed(20);
-    set_property("magic resistance",random(20)+10);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_stats("intelligence",18);
     set_stats("wisdom",14);

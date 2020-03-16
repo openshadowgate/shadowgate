@@ -49,7 +49,7 @@ void create() {
    set_max_hp(200);
    set_hp(20);
    set("aggressive",0);
-   set_property("magic resistance",25);
+   set_mob_magic_resistance("average");
    set_emotes(10, ({"%^RESET%^%^RED%^Joseph coughs, spitting up blood%^RESET%^.",
 "%^RESET%^%^RED%^Blood drips from several wounds along Joseph's neck%^RESET%^",
 "%^BLACK%^%^BOLD%^Joseph shivers"}), 0);

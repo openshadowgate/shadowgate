@@ -14,7 +14,7 @@ void create() {
   "  He watches the old king with pity and the look of a friend who's long seen the suffering of his comrade."
   "  A smile tugs at the edges of his lips when he sees anyone nearby enjoying the garden but his hands never leave his weapons as he stands near the old king."
     );
-  set_property("magic resistance",90);
+  set_mob_magic_resistance("average");
     set_property("swarm", 1);
   set_overall_ac(-12);
   set_attack_bonus(20);

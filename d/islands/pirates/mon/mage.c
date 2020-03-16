@@ -52,7 +52,7 @@ void create(){
    TO->set_blinking(1);
    set_spells(({"hideous laughter","lightning bolt","cone of cold","fireball","fireball","monster summoning iii"}));
    set_spell_chance(70);
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
 }
 
 int agg_fun() {

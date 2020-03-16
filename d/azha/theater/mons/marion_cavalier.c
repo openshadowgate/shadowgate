@@ -43,7 +43,7 @@ inherit "std/monster";
 	set_stats("wisdom",12);
 	set_alignment(5);
       set_property("add kits",3);
-	set_property("magic resistance",35);
+	set_mob_magic_resistance("average");
 	set_property("full attacks",1);
 	add_search_path("/cmds/cavalier");
 	obj = new(OBJ"malebplate");

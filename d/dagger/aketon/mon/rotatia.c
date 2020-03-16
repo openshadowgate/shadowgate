@@ -27,7 +27,7 @@ create() {
    set_property("full attacks",1);
    set_property("swarm",1);
    set_property("weapon resistance",2);
-   set_property("magic resistance",10);
+   set_mob_magic_resistance("average");
    set_property("no rush",1);
    set_alignment(2);
    set_size(2);

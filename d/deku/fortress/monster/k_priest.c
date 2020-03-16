@@ -105,7 +105,7 @@ void create() {
     "attack against "+TO->QO);
 
     set_property("full attacks",1);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     command("speak common");
     set_lang("common",100);
 }

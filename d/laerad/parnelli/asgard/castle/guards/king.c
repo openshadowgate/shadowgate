@@ -25,7 +25,7 @@ void create(){
     set_size(2);
     set_hd(40,10);
     set_hp(410);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_property("full attacks",1);
     set_property("no animate",1);

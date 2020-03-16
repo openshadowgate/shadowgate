@@ -62,7 +62,7 @@ case 1:
 	obj->move(TO);
 break;
 	}
-	set_property("magic resistance",10);//adjusted MR - was 30, Circe
+	set_mob_magic_resistance("average");//adjusted MR - was 30, Circe
 		switch(random(5)){
 case 0:
 	set_class("fighter");

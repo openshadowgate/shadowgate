@@ -20,7 +20,7 @@ create(){
   set_ac(-13);
   set_property("swarm",1);
   set_size(1);
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   set_body_type("human");
   set_class("fighter");
   set_mlevel(30);

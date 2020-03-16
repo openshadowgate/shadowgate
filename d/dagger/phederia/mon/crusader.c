@@ -7,7 +7,7 @@ void create(){
   set_name("phederian dark crusader");
   set_id(({"phederian","crusader","phederian dark crusader","dark crusader"}));
   set_race("human");
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   if(!random(2)){set_gender("male");} else {set_gender("female");}
   set_short("%^BLUE%^Phederian dark crusader%^BOLD%^RED%^");
   set_long(

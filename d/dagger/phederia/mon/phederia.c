@@ -7,7 +7,7 @@ void create(){
   set_name("phederia");
   set_id(({"phederia","warlord"}));
   set_race("human");
-  set_property("magic resistance",66);
+  set_mob_magic_resistance("average");
   set_gender("female");
   set_short("%^BOLD%^%^BLUE%^Phederia the Dark Warlord%^BOLD%^%^RED%^");
   set_long(

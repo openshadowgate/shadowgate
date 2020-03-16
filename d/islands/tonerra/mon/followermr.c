@@ -37,7 +37,7 @@ OLI
    command("wield mace");
    set_property("full attacks",1);
    set("aggressive",25);
-   set_property("magic resistance",101);
+   set_mob_magic_resistance("average");
 
    set_property("no web",1);
 }

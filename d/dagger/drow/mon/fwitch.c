@@ -21,7 +21,7 @@ void create() {
    set_max_level(20);
     set_hp(200);
     set_property("no bump",1);
-    set_property("magic resistance",12);
+    set_mob_magic_resistance("average");
     set_exp(5500);
     set_body_type("humanoid");
     set_wielding_limbs(({"right hand","left hand"}));

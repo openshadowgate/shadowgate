@@ -39,7 +39,7 @@ void create() {
     ob->set_property("monsterweapon",1);
     ob->set_short("%^RESET%^%^ORANGE%^Dark brown wool vestments%^RESET%^");
     command("wear robe");
-    set_property("magic resistance",45);
+    set_mob_magic_resistance("average");
     add_money("gold", random(100)+200);
     add_money("platinum", random(30)+100);
     add_money("electrum", random(100)+250);

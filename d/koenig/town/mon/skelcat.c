@@ -8,7 +8,7 @@ inherit MONSTER;
 void create()
 {
   ::create();
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   set_name("cat");
   set_id( ({"cat","skeletal cat","skelcat"}) );
   set_short("%^BOLD%^%^WHITE%^A Skeletal Cat%^RESET%^");

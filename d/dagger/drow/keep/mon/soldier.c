@@ -33,7 +33,7 @@ void create() {
     set_stats("constitution",17);
     set("aggressive","aggfunc");
     set_alignment(9);
-    set_property ("magic resistance",10);
+    set_mob_magic_resistance("average");
     set_exp(2000);
     set_emotes(5,({
        "The Drow soldier evil eyes glance around the room.",

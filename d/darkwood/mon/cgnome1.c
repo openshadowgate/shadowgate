@@ -30,7 +30,7 @@ void create()
   set_stats("wisdom",9);
   set_stats("charisma",10);
   set_overall_ac(10);
-  set_property("magic resistance",80);
+  set_mob_magic_resistance("average");
   set_emotes(2,({"The girl gives you a friendly nod.",
                  "The girl gives you a friendly smile."}),0);
   set_achats(5,({"%^MAGENTA%^Gnome yells: %^RESET%^Hey, Im just a little girl!!",

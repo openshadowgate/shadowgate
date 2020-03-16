@@ -110,7 +110,7 @@ void create() {
     set_property("no paralyze",1);
     set_property("no death",1);
     set_property("full attacks",1);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_max_level(30);
     set_funcs(({"attack"}));
     set_func_chance(50);

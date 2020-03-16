@@ -44,7 +44,7 @@ void create(){
    set_overall_ac(-5);
    set_speed(70);
    set_moving(1);
-   set_property("magic resistance",random(20)+20);
+   set_mob_magic_resistance("average");
    set_wielding_limbs(({"left hand","right hand"}));
    ob1 = new("/d/underdark/obj/sboots");
    ob1->move(TO);

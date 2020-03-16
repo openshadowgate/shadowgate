@@ -56,7 +56,7 @@ void create (){
    add_search_path("/cmds/thief");
    set_thief_skill("move silently",95);
    set_thief_skill("hide in shadows",95);
-   set_property("magic resistance",70);
+   set_mob_magic_resistance("average");
    ob=new(OBJD+"gdagger.c");
    ob->move(TO);
    ob->set_property("enchantment",1);

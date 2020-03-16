@@ -50,7 +50,7 @@ void create() {
     set_stats("wisdom",19);
     set_stats("intelligence",20);
     set_stats("charisma",5);
-    set_property("magic resistance",18);
+    set_mob_magic_resistance("average");
     set_emotes(5, ({
         "Mindflayer cackles evilly.",
 	"Mindflayer's tentacles quiver in anticipation.",

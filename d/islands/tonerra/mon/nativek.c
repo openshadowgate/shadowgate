@@ -63,7 +63,7 @@ set_max_level(25);
       command("wear armor");
       new(OBJ+"Lcloak")->move(TO);
       command("wear cloak");
-      set_property("magic resistance",45);
+      set_mob_magic_resistance("average");
       set_spells(({"magic missile","lightning bolt","fireball","vampiric touch"}));
       set_spell_chance(65);
       //set_wimpy(30);

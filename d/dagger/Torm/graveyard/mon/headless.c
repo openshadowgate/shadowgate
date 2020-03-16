@@ -19,7 +19,7 @@ create(){
   set_mlevel("fighter",29);
   set_mlevel("thief",20);
   set_property("no steal",1);
-  set_property("magic resistance",25);
+  set_mob_magic_resistance("average");
   set_property("no bows",1);
   set_property("no bump",1);
   set_property("full attacks",1);
@@ -43,7 +43,7 @@ create(){
   command("speech fill the room with a hollow voice");
   add_money("gold",1000);
   set_hp(300);
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_exp(5000);
   call_out("do_horse",1);
 }
@@ -80,7 +80,7 @@ void heart_beat(){
   }
 }
   if(query_property("magic resistance")<50){
-  TO->set_property("magic resistance",50);
+  TO->set_mob_magic_resistance("average");
   }
   if(present("snake",ETO)){new("/cmds/spells/d/_dispel_magic")->use_spell(TO,0,query_level(),100,"cleric");}
   if(present("guardian",ETO)){new("/cmds/spells/d/_dispel_magic")->use_spell(TO,0,query_level(),100,"cleric");}

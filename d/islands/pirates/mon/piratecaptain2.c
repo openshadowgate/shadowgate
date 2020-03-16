@@ -50,7 +50,7 @@ void create (){
    set_property("swarm",1);
    add_money("silver", random(300)+100);
    add_money("copper", random(30)+10);
-   set_property("magic resistance",25);
+   set_mob_magic_resistance("average");
 }
 
 int agg_fun() {

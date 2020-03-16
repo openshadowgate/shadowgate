@@ -36,7 +36,7 @@ void create() {
     set_overall_ac(-7);
     set_hp(185);
     set_property("no bump",1);
-    set_property("magic resistance",80);
+    set_mob_magic_resistance("average");
     set_max_hp(185);
     set_exp(15500);
 add_money("platinum",random(1000));

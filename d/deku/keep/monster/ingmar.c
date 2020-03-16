@@ -49,7 +49,7 @@ void create()
     add_money("gold", random(200));
     set_hp(315 + random(21));
     set_new_exp(20, "normal");
-    set_property("magic resistance", 35);
+    set_mob_magic_resistance("average");
     set_funcs(({"thrust","heal_self"}));
     set_func_chance(50);
     num = 1;

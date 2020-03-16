@@ -50,7 +50,7 @@ create() {
 	set_new_exp(20, "high");
   add_money("gold",150 + random(500));
   set_property("full attacks",1);
-  set_property("magic resistance", 35);
+  set_mob_magic_resistance("average");
   set_funcs(({"hack"}));
   set_func_chance(30);
 }

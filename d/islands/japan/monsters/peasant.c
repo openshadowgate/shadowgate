@@ -33,7 +33,7 @@ OLI
        set_gender("male");
        set("aggressive",6);
        set_property("swarm",1);
-       set_property("magic resistance",40);
+       set_mob_magic_resistance("average");
        make_me();
        add_money("gold",random(50));
        add_money("silver",random(50));

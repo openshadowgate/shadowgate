@@ -47,5 +47,5 @@ void create() {
   add_money("gold",random(100));
 //  set_exp(1000);
   set_new_exp(10,"high");
-  set_property("magic resistance", 20);
+  set_mob_magic_resistance("average");
 }

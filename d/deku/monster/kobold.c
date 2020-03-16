@@ -29,7 +29,7 @@ void make_me(int x)
             set_spells(({"fireball","scorcher","acid arrow",
             "lower resistance","blink"}));
             set_spell_chance(75);
-            set_property("magic resistance",10);
+            set_mob_magic_resistance("average");
             set_stats("intelligence",14);
             if(!random(4)) 
             {

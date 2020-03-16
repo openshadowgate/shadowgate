@@ -18,7 +18,7 @@ void create() {
    set_guild_level("fighter",39);
    set_class("thief");
    set_guild_level("thief",35);
-   set_property("magic resistance",45);
+   set_mob_magic_resistance("average");
    set_race("drow");
    set_body_type("humanoid");
    set_gender("male");

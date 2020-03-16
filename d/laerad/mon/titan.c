@@ -25,7 +25,7 @@ void create(){
     set_alignment(8);
     set_overall_ac(-10);
     set("aggressive",24);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_class("mage");
     set_guild_level("mage",20);
     set_hd(20,200);

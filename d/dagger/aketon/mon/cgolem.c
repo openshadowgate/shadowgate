@@ -48,7 +48,7 @@ void create(){
      	set_max_hp(500);
     	set_hp(query_max_hp());
     	add_search_path("/cmds/ranger");
-    	set_property("magic resistance",40);
+    	set_mob_magic_resistance("average");
 	set_property("magic",1);
 	set_property("no steal",1);
 	set_property("no stab",1);

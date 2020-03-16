@@ -58,7 +58,7 @@ void create(){
     set("aggressive", 1);
     set_overall_ac(-22);
     set_damage(3,3);
-    set_property("magic resistance",85);
+    set_mob_magic_resistance("average");
     set_property("weapon resistance", 10);
     set_size(4);
     set_base_damage_type("bludgeoning");

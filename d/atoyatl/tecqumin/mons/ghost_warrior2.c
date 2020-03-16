@@ -77,7 +77,7 @@ void create()
       set_stats("dexterity",18);
       set_exp(9000);
   	set_alignment(4);
-      set_property("magic resistance",15);
+      set_mob_magic_resistance("average");
       set_property("full attacks",1);
       set_property("swarm", 1); 
 //      set_spell_chance(5);

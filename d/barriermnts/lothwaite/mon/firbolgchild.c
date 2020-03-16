@@ -40,7 +40,7 @@ void create()
 	set("aggressive",3);
       remove_property("swarm");
 	set_property("weapon resistance",2);
-	set_property("magic resistance",25);
+	set_mob_magic_resistance("average");
       set_moving(1);
       set_speed(60);
       set_nogo(({"/d/barriermnts/lothwaite/rooms/b1", "/d/barriermnts/lothwaite/rooms/stones2"}));

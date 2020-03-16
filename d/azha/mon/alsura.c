@@ -24,7 +24,7 @@ void create() {
         castOK = 1;
         set_name("Ayatollah al-Sura");
         set_id(({ "ayatollah", "alsura", "ishmael", "al-sura" }));
-        set_property("magic resistance", 40);
+        set_mob_magic_resistance("average");
         set_short("Ishmael al-Sura, visiting Holy Man");
         set_long(
 @TSARVEN

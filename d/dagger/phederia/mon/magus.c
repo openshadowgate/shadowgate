@@ -8,7 +8,7 @@ void create(){
   set_name("phederian dark magus");
   set_id(({"phederian","magus","dark magus","phederian dark magus"}));
   set_race("human");
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   if(!random(2)){set_gender("male");} else {set_gender("female");}
   set_short("%^BLUE%^Phederian dark magus%^BOLD%^%^RED%^");
   set_long(

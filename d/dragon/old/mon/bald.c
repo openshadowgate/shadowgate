@@ -29,7 +29,7 @@ determination to think for himself.
     set_stats("constitution",17);
     set_stats("intelligence",5);
     set("aggressive","aggfunc");
-    set_property ("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_exp(1600);
     set_alignment(5);
     set_emotes(5,({

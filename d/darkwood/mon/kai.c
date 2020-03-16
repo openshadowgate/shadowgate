@@ -46,7 +46,7 @@ DARKWOOD
     set_stats("dexterity",25);
     set_stats("constitution",17);
     set_stats("strength",25);
-    set_property ("magic resistance",90);
+    set_mob_magic_resistance("average");
     set_alignment(9);
     set_exp(75000);
     set_emotes(5,({

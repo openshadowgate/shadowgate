@@ -52,7 +52,7 @@ void create() {
     set_class("ranger");
     set_mlevel("ranger", 18);
     set_hd(28,1);
-    set_property("magic resistance", 15);
+    set_mob_magic_resistance("average");
     set_attack_bonus(3);
    set_max_level(25);
     set_max_hp(150+random(200));
@@ -62,7 +62,7 @@ void create() {
     set_property("full attacks", 1);
     set_stats("strength", 15);
     set("aggressive", 20);
-    set_property("magic resistance", 15);
+    set_mob_magic_resistance("average");
     set_alignment(9);
     add_money("gold", random(1000));
     add_money("silver", random(2500));

@@ -49,7 +49,7 @@ create() {
     set_stats("wisdom",25);
     set_stats("charisma",17);
     set_property("full attacks",1);
-    set_property("magic resistance",55);
+    set_mob_magic_resistance("average");
     set_spells(({"burning hands","fireball",
     "scorcher","flame strike","wall of fire","lower resistance",
     "magic missile","powerword stun","fire storm","scorcher",

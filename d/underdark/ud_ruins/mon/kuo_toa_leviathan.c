@@ -55,7 +55,7 @@ void create() {
     set_property("no web", 1);
     set_property("no trip", 1);
     set_property("no poison", 1);
-    set_property("magic resistance", 30);
+    set_mob_magic_resistance("average");
     set_property("no random treasure", 1);
     set_exp(50000);
     set_overall_ac(-12);

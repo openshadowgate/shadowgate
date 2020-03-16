@@ -78,7 +78,7 @@ void create()
    	set_thief_skill("hide in shadows",95);
    	add_search_path("/cmds/thief");
    	set("aggressive","aggression");
-   	set_property ("magic resistance", 35);
+   	set_mob_magic_resistance("average");
    	set_new_exp(35, "normal");
       set_funcs(({"maim"}));
    	set_func_chance(25);

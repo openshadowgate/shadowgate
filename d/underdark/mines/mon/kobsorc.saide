@@ -52,7 +52,7 @@ void create(){
    set_exp(19000);
    set_max_level(17);
    set_overall_ac(-10);
-   set_property("magic resistance",random(20)+20);
+   set_mob_magic_resistance("average");
    set_property("spell penetration",45);
    set_wielding_limbs(({"left hand","right hand"}));
    ob1 = new(OBJ"dragoncloak");

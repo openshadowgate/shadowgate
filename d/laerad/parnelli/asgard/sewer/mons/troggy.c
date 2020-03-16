@@ -70,6 +70,6 @@ void create() {
    set_hp(235);
    set_exp(7000);
    add_money("gold",random(100)+100);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    set_property("water breather",1);
 }

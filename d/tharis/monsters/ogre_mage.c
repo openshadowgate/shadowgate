@@ -29,7 +29,7 @@ void create(){
     set_spells(({"fireball","scorcher","lightning bolt","cone of cold","magic missile"}));
     set_property("swarm",1);
       set_property("alignment adjustment",3);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_wielding_limbs(({"right hand","left hand"}));
     set_overall_ac(2);
     ob = new("/d/tharis/obj/katana");

@@ -64,7 +64,7 @@ void create(){
   	    add_money("gold",random(60));
   	    add_money("copper",random(300));
      	add_money("electrum",random(120));
-    	set_property("magic resistance",10);
+    	set_mob_magic_resistance("average");
        set_exp(800);
        set_property("full attacks",1);
        set_max_level(6);

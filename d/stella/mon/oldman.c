@@ -28,7 +28,7 @@ void create() {
   set_stats("intelligence",20);
   set_stats("wisdom",20);
   set_stats("charisma",13);
-  set_property("magic resistance",90);
+  set_mob_magic_resistance("average");
   set_spell_chance(80);
   set_spells( ({"cone of cold","chain lightning","monster summoning vii","finger of death","ice storm"}) );
   set_emotes(5,({"The old man looks at you beseechingly.","The old man looks fearfully at the castle."}),0);

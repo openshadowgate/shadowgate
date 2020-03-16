@@ -16,7 +16,7 @@ void create(){
    set_short("%^BOLD%^%^RED%^Ravhas, king of the fire giants%^RESET%^");
    set_long("This massive creature is a sight to make you tremble with fear.   His massive frame is fully armored, and he has a great sword that takes two hands for this 18-foot-tall giant to wield.  This fire giant king is most upset about whats happened to his clan and doesn't look too happy to see anyone else here, let alone you!  Perhaps you could try to %^BOLD%^calm %^RESET%^%^CYAN%^him?%^RESET%^");
    set_ac(-5);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    set_mlevel(39);
    add_search_path("/cmds/fighter");
    set("aggressive","agggunc");

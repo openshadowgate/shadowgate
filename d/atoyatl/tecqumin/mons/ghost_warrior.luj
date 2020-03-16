@@ -101,7 +101,7 @@ void create()
       set_new_exp(level, "normal");
       set_funcs(({"shatter", "sunder", "rush", "shieldbash", "summon_help"}));
       set_func_chance(40);
-      set_property("magic resistance",40);
+      set_mob_magic_resistance("average");
       set_property("bludgeoning resistance", 20);
       set_property("slashing resistance", 10);
       set_property("piercing resistance", 10);
@@ -114,7 +114,7 @@ void create()
 	set_speed(0);
       set_max_level(45);
   	set_alignment(4);
-      set_property("magic resistance",25);
+      set_mob_magic_resistance("average");
       set_property("full attacks",1);
   	set_emotes(1,({
            "The %^CYAN%^translucent%^RESET%^, %^BOLD%^%^WHITE%^g%^RESET%^"

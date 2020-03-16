@@ -11,7 +11,7 @@ void create()
 	set_hp(280 + random(40));
 	//set_exp(8000);
 	set_property("weapon resistance", 2);
-	set_property("magic resistance", 30);
+	set_mob_magic_resistance("average");
 	set_property("magic", 1);
 	add_money("gold", random(500));
 	set_damage(2,6);

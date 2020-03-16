@@ -42,7 +42,7 @@ create() {
    //set_property("no death",1);
    set_property("full attacks",1);
    set_property("weapon resistance",1);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    add_money("gold", random(100));
    new("/d/common/obj/weapon/shortsword")->move(TO); 
    command("wield sword");  

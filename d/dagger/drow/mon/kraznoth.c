@@ -22,7 +22,7 @@ void create() {
     set_overall_ac(-5);
     set_hp(135);
     set_property("no bump",1);
-    set_property("magic resistance",80);
+    set_mob_magic_resistance("average");
     set_max_hp(135);
     set_exp(4000);
     set_body_type("humanoid");

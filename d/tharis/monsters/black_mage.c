@@ -52,7 +52,7 @@ OLI
 	ob->move(TO);
 	command("put scroll in robes");
 	set_alignment(9);
-	set_property("magic resistance",60);
+	set_mob_magic_resistance("average");
 	
 }
 

@@ -19,7 +19,7 @@ create(){
   "  Perhaps you could try to calm him?"
   );
   set_ac(-5);
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_size(3);
   set_body_type("giant");
   set_class("fighter");

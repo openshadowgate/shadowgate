@@ -25,7 +25,7 @@ void create(){
     set_property("full attacks", 1);
     set_overall_ac(-4);
     set_exp(query_hd()*2000);
-    set_property("magic resistance", 35);
+    set_mob_magic_resistance("average");
     ob = new("/d/shadow/obj/weapon/two_hand_sword.c");
     ob->set_property("monsterweapon", 1);
     ob->set_wc(3,10);

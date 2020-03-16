@@ -40,7 +40,7 @@ void create() {
     ob->set_short("%^BOLD%^%^BLACK%^stony plate armor%^RESET%^");
     ob->set_property("monsterweapon",1);
     command("wear plate");
-    set_property("magic resistance",45);
+    set_mob_magic_resistance("average");
     add_money("gold", random(100)+400);
     add_money("platinum", random(30)+200);
     add_money("electrum", random(100)+500);

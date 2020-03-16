@@ -67,7 +67,7 @@ void create() {
     set_property("no poison", 1);
     set_property("no dominate", 1);
     set_property("no bows", 1);
-    set_property("magic resistance",20 + random(21));
+    set_mob_magic_resistance("average");
     set_property("no random treasure", 1);
     set("aggressive","aggfunc");
     eq = new(OBJ"greater_drider_whip");

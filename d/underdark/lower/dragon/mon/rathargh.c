@@ -36,7 +36,7 @@ void create() {
    set_max_hp(2500);
    set_hp(query_max_hp());
    set_property("weapon resistance",4);
-   set_property("magic resistance",60);
+   set_mob_magic_resistance("average");
    set_property("spell penetration",60);
    set_property("no animate", 1);
    set_property("no steal", 1);

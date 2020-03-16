@@ -64,7 +64,7 @@ void create() {
    set_property("no dominate",1);
    set_property("full attacks",1);
    set_property("weapon resistance",3);
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
    set_stats("intelligence",25);
    set_stats("wisdom",24);
    set_stats("strength",23);

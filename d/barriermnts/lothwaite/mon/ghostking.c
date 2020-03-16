@@ -66,7 +66,7 @@ object obj;
 	set_property("swarm",1);
 	set("aggressive",0);
 	set_property("weapon resistance",2);
-	set_property("magic resistance",25);
+	set_mob_magic_resistance("average");
       command("speech speak with a rolling rumble");
 }
 

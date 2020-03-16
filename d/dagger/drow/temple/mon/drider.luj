@@ -27,7 +27,7 @@ void create() {
     set_wielding_limbs(({"right hand","left hand"}));
     set_overall_ac(-4);
     set_property("no bump",1);
-    set_property("magic resistance",40);
+    set_mob_magic_resistance("average");
     set_max_hp(query_hd()*14);
    set_max_level(30);
     set_hp(query_max_hp());

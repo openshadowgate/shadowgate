@@ -31,7 +31,7 @@ for you."
    set_spell_chance(100);
    set_spells(({"magic missile","lightning bolt","fireball","scorcher","burning hands"}));
    set_overall_ac(0);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
 }
 
 void init(){

@@ -22,7 +22,7 @@ void create() {
     set_hp(90);
 set_property("magic",1);
     set_property("no bump",1);
-    set_property("magic resistance",12);
+    set_mob_magic_resistance("average");
     set_max_hp(90);
     set_exp(1000);
     set_body_type("snake");

@@ -36,7 +36,7 @@ void create()
     set_size(2);
     set_property("magic",1);
     set_overall_ac(-20);
-    set_property("magic resistance",45);
+    set_mob_magic_resistance("average");
     set_new_exp(level, "normal");
     set_body_type("humanoid");
     set_race("human");

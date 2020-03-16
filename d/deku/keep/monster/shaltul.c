@@ -27,7 +27,7 @@ void create()
     set_mlevel("thief",26);  
     set_mlevel("assassin",26);
    // set_property("no rush",1);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_overall_ac(-2 - random(5));
     set_hp(795 + random(41));
     set_new_exp(20, "very high");

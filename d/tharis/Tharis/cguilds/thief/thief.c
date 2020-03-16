@@ -25,7 +25,7 @@ DESC
     set_hp(200);
     set_exp(5000);
     set_overall_ac(-3);
-    set_property("magic resistance",80);
+    set_mob_magic_resistance("average");
     set_property("no dominate",1);
     set_property("no death",1);
     set("aggressive",0);

@@ -26,7 +26,7 @@ void create() {
     set("race", "giant" );
     set_property("magic", 1);
    set_property("add kits",15);
-    set_property ("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_level(30);
     set_body_type("human");
     set_wielding_limbs(({"right hand","left hand"}));

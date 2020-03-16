@@ -66,7 +66,7 @@ void create(){
                   set_stats("constitution",16);
                   set_stats("dexterity",12);
                   set_stats("charisma",14);
-                  set_property("magic resistance",15);
+                  set_mob_magic_resistance("average");
                   set_property("full attacks",1);
                   add_money("gold",random(100));
                   set_short("A male firbolg citizen");
@@ -109,7 +109,7 @@ void create(){
                   set_stats("constitution",16);
                   set_stats("dexterity",12);
                   set_stats("charisma",14);
-                  set_property("magic resistance",25);
+                  set_mob_magic_resistance("average");
                   add_money("gold",random(100));
                   set_short("A female firbolg citizen");
                   set_spells(({"lightning bolt","magic missile","burning hands","hold person"}));
@@ -146,7 +146,7 @@ void create(){
                   set_stats("constitution",16);
                   set_stats("dexterity",15);
                   set_stats("charisma",14);
-                  set_property("magic resistance",15);
+                  set_mob_magic_resistance("average");
                   set_property("full attacks",1);
                   add_money("gold",random(25));
                   set_short("A young male firbolg");
@@ -183,7 +183,7 @@ void create(){
                   set_stats("constitution",16);
                   set_stats("dexterity",15);
                   set_stats("charisma",14);
-                  set_property("magic resistance",15);
+                  set_mob_magic_resistance("average");
                   add_money("gold",random(25));
                   set_short("A young female firbolg");
                   set_long("This tall young lady stands around ten "+

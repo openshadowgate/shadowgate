@@ -28,7 +28,7 @@ void create(){
   set_id(({"derro","dwarf","warrior","derro warrior"}));
   set_property("no bows",1);
   set_race("dwarf");
-  set_property("magic resistance",random(20)+10);
+  set_mob_magic_resistance("average");
   set_gender("male");
   set_short("%^RESET%^%^BLUE%^Derro warrior%^BOLD%^%^RED%^%^");
   set_long(

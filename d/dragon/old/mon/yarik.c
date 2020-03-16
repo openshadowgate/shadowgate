@@ -29,7 +29,7 @@ hair give him a distinctive, ratlike appearance.");
     set_stats("dexterity",18);
     set_stats("constitution",9);
     set_stats("intelligence", 15);
-    set_property ("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_exp(1300);
     set_alignment(9);
     set("aggressive","aggfunc");

@@ -27,7 +27,7 @@ void create() {
   set_money("electrum",random(50));
   set_money("platinum",random(20));
   set_money("silver",random(500));
-  set_property("magic resistance",20);
+  set_mob_magic_resistance("average");
   new("/d/shadow/obj/armor/fullplate")->move(TO);
   command("wear plate");
   new("/d/shadow/obj/armor/robe")->move(TO);

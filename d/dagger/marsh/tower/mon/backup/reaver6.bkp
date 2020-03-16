@@ -47,7 +47,7 @@ void create() {
     set_stats("charisma",-10);
     set("aggressive",50);
     remove_property("swarm");
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     new( OPATH "scythe.c" )->move(TO);
     command("wield scythe in left hand");
     new( OPATH "scythe.c" )->move(TO);

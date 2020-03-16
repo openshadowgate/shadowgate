@@ -23,7 +23,7 @@ void create(){
   set_overall_ac(-100);
   set("aggressive",25);
   set_exp(10000);
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
 }
   void drain_heat(object targ){
   tell_room(environment(TO),"%^BOLD%^%^WHITE%^The mold drains heat from the room!",targ);

@@ -41,7 +41,7 @@ void create() {
     set_max_hp(400);
     set_hp(400);
     set_property("no bump",1);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_new_exp(38,"high");
     set_max_level(36);
     set_body_type("humanoid");

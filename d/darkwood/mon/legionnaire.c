@@ -26,7 +26,7 @@ DARKWOOD
         set_hd(20,3);
         set_hp(200);
         set_exp(10000);
-        set_property("magic resistance",50);
+        set_mob_magic_resistance("average");
         set_property("swarm",1);
         set_stats("strength",19);
         set_stats("constitution",17);
@@ -76,7 +76,7 @@ die() {
 		say("%^BLUE%^BOLD%^As the legionnaire dies, you see energy"+
 		" flow from his body into his comrade at his side, making "+
 		"his comrade more powerful!");
-		ob->set_property("magic resistance",10);
+		ob->set_mob_magic_resistance("average");
 		ob->set_max_hp(ob->query_max_hp()+120);
 		ob->do_damage(0,-120);
 	}

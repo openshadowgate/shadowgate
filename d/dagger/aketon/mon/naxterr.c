@@ -55,7 +55,7 @@ void create() {
    set_property("no animate",1);
    set_property("full attacks",1);
    set_property("weapon resistance",2);
-   set_property("magic resistance",10);
+   set_mob_magic_resistance("average");
    set_stats("intelligence",25);
    set_stats("wisdom",18);
    set_stats("strength",22);

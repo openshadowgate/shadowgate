@@ -10,7 +10,7 @@ void create(){
 	set_hd(12+random(8),6);
    set_hp( (query_hd()*6)+random(20) );
 	set_property("full attacks",1);
-	set_property("magic resistance",30);
+	set_mob_magic_resistance("average");
    set_stats("strength",19);
    set_stats("dexterity",18);
    set_stats("wisdom",18);

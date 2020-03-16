@@ -32,7 +32,7 @@ very unpleasant.");
   set_thief_skill("hide in shadows",95);
   add_search_path( "cmds/thief" );
   set("aggressive","aggfunc");
-  set_property ("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_exp(5500);
   set_alignment(5);
   set_emotes(15, ({

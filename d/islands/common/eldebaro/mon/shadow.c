@@ -34,7 +34,7 @@ void create()
     set_max_hp(10);
     set_hp(10);
     
-    set_property("magic resistance", 1000);
+    set_mob_magic_resistance("average");
     set_property("damage resistance", 1000000);
     set_spell_chance(105);
     set_spells(({"lightning bolt", "acid arrow", "magic missile"}));  

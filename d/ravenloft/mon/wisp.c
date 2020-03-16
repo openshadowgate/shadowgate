@@ -22,7 +22,7 @@ void create(){
     set_overall_ac(-8);
     set_exp(8000);
     set("aggressive",21);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_property("strength","fire");
     set_property("swarm",1);
     set_funcs(({"attack"}));

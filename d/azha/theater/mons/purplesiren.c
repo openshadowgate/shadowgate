@@ -54,7 +54,7 @@ inherit "std/monster";
 	add_search_path("/cmds/mage");
 	set_size(2);
 	set_alignment(6);
-	set_property("magic resistance",30);
+	set_mob_magic_resistance("average");
 	set_spell_chance(40);
 	set_spells( ({ "shout","sonic orb","vampiric touch"}) );
 	obj = new("/d/laerad/obj/bracers3");

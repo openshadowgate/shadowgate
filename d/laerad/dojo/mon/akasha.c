@@ -43,7 +43,7 @@ void create() {
    set_property("no knockdown", 1);
    set_property("knock unconscious",1);
    set_property("no steal",1);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_spoken("wizish");
    command("speech speak calmly");
    talking = 0;

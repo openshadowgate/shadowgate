@@ -37,7 +37,7 @@ void create()
 
     set_body_type("humanoid");
     set_alignment(7);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     add_limb("upper right hand", "torso", 0, 0, 0);
     add_limb("upper left hand", "torso", 0, 0, 0);

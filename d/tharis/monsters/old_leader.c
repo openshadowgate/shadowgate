@@ -41,7 +41,7 @@ OLI
 	waiting = ({});
 	set_gender("male");
 	set_overall_ac(-8);
-	set_property("magic resistance",80);
+	set_mob_magic_resistance("average");
 	set_exp(30000);
 	set_spells(({"lightening bolt","cone of cold","magic missile","scorcher","fireball"}));
 	set_spell_chance(90);

@@ -41,7 +41,7 @@ void create()
     set_stats("intelligence", 30);
     set_property("swarm", 1);
     set_property("spell penetration", 50);
-    set_property("magic resistance", 50);
+    set_mob_magic_resistance("average");
     set_hp(1550 + random(51));
     set_max_hp(query_hp());
     set_new_exp(20, "boss");

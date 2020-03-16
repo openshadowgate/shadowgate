@@ -50,7 +50,7 @@ void create() {
    set_property("no death",1);
    set_property("no steal",1);
    set_property("weapon resistance",2);
-   set_property("magic resistance",10);
+   set_mob_magic_resistance("average");
    set_stats("intelligence",25);
    set_stats("wisdom",20);
    set_stats("strength",22);

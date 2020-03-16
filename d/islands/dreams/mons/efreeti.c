@@ -27,7 +27,7 @@ inherit "std/monster";
   	set_mlevel("cleric",35);
   	set_hp(random(150)+870);
 	set_max_level(40);
-      	set_property("magic resistance",35);
+      	set_mob_magic_resistance("average");
   	set_exp(8000);
   	set_overall_ac(5);
   	set_funcs(({"spells"}));

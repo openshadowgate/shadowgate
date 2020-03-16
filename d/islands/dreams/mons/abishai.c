@@ -31,7 +31,7 @@ void create()
   	add_limb("mouth","head",0,0,0);
   	add_limb("tail","torso",0,0,0);
   	set_hp(random(200)+900);
-  	set_property("magic resistance",35);
+  	set_mob_magic_resistance("average");
   	new(OBJ"glaive")->move(TO);
   	command("wield glaive");
   	set_exp(8000);

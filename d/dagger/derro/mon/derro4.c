@@ -13,7 +13,7 @@ void create(){
    set_race("dwarf");
    set_gender("male");
    set_short("%^RESET%^%^CYAN%^Derro savant%^BOLD%^%^RED%^");
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
    set_long("%^CYAN%^With skin the color of an iced-over lake and pupilless, staring eyes, this degenerate creature looks out of place in these giant halls.  The ever-present %^RED%^red glow %^CYAN%^makes the creature's %^RESET%^white%^CYAN%^/%^BOLD%^blue %^RESET%^%^CYAN%^complexion look the color of maggots under a dusk sun.  Magic seems to emanate from this Derro, and its gaze is directed at you!%^RESET%^");
    set_ac(0);
    set_property("no bows",1);

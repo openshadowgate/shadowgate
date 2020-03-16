@@ -47,7 +47,7 @@ void create()
     set_guild_level("thief",x);
     set_mlevel("thief", x);
     set_property("full attacks",1);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_hp(235 + random(31));
     //set_exp(5000);
     set_new_exp(25, "normal");

@@ -43,7 +43,7 @@ void create() {
     set_hp(180);
     set_max_hp(180);
     set_exp(12800);
-    set_property("magic resistance",18);
+    set_mob_magic_resistance("average");
     set_alignment(9);
     set_class("fighter");
     set_guild_level("fighter",18);

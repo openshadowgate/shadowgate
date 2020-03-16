@@ -4,7 +4,7 @@ inherit MONSTER;
 void create()
 {
   ::create();
-  set_property("magic resistance", 30);
+  set_mob_magic_resistance("average");
   set_name("The Gentleman");
   set_id( ({"gentleman", "The Gentleman", "the gentleman"}) );
   set_short("%^BOLD%^%^GREEN%^The Gentleman%^RESET%^");

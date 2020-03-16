@@ -57,7 +57,7 @@ void create(){
    }
    add_money("gold",1000);
    set_hp(300);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    set_exp(15000);
    set_spell_chance(30);
    set_spells(({"scorcher","acid arrow","acid orb","shout"}));

@@ -26,7 +26,7 @@ foul-tempered and sadistic.");
     set_stats("strength",16);
     set_stats("dexterity",19);
     set_stats("constitution",15);
-    set_property ("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_exp(1100);
     set_alignment(9);
     set("aggressive","aggfunc");

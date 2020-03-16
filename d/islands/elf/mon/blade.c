@@ -37,7 +37,7 @@ void create()
   set_stats("constitution",16);
   add_money("silver",random(2000));
   set_property("full attacks",1);
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_monster_feats(({"dodge","knockdown","expertise"
   ,"powerattack","rush","spell focus","knockdown",
   "spell penetration","greater spell penetraion" }));

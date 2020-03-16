@@ -72,7 +72,7 @@ void create() {
     set_max_hp(3000);
     set_hp(query_max_hp());
     set_exp(100000);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_property("add kits",20);
     set_funcs(({"dart","crit","kdit"}));
     set_func_chance(40);

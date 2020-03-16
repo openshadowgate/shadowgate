@@ -48,7 +48,7 @@ create() {
   set_func_chance(30);
   //set_exp(query_max_hp() * 15);
 	set_new_exp(20, "normal");
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_property("full attacks",1);
 }
 

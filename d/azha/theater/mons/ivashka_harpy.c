@@ -46,7 +46,7 @@ void create(){
 	set_stats("wisdom",12);
 	set_scrambling(1);
 	set_alignment(6);
-	set_property("magic resistance",55);
+	set_mob_magic_resistance("average");
 	set_property("full attacks",1);
 	set_property("no dominate",1);
    //set_property("no rush",1); - I am editing this out because I see no point in punishing certain classes.  We might as well give this thing 100% mr and set a "no lower" property

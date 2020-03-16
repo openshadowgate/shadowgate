@@ -48,7 +48,7 @@ void create()
     "lightning bolt", "prismatic spray", 
     "dispel magic"}));
     set_spell_chance(100);
-    set_property("magic resistance", 75);
+    set_mob_magic_resistance("average");
     command("speech speak softly");
     command("speak wizish");
     ob = new(HHOB"azloths_blessing");

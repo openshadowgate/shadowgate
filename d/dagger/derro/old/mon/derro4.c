@@ -18,7 +18,7 @@ void create(){
   set_race("dwarf");
   set_gender("male");
   set_short("%^RESET%^%^CYAN%^Derro savant%^BOLD%^%^RED%^");
-  set_property("magic resistance",30);
+  set_mob_magic_resistance("average");
   set_long(
   "  With skin the color of an iced over lake and pupilless staring eyes these degenerate creatures look out of place in these giants halls."
   "  The everpresent red glow gives thier white/blue complexion that of maggots under a dusk sun."

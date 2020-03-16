@@ -13,7 +13,7 @@ void create() {
 	"clan. The clan is a sorrowed filled clan of farmers and gatherers "+
 	"who are very in tune with nature and have a mystical bond to the land.");
     set_race("human" );
-    set_property ("magic resistance",15);
+    set_mob_magic_resistance("average");
     set_overall_ac(-3);
     set_alignment(5);
     set_stats("intelligence", 20);

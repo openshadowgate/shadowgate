@@ -76,7 +76,7 @@ SEETH
   	command("wear ring");
 
   	set_property("full attacks",1);
-  	set_property("magic resistance",10);
+  	set_mob_magic_resistance("average");
   	call_out("horsey",1);
         parties = ({});
 }

@@ -20,7 +20,7 @@ void create() {
   set_class("cleric");
   set_guild_level("cleric",19);
   set_exp(5);
-  set_property("magic resistance",20);
+  set_mob_magic_resistance("average");
   set_money("gold",random(100));
   set_money("electrum",random(50));
   set_money("platinum",random(20));

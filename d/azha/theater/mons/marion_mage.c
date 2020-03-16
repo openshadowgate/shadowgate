@@ -37,7 +37,7 @@ inherit "std/monster";
 	set_stats("constitution",10);
 	set_stats("wisdom",14);
 	set_alignment(5);
-	set_property("magic resistance",35);
+	set_mob_magic_resistance("average");
 	add_search_path("/cmds/mage");
 	set_spell_chance(95);
 	set_spells( ({"prismatic spray",

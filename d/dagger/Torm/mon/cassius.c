@@ -35,7 +35,7 @@ void create(){
        "he could easily defend himself."
     );
     set_heart_beat(1);
-    set_property("magic resistance", 40);
+    set_mob_magic_resistance("average");
     set_exp(35000);
     set_race("human");
     set_body_type("human");

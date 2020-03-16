@@ -25,7 +25,7 @@ void create(){
     set_exp(0);
     set_stats("strength",19);
     set_stats("dexterity",18);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_property("no bump",1);
     set_property("full attacks",1);

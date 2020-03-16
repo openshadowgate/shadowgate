@@ -43,7 +43,7 @@ void create (){
    set_guild_level("mage",13);
    set_spell_chance(95);
    set_spells(({"cone of cold","fireball","hideous laughter"}));
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
    set_func_chance(50);
    set_funcs(({"bodyslam","swordsweep","headcrusher"}));
    set_achats(5, ({"%^BOLD%^%^BLACK%^The ogre-mage sneers disdainfully at you before moving

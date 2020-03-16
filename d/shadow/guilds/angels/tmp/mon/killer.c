@@ -21,7 +21,7 @@ void create(){
     add_search_path("/cmds/assassin");
     set_thief_skill("hide in shadows",95);
     set_thief_skill("move silently",95);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_stats("strength",17);
     set_stats("dexterity",25);
     set_stats("charisma",18);

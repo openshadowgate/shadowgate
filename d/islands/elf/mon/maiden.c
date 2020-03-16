@@ -36,7 +36,7 @@ create() {
    }));
    set_spell_chance(10);
    set_property("weapon resistance",2);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_property("spell resistance",20);
    set_property("no death",1);
    set_property("magic",1);

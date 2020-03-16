@@ -71,7 +71,7 @@ void create()
     set("aggressive",2);
     set_overall_ac(-22);
 
-    set_property("magic resistance",85);
+    set_mob_magic_resistance("average");
     set_property("weapon resistance", 3);
 
     ob = new("/d/common/obj/weapon/large_battle_axe");

@@ -30,7 +30,7 @@ void create()
   set_stats("wisdom",9);
   set_stats("charisma",10);
   set_overall_ac(10);
-  set_property("magic resistance",80);
+  set_mob_magic_resistance("average");
   set_emotes(2,({"The female gnome gives you a friendly nod as you pass by.",
                  "The female gnome gives you a friendly smile.",
                  "%^MAGENTA%^Gnome says: %^RESET%^Good day!"}),0);

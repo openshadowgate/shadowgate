@@ -32,7 +32,7 @@ void create(){
     set_mlevel("mage",15);
    set_guild_level("mage",15);
 	set_spells(({"fireball","lightning bolt","cone of cold","magic missile"}));
-	set_property("magic resistance",20);
+	set_mob_magic_resistance("average");
 	set_wielding_limbs(({"right hand","left hand"}));
 	set_overall_ac(2);
 	ob = new("/d/tharis/obj/greenrobe");

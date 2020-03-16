@@ -22,7 +22,7 @@ void create(){
    set_overall_ac(-13);
    set("aggressive",20);
    set_exp(15000);
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
 //  set_property("weapon resistance",4);
 // lowered to 3 following new enchant restrictions - L20 players certainly have no chance at +4 weapons
    set_property("weapon resistance",3);

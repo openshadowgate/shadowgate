@@ -7,7 +7,7 @@ void create(){
   set_name("vengance knight");
   set_id(({"skeletal knight","knight","skeleton","vengance knight"}));
   set_race("undead");
-  set_property("magic resistance",66);
+  set_mob_magic_resistance("average");
   set_gender("male");
   set_short("%^BOLD%^%^BLUE%^Vengance knight%^BOLD%^%^RED%^");
   set_long(

@@ -57,7 +57,7 @@ create (){
   set_spells(({"magic missile","cone of cold","fireball","acid arrow","hideous laughter",
   }));
   set_stoneSkinned(10);
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_spell_chance(50);
   break;
   case 0:

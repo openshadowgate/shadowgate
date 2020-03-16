@@ -40,7 +40,7 @@ inherit "std/monster";
 	set_size(2);
       set_property("add kits",11);
 	set_alignment(6);
-	set_property("magic resistance",30);
+	set_mob_magic_resistance("average");
 		switch(random(6)){
 case 0:
 	set_class("fighter");

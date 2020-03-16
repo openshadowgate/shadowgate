@@ -54,7 +54,7 @@ void create() {
     set_max_hp(500);
     set_hp(500);
     set_exp(100000);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_funcs(({"dart"}));
     set_func_chance(25);
    set_property("full attacks",1);

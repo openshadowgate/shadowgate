@@ -28,6 +28,6 @@ void create() {
    set_overall_ac(-30);
    set_property("no bows", 1);
    set_property("no rush", 1);
-   set_property("magic resistance", 66);
+   set_mob_magic_resistance("average");
    set_resistance("fire",15);
 }

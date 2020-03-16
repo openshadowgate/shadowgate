@@ -58,7 +58,7 @@ void create()
     set_guild_level("mage",x+1);
     set_guild_level("thief",x+2);
     set_property("full attacks",1);
-    set_property("magic resistance",55);
+    set_mob_magic_resistance("average");
     set_spells(({"burning hands","fireball",
     "scorcher","wall of fire","magic missile","lower resistance"}));
     set_spell_chance(40);

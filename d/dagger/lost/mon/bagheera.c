@@ -4,7 +4,7 @@ inherit MONSTER;
 void create()
 {
   ::create();
-  set_property("magic resistance",50);
+  set_mob_magic_resistance("average");
   set_property("swarm",1);
   set_name("Bagheera");
   set_id( ({"fierce frothing bagheera","frothing bagheera","warrior","bagheera","warrior2"}) );

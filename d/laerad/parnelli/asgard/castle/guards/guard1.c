@@ -22,7 +22,7 @@ void create(){
     set_size(2);
     set_hd(10+(random(8)),15);
     set_hp(query_hd()*10);
-    set_property("magic resistance",35);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_property("full attacks",1);
     set_overall_ac(2);

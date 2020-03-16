@@ -42,7 +42,7 @@ void create()
 	set_stats("constitution",18);
 	set_stats("charisma",20);
 	set_stats("dexterity",5);
-	set_property("magic resistance",75);
+	set_mob_magic_resistance("average");
 	set_exp(5000);
 	set_max_level(20);
 	new("/d/magic/symbols/helm_symbol.c")->move(TO);

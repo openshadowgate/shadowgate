@@ -31,7 +31,7 @@ void create() {
     set_mlevel("paladin",30);
     set_hp(700);
     set_max_hp(700);
-    set_property("magic resistance",95);
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     set_exp(50000);
     set_size(3);

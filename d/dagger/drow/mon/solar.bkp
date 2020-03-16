@@ -26,7 +26,7 @@ set_id(({"solar"}));
     set_guild_level("paladin",30);
     set_hp(700);
     set_max_hp(700);
-    set_property("magic resistance",95);
+    set_mob_magic_resistance("average");
     set_hd(30,7);
     set_exp(50000);
     set_size(3);

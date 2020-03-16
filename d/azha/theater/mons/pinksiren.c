@@ -48,7 +48,7 @@ inherit "std/monster";
 	set_stats("constitution",16);
 	set_stats("wisdom",12);
 	set_alignment(6);
-	set_property("magic resistance",30);
+	set_mob_magic_resistance("average");
 	set_spell_chance(40);
 	set_spells( ({"sonic orb", "shout","vampiric touch"}) );
 	set_property("full attacks",1);

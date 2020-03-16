@@ -13,7 +13,7 @@ create (){
   set_property("swarm",1);
   set_property("no dominate",1);
   set_property("no bows",1);
-  set_property("magic resistance",35);
+  set_mob_magic_resistance("average");
   set_property("magic",1);
    set_short("Dalvin, Captain of Torm Outpost");
   set_property("bounty hunter",1);

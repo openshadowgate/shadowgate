@@ -53,7 +53,7 @@ AZHA
     set_property("no paralyze", 1);
     set_property("magic", 1);
     set_property("no bows", 1);
-    set_property("magic resistance", 30);
+    set_mob_magic_resistance("average");
 }
 
 void init(){

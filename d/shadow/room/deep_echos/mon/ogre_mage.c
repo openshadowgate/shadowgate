@@ -45,7 +45,7 @@ void create (){
    if(random(2)==0)set_spells(({"ray of enfeeblement","ball lightning","acid breath",}));
    else set_spells(({"gust of wind","hold person","acid orb",}));
    
-   set_property("magic resistance",30);
+   set_mob_magic_resistance("average");
    set_achats(5, ({"The ogre-mage sneers at you and continues his attack.",
    "Ogre-mage drools and grins at you hungrily.",
    "Ogre-mage laughs evily.",}) );

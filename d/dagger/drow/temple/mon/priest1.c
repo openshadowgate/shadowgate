@@ -25,7 +25,7 @@ void create() {
     set_overall_ac(-5);
     set_hp(175);
     set_property("no bump",1);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     set_max_hp(175);
     set_exp(20000);

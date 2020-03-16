@@ -44,7 +44,7 @@ void create() {
     set_stats("wisdom",15);
     set_stats("intelligence",15);
     set_stats("charisma",-3);
-    set_property ("magic resistance",28);
+    set_mob_magic_resistance("average");
     set_exp(22000);
     set_thief_skill("hide in shadows",95);
     set_max_level(36);

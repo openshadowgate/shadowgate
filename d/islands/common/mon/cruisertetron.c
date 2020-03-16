@@ -38,7 +38,7 @@ void create()
     set_stats("dexterity",30);
     set_stats("constitution",30);
     set("aggressive","aggfunc");
-    set_property("magic resistance",90);
+    set_mob_magic_resistance("average");
     set_property("damage resistance",20);
     set_property("spell damage resistance",40);
     set_new_exp(60,"boss");

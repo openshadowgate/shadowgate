@@ -96,7 +96,7 @@ void create(){
   	ob->set_uses(random(25)+25);
 
   	set_money("gold",random(3000));
-  	set_property("magic resistance",65);
+  	set_mob_magic_resistance("average");
   	parties = ({});
 }
 

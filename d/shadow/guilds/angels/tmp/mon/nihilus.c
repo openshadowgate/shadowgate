@@ -30,7 +30,7 @@ void create(){
 //    set("aggressive","member");
     set("aggressive", 21);
     set_property("swarm", 1);        
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_property("strength","paralyzed");
     set_property("no bump",1);
     set_class("fighter");

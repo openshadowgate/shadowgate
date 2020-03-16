@@ -45,7 +45,7 @@ void create()
     set_alignment(9);
     set_mlevel("mage",24);
     set_guild_level("mage",24);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_overall_ac(-8);
     set_hp(787 + random(50));
     set_new_exp(20, "very high");

@@ -77,7 +77,7 @@ VOID
     ob->move(TO);
   	command("wear ring");
 
-  	set_property("magic resistance",-15);
+  	set_mob_magic_resistance("average");
   	parties = ({});
 }
 

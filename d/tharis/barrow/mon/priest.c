@@ -37,7 +37,7 @@ void create() {
     set_hp(165);
    set_max_level(23);
     set_property("no bump",1);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_max_hp(165);
     set_exp(9700);
     set_level(20);

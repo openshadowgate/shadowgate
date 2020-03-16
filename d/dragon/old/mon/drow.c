@@ -27,7 +27,7 @@ and white hair.");
     set_stats("strength",17);
     set_stats("dexterity",19);
     set_stats("constitution",17);
-    set_property ("magic resistance",90);
+    set_mob_magic_resistance("average");
     set_exp(1300);
     set_alignment(9);
     set("aggressive","aggfunc");

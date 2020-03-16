@@ -37,7 +37,7 @@ OLI
 	else
 		set_gender("female");
 	set_overall_ac(2);
-	set_property("magic resistance",50);
+	set_mob_magic_resistance("average");
 	set_hd(8,8);
 	set_hp(45);
 	set_exp(1100);

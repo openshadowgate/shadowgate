@@ -44,7 +44,7 @@ create() {
   command("wield sword");
   add_money("gold",random(100));
   //set_exp(query_max_hp() * (14 + random(5)));
-  set_property("magic resistance", 15 + random(26));
+  set_mob_magic_resistance("average");
   set_property("full attacks",1);
   add_money("gold",50 + random(151));
   if(!random(3)) add_money("platinum",5 + random(11));

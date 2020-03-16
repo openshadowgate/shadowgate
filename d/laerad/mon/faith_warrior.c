@@ -127,7 +127,7 @@ void create(){
     set_stats("dexterity",20);
     set_stats("constitution",19);
     set_stats("charisma",18);
-    set_property("magic resistance",40);
+    set_mob_magic_resistance("average");
     set_property("add kits",20);
     if(!random(5)) new("/d/deku/armours/ring_p")->move(TO);
     obj = new("/d/shadow/obj/clothing/silkcloak");

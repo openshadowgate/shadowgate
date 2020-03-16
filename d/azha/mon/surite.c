@@ -25,7 +25,7 @@ create() {
         id = random(10)+"surite"+time();
         set_name("Surite");
         set_id(({ "surite", "cleric", "warrior cleric", "surite cleric", id}));
-        set_property("magic resistance", 15);
+        set_mob_magic_resistance("average");
         set_short("Surite warrior cleric");
         set_long(
 @TSARVEN

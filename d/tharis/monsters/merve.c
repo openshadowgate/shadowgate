@@ -9,7 +9,7 @@ void create(){
 	set_name("Merve");
 	set_id(({"merve","Merve"}));
 	set("short","Merve, the elven registar");
-	set_property("magic resistance",25);
+	set_mob_magic_resistance("average");
 	set("long",
 @OLI
 	Merve is a small man with no distinguishing features except for 

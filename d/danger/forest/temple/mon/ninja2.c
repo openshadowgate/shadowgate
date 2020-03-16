@@ -33,7 +33,7 @@ void create() {
    set_gender("female");
    set_race("human");
    set_alignment(3);
-   set_property("magic resistance", 90);
+   set_mob_magic_resistance("average");
    set_property("full attacks", 1);
    set_property("swarm", 1);
    ob = new(OBJ+"dagger")->move(TO);

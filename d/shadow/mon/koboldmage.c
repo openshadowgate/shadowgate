@@ -61,7 +61,7 @@ int droll;
    set_stats("dexterity",16);
    set_stats("constitution",7);
    set_max_hp(query_hp());
-   if(!random(4)) set_property("magic resistance",20);
+   if(!random(4)) set_mob_magic_resistance("average");
    set_wielding_limbs( ({ "right hand", "left hand"}) );
    set_monster_feats(({
 	  "dodge",

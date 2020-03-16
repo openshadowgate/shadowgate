@@ -51,7 +51,7 @@ object obj,obj2,obj3;
    set_stats("charisma", 9);
    set_stats("dexterity", 14);
    set_stats("constitution", 20);
-   set_property("magic resistance",20);
+   set_mob_magic_resistance("average");
    set_property("full attacks",1);
    set_property("alignment adjustment",-1);
    add_money("gold",random(200));

@@ -59,7 +59,7 @@ void create()
    	set_stats("charisma",3);
    	set("aggressive","aggression");
 	set_property("weapon resistance", 3);
-	set_property("magic resistance", 50);
+	set_mob_magic_resistance("average");
    	set_new_exp(35, "very high");
 	set_attack_bonus(15);
 	set_property("no_bump",1);
@@ -125,7 +125,7 @@ void remove_my_collar()
 			break;
 		case 2:
 			MyAuraColor = "%^BOLD%^%^BLACK%^black%^RESET%^";
-			TO->set_property("magic resistance", -1000);
+			TO->set_mob_magic_resistance("average");
 			break;
 		case 3:
 			TO->remove_property("damage resistance");
@@ -194,7 +194,7 @@ void AdjustCollar()
 		case 2:
 			//complete magic resistance - black aura
 
-			TO->set_property("magic resistance", 1000);
+			TO->set_mob_magic_resistance("average");
 			tell_room(ETO, TOQCN +"%^BOLD%^%^BLUE%^ is suddenly surrounded by "+
 			"a %^BOLD%^%^BLACK%^black aura%^BOLD%^%^BLUE%^!%^RESET%^");
 

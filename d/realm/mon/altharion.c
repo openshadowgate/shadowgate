@@ -70,7 +70,7 @@ void create()
    	set_stats("intelligence",10);
    	set_stats("charisma",3);
    	set("aggressive","aggression");
-   	set_property ("magic resistance", 35);
+   	set_mob_magic_resistance("average");
    	set_new_exp(35, "very high");
       set_funcs(({"maim", "anger", "rage"}));
    	set_func_chance(40);

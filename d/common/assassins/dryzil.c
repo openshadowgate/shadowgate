@@ -48,7 +48,7 @@ void create() {
    set_stats("dexterity", 22);
    set_stats("constitution", 22);
    set_class("thief");
-   set_property("magic resistance",50);
+   set_mob_magic_resistance("average");
    set_guild_level("thief",23);
    set_thief_skill("move silently",95);
    set_thief_skill("hide in shadows",95);

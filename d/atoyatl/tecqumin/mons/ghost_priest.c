@@ -82,7 +82,7 @@ void create()
       set_stats("dexterity",18);
       set_new_exp(38, "normal");
   	set_alignment(4);
-      set_property("magic resistance",65);
+      set_mob_magic_resistance("average");
       set_property("full attacks",1);
       set_property("swarm", 1);
       add_money("gold", random(2000)+2000);

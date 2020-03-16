@@ -46,7 +46,7 @@ void create()
     set_guild_level("fighter",x);
     set_guild_level("cleric",x);
     set_property("full attacks",1);
-    set_property("magic resistance",15);
+    set_mob_magic_resistance("average");
     set_hp(400 + random(51));
     //set_exp(12000);
     set_new_exp(25, "very high");

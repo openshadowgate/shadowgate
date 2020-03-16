@@ -44,7 +44,7 @@ stone around, shows the true age of the figured woman.
   ob->move(TO);
   new("/d/dragon/obj/misc/wand")->move(this_object());
   set_alignment(9);
-  set_property("magic resistance", 60);
+  set_mob_magic_resistance("average");
 }
 
 void init() {

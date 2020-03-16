@@ -40,7 +40,7 @@ void create()
     set_stats("charisma",10);
     set_stats("dexterity",10);
     set_stats("constitution",14);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_hp(775 + random(51));
     set_new_exp(20, "boss");
     set_spell_chance(70);

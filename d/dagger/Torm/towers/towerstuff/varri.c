@@ -23,7 +23,7 @@ create() {
   set_mlevel("mage",40);
     set_body_type("human");
     set_property("swarm",1);
-  set_property("magic resistance",90);
+  set_mob_magic_resistance("average");
     set_spell_chance(85);
   set_guild_level("mage",40);
     set_spells(({
