@@ -38,7 +38,7 @@ void create(){
     set_stats("constitution",20);
     set_stats("intelligence",16);
     set_stats("wisdom",20);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_property("full attacks",1);
     set_property("no dominate",1);
     set_property("no death",1);

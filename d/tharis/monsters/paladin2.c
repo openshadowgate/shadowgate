@@ -33,7 +33,7 @@ void create(){
         "call lightning",
         "flame strike"
     }));
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_overall_ac(0);
     set_property("no rush",1);
     set_property("no dominate",1);

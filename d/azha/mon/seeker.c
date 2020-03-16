@@ -52,7 +52,7 @@ TSARVEN
   set_body_type("elf");  
   set_alignment(1);  
   set_size(2);  
-  set_property("magic resistance", 10);
+  set_mob_magic_resistance("average");
   set_stats("intelligence",16);  
   set_stats("wisdom",12);  
   set_stats("strength",10);  

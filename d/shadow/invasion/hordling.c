@@ -15,7 +15,7 @@ void create(){
     set_body_type("human");
     set_race("hordling");
     set_size(2);
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_property("swarm",1);
     make_me();
 }

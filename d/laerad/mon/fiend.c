@@ -32,7 +32,7 @@ void create(){
     add_limb("left wing","torso",0,0,0);
     add_limb("tail","torso",0,0,0);
     set_guild_level("fighter",40);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_property("no bows",1);
     set_property("magic",1);
     set_property("no animate",1);

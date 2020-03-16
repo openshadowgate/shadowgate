@@ -22,7 +22,7 @@ void create(){
     set_size(3);
     set_hd(12,34);
     set_hp(130);
-    set_property("magic resistance",20);
+    set_mob_magic_resistance("average");
     set_property("alignment adjustment",4);
     set_property("swarm",1);
     set_stats("strength",14);

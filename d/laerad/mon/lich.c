@@ -33,7 +33,7 @@ void create() {
     set_hp(query_hd() * 12);
     set_guild_level("mage",query_hd());
     set_attack_bonus(10);
-    set_property("magic resistance",50);
+    set_mob_magic_resistance("average");
     set_property("no dominate",1);
     set_property("no death",1);
     set_property("no rush",1);

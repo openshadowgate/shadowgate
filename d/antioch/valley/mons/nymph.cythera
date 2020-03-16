@@ -120,7 +120,7 @@ void create()
 	set_stats("charisma",25);
 	set_property("swarm",1);
 	set("aggressive",10);
-	set_property("magic resistance",50);
+	set_mob_magic_resistance("average");
 	set_class("fighter");
 	set_mlevel("fighter",20);
 	set_attack_limbs(({"right hand","left hand"}));

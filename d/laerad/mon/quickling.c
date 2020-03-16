@@ -25,7 +25,7 @@ void create(){
     set_class("thief");
     set_mlevel("thief",query_hd()); 
     set_guild_level("thief",query_hd());
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_stats("strength",17);
     set_stats("dexterity",22);
     set_stats("charisma",18);

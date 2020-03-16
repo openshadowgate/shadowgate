@@ -38,7 +38,7 @@ void create(){
     set_stats("constitution",20);
     set_stats("intelligence",7);
     set_stats("wisdom",8);
-    set_property("magic resistance",30);
+    set_mob_magic_resistance("average");
     set_property("full attacks",1);
     add_money("gold",random(1200)+500);
     add_money("copper",random(2500)+2500);

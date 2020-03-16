@@ -25,7 +25,7 @@ void create(){
     set_stats("dexterity",14);
     set_exp(7000);
     set_overall_ac(-3);
-    set_property("magic resistance",40);
+    set_mob_magic_resistance("average");
     set_property("alignment adjustment",6);
     set_property("swarm",1);
     set("aggressive",20);

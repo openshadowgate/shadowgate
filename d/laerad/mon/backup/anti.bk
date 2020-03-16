@@ -27,7 +27,7 @@ void create(){
 	"call lightning",
 	"cause serious wounds"
     }));
-    set_property("magic resistance",25);
+    set_mob_magic_resistance("average");
     set_overall_ac(0);
     set_exp(15000);
     set_stats("strength",18);
