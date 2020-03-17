@@ -44,7 +44,7 @@ void create()
     setupName("watch");
     set_race("human");
     set_hd(15 + random(15), 1);
-    set_hp(roll_dice(query_hd(), 15));
+    set_hp(TO->query_max_hp());
     set_class("fighter");
     add_search_path("/cmds/fighter");
     set_property("full attacks", 1);
