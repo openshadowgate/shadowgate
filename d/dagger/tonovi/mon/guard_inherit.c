@@ -21,12 +21,9 @@ void create()
     set_id(({ "guard", "tonovi guard", "town guard", "Gtonovimon" }));
     set_short("Tonovi Guard");
     set_long(
-        @G
-        This is one of the trained guards of Tonovi, a soldier
-        that showed promise and was given the prestigious task
-        of protecting his homeland.Wearing just leather armor,
-        you suspect he is one of the newer recruits.
-        G
+"
+This is one of the trained guards of Tonovi, a soldier that showed promise and was given the prestigious task of protecting his homeland.Wearing just leather armor, you suspect he is one of the newer recruits.
+"
         );
     set_gender("male");
     set_race("human");
