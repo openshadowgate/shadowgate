@@ -63,7 +63,7 @@ void create()
     anum = 4;
     set_attack_limbs(({ "right hand", "right hand2", "right hand3", "right hand4", "left hand", "left hand2", "left hand3", "left foot", "left foot2", "right foot", "right foot2", "right foot3" }));
     alimbs = (string*)TO->query_attack_limbs();
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_attacks_num(anum);
     set_damage(1, 6);
     ob = new("/d/common/obj/brewing/herb_special_inherit");
