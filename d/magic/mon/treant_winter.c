@@ -38,7 +38,7 @@ void create(){
    add_limb("right limb","trunk",0,0,0);
    add_limb("foliage","trunk",0,0,0);
    add_limb("root","trunk",0,0,0);
-   add_limb("left limb","trunk",0,0,0);   
+   add_limb("left limb","trunk",0,0,0);
    set_attack_limbs(({"right limb", "left limb"}));
    set_base_damage_type("bludgeon");
    set_funcs(({"tangle"}));
@@ -60,9 +60,8 @@ object query_caster(){return caster;}
 void set_mylevel(int x){
    mylevel = x;
    set_hd(mylevel,10);
-   set_hp(query_hd()*10);
    set_attacks_num((mylevel/13)+1);
-   set_damage(2,(mylevel/4)); 
+   set_damage(2,(mylevel/4));
    set_overall_ac(10-mylevel);
    set_stats("strength",18);
    set_stats("intelligence",7);
