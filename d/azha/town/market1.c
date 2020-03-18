@@ -36,5 +36,4 @@ reset()
 {
     ::reset();
     AOVER->setup_monsters(TO, "street");
-    AOVER->always_add_monster(TO, AMONDIR + "bokara", 1);
 }

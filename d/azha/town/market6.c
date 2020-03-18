@@ -7,7 +7,7 @@
 #include "/d/azha/azha.h"
 #include "/d/tsarven/include/southern.h"
 
-inherit ROOM;
+inherit "//d/azha/town/market1";
 
 void create()
 {

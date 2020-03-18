@@ -14,23 +14,14 @@ void create() {
    set_terrain(CITY);
    set_travel(PAVED_ROAD);
 	set_light(2);
-	set_indoors(0);  
+	set_indoors(0);
 	set_short("High Street, Azha, outside Market Square");
   set_long(
-@AZHA
-%^BOLD%^High Street, outside Market Square%^RESET%^
-	You are in the center of the town of Azha, on High Street.  To the
-south, you notice, wagons turning to enter the walled trade market of
-the town.  Guards inspect licences and wagons carefully to prevent
-the entrance of contraband or black marketeers.  An official collects
-the market fees of the licenced traders.  To the north, you see a
-road leading straight out of the market gate, probably towards the
-taverns and town offices.  High Street continues to the east and
-west.
-AZHA
+"%^BOLD%^High Street, outside Market Square%^RESET%^
+%^ORANGE%^You are in the center of the town of Azha, on High Street. To thesouth, you notice, wagons turning to enter the walled trade market ofthe town. Guards inspect licences and wagons carefully to preventthe entrance of contraband or black marketeers. An official collectsthe market fees of the licenced traders. To the north, you see aroad leading straight out of the market gate, probably towards thetaverns and town offices. High Street continues to the east andwest."
     );
 	set_exits(([
-	"west" : "/d/azha/town/high2",     
+	"west" : "/d/azha/town/high2",
   "south" : "/d/azha/town/market5",
 	"east" : "/d/azha/town/high4",
 	"north" : "/d/azha/town/center2"

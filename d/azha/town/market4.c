@@ -30,5 +30,6 @@ reset()
 {
     ::reset();
     AOVER->setup_monsters(TO, "public");
+    AOVER->always_add_monster(TO, AMONDIR + "bokara", 1);
 //          AOVER->add_monster(TO, AMONDIR+"murad", 1);
 }
