@@ -270,15 +270,8 @@ static void disconnect_copy(string str, object ob) {
     internal_remove();
 }
 
-static private void exec_user() {
-    if (MULTI_D->query_prevent_login(__Name)) {
-  seteuid(UID_LOG);
-        log_file("watch/multilog_denial",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()));
-          message("logon", read_file("/news/_link_multilog"), this_object());
-  seteuid(getuid());
-        internal_remove();
-        return;
-    }
+static private void exec_user()
+{
     __Player->set_name(__Name);
     if (!exec(__Player, this_object())) {
         message("logon", "\Problem connecting.\n", this_object());
@@ -286,11 +279,11 @@ static private void exec_user() {
         return;
     }
     __Player->setup();
-    if (member_array("neck",__Player->query_limbs()) == -1)
-        __Player->add_limb("neck","neck",__Player->query_max_hp(),0,0);
+    if (member_array("neck", __Player->query_limbs()) == -1) {
+        __Player->add_limb("neck", "neck", __Player->query_max_hp(), 0, 0);
+    }
     destruct(this_object());
 }
-
 static void new_user(string str) {
     if ((str = lower_case(str)) == "" || str[0] != 'y') {
         message("logon", "\nOk, then enter the name you really want: ", this_object());
