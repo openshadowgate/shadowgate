@@ -42,7 +42,7 @@ void create()
     set_alignment(3);
     add_limb("right claw", "right hand", 0, 0, 0);
     add_limb("left claw", "left hand", 0, 0, 0);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({ "right claw", "left claw" }));
     set_damage(4, 10);
     add_money("gold", random(1000) + 50);
