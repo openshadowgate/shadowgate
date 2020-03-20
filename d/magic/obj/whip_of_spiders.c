@@ -79,22 +79,30 @@ int save_me(string file)
 
 void make_me(object spell)
 {
+    int enchant, charlev = (spell->query_caster())->query_level();
     spellobj = spell;
-    TO->set_property("enchantment", spell->query_clevel() / 8 + 1);
+    enchant = spell->query_clevel();
+    enchant = enchant < 1 ? 1 : enchant;
+    enchant = enchant > charlev ? charlev : enchant;
+    enchant = (enchant - 3) / 5;
+    TO->set_property("enchantment", enchant);
 }
 
 int hit_func(object targ)
 {
     targ = ETO->query_current_attacker();
-    if(!objectp(ETO)) return 1;
-    if(!objectp(targ)) return 1;
+    if (!objectp(ETO)) {
+        return 1;
+    }
+    if (!objectp(targ)) {
+        return 1;
+    }
 
-    if(!random(6))
-    {
-        tell_object(ETO,"%^BOLD%^%^WHITE%^Some spiders of the whip fall off to bite "+targ->QCN+"!");
-        tell_object(targ,"%^BOLD%^%^WHITE%^You feel painful bites of spiders from "+ETOQCN+"'s as they crawl around you!");
-        tell_room(EETO,"%^BOLD%^%^WHITE%^Spiders on "+ETOQCN+"'s whip bite into "+targ->QCN+"!",({ETO,targ}));
-        targ->do_damage("torso",random(6)+6);
+    if (!random(6)) {
+        tell_object(ETO, "%^BOLD%^%^WHITE%^Some spiders of the whip fall off to bite " + targ->QCN + "!");
+        tell_object(targ, "%^BOLD%^%^WHITE%^You feel painful bites of spiders from " + ETOQCN + "'s as they crawl around you!");
+        tell_room(EETO, "%^BOLD%^%^WHITE%^Spiders on " + ETOQCN + "'s whip bite into " + targ->QCN + "!", ({ ETO, targ }));
+        targ->do_damage("torso", random(6) + 6);
         return 1;
     }
 }
