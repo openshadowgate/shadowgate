@@ -23,7 +23,7 @@ void create(){
     set_overall_ac(2);
     set_exp(1100);
     set("aggressive",18);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"head","right forepaw","left forepaw"}));
     set_attacks_num(3);
     set_damage(1,6);

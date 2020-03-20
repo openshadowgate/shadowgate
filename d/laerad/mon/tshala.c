@@ -29,7 +29,7 @@ void create(){
 	set_property("weapon resistance",2);
     set_attack_limbs(({"head","tail"}));
     set_attacks_num(4);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(1,12);
     set_class("mage");
     set_hd(19,38);    // was 9

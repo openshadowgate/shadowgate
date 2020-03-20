@@ -39,7 +39,7 @@ void create(){
 	new("/d/laerad/obj/ring_stars")->move(this_object());
         command("wear ring");
     }
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_attack_limbs(({"right hand","left hand"}));
     set_attacks_num(2);
     set_damage(1,6);

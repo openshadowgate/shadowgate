@@ -29,7 +29,7 @@ void create(){
     set("aggressive",19); // was 15
     set_attack_limbs(({"head", "right fore hoof","left fore hoof"}));
     set_attacks_num(3);	  // was 1
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(3,6);
 	set_moving(1);
 	set_speed(45);

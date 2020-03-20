@@ -30,7 +30,7 @@ void create(){
     set_property("swarm",1);
     set_attack_limbs(({"right hand","left hand"}));
     set_attacks_num(2);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(2,6);
     set_funcs(({"gaze"}));
     set_func_chance(55);

@@ -40,7 +40,7 @@ void create(){
     add_limb("left middle paw","torso", 0, 0, 0);
     set_attack_limbs(({"right forepaw","left forepaw","head","right middle paw","left middle paw"}));
     set_attacks_num(5);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(3,6);
     set_stats("dexterity",12);
 //    set_funcs(({"psionic"}));

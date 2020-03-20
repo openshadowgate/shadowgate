@@ -43,7 +43,7 @@ void create(){
     set_spell_chance(15);
     set_attack_limbs(({"right hand","left hand"}));
     set_property("full attacks",1);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(6,6);
     set_attack_bonus(2);
     set_damage_bonus(2);

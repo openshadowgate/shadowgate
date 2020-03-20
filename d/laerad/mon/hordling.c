@@ -102,7 +102,7 @@ void make_me()
         break;
 
     case "thief":
-        set_base_damage_type("thiefslashing");
+        set_base_damage_type("slashing");
         set_attack_limbs(({ "right hand", "left hand" }));
         set_attacks_num(2);
         set_damage(2, 8);
@@ -112,7 +112,7 @@ void make_me()
         break;
 
     case "mage":
-        set_base_damage_type("thiefslashing");
+        set_base_damage_type("slashing");
         set_attack_limbs(({ "right hand", "left hand" }));
         set_attacks_num(1);
         set_damage(1, 20);
@@ -134,7 +134,7 @@ void make_me()
         break;
 
     case "cleric":
-        set_base_damage_type("thiefslashing");
+        set_base_damage_type("slashing");
         set_attack_limbs(({ "right hand", "left hand" }));
         set_attacks_num(2);
         set_damage(3, 6);
@@ -155,7 +155,7 @@ void make_me()
         break;
 
     case "antipaladin":
-        set_base_damage_type("thiefslashing");
+        set_base_damage_type("slashing");
         set_attack_limbs(({ "right hand", "left hand", "head" }));
         set_attacks_num(4);
         set_damage(3, 8);

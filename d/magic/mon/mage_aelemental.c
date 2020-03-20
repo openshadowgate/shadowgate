@@ -36,7 +36,7 @@ void create(){
     set_attack_limbs(({"base"}));
     set_damage(2,10);
     set_attacks_num(2);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_gender("sexless");
     set_overall_ac(4);
   }

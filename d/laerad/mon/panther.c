@@ -24,7 +24,7 @@ void create(){
     set_exp(1500);
     set("aggressive",18);
     set_property("swarm",1);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"head","right forepaw","left forepaw"}));
     set_attacks_num(3);
     set_damage(1,8);

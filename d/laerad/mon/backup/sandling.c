@@ -26,7 +26,7 @@ void create(){
     set("aggressive","grab");
     set_attack_limbs(({"right hand"}));
     set_attacks_num(1);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(2,8);
     set_invis();
 }

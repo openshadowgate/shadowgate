@@ -41,7 +41,7 @@ void create(){
     set("aggressive",19);
     set_attack_limbs(({"right hand","left hand","head"}));
     set_attacks_num(3);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(4,8);
     set_stats("strength",22);
     set_stats("dexterity",16);

@@ -38,7 +38,7 @@ void create(){
     set_mob_magic_resistance("average");
     set("aggressive",10);
     set_stats("strength",19);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"right forepaw","left forepaw","head"}));
     attlimbs = (string *)TO->query_attack_limbs();
     if(tents) attlimbs += ({"right tentacle","left tentacle"});

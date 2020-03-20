@@ -43,7 +43,7 @@ void create(){
    set_gender("sexless");
    set_attack_limbs(({"right fist","left fist"}));
    set_damage(5,6);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_attacks_num(1);
    set_overall_ac(0);
 }

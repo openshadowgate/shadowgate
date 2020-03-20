@@ -36,7 +36,7 @@ void create()
     remove_limb("tail");
     add_limb("crystal shard","torso",0,0,0);
     set_attack_limbs(({"crystal shard"}));
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_exp(1);
     set_stats("intelligence",12);
     set_stats("wisdom",12);

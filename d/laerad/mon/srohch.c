@@ -29,7 +29,7 @@ void create(){
     set("aggressive",14);
     set_attack_limbs(({"right forepaw","left forepaw","head"}));
     set_attacks_num(3);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1,6);
     set_attack_bonus(6);
     set_max_level(35); //added by Ares 3-31-05, they should be moving on long before now, but just in case

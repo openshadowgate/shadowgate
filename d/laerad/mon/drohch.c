@@ -33,7 +33,7 @@ void create(){
     set("aggressive",18);
     set_attack_limbs(({"claw1","claw2","claw3","claw4","claw5","claw6"}));
     set_attacks_num(6);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1,6);
     set_attack_bonus(1);
     set_funcs(({"bite"}));
