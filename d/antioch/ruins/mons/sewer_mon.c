@@ -36,7 +36,7 @@ void create()
     set_attack_limbs(({ "right claw", "left claw", "mouth", "tail" }));
     set_attacks_num(4);
     set_damage(3, 5);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_property("swarm", 1);
     set_mob_magic_resistance("average");
     set_property("no dominate", 1);

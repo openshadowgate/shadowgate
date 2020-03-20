@@ -30,7 +30,7 @@ void create()
     set_stats("strength", 18);
     set_attack_limbs(({ "right hand", "left hand" }));
     set_attacks_num(2);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 8);
     set_property("swarm", 1);
     set("aggressive", 25);
