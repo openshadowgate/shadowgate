@@ -6,10 +6,13 @@ private string size2str(int x)
     switch (x) {
     case 1:
         return "small"; break;
+
     case 2:
         return "medium"; break;
+
     case 3:
         return "large"; break;
+
     case 4:
         return "giant"; break;
     }
@@ -35,20 +38,37 @@ private string checkrepair(string mytype, string* repairtype)
     if (!sizeof(repairtype)) {
         switch (mytype) {
         case "clothing": return "tailor"; break;
-        case "bracer": case "ring": return "jeweller"; break;
-        case "chain": case "armour": case "shield": case "armor": case "plate": return "armorsmith"; break;
-        case "leather": case "thiefshield": return "leatherworker"; break;
+
+        case "bracer":
+        case "ring": return "jeweller"; break;
+
+        case "chain":
+        case "armour":
+        case "shield":
+        case "armor":
+        case "plate": return "armorsmith"; break;
+
+        case "leather":
+        case "thiefshield": return "leatherworker"; break;
+
         case "wood": return "woodworker"; break;
+
         default: return "invalid"; break;
         }
     }
     switch (repairtype[0]) {
     case "jewel": feedback = "jeweller"; break;
+
     case "armorsmith": feedback = "armorsmith"; break;
+
     case "tailor": feedback = "tailor"; break;
+
     case "woodwork": feedback = "woodworker"; break;
+
     case "leatherwork": feedback = "leatherworker"; break;
+
     case "weaponsmith": feedback = "weaponsmith"; break;
+
     default: feedback = "invalid"; break;
     }
     if (sizeof(repairtype) > 1) {
@@ -56,11 +76,17 @@ private string checkrepair(string mytype, string* repairtype)
             feedback += "%^RESET%^ or %^GREEN%^";
             switch (repairtype[i]) {
             case "jewel": feedback += "jeweller"; break;
+
             case "armorsmith": feedback += "armorsmith"; break;
+
             case "tailor": feedback += "tailor"; break;
+
             case "woodwork": feedback += "woodworker"; break;
+
             case "leatherwork": feedback += "leatherworker"; break;
+
             case "weaponsmith": feedback = "weaponsmith"; break;
+
             default: feedback += "invalid"; break;
             }
         }
@@ -98,9 +124,11 @@ int cmd_discern(string str)
         int num, dice, lnum, ldice;
         int wear;
         int range, multiplier;
+        string damtype;
 
         num = obj->query_wc_num();
         dice = obj->query_wc_dice();
+        damtype = obj->query_damage_type();
 
         wear = (int)obj->query_overallStatus();
 
@@ -124,6 +152,7 @@ int cmd_discern(string str)
         multiplier = obj->query_critical_hit_multiplier();
         range = 20 - (range - 1);
 
+        write("%^WHITE%^It does %^BOLD%^%^GREEN%^" + damtype + " %^RESET%^damage.");
         write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + num + "-" + num * dice + " (" + num + "d" + dice + ")%^RESET%^ damage to normal creatures.");
         write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + lnum + "-" + lnum * ldice + " (" + lnum + "d" + ldice + ")%^RESET%^ damage to large creatures.");
         write("%^WHITE%^It scores critical hit on a roll of %^BOLD%^%^ORANGE%^" + range + "-20%^RESET%^.");
@@ -136,8 +165,7 @@ int cmd_discern(string str)
             write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + num * multiplier + "-" + num * dice * multiplier + " (" + num * multiplier + "d" + dice + ")%^RESET%^ additional damage on a crit to normal creatures.");
             write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + lnum * multiplier + "-" + num * dice * multiplier + " (" + lnum * multiplier + "d" + ldice + ")%^RESET%^ additional damage on a crit to large creatures%^");
         }
-        if (obj->query("PoisonDoses"))
-        {
+        if (obj->query("PoisonDoses")) {
             write("It has %^BOLD%^%^GREEN%^" + obj->query("PoisonDoses") + "%^RESET%^ layers of poison oil.");
             {
                 string poison;
