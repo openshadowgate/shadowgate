@@ -121,14 +121,13 @@ void execute_attack()
                         "%^RESET%^%^BOLD%^%^BLUE%^energy %^CYAN%^radiates%^RESET%^%^BOLD%^%^BLUE%^ outwards from " + caster->QCN + " and bathes you "
                         "in %^YELLOW%^heal%^RESET%^i%^BOLD%^%^YELLOW%^ng %^RESET%^%^BOLD%^%^BLUE%^energy.%^RESET%^", caster);
         }
-        healed += ({ party[i] });
     }
 
-    if (sizeof(healed)) {
-        tell_object(caster, "%^RESET%^%^BOLD%^%^BLUE%^A wave of %^RESET%^%^BOLD%^p%^CYAN%^o%^BLUE%^s%^RESET%^i%^BLUE%^t%^RESET%^%^BOLD%^i%^CYAN%^v%^YELLOW%^e "
-                    "%^RESET%^%^BOLD%^%^BLUE%^energy %^CYAN%^radiates%^RESET%^%^BOLD%^%^BLUE%^ outwards from you and bathes your allies "
-                    "in %^YELLOW%^heal%^RESET%^i%^BOLD%^%^YELLOW%^ng %^RESET%^%^BOLD%^%^BLUE%^energy.%^RESET%^");
-    }
+    /* if (sizeof(healed)) { */
+    /*     tell_object(caster, "%^RESET%^%^BOLD%^%^BLUE%^A wave of %^RESET%^%^BOLD%^p%^CYAN%^o%^BLUE%^s%^RESET%^i%^BLUE%^t%^RESET%^%^BOLD%^i%^CYAN%^v%^YELLOW%^e " */
+    /*                 "%^RESET%^%^BOLD%^%^BLUE%^energy %^CYAN%^radiates%^RESET%^%^BOLD%^%^BLUE%^ outwards from you and bathes your allies " */
+    /*                 "in %^YELLOW%^heal%^RESET%^i%^BOLD%^%^YELLOW%^ng %^RESET%^%^BOLD%^%^BLUE%^energy.%^RESET%^"); */
+    /* } */
 
     if (objectp(place)) {
         place->addObjectToCombatCycle(TO, 1);
