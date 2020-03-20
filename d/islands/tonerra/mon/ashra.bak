@@ -14,12 +14,13 @@ void create()
     set_name("Avatar of Ashra");
     set_id(({ "ashra", "avatar", "god", "shadow god" }));
     set_short("%^BOLD%^%^BLACK%^A%^RESET%^%^MAGENTA%^v%^BOLD%^a%^WHITE%^t%^BLACK%^ar of A%^RESET%^%^MAGENTA%^s%^BOLD%^h%^WHITE%^r%^BLACK%^a%^RESET%^");
-    set_long("This is a god's chosen form. Standing before you is a female figure clothed in billowing shadows that seem to hungrily consume the light around them. Her face is covered with a brilliant procelin mask which has been cracked down the middle. Black tears run from her eyes, but her mouth bears a sinister smile. Tendrils of blackness consume everything around her.");
+    set_long("This is a god's chosen form. Standing before you is a female figure
+clothed in billowing shadows that seem to hungrily consume the light around
+them. Her face is covered with a brilliant procelin mask which has been cracked
+down the middle. Black tears run from her eyes, but her mouth bears a sinister
+smile. Tendrils of blackness consume everything around her.");
     set_body_type("human");
-    add_limb("tendril one", "torso", 0, 0, 0);
-    add_limb("tendril two", "torso", 0, 0, 0);
-    add_limb("tendril three", "torso", 0, 0, 0);
-    add_limb("tendril four", "torso", 0, 0, 0);
+    add_limb("tail", "", 0, 0, 0);
     set_gender("female");
     set_race("god");
     set_hd(60, 9);
@@ -31,21 +32,20 @@ void create()
     set_mlevel("cleric", 70);
     set_guild_level("cleric", 70);
     set_guild_level("mage", 70);
-    set_alignment(9);
-    set_attack_limbs(({ "right claw", "left claw", "mouth", "tendril one", "tendril two", "tendril three", "tendril four" }));
+    set_attack_limbs(({ "right claw", "left claw", "mouth" }));
     set_base_damage_type("slashing");
     set_damage(16, 6);
     set_hit_funcs((["mouth" : (: TO, "mouth" :)]));
     set_attacks_num(5);
     set_property("no death", 1);
     set_property("no bows", 1);
-    set_mob_magic_resistance("high");
+    set_mob_magic_resistance("average");
     set_overall_ac(-75);
     set_max_hp(60000);
     set_hp(query_max_hp());
     set_property("add kits", 40);
     set_new_exp(50, "boss");
-    set_max_level(50);
+    set_max_level(45);
     set_emotes(30, ({ "Ashra whispers : YOU WILL LIVE IN ENDLESS NIGHTMARE...." }), 20);
     set_func_chance(40);
     set_monster_feats(({
@@ -124,7 +124,6 @@ die(object ob)
 }
 
 void heart_beat()
-
 {
     if (!objectp(TO)) {
         return;
