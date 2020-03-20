@@ -47,7 +47,7 @@ PEG
    set_attack_limbs(({"left flame", "right flame"}));
    set_damage(3,8);
    set_attacks_num(1);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_gender("sexless");
    set_overall_ac(0);
 }

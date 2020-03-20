@@ -32,7 +32,7 @@ void create() {
    set_max_hp(2000);
    set_damage(1,1);
    set_attacks_num(0);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    remove_property("swarm");
    set("aggressive",0);
    remove_property("swarm");

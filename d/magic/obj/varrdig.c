@@ -31,7 +31,7 @@ DESC
    set_attack_limbs(({"left water tube", "right water tube"}));
    set_damage(1,4);
    set_attacks_num(2);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_funcs(({"shoot_water"}));
    set_func_chance(25);
    set_overall_ac(-3);
