@@ -37,14 +37,14 @@ void create()
     set_alignment(9);
     set_attack_limbs(({ "right claw", "left claw", "mouth", "tendril one", "tendril two", "tendril three", "tendril four" }));
     set_base_damage_type("slashing");
-    set_damage(16, 6);
+    set_damage(16, 10);
     set_hit_funcs((["mouth" : (: TO, "mouth" :)]));
     set_attacks_num(5);
     set_property("no death", 1);
     set_property("no bows", 1);
     set_mob_magic_resistance("high");
     set_overall_ac(-65);
-    set_max_hp(60000);
+    set_max_hp(125000);
     set_hp(query_max_hp());
     set_property("add kits", 40);
     set_new_exp(60, "boss");
@@ -105,9 +105,11 @@ void init()
         return;
     }
 
+    /*
     if (!interactive(TP) && !TP->query_ibrandul() && !TP->is_merc()) {
         TP->set_hp(-1);
     }
+    
     psize = sizeof(filter_array(all_inventory(ETO), (: userp($1) :)));
     psize = psize < 1 ? 1 : psize;
     if (psize > coreparty) {
@@ -116,6 +118,7 @@ void init()
         set_damage(16, 5 + psize);
         coreparty = psize;
     }
+    */
 }
 
 die(object ob)
