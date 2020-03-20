@@ -19,15 +19,18 @@ void create()
 }
 
 
-int allow_shifted() { return 1; }
-
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
 
-    if(ob->query_class_level("radiant_servant") < 4)
-    {
+    if (ob->query_class_level("radiant_servant") < 4) {
         dest_effect();
         return 0;
     }
@@ -37,9 +40,11 @@ int prerequisites(object ob)
 int cmd_radiant_aura(string str)
 {
     object feat;
-    if(!objectp(TP)) { return 0; }
+    if (!objectp(TP)) {
+        return 0;
+    }
     feat = new(base_name(TO));
-    feat->setup_feat(TP,str);
+    feat->setup_feat(TP, str);
     return 1;
 }
 
@@ -47,8 +52,7 @@ void execute_feat()
 {
     object obj;
 
-    if(FEATS_D->is_active(caster,"radiant aura"))
-    {
+    if (FEATS_D->is_active(caster, "radiant aura")) {
         obj = query_active_feat("radiant aura");
         obj->dest_effect();
         caster = 0;
@@ -83,7 +87,9 @@ void execute_attack()
     party += caster->query_followers() - caster->query_attackers();
     party = distinct_array(party);
 
-    if(!sizeof(party)) { party = ({ caster }); }
+    if (!sizeof(party)) {
+        party = ({ caster });
+    }
 
     for (i = 0; i < sizeof(party); i++) {
         if (!objectp(caster) || caster->query_ghost()) {
@@ -118,15 +124,17 @@ void execute_attack()
         healed += ({ party[i] });
     }
 
-    if(sizeof(healed))
-    {
+    if (sizeof(healed)) {
         tell_object(caster, "%^RESET%^%^BOLD%^%^BLUE%^A wave of %^RESET%^%^BOLD%^p%^CYAN%^o%^BLUE%^s%^RESET%^i%^BLUE%^t%^RESET%^%^BOLD%^i%^CYAN%^v%^YELLOW%^e "
-            "%^RESET%^%^BOLD%^%^BLUE%^energy %^CYAN%^radiates%^RESET%^%^BOLD%^%^BLUE%^ outwards from you and bathes your allies "
-            "in %^YELLOW%^heal%^RESET%^i%^BOLD%^%^YELLOW%^ng %^RESET%^%^BOLD%^%^BLUE%^energy.%^RESET%^");
+                    "%^RESET%^%^BOLD%^%^BLUE%^energy %^CYAN%^radiates%^RESET%^%^BOLD%^%^BLUE%^ outwards from you and bathes your allies "
+                    "in %^YELLOW%^heal%^RESET%^i%^BOLD%^%^YELLOW%^ng %^RESET%^%^BOLD%^%^BLUE%^energy.%^RESET%^");
     }
 
-    if(objectp(place)) { place->addObjectToCombatCycle(TO,1); }
-    else { dest_effect(); }
+    if (objectp(place)) {
+        place->addObjectToCombatCycle(TO, 1);
+    }else {
+        dest_effect();
+    }
     return;
 }
 
