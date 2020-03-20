@@ -1,73 +1,85 @@
 //Coded by Bane//
 #include <std.h>
 inherit WEAPONLESS;
-void create(){
+void create()
+{
     ::create();
-    set_id(({"troll","guard","troll guard"}));
+    set_id(({ "troll", "guard", "troll guard" }));
     set_name("troll guard");
     set_short("A Troll guard");
     set_long(
-	"This is a rather large troll guard.  He is dressed in a hide "+
-	"cloth.  His skin is a putred green and his eyes bulge out of his "+
-	"head.  He stands over 7 feet tall and looks extremely fierce."
-    );
+        "This is a rather large troll guard.  He is dressed in a hide " +
+        "cloth.  His skin is a putred green and his eyes bulge out of his " +
+        "head.  He stands over 7 feet tall and looks extremely fierce."
+        );
     set_body_type("human");
     set_race("troll");
     set_gender("male");
     set_size(2);
-    set_hd(12,14);
+    set_hd(12, 14);
     set_hp(110);
     set_overall_ac(-3);
-    set_property("weakness","fire");
-    set_property("weakness","acid");
+    set_resistance_percent("fire", -50);
+    set_resistance_percent("acid", -50);
     set_exp(0);
-    set_stats("strength",20);
-    set_stats("constitution",24);
-    set_property("swarm",1);
-    add_money("gold",random(200)+300);
-    add_money("silver",random(20)+10);
-    set_base_damage_type("thiefslashing");
-    set_attack_limbs(({"right hand","left hand","head"}));
+    set_stats("strength", 20);
+    set_stats("constitution", 24);
+    set_property("swarm", 1);
+    add_money("gold", random(200) + 300);
+    add_money("silver", random(20) + 10);
+    set_base_damage_type("slashing");
+    set_attack_limbs(({ "right hand", "left hand", "head" }));
     set_attacks_num(3);
-    set_damage(1,4);
+    set_damage(1, 4);
     set_max_level(35); //added by Ares 3-31-05, they should be moving on long before now, but just in case
-
 }
-void init(){
+
+void init()
+{
     string race;
     ::init();
     race = (string)TP->query_race();
-    if(wizardp(TP)) return;
-   if(TP->query_invis()) return;
-    if(race == "human" || race == "elf" || race == "half-elf" || 
-       race == "dwarf" || race == "gnome" || race == "halfling" || 
-       race == "horse") {
-    if(interactive(TP)){
-	    force_me("say YOU DO NOT BELONG HERE OUTSIDER!");
-	    }
-      force_me("kill "+TPQN);
-	    return 1;
-	}
-	if(interactive(TP)){
-	force_me("bow");
-	}
-	force_me("say hello friend.");
-	return 1;
+    if (wizardp(TP)) {
+        return;
     }
-void heart_beat(){
-    if(!objectp(TO)) return;
+    if (TP->query_invis()) {
+        return;
+    }
+    if (race == "human" || race == "elf" || race == "half-elf" ||
+        race == "dwarf" || race == "gnome" || race == "halfling" ||
+        race == "horse") {
+        if (interactive(TP)) {
+            force_me("say YOU DO NOT BELONG HERE OUTSIDER!");
+        }
+        force_me("kill " + TPQN);
+        return 1;
+    }
+    if (interactive(TP)) {
+        force_me("bow");
+    }
+    force_me("say hello friend.");
+    return 1;
+}
+
+void heart_beat()
+{
+    if (!objectp(TO)) {
+        return;
+    }
     ::heart_beat();
-    if(query_hp() < 110){
+    if (query_hp() < 110) {
         add_hp(2);
-	return 1;
+        return 1;
     }
 }
-void die(object targ){
-    if(query_hp() < -15){
+
+void die(object targ)
+{
+    if (query_hp() < -15) {
         query_current_attacker()->add_exp(1700);
         return ::die(targ);
     }
-    tell_room(ETO,"%^RED%^Troll guard drops dead before you.");
+    tell_room(ETO, "%^RED%^Troll guard drops dead before you.");
     new("/d/laerad/mon/obj/tcorpse1")->move(ETO);
     remove();
 }

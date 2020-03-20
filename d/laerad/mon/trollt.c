@@ -20,8 +20,8 @@ void create()
     set_hd(15, 5);
     set_hp(125);
     set_overall_ac(-4);
-    set_property("weakness", "fire");
-    set_property("weakness", "acid");
+    set_resistance_percent("fire", -50);
+    set_resistance_percent("acid", -50);
     set_exp(0);
     set_stats("strength", 19);
     set_stats("constitution", 24);
