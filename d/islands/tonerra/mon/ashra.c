@@ -26,11 +26,14 @@ void create()
     set_class("fighter");
     set_class("mage");
     set_class("cleric");
+    set_class("warlock");
     set_mlevel("fighter", 70);
     set_mlevel("mage", 70);
     set_mlevel("cleric", 70);
+    set_mlevel("warlock", 70);
     set_guild_level("cleric", 70);
     set_guild_level("mage", 70);
+    set_guild_level("warlock", 70);
     set_alignment(9);
     set_attack_limbs(({ "right claw", "left claw", "mouth", "tendril one", "tendril two", "tendril three", "tendril four" }));
     set_base_damage_type("slashing");
@@ -40,13 +43,14 @@ void create()
     set_property("no death", 1);
     set_property("no bows", 1);
     set_mob_magic_resistance("high");
-    set_overall_ac(-75);
+    set_overall_ac(-65);
     set_max_hp(60000);
     set_hp(query_max_hp());
     set_property("add kits", 40);
-    set_new_exp(50, "boss");
-    set_max_level(50);
-    set_emotes(30, ({ "Ashra whispers : YOU WILL LIVE IN ENDLESS NIGHTMARE...." }), 20);
+    set_new_exp(60, "boss");
+    set_max_level(60);
+    set_emotes(30, ({ "%^BLACK%^BOLD%^Ashra whispers : YOU WILL LIVE IN ENDLESS NIGHTMARE....%^RESET%^",
+                      "%^BLACK%^BOLD%^Ashra whispers : I AM INEVITABLE....%^RESET%^", }), 20);
     set_func_chance(40);
     set_monster_feats(({
         "spell focus",
@@ -59,12 +63,12 @@ void create()
                   "shadow nova",
                   "unholy orb",
                   "blasphemy",
-                  "nightmare maw",
                   "shadow vortex",
                   "entropic storm",
                   "forgotten melody",
                   "visions from within",
                   "unholy aura",
+                  "hungry darkness",
                   "mass harm" }));
     set_spell_chance(85);
     add_money("platinum", random(100000));
@@ -116,15 +120,15 @@ void init()
 
 die(object ob)
 {
+    /* disabled for testing
     message("shout", "Ashra shouts: %^BOLD%^BLACK%^THE DARKNESS.....IS ETERNAL....%^RESET%^", users());
     tell_room(ETO, "%^BLACK%^BOLD%^The tendrils of shadow seem to collapse in on themselves as they are pulled back through the portal. "
 "The darkness coalesces into a swirling miasma as it drains back into the Shadow Plane.%^RESET%^");
-
+    */
     return ::die();
 }
 
 void heart_beat()
-
 {
     if (!objectp(TO)) {
         return;
@@ -133,4 +137,11 @@ void heart_beat()
         coreparty = 0;
     }
     ::heart_beat();
+
+    if(!random(5))
+    {
+        tell_room(ETO, "%^BLACK%^Ashra draws strength from the shadows around her.%^RESET%^");
+        add_hp(50);
+    }
+    
 }
