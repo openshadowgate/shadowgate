@@ -34,7 +34,7 @@ void create(){
    set_damage(1,8);
    set_stats("strength",18);
    set_attacks_num(3);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_overall_ac(4);
    set_alignment(5);
    add_limb("tail","torso",0,0,0);

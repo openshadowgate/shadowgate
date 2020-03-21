@@ -26,7 +26,7 @@ void create(){
 	add_limb("antlers","head",0,0,0);
 	set_attack_limbs(({"antlers","right front hoof","left front hoof"}));
 	set_attacks_num(3);
-	set_base_damage_type("bludgeon");
+	set_base_damage_type("bludgeoning");
 	set_damage(1,10);
 	set_alignment(8);
 	set_overall_ac(7);

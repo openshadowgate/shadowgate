@@ -31,7 +31,7 @@ void create(){
    set_max_level(20);
    set_damage(1,10);
    set_attacks_num(2);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_overall_ac(5);
    set_alignment(5);
    add_limb("mouth","head",0,0,0);

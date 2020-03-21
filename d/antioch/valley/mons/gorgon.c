@@ -39,7 +39,7 @@ void create(){
 	set_new_exp(20,"normal");
 	set_attack_limbs(({"right fore hoof","left fore hoof"}));
 	set_attacks_num(2);
-	set_base_damage_type("bludgeon");
+	set_base_damage_type("bludgeoning");
 	set_damage(2,4);
 	set_funcs(({"breath"}));
 	set_func_chance(20);

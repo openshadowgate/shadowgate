@@ -155,7 +155,7 @@ void create()
     set_property("full attacks", 1);
     //set_attack_limbs(({"right hand","left hand"}));
     //set_attacks_num(2);
-    //set_base_damage_type("thiefslashing");
+    //set_base_damage_type("slashing");
     //set_damage(1,10);
     if (query_night() == 1) {
         if (!random(5)) {

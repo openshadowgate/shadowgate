@@ -41,7 +41,7 @@ void create()
     set_property("swarm", 1);
     set_attack_limbs(({ "right forepaw", "left forepaw" }));
     set_attacks_num(2);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(2, 6);
     set_funcs(({ "bite" }));
     set_func_chance(40);

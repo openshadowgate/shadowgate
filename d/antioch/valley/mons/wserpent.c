@@ -40,7 +40,7 @@ void create(){
 	set_stats("intelligence",18);
 	set_attack_limbs(({"mouth"}));
 	set_attacks_num(1);
-	set_base_damage_type("pierce");
+	set_base_damage_type("piercing");
 	set_damage(1,4);
 	set_hit_funcs((["mouth":(:TO,"poison":)]));
 	set_funcs(({"sparks"}));

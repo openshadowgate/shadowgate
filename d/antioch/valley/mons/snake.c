@@ -34,7 +34,7 @@ void create(){
 	set_attacks_num(1);
 	set_hit_funcs((["mouth":(:TO,"bite":)]));
 	set_damage(1,12);
-	set_base_damage_type("pierce");
+	set_base_damage_type("piercing");
 //	set_exp(14000);
 	set_new_exp(20,"normal");
 	set_max_hp(random(30)+100);

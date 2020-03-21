@@ -56,7 +56,7 @@ void druid_form()
     set_overall_ac(-3);
     set_attack_limbs(({ "left hand", "right hand" }));
     set_attacks_num(2);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 6);
     set_spells(({
         "call lightning",
@@ -152,7 +152,7 @@ void drake_form()
     set_size(3);
     set_attack_limbs(({ "right foreclaw", "left foreclaw" }));
     set_attacks_num(4);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 10);
     set_overall_ac(-6);
     set_short("A young drake");
@@ -177,7 +177,7 @@ void bear_form()
     set_short("A grizzly bear");
     set_size(3);
     set_attack_limbs(({ "right forepaw", "left forepaw" }));
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attacks_num(2);
     set_damage(1, 8);
     set_hit_funcs((["left forepaw" : (: TO, "bear_hug" :)]));
@@ -205,7 +205,7 @@ void wolf_form()
     set_short("A vicious wolverine");
     add_limb("mouth", "torso", 0, 0, 0);
     set_attack_limbs(({ "right forepaw", "left forepaw", "mouth" }));
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attacks_num(3);
     set_damage(1, 6);
     set_hit_funcs((["mouth" : (: TO, "wolf_bite" :)]));

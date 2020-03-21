@@ -299,7 +299,7 @@ void create()
     set_overall_ac(1);
     set_attack_limbs(({ "mouth", "right claw", "left claw" }));
     set_attacks_num(3);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 3);
     set_alignment(7);
     add_money("gold", random(1000) + 50);

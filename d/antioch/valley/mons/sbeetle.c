@@ -28,7 +28,7 @@ void create(){
 	add_limb("mandibles","head",0,0,0);
 	set_attack_limbs(({"mandibles"}));
 	set_attacks_num(2);
-	set_base_damage_type("pierce");
+	set_base_damage_type("piercing");
 	set_damage(2,10);
 	set_max_hp(random(175)+125);
 	set_hp(query_max_hp());

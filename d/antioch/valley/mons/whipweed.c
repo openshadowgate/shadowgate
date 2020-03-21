@@ -41,7 +41,7 @@ void create(){
 	set_alignment(5);
 	set_attack_limbs(({"stalk 1","stalk 2"}));
 	set_attacks_num(2);
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
    set_property("no charge",1);
 	set_damage(1,10);
 	set_stats("intelligence",5);

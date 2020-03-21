@@ -24,7 +24,7 @@ void create(){
    set_size(1);
    set_attack_limbs(({"right forepaw","left forepaw","mouth"}));
    set_attacks_num(3);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_damage(1,10);
    set_overall_ac(2);
 	set_max_hp(random(30)+90);

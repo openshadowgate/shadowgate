@@ -61,7 +61,7 @@ void create()
     set_property("no death", 1);
     set_attack_limbs(({ "left hand", "right hand" }));
     set_attacks_num(2);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 10);
     set_spells(({
         "call lightning",
@@ -110,7 +110,7 @@ void druid_form()
     set_overall_ac(-6);
     set_attack_limbs(({ "left hand", "right hand" }));
     set_attacks_num(2);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 10);
     set_spells(({
         "call lightning",
@@ -206,7 +206,7 @@ void dragon_form()
     set_size(3);
     set_attack_limbs(({ "right foreclaw", "left foreclaw" }));
     set_attacks_num(4);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 20);
     set_overall_ac(-16);
     set_short("A large amethyst dragon");
@@ -232,7 +232,7 @@ void bear_form()
     set_size(3);
     add_limb("beak", "head", 0, 0, 0);
     set_attack_limbs(({ "right forepaw", "left forepaw", "beak" }));
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attacks_num(2);
     set_damage(1, 12);
     set_hit_funcs((["left forepaw" : (: TO, "bear_hug" :)]));
@@ -261,7 +261,7 @@ void griffon_form()
     set_short("An agitated griffon");
     add_limb("mouth", "torso", 0, 0, 0);
     set_attack_limbs(({ "right forepaw", "left forepaw", "mouth" }));
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attacks_num(3);
     set_damage(1, 8);
     set_overall_ac(-6);

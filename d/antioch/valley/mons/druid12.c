@@ -31,7 +31,7 @@ void create()
 	set_overall_ac(-3);
 	set_attack_limbs(({"left hand","right hand"}));
 	set_attacks_num(2);
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_damage(1,6);
 	set_spells(({
 		"call lightning",

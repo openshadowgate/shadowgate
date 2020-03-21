@@ -39,7 +39,7 @@ void create()
     set_mlevel("fighter", 20);
     set_attack_limbs(({ "right hand", "left hand" }));
     set_attacks_num(1);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 8);
     set_hit_funcs((["right hand" : (: TO, "sleep" :)]));
     set_funcs(({ "sleepy" }));

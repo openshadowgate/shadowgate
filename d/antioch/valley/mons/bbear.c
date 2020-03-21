@@ -34,7 +34,7 @@ void create(){
 	add_limb("mouth","head",0,0,0);
 	set_attack_limbs(({"right forepaw","left forepaw","mouth"}));
 	set_attacks_num(3);
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_damage(1,8);
 	set("aggressive",10);
 	set_property("swarm",1);

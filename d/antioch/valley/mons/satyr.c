@@ -36,7 +36,7 @@ void create()
     set_property("swarm", 1);
     set_attack_limbs(({ "right hand", "left hand" }));
     set_attacks_num(2);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1, 8);
     set_level(15);
     set_class("bard");

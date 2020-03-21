@@ -44,7 +44,7 @@ void create(){
 	set_hp(query_max_hp());
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(2);
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_damage(1,20);
       set_resistance("negative energy",10);
       set_resistance("positive energy",-10);

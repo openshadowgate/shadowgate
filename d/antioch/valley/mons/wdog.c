@@ -35,7 +35,7 @@ void create(){
 	set_property("swarm",1);
 	set_attack_limbs(({"right forepaw","left forepaw"}));
 	set_attacks_num(2);
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_damage(1,4);
     if(!random(15)) {
       ob = new("/d/common/obj/brewing/herb_special_inherit");
