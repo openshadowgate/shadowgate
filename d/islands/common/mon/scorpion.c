@@ -26,7 +26,7 @@ void create()
     add_limb("stinger", "stinger", 96, 1, 4);
     set_attacks_num(2);
     set_attack_limbs(({ "left claw", "tail", "right claw" }));
-    set_base_damage_type("blundgeoning");
+    set_base_damage_type("bludgeoning");
     set_funcs(({ "sting" }));
     set_func_chance(35);
     set_damage(2, 6);
