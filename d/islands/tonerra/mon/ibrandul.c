@@ -106,6 +106,14 @@ void set_paralyzed(int time, string message)
     return;
 }
 
+int do_typed_damage_effects(victim, limb, damage, damage_type)
+{
+    if (damage_type == "divine") {
+        tell_room(ETO, "%^BOLD%^%^WHITE%^The Dead God seems immune to divine damage!%^RESET%^");
+    }
+    return damage;
+}
+
 void summoning(object targ)
 {
     object ob;
