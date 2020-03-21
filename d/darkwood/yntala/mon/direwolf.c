@@ -43,7 +43,7 @@ void create (){
    add_limb("right claws","right forepaw",0,0,0);
    add_limb("teeth","mouth",0,0,0);
    set_attack_limbs(({"right claws","teeth","left claws"}));
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_achats(2, ({"%^BOLD%^%^BLACK%^The wolf glares at you as he lunges at you again.%^RESET%^",
 "%^BOLD%^%^BLACK%^The wolf snarls viciously as he bares his %^RESET%^teeth %^BOLD%^%^BLACK%^at you!%^RESET%^"}) );
     if(!random(8)) {

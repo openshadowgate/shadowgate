@@ -42,7 +42,7 @@ object ob;
    add_limb("right claws","right arm",0,0,0);
    add_limb("teeth","mouth",0,0,0);
    set_attack_limbs(({"left claws","right claws","teeth"}));
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_func_chance(10);
    set_funcs(({"rend"}));
    set_achats(2, ({"The girallon beats on his chest wildly before attacking again!"}) );

@@ -29,7 +29,7 @@ void create (){
    set("aggressive",5);
    add_limb("claws","left foreleg",0,0,0);
    set_attack_limbs(({"claws"}));
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_emotes(1,({"%^ORANGE%^The little lizard darts across the path.%^RESET%^",
 "%^ORANGE%^The lizard flicks its %^GREEN%^tongue.%^RESET%^",
 "%^GREEN%^The lizard lazily moves onto a bush.%^RESET%^"}), 0);
