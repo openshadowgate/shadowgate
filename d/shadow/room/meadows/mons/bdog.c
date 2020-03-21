@@ -33,7 +33,7 @@ void create()
    add_limb("mouth","head",0,0,0);
    set_damage(1,4);
    set_attacks_num(2);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_attack_limbs(({"right forepaw","left forepaw","mouth"}));
    set_hit_funcs((["mouth" : "The dog bites you viciously."]));
    set_emotes(2,({

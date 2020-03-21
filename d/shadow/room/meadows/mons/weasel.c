@@ -32,7 +32,7 @@ void create()
    add_limb("left claw","left forepaw",0,0,0);
    set_damage(1,2);
    set_attacks_num(3);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_attack_limbs(({"right claw","left claw","mouth"}));
    set_hit_funcs((["mouth" : "The weasel bites you with its sharp teeth."]));
    set_new_exp(4,"normal");

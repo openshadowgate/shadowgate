@@ -46,7 +46,7 @@ void create()
     add_limb("root", "trunk", 0, 0, 0);
     add_limb("left limb", "trunk", 0, 0, 0);
     set_attack_limbs(({ "right limb", "left limb" }));
-    set_base_damage_type("blundgeoning");
+    set_base_damage_type("bludgeoning");
     set_funcs(({ "tangle" }));
     set_func_chance(10);
 }

@@ -65,7 +65,7 @@ void setup_beastie(object caster, int beastalign)
         remove_limb("right leg");
         add_limb("vortex", "torso", 0, 0, 0);
         set_attack_limbs(({ "right arm", "left arm" }));
-        set_base_damage_type("blundgeoning");
+        set_base_damage_type("bludgeoning");
         iselemental = 1;
         return;
     }
@@ -84,7 +84,7 @@ void setup_beastie(object caster, int beastalign)
                  "viridian hands.");
         set_body_type("humanoid");
         set_attack_limbs(({ "left hand", "right hand" }));
-        set_base_damage_type("blundgeoning");
+        set_base_damage_type("bludgeoning");
         break;
 
     case 2:   // LN: zelekhut, inevitable
@@ -148,7 +148,7 @@ void setup_beastie(object caster, int beastalign)
                  "but you're quite sure a creature of this size would be a considerable foe in combat.  However, there is an almost "
                  "tangible aura of %^GREEN%^calm %^RESET%^to this surprisingly beautiful creature, that pervades the air around it.");
         set_body_type("humanoid");
-        set_base_damage_type("blundgeoning");
+        set_base_damage_type("bludgeoning");
         break;
 
     case 6:   // NE: nycaloth, yugoloth
@@ -181,7 +181,7 @@ void setup_beastie(object caster, int beastalign)
                  "hint at a warm climate of origin, or a very strong tolerance to cold.");
         set_body_type("humanoid");
         set_attack_limbs(({ "left hand", "right hand" }));
-        set_base_damage_type("blundgeoning");
+        set_base_damage_type("bludgeoning");
         break;
 
     case 8:   // CN: gray slaad

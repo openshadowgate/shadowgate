@@ -84,7 +84,7 @@ void create()
     set_money("gold", 35000);
     set_damage(4, 8);
     set_attacks_num(6);
-    set_base_damage_type("blundgeoning");
+    set_base_damage_type("bludgeoning");
     set_funcs(({ "acid" }));
     set_func_chance(50);
     set_moving(1);

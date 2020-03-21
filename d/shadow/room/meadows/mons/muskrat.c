@@ -31,7 +31,7 @@ void create()
    set_stats("strength",13);
    set_damage(1,3);
    set_attacks_num(2);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_attack_limbs(({"right forepaw","left forepaw"}));
    set_new_exp(5,"normal");
    set_emotes(8,({

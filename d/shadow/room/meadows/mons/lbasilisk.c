@@ -37,7 +37,7 @@ void create()
    add_limb("left claw","left foreleg",0,0,0);
    set_damage(1,5);
    set_attacks_num(2);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    set_attack_limbs(({"right claw","left claw"}));
    set_exp(1500);
    set("aggressive",10);
