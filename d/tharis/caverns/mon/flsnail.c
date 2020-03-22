@@ -26,6 +26,6 @@ void create(){
     add_limb("shell","torso",0,0,0);
     set_attack_limbs(({"tentacle1","tentacle2","tentacle3","tentacle4"}));
     set_attacks_num(4);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(1,12);
 }

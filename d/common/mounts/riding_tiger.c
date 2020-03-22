@@ -46,7 +46,7 @@ void create(){
       "%^RESET%^%^ORANGE%^g tiger%^RESET%^");
    set_attacks_num(2);
    set_damage(2,4);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_emotes(1,({"%^RESET%^%^ORANGE%^The tiger stretches and yawns, "+
       "arching its back and revealing sharp %^RESET%^teeth%^ORANGE%^"+
       ".%^RESET%^","%^RESET%^%^ORANGE%^The tiger swishes its r"+

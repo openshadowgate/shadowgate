@@ -22,6 +22,6 @@ create() {
    	set("value", 10);
    	//set_wc(2,3);
    	//set_large_wc(1,8);
-	//set_type("thiefslashing");
+	//set_type("slashing");
    	//set_weapon_speed(5);
 }

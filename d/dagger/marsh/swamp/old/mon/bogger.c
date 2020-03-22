@@ -17,7 +17,7 @@ create() {
     set_body_type("human");
     set_attacks_num(2); 
     set_damage(2,4);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_attack_limbs(({"right hand","left hand"})); 
     set_alignment(5);
     set_overall_ac(2);

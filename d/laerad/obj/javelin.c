@@ -33,7 +33,7 @@ void create() {
     set_large_thrown_wc(1,10);
     set_thrown_wc(1,6);
     set_thrown_hit_func((:TO,"throw_j":));
-    set_type("thiefpiercing");
+    set_type("piercing");
 set_prof_type("spear");
 
 }

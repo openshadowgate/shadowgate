@@ -26,7 +26,7 @@ void create(){
           +" slashing attack, and would leave a %^RED%^nasty wound"
           +"%^RESET%^%^ORANGE%^.");
 
-  set_type("magebludgeon");
+  set_type("bludgeoning");
   set_prof_type("clublike");
   set_weight(4);
   set_value(500);

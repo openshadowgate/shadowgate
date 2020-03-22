@@ -24,7 +24,7 @@ void create() {
     set_large_wc(2,4);
     set_size(1);
     set_prof_type("singer");
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("enchantment",3);
 
     set_wield((:this_object(), "extra_wield":));

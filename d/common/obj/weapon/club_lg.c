@@ -15,7 +15,7 @@ create()
     set("value", 1);
     set_wc(1, 12);
     set_large_wc(1, 12);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_prof_type("club");
     set_weapon_prof("simple");
     set_weapon_speed(6);

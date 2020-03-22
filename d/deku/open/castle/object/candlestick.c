@@ -21,5 +21,5 @@ CANDELSTICK
    set("value", 1);
    set_wc(1,3);
    set_large_wc(1,1);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
 }

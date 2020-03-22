@@ -16,7 +16,7 @@ create(){
     	set_weapon_speed(5);
     	set_size(2);
     	set("value",1500);
-    	set_type("thiefslashing");
+    	set_type("slashing");
     	set_wield((:TO,"wield_func":));
     	set_unwield((:TO,"unwield_func":));
     	set_hit((: TO,"extra_hit" :));

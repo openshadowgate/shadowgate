@@ -16,7 +16,7 @@ void create() {
    	set_value(75);
    	set_wc(2,3);
    	set_large_wc(2,3);
-   	set_type("thiefslashing");
+   	set_type("slashing");
    	set_weapon_speed(3);
     set_weapon_prof("exotic");
     set_critical_threat_range(2);

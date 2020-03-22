@@ -24,7 +24,7 @@ create() {
     set_value(1000);
     set_wc(1,6);
     set_large_wc(2,4);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_property("enchantment",3);
     set_size(1);
     set_prof_type("demongate hand");

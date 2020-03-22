@@ -20,7 +20,7 @@ create() {
     set("value", 100);
 //    set_wc(1,8);
 //    set_large_wc(1,12);
-//    set_type("thiefslashing");
+//    set_type("slashing");
     set_property("enchantment",2);
     set_wield((:TO,"extra_wield":));
     set_hit((:TO,"extra_hit":));

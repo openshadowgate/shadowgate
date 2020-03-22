@@ -27,7 +27,7 @@ set_stats("wisdom", 1);
 set_class("fighter");
 set("aggressive", 15);
 set_alignment(5);
-set_base_damage_type("bludgeon");
+set_base_damage_type("bludgeoning");
 set_damage(2,16);
 set_attack_limbs(({"right arm","left arm"}));
 set_attacks_num(2);

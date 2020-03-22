@@ -11,7 +11,7 @@ void create(){
 	set_short("mug of ale");
 	set_long("This looks like a mug filled with ale.");
 	set_value(0);
-	set_type("magebludgeon");
+	set_type("bludgeoning");
 	set_property("enchantment",3);
 	set_hit((:TO,"hit_function":));
 }

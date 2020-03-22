@@ -21,7 +21,7 @@ Creator of this dagger remains unknown even to the Arch Lich of The Demonsgate. 
 AVATAR
 	);
 	set_property("lore difficulty",40);
-	//set_type("magepiercing");
+	//set_type("piercing");
 	//set_prof_type("simple");
 	//set_size(1);
 	//set_wc(1,4);

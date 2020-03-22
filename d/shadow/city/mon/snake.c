@@ -21,7 +21,7 @@ void create() {
   set_exp(10, "normal");
   set_damage(2,6);
   set_attacks_num(1);
-  set_base_damage_type("bludgeon");
+  set_base_damage_type("bludgeoning");
   set_attack_limbs(({"mouth","tail","torso"}));
   set_ac(10);
   set_alignment(5);

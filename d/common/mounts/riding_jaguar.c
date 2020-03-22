@@ -45,7 +45,7 @@ void create(){
       "%^BLACK%^e%^RESET%^%^ORANGE%^d riding jaguar%^RESET%^");
    set_attacks_num(2);
    set_damage(2,4);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_emotes(1,({"%^RESET%^%^ORANGE%^The jaguar stretches and yawns, "+
       "arching its back and revealing sharp %^RESET%^teeth%^ORANGE%^"+
       ".%^RESET%^","%^RESET%^%^ORANGE%^The jaguar swishes its "+

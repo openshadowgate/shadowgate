@@ -21,7 +21,7 @@ create() {
 // than a regular dagger. Amount is increase of 2.
     set_wc(2,3);
     set_large_wc(2,4);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("enchantment",1);
     set_wield((: TO,"drow" :));
     set_hit((: TO,"extra_hit" :));

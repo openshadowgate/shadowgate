@@ -14,7 +14,7 @@ create() {
    set("value", 20);
   set_wc(3,3);
   set_large_wc(2,5);
-  set_type("thiefslashing");
+  set_type("slashing");
   set_wield("You grip a fine crafted sword.");
   set_hit("You slice through your opponent!");
   set_property("monsterweapon",1);

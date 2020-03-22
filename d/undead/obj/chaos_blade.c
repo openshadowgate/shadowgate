@@ -36,7 +36,7 @@ void create()
     set_value(2500);
     set_property("enchantment",3);
     set_weight(3);
-    set_type("thiefslashing");
+    set_type("slashing");
 
     set_hit((:TO,"hitme":));
     set_wield((:TO,"wieldme":));

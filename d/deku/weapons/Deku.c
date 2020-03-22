@@ -19,7 +19,7 @@ create() {
              "created ages past by drow wizards as a weapon to destroy\n"+
              "good.  A feeling of evil radiates from the stones.\n");
   set_value(500);
-  set_type("magebludgeon");
+  set_type("bludgeoning");
    set_prof_type("magic club");
    set_weapon_speed(4);
   set_hit((:this_object(),"weapon_hit":));

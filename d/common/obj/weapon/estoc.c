@@ -14,7 +14,7 @@ create() {
    set("value", 35);
    set_wc(2,4);
    set_large_wc(2,4);
-   set_type("thiefpiercing");
+   set_type("piercing");
    set_weapon_speed(6);
    set_weapon_prof("exotic");
    set_critical_threat_range(3);

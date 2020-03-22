@@ -18,7 +18,7 @@ knife like shape. The handle is shaped to fit the hand perfectly. The
 blade is solid, slightly chipped and hune extremely sharp. 
 OLI
   );
-  set_type("magepiercing");
+  set_type("piercing");
   set_wc(1,5);
   set_large_wc(1,6);
   set_hit((:TO,"hit_me":));

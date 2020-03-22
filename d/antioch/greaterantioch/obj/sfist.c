@@ -15,7 +15,7 @@ void create(){
 	set_weight(2);
 	set_value(1000);
 	set_lore("Rumored to be a special gift to Maskarrans who have completed a special mission for their deity.");
-	set_type("thiefpiercing");
+	set_type("piercing");
 	set_prof_type("stealthwhisper");
 	set_size(1);
 	set_wc(1,4);

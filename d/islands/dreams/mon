@@ -84,7 +84,7 @@ void create(){
     add_limb("mouth", "head", 0, 0, 0);
     set_attack_limbs(({"right foreclaw","left foreclaw","tail","mouth"}));
     set_attacks_num(3);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(2,8);
     set_funcs(({"breath","breath","breath","wings","nightmare"}));
     set_func_chance(80);

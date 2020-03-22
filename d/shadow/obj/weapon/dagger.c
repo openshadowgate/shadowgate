@@ -14,6 +14,6 @@ create() {
    set("value", 2);
    set_wc(1,4);
    set_large_wc(1,3);
-   set_type("magepiercing");
+   set_type("piercing");
    set_weapon_speed(2);
 }

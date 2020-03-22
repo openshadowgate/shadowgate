@@ -27,7 +27,7 @@ Crafted by the dwarves of mount Uruzbandum, these flails are known to be unbreak
 
 AVATAR
 	);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("flail");
 	set_size(2);
 	//changed to inherit the common flail - Saide

@@ -26,7 +26,7 @@ void create(){
 " Others say the sword has been spotted near the coastal regions of Torm. Or...it could be at the bottom of the ocean."
 
 	);
-	//set_type("thiefslashing");
+	//set_type("slashing");
 	//set_prof_type("medium blades");
 	//set_size(2);
 	//set_wc(1,8);

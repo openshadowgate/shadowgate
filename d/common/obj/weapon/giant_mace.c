@@ -20,7 +20,7 @@ GARRETT
    set_value(25);
    set_wc(3,6);
    set_large_wc(3,6);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_prof_type("mace");
    set_weapon_speed(6);
    set_weapon_prof("simple");

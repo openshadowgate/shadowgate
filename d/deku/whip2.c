@@ -25,7 +25,7 @@ create() {
    set_cointype("silver");
    set_wc(1,2);
    set_large_wc(1,1);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_prof_type("whip");
 */
 }

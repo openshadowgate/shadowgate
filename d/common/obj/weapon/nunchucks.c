@@ -14,7 +14,7 @@ void create(){
     set_wc(2,4);
     set_large_wc(2,4);
     set_size(2);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_prof_type("club");
     set_weapon_speed(4);
     set_property("repairtype",({"woodwork"}));    

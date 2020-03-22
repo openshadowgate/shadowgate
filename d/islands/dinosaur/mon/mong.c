@@ -67,7 +67,7 @@ void create(){
     set_alignment(6);
     set_attacks_num(3);
     set_damage(2,6);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_property("swarm",1);
     add_money("platinum", roll_dice(2,10));
     add_money("gold", roll_dice(10,10));

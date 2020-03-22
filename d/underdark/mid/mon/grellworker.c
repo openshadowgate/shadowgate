@@ -55,7 +55,7 @@ void create() {
     set_attack_limbs(({"third tentacle","fourth tentacle","fifth tentacle","sixth tentacle","seventh tentacle","eighth tentacle","ninth tentacle","tenth tentacle"}));
     if(!random(3)) { new(OBJ"lightningspear")->move(TO); }
     set_attacks_num(2);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(1,4);
     set_property("no steal",1);
     set_property("strength","electrcity");

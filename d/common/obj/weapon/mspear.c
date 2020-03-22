@@ -14,7 +14,7 @@ create() {
    set("value", 10);
    set_wc(1,8);
    set_large_wc(1,8);
-   set_type("thiefpiercing");
+   set_type("piercing");
    set_prof_type("spear");
    set_weapon_speed(6);
    set_weapon_prof("simple");

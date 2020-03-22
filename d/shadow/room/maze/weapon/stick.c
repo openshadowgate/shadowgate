@@ -12,5 +12,5 @@ set_weight(5);
    set("value", 25);
    set_wc(1,10);
    set_large_wc(1,10);
-   set_type("bludgeon");
+   set_type("bludgeoning");
 }

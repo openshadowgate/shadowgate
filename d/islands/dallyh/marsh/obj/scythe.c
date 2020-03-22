@@ -14,7 +14,7 @@ void create(){
     set_large_wc(3,5);
     set_weight(30);
     set_value(80);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_size(2);
     set_prof_type("scythe");
     set_property("enchantment",1);

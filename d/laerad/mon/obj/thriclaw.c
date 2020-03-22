@@ -12,6 +12,6 @@ void create(){
     set("value",1);
     set_wc(1,4);
     set_large_wc(1,4);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("monsterweapon",1);
 }

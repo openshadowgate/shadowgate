@@ -713,15 +713,15 @@ string types(object ob) {
     /*
     switch (type) 
     {
-    case "thiefslashing":
-    case "thiefpiercing":
+    case "slashing":
+    case "piercing":
         ret = "thief";
         break;
-    case "bludgeon":
+    case "bludgeoning":
         ret = "cleric";
         break;
-    case "magepiercing":
-    case "magebludgeon":
+    case "piercing":
+    case "bludgeoning":
         ret = "mage";
         break;
     default:

@@ -15,7 +15,7 @@ void create() {
    set_value(15);
    set_wc(1,6); //waveblade from pathfinder equivalent
    set_large_wc(1,6);
-   set_type("thiefpiercing");
+   set_type("piercing");
    set_damage_type("piercing");
    set_prof_type("whip");
    set_weapon_speed(8);

@@ -28,7 +28,7 @@ void create(){
    //set_size(2);
    //set_wc(1,6);
    //set_large_wc(2,4);
-   //set_type("magebludgeon");
+   //set_type("bludgeoning");
    //set_prof_type("tool");
    //set_weapon_speed(5);
     set_value(10);

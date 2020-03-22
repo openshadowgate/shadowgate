@@ -13,7 +13,7 @@ void create(){
   set_value(10);
    //set_wc(1,6);
    //set_large_wc(1,4);
-   //set_typle("magebludgeon");
+   //set_typle("bludgeoning");
   set_wield("You wrap the leather thong around your wrist.");
 set_unwield("The leather thong is undone and the weapon slips free.");
   set_hit((:TO,"extra_hit":));

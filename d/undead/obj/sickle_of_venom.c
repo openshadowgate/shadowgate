@@ -29,7 +29,7 @@ void create()
     set_hit((: TO, "extra_hit":));
     set_wield((: TO, "extra_wield":));
     set_property("enchantment",2);
-    set_type("thiefslashing");
+    set_type("slashing");
     uses = roll_dice(3,6);
 }
 

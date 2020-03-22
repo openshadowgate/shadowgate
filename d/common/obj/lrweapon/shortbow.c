@@ -12,7 +12,7 @@ create() {
    set("value", 30);
    set_wc(2,4);
    set_large_wc(2,4);
-  set_type("thiefpiercing");
+  set_type("piercing");
    set_two_handed();
    set_lr_prof_type("short bow");
    set_weapon_prof("simple");

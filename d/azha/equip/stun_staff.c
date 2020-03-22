@@ -30,7 +30,7 @@ TSARVEN
    set_weight(4);
    set_size(1);
    set("value", 50);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_prof_type("staff");
    set_hit((:this_object(), "extra_hit":));
 }

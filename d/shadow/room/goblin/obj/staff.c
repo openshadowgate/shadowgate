@@ -15,7 +15,7 @@ create() {
     set_wc(1,6);
     set_large_wc(1,8);
     set_size(2);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
    set_prof_type("staff");
     set_wield((: TO,"extra_wield" :));
     set_unwield((: TO,"extra_unwield" :));

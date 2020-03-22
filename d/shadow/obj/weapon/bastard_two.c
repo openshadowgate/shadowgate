@@ -13,6 +13,6 @@ create() {
    set("value", 20);
    set_wc(2,4);
    set_large_wc(2,8);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_weapon_speed(8);
 }

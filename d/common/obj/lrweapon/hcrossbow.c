@@ -19,7 +19,7 @@ OLI
    set("value", 30);
    set_wc(1,10);
    set_large_wc(1,10);
-   set_type("thiefpiercing");
+   set_type("piercing");
    set_two_handed();
    set_lr_prof_type("crossbow");
    set_weapon_prof("simple");

@@ -45,7 +45,7 @@ void create (){
    add_limb("left hoof","left foreleg",0,0,0);
    add_limb("right hoof","right foreleg",0,0,0);
    set_attack_limbs(({"right hoof","left hoof"}));
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_spell_chance(95);
    set_spells(({"call lightning","limb attack","sticks into snakes","create treant","cause critical wounds"}));
     set_achats(10, ({"%^MAGENTA%^The female centaur looks at you angrily.%^RESET%^",

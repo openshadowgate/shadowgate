@@ -33,7 +33,7 @@ void create()
 	set_property("lore",13);
 	//set_weight(10);
 	//set_size(2);
-	//set_type("bludgeon");
+	//set_type("bludgeoning");
 	//set_prof_type("mace");
 	//set_wc(1,8);
 	//set_large_wc(1,8);

@@ -13,6 +13,6 @@ set_weight(11);
     set_size(1,4);
     set_large_wc(1,3);
    set_value(5);
-set_type("bludgeon");
+set_type("bludgeoning");
    set_prof_type("tool");
 }

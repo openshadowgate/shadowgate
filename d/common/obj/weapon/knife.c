@@ -15,7 +15,7 @@ set_id(({ "knife","dagger"}));
    set_cointype("silver");
    set_wc(1,4);
    set_large_wc(1,4);
-   set_type("magepiercing");
+   set_type("piercing");
    set_weapon_speed(2);
    set_weapon_prof("simple");
    set_critical_threat_range(2);

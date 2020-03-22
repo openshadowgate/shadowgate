@@ -59,7 +59,7 @@ void create() {
    set_size(1);
    //set_weapon_prof("exotic");
    //set_prof_type("diamond dagger");
-  // set_type("thiefslashing");
+  // set_type("slashing");
    set_property("enchantment",4);
    set_wield((:TO,"wield":));
    set_unwield((:TO,"unwield":));

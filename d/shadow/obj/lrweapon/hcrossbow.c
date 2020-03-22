@@ -19,7 +19,7 @@ OLI
    set("value", 30);
    set_wc(1,6);
    set_large_wc(1,6);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_two_handed();
    set_lr_prof_type("crossbow");
    set_prof_type("medium clublike");

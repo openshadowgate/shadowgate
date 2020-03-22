@@ -17,5 +17,5 @@ create() {
    set_weight(3);
    set_size(1);
    set_wc(1,4);
-   set_type("bludgeon");
+   set_type("bludgeoning");
 }

@@ -18,7 +18,7 @@ It looks very fragile, you should be careful not to drop it.
 ANTIOCH
     );
   set_weight(4);
-  set_type("magebludgeon");
+  set_type("bludgeoning");
   set_wc(1,4);
   set_large_wc(1,6);
 

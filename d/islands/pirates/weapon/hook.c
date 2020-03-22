@@ -12,7 +12,7 @@ set_large_wc(1,5);
 set_weight(6);
     set_size(1);
 set("value", 200);
-set_type("thiefslashing");
+set_type("slashing");
 set_prof_type("tool");
 set_property("enchantment",2);
 }

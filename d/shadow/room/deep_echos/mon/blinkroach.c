@@ -39,7 +39,7 @@ void create()
    add_limb("mouth","head",0,0,0);
    set_damage(1,4);
    set_attacks_num(1);
-   set_base_damage_type("thiefslashing");
+   set_base_damage_type("slashing");
    //set_attack_limbs(({"mouth","mandibles"}));
    set_hit_funcs((["mouth" : "%^BOLD%^The bug bites through"+
       " an opening your armor."]));

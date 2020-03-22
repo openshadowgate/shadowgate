@@ -18,7 +18,7 @@ create() {
    set_property("enchantment",2);
    set_wc(1,6);
    set_critical_hit_multiplier(4);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_lr_prof_type("gun");
    set_weapon_prof("exotic");
    set_rate_of_fire(4);

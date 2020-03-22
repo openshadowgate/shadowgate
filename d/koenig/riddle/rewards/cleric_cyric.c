@@ -23,7 +23,7 @@ The Dark Sun's Blade was made by a maurader priest of Cyric's faith around the y
 AVATAR
 	);
    set_property("lore difficulty",12);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("club");
 	set_size(2);
 	set_wc(1,6);

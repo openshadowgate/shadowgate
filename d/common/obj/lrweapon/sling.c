@@ -15,13 +15,13 @@ void create(){
    );
    set_prof_type("staff");
    set_weight(1);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_decay_rate(100);
    set_range(2,7,12);
    set_ammo("bullet");
    set_lr_prof_type("sling");
    set_weapon_prof("simple");
-    set_lr_type("magebludgeon");
+    set_lr_type("bludgeoning");
    set_size(1);
    set_wc(1,4);
    set_large_wc(1,4);

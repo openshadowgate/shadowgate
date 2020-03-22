@@ -16,7 +16,7 @@ void create(){
     set_large_wc(1,8);
     set_size(2);
    
-set_type("thiefslashing");
+set_type("slashing");
     set_prof_type("scythe");
    set_weapon_speed(4);
 }

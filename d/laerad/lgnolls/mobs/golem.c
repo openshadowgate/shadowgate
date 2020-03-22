@@ -43,7 +43,7 @@ void create() {
     set_overall_ac(-17);
     set_attacks_num(4);
     set_attack_limbs( ({"right stone fist", "left stone fist"}) );
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(8,4);
     set_property("swarm",1);
     set_stats("strength", 18);

@@ -23,7 +23,7 @@ The Chakram of Night's Secrets is a weapon that was once used by a woman named E
 AVATAR
 	);
    set_property("lore difficulty",12);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("club");
 	set_size(2);
 	set_wc(1,6);

@@ -68,7 +68,7 @@ void create()
     set_hit((:TO,"hit_func":));
     set_wc(1,1);
     set_large_wc(1,1);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_weapon_prof("simple");
     set_critical_threat_range(1);
     set_critical_hit_multiplier(2);

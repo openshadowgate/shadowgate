@@ -11,5 +11,5 @@ set_long ("The flames of the fire witch.");
     set_value (1);
     set_property ("monsterweapon",1);
     set_wc (3,6);
-set_type ("magebludgeon");
+set_type ("bludgeoning");
 }

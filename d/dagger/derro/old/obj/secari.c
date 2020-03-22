@@ -35,6 +35,6 @@ void create(){
   	set_value(500);
   	//set_wc(3,2);
   	//set_large_wc(2,3);
-  	//set_type("magepiercing");
+  	//set_type("piercing");
         set_property("enchantment",1);
 }

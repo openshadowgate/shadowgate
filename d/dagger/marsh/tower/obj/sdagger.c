@@ -14,7 +14,7 @@ create() {
     set_value(0);
     set_wc(1,6);
     set_large_wc(2,4);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_size(2);
     set_wield((: TO,"extra_wield" :));
     set_unwield((: TO,"extra_unwield" :));

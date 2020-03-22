@@ -20,7 +20,7 @@ This was forged by the dwarf Teiral Stormhammer in the dwarven city of Kinaro al
 
 AVATAR
 	);
-   //set_type("bludgeon");
+   //set_type("bludgeoning");
    //set_prof_type("medium hammer");
   //set_size(2);
    //set_wc(1.8);

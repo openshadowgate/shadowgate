@@ -13,7 +13,7 @@ void create()
              " fitted in place on the wearer's forearm.  " +
              "The iron claw is a favorite weapon for pugilists" +
              " as well as followers of Malar.");
-    set_type("thiefslashing");
+    set_type("slashing");
     set_prof_type("knuckles");
     set_weapon_prof("simple");
     set_weight(2);

@@ -18,7 +18,7 @@ set_large_wc(1,3);
 set_size(1);
 set_property("enchantment",1);
     set("value",1000);
-set_type("magepiercing");
+set_type("piercing");
 set_hit((: TO,"extra_hit" :));
     set_prof_type("small blades");
 }

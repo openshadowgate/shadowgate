@@ -29,7 +29,7 @@ void create() {
     set_wc(2,4);
     set_large_wc(2,4);
     set_size(2);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_heart_beat(1);
     set_hit((:this_object(),"extra_hit":));
     set_wield((:this_object(), "extra_wield":));

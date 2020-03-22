@@ -16,7 +16,7 @@ void create() {
     set_wc(1,4)+1;
     set_large_wc(1,4);
     set_ac(3);
-    set_type("bludgeon");
+    set_type("bludgeoning");
     set_prof_type("small hammer");
     set("value", 40);
     set_long("A truly magnificent hammer of Dwarven origin.  The "+

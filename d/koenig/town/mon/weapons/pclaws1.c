@@ -11,7 +11,7 @@ void create()
   set_long("You cant tell what they are made of but they look disgusting and deadly!");
   set_weight(5);
   set("value", 10);
-  set_type("thiefslashing");
+  set_type("slashing");
   set_wc(1,4);
   set_large_wc(1,8);
   set_size(1);

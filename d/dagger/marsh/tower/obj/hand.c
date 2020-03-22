@@ -55,7 +55,7 @@ void create(){
     set_property("enchantment", 5);
     set_property("able to cast", 1);
     set_prof_type("club");
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_wield( (:this_object(), "extra_wield":) );
     set_unwield( (:this_object(), "extra_remove":) );
     set_hit( (:this_object(), "extra_hit":) );

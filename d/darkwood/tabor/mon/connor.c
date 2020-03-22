@@ -29,7 +29,7 @@ TABOR
     set_race("human");
     set_gender("male");
     set_id(({"connor","Connor","trainer","master"}));
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_overall_ac(0);
     remove_std_db();
 }

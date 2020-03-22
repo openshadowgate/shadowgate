@@ -9,7 +9,7 @@ string owner;
 void create(){
     ::create();
     set_id(({"mace","magic mace"}));
-    set_type("bludgeon");
+    set_type("bludgeoning");
     set_prof_type("magic weapons");
     set_weight(0);
     set_value(0);

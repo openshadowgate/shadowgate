@@ -20,7 +20,7 @@ create() {
 //    set_wc(1,4);
 //    set_large_wc(1,6);
 //    set_size(1);
-//    set_type("magebludgeon");
+//    set_type("bludgeoning");
 //    set_prof_type("whip");
     set_wield((: TO,"extra_wield" :));
     set_hit((: TO,"extra_hit" :));

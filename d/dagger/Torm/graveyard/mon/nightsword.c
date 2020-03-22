@@ -17,7 +17,7 @@ create (){
   set_wc(1,8);
   set_large_wc(2,5);
   set_property("enchantment",2);
-  set_type("thiefslashing");
+  set_type("slashing");
   set_prof_type("medium blades");
   set_hit((:TO,"extra_hit":));
 }

@@ -13,7 +13,7 @@ set_short("a stinger");
    set("value", 400);
 	set_wc(10,3);
 	set_large_wc(12,4);
-set_type("magepiercing");
+set_type("piercing");
 set_hit((:TO,"weapon_hit":));
 }
 int weapon_hit(object targ){

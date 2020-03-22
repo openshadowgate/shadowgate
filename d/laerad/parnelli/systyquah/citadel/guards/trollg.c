@@ -26,7 +26,7 @@ void create(){
     set_property("swarm",1);
     add_money("gold",random(200)+300);
     add_money("silver",random(20)+10);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"right hand","left hand","head"}));
     set_attacks_num(3);
     set_damage(1,4);

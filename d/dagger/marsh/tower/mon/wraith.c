@@ -24,7 +24,7 @@ set_property("no bows",1);
 set_property("magic",1);
     set_attacks_num(2);
     set_damage(4,6);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_attack_limbs(({"right hand","left hand"}));
     set_overall_ac(-10);
     set_body_type("humanoid");

@@ -18,7 +18,7 @@ void create()
 /*	set_weight(6);
 	set_wc(1,4);
 	set_large_wc(1,3);
-	set_type("thiefpiercing");
+	set_type("piercing");
 	set_size(1);*/
 	set_wield((:TO,"wieldme":));
 	set_unwield("You carefully remove the brass knuckles.");

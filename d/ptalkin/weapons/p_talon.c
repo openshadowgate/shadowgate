@@ -13,7 +13,7 @@ set_property("monsterweapon", 1);
    set("value",0);
     set_wc(1,10);
     set_large_wc(1,10);
-set_type("magepiercing");
+set_type("piercing");
     set_property("monsterweapon",1);
     set_hit((:TO,"weapon_hit":));
 }

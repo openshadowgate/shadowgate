@@ -18,7 +18,7 @@ void create() {
    set_wc(1,4);
    set_large_wc(1,3);
    set_size(1);
-   set_type("magepiercing");
+   set_type("piercing");
    set_property("enchantment",2);
    set_wield( (: TO,"wield_func" :) );
    set_hit( (: TO,"hit_func" :) );

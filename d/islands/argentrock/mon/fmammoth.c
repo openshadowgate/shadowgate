@@ -28,7 +28,7 @@ create() {
    add_limb("trunk","head",0,0,0);
    set_attack_limbs( ({"trunk","left forepaw","right forepaw"}) );
    set_attacks_num(3);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_base_damage_type("bludgeoning");
    set_damage(3,8);
    set_hit_funcs( (["trunk": (: TO,"trunk_func" :)]) );

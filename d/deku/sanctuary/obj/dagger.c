@@ -21,7 +21,7 @@ void create(){
       " made this dagger to make practicing easier."
    );
    set_property("lore",9);
-  // set_type("thiefpiercing");
+  // set_type("piercing");
   // set_prof_type("small blades");
   // set_weight(4);
   // set_size(1);

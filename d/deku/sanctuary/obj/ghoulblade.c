@@ -26,7 +26,7 @@ AVATAR
 	);
 	set_property("lore",9);
 /* let the base file set these now too per bug reports of such a high discern
-	set_type("thiefpiercing");
+	set_type("piercing");
 	set_prof_type("small blades");
 	set_size(1);
         set_wc(2,4);

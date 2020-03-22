@@ -36,7 +36,7 @@ void create(){
     set_exp(100);
     set_alignment(2);
     set_class("fighter");
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_attack_limbs(({"right hand","left hand","right foot","left foot"}));
     set_attacks_num(5);
     set_damage(2,5);

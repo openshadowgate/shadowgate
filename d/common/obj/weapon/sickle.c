@@ -20,7 +20,7 @@ create()
     set_large_wc(1, 6);
     //set_wc(1,6);
     //set_large_wc(2,4);
-    set_type("magepiercing");
+    set_type("piercing");
     set_prof_type("small blades");
     set_weapon_speed(4);
     set_weapon_prof("simple");

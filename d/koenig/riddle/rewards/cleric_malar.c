@@ -23,7 +23,7 @@ The Spike club of Talons and Fangs is a weapon that each Malarite strives to mak
 AVATAR
 	);
    set_property("lore difficulty",12);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("club");
 	set_size(2);
 	set_wc(1,6);

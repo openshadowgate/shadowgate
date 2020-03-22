@@ -56,7 +56,7 @@ void create()
 			set_weight(15);
    			set_wc(2,5);
 			set_large_wc(2,6);
-   			set_type("bludgeon");
+   			set_type("bludgeoning");
    			set_prof_type("hammer");
    			set_weapon_speed(8);
 			set_name("war hammer of lifestealing");

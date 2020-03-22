@@ -14,6 +14,6 @@ create() {
    set("value", 1);
    set_wc(1,8);
    set_large_wc(2,5);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_weapon_speed(6);
 }

@@ -15,7 +15,7 @@ create() {
    set_value(850);
    set_wc(1,6);
    set_large_wc(2,4);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_property("enchantment",random(3)+2);
    set_hit( (: TO,"hit_func" :) );
    set_prof_type("flail");

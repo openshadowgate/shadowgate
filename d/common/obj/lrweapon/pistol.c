@@ -15,7 +15,7 @@ create() {
    set_large_wc(1,8);
 
    set_critical_hit_multiplier(4);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_lr_prof_type("gun");
 
    set_weapon_prof("exotic");

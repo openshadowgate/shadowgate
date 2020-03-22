@@ -16,7 +16,7 @@ void create() {
     //set_large_wc(2,5);
     //set_size(1);
 	//set_prof("short blades");
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("enchantment",3);
     set_hit( (:this_object(), "extra_hit":) );
    set_wield((:TO,"wieldme":));

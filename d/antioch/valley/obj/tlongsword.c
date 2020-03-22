@@ -32,7 +32,7 @@ void create()
 		"are all single.");
 	set_property("lore",13);
 	//set_size(1);
-	//set_type("thiefslashing");
+	//set_type("slashing");
 	//set_weight(2);
 	//set_wc(1,6);
 	//set_large_wc(1,4);

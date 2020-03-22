@@ -31,7 +31,7 @@ void create()
     set_property("magic",1);
     set_attacks_num(1);
     set_attack_limbs(({"right pincer","left pincer","mouth"}));
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_property("knock unconscious",1);
     set_func_chance(5);
     set_funcs(({"bite"}));

@@ -37,7 +37,7 @@ void create()
         set_value(2500);
         //set_wc(1,8);
         //set_large_wc(1,10);
-        //set_type("bludgeon");
+        //set_type("bludgeoning");
         //set_prof_type("staff");
         switch(random(2)) {
 	          case 0:

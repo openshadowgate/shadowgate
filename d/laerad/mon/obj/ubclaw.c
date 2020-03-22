@@ -12,7 +12,7 @@ void create(){
     set("value",1);
     set_wc(3,3);
     set_large_wc(3,3);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("monsterweapon",1);
     set_hit( (:TO,"fling":) );
 }

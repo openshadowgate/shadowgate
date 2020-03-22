@@ -52,7 +52,7 @@ void create()
    	set_property("lore difficulty",20);
    	set_weight(5);
    	set_value(1000);
-   	set_type("magebludgeon");
+   	set_type("bludgeoning");
    	set_wc(2,6);
    	set_large_wc(2,6);
 	set_size(3);

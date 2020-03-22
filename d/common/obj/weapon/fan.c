@@ -13,7 +13,7 @@ void create() {
 		"lacquered paper.  The steel fan is a delicate weapon"+
 		" to use in battle, one often reserved for monks or "+
 		"females.");
-   	set_type("magepiercing");
+   	set_type("piercing");
    	set_prof_type("fan");
     set_weapon_prof("exotic");
    	set_weight(3);

@@ -23,7 +23,7 @@ void create(){
   enable_commands();
 //  set("aggressive",0);
   //set_property("swarm",1);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_long(
 @OLI
    Alinbar Betome, this gaily clad minstrel, once traveled the realms 

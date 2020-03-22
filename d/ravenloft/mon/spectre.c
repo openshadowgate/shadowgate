@@ -28,7 +28,7 @@ void create(){
     set("aggressive",19);
     set_attack_limbs(({"right hand"}));
     set_attacks_num(1);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(1,8);
     set_attack_bonus(5);
     set_hit_funcs( (["right hand":(:TO,"drain":)]) );

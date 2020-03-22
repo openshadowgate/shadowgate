@@ -19,7 +19,7 @@ create() {
    set_value(50);
    set_wc(3,6);
    set_large_wc(3,6);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_prof_type("giant hammer");
    set_weapon_speed(8);
    set_weapon_prof("martial");

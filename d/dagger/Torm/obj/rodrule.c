@@ -16,5 +16,5 @@ create() {
   set_large_wc(1,8);
   set_wc(1,8);
   set_value(25);
-set_type("bludgeon");
+set_type("bludgeoning");
 }

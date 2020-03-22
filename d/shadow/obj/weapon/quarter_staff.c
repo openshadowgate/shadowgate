@@ -19,7 +19,7 @@ create() {
     set_weight(4);
     set_size(3);
     set("value", 3);   
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_prof_type("staff");
    set_weapon_speed(4);
 }

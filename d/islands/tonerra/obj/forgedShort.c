@@ -39,7 +39,7 @@ OLI
    //set_size(1);
    //set_large_wc(2,5);
    set_hit((:TO,"hitme":));
-   set_type("thiefslashing");
+   set_type("slashing");
    set_weight(6);
    set_value(1000);  
 //set_property("magic", 1);

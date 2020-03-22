@@ -12,7 +12,7 @@ void create() {
   set("short","dragon claws");
   set("long",
 "These are huge hideous dragon claws that are glowing slightly");
-  set_type("magepiercing");
+  set_type("piercing");
   set_weight(60);
   set("value",100);
   set_size(3);

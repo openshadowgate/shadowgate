@@ -18,6 +18,6 @@ create() {
    set_cointype("silver"); 
    set_wc(1,7);
    set_large_wc(1,6);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_weapon_speed(4);
 }

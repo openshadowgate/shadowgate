@@ -24,7 +24,7 @@ create() {
   set_large_wc(1,6);
   set_wc(1,6);
   set_value(5);
-  set_type("magepiercing");
+  set_type("piercing");
   set_property("enchantment",3);
   set_prof_type("small blades");
   set_wield((:TO,"extra_wield":));

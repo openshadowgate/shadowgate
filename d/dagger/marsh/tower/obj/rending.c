@@ -21,7 +21,7 @@ create() {
     set_value(200);
     set_wc(1,3);
     set_large_wc(1,2);
-    set_type("magepiercing");
+    set_type("piercing");
     set_size(2);
     set_wield((: TO,"extra_wield" :));
     set_hit((: TO,"extra_hit" :));

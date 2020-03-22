@@ -19,7 +19,7 @@ TERRATO
    set("value",700);
    set_wc(1,10);
    set_large_wc(3,7);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_hit((:TO, "hit_fun":));
 }
 int hit_fun(object targ){

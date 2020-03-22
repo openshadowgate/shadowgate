@@ -14,7 +14,7 @@ void create() {
   set_size(2);
   set_wc(1,8);
   set_large_wc(1,12);
-  set_type("thiefslashing");
+  set_type("slashing");
   set_value(125);
    set_wield("You feel the magic that this weapon possesses.");
   set("read","You cannot read this sword for all of the blood and gore\n"+

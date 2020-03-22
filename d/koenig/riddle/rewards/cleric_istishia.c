@@ -23,7 +23,7 @@ The Chain of the Singing Dolphin was a gift given to the faith of Istishia by a 
 AVATAR
 	);
    set_property("lore difficulty",12);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("flail");
 	set_size(2);
 	set_wc(1,8);

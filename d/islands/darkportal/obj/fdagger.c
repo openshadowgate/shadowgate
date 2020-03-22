@@ -12,7 +12,7 @@ create(){
     set_weight(4);
     set_size(1);
     set("value",200);
-set_type("thiefslashing");
+set_type("slashing");
     set_prof_type("small blades");
 set_wield((:TO,"wield_func":));
 set_hit((:TO,"extra_hit":));

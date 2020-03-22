@@ -41,7 +41,7 @@ void create()
       //set_wc(2,6);
       //set_large_wc(3,6);
     set_property("enchantment",2);
-     //set_type("bludgeon");
+     //set_type("bludgeoning");
     set_hit((:TO,"extra_hit":));
     set_wield((:TO,"extra_wield":));
 }

@@ -26,7 +26,7 @@ STYX
 //   set_cointype("copper")     /* specifies currency, defaults to gold */
    set_wc(1,4);               /* against small and medium */
    set_large_wc(1,3);         /* against large */
-   set_type("magepiercing");  /* F/M/T types */
+   set_type("piercing");  /* F/M/T types */
 //   set_weapon_speed(4);       /* sets the speed of the weapon */
    set_hit( (:this_object(), "extra_hit":) );
 }

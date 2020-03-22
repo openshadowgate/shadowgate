@@ -18,7 +18,7 @@ void create(){
     set_value(2500);
     set_wc(1,6);
     set_large_wc(1,6);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_prof_type("staff");
     set_property("enchantment",1);
     set_hit( (:TO,"extra_hit":) );

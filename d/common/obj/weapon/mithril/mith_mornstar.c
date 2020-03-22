@@ -12,7 +12,7 @@ create() {
    set("value", 310);
    set_wc(2,4);
    set_large_wc(1,6);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_prof_type("mace");
    set_weapon_speed(7);
    set_weapon_prof("simple");

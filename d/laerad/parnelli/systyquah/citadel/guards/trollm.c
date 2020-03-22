@@ -45,7 +45,7 @@ void create(){
 	"meteor swarm",
 	"energy drain",
     }) );
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"right hand","left hand"}));
     set_num_attacks(3);
     set_damage(1,4);

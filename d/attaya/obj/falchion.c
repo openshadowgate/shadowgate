@@ -26,7 +26,7 @@ void create() {
     set_size(2);
     set_value(200);
     set_property("enchantment",1+random(2));
-    set_type("thiefslashing");
+    set_type("slashing");
     set_wield("You grasp the leather wrapped handle firmly.");
     set_unwield("You release your grasp on the Dark Falchion.");
 }

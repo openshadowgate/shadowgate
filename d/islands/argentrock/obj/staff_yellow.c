@@ -34,7 +34,7 @@ void create(){
 //   set_weight(20);
    set_value(1000);
 //   set_size(3);
-//   set_type("magebludgeon");
+//   set_type("bludgeoning");
 //   set_prof_type("pagan staff");
    set_prof_level(40);
    set_ac(1);

@@ -30,7 +30,7 @@ void create(){
     add_limb("left claw","left arm",0,0,0);
     set_attack_limbs(({"right claw","left claw","teeth"}));
     set_attacks_num(3);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(3,4);
     set_funcs(({"gaze"}));
     set_func_chance(30);

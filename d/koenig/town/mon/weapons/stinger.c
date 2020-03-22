@@ -11,7 +11,7 @@ void create()
   set_long("Sharp and nasty.");
   set_weight(5);
   set("value", 5);
-  set_type("magepiercing");
+  set_type("piercing");
   set_wc(1,4);
   set_large_wc(1,8);
   set_size(2);

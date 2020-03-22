@@ -22,7 +22,7 @@ Tales abound of the danger of shark attacks and the fierceness of their bite due
 AVATAR
 	);
 	set_property("lore difficulty",15);
-	set_type("magepiercing");
+	set_type("piercing");
 	set_prof_type("small blades");
 	set_size(1);
 	set_wc(1,4);

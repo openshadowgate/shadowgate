@@ -23,7 +23,7 @@ void create()
    set_value(1000);
    //set_wc(2,4);
    //set_large_wc(2,5);
-   //set_type("thiefslashing");
+   //set_type("slashing");
    set_property("enchantment",3);
    //set_weapon_speed(3);
    //set_size(1);

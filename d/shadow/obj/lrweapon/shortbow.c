@@ -12,7 +12,7 @@ create() {
    set("value", 30);
    set_wc(1,6);
    set_large_wc(1,6);
-  set_type("magebludgeon");
+  set_type("bludgeoning");
    set_two_handed();
   set_lr_prof_type("short bow");
    set_prof_type("staff");
@@ -20,5 +20,5 @@ create() {
    set_range(5,10,15);
    set_ammo("shortbow arrow");
    set_decay_rate(100);
-     set_lr_type("thiefpiercing");
+     set_lr_type("piercing");
 }

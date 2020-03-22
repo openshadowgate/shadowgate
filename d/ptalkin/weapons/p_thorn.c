@@ -24,7 +24,7 @@ set_long("thorn");
 
 
    set_large_wc(1,5);
-set_type("magepiercing");
+set_type("piercing");
     set_property("monsterweapon",1);
 
 

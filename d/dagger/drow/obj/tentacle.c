@@ -11,7 +11,7 @@ void create() {
     set_value (1);
     set_property ("monsterweapon",1);
     set_wc (1,3);
-    set_type ("magepiercing");
+    set_type ("piercing");
     set_hit ((:TO,"extra_hit":));
 }
 int extra_hit() {

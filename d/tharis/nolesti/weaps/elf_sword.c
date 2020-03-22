@@ -28,7 +28,7 @@ create()
     set_wield( "You grasp the hilt of the Sword of the Elves!" );
     set_unwield( "You feel like a part of you is lost as you unwield the sword." );
     set( "value", 9382 );
-    set_type( "thiefslashing" );
+    set_type( "slashing" );
 }
 
 void slice( object targ )

@@ -13,5 +13,5 @@ create() {
    set("value", 30);
    set_wc(2,5);
    set_large_wc(1,9);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
 }

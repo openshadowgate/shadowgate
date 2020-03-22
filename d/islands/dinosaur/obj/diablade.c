@@ -23,7 +23,7 @@ void create(){
     set_wc(2,4);
     set_large_wc(2,6);
     set_size(2);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("enchantment", 5);
 
     set_wield( (:TO, "extra_wield":) );

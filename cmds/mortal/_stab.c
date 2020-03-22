@@ -110,19 +110,6 @@ int scramble_stab(object stabber, object victim)
     // This is going to get messy. This is all new code.
 
     weapon = stabber->query_wielded();
-    if(sizeof(weapon))
-    {
-        if ((string)weapon[0]->query_type()!="thiefslashing" &&(string)weapon[0]->query_type()!="thiefpiercing" && (string)weapon[0]->query_type()!="magepiercing")
-        {
-            //tell_object(stabber,"You can't stab with that kind of weapon!\n");
-            nostab = 1;
-        }
-    }
-
-    // if (member_array((string)victim->query_body_type(),VALID_BACKS) == -1 && !interactive(victim)) {
-    // old logic. Not sure what the interactive is really checking for... :P - g
-
-    //stabber->clean_up_attackers();
 
     if (!objectp(victim))
         victim = stabber->query_current_attacker();
@@ -478,16 +465,10 @@ int cmd_stab(string str)
         }
 
         weapon = TP->query_wielded();
-        if (sizeof(weapon))
-        {
-            if ((string)weapon[0]->query_type()!="thiefslashing" && (string)weapon[0]->query_type()!="thiefpiercing" && (string)weapon[0]->query_type()!="magepiercing")
-            {
-	            //notify_fail("You can't stab with that kind of weapon!\n");
-	            //return 0;
-                scramble_stab(TP, victim);
-                TP->set_disable(25, victim);
-                return 1;
-            }
+        if (sizeof(weapon)) {
+            scramble_stab(TP, victim);
+            TP->set_disable(25, victim);
+            return 1;
         }
 
         do_stab(TP, victim);

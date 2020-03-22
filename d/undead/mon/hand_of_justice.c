@@ -35,7 +35,7 @@ void create()
     set_mob_magic_resistance("average");
     set_attack_limbs(({"right hand"}));
     set_attacks_num(3);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(4,12);
     set_stats("strength",22);
     set_stats("dexterity",14);

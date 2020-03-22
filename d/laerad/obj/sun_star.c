@@ -44,7 +44,7 @@ void create(){
     set_wc(2,4);
     set_large_wc(1,8);
     set_property("enchantment",2);
-    set_type("bludgeon");
+    set_type("bludgeoning");
     set_prof_type("mace");
     set_hit( (:TO,"extra_hit":) );
     set_wield( (:TO,"align_check":) );

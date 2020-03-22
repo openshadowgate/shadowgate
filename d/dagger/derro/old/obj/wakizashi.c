@@ -43,7 +43,7 @@ void create(){
 	set_value(1000);
   	//set_wc(3,4);
   	//set_large_wc(3,3);
-  	//set_type("thiefslashing");
+  	//set_type("slashing");
      	set_property("enchantment",(random(2))+2);
    	set_wield((:TO,"wield_func":));
    	set_unwield((:TO,"unwield_func":));

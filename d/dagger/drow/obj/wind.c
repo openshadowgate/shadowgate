@@ -11,5 +11,5 @@ set_long ("The wind of the air elemental.");
     set_value (1);
     set_property ("monsterweapon",1);
     set_wc (2,10);
-set_type ("magepiercing");
+set_type ("piercing");
 }

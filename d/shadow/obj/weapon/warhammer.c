@@ -15,7 +15,7 @@ create() {
    set("value", 2);
    set_wc(1,6);
    set_large_wc(1,6);
-   set_type("bludgeon");
+   set_type("bludgeoning");
   set_prof_type("medium hammer");
    set_weapon_speed(4);
 }

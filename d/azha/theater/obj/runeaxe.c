@@ -31,7 +31,7 @@ case 1:
 	set_size(1);
 	set_weight(4);
 	set_weapon_speed(4);
-	set_type("thiefslashing");
+	set_type("slashing");
 	set_wc(1,6);
 	set_large_wc(1,4);
 	break;

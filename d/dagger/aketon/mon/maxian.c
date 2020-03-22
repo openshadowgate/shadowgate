@@ -18,7 +18,7 @@ create() {
    add_limb("right hand","torso",0,0,0);
    set_attack_limbs( ({"left hand","right hand"}) );
    set_attacks_num(2);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_damage(3,8);
    set_hd(20,8);
    set_hp(200);

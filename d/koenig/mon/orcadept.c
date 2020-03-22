@@ -37,7 +37,7 @@ void create()
   add_money("gold",random(5)*dlevel);
   add_money("copper",random(20)*dlevel);
   set_attacks_num(2);
-  set_base_damage_type("bludgeon");
+  set_base_damage_type("bludgeoning");
   set_attack_limbs(({"left hand","right hand"}));
   set_overall_ac(4);
   set_alignment(9);

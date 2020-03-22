@@ -16,6 +16,6 @@ void create()
    	set("value",3);
    	set_wc(1,8);
    	set_large_wc(1,6);
-  	set_type("bludgeon");
+  	set_type("bludgeoning");
   	set_weapon_speed(9);*/
 }

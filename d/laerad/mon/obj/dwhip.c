@@ -12,6 +12,6 @@ void create(){
     set("value",1);
     set_wc(1,6);
     set_large_wc(1,8);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_property("monsterweapon",1);
 }

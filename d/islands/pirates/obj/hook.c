@@ -16,7 +16,7 @@ void create(){
 //   set_weight(5);
 //   set_size(1);
    set_value(200);
-   set_type("thiefpiercing");
+   set_type("piercing");
 //   set_prof_type("tool");
    set_property("enchantment",2);
    set_wield("%^RED%^You secure the bloodstained hook with the straps.%^RESET%^");

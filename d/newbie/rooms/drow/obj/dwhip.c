@@ -20,7 +20,7 @@ create() {
    	set_cointype("gold");
    	//set_wc(1,4);
    	//set_large_wc(1,3);
-   	//set_type("thiefslashing");
+   	//set_type("slashing");
    	//set_prof_type("whip");
    	//set_weapon_speed(8);
 }

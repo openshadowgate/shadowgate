@@ -23,7 +23,7 @@ void create()
     set_hd(level,12);
     set_level(level);
     set_size(2);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     add_limb("severed neck","torso",0,0,0);
     add_limb("right hoof","right foreleg",0,0,0);
     add_limb("left hoof","lef foreleg",0,0,0);

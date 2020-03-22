@@ -23,7 +23,7 @@ The Scepter of the Tyrant's Reign is veiwed as many as the divine symbol of The 
 AVATAR
 	);
    set_property("lore difficulty",12);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("mace");
 	set_size(2);
 	set_wc(1,8);

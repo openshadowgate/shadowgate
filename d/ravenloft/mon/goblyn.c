@@ -41,7 +41,7 @@ void create(){
     add_money("silver",random(5));
     add_money("copper",random(50));
     set_attack_limbs(({"right hand","left hand"}));
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attacks_num(2);
     set_damage(1,6);
     set_hit_funcs( ([

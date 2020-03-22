@@ -27,7 +27,7 @@ OLI
    set_weight(17);
    set_value(500);
    set_size(3);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_prof_type("staff");
    set_prof_level(20);
   set_value(500);

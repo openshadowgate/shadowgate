@@ -15,7 +15,7 @@ set_size(2);
 set("value", 100);
 set_wc(1,8);
 set_large_wc(1,12);
-set_type("thiefslashing");
+set_type("slashing");
    if(!random(2)) {
 set_property("enchantment", 1);
    }

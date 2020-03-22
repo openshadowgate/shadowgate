@@ -21,7 +21,7 @@ create(){
     set_weight(4);
     set_size(1);
     set("value",10);
-    set_type("thiefpiercing");
+    set_type("piercing");
     set_prof_type("rapier");
    set_weapon_speed(3);
    set_weapon_prof("martial");

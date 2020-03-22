@@ -22,7 +22,7 @@ After the war between Tonovi and the surrounding lands, the City of Torm realize
 AVATAR
 	);
 	set_property("lore difficulty",16);
-	set_type("thiefslashing");
+	set_type("slashing");
 	set_prof_type("medium blades");
 	set_size(2);
 	set_wc(1,8);

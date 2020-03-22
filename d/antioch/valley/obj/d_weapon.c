@@ -41,7 +41,7 @@ void create_weapon(object obj)
 			TYPE = "knife";
 			obj->set_wc(1,3);
 			obj->set_large_wc(1,2);
-            obj->set_type("magepiercing");
+            obj->set_type("piercing");
 			obj->set_prof_type("small blades");
             obj->set_weapon_prof("simple");
 			obj->set_weight(2);
@@ -50,7 +50,7 @@ void create_weapon(object obj)
 			TYPE = "dagger";
 			obj->set_wc(1,4);
 			obj->set_large_wc(1,3);
-			obj->set_type("magepiercing");
+			obj->set_type("piercing");
             obj->set_prof_type("small blades"); 
 			obj->set_weight(2);     
 			break;
@@ -58,7 +58,7 @@ void create_weapon(object obj)
 			TYPE = "club";
 			obj->set_wc(1,6);
 			obj->set_large_wc(1,3);
-         	obj->set_type("magebludgeon");
+         	obj->set_type("bludgeoning");
             obj->set_weapon_prof("simple");
             obj->set_prof_type("club");
 			obj->set_weight(5);
@@ -67,7 +67,7 @@ void create_weapon(object obj)
 			TYPE = "staff";
 			obj->set_wc(1,6);
 			obj->set_large_wc(1,6);
-            obj->set_type("magebludgeon");
+            obj->set_type("bludgeoning");
 			obj->set_prof_type("staff");
             obj->set_weapon_prof("simple");
 			obj->set_weight(5);
@@ -87,7 +87,7 @@ void create_weapon(object obj)
 			TYPE = "morning star";
 			obj->set_wc(2,4);
 			obj->set_large_wc(1,6);
-			obj->set_type("bludgeon");
+			obj->set_type("bludgeoning");
             obj->set_prof_type("mace");
             obj->set_weapon_prof("simple");
 			obj->set_weight(7);
@@ -105,7 +105,7 @@ void create_weapon(object obj)
 			TYPE = "sickle";
 			obj->set_wc(1,6);
 			obj->set_large_wc(1,4);
-			obj->set_type("thiefslashing");
+			obj->set_type("slashing");
             obj->set_prof_type("small blades");
             obj->set_weapon_prof("simple");
 			obj->set_weight(4);
@@ -123,7 +123,7 @@ void create_weapon(object obj)
 			TYPE = "scimitar";
 			obj->set_wc(1,8);
 			obj->set_large_wc(1,8);
-			obj->set_type("thiefslashing");
+			obj->set_type("slashing");
 			obj->set_profs("medium blades");
             obj->set_weapon_prof("martial");
 			obj->set_weight(7);
@@ -141,7 +141,7 @@ void create_weapon(object obj)
 			TYPE = "flail";
 			obj->set_wc(1,6);
 			obj->set_large_wc(2,4);
-			obj->set_type("bludgeon");
+			obj->set_type("bludgeoning");
          	obj->set_prof_type("flail");
 			obj->set_weapon_prof("martial");
             obj->set_weight(7);
@@ -150,7 +150,7 @@ void create_weapon(object obj)
 			TYPE = "mace";
 			obj->set_wc(1,8);
 			obj->set_large_wc(1,6);
-			obj->set_type("bludgeon");
+			obj->set_type("bludgeoning");
             obj->set_prof_type("mace");
             obj->set_weapon_prof("simple");
 			obj->set_weight(7);
@@ -176,7 +176,7 @@ void create_weapon(object obj)
 			TYPE = "hammer";
 			obj->set_wc(1,6);
 			obj->set_large_wc(2,4);
-			obj->set_type("bludgeon");
+			obj->set_type("bludgeoning");
             obj->set_prof_type("hammer");
             obj->set_weapon_prof("martial");
 			obj->set_weight(7);
@@ -194,7 +194,7 @@ void create_weapon(object obj)
 			TYPE = "sword";
 			obj->set_wc(2,4);
 			obj->set_large_wc(1,6);
-			obj->set_type("thiefslashing");
+			obj->set_type("slashing");
 			obj->set_weight(7);
 			break;
 	}

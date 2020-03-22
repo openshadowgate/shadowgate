@@ -15,7 +15,7 @@ create() {
   set_value(200);
   set_wc(2,5);
   set_large_wc(3,6);
-   set_type("bludgeon");
+   set_type("bludgeoning");
   set_prof_type("large hammer");
   set_weapon_speed(10);
   set_property("enchantment",2);

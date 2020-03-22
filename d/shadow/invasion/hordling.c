@@ -59,14 +59,14 @@ void make_me(){
     set_hp(TP->query_max_hp());
     switch(class){
     case "fighter": 
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_attack_limbs(({"right hand","left hand","head"}));
 	set_attacks_num(4);
 	set_damage(1,10);
 	set_stats("strength",19);
 	break;
     case "thief":
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(2);
 	set_damage(1,8);
@@ -75,7 +75,7 @@ void make_me(){
 	set_func_chance(30);
 	break;
     case "mage":
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(1);
 	set_damage(1,6);
@@ -92,7 +92,7 @@ void make_me(){
 	set_spell_chance(75);
 	break;
     case "cleric":
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_attack_limbs(({"right hand","left hand"}));
 	set_attacks_num(2);
 	set_damage(1,8);
@@ -107,7 +107,7 @@ void make_me(){
 	set_spell_chance(50);
 	break;
     case "antipaladin":
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_attack_limbs(({"right hand","left hand","head"}));
 	set_attacks_num(4);
 	set_damage(1,8);

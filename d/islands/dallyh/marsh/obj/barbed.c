@@ -35,7 +35,7 @@ create() {
         "bone of a celestial's wing.");
      set_value(1350);
      set_prof_type("barbed dagger");
-     set_type("thiefslashing");
+     set_type("slashing");
      set_property("enchantment",6);
      set_hit((:TO, "extra_hit":) );
      set_wield((:TO, "extra_wield":));

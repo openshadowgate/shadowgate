@@ -12,7 +12,7 @@ void create()
   set_long("These fangs are long and nasty to behold.");
   set_weight(1);
   set("value",10);
-  set_type("thiefslashing");
+  set_type("slashing");
   set_wc(1,4);
   set_large_wc(1,8);
   set_size(1);

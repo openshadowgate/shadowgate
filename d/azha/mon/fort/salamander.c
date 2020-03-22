@@ -26,7 +26,7 @@ OLI
    set_hp(150);
    set_exp(2000);
    set_overall_ac(-1);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_attack_limbs(({"right hand","left hand"}));
    set_damage(2,12);
    set_attacks_num(2);

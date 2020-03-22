@@ -16,7 +16,7 @@ void create(){
     set_value(1500);
     set_wc(1,12);
     set_large_wc(1,12);
-    set_type("magepiercing");
+    set_type("piercing");
     set_wield((:TO,"extra_wield":));
     set_property("monsterweapon",1);
 }

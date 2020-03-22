@@ -17,7 +17,7 @@ run the length of the handle, and the mace seems finely crafted.
 CIRCE
 	);
 	set_weight(10);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("mace");
       set_weapon_speed(6);
 	set_size(2);

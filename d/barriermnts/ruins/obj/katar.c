@@ -21,7 +21,7 @@ void create() {
 "sheaf, several mysterious runes have been engraved, highlighted with "
 "%^RESET%^%^RED%^r%^BOLD%^u%^RESET%^%^RED%^b%^BOLD%^y%^BLACK%^ dust. The blades have all been tinted a "
 "%^RESET%^%^RED%^deep-red%^BLACK%^%^BOLD%^ hue, as if they were eternally stained with blood.%^RESET%^");
-   set_type("thiefslashing");
+   set_type("slashing");
    set_prof_type("knuckles");
    set_lore("%^WHITE%^%^BOLD%^This katar was rumoured to be the sacred ritual weapon of a now-destroyed "
 "cult, created for the human magus Archemond.  It was forged from the metal damascus, of which "

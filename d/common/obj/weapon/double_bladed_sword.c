@@ -15,7 +15,7 @@ void create() {
    set_size(3);
    set_value(50);
    set_wc(2,8); //putting this a die higher than TT to reflect that we lack tech to make it usable as two weapons without needing ambidexterity
-    set_type("thiefslashing");
+    set_type("slashing");
    set_large_wc(2,8); //putting this a die higher than TT to reflect that we lack tech to make it usable as two weapons without needing ambidexterity
    set_weapon_prof("exotic");
    set_weapon_speed(10);

@@ -19,7 +19,7 @@ void create() {
     set_two_handed();
     set_lr_prof_type("short bow");
     set_prof_type("club");
-    set_type("bludgeon");
+    set_type("bludgeoning");
     set_decay_rate(150);
     set_rate_of_fire(3);
     set_range(5,10,15);

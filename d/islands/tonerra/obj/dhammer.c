@@ -32,7 +32,7 @@ OLI
     set_weight(45);
     set_value(15000);
     set_wield("%^RED%^The great geometrics grip into your hands.");
-    set_type("bludgeon");
+    set_type("bludgeoning");
 //    set_prof_type("large hammer");
 //changing to prof "giant hammer" after bug reports that you have to 
 //be large and it takes two hands - Circe 12/20/04

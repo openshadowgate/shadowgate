@@ -23,7 +23,7 @@ This is one of the many lucky coins from a halfling by the name of Jornax.   Jor
 AVATAR
 	);
    set_property("lore difficulty",12);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("club");
 	set_size(1);
 	set_wc(1,3);

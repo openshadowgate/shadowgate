@@ -16,7 +16,7 @@ void create()
         "them what you were manifesting and that you got this "+
         "message.  Something is wrong with the power.");
     set_id(({"weapon","psion weapon","energy weapon"}));
-    set_type("magepiercing");
+    set_type("piercing");
     set_weight(0);
     set_value(0);
     set("no curse",1);

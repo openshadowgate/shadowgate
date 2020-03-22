@@ -15,7 +15,7 @@ create() {
    set_cointype("silver");
 	set_wc(1,4);
 	set_large_wc(2,5);
-   set_type("magepiercing");
+   set_type("piercing");
 }
 void init()
 {

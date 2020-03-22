@@ -18,7 +18,7 @@ void create(){
     set_large_wc(1,4)+1;
     set_property("enchantment",2);
     set_property("monsterweapon",1);
-    set_type("magepiercing");
+    set_type("piercing");
     set_hit( (:TO,"extra_hit":) );
 }
 int extra_hit(object ob){

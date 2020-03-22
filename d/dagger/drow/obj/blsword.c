@@ -16,7 +16,7 @@ create() {
     set_value(50);
     set_wc(1,8);
     set_large_wc(1,12);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("enchantment",1);
     set_wield((: TO,"drow" :));
 }

@@ -15,6 +15,6 @@ create() {
    set_cointype("silver");
    set_wc(1,3);
    set_large_wc(1,2);
-   set_type("magepiercing");
+   set_type("piercing");
    set_weapon_speed(2);
 }

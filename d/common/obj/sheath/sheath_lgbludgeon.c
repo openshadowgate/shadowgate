@@ -56,8 +56,8 @@ int will_work(object ths, object tht)
     // from going into size-1 holsters. :P
 
     if (sscanf(ths->query_prof_type(), "%s axe", trash) == 1) {
-        if ((member_array("bludgeon", allowed) != -1) ||
-            (member_array("magebludgeon", allowed) != -1)) {
+        if ((member_array("bludgeoning", allowed) != -1) ||
+            (member_array("bludgeoning", allowed) != -1)) {
             return 1;
         } else{
             return 0;

@@ -43,7 +43,7 @@ void create(){
 *    set_size(2);
 *    set_wc(1,8);
 *    set_large_wc(1,10);
-*    set_type("thiefslashing");
+*    set_type("slashing");
 *    set_prof_type("medium blades");
 ****/
     set_property("enchantment",4);

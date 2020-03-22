@@ -50,7 +50,7 @@ void create()
 		" seeking to end their romances in what ever way he could.  Some "+
 		"claim that Jarthow is still out there… stalking young lovers.");
 	set_property("lore",14);
-	set_type("thiefslashing");
+	set_type("slashing");
 	set_size(2);
         set_property("enchantment",3+random(2));
 	set_wc(2,4);

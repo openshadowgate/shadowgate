@@ -11,5 +11,5 @@ void create(){
   set_value(1);
   set_wc(3,3);
   set_large_wc(3,3);
-  set_type("magebludgeon");
+  set_type("bludgeoning");
 }

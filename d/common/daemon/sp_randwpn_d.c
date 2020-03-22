@@ -153,7 +153,7 @@ void make_polearm(object obj) {
       obj->set_weight(10);
       obj->set_wc(1,8);
       obj->set_large_wc(2,5);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_weapon_speed(8);
       obj->set_damage_type("slashing");
       break;
@@ -161,7 +161,7 @@ void make_polearm(object obj) {
       obj->set_weight(10);
       obj->set_wc(1,6);
       obj->set_large_wc(2,6);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_weapon_speed(8);
       obj->set_damage_type("piercing");
       break;
@@ -208,7 +208,7 @@ void make_random(object obj) {
       obj->set_weight(2);
       obj->set_wc(1,4);
       obj->set_large_wc(1,4);
-      obj->set_type("magepiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("small blades");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(2);
@@ -221,7 +221,7 @@ void make_random(object obj) {
       obj->set_weight(2);
       obj->set_wc(1,3);
       obj->set_large_wc(1,2);
-      obj->set_type("magepiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("small blades");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(2);
@@ -234,7 +234,7 @@ void make_random(object obj) {
       obj->set_weight(6);
       obj->set_wc(1,6);
       obj->set_large_wc(2,3);
-      obj->set_type("thiefpiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("short blades");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(5);
@@ -248,7 +248,7 @@ void make_random(object obj) {
       obj->set_weight(4);
       obj->set_wc(1,6);
       obj->set_large_wc(1,8);
-      obj->set_type("thiefpiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("spear");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(6);
@@ -262,7 +262,7 @@ void make_random(object obj) {
       obj->set_weight(4);
       obj->set_wc(2,3);
       obj->set_large_wc(2,3);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_prof_type("short blades");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(3);
@@ -275,7 +275,7 @@ void make_random(object obj) {
       obj->set_weight(6);
       obj->set_wc(2,6);
       obj->set_large_wc(3,4);
-      obj->set_type("thiefpiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("spear");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(10);
@@ -316,7 +316,7 @@ void make_random(object obj) {
       obj->set_weight(3);
       obj->set_wc(1,4);
       obj->set_large_wc(1,4);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_prof_type("small blades");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(4);
@@ -344,7 +344,7 @@ void make_random(object obj) {
       obj->set_weight(5);
       obj->set_wc(1,6);
       obj->set_large_wc(1,4);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_prof_type("axe");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(4);
@@ -385,7 +385,7 @@ void make_random(object obj) {
       obj->set_weight(4);
       obj->set_wc(1,7);
       obj->set_large_wc(1,6);
-      obj->set_type("thiefpiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("rapier");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(3);
@@ -398,7 +398,7 @@ void make_random(object obj) {
       obj->set_weight(10);
       obj->set_wc(1,8);
       obj->set_large_wc(1,8);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_prof_type("medium blades");
 	  obj->set_weapon_prof("exotic");
       obj->set_weapon_speed(6);
@@ -412,7 +412,7 @@ void make_random(object obj) {
       obj->set_weight(7);
       obj->set_wc(1,8);
       obj->set_large_wc(1,8);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_prof_type("medium blades");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(5);
@@ -439,7 +439,7 @@ void make_random(object obj) {
       obj->set_weight(4);
       obj->set_wc(1,8);
       obj->set_large_wc(1,8);
-      obj->set_type("thiefpiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("medium blades");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(5);
@@ -452,7 +452,7 @@ void make_random(object obj) {
       obj->set_weight(5);
       obj->set_wc(1,6);
       obj->set_large_wc(1,6);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_prof_type("knuckles");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(4);
@@ -480,7 +480,7 @@ void make_random(object obj) {
       obj->set_weight(15);
       obj->set_wc(3,4);
       obj->set_large_wc(3,4);
-      obj->set_type("thiefslashing");
+      obj->set_type("slashing");
       obj->set_prof_type("large blades");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(10);
@@ -508,7 +508,7 @@ void make_random(object obj) {
       obj->set_weight(4);
       obj->set_wc(1,8);
       obj->set_large_wc(1,6);
-      obj->set_type("magebludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("club");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(4);
@@ -522,7 +522,7 @@ void make_random(object obj) {
       obj->set_weight(10);
       obj->set_wc(2,5);
       obj->set_large_wc(2,5);
-      obj->set_type("magebludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("club");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(6);
@@ -536,7 +536,7 @@ void make_random(object obj) {
       obj->set_weight(15);
       obj->set_wc(1,8);
       obj->set_large_wc(1,8);
-      obj->set_type("bludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("flail");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(7);
@@ -550,7 +550,7 @@ void make_random(object obj) {
       obj->set_weight(10);
       obj->set_wc(1,8);
       obj->set_large_wc(1,8);
-      obj->set_type("bludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("mace");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(6);
@@ -563,7 +563,7 @@ void make_random(object obj) {
       obj->set_weight(12);
       obj->set_wc(2,4);
       obj->set_large_wc(1,6);
-      obj->set_type("bludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("mace");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(7);
@@ -577,7 +577,7 @@ void make_random(object obj) {
       obj->set_weight(10);
       obj->set_wc(1,8);
       obj->set_large_wc(1,8);
-      obj->set_type("bludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("hammer");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(5);
@@ -591,7 +591,7 @@ void make_random(object obj) {
       obj->set_weight(15);
       obj->set_wc(2,5);
       obj->set_large_wc(2,6);
-      obj->set_type("bludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("hammer");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(8);
@@ -605,7 +605,7 @@ void make_random(object obj) {
       obj->set_weight(4);
       obj->set_wc(2,4);
       obj->set_large_wc(2,5);
-      obj->set_type("magebludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("staff");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(4);
@@ -620,7 +620,7 @@ void make_random(object obj) {
       obj->set_weight(3);
       obj->set_wc(1,6);
       obj->set_large_wc(1,6);
-      obj->set_type("magebludgeon");
+      obj->set_type("bludgeoning");
       obj->set_prof_type("staff");
 	  obj->set_weapon_prof("simple");
       obj->set_weapon_speed(3);
@@ -663,7 +663,7 @@ void make_random(object obj) {
       obj->set_weight(3);
       obj->set_wc(1,5);
       obj->set_large_wc(1,5);
-      obj->set_type("magepiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("fan");
 	  obj->set_weapon_prof("exotic");
       obj->set_weapon_speed(3);
@@ -676,7 +676,7 @@ void make_random(object obj) {
       obj->set_weight(4);
       obj->set_wc(1,5);
       obj->set_large_wc(1,5);
-      obj->set_type("thiefpiercing");
+      obj->set_type("piercing");
       obj->set_prof_type("rapier");
 	  obj->set_weapon_prof("martial");
       obj->set_weapon_speed(3);

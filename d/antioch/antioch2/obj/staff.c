@@ -16,7 +16,7 @@ void create()
 	);
         //set_wc(1,4);
         //set_large_wc(1,6);
-        //set_type("magebludgeon");
+        //set_type("bludgeoning");
         //set_weight(4);
         //set_value(2);
         //set_size(2);

@@ -16,7 +16,7 @@ create()
     set_large_wc(2, 4);
     set_prof_type("medium blades");
     set_weapon_prof("martial");
-    set_type("thiefslashing");
+    set_type("slashing");
     set_weapon_speed(5);
 
     set_critical_threat_range(2);

@@ -28,7 +28,7 @@ FIZIE
     set_weight(3);
     set_size(1);
 set_value(500);
-    set_type("magepiercing");
+    set_type("piercing");
     set_wield((:TO,"wield_func":));
    set_unwield((:TO,"removeme":));
     set_hit((: TO,"extra_hit" :));

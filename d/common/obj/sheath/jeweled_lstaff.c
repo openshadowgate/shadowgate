@@ -47,7 +47,7 @@ int will_work(object ths, object tht) {
    if(member_array(ths->query_lr_prof_type(),allowed) != -1) return 1;
    if(member_array(ths->query_basic_prof_type(),allowed) == -1) return 0;
    if(sscanf(ths->query_prof_type(),"%s axe",trash) == 1) {
-      if((member_array("bludgeon", allowed) != -1) || (member_array("magebludgeon", allowed) != -1))
+      if((member_array("bludgeoning", allowed) != -1) || (member_array("bludgeoning", allowed) != -1))
          return 1;
       else return 0;
    }

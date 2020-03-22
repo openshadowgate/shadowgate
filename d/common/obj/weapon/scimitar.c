@@ -14,7 +14,7 @@ void create()
    set("value", 15);
    set_wc(1,6);
    set_large_wc(1,6);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_weapon_speed(5);
    set_prof_type("medium blades");
    set_weapon_prof("martial");

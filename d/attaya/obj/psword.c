@@ -13,7 +13,7 @@ create() {
     set_value(500);
     set_wc(1,8);
     set_large_wc(1,14);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("enchantment",4);
     set_hit((:TO,"extra_hit":));
     set_property("monsterweapon", 1);

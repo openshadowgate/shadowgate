@@ -23,7 +23,7 @@ void create() {
 //   set_wc(1,6);   // all should come from the inherit now
 //   set_large_wc(2,6);
 //   set_size(2);
-//   set_type("bludgeon");
+//   set_type("bludgeoning");
 //   set_prof_type("whip");
    set_property("enchantment",3);  // increased from 1
    set_hit((:this_object(), "extra_hit":));

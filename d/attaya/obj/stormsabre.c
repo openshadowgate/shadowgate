@@ -13,7 +13,7 @@ create() {
     set_value(3500);
     set_wc(8,16);
     set_large_wc(8,18);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_rate_of_fire(1);
     set_range(5,10,15);
     set_ammo("red lightning");

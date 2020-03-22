@@ -32,7 +32,7 @@ OLI
    set_attacks_num(2);
    set_mob_magic_resistance("average");
    set_damage(2,8);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_stats("dexterity",100);
    set_funcs(({"breakem"}));
    set_func_chance(15);

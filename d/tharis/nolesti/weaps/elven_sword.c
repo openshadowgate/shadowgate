@@ -20,5 +20,5 @@ create()
     set_wc( 1, 7 );
     set_large_wc( 1, 9 );
     set( "value", 15 );
-    set_type( "thiefslashing" );
+    set_type( "slashing" );
 }

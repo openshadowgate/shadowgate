@@ -20,7 +20,7 @@ void create(){
     set_class("fighter");
     set_mlevel("fighter", query_hd());
     set_attack_limbs(({"right hand", "left hand"}));
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
    set_damage(2,6);
     set_overall_ac(-5);
     set("aggressive", 18);

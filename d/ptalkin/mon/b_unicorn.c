@@ -25,7 +25,7 @@ knifes the air, shining faintly with magic.
 set_property("wimpy", 40);
 	set_overall_ac(2);
 	set_damage(1,12);
-	set_base_damage_type("bludgeon");
+	set_base_damage_type("bludgeoning");
 	set_attack_limbs(({"right hoof","left hoof","horn"}));
 	set_body_type("equine");
 	set_race("unicorn");

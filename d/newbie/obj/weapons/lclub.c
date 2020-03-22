@@ -11,7 +11,7 @@ void create(){
    set_size(3);
    set_weight(7);
    set_value(5);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_prof_type("large clublike");
    set_weapon_speed(4);
    set_wc(1,6);

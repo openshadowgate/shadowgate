@@ -16,7 +16,7 @@ create(){
     set_wield((:TO,"wield_func":));
     set_unwield((:TO,"unwield_func":));
     set_hit((: TO,"extra_hit" :));
-    set_type("thiefslashing");
+    set_type("slashing");
     set_prof_type("small blades");
 attacked=0;
 }

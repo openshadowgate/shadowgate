@@ -14,7 +14,7 @@ create() {
    set("value", 35);
    set_wc(1,10);
    set_large_wc(1,10);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_weapon_speed(6);
    set_weapon_prof("exotic");
 

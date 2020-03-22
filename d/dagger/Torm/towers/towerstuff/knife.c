@@ -15,7 +15,7 @@ create() {
    set("value", 2);
   set_wc(1,5);
   set_large_wc(2,3);
-   set_type("magepiercing");
+   set_type("piercing");
    set_weapon_speed(2);
   set_property("enchantment",1);
 }

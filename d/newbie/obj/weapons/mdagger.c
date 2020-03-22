@@ -11,7 +11,7 @@ void create(){
    set_size(1);
    set_weight(2);
    set_value(3);
-   set_type("magepiercing");
+   set_type("piercing");
    set_prof_type("small blades");
    set_weapon_speed(2);
    set_wc(1,4);

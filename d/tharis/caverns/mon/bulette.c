@@ -38,6 +38,6 @@ void create(){
     add_limb("left claws","left foreleg",0,0,0);
     set_damage(2,5);
     set_attacks_num(3);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_attack_limbs(({"right claws","left claws","teeth"}));
 }

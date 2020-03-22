@@ -49,7 +49,7 @@ void create(){
     set_large_thrown_wc(1,4);
     set_thrown_wc(1,6);
     set_thrown_hit_func((:TO,"throwme":));
-    set_type("thiefpiercing");
+    set_type("piercing");
     set_prof_type("small blades");
     set_size(1);
 }

@@ -11,7 +11,7 @@ create() {
              "it hits an opponent.\n");
     set_weight(7);
     set_size(2);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_wc(1,8);
     set_large_wc(1,12);
     set_wield_string("The sword glows when you wield it.\n");

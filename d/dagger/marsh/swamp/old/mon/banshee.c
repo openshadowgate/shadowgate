@@ -24,7 +24,7 @@ set_property("magic",1);
     set_weight(50);
     set_attacks_num(4); 
     set_damage(1,8);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     add_limb("right chain","torso",0,0,0);
     add_limb("left chain","torso",0,0,0);
     set_attack_limbs(({"right hand","left hand","right chain","left chain"})); 

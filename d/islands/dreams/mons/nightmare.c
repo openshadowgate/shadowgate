@@ -28,7 +28,7 @@ void create()
 	set_max_level(37);
   	set_attack_limbs(({"right fore hoof","left fore hoof","mouth"}));
   	set_attacks_num(4);
-  	set_base_damage_type("thiefslashing");
+  	set_base_damage_type("slashing");
   	set_damage(3,4);
   	set_hp(random(50)+550);
   	set_exp(10000);

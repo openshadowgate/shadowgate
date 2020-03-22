@@ -14,7 +14,7 @@ void create(){
     set_long("This morningstar is a black, spiked one-piece rod fitted with a round, spiked head.  It is surrounded by a dim, flickering, green aura.");
     set_wc(1,14);
     set_large_wc(1,14);
-    set_type("bludgeon");
+    set_type("bludgeoning");
     set_prof_type("magic weapons");
     set_weight(0);
     set_value(0);

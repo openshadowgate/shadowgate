@@ -7,7 +7,7 @@ void create() {
   set_id(({ "staff", "long staff" }));
   set_short("A Long Staff");
   set_long("The warped wood of this staff lends it an Arcane sense.");
-  set_type("magebludgeon");
+  set_type("bludgeoning");
   set_wc(1,6);
   set_hit((: this_object(), "big_hit" :));
   set_weight(3);

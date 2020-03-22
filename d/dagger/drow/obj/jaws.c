@@ -11,5 +11,5 @@ set_long ("The jaws of the giant gar.");
     set_value (1);
     set_property ("monsterweapon",1);
     set_wc (5,5);
-set_type ("magepiercing");
+set_type ("piercing");
 }

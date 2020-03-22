@@ -42,7 +42,7 @@ void create()
   set_attacks_num(3);
   remove_limb("left hand");
   remove_limb("right hand");
-  set_base_damage_type("thiefslashing");
+  set_base_damage_type("slashing");
   add_limb("left claw","left arm",0,0,0);
   add_limb("right claw","right arm",0,0,0);
   add_limb("teeth","head",0,0,0);

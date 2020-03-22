@@ -12,7 +12,7 @@ create() {
    set("value", 2);
    set_wc(1,4);
    set_large_wc(1,4);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_weapon_prof("martial");
    set_weapon_speed(2);
    set_critical_threat_range(3);

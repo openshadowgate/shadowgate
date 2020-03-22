@@ -18,7 +18,7 @@ void create() {
     set_size(2);
     set_wc(1,8);
     set_large_wc(1,12);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_value(125);
     set_wield_string("You mind fills with the deeds of ancient heroes.");
     set("read","Song is the blade of the true bard.\n");

@@ -32,7 +32,7 @@ void create(){
 		"dagger is given only to those who have earned the right to be called"+
 		" a man. - Five Years in Tonerra: Observations of the Natives - Timmon Bigspy");
 	set_property("lore",13);
-	//set_type("magepiercing");
+	//set_type("piercing");
   	set_wc(1,5);
   	set_large_wc(1,6);
   	set_hit((:TO,"hit_me":));

@@ -28,7 +28,7 @@ void create()
    set_hp(random(150)+75);
    set_damage(1,8);
    set_attacks_num(2);
-   set_base_damage_type("magebludgeon");
+   set_base_damage_type("bludgeoning");
    set_property("swarm",1);
    set("aggressive",25);
    set_exp(300);

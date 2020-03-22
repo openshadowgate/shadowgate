@@ -16,5 +16,5 @@ set_weight(14);
 set("value", 25);
 set_wc(2,7);
 set_large_wc(2,8);
-set_type("thiefslashing");
+set_type("slashing");
 }

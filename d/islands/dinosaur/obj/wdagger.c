@@ -16,7 +16,7 @@ void create(){
     set_value(300);
     set_weight(3);
     set_size(1);
-    set_type("magepiercing");
+    set_type("piercing");
     set_property("enchantment", 2);
     set_wield( (:TO, "extra_wield":) );
     set_hit( (:TO, "extra_hit":) );

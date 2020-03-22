@@ -32,7 +32,7 @@ create() {
    set_value(0);
    set_wc(1,12);
    set_large_wc(1,8);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_prof_type("medium blades");
    set_weapon_prof("exotic");
    set_weapon_speed(5);

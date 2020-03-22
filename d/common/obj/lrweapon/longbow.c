@@ -16,7 +16,7 @@ create() {
    set_two_handed();
    set_wc(2,6);
    set_large_wc(2,6);
-   set_type("thiefpiercing");
+   set_type("piercing");
    set_rate_of_fire(2);
    set_range(7,15,21);
    set_ammo("longbow arrow");

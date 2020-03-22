@@ -15,6 +15,6 @@ create() {
   set_large_wc(1,2);
   set_wc(1,2);
    set_value(5);
-set_type("bludgeon");
+set_type("bludgeoning");
    set_prof_type("tool");
 }

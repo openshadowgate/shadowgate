@@ -6,7 +6,7 @@ create() {
   set("id", ({"teeth"}) );
   set_short("Annis teeth");
   set("long", "These are the ugly green teeth of a Annis.\n");
-  set_type("magebludgeon");
+  set_type("bludgeoning");
 set_property("monsterweapon",1);
   set_weight(1);
   set_size(1);

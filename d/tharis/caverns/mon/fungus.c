@@ -22,7 +22,7 @@ void create(){
     set_property("no rush",1);
     set_attack_limbs(({"head"}));
     set_attacks_num(1);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_damage(1,10);
     set_funcs(({"spores"}));
     set_func_chance(20);

@@ -11,7 +11,7 @@ void create(){
    set_size(2);
    set_weight(8);
    set_value(5);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_prof_type("flail");
    set_weapon_speed(6);
    set_wc(1,5);

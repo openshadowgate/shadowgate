@@ -12,7 +12,7 @@ create(){
     set_weight(3);
     set_size(1);
     set("value",1000);
-    set_type("magepiercing");
+    set_type("piercing");
     set_wield((:TO,"wield_func":));
     set_hit((: TO,"extra_hit" :));
     set_prof_type("small blades");

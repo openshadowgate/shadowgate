@@ -11,7 +11,7 @@ set_long("This is a dagger carved from the bones of a whale. It is quite sturdy.
     set_weight(2);
     set_size(1);
     set("value",1000);
-    set_type("magepiercing");
+    set_type("piercing");
     set_hit((: TO,"extra_hit" :));
     set_prof_type("small blades");
 }

@@ -31,7 +31,7 @@ void create()
   	add_limb("horn","head",0,0,0);
   	set_attack_limbs(({"right fore hoof","left fore hoof","horn"}));
   	set_attacks_num(3);
-  	set_base_damage_type("thiefslashing");
+  	set_base_damage_type("slashing");
   	set_damage(2,5);
   	set_hp(random(25)+500);
   	set_exp(10000);

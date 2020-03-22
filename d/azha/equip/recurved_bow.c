@@ -36,8 +36,8 @@ WEAPON
 	set_rate_of_fire(3);
     set_lr_prof_type("recurved bow");
 	set_range(4,8,12);
-	set_type("bludgeon");
-//        set_lr_type("thiefpiercing"); thieves can't use it so let it default to piercing to fix shop list confusion *Styx*  11/14/04
+	set_type("bludgeoning");
+//        set_lr_type("piercing"); thieves can't use it so let it default to piercing to fix shop list confusion *Styx*  11/14/04
 	set_ammo("shortbow arrow");
     set_prof_type("club");
 	set_value(100);

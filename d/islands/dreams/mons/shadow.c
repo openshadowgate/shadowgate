@@ -24,7 +24,7 @@ void create()
   	set_mlevel("fighter",25);
   	set_attack_limbs(({"right hand","left hand"}));
   	set_attacks_num(2);
-  	set_base_damage_type("thiefslashing");
+  	set_base_damage_type("slashing");
   	set_damage(1,6);
   	set_stats("dexterity",18);
   	set_hit_funcs((["left hand":(:TO,"drainem":)]));

@@ -28,7 +28,7 @@ create()
     set_wield( (: TO, "intell" :) );
     set_unwield( (: TO, "reset" :) );
     set( "value", 1000 );
-    set_type( "magebludgeon" );
+    set_type( "bludgeoning" );
 }
 
 void blast( object targ )

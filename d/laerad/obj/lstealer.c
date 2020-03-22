@@ -38,7 +38,7 @@ void create()
     set_value(500);
     //set_wc(1,6);
     //set_large_wc(1,8);
-    //set_type("thiefslashing");
+    //set_type("slashing");
     set_property("enchantment",2);
     set_wield((:TO,"wield_me":));
     set_unwield((:TO,"removeme":));

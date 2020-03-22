@@ -15,10 +15,10 @@ create() {
    set_two_handed();
    set_wc(1,8);
    set_large_wc(1,8);
-   set_type("bludgeon");
+   set_type("bludgeoning");
    set_rate_of_fire(2);
    set_range(7,15,21);
    set_ammo("longbow arrow");
    set_decay_rate(100);
-   set_lr_type("thiefpiercing");
+   set_lr_type("piercing");
 }

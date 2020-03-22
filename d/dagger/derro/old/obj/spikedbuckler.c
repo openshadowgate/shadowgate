@@ -17,7 +17,7 @@ void create(){
   set_ac(1);
   set_wc(1,4);
   set_large_wc(1,4);
-  set_type("thiefpiercing");
+  set_type("piercing");
   set_prof_type("spikedbuckler");
   set_property("enchantment",1);
   set_hit((:TO,"extra_hit":));

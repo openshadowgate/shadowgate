@@ -13,6 +13,6 @@ set_name("long dagger");
    set("value", 500);
    set_wc(1,6);
    set_large_wc(1,6);
-   set_type("magepiercing");
+   set_type("piercing");
 set_prof_type("small blades");
 }

@@ -18,7 +18,7 @@ void create(){
     set_race("human");
     set_gender("male");
     set_id( ({"vaistus", "Vaistus", "trainer", "master"}) );
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_overall_ac(5);
     set_exp(1);
 }

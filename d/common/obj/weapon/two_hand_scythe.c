@@ -20,7 +20,7 @@ void create(){
     set_wc(2,4);
     set_large_wc(2,4);
     set_size(3);
-      set_type("thiefslashing");
+      set_type("slashing");
 set_prof_type("polearm");
     set_weapon_speed(6);
     set_weapon_prof("martial");

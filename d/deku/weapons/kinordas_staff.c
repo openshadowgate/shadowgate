@@ -46,7 +46,7 @@ void create(){
    	set("langage","common");	
     	set_weight(7);	
     	set_value(5000);
-	set_type("magebludgeon");
+	set_type("bludgeoning");
 	set_prof_type("staff");
 	set_size(3);
 	set_wc(1,6);

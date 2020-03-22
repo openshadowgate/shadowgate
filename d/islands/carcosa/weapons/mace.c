@@ -14,7 +14,7 @@ void create(){
 	set("value",500);
 	set_wc(1,6)+1;
 	set_large_wc(1,6);
-	set_type("magebludgeon");
+	set_type("bludgeoning");
       set_prof_type("mace");
 	set_wield( (:this_object(),"wield_mace":) );
 	set_unwield( (:this_object(),"unwield_mace":) );

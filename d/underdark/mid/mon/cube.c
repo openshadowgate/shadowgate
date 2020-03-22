@@ -38,7 +38,7 @@ void create(){
     set_attack_limbs(({"body"}));
     set_attacks_num(2);
     set_damage(4,4);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     myroom = find_object_or_load(MIDMON"cuberoom");
 }
 

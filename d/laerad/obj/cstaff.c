@@ -17,7 +17,7 @@ void create() {
     set_weight(10);
     set_size(3);
     set_value(3500);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_prof_type("staff");
     set_wc(1,6);
     set_large_wc(1,6);

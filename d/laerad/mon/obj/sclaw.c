@@ -12,7 +12,7 @@ void create(){
     set("value",1);
     set_wc(1,12);
     set_large_wc(1,10);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("monsterweapon",1);
     set_property("enchantment",1);
 }

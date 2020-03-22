@@ -14,7 +14,7 @@ void create()
     set_short("%^RESET%^%^WHITE%^a %^BOLD%^%^BLACK%^w%^RESET%^h%^BOLD%^i%^RESET%^p of %^BOLD%^%^BLACK%^s%^RESET%^p%^BOLD%^i%^BLACK%^d%^RESET%^e%^BOLD%^r%^RESET%^s");
     set_long("You see a strange whip made of numerous tiny spiders. They look back at you with their tiny black eyes.");
     set_id(({"weapon","whip","whip of spiders"}));
-    set_type("magepiercing");
+    set_type("piercing");
     set_weight(0);
     set_value(0);
     set("no curse",1);

@@ -12,7 +12,7 @@ create(){
     set_weight(4);
     set_size(1);
     set("value",200);
-set_type("bludgeon");
+set_type("bludgeoning");
     set_prof_type("flail");
 set_wield((:TO,"wield_func":));
 set_hit((:TO,"extra_hit":));

@@ -62,7 +62,7 @@ inherit WEAPONLESS;
     set_property("swarm",1);
     set("aggressive",18);
 	set_attacks_num(2);
-    set_base_damage_type("thiefslashing");
+    set_base_damage_type("slashing");
     set_damage(2,4);
 	set_funcs(({"moan1","moan2"}));
 	set_func_chance(50);

@@ -29,7 +29,7 @@ OLI
    set_mob_magic_resistance("average");
    set_property("weapon resistance",2);
 
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
 
    set_overall_ac(-14);
    set_attack_limbs(({"grasping right hand","grasping left hand"}));

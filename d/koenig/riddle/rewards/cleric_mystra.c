@@ -39,7 +39,7 @@ AVATAR
          "end along the road between Azha and Tharis."
 	);
    set_property("lore difficulty",12);
-	set_type("bludgeon");
+	set_type("bludgeoning");
 	set_prof_type("staff");
 	set_size(3);
 	set_wc(1,6);

@@ -32,7 +32,7 @@ create() {
     set_attack_limbs(({"left flame", "right flame"}));
     set_damage(4,8);
     set_attacks_num(1);
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
 	set_wielding_limbs( ({ "right hand", "left hand" }) );
     add_money("gold",175 + random(200));
 	step = 0;

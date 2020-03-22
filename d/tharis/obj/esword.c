@@ -18,7 +18,7 @@ void create() {
    set_value(750);
    set_wc(1,8);
    set_large_wc(1,12);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_wield( (: TO, "state_so" :) );
    set_unwield( (: TO, "state_what" :) );
    set_hit((:TO,"make_magic":));

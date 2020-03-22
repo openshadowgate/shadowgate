@@ -31,7 +31,7 @@ void create()
 		"more to melt them all.");
 	set_property("lore",11);
 	//set_size(1);
-	set_type("magepiercing");
+	set_type("piercing");
 	//set_weight3);
 	//set_wc(1,4);
 	//set_large_wc(1,3);

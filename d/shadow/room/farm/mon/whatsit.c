@@ -51,7 +51,7 @@ inherit WEAPONLESS;
       add_limb("sycamore arm","torso",0,0,0);
 	set_attack_limbs(({"oak arm","walnut arm","spruce arm","willow arm","cypress arm","sycamore arm"}));
 	set_attacks_num(3);
-      set_base_damage_type("bludgeon");
+      set_base_damage_type("bludgeoning");
      	set_damage(1,2);
 	set_funcs(({"arm1","arm2","arm3","arm4","arm5","arm6"}));
 	set_func_chance(30);

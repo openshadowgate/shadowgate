@@ -12,7 +12,7 @@ void create(){
    set_long("%^BOLD%^This is a knife made of pure silver. You realize "
       "it is one of the rare artifact weapons that can be found.");
    set_id( ({"knife","silver knife","silver","artifact"}) );
-   set_type("magepiercing");
+   set_type("piercing");
    set_weight(5);
    set_value(800);
    set_size(1);

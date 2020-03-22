@@ -30,7 +30,7 @@ void create() {
    set_property("weapon resistance", 4);
    set_attack_limbs(({"right fist","left fist"}));
    set_damage(3,10);
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_attacks_num(6);
    set_property("no death", 1);
    set_stats("strength", 25);

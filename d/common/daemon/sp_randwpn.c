@@ -106,15 +106,15 @@ int hit_func(object targ) {
     if(!objectp(targ)) return 0;  
     name = TO->query_name();
     type = (string)TO->query_type();
-    if(type == "magebludgeon" || type == "bludgeon") {
+    if(type == "bludgeoning" || type == "bludgeoning") {
 	hits = BSTRIKES[random(sizeof(BSTRIKES))];
 	cuts = SMASHES[random(sizeof(SMASHES))];
     }
-    if(type == "thiefslashing" || type == "slash" || type == "slashing") {
+    if(type == "slashing" || type == "slash" || type == "slashing") {
 	hits = SSTRIKES[random(sizeof(SSTRIKES))];
 	cuts = CUTS[random(sizeof(CUTS))];
     }
-    if(type == "pierce" || type == "piercing" || type == "magepiercing" || type == "thiefpiercing") {
+    if(type == "pierce" || type == "piercing" || type == "piercing" || type == "piercing") {
 	hits = PSTRIKES[random(sizeof(PSTRIKES))];
 	cuts = CUTS[random(sizeof(CUTS))];
     }

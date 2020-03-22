@@ -45,7 +45,7 @@ void create()
     set_class("fighter");
 //    set_guild_level("fighter",24);
     set_stats("charisma", 12);
-    set_base_damage_type("magebludgeon");
+    set_base_damage_type("bludgeoning");
     set_attack_limbs(({ "right hand", "left hand", "right foot", "left foot" }));
     set_attacks_num(5);
     set_damage(2, 5);

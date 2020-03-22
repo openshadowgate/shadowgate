@@ -22,7 +22,7 @@ The Gorgon's Staff is rumored to grant one a minor mastery over the earth.  It i
 AVATAR
 	);
 	set_property("lore",12);
-	set_type("magebludgeon");
+	set_type("bludgeoning");
 	set_prof_type("staff");
 	set_size(3);
 	set_wc(1,6);

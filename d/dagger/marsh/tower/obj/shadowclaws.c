@@ -21,7 +21,7 @@ void create() {
    set_weight(0);
    set_value(0);
    set_property("no curse",1);
-   set_type("magepiercing");
+   set_type("piercing");
    set_damage_type("piercing");
    set_hit((:TO,"hit_fun":));
 }

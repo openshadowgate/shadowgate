@@ -24,7 +24,7 @@ The Sai of the East is a weapon from a distant land.  The sai looks like a dagge
 AVATAR
 	);
    set_property("lore difficulty",12);
-	set_type("magebludgeon");
+	set_type("bludgeoning");
 	set_prof_type("club");
 	set_size(1);
 	set_wc(1,4);

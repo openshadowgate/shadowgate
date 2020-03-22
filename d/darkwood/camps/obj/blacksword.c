@@ -16,7 +16,7 @@ void create() {
     //set_wc(2,4);
     //set_large_wc(2,5);
     set_size(1);
-    //set_type("thiefslashing");
+    //set_type("slashing");
     set_hit( (:this_object(), "extra_hit":) );
    set_wield((:TO,"wieldme":));
    set_unwield((:TO,"removeme":));

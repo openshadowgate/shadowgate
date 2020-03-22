@@ -13,7 +13,7 @@ create() {
     set_value(550);
     set_wc(1,10);
     set_large_wc(1,10);
-    set_type("bludgeon");
+    set_type("bludgeoning");
     set_property("enchantment",2);
     set_unwield("You lower the heavy stormhammer and your muscles feel sore.");
     set_prof_type("medium hammer");

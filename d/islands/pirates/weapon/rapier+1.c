@@ -17,6 +17,6 @@ set_large_wc(1,9);
 set_size(1);
     set("value",15);
 set_property("enchantment",1);
-set_type("thiefslashing");
+set_type("slashing");
     set_prof_type("rapier");
 }

@@ -13,6 +13,6 @@ set_short("A axe");
     set_wc(1,6);
     set_large_wc(1,4);
    set_value(10);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_prof_type("medium axe");
 }

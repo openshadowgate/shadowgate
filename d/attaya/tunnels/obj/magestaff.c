@@ -67,7 +67,7 @@ set_long("%^ORANGE%^A stout looking staff of %^RESET%^t%^BOLD%^%^BLACK%^w"
         +" %^GREEN%^roots%^ORANGE%^, which seem to be holding it in"
         +" place.");
 
-  set_type("magebludgeon");
+  set_type("bludgeoning");
   set_prof_type("staff");
 //set_weight(20); //changed to 20 from 30, because as it is at present the max weight a sleeve can hold is 20 lbs - valas couldn't sheath this thing
   set_weight(10); //changed weight to 10 because most staves are 4 lbs, so this seemed extreme ~Circe~ 5/11/11

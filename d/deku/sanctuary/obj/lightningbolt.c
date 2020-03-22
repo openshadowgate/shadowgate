@@ -29,7 +29,7 @@ void create(){
 		"memories of a blade like this.");
 /* all this would be in the /d/common file now
 //	set_weight(4);
-	set_type("thiefpiercing");
+	set_type("piercing");
 	set_prof_type("rapier");
 	set_size(2);
 	set_wc(2,3);

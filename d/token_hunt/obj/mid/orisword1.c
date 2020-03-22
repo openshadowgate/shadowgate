@@ -30,7 +30,7 @@ void create() {
      TO->set_property("enchantment",3);
    }
    set_item_bonus("reflex",1);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_wield((:TO,"wield_fun":));
    set_unwield((:TO,"unwield_fun":));
    set_overallStatus(220);

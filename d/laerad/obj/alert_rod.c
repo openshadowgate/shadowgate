@@ -15,7 +15,7 @@ void create(){
     set_weight(15);
     set_size(2);
     set_value(5000);
-    set_type("bludgeon");
+    set_type("bludgeoning");
     set_prof_type("mace");
     set_wc(1,6);
     set_large_wc(1,6);

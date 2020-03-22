@@ -18,5 +18,5 @@ void create(){
         set_wc(1,12);
         set_large_wc(1,16);
         set_size(3);
-        set_type("thiefslashing");
+        set_type("slashing");
         }

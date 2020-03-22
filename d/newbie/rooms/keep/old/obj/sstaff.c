@@ -21,7 +21,7 @@ void create()
       "wielded by a xvart shaman, the highest of their numbers.");
    set_property("lore difficulty",7);
    set_value(5);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_weapon_speed(2);
    set_wc(1,4);
    set_large_wc(1,4);

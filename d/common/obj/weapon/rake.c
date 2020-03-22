@@ -10,7 +10,7 @@ create(){
     set_size(2);
     set_wc(1,2);
     set_large_wc(1,2);
-    set_type("magebludgeon");
+    set_type("bludgeoning");
     set_prof_type("tool");
     set_value(1);
     set_wield("You feel rather silly wielding this, but hey it's a weapon!");

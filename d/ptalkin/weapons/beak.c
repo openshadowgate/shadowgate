@@ -5,7 +5,7 @@ create() {
 set_name("beak");
 set_id(({"beak"}));
 set_short("beak");
-  set_type("magebludgeon");
+  set_type("bludgeoning");
 set_property("monsterweapon",1);
   set_weight(1);
   set_size(1);

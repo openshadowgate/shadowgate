@@ -21,7 +21,7 @@ create() {
    set("value", 500);
    set_wc(1,1);
    set_large_wc(1,1);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_weapon_speed(3);
    set_lore("Rumours speak of tabaxi hunters who used the bolas to trap men as well as beasts. The greatest of these were thought to hold enchantments designed to combat magical means of escape");
    set_thrown_hit_func((:TO, "hit_func":));

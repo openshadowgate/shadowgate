@@ -7,7 +7,7 @@ void create() {
    set_id( ({"tines"}) );
    set_short( "tines");
    set_long("A forks tines.");
-   set_type("thiefslashing");
+   set_type("slashing");
    set_wc(2,7);
    set_value(7);
 set_weight(1);

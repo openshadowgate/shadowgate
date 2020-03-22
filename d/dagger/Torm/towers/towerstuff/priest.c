@@ -42,7 +42,7 @@ set_size(2);
   set_exp(query_max_hp()*6);
   set_attack_limbs(({"phantom mace"}));
   set_attacks_num(2);
-  set_base_damage_type("bludgeon");
+  set_base_damage_type("bludgeoning");
   set_hit_funcs((["phantom mace":(:TO,"hit":)]));
   set_damage(1,12);
 }

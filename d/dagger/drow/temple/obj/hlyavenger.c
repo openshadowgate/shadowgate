@@ -29,7 +29,7 @@ create() {
     set_value(5000);
     set_wc(1,8);
     set_large_wc(1,12);
-    set_type("thiefslashing");
+    set_type("slashing");
     set_property("enchantment",5);
     set_wield ( (: TO, "paladin" :) );
     set_hit ( (: TO, "extra_hit" :) );

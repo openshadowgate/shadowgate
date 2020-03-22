@@ -17,7 +17,7 @@ void create(){
    set_wc(1,6);
    set_size(1);
    set_large_wc(1,3);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_prof_type("holy clublike");
    set_prof_level(25);
    set_weight(6);

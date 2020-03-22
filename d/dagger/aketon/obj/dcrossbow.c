@@ -13,7 +13,7 @@ create() {
    set("value",90);
    set_wc(3,4);
    set_large_wc(3,4);
-   set_type("thiefslashing");
+   set_type("slashing");
    set_rate_of_fire(3);
    set_range(10,15,20);
    set_ammo("dcarrows");

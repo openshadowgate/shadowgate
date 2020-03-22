@@ -21,7 +21,7 @@ create() {
    set("value", 500);
    set_wc(1,1);
    set_large_wc(1,1);
-   set_type("magebludgeon");
+   set_type("bludgeoning");
    set_weapon_speed(3);
    set_thrown_hit_func((:TO, "hit_func":));
    set_wield((:TO, "wield_func":));

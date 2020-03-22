@@ -46,7 +46,7 @@ OLI
 	ob->set_large_wc(1,6);
 	ob->set_property("enchantment",3);
    ob->set_weight(5);
-	ob->set_type("bludgeon");
+	ob->set_type("bludgeoning");
 	ob->set("value", 50);
 	ob->move(TO);
 	set_overall_ac(1);

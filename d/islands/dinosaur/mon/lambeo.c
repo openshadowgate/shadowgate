@@ -27,7 +27,7 @@ void create(){
     add_limb("mouth", "mouth", 0, 0, 0);
     add_limb("tail", "tail", 0, 0, 0);
     set_attack_limbs( ({"mouth", "right forepaw", "left forepaw"}) );
-    set_base_damage_type("bludgeon");
+    set_base_damage_type("bludgeoning");
     set_attacks_num(1);
     set_damage(2,6);
     set_moving(1);
