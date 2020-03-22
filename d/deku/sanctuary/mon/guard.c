@@ -30,7 +30,7 @@ void create(){
    add_limb("left fist", "left arm", 0, 0, 0);
    set_wielding_limbs(({"right fist","left fist"}));
    set_attack_limbs(({"right fist","left fist"}));
-   set_base_damage_type("bludgeon");
+   set_base_damage_type("bludgeoning");
    set_attacks_num(2);
    set_damage(1,10);
    set_stats("strength",17);

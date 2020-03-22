@@ -37,7 +37,7 @@ void create(){
 	set_attacks_num(2);
       set_hit_funcs((["right fold":(:TO,"engulf":), "left fold":(:TO,"engulf":)]));
 	set_damage(1,6);
-	set_base_damage_type("thiefslashing");
+	set_base_damage_type("slashing");
 	set_exp(2000);
       set_hp(random(75)+125);
       set_max_hp(query_hp());
