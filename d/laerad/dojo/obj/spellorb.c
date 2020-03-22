@@ -18,7 +18,7 @@ void create()
              "elements was a key aspect of their religious and philosophical attitudes, so it was seen as high accomplishment to "
              "create such a magical item that captured the essence of each of these.  Yet while fire, water, earth and air were able "
              "to be harnessed within the orb, the precious fifth element of spirit seemed to elude even their skills.  It was said "
-             "that one with enough presence of will could %^YELLOW%^shift %^WHITE%^the orb to embody any one of these four elements at "
+             "that one with enough presence of will could %^YELLOW%^alter %^WHITE%^the orb to embody any one of these four elements at "
              "a given time.%^RESET%^\n");
     set("no curse", 1);
     set_property("lore difficulty", 27);
@@ -37,7 +37,7 @@ void create()
 void init()
 {
     ::init();
-    add_action("shift_fun", "shift");
+    add_action("shift_fun", "alter");
     if (!userp(ETO)) {
         return;
     }
@@ -69,7 +69,7 @@ int wield_fun()
         set_item_bonus("wisdom", 0);
         return 1;
     }
-    if (TP->is_class("sorcerer") || TP->is_class("bard") || TP->is_class("oracle")) {
+    if (TP->is_class("sorcerer") || TP->is_class("bard") || TP->is_class("oracle") || TP->is_class("warlock")) {
         set_item_bonus("intelligence", 0);
         set_item_bonus("charisma", 4);
         set_item_bonus("wisdom", 0);
@@ -118,7 +118,7 @@ int shift_fun(string str)
 void set_element(string myelement)
 {
     mysetting = myelement;
-    switch (myelement) {
+    switch (mysetting) {
     case "fire":
         theshort = "%^RESET%^%^RED%^r%^MAGENTA%^u%^BOLD%^b%^RESET%^%^RED%^y-r%^BOLD%^e%^RESET%^%^RED%^d";
         thecolor = "%^RED%^";
