@@ -254,8 +254,8 @@ string get_trap_room_auto_detect(string str, object who, int is_door)
 				}
 				continue;
 			}
-                        if(flag == 2) return str +"%^RESET%^ (%^BOLD%^%^GREEN%^Trapped%^RESET%^)";
-                        if(flag == 1) return str + "%^RESET%^ (%^BOLD%^%^RED%^Trapped%^RESET%^)";
+			if(flag == 2) return "%^BOLD%^%^GREEN%^"+str+"%^BOLD%^%^CYAN%^";
+			if(flag == 1) return "%^BOLD%^%^RED%^"+str+"%^BOLD%^%^CYAN%^";
 			else return str;
 			break;
 	}
