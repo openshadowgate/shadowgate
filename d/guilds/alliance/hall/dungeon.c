@@ -48,6 +48,14 @@ void create()
     //call_out("check",30);
 }
 
+void reset()
+{
+    ::reset();
+    if (!present("table")) {
+        new("d/guilds/alliance/obj/jail_food.c")->move(this_object());
+    }
+}
+
 /*void check(object obj)
    {
    int i, j, temp1, temp2, max;
