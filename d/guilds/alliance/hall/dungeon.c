@@ -5,45 +5,51 @@
 inherit VAULT;
 //inherit "/std/gaol";
 
-void create(){
-   object ob;
-   ::create();
-   set_terrain(STONE_BUILDING);
-   set_travel(PAVED_ROAD);
-   //set_property("no teleport",1);
-   set_property("teleport proof",75);
-   set_indoors(1);
-   set_light(1);
-   set_short("The castle dungeon");
-   set_long("%^CYAN%^The castle dungeon\n "+
-      "%^RED%^You are in the castle dungeon and the moist and cold "+
-	  "air chills your body. The dungeon is lit by a few torches but "+
-	  "vision is still a little blurry. There isn't much space down "+
-	  "here and this is certainly no place for a giant nor any surface "+
-	  "creature to be comfortable.\n");
-   set_listen("default","You can hear the sound of water dripping and the "
-     "screams from a few rats hiding here.");
-   set_smell("default","You smell a strong mixture of dirt and burning torches.");
-   set_exits(([
-      "up":"/d/guilds/alliance/hall/stair2.c",
-   ]));
-    set_door("cell door","/d/guilds/alliance/hall/stair2","up","alliance ring");
-    set_open("cell door",0);    
-    set_locked("cell door",1);
+void create()
+{
+    object ob;
+    ::create();
+    set_terrain(STONE_BUILDING);
+    set_travel(PAVED_ROAD);
+    //set_property("no teleport",1);
+    set_property("teleport proof", 75);
+    set_indoors(1);
+    set_light(1);
+    set_short("The castle dungeon");
+    /*set_long("%^CYAN%^The castle dungeon\n "+ //commenting out original description for use as a plot element
+       "%^RED%^You are in the castle dungeon and the moist and cold "+
+       "air chills your body. The dungeon is lit by a few torches but "+
+       "vision is still a little blurry. There isn't much space down "+
+       "here and this is certainly no place for a giant nor any surface "+
+       "creature to be comfortable.\n");
+       set_listen("default","You can hear the sound of water dripping and the "
+       "screams from a few rats hiding here.");
+       set_smell("default","You smell a strong mixture of dirt and burning torches.");*/
+
+    set_long("%^CYAN%^The castle dungeon\n" +
+             "%^RED%^For a holding cell, this is pretty nice! This twelve foot square room contains all the basic amenities.  A set of bunkbeds line one wall, while a toilet, sink, and shower line the opposite.  Across from the door, a basic writing desk and chair sit near a small bookcase filled with various books.  The entire area has been lit by magical lights attached to the ceiling.\n");
+    set_listen("default", "You hear very little down here, aside from the noise your own movement makes.");
+    set_exits(([
+                   "up" : "/d/guilds/alliance/hall/stair2.c",
+               ]));
+    set_door("cell door", "/d/guilds/alliance/hall/stair2", "up", "alliance ring");
+    set_open("cell door", 0);
+    set_locked("cell door", 1);
+    lock_difficulty("cell door", -90);
     set_door_description("cell door", "This is a door made of three inch thick "
-      "oaken boards.  It has a section cut out and replaced with a grid of one "
-      "inch diameter iron bars so that some air can still get to the prisoners.");
-    set_string("cell door","open","The cell door creaks slightly as it swings "
-      "open.");
-    set_string("cell door","close","An ominous thud echoes off the walls as the "
-      "heavy cell door shuts solidly.");
-    "/d/guilds/alliance/hall/stair2"->set_open("cell door",0);
-    "/d/guilds/alliance/hall/stair2"->set_locked("cell door",1);
-   //call_out("check",30);
+                         "oaken boards.  It has a section cut out and replaced with a grid of one "
+                         "inch diameter iron bars so that some air can still get to the prisoners.");
+    set_string("cell door", "open", "The cell door creaks slightly as it swings "
+               "open.");
+    set_string("cell door", "close", "An ominous thud echoes off the walls as the "
+               "heavy cell door shuts solidly.");
+    "/d/guilds/alliance/hall/stair2"->set_open("cell door", 0);
+    "/d/guilds/alliance/hall/stair2"->set_locked("cell door", 1);
+    //call_out("check",30);
 }
 
 /*void check(object obj)
-{
+   {
    int i, j, temp1, temp2, max;
    object *inven;
    inven = all_living(TO);
@@ -72,4 +78,4 @@ void create(){
    }
 
    call_out("check",120);
-}*/
+   }*/
