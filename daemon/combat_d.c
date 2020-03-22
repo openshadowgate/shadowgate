@@ -1157,12 +1157,12 @@ void send_messages(object attacker, int magic, object weapon, string what, int x
             }
             else
             {
-                if(type == "blade" || type == "lash" || type == "knife" || type == "slashing" || type == "slash" || type == "thiefslashing" || type == "magicslashing")
+                if(ntype == "slashing")
                 {
                     verb = ({ "tap", "tickle", "sting", "slash", "cut", "slice", "slice", "shear", "strike", "mutilate", "dismember", "maim"});
                     adverb = ({ 0, 0, "sharply", 0, 0, 0, "horribly", "to pieces", "letting blood", 0, 0, "utterly"});
                 }
-                else if(type == "pierce" || type == "thiefpiercing" || type == "piercing" || type == "arrow" || type == "lance" || type == "polearm" || type == "magepierce"|| type == "magepiercing" || type == "ranged")
+                else if(type == "piercing" || type == "arrow" || type == "ranged")
                 {
                     verb = ({ "tap", "poke", "sting", "pierce", "puncture", "penetrate", "perforate", "shear", "impale", "mutilate", "dismember", "maim"});
                     adverb = ({ 0, 0, "sharply", 0, 0, 0, "sharply", "to pieces", "letting blood", 0, 0, "utterly"});
@@ -1183,19 +1183,13 @@ void send_messages(object attacker, int magic, object weapon, string what, int x
             {
                 switch(type)
                 {
-                case "firearm":
-                    me = "Bullet stuff";
-                    you = "Bullet stuff";
-                    others = "Bullet stuff";
-                    break;
-                case "blade": case "lash": case "knife": case "slashing": case "slash": case "thiefslashing": case "magicslashing":
-
+                case "slashing":
                     me = "%^RED%^You land a %^BOLD%^vicious %^RESET%^%^RED%^s%^BOLD%^l%^RESET%^%^RED%^a%^BOLD%^s%^RESET%^%^RED%^h%^BOLD%^i%^RESET%^%^RED%^n%^BOLD%^g %^RESET%^%^RED%^blow with %^BOLD%^%^BLACK%^"+used+" %^RESET%^%^RED%^and %^BOLD%^tear %^RESET%^%^RED%^your weapon free of %^BOLD%^%^BLACK%^"+your_name+"%^RESET%^%^RED%^!%^RESET%^";
                     you = "%^BOLD%^%^RED%^"+my_name+" %^RESET%^%^RED%^strikes you with a %^BOLD%^vicious %^RESET%^%^RED%^s%^BOLD%^l%^RESET%^%^RED%^a%^BOLD%^s%^RESET%^%^RED%^h%^BOLD%^i%^RESET%^%^RED%^n%^BOLD%^g %^RESET%^%^RED%^blow  with %^BOLD%^%^BLACK%^"+used+" %^RESET%^%^RED%^and tears %^BOLD%^%^BLACK%^"+attacker->QP+" %^RESET%^%^RED%^weapon free from you!%^WHITE%^";
                     others = "%^BOLD%^%^RED%^"+my_name+" %^RESET%^%^RED%^strikes %^BOLD%^"+your_name+" %^RESET%^%^RED%^with a %^BOLD%^vicious %^RESET%^%^RED%^s%^BOLD%^l%^RESET%^%^RED%^a%^BOLD%^s%^RESET%^%^RED%^h%^BOLD%^i%^RESET%^%^RED%^n%^BOLD%^g %^RESET%^%^RED%^blow with %^BOLD%^%^BLACK%^"+attacker->QP+" "+used+" and %^RESET%^%^RED%^tears %^BOLD%^%^BLACK%^"+attacker->QP+" %^RESET%^%^RED%^blade free from %^BOLD%^%^BLACK%^"+your_name+"%^RESET%^%^RED%^!%^WHITE%^";
                     break;
 
-                case "pierce": case "thiefpiercing": case "piercing": case "arrow": case "lance": case "polearm": case "magepierce": case "magepiercing": case "ranged":
+                case "piercing": case "arrow": case "ranged":
                     me = "%^CYAN%^You p%^BOLD%^%^i%^RESET%^%^CYAN%^erce through %^BOLD%^"+your_name+"'s%^RESET%^%^CYAN%^ defenses and drive your "+used+" into a %^BOLD%^vital%^RESET%^%^CYAN%^ spot!%^RESET%^";
                     you = "%^CYAN%^%^BOLD%^"+my_name+"%^RESET%^%^CYAN%^ pierces through your defences and drives %^BOLD%^"+attacker->QP+" "+used+"%^RESET%^ into a v%^BOLD%^i%^RESET%^%^CYAN%^tal spot!%^RESET%^";
                     others = "%^CYAN%^%^BOLD%^"+my_name+" p%^BOLD%^i%^RESET%^%^CYAN%^erces through %^BOLD%^"+your_name+"'s%^RESET%^ defenses and drives %^BOLD%^"+attacker->QP+" "+used+"%^RESET%^%^CYAN%^ into a v%^BOLD%^i%^RESET%^%^CYAN%^tal spot!%^RESET%^";
@@ -1470,47 +1464,8 @@ int is_ok_armour(object who, string myclass)
 
 int is_ok_weapon(object who, string myclass)
 {
-    object *weapons;
-    string type;
-    int flag;
-    int i;
-    if(!objectp(who)) return 0;
-    if (myclass == "fighter" || myclass == "paladin" || myclass == "antipaladin" || myclass == "cavalier" || myclass == "ranger" || myclass == "bard")
-    {
-        return 1;
-    }
-    weapons = (object *)who->query_wielded();
-    for (i=0;i<sizeof(weapons);i++)
-    {
-        type= weapons[i]->query_type();
-        if (myclass=="thief")
-        {
-            if (member_array(type, ({"magebludgeon","magicslashing","magepiercing","thiefpiercing","lash","thiefslashing"})) == -1)
-            {
-                return 0;
-            }
-        }
-        else if (myclass == "cleric")
-        {
-            if (member_array(type, ({"magebludgeon","magicslashing","lash","bludgeon"})) == -1)
-            {
-                return 0;
-            }
-        }
-        else if (myclass == "mage")
-        {
-            if (member_array(type, ({"magebludgeon","magicslashing","magepiercing"})) == -1)
-            {
-                return 0;
-            }
-        }
-        else if (myclass=="psion")
-        {
-            if (member_array(type, ({"magebludgeon","magicslashing","magepiercing"})) == -1)
-            {
-                return 0;
-            }
-        }
+    if (!objectp(who)) {
+        return 0;
     }
     return 1;
 }

@@ -270,25 +270,16 @@ void set_weapon_prof(string str)
 
 string query_weapon_prof()
 {
-    if(!weapon_prof)
-    {
-        switch(query_type())
-        {
-        case "magebludgeon":    return "simple";
-        case "magicslashing":   return "martial";
-        case "lash":            return "exotic";
-        case "bludgeon":        return "simple";
-        case "magepiercing":    return "simple";
-        case "thiefpiercing":   return "martial";
-        case "thiefslashing":   return "martial";
-        }
+    if (!weapon_prof) {
+        return "simple";
     }
     return weapon_prof;
 }
 
 
-int is_ok_wield(){
-    int isok,fi,th,ma,cl;
+int is_ok_wield()
+{
+    int isok, fi, th, ma, cl;
     object who;
 
     who = query_wielded();
@@ -296,60 +287,24 @@ int is_ok_wield(){
         return 1;
     }
 
-    if(!interactive(who)) { return 1; }
-    if(who->query("new_class_type"))
-    {
-        if(avatarp(who)) { return 1; }
-        switch(query_weapon_prof())
-        {
-        case "simple":  if(FEATS_D->usable_feat(who,"simple weapon proficiency"))  return 1;
-        case "martial": if(FEATS_D->usable_feat(who,"martial weapon proficiency")) return 1;
-        case "exotic":  if(FEATS_D->usable_feat(who,"exotic weapon proficiency"))  return 1;
+    if (!userp(who)) {
+        return 1;
+    }
+    if (who->query("new_class_type")) {
+        switch (query_weapon_prof()) {
+        case "simple":  if (FEATS_D->usable_feat(who, "simple weapon proficiency")) {
+                return 1;
+            }
+        case "martial": if (FEATS_D->usable_feat(who, "martial weapon proficiency")) {
+                return 1;
+            }
+        case "exotic":  if (FEATS_D->usable_feat(who, "exotic weapon proficiency")) {
+                return 1;
+        }
         default: return 0;
         }
-    }
-
-    else
-    {
-        if(who->is_class("mage")) ma = 1;
-        if(who->is_class("psion")) ma = 1;
-        if(who->is_class("thief")) th = 1;
-        if(who->is_class("cleric")) cl = 1;
-        if(who->is_class("druid")) cl = 1;
-        if(who->is_class("fighter")) fi = 1;
-        if(who->is_class("antipaladin")) fi = 1;
-        if(who->is_class("bard")) fi = 1;
-        if(who->is_class("paladin")) fi = 1;
-        if(who->is_class("cavalier")) fi = 1;
-        if(who->is_class("ranger")) fi = 1;
-        isok = 0;
-        if(cl) {
-            if((string)TO->query_type() == "magebludgeon"
-               || (string)TO->query_type() == "magicslashing"
-               || (string)TO->query_type() == "lash"
-               || (string)TO->query_type() == "bludgeon")
-                isok = 1;
-        }
-
-        else {
-            if(fi) isok =1;
-            else if(th) {
-                if((string)TO->query_type() == "magepiercing"
-                   || (string)TO->query_type() == "magebludgeon"
-                   || (string)TO->query_type() == "magicslashing"
-                   || (string)TO->query_type() == "thiefpiercing"
-                || (string)TO->query_type() == "lash"
-                   || (string)TO->query_type() == "thiefslashing")
-                    isok = 1;
-            }
-            else if(ma)
-                if((string)TO->query_type() == "magepiercing"
-                   || (string)TO->query_type() == "magicslashing"
-                   ||(string)TO->query_type() == "magebludgeon"
-                              || (string)TO->query_type() == "lash")
-                    isok = 1;
-        }
-        return isok;
+    } else {
+        return 1;
     }
 }
 
