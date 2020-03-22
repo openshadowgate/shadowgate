@@ -51,8 +51,8 @@ void create()
 void reset()
 {
     ::reset();
-    if (!present("table")) {
-        new("d/guilds/alliance/obj/jail_food.c")->move(this_object());
+    if (!present("jail food")) {
+        new("/d/common/obj/misc/jailfood/j_food_good.c")->move(this_object());
     }
 }
 
