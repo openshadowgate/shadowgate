@@ -1,40 +1,45 @@
 #include <std.h>
 inherit "/std/armour";
- 
-void create() {
+
+void create()
+{
     ::create();
     set_name("helm");
-    set("id", ({ "helm", "chain", "coif", "helmet", "chain coif" }) );
+    set("id", ({ "helm", "chain", "coif", "helmet", "chain coif" }));
     set("short", "Chain coif of the Order of Darkness");
     set("long", "This is a decorative light chain coif worn "
-	"by members of Order of Darkness.");
+        "by members of Order of Darkness.");
     set_weight(10);
     set("value", 25);
     set_type("armour");
-    set_limbs( ({ "head" }) );
+    set_limbs(({ "head" }));
     set_ac(1);
-    set_wear((:TO,"wearit":));
-    set_remove((:TO,"removeit":));
+    set_wear((: TO, "wearit" :));
+    set_remove((: TO, "removeit" :));
 }
-int wearit() {
-    if(!TP->is_class("antipaladin")) {
-	notify_fail("You may not wear this armour!\n");
-	return 0;
+
+int wearit()
+{
+    if (!TP->is_class("paladin")) {
+        notify_fail("You may not wear this armour!\n");
+        return 0;
     } else {
         write(
             "%^RED%^You feel more protected by the chain "
-	    "coif!%^RESET%^"
-        );
+            "coif!%^RESET%^"
+            );
         say(
-	    "%^RED%^"+TPQCN+" glows with an inner light!"
-	    "%^RESET%^"
-	,TP);
+            "%^RED%^" + TPQCN + " glows with an inner light!"
+            "%^RESET%^"
+            , TP);
         return 1;
     }
 }
-int removeit() {
+
+int removeit()
+{
     tell_object(TP,
-        "You remove the coif and feel less protected."
-    );
+                "You remove the coif and feel less protected."
+                );
     return 1;
 }
