@@ -84,6 +84,9 @@ void make_me(object spell)
     enchant = spell->query_clevel();
     enchant = enchant < 1 ? 1 : enchant;
     enchant = enchant > charlev ? charlev : enchant;
+    if (charlev < 5) {
+        return;
+    }
     enchant = (enchant - 3) / 5;
     TO->set_property("enchantment", enchant);
 }
