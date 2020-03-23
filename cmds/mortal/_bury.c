@@ -7,15 +7,19 @@ int cmd_bury(string str)
     object ob, attacker;
 
     attacker = this_player()->query_attackers();
+
     if (attacker != ({})) {
         write("You have to finish what you're doing.");
         return 1;
     }
 
     if (str == "all") {
-        while (objectp(present("corpse", ETP))) {
-
+        while (objectp(ob = present("corpse", ETP))) {
+            ob->remove();
         }
+        tell_room(ETP, TPQCN + " gathers debris from " + TP->query_possessive() + " " +
+                  "surroundings to bury the deceased.", TP);
+        return 1;
     }
     ob = present("corpse", environment(this_player()));
     if (!str) {
