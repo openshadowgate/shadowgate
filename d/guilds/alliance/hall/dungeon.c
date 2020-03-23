@@ -55,7 +55,7 @@ void reset()
         new("/d/common/obj/misc/jailfood/j_food_good.c")->move(this_object());
     }
     if (!present("malory")) {
-        new("/realms/kismet/obj/plots/sleeping_malory.c")->move(this_object());
+        new("/realms/kismet/mon/malorybody.c")->move(this_object());
     }
 }
 
