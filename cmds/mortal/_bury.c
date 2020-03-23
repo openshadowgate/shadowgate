@@ -17,8 +17,10 @@ int cmd_bury(string str)
         while (objectp(ob = present("corpse", ETP))) {
             ob->remove();
         }
+        write("You gather debris from your surroundings to bury corpses.");
         tell_room(ETP, TPQCN + " gathers debris from " + TP->query_possessive() + " " +
                   "surroundings to bury the deceased.", TP);
+        this_player()->add_hp(random(4) + 1);
         return 1;
     }
     ob = present("corpse", environment(this_player()));
@@ -37,7 +39,6 @@ int cmd_bury(string str)
     write("You gather debris from your surroundings to bury this corpse.");
     tell_room(ETP, TPQCN + " gathers debris from " + TP->query_possessive() + " " +
               "surroundings to bury the deceased.", TP);
-    this_player()->add_hp(random(4) + 1);
     ob->remove();
     write("You gather your thoughts in the process.");
     return 1;
@@ -53,11 +54,13 @@ bury - bury a corpse for tiny amout of hp
 
 %^CYAN%^SYNTAX%^RESET%^
 
-bury %^ORANGE%^%^ULINE%^CORPSE%^RESET%^
+bury [all|CORPSE]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 Will bury %^ORANGE%^%^ULINE%^CORPSE%^RESET%^ for modest (1d4) amount of hp.
+
+You can bury all corpses, safely destroying them, with 'all' argument.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

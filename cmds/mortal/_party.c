@@ -83,7 +83,6 @@ int leave() {
         return 0;
     }
 // changed to capitalize.. getParsableName from QCN
-    PARTY_OB->notify_party(party,capitalize(TP->getParsableName())+" has left the party.");
     write("%^MAGENTA%^You leave your party.\n");
     return 1;
 }
@@ -143,8 +142,8 @@ int sub(string str) {
     i = (int)PARTY_OB->remove_member(ob);
     if(i==NOT_MEMBER) {
 // fixing invis. here too, changed to capitalize.. getParsableName from QCN
-  //getParsableName() here was returning their real name, so 
-  //I've changed it to do knownAs(str) - str is their real 
+  //getParsableName() here was returning their real name, so
+  //I've changed it to do knownAs(str) - str is their real
   //name and knownAs() returns what you know them as - Saide 4/08/04
         notify_fail(capitalize(TP->knownAs(str))+" is not a member of your group.\n");
         return 0;
