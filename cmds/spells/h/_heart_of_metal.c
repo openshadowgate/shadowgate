@@ -18,7 +18,7 @@ void create()
     set_spell_level(([ "mage" : 3, "cleric" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS heart of metal <weapon> with <type>");
-    set_description("Using this spell, you temporarily lend the powers of either silver or cold iron to the target weapon.  This will change its base damage type for the duration of the spell.  NOTE: This spell is currently being debugged.  I wouldn't mess with it right now.");
+    set_description("Using this spell, you temporarily lend the powers of either silver or cold iron to the target weapon.  This will change its base damage type for the duration of the spell.  It will last a number of rounds equal to twice your caster level.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -72,7 +72,7 @@ void spell_effect(int prof)
         caster->remove_paralyzed();
         spell_successful();
         mylevel = clevel;
-        call_out("dest_effect", (((mylevel / 10) + 1) * ROUND_LENGTH));
+        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
         break;
 
     case "cold iron":
@@ -88,7 +88,7 @@ void spell_effect(int prof)
         caster->remove_paralyzed();
         spell_successful();
         mylevel = clevel;
-        call_out("dest_effect", (((mylevel / 10) + 1) * ROUND_LENGTH));
+        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
         break;
     }
 }

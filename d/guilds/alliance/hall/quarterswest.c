@@ -21,8 +21,8 @@ void create()
     set_property("teleport proof", 67);
     set_short("Quarters Common Area");
     set_long("\n\
-%^YELLOW%^Yellow Quarters%^RESET%^\n"+
-"This is a simple, yet comfortable room with two spacious beds with night stands, a wooden dresser and a small closet. On the wall opposite from the beds is a small stone fireplace, and a nice, warm fire crackles, making this a very homey space.");
+%^YELLOW%^Yellow Quarters - Squad Bay%^RESET%^\n"+
+"This is a large room meant to house up to twelve people in relative comfort. It is a squad bay setup with two rows of three bunks, complete with footlockers. There is a small stone fireplace on the far wall with a mantle holding the crest of the Alliance Reborn. Around the fire is a set of simple wooden chairs. ");
     set_exits( ([
                  "east" :"/d/guilds/alliance/hall/common",
                ]) );
