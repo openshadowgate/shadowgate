@@ -1157,7 +1157,7 @@ void send_messages(object attacker, int magic, object weapon, string what, int x
             }
             else
             {
-                if(ntype == "slashing")
+                if(type == "slashing")
                 {
                     verb = ({ "tap", "tickle", "sting", "slash", "cut", "slice", "slice", "shear", "strike", "mutilate", "dismember", "maim"});
                     adverb = ({ 0, 0, "sharply", 0, 0, 0, "horribly", "to pieces", "letting blood", 0, 0, "utterly"});
