@@ -1,4 +1,4 @@
-//~Circe~ 10/13/15 for psywarriors
+//heart of metal, 3/24/2020, Odin
 
 #include <priest.h>
 #include <daemons.h>
@@ -14,7 +14,7 @@ void create()
 {
     ::create();
     set_spell_name("heart of metal");
-    set_spell_level(([ "wizard" : 3, "cleric" : 3, "inquisitor" : 3 ]));
+    set_spell_level(([ "mage" : 3, "cleric" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS heart of metal <weapon> with <type>");
     set_description("Using this spell, you temporarily lend the powers of either silver or cold iron to the target weapon.  This will change its base damage type for the duration of the spell.");
