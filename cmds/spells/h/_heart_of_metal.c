@@ -63,12 +63,12 @@ void spell_effect(int prof)
         ashort = " %^BOLD%^%^WHITE%^{{s%^RESET%^%^WHITE%^i%^BOLD%^%^WHITE%^lv%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^ry%^BOLD%^%^WHITE%^}}%^RESET%^";
         mywpn->set_damage_type("silver");
         mywpn->remove_property("added short string");
+        mywpn->set_property("added short string", ({ ashort }));
         mywpn->set_property("added short", ({ ashort }));
         if (interactive(caster)) {
             tell_object(caster, "%^BOLD%^%^WHITE%^You gather the very essence of silver about you infuse your " + weaponarg + " with its mystical powers.%^RESET%^");
         }
-        tell_room(place, "%^BOLD%^%^WHITE%^As " + caster->QCN + " concentrates on " + caster->QP + " "
-                  "" + weaponarg + ", the weapon itself turns to pure silver!.%^RESET%^", caster);
+        tell_room(place, "%^BOLD%^%^WHITE%^As " + caster->QCN + " concentrates on " + caster->QP + " " + weaponarg + ", the weapon itself turns to pure silver!.%^RESET%^", caster);
         caster->remove_paralyzed();
         spell_successful();
         mylevel = clevel;
@@ -78,6 +78,7 @@ void spell_effect(int prof)
     case "cold iron":
         ashort = " %^RESET%^%^RED%^{{cold iron}}%^RESET%^";
         mywpn->set_damage_type("cold iron");
+        mywpn->set_property("added short string", ({ ashort }));
         mywpn->set_property("added short", ({ ashort }));
         if (interactive(caster)) {
             tell_object(caster, "%^RESET%^%^RED%^You gather the very essence of cold iron about you infuse your " + weaponarg + " with its mystical powers.%^RESET%^");
