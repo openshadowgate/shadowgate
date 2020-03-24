@@ -19,7 +19,7 @@ int object_can_be_teleported(object teleportee, object destination, int clevel)
     if (destination->is_flight_room()) {
         return 0;
     }
-    if (teleportee->query_property("teleport proof") - 9 + random(20) > clevel) {
+    if (teleportee->query_property("teleport proof") - 10 + roll_dice(1, 20) > clevel) { //changing this so I can better math it with anydance.
         return 0;
     }
 
@@ -51,14 +51,14 @@ object scatter_destination(mixed destination)
 
     files = dir_listing(fname);
 
-    foreach (tmp in files)
+    foreach(tmp in files)
     {
         if (catch(destobj = find_object_or_load(tmp))) {
             files -= ({ tmp });
         }
 
         if (!destobj->is_room()) {
-            files -= ({tmp});
+            files -= ({ tmp });
         }
     }
 
@@ -112,8 +112,8 @@ string* dir_listing(string tempfil)
     tmpstor = explode(tempfil, "/");
 
     path = "/" +
-        implode(tmpstor - ({ tmpstor[sizeof(tmpstor) - 1] }),"/")
-        + "/";
+           implode(tmpstor - ({ tmpstor[sizeof(tmpstor) - 1] }), "/")
+           + "/";
 
     tmpstor = map_array(get_dir(path + "*.c"), (: $2 + $1:), path);
 
