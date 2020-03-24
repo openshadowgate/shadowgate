@@ -72,7 +72,7 @@ void spell_effect(int prof)
         caster->remove_paralyzed();
         spell_successful();
         mylevel = clevel;
-        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
+        call_out("dest_effect", (mylevel / 10 * ROUND_LENGTH));
         break;
 
     case "cold iron":
@@ -88,7 +88,7 @@ void spell_effect(int prof)
         caster->remove_paralyzed();
         spell_successful();
         mylevel = clevel;
-        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
+        call_out("dest_effect", (mylevel / 10 * ROUND_LENGTH));
         break;
     }
 }
