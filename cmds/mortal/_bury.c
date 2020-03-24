@@ -39,6 +39,7 @@ int cmd_bury(string str)
     write("You gather debris from your surroundings to bury this corpse.");
     tell_room(ETP, TPQCN + " gathers debris from " + TP->query_possessive() + " " +
               "surroundings to bury the deceased.", TP);
+    this_player()->add_hp(random(4) + 1);
     ob->remove();
     write("You gather your thoughts in the process.");
     return 1;
