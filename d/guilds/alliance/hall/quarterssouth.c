@@ -1,5 +1,5 @@
 /*
-  quartersnorth.c
+  quarterssouth.c
   
   Written for the new guild Alliance Reborn.
   
@@ -21,12 +21,12 @@ void create()
     set_property("teleport proof", 67);
     set_short("Quarters Common Area");
     set_long("\n\
-%^GREEN%^Green Quarters%^RESET%^\n"+
+%^RED%^Red Quarters%^RESET%^\n"+
 "This is a simple, yet comfortable room with two spacious beds with night stands, a wooden dresser and a small closet. On the wall opposite from the beds is a small stone fireplace, and a nice, warm fire crackles, making this a very homey space.");
     set_exits( ([
-                 "south" :"/d/guilds/alliance/hall/common",
+                 "north" :"/d/guilds/alliance/hall/common",
                ]) );
                
-    set_door("green door", "/d/guilds/alliance/hall/common", "south");
+    set_door("red door", "/d/guilds/alliance/hall/common", "north");
     
 }
