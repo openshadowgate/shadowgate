@@ -8,7 +8,7 @@ inherit SPELL;
 #define MYTYPES ({ "silver", "cold iron" })
 
 object mywpn;
-string origtype, weaponarg, typearg;
+string origtype, weaponarg, typearg, ashort;
 int args;
 
 void create()
@@ -60,10 +60,10 @@ void spell_effect(int prof)
     int mylevel;
     switch (typearg) {
     case "silver":
+        ashort = " %^BOLD%^%^WHITE%^{{s%^RESET%^%^WHITE%^i%^BOLD%^%^WHITE%^lv%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^ry%^BOLD%^%^WHITE%^}}%^RESET%^";
         mywpn->set_damage_type("silver");
         mywpn->remove_property("added short string");
-        mywpn->set_property("added short string", ({ " %^BOLD%^%^WHITE%^{{s%^RESET%^%^WHITE%^i%^BOLD%^%^WHITE%^lv%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^ry%^BOLD%^%^WHITE%^}}%^RESET%^" }));
-        mywpn->set_property("added short", mywpn->query_property("added short string"));
+        mywpn->set_property("added short", ({ ashort }));
         if (interactive(caster)) {
             tell_object(caster, "%^BOLD%^%^WHITE%^You gather the very essence of silver about you infuse your " + weaponarg + " with its mystical powers.%^RESET%^");
         }
@@ -72,23 +72,21 @@ void spell_effect(int prof)
         caster->remove_paralyzed();
         spell_successful();
         mylevel = clevel;
-        call_out("dest_effect", (mylevel / 10 * ROUND_LENGTH));
+        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
         break;
 
     case "cold iron":
+        ashort = " %^RESET%^%^RED%^{{cold iron}}%^RESET%^";
         mywpn->set_damage_type("cold iron");
-        mywpn->remove_property("added short string");
-        mywpn->set_property("added short string", ({ " %^RESET%^%^RED%^{{cold iron}}%^RESET%^" }));
-        mywpn->set_property("added short", mywpn->query_property("added short string"));
+        mywpn->set_property("added short", ({ ashort }));
         if (interactive(caster)) {
             tell_object(caster, "%^RESET%^%^RED%^You gather the very essence of cold iron about you infuse your " + weaponarg + " with its mystical powers.%^RESET%^");
         }
-        tell_room(place, "%^RESET%^%^RED%^As " + caster->QCN + " concentrates on " + caster->QP + " "
-                  "" + weaponarg + ", the weapon itself turns to pure cold iron!.%^RESET%^", caster);
+        tell_room(place, "%^RESET%^%^RED%^As " + caster->QCN + " concentrates on " + caster->QP + " " + weaponarg + ", the weapon itself turns to pure cold iron!.%^RESET%^", caster);
         caster->remove_paralyzed();
         spell_successful();
         mylevel = clevel;
-        call_out("dest_effect", (mylevel / 10 * ROUND_LENGTH));
+        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
         break;
     }
 }
@@ -99,7 +97,7 @@ void dest_effect()
         tell_object(caster, "%^RESET%^%^CYAN%^Your weapon reverts to its normal material.%^RESET%^");
     }
     if (objectp(mywpn)) {
-        mywpn->remove_property_value("added short", (string)mywpn->query_property("added short string"));
+        mywpn->remove_property_value("added short", ({ ashort }));
         mywpn->set_damage_type(origtype);
     }
     ::dest_effect();
