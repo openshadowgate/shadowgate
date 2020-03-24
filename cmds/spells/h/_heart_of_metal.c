@@ -8,7 +8,7 @@ inherit SPELL;
 #define MYTYPES ({ "silver", "cold iron" })
 
 object mywpn;
-string mypname, pname, origtype;
+string mypname, pname, origtype, weaponarg, typearg;
 
 void create()
 {
@@ -27,8 +27,29 @@ void create()
 
 int preSpell()
 {
+    origtype = mywpn->query_base_damage_type();
     if (!arg) {
         tell_object(caster, "You must specify a target weapon for this power!");
+        dest_effect();
+        return 0;
+    }
+    if (!mywpn = present(arg, caster)) {
+        tell_object(caster, "You don't have any " + arg + " in your inventory!");
+        dest_effect();
+        return 0;
+    }
+    if (!mywpn->is_weapon()) {
+        tell_object(caster, "That " + arg + " is not a weapon!");
+        return 0;
+    }
+    if (sscanf(arg, "%s with %s", weaponarg, typearg) != 2) {
+        tell_object(CASTER, "You need to specify both your weapon and the type of metal.");
+        dest_effect();
+        return 0;
+    }
+    if (member_array(typearg, MYTYPES) == -1) {
+        tell_object(caster, "That is not a valid type of metal!");
+        dest_effect();
         return 0;
     }
     return 1;
@@ -36,40 +57,9 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    int i, mylevel, doses;
-    string weaponarg, typearg;
-    if (!objectp(caster)) {
-        dest_effect();
-        return;
-    }
-    if (!arg) {
-        tell_object(caster, "You must specify a target weapon for this power!");
-        dest_effect();
-        return;
-    }
-    if (!mywpn = present(arg, caster)) {
-        tell_object(caster, "You don't have any " + arg + " in your inventory!");
-        dest_effect();
-        return;
-    }
-    if (!mywpn->is_weapon()) {
-        tell_object(caster, "That " + arg + " is not a weapon!");
-        return;
-    }
-    if (sscanf(arg, "%s with %s", weaponarg, typearg) != 2) {
-        tell_object(CASTER, "You need to specify both your weapon and the type of metal.");
-        dest_effect();
-        return;
-    }
-    if (member_array(typearg, MYTYPES) == -1) {
-        tell_object(caster, "That is not a valid type of metal!");
-        dest_effect();
-        return;
-    }
-
+    int mylevel;
     switch (typearg) {
     case "silver":
-        origtype = mywpn->query_base_damage_type();
         mywpn->set_damage_type("silver");
         mywpn->remove_property("added short string");
         mywpn->set_property("added short string", ({ " %^BOLD%^%^WHITE%^{{s%^RESET%^%^WHITE%^i%^BOLD%^%^WHITE%^lv%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE^&ry%^BOLD%^%^WHITE%^}}%^RESET%^" }));
