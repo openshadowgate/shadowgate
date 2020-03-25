@@ -7,12 +7,13 @@
 
 inherit "/cmds/spells/d/_domination";
 
-void create() {
+void create()
+{
     ::create();
     set_spell_name("dominate monster");
     set_spell_level(([ "mage" : 9, "cleric" : 9]));
-    set_domains(({"charm", "law"}));
-    set_spell_sphere("necromancy");
+    set_domains(({ "charm", "law" }));
+    set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS dominate monster on TARGET");
     set_description("This spell works exactly as domination, except it works on all creatures.");
     set_verbal_comp();
@@ -40,13 +41,13 @@ int query_domination_duration(object targ)
 int cant_be_dominated(targ)
 {
     return do_save(target, -2) ||
-        mind_immunity_damage(targ, "default");
+           mind_immunity_damage(targ, "default");
 }
 
 int is_proper_target(object targ)
 {
     return !targ->query_property("no dominate") ||
-        !present("clothesx999", targ);
+           !present("clothesx999", targ);
 }
 
 void monster_fix(object targ)
