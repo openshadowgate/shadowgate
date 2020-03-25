@@ -908,7 +908,7 @@ int PickLock(string str)
 
     score = TP->query_skill("dungeoneering") + roll_dice(1, 20); //adding in a roll 20 per TT
     modifier = query_mod(ident, lock_id); //this is the number given on the lock itself
-    difficulty = 20 + abs(modifier); //Making the DC a positive number, base 20 is poor lock, since all locks were previously set at negative numbers hopefully this won't break anything
+    difficulty = abs(modifier); //Making the DC a positive number, just removing the 20 to avoid confusion and keep DCs all in one place
     if (score >= difficulty) {
         if (doors[ident]["unlock fun"]) {
             if (!call_other(this_object(), doors[ident]["unlock fun"])) {
