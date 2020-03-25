@@ -40,6 +40,7 @@ void query_alt_doorname();
 string alt_doorname;
 int query_doors_map();  // added 5/8/06 *Styx*
 void set_default_door_state(mixed map);
+int get_phouse_lock_difficulty(string locklevel); //added by Odin 3/25/2020, helper function to standardize playerhouse lock DCs
 
 int is_vault()
 {
@@ -777,7 +778,7 @@ int GoThroughDoor()
     return 1;
 }
 
-varargs void lock_difficulty(string str, int mod, string lock_id)
+varargs void lock_difficulty(string str, int mod, string lock_id) //mod is your DC.  Keep in mind that the average PC with dungeoneering as a class skill will have Level * 2 + Wisdom Modifier + 1d20 to defeat your lock.
 {
     if (!door_mod) {
         door_mod = ([]);
@@ -935,7 +936,7 @@ int PickLock(string str)
         if ((difficulty - score) > 10) {
             level = TP->query_level();
             score = random(99);
-            if (score > (level + TP->query_stats("dexterity"))) {
+            if (score > (level + TP->query_stats("wisdom"))) {
                 ob2 = present("tools", TP);
                 tell_object(TP, "You break your tools!");
                 ob2->break_picks();
@@ -1245,4 +1246,44 @@ int clean_up()
 
     ::clean_up();
     return 1;
+}
+
+int get_phouse_lock_difficulty(string locklevel) //function to standardize lock levels across player houses, six levels available
+{
+    int lockdc, baselockdc;
+    baselockdc = 20; //this is a poor quality lock
+    if (!stringp(locklevel) || locklevel == "" || locklevel == " ") {
+        locklevel = "average";
+    }
+    locklevel = lower_case(locklevel);
+    switch (locklevel) {
+    case "poor":
+        lockdc += 0;
+        break;
+
+    case "common":
+        lockdc += 10;
+        break;
+
+    case "good":
+        lockdc += 20;
+        break;
+
+    case "rare":
+        lockdc += 30;
+        break;
+
+    case "epic":
+        lockdc += 40;
+        break;
+
+    case "legendary":
+        lockdc += 50;
+        break;
+
+    default:
+        lockdc += 0;
+        break;
+    }
+    return lockdc;
 }
