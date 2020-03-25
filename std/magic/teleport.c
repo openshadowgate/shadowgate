@@ -19,7 +19,7 @@ int object_can_be_teleported(object teleportee, object destination, int clevel)
     if (destination->is_flight_room()) {
         return 0;
     }
-    if (teleportee->query_property("teleport proof") - 10 + roll_dice(1, 20) > clevel) { //changing this so I can better math it with anydance.
+    if (teleportee->query_property("teleport proof") - 9 + random(20) > clevel) {
         return 0;
     }
 
