@@ -1252,6 +1252,7 @@ int get_phouse_lock_difficulty(string locklevel) //function to standardize lock 
 {
     int lockdc, baselockdc;
     baselockdc = 20; //this is a poor quality lock
+    lockdc = baselockdc; //probably redundant, but I'm paranoid
     if (!stringp(locklevel) || locklevel == "" || locklevel == " ") {
         locklevel = "average";
     }
