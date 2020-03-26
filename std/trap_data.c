@@ -8,7 +8,7 @@
 //in the object - so we can have special traps
 //IE you get thrown into another room or whatever - Saide
 
-varargs void set_trapped(string* actions, string* TrapLevels, string* TrapTypes, int PSetter);
+varargs void set_trapped(string* actions, string* TrapLevels, string* TrapTypes, int PSetter, int trapDC);
 void remove_trap(string str);
 void disable_trap(string str, int DisableType);
 void set_random_traps();
@@ -24,7 +24,7 @@ mapping trap_data = ([]);
 //Psetter = 0 for a room trap that's always there, 1 for a player setting it
 //and 2 for a trap that's placed randomly - Saide
 
-varargs void set_trapped(string* actions, string* TrapLevels, string* TrapTypes, int PSetter)
+varargs void set_trapped(string* actions, string* TrapLevels, string* TrapTypes, int PSetter, int trapDC)
 {
     string MyTrapFile, MyTrapLvl, MyTrapType, MyTrapDc;
     object TrapOb;
@@ -88,6 +88,9 @@ varargs void set_trapped(string* actions, string* TrapLevels, string* TrapTypes,
                 continue;
             }
             MyTrapDc = (int)TrapOb->query_dc();
+            if (trapDC) {
+                MyTrapDc = trapDC;
+            }
             MyTrapFile = base_name(TrapOb);
             TrapOb->remove();
         }
@@ -496,7 +499,7 @@ void disable_trap(string str, int DisableType)
     }
 }
 
-varargs void set_trap_functions(string* what, string* funcs, string* trigger)
+varargs void set_trap_functions(string* what, string* funcs, string* trigger, int trapDC)
 {
     string* TLvls;
     int x;
@@ -509,7 +512,7 @@ varargs void set_trap_functions(string* what, string* funcs, string* trigger)
         continue;
     }
     //tell_object(find_player("saide"), "TLvls = "+identify(TLvls));
-    return set_trapped(trigger, TLvls, funcs, 0);
+    return set_trapped(trigger, TLvls, funcs, 0, trapDC);
 }
 
 void query_trap_data()
