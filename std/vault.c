@@ -1251,7 +1251,7 @@ int clean_up()
 int get_phouse_lock_dc(string locklevel) //function to standardize lock levels across player houses, six levels available
 {
     int lockdc, baselockdc;
-    baselockdc = 20; //this is a poor quality lock
+    baselockdc = 25; //this is a poor quality lock
     lockdc = baselockdc; //probably redundant, but I'm paranoid
     if (!stringp(locklevel) || locklevel == "" || locklevel == " ") {
         locklevel = "average";
