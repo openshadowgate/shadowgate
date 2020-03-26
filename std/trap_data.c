@@ -8,7 +8,7 @@
 //in the object - so we can have special traps
 //IE you get thrown into another room or whatever - Saide
 
-varargs void set_trapped(string* actions, string* TrapLevels, string* TrapTypes, int PSetter, int trapDC);
+varargs void set_trapped(string* actions, string* TrapLevels, string* TrapTypes, int PSetter, int trapDC); // added argument to allow setting trap DC in trapped rooms
 void remove_trap(string str);
 void disable_trap(string str, int DisableType);
 void set_random_traps();
@@ -499,7 +499,7 @@ void disable_trap(string str, int DisableType)
     }
 }
 
-varargs void set_trap_functions(string* what, string* funcs, string* trigger, int trapDC)
+varargs void set_trap_functions(string* what, string* funcs, string* trigger, int trapDC) //added argument to allow setting DC to traps in rooms - Odin 3/26/2020
 {
     string* TLvls;
     int x;
