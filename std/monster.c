@@ -1749,7 +1749,9 @@ int set_new_exp(int level, string perc)
     if (!intp(level) || level < 1) {
         level = (int)TO->query_level();
     }
-    level = (int)TO->query_highest_level(); // emergency override since a lot of mobs had exp far below their levels and people are saying grinding isn't worth doing anymore - Odin 3/26/2020
+    if (level < (int)TO->query_highest_level()) {// emergency override since a lot of mobs had exp far below their levels and people are saying grinding isn't worth doing anymore - Odin 3/26/2020
+        level = (int)TO->query_highest_level();
+    }
     if (!stringp(perc) || perc == "" || perc == " ") {
         perc = "normal";
     }
