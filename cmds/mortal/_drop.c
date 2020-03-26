@@ -73,20 +73,21 @@ int cmd_drop(string str)
             ob = present(str, TP);
             if (!objectp(ob)) {
                 ob = present(str, ETP);
-                if(objectp(ob))
-                {
-                    if(ob == TP->query_draggee())
-                    {
-                        TP->set_draggee(0);
-                        ob->remove_property("draggee");
-                    }
+                if (!objectp(ob)) {
+                    notify_fail("What " + str + "?\n");
+                    return 1;
+                } else if (ob == TP->query_draggee()) {
+                    TP->set_draggee(0);
+                    ob->remove_property("draggee");
+                    tell_room(ETP, TPQCN + " drops a body.\n", TP);
+                    tell_object(TP, "You drop a body.");
+                    return 1;
+                } else {
+                    notify_fail("You can't drop what is already on the ground.\n");
+                    return 1;
                 }
             }
 
-            if (!ob) {
-                notify_fail("What " + str + "?\n");
-                return 0;
-            }
             tmp = (string)ob->query_short();
 
             if (ob->drop()) {
@@ -96,42 +97,36 @@ int cmd_drop(string str)
                 return 1;
             }
 
-            if ((string)ob->query_name() == "draggee") {
-                tmp = "a body";
-            }
-
             res = (int)ob->move(ETP);
-            if(res == MOVE_OK)
-            {
-                tell_room(ETP,TPQCN+" drops "+tmp+".\n", TP);
-                tell_object(TP, "You drop "+tmp+".");
-                if(sizeof(TP->query_attackers()) > 0)
-                {
-                    TP->set_paralyzed(1, "You are getting back into position after dropping "+tmp+".");
+            if (res == MOVE_OK) {
+                tell_room(ETP, TPQCN + " drops " + tmp + ".\n", TP);
+                tell_object(TP, "You drop " + tmp + ".");
+                if (sizeof(TP->query_attackers()) > 0) {
+                    TP->set_paralyzed(1, "You are getting back into position after dropping " + tmp + ".");
                 }
                 return 1;
             }
-            if(res == MOVE_NOT_ALLOWED)
+            if (res == MOVE_NOT_ALLOWED) {
                 notify_fail("You can't do that.\n");
-            else
-                if(res == MOVE_NO_ROOM)
-                notify_fail("Not enough room.\n");
-                return 0;
+            } else
+                if (res == MOVE_NO_ROOM) {
+                    notify_fail("Not enough room.\n");
+                }
+            return 0;
         }
+
     type = lower_case(type);
-    if(ammount < 1)
-    {
+
+    if (ammount < 1) {
         notify_fail("You can only drop positive ammounts of money.\n");
         return 0;
     }
-    if((int)TP->query_money(type) < 0)
-    {
+    if ((int)TP->query_money(type) < 0) {
         notify_fail("That type of currency doesn't exist.\n");
         return 0;
     }
-    if(TP->query_money(type) < ammount)
-    {
-        notify_fail("There is not that much "+type+" in your purse.\n");
+    if (TP->query_money(type) < ammount) {
+        notify_fail("There is not that much " + type + " in your purse.\n");
         return 0;
     }
     if(ammount > 1000)
@@ -143,6 +138,7 @@ int cmd_drop(string str)
         {
             ob = new(OB_COINS);
         }
+
     ob->add_money(type, ammount);
     TP->add_money(type, -ammount);
     write("You drop "+ammount+" "+type+" pieces.");
