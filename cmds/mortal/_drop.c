@@ -82,8 +82,8 @@ int cmd_drop(string str)
                     }
                 }
             }
-            else if(!ob)
-            {
+
+            if (!ob) {
                 notify_fail("What " + str + "?\n");
                 return 0;
             }
