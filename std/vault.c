@@ -40,7 +40,7 @@ void query_alt_doorname();
 string alt_doorname;
 int query_doors_map();  // added 5/8/06 *Styx*
 void set_default_door_state(mixed map);
-int get_phouse_lock_difficulty(string locklevel); //added by Odin 3/25/2020, helper function to standardize playerhouse lock DCs
+int get_phouse_lock_dc(string locklevel); //added by Odin 3/25/2020, helper function to standardize playerhouse lock DCs
 
 int is_vault()
 {
@@ -1248,7 +1248,7 @@ int clean_up()
     return 1;
 }
 
-int get_phouse_lock_difficulty(string locklevel) //function to standardize lock levels across player houses, six levels available
+int get_phouse_lock_dc(string locklevel) //function to standardize lock levels across player houses, six levels available
 {
     int lockdc, baselockdc;
     baselockdc = 20; //this is a poor quality lock
