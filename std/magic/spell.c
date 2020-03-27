@@ -2935,10 +2935,11 @@ varargs int do_save(object targ, int mod)
 
     if (shadow_spell) {
         type = "will";
-        /* caster_bonus = shadow_spell * caster_bonus / 10; */
+        caster_bonus = shadow_spell * caster_bonus / 10;
     }
 
-    // this is directly copied below for the shadowdancer reroll - if anything changed here, change there too plz!
+    // this is directly copied below for the shadowdancer reroll - if
+    // anything changed here, change there too plz!
     switch (lower_case(type)) {
     case "fortitude":
     case "fort":
