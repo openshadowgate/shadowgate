@@ -51,7 +51,7 @@ int preSpell()
         tell_object(caster, "That is not a valid type of metal!");
         return 0;
     }
-    origtype = mywpn->query_damage_type();
+    origtype = mywpn->query_special_material_type();
     return 1;
 }
 
@@ -61,7 +61,7 @@ void spell_effect(int prof)
     switch (typearg) {
     case "silver":
         ashort = " %^BOLD%^%^WHITE%^{{s%^RESET%^%^WHITE%^i%^BOLD%^%^WHITE%^lv%^RESET%^%^WHITE%^e%^BOLD%^%^WHITE%^ry%^BOLD%^%^WHITE%^}}%^RESET%^";
-        mywpn->set_damage_type("silver");
+        mywpn->set_special_material_type("silver");
         mywpn->remove_property("added short string");
         mywpn->set_property("added short string", ({ ashort }));
         mywpn->set_property("added short", ({ ashort }));
@@ -77,7 +77,7 @@ void spell_effect(int prof)
 
     case "cold iron":
         ashort = " %^RESET%^%^RED%^{{cold iron}}%^RESET%^";
-        mywpn->set_damage_type("cold iron");
+        mywpn->set_special_material_type("cold iron");
         mywpn->set_property("added short string", ({ ashort }));
         mywpn->set_property("added short", ({ ashort }));
         if (interactive(caster)) {
@@ -99,7 +99,7 @@ void dest_effect()
     }
     if (objectp(mywpn)) {
         mywpn->remove_property_value("added short", ({ ashort }));
-        mywpn->set_damage_type(origtype);
+        mywpn->set_special_material_type(origtype);
     }
     ::dest_effect();
     if (objectp(TO)) {
