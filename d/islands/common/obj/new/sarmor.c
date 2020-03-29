@@ -46,6 +46,7 @@ void create()
 
     set_item_bonus("constitution", 6);
     set_item_bonus("damage resistance", 10);
+    set_item_bonus("endurance", 6);
 
     set_wear((: TO, "wear_func" :));
     set_remove((: TO, "remove_func" :));
