@@ -185,6 +185,41 @@ mapping get_message(string id, int number)
     return posts[number];
 }
 
+int dump_board(string id, string fname)
+{
+    mapping message;
+    string tosave;
+    int saved = 0;
+
+    if (!id) {
+        return 0;
+    }
+    if (current != id) {
+        if (file_size(DIR_BOARDS + "/" + id + ".o") < 0) {
+            return 0;
+        }
+        current = id;
+        restore_object(DIR_BOARDS + "/" + current);
+    }
+
+    if (!sizeof(posts)) {
+        return 0;
+    }
+
+    foreach(message in posts)
+    {
+        tosave = "";
+        tosave += "From: " + message["owner"] + "\n";
+        tosave += "Date: " + ctime(message["date"]) + "\n";
+        tosave += "Subject: " + message["title"] + "\n";
+        tosave += message["message"];
+
+        write_file(fname + "." + message["date"] + ".txt", tosave, 1);
+        saved++;
+    }
+    return saved;
+}
+
 void save_message(string id, int number, string fname)
 {
     mapping message;
