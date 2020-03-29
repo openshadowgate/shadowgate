@@ -25,11 +25,13 @@ inherit DAEMON;
 void index_spells();
 mapping allSpells;
 mapping spellIndex = ([]);
+mapping domainIndex = ([]);
 
 void create(){
     ::create();
     index_spells();
 }
+
 
 int can_cast(object target, int spell_level, string spell_type, string spell_name, int spell_delay) {
     string str,cl,cl1,cl2,myexp;
@@ -163,11 +165,12 @@ object get_spell_from_array(object *spellary, string spellname) {
 }
 
 /**
- * Ads all spells to allSpells property. class:spells:level mapping
+ * Adds all spells to allSpells property. class:spells:level mapping
+ * Adds spells to domainIndex
  */
 void index_spells()
 {
-    string key, tclass;
+    string key, tclass, tdomain;
 
     build_index();
 
@@ -175,12 +178,25 @@ void index_spells()
 
     foreach(key in keys(spellIndex))
     {
-        if (!sizeof(spellIndex[key]["levels"]))
+        if (!sizeof(spellIndex[key]["levels"])) {
             continue;
+        }
+
+        if (sizeof(spellIndex[key]["domains"])) {
+            foreach(tdomain in spellIndex[key]["domains"])
+            {
+                if (!arrayp(domainIndex[tdomain])) {
+                    domainIndex[tdomain] = ({});
+                }
+                domainIndex[tdomain] += ({ key });
+            }
+        }
+
         foreach(tclass in keys(spellIndex[key]["levels"]))
         {
-            if (!mapp(allSpells[tclass]))
+            if (!mapp(allSpells[tclass])) {
                 allSpells[tclass] = ([]);
+            }
             allSpells[tclass] += ([key:spellIndex[key]["levels"][tclass]]);
         }
     }
@@ -208,9 +224,12 @@ void build_index()
                     all_spells[x] = replace_string(all_spells[x], "_", " ");
                     str2 = DIR_SPELLS + "/" + dirset[i] + "/_" + replace_string(all_spells[x], " ", "_") + ".c";
                     if (file_exists(str2)) {
-                        if (catch(level = str2->query_spell_level_map())) continue;
-                        if (!mapp(level))
+                        if (catch(level = str2->query_spell_level_map())) {
                             continue;
+                        }
+                        if (!mapp(level)) {
+                            continue;
+                        }
                         spelltable = ([]);
 
                         spelltable["levels"] = level;
