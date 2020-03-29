@@ -1,7 +1,7 @@
-//Updated to inherit from common studded - Octothorpe 6/8/09
+//updated to inherit from hide armor - Odin 3/29/2020
 #include <std.h>
 
-inherit "/d/common/obj/armour/studded.c";
+inherit "/d/common/obj/armour/hide.c";
 
 string owner;
 int uses;
@@ -14,16 +14,16 @@ int query_uses()
 void create()
 {
     ::create();
-    set_name("body armor");
+    set_name("Carapace of the Scorpion Lord");
 
-    set_id(({ "body armor", "armor", "leather", "mesh", "scorpion armor" }));
+    set_id(({ "body armor", "armor", "hide", "scorpion armor", "carapace", "carapace of the scorpion lord", "carapace armor" }));
 
     set_short("%^BOLD%^%^BLACK%^Carapace of the %^RESET%^%^GREEN%^Sc%^BOLD%^%^BLACK%^o%^RESET%^%^GREEN%^rp"
               "%^BOLD%^%^BLACK%^i%^RESET%^%^GREEN%^on %^BOLD%^%^GREEN%^L%^RESET%^%^GREEN%^or%^BOLD%^%^GREEN%^d%^RESET%^");
 
-    set_obvious_short("%^BOLD%^%^BLACK%^Black leather carapace%^RESET%^");
+    set_obvious_short("%^BOLD%^%^BLACK%^Black carapace body armor%^RESET%^");
 
-    set_long("%^BOLD%^%^BLACK%^This suit of armor is made of a strange leather, hardened near to the strength"
+    set_long("%^BOLD%^%^BLACK%^This suit of body armor is made of a strange hide, hardened near to the strength"
              " of metal.  All pieces of it fit perfectly together and allow completely free movement.  Designs cover the"
              " armor, almost seeming to extend outward slightly from the actual armor.  Eight legs wrap around the center"
              " of the armor, encasing the wearer.  The image of a %^RESET%^%^WHITE%^bone %^BOLD%^%^BLACK%^ridge connects each"
