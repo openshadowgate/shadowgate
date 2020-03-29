@@ -16,7 +16,6 @@ void create()
     set_author("ares");
     set_spell_name("armor of darkness");
     set_spell_level(([ "classless" : 4 ]));
-    set_domains("darkness");
     set_spell_sphere("divination");
     set_syntax("cast CLASS armor of darkness");
     set_description("This spell will surround the caster in a dark haze making it harder for enemies to see the caster to hit them.  It also improves the caster's vision to allow them to better see through the darkness themselves.");

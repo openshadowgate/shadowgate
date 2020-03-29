@@ -12,6 +12,7 @@ void create() {
     set_spell_name("control undead");
     set_spell_level(([ "mage" : 7,]));
     set_spell_sphere("necromancy");
+    set_domains(({}));
     set_syntax("cast CLASS control undead on TARGET");
     set_description("By invoking this spell, a necromancer confirms its domain over the undead and takes control of the unliving. They can use the next commands to force the undead to serve:
 

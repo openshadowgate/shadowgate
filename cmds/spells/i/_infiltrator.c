@@ -14,6 +14,7 @@ void create() {
     set_spell_name("infiltrator");
     set_spell_level(([ "classless" : 9, ])); // mage 9
     set_spell_sphere("enchantment_charm");
+    set_domains(({}));
     set_syntax("cast CLASS infiltrator on TARGET");
     set_description("
 

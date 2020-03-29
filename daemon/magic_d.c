@@ -488,6 +488,15 @@ mixed* query_index(string myclass)
     return allSpells[theclass];
 }
 
+string* query_domain_index(string domain)
+{
+    if (sizeof(domainIndex[domain])) {
+        return domainIndex[domain];
+    } else {
+        return 0;
+    }
+}
+
 mapping *query_global_index()
 {
     return spellIndex;
