@@ -24,4 +24,12 @@ void create()
     add_lock("gate", "alliance ring", "lock", "There is no keyhole in this lock, but rather a circular depression with a tiny engraved image of two gauntlets shaking hands.  Otherwise it is a gigantic, but otherwise normal, gate lock.");
     set_locked("gate", 1, "lock");
     lock_difficulty("gate", get_phouse_lock_dc("epic"), "lock");
+
+    set_post_exit_functions(({ "out" }), ({ "gone_out" }));
+}
+
+void gone_out()
+{
+    tell_object(TP, "As you leave, you see a sign above you that says %^BOLD%^%^WHITE%^'Remember to lock the gate as you leave!'%^RESET%^");
+    return;
 }
