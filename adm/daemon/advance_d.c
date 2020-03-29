@@ -351,9 +351,14 @@ int advance(object tp, string myclass)
         {
             tell_object(tp,"You are now level "+(lev+1)+".");
         }
-        CLASS_NEWS->class_news(myclass, capitalize((string)tp->query_name())+" advances a level.");
-        if (newbiep(tp) && ((int)tp->query_lowest_level() == 6))
+
+        if (!tp->query("test_character")) {
+            CLASS_NEWS->class_news(myclass, capitalize((string)tp->query_name()) + " advances a level.");
+        }
+
+        if (newbiep(tp) && ((int)tp->query_lowest_level() == 6)) {
             tp->set_position("player");
+        }
 //        NWP_D->advance_player(tp,class,lev+1); //nwps no longer exist! N, 1/14.
 
     }
