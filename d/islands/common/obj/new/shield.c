@@ -45,6 +45,7 @@ void create()
 
     set_item_bonus("spell damage resistance", 35);
     set_item_bonus("constitution", 6);
+    set_item_bonus("shieldMiss", 40);
 
     set_wear((: TO, "wear_it" :));
     set_remove((: TO, "remove_it" :));
