@@ -1,5 +1,5 @@
 //Rebirth - new spell for the Renewal domain
-//by ~Circe~ 5/15/08 - will give the caster an 
+//by ~Circe~ 5/15/08 - will give the caster an
 //option to revive himself after death
 
 #include <std.h>
@@ -14,7 +14,7 @@ void create(){
     set_spell_name("rebirth");
     set_spell_level(([ "cleric" : 8 ]));
     set_spell_sphere("healing");
-    set_spell_domain("renewal");
+    set_domains("renewal");
     set_syntax("cast CLASS rebirth");
     set_description("This spell provides the caster with a certain amount of protection, allowing him to ressurrect "
 "himself should he die.  The priest will be given a choice at the moment of death and may accept the rebirth offered from "
@@ -26,7 +26,7 @@ void create(){
 "if he hadn't died at all.  If he refuses the rebirth, the death will continue as normal.");
     set_verbal_comp();
     set_property("magic",1);
-    set_peace_needed(1); 
+    set_peace_needed(1);
 	set_helpful_spell(1);
 }
 
