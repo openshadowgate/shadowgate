@@ -141,9 +141,6 @@ string user_finger_display(string who) {
 	}
         birth = (int)ob->query_birthday();
         birth2 = birth - (int)ob->query_start_age() * YEAR;
-        if (this_player() && archp(this_player()))
-            if ((uh_oh = (string)ob->query_email()) != "")
-                finger += "Email: " + uh_oh + "\n";
         invis = (int)ob->query_invis();
         quiet = (int)ob->query_quietness();
         castwiz = wizardp(this_player());
