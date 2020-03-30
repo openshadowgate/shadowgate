@@ -5,19 +5,13 @@ inherit SPELL;
 void create() {
     ::create();
     set_author("nienne");
-    set_spell_name("shield");
-    set_spell_level(([ "mage" : 1, "inquisitor":1, "cleric":1, ]));
+    set_spell_name("force screen");
+    set_spell_level(([ "psion" : 1 ]));
     set_spell_sphere("abjuration");
-    set_syntax("cast CLASS shield");
+    set_syntax("cast CLASS force screen");
     set_description("This spell calls a protective shield into existance before the caster. It negates magic missiles, "
 "and provides a small bonus to armor class for its duration. Use of a physical shield will interfere with the spell and "
 "cause it to fade.");
-    set_verbal_comp();
-    set_somatic_comp();
-     // school specific mage spell
-    set_components(([
-      "mage" : ([ "clear crystal" : 1, ]),
-    ]));
 	set_helpful_spell(1);
 }
 
