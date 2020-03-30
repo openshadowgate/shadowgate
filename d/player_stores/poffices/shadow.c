@@ -62,7 +62,9 @@ void create() {
 	"%^YELLOW%^S%^CYAN%^ervice");
   set_long("%^BOLD%^%^YELLOW%^S%^CYAN%^hadow %^YELLOW%^M%^CYAN%^essage "
 	   "%^YELLOW%^S%^CYAN%^ervice\n"
-"%^RESET%^%^WHITE%^The arched doorway leads into a small, plush room with white plaster walls and a blue %^BLUE%^car%^CYAN%^p%^BLUE%^et.%^WHITE%^ A clerk sits at a new-looking desk with a bold, brightly coloured sign on it. Black iron %^ORANGE%^la%^BLUE%^n%^BLUE%^t%^ORANGE%^erns%^WHITE%^ on the walls light the room brightly, and there is an additional tall white candle on the clerk's desk. Next to the candle is an odd-looking upturned brass hearing trumpet. A guard stands in the back corner of the room, beside a sturdy looking iron-bound oak door with a %^MAGENTA%^g%^BLUE%^l%^MAGENTA%^yp%^BLUE%^h%^WHITE%^ on it. Higher up, in the middle of the back wall is a small metal %^BOLD%^%^BLACK%^flap%^RESET%^%^BLUE%^.%^WHITE%^ Two comfortable %^BLUE%^chairs%^WHITE%^ are provided for customers. There is a small metal trash %^BLUE%^can%^WHITE%^ by the door.%^RESET%^
+"%^RESET%^%^WHITE%^The arched doorway leads into a small, plush room with white plaster walls and a blue %^BLUE%^car%^CYAN%^p%^BLUE%^et.%^WHITE%^ A clerk sits at a new-looking desk with a bold, brightly coloured %^WHITE%^%^BOLD%^sign%^RESET%^ on it. Black iron %^ORANGE%^la%^BLUE%^n%^BLUE%^t%^ORANGE%^erns%^WHITE%^ on the walls light the room brightly, and there is an additional tall white candle on the clerk's desk. Next to the candle is an odd-looking upturned brass hearing trumpet. A guard stands in the back corner of the room, beside a sturdy looking iron-bound oak door with a %^MAGENTA%^g%^BLUE%^l%^MAGENTA%^yp%^BLUE%^h%^WHITE%^ on it. Higher up, in the middle of the back wall is a small metal %^BOLD%^%^BLACK%^flap%^RESET%^%^BLUE%^.%^WHITE%^ Two comfortable %^BLUE%^chairs%^WHITE%^ are provided for customers. There is a small metal trash %^BLUE%^can%^WHITE%^ by the door.%^RESET%^
+
+There is a %^BOLD%^sign%^RESET%^ here.
 "
   );
   set_smell("default", "The room is clean and smells of paper, ink, and wood polish.");
@@ -79,8 +81,8 @@ void create() {
   set_door_description("iron bound door", "%^ORANGE%^This sturdy looking oak door is bound with %^BOLD%^%^BLACK%^iron%^RESET%^%^ORANGE%^ and bears an impressive looking %^RED%^glyph%^ORANGE%^ across it.  A sign above the doorway spells out in various languages: %^RED%^PRIVATE%^RESET%^");
 
   	lock_difficulty("iron bound door",-80, "lock");
-	set_trapped(({"unlock iron bound door", "open iron bound door", 
-	"pick iron bound door"}), ({"special", "special", "special"}), 
+	set_trapped(({"unlock iron bound door", "open iron bound door",
+	"pick iron bound door"}), ({"special", "special", "special"}),
 	({"zap_me", "zap_me", "zap_me"}));
 
   	set = 1;
@@ -126,17 +128,17 @@ void reset() {
 //   clerk = find_object_or_load("/d/player_stores/clerks/po_shadow");
 /*  taking the guard out for a while to see if we can figure out if he's the cause of the bugs from other guards entering here  *Styx* 7/18/05
    if(!present("shop guard"))
-      if(!objectp(environment(guard))) 
+      if(!objectp(environment(guard)))
 	 guard->move(TO);
 */
 
-   if(!present("shop clerk")) 
+   if(!present("shop clerk"))
 	new("/d/player_stores/clerks/po_shadow")->move(TO);
-//      if(!objectp(environment(clerk)))  
+//      if(!objectp(environment(clerk)))
 // 	 clerk->move(TO);
 /*
-   if(!present("shop clerk")) 
-      if(!objectp(environment(find_object_or_load(clerk)))) 	
+   if(!present("shop clerk"))
+      if(!objectp(environment(find_object_or_load(clerk))))
 	find_object_or_load(clerk)->move(TO);
 */
    switch(random(7)) {
@@ -150,11 +152,11 @@ void reset() {
 	break;
       case 4:  tell_room(TO, "%^BOLD%^%^BLUE%^The door at the side of the desk falls open and you catch a glimpse of %^BLACK%^leathery wings %^BLUE%^inside before it is pulled shut again.");
 	break;
-      case 5:  
+      case 5:
 	if(present("winata"))
 	   tell_room(TO, "%^GREEN%^Winata pulls a %^ORANGE%^yellowed, oft-folded piece of paper %^GREEN%^from her pocket.\nUnfolding it carefully, she reads it and a wistful light comes to her eyes before she folds it back up and tucks it away again.");
 	break;
-      case 6:  
+      case 6:
 	if(present("mail clerk", TO)) {
 	   who = present("mail clerk", TO);
 	   tell_room(TO, "%^BOLD%^%^BLUE%^"+who->query_cap_name()+" gets "
@@ -174,8 +176,18 @@ void init() {
    add_action("trash_paper", "trash");
    add_action("sit_chair", "sit");
    add_action("arm_trap", "trace");
+   add_action("read_sign", "read");
 }
 
+
+int read_sign(string str)
+{
+    if (str == "sign") {
+        signdesc();
+        return 1;
+    }
+    return 0;
+}
 
 void get_help(object badguy) {
    object watch;
@@ -231,7 +243,7 @@ int zap_me(string str) {
 	   guard->force_me("block east");
      }
      tell_room(TO,"%^BOLD%^%^CYAN%^The glyph on the door suddenly glows brightly!");
-// bugs for most spells without moving it to an object and having the object cast the spell 
+// bugs for most spells without moving it to an object and having the object cast the spell
 // this makes it so there is an environment for the caster
      glyph = new("/std/Object");
          glyph->set_name("glyph");
@@ -253,10 +265,10 @@ int zap_me(string str) {
   return 1;
 }
 
-int arm_trap(string str) 
+int arm_trap(string str)
 {
 	if(!str) return 0;
-	if(str != "runes") 
+	if(str != "runes")
 	{
 		write("Tracing the "+str+" doesn't seem to have any effect except "
 	    	"perhaps to make you look silly.");
@@ -264,9 +276,9 @@ int arm_trap(string str)
 	    	"you think?", TP);
 		return 1;
    	}
-   	if( (member_array((string)TPQN,TO->query_owners()) == -1) && !TP->query_true_invis()) 
+   	if( (member_array((string)TPQN,TO->query_owners()) == -1) && !TP->query_true_invis())
 	{
-    		if(random(20)) 
+    		if(random(20))
 		{
 			tell_object(TP,"%^YELLOW%^As you attempt to trace the runes, "+
 			"the glyph shoots a lightning bolt at you!");
@@ -279,14 +291,14 @@ int arm_trap(string str)
 			return 1;
      		}
    	}
-   	if(!set) 
-	{  
+   	if(!set)
+	{
       	tell_object(TP,"As you trace the runes around the glyph they glow, albeit briefly.");
 	      tell_room(ETP,TPQCN+" traces the runes around the glyph and they glow briefly.", TP);
-      	toggle_glyph(1); 
+      	toggle_glyph(1);
       	set = 1;
-   	} 
-	else 
+   	}
+	else
 	{
       	tell_object(TP,"The glow from the glyph fades as you trace the runes.");
       	tell_room(ETP,TPQCN+" traces the runes around the glyph and the "+
@@ -297,11 +309,11 @@ int arm_trap(string str)
    	return 1;
 }
 
-void toggle_glyph(int on) 
+void toggle_glyph(int on)
 {
-   	if(on) 
+   	if(on)
 	{
-   		if(TO->is_this_trapped("unlock iron bound door")) 
+   		if(TO->is_this_trapped("unlock iron bound door"))
 		{
 			TO->remove_trap("unlock iron bound door");
 		}
@@ -313,14 +325,14 @@ void toggle_glyph(int on)
 		{
 			TO->remove_trap("pick iron bound door");
 		}
-		set_trapped(({"unlock iron bound door", "open iron bound door", 
-		"pick iron bound door"}), ({"special", "special", "special"}), 
+		set_trapped(({"unlock iron bound door", "open iron bound door",
+		"pick iron bound door"}), ({"special", "special", "special"}),
 		({"zap_me", "zap_me", "zap_me"}));
 		return;
-   	} 
+   	}
 	else
-	{	
-    		if(TO->is_this_trapped("unlock iron bound door")) 
+	{
+    		if(TO->is_this_trapped("unlock iron bound door"))
 		{
 			TO->remove_trap("unlock iron bound door");
 		}
