@@ -11,7 +11,7 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("conceal alignment");
-    set_spell_level(([ "cleric" : 1 ]));
+    set_spell_level(([ "cleric" : 1, "psion" : 1 ]));
     set_spell_sphere("alteration");
     set_domains("trickery");
     set_syntax("cast CLASS conceal alignment on <align>");
