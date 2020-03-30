@@ -6,7 +6,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("shield");
-    set_spell_level(([ "mage" : 1, "inquisitor":1, "cleric":1 ]));
+    set_spell_level(([ "mage" : 1, "inquisitor":1, "cleric":1, "psion":1 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS shield");
     set_description("This spell calls a protective shield into existance before the caster. It negates magic missiles, "
