@@ -18,7 +18,7 @@ create()
 {
     ::create();
     set_spell_name("sleep");
-    set_spell_level(([ "mage" : 1, "bard" : 1, "psion" : 1, "cleric" : 1]));
+    set_spell_level(([ "mage" : 1, "bard" : 1, "cleric" : 1]));
     set_domains("charm");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast <classname> sleep on <target>");
