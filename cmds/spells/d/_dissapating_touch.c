@@ -1,5 +1,5 @@
 /*
-  _disappating_touch.c
+  _dissapating_touch.c
   
   Does teleportation damage to the target. Touch attack.
   
@@ -20,7 +20,7 @@ void create()
     set_spell_name("dissapating touch");
     set_spell_level(([ "psion" : 1 ]));
     set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS disappating touch on TARGET");
+    set_syntax("cast CLASS dissapating touch on TARGET");
     set_description("With this power, the psion's mere touch can disperse the surface material of their foe, teleporting a portion of it away and disrupting their very structure.");
     set_target_required(1);
 }
