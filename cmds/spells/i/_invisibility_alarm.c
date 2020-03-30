@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("invisibility alarm");
-    set_spell_level(([ "bard" : 1, "inquisitor" : 1, "ranger" : 1, "psion":1, "mage":1 ]));
+    set_spell_level(([ "bard" : 1, "inquisitor" : 1, "ranger" : 1, "mage":1 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS alarm");
     set_description("You draw an invisible alarm rune on the surface. If an alarm detects anyone hidden or invisible in the room but you and your followers it will convey a telepathic message directly into your mindYou can have as many alarms as you need, but after a while magic in them will dissipate.");
