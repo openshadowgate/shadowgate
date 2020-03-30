@@ -8,7 +8,7 @@ string rage_class;
 int tireless_rage = 0;
 int spirit_warrior = 0;
 
-object *exclude = ({});
+object* exclude = ({});
 
 void create()
 {
@@ -18,7 +18,7 @@ void create()
     feat_name("rage");
     feat_syntax("rage");
     feat_prereq("Barbarian L1");
-   feat_desc("This feat allows the barbarian to enter a fit of furious rage, boosting their strength, constitution, and will. The ability will last longer, and grow stronger, as the barbarian gains levels. Rage can be turned off by typing rage again. By the end of raging the barbarian will become fatigued. Rage will be interrupted if the barbarran becomes fatigued and exhausted.
+    feat_desc("This feat allows the barbarian to enter a fit of furious rage, boosting their strength, constitution, and will. The ability will last longer, and grow stronger, as the barbarian gains levels. Rage can be turned off by typing rage again. By the end of raging the barbarian will become fatigued. Rage will be interrupted if the barbarran becomes fatigued and exhausted.
 
 %^BOLD%^N.B.%^RESET%^ Being enraged means that you are maddened uncontrollably. This is *not* a state in which you can calmly participate in a normal conversation, undertake delicate tasks, cast offensive spells, solve problems, or pretty much do anything other than shout obscenities andkill things. This power won't work in conjunction with wimilar magical effects, such as rally, transformation, rage, berserker and fell flight.
 
@@ -33,12 +33,15 @@ int allow_shifted()
     return 1;
 }
 
-int prerequisites(object ob) {
-   if(!objectp(ob)) { return 0; }
-   if(!ob->is_class("barbarian")) {
-      dest_effect();
-      return 0;
-   }
+int prerequisites(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!ob->is_class("barbarian")) {
+        dest_effect();
+        return 0;
+    }
     return ::prerequisites(ob);
 }
 
@@ -56,7 +59,7 @@ int cmd_rage(string str)
 
 string cm(string str)
 {
-    return CRAYON_D->color_string(str,"red and black");
+    return CRAYON_D->color_string(str, "red and black");
 }
 
 void execute_feat()
@@ -93,8 +96,8 @@ void execute_feat()
         return;
     }
 
-    tell_object(caster,cm("You gather strenght as you prepare to go into frenzy."));
-    caster->set_property("active_feats",({TO}));
+    tell_object(caster, cm("You gather strength as you prepare to go into frenzy."));
+    caster->set_property("active_feats", ({ TO }));
 
 
     if (FEATS_D->usable_feat(caster, "mighty rage")) {
@@ -105,15 +108,17 @@ void execute_feat()
         rage_class = "simple rage";
     }
 
-    if (FEATS_D->usable_feat(caster, "tireless rage"))
+    if (FEATS_D->usable_feat(caster, "tireless rage")) {
         tireless_rage = 1;
+    }
 
-    if (FEATS_D->usable_feat(caster, "spirit warrior"))
+    if (FEATS_D->usable_feat(caster, "spirit warrior")) {
         spirit_warrior = 1;
+    }
 
-    caster->set_property("raged",1);
-    caster->remove_property_value("added short",({"%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^"}));
-    caster->set_property("added short",({"%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^"}));
+    caster->set_property("raged", 1);
+    caster->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+    caster->set_property("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
     call_out("enable_rage", ROUND_LENGTH);
 
     ::execute_feat();
@@ -126,37 +131,40 @@ void enable_rage()
 
     activate_rage(1);
     tell_object(caster, cm("The world takes on a tinge of red as you are overcome by an insatiable desire to see your enemies rendered into a bloody pulp."));
-    tell_room(place,  cm(caster->QCN + " growls fiercely as " + caster->QS + " transforms into a homicidal maniac."), caster);
+    tell_room(place, cm(caster->QCN + " growls fiercely as " + caster->QS + " transforms into a homicidal maniac."), caster);
 
     duration = ROUND_LENGTH * (caster->query_guild_level("barbarian") * 4);
 
-    if (!FEATS_D->usable_feat(caster, "persistent rage"))
+    if (!FEATS_D->usable_feat(caster, "persistent rage")) {
         call_out("dest_effect", duration);
+    }
 }
 
 void activate_rage(int direction)
 {
-
     switch (rage_class) {
     case "simple rage":
         simple_rage(direction);
         break;
+
     case "greater rage":
         greater_rage(direction);
         break;
+
     case "mighty rage":
         mighty_rage(direction);
         break;
     }
 
-    if (spirit_warrior)
+    if (spirit_warrior) {
         spirit_warrior(direction);
+    }
 
-    if(!tireless_rage)
-        if(direction < 0)
-        {
+    if (!tireless_rage) {
+        if (direction < 0) {
             "/std/effect/status/fatigued"->apply_effect(target, 36); // 36 rounds - three minutes
         }
+    }
 }
 
 void simple_rage(int direction)
@@ -190,8 +198,8 @@ void spirit_warrior(int direction)
 
 void execute_attack()
 {
-    object *attackers = ({ });
-    object *allies = ({ });
+    object* attackers = ({ });
+    object* allies = ({ });
     int i;
 
     if (!objectp(caster)) {
@@ -204,8 +212,7 @@ void execute_attack()
         return;
     }
 
-    if (!caster->query_property("raged"))
-    {
+    if (!caster->query_property("raged")) {
         dest_effect();
         return;
     }
@@ -238,7 +245,7 @@ void dest_effect()
         tell_object(caster, cm("You struggle to catch your breath as you try to yank yourself away from your murderous reverie."));
         caster->remove_property_value("active_feats", ({ TO }));
         caster->remove_property("raged");
-        caster->remove_property_value("added short",({"%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^"}));
+        caster->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
         activate_rage(-1);
     }
     ::dest_effect();

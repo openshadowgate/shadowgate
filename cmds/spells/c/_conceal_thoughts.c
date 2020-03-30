@@ -10,17 +10,14 @@ inherit SPELL;
 
 void create(){
     ::create();
-    set_spell_name("conceal alignment");
-    set_spell_level(([ "cleric" : 1, ]));
+    set_spell_name("conceal thoughts");
+    set_spell_level(([ "psion" : 1, ]));
     set_spell_sphere("alteration");
-    set_domains("trickery");
-    set_syntax("cast CLASS conceal alignment on <align>");
+    set_syntax("cast CLASS conceal thoughts on <align>");
     set_description("When this spell is cast, the caster must pick the alignment that he wishes for others to see him as"
 ".  This spell has a chance to fool any magical or other means of detecting the caster's true alignment.\n\nThe choices "
 "for alignment are lawful good, neutral good, chaotic good, lawful neutral, true neutral, chaotic neutral, lawful evil, "
 "neutral evil, or chaotic evil.  Please make sure you do not capitalize any part of your choice.");
-    set_verbal_comp();
-    set_somatic_comp();
     set_arg_needed();
     set_silent_casting(1);
     set_helpful_spell(1);

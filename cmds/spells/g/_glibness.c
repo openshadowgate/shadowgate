@@ -18,6 +18,7 @@ void create()
     set_somatic_comp();
     set_arg_needed();
     set_helpful_spell(1);
+    set_silent_casting(1);
 }
 
 int preSpell()
@@ -37,8 +38,8 @@ spell_effect()
     target = caster;
 
     spell_successful();
-
-    tell_room(place, "%^MAGENTA%^" + caster->QCN + " touches " + caster->QP + "temples, chanting in low undertones.%^RESET%^");
+    tell_object(target, "%^MAGENTA%^You feel insight into the desires of others fill your mind.%^RESET%^");
+    tell_room(place, "%^MAGENTA%^" + caster->QCN + " touches " + caster->QP + " temples, chanting in low undertones.%^RESET%^");
 
     bonus = clevel / 2 + 1;
     target->add_skill_bonus("influence", bonus);
@@ -53,7 +54,7 @@ void dest_effect()
     if (objectp(target)) {
         target->add_skill_bonus("influence", -bonus);
         target->remove_property_value("spelled", ({ TO }));
-        tell_object(target, "%^MAGENTA%^Your insights into desires of others fade.%^RESET%^");
+        tell_object(target, "%^MAGENTA%^Your insights into the desires of others fade.%^RESET%^");
         target->remove_property("glibness_spell");
     }
     ::dest_effect();
