@@ -106,8 +106,12 @@ There is a %^BOLD%^sign%^RESET%^ here.
 }
 
 void signdesc() {
-   write("%^BOLD%^%^CYAN%^Welcome to the %^BLUE%^Shadow Message Service%^CYAN%^, the %^YELLOW%^quickest%^CYAN%^ and most %^RED%^reliable%^CYAN%^ way to get a message to friends and foes alike, at those times you cannot seem to get hold of them yourself!\n");
-   write("%^BOLD%^%^BLUE%^You may leave a written document for any person you know, or check to see if anyone has left a message for you.  %^RESET%^<help shop>\nThe current charge for leaving a letter is a mere %^YELLOW%^"+TO->query_deposit()+" gold%^RESET%^.  Don't forget to look in frequently!");
+   write("%^BOLD%^%^CYAN%^Welcome to the %^BLUE%^Shadow Message Service%^CYAN%^, the %^YELLOW%^quickest%^CYAN%^ and most %^RED%^reliable%^CYAN%^ way to get a message to friends and foes alike, at those times you cannot seem to get hold of them yourself!
+");
+   write("%^BOLD%^%^BLUE%^You may leave a written document for any person you know, or check to see if anyone has left a message for you.
+%^BOLD%^The current charge for leaving a letter is a mere %^YELLOW%^"+TO->query_deposit()+" gold.
+
+Use <help shop> to know how to use the service.");
 }
 
 string glyph_desc() {

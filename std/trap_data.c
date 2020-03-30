@@ -167,10 +167,10 @@ string get_trap_object_auto_detect(string str, object who)
         continue;
     }
     if (flag == 2) {
-        return str + "%^RESET%^ (%^BOLD%^%^GREEN%^trapped%^RESET%^)";
+        return str + " (%^BOLD%^%^GREEN%^trapped%^BOLD%^%^CYAN%^)";
     }
     if (flag == 1) {
-        return str + "%^RESET%^ (%^BOLD%^%^RED%^trapped%^RESET%^)";
+        return str + " (%^BOLD%^%^RED%^trapped%^BOLD%^%^CYAN%^)";
     }
     return str;
 }
