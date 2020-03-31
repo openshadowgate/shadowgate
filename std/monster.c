@@ -1795,7 +1795,11 @@ varargs int set_new_exp(int level, string perc)
     if (level > 100) {
         level = 100; exp = 300000000;
     } else {
-        exp = (475 * level * level * level - 7600 * level * level + 74975 * level - 23750) / 882;
+        /*
+           Fit data:
+           [75,1],[1000,10],[75000,50]
+         */
+        exp = (90078000 * level * level - 180156000 * level + 378646100) / 2885681;
     }
 
     if (perc != "normal") {

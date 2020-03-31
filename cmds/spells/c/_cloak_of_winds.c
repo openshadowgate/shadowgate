@@ -33,7 +33,7 @@ void spell_effect(int prof)
     duration = (ROUND_LENGTH * 6) * clevel;
     tell_room(place, "%^WHITE%^%^BOLD%^A cloak of winds surrounds and embraces " + caster->QCN + ".", caster);
     tell_object(caster, "%^WHITE%^%^BOLD%^A cloaked of winds surrounds and embraces you.");
-    caster->set_property("cloak of winds");
+    caster->set_property("cloak of winds", 1);
     caster->set_property("spelled", ({ TO }));
     caster->set_property("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyond veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
     caster->add_ac_bonus(2);
