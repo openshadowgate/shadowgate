@@ -23,7 +23,7 @@ Use <help library> to see what can be done here.%^RESET%^
         );
     set_light(2);
     set_smell("default","You smell oils and burning wax.");
-    set_listen("default","You hear quiet surtling of perchaments.");
+    set_listen("default","You hear quiet surtling of parchment.");
     set_items(([
                    "shelves":"Ancient, massive granite floors of shelves, filled with books and scrolls.",
                    ({"chairs","tables"}):"Comfortable, but primitive, wooden chairs stand around round wooden tables for people to sit at, to read or work.",

@@ -164,7 +164,8 @@ break;
 	//set_speed(30);
 	set_nogo(({ ROOMDIR"farm6",
 			ROOMDIR"gnomehome",}));
-	set_exp(random(200)+1000);
+//        set_exp(random(200)+1000);
+        set_new_exp(15, "normal");
 	set_languages( ({ "common" }) );
 	set_emotes(10,({
 		"%^YELLOW%^The dwarf belches.",
