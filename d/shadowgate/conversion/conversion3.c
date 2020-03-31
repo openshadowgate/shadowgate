@@ -39,7 +39,7 @@ void create()
         "antioch"       : "/d/antioch/antioch2/rooms/street2",
         "verbobone"     : "/d/deku/town/road5",
         "daggerdale"    : "/d/dagger/Daggerdale/fountain/fountain",
-        "shadow"        : "/d/shadow/room/city/room/plaza",
+        "shadow"        : "/d/shadow/city/room/plaza",
         "muuldaan"      : "/d/shadow/room/muuldaan/rooms/cavern1",
         "offestry"      : "/d/newbie/rooms/town/square",
         "kildare"       : "/d/shadow/room/kildare/rooms/ptrail1",
