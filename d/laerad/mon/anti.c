@@ -1,6 +1,6 @@
 //updated by Circe to ignore true invis 5/21/04
 //Coded by Bane//
-// adding id of laeradmon & getting rid of the wander inherit to use normal wandering *Styx* 12/20/03, last change 8/7/02 (riding level?) 
+// adding id of laeradmon & getting rid of the wander inherit to use normal wandering *Styx* 12/20/03, last change 8/7/02 (riding level?)
 
 #include <std.h>
 #include <daemons.h>
@@ -24,6 +24,7 @@ void create(){
     set_race("human");
     set_gender("male");
     set_size(2);
+    set_no_moving();
     set_class("paladin");
     set_nwp("riding",20);
     set_diety("bane");
@@ -140,9 +141,9 @@ remove_property("magic");
 
 void do_horse(){
 	object horse;
-	
+
 	if(!objectp(ETO)) return;
-	
+
 	horse = new("/d/tharis/monsters/sksteed");
 	horse->set_owner(TO);
 	horse->move(ETO);
@@ -151,13 +152,13 @@ void do_horse(){
 
 int kill_ob(object victim, int which){
 	int hold;
-	
+
 	hold = ::kill_ob(victim, which);
 	if(!victim->query_true_invis()){
    	   if(hold){
 	 	   command("sic "+victim->query_true_name());
 	   }
-      } 
+      }
 	return hold;
 }
 

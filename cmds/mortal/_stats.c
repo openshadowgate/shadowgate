@@ -15,76 +15,83 @@ int EXPS;
 
 int stat_points_left(object ob)
 {
-    int allowed,gained,remaining;
+    int allowed, gained, remaining;
 
-    if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
 
     gained = (int)ob->query("stat_points_gained");
     allowed = (int)ob->query_character_level() / 4;
     remaining = allowed - gained;
-    if(remaining < 0) { remaining = 0; }
+    if (remaining < 0) {
+        remaining = 0;
+    }
     return remaining;
 }
 
-int confirm_stat_gain(string str,object ob,string stat,int cost)
+int confirm_stat_gain(string str, object ob, string stat, int cost)
 {
-    int num,gained;
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(stat)) { return 0; }
-    if(!intp(cost)) { return 0; }
-
-    if(str != "yes")
-    {
-        tell_object(ob,"Aborting...");
+    int num, gained;
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!stringp(stat)) {
+        return 0;
+    }
+    if (!intp(cost)) {
         return 0;
     }
 
-    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
-    {
+    if (str != "yes") {
+        tell_object(ob, "Aborting...");
+        return 0;
+    }
+
+    if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
         ob->add_exp(-1 * cost);
         ob->resetLevelForExp(0);
         ob->remove_XP_tax("improvement");
-        log_file("stat_gain",""+ob->QCN+" gained 1 point in "+
-        stat+" on "+ctime(time())+" for "+cost+" exp\n");
-    }
-    else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1)
-    {
-        if((int)ob->set_XP_tax(cost, 0, "improvement") == -1)
-        {
-            tell_object(ob, "Currently your character improvement tax is above the maximum allowed. "+
-            "You must first reduce it before you can gain this stat point.");
+        log_file("stat_gain", "" + ob->QCN + " gained 1 point in " +
+                 stat + " on " + ctime(time()) + " for " + cost + " exp\n");
+    }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
+        if ((int)ob->set_XP_tax(cost, 0, "improvement") == -1) {
+            tell_object(ob, "Currently your character improvement tax is above the maximum allowed. " +
+                        "You must first reduce it before you can gain this stat point.");
             return 1;
         }
-        log_file("stat_gain",""+ob->QCN+" gained 1 point in "+
-        stat+" on "+ctime(time())+" for a character improvement tax of "+cost+" exp\n");
+        log_file("stat_gain", "" + ob->QCN + " gained 1 point in " +
+                 stat + " on " + ctime(time()) + " for a character improvement tax of " + cost + " exp\n");
     }
     gained = (int)ob->query("stat_points_gained");
     gained += 1;
     ob->delete("stat_points_gained");
-    ob->set("stat_points_gained",gained);
+    ob->set("stat_points_gained", gained);
     num = (int)ob->query_rolled_stats(stat);
-    ob->set_stats(stat,num + 1);
-    tell_object(ob,"%^YELLOW%^You have successfully added 1 point to your "+
-	stat+", your "+stat+" score is now "+ob->query_base_stats(stat)+".%^RESET%^");
+    ob->set_stats(stat, num + 1);
+    tell_object(ob, "%^YELLOW%^You have successfully added 1 point to your " +
+                stat + ", your " + stat + " score is now " + ob->query_base_stats(stat) + ".%^RESET%^");
     FEATS_D->update_usable(ob);
     return 1;
 }
 
-int gain_stat(object ob,string stat)
+int gain_stat(object ob, string stat)
 {
-    int current,cost,total_exp,exp;
+    int current, cost, total_exp, exp;
 
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(stat)) { return 0; }
-
-    if(!stat_points_left(ob))
-    {
-        tell_object(ob,"%^RED%^You have no stat points left to gain.");
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!stringp(stat)) {
         return 0;
     }
 
-    switch(stat)
-    {
+    if (!stat_points_left(ob)) {
+        tell_object(ob, "%^RED%^You have no stat points left to gain.");
+        return 0;
+    }
+
+    switch (stat) {
     case "str": stat = "strength";      break;
     case "con": stat = "constitution";  break;
     case "dex": stat = "dexterity";     break;
@@ -94,316 +101,288 @@ int gain_stat(object ob,string stat)
     }
 
     current = (int)ob->query_rolled_stats(stat);
-    if(!current)
-    {
-        tell_object(ob,"%^BOLD%^"+stat+" is not a valid stat, please pick either "
-            "strength, dexterity, constitution, intelligence, wisdom, or charisma.  "
-            "You may also use the abbreviations str,dex,con,int,wis and cha.");
+    if (!current) {
+        tell_object(ob, "%^BOLD%^" + stat + " is not a valid stat, please pick either "
+                    "strength, dexterity, constitution, intelligence, wisdom, or charisma.  "
+                    "You may also use the abbreviations str,dex,con,int,wis and cha.");
         return 0;
     }
-    if(current < 0) { return 0; }
-    if(current > 54)
-    {
-        tell_object(ob,"%^RED%^You can't have a base stat (before racial & age modifiers) higher than 55 points.");
+    if (current < 0) {
+        return 0;
+    }
+    if (current > 54) {
+        tell_object(ob, "%^RED%^You can't have a base stat (before racial & age modifiers) higher than 55 points.");
         return 0;
     }
 
     total_exp = (int)ob->query_exp();
-    exp       = EXP_NEEDED[(int)ob->query_character_level()];
-    cost      = to_int(to_float(exp) * 0.10);
+    exp = EXP_NEEDED[(int)ob->query_character_level()];
+    cost = to_int(to_float(exp) * 0.10);
 
-    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
-    {
-        tell_object(ob,"%^YELLOW%^Do you really want to add a point to "+stat+"?  It will "
-        "cost you %^MAGENTA%^"+cost+"%^YELLOW%^ experience points.%^RESET%^");
-    }
-    else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1)
-    {
-        tell_object(ob, "%^YELLOW%^Do you really want to add a point to "+stat+"?  It will "+
-        "add a character improvement tax of %^MAGENTA%^"+cost+"%^YELLOW%^ experience points. "+
-        "This tax will reduce all experience you gain by %^RED%^50%%^YELLOW%^ until it is repaid.");
+    if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
+        tell_object(ob, "%^YELLOW%^Do you really want to add a point to " + stat + "?  It will "
+                    "cost you %^MAGENTA%^" + cost + "%^YELLOW%^ experience points.%^RESET%^");
+    }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
+        tell_object(ob, "%^YELLOW%^Do you really want to add a point to " + stat + "?  It will " +
+                    "add a character improvement tax of %^MAGENTA%^" + cost + "%^YELLOW%^ experience points. " +
+                    "This tax will reduce all experience you gain by %^RED%^50%%^YELLOW%^ until it is repaid.");
     }
 
-    tell_object(ob,"Enter <yes> to confirm, anything else to abort.");
-    input_to("confirm_stat_gain",ob,stat,cost);
+    tell_object(ob, "Enter <yes> to confirm, anything else to abort.");
+    input_to("confirm_stat_gain", ob, stat, cost);
     return 1;
 }
 
 int is_valid_stat_move(object who, string stat, string stat_two)
 {
-	mapping MyStats;
-	int StatOne, StatTwo, StatTotals, CurStat;
+    mapping MyStats;
+    int StatOne, StatTwo, StatTotals, CurStat;
 
-	if(!objectp(who)) return 0;
-
-	StatOne = (int)who->query_rolled_stats(stat) + 1;
-	StatTwo = (int)who->query_rolled_stats(stat_two) - 1;
-	if((int)who->query_base_stats(stat) + 1 > 25)
-	{
-		tell_object(who, "You cannot have a stat higher than "+
-		"25.");
-		return 0;
-	}
-
-	if(StatTwo < 6)
-	{
-		tell_object(who, "Your base "+stat+" cannot go below 6.");
-		return 0;
-	}
-
-	StatTotals = 0;
-	MyStats = ([]);
-	if((CurStat = (int)who->query_rolled_stats("strength")) >= 18)
-	{
-		MyStats += (["strength" : CurStat]);
-		StatTotals += CurStat - 18;
-	}
-	if((CurStat = (int)who->query_rolled_stats("dexterity")) >= 18)
-	{
-		MyStats += (["dexterity" : CurStat]);
-		StatTotals += CurStat - 18;
-	}
-	if((CurStat = (int)who->query_rolled_stats("intelligence")) >= 18)
-	{
-		MyStats += (["intelligence" : CurStat]);
-		StatTotals += CurStat - 18;
-	}
-	if((CurStat = (int)who->query_rolled_stats("constitution")) >= 18)
-	{
-		MyStats += (["constitution" : CurStat]);
-		StatTotals += CurStat - 18;
-	}
-	if((CurStat = (int)who->query_rolled_stats("wisdom")) >= 18)
-	{
-		MyStats += (["wisdom" : CurStat]);
-		StatTotals += CurStat - 18;
-	}
-	if((CurStat = (int)who->query_rolled_stats("charisma")) >= 18)
-	{
-		MyStats += (["charisma" : CurStat]);
-		StatTotals += CurStat - 18;
-	}
-	if(StatOne > 18 && StatTotals >= (int)who->query("stat_points_gained"))
-	{
-		if(MyStats[stat])
-		{
-			if(MyStats[stat_two] > 18)
-				return 1;
-		}
-		tell_object(who, "That would cause your base "+stat+
-		" to be higher than allowed.");
-		return 0;
-	}
-	return 1;
-}
-
-int confirm_move_stat(string str,object obj,string stat_one,string stat_two,int cost)
-{
-    if(str != "yes")
-    {
-        tell_object(obj,"Aborting...");
-    return 0;
-    }
-    if(!cost)
-    {
-        tell_object(obj,"Error with exp cost, contact a wiz... exiting...");
+    if (!objectp(who)) {
         return 0;
     }
 
-
-    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
-    {
-        obj->add_exp(-cost);
-        obj->resetLevelForExp(0);
-        obj->remove_XP_tax("improvement");
-        log_file("stat_moves",""+capitalize(obj->query_true_name())+" moved 1 point from "
-        ""+stat_one+"("+((int)obj->query_base_stats(stat_one) + 1)+") into "+stat_two+"("
-        ""+((int)obj->query_base_stats(stat_two) - 1)+") for "+cost+" experience points "
-        ""+ctime(time())+"\n");
-
-        tell_object(obj,"%^BOLD%^Subtracting %^MAGENTA%^"+cost+
-        "%^RESET%^%^YELLOW%^ experience points...%^RESET%^");
+    StatOne = (int)who->query_rolled_stats(stat) + 1;
+    StatTwo = (int)who->query_rolled_stats(stat_two) - 1;
+    if ((int)who->query_base_stats(stat) + 1 > 25) {
+        tell_object(who, "You cannot have a stat higher than " +
+                    "25.");
+        return 0;
     }
-    else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1)
-    {
-        if((int)obj->set_XP_tax(cost, 0, "improvement") == -1)
-        {
-            tell_object(obj, "Currently your character improvement tax is above the maximum "+
-            "allowed, you must reduce it before moving stats.");
-            return 1;
+
+    if (StatTwo < 6) {
+        tell_object(who, "Your base " + stat + " cannot go below 6.");
+        return 0;
+    }
+
+    StatTotals = 0;
+    MyStats = ([]);
+    if ((CurStat = (int)who->query_rolled_stats("strength")) >= 18) {
+        MyStats += (["strength" : CurStat]);
+        StatTotals += CurStat - 18;
+    }
+    if ((CurStat = (int)who->query_rolled_stats("dexterity")) >= 18) {
+        MyStats += (["dexterity" : CurStat]);
+        StatTotals += CurStat - 18;
+    }
+    if ((CurStat = (int)who->query_rolled_stats("intelligence")) >= 18) {
+        MyStats += (["intelligence" : CurStat]);
+        StatTotals += CurStat - 18;
+    }
+    if ((CurStat = (int)who->query_rolled_stats("constitution")) >= 18) {
+        MyStats += (["constitution" : CurStat]);
+        StatTotals += CurStat - 18;
+    }
+    if ((CurStat = (int)who->query_rolled_stats("wisdom")) >= 18) {
+        MyStats += (["wisdom" : CurStat]);
+        StatTotals += CurStat - 18;
+    }
+    if ((CurStat = (int)who->query_rolled_stats("charisma")) >= 18) {
+        MyStats += (["charisma" : CurStat]);
+        StatTotals += CurStat - 18;
+    }
+    if (StatOne > 18 && StatTotals >= (int)who->query("stat_points_gained")) {
+        if (MyStats[stat]) {
+            if (MyStats[stat_two] > 18) {
+                return 1;
+            }
         }
-        log_file("stat_moves",""+capitalize(obj->query_true_name())+" moved 1 point from "
-        ""+stat_one+"("+((int)obj->query_base_stats(stat_one) + 1)+") into "+stat_two+"("
-        ""+((int)obj->query_base_stats(stat_two) - 1)+") for a character improvement "+
-        "tax of "+cost+" experience points "
-        ""+ctime(time())+"\n");
+        tell_object(who, "That would cause your base " + stat +
+                    " to be higher than allowed.");
+        return 0;
     }
+    return 1;
+}
+
+int confirm_move_stat(string str, object obj, string stat_one, string stat_two, int cost)
+{
+    if (str != "yes") {
+        tell_object(obj, "Aborting...");
+        return 0;
+    }
+    if (!cost) {
+        tell_object(obj, "Error with exp cost, contact a wiz... exiting...");
+        return 0;
+    }
+
+    if ((int)obj->set_XP_tax(cost, 0, "improvement") == -1) {
+        tell_object(obj, "Currently your character improvement tax is above the maximum " +
+                    "allowed, you must reduce it before moving stats.");
+        return 1;
+    }
+    log_file("stat_moves", "" + capitalize(obj->query_true_name()) + " moved 1 point from "
+             "" + stat_one + "(" + ((int)obj->query_base_stats(stat_one) + 1) + ") into " + stat_two + "("
+             "" + ((int)obj->query_base_stats(stat_two) - 1) + ") for a character improvement " +
+             "tax of " + cost + " experience points "
+             "" + ctime(time()) + "\n");
 
     obj->force_me("stats");
-    obj->set_stats(stat_one,(int)obj->query_rolled_stats(stat_one) - 1);
-    obj->set_stats(stat_two,(int)obj->query_rolled_stats(stat_two) + 1);
+    obj->set_stats(stat_one, (int)obj->query_rolled_stats(stat_one) - 1);
+    obj->set_stats(stat_two, (int)obj->query_rolled_stats(stat_two) + 1);
 
-    tell_object(obj,"%^BOLD%^Moving 1 point of "+stat_one+" into "+stat_two+"...%^RESET%^");
-    tell_object(obj,"%^BOLD%^Done.%^RESET%^");
+    tell_object(obj, "%^BOLD%^Moving 1 point of " + stat_one + " into " + stat_two + "...%^RESET%^");
+    tell_object(obj, "%^BOLD%^Done.%^RESET%^");
     obj->force_me("stats");
     return 1;
 }
 
-int move_stat(object obj,string *stats)
+int move_stat(object obj, string* stats)
 {
-    string stat_one,stat_two;
-    int cost,exp,total_exp, tcheck;
+    string stat_one, stat_two;
+    int cost, exp, total_exp, tcheck;
 
-    if(!objectp(obj)) { return 0; }
-    if(!pointerp(stats)) { return 0; }
-
-    switch(lower_case(stats[0]))
-    {
-        case "str": stat_one = "strength";      break;
-        case "con": stat_one = "constitution";  break;
-        case "dex": stat_one = "dexterity";     break;
-        case "int": stat_one = "intelligence";  break;
-        case "wis": stat_one = "wisdom";        break;
-        case "cha": stat_one = "charisma";      break;
+    if (!objectp(obj)) {
+        return 0;
+    }
+    if (!pointerp(stats)) {
+        return 0;
     }
 
-    switch(lower_case(stats[1]))
-    {
-        case "str": stat_two = "strength";      break;
-        case "con": stat_two = "constitution";  break;
-        case "dex": stat_two = "dexterity";     break;
-        case "int": stat_two = "intelligence";  break;
-        case "wis": stat_two = "wisdom";        break;
-        case "cha": stat_two = "charisma";      break;
+    switch (lower_case(stats[0])) {
+    case "str": stat_one = "strength";      break;
+    case "con": stat_one = "constitution";  break;
+    case "dex": stat_one = "dexterity";     break;
+    case "int": stat_one = "intelligence";  break;
+    case "wis": stat_one = "wisdom";        break;
+    case "cha": stat_one = "charisma";      break;
     }
 
-    if(!is_valid_stat_move(obj, stat_two, stat_one))
-    {
+    switch (lower_case(stats[1])) {
+    case "str": stat_two = "strength";      break;
+    case "con": stat_two = "constitution";  break;
+    case "dex": stat_two = "dexterity";     break;
+    case "int": stat_two = "intelligence";  break;
+    case "wis": stat_two = "wisdom";        break;
+    case "cha": stat_two = "charisma";      break;
+    }
+
+    if (!is_valid_stat_move(obj, stat_two, stat_one)) {
         return 1;
     }
     total_exp = (int)obj->query_exp();
-    exp       = EXP_NEEDED[(int)obj->query_character_level()];
-    cost      = to_int(to_float(exp) * 0.25);
-    tcheck    = to_int(to_float(total_exp) * 0.25);
+    exp = EXP_NEEDED[(int)obj->query_character_level()];
+    cost = to_int(to_float(exp) * 0.25);
+    tcheck = to_int(to_float(total_exp) * 0.25);
 
-    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)
-    {
-        if(cost > tcheck)
-        {
+    if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
+        if (cost > tcheck) {
             tell_object(obj, "You cannot move a stat point at this time.");
             return 1;
         }
-        tell_object(obj,"%^YELLOW%^It would cost you %^MAGENTA%^"+
-        cost+"%^RESET%^%^YELLOW%^ experience "
-        "points to move 1 point from "+stat_one+" into "+stat_two+
-        ".  Are you sure you want to do this?  Enter %^MAGENTA%^yes"+
-        "%^RESET%^%^YELLOW%^ to confirm, anything else to abort.");
+        tell_object(obj, "%^YELLOW%^It would cost you %^MAGENTA%^" +
+                    cost + "%^RESET%^%^YELLOW%^ experience "
+                    "points to move 1 point from " + stat_one + " into " + stat_two +
+                    ".  Are you sure you want to do this?  Enter %^MAGENTA%^yes" +
+                    "%^RESET%^%^YELLOW%^ to confirm, anything else to abort.");
+    }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
+        tell_object(obj, "%^YELLOW%^You will incur a character improvement " +
+                    "tax of %^MAGENTA%^" + cost + "%^RESET%^%^YELLOW%^ "
+                    " to move 1 point from " + stat_one + " into " + stat_two +
+                    ".  This tax will reduce all future experience points that you gain by " +
+                    "%^RED%^50%%^YELLOW%^ until it is repaid. Are you sure you want to do this?  Enter %^MAGENTA%^yes" +
+                    "%^RESET%^%^YELLOW%^ to confirm, anything else to abort.");
     }
-    else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1)
-    {
-        tell_object(obj,"%^YELLOW%^You will incur a character improvement "+
-        "tax of %^MAGENTA%^"+cost+"%^RESET%^%^YELLOW%^ "
-        " to move 1 point from "+stat_one+" into "+stat_two+
-        ".  This tax will reduce all future experience points that you gain by "+
-        "%^RED%^50%%^YELLOW%^ until it is repaid. Are you sure you want to do this?  Enter %^MAGENTA%^yes"+
-        "%^RESET%^%^YELLOW%^ to confirm, anything else to abort.");
-    }
-    input_to("confirm_move_stat",obj,stat_one,stat_two,cost);
+    input_to("confirm_move_stat", obj, stat_one, stat_two, cost);
     return 1;
 }
 
 string mybonus(object who, string stat)
 {
     int bonus;
-    if(!objectp(who)) return "";
+    if (!objectp(who)) {
+        return "";
+    }
     bonus = BONUS_D->query_stat_bonus(who, stat);
-    if(bonus > 0) return "+"+bonus;
-    else return " "+bonus;
+    if (bonus > 0) {
+        return "+" + bonus;
+    } else {
+        return " " + bonus;
+    }
 }
 
 string stat_display(int stat, int cur_stat)
 {
-    if(stat == cur_stat) return "%^RESET%^"+stat;
-    if(stat < cur_stat) return "%^BOLD%^%^CYAN%^"+cur_stat+"%^RESET%^";
-    if(stat > cur_stat) return "%^BOLD%^%^RED%^"+cur_stat+"%^RESET%^";
+    if (stat == cur_stat) {
+        return "%^RESET%^" + stat;
+    }
+    if (stat < cur_stat) {
+        return "%^BOLD%^%^CYAN%^" + cur_stat + "%^RESET%^";
+    }
+    if (stat > cur_stat) {
+        return "%^BOLD%^%^RED%^" + cur_stat + "%^RESET%^";
+    }
 }
 
 int cmd_stats(string person)
 {
     object obj;
-    int age,i, bonus, cstr, cint, cwis, ccon, cdex, ccha;
-    string *tmp,*valid, bstr;
+    int age, i, bonus, cstr, cint, cwis, ccon, cdex, ccha;
+    string* tmp, * valid, bstr;
 
-    if(!avatarp(TP)) { obj = TP; }
-    if(!stringp(person)) { obj = TP; }
-    if(!objectp(obj=find_player(person))) { obj = TP; }
+    if (!avatarp(TP)) {
+        obj = TP;
+    }
+    if (!stringp(person)) {
+        obj = TP;
+    }
+    if (!objectp(obj = find_player(person))) {
+        obj = TP;
+    }
 
-    if(TP->query("new_class_type"))
-    {
-        if(stringp(person) && strsrch(person,"gain") != -1)
-        {
-            person = replace_string(person,"gain ","");
-            if(TP->query("negative level"))
-            {
-                tell_object(TP, "You have a negative level and must have it removed before "+
-                "you can gain stats!");
+    if (TP->query("new_class_type")) {
+        if (stringp(person) && strsrch(person, "gain") != -1) {
+            person = replace_string(person, "gain ", "");
+            if (TP->query("negative level")) {
+                tell_object(TP, "You have a negative level and must have it removed before " +
+                            "you can gain stats!");
                 return 1;
             }
-            if(intp("/daemon/user_d.c"->get_scaled_level(TP)))
-            {
-                tell_object(TP, "You have scaled your level down and must revert it back to "+
-                "normal before you can gain any stats!");
+            if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+                tell_object(TP, "You have scaled your level down and must revert it back to " +
+                            "normal before you can gain any stats!");
                 return 1;
             }
-            gain_stat(TP,person);
+            gain_stat(TP, person);
             return 1;
         }
 
-        if(stringp(person) && strsrch(person,"move") != -1)
-        {
+        if (stringp(person) && strsrch(person, "move") != -1) {
 // breaking on level-adjusted characters @ L11, fixing. N, 4/1/20
 //            if((int)TP->query_base_character_level() < 10)
-            if((int)TP->query_character_level() < 10)
-            {
-                tell_object(TP,"You must be above level 10 in order to move one of your "
-                    "stats.");
+            if ((int)TP->query_character_level() < 10) {
+                tell_object(TP, "You must be above level 10 in order to move one of your "
+                            "stats.");
                 return 1;
             }
-            if(TP->query("negative level"))
-            {
-                tell_object(TP, "You have a negative level and must have it removed before "+
-                "you can move stats!");
+            if (TP->query("negative level")) {
+                tell_object(TP, "You have a negative level and must have it removed before " +
+                            "you can move stats!");
                 return 1;
             }
-            if(intp("/daemon/user_d.c"->get_scaled_level(TP)))
-            {
-                tell_object(TP, "You have scaled your level down and must revert it back to "+
-                "normal before you can move any stats!");
+            if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+                tell_object(TP, "You have scaled your level down and must revert it back to " +
+                            "normal before you can move any stats!");
                 return 1;
             }
-            valid = ({ "str","dex","con","int","wis","cha" });
-            if(strsrch(person,"to") == -1)
-            {
-                tell_object(TP,"Syntax: stats move str to dex");
+            valid = ({ "str", "dex", "con", "int", "wis", "cha" });
+            if (strsrch(person, "to") == -1) {
+                tell_object(TP, "Syntax: stats move str to dex");
                 return 1;
             }
-            person = replace_string(person,"move ","");
-            person = replace_string(person,"to ","");
-            tmp = explode(person," ");
-            if(sizeof(tmp) != 2)
-            {
-                tell_object(TP,"Syntax: stats move str to dex");
+            person = replace_string(person, "move ", "");
+            person = replace_string(person, "to ", "");
+            tmp = explode(person, " ");
+            if (sizeof(tmp) != 2) {
+                tell_object(TP, "Syntax: stats move str to dex");
                 return 1;
             }
-            for(i=0;i<sizeof(tmp);i++)
-            {
-                if(member_array(tmp[i],valid) == -1)
-                {
-                    tell_object(TP,"You must pick your stats from the following list: "+implode(valid," ")+"");
+            for (i = 0; i < sizeof(tmp); i++) {
+                if (member_array(tmp[i], valid) == -1) {
+                    tell_object(TP, "You must pick your stats from the following list: " + implode(valid, " ") + "");
                     return 1;
                 }
             }
-            move_stat(TP,tmp);
+            move_stat(TP, tmp);
             return 1;
         }
     }
@@ -421,25 +400,31 @@ int cmd_stats(string person)
     CHR = obj->query_base_stats("charisma");
     ccha = obj->query_stats("charisma");
 
-    str = "\n%^RESET%^%^GREEN%^Str %^RESET%^"+stat_display(STR, cstr)+ " ("+mybonus(obj, "strength")+")";
-    str += "  %^GREEN%^Dex %^RESET%^"+stat_display(DEX, cdex)+" ("+mybonus(obj, "dexterity")+")";
-    if(obj->is_undead())
+    str = "\n%^RESET%^%^GREEN%^Str %^RESET%^" + stat_display(STR, cstr) + " (" + mybonus(obj, "strength") + ")";
+    str += "  %^GREEN%^Dex %^RESET%^" + stat_display(DEX, cdex) + " (" + mybonus(obj, "dexterity") + ")";
+    if (obj->is_undead()) {
         str += "  %^GREEN%^Con %^RESET%^--\n";
-    else
-        str += "  %^GREEN%^Con %^RESET%^"+stat_display(CON, ccon)+" ("+mybonus(obj, "constitution")+")\n";
-
-    str += "%^BLUE%^Int %^RESET%^"+stat_display(INT, cint)+" ("+mybonus(obj, "intelligence")+")";
-    str += "  %^BLUE%^Wis %^RESET%^"+stat_display(WIS, cwis)+" ("+mybonus(obj, "wisdom")+")";
-    str += "  %^BLUE%^Cha %^RESET%^"+stat_display(CHR, ccha)+" ("+mybonus(obj, "charisma")+")";
-    if(obj == TP) tell_object(obj,""+str);
-    else tell_object(TP,""+str);
-
-    if(obj == TP) {
-        if(stat_points_left(obj) > 1) tell_object(obj,"%^RESET%^%^BOLD%^You have %^CYAN%^"+stat_points_left(obj)+"%^RESET%^%^BOLD%^ bonus stat points remaining.%^RESET%^");
-        else if(stat_points_left(obj)) tell_object(obj, "%^RESET%^%^BOLD%^You have %^CYAN%^1%^RESET%^%^BOLD%^ bonus stat point remaining.%^RESET%^");
+    } else {
+        str += "  %^GREEN%^Con %^RESET%^" + stat_display(CON, ccon) + " (" + mybonus(obj, "constitution") + ")\n";
     }
-    else {
-        tell_object(TP,"%^RESET%^%^BOLD%^Base stats unmodified by age and race are:%^RESET%^");
+
+    str += "%^BLUE%^Int %^RESET%^" + stat_display(INT, cint) + " (" + mybonus(obj, "intelligence") + ")";
+    str += "  %^BLUE%^Wis %^RESET%^" + stat_display(WIS, cwis) + " (" + mybonus(obj, "wisdom") + ")";
+    str += "  %^BLUE%^Cha %^RESET%^" + stat_display(CHR, ccha) + " (" + mybonus(obj, "charisma") + ")";
+    if (obj == TP) {
+        tell_object(obj, "" + str);
+    } else {
+        tell_object(TP, "" + str);
+    }
+
+    if (obj == TP) {
+        if (stat_points_left(obj) > 1) {
+            tell_object(obj, "%^RESET%^%^BOLD%^You have %^CYAN%^" + stat_points_left(obj) + "%^RESET%^%^BOLD%^ bonus stat points remaining.%^RESET%^");
+        } else if (stat_points_left(obj)) {
+            tell_object(obj, "%^RESET%^%^BOLD%^You have %^CYAN%^1%^RESET%^%^BOLD%^ bonus stat point remaining.%^RESET%^");
+        }
+    }else {
+        tell_object(TP, "%^RESET%^%^BOLD%^Base stats unmodified by age and race are:%^RESET%^");
         STR = obj->query_rolled_stats("strength");
         INT = obj->query_rolled_stats("intelligence");
         WIS = obj->query_rolled_stats("wisdom");
@@ -447,9 +432,9 @@ int cmd_stats(string person)
         CON = obj->query_rolled_stats("constitution");
         CHR = obj->query_rolled_stats("charisma");
 
-        tell_object(TP,"%^RESET%^%^GREEN%^str :%^RESET%^"+STR+"  %^GREEN%^int :%^RESET%^"+INT+"  %^GREEN%^wis :%^RESET%^"+WIS+"  %^GREEN%^dex :%^RESET%^"+DEX+"  %^GREEN%^con :%^RESET%^"+CON+"  %^GREEN%^cha :%^RESET%^"+CHR+"");
+        tell_object(TP, "%^RESET%^%^GREEN%^str :%^RESET%^" + STR + "  %^GREEN%^int :%^RESET%^" + INT + "  %^GREEN%^wis :%^RESET%^" + WIS + "  %^GREEN%^dex :%^RESET%^" + DEX + "  %^GREEN%^con :%^RESET%^" + CON + "  %^GREEN%^cha :%^RESET%^" + CHR + "");
     }
-  return 1;
+    return 1;
 }
 
 void help()

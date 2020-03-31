@@ -1,5 +1,5 @@
 //Coded by Bane//
-// adding id of laeradmon & getting rid of the wander inherit to use normal wandering *Styx* 12/20/03, last change 8/7/02 (riding level?) 
+// adding id of laeradmon & getting rid of the wander inherit to use normal wandering *Styx* 12/20/03, last change 8/7/02 (riding level?)
 
 #include <std.h>
 #include <daemons.h>
@@ -26,7 +26,8 @@ void create() {
    set_gender("male");
     set_nwp("riding",20);
    set_size(2);
-   set_diety("tyr");
+   set_diety("kreysneothosies");
+   set_no_moving();
    set_class("paladin");
    set_mlevel("paladin",22);
    set_guild_level("cleric",22);

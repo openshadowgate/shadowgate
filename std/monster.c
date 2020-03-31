@@ -24,6 +24,7 @@ int hit_dice, hit_dice_bonus, stage;
 static int speed;
 static int moving;
 string* nogolist;   // * for the addition to move_around()
+int no_moving;
 mapping emotes;
 mapping spells;
 mapping thief_skill;
@@ -786,6 +787,9 @@ void move_around()
     if (!objectp(ETO)) {
         return;
     }
+    if (no_moving) {
+        return;
+    }
     ETO->setupExits();
     if (query_current_attacker()) {
         return;
@@ -833,12 +837,22 @@ void set_nogo(string* list)
     nogolist = list;
 }                                                 // *added support for move_around
 
+void set_no_moving()
+{
+    no_moving = 1;
+}
+
 string* query_nogo()
 {
     if (!pointerp(nogolist)) {
         nogolist = ({ });                       // *make sure we have an array
     }
     return nogolist;
+}
+
+int query_no_moving()
+{
+    return no_moving;
 }
 
 void set_moving(int i)
