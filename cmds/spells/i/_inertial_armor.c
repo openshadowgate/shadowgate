@@ -52,7 +52,7 @@ void spell_effect(int prof) {
         return;
     }
     
-    bonus = 1+(clevel/12);  // on par with mage armor
+    bonus = clip( clevel, 4, 8 ); //Base 4, ramps up to 8
     spell_successful();
     
     if (target == caster) 

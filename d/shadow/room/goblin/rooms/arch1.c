@@ -2,7 +2,7 @@
 #include "/d/shadow/room/goblin/short.h"
 
 inherit ROOM;
- 
+
 void create() {
     ::create();
     set_terrain(STONE_BUILDING);
@@ -31,17 +31,17 @@ void create() {
     ]));
 }
 
-void reset() {
+void reset()
+{
     ::reset();
-    if(!random(5))
-      if(!present("goblin")) {
-        switch(random(8)) {
-          case 0: new( MPATH "raider.c")->move(TO);
-          case 1: new( MPATH "footman.c" )->move(TO);
-          case 2..4: new( MPATH "footman.c" )->move(TO);
-          case 5..6: new( MPATH "footman.c")->move(TO);
-                  break;
-          case 7: new( MPATH "witch.c")->move(TO);        
+    if (!present("goblin")) {
+        switch (random(8)) {
+        case 0: new(MPATH "raider.c")->move(TO);
+        case 1: new(MPATH "footman.c")->move(TO);
+        case 2..4: new(MPATH "footman.c")->move(TO);
+        case 5..6: new(MPATH "footman.c")->move(TO);
+            break;
+        case 7: new(MPATH "witch.c")->move(TO);
         }
-      }
+    }
 }

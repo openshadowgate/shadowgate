@@ -1752,6 +1752,7 @@ varargs int set_new_exp(int level, string perc)
             level = (int)TO->query_highest_level();
         }
     }
+
     if (!stringp(perc) || perc == "" || perc == " ") {
         perc = "normal";
     }
@@ -1793,8 +1794,7 @@ varargs int set_new_exp(int level, string perc)
     }
     if (level > 100) {
         level = 100; exp = 300000000;
-    }
-    else {
+    } else {
         exp = (475 * level * level * level - 7600 * level * level + 74975 * level - 23750) / 882;
     }
 
