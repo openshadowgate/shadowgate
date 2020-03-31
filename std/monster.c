@@ -1761,11 +1761,11 @@ varargs int set_new_exp(int level, string perc)
 
     switch (perc) {
     case "very low":
-        div = 60;
+        div = 70;
         break;
 
     case "low":
-        div = 80;
+        div = 85;
         break;
 
     case "normal":
@@ -1773,11 +1773,11 @@ varargs int set_new_exp(int level, string perc)
         break;
 
     case "high":
-        div = 120;
+        div = 115;
         break;
 
     case "very high":
-        div = 140;
+        div = 130;
         break;
 
     case "boss":
