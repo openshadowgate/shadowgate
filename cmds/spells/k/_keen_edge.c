@@ -6,7 +6,7 @@ int trackera, trackerb;
 void create() {
     ::create();
     set_spell_name("keen edge");
-    set_spell_level(([ "inquisitor" : 3, "mage" : 3 ]));
+    set_spell_level(([ "inquisitor" : 3, "mage" : 3, "psion": 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS keen edge");
     set_description("This spell makes a weapon magically keen, improving its ability to deal telling blows. This transmutation increases the threat range of the weapon and works the same way as lethal strikes feat does.

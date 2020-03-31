@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("telekinetic push");
-    set_spell_level(([ "mage" : 5, "oracle" : 5 ]));
+    set_spell_level(([ "mage" : 5, "oracle" : 5, "psion" : 3 ]));
     set_mystery("ancestor");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS telekinetic push on TARGET");
