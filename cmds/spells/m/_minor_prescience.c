@@ -10,7 +10,7 @@ void create() {
     ::create();
     set_spell_name("minor prescience");
     set_spell_level(([ "psion" : 1 ]));
-    set_spell_sphere("combat");
+    set_spell_sphere("divination");
     set_syntax("cast CLASS minor prescience");
     set_description("This power will allow the psion foreknowledge, granting him additional prowess in battle.  The power "
 "gives the psion a minor bonus to hit and damage his opponents for a time.");

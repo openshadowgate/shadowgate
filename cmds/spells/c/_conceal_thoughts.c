@@ -12,7 +12,7 @@ void create(){
     ::create();
     set_spell_name("conceal thoughts");
     set_spell_level(([ "psion" : 1, ]));
-    set_spell_sphere("alteration");
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS conceal thoughts on <align>");
     set_description("When this spell is cast, the caster must pick the alignment that he wishes for others to see him as"
 ".  This spell has a chance to fool any magical or other means of detecting the caster's true alignment.\n\nThe choices "
