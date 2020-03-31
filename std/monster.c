@@ -1738,19 +1738,19 @@ int query_exp_needed(int level)
 /**
  * Automatically Sets monster exp based on exp needed towards next level
  *
- * @param level monster level
- * @param perc "very low" "low" "normal" "high" "very high" "boss",
+ * @param level optional, monster level
+ * @param perc optional, "very low" "low" "normal" "high" "very high" "boss",
  *        defaults to "normal", percentile based exp level
  */
-int set_new_exp(int level, string perc)
+varargs int set_new_exp(int level, string perc)
 {
     int exp, div;
 
     if (!intp(level) || level < 1) {
         level = (int)TO->query_level();
-    }
-    if (level < (int)TO->query_highest_level()) {// emergency override since a lot of mobs had exp far below their levels and people are saying grinding isn't worth doing anymore - Odin 3/26/2020
-        level = (int)TO->query_highest_level();
+        if (level < (int)TO->query_highest_level()) {
+            level = (int)TO->query_highest_level();
+        }
     }
     if (!stringp(perc) || perc == "" || perc == " ") {
         perc = "normal";
@@ -1793,7 +1793,7 @@ int set_new_exp(int level, string perc)
     }
     if (level > 100) {
         level = 100; exp = 300000000;
-    }                                                         // table goes to 100 now
+    }
     else {
         exp = (475 * level * level * level - 7600 * level * level + 74975 * level - 23750) / 882;
     }
