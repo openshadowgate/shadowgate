@@ -9,12 +9,13 @@ void create(){
 	"north":"/d/laerad/wasteland/waste24",
 	"south":"/d/laerad/wasteland/waste26"
     ]) );
-    new("/d/laerad/mon/anti")->move(this_object());
 }
 int clean_up(){return 1;}
 
 reset()
 {
     ::reset();
-    new("/d/laerad/mon/paladin")->move(this_object());
+    if (!objectp(present("silvim", TO))) {
+        new("/d/laerad/mon/anti")->move(this_object());
+    }
 }

@@ -25,7 +25,7 @@ void create(){
 reset()
 {
     ::reset();
-    new("/d/laerad/mon/paladin")->move(this_object());
+    if (!objectp(present("arganon", TO))) {
+        new("/d/laerad/mon/paladin")->move(this_object());
+    }
 }
-
-int clean_up(){return 1;}
