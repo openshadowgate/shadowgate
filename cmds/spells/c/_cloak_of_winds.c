@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("cloak of winds");
-    set_spell_level(([ "druid" : 3, "mage" : 3,"ranger":3, "cleric":2]));
+    set_spell_level(([ "druid" : 3, "mage" : 3, "ranger" : 3, "cleric" : 2]));
     set_domains("air");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS cloak of winds");
@@ -17,6 +17,7 @@ void create()
     set_helpful_spell(1);
     traveling_aoe_spell(1);
 }
+
 int preSpell()
 {
     if (caster->query_property("cloak of winds")) {
@@ -25,15 +26,16 @@ int preSpell()
     }
     return 1;
 }
+
 void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 6) * clevel;
     tell_room(place, "%^WHITE%^%^BOLD%^A cloak of winds surrounds and embraces " + caster->QCN + ".", caster);
     tell_object(caster, "%^WHITE%^%^BOLD%^A cloaked of winds surrounds and embraces you.");
-    caster->set_property("cloak of winds", 1);
+    caster->set_property("cloak of winds");
     caster->set_property("spelled", ({ TO }));
-    caster->set_property("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyound veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
+    caster->set_property("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyond veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
     caster->add_ac_bonus(2);
 
     addSpellToCaster();
@@ -42,6 +44,7 @@ void spell_effect(int prof)
     counter = 6 * clevel;
     call_out("room_check", ROUND_LENGTH);
 }
+
 void room_check()
 {
     if (!objectp(caster) || !objectp(ENV(caster))) {
@@ -54,6 +57,7 @@ void room_check()
     call_out("room_check", ROUND_LENGTH * 2);
     return;
 }
+
 void execute_attack()
 {
     object* attackers, room;
@@ -100,6 +104,7 @@ void execute_attack()
     prepend_to_combat_cycle(place);
     counter--;
 }
+
 void dest_effect()
 {
     remove_call_out("room_check");
@@ -107,7 +112,7 @@ void dest_effect()
     if (objectp(caster)) {
         tell_room(environment(caster), "%^BOLD%^%^WHITE%^Cloak of winds around " + caster->QCN + " retreat.");
         caster->remove_property("cloak of winds");
-        caster->remove_property_value("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyound veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
+        caster->remove_property_value("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyond veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
         caster->add_ac_bonus(-2);
     }
     ::dest_effect();
