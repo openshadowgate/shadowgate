@@ -7,7 +7,6 @@ void create()
     ::create();
     set_spell_name("aura sight");
     set_spell_level(([ "psion" : 4 ]));
-    set_discipline("seer");
     set_spell_sphere("divination");
     set_syntax("cast CLASS aura sight on TARGET");
     set_description("This power will allow the seer to focus on a target to discover the target's alignment.  The "

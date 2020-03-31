@@ -8,7 +8,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("body purification");
-    set_spell_level(([ "psywarrior" : 4, "psion" : 4 ]));
+    set_spell_level(([ "psywarrior" : 4, "psion" : 3 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS body purification");
     set_description("This power will allow the psionic character to remove "

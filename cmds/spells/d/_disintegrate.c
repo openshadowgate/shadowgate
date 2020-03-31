@@ -13,7 +13,7 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("disintegrate");
-    set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6, "psion" : 6 ]));
     set_spell_sphere("invocation_evocation");
     set_domains(({"destruction", "renewal"}));
     set_syntax("cast CLASS disintegrate on TARGET");
