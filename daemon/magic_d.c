@@ -25,7 +25,6 @@ inherit DAEMON;
 void index_spells();
 mapping allSpells;
 mapping spellIndex = ([]);
-mapping domainIndex = ([]);
 
 void create(){
     ::create();
@@ -166,7 +165,6 @@ object get_spell_from_array(object *spellary, string spellname) {
 
 /**
  * Adds all spells to allSpells property. class:spells:level mapping
- * Adds spells to domainIndex
  */
 void index_spells()
 {
@@ -180,16 +178,6 @@ void index_spells()
     {
         if (!sizeof(spellIndex[key]["levels"])) {
             continue;
-        }
-
-        if (sizeof(spellIndex[key]["domains"])) {
-            foreach(tdomain in spellIndex[key]["domains"])
-            {
-                if (!arrayp(domainIndex[tdomain])) {
-                    domainIndex[tdomain] = ({});
-                }
-                domainIndex[tdomain] += ({ key });
-            }
         }
 
         foreach(tclass in keys(spellIndex[key]["levels"]))
@@ -486,15 +474,6 @@ mixed* query_index(string myclass)
         theclass = "cleric";
     }
     return allSpells[theclass];
-}
-
-string* query_domain_index(string domain)
-{
-    if (sizeof(domainIndex[domain])) {
-        return domainIndex[domain];
-    } else {
-        return 0;
-    }
 }
 
 mapping *query_global_index()
