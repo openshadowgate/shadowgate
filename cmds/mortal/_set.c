@@ -142,6 +142,11 @@ int set_scrwidth(string val)
         write("%^BOLD%^%^RED%^Invalid value, must be bigger than 2.%^RESET%^");
         return 0;
     }
+    if(atoi(val) > 2000)
+    {
+        write("%^BOLD%^%^RED%^Invalid value, must be less than 2000.%^RESET%^");
+        return 0;
+    }
     TP->setenv("SCREEN", val);
     return 1;
 }
