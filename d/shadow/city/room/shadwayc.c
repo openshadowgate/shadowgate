@@ -52,7 +52,7 @@ void create(){
          "seen north of the Tsarven Empire.",
    ]));
    set_exits(([
-      "west" : ROOMS"shadwayb",
+      "west" : ROOMS"shadwaybc",
       "east" : ROOMS"shadwayd",
       "northwest" : ROOMS"crossways4",
    ]));
@@ -62,3 +62,4 @@ void reset(){
    ::reset();
    if(!present("street_light",TO)) new("/d/common/obj/misc/street_light")->move(TO);
 }
+
