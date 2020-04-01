@@ -116,7 +116,7 @@ int gain_stat(object ob, string stat)
     }
 
     total_exp = (int)ob->query_exp();
-    exp = EXP_NEEDED[(int)ob->query_character_level()];
+    exp = total_exp_for_level(ob->query_character_level());
     cost = to_int(to_float(exp) * 0.10);
 
     if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
@@ -260,7 +260,7 @@ int move_stat(object obj, string* stats)
         return 1;
     }
     total_exp = (int)obj->query_exp();
-    exp = EXP_NEEDED[(int)obj->query_character_level()];
+    exp = total_exp_for_level(obj->query_character_level());
     cost = to_int(to_float(exp) * 0.25);
     tcheck = to_int(to_float(total_exp) * 0.25);
 

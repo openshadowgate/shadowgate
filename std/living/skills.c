@@ -1003,11 +1003,10 @@ varargs void set_XP_tax(int percent, int duration, string tax)
         _IRS["tax"]["death"]["fall off"] = 7200;
         break;
     case "improvement":
-        cost = EXP_NEEDED[query_character_level() + 1];
+        cost = total_exp_for_level(query_character_level() + 1);
         if ((_IRS["tax"]["improvement"]["amount"] + percent) > cost && percent > 0) {
             return -1;
         }
-        //if((_IRS["tax"]["improvement"]["amount"] + percent) > EXP_NEEDED[((int)TP->query_character_level()+1)]) return -1; // bugging here, breaking up to track down issue
         _IRS["tax"]["improvement"]["amount"] += percent;
         if (_IRS["tax"]["improvement"]["amount"] < 0) {
             _IRS["tax"]["improvement"]["amount"] = 0;

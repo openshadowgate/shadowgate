@@ -24,19 +24,26 @@ int help(string str);
 
 int free;
 
-int calculate_feat_cost(object ob) {
-    int level,exp;
-    if(!objectp(ob)) { return 0; }
+int calculate_feat_cost(object ob)
+{
+    int level, exp;
+    if (!objectp(ob)) {
+        return 0;
+    }
 
-    if(free) { return 0; }
+    if (free) {
+        return 0;
+    }
 
-    if(ob->query("free_feats")) { return 0; } // giving free feats when we remove some because they're obsolete
+    if (ob->query("free_feats")) {
+        return 0;
+    }
     level = ob->query_highest_level();
-    if(level == 1) { return 0; }
-    if(!avatarp(ob))
-    {
-        exp = EXP_NEEDED[level + 1]/10;
-//        exp = EXP_NEEDED[level + 1] - EXP_NEEDED[level];
+    if (level == 1) {
+        return 0;
+    }
+    if (!avatarp(ob)) {
+        exp = exp_for_level(level) * 3 / 4;
         return exp;
     }
     return 0;

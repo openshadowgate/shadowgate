@@ -52,7 +52,7 @@ mixed* genoutput(object targ)
     }
 
     if (targ->query_character_level() < 100) {
-        output += ({ ({ "Exp to Next", "%^BOLD%^%^WHITE%^" + english_number(EXP_NEEDED[targ->query_character_level() + 1] - targ->query_exp()) }) });
+        output += ({ ({ "Exp to Next", "%^BOLD%^%^WHITE%^" + english_number(total_exp_for_level(targ->query_character_level() + 1) - targ->query_exp()) }) });
     }
     if (mapp(targ->query_XP_tax()["improvement"])) {
         output += ({ ({ "Exp Tax", "%^BOLD%^%^CYAN%^" + english_number(targ->query_XP_tax()["improvement"]["amount"]) }) });

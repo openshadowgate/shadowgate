@@ -1919,37 +1919,35 @@ void resetLevelForExp(int expLoss)
 
     add_exp(expLoss);
 
-    if(TO->query("new_class_type"))
-    {
-        if(active_class = (string)TO->query("active_class"));
+    if (TO->query("new_class_type")) {
+        if (active_class = (string)TO->query("active_class")) {
+            ;
+        }
         {
-            if(member_array(active_class,(string *)TO->query_classes()) == -1)
-            {
+            if (member_array(active_class, (string*)TO->query_classes()) == -1) {
                 return notify_fail("Your active_class is set to a class that you do not currently have.");
             }
 
             my_levels = TO->query_levels();
 
-            while((int)EXP_NEEDED[query_character_level()] > query_exp() && (my_levels[active_class] > 1))
-            {
-                	hp_loss = ADVANCE_D->get_hp_bonus(active_class,
-			query_base_stats("constitution"),query_base_character_level(),TO);
-                	set_mlevel(active_class,query_class_level(active_class) - 1);
+            while (total_exp_for_level(query_character_level()) > query_exp() && (my_levels[active_class] > 1)) {
+                hp_loss = ADVANCE_D->get_hp_bonus(active_class,
+                                                  query_base_stats("constitution"),
+                                                  query_base_character_level(), TO);
+                set_mlevel(active_class, query_class_level(active_class) - 1);
 
-                	rolls = (int*)TO->query("hp_array");
-                	tmp = 20;
-                	for(i= 0 ; i < query_base_character_level()+1; i++)
-                	{
-                 		tmp += rolls[i];
-                	}
-               	 //set_max_hp(query_true_max_hp() - hp_loss);
-                	set_max_hp(tmp);
+                rolls = (int*)TO->query("hp_array");
+                tmp = 20;
+                for (i = 0; i < query_base_character_level() + 1; i++) {
+                    tmp += rolls[i];
+                }
+                //set_max_hp(query_true_max_hp() - hp_loss);
+                set_max_hp(tmp);
 
-                	reduce_my_skills(active_class);
-                	reduce_guild_level(active_class);
-                	NWP_D->reduce_player(TO,active_class,query_class_level(active_class));
+                reduce_my_skills(active_class);
+                reduce_guild_level(active_class);
+                NWP_D->reduce_player(TO, active_class, query_class_level(active_class));
             }
-
         }
 
         setenv("TITLE", (string)ADVANCE_D->get_new_title(TO));
