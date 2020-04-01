@@ -48,21 +48,14 @@ int confirm_stat_gain(string str, object ob, string stat, int cost)
         return 0;
     }
 
-    if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
-        ob->add_exp(-1 * cost);
-        ob->resetLevelForExp(0);
-        ob->remove_XP_tax("improvement");
-        log_file("stat_gain", "" + ob->QCN + " gained 1 point in " +
-                 stat + " on " + ctime(time()) + " for " + cost + " exp\n");
-    }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
-        if ((int)ob->set_XP_tax(cost, 0, "improvement") == -1) {
-            tell_object(ob, "Currently your character improvement tax is above the maximum allowed. " +
-                        "You must first reduce it before you can gain this stat point.");
-            return 1;
-        }
-        log_file("stat_gain", "" + ob->QCN + " gained 1 point in " +
-                 stat + " on " + ctime(time()) + " for a character improvement tax of " + cost + " exp\n");
+    if ((int)ob->set_XP_tax(cost, 0, "improvement") == -1) {
+        tell_object(ob, "Currently your character improvement tax is above the maximum allowed. " +
+                    "You must first reduce it before you can gain this stat point.");
+        return 1;
     }
+    log_file("stat_gain", "" + ob->QCN + " gained 1 point in " +
+             stat + " on " + ctime(time()) + " for a character improvement tax of " + cost + " exp\n");
+
     gained = (int)ob->query("stat_points_gained");
     gained += 1;
     ob->delete("stat_points_gained");
@@ -117,16 +110,11 @@ int gain_stat(object ob, string stat)
 
     total_exp = (int)ob->query_exp();
     exp = total_exp_for_level(ob->query_character_level());
-    cost = to_int(to_float(exp) * 0.10);
+    cost = exp_for_level(ob->query_character_level());
 
-    if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
-        tell_object(ob, "%^YELLOW%^Do you really want to add a point to " + stat + "?  It will "
-                    "cost you %^MAGENTA%^" + cost + "%^YELLOW%^ experience points.%^RESET%^");
-    }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
-        tell_object(ob, "%^YELLOW%^Do you really want to add a point to " + stat + "?  It will " +
-                    "add a character improvement tax of %^MAGENTA%^" + cost + "%^YELLOW%^ experience points. " +
-                    "This tax will reduce all experience you gain by %^RED%^50%%^YELLOW%^ until it is repaid.");
-    }
+    tell_object(ob, "%^YELLOW%^Do you really want to add a point to " + stat + "?  It will " +
+                "add a character improvement tax of %^MAGENTA%^" + cost + "%^YELLOW%^ experience points. " +
+                "This tax will reduce all experience you gain by %^RED%^50%%^YELLOW%^ until it is repaid.");
 
     tell_object(ob, "Enter <yes> to confirm, anything else to abort.");
     input_to("confirm_stat_gain", ob, stat, cost);
@@ -261,27 +249,16 @@ int move_stat(object obj, string* stats)
     }
     total_exp = (int)obj->query_exp();
     exp = total_exp_for_level(obj->query_character_level());
-    cost = to_int(to_float(exp) * 0.25);
-    tcheck = to_int(to_float(total_exp) * 0.25);
+    cost = exp_for_level(obj->query_character_level());
+    tcheck = cost;
 
-    if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
-        if (cost > tcheck) {
-            tell_object(obj, "You cannot move a stat point at this time.");
-            return 1;
-        }
-        tell_object(obj, "%^YELLOW%^It would cost you %^MAGENTA%^" +
-                    cost + "%^RESET%^%^YELLOW%^ experience "
-                    "points to move 1 point from " + stat_one + " into " + stat_two +
-                    ".  Are you sure you want to do this?  Enter %^MAGENTA%^yes" +
-                    "%^RESET%^%^YELLOW%^ to confirm, anything else to abort.");
-    }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
-        tell_object(obj, "%^YELLOW%^You will incur a character improvement " +
-                    "tax of %^MAGENTA%^" + cost + "%^RESET%^%^YELLOW%^ "
-                    " to move 1 point from " + stat_one + " into " + stat_two +
-                    ".  This tax will reduce all future experience points that you gain by " +
-                    "%^RED%^50%%^YELLOW%^ until it is repaid. Are you sure you want to do this?  Enter %^MAGENTA%^yes" +
-                    "%^RESET%^%^YELLOW%^ to confirm, anything else to abort.");
-    }
+    tell_object(obj, "%^YELLOW%^You will incur a character improvement " +
+                "tax of %^MAGENTA%^" + cost + "%^RESET%^%^YELLOW%^ "
+                " to move 1 point from " + stat_one + " into " + stat_two +
+                ".  This tax will reduce all future experience points that you gain by " +
+                "%^RED%^50%%^YELLOW%^ until it is repaid. Are you sure you want to do this?  Enter %^MAGENTA%^yes" +
+                "%^RESET%^%^YELLOW%^ to confirm, anything else to abort.");
+
     input_to("confirm_move_stat", obj, stat_one, stat_two, cost);
     return 1;
 }
