@@ -1252,9 +1252,9 @@ int exp_buffer(int exp)
         return exp;
     }
     total_exp = (int)TO->query_exp();
-    max = EXP_NEEDED[CHARACTER_LEVEL_CAP + 1 ];
+    max = total_exp_for_level(CHARACTER_LEVEL_CAP + 1 );
     if (query("test_character")) {
-        max = EXP_NEEDED[TEST_CHARACTER_LEVEL_CAP + 1];
+        max = total_exp_for_level(TEST_CHARACTER_LEVEL_CAP + 1);
     }
     allowed = max - total_exp;
     if (allowed < 0) {
