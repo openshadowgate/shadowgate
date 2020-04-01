@@ -1745,7 +1745,7 @@ int set_heart_beat(int flag)
 int query_exp_needed(int level)
 {
     int exp;
-    exp = EXP_NEEDED[level];
+    exp = total_exp_for_level(level);
     return exp;
 }
 
