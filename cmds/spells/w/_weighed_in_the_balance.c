@@ -26,6 +26,7 @@ void create()
                     "Those aiding the caster will be healed (they must be in a party) while those attacking the caster will suffer damage.");
     set_verbal_comp();
     set_somatic_comp();
+    splash_spell(1);
 }
 
 int preSpell()
