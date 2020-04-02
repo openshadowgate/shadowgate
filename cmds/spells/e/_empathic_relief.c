@@ -42,7 +42,7 @@ void spell_effect(int prof)
     tell_object(target, "%^BOLD%^" + sprintf("%s pours psychic energy into your body, cleansing you of all ailments.", myname));
     tell_room(place, "%^BOLD%^" + sprintf("%s pours psychic energy into %s, cleansing all of %s ailments.", myname, yourname, target->query_possessive()), ({ target, caster }));
     
-    "/std/magic/cleanse"->cleanse(target);\
+    (object)"/std/magic/cleanse"->cleanse(target);
     spell_successful();
     dest_effect();
 }
