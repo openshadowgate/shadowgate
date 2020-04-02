@@ -11,7 +11,7 @@ int mychance;
 void create() {
     ::create();
     set_spell_name("ghostform");
-    set_spell_level(([ "cleric" : 8 ]));
+    set_spell_level(([ "classless" : 8 ]));
     set_spell_sphere("conjuration_summoning");
     set_spell_domain("repose");
     set_syntax("cast CLASS ghostform");
