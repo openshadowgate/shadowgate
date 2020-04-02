@@ -1,6 +1,6 @@
 %^CYAN%^STANDARD DAMAGE%^RESET%^
 
-To scale damage sucessfuly to fifty levels ShadowGate engine employs dice rules for spells of different levels across classes. When using damaging spells you may expect the next dies to roll when damage is applied:
+To scale damage successfully to fifty levels ShadowGate engine employs dice rules for spells of different levels across classes. When using damaging spells you may expect the next dies to roll when damage is applied:
 
 %^CYAN%^%^ULINE%^All classes:
 
@@ -16,6 +16,8 @@ To scale damage sucessfuly to fifty levels ShadowGate engine employs dice rules 
 %^CYAN%^L9:%^RESET%^  1d12
 
 %^CYAN%^Default:%^RESET%^  1d8
+
+%^CYAN%^Splash Spell:%^RESET%^  -2 levels
 
 %^CYAN%^AOE:%^RESET%^      1d4 per every 5 caster levels
 %^CYAN%^TravAOE:%^RESET%^  1d4 per every 5 caster levels
