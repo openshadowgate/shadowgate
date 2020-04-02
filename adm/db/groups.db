@@ -10,7 +10,7 @@
 # -------------------------------------------------------------
 
 (superuser): nienne eris ilmarinen nuwisha
-(assist): Restore eris garrett ilmarinen lujke circe uriel odin
+(assist): Restore eris garrett ilmarinen lujke circe odin
 
 (mudlib): lujke ilmarinen
 (daemon): ilmarinen lujke circe
@@ -23,13 +23,13 @@
 (tutor): garrett
 
 #       Teams
-(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania uriel tlaloc
-(daemonassist): lujke nienne octothorpe uriel
+(area): chernobog circe ergo essyllis garrett lujke nienne odin titania uriel tlaloc
+(daemonassist): lujke nienne
 (help): chernobog kismet titania
 
 #	Class coding teams
 #       (with write access to certain /cmds and /std dirs)
-(usercmd): garrett nienne lujke octothorpe tlaloc odin titania
+(usercmd): garrett nienne lujke tlaloc odin titania
 
 #       Areas of the game (/d)
 (attaya): lujke
