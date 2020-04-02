@@ -12,7 +12,8 @@ void create()
     set_terrain(STONE_BUILDING);
     set_travel(PAVED_ROAD);
     //set_property("no teleport",1);
-    set_property("teleport proof", 75);
+    set_property("teleport proof", 67); //max as per current guidelines
+    set_property("no phase", 1);
     set_indoors(1);
     set_light(1);
     set_short("The castle dungeon");
