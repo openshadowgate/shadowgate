@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("stunning barrier");
-    set_spell_level(([ "cleric" : 1, "inquisitor" : 1, "paladin" : 1, "mage":1 , "psion": 1 , "psywarrior" : 1]));
+    set_spell_level(([ "cleric" : 1, "inquisitor" : 1, "paladin" : 1, "mage":1 , "psywarrior" : 1]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS stunning barrier");
     set_damage_desc("briefly stuns first enemy");

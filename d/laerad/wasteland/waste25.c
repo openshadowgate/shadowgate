@@ -9,12 +9,7 @@ void create()
                    "east" : "/d/laerad/wasteland/waste34",
                    "north" : "/d/laerad/wasteland/waste24",
                    "south" : "/d/laerad/wasteland/waste26"
-               ]));
-}
-
-int clean_up()
-{
-    return 1;
+                   ]));
 }
 
 reset()

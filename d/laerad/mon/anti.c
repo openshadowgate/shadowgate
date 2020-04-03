@@ -31,7 +31,6 @@ void create(){
     set_mlevel("paladin",22);
     set_guild_level("cleric",22);
     set_hd(22,0);
-    set_hp(220);
     set_spell_chance(20);
     set_spells(({
         "limb attack",

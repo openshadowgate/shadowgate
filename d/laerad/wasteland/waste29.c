@@ -25,7 +25,7 @@ void create(){
 reset()
 {
     ::reset();
-    if (!objectp(present("arganon", TO))) {
+    if (!objectp(present("silvim", TO))) {
         new("/d/laerad/mon/paladin")->move(this_object());
     }
 }
