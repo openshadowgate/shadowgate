@@ -14,7 +14,7 @@ void create() {
     ::create();
     set_author("circe");
     set_spell_name("skate");
-    set_spell_level(([ "psywarrior" : 1, "psion" : 1, "cleric":1]));
+    set_spell_level(([ "psywarrior" : 1, "psion" : 1,]));
     set_domains("travel");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS skate");

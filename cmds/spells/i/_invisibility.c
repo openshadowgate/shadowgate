@@ -12,7 +12,7 @@ create()
 {
     ::create();
     set_spell_name("invisibility");
-    set_spell_level(([ "mage" : 2, "bard" : 2, "assassin" : 2, "inquisitor" : 2, "cleric" : 2 ]));
+    set_spell_level(([ "mage" : 2, "bard" : 2, "assassin" : 2, "inquisitor" : 2, "oracle" : 2 ]));
     set_mystery("shadow");
     set_domains("trickery");
     set_spell_sphere("illusion");

@@ -17,7 +17,7 @@ string theName;
 void create(){
     ::create();
     set_spell_name("listening shadow");
-    set_spell_level(([ "cleric" : 8, "assassin" : 4, "monk":17]));
+    set_spell_level(([ "assassin" : 4, "monk":17]));
     set_spell_sphere("divination");
     set_domains("darkness");
     set_monk_way("way of the shadow");

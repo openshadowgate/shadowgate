@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     set_spell_name("stone throw");
-    set_spell_level(([ "cleric" : 1, "mage" : 1]));
+    set_spell_level(([ "oracle" : 1, "mage" : 1, "druid":1]));
     set_domains("earth");
     set_mystery("stone");
     set_spell_sphere("alteration");

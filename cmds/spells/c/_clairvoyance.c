@@ -16,7 +16,7 @@ void create()
 {
     ::create();
     set_spell_name("clairvoyance");
-    set_spell_level(([ "psion" : 1, "mage" : 2, "bard" : 3, "assassin" : 4, "inquisitor" : 3, "cleric":2, "oracle":2, "druid":3]));
+    set_spell_level(([ "psion" : 1, "mage" : 2, "bard" : 3, "assassin" : 4, "inquisitor" : 3, "oracle":2, "druid":3]));
     set_discipline("seer");
     set_domains("travel");
     set_mystery("lore");

@@ -11,13 +11,13 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("strength of stone");
-    set_spell_level(([ "cleric" : 3 ]));
-    set_spell_sphere("combat");
+    set_spell_level(([ "druid" : 3 ]));
+    set_spell_sphere("alteration");
     set_domains("earth");
     set_syntax("cast CLASS strength of stone");
     set_description("This spell will imbue the caster with the strength of the earth, slightly empowering both their melee and spell abilities. The spell does not stack with other bless-type spells.");
     set_verbal_comp();
-	set_helpful_spell(1);
+    set_helpful_spell(1);
 }
 
 string query_cast_string() {

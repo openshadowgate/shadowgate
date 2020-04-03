@@ -15,7 +15,7 @@ object detector, blocker;
 void create() {
     ::create();
     set_spell_name("screen");
-    set_spell_level(([ "cleric" : 8, "mage": 8]));
+    set_spell_level(([ "oracle" : 8, "mage": 8]));
     set_spell_sphere("illusion");
     set_domains(({"illusion", "trickery"}));
     set_mystery("lore");

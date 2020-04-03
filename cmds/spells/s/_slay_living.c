@@ -10,7 +10,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("slay living");
-    set_spell_level(([ "cleric" : 5, "oracle" : 5 ]));
+    set_spell_level(([ "cleric" : 5, ]));
     set_spell_sphere("necromancy");
     set_domains(({"evil", "repose"}));
     set_mystery(({"reaper","bones"}));

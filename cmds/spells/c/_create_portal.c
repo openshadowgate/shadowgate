@@ -14,7 +14,7 @@ void create()
 {
     ::create();
     set_spell_name("create portal"); // just portal in srds
-    set_spell_level(([ "cleric" : 7, "mage" : 7]));
+    set_spell_level((["mage" : 7]));
     set_spell_sphere("conjuration_summoning");
     set_domains("travel");
     set_syntax("cast CLASS create portal to DESTINATION");

@@ -10,7 +10,7 @@ mixed endplace;
 void create() {
     ::create();
     set_spell_name("teleport");
-    set_spell_level(([ "mage" : 5, "cleric":5]));
+    set_spell_level(([ "mage" : 5,]));
     set_domains("travel");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS teleport on LOCATION");

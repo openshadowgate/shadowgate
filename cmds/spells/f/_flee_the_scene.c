@@ -10,7 +10,7 @@ void create()
     ::create();
     set_author("nienne");
     set_spell_name("flee the scene"); // Mislead
-    set_spell_level(([ "warlock" : 2, "bard":5, "mage":6, "cleric":6]));
+    set_spell_level(([ "warlock" : 2, "bard":5, "mage":6,]));
     set_domains("trickery");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS flee the scene on DIRECTION");

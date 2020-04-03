@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("undeath is death");
-    set_spell_level(([ "mage" : 6, "cleric" : 6,"inquisitor":6, "oracle":6 ]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6,"inquisitor":6, ]));
     set_spell_sphere("necromancy");
     set_mystery("reaper");
     set_domains("repose");

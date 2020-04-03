@@ -16,7 +16,7 @@ object blocker;
 void create() {
     ::create();
     set_spell_name("false vision");
-    set_spell_level(([ "bard" : 5, "mage" : 5,"oracle":5, "cleric":5]));
+    set_spell_level(([ "bard" : 5, "mage" : 5,"oracle":5,]));
     set_mystery("whimsy");
     set_spell_sphere("illusion");
     set_domains(({"knowledge", "trickery"}));

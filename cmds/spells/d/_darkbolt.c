@@ -9,7 +9,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("darkbolt");
-    set_spell_level(([ "cleric" : 5, "mage" : 5 ]));
+    set_spell_level(([ "mage" : 5 ]));
     set_spell_sphere("necromancy");
     set_domains("darkness");
     set_syntax("cast CLASS darkbolt on TARGET");

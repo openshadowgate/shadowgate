@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("fog cloud");
-    set_spell_level(([ "druid" : 2, "mage" : 2, "assassin": 1, "cleric" : 2 ]));
+    set_spell_level(([ "druid" : 2, "mage" : 2, "assassin": 1, "oracle" : 2 ]));
     set_spell_sphere("conjuration_summoning");
     set_mystery(({"battle","apocalypse"}));
     set_domains(({"darkness"}));
