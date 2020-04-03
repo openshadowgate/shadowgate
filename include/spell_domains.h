@@ -12,3 +12,9 @@
     "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction" }) , \
     "ryorik"           : ({ "air", "fire", "earth", "water", "chaos"}) ,\
 ]))
+
+// order of spells is important
+#define DOMAIN_SPELLS ([\
+"plant":({"1:entangle", "2:barkskin", "4:thorn body", "5:wall of thorns", "7:animate plants", "7:liveoak", "8:mind blank", "9:shambler"}),\
+
+])
