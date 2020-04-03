@@ -30,7 +30,7 @@ int cmd_cast(string str)
 {
     object targ, * armor, * wielded;
     int i, j, align, healharm, schoolspell, mylvl, * mapkeys, domain;
-    string str2, tmp, type, spell, tar, * known, myschool, myexp, myexp1, myexp2, myexp3;
+    string str2, tmp, type, spell, tar, * known, myschool, myexp, myexp1, myexp2, myexp3, domain_name;
     mapping mymapp = ([]), mymapp2 = ([]);
 
     seteuid(getuid());
@@ -59,9 +59,12 @@ int cmd_cast(string str)
         healharm = 0;
     }
 
-    /* if (regexp(str, "as [a-z]+ domain")) { */
-    /*     domain = 1; */
-    /* } */
+    if (regexp(str, "as [a-z]+ domain")) {
+        domain = 1;
+        sscanf(str, "as %s domain", domain_name);
+        tell_object(FPL("ilmarinen"),":"+domain_name);
+        str = replace_string(str, "as " + domain_name + " domain", "", 1);
+    }
 
     if (regexp(str, implode("/daemon/player_d"->list_classes(), "|") + "|innate")) {
         if (!sscanf(str, "%s %s", type, str2)) {
