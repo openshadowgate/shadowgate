@@ -52,7 +52,7 @@ void spell_effect(int prof) {
         return;
     }
     
-    bonus = clip( clevel, 4, 8 ); //Base 4, ramps up to 8
+    bonus = clip( clevel / 2, 4, 12 ); //Base 4, ramps up to 12
     spell_successful();
     
     if (target == caster) 
