@@ -7,6 +7,7 @@
 #include <daemons.h>
 #include <schoolspells.h>
 #include <disciplinespells.h>
+#include <spell_domains.h>
 
 inherit DAEMON;
 
@@ -61,8 +62,8 @@ int cmd_cast(string str)
 
     if (regexp(str, "as [a-z]+ domain")) {
         domain = 1;
-        sscanf(str, "as %s domain", domain_name);
-        tell_object(FPL("ilmarinen"),":"+domain_name);
+        sscanf(str, "%s as %s domain", str2, domain_name);
+
         str = replace_string(str, "as " + domain_name + " domain", "", 1);
     }
 
@@ -87,18 +88,29 @@ int cmd_cast(string str)
     }
 
     align = TP->query_true_align();
-    if (healharm) {
+    if (healharm || domain) {
         if (type != "cleric") {
-            write("Sorry, only clerical spells can be cast as healing or harming magic.");
+            write("Only clerical spells can be cast as domain or healing magic.");
             return 1;
         }
-        if((align % 3 == 1 && healharm < 0) || (align % 3 == 0 && healharm > 0)) {
-            write("Sorry, your alignment does not allow you to do that!");
+        if ((align % 3 == 1 && healharm < 0) || (align % 3 == 0 && healharm > 0)) {
+            write("Your alignment does not allow you to do that!");
             return 1;
         }
-        str2=replace_string(str2,"  "," ",1);
-        if (str2[0] == ' ') str2=replace_string(str2," ","",1);
-        if (str2[strlen(str2)-1] == ' ') str2=arrange_string(str2,strlen(str2)-1);
+        str2 = replace_string(str2, "  ", " ", 1);
+        if (str2[0] == ' ') {
+            str2 = replace_string(str2, " ", "", 1);
+        }
+        if (str2[strlen(str2) - 1] == ' ') {
+            str2 = arrange_string(str2, strlen(str2) - 1);
+        }
+    }
+
+    if (domain) {
+        if (member_array(domain_name, TP->query_divine_domain()) == -1) {
+            write("You don't have a " + domain_name + " domain.");
+            return 1;
+        }
     }
 
     if(type == "sorcerer" ||
@@ -209,11 +221,19 @@ int cmd_cast(string str)
         }
     }
 
+    if (domain) {
+        targ = find_object_or_load(tmp);
+        tmp = MAGIC_D->get_spell_file_name(DOMAIN_SPELLS[domain_name][targ->query_spell_level(type) - 1]);
+        if (tmp == "") {
+            return 1;
+        }
+    }
+
     if (!tar) {
         tar = 0;
     }
     targ = new(tmp);
-    if (healharm) {
+    if (healharm || domain) {
         targ->set_property("improvised", spell);
     }
 
