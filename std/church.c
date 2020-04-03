@@ -462,13 +462,10 @@ int select_domain(string str)
             possible_domains = distinct_array(possible_domains);
             num_classes = sizeof(TP->query_classes());
 
-            if (member_array(selection, SPELL_DOMAINS[player_deity]) == -1) {
-                tell_object(TP, "Your deity does not allow the " + selection + " domain.  Please select "
-                            "from the following domains: " + implode(SPELL_DOMAINS[player_deity], " ") + "");
+            if (member_array(selection, possible_domains) == -1) {
+                tell_object(TP, "You can't select the " + selection + " domain. Select "
+                            "from the following domains: " + implode(possible_domains, " ") + "");
                 return 1;
-            }
-            if ((int)TP->query_cl_spell_level_restricted() == 7) {
-                TP->set_cl_spell_level_restricted(9);
             }
 
             if (TP->query("new_class_type") && FEATS_D->usable_feat(TP, "divine domain")) {

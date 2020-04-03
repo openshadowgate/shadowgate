@@ -22,7 +22,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("cleric") < 1 ||
+    if (ob->query_class_level("cleric") < 1 &&
         ob->query_class_level("druid") < 1) {
         dest_effect();
         return 0;
