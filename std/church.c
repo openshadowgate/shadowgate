@@ -448,7 +448,15 @@ int select_domain(string str)
                 temple_deity = player_deity;
             }
             player_domains = TP->query_divine_domain();
-            possible_domains = SPELL_DOMAINS[lower_case(player_deity)];
+
+            possible_domains = ({});
+
+            if (TP->is_class("cleric") ||
+                TP->is_class("paladin") ||
+                TP->is_class("inquisitor")
+                ) {
+                possible_domains + = SPELL_DOMAINS[lower_case(player_deity)];
+            }
             if (TP->is_class("druid")) {
                 possible_domains += ({ "air", "animal", "earth", "fire", "plant", "water", "storms" });
             }

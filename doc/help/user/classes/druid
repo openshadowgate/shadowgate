@@ -6,7 +6,7 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/will strong, reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ endurance, healing, perception, survival
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: light armor proficiency, medium armor proficiency, shield proficiency, simple weapon proficiency, spell focus
+ %^RESET%^L1: light armor proficiency, medium armor proficiency, shield proficiency, simple weapon proficiency, spell focus, divine domain
  %^RESET%^L3: tracklessstep
  %^RESET%^L4: shapeshift
  %^RESET%^L9: venom immunity
@@ -19,6 +19,8 @@ Druids are champions of nature, though they claim no power over it. Instead, a d
 %^CYAN%^Druidic oaths:%^RESET%^ Druids train with natural weapons and armor, and they further take traditional oaths that restrict them from using metal armor. Druids avoid carrying much worked metal at all, believing that it interferes with the pure nature of the wilds. The reasoning behind these oaths depend on the druid's background.
 
 Druids prepare their spells with the %^ORANGE%^<prepare>%^RESET%^ command. The %^ORANGE%^<spells druid>%^RESET%^ command will show you every spell available to druids. To cast they use the %^ORANGE%^<cast>%^RESET%^ command. They expend prepared spells from their memory when they cast. They can see currently prepared spells with %^ORANGE%^<recall druid spells>%^RESET%^.
+
+Much like clerics, druids can utilize spontaneous casting of domain spells, however choice of domains they can pick is not defined by their deity. Druids choose one of air, animal, earth, fire, plant, water or storms domains. Multiclass characters get these domains added to their domain selection.
 
 Druids are versatile and they can take many paths in their lives, becoming powerful spellcasters or preferring a feral life in the shapes of fearsome beasts, or even using their potential for martial combat in their humanoid form.
 

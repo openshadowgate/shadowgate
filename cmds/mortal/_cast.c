@@ -274,7 +274,7 @@ cast
 
 %^CYAN%^SYNTAX%^RESET%^
 
-cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [on self|here|rand|%^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
+cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [as %^ORANGE%^%^ULINE%^DOMAIN_NAME%^RESET%^ domain] [on self|here|rand|%^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
 cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
@@ -287,9 +287,21 @@ By default, spell accepts %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^, a set of param
 
 See individual spell help files for specific syntax.
 
+%^CYAN%^DOMAIN CASTING%^RESET%^
 
+Some classes utilize spontaneous casting on domain spells.
 
-%^CYAN%^CLERICS%^RESET%^
+You can expend any spell slot to cast it as a domain spell of that domain. Refer to spell domain helpfile to see which spell will be cast.
+
+For example, to cast prepared 'succor' spell as plant domain spell of the same level, Shambler, as cleric, one must do:
+
+  %^ORANGE%^<cast cleric succor as plant domain>%^RESET%^
+
+If the domain spell has target, it has to be applied eiter in the end of cast string or in the beginning. In next example fire domain cleric will cast succor as fire domain spell elemental swarm on goblin:
+
+  %^ORANGE%^<cast cleric succor as fire domain on goblin>%^RESET%^
+
+%^CYAN%^CLERICAL CHANNELING%^RESET%^
 
 Clerics utilize spontaneous casting.
 
@@ -301,8 +313,8 @@ Neutral clerics can do both.
 
 For example, if you have light spell prepared you can cast it as cure/cause light wounds the next way:
 
-    %^ORANGE%^<cast cleric light as healing on %^ORANGE%^%^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
-    %^ORANGE%^<cast cleric light as harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
+  %^ORANGE%^<cast cleric light as healing on %^ORANGE%^%^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
+  %^ORANGE%^<cast cleric light as harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^%^ORANGE%^>%^RESET%^
 
 Positive energy heals living and harms undead.
 Negative energy harms living and heals undead.
