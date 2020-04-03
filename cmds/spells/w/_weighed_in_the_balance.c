@@ -18,7 +18,7 @@ void create()
     ::create();
     set_author("circe");
     set_spell_name("weighed in the balance");
-    set_spell_level(([ "cleric" : 8 ]));
+    set_spell_level(([ "classless" : 8 ]));
     set_spell_sphere("combat");
     set_spell_domain("vigilance");
     set_syntax("cast CLASS weighed in the balance");

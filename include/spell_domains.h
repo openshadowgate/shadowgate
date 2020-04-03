@@ -40,4 +40,5 @@
 "animal":({ "magic fang", "hold animal", "charm monster", "polymorph self", "summon natures ally v", "antilife shell", "true seeing", "shapechange", "summon natures ally ix" }),\
 "good":({ "protection from alignment", "align weapon", "prayer", "holy smite", "burst of glory", "holy orb", "holy word", "holy aura", "gate" }),\
 "water":({ "touch of sickening", "acid arrow", "stinking cloud", "ice storm", "cone of cold", "sirocco", "elemental body iv", "horrid wilting", "tidal surge" }),\
+"vigilance":({"divine favor", "orders oath", "heroism", "vicarious view", "domination", "inspiring recovery", "greater heroism", "placeholder", "overwhelming presence"})\,
 ])

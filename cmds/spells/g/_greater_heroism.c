@@ -4,6 +4,7 @@ void create() {
     ::create();
     set_spell_name("greater heroism");
     set_spell_level(([ "mage" : 6, "bard" : 5, "oracle" : 6 ]));
+    set_domains("vigilance");
     set_mystery("ancestor");
     set_syntax("cast CLASS greater heroism [on TARGET]");
     set_damage_desc("+4 to attack bonus, saving throws, skills");
