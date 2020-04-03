@@ -107,10 +107,9 @@ mixed* genoutput(object targ)
             output += ({ ({ "Monk Way", "%^BOLD%^%^CYAN%^" + capitalize(targ->query("monk way")) }) });
         }
     }
-    if (targ->is_class("cleric")) {
-        if (pointerp(targ->query_divine_domain())) {
-            output += ({ ({ "Divine Domain", "%^BOLD%^%^WHITE%^" + implode(targ->query_divine_domain(), "/") }) });
-        }
+
+    if (pointerp(targ->query_divine_domain())) {
+        output += ({ ({ "Divine Domain", "%^BOLD%^%^WHITE%^" + implode(targ->query_divine_domain(), "/") }) });
     }
 
     output += ({ ({ "Play Time", "%^BOLD%^%^WHITE%^" + parse_time(targ->query_age()) }) });

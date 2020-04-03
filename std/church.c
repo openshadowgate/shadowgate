@@ -436,76 +436,74 @@ int select_domain(string str)
             return 1;
             break;
         case "domain":
-            if(sizeof(info) > 2)
-            {
-                tell_object(TP,"Syntax: <pick domain> <domain>   Please pick only one domain at a time.");
+            if (sizeof(info) > 2) {
+                tell_object(TP, "Syntax: <pick domain> <domain>   Please pick only one domain at a time.");
                 return 1;
             }
 
             selection = lower_case(info[1]);
             player_deity = (string)TP->query_diety();
             temple_deity = (string)TO->query_diety();
-            if(TO->query_property("conversion room")) { temple_deity = player_deity; }
+            if (TO->query_property("conversion room")) {
+                temple_deity = player_deity;
+            }
             player_domains = TP->query_divine_domain();
             possible_domains = SPELL_DOMAINS[lower_case(player_deity)];
+            if (TP->is_class("druid")) {
+                possible_domains += ({ "air", "animal", "earth", "fire", "plant", "water", "storms" });
+            }
+
+            possible_domains = distinct_array(possible_domains);
             num_classes = sizeof(TP->query_classes());
 
-            if(member_array(selection,SPELL_DOMAINS[player_deity]) == -1)
-            {
-                tell_object(TP,"Your deity does not allow the "+selection+" domain.  Please select "
-                "from the following domains: "+implode(SPELL_DOMAINS[player_deity]," ")+"");
+            if (member_array(selection, SPELL_DOMAINS[player_deity]) == -1) {
+                tell_object(TP, "Your deity does not allow the " + selection + " domain.  Please select "
+                            "from the following domains: " + implode(SPELL_DOMAINS[player_deity], " ") + "");
                 return 1;
             }
-            if((int)TP->query_cl_spell_level_restricted() == 7)
-            {
+            if ((int)TP->query_cl_spell_level_restricted() == 7) {
                 TP->set_cl_spell_level_restricted(9);
             }
 
-            if( TP->query("new_class_type") && FEATS_D->usable_feat(TP,"divine domain"))
-            {
-                if(!sizeof(player_domains))
-                {
+            if (TP->query("new_class_type") && FEATS_D->usable_feat(TP, "divine domain")) {
+                if (!sizeof(player_domains)) {
                     TP->set_divine_domain(({ selection }));
-                    tell_object(TP,"You have choosen to select the "+selection+" domain.\n");
-                    TP->set("domains_changed",1);
+                    tell_object(TP, "You have choosen to select the " + selection + " domain.\n");
+                    TP->set("domains_changed", 1);
                     return 1;
                 }
-                if(sizeof(player_domains) < 2)
-                {
-                    if(!FEATS_D->usable_feat(TP,"second divine domain")) {
-                        tell_object(TP,"You haven't yet gained enough ability to harness the spells of two domains.\n");
+                if (sizeof(player_domains) < 2) {
+                    if (!FEATS_D->usable_feat(TP, "second divine domain")) {
+                        tell_object(TP, "You haven't yet gained enough ability to harness the spells of two domains.\n");
                         return 1;
                     }
-                    if(player_domains[0] == selection)
-                    {
-                        tell_object(TP,"You already have the "+selection+" domain, please choose a different "
-                        "one.  You may choose from the following domains: "+implode(SPELL_DOMAINS[player_deity]," ")+"");
+                    if (player_domains[0] == selection) {
+                        tell_object(TP, "You already have the " + selection + " domain, please choose a different "
+                                    "one.  You may choose from the following domains: " + implode(SPELL_DOMAINS[player_deity], " ") + "");
                         return 1;
                     }
                     TP->set_divine_domain(({ player_domains[0], selection }));
-                    tell_object(TP,"You have chosen to select the "+selection+" domain.");
-                    tell_object(TP,"Your now have the following domains: "+player_domains[0]+" and "+selection+"\n");
+                    tell_object(TP, "You have chosen to select the " + selection + " domain.");
+                    tell_object(TP, "Your now have the following domains: " + player_domains[0] + " and " + selection + "\n");
                     return 1;
                 }
-                if(sizeof(player_domains) < 3)
-                {
-                    if(!FEATS_D->usable_feat(TP,"third divine domain")) {
-                        tell_object(TP,"Only the most advanced and favored clerics can gain a third domain.\n");
+                if (sizeof(player_domains) < 3) {
+                    if (!FEATS_D->usable_feat(TP, "third divine domain")) {
+                        tell_object(TP, "Only the most advanced and favored clerics can gain a third domain.\n");
                         return 1;
                     }
-                    if(member_array(selection,player_domains) != -1)
-                    {
-                        tell_object(TP,"You already have the "+selection+" domain, please choose a different "
-                        "one.  You may choose from the following domains: "+implode(SPELL_DOMAINS[player_deity]," ")+"");
+                    if (member_array(selection, player_domains) != -1) {
+                        tell_object(TP, "You already have the " + selection + " domain, please choose a different "
+                                    "one.  You may choose from the following domains: " + implode(SPELL_DOMAINS[player_deity], " ") + "");
                         return 1;
                     }
                     TP->set_divine_domain(({ player_domains[0], player_domains[1], selection }));
-                    tell_object(TP,"You have chosen to select the "+selection+" domain.");
-                    tell_object(TP,"Your now have the following domains: "+player_domains[0]+", "+player_domains[1]+" and "+selection+"\n");
+                    tell_object(TP, "You have chosen to select the " + selection + " domain.");
+                    tell_object(TP, "Your now have the following domains: " + player_domains[0] + ", " + player_domains[1] + " and " + selection + "\n");
                     return 1;
                 }
 
-                tell_object(TP,"Even the greatest of clerics cannot choose more than three domains!\n");
+                tell_object(TP, "Even the greatest of clerics cannot choose more than three domains!\n");
                 return 1;
             }
             break;

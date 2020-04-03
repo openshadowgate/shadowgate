@@ -38,15 +38,16 @@ string *class_feats(string myspec)
 }
 
 // Time for a redo! Nienne, 9/15.
-mapping class_featmap(string myspec) {
+mapping class_featmap(string myspec)
+{
     return ([
-        1: ({ "light armor proficiency", "medium armor proficiency", "simple weapon proficiency", "shield proficiency", "spell focus" }),
-        3 : ({ "tracklessstep" }),
-        4: ({ "shapeshift" }),
-        9: ({ "venom immunity" }),
-        11: ({ "wild speech", "wild knowledge"}),
-        15: ({ "timeless body" }),
-    ]);
+                1 : ({ "light armor proficiency", "medium armor proficiency", "simple weapon proficiency", "shield proficiency", "spell focus", "divine domain" }),
+                3 : ({ "tracklessstep" }),
+                4 : ({ "shapeshift" }),
+                9 : ({ "venom immunity" }),
+                11 : ({ "wild speech", "wild knowledge" }),
+                15 : ({ "timeless body" }),
+            ]);
 }
 
 string *class_skills()

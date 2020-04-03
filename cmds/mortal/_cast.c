@@ -89,8 +89,9 @@ int cmd_cast(string str)
 
     align = TP->query_true_align();
     if (healharm || domain) {
-        if (type != "cleric") {
-            write("Only clerical spells can be cast as domain or healing magic.");
+        if (type != "cleric" ||
+            type != "druid") {
+            write("Only certain classes can cast spells as domain or healing magic.");
             return 1;
         }
         if ((align % 3 == 1 && healharm < 0) || (align % 3 == 0 && healharm > 0)) {
@@ -285,6 +286,8 @@ A %^ORANGE%^%^ULINE%^SPELL%^RESET%^ might or might not have arguments.
 By default, spell accepts %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^, a set of parameters that might be target of the spell or something else. Special argument 'self' will indicate you as the target, 'here' will indicate the room you're in, and 'rand' will indicate a random attacker.
 
 See individual spell help files for specific syntax.
+
+
 
 %^CYAN%^CLERICS%^RESET%^
 
