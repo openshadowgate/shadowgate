@@ -10,8 +10,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("dimensional lock");
-    set_spell_level(([ "mage" : 9, "oracle" : 9,]));
-    set_mystery("spellscar");
+    set_spell_level(([ "mage" : 6, "cleric" : 6,]));
     set_domains("protection");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS dimensional lock");

@@ -1,4 +1,4 @@
-//Forbiddance, adapted from Teleportation ward for 
+//Forbiddance, adapted from Teleportation ward for
 //Tyranny domain ~Circe~ 4/26/08 rebalancing the domains
 #include <std.h>
 #include <daemons.h>
@@ -12,9 +12,8 @@ object room;
 void create(){
     ::create();
     set_spell_name("forbiddance");
-    set_spell_level(([ "cleric" : 8 ]));
+    set_spell_level(([ "cleric" : 6, "inquisitor" : 6]));
     set_spell_sphere("abjuration");
-    set_spell_domain("tyranny");
     set_syntax("cast CLASS forbiddance");
     set_description("This spell creates an oppressive aura of protection throughout the area, forbidding anyone from "
 "teleporting into or out of it.  The magic will last for a short time, until the caster leaves the area, or until it is "

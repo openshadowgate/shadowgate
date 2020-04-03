@@ -12,7 +12,7 @@
 "life":({"mending", "restoration", "remove blindness", "neutralize poison", "breath of life", "heal", "regeneration", "mass heal", "resurrection"}),\
 "shadow":({"blurred movement", "invisibility", "deeper darkness", "shadow stride", "vampiric shadow shield", "shadow travel", "umbral strike", "greater shadow evocation", "shades"}),\
 "solar":({"faerie fire", "flaming sphere", "daylight", "dimension door", "solar siege shot", "sirocco", "sunbeam", "sunbeam", "hellball"}),\
-"spellscar":({"armor", "resist energy", "dispel magic", "true form", "siphon magic", "globe of invulnerability", "spell turning", "spellscar", "dimensional lock"}),\
+"spellscar":({"armor", "resist energy", "dispel magic", "true form", "siphon magic", "globe of invulnerability", "spell turning", "spellscar", "imprisonment"}),\
 "apocalypse":({"summon swarm", "fog cloud", "sleet storm", "ice storm", "insect plague", "circle of death", "fire storm", "incendiary cloud", "meteor swarm"}),\
 "ancestor":({"unseen servant", "spiritual weapon", "heroism", "spiritual ally", "telekinetic push", "greater heroism","vision", "timeless body", "astral projection"}),\
 "lore":({"identify","clairvoyance","tongues","modify memory","telepathic bond","legend lore","vision","screen","timestop"}),\
