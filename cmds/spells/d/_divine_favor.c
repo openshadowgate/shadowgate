@@ -9,7 +9,7 @@ void create()
     ::create();
     set_spell_name("divine favor");
     set_spell_level(([ "paladin" : 3, "inquisitor" : 1, "cleric" : 1]));
-    set_domains("protection");
+    set_domains(({"protection", "vigilance"}));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS divine favor");
     set_description("Calling upon the strength of their patron, a holy knight can gain a bonus to their attack and damage rolls. This spell does not stack with fighter feats for bonus attack and damage rolls.");
