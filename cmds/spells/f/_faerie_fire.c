@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("faerie fire");
-    set_spell_level(([ "cleric" : 1, "druid" : 1,"oracle":1 ]));
+    set_spell_level(([ "druid" : 1,"oracle":1 ]));
     set_spell_sphere("combat");
     set_domains(({"moon", "sun"}));
     set_mystery(({"whimsy","solar"}));

@@ -17,7 +17,7 @@ void create() {
     ::create();
     set_spell_name("stormrage");
     set_spell_level(([ "cleric" : 8 ]));
-    set_spell_sphere("weather");
+    set_spell_sphere("invocation_evocation");
     set_domains("storms");
     set_syntax("cast CLASS stormrage");
     set_description("In using this spell, the caster calls upon the might of the weather, creating a powerful storm in an "

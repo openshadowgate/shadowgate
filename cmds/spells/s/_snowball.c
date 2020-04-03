@@ -5,7 +5,7 @@ void create()
 {
     ::create();
     set_spell_name("snowball");
-    set_spell_level(([ "cleric" : 1, "mage" : 1, "druid":1]));
+    set_spell_level(([ "mage" : 1, "druid":1]));
     set_domains("storms");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS snowball on TARGET");

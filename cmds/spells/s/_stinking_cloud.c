@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("stinking cloud");
-    set_spell_level(([ "mage" : 3, "cleric":3]));
+    set_spell_level(([ "mage" : 3,]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS stinking cloud");
     set_domains("water");

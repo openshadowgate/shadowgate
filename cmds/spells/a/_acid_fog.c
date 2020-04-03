@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("acid fog");
-    set_spell_level(([ "mage":7, "cleric":7]));
+    set_spell_level(([ "mage":7,]));
     set_domains("storms");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS acid fog");

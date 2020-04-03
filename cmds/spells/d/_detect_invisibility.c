@@ -15,7 +15,7 @@ void see_changes();
 void create() {
     ::create();
     set_spell_name("detect invisibility");
-    set_spell_level(([ "mage" : 2, "bard" : 3, "inquisitor":2, "cleric":2]));
+    set_spell_level(([ "mage" : 2, "bard" : 3, "inquisitor":2,]));
     set_domains("sun");
     set_spell_sphere("divination");
     set_syntax("cast CLASS detect invisibility");

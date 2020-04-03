@@ -16,7 +16,7 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("windstorm");
-    set_spell_level(([ "cleric" : 8, "druid":8]));
+    set_spell_level(([ "druid":8]));
     set_spell_sphere("invocation_evocation");
     set_domains("air");
     set_syntax("cast CLASS windstorm");

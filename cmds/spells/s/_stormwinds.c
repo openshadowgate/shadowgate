@@ -11,7 +11,7 @@ int count;
 void create() {
     ::create();
     set_spell_name("stormwinds");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 5, "druid":5]));
     set_spell_sphere("elemental air");
     set_domains("storms");
     set_syntax("cast CLASS stormwinds on TARGET");

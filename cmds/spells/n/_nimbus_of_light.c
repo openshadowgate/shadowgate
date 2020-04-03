@@ -12,8 +12,8 @@ int armor_bonus,modifier,attk_bonus;
 void create(){
     ::create();
     set_author("ares");
-    set_spell_name("nimbus of light");// Shield of dawn
-    set_spell_level(([ "cleric" : 4 ]));
+    set_spell_name("nimbus of light");
+    set_spell_level(([ "cleric" : 4]));
     set_spell_sphere("divination");
     set_domains("sun");
     set_damage_desc("AC, attack, sight bonuses");

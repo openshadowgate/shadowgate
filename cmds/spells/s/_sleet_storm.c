@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("sleet storm");
-    set_spell_level(([ "druid" : 3, "mage" :3,"oracle":3, "cleric":3]));
+    set_spell_level(([ "druid" : 3, "mage" :3,"oracle":3,]));
     set_domains("storms");
     set_mystery("apocalypse");
     set_spell_sphere("invocation_evocation");

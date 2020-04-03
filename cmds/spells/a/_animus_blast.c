@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("animus blast");
-    set_spell_level(([ "mage" : 9, "cleric":9]));
+    set_spell_level(([ "mage" : 9,]));
     set_domains("evil");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animus blast");

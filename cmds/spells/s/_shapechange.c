@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("shapechange");
-    set_spell_level(([ "mage" : 9, "cleric":8,]));
+    set_spell_level(([ "mage" : 9,]));
     set_domains("animal");
     set_spell_sphere("alteration");
     set_mystery(({"dragon", "nature"}));

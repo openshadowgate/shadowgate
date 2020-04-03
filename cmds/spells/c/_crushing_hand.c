@@ -14,7 +14,7 @@ void create(){
     ::create();
     set_author("circe");
     set_spell_name("crushing hand");
-    set_spell_level(([ "cleric" : 9 ]));
+    set_spell_level(([ "mage":9]));
     set_spell_sphere("invocation_evocation");
     set_domains("strength");
     set_syntax("cast CLASS crushing hand");

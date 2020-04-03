@@ -13,7 +13,7 @@ void create()
 {
     ::create();
     set_spell_name("tidal surge"); // Tsunami
-    set_spell_level(([ "druid" : 9, "mage" : 9, "cleric" : 9]));
+    set_spell_level(([ "druid" : 9, "mage" : 9,]));
     set_spell_sphere("conjuration_summoning");
     set_domains(({ "water", "destruction" }));
     set_syntax("cast CLASS tidal surge on TARGET");
