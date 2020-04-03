@@ -20,7 +20,7 @@ Clerics prepare their spells with the %^ORANGE%^<prepare>%^RESET%^ command. The 
 
 Clerics of good and neutral alignments may also spontaneously cast any prepared spell as a healing spell of the same level. Neutral and evil clerics may do likewise, but they will cast such spells spontaneously as damaging equivalents instead. To learn how to do it refer to %^ORANGE%^<help cast>%^RESET%^.
 
-In addition to that, clerics can utilize spontaneous casting of domain spells. Domains clerics can pick are defined by their deity and are to be selected at shrines, churches or temples. To learn how to cast domain spells spontaneously refer to %^ORANGE%^<help cast>%^RESET%^.
+In addition to that, clerics can utilize spontaneous casting of domain spells. Domains clerics can pick are defined by their deity and are to be selected at shrines, churches or temples. Some domain spells can be cast only spontaneously. To learn how to cast domain spells spontaneously refer to %^ORANGE%^<help cast>%^RESET%^.
 
 Clerics are versatile, they can choose both melee and spellcasting paths. Clerics can cast in any armor, but they must not wield while doing so as their casting relies on gestures and speaking.
 

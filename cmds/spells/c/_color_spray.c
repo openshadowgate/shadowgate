@@ -21,7 +21,7 @@ void make_save();
 void create() {
     ::create();
     set_spell_name("color spray");
-    set_spell_level(([ "mage" : 1, "cleric":1 ]));
+    set_spell_level(([ "mage" : 1, "oracle":1 ]));
     set_mystery("heavens");
     set_domains("magic");
     set_spell_sphere("illusion");

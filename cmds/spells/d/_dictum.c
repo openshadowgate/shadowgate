@@ -7,7 +7,7 @@ create()
 {
     ::create();
     set_spell_name("dictum");
-    set_spell_level(([ "cleric" : 7, "inquisitor" : 6, "oracle" : 6 ]));
+    set_spell_level(([ "cleric" : 6, "inquisitor" : 6,]));
     set_spell_sphere("invocation_evocation");
     set_mystery("godclaw");
     set_domains("law");

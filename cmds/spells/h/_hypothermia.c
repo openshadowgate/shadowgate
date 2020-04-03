@@ -19,7 +19,7 @@ void create(){
     ::create();
     set_author("ares");
     set_spell_name("hypothermia");
-    set_spell_level(([ "cleric" : 7 ]));
+    set_spell_level(([ "cleric" : 7, "druid":7]));
     set_spell_sphere("invocation_evocation");
     set_domains("cold");
     set_syntax("cast CLASS hypothermia on TARGET");
