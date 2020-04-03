@@ -14,7 +14,7 @@ object tree;
 void create() {
     ::create();
     set_spell_name("liveoak");
-    set_spell_level(([ "druid" : 7, "cleric":7, "oracle":7]));
+    set_spell_level(([ "druid" : 7, "oracle":7]));
     set_domains("plant");
     set_mystery("nature");
     set_spell_sphere("conjuration_summoning");

@@ -452,8 +452,9 @@ int select_domain(string str)
             possible_domains = ({});
 
             if (TP->is_class("cleric")) {
-                possible_domains + = SPELL_DOMAINS[lower_case(player_deity)];
+                possible_domains += SPELL_DOMAINS[lower_case(player_deity)];
             }
+
             if (TP->is_class("druid")) {
                 possible_domains += ({ "air", "animal", "earth", "fire", "plant", "water", "storms" });
             }

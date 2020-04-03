@@ -11,7 +11,7 @@ void create() {
     ::create();
     set_author("garrett");
     set_spell_name("invisibility purge");
-    set_spell_level(([ "cleric" : 5, "inquisitor" : 3 ]));
+    set_spell_level(([ "cleric" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("abjuration");
     set_domains("protection");
     set_syntax("cast CLASS invisibility purge");

@@ -13,7 +13,7 @@ void create()
 {
     ::create();
     set_spell_name("mind blank");
-    set_spell_level(([ "psywarrior" : 6, "psion" : 7, "mage" : 8, "cleric":8]));
+    set_spell_level(([ "psywarrior" : 6, "psion" : 7, "mage" : 8,]));
     set_domains(({"plant", "protection"}));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS mind blank");

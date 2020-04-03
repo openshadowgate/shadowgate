@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("thorn body");
-    set_spell_level(([ "druid" : 4, "cleric" : 4, ]));
+    set_spell_level(([ "druid" : 4,]));
     set_domains("plant");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS thorn body");

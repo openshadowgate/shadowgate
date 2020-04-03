@@ -30,7 +30,7 @@ int armor_filter(object ob){
 int cmd_cast(string str)
 {
     object targ, * armor, * wielded;
-    int i, j, align, healharm, schoolspell, mylvl, * mapkeys, domain;
+    int i, j, align, healharm, schoolspell, mylvl, * mapkeys, domain, slevel;
     string str2, tmp, type, spell, tar, * known, myschool, myexp, myexp1, myexp2, myexp3, domain_name;
     mapping mymapp = ([]), mymapp2 = ([]);
 
@@ -224,7 +224,8 @@ int cmd_cast(string str)
 
     if (domain) {
         targ = find_object_or_load(tmp);
-        tmp = MAGIC_D->get_spell_file_name(DOMAIN_SPELLS[domain_name][targ->query_spell_level(type) - 1]);
+        slevel = targ->query_spell_level(type);
+        tmp = MAGIC_D->get_spell_file_name(DOMAIN_SPELLS[domain_name][slevel - 1]);
         if (tmp == "") {
             return 1;
         }
@@ -234,8 +235,13 @@ int cmd_cast(string str)
         tar = 0;
     }
     targ = new(tmp);
+
     if (healharm || domain) {
         targ->set_property("improvised", spell);
+    }
+
+    if (domain) {
+        targ->set_spell_level(([type:slevel]));
     }
 
     spell = "level "+(int)tmp->query_spell_level(type); //spontaneous caster classes!
