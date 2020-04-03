@@ -12,6 +12,7 @@
 inherit DAEMON;
 
 #include <cleric_spells.h>
+#include <spell_domains_spells.h>
 
 void help();
 

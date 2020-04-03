@@ -808,6 +808,15 @@ mapping query_mastered_bonus()
 
         if (stringp(mybl)) {
             tmp["oracle"] = MYSTERY_SPELLS[mybl];
+            tmp["oracle"] += ({
+                    "cure light wounds", "cause light wounds",
+                        "cure moderate wounds", "cause moderate wounds",
+                        "cure serious wounds", "cause serious wounds",
+                        "cure critical wounds", "cause critical wounds",
+                        "mass cure light wounds", "mass cause light wounds",
+                        "mass cure moderate wounds", "mass cause moderate wounds",
+                        "mass cure serious wounds", "mass cause serious wounds",
+                        "mass cure critical wounds", "mass cause critical wounds",});
         }
     }
 
