@@ -20,7 +20,7 @@ Druids are champions of nature, though they claim no power over it. Instead, a d
 
 Druids prepare their spells with the %^ORANGE%^<prepare>%^RESET%^ command. The %^ORANGE%^<spells druid>%^RESET%^ command will show you every spell available to druids. To cast they use the %^ORANGE%^<cast>%^RESET%^ command. They expend prepared spells from their memory when they cast. They can see currently prepared spells with %^ORANGE%^<recall druid spells>%^RESET%^.
 
-Much like clerics, druids can utilize spontaneous casting of domain spells, however choice of domains they can pick is not defined by their deity. Druids choose one of air, animal, earth, fire, plant, water or storms domains. Multiclass characters get these domains added to their domain selection.
+Much like clerics, druids can utilize spontaneous casting of domain spells, however choice of domains they can pick is not defined by their deity. Druids choose one of air, animal, earth, fire, plant, water or storms domains. To learn how to cast domain spells spontaneously refer to %^ORANGE%^<help cast>%^RESET%^.
 
 Druids are versatile and they can take many paths in their lives, becoming powerful spellcasters or preferring a feral life in the shapes of fearsome beasts, or even using their potential for martial combat in their humanoid form.
 

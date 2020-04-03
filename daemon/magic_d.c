@@ -25,7 +25,6 @@ inherit DAEMON;
 void index_spells();
 mapping allSpells;
 mapping spellIndex = ([]);
-mapping domainIndex = ([]);
 
 void create(){
     ::create();
@@ -166,7 +165,6 @@ object get_spell_from_array(object *spellary, string spellname) {
 
 /**
  * Adds all spells to allSpells property. class:spells:level mapping
- * Adds spells to domainIndex
  */
 void index_spells()
 {
@@ -180,16 +178,6 @@ void index_spells()
     {
         if (!sizeof(spellIndex[key]["levels"])) {
             continue;
-        }
-
-        if (sizeof(spellIndex[key]["domains"])) {
-            foreach(tdomain in spellIndex[key]["domains"])
-            {
-                if (!arrayp(domainIndex[tdomain])) {
-                    domainIndex[tdomain] = ({});
-                }
-                domainIndex[tdomain] += ({ key });
-            }
         }
 
         foreach(tclass in keys(spellIndex[key]["levels"]))
@@ -236,8 +224,6 @@ void build_index()
                         spelltable["sphere"] = str2->query_spell_sphere(); //aka school
                         spelltable["way"] = str2->query_monk_way();
                         spelltable["discipline"] = str2->query_discipline();
-                        spelltable["domain"] = str2->get_spell_domain();
-                        spelltable["domains"] = str2->query_domains();
                         spelltable["feats"] = str2->query_feats_required();
                         spellIndex += ([ all_spells[x] : spelltable]);
                     }
@@ -272,6 +258,8 @@ mapping index_spells_for_player(object player, string myclass)
     string* playerdom = player->query_divine_domain();
     string tmpdom;
 
+    // Pseudoclass for classes that use other classes spell lists, such as sorcerers.
+    // Myclass -- player's real class.
     pclass = myclass;
     if (myclass == "sorcerer")
         pclass = "mage";
@@ -299,35 +287,6 @@ mapping index_spells_for_player(object player, string myclass)
                 domain != "me" &&
                 domain != playerdisc)
                 continue;
-        }
-
-        // Legacy code for transitioning from old to new domains system
-        if (myclass == "cleric" ) {
-            domain = spellIndex[spellfile]["domain"];
-            if (domain &&
-                domain != "" &&
-                member_array(domain, playerdom) == -1)
-                continue;
-        }
-
-
-        if (myclass == "cleric") {
-            domains = spellIndex[spellfile]["domains"];
-
-            if (arrayp(domains))
-                if (sizeof(domains))
-                {
-                    has_domain = 0;
-                    foreach(tmpdom in playerdom)
-                    {
-                        if (member_array(tmpdom, domains) != -1) {
-                            has_domain++;
-                        }
-                    }
-                    if (!has_domain) {
-                        continue;
-                    }
-                }
         }
 
         if (pclass == "monk" &&
@@ -380,20 +339,6 @@ mapping index_unrestricted_spells(string myclass)
             domain = spellIndex[spellfile]["discipline"];
             if(domain &&
                domain != "me")
-                continue;
-        }
-
-
-        if(pclass=="cleric" && myclass != "oracle")
-        {
-            if(sizeof(spellIndex[spellfile]["domains"]))
-                continue;
-
-            // Legacy code for old style domains
-            domain = spellIndex[spellfile]["domain"];
-
-            if(domain &&
-               domain != "")
                 continue;
         }
 
@@ -486,15 +431,6 @@ mixed* query_index(string myclass)
         theclass = "cleric";
     }
     return allSpells[theclass];
-}
-
-string* query_domain_index(string domain)
-{
-    if (sizeof(domainIndex[domain])) {
-        return domainIndex[domain];
-    } else {
-        return 0;
-    }
 }
 
 mapping *query_global_index()

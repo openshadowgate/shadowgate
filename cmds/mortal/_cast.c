@@ -89,8 +89,8 @@ int cmd_cast(string str)
 
     align = TP->query_true_align();
     if (healharm || domain) {
-        if (type != "cleric" ||
-            type != "druid") {
+        if (!(type == "cleric" ||
+              type == "druid")) {
             write("Only certain classes can cast spells as domain or healing magic.");
             return 1;
         }

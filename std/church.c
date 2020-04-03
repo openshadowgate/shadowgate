@@ -451,10 +451,7 @@ int select_domain(string str)
 
             possible_domains = ({});
 
-            if (TP->is_class("cleric") ||
-                TP->is_class("paladin") ||
-                TP->is_class("inquisitor")
-                ) {
+            if (TP->is_class("cleric")) {
                 possible_domains + = SPELL_DOMAINS[lower_case(player_deity)];
             }
             if (TP->is_class("druid")) {
