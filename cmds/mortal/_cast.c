@@ -287,15 +287,13 @@ cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^
 
 Ivokes %^ORANGE%^%^ULINE%^SPELL%^RESET%^ using character's %^ORANGE%^%^ULINE%^CLASS%^RESET%^. If %^ORANGE%^%^ULINE%^CLASS%^RESET%^ is ommited uses currently posed class you can change with %^ORANGE%^<pose>%^RESET%^. If you're single class character, uses your only class.
 
-A %^ORANGE%^%^ULINE%^SPELL%^RESET%^ might or might not have arguments.
+A %^ORANGE%^%^ULINE%^SPELL%^RESET%^ might or might not have arguments. A %^ORANGE%^%^ULINE%^SPELL%^RESET%^ might be its quick name referenced in the helpfile. Don't use spell quick names in aliases as they change as new spells get added.
 
 By default, spell accepts %^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^, a set of parameters that might be target of the spell or something else. Special argument 'self' will indicate you as the target, 'here' will indicate the room you're in, and 'rand' will indicate a random attacker.
 
 See individual spell help files for specific syntax.
 
 %^CYAN%^DOMAIN CASTING%^RESET%^
-
-Some classes utilize spontaneous casting on domain spells.
 
 You can expend any spell slot to cast it as a domain spell of that domain. Refer to spell domain helpfile to see which spell will be cast.
 
@@ -308,8 +306,6 @@ If the domain spell has target, it has to be applied eiter in the end of cast st
   %^ORANGE%^<cast cleric succor as fire domain on goblin>%^RESET%^
 
 %^CYAN%^CLERICAL CHANNELING%^RESET%^
-
-Clerics utilize spontaneous casting.
 
 If you're of good alignment you can add the keywords %^ORANGE%^<as healing>%^RESET%^ to your cast invocation to convert the spell you name into a relevant healing (positive energy) spell.
 

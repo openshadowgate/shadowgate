@@ -3407,7 +3407,7 @@ void help()
     mapping mycomps, compmap;
     string* classkeys, printclass, * compskeys, * mapkeys, printcomps;
     int i, j;
-    write("%^BOLD%^%^RED%^Spell:%^RESET%^ " + spell_name);
+    write("%^BOLD%^%^RED%^Spell:%^RESET%^ " + spell_name + " (" + MAGIC_D->query_index_row(spell_name)["quick"] + ")");
     classkeys = keys(spell_levels);
 
     if (!sizeof(classkeys)) {
@@ -3453,8 +3453,8 @@ void help()
     if (!description) {
         description = "file a bug report - not initialized";
     }
-    write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax);
-    write("%^BOLD%^%^RED%^Quick name:%^RESET%^ " + MAGIC_D->query_index_row(spell_name)["quick"] + "\n");
+    write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax + "\n");
+
     write(description + "\n");
 
     if (peace) {
