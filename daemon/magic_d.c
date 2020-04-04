@@ -253,6 +253,7 @@ void build_index()
     mapping level, spelltable, featmap;
 
     spellIndex = ([]);
+    quick_names = ([]);
     dirset = get_dir(DIR_SPELLS + "/");
     if (sizeof(dirset)) {
         for (i = 0; i < sizeof(dirset); i++) {
@@ -624,8 +625,9 @@ string add_quick_name(string spell_name)
     int i = 0;
 
     do {
-        final = orig[0..i];
-    } while (i < sizeof(orig) && member_array(final, keys(quick_names) != -1));
+        final = spell_name[0..i];
+        i++;
+    } while (i < sizeof(spell_name) && member_array(final, keys(quick_names)) != -1);
     quick_names[final] = spell_name;
     return final;
 }
