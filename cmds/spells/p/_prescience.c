@@ -35,10 +35,10 @@ string query_cast_string() { return "%^RED%^"+caster->QCN+" closes "+caster->QP+
 
 int preSpell() 
 {
-    if (caster->query_property("prescienced")) 
+    if (caster->query_property("prescienced") || caster->query_property("hasted"))
     {
         tell_object(caster,"You are already under the effects "+
-           "of a prescience power.");
+           "of a prescience or haste power.");
         return 0;
     }
     return 1;

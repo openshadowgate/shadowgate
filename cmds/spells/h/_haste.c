@@ -35,7 +35,7 @@ void spell_effect(int prof) {
     object *party_base = ({}), *party_members = ({});
 
     if((string)TO->query_spell_type() == "potion") {
-      if(caster->query_property("hasted") || caster->query_property("raged")) {
+      if(caster->query_property("hasted") || caster->query_property("raged") || caster->query_property("prescienced")) {
         tell_object(caster,"You're already under such an effect!");
         TO->remove();
         return;
