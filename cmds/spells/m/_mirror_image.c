@@ -9,6 +9,7 @@ void create() {
     set_spell_name("mirror image");
     set_spell_level(([ "mage" : 2, "bard":2 ]));
     set_spell_sphere("illusion");
+    set_domains("creation");
     set_syntax("cast CLASS mirror image");
     set_description("Several illusory duplicates of you pop into being, making it difficult for enemies to know which target to attack. The figments stay near you and disappear when struck.
 
