@@ -338,7 +338,6 @@ void heart_beat()
         if (!query_property("inactive")) {
             myskill = query_skill("endurance");
             if (sizeof(query_attackers()) < 1) {
-//              used_stamina-= query_stats("constitution")/4 + 1;
                 if (myskill < 0)
                     myskill = 1;
                 used_stamina -= ((myskill / 4) + 2);
@@ -350,7 +349,7 @@ void heart_beat()
                     used_stamina = 0;
             }
         }
-        if (query_condition() < -50) {
+        if (query_condition() < 0) {
             set_condition(query_max_stamina());
         }
     }
@@ -1557,12 +1556,7 @@ void increment_stamina(int x)
     }
     if (query_condition() < 0) {
         send_paralyzed_message("info", TO);
-    }
-
-    // This is a hard cap so players hopefully don't remain unconscious for too long
-    if (query_condition() < -50)
-    {
-        used_stamina = query_max_stamina() - 100;
+        used_stamina = query_max_stamina();
     }
 
 
@@ -1657,18 +1651,12 @@ string query_condition_string(){
    }
    return stamina;
 }
+
 int query_unconscious(){
-      if(interactive(TO) && query_condition() < 0) {
-        return 1;
-    }
     return ::query_unconscious();
 }
 
 string query_unconscious_message() {
-
-    if(query_condition() < 0) {
-        return PASSED_OUT;
-    }
     return ::query_unconscious_message();
 }
 

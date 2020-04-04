@@ -108,7 +108,7 @@ mixed* genoutput(object targ)
         }
     }
 
-    if (pointerp(targ->query_divine_domain())) {
+    if (sizeof(targ->query_divine_domain())) {
         output += ({ ({ "Divine Domain", "%^BOLD%^%^WHITE%^" + implode(targ->query_divine_domain(), "/") }) });
     }
 
