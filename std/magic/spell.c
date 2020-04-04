@@ -3438,19 +3438,6 @@ void help()
         write("%^BOLD%^%^RED%^Sphere:%^RESET%^ " + spell_sphere + (spell_domain ? (" [" + spell_domain + "]") : "") + (evil_spell ? " [evil]" : "") + (mental_spell ? " [mind-affecting]" : ""));
     }
 
-    if (sizeof(divine_domains)) {
-        write("%^BOLD%^%^RED%^Domains:%^RESET%^ " + implode(divine_domains, ", "));
-    }
-    if (sizeof(oracle_mystery)) {
-        write("%^BOLD%^%^RED%^Mystery:%^RESET%^ " + implode(oracle_mystery, ", "));
-    }
-
-    if (mydiscipline) {
-        write("%^BOLD%^%^RED%^Discipline:%^RESET%^ " + mydiscipline);
-    }
-    if (monk_way) {
-        write("%^BOLD%^%^RED%^Monk way:%^RESET%^ " + monk_way);
-    }
     /* if (verbal_comp || somatic_comp) { */
     /*     write("%^BOLD%^%^RED%^Components:%^RESET%^ " + (verbal_comp ? "V " : "") + (somatic_comp ? "S " : "")); */
     /* } */
@@ -3466,7 +3453,8 @@ void help()
     if (!description) {
         description = "file a bug report - not initialized";
     }
-    write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax + "\n");
+    write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax);
+    /* write("%^BOLD%^%^RED%^Quick name:%^RESET%^ " + MAGIC_D->query_index_row(spell_name)["quick"] + "\n"); */
     write(description + "\n");
 
     if (peace) {
