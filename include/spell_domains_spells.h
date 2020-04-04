@@ -35,4 +35,5 @@ DOMAIN_SPELLS = ([
 "water" : ({ "touch of sickening", "acid arrow", "stinking cloud", "ice storm", "cone of cold", "sirocco", "elemental body iv", "horrid wilting", "tidal surge" }),
 "vigilance" : ({ "divine favor", "orders oath", "heroism", "vicarious view", "domination", "inspiring recovery", "greater heroism", "placeholder", "overwhelming presence" }),
 "mentalism":({"confusion", "placeholder", "clairvoyance", "modify memory", "telepathic bond", "bolt of force", "mind blank", "inner eye", "astral projection"}),
+"creation":({"minor creation", "mirror image", "acid breath", "glyph of warding", "sticks into snakes", "greater dispel magic", "cometfall", "powerword stun", "powerword kill"}),
 ]);
