@@ -3454,7 +3454,7 @@ void help()
         description = "file a bug report - not initialized";
     }
     write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax);
-    /* write("%^BOLD%^%^RED%^Quick name:%^RESET%^ " + MAGIC_D->query_index_row(spell_name)["quick"] + "\n"); */
+    write("%^BOLD%^%^RED%^Quick name:%^RESET%^ " + MAGIC_D->query_index_row(spell_name)["quick"] + "\n");
     write(description + "\n");
 
     if (peace) {

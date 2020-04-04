@@ -248,7 +248,7 @@ void index_spells()
  */
 void build_index()
 {
-    string* all_spells, str2, * dirset, l;
+    string* all_spells, str2, * dirset;
     int x, i, j;
     mapping level, spelltable, featmap;
 
@@ -273,10 +273,7 @@ void build_index()
                         }
                         spelltable = ([]);
 
-                        foreach(l in keys(level))
-                        {
-                            add_quick_name(l, all_spells[x]);
-                        }
+                        spelltable["quick"] = add_quick_name(all_spells[x]);
                         spelltable["levels"] = level;
                         spelltable["sphere"] = str2->query_spell_sphere(); //aka school
                         spelltable["way"] = str2->query_monk_way();
@@ -622,8 +619,9 @@ void spell_failure(object spell, int prof){
     }
 }
 
-string add_quick_name(string sclass, string spell_name)
+string add_quick_name(string spell_name)
 {
+    string orig;
     string final;
     int i = 0;
 
@@ -635,26 +633,23 @@ string add_quick_name(string sclass, string spell_name)
         return "";
     }
 
-    if (!mapp(quick_names[sclass])) {
-        quick_names[sclass] = ([]);
-    }
+    orig = replace_string(spell_name, " ", "");
 
     do {
-        final = spell_name[0..i];
+        final = orig[0..i];
         i++;
-    } while (i < sizeof(spell_name) && member_array(final, keys(quick_names[sclass])) != -1);
-    quick_names[sclass][final] = spell_name;
+    } while (i < sizeof(orig) && member_array(final, keys(quick_names)) != -1);
+    quick_names[final] = spell_name;
     return final;
 }
 
-string expand_quick_name(string sclass, string quick_name)
+string expand_quick_name(string quick_name)
 {
-    return quick_names[sclass][quick_name];
-}
-
-mapping query_quick_names(string sclass)
-{
-    return quick_names[sclass];
+    if (!stringp(quick_names[quick_name])) {
+        return quick_name;
+    } else {
+        return quick_names[quick_name];
+    }
 }
 
 //special function for the way of the elements monk feat

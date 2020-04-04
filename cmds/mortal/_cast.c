@@ -201,11 +201,11 @@ int cmd_cast(string str)
                 return 1;
             }
 
-
-    spell = replace_string(str2," ","_");
-    tmp = "/cmds/spells/"+spell[0..0]+"/_"+spell+".c";
-    if(!file_exists(tmp))
-	{
+    spell = str2;
+    spell = MAGIC_D->expand_quick_name(spell);
+    spell = replace_string(spell, " ", "_");
+    tmp = "/cmds/spells/" + spell[0..0] + "/_" + spell + ".c";
+    if (!file_exists(tmp)) {
         write("Either that spell does not exist, or you do not know it!");
         return 1;
     }
