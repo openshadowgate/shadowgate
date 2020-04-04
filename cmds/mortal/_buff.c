@@ -28,48 +28,45 @@ int cmd_buff(string str)
 
     arguments = explode(str, " ");
 
-    if (!sizeof(arguments)) { return 1; }
+    if (!sizeof(arguments)) {
+        return 1;
+    }
 
     switch (arguments[0])
     {
     case "add":
 
-        if (sizeof(arguments) < 2)
-        {
+        if (sizeof(arguments) < 2) {
             tell_object(TP, "Syntax: <buff add SPELL NAME> or <buff add SPELL NAME $T> or <buff add SPELL NAME | cast CLASS SPELL ARGUMENTS>");
             return 1;
         }
-        for (i = 1;i < sizeof(arguments);i++)
-        {
+        for (i = 1; i < sizeof(arguments); i++) {
             temp += ({ arguments[i] });
         }
 
         temp_string = implode(temp, " ");
         spell_name = parse_spell(temp_string);
-        if (!spell_name) { return 1; }
+        if (!spell_name) {
+            return 1;
+        }
         extra = parse_other(spell_name, temp_string);
         target = parse_target(extra);
-        special = parse_special(TP,extra);
-        if (special == -1)
-        {
+        special = parse_special(TP, extra);
+        if (special == -1) {
             tell_object(TP, "Aborting...");
             return 1;
         }
-        if (special)
-        {
-            if (strsrch(special, spell_name) == -1)
-            {
-                tell_object(TP, "You must include the spell name in your special cast string.  Aborting...");
-                return 1;
-            }
-        }
         buffs = get_buffs(TP);
         delete_buff(TP, spell_name);
-        buffs[spell_name] = (["target":target, "special" : special]);
+        buffs[spell_name] = (["target" : target, "special" : special]);
         tell_object(TP, "Adding buff: " + spell_name + "");
-        if (target) { tell_object(TP, "target: " + target); }
-        if (special) { tell_object(TP, "special cast string: " + special); }
-        save_buffs(TP,buffs);
+        if (target) {
+            tell_object(TP, "target: " + target);
+        }
+        if (special) {
+            tell_object(TP, "special cast string: " + special);
+        }
+        save_buffs(TP, buffs);
         return 1;
 
     case "clear":
@@ -80,13 +77,11 @@ int cmd_buff(string str)
 
     case "remove":
 
-        if (sizeof(arguments) < 2)
-        {
+        if (sizeof(arguments) < 2) {
             tell_object(TP, "Syntax: <buff remove SPELL NAME>");
             return 1;
         }
-        for (i = 1;i < sizeof(arguments);i++)
-        {
+        for (i = 1; i < sizeof(arguments); i++) {
             temp += ({ arguments[i] });
         }
 

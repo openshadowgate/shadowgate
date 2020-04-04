@@ -27,7 +27,8 @@ inherit DAEMON;
 void index_spells();
 mapping allSpells;
 mapping spellIndex;
-mapping dominIndex;
+
+mapping quick_names = ([]);
 
 void create(){
     ::create();
@@ -271,6 +272,7 @@ void build_index()
                         }
                         spelltable = ([]);
 
+                        spelltable["quick_name"] = add_quick_name(x);
                         spelltable["levels"] = level;
                         spelltable["sphere"] = str2->query_spell_sphere(); //aka school
                         spelltable["way"] = str2->query_monk_way();
@@ -614,6 +616,23 @@ void spell_failure(object spell, int prof){
     case 75..99:
         spell->spell_effect(prof);
     }
+}
+
+string add_quick_name(string spell_name)
+{
+    string final;
+    int i = 0;
+
+    do {
+        final = orig[0..i];
+    } while (i < sizeof(orig) && member_array(final, keys(quick_names) != -1));
+    quick_names[final] = spell_name;
+    return final;
+}
+
+string expand_quick_name(string quick_name)
+{
+    return quick_names[quick_name];
 }
 
 //special function for the way of the elements monk feat
