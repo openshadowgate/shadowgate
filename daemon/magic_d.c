@@ -26,7 +26,8 @@ inherit DAEMON;
 
 void index_spells();
 mapping allSpells;
-mapping spellIndex = ([]);
+mapping spellIndex;
+mapping dominIndex;
 
 void create(){
     ::create();
@@ -47,51 +48,80 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
 #include <prc_improv_spells.h>
 
 // casting so errors don't show up from other places in lib.
-    if(spell_type == "priest") spell_type = "cleric";
-    if(spell_type == "wizard") spell_type = "mage";
-    if(spell_type == "psionics") spell_type = "psion";
-
-    spell_name = replace_string(spell_name,"_"," ");
-    if (!spell_name) return 0;
-
-    if(mapp(spellIndex[spell_name]))
-    {
-        if(FEATS_D->usable_feat(target, "supreme healer") && member_array(spell_name, supreme_healer_spells) != -1) { return 1; }
-        if(FEATS_D->usable_feat(target, "natures gift") && member_array(spell_name, natures_gift_spells) != -1) { return 1; }
-        if(FEATS_D->usable_feat(target, "raging healer") && member_array(spell_name, raging_healer_spells) != -1) { return 1; }
-        if(FEATS_D->usable_feat(target, "inspired necromancy") && spell_level < 7 && spellIndex[spell_name]["sphere"] == "necromancy") { return 1; }
+    if (spell_type == "priest") {
+        spell_type = "cleric";
+    }
+    if (spell_type == "wizard") {
+        spell_type = "mage";
+    }
+    if (spell_type == "psionics") {
+        spell_type = "psion";
     }
 
-    if(FEATS_D->usable_feat(target,"expanded knowledge 1")){
-       myexp = target->query("expanded_knowledge_1");
-       if(spell_name == myexp) { return 1; }
-    }
-    if(FEATS_D->usable_feat(target,"expanded knowledge 2")){
-       myexp = target->query("expanded_knowledge_2");
-       if(spell_name == myexp) { return 1; }
-    }
-    if(FEATS_D->usable_feat(target,"expanded knowledge 3")){
-       myexp = target->query("expanded_knowledge_3");
-       if(spell_name == myexp) { return 1; }
-    }
-    if(FEATS_D->usable_feat(target,"body cognition") || FEATS_D->usable_feat(target,"mind over matter")){
-       if(spell_name == "true metabolism") { return 1; }
-    }
-    if(FEATS_D->usable_feat(target,"presence of mind") || FEATS_D->usable_feat(target,"mental fortress")){
-       if(spell_name == "timeless body") { return 1; }
+    spell_name = replace_string(spell_name, "_", " ");
+    if (!spell_name) {
+        return 0;
     }
 
-    if (!target->query_memorized(spell_type,spell_name)) return 0;
+    if (mapp(spellIndex[spell_name])) {
+        if (FEATS_D->usable_feat(target, "supreme healer") && member_array(spell_name, supreme_healer_spells) != -1) {
+            return 1;
+        }
+        if (FEATS_D->usable_feat(target, "natures gift") && member_array(spell_name, natures_gift_spells) != -1) {
+            return 1;
+        }
+        if (FEATS_D->usable_feat(target, "raging healer") && member_array(spell_name, raging_healer_spells) != -1) {
+            return 1;
+        }
+        if (FEATS_D->usable_feat(target, "inspired necromancy") && spell_level < 7 && spellIndex[spell_name]["sphere"] == "necromancy") {
+            return 1;
+        }
+    }
+
+    if (FEATS_D->usable_feat(target, "expanded knowledge 1")) {
+        myexp = target->query("expanded_knowledge_1");
+        if (spell_name == myexp) {
+            return 1;
+        }
+    }
+    if (FEATS_D->usable_feat(target, "expanded knowledge 2")) {
+        myexp = target->query("expanded_knowledge_2");
+        if (spell_name == myexp) {
+            return 1;
+        }
+    }
+    if (FEATS_D->usable_feat(target, "expanded knowledge 3")) {
+        myexp = target->query("expanded_knowledge_3");
+        if (spell_name == myexp) {
+            return 1;
+        }
+    }
+    if (FEATS_D->usable_feat(target, "body cognition") || FEATS_D->usable_feat(target, "mind over matter")) {
+        if (spell_name == "true metabolism") {
+            return 1;
+        }
+    }
+    if (FEATS_D->usable_feat(target, "presence of mind") || FEATS_D->usable_feat(target, "mental fortress")) {
+        if (spell_name == "timeless body") {
+            return 1;
+        }
+    }
+
+    if (!target->query_memorized(spell_type, spell_name)) {
+        return 0;
+    }
 
     x = target->query_guild_level(spell_type);
-    if (x < 1) return 0;
+    if (x < 1) {
+        return 0;
+    }
 
-    if(spell_type == "monk")
-    {
-        if(x >= spell_level)
+    if (spell_type == "monk") {
+        if (x >= spell_level) {
             return 1;
-        else
+        } else {
             return 0;
+        }
     }
     return 1;
 }
@@ -103,14 +133,20 @@ string *query_opposite_sphere(string str) {
 int query_spell_cost(int x, string player_sphere, string spell_sphere) {
     mixed* ret;
     int i;
-    if (player_sphere == "monster sphere") return x;
-    if (x == 0) return -1;
-    if (player_sphere == spell_sphere)
+    if (player_sphere == "monster sphere") {
+        return x;
+    }
+    if (x == 0) {
+        return -1;
+    }
+    if (player_sphere == spell_sphere) {
         return x / 2;
+    }
     ret = query_opposite_sphere(player_sphere);
     for (i = 0; i < sizeof(ret); i++) {
-        if (ret[i] == spell_sphere)
+        if (ret[i] == spell_sphere) {
             return x * 2;
+        }
     }
     return x;
 }
@@ -118,41 +154,48 @@ int query_spell_cost(int x, string player_sphere, string spell_sphere) {
 int cast_spell(string spell_name, object caster, string target, int ob_level) {
     string spell_file;
     object spell;
-    seteuid(getuid() );
-    if (!file_exists(spell_file = "/cmds/spells/" + spell_name[0..0] + "/_" + replace_string(spell_name, " ", "_") + ".c") ) return 0;
+    seteuid(getuid());
+    if (!file_exists(spell_file = "/cmds/spells/" + spell_name[0..0] + "/_" + replace_string(spell_name, " ", "_") + ".c")) {
+        return 0;
+    }
     new(spell_file)->use_spell(caster, target, ob_level);
     return 1;
 }
 
 string query_title(object magi) {
-    if ((string)magi->query_class() == "bard")
+    if ((string)magi->query_class() == "bard") {
         return "bard";
+    }
     switch (magi->query_sphere()) {
-    case "invocation_evocation" :
+    case "invocation_evocation":
         return "invoker";
-    case "conjuration_summoning" :
-        if ((string)magi->query_gender()=="female")
+    case "conjuration_summoning":
+        if ((string)magi->query_gender() == "female") {
             return "conjuress";
+        }
         return "conjurer";
-    case "alteration" :
+    case "alteration":
         return "transmuter";
-    case "necromancy" :
+    case "necromancy":
         return "necromancer";
-    case "greater divination" :
-        if ((string)magi->query_gender()=="female")
+    case "greater divination":
+        if ((string)magi->query_gender() == "female") {
             return "diviness";
+        }
         return "diviner";
-    case "abjuration" :
-        if ((string)magi->query_gender()=="female")
+    case "abjuration":
+        if ((string)magi->query_gender() == "female") {
             return "abjuress";
+        }
         return "abjurer";
-    case "enchantment_charm" :
-        if ((string)magi->query_gender()=="female")
+    case "enchantment_charm":
+        if ((string)magi->query_gender() == "female") {
             return "enchantress";
+        }
         return "enchanter";
-    case "illusion" :
+    case "illusion":
         return "illusionist";
-    default :
+    default:
         return "mage";
     }
 }
