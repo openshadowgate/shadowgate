@@ -15,7 +15,6 @@ void create() {
     set_spell_name("insight");
     set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("divination");
-    set_spell_domain("mentalism");
     set_syntax("cast CLASS insight on TARGET");
     set_description("This spell grants the target a second's insight into the future, allowing her to both avoid attacks "
 "better, and to hit her targets better.  The spell is more effective when used by a priest that is solely dedicated to "
@@ -26,7 +25,7 @@ void create() {
 	set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
    	tell_object(caster,"%^BOLD%^%^CYAN%^Pressing your fingers to "+
 		"your temples, you begin to chant in a rhythmic tone.");
@@ -51,7 +50,7 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof){ 
+void spell_effect(int prof){
     int duration;
     duration = (ROUND_LENGTH * 20) * clevel;
     bonus = 2;
@@ -87,10 +86,10 @@ void spell_effect(int prof){
 
 void dest_effect()
 {
-    if(objectp(target)) 
-    { 
+    if(objectp(target))
+    {
         tell_object(target,"%^BOLD%^%^CYAN%^The sense of foresight fades.%^RESET%^");
-        target->remove_property("foresight"); 
+        target->remove_property("foresight");
         target->add_ac_bonus(-bonus);
         target->add_attack_bonus(-attk_bonus);
     }
