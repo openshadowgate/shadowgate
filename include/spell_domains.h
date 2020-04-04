@@ -11,5 +11,4 @@
     "kismet"           : ({ "creation", "knowledge", "mentalism", "magic", "law"}) , \
     "lysara"           : ({ "travel", "fate", "repose", "moon", "water" }) ,\
     "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction" }) , \
-    "ryorik"           : ({ "air", "fire", "earth", "water", "chaos"}) ,\
 ]))
