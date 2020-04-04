@@ -1,4 +1,11 @@
-// order of spells is important
+/**
+ * List of domain spell mapped by domain.
+ *
+ * Order of spells defines their levels
+ *
+ * This dataset should be queried from MAGIC_D with
+ * query_domain_spells(domain) and query_domains() functions.
+ */
 mapping DOMAIN_SPELLS = ([]);
 DOMAIN_SPELLS = ([
                      "plant" : ({ "entangle", "barkskin", "thorn body", "wall of thorns", "liveoak", "animate plants", "mind blank", "shambler" }),

@@ -12,7 +12,6 @@
 inherit DAEMON;
 
 #include <cleric_spells.h>
-#include <spell_domains_spells.h>
 
 void help();
 
@@ -226,7 +225,7 @@ int cmd_cast(string str)
     if (domain) {
         targ = find_object_or_load(tmp);
         slevel = targ->query_spell_level(type);
-        tmp = MAGIC_D->get_spell_file_name(DOMAIN_SPELLS[domain_name][slevel - 1]);
+        tmp = MAGIC_D->get_spell_file_name((MAGIC_D->query_domain_spells(domain_name))[slevel - 1]);
         if (tmp == "") {
             return 1;
         }

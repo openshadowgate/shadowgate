@@ -22,15 +22,19 @@
 #define VCASTERS ({"bard", "mage", "psion", "cleric", "ranger", "sorcerer", "paladin", "druid", "psywarrior"})
 inherit DAEMON;
 
+#include <spell_domains_spells.h>
+
 void index_spells();
 mapping allSpells;
 mapping spellIndex = ([]);
 
 void create(){
     ::create();
-    index_spells();
-}
 
+    if (!sizeof(spellIndex)) {
+        index_spells();
+    }
+}
 
 int can_cast(object target, int spell_level, string spell_type, string spell_name, int spell_delay) {
     string str,cl,cl1,cl2,myexp;
@@ -153,13 +157,17 @@ string query_title(object magi) {
     }
 }
 
-object get_spell_from_array(object *spellary, string spellname) {
+object get_spell_from_array(object* spellary, string spellname)
+{
     int i;
 
-    for (i = 0;i<sizeof(spellary);i++) {
-        if(!objectp(spellary[i])) continue;
-        if ((string)spellary[i]->query_spell_name() == spellname)
+    for (i = 0; i < sizeof(spellary); i++) {
+        if (!objectp(spellary[i])) {
+            continue;
+        }
+        if ((string)spellary[i]->query_spell_name() == spellname) {
             return spellary[i];
+        }
     }
 }
 
@@ -527,6 +535,16 @@ void do_kill(object spell)
 
 int is_spell(){
     return 1;
+}
+
+string *query_domain_spells(string domain)
+{
+    return DOMAIN_SPELLS[domain];
+}
+
+string *query_domains()
+{
+    return keys(DOMAIN_SPELLS);
 }
 
 void spell_failure(object spell, int prof){
