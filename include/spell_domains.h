@@ -1,5 +1,6 @@
 #include <std.h>
 
+// Must correspond to deities.h
 #define SPELL_DOMAINS (([\
     "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire" }) ,\
     "callamir"         : ({ "good", "charm", "air", "trickery", "travel", "chaos"}), \

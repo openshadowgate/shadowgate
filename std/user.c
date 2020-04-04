@@ -3,7 +3,6 @@
  */
 
 #include <conf.h>
-#include "/d/shadowgate/dieties.h"
 #include <rooms.h>
 #include <security.h>
 #include <daemons.h>
@@ -22,6 +21,7 @@
 #include <psions.h>
 #include <class_types.h>
 #include <domination.h>
+#include <dieties.h>
 
 inherit "/std/user/more";
 
@@ -1516,11 +1516,12 @@ void setup() {
    static_user["verbose_moves"] = 1;
    "/adm/daemon/average_age_d.c"->register_player(TO);
 
-// new gods wipe!! N, 1/18
-   if(member_array((string)TO->query_diety(),NEWPANTHEON) == -1 && (string)TO->query_diety() != "godless") {
-     TO->set_diety(0);
-     TO->set_sphere(0);
-     if(TO->is_class("cleric")) TO->set_divine_domain(({}));
+   if (member_array((string)TO->query_diety(), NEWPANTHEON) == -1 && (string)TO->query_diety() != "godless") {
+       TO->set_diety(0);
+       TO->set_sphere(0);
+       if (TO->is_class("cleric")) {
+           TO->set_divine_domain(({}));
+       }
    }
    force_me("look");
 }
