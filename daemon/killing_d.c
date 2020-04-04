@@ -8,7 +8,7 @@
 #include <std.h>
 #include <security.h>
 #include <daemons.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 
 #define SAVE_KILLS "/daemon/save/kills"
 

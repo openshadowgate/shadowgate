@@ -10,10 +10,10 @@
 #include <spell_domains.h>
 #include <daemons.h>
 // temp items can be revoked once choose is out of this file!! N, 1/18
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 #define DIETY_D "/daemon/diety_d.c"
 #define FORSAKE_DELAY 86400
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 // down to here, 3x variables can be removed
 #define FUNDS "/daemon/templefunds_d.c"
 #include <new_exp_table.h>

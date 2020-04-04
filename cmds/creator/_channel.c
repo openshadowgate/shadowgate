@@ -2,7 +2,7 @@
 
 #include <std.h>
 #include <security.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 
 #define NORM_CHANNELS ({"cleric","fighter","ranger","mage","paladin", "antipaladin","thief", "bard","assassin","druid","cavalier", "hm", "newbie", "inform", "shout"})
 

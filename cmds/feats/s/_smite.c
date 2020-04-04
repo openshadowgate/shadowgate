@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 inherit FEAT;
 
 #define FEATTIMER 35

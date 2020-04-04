@@ -1,5 +1,5 @@
 #include <std.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 inherit DAEMON;
 
 void create() { ::create(); }

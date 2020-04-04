@@ -14,7 +14,7 @@
 #include <move.h>
 #include <daemons.h>
 #include <objects.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 #define DIETY_D "/daemon/diety_d.c"
 #define FORSAKE_DELAY 86400
 #define FUNDS "/daemon/templefunds_d.c"

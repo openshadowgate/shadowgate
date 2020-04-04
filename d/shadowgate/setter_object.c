@@ -63,7 +63,7 @@ for this object to work correctly
 #include "ansi.h"
 #include <psions.h>
 #include <dirs.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 #define TS_D "/daemon/treesave_d.c"
 #define CMD_NOTE "/cmds/avatar/_note.c"
 #define NEWBIE_START "/d/newbie/ooc/hub_room"

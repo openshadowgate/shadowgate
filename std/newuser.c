@@ -1,5 +1,5 @@
 #include <conf.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 #include <rooms.h>
 #include <security.h>
 #include <daemons.h>

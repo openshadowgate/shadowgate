@@ -4,7 +4,7 @@
 //Likely not all of them are necessary, but better safe 
 //than sorry :) ~Circe~ 5/19/08
 #include <config.h>
-#include "/d/shadowgate/dieties.h"
+#include <dieties.h>
 #include <rooms.h>
 #include <security.h>
 #include <daemons.h>
