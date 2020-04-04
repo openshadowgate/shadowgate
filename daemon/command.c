@@ -29,7 +29,7 @@ string *build_alpha_directory(string direct)
     return res;
 }
 
-void create() 
+void create()
 {
     string *hashset;
     seteuid(getuid());
@@ -46,16 +46,16 @@ void create()
     return;
 }
 
-string find_cmd(string cmd, string *path) 
+string find_cmd(string cmd, string *path)
 {
     string *tmp;
     path += build_alpha_directory(DIR_FEATS + "/");
-    
+
     if(__Cmds[cmd] && sizeof(tmp = (path & (string *)__Cmds[cmd])))
     {
         return sprintf("%s/_%s", tmp[0], cmd);
     }
-    else 
+    else
     {
         tmp = (path & __Paths);
         if(sizeof(tmp = path - tmp)) rehash(tmp);
@@ -67,7 +67,7 @@ string find_cmd(string cmd, string *path)
     return 0;
 }
 
-void rehash(mixed val) 
+void rehash(mixed val)
 {
     string *choses;
     int i, j;
@@ -75,11 +75,11 @@ void rehash(mixed val)
     if(stringp(val)) val = ({ val });
     else if(!pointerp(val)) return;
     i = sizeof(val);
-    while(i--) 
+    while(i--)
     {
         if(file_size(val[i]) !=-2) continue;
         j = sizeof(choses = get_dir(val[i]+"/_*.c"));
-        while(j--) 
+        while(j--)
         {
             choses[j] = choses[j][1..strlen(choses[j])-3];
             if(pointerp(__Cmds[choses[j]])) __Cmds[choses[j]] += ({ val[i] });

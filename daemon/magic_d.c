@@ -621,7 +621,7 @@ void spell_failure(object spell, int prof){
 
 string add_quick_name(string spell_name)
 {
-    string orig;
+    string orig, *origs;
     string final;
     int i = 0;
 
@@ -634,9 +634,13 @@ string add_quick_name(string spell_name)
     }
 
     orig = replace_string(spell_name, " ", "");
+    origs = explode(spell_name, " ");
 
     do {
         final = orig[0..i];
+        if (sizeof(origs) > 1 && sizeof(origs) > i) {
+            orig = final[0..i] + origs[i];
+        }
         i++;
     } while (i < sizeof(orig) && member_array(final, keys(quick_names)) != -1);
     quick_names[final] = spell_name;
