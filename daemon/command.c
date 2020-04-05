@@ -36,9 +36,6 @@ void create()
     __Cmds = ([]);
     __Paths = ({});
 
-//    hashset = ({ DIR_MORTAL_CMDS, DIR_FEATS, DIR_CREATOR_CMDS, DIR_CLASS_CMDS,
-//      DIR_SYSTEM_CMDS ,DIR_WIZARD_SPLS,DIR_CLERIC_SPLS,DIR_OVER_CMDS,
-//	DIR_THIEF_CMDS,DIR_PSION_SPLS });
     hashset = ({ DIR_MORTAL_CMDS, DIR_CREATOR_CMDS, DIR_CLASS_CMDS, DIR_SYSTEM_CMDS ,DIR_OVER_CMDS, DIR_THIEF_CMDS });
     hashset += build_alpha_directory(DIR_SPELLS+"/");
     hashset += build_alpha_directory(DIR_FEATS+"/");

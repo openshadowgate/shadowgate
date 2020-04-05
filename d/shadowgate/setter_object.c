@@ -1524,10 +1524,10 @@ void pick_genetics()
     switch(MyPlace)
     {
         case "hair color":
-            my_choices = MyFile->query_hair_colors(MyCharacterInfo["race"]["subrace"]);
+            my_choices = sort_array(MyFile->query_hair_colors(MyCharacterInfo["race"]["subrace"]), 1);
             break;
         case "eye color":
-            my_choices = MyFile->query_eye_colors(MyCharacterInfo["race"]["subrace"]);
+            my_choices = sort_array(MyFile->query_eye_colors(MyCharacterInfo["race"]["subrace"]), 1);
             break;
         case "bonus language":
         {
@@ -1693,28 +1693,33 @@ void pick_deity()
     align = MyCharacterInfo["myclass"]["alignment"];
     myrace = MyCharacterInfo["race"]["race name"];
     mysubrace = MyCharacterInfo["race"]["subrace"];
-    if(mysubrace == "NIL") mysubrace = "";
+    if (mysubrace == "NIL") {
+        mysubrace = "";
+    }
     temp = MyCharacterInfo["myclass"]["myclass name"];
     names = keys(DIETIES);
 
     myfile = DIR_RACES+"/"+myrace+".c";
     badgods = ({});
-    if(file_exists(myfile)) badgods += (string *)myfile->restricted_deities(mysubrace);
-    names -= badgods;
-    if(temp == "paladin" || temp == "cleric" ) // clergy/orders
-    {
-        for(inc = 0; inc < sizeof(names);inc ++)
-        {
-            if(member_array(align,DIETIES[names[inc]][2]) == -1) continue;
-            my_choices += ({names[inc]});
-        }
+
+    if (temp == "paladin") {
+        names = PALADIN_GODS;
     }
-    else
-    {
-        for(inc = 0; inc < sizeof(names);inc ++)
-        {
-            if(member_array(align,DIETIES[names[inc]][1]) == -1) continue;
-            my_choices += ({names[inc]});
+
+    names -= badgods;
+    if (temp == "cleric") {
+        for (inc = 0; inc < sizeof(names); inc++) {
+            if (member_array(align, DIETIES[names[inc]][2]) == -1) {
+                continue;
+            }
+            my_choices += ({ names[inc] });
+        }
+    } else {
+        for (inc = 0; inc < sizeof(names); inc++) {
+            if (member_array(align, DIETIES[names[inc]][1]) == -1) {
+                continue;
+            }
+            my_choices += ({ names[inc] });
         }
     }
     tell_object(ETO, "%^BOLD%^%^WHITE%^You must now choose which deity you wish to follow.%^RESET%^");
@@ -1727,7 +1732,7 @@ void pick_deity()
     }
     header();
     tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick "+my_choices[0]+"%^BLACK%^> %^WHITE%^to set your "+MyPlace+" to "+my_choices[0]+".");
-    tell_object(ETO, "%^BOLD%^Alternatively, you can %^BLACK%^<%^CYAN%^pick godless%^BLACK%^> %^WHITE%^to select no patron deity. However %^YELLOW%^please note%^BOLD%^%^WHITE%^, having no deity to intercede for you will put far more strain on your character if returned from the afterlife.");
+    tell_object(ETO, "%^BOLD%^Alternatively, you can %^BLACK%^<%^CYAN%^pick godless%^BLACK%^> %^WHITE%^to select no patron deity.");
     return 1;
 }
 
