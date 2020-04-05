@@ -86,27 +86,13 @@ string platinum_desc()
 string weapons_desc()
 {
     if (weapons1 && weapons2) {
-        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger"
-               "%^RESET%^, a razor-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed "
-               "%^YELLOW%^gauntlet%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^. Off to the side "
-               "is another stack, all varied types of blades that include a %^YELLOW%^"
-               "beautiful scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword%^RESET%^, a "
-               "%^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an ominous %^YELLOW%^black bastard sword%^RESET%^ "
-               "and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something...";
+        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger%^RESET%^, a razor-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed %^YELLOW%^gauntlet%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^.\n\nOff to the side is another stack, all varied types of blades that include a %^YELLOW%^beautiful scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword%^RESET%^, a %^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an ominous %^YELLOW%^black bastard sword%^RESET%^and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^.\n\nYou could try to %^YELLOW%^take%^RESET%^ something...";
     }
     if (weapons1) {
-        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger%^RESET%^, a razor"
-               "-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed %^YELLOW%^gauntlet"
-               "%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ "
-               "something... Off to the side is another stack, all varied types of "
-               "blades, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger%^RESET%^, a razor-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed %^YELLOW%^gauntlet%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another stack, all varied types of blades, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     if (weapons2) {
-        return "Various weapons are strewn about. Off to the side is a stack of varied types of blades that "
-               "include a beautiful %^YELLOW%^scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword"
-               "%^RESET%^, a %^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an %^YELLOW%^elven curved blade%^RESET%^, an ominous %^YELLOW%^black "
-               "bastard sword%^RESET%^, and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something... Off to the side is another pile, this time of "
-               "more exotic weaponry, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various weapons are strewn about. Off to the side is a stack of varied types of blades that include a beautiful %^YELLOW%^scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword%^RESET%^, a %^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an %^YELLOW%^elven curved blade%^RESET%^, an ominous %^YELLOW%^black bastard sword%^RESET%^, and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another pile, this time of more exotic weaponry, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     return "Most of the weapons appear to have been taken already, and the few that are left are screened by some sort of "
            "dull crimson ward that prevents you from getting close to them.";
@@ -187,7 +173,7 @@ int take_fun(string str)
     case "small hammer":
     case "sickle":
     case "longbow":
-    case "pistol":                                                                                                                 //weapon1
+    case "pistol":
         if (!weapons1) {
             tell_object(TP, "You reach out for a weapon and are stung sharply by the crimson ward around it!");
             return 1;
@@ -221,7 +207,7 @@ int take_fun(string str)
     case "sabre":
     case "black bastard sword":
     case "black and silver falcata":
-    case "elven curved blade"                                                                             //weapon2
+    case "elven curved blade":                                                                             //weapon2
         if (!weapons2) {
             tell_object(TP, "You reach out for a weapon and are stung sharply by the crimson ward around it!");
             return 1;
@@ -229,21 +215,37 @@ int take_fun(string str)
         write("%^BOLD%^%^GREEN%^You take a thorough look around the room for a weapon and select one of interest.");
         tell_room(TO, "%^BOLD%^%^GREEN%^" + TPQCN + " takes a thorough look around the room for a weapon and selects one of interest.", TP);
         switch (str) {
-        case "beautiful scimitar":         ob = new(ITEM + "esword")->move(TO);      break;
+        case "beautiful scimitar":
+            ob = new(ITEM + "esword")->move(TO);
+            break;
 
-        case "dark scimitar":              ob = new(ITEM + "shefflix")->move(TO);    break;
+        case "dark scimitar":
+            ob = new(ITEM + "shefflix")->move(TO);
+            break;
 
-        case "crimson longsword":          ob = new(ITEM + "rdblade")->move(TO);     break;
+        case "crimson longsword":
+            ob = new(ITEM + "rdblade")->move(TO);
+            break;
 
-        case "sabre":                      ob = new(ITEM + "csabre")->move(TO);      break;
+        case "sabre":
+            ob = new(ITEM + "csabre")->move(TO);
+            break;
 
-        case "golden longsword":           ob = new(ITEM + "gdblade")->move(TO);     break;
+        case "golden longsword":
+            ob = new(ITEM + "gdblade")->move(TO);
+            break;
 
-        case "black bastard sword":            ob = new(ITEM + "ragnarok")->move(TO);    break;
+        case "black bastard sword":
+            ob = new(ITEM + "ragnarok")->move(TO);
+            break;
 
-        case "black and silver falcata":  ob = new(ITEM + "tasword")->move(TO);     break;
+        case "black and silver falcata":
+            ob = new(ITEM + "tasword")->move(TO);
+            break;
 
-        case "elven curved blade": ob = new(ITEM + "godslayer.c")->move(TO);   break;
+        case "elven curved blade":
+            ob = new(ITEM + "godslayer")->move(TO);
+            break;
         }
         weapons2--;
         break;
@@ -261,17 +263,29 @@ int take_fun(string str)
         write("%^BOLD%^%^GREEN%^You take a thorough look around the room for some armor and select one of interest.");
         tell_room(TO, "%^BOLD%^%^GREEN%^" + TPQCN + " takes a thorough look around the room for some armor and selects one of interest.", TP);
         switch (str) {
-        case "chainshirt":     ob = new(ITEM + "e_chain.c")->move(TO);   break;
+        case "chainshirt":
+            ob = new(ITEM + "e_chain.c")->move(TO);
+            break;
 
-        case "fullplate":      ob = new(ITEM + "e_plate.c")->move(TO);   break;
+        case "fullplate":
+            ob = new(ITEM + "e_plate.c")->move(TO);
+            break;
 
-        case "breastplate":    ob = new(ITEM + "iceplate.c")->move(TO);  break;
+        case "breastplate":
+            ob = new(ITEM + "iceplate.c")->move(TO);
+            break;
 
-        case "shadows":        ob = new(ITEM + "n_cover.c")->move(TO);   break;
+        case "shadows":
+            ob = new(ITEM + "n_cover.c")->move(TO);
+            break;
 
-        case "mail shirt":     ob = new(ITEM + "p_mail.c")->move(TO);    break;
+        case "mail shirt":
+            ob = new(ITEM + "p_mail.c")->move(TO);
+            break;
 
-        case "carapace":       ob = new(ITEM + "sarmor.c")->move(TO);    break;
+        case "carapace":
+            ob = new(ITEM + "sarmor.c")->move(TO);
+            break;
         }
         armor1--;
         break;
@@ -291,21 +305,37 @@ int take_fun(string str)
         write("%^BOLD%^%^GREEN%^You take a thorough look around the room for some armor and select one of interest.");
         tell_room(TO, "%^BOLD%^%^GREEN%^" + TPQCN + " takes a thorough look around the room for some armor and selects one of interest.", TP);
         switch (str) {
-        case "helm":               ob = new(ITEM + "helm.c")->move(TO);              break;
+        case "helm":
+            ob = new(ITEM + "helm.c")->move(TO);
+            break;
 
-        case "cape":               ob = new(ITEM + "shimmeringcape2.c")->move(TO);   break;
+        case "cape":
+            ob = new(ITEM + "shimmeringcape2.c")->move(TO);
+            break;
 
-        case "cloak":              ob = new(ITEM + "seeker.c")->move(TO);            break;
+        case "cloak":
+            ob = new(ITEM + "seeker.c")->move(TO);
+            break;
 
-        case "colorful cloak":     ob = new(ITEM + "naturecloak.c")->move(TO);       break;
+        case "colorful cloak":
+            ob = new(ITEM + "naturecloak.c")->move(TO);
+            break;
 
-        case "robe":               ob = new(ITEM + "starrobes.c")->move(TO);         break;
+        case "robe":
+            ob = new(ITEM + "starrobes.c")->move(TO);
+            break;
 
-        case "red boots":          ob = new(ITEM + "boots.c")->move(TO);             break;
+        case "red boots":
+            ob = new(ITEM + "boots.c")->move(TO);
+            break;
 
-        case "green boots":        ob = new(ITEM + "rangerboots.c")->move(TO);       break;
+        case "green boots":
+            ob = new(ITEM + "rangerboots.c")->move(TO);
+            break;
 
-        case "gauntlets":          ob = new(ITEM + "o_gauntlets.c")->move(TO);       break;
+        case "gauntlets":
+            ob = new(ITEM + "o_gauntlets.c")->move(TO);
+            break;
         }
         armor2--;
         break;
@@ -322,15 +352,25 @@ int take_fun(string str)
         write("%^BOLD%^%^GREEN%^You take a thorough look around the room for an item and select one of interest.");
         tell_room(TO, "%^BOLD%^%^GREEN%^" + TPQCN + " takes a thorough look around the room for an item and selects one of interest.", TP);
         switch (str) {
-        case "shield":             ob = new(ITEM + "shield")->move(TO);          break;
+        case "shield":
+            ob = new(ITEM + "shield")->move(TO);
+            break;
 
-        case "bracers of jade":    ob = new(ITEM + "snakebracers")->move(TO);    break;
+        case "bracers of jade":
+            ob = new(ITEM + "snakebracers")->move(TO);
+            break;
 
-        case "bluish bracers":     ob = new(ITEM + "waveguards")->move(TO);      break;
+        case "bluish bracers":
+            ob = new(ITEM + "waveguards")->move(TO);
+            break;
 
-        case "reddish bracers":    ob = new(ITEM + "flameguards")->move(TO);     break;
+        case "reddish bracers":
+            ob = new(ITEM + "flameguards")->move(TO);
+            break;
 
-        case "white bracers":      ob = new(ITEM + "windguards")->move(TO);      break;
+        case "white bracers":
+            ob = new(ITEM + "windguards")->move(TO);
+            break;
         }
         other1--;
         break;
@@ -348,17 +388,29 @@ int take_fun(string str)
         write("%^BOLD%^%^GREEN%^You take a thorough look around the room for an item and select one of interest.");
         tell_room(TO, "%^BOLD%^%^GREEN%^" + TPQCN + " takes a thorough look around the room for an item and selects one of interest.", TP);
         switch (str) {
-        case "fine robes":     ob = new(ITEM + "robes")->move(TO);       break;
+        case "fine robes":
+            ob = new(ITEM + "robes")->move(TO);
+            break;
 
-        case "ring":           ob = new(ITEM + "healring")->move(TO);    break;
+        case "ring":
+            ob = new(ITEM + "healring")->move(TO);
+            break;
 
-        case "bag":            ob = new(ITEM + "bag")->move(TO);         break;
+        case "bag":
+            ob = new(ITEM + "bag")->move(TO);
+            break;
 
-        case "sash":           ob = new(ITEM + "firesash")->move(TO);    break;
+        case "sash":
+            ob = new(ITEM + "firesash")->move(TO);
+            break;
 
-        case "rod":            ob = new(ITEM + "rodIV")->move(TO);       break;
+        case "rod":
+            ob = new(ITEM + "rodIV")->move(TO);
+            break;
 
-        case "chemise":        ob = new(ITEM + "chemise")->move(TO);     break;
+        case "chemise":
+            ob = new(ITEM + "chemise")->move(TO);
+            break;
         }
         other2--;
         break;
