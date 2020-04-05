@@ -154,14 +154,6 @@ void cast_special_spells()
                     }
                     return;
                 }
-                if (strsrch(special, spell) == -1) {
-                    tell_object(owner, "You must include the name of the spell in your special cast string.  Your special cast "
-                                "string is: " + special + "\nYour spell name is: " + spell + "\nAborting...");
-                    if (objectp(TO)) {
-                        TO->remove();
-                    }
-                    return;
-                }
 
                 if (strsrch(special, "$T") != -1) {
                     party_special += ({ spell });
