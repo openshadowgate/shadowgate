@@ -132,7 +132,7 @@ int no_cast(string str)
 
     tell_object(targ, "%^BLUE%^Cruiser Tetron pulls out an ancient parchment with a pentagram burned into its surface.");
     tell_object(targ, "%^BOLD%^%^RED%^He presses it against your forehead and a horrible pain rips through your body");
-    tell_room(ETO, "%^BLUE%^Cruiser Tetron pulls out an ancient parchment and presses it against the forhead of " + targ->QCN + "!", targ);
+    tell_room(ETO, "%^BLUE%^Cruiser Tetron pulls out an ancient parchment and presses it against the forehead of " + targ->QCN + "!", targ);
     tell_room(ETO, "" + targ->QCN + " screams in pain and reaches out to you for help!", targ);
     TO->set_property("noMissChance", 1);
     targ->do_damage("torso", roll_dice(30, 10));
@@ -382,7 +382,7 @@ void fireball(object targ)
     live = all_living(ETO);
     live -= ({ TO });
     live = filter_array(live, "is_non_immortal", FILTERS_D);
-
+    tell_room(ETO, "%^MAGENTA%^Cruiser Tetron says:%^BOLD%^%^RED%^ By fire be purged!%^RESET%^");
     for (i = 0, sizeof(live) > 0; i < sizeof(live); i++) {
         if (!objectp(live[i])) {
             continue;
@@ -415,7 +415,7 @@ void bolt(object targ)
     if (fodder_check()) {
         fireball(targ); return;
     }
-
+    tell_room(ETO, "%^MAGENTA%^Cruiser Tetron says:%^BOLD%^%^RED%^ Suffer the storm's wrath!%^RESET%^");
     if (!targ->reflex_save(35 + random(20))) {
         tell_room(ETO, "%^YELLOW%^Cruiser Tetron shoots lightning from his fingertips and blasts " + targ->QCN + "!", targ);
         tell_object(targ, "%^YELLOW%^Cruiser Tetron shoots lightning from his fingertips and blasts you!");
@@ -492,7 +492,7 @@ void light(object targ)
         tell_object(targ, "%^BOLD%^%^BLACK%^Cruiser Tetron lowers his hands and blasts you with a horrible beam of %^B_BLUE%^%^BOLD%^%^BLACK%^BLACK LIGHT!%^RESET%^");
         tell_object(targ, "%^B_RED%^%^BOLD%^%^BLACK%^It utterly destroys you!%^RESET%^");
         TO->set_property("noMissChance", 1);
-        targ->cause_typed_damage(targ, "torso", roll_dice(60, 12), "evil");
+        targ->cause_typed_damage(targ, "torso", roll_dice(60, 12), "untyped");
         TO->set_property("noMissChance", -1);
         return;
     }else {
