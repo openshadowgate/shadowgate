@@ -86,13 +86,13 @@ string platinum_desc()
 string weapons_desc()
 {
     if (weapons1 && weapons2) {
-        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger%^RESET%^, a razor-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed %^YELLOW%^gauntlet%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^.\n\nOff to the side is another stack, all varied types of blades that include a %^YELLOW%^beautiful scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword%^RESET%^, a %^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an ominous %^YELLOW%^black bastard sword%^RESET%^and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^.\n\nYou could try to %^YELLOW%^take%^RESET%^ something...";
+        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger%^RESET%^, a razor-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed %^YELLOW%^gauntlet%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^.\n\nOff to the side is another stack, all varied types of blades that include a %^YELLOW%^beautiful scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword%^RESET%^, a %^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an ominous %^YELLOW%^black bastard sword %^RESET%^and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...";
     }
     if (weapons1) {
-        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger%^RESET%^, a razor-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed %^YELLOW%^gauntlet%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another stack, all varied types of blades, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various weapons are strewn about. One pile consists of a gemmed %^YELLOW%^dagger%^RESET%^, a razor-sharp %^YELLOW%^battleaxe%^RESET%^, a %^YELLOW%^whip%^RESET%^ with fiery strands, a clawed %^YELLOW%^gauntlet%^RESET%^, a %^YELLOW%^small hammer%^RESET%^, a %^YELLOW%^sickle%^RESET%^, an aged yew %^YELLOW%^longbow%^RESET%^, and a %^YELLOW%^pistol%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another stack, all varied types of blades, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     if (weapons2) {
-        return "Various weapons are strewn about. Off to the side is a stack of varied types of blades that include a beautiful %^YELLOW%^scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword%^RESET%^, a %^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an %^YELLOW%^elven curved blade%^RESET%^, an ominous %^YELLOW%^black bastard sword%^RESET%^, and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another pile, this time of more exotic weaponry, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various weapons are strewn about. Off to the side is a stack of varied types of blades that include a beautiful %^YELLOW%^scimitar%^RESET%^, a runed %^YELLOW%^dark scimitar%^RESET%^, a %^YELLOW%^crimson longsword%^RESET%^, a %^YELLOW%^golden longsword%^RESET%^, a crystal %^YELLOW%^sabre%^RESET%^, an %^YELLOW%^elven curved blade%^RESET%^, an ominous %^YELLOW%^black bastard sword%^RESET%^, and an equally ominous %^YELLOW%^black and silver falcata%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another pile, this time of more exotic weaponry, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     return "Most of the weapons appear to have been taken already, and the few that are left are screened by some sort of "
            "dull crimson ward that prevents you from getting close to them.";
@@ -102,26 +102,13 @@ string armor_desc()
 {
     if (armor1 && armor2) {
         return "Various armor is strewn about. One pile consists of an ornate %^YELLOW%^chainshirt"
-               "%^RESET%^, dull blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^"
-               "shadows%^RESET%^, a crystal %^YELLOW%^mail shirt%^RESET%^ and a black leather %^YELLOW%^carapace%^RESET%^. A second "
-               "stack, off to the side, holds a few smaller pieces including an iron %^YELLOW%^helm%^RESET%^, a %^YELLOW%^colorful cloak%^RESET%^, a shimmering %^YELLOW%^cape"
-               "%^RESET%^, a hooded black %^YELLOW%^cloak%^RESET%^, a %^YELLOW%^robe%^RESET%^ decorated with stars, some dark red "
-               "%^YELLOW%^boots%^RESET%^, some %^YELLOW%^forest green boots%^RESET%^, and a pair of heavy %^YELLOW%^"
-               "gauntlets%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something...";
+               "%^RESET%^, dull blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^shadows%^RESET%^, a crystal %^YELLOW%^mail shirt%^RESET%^ and a black leather %^YELLOW%^carapace%^RESET%^.\n\nA second stack, off to the side, holds a few smaller pieces including an iron %^YELLOW%^helm%^RESET%^, a %^YELLOW%^colorful cloak%^RESET%^, a shimmering %^YELLOW%^cape%^RESET%^, a hooded black %^YELLOW%^cloak%^RESET%^, a %^YELLOW%^robe%^RESET%^ decorated with stars, some dark red %^YELLOW%^boots%^RESET%^, some %^YELLOW%^forest green boots%^RESET%^, and a pair of heavy %^YELLOW%^gauntlets%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...";
     }
     if (armor1) {
-        return "Various armor is strewn about. One pile consists of an ornate %^YELLOW%^chainshirt%^RESET%^, dull "
-               "blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^shadows%^RESET%^, "
-               "a crystal %^YELLOW%^mail shirt%^RESET%^ and a black leather %^YELLOW%^carapace%^RESET%^. You could try to %^YELLOW%^take"
-               "%^RESET%^ something... Off to the side is another stack, this time of smaller accessories, but a dull red ward flickers "
-               "above them that prevents you from reaching out to take one.";
+        return "Various armor is strewn about. One pile consists of an ornate %^YELLOW%^chainshirt%^RESET%^, dull blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^shadows%^RESET%^, a crystal %^YELLOW%^mail shirt%^RESET%^ and a black leather %^YELLOW%^carapace%^RESET%^.\nYou could try to %^YELLOW%^take %^RESET%^something...\n\nOff to the side is another stack, this time of smaller accessories, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     if (armor2) {
-        return "Various armor is strewn about. Off to the side is a stack that holds a few small pieces including "
-               "an iron %^YELLOW%^helm%^RESET%^, a %^YELLOW%^colorful cloak%^RESET%^, a shimmering %^YELLOW%^cape%^RESET%^, a hooded black %^YELLOW%^cloak%^RESET%^, a "
-               "%^YELLOW%^robe%^RESET%^ decorated with stars, some dark red %^YELLOW%^boots%^RESET%^, some %^YELLOW%^forest green boots%^RESET%^, and a pair of heavy %^YELLOW%^"
-               "gauntlets%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something... Off to the side is another pile, these much "
-               "larger items, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various armor is strewn about. Off to the side is a stack that holds a few small pieces including an iron %^YELLOW%^helm%^RESET%^, a %^YELLOW%^colorful cloak%^RESET%^, a shimmering %^YELLOW%^cape%^RESET%^, a hooded black %^YELLOW%^cloak%^RESET%^, a %^YELLOW%^robe%^RESET%^ decorated with stars, some dark red %^YELLOW%^boots%^RESET%^, some %^YELLOW%^forest green boots%^RESET%^, and a pair of heavy %^YELLOW%^gauntlets%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another pile, these much larger items, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     return "Most of the armor appears to have been taken already, and the few items that are left are screened by some "
            "sort of dull crimson ward that prevents you from getting close to them.";
@@ -130,24 +117,13 @@ string armor_desc()
 string other_desc()
 {
     if (other1 && other2) {
-        return "Various other items are strewn about. One pile consists of a medium %^YELLOW%^shield%^RESET%^ and many pairs "
-               "of bracers - %^YELLOW%^reddish bracers%^RESET%^, %^YELLOW%^bluish bracers%^RESET%^, %^YELLOW%^white bracers%^RESET%^ and "
-               "%^YELLOW%^bracers of jade%^RESET%^. A second stack, off to the side, holds a set of %^YELLOW%^fine robes%^RESET%^, a "
-               "%^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^sash%^RESET%^ "
-               "a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something...";
+        return "Various other items are strewn about. One pile consists of a medium %^YELLOW%^shield%^RESET%^ and many pairs of bracers - %^YELLOW%^reddish bracers%^RESET%^, %^YELLOW%^bluish bracers%^RESET%^, %^YELLOW%^white bracers%^RESET%^ and %^YELLOW%^bracers of jade%^RESET%^.\n\nA second stack, off to the side, holds a set of %^YELLOW%^fine robes%^RESET%^, a %^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^sash%^RESET%^ a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...";
     }
     if (other1) {
-        return "Various other items are strewn about. One pile consists of a medium %^YELLOW%^shield%^RESET%^ and "
-               "many pairs of bracers - %^YELLOW%^reddish bracers%^RESET%^, %^YELLOW%^bluish bracers%^RESET%^, %^YELLOW%^white bracers"
-               "%^RESET%^ and %^YELLOW%^bracers of jade%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something... More sit in a "
-               "stack off to the side, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various other items are strewn about. One pile consists of a medium %^YELLOW%^shield%^RESET%^ and many pairs of bracers - %^YELLOW%^reddish bracers%^RESET%^, %^YELLOW%^bluish bracers%^RESET%^, %^YELLOW%^white bracers %^RESET%^and %^YELLOW%^bracers of jade%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nMore sit in a stack off to the side, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     if (other2) {
-        return "Various other items are strewn about. Off to the side is a stack that holds a set of %^YELLOW%^fine "
-               "robes%^RESET%^, a %^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^"
-               "sash%^RESET%^ a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^. You could try to %^YELLOW%^take%^RESET%^ something... Off to the "
-               "side is another pile, mostly bracers, but a dull red ward flickers above them that prevents you from reaching out to "
-               "take one.";
+        return "Various other items are strewn about. Off to the side is a stack that holds a set of %^YELLOW%^fine robes%^RESET%^, a %^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^sash%^RESET%^ a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to theside is another pile, mostly bracers, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     return "Most of the other items appear to have been taken already, and the few that are left are screened by some "
            "sort of dull crimson ward that prevents you from getting close to them.";
