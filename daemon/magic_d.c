@@ -16,11 +16,14 @@
 #include <std.h>
 #include <dirs.h>
 #include <daemons.h>
+#include <security.h>
 #include <schoolspells.h>
 
 #define CQCN spell->query_caster()->query_cap_name()
 #define VCASTERS ({"bard", "mage", "psion", "cleric", "ranger", "sorcerer", "paladin", "druid", "psywarrior"})
 inherit DAEMON;
+
+#define MAGIC_D_SAVE "/daemon/save/magic_d"
 
 #include <spell_domains_spells.h>
 
@@ -28,10 +31,14 @@ void index_spells();
 mapping allSpells;
 mapping spellIndex;
 
-mapping quick_names = ([]);
+mapping quick_names;
 
 void create(){
     ::create();
+
+    seteuid(UID_ROOT);
+    restore_object(MAGIC_D_SAVE);
+    seteuid(geteuid());
 
     if (!sizeof(spellIndex)) {
         index_spells();
@@ -240,6 +247,11 @@ void index_spells()
             allSpells[tclass] += ([key:spellIndex[key]["levels"][tclass]]);
         }
     }
+
+    seteuid(UID_ROOT);
+    save_object(MAGIC_D_SAVE);
+    seteuid(geteuid());
+
 }
 
 /**
@@ -656,6 +668,15 @@ string expand_quick_name(string quick_name)
     } else {
         return quick_names[quick_name];
     }
+}
+
+/**
+ * Cleans quick names. You'll need to regenerate index with
+ * index_spells() to generate new set. Use this for debug only.
+ */
+void clean_quick_names()
+{
+    quick_names = ([]);
 }
 
 //special function for the way of the elements monk feat
