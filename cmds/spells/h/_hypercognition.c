@@ -12,7 +12,7 @@ void dest_effect();
 void create() {
     ::create();
     set_spell_name("hypercognition");
-    set_spell_level(([ "psion" : 2 ]));
+    set_spell_level(([ "psion" : 3 ]));
     set_discipline("seer");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS hypercognition");
