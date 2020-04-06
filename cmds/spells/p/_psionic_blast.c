@@ -34,7 +34,6 @@ void spell_effect(int prof)
     string myname, yourname;
     
     myname = caster->QCN;
-    yourname = target->QCN;
     
     tell_object(caster, "%^CYAN%^You place your fingers to the side of your head and bring forth a blast of psychic energy!%^RESET%^");
     tell_room(place, "%^CYAN%^" + sprintf("%s places %s fingers to the side of %s head and concentrates!", myname, caster->query_possessive(), caster->query_possessive()) + "%^RESET%^", ({ caster }));
@@ -60,7 +59,7 @@ void spell_effect(int prof)
         {
             tell_object(ob, "%^BOLD%^The psionic energy slams into you, leaving you stunned!");
             tell_object(caster, "%^BOLD%^The psionic energy slams into " + ob->QCN + ", leaving them stunned!");
-            ob->set_paralyzed(roll_dice(2,4) * 8);
+            ob->set_paralyzed(roll_dice(2,4) * 8, "%^BOLD%^You are stunned by the psychic blast!");
         }
     }
       
