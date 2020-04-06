@@ -1,4 +1,4 @@
-#define DISCIPLINESPELLS ({ "animal affinity","clairvoyance","thicken skin","hypercognition", "sending","chameleon","energy cone","call crystals","aura sight","control object", "psionic teleport","hail of crystals","astral construct","speak with dead","mindnet","tornado blast","planar portal","planar sending","reddopsi","energy current","domination","prying eyes","modify memory"});
+#define DISCIPLINESPELLS ({"animal affinity","clairvoyance","thicken skin","hypercognition", "sending","chameleon","energy cone","call crystals","aura sight","control object", "psionic teleport","hail of crystals","astral construct","speak with dead","mindnet","tornado blast","planar portal","planar sending","reddopsi","energy current","domination","prying eyes","modify memory"});
 
 #define DISCIPLINESPELLSBYLEVEL ([\
     0:({}),\
@@ -9,18 +9,18 @@
     5:({"psionic teleport","hail of crystals","energy current"}),\
     6:({}),\
     7:({"astral construct","speak with dead","reddopsi","lesser transformation"}), \
-    8:({"mindnet", "domination", "prying eyes"}), \
+    8:({"mindnet", "domination", "prying eyes"}),                                     \
     9:({"tornado blast","planar portal"}),\
 ]);
 
 // The only improtant array as of 2020
 #define DISCIPLINESPELLSBYDISCIPLINE ([\
-    "egoist":({"thicken skin","animal affinity","chameleon","deathward","breath of life","restoration","lesser transformation","shadow double","shadow body"}),\
-    "seer":({"dissonance","clairvoyance","hypercognition","escape detection","remote viewing","legend lore","prying eyes","fortune fate","foresight"}),\
-    "shaper":({"minor creation","astral construct","ectoplasmic cocoon","creation","hail of crystals","ruin","rebirth","create demiplane","implosion"}),\
-    "kineticist":({"animate object","energy emanation","energy cone","hold person","energy current","bolt of force","reddopsi","crushing hand","tornado blast"}),\
-    "nomad":({"expeditious retreat","leaps and bounds","trace teleport","dimensional anchor","psionic teleport","planar sending","planar portal","astral projection","timestop"}),\
-    "telepath":({"command","charm monster","hostile empathic transfer","modify memory","domination","serenity","visions from within","mindnet","overwhelming presence"}),\
+    "egoist":({"animal affinity","chameleon","thicken skin","lesser transformation"}),             \
+    "seer":({"clairvoyance","hypercognition","aura sight","sending","speak with dead","prying eyes"}), \
+    "shaper":({"call crystals","hail of crystals","astral construct","planar portal","psionic teleport"}), \
+    "kineticist":({"control object","energy cone","energy current","reddopsi","tornado blast"}),\
+    "nomad":({"call crystals","hail of crystals","astral construct", "planar sending","planar portal","psionic teleport"}), \
+    "telepath":({"domination","modify memory","sending","speak with dead","mindnet"}),\
 ]);
 
 #define DISCIPLINEFILES ([\

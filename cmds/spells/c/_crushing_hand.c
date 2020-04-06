@@ -14,9 +14,10 @@ void create(){
     ::create();
     set_author("circe");
     set_spell_name("crushing hand");
-    set_spell_level(([ "mage":9]));
+    set_spell_level( ([ "mage" : 9, "psion" : 8 ]) );
     set_spell_sphere("invocation_evocation");
     set_domains("strength");
+    set_discipline("kineticist");
     set_syntax("cast CLASS crushing hand");
     set_description("This spell will call forth a crushing hand to help defend the caster as well as lend its strength to the battles the caster may face.  While the hand is under the caster's control, he may <command hand to [action]> or <dismiss> the crushing hand if it is no longer needed.");
     set_verbal_comp();

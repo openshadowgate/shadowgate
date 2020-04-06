@@ -8,8 +8,9 @@ string myenergy, mycolor;
 void create() {
     ::create();
     set_spell_name("energy emanation");
-    set_spell_level(([ "psywarrior" : 2 ]));
+    set_spell_level( ([ "psywarrior" : 2, "psion" : 2 ]) );
     set_spell_sphere("combat");
+    set_discipline("kineticist");
     set_syntax("cast CLASS energy emanation [on cold|electricity|fire|sonic]");
     set_description("This power surrounds the psionic character in a glowing "
        "halo of energy that lashes out at all those nearby. The amount of damage "
