@@ -48,7 +48,6 @@ void create()
     setupName("watch");
     set_race("human");
     set_hd(15 + random(20), 1);
-    set_hp(roll_dice(query_hd(), 15));
     set_class("fighter");
     set_mlevel("fighter", query_hd());
     set_guild_level("fighter", query_hd());
