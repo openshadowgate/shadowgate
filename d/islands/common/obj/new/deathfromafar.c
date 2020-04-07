@@ -153,7 +153,7 @@ int ammo_fun(string str)
         return notify_fail("The bow cannot use that type of ammunition!");
     }
     if (!TO->query_wielded()) {
-        return notify_fail("You must wield the bow to configure its ammunition will upon it!");
+        return notify_fail("You must wield the bow to configure its ammunition!");
     }
     set_special_mat(str);
     tell_object(ETO, "%^ORANGE%^You ready your bow to use %^BOLD%^%^WHITE%^" + str + " %^RESET%^%^ORANGE%^arrows.%^RESET%^");
