@@ -15,9 +15,10 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("fortune fate");
-    set_spell_level(([ "cleric" : 8 ]));
+    set_spell_level(([ "cleric" : 8, "psion" : 8 ]));
     set_spell_sphere("healing");
     set_spell_domain("fate");
+    set_discipline("seer");
     set_syntax("cast CLASS fortune fate on TARGET");
     set_description("This spell will cause the fates to smile on the target.  When cast, it will activate a healing spell "
 "that will remain in reserve up until the target falls below 25% of their maximum health.  When that point is reached, a "

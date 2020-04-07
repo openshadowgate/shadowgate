@@ -11,7 +11,8 @@ object *mons = ({});
 void create() {
     ::create();
     set_spell_name("creation");
-    set_spell_level(([ "psion" : 5 ]));
+    set_spell_level(([ "psion" : 4 ]));
+    set_discipline("shaper");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS creation");
     set_description("This power creates psionic fighters to protect the psion.  These warriors do not truly exist but "

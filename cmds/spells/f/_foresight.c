@@ -11,8 +11,9 @@ int duration;
 void create() {
     ::create();
     set_spell_name("foresight");
-    set_spell_level(([ "mage" : 7, "bard" : 4,"oracle":7, "druid":9]));
+    set_spell_level(([ "mage" : 7, "bard" : 4,"oracle":7, "druid":9, "psion" : 9 ]));
     set_spell_sphere("divination");
+    set_discipline("seer");
     set_mystery("battle");
     set_syntax("cast CLASS foresight [on TARGET]");
     set_damage_desc("clvel/16 to armor bonus, clevel/12 to reflex save, death ward feat");

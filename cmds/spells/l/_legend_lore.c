@@ -8,8 +8,9 @@ int i;
 void create() {
     ::create();
     set_spell_name("legend lore");
-    set_spell_level(([ "bard" : 1, "mage" : 6, "inquisitor" : 6, "oracle":6,]));
+    set_spell_level(([ "bard" : 1, "mage" : 6, "inquisitor" : 6, "oracle":6, "psion" : 6 ]));
     set_mystery("lore");
+    set_discipline("seer");
     set_domains("knowledge");
     set_spell_sphere("divination");
     set_syntax("cast CLASS legend lore on <object>");
