@@ -11,7 +11,7 @@ int theProf;
 create() {
     ::create();
     set_spell_name("comprehend languages");
-    set_spell_level(([ "cleric" : 3 ]));
+    set_spell_level(([ "classless" : 3 ]));
     set_spell_sphere("divination");
     set_spell_domain("knowledge");
     set_syntax("cast CLASS comprehend languages on TARGET");

@@ -8,7 +8,7 @@ int theProf;
 void create() {
     ::create();
     set_spell_name("tongues");
-    set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor": 2, "oracle":3, "cleric":3]));
+    set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor": 2, "cleric":3]));
     set_spell_sphere("alteration");
     set_domains("knowledge");
     set_mystery("lore");
