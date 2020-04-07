@@ -9,7 +9,7 @@ void create()
     set_obvious_short("%^BOLD%^%^BLACK%^aged %^RESET%^%^ORANGE%^y%^RED%^e%^ORANGE%^w longbow%^RESET%^");
     set_name("Liluminel - Death from Afar");
     set_short("%^RESET%^%^ORANGE%^L%^RED%^i%^ORANGE%^lum%^RED%^i%^ORANGE%^nel - %^BOLD%^%^BLACK%^D%^RESET%^e%^BOLD%^%^BLACK%^a%^RESET%^t%^BOLD%^%^BLACK%^h %^RESET%^%^ORANGE%^From Afar%^RESET%^");
-    set_id(({ "bow", "longbow", "yew longbow", "death bow", "liluminel", "liluminel - death from afar", "klauthbow" }));;
+    set_id(({ "bow", "longbow", "yew longbow", "death bow", "liluminel", "liluminel - death from afar", "klauthbow", "death arrow" }));;
     set_long("%^RESET%^This is a mastercrafted longbow made from a single piece of carefully carved %^BOLD%^%^BLACK%^aged %^RESET%^%^ORANGE%^y%^RED%^e%^ORANGE%^w%^RESET%^.  It bears a %^RESET%^%^MAGENTA%^gentle %^RESET%^curve to its center, and where it curls back upon itself at each end  When properly strung, its total length is just under five feet from tip to tip.  The bow grows in thickness towards the center, allowing a proper balance between %^RESET%^%^RED%^tension %^RESET%^and %^BOLD%^%^RED%^compression%^RESET%^.  %^YELLOW%^Ornate bands %^RESET%^of very thin %^BOLD%^%^WHITE%^mithril %^RESET%^are positioned on either side of the grip as well atop either end where it is strung.  The bands themselves are engraved with ornate, %^RESET%^%^GREEN%^v%^BOLD%^i%^RESET%^%^GREEN%^n%^BOLD%^e%^WHITE%^-%^RESET%^%^GREEN%^l%^BOLD%^i%^RESET%^%^GREEN%^k%^BOLD%^e %^RESET%^motifs that crawl their way along the metal.  The reverse-twisted bowstring, made from a combination of %^BOLD%^%^GREEN%^hemp %^RESET%^and %^BOLD%^%^WHITE%^linen%^RESET%^, appears %^BOLD%^%^MAGENTA%^enchanted %^RESET%^against %^BOLD%^%^BLUE%^moisture%^RESET%^.  Overall this weapon is one of the highest quality bows you have ever laid eyes upon.");
     set_lore("Legends say this longbow was made by the elven bowyer Daratrine Glynmyar in the year 450SG.  She was widely regarded as a once-in-a-generation talent when it came to shaping wood into instruments of death.  This is one of her finest works, supposedly made for Thasinia Elalee, an Arcane Archer in the corps at Ashta'Rathai.  Thasinia went missing sometime around the year 537SG, rumored to have been taken down by a swarm of invaders.  Neither her body nor her weapon were ever found.  Legends also state that enchantments placed on the bow allow its weilder to %^BOLD%^%^WHITE%^<configure> %^RESET%^its ammunition to either be %^BOLD%^%^RED%^normal%^RESET%^, %^BOLD%^%^WHITE%^silver%^RESET%^, or %^BOLD%^%^BLACK%^cold iron%^RESET%^.");
     set_value(250000);
@@ -25,6 +25,7 @@ void create()
     set_wield((: TO, "wieldme" :));
     set_unwield((: TO, "unwieldme" :));
     set_property("quest required", "%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
+    set_ammo("death arrow");
 }
 
 void init()
@@ -34,6 +35,21 @@ void init()
     if (!userp(ETO)) {
         return;
     }
+}
+
+int use_shots()
+{
+    return 1;
+}
+
+int query_shots()
+{
+    return -1;
+}
+
+string query_ammo_type()
+{
+    return "death arrow";
 }
 
 int wieldme()
@@ -128,16 +144,6 @@ int hitme(object targ)
     return 1;
 }
 
-int use_shots()
-{
-    return 1;
-}
-
-int query_shots()
-{
-    return -1;
-}
-
 int ammo_fun(string str)
 {
     if (!str) {
@@ -147,7 +153,7 @@ int ammo_fun(string str)
         return notify_fail("The bow cannot use that type of ammunition!");
     }
     if (!TO->query_wielded()) {
-        return notify_fail("You must wield the bow to impose your will upon it!");
+        return notify_fail("You must wield the bow to configure its ammunition will upon it!");
     }
     set_special_mat(str);
     tell_object(ETO, "%^ORANGE%^You ready your bow to use %^BOLD%^%^WHITE%^" + str + " %^RESET%^%^ORANGE%^arrows.%^RESET%^");

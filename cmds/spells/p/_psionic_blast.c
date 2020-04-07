@@ -53,7 +53,7 @@ void spell_effect(int prof)
     
     foreach(object ob in victims)
     {
-        if(do_save(ob))
+        if(do_save(ob, 0))
             tell_object(ob, "You manage to shrug off the psionic blast.");
         else
         {
