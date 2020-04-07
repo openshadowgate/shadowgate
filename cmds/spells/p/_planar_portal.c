@@ -12,7 +12,7 @@ object endplace;
 void create(){
     ::create();
     set_spell_name("planar portal");
-    set_spell_level(([ "psion" : 9 ]));
+    set_spell_level(([ "psion" : 7 ]));
     set_discipline("nomad");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS planar portal to <location>");

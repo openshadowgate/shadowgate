@@ -6,8 +6,9 @@ void create()
 {
     ::create();
     set_spell_name("command");
-    set_spell_level(([ "paladin" : 1, "cleric" : 1, "inquisitor" : 1 ]));
+    set_spell_level(([ "paladin" : 1, "cleric" : 1, "inquisitor" : 1, "psion" : 1 ]));
     set_spell_sphere("enchantment_charm");
+    set_discipline("telepath");
     set_syntax("cast CLASS command on TAGET to COMMAND");
     set_description("You intone a spelled command that the target has no choice but to obey. If the target succeeds the save or is immune, they will attack the caster.");
     set_save("will");

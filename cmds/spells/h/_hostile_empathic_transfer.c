@@ -8,7 +8,8 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("hostile empathic transfer");
-    set_spell_level(([ "psywarrior" : 3 ]));
+    set_spell_level(([ "psywarrior" : 3, "psion" : 3 ]));
+    set_discipline("telepath");
     set_syntax("cast CLASS hostile empathic transfer");
     set_description("By manifesting this power, the psionic character is able "
        "to transfer some of his own injuries to his foes. The amount of hit "

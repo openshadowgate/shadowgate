@@ -11,7 +11,8 @@ void create() {
     ::create();
     set_author("circe");
     set_spell_name("dimension slide");
-    set_spell_level(([ "psywarrior" : 3 ]));
+    set_spell_level(([ "psywarrior" : 3, "psion" : 1 ]));
+    set_discipline("nomad");
     set_syntax("cast CLASS dimension slide on DIRECTION");
     set_description("Manifesting this power allows the psionic character "
        "to teleport a short distance away. The power can be used in combat "

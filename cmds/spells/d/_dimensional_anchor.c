@@ -11,8 +11,9 @@ void create()
 {
     ::create();
     set_spell_name("dimensional anchor");
-    set_spell_level(([ "cleric" : 4, "inquisitor" : 3, "mage" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "inquisitor" : 3, "mage" : 4, "psion" : 4 ]));
     set_spell_sphere("abjuration");
+    set_discipline("nomad");
     set_syntax("cast CLASS dimensional anchor on TARGET");
     set_damage_desc("prevents extraplanar travel");
     set_description("A green ray springs from your hand. You must make a ranged touch attack to hit the target. Any creature or object struck by the ray is covered with a shimmering emerald field that blocks extradimensional travel based on their caster level.");

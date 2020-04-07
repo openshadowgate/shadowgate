@@ -6,9 +6,10 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("overwhelming presence");
-    set_spell_level(([ "cleric" : 9, "bard" : 6, "mage" : 9, "inquisitor" : 6, "oracle" : 9 ]));
+    set_spell_level(([ "cleric" : 9, "bard" : 6, "mage" : 9, "inquisitor" : 6, "oracle" : 9, "psion" : 9 ]));
     set_spell_sphere("enchantment_charm");
     set_mystery("dragon");
+    set_discipline("telepath");
     set_domains("vigilance");
     set_syntax("cast CLASS overwhelming presence");
     set_damage_desc("trips attackers, 1d6 to wisdom");

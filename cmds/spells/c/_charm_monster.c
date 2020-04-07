@@ -17,8 +17,9 @@ void end_charmed(object target,object caster);
 void create() {
     ::create();
     set_spell_name("charm monster");
-    set_spell_level(([ "bard" : 3, "mage" : 1, "ranger" : 2 ]));
+    set_spell_level(([ "bard" : 3, "mage" : 1, "ranger" : 2, "psion" : 2 ]));
     set_spell_sphere("enchantment_charm");
+    set_discipline("telepath");
     set_mystery("nature");
     set_domains(({"animal", "charm"}));
     set_syntax("cast CLASS charm monster on TARGET");
