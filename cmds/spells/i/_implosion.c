@@ -5,8 +5,9 @@ void create()
 {
     ::create();
     set_spell_name("implosion");
-    set_spell_level(([ "cleric" : 9]));
+    set_spell_level(([ "cleric" : 9, "psion" : 9 ]));
     set_spell_sphere("invocation_evocation");
+    set_discipline("shaper");
     set_syntax("cast CLASS implosion on TARGET");
     set_damage_desc("untyped");
     set_description("With this spell caster attempts to crush opponent.");

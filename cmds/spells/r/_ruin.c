@@ -6,8 +6,9 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("ruin");
-    set_spell_level(([ "mage" : 5 ]));
+    set_spell_level(([ "mage" : 5, "psion" : 6 ]));
     set_spell_sphere("alteration");
+    set_discipline("shaper");
     set_syntax("cast CLASS ruin on TARGET");
     set_damage_desc("untyped");
     set_description("With this spell mage attempts to disrupt the very creation of her target to transform them into nothing.");
