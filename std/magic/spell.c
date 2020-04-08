@@ -2257,7 +2257,7 @@ void define_base_spell_level_bonus()
     }
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power")) {
-        sdamage_adjustment += 2;
+        sdamage_adjustment += 4;
     }
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
@@ -2274,7 +2274,7 @@ void define_base_damage(int adjust)
 
         blasttype = (string)caster->query("warlock_blast_type");
         if (blasttype == "utterdark") {
-            sdamage = roll_dice(clevel, 10) + roll_dice(1, clevel / 2);
+            sdamage = roll_dice(clevel, 11);
         }else {
             sdamage = roll_dice(clevel, 10);
         }

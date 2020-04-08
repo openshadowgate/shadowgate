@@ -10,7 +10,7 @@ void create()
     feat_category("ShadowAdept");
     feat_name("gift of the shadows");
     feat_prereq("Shadow adept L1");
-    feat_desc("A shadow adept gains the use of several new spells:
+    feat_desc("A shadow adept gains ability to store spells in his shadow, more reliable than an archmage, gaining additional four spell slots per level. In addition to that, he will have some shadow themed spells always mastered:
 
 umbral sight, shield of shadows, shadow vortex, night armor, darkbolt, shadow blast, shadow double, nightmare maw, shadow nova");
     permanent(1);
