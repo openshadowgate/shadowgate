@@ -24,12 +24,7 @@ void create() {
 "it and <command shadow to follow>. This is a greater summons, and cannot be used simultaneously with other greater summons.");
     set_verbal_comp();
     set_somatic_comp();
-    set_components(([
-      "mage" : ([ "onyx dust" : 1, ]),
-    ]));
     set_helpful_spell(1);
-    //set_feats_required(([ "mage" : "shadow adept", "sorcerer" : "shadow_adept" ]));
-    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
 }
 
 int preSpell(){

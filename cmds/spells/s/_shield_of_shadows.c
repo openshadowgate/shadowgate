@@ -17,8 +17,6 @@ void create() {
       "mage" : ([ "clear crystal" : 1, ]),
     ]));
     set_helpful_spell(1);
-    //set_feats_required(([ "mage" : "shadow adept", "sorcerer" : "shadow_adept" ]));
-    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
 }
 
 int preSpell(){

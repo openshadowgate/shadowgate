@@ -18,7 +18,6 @@ void create()
     set_target_required(1);
     set_save("fort");
     splash_spell(1);
-    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
 }
 
 string query_cast_string()

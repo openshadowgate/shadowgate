@@ -22,7 +22,6 @@ void create()
     set_save("reflex");
     aoe_spell(1);
     set_aoe_message("%^RESET%^%^MAGENTA%^(%^BOLD%^%^BLACK%^p%^RESET%^%^MAGENTA%^o%^BOLD%^%^BLACK%^p%^RESET%^%^MAGENTA%^u%^BOLD%^%^BLACK%^l%^RESET%^%^MAGENTA%^a%^BOLD%^%^BLACK%^t%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^d w%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^th sh%^RESET%^%^MAGENTA%^a%^BOLD%^%^BLACK%^d%^RESET%^%^MAGENTA%^o%^BOLD%^%^BLACK%^w v%^RESET%^%^MAGENTA%^o%^BOLD%^%^BLACK%^rt%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^c%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^s%^RESET%^%^MAGENTA%^)%^RESET%^");
-    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
 }
 
 string query_cast_string()

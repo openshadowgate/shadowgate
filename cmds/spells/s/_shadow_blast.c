@@ -18,7 +18,6 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(1);
-    set_feats_required(([ "mage" : "gift of the shadows", "sorcerer" : "gift of the shadows", "shadow_adept" : "gift of the shadows" ]));
     set_save("reflex");
 }
 
