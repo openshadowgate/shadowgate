@@ -63,6 +63,9 @@ int magic_arsenal_feat(int num)
     if (FEATS_D->usable_feat(TO, "greater arsenal")) {
         num += 4;
     }
+    if (FEATS_D->usable_feat(TO, "gift of the shadows")) {
+        num += 4;
+    }
     return num;
 }
 

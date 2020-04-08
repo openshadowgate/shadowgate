@@ -25,7 +25,6 @@ void create()
                     ]));
     set_immunities(({ "electricity" }));
     set_save("reflex");
-    debug_saves(1);
 }
 
 string query_cast_string()
