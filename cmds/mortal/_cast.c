@@ -6,7 +6,6 @@
 #include <std.h>
 #include <daemons.h>
 #include <schoolspells.h>
-#include <disciplinespells.h>
 #include <spell_domains.h>
 
 inherit DAEMON;

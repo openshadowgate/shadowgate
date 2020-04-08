@@ -3,8 +3,6 @@
 #include <daemons.h>
 #include <magic.h>
 #include <schoolspells.h>
-#include <disciplinespells.h>
-#include <bloodlines.h>
 inherit "/std/innate";
 
 /**
@@ -784,13 +782,10 @@ mapping query_mastered_bonus()
 {
     mapping tmp = ([]);
 
-    {
-        if (TO->is_class("psion")) {
-            string mydis = (string)TO->query_discipline();
-            mapping powersbydiscipline = DISCIPLINESPELLSBYDISCIPLINE;
-            if (sizeof(powersbydiscipline[mydis])) {
-                tmp["psion"] = powersbydiscipline[mydis];
-            }
+    if (TO->is_class("psion")) {
+        string mydis = (string)TO->query_discipline();
+        if (stringp(mydis)) {
+            tmp["psion"] = MAGIC_SS_D->query_class_special_spells("psion", mydis);;
         }
     }
 
@@ -798,7 +793,7 @@ mapping query_mastered_bonus()
         string mybl = (string)TO->query_bloodline();
 
         if (stringp(mybl)) {
-            tmp["sorcerer"] = BLOODLINE_SPELLS[mybl];
+            tmp["sorcerer"] = MAGIC_SS_D->query_class_special_spells("sorcerer", mybl);
         }
     }
 
@@ -806,27 +801,19 @@ mapping query_mastered_bonus()
         string mybl = (string)TO->query_mystery();
 
         if (stringp(mybl)) {
-            tmp["oracle"] = MAGIC_SS_D->query_class_special_spells(mybl);
-            tmp["oracle"] += ({
-                    "cure light wounds", "cause light wounds",
-                        "cure moderate wounds", "cause moderate wounds",
-                        "cure serious wounds", "cause serious wounds",
-                        "cure critical wounds", "cause critical wounds",
-                        "mass cure light wounds", "mass cause light wounds",
-                        "mass cure moderate wounds", "mass cause moderate wounds",
-                        "mass cure serious wounds", "mass cause serious wounds",
-                        "mass cure critical wounds", "mass cause critical wounds",});
+            tmp["oracle"] = MAGIC_SS_D->query_class_special_spells("oracle", mybl);
+            tmp["oracle"] += MAGIC_SS_D->query_class_special_spells("oracle", "all");
         }
     }
 
 
-    if (TO->is_class("mage") || TO->is_class("sorcerer")) {
+    if (TO->is_class("shadow_adept")) {
         if (FEATS_D->usable_feat(TO, "gift of the shadows")) {
             string baseclass = TO->query("shadow_adept_base_class");
             if (!arrayp(tmp[baseclass])) {
                 tmp[baseclass] = ({});
             }
-            tmp[baseclass] += ({ "umbral sight", "shield of shadows", "shadow vortex", "night armor", "darkbolt", "shadow blast", "shadow double", "nightmare maw", "shadow nova" });
+            tmp[baseclass] += MAGIC_SS_D->query_class_special_spells("shadow_adept", "all");
         }
     }
 
@@ -860,19 +847,9 @@ mapping query_mastered_bonus()
         }
     }
 
-    {
-        if (TO->is_class("warlock")) {
-            tmp["warlock"] = (({ "eldritch blast", "eldritch claws", "summon companion", "eldritch bow", "detect magic", "eldritch glaive" }));
-            if ((int)TO->query_class_level("warlock") > 4) {
-                tmp["warlock"] += (({ "eldritch chain" }));
-            }
-            if ((int)TO->query_class_level("warlock") > 14) {
-                tmp["warlock"] += (({ "eldritch burst" }));
-            }
-        }
-    }
-
     if (TO->is_class("warlock")) {
+        tmp["warlock"] = MAGIC_SS_D->query_class_special_spells("warlock", "all");
+
         if (TO->is_class("hellfire warlock")) {
             tmp["warlock"] += ({ "brimstone blast" });
         }
