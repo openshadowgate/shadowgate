@@ -5,7 +5,6 @@
 #include <schoolspells.h>
 #include <disciplinespells.h>
 #include <bloodlines.h>
-#include <mysteries.h>
 inherit "/std/innate";
 
 /**
@@ -807,7 +806,7 @@ mapping query_mastered_bonus()
         string mybl = (string)TO->query_mystery();
 
         if (stringp(mybl)) {
-            tmp["oracle"] = MYSTERY_SPELLS[mybl];
+            tmp["oracle"] = MAGIC_SS_D->query_class_special_spells(mybl);
             tmp["oracle"] += ({
                     "cure light wounds", "cause light wounds",
                         "cure moderate wounds", "cause moderate wounds",

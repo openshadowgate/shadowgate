@@ -57,6 +57,7 @@
 #define LOCALPOST_D          (DIR_DAEMONS+"/localpost")
 #define LOGROT_D (DIR_DAEMONS+"/logrotate_d")
 #define MAGIC_D              (DIR_DAEMONS+"/magic_d")
+#define MAGIC_SS_D              (DIR_DAEMONS+"/magic_ss_d")
 #define MESSAGING_D  (DIR_DAEMONS+"/messaging_d")
 #define MONSTER_FEAT_D       (DIR_DAEMONS+"/monster_feat_d")
 #define MULTI_ALT_D          (DIR_DAEMONS+"/multi_alt_d")

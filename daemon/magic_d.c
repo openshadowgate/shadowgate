@@ -33,7 +33,8 @@ mapping spellIndex;
 
 mapping quick_names;
 
-void create(){
+void create()
+{
     ::create();
 
     seteuid(UID_ROOT);
