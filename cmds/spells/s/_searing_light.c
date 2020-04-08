@@ -26,6 +26,7 @@ void create()
     set_damage_desc("divine damage, counts as two spell levels higher vs undead for damage calcs");
     set_immunities(({ "spell_immunity" }));
     set_save("reflex");
+    splash_spell(1);
 }
 
 int preSpell()
