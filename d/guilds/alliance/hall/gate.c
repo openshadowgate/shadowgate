@@ -26,11 +26,11 @@ void create()
     set_locked("gate", 1, "lock");
     lock_difficulty("gate", get_phouse_lock_dc("epic"), "lock");
 
-    set_post_exit_functions(({ "out" }), ({ "gone_out" }));
+    //set_post_exit_functions(({ "out" }), ({ "gone_out" })); causing bugs, will fix later - Odin
 }
 
-void gone_out()
-{
+/*void gone_out()
+   {
     tell_object(TP, "As you leave, you see a sign above you that says %^BOLD%^%^WHITE%^'Remember to lock the gate as you leave!'%^RESET%^");
     return;
-}
+   }*/

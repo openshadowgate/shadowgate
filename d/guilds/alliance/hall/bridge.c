@@ -33,7 +33,7 @@ void create()
     other->set_locked("gate", 1, "lock");
     other->set_open("gate", 0);
     set_trap_functions(({ "gate" }), ({ "lock_trap" }), ({ "pick" }), ({ get_phouse_lock_dc("epic") }));
-    set_post_exit_functions(({ "enter" }), ({ "entered" }));
+    //set_post_exit_functions(({ "enter" }), ({ "entered" })); Causing bugs
 }
 
 int lock_trap(string str)
@@ -57,8 +57,8 @@ int lock_trap(string str)
     return 1;
 }
 
-void entered()
-{
+/*void entered()
+   {
     tell_object(TP, "As you enter, you see a sign above you that says %^BOLD%^%^WHITE%^'Remember to lock the gate as you enter!'%^RESET%^");
     return;
-}
+   }*/
