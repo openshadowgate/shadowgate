@@ -40,7 +40,7 @@ void create(){
    	set_value(30);
    	set_type("ring");
    	set_limbs(({"waist"}));
-   	set_size(random(2)+1); 
+   	set_size(random(2)+1);
         set_property("repairtype",({ "tailor" }));
 }
 
@@ -74,10 +74,10 @@ case "cotton":
 		" prized fabric for its versatility and the way it takes"+
 		" color.  This simple looking skirt is one that any woman"+
 		" could dress up or down with the right accessories, making"+
-		" it as versatile as the fabric.\n");  
+		" it as versatile as the fabric.\n");
    	TO->set_name("cotton skirt");
    	TO->set_short("%^RESET%^"+COLOR+" cotton skirt%^RESET%^");
-      TO->set_id(({"skirt","cotton skirt"}));   
+      TO->set_id(({"skirt","cotton skirt"}));
       break;
 case "lace":
       TO->set_long("Finely woven "+COLOR+" %^RESET%^lace overlays"+
@@ -106,7 +106,7 @@ case "velvet":
       break;
 case "tweed":
       TO->set_long("This heavy tweed skirt will keep any lady"+
-		" warm during the colder moths.  The wool tweed has"+
+		" warm during the colder months.  The wool tweed has"+
 		" been dyed "+COLOR+" %^RESET%^and features a subtle"+
 		" check pattern in a matching hue.  The straight skirt"+
 		" comes to the tops of the calves on the wearer, helping"+

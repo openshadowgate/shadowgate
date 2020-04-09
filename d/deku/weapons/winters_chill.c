@@ -9,15 +9,15 @@ void adj_charges(int x);
 void create(){
 	::create();
 	set_name("staff");
-	set_id(({ "staff", "winters chill", "staff of winters chill", 
+	set_id(({ "staff", "winters chill", "staff of winters chill",
     "winters chill staff","graystaff","graywood staff"}));
 
 	set_obvious_short("A gnarled gray wood staff with an ice blue orb");
-	
+
     set_short("%^BOLD%^%^WHITE%^Staff of w%^BLUE%^i%^BOLD%^%^WHITE%^"+
     "nt%^BLUE%^e%^BOLD%^%^WHITE%^r's ch%^RESET%^%^CYAN%^i"+
     "%^BOLD%^%^WHITE%^ll%^RESET%^");
-	
+
     set_long("%^BOLD%^%^WHITE%^This staff is made from a %^BLUE%^"+
     "mysterious%^BOLD%^%^WHITE%^ gray and gnarled piece of wood "+
     "that spans approximately eight feet in length.  The entire staff "+
@@ -38,12 +38,12 @@ void create(){
     "the exact center of the staff.  An almost invisible "+
     "%^BLUE%^inscription%^BOLD%^%^WHITE%^ rests between the "+
     "two eyes.%^RESET%^");
-	
+
 	set_read("%^CYAN%^Winter's fury is never long dormant, %^RESET%^\n\n"+
     "You may send the %^BLUE%^frost%^RESET%^ of winter against him, \n"+
     "You may make him %^BLUE%^absorb%^RESET%^ the cold\n"+
     "and you may %^BLUE%^chill%^RESET%^ him with its touch.\n");
-    
+
     set_lore("%^CYAN%^These staves were formed with the sole "+
     "purpose of causing others to respect the cold of winter.  "+
     "They were not formed for either evil or good, but rather to "+
@@ -53,9 +53,9 @@ void create(){
     "several magics that would lend them aid in completing what "+
     "he intended for them.%^RESET%^");
 
-    set("langage",!random(2) ? "elven" : "common");	
+    set("langage",!random(2) ? "elven" : "common");
     set_weight(7);
-	
+
     set_value(5000);
 	set_type("bludgeoning");
 	set_prof_type("staff");
@@ -97,6 +97,7 @@ void adj_charges(int x) {
 
 void init(){
     ::init();
+    charges = 10 + random(11);
     add_action("frost_fingers","frost");
     add_action("chill_touch","chill");
     add_action("cone_of_cold","absorb");
@@ -122,7 +123,7 @@ int frost_fingers(string str) {
     object ob;
     int spe;
     spe = 2;
-    
+
     if(ETO->query_unconscious() || ETO->query_bound()
     || ETO->query_paralyzed()) {
         ETO->send_paralyzed_message("info",ETO);
@@ -144,7 +145,7 @@ int frost_fingers(string str) {
         if(living(ob) && objectp(ob)) {
             msg(ob);
             adj_charges(-spe);
-            new("/cmds/spells/f/_frost_breath")->use_spell(ETO,ob,10,10,"mage");
+            new("/cmds/spells/f/_frost_breath")->use_spell(ETO,ob,10,100,"cleric");
             return 1;
         }
     }
@@ -190,7 +191,7 @@ int cone_of_cold(string str) {
     object ob;
     int spe;
     spe = 3;
-    
+
     if(ETO->query_unconscious() || ETO->query_bound()
     || ETO->query_paralyzed()) {
         ETO->send_paralyzed_message("info",ETO);
@@ -212,12 +213,10 @@ int cone_of_cold(string str) {
         if(living(ob) && objectp(ob)) {
             msg(ob);
             adj_charges(-spe);
-            new("/cmds/spells/c/_cone_of_cold")->use_spell(ETO,ob,12,12,"mage");
+            new("/cmds/spells/c/_cone_of_cold")->use_spell(ETO,ob,12,100,"mage");
             return 1;
         }
     }
     write("You see no such target here.");
     return 1;
 }
-        
-

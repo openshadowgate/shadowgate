@@ -7,7 +7,7 @@ void create(){
     ::create();
     set_short("%^CYAN%^On the lake's edge.");
     set_long(
-      "Here in the middle of the jungle you have been wandering around in there is a fairly large lake.  here at the edge of the lake where you are standing it is fairly marshy, and you can see huge footprints in the mud, but you can also see that when the lake does start to deepen, it gets deeper fast.  In the middle of the lake there is an island."
+      "Here in the middle of the jungle you have been wandering around in there is a fairly large lake. Here at the edge of the lake where you are standing it is fairly marshy, and you can see huge footprints in the mud, but you can also see that when the lake does start to deepen, it gets deeper fast.  In the middle of the lake there is an island."
     );
     set_smell("default", "Around the lake it smells much like a swamp.");
     set_listen("default", "Mosquitios buzz around your head.");
