@@ -62,7 +62,7 @@ void spell_effect(int prof)
     tell_object(targ,"%^BOLD%^%^WHITE%^The color drains away from "+
        "your body, giving you a ghostly appearance!");
     toggle = 1;
-    targ->set_missChance(targ->query_missChance()+ 75);
+    targ->set_missChance(targ->query_missChance() + 65);
     targ->set_property("timeless body",1);
     targ->set_property("spelled", ({TO}) );
     spell_successful();
@@ -152,7 +152,7 @@ void execute_attack(){
 void dest_effect(){
    if (objectp(targ)) {
       if(toggle) {
-         chance = (int)targ->query_missChance()-75;
+         chance = (int)targ->query_missChance() - 65;
       }else{
          chance = (int)targ->query_missChance()-25;
       }
