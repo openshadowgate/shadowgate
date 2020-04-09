@@ -1,8 +1,8 @@
 //I've updated this and the sword - /d/deku/weapons/gray_longsword.c
 //to be base +3 and then +4 when used together - since I've been told
-//a lot of the stuff on deku now is +3/+4 - and since these 
+//a lot of the stuff on deku now is +3/+4 - and since these
 //work together and I think they are quite rarely ever used
-//together - it should be good - if anyone has a problem 
+//together - it should be good - if anyone has a problem
 //or notices one - please let me know, Saide - March 2nd, 2011
 
 #include <std.h>
@@ -13,7 +13,7 @@ object bro;
 
 void do_activate(object ob)
 {
-	if(!objectp(ETO)) return;	
+	if(!objectp(ETO)) return;
 	bro = ob;
 	if((int)TO->query_property("enchantment") < 2)
 	{
@@ -38,12 +38,12 @@ void do_normal()
 	activated = 0;
 }
 
-void create() 
+void create()
 {
     ::create();
     set_name("a suit of gray fullplate");
-	set_id(({"armor", "full plate", "plate armor",  
-	"exoskeleton", "eviscerator armor", "eviscerator plate", 
+	set_id(({"armor", "full plate", "plate armor",
+	"exoskeleton", "eviscerator armor", "eviscerator plate",
 	"eviscerator exoskeleton", "evisc_armor_worn", "plate", "fullplate"}));
 	set_short("%^BOLD%^%^BLACK%^The E%^BOLD%^%^MAGENTA%^v%^BOLD%^%^BLACK%^"+
 	"i%^BOLD%^%^MAGENTA%^sc%^BOLD%^%^BLACK%^e%^BOLD%^%^MAGENTA%^r"+
@@ -52,7 +52,7 @@ void create()
 	"x%^BOLD%^%^YELLOW%^o%^BOLD%^%^BLACK%^sk%^BOLD%^%^YELLOW%^"+
 	"e%^BOLD%^%^BLACK%^l%^BOLD%^%^YELLOW%^e%^BOLD%^%^BLACK%^t"+
 	"%^BOLD%^%^YELLOW%^o%^BOLD%^%^BLACK%^n%^RESET%^");
-	set_obvious_short("A suit of gray fullplate");	
+	set_obvious_short("A suit of gray fullplate");
 	set_long("%^BOLD%^%^BLACK%^This shiny armor has been forged from a "+
 	"mysterious gray metal.  It is thick and heavy, with only a thin, dirty "+
 	"padding on the inside to help against chafing.  "+
@@ -79,6 +79,7 @@ void create()
 
 	set_property("lore difficulty", 20);
 	set_property("enchantment", 2);
+        set_property("no repair", 1);
     set_item_bonus("positive energy resistance", 15);
     set_item_bonus("damage bonus", 2);
 	set_value(5000);
@@ -93,7 +94,7 @@ int wearme()
 	int x;
 	tell_object(ETO, "%^BOLD%^%^GREEN%^An eerie chill crawls "+
 	"up your spine....%^RESET%^");
-	if(ETO->query_highest_level() < 15) 
+	if(ETO->query_highest_level() < 15)
 	{
 		tell_object(ETO, "%^BOLD%^%^RED%^A hoarse voice whispers to you:%^RESET%^ "+
 		"You're far too weak to control me!%^RESET%^");
@@ -128,10 +129,10 @@ int wearme()
 	}
 	return 1;
 }
-	
+
 int removeme()
 {
-	if(activated) 
+	if(activated)
 	{
 		if(objectp(bro)) bro->do_normal();
 		do_normal();
@@ -140,7 +141,7 @@ int removeme()
 	"your armor...%^RESET%^");
 	tell_object(ETO, "%^BOLD%^%^RED%^A hoarse voice whispers to you:%^RESET%^ "+
 	"you weak, miserable, pathetic worm!! HOW DARE YOU???");
-	
+
 	if(!ETO->query_invis())
 	{
 		tell_room(EETO, ETOQCN+"%^BOLD%^%^GREEN%^ removes "+ETO->QP+

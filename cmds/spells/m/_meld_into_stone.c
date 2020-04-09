@@ -17,7 +17,6 @@ void create() {
     set_spell_level(([ "cleric" : 3,
                        "druid":3]));
     set_spell_sphere("alteration");
-    set_spell_domain("cavern");
     set_mystery("stone");
     set_syntax("cast CLASS meld into stone");
     set_description("This spell allows the caster to meld with nearby stone, rendering him invisible to most viewers.  "

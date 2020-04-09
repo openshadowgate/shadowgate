@@ -20,7 +20,6 @@ void create(){
     set_spell_name("silver sight");
     set_spell_level(([ "cleric" : 8 ]));
     set_spell_sphere("divination");
-    set_spell_domain("moon");
     set_syntax("cast CLASS silver sight on TARGET");
     set_description("This spell will invoke the power of the moon to grant the caster far-reaching sight, allowing her to "
 "watch what goes on in the target room.");

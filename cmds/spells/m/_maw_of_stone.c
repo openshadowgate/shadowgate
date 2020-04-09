@@ -1,5 +1,5 @@
 //Maw of Stone - based on stormwinds
-//new Cavern domain spell by ~Circe~ 
+//new Cavern domain spell by ~Circe~
 //Rebalancing domains 5/20/08
 #include <std.h>
 #include <magic.h>
@@ -14,7 +14,6 @@ void create(){
     set_spell_name("maw of stone");
     set_spell_level(([ "cleric" : 5 ]));
     set_spell_sphere("elemental earth");
-    set_spell_domain("cavern");
     set_syntax("cast CLASS maw of stone on TARGET");
     set_description("This spell conjures stone from the earth to surround the target, causing damage to all those "
 "attacking the caster initially.  Afterwards, it continues to gnaw on the target for a limited time.");
@@ -119,7 +118,7 @@ void do_gnaw() {
       damage_targ(target,"torso",dam/2,"bludgeoning");
    }
    count++;
-   if(!objectp(target)) { 
+   if(!objectp(target)) {
       dest_effect();
       return;
    }
@@ -133,7 +132,7 @@ void do_gnaw() {
    }
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if(objectp(caster)) { caster->remove_property("stone_maw"); }
     remove_call_out("do_gnaw");

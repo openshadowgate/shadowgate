@@ -76,6 +76,10 @@ int preSpell()
         tell_object(caster, "Both objects must be of the same type.");
         return 0;
     }
+    if (fob->query_property("no repair")) {
+        tell_object(caster, "The first object refuses siphoning.");
+        return 0;
+    }
     if (fob->query_property("enchantment") < 1) {
         tell_object(caster, "The first object must be enchanted.");
         return 0;

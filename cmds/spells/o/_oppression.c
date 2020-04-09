@@ -15,7 +15,7 @@ void create(){
     set_spell_name("oppression");
     set_spell_level(([ "cleric" : 2 ]));
     set_spell_sphere("alteration");
-    set_spell_domain("tyranny");
+    set_domains("tyranny");
     set_syntax("cast CLASS oppression");
     set_description("This spell will surround the caster with a dark aura of oppression.  Any creature caught in the aura "
 "that is not in the caster's party must make a saving throw or cower in fear from the caster.  Targets that are so "
@@ -26,7 +26,7 @@ void create(){
     set_save("will");
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^BLACK%^Clenching your fists, "+
         "you begin to growl the words of a prayer in a fearsome tone.");
@@ -36,11 +36,11 @@ string query_cast_string()
 	return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 10) * clevel;
-    if(sizeof(caster->query_classes()) == 1){ 
+    if(sizeof(caster->query_classes()) == 1){
        bonus = 1+((int)TO->query_guild_level("priest")/8);
     }
     else{
@@ -67,7 +67,7 @@ void execute_attack(){
     object *inven,room,*tmp;
     string party;
     int i;
-    
+
     ::execute_attack();
     counter = 0;
     room  = environment(caster);
@@ -78,7 +78,7 @@ void execute_attack(){
     inven = target_filter(inven);
     inven = filter_array(inven,"party_filter",TO);
 
-    if(caster->query_followers()) 
+    if(caster->query_followers())
        inven -= caster->query_followers();
 /*
     if(!counter || counter == 40){
@@ -144,7 +144,7 @@ void dest_effect(){
             tmp[i]->remove_property("oppressed");
             tmp[i]->add_attack_bonus(bonus);
             tmp[i]->add_damage_bonus(bonus);
-            oppressed -= ({ tmp[i] });            
+            oppressed -= ({ tmp[i] });
         }
     }
     ::dest_effect();

@@ -12,7 +12,6 @@ void create(){
     set_spell_name("aegis of fate");
     set_spell_level(([ "cleric" : 6 ]));
     set_spell_sphere("enchantment_charm");
-    set_spell_domain("fate");
     set_syntax("cast CLASS aegis of fate on TARGET");
     set_description("This spell alters the fate of the target, creating an ever-fluctuating shield about the target.  The "
 "shield swirls in a chaotic display, offering some protection from both physical and magical effects to the target.  How "

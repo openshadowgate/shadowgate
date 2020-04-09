@@ -11,7 +11,6 @@ void create() {
     set_spell_name("body blades");
     set_spell_level(([ "cleric" : 2 ]));
     set_spell_sphere("combat");
-    set_spell_domain("suffering");
     set_syntax("cast CLASS body blades");
     set_description("This spell will cause razor sharp blades to sprout from the caster's skin, protecting them from harm "
 "and doing damage to anyone who attacks the caster.");
@@ -20,7 +19,7 @@ void create() {
     traveling_aoe_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
    	tell_object(caster,"%^RED%^Rubbing some iron shavings onto your skin,"+
 		" you begin to chant in a low growl.");
@@ -29,9 +28,9 @@ string query_cast_string()
     return "display";
 }
 
-int preSpell() 
+int preSpell()
 {
-    if(caster->query_property("body blades")) 
+    if(caster->query_property("body blades"))
     {
         tell_object(caster,"You are already protected by body blades.");
         return 0;
@@ -39,7 +38,7 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 10) * clevel;
@@ -62,7 +61,7 @@ void execute_attack()
     int i;
 
     ::execute_attack();
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;

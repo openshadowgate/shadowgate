@@ -13,7 +13,6 @@ void create() {
     set_spell_name("displacement");
     set_spell_level(([ "bard" : 3, "mage" : 3 ]));
     set_spell_sphere("illusion");
-    set_spell_domain("illusion");
     set_domains("trickery");
     set_syntax("cast CLASS displacement");
     set_damage_desc("20% miss chance");

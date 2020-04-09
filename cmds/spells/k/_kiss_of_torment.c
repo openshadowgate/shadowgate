@@ -7,7 +7,6 @@ void create() {
     set_spell_name("kiss of torment");
     set_spell_level(([ "cleric" : 5 ]));
     set_spell_sphere("necromancy");
-    set_spell_domain("suffering");
     set_syntax("cast CLASS kiss of torment on TARGET");
     set_description("A simple touch from this spell will deal extreme torment to the victim, leaving them in agony and "
 "distress.");
@@ -54,7 +53,7 @@ void spell_effect(int prof) {
     }
 }
 
-void next_damage(object targ, int count) 
+void next_damage(object targ, int count)
 {
     if(do_save(targ,-1)) {
     //if ("daemon/saving_d"->saving_throw(targ,"spell", -1)) {

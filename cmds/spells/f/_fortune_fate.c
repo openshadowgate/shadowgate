@@ -2,7 +2,7 @@
 // Works similar to contingency, except it triggers a random heal spell
 // from cure light wounds up to heal automatically when the target falls
 // below 25% health -Ares
-//Adjusted to have a higher percentage chance for the higher level 
+//Adjusted to have a higher percentage chance for the higher level
 //heals in rebalancing the domains.  ~Circe~ 4/24/08
 
 #include <std.h>
@@ -17,7 +17,6 @@ void create() {
     set_spell_name("fortune fate");
     set_spell_level(([ "cleric" : 8, "psion" : 8 ]));
     set_spell_sphere("healing");
-    set_spell_domain("fate");
     set_discipline("seer");
     set_syntax("cast CLASS fortune fate on TARGET");
     set_description("This spell will cause the fates to smile on the target.  When cast, it will activate a healing spell "
@@ -33,9 +32,9 @@ void random_heal()
 {
     int rand;
     if(!objectp(target)) { dest_effect(); return; }
-    
+
     rand = 100 + clevel; // slightly weighted to give higher levels a higher chance of stronger 				 //spells
-    switch(roll_dice(1,rand)) 
+    switch(roll_dice(1,rand))
     {
    	case 1..35:
         new("/cmds/spells/c/_cure_serious_wounds.c")->use_spell(target,target,cast_level,100,"cleric");
@@ -69,7 +68,7 @@ void heart_beat()
     return;
 }
 
-int preSpell() 
+int preSpell()
 {
     if(!objectp(target))
     {
@@ -84,7 +83,7 @@ int preSpell()
     return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^ORANGE%^As you begin to chant a lilting prayer,"+
        " a golden aura bathes your fingers.");
@@ -93,7 +92,7 @@ string query_cast_string()
     return "display";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     if(!present(target,place))
     {
@@ -122,17 +121,17 @@ void spell_effect(int prof)
     cast_level = clevel;
     spell_successful();
     addSpellToCaster();
-	if(objectp(target)) 
+	if(objectp(target))
 	{
 		target->set_property("spelled",({TO}));
 		target->set_property("fortune fate",1);
 	}
 }
 
-void dest_effect() 
+void dest_effect()
 {
 	if(!objectp(TO)) return;
-	if(objectp(target)) 
+	if(objectp(target))
 	{
 		tell_object(target,"%^ORANGE%^You feel more vulnerable now that the fates"+
 		" no longer smile on you.");

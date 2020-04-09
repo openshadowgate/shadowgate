@@ -16,7 +16,6 @@ void create()
     set_spell_name("auspicious bolt");
     set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("combat");
-    set_spell_domain("fate");
     set_syntax("cast CLASS auspicious bolt on TARGET");
     set_description("This spell will call on the fates to improve the fortune of the recipient in battle.  To what degree "
         "the fortunes are altered in favor of the target depends on the level of the caster, and of course fate itself.");

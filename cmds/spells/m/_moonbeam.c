@@ -12,7 +12,6 @@ void create(){
     set_spell_name("moonbeam");
     set_spell_level(([ "cleric" : 5 ]));
     set_spell_sphere("combat");
-    set_spell_domain("moon");
     set_syntax("cast CLASS moonbeam on TARGET");
     set_description("This spell begins by the caster fanning out her hands while chanting the spell.  Bolts of moonlight "
 "will fly out and do damage to the target and possibly those near him.");
@@ -96,7 +95,7 @@ spell_effect(int prof){
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
