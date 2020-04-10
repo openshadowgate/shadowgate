@@ -5,40 +5,70 @@
 %^CYAN%^Discipline specific spells are as follows:%^RESET%^
 
 %^CYAN%^Egoist:%^RESET%^
+    thicken skin
     animal affinity
     chameleon
+    deathward
+    breath of life
+    restoration
     lesser transformation
-    thicken skin
+    shadow double
+    shadow body
+
 %^CYAN%^Seer:%^RESET%^ 
-    aura sight
+    dissonance
     clairvoyance
     hypercognition
+    escape detection
+    remote viewing
+    legend lore
     prying eyes
-    sending
-    speak with dead
+    fortune fate
+    foresight
+
 %^CYAN%^Shaper:%^RESET%^ 
+    minor creation
     astral construct
-    call crystals
+    web
+    creation
     hail of crystals
-    planar portal
-    psionic teleport
+    ruin
+    rebirth
+    create demiplane
+    implosion
+
 %^CYAN%^Kineticist:%^RESET%^ 
     animate object
+    energy emanation
     energy cone
+    hold person
     energy current
+    bolt of force
     reddopsi
+    crushing hand
     tornado blast
+
 %^CYAN%^Nomad:%^RESET%^
-    call crystals
-    planar portal
-    planar sending    
+    dimension slide
+    phantom steed
+    dismissal
+    dimensional anchor
     psionic teleport
+    planar sending
+    planar portal
+    astral projection
+    timestop
+
 %^CYAN%^Telepath:%^RESET%^ 
-    domination
-    mindnet
+    command
+    charm monster
+    hostile empathic transfer
     modify memory
-    sending
-    speak with dead
+    domination
+    serenity
+    visions from within
+    mindnet
+    overwhelming presence
    
 
 %^CYAN%^See also:%^RESET%^ psion, discipline roleplay
