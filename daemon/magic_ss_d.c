@@ -11,6 +11,8 @@ inherit DAEMON;
 mapping class_spells;
 #include <class_spells.h>
 
+#include <spell_domains_spells.h>
+
 void create()
 {
     ::create();
@@ -27,4 +29,14 @@ string *query_class_special_spells(string mclass, string special)
     } else {
         return class_spell_storage[mclass][special];
     }
+}
+
+string *query_domain_spells(string domain)
+{
+    return DOMAIN_SPELLS[domain];
+}
+
+string *query_domains()
+{
+    return keys(DOMAIN_SPELLS);
 }

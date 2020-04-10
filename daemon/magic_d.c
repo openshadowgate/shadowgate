@@ -25,8 +25,6 @@ inherit DAEMON;
 
 #define MAGIC_D_SAVE "/daemon/save/magic_d"
 
-#include <spell_domains_spells.h>
-
 void index_spells();
 mapping allSpells;
 mapping spellIndex;
@@ -596,16 +594,6 @@ void do_kill(object spell)
 
 int is_spell(){
     return 1;
-}
-
-string *query_domain_spells(string domain)
-{
-    return DOMAIN_SPELLS[domain];
-}
-
-string *query_domains()
-{
-    return keys(DOMAIN_SPELLS);
 }
 
 void spell_failure(object spell, int prof){

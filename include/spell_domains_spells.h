@@ -6,7 +6,7 @@
  * This dataset should be queried from MAGIC_D with
  * query_domain_spells(domain) and query_domains() functions.
  */
-mapping DOMAIN_SPELLS = ([]);
+static mapping DOMAIN_SPELLS = ([]);
 DOMAIN_SPELLS = ([
 "air" : ({ "whispering wind", "cloak of winds", "gaseous form", "air walk", "airbolt", "chain lightning", "elemental body iv", "windstorm", "elemental swarm" }),
 "animal" : ({ "magic fang", "hold animal", "charm monster", "polymorph self", "summon natures ally v", "antilife shell", "true seeing", "shapechange", "summon natures ally ix" }),
