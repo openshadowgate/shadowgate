@@ -24,16 +24,16 @@ void create()
     set_items(([
                    "moat" : " %^BLUE%^This is a moat that surrounds the castle, built to keep attackers from the castle walls. The only way across seems to be by this drawbridge. The water looks dark and cold and the moat seems fairly deep, deep enough to keep a fully armoured warrior from swimming across it.",
                ]));
-    set_door("gate", RDIR + "gate", "enter");
+    set_door("gate", "/d/guilds/alliance/hall/gate.c", "enter");
     set_open("gate", 0);
     add_lock("gate", "alliance ring", "lock", "There is no keyhole in this lock, but rather a circular depression with a tiny engraved image of two gauntlets shaking hands.  Otherwise it is a gigantic, but otherwise normal, gate lock.");
     set_locked("gate", 1, "lock");
     lock_difficulty("gate", get_phouse_lock_dc("epic"), "lock");
-    other = find_object_or_load(RDIR + "stair2");
-    other->set_locked("gate", 1, "lock");
-    other->set_open("gate", 0);
+    //other = find_object_or_load(RDIR + "stair2");
+    //other->set_locked("gate", 1, "lock");
+    //other->set_open("gate", 0);
     set_trap_functions(({ "gate" }), ({ "lock_trap" }), ({ "pick" }), ({ get_phouse_lock_dc("epic") }));
-    //set_post_exit_functions(({ "enter" }), ({ "entered" })); Causing bugs
+    set_post_exit_functions(({ "enter" }), ({ "entered" }));
 }
 
 int lock_trap(string str)
@@ -57,8 +57,8 @@ int lock_trap(string str)
     return 1;
 }
 
-/*void entered()
-   {
+void entered()
+{
     tell_object(TP, "As you enter, you see a sign above you that says %^BOLD%^%^WHITE%^'Remember to lock the gate as you enter!'%^RESET%^");
     return;
-   }*/
+}

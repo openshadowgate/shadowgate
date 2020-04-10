@@ -107,11 +107,11 @@ class_spell_storage =
     "seer":
         ({"dissonance","clairvoyance","hypercognition","escape detection","remote viewing","legend lore","prying eyes","fortune fate","foresight"}),
     "shaper":
-        ({"minor creation","astral construct","ectoplasmic cocoon","creation","hail of crystals","ruin","rebirth","create demiplane","implosion"}),
+        ({"minor creation","astral construct","web","creation","hail of crystals","ruin","rebirth","create demiplane","implosion"}),
     "kineticist":
         ({"animate object","energy emanation","energy cone","hold person","energy current","bolt of force","reddopsi","crushing hand","tornado blast"}),
     "nomad":
-        ({"dimension slide","leaps and bounds","trace teleport","dimensional anchor","psionic teleport","planar sending","planar portal","astral projection","timestop"}),
+        ({"dimension slide","phantom steed","trace teleport","dimensional anchor","psionic teleport","planar sending","planar portal","astral projection","timestop"}),
     "telepath":
         ({"command","charm monster","hostile empathic transfer","modify memory","domination","serenity","visions from within","mindnet","overwhelming presence"}),
 ]),

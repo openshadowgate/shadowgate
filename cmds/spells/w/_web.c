@@ -14,8 +14,9 @@ void waiter(int num);
 create() {
     ::create();
     set_spell_name("web");
-    set_spell_level(([ "mage" : 2, "assassin" : 2 ]));
+    set_spell_level(([ "mage" : 2, "assassin" : 2, "psion" : 3 ]));
     set_spell_sphere("invocation_evocation");
+    set_discipline("shaper");
     set_syntax("cast CLASS web on TARGET");
     set_damage_desc("tripped for 1d8 rounds");
     set_description("When a victim is unfortunate enough to be victim of a web spell, he/she might as well get a new hobby. If the web is successful, the victim will be immobilized within a massive web.");
