@@ -40,12 +40,10 @@ void create()
     set_door_description("cell door", "This is a door made of three inch thick "
                          "oaken boards.  It has a section cut out and replaced with a grid of one "
                          "inch diameter iron bars so that some air can still get to the prisoners.");
-    set_string("cell door", "open", "The cell door creaks slightly as it swings "
-               "open.");
-    set_string("cell door", "close", "An ominous thud echoes off the walls as the "
-               "heavy cell door shuts solidly.");
-    "/d/guilds/alliance/hall/stair2"->set_open("cell door", 0);
-    "/d/guilds/alliance/hall/stair2"->set_locked("cell door", 1);
+    //set_string("cell door", "open", "The cell door creaks slightly as it swings open.");
+    //set_string("cell door", "close", "An ominous thud echoes off the walls as the heavy cell door shuts solidly.");
+    //"/d/guilds/alliance/hall/stair2"->set_open("cell door", 0);
+    //"/d/guilds/alliance/hall/stair2"->set_locked("cell door", 1);
     //call_out("check",30);
 }
 
