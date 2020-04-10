@@ -10,11 +10,11 @@
 inherit WEAPONLESS;
 
 #include <daemons.h>
-#include "summoned_monster.h"
 
 #define SAVEDIR "/d/save/summons/" + owner->query_name() + "/animal/"
 
-object owner;
+object owner,
+       *link_buffs;   //Companion gets buffs
 
 string saved_short,
        saved_long;
@@ -35,6 +35,7 @@ void create(){
     set_damage(2, 6);
     set_size(2);
     set_gender("neuter");
+    setup = 0;
     set_funcs( ({ "special_attack" }) );
     set_func_chance(35);
 }
@@ -59,13 +60,12 @@ void init()
     {
         set_short(saved_short);
         set_long(saved_long);
-        "/daemon/yuck_d"->load_inventory(this_object(), SAVEDIR + "acompanion");
     }
     
-    add_action("animal_command", "animal");
+    add_action("set_animal_desc", "animal");
 }
 
-int animal_command(string str)
+int set_animal_desc(string str)
 {
     string *input;
     
@@ -76,7 +76,7 @@ int animal_command(string str)
     
     if(sizeof(input) < 2)
     {
-        tell_object(this_player(), "Syntax : animal [long/short] [input].");
+        tell_object(this_player(), "Syntax : animal [long/short] [description].");
         return 1;
     }
     
@@ -87,7 +87,6 @@ int animal_command(string str)
         tell_object(this_player(), "Your Animal Companion will now be seen as: \n" + query_short());
         rm(SAVEDIR + "short");
         write_file(SAVEDIR + "short", query_short());
-
         break;
         case "long":
         this_object()->set_long(implode(input[1..], " "));
@@ -95,13 +94,8 @@ int animal_command(string str)
         rm(SAVEDIR + "long");
         write_file(SAVEDIR + "long", query_long());
         break;
-        /*
-        case "command":
-        command(input[1], this_object());
-        break;
-        */
         default:
-        tell_object(this_player(), "Please select 'long', 'short', or 'command' as options.");
+        tell_object(this_player(), "Please select 'long' or 'short' as options.");
         return 1;
         break;
     }
@@ -154,8 +148,6 @@ void heart_beat()
     }
     else
         add_hp(query_max_hp() / 25);
-    
-    "/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
 }
 
 void special_attack(object target)
@@ -168,7 +160,6 @@ void special_attack(object target)
     
     tname = target->query_name();
     aname = capitalize(this_object()->query_name());
-
     room = environment(this_object());
     
     if(environment(target) != room)
