@@ -50,6 +50,12 @@ void spell_effect(int prof)
         TO->remove();
         return;
     }
+
+    if (!objectp(caster)) {
+        dest_effect();
+        return;
+    }
+
     new("/std/races/shapeshifted_races/mage_"+arg+".c")->init_shape(caster,arg);
 
     shape = caster->query_property("shapeshifted");
@@ -64,10 +70,13 @@ void spell_effect(int prof)
 void dest_effect()
 {
     object shape;
-	if(objectp(caster))
-    {
-        if(objectp(shape = caster->query_property("shapeshifted"))) shape->reverse_shape(caster);
-	}
+    if (objectp(caster)) {
+        if (objectp(shape = caster->query_property("shapeshifted"))) {
+            shape->reverse_shape(caster);
+        }
+    }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
