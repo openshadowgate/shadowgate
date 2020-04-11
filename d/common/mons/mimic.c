@@ -16,7 +16,7 @@ void create()
    	set_gender("neuter");
     	set_alignment(9);
    	set_property("full attacks", 1);
-   	set_property("swarm",1);	
+   	set_property("swarm",1);
 	delay = 0;
 }
 
@@ -33,9 +33,9 @@ void become_this(object ob, object vic)
 	mod = (int)ob->query_myMimicExpLevel();
 	if(!mod) mod = 5;
 	set_new_exp(mod, "normal");
-	
+
 	mod = (int)ob->query_myMimicLevel();
-	if(!mod) mod = 5;	
+	if(!mod) mod = 5;
 
 	set_id(ob->query_id());
 	add_id("mimic");
@@ -60,7 +60,7 @@ void become_this(object ob, object vic)
 	"and two grotesquely muscled arms have sprung out from "+
 	"it - one from each end where a handle should be.  "+
 	"Set into what should be the lid, are two "+
-	"dark %^BOLD%^%^RED%^evil%^BOLD%^%^BLACK%^ eyes.%^RESET%^"); 
+	"dark %^BOLD%^%^RED%^evil%^BOLD%^%^BLACK%^ eyes.%^RESET%^");
 
 	set_body_type("chest");
    	set_race("mimic");
@@ -84,7 +84,7 @@ void become_this(object ob, object vic)
 
 	if(y) set_property("weapon resistance", (y/2));
 
-   	set_mob_magic_resistance("average"));
+// set_mob_magic_resistance("average"));
 
 	set_stats("strength", 17 + y);
   	set_stats("dexterity", 14 + y);
@@ -95,7 +95,7 @@ void become_this(object ob, object vic)
 	set_base_damage_type("cold iron");
 	//2-11 attacks
    	set_attacks_num((y+1));
-	
+
 	//2d7-2d14 damage
    	set_damage(2, (y+4));
 
@@ -106,11 +106,11 @@ void become_this(object ob, object vic)
 
 	TO->move(environment(ob));
 	ob->set_property("no detect", 1);
-	ob->set_hidden(1);	
+	ob->set_hidden(1);
 	tmpShort = ob->query_short();
 	ob->set_short(0);
 	ob->move(TO);
-	if(objectp(vic)) 
+	if(objectp(vic))
 	{
 		TO->force_me("kill "+vic->query_name());
 		MyTarg = vic;
@@ -121,7 +121,7 @@ void quiet_down()
 {
 	if(!objectp(TO)) return;
 	if(!objectp(ETO)) return;
-	if(!objectp(ChestOb)) 
+	if(!objectp(ChestOb))
 	{
 		if(!stringp(ChestObFile)) return;
 		if(stringp(ChestObFile))
@@ -145,9 +145,9 @@ void quiet_down()
 
 //hoping to build a list of directions
 //for our mimic to run (sans doors, no door opener)
-//after a target - if the target is within 5 rooms 
+//after a target - if the target is within 5 rooms
 //of the mimic - will execute up to two of these
-//directions at a time - chasing the target that 
+//directions at a time - chasing the target that
 //originally disturbed it - Saide
 
 void chase(object ob)
@@ -155,18 +155,18 @@ void chase(object ob)
 	string *cmds = ({});
 	string tn;
 	//tell_object(find_player("saide"), "Getting here - in void chase()");
-	if(!objectp(TO)) 
+	if(!objectp(TO))
 	{
 		quiet_down();
 		return;
 	}
-	if(!objectp(ob)) 
+	if(!objectp(ob))
 	{
 		quiet_down();
 		return;
 	}
 	tn = ob->query_name();
-	if(!PATHFINDER_D->far_present(ETO, tn, 5)) 
+	if(!PATHFINDER_D->far_present(ETO, tn, 5))
 	{
 		quiet_down();
 		return;
@@ -178,10 +178,10 @@ void chase(object ob)
 		return;
 	}
 	TO->force_me(cmds[0]);
-	if(present(tn, ETO)) 
+	if(present(tn, ETO))
 	{
 		TO->force_me("kill "+tn);
-		return;	
+		return;
 	}
 	if(sizeof(cmds) > 1 && random(2))
 	{
@@ -202,25 +202,25 @@ void heart_beat()
 	if(!objectp(TO)) return;
 	if(!objectp(ETO)) return;
 	//tell_object(find_player("saide"), "Mytarg = "+identify(MyTarg));
-	if(!sizeof(filter_array(all_living(ETO), "is_non_immortal_player", FILTERS_D))) 
+	if(!sizeof(filter_array(all_living(ETO), "is_non_immortal_player", FILTERS_D)))
 	{
-		if(!objectp(MyTarg)) 
+		if(!objectp(MyTarg))
 		{
 			quiet_down();
 			return;
 		}
-		if(MyTarg->query_true_invis()) 
+		if(MyTarg->query_true_invis())
 		{
 			quiet_down();
 			return 1;
 		}
-		if(objectp(MyTarg) && !present(MyTarg->query_name(), ETO)) 
+		if(objectp(MyTarg) && !present(MyTarg->query_name(), ETO))
 		{
 			//tell_object(find_player("saide"), "Getting here...");
-			if(random(20)) 
+			if(random(20))
 			{
 				//tell_object(find_player("saide"), "Getting here (delay)");
-				if(delay) 
+				if(delay)
 				{
 			//tell_object(find_player("saide"), "Getting here (delay - inside)");
 					delay--;
@@ -244,10 +244,10 @@ void die(object ob)
 {
 	object treasure_ob;
 	mapping MyStuff;
-	string *MyStuffKeys, tmp;	
+	string *MyStuffKeys, tmp;
 	int flag, x, amt;
 	if(!objectp(TO)) return;
-	if(!objectp(ETO)) return;	
+	if(!objectp(ETO)) return;
 
 
 	tell_room(ETO, "%^BOLD%^%^BLACK%^The mimic "+
@@ -258,24 +258,24 @@ void die(object ob)
 	"%^BOLD%^%^RED%^ROAR%^BOLD%^%^BLACK%^ and "+
 	"its treasure horde spills out on the ground!%^RESET%^");
 
-	if(!objectp(ChestOb)) 
+	if(!objectp(ChestOb))
 	{
-		if(!stringp(ChestObFile)) 
+		if(!stringp(ChestObFile))
 		{
 			flag = 1;
 		}
-		if(stringp(ChestObFile)) 
+		if(stringp(ChestObFile))
 		{
 			ChestOb = new(ChestObFile);
 			if(!objectp(ChestOb)) flag = 1;
 		}
 	}
-	if(objectp(ChestOb)) 
+	if(objectp(ChestOb))
 	{
 		MyStuff = ChestOb->query_myMimicTreasure();
 		if(!mapp(MyStuff)) flag = 1;
 	}
-	if(flag) 
+	if(flag)
 	{
 		treasure_ob = new("/std/obj/coins");
      		treasure_ob->set_money("gold", 1000 + random(500));
@@ -283,13 +283,13 @@ void die(object ob)
 	}
 	else
 	{
-		MyStuffKeys = keys(MyStuff);			
+		MyStuffKeys = keys(MyStuff);
 		for(x = 0;x < sizeof(MyStuffKeys);x++)
 		{
 			if(member_array(MyStuffKeys[x], HARD_CURRENCIES) != -1)
 			{
 				amt = MyStuff[MyStuffKeys[x]];
-				if(!intp(amt)) continue;		
+				if(!intp(amt)) continue;
 				treasure_ob = new("/std/obj/coins");
 				treasure_ob->set_money(MyStuffKeys[x], amt);
 				treasure_ob->move(ETO);
@@ -301,7 +301,7 @@ void die(object ob)
 				if(strsrch(tmp, ".c") == -1) tmp = tmp + ".c";
 				if(!file_exists(tmp)) continue;
 				amt = MyStuff[MyStuffKeys[x]];
-				if(!intp(amt)) 
+				if(!intp(amt))
 				{
 					new(tmp)->move(ETO);
 					continue;
@@ -317,7 +317,5 @@ void die(object ob)
 		}
 	}
 	TO->move("/d/shadowgate/void");
-	::die(ob);	
+	::die(ob);
 }
-
-

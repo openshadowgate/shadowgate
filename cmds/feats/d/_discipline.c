@@ -11,16 +11,17 @@ string *valid_choices = ({ "egoist", "kineticist", "nomad", "seer", "shaper", "t
 void create()
 {
     ::create();
-    feat_type("premanent");
+    feat_type("instant");
     feat_category("Psionics");
     feat_name("discipline");
-    feat_syntax("discipline");
-    feat_desc("This feat allows a psion to select or change their psionic discipline.");
+    feat_prereq("Psion L1");
+    feat_syntax("discipline [DISCIPLINE]");
+    feat_desc("This feat allows a psion to select or change their psionic discipline.
 
 Psionic Disciplines grant unique spells to the practitioner. The psion will
 recieve mastery in one discipline spell per spell level.
 
-You can select from the following disciplines
+You can select from the following disciplines:
   Egoist
   Kineticist
   Nomad
@@ -36,8 +37,25 @@ To start selection process type <discipline>.");
     allow_tripped(1);
 }
 
-int cmd_discipline(string args)
+int allow_shifted() { return 1; }
+
+int cmd_animal_companion(string str)
 {
+    object feat;
+    
+    if(!objectp(this_player()))
+        return 0;
+    
+    feat = new(base_name(this_object()));
+    feat->setup_feat(this_player(), str);
+    
+    return 1;
+}
+
+int execute_feat(string args)
+{
+    ::execute_feat();
+    
     if(!args)
     {
         write("%^BOLD%^You current discipline is: %^RESET%^RED%^" + this_player()->query_discipline());
@@ -50,7 +68,7 @@ int cmd_discipline(string args)
         return 1;
     }
     
-    if(member(valid_choices, args) < 0))
+    if(member(valid_choices, args) < 0)
     {
         write("%^BOLD%^Valid choices are : %^RESET%^RED%^" + implode(valid_choices, ", "));
         return 1;
@@ -72,6 +90,7 @@ void confirm_selection(string args)
     write("%^BOLD%^You declare your psionic discipline as : %^CYAN%^" + args + ".");
     this_player()->set_discipline(args);
     this_player()->set_property("discipline_change", time());
+    dest_effect();
     return;
 }
 
@@ -86,20 +105,6 @@ int prerequisites(object ob)
         return 0;
     }
     return ::prerequisites(ob);
-}
-
-void permanent_effects(object ob)
-{
-    ::permanent_effects(ob);
-    dest_effect();
-    return;
-}
-
-void reverse_permanent_effects(object ob)
-{
-    ::reverse_permanent_effects(ob);
-    dest_effect();
-    return;
 }
 
 void dest_effect()
