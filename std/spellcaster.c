@@ -57,6 +57,7 @@ int magic_arsenal_feat(int num)
     if (!objectp(TO)) {
         return num;
     }
+
     if (FEATS_D->usable_feat(TO, "magic arsenal")) {
         num += 2;
     }
