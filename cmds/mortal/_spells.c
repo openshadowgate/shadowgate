@@ -253,17 +253,7 @@ void sort_by_domain()
 
 int *magic_arsenal_feat(object ob, int *spells)
 {
-    int i;
-
-    if(FEATS_D->usable_feat(ob,"magic arsenal"))
-    {
-        for(i=0;i<sizeof(spells);i++)
-        {
-            if(!spells[i]) continue;
-            spells[i] += 2;
-        }
-    }
-    return spells;
+    return "/cmds/mortal/_recall"->magic_arsenal_feat(ob, spells);
 }
 
 

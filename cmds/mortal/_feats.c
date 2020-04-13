@@ -566,7 +566,7 @@ int confirm_remove(string str,object ob,string feat,string extradata)
     if(feat == "expanded knowledge 3"){ ob->delete("expanded_knowledge_3"); }
     if(feat == "skill focus") { ob->delete("skill_focus"); }
 
-    price = calculate_feat_cost(ob);
+    price = calculate_feat_cost(ob) / 8;
     if(!avatarp(TP))
     {
         if((int)"/daemon/config_d.c"->check_config("character improvement") == 0)

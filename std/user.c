@@ -428,31 +428,6 @@ void make_new_hitpoint_rolls(object obj)
     return;
 }
 
-void change_my_domains(){
-   string *domains;
-   if(!objectp(TP)) { return; }
-   if(!(TP->is_class("cleric")) && sizeof(query_divine_domain())) {
-     set_divine_domain(({})); // reset domains now that divine can multi! Ranger/pali etc.
-   }
-   if(query("domains_changed")){ return; }
-   if(!TP->is_class("cleric")){ return; }
-   domains = query_divine_domain();
-   if(!pointerp(domains)){ domains = ({}); }
-   tell_object(TP,"%^BOLD%^%^RED%^There has been a shifting of domains, "+
-      "and you must visit your temple to reselect your domains.  "+
-      "See <help deities> or the individual help file for your "+
-      "deity for the list of domains your deity can access.%^RESET%^");
-   tell_object(TP,"%^YELLOW%^NOTE: %^WHITE%^Not all deities had their "+
-      "domains changed, but many of the spells within domains did "+
-      "change.  Please take a few moments to review <help domains> to "+
-      "see the spells listed for each domain and then review the help "+
-      "file for each spell before making your choice.  Once your choice "+
-      "is made, it will not be undone.%^RESET%^");
-   set_divine_domain(({}));
-   set("domains_changed",1);
-   return;
-}
-
 void redo_my_languages() {
   int mylang = 0;
   string race;
@@ -1419,7 +1394,6 @@ void setup() {
       make_new_hitpoint_rolls(TO);
 
     convert_to_new_class_type();
-    change_my_domains();
     redo_my_languages();
     convert_relationships();
 

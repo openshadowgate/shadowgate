@@ -15,20 +15,19 @@ To scale damage successfully to fifty levels ShadowGate engine employs dice rule
 %^CYAN%^L8:%^RESET%^  1d11  + 1/2
 %^CYAN%^L9:%^RESET%^  1d12
 
-%^CYAN%^%^ULINE%^Monks
+%^CYAN%^%^ULINE%^Monk character class
 1d10 for all spell classes
 
-%^CYAN%^%^ULINE%^Warlocks
+%^CYAN%^%^ULINE%^Warlock character
 1d10 for all spell classes
 1d11 for utterdark spells
 
-%^CYAN%^%^ULINE%^No level set spells
+%^CYAN%^%^ULINE%^Spells with no levels set
 1d8
 
 %^ULINE%^%^CYAN%^Shifts depending on a spell class
 
 %^CYAN%^Splash Spell Class:%^RESET%^  -1 levels
-%^CYAN%^Burst Spell Class:%^RESET%^   -3 levels
 
 %^CYAN%^AOE Class (limit 2):%^RESET%^      1d8 per every 5 caster levels
 %^CYAN%^TravAOE Class (limit 1):%^RESET%^  1d6 per every 5 caster levels

@@ -71,11 +71,7 @@ void spell_effect(int prof)
         tell_object(caster, "%^CYAN%^You invoke a protective ward around yourself.%^RESET%^");
         tell_room(place, "%^CYAN%^" + caster->QCN + " invokes a protective ward about " + caster->QO + "self.%^RESET%^", caster);
     }
-    if (reversed) {
-        caster->set_resistance(ARG, -resistanceamount);
-    }else {
-        caster->set_resistance(ARG, resistanceamount);
-    }
+    caster->set_resistance(ARG, resistanceamount);
     caster->set_property("castspellresist", 1);
     didbuff = 1;
     spell_successful();
@@ -85,13 +81,8 @@ void spell_effect(int prof)
 void dest_effect()
 {
     if (objectp(caster) && didbuff) {
-        if (reversed) {
-            tell_object(caster, "%^CYAN%^You feel the unsettling ward fade from you.%^RESET%^");
-            caster->set_resistance(ARG, resistanceamount);
-        }else {
-            tell_object(caster, "%^CYAN%^You feel the protective ward fade from you.%^RESET%^");
-            caster->set_resistance(ARG, -1 * resistanceamount);
-        }
+        tell_object(caster, "%^CYAN%^You feel the protective ward fade from you.%^RESET%^");
+        caster->set_resistance(ARG, -resistanceamount);
         caster->set_property("castspellresist", -1);
     }
     ::dest_effect();

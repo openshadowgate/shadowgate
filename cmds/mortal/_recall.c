@@ -150,7 +150,13 @@ int *magic_arsenal_feat(object ob, int *spells){
     if(FEATS_D->usable_feat(ob,"greater arsenal")) {
         for(i=0;i<sizeof(spells);i++) {
             if(!spells[i]) continue;
-            spells[i] += 3;
+            spells[i] += 5;
+        }
+    }
+    if(FEATS_D->usable_feat(ob,"gift of the shadows")) {
+        for(i=0;i<sizeof(spells);i++) {
+            if(!spells[i]) continue;
+            spells[i] += 5;
         }
     }
     return spells;
