@@ -156,7 +156,7 @@ int *magic_arsenal_feat(object ob, int *spells){
     if(FEATS_D->usable_feat(ob,"gift of the shadows")) {
         for(i=0;i<sizeof(spells);i++) {
             if(!spells[i]) continue;
-            spells[i] += 5;
+            spells[i] += 4;
         }
     }
     return spells;
