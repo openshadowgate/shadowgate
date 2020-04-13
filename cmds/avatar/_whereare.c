@@ -22,6 +22,9 @@ string filter_colors(string str) {
 //    str = replace_string(str, "%^"+tmp+"%^", "");
     for(i=0, sizeof_array=sizeof(colors),tmp=colors[i];i<sizeof_array;i++)
         str=replace_string(str,tmp,"");
+
+   for(i=0, sizeof_array=sizeof(colors),tmp=colors[i];i<sizeof_array;i++)
+        str=replace_string(str,lower_case(tmp),"");
   return str;
 }
 
