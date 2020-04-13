@@ -2252,8 +2252,15 @@ void define_clevel()
 void define_base_spell_level_bonus()
 {
     sdamage_adjustment = 0;
-    if (query_splash_spell()) {
-        sdamage_adjustment -= 2;
+
+    // Cone, ball, chain
+    if (splash_spell == 1) {
+        sdamage_adjustment -= 1;
+    }
+
+    // Blast, burst
+    if (splash_spell > 1) {
+        sdamage_adjustment -= 3;
     }
 
     if (FEATS_D->usable_feat(caster, "apoapsis of power")) {
@@ -3475,8 +3482,14 @@ void help()
     if (traveling_aoe_spell || traveling_spell) {
         write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
     }
-    if (splash_spell) {
-        write("%^BOLD%^%^RED%^This spell will affect multiple targets.");
+    if (splash_spell == 1) {
+        write("%^BOLD%^%^RED%^This spell has a chance to affect multiple targets.");
+    }
+    if (splash_spell == 2) {
+        write("%^BOLD%^%^RED%^This spell will affect all enemies.");
+    }
+    if (splash_spell == 3) {
+        write("%^BOLD%^%^RED%^This spell will affect every non ally.");
     }
 
     if (mapp(feats_required)) {

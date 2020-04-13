@@ -2,7 +2,7 @@
 
 To scale damage successfully to fifty levels ShadowGate engine employs dice rules for spells of different levels across classes. When using damaging spells you may expect the next dies to roll when damage is applied:
 
-%^CYAN%^%^ULINE%^All classes:
+%^CYAN%^%^ULINE%^All caracter classes classes
 
 %^CYAN%^L0:%^RESET%^  1d7
 %^CYAN%^L1:%^RESET%^  1d8
@@ -15,20 +15,22 @@ To scale damage successfully to fifty levels ShadowGate engine employs dice rule
 %^CYAN%^L8:%^RESET%^  1d11  + 1/2
 %^CYAN%^L9:%^RESET%^  1d12
 
-%^CYAN%^%^ULINE%^Augmented through Apoapsis of Power (+2 levels):
-%^CYAN%^L10:%^RESET%^  1d12 + 1/2
-%^CYAN%^L11:%^RESET%^  1d13
-%^CYAN%^L12:%^RESET%^  1d13 + 1/2
-%^CYAN%^L14:%^RESET%^  1d14
+%^CYAN%^%^ULINE%^Monks
+1d10 for all spell classes
 
-%^CYAN%^Default:%^RESET%^  1d8
+%^CYAN%^%^ULINE%^Warlocks
+1d10 for all spell classes
+1d11 for utterdark spells
 
-%^CYAN%^Splash Spell:%^RESET%^  -2 levels
+%^CYAN%^%^ULINE%^No level set spells
+1d8
 
-%^CYAN%^AOE (limit 3):%^RESET%^      1d4 per every 5 caster levels
-%^CYAN%^TravAOE (limit 1):%^RESET%^  1d4 per every 5 caster levels
+%^ULINE%^%^CYAN%^Shifts depending on a spell class
 
-%^CYAN%^Monks:%^RESET%^    1d10 for all spells
-%^CYAN%^Warlocks:%^RESET%^ 1d10 for all spells, 1d11 for utterdark spells
+%^CYAN%^Splash Spell Class:%^RESET%^  -1 levels
+%^CYAN%^Burst Spell Class:%^RESET%^   -3 levels
+
+%^CYAN%^AOE Class (limit 2):%^RESET%^      1d8 per every 5 caster levels
+%^CYAN%^TravAOE Class (limit 1):%^RESET%^  1d6 per every 5 caster levels
 
 %^CYAN%^See also:%^RESET%^ cast, prepare, master, classes
