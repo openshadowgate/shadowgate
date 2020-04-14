@@ -14,15 +14,25 @@ inherit DAEMON;
 
 void help();
 
-int light_armor_filter(object ob){
-    if(!objectp(ob)) return 0;
-    if(ob->query_armor_prof() == "light") return 0;
+int light_armor_filter(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (ob->query_armor_prof() == "light") {
+        return 0;
+    }
     return 1;
 }
 
-int armor_filter(object ob){
-    if(!objectp(ob)) return 0;
-    if(ob->query_armor_prof() == "light" || ob->query_armor_prof() == "medium" || ob->query_armor_prof() == "heavy") return 1;
+int armor_filter(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (ob->query_armor_prof() == "light" || ob->query_armor_prof() == "medium" || ob->query_armor_prof() == "heavy") {
+        return 1;
+    }
     return 0;
 }
 
@@ -34,7 +44,7 @@ int cmd_cast(string str)
     mapping mymapp = ([]), mymapp2 = ([]);
 
     seteuid(getuid());
-    if(!str) {
+    if (!str) {
         write("Cast what on/at what?");
         return 1;
     }
@@ -75,12 +85,15 @@ int cmd_cast(string str)
         str2 = str;
     }
 
-    if (!sscanf(str2, "%s on %s", str2, tar))
-        if (!sscanf(str2, "%s at %s", str2, tar))
-            if (!sscanf(str2, "%s to %s", str2, tar))
+    if (!sscanf(str2, "%s on %s", str2, tar)) {
+        if (!sscanf(str2, "%s at %s", str2, tar)) {
+            if (!sscanf(str2, "%s to %s", str2, tar)) {
                 if (!sscanf(str2, "%s as %s", str2, tar)) {
                     tar = 0;
                 }
+            }
+        }
+    }
 
     if (!TP->is_class(type) && !avatarp(TP) && type != "innate") {
         return notify_fail("You can't cast spells as a " + type + "!\n");
@@ -113,65 +126,59 @@ int cmd_cast(string str)
         }
     }
 
-    if(type == "sorcerer" ||
-       type == "inquisitor" ||
-       type == "oracle" ||
-       type == "psion" ||
-       type == "psywarrior")
-    {
+    if (type == "sorcerer" ||
+        type == "inquisitor" ||
+        type == "oracle" ||
+        type == "psion" ||
+        type == "psywarrior") {
         known = TP->query_mastered_spells(type);
-        if(member_array(str2,known) == -1) {
-            tell_object(TP,"You haven't mastered such a power!");
+        if (member_array(str2, known) == -1) {
+            tell_object(TP, "You haven't mastered such a power!");
             return 1;
         }
     }
 
-    if(type == "bard")
-    {
-        if(TP->is_wearing_type("armor") && !avatarp(TP))
-        {
-            tell_object(TP,"You can't cast in all that armor.");
+    if (type == "bard") {
+        if (TP->is_wearing_type("armor") && !avatarp(TP)) {
+            tell_object(TP, "You can't cast in all that armor.");
             return 1;
         }
     }
 
-    if(type == "monk")
-    {
+    if (type == "monk") {
         known = TP->query_ki_spells();
-        if(member_array(str2,known) == -1)
-        {
-            tell_object(TP,"You know no such ability!");
+        if (member_array(str2, known) == -1) {
+            tell_object(TP, "You know no such ability!");
             return 1;
         }
-        if(!TP->is_ok_armour("barb"))
-        {
+        if (!TP->is_ok_armour("barb")) {
             tell_object(TP, "You must be unarmored in order to use your monk spells.");
             return 1;
         }
-        wielded == (object *)TP->query_wielded();
-        for(i = 0;i < sizeof(wielded);i++)
-        {
-            if(!objectp(wielded[i])) continue;
-            if((int)wielded[i]->query_size() > 1)
-            {
-                tell_object(TP, "Your "+wielded[i]->query_short()+" interferes "+
-                "with your ability to cast your monk spells!%^RESET%^");
+        wielded == (object*)TP->query_wielded();
+        for (i = 0; i < sizeof(wielded); i++) {
+            if (!objectp(wielded[i])) {
+                continue;
+            }
+            if ((int)wielded[i]->query_size() > 1) {
+                tell_object(TP, "Your " + wielded[i]->query_short() + " interferes " +
+                            "with your ability to cast your monk spells!%^RESET%^");
                 return 1;
             }
         }
     }
 
-    if(type == "wizard" ||
-       type == "mage" ||
-       type == "sorcerer" ||
-       type == "warlock")
-    {
+    if (type == "wizard" ||
+        type == "mage" ||
+        type == "sorcerer" ||
+        type == "warlock") {
         armor = TP->all_armour();
         armor = distinct_array(armor);
-        armor = filter_array(armor,"armor_filter",TO);
-        if(FEATS_D->usable_feat(TP,"armored caster") ||
-           type == "warlock")
-            armor = filter_array(armor,"light_armor_filter",TO);
+        armor = filter_array(armor, "armor_filter", TO);
+        if (FEATS_D->usable_feat(TP, "armored caster") ||
+            type == "warlock") {
+            armor = filter_array(armor, "light_armor_filter", TO);
+        }
     }
     if (type == "psywarrior" || type == "psion") {
         if (FEATS_D->usable_feat(TP, "armored manifester") || FEATS_D->usable_feat(TP, "mind before matter")) {
@@ -193,12 +200,14 @@ int cmd_cast(string str)
         return 1;
     }
 
-    if (TP->query("relationship_profile"))
-        if (strsrch((string)TP->query("relationship_profile"), "druid_") >= 0)
+    if (TP->query("relationship_profile")) {
+        if (strsrch((string)TP->query("relationship_profile"), "druid_") >= 0) {
             if (TP->query_property("shapeshifted") && type != "innate" && type != "druid") {
                 tell_object(TP, "You can only cast druid spells or innate abilities while in druidic form.");
                 return 1;
             }
+        }
+    }
 
     spell = str2;
     spell = MAGIC_D->expand_quick_name(spell);
@@ -245,10 +254,10 @@ int cmd_cast(string str)
     }
 
     if (domain) {
-        targ->set_spell_level(([type:slevel]));
+        targ->set_spell_level(([type: slevel]));
     }
 
-    spell = "level "+(int)tmp->query_spell_level(type); //spontaneous caster classes!
+    spell = "level " + (int)tmp->query_spell_level(type); //spontaneous caster classes!
 
     if (type == "bard" ||
         type == "sorcerer" ||
@@ -274,10 +283,10 @@ int cmd_cast(string str)
     return 1;
 }
 
-void help() {
-
+void help()
+{
     write(
-"
+        "
 %^CYAN%^NAME%^RESET%^
 
 cast
@@ -313,7 +322,7 @@ If the domain spell has target, it has to be applied eiter in the end of cast st
 
 If you're of good alignment you can add the keywords %^ORANGE%^<as healing>%^RESET%^ to your cast invocation to convert the spell you name into a relevant healing (positive energy) spell.
 
-If you're of evil alignment you can add the keywords %^ORANGE%^<as healing>%^RESET%^ to your cast invocation to convert the spell you name into a relevant harming (negative energy) spell.
+If you're of evil alignment you can add the keywords %^ORANGE%^<as harming>%^RESET%^ to your cast invocation to convert the spell you name into a relevant harming (negative energy) spell.
 
 Neutral clerics can do both.
 

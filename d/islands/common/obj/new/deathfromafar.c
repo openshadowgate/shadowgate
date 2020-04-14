@@ -58,16 +58,16 @@ int wieldme()
         tell_object(ETO, "You find it impossible to lift two such mighty weapons!", ETO);
         return 0;
     }
-    tell_room(EETO, ETOQCN + " %^RESET%^%^ORANGE%^wields the longbow and seems filled with a %^BOLD%^%^RED%^killer insight%^RESET%^%^ORANGE%^.%^RESET%^", ETO);
-    tell_object(ETO, "%^RESET%^%^ORANGE%^As you wield the longbow, you are filled with a %^BOLD%^%^%^RED%^killer insight%^RESET%^%^ORANGE%^.%^RESET%^");
+    tell_room(EETO, ETOQCN + " %^RESET%^%^ORANGE%^wields the longbow and seems filled with a %^BOLD%^%^RED%^killer's instinct%^RESET%^%^ORANGE%^.%^RESET%^", ETO);
+    tell_object(ETO, "%^RESET%^%^ORANGE%^As you wield the longbow, you are filled with a %^BOLD%^%^%^RED%^killer's instinct%^RESET%^%^ORANGE%^.%^RESET%^");
     ETO->set_property("master weapon", 1);
     return 1;
 }
 
 int unwieldme()
 {
-    tell_room(EETO, "%^RESET%^%^ORANGE%^" + ETOQCN + " unwields the longbow and seems less %^BOLD%^%^CYAN%^insightful.%^RESET%^", ETO);
-    tell_object(ETO, "%^RESET%^%^ORANGE%^As you unwield the longbow, you feel the %^BOLD%^%^RED%^killer instinct %^RESET%^%^ORANGE%^imparted by the bow leave.%^RESET%^");
+    tell_room(EETO, "%^RESET%^%^ORANGE%^" + ETOQCN + " unwields the longbow and seems less %^BOLD%^%^CYAN%^instinctful.%^RESET%^", ETO);
+    tell_object(ETO, "%^RESET%^%^ORANGE%^As you unwield the longbow, you feel the %^BOLD%^%^RED%^killer's instinct %^RESET%^%^ORANGE%^imparted by the bow leave.%^RESET%^");
     ETO->set_property("master weapon", -1);
     return 1;
 }
