@@ -87,11 +87,11 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) {
+    /*if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) { //Removing as pistols are now a thing.
         tell_object(caster, "%^YELLOW%^You can't dualwield ranged weapons!\n");
         dest_effect();
         return;
-    }
+       }*/
     if (!ammo = present(weapons[0]->query_ammo(), caster)) {
         tell_object(caster, "%^YELLOW%^You don't have any ammunition for that weapon!\n");
         dest_effect();

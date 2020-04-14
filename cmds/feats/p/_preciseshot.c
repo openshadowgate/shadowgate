@@ -97,11 +97,11 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) {
+    /*if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) { //Removing as pistols are now a thing
         tell_object(caster, "%^YELLOW%^You can't dual-wield ranged weapons!\n");
         dest_effect();
         return;
-    }
+       }*/
     if (caster->query_property("shapeshifted")) {
         tell_object(caster, "%^YELLOW%^You can't do that while shapeshifted!\n");
         dest_effect();

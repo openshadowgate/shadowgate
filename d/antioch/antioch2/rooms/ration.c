@@ -1,5 +1,8 @@
+//Updated for better mapping. Kismet. 
+//Ready to be installed: Proper path is: /d/antioch/antioch2/rooms/ration Kismet.
+
 #include <std.h>
-#include "../antioch.h"
+#include "../antioch.h" 
 inherit VAULT;
 
 void create()
@@ -7,7 +10,7 @@ void create()
 	::create();
    set_terrain(WOOD_BUILDING);
    set_travel(DIRT_ROAD);
-	set_property("indoors",1);
+	set_property("indoors",1); 
 	set_property("light",2);
 	set_short("The Iron Gullet");
 	set_long(
@@ -56,7 +59,7 @@ void create()
 	"scale" : "This is a fine metal scale used to carefully weigh"+
 	" out the rations in the shop.",
 	"shelves" : "The shelves behind the counter are stocked full of"+
-	" rations.",
+	" rations.", 
 	({"barrel","barrels"}) : "There are many barrels scattered about"+
 	" the room containing various nuts. You can recognize peanuts,"+
 	" pecans, walnuts, almonds, cashews, and a couple types you"+
@@ -75,12 +78,12 @@ void create()
 	" type seems to be beef, you think, but meat pretty much looks"+
 	" the same dried and it's hard to tell.",
 	"stool" : "There is a wooden stool behind the counter for the"+
-	" owner of this shop to sit on.",
+	" owner of this shop to sit on.", 
 	]));
 	set_exits(([
-	"west" : ROOMS+"street17",
+		"east" : ROOMS+"street17",
 	]));
-	set_door("door",ROOMS+"street17","west",0);
+		set_door("door",ROOMS+"street17","east",0);
 }
 
 void reset()

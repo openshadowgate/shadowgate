@@ -1,4 +1,6 @@
 // switched to the new jail inherit 1/26/06 *Styx*
+// Changed location, so updated which room is seen when one peers through a window, as well as some minor changes to description. Kismet.
+//Ready to be installed. Proper path: /d/antioch/antioch2/rooms/jail Kismet.
 
 #include <std.h>
 
@@ -15,22 +17,23 @@ void create()
     set_terrain(STONE_BUILDING);
     set_travel(PAVED_ROAD);
     set_name("Antioch jail cell");
-    set_short("An Antioch jail cell");
-    set_long("You are in a gloomy, dank jail cell, about six feet wide by eight feet deep.  The walls are cold, damp stone and rats are scurrying about the straw mat on the floor that serves as a bed.  The only light comes through a small window that is heavily barred or through the six inch square grate in the door.  The damp air chills your body.  Obviously your stay here is not meant to be a pleasant experience.");
+    set_short("Antioch jail cell");
+    set_long("A gloomy, dank cell\n"+ 
+"You are in a gloomy, dank jail cell, about six feet wide by eight feet deep.  The walls are cold, damp stone and rats are scurrying about the straw mat on the floor that serves as a bed. The only light comes through a small window that is heavily barred or through the six inch square grate in the door. The damp air chills your body. Obviously your stay here is not meant to be a pleasant experience.");
     set_listen("default", "You can hear the rats scurrying around.");
     set_smell("default", "A nauseating smell rises from the filthy, damp "
               "floor.");
     set_items(([
                    "grate" : "Perhaps you can peer through the grate to see who is in "
                    "the main jail.",
-                   "window" : "You can see the top of the gallows from here.  You "
+                   "window" : "You can see the top an oak tree from here.  You "
                    "might be able to peer out and see who is there, if you really "
                    "want to know.",
                ]));
     set_exits(([
                    "out" : JAILMAIN,
                    "grate" : JAILMAIN,
-                   "window" : "/d/antioch/antioch2/rooms/street1",
+                   "window" : "/d/antioch/antioch2/rooms/square",
                ]));
     set_invis_exits(({ "window", "grate" }));
     set_pre_exit_functions(({ "window", "grate" }), ({ "GoThroughDoor", "GoThroughDoor" }));
