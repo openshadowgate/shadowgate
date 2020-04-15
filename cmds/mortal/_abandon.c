@@ -52,9 +52,9 @@ int get_exp_cost(object obj, int num)
     if (level > CHARACTER_LEVEL_CAP) {
         level = CHARACTER_LEVEL_CAP;
     }
-    extra = (int)obj->query_exp() - exp_for_level(level);
+    extra = (int)obj->query_exp() - total_exp_for_level(level);
 
-    cost = total_exp_for_level(level) - total_exp_for_level(level - (num));
+    cost = total_exp_for_level(level) - total_exp_for_level(level - (num - level_adjust));
     cost = cost + extra;
     return cost;
 }
@@ -83,6 +83,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
     if (objectp(class_ob) && TP->query_class_level("theclass") < 11) {
         class_ob->remove_base_class(TP);
     }
+
     //tell_object(TP, "cost = "+cost);
     TP->set("active_class", theclass);
     TP->add_exp(-cost);
@@ -93,28 +94,12 @@ int confirm_drop(string str, string theclass, int drop, int cost)
     TP->set_combat_spec(theclass, "");
     tell_object(TP, "%^BOLD%^Resetting class combat spec...%^RESET%^");
     skills = my_skills;
+
     if (sizeof(skills)) {
         for (i = 0; i < sizeof(skills); i++) {
             TP->set_skill(skills[i], 0);
         }
         tell_object(TP, "%^BOLD%^Clearing skills...%^RESET%^");
-    }
-
-    imms = children("/std/user.c");
-    for (i = 0; i < sizeof(imms); i++) {
-        if (!objectp(imms[i])) {
-            continue;
-        }
-        if (!avatarp(imms[i])) {
-            continue;
-        }
-        if ((int)TP->query_class_level(theclass) <= 1) {
-            tell_object(imms[i], "%^RESET%^%^BOLD%^" + capitalize(TP->query_true_name()) + " has chosen to "
-                        "abandon " + TP->QP + " " + theclass + " class.");
-        }else {
-            tell_object(imms[i], "%^RESET%^%^BOLD%^" + capitalize(TP->query_true_name()) + " has chosen "
-                        "to drop " + drop + " levels in " + TP->QP + " " + theclass + " class.");
-        }
     }
 
     feats = (int)TP->query_other_feats_gained();
@@ -273,9 +258,7 @@ int cmd_abandon(string str)
     }
 
     drop = get_level_block(feedlevel);// + lvladjust);
-    tell_object(TP, "drop = " + drop);
     cost = get_exp_cost(TP, drop);
-//    cost = get_exp_cost(TP, (drop + lvladjust));
 
     if ((int)TP->query_class_level(str) > (10 - lvladjust)) {
         tell_object(TP, "\nAre you sure you want to drop %^BOLD%^%^" + drop + " %^RESET%^"

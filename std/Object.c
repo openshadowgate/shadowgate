@@ -1186,60 +1186,90 @@ string query_factionitem(){
    return factionitem;
 }
 
-void sign(object signer){
-    if(!pointerp(ob_data["signature"])) {
-      ob_data["signature"] = ({capitalize(signer->query_name())});
-      } else {
-     ob_data["signature"] += ({capitalize(signer->query_name())});
+void sign(object signer, string sign_as, int skill)
+{
+    if (!arrayp(ob_data["signature"])) {
+        ob_data["signature"] = ({});
     }
+
+    ob_data["signature"] += ({ ({signer->query_name(), sign_as, skill}) });
 }
 
 int __Read(string str) {
     int i;
-        if(!objectp(TO)) return 0;
-        if(!objectp(TP)) return 0;
-    if(!str) return notify_fail("Read what?\n");
-    if(objectp(ETO))
-    if(present(str,ETO) != TO) return 0;//notify_fail("You do not notice that here.\n");
-    if(query_hidden() || query_magic_hidden()) return 0;//return notify_fail("You do not notice that here.\n");
-    if(!ob_data || !ob_data["read"])
+    if (!objectp(TO)) {
+        return 0;
+    }
+    if (!objectp(TP)) {
+            return 0;
+        }
+    if (!str) {
+        return notify_fail("Read what?\n");
+    }
+    if (objectp(ETO)) {
+        if (present(str, ETO) != TO) {
+            return 0;                       //notify_fail("You do not notice that here.\n");
+        }
+    }
+    if (query_hidden() || query_magic_hidden()) {
+        return 0;                                           //return notify_fail("You do not notice that here.\n");
+    }
+    if (!ob_data || !ob_data["read"]) {
         return notify_fail(living(this_object()) ? "Read a living thing?\n" :
                            "There is nothing on it to read.\n");
-    if(functionp(ob_data["read"])){
-       if(query_property("sealed")){
-          tell_object(TP,"That seems to be sealed.  You will need "+
-             "to break the seal first.");
-          return 1;
-       }
+    }
+    if (functionp(ob_data["read"])) {
+        if (query_property("sealed")) {
+            tell_object(TP, "That seems to be sealed.  You will need " +
+                        "to break the seal first.");
+            return 1;
+        }
         return call_other(TO, (*ob_data["read"])(0), (str));
     }
     else if(stringp(ob_data["read"]) || pointerp(ob_data["read"])) {
-       if(query_property("sealed")){
-          tell_object(TP,"That seems to be sealed.  You will need "+
-             "to break the seal first.");
-          return 1;
-       }
-        if(stringp(ob_data["read"])) {
+        if (query_property("sealed")) {
+            tell_object(TP, "That seems to be sealed.  You will need " +
+                        "to <seal break> first.");
+            return 1;
+        }
+        if (stringp(ob_data["read"])) {
             message("reading", ob_data["read"], TP);
         } else if (pointerp(ob_data["read"])) {
-            for(i=0;i<sizeof(ob_data["read"]);i++){
+            for (i = 0; i < sizeof(ob_data["read"]); i++) {
                 if (pointerp(ob_data["language list"]) && sizeof(ob_data["language list"]) > i) {
                     ob_data["language"] = ob_data["language list"][i];
                 }
                 message("reading", ob_data["read"][i], TP);
             }
         }
-// moving the signature info. line down so it doesn't show unless there is one *Styx* 8/29/03
-//        message("info", "-=-=-=-=-=-=-=-=-=Signature Info=-=-=-=-=-=-=-=-=-",TP);
-        if (pointerp(ob_data["signature"])){
-           message("info", "-=-=-=-=-=-=-=-=-=Signature Info=-=-=-=-=-=-=-=-=-",TP);
+        if (pointerp(ob_data["signature"])) {
+            string signature;
+            message("info", "Signatures: ", TP);
 
-            for(i=0;i<sizeof(ob_data["signature"]);i++){
-                message("info","Signed by: "+ob_data["signature"][i],TP);
+            for (i = 0; i < sizeof(ob_data["signature"]); i++) {
+                if (stringp(ob_data["signature"][i])) {
+                    signature = ob_data["signature"][i];
+                } else if (arrayp(ob_data["signature"][i])) {
+                    signature = ob_data["signature"][i][1];
+                }
+
+                if (!TP->knownAs(signature)) {
+                    message("info", "Signed by someone you don't know.", TP);
+                } else {
+                    message("info", "Signed by: " + capitalize(TP->knownAs(signature)), TP);
+                }
+
+                if (arrayp(ob_data["signature"][i])) {
+                    if (ob_data["signature"][i][1] != ob_data["signature"][i][0]) {
+                        if (TP->query_skill("academics") >= ob_data["signature"][i][2]) {
+                            message("info", "You are sure signature had been forged.", TP);
+                        }
+                    }
+                }
+
             }
         }
-        message("other_action", (string)TPQCN+" reads the "+query_name()+".", ETP,
-                ({ TP}));
+        message("other_action", (string)TPQCN+" reads the "+query_name()+".", ETP, ({ TP }));
         return 1;
     }
     else return notify_fail("It looks all jumbled.\n");

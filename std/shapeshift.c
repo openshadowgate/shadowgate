@@ -40,17 +40,15 @@ static mapping  bonuses;
 
 void create()
 {
-    set_attack_limbs( ({ "mouth" }) ); //
-    set_new_damage_type("piercing"); //
-    set_limbs( ({ "mouth","head","right foreleg","right forepaw","left foreleg","left forepaw","right rear leg","right rear paw","left rear leg","left rear paw","tail" }) ); //
-    set_attack_functions( ([ "mouth" : (:TO,"shape_attack":) ]) ); //
-    set_ac_bonus(1); //
-    set_base_attack_num(2); //
-    set_castable(0); //
-    set_can_talk(0); //
-    //set_shape_race(); //
-    //set_shape_language("wolf"); //
-    set_shape_profile("druid_wolf_999"); // needs to be something the player is unlikely to name one of their profiles when disguise goes in
+    set_attack_limbs( ({ "mouth" }) );
+    set_new_damage_type("piercing");
+    set_limbs( ({ "mouth","head","right foreleg","right forepaw","left foreleg","left forepaw","right rear leg","right rear paw","left rear leg","left rear paw","tail" }) );
+    set_attack_functions( ([ "mouth" : (:TO,"shape_attack":) ]) );
+    set_ac_bonus(1);
+    set_base_attack_num(2);
+    set_castable(0);
+    set_can_talk(0);
+    set_shape_profile("druid_wolf_999");
     set_shape_height(36);
     set_shape_weight(125);
     call_out("check",10);
@@ -395,7 +393,7 @@ void do_bonuses(object obj, string bonus,int amount)
     case "light resistance":
     case "darkness resistance":
 
-        obj->set_resistance(bonus,amount);
+        obj->set_resistance(replace_string(bonus, " resistance", ""),amount);
         return;
 
     case "fire resistance percent":
@@ -420,7 +418,7 @@ void do_bonuses(object obj, string bonus,int amount)
     case "light resistance percent":
     case "darkness resistance percent":
 
-        obj->set_resistance_percent(bonus,amount);
+        obj->set_resistance_percent(replace_string(bonus, " resistance percent", ""),amount);
         return;
 
     case "sight bonus":

@@ -23,8 +23,9 @@ void create()
     set_shape_bonus("sight bonus", 3);
     set_shape_bonus("dexterity", 4);
     set_shape_bonus("constitution", 4);
-    set_shape_bonus("cold resistance", 10);
-    set_shape_bonus("silver resistance", -50);
+    set_shape_bonus("acid resistance percent", 7);
+    set_shape_bonus("cold resistance percent", 7);
+    set_shape_bonus("silver resistance percent", -50);
 }
 
 int default_descriptions(object obj)

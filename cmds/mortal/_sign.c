@@ -19,7 +19,9 @@ sign OBJECT [as NAME]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This allows you to sign an object indicating an authentic signature. There is a chance that someone can forge a signature.
+This allows you to sign an object indicating an authentic signature.
+
+You can forge signatures signing as NAME. Ability to detect signature is forged will depend on the reader's academic skill versus your academics skill.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
@@ -50,7 +52,7 @@ int cmd_sign(string str)
         }
     }
     if (!stringp(who)) {
-        ob->sign(TP);
+        ob->sign(TP, TP->query_name(), TP->query_skill("academics"));
         write("You sign your name to the " + ob->query_short() + ".");
         tell_room(ETP, TPQCN + " signs " + TP->query_possessive() + " name to the " + ob->query_short() + ".", TP);
         return 1;
@@ -58,15 +60,15 @@ int cmd_sign(string str)
 
     who2 = TP->realName(who);
     if (!stringp(who2)) {
-        write("You can't forge a signature of someone you don't know (for now).");
+        write("You can't forge a signature of someone you don't know.");
         return 1;
     }
     if (!user_exists(who2)) {
-        write("You can't forge a signature of someone who doesn't exist (for now).");
+        write("You can't forge a signature of someone who doesn't exist.");
         return 1;
     }
 
-    ob->forge(TP, who);
+    ob->sign(TP, who, TP->query_skill("academics"));
 
     write("You forge " + capitalize(who) + "'s name on the " + ob->query_short() + ".");
     tell_room(ETP, TPQCN + " signs " + TP->query_possessive() + " name is the " + ob->query_short() + ".", TP);

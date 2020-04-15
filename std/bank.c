@@ -166,7 +166,8 @@ int exchange(string str) {
    amt = amount;
    val = amount * (int)ECONOMY_D->currency_rate(from);
    amount = to_int(val / (int)ECONOMY_D->currency_rate(to));
-   check = amount; //exchanging currency is now free
+   check = (amount*85)/100;
+   check = amount;
    if(check < 1){
       notify_fail("That is not enough "+from+" to exchange it for "+to+".\n");
       return 0;
@@ -176,7 +177,7 @@ int exchange(string str) {
    amt2 = amt2 / (int)ECONOMY_D->currency_rate(from);
    diff = amt - amt2;
    if (diff > 0) TP->add_money(from,diff);
-   //amount = (amount*90)/100; //exchanging currence is now free
+   amount = (amount*85)/100;
    this_player()->add_money(to, amount);
    write("You exchange your "+from+" coins for "+amount+" "+to+".");
    tell_room(ETP,TPQCN+" exchanges some money.",TP);
@@ -287,6 +288,7 @@ int deposit(string str) {
    }
 
    amount2 = amount;
+   amount2 = (amount * 85) / 100;
    x = (int)BANK_D->deposit((string)this_player()->query_name(), BANK_ID, amount2, type);
    if(x != TRANSACTION_OK) {
       switch(x) {
@@ -364,6 +366,7 @@ int read(string str) {
 %^CYAN%^%^BOLD%^ withdraw NUM TYPE%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
 %^CYAN%^%^BOLD%^ exchange NUM TYPE for TYPE2%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
 
+A 15% service fee will be charged to all transactions.
 MELNMARN
    );
    if(archp(TP)) {
