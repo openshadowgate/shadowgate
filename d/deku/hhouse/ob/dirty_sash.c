@@ -6,9 +6,9 @@ void create()
 {
     ::create();
     set_name("dingy sash");
-    set_id(({ "sash", "dirty sash", "dingy sash", 
+    set_id(({ "sash", "dirty sash", "dingy sash",
     "hhousedingysaidesash", "green sash", "dingy green sash"}));
-	
+
     set_short("%^RESET%^%^ORANGE%^A dingy sash%^RESET%^");
 
     set_long("%^RESET%^%^ORANGE%^This piece of %^BOLD%^%^CYAN%^cotton"+
@@ -54,8 +54,8 @@ int clean_me_up()
     if(is_clean) return 0;
     is_clean = 1;
 
-    set_id(({ "sash", "augmentation sash", "brilliant sash", "green sash", 
-    "brilliant green sash", "sash of augmentation", "cohesion sash", 
+    set_id(({ "sash", "augmentation sash", "brilliant sash", "green sash",
+    "brilliant green sash", "sash of augmentation", "cohesion sash",
     "cohesive sash of augmentation"}));
 
     set_obvious_short("%^BOLD%^%^GREEN%^A br%^RESET%^%^GREEN%^i%^BOLD%^"+
@@ -102,7 +102,7 @@ string find_highest_level_class(object who)
     {
         clev = (int)who->query_class_level(myClasses[x]);
         if(lev > clev) continue;
-        else 
+        else
         {
             lev = clev;
             highclass = myClasses[x];
@@ -111,61 +111,60 @@ string find_highest_level_class(object who)
     }
     if(!stringp(highclass)) return "fail";
     return highclass;
-    
+
 }
 
 void adjust_sash(object who)
 {
-    if(!objectp(who)) return;
+    if (!objectp(who)) {
+        return;
+    }
 
     myOwner = who->query_true_name();
     clear_item_bonus();
     myClass = find_highest_level_class(who);
-    if(myClass == "fail")
-    {
+    if (myClass == "fail") {
         tell_object(who, "Something went wrong when cleaning your sash. Notify saide of this message.");
         return;
     }
-    switch(myClass)
-    {
-        case "druid": case "cleric":
-            set_item_bonus("wisdom", 2);
-            set_item_bonus("empowered", 1);
-            break;
-        case "mage": case "psion": case "psywarrior":
-			set_item_bonus("intelligence", 2);
-            set_item_bonus("empowered", 1);
-            break;
-        case "sorcerer": case "paladin": case "cavalier": case "bard": case "warlock":
-            set_item_bonus("charisma", 2);
-            set_item_bonus("empowered", 1);	
-            break;
-        case "fighter": 
-            set_item_bonus("strength", 2);
-            set_item_bonus("perception", 2);
-            break;
-        case "barbarian":
-            set_item_bonus("constitution", 2);
-            //set_item_bonus("strength", 2);
-            set_item_bonus("endurance", 2);
-            break;
-        case "ranger": 
-            set_item_bonus("wisdom", 2);
-            set_item_bonus("survival", 2);
-            break;
-        case "thief": 
-            set_item_bonus("dexterity", 2);
-            set_item_bonus("dungeoneering", 2);
-            break;
+    switch (myClass) {
+    case "druid": case "cleric":
+        set_item_bonus("wisdom", 2);
+        set_item_bonus("empowered", 1);
+        break;
+    case "mage": case "psion": case "psywarrior":
+        set_item_bonus("intelligence", 2);
+        set_item_bonus("empowered", 1);
+        break;
+    case "sorcerer": case "paladin": case "cavalier": case "bard": case "warlock": case "oracle":
+        set_item_bonus("charisma", 2);
+        set_item_bonus("empowered", 1);
+        break;
+    case "fighter":
+        set_item_bonus("strength", 2);
+        set_item_bonus("perception", 2);
+        break;
+    case "barbarian":
+        set_item_bonus("constitution", 2);
+        //set_item_bonus("strength", 2);
+        set_item_bonus("endurance", 2);
+        break;
+    case "ranger":
+        set_item_bonus("wisdom", 2);
+        set_item_bonus("survival", 2);
+        break;
+    case "thief":
+        set_item_bonus("dexterity", 2);
+        set_item_bonus("dungeoneering", 2);
+        break;
     }
-
 }
 
-int wear_func() 
+int wear_func()
 {
     if(!objectp(ETO)) return 0;
     //if(!objectp(EETO)) return 0;
-    if(!is_clean) 
+    if(!is_clean)
     {
         tell_object(ETO, "%^RESET%^%^ORANGE%^You quickly "+
         "tie the dingy sash around your waist.%^RESET%^");
@@ -178,8 +177,8 @@ int wear_func()
     }
     if(is_clean)
     {
-        if(myOwner != (string)ETO->query_true_name() || 
-        myClass != (string)ETO->query("active_class")) 
+        if(myOwner != (string)ETO->query_true_name() ||
+        myClass != (string)ETO->query("active_class"))
         {
             adjust_sash(ETO);
             tell_object(ETO, "%^BOLD%^%^GREEN%^You quickly "+
@@ -201,25 +200,23 @@ int wear_func()
     return 1;
 }
 
-int remove_func() 
+int remove_func()
 {
     if(!is_clean)
     {
         tell_object(ETO, "%^RESET%^%^ORANGE%^You untie the "+
         "dingy sash.%^RESET%^");
         tell_room(EETO, ETOQCN+"%^RESET%^%^ORANGE%^ unties the "+
-        "dingy sash.%^RESET%^", ETO);   
+        "dingy sash.%^RESET%^", ETO);
         return 1;
     }
     if(is_clean)
     {
         tell_object(ETO, "%^BOLD%^%^GREEN%^You untie the sash "+
         "and feel the augmentation granted by it fade away.%^RESET%^");
-		
+
         tell_room(EETO, ETOQCN+"%^BOLD%^%^GREEN%^ unties the "+
         "brilliant sash.%^RESET%^", ETO);
         return 1;
     }
 }
-
-

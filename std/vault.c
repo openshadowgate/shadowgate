@@ -390,7 +390,7 @@ int OpenDoor(string str)
     }else {
         write("You open the " + str + ".\n");
     }
-//    say(this_player()->query_cap_name()+" opens the "+str+".\n",this_player());
+
     if (doors[str]["open string"]) {
         tell_room(ETP, TPQCN + " opens the " + str + ".\n" + (doors[str]["open string"]), TP);
     }else {
@@ -401,8 +401,8 @@ int OpenDoor(string str)
         if (userp(TP)) {
             doors[str]["destination"]->set_had_players();
         }
-        tell_room(doors[str]["destination"], "You notice the " + str +
-                  " suddenly open from the other side.\n");
+        tell_room(find_object_or_load(doors[str]["destination"]), "You notice the " + str +
+                  " opens from the other side.\n");
     }
     POISON_D->is_object_poisoned(TO, TP, "open", 1, str);
     set_open(str, 1);
@@ -462,7 +462,7 @@ int CloseDoor(string str)
         if (userp(TP)) {
             doors[str]["destination"]->set_had_players();
         }
-        tell_room(doors[str]["destination"], "The " + str +
+        tell_room(find_object_or_load(doors[str]["destination"]), "The " + str +
                   " is closed by someone on the other side.\n");
     }
     POISON_D->is_object_poisoned(TO, TP, "close", 1, str);
@@ -742,7 +742,7 @@ int KnockDoor(string str)
         write("You " + doors[str]["knock string"] + " on the " + str + ".");
         say(TPQCN + " " + doors[str]["knock string"] + "s on the " + str + ".", TP);
         if (objectp(find_object_or_load(doors[str]["destination"]))) {
-            tell_room(doors[str]["destination"], "Someone from the other " +
+            tell_room(find_object_or_load(doors[str]["destination"]), "Someone from the other " +
                       "side " + doors[str]["knock string"] + "s on the " + str + ".");
         }
     }

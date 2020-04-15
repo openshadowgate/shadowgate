@@ -15,6 +15,7 @@ void create()
                    "west" : ROOMS "beach7",
                    "northwest" : ROOMS "beach2",
                    "north" : ROOMS "beach3",
+                   "northeast" : ROOMS "beach4",
                    "east" : ROOMS "beach9",
                    "southwest" : ROOMS "shore3",
                    "south" : ROOMS "shore4",
