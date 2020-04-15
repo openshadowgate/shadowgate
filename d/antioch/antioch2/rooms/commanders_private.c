@@ -12,6 +12,7 @@ void create()
 	set_travel(PAVED_ROAD);
     set_property("indoors",1);
     set_property("light",2);
+	set_property("teleport proof",67);
     set_short("The Commander's Private Quarters");
     set_long("The Commander's Private Quarters\n"+
 "This small room functions as the commander's private quarters, as well as a closed-off meeting area. It hosts a relatively big table, circled by wooden chairs, and a small cupboard. On the wall above the table hangs a large painting of the sun setting over a warm mountain range. There is a fireplace set into the southern wall, providing some warmth and comfort on cold days, as well as an area to brew tea.  Just west of the fireplace, a room divider of Tsarven origin provides some privacy to a simple bed, a chest of clothes and a small wash-bin. A window set in the west wall gives a view of the King's forests behind Antioch."
@@ -33,6 +34,8 @@ void create()
     ]));
 	set_exits(([
         "east" : ROOMS+"commanders_office",
-    ]));
+    ])); 
     set_door("door",ROOMS+"commanders_office","east",0);
+	set_locked("door", 1, "lock");
+		lock_difficulty("door", get_phouse_lock_dc("epic"), "lock");
 }

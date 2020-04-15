@@ -1,5 +1,5 @@
 //Updated to improve mapping and to add Commander's Office. Kismet. 
-//Ready to install. Proper path is: /d/antioch/antioch2/rooms/jail_main Kismet.
+//Ready to install. Proper path is: /d/antioch/antioch2/rooms/jail_main Kismet. 
 
 #include <std.h> 
 #define SHADOW "gates" //why does this say SHADOW? Kismet. 
@@ -8,7 +8,7 @@
 #define DESTD "/daemon/destinations_d"
 #define ADEST(B,C) "/daemon/destinations_d"->add_waystation("/d/antioch/antioch2/rooms/jail_main",B,C)
 
-inherit "/std/jail_main.c";
+inherit "/std/jail_main.c"; 
 
 void create(){
     ::create();
@@ -31,7 +31,7 @@ void create(){
     set_name("Antioch jail"); 
     set_short("%^BOLD%^%^WHITE%^The Antioch Jail Office%^RESET%^");
     set_long("%^BOLD%^%^WHITE%^The Antioch Jail Office%^RESET%^.\n"+
-"This is the jailer's room, where criminals are checked in before being put into a cell. A cluttered desk sits in one corner and several well-worn chairs are scattered around the room. There is a book on the desk with a list of names scratched in it, as well as a %^BOLD%^%^WHITE%^sign%^RESET%^ that you should look at. A narrow stairwell leads down to a sturdy cell door with a small %^BOLD%^%^BLACK%^grate%^RESET%^ in it. During the day, the large window set above the door lets in some much needed light and during the evenings, several magical torches shed a bright light upon the otherwise drab room. The main exit leads east, out to the square, while another narrow staircase leads up onto a small balcony, which houses the commander's office. Towards the back of the room, a few relatively comfy chairs are set up in front of a modest fireplace.");
+"This is the jailer's room, where criminals are checked in before being put into a cell. A cluttered desk sits in one corner and several well-worn chairs are scattered around the room. There is a book on the desk with a list of names written in it, as well as a %^BOLD%^%^WHITE%^sign%^RESET%^ that you should %^BOLD%^%^WHITE%^look %^RESET%^at. A narrow stairwell leads down to a sturdy cell door with a small %^BOLD%^%^BLACK%^grate%^RESET%^ in it. During the day, the large window set above the door lets in some much needed light and during the evenings, several magical torches shed a bright light upon the otherwise drab room. The main exit leads east, out to the square, while another narrow staircase leads up onto a small balcony, which houses the commander's office. Towards the back of the room, a few relatively comfy chairs are set up in front of a modest fireplace.");
     set_items(([
         "grate" : "Perhaps the guard won't mind if you peer through the grate to see who is in the cell.",
 		({"cell door","cell"}) : "The cell door looks very heavy and extremely sturdy.  There is a grate in it which you could peer through.",
@@ -53,7 +53,7 @@ void create(){
     add_pre_exit_function("grate", "GoThroughDoor");
     set_door("cell door",CELL,"cell","Antioch jail key","lock");
 		set_open("cell door",0);
-		set_locked("cell door", 0, "lock");
+		set_locked("cell door", 1, "lock");
 		lock_difficulty("cell door",-90, "lock");
 		set_lock_description("cell door", "lock",
                          "This lock is sandwiched between two very heavy "
