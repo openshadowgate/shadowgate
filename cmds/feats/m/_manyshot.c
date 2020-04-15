@@ -82,7 +82,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if (!weapons[0]->is_lrweapon()) {
+    if (!weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
         tell_object(caster, "%^YELLOW%^You can't use this feat unless you are wielding a ranged weapon!\n");
         dest_effect();
         return;
@@ -145,16 +145,16 @@ void execute_attack()
         dest_effect();
         return;
     }
-    if (!weapons[0]->is_lrweapon()) {
+    if (!weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
         tell_object(caster, "%^YELLOW%^You can't use this feat unless you are wielding a ranged weapon!\n");
         dest_effect();
         return;
     }
-    if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) {
+    /*if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) {
         tell_object(caster, "%^YELLOW%^You can't dualwield ranged weapons!\n");
         dest_effect();
         return;
-    }
+       }*/
 
     caster->remove_property("using manyshot");
     caster->set_property("using manyshot", time() + 35);

@@ -92,7 +92,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if (!weapons[0]->is_lrweapon()) {
+    if (!weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
         tell_object(caster, "%^YELLOW%^You can't use this feat unless you are wielding a ranged weapon!\n");
         dest_effect();
         return;
@@ -156,16 +156,16 @@ void execute_attack()
         return;
     }
     weapons = caster->query_wielded();
-    if (!weapons[0]->is_lrweapon()) {
+    if (!weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
         tell_object(caster, "%^YELLOW%^You lower your weapon too soon, and the shot skitters uselessly along the ground!\n");
         dest_effect();
         return;
     }
-    if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) {
+    /*if (sizeof(weapons) > 1 && weapons[0] != weapons[1]) {
         tell_object(caster, "%^YELLOW%^You lower your weapon too soon, and the shot skitters uselessly along the ground!\n");
         dest_effect();
         return;
-    }
+       }*/
     if (caster->query_property("shapeshifted")) {
         tell_object(caster, "%^YELLOW%^You lower your weapon too soon, and the shot skitters uselessly along the ground!\n");
         dest_effect();
