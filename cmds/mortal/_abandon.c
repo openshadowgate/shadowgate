@@ -118,7 +118,6 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         TP->set_mlevel(theclass, 0);
         TP->remove_class(theclass);
         tell_object(TP, "%^BOLD%^Removing class %^MAGENTA%^" + theclass + "%^RESET%^%^BOLD%^...%^RESET%^");
-        TP->restrict_channel(theclass);
     }
 
 // moved all of the next section out of the above subquery; N, 6/16
@@ -243,7 +242,7 @@ int cmd_abandon(string str)
     }
 
     feedlevel = (int)TP->query_class_level(str);
-    if (lvladjust) { // need to revise the class level feed-in if level adjusted. N, 31/1/20.
+    if (lvladjust) {
         classlvls = 0;
         if (sizeof(classes) > 1) {
             for (i = 0; i < sizeof(classes); i++) {
@@ -252,12 +251,12 @@ int cmd_abandon(string str)
                 }
             }
         }
-        if (!(classlvls % 10)) { // means they're abandoning a LA impacted, if all the rest divide cleanly by 10.
+        if (!(classlvls % 10)) {
             feedlevel += lvladjust;
         }
     }
 
-    drop = get_level_block(feedlevel);// + lvladjust);
+    drop = get_level_block(feedlevel);
     cost = get_exp_cost(TP, drop);
 
     if ((int)TP->query_class_level(str) > (10 - lvladjust)) {
