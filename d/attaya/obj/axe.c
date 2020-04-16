@@ -181,7 +181,7 @@ int extra_hit(object targ)
     }
 
     if (rand == 10) {
-        if ((member_array("neck", targ->query_limbs()) != -1) && !random(10) && !targ->reflex_save(25) && !targ->query_property("no death") && !FEATS_D->usable_feat(targ, "death ward")) {
+        if ((member_array("neck", targ->query_limbs()) != -1) && !random(10) && !targ->reflex_save(50) && !targ->query_property("no death") && !FEATS_D->usable_feat(targ, "death ward")) { //increased DC to 50 to match godslayer
             tell_object(ETO, "%^RED%^You drop to one knee and snap the blade of the massive axe in a deadly upwards arc!%^RESET%^");
             tell_object(ETO, "%^BLUE%^You can see the blade sink cleanly into " + targ->QCN + "'s neck and pass through almost without resistance.%^RESET%^");
             tell_object(ETO, "%^B_RED%^" + targ->QCN + "'s head falls away and " + targ->QP + " body drops lifelessly to the ground.%^RESET%^");
