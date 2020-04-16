@@ -5,7 +5,7 @@
 
 inherit DAEMON;
 
-string forbidden_to_teach = ({"sylvan", "druidic"});
+string forbidden_to_teach = ({ "druidic" });
 
 int help()
 {
