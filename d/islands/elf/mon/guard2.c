@@ -134,18 +134,7 @@ int is_bad_race(object live)  // added N's fix for subraces
     if (query_bad_race(live)) {
         return 1;
     }
-    if ((string)live->query_race() == "elf") {
-        // un-altered fey'ri in natural demonic form
-        if ((string)live->query("subrace") == "fey'ri" &&
-            !live->query_property("altered")) {
-            return 1;
-        }
-    }
-    if (objectp(myshape = live->query_property("shapeshifted"))) {
-        if ((string)myshape->query_shape_race() == "dragon") {
-            return 1;
-        }
-    }else {
+    if ((string)live->query_visual_race() != "elf") {
         return 0;
     }
 }

@@ -5,9 +5,31 @@
 
 inherit DAEMON;
 
+string forbidden_to_teach = ({"sylvan", "druidic"});
+
 int help()
 {
-    write("%^CYAN%^NAME%^RESET%^\n\nteach - teach someone a tongue\n\n%^CYAN%^SYNTAX%^RESET%^\n\nteach %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ to %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^\n\n%^CYAN%^DESCRIPTION%^RESET%^\n\nIf you have a fair understanding of a %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you can teach %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^.\n\nThis will either help them learn it or give them a basic understanding of the language so they can start to learn from basic conversations.\n\n%^CYAN%^SEE ALSO%^RESET%^\n\nlanguages, speak, say, races");
+    write(
+        "
+%^CYAN%^NAME%^RESET%^
+
+teach - teach someone a tongue
+
+%^CYAN%^SYNTAX%^RESET%^
+
+teach %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ to %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+If you have a fair understanding of a %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you can teach %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^.
+
+This will either help them learn it or give them a basic understanding of the language so they can start to learn from basic conversations.
+
+Both teacher's and student's intelligence score affect how quickly language is being taught.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+languages, speak, say, races");
     return 1;
 }
 
@@ -42,6 +64,10 @@ int cmd_teach(string str)
 
     if (!TP->query_base_lang(lang) || (int)TP->query_base_lang(lang) < 50) {
         return notify_fail("You don't know that language well enough to teach it.\n");
+    }
+
+    if (member_array(lang, forbidden_to_teach) != -1) {
+        return notify_fail("You can't teach that language.\n");
     }
 
     if (!(targ = present(who, ETP))) {

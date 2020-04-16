@@ -382,6 +382,12 @@ string *query_subraces(object who)
 
 string *query_languages(string subrace)
 {
+    if (subrace == "feytouched") {
+        return (["required":({"common","aklo"}),
+                 "optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    }
+
     // Tieflings and aasimars are born among humans and thus can't learn abyssal and celestial by themselves
-    return (["required":({"common",}),"optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    return (["required":({"common",}),
+             "optional":({"halfling","orcish","dwarvish","gnomish",})]);
 }
