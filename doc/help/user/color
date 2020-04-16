@@ -30,19 +30,17 @@ The following color codes and their associated colors are available on Shadowgat
   %%%^^^ULINE%%%^^^   Sets all text following this code to its %^ULINE%^underlined value%^RESET%^.
   %%%^^^RESET%%%^^^   Resets all colors and modifiers and sets color back to white.
 
-%^CYAN%^%^ULINE%^Please note%^RESET%^
+%^CYAN%^%^ULINE%^Note%^RESET%^
 
- %^MAGENTA%^*%^RESET%^ %^RESET%^%^RED%^Refrain%^RESET%^ from using plain black (%%%^^^BLACK%%%^^^). Plain black will meld into the background of most clients.
- %^MAGENTA%^*%^RESET%^ %^RESET%^%^GREEN%^Remember %^RESET%^to put a %%%^^^RESET%%%^^^ at the start and end of all your colored works.
- %^MAGENTA%^*%^RESET%^ If you use background color make sure you're using high contrast color such as black. Otherwise many clients just won't see the text you've written. Most terminals default to bright colors for background colors.
+ %^MAGENTA%^*%^RESET%^ Do not use plain black (%%%^^^BLACK%%%^^^). Plain black will meld into the background of most clients. Don't use it even with background colors as clients may disable background colors.
+ %^MAGENTA%^*%^RESET%^ Put a %%%^^^RESET%%%^^^ at the start and end of all your colored works.
+ %^MAGENTA%^*%^RESET%^ If you use background color make sure you're using high contrast color. Otherwise many clients just won't see the text you've written. Most terminals default to bright colors for background colors.
 
 %^ULINE%^%^CYAN%^Trillet's "Color Code Preview/Generation Flash Application"
 
-You may also want to visit our Forum and look for the "Color Code Preview/Generation Flash Application" created by %^BOLD%^%^CYAN%^Trillet%^RESET%^:
+You may also want to look for the "Color Code Preview/Generation Flash Application" created by %^BOLD%^%^CYAN%^Trillet%^RESET%^:
 
 %^ULINE%^https://shadowgate.org/forum/viewtopic.php?f=16&t=11
-
-It is an awesome application that you can use to quickly color your creations.  As always, remember to add that %%%^^^RESET%%%^^^ where appropriate.
 
 %^CYAN%^EXAMPLES%^RESET%^
 
