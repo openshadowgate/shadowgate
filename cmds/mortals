@@ -144,7 +144,7 @@ void step(int when, object who, object targ, string what)
         }
         targ->force_me("emote seems to have gained a little more knowledge.");
         who->force_me("shrug");
-        targ->add_grammar(what, (int)targ->query_stats("intelligence") * 3000); //Dramatically upping how much of a language you get from each session.  Everything else acquires automatically, we shouldn't force players to spend RL months learning a language when they can go from 0-50 in a RL week.
+        targ->add_grammar(what, (int)targ->query_stats("intelligence") * 2000); //Dramatically upping how much of a language you get from each session.  Everything else acquires automatically, we shouldn't force players to spend RL months learning a language when they can go from 0-50 in a RL week.
 // giving it a little more boost to learn basics but harder to hide it's not native
 // neither add_grammar adds nearly as much as it appears because of how add_grammar works
         /*lang = (int)targ->query_base_lang(what);
