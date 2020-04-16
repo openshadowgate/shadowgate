@@ -12,13 +12,6 @@
 #include <daemons.h>
 #include <langs.h>
 
-//#define INTS ([1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:2,10:2,11:2,12:3,13:3,14:4,15:4,16:5,17:6,18:7,19:7,20:8,21:8,22:9,23:10,24:11,25:12])
-//#define INTS ([1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:2,10:2,11:2,12:3,13:3,14:4,15:4,16:5,17:5,18:6,19:6,20:7,21:7,22:8,23:8,24:9,25:9])
-
-//new array developed by Odin.  You can learn a maximum amount of languages equal to 3 + your intelligence modifier * 1.5 (round down), minimum 2.
-#define INTS ([1 : 2, 2 : 2, 3 : 2, 4 : 2, 5 : 2, 6 : 2, 7 : 2, 8 : 2, 9 : 2, 10 : 3, 11 : 3, 12 : 4, 13 : 4, 14 : 6, 15 : 6, 16 : 7, 17 : 7, 18 : 9, 19 : 9, 20 : 10, 21 : 10, 22 : 12, 23 : 12, 24 : 13, 25 : 13])
-
-
 mapping __Lang;
 mapping _grammar;
 mapping subgrammar;
@@ -90,9 +83,6 @@ int query_lang(string type)
 
 int add_lang(string type)
 {
-    if (sizeof(keys(__Lang)) >= INTS[TO->query_base_stats("intelligence")]) {
-        return 0;
-    }
     if (query_lang(type)) {
         return 0;
     }
@@ -182,13 +172,11 @@ void add_grammar(string type, int level)
         subgrammar[type] = 1;
     }
     intel = TO->query_stats("intelligence");
-// to cap learning based on int *Styx* 9/06
+
     if (intel < 9) {
         return; // can't get over their original in common per discussion *Styx* 9/06
     }
-//   if(query_lang(type) > (82 + intel) ) // not doing this yet after all...
-//        return;
-// to slow down the last 10% of proficiency *Styx* 9/06
+
     if ((query_lang(type) > 90) && random(25 - intel)) {
         return;
     }

@@ -102,13 +102,13 @@ void step(int when, object who, object targ, string what)
         who->force_me("emote pulls out some bread.");
         who->force_me("say This is bread. This is food.");
         targ->force_me("nod with some understanding.");
-        call_out("step", 10, 2, who, targ, what);
+        call_out("step", 5, 2, who, targ, what);
     } else if (when == 2) {
         who->force_me("emote holds out " + who->query_possessive() + " hand in welcome.");
         who->force_me("say Greetings.");
         who->force_me("emote sighs and wipes " + who->query_possessive() + " brow.");
         who->force_me("emote gathers up some items of interest.");
-        call_out("step", 10, 3, who, targ, what);
+        call_out("step", 5, 3, who, targ, what);
     } else if (when == 3) {
         who->force_me("emote points at the items and ..");
         who->force_me("say sword");
@@ -130,44 +130,27 @@ void step(int when, object who, object targ, string what)
         who->force_me("smile");
         if (!targ->query_base_lang(what)) {
             if (!targ->add_lang(what)) {
-                tell_object(who, targ->query_cap_name() + " just doesn't seem to get it.");
+                tell_object(who, targ->query_cap_name() + " just doesn't seem to get it and seems to be unable to learn new language.");
                 tell_object(targ, "You just don't seem to get it, maybe your languages are just exhausted for the time being.");
                 who->remove_property("teaching");
                 targ->remove_property("taught");
                 return;
             }
+
             targ->force_me("emote brightens with some limited understanding.");
-            targ->add_grammar(what, (int)who->query_base_lang(what) * (int)who->query_stats("charisma") * 2);
+
+            // base 5pt increase + bonuses
+            targ->add_grammar(what, who->query_stats("intelligence") * 10 + targ->query_stats("intelligence") * 10 + 500);
             who->remove_property("teaching");
             targ->remove_property("taught");
             return;
         }
         targ->force_me("emote seems to have gained a little more knowledge.");
         who->force_me("shrug");
-        targ->add_grammar(what, (int)targ->query_stats("intelligence") * 3000); //Dramatically upping how much of a language you get from each session.  Everything else acquires automatically, we shouldn't force players to spend RL months learning a language when they can go from 0-50 in a RL week.
-// giving it a little more boost to learn basics but harder to hide it's not native
-// neither add_grammar adds nearly as much as it appears because of how add_grammar works
-        /*lang = (int)targ->query_base_lang(what);
-           switch (lang) {
-           case 0..25:     adj = 20;   break;
 
-           case 26..50:    adj = 15;   break;
+        // base 5pt increase + bonuses, 10 sessions for psions teaching each other, 20 sessions for dumb-dumbs
+        targ->add_grammar(what, who->query_stats("intelligence") * 10 + targ->query_stats("intelligence") * 10 + 500 + 500);
 
-           case 51..60:    adj = 10;   break;
-
-           case 61..70:    adj = 5;   break;
-
-           case 71..80:    adj = 0;   break;
-
-           case 81..90:    adj = -2;   break;
-
-           case 91..95:    adj = -4;   break;
-
-           case 96..200:   adj = -6;   break;
-
-           default:            break;
-           }
-           targ->add_grammar(what, (int)targ->query_stats("intelligence") * (100 + adj));*/
         who->remove_property("teaching");
         targ->remove_property("taught");
     }
