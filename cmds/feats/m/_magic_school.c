@@ -13,7 +13,7 @@ string *vschools;
 void create()
 {
     ::create();
-    feat_type("premanent");
+    feat_type("permanent");
     feat_category("ArcaneSpellcraft");
     feat_name("magic school");
     feat_syntax("magic_school");

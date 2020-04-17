@@ -1,16 +1,24 @@
+/*
+  _discipline.c
+  
+  Allows the psion to change disciplines.
+  
+  -- Tlaloc -- 4.17.20
+*/
+
 #include <std.h>
 #include <daemons.h>
 #include <dirs.h>
 #include <schoolspells.h>
-inherit FEAT;
 
-int FLAG;
+inherit FEAT;
 
 string *valid_choices = ({ "egoist", "kineticist", "nomad", "seer", "shaper", "telepath" });
 
 void create()
 {
     ::create();
+    set_author("tlaloc");
     feat_type("instant");
     feat_category("Psionics");
     feat_name("discipline");
@@ -33,18 +41,23 @@ A psion that has not made their choice will merely be precluded from access to
 the discipline-specific spells.
 
 To start selection process type <discipline>.");
-    permanent(1);
     allow_tripped(1);
 }
 
 int allow_shifted() { return 1; }
 
-int cmd_animal_companion(string str)
+int cmd_discipline(string str)
 {
     object feat;
     
     if(!objectp(this_player()))
         return 0;
+    
+    if(this_player()->query_class_level("psion") < 1)
+    {
+        dest_effect();
+        return 0;
+    }
     
     feat = new(base_name(this_object()));
     feat->setup_feat(this_player(), str);
@@ -52,11 +65,11 @@ int cmd_animal_companion(string str)
     return 1;
 }
 
-int execute_feat(string args)
+int execute_feat()
 {
     ::execute_feat();
     
-    if(!args)
+    if(!arg)
     {
         write("%^BOLD%^You current discipline is: %^RESET%^RED%^" + this_player()->query_discipline());
         return 1;
@@ -68,27 +81,27 @@ int execute_feat(string args)
         return 1;
     }
     
-    if(member(valid_choices, args) < 0)
+    if(member_array(arg, valid_choices) < 0)
     {
         write("%^BOLD%^Valid choices are : %^RESET%^RED%^" + implode(valid_choices, ", "));
         return 1;
     }
     
-    write("You have selected the %^CYAN%^ " + args + "%^RESET%^ discipline. Type <yes> to confirm. Anything else will abort.");
+    write("You have selected the %^CYAN%^ " + arg + "%^RESET%^ discipline. Type <yes> to confirm. Anything else will abort.");
     input_to("confirm_selection", 0);
     
     return 1;
 }
 
-void confirm_selection(string args)
+void confirm_selection(string str)
 {
-    if (args != "yes") {
+    if (str != "yes") {
         tell_object(this_player(), "Aborting...");
         return;
     }
 
-    write("%^BOLD%^You declare your psionic discipline as : %^CYAN%^" + args + ".");
-    this_player()->set_discipline(args);
+    write("%^BOLD%^You declare your psionic discipline as : %^CYAN%^" + arg + ".");
+    this_player()->set_discipline(arg);
     this_player()->set_property("discipline_change", time());
     dest_effect();
     return;

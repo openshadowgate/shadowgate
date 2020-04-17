@@ -33,12 +33,11 @@ string *combat_styles() {
 string *class_feats(string myspec)
 {
     return ({ "simple weapon proficiency",
-              "discipline",
               "spell focus", });
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "simple weapon proficiency", "spell focus", "discipline", }), ]);
+    return ([ 1 : ({ "simple weapon proficiency", "spell focus", }), ]);
 }
 
 string *class_skills()
