@@ -3,40 +3,50 @@
 
 string *VALID_SETTINGS = ({"brief","brief_combat","hints","logon_notify","persist","simpleinv","expgain","hardcore","levelcheck","no_reward","taxperc","columns","scrlines","scrwidth","term",});
 
+object tp;
+
 int cmd_set(string args)
 {
-    string setting,value;
-    if(!stringp(args))
-    {
+    string setting, value;
+
+    tp = TP;
+
+    if (avatarp(TP)) {
+        string * usernames = users()->query_name();
+
+        if (member_array(args, usernames) != -1) {
+            tp = find_player(args);
+            args = 0;
+        }
+    }
+
+    if (!stringp(args)) {
         string stng;
         write("%^BLUE%^--=%^BOLD%^<%^WHITE%^ Settings %^BLUE%^>%^RESET%^%^BLUE%^=--%^RESET%^");
         foreach(stng in VALID_SETTINGS)
         {
-            write("%^WHITE%^ "+arrange_string(stng+" %^BOLD%^%^BLACK%^--------------",14)+"%^RESET%^%^GREEN%^ : %^RESET%^"+colorize_value((string)call_other(TO,"get_"+stng)));
+            write("%^WHITE%^ " + arrange_string(stng + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + colorize_value((string)call_other(TO, "get_" + stng)));
         }
         return 1;
     }
-    if(sscanf(args,"%s %s",setting,value)!=2)
-    {
+
+    if (sscanf(args, "%s %s", setting, value) != 2) {
         write("You must specify both setting and value.");
         return 1;
     }
-    if(member_array(setting,VALID_SETTINGS)==-1)
-    {
+    if (member_array(setting, VALID_SETTINGS) == -1) {
         write("Invalid setting.");
         return 1;
     }
 
     {
-        int status = call_other(TO,"set_"+setting,value);
-        if(status==0)
-        {
-            write("%^WHITE%^%^BOLD%^Unable to set %^RED%^"+setting+"%^WHITE%^ to %^RED%^"+value+"%^WHITE%^.");
+        int status = call_other(TO, "set_" + setting, value);
+        if (status == 0) {
+            write("%^WHITE%^%^BOLD%^Unable to set %^RED%^" + setting + "%^WHITE%^ to %^RED%^" + value + "%^WHITE%^.");
             return 1;
         }
-        if(status==1)
-        {
-            write("%^WHITE%^%^BOLD%^Setting %^GREEN%^"+setting+"%^WHITE%^ to %^CYAN%^"+value+"%^WHITE%^.");
+        if (status == 1) {
+            write("%^WHITE%^%^BOLD%^Setting %^GREEN%^" + setting + "%^WHITE%^ to %^CYAN%^" + value + "%^WHITE%^.");
             return 1;
         }
     }
@@ -46,155 +56,149 @@ int cmd_set(string args)
 
 int set_simpleinv(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if (val == "off")
-        TP->delete("simple inventory");
-    else
-        TP->set("simple inventory", 1);
+    if (val == "off") {
+        tp->delete("simple inventory");
+    } else {
+        tp->set("simple inventory", 1);
+    }
     return 1;
 }
 
 string get_simpleinv()
 {
-    if(TP->query("simple inventory"))
+    if (tp->query("simple inventory")) {
         return "on";
-    else
+    } else {
         return "off";
+    }
 }
 
 int set_hints(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if (val == "on")
-        TP->delete("no hints");
-    else
-        TP->set("no hints", 1);
+    if (val == "on") {
+        tp->delete("no hints");
+    } else {
+        tp->set("no hints", 1);
+    }
     return 1;
 }
 
 string get_hints()
 {
-    if(TP->query("no hints"))
+    if (tp->query("no hints")) {
         return "off";
-    else
+    } else {
         return "on";
+    }
 }
 
 int set_term(string val)
 {
-    string *valid_values;
+    string* valid_values;
     valid_values = TERMINAL_D->query_terms();
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    TP->setenv("TERM", val);
-    TP->reset_terminal();
+    tp->setenv("TERM", val);
+    tp->reset_terminal();
     return 1;
 }
 
 string get_term()
 {
-    return TP->getenv("TERM");
+    return tp->getenv("TERM");
 }
 
 int set_scrlines(string val)
 {
-    if(!atoi(val))
-    {
+    if (!atoi(val)) {
         write("%^BOLD%^%^RED%^Invalid value, must provide a number.%^RESET%^");
         return 0;
     }
-    if(atoi(val)<2)
-    {
+    if (atoi(val) < 2) {
         write("%^BOLD%^%^RED%^Invalid value, must be bigger than 2.%^RESET%^");
         return 0;
     }
-    TP->setenv("LINES", val);
+    tp->setenv("LINES", val);
     return 1;
 }
 
 string get_scrlines()
 {
-    return TP->getenv("LINES");
+    return tp->getenv("LINES");
 }
 
 int set_scrwidth(string val)
 {
-    if(!atoi(val))
-    {
+    if (!atoi(val)) {
         write("%^BOLD%^%^RED%^Invalid value, must provide a number.%^RESET%^");
         return 0;
     }
-    if(atoi(val)<2)
-    {
+    if (atoi(val) < 2) {
         write("%^BOLD%^%^RED%^Invalid value, must be bigger than 2.%^RESET%^");
         return 0;
     }
-    if(atoi(val) > 2000)
-    {
+    if (atoi(val) > 2000) {
         write("%^BOLD%^%^RED%^Invalid value, must be less than 2000.%^RESET%^");
         return 0;
     }
-    TP->setenv("SCREEN", val);
+    tp->setenv("SCREEN", val);
     return 1;
 }
 
 string get_scrwidth()
 {
-    return TP->getenv("SCREEN");
+    return tp->getenv("SCREEN");
 }
 
 int set_columns(string val)
 {
-    if(!atoi(val))
-    {
+    if (!atoi(val)) {
         write("%^BOLD%^%^RED%^Invalid value, must provide a number.%^RESET%^");
         return 0;
     }
-    if(atoi(val)<1)
-    {
+    if (atoi(val) < 1) {
         write("%^BOLD%^%^RED%^Invalid value, must be bigger than 1.%^RESET%^");
         return 0;
     }
-    TP->setenv("COLUMNS", val);
+    tp->setenv("COLUMNS", val);
     return 1;
 }
 
 string get_columns()
 {
-    return TP->getenv("COLUMNS");
+    return tp->getenv("COLUMNS");
 }
 
 int set_logon_notify(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(val == "off")
+    if (val == "off") {
         this_player()->set_logon_notify(0);
-    else
+    } else {
         this_player()->set_logon_notify(1);
+    }
     return 1;
 }
 
 string get_logon_notify()
 {
-    if(TP->query_logon_notify())
+    if(tp->query_logon_notify())
         return "on";
     else
         return "off";
@@ -202,39 +206,42 @@ string get_logon_notify()
 
 int set_brief(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(this_player()->query_verbose()&&val=="on")
+    if (this_player()->query_verbose() && val == "on") {
         this_player()->set_brief();
-    if(!this_player()->query_verbose()&&val=="off")
+    }
+    if (!this_player()->query_verbose() && val == "off") {
         this_player()->set_brief();
+    }
     return 1;
 }
 
 string get_brief()
 {
-    if(this_player()->query_verbose())
+    if (this_player()->query_verbose()) {
         return "off";
-    else
+    } else {
         return "on";
+    }
 }
 
 int set_persist(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(val=="on")
-        this_player()->set("persist_login",1);
-    if(val=="off")
+    if (val == "on") {
+        this_player()->set("persist_login", 1);
+    }
+    if (val == "off") {
         this_player()->delete("persist_login");
+    }
     return 1;
 }
 
@@ -248,67 +255,68 @@ int get_persist(string val)
 
 int set_brief_combat(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(TP->query_verbose_combat()&&val=="on")
-        TP->set_brief_combat();
-    if(!TP->query_verbose_combat()&&val=="off")
-        TP->set_brief_combat();
+    if (tp->query_verbose_combat() && val == "on") {
+        tp->set_brief_combat();
+    }
+    if (!tp->query_verbose_combat() && val == "off") {
+        tp->set_brief_combat();
+    }
     return 1;
 }
 
 string get_brief_combat()
 {
-    if(this_player()->query_verbose_combat())
+    if (this_player()->query_verbose_combat()) {
         return "off";
-    else
+    } else {
         return "on";
+    }
 }
 
 int set_expgain(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(val=="on"&&(USER_D->no_exp(TP)))
-        USER_D->toggle_no_exp(TP);
-    if(val=="off"&&(!USER_D->no_exp(TP)))
-        USER_D->toggle_no_exp(TP);
+    if (val == "on" && (USER_D->no_exp(tp))) {
+        USER_D->toggle_no_exp(tp);
+    }
+    if (val == "off" && (!USER_D->no_exp(tp))) {
+        USER_D->toggle_no_exp(tp);
+    }
     return 1;
 }
 
 string get_expgain()
 {
-    if(USER_D->no_exp(TP))
+    if (USER_D->no_exp(tp)) {
         return "off";
-    else
+    } else {
         return "on";
+    }
 }
 
 int set_hardcore(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(val=="on")
-    {
-        tell_object(TP,"%^BOLD%^Are you sure?.. You will loose all your levels and equipment if you die.");
-        tell_object(TP,"%^BOLD%^Type %^ORANGE%^YES%^WHITE%^ to confirm.");
+    if (val == "on") {
+        tell_object(tp, "%^BOLD%^Are you sure?.. You will loose all your levels and equipment if you die.");
+        tell_object(tp, "%^BOLD%^Type %^ORANGE%^YES%^WHITE%^ to confirm.");
         input_to("confirm_hardcore");
         return 2;
     }
-    if(val=="off")
-    {
+    if (val == "off") {
         write("%^BOLD%^%^RED%^Nope. You keep suffering.");
         return 0;
     }
@@ -317,42 +325,37 @@ int set_hardcore(string val)
 
 string get_hardcore()
 {
-    if(TP->query("hardcore"))
+    if (tp->query("hardcore")) {
         return "on";
-    else
+    } else {
         return "off";
+    }
 }
 
 void confirm_hardcore(string str)
 {
-    if(str=="YES")
-    {
-        tell_object(TP,"%^BOLD%^Turning hardcore mode on you %^RED%^on%^WHITE%^.");
-        TP->set("hardcore",1);
-    }
-    else
-    {
-        tell_object(TP,"%^BOLD%^A wise decision.");
+    if (str == "YES") {
+        tell_object(tp, "%^BOLD%^Turning hardcore mode on you %^RED%^on%^WHITE%^.");
+        tp->set("hardcore", 1);
+    }else {
+        tell_object(tp, "%^BOLD%^A wise decision.");
     }
 }
 
 int set_levelcheck(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(val=="off")
-    {
-        tell_object(TP,"%^BOLD%^Are you sure?.. You will become a valid target for pk for high-levels.");
-        tell_object(TP,"%^BOLD%^Type %^ORANGE%^YES%^WHITE%^ to confirm.");
+    if (val == "off") {
+        tell_object(tp, "%^BOLD%^Are you sure?.. You will become a valid target for pk for high-levels.");
+        tell_object(tp, "%^BOLD%^Type %^ORANGE%^YES%^WHITE%^ to confirm.");
         input_to("confirm_levelcheck");
         return 2;
     }
-    if(val=="on")
-    {
+    if (val == "on") {
         write("%^BOLD%^%^RED%^Nope. You keep suffering.");
         return 0;
     }
@@ -361,38 +364,35 @@ int set_levelcheck(string val)
 
 void confirm_levelcheck(string str)
 {
-    if(str=="YES")
-    {
-        tell_object(TP,"%^BOLD%^%^BLACK%^DEATH IS THE ROAD TO AWE.");
-        tell_object(TP,"%^BOLD%^Turning levelcheck on you %^RED%^off%^WHITE%^.");
-        TP->set("no_levelcheck",1);
-    }
-    else
-    {
-        tell_object(TP,"%^BOLD%^A wise decision.");
+    if (str == "YES") {
+        tell_object(tp, "%^BOLD%^%^BLACK%^DEATH IS THE ROAD TO AWE.");
+        tell_object(tp, "%^BOLD%^Turning levelcheck on you %^RED%^off%^WHITE%^.");
+        tp->set("no_levelcheck", 1);
+    }else {
+        tell_object(tp, "%^BOLD%^A wise decision.");
     }
 }
 
 string get_levelcheck()
 {
-    if(TP->query("no_levelcheck"))
+    if (tp->query("no_levelcheck")) {
         return "off";
-    else
+    } else {
         return "on";
+    }
 }
 
 int set_no_reward(string val)
 {
-    string *valid_values = ({"on","off"});
-    if(member_array(val,valid_values)==-1)
-    {
-        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ "+implode(valid_values,", "));
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
         return 0;
     }
-    if(val=="on")
-        TP->set("no_reward",1);
-    if(val=="off")
-    {
+    if (val == "on") {
+        tp->set("no_reward", 1);
+    }
+    if (val == "off") {
         write("%^BOLD%^%^RED%^Nope. You keep suffering.");
         return 0;
     }
@@ -401,44 +401,49 @@ int set_no_reward(string val)
 
 string get_no_reward()
 {
-    if(TP->query("no_reward"))
+    if (tp->query("no_reward")) {
         return "on";
-    else
+    } else {
         return "off";
+    }
 }
 
 int set_taxperc(string val)
 {
     int perc;
-    if(!atoi(val))
-    {
+    if (!atoi(val)) {
         write("%^BOLD%^%^RED%^Invalid value, must provide a number.%^RESET%^");
         return 0;
     }
     perc = atoi(val);
-    if(USER_D->set_character_improvement_tax_percent(TP,perc))
+    if (USER_D->set_character_improvement_tax_percent(tp, perc)) {
         return 1;
-    else
+    } else {
         return 0;
+    }
 }
 
 int get_taxperc()
 {
-    return sprintf("%d",USER_D->get_character_improvement_tax_percent(TP));
+    return sprintf("%d", USER_D->get_character_improvement_tax_percent(tp));
 }
 
 string colorize_value(string str)
 {
-    if(!str)
+    if (!str) {
         return "";
-    if(str=="off")
+    }
+    if (str == "off") {
         return "%^RED%^off%^RESET%^";
-    if(str=="on")
+    }
+    if (str == "on") {
         return "%^GREEN%^on%^RESET%^";
-    if(regexp(str,"[0-9]+"))
-        return "%^CYAN%^"+str+"%^RESET%^";
+    }
+    if (regexp(str, "[0-9]+")) {
+        return "%^CYAN%^" + str + "%^RESET%^";
+    }
 
-    return "%^ORANGE%^"+str+"%^RESET%^";
+    return "%^ORANGE%^" + str + "%^RESET%^";
 }
 
 void help()
@@ -471,7 +476,7 @@ You can manipulate numerous mud settings:
 %^CYAN%^expgain %^GREEN%^on|off%^RESET%^\n  This will turn on or off experience gain for your character. While it is off, you will get NO EXPERIENCE. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^CYAN%^hardcore %^GREEN%^on%^RESET%^\n  If you loved good old days and want more. Harcore mode can't be turned off. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^levelcheck %^GREEN%^off%^RESET%^\n  Disabling this will make you a valid target across all levels. Levelcheck can't be turned on without petitioning. %^MAGENTA%^Default value is on.%^RESET%^\n
-%^CYAN%^no_reward %^GREEN%^on|off%^RESET%^\n  Opt out from receiving reward from other players granted with %^ORANGE%^<reward>%^RESET%^ command. %^MAGENTA%^Default value is off.%^RESET%^\n
+%^CYAN%^no_reward %^GREEN%^on|off%^RESET%^\n  Opt out from receiving rewards, granted with %^ORANGE%^<reward>%^RESET%^ command and avatar plots. %^MAGENTA%^Default value is off.%^RESET%^\n
 %^CYAN%^taxperc %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  This will define how much of your experience gain goes towards paying off your experience tax. This value will grow with your levels, but you may force its increase via this setting. %^MAGENTA%^Default value is on.%^RESET%^\n
 %^ULINE%^%^CYAN%^Terminal and display:%^RESET%^
 
