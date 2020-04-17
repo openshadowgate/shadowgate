@@ -251,12 +251,13 @@ void healing(object ob)
     live = filter_array(live, "is_non_immortal", FILTERS_D);
     count = sizeof(live);
 
-    tell_room(ETO, "%^MAGENTA%^Cruiser Tetron says:%^BOLD%^%^RED%^ Die, insect.%^RESET%^");
+
+    tell_room(ETO, "%^MAGENTA%^Cruiser Tetron says:%^BOLD%^%^RED%^ I did not sleep for five thousand years to be taken down that easily..%^RESET%^");
     tell_room(ETO, "%^GREEN%^Cruiser Tetron touches his fingers to his forehead and mutters a chant.");
 
     switch (count) {
     case 0..2:
-        tell_room(ETO, "%^MAGENTA%^Cruiser Tetron says:%^BOLD%^%^RED%^ I did not sleep for five thousand years to be taken down that easily..%^RESET%^");
+
         tell_room(ETO, "%^BOLD%^Cruiser Tetron's wounds begin to heal themselves.");
         TO->add_hp(1000);
         break;
@@ -284,7 +285,7 @@ void circle(object targ)
     if (fodder_check()) {
         fireball(targ); return;
     }
-
+    tell_room(ETO, "%^MAGENTA%^Cruiser Tetron says:%^BOLD%^%^RED%^ Die, insect.%^RESET%^");
     tell_room(ETO, "Cruiser Tetron unwields Battleaxe of the Dominion (wielded in right hand and left hand).");
     tell_room(ETO, "%^RED%^Cruiser Tetron gives a smug smile as a dagger " +
               "in his possession begins screaming.%^RESET%^");
