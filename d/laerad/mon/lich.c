@@ -81,6 +81,9 @@ void create()
     if (random(20) < 12) {
         ob->set_property("monsterweapon", 1);
     }
+    ob = new("/d/common/obj/brewing/herb_special_inherit");
+    ob->set_herb_name("lich dust");
+    ob->move(TO);
     set_attack_limbs(({ "right hand", "left hand" }));
     set_attacks_num(1);
     set_base_damage_type("bludgeoning");
