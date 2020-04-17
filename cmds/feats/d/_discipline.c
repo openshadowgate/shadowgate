@@ -77,7 +77,7 @@ int execute_feat()
     
     if(this_player()->query_property("discipline_change") > time() - 259200)
     {
-        write("%^BOLD%^You may only change your discipline once every three days.");
+        write("%^BOLD%^You may only change your discipline once every three weeks.");
         return 1;
     }
     
