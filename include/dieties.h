@@ -1,4 +1,4 @@
-#define KNIGHTS ({"auril","auppenser","bane","grumbar","helm","kelemvor","kossuth","lathander","mystra","selune","shar","sune","torm","tyr"})
+#define KNIGHTS ({})
 
 #define NEWPANTHEON ({"jarmila","callamir","kreysneothosies","ryorik","lord shadow","the faceless one","kismet","lysara","nimnavanon","nilith"})
 
@@ -18,6 +18,9 @@
 ]))
 
 #define PALADIN_GODS ({"jarmila", "kreysneothosies", "nilith", "lord shadow", "kismet", "lysara"})
+
+// Occult classes or ic development only
+#define OCCULT_GODS ({"usuiguth"})
 
 #define RANGERS ({})
 
