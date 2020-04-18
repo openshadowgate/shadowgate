@@ -4,7 +4,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("lower resistance");
-    set_spell_level(([ "mage" : 5 ]));
+    set_spell_level(([ "classless" : 5 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS lower resistance on TARGET");
     set_description("This will temporarily pull from the target some quantity of magic resistance.");
@@ -15,6 +15,11 @@ void create() {
       "mage" : ([ "iron rod" : 1, ]),
     ]));
 }
+
+/*
+ * DO NOT REMOVE THIS SPELL
+ * USED BY NPCS
+ */
 
 string query_cast_string() {
     return "%^MAGENTA%^"+caster->QCN+" raises the iron rod and starts to chant.";
@@ -59,12 +64,12 @@ void undo(int lower) {
         TO->remove();
         return;
     }
-    if (target->query_property("lowered resistance")) 
+    if (target->query_property("lowered resistance"))
     {
         target->set_property("magic resistance",lower);
         target->remove_property("lowered resistance");
     }
-	
+
     tell_room(environment(target),"%^MAGENTA%^ You see the wave of incoming power returning to "+target->QCN+".");
     dest_effect();
 }
