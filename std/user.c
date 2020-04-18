@@ -433,32 +433,37 @@ void redo_my_languages() {
   string race;
   race = TP->query_race();
 
-  if(!objectp(TP)) { return; }
-  if(avatarp(TP)) { return; }
-  if(query("new_langs_set3")) { return; }
-  if(strsrch(race,"half-") != -1) {
-     set_lang("common",100);
-     set_lang(LANGS[race][0],100);
+  if (!objectp(TP)) {
+      return;
   }
-  else {
-     if(member_array(race,PLAYER_D->night_races()) == -1) {
-        set_lang("common",100);
-     }
-     else {
-        set_lang("undercommon",100);
-     }
+  if (avatarp(TP)) {
+      return;
+  }
+  if (query("new_langs_set3")) {
+      return;
+  }
+  if (strsrch(race, "half-") != -1) {
+      set_lang("common", 100);
+      set_lang(LANGS[race][0], 100);
+  }else {
+      if (member_array(race, PLAYER_D->night_races()) == -1) {
+          set_lang("common", 100);
+      }else {
+          set_lang("undercommon", 100);
+      }
   }
   set("new_langs_set3",1);
 
-  if(query("new_langs_set2")) { return; }
-
-  if((int)TP->query_lang("ogrish")) {
-    mylang = TP->query_lang("ogrish");
-    TP->remove_lang("ogrish");
+  if (query("new_langs_set2")) {
+      return;
   }
-  if((int)TP->query_lang("ogre-magi") > mylang) {
-    mylang = TP->query_lang("ogre-magi");
-    TP->remove_lang("ogre-magi");
+  if ((int)TP->query_lang("ogrish")) {
+      mylang = TP->query_lang("ogrish");
+      TP->remove_lang("ogrish");
+  }
+  if ((int)TP->query_lang("ogre-magi") > mylang) {
+      mylang = TP->query_lang("ogre-magi");
+      TP->remove_lang("ogre-magi");
   }
   if (mylang) {
       TP->set_lang("giant", mylang);
@@ -466,7 +471,9 @@ void redo_my_languages() {
   }
   mylang = 0;
 
-  if(query("new_langs_set")) delete("new_langs_set");
+  if (query("new_langs_set")) {
+      delete("new_langs_set");
+  }
   set("new_langs_set2",1);
   return;
 }
@@ -1300,64 +1307,59 @@ void setup() {
       move(JAIL);
       tell_room(ETO, query_cap_name() + " joins in JAIL.", TO);
       NOTIFY_D->mud_notify("joined", this_player(), " (IN OOC JAIL)");
-  }else
-    {
-        if((string)TO->query("my_virtual_room"))
-        {
-            if(objectp(ob = "/daemon/virtual_room_d.c"->restore_virtual_room((string)TO->query("my_virtual_room"))))
-            {
-                if(move(ob) != MOVE_OK)
-                {
-                    TO->delete("my_virtual_room");
-                    if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp)==MOVE_OK))
+  }else {
+      if ((string)TO->query("my_virtual_room")) {
+          if (objectp(ob = "/daemon/virtual_room_d.c"->restore_virtual_room((string)TO->query("my_virtual_room")))) {
+              if (move(ob) != MOVE_OK) {
+                  TO->delete("my_virtual_room");
+                  if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
+                      move(ROOM_START);
+                  }
+                  setenv("start", primary_start);
+                  TO->delete("my_virtual_room");
+              }
+          }else {
+              TO->delete("my_virtual_room");
+              // tell_object(TO, "ob is NOT a valid object.");
+              if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
+                  move(ROOM_START);
+              }
+              setenv("start", primary_start);
+          }
+      }else {
+          if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
+              move(ROOM_START);
+          }
+          setenv("start", primary_start);
+      }
+  }
 
-                    move(ROOM_START);
-                    setenv("start", primary_start);
-                    TO->delete("my_virtual_room");
-                }
-            }
-            else
-            {
-                TO->delete("my_virtual_room");
-               // tell_object(TO, "ob is NOT a valid object.");
-                if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp)==MOVE_OK))
-                move(ROOM_START);
-                setenv("start", primary_start);
-            }
-        }
-        else
-        {
-            if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp)==MOVE_OK))
-            move(ROOM_START);
-            setenv("start", primary_start);
-        }
-    }
+  {
+      string racefile = "/std/races/" + query("race") + ".c";
 
-   {
-       string racefile = "/std/races/"+query("race")+".c";
-
-       if(file_exists(racefile))
-           if(query("no pk"))
-               if(racefile->is_pk_race(query("subrace")) ||
-                  TO->is_undead())
-               {
-                   delete("no pk");
-                   tell_object(TO,"%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
-               }
-   }
+      if (file_exists(racefile)) {
+          if (query("no pk")) {
+              if (racefile->is_pk_race(query("subrace")) ||
+                  TO->is_undead()) {
+                  delete("no pk");
+                  tell_object(TO, "%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
+              }
+          }
+      }
+  }
 
    register_channels();
    if (!sizeof(query_aliases())) {
-     message("environment", "Resetting alias data.", TO);
-     init_aliases();
-     force_me("alias -reset");
+       message("environment", "Resetting alias data.", TO);
+       init_aliases();
+       force_me("alias -reset");
    }
    set_property("light", -query_property("light"));
    if (!query("race")) {
-     set_logon_notify(1);  /* default login/out messages turned on */
-     move(ROOM_SETTER);
-     tell_room(ETO,query_cap_name() + " is a new adventurer",TO);
-     NOTIFY_D->logon_notify("%^YELLOW%^"+capitalize(query_name())+" is a new adventurer%^RESET%^",this_player());
+       set_logon_notify(1);   /* default login/out messages turned on */
+       move(ROOM_SETTER);
+       tell_room(ETO, query_cap_name() + " is a new adventurer", TO);
+       NOTIFY_D->logon_notify("%^YELLOW%^" + capitalize(query_name()) + " is a new adventurer%^RESET%^", this_player());
    } else {
      if (member_array(query("race"),query("id")) == -1) {
        add_id(query_race());
@@ -1375,13 +1377,12 @@ void setup() {
      set_property("spell_points",holder1);
      set("reply",0);
 
-     if (!stringp(tmp = getenv("TERM")))
-       setenv("TERM", tmp = "dumb");
+     if (!stringp(tmp = getenv("TERM"))) {
+         setenv("TERM", tmp = "dumb");
+     }
      static_user["term_info"] = (mapping)TERMINAL_D->query_term_info(tmp);
 
      write_messages();
-
-
 
      set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
      set_max_internal_encumbrance(1000); // Letting players hold ungodly amounts of shit until they get real.
@@ -1397,18 +1398,14 @@ void setup() {
     redo_my_languages();
     convert_relationships();
 
-    if(TO->query("relationship_profile"))
-    {
-
-      if(objectp(to_object("/daemon/description_d")))
-      {
-        ob = new("/daemon/description_d");
-        TO->set("relationship_profile","default");
-        if(!ob->restore_profile_settings(TO,"default")) // restore description of default profile on login
-        {
-          ob->initialize_profile(TO);
+    if (TO->query("relationship_profile")) {
+        if (objectp(to_object("/daemon/description_d"))) {
+            ob = new("/daemon/description_d");
+            TO->set("relationship_profile", "default");
+            if (!ob->restore_profile_settings(TO, "default")) { // restore description of default profile on login
+                ob->initialize_profile(TO);
+            }
         }
-      }
     }
 
     if (objectp(find_object_or_load("/daemon/feat_d.c"))) {
@@ -1423,10 +1420,9 @@ void setup() {
     init_feats();
     load_autoload_obj();
 
-    if(!TO->query("true_quietness"))
-    {
-      tell_room(ETO,TOQCN+" joins",TO);
-      NOTIFY_D->mud_notify("joined",this_player());
+    if (!TO->query("true_quietness")) {
+        tell_room(ETO, TOQCN + " joins", TO);
+        NOTIFY_D->mud_notify("joined", this_player());
     }
     do_encumbrance();
     if (environment()->query_inn())
@@ -1435,12 +1431,13 @@ void setup() {
    age = time() - (int)TO->query_birthday();
    PLAYER_D->add_player_info();
    if (!(PRISON_D->is_imprisoned(query_name()))) {
-     if(!query_body_type() && query_race() != "unborn")
-       move_player("/realms/vetri/bodyhold");
-     else if(!query_eye_color() && query_race() != "unborn")
-       move_player("/realms/crystal/colorhold");
-     else
-       load_pets();
+       if (!query_body_type() && query_race() != "unborn") {
+           move_player("/realms/vetri/bodyhold");
+       } else if (!query_eye_color() && query_race() != "unborn") {
+           move_player("/realms/crystal/colorhold");
+       } else {
+           load_pets();
+       }
    }
    convert_kills();
    if (query_property("inactive")) {

@@ -152,3 +152,8 @@ int caster_level_calcs(object player, string the_class)
     }
     return 0;
 }
+
+string *query_bonus_languages()
+{
+    return ({"sylvan", "elven", "auran", "aquan", "terran"});
+}
