@@ -45,7 +45,7 @@ void create()
     set_property("enchantment", 7);
 
     set_item_bonus("constitution", 6);
-    set_item_bonus("damage resistance", 10);
+    set_item_bonus("strength", 6);
     set_item_bonus("endurance", 6);
 
     set_wear((: TO, "wear_func" :));
