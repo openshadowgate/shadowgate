@@ -1388,6 +1388,7 @@ void pick_my_unique()
         tell_object(ETO, "ERROR: Could not find your class file, please notify a wiz!");
         return;
     }
+
     my_choices = MyFile->query_newbie_stuff(MyCharacterInfo["myclass"]["alignment"]);
     if(!pointerp(my_choices))
     {
@@ -1501,42 +1502,60 @@ void pick_sub_race()
 void pick_genetics()
 {
     int x, max_weight, *weights;
-    string MyFile;
+    string MyRaceFile, MyClassFile;
     object race_ob;
     mixed targ;
-    if(!objectp(ETO)) return;
-    if(!objectp(TO)) return;
-    if(MyPlace == "eye color" ||
-       MyPlace == "hair color" ||
-       MyPlace == "bonus language")
-    {
-        if(MyCharacterInfo["race"]["psuedo race"] != "NIL") targ = MyCharacterInfo["race"]["psuedo race"];
-        else targ = MyCharacterInfo["race"]["race name"];
-        MyFile = "/std/races/"+targ+".c";
-        race_ob = find_object_or_load(MyFile);
-        if(!objectp(race_ob))
-        {
-            tell_object(ETO,"There's something wrong with your race "+targ+", please contact a wiz.");
+    if (!objectp(ETO)) {
+        return;
+    }
+    if (!objectp(TO)) {
+        return;
+    }
+    if (MyPlace == "eye color" ||
+        MyPlace == "hair color" ||
+        MyPlace == "bonus language") {
+        if (MyCharacterInfo["race"]["psuedo race"] != "NIL") {
+            targ = MyCharacterInfo["race"]["psuedo race"];
+        } else {
+            targ = MyCharacterInfo["race"]["race name"];
+        }
+        MyRaceFile = "/std/races/" + targ + ".c";
+        race_ob = find_object_or_load(MyRaceFile);
+        if (!objectp(race_ob)) {
+            tell_object(ETO, "There's something wrong with your race " + targ + ", please contact staff.");
             return;
         }
     }
+    if (MyPlace == "bonus language") {
+        MyClassFile = "/std/class/"+ MyCharacterInfo["myclass"]["myclass name"] +".c";
+        if (!file_exists(MyClassFile)) {
+            tell_object(ETO, "ERROR: Could not find your class file, please notify staff!");
+            return;
+        }
+    }
+
     tell_object(ETO, "%^BOLD%^You must now choose your "+MyPlace+". You may pick from the following:");
     switch(MyPlace)
     {
         case "hair color":
-            my_choices = sort_array(MyFile->query_hair_colors(MyCharacterInfo["race"]["subrace"]), 1);
+            my_choices = sort_array(MyRaceFile->query_hair_colors(MyCharacterInfo["race"]["subrace"]), 1);
             break;
         case "eye color":
-            my_choices = sort_array(MyFile->query_eye_colors(MyCharacterInfo["race"]["subrace"]), 1);
+            my_choices = sort_array(MyRaceFile->query_eye_colors(MyCharacterInfo["race"]["subrace"]), 1);
             break;
         case "bonus language":
         {
-            string * langs;
-            langs = MyFile->query_languages(MyCharacterInfo["race"]["subrace"])["optional"];
-            if(sizeof(langs))
+            string* langs;
+            langs = MyRaceFile->query_languages(MyCharacterInfo["race"]["subrace"])["optional"];
+            if (arrayp(MyClassFile->query_bonus_languages())) {
+                langs += MyClassFile->query_bonus_languages();
+            }
+
+            if (sizeof(langs)) {
                 my_choices = langs;
-            else
-                my_choices = ({"common","undercommon"});
+            } else {
+                my_choices = ({ "common", "undercommon" });
+            }
         }
             break;
         case "template":

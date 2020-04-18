@@ -49,6 +49,7 @@ mapping query_all_langs()
         return ret;
     }
     langs = keys(langOverload);
+
     for (i = 0; i < sizeof(langs); i++) {
         if (!ret[langs[i]]) {
             if (langOverload[langs[i]] != 0) {
@@ -63,22 +64,7 @@ mapping query_all_langs()
 
 int query_lang(string type)
 {
-    int ability;
-    if (!__Lang) {
-        init_lang();
-    }
-
-    if (!__Lang[type]) {
-        ability = 0;
-    }else {
-        ability = __Lang[type];
-    }
-    if (!langOverload || !langOverload[type]) {
-        return ability;
-    }
-    return ability + langOverload[type];
-
-    return __Lang[type];
+    return query_all_langs()[type];
 }
 
 int add_lang(string type)
