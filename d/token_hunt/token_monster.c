@@ -987,7 +987,7 @@ void non_combat_action(string action)
             if(!cast_check(TO)) { break; }
             if(!present("phantom",ETO))
             {
-                new("/cmds/spells/f/_faithful_phantom_guardians.c")->use_spell(TO,"soldiers",num,100);
+                new("/cmds/spells/p/_phantom_guardians.c")->use_spell(TO,"soldiers",num,100);
                 TO->remove_property("my_summon_timer");
                 TO->set_property("my_summon_timer",time()+40);
             }

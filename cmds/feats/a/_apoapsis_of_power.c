@@ -9,8 +9,9 @@ void create()
     feat_type("permanent");
     feat_category("MagicDamage");
     feat_name("apoapsis of power");
-    feat_prereq("Greater spell penetration, Greater spell power, Mage, Sorcerer or Psion");
-    feat_desc("Casters learn ability to shift their damage table two levels up.");
+    feat_prereq("Greater spell penetration, Greater spell power,
+               Mage, Sorcerer or Psion");
+    feat_desc("Casters learn ability to shift their damage table four levels up.  Only mage, sorcerer, and psion spells will be affected.");
     permanent(1);
 }
 

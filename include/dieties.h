@@ -6,7 +6,7 @@
  * List of deities with follower-clergy pairs
  */
 #define DIETIES (([\
-   "jarmila":({"Light/Love",({1, 2, 4, 5, 6, 7, 8}),({1, 4, 5, 7})}), \
+   "jarmila":({"Light/Love",({1, 2, 4, 5, 6, 7, 8}),({1, 4, 5, 7})}),\
    "callamir":({"Luck/Trickery",({1, 4, 5, 7, 8, 9}),({4, 7, 8})}),\
    "kreysneothosies":({"Justice/Protection",({1, 2, 3, 4, 5, 7}),({1, 2, 4})}),\
    "nilith":({"Undead/War",({3, 5, 6, 7, 8, 9}),({6, 8, 9})}),\

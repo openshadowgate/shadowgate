@@ -67,7 +67,7 @@ int cmd_prepare(string str)
         return notify_fail("You cannot prepare spells while in combat!\n");
     }
     if (TP->query_property("effect_exhausted") || TP->query_property("effect_fatigued")) {
-        return notify_fail("%^BOLD%^You are fatigued or exhausted and cannot prepare!%^RESET%^\n");
+        return notify_fail("You are fatigued or exhausted and cannot prepare!\n");
     }
 
     arguments = explode(str," ");

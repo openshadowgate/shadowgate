@@ -19,22 +19,28 @@ void create()
     set_gender("male");
     set_race("human");
     set_body_type("humanoid");
-    set_hd(50, 8);
+
     set_alignment(8);
     set("aggressive", 2);
     set_size(2);
+
+    set_hd(60, 8);
     set_class("mage");
-    set_mlevel("mage", 65);
-    set_guild_level("mage", 65);
-    set_overall_ac(-75);
+    set_mlevel("mage", 68);
+    set_guild_level("mage", 68);
+
+    set_overall_ac(-80);
+
     set_stats("intelligence", 30);
     set_stats("wisdom", 26);
     set_stats("strength", 26);
     set_stats("charisma", 12);
     set_stats("dexterity", 16);
-    set_stats("constitution", 22);
+    set_stats("constitution", 24);
+
     set_new_exp(60, "boss");
-    set_mob_magic_resistance("high"); //comes out to 81MR
+    set_mob_magic_resistance("high");
+
     set_property("spell damage resistance", 10);
     set_property("no death", 1);
     set_property("magic", 1);
@@ -44,9 +50,12 @@ void create()
     set_property("weapon resistance", 3);
     set_property("cast and attack", 1);
     set_property("function and attack", 1);
+
     set_property("spell penetration", 30);
-    set_max_hp(3500);
+
+    set_max_hp(5500);
     set_hp(query_max_hp());
+
     set_emotes(2,
                ({ "%^MAGENTA%^Batlin says%^RESET%^: Where did I put my spellbook?",
                   "%^MAGENTA%^Batlin says%^RESET%^: I need to gather more components.",
@@ -56,27 +65,26 @@ void create()
                   "%^MAGENTA%^Batlin says%^RESET%^: Better lock up the cells ...",
                   "%^MAGENTA%^Batlin says%^RESET%^: Black pearl is hard to find!" }), 0);
     add_money("gold", 50000 + random(10000));
+
     set_funcs(({ "daemonic_surprise",
                  "mind_blast",
                  "energy_strike" }));
+
     set_func_chance(30);
+
     set_spells(({ "mind fog",
-                  "globe of invulnerability",
-                  "sleet storm",
-                  "glacier",
-                  "glacier",
-                  "weird",
-                  "wail of the banshee",
-                  "meteor swarm",
-                  "sleet storm",
-                  "entropic storm",
-                  "typhoon",
-                  "shadow nova",
-                  "ray of ending",
-                  "clashing rocks" }));
-    set_spell_chance(100);
+                    "globe of invulnerability",
+                    "typhoon",
+                    "weird",
+                    "waves of exhaustion",
+                    "prismatic burst",
+                    "sunburst",
+                    "sleet storm" }));
+
+    set_spell_chance(90);
+
     obj = new(OBJ + "elemental_staff")->move(TO);
-    command("wield staff in left hand and right hand");
+    command("wield staff");
     obj = new("/d/islands/argentrock/obj/robes");
     obj->move(TO);
     command("wear robe");
@@ -84,11 +92,13 @@ void create()
     obj->move(TO);
     obj->set_property("monsterweapon", 1);
     command("wear ring");
+
     for (i = 0; i < random(15); i++) {
         obj = new("/d/magic/scroll");
         obj->set_spell(9);
         obj->move(TO);
     }
+
     names = ({});
     count = 0;
 }
@@ -102,10 +112,6 @@ int set_tripped(int num, string str)
 {
     return 0;
 }
-
-//so he can wear the robes - Saide
-//No longer required for the new robe
-/* string *query_mini_quests() { return ({"%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^"}); } */
 
 void heart_beat()
 {
@@ -151,8 +157,8 @@ void heart_beat()
     if (query_hp() < query_max_hp()) {
         TO->do_damage("torso", -1 * roll_dice(10, 20));
     }
-    if (query_hp() <= 900) {
-        if (count <= 0) {
+    if (query_hp() < 500) {
+        if (count < 0) {
             count = 12;
             set_func_chance(0);
             call_out("imbalance", 0.1);

@@ -854,7 +854,8 @@ void wizard_interface(object user, string type, string targ)
     seteuid(getuid());
 
     if (query_aoe_spell()) {
-        if (sizeof(caster->query_property("aoe list")) > 2) {
+        // No more than two
+        if (sizeof(caster->query_property("aoe list")) > 1) {
             tell_object(caster, "You can't concentrate on that many effects!");
             ::remove();
             return;
@@ -1545,7 +1546,8 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
     }
 
     if (query_aoe_spell()) {
-        if (sizeof(caster->query_property("aoe list")) > 2) {
+        // No more than two
+        if (sizeof(caster->query_property("aoe list")) > 1) {
             tell_object(caster, "You can't concentrate on that many effects!");
             ::remove();
             return;
@@ -2263,8 +2265,9 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 3;
     }
 
-    if (FEATS_D->usable_feat(caster, "apoapsis of power")) {
-        sdamage_adjustment += 2;
+    if ((spell_type == "mage" || spell_type == "sorcerer" || spell_type == "psion")
+        && FEATS_D->usable_feat(caster, "apoapsis of power")) {
+        sdamage_adjustment += 4;
     }
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
@@ -2275,7 +2278,7 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
-        sdamage = roll_dice((clevel / 6 + 1), 4);
+        sdamage = roll_dice(clevel, 4);
     } else if (spell_type == "warlock") {
         string blasttype;
 
@@ -3420,7 +3423,7 @@ void help()
         quickname = MAGIC_D->query_index_row(spell_name)["quick"];
     }
 
-    write("%^BOLD%^%^RED%^Spell:%^RESET%^ " + spell_name + (quickname ?(" (" + quickname + ")") : ""));
+    write("%^BOLD%^%^RED%^Spell:%^RESET%^ " + spell_name + (quickname ? (" (" + quickname + ")") : ""));
     classkeys = keys(spell_levels);
 
     if (!sizeof(classkeys)) {
