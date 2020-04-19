@@ -26,7 +26,7 @@ void create() {
    set_hp(query_max_hp());
    set_exp(100);
    set_spell_chance(95);
-   set_spells(({"lightning bolt", "lightning bolt", "hold person", "powerword stun", "magic missile", "magic missile", "wall of fire", "faithful phantom guardians", "prismatic spray" }));
+   set_spells(({"lightning bolt", "lightning bolt", "hold person", "powerword stun", "magic missile", "magic missile", "wall of fire", "phantom guardians", "prismatic spray" }));
    set_storage_room(STORAGE"general_storage");
    set_items_allowed("misc");
 }

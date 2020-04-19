@@ -3413,8 +3413,14 @@ void help()
 {
     mapping mycomps, compmap;
     string* classkeys, printclass, * compskeys, * mapkeys, printcomps;
+    string quickname;
     int i, j;
-    write("%^BOLD%^%^RED%^Spell:%^RESET%^ " + spell_name + " (" + MAGIC_D->query_index_row(spell_name)["quick"] + ")");
+
+    if (mapp(MAGIC_D->query_index_row(spell_name))) {
+        quickname = MAGIC_D->query_index_row(spell_name)["quick"];
+    }
+
+    write("%^BOLD%^%^RED%^Spell:%^RESET%^ " + spell_name + (quickname ?(" (" + quickname + ")") : ""));
     classkeys = keys(spell_levels);
 
     if (!sizeof(classkeys)) {

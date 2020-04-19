@@ -42,7 +42,7 @@ void create() {
        ({"fireball",
                "greater dispel magic",
                "monster summoning ix",
-               "faithful phantom guardians",
+               "phantom guardians",
                "phantasmal killer",
                "stormbolts",
                "stormbolts",

@@ -9,10 +9,10 @@ object *mons = ({});
 
 void create() {
     ::create();
-    set_spell_name("faithful phantom guardians");
+    set_spell_name("phantom guardians");
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS faithful phantom guardians on <centaurs|bats|soldiers>");
+    set_syntax("cast CLASS phantom guardians on <centaurs|bats|soldiers>");
     set_description("This spell creates casting level relative guardians who will guard the caster blindly.  You have the "
 "choice of 3 types: 2 centaurs, 4 soldiers or 8 bats. These guardians will not be effected by area effect spells.");
     set_verbal_comp();

@@ -1,7 +1,7 @@
-#define KNIGHTS ({})
-
-#define NEWPANTHEON ({"jarmila","callamir","kreysneothosies","ryorik","lord shadow","the faceless one","kismet","lysara","nimnavanon","nilith"})
-
+// Occult classes or ic development only
+#define OCCULT_GODS (([\
+    "usuiguth":({"Dreams/Madness", ({4, 5, 6, 7, 8, 9}), ({5, 7, 8, 9})}), \
+]))
 /**
  * List of deities with follower-clergy pairs
  */
@@ -17,17 +17,6 @@
    "nimnavanon":({"Forests/Weather",({1, 2, 3, 4, 5, 6, 7, 8, 9}),({2, 4, 5, 6, 8})}),\
 ]))
 
+#define PANTHEON DIETIES + OCCULT_GODS
+
 #define PALADIN_GODS ({"jarmila", "kreysneothosies", "nilith", "lord shadow", "kismet", "lysara"})
-
-// Occult classes or ic development only
-#define OCCULT_GODS ({"usuiguth"})
-
-#define RANGERS ({})
-
-#define DRUIDS ({})
-
-#define MONKS ({})
-
-#define KNIGHTALIGN (([]))
-
-#define RANGERALIGN (([]))

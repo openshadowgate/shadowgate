@@ -13,7 +13,7 @@ inherit OBJECT;
 "stoneskin",\
 "magic missile",\
 "scorcher",\
-"faithful phantom guardians",\
+"phantom guardians",\
 "blink",\
 "hold person",\
 "ray of enfeeblement",\

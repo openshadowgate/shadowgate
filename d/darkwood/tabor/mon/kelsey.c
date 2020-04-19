@@ -44,7 +44,7 @@ void create()
 	"magic missile",
 	"acid arrow",
 	"chain lightning",
-	"faithful phantom guardians",
+	"phantom guardians",
 	"fireball",
 	"monster summoning vii",
 	"web",

@@ -517,9 +517,9 @@ void single_target_spell() // always cast two
             break;
         }
 
-    case 1: // faithful phantom guardians
+    case 1: // phantom guardians
 
-        if(!has_spell(TO, "faithful phantom guardians"))
+        if(!has_spell(TO, "phantom guardians"))
         {
             new("/cmds/spells/f/_faithful_phantom_guardians.c")->use_spell(TO,"soldiers",MULT,10,"mage");
             break;

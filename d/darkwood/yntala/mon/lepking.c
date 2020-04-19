@@ -49,7 +49,7 @@ void create (){
    set_mlevel("mage",25);
    set_guild_level("mage",25);
    set_spell_chance(95);
-   set_spells(({"lightning bolt","fireball","hideous laughter","fireball","hideous laughter","scorcher","scorcher","burning hands","ray of enfeeblement","lower resistance","lower resistance","powerword stun","powerword stun","meteor swarm","chain lightning","ice storm","faithful phantom guardians"}));
+   set_spells(({"lightning bolt","fireball","hideous laughter","fireball","hideous laughter","scorcher","scorcher","burning hands","ray of enfeeblement","lower resistance","lower resistance","powerword stun","powerword stun","meteor swarm","chain lightning","ice storm","phantom guardians"}));
    set_mob_magic_resistance("average");
    if(random(10) < 1){
       obj = new("/d/magic/scroll");

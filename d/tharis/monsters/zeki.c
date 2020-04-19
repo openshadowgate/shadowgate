@@ -68,7 +68,7 @@ void create() {
     "domination":53000,
     "dragon scales":69500,
     "drawmij's instant summons":85000,
-    "faithful phantom guardians":92000,
+    "phantom guardians":92000,
     "finger of death":74000,
     "fireball":34000,
     "frost orb":33000,

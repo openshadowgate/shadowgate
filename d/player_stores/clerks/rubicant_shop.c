@@ -25,7 +25,7 @@ create() {
    set_hp(query_max_hp());
    set_exp(100);
    set_spell_chance(95);
-   set_spells(({"lightning bolt", "lightning bolt", "hold person", "powerword stun", "magic missile", "magic missile", "wall of fire", "faithful phantom guardians", "prismatic spray", "sonic orb" }));
+   set_spells(({"lightning bolt", "lightning bolt", "hold person", "powerword stun", "magic missile", "magic missile", "wall of fire", "phantom guardians", "prismatic spray", "sonic orb" }));
    make_me();
    new("/d/player_stores/obj/rubicant_shop_key")->move(TO);
    command("wear key");

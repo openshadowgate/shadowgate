@@ -60,10 +60,15 @@ int cmd_prepare(string str)
         return 1;
     }
 
-    if (TP->query_property("berserked"))
+    if (TP->query_property("berserked")) {
         return notify_fail("The rage in you prevents such concentration!\n");
-    if (sizeof(TP->query_attackers()) > 0)
+    }
+    if (sizeof(TP->query_attackers()) > 0) {
         return notify_fail("You cannot prepare spells while in combat!\n");
+    }
+    if (TP->query_property("effect_exhausted") || TP->query_property("effect_fatigued")) {
+        return notify_fail("%^BOLD%^You are fatigued or exhausted and cannot prepare!%^RESET%^\n");
+    }
 
     arguments = explode(str," ");
 

@@ -75,7 +75,7 @@ void create(){
       "powerword stun",
       "lightning bolt",
       "dispel magic",
-      "faithful phantom guardians",
+      "phantom guardians",
       "scorcher",
       }));
    set_spell_chance(50);

@@ -42,7 +42,7 @@ void create()
         "hideous laughter",
         "magic missile",
         "chain lightning",
-        "faithful phantom guardians",
+        "phantom guardians",
         "fireball",
         "monster summoning vii",
         "web",

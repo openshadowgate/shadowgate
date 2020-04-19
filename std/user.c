@@ -1487,37 +1487,38 @@ void setup() {
    static_user["verbose_moves"] = 1;
    "/adm/daemon/average_age_d.c"->register_player(TO);
 
-   if (member_array((string)TO->query_diety(), NEWPANTHEON) == -1 && (string)TO->query_diety() != "godless") {
+   if (member_array((string)TO->query_diety(), keys(PANTHEON)) == -1 && (string)TO->query_diety() != "godless") {
        TO->set_diety(0);
        TO->set_sphere(0);
-       if (TO->is_class("cleric")) {
-           TO->set_divine_domain(({}));
-       }
+       TO->set_divine_domain(({}));
    }
    force_me("look");
 }
 
-//should automatically remove anyone from a guild if the guild is removed
 void init_mud_guilds(){
   string *tmp, *tmpguild;
   int i;
 
-  if(!guild)
-    guild = ({});
-  if(!pointerp(guild))
-    guild = ({guild});
-  if(!shguild || !pointerp(shguild))
-    shguild = ({});
+  if (!guild) {
+      guild = ({});
+  }
+  if (!pointerp(guild)) {
+      guild = ({ guild });
+  }
+  if (!shguild || !pointerp(shguild)) {
+      shguild = ({});
+  }
 
-  if(avatarp(TO))
-    return;
+  if (avatarp(TO)) {
+      return;
+  }
 
   tmp = GUILDS_D->query_all_guilds();
   tmpguild = guild;
-  for(i=0;i<sizeof(tmpguild);i++){
-    if ((member_array(tmpguild[i], tmp) == -1) || (!(int)GUILDS_D->is_member(tmpguild[i], TO->query_name())))
-      remove_guild(tmpguild[i]);
-    //        if(member_array(tmpguild[i], tmp) == -1)
+  for (i = 0; i < sizeof(tmpguild); i++) {
+      if ((member_array(tmpguild[i], tmp) == -1) || (!(int)GUILDS_D->is_member(tmpguild[i], TO->query_name()))) {
+          remove_guild(tmpguild[i]);
+      }
   }
 
   guild = distinct_array(guild);

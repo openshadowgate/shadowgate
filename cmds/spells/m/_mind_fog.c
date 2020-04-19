@@ -24,10 +24,6 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-     // school specific mage spell
-    set_components(([
-        "mage" : ([ "diamond dust" : 2, "sapphire dust" : 1, ]),
-    ]));
     set_immunities( ({ "spell_immunity"}) );
     set_save("will");
 }
@@ -58,13 +54,10 @@ void spell_effect(int prof)
         damage_targ(target,"head",roll_dice(1,clevel),"mental");
         tell_object(target,"%^BOLD%^%^WHITE%^A heavy feeling descends upon you, leaving it difficult to think straight!%^RESET%^");
         tell_object(caster,"%^BOLD%^%^WHITE%^"+target->QCN+"'s eyes glaze over, as "+target->QS+" falls prey to your mind fog!%^RESET%^");
-        if(interactive(target))
-        {
-            target->set_static("spell interrupt","%^YELLOW%^You can't seem to think clearly enough!%^RESET%^");
-        }
-        else
-        {
-            target->set_property("spell interrupt","%^YELLOW%^You can't seem to think clearly enough!%^RESET%^");
+        if (userp(target)) {
+            target->set_static("spell interrupt", "%^YELLOW%^You can't seem to think clearly enough!%^RESET%^");
+        }else {
+            target->set_property("spell interrupt", "%^YELLOW%^You can't seem to think clearly enough!%^RESET%^");
         }
         call_out("next",ROUND_LENGTH,target);
         return;
@@ -87,11 +80,12 @@ void next()
     int enough;
     int i;
     enough = (clevel/11) +1;
-    if(enough > 4) { enough = 4; }
+    if (enough > 4) {
+        enough = 4;
+    }
     //no more than 4 rounds - duration on this was impossible for something that can be recast. Nienne, 04/10
     count++;
-    if(count > enough)
-    {
+    if (count > enough) {
         dest_effect();
         return;
     }

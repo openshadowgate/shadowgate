@@ -50,7 +50,7 @@ void create (){
    set_mlevel("mage",42);
    set_guild_level("mage",42);
    set_spell_chance(100);
-   set_spells(({"lightning bolt","fireball","chain lightning","lower resistance","meteor swarm","hideous laughter","meteor swarm","greater shout","scorcher","scorcher","meteor swarm","scorcher","ice storm","storm of vengeance","chain lightning","chain lightning","ice storm","ice storm","storm of vengeance","wall of fire","wall of fire","chain lightning","chain lightning","chain lightning","faithful phantom guardians","faithful phantom guardians"}));
+   set_spells(({"lightning bolt","fireball","chain lightning","lower resistance","meteor swarm","hideous laughter","meteor swarm","greater shout","scorcher","scorcher","meteor swarm","scorcher","ice storm","storm of vengeance","chain lightning","chain lightning","ice storm","ice storm","storm of vengeance","wall of fire","wall of fire","chain lightning","chain lightning","chain lightning","phantom guardians","phantom guardians"}));
    set_mlevel("thief",32);
    set_guild_level("thief",40);
    add_search_path("/cmds/thief");
@@ -87,7 +87,7 @@ if(TP->query_highest_level()<18){
   force_me("say %^BOLD%^%^BLACK%^'%^RESET%^%^BLUE%^The powers that have created this forest have also created me, little one.  For they fear you will inbalance the evils of this forest... So they created me, Tluklengrie to ensure you cannot do that.  I think I will enjoy some of your things while you ponder not wasting your time on something clearly beneath your skill.%^BOLD%^%^BLACK%^'");
    call_out("follower",1); //added this to get them to follow
    force_me("kill "+TPQN+ "");
-   force_me("cast faithful phantom guardians on soldiers");
+   force_me("cast phantom guardians on soldiers");
    call_out("spell_effect",1);
    switch(random(3)){
       case 0..1:

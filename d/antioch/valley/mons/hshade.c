@@ -40,7 +40,7 @@ void create(){
 	set_class("mage");
 	set_mlevel("mage",20);
 	set_level(20);
-	set_spells(({"faithful phantom guardians","magic missile","vampiric touch"}));
+	set_spells(({"phantom guardians","magic missile","vampiric touch"}));
 	set_spell_chance(30);
 //        set_exp(11500);
 	set_new_exp(20,"normal");

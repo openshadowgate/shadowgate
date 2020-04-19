@@ -1,4 +1,4 @@
-//Based on the faithful phantom guardians code.
+//Based on the phantom guardians code.
 //additional methods for wizzes to set and query creature type: 
 // query_creature() and set_creature(string str)
 

@@ -39,7 +39,7 @@ void create() {
    set_hp(query_max_hp());
    set_exp(300);
    set_spell_chance(95);
-   set_spells(({"cone of cold", "cone of cold", "powerword stun", "magic missile", "magic missile", "frost orb", "frost orb", "faithful phantom guardians", "disintegrate", "chain lightning" }));
+   set_spells(({"cone of cold", "cone of cold", "powerword stun", "magic missile", "magic missile", "frost orb", "frost orb", "phantom guardians", "disintegrate", "chain lightning" }));
    set_property("no bow",1);
 
    spells_sold=([

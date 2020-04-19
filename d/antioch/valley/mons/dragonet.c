@@ -259,7 +259,7 @@ void create()
             "powerword kill",
             "lightning bolt",
             "incendiary cloud",
-            "faithful phantom guardians",
+            "phantom guardians",
         }));
         break;
     }

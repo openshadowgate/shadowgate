@@ -3,7 +3,7 @@
  *
  * Order of spells defines their levels
  *
- * This dataset should be queried from MAGIC_D with
+ * This dataset should be queried from MAGIC_SS_D with
  * query_domain_spells(domain) and query_domains() functions.
  */
 static mapping DOMAIN_SPELLS = ([]);
@@ -23,9 +23,10 @@ DOMAIN_SPELLS = ([
 "fate":({"true strike", "clairvoyance", "auspicious bolt", "precognitive perception", "trace teleport", "aegis of fate", "foresight", "fortune fate", "astral projection"}),
 "fire" : ({ "burning hands", "produce flame", "fireball", "wall of fire", "fire shield", "fire seeds", "elemental body iv", "incendiary cloud", "elemental swarm" }),
 "good" : ({ "protection from alignment", "align weapon", "prayer", "holy smite", "burst of glory", "holy orb", "holy word", "holy aura", "gate" }),
-"illusion":({"blurred movement", "invisibility", "displacement", "greater invisibility", "phantasmal killer", "screen", "shadow double", "scintilating pattern", "weird"}),
+"illusion":({"blurred movement", "invisibility", "displacement", "greater invisibility", "phantasmal killer", "screen", "shadow double", "scintillating pattern", "weird"}),
 "knowledge" : ({ "true strike", "placeholder", "tongues", "deathward", "false vision", "legend lore", "powerword blind", "powerword stun", "powerword kill" }),
 "law" : ({ "protection from alignment", "align weapon", "prayer", "deathward", "domination", "repulsion", "dictum", "shield of law", "dominate monster" }),
+"madness":({"cause fear", "touch of idiocy", "rage", "confusion", "nightmare", "phantasmal killer", "insanity", "scintillating pattern", "weird"}),
 "magic" : ({ "color spray", "resist energy", "break curse", "freedom of movement", "mystic bolt", "protection from spells", "true seeing", "spellscar", "clashing rocks" }),
 "mentalism":({"confusion", "placeholder", "clairvoyance", "modify memory", "telepathic bond", "bolt of force", "mind blank", "inner eye", "astral projection"}),
 "moon":({"darkness", "confusion", "owls wisdom", "placeholder", "moonbeam", "placeholder", "placeholder", "insanity", "meteor swarm"}),
@@ -33,6 +34,7 @@ DOMAIN_SPELLS = ([
 "protection" : ({ "divine favor", "shield other", "resist energy", "lesser globe of invulnerability", "invisibility purge", "repulsion", "spell turning", "mind blank", "dimensional lock" }),
 "renewal" : ({ "bless", "restoration", "rejuvenation", "freedom of movement", "waves of fatigue", "disintegrate", "waves of exhaustion", "rebirth", "greater ruin" }),
 "repose" : ({ "spectral touch", "gentle repose", "phantom steed", "deathward", "slay living", "undeath is death", "waves of exhaustion", "destruction", "wail of the banshee" }),
+"stars":({"danding lights", "levitate", "hypnotic pattern", "dimension door", "prying eyes", "sunbeam",  "reverse gravity", "sunburst", "meteor swarm"}),
 "storms" : ({ "snowball", "lightning touch", "sleet storm", "ice storm", "stormwinds", "sirocco", "acid fog", "stormrage", "storm of vengeance" }),
 "strength" : ({ "enlarge person", "distressing tone", "magic vestments", "lesser globe of invulnerability", "righteous might", "stoneskin", "placeholder", "placeholder", "crushing hand" }),
 "suffering":({"touch of sickening", "body blades", "wave of pain", "purge spirit", "kiss of torment", "eyebite", "finger of death", "nightmare maw", "ray of ending"}),
@@ -42,6 +44,7 @@ DOMAIN_SPELLS = ([
 "tyranny":({"cause fear", "oppression", "wave of pain", "modify memory", "fear", "forbiddance", "insanity", "orb of the void", "wail of the banshee"}),
 "undeath":({"repair undead", "command undead", "gentle repose", "animate dead", "mass repair undead", "create undead", "control undead", "create greater undead", "animus blizzard"}),
 "vigilance" : ({ "divine favor", "orders oath", "heroism", "vicarious view", "domination", "inspiring recovery", "greater heroism", "placeholder", "overwhelming presence" }),
+"void":({"blurred movement", "levitate", "dismissal", "dimension door", "conjure elemental", "phantom guardians",  "reverse gravity", "nightmare maw", "gate"}),
 "war" : ({ "magic weapon", "spiritual weapon", "magic vestments", "placeholder", "flame strike", "transformation", "powerword blind", "powerword stun", "powerword kill" }),
 "water" : ({ "touch of sickening", "acid arrow", "stinking cloud", "ice storm", "cone of cold", "sirocco", "elemental body iv", "horrid wilting", "tidal surge" }),
 ]);
