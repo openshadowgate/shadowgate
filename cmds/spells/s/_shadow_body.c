@@ -1,9 +1,9 @@
 /*
   _shadow_body.c
-  
+
   Egoists can turn their body into shadow. Similar to Fiery Body
   and Form of Doom.
-  
+
   -- Tlaloc -- 4.3.20
 */
 
@@ -34,7 +34,7 @@ void effect(int direction)
         caster->remove_property("disease immunity");
         caster->remove_property("poison immunity");
     }
-    
+
     caster->set_property("damage resistance",10 * direction);
     caster->set_resistance_percent("fire",50*direction);
     caster->set_resistance_percent("acid",50*direction);
@@ -46,10 +46,10 @@ void effect(int direction)
 void create()
 {
     ::create();
-    
+
     set_author("tlaloc");
     set_spell_name("shadow body");
-    set_spell_level( ([ "psion" : 9 ]) );
+    set_spell_level( ([ "psion" : 9, "mage":7 ]) );
     set_spell_sphere("alteration");
     set_discipline("egoist");
     set_syntax("cast CLASS shadow body");
@@ -64,7 +64,7 @@ int preSpell()
       tell_object(caster,"You already have protection of this nature!");
       return 0;
    }
-   
+
    return 1;
 }
 
@@ -78,19 +78,19 @@ void spell_effect(int prof)
 {
     string myname, yourname;
     int mylevel;
-    
+
     myname = caster->QCN;
     ashort = "%^MAGENTA%^(%^BOLD%^%^BLACK%^s%^RESET%^%^MAGENTA%^h%^BOLD%^a%^RESET%^d%^BOLD%^%^BLACK%^o%^RESET%^%^MAGENTA%^w%^BOLD%^y %^BLACK%^s%^RESET%^%^MAGENTA%^i%^BOLD%^l%^RESET%^h%^BOLD%^%^BLACK%^o%^RESET%^%^MAGENTA%^u%^BOLD%^e%^RESET%^t%^BOLD%^%^BLACK%^t%^RESET%^%^MAGENTA%^e)%^WHITE%^";
-    
+
     tell_object(caster, "%^BOLD%^%^BLACK%^You focus on the s%^RESET%^%^MAGENTA%^h%^BOLD%^a%^RESET%^d%^BOLD%^%^BLACK%^o%^RESET%^%^MAGENTA%^w%^BOLD%^s%^RESET%^%^CYAN%^, %^BOLD%^%^BLACK%^drawing them to you and s%^RESET%^%^MAGENTA%^u%^BOLD%^b%^RESET%^s%^BOLD%^%^BLACK%^u%^RESET%^%^MAGENTA%^m%^BOLD%^i%^RESET%^n%^BOLD%^%^BLACK%^g your body!%^RESET%^");
     tell_room(place, "%^BOLD%^BLACK%^" + sprintf("%s pulls the shadows towards %s, subsuming %s body!", myname, caster->query_objective(), caster->query_possessive()), ({ caster }));
 
     effect(1);
     spell_successful();
     addSpellToCaster();
-    
+
     caster->set_property("added short",({ashort}));
-    
+
     call_out("dest_effect",ROUND_LENGTH * ( clevel + 10 ) * 10);
 
 }
