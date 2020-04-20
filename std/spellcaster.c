@@ -62,10 +62,10 @@ int magic_arsenal_feat(int num)
         num += 2;
     }
     if (FEATS_D->usable_feat(TO, "greater arsenal")) {
-        num += 5;
+        num += query_level() / 10 + 1;
     }
     if (FEATS_D->usable_feat(TO, "gift of the shadows")) {
-        num += 4;
+        num += query_level() / 10 + 1;
     }
     return num;
 }
