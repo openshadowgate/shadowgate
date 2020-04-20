@@ -78,7 +78,7 @@ static void logon()
     if ("/adm/daemon/shutdown_d.c"->shuttingDown()) {
         ttl = "/adm/daemon/shutdown_d.c"->query_time_left();
         if(ttl > 0)
-            message("logon", "\n<<< The MUD will be rebooting shortly. Reboot in "+ttl/60+" minute(s)! >>>\n", this_object());
+            message("logon", "\n<<< The MUD will be rebooting. Reboot in "+ttl/60+" minute(s)! >>>\n", this_object());
         else {
             message("logon", "\n<<< The MUD will reboot in under a minute! >>>\n", this_object());
             message("logon", "\n<<< Please consider waiting for a minute for the game to boot properly!!! >>>\n", this_object());

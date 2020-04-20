@@ -8,39 +8,39 @@ void create() {
     ::create();
     set_travel(RUTTED_TRACK);
     set_short("%^BOLD%^By a sagging fence%^RESET%^");
-    set_long( ::query_long()+"  A %^ORANGE%^fence %^RESET%^blocks your "+
-       "passage east, though it seems to have %^BOLD%^scuffmarks%^RESET%^ "+
-       "along its top and sags in the middle.");
+    set_long( ::query_long()+"A %^ORANGE%^fence %^RESET%^blocks your "+
+              "passage east, though it seems to have %^BOLD%^scuffmarks%^RESET%^ "+
+              "along its top and sags in the middle.");
     set("night long","%^GREEN%^The light of the moon reflects off the %^BOLD%^%^GREEN%^"+
-      "cornstalks%^RESET%^%^GREEN%^, bathing them in %^BOLD%^%^WHITE%^silvery light"+
-      "%^RESET%^%^GREEN%^.  The corn has been divided into rows with narrow "+
-      "lanes that allow passage, "+
-      "although it can be difficult to find a clear way through the shadows "+
-      "cast by the stalks.  The ground looks uneven with the flickering light "+
-      "as it shines through the corn.  A %^ORANGE%^fence %^RESET%^%^GREEN%^blocks your "+
-       "passage east, though it seems to have %^BOLD%^%^WHITE%^"+
-       "scuffmarks%^RESET%^%^GREEN%^ "+
-       "along its top and sags in the middle."
-    );
+        "cornstalks%^RESET%^%^GREEN%^, bathing them in %^BOLD%^%^WHITE%^silvery light"+
+        "%^RESET%^%^GREEN%^. The corn has been divided into rows with narrow "+
+        "lanes that allow passage, "+
+        "although it can be difficult to find a clear way through the shadows "+
+        "cast by the stalks. The ground looks uneven with the flickering light "+
+        "as it shines through the corn. A %^ORANGE%^fence %^RESET%^%^GREEN%^blocks your "+
+        "passage east, though it seems to have %^BOLD%^%^WHITE%^"+
+        "scuffmarks%^RESET%^%^GREEN%^ "+
+        "along its top and sags in the middle."
+        );
     add_item("fence","The ancient wooden fence is bleached nearly white and covered "+
-       "with patches of moss.  From here, you can see five fence posts that seem "+
-       "to have strange carvings.  Strangely, it seems there is some sort of wide path "+
-       "on the other side of the fence to the east.  You might be able to climb the fence.");
+             "with patches of moss. From here, you can see five fence posts that seem "+
+             "to have strange carvings. Strangely, it seems there is some sort of wide path "+
+             "on the other side of the fence to the east. You might be able to climb the fence.");
     add_item("scuffmarks","The white marks cover the whole top of this "+
-       "section of fence.  The fence also sags here in the middle, and "+
-       "you think you might be able to climb the fence.");
-    add_item("posts","Weathered symbols have been etched into the gnarled wood.  "+
-       "The symbols look very old.  The first is that of a sunburst, while on the "+
-       "second post there is a symbol that looks sort of like a horse's head.  The "+
-       "third post bears an oak leaf.  The fourth has a worn triangle shape.  On "+
-       "the fifth post two symbols have been carved, that of a waterfall with "+
-       "something surrounding it, though that has faded in time, and a teardrop shape.");
+             "section of fence. The fence also sags here in the middle, and "+
+             "you think you might be able to climb the fence.");
+    add_item("posts","Weathered symbols have been etched into the gnarled wood. "+
+             "The symbols look very old. The first is that of a sunburst, while on the "+
+             "second post there is a symbol that looks sort of like a horse's head. The "+
+             "third post bears an oak leaf. The fourth has a worn triangle shape. On "+
+             "the fifth post two symbols have been carved, that of a waterfall with "+
+             "something surrounding it, though that has faded in time, and a teardrop shape.");
     set_exits(([
-       "south" : KFIELD"field19",
-       "north" : KFIELD"field17",
-       "west" : KFIELD"field13",
-       "fence" : "/d/barriermnts/lothwaite/rooms/pathway1",
-    ] ));
+                   "south" : KFIELD"field19",
+                   "north" : KFIELD"field17",
+                   "west" : KFIELD"field13",
+                   "fence" : "/d/barriermnts/lothwaite/rooms/pathway1",
+                   ] ));
 }
 
 void init(){

@@ -12,7 +12,7 @@ void create(){
    set("night long",(:TO,"ndesc":));
    set_exits(([
                   "southeast" : PATHEXIT"pathway2",
-      "fence" : "/d/koenig/fields/room/field18"
+                  "fence" : "/d/koenig/fields/room/field18"
    ]));
    slipping();
 }
