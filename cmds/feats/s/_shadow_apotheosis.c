@@ -201,6 +201,7 @@ void shadow_effects(object obj)
         tell_room(place, cm("A bolt of black lightning strikes out from the vortex surrounding " + caster->QCN + " and strikes " + obj->QCN + " painfully!"), ({ obj, caster }));
 
         obj->cause_typed_damage(obj, obj->return_target_limb(), damage, "untyped");
+        caster->cause_typed_damage(caster, obj->return_target_limb(), -damage / 4, "untyped");
         break;
     }
     return;

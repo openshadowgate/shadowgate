@@ -9,11 +9,11 @@ int saved = 0;
 void create()
 {
     ::create();
-    set_name("mindfire");
+    set_name("cacle fever");
     set_incubation("1 day");
-    set_damage_desc("1d4 int");
+    set_damage_desc("1d6 wis");
     set_infection("inhaled");
-    set_description("\n\nFeels like your brain is burning. Causes stupor.");
+    set_description("\n\nSymptoms include high fever, disorientation, and frequent bouts of hideous laughter. Also known as the shieks.");
 
     set_property("inanimate bonus", 1);
     set_heart_beat(32);
@@ -43,7 +43,8 @@ advance_disease()
 
     set_item_bonus("intelligence",dmg);
 
-    tell_object(ETO,"\n%^BOLD%^%^BLUE%^Your brain is burning with pain.%^RESET%^");
+    tell_object(ETO,"\n%^BOLD%^%^BLUE%^Your burst out in sudden laughter.%^RESET%^");
+    tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " bursts out in sudden laughter!%^RESET%^", ETO);
 
     stage++;
 
