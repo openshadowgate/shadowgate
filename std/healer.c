@@ -217,25 +217,9 @@ void cure_disease(string str)
     tell_object(TP,name+" tosses a soft white powder all over the room!");
     tell_room(TO, name+" collects some money and then tosses a soft white powder all over room!", TP);
     ppl = all_inventory(TO);
-    for(x = 0;x < sizeof(ppl);x++)
-    {
-        if(!objectp(ppl[x]))
-            continue;
-        curemsg = "/daemon/disease_d.c"->cure_diseases(ob, ppl[x]);
-        if (ppl[x] == ob)
-            continue;
-        if(curemsg != "")
-            ob->force_me("whisper "+TP->query_name()+" I have cured "+ curemsg + " from you.");
-        else
-            ob->force_me("whisper "+TP->query_name()+" Seems either I've failed or you weren't sick in the first place.");
-        inv = all_inventory(TP);
-        for(i = 0; i < sizeof(inv);i++)
-        {
-            if(!objectp(inv[i])) continue;
-            "/daemon/disease_d.c"->cure_diseases(ob, inv[i]);
-            continue;
-        }
-    }
+
+
+
     TP->use_funds("gold", ADJUST_COST(cd));
     return 1;
 }

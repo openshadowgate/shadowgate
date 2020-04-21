@@ -65,6 +65,7 @@
 // because Garrett is silly and is a wabbit
 #define SPELL "/std/magic/spell"
 #define STATUS "/std/effect/status_eff"
+#define DISEASE "/std/diseases/disease_obj"
 #define FEAT "/std/feat"
 #define SCRIBE "/std/scribe"
 #define WEAPONLESS "/std/weaponless_monsters"

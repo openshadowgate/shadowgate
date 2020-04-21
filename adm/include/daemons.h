@@ -31,7 +31,6 @@
 #define DESC_D              (DIR_DAEMONS+"/description_d")
 #define DESTINATIONS_D   (DIR_DAEMONS+"/destinations_d")
 #define DICE_D               ("/daemon/dice_d")
-#define DISEASE_D            (DIR_DAEMONS+"/disease_d")
 #define DM_NPC_D             (DIR_SECURE_DAEMONS+"/dm_npc_d")
 #define D_BUG_D            (DIR_SECURE_DAEMONS+"/debug_d")
 #define ECONOMY_D            (DIR_DAEMONS+"/economy_d")
