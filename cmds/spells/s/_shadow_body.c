@@ -22,7 +22,7 @@ void effect(int direction)
     {
         caster->set_property("flying",1);
         caster->set_property("darkvision", 1);
-        caster->set_property("iron_body",1);
+        caster->set_property("iron body", 1);
         caster->set_property("poison immunity", 1);
         caster->set_property("disease immunity", 1);
     }
@@ -30,7 +30,7 @@ void effect(int direction)
     {
         caster->remove_property("flying");
         caster->remove_property("darkvision");
-        caster->remove_property("iron_body");
+        caster->remove_property("iron body");
         caster->remove_property("disease immunity");
         caster->remove_property("poison immunity");
     }
@@ -59,7 +59,7 @@ void create()
 
 int preSpell()
 {
-   if(caster->query_stoneSkinned() || caster->query_property("iron body") || caster->query_property("castspellresist") || caster->query_property("form of doom") || caster->query_property("fiery body"))
+   if(caster->query_stoneSkinned() || caster->query_property("iron body") || caster->query_property("form of doom") || caster->query_property("fiery body"))
    {
       tell_object(caster,"You already have protection of this nature!");
       return 0;
