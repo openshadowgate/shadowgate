@@ -86,7 +86,7 @@ static void select_topic(string str, string category, string *topics,int ind) {
 static string *query_categories() {
    string *tmp;
 
-   tmp = ({ "*player general", "*player commands","*feats","*skills","*spells" });
+   tmp = ({ "*player general", "*player commands","*feats","*skills","*spells", "*diseases"});
    // tmp += ({ "*abilities" });
 
    tmp += ({ "*policies", "*rules", "*lore", "*guidelines", "*deities", "*races", "*alignment","*roleplaying","*classes" ,"*faq", "*domains", "*mysteries"});
@@ -168,6 +168,10 @@ string *query_topics(string category) {
    case "*mysteries": return topics_dir(DIR_MYSTERIES_HELP+"/");
    case "*skills": return topics_dir(DIR_SKILLS_HELP+"/");
 
+   case "*diseases":
+       myhold = get_dir("/std/diseases/diseases/");
+       myreturn = map(myhold, (:replace_string($1, ".c", ""):));
+       return myreturn;
    case "*spells": case "*feats":
       if(category == "*spells") MYDIR = DIR_SPELLS;
       else MYDIR = DIR_FEATS;
@@ -182,7 +186,6 @@ string *query_topics(string category) {
       if(!sizeof(myok)) return 0;
       for(i = 0;i < sizeof(myok); i++) myreturn += (string *)CMD_D->query_commands(myok[i]);
       return myreturn;
-
    case "*creator general":
       if(!wizardp(this_player())) return 0;
       else return topics_dir(DIR_CREATOR_HELP+"/");
@@ -311,12 +314,24 @@ static int find_help(string topic, string category, int menu) {
            return 0;
         if(objectp(ob)) tmp = ob; // trying to fix a bug in help - garrett
        break;
-   case "*spells":
-      if(!file_exists(tmp = DIR_SPELLS"/"+topic[0..0]+"/_"+topic+".c")) return 0;
-      if(!(ob = find_object_or_load(tmp)) || !function_exists("help", ob))
-         return 0;
-      tmp = ob;
-      break;
+   case"*diseases" :
+       if (!file_exists(tmp = "/std/diseases/diseases/" + topic + ".c")) {
+           return 0;
+       }
+       if (!(ob = find_object_or_load(tmp)) || !function_exists("help", ob)) {
+           return 0;
+       }
+       tmp = ob;
+       break;
+   case"*spells" :
+       if (!file_exists(tmp = DIR_SPELLS "/" + topic[0..0] + "/_" + topic + ".c")) {
+           return 0;
+       }
+       if (!(ob = find_object_or_load(tmp)) || !function_exists("help", ob)) {
+           return 0;
+       }
+       tmp = ob;
+   break;
    case "*policies":
       if(!file_exists(tmp = DIR_POLICIES_HELP+"/"+topic)) return 0;
       break;
@@ -472,23 +487,17 @@ static int find_help(string topic, string category, int menu) {
       tmp = ob;
       break;
    }
-   if((term=(string)this_player()->getenv("TERM")) == "ansi" ||
-      term=="xterm" || term == "ansi-status")
-      message("info", sprintf("\n"+CLS+"Topic: %%^GREEN%%^%s"
-                              "%%^RESET%%^  \t%s System Help \tCategory: %%^GREEN%%^%s\n",
-                              topic, mud_name(), category), this_player());
-   else
-      message("info", sprintf("\nTopic: %%^GREEN%%^%s"
-                              "%%^RESET%%^  \t%s System Help \tCategory: %%^GREEN%%^%s\n",
-                              topic, mud_name(), category), this_player());
-   if(objectp(tmp)) {
-      tmp->help();
-      if(menu) {
-         message("prompt", "\nHit <return> to continue: ", this_player());
-         input_to("menu_return", category);
-      }
-   } else this_player()->more(tmp, "help", (menu ? (: "endmore" :) : 0),
-                              (menu ? category : 0));
+   message("info", "\n%^BOLD%^%^WHITE%^Topic: %^RESET%^%^ORANGE%^" + topic + " %^GREEN%^" + category + "\n", this_player());
+   if (objectp(tmp)) {
+       tmp->help();
+       if (menu) {
+           message("prompt", "\nHit <return> to continue: ", this_player());
+           input_to("menu_return", category);
+       }
+   } else {
+       this_player()->more(tmp, "help", (menu ? (: "endmore" :) : 0),
+                           (menu ? category : 0));
+   }
    return 1;
 }
 

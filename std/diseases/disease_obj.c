@@ -1,4 +1,5 @@
 #include <std.h>
+#include <daemons.h>
 
 #pragma strict_types
 #pragma strong_types
@@ -47,10 +48,9 @@ int is_disease()
     return 1;
 }
 
-void init_disease(int stg, int dc)
+void init_disease(int dc)
 {
     clevel = dc;
-    stage = stg;
     return;
 }
 
@@ -66,21 +66,29 @@ int cure_disease(int power)
     }
     if (objectp(TO)) {
         TO->remove();
+        return 1;
     }
-    return 1;
 }
 
-int infect(object victim, int stg, int dc)
+object infect(object victim, int dc)
 {
     object tmp;
+    object * diseases;
 
     if (is_immune(victim)) {
         return 0;
     }
+
+    if (member_array(query_name(),
+                     filter_array(all_inventory(victim),
+                                  (:$1->is_disease():))->query_name()) != -1) {
+        return 0;
+    }
+
     tmp = new(file_name(TO));
     tmp->move(victim);
-    tmp->init_disease(stg, dc);
-    return 1;
+    tmp->init_disease(dc);
+    return tmp;
 }
 
 int is_immune(object victim)
@@ -88,7 +96,8 @@ int is_immune(object victim)
     if (victim->is_undead()) {
         return 1;
     }
-    if (FEATS_D->usable_feat(victim, "purity of body") || FEATS_D->usable_feat(victim, "divine health")) {
+    if (FEATS_D->usable_feat(victim, "purity of body") ||
+        FEATS_D->usable_feat(victim, "divine health")) {
         return 1;
     }
     return 0;
@@ -96,9 +105,9 @@ int is_immune(object victim)
 
 void help()
 {
-    write("%^BOLD%^%^ORANGE%^Name: " + query_name());
-    write("%^BOLD%^%^ORANGE%^Infection: " + infection_desc);
-    write("%^BOLD%^%^ORANGE%^Incubation: " + incubation_desc);
-    write("%^BOLD%^%^ORANGE%^Damage: " + damage_desc);
-    write("%^BOLD%^%^ORANGE%^Description: \n" + description);
+    write("%^GREEN%^%^BOLD%^Name: %^RESET%^" + query_name());
+    write("%^GREEN%^%^BOLD%^Infection: %^RESET%^" + infection_desc);
+    write("%^GREEN%^%^BOLD%^Incubation: %^RESET%^" + incubation_desc);
+    write("%^GREEN%^%^BOLD%^Damage: %^RESET%^" + damage_desc);
+    write("%^GREEN%^%^BOLD%^Description: %^RESET%^" + description);
 }

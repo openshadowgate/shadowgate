@@ -151,6 +151,7 @@ int identify_curse(string str)
 int pray()
 {
     string* classes;
+    object* stuff;
 
     if (!this_player()->query_ghost()) {
         notify_fail("The living do not need to pray for revival.\n");
@@ -196,10 +197,13 @@ int pray()
     TP->delete("RaisingExpLoss");
     TP->delete("RaisingType");
 
+    stuff = all_inventory(TP);
+    filter_array(stuff, (:$1->is_disease():))->remove();
+
     /* Punishment for non-newbies. */
     if (!newbiep(TP) &&
         ((int)TP->query_character_level() > 6)) {
-        object* stuff;
+
         int exploss, expdelta, exp, thelevel;
         int i;
         string myclass;

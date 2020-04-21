@@ -48,6 +48,7 @@ void spell_effect(int prof)
             continue;
         admg=sdamage;
         tell_object(attackers[i],"%^BLUE%^You are hit with bolts of darkness!%^RESET%^");
+        tell_object(caster,"%^BOLD%^" + attackers[i]->QCN + " is hit with bolts of darkness!%^RESET%^");
         if(!do_save(attackers[i]))
         {
             damage_targ(attackers[i],attackers[i]->return_target_limb(),admg/2,"electricity");

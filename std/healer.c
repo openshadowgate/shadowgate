@@ -218,7 +218,7 @@ void cure_disease(string str)
     tell_room(TO, name+" collects some money and then tosses a soft white powder all over room!", TP);
     ppl = all_inventory(TO);
 
-
+    filter_array(deep_inventory(TO), (:$1->is_disease():))->remove();
 
     TP->use_funds("gold", ADJUST_COST(cd));
     return 1;
