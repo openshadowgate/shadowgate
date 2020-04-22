@@ -105,12 +105,14 @@ void pin(object targ) {
       tell_object(targ, "%^GREEN%^The demon grabs you and slams you to the ground hard, knocking the breath out of you!");
       targ->set_paralyzed(random(20)+15, "The breath has been knocked out of you, you can't breathe!!");
       targ->do_damage(targ->return_target_limb(),roll_dice(10,10));
+      "/std/diseases/diseases/demon_fever"->infect(targ, query_level());
       return 1;
     } else {
       tell_room(ETO, "%^GREEN%^"+targ->query_cap_name()+" dives out of the way of the demon!", targ);
       tell_object(targ, "%^GREEN%^You dive out of the way of the demon!");
       return 1;
     }
+
 }
 
 void tail(object targ) {

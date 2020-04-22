@@ -10,6 +10,10 @@
 #include <std.h>
 #include <daemons.h>
 
+#define MAX_PSI 6
+#define MAX_DIS 5
+#define MAX_WAR 4
+
 inherit SPELL;
 
 void create()
@@ -59,13 +63,18 @@ int preSpell()
         sargs = "";
     spell_to_cast = new(splfn);
     
-    ctype = "psywarrior";
+    ctype = "psion"; 
+    slevel = spell_to_cast->query_spell_level(ctype);   
+    max_level = MAX_PSI;
     
-    slevel = spell_to_cast->query_spell_level(ctype);
-    if(!slevel)
+    if(spell_to_cast->query_discipline())
+        max_level = MAX_DIS;
+    
+    if(slevel < 1)
     {
-        ctype = "psion";
+        ctype = "psywarrior";
         slevel = spell_to_cast->query_spell_level(ctype);
+        max_level = MAX_WAR;
     }
     
     if(slevel < 1)
@@ -73,15 +82,6 @@ int preSpell()
         tell_object(this_player(), "You may only cast psywarrior or psion spells with this power!");
         return 0;
     }
-    
-    if(ctype == "psion")
-    {
-        max_level = 6;
-        if(spell_to_cast->query_discipline())
-            max_level = 5;
-    }
-    else
-        max_level = 4;
     
     if(slevel > max_level)
     {
