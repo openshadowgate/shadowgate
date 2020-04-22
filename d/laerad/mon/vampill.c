@@ -132,7 +132,7 @@ void cone(object targ)
     }
     tell_object(targ, "%^BOLD%^BLUE%^The Vampire Illithid psionically assaults your brain!");
     tell_room(ETO, "%^BOLD%^BLUE%^The Vampire Illithid focuses a psionic assault on " + targ->query_cap_name() + ".", targ);
-    if (!SAVING_D->will_save(targ, 20)) {
+    if (!SAVING_THROW_D->will_save(targ, 20)) {
         tell_object(targ, "Your body freezes up!");
         tell_room(ETO, targ->query_cap_name() + "'s body freezes up!", targ);
         targ->set_paralyzed(40 + (random(30)), "Your muscles won't budge.");
@@ -184,7 +184,7 @@ void brain_me1(object targ)
 //    }
 //  }
         }
-        if (!SAVING_D->fort_save(targ, 20)) {
+        if (!SAVING_THROW_D->fort_save(targ, 20)) {
             tell_object(targ, "%^BOLD%^As the tentacle hits you it grabs ahold of your head and starts to burrow towards your brain!");
             tell_room(ETO, "%^BOLD%^As the tentacle hits " + targ->query_cap_name() + " it grabs ahold of " + targ->query_possessive() + " head and starts to burrow into it!", targ);
             set_attack_limbs((string*)TO->query_attack_limbs() - ({ limb }));
@@ -207,7 +207,7 @@ void burrow1(object targ)
     if (!present(targ, ETO)) {
         return 1;
     }
-    if (!SAVING_D->fort_save(targ, 20) && !targ->query_paralyzed()) {
+    if (!SAVING_THROW_D->fort_save(targ, 20) && !targ->query_paralyzed()) {
         tell_object(targ, "%^BOLD%^You grab ahold of the tentacle and tear it out of your head!");
         tell_room(ETO, "%^BOLD%^" + targ->query_cap_name() + " grabs ahold of the tentacle and tears it out of " + targ->query_possessive() + " head!", targ);
         set_attack_limbs((string*)TO->query_attack_limbs() + ({ limb }));
