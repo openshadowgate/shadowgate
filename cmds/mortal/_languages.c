@@ -3,53 +3,64 @@
 #include <clock.h>
 inherit DAEMON;
 
-int cmd_languages(string str){
-   mapping skills;
-   string *skillslist,
-       skill,
-       mylang;
-   int freelang,
-       usedlang,
-       points,
-       newtotal,
-       grammar;
-   int intbonus = BONUS_D->query_stat_bonus(TP, "intelligence");
+int cmd_languages(string str)
+{
+    mapping skills;
+    string* skillslist,
+          skill,
+          mylang;
+    int freelang,
+        usedlang,
+        points,
+        newtotal,
+        grammar;
+    int intbonus = BONUS_D->query_stat_bonus(TP, "intelligence");
 
-   intbonus = intbonus<1?1:intbonus;
-   freelang = (TP->query_age() / 43200 + ((time() - TP->query_birthday())/YEAR)) * intbonus;
-   usedlang = TP->query("used language points");
-   skills = TP->query_all_langs();
-   skillslist = keys(skills);
+    intbonus = intbonus < 1 ? 1 : intbonus;
+    freelang = (TP->query_age() / 43200 + ((time() - TP->query_birthday()) / YEAR)) * intbonus;
+    usedlang = TP->query("used language points");
+    skills = TP->query_all_langs();
+    skillslist = keys(skills);
 
-   if(!str)
-   {
-     tell_object(TP, ""+arrange_string("Language",20)+arrange_string("prof. level", 15)+"\n");
-     foreach(skill in skillslist)
-     {
-         tell_object(TP, ""+arrange_string(skill,20)+arrange_string(skills[skill]+"("+TP->query_grammar(skill)+")", 15));
-     }
-     tell_object(TP,"%^GREEN%^You are currently speaking in %^BOLD%^"+TP->query_spoken()+".\n");
-     tell_object(TP,"%^ORANGE%^You have used %^BOLD%^"+usedlang+"%^RESET%^%^ORANGE%^ of your total %^BOLD%^"+freelang+"%^RESET%^%^ORANGE%^ language points.%^RESET%^");
-     return 1;
-   }
-   str = lower_case(str);
-   if(sscanf(str,"add %d to %s",points,mylang) != 2) return notify_fail("See <help languages> for syntax.\n");
-   if(member_array(mylang,skillslist) == -1) return notify_fail("You don't know "+mylang+".\n");
-   if(points < 1) return notify_fail("You can only add a positive number of points to a language.\n");
-   newtotal = skills[mylang] + points;
-   if(newtotal > 100) return notify_fail("There's no point taking a language above 100%.\n");
-   if((usedlang+points) > freelang) return notify_fail("You don't have that many free points to spend.\n");
-   grammar = (int)TP->query_grammar(mylang);
-   TP->set_lang(mylang,newtotal);
-   TP->set_grammar(mylang,grammar);
-   TP->set("used language points",(usedlang+points));
-   tell_object(TP,"%^BOLD%^%^WHITE%^You have increased your understanding of "+mylang+" by "+points+" points.%^RESET%^");
-   return 1;
+    if (!str) {
+        tell_object(TP, "" + arrange_string("Language", 20) + arrange_string("prof. level", 15) + "\n");
+        foreach(skill in skillslist)
+        {
+            tell_object(TP, "" + arrange_string(skill, 20) + arrange_string(skills[skill] + "(" + TP->query_grammar(skill) + ")", 15));
+        }
+        tell_object(TP, "%^GREEN%^You are currently speaking in %^BOLD%^" + TP->query_spoken() + ".\n");
+        tell_object(TP, "%^ORANGE%^You have used %^BOLD%^" + usedlang + "%^RESET%^%^ORANGE%^ of your total %^BOLD%^" + freelang + "%^RESET%^%^ORANGE%^ language points.%^RESET%^");
+        return 1;
+    }
+    str = lower_case(str);
+    if (sscanf(str, "add %d to %s", points, mylang) != 2) {
+        return notify_fail("See <help languages> for syntax.\n");
+    }
+    if (member_array(mylang, skillslist) == -1) {
+        return notify_fail("You don't know " + mylang + ".\n");
+    }
+    if (points < 1) {
+        return notify_fail("You can only add a positive number of points to a language.\n");
+    }
+    newtotal = skills[mylang] + points;
+    if (newtotal > 100) {
+        return notify_fail("There's no point taking a language above 100%.\n");
+    }
+    if ((usedlang + points) > freelang) {
+        return notify_fail("You don't have that many free points to spend.\n");
+    }
+    grammar = (int)TP->query_grammar(mylang);
+    TP->set_lang(mylang, newtotal);
+    TP->set_grammar(mylang, grammar);
+    TP->set("used language points", (usedlang + points));
+    tell_object(TP, "%^BOLD%^%^WHITE%^You have increased your understanding of " + mylang + " by " + points + " points.%^RESET%^");
+    return 1;
 }
 
-void help(){
+void help()
+{
     write(
-"
+        "
 %^CYAN%^NAME%^RESET%^
 
 languages - manage your languages
@@ -70,7 +81,7 @@ To choose a language you're currently using use %^ORANGE%^<speak>%^RESET%^ comma
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-speak, teach, speech, line use
+speak, teach, speech, line use, spoken languages
 "
-);
+        );
 }

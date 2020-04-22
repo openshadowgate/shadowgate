@@ -39,6 +39,7 @@ void effect(int direction)
     caster->set_resistance_percent("fire",50*direction);
     caster->set_resistance_percent("acid",50*direction);
     caster->set_resistance_percent("electricity",50*direction);
+    caster->set_property("endurance", (clevel / 8) * direction);
 
     return;
 }

@@ -1060,8 +1060,6 @@ string query_long(string unused)
             }
         }
     }
-    if(TP == TO) { if(stringp(dis = "/daemon/disease_d"->my_obvious_disease_effects(TP))) pre += dis; }
-    else if(stringp(dis = "/daemon/disease_d"->their_obvious_disease_effects(TO))) pre += dis;
     /* sub = capitalize(query_subjective()); */
     sub = "They";
     if (userp(TO)) {

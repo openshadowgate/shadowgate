@@ -650,19 +650,9 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         }
     }
     //disease stuff
-    if (attacker->query_property("infects disease")) {
-        effect_chance = (int)attacker->query("disease chance");
-        if (!intp(effect_chance)) {
-            effect_chance = 10;
-        }
-        if (effect_chance > roll_dice(1, 100)) {
-            "/daemon/disease_d.c"->infect_with_disease(attacker, target, random(2));
-        }
-    }else if (objectp(weapon) && !attacker->query_property("shapeshifted")) {
-        if (objectp(target) && weapon->query_property("infects disease")) {
-            "/daemon/disease_d.c"->infect_with_disease(weapon, target, 0);
-        }
-    }
+    /* if (attacker->query_property("infects disease")) { */
+
+    /* } */
     return;
 }
 

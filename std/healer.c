@@ -57,7 +57,6 @@ void init() {
     add_action("buy_potion", "blp");
     add_action("buy_potion", "bnp");
     add_action("cure_disease", "cd");
-    add_action("remove_negative_level", "rnl");
     add_action("cure_blindness", "cb");
     add_action("read_list","read");
     add_action("read_list","look");
@@ -77,7 +76,6 @@ int read_list(string str){
           "blp   buy a legendary healing potion    for "+ADJUST_COST(bp*TIER_IV)+" gold \n"
           "cb    cure your blindness               for "+ADJUST_COST(cb)+" gold \n"
           "cd    cure your diseases                for "+ADJUST_COST(cd)+" gold \n"
-          "rnl   remove 1 negative level           for "+ADJUST_COST(rnl)+" gold \n"
           "%^BOLD%^%^MAGENTA%^-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n"
     );
     if(query_newbie_heal()){
@@ -221,57 +219,6 @@ void cure_disease(string str)
     filter_array(deep_inventory(TO), (:$1->is_disease():))->remove();
 
     TP->use_funds("gold", ADJUST_COST(cd));
-    return 1;
-}
-
-void remove_negative_level(string str)
-{
-    object ob;
-    int neg_levels;
-    if(TP->query_hidden())
-	TP->force_me("step");
-
-    if(!(ob = present( lower_case(name)))){
-        tell_object(TP, "The healer is not here right now.");
-        return 1;
-    }
-    if(sizeof(ob->query_attackers())){
-        tell_object(TP, "The healer is a little busy right now!");
-        return 1;
-    }
-    if(sizeof(TP->query_attackers())){
-        tell_object(TP, "You're a little busy right now!");
-        return 1;
-    }
-    if(!ob->should_interact(TP)){
-        ob->force_me("emote waves you away in refusal");
-        ob->force_me("say leave before you tarnish my image.");
-        return 1;
-    }
-    neg_levels = absolute_value(TP->query("negative levels"));
-    if(!neg_levels)
-    {
-        tell_object(TP, name +" carefully looks you over.");
-        tell_room(TO, "%^MAGENTA%^"+name+" says: %^RESET%^You're not suffering from that at the moment, so I can't help you.");
-        return 1;
-    }
-    if(!TP->query_funds("gold",ADJUST_COST((rnl*neg_levels))))
-    {
-//        tell_object(TP, "You don't have enough money!");
-        tell_room(TO, name+" seems to be negotiating with "+TPQCN+".", TP);
-        tell_room(TO, "%^MAGENTA%^"+name+" says:  %^RESET%^That's not enough money you have there, sorry.");
-        tell_object(TP, "%^BOLD%^%^CYAN%^"+name+"%^BOLD%^%^CYAN%^ whispers to you: %^RESET%^You'll need "+
-        ADJUST_COST((rnl*neg_levels))+" gold coins for me to be able to fix you!");
-        tell_room(TO, "%^BOLD%^%^CYAN%^"+name+"%^BOLD%^%^CYAN%^ whispers something to "+TPQCN+"%^BOLD%^%^CYAN%^.%^RESET%^", TP);
-        return 1;
-    }
-    //TP->add_poisoning(-(int)TP->query_poisoning());
-
-    tell_object(TP,name+" administers a clear bitter liquid that removes your negative levels.");
-    tell_room(TO, name+" collects some money and then administers a clear liquid to "+TPQCN+".", TP);
-    "/daemon/disease_d.c"->cure_disease(TO, TP);
-    TP->use_funds("gold", ADJUST_COST((rnl*neg_levels)));
-    TP->delete("negative level");
     return 1;
 }
 
