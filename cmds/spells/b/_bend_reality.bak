@@ -2,7 +2,8 @@
   _bend_reality.c
   
   Similar to shadow spells like shadow alteration.
-  Lets you cast lower level psychic powers.
+  Lets you cast any psion power of the alteration 
+  school.
   
   -- Tlaloc -- 4.4.20
 */
@@ -19,14 +20,19 @@ void create()
     set_spell_level(([ "psion" : 8 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS bend reality on SPELL_NAME [on SPELL_ARGS]");
-    set_description("You use your vast psionic powers to bend reality around you, allowing you to cast any psion power of level 6 or below, any discipline-specific psion power of level 5 or below, OR any psywarrior spell of level 4 or below. Example: <cast psion bend reality on ruin on goblin>");
+    set_description("You use your vast psionic powers to bend reality around you, allowing you to cast an alteration mage or psion spell of 5th level or lower. E.G. <cast psion bend reality on ruin on goblin>");
     set_arg_needed(1);
     set_silent_casting(1);
 }
 
+string shadow_school()
+{
+    return "alteration";
+}
+
 int preSpell()
 {
-    int max_level;
+    int max_level = 5;
     int slevel;
     object spell_to_cast;
     string spl, sargs;
@@ -58,30 +64,26 @@ int preSpell()
     if(!sargs || sargs == "" || !stringp(sargs))
         sargs = "";
     spell_to_cast = new(splfn);
-    
-    ctype = "psion";
+    if(spell_to_cast->query_spell_sphere()!=shadow_school())
+    {
+        tell_object(TP,"Only alteration school spells are allowed!");
+        return 0;
+    }
+
+    ctype = "mage";
     
     slevel = spell_to_cast->query_spell_level(ctype);
     if(!slevel)
     {
-        ctype = "psywarrior";
+        ctype = "psion";
         slevel = spell_to_cast->query_spell_level(ctype);
     }
     
     if(slevel < 1)
     {
-        tell_object(this_player(), "You may only cast psywarrior or psion spells with this power!");
+        tell_object(this_player(), "You may only cast mage or psion spells with this power!");
         return 0;
     }
-    
-    if(ctype == "psion")
-    {
-        max_level = 6;
-        if(spell_to_cast->query_discipline())
-            max_level = 5;
-    }
-    else
-        max_level = 4;
     
     if(slevel > max_level)
     {
