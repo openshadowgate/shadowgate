@@ -24,19 +24,14 @@ string query_cast_string()
 {
     string cast;
 
-    if (interactive(CASTER))
-    {
-         cast = "%^CYAN%^"+YOU+" starts to intone a long "+
-		" incantation!";
-    } else {
-         cast = "%^CYAN%^"+YOU+" starts to vibrate and speaks "+
-		" a long incantation!";
-    }
+    cast = "%^CYAN%^"+YOU+" starts to vibrate and speaks a long incantation!";
+    return cast;
 }
 
 void spell_effect(int prof)
 {
-    int res;
+    int res = 0;
+    string dname;
     object * diseases, disease;
     tell_room(place, "%^BOLD%^%^WHITE%^A brilliant white aura briefly envelopes " + HIM + "!", ({ caster, target }));
     if (interactive(caster)) {
@@ -52,20 +47,19 @@ void spell_effect(int prof)
 
     diseases = filter_array(all_inventory(target), (:$1->is_disease():));
 
-    disease = diseases[random(sizeof(diseases))];
+    if (sizeof(diseases)) {
+        disease = diseases[random(sizeof(diseases))];
 
-    res = disease->cure_disease(clevel * 3 / 2);
+        dname = disease->query_name();
+        res = disease->cure_disease(clevel * 3 / 2);
+    }
 
     if (res == 0) {
-        tell_room(place, HIM + " appears no different", ({ target }));
-        if (living(target)) {
-            tell_object(target, "%^BOLD%^%^WHITE%^You feel no different.%^RESET%^");
-        }
+        tell_object(caster, "%^BOLD%^%^WHITE%^" + HIM + " appears no different");
+        tell_object(target, "%^BOLD%^%^WHITE%^You feel no different.%^RESET%^");
     }else {
-        tell_room(place, HIM + " appears to have been cleansed!", ({ target }));
-        if (living(target)) {
-            tell_object(target, "%^BOLD%^%^WHITE%^You have been cleansed of the disease!");
-        }
+        tell_object(caster, "%^BOLD%^%^WHITE%^" + HIM + " appears has been cleansed of " + dname + "!", ({ target }));
+        tell_object(target, "%^BOLD%^%^WHITE%^You have been cleansed of the disease!");
     }
 
     spell_successful();

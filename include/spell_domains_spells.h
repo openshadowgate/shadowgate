@@ -19,7 +19,7 @@ DOMAIN_SPELLS = ([
 "destruction" : ({ "true strike", "shatter", "rage", "fear", "tremor", "disintegrate", "finger of death", "horrid wilting", "tidal surge" }),
 "earth" : ({ "stone throw", "soften earth", "strength of stone", "spike growth", "earth reaver", "stoneskin", "elemental body iv", "stone body", "elemental swarm" }),
 "elements":({"shocking grasp", "flaming sphere", "fireball", "fire shield", "chain lightning", "freezing sphere", "vortex", "fire storm", "meteor swarm"}),
-"evil" : ({ "protection from alignment", "align weapon", "placeholder", "unholy smite", "slay living", "unholy orb", "blasphemy", "unholy aura", "animus blast" }),
+"evil" : ({ "protection from alignment", "align weapon", "contagion", "unholy smite", "slay living", "unholy orb", "blasphemy", "unholy aura", "animus blast" }),
 "fate":({"true strike", "clairvoyance", "auspicious bolt", "precognitive perception", "trace teleport", "aegis of fate", "foresight", "fortune fate", "astral projection"}),
 "fire" : ({ "burning hands", "produce flame", "fireball", "wall of fire", "fire shield", "fire seeds", "elemental body iv", "incendiary cloud", "elemental swarm" }),
 "good" : ({ "protection from alignment", "align weapon", "prayer", "holy smite", "burst of glory", "holy orb", "holy word", "holy aura", "gate" }),

@@ -31,7 +31,7 @@ advance_disease()
 
     next_step += DAY;
 
-    if ("/daemon/saving_throw_d"->fort_save(ETO, -clevel))
+    if (do_save())
     {
         saved++;
         if (saved > 2) {
@@ -40,6 +40,7 @@ advance_disease()
         }
         return;
     }
+    saved = 0;
 
     set_item_bonus("strength",dmg);
 

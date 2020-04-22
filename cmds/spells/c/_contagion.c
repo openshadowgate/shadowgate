@@ -11,7 +11,7 @@ void create() {
     set_spell_sphere("necromancy");
     set_damage_desc("Random disease");
     set_syntax("cast CLASS contagion on TARGET");
-    set_description("The subject contracts one of the following diseases: blinding sickness, bubonic plague, cackle fever, filth fever, leprosy, mindfire, red ache, shakes, or slimy doom. The disease is contracted immediately (the onset period does not apply). Spell's caster level used as spell power. Disease will progress then as usual.");
+    set_description("The subject contracts one of the following diseases: blinding sickness, cackle fever, filth fever, mindfire, red ache, shakes, slimy doom. The disease is contracted immediately (the onset period does not apply). Spell's caster level used as spell power. Disease will progress then as usual.");
 
     set_verbal_comp();
     set_somatic_comp();
@@ -27,10 +27,24 @@ string query_cast_string()
     return "%^BOLD%^%^BLACK%^"+caster->QCN+" steps into the shadows, then mixes something in his hands while chanting in a deep, dark tone.";
 }
 
+int query_forced_infection()
+{
+    return 0;
+}
+
 void spell_effect()
 {
     object disease;
+    string * targ_infections, dname;
     string dfile;
+
+    targ_infections = filter_array(all_inventory(target), (:$1->is_disease():))->query_name();
+    diseases -= targ_infections;
+
+    if (!sizeof(diseases)) {
+        tell_object(caster,"%^BOLD%^%^GREEN%^Target is infected with everything possible.");
+        return;
+    }
 
     dfile = "/std/diseases/diseases/" + replace_string(diseases[random(sizeof(diseases))], " ", "_") + ".c";
 
@@ -45,6 +59,9 @@ void spell_effect()
 
     disease = dfile->infect(target, clevel);
     if (objectp(disease)) {
+        if (query_forced_infection()) {
+            disease->set_force_fail();
+        }
         disease->advance_disease();
     } else {
         tell_object(caster,"%^BOLD%^%^GREEN%^You sense your curse had been repelled.");

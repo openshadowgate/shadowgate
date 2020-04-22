@@ -16,6 +16,7 @@ mapping innate_spells()
                 "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                 "stinking cloud" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                 "wererat shape" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                "contagion" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                 ]);
 }
 
