@@ -9,11 +9,11 @@ int saved = 0;
 void create()
 {
     ::create();
-    set_name("cacle fever");
+    set_name("slimy doom");
     set_incubation("1 day");
-    set_damage_desc("1d6 wis");
-    set_infection("inhaled");
-    set_description("\n\nSymptoms include high fever, disorientation, and frequent bouts of hideous laughter. Also known as the shieks.");
+    set_damage_desc("1d4 con");
+    set_infection("contact");
+    set_description("\n\nVictim turns into infectious goo from the inside out.");
 
     set_property("inanimate bonus", 1);
     set_heart_beat(32);
@@ -27,7 +27,7 @@ int init_disease(int dc)
 
 advance_disease()
 {
-    int dmg = -roll_dice(stage, 6);
+    int dmg = -roll_dice(stage, 4);
 
     next_step += DAY;
 
@@ -41,10 +41,9 @@ advance_disease()
         return;
     }
 
-    set_item_bonus("intelligence",dmg);
+    set_item_bonus("dexterity",dmg);
 
-    tell_object(ETO,"\n%^BOLD%^%^BLUE%^Your burst out in sudden laughter.%^RESET%^");
-    tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " bursts out in sudden laughter!%^RESET%^", ETO);
+    tell_object(ETO,"\n%^BOLD%^%^GREEN%^Rotten phlegm fills your mouth.%^RESET%^");
 
     stage++;
 
@@ -65,13 +64,6 @@ void heart_beat()
     }
     if (ETO->query_age() > next_step) {
         advance_disease();
-    }
-
-    if (stage > 1) {
-        if (!random(120)) {
-            tell_object(ETO, "\n%^BOLD%^%^BLUE%^Your burst out in sudden laughter.%^RESET%^");
-            tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " bursts out in sudden laughter!%^RESET%^", ETO);
-        }
     }
 
     return;

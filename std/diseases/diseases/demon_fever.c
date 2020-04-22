@@ -9,11 +9,11 @@ int saved = 0;
 void create()
 {
     ::create();
-    set_name("cacle fever");
+    set_name("demon fever");
     set_incubation("1 day");
-    set_damage_desc("1d6 wis");
-    set_infection("inhaled");
-    set_description("\n\nSymptoms include high fever, disorientation, and frequent bouts of hideous laughter. Also known as the shieks.");
+    set_damage_desc("1d6 con");
+    set_infection("injury");
+    set_description("\n\nNight hags spread it.");
 
     set_property("inanimate bonus", 1);
     set_heart_beat(32);
@@ -41,10 +41,9 @@ advance_disease()
         return;
     }
 
-    set_item_bonus("intelligence",dmg);
+    set_item_bonus("constitution",dmg);
 
-    tell_object(ETO,"\n%^BOLD%^%^BLUE%^Your burst out in sudden laughter.%^RESET%^");
-    tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " bursts out in sudden laughter!%^RESET%^", ETO);
+    tell_object(ETO,"\n%^BOLD%^%^GREEN%^Your fever intensifies.%^RESET%^");
 
     stage++;
 
@@ -67,10 +66,9 @@ void heart_beat()
         advance_disease();
     }
 
-    if (stage > 1) {
+    if (stage > 2) {
         if (!random(120)) {
-            tell_object(ETO, "\n%^BOLD%^%^BLUE%^Your burst out in sudden laughter.%^RESET%^");
-            tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " bursts out in sudden laughter!%^RESET%^", ETO);
+            tell_object(ETO, "\n%^BOLD%^%^BLUE%^You feel significantly under the weather.%^RESET%^");
         }
     }
 

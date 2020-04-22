@@ -9,11 +9,11 @@ int saved = 0;
 void create()
 {
     ::create();
-    set_name("cacle fever");
+    set_name("shakes");
     set_incubation("1 day");
-    set_damage_desc("1d6 wis");
-    set_infection("inhaled");
-    set_description("\n\nSymptoms include high fever, disorientation, and frequent bouts of hideous laughter. Also known as the shieks.");
+    set_damage_desc("1d8 dex");
+    set_infection("contact");
+    set_description("\n\nCauses involuntary twitches, tremors, and fits..");
 
     set_property("inanimate bonus", 1);
     set_heart_beat(32);
@@ -27,7 +27,7 @@ int init_disease(int dc)
 
 advance_disease()
 {
-    int dmg = -roll_dice(stage, 6);
+    int dmg = -roll_dice(stage, 8);
 
     next_step += DAY;
 
@@ -41,10 +41,10 @@ advance_disease()
         return;
     }
 
-    set_item_bonus("intelligence",dmg);
+    set_item_bonus("dexterity",dmg);
 
-    tell_object(ETO,"\n%^BOLD%^%^BLUE%^Your burst out in sudden laughter.%^RESET%^");
-    tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " bursts out in sudden laughter!%^RESET%^", ETO);
+    tell_object(ETO,"\n%^BOLD%^%^BLUE%^Your shake and twitch.%^RESET%^");
+    tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " shakes and twitches.%^RESET%^", ETO);
 
     stage++;
 
@@ -69,8 +69,8 @@ void heart_beat()
 
     if (stage > 1) {
         if (!random(120)) {
-            tell_object(ETO, "\n%^BOLD%^%^BLUE%^Your burst out in sudden laughter.%^RESET%^");
-            tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " bursts out in sudden laughter!%^RESET%^", ETO);
+            tell_object(ETO, "\n%^BOLD%^%^BLUE%^Your shake and twitch.%^RESET%^");
+            tell_room(EETO, "%^ORANGE%^" + ETO->QCN + " shakes and twitches.%^RESET%^", ETO);
         }
     }
 

@@ -59,12 +59,12 @@ int preSpell()
         sargs = "";
     spell_to_cast = new(splfn);
     
-    ctype = "psion";
+    ctype = "psywarrior";
     
     slevel = spell_to_cast->query_spell_level(ctype);
     if(!slevel)
     {
-        ctype = "psywarrior";
+        ctype = "psion";
         slevel = spell_to_cast->query_spell_level(ctype);
     }
     

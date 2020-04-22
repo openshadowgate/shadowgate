@@ -1,0 +1,13 @@
+%^CYAN%^DISEASES%^RESET%^
+
+Characters can contract diseases during adventuring from various sources, be that monsters, environment or spells.
+
+Infected character must succeed a fortitude saving throw or else their disease will progress. If they succeed usually two saving throws in order they will naturally fight of the disease and it will vanish. Saving throw is rolled versus diseases power which is determined during the infection.
+
+Diseases can be diagnosed only by observing the symptoms.
+
+A character can't be infected with same disease twice, even if the new infection is of greater power than previous.
+
+To heal a disease you can either use spells, potions or pay for town healer's services. Most diseases require treatment to be able to overcome disease's power.
+
+%^CYAN%^See also: %^RESET%^*diseases, status effects, stats, skills, score, hp

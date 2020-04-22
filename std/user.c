@@ -439,9 +439,30 @@ void redo_my_languages() {
   if (avatarp(TP)) {
       return;
   }
-  if (query("new_langs_set3")) {
+
+  if (query("lang_update_20200422")) {
       return;
   }
+
+  tell_object(TO,"%^BOLD%^Updating languages.");
+
+  // Removing old language update properties
+  {
+      if (query("new_langs_set3")) {
+          delete("new_langs_set3");
+      }
+
+      if (query("new_langs_set2")) {
+          delete("new_langs_set2");
+      }
+
+      if (query("new_langs_set")) {
+          delete("new_langs_set");
+      }
+      // Each time lang system is updated, add update marker removal
+      // here
+  }
+
   if (strsrch(race, "half-") != -1) {
       set_lang("common", 100);
       set_lang(LANGS[race][0], 100);
@@ -452,29 +473,32 @@ void redo_my_languages() {
           set_lang("undercommon", 100);
       }
   }
-  set("new_langs_set3",1);
 
-  if (query("new_langs_set2")) {
-      return;
+  if (TO->query_lang("ogrish")) {
+      mylang = TO->query_lang("ogrish");
+      TO->remove_lang("ogrish");
   }
-  if ((int)TP->query_lang("ogrish")) {
-      mylang = TP->query_lang("ogrish");
-      TP->remove_lang("ogrish");
+
+  if (TO->query_lang("ogre-magi") > mylang) {
+      mylang = TO->query_lang("ogre-magi");
+      TO->remove_lang("ogre-magi");
   }
-  if ((int)TP->query_lang("ogre-magi") > mylang) {
-      mylang = TP->query_lang("ogre-magi");
-      TP->remove_lang("ogre-magi");
-  }
+
   if (mylang) {
-      TP->set_lang("giant", mylang);
-      tell_object(TP, "%^BOLD%^%^RED%^Reinitializing your languages, contact a staff member if anything seems wrong.%^RESET%^");
+      TO->set_lang("giant", mylang);
   }
+
   mylang = 0;
 
-  if (query("new_langs_set")) {
-      delete("new_langs_set");
+  if (TP->query_lang("kobold")) {
+      mylang = TP->query_lang("kobold");
+      TP->remove_lang("kobold");
   }
-  set("new_langs_set2",1);
+
+  if (mylang) {
+      TO->set_lang("draconic", mylang);
+  }
+
   return;
 }
 
