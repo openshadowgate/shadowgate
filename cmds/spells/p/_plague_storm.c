@@ -76,6 +76,7 @@ void execute_attack()
         if (objectp(disease)) {
             disease->advance_disease();
             tell_room(place, "%^BOLD%^%^GREEN%^" + foes[i]->QCN + " inhales the diseaseous cloud.");
+            spell_kill(foes[i], caster);
         }
     }
 

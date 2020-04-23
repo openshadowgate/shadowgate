@@ -17,14 +17,7 @@ void create()
              "can be little doubt that whatever substance is inside "
              "of this vial is dangerous at best.");
 
-    set_lore("This potion was rumored to be created several "
-             "centuries ago by a derranged wizard who had multiple "
-             "personalities.  The formula was said to have been lost "
-             "with his untimely death when one furious suitor learned "
-             "that his lovely mistress was normally a man.  This "
-             "particular potion is said to be a counter for the "
-             "original, capable of physically changing a woman into "
-             "a man or vice versa.");
+    set_lore("This potion was rumored to be created several centuries ago by a derranged wizard who had multiple personalities.  The formula was said to have been lost with his untimely death when one furious suitor learned that his lovely mistress was normally a man.  This particular potion is said to be a counter for the original, capable of physically changing a woman into a man or vice versa.\n\n%^BOLD%^%^WHITE%^OOC Note: The function of sex cells (sperm, eggs) is entirely up to the gender inverted PC.  If a PC chooses to become pregnant while under the effects of the potion, that is fine.\n\nIf the potion is administered to a pregnant PC, the %^ULINE%^pregnant PC%^RESET%^ %^BOLD%^%^WHITE%^gets to choose one of the following options:\n\n1. The inversion fails.\n\n2. The fetus dies.\n\nYes, that means you %^ULINE%^cannot%^RESET%^ %^BOLD%^%^WHITE%^use this potion for forced abortions.%^RESET%^");
 
     set_property("lore difficulty", 35);
     set("color", "%^BOLD%^%^MAGENTA%^bright purple%^RESET%^");
