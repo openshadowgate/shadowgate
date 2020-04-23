@@ -2577,6 +2577,7 @@ int thaco(object target, int bonus)
 varargs int checkMagicResistance(object victim, int mod)
 {
     int res = 0;
+    int dieroll = 0;
 
     if (!intp(mod)) {
         mod = 1;
@@ -2604,7 +2605,12 @@ varargs int checkMagicResistance(object victim, int mod)
         res = (int)victim->query_property("magic resistance");
     }
 
+    dieroll = roll_dice(1, 20);
+
     if ((roll_dice(1, 20) + mod) > res) {
+        /*tell_object(caster, "Spell penetration: " + mod); //used for debugging
+           tell_object(caster, "Die roll: " + dieroll);
+           tell_object(caster, "Resistance: " + res);*/
         return 0;
     }
     return 1;
