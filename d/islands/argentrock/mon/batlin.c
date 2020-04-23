@@ -48,9 +48,8 @@ void create()
     set_property("no steal", 1);
     set_property("no bow", 1);
     set_property("weapon resistance", 3);
-    set_property("cast and attack", 1);
+    //set_property("cast and attack", 1);
     set_property("function and attack", 1);
-
     set_property("spell penetration", 30);
 
     set_max_hp(5500);
@@ -73,13 +72,13 @@ void create()
     set_func_chance(30);
 
     set_spells(({ "mind fog",
-                    "globe of invulnerability",
-                    "typhoon",
-                    "weird",
-                    "waves of exhaustion",
-                    "prismatic burst",
-                    "sunburst",
-                    "sleet storm" }));
+                  "globe of invulnerability",
+                  "typhoon",
+                  "weird",
+                  "waves of exhaustion",
+                  "prismatic burst",
+                  "sunburst",
+                  "sleet storm" }));
 
     set_spell_chance(90);
 
