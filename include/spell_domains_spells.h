@@ -42,7 +42,7 @@ DOMAIN_SPELLS = ([
 "travel" : ({ "skate", "clairvoyance", "faithful mount", "dimension door", "teleport", "pass portal", "create portal", "phase door", "astral projection" }),
 "trickery" : ({ "conceal alignment", "invisibility", "displacement", "confusion", "false vision", "flee the scene", "mass invisibility", "screen", "timestop" }),
 "tyranny":({"cause fear", "oppression", "wave of pain", "modify memory", "fear", "forbiddance", "insanity", "orb of the void", "wail of the banshee"}),
-"undeath":({"repair undead", "command undead", "gentle repose", "animate dead", "mass repair undead", "create undead", "control undead", "create greater undead", "animus blizzard"}),
+"undeath":({"repair undead", "command undead", "necrophage", "animate dead", "mass repair undead", "create undead", "control undead", "create greater undead", "animus blizzard"}),
 "vigilance" : ({ "divine favor", "orders oath", "heroism", "vicarious view", "domination", "inspiring recovery", "greater heroism", "placeholder", "overwhelming presence" }),
 "void":({"blurred movement", "levitate", "dismissal", "dimension door", "conjure elemental", "phantom guardians",  "reverse gravity", "nightmare maw", "gate"}),
 "war" : ({ "magic weapon", "spiritual weapon", "magic vestments", "placeholder", "flame strike", "transformation", "powerword blind", "powerword stun", "powerword kill" }),
