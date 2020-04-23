@@ -1,0 +1,110 @@
+#include <std.h>
+#include <priest.h>
+#include <party.h>
+
+inherit SPELL;
+
+int flag;
+
+void emote_em();
+
+void create()
+{
+    ::create();
+    set_spell_name("frightful aspect");
+    set_spell_level(([ "cleric" : 8, "druid" : 8, "mage" : 8]));
+    set_syntax("cast CLASS frightful aspect");
+    set_description("You become a larger, awful version of yourself. You grow in size, and take on features that horrify your enemies. You gain the following abilities: a +6 size bonus to Strength, a +4 size bonus to Constitution, a +6 natural armor bonus, 5 damage resistance, and spell resistance equal to 10 + half your caster level. You also emit an aura that emanates 30 feet from you. Enemy creatures within the aura are shaken. This spell won't work together with iron body.
+
+%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
+    set_verbal_comp();
+    set_arg_needed();
+    mental_spell(1);
+    set_save("will");
+}
+
+int preSpell()
+{
+    if (caster->query_property("frightful_aspect")) {
+        tell_object(caster, "You are already under the effects of this power!");
+        return 0;
+    }
+    if (caster->query_property("iron body")) {
+        tell_object(caster, "You already have protection of this nature!");
+        return 0;
+    }
+    return 1;
+}
+
+void spell_effect(int prof)
+{
+    tell_object(target,"%^RED%^You grow twice in size and feel more powerful, ready to crush your enemies!");
+    tell_room(place,"%^RED%^"+target->QCN+" grows twice in size!", target);
+
+    caster->set_property("spelled", ({ TO }));
+    caster->set_property("iron body", 1);
+    caster->set_property("damage resistance", 5);
+    caster->add_stat_bonus("strength", 6);
+    caster->add_stat_bonus("constitution", 4);
+    caster->set_property("added short",({"%^RED%^ (giant)%^RESET%^"}));
+    caster->set_size_bonus(1);
+    caster->add_ac_bonus(4);
+
+    addSpellToCaster();
+    spell_successful();
+    environment(caster)->addObjectToCombatCycle(TO, 1);
+    call_out("dest_effect",ROUND_LENGTH*(clevel + roll_dice(1, 12)));
+}
+
+void execute_attack()
+{
+    object* inven, room, ppl;
+    if (!flag) {
+        ::execute_attack();
+        flag = 1;
+        return;
+    }
+    if (!objectp(caster)) {
+        dest_effect();
+        return;
+    }
+    room = environment(caster);
+
+    inven = caster->query_attackers();
+    inven = target_filter(inven);
+
+    if (sizeof(inven)) {
+        foreach(ppl in inven)
+        {
+            if (!ppl->query_property("effect_shaken")) {
+                if (!mind_immunity_check(ppl)) {
+                    "/std/effect/status/shaken"->apply_effect(ppl, clevel / 6 + 1);
+                    tell_object(ppl, "%^RED%^You shake in fear in sight of " + caster->QCN);
+                    tell_room(room, "%^RED%^" + ppl->QCN + " shakes in fear in sight of " + caster->QCN, ({ ppl }));
+                }
+            }
+        }
+    }
+
+    environment(caster)->addObjectToCombatCycle(TO, 1);
+}
+
+void dest_effect()
+{
+    if (objectp(caster)) {
+        caster->set_size_bonus(0);
+        caster->remove_property("added short",({"%^RED%^ (giant)%^RESET%^"}));
+        caster->remove_property("iron body");
+        caster->add_stat_bonus("strength", -6);
+        caster->add_stat_bonus("constitution", -4);
+        caster->set_property("damage resistance", -5);
+        caster->add_ac_bonus(-4);
+        caster->remove_property("frightful_aspect");
+        tell_object(target, "%^RED%^You shrink back to normal!");
+        tell_room(environment(target),"%^RED%^"+target->QCN+" shrinks back to normal size.", target );
+    }
+    ::dest_effect();
+    if (objectp(TO)) {
+        TO->remove();
+    }
+}
