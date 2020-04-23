@@ -10,6 +10,7 @@ int cmd_reply(string str)
     string reply, a, b;
     int quiet, invis;
     string *ignored, *caster_correspond, *targ_correspond;
+    string msg = str;
     object ob;
 
     reply = (string)this_player()->query("reply");
@@ -151,6 +152,8 @@ int cmd_reply(string str)
 
     if(!wizardp(ob) && !wizardp(TP) && !ob->query_true_invis() && !TP->query_true_invis())
       CHAT_D->force_chat(TP,"telepathy","tells "+ob->QCN+" ( "+str+" )",1);
+
+#include <detect_thoughts.h>
 
     if(!TP->query_disguised() || !wizardp(TP))
     {

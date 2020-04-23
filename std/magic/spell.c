@@ -2607,7 +2607,7 @@ varargs int checkMagicResistance(object victim, int mod)
 
     dieroll = roll_dice(1, 20);
 
-    if ((roll_dice(1, 20) + mod) > res) {
+    if ((dieroll + mod) > res) {
         /*tell_object(caster, "Spell penetration: " + mod); //used for debugging
            tell_object(caster, "Die roll: " + dieroll);
            tell_object(caster, "Resistance: " + res);*/
