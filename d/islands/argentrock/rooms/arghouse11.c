@@ -39,10 +39,10 @@ void create() {
    set_search("black barrel", (: TO,"search_barrel" :) );
    searched = 0;
    lifted = 0;
-   if(!present("batlin"))
-   {
-       new(MON+"batlin")->move(TO);
-   }
+   /* if(!present("batlin")) */
+   /* { */
+   /*     new(MON+"batlin")->move(TO); */
+   /* } */
 
    set_had_players(10);
 }
