@@ -131,7 +131,7 @@ void dest_effect()
     if (objectp(target)) {
         target->add_ac_bonus(-1 * bonus);
         target->remove_property_value("spelled", ({ TO }));
-        target->set_property("magic resistance", mrbonus);
+        target->set_property("magic resistance", -1 * mrbonus);
         target->remove_property("raised resistance", -1);
         tell_object(target, "%^CYAN%^The magic shielding around you glows briefly, then fades away.");
         tell_room(environment(target), "%^CYAN%^" + target->QCN + " glows briefly.", target);
