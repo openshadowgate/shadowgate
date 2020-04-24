@@ -7,19 +7,12 @@ int vacuum;
 
 string long_desc();
 
-void create() {
-  ::create();
-  vacuum = 1;
-  set_exits( ([     "left" : TECVOID + "outer_void4",
-                    "down" : TECVOID + "outer_void7",
-                 "forward" : TECVOID + "outer_void105"   ])  );
-  set_heart_beat(1);
-}
-
-int is_vacuum(){
-  return vacuum;
-}
-
-void set_vacuum(int vac){
-  vacuum = vac;
+void create()
+{
+    ::create();
+    vacuum = 1;
+    set_exits(([     "left" : TECVOID + "outer_void4",
+                     "down" : TECVOID + "outer_void7",
+                     "forward" : TECVOID + "outer_void105"   ]));
+    set_heart_beat(1);
 }
