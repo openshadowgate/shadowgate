@@ -154,9 +154,9 @@ void heart_beat()
         }
     }
     if (query_hp() < query_max_hp()) {
-        TO->do_damage("torso", -1 * roll_dice(10, 20));
+        TO->do_damage("torso", -roll_dice(10, 20));
     }
-    if (query_hp() < 500) {
+    if (query_hp() < 900) {
         if (count < 0) {
             count = 12;
             set_func_chance(0);
@@ -172,7 +172,7 @@ void heart_beat()
 void check_them()
 {
     object* stuff;
-    int i, num;
+    int i, num, said;
     if (!objectp(TO)) {
         return;
     }
@@ -182,15 +182,18 @@ void check_them()
     stuff = all_living(ETO);
     stuff -= ({ TO });
     num = sizeof(stuff);
+    said = 0;
     if (sizeof(TO->query_attackers())) {
         for (i = 0; i < num; i++) {
             if (!objectp(stuff[i])) {
                 continue;
             }
             if (!userp(stuff[i]) && !interactive(stuff[i]) && !stuff[i]->is_merc()) {
-                //command("say DIE! You brainless creature, your presence here "+
-                //    "is a mistake!");
-                //tell_room(ETO,"%^BOLD%^BLUE%^Batlin chants a short phrase.");
+                if (!said) {
+                    command("say DIE! You brainless creature, your presence here is a mistake!");
+                    tell_room(ETO, "%^BOLD%^BLUE%^Batlin chants a short phrase.");
+                }
+                said = 1;
                 stuff[i]->die();
             }
         }

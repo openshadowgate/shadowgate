@@ -90,6 +90,11 @@ string list_users(string *races, object tp)
                     if((string)shape->query_shape_race())
                         rabbit = (string)shape->query_shape_race();
 
+                if (time() - who[i]->query_login_time() < 120)
+                {
+                    rabbit = "someone";
+                }
+
                 if (ctime(time())[4..9]=="Feb 21") rabbit="kitty";
                 if (ctime(time())[4..9]=="Apr  1") rabbit="%^WHITE%^rabbit";
                 if (ctime(time())[4..9]=="Nov 28") rabbit="turkey";
@@ -122,6 +127,8 @@ string list_users(string *races, object tp)
 
             if (!who[i]->query_alignment()) {
                 melnmarn = capitalize((string)who[i]->query_name()) + " the new adventurer";
+            } else if (time() - who[i]->query_login_time() < 120) {
+                melnmarn = "Someone is waking up";
             } else if ((string)who[i]->query_title()) {
                 melnmarn = (string)who[i]->query_title();
             } else {
