@@ -88,7 +88,7 @@ void squawk(){
     if(mapp(als) && sizeof(als)>0)
     {
       alks = keys(als);
-      if (member_array("say", alks)!= -1) 
+      if (member_array("say", alks)!= -1)
       {
         saylias = als["say"];
         if (stringp(saylias) && strlen("saylias")>0)
@@ -98,14 +98,14 @@ void squawk(){
           report ("sscanffing saylias: " + saylias);
           num = sscanf(saylias, "%s$*%s", saylias_start, saylias_end);
           report ("Saylias sscanffed");
-        } else 
+        } else
         {
           saylias_start = "";
           saylias_end = "";
         }
       }
     }
-  } else 
+  } else
   {
     report("Onr is not an object");
   }
@@ -114,6 +114,10 @@ void squawk(){
   report(" Saylias_end: " + saylias_end + "|End of Saylias_end");
   total = 0;
   usables = ({});
+  if (!sizeof(ks)) {
+      return;
+  }
+
   for (i=count-1;i>=0;i--){
     x = sayings[ks[i]][0];
     msg = ks[i];
@@ -127,7 +131,7 @@ void squawk(){
         new_key = junk + new_key;
         sayings[new_key] = sayings[ks[i]];
         map_delete(sayings, ks[i]);
-      } else 
+      } else
       {
         report(ks[i] + " does not contain " + saylias_start);
       }
@@ -140,7 +144,7 @@ void squawk(){
         new_key = junk + new_key;
         sayings[new_key] = sayings[ks[i]];
         map_delete(sayings, ks[i]);
-      } else 
+      } else
       {
         report(ks[i] + " does not contain " + saylias_end);
       }
@@ -159,7 +163,7 @@ void squawk(){
   roll = random(total);
   for (i = 0; i<count; i++){
     report("Actually squawking. i: " + i);
-    if (sizeof(usables)<=i) 
+    if (sizeof(usables)<=i)
     {
       report("%^BOLD%^%^YELLOW%^Size of usables: " + sizeof(usables) + " i: " + i);
       continue;
@@ -179,10 +183,10 @@ void squawk(){
       describe =  sayings[usables[i]][3];
       set("describe string", ""+ describe );
       colour = COLOURS[random(sizeof(COLOURS))];
-      
+
       output("'"+ colour + usables[i] + "'", language);
       break;
-    } 
+    }
   }
   report("Finished actually squawking");
   if (random(4)){
@@ -199,7 +203,7 @@ void catch_say(string str){
   mapping als;
   if (TP->id("parrot")){
     return;
-  } 
+  }
   if (mapp(sayings) && sizeof(sayings)>0) ks = keys (sayings);
   else ks = ({});
   language = TP->query_language();
@@ -288,11 +292,11 @@ void catch_say(string str){
     }
     if (strlen(str)>1 && str[0..0] == " "){
       str = str[1..strlen(str)-1]; //remove any starting space from sentence
-    } 
+    }
     if (catch(str = FILTERS_D->filter_colors(str))) return;
     if (sizeof(ks) <1 || member_array(str, ks)!= -1){
       num = sayings[str][0];
-      num++;    
+      num++;
     } else {
       num = 1;
     }
@@ -303,7 +307,7 @@ void catch_say(string str){
 }
 
 string remove_saylias(string str, string saylias){
-  
+
 }
 
 
@@ -403,7 +407,7 @@ int stroke(string str){
   tell_object(TP, "You scratch the parrot on the top of its head and tickle it under the chin. It cocks its head, assenting to be picked up");
   tell_room(ETO, TPQCN + " scratches the parrot on the top of its head and tickles it under the chin. It cocks its head, assenting to be picked up",
 TP);
-  settle_down(); //separated some code out, so it can be used with 
+  settle_down(); //separated some code out, so it can be used with
   return 1;     //different messages - Lujke
 }
 
