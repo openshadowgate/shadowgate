@@ -8,7 +8,7 @@ void create() {
     feat_category("Presence");
     feat_name("unyielding soul");
     feat_prereq("Force of personality");
-    feat_desc("This feat is a mark of those with such a powerful force of personality that they are able to repel mind-controlling effects. Instead, they simply take an amount of damage based upon the power of the spell itself.");
+    feat_desc("This feat is a mark of those with such a powerful force of personality that they are sometimes able to repel mind-controlling effects. Instead, they simply take an amount of damage based upon the power of the spell itself.");
     permanent(1);
 }
 

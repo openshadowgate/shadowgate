@@ -90,8 +90,8 @@ int smoke(string str)
     //pipe - this way, if tobacco is > 500 then set
     //it to 500 to prevent this and all the
     //call outs that will go with it - Saide
-    if (tobacco > 500) {
-        tobacco = 500;
+    if (tobacco > 5000) {
+        tobacco = 5000;
     }
     call_out("go_out", tobacco);
     call_out("take_drag", 5);
@@ -202,7 +202,7 @@ int pack_pipe(string str)
             tell_room(EETO, ETOQCN + " packs " + ETO->QP +
                       " pipe with some " + tobacco_type + " tobacco.", ({ ETO }));
         }
-        tobacco = 500;
+        tobacco = 5000; //upped to 5000 to provide a decent smoking time
         packed = 1;
         sp_adjust = ob->set_uses();
         return 1;

@@ -3,13 +3,13 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("Metamind");
     feat_name("mind partition");
-    feat_desc("The mind partition feat grants the ability to repel mind-controlling affects through sheer will.");
+    feat_desc("The mind partition feat grants the ability to repel mind-controlling affects often through sheer will.");
     feat_prereq("Metamind L1");
     permanent(1);
     set_required_for(({"mental fortress","perfect manifestation"}));
@@ -55,4 +55,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

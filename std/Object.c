@@ -618,11 +618,29 @@ mixed query_property(string prop)
         return num;
     }
 
-    if(prop == "verstandnis")
-    {
-        if(FEATS_D->usable_feat(TO, "tongue of the sun and moon"))
+    if (prop == "verstandnis") {
+        if (FEATS_D->usable_feat(TO, "tongue of the sun and moon")) {
             return 1;
+        }
     }
+
+    if (prop == "mind_immunity") {
+        if (FEATS_D->usable_feat(TO, "unyielding soul")) {
+            num += 6;
+        }
+        if (FEATS_D->usable_feat(TO, "mind partition")) {
+            num += 14;
+        }
+        if (TO->is_undead()) {
+            return 20;
+        }
+        num += props[prop];
+        if (num > 20) {
+            return 20;
+        }
+        return num;
+    }
+
 
     if (prop == "spell damage resistance") {
         if (TO->is_vampire()) {

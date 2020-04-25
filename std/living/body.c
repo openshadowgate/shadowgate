@@ -764,7 +764,7 @@ int query_resistance_percent(string res)
     }
     if (TO->is_undead()) {
         if (res == "fire") {
-            return -50;
+            return -33;
         }
         if (res == "cold") {
             return 33;

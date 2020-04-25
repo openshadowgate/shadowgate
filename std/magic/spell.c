@@ -3379,26 +3379,15 @@ varargs int mind_immunity_check(object obj, string type)
         return 0;
     }
 
-    // can add other types here if you want a different message to be sent,
-    // easier to have these all in one place rather than duplicate the code in a dozen spells
     switch (type) {
-    case "silent": // no messages
-        if (FEATS_D->usable_feat(obj, "unyielding soul") ||
-            obj->is_undead() ||
-            FEATS_D->usable_feat(obj, "mind partition")) {
+    case "silent":
+        if (random(20) < obj->query_property("mind_immunity")) {
             return 1;
         }
-
-    case "default":
     default:
-        if (FEATS_D->usable_feat(obj, "unyielding soul") || obj->is_undead()) {
+        if (random(20) < obj->query_property("mind_immunity")) {
             tell_object(obj, "%^BOLD%^%^WHITE%^You feel an invocation trying to take hold of your mind, but such is the strength of your soul that you manage to shake it off!%^RESET%^");
             tell_object(caster, "%^BOLD%^%^WHITE%^%^" + obj->QCN + " struggles momentarily, before shaking off the invocation's effects!%^RESET%^");
-            return 1;
-        }
-        if (FEATS_D->usable_feat(obj, "presence of mind") || FEATS_D->usable_feat(obj, "mind partition")) {
-            tell_object(obj, "%^BOLD%^%^WHITE%^You feel a spell trying to take hold of your mind, but such is your mental strength that you manage to shake it off!%^RESET%^");
-            tell_object(caster, "%^BOLD%^%^WHITE%^%^" + obj->QCN + " struggles momentarily, before shaking off the spell's effects!%^RESET%^");
             return 1;
         }
     }
