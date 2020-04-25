@@ -87,3 +87,13 @@ string long_desc()
     }
     return desc;
 }
+
+int is_vacuum()
+{
+    return vacuum;
+}
+
+void set_vacuum(int vac)
+{
+    vacuum = vac;
+}

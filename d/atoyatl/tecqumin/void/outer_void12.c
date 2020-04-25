@@ -16,3 +16,13 @@ void create()
                        "forward" : TECVOID + "outer_void112"  ]));
     set_heart_beat(1);
 }
+
+int is_vacuum()
+{
+    return vacuum;
+}
+
+void set_vacuum(int vac)
+{
+    vacuum = vac;
+}

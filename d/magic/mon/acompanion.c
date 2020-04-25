@@ -49,7 +49,7 @@ void init()
     saved_short = read_file(SAVEDIR + "short");
     saved_long = read_file(SAVEDIR + "long");
     
-    //Use read_file here - don't want to save whole object for 2 variables
+    //Used read_file here - don't want to save whole object for 2 variables
     if(!strlen(saved_short) && !strlen(saved_long))
     {
         mkdir("/d/save/summons/" + this_player()->query_name());
@@ -87,7 +87,6 @@ int animal_command(string str)
         tell_object(this_player(), "Your Animal Companion will now be seen as: \n" + query_short());
         rm(SAVEDIR + "short");
         write_file(SAVEDIR + "short", query_short());
-
         break;
         case "long":
         this_object()->set_long(implode(input[1..], " "));
@@ -154,8 +153,6 @@ void heart_beat()
     }
     else
         add_hp(query_max_hp() / 25);
-    
-    "/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
 }
 
 void special_attack(object target)
@@ -168,7 +165,6 @@ void special_attack(object target)
     
     tname = target->query_name();
     aname = capitalize(this_object()->query_name());
-
     room = environment(this_object());
     
     if(environment(target) != room)
@@ -253,15 +249,19 @@ void special_attack(object target)
     
 void die(object ob)
 {
+    "/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
     owner && tell_object(owner, "%^RED%^Your animal companion screams in agony as it passes from this world!%^RESET%^");
     owner && owner->remove_property("animal_companion");
+    owner && owner->remove_property("has_elemental");
     remove();
 }
 
 int remove()
 {
+    "/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
     all_inventory(this_object())->remove();
     owner && owner->remove_property("animal_companion");
+    owner && owner->remove_property("has_elemental");
     ::remove();
     return 1;
 }
