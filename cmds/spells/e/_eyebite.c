@@ -56,7 +56,7 @@ void spell_effect(int prof) {
     tell_room(place,"%^BLUE%^A mirroring aura starts to grow around "+target->QCN+", seeping into "+target->QP+" skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.%^RESET%^",target);
 
     {
-        object eff = "/std/effect/status/sickened"->apply_effect(target,clevel/8+1);
+        object eff = "/std/effect/status/sickened"->apply_effect(target,clevel/4+1);
         if(objectp(eff))
             eff->set_spell();
     }

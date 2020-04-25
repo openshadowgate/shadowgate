@@ -2951,7 +2951,7 @@ varargs int do_save(object targ, int mod)
 
     if (shadow_spell) {
         type = "will";
-        caster_bonus = shadow_spell * caster_bonus / 10;
+        /* caster_bonus = shadow_spell * caster_bonus / 10; */
     }
 
     // this is directly copied below for the shadowdancer reroll - if
