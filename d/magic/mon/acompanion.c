@@ -59,7 +59,7 @@ void init()
     {
         set_short(saved_short);
         set_long(saved_long);
-        "/daemon/yuck_d"->load_inventory(this_object(), SAVEDIR + "acompanion");
+        //"/daemon/yuck_d"->load_inventory(this_object(), SAVEDIR + "acompanion");
     }
     
     add_action("animal_command", "animal");
@@ -249,7 +249,7 @@ void special_attack(object target)
     
 void die(object ob)
 {
-    "/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
+    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
     owner && tell_object(owner, "%^RED%^Your animal companion screams in agony as it passes from this world!%^RESET%^");
     owner && owner->remove_property("animal_companion");
     owner && owner->remove_property("has_elemental");
@@ -258,10 +258,9 @@ void die(object ob)
 
 int remove()
 {
-    "/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
+    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
     all_inventory(this_object())->remove();
     owner && owner->remove_property("animal_companion");
     owner && owner->remove_property("has_elemental");
     ::remove();
-    return 1;
 }
