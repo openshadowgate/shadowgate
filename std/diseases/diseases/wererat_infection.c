@@ -11,7 +11,7 @@ void create()
     ::create();
     set_name("wererat infection");
     set_incubation("1 day");
-    set_damage_desc("1 con once");
+    set_damage_desc("1 con");
     set_infection("contact");
     set_description("\n\nThis rapidly progressing disease will turn you into a wererat in the last, third, stage, but only if you're partially human.");
 
@@ -27,7 +27,7 @@ int init_disease(int dc)
 
 advance_disease()
 {
-    int dmg = -1;
+    int dmg = -stage;
 
     next_step += DAY;
 

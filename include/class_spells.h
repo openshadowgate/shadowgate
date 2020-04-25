@@ -43,7 +43,7 @@ class_spell_storage =
     "shadow":
         ({"blurred movement", "invisibility", "deeper darkness", "shadow stride", "vampiric shadow shield", "shadow travel", "umbral strike", "greater shadow evocation", "shades"}),
     "solar":
-        ({"faerie fire", "flaming sphere", "daylight", "dimension door", "solar siege shot", "sirocco", "sunbeam", "sunbeam", "hellball"}),
+        ({"faerie fire", "flaming sphere", "daylight", "dimension door", "solar siege shot", "sirocco", "sunbeam", "sunburst", "hellball"}),
     "spellscar":
         ({"armor", "resist energy", "dispel magic", "true form", "siphon magic", "globe of invulnerability", "spell turning", "spellscar", "imprisonment"}),
     "apocalypse":
