@@ -12,8 +12,8 @@ void create()
     set_name("wererat infection");
     set_incubation("1 day");
     set_damage_desc("1 con");
-    set_infection("contact");
-    set_description("\n\nThis rapidly progressing disease will turn you into a wererat in the last, third, stage, but only if you're partially human.");
+    set_infection("inhaled");
+    set_description("\n\nThis rapidly progressing disease will turn you into a wererat in the last, third, stage, but only if you're partially human. This disease will affect but won't progress further than late stages for undead and other forms of lycanthropy-like states.");
 
     set_property("inanimate bonus", 1);
     set_heart_beat(32);
@@ -66,6 +66,7 @@ advance_disease()
 
         tell_object(ETO,"\n%^BOLD%^%^GREEN%^You twitch and snicker, ready to obey the warren.%^RESET%^");
         tell_object(ETO,"\n%^BOLD%^%^GREEN%^Ignoring the disease inside, you are now a wererat.%^RESET%^");
+        TO->remove();
     }
 
     stage++;

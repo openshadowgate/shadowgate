@@ -4753,38 +4753,38 @@ varargs void paralyze_all(string msg)
     }
 }
 
-void kill_all()
-{
-    object* usrs, * rooms, * critters, room;
-    int i, j, count1, count2;
-    rooms = ({});
-    usrs = children("/std/user.c");
-    count1 = sizeof(usrs);
-    if (count1 < 1) {
-        return;
-    }
-    for (i = 0; i < count1; i++) {
-        room = environment(usrs[i]);
-        if (objectp(room) && interact("tecqumin", base_name(room))) {
-            rooms += ({ room });
-        }
-    }
-    count1 = sizeof(rooms);
-    for (i = 0; i < count1; i++) {
-        critters = all_living(rooms[i]);
-        count2 = sizeof(critters);
-        if (count2 < 1) {
-            continue;
-        }
-        for (j = 0; j < count2; j++) {
-            if (critters[j]->query_true_invis() || critters[j] == TO || critters[j]->query_level() > 99) {
-                continue;
-            }
-            critters[j]->set_hp(-20);
-            critters[j]->die();
-        }
-    }
-}
+/* void kill_all() */
+/* { */
+/*     object* usrs, * rooms, * critters, room; */
+/*     int i, j, count1, count2; */
+/*     rooms = ({}); */
+/*     usrs = children("/std/user.c"); */
+/*     count1 = sizeof(usrs); */
+/*     if (count1 < 1) { */
+/*         return; */
+/*     } */
+/*     for (i = 0; i < count1; i++) { */
+/*         room = environment(usrs[i]); */
+/*         if (objectp(room) && interact("tecqumin", base_name(room))) { */
+/*             rooms += ({ room }); */
+/*         } */
+/*     } */
+/*     count1 = sizeof(rooms); */
+/*     for (i = 0; i < count1; i++) { */
+/*         critters = all_living(rooms[i]); */
+/*         count2 = sizeof(critters); */
+/*         if (count2 < 1) { */
+/*             continue; */
+/*         } */
+/*         for (j = 0; j < count2; j++) { */
+/*             if (critters[j]->query_true_invis() || critters[j] == TO || critters[j]->query_level() > 99) { */
+/*                 continue; */
+/*             } */
+/*             critters[j]->set_hp(-20); */
+/*             critters[j]->die(); */
+/*         } */
+/*     } */
+/* } */
 
 void goto_zigzenith()
 {

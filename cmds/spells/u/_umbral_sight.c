@@ -35,7 +35,7 @@ int preSpell() {
 
 void spell_effect(int prof) {
     int duration;
-    duration = (ROUND_LENGTH * 20) * clevel;
+    duration = (ROUND_LENGTH * 20) * (clevel + roll_dice(1, 20));
 
     if(member_array((string)caster->query_race(),PLAYER_D->night_races()) != -1) modifier = -10;
     else modifier = 8;
