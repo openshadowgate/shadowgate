@@ -33,6 +33,9 @@ void create(){
   set_no_clean(1);
   set_property("no animate",1);
   set_property("no random treasure", 1);
+
+  // Due to numerous crashes caused by parrots
+  TO->remove();
 }
 
 void set_sayings(mapping s){
