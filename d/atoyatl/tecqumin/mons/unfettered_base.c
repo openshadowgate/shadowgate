@@ -4575,4 +4575,550 @@ string skin_desc()
     }
     if (ratio >= 10 && ratio < 25) {
         desc = "  The %^BOLD%^%^BLACK%^th%^RESET%^i%^BOLD%^%^BLACK%^ck, r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^n%^RESET%^ on the %^BOLD%^%^BLACK%^tentacles %^RESET%^has been cut to ribbons and has %^MAGENTA%^g%^BOLD%^%^RED%^a%^RESET%^%^MAGENTA%^p%^BOLD%^i%^RESET%^%^MAGENTA%^ng %^BOLD%^%^RED%^r%^RESET%^%^RED%^e%^BOLD%^%^MAGENTA%^n%^RED%^ts %^RESET%^in it.";
-  
+    }
+    if (ratio < 10) {
+        desc = "  The %^BOLD%^%^BLACK%^th%^RESET%^i%^BOLD%^%^BLACK%^ck, r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^n%^RESET%^ on the %^BOLD%^%^BLACK%^tentacles %^RESET%^has been %^BOLD%^%^RED%^shredded%^RESET%^, and only a few %^RED%^ragged %^BOLD%^%^BLACK%^str%^RESET%^%^RED%^i%^BOLD%^%^BLACK%^p%^RED%^s %^RESET%^remain";
+    }
+    if (skin == 0) {
+        desc = "The %^BOLD%^%^BLACK%^sk%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^n"
+               + " %^RESET%^has been flayed from the %^BOLD%^%^BLACK%^tentacles"
+               + "%^RESET%^, and all that is left is the %^BOLD%^%^RED%^r%^RESET%^"
+               + "%^RED%^a%^BOLD%^%^RED%^w, %^RESET%^%^RED%^e%^MAGENTA%^x%^RED%^p"
+               + "%^BOLD%^o%^RESET%^%^RED%^se%^BOLD%^d %^MAGENTA%^m%^RESET%^"
+               + "%^MAGENTA%^u%^BOLD%^sc%^RED%^l%^MAGENTA%^e%^RESET%^ and %^BOLD%^"
+               + "%^RED%^s%^YELLOW%^i%^RED%^n%^MAGENTA%^e%^RED%^w %^RESET%^beneath.";
+    }
+    return desc;
+}
+
+void goto_bridge()
+{
+    int waytime, mazetime;
+    string dest;
+    dest = JUNG_ROOM5 + "ropebridge5";
+//  dest = JUNG_ROOM + "j_link9a";
+    waytime = DEST->query_timing(dest);
+    mazetime = MAZE_D->query_timing(JUNG_ROOM5);
+    if (mazetime == 0 || mazetime > waytime) {
+        // Above check makes sure the next lag inducing maneuvre only happens
+        // if the maze has been reset since the waystations were set up
+        DEST->clear_waystations(dest);
+        DEST->generate_waystations(dest, 6, 4);
+    }
+    start_walking(dest);
+    hurry();
+}
+
+void check_my_heart()
+{
+    if (heartcount > 300) {
+        return;
+    }
+    if (BEAT > 7) {
+        set_heart_beat(1);
+        BEAT = 0;
+        call_out("check_my_heart", 1);
+        return;
+    }
+    BEAT++;
+    call_out("check_my_heart", 1);
+    return;
+}
+
+void reach_destination()
+{
+    string roomname, envname, pplname;
+    int i, count, flag;
+    object* empresses, empress, * ppl, room;
+    report("%^BOLD%^%^MAGENTA%^reached destination: " + base_name(ETO));
+    ::reach_destination();
+    if (!objectp(ETO)) {
+        return;
+    }
+    roomname = file_name(ETO);
+    switch (roomname) {
+    case JUNG_ROOM + "ropebridge5":
+        ETO->tell_bridge("The entire %^ORANGE%^bridge%^RESET%^ shakes as"
+                         + " the %^BLUE%^creature%^RESET%^ known as %^MAGENTA%^The"
+                         + " U%^MAGENTA%^nfe%^MAGENTA%^tte%^MAGENTA%^re%^MAGENTA%^d%^RESET%^"
+                         + " arrives at the eastern end!");
+        //check whether anyone online on the tecqumin continent has killed the empress lately
+        ppl = children("/std/user.c");
+        count = sizeof(ppl);
+        if (count < 1) {
+            return;
+        }
+        flag = 0;
+        for (i = 0; i < count; i++) {
+            if (!objectp(ppl[i]) || ppl[i]->query_true_invis()) {
+                continue;
+            }
+            room = environment(ppl[i]);
+            if (!objectp(room)) {
+                continue;
+            }
+            envname = base_name(room);
+            if (interact("tecqumin", envname)) {
+                pplname = ppl[i]->query_name();
+                if (EVENTS_D->has_killed(pplname, MOB + "empress", DAY * 7) != -1) {
+                    return; //If someone online on this continent has killed the empress recently, don't have her give her warning
+                }
+            }
+        }
+        call_out("empress_warning", 1);
+        break;
+
+    case JUNG_ROOM4 + "city_jung14":
+        force_me("southeast");
+        call_out("goto_plaza", 2);
+        break;
+
+    case CITY_ROOM + "plaza":
+        goto_zigzenith();
+        break;
+
+    case ROOMS + "zigzenith":
+        do_finale();
+        break;
+    }
+}
+
+void goto_plaza()
+{
+    object waystation;
+    string dest_name;
+    int waytime, uptime;
+    dest_name = CITY_ROOM + "plaza";
+    waytime = "/daemon/destinations_d"->query_timing(dest_name);
+    if (waytime < time() - uptime()) {
+        "/daemon/destinations_d"->clear_waystations(dest_name);
+        "/daemon/destinations_d"->generate_waystations(dest_name, 4, 3);
+    }
+    waystation = "/daemon/pathfinder_d"->find_waystation(ETO, dest_name, 5);
+    if (!objectp(waystation)) {
+        //Look up an alternate city room to go to.
+        "/daemon/destinations_d"->clear_waystations(dest_name);
+        "/daemon/destinations_d"->generate_waystations(dest_name, 4, 3);
+        start_walking(dest_name);
+        report("%^BOLD%^%^MAGENTA%^ AAARGH - CAN'T FIND THE PLAZA!");
+    } else {
+        start_walking(dest_name);
+    }
+}
+
+varargs void paralyze_all(string msg)
+{
+    object* usrs, * rooms, * critters, room;
+    int i, j, count1, count2;
+    rooms = ({});
+    usrs = children("/std/user.c");
+    count1 = sizeof(usrs);
+    if (count1 < 1) {
+        return;
+    }
+    for (i = 0; i < count1; i++) {
+        room = environment(usrs[i]);
+        if (objectp(room) && interact("tecqumin", base_name(room))) {
+            rooms += ({ room });
+        }
+    }
+    count1 = sizeof(rooms);
+    if (!stringp(msg)) {
+        msg = "Events are afoot. You cannot act.";
+    }
+    for (i = 0; i < count1; i++) {
+        critters = all_living(rooms[i]);
+        count2 = sizeof(critters);
+        if (count2 < 1) {
+            continue;
+        }
+        for (j = 0; j < count2; j++) {
+            if (critters[j]->query_true_invis()) {
+                continue;
+            }
+            critters[j]->remove_property("no paralyze");
+            critters[j]->set_paralyzed(1000, msg);
+        }
+    }
+}
+
+/* void kill_all() */
+/* { */
+/*     object* usrs, * rooms, * critters, room; */
+/*     int i, j, count1, count2; */
+/*     rooms = ({}); */
+/*     usrs = children("/std/user.c"); */
+/*     count1 = sizeof(usrs); */
+/*     if (count1 < 1) { */
+/*         return; */
+/*     } */
+/*     for (i = 0; i < count1; i++) { */
+/*         room = environment(usrs[i]); */
+/*         if (objectp(room) && interact("tecqumin", base_name(room))) { */
+/*             rooms += ({ room }); */
+/*         } */
+/*     } */
+/*     count1 = sizeof(rooms); */
+/*     for (i = 0; i < count1; i++) { */
+/*         critters = all_living(rooms[i]); */
+/*         count2 = sizeof(critters); */
+/*         if (count2 < 1) { */
+/*             continue; */
+/*         } */
+/*         for (j = 0; j < count2; j++) { */
+/*             if (critters[j]->query_true_invis() || critters[j] == TO || critters[j]->query_level() > 99) { */
+/*                 continue; */
+/*             } */
+/*             critters[j]->set_hp(-20); */
+/*             critters[j]->die(); */
+/*         } */
+/*     } */
+/* } */
+
+void goto_zigzenith()
+{
+    object waystation;
+    string dest_name;
+    int waytime, uptime;
+    dest_name = ROOMS + "zigzenith";
+    waytime = "/daemon/destinations_d"->query_timing(dest_name);
+    if (waytime < time() - uptime()) {
+        "/daemon/destinations_d"->clear_waystations(dest_name);
+        "/daemon/destinations_d"->generate_waystations(dest_name, 4, 3);
+    }
+    waystation = "/daemon/pathfinder_d"->find_waystation(ETO, dest_name, 5);
+    if (!objectp(waystation)) {
+        //Look up an alternate city room to go to.
+    } else {
+        start_walking(dest_name);
+    }
+}
+
+varargs void tell_continent(string str, string alignment)
+{
+    object* users;
+    int i, count;
+    string where, who;
+    users = children("/std/user");
+    count = sizeof(users);
+    if (count < 1) {
+        return;
+    }
+    for (i = 0; i < count; i++) {
+        if (users[i]->query_true_invis()) {
+            if (stringp(alignment)) {
+                who = alignment + " aligned characters in the %^CYAN%^Tecqumin%^RESET%^ area";
+            } else {
+                who = "all characters in the %^CYAN%^Tecqumin%^RESET%^ area";
+            }
+            tell_object(users[i], who + " hear a message that: " + str);
+            continue;
+        }
+        if (!objectp(environment(users[i])) || !interact("tecqumin", base_name(environment(users[i])))) {
+            continue;
+        }
+        if (!stringp(alignment) || (alignment == "evil" && users[i]->is_evil()) || (alignment == "good" && users[i]->is_good()) || (alignment == "neutral" && users[i]->is_neutral())) {
+            tell_object(users[i], str);
+        }
+    }
+}
+
+void do_finale2()
+{
+    power_absorbed++;
+    tell_continent("A strange, high pitched %^BOLD%^%^CYAN%^keening%^RESET%^ sound filters through the %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng%^RESET%^%^GREEN%^l%^BOLD%^e%^RESET%^, slipping between %^ORANGE%^trees%^RESET%^ and under %^GREEN%^r%^ORANGE%^oo%^GREEN%^t%^ORANGE%^s%^RESET%^ to appeal to your ears with a deliciously %^BOLD%^%^BLACK%^ent%^MAGENTA%^i%^BOLD%^%^BLACK%^c%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^ng %^BOLD%^%^MAGENTA%^promise %^RESET%^of %^BOLD%^%^BLACK%^d%^RESET%^%^BLUE%^a%^BOLD%^%^BLACK%^rk r%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^w%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^rds^. It seems to be coming from the direction of the ziggurat at the centre of the %^CYAN%^Tecqumin%^RESET%^ lost city.", "evil");
+    tell_continent("A strange, high pitched %^BOLD%^%^CYAN%^keening%^RESET%^ sound filters through the %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng%^RESET%^%^GREEN%^l%^BOLD%^e%^RESET%^, slipping between %^ORANGE%^trees%^RESET%^ and under %^GREEN%^r%^ORANGE%^oo%^GREEN%^t%^ORANGE%^s%^RESET%^ with an %^BOLD%^%^BLUE%^ins%^GREEN%^i%^BLUE%^d%^GREEN%^i%^CYAN%^o%^BLUE%^us%^RESET%^, %^GREEN%^s%^BOLD%^i%^RESET%^%^GREEN%^ck%^BOLD%^e%^RESET%^%^GREEN%^n%^BOLD%^i%^RESET%^%^GREEN%^ng%^RESET%^ appeal to %^BLUE%^base desires%^RESET%^ for %^BOLD%^%^YELLOW%^power%^RESET%^ and %^BOLD%^%^MAGENTA%^self satisfaction%^RESET%^. It seems to be coming from the direction of the ziggurat at the centre of the %^CYAN%^Tecqumin%^RESET%^ lost city.", "good");
+    tell_continent("A strange, high pitched %^BOLD%^%^CYAN%^keening%^RESET%^ sound filters through the %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng%^RESET%^%^GREEN%^l%^BOLD%^e%^RESET%^, slipping between %^ORANGE%^trees%^RESET%^ and under %^GREEN%^r%^ORANGE%^oo%^GREEN%^t%^ORANGE%^s%^RESET%^ to reach your ears with an appeal to whatever there is in you that is %^BOLD%^%^GREEN%^selfish%^RESET%^ and %^BOLD%^%^BLUE%^desirous%^RESET%^ of %^BOLD%^%^YELLOW%^power%^RESET%^ and %^MAGENTA%^thrall%^RESET%^ over others. It seems to be coming from the direction of the ziggurat at the centre of the %^CYAN%^Tecqumin%^RESET%^ lost city.", "neutral");
+
+    set_property("finale", 2);
+}
+
+void absorb_power(int how_much)
+{
+    power_absorbed += how_much;
+}
+
+void lose_power(int how_much)
+{
+    power_absorbed -= how_much;
+}
+
+int query_power_absorbed()
+{
+    return power_absorbed;
+}
+
+void do_finale1()
+{
+    power_absorbed++;
+    force_me("emote emits a high pitched keening sound that is at once %^GREEN%^na"
+             + "%^BLUE%^u%^GREEN%^se%^CYAN%^a%^BOLD%^%^GREEN%^t%^RESET%^%^GREEN%^ing%^RESET%^"
+             + " and almost %^BOLD%^%^WHITE%^irresistably%^RESET%^ appealing");
+    set_property("finale", 2);
+}
+
+void do_finale0()
+{
+    power_absorbed++;
+    force_me("emote uses its tentacles to drag itself and the rift it resides in forward to settle in between the two bloodstained altars at the top of the ziggurat");
+    set_property("finale", 1);
+}
+
+void empress_warning()
+{
+    object* empresses, empress, * ppl, room;
+    empresses = children(MOB + "empress");
+    if (sizeof(empresses) < 1) {
+        empress = new(MOB + "empress");
+    } else {
+        if (empress_moves > 2) {
+            return;
+        }
+        empress = empresses[0];
+        empress_moves++;
+        if (objectp(environment(empress))) {
+            tell_room(environment(empress), "The %^CYAN%^spirit%^RESET%^ of%^MAGENTA%^"
+                      + " Empress Mehaq%^RESET%^ %^BOLD%^%^CYAN%^fl%^WHITE%^i%^CYAN%^ck%^RESET%^"
+                      + "%^CYAN%^e%^BOLD%^rs%^RESET%^, and disappears");
+        }
+    }
+    room = find_object_or_load(JUNG_ROOM + "ropebridge3");
+    empress->move(room);
+    room->tell_bridge("The %^CYAN%^spirit%^RESET%^ of%^MAGENTA%^"
+                      + " Empress Mehaq%^RESET%^ appears in the centre of the bridge");
+    "/daemon/bridge_monitor_d.c"->set_PosDir(empress, ({ 29, 0, 1 }));
+    call_out("empress_warning2", 1, empress);
+}
+
+void empress_warning2(object empress)
+{
+    object room;
+    if (!objectp(empress)) {
+        return;
+    }
+    room = environment(empress);
+    if (!objectp(room)) {
+        empress_warning();
+        return;
+    }
+    if (base_name(room) != JUNG_ROOM + "ropebridge0" && base_name(room) != JUNG_ROOM + "ropebridge1"
+        && base_name(room) != JUNG_ROOM + "ropebridge2" && base_name(room) != JUNG_ROOM + "ropebridge3"
+        && base_name(room) != JUNG_ROOM + "ropebridge4" && base_name(room) != JUNG_ROOM + "ropebridge5") {
+        empress_warning();
+        return;
+    }
+    empress_moves = 0;
+    room->tell_bridge("%^RESET%^%^MAGENTA%^Empress Mehaq%^BOLD%^%^CYAN%^ cries out: %^BOLD%^%^WHITE%^The creature is trying to reach the city of the Tecqumin! ");
+    call_out("empress_warning3", 2, empress);
+}
+
+void empress_warning3(object empress)
+{
+    object room;
+    if (!objectp(empress)) {
+        return;
+    }
+    room = environment(empress);
+    if (!objectp(room)) {
+        empress_warning();
+        return;
+    }
+    if (base_name(room) != JUNG_ROOM + "ropebridge0" && base_name(room) != JUNG_ROOM + "ropebridge1"
+        && base_name(room) != JUNG_ROOM + "ropebridge2" && base_name(room) != JUNG_ROOM + "ropebridge3"
+        && base_name(room) != JUNG_ROOM + "ropebridge4" && base_name(room) != JUNG_ROOM + "ropebridge5") {
+        empress_warning();
+        return;
+    }
+    empress_moves = 0;
+    room->tell_bridge("%^RESET%^%^MAGENTA%^Empress Mehaq%^BOLD%^%^CYAN%^ cries out: %^BOLD%^%^WHITE%^If it reaches the %^RESET%^zenith %^BOLD%^%^WHITE%^of the %^RESET%^ziggurat%^BOLD%^%^WHITE%^, it will have access to great power! ");
+    call_out("empress_warning4", 2, empress);
+}
+
+void empress_warning4(object empress)
+{
+    object room;
+    if (!objectp(empress)) {
+        return;
+    }
+    room = environment(empress);
+    if (!objectp(room)) {
+        empress_warning();
+        return;
+    }
+    if (base_name(room) != JUNG_ROOM + "ropebridge0" && base_name(room) != JUNG_ROOM + "ropebridge1"
+        && base_name(room) != JUNG_ROOM + "ropebridge2" && base_name(room) != JUNG_ROOM + "ropebridge3"
+        && base_name(room) != JUNG_ROOM + "ropebridge4" && base_name(room) != JUNG_ROOM + "ropebridge5") {
+        empress_warning();
+        return;
+    }
+    empress_moves = 0;
+    room->tell_bridge("%^RESET%^%^MAGENTA%^Empress Mehaq%^BOLD%^%^CYAN%^ cries out: %^BOLD%^%^WHITE%^It must be stopped! DO NOT LET IT CROSS THE BRIDGE!");
+}
+
+void catch_tell(string str)
+{
+    string obstacle, article;
+    if (interact("You can't go any further west at the moment; ", str)) {
+        sscanf(str, "You can't go any further west at the moment; %s %s is in the way.", article, obstacle);
+        if (stringp(obstacle)) {
+            tell_room(ETO, "The %^BLUE%^Un%^MAGENTA%^fe%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^e%^BLUE%^d lashes out with a tentacle");
+            call_out("push_obstacle", 1, obstacle);
+        }
+    }
+}
+
+void push_obstacle(string obstacle)
+{
+    force_me("push " + obstacle + " off bridge");
+}
+
+void stop_combat()
+{
+    object* critters, room, * attackers;
+    int i, j, count, count2;
+    room = ETO;
+    if (!objectp(room)) {
+        return;
+    }
+    critters = all_living(room);
+    count = sizeof(critters);
+    if (count < 1) {
+        return;
+    }
+    for (i = 0; i < count; i++) {
+        critters[i]->cease_all_attacks();
+        attackers = critters[i]->query_attackers();
+        count2 = sizeof(attackers);
+        if (count2 < 1) {
+            continue;
+        }
+        for (j = 0; j < count; j++) {
+            critters[i]->remove_attacker(attackers[j]);
+        }
+    }
+}
+
+void tell_world(string msg)
+{
+    object* ppl;
+    int i, j, count;
+    ppl = children("user.c");
+    count = sizeof(ppl);
+    if (count < 1) {
+        return;
+    }
+    for (i = 0; i < count; i++) {
+        if (!ppl[i]->query_true_invis()) {
+            continue;
+        }
+        tell_object(ppl[i], msg);
+    }
+}
+
+void the_end()
+{
+    move("/d/shadowgate/void");
+}
+
+void victory7()
+{
+    tell_world("\n\n");
+    tell_world("%^B_RED%^%^BOLD%^%^WHITE%^All tremble at the knowledge that War is coming");
+    tell_world("\n\n");
+    call_out("the_end", 1);
+}
+
+void victory6()
+{
+    tell_world("\n\n");
+    tell_world("%^B_RED%^%^BOLD%^%^WHITE%^The creature known as the Unfettered has been"
+               + " released by foolhardy adventurers, and has gathered power to aid its eventual"
+               + " war against the Gods.");
+    tell_world("\n\n");
+    call_out("victory7", 3);
+}
+
+void victory5()
+{
+    /////Make world broadcast
+    tell_world("\n\n\n\n\n");
+    tell_world("%^B_RED%^%^BOLD%^%^WHITE%^A darkness falls over the continent of Danger");
+    tell_world("\n\n\n\n\n");
+    call_out("victory6", 3);
+}
+
+void victory4()
+{
+    paralyze_all();
+    tell_continent("\n\n\n\n\n\n");
+    tell_continent("%^B_BLACK%^%^BOLD%^%^WHITE%^As the light and life fade from"
+                   + " your eyes, you know that the world is at risk, and the final victory of the"
+                   + " %^RESET%^%^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e"
+                   + "%^BLUE%^r%^MAGENTA%^e%^BLUE%^d%^BOLD%^%^WHITE%^ is made closer");
+    call_out("victory5", 2);
+}
+
+void kill_all()
+{
+    object* critters, crit;
+    critters = children("/std/user.c");
+    foreach(crit in critters)
+    {
+        if (!objectp(environment(crit)) || !interact("atoyatl", base_name(environment(crit)))) {
+            continue;
+        }
+        if (crit->query_true_invis() || TP->query_level() > 99) {
+            tell_object(crit, "Your immortal greatness spares you from the awful destruction of the Unfettered");
+            continue;
+        }
+        crit->die(TO);
+    }
+}
+
+void victory3()
+{
+    paralyze_all();
+    tell_continent("\n\n\n\n\n\n");
+    tell_continent("%^B_BLACK%^%^BOLD%^%^WHITE%^The %^RESET%^%^CYAN%^air %^BOLD%^%^WHITE%^thins and you fall to your knees as the %^MAGENTA%^life%^BOLD%^%^WHITE%^ is drawn out of you towards the malevolant force of the %^RESET%^%^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^e%^BLUE%^d%^BOLD%^%^WHITE%^, unleashed upon the world by adventurers too proud to acknowledge the slim chances of their success");
+    call_out("victory4", 2);
+}
+
+void victory2()
+{
+    paralyze_all();
+    if (objectp(ETO)) {
+        tell_room(ETO, "The air rushes out of the room as the Unfettered pushes more of its massive bulk out of the huge rift it has torn in the sky.");
+    }
+    call_out("victory3", 2);
+}
+
+void fail_all()
+{
+    object* ppl, room;
+    int i, count;
+    ppl = children("/std/user.c");
+    count = sizeof(ppl);
+    if (count < 1) {
+        return;
+    }
+    for (i = 0; i < count; i++) {
+        room = environment(ppl[i]);
+        if (ppl[i]->query_true_invis() || !objectp(room) || !interact("tecqumin", base_name(room))) {
+            continue;
+        }
+        EVENT_RECORDS_D->record_event(ppl[i]->query_name(), "Failed to stop the Unfettered", time());
+    }
+}
+
+void victory()
+{
+    //First, paralyze everyone on the continent
+    paralyze_all("You are in the grip of the %^GREEN%^horror%^RESET%^ of the events unfolding. You cannot move.");
+    //Add a 'failed to stop the Unfettered' event for everyone on the continent
+    fail_all();
+    //next, stop all combat in the room
+    stop_combat();
+    tell_continent("\n\n\n\n\n");
+    tell_continent("%^B_BLACK%^%^BOLD%^%^RED%^A massive BOOMING %^BOLD%^%^WHITE%^shockwave %^RED%^hits you as the sky overhead is %^CYAN%^TORN APART");
+    call_out("victory2", 2);
+}
