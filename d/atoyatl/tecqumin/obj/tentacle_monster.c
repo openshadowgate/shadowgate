@@ -54,7 +54,7 @@ int tear_me(string str){
   }
   stren = (int)ETO->query_stats("strength");
   roll = stren/(random(5)+1) * 2;
-  tell_room(EETO, ETO + " %^BOLD%^%^RED%^tears%^RESET%^ at " 
+  tell_room(EETO, ETO + " %^BOLD%^%^RED%^tears%^RESET%^ at "
     + ETO->QP + " face, trying to dislodge the %^MAGENTA%^sq"
     +"%^BOLD%^%^BLUE%^u%^RESET%^%^BLUE%^i%^MAGENTA%^dl%^CYAN%^i"
     +"%^MAGENTA%^ke%^RESET%^ %^MAGENTA%^monster%^RESET%^!", TP);
@@ -85,7 +85,7 @@ int tear_me(string str){
 void random_attach(){
   object * critters, players;
   int i, count;
-  tell_room(ETO, "Randomly attaching");
+  //tell_room(ETO, "Randomly attaching");
   critters = all_living(ETO);
   count = sizeof(critters);
   if (count < 1){
@@ -93,9 +93,9 @@ void random_attach(){
     return;
   }
   players = ({});
-  tell_room(ETO, "Adding players");
+  //tell_room(ETO, "Adding players");
   for (i=0; i<count; i++){
-    if ((int)critters[i]->is_player() 
+    if ((int)critters[i]->is_player()
                              && !critters[i]->query_true_invis()){
       tell_room(ETO, "Adding player " + critters[i]->query_name() );
       players += ({critters[i]});
@@ -122,7 +122,7 @@ string short_desc(){
     } else {
       desc += ", clinging to " + ETO->QCN + "'s %^BOLD%^%^BLUE%^face"
         +"%^RESET%^!";
-    }   
+    }
   }
   return desc;
 }
@@ -149,7 +149,7 @@ string long_desc(){
     } else {
       desc += " It is clinging to " + ETO->QCN + "'s %^BOLD%^%^BLUE%^"
         +"face%^RESET%^!";
-    }   
+    }
   }
   switch(feed){
   case 1:
@@ -179,13 +179,13 @@ string long_desc(){
 
 int cling(object clingee){
   clinging = 0;
-  tell_room(ETO, "Starting cling process");
+  //tell_room(ETO, "Starting cling process");
   if (!objectp(clingee)
          ||(!present(clingee, ETO) && !present(TO, clingee))
          || clingee->query_true_invis()){
     return -1;
   }
-  move(clingee); 
+  move(clingee);
   if (objectp(EETO)){
     tell_room(EETO, query_short() + " flies up and attaches itself"
     +" to " + clingee->QCN + "'s %^BOLD%^%^BLUE%^face%^RESET%^!"
@@ -197,7 +197,7 @@ int cling(object clingee){
       +"%^CYAN%^fe force%^RESET%^!");
   clingee->set_paralyzed(50, "The %^MAGENTA%^sq%^BOLD%^%^BLUE%^u"
     +"%^RESET%^%^BLUE%^i%^MAGENTA%^dl%^CYAN%^i%^MAGENTA%^ke%^RESET%^"
-    +" is clinging to your %^BOLD%^%^BLUE%^face%^RESET%^!" 
+    +" is clinging to your %^BOLD%^%^BLUE%^face%^RESET%^!"
     +"                                                               "
     +"You might want to %^BOLD%^%^WHITE%^<tear>%^RESET%^ it off.");
   clinging = 100;
@@ -205,7 +205,7 @@ int cling(object clingee){
 
 int evade_splash(object splashtarg) {
    object *worn;
-   if(!FEATS_D->usable_feat(splashtarg,"evasion")) return 0; 
+   if(!FEATS_D->usable_feat(splashtarg,"evasion")) return 0;
    worn = splashtarg->all_armour();
    worn = distinct_array(worn);
    worn = filter_array(worn,"light_armor_filter",TO);
@@ -253,7 +253,7 @@ void explode(){
     if (critters[i]->query_true_invis()||critters[i]->id("unfettered")){
       continue;
     }
-    if("/daemon/saving_throw_d.c"->reflex_save(critters[i],40)){ 
+    if("/daemon/saving_throw_d.c"->reflex_save(critters[i],40)){
       if(evade_splash(critters[i])){
         tell_room(ETO, critters[i]->QCN + " %^BOLD%^%^CYAN%^%^dives out"
           +" of the way of the  %^BOLD%^%^GREEN%^ac%^RESET%^%^GREEN%^i"
@@ -314,7 +314,7 @@ void feed(){
   }
   ETO->set_paralyzed(50, "The %^MAGENTA%^sq%^BOLD%^%^BLUE%^u"
     +"%^RESET%^%^BLUE%^i%^MAGENTA%^dl%^CYAN%^i%^MAGENTA%^ke%^RESET%^"
-    +" is clinging to your %^BOLD%^%^BLUE%^face%^RESET%^!" 
+    +" is clinging to your %^BOLD%^%^BLUE%^face%^RESET%^!"
     +"                                                               "
     +"You might want to %^BOLD%^%^WHITE%^<tear>%^RESET%^ it off.");
   classes = ETO->query_classes();
@@ -325,11 +325,11 @@ void feed(){
   cl = classes[random(sizeof(classes))];
   neglevs = ETO->query("negative level");
   if (sizeof(neglevs)>0){
-    neglev = neglevs[cl];  
+    neglev = neglevs[cl];
   } else {
     neglev = 0;
   }
-  ETO->set("negative level", ([cl : neglev -2]));
+  //ETO->set("negative level", ([cl : neglev -2]));
   feed += 1;
   call_out("feed", 5);
 }

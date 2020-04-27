@@ -4574,5 +4574,9 @@ string skin_desc()
                + " %^RESET%^underneath";
     }
     if (ratio >= 10 && ratio < 25) {
-        desc = "  The %^BOLD%^%^BLACK%^th%^RESET%^i%^BOLD%^%^BLACK%^ck, r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^n%^RESET%^ on the %^BOLD%^%^BLACK%^tentacles %^RESET%^has been cut to ribbons and has %^MAGENTA%^g%^BOLD%^%^RED%^a%^RESET%^%^MAGENTA%^p%^BOLD%^i%^RESET%^%^MAGENTA%^ng %^BOLD%^%^RED%^r%^RESET%^%^RED%^e%^BOLD%^%^MAGENTA%^n%^RED%^ts %^RESET%^in it.";
+        desc = "  The %^BOLD%^%^BLACK%^th%^RESET%^i%^BOLD%^%^BLACK%^ck,"
+               + " r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i"
+               + "%^BOLD%^%^BLACK%^n%^RESET%^ on the %^BOLD%^%^BLACK%^tentacles"
+               + " %^RESET%^has been cut to ribbons and has %^MAGENTA%^g%^BOLD%^"
+               + "%^RED%^a%^RESET%^%^MAGENTA%^p%^BOLD%^i%^RESET%^%^MAGENTA%^ng"
   
