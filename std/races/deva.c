@@ -3,126 +3,206 @@
 #include <std.h>
 inherit DAEMON;
 
-void create() { ::create(); }
-
-// age at which each age cat starts: normal, middle, old, venerable
-int *age_brackets() { return ({ 18, 500, 1450, 2000 }); }
-
-int *restricted_alignments(string subrace) { return ({ 2,3,6,8,9,5 }); }
-
-string *restricted_classes(string subrace) { return ({ }); }
-
-string *restricted_deities(string subrace) {
-    return ({ "lord shadow","lysara","kismet","ryorik","nilith","the faceless one" });
+void create()
+{
+    ::create();
 }
 
-int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
+// age at which each age cat starts: normal, middle, old, venerable
+int* age_brackets()
+{
+    return ({ 18, 500, 1450, 2000 });
+}
+
+int* restricted_alignments(string subrace)
+{
+    return ({ 2, 3, 6, 8, 9, 5 });
+}
+
+string* restricted_classes(string subrace)
+{
+    return ({ });
+}
+
+string* restricted_deities(string subrace)
+{
+    return ({ "lord shadow", "lysara", "kismet", "ryorik", "nilith", "the faceless one" });
+}
+
+int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
+{
     return ({ 0, 2, 0, 0, 0, 2 });
 }
 
-mapping skill_mods(string subrace) { return ([ "perception" : 2, "survival": 2 ]); }
-
-int level_adjustment(string subrace) { return 3; }
-
-int natural_AC(string subrace) { return 0; }
-
-int sight_bonus(string subrace) { return 3; }
-
-mapping daily_uses(string subrace) { return ([]); }
-
-mapping query_racial_innate(string subrace) {
-	return (["light" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
-             "divine weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
-             "divine shield" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
-             "invisibility" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
-             "sacred nimbus" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
-             "cure critical wounds" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
-             "cleanse disease" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),
-             "angelic aspect" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),                          ]);
+mapping skill_mods(string subrace)
+{
+    return ([ "perception" : 2, "survival" : 2 ]);
 }
 
-int misc_bonuses(string subrace, string bonus) { return 0; }
+int level_adjustment(string subrace)
+{
+    return 3;
+}
 
-int *min_stats() { return ({ 3, 3, 3, 3, 3, 3 }); }
-int *max_stats() { return ({ 18, 18, 18, 18, 18, 18 }); }
-int *stat_adj()  { return ({ 0, 0, 0, 0, 0, 0 }); }
+int natural_AC(string subrace)
+{
+    return 0;
+}
 
-int is_restricted() { return 1; } // restricted races by approval
+int sight_bonus(string subrace)
+{
+    return 3;
+}
 
-string race_name() { return "deva"; }
+mapping daily_uses(string subrace)
+{
+    return ([]);
+}
 
-int weight() { return 9999; }
+mapping query_racial_innate(string subrace)
+{
+    return (["light" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+             "divine weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+             "divine shield" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+             "invisibility" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+             "sacred nimbus" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+             "cure critical wounds" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+             "cure disease" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+             "angelic aspect" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]), ]);
+}
 
-int fingers() { return 5; }
+int misc_bonuses(string subrace, string bonus)
+{
+    return 0;
+}
 
-string *wielding_limbs() { return ({ "right hand", "left hand" }); }
+int* min_stats()
+{
+    return ({ 3, 3, 3, 3, 3, 3 });
+}
 
-mapping monster_stat_rolls() { return ([ "str" : 0, "con" : 0, "int" : 0, "wis" : 0, "dex" : 0, "cha" : 0 ]); }
+int* max_stats()
+{
+    return ({ 18, 18, 18, 18, 18, 18 });
+}
 
-int size() { return 2; }
+int* stat_adj()
+{
+    return ({ 0, 0, 0, 0, 0, 0 });
+}
 
-string *limbs() {
-    return ({  "head",
-               "right arm",
-               "right hand",
-               "left arm",
-               "left hand",
-               "left leg",
-               "left foot",
-               "right leg",
-               "right foot",
-               "waist",
-               "neck" });
+int is_restricted()
+{
+    return 1;
+}                                 // restricted races by approval
+
+string race_name()
+{
+    return "deva";
+}
+
+int weight()
+{
+    return 9999;
+}
+
+int fingers()
+{
+    return 5;
+}
+
+string* wielding_limbs()
+{
+    return ({ "right hand", "left hand" });
+}
+
+mapping monster_stat_rolls()
+{
+    return ([ "str" : 0, "con" : 0, "int" : 0, "wis" : 0, "dex" : 0, "cha" : 0 ]);
+}
+
+int size()
+{
+    return 2;
+}
+
+string* limbs()
+{
+    return ({ "head",
+              "right arm",
+              "right hand",
+              "left arm",
+              "left hand",
+              "left leg",
+              "left foot",
+              "right leg",
+              "right foot",
+              "waist",
+              "neck" });
 }
 
 // minimum height for the race = base, max height for the race = base + mod
-int height_base(string gender) {
-    if(gender == "male") return 60;
+int height_base(string gender)
+{
+    if (gender == "male") {
+        return 60;
+    }
     return 55;
 }
 
-int height_mod(string gender) {
+int height_mod(string gender)
+{
     return 20;
 }
 
 // minimum weight for the race = base, max weight for the race = base + (modifier x height mod)
 // height mod = player height minus base height.
-int weight_base(string gender) {
-    if(gender == "male") return 120;
+int weight_base(string gender)
+{
+    if (gender == "male") {
+        return 120;
+    }
     return 85;
 }
 
-int weight_mod(string gender) {
+int weight_mod(string gender)
+{
     return 8;
 }
 
 // used by /daemon/player_d
 mapping weight_values(string gender, int height)
 {
-    mapping map=([]);
+    mapping map = ([]);
 
-    map["num"]  = 8;
+    map["num"] = 8;
 
-    switch(gender)
-    {
+    switch (gender) {
     case "male":
         map["base"] = 150;
-        switch(height)
-        {
+        switch (height) {
         case 60..65: map["adjust"] = -40; map["die"] = 15; break;
+
         case 66..74: map["adjust"] = -10; map["die"] = 10; break;
+
         case 75..80: map["adjust"] = 20;  map["die"] = 15; break;
+
         case 81..86: map["adjust"] = 30;  map["die"] = 25; break;
+
         default:     map["adjust"] = 0;   map["die"] = 10; break;
         }
+
     default:
         map["base"] = 110;
-        switch(height)
-        {
+        switch (height) {
         case 55..60: map["adjust"] = -10; map["die"] = 14; break;
+
         case 61..69: map["adjust"] = -5;  map["die"] = 10; break;
+
         case 70..75: map["adjust"] = 0;   map["die"] = 15; break;
+
         case 76..81: map["adjust"] = 15;  map["die"] = 15; break;
+
         default:     map["adjust"] = 0;   map["die"] = 10; break;
         }
     }
@@ -130,21 +210,23 @@ mapping weight_values(string gender, int height)
     return map;
 }
 
-string *query_hair_colors(string who) {
-    string *choices = ({});
-    choices += ({"ebony", "golden", "silver"});
-    choices += ({"sable", "auburn", "scarlet", "crimson"});
-    choices += ({"black", "brown", "blonde", "red", "white", "gray", "bald"});
+string* query_hair_colors(string who)
+{
+    string* choices = ({});
+    choices += ({ "ebony", "golden", "silver" });
+    choices += ({ "sable", "auburn", "scarlet", "crimson" });
+    choices += ({ "black", "brown", "blonde", "red", "white", "gray", "bald" });
     return choices;
 }
 
-string *query_eye_colors(string who) {
-    string *choices = ({});
-    choices += ({"violet", "purple", "silver"});
-    choices += ({"emerald", "sapphire", "yellow", "amber"});
-    choices += ({"azure", "cyan", "sable", "chocolate", "coffee"});
-    choices += ({"green", "hazel"});
-    choices += ({"brown", "blue", "gray"});
+string* query_eye_colors(string who)
+{
+    string* choices = ({});
+    choices += ({ "violet", "purple", "silver" });
+    choices += ({ "emerald", "sapphire", "yellow", "amber" });
+    choices += ({ "azure", "cyan", "sable", "chocolate", "coffee" });
+    choices += ({ "green", "hazel" });
+    choices += ({ "brown", "blue", "gray" });
     return choices;
 }
 
@@ -153,8 +235,8 @@ int is_pk_race()
     return 1;
 }
 
-string *query_languages(string subrace)
+string* query_languages(string subrace)
 {
-    return (["required":({"common","elven","celestial",}),
-             "optional":({"gnomish","halfling","sylvan",})]);
+    return (["required" : ({ "common", "elven", "celestial", }),
+             "optional" : ({ "gnomish", "halfling", "sylvan", })]);
 }

@@ -15,13 +15,10 @@ void create()
     set_spell_level(([ "cleric" : 8, "druid" : 8, "mage" : 8]));
     set_syntax("cast CLASS frightful aspect");
     set_spell_sphere("alteration");
-    set_description("You become a larger, awful version of yourself. You grow in size, and take on features that horrify your enemies. You gain the following abilities: a +6 size bonus to Strength, a +4 size bonus to Constitution, a +6 natural armor bonus, 5 damage resistance, and spell resistance equal to 10 + half your caster level. You also emit an aura that emanates 30 feet from you. Enemy creatures within the aura are shaken. This spell won't work together with iron body.
-
-%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
+    set_description("You become a larger, awful version of yourself. You grow in size, and take on features that horrify your enemies. You gain the following abilities: a +6 size bonus to Strength, a +4 size bonus to Constitution, a +6 natural armor bonus, 5 damage resistance, and spell resistance equal to 10 + half your caster level. You also emit an aura that emanates 30 feet from you. Enemy creatures within the aura are shaken. This spell won't work together with iron body.\n\n%^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
-    set_arg_needed();
-    mental_spell(1);
-    set_save("will");
+    set_somatic_comp();
+    set_helpful_spell(1);
 }
 
 int preSpell()
@@ -40,9 +37,8 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    tell_object(target, "%^RED%^You grow twice in size and feel more powerful, ready to crush your enemies!");
-    tell_room(place, "%^RED%^" + target->QCN + " grows twice in size!", target);
-
+    tell_object(caster, "%^RED%^You grow twice in size and feel more powerful, ready to crush your enemies!");
+    tell_room(environment(caster), "%^RED%^" + caster->QCN + " grows twice in size!", caster);
     caster->set_property("spelled", ({ TO }));
     caster->set_property("iron body", 1);
     caster->set_property("damage resistance", 5);
