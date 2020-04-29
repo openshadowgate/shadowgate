@@ -80,7 +80,7 @@ void create()
     set_property("no death", 1);
     set_property("no paralyze", 1);
     set_property("full attacks", 1);
-    set_property("no crit", 1);
+    //set_property("no crit", 1); Removing this as it renders some prestige class feats useless
     set_property("no tripped", 1);
     set_overall_ac(-220);
     add_attack_bonus(85);
@@ -101,7 +101,7 @@ void create()
     }), 0);
     set_damage(20, 8);
     set_mob_magic_resistance("high");
-    set_property("weapon resistance", 10);
+    set_property("weapon resistance", 7); //was 10, dropping to 7 on a trial basis so klauth-equipped PCs can damage it
     set_size(4);
     set_base_damage_type("bludgeoning");
     set_fake_limbs(({ "torso", "first tentacle", "second tentacle",
