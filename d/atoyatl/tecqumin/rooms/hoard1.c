@@ -9,7 +9,7 @@ mapping takers;
 int when_opened, reset_count;
 object * torcs, * kilts, * ponchos, knife, sword, head, amulet, headdress, seal, club, shield;
 
-string long_desc(); 
+string long_desc();
 void set_treasures();
 
 void init(){
@@ -19,7 +19,7 @@ void init(){
 
 }
 
-void open(){ 
+void open(){
   when_opened = time();
   reset_count = 0;
 }
@@ -40,12 +40,12 @@ void set_teasures(){
     report ("storage room is working perfectly, sir");
   }
   torcs = ({});
- 
+
   for (i=1; i<4; i++){
     ob = present("torc " + i, room);
     if (objectp(ob)){
       ob->move("/d/shadowgate/void");
-    } 
+    }
     ob = new(OBJ+"torc_greater");
     ob->move(room);
     torcs += ({ob});
@@ -228,7 +228,7 @@ string long_desc(){
     result += " A great stone shield lies on the floor.";
   }
   switch(kilt_count()){
-  case 1: 
+  case 1:
     result += " A fine quality kilt is displayed on a clothing rack.";
     break;
   case 2:
@@ -236,7 +236,7 @@ string long_desc(){
     result += " Some fine quality kilts are displayed on a clothing rack.";
   }
   switch(torc_count()){
-  case 1: 
+  case 1:
     result += " A prestigious looking torc rests atop a pile of %^BOLD%^%^YELLOW%^g%^RESET%^%^ORANGE%^o%^BOLD%^"
     +"%^YELLOW%^ld%^WHITE%^e%^YELLOW%^n tr%^RESET%^%^ORANGE%^ea%^BOLD%^%^YELLOW%^"
     +"s%^RESET%^%^ORANGE%^u%^BOLD%^%^YELLOW%^re.";
@@ -285,7 +285,7 @@ string treasure_desc(){
                "among a pile of treasures on a high shelf",
               "on a rack of clothing", "on a rack of clothing", "on a rack of clothing",
               "a %^ORANGE%^dusty%^RESET%^ shelf all on its own",
-              "leaning against a wall", 
+              "leaning against a wall",
               "resting on the floor" });
 
   count = sizeof(treasures);
@@ -293,7 +293,7 @@ string treasure_desc(){
   for (i=0;i<count;i++){
     if (objectp(treasures[i]) && present(treasures[i], room)){
       num++;
-    } 
+    }
   }
   if (num <1){
     tell_object(TP, "All of the unique treasures appear to have been taken, but you could still help yourself to some gold or gems");
@@ -305,7 +305,7 @@ string treasure_desc(){
       item_id = treasures[i]->query_id()[0];
       tell_object(TP,"%^RESET%^%^ORANGE%^" +  item_id + " " + treasures[i]->query_id_no(item_id) + "%^RESET%^: "+
 treasures[i]->query_obvious_short() + " " + locations[i] );
-    } 
+    }
   }
   tell_object(TP, "%^ORANGE%^To view any of the treasures in more detail, you can 'view <item> #'");
   tell_object(TP, "%^CYAN%^To claim one of the treasures, use 'claim <item> # from treasury'");
@@ -317,20 +317,20 @@ void which_torc(string str){
   if (!objectp(torc)|| !torc->id("torc")){
     tell_object(TP, "That is not a torc");
     return;
-  }  
-  tell_room(TO, TPQCN + "%^RESET%^ reaches out and takes " 
+  }
+  tell_room(TO, TPQCN + "%^RESET%^ reaches out and takes "
     + torc->query_obvious_short() + "%^RESET%^ from a pile"
     +" of %^BOLD%^%^YELLOW%^g%^RESET%^%^ORANGE%^o%^BOLD%^"
     +"%^YELLOW%^ld%^WHITE%^e%^YELLOW%^n tr%^RESET%^%^ORANGE%^"
     +"ea%^BOLD%^%^YELLOW%^s%^RESET%^%^ORANGE%^u"
     +"%^BOLD%^%^YELLOW%^re", TP);
-  tell_object (TP, "You reach out and take " 
+  tell_object (TP, "You reach out and take "
     + torc->query_obvious_short() + "%^RESET%^ from a pile of"
     +" %^BOLD%^%^YELLOW%^g%^RESET%^%^ORANGE%^o%^BOLD%^"
     +"%^YELLOW%^ld%^WHITE%^e%^YELLOW%^n"
     +" tr%^RESET%^%^ORANGE%^ea%^BOLD%^%^YELLOW%^s%^RESET%^"
     +"%^ORANGE%^u%^BOLD%^%^YELLOW%^re");
-  torc->move(TP);
+  torc->move(TO);
 }
 
 void which_kilt(string str){
@@ -339,14 +339,14 @@ void which_kilt(string str){
   if (!objectp(kilt)|| !kilt->id("kilt")){
     tell_object(TP, "That is not a kilt");
     return;
-  }  
-  tell_room(TO, TPQCN + "%^RESET%^ reaches out and takes " 
+  }
+  tell_room(TO, TPQCN + "%^RESET%^ reaches out and takes "
     + kilt->query_obvious_short() + "%^RESET%^ from a rack"
     +" of clothing", TP);
-  tell_object (TP, "You reach out and take " 
+  tell_object (TP, "You reach out and take "
     + kilt->query_obvious_short() + "%^RESET%^ from a rack"
     +" of clothing");
-  kilt->move(TP);
+  kilt->move(TO);
 }
 
 void which_poncho(string str){
@@ -355,14 +355,14 @@ void which_poncho(string str){
   if (!objectp(poncho)|| !poncho->id("poncho")){
     tell_object(TP, "That is not a poncho");
     return;
-  }  
-  tell_room(TO, TPQCN + "%^RESET%^ reaches out and takes " 
+  }
+  tell_room(TO, TPQCN + "%^RESET%^ reaches out and takes "
     + poncho->query_obvious_short() + "%^RESET%^ from a rack"
     +" of clothing", TP);
-  tell_object (TP, "You reach out and take " 
+  tell_object (TP, "You reach out and take "
     + poncho->query_obvious_short() + "%^RESET%^ from a rack"
     +" of clothing");
-  poncho->move(TP);
+  poncho->move(TO);
 }
 
 void view2(object ob, string str){
@@ -405,7 +405,7 @@ int take_treasure(string str){
   room = find_object_or_load(TECSTORE);
   if (!objectp(room)){
     tell_object(TP, "There is an error with the Tecqumin treasure store. Please make a bug report for here");
-    return 1;    
+    return 1;
   }
   if (EVENT_RECORDS_D->completed_event(TP->query_name(), "claimed a second Tecqumin treasure")>0 && !present("keystone", TP)){
     tell_object(TP, "It is less than a week since you last claimed a second treasure. The %^CYAN%^Tecqumin
@@ -455,7 +455,7 @@ int take_treasure(string str){
     tell_object (TP, "%^GREEN%^Type anything else to choose something different");
     input_to("which_torc", 0);
     break;
-    return 1;  
+    return 1;
   case "kilt":
     if (!present("kilt", find_object_or_load(TECSTORE))){
       tell_object(TP, "There are no kilts available");
@@ -470,7 +470,7 @@ int take_treasure(string str){
     tell_object (TP, "%^GREEN%^Type anything else to choose something different");
     input_to("which_kilt", 0);
     break;
-    return 1;  
+    return 1;
   case "kilt 1":
   case "kilt 2":
   case "kilt 3":
@@ -499,7 +499,7 @@ int take_treasure(string str){
     tell_object (TP, "%^GREEN%^Type anything else to choose something different");
     input_to("which_poncho", 0);
     break;
-    return 1;  
+    return 1;
   case "poncho 1":
   case "poncho 2":
   case "poncho 3":
@@ -551,7 +551,7 @@ int take_treasure(string str){
       tell_object(TP, "Sorry that has already been taken");
       return 1;
     }
-    treasure = head; 
+    treasure = head;
     where = "a %^ORANGE%^dusty%^RESET%^ shelf all on its own";
     break;
   case "shield 1":
@@ -565,8 +565,8 @@ int take_treasure(string str){
     treasure = shield;
     where = "the floor";
     break;
-  default: 
-    tell_object(TP, "Sorry there is no " + what + " here for you to claim. You can look at the treasure to see what there is"); 
+  default:
+    tell_object(TP, "Sorry there is no " + what + " here for you to claim. You can look at the treasure to see what there is");
     return 1;
   }
   if (!objectp(treasure)){
@@ -575,7 +575,7 @@ int take_treasure(string str){
   }
   tell_object(TP, "You take " + treasure->query_short() + "%^RESET%^ from " + where);
   tell_room(TO, TPQCN + " takes " + treasure->query_short() + "%^RESET%^ from " + where, TP);
-  treasure->move(TP);
+  treasure->move(TO);
   if (present("keystone", TP)){
     tell_object(TP, "As you take the treasure, the keystone vanishes from your grasp");
     present("keystone", TP)->remove();

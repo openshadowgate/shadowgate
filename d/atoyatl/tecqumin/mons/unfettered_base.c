@@ -1571,7 +1571,7 @@ int categorize_incoming_attack(object attacker)
    attacker_name = attacker->query_name();
  */
     // Work out what sort of attack it was, to determine what feat would affect the chances of targetting the attack
-    tell_room(ETO, "My attacker is targetting one of my limbs");
+    //tell_room(ETO, "My attacker is targetting one of my limbs");
     attack_type = 0;
     if (!objectp(attacker)) {
         tell_room(ETO, "ERROR with attacking object. Not taking damage. Please make a bug report");
@@ -1588,7 +1588,7 @@ int categorize_incoming_attack(object attacker)
     }
     prev_ob_name = file_name(prev_ob);
     if (interact("/cmds/spells/", prev_ob_name)) { //This would mean that the attack was a spell
-        if ((string)prev_ob->get_save() == "reflex") {
+        if ((int)prev_ob->query_splash_spell() > 0) {
             //tell_room(ETO, "Attack type: Area spell");
             attack_type = AREASPELL;
         } else {

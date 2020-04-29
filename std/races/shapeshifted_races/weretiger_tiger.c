@@ -29,7 +29,6 @@ void create()
     set_shape_bonus("wisdom", 2);
     set_shape_height(50 + random(12));
     set_shape_weight(200 + random(50));
-    set_shape_mastery_feat("knockdown");
 }
 
 int default_descriptions(object obj)

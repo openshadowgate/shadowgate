@@ -5,7 +5,8 @@
 #include <daemons.h>
 #include <std.h>
 inherit SPELL;
-int reversed;
+
+int mybonus;
 
 void create() {
     ::create();
@@ -47,11 +48,13 @@ string query_cast_string()
 
 void spell_effect(int prof)
 {
-    tell_object(target, "%^BOLD%^%^BLACK%^You sense darkness had entwined with your body!%^RESET%^");
+    tell_object(caster,"%^BOLD%^%^BLACK%^You reach towards " +target->QCN + " infusing " + target->QO + " with darkness.");
+    tell_object(target, "%^BOLD%^%^BLACK%^You sense darkness had entwined with your body, making it stronger!%^RESET%^");
+    mybonus = clevel * 3 / 2;
     target->set_property("spelled",({TO}));
     target->set_property("damage resistance",10);
-    target->set_property("silver resistance",10);
-    target->set_property("cold resistance",10);
+    target->set_resistance("silver",mybonus);
+    target->set_resistance("cold",mybonus);
     target->set_property("iron body",1);
     addSpellToCaster();
     return;
@@ -64,8 +67,8 @@ void dest_effect() {
     }
     tell_object(target,"%^BOLD%^%^BLACK%^The darkness within recedes, leaving you vulnerable once again.");
     target->set_property("damage resistance",-10);
-    target->set_property("silver resistance",-10);
-    target->set_property("cold resistance",-10);
+    target->set_resistance("silver",-mybonus);
+    target->set_resistance("cold",-mybonus);
     target->set_property("iron body",-1);
     ::dest_effect();
     if(objectp(TO)) TO->remove();
