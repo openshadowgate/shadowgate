@@ -11,4 +11,5 @@
     "nilith"           : ({ "war", "strength", "destruction", "evil", "chaos", "undeath"}), \
     "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction" }) , \
     "the faceless one" : ({ "trickery", "illusion", "cavern", "darkness", "evil", "madness"}) , \
+    "usuiguth"         : ({ "chaos", "madness", "void", "stars", "evil", "good"}),\
 ]))
