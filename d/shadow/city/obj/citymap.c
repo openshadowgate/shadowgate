@@ -26,7 +26,11 @@ void create() {
 
 int read_map(string str){
   if(!str) notify_fail("Read what?");
-  if(str != "map") return 0;
+//  if(str != "map") return 0;
+// This is wrong, Please use the below for better reading...
+   if (present(str, ETO) != TO) {
+            return 0;                       //notify_fail("You do not notice that here.\n");
+        }
   TP->more("/d/shadow/city/obj/shadowmap");
   return 1;
 }

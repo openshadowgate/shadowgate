@@ -29,7 +29,9 @@ void create() {
 
 int read_map(string str){
   if(!str) notify_fail("Read what?");
-  if(str != "map") return 0;
+//  if(str != "map") return 0;
+// Fix to make sure you can "read map 2"...
+        if (present(str, ETO) != TO) return 0;
   TP->more("/d/darkwood/tabor/obj/NEW_MAP");
   return 1;
 }

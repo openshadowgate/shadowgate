@@ -64,7 +64,7 @@ void init()
 void create()
 {
    ::create();
-   set_id(({"map","newbie town map"}));
+   set_id(({"map", "offestry map", "newbie map","newbie town map"}));
    set_name("map");
    set("short","A map of Offestry");
    set("long","This is a map. You should read it.");
@@ -78,7 +78,9 @@ int read_func(string str)
     if(!objectp(TO)) return 0;
     //if(!objectp(ETO)) return 0;
     if(!stringp(str)) return 0;
-    if(str != "map") return 0;
+   if (present(str, ETO) != TO) {
+            return 0;                       //notify_fail("You do not notice that here.\n");
+        }
     
     if(!mapp(MY_GRID)) MY_GRID = "/daemon/area_map_d.c"->build_grid(MAP_GRID);
     if(!mapp(MY_GRID)) return 0; //something went wrong
