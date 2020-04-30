@@ -1255,8 +1255,8 @@ string query_long(string unused)
         if (objectp(shape)) {
             height = (int)shape->query_shape_height();
         }
-        height = height / 6;
-        height = (height + random(2)) * 6;
+        //height = height / 6; commenting out randomization until I can figure out how to make it work with perception.  You should be able to easily tell if someone is taller/heavier than you
+        //height = (height + random(2)) * 6;
         weight = TO->query_player_weight();
         if (objectp(shape)) {
             weight = (int)shape->query_shape_weight();
@@ -1265,8 +1265,8 @@ string query_long(string unused)
             height = to_int(height * pow(2, TO->query_size_bonus()));
             weight = to_int(weight * pow(pow(2, TO->query_size_bonus()), 2));
         }
-        weight = weight / 25;
-        weight = (weight + random(2)) * 25;
+        //weight = weight / 25;
+        //weight = (weight + random(2)) * 25;
         reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
     }
 
@@ -1350,14 +1350,14 @@ string query_desc(string unused)
         if (objectp(shape)) {
             height = (int)shape->query_shape_height();
         }
-        height = height / 6;
-        height = (height + random(2)) * 6;
+        //height = height / 6; commenting out randomization until I can figure out how to make it work with perception.  You should be able to easily tell if someone is taller/heavier than you
+        //height = (height + random(2)) * 6;
         weight = TO->query_player_weight();
         if (objectp(shape)) {
             weight = (int)shape->query_shape_weight();
         }
-        weight = weight / 25;
-        weight = (weight + random(2)) * 25;
+        //weight = weight / 25;
+        //weight = (weight + random(2)) * 25;
         reg += "%^BOLD%^" + sub + " is approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
     }
     x = ((player_data["general"]["hp"] * 100) / player_data["general"]["max_hp"]);

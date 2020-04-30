@@ -38,8 +38,8 @@ int cmd_alterobj(string str) {
     }
     if(!avatarp(TP)) {
        if(ob->query_property("no alter")) return notify_fail("The magic in that item prevents you from altering it.\n");
-       if(!ob->is_armor() && !ob->is_weapon() && !ob->is_instrument() && !ob->is_carving())
-	 return notify_fail("You can only alter weapons, armor, clothing, jewelry, or instruments.\n");
+       if(!ob->is_armor() && !ob->is_weapon() && !ob->is_instrument() && !ob->is_carving() && !ob->is_container())
+	 return notify_fail("You can only alter weapons, armor, clothing, jewelry, containers, or instruments.\n");
        percent = do_nwps(ob);
        if(!percent) {
          TP->remove_property("working");
@@ -353,6 +353,10 @@ int do_nwps(object ob) {
       if(ob->is_weapon()) { //weaponsmith or woodwork, figure a split
         myskill = TP->query_skill("craft, weaponsmith");
         type = "weaponsmith";
+      }
+      if(ob->is_container()) { //defaulting to tailoring
+        myskill = TP->query_skill("craft, tailor");
+        type = "tailor";
       }
       if(ob->is_armor()) {
         switch(ob->query_type()) {
