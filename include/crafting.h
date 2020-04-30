@@ -113,6 +113,7 @@ WEAPONSMITH = ([
                    "medium hammer":(["file":COMMONFILE"weapon/warhammer","units":3]),
                    "polearm":(["file":COMMONFILE"weapon/halberd","units":4]),
                    "rapier":(["file":COMMONFILE"weapon/rapier","units":2]),
+                   "scimitar":(["file":COMMONFILE"weapon/scimitar","units":2]),
                    "scythe":(["file":COMMONFILE"weapon/scythe","units":3]),
                    "shurikens":(["file":COMMONFILE"lrweapon/shurikens","units":1]),
                    "darts":(["file":COMMONFILE"lrweapon/darts","units":1]),

@@ -92,7 +92,13 @@ void execute_feat()
         dest_effect();
         return;
        }*/
-    if (!ammo = present(weapons[0]->query_ammo(), caster)) {
+    if (weapons[0]->is_lrweapon()) {
+        ammo = present(weapons[0]->query_ammo(), caster);
+    }
+    if (weapons[1]->is_lrweapon()) {
+        ammo = present(weapons[1]->query_ammo(), caster);
+    }
+    if (!ammo) {
         tell_object(caster, "%^YELLOW%^You don't have any ammunition for that weapon!\n");
         dest_effect();
         return;

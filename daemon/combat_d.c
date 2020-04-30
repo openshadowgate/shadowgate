@@ -1020,7 +1020,7 @@ int damage_done(object attacker, object weap, int damage, int isranged)
             }
         }
     }
-    prof += (random(30) - random(30));
+    //prof += (random(30) - random(30)); //Commenting out because I see no logical reason to add variance here when it's already handled through weapon die rolls - Odin 4/30/20
 
     if (prof == 0) {
         return 0;
