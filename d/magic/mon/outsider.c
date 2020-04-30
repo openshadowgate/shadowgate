@@ -364,9 +364,9 @@ void set_mylevel(int x)
     set_overall_ac(10 - mylevel);
     set_stats("strength", 20);
     set_stats("constitution", 20);
-    set_stats("dexterity", 5);
+    set_stats("dexterity", 20);
     set_property("effective_enchantment", (mylevel / 7) + 1);
-    set_max_internal_encumbrance(100);
+    set_property("extra encumbrance", -205); //override to drop them to 100 carrying capacity, not meant to be pack mules
 }
 
 void defend()

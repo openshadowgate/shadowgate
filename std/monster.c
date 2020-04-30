@@ -146,10 +146,10 @@ void create()
     }
 }
 
-int query_max_internal_encumbrance()
-{
+/*int query_max_internal_encumbrance() //This is overriding living.c which is why we're having bugs with secret chest/outsider encumbrance.  Commenting it out to see if it reverts to living.c property.
+   {
     return 100 + (level * 10);
-}
+   }*/
 
 void reset()
 {
