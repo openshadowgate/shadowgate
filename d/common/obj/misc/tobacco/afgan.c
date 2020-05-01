@@ -11,9 +11,10 @@ void create()
     set_short("%^BOLD%^%^BLACK%^Luxury of Tharis tobacco%^RESET%^");
     set_long("%^BOLD%^%^BLACK%^Incredibly popular and very rare.  Mild, golden Cordazethes, that possess a naturally high sweetness, are mixed with a very mild Black Cavendish. A fresh flavor with essences of exotic fruits and a touch of Bourbon Vanilla is added to make this a very mild blend.\n%^YELLOW%^You should pack this in a pipe.\n%^RESET%^There are " + loads + " loads left.");
     set_value(2000);
+    min_con = 14;
     set_has_messages();
-    set_my_messages(({ "%^RESET%^%^ORANGE%^You enjoy the rich taste of the bourbon infused tobacco.%^RESET%^" }));
-    set_your_messages(({ "%^RESET%^%^ORANGE%^You smell the aroma of borboun infused tobacco.%^RESET%^" }));
+    set_my_messages(({ "You inhale the sweet aroma of the bourbon-infused tobacco." }));
+    set_your_messages(({ " inhales the sweet aroma of the bourbon-infused tobacco." }));
 }
 
 int use_load()
