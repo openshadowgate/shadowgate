@@ -12,7 +12,8 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("levitate");
-    set_spell_level(([ "mage" : 2, "oracle" : 2 ]));
+    set_spell_level(([ "mage" : 2, "oracle" : 2, "monk":3]));
+    set_monk_way("way of the elements");
     set_mystery("dragon");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS levitate on TARGET");

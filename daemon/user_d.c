@@ -138,14 +138,8 @@ int has_ki(object ob)
 
 string *query_ki_spells(object ob)
 {
-    string *ki_spells = ({});
-    if(!objectp(ob)) return ki_spells;
-    if(!ob->is_class("monk")) return ki_spells;
-    if(pointerp(ki_spells = ob->query("ki spells")))
-    {
-        return ki_spells;
-    }
-    return ({});
+    int level = ob->query_prestige_level("monk");
+    return filter_mapping(MAGIC_D->index_ki_spells_by_level(ob), (:$1 <= $3:), level);
 }
 
 void remove_ki_spell(object ob, string str)
