@@ -9,7 +9,7 @@ void create() {
     set_name("luxury of tharis tobacco");
     set_short("%^BOLD%^%^BLACK%^Luxury of Tharis tobacco%^RESET%^");
     set_long("%^BOLD%^%^BLACK%^Incredibly popular and very rare.  Mild, golden Cordazethes, that possess a "
-"natuarlly high sweetness, are mixed with a very mild Black Cavendish. A fresh flavor with essences of "
+"naturally high sweetness, are mixed with a very mild Black Cavendish. A fresh flavor with essences of "
 "exotic fruits and a touch of Bourbon Vanilla is added to make this a very mild blend.\n%^YELLOW%^You should "
 "pack this in a pipe.\n%^RESET%^There are "+loads+" loads left.");
     set_value(2000);

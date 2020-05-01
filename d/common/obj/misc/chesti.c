@@ -19,6 +19,7 @@ void create()
     set_no_clean(1);
     set_possible_to_close(1);
     set_closed(1);
+    set_property("repairtype",({ "woodwork" }));
 }
 
 string query_chest_type() { return chest_type; }

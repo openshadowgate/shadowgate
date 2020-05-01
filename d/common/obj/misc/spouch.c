@@ -41,6 +41,7 @@ void create(){
 		" safe.  The inside of the pouch is lined in complementary"+
 		" cotton dyed "+COLOR+"%^RESET%^.\n");
     	set_value(7);
-    	set_cointype("silver"); 
+    	set_cointype("silver");
     	set_max_internal_encumbrance(5);
-}    
+      set_property("repairtype",({ "leatherwork","tailor" }));
+}

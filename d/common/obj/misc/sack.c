@@ -11,6 +11,7 @@ void create()
     set_value(2);
     set_cointype("silver");
     set_max_internal_encumbrance(30);
+    set_property("repairtype",({"tailor" }));
 }
 int is_light_opaque()
 {

@@ -13,6 +13,7 @@ void create()
     set_value(100);
     set_cointype("gold");
     set_max_internal_encumbrance(65);
+    set_property("repairtype",({ "leatherwork","tailor","woodwork" }));
 }
 
 int item_allowed(object item)

@@ -10,4 +10,5 @@ void create() {
     set_value(2);
     set_property("treasure_type", "5A");
     set_max_internal_encumbrance(35);
+    set_property("repairtype",({ "leatherwork","tailor" }));
 }

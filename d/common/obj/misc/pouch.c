@@ -43,6 +43,7 @@ void create(){
     	set_max_internal_encumbrance(8);
    	set_limbs(({"waist"}));
    	set_type("clothing");
+    set_property("repairtype",({ "leatherwork","tailor" }));
 }
 int query_size(){
     if(!objectp(ETO)) return 2;
