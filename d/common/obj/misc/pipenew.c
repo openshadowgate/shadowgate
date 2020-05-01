@@ -12,7 +12,7 @@ inherit OBJECT;
 
 object ob;
 string tobacco_type, * mymsgs, * yourmsgs, packedshort, litshort;
-int lit, packed, light_time, sp_adjust, con_req, hasmsgs, tobacco, intox, mycharges;
+int lit, packed, light_time, sp_adjust, con_req, hasmsgs, tobacco, intox, mycharges, tracker;
 
 packedshort = " %^BOLD%^%^BLACK%^(packed)%^RESET%^";
 litshortshort = " %^BOLD%^%^YELLOW%^(lit)%^RESET%^";
@@ -41,6 +41,7 @@ void create()
     con_req = 0;
     sp_adjust = 0;
     hasmsgs = 0;
+    tracker = 0;
     mymsgs = ({});
     yourmsgs = ({});
     intox = 0;
@@ -134,10 +135,9 @@ int empty(string str)
     return 1;
 }
 
-void take_drag(int tracker)
+void take_drag()
 {
     int i;
-    string myname;
     if (!living(ETO)) {
         tell_room(EETO, "The pipe goes out.\n", TP);
         TO->remove_property("lit pipe");
@@ -150,19 +150,8 @@ void take_drag(int tracker)
         TO->remove_property("added short");
         return;
     }
-    myname = ETO->QCN;
-    if (tracker > (random(5) + 30)) {
-        tell_room(EETO, "" + ETO->QCN + "'s pipe goes out.\n", TP);
-        tell_object(ETO, "Your pipe goes out.\n");
-        TO->remove_property("lit pipe");
-        tobacco = 0;
-        lit = 0;
-        packed = 0;
-        intox = 0;
-        hasmsgs = 0;
-        TO->remove_property_value("added short", ({ "%^YELLOW%^ (lit)%^RESET%^" }));
-        TO->remove_property("added short");
-        return;
+    if (tracker > 60 + random(31)) {
+        call_out("go_out", 2);
     }
     if (living(ETO)) {
         tell_object(ETO, "%^RED%^You take a long, gentle puff from your pipe.");
@@ -180,7 +169,23 @@ void take_drag(int tracker)
         tell_room(EETO, yourmsgs[i], ETO);
     }
     tracker++;
-    call_out("take_drag", random(10) + 20, tracker);
+    call_out("take_drag", random(10) + 20);
+}
+
+void go_out()
+{
+    tell_room(EETO, "" + ETO->QCN + "'s pipe goes out.\n", TP);
+    tell_object(ETO, "Your pipe goes out.\n");
+    TO->remove_property("lit pipe");
+    remove_call_out("take_drag");
+    tobacco = 0;
+    lit = 0;
+    packed = 0;
+    intox = 0;
+    hasmsgs = 0;
+    tracker = 0;
+    TO->remove_property_value("added short", ({ "%^YELLOW%^ (lit)%^RESET%^" }));
+    TO->remove_property("added short");
 }
 
 int pack_pipe(string str)
@@ -258,4 +263,9 @@ void save_me(string fname)
         lit = 0;
     }
     return ::save_me(fname);
+}
+
+int get_tracker()
+{
+    return tracker;
 }
