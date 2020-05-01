@@ -95,7 +95,7 @@ mapping query_class_spells()
     return(([
         1 : ({"eldritch blast","eldritch claws","frightful blast","detect magic","beguiling influence","breath of the night","dark ones own luck","entropic warding","leaps and bounds","otherworldly whispers","see the unseen","spiderwalk","swimming the styx","voice of madness" }),
         2 : ({"eldritch chain","glacial blast","brimstone blast","charm","curse of despair","flee the scene","hungry darkness","ignore the pyre","the dead walk","voracious dispelling","walk unseen","witchwood step" }),
-        3 : ({"eldritch glaive","vitriolic blast","beshadowed blast","enervating shadow","heart of darkness","nightmares made real","phantasmal killer","wall of perilous fire","warlocks call" }),
+        3 : ({"eldritch glaive","eldritch scimitar","vitriolic blast","beshadowed blast","enervating shadow","heart of darkness","nightmares made real","phantasmal killer","wall of perilous fire","warlocks call" }),
         4 : ({"eldritch burst","binding blast","utterdark blast","casters lament","cloak of shadows","cunning insight","dark discorporation","devour magic","path of shadows" }),
     ]));
 }

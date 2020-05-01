@@ -18,6 +18,11 @@ void create()
     ::create();
 }
 
+/**
+ * @param mclass class to query
+ * @param special special to query, i.e. specific school, mystery, discipline
+ * @return ordered list of spells from L1
+ */
 string *query_class_special_spells(string mclass, string special)
 {
     if (!mapp(class_spell_storage)) {
@@ -31,11 +36,18 @@ string *query_class_special_spells(string mclass, string special)
     }
 }
 
+/**
+ * @param domain Spell domain to query
+ * @return orderer list of spells for a domain from L1 to L9
+ */
 string *query_domain_spells(string domain)
 {
     return DOMAIN_SPELLS[domain];
 }
 
+/**
+ * @return list of all domains
+ */
 string *query_domains()
 {
     return keys(DOMAIN_SPELLS);

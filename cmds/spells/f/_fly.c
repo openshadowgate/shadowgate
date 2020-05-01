@@ -14,7 +14,7 @@ void create() {
     set_spell_level(([ "classless" : 3]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS fly on TARGET");
-    set_description("See new spell: levitate.");
+    set_description("This spell is used by mobiles only. See new spell: levitate.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

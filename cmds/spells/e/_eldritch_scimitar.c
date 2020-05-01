@@ -5,16 +5,16 @@ inherit SPELL;
 
 #define BASEDIR "/d/magic/obj/lockweapons/"
 
-object glaive;
+object scimitar;
 string blasttype;
 
 void create() {
     ::create();
     set_author("nienne");
-    set_spell_name("eldritch glaive");
+    set_spell_name("eldritch scimitar");
     set_spell_level(([ "warlock" : 1 ]));
-    set_syntax("cast CLASS eldritch glaive");
-    set_description("%^RESET%^A variant on the core spell-like ability of the warlock, this invocation allows the caster to shape their eldritch blast into a single glaive, which can be used as a melee weapon. Both hands must be empty in order for this invocation to work; similarly, if a different shaped blast is invoked, the glaive will disappear. Releasing grip upon the weapon will end the invocation. As with the eldritch blast, the glaive can be imbued with various essences.
+    set_syntax("cast CLASS eldritch scimitar");
+    set_description("%^RESET%^A variant on the core spell-like ability of the warlock, this invocation allows the caster to shape their eldritch blast into a single scimitar, which can be used as a melee weapon. Both hands must be empty in order for this invocation to work; similarly, if a different shaped blast is invoked, the scimitar will disappear. Releasing grip upon the weapon will end the invocation. As with the eldritch blast, the scimitar can be imbued with various essences.
 
 See also: blasttype");
     set_verbal_comp();
@@ -27,7 +27,7 @@ int preSpell() {
         if(present("eldritch_weapon_xxx", caster)->query_wielded()) caster->force_me("unwield eldritch_weapon_xxx");
         if(objectp(present("eldritch_weapon_xxx", caster)))
         {
-            tell_room(place,"%^RESET%^%^CYAN%^The gleaming glaive shimmers and disappears.%^RESET%^");
+            tell_room(place,"%^RESET%^%^CYAN%^The gleaming scimitar shimmers and disappears.%^RESET%^");
             present("eldritch_weapon_xxx", caster)->remove();
             continue;
         }
@@ -55,7 +55,7 @@ void spell_effect(int prof){
     string filename;
 
     blasttype = (string)caster->query("warlock_blast_type");
-    filename = "eldritch_glaive_"+blasttype;
+    filename = "eldritch_scimitar_"+blasttype;
     switch(blasttype) {
     case "frightful":
         descriptor = "%^BLUE%^ma%^MAGENTA%^l%^BLUE%^ign%^BOLD%^%^BLACK%^an%^RESET%^%^BLUE%^t e%^MAGENTA%^n%^BOLD%^%^BLACK%^e%^RESET%^%^BLUE%^r%^RESET%^g%^BLUE%^y";
@@ -84,18 +84,18 @@ void spell_effect(int prof){
     default:
         blasttype = "default";
         descriptor = "e%^BOLD%^%^MAGENTA%^n%^RESET%^%^MAGENTA%^e%^BOLD%^%^WHITE%^r%^BOLD%^%^MAGENTA%^g%^RESET%^%^MAGENTA%^y";
-        filename = "eldritch_glaive";
+        filename = "eldritch_scimitar";
         break;
     }
 
-    glaive = new(BASEDIR+filename);
-    glaive->move(caster);
-    glaive->weapon_setup(caster,clevel);
-    glaive->set_short("%^RESET%^"+descriptor+"%^RESET%^ %^CYAN%^g%^BOLD%^%^CYAN%^l%^RESET%^%^CYAN%^a%^BOLD%^%^WHITE%^i%^BOLD%^%^CYAN%^v%^RESET%^%^CYAN%^e%^RESET%^");
-    glaive->set_long("%^BOLD%^%^WHITE%^This magical construct looks as though it would serve as a weapon of considerable %^RESET%^%^RED%^potency%^BOLD%^%^WHITE%^. Instead of wood or metal, however, it is made purely of "+descriptor+"%^BOLD%^%^WHITE%^. Shaped like a glaive, it rises from a long and narrow haft that must be at least six or seven feet long. From there, it broadens and gains a %^YELLOW%^razor-sharp %^BOLD%^%^WHITE%^edge, forming a curved blade of %^RESET%^%^MAGENTA%^lethal %^BOLD%^%^WHITE%^purpose.%^RESET%^\n");
+    scimitar = new(BASEDIR+filename);
+    scimitar->move(caster);
+    scimitar->weapon_setup(caster,clevel);
+    scimitar->set_short("%^RESET%^"+descriptor+"%^RESET%^ %^CYAN%^sc%^BOLD%^%^CYAN%^i%^RESET%^%^CYAN%^m%^BOLD%^%^WHITE%^i%^BOLD%^%^CYAN%^ta%^RESET%^%^CYAN%^r%^RESET%^");
+    scimitar->set_long("%^BOLD%^%^WHITE%^This magical construct looks as though it would serve as a weapon of considerable %^RESET%^%^RED%^potency%^BOLD%^%^WHITE%^.  Instead of wood or metal, however, it is made purely o%^RESET%^f" + descriptor + "%^BOLD%^%^WHITE%^.  This weapon, formed by %^RESET%^%^CYAN%^will %^BOLD%^%^WHITE%^of the wielder, has the shape of a curved sword.  This scimitar is shorter than a longsword and longer than a shortsword. The outer edge of the scimitar is %^ORANGE%^razor sharp%^WHITE%^, and the back is flat, giving the blade a triangular cross-section.%^RESET%^\n");
     tell_object(caster,"%^MAGENTA%^In your hands materializes crude blade, formed of "+descriptor+"!%^RESET%^");
     tell_room(place,"%^MAGENTA%^In hands of "+caster->QCN+" materializes a crude blade, formed of "+descriptor+"!%^RESET%^",caster);
-    caster->force_me("wield eldritch glaive");
+    caster->force_me("wield eldritch scimitar");
 
     spell_successful();
     call_out("dest_effect",clevel*ROUND_LENGTH*10);
@@ -103,8 +103,8 @@ void spell_effect(int prof){
 }
 
 void dest_effect() {
-    if(glaive)
-        glaive->remove();
+    if(scimitar)
+        scimitar->remove();
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
