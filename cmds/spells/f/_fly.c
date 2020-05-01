@@ -11,9 +11,8 @@ void create() {
     ::create();
     set_author("ares");
     set_spell_name("fly");
-    set_spell_level(([ "monk" : 3]));
+    set_spell_level(([ "classless" : 3]));
     set_spell_sphere("alteration");
-    set_monk_way("way of the elements");
     set_syntax("cast CLASS fly on TARGET");
     set_description("See new spell: levitate.");
     set_verbal_comp();

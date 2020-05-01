@@ -92,23 +92,23 @@ int cmd_ki(string str)
         else tmp += ({"%^BOLD%^%^GREEN%^Elemental Focus%^RESET%^ : "+ELE_FOCUS[(string)ob->query("monk_ele_focus")]});
         tmp += ({""});
     }
-    if(myWay == "way of the elements" || myWay == "way of the shadow" || myWay == "grandmaster of the way")
-    {
+    if (myWay == "way of the elements" || myWay == "way of the shadow" || myWay == "grandmaster of the way") {
         mapping kiindex = MAGIC_D->index_ki_spells_by_level(TP);
         kiLevels = filter_array(keys(kiindex), "sort_ki_spells", "/daemon/user_d.c", myLev);
         kiLevels = sort_array(kiLevels, "numerical_sort", FILTERS_D);
-        if(sizeof(kiLevels)) tmp += ({"%^BOLD%^%^GREEN%^Available Spells \n%^RESET%^"});
-        for(x = 0;x < sizeof(kiLevels);x++)
-        {
+        if (sizeof(kiLevels)) {
+            tmp += ({ "%^BOLD%^%^GREEN%^Available Spells \n%^RESET%^" });
+        }
+        for (x = 0; x < sizeof(kiLevels); x++) {
             int cost;
-            lvl = "Level "+kiLevels[x];
-            lvl = arrange_string(lvl,9);
-            cost = kiLevels[x]/3;
-            cost = cost>6?6:cost;
-            tmp += ({"%^BOLD%^%^GREEN%^"+lvl+"%^RESET%^: %^BOLD%^%^WHITE%^"+implode(kiindex[kiLevels[x]], ", ")+". %^RESET%^( %^BOLD%^%^CYAN%^Ki Cost: "+cost+" %^RESET%^)%^RESET%^" });
+            lvl = "Level " + kiLevels[x];
+            lvl = arrange_string(lvl, 9);
+            cost = kiLevels[x] / 3;
+            cost = cost > 6 ? 6 : cost;
+            tmp += ({ "%^BOLD%^%^GREEN%^" + lvl + "%^RESET%^: %^BOLD%^%^WHITE%^" + implode(kiindex[kiLevels[x]], ", ") + ". %^RESET%^( %^BOLD%^%^CYAN%^Ki Cost: " + cost + " %^RESET%^)%^RESET%^" });
             continue;
         }
-        tmp += ({""});
+        tmp += ({ "" });
     }
     ki = ob->query("available ki");
     max_ki = ob->query("maximum ki");

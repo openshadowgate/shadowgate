@@ -29,9 +29,10 @@ void reset_all_status_problems(object who)
 {
     object *myFeats;
     int x;
-    if(!objectp(who)) return;
-    if(who->query("alternative world") && who->query_ghost())
-    {
+    if (!objectp(who)) {
+        return;
+    }
+    if (who->query("alternative world") && who->query_ghost()) {
         who->set("previous alternative world", who->query("alternative world"));
         who->delete("alternative world");
         who->delete("alternative world check");
@@ -73,22 +74,29 @@ mixed check_rem_rooms(object who, string *arr, mapping rem)
     int x, y, flag = 0;
     string *INVALID = ({"/d/deku/dark/", "/d/islands/common/eldebaro/rooms/", "/d/islands/dallyh/marsh/rooms"});
     string match, *tmp = ({});
-    if(!objectp(who)) return rem;
-    if(!pointerp(arr)) return rem;
-    if(!mapp(rem)) return rem;
-    for(x = 0;x < sizeof(arr);x++)
-    {
-        if(!stringp(rem[arr[x]]) || rem[arr[x]] == "") continue;
-        for(y = 0;y < sizeof(INVALID);y++)
-        {
+    if (!objectp(who)) {
+        return rem;
+    }
+    if (!pointerp(arr)) {
+        return rem;
+    }
+    if (!mapp(rem)) {
+        return rem;
+    }
+    for (x = 0; x < sizeof(arr); x++) {
+        if (!stringp(rem[arr[x]]) || rem[arr[x]] == "") {
+            continue;
+        }
+        for (y = 0; y < sizeof(INVALID); y++) {
             match = rem[arr[x]];
-            if(!stringp(match)) continue;
+            if (!stringp(match)) {
+                continue;
+            }
             //tell_object(who, "match = "+match);
-            if(strsrch(match, INVALID[y]) != -1)
-            {
+            if (strsrch(match, INVALID[y]) != -1) {
                 //tell_object(who, "Should be removing "+match);
                 map_delete(rem, arr[x]);
-                tmp += ({arr[x]});
+                tmp += ({ arr[x] });
                 flag = 1;
                 continue;
             }
@@ -110,10 +118,16 @@ mixed check_rem_rooms(object who, string *arr, mapping rem)
 int spend_ki(object ob, int amount)
 {
     int avail;
-    if(!intp(amount)) return 0;
-    if(!objectp(ob)) return 0;
+    if (!intp(amount)) {
+        return 0;
+    }
+    if (!objectp(ob)) {
+        return 0;
+    }
     avail = (int)ob->query("available ki");
-    if(amount > avail) return 0;
+    if (amount > avail) {
+        return 0;
+    }
     avail -= amount;
     ob->set("available ki", avail);
     return 1;
@@ -122,56 +136,34 @@ int spend_ki(object ob, int amount)
 int can_spend_ki(object ob, int amount)
 {
     int avail;
-    if(!intp(amount)) return 0;
-    if(!objectp(ob)) return 0;
+    if (!intp(amount)) {
+        return 0;
+    }
+    if (!objectp(ob)) {
+        return 0;
+    }
     avail = (int)ob->query("available ki");
-    if(avail >= amount) return 1;
+    if (avail >= amount) {
+        return 1;
+    }
     return 0;
 }
 
 int has_ki(object ob)
 {
-    if(!objectp(ob)) return 0;
-    if(!ob->query("available ki")) return 0;
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!ob->query("available ki")) {
+        return 0;
+    }
     return 1;
 }
 
 string *query_ki_spells(object ob)
 {
     int level = ob->query_prestige_level("monk");
-    return filter_mapping(MAGIC_D->index_ki_spells_by_level(ob), (:$1 <= $3:), level);
-}
-
-void remove_ki_spell(object ob, string str)
-{
-    string *ki_spells;
-    if(!objectp(ob)) return;
-    if(!stringp(str)) return;
-    ki_spells = ob->query_ki_spells();
-    if(member_array(str, ki_spells) != -1)
-    {
-        ki_spells -= ({str});
-        ob->delete("ki spells");
-        ob->set("ki spells", ki_spells);
-        return;
-    }
-    return;
-}
-
-void add_ki_spell(object ob, string str)
-{
-    string *ki_spells;
-    if(!objectp(ob)) return;
-    if(!stringp(str)) return;
-    ki_spells = ob->query_ki_spells();
-    if(member_array(str, ki_spells) == -1)
-    {
-        ki_spells += ({str});
-        ob->delete("ki spells");
-        ob->set("ki spells", ki_spells);
-        return;
-    }
-    return;
+    return collapse_array(values(filter_mapping(MAGIC_D->index_ki_spells_by_level(ob), (:$1 <= $3:), level)));
 }
 
 varargs void regenerate_ki(object ob, int amount, int pass)
@@ -204,61 +196,6 @@ int sort_ki_spells(int kiLev, int compLev)
     return 0;
 }
 
-void init_ki_spells(object ob, string myWay)
-{
-    int myLev, x, *kiLevels;
-    string *myMastered, *ShouldHave;
-    mapping kiSpells;
-    if(!objectp(ob)) return;
-    if(!stringp(myWay)) return;
-    if(FEATS_D->usable_feat(ob,"grandmaster of the way")) { myWay = "grandmaster of the way"; }
-
-    if(myWay != "way of the shadow" && myWay != "way of the elements" && myWay != "grandmaster of the way") return;
-    myLev = ob->query_prestige_level("monk");
-    myMastered = ob->query_ki_spells();
-    ShouldHave = ({});
-    if(!mapp(kiSpells = MAGIC_D->index_ki_spells_by_level(ob))) return;
-    //tell_object(find_player("noobermonker"),"kiSpells: "+identify(kiSpells));
-    kiLevels = keys(kiSpells);
-    if(!sizeof(kiLevels)) return;
-    //should sort the array so that only
-    //ki spell levels of less than or equal to the
-    //monk's level show up
-    kiLevels = filter_array(kiLevels, "sort_ki_spells", "/daemon/user_d.c", myLev);
-    //tell_object(find_player("noobermonker"), "kiLevels = "+identify(kiLevels));
-
-    for(x = 0;x < sizeof(kiLevels);x++)
-    {
-        if(pointerp(kiSpells[kiLevels[x]])) ShouldHave += kiSpells[kiLevels[x]];
-        continue;
-    }
-    //tell_object(find_player("noobermonker"), "ShouldHave = "+identify(ShouldHave));
-    myMastered -= ShouldHave;
-    //tell_object(find_player("noobermonker"), "myMastered = "+identify(myMastered));
-    if(sizeof(myMastered))
-    {
-        for(x = 0;x < sizeof(myMastered);x++)
-        {
-            if(objectp(ob)) remove_ki_spell(ob, myMastered[x]);
-            continue;
-        }
-    }
-    myMastered = ob->query_ki_spells();
-   // tell_object(find_player("saide"), "myMastered = "+identify(myMastered));
-    ShouldHave -= myMastered;
-    //tell_object(find_player("saide"), "ShouldHave = "+identify(ShouldHave));
-    if(sizeof(ShouldHave))
-    {
-        for(x = 0;x < sizeof(ShouldHave);x++)
-        {
-            if(member_array(ShouldHave[x], myMastered) != -1) continue;
-            if(objectp(ob)) add_ki_spell(ob, ShouldHave[x]);
-            continue;
-        }
-    }
-    return;
-}
-
 void init_ki(object ob)
 {
     int avail, newmax, oldmax, diff;
@@ -285,19 +222,6 @@ void init_ki(object ob)
     }
     ob->set("available ki", avail);
     ob->set("maximum ki", newmax);
-    if(stringp(myWay))
-    {
-        if(myWay == "way of the elements" || myWay == "way of the shadow" || myWay == "grandmaster of the way")
-        {
-            init_ki_spells(ob, myWay);
-            return;
-        }
-        else
-        {
-            ob->delete("ki spells");
-            return;
-        }
-    }
     return;
 }
 //END OF MONK FUNCS :P
