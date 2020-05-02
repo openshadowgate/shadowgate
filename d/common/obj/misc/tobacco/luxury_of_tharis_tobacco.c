@@ -13,8 +13,8 @@ void create()
     set_value(2000);
     min_con = 14;
     set_has_messages();
-    set_my_messages(({ "You inhale the sweet aroma of the bourbon-infused tobacco." }));
-    set_your_messages(({ " inhales the sweet aroma of the bourbon-infused tobacco." }));
+    set_my_messages(({ "%^RESET%^%^ORANGE%^You enjoy the rich taste of the bourbon-infused tobacco.%^RESET%^" }));
+    set_your_messages(({ "%^RESET%^%^ORANGE%^You smell the sweet aroma of the bourbon-infused tobacco.%^RESET%^" }));
 }
 
 int use_load()

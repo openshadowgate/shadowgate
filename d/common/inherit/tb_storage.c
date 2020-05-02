@@ -11,6 +11,7 @@ void create()
 
 void reset()
 {
+    int i;
     ::reset();
     if (!present("pirate's booty tobacco")) {
         new("/d/common/obj/misc/tobacco/pirates_booty_tobacco")->move(this_object());
@@ -50,6 +51,21 @@ void reset()
     }
     if (!present("pipe 2")) {
         new("/d/common/obj/misc/pipe")->move(this_object());
+    }
+    for (i = 0; i < 5; i++) {
+        if (!present("light-bodied cigar " + i)) {
+            new("/d/common/obj/misc/tobacco/light_bodied_cigar")->move(TO);
+        }
+    }
+    for (i = 0; i < 5; i++) {
+        if (!present("medium-bodied cigar " + i)) {
+            new("/d/common/obj/misc/tobacco/medium_bodied_cigar")->move(TO);
+        }
+    }
+    for (i = 0; i < 5; i++) {
+        if (!present("full-bodied cigar " + i)) {
+            new("/d/common/obj/misc/tobacco/full_bodied_cigar")->move(TO);
+        }
     }
 }
 
