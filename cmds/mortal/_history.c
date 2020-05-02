@@ -5,9 +5,9 @@ int cmd_history(string args)
     string fname;
 
     if(!avatarp(TP))
-        fname = "/log/plog/"+TP->query_name();
+        fname = "/log/tshlog/player/"+TP->query_name();
     else
-        fname = "/log/avlog/"+TP->query_name();
+        fname = "/log//tshlog/avatar/"+TP->query_name();
     if(args=="all")
         TP->more(fname);
     else

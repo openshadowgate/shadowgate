@@ -14,7 +14,7 @@ void create() {
 
 void reset() {
 object obj;
-::reset();           
+::reset();
 	if(!present("thief clothesxx")){
 	   switch(random(3)){
   	      case 0:  new("/d/tharis/obj/clothing/bodysuit")->move(TO);
@@ -43,10 +43,6 @@ object obj;
 	   new("/d/common/obj/armour/leather")->move(TO);
 	if(!present("thief tools"))
          new("/d/common/obj/misc/thief_tools")->move(TO);
-	if(!present("tobacco"))
-	   new("/d/common/obj/misc/turkish")->move(TO);
-	if(!present("tobacco 2") && !random(3))
-	   new("/d/common/obj/misc/afgan")->move(TO);
 	if(!present("rope"))
 	   new("/d/common/obj/misc/rope")->move(TO);
 	if(!present("potion")){

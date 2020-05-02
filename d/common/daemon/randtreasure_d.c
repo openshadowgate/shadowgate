@@ -1,4 +1,4 @@
-/*  NOTES 
+/*  NOTES
 Created by Circe 12/30/04 - based on generators by Styx and Bane
 This is a random treasure generator to be used wherever.  Note that this is a list of common gear that could go in any area.  Make sure, though, that if you are allowing the possibility of scrolls, you choose the right level - scroll, midscroll, or highscroll.  This list includes gear - not armor or weapons.  There is another daemon - /d/common/daemon/randgear_d.c to handle those.
 
@@ -13,13 +13,13 @@ where the arguments mean:
    Cases of the switch are: "stuff", "component", "psi_component", "scroll", "kit", "coins", "highscroll", "midscroll", and "random"
 3) (optional) random(number) quantity to be found for uses of kits, qty of a
      component, etc.  Can be a non-random of course also.
-I set some maximums with each for each to help avoid unreasonable amounts 
+I set some maximums with each for each to help avoid unreasonable amounts
   from typos, etc.  For coins, the qty will be for gold coins.
 Some types will ignore qty and the others have a default amount if it returns
   zero from a random or isn't set at all.
 
 To use on a created monster:
-   mon = new(MON+bigbunny); 
+   mon = new(MON+bigbunny);
    "/d/common/daemon/randstuff_d"->find_stuff(mon,"random",100);
 
 Added psion components.  Circe 10/2/07
@@ -39,14 +39,14 @@ inherit DAEMON;
 
 #define PSI_COMPS ({"aventurine","bloodstone","carnelian","leopard agate","sunstone","apatite","wemic tears","adamite","malachite","mottled jasper","unakite","flowstone","tektite","yellow calcite"})
 
-#define STUFF ({CMISC"afgan", CMISC"backpack", CMISC"bait", CMISC"bandage",\
-CMISC"bandoleer", CMISC"basket", CMISC"beacon", CMISC"brazil",\
-CMISC"broadleaf", CMISC"bullseye", CMISC"chest", CMISC"climb_tool",\
-CMISC"cuban", CMISC"darkbeacon", CMISC"darkoil", CMISC"eyepatch",\
+#define STUFF ({"/d/common/obj/misc/tobacco/luxury_of_tharis_tobacco", CMISC"backpack", CMISC"bait", CMISC"bandage",\
+CMISC"bandoleer", CMISC"basket", CMISC"beacon", "/d/common/obj/misc/tobacco/tsarven_tobacco",\
+"/d/common/obj/misc/tobacco/dwarfs_pride_tobacco", CMISC"bullseye", CMISC"chest", CMISC"climb_tool",\
+"/d/common/obj/misc/tobacco/pirates_booty_tobacco", CMISC"darkbeacon", CMISC"darkoil", CMISC"eyepatch",\
 CMISC"flint", CMISC"fishing_pole", CMISC"fishing_rod", CMISC"lantern",\
-CMISC"latakia", CMISC"lkchest", CMISC"oil", CMISC"pouch", CMISC"rope",\
+"/d/common/obj/misc/tobacco/halflings_homeblend_tobacco", CMISC"lkchest", CMISC"oil", CMISC"pouch", CMISC"rope",\
 CMISC"sack", CMISC"sbasket", CMISC"schest", CMISC"soap", CMISC"spouch",\
-CMISC"ssack", CMISC"thief_tools", CMISC"torch", CMISC"turkish",\
+CMISC"ssack", CMISC"thief_tools", CMISC"torch", "/d/common/obj/misc/tobacco/white_dragon_tobacco",\
 CMISC"wood", CMISC"gem", CMISC"gem", CMISC"gem", CMISC"gem",\
 CMISC"gem", CMISC"deckofcards", CMISC"die", CMISC"pipe",\
 CPOT"cure_poison", CPOT"det_invis", CPOT"extra_heal", CPOT"heal",\
@@ -77,11 +77,11 @@ int i;
 object ob;
 string *list;
 object item;
-//NOTE - Do NOT change any of the existing cases below because they might be called 
+//NOTE - Do NOT change any of the existing cases below because they might be called
 //by something, but adding new ones (along with a defined list) is fine.
   if(which == "random")   which = RAND[random(sizeof(RAND))];
    switch(which) {
-     case "component" : 
+     case "component" :
         ob = new("d/magic/store_comp");
         i = random(sizeof(COMPS));
         ob->set_name(COMPS[i]);
@@ -90,29 +90,29 @@ object item;
         if(qty > 0 && qty < 50) {ob->set_comp_quantity(qty); break; }
         ob->set_comp_quantity(random(10)+1);
         break;
-     case "scroll" : 
+     case "scroll" :
        ob = new("/d/magic/scroll");
        ob->set_spell(random(4)+1);
        break;
-     case "highscroll" : 
+     case "highscroll" :
        ob = new("/d/magic/scroll");
        ob->set_av_spell(random(5)+4);
        break;
-     case "midscroll" : 
+     case "midscroll" :
        ob = new("/d/magic/scroll");
        ob->set_av_spell(random(4)+3);
        break;
      case "kit" :
         ob = new(HEALKIT);
         if(qty > 0 && qty < 50) {
-          ob->set_uses(qty); 
+          ob->set_uses(qty);
           ob->move(me);
-          break; 
+          break;
         }
         ob->set_uses(random(10)+4);
         ob->move(me);
         break;
-     case "psi_component" : 
+     case "psi_component" :
         ob = new("d/magic/store_psi_comp");
         i = random(sizeof(PSI_COMPS));
         ob->set_name(PSI_COMPS[i]);
@@ -127,10 +127,10 @@ object item;
        break;
      case "coins" :
        ob = new("/std/obj/coins");
-       if(qty > 0 && qty < 500) { 
+       if(qty > 0 && qty < 500) {
          ob->set_money("gold", qty);
          break;
-       } 
+       }
        ob->set_money("gold", random(200)+50);
        ob->set_money("silver", random(200));
        break;
