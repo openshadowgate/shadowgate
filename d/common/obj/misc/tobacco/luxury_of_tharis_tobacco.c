@@ -1,7 +1,7 @@
 //Gave new desc and made it more IG - Cythera 4/05
 //Modified from new inherit. Nienne, 02/08.
 #include <std.h>
-inherit "/d/common/obj/misc/tobacco";
+inherit "/d/common/obj/misc/tobacco/tobacco";
 
 void create()
 {

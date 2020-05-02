@@ -39,7 +39,7 @@ void spell_effect(int prof)
 {
     tell_object(caster, "%^RED%^You grow twice in size and feel more powerful, ready to crush your enemies!");
     tell_room(environment(caster), "%^RED%^" + caster->QCN + " grows twice in size!", caster);
-    caster->set_property("spelled", ({ TO }));
+    //caster->set_property("spelled", ({ TO }));
     caster->set_property("iron body", 1);
     caster->set_property("damage resistance", 5);
     caster->add_stat_bonus("strength", 6);
@@ -48,8 +48,8 @@ void spell_effect(int prof)
     caster->set_size_bonus(1);
     caster->add_ac_bonus(6);
     caster->set_property("magic resistance", mrbonus);
-    addSpellToCaster();
     spell_successful();
+    addSpellToCaster();
     environment(caster)->addObjectToCombatCycle(TO, 1);
     call_out("dest_effect", ROUND_LENGTH * (clevel + roll_dice(1, 12)));
 }
@@ -98,9 +98,9 @@ void dest_effect()
         caster->set_property("damage resistance", -5);
         caster->add_ac_bonus(-6);
         caster->remove_property("frightful_aspect");
-        target->set_property("magic resistance", -1 * mrbonus);
+        caster->set_property("magic resistance", -mrbonus);
         tell_object(target, "%^RED%^You shrink back to normal!");
-        tell_room(environment(target), "%^RED%^" + target->QCN + " shrinks back to normal size.", target);
+        tell_room(environment(caster), "%^RED%^" + caster->QCN + " shrinks back to normal size.", target);
     }
     ::dest_effect();
     if (objectp(TO)) {
