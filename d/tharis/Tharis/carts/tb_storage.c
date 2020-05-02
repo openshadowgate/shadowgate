@@ -1,4 +1,4 @@
-#include "/d/shadow/mon/melnmarn.h"
+#include <std.h>
 inherit ROOM;
 void create()
 {
@@ -11,28 +11,22 @@ void create()
 void reset()
 {
     ::reset();
-    if (!present("cuban")) {
+    if (!present("pirate's booty tobacco")) {
         new("/d/common/obj/misc/cuban")->move(this_object());
     }
-    if (!present("turkish")) {
+    if (!present("white dragon tobacco")) {
         new("/d/common/obj/misc/turkish")->move(this_object());
     }
-    if (!present("brazil")) {
+    if (!present("tsarven tobacco")) {
         new("/d/common/obj/misc/brazil")->move(this_object());
     }
-    if (!present("latakia")) {
+    if (!present("hafling's homeblend tobacco")) {
         new("/d/common/obj/misc/latakia")->move(this_object());
     }
-    if (!present("broadleaf")) {
+    if (!present("dwarf's pride tobacco")) {
         new("/d/common/obj/misc/broadleaf")->move(this_object());
     }
-    if (!present("broadleaf")) {
-        new("/d/common/obj/misc/broadleaf")->move(this_object());
-    }
-    if (!present("turkish")) {
-        new("/d/common/obj/misc/turkish")->move(this_object());
-    }
-    if (!present("afgan")) {
+    if (!present("luxury of tharis tobacco")) {
         new("/d/common/obj/misc/afgan")->move(this_object());
     }
     if (!present("pipe")) {
