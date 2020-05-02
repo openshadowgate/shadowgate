@@ -1719,23 +1719,25 @@ void pick_deity()
     names = keys(DIETIES);
 
     myfile = DIR_RACES+"/"+myrace+".c";
-    badgods = ({});
 
     if (temp == "paladin") {
         names = PALADIN_GODS;
     }
 
-    names -= badgods;
+    if (member_array(temp, OCCULT_CLASSES) != -1) {
+        names += keys(OCCULT_GODS);
+    }
+
     if (temp == "cleric") {
         for (inc = 0; inc < sizeof(names); inc++) {
-            if (member_array(align, DIETIES[names[inc]][2]) == -1) {
+            if (member_array(align, PANTHEON[names[inc]][2]) == -1) {
                 continue;
             }
             my_choices += ({ names[inc] });
         }
     } else {
         for (inc = 0; inc < sizeof(names); inc++) {
-            if (member_array(align, DIETIES[names[inc]][1]) == -1) {
+            if (member_array(align, PANTHEON[names[inc]][1]) == -1) {
                 continue;
             }
             my_choices += ({ names[inc] });
@@ -1745,9 +1747,8 @@ void pick_deity()
     header();
     tell_object(ETO, "%^YELLOW%^Deity Name         Sphere of Control");
     tell_object(ETO, "%^BLUE%^------------         -------------------");
-    for(inc = 0; inc < sizeof(my_choices);inc ++)
-    {
-        tell_object(ETO,sprintf("%%^CYAN%%^%-20s %%^GREEN%%^%s",capitalize(my_choices[inc]),capitalize(DIETIES[my_choices[inc]][0])));
+    for (inc = 0; inc < sizeof(my_choices); inc++) {
+        tell_object(ETO, sprintf("%%^CYAN%%^%-20s %%^GREEN%%^%s", capitalize(my_choices[inc]), capitalize(DIETIES[my_choices[inc]][0])));
     }
     header();
     tell_object(ETO, "%^BOLD%^Type %^BLACK%^<%^CYAN%^pick "+my_choices[0]+"%^BLACK%^> %^WHITE%^to set your "+MyPlace+" to "+my_choices[0]+".");
