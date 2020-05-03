@@ -7,6 +7,10 @@
 
 /**
  * List of deities with follower-clergy pairs
+ *
+ * Followers must be two steps from god's alignment
+ *
+ * Clergy must be one step from god's alignment
  */
 #define DIETIES (([\
    "jarmila":({"Light/Love",({1, 2, 4, 5, 6, 7, 8}),({1, 4, 5, 7})}),\
