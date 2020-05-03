@@ -1,6 +1,5 @@
 #include <std.h>
-
-inherit WEAPON;
+inherit "/d/common/obj/weapon/whip.c";
 string owner;
 object spellobj;
 
@@ -14,14 +13,11 @@ void create()
     set_short("%^RESET%^%^WHITE%^a %^BOLD%^%^BLACK%^w%^RESET%^h%^BOLD%^i%^RESET%^p of %^BOLD%^%^BLACK%^s%^RESET%^p%^BOLD%^i%^BLACK%^d%^RESET%^e%^BOLD%^r%^RESET%^s");
     set_long("You see a strange whip made of numerous tiny spiders. They look back at you with their tiny black eyes.");
     set_id(({"weapon","whip","whip of spiders"}));
-    set_type("piercing");
     set_weight(0);
     set_value(0);
     set("no curse",1);
-    set_prof_type("magic weapons");
+    set_weapon_prof("simple");
     set_property("able to cast",1);
-    set_wc(1,8);
-    set_large_wc(1,8);
     set_wield((:TO, "extra_wield":));
     set_unwield((:TO,"extra_unwield":));
     set_hit((:TO,"hit_func":));

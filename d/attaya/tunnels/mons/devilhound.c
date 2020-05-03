@@ -36,11 +36,11 @@ void create()
   	set_attack_limbs(({"mouth","right forepaw","left forepaw",
                             "mouth"}));
   	set_attacks_num(3);
-  	set_base_damage_type("pierce");
+  	set_base_damage_type("piercing");
   	set_damage(3,6);
   	set_hp(random(50)+200);
 	set_speed(30);
- 	set_nogo(({ "/d/attaya/ugstream", 
+ 	set_nogo(({ "/d/attaya/ugstream",
                  "/d/attaya/rooms/tun15",
                 "/d/attaya/rooms/tun02",}));
   	set_exp(4000);
