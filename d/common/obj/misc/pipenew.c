@@ -136,10 +136,10 @@ void take_drag()
 {
     int i;
     if (!living(ETO)) {
-      call_out("go_out", 2);
+      call_out("go_out", 0);
     }
     if (tracker > 60 + random(31)) {
-        call_out("go_out", 2);
+        call_out("go_out", 0);
     }
     if (living(ETO)) {
         tell_object(ETO, "%^RED%^You take a long, gentle puff from your pipe.");
@@ -228,29 +228,12 @@ int pack_pipe(string str)
 remove()
 {
     if (lit) {
-        lit = 0;
-        packed = 0;
-        remove_call_out("take_drag");
-        remove_property("lit pipe");
+      call_out("go out", 2);
     }
     if (packed) {
-        packed = 0;
+        call_out("empty", 2);
     }
-    hasmsgs = 0;
-    intox = 0;
     return ::remove();
-}
-
-void save_me(string fname)
-{
-    if (lit) {
-        tobacco -= (light_time - time());
-        remove_call_out("take_drag");
-        remove_call_out("go_out");
-        packed = 1;
-        lit = 0;
-    }
-    return ::save_me(fname);
 }
 
 int get_tracker()
