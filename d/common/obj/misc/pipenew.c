@@ -43,6 +43,7 @@ void create()
     yourmsgs = ({});
     intox = 0;
     mycharges = 0;
+    set_property("repairtype", ({ "woodwork" }));
 }
 
 void init()
@@ -239,4 +240,9 @@ remove()
 int get_tracker()
 {
     return tracker;
+}
+
+int is_carving()
+{
+  return 1;
 }

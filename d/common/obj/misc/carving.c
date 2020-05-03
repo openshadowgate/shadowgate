@@ -9,5 +9,6 @@ void create() {
     set_long("This is a small statue carved from wood.\n");
     set_weight(1);
     set_value(1);
+    set_property("repairtype", ({ "woodwork" }));
 }
 int is_carving(){return 1;}
