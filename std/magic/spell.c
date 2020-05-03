@@ -2589,7 +2589,6 @@ varargs int checkMagicResistance(object victim, int mod)
         return 0;
     }
 
-// vitriolic blast does not require a MR/SR save
     if (spell_name == "eldritch blast" || spell_name == "eldritch chain" || spell_name == "eldritch burst") {
         if ((string)caster->query("warlock_blast_type") == "vitriolic") {
             return 0;
@@ -2604,14 +2603,14 @@ varargs int checkMagicResistance(object victim, int mod)
         res = (int)victim->query_property("magic resistance");
     }
 
+    /* As character levels progress it is more noticable that maximum delta
+     * between possible mr and mpen grows, thus ideally this roll
+     * should scale by quadratic function as well. d20 is unfit for
+     * fifty levels of progression. */
+
     dieroll = roll_dice(1, 100);
 
     if ((dieroll + mod) > res) {
-        //used for debugging
-        // Oh really? And what for this comment is being used for then, being stupid?
-        /*tell_object(caster, "Spell penetration: " + mod);
-           tell_object(caster, "Die roll: " + dieroll);
-           tell_object(caster, "Resistance: " + res);*/
         return 0;
     }
     return 1;
