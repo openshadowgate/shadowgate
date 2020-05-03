@@ -2,6 +2,9 @@
 #define OCCULT_GODS (([\
     "usuiguth":({"Dreams/Madness", ({4, 5, 6, 7, 8, 9}), ({5, 7, 8, 9})}), \
 ]))
+
+#define OCCULT_CLASSES ({"warlock"})
+
 /**
  * List of deities with follower-clergy pairs
  */
