@@ -20,7 +20,7 @@ int cmd_languages(string str)
     freelang = (TP->query_age() / 43200 + ((time() - TP->query_birthday()) / YEAR)) * intbonus;
     usedlang = TP->query("used language points");
     skills = TP->query_all_langs();
-    skillslist = keys(skills);
+    skillslist = sort_array(keys(skills), 1);
 
     if (!str) {
         tell_object(TP, "" + arrange_string("Language", 20) + arrange_string("prof. level", 15) + "\n");

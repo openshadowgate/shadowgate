@@ -551,7 +551,7 @@ void startCasting()
     inven = all_living(ETP);
     roll = TP->query_skill("spellcraft") + roll_dice(1, 20);
     if (TP->usable_feat("elusive spellcraft")) {
-        roll += roll_dice(1, 20);
+        roll += roll_dice(2, 8);
     }
     displaystring = (string)TO->query_cast_string() + "\n";
     if (displaystring == "0\n") {
@@ -699,11 +699,13 @@ int check_reflection()
     if (turnperc < 0) {
         turnperc = 0;
     }
-    if (turnperc > 85) {
-        turnperc = 85;
-    }
+
     if (!turnperc) {
         return 0;
+    }
+
+    if (turnperc > 85) {
+        turnperc = 85;
     }
 
     if (turnperc > roll_dice(1, 100)) {
