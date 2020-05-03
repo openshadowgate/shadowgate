@@ -2573,7 +2573,6 @@ int thaco(object target, int bonus)
     return result;
 }
 
-// changing this to roll every time damage is done -Ares
 varargs int checkMagicResistance(object victim, int mod)
 {
     int res = 0;
@@ -2605,10 +2604,12 @@ varargs int checkMagicResistance(object victim, int mod)
         res = (int)victim->query_property("magic resistance");
     }
 
-    dieroll = roll_dice(1, 20);
+    dieroll = roll_dice(1, 100);
 
     if ((dieroll + mod) > res) {
-        /*tell_object(caster, "Spell penetration: " + mod); //used for debugging
+        //used for debugging
+        // Oh really? And what for this comment is being used for then, being stupid?
+        /*tell_object(caster, "Spell penetration: " + mod);
            tell_object(caster, "Die roll: " + dieroll);
            tell_object(caster, "Resistance: " + res);*/
         return 0;
