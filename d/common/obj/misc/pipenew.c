@@ -14,9 +14,6 @@ object ob;
 string tobacco_type, * mymsgs, * yourmsgs, packedshort, litshort;
 int lit, packed, light_time, sp_adjust, con_req, hasmsgs, tobacco, intox, mycharges, tracker;
 
-packedshort = " %^BOLD%^%^BLACK%^(packed)%^RESET%^";
-litshortshort = " %^BOLD%^%^YELLOW%^(lit)%^RESET%^";
-
 void create()
 {
     int i;
@@ -139,16 +136,7 @@ void take_drag()
 {
     int i;
     if (!living(ETO)) {
-        tell_room(EETO, "The pipe goes out.\n", TP);
-        TO->remove_property("lit pipe");
-        tobacco = 0;
-        lit = 0;
-        packed = 0;
-        intox = 0;
-        hasmsgs = 0;
-        TO->remove_property_value("added short", ({ "%^YELLOW%^ (lit)%^RESET%^" }));
-        TO->remove_property("added short");
-        return;
+      call_out("go_out", 2);
     }
     if (tracker > 60 + random(31)) {
         call_out("go_out", 2);
