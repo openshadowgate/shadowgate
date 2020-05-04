@@ -99,7 +99,7 @@ string list_users(string *races, object tp)
                 if (ctime(time())[4..9]=="Apr  1") rabbit="%^WHITE%^rabbit";
                 if (ctime(time())[4..9]=="Nov 28") rabbit="turkey";
                 if (ctime(time())[4..9]=="May  1") rabbit="%^RED%^commie";
-                if (ctime(time())[4..9]=="May  4") rabbit="%^RESET%^%^CYAN%^%^Jedi";
+                if (ctime(time())[4..9]=="May  4") rabbit=({"%^RESET%^%^CYAN%^%^Jedi", "%^RED%^Sith"})[who[i]->query_name()[0] % 2];
                 if (ctime(time())[4..9]=="Oct 31") rabbit="%^ORANGE%^pumpkin";
                 if (ctime(time())[4..9]=="Dec 24") rabbit="%^BOLD%^"+({"%^GREEN%^","%^RED%^","%^YELLOW%^","%^CYAN%^"})[i%4]+"elf";
                 if (ctime(time())[4..9]=="Dec 25") rabbit="%^BOLD%^"+({"%^GREEN%^","%^RED%^","%^YELLOW%^","%^CYAN%^"})[i%4]+"elf";

@@ -1803,38 +1803,10 @@ void heart_beat()
     }
 
     //Once per round
-    if(!(user_ticker%3))
-    {
-        if(is_vampire())
-        {
-            if(TO->is_in_sunlight())
-            {
-                int todamage = query_max_hp()/2 +1;
+    /* if(!(user_ticker%3)) */
+    /* { */
 
-                if(!query_property("sunlight_umbrella"))
-                {
-                    if(TO->query_hp()<-(TO->query_max_hp()*4/5))
-                    {
-                        TO->add_death("Sunlight");
-                        TO->die();
-                    }
-                    else
-                    {
-                        TO->cause_typed_damage(TO,"torso",todamage,"divine");
-                        tell_object(TO,"%^ORANGE%^The sun burns your putrid flesh!");
-                    }
-                }
-            }
-            if(!random(10))
-            {
-                if(TO->is_vampire())
-                    if(query_bloodlust() < (20000 / 6))
-                    {
-                        write("%^RED%^Bloodlust drives you insane.");
-                    }
-            }
-        }
-    }
+    /* } */
 
     if (!avatarp(TO))
         if (!(user_ticker % 9))
