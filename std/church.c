@@ -275,7 +275,7 @@ int pray()
                     continue;
                 }
                 if (stuff[i]->query_property("enchantment") > 0) {
-                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus() / 2);
+                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus() * 3 / 4);
                     continue;
                 }
             }

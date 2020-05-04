@@ -65,7 +65,7 @@ look_around()
     }
     else
     {
-        tell_objcet(cast, "%^BOLD%^%^WHITE%^[A] %^CYAN%^There are no obvious exits.");
+        tell_object(cast, "%^BOLD%^%^WHITE%^[A] %^CYAN%^There are no obvious exits.");
     }
 }
 
