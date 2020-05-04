@@ -3971,6 +3971,10 @@ void reset_start_age(){
     start_age = 0;
 }
 
+void set_start_age(int x){
+    start_age = x;
+}
+
 int query_ageCat() { return ageCat; }
 
 int query_start_age() {

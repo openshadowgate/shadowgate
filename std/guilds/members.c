@@ -57,9 +57,14 @@ int read_fcn(string str) {
         tell_object(TP, "%^BOLD%^%^RED%^In order to read a listing of your fellow guild members, type 'read list'.  If you are not on this list, or know someone that should be, please contact a wiz.%^RESET%^\n");
         tell_object(TP, "%^BOLD%^%^YELLOW%^To get your guild object back, type 'request'");
         if(GUILDS_D->is_leader(guild_name, TPQN) || wizardp(TP)){
-            tell_object(TP, "%^BOLD%^%^BLUE%^Leader commands:\n");
+            tell_object(TP, "%^BOLD%^%^BLUE%^Leader commands:");
             tell_object(TP, "%^BOLD%^%^BLUE%^    appoint <person>:  Assigns <person> as HC");
             tell_object(TP, "%^BOLD%^%^BLUE%^    demote <person>:  Removes <person> as HC");
+            tell_object(TP, "%^BOLD%^%^BLUE%^    add <name>: adds named person to the guild's list,");
+            tell_object(TP, "%^BOLD%^%^BLUE%^    remove <name>: removes name from the guild's list.");
+        }
+        if(GUILDS_D->is_hc(guild_name, TPQN) || wizardp(TP)){
+            tell_object(TP, "\n%^BOLD%^%^BLUE%^HC commands:");
             tell_object(TP, "%^BOLD%^%^BLUE%^    add <name>: adds named person to the guild's list,");
             tell_object(TP, "%^BOLD%^%^BLUE%^    remove <name>: removes name from the guild's list.");
         }
@@ -80,17 +85,17 @@ int read_fcn(string str) {
             tell_object(TP, "%^BOLD%^The list is currently empty.  Please contact a wiz.");
             return 1;
         }
-                
+
         tell_object(TP, "For the guild "+guild_name+":");
         tell_object(TP, "Your leader is:  "+capitalize((string)GUILDS_D->query_guild_leader(guild_name)));
-        
+
         tell_object(TP, "Your HC are:");
         list = (string *)GUILDS_D->query_guild_hc(guild_name);
         sort(list);
         for (i=0;i<sizeof(list);i++) {
             tell_object(TP, "%^BOLD%^   "+capitalize(list[i]));
         }
-        
+
         list = (string *)GUILDS_D->query_guild_members(guild_name);
         tell_object(TP, "%^BOLD%^%^BLUE%^The members of your guild are:");
         sort(list);
@@ -125,7 +130,7 @@ int add_fcn(string str) {
 int remove_fcn(string str) {
     string who;
     object ob;
-    
+
     if (!str) return notify_fail("Remove who from what?  More info please.\n");
     who = lower_case(str);
 
@@ -148,7 +153,7 @@ int remove_fcn(string str) {
 }
 
 int appoint_hc(string str){
-    
+
     if(!str) return notify_fail("Who?\n");
     str = lower_case(str);
     if(!GUILDS_D->is_leader(guild_name, TPQN) && !wizardp(TP)) return 0;
@@ -179,7 +184,7 @@ int return_obj(string str){
     if(!guild_object || guild_object == "")
         return notify_fail("There is no object set.  Contact a wiz.\n");
 
-    if(!TP->in_guild(guild_name))
+    if(!GUILDS_D->is_member(guild_name, TPQN))
         return 0;
 
     ob = new(guild_object);
@@ -213,4 +218,3 @@ private void swap(int i, int j, string* stuff) {
     stuff[i]=stuff[j];
     stuff[j]=tmp;
 }
-

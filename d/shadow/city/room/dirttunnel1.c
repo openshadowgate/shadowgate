@@ -9,6 +9,6 @@ void create(){
    ::create();
    set_exits(([
       "south" : ROOMS"dirttunnel2",
-	  "out" : "/d/shadow/room/inherits/owagon38.c",
+	  "out" : "/d/shadow/room/forest/owagon38.c",
    ]));
 }
