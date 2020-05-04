@@ -57,7 +57,6 @@ void create()
     }));
     set_spell_chance(50);
     add_money("platinum", random(1000) + 1000);
-    set_property("spell penetration", 30);
 }
 
 void init()
