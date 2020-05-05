@@ -39,13 +39,13 @@ void create(){
    ]));
     set_guild_name("Alliance Reborn");
      set_guild_object("/d/guilds/alliance/obj/alliancering.c");
-     set_search("default",(:TO,"find_ring":));
+     //set_search("default",(:TO,"find_ring":));  This is now an active guild players have paid money into.  It's no different than a player house and non-members shouldn't be able to easily find the key. - Odin 5/4/2020
 }
 
-int found;
+/*int found;
 int find_ring(){
      object ob;
-    if (! found){ 
+    if (! found){
       tell_object(TP,"As you search you stumble upon a small ring, left for the ages on doubt.");
       tell_room(TO,"As "+TPQCN+" searches the room "+TP->query_subjective()+" finds a small ring, left for the ages no doubt.",TP);
       ob = new("/d/guilds/alliance/obj/alliancering.c");
@@ -54,4 +54,4 @@ int find_ring(){
       return 1;
    }
    return 0;
-}
+}*/

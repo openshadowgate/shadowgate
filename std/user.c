@@ -2106,10 +2106,13 @@ nomask void die()
         tell_room(ETO, capitalize(query_vis_name()) + " turns into smoke.");
     }
 
-//    filter_array(all_inventory(TP), (:$1->is_disease():))->remove();
-    filter_array(all_inventory(TO), "is_disease")->remove();
-// I think having TP here was causing some bugs, when TP wasn't defined, also, this should be a simpler solve for the function name to filter on.
-// Garrett 05/04/2020
+    filter_array(all_inventory(TO), (:$1->is_disease():))->remove();
+
+    // I think having TP here was causing some bugs, when TP wasn't defined, also, this should be a simpler solve for the function name to filter on.
+    // Garrett 05/04/2020
+
+    // Right about cause of error, but is_disease must be defined within this object if you wisht to use "" syntax, whileas (: :) is a closure and is_disease() is method shared by diseases that returns 1.
+    // Illy 2020-05-05
 
     cease_all_attacks();
     reset_all_status_problems();

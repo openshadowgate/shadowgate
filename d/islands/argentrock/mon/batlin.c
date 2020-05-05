@@ -50,7 +50,9 @@ void create()
     set_property("weapon resistance", 3);
     //set_property("cast and attack", 1);
     set_property("function and attack", 1);
-    set_property("spell penetration", 30);
+    set_monster_feats(({
+      "spell penetration","greater spell penetration"
+    }));
 
     set_max_hp(5500);
     set_hp(query_max_hp());

@@ -14,7 +14,7 @@ void create()
     set_id(({ "cigar" }));
     set_short("%^RESET%^%^ORANGE%^cigar%^RESET%^");
     set_long("This is a hand rolled cigar.\n\n%^RESET%^%^ORANGE%^Try smoking it. Douse it to put it out.%^RESET%^");
-    set_weight(1);
+    set_weight(0);
     set_value(50);
     lit = 0;
     hasmsgs = 1;
