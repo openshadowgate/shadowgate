@@ -440,7 +440,7 @@ void redo_my_languages() {
       return;
   }
 
-  if (query("lang_update_20200422")) {
+  if (query("lang_update_20200505")) {
       return;
   }
 
@@ -461,8 +461,12 @@ void redo_my_languages() {
       }
       // Each time lang system is updated, add update marker removal
       // here
+      if (query("lang_update_20200422")) {
+          delte("lang_update_20200422");
+      }
   }
 
+  // Half-races scope
   if (strsrch(race, "half-") != -1) {
       set_lang("common", 100);
       set_lang(LANGS[race][0], 100);
@@ -474,29 +478,42 @@ void redo_my_languages() {
       }
   }
 
-  if (TO->query_lang("ogrish")) {
-      mylang = TO->query_lang("ogrish");
-      TO->remove_lang("ogrish");
+  // Deep removal
+  if (TO->query_lang("deep")) {
+      TO->remove_lang("deep");
   }
 
-  if (TO->query_lang("ogre-magi") > mylang) {
-      mylang = TO->query_lang("ogre-magi");
-      TO->remove_lang("ogre-magi");
+  // Ogre conversion scope
+  {
+      if (TO->query_lang("ogrish")) {
+          mylang = TO->query_lang("ogrish");
+          TO->remove_lang("ogrish");
+      }
+
+      if (TO->query_lang("ogre-magi") > mylang) {
+          mylang = TO->query_lang("ogre-magi");
+          TO->remove_lang("ogre-magi");
+      }
+
+      if (mylang) {
+          TO->set_lang("giant", mylang);
+      }
+
+      mylang = 0;
   }
 
-  if (mylang) {
-      TO->set_lang("giant", mylang);
-  }
 
-  mylang = 0;
+  // Kobold conversion scope
+  {  if (TP->query_lang("kobold")) {
+          mylang = TP->query_lang("kobold");
+          TP->remove_lang("kobold");
+      }
 
-  if (TP->query_lang("kobold")) {
-      mylang = TP->query_lang("kobold");
-      TP->remove_lang("kobold");
-  }
+      if (mylang) {
+          TO->set_lang("draconic", mylang);
+      }
 
-  if (mylang) {
-      TO->set_lang("draconic", mylang);
+      mylang = 0;
   }
 
   return;

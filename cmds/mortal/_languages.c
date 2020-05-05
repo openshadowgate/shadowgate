@@ -18,6 +18,7 @@ int cmd_languages(string str)
 
     intbonus = intbonus < 1 ? 1 : intbonus;
     freelang = (TP->query_age() / 43200 + ((time() - TP->query_birthday()) / YEAR)) * intbonus;
+    freelang = freelang > 500 ? 500 : freelang;
     usedlang = TP->query("used language points");
     skills = TP->query_all_langs();
     skillslist = sort_array(keys(skills), 1);
