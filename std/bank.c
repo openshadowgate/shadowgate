@@ -166,7 +166,7 @@ int exchange(string str) {
    amt = amount;
    val = amount * (int)ECONOMY_D->currency_rate(from);
    amount = to_int(val / (int)ECONOMY_D->currency_rate(to));
-   check = (amount*85)/100;
+   //check = (amount*85)/100; Currency exchange is free - Odin 5/4/2020
    check = amount;
    if(check < 1){
       notify_fail("That is not enough "+from+" to exchange it for "+to+".\n");
@@ -177,7 +177,7 @@ int exchange(string str) {
    amt2 = amt2 / (int)ECONOMY_D->currency_rate(from);
    diff = amt - amt2;
    if (diff > 0) TP->add_money(from,diff);
-   amount = (amount*85)/100;
+   //amount = (amount*85)/100; See above comment, we're punishing player with 15% deposit fee, shouldn't charge them for exchange
    this_player()->add_money(to, amount);
    write("You exchange your "+from+" coins for "+amount+" "+to+".");
    tell_room(ETP,TPQCN+" exchanges some money.",TP);
@@ -366,7 +366,7 @@ int read(string str) {
 %^CYAN%^%^BOLD%^ withdraw NUM TYPE%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
 %^CYAN%^%^BOLD%^ exchange NUM TYPE for TYPE2%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
 
-A 15% service fee will be charged to all transactions.
+A 15% service fee will be charged to all deposits.
 MELNMARN
    );
    if(archp(TP)) {
