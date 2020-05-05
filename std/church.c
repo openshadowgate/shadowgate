@@ -224,7 +224,7 @@ int pray()
         exp = (int)TP->query_exp();
 
         expdelta = exp_for_level(thelevel);
-        exploss = expdelta * 9 / 13;
+        exploss = expdelta * 12 / 11;
         log_file("deathlexp", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
         if (TP->query("hardcore")) {
@@ -275,7 +275,7 @@ int pray()
                     continue;
                 }
                 if (stuff[i]->query_property("enchantment") > 0) {
-                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus() * 3 / 4);
+                    stuff[i]->set_overallStatus((int)stuff[i]->query_overallStatus() * 1 / 4);
                     continue;
                 }
             }

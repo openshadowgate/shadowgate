@@ -1,46 +1,38 @@
-%^BOLD%^%^BLUE%^The world of ShadowGate is pantheistic and includes many deities who may be worshipped by mortals.  While any mortal may make offerings to any deity to appease him or her, each mortal is also encouraged to choose a patron who will help guide the mortal's life.  These are the deities and their spheres of influence.
+%^BOLD%^%^CYAN%^DEITIES%^RESET%^
 
-%^BOLD%^%^BLUE%^Callamir: Luck/Trickery
-  %^BOLD%^%^BLUE%^Domains :%^BLUE%^ air, chaos, charm, good, travel, trickery
-  %^BOLD%^%^BLUE%^Allies  :%^BLUE%^ Jarmila
-  %^BOLD%^%^BLUE%^Enemies :%^BLUE%^ The Faceless One, Lord Shadow
-%^BOLD%^%^RED%^Jarmila: Light/Love
-  %^BOLD%^%^RED%^Domains :%^RED%^ fire, good, protection, renewal, sun
-  %^BOLD%^%^RED%^Allies  :%^RED%^ Callamir, Kreysneothosies, Lysara
-  %^BOLD%^%^RED%^Enemies : Lord Shadow, Nilith, The Faceless One
+The world of ShadowGate is pantheistic, it includes the next deities
+
 %^CYAN%^Kismet: Magic/Knowledge
   %^CYAN%^Domains :%^CYAN%^%^CYAN%^ creation, knowledge, law, magic, mentalism, stars
-  %^CYAN%^Allies  :%^CYAN%^%^CYAN%^ none
   %^CYAN%^Enemies :%^CYAN%^%^CYAN%^ none
-%^BOLD%^Kreysneothosies: Home/Protection
-  %^BOLD%^Domains : earth, law, protection, strength, vigilance
-  %^BOLD%^Allies  : Jarmila, Lysara
-  %^BOLD%^Enemies : The Faceless One, Nilith
-%^BOLD%^%^BLACK%^Lord Shadow: Darkness/Tyranny
-  %^BOLD%^%^BLACK%^Domains :%^BOLD%^%^BLACK%^ cold, darkness, evil, law, suffering, tyranny
-  %^BOLD%^%^BLACK%^Allies  :%^BOLD%^%^BLACK%^ none
-  %^BOLD%^%^BLACK%^Enemies :%^BOLD%^%^BLACK%^ Jarmila, Callamir, Lysara
 %^BOLD%^%^MAGENTA%^Lysara: Death/Fate
   %^BOLD%^%^MAGENTA%^Domains :%^MAGENTA%^ fate, moon, repose, travel, void, water
-  %^BOLD%^%^MAGENTA%^Allies  :%^MAGENTA%^ Kreysneothosies, Jarmila
   %^BOLD%^%^MAGENTA%^Enemies :%^MAGENTA%^ Nilith, Lord Shadow
-%^ORANGE%^Nilith: Undeath/War
-  %^ORANGE%^Domains :%^ORANGE%^%^ORANGE%^ chaos, destruction, evil, strength, war
-  %^ORANGE%^Allies  :%^ORANGE%^%^ORANGE%^ none
-  %^ORANGE%^Enemies :%^ORANGE%^%^ORANGE%^ Lysara, Kreysneothosies, Jarmila, Nimnavanon
 %^GREEN%^Nimnavanon: Forests/Weather
   %^GREEN%^Domains :%^GREEN%^%^GREEN%^ animal, destruction, earth, plant, storms
-  %^GREEN%^Allies  :%^GREEN%^%^GREEN%^ none
   %^GREEN%^Enemies :%^GREEN%^%^GREEN%^ Nilith
+%^BOLD%^%^RED%^Jarmila: Light/Love
+  %^BOLD%^%^RED%^Domains :%^RED%^ fire, good, protection, renewal, sun
+  %^BOLD%^%^RED%^Enemies : Lord Shadow, Nilith, The Faceless One
+%^BOLD%^Kreysneothosies: Home/Protection
+  %^BOLD%^Domains : earth, law, protection, strength, vigilance
+  %^BOLD%^Enemies : The Faceless One, Nilith
+%^BOLD%^%^BLUE%^Callamir: Luck/Trickery
+  %^BOLD%^%^BLUE%^Domains :%^BLUE%^ air, chaos, charm, good, travel, trickery
+  %^BOLD%^%^BLUE%^Enemies :%^BLUE%^ The Faceless One, Lord Shadow
+%^BOLD%^%^BLACK%^Lord Shadow: Darkness/Tyranny
+  %^BOLD%^%^BLACK%^Domains :%^BOLD%^%^BLACK%^ cold, darkness, evil, law, suffering, tyranny
+  %^BOLD%^%^BLACK%^Enemies :%^BOLD%^%^BLACK%^ Jarmila, Callamir, Lysara
+%^ORANGE%^Nilith: Undeath/War
+  %^ORANGE%^Domains :%^ORANGE%^%^ORANGE%^ chaos, destruction, evil, strength, war
+  %^ORANGE%^Enemies :%^ORANGE%^%^ORANGE%^ Lysara, Kreysneothosies, Jarmila, Nimnavanon
 %^RED%^The Faceless One: Murder/Deception
   %^RED%^Domains :%^RED%^ cavern, darkness, evil, illusion, madness, trickery
-  %^RED%^Allies  :%^RED%^ none
   %^RED%^Enemies :%^RED%^ Jarmila, Callamir, Kreysneothosies
 %^BOLD%^%^CYAN%^Ryorik: Elements/Natural Disasters
   %^BOLD%^%^CYAN%^Domains :%^BOLD%^%^CYAN%^ none
-  %^BOLD%^%^CYAN%^Allies  :%^BOLD%^%^CYAN%^ none
   %^BOLD%^%^CYAN%^Enemies :%^BOLD%^%^CYAN%^ none
 
-%^BOLD%^%^WHITE%^Each divinity has own set of allies and enemies. Being an ally or enemy does not necessarily mean you must aid or kill on sight. Determine the best course of action for your character based on your character's beliefs, the other individual(s) in question, and past actions and interactions with the individuals or their faith. Refer to their helpfiles for allies and enemies.
+You can choose to follow a god if your alignment is within two steps on the grid of deity's alignment, if you're a cleric that restriction increases to just one step.
 
-%^BOLD%^%^BLUE%^See also: %^GREEN%^domains, individual help files for each deity
+%^CYAN%^See also: %^RESET%^domains, individual help files for each deity, alignments

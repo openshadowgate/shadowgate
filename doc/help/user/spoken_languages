@@ -5,11 +5,12 @@ The following languages are spoken in Shadowgate:
 %^CYAN%^%^ULINE%^Language:%^RESET%^             %^CYAN%^%^ULINE%^Spoken by:
 Abyssal               Demons and other chaotic-evil outsiders
 Aklo                  Evil-aligned fey, feytouched
-Aquan                 Aquatic elves
+Auran                 Flying creatures, air-based creatures
+Aquan                 Aquatic and water-based creatures
 Beast                 Beastkin, gnolls, wemics
 Celestial             Angels and other good-aligned outsiders
 Common                Humans, civilized races
-Draconic              Dragons, kobolds, arcane magic users
+Draconic              Dragons, kobolds, trained arcane magic users
 Drow                  Drow
 Dwarvish              Dwarves
 Elven                 Elves, voadkyn
@@ -17,9 +18,11 @@ Goblin                Goblins, hobgoblins, bugbears
 Giant                 Firbolgs, ogres, ogre-magi
 Gnomish               Gnomes
 Halfling              Halflings
+Ignan                 Fire-based creatures
 Infernal              Devils and other lawful-evil outsiders
 Orcish                Orcs
 Saurian               Saurians
+Terran                Earth-based creatures
 Sylvan                Animals, dryads, nymphs, satyrs
 Undercommon           Beast/uncivilized races
 Yaun-ti               Yuan-ti

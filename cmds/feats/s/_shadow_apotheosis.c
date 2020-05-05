@@ -70,6 +70,7 @@ void execute_feat()
         obj = query_active_feat("shadow apotheosis");
         tell_object(caster, cm("You release your connection to the shadows around you and they slither away into the world."));
         tell_room(place, cm("" + caster->QCN + " releases " + caster->QP + " connection to the shadows around " + caster->QO + " and the shadows slither out into the world!"), caster);
+        caster = 0;
         obj->dest_effect();
         dest_effect();
         return;
@@ -109,6 +110,11 @@ void execute_attack()
     place = environment(caster);
     attackers = caster->query_attackers();
 
+    if (sizeof(attackers)) {
+        tell_object(caster, cm("A shadowy tendril lashes out at your enemies from vortex of shadows !"));
+        tell_room(place, cm("A shadowy tendril lashes out from " + caster->QCN + "'s vortex of shadows and lashes out!"), ({ caster }));
+    }
+
     for (i = 0; sizeof(attackers), i < sizeof(attackers); i++) {
         if (!objectp(attackers[i])) {
             continue;
@@ -119,6 +125,7 @@ void execute_attack()
         if (attackers[i]->query_unconscious()) {
             continue;
         }
+
         shadow_effects(attackers[i]);
     }
 
@@ -148,44 +155,32 @@ void shadow_effects(object obj)
     case 0: // trip
 
         tell_object(obj, cm("A shadowy tendril lashes out from " + caster->QCN + "'s vortex of shadows and tries to grasp you!"));
-        tell_object(caster, cm("A shadowy tendril lashes out from your vortex of shadows and tries to grasp " + obj->QCN + "!"));
-        tell_room(place, cm("A shadowy tendril lashes out from " + caster->QCN + "'s vortex of shadows and tries to grasp " + obj->QCN + "!"), ({ obj, caster }));
         if (!obj->reflex_save(clevel) && !obj->query_property("no trip")) {
             tell_object(obj, cm("The shadowy tendril wraps around your ankle and pulls you from your feet!"));
-            tell_room(place, cm("The shadowy tendtril wraps around " + obj->QCN + "'s ankle and pulls " + obj->QO + " from " + obj->QP + " feet!"), obj);
-            obj->set_tripped(roll_dice(1, 8), cm("A shadowy tendril is wrapped around your ankle!"));
         }else {
             tell_object(obj, cm("You managed to sidestep the grasping tendril!"));
-            tell_room(place, cm("" + obj->QCN + " manages to sidestep the grasping tendril!", obj));
         }
         break;
 
     case 1..3: // stun
 
         tell_object(obj, cm("A streak of darkness flies from " + caster->QCN + "'s shadow vortex and flies towards your head!"));
-        tell_object(caster, cm("A streak of darkness files from your shadow vortex and flies towards " + obj->QCN + "'s head!"));
-        tell_room(place, cm("A streak of darkness flies from " + caster->QCN + "'s shadow vortex and flies towards " + obj->QCN + "'s head!"), ({ obj, caster }));
         if (!obj->reflex_save(clevel) && !obj->query_property("no stun")) {
             tell_object(obj, cm("You try to dodge but to no avail, the streak of darkness hits you in the head, staggering you with intense pain!"));
-            tell_room(place, cm("" + obj->QCN + " tries to dodge but to no avail, the streak of darkness hits " + obj->QO + " square in the head!"), obj);
             obj->set_paralyzed(roll_dice(1, 2) * 8, cm("You are trying to recover your senses!"));
         }else {
             tell_object(obj, cm("You duck to the side, avoiding the streak of darkness at the last instant."));
-            tell_room(place, cm("" + obj->QCN + " ducks to the side, avoiding the streak of darkness at the last instant."));
         }
         break;
 
     case 4..7: // blind
 
         tell_object(obj, cm("An inky black shadow flies towards you, threatening to envelop you!"));
-        tell_room(place, cm("An inky black shadows flies towards " + obj->QCN + ", threatening to envelop " + obj->QO + "!"), obj);
         if (!obj->will_save(clevel) && !obj->query_property("no blind")) {
             tell_object(obj, cm("The shadowy figure wraps about you like a dense blanket of smoke, making it impossible to see!"));
-            tell_room(place, cm("The shadowy figure wraps around " + obj->QCN + ", making it impossible for " + obj->QO + " to see!"), obj);
             obj->set_temporary_blinded(clevel / 20 + 1);
         }else {
             tell_object(obj, cm("The shadowy figure tries to wrap around you but you shrug it off!"));
-            tell_room(place, cm("The shadowy figure tries to wrap around " + obj->QCN + " but " + obj->QS + " shrugs it off!"), obj);
         }
         break;
 
@@ -197,11 +192,8 @@ void shadow_effects(object obj)
         }
 
         tell_object(obj, cm("A bolt of black lightning strikes out from the vortex surrounding " + caster->QCN + " striking you painfully!"));
-        tell_object(caster, cm("A bolt of black lightning strikes out from the vortex surrounding you and strikes " + obj->QCN + " painfully!"));
-        tell_room(place, cm("A bolt of black lightning strikes out from the vortex surrounding " + caster->QCN + " and strikes " + obj->QCN + " painfully!"), ({ obj, caster }));
-
         obj->cause_typed_damage(obj, obj->return_target_limb(), damage, "untyped");
-        caster->cause_typed_damage(caster, obj->return_target_limb(), -damage / 4, "untyped");
+        caster->add_hp(damage / 6);
         break;
     }
     return;

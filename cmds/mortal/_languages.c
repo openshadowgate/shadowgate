@@ -75,7 +75,7 @@ This command will display languages you know.
 
 With argument, you can add %^ORANGE%^%^ULINE%^NUM%^RESET%^ points you have accumulated to %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you already know.
 
-You receive intelligence bonus of points (but no less than one point) of language points per eighteen hours of playtime and character age in years since the age you had at the time you have started playing. You are free to distrubute these points with 'add' subcommand, but someone must still give you basic understanding of the language, but you can learn one language for every intelligence bonus point.
+You receive intelligence bonus of points (but no less than one point) of language points per eighteen hours of playtime and character age in years since the age you had at the time you have started playing. You are free to distrubute these points with 'add' subcommand, but someone must still give you basic understanding of the language, and there is no mechanical limit on the number of languages you can learn.
 
 To choose a language you're currently using use %^ORANGE%^<speak>%^RESET%^ command.
 
