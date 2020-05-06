@@ -6,26 +6,26 @@
 #include <std.h>
 
 inherit DAEMON;
- 
-int cmd_goto(string str) 
+
+int cmd_goto(string str)
 {
     object ob;
     mixed location;
     string room, *rooms;
-    
-    if(!str) 
+
+    if(!str)
     {
         location = (string)this_player()->getenv("marked");
 	    if(!location) location = (string)this_player()->getenv("start");
 	    this_player()->move_player(location);
 	    return 1;
     }
-    
+
     if(str == "home")
     {
         if(wizardp(TP) || TP->query_position() == "dm") location = "/realms/"+TP->query_true_name()+"/workroom";
         else if(avatarp(TP)) location = "/d/avrooms/"+TPQN+".c";
-        if(!objectp(room = find_object_or_load(location)))        
+        if(!objectp(room = find_object_or_load(location)))
         {
             tell_object(TP,"You don't seem to have a home.");
             return 1;
@@ -36,15 +36,15 @@ int cmd_goto(string str)
             return 1;
         }
     }
-    
-    if(str == "arena") 
+
+    if(str == "arena")
     {
         TP->move_player("/realms/obsidian/rooms/arena1");
         return 1;
     }
-    
-    if(TP->query_rem_rooms()) 
-    { 
+
+    if(TP->query_rem_rooms())
+    {
         if(member_array(str,keys(TP->query_rem_rooms())) != -1)
         {
             tell_object(TP,"You go to the location remembered as "+str+"!\n");
@@ -52,23 +52,23 @@ int cmd_goto(string str)
             TP->move_player(rooms[str]);
             return 1;
         }
-    }   
-    
-    if((ob = find_living(lower_case(str))) && (!ob->query_invis() || !archp(ob)) && ob=environment(ob)) 
+    }
+
+    if((ob = find_living(lower_case(str))) && (!ob->query_invis() || !archp(ob)) && ob=environment(ob))
     {
-        if(ob == environment(this_player())) 
+        if(ob == environment(this_player()))
         {
             tell_object(TP, "You are already in that location.");
             return 1;
         }
     }
-    
+
     if(ob && ob->query_invis() && wizardp(ob) && !archp(this_player()))
     {
         tell_object(TP, "You can find no such user.");
         return 1;
     }
-    
+
     if(!ob) str = resolv_path((string)this_player()->get_path(), str);
     this_player()->move_player((ob ? ob : str), "");
     return 1;

@@ -59,6 +59,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     }
 
     save_info["base_class_save"] = save;         // this is without any modifiers
+
     switch (type) {
     case "fort": case "fortitude":  statbonus = (int)ob->query_stats("constitution"); break;
     case "reflex": statbonus = (int)ob->query_stats("dexterity");    break;
@@ -74,50 +75,58 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     statbonus = (statbonus - 10)/2;
     save_info["base_stat_bonus"] = statbonus;
     save += statbonus;
-    //tell_object(find_player("saide"), "save = "+save+", statbonus = "+statbonus);
-    // step 4: let's move all the misc saving throw bonuses here so we don't muddy the waters! Confusing enough that DCs are a negative mod.
-    switch (type) {
-    case "fort": case "fortitude":
-        mod = (int)ob->query_saving_bonus("fortitude");
-        if ((string)ob->query_race() == "human" && (string)ob->query("subrace") == "aesatri") {
-            mod += 1;
-        }
-        break;
-    case "reflex":
-        mod = (int)ob->query_saving_bonus("reflex");
-        if ((string)ob->query_race() == "human" && (string)ob->query("subrace") == "senzokuan") {
-            mod += 1;
-        }
-        break;
-    case "will":
-        mod = (int)ob->query_saving_bonus("will");
-        if ((string)ob->query_race() == "human" && (string)ob->query("subrace") == "maalish") {
-            mod += 1;
-        }
-        break;
-    }
-    // general sources of bonuses to all saving throws
-    if ((string)ob->query_race() == "halfling" && (string)ob->query("subrace") == "lightfoot halfling") {
-        mod += 1;                                                                                                        // lightfoot halfling +1 luck bonus racial
-    }
-    if ((string)ob->query_race() == "gnome" && ((string)ob->query("subrace") == "deep gnome" || (string)ob->query("subrace") == "svirfneblin")) {
-        mod += 2;                                                                                                                                                // svirfneblin +2 saves racial
-    }
-    if (FEATS_D->usable_feat(ob, "resistance")) {
-        mod += 2;
-    }
-    if (FEATS_D->usable_feat(ob, "force of personality")) {
-        int sbonus = BONUS_D->query_stat_bonus(ob, "charisma");
-        mod += sbonus > 5 ? 5 : sbonus;
-    }
-    save_info["misc_modifiers"] = mod;
+
     {
-        if (type == "will") {
-            if (ob->is_vampire()) {
-                mod -= (20000 - (int)ob->query_bloodlust()) / 2000;
+        switch (type) {
+        case "fort": case "fortitude":
+            mod = (int)ob->query_saving_bonus("fortitude");
+            if ((string)ob->query_race() == "human" &&
+                (string)ob->query("subrace") == "aesatri") {
+                mod += 1;
+            }
+            break;
+        case "reflex":
+            mod = (int)ob->query_saving_bonus("reflex");
+            if ((string)ob->query_race() == "human" &&
+                (string)ob->query("subrace") == "senzokuan") {
+                mod += 1;
+            }
+            break;
+        case "will":
+            mod = (int)ob->query_saving_bonus("will");
+            if ((string)ob->query_race() == "human" &&
+                (string)ob->query("subrace") == "maalish") {
+                mod += 1;
+            }
+            break;
+        }
+
+        if ((string)ob->query_race() == "halfling" &&
+            (string)ob->query("subrace") == "lightfoot halfling") {
+            mod += 1;
+        }
+
+        if ((string)ob->query_race() == "gnome" &&
+            ((string)ob->query("subrace") == "deep gnome" || (string)ob->query("subrace") == "svirfneblin")) {
+            mod += 2;                                                                                                                                                // svirfneblin +2 saves racial
+        }
+        if (FEATS_D->usable_feat(ob, "resistance")) {
+            mod += 2;
+        }
+        if (FEATS_D->usable_feat(ob, "force of personality")) {
+            int sbonus = BONUS_D->query_stat_bonus(ob, "charisma");
+            mod += sbonus > 5 ? 5 : sbonus;
+        }
+        save_info["misc_modifiers"] = mod;
+        {
+            if (type == "will") {
+                if (ob->is_vampire()) {
+                    mod -= (20000 - (int)ob->query_bloodlust()) / 2000;
+                }
             }
         }
     }
+
     save += mod;
     if (raw_save) {
         return save;
@@ -133,15 +142,22 @@ varargs void do_save(object ob, int dc, string type, raw_save)
 
     save_info["dc"] = dc;
     save_info["final_saving_throw"] = save;
-    //hijacking dc here, if it's positive, make it negative - Saide, December 2016
-    //should work okay - if dc is positive then there is no way
-    //anyone would EVER fail their saving throw
-    if(dc > 0) dc *= -1;
-    roll1 = roll_dice(1,20) + save + dc; // note that the mod is inclusive of all bonuses as well as the DC (which is added as a negative)
-    //tell_object(find_player("saide"), "save = "+save+", statbonus = "+statbonus +", roll1 = "+roll1);
-    save_info["pass_or_fail_by"] = roll1;
-    if(roll1 >= 0) { save_info["save_result"] = 1; }
-    else { save_info["save_result"] = 0; }
+
+    if (dc > 0) {
+        dc *= -1;
+    }
+    roll1 = roll_dice(1, 20);
+    save_info["pass_or_fail_by"] = roll1 + save + dc;
+
+    if (roll1 == 1) {
+        save_info["save_result"] = 0;
+    } else if (roll1 == 20) {
+        save_info["save_result"] = 1;
+    } else if (roll1 + save + dc >= 0) {
+        save_info["save_result"] = 1;
+    } else {
+        save_info["save_result"] = 0;
+    }
 }
 
 int get_save(object who, string type)

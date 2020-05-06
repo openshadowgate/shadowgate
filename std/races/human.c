@@ -387,7 +387,36 @@ string *query_languages(string subrace)
                  "optional":({"halfling","orcish","dwarvish","gnomish",})]);
     }
 
-    // Tieflings and aasimars are born among humans and thus can't learn abyssal and celestial by themselves
+    if (subrace == "aasimar") {
+        return (["required":({"common","celestial"}),
+                 "optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    }
+
+    if (subrace == "tiefing") {
+        return (["required":({"common","abyssal","infernal"}),
+                 "optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    }
+
+    if (subrace == "air genasi") {
+        return (["required":({"common","auran"}),
+                 "optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    }
+
+    if (subrace == "earth genasi") {
+        return (["required":({"common","terran"}),
+                 "optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    }
+
+    if (subrace == "fire genasi") {
+        return (["required":({"common","ignan"}),
+                 "optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    }
+
+    if (subrace == "water genasi") {
+        return (["required":({"common","aquan"}),
+                 "optional":({"halfling","orcish","dwarvish","gnomish",})]);
+    }
+
     return (["required":({"common",}),
              "optional":({"halfling","orcish","dwarvish","gnomish",})]);
 }
