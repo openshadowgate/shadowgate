@@ -117,13 +117,13 @@ string armor_desc()
 string other_desc()
 {
     if (other1 && other2) {
-        return "Various other items are strewn about. One pile consists of a medium %^YELLOW%^shield%^RESET%^ and many pairs of bracers - %^YELLOW%^reddish bracers%^RESET%^, %^YELLOW%^bluish bracers%^RESET%^, %^YELLOW%^white bracers%^RESET%^ and %^YELLOW%^bracers of jade%^RESET%^.\n\nA second stack, off to the side, holds a set of %^YELLOW%^fine robes%^RESET%^, a %^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^sash%^RESET%^ a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...";
+        return "Various other items are strewn about. One pile consists of a medium %^YELLOW%^shield%^RESET%^ and many pairs of bracers - %^YELLOW%^reddish bracers%^RESET%^, %^YELLOW%^bluish bracers%^RESET%^, %^YELLOW%^white bracers%^RESET%^ and %^YELLOW%^bracers of jade%^RESET%^.\n\nA second stack, off to the side, a %^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^sash%^RESET%^ a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...";
     }
     if (other1) {
         return "Various other items are strewn about. One pile consists of a medium %^YELLOW%^shield%^RESET%^ and many pairs of bracers - %^YELLOW%^reddish bracers%^RESET%^, %^YELLOW%^bluish bracers%^RESET%^, %^YELLOW%^white bracers %^RESET%^and %^YELLOW%^bracers of jade%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nMore sit in a stack off to the side, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     if (other2) {
-        return "Various other items are strewn about. Off to the side is a stack that holds a set of %^YELLOW%^fine robes%^RESET%^, a %^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^sash%^RESET%^ a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to theside is another pile, mostly bracers, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various other items are strewn about. Off to the side is a stack that holds a set of a %^YELLOW%^ring%^RESET%^ of platinum and gold, a runed blue %^YELLOW%^bag%^RESET%^, a scarlet %^YELLOW%^sash%^RESET%^ a short heavy %^YELLOW%^rod%^RESET%^ and a %^YELLOW%^chemise%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to theside is another pile, mostly bracers, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     return "Most of the other items appear to have been taken already, and the few that are left are screened by some "
            "sort of dull crimson ward that prevents you from getting close to them.";
@@ -351,7 +351,6 @@ int take_fun(string str)
         other1--;
         break;
 
-    case "fine robes":
     case "ring":
     case "bag":
     case "sash":
@@ -364,9 +363,6 @@ int take_fun(string str)
         write("%^BOLD%^%^GREEN%^You take a thorough look around the room for an item and select one of interest.");
         tell_room(TO, "%^BOLD%^%^GREEN%^" + TPQCN + " takes a thorough look around the room for an item and selects one of interest.", TP);
         switch (str) {
-        case "fine robes":
-            ob = new(ITEM + "robes")->move(TO);
-            break;
 
         case "ring":
             ob = new(ITEM + "healring")->move(TO);
