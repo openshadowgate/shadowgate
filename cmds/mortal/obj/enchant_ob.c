@@ -892,8 +892,6 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
 
     skill = skill + roll;
 
-    skill += "/daemon/bonus_d.c"->query_stat_bonus(tp,"inelligence");
-
     if(flag) // external check, used for disenchanting, unsure if we need fail/pass messages for that
     {
         if(roll == 1 || (DC > skill)) { return 0; }
@@ -906,7 +904,7 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
             "some of your materials!");
         tell_room(etp,"\n%^RED%^"+tp->QCN+" curses the Lord of Hell's hairy arse!");
 
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" failed a enchanting DC of "+DC+" with a roll of "+roll+" and a roll of "+(skill-roll)+".\n\n");
+        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" failed a enchanting DC of "+DC+" with a roll of "+roll+" and a skill of "+(skill-roll)+".\n\n");
 
         cost = cost / 8;
         cost += roll_dice(1,cost);
@@ -933,7 +931,7 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
 
         return 0;
     }
-    log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" passed an enchanting DC of "+DC+" with a roll of "+roll+" and a roll of "+(skill-roll)+".\n\n");
+    log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" passed an enchanting DC of "+DC+" with a roll of "+roll+" and a skill of "+(skill-roll)+".\n\n");
     return 1;
 }
 
