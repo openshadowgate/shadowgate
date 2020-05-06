@@ -11,7 +11,7 @@ inherit DAEMON;
 #define COLORS ({"%^RED%^red", "%^BLUE%^blue","%^CYAN%^cyan","%^GREEN%^green","%^MAGENTA%^magenta","%^YELLOW%^yellow","white","%^ORANGE%^orange","%^BOLD%^%^BLACK%^black"})
 #define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl","knife","scroll","tablet","hat","tome","rod","statue","figurine","amulet","talisman","slippers","flask","candle","mirror","rug","brooch","egg","scarf", "sphere","cube","stone","crown","amulet"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good","neutrality","the sun","the earth","the moon","the land","the sky","force","darkness","light","control","destiny","fortitude","cowardice","death","health","life","shielding","the universe","horror","beauty","comeliness","humility","pride","truth","lies","weakness","strength","nature","terror","fear","courage","wonder", "socmos"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good","neutrality","the sun","the earth","the moon","the land","the sky","force","darkness","light","control","destiny","fortitude","cowardice","death","health","life","shielding","the universe","horror","beauty","comeliness","humility","pride","truth","lies","weakness","strength","nature","terror","fear","courage","wonder", "the cosmos"})
 
 #define SAVE_QUESTS "/daemon/save/quests_high"
 
