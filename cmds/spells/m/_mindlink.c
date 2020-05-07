@@ -28,7 +28,6 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-    string arg;
     string *ignored, *casterallowed, *targallowed;
 
     arg = lower_case(arg);
