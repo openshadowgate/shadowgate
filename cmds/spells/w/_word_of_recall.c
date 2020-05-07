@@ -12,10 +12,10 @@ void create()
 {
     ::create();
     set_spell_name("word of recall");
-    set_spell_level(([ "druid" : 8 ]));
-    set_spell_sphere("alteration");
-    set_syntax("cast CLASS word of recall to <location>");
-    set_description("The word of recall spell will allow a druid to travel to a location that he or she has previously "
+    set_spell_level(([ "druid" : 8, "cleric":6]));
+    set_spell_sphere("conjuration_summoning");
+    set_syntax("cast CLASS word of recall to LOCATION");
+    set_description("The word of recall spell will allow to travel to a location that she has previously "
         " remembered from the 'remembered location' list.  To remember a new location use 'remember here as <location>', to see a list of all "
         "remembered locations, use 'recall locations'.\nThis spell must be cast while at peace.\nSee also: remember, unremember, recall");
     set_verbal_comp();
@@ -59,12 +59,10 @@ void spell_effect_next()
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
     }
-    dest_effect();    
+    dest_effect();
 }
 
 void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
-
