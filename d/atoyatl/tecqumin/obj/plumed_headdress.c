@@ -1,20 +1,10 @@
-// Coded by Lujke. 
-// The circlet of control can be used in conjunction with 
-// the bracelets of compliance to take control of another person's actions
-// The victim must be wearing the bracelets and the controller must be 
-// wearing the circlet. They must both be in the same room.
-// If all these conditions are fulfilled, the controller can 
-// 'command <victim> to <action>'
-// most possible ooc and other abuses have been coded out. 
-// Unlike the domination spell, the victim is still able to take their own
-// actions at will. However, the duration is unlimited as long as the 
-// victim is wearing the bracelets, which are cursed.
+
 
 #include <std.h>
 #include <move.h>
 #define DAY 24000
 #include <daemons.h>
-inherit ARMOUR;
+inherit "/d/common/obj/clothing/hat.c";
 
 string owner;
 string query_owner();
@@ -29,7 +19,7 @@ void create()
     +"%^BOLD%^%^GREEN%^ss%^RESET%^");
   set_name("plumed headdress");
   set_short("%^CYAN%^Tec%^BOLD%^%^GREEN%^qumi%^RESET%^%^GREEN%^n"
-    +" Emp%^BOLD%^%^YELLOW%^or%^RESET%^%^GREEN%^er's H%^BOLD%^"
+    +" Emp%^BOLD%^%^YELLOW%^er%^RESET%^%^GREEN%^or's H%^BOLD%^"
     +"%^GREEN%^eaddr%^RESET%^%^CYAN%^ess");
   set_id(({"headdress", "plumed headdress", "tecqumin headdress",
                                      "emporer's headdress"}));
@@ -60,65 +50,15 @@ void create()
   set_type("clothing");
   set_limbs(({"head"}));
   set_ac(0);
-  set_property("enchantment",1);
   set_value(10000);
   set_wear((:TO,"wearme":));
   set_remove((:TO,"removeme":));
-  switch (random(6))
-  {
-  case 0:
-    set_size(1);
-    break;
-  case 1:
-    set_size(3);
-  default:
-    set_size(2);
-  }
-  set_property("enchantment",6);
+  set_size(-1);
+  set_property("enchantment",7);
   set_item_bonus("charisma",6);
   set_item_bonus("influence", 4);
-  set_property("quest required", "%^GREEN%^Sealed the %^BLUE%^U%^MAGENTA%^nf"
-    +"%^BLUE%^e%^MAGENTA%^tt%^BLUE%^e%^MAGENTA%^r%^BLUE%^e%^MAGENTA%^d"
-    +" %^GREEN%^back into the %^BLUE%^v%^BOLD%^%^BLACK%^o%^RESET%^i%^BLUE%^d");
+  set_property("quest required", "Fettered the %^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^e%^BLUE%^d");
 }
-
-void init(){
-  string * quests;
-  ::init();
-  if (!objectp(TO)||!objectp(ETO)||!objectp(EETO)){return;}
-  quests = ETO->query_mini_quests();
-  if (sizeof(quests)>0)
-  {
-    if (member_array("Delivered justice to Epithon", quests)!=-1)
-    {
-      remove_property("quest required");
-      set_property("quest required", "Delivered justice to Epithon");
-    } else 
-    {
-      if (member_array("Delivered justice to Taluc", quests)!=-1)
-      {
-        remove_property("quest required");
-        set_property("quest required", "Delivered justice to Taluc");       
-      } else 
-      {
-        remove_property("quest required");
-        set_property("quest required", "%^GREEN%^Sealed the %^BLUE%^U%^MAGENTA%^nf"
-          +"%^BLUE%^e%^MAGENTA%^tt%^BLUE%^e%^MAGENTA%^r%^BLUE%^e%^MAGENTA%^d"
-          +" %^GREEN%^back into the %^BLUE%^v%^BOLD%^%^BLACK%^o%^RESET%^i%^BLUE%^d");
-
-      }
-    }
-  }
-}
-
-string query_owner(){
-  return owner;
-}
-
-string set_owner(string str){
-  owner = str;
-}
-
 
 
 int wearme(){
@@ -127,7 +67,7 @@ int wearme(){
       +", you feel your posture straighten slightly, and a sense of"
       +" %^BOLD%^%^RED%^power%^RESET%^%^CYAN%^ and%^BOLD%^%^BLUE%^"
       +" importance%^RESET%^%^CYAN%^ flows into you.");
-  tell_room(EETO,ETO->QCN + "%^RESET%^%^CYAN%^ straightens as " 
+  tell_room(EETO,ETO->QCN + "%^RESET%^%^CYAN%^ straightens as "
       + ETO->QS + " places the " + query_short() + "%^RESET%^%^CYAN%^"
       +" onto " + ETO->QP + " head. " + ETO->QS + " seems to take on"
       +" an air of impressive authority.", ETO);
@@ -139,8 +79,11 @@ int removeme(){
   tell_object(ETO,"" + query_short() + "You remove the headdress and"
     +" feel slightly less important.");
   tell_room(EETO, ETO->query_cap_name()+" slumps a little and looks"
-    +" slightly less important after removing the " + query_short() 
+    +" slightly less important after removing the " + query_short()
     +" from " + ETO->QP + " head.", ETO);
   return 1;
 }
 
+void init() {
+    ::init();
+}

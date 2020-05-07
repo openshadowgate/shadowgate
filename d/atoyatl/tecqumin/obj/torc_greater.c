@@ -13,7 +13,7 @@ void create(){
                +" %^RESET%^of %^BOLD%^%^RED%^f%^BLUE%^ea%^RED%^th"
                +"%^BLUE%^e%^RED%^rs%^RESET%^", "a%^BOLD%^%^WHITE%^"
                +" snarling %^BOLD%^%^BLACK%^j%^RESET%^a%^BOLD%^"
-               +"%^BLACK%^g%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^ar", 
+               +"%^BLACK%^g%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^ar",
                 "a hero %^BOLD%^%^YELLOW%^wreathed %^RESET%^in"
                +" %^BOLD%^%^RED%^f%^YELLOW%^l%^RESET%^%^RED%^a"
                +"%^BOLD%^me%^RESET%^", "a %^BOLD%^%^GREEN%^tr"
@@ -21,9 +21,9 @@ void create(){
                +"i%^BOLD%^r%^RESET%^%^GREEN%^i%^BOLD%^t%^RESET%^",
                 "a %^BOLD%^%^YELLOW%^sun G%^RESET%^%^ORANGE%^o"
                +"%^BOLD%^d%^RESET%^"});
-    head_shorts = ({"%^BOLD%^%^GREEN%^serpent%^RESET%^", 
+    head_shorts = ({"%^BOLD%^%^GREEN%^serpent%^RESET%^",
       "%^BOLD%^%^BLACK%^j%^RESET%^a%^BOLD%^%^BLACK%^g%^RESET%^"
-     +"%^BLUE%^u%^BOLD%^%^BLACK%^ar", "%^ORANGE%^hero%^RESET%^", 
+     +"%^BLUE%^u%^BOLD%^%^BLACK%^ar", "%^ORANGE%^hero%^RESET%^",
       "%^GREEN%^tree", "%^BOLD%^%^YELLOW%^sun"});
     ::create();
     head1 = random(sizeof(heads));
@@ -38,15 +38,15 @@ void create(){
       +" and " + head_shorts[head2] + " %^BOLD%^%^YELLOW%^T%^RESET%^%^ORANGE%^o"
       +"%^BOLD%^%^YELLOW%^rc %^RESET%^of the %^CYAN%^Tecqumin%^RESET%^");
     set_obvious_short("A %^BOLD%^%^YELLOW%^g%^RESET%^%^ORANGE%^o%^BOLD%^"
-      +"%^YELLOW%^ld%^RESET%^%^ORANGE%^e%^BOLD%^%^YELLOW%^n " 
-      + head_shorts[head1] + " and " + head_shorts[head2] 
+      +"%^YELLOW%^ld%^RESET%^%^ORANGE%^e%^BOLD%^%^YELLOW%^n "
+      + head_shorts[head1] + " and " + head_shorts[head2]
       +" %^BOLD%^%^YELLOW%^t%^RESET%^%^ORANGE%^o%^BOLD%^%^YELLOW%^rc%^RESET%^");
     set_long("This %^BOLD%^%^YELLOW%^r%^RESET%^%^ORANGE%^i%^BOLD%^%^YELLOW%^"
       +"g%^RESET%^%^ORANGE%^i%^BOLD%^%^YELLOW%^d g%^RESET%^%^ORANGE%^o"
       +"%^BOLD%^%^YELLOW%^ld%^RESET%^%^ORANGE%^e%^BOLD%^%^YELLOW%^n"
       +" %^RESET%^neck ring is of fine quality. The two bulbs at the ends"
       +" come close to meeting each other at the front. One is fashioned"
-      +" into the head of " + heads[head1] + ", and the other is " 
+      +" into the head of " + heads[head1] + ", and the other is "
       + heads[head2] +". They seem to stare into each others' eyes.\n");
    set_lore("The priests of the Tecqumin wore torcs that indicated their"
       +" allegiance to one or another of the gods that they worshipped."
@@ -77,7 +77,7 @@ void create(){
      break;
    case 3:
      //tree spirit
-    set_item_bonus("sruvival", 30);
+    set_item_bonus("survival", 30);
      break;
    case 4:
      //sun god
@@ -99,7 +99,7 @@ void create(){
      break;
    case 3:
      //tree spirit
-    set_item_bonus("sruvival", 30);
+    set_item_bonus("survival", 30);
      break;
    case 4:
      //sun god
@@ -110,27 +110,17 @@ void create(){
    set_wear((:TO,"wear_it":));
    uses = 2;
    set_overallStatus(220);
+   set_property("quest required", "Fettered the %^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^e%^BLUE%^d");
 }
 
 int wear_it(string str){
-    string * quests;
-    quests = ETO->query_mini_quests();
-    if (sizeof(quests) || member_array("Fettered the %^MAGENTA%^U%^BLUE%^nf"
-      +"%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^e%^BLUE%^d"
-      +"%^RESET%^ - helped keep a greater menace out of the Realms", quests)!=-1){
-      tell_object(ETO, "The %^BOLD%^%^CYAN%^sp%^WHITE%^i%^CYAN%^r%^WHITE%^i"
-        +"%^CYAN%^ts%^RESET%^ of the %^CYAN%^Tecqumin%^RESET%^ ancestors will"
-        +" not allow you to wear the %^BOLD%^%^YELLOW%^t%^RESET%^%^ORANGE%^o"
-        +"%^BOLD%^%^YELLOW%^rc%^RESET%^. You have not earned the right.");
-      return 0;
-    }
     tell_object(ETO,"You drag the ends of the torc apart far enough to get it"
       +" round your neck. When you let go, they spring back together. You feel"
       +" a sense of acceptance from the %^CYAN%^Tecqumin%^RESET%^ ancestor"
       +" %^BOLD%^%^CYAN%^spirits%^RESET%^, who recognise your great deeds"
       +" against the %^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e"
       +"%^BLUE%^r%^MAGENTA%^e%^BLUE%^d");
-    tell_room(environment(ETO), ETO->query_cap_name()+ " fastens the " 
+    tell_room(environment(ETO), ETO->query_cap_name()+ " fastens the "
       + query_name() + " around "+ETO->query_possessive()+" neck.",ETO);
     return 1;
 }
