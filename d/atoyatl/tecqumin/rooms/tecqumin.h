@@ -37,7 +37,7 @@
 #define PLAT_BASE "/realms/lujke/tecqumin/treehouse/rooms/platform_base.c"
 #define TEST "/realms/lujke/tecqumin/test/"
 #define QNPC "/d/npc/QNPC.c"
-#define BUILDER "/daemon/maze_d.c"
+#define BUILDER "/d/atoyatl/maze_d.c"
 #define WEMIC "/realms/lujke/wemic/rooms/"
 #define TREEHOUSE "/realms/lujke/tecqumin/treehouse"
 #define TABAXROOM "/realms/lujke/tecqumin/tabaxi/rooms/"

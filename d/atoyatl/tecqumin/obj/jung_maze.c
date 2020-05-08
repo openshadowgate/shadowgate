@@ -1,7 +1,7 @@
 #include <std.h>
 #include "/realms/lujke/tecqumin/tecqumin.h"
 #define WEMIC "/realms/lujke/wemic/rooms/"
-#define BUILDER "/realms/lujke/daemon/maze_d.c"
+#define BUILDER "/realms/lujke/d/atoyatl/maze_d.c"
 
 inherit OBJECT;
 

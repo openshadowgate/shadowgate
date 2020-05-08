@@ -13,7 +13,7 @@
 #define TEC_MOB "/d/atoyatl/tecqumin/mons/"
 #define STORE "/d/atoyatl/wemic/store/"
 #define CARM "/d/common/obj/armour/"
-#define BUILDER "/daemon/maze_d.c"
+#define BUILDER "/d/atoyatl/maze_d.c"
 #define JUNG_ROOM "/d/atoyatl/tecqumin/jungle/rooms/"
 #define JUNG_ROOM1 "/d/atoyatl/tecqumin/junglea/rooms/"
 

@@ -630,7 +630,7 @@ void reach_destination(){
     room = find_object_or_load(dest);
   }
   waytime = DEST->query_timing(dest);
-  mazetime = "/daemon/maze_d.c"->query_timing(JUNG_ROOM4 + "j_maze");
+  mazetime = "/d/atoyatl/maze_d.c"->query_timing(JUNG_ROOM4 + "j_maze");
   if (!intp(waytime) || !intp(mazetime) || waytime == 0 || mazetime >= waytime){
   // Above check makes sure the next lag inducing maneuvre only happens
   // if the maze has been reset since the waystations were set up  

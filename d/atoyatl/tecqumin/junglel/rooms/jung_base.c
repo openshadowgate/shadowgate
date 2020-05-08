@@ -127,21 +127,21 @@ void init() {
       break;
     }
     if (sizeof(exits)<1){
-      "/daemon/maze_d.c"->set_roompath(path + "j_maze");
-      "/daemon/maze_d.c"->set_special_rooms( spec_rooms );
+      "/d/atoyatl/maze_d.c"->set_roompath(path + "j_maze");
+      "/d/atoyatl/maze_d.c"->set_special_rooms( spec_rooms );
       if (stringp(southroom)){
-        "/daemon/maze_d.c"->set_southroom(southroom);
+        "/d/atoyatl/maze_d.c"->set_southroom(southroom);
       }
       if (stringp(northroom)){
-        "/daemon/maze_d.c"->set_northroom(northroom);
+        "/d/atoyatl/maze_d.c"->set_northroom(northroom);
       }
       if (stringp(eastroom)){
-        "/daemon/maze_d.c"->set_eastroom(eastroom);
+        "/d/atoyatl/maze_d.c"->set_eastroom(eastroom);
       }
       if (stringp(westroom)){
-         "/daemon/maze_d.c"->set_westroom(westroom);
+         "/d/atoyatl/maze_d.c"->set_westroom(westroom);
       }
-      "/daemon/maze_d.c"->init_maze(5, 5, path + "/j_maze", 30);
+      "/d/atoyatl/maze_d.c"->init_maze(5, 5, path + "/j_maze", 30);
     }    
   }
   if (sizeof(query_exits())<1){
@@ -151,25 +151,25 @@ void init() {
 
 void make_maze(){
   if (!stringp(r_path)){ return; }
-  "/daemon/maze_d.c"->set_roompath(r_path);
+  "/d/atoyatl/maze_d.c"->set_roompath(r_path);
   if (stringp (s_room)){
-    "/daemon/maze_d.c"->set_southroom(s_room);
+    "/d/atoyatl/maze_d.c"->set_southroom(s_room);
   }
   if (stringp (n_room)){
-    "/daemon/maze_d.c"->set_northroom(n_room);
+    "/d/atoyatl/maze_d.c"->set_northroom(n_room);
   }
   if (stringp (e_room)){
-    "/daemon/maze_d.c"->set_eastroom(e_room);  
+    "/d/atoyatl/maze_d.c"->set_eastroom(e_room);  
   }
   if (stringp (w_room)){
-    "/daemon/maze_d.c"->set_westroom(w_room);  
+    "/d/atoyatl/maze_d.c"->set_westroom(w_room);  
   }
   if (sizeof(spec_rooms)){
-    "/daemon/maze_d.c"->set_special_rooms( ({ spec_rooms }) );
+    "/d/atoyatl/maze_d.c"->set_special_rooms( ({ spec_rooms }) );
   } else {
-    "/daemon/maze_d.c"->set_special_rooms( ({  }) );
+    "/d/atoyatl/maze_d.c"->set_special_rooms( ({  }) );
   }
-  "/daemon/maze_d.c"->init_maze(5, 5, r_path, 30);
+  "/d/atoyatl/maze_d.c"->init_maze(5, 5, r_path, 30);
 }
 
 void remove_maze(){
@@ -200,13 +200,13 @@ void remove_maze(){
     num2 = sizeof(exits);
     if (num2>0){
       for (j=0;j<num2;j++){ 
-        "/daemon/maze_d.c"->remove_exit(mazeroom,exits[j]);
+        "/d/atoyatl/maze_d.c"->remove_exit(mazeroom,exits[j]);
         if ((string)mazeroom->query_exit(exits[j]) != "/d/shadowgate/void"){
           mazeroom->remove_exit(exits[j]);
         }
       }
     }
-    "/daemon/maze_d.c"->remove_maze(file_name(mazeroom)); 
+    "/d/atoyatl/maze_d.c"->remove_maze(file_name(mazeroom)); 
   }
 }
 

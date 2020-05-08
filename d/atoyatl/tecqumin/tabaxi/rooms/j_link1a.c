@@ -21,13 +21,13 @@ void init(){
   mazes = BUILDER->query_saved_mazes();
   saved_exits = mazes[file];
   if (sizeof(exits)<1 && sizeof(saved_exits)<1){
-    "/daemon/maze_d.c"->set_roompath(JUNG_ROOM + "j_maze");
-    "/daemon/maze_d.c"->set_southroom(WEMIC + "path14.c");
-    "/daemon/maze_d.c"->set_northroom(JUNG_ROOM + "j_link1.c");
-    "/daemon/maze_d.c"->set_eastroom(JUNG_ROOM + "j_link8a.c");  
-    "/daemon/maze_d.c"->set_special_rooms( ({JUNG_ROOM + "jung_clearing.c", JUNG_ROOM 
+    "/d/atoyatl/maze_d.c"->set_roompath(JUNG_ROOM + "j_maze");
+    "/d/atoyatl/maze_d.c"->set_southroom(WEMIC + "path14.c");
+    "/d/atoyatl/maze_d.c"->set_northroom(JUNG_ROOM + "j_link1.c");
+    "/d/atoyatl/maze_d.c"->set_eastroom(JUNG_ROOM + "j_link8a.c");  
+    "/d/atoyatl/maze_d.c"->set_special_rooms( ({JUNG_ROOM + "jung_clearing.c", JUNG_ROOM 
                                                   + "jung_waterhole"}) );
-    "/daemon/maze_d.c"->init_maze(5, 5, JUNG_ROOM + "j_maze", 30);
+    "/d/atoyatl/maze_d.c"->init_maze(5, 5, JUNG_ROOM + "j_maze", 30);
   }    
   set_had_players(3);
 }

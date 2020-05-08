@@ -65,7 +65,7 @@
 #define TEST "/d/atoyatl/tecqumin/test/"
 #define TECSTORE "/d/atoyatl/tecqumin/rooms/storage/tec_storage.c"
 #define TECVOID "/d/atoyatl/tecqumin/void/"
-#define BUILDER "/daemon/maze_d"
+#define BUILDER "/d/atoyatl/maze_d"
 #define WEMIC "/d/atoyatl/wemic/rooms/"
 #define TREEHOUSE "/d/atoyatl/tecqumin/treehouse"
 #define TABAXROOM "/d/atoyatl/tecqumin/tabaxi/rooms/"
@@ -110,7 +110,7 @@
 #define DAY 24000   // 20 seconds in one minute
                     // 60 minutes in one hour
                     // 20 hours in one day
-#define MAZE_D "daemon/maze_d"
+#define MAZE_D "d/atoyatl/maze_d"
 #define MELEE 1
 #define RANGED 2
 #define TARGETSPELL 3

@@ -46,12 +46,12 @@ void init(){
     exits = mazeroom->query_exits();
   }
   if (sizeof(exits)<1){
-    "/daemon/maze_d.c"->set_roompath(JUNG_ROOM8 + "j_maze");
-    "/daemon/maze_d.c"->set_eastroom(JUNG_ROOM + "j_link7a.c");
-    "/daemon/maze_d.c"->set_westroom(JUNG_ROOM + "j_link8.c");  
-    "/daemon/maze_d.c"->set_southroom(JUNG_ROOM + "shore.c");
-    "/daemon/maze_d.c"->set_special_rooms( ({ }) );
-    "/daemon/maze_d.c"->init_maze(5, 5, JUNG_ROOM8 + "j_maze", 30);
+    "/d/atoyatl/maze_d.c"->set_roompath(JUNG_ROOM8 + "j_maze");
+    "/d/atoyatl/maze_d.c"->set_eastroom(JUNG_ROOM + "j_link7a.c");
+    "/d/atoyatl/maze_d.c"->set_westroom(JUNG_ROOM + "j_link8.c");  
+    "/d/atoyatl/maze_d.c"->set_southroom(JUNG_ROOM + "shore.c");
+    "/d/atoyatl/maze_d.c"->set_special_rooms( ({ }) );
+    "/d/atoyatl/maze_d.c"->init_maze(5, 5, JUNG_ROOM8 + "j_maze", 30);
   }    
 }
 

@@ -143,7 +143,7 @@ int move_fun(string str){
   }
   report("About to check exits on the maze room");
   maze_room = find_object_or_load(JUNG_ROOM8 + "j_maze0");
-  exit_rooms = "/daemon/maze_d"->query_room_exits(JUNG_ROOM8, "j_maze0");
+  exit_rooms = "/d/atoyatl/maze_d"->query_room_exits(JUNG_ROOM8, "j_maze0");
   if (sizeof(exit_rooms)<1) 
   {
     report("%^CYAN%^initiating maze");
