@@ -100,6 +100,12 @@ class_spell_storage =
         ({ "umbral sight", "shield of shadows", "shadow vortex", "night armor", "darkbolt", "shadow blast", "shadow double", "nightmare maw", "shadow nova" }),
 ]),
 
+"chronicler":
+([
+    "all":
+        ({ "doom", "sands of time", "spiritual ally", "foresight", "timeless body", "timestop" }),
+]),
+
 "psion":
 ([
     "egoist":

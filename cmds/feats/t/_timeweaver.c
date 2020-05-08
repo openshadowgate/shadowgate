@@ -3,18 +3,16 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("Chronicler");
     feat_name("timeweaver");
-    feat_prereq("Chronicler L4");
-    feat_desc("A chronicler extends their aptitude in manipulating the past and the future. They gain the use of several new spells:
-
-doom, sands of time, spiritual ally, foresight, timeless body, timestop");
+    feat_prereq("Chronicler L1");
+    feat_desc("A chronicler extends their aptitude in manipulating the past and the future. They gain the use of several new spells which they will always have mastered:\n\ndoom, sands of time, spiritual ally, foresight, timeless body, timestop");
     permanent(1);
-    set_required_for(({"temporal displacement"}));
+
 }
 
 int allow_shifted() { return 1; }
@@ -23,7 +21,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("chronicler")<4)
+    if((int)ob->query_class_level("chronicler")<1)
     {
         dest_effect();
         return 0;
@@ -57,4 +55,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
@@ -12,7 +12,7 @@ void create()
     feat_prereq("Chronicler L1");
     feat_desc("A chronicler starts out by learning to see the past and future, before later learning to manipulate it. They gain the ability to see, and thereby avoid, stabs from rogues of the same level or less.");
     permanent(1);
-    set_required_for(({"timeweaver"}));
+    set_required_for(({"temporal displacement"}));
 }
 
 int allow_shifted() { return 1; }
@@ -21,7 +21,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("chronicler") < 1)
+    if((int)ob->query_class_level("chronicler") < 4)
     {
         dest_effect();
         return 0;

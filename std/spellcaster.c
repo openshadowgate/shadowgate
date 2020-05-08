@@ -821,6 +821,16 @@ mapping query_mastered_bonus()
         }
     }
 
+    if (TO->is_class("chronicler")) {
+        if (FEATS_D->usable_feat(TO, "timeweaver")) {
+            string baseclass = "bard";
+            if (!arrayp(tmp[baseclass])) {
+                tmp[baseclass] = ({});
+            }
+            tmp[baseclass] += MAGIC_SS_D->query_class_special_spells("chronicler", "all");
+        }
+    }
+
     if (TO->is_class("psion") || TO->is_class("psywarrior")) {
         string theclass = TO->is_class("psion") ? "psion" : "psywarrior";
         if (TO->is_class(theclass) && !tmp[theclass]) {

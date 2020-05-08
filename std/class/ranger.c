@@ -81,7 +81,8 @@ void advanced_func(object player)
     player->set_guild_level("ranger",(int)player->query_class_level("ranger"));
 }
 
-int hit_dice() { return 8; }  // down to cleric equiv. with the new ranger spells in!
+int hit_dice() { return 10; }  // down to cleric equiv. with the new ranger spells in!
+                              // back up to d10 as per d20PFSRD
 
 int default_hitpoints() { return 3; } // hitpoints per level above level 20
 
