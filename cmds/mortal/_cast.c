@@ -126,7 +126,8 @@ int cmd_cast(string str)
         }
     }
 
-    if (type == "sorcerer" ||
+    if (type == "bard" ||
+        type == "sorcerer" ||
         type == "inquisitor" ||
         type == "oracle" ||
         type == "psion" ||

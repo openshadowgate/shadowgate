@@ -43,7 +43,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency", "medium armor proficiency","shield proficiency", "spell focus","rally","dodge" }), 5 : ({ "indomitable" }), 8 : ({ "anger" }), 11 : ({ "calm" }), 12 : ({ "tools of the trade" }), 14 : ({ "force of personality" }), 17 : ({ "charm" }), ]);
+    return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency", "medium armor proficiency","shield proficiency", "spell focus","rally","dodge" }), 5 : ({ "indomitable" }), 8 : ({ "anger" }), 10 : ({ "tools of the trade" }), 11 : ({ "calm" }),  14 : ({ "force of personality" }), 17 : ({ "charm" }), ]);
 }
 
 string *class_skills()
@@ -66,7 +66,7 @@ void advanced_func(object player)
     return;
 }
 
-int hit_dice() { return 6; }  // hit dice rolled for hitpoints each level
+int hit_dice() { return 8; }  // hit dice rolled for hitpoints each level
 
 int default_hitpoints() { return 3; } // hitpoints per level above level 20
 

@@ -1,8 +1,8 @@
-%^RESET%^%^CYAN%^Thief:
+%^RESET%^%^CYAN%^Thief (Rogue):
 
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 dexterity
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ reflex strong, fort/will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, dungeoneering, stealth, thievery
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^

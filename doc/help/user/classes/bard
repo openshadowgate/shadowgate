@@ -2,15 +2,15 @@
 
 %^RESET%^%^CYAN%^Stat requirements:%^RESET%^ 15 charisma
 %^RESET%^%^CYAN%^Alignments allowed:%^RESET%^ any non-lawful
-%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d6
+%^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ reflex/will strong, fort weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ academics, thievery, influence, spellcraft, athletics
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: simple weapon proficiency, martial weapon proficiency, light armor proficiency, medium armor proficiency, shield proficiency, spell focus, rally, dodge
  %^RESET%^L5: indomitable
  %^RESET%^L8: anger
+ %^RESET%^L10: tools of the trade
  %^RESET%^L11: calm
- %^RESET%^L12: tools of the trade
  %^RESET%^L14: force of personality
  %^RESET%^L17: charm
  %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
@@ -19,7 +19,7 @@ Bards are great entertainers and tend to be enjoyable companions on an adventure
 
 They dabble in being flexible in many areas of combat, rather than being a master of one. They have a rogue's basic combat ability, as well as six levels of arcane spells, which unlike most casters can be used spontaneously. Their casting abilities are based upon their charisma score. They also have the ability to remember and recite %^ORANGE%^<lore>%^RESET%^ that they have been told about.
 
-Bard is a spontaneous caster with a free choice of spells to cast from the bard list. All spells from the bard spell list, %^ORANGE%^<spells bard>%^RESET%^, are available to the bard. They %^ORANGE%^<cast>%^RESET%^ spells of levels they have prepared using the %^ORANGE%^<prepare>%^RESET%^ command. They can see how many spell slots per level are availabe to them with %^ORANGE%^<recall bard spells>%^RESET%^.
+Bards are spontaneous casters that use %^ORANGE%^<master>%^RESET%^ command to learn new spells from inquisitor list you can view with %^ORANGE%^<spells inquisitor>%^RESET%^. They %^ORANGE%^<cast>%^RESET%^ any of spell they learned by expending spell slot prepared with %^ORANGE%^<prepare>%^RESET%^ command. They can see how many slots per level you have prepared with %^ORANGE%^<recall inquisitor spells>%^RESET%^. They base their casting and slot bonuses on the charisma stat.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, stats, skills, spells, cast, buff, prepare, story, song, lore, prestige classes
 

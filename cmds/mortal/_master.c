@@ -13,6 +13,7 @@ mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "psion":PSIONKNOWN,
                    "psywarrior":PWKNOWN,
                    "inquisitor":INQKNOWN,
+                   "bard":INQKNOWN,
                    "warlock":WARLOCKKNOWN]);
 
 int cmd_master(string args)

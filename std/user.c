@@ -5047,42 +5047,58 @@ int is_in_sunlight()
     return 1;
 }
 
-int test_passive_perception() {
-    object *living, targ;
+int test_passive_perception()
+{
+    object* living, targ;
     int i, numnotvisible, ishidden, ismagic;
     int perception, stealth, spellcraft;
-    if (!objectp(TO)) return;
-    if (!objectp(ETO)) return;
-    if(FEATS_D->usable_feat(TO,"spot"))
-        perception = (int) TO->query_skill("perception");
-    else
-        perception = (int) TO->query_skill("perception")*3/4;
-    living = filter_array(all_living(ETO)-({TO}), "is_non_immortal", FILTERS_D);
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!objectp(ETO)) {
+        return;
+    }
+    if (FEATS_D->usable_feat(TO, "spot")) {
+        perception = (int)TO->query_skill("perception");
+    } else {
+        perception = (int)TO->query_skill("perception") * 3 / 4;
+    }
+    living = filter_array(all_living(ETO) - ({ TO }), "is_non_immortal", FILTERS_D);
     numnotvisible = 0;
-    for(i=0;i<sizeof(living);i++){
+    for (i = 0; i < sizeof(living); i++) {
         targ = living[i];
-        if(!objectp(targ)) continue;
-        if(targ->query_property("minion")==TO) continue;
+        if (!objectp(targ)) {
+            continue;
+        }
+        if (targ->query_property("minion") == TO) {
+            continue;
+        }
         ishidden = targ->query_hidden();
         ismagic = targ->query_magic_hidden();
-        stealth = (int) targ->query_skill("stealth");
-        spellcraft = (int) targ->query_skill("spellcraft");
-        if(FEATS_D->usable_feat(TO,"spot") && !TO->true_seeing())
-        {
-            if (ishidden==1 && ismagic==0) {
-                if (perception > stealth) { numnotvisible++; }
+        stealth = (int)targ->query_skill("stealth");
+        spellcraft = (int)targ->query_skill("spellcraft");
+        if (FEATS_D->usable_feat(TO, "spot") && !TO->true_seeing()) {
+            if (ishidden == 1 && ismagic == 0) {
+                if (perception > stealth) {
+                    numnotvisible++;
+                }
             }
-            if (ishidden==1 && ismagic==1) {
-                if (perception > stealth && perception*5/6 > spellcraft) { numnotvisible++; }
+            if (ishidden == 1 && ismagic == 1) {
+                if (perception > stealth && perception * 4 / 5 > spellcraft) {
+                    numnotvisible++;
+                }
             }
         }
-        if(!TO->detecting_invis())
-            if (ishidden==0 && ismagic==1) {
-                if (perception > spellcraft*5/6) { numnotvisible++; }
+        if (!TO->detecting_invis()) {
+            if (ishidden == 0 && ismagic == 1) {
+                if (perception > spellcraft * 4 / 5) {
+                    numnotvisible++;
+                }
             }
+        }
     }
     if (numnotvisible > 0) {
-        tell_object(TO,"%^BOLD%^%^CYAN%^You sense an unseen creature lurking nearby!%^RESET%^");
+        tell_object(TO, "%^BOLD%^%^CYAN%^You sense an unseen creature lurking nearby!%^RESET%^");
     }
     return 1;
 }
