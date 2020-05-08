@@ -26,7 +26,7 @@ void create() {
    	set_hd(10,0);
 	set_max_hp(query_hp());
    	add_money("copper", random(200));
-   	set_currency("gold");
+   	set_currency("silver");
 	set_menu(
       ({"onion soup", "roasted wild pork", "alehouse chicken", "stuffed veal loin", "fried squash", "green peas royal", "gingerbread", "green apple tart", "griddle cakes", "water", "eggnog", "three coins ale", "mulled wine", "apple cider", "white wine" }),
       ({"food", "food", "food", "food", "food", "food", "food", "food", "food", "water", "soft drink", "alcoholic", "alcoholic", "soft drink", "alcoholic" }),
@@ -47,7 +47,7 @@ void create() {
       "The ale is ice cold and has a foamy head on it - making it easy to enjoy.\n",
       "The mulled red wine is warm and very fragrant with cloves, cinnamon, and nutmeg flavors.\n",
       "The apple cider is served warm, reminding you of the autumn.\n",
-      "The white wine has a fruity bouquet to it, going down easily.\n"       
+      "The white wine has a fruity bouquet to it, going down easily.\n"
       }));
    set_your_mess(({
        "finishes off the onion soup, then starts to chew on the sourdough bread bowl.\n",
@@ -65,7 +65,7 @@ void create() {
        "nurses a glass of mulled red wine.\n",
        "sips on the hot apple cider, enjoying every sip.\n",
        "sips on a glass of white wine until its empty.\n"
-        })); 
+        }));
     set_menu_short(({
          "Onion Soup",
          "Roasted Wild Pork",
@@ -98,7 +98,7 @@ void create() {
       "%^YELLOW%^Served in a flagon, the pale ale is light and easy to handle.%^RESET%^\n",
       "%^MAGENTA%^Served in a flagon, the mulled wine is hot and fragrant.%^RESET%^\n",
       "%^ORANGE%^Served in a small cup, the apple cider is warm and garnished with a cinnamon stick.%^RESET%^\n",
-      "%^YELLOW%^Served in a tall glass, the white wine is chilled to the right temperature to bring out its fruity bouquet.%^RESET%^\n"   	
+      "%^YELLOW%^Served in a tall glass, the white wine is chilled to the right temperature to bring out its fruity bouquet.%^RESET%^\n"
     }));
 }
 void receive_given_item(object ob){
