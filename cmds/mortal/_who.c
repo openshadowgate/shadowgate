@@ -58,7 +58,6 @@ string list_users(string *races, object tp)
     wizzes = filter_array(users(),"wizards",TO);
     who = users() + "/daemon/filters_d.c"->query_retired();
     who = filter_array(who, "which_users", this_object(), races);
-    who = filter_array(who, (:!$1->query("true_quietness"):));
     max = sizeof(wizzes+who);
 
     wizzes = sort_array(wizzes, "sort_by_level", this_object());
