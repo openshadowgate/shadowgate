@@ -111,6 +111,9 @@ void do_rally(){
     place = environment(caster);
     mod = clevel / 12 + 1;
     duration = 150 + (caster->query_guild_level("bard") * 10);
+    if (FEATS_D->usable_feat(caster, "timeweaver")) {
+        duration *= 5;
+    }
     for (i = 0; i < sizeof(cur_players); i++) {
         if (!objectp(cur_players[i])) {
             continue;

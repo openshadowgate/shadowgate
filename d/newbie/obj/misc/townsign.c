@@ -1,5 +1,6 @@
 #include <std.h>
-inherit OBJECT;
+//inherit OBJECT;
+inherit "/d/newbie/obj/misc/map";
 
 void create() {
     ::create();
@@ -26,17 +27,19 @@ void init(){
 
 int __Read(string str)
 {
-   object mapObj;
-   if(str == "sign") 
-   {
-        TP->force_me("look sign");
-        return 1;
-   }
-   if(str == "map")
-   {  
-     mapObj = new("/d/newbie/obj/misc/map");
-     mapObj->read_func(str);
-     mapObj->remove();
-     return 1;
-   }
+//   object mapObj;
+//   if(str == "sign") 
+//   {
+//        TP->force_me("look sign");
+//        return 1;
+//   }
+//   if(str == "map")
+//   {  
+//     mapObj = new("/d/newbie/obj/misc/map");
+//     return (: "/d/newbie/obj/misc/map"->"read_func", str :);
+//     mapObj->remove();
+//     return 1;
+//
+//   }
+     return ::read_func(str);
 }

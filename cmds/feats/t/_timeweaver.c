@@ -10,7 +10,7 @@ void create()
     feat_category("Chronicler");
     feat_name("timeweaver");
     feat_prereq("Chronicler L1");
-    feat_desc("A chronicler extends their aptitude in manipulating the past and the future. They gain the use of several new spells which they will always have mastered:\n\ndoom, sands of time, spiritual ally, foresight, timeless body, timestop");
+    feat_desc("A chronicler extends their aptitude in manipulating the past and the future. Their rally ability's duration is increased by a factor of five. Furthermore, they gain the use of several new spells which they will always have mastered:\n\ndoom, sands of time, spiritual ally, foresight, timeless body, timestop");
     permanent(1);
 
 }
