@@ -2066,6 +2066,7 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
 {
     int nokill, reduction, spmod;
     string* limbs = ({});
+    int dieroll;
     nokill = 1;
 
     if (!objectp(victim)) {
@@ -2095,13 +2096,20 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
         }
     }
 
+    if (nokill) {
+        sendDisbursedMessage(victim);
+        return 1;
+    }
+
     spmod = clevel;     // spmod = base spell penetration
     if (!spmod) {
         spmod = 1;
     }
     spmod += (int)caster->query_property("spell penetration");     // add spell pen to base caster level
 
-    if (checkMagicResistance(victim, spmod) || nokill) {
+    dieroll = roll_dice(1, 20);
+
+    if (checkMagicResistance(victim, spmod) && dieroll != 20) {
         sendDisbursedMessage(victim);
         return 1;
     }
@@ -2257,25 +2265,17 @@ void define_base_spell_level_bonus()
 {
     sdamage_adjustment = 0;
 
-    // Cone, ball, chain
     if (splash_spell == 1) {
         sdamage_adjustment -= 1;
     }
 
-    // Blast
-    if (splash_spell == 2) {
-        sdamage_adjustment -= 2;
-    }
-
-    //Burst
     if (splash_spell > 2) {
         sdamage_adjustment -= 3;
     }
 
-
     if ((spell_type == "mage" || spell_type == "sorcerer" || spell_type == "psion")
         && FEATS_D->usable_feat(caster, "apoapsis of power")) {
-        sdamage_adjustment += 3;
+        sdamage_adjustment += 4;
     }
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
@@ -2286,7 +2286,7 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
-        sdamage = roll_dice(clevel / 6 + 1, 10);
+        sdamage = roll_dice(clevel / 3 + 1, 8);
     } else if (spell_type == "warlock") {
         string blasttype;
 
@@ -2311,12 +2311,12 @@ void define_base_damage(int adjust)
         slevel = slevel < 1 ? 1 : slevel;
 
         if (slevel < 1) {
-            sdamage = roll_dice(clevel, 7);
+            sdamage = roll_dice(clevel, 8);
         }else if (slevel > 0 && slevel < 20) {
             if (slevel % 2) {
-                sdamage = roll_dice(clevel, 7 + (slevel + 1) / 2);
+                sdamage = roll_dice(clevel, 8 + (slevel + 1) / 2);
             }else {
-                sdamage = roll_dice(clevel, 7 + slevel / 2 - 1) + roll_dice(1, clevel / 2);
+                sdamage = roll_dice(clevel, 8 + slevel / 2 - 1) + roll_dice(1, clevel / 2);
             }
         } else {
             sdamage = roll_dice(clevel, 8);
@@ -2617,14 +2617,6 @@ varargs int checkMagicResistance(object victim, int mod)
      * fifty levels of progression. */
 
     dieroll = roll_dice(1, 20);
-
-    if (dieroll == 1) {
-        return 0;
-    }
-
-    if (dieroll = 20) {
-        return 1;
-    }
 
     if ((dieroll + mod) > res) {
         return 0;
@@ -3540,13 +3532,13 @@ void help()
         write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
     }
     if (splash_spell == 1) {
-        write("%^BOLD%^%^RED%^This spell has a chance to affect multiple targets.  Its damage is shifted down one level.");
+        write("%^BOLD%^%^RED%^This spell has a chance to affect multiple targets.");
     }
     if (splash_spell == 2) {
-        write("%^BOLD%^%^RED%^This spell will affect mostly enemies.  Its damage is shifted down two levels.");
+        write("%^BOLD%^%^RED%^This spell will affect mostly enemies.");
     }
     if (splash_spell == 3) {
-        write("%^BOLD%^%^RED%^This spell will affect everyone.  Its damage is shifted down three levels.");
+        write("%^BOLD%^%^RED%^This spell will affect everyone.");
     }
 
     if (mapp(feats_required)) {

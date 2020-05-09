@@ -15,11 +15,11 @@
  %^RESET%^L17: charm
  %^RESET%^Also: one bonus hybrid feat at L21, and every five class levels thereafter
 
-Bards are great entertainers and tend to be enjoyable companions on an adventure. Bards are generally well respected in most settlements, being the bringers of news from far away lands, the lorekeepers of the realms, and the voice of many a king or noble to their people and to other cities. They are known for maintaining a degree of neutrality in most matters. They get by on their wit and their charm, leaving some to be known as rogueish troublemakers that are regarded with suspicion.
+Bards are great entertainers and tend to be enjoyable companions on an adventure. Bards are generally well respected in most settlements, being the bringers of news from far away lands, the lore-keepers of the realms, and the voice of many a king or noble to their people and to other cities. They are known for maintaining a degree of neutrality in most matters. They get by on their wit and their charm, leaving some to be known as roguish troublemakers that are regarded with suspicion.
 
 They dabble in being flexible in many areas of combat, rather than being a master of one. They have a rogue's basic combat ability, as well as six levels of arcane spells, which unlike most casters can be used spontaneously. Their casting abilities are based upon their charisma score. They also have the ability to remember and recite %^ORANGE%^<lore>%^RESET%^ that they have been told about.
 
-Bards are spontaneous casters that use %^ORANGE%^<master>%^RESET%^ command to learn new spells from inquisitor list you can view with %^ORANGE%^<spells inquisitor>%^RESET%^. They %^ORANGE%^<cast>%^RESET%^ any of spell they learned by expending spell slot prepared with %^ORANGE%^<prepare>%^RESET%^ command. They can see how many slots per level you have prepared with %^ORANGE%^<recall inquisitor spells>%^RESET%^. They base their casting and slot bonuses on the charisma stat.
+Bards are spontaneous casters that use %^ORANGE%^<master>%^RESET%^ command to learn new spells from bard list you can view with %^ORANGE%^<spells bard>%^RESET%^. They %^ORANGE%^<cast>%^RESET%^ any of spell they learned by expending spell slot prepared with %^ORANGE%^<prepare>%^RESET%^ command. They can see how many slots per level you have prepared with %^ORANGE%^<recall bard spells>%^RESET%^. They base their casting and slot bonuses on the charisma stat.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^feats, stats, skills, spells, cast, buff, prepare, story, song, lore, prestige classes
 

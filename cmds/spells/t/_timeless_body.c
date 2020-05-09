@@ -154,7 +154,7 @@ void dest_effect(){
       if(toggle) {
          chance = (int)targ->query_missChance() - 65;
       }else{
-         chance = (int)targ->query_missChance()-25;
+         chance = (int)targ->query_missChance()-15;
       }
       targ->set_missChance(chance);
       targ->remove_property("timeless body");
