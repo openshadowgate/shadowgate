@@ -39,7 +39,7 @@ void create(){
    }
    set_property("no alter",1);
    set_item_bonus("will",1);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_wear((:TO,"wearme":));
    set_remove((:TO,"removeme":));
 }

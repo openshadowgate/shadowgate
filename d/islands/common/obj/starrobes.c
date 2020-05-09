@@ -38,7 +38,7 @@ void create()
 
     set_property("enchantment",5);
 
-    set_item_bonus("magic resistance",20);
+    set_item_bonus("magic resistance",2);
     set_item_bonus("bonus_spell_slots",2);
     set_item_bonus("wisdom",4);
     set_wear((:TO,"wear":));

@@ -27,7 +27,7 @@ void create(){
     set_weight(5);
     set_value(1500);
     set_property("enchantment",3);
-    set_item_bonus("magic resistance",15);
+    set_item_bonus("magic resistance",1);
     set_item_bonus("sight bonus",3);
     set_type("clothing");
     set_limbs(({"torso"}));

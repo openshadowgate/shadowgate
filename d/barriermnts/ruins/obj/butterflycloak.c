@@ -24,7 +24,7 @@ void create() {
 "from the skill and style of crafting, the garment is presumably of elven make.%^RESET%^\n");
    set_property("lore difficulty",15);
    set_property("enchantment",2);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_limbs(({"neck"}));
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));

@@ -32,7 +32,7 @@ void create() {
     set_read("The words, %^YELLOW%^lighten%^RESET%^, %^RED%^darken%^RESET%^, and "
 "%^BOLD%^%^WHITE%^normalize %^RESET%^are written on the inside of the mask.");
     set_property("enchantment",4);
-    set_item_bonus("magic resistance",20);
+    set_item_bonus("magic resistance",2);
     set_wear((:TO,"wearit":));
     set_remove((:TO,"removeit":));
 }

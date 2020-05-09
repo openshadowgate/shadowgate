@@ -28,7 +28,7 @@ void create()
         TO->remove_property("enchantment");
         TO->set_property("enchantment",5);
     }
-    set_item_bonus("magic resistance",20);
+    set_item_bonus("magic resistance",2);
     set_item_bonus("bonus_spell_slots",2);
       set_item_bonus("spellcraft",4); // nerfed from 10 to 4; 50% on a roll is way too much. N, 2/14
     set_limbs(({"torso"}));

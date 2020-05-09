@@ -60,7 +60,7 @@ int wieldme()
 			tell_room(environment(ETO),"%^BOLD%^The %^RED%^ruby"+
 			"%^WHITE%^ on the hilt of "+ETO->query_cap_name()+"'s"+
 			" sword flashes briefly.",ETO);
-			set_item_bonus("magic resistance",10);
+			set_item_bonus("magic resistance",1);
             	set_item_bonus("attack bonus",2);
             	set_item_bonus("damage bonus",2);
 			//set_ac(0);
@@ -73,7 +73,7 @@ int wieldme()
 			tell_room(environment(ETO),"%^BOLD%^The smaller %^RED%^"+
 			"rubies%^WHITE%^ on the hilt of "+ETO->query_cap_name()+"'s"+
 			" sword glow faintly.",ETO);
-			set_item_bonus("magic resistance",5);
+			set_item_bonus("magic resistance",1);
             	set_item_bonus("attack bonus",0);
             	set_item_bonus("damage bonus",0);
 			//set_ac(0);
@@ -87,7 +87,7 @@ int wieldme()
 			tell_room(environment(ETO),"%^BOLD%^The %^RED%^rubies"+
 			"%^WHITE%^ on the hilt of "+ETO->query_cap_name()+"'s"+
 			" sword flash briefly.",ETO);
-			set_item_bonus("magic resistance",-10);
+			set_item_bonus("magic resistance",-1);
             	set_item_bonus("attack bonus",0);
             	set_item_bonus("damage bonus",0);
          ETO->set_property("good item",1);

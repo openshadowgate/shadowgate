@@ -31,14 +31,14 @@ int wear_func(){
    if((string)ETO->query_diety() == "kismet"){
       tell_object(ETO,"%^BOLD%^%^BLUE%^As you slide into the velvet robes, the %^WHITE%^s%^RESET%^t%^BOLD%^a%^RESET%^r%^BOLD%^s %^BLUE%^shimmer briefly.%^RESET%^");
       tell_room(EETO,"%^BLUE%^"+ETOQCN+" slides into "+ETO->QP+" blue velvet robes.  The images of the %^BOLD%^%^WHITE%^s%^RESET%^t%^BOLD%^a%^RESET%^r%^BOLD%^s%^RESET%^%^BLUE%^ on "+ETO->QP+" robes shimmer briefly.%^RESET%^",ETO);
-	set_item_bonus("magic resistance",10);
+	set_item_bonus("magic resistance",1);
       set_item_bonus("sight bonus",5);
       FLAG = 1;
       return 1;
    }else{
 	tell_room(EETO,"%^BLUE%^"+ETOQCN+" slips in a plush blue velvet robe.%^RESET%^",ETO);
 	tell_object(ETO,"%^BLUE%^You slip on the plush blue velvet robe and can't help but feel a bit %^WHITE%^special%^RESET%^.%^RESET%^");
-	set_item_bonus("magic resistance",5);
+	set_item_bonus("magic resistance",1);
       set_item_bonus("sight bonus",2);
 	return 1;
    }

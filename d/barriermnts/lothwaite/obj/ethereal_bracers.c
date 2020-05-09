@@ -42,7 +42,7 @@ void create(){
     set_value(1000);
     set_size(2);
     set_property("enchantment",3);
-    set_item_bonus("magic resistance",12);
+    set_item_bonus("magic resistance",1);
     set_remove((:TO,"remove_func":));
     set_wear( (:TO,"check":) );
     set_struck((:TO,"strike_func":));

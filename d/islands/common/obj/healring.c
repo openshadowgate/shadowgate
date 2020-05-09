@@ -26,7 +26,7 @@ void create(){
    set_property("enchantment",6);
    set_item_bonus("healing",4);
    set_item_bonus("damage resistance",10);
-   set_item_bonus("magic resistance",5);
+   set_item_bonus("magic resistance",1);
    set_ac(0);
    set_wear((:TO,"wearme":));
    set_heart_beat(1);

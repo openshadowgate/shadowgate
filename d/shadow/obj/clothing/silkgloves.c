@@ -17,7 +17,7 @@ void create() {
    set_limbs( ({"left arm","right arm"}) );
    set_weight(1);
    set_ac(0);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_value(800);
    set_wear( (: TO,"wear_func" :) );
    set_remove( (: TO,"remove_func" :) );

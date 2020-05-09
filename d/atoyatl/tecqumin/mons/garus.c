@@ -1,4 +1,4 @@
-//garus.c The Old Sailor                                
+//garus.c The Old Sailor
 // Coded by Lujke 15/8/2017
 #include <std.h>
 #include <daemons.h>
@@ -56,23 +56,23 @@ void create(){
 void init(){
   ::init();
   add_action("dismiss_me", "dismiss");
-} 
+}
 
 int dismiss_me(string str){
   if (!id(str)) return notify_fail("If you want to dismiss Garus, you need to do it by name");
   force_me("emote Staggers off to sleep in a ditch");
   move("/d/shadowgate/void");
-  "/daemon/garus_locator_d"->dismiss();
+  "/d/atoyatl/garus_locator_d"->dismiss();
 }
 
 set_responses(){
-  set_response(({"hello", "greetings", "good day", "gooday"}), 
+  set_response(({"hello", "greetings", "good day", "gooday"}),
           ({"Arr, good day to ye. A foine day fer a drink and fer tha telling o' tales"}) );
-  set_response(({"hello" }), 
+  set_response(({"hello" }),
           ({"Arr, good day to ye. A foine day fer a drink and fer tha telling o' tales"}) );
-  set_response(({"good day"}), 
+  set_response(({"good day"}),
           ({"Arr, good day to ye. A foine day fer a drink and fer tha telling o' tales"}) );
-  set_response(({ "gooday"}), 
+  set_response(({ "gooday"}),
           ({"Arr, good day to ye. A foine day fer a drink and fer tha telling o' tales"}) );
 
   set_response(({"drink"}), ({"A rum fer me, if ye will. Or anythin' ye got goin, ta be fair." }) );
@@ -97,7 +97,7 @@ void tell_tale1(){
   story_stage = 2;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   call_out("tell_tale2", 8, TP);
-} 
+}
 
 void tell_tale2(object ob){
   if(!objectp(ob) || !objectp(ETO) || !present(ob, ETO)){
@@ -112,9 +112,9 @@ void tell_tale2(object ob){
   story_stage = 3;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   call_out("tell_tale3", 6, ob);
-} 
+}
 
-void tell_tale3(object ob){ 
+void tell_tale3(object ob){
   if(!objectp(ob) || !objectp(ETO) || !present(ob, ETO)){
     force_me("say Well, ah guess ye're not all tha' innerested, anyway");
     return;
@@ -127,9 +127,9 @@ void tell_tale3(object ob){
   story_stage = 4;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   call_out("tell_tale4", 5, ob);
-} 
+}
 
-void tell_tale4(object ob){ 
+void tell_tale4(object ob){
   if(!objectp(ob) || !objectp(ETO) || !present(ob, ETO)){
     force_me("say Well, ah guess ye're not all tha' innerested, anyway");
     return;
@@ -142,9 +142,9 @@ void tell_tale4(object ob){
   story_stage = 5;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   call_out("tell_tale5", 5, ob);
-} 
+}
 
-void tell_tale5(object ob){ 
+void tell_tale5(object ob){
   if(!objectp(ob) || !objectp(ETO) || !present(ob, ETO)){
     force_me("say Well, ah guess ye're not all tha' innerested, anyway");
     return;
@@ -157,9 +157,9 @@ void tell_tale5(object ob){
   story_stage = 6;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   call_out("tell_tale6", 6, ob);
-} 
+}
 
-void tell_tale6(object ob){ 
+void tell_tale6(object ob){
   if(!objectp(ob) || !objectp(ETO) || !present(ob, ETO)){
     force_me("say Well, ah guess ye're not all tha' innerested, anyway");
     return;
@@ -172,9 +172,9 @@ void tell_tale6(object ob){
   story_stage = 7;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   call_out("tell_tale7", 7, ob);
-} 
+}
 
-void tell_tale7(object ob){ 
+void tell_tale7(object ob){
   if(!objectp(ob) || !objectp(ETO) || !present(ob, ETO)){
     force_me("say Well, ah guess ye're not all tha' innerested, anyway");
     return;
@@ -187,9 +187,9 @@ void tell_tale7(object ob){
   story_stage = 8;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   call_out("tell_tale8", 7, ob);
-} 
+}
 
-void tell_tale8(object ob){ 
+void tell_tale8(object ob){
   if(!objectp(ob) || !objectp(ETO) || !present(ob, ETO)){
     force_me("say Well, ah guess ye're not all tha' innerested, anyway");
     return;
@@ -202,14 +202,14 @@ void tell_tale8(object ob){
   story_stage = 9;
   set_response(({"last adventure"}), ({"It were wild indeed"  }), "tell_tale" + story_stage);
   when_finished = time();
-} 
+}
 
 void tell_tale9(){
   force_me("say well, lemme see");
   if (time() - 10000 > when_finished){
     story_stage = 1;
     tell_tale1();
-  }   
+  }
   force_me("say Ah, I've talked enuff fer one day. Ask me agin later");
 }
 
@@ -254,7 +254,7 @@ void give_quest(){
   }
   critters = all_living(ETO);
   count = sizeof(critters);
-  if (count<1){ 
+  if (count<1){
     return;
   }
   for (i=0;i<count;i++){
@@ -264,5 +264,3 @@ void give_quest(){
     EVENT_RECORDS_D->record_event(critters[i]->query_name(), "Heard about the Tecqumin", time());
   }
 }
-
-

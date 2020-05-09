@@ -29,7 +29,7 @@ AVATAR
 	set_property("enchantment",3+random(2));
 	set_wear((:TO,"wear_func":));
 	set_remove((:TO,"remove_func":));
-      set_item_bonus("magic resistance",10);
+      set_item_bonus("magic resistance",1);
 }
 int wear_func(){
 	tell_room(environment(ETO),"%^BOLD%^%^RED%^"+ETOQCN+" ties on a red silk cloak.",ETO);

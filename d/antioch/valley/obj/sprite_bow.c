@@ -38,7 +38,7 @@ void create() {
 	set_rate_of_fire(2);
 	set_range(5,10,15);
    	set_two_handed();
-    set_item_bonus("magic resistance",15);
+    set_item_bonus("magic resistance",1);
     set_ammo("sprite arrows");
 	set_wield((:TO,"wieldme":));
 	set_unwield((:TO,"removeme":));

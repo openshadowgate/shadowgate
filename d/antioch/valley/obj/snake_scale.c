@@ -47,7 +47,7 @@ void create()
 	set_remove((:TO,"removeme":));
 	set_struck((:TO,"strikeme":));
         set_property("enchantment",3);
-	set_item_bonus("magic resistance",15);
+	set_item_bonus("magic resistance",1);
 }
 
 int wearme()

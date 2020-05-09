@@ -188,7 +188,7 @@ void backup()
     if (objectp(ETO)) {
         roomname = base_name(ETO);
     }
-    "/daemon/unfettered_restorer_d.c"->backup(relay_room, clones, tentacle_hps, empress_moves, spirits_absorbed, countdown, invincible, last_summoned, targeters, seized, exits_used, victory, destinations_visited, path_trod, mucus, frozen_mucus, skin, tentacles_withdrawn, relaying, power_absorbed, last_move, absorbing, reporting, BEAT, heartcount, roomname);
+    "/d/atoyatl/unfettered_restorer_d.c"->backup(relay_room, clones, tentacle_hps, empress_moves, spirits_absorbed, countdown, invincible, last_summoned, targeters, seized, exits_used, victory, destinations_visited, path_trod, mucus, frozen_mucus, skin, tentacles_withdrawn, relaying, power_absorbed, last_move, absorbing, reporting, BEAT, heartcount, roomname);
 }
 
 void init()

@@ -24,7 +24,7 @@ void create(){
    set_type("clothing");
    set_limbs(({"neck"}));
    set_property("enchantment",5);
-   set_item_bonus("magic resistance",15);
+   set_item_bonus("magic resistance",1);
    set_value(4000);
    set_lore("'Tomorrow we depart to the caverns. I cautioned the others last "
 "night that I still did not trust Sylren, even now, even after twenty years of "

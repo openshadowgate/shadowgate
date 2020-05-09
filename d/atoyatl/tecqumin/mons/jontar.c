@@ -1,4 +1,4 @@
-//jontar.c - The Old Priest                                 
+//jontar.c - The Old Priest
 // Coded by Lujke 29/12/06
 #include <std.h>
 #include "../tecqumin.h"
@@ -47,7 +47,7 @@ void create(){
 }
 
 set_responses(){
-  set_response(({"hello", "greetings", "good day", "gooday", "hi"}), 
+  set_response(({"hello", "greetings", "good day", "gooday", "hi"}),
     ({"Hello there.", "Why, you are of the living, and not of the"
      +" %^CYAN%^Tecqumin%^RESET%^. What a strange thing." }),
       "frown" );
@@ -62,7 +62,7 @@ set_responses(){
     +" surprised you know of them.", "We priests learned many sacred"
     +" chants, for different days and different seasons. Part of our"
     +" ritual duty was to say the correct chants for each day, when"
-    +" sacrifices were made or powers invoked.", 
+    +" sacrifices were made or powers invoked.",
         "Would you like to know the %^GREEN%^chant for today"
     +"%^RESET%^?" }),"frown", "Knows of the Heart of the Jungle" );
   set_response(({"fountain", "fountain of youth"}), ({"We%^CYAN%^"
@@ -112,7 +112,7 @@ set_responses(){
     +"%^RESET%^ that %^CYAN%^Epithon%^RESET%^, our prince, made for"
     +" the new God he worshipped. And then came a day of fear, a day"
     +" when terror and destruction rained from the sky and the very"
-    +" land itself broke.", 
+    +" land itself broke.",
         "The first we knew was when the sky darkened with clouds as"
     +" black as the coat of %^ORANGE%^Nobach Eri%^RESET%^. Then a"
     +" sound came, so loud that men fell to the ground, clutching at"
@@ -120,7 +120,7 @@ set_responses(){
     +" ground shook, buildings fell and many died. And when we"
     +" looked up, those who still lived, half the%^ORANGE%^ mountain"
     +" %^RESET%^was gone, smote in two by some great force, and a"
-    +" cloud of dust blocked out the sun for many days.", 
+    +" cloud of dust blocked out the sun for many days.",
         "After that, there were no more children for the%^CYAN%^"
     +" Tecqumin%^RESET%^. No lives to replace those who died. But"
     +" those who died did not leave. Not for them the final journey"
@@ -133,7 +133,7 @@ set_responses(){
     +" at the very summit of the %^CYAN%^Ziggurat%^RESET%^. We"
     +" offered grain and animals and flowers and precious stones,"
     +" but most precious of all, we offered them %^RED%^blood gift"
-    +"%^RESET%^, and the life force that flowed within it.", 
+    +"%^RESET%^, and the life force that flowed within it.",
          "At one time, over a thousand souls went to the%^BOLD%^"
     +" %^RED%^S%^YELLOW%^u%^RED%^n Lord%^RESET%^ in this way in the"
     +" space of a week. %^ORANGE%^Slaves%^RESET%^ and captured foes"
@@ -146,7 +146,7 @@ set_responses(){
     +" our people%^RESET%^. After %^CYAN%^Epithon%^RESET%^ diverted"
     +" much of the worship from the %^BOLD%^%^RED%^S%^YELLOW%^u"
     +"%^RED%^n Lord%^RESET%^, he demanded more and more of the"
-    +" %^RED%^blood gift%^RESET%^ for that creature.", 
+    +" %^RED%^blood gift%^RESET%^ for that creature.",
         "I don't know why it would have needed so much %^CYAN%^life"
     +" force%^RESET%^ for itself. But I think that whatever it was"
     +" doing caused the destruction that rained down on our people."
@@ -177,9 +177,9 @@ set_responses(){
     +"%^RESET%^%^CYAN%^h%^BOLD%^%^CYAN%^t %^RESET%^%^CYAN%^of"
     +" %^BOLD%^%^MAGENTA%^f%^YELLOW%^l%^RESET%^%^MAGENTA%^o"
     +"%^BOLD%^%^MAGENTA%^we%^GREEN%^r%^MAGENTA%^s%^RESET%^, a"
-    +" concoction of drugged wine given them to spare any pain.", 
+    +" concoction of drugged wine given them to spare any pain.",
         "Thus they began their journey to the Heavens in a state of"
-    +" euphoria", 
+    +" euphoria",
         "Great honour was also accrued by their patrons, those who"
     +" supplied %^ORANGE%^slaves%^RESET%^ or captured foemen to the"
     +" %^ORANGE%^sacrifice%^RESET%^. This was one path by which the"
@@ -188,10 +188,10 @@ set_responses(){
   set_response(({"draught of flowers"}), ({"A wondrous concoction"
     +" made by the city herbalists, it rendered the drinker"
     +" euphoric and compliant, so that they could be lead easily to"
-    +" their end on the altar of the Gods", 
+    +" their end on the altar of the Gods",
         "They always looked quite happy, it seemed to me. There were"
     +" rumours that some of the priests drank it too, straight from"
-    +" the mushroom cups it came in. I never tried, though.", 
+    +" the mushroom cups it came in. I never tried, though.",
         "Certainly the priests removed all that was in the temple,"
     +" when the %^CYAN%^downfall of our race%^RESET%^ came. If any"
     +" remains, it will be in the %^MAGENTA%^city"
@@ -206,12 +206,12 @@ set_responses(){
     +" its making. Something must have given it its special"
     +" qualities."}) );
   set_response(({"apothecary", "city apothecary"}), ({"The"
-    +" main apothecary was one of the grander huts in the city, close" 
+    +" main apothecary was one of the grander huts in the city, close"
     +" to the plaza."}) );
   set_response(({"slaves"}), ({"Those unable to pay their debts,"
     +" those guilty of crimes, the sons and daughters of enslaved"
     +" parents, those captured in battle or blood feud. All could"
-    +" become slaves.", 
+    +" become slaves.",
        "Their work was vital to the working of our land, growing"
     +" food, building works and, of course, making the %^RED%^blood"
     +" gift %^RESET%^to the %^ORANGE%^Gods%^RESET%^"}) );
@@ -219,10 +219,10 @@ set_responses(){
     +" father of the Gods, has the task of carrying the sun on its"
     +" journey across the sky each day. The %^RED%^blood gift"
     +" %^RESET%^we gave to him gave him strength to continue with"
-    +" his task", 
+    +" his task",
        "I wonder how he has continued to manage it since."}),
     "puzzled" );
-  set_response(({"lift the curse", "lift curse", "lift your curse"}), 
+  set_response(({"lift the curse", "lift curse", "lift your curse"}),
     ({"The curse is so powerful, strong enough to seal the fates of"
     +" an entire nation. I can only think it is a punishment from"
     +" the %^ORANGE%^Gods%^RESET%^. But surely this curse did not"
@@ -231,7 +231,7 @@ set_responses(){
     +" %^CYAN%^downfall of our people%^RESET%^. If you can find any"
     +" way to contact one of our %^ORANGE%^Gods%^RESET%^, perhaps a"
     +" way might be found to lift the curse."}) );
-  set_response(({"hero of the flame", "inami", "hero of fire"}), 
+  set_response(({"hero of the flame", "inami", "hero of fire"}),
     ({"Inami was the hunter who tracked the sun across the sky to"
     +" its nighttime resting place, and there stole from it the"
     +" secret of fire. He had but nine fingers, having burned one of"
@@ -249,7 +249,7 @@ set_responses(){
     +" once was?",  "smile", "Told Jontar that Quali Lives"}) );
   set_response(({"quali", "jungle spirit"}), ({"Quali is the life"
            +" of the jungle. He lives among the trees. Perhaps he is"
-    +" the trees.", 
+    +" the trees.",
        "It is interesting that the Jungle has remained since the"
     +" %^CYAN%^downfall of my people%^RESET%^. Perhaps he is still"
     +" out there, somewhere."}) );
@@ -262,9 +262,9 @@ set_responses(){
     +" the lives of the %^CYAN%^Tecqumin%^RESET%^, when he whispered"
     +" to %^MAGENTA%^Epithon%^RESET%^ of the creature whose name I"
     +" will not speak. Even after his plans were cast down, and the"
-    +" ceature imprisoned, he made attempts to free the thing.", 
+    +" ceature imprisoned, he made attempts to free the thing.",
      "I wonder what he is up to now." }) );
-  set_response(({"creature imprisoned", "plans cast down", 
+  set_response(({"creature imprisoned", "plans cast down",
                 "plans were cast down", "creature was imprisoned"}),
    ({"The downfall of the %^CYAN%^Tecqumin%^RESET%^ people came when"
     +" %^ORANGE%^great spirits%^RESET%^ from far away came to wreak"
@@ -277,7 +277,7 @@ set_responses(){
   set_response(({"jetstone" }),
     ({"Taluc's jetstone is was about the size of a small gourd, and"
     +" it was carved with the face of a jaguar, and inscribed with"
-    +" many strange symbols."}),"thoughtful", 
+    +" many strange symbols."}),"thoughtful",
       ({"Heard of the Jetstone"}) );
   set_response(({"epithon", "prince" }), ({"Prince Epithon was the"
     +" ruler of the %^CYAN%^Tecqumin%^RESET%^ at the end of our days"
@@ -314,7 +314,7 @@ void chant2(object speaker){
 }
 
 void chant3(){
-  force_me("say Yes, yes of course it is. And the chant for a " 
+  force_me("say Yes, yes of course it is. And the chant for a "
              + day(time())+" in " + month(time()) +" is:");
   call_out("chant4", 2, 0);
 }
@@ -333,7 +333,7 @@ void chant4(int count){
 void quali_unwell(){
   if (!asking_about_quali) return;
   force_me("say Quali is not His old tranquil self?"
-   +" Then tell me, how is he, what is he like?");  
+   +" Then tell me, how is he, what is he like?");
 }
 
 void die(object ob) {
@@ -350,7 +350,7 @@ void die(object ob) {
       slayer = attackers[i];
       if (objectp(slayer) && slayer->is_player()){
         slayer_name = slayer->query_name();
-        "/daemon/tecqumin_d.c"->kill_jontar(slayer_name);
+        "/d/atoyatl/tecqumin_d.c"->kill_jontar(slayer_name);
       }
     }
   }
@@ -362,9 +362,9 @@ void die(object ob) {
    string *currs;
 
    message("other_action", "%^RED%^"+query_cap_name()+
-     " swirls, loses form and is banished%^RESET%^", 
+     " swirls, loses form and is banished%^RESET%^",
      environment(this_object()), ({ this_object()}));
-   message("other_action", "%^BLUE%^A smeary residue is left behind", 
+   message("other_action", "%^BLUE%^A smeary residue is left behind",
      environment(this_object()), ({ this_object()}));
    tmp = ETO;
    tmp_size=sizeof(currs=query_currencies());
@@ -390,11 +390,11 @@ void die(object ob) {
       if(TO->query_owner() && objectp(TO->query_owner()))
          (TO->query_owner())->remove_pet(TO);
 
-        if(TO->query_property("death effects")) 
+        if(TO->query_property("death effects"))
         {
                 "/daemon/death_effects_d"->get_death_effect(TO);
         }
-   remove(); 
+   remove();
 }*/
 
 void gasp(object speaker){
@@ -508,7 +508,7 @@ void reply_func(string msg, object speaker){
   report("The speaker HAS discovered the madness of Quali");
   msg = "/daemon/stripper_d"->stripcolors(msg);
   msg = lower_case(msg);
-  if ( interact("quali", msg) || interact ("jungle spirit", msg) 
+  if ( interact("quali", msg) || interact ("jungle spirit", msg)
        || interact("spirit of the jungle", msg))
   {
     if (interact("kill", msg)||interact("slay", msg)||
@@ -527,7 +527,7 @@ void reply_func(string msg, object speaker){
     asking_about_madness = 0;
     return;
     }
-    if (asking_about_madness == 1 
+    if (asking_about_madness == 1
        || interact(" mad", msg)|| interact("maddened", msg)
        ||interact("madness", msg) || interact("crazy", msg)
        ||interact("crazed", msg) || interact("raving", msg)
@@ -539,7 +539,7 @@ void reply_func(string msg, object speaker){
       force_me("emote raises an eyebrow");
       force_me("say Maddened, you say? I am not surprised. I had"
         +" thought Him completely vanquished during the destruction"
-  
+
         +" that accompanied the %^CYAN%^downfall of my people"
         +"%^RESET%^ But, if He lives, perhaps there may be a way to"
         +" return His senses to Him.");
@@ -559,7 +559,7 @@ void reply_func(string msg, object speaker){
     ||interact("insane", msg) ||interact("insanity", msg)
     ||interact("lunatic", msg)||interact(" loon", msg)
     ||interact("mind is lost", msg) || interact("agony", msg)
-    ||interact("cursed", msg) || interact ("suffering", msg)){ 
+    ||interact("cursed", msg) || interact ("suffering", msg)){
     force_me("say Who is maddened?");
     asking_about_madness = 1;
     return;
@@ -601,7 +601,7 @@ void congratulate_on_strengthened_seal2(object ob){
   k = new (OBJ + "pyramidkey");
   k->move(TO);
   tell_object(ob, query_name() + " gives you a " + k->query_name());
-  tell_room( query_name() +  " gives something to " + ob->QCN);  
+  tell_room( query_name() +  " gives something to " + ob->QCN);
   k->move(ob);
 //  force_me("give crystal  to " + ob->query_name());
 }
@@ -778,7 +778,7 @@ int query_day_number(){
   case "Springstime":
     mon = 2;
     break;
-  case "Plantingdays": 
+  case "Plantingdays":
     mon = 3;
     break;
   case "Sundays":

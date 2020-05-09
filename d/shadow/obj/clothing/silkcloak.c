@@ -56,7 +56,7 @@ void create(){
    set_limbs(({"neck"}));
    set_ac(0);
    set_property("enchantment",2);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_value(500+random(3)*500);
    set_wear((: TO,"wear_func" :));
    set_remove((: TO,"remove_func" :));

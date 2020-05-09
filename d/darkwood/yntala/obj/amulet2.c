@@ -21,7 +21,7 @@ void create(){
         set_type("clothing");
         set_limbs(({"neck"}));
         set_property("enchantment",2);
-        set_item_bonus("magic resistance",5);
+        set_item_bonus("magic resistance",1);
         set_size(-1);
         set_wear((:TO,"wearme":));
 }

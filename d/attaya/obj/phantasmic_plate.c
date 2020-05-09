@@ -52,7 +52,7 @@ void create(){
    set_size(-1);
    set_property("enchantment",5);
    set_property("no alter",1);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_item_bonus("fortitude",3);
    set_item_bonus("reflex",3);
    set_item_bonus("will",3);

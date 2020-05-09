@@ -28,7 +28,7 @@ OLI
 	set_remove((:this_object(),"remove_me" :));
 	set_type("ring");
 	set_limbs(({"neck"}));
-	set_item_bonus("magic resistance",10);
+	set_item_bonus("magic resistance",1);
 	set_heart_beat(1);
 }
 

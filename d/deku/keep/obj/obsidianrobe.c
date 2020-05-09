@@ -59,7 +59,7 @@ void create()
     set_wear((:TO,"wear_robe":));
     set_remove("%^BOLD%^%^BLUE%^You remove the perfectly "+
 	"fitted robe%^BOLD%^%^BLUE%^.%^RESET%^");
-    set_item_bonus("magic resistance", 15);
+    set_item_bonus("magic resistance", 1);
     set_struck((:TO,"strike_func":));
     x = random(4);
     set_max_internal_encumbrance(10);

@@ -31,13 +31,13 @@ int wear_func(){
    if((string)ETO->query_diety() == "lord shadow"){
       tell_object(ETO,"%^BOLD%^%^BLACK%^Sliding into the inky robes, you feel oddly soothed.%^RESET%^");
       tell_room(EETO,"%^MAGENTA%^"+ETOQCN+" slides into "+ETO->QP+" inky black robes.  Faces move across the surface of the robe, screaming out silently in sheer terror.%^RESET%^",ETO);
-      set_item_bonus("magic resistance",10);
+      set_item_bonus("magic resistance",1);
       set_item_bonus("sight bonus",5);
       return 1;
    }else{
       tell_room(EETO,"%^MAGENTA%^"+ETOQCN+" slips in a inky black robe.%^RESET%^",ETO);
       tell_object(ETO,"%^MAGENTA%^You slip on the inky black robe, you can almost feel the terror that is woven into the cloth.%^RESET%^");
-      set_item_bonus("magic resistance",5);
+      set_item_bonus("magic resistance",1);
       set_item_bonus("sight bonus",2);
       return 1;
    }

@@ -21,7 +21,7 @@ void create(){
      TO->remove_property("enchantment");
      TO->set_property("enchantment",5);
    }
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_item_bonus("athletics",5);
    set_item_bonus("attack bonus",4);
 	set_wear((:TO,"wear_func":));

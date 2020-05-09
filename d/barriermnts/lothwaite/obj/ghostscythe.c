@@ -89,7 +89,7 @@ int wield_func(string str) {
 			"a grim look of determination.",ETO);
    set_item_bonus("attack bonus",0);
    set_item_bonus("damage bonus",0);
-   set_item_bonus("magic resistance",-5);
+   set_item_bonus("magic resistance",-1);
 			return 1;
 	}
 }

@@ -823,7 +823,7 @@ void make_random(object obj) {
             	obj->set_item_bonus("sight bonus",1);
             	break;
             case 94:
-            	obj->set_item_bonus("magic resistance",5);
+            	obj->set_item_bonus("magic resistance",1);
             	break;
             case 95:
             	obj->set_item_bonus("spell resistance",5);
@@ -856,7 +856,7 @@ void make_random(object obj) {
             	obj->set_item_bonus("sight bonus",1);
             	break;
             case 88..89:
-            	obj->set_item_bonus("magic resistance",5);
+            	obj->set_item_bonus("magic resistance",1);
             	break;
             case 90..91:
             	obj->set_item_bonus("spell resistance",5);
@@ -889,7 +889,7 @@ void make_random(object obj) {
             	obj->set_item_bonus("sight bonus",1);
             	break;
             case 70..74:
-            	obj->set_item_bonus("magic resistance",5);
+            	obj->set_item_bonus("magic resistance",1);
             	break;
             case 75..79:
             	obj->set_item_bonus("spell resistance",5);
@@ -922,7 +922,7 @@ void make_random(object obj) {
             	obj->set_item_bonus("sight bonus",random(2)+1);
             	break;
             case 40..49:
-            	obj->set_item_bonus("magic resistance",random(6)+5);
+            	obj->set_item_bonus("magic resistance",random(6)+1);
             	break;
             case 50..59:
             	obj->set_item_bonus("spell resistance",random(6)+5);
@@ -958,7 +958,7 @@ void make_random(object obj) {
             	obj->set_item_bonus("sight bonus",random(2)+2);
             	break;
             case 40..49:
-            	obj->set_item_bonus("magic resistance",random(6)+10);
+            	obj->set_item_bonus("magic resistance",random(6)+1);
             	break;
             case 50..59:
             	obj->set_item_bonus("spell resistance",random(6)+10);
@@ -992,7 +992,7 @@ void make_random(object obj) {
             	obj->set_item_bonus("sight bonus",random(2)+2);
             	break;
             case 40..49:
-            	obj->set_item_bonus("magic resistance",random(6)+10);
+            	obj->set_item_bonus("magic resistance",random(6)+1);
             	break;
             case 50..59:
             	obj->set_item_bonus("spell resistance",random(6)+10);

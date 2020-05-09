@@ -29,7 +29,7 @@ BRUENOR
     );
     set("value",250);
     set_property("enchantment",4);
-    set_item_bonus("magic resistance",10);
+    set_item_bonus("magic resistance",1);
     set_item_bonus("spell damage resistance",25);
     set_wield((:TO, "extra_wield":));
     set_unwield((:TO, "extra_unwield":));

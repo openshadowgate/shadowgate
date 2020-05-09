@@ -40,7 +40,7 @@ void create()
     set_size(-1);
     
     set_item_bonus("dexterity",6);
-    set_item_bonus("magic resistance",50);
+    set_item_bonus("magic resistance",1);
 
     set_remove((:TO,"remove_func":));
     set_struck((:TO,"strike_func":));

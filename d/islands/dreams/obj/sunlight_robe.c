@@ -37,7 +37,7 @@ if((string)ETO->query_diety() == "jarmila") {
       	tell_room(environment(ETO),"%^YELLOW%^"+ETO->QCN+""+
       		" slides into "+ETO->QP+" golden robe, the "+
                   "cloth glowing with a bright radiance.",ETO);
-				set_item_bonus("magic resistance",10);
+				set_item_bonus("magic resistance",1);
                         set_item_bonus("sight bonus",5);
 
       return 1;
@@ -46,7 +46,7 @@ if((string)ETO->query_diety() == "jarmila") {
 			" a golden robe.",ETO);
 		tell_object(ETO,"%^ORANGE%^You slip on the golden"+
 			" robe, a slight wamrth seeps into your skin.%^RESET%^");
-				set_item_bonus("magic resistance",5);
+				set_item_bonus("magic resistance",1);
                         set_item_bonus("sight bonus",2);
 	return 1;
 	}

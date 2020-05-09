@@ -20,7 +20,7 @@ void create(){
     set_wear((: this_object(),"wearit" :));
     set_remove((:this_object(),"removeit" :));
     set_type("clothing");
-    set_item_bonus("magic resistance",25);
+    set_item_bonus("magic resistance",2);
     set_limbs(({"neck"}));
 }
  

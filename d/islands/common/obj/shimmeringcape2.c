@@ -22,7 +22,7 @@ void create(){
      TO->remove_property("enchantment");
      TO->set_property("enchantment",5);
    }
-   set_item_bonus("magic resistance",15);
+   set_item_bonus("magic resistance",1);
    set_item_bonus("damage resistance",5);
    set_item_bonus("fortitude",2);
    set_value(10000);

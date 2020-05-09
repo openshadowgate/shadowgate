@@ -35,7 +35,7 @@ void create(){
      TO->remove_property("enchantment");
      TO->set_property("enchantment",3);
    }
-      set_item_bonus("magic resistance",15);
+      set_item_bonus("magic resistance",1);
 	set_wear((:TO,"wear_func":));
 	set_remove((:TO,"remove_func":));
 	set_struck((:TO,"strike_func":));

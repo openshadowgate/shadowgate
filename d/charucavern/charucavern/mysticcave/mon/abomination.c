@@ -275,7 +275,7 @@ void add_bonus(object ob)
             ob->set_item_bonus(!random(2) ? "attack bonus" : "damage bonus", 2);
             break;
         case 9:
-            ob->set_item_bonus(!random(2) ? "magic resistance" : "spell penetration", 10);
+            ob->set_item_bonus(!random(2) ? "magic resistance" : "spell penetration", 1);
             break;
     }
     ob->remove_property("enchantment");

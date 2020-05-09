@@ -29,7 +29,7 @@ void create(){
    set_wear((:TO,"extra_wear":));
    set_ac(6);
    set_property("enchantment",3);
-   set_item_bonus("magic resistance",20);
+   set_item_bonus("magic resistance",2);
 }
 
 int extra_wear(){

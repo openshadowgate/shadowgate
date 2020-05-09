@@ -36,7 +36,7 @@ void create(){
 		" to be open to questions.");
 	set_property("lore",30);
 	set_property("enchantment",4);
-      set_item_bonus("magic resistance",15);
+      set_item_bonus("magic resistance",1);
 	set_hit((:TO, "hitme":));
 	set_value(2000);
 	set_wield((:TO,"wield_func":));

@@ -24,7 +24,7 @@ void create(){
 		"in magic themselves. -- Sallonir deldor, Bard of Torm.");
 		set_property("lore",20);
         set_property("enchantment",3);
-		set_item_bonus("magic resistance",15);
+		set_item_bonus("magic resistance",1);
         set_weight(5);
         set_value(900);
         set_type("clothing");

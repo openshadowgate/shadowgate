@@ -22,5 +22,5 @@ void create() {
     set_size(2);
     set_value(500);
     set_property("enchantment", 3);
-    set_item_bonus("magic resistance",10);
+    set_item_bonus("magic resistance",1);
 }

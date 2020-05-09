@@ -18,7 +18,7 @@ void create() {
      TO->remove_property("enchantment");
      TO->set_property("enchantment",5);
    }
-//   set_item_bonus("magic resistance",25);
+//   set_item_bonus("magic resistance",2);
    set_item_bonus("spell damage resistance",25);
    set_item_bonus("constitution",2);
 //   set_item_bonus("shieldMiss",35);

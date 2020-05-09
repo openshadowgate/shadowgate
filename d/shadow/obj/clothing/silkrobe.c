@@ -31,7 +31,7 @@ void create() {
    set_type("clothing");
    set_limbs( ({"torso"}) );
    set_ac(1);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_property("enchantment",2);
    set_value(100+random(3)*100);
    set_wear( (: TO,"wear_func" :) );

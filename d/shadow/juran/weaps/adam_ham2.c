@@ -55,7 +55,7 @@ int wield_func(string str){
 			tell_room(environment(ETO),"%^BOLD%^The runes "+
 				"on "+ETO->QCN+"'s hammer flash with a "+
 				"bright white light briefly.",ETO);
-			set_item_bonus("magic resistance",15);
+			set_item_bonus("magic resistance",1);
 			return 1;
 
 		case 2: case 5: case 8:
@@ -64,7 +64,7 @@ int wield_func(string str){
 			tell_room(environment(ETO),"%^BOLD%^%^YELLOW%^The runes "+
 				"on "+ETO->QCN+"'s hammer flash with a "+
 				"yellow light briefly.",ETO);
-			set_item_bonus("magic resistance",5);
+			set_item_bonus("magic resistance",1);
 			return 1;
 
 		case 3: case 6: case 9:
@@ -73,7 +73,7 @@ int wield_func(string str){
 			tell_room(environment(ETO),"%^BOLD%^%^RED%^The runes "+
 				"on "+ETO->QCN+"'s hammer glow an ominous "+
 				"crimson.",ETO);
-			set_item_bonus("magic resistance",-10);
+			set_item_bonus("magic resistance",-1);
 			return 1;
 
 		default:

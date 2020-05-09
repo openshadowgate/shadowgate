@@ -45,7 +45,7 @@ void create(){
      TO->remove_property("enchantment");
      TO->set_property("enchantment",5);
    }
-      set_item_bonus("magic resistance",25);
+      set_item_bonus("magic resistance",2);
       set_item_bonus("sight bonus",2);
      set_type("clothing");
      set_limbs(({"torso"}));

@@ -7,7 +7,7 @@
 #include <security.h>
 #include <daemons.h>
 #define PATHFINDER "/daemon/pathfinder_d.c"
-#define SAVE_FILE "/daemon/save/destinations" 
+#define SAVE_FILE "/daemon/save/destinations"
 #define ERROR_LOG "Misc_Errors"
 #define SUCC_LOG "destinations_log"
 
@@ -39,7 +39,7 @@ void create(){
   ::create();
   ... BLAH...
   DEST->generate_waystations(file_name(TO),2, 3);
-  // this would generate 2 stages of waystations radiating from the 
+  // this would generate 2 stages of waystations radiating from the
   // current room.  Each waystation would be 3 stages further away than
   // the last. NOTE: the code to generate waystations can get
   // quite processor intensive and cause lag pockets if you set
@@ -48,12 +48,12 @@ void create(){
   // about 15.
   // However, you can use the 'generate waystations' function as a one-off
   // and make a note of which rooms it sets waystations in, to save you
-  // the bother of mapping it all out. The code is not perfect though, 
+  // the bother of mapping it all out. The code is not perfect though,
   // and will not necessarily set you the 'best' or shortest routes for
   // mobs to follow, so manually mapping it is still preferable.
   // Another possibility is to manually map in a few 'key' waystations
   // (eg along a main path that you want mobs to follow), and then
-  // use the 'generate waystations' function to work out all the 
+  // use the 'generate waystations' function to work out all the
   // more fiddly 'fill in' waystation rooms.
 
 }
@@ -77,37 +77,37 @@ void create(){
     seteuid(getuid());
 }
 
-void clean_up() { 
+void clean_up() {
   // This function added to prevent data being removed by the inherited
   // clean_up function.
-  return; 
-} 
+  return;
+}
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", str);
+
 }
 
 
 void add_waystation(string destination, string room, int stage){
   /* add_waytstation adds a waystation for a named room and a named
      destination. It takes three arguments:
-  
+
   string destination - the filename of the destination room, without a
-                       ".c" at the end, exactly as returned by 
+                       ".c" at the end, exactly as returned by
                        file_name(room)
-  string room        - the filename of the room that the waystation is to 
+  string room        - the filename of the room that the waystation is to
                        be added to, same format as above.
-  int stage          - the 'stage' number of the waystation (ie how many 
-                       stages of five steps this waystation is from the 
+  int stage          - the 'stage' number of the waystation (ie how many
+                       stages of five steps this waystation is from the
                        destination. Note that the destination room must
                        always be set to stage '1', the waystations that
                        are five 'steps' away from it are stage '2', those
                        that are ten 'steps' away are stage '3', etc.
   */
-  
+
   mapping __waystations = ([]);
 
-  if (__destinations[destination] ==0){  
+  if (__destinations[destination] ==0){
     __destinations += ([destination : __waystations]);
   } else{
     __waystations = __destinations[destination];
@@ -143,12 +143,12 @@ mapping query_destinations(){
 int query_waystation(string destination, string room){
   /* returns the 'stage' number for the room named, in respect of the
      destination named. Takes two arguments:
- 
+
   string destination  - the filename of the destination room, without a
                         ".c" at the end.
-  string room         - the filename of the room to be queried, without a 
+  string room         - the filename of the room to be queried, without a
                         ".c" at the end.
- NOTE: returns '0' if no waystation is set for this room in respect of the 
+ NOTE: returns '0' if no waystation is set for this room in respect of the
  named destination   */
 
   mapping __waystations;
@@ -193,7 +193,7 @@ varargs object * add_waystations(object * rooms, object room, string destination
   // looks for all the rooms that are a set number of steps from the
   // current room, and adds a waypoint for each of them, with the stage
   // number passed. The number of steps is set by the 'spacing' variable.
-  // Note: NEVER set a stage number less than 1. 1 should be the number 
+  // Note: NEVER set a stage number less than 1. 1 should be the number
   // for the final destination. All others should go higher as the
   // waystations get farther from the destination.
 
@@ -208,7 +208,7 @@ varargs object * add_waystations(object * rooms, object room, string destination
   if(!objectp(room)){
     return pot_waystations;
   }
-  if (!arrayp(rooms)) rooms = ({});  
+  if (!arrayp(rooms)) rooms = ({});
   if (member_array(room, rooms)==-1){
     rooms += ({room});
   }
@@ -218,11 +218,11 @@ varargs object * add_waystations(object * rooms, object room, string destination
 
   prevcount = 0;
   count = 1;
-  
+
   report("About to cycle through spaces");
   for (i=0;i<spacing;i++){
     report ("%^CYAN%^Stage " + i);
-    if (count-prevcount<1){ 
+    if (count-prevcount<1){
     // This means that no extra rooms were added in the last iteration,
     // so the loop ceases
       report("Count: " + count + " Prevcount: " + prevcount + " Therefore ending");
@@ -241,19 +241,19 @@ varargs object * add_waystations(object * rooms, object room, string destination
           //check each exit to see if it leads to a valid new room,
           // which does not already exist in the rooms array.
           if (file_exists(rooms[j]->query_exit(exits[k])+".c")){
-            if (sizeof(nogo) == 0 || member_array (rooms[j]->query_exit(exits[k]), nogo) ==-1){ 
+            if (sizeof(nogo) == 0 || member_array (rooms[j]->query_exit(exits[k]), nogo) ==-1){
               if (!catch(rooms[j]->query_exit(exits[k])->query_short()))
               {
                 temproom =find_object_or_load(rooms[j]->query_exit(exits[k]));
-              } else 
+              } else
               {
                 report ("Problem loading room: " + rooms[j]);
               }
               if (objectp(temproom)){
                 if (member_array(temproom, rooms, 0)==-1){
                   rooms += ({temproom});
-                } 
-              } else 
+                }
+              } else
               {
                 report ("%^BOLD%^%^GREEN%^WEIRD%^RESET%^ Problem loading room: " + rooms[j]);
               }
@@ -263,10 +263,10 @@ varargs object * add_waystations(object * rooms, object room, string destination
       }
     }
     prevcount = count;
-    count = sizeof(rooms);  
+    count = sizeof(rooms);
     report("Finished cycle. On to next... Prevcount: " + prevcount + " Count: " + count );
   }
-  
+
   // After a number of iterations equal to the 'spacing' argument, the
   // rooms that are precisely that many steps away from
   // the starting room will be those beteeen rooms[prevcount] and room
@@ -277,15 +277,15 @@ varargs object * add_waystations(object * rooms, object room, string destination
     report("%^BOLD%^%^RED%^Size of pot_waystations <1). Exiting add_waystations");
     SAVE();
     return pot_waystations;
-  } 
- 
+  }
+
   for (i=0;i<sizeof(pot_waystations);i++){
     temproom = pot_waystations[i];
     near_waystation =PATHFINDER->find_waystation(temproom,destination, spacing-1);
     if (!objectp(near_waystation)){
       report("Adding waystation to " + file_name(temproom));
       add_waystation(destination, file_name(temproom), stage);
-    } else 
+    } else
      {
       report("Not adding waystation to " + file_name(temproom) + " Because it is near waystation: " + file_name(near_waystation));
     }
@@ -330,7 +330,7 @@ varargs void generate_waystations(string destination, int stages, int spacing, s
   }
   dest_room = find_object_or_load(destination);
   rooms_checked = ({});
-  latest_rooms = ({dest_room});  
+  latest_rooms = ({dest_room});
   next_rooms = ({});
 
   if (destination ==0){
@@ -350,18 +350,18 @@ varargs void generate_waystations(string destination, int stages, int spacing, s
     nogo = ({});
   }
 
-  
+
   if (stages<1){
     report("Stages set less than zero");
     return;
   }
-  report("Adding waystation for destination");  
+  report("Adding waystation for destination");
   add_waystation(destination, destination, 1); //  The destination always
                                                // has a waystation setting
                                                // of 1
 
- 
-  // Next add in the waystations around it, to however many stages you are 
+
+  // Next add in the waystations around it, to however many stages you are
   // looking for
   report("About to addwaystations");
   for (i=0;i<stages;i++){
@@ -375,7 +375,7 @@ varargs void generate_waystations(string destination, int stages, int spacing, s
         report("%^BOLD%^%^CYAN%^j = " + j + " About to do add_waystations");
         next_rooms += add_waystations(rooms_checked, latest_rooms[j], destination, i+2, spacing, nogo);
         report("Finished doing add_waystations");
-      } else 
+      } else
       {
          report("%^BOLD%^%^MAGENTA%^" + file_name(latest_rooms[j]) + " IS NOT a waystation for " + destination + " continuing...");
       }
@@ -391,7 +391,7 @@ varargs void generate_waystations(string destination, int stages, int spacing, s
 
 void generate_maze_waystations(string destination, int stages, int spacing){
 
-//Version of generate_waystations for when the target room is part of a maze on the maze daemon. 
+//Version of generate_waystations for when the target room is part of a maze on the maze daemon.
 
 /*Adds in waystations for the named destination, for the number of stages named. See comments at top of file on how to use it. Note that setting 'stages' above 3 or 4 is likely to cause lag pockets */
 
@@ -400,7 +400,7 @@ void generate_maze_waystations(string destination, int stages, int spacing){
 
   dest_room = destination;
   rooms_checked = ({});
-  latest_rooms = ({dest_room});  
+  latest_rooms = ({dest_room});
   next_rooms = ({});
 
 
@@ -417,17 +417,17 @@ void generate_maze_waystations(string destination, int stages, int spacing){
   if (!objectp(dest_room)){
     return;
   }
-  
+
   if (stages<1){
     return;
   }
-  
+
   add_waystation(destination, destination, 1); //  The destination always
                                                // has a waystation setting
                                                // of 1
 
- 
-  // Next add in the waystations around it, to however many stages you are 
+
+  // Next add in the waystations around it, to however many stages you are
   // looking for
   for (i=0;i<stages;i++){
     if (sizeof(latest_rooms)<1){
@@ -459,5 +459,3 @@ void set_waystations(string destination, mapping map){
   __destinations[destination] = map;
   __timings[destination] = time();
 }
-
-

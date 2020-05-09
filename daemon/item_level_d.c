@@ -235,7 +235,7 @@ varargs int get_bonus_value(string bonus_name, string num, object item, object t
     case "sight bonus":                     value = num * 8;            break;
     case "max hp bonus":                     value = num * 8;            break;
 
-    case "magic resistance":                value = num * 1.5;            break;
+    case "magic resistance":                value = num * 9;            break;
 
     // stats
     case "strength":
@@ -299,7 +299,7 @@ varargs int get_bonus_value(string bonus_name, string num, object item, object t
     case "empowered":
     case "caster level":                    value = num * 15;       break;
 
-    case "spell penetration":               value = num * 1.5;      break;
+    case "spell penetration":               value = num * 15;      break;
 
 
     // spell slots

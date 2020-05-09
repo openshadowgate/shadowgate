@@ -88,7 +88,7 @@
                    +"a%^GREEN%^g%^BOLD%^%^GREEN%^e%^RESET%^%^GREEN%^d%^RESET%^"
 #define CAMOUFLAGING "%^GREEN%^c%^ORANGE%^a%^GREEN%^mou%^BOLD%^%^GREEN%^f%^RESET%^%^GREEN%^"\
                    +"l%^ORANGE%^a%^GREEN%^g%^BOLD%^%^GREEN%^i%^RESET%^%^GREEN%^ng%^RESET%^"
-#define HEXER_D "/daemon/hexer_d.c"
+#define HEXER_D "/d/atoyatl/hexer_d.c"
 #define RAM 0
 #define WAIT 1
 #define SWING 2

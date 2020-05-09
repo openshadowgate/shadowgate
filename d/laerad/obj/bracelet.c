@@ -43,7 +43,7 @@ void create(){
     	set_type("clothing");
     	set_ac(0);
     	set_property("enchantment",2);
-	set_item_bonus("magic resistance",20);
+	set_item_bonus("magic resistance",2);
 	set_limbs(({"right arm","left arm"}));
     	set_weight(5);
     	set_value(3000);

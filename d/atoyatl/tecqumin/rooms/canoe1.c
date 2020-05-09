@@ -9,11 +9,11 @@
 #define HARD_RIGHT 3
 #define OBS_INTERVAL 5
 #define PATHFINDER "/daemon/pathfinder_d.c"
-#define CANOE_D "/daemon/canoe_d"
+#define CANOE_D "/d/atoyatl/canoe_d"
 
 inherit ROOM;
 
-// This room is designed to give players a white water ride in a canoe. 
+// This room is designed to give players a white water ride in a canoe.
 // It's all controlled by a separate paddle object (../obj/paddle.c)
 // That the players can use to control the vessel
 
@@ -72,8 +72,8 @@ void setup_river(){
   int i, j, bend;
   paused = 0;
   pause_count = 0;
-  set_items( ([ 
-   
+  set_items( ([
+
   ]) );
   //log = "";
   path = ({0});
@@ -82,7 +82,7 @@ void setup_river(){
   river_speed = random (5)+1;
   progress = 0;
   capsized = 0;
-  river_length = 13 + random (6); 
+  river_length = 13 + random (6);
   for (i=1;i<river_length;i++){
     river_speed += random (3)-1;
     if (river_speed>5){
@@ -127,7 +127,7 @@ void setup_river(){
       }
       path += ({direction});
       break;
-    case HARD_RIGHT: 
+    case HARD_RIGHT:
       direction +=3;
       if (direction>15){
         direction -= 16;
@@ -190,7 +190,7 @@ void setup_river(){
   obstruction_placements = ({});
   generate_obstructions();
   path += ({direction, direction, direction, direction, direction, direction});
-  speed += ({river_speed, river_speed,river_speed}); 
+  speed += ({river_speed, river_speed,river_speed});
   obstructions += ({"none", "none", "is an island "});
   obstruction_placements += ({3, 3, 3});
   path += ({direction, direction, direction, direction, direction, direction, direction});
@@ -286,13 +286,13 @@ void set_obstruction(int progress, int position, int type){
   case 5:
     obs = "a sandbar ";
     break;
-  case 6: 
+  case 6:
     obs = "is an island ";
     break;
   case 7:
     obs = "is a waterfall ";
     break;
-  default: 
+  default:
     obs = "none";
     break;
   }
@@ -310,7 +310,7 @@ void set_paused(int p){
 }
 
 int pause(string str){
-  if (paused % 2 ==1) 
+  if (paused % 2 ==1)
   {
     tell_room(TO, "The canoe ride is already paused");
     return 1;
@@ -333,7 +333,7 @@ int pause(string str){
 }
 
 int resume(string str){
-  if (paused % 2 ==0) 
+  if (paused % 2 ==0)
   {
     tell_room(TO, "The canoe ride isn't paused");
     return 1;
@@ -401,7 +401,7 @@ void reset(){
       {
         flag = 1;
         break;
-      } 
+      }
     }
   }
   if (flag == 0)
@@ -432,7 +432,7 @@ varargs int * get_path_between_points(int start_point, int end_point){
   {
     line = path[i];
     result += ({line});
-  }  
+  }
   return result;
 }
 
@@ -441,15 +441,15 @@ varargs string * draw_river(int start_point, int end_point){
   int i, p, * temp_path;
   if (sizeof(path)<1) return ({"There is no river. Path has not been prepared"});
   if (!intp(start_point) || start_point<0) start_point = 0;
-  if (!intp(end_point) || end_point > sizeof(path)-1) 
+  if (!intp(end_point) || end_point > sizeof(path)-1)
   {
     end_point = sizeof(path)-1;
   }
   result = ({});
   temp_path = get_path_between_points(start_point, end_point);
-  "/daemon/canoe_d"->set_path(temp_path);
-  "/daemon/canoe_d"->build_map();
-  result = "/daemon/canoe_d"->query_display();
+  "/d/atoyatl/canoe_d"->set_path(temp_path);
+  "/d/atoyatl/canoe_d"->build_map();
+  result = "/d/atoyatl/canoe_d"->query_display();
   return result;
 }
 
@@ -461,7 +461,7 @@ string get_river_position(int pos){
   case 1:
     return "close to the left bank";
     break;
-  case 2: 
+  case 2:
     return "slightly to the left of the centre of the river";
     break;
   case 3:
@@ -475,7 +475,7 @@ string get_river_position(int pos){
     break;
   case 6:
     return "right beside the right bank";
-    break;    
+    break;
   }
 }
 
@@ -484,7 +484,7 @@ string get_ob_position(int ob_dist){
   if (ob_dist>sizeof(obstruction_placements)){
     return "The obstruction seems to be placed beyond"
           +" the end of the map. Very strange. The"
-          +" map does not go as far as position " 
+          +" map does not go as far as position "
           + ob_dist;
   }
   placement =  obstruction_placements[ob_dist];
@@ -497,15 +497,15 @@ string get_dist_string(int distance){
     return "ten yards";
   case 2:
     return "twenty yards";
-  case 3: 
+  case 3:
     return "thirty yards";
-  case 4: 
+  case 4:
     return "forty yards";
-  case 5: 
+  case 5:
     return "fifty yards";
-  case 6: 
+  case 6:
     return "sixty yards";
-  case 7: 
+  case 7:
     return "seventy yards";
   case 8:
     return "eighty yards";
@@ -535,9 +535,9 @@ mapping query_bends(){
     if (i >= river_length - 1){
       result += ([ i: "The river empties into a small lake "]);
       return result;
-    }    
+    }
 /*    if (prev_dir ==path[i]){
-      result += "The river carries straight on " 
+      result += "The river carries straight on "
               + get_dist_string(i-progress) +" ahead.";
     }
 */
@@ -545,7 +545,7 @@ mapping query_bends(){
     // Add in the text for a right turn
     if ((!(prev_dir==0&&path[i]==15) &&prev_dir < path[i] )
                      ||(prev_dir==15 && path[i]==0)){
- //     log += "Found a right turn at point " + i 
+ //     log += "Found a right turn at point " + i
  //            + ". prev_dir = " + prev_dir + ", path[i] = " + path[i];
       bend_counter ++;
       prev_dir = path[i];
@@ -559,13 +559,13 @@ mapping query_bends(){
         }
         if ((!(prev_dir==0&&path[j]==15) && prev_dir < path[j])
                      ||(prev_dir==15 && path[j]==0)){
-   //       log += "Found a right turn at point " + j 
+   //       log += "Found a right turn at point " + j
    //          + ". prev_dir = " + prev_dir + ", path[j] = " + path[j];
           bend_counter++;
         }
         if ((!(prev_dir==15 && path[j]==0) && prev_dir > path[j])
                      ||(prev_dir==0 && path[j]==15)){
-  //        log += "Found a left turn (dogleg) at point " + j 
+  //        log += "Found a left turn (dogleg) at point " + j
   //         + ". prev_dir = " + prev_dir + ", path[j] = " +path[j]+"\n";
           result += ([i:"The river bends right and then left "]);
           dog_leg = 1;
@@ -576,7 +576,7 @@ mapping query_bends(){
         prev_dir = path[j];
       }
       if (dog_leg==0){
- //     log += "No dogleg found. bend_counter = " + bend_counter + "\n"; 
+ //     log += "No dogleg found. bend_counter = " + bend_counter + "\n";
         switch (bend_counter){
         case 1:
           result += ([i:"The river bends slightly to the right "]);
@@ -593,11 +593,11 @@ mapping query_bends(){
         }
       }
       i=j-1;
-    } 
+    }
     // Add in the text for a left turn
     if ((!(prev_dir== 15 && path[i]==0)&&prev_dir>path[i] )
                   ||(prev_dir==0 && path[i]==15)){
-  //    log += "Found a left turn at point " + i 
+  //    log += "Found a left turn at point " + i
   //           + ". prev_dir = " + prev_dir + ", path[i] = " + path[i];
 
       bend_counter --;
@@ -612,13 +612,13 @@ mapping query_bends(){
         }
         if ((!(prev_dir==15 && path[i]==0)&& prev_dir > path[j])
                   ||(prev_dir==0 && path[j]==15)){
- //         log += "Found a left turn at point " + j 
+ //         log += "Found a left turn at point " + j
  //            + ". prev_dir = " + prev_dir + ", path[j] = " + path[j];
           bend_counter--;
         }
         if ((!(prev_dir==0&& path[j]==15)&&prev_dir < path[j])
                   ||(prev_dir==15 && path[j]==0)){
- //         log += "Found a right turn (dogleg) at point " + j 
+ //         log += "Found a right turn (dogleg) at point " + j
  //            + ". prev_dir = " + prev_dir + ", path[j] = " + path[j];
 
           result += ([i:"The river bends left and then right "]);
@@ -648,7 +648,7 @@ mapping query_bends(){
       }
       i=j-1;
     }
-    
+
   }
   return result;
 }
@@ -743,7 +743,7 @@ string speed_change_description(int travel_speed){
       return "The water flows more slowly here";
     }
   case 1..5:
-    if (!intp(speed[progress]) || !intp(speed[progress-1])) break; 
+    if (!intp(speed[progress]) || !intp(speed[progress-1])) break;
     switch(speed[progress] - speed[progress-1]){
     case 0:
       return "";
@@ -781,14 +781,14 @@ void capsize(){
   if (!objectp(river)){
     tell_room(TO, "Error with the river you were falling into ('" +
               JUNG_ROOM + "river" + bank_num + ".c" + "'). Please"+
-              " tell a Wiz, and/or bug this room.");    
+              " tell a Wiz, and/or bug this room.");
     return;
   }
   occupants = PATHFINDER->all_living_present(TO);
   if (sizeof(occupants)>0){
     for(i=0;i<sizeof(occupants);i++){
       if (!occupants[i]->query_true_invis()){
-        tell_room(TO, (string)occupants[i]->QCN + " falls into the river!", 
+        tell_room(TO, (string)occupants[i]->QCN + " falls into the river!",
           occupants[i]);
       }
       tell_object(occupants[i], "You fall into the river with a "
@@ -870,11 +870,11 @@ void hit_obstruction(string obstruction){  //blah
     critter->force_me("look");
   }
   if (obstruction == "is an island " || obstruction == "is a waterfall ") return;
-  tell_room(TO, "%^BOLD%^%^CYAN%^The canoe hits  %^RESET%^" + obstruction 
+  tell_room(TO, "%^BOLD%^%^CYAN%^The canoe hits  %^RESET%^" + obstruction
                + "%^BOLD%^%^CYAN%^. You"
                +" capsize and end up in the "
                +"%^BOLD%^%^BLUE%^river%^CYAN%^!");
-  
+
   capsize();
 }
 
@@ -886,7 +886,7 @@ int apply_lateral_travel(){
 
   lat_dist = query_lat_dist(relative_direction, boat_speed);
   position += lat_dist;
-  
+
   switch (lat_dist){
   case 0:
     tell_room(TO, "The canoe continues straight down the river");
@@ -906,7 +906,7 @@ int apply_lateral_travel(){
   }
 //Check for obstruction
   obstruction = obstructions[progress];
-  if (obstruction != "none" && obstruction != "is an island " && 
+  if (obstruction != "none" && obstruction != "is an island " &&
       obstruction != "is a waterfall " ){
     special_report("%^B_WHITE%^%^BOLD%^%^BLACK%^There is NOT a waterfall or an ISLAND!");
     ob_position = obstruction_placements[progress];
@@ -920,7 +920,7 @@ int apply_lateral_travel(){
         return;
       }
     }
-  } else 
+  } else
   {
     special_report("%^B_CYAN%^%^BOLD%^%^WHITE%^There might be a waterfall or an ISLAND!");
     if (obstruction == "is a waterfall " )
@@ -1101,7 +1101,7 @@ string get_speed_message(){
   if (sizeof(speed)>progress)
   {
     river_speed = speed[progress];
-  } else 
+  } else
   {
     river_speed = random(5)+1;
   }
@@ -1124,7 +1124,7 @@ string get_speed_message(){
       r_speed+= "White horses break here and there as the river rushes and tumbles at great speed";
       break;
     }
-  } else 
+  } else
   {
     r_speed = "Oh NO! The river speed is an array!";
   }
@@ -1146,7 +1146,7 @@ string get_speed_message(){
     b_speed = "The canoe is going as fast as possible ahead of the current of the river";
     break;
   }
-  return "%^BOLD%^%^BLUE%^"+ r_speed + "  %^BOLD%^%^RED%^"+b_speed; 
+  return "%^BOLD%^%^BLUE%^"+ r_speed + "  %^BOLD%^%^RED%^"+b_speed;
 }
 
 void report(string str){
@@ -1163,7 +1163,7 @@ void travel(){
   if (launched ==3) return;
   if (capsized == 2) return;
   if (paused % 2 ==1){
-    report ("PAUSED");  
+    report ("PAUSED");
     if (pause_count ==10)
     {
       tell_room(TO, "Pause duration completed. Resuming journey");
@@ -1177,12 +1177,12 @@ void travel(){
     tell_room(TO, "To restart ahead of countdown, type <resume>");
     if (pause_count <20) pause_count ++;
     call_out("travel", 8);
-    return;    
+    return;
   }
   if (sizeof(speed) > progress)
   {
     river_speed = speed[progress];
-  } else 
+  } else
   {
     river_speed = random(4)+1;
   }
@@ -1245,7 +1245,7 @@ void travel(){
     if (!intp(travel_speed) || !intp(boat_speed)) break;
     travel_speed -= boat_speed;
     break;
-  }  
+  }
 
   // apply the boat's progress during the round
   if (!intp(river_speed) || !intp(boat_speed))
@@ -1253,14 +1253,14 @@ void travel(){
     river_speed = random(4) +1;
     boat_speed = 0;
   }
-  
+
   if (boat_speed + river_speed>0){
     progress ++;
-  } 
+  }
   if (boat_speed + river_speed<0){
     progress --;
-  } 
-  
+  }
+
   if (progress == river_length-10 && position >1 && position < 5){
     arrive();
     launched = 2;
@@ -1293,7 +1293,7 @@ void travel(){
   if (capsized ==2) return;
 //  tell_room(TO, "Finished applying lateral travel. You really should have heard something then.");
   if (sizeof(obstructions)>progress)
-  {   
+  {
     obname = obstructions[progress];
     if (sizeof(obstruction_placements)>progress)
     {
@@ -1336,7 +1336,7 @@ void travel(){
       }
     }
     return;
-  } 
+  }
   if (travel_speed == 0){
     travel_speed = 1;
   }
@@ -1397,10 +1397,10 @@ void travel(){
   }
   delay = 12/travel_speed;
   if (travel_speed <0) {
-    delay = delay *-1; 
+    delay = delay *-1;
   }
   if (delay <2 && delay >=1){
-    tell_room(TO, "You are going too fast. SLOW DOWN!"); 
+    tell_room(TO, "You are going too fast. SLOW DOWN!");
   }
   if (delay<1){
     tell_room(TO, "You lose control of the canoe as it hurtles down the river."
@@ -1481,9 +1481,9 @@ void paddle_left(){
   tell_room(TO, "The nose of the canoe turns to the right");
   show_direction(query_relative_direction());
   show_river(TP);
-//  tell_room(TO, "new direction is: " 
+//  tell_room(TO, "new direction is: "
 //                          + direction);
-//  tell_room(TO, "new relative direction is: " 
+//  tell_room(TO, "new relative direction is: "
 //                          + query_relative_direction());
   if (find_call_out("travel") == -1) call_out("travel", 2);
   tell_room(TO, get_speed_message());
@@ -1502,9 +1502,9 @@ void paddle_right(){
   tell_room(TO, "The nose of the canoe turns to the left");
   show_direction(query_relative_direction());
   show_river(TP);
-//  tell_room(TO, "new direction is: " 
+//  tell_room(TO, "new direction is: "
 //                          + direction);
-//  tell_room(TO, "new relative direction is: " 
+//  tell_room(TO, "new relative direction is: "
 //                          + query_relative_direction());
   if (find_call_out("travel") == -1) call_out("travel", 2);
   tell_room(TO, get_speed_message());
@@ -1523,9 +1523,9 @@ void back_paddle_left(){
   tell_room(TO, "The nose of the canoe turns to the left");
   show_direction(query_relative_direction());
   show_river(TP);
-//  tell_room(TO, "new direction is: " 
+//  tell_room(TO, "new direction is: "
 //                          + direction);
-//  tell_room(TO, "new relative direction is: " 
+//  tell_room(TO, "new relative direction is: "
 //                          + query_relative_direction());
   if (find_call_out("travel") == -1) call_out("travel", 2);
   tell_room(TO, get_speed_message());
@@ -1552,9 +1552,9 @@ void back_paddle_right(){
   tell_room(TO, "The nose of the canoe turns to the right");
   show_direction(query_relative_direction());
   show_river(TP);
-//  tell_room(TO, "new direction is: " 
+//  tell_room(TO, "new direction is: "
 //                          + direction);
-//  tell_room(TO, "new relative direction is: " 
+//  tell_room(TO, "new relative direction is: "
 //                          + query_relative_direction());
   if (find_call_out("travel") == -1) call_out("travel", 2);
   tell_room(TO, get_speed_message());
@@ -1572,21 +1572,21 @@ void launch(object ob){
     progress = 0;
   }
   if (query_exit("out")==ROOMS + "river"){
-    tell_object(ob, "The canoe is already launched, isn't it? If not, please make a bug report"); 
+    tell_object(ob, "The canoe is already launched, isn't it? If not, please make a bug report");
     return;
   }
   if (query_exit("out")!=ROOMS + "river_beach"){
-    progress = 0;    
+    progress = 0;
     direction = 0;
-  } 
+  }
   tell_object(ob, "Using your paddle, you push off from the"
                  +" bank");
-  tell_room(TO, "Using " + (string)ob->QP + " paddle, " 
+  tell_room(TO, "Using " + (string)ob->QP + " paddle, "
               + (string) ob->QCN + " pushes off from the bank", ob);
   tell_room(TO,"The canoe moves off to the centre of the river");
   position = 4;
   remove_exit("out");
-  set_exits( ([ "out" : ROOMS + "river" ]) ); 
+  set_exits( ([ "out" : ROOMS + "river" ]) );
   call_out("travel",2);
   launched = 1;
   show_river(ob);

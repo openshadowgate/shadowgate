@@ -54,7 +54,7 @@ void create()
     set_property("enchantment",2);
     set_wear((:TO,"wear_func":));
     set_remove((:TO,"remove_func":));
-    set_item_bonus("magic resistance", 5);
+    set_item_bonus("magic resistance", 1);
 }
 
 int wear_func() 

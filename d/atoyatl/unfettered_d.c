@@ -26,7 +26,7 @@ void checkunf(){
     {
       unfettered = new(MOB + "unfettered_main");
       MOB->move(roomname);
-    } else 
+    } else
     {
       report("Roomname " + roomname + " failed to load");
     }
@@ -35,7 +35,7 @@ void checkunf(){
 }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", "unfettered_restorer_d:" + str);
+  "/d/atoyatl/reporter_d.c"->report("lujke", "unfettered_restorer_d:" + str);
 }
 
 void backup(object r_room, object * cls, int t_hps, int e_moves, int s_absorbed, int c_down, int i, int l_summoned, mapping t_ers, mapping s_zed, mapping e_used, mapping victory, string * destinations_visited, string *path_trod, int mucus, int frozen_mucus, int skin, tentacles_withdrawn, int relaying, int power_absorbed, int l_move, int ab_ing, int r_ting, int B_T, int h_count, string r_name){
@@ -49,7 +49,7 @@ void backup(object r_room, object * cls, int t_hps, int e_moves, int s_absorbed,
   last_summoned = l_summoned;
   targeters = t_ers;
   seized = s_zed;
-  exits_used = e_used;  
+  exits_used = e_used;
   last_move = l_move;
   absorbing = ab_ing;
   reporting = r_ting;
@@ -61,4 +61,3 @@ void backup(object r_room, object * cls, int t_hps, int e_moves, int s_absorbed,
 void set_unfettered(object unf){
   unfettered = unf;
 }
-

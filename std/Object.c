@@ -462,10 +462,10 @@ mixed query_property(string prop)
 
     if (prop == "spell penetration") {
         if (FEATS_D->usable_feat(TO, "spell penetration")) {
-            num += 15;
+            num += 1;
         }
         if (FEATS_D->usable_feat(TO, "greater spell penetration")) {
-            num += 15;
+            num += 2;
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "spell penetration"));
@@ -530,16 +530,16 @@ mixed query_property(string prop)
 
     if (prop == "magic resistance") {
         if (FEATS_D->usable_feat(TO, "improved resistance")) {
-            num += 15;
+            num += 1;
         }
         if (FEATS_D->usable_feat(TO, "increased resistance")) {
-            num += 15;
+            num += 2;
         }
         if ((string)TO->query_race() == "human") {
             subrace = (string)TO->query("subrace");
             if (subrace) {
                 if (strsrch(subrace, "genasi") != -1) {
-                    num += 10;                                 // +10 MR all genasi
+                    num += 1;                                 // +10 MR all genasi
                 }
             }
         }
@@ -547,7 +547,7 @@ mixed query_property(string prop)
             subrace = (string)TO->query("subrace");
             if (subrace) {
                 if (subrace == "deep gnome" || subrace == "svirfneblin") {
-                    num += 10;
+                    num += 1;
                 }
             }
         }
@@ -555,7 +555,7 @@ mixed query_property(string prop)
             subrace = (string)TO->query("subrace");
             if (subrace) {
                 if (subrace == "orog" || subrace == "tanarukk") {
-                    num += 10;
+                    num += 1;
                 }
             }
         }
@@ -563,24 +563,24 @@ mixed query_property(string prop)
             subrace = (string)TO->query("subrace");
             if (subrace) {
                 if (subrace == "fey'ri") {
-                    num += 10;
+                    num += 1;
                 }
             }
         }
         if ((string)TO->query_race() == "shade") {
-            num += 10;
+            num += 1;
         }
         if ((string)TO->query_race() == "deva") {
-            num += 10;
+            num += 1;
         }
         if ((string)TO->query_race() == "yuan-ti") {
-            num += 10;
+            num += 1;
         }
         if ((string)TO->query_race() == "drow" ||
             (string)TO->query("subrace") == "szarkai" &&
             !TO->query_property("raised resistance")) {
             mylevel = (int)TO->query_level() + 10;
-            num += 10;   // drow/shade racial, MR of overall character level +10.
+            num += 2;
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "magic resistance"));

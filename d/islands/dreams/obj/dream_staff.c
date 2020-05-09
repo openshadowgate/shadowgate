@@ -23,7 +23,7 @@ void create(){
       TO->set_property("enchantment",4);
    }
    set_item_bonus("spell penetration",5);
-   set_item_bonus("magic resistance",5);
+   set_item_bonus("magic resistance",1);
    set_value(3000);
    set_wield((:TO,"wieldme":));
    set_unwield((:TO,"unwieldme":));

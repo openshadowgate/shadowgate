@@ -40,7 +40,7 @@ void create() {
     	set_value(3000);
       set_property("enchantment",3);
 	set_item_bonus("strength",-1);
-	set_item_bonus("magic resistance",20);
+	set_item_bonus("magic resistance",2);
    	set_wear((:TO,"wearme":));
    	set_remove((:TO,"removeme":));
 }

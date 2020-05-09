@@ -43,7 +43,7 @@ void create()
     set_property("no curse",1);
     set_property("enchantment",7);
 
-    set_item_bonus("magic resistance",50);
+    set_item_bonus("magic resistance",1);
     set_item_bonus("bonus_spell_slots",3);
     
     set_max_internal_encumbrance(21);

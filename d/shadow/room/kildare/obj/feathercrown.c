@@ -30,7 +30,7 @@ set_short("%^BOLD%^%^WHITE%^Crown of Feathers%^RESET%^");
 	set_wear((:TO,"wearme":));
 	set_remove((:TO,"removeme":));
 	set_ac(0);
-	set_item_bonus("magic resistance",5);
+	set_item_bonus("magic resistance",1);
 }
 
 int wearme()

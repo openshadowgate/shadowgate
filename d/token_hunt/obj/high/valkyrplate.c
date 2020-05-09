@@ -61,7 +61,7 @@ void create(){
    }
    set_item_bonus("bonus_spell_slots",1);
    set_item_bonus("spell penetration",15);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_property("lore difficulty",24);
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));

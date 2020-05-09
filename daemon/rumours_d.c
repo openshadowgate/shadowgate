@@ -3,7 +3,7 @@
 // Coded by Lujke
 //////////////////////////////////////////////////////////////////////
 // Notes to self
-// Rumours work by recognized name - the rumour goes down by the name the subject is known by to the person who first passes it on. True name is recorded in the details of the rumour, to help keep track - but rumours will come out according to those recognised names 
+// Rumours work by recognized name - the rumour goes down by the name the subject is known by to the person who first passes it on. True name is recorded in the details of the rumour, to help keep track - but rumours will come out according to those recognised names
 // Researching a rumour should lead to a small chance of word getting back to the subject of the rumour that you have been asking about them
 // Creating a rumour should lead to a small chance of word getting back to the subject of the rumour that you have been talking about them
 
@@ -14,13 +14,13 @@
 #include <security.h>
 #include <daemons.h>
 #include "/daemon/rumours/sources.h"
-#define SAVE_DIR "/daemon/save/rumours/" 
-#define SAVE_FILE "/daemon/save/saved_rumours" 
+#define SAVE_DIR "/daemon/save/rumours/"
+#define SAVE_FILE "/daemon/save/saved_rumours"
 #define RUMOUR "/daemon/rumour.c"
 
 inherit DAEMON;
 
-mapping all_rumours;  // ([ string subject : mapping rumours ]) rumours: ([ string label: mixed details ])  
+mapping all_rumours;  // ([ string subject : mapping rumours ]) rumours: ([ string label: mixed details ])
 mapping rumour; // ([ int num: ({string subject, int time, int traction, int source_type, int rumour_number })
 mapping gossip_times;  //([string gossiper: int * last_gossip_times ])
 mapping heard_rumours; //([string subject: mapping heard_rumours]) heard_rumours: ([string heard_label: mixed details])
@@ -59,13 +59,13 @@ mixed * query_rumour(string subject, int num){
   report("query_rumour stage 5");
 //  rum = new(RUMOUR);
   result = my_rumours[num];
-  report ("Result loaded. Size of result:" + sizeof(result)); 
+  report ("Result loaded. Size of result:" + sizeof(result));
   filename = "/daemon/save/rumours/" + result[RUMOUR_SUBJECT] + result[RUMOUR_NUMBER] + ".o";
   if (file_exists(filename ))
-  {  
+  {
     filename = "/daemon/save/rumours/" + result[RUMOUR_SUBJECT] + result[RUMOUR_NUMBER];
     RUMOUR->LOAD(filename );
-  } else 
+  } else
   {
     report ("%^BOLD%^%^GREEN%^Error - file /daemon/save/rumours/" + result[RUMOUR_SUBJECT] + result[RUMOUR_NUMBER] + " does not exist");
   }
@@ -113,10 +113,10 @@ save_rumour_ob(mixed * rum){
     my_rumours = ([]);
   } else {
     subjects = keys(all_rumours);
-    if (member_array(name, subjects) == -1)   
+    if (member_array(name, subjects) == -1)
     {
       my_rumours = ([]);
-    } else 
+    } else
     {
       my_rumours = all_rumours[name];
     }
@@ -132,11 +132,11 @@ void convert_rumours(){
   mapping rums;
   mixed * rum;
   if (!mapp(all_rumours)||sizeof(all_rumours)<1) return;
-  report ("%^BOLD%^%^GREEN%^Converting rumours"); 
+  report ("%^BOLD%^%^GREEN%^Converting rumours");
   subjects = keys(all_rumours);
   foreach(subject in subjects)
   {
-    rums = all_rumours[subject]; 
+    rums = all_rumours[subject];
     if (!mapp(rums)|| sizeof(rums)<1) continue;
     nums = keys(rums);
     foreach(num in nums)
@@ -157,7 +157,7 @@ mapping query_rumours(string subject, int type){
   subjects = keys(all_rumours);
   if (member_array(subject, subjects)==-1) return ([]);
   rumours = all_rumours[subject];
-  report("Number of initial rumours found for " + subject + ": " + sizeof(rumours)); 
+  report("Number of initial rumours found for " + subject + ": " + sizeof(rumours));
   if (intp(type) && type >0)
   {
     report("Type specified when trying to query_rumours");
@@ -183,20 +183,20 @@ void leave_feedback(string name, string fb){
   if (!mapp(feedback)) {
     feedback = ([]);
     feedback_for_subject = ([]);
-  } else 
+  } else
   {
     subjects = keys(feedback);
     if (member_array(name, subjects) !=-1)
     {
-      feedback_for_subject = feedback[name]; 
-    } else 
+      feedback_for_subject = feedback[name];
+    } else
     {
       feedback_for_subject = ([]);
     }
   }
   feedback_for_subject[time()] = fb;
   feedback[name] = feedback_for_subject;
-}  
+}
 
 void save_rumour(mixed * rum){
   string subject, subjects;
@@ -211,13 +211,13 @@ void save_rumour(mixed * rum){
   {
     all_rumours = ([]);
     subject_rumours = ([]);
-  } else 
+  } else
   {
     subjects = keys(all_rumours);
     if (sizeof(subjects)<1 || member_array(subject, subjects)==-1)
     {
       subject_rumours = ([]);
-    } else 
+    } else
     {
       subject_rumours = all_rumours[subject];
     }
@@ -247,7 +247,7 @@ void circulate_rumour(int num, string name, object ob){
   {
     tell_object(ob, "You haven't heard any rumours yet. You'll have to gossip a bit to hear some before you can spread them around");
     return;
-  }  
+  }
   hearers = keys(heard_rumours);
   if (member_array(ob->query_name(), hearers)==-1)
   {
@@ -270,13 +270,13 @@ void circulate_rumour(int num, string name, object ob){
   if (!mapp(my_rumours) || sizeof(my_rumours)<1)
   {
     tell_object(ob, "You haven't heard any rumours about " + capitalize(name) + ". You'll either have to dig some dirt on them, or gossip generally until you hear something about them, before you can circulate an existing rumour. Or you could always start a new one, if you like");
-    return;    
+    return;
   }
   nums = keys(my_rumours);
   if (member_array(num, nums)==-1)
   {
     tell_object(ob, "You haven't heard a rumour numbered " + num + " about " + capitalize(name) + ". Check your heard rumours list and try again");
-    return;        
+    return;
   }
   rum = my_rumours[num];
   lvl = rum[2];
@@ -294,8 +294,8 @@ void circulate_rumour(int num, string name, object ob){
     tell_object(ob, "It is probably a secret that: ");
     tell_object(ob, rum[SECRET]);
   }
-  tell_object(ob,"%^BOLD%^%^WHITE%^Type 'yes' to go ahead and spread the rumour around - anything else to quit"); 
-  input_to("confirm_circulate", 0 ,ob, rum); 
+  tell_object(ob,"%^BOLD%^%^WHITE%^Type 'yes' to go ahead and spread the rumour around - anything else to quit");
+  input_to("confirm_circulate", 0 ,ob, rum);
 }
 
 
@@ -311,7 +311,7 @@ void quash_rumour(int num, string name, object ob){
   {
     tell_object(ob, "You haven't heard any rumours yet. You'll have to gossip a bit to hear some before you can try to stamp them out");
     return;
-  }  
+  }
   hearers = keys(heard_rumours);
   if (member_array(ob->query_name(), hearers)==-1)
   {
@@ -334,13 +334,13 @@ void quash_rumour(int num, string name, object ob){
   if (!mapp(my_rumours) || sizeof(my_rumours)<1)
   {
     tell_object(ob, "You haven't heard any rumours about " + capitalize(name) + ". You'll either have to dig some dirt on them, or gossip generally until you hear something about them, before you can attempt to quash an existing rumour. Or you could always start a new one, if you like");
-    return;    
+    return;
   }
   nums = keys(my_rumours);
   if (member_array(num, nums)==-1)
   {
     tell_object(ob, "You haven't heard a rumour numbered " + num + " about " + capitalize(name) + ". Check your heard rumours list and try again");
-    return;        
+    return;
   }
   rum = my_rumours[num];
   lvl = rum[2];
@@ -358,8 +358,8 @@ void quash_rumour(int num, string name, object ob){
     tell_object(ob, "It is probably a secret that: ");
     tell_object(ob, rum[SECRET]);
   }
-  tell_object(ob,"%^BOLD%^%^WHITE%^Type 'yes' to go ahead and spread the rumour around - anything else to quit"); 
-  input_to("confirm_quash", 0 ,ob, rum); 
+  tell_object(ob,"%^BOLD%^%^WHITE%^Type 'yes' to go ahead and spread the rumour around - anything else to quit");
+  input_to("confirm_quash", 0 ,ob, rum);
 }
 
 
@@ -418,7 +418,7 @@ void check_for_feedback(object ob){
   my_feedback = feedback[myname];
   times = keys(my_feedback);
   count = sizeof(times);
-  inf = ob->query_skill("influence");  
+  inf = ob->query_skill("influence");
   num = random(inf/15) + 1;
   if (num > count) num = count;
   call_out("give_feedback", 2, ob, num);
@@ -447,7 +447,7 @@ void give_feedback(object ob, int num){
   sub_name = my_feedback[t][2];
   if (ob->isKnown(sub_name)){
     sub_alias = ob->knownAs(sub_name);
-  } else 
+  } else
   {
     sub_alias = my_feedback[t][3];
   }
@@ -458,7 +458,7 @@ void give_feedback(object ob, int num){
   {
     tell_object(TP, "You hear a whisper about " + sub_alias);
     tell_object(ob, fb);
-  } else { 
+  } else {
     report ("Feedback not given due to bad roll");
   }
 
@@ -478,19 +478,19 @@ void recall_rumours(object ob){
   {
     tell_object(ob, "%^ORANGE%^You have not heard any rumours about anyone");
     return;
-  }  
+  }
   recaller = ob->query_true_name();
   recallers = keys(heard_rumours);
   if (member_array(recaller, recallers)==-1)
   {
     tell_object(ob, "%^ORANGE%^You have not heard any rumours about anyone");
-    return;    
+    return;
   }
   my_heard_rumours = heard_rumours[recaller];
   if (!mapp(my_heard_rumours) || sizeof(my_heard_rumours)<1)
   {
     tell_object(ob, "%^ORANGE%^You have not heard any rumours about anyone");
-    return;    
+    return;
   }
   subs = keys(my_heard_rumours);
   result = "%^RESET%^%^ORANGE%^You have heard rumours about the following people:\n";
@@ -503,7 +503,7 @@ void recall_rumours(object ob){
     {
       result += line + "\n";
       line = name;
-    } else 
+    } else
     {
       line +=  name ;
     }
@@ -520,17 +520,17 @@ void set_feedback(string name, string fb, int source_type, string sub_name, stri
   string * subjects;
   int * times, when;
   mapping my_feedback;
-  if (!mapp(feedback) || sizeof(feedback)<1) 
+  if (!mapp(feedback) || sizeof(feedback)<1)
   {
     feedback = ([]);
     my_feedback = ([]);
-  } else 
+  } else
   {
     subjects = keys(feedback);
     if (member_array(name, subjects)==-1)
     {
       my_feedback = ([]);
-    } else 
+    } else
     {
       my_feedback = feedback[name];
     }
@@ -546,10 +546,10 @@ varargs int can_gossip(string subject, int influence){
   int result, inf, * times;
   object ob;
   subject = lower_case(subject);
-  if (intp(influence) && influence >-1) 
+  if (intp(influence) && influence >-1)
   {
     inf = influence;
-  } else 
+  } else
   {
     ob = find_player(subject);
     if (!objectp(ob))
@@ -559,7 +559,7 @@ varargs int can_gossip(string subject, int influence){
     }
     inf = ob->query_skill("influence");
   }
-  times = delete_old_gossip_times(subject, time()- 259200);  
+  times = delete_old_gossip_times(subject, time()- 259200);
 
 //////////////////////////////////////////////////////////////////
 ////////CHANGE THIS BACK TO OLD VERION ONCE RUMOURS GO LIVE //////
@@ -579,7 +579,7 @@ void add_gossip_time(string subject){
   {
     gossip_times = ([]);
     subjects = ({});
-  } else 
+  } else
   {
     subjects = keys(gossip_times);
   }
@@ -587,7 +587,7 @@ void add_gossip_time(string subject){
   if (member_array(subject, subjects)==-1)
   {
     times = ({});
-  } else 
+  } else
   {
     times = gossip_times[subject];
   }
@@ -599,7 +599,7 @@ void add_gossip_time(string subject){
 int * delete_old_gossip_times(string subject, int threshold){
   int * times, t, * result;
   string * subjects;
-  if (!mapp(gossip_times) || sizeof(gossip_times)<1) 
+  if (!mapp(gossip_times) || sizeof(gossip_times)<1)
   {
     gossip_times = ([ subject: ({}) ]);
     return ({});
@@ -607,7 +607,7 @@ int * delete_old_gossip_times(string subject, int threshold){
   subjects = keys(gossip_times);
   if (member_array(subject, subjects) == -1)
   {
-    gossip_times[subject] = ({}); 
+    gossip_times[subject] = ({});
     return ({});
   }
   times = gossip_times[subject];
@@ -617,7 +617,7 @@ int * delete_old_gossip_times(string subject, int threshold){
     if (t > threshold)
     {
       result += ({t});
-    } 
+    }
   }
   gossip_times[subject] = result;
   SAVE();
@@ -646,7 +646,7 @@ mapping query_all_rumours(){
 }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", str);
+
 }
 
 int get_next_num_from_array(int nums){
@@ -685,7 +685,7 @@ int has_heard_rumour(string hearer, mixed * rumour){
   rumours_about_subject = my_heard_rumours[subject];
   if(sizeof(rumours_about_subject)<1)
   {
-    report("Size of rumours about subject is: " + sizeof(rumours_about_subject)); 
+    report("Size of rumours about subject is: " + sizeof(rumours_about_subject));
     return 0;
   }
   rumour_number =rumour[RUMOUR_NUMBER];
@@ -706,11 +706,11 @@ int has_heard_rumour(string hearer, mixed * rumour){
   {
     report("Hearer has not heard rumour number " + rumour_number + " about " + subject);
     return 0;
-  } else 
+  } else
   {
     report("Hearer %^BOLD%^%^RED%^has already heard %^RESET%^rumour number " + rumour_number + " about " + subject);
   }
-  return 1;  
+  return 1;
 }
 
 varargs void hear_rumour(string hearer, mixed * rumour, int lvl){
@@ -718,13 +718,13 @@ varargs void hear_rumour(string hearer, mixed * rumour, int lvl){
   int * nums, next_num, rumour_number; //, rumour_lvl;
   string * subjects, subject;
   report("hearing rumour");
-  if (sizeof(rumour)<RUMOUR_SUBJECT+1) 
+  if (sizeof(rumour)<RUMOUR_SUBJECT+1)
   {
     report("The rumour is too small to have a subject. Sizeof rumour: " + sizeof(rumour) + "  Rumour subject number: " + RUMOUR_SUBJECT);
   }
   subject = rumour[RUMOUR_SUBJECT];
   rumour_number = rumour[RUMOUR_NUMBER];
-  my_heard_rumours = get_my_heard_rumours(hearer);  
+  my_heard_rumours = get_my_heard_rumours(hearer);
   if (!intp(lvl) || lvl < 1 || lvl >3) lvl = 1;
   next_num = 0;
   if (!mapp(my_heard_rumours) || sizeof(my_heard_rumours)<1)
@@ -743,14 +743,14 @@ varargs void hear_rumour(string hearer, mixed * rumour, int lvl){
       subject_rumours = ([]);
       nums = (({}));
       next_num = 1;
-    } else 
+    } else
     {
       subject_rumours = my_heard_rumours[subject];
       nums = keys(subject_rumours);
       next_num = 0;
     }
   }
-  
+
   if (arrayp(nums) && sizeof(nums)>0 && next_num<1)
   {
     next_num = get_next_num_from_array(nums);
@@ -772,7 +772,7 @@ int get_next_backup_number(){
   foreach(file in files)
   {
     num = sscanf(file, "%s_%d", junk, i);
-    if (num>1 && i >= result) result = i+1; 
+    if (num>1 && i >= result) result = i+1;
   }
   return result;
 }
@@ -825,7 +825,7 @@ mapping get_my_heard_rumours(string hearer){
     report("No heard rumours found for anyone. Starting new mappings");
     heard_rumours = ([]);
     hearers = ({});
-  } else 
+  } else
   {
     hearers = keys(heard_rumours);
     report("Some people have heard rumours. Checking whether " + hearer + " has heard any");
@@ -834,7 +834,7 @@ mapping get_my_heard_rumours(string hearer){
   {
     report(hearer + " Has not heard any rumours");
     my_heard_rumours = ([]);
-  } else  
+  } else
   {
 
     my_heard_rumours = heard_rumours[hearer];
@@ -847,12 +847,12 @@ mapping get_my_heard_rumours(string hearer){
 mapping get_heard_rumours(string hearer, string subject){
   mapping my_heard_rumours, rumours_about_subject;
   string * subjects;
-  my_heard_rumours = get_my_heard_rumours(hearer);  
+  my_heard_rumours = get_my_heard_rumours(hearer);
   if (sizeof(my_heard_rumours)<1) return ([]);
   subjects = keys(my_heard_rumours);
   if (member_array(subject, subjects)==-1) return ([]);
   rumours_about_subject = my_heard_rumours[subject];
-  return rumours_about_subject;  
+  return rumours_about_subject;
 }
 
 int get_next_heard_number(string hearer, string subject){
@@ -862,7 +862,7 @@ int get_next_heard_number(string hearer, string subject){
   if (sizeof(rumours_about_subject)<1) return 1;
   nums = keys(rumours_about_subject);
   result = get_next_num_from_array(nums);
-  return result;  
+  return result;
 }
 
 int count_rumours(){
@@ -875,7 +875,7 @@ int count_rumours(){
   foreach(subject in subjects){
     my_rumours = all_rumours[subject];
     count += sizeof(my_rumours);
-  } 
+  }
   return count;
 }
 
@@ -893,7 +893,7 @@ varargs int add_rumour(string subject, string truename, string * instigator, str
   object rum;
   report ("Adding a rumour for subject: " + subject);
 //  rum = new(RUMOUR);
-  if (!mapp (all_rumours) || sizeof(all_rumours)<1) 
+  if (!mapp (all_rumours) || sizeof(all_rumours)<1)
   {
     all_rumours = ([]);
   }
@@ -906,14 +906,14 @@ varargs int add_rumour(string subject, string truename, string * instigator, str
   if (!stringp(detail))
   {
     det = "";
-  } else 
+  } else
   {
     det = detail;
   }
   if (!stringp(secret))
   {
     sec = "";
-  } else 
+  } else
   {
     sec = secret;
   }
@@ -936,10 +936,10 @@ varargs int add_rumour(string subject, string truename, string * instigator, str
   {
     trac = traction;
   }
-  if (!stringp(truename)) 
+  if (!stringp(truename))
   {
     tn = "unknown";
-  } else 
+  } else
   {
     tn = truename;
   }
@@ -975,7 +975,7 @@ varargs int add_rumour(string subject, string truename, string * instigator, str
     case WILD_SOURCE:
       "with the wild folk and rangers";
       break;
-    
+
     }
     set_feedback(subject, fb, st, inst, adj);
   }
@@ -1018,7 +1018,7 @@ varargs mixed * get_rumour_for_subject(string subject, int source, int num){  //
   labels = keys(rumours);
   if (num>0){
     num --;
-  } else 
+  } else
   {
     report("No rumour number requested. Getting random rumour");
     total_trac = calculate_total_traction(rumours);
@@ -1036,7 +1036,7 @@ varargs mixed * get_rumour_for_subject(string subject, int source, int num){  //
 //  ob = new(RUMOUR);
   RUMOUR->LOAD(subject + num);
   result += ({RUMOUR->query_subject(), RUMOUR->query_detail(), RUMOUR->query_secret(), RUMOUR->query_instigator(), RUMOUR->query_truename() });
-  return result;    
+  return result;
 }
 
 mapping get_rumours_for_source_type(int source){
@@ -1045,7 +1045,7 @@ mapping get_rumours_for_source_type(int source){
   mixed * rumour_details;
   int * nums, num, type, count;
   if (!mapp(all_rumours) || sizeof(all_rumours)<1)
-  { 
+  {
     return ([]);
   }
   subjects = keys(all_rumours);
@@ -1072,7 +1072,7 @@ mapping get_rumours_for_source_type(int source){
           report("This rumour is the right type. Type: " + type);
           result += ([count : rumour_details]);
           count ++;
-        } else 
+        } else
         {
           report("Wrong type of source (" + type + "). Checking for random chance");
           if (!random(60))
@@ -1088,7 +1088,7 @@ mapping get_rumours_for_source_type(int source){
       }
     }
   }
-  report("Number of rumours found for source type " + source + ": " + sizeof(result));  
+  report("Number of rumours found for source type " + source + ": " + sizeof(result));
   return result;
 }
 
@@ -1099,7 +1099,7 @@ mixed * get_rumour(int source, object audience){
   mapping my_rumours;
   mixed * rum;
   object ob;
-  my_rumours = get_rumours_for_source_type(source); 
+  my_rumours = get_rumours_for_source_type(source);
   total_traction = calculate_total_traction(my_rumours);
   report("get_rumour: total traction calculated: " + total_traction);
   trac = random(total_traction);
@@ -1136,7 +1136,7 @@ mixed * get_rumour(int source, object audience){
 //    if (flag ==1) break;
 //  }
 //  rum += ({my_rumours[nums[j]]});
-  
+
   return rum;
 }
 
@@ -1214,7 +1214,7 @@ int check_room_source_type(object room){
       room_type = BEAST_SOURCE;
       break;
     }
-  } 
+  }
   if (room_type == -1)
   {
 //    report("Not a beast path. Checking for wild paths");
@@ -1227,7 +1227,7 @@ int check_room_source_type(object room){
         break;
       }
     }
-  } 
+  }
   if (room_type == -1)
   {
 //    report("Not a wild path. Checking for city paths");
@@ -1241,7 +1241,7 @@ int check_room_source_type(object room){
       }
     }
   }
-  if (room_type == -1){   
+  if (room_type == -1){
 //    report("Not Any of the paths. Checking for standard city rooms");
     terrain = room->query_terrain();
     if (terrain == "city" || present("barkeep", room)|| present("waiter", room) ||present("waitress", room) || present("baker", room)|| present("bartender", room)){
@@ -1315,8 +1315,8 @@ void trace_rumour(object ob, string trace_subject, int trace_num){
   {
     tell_object("Sorry, there was an early problem loading rumour number " + trace_num + " about " + trace_subject + ", so you are not able to trace its origins at this time. Please use the game command to make a bug report.");
     ob->remove_property("tracing");
-    ob->remove_property("gossipping");  
-    return;  
+    ob->remove_property("gossipping");
+    return;
   }
   real_rumour_no = heard_rumour[1];
   real_rumour = query_rumour(trace_subject, real_rumour_no);
@@ -1324,16 +1324,16 @@ void trace_rumour(object ob, string trace_subject, int trace_num){
   {
     tell_object("Sorry, there was a late problem loading rumour number " + trace_num + " about " + trace_subject + ", so you are not able to trace its origins at this time. Please use the game command to make a bug report.");
     ob->remove_property("tracing");
-    ob->remove_property("gossipping");  
-    return;  
+    ob->remove_property("gossipping");
+    return;
   }
   instigators = real_rumour[INSTIGATOR];
   if (!arrayp(instigators) || sizeof(instigators)< 1)
   {
     tell_object("Sorry, there was a problem identifying who started rumour number " + trace_num + " about " + trace_subject + ", so you are not able to trace its origins at this time. Please use the game command to make a bug report.");
     ob->remove_property("tracing");
-    ob->remove_property("gossipping");  
-    return;  
+    ob->remove_property("gossipping");
+    return;
   }
 //////DO CHECKS HERE///////////////
   room_type = check_room_source_type(environment(ob));
@@ -1352,8 +1352,8 @@ void trace_rumour(object ob, string trace_subject, int trace_num){
       break;
     }
     ob->remove_property("tracing");
-    ob->remove_property("gossipping");  
-    return;  
+    ob->remove_property("gossipping");
+    return;
   }
   skill =  calculate_gossip_skill(ob, real_rumour[SOURCE_TYPE]);
   if (random(4) || random (150) > skill) return;
@@ -1374,7 +1374,7 @@ seems to be old news that just forms part of a lot of people's background knowle
     break;
   default:
     message = "Word reaches you that the rumour that \n" + real_rumour[SURFACE] + "\n may have been started by " + capitalize(alleged_instigator) + " .";
-    break; 
+    break;
   }
   tell_object(ob, message);
 }
@@ -1386,7 +1386,7 @@ int update_rumours(){
   count = 0;
   if(!mapp(all_rumours) || sizeof(all_rumours)<1) return 0;
   subjects = keys(all_rumours);
-  foreach(subject in subjects) 
+  foreach(subject in subjects)
   {
     rumours_about_subject = all_rumours[subject];
     count += sizeof(rumours_about_subject);
@@ -1471,13 +1471,13 @@ void check_for_rumour(object ob){
   {
     report("Gossipper is not investigating, just gossipping");
     target = "none";
-  } else 
+  } else
   {
     report("Gossipper IS investigating something particular");
-    target = ob->query_property("investigating"); 
+    target = ob->query_property("investigating");
   }
   if (target=="none" && ob->query_property("tracing"))
-  { 
+  {
     report("Gossipper is trying to trace the source of a rumour");
     trace_subject = ob->query_property("tracing");
     num = sscanf(trace_subject, "%s_%d", trace_subject, trace_num);
@@ -1502,8 +1502,8 @@ void check_for_rumour(object ob){
       name = ob->query_true_name();
       if (has_heard_rumour(name, rum))
       {
-        tell_object(ob,  get_source(room_type, get_random_source_number(room_type)) + " thing you already heard before about " + capitalize(rum[RUMOUR_SUBJECT]) +". Again."); 
-        return; 
+        tell_object(ob,  get_source(room_type, get_random_source_number(room_type)) + " thing you already heard before about " + capitalize(rum[RUMOUR_SUBJECT]) +". Again.");
+        return;
       }
       report("%^BOLD%^%^CYAN%^About to hear rumour");
       rum = query_rumour(rum[RUMOUR_SUBJECT], rum[RUMOUR_NUMBER]);
@@ -1515,7 +1515,7 @@ void check_for_rumour(object ob){
       tell_object(ob, "You haven't come across any interesting rumours yet. Perhaps you should keep gossiping");
       return;
     }
-  } else 
+  } else
   {
     report("target set. checking chances of succeeding with investigation");
     num = sscanf(target, "%s_%d", targ_name, heard_rumour_num);
@@ -1568,7 +1568,7 @@ void check_for_rumour(object ob){
         {
           tell_object(ob, "Something seems to have gone wrong. You are trying to further investigate rumour number " + heard_rumour_num + " about " + targ_name + ", but you don't seem to have heard such a rumour about them. Please make a bug report, saying that Lujke may be a stable genius, but he's not smart.");
           ob->remove_property("investigating");
-          return; 
+          return;
         }
         heard_rum = rums_about_subject[heard_rumour_num];
         lvl = heard_rum[2];
@@ -1577,7 +1577,7 @@ void check_for_rumour(object ob){
         {
           tell_object(ob, "Something seems to have gone wrong. You are trying to further investigate rumour number " + heard_rumour_num + " about " + targ_name + ", but there was an error loading that rumour. Please make a bug report, saying that Lujke may be a stable genius, but he's not, like, very smart.");
           ob->remove_property("investigating");
-          return;                     
+          return;
         }
         detail = rum[DETAIL];
         secret = rum[SECRET];
@@ -1596,9 +1596,9 @@ void check_for_rumour(object ob){
             heard_rumours[ob->query_true_name()] = my_heard_rumours;
             ob->remove_property("investigating");
             ob->remove_property("gossipping");
-            SAVE(); 
+            SAVE();
             return;
-          } else 
+          } else
           {
             report("further detail not found. Checking for secret info");
             if (strlen(detail)<1 && strlen(secret)>0 && random(1000)<calculate_gossip_skill(ob, rum[SOURCE_TYPE]))
@@ -1611,13 +1611,13 @@ void check_for_rumour(object ob){
               ob->remove_property("investigating");
               ob->remove_property("gossipping");
               SAVE();
-              return; 
+              return;
             } else
             {
               report("Didn't find any secret info");
               tell_object(ob, "You haven't turned up any more information about the rumour you are trying to look into, yet. Keep digging...");
               return;
-            } 
+            }
           }
           break;
         case DETAIL_LVL:
@@ -1632,8 +1632,8 @@ void check_for_rumour(object ob){
             ob->remove_property("investigating");
             ob->remove_property("gossipping");
             SAVE();
-            return; 
-          } else 
+            return;
+          } else
           {
             report("Didn't find any secret info");
             tell_object(ob, "Your contacts haven't turned up any further information about that rumour yet.");
@@ -1651,7 +1651,7 @@ void check_for_rumour(object ob){
         report("Failed the 1 in 20 chance to get more detail");
         tell_object("You haven't been able to turn up any more information about the rumour you've been asking for, at least until now. Perhaps you should keep trying.");
         return;
-      }    
+      }
     } else
     {
       report ("Looking generally for information about a specific subject.");
@@ -1661,8 +1661,8 @@ void check_for_rumour(object ob){
         name = ob->query_true_name();
         if (has_heard_rumour(name, rum))
         {
-          tell_object(ob,  get_source(room_type, get_random_source_number(room_type)) + " thing you already heard before about " + capitalize(rum[RUMOUR_SUBJECT]) +". Again."); 
-          return; 
+          tell_object(ob,  get_source(room_type, get_random_source_number(room_type)) + " thing you already heard before about " + capitalize(rum[RUMOUR_SUBJECT]) +". Again.");
+          return;
         }
         report("%^BOLD%^%^CYAN%^About to hear rumour");
         rum = query_rumour(rum[RUMOUR_SUBJECT], rum[RUMOUR_NUMBER]);
@@ -1698,7 +1698,7 @@ int get_random_source_number(int type){
   }
   report ("number found: " + x);
   return x;
-} 
+}
 
 string get_source(int type, int number){
   string source;
@@ -1735,7 +1735,7 @@ int calculate_gossip_skill(object ob, int gossip_type){
     bard = ob->query_class_level("bard");
     thief = ob->query_class_level("thief");
     result += bard *2;
-    result += thief; 
+    result += thief;
     switch(race)
     {
     case "bugbear":
@@ -1748,14 +1748,14 @@ int calculate_gossip_skill(object ob, int gossip_type){
     case "kobold":
     case "orc":
     case "ogre-mage":
-    case "yuan-ti":    
+    case "yuan-ti":
       result = result / 20;
       break;
     case "minotaur":
       result = result/3;
       break;
     case "centaur":
-    case "wemic":   
+    case "wemic":
       result = result / 2;
       break;
     case "beastman":
@@ -1775,7 +1775,7 @@ int calculate_gossip_skill(object ob, int gossip_type){
         result = result /3;
       default:
         result = (result*9) /10;
-      } 
+      }
       break;
     case "dwarf":
       switch(subrace)
@@ -1786,7 +1786,7 @@ int calculate_gossip_skill(object ob, int gossip_type){
 
       default:
         result = (result*9) /10;
-      } 
+      }
       break;
     case "gnome":
     case "halfling":
@@ -1800,10 +1800,10 @@ int calculate_gossip_skill(object ob, int gossip_type){
         result = (result*7) /10;
         break;
       default:
-        result = result * 1;    
-        break;   
+        result = result * 1;
+        break;
       }
-    } 
+    }
     break;
   default:
     report("NON STANDARD RACE ENCOUNTERED");
@@ -1828,14 +1828,14 @@ int calculate_gossip_skill(object ob, int gossip_type){
       result = result / 2;
       break;
     case "ogre-mage":
-    case "yuan-ti":    
+    case "yuan-ti":
       result = (result *4)/10;
       break;
     case "minotaur":
       result = result / 2;
       break;
     case "centaur":
-    case "wemic":   
+    case "wemic":
     case "beastman":
       result = result * 1;
       break;
@@ -1857,7 +1857,7 @@ int calculate_gossip_skill(object ob, int gossip_type){
         result = (result*12) /10;
       default:
         result = result * 1;
-      } 
+      }
       break;
     case "dwarf":
       switch(subrace)
@@ -1866,7 +1866,7 @@ int calculate_gossip_skill(object ob, int gossip_type){
       result = result / 3;
       default:
         result = (result*6) /10;
-      } 
+      }
       break;
     case "gnome":
     case "halfling":
@@ -1881,19 +1881,19 @@ int calculate_gossip_skill(object ob, int gossip_type){
         break;
       default:
         result = (result*9) /10;
-        break;   
+        break;
       }
     default:
       report("NON STANDARD RACE ENCOUNTERED");
       result = result;
 
-    } 
+    }
     break;
   case BEAST_SOURCE:
     bard = ob->query_class_level("bard");
     thief = ob->query_class_level("thief");
     result += bard *2;
-    result += thief; 
+    result += thief;
     switch(race)
     {
     case "bugbear":
@@ -1906,14 +1906,14 @@ int calculate_gossip_skill(object ob, int gossip_type){
     case "kobold":
     case "orc":
     case "ogre-mage":
-    case "yuan-ti":    
+    case "yuan-ti":
       result = result * 1;
       break;
     case "minotaur":
       result = (result *7) /10;
       break;
     case "centaur":
-    case "wemic":   
+    case "wemic":
     case "beastman":
     case "firbolg":
       result = (result *4) /10;
@@ -1933,7 +1933,7 @@ int calculate_gossip_skill(object ob, int gossip_type){
       result = result/20;
       default:
       result = result/20;
-      } 
+      }
       break;
     case "dwarf":
       switch(subrace)
@@ -1942,9 +1942,9 @@ int calculate_gossip_skill(object ob, int gossip_type){
       result = result/3;
       default:
       result = result/20;
-      } 
+      }
       break;
-    case "gnome":  
+    case "gnome":
     case "halfling":
     case "half-elf":
     case "human":
@@ -1957,13 +1957,13 @@ int calculate_gossip_skill(object ob, int gossip_type){
         break;
       default:
       result = result/20;
-        break;   
+        break;
       }
     default:
       report("NON STANDARD RACE ENCOUNTERED");
       result = result;
     break;
-    } 
+    }
   }
   if (ob->query_property("gossipping"))
   {

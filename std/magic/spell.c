@@ -2199,14 +2199,14 @@ void define_clevel()
         if (caster->query_school() && caster->query_opposing_school()) {
             if (spell_sphere == caster->query_school()) {
                 if (caster->is_class("mage")) {
-                    clevel += caster->query_guild_level("mage") / 14;
+                    clevel += caster->query_guild_level("mage") / 16;
                 }
                 if (FEATS_D->usable_feat(caster, "school familiarity")) {
                     clevel += 4;
                 }
             } else if (spell_sphere == caster->query_opposing_school()) {
                 if (caster->is_class("mage")) {
-                    clevel -= caster->query_guild_level("mage") / 14;
+                    clevel -= caster->query_guild_level("mage") / 16;
                 }
             }
         }
@@ -2240,7 +2240,7 @@ void define_clevel()
     if (FEATS_D->usable_feat(caster, "ragecaster")) {
         clevel = caster->query_character_level();
         if (caster->query_property("raged")) {
-            clevel += 4;
+            clevel += 3;
         }
     }
 
@@ -2269,7 +2269,7 @@ void define_base_spell_level_bonus()
 
     if ((spell_type == "mage" || spell_type == "sorcerer" || spell_type == "psion")
         && FEATS_D->usable_feat(caster, "apoapsis of power")) {
-        sdamage_adjustment += 4;
+        sdamage_adjustment += 3;
     }
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
@@ -2280,7 +2280,7 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
-        sdamage = roll_dice(clevel / 5 + 1, 8);
+        sdamage = roll_dice(clevel / 6 + 1, 10);
     } else if (spell_type == "warlock") {
         string blasttype;
 
@@ -2610,7 +2610,15 @@ varargs int checkMagicResistance(object victim, int mod)
      * should scale by quadratic function as well. d20 is unfit for
      * fifty levels of progression. */
 
-    dieroll = roll_dice(1, 100);
+    dieroll = roll_dice(1, 20);
+
+    if (dieroll == 1) {
+        return 0;
+    }
+
+    if (dieroll = 20) {
+        return 1;
+    }
 
     if ((dieroll + mod) > res) {
         return 0;
@@ -3115,23 +3123,26 @@ object *target_selector()
     object * everyone = all_living(place);
     object * slctd = ({});
     int aff;
+    int slevel = query_spell_level(spell_type);
 
     shuffle(foes);
     shuffle(everyone);
 
+    slevel = slevel < 1 ? 1 : slevel;
+
     if (splash_spell == 2) {
-        aff = clevel / 10 + 1;
+        aff = random(slevel) + 1;
         aff = aff > 7 ? 7 : aff;
         slctd += foes[0..aff];
     } else if (splash_spell == 3 || aoe_spell) {
-        aff = clevel / 8 + 1;
+        aff = random(slevel * 2) + 1;
         aff = aff > 7 ? 7 : aff;
         slctd += foes[0..aff];
         if (roll_dice(1, 20) > (clevel / 4)) {
             slctd += everyone[0..(68 / clevel + 1)];
         }
     } else {
-        aff = clevel / 8 + 1;
+        aff = random(slevel) + 1;
         aff = aff > 5 ? 5 : aff;
         slctd += foes[0..aff];
         if (roll_dice(1, 20) > (clevel / 3)) {
@@ -3526,10 +3537,10 @@ void help()
         write("%^BOLD%^%^RED%^This spell has a chance to affect multiple targets.");
     }
     if (splash_spell == 2) {
-        write("%^BOLD%^%^RED%^This spell will affect all enemies.");
+        write("%^BOLD%^%^RED%^This spell will affect mostly enemies.");
     }
     if (splash_spell == 3) {
-        write("%^BOLD%^%^RED%^This spell will affect every non ally.");
+        write("%^BOLD%^%^RED%^This spell will affect everyone.");
     }
 
     if (mapp(feats_required)) {

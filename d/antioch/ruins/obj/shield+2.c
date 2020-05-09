@@ -41,7 +41,7 @@ void create()
 	set_weight(10);
 	set_value(4000);
 	set_property("enchantment",2);
-	set_item_bonus("magic resistance",5);
+	set_item_bonus("magic resistance",1);
 	set_wear((:TO,"wear_func":));
 	set_remove((:TO,"remove_func":));
 	set_struck((:TO,"strike_func":));

@@ -35,7 +35,7 @@ void create()
 
     set_value(100000);
 
-    set_item_bonus("magic resistance", 50);
+    set_item_bonus("magic resistance", 1);
     set_item_bonus("fortitude", 6);
     set_special_material_type("silver");
 

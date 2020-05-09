@@ -58,7 +58,7 @@ int wieldme()
 				" %^GREEN%^emerald"+
 				"%^BOLD%^%^BLACK%^ on the hilt of"+
 				" "+ETO->QCN+"'s sword flashes briefly.",ETO);
-			set_item_bonus("magic resistance",10);
+			set_item_bonus("magic resistance",1);
          ETO->set_property("evil item",1);
 			return 1;
 
@@ -70,7 +70,7 @@ int wieldme()
 				"The smaller %^GREEN%^emeralds%^BLACK%^ "+
 				"on the hilt of "+ETO->QCN+"'s"+
 				" sword glow faintly.",ETO);
-			set_item_bonus("magic resistance",5);
+			set_item_bonus("magic resistance",1);
          ETO->set_property("evil item",1);
 			return 1;
 

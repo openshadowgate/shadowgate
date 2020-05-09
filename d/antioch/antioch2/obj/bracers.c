@@ -22,7 +22,7 @@ void create()
 		remove_property("enchantment");
 		set_property("enchantment",1);
 	}
-	set_item_bonus("magic resistance",10);
+	set_item_bonus("magic resistance",1);
 	set_wear((:TO,"wearme":));
 	set_remove((:TO,"removeme":));
 }

@@ -24,7 +24,7 @@ void create(){
     set_value(2000);
     set_size(2);
     set_property("enchantment",4);
-    set_item_bonus("magic resistance",25);
+    set_item_bonus("magic resistance",2);
     set_item_bonus("damage resistance",4);
     set_property("lore diffculty",40);
     set_wear((:TO,"wear_func":));

@@ -31,13 +31,13 @@ int wear_func(){
    if((string)ETO->query_diety() == "lysara"){
       tell_object(ETO,"%^BOLD%^%^WHITE%^Sliding into the milky white robe, you feel a soothing serenity.%^RESET%^");
       tell_room(EETO,"%^BOLD%^"+ETOQCN+" slides into "+ETO->QP+" milky white robe, the moonstone charms around "+ETO->QP+" waist glow softly.%^RESET%^",ETO);
-      set_item_bonus("magic resistance",10);
+      set_item_bonus("magic resistance",1);
       set_item_bonus("sight bonus",5);
       return 1;
    }else{
       tell_room(EETO,"%^BOLD%^"+ETOQCN+" slips in a milky white robe.%^RESET%^",ETO);
       tell_object(ETO,"%^BOLD%^You slip on the milky white robe, you can almost a calm serenity wash over you.%^RESET%^");
-      set_item_bonus("magic resistance",5);
+      set_item_bonus("magic resistance",1);
       set_item_bonus("sight bonus",2);
       return 1;
    }

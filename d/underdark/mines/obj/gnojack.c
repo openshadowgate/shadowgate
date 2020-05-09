@@ -25,7 +25,7 @@ void create(){
    set_size(1);
    set_property("lore",12);
    set_property("enchantment",3);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    set_value(400+random(150));
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));

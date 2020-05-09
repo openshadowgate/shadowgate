@@ -20,7 +20,7 @@ void create() {
 "were said to be able to shift and move even while worn, in order to better protect the underlying skin of the "
 "wearer.  When unused, they simply tumbled into a heap of shining scales that could not even be discerned as magical.");
    set_property("lore difficulty",25);
-   set_item_bonus("magic resistance",10);
+   set_item_bonus("magic resistance",1);
    while ((int)TO->query_property("enchantment") != 2) {
      TO->remove_property("enchantment");
      TO->set_property("enchantment",2);
