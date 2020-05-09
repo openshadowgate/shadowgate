@@ -162,7 +162,7 @@ void zapper()
         break;
     }
 
-    inven = all_living(environment(caster));
+    inven = target_selector();
     inven = target_filter(inven);
 
 

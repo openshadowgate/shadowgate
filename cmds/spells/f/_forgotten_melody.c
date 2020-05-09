@@ -25,6 +25,7 @@ void create()
         "the song.  The caster does not have to continue singing, as the spell's effects are that the targets become lost in "
         "trying to figure out the tune.");
     mental_spell();
+    splash_spell(2);
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -70,7 +71,7 @@ void spell_effect(int prof)
         " familiar song.");
     spell_kill(target,caster);
 
-    inven = caster->query_attackers();
+    inven = target_selector();
     inven += ({target});
     inven = distinct_array(inven);
     inven = target_filter(inven);

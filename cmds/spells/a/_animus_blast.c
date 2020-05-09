@@ -24,7 +24,7 @@ To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
-    splash_spell(1);
+    splash_spell(3);
     evil_spell(1);
     set_components(([ "mage" : ([ "drop of blood" : 1, "bit of bone" : 1, ]), ]));
 }
@@ -45,7 +45,7 @@ void spell_effect(int prof)
     string undeadtype,myrace;
     object controller;
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

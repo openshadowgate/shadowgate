@@ -18,7 +18,7 @@ void create() {
     set_description("This spell sends a wave of necrotic energy at everyone living in sight, evaporating water and life from them.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     set_save("fort");
     set_components(([
       "mage" : ([ "drop of blood" : 1 ]),
@@ -32,7 +32,7 @@ string query_cast_string() {
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

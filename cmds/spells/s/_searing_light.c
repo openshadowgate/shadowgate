@@ -59,7 +59,7 @@ spell_effect(int prof)
         dest_effect();
         return 1;
     }
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
     attackers += ({ target });
     attackers = distinct_array(attackers);

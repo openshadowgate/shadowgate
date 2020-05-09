@@ -1,8 +1,8 @@
 /*
   _shrapnel_burst.c
-  
+
   Level 5 Multi-Target.
-  
+
   -- Tlaloc -- 4.10.20
 */
 
@@ -15,7 +15,7 @@ inherit SPELL;
 void create()
 {
     ::create();
-    
+
     set_author("tlaloc");
     set_spell_name("shrapnel burst");
     set_spell_level( ([ "psion" : 5 ]) );
@@ -37,36 +37,36 @@ void spell_effect(int prof)
 {
     object *attackers;
     int damage;
-    
-    attackers = caster->query_attackers();
+
+    attackers = target_selector();
     attackers += ({ target });
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
     attackers = distinct_array(attackers);
-    
+
     if(!sizeof(attackers))
     {
         tell_object(caster, "%^BOLD%^Your crystal shrapnel blasts out from you, but hits nothing!");
         return;
     }
-    
+
     tell_object(caster, "%^BOLD%^You focus your psychic energies and crystalline shrapnel explodes outwards from you!");
     say(sprintf("%s focuses on %s psychic energies and crystalline shrapnel explodes outwards from %s!",caster->QCN,caster->query_possessive(),caster->query_subjective()));
-    
+
     damage = sdamage;
-    
+
     foreach(object ob in attackers)
     {
         if(do_save(target, 0))
             damage /= 2;
-        
+
         tell_object(caster, "%^BOLD%^Your crystal shrapnel tears into " + ob->QCN);
         tell_object(ob, "%^BOLD%^The crystal shrapnel tears into you!");
         say("%^BOLD%^The crystal shrapnel tears into " + ob->QCN + "!", ({ ob, caster }));
         damage_targ(ob, "torso", damage, "piercing");
         spell_kill(ob, caster);
     }
-    
+
     spell_successful();
     dest_effect();
 }

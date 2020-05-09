@@ -49,9 +49,8 @@ void spell_effect(int prof) {
         return;
     }
     HIM=target->QCN;
-    foes=caster->query_attackers();
-    if (member_array(target,foes) != -1)
-        foes -= ({ target});
+    foes=target_selector();
+    foes -= ({ target});
     foes = target_filter(foes);
 
 

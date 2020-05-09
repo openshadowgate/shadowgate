@@ -17,6 +17,7 @@ void create() {
     "spell is 1d6 per caster level.%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
+    splash_spell(3);
     //set_target_required(1);
     set_save("fort");
     set_components(([
@@ -53,7 +54,7 @@ void spell_effect(int prof)
     "of %^BOLD%^%^RED%^force%^BOLD%^%^WHITE%^ rolls out from "+caster->QCN+
     "%^BOLD%^%^WHITE%^ going in all directions!%^RESET%^", caster);
 
-    foes += all_living(environment(caster));
+    foes += target_selector();
     if(!sizeof(foes))
     {
         if(objectp(environment(environment(caster)))) foes += all_living(environment(caster));

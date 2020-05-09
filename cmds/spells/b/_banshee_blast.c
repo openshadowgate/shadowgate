@@ -35,8 +35,7 @@ void spell_effect(int prof)
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM, directed at " +target->QCN+".",caster);
     message("info","%^BLUE%^You hear a horrible high-pitched scream.",nearbyRoom(place,2));
 
-    foes = all_living(place);
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
+    foes = target_selector();
     foes = target_filter(foes);
 
     if (sizeof(foes)) {

@@ -23,7 +23,7 @@ void create()
         "rays and will be subject to a number of different attacks from the spell.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(2);
     set_target_required(1);
     set_save("varied");
 }
@@ -60,7 +60,7 @@ void spell_effect(int prof)
 
     hits = clevel / 11;
 
-    attackers = (object*)caster->query_attackers();
+    attackers = target_selector();
     attackers = distinct_array(attackers);
     attackers -= ({ target });
 

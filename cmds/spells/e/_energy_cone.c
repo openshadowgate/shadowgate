@@ -23,7 +23,7 @@ void create() {
     set_somatic_comp();
     set_arg_needed();
     set_save("reflex");
-    splash_spell(1);
+    splash_spell(2);
 }
 
 string query_cast_string() {
@@ -114,7 +114,7 @@ void spell_effect(int prof){
                dam_type = "sonic";
                 break;
     }
-    foes += all_inventory(place);
+    foes += target_selector();
     foes = filter_array(foes, "is_non_immortal", FILTERS_D);
 
     if(!sizeof(foes))

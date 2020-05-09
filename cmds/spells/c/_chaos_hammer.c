@@ -52,7 +52,7 @@ void spell_effect(int prof)
     hits = ({});
     inven = ({});
 
-    inven = all_living(environment(target));
+    inven = target_selector();
     inven -= ({ target });
     inven -= ({ caster });
 

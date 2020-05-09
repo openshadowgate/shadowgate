@@ -96,7 +96,7 @@ void spell_effect(int prof) {
         tell_object(target, "%^BOLD%^%^RED%^A stream of fire from "+caster->QCN+" rams towards you!");
     }
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     hits = ({});
     if(pointerp(caster->query_attackers())) hits += caster->query_attackers();
     if(pointerp(target->query_attackers())) hits += target->query_attackers();

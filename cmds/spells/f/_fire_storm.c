@@ -68,8 +68,7 @@ void execute_attack()
         return;
     }
 
-    foes = all_living(place);
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
+    foes = target_selector();
     foes = target_filter(foes);
 
     if (time > clevel * 2 || !present(caster,place))

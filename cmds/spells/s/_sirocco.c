@@ -16,14 +16,14 @@ void create() {
     set_syntax("cast CLASS sirocco");
     set_damage_desc("bludgeoning");
     set_description("A blast of furnace-hot wind blasts downward, smashing them with power of the blast and knocking them prone.");
-    splash_spell(1);
+    splash_spell(3);
     set_save("fort");
 }
 
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place,"%^BLUE%^%^BOLD%^"+caster->QCN+" raises hand and releases waves of hot winds in all directions!%^RESET%^");

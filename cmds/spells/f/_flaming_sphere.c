@@ -34,6 +34,7 @@ void create() {
     set_target_required(1);
     set_immunities( ({"fire"}) );
     set_save("reflex");
+    splash_spell(1);
 }
 
 string query_cast_string() {
@@ -70,7 +71,7 @@ spell_effect(int prof){
     inven = all_inventory(environment(caster));
     inven = filter_array(inven, "is_non_immortal",FILTERS_D);
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     hits = ({});
     if(pointerp(caster->query_attackers())) hits += caster->query_attackers();
     if(pointerp(target->query_attackers())) hits += target->query_attackers();

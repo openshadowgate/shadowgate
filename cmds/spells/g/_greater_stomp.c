@@ -73,7 +73,7 @@ void execute_attack(){
       dest_effect();
       return;
    }
-   inven = all_living(storm_room);
+   inven = target_selector();
    if(sizeof(inven) > 0){
       foes = filter_array(inven,"is_non_immortal",FILTERS_D);
       foes = target_filter(foes);

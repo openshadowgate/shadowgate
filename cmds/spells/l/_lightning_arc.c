@@ -16,7 +16,7 @@ void create() {
     set_description("You generate an arc of lightning between at least two targets. It connects between them and causes damage to everything in its path. This spell requires at least two opponents to work. An agile opponent might step out of its way and avoid some of the energy.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(2);
     set_save("reflex");
 }
 
@@ -27,7 +27,7 @@ string query_cast_string() {
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place,"%^BOLD%^%^ORANGE%^"+caster->QCN+" waves hand and releases an arc of electricity!%^RESET%^");

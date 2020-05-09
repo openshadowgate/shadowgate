@@ -21,7 +21,7 @@ void create()
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(2);
     set_save("reflex");
 }
 
@@ -39,7 +39,7 @@ void spell_effect(int prof)
     object *attackers;
     int i;
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     if(!sizeof(attackers))

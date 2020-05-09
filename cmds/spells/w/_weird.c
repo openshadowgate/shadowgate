@@ -18,7 +18,7 @@ void create()
     set_description("With this spell, caster extends fears and horrors of own mind into material plane, causing pain and suffering to everything in sight. Only a strong will can withstand this power, and only to avoid some of the suffering..");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(2);
     set_save("will");
 }
 
@@ -31,7 +31,7 @@ void spell_effect(int prof)
 {
     object* attackers;
     int i, admg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
     attackers = target_filter(attackers);
 

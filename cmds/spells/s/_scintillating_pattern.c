@@ -14,13 +14,13 @@ void create() {
     set_syntax("cast CLASS scintillating pattern");
     set_damage_desc("mass confusion for clevel/5 + 1 rounds on enemies");
     set_description("This casting summons forward illusionary patter that briefly captivates and confuses enemies that are weaker than the spell.");
-    splash_spell(1);
+    splash_spell(2);
 }
 
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place,"%^MAGENTA%^%^BOLD%^Spirals of scintillating patterns appear in the air!%^RESET%^");

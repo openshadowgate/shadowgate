@@ -19,7 +19,7 @@ void create()
     set_somatic_comp();
     set_target_required(1);
     set_save("fort");
-    splash_spell(1);
+    splash_spell(3);
 }
 
 string query_cast_string()
@@ -46,8 +46,7 @@ void explode()
     object* attackers;
     int i;
 
-    attackers = all_living(place);
-    attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
+    attackers = splash_spell(3);
     attackers = target_filter(attackers);
     tell_room(place, "%^BOLD%^%^GREEN%^As acidic slime finally destroys the undead it explodes, spreading acid around.");
 

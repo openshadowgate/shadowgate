@@ -18,7 +18,7 @@ void create() {
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     evil_spell(1);
     set_save("will");
 }
@@ -26,8 +26,7 @@ void create() {
 void spell_effect(int prof){
     object *attackers;
     int i,admg, align;
-    attackers = all_living(place);
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
+    attackers = target_selector();
     attackers = target_filter(attackers);
     attackers -= caster->query_followers();
 

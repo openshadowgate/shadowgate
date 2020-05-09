@@ -95,7 +95,7 @@ void do_incendiary() {
       dest_effect();
       return;
    }
-    attackers = all_living(place);
+   attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

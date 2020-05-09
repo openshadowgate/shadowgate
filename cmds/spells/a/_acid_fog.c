@@ -60,7 +60,7 @@ void execute_attack()
         return;
     }
 
-    foes = all_living(place);
+    foes = target_selector();
     foes = target_filter(foes);
     foes -= ({ caster });
 

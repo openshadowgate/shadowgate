@@ -76,7 +76,7 @@ void do_storm() {
         dest_effect();
         return;
     }
-    foes = all_living(place);
+    foes = target_selector();
     foes = target_filter(foes);
     foes -= ({caster});
 

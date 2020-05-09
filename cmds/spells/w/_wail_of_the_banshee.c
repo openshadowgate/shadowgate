@@ -19,7 +19,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_save("fort");
-    splash_spell(1);
+    splash_spell(3);
 }
 
 string query_cast_string() {
@@ -35,7 +35,7 @@ void spell_effect(int prof)
     tell_room(place,"%^BLUE%^"+caster->QCN+" releases a HORRIBLE SCREAM in fell tongues, you feel your soul is being ripped from your body.",caster);
     message("info","%^BLUE%^You hear a horrible high-pitched scream.",nearbyRoom(place,2));
 
-    foes = all_living(place);
+    foes = target_selector();
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     foes = target_filter(foes);
 

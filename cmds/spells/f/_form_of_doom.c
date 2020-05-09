@@ -119,7 +119,7 @@ void execute_attack(){
    room  = environment(caster);
    party = (string)caster->query_party();
    if(party) { party_members = (object *)PARTY_OB->query_party_members(party); }
-   inven = all_living(room);
+   inven = target_selector();
    inven -= ({caster});
    inven = filter_array(inven,"is_non_immortal",FILTERS_D);
    inven = filter_array(inven,"party_filter",TO);

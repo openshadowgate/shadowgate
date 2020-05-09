@@ -17,7 +17,7 @@ void create()
     set_description("This spell sends a waves of dark bolts snatched from the plane of shadow. A quick opponent might dodge bolts, but will still be damaged by the cold. This spell will aim at every living present.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     set_save("reflex");
 }
 
@@ -30,7 +30,7 @@ void spell_effect(int prof)
 {
     object *attackers;
     int i,admg;
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

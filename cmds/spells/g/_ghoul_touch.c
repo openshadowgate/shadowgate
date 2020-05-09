@@ -24,6 +24,7 @@ Additionally, the paralyzed subject exudes a carrion stench that causes all livi
     set_save("fort");
     set_verbal_comp();
     set_somatic_comp();
+    splash_spell(3);
     mental_spell(1);
     set_target_required(1);
 }
@@ -78,7 +79,7 @@ spell_effect(int prof) {
 
         tell_room(place,"%^BOLD%^%^CYAN%^"+target->QCN+" recks of rot.");
         //This spell must be evil.
-        attackers = all_living(place);
+        attackers = target_selector();
         attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
         attackers = target_filter(attackers);
         foreach(attacker in attackers)

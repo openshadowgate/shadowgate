@@ -54,7 +54,7 @@ void execute_attack()
         return;
     }
 
-    foes = all_living(place);
+    foes = target_selector();
     foes -= ({caster});
     if(caster->query_followers()) { foes -= caster->query_followers(); }
     foes = target_filter(foes);

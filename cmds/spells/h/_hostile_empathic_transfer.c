@@ -19,6 +19,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
+    splash_spell(3);
 }
 
 void spell_effect(int prof) {
@@ -28,7 +29,7 @@ void spell_effect(int prof) {
 
     mylevel = clevel;
 
-    foes = all_living(environment(caster));
+    foes = target_selector();
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
 
     foes = target_filter(foes);

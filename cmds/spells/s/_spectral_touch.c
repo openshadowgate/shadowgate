@@ -42,7 +42,7 @@ spell_effect(int prof){
     tell_object(caster,"%^BOLD%^%^CYAN%^An eerie blue glow surrounds "+
        "your hand as you begin to chant.%^RESET%^");
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
     attackers += ({ target });
     attackers = distinct_array(attackers);

@@ -52,8 +52,7 @@ void spell_effect(int prof){
         return;
     }
 
-    attackers = caster->query_attackers();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
+    attackers = target_selector();
     attackers += ({ target });
     attackers = distinct_array(attackers);
     attackers = target_filter(attackers);

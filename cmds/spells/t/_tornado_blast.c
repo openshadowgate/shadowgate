@@ -73,14 +73,8 @@ void spell_effect(int prof) {
     }
     tell_object(place,"%^BOLD%^%^BLACK%^The %^CYAN%^vortex %^BLACK%^widens, "+
        "striking all in its path!");
-    if(!living(caster)) {
-        foes += all_living(environment(target));
-        foes = target_filter(foes);
-        if(member_array(caster,foes) != -1) foes -= ({caster});
-    }else{
-        foes += caster->query_attackers();
-        if(member_array(target,foes) != -1) foes -= ({target});
-    }
+    foes += target_selector();
+    if(member_array(target,foes) != -1) foes -= ({target});
 
     for(i=0;i<sizeof(foes);i++){
        if(foes[i]->id(""+caster->query_name()+" summoned")) continue;

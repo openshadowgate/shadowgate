@@ -54,7 +54,7 @@ void execute_attack() {
         return;
     }
     mylevel = clevel;
-    foes = all_living(place);
+    foes = target_selector();
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     ownparty = ({});
     if(userp(caster)){

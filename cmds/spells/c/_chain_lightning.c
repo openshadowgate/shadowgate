@@ -88,7 +88,7 @@ void spell_effect(int prof)
     inven = ({});
     // inven = all_inventory(environment(target));
     // time for this spell to work as advertised; living targets only.
-    inven = all_living(environment(target));
+    inven = target_selector();
     inven -= ({ target }); // target already gets hit with initial damage!
     inven -= ({ caster }); // caster chooses targets within 30ft, so cannot be hit
 

@@ -17,7 +17,7 @@ void create()
     set_description("The ultimate skill of the most trained evokers, this spell unleashes a hellish blast of energy in all directions from a single point directed by the caster. A simultaneous blast of sonic, acid, fire and electricity unleashes massive damage upon everyone near the caster!\n\n%^BOLD%^%^RED%^Note this spell will do damage as if it were four levels higher.  This is before any further modifications due to feats.%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     set_damage_desc("quarter of each acid, fire, electricity and sonic");
     set_save("reflex");
     set_components(([
@@ -35,7 +35,7 @@ void spell_effect(int prof)
     object* attackers;
     int i, admg;
 
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
     attackers = target_filter(attackers);
 

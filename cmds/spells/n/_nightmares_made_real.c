@@ -59,7 +59,7 @@ void execute_attack(){
       return;
    }
 //   attackers = caster->query_attackers();
-   attackers = all_living(place);
+   attackers = target_selector();
    attackers = target_filter(attackers);
 
 

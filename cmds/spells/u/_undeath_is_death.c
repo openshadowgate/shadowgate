@@ -19,7 +19,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
-    splash_spell(1);
+    splash_spell(3);
 }
 
 string query_cast_string() {
@@ -34,7 +34,7 @@ void spell_effect(int prof)
     tell_object(caster, "%^BOLD%^%^ORANGE%^As you finish drawing a circle of life, you channel energy out of it.");
     tell_room(place, "%^BOLD%^%^ORANGE%^" + caster->QCN + " channels blinding energy out of the light circle.", caster);
 
-    foes = caster->query_attackers();
+    foes = target_selector();
     foes = target_filter(foes);
     foes = shuffle(foes);
 

@@ -18,7 +18,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
-    splash_spell(1);
+    splash_spell(2);
 }
 string query_cast_string()
 {
@@ -30,7 +30,7 @@ void spell_effect(int prof)
 {
     object* attackers;
     int i, dmg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place, "%^ORANGE%^The earth turns into a mud!%^RESET%^");

@@ -19,6 +19,7 @@ void create(){
     set_somatic_comp();
     set_target_required(1);
     set_save("reflex");
+    splash_spell(1);
 }
 
 int preSpell(){
@@ -47,7 +48,7 @@ spell_effect(int prof){
         dest_effect();
         return 1;
     }
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers += ({ target });
     attackers = target_filter(attackers);

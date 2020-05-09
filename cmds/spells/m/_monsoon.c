@@ -61,7 +61,7 @@ void do_storm()
         return;
     }
 
-    foes = all_living(place);
+    foes = target_selector();
     foes = target_filter(foes);
 
     if(time > clevel || !present(caster,place))

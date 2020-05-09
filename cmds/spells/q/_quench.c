@@ -5,7 +5,7 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("quench");
@@ -19,19 +19,20 @@ void create()
     set_target_required(1);
     set_immunities( ({"water"}) );
     set_save("reflex");
+    splash_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     return "%^RESET%^%^BOLD%^"+caster->QCN+" raises an outstretched hand towards "+target->QCN+" and begins to growl under "+caster->QP+" breath.%^RESET%^";
 }
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     object etp,*foes=({});
     int i;
 
-    if(!objectp(etp = environment(caster))) 
+    if(!objectp(etp = environment(caster)))
     {
         dest_effect();
         return;
@@ -46,10 +47,10 @@ spell_effect(int prof)
 
     spell_successful();
 
-    foes = all_living(etp);
+    foes = target_selector();
     foes = target_filter(foes);
     foes -= ({ caster });
-    
+
     tell_object(caster,"%^BOLD%^%^BLUE%^You release the energy of your spell and send a huge ball of water hurling at "+target->QCN+"!%^RESET%^");
     tell_object(target,"%^BOLD%^%^BLUE%^"+caster->QCN+" releases the energy of "+caster->QP+" spell and sends a huge ball of water hurling at you!%^RESET%^");
     tell_room(etp,"%^BOLD%^%^BLUE%^"+caster->QCN+" releases the energy of "+caster->QP+" spell and sends a huge ball of water hurling at "+target->QCN+"!%^RESET%^",({target,caster}));
@@ -95,7 +96,7 @@ spell_effect(int prof)
     dest_effect();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

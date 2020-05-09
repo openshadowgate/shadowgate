@@ -16,13 +16,13 @@ void create() {
     set_damage_desc("mass sickening");
     set_description("You hum a low tone that makes everyone present briefly sickened.");
     set_save("fort");
-    splash_spell(1);
+    splash_spell(3);
 }
 
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

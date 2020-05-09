@@ -66,7 +66,7 @@ void execute_attack()
 
     message("info", "%^RESET%^%^BLUE%^Howling winds sweep across the place!", nearbyRoom(place,2));
 
-    foes = all_living(place);
+    foes = target_selector();
     foes = target_filter(foes);
     foes -= ({ caster });
 

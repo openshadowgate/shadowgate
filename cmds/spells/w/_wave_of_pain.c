@@ -14,6 +14,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
+    splash_spell(3);
 }
 
 string query_cast_string()
@@ -31,7 +32,7 @@ void spell_effect(int prof)
     object *inven;
     int i,j;
 
-    inven = all_living(place);
+    inven = target_selector();
     inven = target_filter(inven);
 
     inven -= ({caster});

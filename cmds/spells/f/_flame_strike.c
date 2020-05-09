@@ -30,6 +30,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
+    splash_spell(2);
     set_immunities( ({ "fire", "spell_immunity"}) );
     set_save("reflex");
 }
@@ -49,7 +50,7 @@ void spell_effect(int prof)
         return;
     }
     HIM=target->QCN;
-    foes=caster->query_attackers();
+    foes=target_selector();
 
     foes = target_filter(foes);
 

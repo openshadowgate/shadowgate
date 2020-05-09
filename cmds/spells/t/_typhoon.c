@@ -53,7 +53,7 @@ void execute_attack()
 
     message("info", "%^RESET%^%^CYAN%^Howling tornado and the pelting of heavy streams of water threaten to drown out all other sounds!", nearbyRoom(place,2));
 
-    foes = all_living(place);
+    foes = target_selector();
     foes = target_filter(foes);
     foes -= ({ caster });
 

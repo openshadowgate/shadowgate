@@ -25,6 +25,7 @@ void create()
     set_somatic_comp();
     set_target_required(1);
     set_save("reflex");
+    splash_spell(1);
 }
 
 string query_cast_string()
@@ -48,12 +49,7 @@ void spell_effect(int prof)
         YOU = caster->QCN;
     }
     HIM = target->QCN;
-    if (!living(caster)) {
-        foes = all_living(environment(target));
-        foes = filter_array(foes, "is_non_immortal", FILTERS_D);
-    } else {
-        foes = caster->query_attackers();
-    }
+    foes = target_selector();
     if (member_array(target, foes) != -1) {
         foes -= ({ target });
     }

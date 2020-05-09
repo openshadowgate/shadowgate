@@ -68,7 +68,6 @@ void execute_attack()
     }
     room      = environment(caster);
     attackers = caster->query_attackers();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
     for(i=0;i<sizeof(attackers)&&i<6;i++)
     {

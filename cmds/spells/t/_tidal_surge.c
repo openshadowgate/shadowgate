@@ -25,7 +25,7 @@ void create()
     set_somatic_comp();
     set_target_required(1);
     set_save("fort");
-    splash_spell(1);
+    splash_spell(2);
 }
 
 int preSpell()
@@ -108,18 +108,8 @@ void spell_effect(int prof)
         damage_targ(target, (string)target->return_target_limb(), dam, "bludgeoning");
     }
 
-    if (!living(caster)) {
-        foes += all_living(environment(target));
-        foes = target_filter(foes);
-
-        if (member_array(caster, foes) != -1) {
-            foes -= ({ caster });
-        }
+    foes += target_selector();
         foes -= ({ target });
-    }else {
-        foes += caster->query_attackers();
-        foes -= ({ target });
-    }
 
     for (i = 0; i < sizeof(foes); i++) {
         if (!objectp(foes[i])) {

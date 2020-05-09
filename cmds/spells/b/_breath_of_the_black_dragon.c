@@ -1,4 +1,4 @@
-//"breath weapon" for the psion that does acid damage and 
+//"breath weapon" for the psion that does acid damage and
 //continues to burn.  ~Circe~ 7/25/05
 #include <spell.h>
 #include <daemons.h>
@@ -21,6 +21,7 @@ void create() {
     set_somatic_comp();
     set_target_required(1);
     set_save("reflex");
+    splash_spell(1);
 }
 
 string query_cast_string() {
@@ -36,17 +37,12 @@ void spell_effect(int prof) {
     }
     spell_successful();
     dmg = sdamage;
-    if(!living(caster)) {
-        foes = all_living(environment(target));
-        foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-        if(member_array(caster,foes) != -1)
-           foes -= ({caster});
-    } else {
-        foes = caster->query_attackers();
-    }
+
+    foes = target_selector();
+
     if (member_array(target,foes) != -1)
         foes -= ({target});
-    
+
     foes = target_filter(foes);
 
 

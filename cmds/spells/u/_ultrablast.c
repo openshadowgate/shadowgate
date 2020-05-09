@@ -36,13 +36,8 @@ spell_effect(int prof) {
     }
     spell_successful();
     dmg = sdamage;
-    if(!living(caster)) {
-        foes = all_living(environment(target));
-        if(member_array(caster,foes) != -1)
-           foes -= ({caster});
-    } else {
-        foes = caster->query_attackers();
-    }
+    foes = target_selector();
+
     if(caster->is_player()) { // added to make perfect caster useful. N, 6/11.
       tmp = target->query_attackers();
       tmp = filter_array(tmp,"live_filter",TO);
@@ -62,7 +57,7 @@ spell_effect(int prof) {
     tell_room(environment(caster),"%^BOLD%^%^CYAN%^"+target->QCN+" "+
        "reels back in pain and clasps "+target->QP+" ears as the "+
        "echo of a shriek rises in the air!",target);
-    damage_targ(target,target->return_target_limb(),dmg,"mental"); 
+    damage_targ(target,target->return_target_limb(),dmg,"mental");
 
     for(x=0;x<sizeof(foes);x++){
         dmg = sdamage;
@@ -74,7 +69,7 @@ spell_effect(int prof) {
         tell_object(foes[x],"%^RESET%^%^CYAN%^A horrid, jarring shriek "+
            "fills your mind, sending you reeling in pain and clasping "+
            "your ears!");
-        damage_targ(foes[x], foes[x]->return_target_limb(), dmg,"mental" ); 
+        damage_targ(foes[x], foes[x]->return_target_limb(), dmg,"mental" );
     }
     dest_effect();
 }
@@ -83,4 +78,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

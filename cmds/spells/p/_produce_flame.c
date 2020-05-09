@@ -28,6 +28,7 @@ void create() {
     set_somatic_comp();
     set_target_required(1);
     set_save("reflex");
+    splash_spell(1);
 }
 
 string query_cast_string() {
@@ -47,7 +48,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    targets =  all_living(place);
+    targets = target_selector();
     targets = target_filter(targets);
 
     targets -= ({target});

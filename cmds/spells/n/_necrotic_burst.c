@@ -60,8 +60,6 @@ void spell_effect(int prof)
     }
     else
     {
-        /* living = filter_array(living,"is_non_immortal",FILTERS_D); */
-        /* living = target_filter(living); */
         targets = ({target});;
     }
 

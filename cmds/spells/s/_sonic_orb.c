@@ -5,7 +5,7 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("sonic orb");
@@ -27,7 +27,7 @@ void create()
 string query_cast_string() { return "%^BOLD%^%^CYAN%^"+caster->QCN+" chants rapidly, creating a sound orb in "+caster->QP+" hand."; }
 
 
-spell_effect(int prof) 
+spell_effect(int prof)
 {
     object *foes = ({});
     string YOU,HIM,tmp = "";
@@ -44,35 +44,28 @@ spell_effect(int prof)
 
     YOU=caster->QCN;
     HIM=target->QCN;
-    
-    if(!living(caster)) 
-    {
-        foes = all_living(environment(target));
-    } 
-    else 
-    {
-        foes = caster->query_attackers();
-    }
-    
+
+    foes = target_selector();
+
     foes -= ({ target });
     foes = target_filter(foes);
 
     if(interactive(caster)) { tmp="'s finger"; }
-    
+
     tell_object(target,"%^BOLD%^%^CYAN%^An orb of sound speeds through the air from "+YOU+tmp+", heading straight for you!");
     tell_object(caster,"%^BOLD%^%^CYAN%^An orb of sound speeds through the air from your hand, heading straight for "+HIM+"!");
     tell_room(place, "%^BOLD%^%^CYAN%^An orb of sound speeds through the air from "+YOU+tmp+", heading straight for "+HIM+"!",({ caster, target}) );
-    
+
     tell_object(target,"%^BOLD%^%^WHITE%^The sonic orb explodes as it hits you!",target);
     tell_room(environment(target),"%^BOLD%^%^WHITE%^The sonic orb explodes as it hits "+target->QCN+"!",target);
-    
+
     if(!do_save(target)) { damage_targ(target, "torso", sdamage / 2, "acid" ); }
     else { damage_targ(target, "torso", sdamage / 2, "acid" ); }
-    
+
     for(i=0;sizeof(foes),i<sizeof(foes);i++)
     {
         if(!objectp(foes[i])) { continue; }
-        
+
         if(!do_save(foes[i]))
         {
             tell_room(environment(foes[i]),"%^BOLD%^%^BLUE%^Sound catches "+foes[i]->QCN+"!",foes[i]);
@@ -80,18 +73,18 @@ spell_effect(int prof)
             damage_targ(foes[i], "torso", sdamage, "acid" );
             continue;
         }
-        
+
         tell_room(environment(foes[i]),"%^BOLD%^%^GREEN%^Sound catches "+foes[i]->QCN+"!",foes[i]);
         tell_object(foes[i],"%^BOLD%^%^GREEN%^Your flesh is resonating with the sound!");
         damage_targ(foes[i], "torso", sdamage / 2, "acid");
     }
-    
+
     dest_effect();
     return;
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

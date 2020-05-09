@@ -22,6 +22,7 @@ void create() {
 	"knock them from their feet.");
     set_verbal_comp();
     set_somatic_comp();
+    splash_spell(3);
      // school specific mage spell
     set_components(([
       "mage" : ([ "carbon" : 1, ]),
@@ -52,7 +53,7 @@ void spell_effect(int prof)
     	int i;
 
     	caught = ({});
-    	inven = all_living(environment(caster));
+    	inven = target_selector();
     	inven -= ({caster});
     	inven = filter_array(inven,"is_non_immortal",FILTERS_D);
     inven = target_filter(inven);

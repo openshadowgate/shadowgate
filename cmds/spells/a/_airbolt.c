@@ -66,8 +66,7 @@ void spell_effect(int prof)
 
    tell_object(caster,"%^BOLD%^%^BLUE%^You point your finger at "+target->QCN+", unleashing the gale.%^RESET%^");
 
-    attackers = caster->query_attackers();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
+    attackers = target_selector();
     attackers = target_filter(attackers);
     attackers += ({ target });
 

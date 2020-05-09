@@ -19,7 +19,7 @@ void create() {
 
     set_save("fort");
     evil_spell(1);
-    splash_spell(1);
+    splash_spell(3);
 }
 
 string query_cast_string()
@@ -39,7 +39,7 @@ void spell_effect()
     tell_object(caster,"%^BOLD%^%^BLACK%^You connect your hands, clapping loudly, as waves of fell powers spread with the sound.");
     tell_room(place, "%^BOLD%^%^BLACK%^" + caster->QCN + " connects " + caster->QP + " hands with a loud clap, sickening waves of power spread with the sound.");
 
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

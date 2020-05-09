@@ -17,7 +17,7 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
-    splash_spell(1);
+    splash_spell(3);
 }
 
 string query_cast_string()
@@ -31,7 +31,7 @@ void spell_effect(int prof)
 {
     object *attackers;
     int i,dmg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place,"%^BOLD%^%^MAGENTA%^"+caster->QCN+" utters a quick invocation and puddles of liquid obsidian appear under "+caster->QP+" enemies!%^RESET%^");

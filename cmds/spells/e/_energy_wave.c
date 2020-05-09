@@ -111,7 +111,7 @@ void spell_effect(int prof){
                dam_type = "sonic";
                 break;
     }
-    foes += all_inventory(place);
+    foes += target_selector();
     foes = filter_array(foes, "is_non_immortal", FILTERS_D);
 
     if(!sizeof(foes))

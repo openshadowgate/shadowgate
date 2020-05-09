@@ -15,6 +15,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_heart_beat(1);
+    splash_spell(3);
     set_components(([
       "mage" : ([ "ruby dust" : 1 ])
     ]));
@@ -49,7 +50,7 @@ void spell_effect(int prof) {
     object *inven;
     duration = (ROUND_LENGTH) * clevel+4;
 
-    inven = all_living(environment(caster));
+    inven = target_selector();
     inven = filter_array(inven, "is_non_immortal",FILTERS_D);
     inven = target_filter(inven);
 

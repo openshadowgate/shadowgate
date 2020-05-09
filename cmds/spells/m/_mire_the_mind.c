@@ -20,6 +20,7 @@ void create() {
     set_somatic_comp();
     set_helpful_spell(1);
     set_save("will");
+    splash_spell(2);
 }
 
 int preSpell(){
@@ -60,7 +61,7 @@ void test() {
     newaffected = ({});
 //    temphere = all_living(environment(caster));
 // let's see if we can make it more useful on attackers!
-    temphere = caster->query_attackers();
+    temphere = target_selector();
     if(member_array(caster,temphere) != -1) temphere -= ({ caster });
     temphere = filter_array(temphere, "is_non_immortal",FILTERS_D);
     temphere = target_filter(temphere);

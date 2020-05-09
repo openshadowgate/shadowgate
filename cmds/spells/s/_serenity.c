@@ -15,14 +15,14 @@ void create() {
     set_syntax("cast CLASS serenity");
     set_damage_desc("mental");
     set_description("This spell sends a serene song into mind of everyone present. Those who attack you will feel mental pain of overcoming contradiction. Strong-willed will shrug this song off.");
-    splash_spell(1);
+    splash_spell(2);
     set_save("will");
 }
 
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

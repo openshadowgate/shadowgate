@@ -23,6 +23,7 @@ void create()
     set_description("This spell functions exactly like fester, but affects all attackers.");
     set_verbal_comp();
     set_somatic_comp();
+    splash_spell(3);
 }
 
 string query_cast_string()
@@ -34,7 +35,7 @@ void spell_effect()
 {
     object * attackers;
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place,"%^MAGENTA%^You watch as tendrils of darkness hit everyone attacking "+caster->QCN+".",({caster}));

@@ -16,7 +16,7 @@ void create() {
     set_description("You test a creature’s purity of convictions by exposing it to a sheet of divine fire. Unless they are of the same faith as you they'll take damage. Half of this damage comes directly from the divine and can't be reduced.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
 }
 
 string query_cast_string() {
@@ -26,7 +26,7 @@ string query_cast_string() {
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
     attackers = filter_array(attackers,(:$1->query_diety()!=$2->query_diety():),caster);

@@ -17,7 +17,7 @@ void create() {
     set_description("You draw down holy power to smite your enemies, possibly blinding them. Only good and neutral creatures are harmed by the spell, evil creatures are unaffected..");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     set_save("will");
 }
 
@@ -28,7 +28,7 @@ string query_cast_string() {
 void spell_effect(int prof){
     object *attackers;
     int i,admg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" raises hand and dark flames burst out of "+caster->QO+" in all directions!%^RESET%^");

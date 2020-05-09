@@ -9,14 +9,14 @@ void create()
     set_spell_name("biting wind");
     set_spell_level(([ "mage" : 1 ]));
     set_spell_sphere("invocation_evocation");
-    set_syntax("cast CLASS biting wind on TARGET");
+    set_syntax("cast CLASS biting wind");
     set_domains("cold");
     set_damage_desc("cold");
     set_description("A stream of cold releases out from you in all directions, biting everything in sight with cold.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    splash_spell(1);
+    splash_spell(3);
     set_save("fortitude");
 }
 
@@ -32,7 +32,7 @@ void spell_effect(int prof)
     object* attackers;
     int i, dam;
 
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
     attackers = target_filter(attackers);
 

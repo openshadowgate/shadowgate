@@ -101,7 +101,7 @@ void spell_effect(int prof)
     damage_targ(target, target->return_target_limb(), sdamage/2, element);
     damage_targ(target, target->return_target_limb(), sdamage/2, "bludgeoning");
 
-    foes = all_living(place);
+    foes = target_selector();
     foes -= ({ target });
     foes -= ({ caster });
     foes = target_filter(foes);

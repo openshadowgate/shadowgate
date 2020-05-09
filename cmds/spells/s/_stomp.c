@@ -19,6 +19,7 @@ void create(){
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
+    splash_spell(3);
     //debug_saves(1);
 }
 
@@ -32,7 +33,7 @@ void spell_effect(int prof) {
 
     mylevel = clevel;
 
-    mytargs =  all_living(place);
+    mytargs = target_selector();
     mytargs -= ({caster});
     mytargs = target_filter(mytargs);
 

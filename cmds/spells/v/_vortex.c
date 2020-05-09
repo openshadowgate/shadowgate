@@ -15,7 +15,7 @@ void create()
     set_syntax("cast CLASS vortex");
     set_damage_desc("bludgeoning, paralyzed");
     set_description("You create a vortex and send it at your opponents... Those who can't dodge become momentarely stuck and paralyzed in it.");
-    splash_spell(1);
+    splash_spell(2);
     set_save("reflex");
 }
 
@@ -28,7 +28,7 @@ void spell_effect(int prof)
 {
     object* attackers;
     int i, admg;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
     attackers = target_filter(attackers);
 

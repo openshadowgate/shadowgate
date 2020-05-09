@@ -29,7 +29,7 @@ void create(){
 "to mobs is consistent no matter the mob's alignment.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(2);
     set_save("reflex");
 }
 
@@ -40,7 +40,7 @@ void spell_effect(int prof){
     object *foes;
     object *party;
 
-   foes = caster->query_attackers();
+    foes = target_selector();
    foes = target_filter(foes);
 
    if(caster->query_party()){

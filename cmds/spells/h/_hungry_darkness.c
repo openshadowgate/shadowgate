@@ -44,7 +44,7 @@ void execute_attack() {
         dest_effect();
         return;
     }
-    foes = all_living(place);
+    foes = target_selector();
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
 
     foes = target_filter(foes);
@@ -110,7 +110,7 @@ void execute_attack() {
         }
         time+=1;
         if (present(caster,place) && caster != target && !caster->query_unconscious()) {
-            environment(CASTER)->addObjectToCombatCycle(TO,1);        
+            environment(CASTER)->addObjectToCombatCycle(TO,1);
         }
         else {
             dest_effect();

@@ -20,7 +20,7 @@ void create()
     set_description("This spell functions exactly like prismatic spray, but creates beam for each attacker.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(2);
     set_target_required(0);
 }
 
@@ -30,9 +30,7 @@ void spell_effect(int prof)
     object *attackers,*targs=({}),tmp;
     int i,hits;
 
-    attackers = caster->query_attackers();
-    attackers = distinct_array(attackers);
-
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     if(!sizeof(attackers))

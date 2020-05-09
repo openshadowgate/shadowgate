@@ -20,6 +20,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_feats_required(([ "bard" : "timeweaver" ]));
+    splash_spell();
 }
 
 string query_cast_string() {
@@ -32,7 +33,7 @@ void spell_effect(int prof) {
     object *mytargs, myparty;
     int duration, i;
     duration = (ROUND_LENGTH * roll_dice(1,4) * 8); // d4 rounds, no +1
-    mytargs = all_living(place);
+    mytargs = target_selector();
     mytargs -= ({ caster });
     mytargs = target_filter(mytargs);
     myparty = ob_party(caster);

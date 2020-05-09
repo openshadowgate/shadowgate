@@ -16,7 +16,7 @@ void create() {
     set_description("Your wrathful words cause physical harm to your enemies. Half of this damage is sonic damage, but the other half results directly from divine power and is therefore not subject to being reduced by resistance to sonic-based attacks. Rebuke is especially devastating to foes who worship your god, punishing them for offending your faith with additional damage.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     set_save("fort");
 }
 
@@ -28,7 +28,7 @@ void spell_effect(int prof){
     object *attackers;
     int i,admg;
     string mygod = caster->query_diety();
-    attackers = all_living(place);
+    attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

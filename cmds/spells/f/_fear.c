@@ -15,6 +15,7 @@ void create()
     set_syntax("cast CLASS fear");
     set_description("Fear sends a wave of horrid thoughts and images out toward the foes around the caster, possibly terrifying them. An invisible cone of terror causes each living creature in the area to become panicked unless it succeeds on a Will save. If cornered, a panicked creature begins cowering. If the Will save succeeds, the creature is shaken for 1 round.");
     mental_spell();
+    splash_spell(3);
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -34,23 +35,9 @@ void spell_effect(int prof)
     tell_object(caster,"%^BLUE%^You send a cone of dark images and "+
                 "deep-seeded fears forth from your hand.");
 
-    if(!living(caster))
-    {
-        if(!objectp(target))
-        {
-            dest_effect();
-            return;
-        }
-        inven = all_living(environment(target));
-        inven = filter_array(inven, "is_non_immortal",FILTERS_D);
-        if(member_array(caster,inven) != -1) { inven -= ({caster}); }
-    }
-    else
-    {
-        inven = caster->query_attackers();
-        inven -= ({caster});
-        inven = filter_array(inven, "is_non_immortal",FILTERS_D);
-    }
+    inven = target_selector();
+    inven -= ({caster});
+    inven = filter_array(inven, "is_non_immortal",FILTERS_D);
 
     inven = distinct_array(inven);
     inven = target_filter(inven);

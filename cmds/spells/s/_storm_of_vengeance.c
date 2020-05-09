@@ -85,7 +85,7 @@ void execute_attack() {
     } // falls through when mystage is above 1
 
 
-    foes = all_living(place);
+    foes = target_selector();
     foes = target_filter(foes);
     foes -= ({ caster });
     define_base_damage(0);

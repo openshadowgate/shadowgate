@@ -29,6 +29,7 @@ void create() {
     set_description("Color spray, when cast, will cause a blinding light of mixed colors to flash from the caster.  All "
 "creatures not in the caster's party can be blinded temporarily by this, or even knocked unconscious.");
     mental_spell();
+    splash_spell(3);
     set_verbal_comp();
     set_somatic_comp();
     success = 0;
@@ -46,7 +47,7 @@ void spell_effect(int prof) {
 
     bonus = prof/10-10;
     affected = random(6) + 1+ bonus;
-    prospective = all_living(place);
+    prospective = target_selector();
     targets = ({});
 
     if (caster->query_party())

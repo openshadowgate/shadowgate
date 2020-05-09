@@ -18,7 +18,7 @@ void create(){
     set_description("This spell causes a great quake to shake the ground, doing some damage to the caster's enemies, and having a chance to knock them down to the ground.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     set_save("reflex");
 }
 
@@ -34,7 +34,7 @@ void spell_effect(int prof){
     object *inven;
     int i,damage;
 
-    inven = caster->query_attackers();
+    inven = target_selector();
     inven = target_filter(inven);
 
     inven -= ({caster});

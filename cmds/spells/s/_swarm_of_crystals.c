@@ -88,7 +88,7 @@ void spell_effect(int prof) {
     }
     inven = all_inventory(environment(caster));
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     hits = ({});
     if(pointerp(caster->query_attackers())) hits += caster->query_attackers();
     if(pointerp(target->query_attackers())) hits += target->query_attackers();

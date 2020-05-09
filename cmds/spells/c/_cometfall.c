@@ -18,6 +18,7 @@ void create(){
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
+    splash_spell(3);
 }
 
 string query_cast_string(){
@@ -31,7 +32,7 @@ string query_cast_string(){
 void spell_effect(int prof){
     object *attackers;
     int i,damage;
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
 

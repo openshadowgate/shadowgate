@@ -15,7 +15,7 @@ void create()
     set_description("A stream of cold releases out from you in all directions, biting everything in sight with cold.");
     set_verbal_comp();
     set_somatic_comp();
-    splash_spell(1);
+    splash_spell(3);
     set_save("reflex");
 }
 
@@ -31,8 +31,7 @@ void spell_effect(int prof)
     object* attackers;
     int i;
 
-    attackers = all_living(place);
-    attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     tell_room(place, "%^BOLD%^%^CYAN%^The power of c%^WHITE%^o%^CYAN%^l%^WHITE%^d e%^BLUE%^b%^CYAN%^b%^BLUE%^s %^CYAN%^from you, freezing the ground.%^RESET%^");

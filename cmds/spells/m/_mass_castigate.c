@@ -15,6 +15,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     mental_spell(1);
+    splash_spell(3);
     set_save("will");
 }
 
@@ -38,7 +39,7 @@ void spell_effect(int prof){
         bonus += 8;
     bonus = -bonus;//negative bonus is bonus to you, positive to them
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     attackers = target_filter(attackers);
 
     foreach(target in attackers)
