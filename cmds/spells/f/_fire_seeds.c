@@ -64,15 +64,11 @@ void spell_effect(int prof) {
 
     spell_successful();
     spell_kill(target,caster);
-    if(!interactive(caster) && !caster->query_invis())
+    if (!interactive(caster) && !caster->query_invis()) {
         foes = ({});
+    }
     if(!living(caster)) {
-        foes = all_living(environment(target));
-        foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    } else {
-        if(sizeof(caster->query_attackers())){
-            foes = caster->query_attackers();
-        }
+        foes = target_selector();
     }
     if(!objectp(target)) return;
     if(sizeof(foes) > 0){

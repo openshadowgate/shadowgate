@@ -3109,6 +3109,40 @@ object* target_filter(object* targets)
     return targets;
 }
 
+object *target_selector()
+{
+    object * foes = caster->query_attackers();
+    object * everyone = all_living(place);
+    object * slctd = ({});
+    int aff;
+
+    shuffle(foes);
+    shuffle(everyone);
+
+    if (splash_spell == 2) {
+        aff = clevel / 10 + 1;
+        aff = aff > 7 ? 7 : aff;
+        slctd += foes[0..aff];
+    } else if (splash_spell == 3 || aoe_spell) {
+        aff = clevel / 8 + 1;
+        aff = aff > 7 ? 7 : aff;
+        slctd += foes[0..aff];
+        if (roll_dice(1, 20) > (clevel / 4)) {
+            slctd += everyone[0..(68 / clevel + 1)];
+        }
+    } else {
+        aff = clevel / 8 + 1;
+        aff = aff > 5 ? 5 : aff;
+        slctd += foes[0..aff];
+        if (roll_dice(1, 20) > (clevel / 3)) {
+            slctd += everyone[0..(48 / clevel + 1)];
+        }
+    }
+
+    slctd = distinct_array(slctd);
+    return slctd;
+}
+
 // filter for perfect casting to remove party members and their
 // fodder from list of stuff that spells will hit.. hopefully
 int perfect_filter(object obj)

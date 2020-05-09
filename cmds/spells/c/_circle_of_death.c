@@ -35,6 +35,7 @@ void spell_effect(int prof)
 
     foes = caster->query_attackers();
     foes = target_filter(foes);
+    foes = shuffle(foes);
 
     max = clevel * 2;
 
@@ -43,8 +44,7 @@ void spell_effect(int prof)
         if (do_save(foe, 4) ||
             foe->query_property("no death") ||
             foe->query_level() > caster->query_level() ||
-            foe->query_level() > clevel ||
-            random(2)
+            foe->query_level() > clevel
             ) {
             tell_object(foe, "%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
             continue;

@@ -9,11 +9,16 @@
 int arrays_equal(mixed *one, mixed *two)
 {
     int i;
-    if(!pointerp(one) || !pointerp(two)) { return 0; }
-    if(sizeof(one) != sizeof(two)) { return 0; }
-    for(i=0;sizeof(one),i<sizeof(one);i++)
-    {
-        if(one[i] != two[i]) { return 0; }
+    if (!pointerp(one) || !pointerp(two)) {
+        return 0;
+    }
+    if (sizeof(one) != sizeof(two)) {
+        return 0;
+    }
+    for (i = 0; sizeof(one), i < sizeof(one); i++) {
+        if (one[i] != two[i]) {
+            return 0;
+        }
     }
     return 1;
 }
@@ -22,12 +27,7 @@ int arrays_equal(mixed *one, mixed *two)
  * Turns array into a set: an array with unique atoms only.
  */
 mixed *distinct_array(mixed *arr) {
-    mapping tmp;
-    int i, maxi;
-
-    for(i = 0, tmp = allocate_mapping(maxi = sizeof(arr)); i<maxi; i++)
-      tmp[arr[i]] = 1;
-    return keys(tmp);
+    return keys(allocate_mapping(arr, 1));
 }
 
 /**
@@ -96,4 +96,20 @@ varargs mixed *exclude_array(mixed *array,int from, int to)
    if(to < sizeof(array) - 1)
       top = array[to + 1 .. sizeof(array) - 1];
    return bottom + top;
+}
+
+/**
+ * Inserts new element into an array. Doesn't change the original
+ *
+ * @param arr Array to wok on
+ * @param el element to insert
+ * @param pos Postion to insert at
+ * @return Modified array
+ */
+mixed insert(mixed arr, mixed el, int pos)
+{
+    if (stringp(arr)) {
+        return arr[0..pos - 1] + el + arr[pos..];
+    }
+    return arr[0..pos - 1] + ({ el }) + arr[pos..];
 }

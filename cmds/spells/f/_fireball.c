@@ -93,8 +93,7 @@ void spell_effect(int prof)
     if(spell_type == "monk") { MAGIC_D->elemental_opportunist(caster, target); }
     spell_successful();
 
-    if(!living(caster)) { foes = all_living(environment(target)); }
-    else { foes = caster->query_attackers(); }
+    foes = target_selector();
 
     foes -= ({ target});
     foes = target_filter(foes);
