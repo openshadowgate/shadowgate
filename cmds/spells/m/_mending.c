@@ -69,7 +69,7 @@ void spell_effect(int prof)
         	return;
     	}
     	if (!ob->query_property("repairtype") &&
-	!ob->is_instrument() && !ob->is_armor() && !ob->is_weapon())
+	!ob->is_instrument() && !ob->is_armor() && !ob->is_weapon() && !ob->is_container() && !ob->is_carving())
 	{
       	tell_object(caster,"That item cannot be repaired.");
         	dest_effect();

@@ -12,7 +12,7 @@ void create()
 {
     object ob;
 
-    MULT = 50;
+    MULT = 65; //up from 50 - odin 5/8/2020
 
     ::create();
     set_name("Klauth");
@@ -86,7 +86,7 @@ void create()
     set_hd(MULT, 10);
     set_hp(MULT * 2000);
     set_new_exp(MULT, "boss");
-    set_overall_ac(-35);
+    set_overall_ac(-55); //up from 35
 
     set_body_type("dragon");
     set_attack_limbs(({ "right claw", "left claw", "mouth", "tail" }));
@@ -332,6 +332,7 @@ object* get_attackers()
 
 // scales up the dragon's health, another 1k hitpoints for
 // each player in the room
+//upping to 2k - Odin 5/8/2020
 void scale_me(int num)
 {
     if (!objectp(TO)) {
@@ -348,8 +349,8 @@ void scale_me(int num)
     TO->remove_property("scale");
     TO->set_property("scale", num);
 
-    TO->set_max_hp(TO->query_max_hp() + (1000 * num));
-    TO->add_hp((1000 * num));
+    TO->set_max_hp(TO->query_max_hp() + (2000 * num));
+    TO->add_hp((2000 * num));
     HEAL = num;
     return;
 }
@@ -461,8 +462,8 @@ void fire_storm()
     if (!objectp(TO)) {
         return;
     }
-    new("/cmds/spells/f/_fire_storm.c")->use_spell(TO, 0, 50, 100, "cleric");
-    new("/cmds/spells/b/_blade_barrier.c")->use_spell(TO, 0, 50, 100, "cleric");
+    new("/cmds/spells/f/_fire_storm.c")->use_spell(TO, 0, MULT, 100, "cleric");  //both of these were static 50, set to MULT - Odin 5/8/2020
+    new("/cmds/spells/b/_blade_barrier.c")->use_spell(TO, 0, MULT, 100, "cleric");
     attacks();
     return;
 }
@@ -585,28 +586,28 @@ void single_target_spell() // always cast two
     case 1: // phantom guardians
 
         if (!has_spell(TO, "phantom guardians")) {
-            new("/cmds/spells/f/_phantom_guardians.c")->use_spell(TO, "soldiers", MULT, 10, "mage");
+            new("/cmds/spells/f/_phantom_guardians.c")->use_spell(TO, "soldiers", MULT, 100, "mage");
             break;
         }
 
     case 2: // shield
 
         if (!has_spell(TO, "shield")) {
-            new("/cmds/spells/s/_shield.c")->use_spell(TO, TO, 65, 100, "mage");
+            new("/cmds/spells/s/_shield.c")->use_spell(TO, TO, MULT, 100, "mage");
             break;
         }
 
     case 3: // spell turning
 
         if (!has_spell(TO, "spell turning")) {
-            new("/cmds/spells/s/_spell_turning.c")->use_spell(TO, TO, 65, 100, "mage");
+            new("/cmds/spells/s/_spell_turning.c")->use_spell(TO, TO, MULT, 100, "mage");
             break;
         }
 
     case 4: // berserker
 
-        if (!has_spell(TO, "berserker")) {
-            new("/cmds/spells/b/_berserker.c")->use_spell(TO, TO, 65, 100, "cleric");
+        if (!has_spell(TO, "frightful aspect")) {
+            new("/cmds/spells/f/_frightful_aspect.c")->use_spell(TO, TO, MULT, 100, "mage");
             break;
         }
 
@@ -623,7 +624,7 @@ void single_target_spell() // always cast two
         }
 
         if (objectp(targ) && !targ->query_blind()) {
-            new("/cmds/spells/b/_blindness.c")->use_spell(TO, targ, 65, 100, "mage");
+            new("/cmds/spells/b/_blindness.c")->use_spell(TO, targ, MULT, 100, "mage");
             break;
         }
 
@@ -640,7 +641,7 @@ void single_target_spell() // always cast two
         }
 
         if (objectp(targ) && !targ->query_property("enfeebled")) {
-            new("/cmds/spells/r/_ray_of_enfeeblement.c")->use_spell(TO, targ, 65, 100, "mage");
+            new("/cmds/spells/r/_ray_of_enfeeblement.c")->use_spell(TO, targ, MULT, 100, "mage");
             break;
         }
 
@@ -658,7 +659,7 @@ void single_target_spell() // always cast two
         }
 
         if (objectp(targ) && !targ->query_paralyzed() && !obj->mind_immunity_check(targ, "silent")) {
-            new("/cmds/spells/p/_powerword_stun.c")->use_spell(TO, targ, 65, 100, "mage");
+            new("/cmds/spells/p/_powerword_stun.c")->use_spell(TO, targ, MULT, 100, "mage");
             obj->dest_effect();
             break;
         }
@@ -675,10 +676,10 @@ void single_target_spell() // always cast two
         if (!objectp(targ)) {
             break;
         }
-        new("/cmds/spells/l/_lightning_bolt.c")->use_spell(TO, targ, 30, 100, "cleric");
+        new("/cmds/spells/l/_lightning_bolt.c")->use_spell(TO, targ, MULT, 100, "cleric");
         break;
 
-    case 9: // flameburst
+    case 9: // was flameburst, changing to polar ray
 
         if (!objectp(targ)) {
             targ = pick_target();
@@ -686,7 +687,7 @@ void single_target_spell() // always cast two
         if (!objectp(targ)) {
             break;
         }
-        new("/cmds/spells/f/_flameburst.c")->use_spell(TO, targ, 30, 100, "cleric");
+        new("/cmds/spells/p/_polar_ray.c")->use_spell(TO, targ, MULT, 100, "mage");
         break;
 
     case 10: // mind fog
@@ -698,7 +699,7 @@ void single_target_spell() // always cast two
         if (!objectp(targ)) {
             break;
         }
-        new("/cmds/spells/m/_mind_fog.c")->use_spell(TO, targ, 65, 100, "mage");
+        new("/cmds/spells/m/_mind_fog.c")->use_spell(TO, targ, MULT, 100, "mage");
         break;
 
     case 11: // greater dispel magic
@@ -721,7 +722,7 @@ void single_target_spell() // always cast two
         if (!objectp(targ)) {
             break;
         }
-        new("/cmds/spells/c/_chill_touch.c")->use_spell(TO, targ, 30, 100, "mage");
+        new("/cmds/spells/c/_chill_touch.c")->use_spell(TO, targ, MULT, 100, "mage");
         break;
 
     case 13: // resonating word
@@ -732,7 +733,7 @@ void single_target_spell() // always cast two
         if (!objectp(targ)) {
             break;
         }
-        new("/cmds/spells/r/_resonating_word.c")->use_spell(TO, targ, 30, 100, "mage");
+        new("/cmds/spells/r/_resonating_word.c")->use_spell(TO, targ, MULT, 100, "mage");
         break;
 
     default: // disintegrate
@@ -743,7 +744,7 @@ void single_target_spell() // always cast two
         if (!objectp(targ)) {
             break;
         }
-        new("/cmds/spells/d/_disintegrate.c")->use_spell(TO, targ, 30, 100, "mage");
+        new("/cmds/spells/d/_disintegrate.c")->use_spell(TO, targ, MULT, 100, "mage");
         break;
     }
 
@@ -787,9 +788,9 @@ void do_inferno(int count)
         }
 
         targ = attackers[i];
-        damage = ((MULT / 2) + roll_dice(1, (MULT / 4)));
+        damage = (MULT + roll_dice(2, MULT)); // fire resistance is very high so I'm dramatically increasing the damage of this
 
-        if (targ->reflex_save(25 + random(20))) {
+        if (targ->reflex_save(MULT - 10)) {
             if (FEATS_D->usable_feat(targ, "evasion")) {
                 tell_object(targ, cm("You dive and twist, dodge and evade for everything you're worth, and you manage to avoid the flames!"));
                 continue;
@@ -800,7 +801,7 @@ void do_inferno(int count)
             continue;
         }
 
-        inv = all_inventory(targ);
+        /*inv = all_inventory(targ);
         for (j = 0; sizeof(inv), j < sizeof(inv); j++) {
             if (!objectp(inv[j])) {
                 continue;
@@ -814,7 +815,7 @@ void do_inferno(int count)
             for (x = 0; x < roll_dice(1, 6); x++) {
                 inv[j]->decay();
             }
-        }
+        }*/
 
         tell_object(targ, cm("You can't get out of the way in time and you are burned by the full force of the inferno!"));
         targ->cause_typed_damage(targ, targ->return_target_limb(), damage, "fire");
@@ -870,7 +871,7 @@ void earthquake()
         targ = attackers[i];
         damage = roll_dice(MULT, 5);
 
-        if (targ->reflex_save(25 + random(20))) {
+        if (targ->reflex_save(MULT - 10)) {
             if (FEATS_D->usable_feat(targ, "evasion")) {
                 tell_object(targ, "%^RESET%^%^ORANGE%^You jump and spin in the air, managing to avoid the worst of the tumbling rubble and shaking ground!");
                 continue;
@@ -897,7 +898,7 @@ void earthquake()
     return;
 }
 
-// cast a ton of spells at level 25 to scare the shit out of the players
+// cast a ton of spells at MULT / 2 to scare the shit out of the players
 void spell_frenzy(int count)
 {
     object targ;
@@ -927,13 +928,13 @@ void spell_frenzy(int count)
     }
 
     switch (random(20)) {
-    case 0..8:      new("/cmds/spells/f/_burning_hands.c")->use_spell(TO, targ, 25, 100, "mage");        break;
+    case 0..8:      new("/cmds/spells/b/_burning_hands.c")->use_spell(TO, targ, (MULT/2), 100, "mage");        break;
 
-    case 9..10:     new("/cmds/spells/c/_chain_lightning.c")->use_spell(TO, targ, 25, 100, "mage"); break;
+    case 9..10:     new("/cmds/spells/c/_chain_lightning.c")->use_spell(TO, targ, (MULT/2), "mage"); break;
 
-    case 11..16:    new("/cmds/spells/m/_lightning_bolt.c")->use_spell(TO, targ, 25, 100, "mage");    break;
+    case 11..16:    new("/cmds/spells/l/_lightning_bolt.c")->use_spell(TO, targ, (MULT/2), "mage");    break;
 
-    default:        new("/cmds/spells/p/_prismatic_spray.c")->use_spell(TO, targ, 25, 100, "mage"); break;
+    default:        new("/cmds/spells/p/_prismatic_spray.c")->use_spell(TO, targ, (MULT/2), "mage"); break;
     }
 
     count++;
@@ -954,15 +955,15 @@ void aoe_spell()
     }
 
     switch (random(24)) {
-    case 0..8:      new("/cmds/spells/f/_fireball.c")->use_spell(TO, targ, 40, 100, "mage");        break;
+    case 0..8:      new("/cmds/spells/f/_fireball.c")->use_spell(TO, targ, MULT, 100, "mage");        break;
 
-    case 9..10:     new("/cmds/spells/c/_chain_lightning.c")->use_spell(TO, targ, 40, 100, "mage"); break;
+    case 9..10:     new("/cmds/spells/c/_chain_lightning.c")->use_spell(TO, targ, MULT, 100, "mage"); break;
 
-    case 11..16:    new("/cmds/spells/m/_web.c")->use_spell(TO, targ, 40, 100, "mage");    break;
+    case 11..16:    new("/cmds/spells/w/_web.c")->use_spell(TO, targ, MULT, 100, "mage");    break;
 
-    case 17..18:    new("/cmds/spells/p/_prismatic_spray.c")->use_spell(TO, targ, 40, 100, "mage"); break;
+    case 17..18:    new("/cmds/spells/p/_prismatic_spray.c")->use_spell(TO, targ, MULT, 100, "mage"); break;
 
-    case 19..21:    new("/cmds/spells/f/_weird.c")->use_spell(TO, targ, 40, 50, "mage");            break;
+    case 19..21:    new("/cmds/spells/w/_wail_of_the_banshee.c")->use_spell(TO, 0, MULT, 100, "mage");            break;
 
     default:
         if (TO->query_property("frenzy timer") < time()) {
@@ -1025,7 +1026,7 @@ void rush() // mouth attack
 
     tell_room(ETO, "%^BOLD%^%^WHITE%^Klauth snaps his huge maw around and clamps visciously down on " + targ->QCN + "!%^RESET%^", targ);
     tell_object(targ, "%^BOLD%^%^WHITE%^Klauth snaps his huge maw around and clamps visciously down on you!%^RESET%^");
-    targ->do_damage(targ->return_target_limb(), random(90) + 90);
+    targ->do_damage(targ->return_target_limb(), random(90) + 90 + MULT);
 
     return roll_dice(3, 20);
 }
@@ -1046,9 +1047,9 @@ void sweep() // tail
             continue;
         }
         targ = attackers[i];
-        damage = roll_dice(3, 40) + 40;
+        damage = roll_dice(3, 40) + 40 + MULT;
 
-        if (targ->reflex_save(45 + random(10))) {
+        if (targ->reflex_save(MULT)) {
             if (FEATS_D->usable_feat(targ, "evasion")) {
                 tell_object(targ, "You dive out of the way, avoiding the dragon's dangerous tail!");
                 continue;
