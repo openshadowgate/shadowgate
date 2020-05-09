@@ -2275,7 +2275,7 @@ void define_base_spell_level_bonus()
 
     if ((spell_type == "mage" || spell_type == "sorcerer" || spell_type == "psion")
         && FEATS_D->usable_feat(caster, "apoapsis of power")) {
-        sdamage_adjustment += 4;
+        sdamage_adjustment += 3;
     }
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
