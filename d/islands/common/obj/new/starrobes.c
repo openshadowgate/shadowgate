@@ -50,7 +50,7 @@ void create()
     set_property("no curse",1);
     set_property("enchantment",7);
     set_property("lore difficulty", 45);
-    set_item_bonus("magic resistance",1);
+    set_item_bonus("magic resistance",4);
     set_item_bonus("bonus_spell_slots",3);
 
     set_wear((:TO,"wear":));

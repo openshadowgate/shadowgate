@@ -9,11 +9,11 @@ void create()
     ::create();
     set_name("robes");
     set_obvious_short("A set of dark red robes");
-    
+
     set_short("%^BOLD%^%^RED%^Robes of the Archmagi%^RESET%^");
-    
+
     set_id(({"robes","robes of the archmagi","Robes of the Archmagi","mage robes","magi robes","robe"}));
-    
+
     set_long(
         "%^BOLD%^%^RED%^These robes are a dark red in color, representing a mage"+
         " who upholds the balance of power between good and evil. They are very"+
@@ -36,25 +36,25 @@ void create()
 			 " mages attacked Batlin. The war raged on for countless months, some even say it lasted for years with neither side managing to"
 			 " best the other. The robe is said to have vanished from history at this time, and although it has been sought for ages, nobody"
 			 " was able to locate this priceless magical artifact.");
-        
+
     set_weight(5);
     set_type("clothing");
-    
+
     set_property("no curse",1);
     set_property("enchantment",7);
 
-    set_item_bonus("magic resistance",1);
+    set_item_bonus("magic resistance",4);
     set_item_bonus("bonus_spell_slots",3);
-    
+
     set_max_internal_encumbrance(21);
-    
+
     set_value(350000);
-    
+
     set_wear((:TO,"wearme":));
     set_remove((:TO,"removeme":));
-    
+
     FLAG = "neutral";
-    
+
     set_property("quest required","%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
 }
 
@@ -63,7 +63,7 @@ int wearme()
 {
     string MASTER;
 
-    if((int)ETO->query_prestige_level("mage") < 45 && (int)ETO->query_prestige_level("sorcerer") < 45) 
+    if((int)ETO->query_prestige_level("mage") < 45 && (int)ETO->query_prestige_level("sorcerer") < 45)
     {
         tell_object(ETO,"You have not earned the right to make use of this item.");
         return 0;
@@ -71,10 +71,10 @@ int wearme()
 
     if((string)ETO->query_gender() == "female") MASTER = "mistress";
     if((string)ETO->query_gender() == "male")   MASTER = "master";
-    
-    if(ALIGN->is_evil(ETO)) 
+
+    if(ALIGN->is_evil(ETO))
     {
-        if(FLAG != "evil") 
+        if(FLAG != "evil")
         {
             tell_object(ETO,"%^BOLD%^%^BLACK%^The robes turn the darkest"+
                 " black as you slip them on.");
@@ -95,8 +95,8 @@ int wearme()
                 " pockets to conceal spell components and the like in"+
                 " them.%^RESET%^ ");
             FLAG = "evil";
-        }   
-        else 
+        }
+        else
         {
             tell_object(ETO,"%^BOLD%^%^BLACK%^The robes feel like a part of"+
                 " you as you slip the trusted garment on.");
@@ -105,9 +105,9 @@ int wearme()
         }
     }
 
-    if(ALIGN->is_good(ETO)) 
+    if(ALIGN->is_good(ETO))
     {
-        if(FLAG != "good") 
+        if(FLAG != "good")
         {
             tell_object(ETO,"%^BOLD%^The robes turn a sparkling white as"+
                 " you slip them on.");
@@ -130,8 +130,8 @@ int wearme()
                 " and the like in them.%^RESET%^ ");
             FLAG = "good";
         }
-        
-        else 
+
+        else
         {
             tell_object(ETO,"%^BOLD%^The robes feel like a part of you"+
                 " as you slip the trusted garment on.");
@@ -139,9 +139,9 @@ int wearme()
                 " seems more powerful after slipping on "+ETO->QP+" robes.",ETO);
         }
     }
-    if(ALIGN->is_neutral(ETO)) 
+    if(ALIGN->is_neutral(ETO))
     {
-        if(FLAG != "neutral") 
+        if(FLAG != "neutral")
         {
             tell_object(ETO,"%^BOLD%^%^RED%^The robes turn a splendid dark"+
                 " red as you slip them on.");
@@ -163,7 +163,7 @@ int wearme()
                 " and the like in them.%^RESET%^ ");
             FLAG = "neutral";
         }
-        else 
+        else
         {
             tell_object(ETO,"%^BOLD%^%^RED%^The robes feel like a part of you"+
                 " as you slip the trusted garment on.");
@@ -171,13 +171,13 @@ int wearme()
                 " seems more powerful after slipping on "+ETO->QP+" robes.",ETO);
         }
     }
-    
-    if(ETO->is_class("mage")) 
+
+    if(ETO->is_class("mage"))
     {
         TO->set_item_bonus("intelligence",6);
         TO->set_item_bonus("charisma",0);
     }
-    else 
+    else
     {
         TO->set_item_bonus("intelligence",0);
         TO->set_item_bonus("charisma",6);
@@ -188,17 +188,17 @@ int wearme()
 
 int removeme()
 {
-    if(FLAG == "neutral") 
+    if(FLAG == "neutral")
     {
         tell_object(ETO,"%^BOLD%^%^RED%^You feel power slip from you as you"+
             " remove your wonderful robes.");
     }
-    if(FLAG == "good") 
+    if(FLAG == "good")
     {
         tell_object(ETO,"%^BOLD%^You feel power slip from you as you"+
             " remove your wonderful robes.");
     }
-    if(FLAG == "evil") 
+    if(FLAG == "evil")
     {
         tell_object(ETO,"%^BOLD%^%^BLACK%^You feel power slip from you as you"+
             " remove your wonderful robes.");
@@ -216,7 +216,7 @@ void init()
 
 int check_put(string str)
 {
-    if(!query_worn()) 
+    if(!query_worn())
     {
         notify_fail("You must be wearing the robes to place something in its"+
             " pockets.\n");

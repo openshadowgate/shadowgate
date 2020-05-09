@@ -97,7 +97,6 @@ void create()
     set_damage(10, 20);
     set_base_damage_type("slashing");
 
-    set_property("spell penetration", 45);
     set_property("weapon resistance", 0);
     set_property("no death", 1);
     set_property("no knockdown", 1);
@@ -109,6 +108,10 @@ void create()
     set_property("no paralyze", 0);
     set_property("no stun", 0);
     set_property("no bows", 1);
+
+    set_monster_feats(({
+        "spell penetration", "greater spell penetration"
+    }));
 
     set_property("added short", ({ "%^RESET%^%^BOLD%^%^BLUE%^ (%^BOLD%^%^YELLOW%^ Naughty dragon champion%^RESET%^%^BOLD%^%^BLUE%^ )%^RESET%^" }));
 

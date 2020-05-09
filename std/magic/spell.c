@@ -2262,10 +2262,16 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 1;
     }
 
-    // Blast, burst
-    if (splash_spell > 1) {
+    // Blast
+    if (splash_spell == 2) {
+        sdamage_adjustment -= 2;
+    }
+
+    //Burst
+    if (splash_spell > 2) {
         sdamage_adjustment -= 3;
     }
+
 
     if ((spell_type == "mage" || spell_type == "sorcerer" || spell_type == "psion")
         && FEATS_D->usable_feat(caster, "apoapsis of power")) {
@@ -3534,13 +3540,13 @@ void help()
         write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
     }
     if (splash_spell == 1) {
-        write("%^BOLD%^%^RED%^This spell has a chance to affect multiple targets.");
+        write("%^BOLD%^%^RED%^This spell has a chance to affect multiple targets.  Its damage is shifted down one level.");
     }
     if (splash_spell == 2) {
-        write("%^BOLD%^%^RED%^This spell will affect mostly enemies.");
+        write("%^BOLD%^%^RED%^This spell will affect mostly enemies.  Its damage is shifted down two levels.");
     }
     if (splash_spell == 3) {
-        write("%^BOLD%^%^RED%^This spell will affect everyone.");
+        write("%^BOLD%^%^RED%^This spell will affect everyone.  Its damage is shifted down three levels.");
     }
 
     if (mapp(feats_required)) {

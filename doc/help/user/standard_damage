@@ -15,7 +15,7 @@ To scale damage successfully to fifty levels ShadowGate engine employs dice rule
 %^CYAN%^L8:%^RESET%^  1d11  + 1/2
 %^CYAN%^L9:%^RESET%^  1d12
 
-%^CYAN%^%^ULINE%^Augmented through Apoapsis of Power (+4 levels):
+%^CYAN%^%^ULINE%^Augmented through Apoapsis of Power (+3 levels):
 %^CYAN%^L10:%^RESET%^  1d12 + 1/2
 %^CYAN%^L11:%^RESET%^  1d13
 %^CYAN%^L12:%^RESET%^  1d13 + 1/2
@@ -23,10 +23,12 @@ To scale damage successfully to fifty levels ShadowGate engine employs dice rule
 
 %^CYAN%^Default:%^RESET%^  1d8
 
-%^CYAN%^Splash Spell:%^RESET%^  -1 level
+%^CYAN%^Splash Spell:%^RESET%^ -1 level
+%^CYAN%^Blast Spell:%^RESET%^  -2 levels
+%^CYAN%^Burst Spell:%^RESET%^  -3 levels
 
-%^CYAN%^AOE (limit 2):%^RESET%^      1d8 per every 5 caster levels
-%^CYAN%^TravAOE (limit 1):%^RESET%^  1d8 per every 5 caster levels
+%^CYAN%^AOE (limit 2):%^RESET%^      1d10 + 1d10 per every 6 caster levels
+%^CYAN%^TravAOE (limit 1):%^RESET%^  1d10 + 1d10 per every 6 caster levels
 
 %^CYAN%^Monks:%^RESET%^    1d10 for all spells
 %^CYAN%^Warlocks:%^RESET%^ 1d10 for all spells, 1d11 for utterdark spells

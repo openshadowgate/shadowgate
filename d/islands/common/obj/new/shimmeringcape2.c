@@ -23,16 +23,16 @@ void create()
     set_property("no curse",1);
     set_property("enchantment",7);
 
-    set_item_bonus("magic resistance",1);
+    set_item_bonus("magic resistance",4);
     set_item_bonus("damage resistance",10);
 
     set_value(100000);
-    
+
     set_lore("%^WHITE%^%^BOLD%^Garments of this distinctive style of cape were imbued with a rather "
         "interesting enchantment, by an unnamed mage in the employ of the Kinnesarudan empire.  Through the "
         "enchantment, and with correctly focussed intentions by the wearer of the cloak, one could actually "
         "%^YELLOW%^<will>%^WHITE%^ the garment to change colour.");
-        
+
     set_property("lore difficulty",18);
     set_wear((:TO,"wear_it":));
     set_struck((:TO,"struck":));
@@ -42,7 +42,7 @@ void create()
 }
 
 
-void init() 
+void init()
 {
     ::init();
     add_action("changeme","will");
@@ -66,16 +66,16 @@ int struck(int damage, object what, object who)
 }
 
 
-int changeme(string str) 
+int changeme(string str)
 {
     if(!str) return 0;
-    if(!TO->query_worn()) 
+    if(!TO->query_worn())
     {
         tell_object(TP,"You can't feel anything from the cloak, without it wrapped about you.");
         return 1;
     }
-   
-    switch(str) 
+
+    switch(str)
     {
     case "blue":
         tell_object(TP,"The cloak shimmers and takes on a myriad of %^BLUE%^bl%^BOLD%^u%^RESET%^%^BLUE%^e%^RESET%^ shades.");
@@ -110,7 +110,7 @@ int changeme(string str)
     case "black":
         tell_object(TP,"The cloak shimmers and takes on a myriad of %^BLACK%^%^BOLD%^bla%^RESET%^%^WHITE%^c%^BLACK%^%^BOLD%^k%^RESET%^ shades.");
         if(!TP->query_invis()) { tell_room(ETP,""+TP->QCN+"'s cloak shimmers and takes on a myriad of %^BLACK%^%^BOLD%^bla%^RESET%^%^WHITE%^c%^BLACK%^%^BOLD%^k%^RESET%^ shades.",TP); }
-        TO->docolour(str);     
+        TO->docolour(str);
         break;
     case "gold":
         tell_object(TP,"The cloak shimmers and takes on a myriad of %^ORANGE%^gol%^BOLD%^d%^RESET%^%^ORANGE%^en%^RESET%^ shades.");
@@ -126,11 +126,11 @@ int changeme(string str)
 }
 
 
-void docolour(string str) 
+void docolour(string str)
 {
     string colour;
-    
-   switch(str) 
+
+   switch(str)
    {
     case "blue":
         TO->set_short("%^RESET%^%^BLUE%^Maj%^BOLD%^o%^RESET%^%^BLUE%^r Ca%^BOLD%^p%^RESET%^%^BLUE%^e of %^BOLD%^D%^RESET%^%^BLUE%^isp%^BOLD%^l%^RESET%^%^BLUE%^ace%^BOLD%^m%^RESET%^%^BLUE%^ent%^RESET%^");
@@ -176,7 +176,7 @@ void docolour(string str)
         tell_object("Wow, you broke it somehow. Contact a wiz!");
         break;
     }
-    
+
     TO->set_long("This is an incredible garment, similar in design to a cloak, but much shorter and not quite "
         "wide enough to cover the shoulders.  It constantly shimmers and hints at every possible shade of "+colour+
         " in a beautiful myriad of patterns and shapes, that somehow seem to move of their own accord, though "
