@@ -3,24 +3,24 @@
 To scale damage successfully to fifty levels ShadowGate engine employs dice rules for spells of different levels across classes. When using damaging spells you may expect the next dies to roll when damage is applied:
 
 %^CYAN%^%^ULINE%^All classes:
-%^CYAN%^L0:%^RESET%^  1d8
-%^CYAN%^L1:%^RESET%^  1d9
-%^CYAN%^L2:%^RESET%^  1d9  + 1/2
-%^CYAN%^L3:%^RESET%^  1d10
-%^CYAN%^L4:%^RESET%^  1d10  + 1/2
-%^CYAN%^L5:%^RESET%^  1d11
-%^CYAN%^L6:%^RESET%^  1d11  + 1/2
-%^CYAN%^L7:%^RESET%^  1d12
-%^CYAN%^L8:%^RESET%^  1d12  + 1/2
-%^CYAN%^L9:%^RESET%^  1d13
+%^CYAN%^L0:%^RESET%^  1d7
+%^CYAN%^L1:%^RESET%^  1d8
+%^CYAN%^L2:%^RESET%^  1d8  + 1/2
+%^CYAN%^L3:%^RESET%^  1d9
+%^CYAN%^L4:%^RESET%^  1d9  + 1/2
+%^CYAN%^L5:%^RESET%^  1d10
+%^CYAN%^L6:%^RESET%^  1d10  + 1/2
+%^CYAN%^L7:%^RESET%^  1d11
+%^CYAN%^L8:%^RESET%^  1d11  + 1/2
+%^CYAN%^L9:%^RESET%^  1d12
 %^CYAN%^Default:%^RESET%^  1d8
 
-%^CYAN%^Splash Spell:%^RESET%^ -1 level
-%^CYAN%^Burst Spell:%^RESET%^  -3 levels
+%^CYAN%^Splash Spell:%^RESET%^ -2 level
+%^CYAN%^Burst Spell:%^RESET%^  -6 levels
 
 Various feats and conditions may shift damage table further.
 
-%^CYAN%^Area of effect:%^RESET%^  1d8 + 1d8 per every 3 caster levels
+%^CYAN%^Area of effect:%^RESET%^  1d4 + 1d4 per every 2 caster levels
 
 %^CYAN%^%^ULINE%^Monks:%^RESET%^
 1d10 for all spells
