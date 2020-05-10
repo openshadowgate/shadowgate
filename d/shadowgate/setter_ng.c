@@ -13,12 +13,11 @@ overview()
 {
     string k;
 
-    foreach(k in setter_chain) {
-        if (functionp((:TO, "display_" + k:))) {
-            call_other(TO, "display_" + k);
-        }
-        write(capitalize(replace_string(k, "_", "")) + ": " + setter_info[k]);
-    }
+    /* foreach(k in setter_chain) { */
+    /*     if (!call_other(TO, "display_" + k)) */
+    /*         write(capitalize(replace_string(k, "_", "")) + ": " + setter_info[k]); */
+    /*     } */
+    /* } */
 }
 
 show_selection(string *slc)
@@ -38,9 +37,7 @@ edit_class(string args)
         possible_classes = filter_array(possible_classes, (:!$1->is_prestige_class():));
         possible_classes = filter_array(possible_classes, (:!$1->is_locked_class():));
         possible_classes = replace_string(possible_classes, ".c", "");
-        possible_lcasses = replace_string(possible_lcasses, "/std/class/", "");
+        possible_classes = replace_string(possible_classes, "/std/class/", "");
+        selection_cache = possible_classes;
     }
-
-
-
 }
