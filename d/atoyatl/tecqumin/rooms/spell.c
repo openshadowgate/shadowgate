@@ -2107,7 +2107,9 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
     }
     spmod += (int)caster->query_property("spell penetration");     // add spell pen to base caster level
 
-    if (checkMagicResistance(victim, spmod)) {
+    dieroll = roll_dice(1, 20);
+
+    if (checkMagicResistance(victim, spmod) && dieroll != 20) {
         sendDisbursedMessage(victim);
         return 1;
     }
@@ -2264,11 +2266,11 @@ void define_base_spell_level_bonus()
     sdamage_adjustment = 0;
 
     if (splash_spell == 1) {
-        sdamage_adjustment -= 2;
+        sdamage_adjustment -= 1;
     }
 
     if (splash_spell > 1) {
-        sdamage_adjustment -= 4;
+        sdamage_adjustment -= 3;
     }
 
     if ((spell_type == "mage" || spell_type == "sorcerer" || spell_type == "psion")
@@ -2284,7 +2286,7 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
-        sdamage = roll_dice(clevel / 2 + 1, 4);
+        sdamage = roll_dice(clevel / 3 + 1, 8);
     } else if (spell_type == "warlock") {
         string blasttype;
 
@@ -2309,12 +2311,12 @@ void define_base_damage(int adjust)
         slevel = slevel < 1 ? 1 : slevel;
 
         if (slevel < 1) {
-            sdamage = roll_dice(clevel, 7);
+            sdamage = roll_dice(clevel, 8);
         }else if (slevel > 0 && slevel < 20) {
             if (slevel % 2) {
-                sdamage = roll_dice(clevel, 8 + (slevel) / 2);
+                sdamage = roll_dice(clevel, 8 + (slevel + 1) / 2);
             }else {
-                sdamage = roll_dice(clevel, 8 + (slevel - 1) / 2 ) + roll_dice(1, clevel / 2);
+                sdamage = roll_dice(clevel, 8 + slevel / 2 ) + roll_dice(1, clevel / 2); //removed -1 to function follow progression previously.  Updated standard damage - Odin 5/9/2020
             }
         } else {
             sdamage = roll_dice(clevel, 8);
@@ -2609,15 +2611,12 @@ varargs int checkMagicResistance(object victim, int mod)
         res = (int)victim->query_property("magic resistance");
     }
 
+    /* As character levels progress it is more noticable that maximum delta
+     * between possible mr and mpen grows, thus ideally this roll
+     * should scale by quadratic function as well. d20 is unfit for
+     * fifty levels of progression. */
+
     dieroll = roll_dice(1, 20);
-
-    if (dieroll == 1 && res) {
-        return 1;
-    }
-
-    if (dieroll == 20) {
-        return 0;
-    }
 
     if ((dieroll + mod) > res) {
         return 0;
@@ -3131,15 +3130,18 @@ object *target_selector()
 
     if (splash_spell == 2) {
         aff = random(slevel) + 1;
-        aff = aff > 6 ? 6 : aff;
+        aff = aff > 7 ? 7 : aff;
         slctd += foes[0..aff];
     } else if (splash_spell == 3 || aoe_spell) {
-        aff = random(slevel) + 1;
-        aff = aff > 6 ? 6 : aff;
-        slctd += everyone[0..aff];
+        aff = random(slevel * 2) + 1;
+        aff = aff > 7 ? 7 : aff;
+        slctd += foes[0..aff];
+        if (roll_dice(1, 20) > (clevel / 4)) {
+            slctd += everyone[0..(68 / clevel + 1)];
+        }
     } else {
         aff = random(slevel) + 1;
-        aff = aff > 4 ? 4 : aff;
+        aff = aff > 5 ? 5 : aff;
         slctd += foes[0..aff];
         if (roll_dice(1, 20) > (clevel / 3)) {
             slctd += everyone[0..(48 / clevel + 1)];
