@@ -8,6 +8,11 @@ string *search_paths() { return ({  }); } // temporary
 
 int caster_class() { return 0; }
 
+int is_locked_class()
+{
+    return 1;
+}
+
 string *restricted_races() {
     return ({"beastman","bugbear","dwarf","elf","gnome","goblin","half-elf","half-orc","halfling","hobgoblin",
         "kobold","orc","drow","firbolg","gnoll","half-drow","half-ogre","ogre","ogre-mage","voadkyn","wemic" });

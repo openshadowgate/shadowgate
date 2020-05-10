@@ -432,22 +432,6 @@ varargs void reset_character_info(string what, int flag)
                 FirstBuild = 0;
                 ETO->remove_XP_tax("all");
                 break;
-            case "template":
-                clear_subrace();
-                clear_stats();
-                clear_hair();
-                clear_eyes();
-                clear_height();
-                clear_weight();
-                clear_body_type();
-                clear_age();
-                clear_alignment();
-                clear_bonus_language();
-                build_restrictions("myclass");
-                build_restrictions("race");
-                build_restrictions("template");
-                if(FirstBuild) { BuildArray = ({"template"}); EndAt = "finalize"; }
-                break;
             case "stats":
                 clear_stats();
                 if(FirstBuild) { BuildArray = ({"stats", "hair color", "eye color", "bonus language"}); EndAt = "finalize"; }
@@ -480,6 +464,10 @@ varargs void reset_character_info(string what, int flag)
             case "bonus language":
                 clear_bonus_language();
                 if(FirstBuild) { BuildArray = ({"bonus language"}); EndAt = "finalize"; }
+                break;
+            case "template":
+                clear_bonus_language();
+                if(FirstBuild) { BuildArray = ({"template"}); EndAt = "finalize"; }
                 break;
             case "alignment":
                 clear_alignment();
@@ -582,21 +570,12 @@ int brief(string str)
 //stats related code - Stats should be starting at the minimum needed for a myclass - Saide
 void setup_stats()
 {
-    mapping tmp, tmp2;
+    mapping tmp;
     int i, change;
     string *temp_data;
-    string statd;
     stats_setup = 1;
     /*if(!bonus)*/ bonus = MAXPOINTS;
     tmp = MyCharacterInfo["myclass"]["minimum stats"];
-    tmp2 = MyCharacterInfo["myclass"]["minimum template stats"];
-
-    foreach(statd in keys(tmp2)) {
-        if (tmp[statd] < tmp2[statd]) {
-            tmp[statd] = tmp2[statd];
-        }
-    }
-
     temp_data = keys(tmp);
     if(!sizeof(temp_data)) return;
     change = 0;
@@ -1786,167 +1765,141 @@ void pick_deity()
 void build_restrictions(string type)
 {
     object MyOb;
-    string MyFile, * possible_races, MyClass, * available_races, * available_subraces, * possible_subraces;
-    string ThisSubRace, * temp_data, targ;
+    string MyFile, *possible_races, MyClass, *available_races, *available_subraces, *possible_subraces;
+    string ThisSubRace, *temp_data, targ;
     mapping minimumstatsmap;
     int i, y, rflag = 1;
 
-    switch (type) {
+    switch(type)
+    {
         //builds myclass based restrictions - IE races/alignments related to myclass/minimum stats - Saide
-    case "myclass":
-        available_races = ({});
-        available_subraces = ({});
-        possible_races = get_dir("/std/races/*.c");
-        possible_races = explode(implode(possible_races, ""), ".c");
-        //tell_object(ETO, "possible races = "+identify(possible_races));
-        if (!pointerp(possible_races)) {
-            tell_object(ETO, "ERROR: Generating a list of possible races!");
-            return;
-        }
-        MyClass = MyCharacterInfo["myclass"]["myclass name"];
-        MyFile = "/std/class/" + MyClass + ".c";
-        if (file_exists(MyFile)) {
-            minimumstatsmap = MyFile->stat_requirements();
-            if (mapp(minimumstatsmap)) {
-                MyCharacterInfo["myclass"]["minimum stats"] = minimumstatsmap;
+        case "myclass":
+            available_races = ({});
+            available_subraces = ({});
+            possible_races = get_dir("/std/races/*.c");
+            possible_races = explode(implode(possible_races, ""), ".c");
+            //tell_object(ETO, "possible races = "+identify(possible_races));
+            if(!pointerp(possible_races))
+            {
+                tell_object(ETO, "ERROR: Generating a list of possible races!");
+                return;
             }
-            temp_data = MyFile->restricted_alignments();
-            if (pointerp(temp_data)) {
-                MyCharacterInfo["myclass"]["restricted alignments"] = temp_data;
+            MyClass = MyCharacterInfo["myclass"]["myclass name"];
+            MyFile = "/std/class/"+MyClass+".c";
+            if(file_exists(MyFile))
+            {
+                minimumstatsmap = MyFile->stat_requirements();
+                if(mapp(minimumstatsmap))
+                {
+                    MyCharacterInfo["myclass"]["minimum stats"] = minimumstatsmap;
+                }
+                temp_data = MyFile->restricted_alignments();
+                if(pointerp(temp_data))
+                {
+                    MyCharacterInfo["myclass"]["restricted alignments"] = temp_data;
+                }
             }
-        }
-        for (i = 0; i < sizeof(possible_races); i++) {
-            MyFile = "/std/races/" + possible_races[i] + ".c";
-            if (!file_exists(MyFile)) {
+            for(i = 0;i < sizeof(possible_races);i++)
+            {
+                MyFile = "/std/races/"+possible_races[i]+".c";
+                if(!file_exists(MyFile)) continue;
+                temp_data = MyFile->restricted_classes("");
+                if(MyFile->is_restricted() && rflag)
+                {
+                    if(OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
+                       OB_ACCOUNT->is_high_mortal(ETO->query_true_name()))
+                        rflag = 0;
+                    if(avatarp(ETO)) rflag = 0;
+                    if(ETO->query("is_valid_npc")) rflag = 0;
+                    if(rflag) continue;
+                }
+                if(MyFile->is_gender_locked(MyCharacterInfo["race"]["gender"]))
+                    continue;
+                if(member_array(MyClass, temp_data) == -1) available_races += ({possible_races[i]});
+                //tell_object(ETO, "RACE OB existed!");
+                possible_subraces = MyFile->query_subraces(ETO);
+                if(pointerp(possible_subraces))
+                {
+                    for(y = 0;y < sizeof(possible_subraces);y++)
+                    {
+                        ThisSubRace = possible_subraces[y];
+                        temp_data = MyFile->restricted_classes(ThisSubRace);
+                        if(!pointerp(temp_data))
+                        {
+                            available_subraces += ({ThisSubRace});
+                            continue;
+                        }
+                        else
+                        {
+                            if(member_array(MyClass, temp_data) == -1)
+                            {
+                                if(member_array(ThisSubRace, available_subraces) == -1) available_subraces += ({ThisSubRace});
+                                if(member_array(possible_races[i], available_races) == -1) available_races += ({possible_races[i]});
+
+                            }
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+                //tell_object(ETO, "RACE OB DOES NOT EXIST for "+possible_races[i]+"!");
                 continue;
             }
-            temp_data = MyFile->restricted_classes("");
-            if (MyFile->is_restricted() && rflag) {
-                if (OB_ACCOUNT->is_experienced(ETO->query_true_name()) ||
-                    OB_ACCOUNT->is_high_mortal(ETO->query_true_name())) {
-                    rflag = 0;
-                }
-                if (avatarp(ETO)) {
-                    rflag = 0;
-                }
-                if (ETO->query("is_valid_npc")) {
-                    rflag = 0;
-                }
-                if (rflag) {
+            available_races = distinct_array(available_races);
+            available_subraces = distinct_array(available_subraces);
+            MyCharacterInfo["myclass"]["available races"] = available_races;
+            MyCharacterInfo["myclass"]["available subraces"] = available_subraces;
+            break;
+        case "race": case "subrace":
+            MyFile = "/std/races/"+MyCharacterInfo["race"]["race name"] +".c";
+            if(!file_exists(MyFile))
+            {
+                tell_object(ETO, "ERROR: Could not find your race file.");
+                return;
+            }
+            if(type == "subrace") temp_data = MyFile->restricted_alignments(MyCharacterInfo["race"]["subrace"]);
+            else temp_data = MyFile->restricted_alignments();
+            if(pointerp(temp_data))
+            {
+                MyCharacterInfo["race"]["restricted alignments"] = temp_data;
+            }
+            if(type == "subrace") break;
+            available_subraces = ({});
+
+            if(MyCharacterInfo["race"]["psuedo race"] != "NIL") targ = MyCharacterInfo["race"]["psuedo race"];
+            else targ = MyCharacterInfo["race"]["race name"];
+
+            MyFile = "/std/races/"+targ+".c";
+            if(file_exists(MyFile))
+            {
+                possible_subraces = MyFile->query_subraces(ETO);
+                temp_data = MyCharacterInfo["myclass"]["available subraces"];
+                for(i = 0;i < sizeof(possible_subraces);i++)
+                {
+                    if(member_array(possible_subraces[i], temp_data) != -1) available_subraces += ({possible_subraces[i]});
                     continue;
                 }
             }
-            if (MyFile->is_gender_locked(MyCharacterInfo["race"]["gender"])) {
-                continue;
-            }
-            if (member_array(MyClass, temp_data) == -1) {
-                available_races += ({ possible_races[i] });
-            }
-            //tell_object(ETO, "RACE OB existed!");
-            possible_subraces = MyFile->query_subraces(ETO);
-            if (pointerp(possible_subraces)) {
-                for (y = 0; y < sizeof(possible_subraces); y++) {
-                    ThisSubRace = possible_subraces[y];
-                    temp_data = MyFile->restricted_classes(ThisSubRace);
-                    if (!pointerp(temp_data)) {
-                        available_subraces += ({ ThisSubRace });
-                        continue;
-                    }else {
-                        if (member_array(MyClass, temp_data) == -1) {
-                            if (member_array(ThisSubRace, available_subraces) == -1) {
-                                available_subraces += ({ ThisSubRace });
-                            }
-                            if (member_array(possible_races[i], available_races) == -1) {
-                                available_races += ({ possible_races[i] });
-                            }
-                        }
-                        continue;
-                    }
+            else tell_object(ETO, "Failed to find a valid race obj");
+            MyCharacterInfo["myclass"]["available subraces"] = available_subraces;
+            //no subraces
+            if(!sizeof(available_subraces))
+            {
+                if((targ = MyCharacterInfo["race"]["psuedo race"]) != "NIL")
+                {
+                    if(targ == "orc") MyCharacterInfo["myclass"]["available subraces"] = ({"gray orc"});
+                    else if(targ == "elf") MyCharacterInfo["myclass"]["available subraces"] = "/std/races/elf.c"->query_subraces(ETO);
+                    else if(targ == "human") MyCharacterInfo["myclass"]["available subraces"] = "/std/races/human.c"->query_subraces(ETO);
+                    else MyPlace = "stats";
                 }
-                continue;
-            }
-            //tell_object(ETO, "RACE OB DOES NOT EXIST for "+possible_races[i]+"!");
-            continue;
-        }
-        available_races = distinct_array(available_races);
-        available_subraces = distinct_array(available_subraces);
-        MyCharacterInfo["myclass"]["available races"] = available_races;
-        MyCharacterInfo["myclass"]["available subraces"] = available_subraces;
-        break;
-    case "race": case "subrace":
-        MyFile = "/std/races/" + MyCharacterInfo["race"]["race name"] + ".c";
-        if (!file_exists(MyFile)) {
-            tell_object(ETO, "ERROR: Could not find your race file.");
-            return;
-        }
-        if (type == "subrace") {
-            temp_data = MyFile->restricted_alignments(MyCharacterInfo["race"]["subrace"]);
-        } else {
-            temp_data = MyFile->restricted_alignments();
-        }
-        if (pointerp(temp_data)) {
-            MyCharacterInfo["race"]["restricted alignments"] = temp_data;
-        }
-        if (type == "subrace") {
-            break;
-        }
-        available_subraces = ({});
-
-        if (MyCharacterInfo["race"]["psuedo race"] != "NIL") {
-            targ = MyCharacterInfo["race"]["psuedo race"];
-        } else {
-            targ = MyCharacterInfo["race"]["race name"];
-        }
-
-        MyFile = "/std/races/" + targ + ".c";
-        if (file_exists(MyFile)) {
-            possible_subraces = MyFile->query_subraces(ETO);
-            temp_data = MyCharacterInfo["myclass"]["available subraces"];
-            for (i = 0; i < sizeof(possible_subraces); i++) {
-                if (member_array(possible_subraces[i], temp_data) != -1) {
-                    available_subraces += ({ possible_subraces[i] });
-                }
-                continue;
-            }
-        }else {
-            tell_object(ETO, "Failed to find a valid race obj");
-        }
-        MyCharacterInfo["myclass"]["available subraces"] = available_subraces;
-        //no subraces
-        if (!sizeof(available_subraces)) {
-            if ((targ = MyCharacterInfo["race"]["psuedo race"]) != "NIL") {
-                if (targ == "orc") {
-                    MyCharacterInfo["myclass"]["available subraces"] = ({ "gray orc" });
-                } else if (targ == "elf") {
-                    MyCharacterInfo["myclass"]["available subraces"] = "/std/races/elf.c"->query_subraces(ETO);
-                } else if (targ == "human") {
-                    MyCharacterInfo["myclass"]["available subraces"] = "/std/races/human.c"->query_subraces(ETO);
-                } else {
-                    MyPlace = "stats";
-                }
-            }else {
-                MyPlace = "stats";
-            }
-        }
-        break;
-        case "template":
-            if (!objectp(TO)) {
-                return;
-            }
-            if (!objectp(ETO)) {
-                return;
-            }
-
-            MyFile = "/std/acquired_template/"+MyCharacterInfo["race"]["template"]+".c";
-            if (!file_exists(MyFile)) {
-                return;
-            }
-
-            minimumstatsmap = MyFile->stat_requirements();
-            if (mmap(minimumstatsmap)) {
-                MyCharacterInfo["myclass"]["minimum template stats"] = minimumstatsmap;
+                else MyPlace = "stats";
             }
             break;
+    case "template":
+        ;
+        break;
+
+
     }
 }
 //END
