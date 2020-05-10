@@ -2269,7 +2269,7 @@ void define_base_spell_level_bonus()
         sdamage_adjustment -= 1;
     }
 
-    if (splash_spell > 2) {
+    if (splash_spell > 1) {
         sdamage_adjustment -= 3;
     }
 
