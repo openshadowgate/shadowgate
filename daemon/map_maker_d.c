@@ -1,6 +1,6 @@
 #include <std.h>
 #include <security.h>
-#define SAVE_FILE "/daemon/save/saved_maps" 
+#define SAVE_FILE "/daemon/save/saved_maps"
 #define ERROR_LOG "Misc_Errors"
 #define SUCC_LOG "maps_log"
 inherit DAEMON;
@@ -9,16 +9,16 @@ mapping users; // ([string name: ([ string mapname: mixed * maps_locations_timin
 mixed * maps_locations_timings; // ({mapping maps, mapping locations, mapping timings, mapping clash_rooms, mapping duplicate_rooms})
 mapping maps; //  ([string mapname : mixed * maps_locations_timings])
 mapping location_grids; // ([ string mapname : mapping  ])
-mapping timings; // ([string mapname : int time_saved]) 
+mapping timings; // ([string mapname : int time_saved])
 mapping rooms;  // ([string room_name: string * exits])
 mapping locations; //([ int location: string room_name ])
-mapping current_maps; // ([ string username: string current_map })	
-mapping notations; //([string room : ({string note_name, string description}) ])	
-mapping waystation_records; // ([string username: mapping user_waystations ]) 
+mapping current_maps; // ([ string username: string current_map })
+mapping notations; //([string room : ({string note_name, string description}) ])
+mapping waystation_records; // ([string username: mapping user_waystations ])
 mapping user_waystations;// ([string mapname: mapping waystations])
 mapping waystations;  // ([string roomname: int stage]);
 string reporting, * clashes, * dupes;
-int timing, detect_invis_exits, last_save;  
+int timing, detect_invis_exits, last_save;
 
 int high_x();
 int low_x();
@@ -75,7 +75,7 @@ int setup_waystations(string user, string mapname, string roomname){
     for (j=0; j<count; j++)
     {
       report ("Room no: " + j + " is " + current_rooms[j]);
-      if (member_array(current_rooms[j], checked_rooms)!=-1) 
+      if (member_array(current_rooms[j], checked_rooms)!=-1)
       {
         report ("%^GREEN%^Room "+ current_rooms[j] + " has already been checked");
         continue;
@@ -87,7 +87,7 @@ int setup_waystations(string user, string mapname, string roomname){
         if (!catch(current_rooms[j]->query_short())){
           exits = generate_new_exit_map(current_rooms[j]);
  //         save_room(user, mapname, roomname, exits);
-        } else 
+        } else
         {
           if (!stringp(current_rooms[j])) report(current_rooms[j] + "Is not a string, apparently, J = " + j);
           if (catch(current_rooms[j]->query_short())) report(current_rooms[j] + "%^BOLD%^%^YELLOW%^ Is not a valid room");
@@ -101,11 +101,11 @@ int setup_waystations(string user, string mapname, string roomname){
       {
         directions = keys(exits);
       } else
-      { 
+      {
         directions = ({});
       }
       count2 = sizeof(directions);
-      if (count2<1) 
+      if (count2<1)
       {
         report ("%^BOLD%^%^BLUE%^Room " + current_rooms[j] + " has less than one exit");
         checked_rooms += ({current_rooms[j]});
@@ -116,7 +116,7 @@ int setup_waystations(string user, string mapname, string roomname){
         report ("Exit number: " + k + " is :  " + directions[k] + " leading to " + exits[directions[k]]);
         if (exits[directions[k]] != "unknown" && member_array(exits[directions[k]], checked_rooms)==-1)
         {
-          report ("Adding room " + exits[directions[k]] + " to next rooms"); 
+          report ("Adding room " + exits[directions[k]] + " to next rooms");
           next_rooms += ({exits[directions[k]]});
         } else {
           if (exits[directions[k]] == "unknown") report("NOT ADDING UNKNOWN EXIT TO NEXT ROOMS");
@@ -214,7 +214,7 @@ string * query_dupes(string user){
 void create(){
     ::create();
     users = ([]);
-    maps_locations_timings = ({ ([]), ([]),([]), ([]), ([]), ([]) });  
+    maps_locations_timings = ({ ([]), ([]),([]), ([]), ([]), ([]) });
     maps = ([]);
     current_maps = ([]);
     location_grids = ([]);
@@ -228,12 +228,12 @@ void create(){
     detect_invis_exits = 0;
     waystations = ([]);
     user_waystations = ([]);
-    waystation_records = ([]); 
+    waystation_records = ([]);
     seteuid(UID_DAEMONSAVE);
     restore_object(SAVE_FILE,1);
     seteuid(getuid());
     last_save = 0;
-   
+
 }
 
 void SAVE(){
@@ -256,7 +256,7 @@ int remove_note(string user, string title){
   if (strlen(title)<2)title = title + " ";
   for (i=0;i<count;i++)
   {
-    report ("checking whether " + notations[roomnames[i]][0] + " == " + title); 
+    report ("checking whether " + notations[roomnames[i]][0] + " == " + title);
     if ("/daemon/stripper_d"->stripcolors(notations[roomnames[i]][0])==title)
     {
       report ("It does! Deleting note...");
@@ -266,7 +266,7 @@ int remove_note(string user, string title){
       maps[current_maps[user]] = maps_locations_timings;
       users[user] = maps;
       report ("Note removed from map " + current_maps[user]);
-    } else 
+    } else
     {
       report ("/daemon/stripper_d"->stripcolors(notations[roomnames[i]][0]) + " != " + title);
     }
@@ -275,21 +275,21 @@ int remove_note(string user, string title){
 
 
 mapping generate_waystations(string user, string name, string path, int stages, int spacing){
-  string * this_stage_rooms, destinations, next_stage_rooms, rooms_checked; 
+  string * this_stage_rooms, destinations, next_stage_rooms, rooms_checked;
   mapping exits, waystations;
   int i, j,k,l,m, count, count2, count3, num;
   num = load_current_map(user);
   if (num!=1) return ([]);
   //Set up first stage with starting name as only one in this_stage_rooms
   next_stage_rooms = ({path + name});
-  
+
   //loop through number of stages.
   rooms_checked = ({});
   for(i=0;i<stages;i++){
     report ("%^YELLOW%^Stage: " + i);
     //At each stage: loop through rooms a number of times equal to spacing. Get exits, and destinations of exits
       //loop through destinations. If not already in list of next stage rooms, add it to list
-    
+
     for (l=0;l<spacing;l++){
       this_stage_rooms = next_stage_rooms;
       next_stage_rooms = ({});
@@ -314,9 +314,9 @@ mapping generate_waystations(string user, string name, string path, int stages, 
           next_stage_rooms += ({destinations[k]});
           rooms_checked += ({destinations[k]});
         }
-      }      
+      }
     }
-    //Once list of next stage rooms is complete, 
+    //Once list of next stage rooms is complete,
     //loop through next stage rooms. Check for each one whether there is a waystation already in place within spacing stages
     //If not, add waystation to that room
     waystations = ([]);
@@ -326,12 +326,12 @@ mapping generate_waystations(string user, string name, string path, int stages, 
       return waystations;
     }
     for (m=0;m<count3;m++){
-      
+
     }
     "/daemon/destinations_d"->add_waystation(name, name, 1);
   }
-  return waystations; 
-} 
+  return waystations;
+}
 
 mapping query_room_exits(string room){
   string * roomnames;
@@ -346,8 +346,8 @@ mapping query_room_exits(string room){
 
 save_room(string user, string mapname, string roomname, mapping exits){
   string * usernames, * mapnames, * roomnames;
-  if (!mapp(rooms)) 
-  { 
+  if (!mapp(rooms))
+  {
     rooms = ([]);
   }
   rooms[roomname] = exits;
@@ -390,13 +390,13 @@ int save_map (string user, string mapname){
   {
     usernames = keys(users);
     if (member_array(user, usernames) != -1)
-    {  
+    {
       maps = users[user];
-    } else 
+    } else
     {
       maps = ([]);
     }
-  } else 
+  } else
   {
     users = ([]);
     maps = ([]);
@@ -427,11 +427,11 @@ int add_notation(string user, string title, string note){
   report("User has a current map when adding note");
   mapname = current_maps[user];
   load_map(user, mapname);
-  if (!mapp(notations) || sizeof(notations)<1) 
+  if (!mapp(notations) || sizeof(notations)<1)
   {
     notations = ([]);
   }
-  roomname = base_name(environment(ob)); 
+  roomname = base_name(environment(ob));
   notations[roomname] = ({title, note});
   maps_locations_timings = ({rooms, locations, timing, clashes, dupes, notations});
   maps[mapname] = maps_locations_timings;
@@ -467,7 +467,7 @@ int load_current_map(string user){
   string mapname;
   mapname = query_current_map(user);
   if (mapname == "none") return 0;
-  return load_map(user, mapname); 
+  return load_map(user, mapname);
 }
 
 string * query_rooms_with_notations(string user){
@@ -572,14 +572,14 @@ int load_map(string user, string mapname){
     report("%^BOLD%^%^CYAN%^Some maps_locations_timings identified for user " + user);
     maps = users[user];
     if (!mapp(maps) || sizeof(maps)<1 ) maps = ([]);
-    user_waystations = waystation_records[user]; 
+    user_waystations = waystation_records[user];
     mapnames = keys(maps);
-    if (sizeof(mapnames)< 1 || member_array(mapname, mapnames)==-1) 
+    if (sizeof(mapnames)< 1 || member_array(mapname, mapnames)==-1)
     {
       report ("No map called " + mapname + " found for user " + user + ". Starting a blank one");
       rooms = ([]);
       locations = ([]);
-      timing = 0; 
+      timing = 0;
       clashes = ({});
       dupes = ({});
       notations = ([]);
@@ -589,16 +589,16 @@ int load_map(string user, string mapname){
       current_maps[user] = mapname;
       if (!mapp(waystation_records)) waystation_records = ([]);
       usernames = keys(waystation_records);
-      if (sizeof(usernames)<1 || member_array(user, usernames)== -1) 
+      if (sizeof(usernames)<1 || member_array(user, usernames)== -1)
       {
         user_waystations = ([]);
-      } else 
+      } else
       {
         user_waystations = waystation_records[user];
       }
       waystations = ([]);
       user_waystations[mapname] = waystations;
-      waystation_records[user] = user_waystations; 
+      waystation_records[user] = user_waystations;
       report("Load map result 3");
       return 3;
     }
@@ -609,7 +609,7 @@ int load_map(string user, string mapname){
       locations = maps_locations_timings[1];
       timing = maps_locations_timings[2];
       clashes = maps_locations_timings[3];
-      dupes = maps_locations_timings[4]; 
+      dupes = maps_locations_timings[4];
       if (sizeof(maps_locations_timings)>5)
       {
         notations = maps_locations_timings[5];
@@ -624,9 +624,9 @@ int load_map(string user, string mapname){
         user_waystations= ([]);
         waystations = ([]);
         user_waystations[mapname] = waystations;
-        waystation_records[user] = user_waystations; 
-        
-      } else 
+        waystation_records[user] = user_waystations;
+
+      } else
       {
         usernames = keys(waystation_records);
         if (member_array(user, usernames)==-1)
@@ -635,8 +635,8 @@ int load_map(string user, string mapname){
           user_waystations = ([]);
           waystations = ([]);
           user_waystations[mapname] = waystations;
-          waystation_records[user] = user_waystations;     
-        } else 
+          waystation_records[user] = user_waystations;
+        } else
         {
           user_waystations = waystation_records[user];
           if (!mapp(user_waystations) || sizeof(user_waystations)<1){
@@ -644,7 +644,7 @@ int load_map(string user, string mapname){
             waystations = ([]);
             user_waystations = ([]);
             user_waystations[mapname] = waystations;
-          } else 
+          } else
           {
             mapnames = keys(user_waystations);
             if (member_array(mapname, mapnames)==-1)
@@ -655,31 +655,31 @@ int load_map(string user, string mapname){
             } else
             {
               waystations = user_waystations[mapname];
-              if (!mapp(waystations)) 
+              if (!mapp(waystations))
               {
                 report("Load map: waystations for map: "+ mapname +" user: " + user + " are not a valid mapping");
                 waystations = ([]);
                 user_waystations[mapname] = waystations;
-              } else 
-              { 
+              } else
+              {
                 report("%^BOLD%^%^CYAN%^Load map: Waystations successfully loaded");
               }
             }
           }
         }
       }
-      current_maps[user] = mapname; 
+      current_maps[user] = mapname;
       report("Load map result 1");
       return 1;
     }
     report("Load map result 5");
     return 5;
-  } 
+  }
   report("%^BOLD%^%^CYAN%^NO MAPS_LOCATIONS_TIMINGS identified for user " + user + ". Making some new ones");
   maps = ([]);
   rooms = ([]);
   locations = ([]);
-  timing = 0; 
+  timing = 0;
   clashes = ({});
   dupes = ({});
   notations = ([]);
@@ -689,7 +689,7 @@ int load_map(string user, string mapname){
   current_maps[user] = mapname;
   waystations = ([]);
   user_waystations[mapname] = waystations;
-  waystation_records[user] = user_waystations; 
+  waystation_records[user] = user_waystations;
   report("Load map result 2");
   return 2;
 }
@@ -714,7 +714,7 @@ void start_new_map(object who){
   {
     usernames = keys(users);
     if (member_array(who->query_name(), usernames)!=-1)
-    { 
+    {
       maps = users[who->query_name()];
     }
   }
@@ -748,10 +748,10 @@ int get_location(string roomname){
       for (i=0;i<count;i++)
       {
         if (locations[locs[i]]==roomname)
-        { 
+        {
           report ("location number " + i + " is " + locs[i] + "which links to " + locations[locs[i]] + ", and is the same as the base name of the room");
           return locs[i];
-        } 
+        }
       }
     }
   }
@@ -797,14 +797,14 @@ void add_room(object who, string direction){
   if (member_array(dest_mapname, mapnames)!=-1 && dest_mapname != mapname && dest_mapname!= "none")
   {
     report("%^CYAN%^Moving onto a new map. Current map: " + mapname + " New map: " + dest_mapname);
-    tell_object(who, "%^ORANGE%^You realise that you are moving into the area covered by map: " + dest_mapname +", so you pull that map out and carry on"); 
+    tell_object(who, "%^ORANGE%^You realise that you are moving into the area covered by map: " + dest_mapname +", so you pull that map out and carry on");
     load_map(who->query_name(), dest_mapname);
     return 8;
   } else {
     if (!mapp(current_maps)) current_maps = ([]);
-    current_maps[who->query_name()] = mapname; 
+    current_maps[who->query_name()] = mapname;
     if (mapname ==  "none")
-    {  
+    {
       if (sizeof(query_maps(who->query_name())) >= ((int)"/daemon/bonus_d.c"->query_stat_bonus(who, "intelligence") + 5) *3)
 //      if (sizeof(query_maps(who->query_name())) >= (int)"/daemon/bonus_d.c"->query_stat_bonus(who, "intelligence") + 5)
       {
@@ -820,7 +820,7 @@ void add_room(object who, string direction){
       report("No map found for " + who->query_name() + " at room " + base_name(rm));
       mapname = get_next_map_name(who);
       report("Starting new map: " + mapname);
-    }  
+    }
     num = load_map (who->query_name(), mapname);
     report ("Map load result is : "  + num);
   }
@@ -843,13 +843,13 @@ void add_room(object who, string direction){
   {
     report ("Found existing exit map for start room");
     exit_map = rooms[base_name(rm)];
-  } else 
+  } else
   {
     report ("%^BOLD%^%^MAGENTA%^No existing exit map for start room. Making a new one");
     exit_map = generate_new_exit_map(rm);
   }
   report("Adding exit in " + direction + " direction, leading to " + dest_name);
-  exit_map[direction] = dest_name; 
+  exit_map[direction] = dest_name;
   rooms[base_name(rm)] = exit_map; //save the updated exit map to the room
 //  roomnames = keys(rooms);
   if (sizeof(roomnames)>0 && member_array(dest_name, roomnames)!=-1)
@@ -857,7 +857,7 @@ void add_room(object who, string direction){
     report ("destination room does have an existing exit map. Loading it.");
     exit_map = rooms[dest_name];
     existing_loc = query_location(dest_name);
-  } else 
+  } else
   {
     report ("destination room does not yet have an exit map. Making a new one.");
     exit_map = generate_new_exit_map(dest_name);
@@ -889,7 +889,7 @@ void add_room(object who, string direction){
   //Check for conflicts with another room in the same location, or the same room in another location
   tmp = get_location(dest_name);
   loc = get_new_location(loc, direction);
-  if (tmp >-1 && tmp != loc && (sizeof(dupes)<1 || member_array(dest_name, dupes) ==-1) ) 
+  if (tmp >-1 && tmp != loc && (sizeof(dupes)<1 || member_array(dest_name, dupes) ==-1) )
   {
     dupes += ({dest_name});
     dupes += ({dest_name+".dupe"});
@@ -905,17 +905,17 @@ void add_room(object who, string direction){
         clashes += ({dest_name});
       }
     }
-  } 
+  }
   report ("setting location " + loc + " to " + dest_name);
   locations[loc] = dest_name;
 //  if (return_dir!="none")
 //  {
 //    exit_map[return_dir] = base_name(rm);
-//  }  
+//  }
 //  rooms[dest_name] = exit_map;
   maps_locations_timings[0] = rooms;
   maps_locations_timings[1] = locations;
-  //add in code to add the location for the new room    
+  //add in code to add the location for the new room
   maps_locations_timings[2] = timing;
   maps_locations_timings[3] = clashes;
   maps_locations_timings[4] = dupes;
@@ -932,7 +932,7 @@ void add_room(object who, string direction){
 
 mapping generate_new_exit_map(string roomname){
   mapping mp;
-  object room, destroom;  
+  object room, destroom;
   int i, count;
   string * directions, * roomnames, destname, ret_dir;
   if (!stringp(roomname))
@@ -955,7 +955,7 @@ mapping generate_new_exit_map(string roomname){
       if (member_array(destname, roomnames)==-1)
       {
         mp[directions[i]] = "unknown";
-      } else 
+      } else
       {
         mp[directions[i]] = destname;
         if (!catch(destname->query_short())){
@@ -964,18 +964,18 @@ mapping generate_new_exit_map(string roomname){
           if (ret_dir == 0)
           {
             report ("%^BOLD%^%^MAGENTA%^GODDAM IT, this is how the 0's are getting into the map!");
-            report ("Room is: " + destname + " direction is: " + ret_dir); 
+            report ("Room is: " + destname + " direction is: " + ret_dir);
           }
           if (roomname == 0 )
           {
             report ("%^BOLD%^%^YELLOW%^NO NO NO, this is how the 0's are getting into the map!");
-            report ("Room is: " + roomname + " direction is: " + ret_dir); 
+            report ("Room is: " + roomname + " direction is: " + ret_dir);
           }
           if (destname == 0 )
           {
             report ("%^BOLD%^%^RED%^NO NO NO, this is how the 0's are getting into the map!");
-            report ("Room is: " + roomname + " direction is: " + ret_dir); 
-          }          add_exit(destname, ret_dir,roomname); 
+            report ("Room is: " + roomname + " direction is: " + ret_dir);
+          }          add_exit(destname, ret_dir,roomname);
         }
       }
     }
@@ -1013,7 +1013,7 @@ string * map_route(string user, string startroom, string destroom){
   count = sizeof(waystation_names);
   report("%^BOLD%^%^YELLOW%^About to cycle through " + sizeof(waystation_names) + " waystations");
   for(i=0;i<count;i++)
-  { 
+  {
     if (i<count) report("%^BOLD%^%^YELLOW%^" + i + "Startroom: " + startroom + " Waystation: " + waystation_names[i]);
     else report ("Last section. Startroom: " + startroom + " Final destination: " +destroom);
     if (i==count)
@@ -1026,7 +1026,7 @@ string * map_route(string user, string startroom, string destroom){
     {
       report("%^BOLD%^%^GREEN%^Problem loading target waystation: " + dest_name + " in map_route");
       return ({});
-    } 
+    }
     destination = find_object_or_load(dest_name);
     if (catch(startroom->query_short()) )
     {
@@ -1065,7 +1065,7 @@ string * query_waystations_en_route(string user, string startroom, string destro
   while(roomname != destroom && roomname != "none"){
     report ("%^BOLD%^%^MAGENTA%^Trying to find a waystation from " + roomname + " to " + destroom);
     roomname = find_waystation(user, mapname, roomname, destroom);
-    if (roomname!= "none") 
+    if (roomname!= "none")
     {
       report("Yay, found a waystation at " + roomname);
       result += ({roomname});
@@ -1096,7 +1096,7 @@ string find_waystation(string user, string mapname, string startroom, string des
   if (!mapp(waystations) || sizeof(waystations)<1) waystations = ([]);
   waystation_names = keys(waystations);
   roomnames = keys(rooms);
-  
+
   waystage = 10000;
   result = "none";
   if (member_array(startroom, waystation_names)!=-1) waystage = waystations[startroom];
@@ -1110,7 +1110,7 @@ string find_waystation(string user, string mapname, string startroom, string des
     current_rooms = next_rooms;
     next_rooms = ({});
     count2 = sizeof(current_rooms);
-    if (count2<1) 
+    if (count2<1)
     {
       report("No more rooms to check at stage " + i + ". Aborting");
       break;
@@ -1139,7 +1139,7 @@ string find_waystation(string user, string mapname, string startroom, string des
         room = exits[directions[j]];
         if (room == "unknown" || (sizeof(checked_rooms)>0 && member_array(room, checked_rooms)!=-1)) continue;
         next_rooms += ({room});
-        if(member_array(room, waystation_names)!=-1) 
+        if(member_array(room, waystation_names)!=-1)
         {
           report("Room " + room + " is a waystation, stage: " + waystations[room] + ". Current waystage is: " + waystage);
           if( waystations[room]<=waystage) {
@@ -1152,7 +1152,7 @@ string find_waystation(string user, string mapname, string startroom, string des
       checked_rooms += ({current_rooms[k]});
     }
   }
-  return result; 
+  return result;
 }
 
 string * findpath(string startname, string endname){
@@ -1194,7 +1194,7 @@ string * query_unknowns(){
       {
         result += ({room->query_exit(directions[j]) });
       }
-    } 
+    }
   }
   return result;
 }
@@ -1207,7 +1207,7 @@ void add_exit(string roomname, string direction, string destination){
   if (sizeof(roomnames)>0 && member_array(roomname, roomnames)!= -1)
   {
     exits = rooms[roomname];
-  } else 
+  } else
   {
     exits = generate_new_exit_map(roomname);
   }
@@ -1253,7 +1253,7 @@ string get_map_name(string roomname){  // load maps for relevant user first
     this_map = rooms_locs_tims[0];
     if (!mapp(this_map) || sizeof(this_map)<1) continue;
     roomnames = keys(this_map);
-    if (sizeof (roomnames)>0 && member_array(roomname, roomnames)!=-1) 
+    if (sizeof (roomnames)>0 && member_array(roomname, roomnames)!=-1)
     {
       report ("Room found!!! in map " + mapnames[i]);
       return mapnames[i];
@@ -1271,7 +1271,7 @@ string get_next_map_name(object who){
   if (!mapp(users) || sizeof(users)<1) users = ([]);
   usernames = keys(users);
   nm = who->query_name();
-  if (sizeof(usernames)< 1 || member_array(nm, usernames) ==-1) 
+  if (sizeof(usernames)< 1 || member_array(nm, usernames) ==-1)
   {
     report("Either no users found, or no users with the name " + nm);
     return nm + "1";
@@ -1373,7 +1373,7 @@ void stop_reporting(){
 }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report(reporting, str);
+
 }
 
 void trim(int screen_width){
@@ -1478,7 +1478,7 @@ int query_location(string room){
     if (sizeof(rms)<1)
     {
       report ("No room locations recorded yet");
-    } else 
+    } else
     {
       report ("Room " + room + " does not have a location recorded");
     }
@@ -1521,7 +1521,7 @@ string query_room(int location){
     if (locs[i]/1000 != y) continue;
     result[locs[i]%1000] = locations[locs[i]];
   }
-  
+
   return result;
 }
 
@@ -1565,7 +1565,7 @@ int eastmost_location_at_y(int y){
   for(i=0;i<count;i++)
   {
     if (locs[i]/1000 != y) continue;
-    if (locs[i] > result) result = locs[i]; 
+    if (locs[i] > result) result = locs[i];
   }
   return result;
 }
@@ -1626,7 +1626,7 @@ string show_basic_map(object who){
         {
           report ("%^BOLD%^%^GREEN%^Adding stripe to top line");
           top_line += "/";
-        } else 
+        } else
         {
           top_line += " ";
         }
@@ -1637,7 +1637,7 @@ string show_basic_map(object who){
           report ("%^BOLD%^%^MAGENTA%^Adding stripe to bottom line");
           bottom_line += "/";
           report("1: %^ORANGE%^Bottom line is now '" + bottom_line + "'");
-        } else 
+        } else
         {
           if (i==low_y) bottom_line += " ";
         }
@@ -1671,7 +1671,7 @@ string show_basic_map(object who){
         if(room_to_left_has_exit(loc, "east"))
         {
           line += "-  ";
-        } else 
+        } else
         {
           line += "   ";
         }
@@ -1680,7 +1680,7 @@ string show_basic_map(object who){
         continue;
         //blah
       } else
-      { 
+      {
         report ("Room found at location " + loc + ". Testing for exit weirdness");
         roomname = locations[loc];
         if (interact(".dupe", roomname)){
@@ -1703,25 +1703,25 @@ string show_basic_map(object who){
         report ("Room loaded");
         if ((room->query_exit("northwest")=="/d/shadowgate/void" ||room->invis_exit("northwest")) && !room_above_has_exit(loc-1, "southeast")){
           if (room->query_exit("northwest")=="/d/shadowgate/void"){
-            report ("No northwest exit from " + roomname); 
+            report ("No northwest exit from " + roomname);
           } else {
             report ("There is a northwest exit from " + roomname);
           }
           if (room->invis_exit("northwest")){
-            report ("Northwest exit from " + roomname + " is invisible"); 
+            report ("Northwest exit from " + roomname + " is invisible");
           } else {
             report ("northwest exit from " + roomname + " is VISIBLE");
           }
           top_line += " ";
         } else
         {
-          report ("There is a a northwest exit from " + base_name(room)); 
+          report ("There is a a northwest exit from " + base_name(room));
           dest = room->query_exit("northwest");
           report ("Testing for return exit weirdness");
           if (catch(dest->query_short())){
             report ("The destination room is broken");
             top_line += "%^BOLD%^%^RED%^";
-          } else 
+          } else
           {
             report ("The destination room is fine");
             dest_room = find_object_or_load(dest);
@@ -1733,21 +1733,21 @@ string show_basic_map(object who){
         }
         if ((room->query_exit("north")=="/d/shadowgate/void" || room->invis_exit("north")) && !room_above_has_exit(loc, "south")){
           if (room->query_exit("north")=="/d/shadowgate/void"){
-            report ("No north exit from " + base_name(room)); 
+            report ("No north exit from " + base_name(room));
           }
           if (room->invis_exit("north")){
-            report ("North exit from " + base_name(room) + " is invisible"); 
+            report ("North exit from " + base_name(room) + " is invisible");
           }
           top_line += " ";
         } else
         {
-          report ("There is a a north exit from " + base_name(room)); 
+          report ("There is a a north exit from " + base_name(room));
           dest = room->query_exit("north");
           report ("Testing for return exit weirdness");
           if (catch(dest->query_short())){
             report ("The destination room is broken");
             top_line += "%^BOLD%^%^RED%^";
-          } else 
+          } else
           {
             report ("The destination room is fine");
             dest_room = find_object_or_load(dest);
@@ -1759,10 +1759,10 @@ string show_basic_map(object who){
         }
         if ((room->query_exit("northeast")=="/d/shadowgate/void" || room->invis_exit("northeast")) && !room_above_has_exit(loc+1, "southwest")){
           if (room->query_exit("northeast")=="/d/shadowgate/void"){
-            report ("No northeast exit from " + base_name(room)); 
+            report ("No northeast exit from " + base_name(room));
           }
           if (room->invis_exit("northeast")){
-            report ("Northeast exit from " + base_name(room) + " is invisible"); 
+            report ("Northeast exit from " + base_name(room) + " is invisible");
           }
           top_line += " ";
         } else
@@ -1773,37 +1773,37 @@ string show_basic_map(object who){
           if (catch(dest->query_short())){
             report ("The destination room is broken");
             top_line += "%^BOLD%^%^RED%^";
-          } else 
+          } else
           {
             report ("The destination room is fine");
             dest_room = find_object_or_load(dest);
             if (dest_room->query_exit("southwest") != roomname){
               top_line += "%^BOLD%^%^MAGENTA%^";
             }
-          } 
+          }
           top_line += "/%^RESET%^";
         }
         if (room->query_exit("west")=="/d/shadowgate/void" && !room_to_left_has_exit(loc, "east")  /*|| room->invis_exit("west")*/)
         {
           if (room->query_exit("west")=="/d/shadowgate/void")
           {
-            report ("No west exit from " + base_name(room)); 
+            report ("No west exit from " + base_name(room));
           }
           if (room->invis_exit("west"))
           {
-            report ("West exit from " + base_name(room) + " is invisible"); 
+            report ("West exit from " + base_name(room) + " is invisible");
           }
           line += " "; //only need to do this if it is at the first line
         } else
         {
-          report ("There is a west exit from " + base_name(room)); 
+          report ("There is a west exit from " + base_name(room));
           dest = room->query_exit("west");
           report ("Testing for return exit weirdness");
           if (catch(dest->query_short()))
           {
             report ("The destination room is broken");
             top_line += "%^BOLD%^%^RED%^";
-          } else 
+          } else
           {
             report ("The destination room is fine");
             dest_room = find_object_or_load(dest);
@@ -1811,7 +1811,7 @@ string show_basic_map(object who){
             {
               line += "%^BOLD%^%^MAGENTA%^";
             }
-          } 
+          }
           line += "-%^RESET%^";
           if(j==low_x && !room_above_has_exit(loc, "southwest"))
           {
@@ -1839,13 +1839,13 @@ string show_basic_map(object who){
           if (member_array(base_name(room), dupes)<10)
           {
             line += "%^MAGENTA%^ " + member_array(base_name(room), dupes)+ "%^RESET%^";
-          } else 
+          } else
           {
             if (member_array(base_name(room), dupes)<100)
             {
               line += "%^MAGENTA%^" + member_array(base_name(room), dupes)+ "%^RESET%^";
             } else
-            { 
+            {
               line += "%^MAGENTA%^ #%^RESET%^";
             }
           }
@@ -1855,7 +1855,7 @@ string show_basic_map(object who){
         {
           line += "%^ORANGE%^* %^RESET%^";
           flag = 1;
-        } 
+        }
         if (flag ==0 && count_nonstandard_exits(room->query_exits())>0)
         {
           line += "%^BOLD%^%^BLUE%^* %^RESET%^";
@@ -1870,7 +1870,7 @@ string show_basic_map(object who){
           } else
           {
             line += "%^ORANGE%^Up%^RESET%^";
-            flag = 1;          
+            flag = 1;
           }
         }
         if (flag ==0 && room->query_exit("down")!="/d/shadowgate/void" && !room->invis_exit("down")  )
@@ -1888,10 +1888,10 @@ string show_basic_map(object who){
       {
         if (room->query_exit("southwest")=="/d/shadowgate/void" || room->invis_exit("southwest")){
           if (room->query_exit("southwest")=="/d/shadowgate/void"){
-            report ("No southwest exit from " + base_name(room)); 
+            report ("No southwest exit from " + base_name(room));
           }
           if (room->invis_exit("southwest")){
-            report ("Southwest exit from " + base_name(room) + " is invisible"); 
+            report ("Southwest exit from " + base_name(room) + " is invisible");
           }
           bottom_line += " ";
           report("4: %^ORANGE%^Bottom line is now '" + bottom_line + "'");
@@ -1903,7 +1903,7 @@ string show_basic_map(object who){
           if (catch(dest->query_short())){
             report ("The destination room is broken");
             bottom_line += "%^BOLD%^%^RED%^";
-          } else 
+          } else
           {
             report ("The destination room is fine");
             dest_room = find_object_or_load(dest);
@@ -1911,28 +1911,28 @@ string show_basic_map(object who){
               bottom_line += "%^BOLD%^%^MAGENTA%^";
               report("5: %^ORANGE%^Bottom line is now '" + bottom_line + "'");
             }
-          } 
+          }
           bottom_line += "/%^RESET%^";
           report("6: %^ORANGE%^Bottom line is now '" + bottom_line + "'");        }
         if (room->query_exit("south")=="/d/shadowgate/void" || room->invis_exit("south")){
           if (room->query_exit("south")=="/d/shadowgate/void"){
-            report ("No south exit from " + base_name(room)); 
+            report ("No south exit from " + base_name(room));
           }
           if (room->invis_exit("south")){
-            report ("South exit from " + base_name(room) + " is invisible"); 
-          }  
+            report ("South exit from " + base_name(room) + " is invisible");
+          }
           bottom_line += " ";
           report("7: %^ORANGE%^Bottom line is now '" + bottom_line + "'");
         } else
-        { 
-          report ("There is a a south exit from " + base_name(room)); 
+        {
+          report ("There is a a south exit from " + base_name(room));
           dest = room->query_exit("south");
           report ("Testing for return exit weirdness");
           if (catch(dest->query_short())){
             report ("The destination room is broken");
             bottom_line += "%^BOLD%^%^RED%^";
             report("8: %^ORANGE%^Bottom line is now '" + bottom_line + "'");
-          } else 
+          } else
           {
             report ("The destination room is fine");
             dest_room = find_object_or_load(dest);
@@ -1949,15 +1949,15 @@ string show_basic_map(object who){
           bottom_line += " ";
           report("10: %^ORANGE%^bottom line is now: '" + bottom_line + "'");
         } else
-        {  
-          report ("There is a a southeast exit from " + base_name(room)); 
+        {
+          report ("There is a a southeast exit from " + base_name(room));
           dest = room->query_exit("southeast");
           report ("Testing for return exit weirdness");
           if (catch(dest->query_short())){
             report ("The destination room is broken");
             bottom_line += "%^BOLD%^%^RED%^";
             report("11: %^ORANGE%^Bottom line is now '" + bottom_line + "'");
-          } else 
+          } else
           {
             report ("The destination room is fine");
             dest_room = find_object_or_load(dest);
@@ -1973,7 +1973,7 @@ string show_basic_map(object who){
     map += top_line + "\n";
     map += line + "\n";
     if (i==low_y)
-    { 
+    {
       report ("%^ORANGE%^Bottom line is: <" + bottom_line + ">");
       map += bottom_line + "\n";
     }
@@ -2045,12 +2045,3 @@ int room_above_has_exit(int this_location, string direction){
   if (member_array(direction, exits)==-1) return 0;
   return 1;
 }
-
-
-
-
-
-
-
-
-
