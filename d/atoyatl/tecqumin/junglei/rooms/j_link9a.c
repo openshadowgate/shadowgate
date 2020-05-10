@@ -38,16 +38,16 @@ void enter_west(){
   count = sizeof(critters); 
   if (count >0){
     for (i=0;i<count;i++){
-      if((int)"/daemon/bridge_monitor_d.c"->query_pos(critters[i])
+      if((int)"/d/atoyatl/bridge_monitor_d.c"->query_pos(critters[i])
                                                            != -1){
-        "/daemon/bridge_monitor_d.c"->remove_crosser(critters[i]);
+        "/d/atoyatl/bridge_monitor_d.c"->remove_crosser(critters[i]);
       }
     }
   }
 }
 
 int GoWest(){
-  "/daemon/bridge_monitor_d.c"->set_PosDir(TP, 
+  "/d/atoyatl/bridge_monitor_d.c"->set_PosDir(TP, 
                                       ({64, STATIONARY, WEST}));
   return 1;
 }

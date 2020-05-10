@@ -55,9 +55,9 @@ void enter_east(){
   count = sizeof(critters); 
   if (count >0){
     for (i=0;i<count;i++){
-      if((int)"/daemon/bridge_monitor_d.c"->query_pos(critters[i])
+      if((int)"/d/atoyatl/bridge_monitor_d.c"->query_pos(critters[i])
                                                            == -1){
-        "/daemon/bridge_monitor_d.c"->set_PosDir(critters[i], 
+        "/d/atoyatl/bridge_monitor_d.c"->set_PosDir(critters[i], 
                                         ({65, STATIONARY, WEST}));
       }
     }

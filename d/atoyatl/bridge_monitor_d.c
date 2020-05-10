@@ -589,8 +589,8 @@ int cut_rope(object cutter){
     break;
   case 1:
     ropes = 0;
-    bp = "/daemon/bridge_monitor_d.c"->query_pos(cutter);
-    switch((int)"/daemon/bridge_monitor_d.c"->query_face(cutter)){
+    bp = "/d/atoyatl/bridge_monitor_d.c"->query_pos(cutter);
+    switch((int)"/d/atoyatl/bridge_monitor_d.c"->query_face(cutter)){
     case EAST:
       bp = bp + 0.5;
       break;

@@ -4655,7 +4655,7 @@ void empress_warning(){
   empress->move(room);
   room->tell_bridge("The %^CYAN%^spirit%^RESET%^ of%^MAGENTA%^"
         +" Empress Mehaq%^RESET%^ appears in the centre of the bridge");
-  "/daemon/bridge_monitor_d.c"->set_PosDir(empress, ({29, 0, 1})); 
+  "/d/atoyatl/bridge_monitor_d.c"->set_PosDir(empress, ({29, 0, 1})); 
   call_out("empress_warning2", 1, empress);
 }
 

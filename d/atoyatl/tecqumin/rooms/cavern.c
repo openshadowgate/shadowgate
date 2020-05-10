@@ -2,7 +2,7 @@
 #include <std.h>
 #include <move.h>
 #include <daemons.h>
-#include "../tecqumin.h"
+#include "/d/atoyatl/tecqumin/tecqumin.h"
 
 inherit ROOM;
 int seal_revealed, seal_strengthened, seal_broken;
@@ -32,7 +32,7 @@ void create() {
     +"%^RESET%^%^ORANGE%^, and exudes a %^BOLD%^%^BLACK%^dark sense"
     +"%^RESET%^%^ORANGE%^ of %^BOLD%^%^BLACK%^menace%^RESET%^%^ORANGE%^.");
   set_items (([ ({"wall", "back wall", "basalt wall", "black wall",
-    "columns", "black basalt wall", "hexagonal basalt wall", "basalt columns", 
+    "columns", "black basalt wall", "hexagonal basalt wall", "basalt columns",
     "basalt", "black hexagonal basalt wall"}): "%^BOLD%^%^BLACK%^The wall"
     +" is formed of dozens and dozens of  %^BOLD%^%^BLACK%^h"
     +"%^RESET%^e%^BOLD%^%^BLACK%^xag%^RESET%^%^BLUE%^o%^BOLD%^%^BLACK%^nal"
@@ -64,7 +64,6 @@ void create() {
     +" are occasional tinkling sounds, like rocks under great pressure.");
   set_exits( (["up": JUNG_ROOM10 + "carved_gate"]) );
 }
-
 void init() {
   object * critters;
   string * quests;
@@ -79,7 +78,6 @@ void init() {
   add_action("touch_blocks", "punch");
   add_action("check_grid", "check");
   add_action("study_me", "study");
-  flag = 0;
   if (seal_revealed == 0){
     if(HEXER_D->check_completed()>0){
       tell_room(TO, "%^BOLD%^%^BLACK%^The black b%^RESET%^a%^BOLD%^%^BLACK%^"
@@ -88,19 +86,15 @@ void init() {
         +" lays beneath.");
       HEXER_D->set_new_pic();
     }
-
-/*
-    if (completed_quest(TP)>0 && !TP->query_true_invis()){
-//      tell_room(TO, "TP (" + TPQCN + ") seems to have completed the quest. Completed quest value: " + completed_quest(TP));
+    if (completed_quest(TP) && !TP->query_true_invis()){
+      flag = 0;
       critters = all_living(TO);
       count = sizeof(critters);
       for (i=0;i<count;i++){
-//        tell_room(TO, "Checking critter " + i +": " + critters[i]->query_name());
         if (!interactive(critters[i])){
           continue;
         }
-        if (completed_quest(critters[i])<1){
-//          tell_room(TO, "Critter " + i +": " + critters[i]->query_name() + " has not completed the quest");
+        if (completed_quest(critters[i])==-1){
           flag = 1;
           break;
         }
@@ -109,7 +103,6 @@ void init() {
         call_out("auto_reveal", 2, TP);
       }
     }
-*/    
   }
 
 }
@@ -149,33 +142,31 @@ int study_me(string str){
   if (!seal_revealed){
     return notify_fail("You can't see that here");
   }
-  if (str != "eye" && str != "eye of helm" && str != "blue eye" && str != "repository" && str != "repository of Helm" && str != "blue eye on gauntlet"
-&& str != "eye on gauntlet"){
-    if (str != "wrist" && str != "jewel on wrist" && str != "jewel" && str != "jewel on gauntlet" && str != "aventurine" && str != "blue aventurine"
-&& str != "aventurine on gauntlet"){
-      return notify_fail("You can't see that here"); 
+  if (str != "eye" && str != "eye of helm" && str != "blue eye" && str != "repository" && str != "repository of Helm" && str != "blue eye on gauntlet" && str != "eye on gauntlet"){
+    if (str != "wrist" && str != "jewel on wrist" && str != "jewel" && str != "jewel on gauntlet" && str != "aventurine" && str != "blue aventurine" && str != "aventurine on gauntlet"){
+      return notify_fail("You can't see that here");
     } else {
       ob = new(OBJ + "aventurine");
       ob->move(TP);
-      TP->force_me("study blue aventurine of Helm"); 
+      TP->force_me("study blue aventurine of Helm");
       ob->move("/d/shadowgate/void");
       return 1;
     }
-    return notify_fail("You can't see that here"); 
+    return notify_fail("You can't see that here");
   } else {
     ob = new(OBJ + "eyeofhelm");
     ob->move(TP);
     TP->force_me("study blue eye of Helm");
     ob->move("/d/shadowgate/void");
     return 1;
-  } 
+  }
 }
 
 void summon_unfettered(){
   object unf;
   unf = new (MOB + "unfettered_main");
   unf->move(TO);
-  
+
 }
 
 int query_seal_revealed(){
@@ -200,7 +191,7 @@ string view_wrist(){
    +" gl%^BOLD%^%^WHITE%^i%^RESET%^tters bright on the wrist of the"
    +" gauntlet. You could study it, if you have knowledge of that"
    +" sort of thing.";
-   
+
 }
 
 string view_gauntlet(){
@@ -229,19 +220,19 @@ void auto_reveal(object ob){
     +" themselves to form an image");
   tell_room(TO, "As " + ob->QCN + "%^RESET%^ enters the room, the markings"
     +" on the %^BOLD%^%^BLACK%^b%^RESET%^a%^BOLD%^%^BLACK%^s%^RESET%^"
-    +"%^BLUE%^a%^BOLD%^%^BLACK%^lt columns%^RESET%^ recognize "+ ob->QO 
+    +"%^BLUE%^a%^BOLD%^%^BLACK%^lt columns%^RESET%^ recognize "+ ob->QO
     +" and rearrange themselves to form an image");
   call_out("reveal_seal", 3);
 }
 
-int touch_blocks(string str){    
+int touch_blocks(string str){
   string what, which, result, * quests;
   int num, rows, columns;
   num = sscanf(str, "%s %s", what, which);
   if (num <2){
     what = str;
   }
-  if (what != "block" && what != "hexagon" && what != "marking" && what != "blocks" 
+  if (what != "block" && what != "hexagon" && what != "marking" && what != "blocks"
          && what != "markings" && what != "column"  && what != "image"){
     return notify_fail("Do you want to %^ORANGE%^touch%^RESET%^ one of"
       +" the blocks?");
@@ -251,7 +242,7 @@ int touch_blocks(string str){
       +" by specifying a hexagon by letter. For example: 'touch block"
       +" A'");
     tell_object(TP, "To see the letters for the different hexagons"
-      +",%^ORANGE%^ <check letters>"); 
+      +",%^ORANGE%^ <check letters>");
     return 1;
   }
   if (HEXER_D->is_a_hex(which)==-1){
@@ -286,7 +277,7 @@ int touch_blocks(string str){
       +" %^RESET%^marking%^BOLD%^%^BLUE%^, the %^RED%^gl%^BOLD%^%^RED%^"
       +"o%^RESET%^%^RED%^w %^RESET%^beneath it begins to %^RESET%^fade"
       +"%^BOLD%^%^BLUE%^.", TP);
-    HEXER_D->highlight_hex("none");    
+    HEXER_D->highlight_hex("none");
     return 1;
   }
   tell_object(TP, "Comparing hex " + which + " to hex: " + HEXER_D->query_highlight());
@@ -301,14 +292,14 @@ int touch_blocks(string str){
       +" they were not the same shape as each other.");
     tell_room(TO, "%^BOLD%^%^BLUE%^" + TPQCN + " %^BOLD%^%^BLUE%^touches"
       +" one of the basalt columns. As " + TP->QP + " fingers brush the"
-      +" %^RESET%^marking%^BOLD%^%^BLUE%^, the image " + TP->QS 
+      +" %^RESET%^marking%^BOLD%^%^BLUE%^, the image " + TP->QS
       +" touches, and the one currently"
       +" %^RESET%^%^RED%^glo%^RESET%^%^RED%^wi%^RESET%^%^RED%^ng"
       +" re%^RESET%^%^RED%^d %^BOLD%^%^BLUE%^suddeny"
       +" %^BOLD%^%^CYAN%^fl%^BLUE%^a%^BOLD%^%^CYAN%^s%^RESET%^%^CYAN%^h"
       +" %^BOLD%^%^BLUE%^b%^CYAN%^lue%^BOLD%^%^BLUE%^, then both fade"
       +" back to %^RESET%^normal%^BOLD%^%^BLUE%^.", TP);
-    HEXER_D->highlight_hex("none");    
+    HEXER_D->highlight_hex("none");
     return 1;
   }
   tell_object(TP, "%^BOLD%^%^BLUE%^As your fingers brush the %^RESET%^"
@@ -327,8 +318,8 @@ int touch_blocks(string str){
     +"%^RED%^mn%^BOLD%^%^BLUE%^. Once they settle down, the"
     +" %^RESET%^%^RED%^gl%^BOLD%^o%^RESET%^%^RED%^w %^RESET%^fades away"
     +"%^BOLD%^%^BLUE%^.", TP);
-  HEXER_D->swap_hexes(which, HEXER_D->query_highlight());    
-  HEXER_D->highlight_hex("none");    
+  HEXER_D->swap_hexes(which, HEXER_D->query_highlight());
+  HEXER_D->highlight_hex("none");
   if (HEXER_D->check_completed()==1){
     call_out("reveal_seal", 2);
   }
@@ -340,7 +331,7 @@ int touch_blocks(string str){
 }
 
 
-varargs void grant_quest(object sealer, string quest, int exp, 
+varargs void grant_quest(object sealer, string quest, int exp,
                               string explanation, int must_be_near){
   object leader, * party, found_thing;
   string name, party_name, * quests;
@@ -381,7 +372,7 @@ int check_grid(string str){
   if (seal_revealed == 1){
     tell_object(TP, "The heagonal blocks have moved aside to reveal a new image beneath");
     return 1;
-  }  
+  }
   HEXER_D->show_pic(TP,1);
   return 1;
 }
@@ -408,7 +399,7 @@ string view_seal(){
         +"%^CYAN%^e%^RESET%^ has been wrenched open wide, and whatever was"
         +" confined by the enchantments it held is no longer trapped.\n\n"
         +"Oh dear. This is probably not good news.";
-    } else 
+    } else
     {
       desc += " The ^%^GREEN%^s%^RESET%^%^GREEN%^e%^ORANGE%^a%^GREEN%^l"
         +"%^RESET%^ looks aged and faded, covered over with a"
@@ -450,10 +441,10 @@ void reveal_seal5(object ob){
   tell_room(TO, "As the new image becomse clear, you recognise"
     +" %^BOLD%^%^RED%^H%^RESET%^e%^BOLD%^%^RED%^l%^BLUE%^m'%^RESET%^s"
     +" staring %^CYAN%^e%^BOLD%^%^BLUE%^y%^RESET%^%^CYAN%^e%^RESET%^"
-    +" emblazoned on an upright war gauntlet. "); 
+    +" emblazoned on an upright war gauntlet. ");
   tell_room(TO, "The %^CYAN%^e%^BOLD%^%^BLUE%^y%^RESET%^%^CYAN%^e%^RESET%^"
     +" is an obvious point of power in the image, as is the%^BOLD%^%^CYAN%^"
-    +" je%^BLUE%^w%^CYAN%^el%^RESET%^ placed over the wrist of the gauntlet."); 
+    +" je%^BLUE%^w%^CYAN%^el%^RESET%^ placed over the wrist of the gauntlet.");
 }
 
 void reveal_seal4(object ob){

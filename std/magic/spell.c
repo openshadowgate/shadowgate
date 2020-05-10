@@ -2316,7 +2316,7 @@ void define_base_damage(int adjust)
             if (slevel % 2) {
                 sdamage = roll_dice(clevel, 8 + (slevel + 1) / 2);
             }else {
-                sdamage = roll_dice(clevel, 8 + slevel / 2 - 1) + roll_dice(1, clevel / 2);
+                sdamage = roll_dice(clevel, 8 + slevel / 2 ) + roll_dice(1, clevel / 2); //removed -1 to function follow progression previously.  Updated standard damage - Odin 5/9/2020
             }
         } else {
             sdamage = roll_dice(clevel, 8);

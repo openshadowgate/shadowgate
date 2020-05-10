@@ -1,6 +1,6 @@
 #include <std.h>
 #include <move.h>
-#include "../tecqumin.h"
+#include "../../tecqumin.h"
 
 inherit ROOM;
 
@@ -16,7 +16,18 @@ void create() {
   set_short("%^BOLD%^%^GREEN%^In a %^RESET%^%^GREEN%^thick%^BOLD%^"
            +" %^GREEN%^jungle");
   set_long( (:TO, "long_desc":) );
-  set_items(([  ]));
+  set_items(([({"hole", "watering hole", "water"}) : "The %^GREEN%^j%^BOLD%^%^GREEN%^"
+    +"u%^RESET%^%^GREEN%^ng%^BOLD%^%^GREEN%^l%^RESET%^%^GREEN%^e %^RESET%^floor slopes"
+    +" down toward the %^CYAN%^water%^RESET%^, making access possible for the various"
+    +" animals who come to drink here. The %^CYAN%^water%^RESET%^ itself has a faintly"
+    +" %^CYAN%^g%^BOLD%^%^GREEN%^ree%^RESET%^%^CYAN%^n%^BOLD%^%^GREEN%^is%^RESET%^"
+    +"%^CYAN%^h%^RESET%^ tinge, but is probably as good a place to drink as any around"
+    +" here.",
+      ({"parrot", "parrots"}) : "A pair of %^BOLD%^%^BLUE%^r%^YELLOW%^a%^RED%^i%^GREEN%^"
+    +"nb%^BOLD%^%^BLUE%^ow %^YELLOW%^lo%^RED%^ri%^GREEN%^k%^BLUE%^e%^YELLOW%^e%^RED%^t"
+    +"%^GREEN%^s%^RESET%^ fly among the %^GREEN%^lower branches%^RESET%^, while some"
+    +" %^BLUE%^blue an%^YELLOW%^d gold mac%^BLUE%^caws%^RESET%^ call out from the"
+    +" %^BOLD%^%^GREEN%^upper canopy%^RESET%^." ]));
   set_smell("default","The air is heavy with %^CYAN%^humidity%^ORANGE%^"
                     +" and the heady scent of %^GREEN%^j%^BOLD%^"
                     +"%^GREEN%^u%^RESET%^%^GREEN%^ngle %^ORANGE%^plant"
@@ -29,6 +40,7 @@ void create() {
 }
 void init() {
    ::init();
+   add_action("drink", "drink");
 }
 
 void reset(){
@@ -52,7 +64,7 @@ void reset(){
                 +" water");
     break;
   case 3:
-    tell_room(TO,"A huge fish surfaces, gulping at a %^BOLD%^%^GRREEN%^"
+    tell_room(TO,"A huge fish surfaces, gulping at a %^BOLD%^%^GREEN%^"
                +"dr%^CYAN%^a%^GREEN%^g%^BLUE%^o%^GREEN%^nfly%^RESET%^"
                +" hovering over the surface of the water, before rolling"
                +" back into the darkness below");
@@ -67,6 +79,18 @@ void reset(){
   }
 }
 
+int drink(string str){
+  if (str != "water"){
+    return notify_fail("Do you want to drink the water? And are you sure about that?");
+  }
+  if(!TP->add_quenched(3000)) {
+    notify_fail("You are too bloated to drink that!\n");
+    return 0;
+  }
+  tell_object(TP, "You scoop %^BOLD%^%^BLUE%^water%^RESET%^ from the little stream and drink deeply. Fortunately,"
+       +" it seems perfectly okay to drink. At least so far.");
+  tell_room(TO, TPQCN + "scoops %^BOLD%^%^BLUE%^water%^RESET%^ from the little stream and drinks deeply.");
+}
 
 
 int remove_log(string str){

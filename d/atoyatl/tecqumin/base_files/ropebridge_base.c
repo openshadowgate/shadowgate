@@ -117,14 +117,14 @@ int fly_down(string str){
       +" want to land on the %^ORANGE%^canyon%^RESET%^ floor.");
     return 1;
   }
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()==-1){
-    if ((int)"/daemon/bridge_monitor_d.c"->query_vPos(TP)<13){
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()==-1){
+    if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_vPos(TP)<13){
       tell_object(TP, "You aren't low enough to land on the canyon"
         +" floor yet. Go further %^BOLD%^%^WHITE%^<down>%^RESET%^.");
       return 1;
     }
   } else {
-    if ((int)"/daemon/bridge_monitor_d.c"->query_vPos(TP)<21){
+    if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_vPos(TP)<21){
       tell_object(TP, "You aren't low enough to land on the canyon"
         +" floor yet. Go further %^BOLD%^%^WHITE%^<down>%^RESET%^.");
       return 1;
@@ -137,7 +137,7 @@ int fly_down(string str){
     tell_room(room, TPQCN + " flies in from above.");
     tell_object(TP, "You fly down to the %^ORANGE%^canyon"
       +" %^BOLD%^%^BLUE%^riverbank%^RESET%^.");
-    "/daemon/bridge_monitor_d.c"->remove_crosser(TP);
+    "/d/atoyatl/bridge_monitor_d.c"->remove_crosser(TP);
     TP->move(room);
     TP->force_me("look");
   }else {
@@ -193,7 +193,7 @@ int push(string str){
   }
   TP->set_property("pushed", time());
   for (i=0;i<sizeof(critters); i++){
-    if ((int)"/daemon/bridge_monitor_d.c"->can_reach(TP, critters[i])==1){
+    if ((int)"/d/atoyatl/bridge_monitor_d.c"->can_reach(TP, critters[i])==1){
       push2(TP, critters[i]);
       return 1;
     }
@@ -247,7 +247,7 @@ void push2(object pusher, object pushed){
          +" to throw you off the bridge!");
       }
     }
-    "/daemon/bridge_monitor_d.c"->fall(pushed);
+    "/d/atoyatl/bridge_monitor_d.c"->fall(pushed);
   } else {
     strdiff = str2 - str1;
     sizediff = size2 - size1;
@@ -281,7 +281,7 @@ int cut_rope(string str){
     str != "ropes" && str !="through ropes"){
     return notify_fail("What do you want to cut?");
   }
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point() !=-1){
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point() !=-1){
     return notify_fail("The ropes have already all been cut!");
   }
   obs = TP->query_wielded();
@@ -301,12 +301,12 @@ int cut_rope(string str){
     return notify_fail("You'll need to be holding"
       +" something sharp!");
   }
-  ropes = "daemon/bridge_monitor_d.c"->query_ropes();
+  ropes = "d/atoyatl/bridge_monitor_d.c"->query_ropes();
   if (ropes <1){
     tell_object(TP, "The ropes are all cut already");
     return 1;
   }
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(TP);
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(TP);
   if (pos < 5 || pos >59){
     tell_object(TP, "You need to be further along the bridge to cut"
                    +" the rope.");
@@ -358,7 +358,7 @@ void cut2(object ob){
     tell_object(ob, "You moved before you finished cutting the rope");
     return;
   }
-  "/daemon/bridge_monitor_d.c"->cut_rope(ob);
+  "/d/atoyatl/bridge_monitor_d.c"->cut_rope(ob);
 }
 
 string base_desc(){
@@ -399,7 +399,7 @@ string base_desc(){
 string long_desc(){
   int ropes;
   string desc;
-  ropes = "/daemon/bridge_monitor_d.c"->query_ropes();
+  ropes = "/d/atoyatl/bridge_monitor_d.c"->query_ropes();
   TP->force_me("check bridge");
   desc = base_desc();
   switch(ropes){
@@ -450,7 +450,7 @@ int let_go(string str){
     return 1;
   }
   TP->remove_property("gripped");
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point() != -1){
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point() != -1){
     TP->force_me("fall off bridge");
     return 1;   
   }
@@ -487,15 +487,15 @@ int turn(string str){
   if (str == "undead"){
     return 0;
   }
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()!=-1){
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()!=-1){
     if (!TP->query_property("flying")){
       tell_object(TP, "The bridge is broken, you can't turn round on"
         +" it!");
       return 1;
     }
   }
-  face = "/daemon/bridge_monitor_d.c"->query_face(TP);
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(TP);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(TP);
   if ((int)TP->query_property("gripped") == 1){
     tell_object(TP, "You are holding tight to the ropes. You'll need"
       +" to %^BOLD%^%^YELLOW%^let go%^RESET%^ to move!");
@@ -508,7 +508,7 @@ int turn(string str){
     tell_object(TP, "You turn and face %^BOLD%^%^WHITE%^west");
     face = WEST;
   }
-  "/daemon/bridge_monitor_d"->set_face(TP, face);
+  "/d/atoyatl/bridge_monitor_d"->set_face(TP, face);
   switch (dir){
   case EAST:
     tell_object(TP, "You are still travelling"
@@ -532,7 +532,7 @@ int fall_me(string str){
         return notify_fail("Just type 'fall' or 'fall down' to fall"
         +" off the bridge.");
     }
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point() == -1){
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point() == -1){
     tell_object(TP, "You swing your leg over the guide rope and drop"
       +" off the bridge");
     tell_bridge(TPQCN + "swings " + TP->QP + " leg over the guide"
@@ -542,14 +542,14 @@ int fall_me(string str){
     tell_bridge(TPQCN + "lets go of the bridge and lets " + TP->QP 
       + "self fall.", TP);
   }
-  "/daemon/bridge_monitor_d.c"->fall(TP);
+  "/d/atoyatl/bridge_monitor_d.c"->fall(TP);
   return 1;
 }
 
 int stop (string str){
   int dir, point;
   string v;
-  point = "/daemon/bridge_monitor_d.c"->query_break_point();
+  point = "/d/atoyatl/bridge_monitor_d.c"->query_break_point();
   if (point >-1){
     if ((int)TP->query_property("flying")==1){
       v = "flying across the canyon";
@@ -562,21 +562,21 @@ int stop (string str){
   if ((int)TP->query_property("flying")==1){
     v = "flying across the canyon";
   }
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(TP);
   if (dir != STATIONARY){
     tell_object(TP, "You stop " + v);
     tell_bridge(TPQCN + " stops " + v, TP);
   } else {
     tell_object(TP, "You're not " + v);
   }
-  "/daemon/bridge_monitor_d.c"->set_dir(TP, STATIONARY);
+  "/d/atoyatl/bridge_monitor_d.c"->set_dir(TP, STATIONARY);
   return 1;
 }
 
 int head_up(string str){
   int pos, dir, face, bp;
   string room, start_room, verb, where;
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()==-1
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()==-1
         && !(int)TP->query_property("flying")){
     tell_object(TP, "You can't go up here");
     return 1;
@@ -587,10 +587,10 @@ int head_up(string str){
     tell_object(TP, "You can't go up from here!");
     return 1;
   }
-  bp = "/daemon/bridge_monitor_d.c"->query_break_point();
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(TP);
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
-  face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+  bp = "/d/atoyatl/bridge_monitor_d.c"->query_break_point();
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(TP);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(TP);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(TP);
   if ((int)TP->query_property("flying")==1){
     verb = "flying";
     where = " upwards";
@@ -619,22 +619,22 @@ int head_up(string str){
 int head_down(string str){
   int pos, dir, face, bp;
   string room, start_room, verb, where;
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()==-1
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()==-1
                          && !(int)TP->query_property("flying")){
     tell_object(TP, "You can't go down here");
     return 1;
   }
-  bp = "/daemon/bridge_monitor_d.c"->query_break_point();
+  bp = "/d/atoyatl/bridge_monitor_d.c"->query_break_point();
   start_room = file_name(ETP);
   if (start_room[0..strlen(JUNG_ROOM + "bbridge")-1]!= JUNG_ROOM
     + "bbridge" && !(int)TP->query_property("flying")&& bp ==-1){
     tell_object(TP, "You can't go that way from here!");
     return 1;
   }
-  bp = "/daemon/bridge_monitor_d.c"->query_break_point();
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(TP);
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
-  face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+  bp = "/d/atoyatl/bridge_monitor_d.c"->query_break_point();
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(TP);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(TP);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(TP);
   if ((int)TP->query_property("flying")==1){
     verb = "flying";
     where = " downward";
@@ -663,7 +663,7 @@ int head_down(string str){
 int head_west (string str){
   int pos, dir, face, len;
   string room, start_room, where;
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()!=-1
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()!=-1
             && !(int)TP->query_property("flying")){
     tell_object(TP, "The bridge is broken! You can't go west!");
     return 1;
@@ -694,9 +694,9 @@ int head_west (string str){
       +" %^BOLD%^%^YELLOW%^let go%^RESET%^ to move!");
     return 1;
   }
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(TP);
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
-  face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(TP);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(TP);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(TP);
   switch (face){
   case WEST:
     switch (dir){
@@ -800,7 +800,7 @@ void pull2(object puller, object pulled){
   BAB = "/daemon/bonus_d.c"->new_bab(1, puller);
   AC = "/daemon/bonus_d.c"->effective_ac(pulled);
   roll = random(20);
-  critters = "/daemon/bridge_monitor_d.c"->query_crossers();
+  critters = "/d/atoyatl/bridge_monitor_d.c"->query_crossers();
   count = sizeof(critters);
   if (roll<19){ //auto hit on a natural 20
     if (roll + BAB < AC){
@@ -842,7 +842,7 @@ void pull2(object puller, object pulled){
         }
       }
     }
-    "/daemon/bridge_monitor_d.c"->fall(pulled);
+    "/d/atoyatl/bridge_monitor_d.c"->fall(pulled);
   } else {
     tell_object(puller, "You grab " + pulled->QCN + " by the ankle, but you don't"
       +" manage to yank " + pulled ->QO + " off the bridge and " + pulled->QS 
@@ -865,7 +865,7 @@ int pull (string str){
   object who, * critters;
   int i, count, nm;
   string true_name, name, where;
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()==-1){
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()==-1){
     return notify_fail("You can't really pull anyone off the bridge at"
     +" the moment. You might be able to push someone, if you were close"
     +" enough.");
@@ -904,7 +904,7 @@ int pull (string str){
       +" %^RESET%^someone from is there.");
     return 1;
   }
-  critters = "/daemon/bridge_monitor_d.c"->query_crossers();
+  critters = "/d/atoyatl/bridge_monitor_d.c"->query_crossers();
   count = sizeof(critters);
   if (count<1){
     return notify_fail("There's no-one on the bridge for you to pull");
@@ -922,8 +922,8 @@ int pull (string str){
     } 
     if (critters[i]->id(name)){
       who = critters[i];
-      if ("daemon/bridge_monitor_d.c"->can_reach(TP, who) &&
-          "daemon/bridge_monitor_d.c"->is_above(who, TP)){
+      if ("d/atoyatl/bridge_monitor_d.c"->can_reach(TP, who) &&
+          "d/atoyatl/bridge_monitor_d.c"->is_above(who, TP)){
         pull2(TP, who);
         TP->set_property("pulled", time());
         return 1;
@@ -951,7 +951,7 @@ void kick2(object kicker, object kicked){
   BAB = "/daemon/bonus_d.c"->new_bab(1, kicker);
   AC = "/daemon/bonus_d.c"->effective_ac(kicked);
   roll = random(20);
-  critters = "/daemon/bridge_monitor_d.c"->query_crossers();
+  critters = "/d/atoyatl/bridge_monitor_d.c"->query_crossers();
   count = sizeof(critters);
   if (roll<19){ //auto hit on a natural 20
     if (roll + BAB < AC){
@@ -986,7 +986,7 @@ void kick2(object kicker, object kicked){
         }
       }
     }
-    "/daemon/bridge_monitor_d.c"->fall(kicked);
+    "/d/atoyatl/bridge_monitor_d.c"->fall(kicked);
   } else {
     if ((str2 - str1) > (siz2-siz1)){
       how = " too strong";
@@ -1014,7 +1014,7 @@ int kick (string str){
   object who, * critters;
   int i, count, nm;
   string true_name, name, where;
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()==-1){
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()==-1){
     return notify_fail("You can't really kick anyone off the bridge at"
     +" the moment. You might be able to push someone, if you were close"
     +" enough.");
@@ -1047,7 +1047,7 @@ int kick (string str){
       +" %^RESET%^someone from is there.");
     return 1;
   }
-  critters = "/daemon/bridge_monitor_d.c"->query_crossers();
+  critters = "/d/atoyatl/bridge_monitor_d.c"->query_crossers();
   count = sizeof(critters);
   if (count<1){
     return notify_fail("There's no-one on the bridge for you to kick");
@@ -1065,8 +1065,8 @@ int kick (string str){
     } 
     if (critters[i]->id(name)){
       who = critters[i];
-      if ("daemon/bridge_monitor_d.c"->can_reach(TP, who)){
-        if ( "daemon/bridge_monitor_d.c"->is_below(who, TP)){
+      if ("d/atoyatl/bridge_monitor_d.c"->can_reach(TP, who)){
+        if ( "d/atoyatl/bridge_monitor_d.c"->is_below(who, TP)){
           kick2(TP, who);
           TP->set_property("pulled", time());
           return 1;
@@ -1081,7 +1081,7 @@ int kick (string str){
 int head_east(string str){
   int pos, dir, face, len;
   string room, start_room, where;
-  if ((int)"/daemon/bridge_monitor_d.c"->query_break_point()!=-1
+  if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point()!=-1
       && !(int)TP->query_property("flying")){
     tell_object(TP, "The bridge is broken! You can't go east!");
     return 1;
@@ -1111,7 +1111,7 @@ int head_east(string str){
   } else {
     if (start_room[strlen(JUNG_ROOM + "ropebridge0")-1]== '0'
         || start_room[strlen(JUNG_ROOM + "ropebridge0")-1] == '5'){
-      if ((int)"/daemon/bridge_monitor_d.c"->query_break_point() > -1 
+      if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_break_point() > -1 
                           && (int)TP->query_property("flying")==1){
         where = "across the canyon";
       }
@@ -1120,9 +1120,9 @@ int head_east(string str){
   if ((int)TP->query_property("flying")==1){
     where = "across the canyon";
   }
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(TP);
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(TP);
-  face = "/daemon/bridge_monitor_d.c"->query_face(TP);
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(TP);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(TP);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(TP);
   switch (face){
   case EAST:
     switch (dir){
@@ -1260,7 +1260,7 @@ int has_moved_west(int pos, int dist){
 
 string get_correct_room(int pos){
   int break_point;
-  break_point = "/daemon/bridge_monitor_d.c"->query_break_point(); 
+  break_point = "/d/atoyatl/bridge_monitor_d.c"->query_break_point(); 
   if (break_point == -1){
     switch(pos){
     case -1..1:
@@ -1330,17 +1330,17 @@ string get_correct_room(int pos){
 }
 
 void tell_bridge( string str, object ob){
-  "/daemon/bridge_monitor_d.c"->tell_bridge( str, ob);
+  "/d/atoyatl/bridge_monitor_d.c"->tell_bridge( str, ob);
 }
 
 void climb_up(object ob){
   int i, j, pos, dist, ath, dir, face, break_point, top, fly1, fly2;
   object room, occupier, * critters;
   string movement, movementb, correct_room, room_name, who, *pic;
-  break_point = "/daemon/bridge_monitor_d.c"->query_break_point();
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(ob);
-  face = "/daemon/bridge_monitor_d.c"->query_face(ob);
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(ob);
+  break_point = "/d/atoyatl/bridge_monitor_d.c"->query_break_point();
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(ob);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(ob);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(ob);
   if (dir != ASCENDING){
     tell_object(ob, "You are no longer going up");
     return 1;
@@ -1367,7 +1367,7 @@ void climb_up(object ob){
     top = pos;
     i = -1;
   } else {
-    top = pos + "/daemon/bridge_monitor_d"->query_height(ob);
+    top = pos + "/d/atoyatl/bridge_monitor_d"->query_height(ob);
     i = 1;
   }
   ath = ob->query_skill("athletics");
@@ -1386,12 +1386,12 @@ void climb_up(object ob){
     dist = 2;
   }
   dist = dist * i;
-  critters = "/daemon/bridge_monitor_d.c"->query_crossers();
+  critters = "/d/atoyatl/bridge_monitor_d.c"->query_crossers();
   if (sizeof(critters)>1){
     for (j = 0;j<sizeof(critters);j++){
       if (critters[j]==ob){continue;}
-      if ((int)"/daemon/bridge_monitor_d.c"->can_reach(ob, critters[j])== 1 &&
-            (int)"/daemon/bridge_monitor_d.c"->is_above( critters[j], ob)==1 ){
+      if ((int)"/d/atoyatl/bridge_monitor_d.c"->can_reach(ob, critters[j])== 1 &&
+            (int)"/d/atoyatl/bridge_monitor_d.c"->is_above( critters[j], ob)==1 ){
         fly1 = ob->query_property("flying");
         fly2 = critters[j]->query_property("flying");
         if (fly1 != fly2 || fly1 == 1){
@@ -1416,11 +1416,11 @@ void climb_up(object ob){
   tell_object(ob, "You " + movement + movementb);
   tell_bridge(ob->QCN + movement + "s" + movementb, ob);
   if ((int)ob->query_property("flying")==1){
-    "/daemon/bridge_monitor_d.c"->set_VPos(ob, 
-                       (int)"/daemon/bridge_monitor_d.c"->query_vPos(ob) - 2);
-    pic = "/daemon/bridge_monitor_d.c"->get_picture(ob, TP);
-    if ((int)"/daemon/bridge_monitor_d.c"->query_vPos(ob) < 0){
-      "/daemon/bridge_monitor_d.c"->set_VPos(ob, 0);
+    "/d/atoyatl/bridge_monitor_d.c"->set_VPos(ob, 
+                       (int)"/d/atoyatl/bridge_monitor_d.c"->query_vPos(ob) - 2);
+    pic = "/d/atoyatl/bridge_monitor_d.c"->get_picture(ob, TP);
+    if ((int)"/d/atoyatl/bridge_monitor_d.c"->query_vPos(ob) < 0){
+      "/d/atoyatl/bridge_monitor_d.c"->set_VPos(ob, 0);
       tell_object(ob, "You can't fly any higher!");
       return;
     }
@@ -1490,10 +1490,10 @@ int climb_down(object ob){
   int i, j, pos, dist, ath, face, break_point, dir, fly1, fly2, bridge_height;
   object room, * critters;
   string movement, movementb, correct_room, room_name, who, *pic;
-  break_point = "/daemon/bridge_monitor_d.c"->query_break_point();
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(ob);
-  face = "/daemon/bridge_monitor_d.c"->query_face(ob);
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(ob);
+  break_point = "/d/atoyatl/bridge_monitor_d.c"->query_break_point();
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(ob);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(ob);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(ob);
   if (dir != DESCENDING){
     tell_object(ob, "You are no longer going down");
     return 1;
@@ -1542,12 +1542,12 @@ int climb_down(object ob){
     movementb = " the canyon.";
   }
   dist = dist * i;
-  critters = "/daemon/bridge_monitor_d.c"->query_crossers();
+  critters = "/d/atoyatl/bridge_monitor_d.c"->query_crossers();
   if (sizeof(critters)>1){  // check for other creatures in your way
     for (j = 0;j<sizeof(critters);j++){
       if (critters[j]==ob){continue;}
-      if ((int)"/daemon/bridge_monitor_d.c"->can_reach(ob, critters[j])== 1 &&
-            (int)"/daemon/bridge_monitor_d.c"->is_below( critters[j], ob)==1 ){
+      if ((int)"/d/atoyatl/bridge_monitor_d.c"->can_reach(ob, critters[j])== 1 &&
+            (int)"/d/atoyatl/bridge_monitor_d.c"->is_below( critters[j], ob)==1 ){
         fly1 = ob->query_property("flying");
         fly2 = critters[j]->query_property("flying");
         if (fly1 != fly2 || fly1 == 1){
@@ -1569,22 +1569,22 @@ int climb_down(object ob){
     }
   }
   if ((int)ob->query_property("flying")){
-    "/daemon/bridge_monitor_d.c"->set_VPos(ob, 
-                          "/daemon/bridge_monitor_d.c"->query_vPos(ob) + 2);
-    pic = "/daemon/bridge_monitor_d.c"->get_picture(ob, TP);
+    "/d/atoyatl/bridge_monitor_d.c"->set_VPos(ob, 
+                          "/d/atoyatl/bridge_monitor_d.c"->query_vPos(ob) + 2);
+    pic = "/d/atoyatl/bridge_monitor_d.c"->get_picture(ob, TP);
     if (break_point>-1){
       bridge_height = 27;
     } else {
       bridge_height = 20;
     }   
-    if ("/daemon/bridge_monitor_d.c"->query_vPos(ob) > 
+    if ("/d/atoyatl/bridge_monitor_d.c"->query_vPos(ob) > 
                                              bridge_height - sizeof(pic)+1){
-      "/daemon/bridge_monitor_d.c"->set_VPos(ob, bridge_height - sizeof(pic)+1);
+      "/d/atoyatl/bridge_monitor_d.c"->set_VPos(ob, bridge_height - sizeof(pic)+1);
       tell_object(ob, "You can't fly any lower while staying in touch with"
         +" the bridge.");
       tell_object(ob, "You can %^BOLD%^%^WHITE%^<fly down>%^RESET%^ if you"
         +" want to land on the canyon floor");
-      "/daemon/bridge_monitor_d.c"->set_dir(TP, STATIONARY);
+      "/d/atoyatl/bridge_monitor_d.c"->set_dir(TP, STATIONARY);
       return 1;
     }
   }
@@ -1668,18 +1668,18 @@ void go_west(object ob){
   object room, moveroom, occupier;
   string movement, movementb, correct_room, obstacle, where, start_room;
   face = WEST;
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(ob);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(ob);
   if (dir !=WEST){
     return;
   }
   if ((int)TP->query_property("gripped") == 1){
     tell_object(TP, "You stop moving, as you are holding tight to the"
       +" ropes.");
-    "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+    "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
     return;
   }
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(ob);
-  face = "/daemon/bridge_monitor_d.c"->query_face(ob);
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(ob);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(ob);
 // First make sure they are in the right room, according to their
 // position on the bridge
   correct_room = get_correct_room(pos);
@@ -1692,14 +1692,14 @@ void go_west(object ob){
       if (!(int)TP->query_property("flying")){
         tell_object(TP, "You can't go east any more - you're"
           +" not flying!");
-        "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+        "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
         return;
       } else {
         where = "across the canyon";
       }
     } else {  
       tell_object(TP, "You can't go east from here, so you stop moving");
-      "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+      "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
       return;
     }
   }
@@ -1733,7 +1733,7 @@ void go_west(object ob){
       }
     } else {  
       tell_object(TP, "You can't go west from here, so you stop moving");
-      "/daemon/bridge_monitor_d.c"->set_dir(STATIONARY);
+      "/d/atoyatl/bridge_monitor_d.c"->set_dir(STATIONARY);
       return;
     }
   }
@@ -1753,7 +1753,7 @@ void go_west(object ob){
     break;
   }
   pos = pos - dist;
-  occupier = "/daemon/bridge_monitor_d.c"->is_occupied(pos);
+  occupier = "/d/atoyatl/bridge_monitor_d.c"->is_occupied(pos);
   if (objectp(occupier) && occupier!=ob && !occupier->query_true_invis() 
     && !ob->query_true_invis()){
     fly1 = ob->query_property("flying");
@@ -1799,7 +1799,7 @@ void go_west(object ob){
      } else {
        tell_object(ob, "You step off the bridge at the western end");
      }
-     "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+     "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
      for (i=1;i<6;i++){
        room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
        if (objectp (room)){
@@ -1966,11 +1966,11 @@ void go_east(object ob){
   string movement, movementb, correct_room, obstacle, where, start_room;
   face = EAST;
   if (!objectp(ob)) return;
-  dir = "/daemon/bridge_monitor_d.c"->query_dir(ob);
+  dir = "/d/atoyatl/bridge_monitor_d.c"->query_dir(ob);
   if (dir !=EAST) return;
   if ((int)ob->query_property("gripped") == 1){
     tell_object(ob, "You stop moving, as you are holding tight to the ropes.");
-    "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+    "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
     return;
   }
   where = "the bridge";
@@ -1982,19 +1982,19 @@ void go_east(object ob){
       if (!(int)TP->query_property("flying")){
         tell_object(TP, "You can't go east any more - you're"
           +" not flying!");
-        "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+        "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
         return;
       } else {
         where = "across the canyon";
       }
     } else {  
       tell_object(ob, "You can't go east from here, so you stop moving");
-      "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+      "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
       return;
     }
   }
-  pos = "/daemon/bridge_monitor_d.c"->query_pos(ob);
-  face = "/daemon/bridge_monitor_d.c"->query_face(ob);
+  pos = "/d/atoyatl/bridge_monitor_d.c"->query_pos(ob);
+  face = "/d/atoyatl/bridge_monitor_d.c"->query_face(ob);
 // First make sure they are in the right room, according to their
 // position on the bridge
   correct_room = get_correct_room(pos);
@@ -2023,14 +2023,14 @@ void go_east(object ob){
       if (!(int)TP->query_property("flying")){
         tell_object(TP, "You can't go east any more - you're"
           +" not flying!");
-        "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+        "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
         return;
       } else {
         where = "across the canyon";
       }
     } else {  
       tell_object(ob, "You can't go east from here, so you stop moving");
-      "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+      "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
       return;
     }
   }
@@ -2063,8 +2063,8 @@ void go_east(object ob){
     break;
   }
   pos = pos + dist;
-  width = "/daemon/bridge_monitor_d.c"->query_width(ob);
-  occupier = "/daemon/bridge_monitor_d.c"->is_occupied(pos + width);
+  width = "/d/atoyatl/bridge_monitor_d.c"->query_width(ob);
+  occupier = "/d/atoyatl/bridge_monitor_d.c"->is_occupied(pos + width);
   if (objectp(occupier) && occupier!=ob){
     fly1 = ob->query_property("flying");
     fly2 = occupier->query_property("flying");
@@ -2094,7 +2094,7 @@ void go_east(object ob){
      } else {
        tell_object(ob, "You step off the bridge at the eastern end");
      }
-     "/daemon/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
+     "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, STATIONARY);
      for (i=1;i<6;i++){
        room = find_object_or_load(JUNG_ROOM + "ropebridge" + i);
        if (objectp (room)){
@@ -2108,7 +2108,7 @@ void go_east(object ob){
        ob->force_me("look");
        tell_room(moveroom, ob->QCN +" steps in from " + where +".", ob);
      }
-//     "/daemon/bridge_monitor_d.c"->remove_crosser(ob);
+//     "/d/atoyatl/bridge_monitor_d.c"->remove_crosser(ob);
      return; // makes sure they don't keep trying to cross
      break;
    case 51..63:
@@ -2253,47 +2253,47 @@ int check_bridge(string str){
                                && str != "progress across bridge"){
       return notify_fail("Try <check progress> or <check bridge>");
     }
-    "/daemon/bridge_monitor_d.c"->check_positions(TP);
+    "/d/atoyatl/bridge_monitor_d.c"->check_positions(TP);
     return 1;
   }
-  "/daemon/bridge_monitor_d.c"->show_bridge(TP);
+  "/d/atoyatl/bridge_monitor_d.c"->show_bridge(TP);
   return 1;
 }
 
 void set_PosDir(object ob, int * PosDir){
-  "/daemon/bridge_monitor_d.c"->set_PosDir(ob, PosDir);
+  "/d/atoyatl/bridge_monitor_d.c"->set_PosDir(ob, PosDir);
 }
 
 void set_pos(object ob, int pos){
-  "/daemon/bridge_monitor_d.c"->set_pos(ob, pos);
+  "/d/atoyatl/bridge_monitor_d.c"->set_pos(ob, pos);
 }
 
 int query_pos(object ob){
-  return "/daemon/bridge_monitor_d.c"->query_pos(ob);
+  return "/d/atoyatl/bridge_monitor_d.c"->query_pos(ob);
 }
 
 void set_face(object ob, int face){
-  "/daemon/bridge_monitor_d.c"->set_face(ob, face);
+  "/d/atoyatl/bridge_monitor_d.c"->set_face(ob, face);
 }
 
 int query_face(object ob){
-  return "/daemon/bridge_monitor_d.c"->query_face(ob);
+  return "/d/atoyatl/bridge_monitor_d.c"->query_face(ob);
 }
 
 int query_dir(object ob){
-  return "/daemon/bridge_monitor_d.c"->query_dir(ob);
+  return "/d/atoyatl/bridge_monitor_d.c"->query_dir(ob);
 }
 
 void set_dir(object ob, int dir){
-  "/daemon/bridge_monitor_d.c"->set_dir(ob, dir);
+  "/d/atoyatl/bridge_monitor_d.c"->set_dir(ob, dir);
 }
 
 void set_demon_pos(int pos){
-  "/daemon/bridge_monitor_d.c"->set_demon_pos(pos);
+  "/d/atoyatl/bridge_monitor_d.c"->set_demon_pos(pos);
 }
 
 int query_demon_pos(){
-  return "/daemon/bridge_monitor_d.c"->query_demon_pos();
+  return "/d/atoyatl/bridge_monitor_d.c"->query_demon_pos();
 }
 
 int set_demon_dir(int dir){
