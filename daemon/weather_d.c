@@ -52,7 +52,7 @@ void setup()
 void weather()
 {
     string tempcondition;
-    tempcondition = "\n %^BOLD%^%^RED%^It seems unseasonably warm.%^RESET%^";
+    tempcondition = "\n %^BOLD%^%^RED%^A chaotic elemental storm scorches the sky!%^RESET%^";
     restore_object(SAVE_WEATHER);
 
     write("%^BOLD%^%^GREEN%^ Time of Day    %^RESET%^%^GREEN%^: %^YELLOW%^" + capitalize(TOD));
