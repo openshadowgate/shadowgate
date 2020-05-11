@@ -7,55 +7,6 @@
 
 inherit DAEMON;
 
-int can_gain_feat(object ob,string feat);
-int can_gain_bonus_feat(object ob,string feat);
-int can_gain_magic_feat(object ob,string feat);
-int can_gain_hybrid_feat(object ob,string feat);
-int add_my_feat(object ob,string type,string feat);
-int remove_my_feat(object ob,string feat,int bypass);
-int can_remove_feat(object ob,string feat);
-string *get_all_removable_feats(object ob);
-varargs int gain_feat(object ob, string type, string feat,int level);
-int meets_requirements(object ob, string feat);
-varargs int gain_feat(object ob, string type, string feat,int level);
-int is_active(object ob,string feat);
-void reverse_permanent_feat(object ob,string feat);
-void execute_permanent_feat(object ob,string feat);
-int is_permanent(object ob,string feat);
-int can_use_feat(object ob,string feat);
-int level_to_use(object ob,string feat);
-int level_of_feat(object ob,string feat);
-int has_feat(object ob, string feat);
-int has_epic_feat(object ob);
-int is_feat(string feat);
-string get_feat_type(object ob,string feat);
-void remove_feat(object ob,string type, string feat);
-varargs void add_feat(object ob, string type, string feat,int level);
-void give_feat(object ob,string feat);
-void take_feat(object ob,string feat);
-void set_feats(object ob,string type,mapping feats);
-mapping get_feats(object ob,string type);
-mapping player_data(object ob);
-void build_feat_list();
-string get_category(string featname);
-mapping get_all_feats();
-string format_category(string cat);
-string pick_color(string feat,object targ);
-string format_feat(string feat,object targ);
-string *format_feats(string *left,string *right,object targ);
-void display_feats(object ob,object targ,string mytype);
-void clear_usable_feats();
-void update_usable(object ob);
-int usable_feat(object ob,string feat);
-string *class_feat_array(string myclass,string spec);
-int bought_as_class_feat(string feat,object targ);
-int bought_as_bonus_feat(string feat,object targ);
-int bought_as_magic_feat(string feat,object targ);
-int bought_as_hybrid_feat(string feat,object targ);
-int can_use_shifted(object ob, string feat);
-int calculate_psionic_feats(object ob);
-int filter_feats(object ob, string feat);
-
 static mapping __ALL_FEATS;
 static mapping __USABLE_FEATS;
 
@@ -1423,110 +1374,63 @@ string format_category(string cat)
     return display;
 }
 
-string pick_color(string feat,object targ)
+string pick_color(string feat, object targ)
 {
-    int has,active,level_check,permanent,temporary;
+    int has, active, level_check, permanent, temporary;
 
-    has         = has_feat(targ,lower_case(feat));
-    active      = is_active(targ,lower_case(feat));
-    level_check = usable_feat(targ,lower_case(feat));
-    permanent   = is_permanent(targ,lower_case(feat));
-    temporary   = is_temporary(targ,lower_case(feat));
+    has = has_feat(targ, lower_case(feat));
+    active = is_active(targ, lower_case(feat));
+    level_check = usable_feat(targ, lower_case(feat));
+    permanent = is_permanent(targ, lower_case(feat));
+    temporary = is_temporary(targ, lower_case(feat));
 
-    if(temporary)    { return "%^BOLD%^%^BLUE%^"; }
-    if(!has)         { return "%^BOLD%^%^WHITE%^"; }
-    if(!level_check) { return "%^RED%^"; }
-    if(permanent)    { return "%^BOLD%^%^GREEN%^"; }
-    if(active)       { return "%^YELLOW%^"; }
+    if (temporary) {
+        return "%^BOLD%^%^BLUE%^";
+    }
+    if (!has) {
+        return "%^BOLD%^%^WHITE%^";
+    }
+    if (!level_check) {
+        return "%^RED%^";
+    }
+    if (permanent) {
+        return "%^BOLD%^%^GREEN%^";
+    }
+    if (active) {
+        return "%^YELLOW%^";
+    }
 
     return "%^BOLD%^%^CYAN%^";
 }
 
-
-//%^B_BLUE%^%^BOLD%^%^GREEN%^Retaining the below code so it can be restored if needed. Adjusting similar code below to address lack of colors%^RESET%^
 string format_feat(string feat,object targ) {
     int level,level_check;
     string display,tmp;
 
-    feat        = capitalize(feat);
-    level_check = can_use_feat(targ,lower_case(feat));
-    level       = level_of_feat(targ,lower_case(feat));
-    if(!level || level == -1) tmp = "%^RESET%^--";
-    else if(!level_check) tmp = "%^BOLD%^%^RED%^"+level+"%^RESET%^";
-    else if(bought_as_class_feat(feat,targ)) tmp = "%^BOLD%^%^MAGENTA%^"+level+"%^RESET%^";
-    else if(bought_as_bonus_feat(feat,targ)) tmp = "%^BOLD%^%^YELLOW%^"+level+"%^RESET%^";
-    else if(bought_as_magic_feat(feat,targ)) tmp = "%^BOLD%^%^YELLOW%^"+level+"%^RESET%^";
-    else if(bought_as_hybrid_feat(feat,targ)) tmp = "%^BOLD%^%^YELLOW%^"+level+"%^RESET%^";
-    else tmp = "%^CYAN%^"+level+"%^RESET%^";
-    if(level && level < 10 && level != -1) tmp = " "+tmp+"";
-
-    if(feat == "")
-        display = arrange_string(" ",LEVEL_SPACER)+arrange_string(" ",FEAT_SPACER);
-    else {
-        display = arrange_string("%^RESET%^%^BOLD%^  "+tmp+"%^RESET%^",LEVEL_SPACER);
-        //display += arrange_string(""+feat+"",FEAT_SPACER)+"%^RESET%^";
-        display += arrange_string(""+pick_color(feat,targ)+feat+"",FEAT_SPACER)+"%^RESET%^";
+    feat = capitalize(feat);
+    level_check = can_use_feat(targ, lower_case(feat));
+    level = level_of_feat(targ, lower_case(feat));
+    if (!level || level == -1) {
+        tmp = "%^RESET%^--";
+    } else if (!level_check) {
+        tmp = "%^BOLD%^%^RED%^" + level + "%^RESET%^";
+    } else if (bought_as_class_feat(feat, targ)) {
+        tmp = "%^BOLD%^%^MAGENTA%^" + level + "%^RESET%^";
+    } else if (bought_as_bonus_feat(feat, targ)) {
+        tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
+    } else if (bought_as_magic_feat(feat, targ)) {
+        tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
+    } else if (bought_as_hybrid_feat(feat, targ)) {
+        tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
+    } else {
+        tmp = "%^CYAN%^" + level + "%^RESET%^";
     }
+    if (level && level < 10 && level != -1) {
+        tmp = " " + tmp + "";
+    }
+    display = "%^RESET%^%^BOLD%^ " + tmp + "%^RESET%^ ";
+    display += pick_color(feat, targ) + feat + "%^RESET%^";
     return display;
-}
-
-/*
-string format_feat(string feat,object targ) {
-    int level,level_check;
-    string display,tmp;
-
-    feat        = capitalize(feat);
-    level_check = can_use_feat(targ,lower_case(feat));
-    level       = level_of_feat(targ,lower_case(feat));
-    if(!level || level == -1) tmp = "%^RESET%^--";
-    else if(!level_check) tmp = "%^BOLD%^%^RED%^"+level+"";
-    else if(bought_as_class_feat(feat,targ)) tmp = "%^BOLD%^%^MAGENTA%^"+level+"%^GREEN%^";
-    else if(bought_as_bonus_feat(feat,targ)) tmp = "%^BOLD%^%^YELLOW%^"+level+"%^GREEN%^";
-    else if(bought_as_magic_feat(feat,targ)) tmp = "%^BOLD%^%^YELLOW%^"+level+"%^GREEN%^";
-    else if(bought_as_hybrid_feat(feat,targ)) tmp = "%^BOLD%^%^YELLOW%^"+level+"%^GREEN%^";
-    else tmp = "%^BOLD%^%^CYAN%^"+level+"%^GREEN%^";
-    if(level && level < 10 && level != -1) tmp = " "+tmp+"";
-
-    if(feat == "")
-        display = arrange_string(" ",LEVEL_SPACER)+arrange_string(" ",FEAT_SPACER);
-    else {
-        display = arrange_string("%^RESET%^%^BOLD%^  "+tmp+"",LEVEL_SPACER);
-        //display += arrange_string(""+feat+"",FEAT_SPACER)+"%^RESET%^";
-        display += arrange_string(pick_color(feat,targ)+feat+"",FEAT_SPACER)+"%^RESET%^";
-    }
-    return display;
-}*/
-
-
-string *format_feats(string *left,string *right,object targ)
-{
-    string *final=({}),display,left_feat,right_feat;
-    int VERT_SPACER,i;
-    if(sizeof(left) > sizeof(right)) { VERT_SPACER = sizeof(left); }
-    else                             { VERT_SPACER = sizeof(right); }
-
-    for(i=0;i<VERT_SPACER;i++)
-    {
-        if(i<sizeof(left))
-        {
-            left_feat = IDT+format_feat(left[i],targ);
-        }
-        else
-        {
-            left_feat = ""+IDT+format_feat("",targ)+"";
-        }
-        if(i<sizeof(right))
-        {
-            right_feat = format_feat(right[i],targ);
-        }
-        else
-        {
-            right_feat = ""+format_feat("",targ)+"";
-        }
-        display = left_feat + right_feat;
-        final += ({ display });
-    }
-    return final;
 }
 
 int is_feat_obsolete(string feat)
@@ -1581,85 +1485,70 @@ void display_feats(object ob,object targ, string mytype)
     if (!targ->is_class("psion") && !targ->is_class("psywarrior") && !avatarp(targ)) {
         currentlist -= ({ "Psionics" });
     }
-    if (!targ->is_class("fighter") && !targ->is_class("cavalier") && !targ->is_class("paladin") && !targ->is_class("antipaladin") && !avatarp(targ)) {
-        currentlist -= ({ "WeaponMastery" });
-    }
-    if (!high_mortalp(targ) && !avatarp(targ) && CONFIG_D->check_config("HM") == 0) {
-        currentlist -= ({ "EpicFeats" });
-    }
 
     classes = targ->query_classes();
-    for(i=0;i<sizeof(PRESTIGE_FEATS);i++)
-    {
+    for (i = 0; i < sizeof(PRESTIGE_FEATS); i++) {
         targ_class = PRESTIGE_MAP[PRESTIGE_FEATS[i]];
-        if(member_array(targ_class,classes) != -1) { continue; }
-        if(avatarp(targ)) { continue; }
+        if (member_array(targ_class, classes) != -1) {
+            continue;
+        }
+        if (avatarp(targ)) {
+            continue;
+        }
         currentlist -= ({ PRESTIGE_FEATS[i] });
     }
 
-
-    for(i=0;i<sizeof(categories);i++)
-    {
-        if(member_array(categories[i],currentlist) != -1) {
-          temp = temp_feats[categories[i]];
-	    //added by saide to allow a player to get only
-	    //a list of feats they are allowed to take
-	    if(mytype == "allowed")
-	    {
-	    	  temp = filter_array(temp, "display_meets_requirements", TO, targ);
-	    }
-          good = ({});
-          for(j=0;j<sizeof(temp);j++) {
-              if(is_feat_obsolete(temp[j])) { continue; }
-              good += ({ temp[j] });
-          }
-	    if(sizeof(good))
-	    {
-	        feats[categories[i]] = good;
-	        continue;
-          }
-	    else badcategories += ({ categories[i] });
-	    continue;
+    for (i = 0; i < sizeof(categories); i++) {
+        if (member_array(categories[i], currentlist) != -1) {
+            temp = temp_feats[categories[i]];
+            //added by saide to allow a player to get only
+            //a list of feats they are allowed to take
+            if (mytype == "allowed") {
+                temp = filter_array(temp, "display_meets_requirements", TO, targ);
+            }
+            good = ({});
+            for (j = 0; j < sizeof(temp); j++) {
+                if (is_feat_obsolete(temp[j])) {
+                    continue;
+                }
+                good += ({ temp[j] });
+            }
+            if (sizeof(good)) {
+                feats[categories[i]] = good;
+                continue;
+            }else {
+                badcategories += ({ categories[i] });
+            }
+            continue;
+        }else {
+            badcategories += ({ categories[i] });
         }
-        else badcategories += ({ categories[i] });
     }
     if(sizeof(badcategories)) categories -= badcategories;
 
-    if(!objectp(ob))   { return; }
-    if(!objectp(targ)) { return; }
-
-    for(i=0;i<sizeof(categories);i++)
-    {
-        left_cats += ({ categories[i] });
-        tmp = i + 1;
-        if(tmp<sizeof(categories))
-        {
-            right_cats += ({ categories[tmp] });
-            i++;
-        }
+    if (!objectp(ob)) {
+        return;
+    }
+    if (!objectp(targ)) {
+        return;
     }
 
-    for(i=0;i<sizeof(left_cats);i++)
+    categories = sort_array(categories, 1);
     {
-        left_column = feats[left_cats[i]];
-        display_cat = left_cats[i];
+        string oline, ft, obuff;
+        int columns, scrw;
 
-        if(i<sizeof(right_cats))
-        {
-            right_column = feats[right_cats[i]];
-            display_cat += " "+right_cats[i];
-        }
-        else { right_column = ({}); }
+        scrw = atoi(ob->getenv("SCREEN"));
+        scrw = scrw ? scrw : 76;
+        columns = atoi(ob->getenv("COLUMNS"));
+        columns = columns < 1 ? 1 : columns;
 
-        display_feats = format_feats(left_column,right_column,targ);
-        display_cat = format_category(display_cat);
-        display += ({ display_cat });
-        for(j=0;j<sizeof(display_feats);j++)
+        for(i=0;i<sizeof(categories);i++)
         {
-            display += ({ display_feats[j] });
+            tell_object(ob, "%^BOLD%^%^MAGENTA%^" + categories[i]);
+            tell_object(ob,format_page(map(feats[categories[i]], (:format_feat($1, $2):), targ), columns, scrw));
         }
     }
-    ob->more(display);
     return;
 }
 
