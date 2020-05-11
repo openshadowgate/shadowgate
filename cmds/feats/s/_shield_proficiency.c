@@ -7,7 +7,7 @@ void create()
 {
    ::create();
    feat_type("permanent");
-   feat_category("NonCombat");
+   feat_category("WeaponAndShield");
    feat_name("shield proficiency");
    feat_desc("Shield Proficiency is a passive feat that allows the use of various types of shields.");
    permanent(1);
@@ -47,4 +47,3 @@ void dest_effect()
    remove_feat(TO);
    return;
 }
-

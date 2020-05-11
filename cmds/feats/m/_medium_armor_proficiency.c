@@ -7,7 +7,7 @@ void create()
 {
    ::create();
    feat_type("permanent");
-   feat_category("NonCombat");
+   feat_category("ArmorMastery");
    feat_name("medium armor proficiency");
    feat_prereq("Light armor proficiency");
    feat_desc("Medium Armor Proficiency is a passive feat that allows the use of various types of mail, including chain, ring, scale, splint, and banded. It also allows the use of brigandine armor and breastplates. Requires light armor proficiency feat.");

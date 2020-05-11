@@ -26,15 +26,13 @@ void create()
     set_stats("charisma",8);
     set_stats("dexterity",20);
     set_stats("constitution",28);
-    /* set_save("will",query_level()/2); */
-    /* set_save("fortitude",query_level()/2); */
-    /* set_save("reflex",query_level()/2); */
     set_property("magic",1);
     set_new_exp(100,"boss");
     set_property("cast and attack",1);
-    set_spells(({"sunburst",
-                    "sunburst",}));
+    set_spells(({"prsimatic burst",
+                    "prismatic burst",}));
     set_spell_chance(100);
+    set_property("function and attack", 1);
     set_funcs(({"mercy"}));
     set_func_chance(5);
 }
@@ -120,6 +118,6 @@ void receive_given_item(object obj)
 void die(object ob)
 {
     WORLD_EVENTS_D->kill_event("A rare opportunity");
-    WORLD_EVENTS_D->inject_event((["A rare opportunity" : (["start message": "For the next two hours all experience gained will award an additional 33%!","event type" : "exp bonus", "length" : 120, "notification" : "33% Bonus Exp","event name" : "A rare opportunity", "modifier" : 33,"announce" : 1, "announce to" : "world" ]),]));
+    WORLD_EVENTS_D->inject_event((["A rare opportunity" : (["start message": "For the next two hours all experience gained will award an additional 15%!","event type" : "exp bonus", "length" : 120, "notification" : "15% Bonus Exp","event name" : "A rare opportunity", "modifier" : 15,"announce" : 1, "announce to" : "world" ]),]));
     ::die(ob);
 }

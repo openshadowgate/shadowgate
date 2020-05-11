@@ -7,11 +7,12 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("ArmorMastery");
-    feat_name("armor training");
-    feat_prereq("Fighter L3");
-    feat_desc("You lear to be more maneuverable while wearing armor of any type. Your dexterity bonus is no longer capped by armor type you wear.");
+    feat_category("MagicResistance");
+    feat_name("spellcasting harrier");
+    feat_prereq("Combat reflexes or Spellbreaker");
+    feat_desc("You reroll magic resistance roll once whenever you fail it.");
     permanent(1);
+    allow_blind(1);
 }
 
 int allow_shifted()
@@ -19,22 +20,23 @@ int allow_shifted()
     return 1;
 }
 
+void execute_feat()
+{
+    ::execute_feat();
+    dest_effect();
+}
+
 int prerequisites(object ob)
 {
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("fighter") < 3) {
+    if (!FEATS_D->has_feat(ob,"cobat reflexes") &&
+        !FEATS_D->has_feat(ob,"spellbreaker")) {
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
-}
-
-void execute_feat()
-{
-    ::execute_feat();
-    dest_effect();
 }
 
 void permanent_effects(object ob)

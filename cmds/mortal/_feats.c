@@ -789,9 +789,9 @@ int cmd_feats(string str){
           return 1;
         }
 
-        tell_object(TP,"%^YELLOW%^You are allowed %^BLUE%^"+MAX_ALLOWED+"%^RESET%^%^YELLOW%^ "
-            "feats. You have used %^BLUE%^"+num_feats+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+allowed+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
+        tell_object(TP, "%^WHITE%^You are allowed %^BOLD%^%^BLUE%^" + MAX_ALLOWED + "%^RESET%^ "
+                    "feats. You have used %^BOLD%^%^BLUE%^" + num_feats + " %^RESET%^and you now have "
+                    "%^BOLD%^%^BLUE%^" + allowed + "%^RESET%^ left.%^RESET%^");
 
 // combat feat allocation here
         BONUS_ALLOWED = 0;
@@ -813,9 +813,9 @@ int cmd_feats(string str){
         bonus       = BONUS_ALLOWED - num_bonus;
 
         if(BONUS_ALLOWED)
-          tell_object(TP,"%^YELLOW%^You have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free martial "
-            "bonus feats. You have used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
+          tell_object(TP,"You have %^BOLD%^%^BLUE%^"+BONUS_ALLOWED+"%^RESET%^ free martial "
+            "bonus feats. You have used %^BOLD%^%^BLUE%^"+num_bonus+" %^RESET%^and you now have "
+            "%^BOLD%^%^BLUE%^"+bonus+"%^RESET%^ left.%^RESET%^");
 
 // magic feat allocation here
         BONUS_ALLOWED = 0;
@@ -845,9 +845,9 @@ int cmd_feats(string str){
         bonus       = BONUS_ALLOWED - num_bonus;
 
         if(BONUS_ALLOWED)
-          tell_object(TP,"%^YELLOW%^You have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free spellcraft "
-            "bonus feats. You have used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
+          tell_object(TP,"You have %^BOLD%^%^BLUE%^"+BONUS_ALLOWED+"%^RESET%^ free spellcraft "
+            "bonus feats. You have used %^BOLD%^%^BLUE%^"+num_bonus+" %^RESET%^and you now have "
+            "%^BOLD%^%^BLUE%^"+bonus+"%^RESET%^ left.%^RESET%^");
 
 // hybrid feat allocation here
         BONUS_ALLOWED = 0;
@@ -872,17 +872,15 @@ int cmd_feats(string str){
         bonus       = BONUS_ALLOWED - num_bonus;
 
         if(BONUS_ALLOWED)
-          tell_object(TP,"%^YELLOW%^You have %^BLUE%^"+BONUS_ALLOWED+"%^RESET%^%^YELLOW%^ free hybrid "
-            "bonus feats. You have used %^BLUE%^"+num_bonus+" %^RESET%^%^YELLOW%^and you now have "
-            "%^BLUE%^"+bonus+"%^RESET%^%^YELLOW%^ left.%^RESET%^");
+          tell_object(TP,"You have %^BOLD%^%^BLUE%^"+BONUS_ALLOWED+"%^RESET%^ free hybrid "
+            "bonus feats. You have used %^BOLD%^%^BLUE%^"+num_bonus+" %^RESET%^and you now have "
+            "%^BOLD%^%^BLUE%^"+bonus+"%^RESET%^ left.%^RESET%^");
 
 // free-cost feat allocation here
         if(TP->query("free_feats"))
         {
-            tell_object(TP,"%^B_RED%^%^BOLD%^%^CYAN%^You currently have %^RESET%^%^BLUE%^"+TP->query("free_feats")+"%^BOLD%^%^CYAN%^ free-cost feats.
-%^BOLD%^%^RED%^N.B.%^RESET%^ You still can only gain the amount of feats you are allowed at your level, these free feats do not allow you to take more, they only make the feats have no experience point cost");
+            tell_object(TP,"%^BOLD%^%^CYAN%^You currently have %^BLUE%^"+TP->query("free_feats")+"%^BOLD%^%^CYAN%^ free-cost feats.");
         }
-	  tell_object(TP, "%^YELLOW%^You can choose from the following list:");
 	  FEATS_D->display_feats(TP,TP,"allowed");
         return 1;
 
@@ -1603,7 +1601,7 @@ The following commands apply:
 %^CYAN%^COLOR CODING%^RESET%^
 
 If your terminal supports color, you may benefit from color coding of the feats according to type, status and if the player has the feat or not:
-  %^BOLD%^%^WHITE%^-- Feat%^RESET%^: Does not have feat.
+  %^CYAN%^-- Feat%^RESET%^: Does not have feat.
   %^RESET%^%^RED%^00 Feat%^RESET%^: Has feat, but no longer meets prerequisites.
   %^BOLD%^%^GREEN%^00 Feat%^RESET%^: Has feat and it gives a permanent bonus.
   %^YELLOW%^00 Feat:%^RESET%^ Has duration feat which is currently active.

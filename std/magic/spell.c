@@ -2611,6 +2611,12 @@ varargs int checkMagicResistance(object victim, int mod)
 
     dieroll = roll_dice(1, 20);
 
+    if ((dieroll + mod) > res) {
+        if (FEATS_D->usable_feat(target, "spell harrier")) {
+            dieroll = roll_dice(1, 20);
+        }
+    }
+
     if (dieroll == 1 && res) {
         return 1;
     }

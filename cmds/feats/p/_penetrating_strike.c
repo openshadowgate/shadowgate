@@ -7,10 +7,10 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("ArmorMastery");
-    feat_name("armor training");
-    feat_prereq("Fighter L3");
-    feat_desc("You lear to be more maneuverable while wearing armor of any type. Your dexterity bonus is no longer capped by armor type you wear.");
+    feat_category("WeaponMastery");
+    feat_name("penetrating strike");
+    feat_prereq("Fighter L12");
+    feat_desc("With this feat you learn to ignore five points of target's damage reduction, making spells such as stoneskin essentially useless.");
     permanent(1);
 }
 
@@ -24,7 +24,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("fighter") < 3) {
+    if (ob->query_class_level("fighter") < 12) {
         dest_effect();
         return 0;
     }

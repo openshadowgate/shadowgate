@@ -7,10 +7,10 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("ArmorMastery");
-    feat_name("armor training");
-    feat_prereq("Fighter L3");
-    feat_desc("You lear to be more maneuverable while wearing armor of any type. Your dexterity bonus is no longer capped by armor type you wear.");
+    feat_category("WeaponMastery");
+    feat_name("greater penetrating strike");
+    feat_prereq("Penetrating strike");
+    feat_desc("With this feat you ignore up to ten points of damage reduction, making spells such as iron body meaningless..");
     permanent(1);
 }
 
@@ -24,10 +24,17 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("fighter") < 3) {
+
+    if (ob->query_class_level("fighter") < 16) {
         dest_effect();
         return 0;
     }
+
+    if (!FEATS_D->has_feat(ob, "penetrating strike")) {
+        dest_effect();
+        return 0;
+    }
+
     return ::prerequisites(ob);
 }
 

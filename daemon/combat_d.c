@@ -541,6 +541,9 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                 }else if (objectp(attacker->query_current_weapon()) && (attacker->query_current_weapon())->query_property("magic")) {
                     mod = (int)attacker->query_current_weapon()->query_property("magic") * 10;
                 }
+
+                reduction -= attacker->query_property("damage penetration");
+
                 reduction -= mod;
                 if (reduction < 0) {
                     reduction = 0;

@@ -471,6 +471,18 @@ mixed query_property(string prop)
         return (num + EQ_D->gear_bonus(TO, "spell penetration"));
     }
 
+    if (prop == "damage penetration") {
+        if (FEATS_D->usable_feat(TO, "penetrating strike")) {
+            num += 5;
+        }
+        if (FEATS_D->usable_feat(TO, "greater penetrating strike")) {
+            num += 5;
+        }
+        num += props[prop];
+        return num;
+    }
+
+
     if (prop == "fast healing") {
         if (TO->is_vampire()) {
             if (!TO->is_in_sunlight()) {

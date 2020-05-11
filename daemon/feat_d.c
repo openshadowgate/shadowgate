@@ -1388,7 +1388,7 @@ string pick_color(string feat, object targ)
         return "%^BOLD%^%^BLUE%^";
     }
     if (!has) {
-        return "%^BOLD%^%^WHITE%^";
+        return "%^CYAN%^";
     }
     if (!level_check) {
         return "%^RED%^";
@@ -1411,7 +1411,7 @@ string format_feat(string feat,object targ) {
     level_check = can_use_feat(targ, lower_case(feat));
     level = level_of_feat(targ, lower_case(feat));
     if (!level || level == -1) {
-        tmp = "%^RESET%^--";
+        tmp = "%^CYAN%^--";
     } else if (!level_check) {
         tmp = "%^BOLD%^%^RED%^" + level + "%^RESET%^";
     } else if (bought_as_class_feat(feat, targ)) {
@@ -1545,8 +1545,12 @@ void display_feats(object ob,object targ, string mytype)
 
         for(i=0;i<sizeof(categories);i++)
         {
-            tell_object(ob, "%^BOLD%^%^MAGENTA%^" + categories[i]);
-            tell_object(ob,format_page(map(feats[categories[i]], (:format_feat($1, $2):), targ), columns, scrw));
+            tell_object(ob, "%^BOLD%^%^WHITE%^" + categories[i]);
+            tell_object(ob, format_page(map(sort_array(feats[categories[i]], 1),
+                                            (: format_feat($1, $2) :),
+                                            targ),
+                                        columns,
+                                        scrw));
         }
     }
     return;

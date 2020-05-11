@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("NonCombat");
+    feat_category("ArmorMastery");
     feat_name("heavy armor proficiency");
     feat_prereq("Medium armor proficiency");
     feat_desc("Heavy Armor Proficiency is a passive feat that allows the use of various types of plate armor, including bronze, field, and full plate.");

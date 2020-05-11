@@ -6,7 +6,7 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("NonCombat");
+    feat_category("ArmorMastery");
     feat_name("light armor proficiency");
     feat_desc("Light Armor Proficiency is a passive feat that allows the use of padded, leather, and studded leather, and hide armor.");
     permanent(1);
@@ -41,4 +41,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

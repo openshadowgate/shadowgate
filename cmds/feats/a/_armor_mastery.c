@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("NonCombat");
+    feat_category("ArmorMastery");
     feat_name("armor mastery");
     feat_prereq("Fighter L19");
     feat_desc("You learn to absorb some damage with your armor even if you got hit. Any damage taken will have a point subtracted for every six fighter levels.");
