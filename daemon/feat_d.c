@@ -1539,7 +1539,6 @@ void display_feats(object ob,object targ, string mytype)
         int columns, scrw;
 
         scrw = atoi(ob->getenv("SCREEN"));
-        scrw = scrw ? scrw : 76;
         columns = atoi(ob->getenv("COLUMNS"));
         columns = columns < 1 ? 1 : columns;
 
