@@ -128,15 +128,6 @@ int cmd_spells(string str)
     tell_object(TP,format_page(obuff, columns, z * columns, vertical));
 
     CleanUpSpellObjects();
-    if(myclass == "monk")
-    {
-        tell_object(TP, "%^BOLD%^Use <ki> command or refer to <help monk> or <help WAY>");
-    }
-    if(myclass == "oracle")
-    {
-        tell_object(TP, "%^BOLD%^Use <master> command to see available spells to master");
-    }
-
     return 1;
 }
 

@@ -152,7 +152,7 @@ void do_rally()
     for (i = 0; i < sizeof(cur_players); i++) {
         switch (mytype) {
         case "spells":
-            cur_players[i]->set_property("spell penetration", (mod));
+            cur_players[i]->set_property("spell penetration", mod);
             cur_players[i]->set_property("empowered", mod);
             break;
 
@@ -207,7 +207,7 @@ void dest_effect()
         tell_object(cur_players[i], "%^BOLD%^%^CYAN%^You feel the effects of the bard's song wear off.%^RESET%^");
         switch (mytype) {
         case "spells":
-            cur_players[i]->set_property("spell penetration", (mod * 5));
+            cur_players[i]->set_property("spell penetration", mod);
             cur_players[i]->set_property("empowered", mod);
             break;
 
