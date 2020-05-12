@@ -27,16 +27,9 @@ create()
     ::create();
     set_name("rod");
     set_id(({ "rod", "rod of the magus" }));
-    set_short("%^BOLD%^%^BLACK%^A long black rod%^RESET%^");
-    set_long("%^ORANGE%^"
-             "This long %^BOLD%^%^BLACK%^black rod %^RESET%^%^ORANGE%^is warm to the touch and made of an ancient "
-             "and unknown %^RESET%^metal%^ORANGE%^. It is covered with various %^CYAN%^arcane runes %^ORANGE%^and %^MAGENTA%^symbols%^ORANGE%^. "
-             "There are two %^BOLD%^%^BLACK%^black opal g%^RESET%^%^BLUE%^e%^BOLD%^%^BLACK%^ms %^RESET%^%^ORANGE%^set into both ends of the %^BOLD%^%^BLACK%^rod%^RESET%^%^ORANGE%^. "
-             "Every so often, in a bizarre random pattern, a %^CYAN%^faint %^BOLD%^%^BLUE%^bl%^RESET%^%^CYAN%^u%^BOLD%^%^BLUE%^e %^RESET%^%^CYAN%^tr%^BOLD%^%^BLUE%^a%^RESET%^%^CYAN%^ce %^ORANGE%^of "
-             "%^CYAN%^electrical en%^BOLD%^%^BLUE%^er%^RESET%^%^CYAN%^gy %^ORANGE%^exits from the one %^BOLD%^%^BLACK%^opal %^RESET%^%^ORANGE%^and streaks down the rod's"
-             "surface and enters the second %^BOLD%^%^BLACK%^opal%^RESET%^%^ORANGE%^. It's purpose is a complete mystery."
-             "%^RESET%^"
-             );
+    set_obvious_short("%^BOLD%^%^BLACK%^A long black rod%^RESET%^");
+    set_short("%^RESET%^%^RED%^Rod of the Magus%^RESET%^");
+    set_long("%^ORANGE%^This long %^BOLD%^%^BLACK%^black rod %^RESET%^%^ORANGE%^is warm to the touch and made of an ancient and unknown %^RESET%^metal%^ORANGE%^. It is covered with various %^CYAN%^arcane runes %^ORANGE%^and %^MAGENTA%^symbols%^ORANGE%^. There are two %^BOLD%^%^BLACK%^black opal g%^RESET%^%^BLUE%^e%^BOLD%^%^BLACK%^ms %^RESET%^%^ORANGE%^set into both ends of the %^BOLD%^%^BLACK%^rod%^RESET%^%^ORANGE%^. Every so often, in a bizarre random pattern, a %^CYAN%^faint %^BOLD%^%^BLUE%^bl%^RESET%^%^CYAN%^u%^BOLD%^%^BLUE%^e %^RESET%^%^CYAN%^tr%^BOLD%^%^BLUE%^a%^RESET%^%^CYAN%^ce %^ORANGE%^of %^CYAN%^electrical en%^BOLD%^%^BLUE%^er%^RESET%^%^CYAN%^gy %^ORANGE%^exits from the one %^BOLD%^%^BLACK%^opal %^RESET%^%^ORANGE%^and streaks down the rod's surface and enters the second %^BOLD%^%^BLACK%^opal%^RESET%^%^ORANGE%^. It's purpose is a complete mystery.%^RESET%^");
     set_value(2000);
     set_property("enchantment", 5);
     uses = 100;
@@ -78,7 +71,6 @@ int extra_wield()
         "'s hand glows with a bright %^BOLD%^red%^RESET%^%^RED%^ aura!"
         "%^RESET%^"
         , ETO);
-    TO->set_short("%^RESET%^%^RED%^Rod of the magus%^RESET%^");
     dynbonus = max(({ ETO->query_prestige_level("mage"),
                       ETO->query_prestige_level("sorcerer") })) / 32 + 1;
     ETO->set_property("spell penetration", 1);
@@ -105,7 +97,6 @@ int extra_unwield()
     ETO->set_property("spell penetration", -1);
     ETO->set_property("bonus_spell_slots", -1);
     ETO->set_property("empowered", -dynbonus);
-    TO->set_short("%^RESET%^%^ORANGE%^A long black rod%^RESET%^");
     return 1;
 }
 
