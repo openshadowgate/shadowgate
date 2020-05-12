@@ -1744,6 +1744,15 @@ int query_attack_bonus()
     if (FEATS_D->usable_feat(TO, "weapon training")) {
         ret += TO->query_prestige_level("fighter") / 5 + 1;
     }
+
+    if (FEATS_D->usable_feat(TO, "weapon focus")) {
+        ret += 1;
+    }
+
+    if (FEATS_D->usable_feat(TO, "greater weapon focus")) {
+        ret += 1;
+    }
+
     if (FEATS_D->usable_feat(TO, "true strikes") &&
         sizeof(TO->query_wielded()) == 1) {
         ret += 3;

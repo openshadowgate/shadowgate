@@ -8,22 +8,17 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("WeaponMastery");
-    feat_name("greater weapon focus");
-    feat_prereq("Weapon Focus, Fighter L8");
-    feat_desc("This feat, available only as a class skill to trained fighters, further increases the accuracy of all attacks with weapons by +1.");
+    feat_name("weapon focus");
+    feat_prereq("None");
+    feat_desc("You gain a +1 bonus on all attack rolls you make.");
     permanent(1);
 }
 
 int allow_shifted() { return 1; }
 
-int prerequisites(object ob) {
-    if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"weapon focus")) {
-        dest_effect();
-        return 0;
-    }
-    if(ob->query_class_level("fighter") < 8) {
-        dest_effect();
+int prerequisites(object ob)
+{
+    if (!objectp(ob)) {
         return 0;
     }
     return ::prerequisites(ob);
