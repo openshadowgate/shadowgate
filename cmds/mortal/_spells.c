@@ -23,10 +23,12 @@ object *ToClean;
 
 int cmd_spells(string str)
 {
-    string myclass, args, tmp;
+    string myclass, args, tmp, pagebuff;
     int x, temp1, level, y, columns, z;
-    string * output = ({}), obuff, oline;
+    string * output = ({}), *obuff, oline;
     mapping hate;
+    int bsize;
+    int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
 
     if (!str) return notify_fail("Check <help spells> for syntax.\n");
 
@@ -101,28 +103,29 @@ int cmd_spells(string str)
 
     columns = columns>y?y:columns;
 
-    obuff="";
+    obuff=({});
 
     x=0;
     foreach(oline in output)
     {
-        obuff+=oline;
+        obuff+=({oline});
         x++;
+        bsize += sizeof(oline);
         if(!(x%columns))
         {
-            if(sizeof(obuff)>2200)
+            if(bsize>2200)
             {
-                tell_object(TP,obuff);
-                obuff="";
+                pagebuff = format_page(obuff, columns, z * columns, vertical);
+                tell_object(TP,pagebuff[0..(sizeof(pagebuff) - 2)]);
+                if (vertical) {
+                    tell_object(TP," ");
+                }
+                obuff = ({});
+                bsize = 0;
             }
-            else
-                obuff+="\n";
         }
-        else
-            obuff+="";
     }
-
-    tell_object(TP,obuff);
+    tell_object(TP,format_page(obuff, columns, z * columns, vertical));
 
     CleanUpSpellObjects();
     if(myclass == "monk")

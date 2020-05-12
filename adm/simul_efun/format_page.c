@@ -4,7 +4,7 @@ varargs string format_page(string * items, int columns, int scrwidth, int vertic
     string ret;
 
     if (vertial) {
-        format_page_v(items, columns, scrwidth);
+        return format_page_v(items, columns, scrwidth);
     }
 
     if (!columns) {

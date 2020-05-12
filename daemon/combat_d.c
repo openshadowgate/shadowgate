@@ -234,49 +234,6 @@ varargs int damage_adjustment(object attacker, object victim, int damage)
     }
     env = environment(attacker);
 
-    //adding some damage mitigation after discussion with Octothorpe
-    //should be 2 per 5 levels above 20 only counting melee
-    //type levels only
-    //with current DR feats this would equal 13 points of DR at level 40
-    //only having it kick in in the event of damage being >= 10 - Saide
-    //tell_object(find_player("saide"), "Damage against "+identify(victim)+ " from "+identify(attacker)+" = "+damage +" in damage_adjustment");
-    if (interactive(victim) && damage >= 10 && (int)victim->query_level() >= 20) {
-        mod = 0;
-        if ((int)victim->query_class_level("fighter")) {
-            mod += (int)victim->query_class_level("fighter");
-        }
-        if ((int)victim->query_class_level("thief")) {
-            mod += (int)victim->query_class_level("thief");
-        }
-        if ((int)victim->query_class_level("antipaladin")) {
-            mod += (int)victim->query_class_level("antipaladin");
-        }
-        if ((int)victim->query_class_level("paladin")) {
-            mod += (int)victim->query_class_level("paladin");
-        }
-        if ((int)victim->query_class_level("cavalier")) {
-            mod += (int)victim->query_class_level("cavalier");
-        }
-        if ((int)victim->query_class_level("ranger")) {
-            mod += (int)victim->query_class_level("ranger");
-        }
-        if ((int)victim->query_class_level("barbarian")) {
-            mod += (int)victim->query_class_level("barbarian");
-        }
-        if ((int)victim->query_class_level("monk")) {
-            mod += (int)victim->query_class_level("monk");
-        }
-        mod = ((mod - 20) / 5) * 2;
-        if (mod > 0) {
-            damage -= mod;
-        }
-        if (damage < 0) {
-            damage = 0;
-            //track_damage(attacker, victim, damage);
-            return damage;
-        }
-    }
-
     // adding a damage resistance property which will directly
     // reduce the damage by the amount.  We can probably do away
     // with this when the types and resistances go into place -Ares

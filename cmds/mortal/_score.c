@@ -128,7 +128,6 @@ int cmd_score(string args)
     mixed* output = ({}), oline;
     int scolumn = 0;
     object targ;
-    int arrange = 14;
 
     if (TP->query_race() == "unborn") {
         return notify_fail("You are in creation!
@@ -152,37 +151,25 @@ Use <review> to review you choices or <press button> to start the process.\n");
     write("%^RESET%^%^GREEN%^--=%^BOLD%^<%^WHITE%^ " + targ->query_title() + " %^BOLD%^%^GREEN%^>%^RESET%^%^GREEN%^=--%^RESET%^");
 
     {
-        int columns, maxwidth, maxcolumns;
+        int columns, maxwidth, maxcolumns, scrwidth;
         int i;
+        int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
 
-        string obuff;
+        string * obuff;
 
         maxcolumns = scolumn ? scolumn : atoi(TP->getenv("COLUMNS"));
         maxcolumns = maxcolumns < 1 ? 1 : maxcolumns;
 
-        maxwidth = maxcolumns > 1 ? 34 : 72;
-
-        columns = atoi(TP->getenv("SCREEN")) / (maxwidth + 1);
+        columns = atoi(TP->getenv("SCREEN")) / (36);
         columns = columns < 1 ? 1 : columns;
 
         columns = columns > maxcolumns ? maxcolumns : columns;
 
-        obuff = "";
+        scrwidth = columns * 36;
 
-        i = 0;
-        foreach(oline in output)
-        {
-            obuff += arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string(oline[0] + " %^BOLD%^%^BLACK%^--------------", arrange, ) + "%^RESET%^%^GREEN%^ : %^RESET%^" + oline[1], maxwidth);
+        obuff = map_array(output, (:arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string($1[0] + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + $1[1], 36):));
 
-            i++;
-            if (!(i % columns)) {
-                obuff += "\n";
-            } else {
-                obuff += "  ";
-            }
-        }
-
-        tell_object(TP, obuff);
+        tell_object(TP, format_page(obuff, columns, scrwidth, vertical));
     }
 
     return 1;

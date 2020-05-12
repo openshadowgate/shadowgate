@@ -26,7 +26,7 @@ void create()
     set_property("enchantment", 4);
     set_item_bonus("attack bonus", -2);
     set_item_bonus("damage bonus", -2);
-    set_item_bonus("spell penetration", 15);
+    set_item_bonus("spell penetration", 2);
     set_property("repairtype", ({ "jewel" }));
     set_cointype("gold");
     set_value(9550);

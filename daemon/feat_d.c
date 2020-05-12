@@ -1535,18 +1535,32 @@ void display_feats(object ob,object targ, string mytype)
 
     categories = sort_array(categories, 1);
     {
-        string oline, ft, obuff;
-        int columns, scrw;
-        int vertical = atoi(ob->getenv("VCOLUMNS"));
+        string oline, ft;
+        int columns, scrw, maxcolumns, maxw;
+        int vertical = ob->getenv("VCOLUMNS") ? 1 : 0;
+        string * obuff;
+
+
+
+        maxw = 34;
 
         scrw = atoi(ob->getenv("SCREEN"));
+
+        maxcolumns = scrw / maxw;
+        maxcolumns = maxcolumns < 1 ? 1 : maxcolumns;
+
         columns = atoi(ob->getenv("COLUMNS"));
         columns = columns < 1 ? 1 : columns;
 
+        columns = columns > maxcolumns ? maxcolumns : columns;
+
+        scrw = columns * maxw;
+
         for(i=0;i<sizeof(categories);i++)
         {
+            obuff = map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ);
             tell_object(ob, "%^BOLD%^%^WHITE%^" + categories[i]);
-            tell_object(ob, format_page(map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ), columns, scrw, vertical));
+            tell_object(ob, format_page(obuff, columns, scrw, vertical));
         }
     }
     return;

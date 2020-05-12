@@ -3,7 +3,7 @@
 #include <magic.h>
 inherit FEAT;
 
-string * JUDGEMENT_TYPES;
+string* JUDGEMENT_TYPES;
 
 void create()
 {
@@ -23,7 +23,7 @@ The list of judgements to choose from:
 
 %^BOLD%^Justice:%^RESET%^ This judgment spurs the inquisitor to seek justice, gaining a sacred bonus point to attack per every five levels.
 
-%^BOLD%^Piercing:%^RESET%^ This judgment gives the inquisitor great focus and makes his spells more potent. This grants a level and ten points worth of spell penetration and a caster level point for every twelve levels.
+%^BOLD%^Piercing:%^RESET%^ This judgment gives the inquisitor great focus and makes his spells more potent. This grants a point of spell penetration and a caster level point for every twelve levels.
 
 %^BOLD%^Protection:%^RESET%^ The inquisitor is surrounded by a protective aura, granting a sacred armor class point per every five levels.
 
@@ -60,7 +60,7 @@ int cmd_judgement(string args)
     object controller;
     int i;
     string j;
-    string *jtoactivate=({}),*argss;
+    string* jtoactivate = ({}), * argss;
 
     if (!objectp(TP)) {
         return 0;
@@ -108,7 +108,6 @@ int cmd_judgement(string args)
 
     return 1;
 }
-
 
 void dest_effect()
 {

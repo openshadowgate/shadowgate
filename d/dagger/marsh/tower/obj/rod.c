@@ -81,7 +81,7 @@ int extra_wield()
     TO->set_short("%^RESET%^%^RED%^Rod of the magus%^RESET%^");
     dynbonus = max(({ ETO->query_prestige_level("mage"),
                       ETO->query_prestige_level("sorcerer") })) / 32 + 1;
-    ETO->set_property("spell penetration", 10);
+    ETO->set_property("spell penetration", 1);
     ETO->set_property("bonus_spell_slots", 1);
     ETO->set_property("empowered", dynbonus);
     return 1;
@@ -102,7 +102,7 @@ int extra_unwield()
     tell_object(ETO, "%^RED%^"
                 "The rod's %^BLUE%^aura%^RED%^ slowly dims."
                 );
-    ETO->set_property("spell penetration", -10);
+    ETO->set_property("spell penetration", -1);
     ETO->set_property("bonus_spell_slots", -1);
     ETO->set_property("empowered", -dynbonus);
     TO->set_short("%^RESET%^%^ORANGE%^A long black rod%^RESET%^");

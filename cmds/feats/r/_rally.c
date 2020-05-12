@@ -3,13 +3,14 @@
 #include <magic.h>
 inherit FEAT;
 
-object *cur_players;
+object* cur_players;
 string mytype, myname;
 int mod, duration;
 void check();
 void do_rally();
 
-void create() {
+void create()
+{
     ::create();
     feat_type("instant");
     feat_category("Performance");
@@ -29,28 +30,37 @@ void create() {
 
 Without an argument it will turn your currently active rally off.
 ");
-    set_required_for(({"anger","calm","charm"}));
+    set_required_for(({ "anger", "calm", "charm" }));
     set_target_required(0);
     allow_blind(1);
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
-int prerequisites(object ob){
-    if(!objectp(ob)) return 0;
-    if(!ob->is_class("bard")) {
+int prerequisites(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!ob->is_class("bard")) {
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
 }
 
-int cmd_rally(string str){
+int cmd_rally(string str)
+{
     object feat;
-    if(!objectp(TP)) { return 0; }
+    if (!objectp(TP)) {
+        return 0;
+    }
     //if(!stringp(str)) { return 0; }
     feat = new(base_name(TO));
-    feat->setup_feat(TP,str);
+    feat->setup_feat(TP, str);
     return 1;
 }
 
@@ -81,27 +91,33 @@ void execute_feat()
     inven = ({});
     cur_players = ({});
     partied = PARTY_D->query_party_members(caster->query_party());
-    if(!sizeof(partied)) partied = ({ caster });
-
-    if(sizeof(all_living(ETP))) { inven += all_living(ETP); }
-    for(i = 0;i<sizeof(inven);i++) {
-        if(userp(inven[i]) && (member_array(inven[i],partied) != -1) && !inven[i]->query_true_invis())
-          cur_players += ({inven[i]});
+    if (!sizeof(partied)) {
+        partied = ({ caster });
     }
-    tell_object(caster,"%^BOLD%^%^WHITE%^You start rallying your comrades to fight better.");
-    tell_room(place,""+caster->QCN+" starts to raise the spirits of "+caster->QP+" companions.",caster);
+
+    if (sizeof(all_living(ETP))) {
+        inven += all_living(ETP);
+    }
+    for (i = 0; i < sizeof(inven); i++) {
+        if (userp(inven[i]) && (member_array(inven[i], partied) != -1) && !inven[i]->query_true_invis()) {
+            cur_players += ({ inven[i] });
+        }
+    }
+    tell_object(caster, "%^BOLD%^%^WHITE%^You start rallying your comrades to fight better.");
+    tell_room(place, "" + caster->QCN + " starts to raise the spirits of " + caster->QP + " companions.", caster);
     mytype = arg;
     clevel = caster->query_guild_level("bard");
-    caster->set_property("using instant feat",1);
+    caster->set_property("using instant feat", 1);
     caster->remove_property("using rally");
-    call_out("do_rally",ROUND_LENGTH);
+    call_out("do_rally", ROUND_LENGTH);
     return;
 }
 
-void do_rally(){
+void do_rally()
+{
     int i;
-    object *inv;
-    if(!objectp(caster)) {
+    object* inv;
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
@@ -136,13 +152,15 @@ void do_rally(){
     for (i = 0; i < sizeof(cur_players); i++) {
         switch (mytype) {
         case "spells":
-            cur_players[i]->set_property("spell penetration", (mod * 5));
+            cur_players[i]->set_property("spell penetration", (mod));
             cur_players[i]->set_property("empowered", mod);
             break;
+
         case "defenses":
             cur_players[i]->add_ac_bonus(mod);
             cur_players[i]->add_saving_bonus("all", mod);
             break;
+
         default:
             cur_players[i]->add_attack_bonus(mod);
             cur_players[i]->add_damage_bonus(mod);
@@ -151,11 +169,11 @@ void do_rally(){
         cur_players[i]->set_property("rally", ({ mytype }));
         tell_object(cur_players[i], "%^YELLOW%^You feel invigorated and ready for battle!%^RESET%^");
     }
-    tell_object(caster,"%^BOLD%^%^WHITE%^You finish inspiring your comrades.%^RESET%^");
+    tell_object(caster, "%^BOLD%^%^WHITE%^You finish inspiring your comrades.%^RESET%^");
     caster->set_property("using rally", 1);
-    call_out("check",ROUND_LENGTH);
-    call_out("dest_effect",duration);
-    caster->set_property("active_feats", ({TO}));
+    call_out("check", ROUND_LENGTH);
+    call_out("dest_effect", duration);
+    caster->set_property("active_feats", ({ TO }));
     return;
 }
 
@@ -192,10 +210,12 @@ void dest_effect()
             cur_players[i]->set_property("spell penetration", (mod * 5));
             cur_players[i]->set_property("empowered", mod);
             break;
+
         case "defenses":
             cur_players[i]->add_ac_bonus(mod);
             cur_players[i]->add_saving_bonus("all", mod);
             break;
+
         default:
             cur_players[i]->add_attack_bonus(mod);
             cur_players[i]->add_damage_bonus(mod);
