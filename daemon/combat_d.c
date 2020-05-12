@@ -318,43 +318,6 @@ attack, lessing its force!%^RESET%^");
         }
     }
 
-
-    layers = (int)victim->query_stoneSkinned();
-    if (!layers) {
-        //track_damage(attacker, victim, damage);
-        return damage;
-    }
-
-    //added && damage >-1 to stop bug with not regenerating HP while
-    //unconscious and stoneskinned.  Circe 2/6/04
-    if (layers && damage > -1) {
-        if (!victim->query_magic_attack() && !victim->query_spell_attack() && !attacker->query_property("magic") && !attacker->is_spell() &&
-            (objectp(attacker->query_current_weapon()) && !(attacker->query_current_weapon())->query_property("magic"))) {
-            if (damage > 0) {
-/*                layers = stoneSkinned;
-                if(layers < 10) { layers = 10; } */
-                layers = 10; // stoneskin is supposed to knock down 10DR at all times, now that we have greater equivs (eg/ iron body). N, 11/15.
-
-                if ((int)victim->query_stoneSkinned() > 0) {
-                    damage = damage - layers;
-                }
-                layers = (int)victim->query_stoneSkinned();
-                layers -= layers > 0 ? 1 : -1; // let's remove the stoneskin layer AFTER it checks if we had one to get the DR!
-                victim->set_stoneSkinned(layers);
-                if (damage < 0) {
-                    damage = 0;
-                }
-            }
-        }
-
-        if (!layers && victim->query_property("spelled")) {
-            while (objectp(myspl = MAGIC_D->get_spell_from_array(victim->query_property("spelled"), "stoneskin"))) {
-                victim->remove_property_value("spelled", ({ myspl }));
-                myspl->dest_effect();
-            }
-        }
-    }
-    //track_damage(attacker, victim, damage);
     return damage;
 }
 
@@ -390,14 +353,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     if (objectp(targ) && FEATS_D->usable_feat(targ, "kinetic conversion")) {
-        switch (type) {
-        case "bludgeoning":
-        case "piercing":
-        case "slashing":
-        case "silver":
-        case "cold iron":
-        case "force":
-        {
+        if (member_array(type, PHYSICAL_DAMAGE_TYPES != -1)) {
             amt = damage / 4;
             if (amt > 3) {
                 amt = 3;
@@ -406,11 +362,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                 amt = 1;
             }
             targ->add_mp(amt);
-            break;
-        }
-
-        default:
-            break;
         }
     }
 
@@ -504,8 +455,10 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     if (objectp(attacker)) {
-        if (attacker->query_property("noMissChance") || attacker->query_property("magic") || (objectp(attacker->query_current_weapon()) &&
-                                                                                              (attacker->query_current_weapon())->query_property("magic"))) {
+        if (attacker->query_property("noMissChance") ||
+            attacker->query_property("magic") ||
+            (objectp(attacker->query_current_weapon()) &&
+             (attacker->query_current_weapon())->query_property("magic"))) {
             targ->set_magic_attack(1);
         }
 

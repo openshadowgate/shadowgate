@@ -1537,6 +1537,7 @@ void display_feats(object ob,object targ, string mytype)
     {
         string oline, ft, obuff;
         int columns, scrw;
+        int vertical = atoi(ob->getenv("VCOLUMNS"));
 
         scrw = atoi(ob->getenv("SCREEN"));
         columns = atoi(ob->getenv("COLUMNS"));
@@ -1545,11 +1546,7 @@ void display_feats(object ob,object targ, string mytype)
         for(i=0;i<sizeof(categories);i++)
         {
             tell_object(ob, "%^BOLD%^%^WHITE%^" + categories[i]);
-            tell_object(ob, format_page(map(sort_array(feats[categories[i]], 1),
-                                            (: format_feat($1, $2) :),
-                                            targ),
-                                        columns,
-                                        scrw));
+            tell_object(ob, format_page(map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ), columns, scrw, vertical));
         }
     }
     return;

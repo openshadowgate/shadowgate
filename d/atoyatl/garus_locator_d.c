@@ -7,16 +7,16 @@ object garus;
 int last_move;
 int last_dismissed;
 
-void create() { 
+void create() {
   if (!objectp(garus)) garus = new("/d/atoyatl/tecqumin/mons/garus");
-  ::create(); 
-} 
+  ::create();
+}
 
-void clean_up() { 
+void clean_up() {
   // This function added to prevent data being removed by the inherited
   // clean_up function.
-  return; 
-} 
+  return;
+}
 
 void dismiss(){
   last_dismissed = time();
@@ -100,7 +100,7 @@ query_level()<38)
 }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", str);
+
 }
 
 void initiate_garus_check(object where){

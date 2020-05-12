@@ -1753,6 +1753,10 @@ int query_attack_bonus()
         ret += 1;
     }
 
+    if (FEATS_D->usable_feat(TO, "epic weapon focus")) {
+        ret += 2;
+    }
+
     if (FEATS_D->usable_feat(TO, "true strikes") &&
         sizeof(TO->query_wielded()) == 1) {
         ret += 3;
@@ -1772,6 +1776,19 @@ int query_damage_bonus()
     if (FEATS_D->usable_feat(TO, "weapon training")) {
         ret += TO->query_prestige_level("fighter") / 5 + 1;
     }
+
+    if (FEATS_D->usable_feat(TO, "weapon specialization")) {
+        ret += 2;
+    }
+
+    if (FEATS_D->usable_feat(TO, "greater weapon specialization")) {
+        ret += 2;
+    }
+
+    if (FEATS_D->usable_feat(TO, "epic weapon specialization")) {
+        ret += 4;
+    }
+
     return ret;
 }
 

@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"brief","brief_combat","hints","logon_notify","persist","simpleinv","expgain","hardcore","levelcheck","no_reward","taxperc","columns","scrlines","scrwidth","term",});
+string *VALID_SETTINGS = ({"brief","brief_combat","hints","logon_notify","persist","simpleinv","expgain","hardcore","levelcheck","no_reward","taxperc","columns", "vcolumns","scrlines","scrwidth","term",});
 
 object tp;
 
@@ -159,7 +159,7 @@ int set_scrwidth(string val)
 
 string get_scrwidth()
 {
-    return tp->getenv("SCREEN");
+    return (tp->getenv("SCREEN")) ? tp->getenv("SCREEN") : "0";
 }
 
 int set_columns(string val)
@@ -178,7 +178,27 @@ int set_columns(string val)
 
 string get_columns()
 {
-    return tp->getenv("COLUMNS");
+    return (tp->getenv("COLUMNS")) ? tp->getenv("COLUMNS") : "0";
+}
+
+int set_vcolumns(string val)
+{
+    string* valid_values = ({ "on", "off" });
+    if (member_array(val, valid_values) == -1) {
+        write("%^BOLD%^%^RED%^Invalid value, valid values are:%^RESET%^ " + implode(valid_values, ", "));
+        return 0;
+    }
+    if (val == "on") {
+        tp->setenv("VCOLUMNS", 1);
+    } else {
+        tp->remove_env("VCOLUMNS");
+    }
+    return 1;
+}
+
+string get_vcolumns()
+{
+    return (tp->getenv("VCOLUMNS")) ? "on" : "off";
 }
 
 int set_logon_notify(string val)
@@ -481,6 +501,7 @@ You can manipulate numerous mud settings:
 %^ULINE%^%^CYAN%^Terminal and display:%^RESET%^
 
 %^CYAN%^columns %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set how many maximum columns you do want to see where multicolumn output is appliable and screen width allows. %^MAGENTA%^Default value: 0%^RESET%^\n
+%^CYAN%^vcolumns %^GREEN%^on|off%^RESET%^\n  Set whether you want to sort columns vertically. %^MAGENTA%^Default value: off%^RESET%^\n
 %^CYAN%^scrlines %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set how many lines appear for paged information. %^MAGENTA%^Default value: 20%^RESET%^\n
 %^CYAN%^scrwidth %^GREEN%^%^ULINE%^NUMBER%^RESET%^\n  Set screen width for text wrapping. %^MAGENTA%^Default value: 75%^RESET%^\n
 %^CYAN%^term %^GREEN%^"+implode(sort_array(TERMINAL_D->query_terms(),1),"|")+"%^RESET%^\n  This will set your current terminal to a given value. The value 'unknown' sets terminal to the one without colors. %^MAGENTA%^Default value is set on first login.%^RESET%^\n
