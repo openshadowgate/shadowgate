@@ -11,7 +11,8 @@ inherit SPELL;
 
 object detector;
 
-void create() {
+void create()
+{
     ::create();
     set_spell_name("detect scrying");
     set_spell_level(([ "mage" : 4, "bard" : 4, "inquisitor" : 4 ]));
@@ -22,64 +23,76 @@ void create() {
     set_somatic_comp();
     set_peace_needed(1);
     set_components(([
-      "mage" : ([ "piece of mirror":1, "tiny hearing trumpet":1, ]),
-    ]));
+                        "mage" : ([ "piece of mirror" : 1, "tiny hearing trumpet" : 1, ]),
+                    ]));
     set_helpful_spell(1);
 }
 
-string query_cast_string() {
-   if(spell_type == "bard") return "%^BOLD%^%^GREEN%^"+caster->QCN+" recites a short rhyme.%^RESET%^";
-   return "%^BOLD%^CYAN%^"+caster->QCN+" places "+
-            "a tiny hearing trumpet up against a small piece of glass "
-            "and places "+caster->QP+" ear to the trumpet!";
+string query_cast_string()
+{
+    if (spell_type == "bard") {
+        return "%^BOLD%^%^GREEN%^" + caster->QCN + " recites a short rhyme.%^RESET%^";
+    }
+    return "%^BOLD%^CYAN%^" + caster->QCN + " places " +
+           "a tiny hearing trumpet up against a small piece of glass "
+           "and places " + caster->QP + " ear to the trumpet!";
 }
 
-void spell_effect(int prof) {
-   int num, bonus, power;
-   int duration;
-   object temp;
-   string mystat;
+void spell_effect(int prof)
+{
+    int num, bonus, power;
+    int duration;
+    object temp;
+    string mystat;
 
-   ::spell_effect();
+    ::spell_effect();
 
-   if(temp = caster->query_property("detect scrying")) {
-      if(!objectp(temp)) {
-         caster->remove_property("detect scrying");
-      } else {
-         tell_object(caster,"%^BOLD%^RED%^You are already detecting "
-            "scrying attempts!");
-          if(objectp(TO)) TO->remove();
-         return;
-      }
-   }
-   tell_room(place,"%^BOLD%^GREEN%^For a brief moment, the air around "+
-      ""+caster->QCN+" shimmers with a magical aura!");
+    if (temp = caster->query_property("detect scrying")) {
+        if (!objectp(temp)) {
+            caster->remove_property("detect scrying");
+        } else {
+            tell_object(caster, "%^BOLD%^RED%^You are already detecting "
+                        "scrying attempts!");
+            if (objectp(TO)) {
+                TO->remove();
+            }
+            return;
+        }
+    }
+    tell_room(place, "%^BOLD%^GREEN%^For a brief moment, the air around " +
+              "" + caster->QCN + " shimmers with a magical aura!");
 
-   caster->set_property("spelled",({TO}));
-   mystat = TO->get_casting_stat();
-   bonus = caster->query_stats(mystat);
-   bonus = bonus - 10;
-   power = clevel + bonus + random(6);
+    caster->set_property("spelled", ({ TO }));
+    mystat = TO->get_casting_stat();
+    bonus = caster->query_stats(mystat);
+    bonus = bonus - 10;
+    power = clevel + bonus + random(6);
 
-   detector = SCRY_D->add_detect_scrying(caster);
-   if(!objectp(detector)) {
-      tell_object(caster,"%^BOLD%^RED%^Something is wrong that "
-         "a wiz might want to look at!");
-      dest_effect();
-      return;
-   }
-   detector->set_detect_power(power);
-   duration = 6 * clevel * ROUND_LENGTH;
-   call_out("dest_effect", duration);
-   addSpellToCaster();
-   return;
+    detector = SCRY_D->add_detect_scrying(caster);
+    if (!objectp(detector)) {
+        tell_object(caster, "%^BOLD%^RED%^Something is wrong that "
+                    "a wiz might want to look at!");
+        dest_effect();
+        return;
+    }
+    detector->set_detect_power(power);
+    duration = 6 * clevel * ROUND_LENGTH;
+    call_out("dest_effect", duration);
+    addSpellToCaster();
+    return;
 }
 
-void dest_effect() {
-
-    if(objectp(caster)) caster->remove_property_value("spelled", ({TO}) );
-    if(objectp(detector)) detector->self_destruct();
+void dest_effect()
+{
+    if (objectp(caster)) {
+        tell_object(caster, "%^CYAN%^%^BOLD%^The magic detecting scrying fades from around you.%^RESET%^");
+        caster->remove_property_value("spelled", ({ TO }));
+    }
+    if (objectp(detector)) {
+        detector->self_destruct();
+    }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
-
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
