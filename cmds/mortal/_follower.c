@@ -23,7 +23,7 @@ int help(){
 
     RETINUE->init_knights(TP);
     retinue = TP->get_retinue_mapping();
-    
+
     write(
 @OLI
     This will allow you to manage your followers.
@@ -31,13 +31,13 @@ int help(){
     follower <name> dismiss
     follower <name> <command>
     follower <name,name2> <command>
-  
-    This command allows you to summon, command, and dismiss your followers or retainers. They will come shortly after you summon them and will obey your every command.  You must use them wisely for if they die then they are lost. You must also learn what to order them to do.  You must RP to learn what is best for each follower.  Retainers are gained every 5 levels, or every 5 days of online time.  The <name> argument can be replaced with <all> and the command will be executed by all the retainers. 
+
+    This command allows you to summon, command, and dismiss your followers or retainers. They will come shortly after you summon them and will obey your every command.  You must use them wisely for if they die then they are lost. You must also learn what to order them to do.  You must RP to learn what is best for each follower.  Retainers are gained every 5 levels, or every 5 days of online time.  The <name> argument can be replaced with <all> and the command will be executed by all the retainers.
 OLI
      +
 @OLI
 
-    Of special note:  Followers save themselves.  If you change the title of the follower it will save.  If your follower has 1 hp left it will also save.  If you give your follower a new sword it will save (it will not automatically rewield). 
+    Of special note:  Followers save themselves.  If you change the title of the follower it will save.  If your follower has 1 hp left it will also save.  If you give your follower a new sword it will save (it will not automatically rewield).
 
     A special "title" command has been added to allow you to set the title  of your followers: follower <name> title <string containing $N>
 
@@ -52,10 +52,7 @@ OLI
     } else {
         write("    You currently have no followers.");
     }
-    write("\n%^YELLOW%^Hard-coded equipment retention has been applied to "
-"followers, to prevent them being abused as surplus storage. Any item given "
-"to a retainer cannot be removed from them (except by offering), and no "
-"refunds will be offered. Keep the following in mind:%^RESET%^\n\n"
+    write("\n Keep the following in mind:%^RESET%^\n\n"
 	"   1)  Retainers should only have gear they can actually use.  Example:  "
 	"if they cannot wear or wield the armor or weapons due to enchantment "
 	"or class they should not have it - clerics with edged weapons, level "
@@ -106,7 +103,7 @@ object makeFollower(mapping map){
     case "bard": // this is to load a plot granted follower only - this is not a standard-issue follower! N, 12/15.
         follower = new ( BARD);
         break;
-    default: 
+    default:
         error("Unknown class "+c);
     }
 
@@ -190,7 +187,7 @@ object makeFollower(mapping map){
     return follower;
 }
 
-                   
+
 int cmd_follower(string str){
     mapping retinue;
     string who, what, *whoList, command, excess;
@@ -230,7 +227,7 @@ int cmd_follower(string str){
         write("%^BOLD%^You have flagged "+who+" for abuse, please note "+whoObj->query_objective()+".");
         return 1;
     }
-    
+
     if (avatarp(TP) && what == "unlock") {
         whoObj = find_player(who);
         whoObj->set("bad knight",0);
@@ -249,12 +246,12 @@ int cmd_follower(string str){
 		{
 		    tell_object(TP,"Your followers are unable to find their way to your current location.");
 			return 0;
-		}		
+		}
 		if(ETP->query_property("no follower"))
 		{
 		    tell_object(TP,"Your followers are unable to find their way to your current location.");
 			return 0;
-		}		
+		}
         for (i = 0;i<sizeof(whoList);i++) {
             who = whoList[i];
             if (!retinue[who]) {
@@ -280,26 +277,26 @@ int cmd_follower(string str){
     case "dismiss":
 
         if(!objectp(TP)) { return 0; }
-        
+
 		if(ETP->query_property("no teleport"))
 		{
 		    tell_object(TP,"Your followers are unable to find their way out of your current location.");
 			return 0;
-		}	
-		
+		}
+
 		if(ETP->query_property("no follower"))
 		{
 		    tell_object(TP,"Your followers are unable to find their way out of your current location.");
 			return 0;
-		}	
-		
-        if(sizeof(TP->query_attackers())) 
+		}
+
+        if(sizeof(TP->query_attackers()))
         {
             tell_object(TP,"You can't do that while being attacked!");
             return 1;
         }
 
-        for (i = 0;i<sizeof(whoList);i++) 
+        for (i = 0;i<sizeof(whoList);i++)
         {
             who = whoList[i];
             if (!retinue[who]) {

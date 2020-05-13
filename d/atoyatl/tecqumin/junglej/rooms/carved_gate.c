@@ -17,7 +17,7 @@ void create() {
   set_name("Before some carved gates");
   set_short((:TO, "short_desc" :));
   set_long( (:TO, "long_desc":) );
-  set_items (([ ({"gateway", "carved gateway", "strange gateway", "gate"}): 
+  set_items (([ ({"gateway", "carved gateway", "strange gateway", "gate"}):
      (:TO, "view_gate":)       ]) );
   set_search("gate","You find some runes carved around the edge of the gateway. You don't"
         +" recognise them, but somehow you seem to be able to read them.");
@@ -43,7 +43,7 @@ string short_desc(){
 }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", str);
+
 }
 
 void on_enter(){
@@ -55,7 +55,7 @@ void init() {
    add_action("open_gate", "open");
    add_action("read_runes", "read");
    add_action("show_face", "present");
-  
+
 }
 
 string view_gate(){
@@ -127,7 +127,7 @@ int read_runes(string str){
   if (sizeof(deeds)<1 || member_array("Read the runes on the carved gate", deeds)==-1){
     TP->set_mini_quest("Read the runes on the carved gate");
   }
-  return 1;  
+  return 1;
 }
 
 int open_gate(string str){
@@ -141,12 +141,12 @@ int open_gate(string str){
   if (EVENT_RECORDS_D->completed_event(TPQN, "Agreed to help Quali", 2400 * 30)>0){
     tell_room(TO, TPQN + " agreed to help Quali");
     if (EVENT_RECORDS_D->has_killed(TP->query_name(), "quali", DAY * 31)<1 &&
-         EVENT_RECORDS_D->has_killed(TP->query_name(), "Quali", DAY * 31)<1 ) 
+         EVENT_RECORDS_D->has_killed(TP->query_name(), "Quali", DAY * 31)<1 )
     {
-       
+
       summon_quali(TP);
     } else
-    { 
+    {
       tell_room(TO, TPQCN + "Has recently killed Quali, so I'm not summoning him");
     }
   } else tell_room(TO, TPQN + " has not agreed to help Quali");
@@ -159,7 +159,7 @@ void summon_quali(object opener){
   int maze_timing, destination_timing;
 //  tell_room(TO, "summoning Quali");
   jungle_spirits = children(MOB + "quali");
-  if (sizeof(jungle_spirits)>0){  
+  if (sizeof(jungle_spirits)>0){
      quali = jungle_spirits[0];
      room = environment(quali);
   } else {
@@ -186,7 +186,7 @@ void summon_quali2(object opener){
   if (objectp(room)){
     tell_room(room, "%^BOLD%^%^GREEN%^Q%^RESET%^%^GREEN%^u%^BOLD%^ali%^RESET%^"
       +" lumbers off into the %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng"
-      +"%^RESET%^%^GREEN%^l%^BOLD%^e");    
+      +"%^RESET%^%^GREEN%^l%^BOLD%^e");
   }
   quali->fix_mind();
   quali->move(TO);
@@ -205,7 +205,7 @@ int show_face(string str){
   if (sscanf(str, "%s to %s", show_what, to_what)!=2){
     return 0;
   }
-  if (to_what != "gate" && to_what !="gateway" && to_what != "carved gateway" 
+  if (to_what != "gate" && to_what !="gateway" && to_what != "carved gateway"
                        && to_what != "the gateway"){
     return 0;
   }
@@ -219,7 +219,7 @@ int show_face(string str){
   if (objectp(head)){
     if (head->id(show_what)){
       tell_object(TP, "You hold the " + head->query_short() + " up, presenting"
-                     +" its face to the gateway"); 
+                     +" its face to the gateway");
       tell_room(TO, TPQCN + "%^RESET%^ holds a " + head->query_short() + " up,"
                     +" presenting its face to the gateway.", TP);
       call_out("grant_entry", 3, head->query_name());
