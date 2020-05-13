@@ -5,18 +5,29 @@ string *VALID_SETTINGS = ({"brief","brief_combat","hints","logon_notify","persis
 
 object tp;
 
+/**
+ * @brief Manages various user settings.
+ *
+ * To add a setting place it in order you want it to be in in
+ * VALID_SETTINGS array, then add set_NAME(string) function to set
+ * that setting and get_NAME function to get that setting. Don't
+ * forget to append explanation to helpfile.
+ */
+
+
 int cmd_set(string args)
 {
     string setting, value;
 
     tp = TP;
 
-    if (avatarp(TP)) {
-        string * usernames = users()->query_name();
-
-        if (member_array(args, usernames) != -1) {
-            tp = find_player(args);
-            args = 0;
+    if (sizeof(args) > 0) {
+        if (avatarp(TP)) {
+            string * usernames = users()->query_name();
+            if (member_array(args, usernames) != -1) {
+                tp = find_player(args);
+                args = 0;
+            }
         }
     }
 
@@ -25,7 +36,7 @@ int cmd_set(string args)
         write("%^BLUE%^--=%^BOLD%^<%^WHITE%^ Settings %^BLUE%^>%^RESET%^%^BLUE%^=--%^RESET%^");
         foreach(stng in VALID_SETTINGS)
         {
-            write("%^WHITE%^ " + arrange_string(stng + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + colorize_value((string)call_other(TO, "get_" + stng)));
+            catch(write("%^WHITE%^ " + arrange_string(stng + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + colorize_value((string)call_other(TO, "get_" + stng))));
         }
         return 1;
     }

@@ -1479,8 +1479,11 @@ void display_feats(object ob,object targ, string mytype)
     if (!targ->is_class("inquisitor") && !avatarp(targ)) {
         currentlist -= ({ "Inquisition" });
     }
+    if (!targ->is_class("monk") && !avatarp(targ)) {
+        currentlist -= ({ "KiEnhancement", "KiOffense", "KiDefense"});
+    }
     if (!targ->is_class("druid") && !targ->is_class("ranger") && !avatarp(targ)) {
-        currentlist -= ({ "WildernessLore" }); currentlist -= ({ "SavageCombat" });
+        currentlist -= ({ "WildernessLore", "SavageCombat" });
     }
     if (!targ->is_class("psion") && !targ->is_class("psywarrior") && !avatarp(targ)) {
         currentlist -= ({ "Psionics" });
@@ -1540,8 +1543,6 @@ void display_feats(object ob,object targ, string mytype)
         int vertical = ob->getenv("VCOLUMNS") ? 1 : 0;
         string * obuff;
 
-
-
         maxw = 34;
 
         scrw = atoi(ob->getenv("SCREEN"));
@@ -1556,11 +1557,23 @@ void display_feats(object ob,object targ, string mytype)
 
         scrw = columns * maxw;
 
-        for(i=0;i<sizeof(categories);i++)
-        {
-            obuff = map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ);
-            tell_object(ob, "%^BOLD%^%^WHITE%^" + categories[i]);
+        if (vertical) {
+            obuff = ({});
+            for (i = 0; i < sizeof(categories); i++ )
+            {
+                obuff += ({"%^BOLD%^%^WHITE%^" + categories[i]});
+                obuff += map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ);
+                obuff += ({" "});
+            }
             tell_object(ob, format_page(obuff, columns, scrw, vertical));
+        } else {
+            for (i = 0; i < sizeof(categories); i++)
+            {
+                obuff = map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ);
+                tell_object(ob, "%^BOLD%^%^WHITE%^" + categories[i]);
+                tell_object(ob, format_page(obuff, columns, scrw));
+            }
+
         }
     }
     return;
