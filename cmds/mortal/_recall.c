@@ -372,43 +372,43 @@ int recall_spells(string type, object who) {
 
 			}
 		}
-        //tell_object(who, identify(tmp));
+                //tell_object(who, identify(tmp));
 		//tell_object(who,s_msg);
         {
             string * output = tmp;
-
-            string obuff, oline;
+            string * obuff, oline;
             int y, z;
             int columns;
+            int scrw = atoi(TP->getenv("SCREEN"));
 
-            z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
-            columns = atoi(TP->getenv("SCREEN"))/z;
-            columns = columns<1?1:columns;
+            scrw = scrw > 34 ? scrw : 72;
+
+            z = max(map_array(output, (: sizeof(strip_colors($1)) :))) + 2;
+            columns = scrw / z;
+            columns = columns < 1 ? 1 : columns;
             y = atoi(TP->getenv("COLUMNS"));
-            y = y<1?1:y;
-            columns = columns>y?y:columns;
-            x=0;
-            obuff="";
+            y = y < 1 ? 1 : y;
+            columns = columns > y ? y : columns;
+            x = 0;
+            obuff = ({});
+            scrw = z * columns;
             foreach(oline in output)
             {
                 if(regexp(oline,"Level"))
                 {
-                    tell_object(TP,obuff);
-                    obuff="";
-                    x=0;
+
+                    if (sizeof(obuff)) {
+                        tell_object(TP,format_page(obuff, columns, scrw));
+                    }
+                    obuff=({});
                     tell_object(TP,oline);
                     continue;
                 }
-                obuff+=oline;
-                x++;
-                if(!(x%columns))
-                    obuff+="\n";
-                else
-                    obuff+="";
+                obuff += ({oline});
             }
-            tell_object(TP,obuff);
+            tell_object(TP,format_page(obuff, columns, scrw));
         }
-//		TP->more(explode(implode(tmp, " "), "\n"));
+
 		return 1;
 	}
 	else{
