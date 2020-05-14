@@ -3622,7 +3622,7 @@ int is_invincible()
 void report(string str)
 {
     if (objectp(ETO) && reporting == 1) { //this is necessary, or I get reports from the base object
-        "/daemon/reporter_d"->report("lujke", str);
+        "/d/atoyatl/reporter_d"->report("lujke", str);
     }
 }
 
