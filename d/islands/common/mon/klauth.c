@@ -791,7 +791,7 @@ void do_inferno(int count)
         }
 
         targ = attackers[i];
-        damage = (MULT + roll_dice(2, MULT)); // fire resistance is very high so I'm dramatically increasing the damage of this
+        damage = (MULT + roll_dice(1, MULT)); // fire resistance is very high so I'm dramatically increasing the damage of this
 
         if (targ->reflex_save(MULT - 10)) {
             if (FEATS_D->usable_feat(targ, "evasion")) {
@@ -805,7 +805,7 @@ void do_inferno(int count)
         }
 
         /*inv = all_inventory(targ);
-        for (j = 0; sizeof(inv), j < sizeof(inv); j++) {
+           for (j = 0; sizeof(inv), j < sizeof(inv); j++) {
             if (!objectp(inv[j])) {
                 continue;
             }
@@ -818,7 +818,7 @@ void do_inferno(int count)
             for (x = 0; x < roll_dice(1, 6); x++) {
                 inv[j]->decay();
             }
-        }*/
+           }*/
 
         tell_object(targ, cm("You can't get out of the way in time and you are burned by the full force of the inferno!"));
         targ->cause_typed_damage(targ, targ->return_target_limb(), damage, "fire");
@@ -931,13 +931,13 @@ void spell_frenzy(int count)
     }
 
     switch (random(20)) {
-    case 0..8:      new("/cmds/spells/b/_burning_hands.c")->use_spell(TO, targ, (MULT/2), 100, "mage");        break;
+    case 0..8:      new("/cmds/spells/b/_burning_hands.c")->use_spell(TO, targ, (MULT / 2), 100, "mage");        break;
 
-    case 9..10:     new("/cmds/spells/c/_chain_lightning.c")->use_spell(TO, targ, (MULT/2), "mage"); break;
+    case 9..10:     new("/cmds/spells/c/_chain_lightning.c")->use_spell(TO, targ, (MULT / 2), "mage"); break;
 
-    case 11..16:    new("/cmds/spells/l/_lightning_bolt.c")->use_spell(TO, targ, (MULT/2), "mage");    break;
+    case 11..16:    new("/cmds/spells/l/_lightning_bolt.c")->use_spell(TO, targ, (MULT / 2), "mage");    break;
 
-    default:        new("/cmds/spells/p/_prismatic_spray.c")->use_spell(TO, targ, (MULT/2), "mage"); break;
+    default:        new("/cmds/spells/p/_prismatic_spray.c")->use_spell(TO, targ, (MULT / 2), "mage"); break;
     }
 
     count++;
