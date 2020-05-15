@@ -1364,7 +1364,10 @@ string type_ok(string type, string limb)
         i = 0;
         x = sizeof(body[limb]["armour_ob"]);
         while (x--) {
-            if ((string)body[limb]["armour_ob"][x]->query_type() == "ring") {
+            if (!objectp(body[limb]["armour_ob"][x])) {
+                continue;
+            }
+            if (body[limb]["armour_ob"][x]->query_type() == "ring") {
                 i++;
             }
         }
