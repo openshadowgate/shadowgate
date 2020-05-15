@@ -24,11 +24,11 @@ object *ToClean;
 int cmd_spells(string str)
 {
     string myclass, args, tmp, pagebuff;
-    int x, temp1, level, y, columns, z;
-    string * output = ({}), *obuff, oline;
+    int x, temp1, level;
+    string * output = ({});
     mapping hate;
     int bsize;
-    int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
+
 
     if (!str) return notify_fail("Check <help spells> for syntax.\n");
 
@@ -95,37 +95,63 @@ int cmd_spells(string str)
                     (myclass == "mage" || myclass == "sorcerer" ? arrange_string(speccache[magic[x]]["sphere"], 4) : "")});
     }
 
-    z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
-    columns = atoi(TP->getenv("SCREEN"))/z;
-    columns = columns<1?1:columns;
-    y = atoi(TP->getenv("COLUMNS"));
-    y = y<1?1:y;
-
-    columns = columns>y?y:columns;
-
-    obuff=({});
-
-    x=0;
-    foreach(oline in output)
     {
-        obuff+=({oline});
-        x++;
-        bsize += sizeof(oline);
-        if(!(x%columns))
+        int y, z, columns;
+        string * obuff, oline;
+        int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
+
+        // Best columns fit algoritm
+
+
+        // Maximum length
+        z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
+
+        // How many times output fits in user screen?
+        columns = atoi(TP->getenv("SCREEN"))/z;
+        columns = columns<1?1:columns;
+
+        // User columns setting
+        y = atoi(TP->getenv("COLUMNS"));
+        y = y<1?1:y;
+
+        // We'll be using no more columns than user can have fit on their screen.
+        columns = columns > y ? y : columns;
+
+        obuff=({});
+
+        x=0;
+        foreach(oline in output)
         {
-            if(bsize>2200)
+            obuff+=({oline});
+            x++;
+            bsize += sizeof(oline);
+            if(!(x%columns))
             {
-                pagebuff = format_page(obuff, columns, z * columns, vertical);
-                tell_object(TP,pagebuff[0..(sizeof(pagebuff) - 2)]);
-                if (vertical) {
-                    tell_object(TP," ");
+                // As of FluffOS v2017 big strings on sending get
+                // broken without taking into account ansii codes.
+
+                // Thus we ourselves have to break them. This is
+                // necessary only if output way too big.
+
+                if(bsize>2200)
+                {
+                    pagebuff = format_page(obuff, columns, z * columns, vertical);
+                    tell_object(TP,pagebuff[0..(sizeof(pagebuff) - 2)]);
+
+                    // If user chose to have columns sorted
+                    // vertically, break output with additional
+                    // newline when buffer ends to visually separate buffers.
+
+                    if (vertical) {
+                        tell_object(TP," ");
+                    }
+                    obuff = ({});
+                    bsize = 0;
                 }
-                obuff = ({});
-                bsize = 0;
             }
         }
+        tell_object(TP,format_page(obuff, columns, z * columns, vertical));
     }
-    tell_object(TP,format_page(obuff, columns, z * columns, vertical));
 
     CleanUpSpellObjects();
     return 1;

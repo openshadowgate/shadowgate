@@ -43,28 +43,68 @@ int cmd_recall(string str) {
         }
         else
         {
-            strarr = sort_array(strarr,"alphabetical_sort",FILTERS_D);
+            string * output = ({});
+            int y, z;
+            int columns;
+            int scrw = atoi(TP->getenv("SCREEN"));
+            int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
+            int roomnw;
+
+            strarr = sort_array(strarr,1);
             num = sizeof(strarr);
 
             write("%^BOLD%^%^BLUE%^--==%^CYAN%^< %^WHITE%^ "+num+" Locations "+
                 "Remembered %^CYAN%^>%^BLUE%^==--%^RESET%^");
+            output = ({});
+
+            roomnw = max(map(keys(remembered), (:sizeof($1):)));
+
             for (i=0;i<sizeof(strarr);i++)
             {
                 if (!remembered[strarr[i]] ||
-                !file_exists(remembered[strarr[i]]+".c") ||
-                !find_object_or_load(remembered[strarr[i]]))
+                    !file_exists(remembered[strarr[i]] + ".c") ||
+                    !find_object_or_load(remembered[strarr[i]]))
                 {
-                    write("You seem to forgotten the location labeled "+strarr[i]+".");
                     strtemp = strarr[i];
                     temp = remembered;
                     map_delete(temp,strtemp);
                     TP->set_rem_rooms( temp, strarr-({strarr[i]}) );
                     continue;
                 }
-                write( "%^CYAN%^"+sprintf("%-15s %-25s", strarr[i],
-                remembered[strarr[i]]->query_short() )+"%^RESET%^" );
-                }
+                output += ({ "%^RESET%^%^CYAN%^ " + arrange_string(strarr[i], roomnw + 1) + remembered[strarr[i]]->query_short() });
             }
+
+            // "Best fit columns algorithm"
+
+            // Maximum width of the column
+            z = max(map(output, (:sizeof(strip_colors($1)):))) + 2;
+
+            // If mobile user has terminal width less than 34 they can suffer.
+            scrw = scrw > 34 ? scrw : 72;
+
+            // Columns setting set by user
+            y = atoi(TP->getenv("COLUMNS"));
+            y = y < 1 ? 1 : y;
+
+            // If user has no columns set display full width of the names
+            z = y > 1 ? 34 : z;
+
+            // How many times output string fits in current screen width?
+            columns = scrw / z;
+            columns = columns < 1 ? 1 : columns;
+
+            // If that value is more than columns setting, it will be
+            // maximum used and user will see less columns than they
+            // have set.
+            columns = columns > y ? y : columns;
+
+            // Recalculating best fit screen width to arrange by the left edge.
+            scrw = z * columns;
+
+            // Location data is small, no buffering is necessary, we can just output it.
+            tell_object(TP, format_page(output, columns, scrw, vertical));
+
+        }
         return 1;
     }
     if(str == "innate spells")
