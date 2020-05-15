@@ -1052,7 +1052,7 @@ void sweep() // tail
         targ = attackers[i];
         damage = roll_dice(3, 40) + 40 + MULT;
 
-        if (targ->reflex_save(MULT) - 10) {
+        if (targ->reflex_save(MULT - 10)) {
             if (FEATS_D->usable_feat(targ, "evasion")) {
                 tell_object(targ, "You dive out of the way, avoiding the dragon's dangerous tail!");
                 continue;
